@@ -66,3 +66,4 @@
 | 2026-10-07 | wow-planner | 参考站 39 板块对照与下一批 | `docs/reference-gap.md` | 待确认 | wow-pm |
 | 2026-10-07 | 全部 | 建立六角色协作机制 | `AGENTS.md`、本文件、6 个 skill | 已定 | — |
 | 2026-10-08 | wow-dev | 仓库合并为 monorepo（远程 `Eplayed/forever-mini`），`for-mini` 由 AI 手册改造为无限服小程序底子，新增基底→小程序导出脚本 | `for-mini/`、`tools/export-mini.js`、`for-mini/docs/VERIFY-2026-10-08.md`、根 `README.md` | 已定（chip/收藏/复制的点击动作待人工手测；`live` 链路等 OSS 上传后回验） | wow-ops |
+| 2026-10-08 | wow-dev | 修根 `AGENTS.md` 上移后遗留的两处歧义：产出路径全部补上 `wow-forever-web/` 或 `for-mini/` 前缀并补小程序截图位；图标口径改回"新物品图标能否取自官方 CDN 尚未证实"，验证基线补第 4、5 条（点击动作无证据必须单列、每轮登记台账） | 根 `AGENTS.md`、本文件 | 已定 | 各角色 |
