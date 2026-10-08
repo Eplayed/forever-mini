@@ -1,0 +1,409 @@
+{
+ "trees": [
+  "野兽控制",
+  "射击",
+  "生存"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "致命守护",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "耐久训练",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "集中火力",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化灵猴守护",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "寻路",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化复活宠物",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "野兽迅捷",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "释放怒火",
+   "max": 5,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化治疗宠物",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "凶暴",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "召唤雄鹰",
+   "max": 1,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "灵魂联结",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "胁迫",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": "野兽迅捷"
+  },
+  {
+   "tree": 0,
+   "name": "野兽戒律",
+   "max": 2,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "狂乱",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "狂野怒火",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "胁迫"
+  },
+  {
+   "tree": 1,
+   "name": "鹰眼",
+   "max": 3,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化震荡射击",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "致命攻击",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化钉刺",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "效率",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "精心瞄准",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "急速杀戮",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化奥术射击",
+   "max": 5,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "孤狼",
+   "max": 1,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强击光环",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "致死射击",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "preName": "精心瞄准"
+  },
+  {
+   "tree": 1,
+   "name": "急速恢复",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": "急速杀戮"
+  },
+  {
+   "tree": 1,
+   "name": "弹幕",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "驱散射击",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "远程武器专精",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "狙击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "强击光环"
+  },
+  {
+   "tree": 2,
+   "name": "强化追踪",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "偏斜",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "诱捕",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "野蛮打击",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "生存专家",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化摔绊",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "灵巧陷阱",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "稳固",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "威慑",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "生存战术",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "掠食者之刃",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "反击",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "威慑"
+  },
+  {
+   "tree": 2,
+   "name": "足智多谋",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暴露猎物",
+   "max": 2,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "生存专家之纪律",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "疾行踢",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "闪电反射",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "撕裂打击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "暴露猎物"
+  }
+ ]
+}

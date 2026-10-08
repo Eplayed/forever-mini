@@ -1,0 +1,425 @@
+{
+ "trees": [
+  "神圣",
+  "防护",
+  "惩戒"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "强化神圣打击",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣之力",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣智慧",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "治愈之光",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "精神集中",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化圣印",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "不灭信仰",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "真理之声",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "崇敬",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "净化之力",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "圣光灌注",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "启发",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": "崇敬"
+  },
+  {
+   "tree": 0,
+   "name": "神恩术",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣精准",
+   "max": 3,
+   "row": 4,
+   "col": 0,
+   "preName": "14"
+  },
+  {
+   "tree": 0,
+   "name": "神圣震击",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奉献之地",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣强化",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "圣光守望",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "神圣震击"
+  },
+  {
+   "tree": 1,
+   "name": "坚韧",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "盾牌壁垒",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "精准",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "守护者的宠爱",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "预知",
+   "max": 5,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化愤怒圣印",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化正义之怒",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "盾牌专精",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "preName": "盾牌壁垒"
+  },
+  {
+   "tree": 1,
+   "name": "神圣职责",
+   "max": 2,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "迅捷审判",
+   "max": 1,
+   "row": 3,
+   "col": 0,
+   "preName": "强化愤怒圣印"
+  },
+  {
+   "tree": 1,
+   "name": "单手武器专精",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化制裁之锤",
+   "max": 3,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "圣殿骑士壁垒",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "清算",
+   "max": 5,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "钢铁信条",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣之盾",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "圣殿骑士壁垒"
+  },
+  {
+   "tree": 2,
+   "name": "偏斜",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "祈福",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化审判",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "圣光导管",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "定罪",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "辩护",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "神圣审判",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "命令圣印",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "正义追击",
+   "max": 2,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "以眼还眼",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "神圣仲裁者",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "十字军",
+   "max": 2,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "双手武器专精",
+   "max": 3,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "复仇",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "preName": "神圣审判"
+  },
+  {
+   "tree": 2,
+   "name": "忏悔",
+   "max": 1,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "圣光勇士",
+   "max": 3,
+   "row": 5,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "律法之器",
+   "max": 2,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "圣光扭转",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": null
+  }
+ ]
+}

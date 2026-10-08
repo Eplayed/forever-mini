@@ -1,0 +1,1571 @@
+{
+ "classId": "warlock",
+ "classNameCn": "术士",
+ "structureStatus": "imported-unverified",
+ "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "grid": {
+  "rows": 7,
+  "cols": 4,
+  "note": "两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实"
+ },
+ "rules": {
+  "totalPoints": 51,
+  "levelCap": 60,
+  "tierUnlockCost": null
+ },
+ "trees": [
+  {
+   "id": "warlock-0",
+   "nameCn": "痛苦",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warlock-0-强化生命分流",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化生命分流",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_burningspirit",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-镇压",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "镇压",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_unsummonbuilding",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-强化腐蚀术",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化腐蚀术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_abominationexplosion",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-邪咒",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "邪咒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_curseofachimonde",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-灵魂收割",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "灵魂收割",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_elemental_primal_shadow",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-强化吸取",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化吸取",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_haunting",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-强化痛苦灾祸",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化痛苦灾祸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_curseofsargeras",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-恶魔专注",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "恶魔专注",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_fingerofdeath",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-诅咒增幅",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "诅咒增幅",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_contagion",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-恶疾",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "恶疾",
+     "nameAlt": "疫病肆虐",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_unstableaffliction_2",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-怨毒",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "怨毒",
+     "nameAlt": "恶意",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_focusedpower",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-夜幕",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "夜幕",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_twilight",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-疲劳诅咒",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "疲劳诅咒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_grimward",
+     "requires": [
+      "warlock-0-诅咒增幅"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-生命虹吸",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "生命虹吸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_requiem",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-灵魂虹吸",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "灵魂虹吸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_lifedrain02",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-暗影掌握",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "暗影掌握",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_shadetruesight",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-0-折磨",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "折磨",
+     "nameAlt": "吸取希望",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_deathknight_hemorrhagicfever",
+     "requires": [
+      "warlock-0-生命虹吸"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "warlock-1",
+   "nameCn": "恶魔学识",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warlock-1-强化生命通道",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化生命通道",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_lifedrain",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-强化小鬼",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "强化小鬼",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_summonimp",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔之拥",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "恶魔之拥",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_metamorphosis",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-邪恶强化",
+     "tier": 0,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "邪恶强化",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_shadowworddominate",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔庇护",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "恶魔庇护",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_ragingscream",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-强化虚空行者",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "强化虚空行者",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_summonvoidwalker",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-邪能活力",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "邪能活力",
+     "nameAlt": "恶魔活力",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_demonictactics",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔能量",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "恶魔能量",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_felmending",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-强化萨亚德",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化萨亚德",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warlock_randomizesuccubusincubus",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔牺牲",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "恶魔牺牲",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_psychicscream",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-召唤大师",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "召唤大师",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_impphaseshift",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-灭杀",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "灭杀",
+     "nameAlt": "屠戮",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_fireball02",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔支配",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "恶魔支配",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_removecurse",
+     "requires": [
+      "warlock-1-召唤大师"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔印记",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "恶魔印记",
+     "nameAlt": "恶魔烙印",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_demonhunter_chaoticimprint_fire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-强化地狱猎犬",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化地狱猎犬",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_summonfelhunter",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-灵魂链接",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "灵魂链接",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_gathershadows",
+     "requires": [
+      "warlock-1-恶魔牺牲"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔知识",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "恶魔知识",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_improvedvampiricembrace",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔学识大师",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "恶魔学识大师",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_shadowpact",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-1-恶魔契约",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "恶魔契约",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_ability_soulharvesterwarlock_demonicsoul",
+     "requires": [
+      "warlock-1-灵魂链接"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "warlock-2",
+   "nameCn": "毁灭",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warlock-2-毁灭延伸",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "毁灭延伸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_corpseexplode",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-强化暗影箭",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "强化暗影箭",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_shadowbolt",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-灾祸",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "灾祸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_deathpact",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-熔岩之肤",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "熔岩之肤",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_mage_moltenarmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-灾变",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "灾变",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_windsofwoe",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-清算",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "清算",
+     "nameAlt": "余波",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_fire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-毁灭",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "毁灭",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_shadowwordpain",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-暗影灼烧",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "暗影灼烧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_scourgebuild",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-强烈",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强烈",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_lavaspawn",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-苦痛之焰",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "苦痛之焰",
+     "nameAlt": "痛苦烈焰",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_soulburn",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-燃烧",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "燃烧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_fireball",
+     "requires": [
+      "warlock-2-暗影灼烧"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-火焰冲撞",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "火焰冲撞",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_volcano",
+     "requires": [
+      "warlock-2-强烈"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-浩劫灾祸",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "浩劫灾祸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warlock_baneofhavoc",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-硫磺烈火",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "硫磺烈火",
+     "nameAlt": "硫磺与火焰",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_meteorstorm",
+     "requires": [
+      "warlock-2-燃烧"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-影与焰",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "影与焰",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_playingwithfire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warlock-2-烧尽",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "烧尽",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_burnout",
+     "requires": [
+      "warlock-2-浩劫灾祸"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warlock/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warlock.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "nodes": 52,
+  "nameConflict": 9,
+  "onlyInOneSource": 0
+ },
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+}

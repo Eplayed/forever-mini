@@ -1,0 +1,433 @@
+{
+ "trees": [
+  "戒律",
+  "神圣",
+  "暗影魔法"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "圣光之力",
+   "max": 5,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "魔杖专精",
+   "max": 2,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "双生戒律",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "无声消退",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣精准",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化真言术：盾",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "殉难",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "精神敏锐",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "心灵专注",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "冥想",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化心灵之火",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "心灵之力",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "灵魂守护",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "强化真言术：盾"
+  },
+  {
+   "tree": 0,
+   "name": "强化法力燃烧",
+   "max": 2,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "苦修",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "新生希望",
+   "max": 5,
+   "row": 4,
+   "col": 2,
+   "preName": "灵魂守护"
+  },
+  {
+   "tree": 0,
+   "name": "神御之盾",
+   "max": 3,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "能量灌注",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "苦修"
+  },
+  {
+   "tree": 1,
+   "name": "暮光专注",
+   "max": 3,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化恢复",
+   "max": 3,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣专精",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "法术屏障",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣之怒",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣新星",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "祝福恢复",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "灵感",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣延伸",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化治疗术",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "灼热之光",
+   "max": 2,
+   "row": 3,
+   "col": 2,
+   "preName": "神圣之怒"
+  },
+  {
+   "tree": 1,
+   "name": "联结治疗",
+   "max": 1,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "圣光祷文",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "救赎之魂",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "精神指引",
+   "max": 5,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "精神治疗",
+   "max": 3,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "愈合祷言",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "救赎之魂"
+  },
+  {
+   "tree": 2,
+   "name": "暗影集中",
+   "max": 5,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "昏厥",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "精神分流",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暗影亲和",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化暗言术：痛",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暗影延伸",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化心灵震爆",
+   "max": 5,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化心灵尖啸",
+   "max": 2,
+   "row": 2,
+   "col": 1,
+   "preName": "昏厥"
+  },
+  {
+   "tree": 2,
+   "name": "精神鞭笞",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化精神鞭笞",
+   "max": 2,
+   "row": 2,
+   "col": 3,
+   "preName": "精神鞭笞"
+  },
+  {
+   "tree": 2,
+   "name": "强化渐隐术",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "吸血鬼的拥抱",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暗影交织",
+   "max": 3,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "沉默",
+   "max": 1,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "噬灵蔓延",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "早逝",
+   "max": 2,
+   "row": 5,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "黑暗",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暗影形态",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "吸血鬼的拥抱"
+  }
+ ]
+}

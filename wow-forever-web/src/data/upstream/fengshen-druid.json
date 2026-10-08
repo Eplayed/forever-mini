@@ -1,0 +1,425 @@
+{
+ "trees": [
+  "平衡",
+  "野性战斗",
+  "恢复"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "强化愤怒",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "起源",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "月光",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化月火术",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "自然的威严",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "自然延伸",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化纠缠根须",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "自然的壮美",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": "自然的威严"
+  },
+  {
+   "tree": 0,
+   "name": "自然平衡",
+   "max": 5,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "虫群",
+   "max": 1,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "复仇",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": "强化月火术"
+  },
+  {
+   "tree": 0,
+   "name": "强化星火术",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "蔓生",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "自然之赐",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "月蚀",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "月怒",
+   "max": 5,
+   "row": 5,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "枭兽形态",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "凶暴",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野性之心",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野性迅捷",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野性本能",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野蛮冲撞",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "厚皮",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野蛮暴怒",
+   "max": 2,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "野性冲锋",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "锋利兽爪",
+   "max": 2,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "撕碎攻击",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "裂伤",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "preName": "野蛮暴怒"
+  },
+  {
+   "tree": 1,
+   "name": "猛兽攻击",
+   "max": 3,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "原始狂怒",
+   "max": 2,
+   "row": 3,
+   "col": 3,
+   "preName": "锋利兽爪"
+  },
+  {
+   "tree": 1,
+   "name": "狩猎天性",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "兽群领袖",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "丛林之王",
+   "max": 3,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "自然反射",
+   "max": 5,
+   "row": 5,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "狂乱撕扯",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": "猛兽攻击"
+  },
+  {
+   "tree": 1,
+   "name": "狂暴",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "兽群领袖"
+  },
+  {
+   "tree": 2,
+   "name": "自然专注",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "激怒",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然主义",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "微妙",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然变形",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "反射",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然赐福",
+   "max": 5,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "大地母亲的恩赐",
+   "max": 1,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "宁静之魂",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化回春术",
+   "max": 3,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "迅捷治愈",
+   "max": 1,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然迅捷",
+   "max": 1,
+   "row": 4,
+   "col": 0,
+   "preName": "自然主义"
+  },
+  {
+   "tree": 2,
+   "name": "生命之魂",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化宁静",
+   "max": 2,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化愈合",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": "强化回春术"
+  },
+  {
+   "tree": 2,
+   "name": "野性成长",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "生命之魂"
+  }
+ ]
+}

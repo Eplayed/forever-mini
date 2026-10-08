@@ -1,0 +1,116 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-07",
+  "totalPoints": 51,
+  "levelCap": 60,
+  "source": [
+   {
+    "type": "official_cn",
+    "url": "https://wowclassicforever.info/talent/warrior/",
+    "note": "参考站页脚口径：经典三系 51 点结构；本站结构字段仍需自行实测确认",
+    "checkedAt": "2026-10-07"
+   }
+  ]
+ },
+ "classes": [
+  {
+   "id": "warrior",
+   "cn": "战士",
+   "en": "Warrior",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L0",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 54,
+   "nameVerified": 16
+  },
+  {
+   "id": "paladin",
+   "cn": "圣骑士",
+   "en": "Paladin",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L3",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 52,
+   "nameVerified": 0
+  },
+  {
+   "id": "hunter",
+   "cn": "猎人",
+   "en": "Hunter",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L0",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 50,
+   "nameVerified": 28
+  },
+  {
+   "id": "rogue",
+   "cn": "潜行者",
+   "en": "Rogue",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L3",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 53,
+   "nameVerified": 0
+  },
+  {
+   "id": "priest",
+   "cn": "牧师",
+   "en": "Priest",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L0",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 53,
+   "nameVerified": 7
+  },
+  {
+   "id": "shaman",
+   "cn": "萨满祭司",
+   "en": "Shaman",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L3",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 50,
+   "nameVerified": 0
+  },
+  {
+   "id": "mage",
+   "cn": "法师",
+   "en": "Mage",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L3",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 54,
+   "nameVerified": 0
+  },
+  {
+   "id": "warlock",
+   "cn": "术士",
+   "en": "Warlock",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L3",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 52,
+   "nameVerified": 0
+  },
+  {
+   "id": "druid",
+   "cn": "德鲁伊",
+   "en": "Druid",
+   "specs": [],
+   "structureStatus": "names-only",
+   "nameLevel": "L0",
+   "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
+   "talentCount": 52,
+   "nameVerified": 38
+  }
+ ]
+}

@@ -1,0 +1,916 @@
+{
+  "meta": {
+    "game": "World of Warcraft: Forever（国服名：魔兽世界：无限）",
+    "seedVersion": "0.1.0",
+    "generatedAt": "2026-10-07",
+    "launchDateCn": "2026-11-05",
+    "betaCnStart": "2026-10-06",
+    "betaIntlStart": "2026-09-17",
+    "statusLegend": {
+      "verified": "已有官方中文或官方英文原文支撑",
+      "need_test": "名称或数值来自非官方源，必须实测确认后定稿",
+      "lead_only": "仅线索，禁止直接展示给玩家"
+    },
+    "provenanceTypes": {
+      "official_cn": "国服官网 wow.blizzard.cn 原文",
+      "official_en": "news.blizzard.com / worldofwarcraft.blizzard.com 原文",
+      "media_cn": "中文媒体转载（17173 等），只作旁证",
+      "fan_db": "第三方粉丝资料库，禁止搬运，只作线索",
+      "video": "玩家实测视频，需 ASR/OCR 后人工确认",
+      "open_data": "开放授权数据集（GPL 等），只取译名与结构"
+    },
+    "rules": [
+      "fan_db 与 media_cn 来源的条目不得直接进小程序正文，必须升到 verified 且来源为官方",
+      "掉落一律不写百分比",
+      "引用 1.12 经典旧世数据的条目加 basisNote='classic-era'，正式服上线后优先重核"
+    ]
+  },
+  "dungeonsNew": [
+    {
+      "id": "hall-of-thanes",
+      "nameEn": "Hall of Thanes",
+      "nameCn": "领主大厅",
+      "nameCnConflict": "诸王大厅",
+      "levelRange": "13-18",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "英文名见于官方 9 座新本名单"
+        },
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304160/index.html",
+          "note": "Beta 公告给出的官方中文名「领主大厅」与等级区间"
+        },
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同一座本 17173 译作「诸王大厅」，构成译名冲突"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 13-18 来自该库，需实测确认"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "译名二选一待定稿；BOSS 数量未知"
+    },
+    {
+      "id": "ruins-of-lordaeron",
+      "nameEn": "Ruins of Lordaeron",
+      "nameCn": "洛丹伦废墟",
+      "levelRange": "15-20",
+      "bossCount": null,
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304160/index.html",
+          "note": "官方中文名与等级区间"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1tJhh6UERb/",
+          "note": "玩家实测：隐藏 BOSS 与刷新位置，6861 播放/05:11"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1uFet62Ei9/",
+          "note": "玩家实测：BOSS 掉落（不完全版），6299/00:42，2026-09-19"
+        }
+      ],
+      "verifiedAt": "2026-10-07",
+      "note": "唯一已有官方中文名 + 两条实测视频线索的本"
+    },
+    {
+      "id": "whelgars-excavation",
+      "nameEn": "Whelgar's Excavation",
+      "nameEnConflict": "Excavation Site: Wetlands",
+      "nameCn": "挖掘场：湿地",
+      "levelRange": "26-31",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方回顾写 Whelgar's Excavation"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "该库与 Wowhead 新闻标题写作 Excavation Site: Wetlands，英文名冲突"
+        },
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "中文名「挖掘场：湿地」"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV15pHi6SE5i/",
+          "note": "2026-10-03 实测+攻略：简介含跳怪路线、潜伏者灭团点、12格背包与PVP饰品二选一（1611/04:57）"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "英文名两个来源不一致，正式服定稿前只留英文+中文并列显示"
+    },
+    {
+      "id": "city-of-dalaran",
+      "nameEn": "City of Dalaran",
+      "nameCn": "达拉然",
+      "levelRange": "28-33",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 28-33"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1ZnYk6eEZ7/",
+          "note": "达拉然副本实机，7.5 万播放/09:35"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "中文名按地名单独定，需与官方对齐；等级门槛疑为 30 级（英文有「如何进入达拉然副本」的新闻）"
+    },
+    {
+      "id": "the-drowned-city",
+      "nameEn": "The Drowned City",
+      "nameCn": null,
+      "levelRange": "35-40",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 35-40"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1w3Yk6rEho/",
+          "note": "沉没之城实机，7.7 万播放"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "无权威中文名，暂保留英文，禁止硬造"
+    },
+    {
+      "id": "kroldok-stronghold",
+      "nameEn": "Krol'dok Stronghold",
+      "nameCn": null,
+      "levelRange": "40-45",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 40-45"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "无中文名、无实测线索"
+    },
+    {
+      "id": "alcaz-prison",
+      "nameEn": "Alcaz Prison",
+      "nameCn": null,
+      "levelRange": "48-53",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 48-53"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "官方 Beta 公告里的「监狱」是否即本座，需确认（若同一座，可升 verified）"
+    },
+    {
+      "id": "blackmaw-hold",
+      "nameEn": "Blackmaw Hold",
+      "nameCn": null,
+      "levelRange": "55-60",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 55-60"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "黑石塔地下经典地名，无限服作为新本重制；中文名需等官方"
+    },
+    {
+      "id": "shapers-terrace",
+      "nameEn": "Shaper's Terrace",
+      "nameCn": null,
+      "levelRange": "58-60",
+      "bossCount": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文名单"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://foreverchanges.pro/dungeons",
+          "note": "等级区间 58-60"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "无中文名、无实测线索"
+    }
+  ],
+  "raids": [
+    {
+      "id": "barrow-deeps",
+      "nameEn": "The Barrow Deeps",
+      "nameCn": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/raids/barrow-deeps",
+          "note": "参考站称首个团本；官方未公布中文名与 BOSS 数"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "BOSS 数与开放时间待核"
+    },
+    {
+      "id": "hyjal-summit",
+      "nameEn": "Hyjal Summit",
+      "nameCn": null,
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/raids",
+          "note": "参考站列为 20 人团本，官方未证实"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "疑似经典海加尔重制，未证实"
+    },
+    {
+      "id": "onyxias-lair",
+      "nameEn": "Onyxia's Lair",
+      "nameCn": null,
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/raids",
+          "note": "参考站列为 40 人团本，官方未证实"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "未证实"
+    }
+  ],
+  "dungeonsClassicInForever": [
+    {
+      "id": "razor-krendor",
+      "nameEn": "The Razor Krendor",
+      "nameCn": "剃刀高地",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "17173 蓝贴转载的 14 座本中文名单之一"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "英文名按经典原名为 The Razor Krendor，无限服沿用情况待核"
+    },
+    {
+      "id": "uldaman",
+      "nameEn": "Uldaman",
+      "nameCn": "奥达曼",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        },
+        {
+          "type": "open_data",
+          "url": "https://github.com/cmangos/classic-db",
+          "note": "1.12 国服中文 locale 可校对装备与怪物名"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "无限服里的经典本掉落与经验已改，不可当事实源"
+    },
+    {
+      "id": "ragefire-chasm",
+      "nameEn": "Ragefire Chasm",
+      "nameCn": "怒焰裂谷",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    },
+    {
+      "id": "wailing-caverns",
+      "nameEn": "The Wailing Caverns",
+      "nameCn": "哀嚎洞穴",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    },
+    {
+      "id": "deathmine",
+      "nameEn": "The Deadmines",
+      "nameCn": "死亡矿井",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1FvaZ67E7h/",
+          "note": "死亡矿井完整路线实测"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV19qa76XEHL/",
+          "note": "20 级防战单刷死亡矿井，4800 播放"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "有路线类实测，优先做"
+    },
+    {
+      "id": "shadowfang-keep",
+      "nameEn": "Shadowfang Keep",
+      "nameCn": "影牙城堡",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    },
+    {
+      "id": "the-stocks",
+      "nameEn": null,
+      "nameCn": "监狱",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上；官方 Beta 公告也提到「监狱」"
+        },
+        {
+          "type": "video",
+          "url": "https://www.bilibili.com/video/BV1ze3x6NETC/",
+          "note": "单刷监狱实测"
+        }
+      ],
+      "verifiedAt": null,
+      "note": "需确认是经典「监狱(The Stockade)」还是新本 Alcaz Prison"
+    },
+    {
+      "id": "blackfathom-deeps",
+      "nameEn": "Blackfathom Deeps",
+      "nameCn": "黑暗深渊",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    },
+    {
+      "id": "gnomeregan",
+      "nameEn": "Gnomeregan",
+      "nameCn": "诺莫瑞根",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    },
+    {
+      "id": "scarlet-monastery",
+      "nameEn": "Scarlet Monastery",
+      "nameCn": "血色修道院",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "media_cn",
+          "url": "https://news.17173.com/content/10042026/085128391.shtml",
+          "note": "同上"
+        }
+      ],
+      "verifiedAt": null,
+      "note": ""
+    }
+  ],
+  "glossary": {
+    "note": "官方中文技能与天赋名（猎人、德鲁伊全量），直接可作小程序中英速查与配装/天赋页面的译名基准",
+    "source": {
+      "type": "official_cn",
+      "url": "https://wow.blizzard.cn/news/24301515/index.html",
+      "fetchedAt": "2026-10-07"
+    },
+    "hunter": [
+      "瞄准射击",
+      "奥术射击",
+      "逃脱",
+      "多重射击",
+      "野兽守护",
+      "冰霜陷阱",
+      "火焰陷阱",
+      "毒蝎钉刺",
+      "欺诈者之舞",
+      "归我了",
+      "冲锋",
+      "挫志尖啸",
+      "潜伏",
+      "钳夹",
+      "雷霆践踏",
+      "裂筋",
+      "野蛮撕扯",
+      "蝎毒",
+      "蛛网",
+      "尘雾之云",
+      "甲壳护盾",
+      "闪电吐息",
+      "狂怒之嚎",
+      "致命守护",
+      "耐久训练",
+      "集中火力",
+      "灵猴守护",
+      "寻路",
+      "狂怒释放",
+      "强化治疗宠物",
+      "凶暴",
+      "召唤雄鹰",
+      "胁迫",
+      "野兽戒律",
+      "鹰眼",
+      "致命攻击",
+      "强化钉刺",
+      "效率",
+      "精确瞄准",
+      "疾速杀戮",
+      "强化奥术射击",
+      "独来独往",
+      "强击光环",
+      "致死射击",
+      "弹幕",
+      "狙击",
+      "强化追踪",
+      "诱捕",
+      "野蛮打击",
+      "生存专家",
+      "强化摔绊",
+      "稳固",
+      "生存战术",
+      "掠食者之锋",
+      "反击",
+      "游刃有余",
+      "暴露猎物",
+      "生存专家的戒律",
+      "陆行鸟踢击",
+      "闪电反射",
+      "裂伤打击",
+      "起死回生"
+    ],
+    "druid": [
+      "撕咬",
+      "爪击",
+      "俯冲",
+      "突进",
+      "音爆",
+      "横扫",
+      "野蛮冲撞",
+      "厚皮",
+      "野蛮暴怒",
+      "野性冲锋",
+      "锋利兽爪",
+      "撕碎攻击",
+      "变形之力",
+      "原始撕咬",
+      "血之狂暴",
+      "强化变形之力",
+      "兽群领袖",
+      "猛兽攻击",
+      "自然反射",
+      "狂乱撕扯",
+      "狂暴",
+      "自然集中",
+      "激怒",
+      "自然主义",
+      "微妙",
+      "自然变形",
+      "反射",
+      "自然赐福",
+      "大地母亲的恩赐",
+      "迅捷治愈",
+      "生命之魂",
+      "强化宁静",
+      "强化愈合",
+      "野性成长",
+      "愈合",
+      "树皮术",
+      "纠缠根须",
+      "飓风",
+      "精灵之火",
+      "自然之握",
+      "荆棘术",
+      "愤怒",
+      "清晰预兆",
+      "强化愤怒",
+      "起源",
+      "月光",
+      "强化月火术",
+      "自然的威严",
+      "自然延伸",
+      "强化纠缠根须",
+      "自然的壮美",
+      "虫群",
+      "复仇",
+      "繁茂",
+      "自然之赐",
+      "日月之蚀",
+      "月怒",
+      "枭兽形态",
+      "野性之心",
+      "豹之迅捷",
+      "野性本能"
+    ],
+    "sources2": {
+      "priest_warrior": "https://wow.blizzard.cn/news/24301514/index.html",
+      "races": "https://wow.blizzard.cn/news/24304075/index.html",
+      "fetchedAt": "2026-10-07",
+      "note": "猎人/德鲁伊 123 条 + 牧师 18 条 + 战士 38 条 + 种族技能 33 条，共 212 条官方中文名，已同步到资料站 src/data/glossary.json（215 条含 3 个装备名）"
+    }
+  },
+  "itemsCn": {
+    "source": {
+      "type": "official_cn",
+      "url": "https://wow.blizzard.cn/news/24303313/index.html",
+      "fetchedAt": "2026-10-07"
+    },
+    "names": [
+      "尊贵法袍",
+      "石猪剑",
+      "拉迪莫尔家传指环"
+    ]
+  },
+  "systems": [
+    {
+      "key": "legacy",
+      "nameEn": "Legacy progression",
+      "nameCn": null,
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方英文原文：Legacy progression for players who love leveling and running alternate characters"
+        }
+      ],
+      "note": "官方中文稿只出现「传承」相关描述，定名仍待确认"
+    },
+    {
+      "key": "camping",
+      "nameEn": "Camping",
+      "nameCn": "露营系统",
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24303313/index.html",
+          "note": "官方中文名"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://www.wowhead.com/forever/guide/camping-overview-unlock-rewards",
+          "note": "Wowhead 有专门的露营解锁奖励指南（人工参照）"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "key": "rulesets",
+      "nameEn": "Rule sets",
+      "nameCn": "规则集",
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24302070/index.html",
+          "note": "官方口径：取消传统服务器，按普通/PvP/RP/专家规则集匹配"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "key": "no-flying",
+      "nameEn": "No flying mounts",
+      "nameCn": null,
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方原文坚持 no flying mounts, no level scaling"
+        }
+      ],
+      "note": "无等级缩放同理"
+    },
+    {
+      "key": "level-cap",
+      "nameEn": "Level 60",
+      "nameCn": "永久 60 级",
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+          "note": "官方回顾 + 媒体汇总口径一致"
+        },
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304160/index.html",
+          "note": "国服 Beta 公告"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "key": "zone-zephras-isle",
+      "nameEn": "Zephras Isle",
+      "nameCn": "泽风岛",
+      "status": "verified",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+          "note": "官方英文列出 3 个新区域之一"
+        },
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304075/index.html",
+          "note": "官方文章出现「泽风岛」，与英文 Zephras Isle 对应"
+        }
+      ],
+      "verifiedAt": "2026-10-07"
+    },
+    {
+      "key": "zone-riverglades",
+      "nameEn": "Riverglades",
+      "nameCn": null,
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+          "note": "3 个新区域之一"
+        }
+      ],
+      "note": "中文名未证实"
+    },
+    {
+      "key": "zone-mount-hyjal",
+      "nameEn": "Mount Hyjal",
+      "nameCn": "海加尔山",
+      "status": "lead_only",
+      "sources": [
+        {
+          "type": "official_en",
+          "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+          "note": "3 个新区域之一"
+        }
+      ],
+      "note": "老地名，无限服作为新区域出现"
+    },
+    {
+      "key": "race-sky-race",
+      "nameEn": "Skyborne",
+      "nameCn": "天裔",
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304075/index.html",
+          "note": "官方中文稿出现「天裔」，并提到塑风者、高阶会"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/races/skyborne",
+          "note": "英文写作 Skyborne，子族 High Order / Windshaper"
+        }
+      ],
+      "note": "英文名未证实，需回官方渠道确认"
+    },
+    {
+      "key": "subgroup-windshaper",
+      "nameEn": "Windshaper",
+      "nameCn": "塑风者",
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304075/index.html",
+          "note": "官方中文稿用词"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/races/skyborne",
+          "note": "参考站同口径"
+        }
+      ]
+    },
+    {
+      "key": "subgroup-high-order",
+      "nameEn": "High Order",
+      "nameCn": "高阶会",
+      "status": "need_test",
+      "sources": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24304075/index.html",
+          "note": "官方中文稿用词"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://wowclassicforever.info/races/skyborne",
+          "note": "参考站同口径"
+        }
+      ]
+    }
+  ],
+  "referenceSites": [
+    {
+      "name": "国服官网新闻栏目",
+      "url": "https://wow.blizzard.cn/news/index.html",
+      "use": "官方中文术语与公告，可入自动化"
+    },
+    {
+      "name": "国服在线修正",
+      "url": "https://wow.blizzard.cn/24266320/index.html",
+      "use": "上线后的改动报警器（无版本号、需整页比对）"
+    },
+    {
+      "name": "国服 forever 专页",
+      "url": "https://wow.blizzard.cn/forever/",
+      "use": "定档与测试信息"
+    },
+    {
+      "name": "官方英文 What's Next 回顾",
+      "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+      "use": "9 座新本英文名唯一权威来源"
+    },
+    {
+      "name": "官方英文 forever 专页",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+      "use": "3 个新区域与系统英文原名，页内含 camelotInitialState 结构化数据"
+    },
+    {
+      "name": "官方英文简中站",
+      "url": "https://worldofwarcraft.blizzard.com/zh-cn/",
+      "use": "第二译名来源"
+    },
+    {
+      "name": "Wowhead Forever 专区",
+      "url": "https://www.wowhead.com/forever",
+      "use": "人工参照：逐本指南/天赋计算器/天梯；禁止搬数据"
+    },
+    {
+      "name": "Wowhead Blue Tracker",
+      "url": "https://www.wowhead.com/forever/blue-tracker",
+      "use": "官方 beta 开发说明的可见入口"
+    },
+    {
+      "name": "wowclassicforever.info",
+      "url": "https://wowclassicforever.info/dungeons/",
+      "use": "人工参照：最接近数据库的粉丝站，有简中路由；禁止搬数据"
+    },
+    {
+      "name": "foreverchanges.pro",
+      "url": "https://foreverchanges.pro/dungeons",
+      "use": "线索：9 新本等级区间与 new/classic 标记；掉落大量缺失"
+    },
+    {
+      "name": "17173 蓝贴转载",
+      "url": "https://news.17173.com/content/10042026/085128391.shtml",
+      "use": "中文 14 座本名清单，作旁证"
+    },
+    {
+      "name": "美服官方论坛搜索",
+      "url": "https://us.forums.blizzard.com/en/wow/search.json?q=Forever",
+      "use": "需求监测：能拿主题标题与日期，取不到正文"
+    },
+    {
+      "name": "百度贴吧无限吧",
+      "url": "https://tieba.baidu.com/f?ie=utf-8&kw=魔兽世界无限",
+      "use": "需求与体感线索"
+    },
+    {
+      "name": "B站搜索（按播放量）",
+      "url": "https://search.bilibili.com/all?keyword=%E6%82%94%E6%97%A0%E9%99%90%20beta&order=click",
+      "use": "实测视频采集入口"
+    },
+    {
+      "name": "cmangos/classic-db",
+      "url": "https://github.com/cmangos/classic-db",
+      "use": "GPL-3.0：1.12 国服中文 locale 与掉落模板，只取译名与结构"
+    }
+  ],
+  "openQuestions": [
+    "3 座团队副本的名称与 BOSS 数量：本轮三个来源互相矛盾，需人工核对官方与 Wowhead 后重建",
+    "每座本的 BOSS 名单与数量：官方与可信源均未给出，只能靠实测视频或自己打",
+    "掉落表：所有来源都是零碎注记，且禁止写百分比",
+    "Whelgar's Excavation 与 Excavation Site: Wetlands 哪个是正式服最终英文名",
+    "官方 Beta 公告里的「监狱」是新本 Alcaz Prison 还是经典 The Stockade",
+    "无限服新物品图标能否从 render-us.worldofwarcraft.com 取到",
+    "pigtogo.cn 无限天赋模拟器与百家号公众号工具的实际内容（竞品基线）",
+    "Legacy / Skyborne 等系统的官方中文定名",
+    "圣骑士、萨满祭司、法师、术士、潜行者：官网尚未发布中文职业深度解析，无权威中文名可采（需盯新闻栏目）",
+    "33 条种族技能的种族归属需逐条回原文核对"
+  ],
+  "seedVersion": "0.3.0"
+}

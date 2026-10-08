@@ -1,0 +1,15 @@
+# 系统
+.DS_Store
+Thumbs.db
+
+# 依赖与构建产物
+node_modules/
+miniprogram_npm/
+dist/
+*.log
+
+# 微信开发者工具本地配置（含个人登录态与本地端口）
+for-mini/project.private.config.json
+
+# 临时验证脚本
+.tmp/

@@ -1,0 +1,1655 @@
+{
+ "classId": "warrior",
+ "classNameCn": "战士",
+ "structureStatus": "imported-unverified",
+ "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "grid": {
+  "rows": 7,
+  "cols": 4,
+  "note": "两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实"
+ },
+ "rules": {
+  "totalPoints": 51,
+  "levelCap": 60,
+  "tierUnlockCost": null
+ },
+ "trees": [
+  {
+   "id": "warrior-0",
+   "nameCn": "武器",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warrior-0-强化英勇打击",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化英勇打击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_ambush",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-偏斜",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "偏斜",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_parry",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化撕裂",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化撕裂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_gouge",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化冲锋",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化冲锋",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_charge",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化战术掌握",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "强化战术掌握",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_enchantarmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化压制",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化压制",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_sword_05",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-愤怒掌控",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "愤怒掌控",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_blessingofstamina",
+     "requires": [
+      "warrior-0-强化战术掌握"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-重伤",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "重伤",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_backstab",
+     "requires": [
+      "warrior-0-强化撕裂"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-穿刺打击",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "穿刺打击",
+     "nameAlt": "长矛突刺",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_spear_01",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-双手武器专精",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "双手武器专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_axe_09",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-穿刺",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "穿刺",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_searingarrow",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-血之气息",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "血之气息",
+     "nameAlt": "血涌",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_sword_01",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-横扫攻击",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "横扫攻击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_slicedice",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-武器大师",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "武器大师",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "garrison_weaponupgrade",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化猛击",
+     "tier": 5,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化猛击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_decisivestrike",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-强化断筋",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化断筋",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_shockwave",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-0-致死打击",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "致死打击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_savageblow",
+     "requires": [
+      "warrior-0-横扫攻击"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "warrior-1",
+   "nameCn": "狂暴",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warrior-1-震耳嗓音",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "震耳嗓音",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_purge",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-残忍",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "残忍",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_eviscerate",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-钢铁意志",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "钢铁意志",
+     "nameAlt": "余怒",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_secondwind",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-怒不可遏",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "怒不可遏",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stoneclawtotem",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-狂怒精准",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "狂怒精准",
+     "nameAlt": "强化顺劈斩",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_incite",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-刺耳怒吼",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "刺耳怒吼",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_deathscream",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-血之狂热",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "血之狂热",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_summonimp",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-无边怒气",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "无边怒气",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-双武器专精",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "双武器专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_dualwield",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-怒击",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "怒击",
+     "nameAlt": "狂怒连击",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_whirlwind",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-狂怒",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "狂怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_unholyfrenzy",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-强化斩杀",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化斩杀",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_sword_48",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-精准",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "精准",
+     "nameAlt": "强化狂暴之怒",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_ancestralguardian",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-死亡之愿",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "死亡之愿",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_deathpact",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-强化拦截",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化拦截",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_sprint",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-强化狂暴之怒",
+     "tier": 5,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化狂暴之怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-乱舞",
+     "tier": 5,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "乱舞",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "ability_ghoulfrenzy",
+     "requires": [
+      "warrior-1-死亡之愿"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-饮血者",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "饮血者",
+     "nameAlt": "疾风",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "racial_troll_berserk",
+     "requires": [
+      "warrior-1-狂怒"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-1-嗜血",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "嗜血",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_bloodlust",
+     "requires": [
+      "warrior-1-死亡之愿"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "warrior-2",
+   "nameCn": "防护",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "warrior-2-强化血性狂暴",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化血性狂暴",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "ability_racial_bloodrage",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-盾牌专精",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "盾牌专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_shield_06",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-预知",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "预知",
+     "nameAlt": "钢铁意志",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_magic_magearmor",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-预知-r1c0",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "预知",
+     "nameAlt": "强化血性狂暴",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_mirrorimage",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-强化复仇",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化复仇",
+     "nameAlt": "坚韧",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_revenge",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-强化雷霆一击",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "强化雷霆一击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_thunderclap",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-破釜沉舟",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "破釜沉舟",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_ashestoashes",
+     "requires": [
+      "warrior-2-强化血性狂暴"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-防御大师",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "防御大师",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_shieldguard",
+     "requires": [
+      "warrior-2-盾牌专精"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-强化缴械",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化缴械",
+     "nameAlt": "强化复仇",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_disarm",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-挑衅",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "挑衅",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_innerrage",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-强化破甲攻击",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化破甲攻击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_sunder",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-先锋",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "先锋",
+     "nameAlt": "强化缴械",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_shieldcharge",
+     "requires": [
+      "warrior-2-防御大师"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-先锋-r3c2",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "先锋",
+     "nameAlt": "强化盾击",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_shieldbash",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-强化盾墙",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化盾墙",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_shieldwall",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-震荡猛击",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "震荡猛击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_thunderbolt",
+     "requires": [
+      "warrior-2-先锋"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-怒火聚焦",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "怒火聚焦",
+     "nameAlt": "强化盾击",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_focusedrage",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-活力",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "活力",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-专注怒气",
+     "tier": 5,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "专注怒气",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-坚城",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "坚城",
+     "nameAlt": "堡垒",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_shield_04",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "warrior-2-盾牌猛击",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "盾牌猛击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_shield_05",
+     "requires": [
+      "warrior-2-震荡猛击"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "nodes": 56,
+  "nameConflict": 15,
+  "onlyInOneSource": 6
+ },
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+}

@@ -1,0 +1,524 @@
+{
+ "rows": [
+  {
+   "tree": 0,
+   "name": "强化英勇打击",
+   "max": 3,
+   "row": 0,
+   "col": 0,
+   "icon": "ability_rogue_ambush",
+   "preId": null,
+   "nid": "a1"
+  },
+  {
+   "tree": 0,
+   "name": "偏斜",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "ability_parry",
+   "preId": null,
+   "nid": "a2"
+  },
+  {
+   "tree": 0,
+   "name": "强化撕裂",
+   "max": 3,
+   "row": 0,
+   "col": 2,
+   "icon": "ability_gouge",
+   "preId": null,
+   "nid": "a3"
+  },
+  {
+   "tree": 0,
+   "name": "强化冲锋",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "icon": "ability_warrior_charge",
+   "preId": null,
+   "nid": "a4"
+  },
+  {
+   "tree": 0,
+   "name": "强化战术掌握",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_nature_enchantarmor",
+   "preId": null,
+   "nid": "a5"
+  },
+  {
+   "tree": 0,
+   "name": "强化压制",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "icon": "inv_sword_05",
+   "preId": null,
+   "nid": "a6"
+  },
+  {
+   "tree": 0,
+   "name": "愤怒掌控",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_holy_blessingofstamina",
+   "preId": "a5",
+   "nid": "a7"
+  },
+  {
+   "tree": 0,
+   "name": "重伤",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "icon": "ability_backstab",
+   "preId": "a3",
+   "nid": "a8"
+  },
+  {
+   "tree": 0,
+   "name": "穿刺打击",
+   "max": 1,
+   "row": 3,
+   "col": 0,
+   "icon": "inv_spear_01",
+   "preId": null,
+   "nid": "a9"
+  },
+  {
+   "tree": 0,
+   "name": "双手武器专精",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "icon": "inv_axe_09",
+   "preId": null,
+   "nid": "a10"
+  },
+  {
+   "tree": 0,
+   "name": "穿刺",
+   "max": 2,
+   "row": 3,
+   "col": 2,
+   "icon": "ability_searingarrow",
+   "preId": null,
+   "nid": "a11"
+  },
+  {
+   "tree": 0,
+   "name": "血之气息",
+   "max": 5,
+   "row": 4,
+   "col": 0,
+   "icon": "inv_sword_01",
+   "preId": null,
+   "nid": "a12"
+  },
+  {
+   "tree": 0,
+   "name": "横扫攻击",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "ability_rogue_slicedice",
+   "preId": null,
+   "nid": "a13"
+  },
+  {
+   "tree": 0,
+   "name": "武器大师",
+   "max": 5,
+   "row": 4,
+   "col": 2,
+   "icon": "garrison_weaponupgrade",
+   "preId": null,
+   "nid": "a14"
+  },
+  {
+   "tree": 0,
+   "name": "强化猛击",
+   "max": 2,
+   "row": 5,
+   "col": 0,
+   "icon": "ability_warrior_decisivestrike",
+   "preId": null,
+   "nid": "a15"
+  },
+  {
+   "tree": 0,
+   "name": "强化断筋",
+   "max": 3,
+   "row": 5,
+   "col": 2,
+   "icon": "ability_shockwave",
+   "preId": null,
+   "nid": "a16"
+  },
+  {
+   "tree": 0,
+   "name": "致死打击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "ability_warrior_savageblow",
+   "preId": "a13",
+   "nid": "a17"
+  },
+  {
+   "tree": 1,
+   "name": "震耳嗓音",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_nature_purge",
+   "preId": null,
+   "nid": "f1"
+  },
+  {
+   "tree": 1,
+   "name": "残忍",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "ability_rogue_eviscerate",
+   "preId": null,
+   "nid": "f2"
+  },
+  {
+   "tree": 1,
+   "name": "余怒",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "icon": "ability_warrior_secondwind",
+   "preId": null,
+   "nid": "f3"
+  },
+  {
+   "tree": 1,
+   "name": "怒不可遏",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_nature_stoneclawtotem",
+   "preId": null,
+   "nid": "f4"
+  },
+  {
+   "tree": 1,
+   "name": "狂怒精准",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "icon": "ability_warrior_incite",
+   "preId": null,
+   "nid": "f5"
+  },
+  {
+   "tree": 1,
+   "name": "刺耳怒吼",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_shadow_deathscream",
+   "preId": null,
+   "nid": "f6"
+  },
+  {
+   "tree": 1,
+   "name": "血之狂热",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_shadow_summonimp",
+   "preId": null,
+   "nid": "f7"
+  },
+  {
+   "tree": 1,
+   "name": "双武器专精",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "icon": "ability_dualwield",
+   "preId": null,
+   "nid": "f8"
+  },
+  {
+   "tree": 1,
+   "name": "怒击",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "icon": "ability_whirlwind",
+   "preId": null,
+   "nid": "f9"
+  },
+  {
+   "tree": 1,
+   "name": "狂怒",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_shadow_unholyfrenzy",
+   "preId": null,
+   "nid": "f10"
+  },
+  {
+   "tree": 1,
+   "name": "强化斩杀",
+   "max": 2,
+   "row": 3,
+   "col": 3,
+   "icon": "inv_sword_48",
+   "preId": null,
+   "nid": "f11"
+  },
+  {
+   "tree": 1,
+   "name": "强化狂暴之怒",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "spell_nature_ancestralguardian",
+   "preId": null,
+   "nid": "f12"
+  },
+  {
+   "tree": 1,
+   "name": "死亡之愿",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_shadow_deathpact",
+   "preId": null,
+   "nid": "f13"
+  },
+  {
+   "tree": 1,
+   "name": "强化拦截",
+   "max": 2,
+   "row": 4,
+   "col": 3,
+   "icon": "ability_rogue_sprint",
+   "preId": null,
+   "nid": "f14"
+  },
+  {
+   "tree": 1,
+   "name": "乱舞",
+   "max": 5,
+   "row": 5,
+   "col": 1,
+   "icon": "ability_ghoulfrenzy",
+   "preId": "f13",
+   "nid": "f15"
+  },
+  {
+   "tree": 1,
+   "name": "饮血者",
+   "max": 2,
+   "row": 5,
+   "col": 2,
+   "icon": "racial_troll_berserk",
+   "preId": "f10",
+   "nid": "f16"
+  },
+  {
+   "tree": 1,
+   "name": "嗜血",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "spell_nature_bloodlust",
+   "preId": "f13",
+   "nid": "f17"
+  },
+  {
+   "tree": 2,
+   "name": "强化血性狂暴",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "icon": "ability_racial_bloodrage",
+   "preId": null,
+   "nid": "p1"
+  },
+  {
+   "tree": 2,
+   "name": "盾牌专精",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "inv_shield_06",
+   "preId": null,
+   "nid": "p2"
+  },
+  {
+   "tree": 2,
+   "name": "钢铁意志",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_magic_magearmor",
+   "preId": null,
+   "nid": "p3"
+  },
+  {
+   "tree": 2,
+   "name": "预知",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_nature_mirrorimage",
+   "preId": null,
+   "nid": "p4"
+  },
+  {
+   "tree": 2,
+   "name": "强化复仇",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "ability_warrior_revenge",
+   "preId": null,
+   "nid": "p5"
+  },
+  {
+   "tree": 2,
+   "name": "强化雷霆一击",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "icon": "ability_thunderclap",
+   "preId": null,
+   "nid": "p6"
+  },
+  {
+   "tree": 2,
+   "name": "破釜沉舟",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_holy_ashestoashes",
+   "preId": "p1",
+   "nid": "p7"
+  },
+  {
+   "tree": 2,
+   "name": "防御大师",
+   "max": 2,
+   "row": 2,
+   "col": 1,
+   "icon": "ability_warrior_shieldguard",
+   "preId": "p2",
+   "nid": "p8"
+  },
+  {
+   "tree": 2,
+   "name": "强化缴械",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "icon": "ability_warrior_disarm",
+   "preId": null,
+   "nid": "p9"
+  },
+  {
+   "tree": 2,
+   "name": "挑衅",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "icon": "ability_warrior_innerrage",
+   "preId": null,
+   "nid": "p10"
+  },
+  {
+   "tree": 2,
+   "name": "强化破甲攻击",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "icon": "ability_warrior_sunder",
+   "preId": null,
+   "nid": "p11"
+  },
+  {
+   "tree": 2,
+   "name": "先锋",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "icon": "ability_warrior_shieldcharge",
+   "preId": null,
+   "nid": "p12"
+  },
+  {
+   "tree": 2,
+   "name": "强化盾击",
+   "max": 2,
+   "row": 3,
+   "col": 2,
+   "icon": "ability_warrior_shieldbash",
+   "preId": null,
+   "nid": "p13"
+  },
+  {
+   "tree": 2,
+   "name": "强化盾墙",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "ability_warrior_shieldwall",
+   "preId": null,
+   "nid": "p14"
+  },
+  {
+   "tree": 2,
+   "name": "震荡猛击",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "ability_thunderbolt",
+   "preId": null,
+   "nid": "p15"
+  },
+  {
+   "tree": 2,
+   "name": "怒火聚焦",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "ability_warrior_focusedrage",
+   "preId": null,
+   "nid": "p16"
+  },
+  {
+   "tree": 2,
+   "name": "坚城",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "inv_shield_04",
+   "preId": null,
+   "nid": "p17"
+  },
+  {
+   "tree": 2,
+   "name": "盾牌猛击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "inv_shield_05",
+   "preId": "p15",
+   "nid": "p18"
+  }
+ ]
+}

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无限服数据基底 · 采编工作台</title>
+<style>
+  :root{
+    --bg:#14161a; --panel:#1c1f25; --panel2:#232730; --line:#2e333d;
+    --txt:#e6e8ec; --dim:#9aa3b0; --accent:#e0a96d;
+    --ok:#4caf72; --warn:#d9a13b; --lead:#6b7c99; --bad:#c9564a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  header{position:sticky;top:0;z-index:10;background:rgba(20,22,26,.95);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 18px}
+  h1{font-size:16px;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+  h1 .tag{font-size:11px;color:var(--accent);border:1px solid var(--accent);
+    border-radius:3px;padding:1px 6px}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  input,select,textarea,button{font:inherit;color:var(--txt);background:var(--panel2);
+    border:1px solid var(--line);border-radius:5px;padding:6px 9px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  #q{flex:1;min-width:200px}
+  button{cursor:pointer}
+  button:hover{border-color:var(--accent);color:#fff}
+  .btn-ghost{background:transparent}
+  main{max-width:1180px;margin:0 auto;padding:16px 18px 80px}
+  .stats{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;
+    padding:6px 12px;font-size:12px;color:var(--dim)}
+  .stat b{color:var(--txt);font-size:15px;margin-right:3px}
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .tab{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:5px 12px;
+    cursor:pointer;font-size:13px;color:var(--dim)}
+  .tab.on{background:var(--accent);color:#1a1408;border-color:var(--accent);font-weight:600}
+  .tab .n{opacity:.7;font-size:11px;margin-left:4px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:14px 16px;margin-bottom:12px}
+  .card .hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .cn{font-size:16px;font-weight:600}
+  .en{color:var(--dim);font-size:13px}
+  .none{color:var(--bad);font-size:13px}
+  .pill{font-size:11px;padding:1px 7px;border-radius:10px;border:1px solid}
+  .p-verified{color:var(--ok);border-color:var(--ok)}
+  .p-need_test{color:var(--warn);border-color:var(--warn)}
+  .p-lead_only{color:var(--lead);border-color:var(--lead)}
+  .lv{font-size:12px;color:var(--accent);background:rgba(224,169,109,.12);
+    border-radius:4px;padding:1px 6px}
+  .meta{font-size:12px;color:var(--dim);margin:4px 0}
+  .meta .conf{color:var(--bad)}
+  details{margin-top:8px}
+  summary{cursor:pointer;font-size:12px;color:var(--dim)}
+  ul.src{list-style:none;margin:6px 0 0;padding:0}
+  ul.src li{font-size:12px;padding:3px 0;border-top:1px dashed var(--line);display:flex;gap:8px;flex-wrap:wrap}
+  ul.src li:first-child{border-top:none}
+  .st{font-size:10px;border:1px solid var(--line);border-radius:3px;padding:0 5px;color:var(--dim);white-space:nowrap}
+  .st.official_cn,.st.official_en{color:var(--ok);border-color:var(--ok)}
+  .st.fan_db,.st.media_cn{color:var(--warn);border-color:var(--warn)}
+  .st.video{color:#7fb3ff;border-color:#7fb3ff}
+  ul.src a{color:#8fb6ff;word-break:break-all}
+  .edit{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+  .edit label{font-size:11px;color:var(--dim);display:block;margin-bottom:2px}
+  .edit input,.edit select{width:100%}
+  .note{grid-column:1/-1}
+  .dirty{border-left:3px solid var(--accent)}
+  .badge-edit{font-size:10px;color:var(--accent)}
+  .terms{display:flex;flex-wrap:wrap;gap:6px}
+  .term{background:var(--panel2);border:1px solid var(--line);border-radius:4px;
+    padding:2px 8px;font-size:12px;cursor:pointer}
+  .term:hover{border-color:var(--accent)}
+  .term.hit{border-color:var(--warn);color:var(--warn)}
+  .list li{margin-bottom:6px;font-size:13px}
+  .refs a{color:#8fb6ff;word-break:break-all}
+  .refs .use{color:var(--dim);font-size:12px}
+  .foot{position:fixed;bottom:0;left:0;right:0;background:rgba(20,22,26,.95);
+    border-top:1px solid var(--line);padding:8px 18px;font-size:12px;color:var(--dim);
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .empty{color:var(--dim);text-align:center;padding:40px 0}
+  code{background:var(--panel2);padding:1px 5px;border-radius:3px;font-size:12px}
+  #toast{position:fixed;top:64px;right:18px;background:var(--panel2);border:1px solid var(--accent);
+    border-radius:6px;padding:8px 14px;font-size:12px;opacity:0;transition:.3s;z-index:30}
+  #toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <h1>无限服数据基底 <span class="tag">采编工作台</span>
+    <span style="font-size:12px;color:var(--dim);font-weight:400" id="seedInfo"></span></h1>
+  <div class="row">
+    <input id="q" placeholder="搜索：本名 / 技能名 / 来源域名 / 关键词">
+    <select id="fStatus">
+      <option value="">全部状态</option>
+      <option value="verified">已官方核实</option>
+      <option value="need_test">待实测</option>
+      <option value="lead_only">仅线索</option>
+    </select>
+    <select id="fProv">
+      <option value="">全部来源</option>
+      <option value="official">只含官方来源</option>
+      <option value="nonofficial">含非官方来源</option>
+    </select>
+    <button id="btnExport" class="btn-ghost">导出 JSON</button>
+    <button id="btnImport" class="btn-ghost">导入 JSON</button>
+    <input type="file" id="fileInput" accept=".json" style="display:none">
+    <button id="btnReset" class="btn-ghost">丢弃本地修改</button>
+  </div>
+</header>
+
+<main>
+  <div class="stats" id="stats"></div>
+  <nav class="tabs" id="tabs"></nav>
+  <div id="body"></div>
+</main>
+
+<div class="foot">
+  <span>规则：非官方来源条目不得直接进小程序正文，必须升到「已官方核实」</span>
+  <span>·</span>
+  <span>掉落不写百分比</span>
+  <span>·</span>
+  <span>本地修改存在浏览器里，导出后覆盖 <code>forever-seed.json</code> 即成为正式基底</span>
+</div>
+<div id="toast"></div>
+
+<script>
+const SEED_URL = './forever-seed.json';
+const LS_KEY = 'wowseed.overlays.v1';
+const KINDS = {
+  dungeonsNew:{label:'新副本',arr:'dungeonsNew'},
+  dungeonsClassicInForever:{label:'经典副本（在无限服）',arr:'dungeonsClassicInForever'},
+  raids:{label:'团队副本',arr:'raids'},
+  systems:{label:'系统与设定',arr:'systems'},
+  glossary:{label:'官方中文术语',arr:null},
+  referenceSites:{label:'参照站点',arr:'referenceSites'},
+  openQuestions:{label:'待办与未证实',arr:'openQuestions'}
+};
+let seed=null, overlays=loadOverlays(), tab='dungeonsNew';
+
+function loadOverlays(){ try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return {}} }
+function saveOverlays(){ localStorage.setItem(LS_KEY, JSON.stringify(overlays)); }
+function ov(id){ return overlays[id]||{} }
+function rec(id,base){ return Object.assign({}, base, ov(id)) }
+
+function toast(t){ const el=document.getElementById('toast'); el.textContent=t; el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'),1800); }
+
+function allRecords(){
+  const out=[];
+  ['dungeonsNew','dungeonsClassicInForever','raids','systems'].forEach(k=>{
+    (seed[k]||[]).forEach(r=>out.push({kind:k,...r}));
+  });
+  return out;
+}
+
+function statusOf(r){ return ov(r.id).status || r.status }
+function hasOfficial(r){ return (r.sources||[]).some(s=>s.type.startsWith('official')) }
+
+function matchQ(r,q){
+  if(!q) return true;
+  const hay=[r.nameCn,r.nameEn,r.nameCnConflict,r.key,(r.note||''),
+    (r.sources||[]).map(s=>s.note+' '+s.url).join(' ')].join(' ').toLowerCase();
+  return hay.includes(q);
+}
+
+function counts(){
+  const rs=allRecords();
+  const c={total:rs.length,verified:0,need_test:0,lead_only:0,edited:Object.keys(overlays).length};
+  rs.forEach(r=>{ const s=statusOf(r); if(c[s]!==undefined) c[s]++; });
+  const g=seed.glossary||{};
+  c.terms=(g.hunter||[]).length+(g.druid||[]).length;
+  c.open=(seed.openQuestions||[]).length;
+  return c;
+}
+
+function renderStats(){
+  const c=counts();
+  document.getElementById('stats').innerHTML=[
+    ['条目',c.total],['已官方核实',c.verified],['待实测',c.need_test],
+    ['仅线索',c.lead_only],['官方术语',c.terms],['待办',c.open],['本地修改',c.edited]
+  ].map(([k,v])=>`<div class="stat"><b>${v}</b>${k}</div>`).join('');
+}
+
+function renderTabs(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  document.getElementById('tabs').innerHTML=Object.entries(KINDS).map(([k,v])=>{
+    let n;
+    if(k==='glossary') n=((seed.glossary||{}).hunter||[]).length+((seed.glossary||{}).druid||[]).length;
+    else if(k==='openQuestions') n=(seed.openQuestions||[]).length;
+    else n=filterList(v.arr,q).length;
+    return `<div class="tab ${k===tab?'on':''}" data-k="${k}">${v.label}<span class="n">${n}</span></div>`;
+  }).join('');
+  document.querySelectorAll('.tab').forEach(el=>
+    el.onclick=()=>{tab=el.dataset.k;render()});
+}
+
+function filterList(arrKey,q){
+  const st=document.getElementById('fStatus').value;
+  const pv=document.getElementById('fProv').value;
+  return (seed[arrKey]||[]).filter(r=>{
+    if(st && statusOf(r)!==st) return false;
+    if(pv==='official' && !hasOfficial(r)) return false;
+    if(pv==='nonofficial' && hasOfficial(r)) return false;
+    return matchQ(r,q);
+  });
+}
+
+function srcList(r){
+  const ss=r.sources||[];
+  if(!ss.length) return '';
+  return `<details open><summary>来源与证据 ${ss.length} 条</summary><ul class="src">`+
+    ss.map(s=>`<li><span class="st ${s.type}">${s.type}</span>
+      <a href="${s.url}" target="_blank" rel="noopener">${shortUrl(s.url)}</a>
+      <span>${esc(s.note||'')}</span></li>`).join('')+`</ul></details>`;
+}
+function shortUrl(u){ try{const x=new URL(u); return x.host+x.pathname.slice(0,42)+(x.pathname.length>42?'…':'')}catch(e){return u} }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])) }
+
+function card(r){
+  const o=ov(r.id), cur=rec(r.id,r);
+  const st=cur.status||r.status;
+  const dirty=Object.keys(o).length?`<span class="badge-edit">已本地修改</span>`:'';
+  const cn=cur.nameCn?`<span class="cn">${esc(cur.nameCn)}</span>`
+    :`<span class="cn none">中文名未定</span>`;
+  const conf=(cur.nameCnConflict?`<span class="conf">译名冲突：${esc(cur.nameCnConflict)}</span>`:'')+
+    (cur.nameEnConflict?` ${cur.nameCnConflict?' / ':''}<span class="conf">英文名冲突：${esc(cur.nameEnConflict)}</span>`:'');
+  return `<div class="card ${Object.keys(o).length?'dirty':''}">
+    <div class="hd">${cn}<span class="en">${esc(cur.nameEn||cur.key||'—')}</span>
+      <span class="pill p-${st}">${labelStatus(st)}</span>
+      ${cur.levelRange?`<span class="lv">${esc(cur.levelRange)} 级</span>`:''}
+      ${cur.bossCount?`<span class="lv">BOSS ${esc(cur.bossCount)}</span>`:''}
+      ${dirty}</div>
+    ${conf?`<div class="meta">${conf}</div>`:''}
+    <div class="meta">${esc(cur.note||'')}${cur.verifiedAt?` ｜ 核对于 ${esc(cur.verifiedAt)}`:' ｜ 未核对'}</div>
+    ${srcList(r)}
+    <div class="edit">
+      <div><label>核对状态</label>
+        <select data-id="${r.id}" data-f="status">
+          ${['verified','need_test','lead_only'].map(s=>
+            `<option value="${s}" ${s===st?'selected':''}>${labelStatus(s)}</option>`).join('')}
+        </select></div>
+      <div><label>中文名</label><input data-id="${r.id}" data-f="nameCn" value="${esc(cur.nameCn||'')}"></div>
+      <div><label>BOSS 数量</label><input data-id="${r.id}" data-f="bossCount" value="${esc(cur.bossCount||'')}"></div>
+      <div><label>核对日期</label><input data-id="${r.id}" data-f="verifiedAt" placeholder="2026-11-05" value="${esc(cur.verifiedAt||'')}"></div>
+      <div class="note"><label>备注</label><input data-id="${r.id}" data-f="note" value="${esc(cur.note||'')}"></div>
+    </div>
+  </div>`;
+}
+function labelStatus(s){ return {verified:'已官方核实',need_test:'待实测',lead_only:'仅线索'}[s]||s }
+
+function renderRecords(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const list=filterList(KINDS[tab].arr,q);
+  if(!list.length) return '<div class="empty">没有符合条件的条目。放宽筛选或换个关键词。</div>';
+  return list.map(card).join('');
+}
+
+function renderGlossary(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const g=seed.glossary||{};
+  const hit=t=>!q||t.toLowerCase().includes(q);
+  const block=(name,arr)=>{
+    const f=(arr||[]).filter(hit);
+    if(!f.length) return '';
+    return `<h3 style="font-size:13px;color:${name==='猎人'?'#c8a06a':'#7fae7f'};margin:14px 0 8px">${name}
+      <span style="color:var(--dim);font-weight:400">共 ${f.length} 条 · 点词条可复制</span></h3>
+      <div class="terms">${f.map(t=>`<span class="term ${q&&hit(t)?'hit':''}">${esc(t)}</span>`).join('')}</div>`;
+  };
+  const src=g.source||{};
+  return `<div class="card">
+    <div class="hd"><span class="cn">官方中文技能与天赋名</span>
+      <span class="pill p-verified">已官方核实</span></div>
+    <div class="meta">出处：<a href="${src.url}" target="_blank" rel="noopener" style="color:#8fb6ff">${esc(src.url)}</a>
+      ｜ 采集于 ${esc(src.fetchedAt||'')} ｜ ${esc(g.note||'')}</div>
+    ${block('猎人',g.hunter)}${block('德鲁伊',g.druid)}
+  </div>
+  <div class="card"><div class="hd"><span class="cn">官方中文装备名</span></div>
+    <div class="terms">${((seed.itemsCn||{}).names||[]).map(t=>`<span class="term">${esc(t)}</span>`).join('')}</div>
+    <div class="meta">出处：<a href="${(seed.itemsCn||{}).source&&seed.itemsCn.source.url||''}" target="_blank" rel="noopener" style="color:#8fb6ff">${esc((seed.itemsCn||{}).source&&seed.itemsCn.source.url||'')}</a></div>
+  </div>`;
+}
+
+function renderRefs(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const list=(seed.referenceSites||[]).filter(r=>matchR(r,q));
+  return `<div class="card refs"><div class="hd"><span class="cn">人工参照与可自动化源</span></div>
+    <div class="meta">标「人工参照」的站点只允许人看人抄，禁止写进爬虫、禁止把数据搬进产物。</div>
+    <ul class="list">${list.map(r=>`<li><b>${esc(r.name)}</b><br>
+      <a href="${r.url}" target="_blank" rel="noopener">${esc(r.url)}</a><br>
+      <span class="use">${esc(r.use)}</span></li>`).join('')}</ul></div>`;
+}
+function matchR(r,q){ return !q || (r.name+' '+r.url+' '+r.use).toLowerCase().includes(q) }
+
+function renderOpen(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const list=(seed.openQuestions||[]).filter(t=>!q||t.toLowerCase().includes(q));
+  return `<div class="card"><div class="hd"><span class="cn">还没被证实的，别当成已知</span></div>
+    <ul class="list">${list.map((t,i)=>`<li>${i+1}. ${esc(t)}</li>`).join('')}</ul></div>`;
+}
+
+const HELP=`<div class="card"><div class="hd"><span class="cn">怎么用（四步）</span></div>
+  <ol class="list" style="padding-left:20px;margin:6px 0 0">
+    <li>起服务再打开：在本目录执行 <code>python3 -m http.server 8811</code>，浏览器访问 <code>http://127.0.0.1:8811</code>。直接双击用 file:// 打开会被浏览器拦住本地数据请求（页面会提示你）。</li>
+    <li>核对：开着「参照站点」页签里的站，逐条改卡片下方的<b>核对状态 / 中文名 / BOSS 数量 / 核对日期 / 备注</b>。改动即时存在浏览器本地，刷新不丢；改过的卡片左侧有橙色条。</li>
+    <li>定稿：点右上角<b>导出 JSON</b>，用下载的文件覆盖本目录的 <code>forever-seed.json</code>，它就是新的数据基底。</li>
+    <li>接产线：基底给 p2-database 的 <code>wow:*</code> 脚本读取，生成 <code>translated-data/wow/{dev|release}</code> 的产物；小程序只读产物，不读这个基底。</li>
+  </ol>
+  <div class="meta" style="margin-top:8px">口径提醒：状态为「仅线索」的条目一律不进小程序正文；等级区间和冲突译名在正式服上线后要重核一遍。</div>
+</div>`;
+
+function body(){
+  if(tab==='glossary') return renderGlossary()+HELP;
+  if(tab==='referenceSites') return renderRefs()+HELP;
+  if(tab==='openQuestions') return renderOpen()+HELP;
+  return renderRecords()+HELP;
+}
+
+function render(){ renderStats(); renderTabs(); document.getElementById('body').innerHTML=body(); bindEdits(); }
+
+function bindEdits(){
+  document.querySelectorAll('.edit [data-id]').forEach(el=>{
+    const ev=el.tagName==='SELECT'?'change':'input';
+    el.addEventListener(ev,()=>{
+      const id=el.dataset.id,f=el.dataset.f;
+      overlays[id]=overlays[id]||{};
+      const v=el.value.trim();
+      if(v==='') delete overlays[id][f]; else overlays[id][f]=v;
+      if(!Object.keys(overlays[id]).length) delete overlays[id];
+      saveOverlays();
+      renderStats();
+      clearTimeout(el._t); el._t=setTimeout(render,600);
+    });
+  });
+  document.querySelectorAll('.term').forEach(el=>
+    el.onclick=()=>{if(navigator.clipboard){navigator.clipboard.writeText(el.textContent);}toast('已复制 '+el.textContent)});
+}
+
+function exportJSON(){
+  const out=JSON.parse(JSON.stringify(seed));
+  ['dungeonsNew','dungeonsClassicInForever','raids','systems'].forEach(k=>{
+    out[k]=(seed[k]||[]).map(r=>rec(r.id,r));
+  });
+  out.meta=Object.assign({},seed.meta,{exportedAt:new Date().toISOString(),editedCount:Object.keys(overlays).length});
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='forever-seed.json'; a.click();
+  URL.revokeObjectURL(a.href); toast('已导出，用它覆盖 forever-seed.json 即成为新基底');
+}
+
+async function boot(){
+  let raw;
+  try{ const r=await fetch(SEED_URL+'?t='+Date.now()); if(!r.ok) throw 0; raw=await r.json(); }
+  catch(e){
+    document.getElementById('body').innerHTML=
+      `<div class="empty">读不到 <code>forever-seed.json</code>。<br>
+       直接用 file:// 打开会被浏览器拦住本地请求，请在该目录起一个静态服务：<br>
+       <code>cd docs/wow-infinite-data &amp;&amp; python3 -m http.server 8811</code><br>
+       然后访问 <code>http://localhost:8811</code>；或者用上面的「导入 JSON」手动加载种子。</div>`;
+    return;
+  }
+  seed=raw;
+  document.getElementById('seedInfo').textContent=
+    `${seed.meta.game} · 种子 v${seed.meta.seedVersion} · 定档 ${seed.meta.launchDateCn}`;
+  render();
+}
+
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('fStatus').addEventListener('change',render);
+document.getElementById('fProv').addEventListener('change',render);
+document.getElementById('btnExport').onclick=exportJSON;
+document.getElementById('btnImport').onclick=()=>document.getElementById('fileInput').click();
+document.getElementById('fileInput').onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const fr=new FileReader();
+  fr.onload=()=>{ try{ seed=JSON.parse(fr.result); overlays={}; saveOverlays(); render(); toast('已载入 '+f.name) }
+    catch(err){ toast('JSON 解析失败：'+err.message) } };
+  fr.readAsText(f);
+};
+document.getElementById('btnReset').onclick=()=>{
+  if(confirm('丢弃所有本地修改，回到种子文件状态？')){ overlays={}; saveOverlays(); render(); toast('已重置') }
+};
+boot();
+</script>
+</body>
+</html>

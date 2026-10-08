@@ -1,0 +1,1592 @@
+{
+ "classId": "druid",
+ "classNameCn": "德鲁伊",
+ "structureStatus": "imported-unverified",
+ "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "grid": {
+  "rows": 7,
+  "cols": 4,
+  "note": "两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实"
+ },
+ "rules": {
+  "totalPoints": 51,
+  "levelCap": 60,
+  "tierUnlockCost": null
+ },
+ "trees": [
+  {
+   "id": "druid-0",
+   "nameCn": "平衡",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "druid-0-强化愤怒",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "强化愤怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_abolishmagic",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-起源",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "起源",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_arcane_arcane03",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-月光",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "月光",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_sentinal",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-强化月火术",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "强化月火术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_starfall",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-自然的威严",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "自然的威严",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_staff_01",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-自然延伸",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "自然延伸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_naturetouchgrow",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-强化纠缠根须",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化纠缠根须",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stranglevines",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-自然的壮美",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "自然的壮美",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_natureresistancetotem",
+     "requires": [
+      "druid-0-自然的威严"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-自然平衡",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "自然平衡",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-虫群",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "虫群",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_insectswarm",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-复仇",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "复仇",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_purge",
+     "requires": [
+      "druid-0-强化月火术"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-强化星火术",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化星火术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_arcane_starfire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-繁茂",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "繁茂",
+     "nameAlt": "蔓生",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_misc_herb_15",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-自然之赐",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "自然之赐",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_naturesblessing",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-日月之蚀",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "日月之蚀",
+     "nameAlt": "月蚀",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_eclipse",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-月怒",
+     "tier": 5,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "月怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_moonglow",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-0-枭兽形态",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "枭兽形态",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_forceofnature",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "druid-1",
+   "nameCn": "野性战斗",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "druid-1-凶暴",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "凶暴",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_hunter_pet_hyena",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-野性之心",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "野性之心",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_blessingofagility",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-豹之迅捷",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "豹之迅捷",
+     "nameAlt": "野性迅捷",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_spiritwolf",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-野性本能",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "野性本能",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_ambush",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-野蛮冲撞",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "野蛮冲撞",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_bash",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-厚皮",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "厚皮",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_misc_pelt_bear_03",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-撕碎攻击",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "撕碎攻击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_vampiricaura",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-野蛮暴怒",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "野蛮暴怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_ravage",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-野性冲锋",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "野性冲锋",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_hunter_pet_bear",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-锋利兽爪",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "锋利兽爪",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_misc_monsterclaw_04",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-撕碎攻击-r3c0",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "撕碎攻击",
+     "nameAlt": "变形之力",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_druid_displacement",
+     "requires": [
+      "druid-1-撕碎攻击"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-原始撕咬",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "原始撕咬",
+     "nameAlt": "裂伤",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_racial_cannibalize",
+     "requires": [
+      "druid-1-野蛮暴怒"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-猛兽攻击",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "猛兽攻击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_hunter_pet_cat",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-血性狂乱",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "血性狂乱",
+     "nameAlt": "原始狂怒",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_ghoulfrenzy",
+     "requires": [
+      "druid-1-锋利兽爪"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-强化变形之力",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化变形之力",
+     "nameAlt": "狩猎天性",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_hunter_aspectmastery",
+     "requires": [
+      "druid-1-撕碎攻击-r3c0"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-兽群领袖",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "兽群领袖",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_unyeildingstamina",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-掠食本能",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "掠食本能",
+     "nameAlt": "丛林之王",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_predatoryinstincts",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-自然反射",
+     "tier": 5,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "自然反射",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_bullrush",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-狂乱撕扯",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "狂乱撕扯",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_primalagression",
+     "requires": [
+      "druid-1-猛兽攻击"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-1-狂暴",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "狂暴",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_berserk",
+     "requires": [
+      "druid-1-兽群领袖"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "druid-2",
+   "nameCn": "恢复",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "druid-2-自然集中",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "自然集中",
+     "nameAlt": "自然专注",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_healingwavegreater",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-激怒",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "激怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_blessingofstamina",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-自然主义",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "自然主义",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_healingtouch",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-微妙",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "微妙",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_eyeoftheowl",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-自然变形",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "自然变形",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_wispsplode",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-反射",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "反射",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_windwalkon",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-自然赐福",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "自然赐福",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_protectionformnature",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-大地母亲的恩赐",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 1,
+     "nameCn": "大地母亲的恩赐",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_spiritarmor",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-宁静之魂",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "宁静之魂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_elunesgrace",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-强化回春术",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化回春术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_rejuvenation",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-迅捷治愈",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 1,
+     "nameCn": "迅捷治愈",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_relics_idolofrejuvenation",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-自然迅捷",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "自然迅捷",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_ravenform",
+     "requires": [
+      "druid-2-自然主义"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-生命之魂",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "生命之魂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_giftofthewaterspirit",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-强化宁静",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化宁静",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_tranquility",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-强化愈合",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化愈合",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_resistnature",
+     "requires": [
+      "druid-2-强化回春术"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "druid-2-野性成长",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "野性成长",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_flourish",
+     "requires": [
+      "druid-2-生命之魂"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "nodes": 53,
+  "nameConflict": 9,
+  "onlyInOneSource": 2
+ },
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+}

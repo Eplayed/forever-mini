@@ -1,0 +1,1623 @@
+{
+ "classId": "mage",
+ "classNameCn": "法师",
+ "structureStatus": "imported-unverified",
+ "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "grid": {
+  "rows": 7,
+  "cols": 4,
+  "note": "两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实"
+ },
+ "rules": {
+  "totalPoints": 51,
+  "levelCap": 60,
+  "tierUnlockCost": null
+ },
+ "trees": [
+  {
+   "id": "mage-0",
+   "nameCn": "奥术",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "mage-0-魔杖专精",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "魔杖专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_wand_01",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术集中",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "奥术集中",
+     "nameAlt": "奥术专注",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_devotion",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-强化引导",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化引导",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_starfall",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术精妙",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "奥术精妙",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_dispelmagic",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-魔法吸收",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "魔法吸收",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_astralrecalgroup",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术专注",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "奥术专注",
+     "nameAlt": "奥术集中",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_manaburn",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术充沛",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "奥术充沛",
+     "nameAlt": "奥术活力",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_arcane_arcaneresilience",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-魔法协调",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "魔法协调",
+     "nameAlt": "奥术几何学",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "inv_ability_mage_radiantspark",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术冲撞",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "奥术冲撞",
+     "nameAlt": "奥术冲击",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_wispsplode",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术冲击",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 1,
+     "nameCn": "奥术冲击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_arcane_blast",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术护盾",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "奥术护盾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_detectlesserinvisibility",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-强化法术反制",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "强化法术反制",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_iceshock",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术冥想",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "奥术冥想",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_siphonmana",
+     "requires": [
+      "mage-0-奥术专注"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-飞弹连射",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 1,
+     "nameCn": "飞弹连射",
+     "nameAlt": "飞弹速射",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_mage_missilebarrage",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-气定神闲",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "气定神闲",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_enchantarmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术心智",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "奥术心智",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_charm",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术增效",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "奥术增效",
+     "nameAlt": "奥术潜能",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_teleport",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-0-奥术强化",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "奥术强化",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_lightning",
+     "requires": [
+      "mage-0-气定神闲"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mage-1",
+   "nameCn": "火焰",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "mage-1-火焰余波",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "火焰余波",
+     "nameAlt": "烈焰余波",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_lavaspawn",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-烧尽",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "烧尽",
+     "nameAlt": "焚化",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_flameshock",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-强化火球术",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化火球术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_flamebolt",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-点燃",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "点燃",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_incinerate",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-烈焰投掷",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "烈焰投掷",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_flare",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-冲击",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "冲击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_meteorstorm",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-燃烧之魂",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "燃烧之魂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_fire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-强化烈焰风暴",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "强化烈焰风暴",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_selfdestruct",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-炎爆术",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "炎爆术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_fireball02",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-强化灼烧",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化灼烧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_windsofwoe",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-强化防护火焰结界",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "强化防护火焰结界",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_firearmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-法术连击",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "法术连击",
+     "nameAlt": "热力连击",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_firebolt",
+     "requires": [
+      "mage-1-炎爆术"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-元素大师",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "元素大师",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_masterofelements",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-火焰重击",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "火焰重击",
+     "nameAlt": "临界质量",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_wispheal",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-冲击波",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "冲击波",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_excorcism_02",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-火焰强化",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "火焰强化",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_immolation",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-1-燃烧",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "燃烧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_sealoffire",
+     "requires": [
+      "mage-1-火焰重击"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mage-2",
+   "nameCn": "冰霜",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "mage-2-冰霜障壁",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "冰霜障壁",
+     "nameAlt": "寒冰防护",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostward",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-强化寒冰箭",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "强化寒冰箭",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostbolt02",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-元素精准",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "元素精准",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_ice_magicdamage",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-寒冰碎片",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "寒冰碎片",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_iceshard",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-极寒冰霜",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "极寒冰霜",
+     "nameAlt": "永冻",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_wisp",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-强化冰霜新星",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "强化冰霜新星",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_freezingbreath",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-霜寒刺骨",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "霜寒刺骨",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostarmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-刺骨寒冰",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "刺骨寒冰",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostbolt",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-冰霜导能",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "冰霜导能",
+     "nameAlt": "寒冰引导",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_stun",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-冰枪术",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "冰枪术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostblast",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-强化暴风雪",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "强化暴风雪",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_icestorm",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-极寒延伸",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "极寒延伸",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_darkritual",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-寒冰屏障",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "寒冰屏障",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frost",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-碎冰",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "碎冰",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostshock",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-强化冰锥术",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "强化冰锥术",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_glacier",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-急速冷却",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "急速冷却",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_wizardmark",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-寒冰指",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "寒冰指",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_mage_wintersgrasp",
+     "requires": [
+      "mage-2-冰枪术"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-深冬之寒",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "深冬之寒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_chillingblast",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "mage-2-寒冰护体",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "寒冰护体",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_ice_lament",
+     "requires": [
+      "mage-2-急速冷却"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/mage/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/mage.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "nodes": 54,
+  "nameConflict": 14,
+  "onlyInOneSource": 0
+ },
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+}

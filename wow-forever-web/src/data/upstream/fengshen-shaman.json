@@ -1,0 +1,409 @@
+{
+ "trees": [
+  "元素战斗",
+  "增强",
+  "恢复"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "传导",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "震荡",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素防护",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "回响",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "烈焰召唤",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素浩劫",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素专注",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素之怒",
+   "max": 5,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化火焰新星",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "风暴之眼",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "雷霆召唤",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "元素之怒"
+  },
+  {
+   "tree": 0,
+   "name": "元素延伸",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "闪电过载",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "地缚",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素迅捷",
+   "max": 3,
+   "row": 5,
+   "col": 2,
+   "preName": "雷霆召唤"
+  },
+  {
+   "tree": 0,
+   "name": "熔岩爆裂",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "闪电过载"
+  },
+  {
+   "tree": 1,
+   "name": "大地之握",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "雷鸣猛击",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "先祖知识",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "守护图腾",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "心灵敏捷",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化幽魂之狼",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化闪电之盾",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "元素武器",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "萨满专注",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "预知",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "坚韧",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "疾风",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": "心灵敏捷"
+  },
+  {
+   "tree": 1,
+   "name": "风暴打击",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "灵魂武器",
+   "max": 1,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "心灵迅捷",
+   "max": 2,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化风暴打击",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": "风暴打击"
+  },
+  {
+   "tree": 1,
+   "name": "漩涡武器",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "先知之怒",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "心灵迅捷"
+  },
+  {
+   "tree": 2,
+   "name": "强化治疗波",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "潮汐掌握",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "静心",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然优雅",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "潮汐专注",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化重生",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "先祖治疗",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "治疗专注",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "水之盾",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "图腾专注",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "恢复图腾",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "法力之潮图腾",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "治疗之道",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "自然迅捷",
+   "max": 1,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "净化",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "激流",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "治疗之道"
+  }
+ ]
+}

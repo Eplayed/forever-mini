@@ -1,0 +1,3669 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-07",
+  "note": "猎人、德鲁伊、牧师、战士四职业的官方中文技能与天赋名，另有 33 条种族技能官方中文名。圣骑士、萨满祭司、法师、术士、潜行者尚无官方中文深度解析文章，不机翻、不搬第三方。",
+  "pending": [
+   "圣骑士/萨满/法师/术士/潜行者：等官网职业深度解析发布后采集",
+   "全部条目的英文原名",
+   "牧师与战士天赋的专精归属（神圣/暗影、武器/狂暴/防护）",
+   "33 条种族技能的种族归属逐条核对"
+  ]
+ },
+ "items": [
+  {
+   "id": "hunter-talent-1",
+   "cn": "瞄准射击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-2",
+   "cn": "奥术射击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-3",
+   "cn": "逃脱",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-4",
+   "cn": "多重射击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-5",
+   "cn": "野兽守护",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-6",
+   "cn": "冰霜陷阱",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-7",
+   "cn": "火焰陷阱",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-8",
+   "cn": "毒蝎钉刺",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-9",
+   "cn": "欺诈者之舞",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-10",
+   "cn": "归我了",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-11",
+   "cn": "冲锋",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-12",
+   "cn": "挫志尖啸",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-13",
+   "cn": "潜伏",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-14",
+   "cn": "钳夹",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-15",
+   "cn": "雷霆践踏",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-16",
+   "cn": "裂筋",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-17",
+   "cn": "野蛮撕扯",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-18",
+   "cn": "蝎毒",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-19",
+   "cn": "蛛网",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-20",
+   "cn": "尘雾之云",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-21",
+   "cn": "甲壳护盾",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-22",
+   "cn": "闪电吐息",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-23",
+   "cn": "狂怒之嚎",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-24",
+   "cn": "致命守护",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-25",
+   "cn": "耐久训练",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-26",
+   "cn": "集中火力",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-27",
+   "cn": "灵猴守护",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-28",
+   "cn": "寻路",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-29",
+   "cn": "狂怒释放",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-30",
+   "cn": "强化治疗宠物",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-31",
+   "cn": "凶暴",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-32",
+   "cn": "召唤雄鹰",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-33",
+   "cn": "胁迫",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-34",
+   "cn": "野兽戒律",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-35",
+   "cn": "鹰眼",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-36",
+   "cn": "致命攻击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-37",
+   "cn": "强化钉刺",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-38",
+   "cn": "效率",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-39",
+   "cn": "精确瞄准",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-40",
+   "cn": "疾速杀戮",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-41",
+   "cn": "强化奥术射击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-42",
+   "cn": "独来独往",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-43",
+   "cn": "强击光环",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-44",
+   "cn": "致死射击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-45",
+   "cn": "弹幕",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-46",
+   "cn": "狙击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-47",
+   "cn": "强化追踪",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-48",
+   "cn": "诱捕",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-49",
+   "cn": "野蛮打击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-50",
+   "cn": "生存专家",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-51",
+   "cn": "强化摔绊",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-52",
+   "cn": "稳固",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-53",
+   "cn": "生存战术",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-54",
+   "cn": "掠食者之锋",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-55",
+   "cn": "反击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-56",
+   "cn": "游刃有余",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-57",
+   "cn": "暴露猎物",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-58",
+   "cn": "生存专家的戒律",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-59",
+   "cn": "陆行鸟踢击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-60",
+   "cn": "闪电反射",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-61",
+   "cn": "裂伤打击",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "hunter-talent-62",
+   "cn": "起死回生",
+   "en": null,
+   "kind": "talent",
+   "classId": "hunter",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-1",
+   "cn": "撕咬",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-2",
+   "cn": "爪击",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-3",
+   "cn": "俯冲",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-4",
+   "cn": "突进",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-5",
+   "cn": "音爆",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-6",
+   "cn": "横扫",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-7",
+   "cn": "野蛮冲撞",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-8",
+   "cn": "厚皮",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-9",
+   "cn": "野蛮暴怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-10",
+   "cn": "野性冲锋",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-11",
+   "cn": "锋利兽爪",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-12",
+   "cn": "撕碎攻击",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-13",
+   "cn": "变形之力",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-14",
+   "cn": "原始撕咬",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-15",
+   "cn": "血之狂暴",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-16",
+   "cn": "强化变形之力",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-17",
+   "cn": "兽群领袖",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-18",
+   "cn": "猛兽攻击",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-19",
+   "cn": "自然反射",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-20",
+   "cn": "狂乱撕扯",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-21",
+   "cn": "狂暴",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-22",
+   "cn": "自然集中",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-23",
+   "cn": "激怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-24",
+   "cn": "自然主义",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-25",
+   "cn": "微妙",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-26",
+   "cn": "自然变形",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-27",
+   "cn": "反射",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-28",
+   "cn": "自然赐福",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-29",
+   "cn": "大地母亲的恩赐",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-30",
+   "cn": "迅捷治愈",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-31",
+   "cn": "生命之魂",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-32",
+   "cn": "强化宁静",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-33",
+   "cn": "强化愈合",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-34",
+   "cn": "野性成长",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-35",
+   "cn": "愈合",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-36",
+   "cn": "树皮术",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-37",
+   "cn": "纠缠根须",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-38",
+   "cn": "飓风",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-39",
+   "cn": "精灵之火",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-40",
+   "cn": "自然之握",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-41",
+   "cn": "荆棘术",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-42",
+   "cn": "愤怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-43",
+   "cn": "清晰预兆",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-44",
+   "cn": "强化愤怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-45",
+   "cn": "起源",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-46",
+   "cn": "月光",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-47",
+   "cn": "强化月火术",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-48",
+   "cn": "自然的威严",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-49",
+   "cn": "自然延伸",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-50",
+   "cn": "强化纠缠根须",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-51",
+   "cn": "自然的壮美",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-52",
+   "cn": "虫群",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-53",
+   "cn": "复仇",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-54",
+   "cn": "繁茂",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-55",
+   "cn": "自然之赐",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-56",
+   "cn": "日月之蚀",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-57",
+   "cn": "月怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-58",
+   "cn": "枭兽形态",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-59",
+   "cn": "野性之心",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-60",
+   "cn": "豹之迅捷",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "druid-talent-61",
+   "cn": "野性本能",
+   "en": null,
+   "kind": "talent",
+   "classId": "druid",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "note": "国服官方职业深度解析原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "item-1",
+   "cn": "尊贵法袍",
+   "en": null,
+   "kind": "item",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24303313/index.html",
+     "note": "官方座谈会回顾中出现的装备名",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "item-2",
+   "cn": "石猪剑",
+   "en": null,
+   "kind": "item",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24303313/index.html",
+     "note": "官方座谈会回顾中出现的装备名",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "item-3",
+   "cn": "拉迪莫尔家传指环",
+   "en": null,
+   "kind": "item",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24303313/index.html",
+     "note": "官方座谈会回顾中出现的装备名",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-63",
+   "cn": "神圣之火",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-64",
+   "cn": "苦修",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-65",
+   "cn": "惩击",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-66",
+   "cn": "真言术：盾",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-67",
+   "cn": "快速治疗",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-68",
+   "cn": "联结治疗",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-69",
+   "cn": "次级治疗术",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-70",
+   "cn": "治疗术",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-71",
+   "cn": "强效治疗术",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-72",
+   "cn": "虚弱灵魂",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-73",
+   "cn": "愈合祷言",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-74",
+   "cn": "救赎之魂",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-75",
+   "cn": "噬灵瘟疫",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-76",
+   "cn": "精神鞭笞",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-77",
+   "cn": "吸血鬼的拥抱",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-78",
+   "cn": "暗言术：灭",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-79",
+   "cn": "沉默",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "priest-talent-80",
+   "cn": "昏阙",
+   "en": null,
+   "kind": "talent",
+   "classId": "priest",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-81",
+   "cn": "战术掌握",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-82",
+   "cn": "乘胜追击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-83",
+   "cn": "鲁莽",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-84",
+   "cn": "反击风暴",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-85",
+   "cn": "盾墙",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-86",
+   "cn": "撕裂",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-87",
+   "cn": "雷霆一击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-88",
+   "cn": "战斗怒吼",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-89",
+   "cn": "破甲攻击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-90",
+   "cn": "穿刺打击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-91",
+   "cn": "压制",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-92",
+   "cn": "武器大师",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-93",
+   "cn": "血之气息",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-94",
+   "cn": "猛击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-95",
+   "cn": "震耳嗓音",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-96",
+   "cn": "钢铁意志",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-97",
+   "cn": "怒不可遏",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-98",
+   "cn": "顺劈斩",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-99",
+   "cn": "血之狂热",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-100",
+   "cn": "无尽怒气",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-101",
+   "cn": "双武器专精",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-102",
+   "cn": "怒击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-103",
+   "cn": "狂怒",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-104",
+   "cn": "精准",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-105",
+   "cn": "死亡之愿",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-106",
+   "cn": "乱舞",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-107",
+   "cn": "嗜血",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-108",
+   "cn": "盾牌专精",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-109",
+   "cn": "预知",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-110",
+   "cn": "血性狂暴",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-111",
+   "cn": "防御大师",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-112",
+   "cn": "复仇",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-113",
+   "cn": "挑衅",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-114",
+   "cn": "缴械",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-115",
+   "cn": "先锋",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-116",
+   "cn": "坚城",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-117",
+   "cn": "怒火聚焦",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "warrior-talent-118",
+   "cn": "盾牌猛击",
+   "en": null,
+   "kind": "talent",
+   "classId": "warrior",
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "note": "国服官方职业深度解析（牧师与战士）原文用词",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-119",
+   "cn": "血性狂怒",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-120",
+   "cn": "粉碎诅咒",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-121",
+   "cn": "被遗忘者的意志",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-122",
+   "cn": "食尸",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-123",
+   "cn": "水下呼吸",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-124",
+   "cn": "哀伤之触",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-125",
+   "cn": "战争践踏",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-126",
+   "cn": "栽培",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-127",
+   "cn": "原野疾驰",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-128",
+   "cn": "耐久",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-129",
+   "cn": "狂暴",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-130",
+   "cn": "极速再生",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-131",
+   "cn": "野兽杀手",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-132",
+   "cn": "再生",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-133",
+   "cn": "踏空而行",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-134",
+   "cn": "天穹视界",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-135",
+   "cn": "风灵护佑",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-136",
+   "cn": "元素洞察",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-137",
+   "cn": "生存意志",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-138",
+   "cn": "感知",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-139",
+   "cn": "人类精魂",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-140",
+   "cn": "石像形态",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-141",
+   "cn": "寻找财宝",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-142",
+   "cn": "王牌猎人",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-143",
+   "cn": "艾露恩之光",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-144",
+   "cn": "影遁",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-145",
+   "cn": "迅捷",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-146",
+   "cn": "精灵之魂",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-147",
+   "cn": "逃命专家",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-148",
+   "cn": "我知道了",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-149",
+   "cn": "开阔思维",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-150",
+   "cn": "工程学专精",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "race-racial-151",
+   "cn": "阅读魔网",
+   "en": null,
+   "kind": "racial",
+   "classId": null,
+   "spec": null,
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  }
+ ]
+}

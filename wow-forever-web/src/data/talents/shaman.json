@@ -1,0 +1,1511 @@
+{
+ "classId": "shaman",
+ "classNameCn": "萨满祭司",
+ "structureStatus": "imported-unverified",
+ "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "grid": {
+  "rows": 7,
+  "cols": 4,
+  "note": "两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实"
+ },
+ "rules": {
+  "totalPoints": 51,
+  "levelCap": 60,
+  "tierUnlockCost": null
+ },
+ "trees": [
+  {
+   "id": "shaman-0",
+   "nameCn": "元素战斗",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "shaman-0-传导",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "传导",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_wispsplode",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-震荡",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "震荡",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_earthshock",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素防护",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "元素防护",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_spiritarmor",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-回响",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "回响",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_frostward",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-烈焰召唤",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "烈焰召唤",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_immolation",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素浩劫",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "元素浩劫",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_elementaldevastation",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素集中",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "元素集中",
+     "nameAlt": "元素专注",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_manaburn",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素迅捷",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "元素迅捷",
+     "nameAlt": "元素之怒",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_lightning_lightningbolt01",
+     "requires": [
+      "shaman-0-雷霆召唤"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-强化火焰新星",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化火焰新星",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_sealoffire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-风暴之眼",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "风暴之眼",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_eyeofthestorm",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-雷霆召唤",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "雷霆召唤",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_callstorm",
+     "requires": [
+      "shaman-0-元素之怒"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素射程",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "元素射程",
+     "nameAlt": "元素延伸",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stormreach",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-闪电超载",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "闪电超载",
+     "nameAlt": "闪电过载",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_lightningoverload",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-地缚",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 1,
+     "nameCn": "地缚",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stranglevines",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-元素之怒",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "元素之怒",
+     "nameAlt": "元素迅捷",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_volcano",
+     "requires": [
+      "shaman-0-雷霆召唤"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-0-熔岩爆裂",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "熔岩爆裂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shaman_lavaburst",
+     "requires": [
+      "shaman-0-闪电超载"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shaman-1",
+   "nameCn": "增强",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "shaman-1-大地之握",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "大地之握",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stoneclawtotem",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-雷鸣猛击",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "雷鸣猛击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_thunderbolt",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-先祖知识",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "先祖知识",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_grimward",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-守护图腾",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "守护图腾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_stoneskintotem",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-聪慧",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "聪慧",
+     "nameAlt": "心灵敏捷",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_mentalquickness",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-强化幽魂之狼",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "强化幽魂之狼",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_spiritwolf",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-强化闪电之盾",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "强化闪电之盾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_lightningshield",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-元素武器",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "元素武器",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_fire_flametounge",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-萨满专注",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "萨满专注",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_elementalabsorption",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-预知",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "预知",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_mirrorimage",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-坚韧",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "坚韧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_devotion",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-乱舞",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "乱舞",
+     "nameAlt": "疾风",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_ghoulfrenzy",
+     "requires": [
+      "shaman-1-聪慧"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-风暴打击",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "风暴打击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_shaman_stormstrike",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-灵魂武器",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "灵魂武器",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_parry",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-精神敏锐",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "精神敏锐",
+     "nameAlt": "心灵迅捷",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_sleep",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-强化风暴打击",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "强化风暴打击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shaman_improvedstormstrike",
+     "requires": [
+      "shaman-1-风暴打击"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-漩涡武器",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "漩涡武器",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shaman_maelstromweapon",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-1-先知之怒",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "先知之怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_bloodlust",
+     "requires": [
+      "shaman-1-精神敏锐"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shaman-2",
+   "nameCn": "恢复",
+   "nameEn": null,
+   "nodes": [
+    {
+     "id": "shaman-2-强化治疗波",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "强化治疗波",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_magicimmunity",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-图腾集中",
+     "tier": 0,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "图腾集中",
+     "nameAlt": "潮汐掌握",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_moonglow",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-全神贯注",
+     "tier": 1,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "全神贯注",
+     "nameAlt": "静心",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_sleep",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-自然优雅",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "自然优雅",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_healingtouch",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-潮汐集中",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "潮汐集中",
+     "nameAlt": "潮汐专注",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_manarecharge",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-强化复生",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化复生",
+     "nameAlt": "强化重生",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_reincarnation",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-先祖治疗",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "先祖治疗",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_undyingstrength",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-治疗专注",
+     "tier": 2,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "治疗专注",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_healingwavelesser",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-水之护盾",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "水之护盾",
+     "nameAlt": "水之盾",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_shaman_watershield",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-潮汐掌握",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "潮汐掌握",
+     "nameAlt": "图腾专注",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_tranquility",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-恢复图腾",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "恢复图腾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_manaregentotem",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-法力之潮图腾",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "法力之潮图腾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_summonwaterelemental",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-治疗之道",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "治疗之道",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_healingway",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-自然迅捷",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "自然迅捷",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_ravenform",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-净化",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "净化",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_frost_wizardmark",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "shaman-2-激流",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "激流",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_nature_riptide",
+     "requires": [
+      "shaman-2-治疗之道"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "nodes": 50,
+  "nameConflict": 14,
+  "onlyInOneSource": 0
+ },
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+}

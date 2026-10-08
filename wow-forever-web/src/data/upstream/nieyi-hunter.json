@@ -1,0 +1,504 @@
+{
+ "rows": [
+  {
+   "tree": 0,
+   "name": "致命守护",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_nature_ravenform",
+   "preId": null,
+   "nid": "t0_0"
+  },
+  {
+   "tree": 0,
+   "name": "耐久训练",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_nature_reincarnation",
+   "preId": null,
+   "nid": "t0_1"
+  },
+  {
+   "tree": 0,
+   "name": "集中火力",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "icon": "inv_weapon_crossbow_10",
+   "preId": null,
+   "nid": "t0_2"
+  },
+  {
+   "tree": 0,
+   "name": "强化灵猴守护",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "icon": "ability_hunter_aspectofthemonkey",
+   "preId": null,
+   "nid": "t0_3"
+  },
+  {
+   "tree": 0,
+   "name": "寻路",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "icon": "ability_mount_jungletiger",
+   "preId": null,
+   "nid": "t0_4"
+  },
+  {
+   "tree": 0,
+   "name": "强化复活宠物",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "icon": "ability_hunter_beastsoothe",
+   "preId": null,
+   "nid": "t0_5"
+  },
+  {
+   "tree": 0,
+   "name": "野兽迅捷",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "icon": "ability_druid_dash",
+   "preId": null,
+   "nid": "t0_6"
+  },
+  {
+   "tree": 0,
+   "name": "狂怒释放",
+   "max": 5,
+   "row": 2,
+   "col": 2,
+   "icon": "ability_bullrush",
+   "preId": null,
+   "nid": "t0_7"
+  },
+  {
+   "tree": 0,
+   "name": "强化治疗宠物",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "icon": "ability_hunter_mendpet",
+   "preId": null,
+   "nid": "t0_8"
+  },
+  {
+   "tree": 0,
+   "name": "凶暴",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "icon": "inv_misc_monsterclaw_04",
+   "preId": null,
+   "nid": "t0_9"
+  },
+  {
+   "tree": 0,
+   "name": "召唤雄鹰",
+   "max": 1,
+   "row": 3,
+   "col": 3,
+   "icon": "ability_hunter_animalhandler",
+   "preId": null,
+   "nid": "t0_10"
+  },
+  {
+   "tree": 0,
+   "name": "灵魂联结",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "ability_druid_demoralizingroar",
+   "preId": null,
+   "nid": "t0_11"
+  },
+  {
+   "tree": 0,
+   "name": "胁迫",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "ability_devour",
+   "preId": "t0_6",
+   "nid": "t0_12"
+  },
+  {
+   "tree": 0,
+   "name": "野兽戒律",
+   "max": 2,
+   "row": 4,
+   "col": 3,
+   "icon": "spell_nature_abolishmagic",
+   "preId": null,
+   "nid": "t0_13"
+  },
+  {
+   "tree": 0,
+   "name": "狂乱",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "inv_misc_monsterclaw_03",
+   "preId": "t0_9",
+   "nid": "t0_14"
+  },
+  {
+   "tree": 0,
+   "name": "狂野怒火",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "ability_druid_ferociousbite",
+   "preId": "t0_12",
+   "nid": "t0_15"
+  },
+  {
+   "tree": 1,
+   "name": "鹰眼",
+   "max": 3,
+   "row": 0,
+   "col": 0,
+   "icon": "ability_townwatch",
+   "preId": null,
+   "nid": "t1_0"
+  },
+  {
+   "tree": 1,
+   "name": "强化震荡射击",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_frost_stun",
+   "preId": null,
+   "nid": "t1_1"
+  },
+  {
+   "tree": 1,
+   "name": "致命攻击",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "ability_searingarrow",
+   "preId": null,
+   "nid": "t1_2"
+  },
+  {
+   "tree": 1,
+   "name": "强化钉刺",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "icon": "ability_hunter_quickshot",
+   "preId": null,
+   "nid": "t1_3"
+  },
+  {
+   "tree": 1,
+   "name": "效率",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_frost_wizardmark",
+   "preId": null,
+   "nid": "t1_4"
+  },
+  {
+   "tree": 1,
+   "name": "精确瞄准",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "ability_hunter_zenarchery",
+   "preId": null,
+   "nid": "t1_5"
+  },
+  {
+   "tree": 1,
+   "name": "疾速杀戮",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "icon": "ability_hunter_rapidkilling",
+   "preId": null,
+   "nid": "t1_6"
+  },
+  {
+   "tree": 1,
+   "name": "强化奥术射击",
+   "max": 5,
+   "row": 2,
+   "col": 1,
+   "icon": "ability_impalingbolt",
+   "preId": null,
+   "nid": "t1_7"
+  },
+  {
+   "tree": 1,
+   "name": "独来独往",
+   "max": 1,
+   "row": 2,
+   "col": 3,
+   "icon": "ability_mount_whitedirewolf",
+   "preId": null,
+   "nid": "t1_8"
+  },
+  {
+   "tree": 1,
+   "name": "强击光环",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "icon": "ability_trueshot",
+   "preId": null,
+   "nid": "t1_9"
+  },
+  {
+   "tree": 1,
+   "name": "致死射击",
+   "max": 5,
+   "row": 3,
+   "col": 2,
+   "icon": "ability_piercedamage",
+   "preId": "t1_5",
+   "nid": "t1_10"
+  },
+  {
+   "tree": 1,
+   "name": "急速恢复",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "ability_hunter_rapidregeneration",
+   "preId": "t1_6",
+   "nid": "t1_11"
+  },
+  {
+   "tree": 1,
+   "name": "弹幕",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "ability_upgrademoonglaive",
+   "preId": null,
+   "nid": "t1_12"
+  },
+  {
+   "tree": 1,
+   "name": "驱散射击",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "icon": "ability_golemstormbolt",
+   "preId": null,
+   "nid": "t1_13"
+  },
+  {
+   "tree": 1,
+   "name": "远程武器专精",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "inv_weapon_rifle_06",
+   "preId": null,
+   "nid": "t1_14"
+  },
+  {
+   "tree": 1,
+   "name": "狙击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "hunter_pvp_snipershot",
+   "preId": "t1_9",
+   "nid": "t1_15"
+  },
+  {
+   "tree": 2,
+   "name": "强化追踪",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "inv_misc_head_dragon_black",
+   "preId": null,
+   "nid": "t2_0"
+  },
+  {
+   "tree": 2,
+   "name": "偏斜",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "ability_parry",
+   "preId": null,
+   "nid": "t2_1"
+  },
+  {
+   "tree": 2,
+   "name": "诱捕",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_nature_stranglevines",
+   "preId": null,
+   "nid": "t2_2"
+  },
+  {
+   "tree": 2,
+   "name": "野蛮打击",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "icon": "ability_racial_bloodrage",
+   "preId": null,
+   "nid": "t2_3"
+  },
+  {
+   "tree": 2,
+   "name": "生存专家",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_shadow_twilight",
+   "preId": null,
+   "nid": "t2_4"
+  },
+  {
+   "tree": 2,
+   "name": "强化摔绊",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "icon": "ability_rogue_trip",
+   "preId": null,
+   "nid": "t2_5"
+  },
+  {
+   "tree": 2,
+   "name": "灵巧陷阱",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_nature_timestop",
+   "preId": null,
+   "nid": "t2_6"
+  },
+  {
+   "tree": 2,
+   "name": "稳固",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "icon": "ability_kick",
+   "preId": null,
+   "nid": "t2_7"
+  },
+  {
+   "tree": 2,
+   "name": "威慑",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "icon": "ability_whirlwind",
+   "preId": null,
+   "nid": "t2_8"
+  },
+  {
+   "tree": 2,
+   "name": "生存战术",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "icon": "ability_ensnare",
+   "preId": null,
+   "nid": "t2_9"
+  },
+  {
+   "tree": 2,
+   "name": "掠食者之锋",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "icon": "ability_dualwield",
+   "preId": null,
+   "nid": "t2_10"
+  },
+  {
+   "tree": 2,
+   "name": "反击",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "ability_warrior_challange",
+   "preId": "t2_8",
+   "nid": "t2_11"
+  },
+  {
+   "tree": 2,
+   "name": "游刃有余",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "ability_hunter_resourcefulness",
+   "preId": null,
+   "nid": "t2_12"
+  },
+  {
+   "tree": 2,
+   "name": "暴露猎物",
+   "max": 2,
+   "row": 4,
+   "col": 1,
+   "icon": "ability_hunter_swiftstrike",
+   "preId": null,
+   "nid": "t2_13"
+  },
+  {
+   "tree": 2,
+   "name": "生存专家的戒律",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "icon": "ability_hunter_mastertactitian",
+   "preId": null,
+   "nid": "t2_14"
+  },
+  {
+   "tree": 2,
+   "name": "陆行鸟踢击",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "icon": "ability_hunter_pet_tallstrider",
+   "preId": null,
+   "nid": "t2_15"
+  },
+  {
+   "tree": 2,
+   "name": "闪电反射",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_nature_invisibilty",
+   "preId": null,
+   "nid": "t2_16"
+  },
+  {
+   "tree": 2,
+   "name": "裂伤打击",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "ability_gouge",
+   "preId": "t2_13",
+   "nid": "t2_17"
+  }
+ ]
+}

@@ -1,0 +1,504 @@
+{
+ "rows": [
+  {
+   "tree": 0,
+   "name": "传导",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_nature_wispsplode",
+   "preId": null,
+   "nid": "e1"
+  },
+  {
+   "tree": 0,
+   "name": "震荡",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_nature_earthshock",
+   "preId": null,
+   "nid": "e2"
+  },
+  {
+   "tree": 0,
+   "name": "元素防护",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_nature_spiritarmor",
+   "preId": null,
+   "nid": "e3"
+  },
+  {
+   "tree": 0,
+   "name": "回响",
+   "max": 5,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_frost_frostward",
+   "preId": null,
+   "nid": "e4"
+  },
+  {
+   "tree": 0,
+   "name": "烈焰召唤",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_fire_immolation",
+   "preId": null,
+   "nid": "e5"
+  },
+  {
+   "tree": 0,
+   "name": "元素浩劫",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "icon": "spell_fire_elementaldevastation",
+   "preId": null,
+   "nid": "e6"
+  },
+  {
+   "tree": 0,
+   "name": "元素集中",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_shadow_manaburn",
+   "preId": null,
+   "nid": "e7"
+  },
+  {
+   "tree": 0,
+   "name": "元素迅捷",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_lightning_lightningbolt01",
+   "preId": "e11",
+   "nid": "e15"
+  },
+  {
+   "tree": 0,
+   "name": "强化火焰新星",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_fire_sealoffire",
+   "preId": null,
+   "nid": "e9"
+  },
+  {
+   "tree": 0,
+   "name": "风暴之眼",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "icon": "spell_nature_eyeofthestorm",
+   "preId": null,
+   "nid": "e10"
+  },
+  {
+   "tree": 0,
+   "name": "雷霆召唤",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_nature_callstorm",
+   "preId": "e8",
+   "nid": "e11"
+  },
+  {
+   "tree": 0,
+   "name": "元素射程",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "spell_nature_stormreach",
+   "preId": null,
+   "nid": "e12"
+  },
+  {
+   "tree": 0,
+   "name": "闪电超载",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_nature_lightningoverload",
+   "preId": null,
+   "nid": "e13"
+  },
+  {
+   "tree": 0,
+   "name": "地缚",
+   "max": 1,
+   "row": 4,
+   "col": 3,
+   "icon": "spell_nature_stranglevines",
+   "preId": null,
+   "nid": "e14"
+  },
+  {
+   "tree": 0,
+   "name": "元素之怒",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_fire_volcano",
+   "preId": null,
+   "nid": "e8"
+  },
+  {
+   "tree": 0,
+   "name": "熔岩爆裂",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "spell_shaman_lavaburst",
+   "preId": "e13",
+   "nid": "e16"
+  },
+  {
+   "tree": 1,
+   "name": "大地之握",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "icon": "spell_nature_stoneclawtotem",
+   "preId": null,
+   "nid": "h1"
+  },
+  {
+   "tree": 1,
+   "name": "雷鸣猛击",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "ability_thunderbolt",
+   "preId": null,
+   "nid": "h2"
+  },
+  {
+   "tree": 1,
+   "name": "先祖知识",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_shadow_grimward",
+   "preId": null,
+   "nid": "h3"
+  },
+  {
+   "tree": 1,
+   "name": "守护图腾",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_nature_stoneskintotem",
+   "preId": null,
+   "nid": "h4"
+  },
+  {
+   "tree": 1,
+   "name": "聪慧",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_nature_mentalquickness",
+   "preId": null,
+   "nid": "h5"
+  },
+  {
+   "tree": 1,
+   "name": "强化幽魂之狼",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_nature_spiritwolf",
+   "preId": null,
+   "nid": "h6"
+  },
+  {
+   "tree": 1,
+   "name": "强化闪电之盾",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "icon": "spell_nature_lightningshield",
+   "preId": null,
+   "nid": "h7"
+  },
+  {
+   "tree": 1,
+   "name": "元素武器",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_fire_flametounge",
+   "preId": null,
+   "nid": "h8"
+  },
+  {
+   "tree": 1,
+   "name": "萨满专注",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_nature_elementalabsorption",
+   "preId": null,
+   "nid": "h9"
+  },
+  {
+   "tree": 1,
+   "name": "预知",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "icon": "spell_nature_mirrorimage",
+   "preId": null,
+   "nid": "h10"
+  },
+  {
+   "tree": 1,
+   "name": "坚韧",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_holy_devotion",
+   "preId": null,
+   "nid": "h11"
+  },
+  {
+   "tree": 1,
+   "name": "乱舞",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "icon": "ability_ghoulfrenzy",
+   "preId": "h5",
+   "nid": "h12"
+  },
+  {
+   "tree": 1,
+   "name": "风暴打击",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "ability_shaman_stormstrike",
+   "preId": null,
+   "nid": "h13"
+  },
+  {
+   "tree": 1,
+   "name": "灵魂武器",
+   "max": 1,
+   "row": 4,
+   "col": 0,
+   "icon": "ability_parry",
+   "preId": null,
+   "nid": "h14"
+  },
+  {
+   "tree": 1,
+   "name": "精神敏锐",
+   "max": 2,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_nature_sleep",
+   "preId": null,
+   "nid": "h15"
+  },
+  {
+   "tree": 1,
+   "name": "强化风暴打击",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "icon": "spell_shaman_improvedstormstrike",
+   "preId": "h13",
+   "nid": "h16"
+  },
+  {
+   "tree": 1,
+   "name": "漩涡武器",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_shaman_maelstromweapon",
+   "preId": null,
+   "nid": "h17"
+  },
+  {
+   "tree": 1,
+   "name": "先知之怒",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "spell_nature_bloodlust",
+   "preId": "h15",
+   "nid": "h18"
+  },
+  {
+   "tree": 2,
+   "name": "强化治疗波",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_nature_magicimmunity",
+   "preId": null,
+   "nid": "t2_0"
+  },
+  {
+   "tree": 2,
+   "name": "图腾集中",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_nature_moonglow",
+   "preId": null,
+   "nid": "r9"
+  },
+  {
+   "tree": 2,
+   "name": "全神贯注",
+   "max": 3,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_nature_sleep",
+   "preId": null,
+   "nid": "r2"
+  },
+  {
+   "tree": 2,
+   "name": "自然优雅",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_nature_healingtouch",
+   "preId": null,
+   "nid": "r3"
+  },
+  {
+   "tree": 2,
+   "name": "潮汐集中",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_frost_manarecharge",
+   "preId": null,
+   "nid": "r4"
+  },
+  {
+   "tree": 2,
+   "name": "强化复生",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "icon": "spell_nature_reincarnation",
+   "preId": null,
+   "nid": "r5"
+  },
+  {
+   "tree": 2,
+   "name": "先祖治疗",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_nature_undyingstrength",
+   "preId": null,
+   "nid": "r6"
+  },
+  {
+   "tree": 2,
+   "name": "治疗专注",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_nature_healingwavelesser",
+   "preId": null,
+   "nid": "r7"
+  },
+  {
+   "tree": 2,
+   "name": "水之护盾",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "icon": "ability_shaman_watershield",
+   "preId": null,
+   "nid": "r8"
+  },
+  {
+   "tree": 2,
+   "name": "潮汐掌握",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_nature_tranquility",
+   "preId": null,
+   "nid": "r1"
+  },
+  {
+   "tree": 2,
+   "name": "恢复图腾",
+   "max": 5,
+   "row": 3,
+   "col": 1,
+   "icon": "spell_nature_manaregentotem",
+   "preId": null,
+   "nid": "r10"
+  },
+  {
+   "tree": 2,
+   "name": "法力之潮图腾",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_frost_summonwaterelemental",
+   "preId": null,
+   "nid": "r11"
+  },
+  {
+   "tree": 2,
+   "name": "治疗之道",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_nature_healingway",
+   "preId": null,
+   "nid": "r12"
+  },
+  {
+   "tree": 2,
+   "name": "自然迅捷",
+   "max": 1,
+   "row": 4,
+   "col": 2,
+   "icon": "spell_nature_ravenform",
+   "preId": null,
+   "nid": "r13"
+  },
+  {
+   "tree": 2,
+   "name": "净化",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_frost_wizardmark",
+   "preId": null,
+   "nid": "r14"
+  },
+  {
+   "tree": 2,
+   "name": "激流",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "spell_nature_riptide",
+   "preId": "r12",
+   "nid": "r15"
+  }
+ ]
+}

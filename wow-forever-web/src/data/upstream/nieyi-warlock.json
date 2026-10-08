@@ -1,0 +1,524 @@
+{
+ "rows": [
+  {
+   "tree": 0,
+   "name": "强化生命分流",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "icon": "spell_shadow_burningspirit",
+   "preId": null,
+   "nid": "t0_0"
+  },
+  {
+   "tree": 0,
+   "name": "镇压",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_shadow_unsummonbuilding",
+   "preId": null,
+   "nid": "t0_1"
+  },
+  {
+   "tree": 0,
+   "name": "强化腐蚀术",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_shadow_abominationexplosion",
+   "preId": null,
+   "nid": "t0_2"
+  },
+  {
+   "tree": 0,
+   "name": "邪咒",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_shadow_curseofachimonde",
+   "preId": null,
+   "nid": "t0_3"
+  },
+  {
+   "tree": 0,
+   "name": "灵魂收割",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "icon": "inv_elemental_primal_shadow",
+   "preId": null,
+   "nid": "t0_4"
+  },
+  {
+   "tree": 0,
+   "name": "强化吸取",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_shadow_haunting",
+   "preId": null,
+   "nid": "t0_5"
+  },
+  {
+   "tree": 0,
+   "name": "强化痛苦灾祸",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_shadow_curseofsargeras",
+   "preId": null,
+   "nid": "t0_6"
+  },
+  {
+   "tree": 0,
+   "name": "恶魔专注",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_shadow_fingerofdeath",
+   "preId": null,
+   "nid": "t0_7"
+  },
+  {
+   "tree": 0,
+   "name": "诅咒增幅",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_shadow_contagion",
+   "preId": null,
+   "nid": "t0_8"
+  },
+  {
+   "tree": 0,
+   "name": "恶疾",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "icon": "spell_shadow_unstableaffliction_2",
+   "preId": null,
+   "nid": "t0_9"
+  },
+  {
+   "tree": 0,
+   "name": "怨毒",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_shadow_focusedpower",
+   "preId": null,
+   "nid": "t0_10"
+  },
+  {
+   "tree": 0,
+   "name": "夜幕",
+   "max": 2,
+   "row": 3,
+   "col": 1,
+   "icon": "spell_shadow_twilight",
+   "preId": null,
+   "nid": "t0_11"
+  },
+  {
+   "tree": 0,
+   "name": "疲劳诅咒",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_shadow_grimward",
+   "preId": "t0_8",
+   "nid": "t0_12"
+  },
+  {
+   "tree": 0,
+   "name": "生命虹吸",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_shadow_requiem",
+   "preId": null,
+   "nid": "t0_13"
+  },
+  {
+   "tree": 0,
+   "name": "灵魂虹吸",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "spell_shadow_lifedrain02",
+   "preId": null,
+   "nid": "t0_14"
+  },
+  {
+   "tree": 0,
+   "name": "暗影掌握",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_shadow_shadetruesight",
+   "preId": null,
+   "nid": "t0_15"
+  },
+  {
+   "tree": 0,
+   "name": "折磨",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "ability_deathknight_hemorrhagicfever",
+   "preId": "t0_13",
+   "nid": "t0_16"
+  },
+  {
+   "tree": 1,
+   "name": "强化生命通道",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "icon": "spell_shadow_lifedrain",
+   "preId": null,
+   "nid": "t1_0"
+  },
+  {
+   "tree": 1,
+   "name": "强化小鬼",
+   "max": 3,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_shadow_summonimp",
+   "preId": null,
+   "nid": "t1_1"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔之拥",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_shadow_metamorphosis",
+   "preId": null,
+   "nid": "t1_2"
+  },
+  {
+   "tree": 1,
+   "name": "邪恶强化",
+   "max": 5,
+   "row": 0,
+   "col": 3,
+   "icon": "spell_shadow_shadowworddominate",
+   "preId": null,
+   "nid": "t1_3"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔庇护",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "icon": "spell_shadow_ragingscream",
+   "preId": null,
+   "nid": "t1_4"
+  },
+  {
+   "tree": 1,
+   "name": "强化虚空行者",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_shadow_summonvoidwalker",
+   "preId": null,
+   "nid": "t1_5"
+  },
+  {
+   "tree": 1,
+   "name": "邪能活力",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_shadow_demonictactics",
+   "preId": null,
+   "nid": "t1_6"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔能量",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "icon": "spell_shadow_felmending",
+   "preId": null,
+   "nid": "t1_7"
+  },
+  {
+   "tree": 1,
+   "name": "强化萨亚德",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "icon": "ability_warlock_randomizesuccubusincubus",
+   "preId": null,
+   "nid": "t1_8"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔牺牲",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_shadow_psychicscream",
+   "preId": null,
+   "nid": "t1_9"
+  },
+  {
+   "tree": 1,
+   "name": "召唤大师",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_shadow_impphaseshift",
+   "preId": null,
+   "nid": "t1_10"
+  },
+  {
+   "tree": 1,
+   "name": "灭杀",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_fire_fireball02",
+   "preId": null,
+   "nid": "t1_11"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔支配",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_nature_removecurse",
+   "preId": "t1_10",
+   "nid": "t1_12"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔印记",
+   "max": 3,
+   "row": 3,
+   "col": 3,
+   "icon": "ability_demonhunter_chaoticimprint_fire",
+   "preId": null,
+   "nid": "t1_13"
+  },
+  {
+   "tree": 1,
+   "name": "强化地狱猎犬",
+   "max": 3,
+   "row": 4,
+   "col": 0,
+   "icon": "spell_shadow_summonfelhunter",
+   "preId": null,
+   "nid": "t1_14"
+  },
+  {
+   "tree": 1,
+   "name": "灵魂链接",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_shadow_gathershadows",
+   "preId": "t1_9",
+   "nid": "t1_15"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔知识",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "spell_shadow_improvedvampiricembrace",
+   "preId": null,
+   "nid": "t1_16"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔学识大师",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_shadow_shadowpact",
+   "preId": null,
+   "nid": "t1_17"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔契约",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "inv_ability_soulharvesterwarlock_demonicsoul",
+   "preId": "t1_15",
+   "nid": "t1_18"
+  },
+  {
+   "tree": 2,
+   "name": "毁灭延伸",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "icon": "spell_shadow_corpseexplode",
+   "preId": null,
+   "nid": "t2_0"
+  },
+  {
+   "tree": 2,
+   "name": "强化暗影箭",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "icon": "spell_shadow_shadowbolt",
+   "preId": null,
+   "nid": "t2_1"
+  },
+  {
+   "tree": 2,
+   "name": "灾祸",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_shadow_deathpact",
+   "preId": null,
+   "nid": "t2_2"
+  },
+  {
+   "tree": 2,
+   "name": "熔岩之肤",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "icon": "ability_mage_moltenarmor",
+   "preId": null,
+   "nid": "t2_3"
+  },
+  {
+   "tree": 2,
+   "name": "灾变",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "icon": "spell_fire_windsofwoe",
+   "preId": null,
+   "nid": "t2_4"
+  },
+  {
+   "tree": 2,
+   "name": "清算",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_fire_fire",
+   "preId": null,
+   "nid": "t2_5"
+  },
+  {
+   "tree": 2,
+   "name": "毁灭",
+   "max": 5,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_shadow_shadowwordpain",
+   "preId": null,
+   "nid": "t2_6"
+  },
+  {
+   "tree": 2,
+   "name": "暗影灼烧",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_shadow_scourgebuild",
+   "preId": null,
+   "nid": "t2_7"
+  },
+  {
+   "tree": 2,
+   "name": "强烈",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_fire_lavaspawn",
+   "preId": null,
+   "nid": "t2_8"
+  },
+  {
+   "tree": 2,
+   "name": "苦痛之焰",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "icon": "spell_fire_soulburn",
+   "preId": null,
+   "nid": "t2_9"
+  },
+  {
+   "tree": 2,
+   "name": "燃烧",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "icon": "spell_fire_fireball",
+   "preId": "t2_7",
+   "nid": "t2_10"
+  },
+  {
+   "tree": 2,
+   "name": "火焰冲撞",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "spell_fire_volcano",
+   "preId": "t2_8",
+   "nid": "t2_11"
+  },
+  {
+   "tree": 2,
+   "name": "浩劫灾祸",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "ability_warlock_baneofhavoc",
+   "preId": null,
+   "nid": "t2_12"
+  },
+  {
+   "tree": 2,
+   "name": "硫磺烈火",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "spell_fire_meteorstorm",
+   "preId": "t2_10",
+   "nid": "t2_13"
+  },
+  {
+   "tree": 2,
+   "name": "影与焰",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "icon": "spell_fire_playingwithfire",
+   "preId": null,
+   "nid": "t2_14"
+  },
+  {
+   "tree": 2,
+   "name": "烧尽",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "icon": "spell_fire_burnout",
+   "preId": "t2_12",
+   "nid": "t2_15"
+  }
+ ]
+}

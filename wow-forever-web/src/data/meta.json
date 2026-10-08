@@ -1,0 +1,64 @@
+{
+ "site": "无限中文资料站",
+ "disclaimer": "非官方粉丝资料站，与暴雪娱乐及网易无关。",
+ "dataBaseline": {
+  "build": "forever-beta 1.60.x（未逐点核对）",
+  "checkedAt": "2026-10-07"
+ },
+ "launch": "2026-11-05",
+ "rules": [
+  "L0 必须至少含一条 official 来源，否则构建失败",
+  "掉落字段禁止出现百分比",
+  "iconKey 只允许本地文件，出现 http 即失败",
+  "缺数据显示「待实测」，禁止编造"
+ ],
+ "openQuestions": [
+  "九职业天赋结构与名称全部标 L2：需游戏内实测或等官方中文深度解析后升 L0",
+  "3 座团队副本的名称与 BOSS 数量：来源互相矛盾，未采信",
+  "每座本的 BOSS 名单与数量：无官方来源，只能实测",
+  "掉落表：所有来源都是零碎注记，且本站禁止写百分比",
+  "Whelgar's Excavation 与 Excavation Site: Wetlands 哪个是正式服英文名",
+  "官方 Beta 公告里的「监狱」是新本 Alcaz Prison 还是经典 The Stockade",
+  "无限服新物品图标能否从官方 CDN 取得（决定图标自绘还是转存）",
+  "Legacy / Skyborne 等系统的官方中文定名",
+  "除猎人与德鲁伊外 7 个职业的官方中文天赋名与树结构",
+  "圣骑士、萨满祭司、法师、术士、潜行者：官网还没有中文深度解析，需盯新闻栏目与在线修正",
+  "33 条种族技能的种族归属需逐条回原文核对（本轮只取名字）"
+ ],
+ "sources": [
+  {
+   "url": "https://wow.blizzard.cn/news/24301515/index.html",
+   "what": "猎人、德鲁伊官方中文天赋与技能名"
+  },
+  {
+   "url": "https://wow.blizzard.cn/news/24301514/index.html",
+   "what": "牧师、战士官方中文天赋与技能名"
+  },
+  {
+   "url": "https://wow.blizzard.cn/news/24304075/index.html",
+   "what": "种族技能官方中文名、泽风岛等新区域译名"
+  },
+  {
+   "url": "https://wow.blizzard.cn/news/24303313/index.html",
+   "what": "系统名与装备名（露营、传承、石猪剑等）"
+  }
+ ],
+ "checkedAt": "2026-10-07",
+ "talentImport": {
+  "method": "两个第三方数据挖掘源按 (系,行,列) 坐标对齐，名字不一致的两边都保留",
+  "sources": [
+   "fengshen.cn/wuxian/talents/*/data.js",
+   "nieyi.cn/f/talents/*.html"
+  ],
+  "collectedAt": "2026-09-13（上游自述），本站对齐于 2026-10-07",
+  "nodes": 473,
+  "nameConflict": 89,
+  "onlyInOneSource": 10,
+  "withIcon": 466,
+  "resolvedRequires": 77,
+  "nameVerified": 114,
+  "excluded": "未取任何一方的天赋描述文案；图标只取文件名标识符，图片来自暴雪官方 CDN",
+  "stillMissing": "游戏内层级点数门槛、英文原名、天赋描述、完整前置链、官方中文定名（89 条两源分歧）",
+  "risk": "两源均为个人站数据挖掘、无授权声明，且彼此译名不一致 89 条，说明其中含自行翻译成分；全部标 L2，正式服上线后需逐条回校"
+ }
+}

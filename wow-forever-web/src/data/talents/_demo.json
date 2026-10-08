@@ -1,0 +1,573 @@
+{
+ "classId": "_demo",
+ "structureStatus": "demo",
+ "dataVersion": "demo-not-game-data",
+ "rules": {
+  "totalPoints": 51,
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20
+  ]
+ },
+ "trees": [
+  {
+   "id": "a",
+   "nameCn": "演示系 A",
+   "nameEn": "Demo A",
+   "rules": {
+    "totalPoints": 51,
+    "tierUnlockCost": [
+     0,
+     5,
+     10,
+     15,
+     20
+    ]
+   },
+   "nodes": [
+    {
+     "id": "a-0-0",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "演示A11",
+     "nameEn": "Demo A T1C1",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "a-0-1",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "演示A12",
+     "nameEn": "Demo A T1C2",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "a-0-3",
+     "tier": 0,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "演示A14",
+     "nameEn": "Demo A T1C4",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "a-0-4",
+     "tier": 0,
+     "column": 4,
+     "maxRanks": 3,
+     "nameCn": "演示A15",
+     "nameEn": "Demo A T1C5",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "a-1-1",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示A22",
+     "nameEn": "Demo A T2C2",
+     "requires": [
+      "a-0-1",
+      "a-0-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-1-2",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示A23",
+     "nameEn": "Demo A T2C3",
+     "requires": [
+      "a-0-2",
+      "a-0-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-1-3",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示A24",
+     "nameEn": "Demo A T2C4",
+     "requires": [
+      "a-0-3",
+      "a-0-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-2-0",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "演示A31",
+     "nameEn": "Demo A T3C1",
+     "requires": [
+      "a-1-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-2-2",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示A33",
+     "nameEn": "Demo A T3C3",
+     "requires": [
+      "a-1-2",
+      "a-1-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-2-4",
+     "tier": 2,
+     "column": 4,
+     "maxRanks": 5,
+     "nameCn": "演示A35",
+     "nameEn": "Demo A T3C5",
+     "requires": [
+      "a-1-3"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-3-1",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示A42",
+     "nameEn": "Demo A T4C2",
+     "requires": [
+      "a-2-1",
+      "a-2-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-3-2",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示A43",
+     "nameEn": "Demo A T4C3",
+     "requires": [
+      "a-2-2",
+      "a-2-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-3-3",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示A44",
+     "nameEn": "Demo A T4C4",
+     "requires": [
+      "a-2-3",
+      "a-2-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "a-4-2",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示A53",
+     "nameEn": "Demo A T5C3",
+     "requires": [
+      "a-3-2",
+      "a-3-1"
+     ],
+     "level": "L3"
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "nameCn": "演示系 B",
+   "nameEn": "Demo B",
+   "rules": {
+    "totalPoints": 51,
+    "tierUnlockCost": [
+     0,
+     5,
+     10,
+     15,
+     20
+    ]
+   },
+   "nodes": [
+    {
+     "id": "b-0-0",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "演示B11",
+     "nameEn": "Demo B T1C1",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "b-0-1",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "演示B12",
+     "nameEn": "Demo B T1C2",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "b-0-3",
+     "tier": 0,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "演示B14",
+     "nameEn": "Demo B T1C4",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "b-0-4",
+     "tier": 0,
+     "column": 4,
+     "maxRanks": 3,
+     "nameCn": "演示B15",
+     "nameEn": "Demo B T1C5",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "b-1-1",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示B22",
+     "nameEn": "Demo B T2C2",
+     "requires": [
+      "b-0-1",
+      "b-0-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-1-2",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示B23",
+     "nameEn": "Demo B T2C3",
+     "requires": [
+      "b-0-2",
+      "b-0-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-1-3",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示B24",
+     "nameEn": "Demo B T2C4",
+     "requires": [
+      "b-0-3",
+      "b-0-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-2-0",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "演示B31",
+     "nameEn": "Demo B T3C1",
+     "requires": [
+      "b-1-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-2-2",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示B33",
+     "nameEn": "Demo B T3C3",
+     "requires": [
+      "b-1-2",
+      "b-1-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-2-4",
+     "tier": 2,
+     "column": 4,
+     "maxRanks": 5,
+     "nameCn": "演示B35",
+     "nameEn": "Demo B T3C5",
+     "requires": [
+      "b-1-3"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-3-1",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示B42",
+     "nameEn": "Demo B T4C2",
+     "requires": [
+      "b-2-1",
+      "b-2-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-3-2",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示B43",
+     "nameEn": "Demo B T4C3",
+     "requires": [
+      "b-2-2",
+      "b-2-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-3-3",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示B44",
+     "nameEn": "Demo B T4C4",
+     "requires": [
+      "b-2-3",
+      "b-2-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "b-4-2",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示B53",
+     "nameEn": "Demo B T5C3",
+     "requires": [
+      "b-3-2",
+      "b-3-1"
+     ],
+     "level": "L3"
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "nameCn": "演示系 C",
+   "nameEn": "Demo C",
+   "rules": {
+    "totalPoints": 51,
+    "tierUnlockCost": [
+     0,
+     5,
+     10,
+     15,
+     20
+    ]
+   },
+   "nodes": [
+    {
+     "id": "c-0-0",
+     "tier": 0,
+     "column": 0,
+     "maxRanks": 3,
+     "nameCn": "演示C11",
+     "nameEn": "Demo C T1C1",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "c-0-1",
+     "tier": 0,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "演示C12",
+     "nameEn": "Demo C T1C2",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "c-0-3",
+     "tier": 0,
+     "column": 3,
+     "maxRanks": 3,
+     "nameCn": "演示C14",
+     "nameEn": "Demo C T1C4",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "c-0-4",
+     "tier": 0,
+     "column": 4,
+     "maxRanks": 3,
+     "nameCn": "演示C15",
+     "nameEn": "Demo C T1C5",
+     "requires": [],
+     "level": "L3"
+    },
+    {
+     "id": "c-1-1",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示C22",
+     "nameEn": "Demo C T2C2",
+     "requires": [
+      "c-0-1",
+      "c-0-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-1-2",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示C23",
+     "nameEn": "Demo C T2C3",
+     "requires": [
+      "c-0-2",
+      "c-0-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-1-3",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示C24",
+     "nameEn": "Demo C T2C4",
+     "requires": [
+      "c-0-3",
+      "c-0-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-2-0",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 5,
+     "nameCn": "演示C31",
+     "nameEn": "Demo C T3C1",
+     "requires": [
+      "c-1-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-2-2",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "演示C33",
+     "nameEn": "Demo C T3C3",
+     "requires": [
+      "c-1-2",
+      "c-1-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-2-4",
+     "tier": 2,
+     "column": 4,
+     "maxRanks": 5,
+     "nameCn": "演示C35",
+     "nameEn": "Demo C T3C5",
+     "requires": [
+      "c-1-3"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-3-1",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 5,
+     "nameCn": "演示C42",
+     "nameEn": "Demo C T4C2",
+     "requires": [
+      "c-2-1",
+      "c-2-0"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-3-2",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示C43",
+     "nameEn": "Demo C T4C3",
+     "requires": [
+      "c-2-2",
+      "c-2-1"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-3-3",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "演示C44",
+     "nameEn": "Demo C T4C4",
+     "requires": [
+      "c-2-3",
+      "c-2-2"
+     ],
+     "level": "L3"
+    },
+    {
+     "id": "c-4-2",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "演示C53",
+     "nameEn": "Demo C T5C3",
+     "requires": [
+      "c-3-2",
+      "c-3-1"
+     ],
+     "level": "L3"
+    }
+   ]
+  }
+ ],
+ "note": "节点名与位置均为编造，只用于验证加点、前置、级联减点与分享编码，不是游戏数据。"
+}

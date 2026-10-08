@@ -1,0 +1,441 @@
+{
+ "trees": [
+  "奥术",
+  "火焰",
+  "冰霜"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "魔杖专精",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术专注",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化引导",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术精妙",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "魔法吸收",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术集中",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术活力",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术几何学",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术冲击",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术冲击",
+   "max": 1,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术护盾",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化法术反制",
+   "max": 2,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术冥想",
+   "max": 3,
+   "row": 3,
+   "col": 2,
+   "preName": "奥术集中"
+  },
+  {
+   "tree": 0,
+   "name": "飞弹速射",
+   "max": 1,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "气定神闲",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术心智",
+   "max": 5,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术潜能",
+   "max": 3,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "奥术强化",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "气定神闲"
+  },
+  {
+   "tree": 1,
+   "name": "烈焰余波",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "焚化",
+   "max": 3,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化火球术",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "点燃",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "烈焰投掷",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "冲击",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "燃烧之魂",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化烈焰风暴",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "炎爆术",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化灼烧",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化防护火焰结界",
+   "max": 2,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "热力连击",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "炎爆术"
+  },
+  {
+   "tree": 1,
+   "name": "元素大师",
+   "max": 3,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "临界质量",
+   "max": 3,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "冲击波",
+   "max": 1,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "火焰强化",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "燃烧",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "临界质量"
+  },
+  {
+   "tree": 2,
+   "name": "寒冰防护",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化寒冰箭",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "元素精准",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "寒冰碎片",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "永冻",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化冰霜新星",
+   "max": 2,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "霜寒刺骨",
+   "max": 3,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "刺骨寒冰",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "寒冰引导",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "冰枪术",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化暴风雪",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "极寒延伸",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "寒冰屏障",
+   "max": 1,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "碎冰",
+   "max": 3,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化冰锥术",
+   "max": 3,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "急速冷却",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "寒冰指",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": "冰枪术"
+  },
+  {
+   "tree": 2,
+   "name": "深冬之寒",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "寒冰护体",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "急速冷却"
+  }
+ ]
+}

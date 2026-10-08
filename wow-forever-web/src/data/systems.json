@@ -1,0 +1,290 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-07",
+  "note": "来自官方中文稿与官方英文稿的设定条目；未确认的保留英文，不机翻"
+ },
+ "groups": [
+  {
+   "id": "rule",
+   "label": "规则与系统",
+   "items": [
+    {
+     "id": "legacy",
+     "nameCn": null,
+     "nameEn": "Legacy progression",
+     "level": "L2",
+     "note": "官方中文稿只出现「传承」相关描述，定名仍待确认",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+       "note": "官方英文原文：Legacy progression for players who love leveling and running alternate characters",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "camping",
+     "nameCn": "露营系统",
+     "nameEn": "Camping",
+     "level": "L0",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24303313/index.html",
+       "note": "官方中文名",
+       "checkedAt": null
+      },
+      {
+       "type": "fan_db",
+       "url": "https://www.wowhead.com/forever/guide/camping-overview-unlock-rewards",
+       "note": "Wowhead 有专门的露营解锁奖励指南（人工参照）",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "rulesets",
+     "nameCn": "规则集",
+     "nameEn": "Rule sets",
+     "level": "L0",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24302070/index.html",
+       "note": "官方口径：取消传统服务器，按普通/PvP/RP/专家规则集匹配",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "no-flying",
+     "nameCn": null,
+     "nameEn": "No flying mounts",
+     "level": "L0",
+     "note": "无等级缩放同理",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+       "note": "官方原文坚持 no flying mounts, no level scaling",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "level-cap",
+     "nameCn": "永久 60 级",
+     "nameEn": "Level 60",
+     "level": "L0",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+       "note": "官方回顾 + 媒体汇总口径一致",
+       "checkedAt": null
+      },
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24304160/index.html",
+       "note": "国服 Beta 公告",
+       "checkedAt": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "zone",
+   "label": "新区域",
+   "items": [
+    {
+     "id": "zone-zephras-isle",
+     "nameCn": "泽风岛",
+     "nameEn": "Zephras Isle",
+     "level": "L0",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+       "note": "官方英文列出 3 个新区域之一",
+       "checkedAt": "2026-10-07"
+      },
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24304075/index.html",
+       "note": "官方文章出现「泽风岛」，与英文 Zephras Isle 对应",
+       "checkedAt": "2026-10-07"
+      }
+     ]
+    },
+    {
+     "id": "zone-riverglades",
+     "nameCn": null,
+     "nameEn": "Riverglades",
+     "level": "L3",
+     "note": "中文名未证实",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+       "note": "3 个新区域之一",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "zone-mount-hyjal",
+     "nameCn": "海加尔山",
+     "nameEn": "Mount Hyjal",
+     "level": "L3",
+     "note": "老地名，无限服作为新区域出现",
+     "provenance": [
+      {
+       "type": "official_en",
+       "url": "https://worldofwarcraft.blizzard.com/en-us/forever",
+       "note": "3 个新区域之一",
+       "checkedAt": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "race",
+   "label": "种族与子族",
+   "items": [
+    {
+     "id": "race-sky-race",
+     "nameCn": "天裔",
+     "nameEn": "Skyborne",
+     "level": "L2",
+     "note": "英文名未证实，需回官方渠道确认",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24304075/index.html",
+       "note": "官方中文稿出现「天裔」，并提到塑风者、高阶会",
+       "checkedAt": null
+      },
+      {
+       "type": "fan_db",
+       "url": "https://wowclassicforever.info/races/skyborne",
+       "note": "英文写作 Skyborne，子族 High Order / Windshaper",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "subgroup-windshaper",
+     "nameCn": "塑风者",
+     "nameEn": "Windshaper",
+     "level": "L2",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24304075/index.html",
+       "note": "官方中文稿用词",
+       "checkedAt": null
+      },
+      {
+       "type": "fan_db",
+       "url": "https://wowclassicforever.info/races/skyborne",
+       "note": "参考站同口径",
+       "checkedAt": null
+      }
+     ]
+    },
+    {
+     "id": "subgroup-high-order",
+     "nameCn": "高阶会",
+     "nameEn": "High Order",
+     "level": "L2",
+     "note": "",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24304075/index.html",
+       "note": "官方中文稿用词",
+       "checkedAt": null
+      },
+      {
+       "type": "fan_db",
+       "url": "https://wowclassicforever.info/races/skyborne",
+       "note": "参考站同口径",
+       "checkedAt": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "item",
+   "label": "官方装备名",
+   "items": [
+    {
+     "id": "item-0",
+     "nameCn": "尊贵法袍",
+     "nameEn": null,
+     "level": "L0",
+     "note": "官方座谈会回顾中出现的装备名",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24303313/index.html",
+       "note": "官方中文原文",
+       "checkedAt": "2026-10-07"
+      }
+     ]
+    },
+    {
+     "id": "item-1",
+     "nameCn": "石猪剑",
+     "nameEn": null,
+     "level": "L0",
+     "note": "官方座谈会回顾中出现的装备名",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24303313/index.html",
+       "note": "官方中文原文",
+       "checkedAt": "2026-10-07"
+      }
+     ]
+    },
+    {
+     "id": "item-2",
+     "nameCn": "拉迪莫尔家传指环",
+     "nameEn": null,
+     "level": "L0",
+     "note": "官方座谈会回顾中出现的装备名",
+     "provenance": [
+      {
+       "type": "official_cn",
+       "url": "https://wow.blizzard.cn/news/24303313/index.html",
+       "note": "官方中文原文",
+       "checkedAt": "2026-10-07"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "unconfirmed": [
+  "3 座团队副本的名称与 BOSS 数量：本轮三个来源互相矛盾，需人工核对官方与 Wowhead 后重建",
+  "每座本的 BOSS 名单与数量：官方与可信源均未给出，只能靠实测视频或自己打",
+  "掉落表：所有来源都是零碎注记，且禁止写百分比",
+  "Whelgar's Excavation 与 Excavation Site: Wetlands 哪个是正式服最终英文名",
+  "官方 Beta 公告里的「监狱」是新本 Alcaz Prison 还是经典 The Stockade",
+  "无限服新物品图标能否从 render-us.worldofwarcraft.com 取到",
+  "pigtogo.cn 无限天赋模拟器与百家号公众号工具的实际内容（竞品基线）",
+  "Legacy / Skyborne 等系统的官方中文定名",
+  "圣骑士、萨满祭司、法师、术士、潜行者：官网尚未发布中文职业深度解析，无权威中文名可采（需盯新闻栏目）",
+  "33 条种族技能的种族归属需逐条回原文核对"
+ ]
+}

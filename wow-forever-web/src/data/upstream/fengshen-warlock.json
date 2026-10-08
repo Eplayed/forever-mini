@@ -1,0 +1,425 @@
+{
+ "trees": [
+  "痛苦",
+  "恶魔学识",
+  "毁灭"
+ ],
+ "rows": [
+  {
+   "tree": 0,
+   "name": "强化生命分流",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "镇压",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化腐蚀术",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "邪咒",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "灵魂收割",
+   "max": 2,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化吸取",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "强化痛苦灾祸",
+   "max": 2,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "恶魔专注",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "诅咒增幅",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "疫病肆虐",
+   "max": 3,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "恶意",
+   "max": 5,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "夜幕",
+   "max": 2,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "疲劳诅咒",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "诅咒增幅"
+  },
+  {
+   "tree": 0,
+   "name": "生命虹吸",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "灵魂虹吸",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "暗影掌握",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "吸取希望",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "生命虹吸"
+  },
+  {
+   "tree": 1,
+   "name": "强化生命通道",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化小鬼",
+   "max": 3,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔之拥",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "邪恶强化",
+   "max": 5,
+   "row": 0,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔庇护",
+   "max": 2,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化虚空行者",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔活力",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔能量",
+   "max": 2,
+   "row": 1,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化萨亚德",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔牺牲",
+   "max": 1,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "召唤大师",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "屠戮",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔支配",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": "召唤大师"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔烙印",
+   "max": 3,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "强化地狱猎犬",
+   "max": 3,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "灵魂链接",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": "恶魔牺牲"
+  },
+  {
+   "tree": 1,
+   "name": "恶魔知识",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔学识大师",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "恶魔契约",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "灵魂链接"
+  },
+  {
+   "tree": 2,
+   "name": "毁灭延伸",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强化暗影箭",
+   "max": 5,
+   "row": 0,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "灾祸",
+   "max": 5,
+   "row": 0,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "熔岩之肤",
+   "max": 5,
+   "row": 1,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "灾变",
+   "max": 3,
+   "row": 1,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "余波",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "毁灭",
+   "max": 5,
+   "row": 2,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "暗影灼烧",
+   "max": 1,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "强烈",
+   "max": 3,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "痛苦烈焰",
+   "max": 3,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "燃烧",
+   "max": 1,
+   "row": 3,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "火焰冲撞",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": "强烈"
+  },
+  {
+   "tree": 2,
+   "name": "浩劫灾祸",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "硫磺与火焰",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "preName": "燃烧"
+  },
+  {
+   "tree": 2,
+   "name": "影与焰",
+   "max": 5,
+   "row": 5,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "烧尽",
+   "max": 1,
+   "row": 6,
+   "col": 1,
+   "preName": "浩劫灾祸"
+  }
+ ]
+}
