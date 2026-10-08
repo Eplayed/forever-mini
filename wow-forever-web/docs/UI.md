@@ -20,9 +20,9 @@
 
 ---
 
-## 二、设计令牌（写进 `src/css/tokens.css`）
+## 二、设计令牌（落在 `src/css/app.css` 的 `:root`）
 
-### 2.1 颜色
+### 2.1 颜色（写进 `src/css/app.css` 的 `:root`）
 
 | 令牌 | 值 | 用途 |
 |------|-----|------|
@@ -40,6 +40,12 @@
 | `--warn` | `#d9a13b` | L2 待实测 |
 | `--lead` | `#7f8ea8` | L3 仅线索 |
 | `--bad` | `#c9564a` | L3 缺失 / 冲突 / 错误 |
+| `--txt-alert` | `#ff9b8f` | 警示文字（`--bad` 的文本态，深色底上对比度才够） |
+| `--txt-caution` | `#f0c67e` | 提醒文字（`--warn` 的文本态） |
+
+**警示与提醒文字一律用 `--txt-alert` / `--txt-caution`（工具类 `.alert` / `.caution`），不许在 JS 里写死 `#ff9b8f` 这类色值**；边框与色块仍用 `--bad` / `--warn`。
+
+职业代表色（`js/glyph.js` 的 `CLASS_COLOR`）是**游戏内职业名颜色的事实性标识**，不属于主题令牌：改动必须与游戏内一致，不随配色方案漂移。战士 `#c79c6e`、圣骑士 `#f5c7e9`、猎人 `#aad372`、潜行者 `#fff468`、牧师 `#ffffff`、萨满祭司 `#2ed6b1`、法师 `#69ccf0`、术士 `#8788ee`、德鲁伊 `#ff7c0a`。
 
 三系列头背景各自微调色相（暖橙 / 冷蓝 / 紫），只改 `background` 的 6–8% 透明度叠加，不改文字色，保证三列可辨但不花。
 
@@ -126,7 +132,21 @@ Tooltip 内容顺序：中文名 → 英文名 → 已点/上限 → 效果描�
 
 ### 3.7 溯源页
 
-覆盖率总表（按模块 × L0-L3）、未证实清单（编号列表）、来源站点清单（标注"人工参照，禁止搬数据"）、数据口径时间线（build 号 → 日期）。
+覆盖率总表（按模块 × L0-L3）、天赋数据来源与风险、方法论段（见 3.8）、还没被证实的清单、来源站点与用法边界（表格，标注"人工参照，禁止搬数据"）、构建时卡口规则。
+
+### 3.8 系统与新区域页 / 方法论段
+
+系统页按规则 / 区域 / 种族 / 装备名四组出卡片，每组自带「还没确认的」清单。
+
+方法论段的数据在 `src/data/method.json`，用三列自适应网格呈现 `.step` 卡片：左侧 2px `--line` 竖线 + `--gold` 小标题 + `--txt-dim` 正文；段末接「刻意不拿的东西」列表、「被指出错了怎么办」、「什么时候重核」。**这一段是用来建立信任的，不加图标、不做视觉强调。**
+
+### 3.9 选职业问答页
+
+一屏一题。卡片头是题干 + 一行 `hint`；选项用 `.qopts` 自适应网格（`minmax(190px,1fr)`），**移动端单列、桌面 3–4 列，不写死列数**。进度条复用 `.cov`，按答没答过着色（已答 `L0` 绿、当前 `L1` 蓝、未答 `L3` 灰），每段带 `title` 显示题干。
+
+答完出结果：顶部灰底横幅先说清"不是强度排行"，随后前三名各一张 `.mcard`——职业色块 + 中文名与英文名 + `.mbar` 匹配度条（相对本题库最高分）+ 归因要点 `ul.list` + 该职业数据情况 + `a.btn` 跳天赋树；其余职业压成一行标签放「其余候选」。
+
+口径约束在视觉层同样要守住：结果区**不出现名次编号、不出现奖牌类图标、不出现"最强 / T0 / 梯度"字样**；并列只用文字说明。
 
 ---
 
@@ -142,8 +162,13 @@ Tooltip 内容顺序：中文名 → 英文名 → 已点/上限 → 效果描�
 | 方案与数据版本不符 | toast 警告 + 按可识别部分还原，丢弃项列在 tooltip |
 | 点击反馈 | 节点 `transform: translateY(1px)` + 边框高亮，120 ms |
 | 动效 | 只用 `transition`，时长 120–180 ms，`ease-out`；不做入场动画 |
+| 问答选项 | 默认 `--panel-2` 底 + `--line` 边；hover 边框转 `--gold-deep`；已选 `.on` 边框与文字转 `--gold`；键盘焦点 `:focus-visible` 描 2px `--gold` 外环 |
+| 匹配度条 | 6px 高，底 `--panel-2`，填充 `--gold`，宽度按分数比例；**不用颜色或宽度差暗示职业强弱** |
+| 候选卡入口 | `a.btn`：1px `--gold` 描边 + `--gold` 文字，按下态交给 `--gold-deep`，不做实心填充 |
+| 节点键盘态 | `Tab` 聚焦、`Enter`/`Space` 跟随当前模式加点或减点、`Backspace`/`Delete` 固定减点；节点带 `role="button"` 与 `aria-label`（名称 + 已点/上限） |
+| 长按（移动端） | 500 ms 触发减点；重渲染会替换元素，所以补发的 click 用时间戳（700 ms 内）吞掉，不依赖元素级标记 |
 
-无障碍：节点可 `Tab` 聚焦、`Enter` 加点、`Backspace` 减点；徽标除颜色外必须有文字，不靠颜色单独承载信息；对比度正文 ≥ 4.5:1。
+无障碍：徽标除颜色外必须有文字，不靠颜色单独承载信息；正文对比度 ≥ 4.5:1，警示文字用 `--txt-alert` / `--txt-caution` 而不是 `--bad` / `--warn`。问答选项、清空、分享、重置一律用原生 `<button>`，不拿 `<div>` 假装按钮。
 
 ---
 
@@ -151,11 +176,19 @@ Tooltip 内容顺序：中文名 → 英文名 → 已点/上限 → 效果描�
 
 ```
 src/
-  index.html  talent.html  skills.html  dungeons.html  glossary.html  provenance.html
-  css/tokens.css  base.css  components.css  pages.css
-  js/store.js  talent.js  render.js  search.js  main.js
-  data/*.json  data/talents/*.json  data/dungeons/*.json
-tools/build-data.js   # 校验 + 覆盖率 + 分片，不达标退出码非 0
+  index.html  talent.html  chooser.html  skills.html  dungeons.html
+  systems.html  glossary.html  provenance.html          # 八页
+  favicon.ico  apple-touch-icon.png                     # 放站点根：浏览器默认就去这里要
+  css/app.css     # 令牌 + 组件样式都在这一个文件（规模不值得拆 tokens/base/components）
+  js/data.js      # 加载、覆盖率条、徽标、toast、复制
+  js/talent.js    # 天赋引擎：加点 / 减点 / 级联 / 门槛 / 前置 / 编解码
+  js/glyph.js     # 本地自绘占位图与职业色板，无外链图片
+  js/app.js       # 八页渲染与交互
+  data/*.json     # classes / glossary / dungeons / systems / meta / chooser / method
+  data/talents/*.json  data/upstream/*.json  img/icons/*.jpg + manifest.json
+tools/build-data.js     # 校验 + 覆盖率，不达标退出码非 0
+tools/site-check.py     # 界面回归自检（渲染 + 交互 + 移动端），不过退出码非 0
+tools/make-favicon.py   # 生成自绘头标三件套
 ```
 
 命名：中文界面上的职业/技能/天赋一律用官方中文名，英文原名并列显示，**不做机翻兜底**。
@@ -165,13 +198,14 @@ tools/build-data.js   # 校验 + 覆盖率 + 分片，不达标退出码非 0
 ```bash
 cd src && python3 -m http.server 8812      # 访问 http://127.0.0.1:8812（不能用 file:// 直接打开）
 node tools/build-data.js                    # 数据校验 + 覆盖率，不通过退出码非 0
+python3 tools/site-check.py                 # 界面回归自检，截图落 docs/screenshots/check-<日期>/
 ```
 
-当前状态：六页可跑。天赋引擎已用**真实数据**验证通过（加点、点数上限、前置拦截、级联减点、总点数封顶、分享编码往返、本地持久化），另留一棵标明"非游戏数据"的演示树做回归。
+当前状态：八页可跑，回归自检 47 项全过（`tools/site-check.py`）。天赋引擎已用**真实数据**验证通过（加点、点数上限、前置拦截、级联减点、总点数封顶、分享编码往返、本地持久化），另留一棵标明"非游戏数据"的演示树做回归。
 
 数据现状：
 
-- **词条 215 条官方中文名**：猎人 62、德鲁伊 61、战士 38、牧师 18、装备 3、种族技能 33。
+- **词条 215 条官方中文名**：猎人 62、德鲁伊 61、战士 38、牧师 18、装备 3、种族技能 33。各类计数以 `node tools/build-data.js` 的输出为准，本节不再手抄副本。
 - **天赋节点 470 个，九职业齐全**：含名称、所属系、点数上限、66 条已解析前置。来源是第三方数据挖掘（上游标称 build `b1eb593d9cd26007`，采集于 2026-09-13），**全部标 L2 待实测**；其中 89 条名称与官网中文用词完全一致，用作质量交叉验证。
 - **刻意未采用**：第三方站的行列坐标。它的九职业都是 4 行 × 7 列，与经典三系 51 点的 10 行 × 5 列不符，判定为排版坐标而非游戏层级，用错会直接误导加点；另外未复制其中文天赋描述文本。
 - **仍然缺**：游戏内真实层级与列位、英文原名、完整前置链（470 个节点只有 66 条带前置）、以及圣骑士/萨满/法师/术士/潜行者五职业的官方中文稿。

@@ -15,15 +15,43 @@
      "id": "melee",
      "label": "贴上去打",
      "note": "愿意贴脸输出",
-     "weight": { "warrior": 3, "rogue": 3, "paladin": 2, "druid": 1, "shaman": 1 }
+     "weight": {
+      "warrior": 3,
+      "rogue": 3,
+      "paladin": 2,
+      "druid": 1,
+      "shaman": 1
+     }
     },
     {
      "id": "ranged",
      "label": "站远一点",
      "note": "偏好保持距离",
-     "weight": { "hunter": 3, "mage": 3, "warlock": 3, "priest": 2, "shaman": 1, "druid": 1 }
+     "weight": {
+      "hunter": 3,
+      "mage": 3,
+      "warlock": 3,
+      "priest": 2,
+      "shaman": 1,
+      "druid": 1
+     }
     },
-    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+    {
+     "id": "either",
+     "label": "都行",
+     "note": "",
+     "weight": {
+      "warrior": 1,
+      "paladin": 1,
+      "hunter": 1,
+      "rogue": 1,
+      "priest": 1,
+      "shaman": 1,
+      "mage": 1,
+      "warlock": 1,
+      "druid": 1
+     }
+    }
    ]
   },
   {
@@ -35,25 +63,50 @@
      "id": "tank",
      "label": "替队友扛伤害",
      "note": "愿意站前排拉怪",
-     "weight": { "warrior": 3, "paladin": 3, "druid": 2, "shaman": 1 }
+     "weight": {
+      "warrior": 3,
+      "paladin": 3,
+      "druid": 2
+     }
     },
     {
      "id": "heal",
      "label": "给队友加血",
      "note": "愿意当治疗",
-     "weight": { "priest": 3, "paladin": 3, "druid": 3, "shaman": 2 }
+     "weight": {
+      "priest": 3,
+      "paladin": 3,
+      "druid": 3,
+      "shaman": 2
+     }
     },
     {
      "id": "dps",
      "label": "专注打伤害",
      "note": "只想把怪打死",
-     "weight": { "mage": 3, "warlock": 3, "rogue": 3, "hunter": 2, "priest": 1, "shaman": 1, "warrior": 1, "druid": 1 }
+     "weight": {
+      "mage": 3,
+      "warlock": 3,
+      "rogue": 3,
+      "hunter": 2,
+      "priest": 1,
+      "shaman": 1,
+      "warrior": 1,
+      "druid": 1
+     }
     },
     {
      "id": "solo",
      "label": "基本一个人玩",
      "note": "以单人活动为主",
-     "weight": { "hunter": 3, "warlock": 3, "mage": 2, "druid": 2, "paladin": 2, "rogue": 1 }
+     "weight": {
+      "hunter": 3,
+      "warlock": 3,
+      "mage": 2,
+      "druid": 2,
+      "paladin": 2,
+      "rogue": 1
+     }
     }
    ]
   },
@@ -66,15 +119,40 @@
      "id": "want",
      "label": "想要，最好有个宠",
      "note": "需要宠物或召唤物分担",
-     "weight": { "hunter": 3, "warlock": 3, "druid": 1 }
+     "weight": {
+      "hunter": 3,
+      "warlock": 3
+     }
     },
     {
      "id": "no",
      "label": "不想要，自己打",
      "note": "不想管理宠物",
-     "weight": { "warrior": 2, "rogue": 2, "mage": 2, "paladin": 1, "priest": 1, "shaman": 1 }
+     "weight": {
+      "warrior": 2,
+      "rogue": 2,
+      "mage": 2,
+      "paladin": 1,
+      "priest": 1,
+      "shaman": 1
+     }
     },
-    { "id": "either", "label": "无所谓", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+    {
+     "id": "either",
+     "label": "无所谓",
+     "note": "",
+     "weight": {
+      "warrior": 1,
+      "paladin": 1,
+      "hunter": 1,
+      "rogue": 1,
+      "priest": 1,
+      "shaman": 1,
+      "mage": 1,
+      "warlock": 1,
+      "druid": 1
+     }
+    }
    ]
   },
   {
@@ -86,15 +164,43 @@
      "id": "simple",
      "label": "技能少一点，节奏稳",
      "note": "偏好简单直接的操作",
-     "weight": { "warrior": 2, "hunter": 2, "paladin": 2, "warlock": 1, "druid": 1 }
+     "weight": {
+      "warrior": 2,
+      "hunter": 2,
+      "paladin": 2,
+      "warlock": 1,
+      "druid": 1
+     }
     },
     {
      "id": "complex",
      "label": "技能多，讲连招和站位",
      "note": "愿意练操作",
-     "weight": { "rogue": 3, "mage": 2, "priest": 2, "shaman": 2, "druid": 2, "warlock": 1 }
+     "weight": {
+      "rogue": 3,
+      "mage": 2,
+      "priest": 2,
+      "shaman": 2,
+      "druid": 2,
+      "warlock": 1
+     }
     },
-    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+    {
+     "id": "either",
+     "label": "都行",
+     "note": "",
+     "weight": {
+      "warrior": 1,
+      "paladin": 1,
+      "hunter": 1,
+      "rogue": 1,
+      "priest": 1,
+      "shaman": 1,
+      "mage": 1,
+      "warlock": 1,
+      "druid": 1
+     }
+    }
    ]
   },
   {
@@ -106,15 +212,43 @@
      "id": "soloFast",
      "label": "一个人也要刷刷刷",
      "note": "单人练级效率优先",
-     "weight": { "mage": 3, "hunter": 3, "warlock": 2, "paladin": 2, "druid": 2, "rogue": 1 }
+     "weight": {
+      "mage": 3,
+      "hunter": 3,
+      "warlock": 2,
+      "paladin": 2,
+      "druid": 2,
+      "rogue": 1
+     }
     },
     {
      "id": "group",
      "label": "主要跟队友下副本",
      "note": "以组队副本为主",
-     "weight": { "priest": 3, "shaman": 3, "paladin": 2, "druid": 2, "warrior": 1 }
+     "weight": {
+      "priest": 3,
+      "shaman": 3,
+      "paladin": 2,
+      "druid": 2,
+      "warrior": 1
+     }
     },
-    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+    {
+     "id": "either",
+     "label": "都行",
+     "note": "",
+     "weight": {
+      "warrior": 1,
+      "paladin": 1,
+      "hunter": 1,
+      "rogue": 1,
+      "priest": 1,
+      "shaman": 1,
+      "mage": 1,
+      "warlock": 1,
+      "druid": 1
+     }
+    }
    ]
   },
   {
@@ -126,19 +260,31 @@
      "id": "plate",
      "label": "板甲，厚实在前",
      "note": "想要板甲",
-     "weight": { "warrior": 3, "paladin": 3 }
+     "weight": {
+      "warrior": 3,
+      "paladin": 3
+     }
     },
     {
      "id": "medium",
      "label": "锁甲或皮甲",
      "note": "接受锁甲皮甲",
-     "weight": { "hunter": 2, "shaman": 2, "rogue": 2, "druid": 2 }
+     "weight": {
+      "hunter": 2,
+      "shaman": 2,
+      "rogue": 2,
+      "druid": 2
+     }
     },
     {
      "id": "cloth",
      "label": "法袍就行",
      "note": "穿法袍",
-     "weight": { "mage": 3, "priest": 3, "warlock": 3 }
+     "weight": {
+      "mage": 3,
+      "priest": 3,
+      "warlock": 3
+     }
     }
    ]
   },
@@ -151,15 +297,41 @@
      "id": "high",
      "label": "重要，想跑得快、能变形态",
      "note": "看重机动与形态",
-     "weight": { "druid": 3, "rogue": 3, "mage": 2, "hunter": 1 }
+     "weight": {
+      "druid": 3,
+      "rogue": 3,
+      "mage": 2,
+      "hunter": 1
+     }
     },
     {
      "id": "low",
      "label": "不重要，站得住就行",
      "note": "更看重站得住",
-     "weight": { "warrior": 2, "paladin": 2, "priest": 1, "warlock": 1, "shaman": 1 }
+     "weight": {
+      "warrior": 2,
+      "paladin": 2,
+      "priest": 1,
+      "warlock": 1,
+      "shaman": 1
+     }
     },
-    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+    {
+     "id": "either",
+     "label": "都行",
+     "note": "",
+     "weight": {
+      "warrior": 1,
+      "paladin": 1,
+      "hunter": 1,
+      "rogue": 1,
+      "priest": 1,
+      "shaman": 1,
+      "mage": 1,
+      "warlock": 1,
+      "druid": 1
+     }
+    }
    ]
   }
  ]

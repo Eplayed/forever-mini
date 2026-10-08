@@ -13,3 +13,6 @@ for-mini/project.private.config.json
 
 # 临时验证脚本
 .tmp/
+
+# 译名体检的页面缓存
+.audit-cache/

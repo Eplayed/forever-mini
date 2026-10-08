@@ -2,6 +2,8 @@
   --bg:#0e1013; --panel:#171a1f; --panel-2:#1e222a; --line:#2b3038;
   --txt:#e7e9ee; --txt-dim:#98a1af; --gold:#e0a96d; --gold-deep:#b8813f;
   --blue:#6fa8ff; --ok:#4caf72; --warn:#d9a13b; --lead:#7f8ea8; --bad:#c9564a;
+  /* 深色底上的强调文本色：--bad/--warn 直接当文字用对比度不够，这两个是它们的文本态 */
+  --txt-alert:#ff9b8f; --txt-caution:#f0c67e;
   --font-cn:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
@@ -212,3 +214,7 @@ ul.list{margin:var(--s2) 0 0 18px;color:var(--txt-dim);font-size:12.5px}
 .step{border-left:2px solid var(--line);padding-left:var(--s3)}
 .step h3{margin:0 0 4px;font-size:13.5px;color:var(--gold)}
 .step p{margin:0;font-size:12.5px}
+
+/* ---------- 语义强调文本（替代散落在 JS 里的硬编码色值） ---------- */
+.alert{color:var(--txt-alert)}
+.caution{color:var(--txt-caution);font-size:12.5px}

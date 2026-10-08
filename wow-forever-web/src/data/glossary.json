@@ -107,7 +107,7 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析原文用词",
+     "note": "国服官方职业深度解析；原文并写「冰霜 与 火焰 陷阱」，非逐字摘录（见 audit-exceptions.json）",
      "checkedAt": "2026-10-07"
     }
    ]

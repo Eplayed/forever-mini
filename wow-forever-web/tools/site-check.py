@@ -194,6 +194,15 @@ def test_talent(browser, base):
     page.keyboard.press("Enter")
     page.wait_for_timeout(200)
     check("键盘 Enter 可加点", ranks(page, DEMO_A01)["ranks"] == 3, "a-0-1=%s" % ranks(page, DEMO_A01)["ranks"])
+    page.evaluate("""() => document.querySelector('[data-n="%s"]').focus()""" % DEMO_A01)
+    page.keyboard.press("Backspace")
+    page.wait_for_timeout(250)
+    check("键盘 Backspace 固定减点", ranks(page, DEMO_A01)["ranks"] == 2, "a-0-1=%s" % ranks(page, DEMO_A01)["ranks"])
+    page.evaluate("""() => document.querySelector('[data-n="%s"]').focus()""" % DEMO_A01)
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(250)
+    check("键盘可来回加减（回到 3 点，后续用例基于此）",
+          ranks(page, DEMO_A01)["ranks"] == 3, "a-0-1=%s" % ranks(page, DEMO_A01)["ranks"])
 
     # 减点模式：切模式后左键必须减点（本轮修的就是这个）
     page.evaluate("() => document.getElementById('mode').click()")

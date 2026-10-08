@@ -26,6 +26,7 @@ node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，�
 node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
 node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
 python3 tools/site-check.py       # 界面回归自检：8 页渲染 + 天赋交互 + 问答流程 + 375px，非 0 即不通过
+python3 tools/audit-translations.py  # 译名体检：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
 cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地 JSON）
 ```
 
@@ -35,6 +36,7 @@ cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地
 2. **数据与代码分离**：改内容只动 `src/data/`，不碰渲染逻辑。
 3. 每条对外展示的数据必须带 `provenance`（来源类型 + URL + 核对日期）与 `level`（L0–L3），由 `build-data.js` 卡口：L0 无官方来源、iconKey 指向不存在的本地文件、掉落出现百分比、节点 id 重复、前置指向不存在的 id —— 任一命中直接构建失败。
 4. 两源译名分歧的节点必须同时保留 `nameCn` 与 `nameAlt`，页面红框标注，不做取舍掩盖。
+4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`src/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
 5. 层级点数门槛未核实前，`rules.tierUnlockCost` 保持 `null`，界面只按坐标摆位，不做解锁判定。
 6. 每个内容页必须自动产出「本页还没确认的」清单（由数据缺口推导，不靠手写），文案面向玩家，不出现内部术语。
 7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。

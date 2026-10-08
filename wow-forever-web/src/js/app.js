@@ -121,7 +121,7 @@
       banner = '<div class="banner">天赋的名称、系属、点数上限、坐标与前置，来自<b>两个第三方数据挖掘源按坐标对齐</b>（' +
         D.esc(f.dataVersion || '上游数据挖掘') + '），<b>未经游戏内核实</b>。' +
         '本职业 ' + tcnt + ' 个天赋：' + vcnt + ' 个名称与官网中文一致' +
-        (ccnt ? '，<b style="color:#ff9b8f">' + ccnt + ' 个两源译名不一致（红框，两个叫法都保留）</b>' : '') +
+        (ccnt ? '，<b class="alert">' + ccnt + ' 个两源译名不一致（红框，两个叫法都保留）</b>' : '') +
         '。层级点数门槛还没核实，所以只按坐标摆位置、不算"第几层需要几点解锁"。最终以游戏内为准。</div>';
     }
     var body = trees.length ? renderTrees(trees, r) : renderPool(pool);
@@ -251,6 +251,7 @@
       n.oncontextmenu = function (e) { e.preventDefault(); act(n.dataset.t, n.dataset.n, 'sub'); };
       n.onkeydown = function (e) {
         if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); act(n.dataset.t, n.dataset.n); }
+        else if (e.key === 'Backspace' || e.key === 'Delete') { e.preventDefault(); act(n.dataset.t, n.dataset.n, 'sub'); }
       };
       bindLongPress(n);
     });
@@ -546,7 +547,7 @@
             '<div class="stat"><b>' + ti.resolvedRequires + '</b>带前置</div></div></div>' +
             '<div><h3>刻意没拿的部分</h3><p class="dim">' + D.esc(ti.excluded) + '</p>' +
             '<h3 style="margin-top:8px">还缺什么</h3><p class="dim">' + D.esc(ti.stillMissing) + '</p>' +
-            '<h3 style="margin-top:8px">风险</h3><p class="dim" style="color:#f0c67e">' + D.esc(ti.risk) + '</p></div></div></div>' : '') +
+            '<h3 style="margin-top:8px">风险</h3><p class="caution">' + D.esc(ti.risk) + '</p></div></div></div>' : '') +
           (m.steps ? '<div class="card"><h2>我们怎么拿到这些数据</h2><p class="dim">' + D.esc(m.meta ? m.meta.note : '') + '</p>' +
             '<div class="grid g2">' + m.steps.map(function (x) {
               return '<div class="step"><h3>' + D.esc(x.title) + '</h3><p class="dim">' + D.esc(x.body) + '</p></div>';

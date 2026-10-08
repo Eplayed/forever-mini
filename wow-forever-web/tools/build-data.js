@@ -120,6 +120,23 @@ if (!(me.steps || []).length) errs.push('method.json：缺方法说明条目');
 (me.steps || []).forEach((x) => { if (!x.title || !x.body) errs.push(`method：说明「${x.title || '?'}」缺标题或正文`); });
 if (!me.recheck || !me.onError) errs.push('method.json：缺「错了怎么办」或「何时重核」说明');
 
+// 译名体检的人工判定清单：每条必须可回查，否则等于开后门
+const aePath = path.join(ROOT, 'audit-exceptions.json');
+if (fs.existsSync(aePath)) {
+  const ae = JSON.parse(fs.readFileSync(aePath, 'utf8'));
+  const glIds = new Set(gl.items.map((x) => x.id));
+  (ae.items || []).forEach((e) => {
+    if (!e.id || !glIds.has(e.id)) errs.push(`audit-exceptions：${e.id} 不在词条表里，判定记录成孤儿`);
+    ['verdict', 'quote', 'reason', 'decidedAt', 'url'].forEach((k) => {
+      if (!e[k]) errs.push(`audit-exceptions ${e.id}：缺 ${k}，判定必须留痕`);
+    });
+    if (e.verdict === 'keep-L0') {
+      const rec = gl.items.filter((x) => x.id === e.id)[0];
+      if (rec && rec.level !== 'L0') errs.push(`audit-exceptions ${e.id}：判 keep-L0 但词条不是 L0`);
+    }
+  });
+}
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };
