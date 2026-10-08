@@ -1,58 +1,37 @@
-# AGENTS.md — 《魔兽世界：无限》资料线（角色协作规则）
+# wow-forever-web · 资料站工程约定
 
-本仓库是「无限服中文资料站」。凡本项目相关任务，**必须按下面的角色机制执行**，不要用一个通用身份把所有活都揽下来。
+角色分工、红线与验收基线以**仓库根 `../AGENTS.md`** 为准，本文件只写资料站特有的工程约定。
 
-## 一、项目地图
+## 目录
 
-| 位置 | 作用 |
-| --- | --- |
-| 仓库根 `wow-forever/` | monorepo，远程 `https://github.com/Eplayed/forever-mini`。本线全部代码与文档都在这一个仓库里，将来后端项目继续往根目录加 |
-| `wow-forever-web/` | 资料站：`src/` 静态站、`src/data/` 站点数据（**全线唯一数据基底**）、`tools/` 脚本、`docs/` 全部角色产出 |
-| `for-mini/` | 小程序端（**已建，2026-10-08 起**）：原生微信小程序，架构照 `poe-mini`（services 统一数据层 + OSS → storage 缓存 → 打包快照三级回退），数据命名空间 `wow/{env}/v1/`、缓存 key `wow_forever_v1_`、快照文件 `data/forever-*-snapshot.js` 全部独立。工程约定与阻塞项见 `for-mini/AGENTS.md` |
-| `poe-mini/`（**仓库外**） | 与本线**无关**：AI 赛道工具小程序，位于 `/Users/zhangyajun/Documents/project/poe-mini`，只作架构参考，不写它的代码、不改它的规则文件 |
-| `daily-talk/`、`p2-database/` | 与本线**无关**（流放助手与数据生产端）。无限服的文档与数据一律放本仓库 `docs/`，不往那两个仓库写 |
-| `docs/wow-infinite-*.md` | 上游方案、采编工作流程、数据源盘点（已从 daily-talk 搬来） |
-| `docs/data-base/forever-seed.json` | 人工核对基底 + 采编工作台（已从 daily-talk 搬来） |
-| `p2-database/`（可选复用） | 若将来要用它的 Dashboard/OSS 工具链，只允许新增独立的 `wow:*` 脚本与独立上传入口，不得复用 POE2/POE1 的脚本 |
+```
+src/            7 个页面（index / talent / skills / dungeons / systems / glossary / provenance）
+  css/app.css   设计令牌与组件样式（令牌表见 docs/UI.md）
+  js/           data.js 加载与溯源、talent.js 天赋引擎、glyph.js 本地占位图、app.js 页面渲染
+  data/         站点数据：classes / glossary / dungeons / systems / meta / talents/*.json / upstream/
+  img/icons/    从官方 CDN 转存的天赋图标 + manifest.json（可整体下线）
+tools/          build-data.js 校验卡口、merge-upstream.js 双源对齐、fetch-icons.js 图标、
+                export-mini.js 导出小程序产物、mindmap.js 生成导图
+docs/           PRD / UI / reference-gap / wow-infinite-*（方案、流程、源盘点）/ data-base 采编工作台
+                screenshots/ 渲染证据 / reference/ 参考站实拍
+```
 
-## 二、六个角色 skill 与调用方式
+## 命令
 
-| 角色 | skill | 一句话职责 |
-| --- | --- | --- |
-| 产品经理 | `wow-pm` | 需求、范围、验收标准 |
-| 策划 | `wow-planner` | 信息架构、内容组织、工具逻辑 |
-| UI | `wow-ui` | 视觉规格、组件状态、渲染证据 |
-| 开发 | `wow-dev` | 实现、构建卡口、验证 |
-| 数据采编 | `wow-data` | 来源、溯源、覆盖率、译名分歧 |
-| 运营 | `wow-ops` | 平台合规、备案、上线节奏、增长 |
+```bash
+node tools/build-data.js        # 改数据必跑：校验 + 覆盖率，非 0 退出即未完成
+node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，谨慎）
+node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
+node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
+cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地 JSON）
+```
 
-调用规则：
+## 站点硬规矩
 
-1. **每轮对话开始时先声明本轮主角色**，格式：`本轮角色：wow-data（数据采编）｜任务：… ｜产出：docs/xxx.md ｜交接给：wow-dev`。
-2. 一次对话**只有一个主角色**。需要跨角色时，先完成本角色交付物并落文件，再显式切换到下一个角色，不复用上一个角色的口头结论。
-3. 用户没指定角色时，按"需求 → 数据可得性 → 内容架构 → 视觉 → 实现 → 运营"的顺序自动选第一个合适的，并在回复开头说明为什么选它。
-4. 用户可用斜杠命令直接点名，例如 `/wow-data 补齐法师职业的天赋译名`。
-
-## 三、防乱三规矩（硬约束）
-
-1. **产出必须落文件**，路径按角色固定：PM 落 `docs/PRD*.md`、策划 `docs/PLAN-*.md`、UI `docs/UI.md` + `docs/screenshots/`、数据 `src/data/**` + `docs/wow-infinite-sources.md`、运营 `docs/OPS-*.md`、开发落代码 + 验证记录。只在对话里说结论不算完成。
-2. **角色之间只通过文件交接**，下一个角色必须先读上一个角色的产出文件，不依赖上下文记忆或聊天记录。
-3. **交接必须带状态**：`已定 / 待用户确认 / 阻塞（原因）`。阻塞项写进文档的待办表，不许口头带过。
-
-## 四、需要并行时用子代理
-
-跨模块可并行的活（例如同时采多个职业数据、同时改两页界面），用子代理拆分，每个子代理的任务书里写死：所属角色、输入文件、输出文件路径、不许改动的范围。**同一个文件不允许两个子代理同时写。**
-
-## 五、全项目红线（所有角色共同遵守）
-
-- 英文官方名是 **Forever**，不是 Infinite。
-- 个人主体：类目只有 `工具-信息查询`；零 UGC；不做付费与虚拟支付。
-- 不做：角色查询、战斗日志、DPS 或强度排行、宏与循环提示、新闻流。
-- 站名与素材避开商标词；页脚固定"非官方粉丝资料站，与暴雪娱乐及网易无关"。
-- 数据分级 L0–L3；非官方来源不得进正文；两源分歧两个都留并标注；掉落不写百分比；缺数据显示"待实测"，禁止机翻与编造。
-- 第三方站只取事实性标识符（名称、坐标、上限、图标文件名、ID），不复制其描述文案与攻略正文。
-- 关键路径是小程序备案 1–20 工作日，任何排期先排它。
-
-## 六、验证基线
-
-改动后必须跑：`node tools/build-data.js`（校验 + 覆盖率，非 0 退出即未完成）；动到小程序要再跑 `node tools/export-mini.js`（生成 `oss-preview/` 与小程序打包快照，超主包预算即失败）；界面改动必须有截图（站点在 `docs/screenshots/`，小程序在 `for-mini/docs/screenshots/`）；本地预览 `cd src && python3 -m http.server 8812`。
+1. **纯静态、无框架、无 Web 字体、无外链图标**；JS 不用 `?.` 与 `??`。
+2. **数据与代码分离**：改内容只动 `src/data/`，不碰渲染逻辑。
+3. 每条对外展示的数据必须带 `provenance`（来源类型 + URL + 核对日期）与 `level`（L0–L3），由 `build-data.js` 卡口：L0 无官方来源、iconKey 指向不存在的本地文件、掉落出现百分比、节点 id 重复、前置指向不存在的 id —— 任一命中直接构建失败。
+4. 两源译名分歧的节点必须同时保留 `nameCn` 与 `nameAlt`，页面红框标注，不做取舍掩盖。
+5. 层级点数门槛未核实前，`rules.tierUnlockCost` 保持 `null`，界面只按坐标摆位，不做解锁判定。
+6. 每个内容页必须自动产出「本页还没确认的」清单（由数据缺口推导，不靠手写），文案面向玩家，不出现内部术语。
+7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。

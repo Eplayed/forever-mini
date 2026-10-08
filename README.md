@@ -32,7 +32,7 @@ node tools/merge-upstream.js
 
 ## 协作规则
 
-角色机制、红线与验收基线见 `wow-forever-web/AGENTS.md` 与 `docs/ROLES.md`；小程序侧的工程约定见 `for-mini/AGENTS.md`。要点：
+角色机制、红线与验收基线见仓库根 **`AGENTS.md`**，交接台账见 **`ROLES.md`**；资料站工程约定见 `wow-forever-web/AGENTS.md`，小程序侧约定见 `for-mini/AGENTS.md`。要点：
 
 - 英文官方名是 **Forever**，不是 Infinite。
 - 个人主体：类目只有 `工具-信息查询`，零 UGC，不做付费。
