@@ -39,7 +39,7 @@
         var classes = r[0].classes, gl = r[1].items, dg = r[3];
         var cov = D.coverage(r[2], r[0], r[1]);
         var dn = r[2].newDungeons.length;
-        set('<div class="card"><h2>《魔兽世界：无限》中文资料</h2>' +
+        set('<div class="card"><h1 class="pt">《魔兽世界：无限》中文资料</h1>' +
           '<p class="dim">天赋、技能中英对照、副本与掉落。每条数据都标了来源与核对状态——' +
           '没核实的地方直接写「待实测」，不编造。</p>' + D.covBar(cov) +
           '<div class="stats" style="margin-top:12px">' +
@@ -50,7 +50,7 @@
           '<div class="banner">本站基于测试服资料整理，正式服 2026-11-05 上线后需整体重核。</div>' +
           '<div class="card"><h2>选职业</h2>' +
           '<p class="dim" style="margin-bottom:var(--s3)">第一次接触无限服、不知道选哪个？' +
-          '<a href="chooser.html">做个 7 题玩法问答 →</a>（本站整理，不是强度排行）</p>' +
+          '<a class="cta" href="chooser.html">做个 7 题玩法问答 →</a>（本站整理，不是强度排行）</p>' +
           '<div class="grid g9">' +
           classes.map(function (c) {
             var n = gl.filter(function (g) { return g.classId === c.id; }).length;
@@ -126,7 +126,7 @@
     }
     var body = trees.length ? renderTrees(trees, r) : renderPool(pool);
     set(head + banner + '<div class="tpanel">' +
-      '<div class="thead"><span class="title">' + D.esc(c.cn || '') + ' 天赋</span>' +
+      '<div class="thead"><h1 class="title">' + D.esc(c.cn || '') + ' 天赋</h1>' +
       '<span class="pts">剩余 <b>' + Math.max(0, r.totalPoints - E.spent(tstate.state, trees)) + '</b>/' + r.totalPoints + '</span>' +
       '<input type="search" id="tq" placeholder="搜天赋名" style="max-width:180px">' +
       '<span class="dim mono" id="sel"></span></div>' +
@@ -134,7 +134,7 @@
         return '<button data-tab="' + i + '" class="' + (i === tstate.active ? 'on' : '') + '">' + D.esc(t.nameCn) + '</button>';
       }).join('') + '</div>' + body +
       '<div class="tfoot"><label class="dim">等级 <span class="mono" id="lvv">60</span></label>' +
-      '<input type="range" min="10" max="60" value="60" id="lv">' +
+      '<input type="range" min="10" max="60" value="60" id="lv" aria-label="按角色等级筛选可用天赋">' +
       '<button id="mode" class="ghost">' + (tstate.mode === 'add' ? '当前：加点' : '当前：减点') + '</button>' +
       '<button id="copy" class="ghost">复制方案</button><button id="share" class="ghost">分享链接</button>' +
       '<button id="reset" class="ghost">重置</button>' +
@@ -361,7 +361,7 @@
         var cls = cstate.answers[q.id] ? (i < cstate.step ? 'L0' : 'L1') : 'L3';
         return '<i class="' + cls + '" style="width:' + w + '" title="' + D.esc(q.q) + '"></i>';
       }).join('') + '</div></div>';
-    var head = '<div class="card"><h2>选职业问答</h2><p class="dim">' + D.esc(cstate.meta.note || '') + '</p></div>';
+    var head = '<div class="card"><h1 class="pt">选职业问答</h1><p class="dim">' + D.esc(cstate.meta.note || '') + '</p></div>';
     var body;
     if (done) {
       var s = chooserScores(), ids = Object.keys(s.score);
@@ -421,14 +421,14 @@
             var c = cls.filter(function (y) { return y.id === x.classId; })[0];
             return '<tr><td>' + D.hl(x.cn, f.q) + '</td><td class="en">' + (x.en ? D.hl(x.en, f.q) : '<span class="dim">待补</span>') + '</td>' +
               '<td>' + (KIND[x.kind] || x.kind) + '</td><td>' + (c ? D.esc(c.cn) : '—') + '</td><td>' + D.pill(x.level) + '</td>' +
-              '<td><button class="ghost" data-copy="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '" style="font-size:11px;padding:1px 6px">复制</button></td></tr>';
+              '<td><button class="ghost" data-copy="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '" >复制</button></td></tr>';
           }).join('') + '</tbody></table>' : '<div class="empty">没有匹配条目，试试放宽筛选。</div>';
         el('cnt').textContent = list.length + ' / ' + items.length + ' 条';
         Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
           b.onclick = function () { D.copy(b.dataset.copy); };
         });
       }
-      set('<div class="card"><h2>技能书</h2><p class="dim">英文原名与专精归属是待补项，缺的地方直接写「待补」，不做机翻。</p>' +
+      set('<div class="card"><h1 class="pt">技能书</h1><p class="dim">英文原名与专精归属是待补项，缺的地方直接写「待补」，不做机翻。</p>' +
         '<div class="field"><input type="search" id="q" placeholder="搜中文或英文">' +
         '<select id="c"><option value="">全部职业</option>' + cls.map(function (x) { return '<option value="' + x.id + '">' + D.esc(x.cn) + '</option>'; }).join('') + '</select>' +
         '<select id="k"><option value="">全部类型</option>' + Object.keys(KIND).filter(function (k) {
@@ -464,7 +464,7 @@
   function dungeons() {
     D.load('data/dungeons.json').then(function (d) {
       var groups = [['newDungeons', '无限服新副本'], ['classicDungeons', '经典副本（在无限服）'], ['raids', '团队副本']];
-      set('<div class="card"><h2>副本手册</h2><p class="dim">名单与等级区间来自官方与线索源；BOSS 技能、掉落、路线在没实测前一律留空并标注。</p></div>' +
+      set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">名单与等级区间来自官方与线索源；BOSS 技能、掉落、路线在没实测前一律留空并标注。</p></div>' +
         '<div class="banner">掉落数据本站<b>不写百分比</b>：测试服看到的是"谁掉了"，不是"多大概率"。</div>' +
         groups.map(function (g) {
           return '<div class="grp">' + g[1] + ' · ' + (d[g[0]] || []).length + '</div>' +
@@ -511,7 +511,7 @@
           t.onclick = function () { D.copy(t.dataset.c); };
         });
       }
-      set('<div class="card"><h2>中英术语速查</h2><p class="dim">点词条即复制。当前只有猎人与德鲁伊的官方中文名，其余职业待采。</p>' +
+      set('<div class="card"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制。当前只有猎人与德鲁伊的官方中文名，其余职业待采。</p>' +
         '<div class="field"><input type="search" id="q" placeholder="输入中文或英文"><span class="dim mono" id="cnt"></span></div>' +
         '<div class="pool" id="pool"></div></div>');
       el('q').oninput = function (e) { draw(e.target.value.trim()); };
@@ -537,7 +537,8 @@
         ['github.com/cmangos/classic-db', '1.12 国服中文 locale（GPL-3.0）', '只取译名与结构'],
         ['search.bilibili.com', '测试服实测视频', 'ASR + 关键帧识别后人工确认']];
         var ti = r[3].talentImport;
-        set('<div class="card"><h2>数据覆盖率</h2>' + D.covBar(cov) +
+        set('<div class="card"><h1 class="pt">溯源与覆盖率</h1><p class="dim">每条数据从哪来、什么时候核的、哪些刻意没拿，全部摊在这里。</p></div>' +
+          '<div class="card"><h2>数据覆盖率</h2>' + D.covBar(cov) +
           '<div class="stats" style="margin-top:12px">' + Object.keys(names).map(function (k) {
             return '<div class="stat"><b>' + cov[k] + '</b>' + names[k] + '</div>';
           }).join('') + '</div>' +
@@ -585,7 +586,8 @@
   function systems() {
     D.load('data/systems.json').then(function (s) {
       var q = document.body.getAttribute('data-page');
-      set(s.groups.map(function (g) {
+      set('<div class="card"><h1 class="pt">系统与新区域</h1><p class="dim">规则、区域、种族与装备名的官方中文口径，逐条带来源。</p></div>' +
+        s.groups.map(function (g) {
         return '<div class="grp">' + D.esc(g.label) + ' · ' + g.items.length + '</div>' +
           g.items.map(function (x) {
             return '<div class="card"><div class="hd" style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">' +

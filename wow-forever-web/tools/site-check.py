@@ -350,8 +350,52 @@ def test_chooser(browser, base):
     ctx.close()
 
 
+def test_design_baseline(browser, base):
+    """吸收自通用设计走查规则的量化底线：每屏一个 H1、触屏点击目标 ≥44px、
+       控件有可读名、图片有 alt、数字用等宽对齐。见 docs/UI.md 第七节。"""
+    print("\n[6] 设计量化基线")
+    for mob, vp in [("桌面", {"width": 1440, "height": 1000}),
+                    ("移动 375", {"width": 375, "height": 812, "is_mobile": True, "has_touch": True})]:
+        ctx = browser.new_context(viewport=vp, is_mobile=("移动" in mob), has_touch=("移动" in mob))
+        for name in PAGES:
+            page = ctx.new_page()
+            page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+            page.wait_for_timeout(1100)
+            r = page.evaluate("""() => {
+              const els = [...document.querySelectorAll('button, a, input, .node, .qopt, .term, .cls')];
+              const small = els.filter(e => { const b = e.getBoundingClientRect();
+                  return b.width > 0 && b.height > 0 && Math.min(b.width, b.height) < 44; });
+              return {
+                h1: document.querySelectorAll('h1').length,
+                small: small.map(e => e.tagName + '.' + String(e.className).split(' ')[0]),
+                unnamed: els.filter(e => !e.textContent.trim() && !e.getAttribute('aria-label') && !e.placeholder).length,
+                noAlt: [...document.querySelectorAll('img')].filter(i => i.getAttribute('alt') === null).length };
+            }""")
+            kinds = {}
+            for k in r["small"]:
+                kinds[k] = kinds.get(k, 0) + 1
+            top = sorted(kinds.items(), key=lambda x: -x[1])[:2]
+            check("%s H1 唯一 %s" % (mob, name), r["h1"] == 1, "H1 %d 个" % r["h1"])
+            if "移动" in mob:
+                check("移动端点击目标 ≥44px %s" % name, not r["small"],
+                      "%d 个偏小 %s" % (len(r["small"]), top))
+            check("控件都有可读名 %s" % name, r["unnamed"] == 0, "%d 个缺名" % r["unnamed"])
+            check("图片都有 alt %s" % name, r["noAlt"] == 0, "%d 张缺 alt" % r["noAlt"])
+            page.close()
+        ctx.close()
+    ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    page = ctx.new_page()
+    page.goto(base + "/glossary.html", wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    page.screenshot(path=os.path.join(SHOT_DIR, "glossary-mobile-375.png"))
+    page.goto(base + "/talent.html?c=hunter", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    page.screenshot(path=os.path.join(SHOT_DIR, "talent-mobile-tabs.png"))
+    ctx.close()
+
+
 def test_mobile(browser, base):
-    print("\n[5] 375px 移动端")
+    print("\n[7] 375px 移动端")
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     page = ctx.new_page()
     errors = []
@@ -388,6 +432,7 @@ def main():
             test_talent(browser, base)
             test_dungeon_banner(browser, base)
             test_chooser(browser, base)
+            test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()
     finally:

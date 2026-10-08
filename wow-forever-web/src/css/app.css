@@ -63,6 +63,7 @@ input:focus,select:focus,button:focus{outline:none;border-color:var(--gold)}
 button{cursor:pointer}
 button:hover{border-color:var(--gold);color:#fff}
 button.ghost{background:transparent}
+button.ghost.mini{font-size:11px;padding:1px 6px}
 button:disabled{opacity:.45;cursor:not-allowed}
 .field{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center;margin-bottom:var(--s3)}
 input[type=search]{flex:1;min-width:180px}
@@ -235,3 +236,23 @@ ul.list{margin:var(--s2) 0 0 18px;color:var(--txt-dim);font-size:12.5px}
 /* ---------- 语义强调文本（替代散落在 JS 里的硬编码色值） ---------- */
 .alert{color:var(--txt-alert)}
 .caution{color:var(--txt-caution);font-size:12.5px}
+
+
+/* ---------- 设计量化基线（吸收自通用走查规则，见 docs/UI.md 第七节） ---------- */
+.card h1.pt{margin-bottom:var(--s3);color:var(--gold);font-size:17px}
+.thead h1.title{font-size:17px}
+.mono,.stat b,.rank,.cov-num{font-variant-numeric:tabular-nums}
+
+/* 触屏点击目标：手机上"能点到"比"省地方"优先 */
+@media (max-width:600px){
+  .term{display:inline-flex;align-items:center;min-height:44px;padding:12px 14px;font-size:14px;line-height:1.2}
+  button.ghost, button.ghost.mini{min-height:44px;min-width:44px;padding:10px 14px;font-size:13px}
+  .top nav a{min-height:44px;display:inline-flex;align-items:center}
+  .src a{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
+  .field input[type=search], .thead input[type=search]{min-height:44px}
+  .qopt{min-height:48px}
+  .ttabs button{min-height:44px}
+  .tfoot input[type=range]{min-height:44px}
+  .card > a{display:inline-flex;align-items:center;min-height:44px}
+  a.cta{display:inline-flex;align-items:center;min-height:44px;padding-right:6px}
+}
