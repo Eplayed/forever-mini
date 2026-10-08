@@ -40,7 +40,8 @@ window.WowData = (function () {
     if (!list || !list.length) return '<div class="dim" style="font-size:12px">无来源记录</div>';
     return '<ul class="src">' + list.map(function (s) {
       return '<li><span class="st ' + esc(s.type) + '">' + esc(s.type) + '</span>' +
-        '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(host(s.url)) + '</a>' +
+        (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(host(s.url)) + '</a>'
+               : '<span class="dim">（无外部链接：本站自己的说明）</span>') +
         '<span>' + esc(s.note || '') + '</span>' +
         (s.checkedAt ? '<span class="dim">核对于 ' + esc(s.checkedAt) + '</span>' : '') +
         (s.quote ? '<span class="quote">原文：' + esc(s.quote) + '</span>' : '') + '</li>';

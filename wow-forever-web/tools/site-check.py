@@ -574,7 +574,9 @@ def test_grouping(browser, base):
     icons = json.load(open(os.path.join(SRC, "data", "icons.json"), encoding="utf-8"))
     gl = json.load(open(os.path.join(SRC, "data", "glossary.json"), encoding="utf-8"))
     expect_rows = len(gl["items"])
-    expect_icons = len([x for x in gl["items"] if icons["map"].get((x.get("classId") or "") + "|" + x["cn"])])
+    def icon_key(x):
+        return ((x.get("raceId") or "") if x.get("kind") == "racial" else (x.get("classId") or "")) + "|" + x["cn"]
+    expect_icons = len([x for x in gl["items"] if icons["map"].get(icon_key(x))])
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
@@ -588,8 +590,8 @@ def test_grouping(browser, base):
       return { groups: groups.map(g => g.innerText.replace(/\\n/g, ' ').trim()),
                rows: rows.length,
                everyRowHasCell: rows.every(r => r.querySelector('.liw')),
-               imgs: document.querySelectorAll('#tbl .liw img').length,
-               broken: [...document.querySelectorAll('#tbl .liw img')].filter(i => i.complete && i.naturalWidth === 0).length,
+               imgs: document.querySelectorAll('#tbl tbody .liw img').length,
+               broken: [...document.querySelectorAll('#tbl tbody .liw img')].filter(i => i.complete && i.naturalWidth === 0).length,
                dupOwner: rows.map(r => r.querySelector('td:nth-child(5)')).length }; }""")
     check("技能书无脚本报错", not errs, "; ".join(errs[:2]))
     check("技能书按职业与种族分组", len(st["groups"]) >= 10,
@@ -644,6 +646,38 @@ def test_grouping(browser, base):
           ab["scroll"] and ab["nameH"] <= 28, json.dumps(ab))
     mp.screenshot(path=os.path.join(SHOT_DIR, "skills-grouped-mobile.png"))
     m.close()
+
+    # 十页正文里不该出现面向开发的东西：脚本路径、原始 JSON、未替换的占位符
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    bad_pages = []
+    for name in PAGES:
+        dp = ctx.new_page()
+        dp.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+        dp.wait_for_timeout(1100)
+        t = dp.evaluate("() => document.querySelector('#main').innerText")
+        hits = [w for w in ["tools/", ".py", ".json", "[{", "undefined", "NaN", "[object"] if w in t]
+        if hits:
+            bad_pages.append("%s:%s" % (name, ",".join(hits)))
+        dp.close()
+    check("十页正文没有调试文案与原始数据", not bad_pages, "; ".join(bad_pages))
+    # 官方 CDN 取回来的职业 / 种族图标要真的显示出来，且一张都不许坏
+    rp = ctx.new_page()
+    rp.goto(base + "/races.html", wait_until="networkidle")
+    rp.wait_for_timeout(1300)
+    ri = rp.evaluate("""() => { const a = [...document.querySelectorAll('.liw img')];
+      return { imgs: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length,
+               tiles: document.querySelectorAll('.rcard .liw.t').length }; }""")
+    check("种族页用上本地官方图标", ri["imgs"] >= 21 and ri["broken"] == 0,
+          "图 %d 张 / 坏 %d / 方块 %d" % (ri["imgs"], ri["broken"], ri["tiles"]))
+    hp = ctx.new_page()
+    hp.goto(base + "/index.html", wait_until="networkidle")
+    hp.wait_for_timeout(1300)
+    hi = hp.evaluate("""() => { const a = [...document.querySelectorAll('.cls .liw img')];
+      return { imgs: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length }; }""")
+    check("首页职业卡用上官方职业图标", hi["imgs"] == 9 and hi["broken"] == 0, json.dumps(hi))
+    hp.screenshot(path=os.path.join(SHOT_DIR, "index-class-icons.png"))
+    rp.screenshot(path=os.path.join(SHOT_DIR, "races-race-icons.png"))
+    ctx.close()
 
 
 def main():

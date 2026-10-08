@@ -100,16 +100,20 @@
       'onerror="this.className=\'lico bad\'">' : '';
     return '<span class="liw' + (small ? ' sm' : '') + '">' + ph + img + '</span>';
   }
+  /* 图标查表的键：职业词条用 classId，种族特长用 raceId（同名特长在不同种族是两回事） */
+  function iconKeyOf(x) {
+    return (x.kind === 'racial' ? (x.raceId || '') : (x.classId || '')) + '|' + x.cn;
+  }
   /* 词条归属：职业词条按职业分组，种族特长按种族分组，剩下的进「装备与其他」。
      技能书页与术语速查页共用这一份，避免两处分组口径不一致。 */
   function raceLookup(races) {
     var m = { order: [] };
     (races || []).forEach(function (x) {
-      m[x.id] = { cn: x.subgroup ? x.subgroup.nameCn : x.nameCn, fac: x.faction };
+      m[x.id] = { cn: x.subgroup ? x.subgroup.nameCn : x.nameCn, fac: x.faction, iconKey: x.iconKey };
       m.order.push(x.id);
       // 天裔在两张表里各一行，词条归属可能落在子族上；展示时统一并进「天裔」一组
       if (x.nameCn === '天裔' && !m.skyborne) {
-        m.skyborne = { cn: '天裔', fac: '' };
+        m.skyborne = { cn: '天裔', fac: '', iconKey: x.iconKey };
         m.order.push('skyborne');
       }
     });
@@ -129,7 +133,7 @@
     });
     var out = [];
     classes.forEach(function (c) {
-      if (byCls[c.id]) out.push({ tile: Glyph.classTile(c.id, c.cn), name: c.cn, sub: c.en, rows: byCls[c.id] });
+      if (byCls[c.id]) out.push({ tile: Glyph.classTile(c.id, c.cn, c.iconKey), name: c.cn, sub: c.en, rows: byCls[c.id] });
     });
     // 种族组按官方页的阵营顺序排（部落五个 → 联盟五个），不按拼音也不按 id
     Object.keys(byRace).sort(function (a, b) {
@@ -137,7 +141,7 @@
       return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
     }).forEach(function (rid) {
       var rc = RACE[rid] || { cn: '未归属种族', fac: '' };
-      out.push({ tile: Glyph.raceTile(rid, rc.fac, rc.cn), name: rc.cn, sub: '种族特长', rows: byRace[rid] });
+      out.push({ tile: Glyph.raceTile(rid, rc.fac, rc.cn, rc.iconKey), name: rc.cn, sub: '种族特长', rows: byRace[rid] });
     });
     if (rest.length) out.push({ tile: '', name: '装备与其他', sub: '', rows: rest });
     return out;
@@ -193,7 +197,7 @@
             var n = gl.filter(function (g) { return g.classId === c.id; }).length;
             var lv = c.talentCount ? (c.nameVerified ? 'L2' : 'L2') : 'L3';
             return '<a class="cls" style="text-decoration:none" href="talent.html?c=' + c.id + '">' +
-              '<div class="ic">' + (window.Glyph ? Glyph.classTile(c.id, c.cn) : D.esc((c.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(c.cn) + '</div>' +
+              '<div class="ic">' + (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey) : D.esc((c.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(c.cn) + '</div>' +
               '<div class="e">' + D.esc(c.en) + '</div>' +
               '<div style="margin-top:5px">' + D.pill(lv) + '</div>' +
               '<div class="e">' + (c.talentCount || 0) + ' 天赋' +
@@ -241,7 +245,7 @@
     var pool = (f.namePool || []), trees = f.trees || [], r = E.defaults(f.rules);
     var head = '<div class="card" style="padding-bottom:0"><div class="classbar">' + tstate.classes.map(function (x) {
       return '<button class="cls ' + (x.id === tstate.classId ? 'on' : '') + '" data-c="' + x.id + '" style="min-width:78px">' +
-        '<div class="ic">' + (window.Glyph ? Glyph.classTile(x.id, x.cn) : D.esc((x.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(x.cn) + '</div></button>';
+        '<div class="ic">' + (window.Glyph ? Glyph.classTile(x.id, x.cn, x.iconKey) : D.esc((x.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(x.cn) + '</div></button>';
     }).join('') + '</div></div>';
     var banner = '';
     if (f.structureStatus === 'none') {
@@ -513,7 +517,7 @@
     var terms = cstate.gloss.filter(function (g) { return g.classId === c.id; }).length;
     var pct = max ? Math.round(score / max * 100) : 0;
     return '<div class="card mcard"><div class="crow">' +
-      '<div class="ic lg">' + (window.Glyph ? Glyph.classTile(c.id, c.cn) : D.esc((c.cn || '?').slice(0, 1))) + '</div>' +
+      '<div class="ic lg">' + (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey, 'lg') : D.esc((c.cn || '?').slice(0, 1))) + '</div>' +
       '<div style="flex:1"><h2 style="margin:0">' + D.esc(c.cn) + ' <span class="dim mono">' + D.esc(c.en || '') + '</span></h2>' +
       '<div class="mbar"><i style="width:' + pct + '%"></i></div>' +
       '<div class="dim">匹配度 ' + pct + '%（' + score + ' 分，本题库最高 ' + max + ' 分）</div></div></div>' +
@@ -630,14 +634,14 @@
           return true;
         });
         var groups = groupEntries(list, cls, RACE);
-        var withIcon = list.filter(function (x) { return ICONS[(x.classId || '') + '|' + x.cn]; }).length;
+        var withIcon = list.filter(function (x) { return ICONS[iconKeyOf(x)]; }).length;
         el('tbl').innerHTML = groups.length ? groups.map(function (g) {
           return '<div class="lgrp">' + g.tile + '<b>' + D.esc(g.name) + '</b>' +
             (g.sub ? '<span class="dim mono">' + D.esc(g.sub) + '</span>' : '') +
             '<span class="dim">' + g.rows.length + ' 条</span></div>' +
             '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">图标</th><th>中文名</th><th>英文原名</th><th>类型</th><th>状态</th><th></th></tr></thead><tbody>' +
             g.rows.map(function (x) {
-              return '<tr><td class="ich">' + iconCell(ICONS[(x.classId || '') + '|' + x.cn], x.id, x.cn) + '</td>' +
+              return '<tr><td class="ich">' + iconCell(ICONS[iconKeyOf(x)], x.id, x.cn) + '</td>' +
                 '<td>' + D.hl(x.cn, f.q) + '</td>' +
                 '<td class="en">' + (x.en ? D.hl(x.en, f.q) : '<span class="dim">待补</span>') + '</td>' +
                 '<td>' + (KIND[x.kind] || x.kind) + '</td><td>' + D.pill(x.level) + '</td>' +
@@ -683,7 +687,7 @@
                 '<td class="quote">' + D.esc(x.quote) + '</td></tr>';
             }).join('') + '</tbody></table></div>';
         }).join('') + '<p class="src">来源：' + (((ab.meta || {}).sources) || []).map(function (x) { return D.esc(x.label); }).join('、') +
-          ' ｜ 生成：' + D.esc((ab.meta || {}).generatedAt || '') + '，由 <span class="mono">tools/extract-abilities.py</span> 整句抓取</p>';
+          ' ｜ 核对日期：' + D.esc((ab.meta || {}).generatedAt || '') + '，整句照录不改写</p>';
         el('abcnt').textContent = ' · ' + list.length + ' 条官方原句';
         Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
           b.onclick = function () { D.copy(b.dataset.copy); };
@@ -718,6 +722,25 @@
     if (x.kind === 'raid') g.push('开放时间、团队规模、BOSS 数——仅有第三方说法');
     return g;
   }
+  function dunList(arr) {
+    if (!arr || !arr.length) return '';
+    return '<ul class="list">' + arr.map(function (b) {
+      if (typeof b === 'string') return '<li>' + D.esc(b) + '</li>';
+      return '<li>' + D.esc(b.nameCn || b.name || b.cn || '未定名') +
+        (b.nameEn ? ' <span class="dim mono">' + D.esc(b.nameEn) + '</span>' : '') +
+        (b.note ? '<span class="dim"> · ' + D.esc(b.note) + '</span>' : '') + '</li>';
+    }).join('') + '</ul>';
+  }
+  function dunRoute(arr) {
+    if (!arr || !arr.length) return '';
+    return '<ul class="list">' + arr.map(function (r) {
+      var o = r && typeof r === 'object' ? r : {};
+      var txt = typeof r === 'string' ? r : (r.label || r.name || r.text || '');
+      var at = o.at || '';
+      return '<li>' + D.esc(txt || '这一步官方没给文字说明') +
+        (at ? ' <span class="dim mono">' + D.esc(at) + '</span>' : '') + '</li>';
+    }).join('') + '</ul>';
+  }
   var DUN_STATE = {
     L0: '名单与等级区间已按官方中文核对',
     L1: '名单已核，中文定名待官方公布',
@@ -751,8 +774,8 @@
                 (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' + D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
                 '</div><button class="ghost" data-d="' + D.esc(x.id) + '">展开来源</button></div>' +
                 '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
-                '<h3>BOSS 与掉落</h3>' + ((x.bosses || []).length ? JSON.stringify(x.bosses) : '<p class="dim">待实测——没有任何可信来源给出这座本的 BOSS 与掉落，此处不留假数据。</p>') +
-                '<h3>路线</h3>' + ((x.route || []).length ? JSON.stringify(x.route) : '<p class="dim">待实测。</p>') +
+                '<h3>BOSS 与掉落</h3>' + (dunList(x.bosses) || '<p class="dim">待实测——没有任何可信来源给出这座本的 BOSS 与掉落，此处不留假数据。</p>') +
+                '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
                 '<h3>这座本还没确认的</h3><ul class="list">' + dunGaps(x).map(function (g) { return '<li>' + D.esc(g) + '</li>'; }).join('') + '</ul>' +
                 '<h3>来源与核对</h3>' + D.sources(x.provenance) + '</div></div>';
             }).join('');
@@ -802,7 +825,7 @@
             '<span class="dim">' + g.rows.length + ' 条</span></div>' +
             '<div class="pool">' + g.rows.map(function (x) {
               return '<span class="term ' + (f.q ? 'hit' : '') + '" data-c="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '">' +
-                iconCell(ICONS[(x.classId || '') + '|' + x.cn], x.id, x.cn, 1) + D.esc(x.cn) +
+                iconCell(ICONS[iconKeyOf(x)], x.id, x.cn, 1) + D.esc(x.cn) +
                 '<button class="info" data-src="' + D.esc(x.id) + '" data-name="' + D.esc(x.cn) + '" data-prov="' +
                 encodeURIComponent(JSON.stringify(x.provenance || [])) + '" aria-label="查看「' + D.esc(x.cn) + '」的来源">来源</button></span>';
             }).join('') + '</div>';
@@ -944,7 +967,7 @@
             }).join('') + '</tr></thead><tbody>' +
             rows.map(function (x) {
               var hit = f.c && x.classes.indexOf(f.c) < 0;
-              return '<tr' + (hit ? ' class="off"' : '') + '><th class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn) +
+              return '<tr' + (hit ? ' class="off"' : '') + '><th class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
                 '<span>' + D.esc(x.nameCn) + (x.subgroup ? '<em>' + D.esc(x.subgroup.nameCn.replace(x.nameCn, '')) + '</em>' : '') +
                 '</span></th>' +
                 cols.map(function (id) {
@@ -968,12 +991,13 @@
           });
           return byRace.length ? byRace.map(function (g) {
             var x = g.race;
-            return '<div class="lgrp">' + Glyph.raceTile(x.id, x.faction, x.nameCn) +
+            return '<div class="lgrp">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
               '<b>' + D.esc(x.subgroup ? x.subgroup.nameCn : x.nameCn) + '</b>' +
               '<span class="dim mono">' + FAC[x.faction] + '</span><span class="dim">' + g.rows.length + ' 条</span></div>' +
-              '<div class="scrollx"><table><thead><tr><th>特长</th><th>类型</th><th>官方整句</th><th></th></tr></thead><tbody>' +
+              '<div class="scrollx"><table><thead><tr><th class="ich">图标</th><th>特长</th><th>类型</th><th>官方整句</th><th></th></tr></thead><tbody>' +
               g.rows.map(function (t) {
-                return '<tr><td>' + D.hl(t.t.name, f.q) + '</td>' +
+                return '<tr><td class="ich">' + iconCell(t.t.iconKey, x.id + t.t.name, t.t.name) + '</td>' +
+                  '<td>' + D.hl(t.t.name, f.q) + '</td>' +
                   '<td>' + (t.t.passive ? '被动' : '主动') + '</td>' +
                   '<td class="quote">' + D.hl(t.t.quote, f.q) + '</td>' +
                   '<td class="act">' + srcBtn('tr-' + x.id + '-' + t.t.name, t.t.name,
@@ -1020,7 +1044,7 @@
             var sub = x.subgroup;
             var lore = sub ? sub.lore : x.lore;
             var tl = sub ? sub.traits : x.traits;
-            return '<div class="rcard"><div class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn) +
+            return '<div class="rcard"><div class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
               '<div style="flex:1"><b>' + D.esc(x.nameCn) +
               (sub ? '<span class="dim"> · ' + D.esc(sub.nameCn) + '</span>' : '') + '</b>' +
               '<div class="dim" style="font-size:12px">' + FAC[x.faction] + ' · 可选 ' + x.classes.length +

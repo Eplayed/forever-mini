@@ -38,6 +38,57 @@ RACE_CN = {u"兽人": "orc", u"牛头人": "tauren", u"巨魔": "troll", u"亡�
            u"天裔": "skyborne", u"塑风者天裔": "windshaper", u"高阶会天裔": "high-order"}
 FACTION_H3 = [(u"部落种族与职业组合", "horde"), (u"联盟种族与职业组合", "alliance")]
 
+# 图标文件名取自第三方资料站的种族页（事实性标识符），图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取。
+# 官方中文公告本身不含图标文件名。资料站用的 race_scourge_male / race_nightelf_male 在官方 CDN 上是 403，
+# 亡灵改用官方 CDN 实存的 race_undead_male，暗夜精灵暂时取不到 → 留空，界面用自绘块。
+# 经典种族只有男性图标键可用（race_*_male），不代表游戏内女性角色的图标。
+RACE_ICON = {u"兽人": "race_orc_male", u"亡灵": "race_undead_male", u"牛头人": "race_tauren_male",
+             u"巨魔": "race_troll_male", u"人类": "race_human_male", u"矮人": "race_dwarf_male",
+             u"暗夜精灵": None, u"侏儒": "race_gnome_male", u"天裔": None}
+ICON_SRC = "https://wowclassicforever.info/zh-hans/races/"
+
+# 种族特长的图标文件名取自参考站种族页（它的配对来自客户端解包），我们没有逐条进游戏核对，
+# 所以这层关系标 fan_db 来源、不冒充官方。图片字节一律由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地。
+# 2026-10-08 实测：下面每一条都是该页面上「图标 alt=特长名 + src=键」实际出现的配对，35 个键在官方 CDN 全部 200。
+# 没出现在那页上的特长（如 血性狂怒、斧类武器专精）一律不填，不靠猜补图。
+TRAIT_ICON = {
+    u"粉碎诅咒": "spell_nature_removecurse",
+    u"坚韧": "inv_helmet_23",
+    u"被遗忘者的意志": "spell_shadow_raisedead",
+    u"食尸": "ability_racial_cannibalize",
+    u"水下呼吸": "spell_shadow_demonbreath",
+    u"哀伤之触": "spell_shadow_fingerofdeath",
+    u"战争践踏": "ability_warstomp",
+    u"栽培": "inv_misc_flower_01",
+    u"原野疾驰": "achievement_zone_barrens_01",
+    u"耐久": "spell_nature_unyeildingstamina",
+    u"狂暴": "racial_troll_berserk",
+    u"极速再生": "ability_racial_regeneratin",
+    u"野兽杀手": "inv_misc_pelt_bear_ruin_02",
+    u"再生": "spell_nature_regenerate",
+    u"踏空而行": "inv_elemental_primal_air",
+    u"天穹视界": "ability_skyreach_lens_flare",
+    u"风灵护佑": "inv_misc_volatileair",
+    u"元素洞察": "achievement_raidprimalist_windelemental",
+    u"生存意志": "spell_shadow_charm",
+    u"感知": "spell_nature_sleep",
+    u"剑类武器专精": "ability_meleedamage",
+    u"人类精魂": "inv_enchant_shardbrilliantsmall",
+    u"石像形态": "spell_shadow_unholystrength",
+    u"寻找财宝": "racial_dwarf_findtreasure",
+    u"锤类武器专精": "inv_hammer_05",
+    u"王牌猎人": "inv_weapon_rifle_05",
+    u"艾露恩之光": "spell_nature_moonglow",
+    u"影遁": "ability_ambush",
+    u"迅捷": "ability_racial_shadowmeld",
+    u"精灵之魂": "spell_nature_wispsplode",
+    u"逃命专家": "ability_rogue_trip",
+    u"我知道了": "inv_gnometoy",
+    u"开阔思维": "inv_enchant_essenceeternallarge",
+    u"工程学专精": "inv_misc_gear_01",
+    u"阅读魔网": "ability_mage_incantersabsorbtion",
+}
+
 H_RE = re.compile(r"<h([2-4])[^>]*>([\s\S]*?)</h\1>", re.I)
 TABLE_RE = re.compile(r"<table[\s\S]*?</table>", re.I)
 ROW_RE = re.compile(r"<tr[\s\S]*?</tr>", re.I)
@@ -127,8 +178,10 @@ def parse_traits(html, hl):
             name = name.replace(u"（被动）", u"").strip()
             if len(name) < 2 or not effect.strip():
                 continue
+            # 官方页写的是「我知道了！」，资料站的 alt 是「我知道了」，去尾部标点再查一次
+            icon = TRAIT_ICON.get(name) or TRAIT_ICON.get(name.strip(u"！!。．.：:"))
             traits.append({"name": name, "passive": passive, "effect": effect.strip(),
-                           "quote": line})
+                           "quote": line, "iconKey": icon})
         if lore or traits:
             out.append({"raceCn": race_cn, "lore": lore, "traits": traits,
                         "raw": block[:0]})
@@ -309,11 +362,18 @@ def main():
             "classes": mrow["classes"],
             "lore": tr["lore"] if tr else None,
             "traits": tr["traits"] if tr else [],
+            "iconKey": RACE_ICON.get(race_cn),
             "level": "L0",
             "provenance": prov(None, LABEL + u"·矩阵表「%s」行：官方只给 X 标记，职业名按同页表头还原为 %s" % (race_cn, cols_cn), today)
                           + (prov(tr["lore"], LABEL + u"·种族简介原文", today) if tr and tr["lore"] else [])
                           + (prov(sub["traits"][0]["quote"], LABEL + u"·子族特长原文", today)
                              if sub and sub["traits"] else [])
+                          + ([{"type": "fan_db", "url": ICON_SRC,
+                               "note": u"图标文件名 %s 取自资料站（事实性标识符），图片由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地；官方中文公告不含图标" % RACE_ICON.get(race_cn),
+                               "checkedAt": today}] if RACE_ICON.get(race_cn) else
+                             [{"type": "site-note",
+                               "note": u"天裔是新种族：官方 CDN 与资料站都查不到可用图标键，界面用自绘阵营块，不拿别人的图凑数",
+                               "checkedAt": today}])
         })
 
     combos = []
@@ -345,7 +405,10 @@ def main():
                 u"英文原名：官方中文公告未给出，逐词硬造等于编造，一律留空",
                 u"阵营之外的可选种族：血精灵、兽人萨满之外的经典旧世组合等，官方本页没提就是没提",
                 u"种族数值平衡与实测改动：Beta 阶段官方只给描述句，不做推算",
-                u"种族图标：无限服新种族图标能否从官方 CDN 取得尚未证实，本页用首字色块不热链"
+                u"种族图标：暴雪官方 CDN 只查得到 7 个种族的图标键（亡灵用 race_undead_male，资料站用的 race_scourge_male 在 CDN 上是 403）；"
+                u"暗夜精灵与天裔取不到，继续用自绘块。另注：CDN 只有 race_*_male 男性图标键，女性角色图标未单独收录",
+                u"种族特长图标：40 条里 38 条拿到键（配对来自参考站的客户端解包，未逐条进游戏核对）；"
+                u"兽人的血性狂怒与斧类武器专精在该页上没出现，留空用自绘块，不靠猜配图标"
             ]
         },
         "factions": [

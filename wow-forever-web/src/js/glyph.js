@@ -12,15 +12,24 @@ window.Glyph = (function () {
   };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  /* 职业方块：职业色渐变 + 中文首字 */
-  function classTile(classId, cn) {
+  /* 方块通用外壳：自绘块垫底，本地转存的官方图标盖在上面。
+     图标取不到（文件缺失或 onerror）时自动露出自绘块，不留空白；也不热链第三方域名。 */
+  function tileWrap(placeholder, iconKey, mod) {
+    var img = iconKey ? '<img src="img/icons/' + encodeURIComponent(iconKey) + '.jpg" alt="" loading="lazy" ' +
+      'onerror="this.className=\'bad\'">' : '';
+    return '<span class="liw t' + (mod ? ' ' + mod : '') + '">' + placeholder + img + '</span>';
+  }
+
+  /* 职业方块：职业色渐变 + 中文首字（有本地图标时显示官方职业图标） */
+  function classTile(classId, cn, iconKey, mod) {
     var col = CLASS_COLOR[classId] || '#e0a96d';
-    return '<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">' +
+    var art = '<svg viewBox="0 0 40 40" aria-hidden="true">' +
       '<defs><linearGradient id="g' + classId + '" x1="0" y1="0" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + col + '" stop-opacity=".32"/>' +
       '<stop offset="1" stop-color="#12151a"/></linearGradient></defs>' +
       '<rect width="40" height="40" rx="6" fill="url(#g' + classId + ')" stroke="' + col + '" stroke-opacity=".5"/>' +
       '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="' + col + '" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
+    return tileWrap(art, iconKey, mod);
   }
 
   /* 副本示意图横幅。
@@ -62,13 +71,14 @@ window.Glyph = (function () {
   /* 种族方块：阵营色打底（部落偏暖红、联盟偏冷蓝），同阵营内按种子小幅浮动区分。
      无限服新种族的官方图标能不能取到尚未证实，所以一律自绘，不热链第三方图标。 */
   var FACTION_HUE = { horde: 8, alliance: 212 };
-  function raceTile(seed, faction, cn) {
+  function raceTile(seed, faction, cn, iconKey, mod) {
     var h = hash(seed);
     var base = FACTION_HUE[faction] === undefined ? 40 : FACTION_HUE[faction];
     var hue = (base + (h % 17) - 8 + 360) % 360;
-    return '<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">' +
+    var art = '<svg viewBox="0 0 40 40" aria-hidden="true">' +
       '<rect width="40" height="40" rx="6" fill="hsl(' + hue + ',30%,17%)" stroke="hsl(' + hue + ',46%,46%)" stroke-opacity=".7"/>' +
       '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="hsl(' + hue + ',62%,76%)" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
+    return tileWrap(art, iconKey, mod);
   }
   return { classTile: classTile, dungeonBanner: dungeonBanner, talentTile: talentTile, raceTile: raceTile, color: CLASS_COLOR };
 })();

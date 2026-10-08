@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""从 src/data/talents/*.json 派生「职业+中文名 → 本地图标键」映射，写 src/data/icons.json。
+"""从 src/data/talents/*.json 与 src/data/races.json 派生「归属|中文名 → 本地图标键」映射，写 src/data/icons.json。
 
-为什么要派生而不是手抄：图标键本来就在天赋数据里，手抄第二份必然和上游漂移。
-界面（技能书、术语速查、种族特长表）按 "classId|名称" 查这张表，查得到就用本地转存图，
-查不到就画自绘占位块——基础技能与种族特长我们没有可信图标来源，不拿别的图凑数。
-
+为什么要派生而不是手抄：图标键本来就在天赋与种族数据里，手抄第二份必然和上游漂移。
+界面（技能书、术语速查）按 classId|名称 查这张表，种族特长用 raceId|名称——同一个名字在不同
+种族是两回事，只按名字查会串图。查得到就用本地转存图，查不到就画自绘占位块：基础技能与没拿到
+键的特长没有可信图标来源，不拿别的图凑数。
 用法：python3 tools/build-icon-map.py
 """
 import datetime
@@ -36,6 +36,21 @@ def main():
                 if k in mapping and mapping[k] != key:
                     dup.append(k)
                 mapping[k] = key
+    # 种族特长：键用 raceId|特长名，和 glossary 里 racial 词条的 raceId 对齐
+    rc_path = os.path.join(DATA, "races.json")
+    if os.path.exists(rc_path):
+        rc = json.load(open(rc_path, encoding="utf-8"))
+        for x in rc.get("races") or []:
+            pool = list(x.get("traits") or [])
+            if x.get("subgroup"):
+                pool += list(x["subgroup"].get("traits") or [])
+            for t in pool:
+                if t.get("iconKey") and t.get("name"):
+                    mapping[x["id"] + "|" + t["name"]] = t["iconKey"]
+                    # 天裔词条的归属可能记在合并键上，两个子族都补一份
+                    if x["id"].startswith("skyborne"):
+                        mapping["skyborne|" + t["name"]] = t["iconKey"]
+
     missing = sorted({v for v in mapping.values() if v not in files})
     payload = {
         "meta": {

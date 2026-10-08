@@ -28,6 +28,20 @@ function checkRecord(kind, rec, sourcesField) {
   if (lvl === 'L0' && !rec.checkedAt && !srcs.some((s) => s.checkedAt)) {
     warns.push(`${kind} ${rec.id}：L0 但缺核对日期`);
   }
+  // 来源类型与域名必须对得上：粉丝站标成 official_cn 等于把第三方口径冒充官方口径
+  srcs.forEach((s) => {
+    const t = s.type || '', u = s.url || '';
+    if (!u) return;
+    if (t === 'official_cn' && !/wow\.blizzard\.cn/.test(u)) {
+      errs.push(`${kind} ${rec.id || ''}：official_cn 指向非官方中文域名 ${u}`);
+    }
+    if (t === 'official_en' && !/blizzard\.(com|cn)/.test(u)) {
+      errs.push(`${kind} ${rec.id || ''}：official_en 指向非暴雪域名 ${u}`);
+    }
+    if ((t === 'fan_db' || t === 'media_cn') && /wow\.blizzard\.cn/.test(u)) {
+      errs.push(`${kind} ${rec.id || ''}：官方中文页被标成 ${t}，来源分级写错了`);
+    }
+  });
   const FAN = /^https?:\/\/(www\.)?(wowhead|foreverchanges|wowclassicforever)/i;
   // 粉丝站链接可以作"人工参照"并存，但不能是 L0 的支撑：有官方中文来源时才允许留 L0
   if (lvl === 'L0' && srcs.some((x) => FAN.test(x.url || '')) && !srcs.some((x) => x.type === 'official_cn')) {
@@ -91,6 +105,10 @@ const cl = read('classes.json');
 if (cl.classes.length !== 9) errs.push(`classes：职业数 ${cl.classes.length}，应为 9`);
 cl.classes.forEach((c) => {
   if (!c.id || !c.cn) errs.push(`class ${c.id}：缺字段`);
+  if (c.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', c.iconKey + '.jpg'))) {
+    errs.push(`class ${c.id}：iconKey ${c.iconKey} 本地没有文件，跑 tools/fetch-icons.py 补`);
+  }
+  checkRecord('class', c);
 });
 fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
   if (f.charAt(0) === '_') return;
@@ -212,8 +230,14 @@ const raceIds = new Set();
   all.forEach((t) => {
     if (!t.name || !t.quote) errs.push(`races ${x.id}：特长缺名称或整句`);
     if (t.name && t.quote && t.quote.indexOf(t.name) < 0) errs.push(`races ${x.id}：特长「${t.name}」不在整句里，疑似串行`);
+    if (t.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', t.iconKey + '.jpg'))) {
+      errs.push(`races ${x.id}/${t.name}：iconKey ${t.iconKey} 本地没有文件，跑 tools/fetch-icons.py 补`);
+    }
   });
   checkRecord('races', x);
+  if (x.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', x.iconKey + '.jpg'))) {
+    errs.push(`races ${x.id}：iconKey ${x.iconKey} 本地没有文件，跑 tools/fetch-icons.py 补`);
+  }
 });
 if ((rc.classOrder || []).length !== 9) errs.push(`races：classOrder 是 ${(rc.classOrder || []).length} 列，矩阵应覆盖 9 个职业`);
 (rc.classOrder || []).forEach((cid) => { if (!classIds.has(cid)) errs.push(`races：classOrder 指向未知职业 ${cid}`); });
@@ -266,6 +290,16 @@ if (!fs.existsSync(icPath)) {
         if (n.iconKey && n.nameCn) want[cid + '|' + n.nameCn] = n.iconKey;
       }));
     });
+  const rcForIcons = JSON.parse(fs.readFileSync(path.join(ROOT, 'races.json'), 'utf8'));
+  (rcForIcons.races || []).forEach((x) => {
+    const pool = (x.traits || []).concat((x.subgroup && x.subgroup.traits) || []);
+    pool.forEach((t) => {
+      if (t.iconKey && t.name) {
+        want[x.id + '|' + t.name] = t.iconKey;
+        if (x.id.indexOf('skyborne') === 0) want['skyborne|' + t.name] = t.iconKey;
+      }
+    });
+  });
   const got = ic.map || {};
   Object.keys(want).forEach((k) => {
     if (got[k] !== want[k]) errs.push(`icons.json 与天赋数据不一致：${k} 应为 ${want[k]}（重跑 build-icon-map.py）`);

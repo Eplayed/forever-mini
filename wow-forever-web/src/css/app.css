@@ -240,6 +240,10 @@ table.mtx button.ch.on{color:var(--gold);border-color:var(--line);background:var
 /* 列表里的图标格：自绘占位块垫底，本地转存的官方图标盖在上面，图缺了自动露出占位 */
 .liw{position:relative;display:inline-block;width:26px;height:26px;vertical-align:middle;flex:0 0 auto}
 .liw.sm{width:18px;height:18px;margin-right:6px}
+/* 职业 / 种族方块：默认 34，lg 给结果卡，sm 给紧凑列表 */
+.liw.t{width:34px;height:34px}
+.liw.t.lg{width:52px;height:52px}
+.liw.t.sm{width:22px;height:22px}
 .liw > svg,.liw > img{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:4px}
 .liw > img{object-fit:cover}
 .liw > img.bad{opacity:0}

@@ -5,9 +5,9 @@
   "levelCap": 60,
   "source": [
    {
-    "type": "official_cn",
+    "type": "fan_db",
     "url": "https://wowclassicforever.info/talent/warrior/",
-    "note": "参考站页脚口径：经典三系 51 点结构；本站结构字段仍需自行实测确认",
+    "note": "参考站页脚口径：经典三系 51 点结构；本站结构字段仍需自行实测确认（2026-10-08 纠正：参考站是粉丝站，不是官方中文，类型由 official_cn 改为 fan_db）",
     "checkedAt": "2026-10-07"
    }
   ]
@@ -22,7 +22,16 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 54,
-   "nameVerified": 16
+   "nameVerified": 16,
+   "iconKey": "class_warrior",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_warrior 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "paladin",
@@ -33,7 +42,16 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 0
+   "nameVerified": 0,
+   "iconKey": "class_paladin",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_paladin 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "hunter",
@@ -44,7 +62,16 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 50,
-   "nameVerified": 28
+   "nameVerified": 28,
+   "iconKey": "class_hunter",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_hunter 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "rogue",
@@ -55,7 +82,16 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 53,
-   "nameVerified": 0
+   "nameVerified": 0,
+   "iconKey": "class_rogue",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_rogue 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "priest",
@@ -66,7 +102,16 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 53,
-   "nameVerified": 7
+   "nameVerified": 7,
+   "iconKey": "class_priest",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_priest 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "shaman",
@@ -77,7 +122,16 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 50,
-   "nameVerified": 0
+   "nameVerified": 0,
+   "iconKey": "class_shaman",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_shaman 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "mage",
@@ -88,7 +142,16 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 54,
-   "nameVerified": 0
+   "nameVerified": 0,
+   "iconKey": "class_mage",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_mage 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "warlock",
@@ -99,7 +162,16 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 0
+   "nameVerified": 0,
+   "iconKey": "class_warlock",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_warlock 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   },
   {
    "id": "druid",
@@ -110,7 +182,16 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 38
+   "nameVerified": 38,
+   "iconKey": "class_druid",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/zh-hans/talents/",
+     "note": "图标文件名 class_druid 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "checkedAt": "2026-10-08"
+    }
+   ]
   }
  ]
 }
