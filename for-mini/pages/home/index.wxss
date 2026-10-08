@@ -1,0 +1,105 @@
+.hero {
+  padding: 24rpx 4rpx 32rpx;
+}
+
+.hero-title {
+  font-size: 46rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: var(--gold);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.cov-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.cov-label {
+  width: 176rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.cov-bar {
+  flex: 1;
+  height: 14rpx;
+  background: var(--panel-2);
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.cov-fill {
+  height: 100%;
+  border-radius: 8rpx;
+}
+
+.cov-L0 { background: var(--ok); }
+.cov-L1 { background: var(--blue); }
+.cov-L2 { background: var(--warn); }
+.cov-L3 { background: var(--lead); }
+
+.cov-num {
+  width: 96rpx;
+  text-align: right;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.cov-note {
+  margin-top: 12rpx;
+}
+
+.module {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.module-main {
+  flex: 1;
+}
+
+.module-name {
+  font-size: 28rpx;
+}
+
+.module-off .module-name {
+  color: var(--txt-dim);
+}
+
+.module-state {
+  font-size: 22rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid var(--line);
+}
+
+.state-ok {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.state-warn {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+.open-item {
+  font-size: 24rpx;
+  color: var(--txt-dim);
+  padding: 8rpx 0 8rpx 20rpx;
+  border-left: 4rpx solid var(--warn);
+  margin-bottom: 10rpx;
+}
+
+.open-more {
+  margin-top: 8rpx;
+}

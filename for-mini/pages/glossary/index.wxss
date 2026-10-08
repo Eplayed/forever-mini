@@ -1,0 +1,153 @@
+.search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.search-input {
+  flex: 1;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  color: var(--txt);
+  font-size: 26rpx;
+}
+
+.fav-btn {
+  margin-left: 14rpx;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.fav-on {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.chips {
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.chip {
+  display: inline-block;
+  margin-right: 12rpx;
+  padding: 8rpx 20rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.chip-on {
+  color: var(--bg);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.term {
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 14rpx;
+  margin-bottom: 14rpx;
+  overflow: hidden;
+}
+
+.term-open {
+  border-color: var(--gold-deep);
+}
+
+.term-head {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 22rpx;
+}
+
+.term-main {
+  flex: 1;
+}
+
+.term-cn {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.term-en {
+  font-size: 24rpx;
+  color: var(--blue);
+}
+
+.term-en-missing {
+  color: var(--lead);
+}
+
+.term-side {
+  text-align: right;
+  margin-right: 16rpx;
+}
+
+.term-tag {
+  margin-top: 6rpx;
+}
+
+.fav {
+  width: 56rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: var(--txt-dim);
+}
+
+.fav-active {
+  color: var(--gold);
+}
+
+.term-detail {
+  padding: 0 22rpx 20rpx;
+  border-top: 1rpx solid var(--line);
+}
+
+.detail-actions {
+  padding: 16rpx 0;
+}
+
+.btn {
+  padding: 10rpx 24rpx;
+  border: 1rpx solid var(--gold);
+  border-radius: 10rpx;
+  color: var(--gold);
+  font-size: 24rpx;
+}
+
+.prov {
+  background: var(--panel-2);
+  border-radius: 10rpx;
+  padding: 14rpx 16rpx;
+  margin-bottom: 10rpx;
+}
+
+.prov-type {
+  font-size: 22rpx;
+  color: var(--ok);
+}
+
+.prov-note {
+  font-size: 24rpx;
+  margin: 4rpx 0;
+}
+
+.prov-url {
+  word-break: break-all;
+}
+
+.empty {
+  text-align: center;
+}
+
+.truncated {
+  text-align: center;
+  padding: 10rpx 0 20rpx;
+}

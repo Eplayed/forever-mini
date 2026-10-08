@@ -1,0 +1,51 @@
+<view class="wrap">
+  <view wx:if="{{offline}}" class="notice">
+    当前显示的是{{sourceText}}（基准 {{baseline}}），可能不是最新核对结果。
+  </view>
+
+  <view class="search">
+    <input class="search-input" placeholder="搜中文名或英文名，例如「瞄准射击」" value="{{kw}}" bindinput="onKw" confirm-type="search" />
+    <view class="fav-btn {{onlyFav ? 'fav-on' : ''}}" bindtap="onToggleFavOnly">只看收藏</view>
+  </view>
+
+  <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="chip {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">
+      {{item.name}} {{item.count}}
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{loaded && list.length === 0}}" class="card empty">
+    <view>没有匹配的词条。</view>
+    <view class="muted">换个关键词试试，或切回「全部」。词条只收录官方中文已核过的名称，没收录的不机翻补上。</view>
+  </view>
+
+  <view class="term {{expandedId === item.id ? 'term-open' : ''}}" wx:for="{{list}}" wx:key="id">
+    <view class="term-head" data-id="{{item.id}}" bindtap="onToggleDetail">
+      <view class="term-main">
+        <view class="term-cn">{{item.cn}}</view>
+        <view class="term-en {{item.en ? '' : 'term-en-missing'}}">{{item.en || '英文名待补'}}</view>
+      </view>
+      <view class="term-side">
+        <view class="badge badge-{{item.level}}">{{item.levelName}}</view>
+        <view class="muted term-tag">{{item.classCn}} · {{item.kindKey}}</view>
+      </view>
+      <view class="fav {{item.fav ? 'fav-active' : ''}}" data-id="{{item.id}}" catchtap="onFav">{{item.fav ? '★' : '☆'}}</view>
+    </view>
+
+    <view wx:if="{{expandedId === item.id}}" class="term-detail">
+      <view class="row detail-actions">
+        <view class="btn" data-id="{{item.id}}" catchtap="onCopy">复制词条</view>
+        <view class="spacer"></view>
+        <view class="muted">{{item.prov.length}} 条来源记录</view>
+      </view>
+      <view class="prov" wx:for="{{item.prov}}" wx:for-item="src" wx:key="url" data-url="{{src.url}}" catchtap="onOpenSource">
+        <view class="prov-type">{{src.type}}</view>
+        <view class="prov-note">{{src.note}}</view>
+        <view class="muted prov-url">{{src.url}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{truncated}}" class="muted truncated">结果过多，仅显示前 {{list.length}} 条，请缩小关键词范围。</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

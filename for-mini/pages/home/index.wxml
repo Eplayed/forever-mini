@@ -1,0 +1,52 @@
+<view class="wrap">
+  <view wx:if="{{offline}}" class="notice">
+    当前显示的是{{sourceText}}，可能不是最新核对结果。正式数据需联网从资料站基底同步。
+  </view>
+
+  <view class="hero">
+    <view class="hero-title">无限资料</view>
+    <view class="muted">全职业天赋与技能中英对照 · 每条数据可溯源</view>
+  </view>
+
+  <view class="card" wx:if="{{loaded}}">
+    <view class="row">
+      <view class="card-title">数据完整度</view>
+      <view class="spacer"></view>
+      <view class="muted">{{sourceText}}</view>
+    </view>
+    <view class="cov-row" wx:for="{{covList}}" wx:key="level">
+      <view class="cov-label">{{item.name}}</view>
+      <view class="cov-bar"><view class="cov-fill cov-{{item.level}}" style="width:{{item.pct}}%"></view></view>
+      <view class="cov-num">{{item.count}}</view>
+    </view>
+    <view class="muted cov-note">
+      共 {{meta.counts.terms}} 条成品词条、{{meta.counts.dungeons}} 座副本、{{meta.counts.talentNodes}} 个天赋节点。
+      天赋节点里 {{meta.counts.talentNameVerified}} 个中文名与官网一致，其余标「待实测」。
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">模块</view>
+    <view class="module {{item.ready ? '' : 'module-off'}}" wx:for="{{modules}}" wx:key="id" data-index="{{index}}" bindtap="onModuleTap">
+      <view class="module-main">
+        <view class="module-name">{{item.name}}</view>
+        <view class="muted">{{item.desc}}</view>
+      </view>
+      <view class="module-state {{item.ready ? 'state-ok' : 'state-warn'}}">{{item.ready ? '可用' : '待补'}}</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{loaded}}">
+    <view class="card-title">还没确认的</view>
+    <view class="open-item" wx:for="{{meta.openQuestions}}" wx:key="*this">{{item}}</view>
+    <view class="muted open-more">以上缺口按官方稿与实测逐条回填，缺数据显示「待实测」，不机翻、不编造。</view>
+  </view>
+
+  <view class="card" wx:if="{{loaded}}">
+    <view class="card-title">上线与基准</view>
+    <view class="muted">数据基准：{{meta.dataBaseline.build}}</view>
+    <view class="muted">核对日期：{{meta.checkedAt}} · 预计上线：{{meta.launch}}</view>
+  </view>
+
+  <view class="foot" bindtap="onDisclaimer">{{meta.disclaimer}}（点击查看声明）</view>
+</view>

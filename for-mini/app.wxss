@@ -1,0 +1,107 @@
+/* 设计令牌与资料站 src/css/app.css 同源，取自 docs/UI.md。小程序侧只用 rpx 适配。 */
+page {
+  --bg: #0e1013;
+  --panel: #171a1f;
+  --panel-2: #1e222a;
+  --line: #2b3038;
+  --txt: #e7e9ee;
+  --txt-dim: #98a1af;
+  --gold: #e0a96d;
+  --gold-deep: #b8813f;
+  --blue: #6fa8ff;
+  --ok: #4caf72;
+  --warn: #d9a13b;
+  --lead: #7f8ea8;
+  --bad: #c9564a;
+
+  background: var(--bg);
+  color: var(--txt);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+button {
+  border: 0;
+}
+
+button::after {
+  border: 0;
+}
+
+.wrap {
+  padding: 24rpx 28rpx 60rpx;
+}
+
+.card {
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.muted {
+  color: var(--txt-dim);
+  font-size: 24rpx;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* 完整度徽标：全站统一样式，不许各页自创 */
+.badge {
+  display: inline-block;
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid var(--line);
+  font-size: 20rpx;
+  line-height: 1.8;
+}
+
+.badge-L0 {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.badge-L1 {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.badge-L2 {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+.badge-L3 {
+  color: var(--lead);
+  border-style: dashed;
+}
+
+.notice {
+  background: rgba(217, 161, 59, 0.12);
+  border: 1rpx solid var(--warn);
+  color: var(--warn);
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.foot {
+  color: var(--txt-dim);
+  font-size: 22rpx;
+  text-align: center;
+  padding: 32rpx 0 8rpx;
+}

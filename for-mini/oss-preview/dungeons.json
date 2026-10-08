@@ -1,0 +1,544 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-07",
+  "note": "掉落与 BOSS 技能未经实测的一律留空并标 L2/L3，不编造。",
+  "updatedAt": "2026-10-07"
+ },
+ "newDungeons": [
+  {
+   "id": "hall-of-thanes",
+   "nameCn": "领主大厅",
+   "nameEn": "Hall of Thanes",
+   "nameCnConflict": "诸王大厅",
+   "kind": "new",
+   "levelRange": "13-18",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "英文名见于官方 9 座新本名单",
+     "checkedAt": null
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "note": "Beta 公告给出的官方中文名「领主大厅」与等级区间",
+     "checkedAt": null
+    },
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同一座本 17173 译作「诸王大厅」，构成译名冲突",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 13-18 来自该库，需实测确认",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "ruins-of-lordaeron",
+   "nameCn": "洛丹伦废墟",
+   "nameEn": "Ruins of Lordaeron",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "15-20",
+   "bosses": [],
+   "route": [],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": "2026-10-07"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "note": "官方中文名与等级区间",
+     "checkedAt": "2026-10-07"
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1tJhh6UERb/",
+     "note": "玩家实测：隐藏 BOSS 与刷新位置，6861 播放/05:11",
+     "checkedAt": "2026-10-07"
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1uFet62Ei9/",
+     "note": "玩家实测：BOSS 掉落（不完全版），6299/00:42，2026-09-19",
+     "checkedAt": "2026-10-07"
+    }
+   ]
+  },
+  {
+   "id": "whelgars-excavation",
+   "nameCn": "挖掘场：湿地",
+   "nameEn": "Whelgar's Excavation",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "26-31",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方回顾写 Whelgar's Excavation",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "该库与 Wowhead 新闻标题写作 Excavation Site: Wetlands，英文名冲突",
+     "checkedAt": null
+    },
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "中文名「挖掘场：湿地」",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV15pHi6SE5i/",
+     "note": "2026-10-03 实测+攻略：简介含跳怪路线、潜伏者灭团点、12格背包与PVP饰品二选一（1611/04:57）",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "city-of-dalaran",
+   "nameCn": "达拉然",
+   "nameEn": "City of Dalaran",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "28-33",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 28-33",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1ZnYk6eEZ7/",
+     "note": "达拉然副本实机，7.5 万播放/09:35",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "the-drowned-city",
+   "nameCn": null,
+   "nameEn": "The Drowned City",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "35-40",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 35-40",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1w3Yk6rEho/",
+     "note": "沉没之城实机，7.7 万播放",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "kroldok-stronghold",
+   "nameCn": null,
+   "nameEn": "Krol'dok Stronghold",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "40-45",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 40-45",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "alcaz-prison",
+   "nameCn": null,
+   "nameEn": "Alcaz Prison",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "48-53",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 48-53",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "blackmaw-hold",
+   "nameCn": null,
+   "nameEn": "Blackmaw Hold",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "55-60",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 55-60",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "shapers-terrace",
+   "nameCn": null,
+   "nameEn": "Shaper's Terrace",
+   "nameCnConflict": null,
+   "kind": "new",
+   "levelRange": "58-60",
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "note": "官方英文名单",
+     "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://foreverchanges.pro/dungeons",
+     "note": "等级区间 58-60",
+     "checkedAt": null
+    }
+   ]
+  }
+ ],
+ "classicDungeons": [
+  {
+   "id": "razor-krendor",
+   "nameCn": "剃刀高地",
+   "nameEn": "The Razor Krendor",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "17173 蓝贴转载的 14 座本中文名单之一",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "uldaman",
+   "nameCn": "奥达曼",
+   "nameEn": "Uldaman",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    },
+    {
+     "type": "open_data",
+     "url": "https://github.com/cmangos/classic-db",
+     "note": "1.12 国服中文 locale 可校对装备与怪物名",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "ragefire-chasm",
+   "nameCn": "怒焰裂谷",
+   "nameEn": "Ragefire Chasm",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "wailing-caverns",
+   "nameCn": "哀嚎洞穴",
+   "nameEn": "The Wailing Caverns",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "deathmine",
+   "nameCn": "死亡矿井",
+   "nameEn": "The Deadmines",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1FvaZ67E7h/",
+     "note": "死亡矿井完整路线实测",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV19qa76XEHL/",
+     "note": "20 级防战单刷死亡矿井，4800 播放",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "shadowfang-keep",
+   "nameCn": "影牙城堡",
+   "nameEn": "Shadowfang Keep",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "the-stocks",
+   "nameCn": "监狱",
+   "nameEn": null,
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上；官方 Beta 公告也提到「监狱」",
+     "checkedAt": null
+    },
+    {
+     "type": "video",
+     "url": "https://www.bilibili.com/video/BV1ze3x6NETC/",
+     "note": "单刷监狱实测",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "blackfathom-deeps",
+   "nameCn": "黑暗深渊",
+   "nameEn": "Blackfathom Deeps",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "gnomeregan",
+   "nameCn": "诺莫瑞根",
+   "nameEn": "Gnomeregan",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "scarlet-monastery",
+   "nameCn": "血色修道院",
+   "nameEn": "Scarlet Monastery",
+   "kind": "classic",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "media_cn",
+     "url": "https://news.17173.com/content/10042026/085128391.shtml",
+     "note": "同上",
+     "checkedAt": null
+    }
+   ]
+  }
+ ],
+ "raids": [
+  {
+   "id": "barrow-deeps",
+   "nameCn": null,
+   "nameEn": "The Barrow Deeps",
+   "kind": "raid",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/raids/barrow-deeps",
+     "note": "参考站称首个团本；官方未公布中文名与 BOSS 数",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "hyjal-summit",
+   "nameCn": null,
+   "nameEn": "Hyjal Summit",
+   "kind": "raid",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/raids",
+     "note": "参考站列为 20 人团本，官方未证实",
+     "checkedAt": null
+    }
+   ]
+  },
+  {
+   "id": "onyxias-lair",
+   "nameCn": null,
+   "nameEn": "Onyxia's Lair",
+   "kind": "raid",
+   "levelRange": null,
+   "bosses": [],
+   "route": [],
+   "level": "L3",
+   "provenance": [
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/raids",
+     "note": "参考站列为 40 人团本，官方未证实",
+     "checkedAt": null
+    }
+   ]
+  }
+ ]
+}

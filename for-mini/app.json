@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/glossary/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "无限资料",
+    "navigationBarBackgroundColor": "#0e1013",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0e1013",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#98a1af",
+    "selectedColor": "#e0a96d",
+    "backgroundColor": "#171a1f",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/glossary/index",
+        "text": "中英速查"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
