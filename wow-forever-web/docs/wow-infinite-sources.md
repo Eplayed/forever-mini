@@ -308,3 +308,49 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 ### 7.7 竞品监测（顺手要盯的四家）
 
 `pigtogo.cn/talents/forever/`（中文无限天赋模拟器，JS 壳未验）、百家号 2026-09-14 那篇"可交互天赋树模拟器（公众号直达版）"、App Store `id1593368066`（WoW Forever Talent Calculator）、Wowhead 自家计算器。结论同第五节：**资料广度不是卖点，中文聚合 + 微信内随手打开 + 清单可勾选可分享才是。**
+
+## 八、2026-10-08 复核（联网实测，含两个新发现）
+
+### 8.1 可达性复测
+
+| 站 | 状态 | 备注 |
+| --- | --- | --- |
+| `wowclassicforever.info` | 200，275 KB | 仍在更新，含 `/beta-datamine/methodology` |
+| `www.wowhead.com/classic/forever` | **403** | 脚本抓取仍被拦，只能人工看 |
+| `foreverchanges.pro/dungeons` | 200，158 KB | 可读 |
+| `www.fengshen.cn/wuxian/` | 200 | 我们的天赋源 A |
+| `nieyi.cn` | 200（**必须用不带 www 的域名**，`www.nieyi.cn` 证书 SAN 不匹配会报 SSL 错） | 我们的天赋源 B，页面 3.9 MB |
+| `pigtogo.cn/talents/forever/` | 200，仅 4.4 KB | 仍是 JS 壳，内容未证实 |
+| `wow.52pk.com/new_tf.shtml` | 200，仅 2.1 KB | 同上，低质壳 |
+| `www.lfcarry.com/` | 200，177 KB | 攻略页，带货代练 |
+
+### 8.2 新站：`wow.gg`（此前未收录，值得盯）
+
+有中文站 `wow.gg/zh-cn`，含无限服前瞻板块（如"元素萨满 — 攻略（Beta 测试）"）。两个关键点：
+
+1. **提供公开数据接口**：页面自述"Public API for AI agents … list of datasets — no key, GET only"，条款写 **CC BY 4.0**。这是我们见到的第一个带明确再授权条款的第三方数据接口。
+2. 但页面**没有说明底层数据怎么来的**（客户端解包 / 官方公告 / 人工整理都没写），副本与 Boss 机制是纯文本 Markdown，无在线天赋模拟器。
+
+用法边界：CC BY 4.0 允许引用（须署名），但**它自己的来源不明**，所以仍按 D 类线索处理——可以拿来对存在性、查漏，不能当事实源，也不能整库搬。署名要求若将来引用需落实。
+
+### 8.3 重要线索：层级点数门槛，两个中文源口径一致
+
+我们一直把 `rules.tierUnlockCost` 留成 `null`（硬规矩 5：未核实不做解锁判定）。本次读到两个独立来源给出**同一条规则**：
+
+- `fengshen.cn/wuxian/warrior.php` 页面原文：**"规则：10 级获得第 1 点，之后每升 1 级获得 1 点。天赋每投入 5 点解锁下一排，部分天赋还需前置天赋点满。里程碑天赋在 11 / 16 / 21 / 31 点各开放一个"**
+- `nieyi.cn/f/talents/warrior.html` 前端代码：`label.classList.toggle('unlocked', points >= row * 5)` —— 即第 N 排需在该系投满 `N × 5` 点
+
+两者与经典旧世 60 级天赋树的标准机制（各排门槛 5 / 10 / 15 / 20）一致。**但这仍是两个粉丝工具的互相印证，不是官方来源**，且我们的树是 7 行（比经典 5 行多），外推到 25 / 30 的部分没有依据。
+
+处置建议（未执行，待拍板）：不擅自填 `tierUnlockCost`。可选路径是先在天赋页把这条规则作为**待实测说明**展示（"两个第三方工具口径一致：每排需投满 5 的倍数解锁，本站未核实"），等进 Beta 或官方公布后再决定是否启用解锁判定。
+
+### 8.4 参考站自述的数据来源（回答"他们的数据怎么来的"）
+
+`wowclassicforever.info/beta-datamine/methodology` 原文要点：
+
+- 对比两个客户端构建：**Forever beta `1.60.1.70170`** 与 **Classic Era `1.15.9.69722`**，用后者作基准过滤掉探索时代内容。
+- "新"的判定是**数据库 ID 唯一性**："New: the ID is in the Forever client and in none of the Era tables we compare with."；排除未命名与占位条目，"旧名新 ID"的重制项目单列，避免统计虚高。
+- 分组是站长自己写的规则："read a group as a strong hint, not a list of drops."（把分组当成强提示，不是掉落清单），实际靠对英文名做正则关键词匹配归类。
+- 明确列出客户端测不到的：**Beta 内容会变或消失**、**"These tables don't say where an item drops or who sells it."**（掉落来源与 NPC 卖不卖，客户端里没有）、纯服务端数据缺失、任务表只有 ID 没有文本（任务文案来自服务器）、**中文翻译有滞后，未译时直接显示英文原名**。
+
+这条对我们最有用：连最接近数据库的粉丝站都拿不到掉落来源，**我们"掉落不写百分比、缺就写待实测"不是能力不足，是这个阶段的客观边界**。
