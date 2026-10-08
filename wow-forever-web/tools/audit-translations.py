@@ -103,16 +103,32 @@ def main():
     args = parser.parse_args()
 
     glossary = json.load(io.open(os.path.join(DATA, "glossary.json"), encoding="utf-8"))
-    items = glossary["items"]
+    items = [{"src": "术语", "id": x["id"], "cn": x.get("cn"), "cls": x.get("classId") or x.get("kind"),
+              "level": x.get("level"), "prov": x.get("provenance", [])} for x in glossary["items"]]
+
+    # 副本名与系统卡片名同样是对外展示的"官方中文"，必须一起回原文核对
+    dungeons = json.load(io.open(os.path.join(DATA, "dungeons.json"), encoding="utf-8"))
+    for key in ("newDungeons", "classicDungeons", "raids"):
+        for x in dungeons.get(key, []):
+            if x.get("nameCn"):
+                items.append({"src": "副本", "id": x["id"], "cn": x["nameCn"], "cls": key,
+                              "level": x.get("level"), "prov": x.get("provenance", [])})
+    systems = json.load(io.open(os.path.join(DATA, "systems.json"), encoding="utf-8"))
+    for g in systems.get("groups", []):
+        for x in g.get("items", []):
+            if x.get("nameCn"):
+                items.append({"src": "系统", "id": x["id"], "cn": x["nameCn"], "cls": g.get("label"),
+                              "level": x.get("level"), "prov": x.get("provenance", [])})
+    raw_items = glossary["items"]
 
     urls = []
     for it in items:
-        for prov in it.get("provenance", []):
+        for prov in it["prov"]:
             if (prov.get("type") or "").startswith("official") and prov.get("url"):
                 if prov["url"] not in urls:
                     urls.append(prov["url"])
 
-    print("词条 %d 条，官方来源页 %d 个" % (len(items), len(urls)))
+    print("待核对名称 %d 条（含副本与系统名），官方来源页 %d 个" % (len(items), len(urls)))
     pages, page_status = {}, {}
     for url in urls:
         if args.no_fetch:
@@ -126,18 +142,21 @@ def main():
 
     judged = []
     hits, misses, no_source, loose_hits = [], [], [], []
+    expected_unofficial = []
     exc_path = os.path.join(DATA, "audit-exceptions.json")
     exceptions = {}
     if os.path.exists(exc_path):
         exceptions = {e["id"]: e for e in json.load(io.open(exc_path, encoding="utf-8")).get("items", [])}
     for it in items:
-        cn = (it.get("cn") or "").strip()
-        srcs = [p.get("url") for p in it.get("provenance", []) if (p.get("type") or "").startswith("official")]
+        cn = (it["cn"] or "").strip()
+        srcs = [p.get("url") for p in it["prov"] if (p.get("type") or "").startswith("official")]
         if not cn:
             no_source.append((it, "词条没有中文名"))
             continue
         if not srcs:
-            no_source.append((it, "没有官方来源 URL"))
+            # L0/L1 声称官方却给不出官方链接才是问题；L2/L3 本来就用转载/开放数据，属预期
+            bucket = no_source if it.get("level") in ("L0", "L1") else expected_unofficial
+            bucket.append((it, "没有官方来源 URL（%s）" % (it.get("level") or "L3")))
             continue
         found_in, loose = None, False
         for url in srcs:
@@ -164,8 +183,8 @@ def main():
     lines = []
     lines.append("# 译名体检报告 · %s（wow-data）" % today)
     lines.append("")
-    lines.append("脚本：`python3 tools/audit-translations.py`。做法是把每条词条的中文名，"
-                 "拿回它自己在 `provenance` 里声明的官方来源页做逐字包含比对。"
+    lines.append("脚本：`python3 tools/audit-translations.py`。做法是把每个对外展示的中文名（术语词条、"
+                 "副本名、系统名）拿回它自己在 `provenance` 里声明的官方来源页做逐字包含比对。"
                  "**只读核对，不改数据。**")
     lines.append("")
     lines.append("## 结果")
@@ -177,7 +196,10 @@ def main():
     lines.append("| 去掉汉字间排版空格才命中（要人眼确认） | %d |" % len(loose_hits))
     lines.append("| **未命中（要人工回原文看）** | %d |" % len(misses))
     lines.append("| 已人工判定并留痕（见 audit-exceptions.json） | %d |" % len(judged))
-    lines.append("| 缺中文名或缺官方来源 | %d |" % len(no_source))
+    lines.append("| **声称官方却核不到（L0/L1 缺官方链接）** | %d |" % len(no_source))
+    lines.append("| 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | %d |" % len(expected_unofficial))
+    lines.append("")
+    lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名。")
     rate = len(hits) * 100.0 / max(len(items), 1)
     lines.append("| 命中率 | %.1f%% |" % rate)
     lines.append("")
@@ -186,7 +208,7 @@ def main():
     lines.append("| 状态 | 页面 | 承担词条 |")
     lines.append("| --- | --- | --- |")
     for url in urls:
-        n = len([1 for it in items for p in it.get("provenance", []) if p.get("url") == url])
+        n = len([1 for it in items for p in it["prov"] if p.get("url") == url])
         lines.append("| %s | %s | %d |" % (page_status.get(url, "?"), url, n))
     lines.append("")
     if loose_hits:
@@ -198,7 +220,7 @@ def main():
         lines.append("| 词条 | 职业 | 出处 |")
         lines.append("| --- | --- | --- |")
         for it, url in loose_hits:
-            lines.append("| %s | %s | %s |" % (it.get("cn"), it.get("classId") or "种族", url))
+            lines.append("| %s | %s %s | %s |" % (it["cn"], it["src"], it["cls"] or "", url))
         lines.append("")
     if judged:
         lines.append("## 已人工判定并留痕")
@@ -208,8 +230,8 @@ def main():
         lines.append("| 词条 | 结论 | 官方原句 | 判定日期 |")
         lines.append("| --- | --- | --- | --- |")
         for it, e in judged:
-            lines.append("| %s | %s | %s | %s |" % (it.get("cn"), e.get("verdict"),
-                                                    e.get("quote"), e.get("decidedAt")))
+            lines.append("| %s（%s） | %s | %s | %s |" % (it["cn"], it["src"], e.get("verdict"),
+                                                        e.get("quote"), e.get("decidedAt")))
         lines.append("")
     if misses:
         lines.append("## 未命中清单（逐条待人工核对）")
@@ -217,17 +239,33 @@ def main():
         lines.append("未命中不等于词条错，常见原因是：官方页用的是另一个写法、词条是从同系列另一篇文章采的、"
                      "或页面改版删了这段。**但在人工确认之前，这些条目的 L0 身份不可信。**")
         lines.append("")
-        lines.append("| 词条 | 职业 | 类型 | 声明来源 |")
-        lines.append("| --- | --- | --- | --- |")
+        lines.append("| 名称 | 出处 | 标识 | 当前级别 | 声明来源 |")
+        lines.append("| --- | --- | --- | --- | --- |")
         for it, srcs in misses:
-            lines.append("| %s | %s | %s | %s |" % (it.get("cn"), it.get("classId") or "种族",
-                                                    it.get("kind"), "<br>".join(srcs)))
+            lines.append("| %s | %s | %s | %s | %s |" % (it["cn"], it["src"], it["id"],
+                                                         it.get("level") or "L3", "<br>".join(srcs)))
+        lv = set(it.get("level") for it, _ in misses)
+        if lv <= {"L2", "L3"}:
+            lines.append("")
+            lines.append("这四条当前都标 L2/L3，界面显示\"待实测\"，**没有在冒充官方**；"
+                         "列在这里是因为它们的中文名来自转载/英文页，等官方中文稿或实测后再定名。")
+        lines.append("")
+    if expected_unofficial:
+        lines.append("## 本来就标着非官名的条目（预期，不需要处理）")
+        lines.append("")
+        lines.append("这些中文名来自转载、开放数据或第三方挖掘，条目本身标的是 L2/L3，界面显示\"待实测\"，"
+                     "不属于\"冒充官方\"。留着这份清单是为了上线后逐条回官方页升级。")
+        lines.append("")
+        lines.append("| 名称 | 出处 | 级别 |")
+        lines.append("| --- | --- | --- |")
+        for it, why in expected_unofficial:
+            lines.append("| %s | %s %s | %s |" % (it["cn"], it["src"], it["id"], it.get("level")))
         lines.append("")
     if no_source:
-        lines.append("## 结构不完整")
+        lines.append("## 声称官方却给不出官方链接（必须处理）")
         lines.append("")
         for it, why in no_source:
-            lines.append("- %s（%s）：%s" % (it.get("id"), it.get("cn"), why))
+            lines.append("- %s / %s（%s）：%s" % (it["src"], it["id"], it["cn"], why))
         lines.append("")
     lines.append("## 处置规则")
     lines.append("")
@@ -250,7 +288,7 @@ def main():
         lines.append("| 词条 | 职业 | 出处 |")
         lines.append("| --- | --- | --- |")
         for it, url in loose_hits:
-            lines.append("| %s | %s | %s |" % (it.get("cn"), it.get("classId") or "种族", url))
+            lines.append("| %s | %s %s | %s |" % (it["cn"], it["src"], it["cls"] or "", url))
         lines.append("")
     if misses:
         print("未命中前 10 条：" + "、".join(it.get("cn", "?") for it, _ in misses[:10]))

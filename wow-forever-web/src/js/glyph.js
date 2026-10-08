@@ -23,25 +23,33 @@ window.Glyph = (function () {
       '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="' + col + '" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
   }
 
-  /* 副本示意图：按种子生成天际线轮廓，不含任何游戏原画 */
-  function dungeonBanner(seed, label, sub) {
-    var h = hash(seed), w = 320, ht = 86;
-    var hue = h % 360, hue2 = (h >> 8) % 360;
-    var pts = [], n = 9, i;
+  /* 副本示意图横幅。
+     文字一律放在 HTML 里，不进 SVG —— 之前 SVG 用 preserveAspectRatio="none" 把 320 宽的
+     viewBox 拉到 1100+ 像素，连字一起横向拉变形，桌面端副本名全是糊的。
+     色相按副本类型给基准值，再按种子小幅浮动：同类副本看起来是一族，不是随机配色。 */
+  var DUNGEON_HUE = { new: 32, classic: 200, raid: 288 };
+  function dungeonBanner(seed, label, opts) {
+    opts = opts || {};
+    var h = hash(seed), w = 320, ht = 86, n = 9, i, pts = [];
+    var base = DUNGEON_HUE[opts.kind] === undefined ? 32 : DUNGEON_HUE[opts.kind];
+    var hue = (base + (h % 21) - 10 + 360) % 360;
     for (i = 0; i <= n; i++) {
       var v = ((h >> (i * 3)) & 31);
-      pts.push((w / n * i).toFixed(1) + ',' + (ht - 14 - (v % 18) - (i % 2 ? 0 : 6)).toFixed(1));
+      pts.push((w / n * i).toFixed(1) + ',' + (ht - 18 - (v % 20) - (i % 2 ? 0 : 8)).toFixed(1));
     }
-    return '<svg class="dbn" viewBox="0 0 ' + w + ' ' + ht + '" width="100%" height="' + ht + '" preserveAspectRatio="none" aria-hidden="true">' +
-      '<defs><linearGradient id="bg' + (h % 9999) + '" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0" stop-color="hsl(' + hue + ',34%,16%)"/>' +
-      '<stop offset="1" stop-color="hsl(' + hue2 + ',28%,8%)"/></linearGradient></defs>' +
-      '<rect width="' + w + '" height="' + ht + '" fill="url(#bg' + (h % 9999) + ')"/>' +
-      '<polygon points="0,' + ht + ' ' + pts.join(' ') + ' ' + w + ',' + ht + '" fill="hsl(' + hue + ',22%,26%)" fill-opacity=".85"/>' +
-      '<circle cx="' + (40 + h % 220) + '" cy="' + (18 + h % 12) + '" r="7" fill="hsl(' + hue + ',60%,72%)" fill-opacity=".55"/>' +
-      '<text x="12" y="' + (ht - 14) + '" font-size="15" font-weight="600" fill="#f0e6d6" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc(label || '') + '</text>' +
-      (sub ? '<text x="12" y="' + (ht - 2) + '" font-size="10.5" fill="#b9c0cc" font-family="ui-monospace,Menlo,monospace">' + esc(sub) + '</text>' : '') +
+    var gid = 'dbng' + (h % 9999);
+    var art = '<svg class="dbn-art" viewBox="0 0 ' + w + ' ' + ht + '" preserveAspectRatio="none" aria-hidden="true">' +
+      '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="hsl(' + hue + ',32%,18%)"/>' +
+      '<stop offset="1" stop-color="hsl(' + hue + ',26%,7%)"/></linearGradient></defs>' +
+      '<rect width="' + w + '" height="' + ht + '" fill="url(#' + gid + ')"/>' +
+      '<circle cx="' + (w - 46 - h % 44) + '" cy="21" r="8" fill="hsl(' + hue + ',58%,74%)" fill-opacity=".38"/>' +
+      '<polygon points="0,' + ht + ' ' + pts.join(' ') + ' ' + w + ',' + ht + '" fill="hsl(' + hue + ',20%,26%)" fill-opacity=".9"/>' +
       '</svg>';
+    return '<div class="dbn2"><span class="dbn2-shade"></span>' + art +
+      '<span class="dbn2-mark">示意图 · 非游戏原画</span>' +
+      '<span class="dbn2-txt"><span class="dbn2-n">' + esc(label || '未定名') + '</span>' +
+      (opts.sub ? '<span class="dbn2-e">' + esc(opts.sub) + '</span>' : '') + '</span></div>';
   }
 
   /* 图标缺失时的天赋格占位：按名字生成稳定色块 + 首字 */

@@ -126,11 +126,28 @@ input[type=search]{flex:1;min-width:180px}
 .node.conf{border-color:rgba(201,86,74,.65)}
 .node .cfl{position:absolute;right:2px;top:2px;width:0;height:0;
   border-left:6px solid transparent;border-top:6px solid var(--bad)}
-.dbn-wrap{margin:calc(-1 * var(--s4)) calc(-1 * var(--s4)) var(--s3);border-radius:var(--r-card) var(--r-card) 0 0;overflow:hidden}
-.dbn{display:block}
+/* 副本横幅：图形铺满、文字用 HTML 排版，避免 SVG 非等比缩放把字拉变形 */
+.dbn2{position:relative;height:96px;margin:calc(-1 * var(--s4)) calc(-1 * var(--s4)) var(--s3);
+  border-radius:var(--r-card) var(--r-card) 0 0;overflow:hidden;background:var(--panel-2)}
+.dbn-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dbn2-shade{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,16,19,0) 30%,rgba(14,16,19,.85) 100%)}
+.dbn2-txt{position:absolute;left:var(--s4);right:var(--s4);bottom:var(--s3);
+  display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap}
+.dbn2-n{font-size:19px;font-weight:700;letter-spacing:.5px;color:var(--txt);
+  text-shadow:0 1px 4px rgba(0,0,0,.75)}
+.dbn2-e{font:12px var(--font-mono);color:var(--txt-dim)}
+.dbn2-mark{position:absolute;top:var(--s2);right:var(--s3);padding:2px 8px;border-radius:999px;
+  font:10.5px var(--font-mono);color:var(--txt-dim);border:1px solid var(--line);
+  background:rgba(14,16,19,.45)}
 .dcardx{padding-top:0}
-.dcardx .dbn-wrap+.dcard{padding-top:var(--s4)}
+.dcardx .dbn2+.dcard{padding-top:var(--s3)}
+@media (max-width:600px){
+  .dbn2{height:82px}
+  .dbn2-n{font-size:17px}
+}
 .dcardx .card,.dcardx>div{margin-bottom:0}
+.dcardx .nm{display:flex;align-items:center;gap:6px;min-height:22px}
 .node .flag{position:absolute;left:2px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
 .node .vok{position:absolute;right:3px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 1px rgba(0,0,0,.5)}
 .node .nm{font-size:10.5px;line-height:1.25;word-break:break-all}

@@ -277,6 +277,34 @@ def test_talent(browser, base):
     ctx.close()
 
 
+def test_dungeon_banner(browser, base):
+    print("\n[4] 副本横幅渲染（防拉伸回归）")
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
+    page = ctx.new_page()
+    page.goto(base + "/dungeons.html", wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    geo = page.evaluate("""() => {
+      const t = document.querySelector('.dbn2-n'); const r = t.getBoundingClientRect();
+      const cs = getComputedStyle(t);
+      return { banners: document.querySelectorAll('.dbn2').length,
+               svgText: document.querySelectorAll('.dbn-art text').length,
+               w: r.width, h: r.height, font: parseFloat(cs.fontSize),
+               transform: cs.transform };
+    }""")
+    per_char = geo["w"] / max(len(page.evaluate("() => document.querySelector('.dbn2-n').textContent")), 1)
+    check("每张副本卡都有横幅", geo["banners"] >= 20, "%d 张" % geo["banners"])
+    check("文字不在 SVG 里（不会被非等比缩放拉变形）", geo["svgText"] == 0, "SVG 内 text 节点 %d" % geo["svgText"])
+    check("横幅标题无 transform 变形", geo["transform"] in ("none", "matrix(1, 0, 0, 1, 0, 0)"), geo["transform"])
+    check("标题字宽未被横向拉伸", per_char <= geo["font"] * 1.35,
+          "字号 %.0fpx，单字实测宽 %.1fpx" % (geo["font"], per_char))
+    check("横幅保留「非游戏原画」标注",
+          page.evaluate("() => [...document.querySelectorAll('.dbn2-mark')].every(m => m.textContent.indexOf('非游戏原画') >= 0)"))
+    body = page.evaluate("() => document.querySelector('#main').innerText")
+    check("副本页不出现内部口径话术", "口径见来源" not in body and "provenance" not in body)
+    page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-banner.png"))
+    ctx.close()
+
+
 def test_chooser(browser, base):
     print("\n[3] 选职业问答")
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
@@ -323,7 +351,7 @@ def test_chooser(browser, base):
 
 
 def test_mobile(browser, base):
-    print("\n[4] 375px 移动端")
+    print("\n[5] 375px 移动端")
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     page = ctx.new_page()
     errors = []
@@ -358,6 +386,7 @@ def main():
             browser = p.chromium.launch(channel="chrome", headless=True)
             test_pages(browser, base)
             test_talent(browser, base)
+            test_dungeon_banner(browser, base)
             test_chooser(browser, base)
             test_mobile(browser, base)
             browser.close()

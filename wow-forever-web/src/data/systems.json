@@ -33,13 +33,13 @@
       {
        "type": "official_cn",
        "url": "https://wow.blizzard.cn/news/24303313/index.html",
-       "note": "官方中文名",
-       "checkedAt": null
+       "note": "官方中文名（2026-10-08 译名体检逐字命中）",
+       "checkedAt": "2026-10-08"
       },
       {
        "type": "fan_db",
        "url": "https://www.wowhead.com/forever/guide/camping-overview-unlock-rewards",
-       "note": "Wowhead 有专门的露营解锁奖励指南（人工参照）",
+       "note": "Wowhead 有专门的露营解锁奖励指南（人工参照）；仅作人工参照，不作为 L0 依据",
        "checkedAt": null
       }
      ]
@@ -54,8 +54,8 @@
       {
        "type": "official_cn",
        "url": "https://wow.blizzard.cn/news/24302070/index.html",
-       "note": "官方口径：取消传统服务器，按普通/PvP/RP/专家规则集匹配",
-       "checkedAt": null
+       "note": "官方口径：取消传统服务器，按普通/PvP/RP/专家规则集匹配（2026-10-08 译名体检逐字命中）",
+       "checkedAt": "2026-10-08"
       }
      ]
     },
@@ -63,8 +63,8 @@
      "id": "no-flying",
      "nameCn": null,
      "nameEn": "No flying mounts",
-     "level": "L0",
-     "note": "无等级缩放同理",
+     "level": "L1",
+     "note": "仅官方英文来源提到，官方中文定名未出现，按分级定义算 L1（仅官方英文）",
      "provenance": [
       {
        "type": "official_en",
@@ -78,8 +78,8 @@
      "id": "level-cap",
      "nameCn": "永久 60 级",
      "nameEn": "Level 60",
-     "level": "L0",
-     "note": "",
+     "level": "L2",
+     "note": "官方英文回顾说等级上限是 60；国服 Beta 公告只写过\"等级上限将被设为20级，并在Beta测试后期提高至30级\"，没有出现过\"永久 60 级\"这个中文说法。中文名是本站归纳，等官方中文原句或上线实测后再升 L0。",
      "provenance": [
       {
        "type": "official_en",
@@ -90,8 +90,8 @@
       {
        "type": "official_cn",
        "url": "https://wow.blizzard.cn/news/24304160/index.html",
-       "note": "国服 Beta 公告",
-       "checkedAt": null
+       "note": "国服 Beta 公告：只提到测试期等级上限 20→30，未出现\"永久 60 级\"字样（2026-10-08 复核）",
+       "checkedAt": "2026-10-08"
       }
      ]
     }

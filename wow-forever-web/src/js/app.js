@@ -455,6 +455,12 @@
     if (x.kind === 'raid') g.push('开放时间、团队规模、BOSS 数——仅有第三方说法');
     return g;
   }
+  var DUN_STATE = {
+    L0: '名单与等级区间已按官方中文核对',
+    L1: '名单已核，中文定名待官方公布',
+    L2: '名单已核，细节等实测或官方补充',
+    L3: '目前只有线索，细节未确认'
+  };
   function dungeons() {
     D.load('data/dungeons.json').then(function (d) {
       var groups = [['newDungeons', '无限服新副本'], ['classicDungeons', '经典副本（在无限服）'], ['raids', '团队副本']];
@@ -463,11 +469,13 @@
         groups.map(function (g) {
           return '<div class="grp">' + g[1] + ' · ' + (d[g[0]] || []).length + '</div>' +
             (d[g[0]] || []).map(function (x) {
-              return '<div class="card dcardx"><div class="dbn-wrap">' +
-                (window.Glyph ? Glyph.dungeonBanner(x.id, x.nameCn || x.nameEn || '未定名',
-                  (x.levelRange ? x.levelRange + ' 级' : '等级区间待核') + ' · 示意图，非游戏原画') : '') +
-                '</div><div class="dcard"><div>' +
-                '<div class="nm">' + D.esc(x.nameCn || '中文名未定') + ' <span class="dim mono">' + D.esc(x.nameEn || '') + '</span> ' + D.pill(x.level) + '</div>' +
+              var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
+                x.nameCn || x.nameEn || '未定名',
+                { kind: x.kind, sub: (x.nameCn && x.nameEn) ? x.nameEn : '' }) : '';
+              return '<div class="card dcardx">' + banner +
+                '<div class="dcard"><div>' +
+                '<div class="nm">' + D.pill(x.level) + ' <span class="dim">' + DUN_STATE[x.level] +
+                (x.nameCn ? '' : '；官方中文名未公布') + '</span></div>' +
                 '<div class="sub">' + (x.levelRange ? x.levelRange + ' 级 · ' : '等级区间待核 · ') +
                 'BOSS ' + ((x.bosses || []).length || '待实测') + ' · 路线 ' + ((x.route || []).length || '待实测') + ' 步</div>' +
                 (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' + D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +

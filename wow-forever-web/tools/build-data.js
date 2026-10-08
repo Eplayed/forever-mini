@@ -17,11 +17,21 @@ function checkRecord(kind, rec, sourcesField) {
   if (lvl === 'L0' && !srcs.some(isOfficial)) {
     errs.push(`${kind} ${rec.id}：标 L0 但没有任何官方来源`);
   }
+  // 中文名的 L0 只能由官方中文页支撑；英文官方页算 L1
+  const cn = rec.cn || rec.nameCn;
+  if (lvl === 'L0' && cn && !srcs.some(function (x) { return x.type === 'official_cn'; })) {
+    errs.push(`${kind} ${rec.id}：中文名「${cn}」标 L0 但没有 official_cn 来源（英文官方页只能算 L1）`);
+  }
+  if (lvl === 'L0' && !cn && rec.nameEn) {
+    errs.push(`${kind} ${rec.id}：只有官方英文内容却标 L0，按分级定义应标 L1`);
+  }
   if (lvl === 'L0' && !rec.checkedAt && !srcs.some((s) => s.checkedAt)) {
     warns.push(`${kind} ${rec.id}：L0 但缺核对日期`);
   }
-  if (srcs.some((s) => /^https?:\/\/(www\.)?(wowhead|foreverchanges|wowclassicforever)/i.test(s.url || '')) && lvl === 'L0') {
-    errs.push(`${kind} ${rec.id}：粉丝站来源不能标 L0`);
+  const FAN = /^https?:\/\/(www\.)?(wowhead|foreverchanges|wowclassicforever)/i;
+  // 粉丝站链接可以作"人工参照"并存，但不能是 L0 的支撑：有官方中文来源时才允许留 L0
+  if (lvl === 'L0' && srcs.some((x) => FAN.test(x.url || '')) && !srcs.some((x) => x.type === 'official_cn')) {
+    errs.push(`${kind} ${rec.id}：L0 只靠粉丝站来源支撑`);
   }
 }
 function scanNoPercent(kind, obj, id) {
@@ -60,6 +70,21 @@ const dg = read('dungeons.json');
 });
 const ids = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).map((d) => d.id);
 if (new Set(ids).size !== ids.length) errs.push('dungeons：存在重复 id');
+
+// 系统卡片
+const sy = read('systems.json');
+(sy.groups || []).forEach((g) => {
+  (g.items || []).forEach((x) => {
+    if (!x.id) errs.push(`systems/${g.id}：卡片缺 id`);
+    if (!x.nameCn && !x.nameEn) errs.push(`systems ${x.id}：中英文名都没有`);
+    if (!(x.provenance || []).length) errs.push(`systems ${x.id}：无来源记录`);
+    checkRecord('systems', x);
+    scanNoPercent('systems', x, x.id);
+  });
+});
+const sysIds = [];
+(sy.groups || []).forEach((g) => (g.items || []).forEach((x) => sysIds.push(x.id)));
+if (new Set(sysIds).size !== sysIds.length) errs.push('systems：存在重复卡片 id');
 
 // 职业与天赋
 const cl = read('classes.json');
