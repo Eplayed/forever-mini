@@ -31,12 +31,14 @@ DOCS = os.path.join(ROOT, "docs")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 TAG_RE = re.compile(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<[^>]+>", re.I)
-CJK_SPACE = re.compile(u"(?<=[\u3400-\u9fff])[\s\u3000]+(?=[\u3400-\u9fff])")
+_CJ = u"\u3400-\u9fff\u3000-\u303f\uff00-\uffef\u2018\u2019\u201c\u201d\u00b7\u2014\u2026"
+CJK_SPACE = re.compile(u"(?<=[%s])[\\s\u3000]+(?=[%s])" % (_CJ, _CJ))
 
 
 def squeeze(text):
-    """去掉汉字之间的空白。官方页常用 <b> 强调词中的一部分，转纯文本后会在汉字中间留下空格，
-       例如「冰霜 与 火焰 陷阱」，不做这一步会把正确词条误判成未命中。"""
+    """去掉汉字与全角标点之间的空白。官方页常用 <b>/<strong> 强调词中的一部分或词条名，
+       转纯文本后会在中间留下空格，例如「冰霜 与 火焰 陷阱」「被遗忘者的意志 ：移除…」，
+       不做这一步会把正确词条误判成未命中。汉字与全角标点之间的空白在中文里没有语义。"""
     prev = None
     while prev != text:
         prev = text
@@ -141,6 +143,35 @@ def main():
                     items.append({"src": "时间线", "id": x["id"], "cn": pr["quote"], "cls": "引用",
                                   "level": x.get("level"), "prov": [pr]})
 
+    # 种族页：核对特长整句、种族简介、亮点组合整句与冲突里的导语
+    rc_path = os.path.join(DATA, "races.json")
+    if os.path.exists(rc_path):
+        rc = json.load(io.open(rc_path, encoding="utf-8"))
+        page_url = ((rc.get("meta") or {}).get("sources") or [{}])[0].get("url")
+        for x in (rc.get("races") or []):
+            lore = (x.get("subgroup") or {}).get("lore") or x.get("lore")
+            if lore:
+                items.append({"src": "种族简介", "id": "%s/lore" % x["id"], "cn": lore, "cls": x.get("faction"),
+                              "level": x.get("level"),
+                              "prov": [{"type": "official_cn", "url": page_url, "quote": lore}]})
+            pool = list(x.get("traits") or [])
+            if x.get("subgroup"):
+                pool += list(x["subgroup"].get("traits") or [])
+            for t in pool:
+                if t.get("quote"):
+                    items.append({"src": "种族特长", "id": "%s/%s" % (x["id"], t["name"]), "cn": t["quote"],
+                                  "cls": x.get("faction"), "level": x.get("level"),
+                                  "prov": [{"type": "official_cn", "url": page_url, "quote": t["quote"]}]})
+        for c in (rc.get("newCombos") or []):
+            for pr in (c.get("provenance") or []):
+                if pr.get("quote"):
+                    items.append({"src": "亮点组合", "id": "combo-%s" % c["label"], "cn": pr["quote"],
+                                  "cls": "引用", "level": c.get("level"), "prov": [pr]})
+        sky = (rc.get("skyborneNote") or {}).get("text")
+        if sky:
+            items.append({"src": "天裔导语", "id": "skyborne-note", "cn": sky, "cls": "引用", "level": "L0",
+                          "prov": [{"type": "official_cn", "url": page_url, "quote": sky}]})
+
     urls = []
     for it in items:
         for prov in it["prov"]:
@@ -204,7 +235,8 @@ def main():
     lines.append("# 译名体检报告 · %s（wow-data）" % today)
     lines.append("")
     lines.append("脚本：`python3 tools/audit-translations.py`。做法是把每个对外展示的中文名（术语词条、"
-                 "副本名、系统名）拿回它自己在 `provenance` 里声明的官方来源页做逐字包含比对。"
+                 "副本名、系统名，以及时间线、技能四态、种族页引用的官方整句）"
+                 "拿回它自己在 `provenance` 里声明的官方来源页做逐字包含比对。"
                  "**只读核对，不改数据。**")
     lines.append("")
     lines.append("## 结果")
@@ -219,7 +251,9 @@ def main():
     lines.append("| **声称官方却核不到（L0/L1 缺官方链接）** | %d |" % len(no_source))
     lines.append("| 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | %d |" % len(expected_unofficial))
     lines.append("")
-    lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名。")
+    lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、"
+                 "`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、"
+                 "亮点组合与天裔导语。")
     rate = len(hits) * 100.0 / max(len(items), 1)
     lines.append("| 命中率 | %.1f%% |" % rate)
     lines.append("")
@@ -267,8 +301,8 @@ def main():
         lv = set(it.get("level") for it, _ in misses)
         if lv <= {"L2", "L3"}:
             lines.append("")
-            lines.append("这四条当前都标 L2/L3，界面显示\"待实测\"，**没有在冒充官方**；"
-                         "列在这里是因为它们的中文名来自转载/英文页，等官方中文稿或实测后再定名。")
+            lines.append("这%d条当前都标 L2/L3，界面显示\"待实测\"，**没有在冒充官方**；"
+                         "列在这里是因为它们的中文名来自转载/英文页，等官方中文稿或实测后再定名。" % len(misses))
         lines.append("")
     if expected_unofficial:
         lines.append("## 本来就标着非官名的条目（预期，不需要处理）")

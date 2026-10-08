@@ -16,3 +16,6 @@ for-mini/project.private.config.json
 
 # 译名体检的页面缓存
 .audit-cache/
+
+# Python 导入脚本时生成的字节码缓存（tools/audit-translations.py 被 extract-*.py 复用时会落盘）
+__pycache__/

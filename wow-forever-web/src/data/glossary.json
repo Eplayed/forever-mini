@@ -3116,10 +3116,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "orc"
   },
   {
    "id": "race-racial-120",
@@ -3133,10 +3134,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "orc"
   },
   {
    "id": "race-racial-121",
@@ -3150,10 +3152,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "race-racial-122",
@@ -3167,10 +3170,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "race-racial-123",
@@ -3184,10 +3188,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "race-racial-124",
@@ -3201,10 +3206,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "race-racial-125",
@@ -3218,10 +3224,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "race-racial-126",
@@ -3235,10 +3242,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "race-racial-127",
@@ -3252,10 +3260,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "race-racial-128",
@@ -3269,10 +3278,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "race-racial-129",
@@ -3286,10 +3296,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "troll"
   },
   {
    "id": "race-racial-130",
@@ -3303,10 +3314,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "troll"
   },
   {
    "id": "race-racial-131",
@@ -3320,10 +3332,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "troll"
   },
   {
    "id": "race-racial-132",
@@ -3337,10 +3350,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "troll"
   },
   {
    "id": "race-racial-133",
@@ -3354,10 +3368,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "skyborne"
   },
   {
    "id": "race-racial-134",
@@ -3371,10 +3386,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "skyborne-horde"
   },
   {
    "id": "race-racial-135",
@@ -3388,10 +3404,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "skyborne"
   },
   {
    "id": "race-racial-136",
@@ -3405,10 +3422,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "skyborne"
   },
   {
    "id": "race-racial-137",
@@ -3422,10 +3440,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "human"
   },
   {
    "id": "race-racial-138",
@@ -3439,10 +3458,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "human"
   },
   {
    "id": "race-racial-139",
@@ -3456,10 +3476,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "human"
   },
   {
    "id": "race-racial-140",
@@ -3473,10 +3494,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "dwarf"
   },
   {
    "id": "race-racial-141",
@@ -3490,10 +3512,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "dwarf"
   },
   {
    "id": "race-racial-142",
@@ -3507,10 +3530,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "dwarf"
   },
   {
    "id": "race-racial-143",
@@ -3524,10 +3548,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "night-elf"
   },
   {
    "id": "race-racial-144",
@@ -3541,10 +3566,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "night-elf"
   },
   {
    "id": "race-racial-145",
@@ -3558,10 +3584,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "night-elf"
   },
   {
    "id": "race-racial-146",
@@ -3575,10 +3602,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "night-elf"
   },
   {
    "id": "race-racial-147",
@@ -3592,10 +3620,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "gnome"
   },
   {
    "id": "race-racial-148",
@@ -3609,10 +3638,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "gnome"
   },
   {
    "id": "race-racial-149",
@@ -3626,10 +3656,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "gnome"
   },
   {
    "id": "race-racial-150",
@@ -3643,10 +3674,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "gnome"
   },
   {
    "id": "race-racial-151",
@@ -3660,10 +3692,11 @@
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "skyborne-alliance"
   }
  ]
 }

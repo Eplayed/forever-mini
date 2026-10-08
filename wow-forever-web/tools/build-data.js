@@ -196,6 +196,61 @@ const abIds = new Set();
 });
 if ((ab.items || []).some((x) => x.state === 'unchanged')) errs.push('abilities：出现"未变"条目——官方没写过，不许凭沉默生成');
 
+// 种族：矩阵与特长只能出自官方中文页，特长名必须原样出现在它自己的整句里
+const rc = read('races.json');
+const facIds = new Set((rc.factions || []).map((f) => f.id));
+const raceIds = new Set();
+(rc.races || []).forEach((x) => {
+  if (raceIds.has(x.id)) errs.push(`races：id 重复 ${x.id}`);
+  raceIds.add(x.id);
+  if (!x.nameCn) errs.push(`races ${x.id}：缺中文名`);
+  if (!facIds.has(x.faction)) errs.push(`races ${x.id}：阵营 ${x.faction} 不在 factions 里`);
+  if (!(x.classes || []).length) errs.push(`races ${x.id}：可选职业为空——官方矩阵没有空行，空着就是解析漏了`);
+  (x.classes || []).forEach((cid) => { if (!classIds.has(cid)) errs.push(`races ${x.id}：职业 ${cid} 不在 classes.json 里`); });
+  const all = (x.traits || []).concat((x.subgroup && x.subgroup.traits) || []);
+  if (!all.length) errs.push(`races ${x.id}：一条特长都没有，官方页每个种族小标题下都有列表`);
+  all.forEach((t) => {
+    if (!t.name || !t.quote) errs.push(`races ${x.id}：特长缺名称或整句`);
+    if (t.name && t.quote && t.quote.indexOf(t.name) < 0) errs.push(`races ${x.id}：特长「${t.name}」不在整句里，疑似串行`);
+  });
+  checkRecord('races', x);
+});
+if ((rc.classOrder || []).length !== 9) errs.push(`races：classOrder 是 ${(rc.classOrder || []).length} 列，矩阵应覆盖 9 个职业`);
+(rc.classOrder || []).forEach((cid) => { if (!classIds.has(cid)) errs.push(`races：classOrder 指向未知职业 ${cid}`); });
+(rc.newCombos || []).forEach((c) => {
+  const q = ((c.provenance || [])[0] || {}).quote || '';
+  if (c.label && q.indexOf(c.label) < 0) errs.push(`races：亮点组合「${c.label}」不在官方整句里`);
+});
+(rc.conflicts || []).forEach((cf) => {
+  if (!cf.a || !cf.a.detail) errs.push(`races：冲突 ${cf.id} 的 a 方缺矩阵明细（官方表格没有整句，只能记明细）`);
+  if (!cf.b || !cf.b.quote) errs.push(`races：冲突 ${cf.id} 的 b 方缺原文引用`);
+  if (!cf.handling) errs.push(`races：冲突 ${cf.id} 没写处置`);
+});
+// 来源里出现的 quote 必须能回原文比对：带 quote 就得带 url，official_cn 就得是官方中文域名
+function checkQuotes(kind, list) {
+  (list || []).forEach((x) => {
+    (x.provenance || []).forEach((pr) => {
+      if (pr.quote && !pr.url) errs.push(`${kind} ${x.id || ''}：来源有 quote 却没 url，体检脚本无法回原文比对`);
+      if (pr.type === 'official_cn' && pr.url && pr.url.indexOf('wow.blizzard.cn') < 0) {
+        errs.push(`${kind} ${x.id || ''}：official_cn 指向非官方中文域名`);
+      }
+    });
+  });
+}
+checkQuotes('races', rc.races);
+checkQuotes('races/亮点组合', rc.newCombos);
+// 词条表里的种族特长要么回填归属，要么明确进待办；孤儿 raceId 直接失败
+gl.items.forEach((x) => {
+  if (!x.raceId) return;
+  if (!raceIds.has(x.raceId) && !Array.from(raceIds).some((id) => id.indexOf(x.raceId) === 0)) {
+    errs.push(`glossary ${x.id}：raceId ${x.raceId} 在 races.json 里找不到`);
+  }
+});
+const racialNoOwner = gl.items.filter((x) => x.kind === 'racial' && !x.raceId);
+if (racialNoOwner.length) {
+  warns.push(`glossary：${racialNoOwner.length} 条种族特长未回填 raceId（${racialNoOwner.slice(0, 5).map((x) => x.cn).join('、')}）`);
+}
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };
@@ -224,6 +279,9 @@ console.log('天赋节点 ' + talentNodes + ' 个，名称与官网中文一致 
 
 console.log('全站覆盖率：L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 + ' / L3 ' + cov.L3 +
   '（共 ' + total + ' 条，L0 占 ' + (cov.L0 / total * 100).toFixed(1) + '%）');
+const rcTraitN = (rc.races || []).reduce((a, x) => a + (x.traits || []).length + (((x.subgroup && x.subgroup.traits) || []).length), 0);
+console.log('种族 ' + (rc.races || []).length + ' 行 / 特长 ' + rcTraitN + ' 条 / 亮点组合 ' + (rc.newCombos || []).length +
+  ' 组，全部出自国服官方中文公告；已回填种族归属的词条 ' + gl.items.filter((x) => x.raceId).length + ' 条');
 warns.forEach((w) => console.log('  提示 ' + w));
 if (errs.length) {
   console.error('\n校验失败 ' + errs.length + ' 项：');

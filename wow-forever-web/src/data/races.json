@@ -1,0 +1,787 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-08",
+  "kind": "official-cn-extract",
+  "method": "tools/extract-races.py 按官方页自身结构取数：h3「部落/联盟种族与职业组合」→ 紧跟的表格；h4 种族名 → 紧跟的 em 简介与 ul 特长列表。矩阵里官方只写 X，职业名取自同页表头。",
+  "sources": [
+   {
+    "url": "https://wow.blizzard.cn/news/24304075/index.html",
+    "label": "国服官方中文·种族与职业组合公告"
+   }
+  ],
+  "notCollected": [
+   "英文原名：官方中文公告未给出，逐词硬造等于编造，一律留空",
+   "阵营之外的可选种族：血精灵、兽人萨满之外的经典旧世组合等，官方本页没提就是没提",
+   "种族数值平衡与实测改动：Beta 阶段官方只给描述句，不做推算",
+   "种族图标：无限服新种族图标能否从官方 CDN 取得尚未证实，本页用首字色块不热链"
+  ]
+ },
+ "factions": [
+  {
+   "id": "horde",
+   "nameCn": "部落"
+  },
+  {
+   "id": "alliance",
+   "nameCn": "联盟"
+  }
+ ],
+ "classOrder": [
+  "druid",
+  "hunter",
+  "mage",
+  "paladin",
+  "priest",
+  "rogue",
+  "shaman",
+  "warlock",
+  "warrior"
+ ],
+ "races": [
+  {
+   "id": "orc",
+   "nameCn": "兽人",
+   "nameEn": null,
+   "faction": "horde",
+   "subgroup": null,
+   "classes": [
+    "hunter",
+    "mage",
+    "rogue",
+    "shaman",
+    "warlock",
+    "warrior"
+   ],
+   "lore": "兽人一族起源于德拉诺星球。这个崇尚和平、信奉萨满教义的种族遭到燃烧军团奴役，被迫与艾泽拉斯的人类开战。历经多年抗争，兽人终于摆脱恶魔的腐化，重获自由。时至今日，他们仍在这个憎恨并唾弃自己的异乡世界中，为荣誉而战。",
+   "traits": [
+    {
+     "name": "血性狂怒",
+     "passive": false,
+     "effect": "攻击强度和法术强度提高10%，持续15秒。",
+     "quote": "血性狂怒：攻击强度和法术强度提高10%，持续15秒。"
+    },
+    {
+     "name": "粉碎诅咒",
+     "passive": false,
+     "effect": "免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。",
+     "quote": "粉碎诅咒：免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。"
+    },
+    {
+     "name": "斧类武器专精",
+     "passive": true,
+     "effect": "斧类使法术和技能的爆击几率提高1%。",
+     "quote": "斧类武器专精（被动）：斧类使法术和技能的爆击几率提高1%。"
+    },
+    {
+     "name": "坚韧",
+     "passive": true,
+     "effect": "昏迷持续时间缩短20%。",
+     "quote": "坚韧（被动）：昏迷持续时间缩短20%。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「兽人」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、潜行者、萨满祭司、术士、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "兽人一族起源于德拉诺星球。这个崇尚和平、信奉萨满教义的种族遭到燃烧军团奴役，被迫与艾泽拉斯的人类开战。历经多年抗争，兽人终于摆脱恶魔的腐化，重获自由。时至今日，他们仍在这个憎恨并唾弃自己的异乡世界中，为荣誉而战。"
+    }
+   ]
+  },
+  {
+   "id": "undead",
+   "nameCn": "亡灵",
+   "nameEn": null,
+   "faction": "horde",
+   "subgroup": null,
+   "classes": [
+    "mage",
+    "paladin",
+    "priest",
+    "rogue",
+    "warlock",
+    "warrior"
+   ],
+   "lore": "摆脱巫妖王的控制后，被遗忘者立志推翻他的统治。在女妖之王希尔瓦娜斯的率领下，他们渴望向天灾军团复仇。人类也已成为他们的敌人，前者执意要将所有亡灵从这片土地上彻底清除。被遗忘者甚至不在乎自己的盟友；对他们而言，部落只是推进黑暗图谋的工具。",
+   "traits": [
+    {
+     "name": "被遗忘者的意志",
+     "passive": false,
+     "effect": "移除魅惑、恐惧和催眠效果。",
+     "quote": "被遗忘者的意志：移除魅惑、恐惧和催眠效果。"
+    },
+    {
+     "name": "食尸",
+     "passive": false,
+     "effect": "吞噬尸体，在持续时间内恢复35%的生命值和法力值。",
+     "quote": "食尸：吞噬尸体，在持续时间内恢复35%的生命值和法力值。"
+    },
+    {
+     "name": "水下呼吸",
+     "passive": true,
+     "effect": "在水下的呼吸时间延长300%。",
+     "quote": "水下呼吸（被动）：在水下的呼吸时间延长300%。"
+    },
+    {
+     "name": "哀伤之触",
+     "passive": true,
+     "effect": "你的攻击有时会吸取生命值。",
+     "quote": "哀伤之触（被动）：你的攻击有时会吸取生命值。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「亡灵」行：官方只给 X 标记，职业名按同页表头还原为 法师、圣骑士、牧师、潜行者、术士、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "摆脱巫妖王的控制后，被遗忘者立志推翻他的统治。在女妖之王希尔瓦娜斯的率领下，他们渴望向天灾军团复仇。人类也已成为他们的敌人，前者执意要将所有亡灵从这片土地上彻底清除。被遗忘者甚至不在乎自己的盟友；对他们而言，部落只是推进黑暗图谋的工具。"
+    }
+   ]
+  },
+  {
+   "id": "tauren",
+   "nameCn": "牛头人",
+   "nameEn": null,
+   "faction": "horde",
+   "subgroup": null,
+   "classes": [
+    "druid",
+    "hunter",
+    "shaman",
+    "warrior"
+   ],
+   "lore": "牛头人始终致力于维护自然平衡，并遵从他们所信奉的女神——大地母亲的意志。不久前，凶残的半人马发动袭击，牛头人险遭灭族；所幸他们遇见兽人，并在其帮助下击败了入侵者。为了报答这份以血换来的恩情，牛头人加入部落，进一步巩固了两个种族之间的友谊。",
+   "traits": [
+    {
+     "name": "战争践踏",
+     "passive": false,
+     "effect": "使附近的敌人昏迷，持续2秒。",
+     "quote": "战争践踏：使附近的敌人昏迷，持续2秒。"
+    },
+    {
+     "name": "栽培",
+     "passive": false,
+     "effect": "额外长出无需草药学即可采集的草药。",
+     "quote": "栽培：额外长出无需草药学即可采集的草药。"
+    },
+    {
+     "name": "原野疾驰",
+     "passive": true,
+     "effect": "持续移动时，移动速度会逐渐提高。",
+     "quote": "原野疾驰（被动）：持续移动时，移动速度会逐渐提高。"
+    },
+    {
+     "name": "耐久",
+     "passive": true,
+     "effect": "总生命值提高5%，命中几率提高1%。",
+     "quote": "耐久（被动）：总生命值提高5%，命中几率提高1%。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「牛头人」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、萨满祭司、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "牛头人始终致力于维护自然平衡，并遵从他们所信奉的女神——大地母亲的意志。不久前，凶残的半人马发动袭击，牛头人险遭灭族；所幸他们遇见兽人，并在其帮助下击败了入侵者。为了报答这份以血换来的恩情，牛头人加入部落，进一步巩固了两个种族之间的友谊。"
+    }
+   ]
+  },
+  {
+   "id": "troll",
+   "nameCn": "巨魔",
+   "nameEn": null,
+   "faction": "horde",
+   "subgroup": null,
+   "classes": [
+    "hunter",
+    "mage",
+    "priest",
+    "rogue",
+    "shaman",
+    "warlock",
+    "warrior"
+   ],
+   "lore": "凶悍的暗矛部族巨魔曾以荆棘谷的丛林为家，却因各方的连年征战而被逐出了故土。后来，巨魔与兽人部落结为盟友；年轻的兽人酋长萨尔说服他们随自己前往卡利姆多。尽管暗矛巨魔仍坚守其幽暗传统，他们在部落中依然享有崇高地位。",
+   "traits": [
+    {
+     "name": "狂暴",
+     "passive": false,
+     "effect": "施法速度和攻击速度提高10%，持续10秒。",
+     "quote": "狂暴：施法速度和攻击速度提高10%，持续10秒。"
+    },
+    {
+     "name": "极速再生",
+     "passive": false,
+     "effect": "在持续时间内恢复50%的最大生命值。",
+     "quote": "极速再生：在持续时间内恢复50%的最大生命值。"
+    },
+    {
+     "name": "野兽杀手",
+     "passive": true,
+     "effect": "对野兽造成的伤害提高5%。",
+     "quote": "野兽杀手（被动）：对野兽造成的伤害提高5%。"
+    },
+    {
+     "name": "再生",
+     "passive": true,
+     "effect": "在战斗中保持10%的生命值恢复。",
+     "quote": "再生（被动）：在战斗中保持10%的生命值恢复。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「巨魔」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、牧师、潜行者、萨满祭司、术士、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "凶悍的暗矛部族巨魔曾以荆棘谷的丛林为家，却因各方的连年征战而被逐出了故土。后来，巨魔与兽人部落结为盟友；年轻的兽人酋长萨尔说服他们随自己前往卡利姆多。尽管暗矛巨魔仍坚守其幽暗传统，他们在部落中依然享有崇高地位。"
+    }
+   ]
+  },
+  {
+   "id": "skyborne-horde",
+   "nameCn": "天裔",
+   "nameEn": null,
+   "faction": "horde",
+   "subgroup": {
+    "nameCn": "塑风者天裔",
+    "lore": "塑风者是首批获赐风之灵“天穹视界”天赋的申多雷高等精灵的后裔。如今，新一代的塑风者受到召唤，离开天空之墙的家园，踏上艾泽拉斯。他们决心查明元素导师失踪的真相，并不惜一切代价迎回风之灵，誓死捍卫他们世代相传的生存之道。",
+    "traits": [
+     {
+      "name": "踏空而行",
+      "passive": false,
+      "effect": "在空中向下滑行10秒。",
+      "quote": "踏空而行：在空中向下滑行10秒。"
+     },
+     {
+      "name": "天穹视界",
+      "passive": false,
+      "effect": "获得元素祝福，移动速度提高10%。",
+      "quote": "天穹视界：获得元素祝福，移动速度提高10%。"
+     },
+     {
+      "name": "风灵护佑",
+      "passive": true,
+      "effect": "近战、远程与法术急速提高1%。",
+      "quote": "风灵护佑（被动）：近战、远程与法术急速提高1%。"
+     },
+     {
+      "name": "元素洞察",
+      "passive": true,
+      "effect": "对元素生物造成的伤害提高5%。",
+      "quote": "元素洞察（被动）：对元素生物造成的伤害提高5%。"
+     }
+    ],
+    "provenance": [
+     {
+      "type": "official_cn",
+      "url": "https://wow.blizzard.cn/news/24304075/index.html",
+      "note": "国服官方中文·种族与职业组合公告·子族特长原文",
+      "checkedAt": "2026-10-08",
+      "quote": "踏空而行：在空中向下滑行10秒。"
+     }
+    ]
+   },
+   "classes": [
+    "druid",
+    "hunter",
+    "rogue",
+    "shaman",
+    "warrior"
+   ],
+   "lore": null,
+   "traits": [],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「天裔」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、潜行者、萨满祭司、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·子族特长原文",
+     "checkedAt": "2026-10-08",
+     "quote": "踏空而行：在空中向下滑行10秒。"
+    }
+   ]
+  },
+  {
+   "id": "human",
+   "nameCn": "人类",
+   "nameEn": null,
+   "faction": "alliance",
+   "subgroup": null,
+   "classes": [
+    "hunter",
+    "mage",
+    "paladin",
+    "priest",
+    "rogue",
+    "warlock",
+    "warrior"
+   ],
+   "lore": "人类是个年轻的种族，因此适应力极强，能以惊人的效率掌握战斗、工艺与魔法技艺。勇气与乐观的天性使人类建立起世上一些最伟大的王国。在这个动荡的时代，历经世代纷争的人类正努力重振昔日荣光，开创光明的新未来。",
+   "traits": [
+    {
+     "name": "生存意志",
+     "passive": false,
+     "effect": "移除昏迷效果。",
+     "quote": "生存意志：移除昏迷效果。"
+    },
+    {
+     "name": "感知",
+     "passive": false,
+     "effect": "侦测潜行的敌人，持续20秒。",
+     "quote": "感知：侦测潜行的敌人，持续20秒。"
+    },
+    {
+     "name": "剑类武器专精",
+     "passive": true,
+     "effect": "剑类使法术和技能的爆击几率提高2%。",
+     "quote": "剑类武器专精（被动）：剑类使法术和技能的爆击几率提高2%。"
+    },
+    {
+     "name": "人类精魂",
+     "passive": true,
+     "effect": "精神提高5%。",
+     "quote": "人类精魂（被动）：精神提高5%。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「人类」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、圣骑士、牧师、潜行者、术士、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "人类是个年轻的种族，因此适应力极强，能以惊人的效率掌握战斗、工艺与魔法技艺。勇气与乐观的天性使人类建立起世上一些最伟大的王国。在这个动荡的时代，历经世代纷争的人类正努力重振昔日荣光，开创光明的新未来。"
+    }
+   ]
+  },
+  {
+   "id": "dwarf",
+   "nameCn": "矮人",
+   "nameEn": null,
+   "faction": "alliance",
+   "subgroup": null,
+   "classes": [
+    "hunter",
+    "paladin",
+    "priest",
+    "rogue",
+    "shaman",
+    "warrior"
+   ],
+   "lore": "往昔，矮人只在乎从大地深处发掘的财富。后来，出土的文献记载，有一个神祇般的种族赋予矮人生命……以及蕴含魔力的天赋传承。为了探寻更多种族起源的真相，矮人全心投入寻找失落的神器与远古知识。如今，矮人考古学家已经遍布世界各地。",
+   "traits": [
+    {
+     "name": "石像形态",
+     "passive": false,
+     "effect": "免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。",
+     "quote": "石像形态：免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。"
+    },
+    {
+     "name": "寻找财宝",
+     "passive": false,
+     "effect": "追踪附近的宝箱。",
+     "quote": "寻找财宝：追踪附近的宝箱。"
+    },
+    {
+     "name": "锤类武器专精",
+     "passive": true,
+     "effect": "锤类使法术和技能的爆击几率提高1%。",
+     "quote": "锤类武器专精（被动）：锤类使法术和技能的爆击几率提高1%。"
+    },
+    {
+     "name": "王牌猎人",
+     "passive": true,
+     "effect": "对野兽造成的伤害提高5%。",
+     "quote": "王牌猎人（被动）：对野兽造成的伤害提高5%。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「矮人」行：官方只给 X 标记，职业名按同页表头还原为 猎人、圣骑士、牧师、潜行者、萨满祭司、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "往昔，矮人只在乎从大地深处发掘的财富。后来，出土的文献记载，有一个神祇般的种族赋予矮人生命……以及蕴含魔力的天赋传承。为了探寻更多种族起源的真相，矮人全心投入寻找失落的神器与远古知识。如今，矮人考古学家已经遍布世界各地。"
+    }
+   ]
+  },
+  {
+   "id": "night-elf",
+   "nameCn": "暗夜精灵",
+   "nameEn": null,
+   "faction": "alliance",
+   "subgroup": null,
+   "classes": [
+    "druid",
+    "hunter",
+    "priest",
+    "rogue",
+    "warrior"
+   ],
+   "lore": "一万年前，暗夜精灵建立了一个庞大的帝国，但他们对原始魔法的恣意使用最终带来了毁灭。悲痛之中，他们退隐森林、与世隔绝，直到宿敌燃烧军团再度归来。别无选择的暗夜精灵终于走出隐居之地，为自己在新世界中的立足之地而战。",
+   "traits": [
+    {
+     "name": "艾露恩之光",
+     "passive": false,
+     "effect": "爆击几率提高10%，持续15秒。",
+     "quote": "艾露恩之光：爆击几率提高10%，持续15秒。"
+    },
+    {
+     "name": "影遁",
+     "passive": false,
+     "effect": "在静止时获得潜行状态。",
+     "quote": "影遁：在静止时获得潜行状态。"
+    },
+    {
+     "name": "迅捷",
+     "passive": true,
+     "effect": "躲闪几率提高1%，移动速度提高2%。",
+     "quote": "迅捷（被动）：躲闪几率提高1%，移动速度提高2%。"
+    },
+    {
+     "name": "精灵之魂",
+     "passive": true,
+     "effect": "死亡时的移动速度提高75%。",
+     "quote": "精灵之魂（被动）：死亡时的移动速度提高75%。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「暗夜精灵」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、牧师、潜行者、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "一万年前，暗夜精灵建立了一个庞大的帝国，但他们对原始魔法的恣意使用最终带来了毁灭。悲痛之中，他们退隐森林、与世隔绝，直到宿敌燃烧军团再度归来。别无选择的暗夜精灵终于走出隐居之地，为自己在新世界中的立足之地而战。"
+    }
+   ]
+  },
+  {
+   "id": "gnome",
+   "nameCn": "侏儒",
+   "nameEn": null,
+   "faction": "alliance",
+   "subgroup": null,
+   "classes": [
+    "mage",
+    "priest",
+    "rogue",
+    "warlock",
+    "warrior"
+   ],
+   "lore": "卡兹莫丹的侏儒虽然身材矮小，却凭借过人的智慧在历史上占据了一席之地。他们的地下王国诺莫瑞根，曾是一座蒸汽动力技术造就的奇观。然而，一场穴居人大举入侵导致这座城市最终沦陷。如今，这座城市的建造者流落在矮人的土地上，竭尽所能协助盟友。",
+   "traits": [
+    {
+     "name": "逃命专家",
+     "passive": false,
+     "effect": "短暂免疫定身和诱捕效果。",
+     "quote": "逃命专家：短暂免疫定身和诱捕效果。"
+    },
+    {
+     "name": "我知道了！",
+     "passive": false,
+     "effect": "使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。",
+     "quote": "我知道了！：使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。"
+    },
+    {
+     "name": "开阔思维",
+     "passive": true,
+     "effect": "法力值、怒气值或能量值上限提高5%。",
+     "quote": "开阔思维（被动）：法力值、怒气值或能量值上限提高5%。"
+    },
+    {
+     "name": "工程学专精",
+     "passive": true,
+     "effect": "工程学装置更加可靠。",
+     "quote": "工程学专精（被动）：工程学装置更加可靠。"
+    }
+   ],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「侏儒」行：官方只给 X 标记，职业名按同页表头还原为 法师、牧师、潜行者、术士、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·种族简介原文",
+     "checkedAt": "2026-10-08",
+     "quote": "卡兹莫丹的侏儒虽然身材矮小，却凭借过人的智慧在历史上占据了一席之地。他们的地下王国诺莫瑞根，曾是一座蒸汽动力技术造就的奇观。然而，一场穴居人大举入侵导致这座城市最终沦陷。如今，这座城市的建造者流落在矮人的土地上，竭尽所能协助盟友。"
+    }
+   ]
+  },
+  {
+   "id": "skyborne-alliance",
+   "nameCn": "天裔",
+   "nameEn": null,
+   "faction": "alliance",
+   "subgroup": {
+    "nameCn": "高阶会天裔",
+    "lore": "高阶会的成员皆是古代埃雷萨拉斯上层精灵学者的后裔。风之灵从泽风岛销声匿迹后，高阶会猛然警醒：天裔一族对元素庇护者的过度依赖，已将他们推向了万劫不复的边缘。如今，新一代的高阶会成员受命重返艾泽拉斯，誓要寻回失落的奥术知识，并以此为力量，让申多雷重获主宰自身命运的能力。",
+    "traits": [
+     {
+      "name": "踏空而行",
+      "passive": false,
+      "effect": "在空中向下滑行10秒。",
+      "quote": "踏空而行：在空中向下滑行10秒。"
+     },
+     {
+      "name": "阅读魔网",
+      "passive": false,
+      "effect": "激活一条魔网，生命与法力恢复速度提高100%。",
+      "quote": "阅读魔网：激活一条魔网，生命与法力恢复速度提高100%。"
+     },
+     {
+      "name": "风灵护佑",
+      "passive": true,
+      "effect": "近战、远程与法术急速提高1%。",
+      "quote": "风灵护佑（被动）：近战、远程与法术急速提高1%。"
+     },
+     {
+      "name": "元素洞察",
+      "passive": true,
+      "effect": "对元素生物造成的伤害提高5%。",
+      "quote": "元素洞察（被动）：对元素生物造成的伤害提高5%。"
+     }
+    ],
+    "provenance": [
+     {
+      "type": "official_cn",
+      "url": "https://wow.blizzard.cn/news/24304075/index.html",
+      "note": "国服官方中文·种族与职业组合公告·子族特长原文",
+      "checkedAt": "2026-10-08",
+      "quote": "踏空而行：在空中向下滑行10秒。"
+     }
+    ]
+   },
+   "classes": [
+    "druid",
+    "hunter",
+    "mage",
+    "rogue",
+    "warrior"
+   ],
+   "lore": null,
+   "traits": [],
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·矩阵表「天裔」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、法师、潜行者、战士",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·子族特长原文",
+     "checkedAt": "2026-10-08",
+     "quote": "踏空而行：在空中向下滑行10秒。"
+    }
+   ]
+  }
+ ],
+ "newCombos": [
+  {
+   "raceCn": "兽人",
+   "classCn": "法师",
+   "classId": "mage",
+   "label": "兽人法师",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "巨魔",
+   "classCn": "术士",
+   "classId": "warlock",
+   "label": "巨魔术士",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "亡灵",
+   "classCn": "圣骑士",
+   "classId": "paladin",
+   "label": "亡灵圣骑士",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "人类",
+   "classCn": "猎人",
+   "classId": "hunter",
+   "label": "人类猎人",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "侏儒",
+   "classCn": "牧师",
+   "classId": "priest",
+   "label": "侏儒牧师",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "矮人",
+   "classCn": "萨满祭司",
+   "classId": "shaman",
+   "label": "矮人萨满祭司",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  },
+  {
+   "raceCn": "天裔",
+   "classCn": null,
+   "classId": null,
+   "label": "天裔",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304075/index.html",
+     "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
+     "checkedAt": "2026-10-08",
+     "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
+    }
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "id": "skyborne-class-breadth",
+   "topic": "天裔到底能选几个职业",
+   "level": "L2",
+   "a": {
+    "saying": "同页两张矩阵表里，天裔在部落标了 5 个职业、在联盟标了 5 个职业（含德鲁伊、猎人、潜行者、战士）。",
+    "detail": "部落：德鲁伊、猎人、潜行者、萨满祭司、战士；联盟：德鲁伊、猎人、法师、潜行者、战士"
+   },
+   "b": {
+    "saying": "同页导语只写明：塑风者天裔能成为萨满祭司、高阶会天裔能成为法师，没有说子族是否只能选这一个。",
+    "quote": "天裔是《魔兽世界》：“无限”中的全新可玩种族，并将以独特的身份参与逐步展开的故事。选择这一新种族时，玩家可以选择加入部落阵营、能够成为萨满祭司的塑风者天裔，或加入联盟阵营、能够成为法师的高阶会天裔。"
+   },
+   "handling": "两个都留：可选职业按矩阵表显示，导语那句原样引用，不替玩家判定子族是否独占单一职业；正式服建号实测后再定。"
+  }
+ ],
+ "skyborneNote": {
+  "text": "天裔是《魔兽世界》：“无限”中的全新可玩种族，并将以独特的身份参与逐步展开的故事。选择这一新种族时，玩家可以选择加入部落阵营、能够成为萨满祭司的塑风者天裔，或加入联盟阵营、能够成为法师的高阶会天裔。",
+  "level": "L0",
+  "provenance": [
+   {
+    "type": "official_cn",
+    "url": "https://wow.blizzard.cn/news/24304075/index.html",
+    "note": "国服官方中文·种族与职业组合公告·天裔子族与阵营整句",
+    "checkedAt": "2026-10-08",
+    "quote": "天裔是《魔兽世界》：“无限”中的全新可玩种族，并将以独特的身份参与逐步展开的故事。选择这一新种族时，玩家可以选择加入部落阵营、能够成为萨满祭司的塑风者天裔，或加入联盟阵营、能够成为法师的高阶会天裔。"
+   }
+  ]
+ }
+}

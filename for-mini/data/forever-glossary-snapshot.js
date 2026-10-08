@@ -116,10 +116,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "orc"
   },
   {
    "id": "hunter-talent-2",
@@ -218,10 +219,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "orc"
   },
   {
    "id": "hunter-talent-3",
@@ -320,10 +322,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "hunter-talent-4",
@@ -405,10 +408,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "hunter-talent-5",
@@ -490,10 +494,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "hunter-talent-6",
@@ -575,10 +580,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "undead"
   },
   {
    "id": "hunter-talent-7",
@@ -660,10 +666,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "hunter-talent-8",
@@ -745,10 +752,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "hunter-talent-9",
@@ -830,10 +838,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "hunter-talent-10",
@@ -915,10 +924,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "tauren"
   },
   {
    "id": "hunter-talent-11",
@@ -1000,10 +1010,11 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族/职业组合文章原文用词；种族归属待逐条回原文核对",
-     "checkedAt": "2026-10-07"
+     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "raceId": "troll"
   },
   {
    "id": "hunter-talent-12",

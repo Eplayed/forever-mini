@@ -30,7 +30,7 @@ SRC = os.path.join(ROOT, "src")
 TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "glossary", "provenance"]
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races", "glossary", "provenance"]
 # 演示结构（_demo.json）里写死了层级门槛与前置链，用它做确定性断言
 DEMO_A00 = "a-0-0"
 DEMO_A01 = "a-0-1"
@@ -109,7 +109,7 @@ def open_talent(page, base, extra=""):
 
 
 def test_pages(browser, base):
-    print("\n[1] 七页渲染")
+    print("\n[1] %d 页渲染" % len(PAGES))
     for name in PAGES:
         ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
         page = ctx.new_page()
@@ -378,7 +378,7 @@ def test_abilities(browser, base):
 def test_design_baseline(browser, base):
     """吸收自通用设计走查规则的量化底线：每屏一个 H1、触屏点击目标 ≥44px、
        控件有可读名、图片有 alt、数字用等宽对齐。见 docs/UI.md 第七节。"""
-    print("\n[7] 设计量化基线")
+    print("\n[8] 设计量化基线")
     for mob, vp in [("桌面", {"width": 1440, "height": 1000}),
                     ("移动 375", {"width": 375, "height": 812, "is_mobile": True, "has_touch": True})]:
         ctx = browser.new_context(viewport=vp, is_mobile=("移动" in mob), has_touch=("移动" in mob))
@@ -420,7 +420,7 @@ def test_design_baseline(browser, base):
 
 
 def test_mobile(browser, base):
-    print("\n[8] 375px 移动端")
+    print("\n[9] 375px 移动端")
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     page = ctx.new_page()
     errors = []
@@ -443,6 +443,130 @@ def test_mobile(browser, base):
     ctx.close()
 
 
+def test_races(browser, base):
+    """种族页与分组导航：矩阵完整性、筛选、逐条来源、冲突留痕、移动端点击目标。"""
+    print("\n[7] 种族页与分组导航")
+    import json
+    rc = json.load(open(os.path.join(SRC, "data", "races.json"), encoding="utf-8"))
+    n_races = len(rc["races"])
+    n_traits = sum(len(x.get("traits") or []) + len(((x.get("subgroup") or {}).get("traits") or []))
+                   for x in rc["races"])
+    n_marks = sum(len(x["classes"]) for x in rc["races"])
+    n_horde = len([x for x in rc["races"] if x["faction"] == "horde"])
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("console", lambda m: errs.append(m.text[:120]) if m.type == "error" else None)
+    page.goto(base + "/races.html", wait_until="networkidle")
+    page.wait_for_timeout(1000)
+    check("种族页无脚本报错", not errs, "报错 %d %s" % (len(errs), errs[:2]))
+    rows = page.evaluate("() => document.querySelectorAll('#mx tbody tr').length")
+    cols = page.evaluate("() => document.querySelectorAll('#mx thead th').length - 1")
+    marks = page.evaluate("() => document.querySelectorAll('#mx td.y').length")
+    dashes = page.evaluate("() => document.querySelectorAll('#mx td.n').length")
+    trs = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
+    check("矩阵行数与数据一致", rows == n_races, "DOM %d / 数据 %d" % (rows, n_races))
+    check("矩阵覆盖 9 个职业列", cols == 9, "列 %d" % cols)
+    check("✓ 与 — 铺满整表不留空", marks + dashes == rows * 9,
+          "✓ %d + — %d，应 %d" % (marks, dashes, rows * 9))
+    check("✓ 数等于数据里的可选职业总数", marks == n_marks, "DOM %d / 数据 %d" % (marks, n_marks))
+    check("特长表条数与数据一致", trs == n_traits, "DOM %d / 数据 %d" % (trs, n_traits))
+
+    col2 = page.evaluate("() => document.querySelectorAll('#mx tbody td:nth-child(2).y').length")
+    page.click("#mx thead th:nth-child(2) button")
+    page.wait_for_timeout(250)
+    off = page.evaluate("() => document.querySelectorAll('#mx tbody tr.off').length")
+    check("点表头职业可按列筛选", off == rows - col2, "灰掉 %d 行（该列 ✓ %d 行）" % (off, col2))
+    page.click("#mx thead th:nth-child(2) button")
+    page.wait_for_timeout(250)
+    check("再点一次取消筛选",
+          page.evaluate("() => document.querySelectorAll('#mx tbody tr.off').length") == 0)
+
+    page.select_option("#ff", "horde")
+    page.wait_for_timeout(250)
+    h = page.evaluate("() => document.querySelectorAll('#mx tbody tr').length")
+    check("阵营筛选生效", h == n_horde, "部落 %d 行（应 %d）" % (h, n_horde))
+    page.select_option("#ff", "")
+    page.wait_for_timeout(200)
+
+    page.fill("#fq", "昏迷")
+    page.wait_for_timeout(250)
+    found = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
+    check("特长搜索按整句生效", 0 < found < trs, "「昏迷」命中 %d 条" % found)
+    page.fill("#fq", "")
+    page.wait_for_timeout(200)
+
+    page.click("#tt tbody tr:first-child button.info")
+    page.wait_for_timeout(300)
+    box = page.evaluate("() => { const b = document.getElementById('srcbox');"
+                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
+    check("特长逐条来源可展开并指向官方中文页",
+          "official_cn" in box and "wow.blizzard.cn" in box, box[:56].replace("\n", " "))
+    text = page.evaluate("() => document.querySelector('#main').innerText")
+    check("矩阵与导语两种说法并存且写了处置",
+          "同一页里两种说法并存" in text and "本站处置" in text)
+    check("种族页写明没采集什么", "这一页没有的" in text and "英文原名" in text)
+    cards = page.evaluate("() => document.querySelectorAll('.rcard').length")
+    check("种族卡数量与矩阵行数一致", cards == n_races, "卡片 %d" % cards)
+    page.query_selector(".rcard button[data-d]").click()
+    page.wait_for_timeout(250)
+    dr = page.evaluate("() => { const d = document.querySelector('.rcard .drawer');"
+                       "return d && d.style.display !== 'none' ? d.innerText.length : 0; }")
+    check("种族卡来源抽屉能展开", dr > 20, "抽屉 %d 字" % dr)
+    page.screenshot(path=os.path.join(SHOT_DIR, "races-matrix.png"), full_page=True)
+
+    groups = page.evaluate("() => [...document.querySelectorAll('nav.main .ndb')]"
+                           ".map(b => b.textContent.replace('▾', '').trim())")
+    check("导航收拢成 5 个分组", groups == ["天赋", "职业", "种族", "世界", "工具"], str(groups))
+    page.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
+                  ".find(x => x.textContent.indexOf('世界') >= 0); b.click(); }")
+    page.wait_for_timeout(250)
+    panel = page.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
+                          ".find(x => x.textContent.indexOf('世界') >= 0);"
+                          "const p = b.parentNode.querySelector('.ndp');"
+                          "return {open: b.parentNode.className.indexOf('open') >= 0,"
+                          " items: [...p.querySelectorAll('a b')].map(a => a.textContent)}; }")
+    check("点「世界」展开面板并列出副本手册",
+          panel["open"] and any("副本手册" in i for i in panel["items"]), str(panel["items"]))
+    page.keyboard.press("Escape")
+    page.wait_for_timeout(200)
+    check("Esc 关闭面板", page.evaluate("() => document.querySelectorAll('nav.main .nd.open').length") == 0)
+    onb = page.evaluate("() => { const b = document.querySelector('nav.main .ndb.on');"
+                        "return b ? b.textContent.trim() : ''; }")
+    check("当前页所在分组高亮", "种族" in onb, "高亮「%s」" % onb)
+    ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780}, is_mobile=True, has_touch=True)
+    mp = m.new_page()
+    mp.goto(base + "/races.html", wait_until="networkidle")
+    mp.wait_for_timeout(1000)
+    small = mp.evaluate("() => [...document.querySelectorAll('nav.main .ndb, nav.main a, #mx thead button.ch')]"
+                        ".filter(e => e.offsetHeight && e.offsetHeight < 44)"
+                        ".map(e => (e.className || 'a') + ':' + e.offsetHeight)")
+    check("移动端导航与矩阵表头点击目标 ≥44px", not small, str(small[:4]))
+    mp.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
+                ".find(x => x.textContent.indexOf('世界') >= 0); b.click(); }")
+    mp.wait_for_timeout(250)
+    mob = mp.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
+                      ".find(x => x.textContent.indexOf('世界') >= 0);"
+                      "const p = b.parentNode.querySelector('.ndp'); const r = p.getBoundingClientRect();"
+                      "const hs = [...p.querySelectorAll('a')].map(a => a.offsetHeight);"
+                      "const lefts = [...p.querySelectorAll('a b')].map(x => Math.round(x.getBoundingClientRect().x - r.x));"
+                      "return {right: Math.round(r.right), vw: window.innerWidth, min: Math.min.apply(null, hs), lefts: lefts}; }")
+    check("移动端下拉不顶出视口且面板项 ≥44px",
+          mob["right"] <= mob["vw"] and mob["min"] >= 44, json.dumps(mob, ensure_ascii=False))
+    # 面板项是纵向 flex，移动端通用规则给的 align-items:center 会把标题与说明居中，这里必须左对齐
+    check("移动端面板条目左对齐", all(v < 24 for v in mob["lefts"]), "文字左边缘偏移 %s" % mob["lefts"])
+    mp.goto(base + "/dungeons.html", wait_until="networkidle")
+    mp.wait_for_timeout(1000)
+    dtext = mp.evaluate("() => document.querySelector('#main').innerText")
+    check("副本页写明「世界」里还没采集的板块",
+          "还没采集的" in dtext and "世界地图" in dtext and "PvP" in dtext)
+    mp.screenshot(path=os.path.join(SHOT_DIR, "nav-mobile-open.png"))
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -458,6 +582,7 @@ def main():
             test_dungeon_banner(browser, base)
             test_chooser(browser, base)
             test_abilities(browser, base)
+            test_races(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

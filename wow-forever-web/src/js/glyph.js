@@ -59,5 +59,16 @@ window.Glyph = (function () {
       '<rect width="28" height="28" rx="4" fill="hsl(' + hue + ',18%,22%)" stroke="hsl(' + hue + ',22%,38%)"/>' +
       '<text x="14" y="19" text-anchor="middle" font-size="12" fill="hsl(' + hue + ',40%,78%)" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
   }
-  return { classTile: classTile, dungeonBanner: dungeonBanner, talentTile: talentTile, color: CLASS_COLOR };
+  /* 种族方块：阵营色打底（部落偏暖红、联盟偏冷蓝），同阵营内按种子小幅浮动区分。
+     无限服新种族的官方图标能不能取到尚未证实，所以一律自绘，不热链第三方图标。 */
+  var FACTION_HUE = { horde: 8, alliance: 212 };
+  function raceTile(seed, faction, cn) {
+    var h = hash(seed);
+    var base = FACTION_HUE[faction] === undefined ? 40 : FACTION_HUE[faction];
+    var hue = (base + (h % 17) - 8 + 360) % 360;
+    return '<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">' +
+      '<rect width="40" height="40" rx="6" fill="hsl(' + hue + ',30%,17%)" stroke="hsl(' + hue + ',46%,46%)" stroke-opacity=".7"/>' +
+      '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="hsl(' + hue + ',62%,76%)" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
+  }
+  return { classTile: classTile, dungeonBanner: dungeonBanner, talentTile: talentTile, raceTile: raceTile, color: CLASS_COLOR };
 })();
