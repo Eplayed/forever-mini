@@ -1,0 +1,166 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-08",
+  "kind": "site-opinion",
+  "note": "这是本站按经典机制与无限服公开资料整理的玩法归类，不是官方推荐，也不构成强度排行。无限服对职业技能与机制有改动，正式版上线后需重核。",
+  "notRanked": true
+ },
+ "questions": [
+  {
+   "id": "position",
+   "q": "打怪的时候，你更想站在哪里？",
+   "hint": "先分近战与远程，这一条最影响手感",
+   "options": [
+    {
+     "id": "melee",
+     "label": "贴上去打",
+     "note": "愿意贴脸输出",
+     "weight": { "warrior": 3, "rogue": 3, "paladin": 2, "druid": 1, "shaman": 1 }
+    },
+    {
+     "id": "ranged",
+     "label": "站远一点",
+     "note": "偏好保持距离",
+     "weight": { "hunter": 3, "mage": 3, "warlock": 3, "priest": 2, "shaman": 1, "druid": 1 }
+    },
+    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+   ]
+  },
+  {
+   "id": "role",
+   "q": "组队的时候你想干什么？",
+   "hint": "决定你每天在副本里做什么动作",
+   "options": [
+    {
+     "id": "tank",
+     "label": "替队友扛伤害",
+     "note": "愿意站前排拉怪",
+     "weight": { "warrior": 3, "paladin": 3, "druid": 2, "shaman": 1 }
+    },
+    {
+     "id": "heal",
+     "label": "给队友加血",
+     "note": "愿意当治疗",
+     "weight": { "priest": 3, "paladin": 3, "druid": 3, "shaman": 2 }
+    },
+    {
+     "id": "dps",
+     "label": "专注打伤害",
+     "note": "只想把怪打死",
+     "weight": { "mage": 3, "warlock": 3, "rogue": 3, "hunter": 2, "priest": 1, "shaman": 1, "warrior": 1, "druid": 1 }
+    },
+    {
+     "id": "solo",
+     "label": "基本一个人玩",
+     "note": "以单人活动为主",
+     "weight": { "hunter": 3, "warlock": 3, "mage": 2, "druid": 2, "paladin": 2, "rogue": 1 }
+    }
+   ]
+  },
+  {
+   "id": "pet",
+   "q": "想要一个跟你一起打的帮手吗？",
+   "hint": "宠物和召唤物能替你分担很多压力",
+   "options": [
+    {
+     "id": "want",
+     "label": "想要，最好有个宠",
+     "note": "需要宠物或召唤物分担",
+     "weight": { "hunter": 3, "warlock": 3, "druid": 1 }
+    },
+    {
+     "id": "no",
+     "label": "不想要，自己打",
+     "note": "不想管理宠物",
+     "weight": { "warrior": 2, "rogue": 2, "mage": 2, "paladin": 1, "priest": 1, "shaman": 1 }
+    },
+    { "id": "either", "label": "无所谓", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+   ]
+  },
+  {
+   "id": "complexity",
+   "q": "操作上手你喜欢哪种？",
+   "hint": "技能数量与站位要求差别很大",
+   "options": [
+    {
+     "id": "simple",
+     "label": "技能少一点，节奏稳",
+     "note": "偏好简单直接的操作",
+     "weight": { "warrior": 2, "hunter": 2, "paladin": 2, "warlock": 1, "druid": 1 }
+    },
+    {
+     "id": "complex",
+     "label": "技能多，讲连招和站位",
+     "note": "愿意练操作",
+     "weight": { "rogue": 3, "mage": 2, "priest": 2, "shaman": 2, "druid": 2, "warlock": 1 }
+    },
+    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+   ]
+  },
+  {
+   "id": "leveling",
+   "q": "升级路上你怎么玩？",
+   "hint": "单人练级与组队下本的体验差别很大",
+   "options": [
+    {
+     "id": "soloFast",
+     "label": "一个人也要刷刷刷",
+     "note": "单人练级效率优先",
+     "weight": { "mage": 3, "hunter": 3, "warlock": 2, "paladin": 2, "druid": 2, "rogue": 1 }
+    },
+    {
+     "id": "group",
+     "label": "主要跟队友下副本",
+     "note": "以组队副本为主",
+     "weight": { "priest": 3, "shaman": 3, "paladin": 2, "druid": 2, "warrior": 1 }
+    },
+    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+   ]
+  },
+  {
+   "id": "armor",
+   "q": "你想穿哪种护甲？",
+   "hint": "护甲类型在经典机制里是职业硬约束",
+   "options": [
+    {
+     "id": "plate",
+     "label": "板甲，厚实在前",
+     "note": "想要板甲",
+     "weight": { "warrior": 3, "paladin": 3 }
+    },
+    {
+     "id": "medium",
+     "label": "锁甲或皮甲",
+     "note": "接受锁甲皮甲",
+     "weight": { "hunter": 2, "shaman": 2, "rogue": 2, "druid": 2 }
+    },
+    {
+     "id": "cloth",
+     "label": "法袍就行",
+     "note": "穿法袍",
+     "weight": { "mage": 3, "priest": 3, "warlock": 3 }
+    }
+   ]
+  },
+  {
+   "id": "mobility",
+   "q": "机动性对你重要吗？",
+   "hint": "位移、变身、解控这些是长期体验差异",
+   "options": [
+    {
+     "id": "high",
+     "label": "重要，想跑得快、能变形态",
+     "note": "看重机动与形态",
+     "weight": { "druid": 3, "rogue": 3, "mage": 2, "hunter": 1 }
+    },
+    {
+     "id": "low",
+     "label": "不重要，站得住就行",
+     "note": "更看重站得住",
+     "weight": { "warrior": 2, "paladin": 2, "priest": 1, "warlock": 1, "shaman": 1 }
+    },
+    { "id": "either", "label": "都行", "note": "", "weight": { "warrior": 1, "paladin": 1, "hunter": 1, "rogue": 1, "priest": 1, "shaman": 1, "mage": 1, "warlock": 1, "druid": 1 } }
+   ]
+  }
+ ]
+}

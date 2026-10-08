@@ -39,8 +39,8 @@
 | --- | --- | --- |
 | 产品 | 已定 | PRD v1.0 与参考站对照 `docs/reference-gap.md` 已定范围；P0 为天赋计算器、技能书、术语、副本手册、溯源 |
 | 策划 | 待确认 | 技能"新增/改动/删除/未变"四态结构已定，但无数据可填；选职业问答建议排下一批 |
-| UI | 已定 | 设计令牌与组件状态在 `docs/UI.md`；7 页桌面与移动端截图在 `docs/screenshots/`；小程序沿用同一套令牌，截图在 `for-mini/docs/screenshots/` |
-| 开发 | 已定 | 仓库合并为 monorepo（远程 `Eplayed/forever-mini`）；静态站 7 页可跑，`build-data.js` 通过，图标 358 张本地化；`for-mini` 已转为无限服小程序底子（数据层三级回退 + 中英速查 + 首页完整度），新增 `tools/export-mini.js`。验证记录：`for-mini/docs/VERIFY-2026-10-08.md` |
+| UI | 部分待补 | 设计令牌与组件状态在 `docs/UI.md`；站点截图在 `docs/screenshots/`；小程序沿用同一套令牌，截图在 `for-mini/docs/screenshots/` |
+| 开发 | 已定 | 资料站新增「选职业问答」页与溯源页方法论段，修掉减点模式失效与导航高亮失效，新增 `tools/site-check.py` 回归自检（47 项全过）；仓库合并为 monorepo（远程 `Eplayed/forever-mini`）；静态站 7 页可跑，`build-data.js` 通过，图标 358 张本地化；`for-mini` 已转为无限服小程序底子（数据层三级回退 + 中英速查 + 首页完整度），新增 `tools/export-mini.js`。验证记录：`for-mini/docs/VERIFY-2026-10-08.md` |
 | 数据 | 部分阻塞 | 天赋 473 节点入库但**层级点数门槛无来源**（阻塞）；89 条两源译名分歧待官方定名；英文原名全缺；掉落无源 |
 | 运营 | 待确认 | 关键路径仍是小程序备案；`for-mini` 现为测试号 `touristappid`，独立 appid 与名称（D1）未定，OSS 域名白名单要等 appid |
 
@@ -67,3 +67,4 @@
 | 2026-10-07 | 全部 | 建立六角色协作机制 | `AGENTS.md`、本文件、6 个 skill | 已定 | — |
 | 2026-10-08 | wow-dev | 仓库合并为 monorepo（远程 `Eplayed/forever-mini`），`for-mini` 由 AI 手册改造为无限服小程序底子，新增基底→小程序导出脚本 | `for-mini/`、`tools/export-mini.js`、`for-mini/docs/VERIFY-2026-10-08.md`、根 `README.md` | 已定（chip/收藏/复制的点击动作待人工手测；`live` 链路等 OSS 上传后回验） | wow-ops |
 | 2026-10-08 | wow-dev | 修根 `AGENTS.md` 上移后遗留的两处歧义：产出路径全部补上 `wow-forever-web/` 或 `for-mini/` 前缀并补小程序截图位；图标口径改回"新物品图标能否取自官方 CDN 尚未证实"，验证基线补第 4、5 条（点击动作无证据必须单列、每轮登记台账） | 根 `AGENTS.md`、本文件 | 已定 | 各角色 |
+| 2026-10-08 | wow-dev | 修天赋计算器减点模式失效与导航高亮失效、补自绘头标、按 `reference-gap.md` 做选职业问答页与溯源页方法论段、新增 `tools/site-check.py` 回归自检 | `src/chooser.html`、`src/data/chooser.json`、`src/data/method.json`、`tools/site-check.py`、`tools/make-favicon.py`、`docs/VERIFY-2026-10-08-site.md`、`docs/screenshots/check-2026-10-08/` | 已定（47/47 通过；真机长按、问答权重口径、新组件未进 UI.md 三项待办） | wow-ui（归档组件）→ wow-planner（问答权重口径确认） |

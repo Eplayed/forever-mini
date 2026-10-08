@@ -94,6 +94,32 @@ fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
   });
 });
 
+// 本站观点类数据：问答与方法说明，防止被当成官方口径
+const ch = read('chooser.json');
+const classIds = new Set(cl.classes.map((c) => c.id));
+if (ch.meta && ch.meta.kind !== 'site-opinion') errs.push('chooser.json：必须标 kind=site-opinion，问答结论不是官方推荐');
+const qSeen = {};
+(ch.questions || []).forEach((q) => {
+  if (!q.id || !q.q) errs.push(`chooser：题目缺 id 或题干 ${q.id || '?'}`);
+  if (qSeen[q.id]) errs.push(`chooser：题目 id 重复 ${q.id}`);
+  qSeen[q.id] = 1;
+  if (!(q.options || []).length) errs.push(`chooser ${q.id}：没有选项`);
+  const oSeen = {};
+  (q.options || []).forEach((o) => {
+    if (oSeen[o.id]) errs.push(`chooser ${q.id}：选项 id 重复 ${o.id}`);
+    oSeen[o.id] = 1;
+    const keys = Object.keys(o.weight || {});
+    if (!keys.length) errs.push(`chooser ${q.id}/${o.id}：没有任何职业权重`);
+    if (!o.label) errs.push(`chooser ${q.id}/${o.id}：缺选项文案`);
+    keys.forEach((cid) => { if (!classIds.has(cid)) errs.push(`chooser ${q.id}/${o.id}：权重指向未知职业 ${cid}`); });
+  });
+});
+if (Object.keys(qSeen).length < 5) errs.push(`chooser：题目只有 ${Object.keys(qSeen).length} 道，少于 5 道不足以归类`);
+const me = read('method.json');
+if (!(me.steps || []).length) errs.push('method.json：缺方法说明条目');
+(me.steps || []).forEach((x) => { if (!x.title || !x.body) errs.push(`method：说明「${x.title || '?'}」缺标题或正文`); });
+if (!me.recheck || !me.onError) errs.push('method.json：缺「错了怎么办」或「何时重核」说明');
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="无限资料站标记：三系天赋节点">
+<rect width="512" height="512" rx="96" fill="#0e1013"/>
+<rect x="46" y="46" width="420" height="420" rx="67" fill="none" stroke="#2b3038" stroke-width="6"/>
+<line x1="128" y1="123" x2="128" y2="384" stroke="#2b3038" stroke-width="8"/>
+<line x1="256" y1="123" x2="256" y2="384" stroke="#2b3038" stroke-width="8"/>
+<line x1="384" y1="123" x2="384" y2="384" stroke="#2b3038" stroke-width="8"/>
+<line x1="128" y1="210" x2="384" y2="210" stroke="#2b3038" stroke-width="6"/>
+<line x1="128" y1="297" x2="384" y2="297" stroke="#2b3038" stroke-width="6"/>
+<line x1="128" y1="384" x2="384" y2="384" stroke="#2b3038" stroke-width="6"/>
+<circle cx="128" cy="123" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="128" cy="210" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="128" cy="297" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="128" cy="384" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="256" cy="123" r="32" fill="#e0a96d"/>
+<circle cx="256" cy="123" r="44" fill="none" stroke="#e0a96d" stroke-width="6"/>
+<circle cx="256" cy="210" r="32" fill="#e0a96d"/>
+<circle cx="256" cy="210" r="44" fill="none" stroke="#e0a96d" stroke-width="6"/>
+<circle cx="256" cy="297" r="32" fill="#e0a96d"/>
+<circle cx="256" cy="297" r="44" fill="none" stroke="#e0a96d" stroke-width="6"/>
+<circle cx="256" cy="384" r="32" fill="#e0a96d"/>
+<circle cx="256" cy="384" r="44" fill="none" stroke="#e0a96d" stroke-width="6"/>
+<circle cx="384" cy="123" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="384" cy="210" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="384" cy="297" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+<circle cx="384" cy="384" r="32" fill="#171a1f" stroke="#7f8ea8" stroke-width="7"/>
+</svg>

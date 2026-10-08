@@ -1,8 +1,9 @@
 /* 页面渲染与交互 */
 (function () {
   var D = window.WowData, E = window.TalentEngine;
-  var NAV = [['index.html', '首页'], ['talent.html', '天赋计算器'], ['skills.html', '技能书'],
-    ['dungeons.html', '副本手册'], ['systems.html', '系统与新区域'], ['glossary.html', '术语速查'], ['provenance.html', '溯源']];
+  var NAV = [['index.html', '首页'], ['talent.html', '天赋计算器'], ['chooser.html', '选职业问答'],
+    ['skills.html', '技能书'], ['dungeons.html', '副本手册'], ['systems.html', '系统与新区域'],
+    ['glossary.html', '术语速查'], ['provenance.html', '溯源']];
   var LS = 'wfs.build.';
   var page = document.body.getAttribute('data-page');
 
@@ -17,7 +18,9 @@
     var d = Math.max(0, Math.floor(now / 86400000)), h = Math.max(0, Math.floor(now / 3600000) % 24);
     el('top').innerHTML = '<div class="in"><div class="brand">无限<span>资料站</span></div><nav class="main">' +
       NAV.map(function (n) {
-        return '<a href="' + n[0] + '" class="' + (page === n[1] ? 'on' : '') + '">' + n[1] + '</a>';
+        // 高亮按文件名比对：page 存的是 data-page（英文键），拿中文标签比永远不命中
+        var key = page === 'home' ? 'index' : page;
+        return '<a href="' + n[0] + '" class="' + (key === n[0].replace('.html', '') ? 'on' : '') + '">' + n[1] + '</a>';
       }).join('') + '</nav><div class="chip">距上线 ' + d + ' 天 ' + h + ' 时</div></div>';
     Promise.all([D.load('data/meta.json'), D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json')])
       .then(function (r) {
@@ -45,7 +48,10 @@
           '<div class="stat"><b>' + classes.length + '</b>职业</div>' +
           '<div class="stat"><b>11-05</b>上线</div></div></div>' +
           '<div class="banner">本站基于测试服资料整理，正式服 2026-11-05 上线后需整体重核。</div>' +
-          '<div class="card"><h2>选职业</h2><div class="grid g9">' +
+          '<div class="card"><h2>选职业</h2>' +
+          '<p class="dim" style="margin-bottom:var(--s3)">第一次接触无限服、不知道选哪个？' +
+          '<a href="chooser.html">做个 7 题玩法问答 →</a>（本站整理，不是强度排行）</p>' +
+          '<div class="grid g9">' +
           classes.map(function (c) {
             var n = gl.filter(function (g) { return g.classId === c.id; }).length;
             var lv = c.talentCount ? (c.nameVerified ? 'L2' : 'L2') : 'L3';
@@ -166,10 +172,12 @@
     var tip = [n.nameCn || '未命名', n.nameEn, rk + '/' + (n.maxRanks === null ? '?' : n.maxRanks),
       n.nameAlt ? '另一来源译作「' + n.nameAlt + '」，待定稿' : '',
       n.nameVerified ? '名称与官网中文一致' : '名称待实测',
-      can.ok ? '点击' + (tstate.mode === 'add' ? '加 1 点' : '') : can.why].filter(Boolean).join(' ｜ ');
+      can.ok ? (tstate.mode === 'add' ? '点击加 1 点（右键或长按减点）' : '点击减 1 点') : can.why].filter(Boolean).join(' ｜ ');
     var ph = window.Glyph ? Glyph.talentTile(n.id, n.nameCn) : '';
     var img = n.iconKey ? '<img class="ico" src="img/icons/' + encodeURIComponent(n.iconKey) + '.jpg" alt="" loading="lazy" onerror="this.className=\'ico bad\'">' : '';
-    return '<div class="' + cls + '" data-n="' + D.esc(n.id) + '" data-t="' + ti + '" title="' + D.esc(tip) + '">' +
+    var label = (n.nameCn || n.nameEn || '未命名天赋') + '，已点 ' + rk + ' / 上限 ' + (n.maxRanks == null ? '未核实' : n.maxRanks);
+    return '<div class="' + cls + '" data-n="' + D.esc(n.id) + '" data-t="' + ti + '" title="' + D.esc(tip) +
+      '" role="button" tabindex="0" aria-label="' + D.esc(label) + '" aria-pressed="' + (rk ? 'true' : 'false') + '">' +
       '<span class="ico-wrap">' + ph + img + '</span>' +
       (n.level === 'L2' ? '<i class="flag"></i>' : '') + (n.nameVerified ? '<i class="vok"></i>' : '') +
       (n.nameConflict ? '<i class="cfl"></i>' : '') +
@@ -206,6 +214,22 @@
     if (unverified) g.push(unverified + ' 个天赋名尚未与官网中文对上，标黄点，以游戏内为准');
     return g;
   }
+  var lastLongPress = 0;
+  function bindLongPress(node) {
+    var timer = null;
+    function cancel() { if (timer) { clearTimeout(timer); timer = null; } }
+    node.ontouchstart = function () {
+      timer = setTimeout(function () {
+        timer = null;
+        // 长按即减点；记时间戳用于吞掉手指抬起后浏览器补发的 click（此时节点已被重渲染替换，元素级标记会失效）
+        lastLongPress = Date.now();
+        act(node.dataset.t, node.dataset.n, 'sub');
+      }, 500);
+    };
+    node.ontouchmove = cancel;
+    node.ontouchcancel = cancel;
+    node.ontouchend = cancel;
+  }
   function bindTalent() {
     Array.prototype.forEach.call(document.querySelectorAll('.cls[data-c]'), function (b) {
       b.onclick = function () { location.href = 'talent.html?c=' + b.dataset.c; };
@@ -219,8 +243,16 @@
     var b2 = el('back');
     if (b2) b2.onclick = function () { loadTree(tstate.classId); };
     Array.prototype.forEach.call(document.querySelectorAll('.node'), function (n) {
-      n.onclick = function () { act(n.dataset.t, n.dataset.n, 'add'); };
+      // 左键跟随当前模式（加点/减点），右键与长按固定减点——移动端没有右键，长按是第二条通道
+      n.onclick = function () {
+        if (Date.now() - lastLongPress < 700) return;
+        act(n.dataset.t, n.dataset.n);
+      };
       n.oncontextmenu = function (e) { e.preventDefault(); act(n.dataset.t, n.dataset.n, 'sub'); };
+      n.onkeydown = function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); act(n.dataset.t, n.dataset.n); }
+      };
+      bindLongPress(n);
     });
     Array.prototype.forEach.call(document.querySelectorAll('[data-clear]'), function (b) {
       b.onclick = function () { clearTree(+b.dataset.clear); };
@@ -275,6 +307,100 @@
       });
     });
     return out.join('\n');
+  }
+
+  /* ---------- 选职业问答 ---------- */
+  var cstate = { qs: [], meta: {}, classes: [], gloss: [], answers: {}, step: 0 };
+
+  function chooser() {
+    Promise.all([D.load('data/chooser.json'), D.load('data/classes.json'), D.load('data/glossary.json')]).then(function (r) {
+      cstate.qs = r[0].questions || []; cstate.meta = r[0].meta || {};
+      cstate.classes = r[1].classes || []; cstate.gloss = r[2].items || [];
+      drawChooser();
+    }).catch(fail);
+  }
+  function chooserScores() {
+    var score = {}, reasons = {}, cid;
+    cstate.classes.forEach(function (c) { score[c.id] = 0; reasons[c.id] = []; });
+    Object.keys(cstate.answers).forEach(function (qid) {
+      var q = cstate.qs.filter(function (x) { return x.id === qid; })[0];
+      if (!q) return;
+      var opt = q.options.filter(function (o) { return o.id === cstate.answers[qid]; })[0];
+      if (!opt) return;
+      for (cid in (opt.weight || {})) {
+        if (!Object.prototype.hasOwnProperty.call(opt.weight, cid)) continue;
+        var w = opt.weight[cid];
+        if (score[cid] === undefined) score[cid] = 0;
+        score[cid] += w;
+        if (w >= 2 && opt.note && reasons[cid].indexOf(opt.note) < 0) reasons[cid].push(opt.note);
+      }
+    });
+    return { score: score, reasons: reasons };
+  }
+  function classCard(c, score, max, reasons) {
+    var terms = cstate.gloss.filter(function (g) { return g.classId === c.id; }).length;
+    var pct = max ? Math.round(score / max * 100) : 0;
+    return '<div class="card mcard"><div class="crow">' +
+      '<div class="ic lg">' + (window.Glyph ? Glyph.classTile(c.id, c.cn) : D.esc((c.cn || '?').slice(0, 1))) + '</div>' +
+      '<div style="flex:1"><h2 style="margin:0">' + D.esc(c.cn) + ' <span class="dim mono">' + D.esc(c.en || '') + '</span></h2>' +
+      '<div class="mbar"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="dim">匹配度 ' + pct + '%（' + score + ' 分，本题库最高 ' + max + ' 分）</div></div></div>' +
+      (reasons.length ? '<ul class="list">' + reasons.map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul>' : '') +
+      '<p class="dim">' + (c.talentCount ? '天赋 ' + c.talentCount + ' 个，其中 ' + (c.nameVerified || 0) + ' 个中文名已与官网核对' : '该职业还没有已核实的官方中文天赋名') +
+      '；官方中文词条 ' + terms + ' 条。</p>' +
+      '<a class="btn" href="talent.html?c=' + c.id + '">看这个职业的天赋树 →</a></div>';
+  }
+  function drawChooser() {
+    var total = cstate.qs.length, done = cstate.step >= total;
+    var answered = Object.keys(cstate.answers).length;
+    var progress = '<div class="card"><div class="crow"><span class="dim">第 ' + Math.min(cstate.step + 1, total) + ' / ' + total + ' 题</span>' +
+      '<span class="sp"></span><button class="ghost" id="creset">重新开始</button></div>' +
+      '<div class="cov">' + cstate.qs.map(function (q, i) {
+        var w = (100 / total).toFixed(2) + '%';
+        var cls = cstate.answers[q.id] ? (i < cstate.step ? 'L0' : 'L1') : 'L3';
+        return '<i class="' + cls + '" style="width:' + w + '" title="' + D.esc(q.q) + '"></i>';
+      }).join('') + '</div></div>';
+    var head = '<div class="card"><h2>选职业问答</h2><p class="dim">' + D.esc(cstate.meta.note || '') + '</p></div>';
+    var body;
+    if (done) {
+      var s = chooserScores(), ids = Object.keys(s.score);
+      var max = Math.max.apply(null, ids.map(function (id) { return s.score[id]; }).concat([1]));
+      var ranked = ids.sort(function (a, b) { return s.score[b] - s.score[a]; });
+      var byId = {};
+      cstate.classes.forEach(function (c) { byId[c.id] = c; });
+      var top = ranked.slice(0, 3);
+      var tied = ranked.filter(function (id) { return s.score[id] === max; });
+      body = '<div class="banner gray">下面是按你选的玩法归类的候选，<b>不是强度排行，也不代表哪个职业更强</b>——' +
+        '无限服的机制改动还没实测，任何"哪个职业厉害"的说法现在都不可信。' +
+        (tied.length > 3 ? '这次并列第一有 ' + tied.length + ' 个职业，都算同样合适。' : '') + '</div>' +
+        top.map(function (id) { return classCard(byId[id] || { id: id, cn: id }, s.score[id], max, s.reasons[id] || []); }).join('') +
+        '<div class="card"><h2>其余候选</h2><div class="pool">' +
+        ranked.filter(function (id) { return top.indexOf(id) < 0; }).map(function (id) {
+          return '<span class="term">' + D.esc((byId[id] || {}).cn || id) + ' ' + s.score[id] + ' 分</span>';
+        }).join('') + '</div>' +
+        '<p class="dim" style="margin-top:8px">分数差距小于 2 分时应视为同样合适。想换个答案再算一次，点上面「重新开始」。</p></div>';
+    } else {
+      var q = cstate.qs[cstate.step];
+      body = '<div class="card"><h2>' + D.esc(q.q) + '</h2>' +
+        (q.hint ? '<p class="dim">' + D.esc(q.hint) + '</p>' : '') +
+        '<div class="qopts">' + q.options.map(function (o) {
+          return '<button class="qopt' + (cstate.answers[q.id] === o.id ? ' on' : '') + '" data-o="' + o.id + '">' + D.esc(o.label) + '</button>';
+        }).join('') + '</div>' +
+        '<div class="crow" style="margin-top:10px">' +
+        (cstate.step ? '<button class="ghost" id="cprev">← 上一题</button><span class="sp"></span>' : '') +
+        '<span class="dim">已答 ' + answered + ' 题</span></div></div>';
+    }
+    set(head + progress + body);
+    var rs = el('creset'); if (rs) rs.onclick = function () { cstate.answers = {}; cstate.step = 0; drawChooser(); };
+    var pv = el('cprev'); if (pv) pv.onclick = function () { cstate.step = Math.max(0, cstate.step - 1); drawChooser(); };
+    Array.prototype.forEach.call(document.querySelectorAll('.qopt'), function (b) {
+      b.onclick = function () {
+        cstate.answers[cstate.qs[cstate.step].id] = b.dataset.o;
+        cstate.step += 1;
+        drawChooser();
+      };
+    });
+    if (done) window.scrollTo(0, 0);
   }
 
   /* ---------- 技能书 ---------- */
@@ -386,9 +512,10 @@
 
   /* ---------- 溯源 ---------- */
   function provenance() {
-    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'), D.load('data/meta.json')])
+    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'), D.load('data/meta.json'), D.load('data/method.json')])
       .then(function (r) {
         var cov = D.coverage(r[2], r[1] ? r[0] : r[0], r[1]);
+        var m = r[4] || {};
         var names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
         var refs = [['wow.blizzard.cn/news/', '国服官方公告与职业深度解析', '可入自动化'],
         ['wow.blizzard.cn/24266320/', '国服在线修正', '可入自动化（需整页比对）'],
@@ -420,6 +547,15 @@
             '<div><h3>刻意没拿的部分</h3><p class="dim">' + D.esc(ti.excluded) + '</p>' +
             '<h3 style="margin-top:8px">还缺什么</h3><p class="dim">' + D.esc(ti.stillMissing) + '</p>' +
             '<h3 style="margin-top:8px">风险</h3><p class="dim" style="color:#f0c67e">' + D.esc(ti.risk) + '</p></div></div></div>' : '') +
+          (m.steps ? '<div class="card"><h2>我们怎么拿到这些数据</h2><p class="dim">' + D.esc(m.meta ? m.meta.note : '') + '</p>' +
+            '<div class="grid g2">' + m.steps.map(function (x) {
+              return '<div class="step"><h3>' + D.esc(x.title) + '</h3><p class="dim">' + D.esc(x.body) + '</p></div>';
+            }).join('') + '</div>' +
+            (m.neverTake ? '<h3 style="margin-top:var(--s4)">刻意不拿的东西</h3><ul class="list">' +
+              m.neverTake.map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul>' : '') +
+            (m.onError ? '<h3 style="margin-top:var(--s4)">被指出错了怎么办</h3><p class="dim">' + D.esc(m.onError) + '</p>' : '') +
+            (m.recheck ? '<h3 style="margin-top:var(--s4)">什么时候重核</h3><p class="dim">' + D.esc(m.recheck) + '</p>' : '') +
+            '<p class="src">方法说明核对日期：' + D.esc((m.meta || {}).generatedAt || '—') + '</p></div>' : '') +
           '<div class="card"><h2>还没被证实的</h2><ol class="q">' +
           (r[3].openQuestions || []).map(function (q) { return '<li>' + D.esc(q) + '</li>'; }).join('') + '</ol></div>' +
           '<div class="card"><h2>来源站点与用法边界</h2><table><thead><tr><th>站点</th><th>能给什么</th><th>怎么用</th></tr></thead><tbody>' +
@@ -462,5 +598,5 @@
   }
 
   shell();
-  ({ home: home, talent: talent, skills: skills, dungeons: dungeons, systems: systems, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, skills: skills, dungeons: dungeons, systems: systems, glossary: glossary, provenance: provenance })[page]();
 })();
