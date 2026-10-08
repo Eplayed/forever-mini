@@ -219,8 +219,9 @@
   function talent() {
     var q = new URLSearchParams(location.search);
     tstate.classId = q.get('c') || 'hunter';
-    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json')]).then(function (r) {
-      tstate.classes = r[0].classes; tstate.gloss = r[1].items;
+    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'),
+      D.load('data/art.json').catch(function () { return {}; })]).then(function (r) {
+      tstate.classes = r[0].classes; tstate.gloss = r[1].items; tstate.art = r[2] || {};
       return loadTree(tstate.classId);
     }).catch(fail);
   }
@@ -267,8 +268,11 @@
         (ccnt ? '，<b class="alert">' + ccnt + ' 个两源译名不一致（红框，两个叫法都保留）</b>' : '') +
         '。层级点数门槛还没核实，所以只按坐标摆位置、不算"第几层需要几点解锁"。最终以游戏内为准。</div>';
     }
+    var cband = (tstate.art && tstate.art.classes) ? tstate.art.classes[tstate.classId] : null;
     var body = trees.length ? renderTrees(trees, r) : renderPool(pool);
     set(head + banner + '<div class="tpanel">' +
+      (cband ? '<div class="tbg"><img src="' + D.esc(cband) + '" alt="" loading="lazy" ' +
+        'onerror="this.className=\'bad\'"><span class="dbn2-mark">客户端原画 · 本地转存</span></div>' : '') +
       '<div class="thead"><h1 class="title">' + D.esc(c.cn || '') + ' 天赋</h1>' +
       '<span class="pts">剩余 <b>' + Math.max(0, r.totalPoints - E.spent(tstate.state, trees)) + '</b>/' + r.totalPoints + '</span>' +
       '<input type="search" id="tq" placeholder="搜天赋名" style="max-width:180px">' +
@@ -713,23 +717,15 @@
   /* ---------- 副本手册 ---------- */
   function dunGaps(x) {
     var g = [];
-    if (!x.nameCn) g.push('官方中文名（现在保留英文原名，未机翻）');
+    if (!x.nameCn) g.push('中文定名（现在保留英文原名，未机翻）');
     if (x.nameCnConflict) g.push('中文名定稿：官方与转载两种叫法并存');
     if (!x.levelRange) g.push('可进入的等级区间');
-    if (!(x.bosses || []).length) g.push('BOSS 名单与数量');
-    g.push('掉落物品与掉落来源（本站不写百分比）');
+    if (!(x.bosses || []).length) g.push('首领名单：客户端解包里还没有这座本的数据');
+    else if (!(x.drops || []).length) g.push('掉落归属：上游开放数据库里还没有它的首领掉落');
+    else g.push('掉落的实装情况与概率（本站不写百分比，等正式服实测）');
     if (!(x.route || []).length) g.push('跑图路线与跳怪点');
-    if (x.kind === 'raid') g.push('开放时间、团队规模、BOSS 数——仅有第三方说法');
+    if (x.kind === 'raid') g.push('开放时间、团队规模——仅有第三方说法');
     return g;
-  }
-  function dunList(arr) {
-    if (!arr || !arr.length) return '';
-    return '<ul class="list">' + arr.map(function (b) {
-      if (typeof b === 'string') return '<li>' + D.esc(b) + '</li>';
-      return '<li>' + D.esc(b.nameCn || b.name || b.cn || '未定名') +
-        (b.nameEn ? ' <span class="dim mono">' + D.esc(b.nameEn) + '</span>' : '') +
-        (b.note ? '<span class="dim"> · ' + D.esc(b.note) + '</span>' : '') + '</li>';
-    }).join('') + '</ul>';
   }
   function dunRoute(arr) {
     if (!arr || !arr.length) return '';
@@ -754,27 +750,57 @@
     ['套装', '套装件数与效果在官方中文稿里还没出现，硬写等于编造。'],
     ['隐藏内容', '属攻略性质，本站红线不做攻略正文与机制清单。']
   ];
+  function dunStateText(x) {
+    var p = x.provenance || [];
+    var off = p.some(function (s) { return (s.type || '').indexOf('official') === 0; });
+    if (off || x.level !== 'L0') return DUN_STATE[x.level] || '';
+    return '名单与等级区间取自客户端解包（第三方资料站转述），未逐条进游戏核对';
+  }
+  function dunLoot(x) {
+    var bosses = x.bosses || [], drops = x.drops || [];
+    if (!bosses.length) return '<p class="dim">客户端解包还没给出这座本的首领名单——无限新增副本里这种的掉落表上游也还没有，不猜。</p>';
+    return '<ul class="bosslist">' + bosses.map(function (b) {
+      var mine = drops.filter(function (y) { return y.bossId === b.id; });
+      return '<li><div class="bh"><b>' + D.esc(b.nameCn) + '</b>' +
+        (mine.length ? '<span class="dim">' + mine.length + ' 件掉落</span>' : '<span class="dim">掉落未列</span>') + '</div>' +
+        (mine.length ? '<div class="loot">' + mine.map(function (y) {
+          return '<span class="loot-i">' + iconCell(y.iconKey, y.itemId, y.nameCn, 1) +
+            D.esc(y.nameCn) + '<span class="dim mono">#' + D.esc(y.itemId) + '</span>' + D.pill('L2') + '</span>';
+        }).join('') + '</div>'
+          : (b.note ? '<div class="note">' + D.esc(b.note) + '</div>' : '')) + '</li>';
+    }).join('') + '</ul>' + (x.lootNote ? '<div class="note">' + D.esc(x.lootNote) + '</div>' : '');
+  }
   function dungeons() {
-    D.load('data/dungeons.json').then(function (d) {
+    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
+      .then(function (rs) {
+      var d = rs[0], ART = rs[1] || {};
       var groups = [['newDungeons', '无限服新副本'], ['classicDungeons', '经典副本（在无限服）'], ['raids', '团队副本']];
-      set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">名单与等级区间来自官方与线索源；BOSS 技能、掉落、路线在没实测前一律留空并标注。</p></div>' +
-        '<div class="banner">掉落数据本站<b>不写百分比</b>：测试服看到的是"谁掉了"，不是"多大概率"。</div>' +
+      var all = [].concat(d.newDungeons || [], d.classicDungeons || [], d.raids || []);
+      var nb = all.reduce(function (s, x) { return s + (x.bosses || []).length; }, 0);
+      var nd = all.reduce(function (s, x) { return s + (x.drops || []).length; }, 0);
+      set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
+        (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
+        (d.raids || []).length + ' 座团本。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
+        '名单与等级区间取自客户端解包（第三方资料站转述）；掉落是上游按经典旧世开放数据库推的，一律标待实测。</p></div>' +
+        '<div class="banner">掉落数据本站<b>不写百分比</b>：这里只回答"谁掉了什么"，不回答"多大概率"。暴雪说过无限服重做过掉落，正式开放可能变化。</div>' +
         groups.map(function (g) {
           return '<div class="grp">' + g[1] + ' · ' + (d[g[0]] || []).length + '</div>' +
             (d[g[0]] || []).map(function (x) {
               var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
                 x.nameCn || x.nameEn || '未定名',
-                { kind: x.kind, sub: (x.nameCn && x.nameEn) ? x.nameEn : '' }) : '';
+                { kind: x.kind, sub: (x.nameCn && x.nameEn) ? x.nameEn : '',
+                  art: (ART.dungeons || {})[x.id] }) : '';
               return '<div class="card dcardx">' + banner +
                 '<div class="dcard"><div>' +
-                '<div class="nm">' + D.pill(x.level) + ' <span class="dim">' + DUN_STATE[x.level] +
-                (x.nameCn ? '' : '；官方中文名未公布') + '</span></div>' +
+                '<div class="nm">' + D.pill(x.level) + ' <span class="dim">' + dunStateText(x) +
+                (x.nameCn ? '' : '；中文定名未公布') + '</span></div>' +
                 '<div class="sub">' + (x.levelRange ? x.levelRange + ' 级 · ' : '等级区间待核 · ') +
-                'BOSS ' + ((x.bosses || []).length || '待实测') + ' · 路线 ' + ((x.route || []).length || '待实测') + ' 步</div>' +
+                'BOSS ' + ((x.bosses || []).length || '待实测') + ' · 掉落 ' + ((x.drops || []).length || '未列') +
+                ' · 路线 ' + ((x.route || []).length || '待实测') + ' 步</div>' +
                 (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' + D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
-                '</div><button class="ghost" data-d="' + D.esc(x.id) + '">展开来源</button></div>' +
+                '</div><button class="ghost" data-d="' + D.esc(x.id) + '">展开首领与掉落</button></div>' +
                 '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
-                '<h3>BOSS 与掉落</h3>' + (dunList(x.bosses) || '<p class="dim">待实测——没有任何可信来源给出这座本的 BOSS 与掉落，此处不留假数据。</p>') +
+                '<h3>首领与掉落</h3>' + dunLoot(x) +
                 '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
                 '<h3>这座本还没确认的</h3><ul class="list">' + dunGaps(x).map(function (g) { return '<li>' + D.esc(g) + '</li>'; }).join('') + '</ul>' +
                 '<h3>来源与核对</h3>' + D.sources(x.provenance) + '</div></div>';
@@ -787,10 +813,11 @@
         WORLD_TODO.map(function (x) { return '<tr><td>' + D.esc(x[0]) + '</td><td class="dim">' + D.esc(x[1]) + '</td></tr>'; }).join('') +
         '</tbody></table></div>');
       Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (b) {
+        var label = b.textContent;
         b.onclick = function () {
           var x = el('d-' + b.dataset.d);
           x.style.display = x.style.display === 'none' ? 'block' : 'none';
-          b.textContent = x.style.display === 'none' ? '展开来源' : '收起';
+          b.textContent = x.style.display === 'none' ? label : '收起';
         };
       });
     }).catch(fail);

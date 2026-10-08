@@ -9,7 +9,9 @@ const warns = [];
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 
 function isOfficial(src) {
-  return (src.type || '').indexOf('official') === 0;
+  const t = src.type || '';
+  // datamine_cn = 客户端解包出来的游戏内中文名（经第三方站转述），2026-10-08 决策算 L0 支撑
+  return t.indexOf('official') === 0 || t === 'datamine_cn';
 }
 function checkRecord(kind, rec, sourcesField) {
   const srcs = rec[sourcesField || 'provenance'] || [];
@@ -17,10 +19,12 @@ function checkRecord(kind, rec, sourcesField) {
   if (lvl === 'L0' && !srcs.some(isOfficial)) {
     errs.push(`${kind} ${rec.id}：标 L0 但没有任何官方来源`);
   }
-  // 中文名的 L0 只能由官方中文页支撑；英文官方页算 L1
+  // 中文名的 L0 可以由官方中文页支撑，也可以由客户端解包支撑（2026-10-08 用户决策）；
+  // 只有英文官方页的算 L1
   const cn = rec.cn || rec.nameCn;
-  if (lvl === 'L0' && cn && !srcs.some(function (x) { return x.type === 'official_cn'; })) {
-    errs.push(`${kind} ${rec.id}：中文名「${cn}」标 L0 但没有 official_cn 来源（英文官方页只能算 L1）`);
+  const cnBacked = srcs.some(function (x) { return x.type === 'official_cn' || x.type === 'datamine_cn'; });
+  if (lvl === 'L0' && cn && !cnBacked) {
+    errs.push(`${kind} ${rec.id}：中文名「${cn}」标 L0，但既没有 official_cn 也没有 datamine_cn 来源（英文官方页只能算 L1）`);
   }
   if (lvl === 'L0' && !cn && rec.nameEn) {
     errs.push(`${kind} ${rec.id}：只有官方英文内容却标 L0，按分级定义应标 L1`);
@@ -41,10 +45,20 @@ function checkRecord(kind, rec, sourcesField) {
     if ((t === 'fan_db' || t === 'media_cn') && /wow\.blizzard\.cn/.test(u)) {
       errs.push(`${kind} ${rec.id || ''}：官方中文页被标成 ${t}，来源分级写错了`);
     }
+    // 客户端解包来源必须可回查：没 url 或没抓取日期，等于一句没法验证的断言
+    if (t === 'datamine_cn') {
+      if (!u) errs.push(`${kind} ${rec.id || ''}：datamine_cn 没有 url，无法回查`);
+      else if (!/wclbox\.com|wowclassicforever\.info/.test(u)) errs.push(`${kind} ${rec.id || ''}：datamine_cn 指向未知的解包站 ${u}`);
+      if (!s.checkedAt) errs.push(`${kind} ${rec.id || ''}：datamine_cn 缺抓取日期`);
+    }
   });
+  if (lvl === 'L0' && !srcs.some((s) => s.type === 'official_cn') && srcs.some((s) => s.type === 'datamine_cn')) {
+    warns.push(`${kind} ${rec.id || ''}：L0 只有客户端解包支撑（官方中文页还没覆盖到这条）`);
+  }
   const FAN = /^https?:\/\/(www\.)?(wowhead|foreverchanges|wowclassicforever)/i;
   // 粉丝站链接可以作"人工参照"并存，但不能是 L0 的支撑：有官方中文来源时才允许留 L0
-  if (lvl === 'L0' && srcs.some((x) => FAN.test(x.url || '')) && !srcs.some((x) => x.type === 'official_cn')) {
+  const cnOrMine = srcs.some((x) => x.type === 'official_cn' || x.type === 'datamine_cn');
+  if (lvl === 'L0' && srcs.some((x) => FAN.test(x.url || '')) && !cnOrMine) {
     errs.push(`${kind} ${rec.id}：L0 只靠粉丝站来源支撑`);
   }
 }
@@ -77,7 +91,20 @@ const dg = read('dungeons.json');
 ['newDungeons', 'classicDungeons', 'raids'].forEach((k) => {
   (dg[k] || []).forEach((d) => {
     if (!d.nameEn && !d.nameCn) errs.push(`dungeon ${d.id}：中英文名都没有`);
-    (d.bosses || []).forEach((b) => { scanNoPercent('dungeon', b, d.id); });
+    (d.bosses || []).forEach((b) => {
+      scanNoPercent('dungeon', b, d.id);
+      if (!b.nameCn) errs.push(`dungeon ${d.id}：首领缺中文名`);
+    });
+    (d.drops || []).forEach((x, i) => {
+      scanNoPercent('drop', x, d.id + '/drop' + i);
+      if (!x.itemId || !/^\d+$/.test(String(x.itemId))) errs.push(`dungeon ${d.id}：第 ${i} 条掉落缺物品 ID`);
+      if (!x.nameCn) errs.push(`dungeon ${d.id}：第 ${i} 条掉落缺中文名`);
+      if (x.level === 'L0') errs.push(`dungeon ${d.id}：第 ${i} 条掉落标了 L0——上游掉落是按经典旧世推的，只能 L2`);
+      if (x.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', x.iconKey + '.jpg'))) {
+        warns.push(`dungeon ${d.id}：掉落图标 ${x.iconKey} 本地没有，界面退回自绘块`);
+      }
+    });
+    if ((d.drops || []).length && !d.lootNote) warns.push(`dungeon ${d.id}：有掉落却没写上上游口径说明（lootNote）`);
     scanIcons('dungeon', d, d.id);
     checkRecord('dungeon', d);
   });
@@ -314,6 +341,23 @@ if (!fs.existsSync(icPath)) {
   if (dupN) warns.push(`icons.json：${dupN} 处同职业同名挂了两个图标键，映射取后出现的那个（界面只用它做展示，不影响数据）`);
   console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文件 ' +
     fs.readdirSync(path.join(ROOT, '..', 'img', 'icons')).filter((f) => f.endsWith('.jpg')).length + ' 张');
+}
+
+// 客户端原画索引：art.json 里每个路径都要真的在仓库里（整目录可删，删了必须只影响视觉）
+const artPath = path.join(ROOT, 'art.json');
+if (fs.existsSync(artPath)) {
+  const art = JSON.parse(fs.readFileSync(artPath, 'utf8'));
+  ['classes', 'dungeons'].forEach((k) => {
+    Object.keys(art[k] || {}).forEach((id) => {
+      if (!fs.existsSync(path.join(ROOT, '..', art[k][id]))) {
+        errs.push(`art.json：${k}/${id} 指向的文件不存在（${art[k][id]}）`);
+      }
+    });
+  });
+  console.log('客户端原画：职业背景 ' + Object.keys(art.classes || {}).length +
+    ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张');
+} else {
+  warns.push('art.json 缺失：客户端原画全部退回自绘（跑 tools/fetch-art.py 可补）');
 }
 
 // 报告

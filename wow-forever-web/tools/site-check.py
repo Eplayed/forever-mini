@@ -297,8 +297,12 @@ def test_dungeon_banner(browser, base):
     check("横幅标题无 transform 变形", geo["transform"] in ("none", "matrix(1, 0, 0, 1, 0, 0)"), geo["transform"])
     check("标题字宽未被横向拉伸", per_char <= geo["font"] * 1.35,
           "字号 %.0fpx，单字实测宽 %.1fpx" % (geo["font"], per_char))
-    check("横幅保留「非游戏原画」标注",
-          page.evaluate("() => [...document.querySelectorAll('.dbn2-mark')].every(m => m.textContent.indexOf('非游戏原画') >= 0)"))
+    marks = page.evaluate("() => [...document.querySelectorAll('.dbn2-mark')].map(m => m.textContent.trim())")
+    honest = [m for m in marks if ("非游戏原画" in m) or ("客户端原画" in m)]
+    check("每张横幅都标明图是示意图还是客户端原画", len(honest) == len(marks) and marks,
+          "%d/%d 带标注" % (len(honest), len(marks)))
+    check("有客户端原画的副本用上了本地图",
+          any("客户端原画" in m for m in marks), "标注种类 %s" % sorted(set(marks)))
     body = page.evaluate("() => document.querySelector('#main').innerText")
     check("副本页不出现内部口径话术", "口径见来源" not in body and "provenance" not in body)
     page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-banner.png"))
@@ -502,7 +506,8 @@ def test_races(browser, base):
     box = page.evaluate("() => { const b = document.getElementById('srcbox');"
                         "return b && b.style.display !== 'none' ? b.innerText : ''; }")
     check("特长逐条来源可展开并指向官方中文页",
-          "official_cn" in box and "wow.blizzard.cn" in box, box[:56].replace("\n", " "))
+          ("官方中文" in box or "official_cn" in box) and "wow.blizzard.cn" in box,
+          box[:56].replace("\n", " "))
     text = page.evaluate("() => document.querySelector('#main').innerText")
     check("矩阵与导语两种说法并存且写了处置",
           "同一页里两种说法并存" in text and "本站处置" in text)
@@ -680,6 +685,58 @@ def test_grouping(browser, base):
     ctx.close()
 
 
+def test_dungeon_data(browser, base):
+    """地下城模块：客户端解包进来的首领与掉落要按口径显示，掉落不写百分比。"""
+    print("\n[11] 地下城数据与客户端原画")
+    import json
+    dg = json.load(open(os.path.join(SRC, "data", "dungeons.json"), encoding="utf-8"))
+    rows = []
+    for k in ("newDungeons", "classicDungeons", "raids"):
+        rows += dg.get(k) or []
+    exp_boss = sum(len(x.get("bosses") or []) for x in rows)
+    exp_drop = sum(len(x.get("drops") or []) for x in rows)
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/dungeons.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    check("副本页无脚本报错", not errs, "; ".join(errs[:2]))
+    cards = page.evaluate("() => document.querySelectorAll('.dcardx').length")
+    check("副本卡数量等于数据", cards == len(rows), "DOM %d / 数据 %d" % (cards, len(rows)))
+    page.evaluate("() => document.querySelector('.dcardx button[data-d]').click()")
+    page.wait_for_timeout(400)
+    # 横幅图是 loading="lazy"，不滚一遍不会发请求，先滚到底再数
+    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(1200)
+    page.evaluate("() => window.scrollTo(0, 0)")
+    page.wait_for_timeout(400)
+    st = page.evaluate("""() => ({
+      lists: document.querySelectorAll('.bosslist').length,
+      bosses: document.querySelectorAll('.bosslist .bh b').length,
+      loot: document.querySelectorAll('.loot-i').length,
+      open: [...document.querySelectorAll('.drawer')].filter(x => x.style.display !== 'none').length,
+      pct: (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/g) || []).slice(0, 3),
+      art: [...document.querySelectorAll('img.dbn-art')].filter(i => i.complete && i.naturalWidth > 0).length })""")
+    check("抽屉里有首领列表", st["open"] >= 1 and st["lists"] >= 1, "展开 %d 张" % st["open"])
+    check("掉落条目与逐条来源都在 DOM 里", st["loot"] >= 1, "首张卡掉落 %d 件" % st["loot"])
+    check("掉落不写百分比", not st["pct"], "出现 %s" % st["pct"])
+    check("本地转存的副本原画加载成功", st["art"] >= 5, "加载 %d 张" % st["art"])
+    page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-with-loot.png"))
+    ctx.close()
+
+    tp = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = tp.new_page()
+    page.goto(base + "/talent.html?c=hunter", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    bg = page.evaluate("""() => { const i = document.querySelector('.tbg img');
+      return i ? { ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth } : null; }""")
+    check("天赋页用上职业背景图", bool(bg) and bg["ok"], str(bg))
+    page.screenshot(path=os.path.join(SHOT_DIR, "talent-class-art.png"))
+    tp.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -697,6 +754,7 @@ def main():
             test_abilities(browser, base)
             test_races(browser, base)
             test_grouping(browser, base)
+            test_dungeon_data(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

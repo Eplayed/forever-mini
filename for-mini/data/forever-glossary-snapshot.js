@@ -11,11 +11,11 @@ module.exports = {
   ],
   "snapshot": true,
   "coverage": {
-   "L0": 216,
+   "L0": 250,
    "L1": 114,
-   "L2": 368,
-   "L3": 12,
-   "total": 710
+   "L2": 360,
+   "L3": 2,
+   "total": 726
   }
  },
  "items": [

@@ -10,25 +10,25 @@ module.exports = {
  "checkedAt": "2026-10-07",
  "source": "wow-forever-web/src/data",
  "coverage": {
-  "L0": 216,
+  "L0": 250,
   "L1": 114,
-  "L2": 368,
-  "L3": 12,
-  "total": 710
+  "L2": 360,
+  "L3": 2,
+  "total": 726
  },
  "counts": {
   "terms": 215,
-  "dungeons": 22,
+  "dungeons": 38,
   "talentNodes": 473,
   "talentNameVerified": 114
  },
  "openQuestions": [
   "九职业天赋结构与名称全部标 L2：需游戏内实测或等官方中文深度解析后升 L0",
   "3 座团队副本的名称与 BOSS 数量：来源互相矛盾，未采信",
-  "每座本的 BOSS 名单与数量：无官方来源，只能实测",
+  "每座本的 BOSS 名单：29/35 座已从客户端解包名单拿到（经新手盒子转述，标 L0 但注明是解包）；6 座无限新增本上游还没有，等实测",
   "掉落表：所有来源都是零碎注记，且本站禁止写百分比",
   "Whelgar's Excavation 与 Excavation Site: Wetlands 哪个是正式服英文名",
-  "官方 Beta 公告里的「监狱」是新本 Alcaz Prison 还是经典 The Stockade"
+  "已澄清（2026-10-09 客户端名单）：两者是两座不同的本——奥卡兹监狱（Alcaz Prison，48-53，无限新增）与监狱（The Stockade，24-32，经典）"
  ],
  "rules": [
   "L0 必须至少含一条 official 来源，否则构建失败",

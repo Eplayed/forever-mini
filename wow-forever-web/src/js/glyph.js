@@ -55,8 +55,11 @@ window.Glyph = (function () {
       '<circle cx="' + (w - 46 - h % 44) + '" cy="21" r="8" fill="hsl(' + hue + ',58%,74%)" fill-opacity=".38"/>' +
       '<polygon points="0,' + ht + ' ' + pts.join(' ') + ' ' + w + ',' + ht + '" fill="hsl(' + hue + ',20%,26%)" fill-opacity=".9"/>' +
       '</svg>';
-    return '<div class="dbn2"><span class="dbn2-shade"></span>' + art +
-      '<span class="dbn2-mark">示意图 · 非游戏原画</span>' +
+    // 有本地转存的客户端原画就盖在自绘横幅上；图取不到时（onerror）自动露出自绘版
+    var photo = opts.art ? '<img class="dbn-art" src="' + esc(opts.art) + '" alt="" loading="lazy" ' +
+      'onerror="this.className=\'dbn-art bad\'">' : '';
+    return '<div class="dbn2"><span class="dbn2-shade"></span>' + art + photo +
+      '<span class="dbn2-mark">' + (opts.art ? '客户端原画 · 本地转存' : '示意图 · 非游戏原画') + '</span>' +
       '<span class="dbn2-txt"><span class="dbn2-n">' + esc(label || '未定名') + '</span>' +
       (opts.sub ? '<span class="dbn2-e">' + esc(opts.sub) + '</span>' : '') + '</span></div>';
   }

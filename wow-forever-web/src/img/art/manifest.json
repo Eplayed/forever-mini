@@ -1,0 +1,119 @@
+{
+ "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
+ "items": [
+  {
+   "file": "art/dungeons/hall-of-thanes.webp",
+   "bytes": 26962,
+   "sha1": "4418e9375e",
+   "source": "https://wowclassicforever.info/images/dungeons/client/hall-of-thanes/loading-screen-640.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/ruins-of-lordaeron.webp",
+   "bytes": 31128,
+   "sha1": "d80ffd3a4b",
+   "source": "https://wowclassicforever.info/images/dungeons/client/ruins-of-lordaeron/loading-screen-640.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/whelgars-excavation.webp",
+   "bytes": 31212,
+   "sha1": "0f67894c51",
+   "source": "https://wowclassicforever.info/images/dungeons/client/excavation-site-wetlands/loading-screen-640.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/city-of-dalaran.webp",
+   "bytes": 27598,
+   "sha1": "3c1f784921",
+   "source": "https://wowclassicforever.info/images/dungeons/client/city-of-dalaran/loading-screen-640.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/onyxias-lair.webp",
+   "bytes": 13420,
+   "sha1": "4925d43fd0",
+   "source": "https://wowclassicforever.info/images/dungeons/client/onyxias-lair/loading-screen-640.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/druid.webp",
+   "bytes": 5080,
+   "sha1": "4f710c4661",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/druid-1737ecda2d3f.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/hunter.webp",
+   "bytes": 3194,
+   "sha1": "d52e58ca81",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/hunter-1739f4ea0872.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/mage.webp",
+   "bytes": 5464,
+   "sha1": "e8d50c6b84",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/mage-8bca614b9d49.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/paladin.webp",
+   "bytes": 5426,
+   "sha1": "7c4dee93a4",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/paladin-7b49a46e9c8e.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/priest.webp",
+   "bytes": 4364,
+   "sha1": "a8163a12f4",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/priest-54156fbe3c17.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/rogue.webp",
+   "bytes": 4818,
+   "sha1": "25a3232780",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/rogue-d26bdae6c725.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/shaman.webp",
+   "bytes": 5048,
+   "sha1": "315eff3e42",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/shaman-4a4464e5c78c.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/warlock.webp",
+   "bytes": 6920,
+   "sha1": "981960d978",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/warlock-219fd94a0746.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/classes/warrior.webp",
+   "bytes": 3488,
+   "sha1": "4dd0c2be8c",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/classes/warrior-e52fcea03efb.webp",
+   "kind": "class-bg",
+   "fetchedAt": "2026-10-09"
+  }
+ ],
+ "fetchedAt": "2026-10-09",
+ "total": 14
+}

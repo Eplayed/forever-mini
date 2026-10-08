@@ -36,10 +36,12 @@ window.WowData = (function () {
     var l = PILL[level] ? level : 'L3';
     return '<span class="pill ' + l + '">' + PILL[l] + '</span>';
   }
+  var TYPE_LABEL = { official_cn: '官方中文', official_en: '官方英文', datamine_cn: '客户端解包',
+    fan_db: '第三方资料站', media_cn: '中文转载', video: '实测视频', 'site-promise': '本站承诺', 'site-note': '本站说明' };
   function sources(list) {
     if (!list || !list.length) return '<div class="dim" style="font-size:12px">无来源记录</div>';
     return '<ul class="src">' + list.map(function (s) {
-      return '<li><span class="st ' + esc(s.type) + '">' + esc(s.type) + '</span>' +
+      return '<li><span class="st ' + esc(s.type) + '">' + esc(TYPE_LABEL[s.type] || s.type) + '</span>' +
         (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(host(s.url)) + '</a>'
                : '<span class="dim">（无外部链接：本站自己的说明）</span>') +
         '<span>' + esc(s.note || '') + '</span>' +

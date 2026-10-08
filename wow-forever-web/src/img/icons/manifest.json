@@ -2,9 +2,11 @@
  "source": "https://render.worldofwarcraft.com/us/icons/56/",
  "format": "56x56 jpg",
  "fetchedAt": "2026-10-08",
- "total": 397,
- "ok": 397,
- "missing": [],
+ "total": 924,
+ "ok": 924,
+ "missing": [
+  "inv_ventureco_ring02_color4"
+ ],
  "note": "图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。",
  "batches": [
   {
@@ -38,6 +40,14 @@
    "at": "2026-10-08",
    "added": 1,
    "unavailable": [],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-10-08",
+   "added": 527,
+   "unavailable": [
+    "inv_ventureco_ring02_color4"
+   ],
    "note": "见本次改动的数据文件 iconKey 字段"
   }
  ]

@@ -35,6 +35,13 @@ _CJ = u"\u3400-\u9fff\u3000-\u303f\uff00-\uffef\u2018\u2019\u201c\u201d\u00b7\u2
 CJK_SPACE = re.compile(u"(?<=[%s])[\\s\u3000]+(?=[%s])" % (_CJ, _CJ))
 
 
+def checkable(prov):
+    """能回原文逐字比对的来源类型。datamine_cn（客户端解包转述）也算——
+       它撑着 L0，就必须能被机器验证「我们抄的和它页面上写的是同一串字」。"""
+    t = prov.get("type") or ""
+    return t.startswith("official") or t == "datamine_cn"
+
+
 def squeeze(text):
     """去掉汉字与全角标点之间的空白。官方页常用 <b>/<strong> 强调词中的一部分或词条名，
        转纯文本后会在中间留下空格，例如「冰霜 与 火焰 陷阱」「被遗忘者的意志 ：移除…」，
@@ -175,7 +182,7 @@ def main():
     urls = []
     for it in items:
         for prov in it["prov"]:
-            if (prov.get("type") or "").startswith("official") and prov.get("url"):
+            if checkable(prov) and prov.get("url"):
                 if prov["url"] not in urls:
                     urls.append(prov["url"])
 
@@ -200,7 +207,7 @@ def main():
         exceptions = {e["id"]: e for e in json.load(io.open(exc_path, encoding="utf-8")).get("items", [])}
     for it in items:
         cn = (it["cn"] or "").strip()
-        srcs = [p.get("url") for p in it["prov"] if (p.get("type") or "").startswith("official")]
+        srcs = [p.get("url") for p in it["prov"] if checkable(p)]
         if not cn:
             no_source.append((it, "词条没有中文名"))
             continue

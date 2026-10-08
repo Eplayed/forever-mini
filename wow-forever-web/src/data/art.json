@@ -1,0 +1,25 @@
+{
+ "classes": {
+  "druid": "img/art/classes/druid.webp",
+  "hunter": "img/art/classes/hunter.webp",
+  "mage": "img/art/classes/mage.webp",
+  "paladin": "img/art/classes/paladin.webp",
+  "priest": "img/art/classes/priest.webp",
+  "rogue": "img/art/classes/rogue.webp",
+  "shaman": "img/art/classes/shaman.webp",
+  "warlock": "img/art/classes/warlock.webp",
+  "warrior": "img/art/classes/warrior.webp"
+ },
+ "dungeons": {
+  "hall-of-thanes": "img/art/dungeons/hall-of-thanes.webp",
+  "ruins-of-lordaeron": "img/art/dungeons/ruins-of-lordaeron.webp",
+  "whelgars-excavation": "img/art/dungeons/whelgars-excavation.webp",
+  "city-of-dalaran": "img/art/dungeons/city-of-dalaran.webp",
+  "onyxias-lair": "img/art/dungeons/onyxias-lair.webp"
+ },
+ "meta": {
+  "fetchedAt": "2026-10-09",
+  "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
+  "count": 14
+ }
+}
