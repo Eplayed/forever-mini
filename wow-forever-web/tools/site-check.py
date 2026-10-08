@@ -357,7 +357,7 @@ def test_abilities(browser, base):
     page.goto(base + "/skills.html", wait_until="networkidle")
     page.wait_for_timeout(1500)
     rows = page.evaluate(r"""() => [...document.querySelectorAll('#abtbl tbody tr')].map(tr => ({
-        name: tr.children[0].innerText.split('\n')[0].trim(),
+        name: (tr.children[0].querySelector('b') || tr.children[0]).innerText.trim(),
         spec: tr.children[1].innerText.replace(/\n/g,' ').trim(),
         quote: tr.children[3].innerText.trim() }))""")
     check("四态表有真实条目", len(rows) >= 30, "%d 行" % len(rows))
@@ -567,6 +567,85 @@ def test_races(browser, base):
     m.close()
 
 
+def test_grouping(browser, base):
+    """分组与图标：技能书 / 术语速查按职业与种族分组，图标要么真图要么自绘占位，不许空白。"""
+    print("\n[10] 分组与图标")
+    import json
+    icons = json.load(open(os.path.join(SRC, "data", "icons.json"), encoding="utf-8"))
+    gl = json.load(open(os.path.join(SRC, "data", "glossary.json"), encoding="utf-8"))
+    expect_rows = len(gl["items"])
+    expect_icons = len([x for x in gl["items"] if icons["map"].get((x.get("classId") or "") + "|" + x["cn"])])
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/skills.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    st = page.evaluate("""() => {
+      const groups = [...document.querySelectorAll('#tbl .lgrp')];
+      const rows = [...document.querySelectorAll('#tbl tbody tr')].filter(r => !r.classList.contains('srow'));
+      return { groups: groups.map(g => g.innerText.replace(/\\n/g, ' ').trim()),
+               rows: rows.length,
+               everyRowHasCell: rows.every(r => r.querySelector('.liw')),
+               imgs: document.querySelectorAll('#tbl .liw img').length,
+               broken: [...document.querySelectorAll('#tbl .liw img')].filter(i => i.complete && i.naturalWidth === 0).length,
+               dupOwner: rows.map(r => r.querySelector('td:nth-child(5)')).length }; }""")
+    check("技能书无脚本报错", not errs, "; ".join(errs[:2]))
+    check("技能书按职业与种族分组", len(st["groups"]) >= 10,
+          "%d 组：%s" % (len(st["groups"]), "、".join(g[:10] for g in st["groups"][:5])))
+    check("分组后条目总数不丢", st["rows"] == expect_rows, "DOM %d / 数据 %d" % (st["rows"], expect_rows))
+    check("每行都有图标格", st["everyRowHasCell"], "缺格 %s" % (not st["everyRowHasCell"]))
+    check("官方图标数量与映射表一致", st["imgs"] == expect_icons,
+          "DOM %d / 映射 %d" % (st["imgs"], expect_icons))
+    check("没有加载失败的图标", st["broken"] == 0, "坏图 %d" % st["broken"])
+    order = page.evaluate("() => [...document.querySelectorAll('#tbl .lgrp b')].map(x => x.textContent)")
+    check("种族组按官方页阵营顺序排", order[4:9] == ["兽人", "亡灵", "牛头人", "巨魔", "天裔"], str(order[4:9]))
+    page.screenshot(path=os.path.join(SHOT_DIR, "skills-grouped.png"))
+
+    page.goto(base + "/glossary.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    gp = page.evaluate("""() => ({ groups: document.querySelectorAll('#pool .lgrp').length,
+        chips: document.querySelectorAll('#pool .term').length,
+        imgs: document.querySelectorAll('#pool .liw img').length })""")
+    check("速查页同样分组且词条不丢", gp["groups"] >= 10 and gp["chips"] == expect_rows,
+          "组 %d / 词条 %d" % (gp["groups"], gp["chips"]))
+    page.select_option("#fr", "skyborne")
+    page.wait_for_timeout(400)
+    sky = page.evaluate("""() => ({ groups: [...document.querySelectorAll('#pool .lgrp b')].map(x => x.textContent),
+        chips: document.querySelectorAll('#pool .term').length })""")
+    check("按种族筛选只剩天裔组", sky["groups"] == ["天裔"] and sky["chips"] == 5,
+          "%s / %d 条" % (sky["groups"], sky["chips"]))
+    page.select_option("#fr", "")
+    page.wait_for_timeout(300)
+
+    page.goto(base + "/races.html", wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    rt = page.evaluate("""() => ({ groups: [...document.querySelectorAll('#tt .lgrp')].map(x => x.innerText.replace(/\\n/g,' ').trim()),
+        rows: [...document.querySelectorAll('#tt tbody tr')].length })""")
+    check("种族特长表按种族分组", len(rt["groups"]) == 10 and rt["rows"] == 40,
+          "%d 组 / %d 行" % (len(rt["groups"]), rt["rows"]))
+    ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = m.new_page()
+    mp.goto(base + "/skills.html", wait_until="networkidle")
+    mp.wait_for_timeout(1500)
+    mob = mp.evaluate("""() => { const gs = [...document.querySelectorAll('#tbl .lgrp')];
+      const vw = document.documentElement.clientWidth;
+      return { over: gs.filter(g => g.getBoundingClientRect().right > vw).length,
+               first: gs.length ? gs[0].innerText.replace(/\\n/g, ' ') : '' }; }""")
+    check("移动端分组标题不溢出视口", mob["over"] == 0, "溢出 %d 个；首个「%s」" % (mob["over"], mob["first"]))
+    ab = mp.evaluate("""() => { const t = document.querySelector('#abtbl table');
+      const box = t.closest('.scrollx'); const nm = document.querySelector('#abtbl tbody tr td b');
+      return { scroll: box.scrollWidth > box.clientWidth, nameH: Math.round(nm.getBoundingClientRect().height) }; }""")
+    # 单元格高度会跟着整行拉伸，所以看名称本身占几行：一行 ≈ 20px，超过 28px 就是被挤换行了
+    check("移动端四态表横向滚而不是把名称挤成一字一行",
+          ab["scroll"] and ab["nameH"] <= 28, json.dumps(ab))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "skills-grouped-mobile.png"))
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -583,6 +662,7 @@ def main():
             test_chooser(browser, base)
             test_abilities(browser, base)
             test_races(browser, base)
+            test_grouping(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

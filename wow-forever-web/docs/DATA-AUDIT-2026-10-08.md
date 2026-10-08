@@ -21,14 +21,14 @@
 
 | 状态 | 页面 | 承担词条 |
 | --- | --- | --- |
-| 缓存 | https://wow.blizzard.cn/news/24301515/index.html | 143 |
-| 缓存 | https://wow.blizzard.cn/news/24303313/index.html | 7 |
-| 缓存 | https://wow.blizzard.cn/news/24301514/index.html | 74 |
-| 缓存 | https://wow.blizzard.cn/news/24304075/index.html | 95 |
-| 缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 9 |
-| 缓存 | https://wow.blizzard.cn/news/24304160/index.html | 9 |
-| 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
-| 缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
+| 仅缓存 | https://wow.blizzard.cn/news/24301515/index.html | 143 |
+| 仅缓存 | https://wow.blizzard.cn/news/24303313/index.html | 7 |
+| 仅缓存 | https://wow.blizzard.cn/news/24301514/index.html | 74 |
+| 仅缓存 | https://wow.blizzard.cn/news/24304075/index.html | 95 |
+| 仅缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 9 |
+| 仅缓存 | https://wow.blizzard.cn/news/24304160/index.html | 9 |
+| 仅缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
+| 仅缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）
 

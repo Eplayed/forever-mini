@@ -181,7 +181,7 @@ input[type=range]{width:150px;padding:0;background:transparent;border:none;accen
 
 /* 名称池 */
 .pool{display:flex;flex-wrap:wrap;gap:6px}
-.term{background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:12.5px;cursor:pointer}
+.term{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:12.5px;cursor:pointer}
 .term:hover{border-color:var(--gold)}
 .term.hit{border-color:var(--warn);color:#f0c67e}
 
@@ -195,6 +195,9 @@ mark{background:rgba(217,161,59,.35);color:#ffe1a8;border-radius:2px;padding:0 1
 
 /* 宽表在窄屏横向滚，不撑破版心 */
 .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* 分组表在窄屏靠横向滚，别把中文名列挤成一字一行 */
+.scrollx > table{min-width:540px}
+.tblbox{padding:0;overflow-y:auto;max-height:72vh}
 
 /* 种族 × 职业矩阵 */
 table.mtx{min-width:680px}
@@ -225,6 +228,26 @@ table.mtx button.ch.on{color:var(--gold);border-color:var(--line);background:var
 .conf{color:var(--bad);font-size:12px;margin-top:4px}
 .grp{font-size:12px;color:var(--txt-dim);letter-spacing:.5px;margin:var(--s5) 0 var(--s2);
   border-bottom:1px solid var(--line);padding-bottom:4px}
+
+/* 列表分组标题：技能书、术语速查、种族特长表共用 */
+.lgrp{display:flex;align-items:center;gap:var(--s2);margin:var(--s5) 0 var(--s2);
+  border-bottom:1px solid var(--line);padding-bottom:4px}
+.lgrp b{font-size:14px;font-weight:600}
+.lgrp svg,.lgrp img{flex:0 0 auto;border-radius:4px}
+.lgrp .dim{font-size:12px}
+.lgrp .dim.mono{margin-left:0}
+
+/* 列表里的图标格：自绘占位块垫底，本地转存的官方图标盖在上面，图缺了自动露出占位 */
+.liw{position:relative;display:inline-block;width:26px;height:26px;vertical-align:middle;flex:0 0 auto}
+.liw.sm{width:18px;height:18px;margin-right:6px}
+.liw > svg,.liw > img{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:4px}
+.liw > img{object-fit:cover}
+.liw > img.bad{opacity:0}
+td.ich{width:34px}
+/* 名称列不许一字一行：宁可整表横向滚 */
+.abtab td:first-child,.entab td:nth-child(2){white-space:nowrap}
+.note{font-size:12.5px;color:var(--txt-dim);margin:6px 0 0}
+.tblbox{padding:0;overflow:auto;max-height:72vh}
 
 /* 抽屉 */
 .drawer{border-left:3px solid var(--gold);padding-left:var(--s3);margin-top:var(--s2)}

@@ -251,6 +251,37 @@ if (racialNoOwner.length) {
   warns.push(`glossary：${racialNoOwner.length} 条种族特长未回填 raceId（${racialNoOwner.slice(0, 5).map((x) => x.cn).join('、')}）`);
 }
 
+// 图标映射是派生产物：必须与 talents/*.json 一致，且每个键都能在本地找到文件
+const icPath = path.join(ROOT, 'icons.json');
+if (!fs.existsSync(icPath)) {
+  errs.push('icons.json 缺失：跑 python3 tools/build-icon-map.py 生成');
+} else {
+  const ic = JSON.parse(fs.readFileSync(icPath, 'utf8'));
+  const want = {};
+  fs.readdirSync(path.join(ROOT, 'talents')).filter((f) => f.endsWith('.json') && f.charAt(0) !== '_')
+    .sort().forEach((f) => {
+      const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
+      const cid = t.classId || f.slice(0, -5);
+      (t.trees || []).forEach((tr) => (tr.nodes || []).forEach((n) => {
+        if (n.iconKey && n.nameCn) want[cid + '|' + n.nameCn] = n.iconKey;
+      }));
+    });
+  const got = ic.map || {};
+  Object.keys(want).forEach((k) => {
+    if (got[k] !== want[k]) errs.push(`icons.json 与天赋数据不一致：${k} 应为 ${want[k]}（重跑 build-icon-map.py）`);
+  });
+  Object.keys(got).forEach((k) => {
+    if (!(k in want)) errs.push(`icons.json 有天赋数据里不存在的键：${k}`);
+    else if (!fs.existsSync(path.join(ROOT, '..', 'img', 'icons', got[k] + '.jpg'))) {
+      errs.push(`icons.json：${k} 指向的本地图标缺失 img/icons/${got[k]}.jpg`);
+    }
+  });
+  const dupN = ((ic.meta || {}).sameNameDifferentIcon || []).length;
+  if (dupN) warns.push(`icons.json：${dupN} 处同职业同名挂了两个图标键，映射取后出现的那个（界面只用它做展示，不影响数据）`);
+  console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文件 ' +
+    fs.readdirSync(path.join(ROOT, '..', 'img', 'icons')).filter((f) => f.endsWith('.jpg')).length + ' 张');
+}
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };
