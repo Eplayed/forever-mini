@@ -75,3 +75,4 @@
 | 2026-10-08 | wow-dev + wow-data | 按参考站 zh-hans 版复核后落地三项：内容页逐条来源、上线时间表单页（11 个时间点带官方原文，中英文两个上线口径并存不替玩家选）、技能四态表（脚本从官方中文深度解析稿整句抽取 38 条：新增 28/改动 5/改名 3/移除 1，12 条带层级线索；未变一律标未统计） | `src/timeline.html`、`src/data/timeline.json`、`src/data/abilities.json`、`tools/extract-abilities.py`、`src/js/app.js`、`src/js/data.js`、`src/css/app.css`、`tools/build-data.js`、`tools/audit-translations.py`、`tools/site-check.py`、`docs/reference-gap.md` | 已定（site-check 125/125；体检 273 条命中、5 条已知 L2/L3 名称未命中属预期） | wow-ui（新组件 .tlrow/.abtab/.srcbox 待归档进 UI.md） |
 
 
+| 2026-10-08 | wow-ui | 全站 9 页实况复核：本地 8817 起服务逐页拍整页截图（桌面 1440 ×9 + 移动 375 ×5），首页/时间线/技能四态表/移动端均正常，无代码与数据改动；截图为一次性浏览件未入仓，正式证据仍在 `docs/screenshots/check-2026-10-08/` | 无（`/tmp/wow-pages-view-2026-10-08/` 临时浏览） | 已定 | 遗留：8812 端口上有个旧 http 服务进程（PID 39231）对本目录返回 404，下次起服务换端口或先清理 |
