@@ -30,7 +30,7 @@ SRC = os.path.join(ROOT, "src")
 TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
-PAGES = ["index", "talent", "chooser", "skills", "dungeons", "systems", "glossary", "provenance"]
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "glossary", "provenance"]
 # 演示结构（_demo.json）里写死了层级门槛与前置链，用它做确定性断言
 DEMO_A00 = "a-0-0"
 DEMO_A01 = "a-0-1"
@@ -350,10 +350,35 @@ def test_chooser(browser, base):
     ctx.close()
 
 
+def test_abilities(browser, base):
+    print("\n[6] 技能四态表")
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
+    page = ctx.new_page()
+    page.goto(base + "/skills.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    rows = page.evaluate(r"""() => [...document.querySelectorAll('#abtbl tbody tr')].map(tr => ({
+        name: tr.children[0].innerText.split('\n')[0].trim(),
+        spec: tr.children[1].innerText.replace(/\n/g,' ').trim(),
+        quote: tr.children[3].innerText.trim() }))""")
+    check("四态表有真实条目", len(rows) >= 30, "%d 行" % len(rows))
+    bad = [r["name"] for r in rows if not r["quote"] or len(r["name"]) < 2 or r["name"] not in r["quote"]]
+    check("每行都是官方原句且含名称", not bad, "不合格 %s" % bad[:3])
+    check("不出现『未变』分组",
+          page.evaluate("() => !document.querySelector('#abtbl').innerText.includes('未变 ·')"))
+    check("专精列显示中文不是英文 key",
+          page.evaluate("() => {const t=document.querySelector('#abtbl').innerText; return t.indexOf('beast-mastery')<0 && t.indexOf('marksmanship')<0;}"))
+    page.evaluate("() => { const s = document.getElementById('c'); s.value='paladin'; s.dispatchEvent(new Event('change')); }")
+    page.wait_for_timeout(900)
+    check("无官方稿的职业显示空态而不是空表",
+          "还没有官方中文深度解析稿" in page.evaluate("() => document.querySelector('#abtbl').innerText"))
+    page.screenshot(path=os.path.join(SHOT_DIR, "skills-abilities.png"))
+    ctx.close()
+
+
 def test_design_baseline(browser, base):
     """吸收自通用设计走查规则的量化底线：每屏一个 H1、触屏点击目标 ≥44px、
        控件有可读名、图片有 alt、数字用等宽对齐。见 docs/UI.md 第七节。"""
-    print("\n[6] 设计量化基线")
+    print("\n[7] 设计量化基线")
     for mob, vp in [("桌面", {"width": 1440, "height": 1000}),
                     ("移动 375", {"width": 375, "height": 812, "is_mobile": True, "has_touch": True})]:
         ctx = browser.new_context(viewport=vp, is_mobile=("移动" in mob), has_touch=("移动" in mob))
@@ -395,7 +420,7 @@ def test_design_baseline(browser, base):
 
 
 def test_mobile(browser, base):
-    print("\n[7] 375px 移动端")
+    print("\n[8] 375px 移动端")
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     page = ctx.new_page()
     errors = []
@@ -432,6 +457,7 @@ def main():
             test_talent(browser, base)
             test_dungeon_banner(browser, base)
             test_chooser(browser, base)
+            test_abilities(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

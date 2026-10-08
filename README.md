@@ -8,7 +8,7 @@
 
 | 目录 | 是什么 | 状态 |
 | --- | --- | --- |
-| `wow-forever-web/` | 资料站：纯静态 8 页（`src/`）、站点数据（`src/data/`）、构建与导出脚本（`tools/`）、全部角色产出（`docs/`） | 已跑通，`node tools/build-data.js` 通过 |
+| `wow-forever-web/` | 资料站：纯静态 9 页（`src/`）、站点数据（`src/data/`）、构建与导出脚本（`tools/`）、全部角色产出（`docs/`） | 已跑通，`node tools/build-data.js` 通过 |
 | `for-mini/` | 无限服小程序：原生微信小程序，与站点共用同一份数据基底 | 底子：数据层 + 中英速查 + 首页完整度已可用，四个模块待实现 |
 | `backend/`（将来） | 数据生产与上传服务 | 未建 |
 

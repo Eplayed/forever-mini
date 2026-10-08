@@ -42,7 +42,8 @@ window.WowData = (function () {
       return '<li><span class="st ' + esc(s.type) + '">' + esc(s.type) + '</span>' +
         '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(host(s.url)) + '</a>' +
         '<span>' + esc(s.note || '') + '</span>' +
-        (s.checkedAt ? '<span class="dim">核对于 ' + esc(s.checkedAt) + '</span>' : '') + '</li>';
+        (s.checkedAt ? '<span class="dim">核对于 ' + esc(s.checkedAt) + '</span>' : '') +
+        (s.quote ? '<span class="quote">原文：' + esc(s.quote) + '</span>' : '') + '</li>';
     }).join('') + '</ul>';
   }
   function host(u) { try { var x = new URL(u); return x.host + x.pathname.slice(0, 34) + (x.pathname.length > 34 ? '…' : ''); } catch (e) { return u; } }

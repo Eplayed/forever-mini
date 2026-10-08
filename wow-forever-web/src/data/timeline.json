@@ -1,0 +1,198 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-08",
+  "note": "时间点全部标来源与核对日期。官方中英文两个上线口径并存，本站不替玩家选一个，换算那条单独标为推断。",
+  "timezoneConflict": {
+   "cn": "国服官方：2026年11月5日全球同步上线",
+   "en": "官方英文回顾：launches globally on November 4, 2026, at 3:00 p.m. PST",
+   "ours": "本站按 PST(UTC-8) → 北京(UTC+8) 相差 16 小时换算：11 月 4 日 15:00 PST = 11 月 5 日 07:00 北京时间，两个口径不矛盾。",
+   "level": "L2",
+   "why": "换算结论是本站推算，官方没有公布北京时间的具体钟点，所以标 L2 待实测。"
+  }
+ },
+ "items": [
+  {
+   "id": "deep-dive-panel",
+   "date": "2026-09-13",
+   "title": "官方 Deep Dive 直播",
+   "what": "暴雪介绍职业与系统改动的深度分享会（PDT 上午 10:00）。",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "quote": "Join us for the World of Warcraft: Forever Deep Dive panel tomorrow, September 13, at 10:00 a.m. PDT",
+     "note": "仅英文来源",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "intl-beta",
+   "date": "2026-09-17",
+   "title": "国际服 Beta 开启",
+   "what": "国际服测试开始，第三方天赋数据挖掘源大多标称采集于这一时期。",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "quote": "with beta beginning September 17",
+     "note": "仅英文来源，国服公告未重复这个日期",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "cn-beta-open",
+   "date": "2026-10-06",
+   "title": "国服 Beta 开启",
+   "what": "北京时间开始。可预购天裔史诗礼包进入测试。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "北京时间10月6日至10月26日，我们邀请广大玩家加入《魔兽世界》：“无限”国服Beta测试",
+     "note": "国服 Beta 公告",
+     "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "你可以预购天裔史诗礼包，在2026年10月6日的《魔兽世界》：“无限”国服Beta",
+     "note": "国服首页的预购说明",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "beta-week1",
+   "date": "2026-10-06",
+   "title": "Beta 第 1 周开放内容",
+   "what": "等级上限 20 级；新种族与地区天裔和泽风岛；新地下城领主大厅（13–18 级）与洛丹伦废墟（15–20 级）。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "第1周 新种族和地区：天裔和泽风岛 新地下城：领主大厅（13–18级） 新地下城：洛丹伦废墟（15-20级）",
+     "note": "这两座本也是本站唯一有官方中文名的副本",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "beta-cap-raise",
+   "date": "待定",
+   "title": "Beta 等级上限提高至 30 级",
+   "what": "官方只说「在Beta测试后期提高至30级」，没给具体日期。",
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "当测试开始时，等级上限将被设为20级，并在Beta测试后期提高至30级",
+     "note": "缺具体日期，标待实测",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "beta-last-day",
+   "date": "2026-10-26",
+   "title": "Beta 最后完整测试日",
+   "what": "此后进入上线前的最后准备。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "Beta测试将持续至10月26日，这一天将会是最后的完整测试日，然后我们将会开始为《魔兽世界》：“无限”的上线展开最后的准备工作",
+     "note": "",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "launch-en",
+   "date": "2026-11-04",
+   "title": "全球上线（官方英文口径）",
+   "what": "PST 下午 3:00。换算成北京时间是 11 月 5 日早上 7:00。",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "quote": "World of Warcraft: Forever launches globally on November 4, 2026, at 3:00 p.m. PST",
+     "note": "英文口径，与国服「11月5日」不矛盾，见页首时区说明",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "launch-cn",
+   "date": "2026-11-05",
+   "title": "全球同步上线（国服口径）",
+   "what": "正式服开放，本站数据以当天客户端为准整批重核。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24304160/index.html",
+     "quote": "《魔兽世界》：“无限”将于2026年11月5日全球同步上线",
+     "note": "国服首页与公告均为此口径",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "site-recheck",
+   "date": "2026-11-07",
+   "title": "本站整批重核（承诺）",
+   "what": "上线后 48 小时内，把天赋结构、译名、副本名单按正式服客户端重跑一遍，更新覆盖率与核对日期。",
+   "level": "L2",
+   "provenance": [
+    {
+     "type": "site-promise",
+     "url": "provenance.html",
+     "quote": "",
+     "note": "这是本站自己的计划，不是官方信息",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hardcore-later",
+   "date": "择期",
+   "title": "专家模式（硬核）开放",
+   "what": "官方明确：专家模式将在版本上线后择期开放，没有日期。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302070/index.html",
+     "quote": "专家模式将在版本上线后择期开放",
+     "note": "规则集公告原文；上一版误写成 Beta 公告地址，2026-10-08 体检时纠正",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "raids-dec9",
+   "date": "2026-12-09",
+   "title": "新团队副本开放",
+   "what": "官方英文回顾说 12 月 9 日开放新团本，之后还有更多副本、PvP 更新、世界内容与专家模式。国服公告未重复这个日期。",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "official_en",
+     "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+     "quote": "New raids unlock on December 9, followed by more raids, dungeons, PvP updates, world content",
+     "note": "仅英文来源；与本站已入库的三座团本名称是否对应，未证实",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  }
+ ]
+}

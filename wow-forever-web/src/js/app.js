@@ -2,8 +2,8 @@
 (function () {
   var D = window.WowData, E = window.TalentEngine;
   var NAV = [['index.html', '首页'], ['talent.html', '天赋计算器'], ['chooser.html', '选职业问答'],
-    ['skills.html', '技能书'], ['dungeons.html', '副本手册'], ['systems.html', '系统与新区域'],
-    ['glossary.html', '术语速查'], ['provenance.html', '溯源']];
+    ['timeline.html', '上线时间表'], ['skills.html', '技能书'], ['dungeons.html', '副本手册'],
+    ['systems.html', '系统与新区域'], ['glossary.html', '术语速查'], ['provenance.html', '溯源']];
   var LS = 'wfs.build.';
   var page = document.body.getAttribute('data-page');
 
@@ -12,6 +12,35 @@
   function store(key, val) {
     try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); return null; }
     catch (e) { D.toast('本机存储不可用，方案仅本次有效'); return null; }
+  }
+  function bindSrcToggles(scope) {
+    Array.prototype.forEach.call((scope || document).querySelectorAll('[data-src]'), function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        var row = el('s-' + b.dataset.src);
+        if (!row) {
+          var box = el('srcbox');
+          if (!box) return;
+          var same = box.dataset.for === b.dataset.src && box.style.display !== 'none';
+          box.style.display = same ? 'none' : 'block';
+          if (!same) {
+            box.dataset.for = b.dataset.src;
+            box.innerHTML = '<h3>' + D.esc(b.dataset.name || '') + ' · 来源与核对</h3>' +
+              D.sources(JSON.parse(decodeURIComponent(b.dataset.prov || '[]')));
+          }
+          b.textContent = same ? '来源' : '收起';
+          return;
+        }
+        var open = row.style.display !== 'none';
+        Array.prototype.forEach.call(document.querySelectorAll('.srow'), function (r) { r.style.display = 'none'; });
+        row.style.display = open ? 'none' : 'table-row';
+        b.textContent = open ? '来源' : '收起';
+        Array.prototype.forEach.call(document.querySelectorAll('[data-src]'), function (o) {
+          if (o !== b && !el('s-' + o.dataset.src)) return;
+          if (o !== b) o.textContent = '来源';
+        });
+      };
+    });
   }
   function shell() {
     var now = new Date('2026-11-05T00:00:00+08:00').getTime() - Date.now();
@@ -139,7 +168,9 @@
       '<button id="copy" class="ghost">复制方案</button><button id="share" class="ghost">分享链接</button>' +
       '<button id="reset" class="ghost">重置</button>' +
       '<span class="sp">' + D.esc(E.describe(trees, tstate.state)) + '</span></div>' +
-      '<div class="src">来源：' + D.esc(f.dataVersion) + ' ｜ ' + D.esc(f.note || '') + '</div></div>' +
+      '<div class="src">来源：' + D.esc(f.dataVersion) + ' ｜ ' + D.esc(f.note || '') +
+      '<button class="ghost" id="tsrcbtn">本页节点来源</button></div>' +
+      '<div class="srcbox" id="tsrc" style="display:none"></div></div>' +
       unconfBlock(talentGaps(f, trees), '本页还没确认的'));
     bindTalent();
   }
@@ -272,6 +303,36 @@
       D.copy(location.href, '分享链接');
     };
     var rs = el('reset'); if (rs) rs.onclick = function () { tstate.state = {}; persist(); renderTalent(); };
+    var tb = el('tsrcbtn');
+    if (tb) tb.onclick = function () {
+      var box = el('tsrc');
+      if (!box) return;
+      var open = box.style.display !== 'none';
+      box.style.display = open ? 'none' : 'block';
+      tb.textContent = open ? '本页节点来源' : '收起';
+      if (!open && !box.dataset.built) {
+        var bySrc = {}, order = [];
+        (tstate.file.trees || []).forEach(function (tr) {
+          (tr.nodes || []).forEach(function (n) {
+            (n.provenance || []).forEach(function (pr) {
+              var key = (pr.type || '?') + '|' + (pr.url || '') + '|' + (pr.checkedAt || '');
+              if (!bySrc[key]) { bySrc[key] = { pr: pr, n: 0 }; order.push(key); }
+              bySrc[key].n += 1;
+            });
+          });
+        });
+        box.innerHTML = '<h3>本页 ' + order.length + ' 类来源，覆盖 ' + (tstate.file.trees || []).reduce(function (a, t) {
+          return a + t.nodes.length;
+        }, 0) + ' 个节点</h3>' + order.map(function (k) {
+          var x = bySrc[k];
+          return '<div class="srcline"><span class="st ' + D.esc(x.pr.type) + '">' + D.esc(x.pr.type) + '</span>' +
+            '<b>' + x.n + '</b> 个节点 ｜ ' + D.esc(x.pr.note || '') +
+            '<br><a href="' + D.esc(x.pr.url) + '" target="_blank" rel="noopener">' + D.esc(x.pr.url) + '</a>' +
+            ' ｜ 核对：' + D.esc(x.pr.checkedAt || '未记录') + '</div>';
+        }).join('');
+        box.dataset.built = '1';
+      }
+    };
     var lv = el('lv'); if (lv) lv.oninput = function () { el('lvv').textContent = lv.value; };
     var q = el('tq'); if (q) q.oninput = function () {
       var v = q.value.trim().toLowerCase();
@@ -404,10 +465,48 @@
     if (done) window.scrollTo(0, 0);
   }
 
+  /* ---------- 上线时间表 ---------- */
+  function timeline() {
+    D.load('data/timeline.json').then(function (d) {
+      var m = d.meta || {}, items = d.items || [], now = Date.now();
+      var tz = m.timezoneConflict;
+      var done = 0, upcoming = 0;
+      items.forEach(function (x) {
+        var t = /^\d{4}-\d{2}-\d{2}$/.test(x.date) ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
+        if (t !== null && t <= now) done += 1; else if (t !== null) upcoming += 1;
+      });
+      var rows = items.map(function (x) {
+        var t = /^\d{4}-\d{2}-\d{2}$/.test(x.date) ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
+        var state = t === null ? '未定' : (t <= now ? '已过' : '待来');
+        var days = t === null ? '' : (t <= now ? '已过 ' + Math.round((now - t) / 86400000) + ' 天' : '还有 ' + Math.ceil((t - now) / 86400000) + ' 天');
+        return '<div class="tlrow tl-' + state + '"><div class="tl-date"><b class="mono">' + D.esc(x.date) + '</b>' +
+          '<span class="dim">' + D.esc(days) + '</span></div><div class="tl-body">' +
+          '<div class="tl-h">' + D.esc(x.title) + ' ' + D.pill(x.level) + ' <span class="tag">' + state + '</span></div>' +
+          '<p class="dim">' + D.esc(x.what) + '</p>' + D.sources(x.provenance, { quote: true }) + '</div></div>';
+      }).join('');
+      set('<div class="card"><h1 class="pt">上线与 Beta 时间表</h1><p class="dim">' + D.esc(m.note || '') + '</p>' +
+        '<div class="stats"><div class="stat"><b>' + items.length + '</b>个时间点</div>' +
+        '<div class="stat"><b>' + done + '</b>已过</div><div class="stat"><b>' + upcoming + '</b>待来</div>' +
+        '<div class="stat"><b>' + (items.length - done - upcoming) + '</b>日期未定</div></div></div>' +
+        (tz ? '<div class="card"><h2>上线日期为什么有两个说法</h2>' +
+          '<p class="dim">' + D.esc(tz.cn) + '<br>' + D.esc(tz.en) + '</p>' +
+          '<p>' + D.esc(tz.ours) + '<span class="tag">本站推算 ' + D.esc(tz.level) + '</span></p>' +
+          '<p class="dim">' + D.esc(tz.why) + '</p></div>' : '') +
+        '<div class="tl">' + rows + '</div>' +
+        unconfBlock(['Beta 等级上限提高到 30 级的具体日期', '专家模式（硬核）开放时间', '12 月 9 日之后各批内容的具体清单与国服对应日期',
+          '三座团队副本与官方所说"new raids"是否同一批'], '还没确认的'));
+    }).catch(fail);
+  }
+
   /* ---------- 技能书 ---------- */
+  var AB_STATE = { new: '新增', changed: '改动', renamed: '改名', removed: '移除' };
+  var AB_KIND = { talent: '天赋', skill: '技能', pet: '宠物技能' };
+  var AB_SPEC = { 'beast-mastery': '野兽控制', marksmanship: '射击', survival: '生存', feral: '野性战斗',
+    restoration: '恢复', balance: '平衡', discipline: '戒律', holy: '神圣', shadow: '暗影',
+    arms: '武器', fury: '狂怒', protection: '防护' };
   function skills() {
-    Promise.all([D.load('data/glossary.json'), D.load('data/classes.json')]).then(function (r) {
-      var items = r[0].items, cls = r[1].classes, f = { c: '', k: '', q: '' };
+    Promise.all([D.load('data/glossary.json'), D.load('data/classes.json'), D.load('data/abilities.json')]).then(function (r) {
+      var items = r[0].items, cls = r[1].classes, ab = r[2] || { items: [], meta: {} }, f = { c: '', k: '', q: '' };
       var KIND = { talent: '天赋/技能', item: '装备', dungeon: '副本', boss: 'BOSS', system: '系统', zone: '地名', skill: '技能' };
       function draw() {
         var list = items.filter(function (x) {
@@ -421,8 +520,46 @@
             var c = cls.filter(function (y) { return y.id === x.classId; })[0];
             return '<tr><td>' + D.hl(x.cn, f.q) + '</td><td class="en">' + (x.en ? D.hl(x.en, f.q) : '<span class="dim">待补</span>') + '</td>' +
               '<td>' + (KIND[x.kind] || x.kind) + '</td><td>' + (c ? D.esc(c.cn) : '—') + '</td><td>' + D.pill(x.level) + '</td>' +
-              '<td><button class="ghost" data-copy="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '" >复制</button></td></tr>';
+              '<td class="act"><button class="ghost" data-copy="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '">复制</button>' +
+              '<button class="ghost" data-src="' + D.esc(x.id) + '">来源</button></td></tr>' +
+              '<tr class="srow" id="s-' + D.esc(x.id) + '" style="display:none"><td colspan="6">' + D.sources(x.provenance) + '</td></tr>';
           }).join('') + '</tbody></table>' : '<div class="empty">没有匹配条目，试试放宽筛选。</div>';
+        bindSrcToggles(el('tbl'));
+        drawAbilities();
+      }
+      function drawAbilities() {
+        var all = ab.items || [];
+        var list = all.filter(function (x) { return !f.c || x.classId === f.c; });
+        var byState = { new: [], changed: [], renamed: [], removed: [] };
+        list.forEach(function (x) { (byState[x.state] || (byState[x.state] = [])).push(x); });
+        var cnName = {};
+        cls.forEach(function (c) { cnName[c.id] = c.cn; });
+        var head = '<p class="dim">只列官方中文稿里带状态标记的原句，整句照录；' +
+          '官方没写过"没变"的东西，所以' + '<b>未变＝未统计</b>，不拿沉默当证据。</p>';
+        if (!list.length) {
+          el('abtbl').innerHTML = head + '<div class="empty">这个职业还没有官方中文深度解析稿，四态无从谈起。' +
+            '缺的五个职业：' + D.esc(((ab.meta || {}).notCollected || [])[1] || '圣骑士/萨满祭司/法师/术士/潜行者') + '</div>';
+          return;
+        }
+        el('abtbl').innerHTML = head + Object.keys(byState).map(function (st) {
+          var rows = byState[st] || [];
+          if (!rows.length) return '';
+          return '<h3>' + AB_STATE[st] + ' · ' + rows.length + ' 条</h3>' +
+            '<table class="abtab"><thead><tr><th>名称</th><th>职业/专精</th><th>层级线索</th><th>官方原句</th></tr></thead><tbody>' +
+            rows.map(function (x) {
+              var tier = x.tierFrom !== null && x.tierFrom !== undefined
+                ? '第' + x.tierFrom + ' 层 → 第' + x.tierHint + ' 层'
+                : (x.tierHint ? '第' + x.tierHint + ' 层' : '—');
+              if (x.milestone) tier += ' ｜ 第' + x.milestone + ' 点关键天赋';
+              return '<tr><td><b>' + D.esc(x.name) + '</b><br><span class="dim">' +
+                D.esc(AB_KIND[x.kind] || x.kind) + '</span></td>' +
+                '<td>' + D.esc(cnName[x.classId] || x.classId) +
+                (x.spec ? ' · ' + D.esc(AB_SPEC[x.spec] || x.spec) : '') + '</td>' +
+                '<td class="mono">' + D.esc(tier) + '</td>' +
+                '<td class="quote">' + D.esc(x.quote) + '</td></tr>';
+            }).join('') + '</tbody></table>';
+        }).join('') + '<p class="src">来源：' + (((ab.meta || {}).sources) || []).map(function (x) { return D.esc(x.label); }).join('、') +
+          ' ｜ 生成：' + D.esc((ab.meta || {}).generatedAt || '') + '，由 <span class="mono">tools/extract-abilities.py</span> 整句抓取</p>';
         el('cnt').textContent = list.length + ' / ' + items.length + ' 条';
         Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
           b.onclick = function () { D.copy(b.dataset.copy); };
@@ -435,6 +572,7 @@
           return items.some(function (x) { return x.kind === k; });
         }).map(function (k) { return '<option value="' + k + '">' + KIND[k] + '</option>'; }).join('') + '</select>' +
         '<span class="dim mono" id="cnt"></span></div></div>' +
+        '<div class="card"><h2>与经典旧世的差异（四态）</h2><div id="abtbl"></div></div>' +
         '<div class="card" style="padding:0;overflow:auto;max-height:72vh"><div id="tbl"></div></div>');
       el('q').oninput = function (e) { f.q = e.target.value; draw(); };
       el('c').onchange = function (e) { f.c = e.target.value; draw(); };
@@ -504,16 +642,20 @@
       function draw(q) {
         var list = items.filter(function (x) { return !q || ((x.cn || '') + (x.en || '')).toLowerCase().indexOf(q.toLowerCase()) >= 0; });
         el('pool').innerHTML = list.length ? list.map(function (x) {
-          return '<span class="term ' + (q ? 'hit' : '') + '" data-c="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '">' + D.esc(x.cn) + '</span>';
+          return '<span class="term ' + (q ? 'hit' : '') + '" data-c="' + D.esc(x.cn + (x.en ? ' / ' + x.en : '')) + '">' + D.esc(x.cn) +
+            '<button class="info" data-src="' + D.esc(x.id) + '" data-name="' + D.esc(x.cn) + '" data-prov="' +
+            encodeURIComponent(JSON.stringify(x.provenance || [])) + '" aria-label="查看「' + D.esc(x.cn) + '」的来源">来源</button></span>';
         }).join('') : '<div class="empty">没有匹配词条。缺的词条说明官方还没给中文名，或我们还没采到。</div>';
         el('cnt').textContent = list.length + ' / ' + items.length;
+        bindSrcToggles(el('pool'));
         Array.prototype.forEach.call(document.querySelectorAll('.term[data-c]'), function (t) {
           t.onclick = function () { D.copy(t.dataset.c); };
         });
       }
       set('<div class="card"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制。当前只有猎人与德鲁伊的官方中文名，其余职业待采。</p>' +
         '<div class="field"><input type="search" id="q" placeholder="输入中文或英文"><span class="dim mono" id="cnt"></span></div>' +
-        '<div class="pool" id="pool"></div></div>');
+        '<div class="pool" id="pool"></div>' +
+        '<div class="srcbox" id="srcbox" style="display:none"></div></div>');
       el('q').oninput = function (e) { draw(e.target.value.trim()); };
       draw('');
     }).catch(fail);
@@ -609,5 +751,5 @@
   }
 
   shell();
-  ({ home: home, talent: talent, chooser: chooser, skills: skills, dungeons: dungeons, systems: systems, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, glossary: glossary, provenance: provenance })[page]();
 })();

@@ -6,8 +6,8 @@
 
 | 项 | 数 |
 | --- | --- |
-| 词条总数 | 240 |
-| 在声明的官方页里逐字命中 | 224 |
+| 词条总数 | 289 |
+| 在声明的官方页里逐字命中 | 273 |
 | 去掉汉字间排版空格才命中（要人眼确认） | 1 |
 | **未命中（要人工回原文看）** | 4 |
 | 已人工判定并留痕（见 audit-exceptions.json） | 1 |
@@ -15,19 +15,19 @@
 | 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | 10 |
 
 核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名。
-| 命中率 | 93.3% |
+| 命中率 | 94.5% |
 
 ## 来源页
 
 | 状态 | 页面 | 承担词条 |
 | --- | --- | --- |
-| 缓存 | https://wow.blizzard.cn/news/24301515/index.html | 123 |
+| 缓存 | https://wow.blizzard.cn/news/24301515/index.html | 143 |
 | 缓存 | https://wow.blizzard.cn/news/24303313/index.html | 7 |
-| 缓存 | https://wow.blizzard.cn/news/24301514/index.html | 56 |
+| 缓存 | https://wow.blizzard.cn/news/24301514/index.html | 74 |
 | 缓存 | https://wow.blizzard.cn/news/24304075/index.html | 37 |
-| 缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 5 |
-| 缓存 | https://wow.blizzard.cn/news/24304160/index.html | 3 |
-| 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 1 |
+| 缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 9 |
+| 缓存 | https://wow.blizzard.cn/news/24304160/index.html | 9 |
+| 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
 | 缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）

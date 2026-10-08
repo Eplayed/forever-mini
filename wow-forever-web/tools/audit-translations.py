@@ -121,6 +121,26 @@ def main():
                               "level": x.get("level"), "prov": x.get("provenance", [])})
     raw_items = glossary["items"]
 
+    # 技能四态条目核对的也是"原文引用"本身，比名字更严格
+    ab_path = os.path.join(DATA, "abilities.json")
+    if os.path.exists(ab_path):
+        ab = json.load(io.open(ab_path, encoding="utf-8"))
+        for x in (ab.get("items") or []):
+            for pr in (x.get("provenance") or []):
+                if pr.get("quote"):
+                    items.append({"src": "技能四态", "id": x["id"], "cn": pr["quote"], "cls": x.get("classId"),
+                                  "level": x.get("level"), "prov": [pr]})
+
+    # 时间线条目核对的是"原文引用"本身，比名字更严格
+    tl_path = os.path.join(DATA, "timeline.json")
+    if os.path.exists(tl_path):
+        tlo = json.load(io.open(tl_path, encoding="utf-8"))
+        for x in (tlo.get("items") or []):
+            for pr in (x.get("provenance") or []):
+                if (pr.get("type") or "").startswith("official") and pr.get("quote"):
+                    items.append({"src": "时间线", "id": x["id"], "cn": pr["quote"], "cls": "引用",
+                                  "level": x.get("level"), "prov": [pr]})
+
     urls = []
     for it in items:
         for prov in it["prov"]:

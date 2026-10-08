@@ -162,6 +162,40 @@ if (fs.existsSync(aePath)) {
   });
 }
 
+// 上线时间表：日期与原文引用都要可查
+const tl = read('timeline.json');
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+(tl.items || []).forEach((x) => {
+  if (!x.id || !x.title || !x.what) errs.push(`timeline ${x.id || '?'}：缺 id/标题/说明`);
+  if (x.date !== '待定' && x.date !== '择期' && !DATE_RE.test(x.date || '')) errs.push(`timeline ${x.id}：日期「${x.date}」不是 YYYY-MM-DD 也不是待定/择期`);
+  if (!['L0', 'L1', 'L2', 'L3'].includes(x.level)) errs.push(`timeline ${x.id}：level 非法 ${x.level}`);
+  const ps = x.provenance || [];
+  if (!ps.length) errs.push(`timeline ${x.id}：无来源`);
+  ps.forEach((pr) => {
+    if (pr.type === 'official_cn' && !pr.quote) errs.push(`timeline ${x.id}：官方中文条目缺原文引用 quote`);
+    if (pr.type === 'official_cn' && pr.url && pr.url.indexOf('wow.blizzard.cn') < 0) errs.push(`timeline ${x.id}：official_cn 指向非官方中文域名`);
+    if (pr.type === 'site-promise' && x.level === 'L0') errs.push(`timeline ${x.id}：本站承诺不能标 L0`);
+  });
+});
+if (tl.meta && tl.meta.timezoneConflict && !tl.meta.timezoneConflict.ours) errs.push('timeline：时区冲突说明缺 ours 字段');
+
+// 技能四态：只允许官方中文整句支撑，名称必须出现在引用里
+const ab = read('abilities.json');
+const STATE_OK = ['new', 'changed', 'removed', 'renamed'];
+const abIds = new Set();
+(ab.items || []).forEach((x) => {
+  if (abIds.has(x.id)) errs.push(`abilities：条目 id 重复 ${x.id}`);
+  abIds.add(x.id);
+  if (!classIds.has(x.classId)) errs.push(`abilities ${x.id}：职业 ${x.classId} 不在 classes.json 里`);
+  if (STATE_OK.indexOf(x.state) < 0) errs.push(`abilities ${x.id}：状态「${x.state}」非法（只许新增/改动/移除/改名）`);
+  if (!x.name || !x.quote) errs.push(`abilities ${x.id}：缺名称或原句`);
+  if (x.name && x.quote && x.quote.indexOf(x.name) < 0) errs.push(`abilities ${x.id}：名称「${x.name}」不在原句里，疑似串行`);
+  if (x.level === 'L0' && !(x.provenance || []).some((pr) => pr.type === 'official_cn' && pr.quote)) {
+    errs.push(`abilities ${x.id}：标 L0 却没有 official_cn 原文引用`);
+  }
+});
+if ((ab.items || []).some((x) => x.state === 'unchanged')) errs.push('abilities：出现"未变"条目——官方没写过，不许凭沉默生成');
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };

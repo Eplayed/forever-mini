@@ -5,15 +5,17 @@
 ## 目录
 
 ```
-src/            8 个页面（index / talent / chooser / skills / dungeons / systems / glossary / provenance）
+src/            9 个页面（index / talent / chooser / timeline / skills / dungeons / systems / glossary / provenance）
   css/app.css   设计令牌与组件样式（令牌表见 docs/UI.md）
   js/           data.js 加载与溯源、talent.js 天赋引擎、glyph.js 本地占位图、app.js 页面渲染
-  data/         站点数据：classes / glossary / dungeons / systems / meta / chooser / method /
-                talents/*.json / upstream/（chooser 与 method 是本站观点类内容，必须标 kind）
+  data/         站点数据：classes / glossary / dungeons / systems / meta / timeline / abilities /
+                chooser / method / talents/*.json / upstream/
+                （chooser 与 method 是本站观点类内容必须标 kind；timeline 与 abilities 每条必须带官方来源，
+                 official_cn 条目还必须带原文引用 quote）
   img/icons/    从官方 CDN 转存的天赋图标 + manifest.json（可整体下线）
 tools/          build-data.js 校验卡口、merge-upstream.js 双源对齐、fetch-icons.js 图标、
-                export-mini.js 导出小程序产物、site-check.py 界面回归自检、make-favicon.py 头标、
-                mindmap.js 生成导图
+                export-mini.js 导出小程序产物、site-check.py 界面回归自检、audit-translations.py 译名体检、
+                extract-abilities.py 抽技能四态、make-favicon.py 头标、mindmap.js 生成导图
 docs/           PRD / UI / reference-gap / wow-infinite-*（方案、流程、源盘点）/ data-base 采编工作台
                 screenshots/ 渲染证据 / reference/ 参考站实拍
 ```
@@ -25,8 +27,9 @@ node tools/build-data.js        # 改数据必跑：校验 + 覆盖率，非 0 �
 node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，谨慎）
 node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
 node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
-python3 tools/site-check.py       # 界面回归自检：8 页渲染 + 天赋交互 + 问答流程 + 375px，非 0 即不通过
+python3 tools/site-check.py       # 界面回归自检：9 页渲染 + 天赋交互 + 问答 + 时间线 + 四态表 + 设计基线 + 375px，非 0 即不通过
 python3 tools/audit-translations.py  # 译名体检：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
+python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
 cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地 JSON）
 ```
 

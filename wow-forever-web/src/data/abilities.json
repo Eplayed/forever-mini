@@ -1,0 +1,904 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-08",
+  "kind": "official-cn-extract",
+  "method": "tools/extract-abilities.py 按官方页小标题分段（职业解析 → 基础技能/宠物/天赋 → 专精），只收「名称：（状态标记。）…」这种整句，名称必须原样出现在句里，否则丢弃。",
+  "states": {
+   "new": "新增",
+   "changed": "改动",
+   "renamed": "改名（原X）",
+   "removed": "移除"
+  },
+  "notCollected": [
+   "未变：官方不会列出没改的东西，缺就是缺，不拿沉默当证据",
+   "圣骑士/萨满祭司/法师/术士/潜行者：官方中文深度解析稿尚未发布",
+   "数值细节：除原文写出的那句之外，不做推算"
+  ],
+  "sources": [
+   {
+    "url": "https://wow.blizzard.cn/news/24301515/index.html",
+    "label": "猎人与德鲁伊职业深度解析"
+   },
+   {
+    "url": "https://wow.blizzard.cn/news/24301514/index.html",
+    "label": "牧师与战士职业深度解析"
+   }
+  ]
+ },
+ "items": [
+  {
+   "id": "hunter-致命守护-0",
+   "classId": "hunter",
+   "spec": "beast-mastery",
+   "kind": "talent",
+   "name": "致命守护",
+   "state": "renamed",
+   "officialTag": "原 强化雄鹰守护 。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "野兽控制 致命守护 ：（原 强化雄鹰守护 。）激活 野兽守护 时，近战攻击现在也有几率提高攻击速度。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "野兽控制 致命守护 ：（原 强化雄鹰守护 。）激活 野兽守护 时，近战攻击现在也有几率提高攻击速度。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-召唤雄鹰-1",
+   "classId": "hunter",
+   "spec": "beast-mastery",
+   "kind": "talent",
+   "name": "召唤雄鹰",
+   "state": "new",
+   "officialTag": "新增第16点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 16,
+   "quote": "召唤雄鹰 ：（新增第16点关键天赋。）立即造成伤害，并召唤一只雄鹰攻击猎人的当前目标，持续18秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "召唤雄鹰 ：（新增第16点关键天赋。）立即造成伤害，并召唤一只雄鹰攻击猎人的当前目标，持续18秒。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-精确瞄准-2",
+   "classId": "hunter",
+   "spec": "marksmanship",
+   "kind": "talent",
+   "name": "精确瞄准",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "精确瞄准 ：（新增天赋。）根据猎人智力的20/40/60/80/100%，提高近战和远程攻击强度。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "精确瞄准 ：（新增天赋。）根据猎人智力的20/40/60/80/100%，提高近战和远程攻击强度。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-疾速杀戮-3",
+   "classId": "hunter",
+   "spec": "marksmanship",
+   "kind": "talent",
+   "name": "疾速杀戮",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "疾速杀戮 ：（新增天赋。）缩短 急速射击 的冷却时间。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "疾速杀戮 ：（新增天赋。）缩短 急速射击 的冷却时间。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-独来独往-4",
+   "classId": "hunter",
+   "spec": "marksmanship",
+   "kind": "talent",
+   "name": "独来独往",
+   "state": "new",
+   "officialTag": "新增第11点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 11,
+   "quote": "独来独往 ：（新增第11点关键天赋。）没有宠物在场时，使猎人所有攻击造成的伤害提高20%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "独来独往 ：（新增第11点关键天赋。）没有宠物在场时，使猎人所有攻击造成的伤害提高20%。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-急速恢复-5",
+   "classId": "hunter",
+   "spec": "marksmanship",
+   "kind": "talent",
+   "name": "急速恢复",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "急速恢复 ：（新增天赋。）需要先点出 疾速杀戮 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "急速恢复 ：（新增天赋。）需要先点出 疾速杀戮 。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-诱捕-6",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "诱捕",
+   "state": "changed",
+   "officialTag": "小幅重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "诱捕 ：（小幅重做。）现在只要陷阱触发，就必定生效。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "诱捕 ：（小幅重做。）现在只要陷阱触发，就必定生效。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-野蛮打击-7",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "野蛮打击",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "野蛮打击 ：（重做。）现在使所有近战伤害提高2/4%，不再使 猛禽一击 和 猫鼬撕咬 的伤害提高10/20%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "野蛮打击 ：（重做。）现在使所有近战伤害提高2/4%，不再使 猛禽一击 和 猫鼬撕咬 的伤害提高10/20%。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-生存战术-8",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "生存战术",
+   "state": "renamed",
+   "officialTag": "原陷阱掌握。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "生存战术 ：（原陷阱掌握。）除了陷阱外，现在还会提高 假死 的命中几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "生存战术 ：（原陷阱掌握。）除了陷阱外，现在还会提高 假死 的命中几率。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-掠食者之锋-9",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "掠食者之锋",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "掠食者之锋 ：（新增天赋。）提高近战爆击的额外伤害，以及双持时副手武器造成的伤害。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "掠食者之锋 ：（新增天赋。）提高近战爆击的额外伤害，以及双持时副手武器造成的伤害。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-游刃有余-10",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "游刃有余",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "游刃有余 ：（新增天赋。）降低所有陷阱和近战技能的法力值消耗。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "游刃有余 ：（新增天赋。）降低所有陷阱和近战技能的法力值消耗。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-暴露猎物-11",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "暴露猎物",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "暴露猎物 ：（新增天赋。）近战或远程攻击命中带有你 猎人印记 的目标时，有几率激活 猫鼬撕咬 ，效果如同成功躲闪一次攻击。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "暴露猎物 ：（新增天赋。）近战或远程攻击命中带有你 猎人印记 的目标时，有几率激活 猫鼬撕咬 ，效果如同成功躲闪一次攻击。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "hunter-生存专家的戒律-12",
+   "classId": "hunter",
+   "spec": "survival",
+   "kind": "talent",
+   "name": "生存专家的戒律",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "生存专家的戒律 ：（新增天赋。）缩短 陷阱 和 威慑 的冷却时间。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "生存专家的戒律 ：（新增天赋。）缩短 陷阱 和 威慑 的冷却时间。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-猛虎之怒-13",
+   "classId": "druid",
+   "spec": "feral",
+   "kind": "talent",
+   "name": "猛虎之怒",
+   "state": "removed",
+   "officialTag": "移除。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "猛虎之怒 ：（移除。）已由野性战斗系的新天赋 变形之力 取代。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "猛虎之怒 ：（移除。）已由野性战斗系的新天赋 变形之力 取代。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-起源-14",
+   "classId": "druid",
+   "spec": "balance",
+   "kind": "talent",
+   "name": "起源",
+   "state": "new",
+   "officialTag": "第1层新增天赋。",
+   "tierHint": 1,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "起源 ：（第1层新增天赋。）提高德鲁伊法术和技能造成的所有周期性伤害与治疗效果。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "起源 ：（第1层新增天赋。）提高德鲁伊法术和技能造成的所有周期性伤害与治疗效果。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-自然的威严-15",
+   "classId": "druid",
+   "spec": "balance",
+   "kind": "talent",
+   "name": "自然的威严",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "自然的威严 ：（第2层新增天赋。）提高所有法术和近战攻击的爆击几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "自然的威严 ：（第2层新增天赋。）提高所有法术和近战攻击的爆击几率。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-繁茂-16",
+   "classId": "druid",
+   "spec": "balance",
+   "kind": "talent",
+   "name": "繁茂",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "繁茂 ：（第5层新增天赋。）现在 纠缠根须 最多可同时困住3个目标。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "繁茂 ：（第5层新增天赋。）现在 纠缠根须 最多可同时困住3个目标。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-日月之蚀-17",
+   "classId": "druid",
+   "spec": "balance",
+   "kind": "talent",
+   "name": "日月之蚀",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "日月之蚀 ：（第5层新增天赋。）施放 愤怒 可缩短接下来2次 星火术 的施法时间，该效果最多可累积4次。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "日月之蚀 ：（第5层新增天赋。）施放 愤怒 可缩短接下来2次 星火术 的施法时间，该效果最多可累积4次。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-大地母亲的恩赐-18",
+   "classId": "druid",
+   "spec": "restoration",
+   "kind": "talent",
+   "name": "大地母亲的恩赐",
+   "state": "new",
+   "officialTag": "新增第11点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 11,
+   "quote": "大地母亲的恩赐 ：（新增第11点关键天赋。）使 回春术 、 迅捷治愈 和 野性成长 的公共冷却时间缩短0.5秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "大地母亲的恩赐 ：（新增第11点关键天赋。）使 回春术 、 迅捷治愈 和 野性成长 的公共冷却时间缩短0.5秒。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "druid-生命之魂-19",
+   "classId": "druid",
+   "spec": "restoration",
+   "kind": "talent",
+   "name": "生命之魂",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "生命之魂 ：（第5层新增天赋。）按百分比提高精神。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301515/index.html",
+     "quote": "生命之魂 ：（第5层新增天赋。）按百分比提高精神。",
+     "note": "猎人与德鲁伊职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-圣光之力-20",
+   "classId": "priest",
+   "spec": "discipline",
+   "kind": "talent",
+   "name": "圣光之力",
+   "state": "new",
+   "officialTag": "第1层新增天赋。",
+   "tierHint": 1,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "戒律 圣光之力 ：（第1层新增天赋。）提高 惩击 和 苦修 对受到你 神圣之火 影响的目标造成的伤害。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "戒律 圣光之力 ：（第1层新增天赋。）提高 惩击 和 苦修 对受到你 神圣之火 影响的目标造成的伤害。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-双生戒律-21",
+   "classId": "priest",
+   "spec": "discipline",
+   "kind": "talent",
+   "name": "双生戒律",
+   "state": "new",
+   "officialTag": "第1层新增天赋。",
+   "tierHint": 1,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "双生戒律 ：（第1层新增天赋。）提高瞬发法术造成的伤害和治疗效果。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "双生戒律 ：（第1层新增天赋。）提高瞬发法术造成的伤害和治疗效果。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-苦修-22",
+   "classId": "priest",
+   "spec": "discipline",
+   "kind": "talent",
+   "name": "苦修",
+   "state": "new",
+   "officialTag": "新增第21点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 21,
+   "quote": "苦修 ：（新增第21点关键天赋。）引导时间为2秒，冷却时间为12秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "苦修 ：（新增第21点关键天赋。）引导时间为2秒，冷却时间为12秒。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-新生希望-23",
+   "classId": "priest",
+   "spec": "discipline",
+   "kind": "talent",
+   "name": "新生希望",
+   "state": "new",
+   "officialTag": "新增天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "新生希望 ：（新增天赋。）需要先点出 灵魂守护 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "新生希望 ：（新增天赋。）需要先点出 灵魂守护 。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-灼热之光-24",
+   "classId": "priest",
+   "spec": "holy",
+   "kind": "talent",
+   "name": "灼热之光",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "灼热之光 ：（重做。）现在可提高所有神圣伤害，但加成比例降低。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "灼热之光 ：（重做。）现在可提高所有神圣伤害，但加成比例降低。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-联结治疗-25",
+   "classId": "priest",
+   "spec": "holy",
+   "kind": "talent",
+   "name": "联结治疗",
+   "state": "new",
+   "officialTag": "新增第16点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 16,
+   "quote": "联结治疗 ：（新增第16点关键天赋。） 新增法术，无冷却时间。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "联结治疗 ：（新增第16点关键天赋。） 新增法术，无冷却时间。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-愈合祷言-26",
+   "classId": "priest",
+   "spec": "holy",
+   "kind": "talent",
+   "name": "愈合祷言",
+   "state": "new",
+   "officialTag": "新增第31点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 31,
+   "quote": "愈合祷言 ：（新增第31点关键天赋。）需要先点出 救赎之魂 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "愈合祷言 ：（新增第31点关键天赋。）需要先点出 救赎之魂 。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-噬灵传染-27",
+   "classId": "priest",
+   "spec": "shadow",
+   "kind": "talent",
+   "name": "噬灵传染",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "噬灵传染 ：（第5层新增天赋。）降低 噬灵瘟疫 的法力值消耗。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "噬灵传染 ：（第5层新增天赋。）降低 噬灵瘟疫 的法力值消耗。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "priest-提早离世-28",
+   "classId": "priest",
+   "spec": "shadow",
+   "kind": "talent",
+   "name": "提早离世",
+   "state": "new",
+   "officialTag": "第6层新增天赋。",
+   "tierHint": 6,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "提早离世 ：（第6层新增天赋。）提高 暗言术：灭 对生命值低于20%的目标的爆击几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "提早离世 ：（第6层新增天赋。）提高 暗言术：灭 对生命值低于20%的目标的爆击几率。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-强化战术掌握-29",
+   "classId": "warrior",
+   "spec": "arms",
+   "kind": "talent",
+   "name": "强化战术掌握",
+   "state": "renamed",
+   "officialTag": "原战术掌握。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "武器 强化战术掌握 ：（原战术掌握。）每点天赋可使切换姿态时保留的怒气增加3点，最多可保留25点。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "武器 强化战术掌握 ：（原战术掌握。）每点天赋可使切换姿态时保留的怒气增加3点，最多可保留25点。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-穿刺打击-30",
+   "classId": "warrior",
+   "spec": "arms",
+   "kind": "talent",
+   "name": "穿刺打击",
+   "state": "new",
+   "officialTag": "新增第16点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 16,
+   "quote": "穿刺打击 ：（新增第16点关键天赋。）消耗15点怒气，立即发动攻击，冷却时间为20秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "穿刺打击 ：（新增第16点关键天赋。）消耗15点怒气，立即发动攻击，冷却时间为20秒。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-血之气息-31",
+   "classId": "warrior",
+   "spec": "arms",
+   "kind": "talent",
+   "name": "血之气息",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "血之气息 ：（第5层新增天赋。）主手攻击命中受到 撕裂 影响的敌人时，有几率激活 压制 ，可在6秒内使用。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "血之气息 ：（第5层新增天赋。）主手攻击命中受到 撕裂 影响的敌人时，有几率激活 压制 ，可在6秒内使用。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-武器大师-32",
+   "classId": "warrior",
+   "spec": "arms",
+   "kind": "talent",
+   "name": "武器大师",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "武器大师： （第5层新增天赋。）将所有武器专精天赋的效果合并为一个天赋。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "武器大师： （第5层新增天赋。）将所有武器专精天赋的效果合并为一个天赋。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-怒击-33",
+   "classId": "warrior",
+   "spec": "fury",
+   "kind": "talent",
+   "name": "怒击",
+   "state": "new",
+   "officialTag": "新增第16点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 16,
+   "quote": "怒击 ：（新增第16点关键天赋。）双持时，旋风斩会用两把武器同时攻击。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "怒击 ：（新增第16点关键天赋。）双持时，旋风斩会用两把武器同时攻击。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-狂怒-34",
+   "classId": "warrior",
+   "spec": "fury",
+   "kind": "talent",
+   "name": "狂怒",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "狂怒 ：（重做。）现在受到任何伤害都有几率触发。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "狂怒 ：（重做。）现在受到任何伤害都有几率触发。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-强化复仇-35",
+   "classId": "warrior",
+   "spec": "protection",
+   "kind": "talent",
+   "name": "强化复仇",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化复仇 ：（重做。）现在会提高复仇造成的伤害，不再有几率使目标昏迷。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "强化复仇 ：（重做。）现在会提高复仇造成的伤害，不再有几率使目标昏迷。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-强化盾墙-36",
+   "classId": "warrior",
+   "spec": "protection",
+   "kind": "talent",
+   "name": "强化盾墙",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化盾墙 ：（重做。）现在会大幅缩短 盾墙 的冷却时间。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "强化盾墙 ：（重做。）现在会大幅缩短 盾墙 的冷却时间。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  },
+  {
+   "id": "warrior-怒火聚焦-37",
+   "classId": "warrior",
+   "spec": "protection",
+   "kind": "talent",
+   "name": "怒火聚焦",
+   "state": "new",
+   "officialTag": "第6层新增天赋。",
+   "tierHint": 6,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "怒火聚焦 ：（第6层新增天赋。）降低所有攻击技能的怒气消耗。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24301514/index.html",
+     "quote": "怒火聚焦 ：（第6层新增天赋。）降低所有攻击技能的怒气消耗。",
+     "note": "牧师与战士职业深度解析原文整句",
+     "checkedAt": "2026-10-08"
+    }
+   ]
+  }
+ ]
+}
