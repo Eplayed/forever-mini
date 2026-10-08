@@ -51,6 +51,7 @@
 | D1 | 小程序与站点名称（不得含商标词） | 卡注册与备案起跑 | 你定，或从「副本手账 / 六十级手册 / 开荒台账」里挑 |
 | D2 | 是否自己买 388 元礼包打 Beta | 决定层级门槛、掉落、译名分歧能否自行核实 | 不买则数据继续标 L2，靠官方稿 |
 | D3 | 无限服小程序落在哪 | **已落地**：就在本仓库 `for-mini/`（monorepo，远程 `Eplayed/forever-mini`），架构照 `poe-mini` 但 appid（待注册，现为测试号）、OSS 命名空间 `wow/{env}/v1/`、缓存 key `wow_forever_v1_`、快照文件全部独立；`poe-mini`（已移出本仓库）与 `daily-talk` 都不承载无限服代码与规则 | — |
+| D4 | 小程序「先发布不备案」行不行 | **已核实：不行**。微信官方备案 FAQ 写明发布（上架）必须先完成备案，未备案发布返回 errcode 86369；平台初审 1–2 工作日 + 管局审核 1–20 工作日。可行的替代：先把**网页资料站**发出去（不涉小程序备案），小程序侧走体验版给少量人用（官方 FAQ 未明确限制，需实测确认），备案与开发并行 | 今天提交备案，同时先发网页站 |
 
 ## 交接记录
 
@@ -68,3 +69,4 @@
 | 2026-10-08 | wow-dev | 仓库合并为 monorepo（远程 `Eplayed/forever-mini`），`for-mini` 由 AI 手册改造为无限服小程序底子，新增基底→小程序导出脚本 | `for-mini/`、`tools/export-mini.js`、`for-mini/docs/VERIFY-2026-10-08.md`、根 `README.md` | 已定（chip/收藏/复制的点击动作待人工手测；`live` 链路等 OSS 上传后回验） | wow-ops |
 | 2026-10-08 | wow-dev | 修根 `AGENTS.md` 上移后遗留的两处歧义：产出路径全部补上 `wow-forever-web/` 或 `for-mini/` 前缀并补小程序截图位；图标口径改回"新物品图标能否取自官方 CDN 尚未证实"，验证基线补第 4、5 条（点击动作无证据必须单列、每轮登记台账） | 根 `AGENTS.md`、本文件 | 已定 | 各角色 |
 | 2026-10-08 | wow-dev | 修天赋计算器减点模式失效与导航高亮失效、补自绘头标、按 `reference-gap.md` 做选职业问答页与溯源页方法论段、新增 `tools/site-check.py` 回归自检 | `src/chooser.html`、`src/data/chooser.json`、`src/data/method.json`、`tools/site-check.py`、`tools/make-favicon.py`、`docs/VERIFY-2026-10-08-site.md`、`docs/screenshots/check-2026-10-08/` | 已定（47/47 通过；真机长按、问答权重口径、新组件未进 UI.md 三项待办） | wow-ui（归档组件）→ wow-planner（问答权重口径确认） |
+| 2026-10-08 | wow-ui → wow-planner → wow-data | 新组件归档进 UI 规范并去硬编码色值；问答权重口径落成 PLAN 文档并改掉两条机制错误；新增译名回官方原文逐字核对的体检脚本与留痕例外清单 | `docs/UI.md`、`docs/PLAN-chooser.md`、`docs/DATA-AUDIT-2026-10-08.md`、`tools/audit-translations.py`、`src/data/audit-exceptions.json`、`tools/site-check.py`、`tools/build-data.js` | 已定（译名 215 条：213 逐字命中 / 1 排版空格命中 / 1 人工判定留痕；site-check 49/49） | wow-ops（发布路径待拍板） |
