@@ -96,6 +96,28 @@ dg.meta = dg.meta || {};
 dg.meta.lootDisclaimer = '掉落归属是上游按经典旧世开放数据库推的，暴雪说过无限服重做过掉落，正式开放可能变化——所以掉落一律标 L2 待实测，本站不写百分比。';
 dg.meta.upstream = { site: up.meta.site, source: up.meta.source, scrapedAt: up.meta.scrapedAt };
 
+const cardsPath = path.join(ROOT, 'upstream', 'wclbox-cards.json');
+if (fs.existsSync(cardsPath)) {
+  const cards = JSON.parse(fs.readFileSync(cardsPath, 'utf8'));
+  const bySlug = {};
+  (cards.cards || []).forEach((c) => { bySlug[c.slug] = c; });
+  const artIdx = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).dungeons || {};
+  let z = 0;
+  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+    const c = bySlug[d.id];
+    if (!c) return;
+    if (c.zone) { d.zoneCn = c.zone; z += 1; }
+    if (c.range) {
+      const up = String(c.range).replace(/[–—~]/g, '-').replace(/[^0-9-]/g, '').replace(/-+/g, '-');
+      if (d.levelRange && d.levelRange !== up) d.levelRangeAlt = up;
+      else if (!d.levelRange) d.levelRange = up;
+    }
+    d.cardCounts = { bosses: c.bosses || null, drops: c.drops || null };
+    d.art = artIdx[d.id] || null;
+  });
+  console.log('卡片信息：补上所在区域 %d 条', z);
+}
+
 fs.writeFileSync(path.join(ROOT, 'dungeons.json'), JSON.stringify(dg, null, 1) + '\n');
 const cnt = (a) => a.reduce((s, x) => s + (x.bosses || []).length, 0);
 console.log('已写 dungeons.json：新本 %d / 经典本 %d / 团本 %d，BOSS 共 %d 个，掉落条目 %d 条',

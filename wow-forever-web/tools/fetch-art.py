@@ -27,6 +27,7 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 WCF = "https://wowclassicforever.info"
 WBX = "https://wowforever.wclbox.com"
+WBX = "https://wowforever.wclbox.com"
 # 我们的副本 id → 参考站用的 slug（两边命名不一致的几座）
 SLUG_ALIAS = {"whelgars-excavation": "excavation-site-wetlands", "deathmine": "the-deadmines",
               "the-stocks": "the-stockade", "razor-krendor": "razorfen-downs"}
@@ -87,19 +88,30 @@ def classes(man):
     print(u"已存职业背景图 %d：%s" % (len(got), u"、".join(got)))
 
 
+def card_art_map():
+    """无限数据库的副本卡片里带载入图路径，键是它的 slug。"""
+    p = os.path.join(DATA, "upstream", "wclbox-cards.json")
+    if not os.path.exists(p):
+        return {}
+    doc = json.load(io.open(p, encoding="utf-8"))
+    return {c["slug"]: c.get("art") for c in doc.get("cards") or [] if c.get("art")}
+
+
 def dungeons(man):
     dg = json.load(io.open(os.path.join(DATA, "dungeons.json"), encoding="utf-8"))
     rows = []
     for key in ("newDungeons", "classicDungeons", "raids"):
         rows += dg.get(key) or []
     have = set(x["file"].split("/")[-1].split(".")[0] for x in man["items"] if "/dungeons/" in x["file"])
+    arts = card_art_map()
     ok, miss = [], []
     for d in rows:
         slug = SLUG_ALIAS.get(d["id"], d["id"])
         if d["id"] in have:
             continue
-        cands = [WCF + "/images/dungeons/client/%s/loading-screen-640.webp" % slug,
-                 WCF + "/images/dungeons/client/%s/loading-screen-640.png" % slug]
+        cands = ([WBX + arts[slug]] if slug in arts else []) + [
+            WCF + "/images/dungeons/client/%s/loading-screen-640.webp" % slug,
+            WCF + "/images/dungeons/client/%s/loading-screen-640.png" % slug]
         for url in cands:
             code, blob = http(url, binary=True)
             if code == 200 and len(blob) > 3000 and blob[:4] != b"<":

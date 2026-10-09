@@ -112,8 +112,256 @@
    "source": "https://wowforever.wclbox.com/jiemian/custom/classes/warrior-e52fcea03efb.webp",
    "kind": "class-bg",
    "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/the-drowned-city.webp",
+   "bytes": 41404,
+   "sha1": "b44972176f",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-the-drowned-city.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/kroldok-stronghold.webp",
+   "bytes": 41404,
+   "sha1": "b44972176f",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-kroldok-stronghold.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/alcaz-prison.webp",
+   "bytes": 43424,
+   "sha1": "e349e18a9a",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-alcaz-prison.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/blackmaw-hold.webp",
+   "bytes": 43424,
+   "sha1": "e349e18a9a",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackmaw-hold.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/shapers-terrace.webp",
+   "bytes": 43424,
+   "sha1": "e349e18a9a",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-shapers-terrace.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/ragefire-chasm.webp",
+   "bytes": 11784,
+   "sha1": "004bf34dc2",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-ragefirechasm.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/wailing-caverns.webp",
+   "bytes": 12316,
+   "sha1": "2298646021",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-wailingcaverns.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/deathmine.webp",
+   "bytes": 28018,
+   "sha1": "c23137846b",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-deadmines.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/shadowfang-keep.webp",
+   "bytes": 20146,
+   "sha1": "9f27d1e76a",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-shadowfangkeep.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/blackfathom-deeps.webp",
+   "bytes": 18256,
+   "sha1": "b2bff0d9c1",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackfathomdeeps.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/the-stocks.webp",
+   "bytes": 7886,
+   "sha1": "88c2354efd",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-stockade.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/gnomeregan.webp",
+   "bytes": 16296,
+   "sha1": "b813cc913e",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-gnomeregan.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/razorfen-kraul.webp",
+   "bytes": 16112,
+   "sha1": "dee9c53019",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-razorfenkraul.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/scarlet-monastery-graveyard.webp",
+   "bytes": 16684,
+   "sha1": "2c695e1067",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-scarletmonastery.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/scarlet-monastery-library.webp",
+   "bytes": 16684,
+   "sha1": "2c695e1067",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-scarlethalls.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/scarlet-monastery-armory.webp",
+   "bytes": 16684,
+   "sha1": "2c695e1067",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-scarlethalls.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/razor-krendor.webp",
+   "bytes": 15156,
+   "sha1": "d15049f43a",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-razorfendowns.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/scarlet-monastery-cathedral.webp",
+   "bytes": 16684,
+   "sha1": "2c695e1067",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-scarletmonastery.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/uldaman.webp",
+   "bytes": 9392,
+   "sha1": "d55a0cd566",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-uldaman.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/zulfarrak.webp",
+   "bytes": 20286,
+   "sha1": "05ec093f01",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-zulfarrak.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/maraudon.webp",
+   "bytes": 16134,
+   "sha1": "1f46083335",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-maraudon.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/sunken-temple.webp",
+   "bytes": 13158,
+   "sha1": "be6d80b21e",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-sunkentemple.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/blackrock-depths.webp",
+   "bytes": 14924,
+   "sha1": "79768b04d8",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackrockdepths.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/dire-maul-east.webp",
+   "bytes": 19408,
+   "sha1": "1893fcc94f",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-diremaul.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/lower-blackrock-spire.webp",
+   "bytes": 14974,
+   "sha1": "f9f2dc5f45",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackrockspire.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/dire-maul-north.webp",
+   "bytes": 19408,
+   "sha1": "1893fcc94f",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-diremaul.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/dire-maul-west.webp",
+   "bytes": 19408,
+   "sha1": "1893fcc94f",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-diremaul.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/scholomance.webp",
+   "bytes": 25226,
+   "sha1": "5e7e94928d",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-scholomance.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/stratholme-main-gate.webp",
+   "bytes": 13924,
+   "sha1": "2986fdec3d",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-stratholme.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/stratholme-service-gate.webp",
+   "bytes": 13924,
+   "sha1": "2986fdec3d",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-stratholme.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/dungeons/upper-blackrock-spire.webp",
+   "bytes": 14974,
+   "sha1": "f9f2dc5f45",
+   "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackrockspire.webp",
+   "kind": "dungeon-loading",
+   "fetchedAt": "2026-10-09"
   }
  ],
  "fetchedAt": "2026-10-09",
- "total": 14
+ "total": 45
 }

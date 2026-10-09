@@ -703,9 +703,9 @@ def test_dungeon_data(browser, base):
     page.goto(base + "/dungeons.html", wait_until="networkidle")
     page.wait_for_timeout(1500)
     check("副本页无脚本报错", not errs, "; ".join(errs[:2]))
-    cards = page.evaluate("() => document.querySelectorAll('.dcardx').length")
+    cards = page.evaluate("() => document.querySelectorAll('.dcard2').length")
     check("副本卡数量等于数据", cards == len(rows), "DOM %d / 数据 %d" % (cards, len(rows)))
-    page.evaluate("() => document.querySelector('.dcardx button[data-d]').click()")
+    page.evaluate("() => document.querySelector('.dcard2 button[data-d]').click()")
     page.wait_for_timeout(400)
     # 横幅图是 loading="lazy"，不滚一遍不会发请求，先滚到底再数
     page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
@@ -723,6 +723,13 @@ def test_dungeon_data(browser, base):
     check("掉落条目与逐条来源都在 DOM 里", st["loot"] >= 1, "首张卡掉落 %d 件" % st["loot"])
     check("掉落不写百分比", not st["pct"], "出现 %s" % st["pct"])
     check("本地转存的副本原画加载成功", st["art"] >= 5, "加载 %d 张" % st["art"])
+    bands = page.evaluate("() => [...document.querySelectorAll('.band b')].map(x => x.textContent.trim())")
+    check("地下城按十级一档分档", len(bands) >= 5 and any("40" in x for x in bands), str(bands))
+    seals = page.evaluate("() => document.querySelectorAll('.dbn2-seal').length")
+    newn = len([x for x in (dg.get("newDungeons") or []) if x.get("kind") == "new"])
+    check("无限新增本带\"新\"角标", seals == newn, "%d 个角标 / %d 座新本" % (seals, newn))
+    conf = page.evaluate("() => document.querySelectorAll('#main .conf').length")
+    check("区间或译名两说的条目都摆在卡面上", conf >= 5, "%d 处冲突标注" % conf)
     page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-with-loot.png"))
     ctx.close()
 
@@ -733,6 +740,21 @@ def test_dungeon_data(browser, base):
     bg = page.evaluate("""() => { const i = document.querySelector('.tbg img');
       return i ? { ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth } : null; }""")
     check("天赋页用上职业背景图", bool(bg) and bg["ok"], str(bg))
+    tl = page.evaluate("""() => {
+      const legend = [...document.querySelectorAll('.tlegend span')].filter(x => x.querySelector('i')).length;
+      const marks = document.querySelectorAll('.node[class*="chg-"]').length;
+      const lines = document.querySelectorAll('.tlines line').length;
+      const hint = document.querySelector('.tree .hint');
+      return { legend: legend, marks: marks, lines: lines, cells: document.querySelectorAll('.node[data-n]').length,
+               gate: hint ? hint.textContent : '' }; }""")
+    check("天赋树有图例与改动标记", tl["legend"] == 4 and tl["marks"] >= 20,
+          "图例 %d / 标记 %d / 格子 %d" % (tl["legend"], tl["marks"], tl["cells"]))
+    check("前置连线画出来了", tl["lines"] >= 6, "%d 条" % tl["lines"])
+    check("层级门槛不再写未核实", "未核实" not in tl["gate"], tl["gate"].strip()[:44])
+    page.click("#cmp")
+    page.wait_for_timeout(1200)
+    cmpn = page.evaluate("() => document.querySelectorAll('.cmprow').length")
+    check("与经典旧世对比能展开且有内容", cmpn >= 20, "%d 条对照" % cmpn)
     page.screenshot(path=os.path.join(SHOT_DIR, "talent-class-art.png"))
     tp.close()
 

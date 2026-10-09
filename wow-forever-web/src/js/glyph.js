@@ -60,7 +60,10 @@ window.Glyph = (function () {
       'onerror="this.className=\'dbn-art bad\'">' : '';
     return '<div class="dbn2"><span class="dbn2-shade"></span>' + art + photo +
       '<span class="dbn2-mark">' + (opts.art ? '客户端原画 · 本地转存' : '示意图 · 非游戏原画') + '</span>' +
-      '<span class="dbn2-txt"><span class="dbn2-n">' + esc(label || '未定名') + '</span>' +
+      (opts.seal ? '<span class="dbn2-seal">' + esc(opts.seal) + '</span>' : '') +
+      '<span class="dbn2-txt">' +
+      (opts.range ? '<span class="dbn2-r">' + esc(opts.range) + '</span>' : '') +
+      '<span class="dbn2-n">' + esc(label || '未定名') + '</span>' +
       (opts.sub ? '<span class="dbn2-e">' + esc(opts.sub) + '</span>' : '') + '</span></div>';
   }
 

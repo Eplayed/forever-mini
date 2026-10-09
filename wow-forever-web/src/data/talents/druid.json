@@ -1,7 +1,7 @@
 {
  "classId": "druid",
  "classNameCn": "德鲁伊",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -46,7 +54,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-improved-wrath",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-起源",
@@ -75,7 +85,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-genesis",
+     "changeState": "added"
     },
     {
      "id": "druid-0-月光",
@@ -104,7 +116,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-moonglow",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-强化月火术",
@@ -133,7 +147,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-improved-moonfire",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-自然的威严",
@@ -149,7 +165,9 @@
       "nieyi"
      ],
      "iconKey": "inv_staff_01",
-     "requires": [],
+     "requires": [
+      "druid-0-自然的壮美"
+     ],
      "level": "L1",
      "provenance": [
       {
@@ -162,7 +180,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-nature-s-majesty",
+     "changeState": "added"
     },
     {
      "id": "druid-0-自然延伸",
@@ -191,7 +211,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-nature-s-reach",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-强化纠缠根须",
@@ -220,7 +242,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-improved-entangling-roots",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-自然的壮美",
@@ -251,7 +275,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-nature-s-splendor",
+     "changeState": "added"
     },
     {
      "id": "druid-0-自然平衡",
@@ -303,7 +329,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-insect-swarm",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-复仇",
@@ -334,7 +362,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-vengeance",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-强化星火术",
@@ -344,7 +374,7 @@
      "nameCn": "强化星火术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -363,7 +393,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-improved-starfire",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-繁茂",
@@ -392,7 +424,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-overgrowth",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-自然之赐",
@@ -421,7 +455,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-nature-s-grace",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-日月之蚀",
@@ -450,7 +486,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-eclipse",
+     "changeState": "added"
     },
     {
      "id": "druid-0-月怒",
@@ -479,7 +517,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-moonfury",
+     "changeState": "modified"
     },
     {
      "id": "druid-0-枭兽形态",
@@ -508,7 +548,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-balance-moonkin-form",
+     "changeState": "modified"
     }
    ]
   },
@@ -525,7 +567,7 @@
      "nameCn": "凶暴",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -544,7 +586,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-ferocity",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-野性之心",
@@ -573,7 +617,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-heart-of-the-wild",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-豹之迅捷",
@@ -602,7 +648,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-feral-swiftness",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-野性本能",
@@ -631,7 +679,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-feral-instinct",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-野蛮冲撞",
@@ -660,7 +710,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-brutal-impact",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-厚皮",
@@ -689,7 +741,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-thick-hide",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-撕碎攻击",
@@ -712,7 +766,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-shredding-attacks",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-野蛮暴怒",
@@ -741,7 +797,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-savage-fury",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-野性冲锋",
@@ -770,7 +828,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-feral-charge",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-锋利兽爪",
@@ -799,7 +859,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-sharpened-claws",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-撕碎攻击-r3c0",
@@ -807,7 +869,7 @@
      "column": 0,
      "maxRanks": 1,
      "nameCn": "撕碎攻击",
-     "nameAlt": "变形之力",
+     "nameAlt": "变换之力",
      "nameConflict": true,
      "nameVerified": true,
      "nameSources": [
@@ -830,7 +892,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-shifting-power",
+     "posMismatch": true
     },
     {
      "id": "druid-1-原始撕咬",
@@ -861,7 +925,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-primal-bite",
+     "changeState": "added"
     },
     {
      "id": "druid-1-猛兽攻击",
@@ -890,7 +956,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-predatory-strikes",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-血性狂乱",
@@ -898,7 +966,7 @@
      "column": 3,
      "maxRanks": 2,
      "nameCn": "血性狂乱",
-     "nameAlt": "原始狂怒",
+     "nameAlt": "血之狂暴",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
@@ -921,7 +989,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-blood-frenzy",
+     "posMismatch": true
     },
     {
      "id": "druid-1-强化变形之力",
@@ -929,7 +999,7 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "强化变形之力",
-     "nameAlt": "狩猎天性",
+     "nameAlt": "强化变换之力",
      "nameConflict": true,
      "nameVerified": true,
      "nameSources": [
@@ -952,7 +1022,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-improved-shifting-power",
+     "posMismatch": true
     },
     {
      "id": "druid-1-兽群领袖",
@@ -981,7 +1053,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-leader-of-the-pack",
+     "changeState": "modified"
     },
     {
      "id": "druid-1-掠食本能",
@@ -991,7 +1065,7 @@
      "nameCn": "掠食本能",
      "nameAlt": "丛林之王",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1010,7 +1084,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-predatory-instincts",
+     "changeState": "added"
     },
     {
      "id": "druid-1-自然反射",
@@ -1039,7 +1115,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-natural-reaction",
+     "changeState": "added"
     },
     {
      "id": "druid-1-狂乱撕扯",
@@ -1070,7 +1148,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-feral-combat-rend-and-tear",
+     "changeState": "added"
     },
     {
      "id": "druid-1-狂暴",
@@ -1101,7 +1181,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-berserk",
+     "changeState": "added"
     }
    ]
   },
@@ -1137,7 +1219,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-nature-s-focus",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-激怒",
@@ -1166,7 +1250,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-furor",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-自然主义",
@@ -1195,7 +1281,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-naturalist",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-微妙",
@@ -1224,7 +1312,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-subtlety",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-自然变形",
@@ -1253,7 +1343,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-natural-shapeshifter",
+     "changeState": "moved"
     },
     {
      "id": "druid-2-反射",
@@ -1282,7 +1374,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-reflection",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-自然赐福",
@@ -1311,7 +1405,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-gift-of-nature",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-大地母亲的恩赐",
@@ -1340,7 +1436,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-gift-of-the-earthmother",
+     "changeState": "added"
     },
     {
      "id": "druid-2-宁静之魂",
@@ -1350,7 +1448,7 @@
      "nameCn": "宁静之魂",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1369,7 +1467,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-tranquil-spirit",
+     "changeState": "unchanged"
     },
     {
      "id": "druid-2-强化回春术",
@@ -1379,7 +1479,7 @@
      "nameCn": "强化回春术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1398,7 +1498,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-improved-rejuvenation",
+     "changeState": "moved"
     },
     {
      "id": "druid-2-迅捷治愈",
@@ -1427,7 +1529,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-swiftmend",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-自然迅捷",
@@ -1437,7 +1541,7 @@
      "nameCn": "自然迅捷",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1458,7 +1562,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-nature-s-swiftness",
+     "changeState": "unchanged"
     },
     {
      "id": "druid-2-生命之魂",
@@ -1487,7 +1593,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-living-spirit",
+     "changeState": "added"
     },
     {
      "id": "druid-2-强化宁静",
@@ -1516,7 +1624,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "druid-improved-tranquility",
+     "changeState": "modified"
     },
     {
      "id": "druid-2-强化愈合",
@@ -1547,7 +1657,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-improved-regrowth",
+     "changeState": "unchanged"
     },
     {
      "id": "druid-2-野性成长",
@@ -1578,7 +1690,9 @@
        "url": "https://nieyi.cn/f/talents/druid.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-druid-restoration-wild-growth",
+     "changeState": "added"
     }
    ]
   }
@@ -1588,5 +1702,13 @@
   "nameConflict": 9,
   "onlyInOneSource": 2
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/druid",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }

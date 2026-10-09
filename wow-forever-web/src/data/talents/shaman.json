@@ -1,7 +1,7 @@
 {
  "classId": "shaman",
  "classNameCn": "萨满祭司",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -27,7 +35,7 @@
      "nameCn": "传导",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -46,7 +54,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-convection",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-震荡",
@@ -56,7 +66,7 @@
      "nameCn": "震荡",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -75,7 +85,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-concussion",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-元素防护",
@@ -85,7 +97,7 @@
      "nameCn": "元素防护",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -104,7 +116,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-warding",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-回响",
@@ -114,7 +128,7 @@
      "nameCn": "回响",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -133,7 +147,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-reverberation",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-烈焰召唤",
@@ -143,7 +159,7 @@
      "nameCn": "烈焰召唤",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -162,7 +178,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-call-of-flame",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-元素浩劫",
@@ -172,7 +190,7 @@
      "nameCn": "元素浩劫",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -191,7 +209,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-devastation",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-元素集中",
@@ -201,7 +221,7 @@
      "nameCn": "元素集中",
      "nameAlt": "元素专注",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -220,7 +240,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-focus",
+     "changeState": "moved"
     },
     {
      "id": "shaman-0-元素迅捷",
@@ -230,7 +252,7 @@
      "nameCn": "元素迅捷",
      "nameAlt": "元素之怒",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -251,7 +273,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-alacrity",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-强化火焰新星",
@@ -261,7 +285,7 @@
      "nameCn": "强化火焰新星",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -280,7 +304,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-improved-fire-nova",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-风暴之眼",
@@ -290,7 +316,7 @@
      "nameCn": "风暴之眼",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -309,7 +335,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-eye-of-the-storm",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-雷霆召唤",
@@ -319,14 +347,15 @@
      "nameCn": "雷霆召唤",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_nature_callstorm",
      "requires": [
-      "shaman-0-元素之怒"
+      "shaman-0-元素之怒",
+      "shaman-0-元素迅捷"
      ],
      "level": "L2",
      "provenance": [
@@ -340,7 +369,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-call-of-thunder",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-元素射程",
@@ -350,7 +381,7 @@
      "nameCn": "元素射程",
      "nameAlt": "元素延伸",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -369,7 +400,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-reach",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-闪电超载",
@@ -379,7 +412,7 @@
      "nameCn": "闪电超载",
      "nameAlt": "闪电过载",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -398,7 +431,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-lightning-overload",
+     "changeState": "added"
     },
     {
      "id": "shaman-0-地缚",
@@ -408,7 +443,7 @@
      "nameCn": "地缚",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -427,7 +462,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-earthbound",
+     "changeState": "added"
     },
     {
      "id": "shaman-0-元素之怒",
@@ -437,7 +474,7 @@
      "nameCn": "元素之怒",
      "nameAlt": "元素迅捷",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -458,7 +495,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-fury",
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-熔岩爆裂",
@@ -468,7 +507,7 @@
      "nameCn": "熔岩爆裂",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -489,9 +528,12 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-lava-burst",
+     "changeState": "added"
     }
-   ]
+   ],
+   "nameAltUpstream": "元素"
   },
   {
    "id": "shaman-1",
@@ -506,7 +548,7 @@
      "nameCn": "大地之握",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -525,7 +567,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-earth-s-grasp",
+     "changeState": "moved"
     },
     {
      "id": "shaman-1-雷鸣猛击",
@@ -535,7 +579,7 @@
      "nameCn": "雷鸣猛击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -554,7 +598,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-thundering-strikes",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-先祖知识",
@@ -564,7 +610,7 @@
      "nameCn": "先祖知识",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -583,7 +629,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-ancestral-knowledge",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-守护图腾",
@@ -593,7 +641,7 @@
      "nameCn": "守护图腾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -612,7 +660,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-guardian-totems",
+     "changeState": "unchanged"
     },
     {
      "id": "shaman-1-聪慧",
@@ -622,7 +672,7 @@
      "nameCn": "聪慧",
      "nameAlt": "心灵敏捷",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -641,7 +691,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-mental-dexterity",
+     "changeState": "added"
     },
     {
      "id": "shaman-1-强化幽魂之狼",
@@ -651,7 +703,7 @@
      "nameCn": "强化幽魂之狼",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -670,7 +722,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "shaman-improved-ghost-wolf",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-强化闪电之盾",
@@ -680,7 +734,7 @@
      "nameCn": "强化闪电之盾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -699,7 +753,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-improved-lightning-shield",
+     "changeState": "unchanged"
     },
     {
      "id": "shaman-1-元素武器",
@@ -709,7 +765,7 @@
      "nameCn": "元素武器",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -728,7 +784,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-elemental-weapons",
+     "changeState": "moved"
     },
     {
      "id": "shaman-1-萨满专注",
@@ -738,7 +796,7 @@
      "nameCn": "萨满专注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -757,7 +815,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-shamanistic-focus",
+     "changeState": "added"
     },
     {
      "id": "shaman-1-预知",
@@ -767,7 +827,7 @@
      "nameCn": "预知",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -786,7 +846,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-anticipation",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-坚韧",
@@ -796,7 +858,7 @@
      "nameCn": "坚韧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -815,7 +877,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-toughness",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-乱舞",
@@ -825,7 +889,7 @@
      "nameCn": "乱舞",
      "nameAlt": "疾风",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -846,7 +910,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-flurry",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-风暴打击",
@@ -856,7 +922,7 @@
      "nameCn": "风暴打击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -875,7 +941,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-stormstrike",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-灵魂武器",
@@ -885,7 +953,7 @@
      "nameCn": "灵魂武器",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -904,7 +972,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-spirit-weapons",
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-精神敏锐",
@@ -914,7 +984,7 @@
      "nameCn": "精神敏锐",
      "nameAlt": "心灵迅捷",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -933,7 +1003,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-mental-quickness",
+     "changeState": "added"
     },
     {
      "id": "shaman-1-强化风暴打击",
@@ -943,7 +1015,7 @@
      "nameCn": "强化风暴打击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -964,7 +1036,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-improved-stormstrike",
+     "changeState": "added"
     },
     {
      "id": "shaman-1-漩涡武器",
@@ -974,7 +1048,7 @@
      "nameCn": "漩涡武器",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -993,7 +1067,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-enhancement-maelstrom-weapon",
+     "changeState": "added"
     },
     {
      "id": "shaman-1-先知之怒",
@@ -1003,7 +1079,7 @@
      "nameCn": "先知之怒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1024,7 +1100,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "shaman-rage-of-the-farseer",
+     "changeState": "added"
     }
    ]
   },
@@ -1041,7 +1119,7 @@
      "nameCn": "强化治疗波",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1060,7 +1138,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-improved-healing-wave",
+     "changeState": "unchanged"
     },
     {
      "id": "shaman-2-图腾集中",
@@ -1070,7 +1150,7 @@
      "nameCn": "图腾集中",
      "nameAlt": "潮汐掌握",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1089,7 +1169,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-totemic-focus",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-全神贯注",
@@ -1099,7 +1181,7 @@
      "nameCn": "全神贯注",
      "nameAlt": "静心",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1118,7 +1200,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-mindfulness",
+     "changeState": "added"
     },
     {
      "id": "shaman-2-自然优雅",
@@ -1128,7 +1212,7 @@
      "nameCn": "自然优雅",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1147,7 +1231,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-natural-grace",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-潮汐集中",
@@ -1157,7 +1243,7 @@
      "nameCn": "潮汐集中",
      "nameAlt": "潮汐专注",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1176,7 +1262,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-tidal-focus",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-强化复生",
@@ -1186,7 +1274,7 @@
      "nameCn": "强化复生",
      "nameAlt": "强化重生",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1205,7 +1293,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-improved-reincarnation",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-先祖治疗",
@@ -1215,7 +1305,7 @@
      "nameCn": "先祖治疗",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1234,7 +1324,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-ancestral-healing",
+     "changeState": "moved"
     },
     {
      "id": "shaman-2-治疗专注",
@@ -1244,7 +1336,7 @@
      "nameCn": "治疗专注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1263,7 +1355,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-healing-focus",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-水之护盾",
@@ -1273,7 +1367,7 @@
      "nameCn": "水之护盾",
      "nameAlt": "水之盾",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1292,7 +1386,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-water-shield",
+     "changeState": "added"
     },
     {
      "id": "shaman-2-潮汐掌握",
@@ -1302,7 +1398,7 @@
      "nameCn": "潮汐掌握",
      "nameAlt": "图腾专注",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1321,7 +1417,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-tidal-mastery",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-恢复图腾",
@@ -1331,7 +1429,7 @@
      "nameCn": "恢复图腾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1350,7 +1448,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-restorative-totems",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-法力之潮图腾",
@@ -1360,7 +1460,7 @@
      "nameCn": "法力之潮图腾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1379,7 +1479,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-mana-tide-totem",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-治疗之道",
@@ -1389,7 +1491,7 @@
      "nameCn": "治疗之道",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1408,7 +1510,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-healing-way",
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-自然迅捷",
@@ -1418,7 +1522,7 @@
      "nameCn": "自然迅捷",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1437,7 +1541,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-nature-s-swiftness",
+     "changeState": "unchanged"
     },
     {
      "id": "shaman-2-净化",
@@ -1447,7 +1553,7 @@
      "nameCn": "净化",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1466,7 +1572,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-purification",
+     "changeState": "unchanged"
     },
     {
      "id": "shaman-2-激流",
@@ -1476,7 +1584,7 @@
      "nameCn": "激流",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1497,7 +1605,9 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-shaman-restoration-riptide",
+     "changeState": "added"
     }
    ]
   }
@@ -1507,5 +1617,13 @@
   "nameConflict": 14,
   "onlyInOneSource": 0
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/shaman",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }

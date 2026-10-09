@@ -1,7 +1,7 @@
 {
  "classId": "paladin",
  "classNameCn": "圣骑士",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -50,7 +58,7 @@
      "nameCn": "神圣之力",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -69,7 +77,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-divine-strength",
+     "changeState": "unchanged"
     },
     {
      "id": "paladin-0-神圣智慧",
@@ -79,7 +89,7 @@
      "nameCn": "神圣智慧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -98,7 +108,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-divine-intellect",
+     "changeState": "unchanged"
     },
     {
      "id": "paladin-0-治疗之光",
@@ -108,7 +120,7 @@
      "nameCn": "治疗之光",
      "nameAlt": "治愈之光",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -127,7 +139,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-healing-light",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-精神集中",
@@ -137,7 +151,7 @@
      "nameCn": "精神集中",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -156,7 +170,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-spiritual-focus",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-强化圣印",
@@ -166,7 +182,7 @@
      "nameCn": "强化圣印",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -185,7 +201,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-improved-seals",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-不灭信仰",
@@ -195,7 +213,7 @@
      "nameCn": "不灭信仰",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -214,7 +232,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-unyielding-faith",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-真理之音",
@@ -224,7 +244,7 @@
      "nameCn": "真理之音",
      "nameAlt": "真理之声",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -243,7 +263,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-voice-of-truth",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-敬畏",
@@ -253,7 +275,7 @@
      "nameCn": "敬畏",
      "nameAlt": "崇敬",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -272,7 +294,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-reverence",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-净化之力",
@@ -282,7 +306,7 @@
      "nameCn": "净化之力",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -301,7 +325,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-purifying-power",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-圣光灌注",
@@ -311,7 +337,7 @@
      "nameCn": "圣光灌注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -330,7 +356,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-infusion-of-light",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-启发",
@@ -340,7 +368,7 @@
      "nameCn": "启发",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -361,7 +389,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-illumination",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-神恩术",
@@ -371,7 +401,7 @@
      "nameCn": "神恩术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -390,7 +420,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-divine-favor",
+     "changeState": "moved"
     },
     {
      "id": "paladin-0-神圣精准",
@@ -400,7 +432,7 @@
      "nameCn": "神圣精准",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -421,7 +453,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-divine-precision",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-神圣震击",
@@ -431,7 +465,7 @@
      "nameCn": "神圣震击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -450,7 +484,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-holy-shock",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-奉献之地",
@@ -460,7 +496,7 @@
      "nameCn": "奉献之地",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -479,7 +515,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-consecrated-ground",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-神圣强化",
@@ -489,7 +527,7 @@
      "nameCn": "神圣强化",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -508,7 +546,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-holy-power",
+     "changeState": "modified"
     },
     {
      "id": "paladin-0-圣光守望",
@@ -518,7 +558,7 @@
      "nameCn": "圣光守望",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -539,7 +579,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-holy-light-s-vigil",
+     "changeState": "added"
     }
    ]
   },
@@ -556,7 +598,7 @@
      "nameCn": "坚韧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -575,7 +617,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-toughness",
+     "changeState": "moved"
     },
     {
      "id": "paladin-1-盾牌壁垒",
@@ -585,7 +629,7 @@
      "nameCn": "盾牌壁垒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -604,7 +648,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "paladin-redoubt",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-精确",
@@ -614,7 +660,7 @@
      "nameCn": "精确",
      "nameAlt": "精准",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -633,7 +679,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-precision",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-守护者的宠爱",
@@ -643,7 +691,7 @@
      "nameCn": "守护者的宠爱",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -662,7 +710,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-guardian-s-favor",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-预知",
@@ -672,7 +722,7 @@
      "nameCn": "预知",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -691,7 +741,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-anticipation",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-强化愤怒圣印",
@@ -701,7 +753,7 @@
      "nameCn": "强化愤怒圣印",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -720,7 +772,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-improved-seal-of-fury",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-强化正义之怒",
@@ -730,7 +784,7 @@
      "nameCn": "强化正义之怒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -749,7 +803,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-improved-righteous-fury",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-盾牌专精",
@@ -759,7 +815,7 @@
      "nameCn": "盾牌专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -780,7 +836,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-shield-specialization",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-神圣职责",
@@ -790,7 +848,7 @@
      "nameCn": "神圣职责",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -809,7 +867,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-sacred-duty",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-迅捷审判",
@@ -819,7 +879,7 @@
      "nameCn": "迅捷审判",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -840,7 +900,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-swift-judgement",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-单手武器专精",
@@ -850,7 +912,7 @@
      "nameCn": "单手武器专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -869,7 +931,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-one-handed-weapon-specialization",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-强化制裁之锤",
@@ -879,7 +943,7 @@
      "nameCn": "强化制裁之锤",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -898,7 +962,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-improved-hammer-of-justice",
+     "changeState": "moved"
     },
     {
      "id": "paladin-1-圣殿骑士壁垒",
@@ -908,7 +974,7 @@
      "nameCn": "圣殿骑士壁垒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -927,7 +993,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-templar-s-bulwark",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-清算",
@@ -937,7 +1005,7 @@
      "nameCn": "清算",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -956,7 +1024,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-reckoning",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-钢铁信条",
@@ -966,7 +1036,7 @@
      "nameCn": "钢铁信条",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -985,7 +1055,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-iron-creed",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-神圣之盾",
@@ -995,7 +1067,7 @@
      "nameCn": "神圣之盾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1016,7 +1088,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-protection-holy-shield",
+     "changeState": "modified"
     }
    ]
   },
@@ -1033,7 +1107,7 @@
      "nameCn": "偏斜",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1052,7 +1126,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-deflection",
+     "changeState": "moved"
     },
     {
      "id": "paladin-2-祈福",
@@ -1062,7 +1138,7 @@
      "nameCn": "祈福",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1081,7 +1157,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-benediction",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-强化审判",
@@ -1091,7 +1169,7 @@
      "nameCn": "强化审判",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1110,7 +1188,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-improved-judgement",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-神圣导能",
@@ -1120,7 +1200,7 @@
      "nameCn": "神圣导能",
      "nameAlt": "圣光导管",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1139,7 +1219,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-holy-conduit",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-定罪",
@@ -1149,7 +1231,7 @@
      "nameCn": "定罪",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1168,7 +1250,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-conviction",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-辩护",
@@ -1178,7 +1262,7 @@
      "nameCn": "辩护",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1197,7 +1281,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-vindication",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-神圣审判",
@@ -1207,7 +1293,7 @@
      "nameCn": "神圣审判",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1226,7 +1312,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-sanctified-judgement",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-命令圣印",
@@ -1236,7 +1324,7 @@
      "nameCn": "命令圣印",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1255,7 +1343,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-seal-of-command",
+     "changeState": "unchanged"
     },
     {
      "id": "paladin-2-正义追击",
@@ -1265,7 +1355,7 @@
      "nameCn": "正义追击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1284,7 +1374,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-pursuit-of-justice",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-以眼还眼",
@@ -1294,7 +1386,7 @@
      "nameCn": "以眼还眼",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1313,7 +1405,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-eye-for-an-eye",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-神圣仲裁者",
@@ -1323,7 +1417,7 @@
      "nameCn": "神圣仲裁者",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1342,7 +1436,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-sacred-arbiter",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-十字军",
@@ -1375,7 +1471,7 @@
      "nameCn": "双手武器专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1394,7 +1490,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-two-handed-weapon-specialization",
+     "changeState": "unchanged"
     },
     {
      "id": "paladin-2-复仇",
@@ -1404,7 +1502,7 @@
      "nameCn": "复仇",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1425,7 +1523,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-vengeance",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-忏悔",
@@ -1435,7 +1535,7 @@
      "nameCn": "忏悔",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1454,7 +1554,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-repentance",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-光芒勇士",
@@ -1464,7 +1566,7 @@
      "nameCn": "光芒勇士",
      "nameAlt": "圣光勇士",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1483,7 +1585,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-champion-of-the-light",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-律法之器",
@@ -1493,7 +1597,7 @@
      "nameCn": "律法之器",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1512,7 +1616,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-instrument-of-law",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-圣光扭转",
@@ -1522,7 +1628,7 @@
      "nameCn": "圣光扭转",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1541,7 +1647,9 @@
        "url": "https://nieyi.cn/f/talents/paladin.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-paladin-retribution-twist-of-light",
+     "changeState": "added"
     }
    ]
   }
@@ -1551,5 +1659,13 @@
   "nameConflict": 6,
   "onlyInOneSource": 2
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/paladin",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }

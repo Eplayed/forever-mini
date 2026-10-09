@@ -1,0 +1,1431 @@
+{
+ "meta": {
+  "classId": "warrior",
+  "source": "https://wowforever.wclbox.com/tianfu/warrior",
+  "scrapedAt": "2026-10-09",
+  "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
+ },
+ "grids": [
+  {
+   "title": "武器",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 100 V115",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 100 V115",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 46 V115",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 46 V115",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-warrior-arms-improved-heroic-strike",
+     "name": "强化英勇打击",
+     "maxRanks": 3,
+     "row": 1,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_rogue_ambush"
+    },
+    {
+     "id": "calc-warrior-arms-deflection",
+     "name": "偏斜",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "ability_parry"
+    },
+    {
+     "id": "calc-warrior-arms-improved-rend",
+     "name": "强化撕裂",
+     "maxRanks": 3,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_gouge"
+    },
+    {
+     "id": "calc-warrior-arms-improved-charge",
+     "name": "强化冲锋",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_warrior_charge"
+    },
+    {
+     "id": "calc-warrior-arms-improved-tactical-mastery",
+     "name": "强化战术掌握",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_nature_enchantarmor"
+    },
+    {
+     "id": "calc-warrior-arms-improved-overpower",
+     "name": "强化压制",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 4,
+     "change": "moved",
+     "icon": "inv_sword_05"
+    },
+    {
+     "id": "calc-warrior-arms-anger-management",
+     "name": "愤怒掌控",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_blessingofstamina"
+    },
+    {
+     "id": "calc-warrior-arms-deep-wounds",
+     "name": "重伤",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_backstab"
+    },
+    {
+     "id": "calc-warrior-arms-spearing-strike",
+     "name": "穿刺打击",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 1,
+     "change": "added",
+     "icon": "inv_spear_01"
+    },
+    {
+     "id": "calc-warrior-arms-two-handed-weapon-specialization",
+     "name": "双手武器专精",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "inv_axe_09"
+    },
+    {
+     "id": "calc-warrior-arms-impale",
+     "name": "穿刺",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_searingarrow"
+    },
+    {
+     "id": "calc-warrior-arms-bloodthrill",
+     "name": "血之气息",
+     "maxRanks": 5,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "inv_sword_01"
+    },
+    {
+     "id": "calc-warrior-arms-sweeping-strikes",
+     "name": "横扫攻击",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "ability_rogue_slicedice"
+    },
+    {
+     "id": "calc-warrior-arms-weaponmaster",
+     "name": "武器大师",
+     "maxRanks": 5,
+     "row": 5,
+     "col": 3,
+     "change": "added",
+     "icon": "garrison_weaponupgrade"
+    },
+    {
+     "id": "calc-warrior-arms-improved-slam",
+     "name": "强化猛击",
+     "maxRanks": 2,
+     "row": 6,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_warrior_decisivestrike"
+    },
+    {
+     "id": "calc-warrior-arms-improved-hamstring",
+     "name": "强化断筋",
+     "maxRanks": 3,
+     "row": 6,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "ability_shockwave"
+    },
+    {
+     "id": "calc-warrior-arms-mortal-strike",
+     "name": "致死打击",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "ability_warrior_savageblow"
+    }
+   ]
+  },
+  {
+   "title": "狂怒",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V277",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V277",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-warrior-fury-booming-voice",
+     "name": "震耳嗓音",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_nature_purge"
+    },
+    {
+     "id": "calc-warrior-fury-cruelty",
+     "name": "残忍",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_rogue_eviscerate"
+    },
+    {
+     "id": "calc-warrior-fury-iron-will",
+     "name": "钢铁意志",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_magic_magearmor"
+    },
+    {
+     "id": "calc-warrior-fury-unbridled-wrath",
+     "name": "怒不可遏",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_nature_stoneclawtotem"
+    },
+    {
+     "id": "calc-warrior-fury-improved-cleave",
+     "name": "强化顺劈斩",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_warrior_cleave"
+    },
+    {
+     "id": "calc-warrior-fury-piercing-howl",
+     "name": "刺耳怒吼",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_deathscream"
+    },
+    {
+     "id": "calc-warrior-fury-blood-craze",
+     "name": "血之狂热",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_summonimp"
+    },
+    {
+     "id": "calc-warrior-fury-boundless-rage",
+     "name": "无尽怒气",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_warrior_intensifyrage"
+    },
+    {
+     "id": "calc-warrior-fury-dual-wield-specialization",
+     "name": "双武器专精",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_dualwield"
+    },
+    {
+     "id": "warrior-raging-blows",
+     "name": "怒击",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_whirlwind"
+    },
+    {
+     "id": "calc-warrior-fury-enrage",
+     "name": "狂怒",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_unholyfrenzy"
+    },
+    {
+     "id": "calc-warrior-fury-improved-execute",
+     "name": "强化斩杀",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 4,
+     "change": "moved",
+     "icon": "inv_sword_48"
+    },
+    {
+     "id": "calc-warrior-fury-precision",
+     "name": "精准",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_marksmanship"
+    },
+    {
+     "id": "calc-warrior-fury-death-wish",
+     "name": "死亡之愿",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_deathpact"
+    },
+    {
+     "id": "calc-warrior-fury-improved-intercept",
+     "name": "强化拦截",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 4,
+     "change": "unchanged",
+     "icon": "ability_rogue_sprint"
+    },
+    {
+     "id": "warrior-improved-berserker-rage",
+     "name": "强化狂暴之怒",
+     "maxRanks": 2,
+     "row": 6,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_nature_ancestralguardian"
+    },
+    {
+     "id": "calc-warrior-fury-flurry",
+     "name": "乱舞",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_ghoulfrenzy"
+    },
+    {
+     "id": "warrior-bloodthirst",
+     "name": "嗜血",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_nature_bloodlust"
+    }
+   ]
+  },
+  {
+   "title": "防护",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 100 V115",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 100 V115",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 46 V115",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 46 V115",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "warrior-shield-specialization",
+     "name": "盾牌专精",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "inv_shield_06"
+    },
+    {
+     "id": "calc-warrior-protection-anticipation",
+     "name": "预知",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_nature_mirrorimage"
+    },
+    {
+     "id": "calc-warrior-protection-improved-bloodrage",
+     "name": "强化血性狂暴",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_racial_bloodrage"
+    },
+    {
+     "id": "calc-warrior-protection-toughness",
+     "name": "坚韧",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_devotion"
+    },
+    {
+     "id": "calc-warrior-protection-improved-thunder-clap",
+     "name": "强化雷霆一击",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 4,
+     "change": "modified",
+     "icon": "ability_thunderclap"
+    },
+    {
+     "id": "calc-warrior-protection-last-stand",
+     "name": "破釜沉舟",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_holy_ashestoashes"
+    },
+    {
+     "id": "calc-warrior-protection-master-of-defense",
+     "name": "防御大师",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_warrior_shieldguard"
+    },
+    {
+     "id": "calc-warrior-protection-improved-revenge",
+     "name": "强化复仇",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_warrior_revenge"
+    },
+    {
+     "id": "calc-warrior-protection-defiance",
+     "name": "挑衅",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 4,
+     "change": "modified",
+     "icon": "ability_warrior_innerrage"
+    },
+    {
+     "id": "calc-warrior-protection-improved-sunder-armor",
+     "name": "强化破甲攻击",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_warrior_sunder"
+    },
+    {
+     "id": "calc-warrior-protection-improved-disarm",
+     "name": "强化缴械",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_warrior_disarm"
+    },
+    {
+     "id": "calc-warrior-protection-vanguard",
+     "name": "先锋",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "added",
+     "icon": "ability_warrior_shieldcharge"
+    },
+    {
+     "id": "calc-warrior-protection-improved-shield-wall",
+     "name": "强化盾墙",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_warrior_shieldwall"
+    },
+    {
+     "id": "calc-warrior-protection-concussion-blow",
+     "name": "震荡猛击",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_thunderbolt"
+    },
+    {
+     "id": "calc-warrior-protection-improved-shield-bash",
+     "name": "强化盾击",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_warrior_shieldbash"
+    },
+    {
+     "id": "calc-warrior-protection-bastion",
+     "name": "坚城",
+     "maxRanks": 5,
+     "row": 5,
+     "col": 4,
+     "change": "modified",
+     "icon": "inv_shield_04"
+    },
+    {
+     "id": "calc-warrior-protection-focused-rage",
+     "name": "怒火聚焦",
+     "maxRanks": 3,
+     "row": 6,
+     "col": 3,
+     "change": "added",
+     "icon": "ability_warrior_focusedrage"
+    },
+    {
+     "id": "calc-warrior-protection-shield-slam",
+     "name": "盾牌猛击",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "modified",
+     "icon": "inv_shield_05"
+    }
+   ]
+  }
+ ],
+ "refs": [
+  {
+   "id": "calc-warrior-arms-improved-heroic-strike",
+   "name": "强化英勇打击",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 3：使你的英勇打击消耗的怒气减少3点。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的英勇打击消耗的怒气减少1点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-deflection",
+   "name": "偏斜",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的招架几率提高5%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的招架几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-rend",
+   "name": "强化撕裂",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 3：使你的撕裂技能造成的流血伤害提高35%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的撕裂技能造成的流血伤害提高12%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-charge",
+   "name": "强化冲锋",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在武器较低层投入 5 点",
+   "effect": "等级 2：使你的冲锋技能产生的怒气提高6点。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的冲锋技能产生的怒气提高3点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-tactical-mastery",
+   "name": "强化战术掌握",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在武器较低层投入 5 点",
+   "effect": "等级 5：战术掌握使你在改变姿态时最多额外保留15点怒气。",
+   "changeNote": "改动摘要：经典旧世中名为战术掌握。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "战术掌握使你在改变姿态时最多额外保留3点怒气。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-overpower",
+   "name": "强化压制",
+   "tag": "移动",
+   "condition": "最高 2 级 · 第 2 层 · 需在武器较低层投入 5 点",
+   "effect": "等级 2：使你的压制技能造成爆击的几率提高50%。",
+   "changeNote": "改动摘要：从第3层移到第2层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的压制技能造成爆击的几率提高25%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-anger-management",
+   "name": "愤怒掌控",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在武器较低层投入 10 点 · 前置：强化战术掌握 5 点",
+   "effect": "等级 1：在战斗中每3秒获得1点怒气，并使脱战怒气衰减降低30%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "在战斗中每3秒获得1点怒气，并使脱战怒气衰减降低30%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-deep-wounds",
+   "name": "重伤",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在武器较低层投入 10 点 · 前置：强化撕裂 3 点",
+   "effect": "等级 3：你的爆击会使对手流血，在12秒内造成相当于你近战武器平均伤害60%的伤害。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的爆击会使对手流血，在12秒内造成相当于你近战武器平均伤害20%的伤害。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-spearing-strike",
+   "name": "穿刺打击",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在武器较低层投入 15 点",
+   "effect": "等级 1：凶猛的一击，造成40%的武器伤害；对巨人、龙类和骑乘状态的目标额外造成80%的武器伤害。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "凶猛的一击，造成40%的武器伤害；对巨人、龙类和骑乘状态的目标额外造成80%的武器伤害。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-two-handed-weapon-specialization",
+   "name": "双手武器专精",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在武器较低层投入 15 点",
+   "effect": "等级 3：使你的双手近战武器造成的伤害提高3%。",
+   "changeNote": "改动摘要：最高等级从5变为3。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的双手近战武器造成的伤害提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-impale",
+   "name": "穿刺",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 4 层 · 需在武器较低层投入 15 点",
+   "effect": "等级 2：使你的技能爆击伤害加成提高20%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的技能爆击伤害加成提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-bloodthrill",
+   "name": "血之气息",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 5 层 · 需在武器较低层投入 20 点",
+   "effect": "等级 5：你的主手近战攻击命中受你的撕裂影响的敌人时，有20%的几率使你可以对其使用压制。持续6秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的主手近战攻击命中受你的撕裂影响的敌人时，有4%的几率使你可以对其使用压制。持续6秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-sweeping-strikes",
+   "name": "横扫攻击",
+   "tag": "未改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在武器较低层投入 20 点",
+   "effect": "等级 1：你在接下来的5次近战攻击中可以攻击到一个额外的敌人。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你在接下来的5次近战攻击中可以攻击到一个额外的敌人。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-weaponmaster",
+   "name": "武器大师",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 5 层 · 需在武器较低层投入 20 点",
+   "effect": "等级 5：根据你所使用的武器，为你的近战武器攻击提供一定的加成效果。 斧/长柄武器：使你的 爆击几率提高5%。 锤/法杖：你的攻击忽略 目标15%的护甲值。 剑：你成功的近战 攻击有5%的几率对目标 造成一次额外的 攻击。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "根据你所使用的武器，为你的近战武器攻击提供一定的加成效果。 斧/长柄武器：使你的 爆击几率提高1%。 锤/法杖：你的攻击忽略 目标3%的护甲值。 剑：你成功的近战 攻击有1%的几率对目标 造成一次额外的 攻击。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-slam",
+   "name": "强化猛击",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 6 层 · 需在武器较低层投入 25 点",
+   "effect": "等级 2：使你的猛击技能的公共冷却时间和施法时间缩短0.50秒。此外，猛击不再打断或延迟你的近战挥击计时，且猛击的冷却时间缩短3.0秒。",
+   "changeNote": "改动摘要：最高等级从5变为2。从狂怒天赋树移到武器天赋树。从第5层移到第6层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的猛击技能的公共冷却时间和施法时间缩短0.25秒。此外，猛击不再打断或延迟你的近战挥击计时，且猛击的冷却时间缩短1.5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-improved-hamstring",
+   "name": "强化断筋",
+   "tag": "未改动",
+   "condition": "最高 3 级 · 第 6 层 · 需在武器较低层投入 25 点",
+   "effect": "等级 3：使你的断筋技能有15%的几率令目标无法移动，持续5秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的断筋技能有5%的几率令目标无法移动，持续5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-arms-mortal-strike",
+   "name": "致死打击",
+   "tag": "未改动",
+   "condition": "最高 1 级 · 第 7 层 · 需在武器较低层投入 30 点 · 前置：横扫攻击 1 点",
+   "effect": "等级 1：一次邪恶的攻击，对目标造成武器伤害外加85点伤害，并使任何形式的治疗对其产生的效果降低50%，持续10秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "一次邪恶的攻击，对目标造成武器伤害外加85点伤害，并使任何形式的治疗对其产生的效果降低50%，持续10秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-booming-voice",
+   "name": "震耳嗓音",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的战斗怒吼和挫志怒吼的作用半径提高50%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的战斗怒吼和挫志怒吼的作用半径提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-cruelty",
+   "name": "残忍",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的近战攻击造成爆击的几率提高5%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的近战攻击造成爆击的几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-iron-will",
+   "name": "钢铁意志",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在狂怒较低层投入 5 点",
+   "effect": "等级 5：使你受到的昏迷和恐惧效果的持续时间缩短15%。",
+   "changeNote": "改动摘要：从防护天赋树移到狂怒天赋树。从第4列移到第2列。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你受到的昏迷和恐惧效果的持续时间缩短3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-unbridled-wrath",
+   "name": "怒不可遏",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在狂怒较低层投入 5 点",
+   "effect": "等级 5：使你有60%的几率在使用武器造成近战伤害后额外获得1点怒气。使用双手武器时，该效果提高至2点怒气。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你有12%的几率在使用武器造成近战伤害后额外获得1点怒气。使用双手武器时，该效果提高至2点怒气。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-improved-cleave",
+   "name": "强化顺劈斩",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在狂怒较低层投入 10 点",
+   "effect": "等级 3：使你的顺劈斩技能消耗的怒气降低3点。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的顺劈斩技能消耗的怒气降低1点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-piercing-howl",
+   "name": "刺耳怒吼",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在狂怒较低层投入 10 点",
+   "effect": "等级 1：使附近的所有敌人眩晕，移动速度降低50%，持续6秒。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使附近的所有敌人眩晕，移动速度降低50%，持续6秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-blood-craze",
+   "name": "血之狂热",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在狂怒较低层投入 10 点",
+   "effect": "等级 3：受到爆击、使用嗜血造成伤害，或单次攻击使你损失超过最大生命值20%后，在6秒内恢复总生命值的3%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "受到爆击、使用嗜血造成伤害，或单次攻击使你损失超过最大生命值20%后，在6秒内恢复总生命值的1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-boundless-rage",
+   "name": "无尽怒气",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 3 层 · 需在狂怒较低层投入 10 点",
+   "effect": "等级 3：使你的最大怒气值上限提高30点。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的最大怒气值上限提高10点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-dual-wield-specialization",
+   "name": "双武器专精",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 4 层 · 需在狂怒较低层投入 15 点",
+   "effect": "等级 5：使你的副手武器伤害提高25%，副手攻击的命中几率提高10%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的副手武器伤害提高5%，副手攻击的命中几率提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "warrior-raging-blows",
+   "name": "怒击",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在狂怒较低层投入 15 点",
+   "effect": "等级 1：你的旋风斩同时以副手武器攻击，并使顺劈斩的怒气消耗降低2点。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的旋风斩同时以副手武器攻击，并使顺劈斩的怒气消耗降低2点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-enrage",
+   "name": "狂怒",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 4 层 · 需在狂怒较低层投入 15 点",
+   "effect": "等级 5：使你在遭受任何伤害性攻击后，有30%的几率使你造成的物理伤害提高10%，持续12秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你在遭受任何伤害性攻击后，有30%的几率使你造成的物理伤害提高2%，持续12秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-improved-execute",
+   "name": "强化斩杀",
+   "tag": "移动",
+   "condition": "最高 2 级 · 第 4 层 · 需在狂怒较低层投入 15 点",
+   "effect": "等级 2：使你的斩杀技能的怒气值消耗减少5点。",
+   "changeNote": "改动摘要：从第2列移到第4列。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的斩杀技能的怒气值消耗减少3点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-precision",
+   "name": "精准",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 5 层 · 需在狂怒较低层投入 20 点",
+   "effect": "等级 3：使你击中目标的几率提高3%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你击中目标的几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-death-wish",
+   "name": "死亡之愿",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在狂怒较低层投入 20 点",
+   "effect": "等级 1：激活后，你造成的物理伤害提高20%，并免疫恐惧效果，但受到的所有伤害提高5%。持续30秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活后，你造成的物理伤害提高20%，并免疫恐惧效果，但受到的所有伤害提高5%。持续30秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-improved-intercept",
+   "name": "强化拦截",
+   "tag": "未改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在狂怒较低层投入 20 点",
+   "effect": "等级 2：使你的拦截技能的冷却时间减少10秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的拦截技能的冷却时间减少5秒。"
+    }
+   ]
+  },
+  {
+   "id": "warrior-improved-berserker-rage",
+   "name": "强化狂暴之怒",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 6 层 · 需在狂怒较低层投入 25 点",
+   "effect": "等级 2：你的狂暴之怒激活时会立即获得10点怒气，并有100%的几率移除所有移动限制效果。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的狂暴之怒激活时会立即获得5点怒气，并有50%的几率移除所有移动限制效果。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-fury-flurry",
+   "name": "乱舞",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在狂怒较低层投入 25 点 · 前置：狂怒 5 点",
+   "effect": "等级 5：近战攻击造成爆击后，使你接下来的3次攻击的近战攻击速度提高25%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "近战攻击造成爆击后，使你接下来的3次攻击的近战攻击速度提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "warrior-bloodthirst",
+   "name": "嗜血",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 7 层 · 需在狂怒较低层投入 30 点 · 前置：死亡之愿 1 点",
+   "effect": "等级 1：立即攻击目标，造成相当于攻击强度35%外加30点的伤害，并使移动速度提高10%，持续10秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "立即攻击目标，造成相当于攻击强度35%外加30点的伤害，并使移动速度提高10%，持续10秒。"
+    }
+   ]
+  },
+  {
+   "id": "warrior-shield-specialization",
+   "name": "盾牌专精",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你用盾牌格挡攻击的几率提高5%，并使你在格挡时有100%的几率产生5点怒气。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你用盾牌格挡攻击的几率提高1%，并使你在格挡时有20%的几率产生5点怒气。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-anticipation",
+   "name": "预知",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的防御技能提高20点。",
+   "changeNote": "改动摘要：数值调整：20点（经典旧世：10点）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的防御技能提高4点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-bloodrage",
+   "name": "强化血性狂暴",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 2：使你的血性狂暴技能产生的所有怒气提高50%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的血性狂暴技能产生的所有怒气提高25%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-toughness",
+   "name": "坚韧",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 5：使你从物品获得的护甲值提高10%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你从物品获得的护甲值提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-thunder-clap",
+   "name": "强化雷霆一击",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 3：使你的雷霆一击技能消耗的怒气减少6点。",
+   "changeNote": "改动摘要：从武器天赋树移到防护天赋树。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的雷霆一击技能消耗的怒气减少2点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-last-stand",
+   "name": "破釜沉舟",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在防护较低层投入 10 点 · 前置：强化血性狂暴 2 点",
+   "effect": "等级 1：激活后，该技能会使你暂时获得相当于最大生命值30%的生命值，持续20秒。效果结束后会失去这些生命值。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活后，该技能会使你暂时获得相当于最大生命值30%的生命值，持续20秒。效果结束后会失去这些生命值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-master-of-defense",
+   "name": "防御大师",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 3 层 · 需在防护较低层投入 10 点 · 前置：盾牌专精 5 点",
+   "effect": "等级 2：使你有100%的几率在装备盾牌并躲闪或招架时产生5点怒气。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你有50%的几率在装备盾牌并躲闪或招架时产生5点怒气。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-revenge",
+   "name": "强化复仇",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在防护较低层投入 10 点",
+   "effect": "等级 3：使你的复仇技能造成的伤害提高60%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的复仇技能造成的伤害提高20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-defiance",
+   "name": "挑衅",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在防护较低层投入 10 点",
+   "effect": "等级 3：装备盾牌时，在防御姿态下产生的所有威胁值额外提高15%。",
+   "changeNote": "改动摘要：最高等级从5变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "装备盾牌时，在防御姿态下产生的所有威胁值额外提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-sunder-armor",
+   "name": "强化破甲攻击",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在防护较低层投入 15 点",
+   "effect": "等级 3：使你的破甲攻击消耗的怒气减少3点。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的破甲攻击消耗的怒气减少1点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-disarm",
+   "name": "强化缴械",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在防护较低层投入 15 点",
+   "effect": "等级 3：使你的缴械技能冷却时间缩短20秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的缴械技能冷却时间缩短7秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-vanguard",
+   "name": "先锋",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在防护较低层投入 15 点",
+   "effect": "等级 1：你的冲锋技能现在可以在防御姿态下使用。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的冲锋技能现在可以在防御姿态下使用。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-shield-wall",
+   "name": "强化盾墙",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 2：使你的盾墙技能的冷却时间缩短11.0分钟。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的盾墙技能的冷却时间缩短5.5分钟。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-concussion-blow",
+   "name": "震荡猛击",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 1：使目标昏迷，持续5秒。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使目标昏迷，持续5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-improved-shield-bash",
+   "name": "强化盾击",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 2：使你的盾击技能有100%的几率令目标沉默3秒。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的盾击技能有50%的几率令目标沉默3秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-bastion",
+   "name": "坚城",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 5：装备盾牌时，你造成的所有伤害提高10%。",
+   "changeNote": "改动摘要：经典旧世中名为单手武器专精。从第6层移到第5层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "装备盾牌时，你造成的所有伤害提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-focused-rage",
+   "name": "怒火聚焦",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 6 层 · 需在防护较低层投入 25 点",
+   "effect": "等级 3：使你的进攻技能消耗的怒气降低3点。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的进攻技能消耗的怒气降低1点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warrior-protection-shield-slam",
+   "name": "盾牌猛击",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 7 层 · 需在防护较低层投入 30 点 · 前置：震荡猛击 1 点",
+   "effect": "等级 1：用盾牌猛击目标，造成421到439点伤害，该伤害受格挡值加成，并有50%的几率驱散目标身上的1个魔法效果。产生极高的威胁。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "用盾牌猛击目标，造成421到439点伤害，该伤害受格挡值加成，并有50%的几率驱散目标身上的1个魔法效果。产生极高的威胁。"
+    }
+   ]
+  }
+ ]
+}

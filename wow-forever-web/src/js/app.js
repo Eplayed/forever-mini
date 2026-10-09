@@ -241,6 +241,66 @@
     if (dec.bad && saved) D.toast('方案与当前数据版本不完全匹配，已按可识别部分还原');
     renderTalent();
   }
+  /* 前置连线：格子是 CSS 网格，位置只能渲染完量出来再画，所以事后注入一层 SVG */
+  function drawLinks() {
+    var file = tstate.file;
+    if (!file || !file.trees) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.tree[data-tree]'), function (col) {
+      var old = col.querySelector('.tlines');
+      if (old) old.parentNode.removeChild(old);
+      var tree = file.trees[+col.getAttribute('data-tree')];
+      if (!tree) return;
+      var pos = {};
+      Array.prototype.forEach.call(col.querySelectorAll('.node[data-n]'), function (n) { pos[n.getAttribute('data-n')] = n; });
+      var box = col.getBoundingClientRect(), svg = '';
+      (tree.nodes || []).forEach(function (n) {
+        var to = pos[n.id];
+        if (!to) return;
+        (n.requires || []).forEach(function (rid) {
+          var from = pos[rid];
+          if (!from) return;
+          var a1 = from.getBoundingClientRect(), b1 = to.getBoundingClientRect();
+          svg += '<line x1="' + (a1.left - box.left + a1.width / 2).toFixed(1) + '" y1="' + (a1.top - box.top + a1.height / 2).toFixed(1) +
+            '" x2="' + (b1.left - box.left + b1.width / 2).toFixed(1) + '" y2="' + (b1.top - box.top + b1.height / 2).toFixed(1) + '"></line>';
+        });
+      });
+      if (!svg) return;
+      var wrap = document.createElement('div');
+      wrap.innerHTML = '<svg class="tlines" aria-hidden="true">' + svg + '</svg>';
+      col.appendChild(wrap.firstChild);
+    });
+  }
+  var CMP_TIP = '对照文本来自客户端解包（第三方资料站转述）';
+  function compareHtml(t) {
+    var nodes = (t && t.nodes) || {};
+    var ids = Object.keys(nodes).filter(function (id) { return nodes[id].changeNote || (nodes[id].ranks || []).length; });
+    if (!ids.length) return '<p class="dim">上游没有给出这些条目的对照文本。</p>';
+    return '<h3>与经典旧世逐条对照 · ' + ids.length + ' 条</h3><p class="note">' + CMP_TIP +
+      '，只列上游写了差异的条目；措辞照录，本站不改写。</p>' +
+      ids.map(function (id) {
+        var e = nodes[id];
+        return '<div class="cmprow"><b>' + D.esc(e.name || '') + '</b>' +
+          (e.tag ? '<span class="tag">' + D.esc(e.tag) + '</span>' : '') +
+          (e.condition ? '<span class="dim mono">' + D.esc(e.condition) + '</span>' : '') +
+          (e.changeNote ? '<div>' + D.esc(e.changeNote.replace(/^改动摘要：/, '')) + '</div>' : '') +
+          ((e.ranks || []).length ? '<div class="cmp-ranks">' + e.ranks.map(function (r) {
+            return '<span class="dim mono">' + D.esc(r.label) + '</span> ' + D.esc(r.text);
+          }).join('<br>') + '</div>' : '') + '</div>';
+      }).join('');
+  }
+  function toggleCompare() {
+    var box = el('cmpbox'), btn = el('cmp');
+    if (!box) return;
+    var open = box.style.display !== 'none';
+    box.style.display = open ? 'none' : 'block';
+    if (btn) btn.setAttribute('aria-pressed', open ? 'false' : 'true');
+    if (open || box.dataset.loaded) return;
+    box.innerHTML = '<p class="dim">对照在载入…</p>';
+    D.load('data/talent-text/' + tstate.classId + '.json').then(function (t) {
+      box.dataset.loaded = '1';
+      box.innerHTML = compareHtml(t);
+    }).catch(function () { box.innerHTML = '<p class="dim">这个职业还没有对照文本。</p>'; });
+  }
   function renderTalent() {
     var f = tstate.file, c = tstate.classes.filter(function (x) { return x.id === tstate.classId; })[0] || {};
     var pool = (f.namePool || []), trees = f.trees || [], r = E.defaults(f.rules);
@@ -260,13 +320,22 @@
       banner = '<div class="banner gray">当前是<b>演示结构</b>，节点名与位置都不是游戏数据，只用于验证加点逻辑。' +
         '<button class="ghost" id="back">回到真实数据</button></div>';
     } else {
-      var vcnt = 0, tcnt = 0, ccnt = 0;
-      trees.forEach(function (t) { t.nodes.forEach(function (n) { tcnt++; if (n.nameVerified) vcnt++; if (n.nameConflict) ccnt++; }); });
-      banner = '<div class="banner">天赋的名称、系属、点数上限、坐标与前置，来自<b>两个第三方数据挖掘源按坐标对齐</b>（' +
-        D.esc(f.dataVersion || '上游数据挖掘') + '），<b>未经游戏内核实</b>。' +
-        '本职业 ' + tcnt + ' 个天赋：' + vcnt + ' 个名称与官网中文一致' +
+      var vcnt = 0, tcnt = 0, ccnt = 0, chg = { added: 0, modified: 0, moved: 0, unchanged: 0 };
+      trees.forEach(function (t) {
+        t.nodes.forEach(function (n) {
+          tcnt++; if (n.nameVerified) vcnt++; if (n.nameConflict) ccnt++;
+          if (chg[n.changeState] !== undefined) chg[n.changeState]++;
+        });
+      });
+      var gate = (f.tierUnlockCost || []).filter(function (v) { return v; }).join(' / ');
+      banner = '<div class="banner">天赋的名称、系属、点数上限、格子位置与前置连线，取自无限客户端解包' +
+        '（两个挖掘源按坐标对齐，结构再经天赋模拟器逐格核对），每条都能点开看来源。' +
+        '本职业 ' + tcnt + ' 个天赋：与经典旧世相比<b class="ok">' + chg.added + ' 个新增</b>、' +
+        '<b class="caution">' + chg.modified + ' 个改动</b>、' + chg.moved + ' 个换层、' + chg.unchanged + ' 个未变；' +
+        vcnt + ' 个名称与官网中文一致' +
         (ccnt ? '，<b class="alert">' + ccnt + ' 个两源译名不一致（红框，两个叫法都保留）</b>' : '') +
-        '。层级点数门槛还没核实，所以只按坐标摆位置、不算"第几层需要几点解锁"。最终以游戏内为准。</div>';
+        (gate ? '。层级点数门槛：第 2 层起需在本系累计 ' + gate + ' 点' : '') +
+        '。最终以游戏内为准。</div>';
     }
     var cband = (tstate.art && tstate.art.classes) ? tstate.art.classes[tstate.classId] : null;
     var body = trees.length ? renderTrees(trees, r) : renderPool(pool);
@@ -276,10 +345,15 @@
       '<div class="thead"><h1 class="title">' + D.esc(c.cn || '') + ' 天赋</h1>' +
       '<span class="pts">剩余 <b>' + Math.max(0, r.totalPoints - E.spent(tstate.state, trees)) + '</b>/' + r.totalPoints + '</span>' +
       '<input type="search" id="tq" placeholder="搜天赋名" style="max-width:180px">' +
+      '<button class="ghost" id="cmp" aria-pressed="false">与经典旧世对比</button>' +
       '<span class="dim mono" id="sel"></span></div>' +
+      '<div class="tlegend"><span><i class="lg added"></i>新增</span><span><i class="lg modified"></i>改动</span>' +
+      '<span><i class="lg moved"></i>换层</span><span><i class="lg unchanged"></i>未变</span>' +
+      '<span class="dim">标记按客户端解包与经典旧世对照给出；没标 = 上游没这条</span></div>' +
       '<div class="ttabs">' + trees.map(function (t, i) {
         return '<button data-tab="' + i + '" class="' + (i === tstate.active ? 'on' : '') + '">' + D.esc(t.nameCn) + '</button>';
       }).join('') + '</div>' + body +
+      '<div class="cmpbox" id="cmpbox" style="display:none"></div>' +
       '<div class="tfoot"><label class="dim">等级 <span class="mono" id="lvv">60</span></label>' +
       '<input type="range" min="10" max="60" value="60" id="lv" aria-label="按角色等级筛选可用天赋">' +
       '<button id="mode" class="ghost">' + (tstate.mode === 'add' ? '当前：加点' : '当前：减点') + '</button>' +
@@ -291,6 +365,9 @@
       '<div class="srcbox" id="tsrc" style="display:none"></div></div>' +
       unconfBlock(talentGaps(f, trees), '本页还没确认的'));
     bindTalent();
+    drawLinks();
+    var cbtn = el('cmp');
+    if (cbtn) cbtn.onclick = toggleCompare;
   }
   function renderPool(pool) {
     if (!pool.length) return '<div class="empty">该职业暂未收录任何已核实天赋名。</div>';
@@ -317,7 +394,7 @@
   function cell(n, t, ti, r, trees, wide) {
     if (!n) return '<div></div>';
     var rk = tstate.state[n.id] || 0, can = E.canAdd(t, tstate.state, n, r, trees);
-    var cls = 'node' + (wide ? ' wide' : '') + (rk ? ' on' : '') + (!can.ok && rk === 0 ? ' lock' : '') + (n.nameConflict ? ' conf' : '');
+    var cls = 'node' + (wide ? ' wide' : '') + (rk ? ' on' : '') + (!can.ok && rk === 0 ? ' lock' : '') + (n.nameConflict ? ' conf' : '') + (n.changeState ? ' chg-' + n.changeState : '');
     var tip = [n.nameCn || '未命名', n.nameEn, rk + '/' + (n.maxRanks === null ? '?' : n.maxRanks),
       n.nameAlt ? '另一来源译作「' + n.nameAlt + '」，待定稿' : '',
       n.nameVerified ? '名称与官网中文一致' : '名称待实测',
@@ -770,44 +847,66 @@
           : (b.note ? '<div class="note">' + D.esc(b.note) + '</div>' : '')) + '</li>';
     }).join('') + '</ul>' + (x.lootNote ? '<div class="note">' + D.esc(x.lootNote) + '</div>' : '');
   }
+  // 按十级一档分：起点落在哪档就归哪档，50 级往上并成"满级前后"
+  var DUN_BANDS = [[10, 19, '起步'], [20, 29, '前期'], [30, 39, '中期'], [40, 49, '中后期'], [50, 99, '满级前后']];
+  function dunBand(x) {
+    var s = parseInt(String(x.levelRange || '').split('-')[0], 10);
+    if (!s) return null;
+    for (var i = 0; i < DUN_BANDS.length; i++) if (s >= DUN_BANDS[i][0] && s <= DUN_BANDS[i][1]) return i;
+    return null;
+  }
   function dungeons() {
     Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
       .then(function (rs) {
       var d = rs[0], ART = rs[1] || {};
-      var groups = [['newDungeons', '无限服新副本'], ['classicDungeons', '经典副本（在无限服）'], ['raids', '团队副本']];
       var all = [].concat(d.newDungeons || [], d.classicDungeons || [], d.raids || []);
       var nb = all.reduce(function (s, x) { return s + (x.bosses || []).length; }, 0);
       var nd = all.reduce(function (s, x) { return s + (x.drops || []).length; }, 0);
-      set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
-        (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
-        (d.raids || []).length + ' 座团本。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
-        '名单与等级区间取自客户端解包（第三方资料站转述）；掉落是上游按经典旧世开放数据库推的，一律标待实测。</p></div>' +
-        '<div class="banner">掉落数据本站<b>不写百分比</b>：这里只回答"谁掉了什么"，不回答"多大概率"。暴雪说过无限服重做过掉落，正式开放可能变化。</div>' +
-        groups.map(function (g) {
-          return '<div class="grp">' + g[1] + ' · ' + (d[g[0]] || []).length + '</div>' +
-            (d[g[0]] || []).map(function (x) {
-              var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
-                x.nameCn || x.nameEn || '未定名',
-                { kind: x.kind, sub: (x.nameCn && x.nameEn) ? x.nameEn : '',
-                  art: (ART.dungeons || {})[x.id] }) : '';
-              return '<div class="card dcardx">' + banner +
-                '<div class="dcard"><div>' +
-                '<div class="nm">' + D.pill(x.level) + ' <span class="dim">' + dunStateText(x) +
-                (x.nameCn ? '' : '；中文定名未公布') + '</span></div>' +
-                '<div class="sub">' + (x.levelRange ? x.levelRange + ' 级 · ' : '等级区间待核 · ') +
-                'BOSS ' + ((x.bosses || []).length || '待实测') + ' · 掉落 ' + ((x.drops || []).length || '未列') +
-                ' · 路线 ' + ((x.route || []).length || '待实测') + ' 步</div>' +
-                (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' + D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
-                '</div><button class="ghost" data-d="' + D.esc(x.id) + '">展开首领与掉落</button></div>' +
-                '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
-                '<h3>首领与掉落</h3>' + dunLoot(x) +
-                '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
-                '<h3>这座本还没确认的</h3><ul class="list">' + dunGaps(x).map(function (g) { return '<li>' + D.esc(g) + '</li>'; }).join('') + '</ul>' +
-                '<h3>来源与核对</h3>' + D.sources(x.provenance) + '</div></div>';
-            }).join('');
+        function card(x) {
+          var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
+            x.nameCn || x.nameEn || '未定名',
+            { kind: x.kind, sub: x.zoneCn || ((x.nameCn && x.nameEn) ? x.nameEn : ''),
+              art: x.art || (ART.dungeons || {})[x.id] || null,
+              seal: x.kind === 'new' ? '新' : null,
+              range: x.levelRange ? x.levelRange + ' 级' : null }) : '';
+          return '<div class="dcard2">' + banner +
+            '<div class="dmeta">' + D.pill(x.level) +
+            '<span>' + ((x.bosses || []).length || '待补') + ' 个首领</span>' +
+            '<span>' + ((x.drops || []).length || '未列') + ' 件掉落</span>' +
+            '<span class="dim">' + dunStateText(x) + (x.nameCn ? '' : '；中文定名未公布') + '</span></div>' +
+            (x.levelRangeAlt ? '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) +
+              '」（官方公告），上游卡片写「' + D.esc(x.levelRangeAlt) + '」，待定稿</div>' : '') +
+            (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
+              D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
+            '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
+            '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
+            '<h3>首领与掉落</h3>' + dunLoot(x) +
+            '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
+            '<h3>这座本还没确认的</h3><ul class="list">' + dunGaps(x).map(function (g) { return '<li>' + D.esc(g) + '</li>'; }).join('') + '</ul>' +
+            '<h3>来源与核对</h3>' + D.sources(x.provenance) + '</div></div>';
+        }
+        function bandBlock(title, sub, rows) {
+          if (!rows.length) return '';
+          return '<div class="band"><b>' + title + '</b>' + (sub ? '<span class="dim">' + sub + '</span>' : '') +
+            '<span class="dim mono">' + rows.length + ' 座</span></div>' +
+            '<div class="dgrid">' + rows.map(card).join('') + '</div>';
+        }
+        var list = (d.newDungeons || []).concat(d.classicDungeons || []);
+        var body = DUN_BANDS.map(function (b, i) {
+          var rows = list.filter(function (x) { return dunBand(x) === i; })
+            .sort(function (p, q) { return parseInt(p.levelRange, 10) - parseInt(q.levelRange, 10); });
+          return bandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2], rows);
         }).join('') +
+          bandBlock('区间未定', '等级区间还没核', list.filter(function (x) { return dunBand(x) === null; })) +
+          bandBlock('团队副本', '开放时间未定', d.raids || []);
+        set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
+          (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
+          (d.raids || []).length + ' 座团本，按十级一档分。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
+          '名单与等级区间取自客户端解包（第三方资料站转述）；掉落是上游按经典旧世开放数据库推的，一律标待实测。</p></div>' +
+        '<div class="banner">掉落数据本站<b>不写百分比</b>：这里只回答"谁掉了什么"，不回答"多大概率"。暴雪说过无限服重做过掉落，正式开放可能变化。</div>' +
+        body +
         '<div class="card" id="todo"><h2>「世界」里还没采集的</h2>' +
-        '<p class="dim" style="font-size:12.5px">这几项在参考站都有独立页面，我们这里只有位置、没有数据。' +
+        '<p class="note">这几项在参考站都有独立页面，我们这里只有位置、没有数据。' +
         '原因逐条写清楚，不做空壳页糊人。</p>' +
         '<table><thead><tr><th>板块</th><th>为什么还空着</th></tr></thead><tbody>' +
         WORLD_TODO.map(function (x) { return '<tr><td>' + D.esc(x[0]) + '</td><td class="dim">' + D.esc(x[1]) + '</td></tr>'; }).join('') +

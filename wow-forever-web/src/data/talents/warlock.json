@@ -1,7 +1,7 @@
 {
  "classId": "warlock",
  "classNameCn": "术士",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -27,7 +35,7 @@
      "nameCn": "强化生命分流",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -46,7 +54,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-improved-life-tap",
+     "changeState": "moved"
     },
     {
      "id": "warlock-0-镇压",
@@ -56,7 +66,7 @@
      "nameCn": "镇压",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -75,7 +85,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-suppression",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-强化腐蚀术",
@@ -85,7 +97,7 @@
      "nameCn": "强化腐蚀术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -104,7 +116,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-improved-corruption",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-邪咒",
@@ -114,7 +128,7 @@
      "nameCn": "邪咒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -133,7 +147,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-malediction",
+     "changeState": "added"
     },
     {
      "id": "warlock-0-灵魂收割",
@@ -143,7 +159,7 @@
      "nameCn": "灵魂收割",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -162,7 +178,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-soul-harvest",
+     "changeState": "added"
     },
     {
      "id": "warlock-0-强化吸取",
@@ -172,7 +190,7 @@
      "nameCn": "强化吸取",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -191,7 +209,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-improved-drains",
+     "changeState": "added"
     },
     {
      "id": "warlock-0-强化痛苦灾祸",
@@ -201,7 +221,7 @@
      "nameCn": "强化痛苦灾祸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -220,7 +240,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-improved-bane-of-agony",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-恶魔专注",
@@ -230,7 +252,7 @@
      "nameCn": "恶魔专注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -249,7 +271,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-fel-concentration",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-诅咒增幅",
@@ -259,7 +283,7 @@
      "nameCn": "诅咒增幅",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -278,7 +302,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-amplify-curse",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-恶疾",
@@ -288,7 +314,7 @@
      "nameCn": "恶疾",
      "nameAlt": "疫病肆虐",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -307,7 +333,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-pandemic",
+     "changeState": "added"
     },
     {
      "id": "warlock-0-怨毒",
@@ -317,7 +345,7 @@
      "nameCn": "怨毒",
      "nameAlt": "恶意",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -336,7 +364,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-malevolence",
+     "changeState": "added"
     },
     {
      "id": "warlock-0-夜幕",
@@ -346,7 +376,7 @@
      "nameCn": "夜幕",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -365,7 +395,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-nightfall",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-疲劳诅咒",
@@ -375,7 +407,7 @@
      "nameCn": "疲劳诅咒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -396,7 +428,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-curse-of-exhaustion",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-生命虹吸",
@@ -406,7 +440,7 @@
      "nameCn": "生命虹吸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -425,7 +459,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-siphon-life",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-灵魂虹吸",
@@ -435,7 +471,7 @@
      "nameCn": "灵魂虹吸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -454,7 +490,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-soul-siphon",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-暗影掌握",
@@ -464,7 +502,7 @@
      "nameCn": "暗影掌握",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -483,7 +521,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-affliction-shadow-mastery",
+     "changeState": "modified"
     },
     {
      "id": "warlock-0-折磨",
@@ -493,7 +533,7 @@
      "nameCn": "折磨",
      "nameAlt": "吸取希望",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -514,7 +554,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-wrack",
+     "changeState": "added"
     }
    ]
   },
@@ -531,7 +573,7 @@
      "nameCn": "强化生命通道",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -550,7 +592,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-improved-health-funnel",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-强化小鬼",
@@ -560,7 +604,7 @@
      "nameCn": "强化小鬼",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -579,7 +623,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-improved-imp",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-恶魔之拥",
@@ -589,7 +635,7 @@
      "nameCn": "恶魔之拥",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -608,7 +654,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-demonic-embrace",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-邪恶强化",
@@ -618,7 +666,7 @@
      "nameCn": "邪恶强化",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -637,7 +685,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-unholy-power",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-恶魔庇护",
@@ -647,7 +697,7 @@
      "nameCn": "恶魔庇护",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -666,7 +716,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-demonic-aegis",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-强化虚空行者",
@@ -676,7 +728,7 @@
      "nameCn": "强化虚空行者",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -695,7 +747,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-improved-voidwalker",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-邪能活力",
@@ -705,7 +759,7 @@
      "nameCn": "邪能活力",
      "nameAlt": "恶魔活力",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -724,7 +778,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-fel-vitality",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-恶魔能量",
@@ -734,7 +790,7 @@
      "nameCn": "恶魔能量",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -753,7 +809,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-demonic-energies",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-强化萨亚德",
@@ -763,7 +821,7 @@
      "nameCn": "强化萨亚德",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -782,7 +840,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-improved-sayaad",
+     "changeState": "unchanged"
     },
     {
      "id": "warlock-1-恶魔牺牲",
@@ -792,7 +852,7 @@
      "nameCn": "恶魔牺牲",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -811,7 +871,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-demonic-sacrifice",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-召唤大师",
@@ -821,7 +883,7 @@
      "nameCn": "召唤大师",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -840,7 +902,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-master-summoner",
+     "changeState": "moved"
     },
     {
      "id": "warlock-1-灭杀",
@@ -850,7 +914,7 @@
      "nameCn": "灭杀",
      "nameAlt": "屠戮",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -869,7 +933,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-decimation",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-恶魔支配",
@@ -879,7 +945,7 @@
      "nameCn": "恶魔支配",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -900,7 +966,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-fel-domination",
+     "changeState": "moved"
     },
     {
      "id": "warlock-1-恶魔印记",
@@ -910,7 +978,7 @@
      "nameCn": "恶魔印记",
      "nameAlt": "恶魔烙印",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -929,7 +997,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-demonic-brand",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-强化地狱猎犬",
@@ -939,7 +1009,7 @@
      "nameCn": "强化地狱猎犬",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -958,7 +1028,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-improved-felhunter",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-灵魂链接",
@@ -968,7 +1040,7 @@
      "nameCn": "灵魂链接",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -989,7 +1061,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-soul-link",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-恶魔知识",
@@ -999,7 +1073,7 @@
      "nameCn": "恶魔知识",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1018,7 +1092,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-demonic-knowledge",
+     "changeState": "added"
     },
     {
      "id": "warlock-1-恶魔学识大师",
@@ -1028,7 +1104,7 @@
      "nameCn": "恶魔学识大师",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1047,7 +1123,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-demonology-master-demonologist",
+     "changeState": "modified"
     },
     {
      "id": "warlock-1-恶魔契约",
@@ -1057,7 +1135,7 @@
      "nameCn": "恶魔契约",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1078,7 +1156,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-demonic-pact",
+     "changeState": "added"
     }
    ]
   },
@@ -1095,7 +1175,7 @@
      "nameCn": "毁灭延伸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1114,7 +1194,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-destructive-reach",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-强化暗影箭",
@@ -1124,7 +1206,7 @@
      "nameCn": "强化暗影箭",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1143,7 +1225,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-improved-shadow-bolt",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-灾祸",
@@ -1153,7 +1237,7 @@
      "nameCn": "灾祸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1172,7 +1256,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-bane",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-熔岩之肤",
@@ -1182,7 +1268,7 @@
      "nameCn": "熔岩之肤",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1201,7 +1287,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-molten-skin",
+     "changeState": "added"
     },
     {
      "id": "warlock-2-灾变",
@@ -1211,7 +1299,7 @@
      "nameCn": "灾变",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1230,7 +1318,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-cataclysm",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-清算",
@@ -1240,7 +1330,7 @@
      "nameCn": "清算",
      "nameAlt": "余波",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1259,7 +1349,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-aftermath",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-毁灭",
@@ -1269,7 +1361,7 @@
      "nameCn": "毁灭",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1288,7 +1380,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-ruin",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-暗影灼烧",
@@ -1298,7 +1392,7 @@
      "nameCn": "暗影灼烧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1317,7 +1411,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-shadowburn",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-强烈",
@@ -1327,7 +1423,7 @@
      "nameCn": "强烈",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1346,7 +1442,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-intensity",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-苦痛之焰",
@@ -1356,7 +1454,7 @@
      "nameCn": "苦痛之焰",
      "nameAlt": "痛苦烈焰",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1375,7 +1473,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-agonizing-flames",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-燃烧",
@@ -1385,7 +1485,7 @@
      "nameCn": "燃烧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1406,7 +1506,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-conflagrate",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-火焰冲撞",
@@ -1416,7 +1518,7 @@
      "nameCn": "火焰冲撞",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1437,7 +1539,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-pyroclasm",
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-浩劫灾祸",
@@ -1447,7 +1551,7 @@
      "nameCn": "浩劫灾祸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1466,7 +1570,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-bane-of-havoc",
+     "changeState": "added"
     },
     {
      "id": "warlock-2-硫磺烈火",
@@ -1476,7 +1582,7 @@
      "nameCn": "硫磺烈火",
      "nameAlt": "硫磺与火焰",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1497,7 +1603,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warlock-destruction-fire-and-brimstone",
+     "changeState": "added"
     },
     {
      "id": "warlock-2-影与焰",
@@ -1507,7 +1615,7 @@
      "nameCn": "影与焰",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1526,7 +1634,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-shadow-and-flame",
+     "changeState": "added"
     },
     {
      "id": "warlock-2-烧尽",
@@ -1536,7 +1646,7 @@
      "nameCn": "烧尽",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1557,7 +1667,9 @@
        "url": "https://nieyi.cn/f/talents/warlock.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "warlock-incinerate",
+     "changeState": "added"
     }
    ]
   }
@@ -1567,5 +1679,13 @@
   "nameConflict": 9,
   "onlyInOneSource": 0
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/warlock",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }

@@ -170,6 +170,27 @@ img.dbn-art.bad{opacity:0}
   background:rgba(14,16,19,.45)}
 .dcardx{padding-top:0}
 .dcardx .dbn2+.dcard{padding-top:var(--s3)}
+/* 副本卡：按十级一档分组的网格 */
+.band{display:flex;align-items:baseline;gap:var(--s3);margin:var(--s6) 0 var(--s3);
+  border-bottom:1px solid var(--line);padding-bottom:5px}
+.band b{font:15px var(--font-mono);color:var(--gold);letter-spacing:.5px}
+.band span:last-child{margin-left:auto}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:var(--s3)}
+.dcard2{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:0 var(--s3) var(--s3);display:flex;flex-direction:column}
+.dcard2 .dbn2{margin:calc(-1 * var(--s3)) calc(-1 * var(--s3) - 1px) var(--s3);height:104px}
+.dcard2 .dbn2-txt{flex-direction:column;align-items:flex-start;gap:2px}
+.dbn2-r{font:11.5px var(--font-mono);color:var(--gold)}
+.dbn2-seal{position:absolute;top:var(--s2);left:var(--s3);padding:1px 7px;border-radius:999px;
+  font-size:11px;color:var(--bg);background:var(--gold);font-weight:700}
+.dmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin-bottom:var(--s2)}
+.dmeta span{color:var(--txt-dim)}
+.dmeta .pill{margin-right:2px}
+button.wide{width:100%;margin-top:auto}
+.dcard2 .drawer{margin-top:var(--s2)}
+@media (max-width:600px){
+  .dcard2 .dbn2{height:92px}
+}
 @media (max-width:600px){
   .dbn2{height:82px}
   .dbn2-n{font-size:17px}
@@ -177,6 +198,28 @@ img.dbn-art.bad{opacity:0}
 .dcardx .card,.dcardx>div{margin-bottom:0}
 .dcardx .nm{display:flex;align-items:center;gap:6px;min-height:22px}
 .node .flag{position:absolute;left:2px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+/* 与经典旧世的差异：左下角菱形（左上/右上已被"待实测"与"名称已核"占用）。
+   颜色之外另有图例文字与 title 说明，不单靠颜色承载信息。 */
+.tree{position:relative}
+.tlines{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.tlines line{stroke:var(--line);stroke-width:2;stroke-dasharray:4 3}
+.node.chg-added::after,.node.chg-modified::after,.node.chg-moved::after,.node.chg-unchanged::after{
+  content:'';position:absolute;left:2px;bottom:2px;width:7px;height:7px;transform:rotate(45deg);border-radius:2px}
+.node.chg-added::after{background:var(--ok)}
+.node.chg-modified::after{background:var(--txt-caution)}
+.node.chg-moved::after{background:var(--blue)}
+.node.chg-unchanged::after{background:var(--lead)}
+.tlegend{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;padding:0 var(--s4) var(--s3);
+  font-size:12px;color:var(--txt-dim)}
+.tlegend span{display:inline-flex;align-items:center;gap:5px}
+.tlegend i.lg{width:8px;height:8px;transform:rotate(45deg);border-radius:2px;display:inline-block}
+.tlegend .added{background:var(--ok)} .tlegend .modified{background:var(--txt-caution)}
+.tlegend .moved{background:var(--blue)} .tlegend .unchanged{background:var(--lead)}
+.cmpbox{margin:var(--s3) var(--s4) var(--s4);border-top:1px solid var(--line);padding-top:var(--s3)}
+.cmprow{border-bottom:1px dashed var(--line);padding:6px 0;font-size:12.5px}
+.cmprow b{margin-right:6px}
+.cmp-ranks{margin-top:4px;font-size:12px;color:var(--txt-dim)}
+b.ok{color:var(--ok)} b.caution{color:var(--txt-caution)}
 .node .vok{position:absolute;right:3px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 1px rgba(0,0,0,.5)}
 .node .nm{font-size:10.5px;line-height:1.25;word-break:break-all}
 .tfoot{display:flex;align-items:center;gap:var(--s3);padding:10px var(--s4);

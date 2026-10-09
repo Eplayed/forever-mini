@@ -1,0 +1,1408 @@
+{
+ "meta": {
+  "classId": "warlock",
+  "source": "https://wowforever.wclbox.com/tianfu/warlock",
+  "scrapedAt": "2026-10-09",
+  "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
+ },
+ "grids": [
+  {
+   "title": "痛苦",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-warlock-affliction-improved-life-tap",
+     "name": "强化生命分流",
+     "maxRanks": 2,
+     "row": 1,
+     "col": 1,
+     "change": "moved",
+     "icon": "spell_shadow_burningspirit"
+    },
+    {
+     "id": "warlock-suppression",
+     "name": "镇压",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_unsummonbuilding"
+    },
+    {
+     "id": "warlock-improved-corruption",
+     "name": "强化腐蚀术",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_abominationexplosion"
+    },
+    {
+     "id": "warlock-malediction",
+     "name": "邪咒",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_shadow_curseofachimonde"
+    },
+    {
+     "id": "warlock-soul-harvest",
+     "name": "灵魂收割",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 2,
+     "change": "added",
+     "icon": "inv_elemental_primal_shadow"
+    },
+    {
+     "id": "warlock-improved-drains",
+     "name": "强化吸取",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_shadow_haunting"
+    },
+    {
+     "id": "calc-warlock-affliction-improved-bane-of-agony",
+     "name": "强化痛苦灾祸",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_shadow_curseofsargeras"
+    },
+    {
+     "id": "calc-warlock-affliction-fel-concentration",
+     "name": "恶魔专注",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_fingerofdeath"
+    },
+    {
+     "id": "calc-warlock-affliction-amplify-curse",
+     "name": "诅咒增幅",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_contagion"
+    },
+    {
+     "id": "warlock-pandemic",
+     "name": "恶疾",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 4,
+     "change": "added",
+     "icon": "spell_shadow_unstableaffliction_2"
+    },
+    {
+     "id": "calc-warlock-affliction-malevolence",
+     "name": "怨毒",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_shadow_focusedpower"
+    },
+    {
+     "id": "calc-warlock-affliction-nightfall",
+     "name": "夜幕",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_twilight"
+    },
+    {
+     "id": "warlock-curse-of-exhaustion",
+     "name": "疲劳诅咒",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_grimward"
+    },
+    {
+     "id": "calc-warlock-affliction-siphon-life",
+     "name": "生命虹吸",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_requiem"
+    },
+    {
+     "id": "calc-warlock-affliction-soul-siphon",
+     "name": "灵魂虹吸",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_lifedrain02"
+    },
+    {
+     "id": "calc-warlock-affliction-shadow-mastery",
+     "name": "暗影掌握",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_shadetruesight"
+    },
+    {
+     "id": "warlock-wrack",
+     "name": "折磨",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_deathknight_hemorrhagicfever"
+    }
+   ]
+  },
+  {
+   "title": "恶魔学识",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "warlock-improved-health-funnel",
+     "name": "强化生命通道",
+     "maxRanks": 2,
+     "row": 1,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_shadow_lifedrain"
+    },
+    {
+     "id": "calc-warlock-demonology-improved-imp",
+     "name": "强化小鬼",
+     "maxRanks": 3,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_summonimp"
+    },
+    {
+     "id": "warlock-demonic-embrace",
+     "name": "恶魔之拥",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_metamorphosis"
+    },
+    {
+     "id": "calc-warlock-demonology-unholy-power",
+     "name": "邪恶强化",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 4,
+     "change": "modified",
+     "icon": "spell_shadow_shadowworddominate"
+    },
+    {
+     "id": "warlock-demonic-aegis",
+     "name": "恶魔庇护",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_shadow_ragingscream"
+    },
+    {
+     "id": "calc-warlock-demonology-improved-voidwalker",
+     "name": "强化虚空行者",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_summonvoidwalker"
+    },
+    {
+     "id": "warlock-fel-vitality",
+     "name": "邪能活力",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_demonictactics"
+    },
+    {
+     "id": "calc-warlock-demonology-demonic-energies",
+     "name": "恶魔能量",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 4,
+     "change": "added",
+     "icon": "spell_shadow_felmending"
+    },
+    {
+     "id": "calc-warlock-demonology-improved-sayaad",
+     "name": "强化萨亚德",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 1,
+     "change": "unchanged",
+     "icon": "ability_warlock_randomizesuccubusincubus"
+    },
+    {
+     "id": "calc-warlock-demonology-demonic-sacrifice",
+     "name": "恶魔牺牲",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_psychicscream"
+    },
+    {
+     "id": "calc-warlock-demonology-master-summoner",
+     "name": "召唤大师",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 3,
+     "change": "moved",
+     "icon": "spell_shadow_impphaseshift"
+    },
+    {
+     "id": "warlock-decimation",
+     "name": "灭杀",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_fire_fireball02"
+    },
+    {
+     "id": "calc-warlock-demonology-fel-domination",
+     "name": "恶魔支配",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "moved",
+     "icon": "spell_nature_removecurse"
+    },
+    {
+     "id": "calc-warlock-demonology-demonic-brand",
+     "name": "恶魔印记",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_demonhunter_chaoticimprint_fire"
+    },
+    {
+     "id": "calc-warlock-demonology-improved-felhunter",
+     "name": "强化地狱猎犬",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_shadow_summonfelhunter"
+    },
+    {
+     "id": "warlock-soul-link",
+     "name": "灵魂链接",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_gathershadows"
+    },
+    {
+     "id": "warlock-demonic-knowledge",
+     "name": "恶魔知识",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_shadow_improvedvampiricembrace"
+    },
+    {
+     "id": "calc-warlock-demonology-master-demonologist",
+     "name": "恶魔学识大师",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_shadowpact"
+    },
+    {
+     "id": "warlock-demonic-pact",
+     "name": "恶魔契约",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "inv_ability_soulharvesterwarlock_demonicsoul"
+    }
+   ]
+  },
+  {
+   "title": "毁灭",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 208 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 208 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-warlock-destruction-destructive-reach",
+     "name": "毁灭延伸",
+     "maxRanks": 2,
+     "row": 1,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_shadow_corpseexplode"
+    },
+    {
+     "id": "warlock-improved-shadow-bolt",
+     "name": "强化暗影箭",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_shadowbolt"
+    },
+    {
+     "id": "warlock-bane",
+     "name": "灾祸",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_deathpact"
+    },
+    {
+     "id": "calc-warlock-destruction-molten-skin",
+     "name": "熔岩之肤",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_mage_moltenarmor"
+    },
+    {
+     "id": "warlock-cataclysm",
+     "name": "灾变",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_fire_windsofwoe"
+    },
+    {
+     "id": "calc-warlock-destruction-aftermath",
+     "name": "清算",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_fire_fire"
+    },
+    {
+     "id": "calc-warlock-destruction-ruin",
+     "name": "毁灭",
+     "maxRanks": 5,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_shadow_shadowwordpain"
+    },
+    {
+     "id": "calc-warlock-destruction-shadowburn",
+     "name": "暗影灼烧",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_scourgebuild"
+    },
+    {
+     "id": "calc-warlock-destruction-intensity",
+     "name": "强烈",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_fire_lavaspawn"
+    },
+    {
+     "id": "warlock-agonizing-flames",
+     "name": "苦痛之焰",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_fire_soulburn"
+    },
+    {
+     "id": "calc-warlock-destruction-conflagrate",
+     "name": "燃烧",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_fire_fireball"
+    },
+    {
+     "id": "calc-warlock-destruction-pyroclasm",
+     "name": "火焰冲撞",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_fire_volcano"
+    },
+    {
+     "id": "warlock-bane-of-havoc",
+     "name": "浩劫灾祸",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_warlock_baneofhavoc"
+    },
+    {
+     "id": "calc-warlock-destruction-fire-and-brimstone",
+     "name": "硫磺烈火",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_fire_meteorstorm"
+    },
+    {
+     "id": "warlock-shadow-and-flame",
+     "name": "影与焰",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_fire_playingwithfire"
+    },
+    {
+     "id": "warlock-incinerate",
+     "name": "烧尽",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "spell_fire_burnout"
+    }
+   ]
+  }
+ ],
+ "refs": [
+  {
+   "id": "calc-warlock-affliction-improved-life-tap",
+   "name": "强化生命分流",
+   "tag": "移动",
+   "condition": "最高 2 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 2：使你的生命分流法术所转化的法力值提高20%。",
+   "changeNote": "改动摘要：从第2层移到第1层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的生命分流法术所转化的法力值提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-suppression",
+   "name": "镇压",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的命中几率提高5%，并使你产生的所有威胁降低20%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的命中几率提高1%，并使你产生的所有威胁降低4%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-improved-corruption",
+   "name": "强化腐蚀术",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的腐蚀术的施法时间缩短2秒，造成的伤害提高10%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的腐蚀术的施法时间缩短0.4秒，造成的伤害提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-malediction",
+   "name": "邪咒",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 2 层 · 需在痛苦较低层投入 5 点",
+   "effect": "等级 5：使你的术士法术造成的所有周期性伤害提高5%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的术士法术造成的所有周期性伤害提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-soul-harvest",
+   "name": "灵魂收割",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 2 层 · 需在痛苦较低层投入 5 点",
+   "effect": "等级 2：受你的吸取灵魂影响的有威胁目标被击杀后，你的法力回复速度提高100%，持续10秒，并在施法时仍保持100%的正常法力回复。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "受你的吸取灵魂影响的有威胁目标被击杀后，你的法力回复速度提高50%，持续10秒，并在施法时仍保持50%的正常法力回复。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-improved-drains",
+   "name": "强化吸取",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 2 层 · 需在痛苦较低层投入 5 点",
+   "effect": "等级 3：使你的吸取生命、吸取灵魂和折磨法术造成的伤害或吸取的生命提高20%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的吸取生命、吸取灵魂和折磨法术造成的伤害或吸取的生命提高7%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-improved-bane-of-agony",
+   "name": "强化痛苦灾祸",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 3 层 · 需在痛苦较低层投入 10 点",
+   "effect": "等级 2：使你的痛苦灾祸造成的伤害提高10%。",
+   "changeNote": "改动摘要：经典旧世中名为强化痛苦诅咒。最高等级从3变为2。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的痛苦灾祸造成的伤害提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-fel-concentration",
+   "name": "恶魔专注",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在痛苦较低层投入 10 点",
+   "effect": "等级 3：使你在引导或施放吸取生命、吸取法力、吸取灵魂或折磨时有70%的几率避免因受到伤害而被打断。",
+   "changeNote": "改动摘要：最高等级从5变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你在引导或施放吸取生命、吸取法力、吸取灵魂或折磨时有23%的几率避免因受到伤害而被打断。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-amplify-curse",
+   "name": "诅咒增幅",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在痛苦较低层投入 10 点",
+   "effect": "等级 1：使你的下一个虚弱诅咒或痛苦灾祸的效果提高50%，或使你的下一个疲劳诅咒的效果提高20%，持续30秒。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的下一个虚弱诅咒或痛苦灾祸的效果提高50%，或使你的下一个疲劳诅咒的效果提高20%，持续30秒。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-pandemic",
+   "name": "恶疾",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 3 层 · 需在痛苦较低层投入 10 点",
+   "effect": "等级 3：使你的腐蚀术、痛苦灾祸、末日灾祸、吸取灵魂、吸取生命、生命虹吸和折磨的爆击伤害加成提高100%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的腐蚀术、痛苦灾祸、末日灾祸、吸取灵魂、吸取生命、生命虹吸和折磨的爆击伤害加成提高33%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-malevolence",
+   "name": "怨毒",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 4 层 · 需在痛苦较低层投入 15 点",
+   "effect": "等级 5：使你的暗影法术爆击几率提高5%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的暗影法术爆击几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-nightfall",
+   "name": "夜幕",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 4 层 · 需在痛苦较低层投入 15 点",
+   "effect": "等级 2：使你的腐蚀术、吸取灵魂、吸取生命和折磨在对敌人造成伤害后有4%的几率令你进入暗影冥思。暗影冥思使你的下一个暗影箭的施法时间缩短100%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的腐蚀术、吸取灵魂、吸取生命和折磨在对敌人造成伤害后有2%的几率令你进入暗影冥思。暗影冥思使你的下一个暗影箭的施法时间缩短100%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-curse-of-exhaustion",
+   "name": "疲劳诅咒",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 4 层 · 需在痛苦较低层投入 15 点 · 前置：诅咒增幅 1 点",
+   "effect": "等级 1：使目标的速度降低30%，持续12秒。每个术士只能对一个目标施加一种诅咒，且同类诅咒不能叠加。",
+   "changeNote": "改动摘要：从第5层移到第4层。数值调整：30%（经典旧世：10%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使目标的速度降低30%，持续12秒。每个术士只能对一个目标施加一种诅咒，且同类诅咒不能叠加。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-siphon-life",
+   "name": "生命虹吸",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在痛苦较低层投入 20 点",
+   "effect": "等级 1：每3秒将目标的11点生命值转移给施法者，持续30秒。",
+   "changeNote": "改动摘要：数值调整：11点（经典旧世：15点）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "每3秒将目标的11点生命值转移给施法者，持续30秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-soul-siphon",
+   "name": "灵魂虹吸",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 5 层 · 需在痛苦较低层投入 20 点",
+   "effect": "等级 3：目标身上每有一个你的其他痛苦系效果，你的吸取生命、吸取灵魂和折磨造成的伤害或吸取的生命值提高12%，最多提高36%。",
+   "changeNote": "改动摘要：经典旧世中名为强化吸取生命。最高等级从5变为3。从第2层移到第5层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "目标身上每有一个你的其他痛苦系效果，你的吸取生命、吸取灵魂和折磨造成的伤害或吸取的生命值提高4%，最多提高12%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-affliction-shadow-mastery",
+   "name": "暗影掌握",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在痛苦较低层投入 25 点",
+   "effect": "等级 5：使你的暗影法术所造成的伤害或吸取的生命值提高5%。",
+   "changeNote": "改动摘要：从第2列移到第3列。数值调整：5%（经典旧世：10%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的暗影法术所造成的伤害或吸取的生命值提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-wrack",
+   "name": "折磨",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在痛苦较低层投入 30 点 · 前置：生命虹吸 1 点",
+   "effect": "等级 1：从内部撕裂目标，每1秒造成36点暗影伤害，并使其受到你其他暗影持续伤害效果的伤害提高10%，持续6秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "从内部撕裂目标，每1秒造成36点暗影伤害，并使其受到你其他暗影持续伤害效果的伤害提高10%，持续6秒。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-improved-health-funnel",
+   "name": "强化生命通道",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 2：使你的生命通道转移的生命值提高40%，生命值消耗降低30%，并使生命通道产生的所有威胁降低100%。无论恶魔的生命值如何都可以使用生命通道。",
+   "changeNote": "改动摘要：从第2层移到第1层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的生命通道转移的生命值提高20%，生命值消耗降低15%，并使生命通道产生的所有威胁降低50%。无论恶魔的生命值如何都可以使用生命通道。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-improved-imp",
+   "name": "强化小鬼",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 3：使你的小鬼的火焰箭造成的伤害提高30%，火焰之盾的效果提高30%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的小鬼的火焰箭造成的伤害提高10%，火焰之盾的效果提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-demonic-embrace",
+   "name": "恶魔之拥",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的耐力总值提高15%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的耐力总值提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-unholy-power",
+   "name": "邪恶强化",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的小鬼、虚空行者、魅魔、夜魔和地狱猎犬宠物造成的所有伤害提高10%。",
+   "changeNote": "改动摘要：从第4层移到第1层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的小鬼、虚空行者、魅魔、夜魔和地狱猎犬宠物造成的所有伤害提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-demonic-aegis",
+   "name": "恶魔庇护",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 2 层 · 需在恶魔学识较低层投入 5 点",
+   "effect": "等级 2：使你的恶魔皮肤和恶魔护甲法术的效果提高30%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的恶魔皮肤和恶魔护甲法术的效果提高15%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-improved-voidwalker",
+   "name": "强化虚空行者",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在恶魔学识较低层投入 5 点",
+   "effect": "等级 3：使你的虚空行者的折磨、吞噬暗影、牺牲和受难法术效果提高30%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的虚空行者的折磨、吞噬暗影、牺牲和受难法术效果提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-fel-vitality",
+   "name": "邪能活力",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在恶魔学识较低层投入 5 点",
+   "effect": "等级 3：使你的小鬼、虚空行者、魅魔、夜魔和地狱猎犬的生命值与法力值上限提高15%，并使你的法力值上限提高15%。",
+   "changeNote": "改动摘要：经典旧世中名为恶魔智力。最高等级从5变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的小鬼、虚空行者、魅魔、夜魔和地狱猎犬的生命值与法力值上限提高5%，并使你的法力值上限提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-demonic-energies",
+   "name": "恶魔能量",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 2 层 · 需在恶魔学识较低层投入 5 点",
+   "effect": "等级 2：你造成的所有法术伤害会为宠物恢复相当于该伤害15%的生命值。通过生命分流获得法力时，召唤的恶魔会获得相当于你所得法力100%的法力。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你造成的所有法术伤害会为宠物恢复相当于该伤害8%的生命值。通过生命分流获得法力时，召唤的恶魔会获得相当于你所得法力50%的法力。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-improved-sayaad",
+   "name": "强化萨亚德",
+   "tag": "未改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在恶魔学识较低层投入 10 点",
+   "effect": "等级 3：使你的魅魔和夜魔的剧痛鞭笞和安抚之吻法术的效果提高30%，并使你的魅魔和夜魔的诱惑和次级隐形术的持续时间延长30%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的魅魔和夜魔的剧痛鞭笞和安抚之吻法术的效果提高10%，并使你的魅魔和夜魔的诱惑和次级隐形术的持续时间延长10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-demonic-sacrifice",
+   "name": "恶魔牺牲",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在恶魔学识较低层投入 10 点",
+   "effect": "等级 1：激活后，牺牲你召唤的恶魔来强化你力量的相反面向，使你获得一个持续2小时的效果。如果召唤任何恶魔，该效果会被取消。 小鬼：使你的暗影伤害提高15%。 虚空行者：每4秒恢复总法力值的2%。 魅魔/夜魔：使你的火焰伤害提高15%。 地狱猎犬：每4秒恢复总生命值的3%。",
+   "changeNote": "改动摘要：从第5层移到第3层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活后，牺牲你召唤的恶魔来强化你力量的相反面向，使你获得一个持续2小时的效果。如果召唤任何恶魔，该效果会被取消。 小鬼：使你的暗影伤害提高15%。 虚空行者：每4秒恢复总法力值的2%。 魅魔/夜魔：使你的火焰伤害提高15%。 地狱猎犬：每4秒恢复总生命值的3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-master-summoner",
+   "name": "召唤大师",
+   "tag": "移动",
+   "condition": "最高 2 级 · 第 3 层 · 需在恶魔学识较低层投入 10 点",
+   "effect": "等级 2：使你召唤小鬼、虚空行者、魅魔、夜魔和地狱猎犬的施法时间减少4秒，法力值消耗降低40%。",
+   "changeNote": "改动摘要：从第4层移到第3层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你召唤小鬼、虚空行者、魅魔、夜魔和地狱猎犬的施法时间减少2秒，法力值消耗降低20%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-decimation",
+   "name": "灭杀",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 4 层 · 需在恶魔学识较低层投入 15 点",
+   "effect": "等级 2：使你的灵魂之火冷却时间缩短90%。当你对生命值低于35%的敌人施放暗影箭或灼热之痛时，这些法术造成的伤害提高6%，并且在接下来的10秒内，你的灵魂之火施法时间缩短40%，且不消耗灵魂碎片。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的灵魂之火冷却时间缩短45%。当你对生命值低于35%的敌人施放暗影箭或灼热之痛时，这些法术造成的伤害提高3%，并且在接下来的10秒内，你的灵魂之火施法时间缩短20%，且不消耗灵魂碎片。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-fel-domination",
+   "name": "恶魔支配",
+   "tag": "移动",
+   "condition": "最高 1 级 · 第 4 层 · 需在恶魔学识较低层投入 15 点 · 前置：召唤大师 2 点",
+   "effect": "等级 1：你的下一个召唤小鬼、虚空行者、魅魔、夜魔或地狱猎犬的法术施法时间减少5.5秒，法力消耗减少50%。",
+   "changeNote": "改动摘要：从第3层移到第4层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的下一个召唤小鬼、虚空行者、魅魔、夜魔或地狱猎犬的法术施法时间减少5.5秒，法力消耗减少50%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-demonic-brand",
+   "name": "恶魔印记",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 4 层 · 需在恶魔学识较低层投入 15 点",
+   "effect": "等级 3：你的灼热之痛产生的威胁降低50%，并标记目标10秒。你的宠物接下来对目标的6次攻击会产生高威胁，并根据宠物类型造成65至68点火焰或暗影伤害。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的灼热之痛产生的威胁降低17%，并标记目标10秒。你的宠物接下来对目标的2次攻击会产生高威胁，并根据宠物类型造成65至68点火焰或暗影伤害。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-improved-felhunter",
+   "name": "强化地狱猎犬",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 5 层 · 需在恶魔学识较低层投入 20 点",
+   "effect": "等级 3：使你的地狱猎犬的腐坏之血的攻击强度降低效果、吞噬魔法的治疗效果以及多疑的侦测等级提高30%，并使其法术封锁的冷却时间缩短6秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的地狱猎犬的腐坏之血的攻击强度降低效果、吞噬魔法的治疗效果以及多疑的侦测等级提高10%，并使其法术封锁的冷却时间缩短2秒。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-soul-link",
+   "name": "灵魂链接",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在恶魔学识较低层投入 20 点 · 前置：恶魔牺牲 1 点",
+   "effect": "等级 1：激活时，施法者受到的所有伤害有30%由你的小鬼、虚空行者、魅魔、夜魔或地狱猎犬恶魔承受。此外，恶魔和主人造成的伤害都提高3%。只要恶魔处于激活状态，该效果就会持续。",
+   "changeNote": "改动摘要：从第7层移到第5层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活时，施法者受到的所有伤害有30%由你的小鬼、虚空行者、魅魔、夜魔或地狱猎犬恶魔承受。此外，恶魔和主人造成的伤害都提高3%。只要恶魔处于激活状态，该效果就会持续。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-demonic-knowledge",
+   "name": "恶魔知识",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 5 层 · 需在恶魔学识较低层投入 20 点",
+   "effect": "等级 3：召唤的恶魔宠物激活时，使你和恶魔宠物的法术伤害最多提高相当于你等级100%的数值。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "召唤的恶魔宠物激活时，使你和恶魔宠物的法术伤害最多提高相当于你等级33%的数值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-demonology-master-demonologist",
+   "name": "恶魔学识大师",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在恶魔学识较低层投入 25 点",
+   "effect": "等级 5：只要召唤的恶魔保持激活，使术士和该恶魔获得一个效果。 小鬼 - 火焰伤害提高10%。 虚空行者 - 受到的物理伤害降低10%。 魅魔/夜魔 - 暗影伤害提高10%。 地狱猎犬 - 受到的魔法伤害降低10%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "只要召唤的恶魔保持激活，使术士和该恶魔获得一个效果。 小鬼 - 火焰伤害提高2%。 虚空行者 - 受到的物理伤害降低2%。 魅魔/夜魔 - 暗影伤害提高2%。 地狱猎犬 - 受到的魔法伤害降低2%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-demonic-pact",
+   "name": "恶魔契约",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在恶魔学识较低层投入 30 点 · 前置：灵魂链接 1 点",
+   "effect": "等级 1：你的恶魔牺牲效果不再因召唤其它不同的恶魔宠物而取消。重新召唤已被牺牲的宠物仍会取消该效果。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的恶魔牺牲效果不再因召唤其它不同的恶魔宠物而取消。重新召唤已被牺牲的宠物仍会取消该效果。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-destructive-reach",
+   "name": "毁灭延伸",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 2：使你的伤害法术射程提高20%。",
+   "changeNote": "改动摘要：从第4层移到第1层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的伤害法术射程提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-improved-shadow-bolt",
+   "name": "强化暗影箭",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：你的暗影箭爆击会使目标受到来自你攻击的暗影伤害提高20%，持续12秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的暗影箭爆击会使目标受到来自你攻击的暗影伤害提高4%，持续12秒。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-bane",
+   "name": "灾祸",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的暗影箭、献祭和烧尽的施法时间缩短0.5秒，灵魂之火的施法时间缩短2秒。",
+   "changeNote": "改动摘要：从第2层移到第1层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的暗影箭、献祭和烧尽的施法时间缩短0.1秒，灵魂之火的施法时间缩短0.4秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-molten-skin",
+   "name": "熔岩之肤",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 2 层 · 需在毁灭较低层投入 5 点",
+   "effect": "等级 5：使你受到的所有伤害降低10%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你受到的所有伤害降低2%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-cataclysm",
+   "name": "灾变",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在毁灭较低层投入 5 点",
+   "effect": "等级 3：使你的毁灭系法术所消耗的法力值减少10%。",
+   "changeNote": "改动摘要：最高等级从5变为3。从第1层移到第2层。数值调整：10%（经典旧世：3%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的毁灭系法术所消耗的法力值减少3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-aftermath",
+   "name": "清算",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在毁灭较低层投入 5 点",
+   "effect": "等级 5：使你的献祭的初始伤害提高50%，并且你的燃烧有100%的几率使目标眩晕，移动速度降低50%，持续5秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的献祭的初始伤害提高10%，并且你的燃烧有20%的几率使目标眩晕，移动速度降低50%，持续5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-ruin",
+   "name": "毁灭",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 3 层 · 需在毁灭较低层投入 10 点",
+   "effect": "等级 5：使你的毁灭系法术的爆击伤害加成提高100%。",
+   "changeNote": "改动摘要：最高等级从1变为5。从第5层移到第3层。数值调整：20%（经典旧世：100%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的毁灭系法术的爆击伤害加成提高20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-shadowburn",
+   "name": "暗影灼烧",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在毁灭较低层投入 10 点",
+   "effect": "等级 1：立即冲击目标，造成62到70点暗影伤害。若消灭一个能为你提供经验值或荣誉值的敌人，且其在受到暗影灼烧后的8秒内死亡，则施法者获得一块灵魂碎片。",
+   "changeNote": "改动摘要：从第4列移到第3列。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "立即冲击目标，造成62到70点暗影伤害。若消灭一个能为你提供经验值或荣誉值的敌人，且其在受到暗影灼烧后的8秒内死亡，则施法者获得一块灵魂碎片。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-intensity",
+   "name": "强烈",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在毁灭较低层投入 15 点",
+   "effect": "等级 3：使你有70%的几率在施放或引导任何毁灭系法术时不会因受到伤害而被打断。",
+   "changeNote": "改动摘要：最高等级从2变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你有23%的几率在施放或引导任何毁灭系法术时不会因受到伤害而被打断。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-agonizing-flames",
+   "name": "苦痛之焰",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在毁灭较低层投入 15 点",
+   "effect": "等级 3：使你的灼热之痛的爆击几率提高10%，并使你所有毁灭系法术造成的伤害提高10%。",
+   "changeNote": "改动摘要：经典旧世中名为强化灼热之痛。最高等级从5变为3。从第4列移到第2列。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的灼热之痛的爆击几率提高3%，并使你所有毁灭系法术造成的伤害提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-conflagrate",
+   "name": "燃烧",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 4 层 · 需在毁灭较低层投入 15 点",
+   "effect": "等级 1：点燃一个已经受到你的献祭法术影响的目标，造成84到106点火焰伤害，并消耗献祭效果。",
+   "changeNote": "改动摘要：从第7层移到第4层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "点燃一个已经受到你的献祭法术影响的目标，造成84到106点火焰伤害，并消耗献祭效果。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-pyroclasm",
+   "name": "火焰冲撞",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在毁灭较低层投入 20 点 · 前置：强烈 3 点",
+   "effect": "等级 2：使你的灵魂之火有26%的几率令目标昏迷3秒，并使你的火焰之雨和地狱烈焰在持续期间有26%的几率令受到伤害的目标昏迷3秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的灵魂之火有13%的几率令目标昏迷3秒，并使你的火焰之雨和地狱烈焰在持续期间有13%的几率令受到伤害的目标昏迷3秒。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-bane-of-havoc",
+   "name": "浩劫灾祸",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 5 层 · 需在毁灭较低层投入 20 点",
+   "effect": "等级 1：使目标遭受浩劫灾祸，持续5分钟，术士对其他目标造成的所有伤害有15%也会施加给被诅咒的目标。浩劫灾祸只能影响1个目标，且每个术士在任一目标身上只能维持一种灾祸。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使目标遭受浩劫灾祸，持续5分钟，术士对其他目标造成的所有伤害有15%也会施加给被诅咒的目标。浩劫灾祸只能影响1个目标，且每个术士在任一目标身上只能维持一种灾祸。"
+    }
+   ]
+  },
+  {
+   "id": "calc-warlock-destruction-fire-and-brimstone",
+   "name": "硫磺烈火",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 5 层 · 需在毁灭较低层投入 20 点 · 前置：燃烧 1 点",
+   "effect": "等级 3：使你的燃烧法术爆击几率提高25%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的燃烧法术爆击几率提高8%。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-shadow-and-flame",
+   "name": "影与焰",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 6 层 · 需在毁灭较低层投入 25 点",
+   "effect": "等级 5：使用燃烧击中敌人后，你造成的所有暗影伤害提高10%，持续20秒。使用暗影灼烧击中敌人后，你造成的所有火焰伤害提高10%，持续20秒。此外，燃烧有100%的几率不消耗献祭，暗影灼烧有100%的几率立刻返还一块灵魂碎片。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使用燃烧击中敌人后，你造成的所有暗影伤害提高2%，持续20秒。使用暗影灼烧击中敌人后，你造成的所有火焰伤害提高2%，持续20秒。此外，燃烧有20%的几率不消耗献祭，暗影灼烧有20%的几率立刻返还一块灵魂碎片。"
+    }
+   ]
+  },
+  {
+   "id": "warlock-incinerate",
+   "name": "烧尽",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在毁灭较低层投入 30 点 · 前置：浩劫灾祸 1 点",
+   "effect": "等级 1：对你的目标造成90到104点火焰伤害，如果目标受到献祭的影响，则额外造成25%的伤害。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "对你的目标造成90到104点火焰伤害，如果目标受到献祭的影响，则额外造成25%的伤害。"
+    }
+   ]
+  }
+ ]
+}

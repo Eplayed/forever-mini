@@ -90,7 +90,14 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "丹莫罗，铁炉堡地下 · 联盟",
+   "levelRangeAlt": "13-20",
+   "cardCounts": {
+    "bosses": "4 个首领",
+    "drops": "1 件掉落"
+   },
+   "art": "img/art/dungeons/hall-of-thanes.webp"
   },
   {
    "id": "ruins-of-lordaeron",
@@ -198,7 +205,14 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "提瑞斯法林地，洛丹伦废墟 · 部落",
+   "levelRangeAlt": "15-22",
+   "cardCounts": {
+    "bosses": "7 个首领",
+    "drops": "2 件掉落"
+   },
+   "art": "img/art/dungeons/ruins-of-lordaeron.webp"
   },
   {
    "id": "whelgars-excavation",
@@ -337,7 +351,14 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "奥特兰克山脉",
+   "levelRangeAlt": "28-35",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "1 件掉落"
+   },
+   "art": "img/art/dungeons/city-of-dalaran.webp"
   },
   {
    "id": "the-drowned-city",
@@ -377,7 +398,13 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "荆棘谷外海",
+   "cardCounts": {
+    "bosses": "尚未公布首领",
+    "drops": "嘉年华演示"
+   },
+   "art": "img/art/dungeons/the-drowned-city.webp"
   },
   {
    "id": "kroldok-stronghold",
@@ -411,7 +438,13 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "河林（新区域）",
+   "cardCounts": {
+    "bosses": "尚未公布首领",
+    "drops": null
+   },
+   "art": "img/art/dungeons/kroldok-stronghold.webp"
   },
   {
    "id": "alcaz-prison",
@@ -445,7 +478,13 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "尘泥沼泽，奥卡兹岛",
+   "cardCounts": {
+    "bosses": "尚未公布首领",
+    "drops": null
+   },
+   "art": "img/art/dungeons/alcaz-prison.webp"
   },
   {
    "id": "blackmaw-hold",
@@ -479,7 +518,13 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "艾萨拉",
+   "cardCounts": {
+    "bosses": "尚未公布首领",
+    "drops": null
+   },
+   "art": "img/art/dungeons/blackmaw-hold.webp"
   },
   {
    "id": "shapers-terrace",
@@ -513,7 +558,13 @@
      "checkedAt": "2026-10-08"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "安戈洛环形山",
+   "cardCounts": {
+    "bosses": "尚未公布首领",
+    "drops": null
+   },
+   "art": "img/art/dungeons/shapers-terrace.webp"
   }
  ],
  "classicDungeons": [
@@ -639,7 +690,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "奥格瑞玛 · 部落",
+   "cardCounts": {
+    "bosses": "4 个首领",
+    "drops": "8 件掉落"
+   },
+   "art": "img/art/dungeons/ragefire-chasm.webp"
   },
   {
    "id": "wailing-caverns",
@@ -1186,7 +1243,14 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "贫瘠之地",
+   "levelRangeAlt": "15-24",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "50 件掉落"
+   },
+   "art": "img/art/dungeons/wailing-caverns.webp"
   },
   {
    "id": "deathmine",
@@ -2085,7 +2149,14 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "银松森林",
+   "levelRangeAlt": "20-30",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "43 件掉落"
+   },
+   "art": "img/art/dungeons/shadowfang-keep.webp"
   },
   {
    "id": "blackfathom-deeps",
@@ -2314,7 +2385,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "灰谷",
+   "cardCounts": {
+    "bosses": "8 个首领",
+    "drops": "17 件掉落"
+   },
+   "art": "img/art/dungeons/blackfathom-deeps.webp"
   },
   {
    "id": "the-stocks",
@@ -2913,7 +2990,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "丹莫罗",
+   "cardCounts": {
+    "bosses": "6 个首领",
+    "drops": "38 件掉落"
+   },
+   "art": "img/art/dungeons/gnomeregan.webp"
   },
   {
    "id": "razorfen-kraul",
@@ -3164,7 +3247,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "贫瘠之地",
+   "cardCounts": {
+    "bosses": "8 个首领",
+    "drops": "21 件掉落"
+   },
+   "art": "img/art/dungeons/razorfen-kraul.webp"
   },
   {
    "id": "scarlet-monastery-graveyard",
@@ -3334,7 +3423,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "提瑞斯法林地",
+   "cardCounts": {
+    "bosses": "5 个首领",
+    "drops": "13 件掉落"
+   },
+   "art": "img/art/dungeons/scarlet-monastery-graveyard.webp"
   },
   {
    "id": "scarlet-monastery-library",
@@ -3432,7 +3527,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "提瑞斯法林地",
+   "cardCounts": {
+    "bosses": "2 个首领",
+    "drops": "7 件掉落"
+   },
+   "art": "img/art/dungeons/scarlet-monastery-library.webp"
   },
   {
    "id": "scarlet-monastery-armory",
@@ -3488,7 +3589,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "提瑞斯法林地",
+   "cardCounts": {
+    "bosses": "1 个首领",
+    "drops": "3 件掉落"
+   },
+   "art": "img/art/dungeons/scarlet-monastery-armory.webp"
   },
   {
    "id": "razor-krendor",
@@ -3914,7 +4021,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "提瑞斯法林地",
+   "cardCounts": {
+    "bosses": "3 个首领",
+    "drops": "12 件掉落"
+   },
+   "art": "img/art/dungeons/scarlet-monastery-cathedral.webp"
   },
   {
    "id": "uldaman",
@@ -4305,7 +4418,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "荒芜之地",
+   "cardCounts": {
+    "bosses": "10 个首领",
+    "drops": "33 件掉落"
+   },
+   "art": "img/art/dungeons/uldaman.webp"
   },
   {
    "id": "zulfarrak",
@@ -4886,7 +5005,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "塔纳利斯",
+   "cardCounts": {
+    "bosses": "12 个首领",
+    "drops": "44 件掉落"
+   },
+   "art": "img/art/dungeons/zulfarrak.webp"
   },
   {
    "id": "maraudon",
@@ -5305,7 +5430,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "凄凉之地",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "38 件掉落"
+   },
+   "art": "img/art/dungeons/maraudon.webp"
   },
   {
    "id": "sunken-temple",
@@ -5526,7 +5657,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "悲伤沼泽",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "15 件掉落"
+   },
+   "art": "img/art/dungeons/sunken-temple.webp"
   },
   {
    "id": "blackrock-depths",
@@ -6872,7 +7009,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "黑石山",
+   "cardCounts": {
+    "bosses": "20 个首领",
+    "drops": "133 件掉落"
+   },
+   "art": "img/art/dungeons/blackrock-depths.webp"
   },
   {
    "id": "dire-maul-east",
@@ -7204,7 +7347,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "菲拉斯",
+   "cardCounts": {
+    "bosses": "5 个首领",
+    "drops": "31 件掉落"
+   },
+   "art": "img/art/dungeons/dire-maul-east.webp"
   },
   {
    "id": "lower-blackrock-spire",
@@ -7971,7 +8120,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "黑石山",
+   "cardCounts": {
+    "bosses": "16 个首领",
+    "drops": "72 件掉落"
+   },
+   "art": "img/art/dungeons/lower-blackrock-spire.webp"
   },
   {
    "id": "dire-maul-north",
@@ -8306,7 +8461,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "菲拉斯",
+   "cardCounts": {
+    "bosses": "7 个首领",
+    "drops": "31 件掉落"
+   },
+   "art": "img/art/dungeons/dire-maul-north.webp"
   },
   {
    "id": "dire-maul-west",
@@ -8776,7 +8937,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "菲拉斯",
+   "cardCounts": {
+    "bosses": "7 个首领",
+    "drops": "45 件掉落"
+   },
+   "art": "img/art/dungeons/dire-maul-west.webp"
   },
   {
    "id": "scholomance",
@@ -9654,7 +9821,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "西瘟疫之地",
+   "cardCounts": {
+    "bosses": "14 个首领",
+    "drops": "78 件掉落"
+   },
+   "art": "img/art/dungeons/scholomance.webp"
   },
   {
    "id": "stratholme-main-gate",
@@ -10292,7 +10465,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "东瘟疫之地",
+   "cardCounts": {
+    "bosses": "11 个首领",
+    "drops": "61 件掉落"
+   },
+   "art": "img/art/dungeons/stratholme-main-gate.webp"
   },
   {
    "id": "stratholme-service-gate",
@@ -11065,7 +11244,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "东瘟疫之地",
+   "cardCounts": {
+    "bosses": "8 个首领",
+    "drops": "78 件掉落"
+   },
+   "art": "img/art/dungeons/stratholme-service-gate.webp"
   },
   {
    "id": "upper-blackrock-spire",
@@ -11943,7 +12128,13 @@
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
     }
-   ]
+   ],
+   "zoneCn": "黑石山 · 10 人",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "89 件掉落"
+   },
+   "art": "img/art/dungeons/upper-blackrock-spire.webp"
   }
  ],
  "raids": [

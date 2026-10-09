@@ -1,0 +1,1346 @@
+{
+ "meta": {
+  "classId": "paladin",
+  "source": "https://wowforever.wclbox.com/tianfu/paladin",
+  "scrapedAt": "2026-10-09",
+  "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
+ },
+ "grids": [
+  {
+   "title": "神圣",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V214 H27 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V214 H27 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-paladin-holy-divine-strength",
+     "name": "神圣之力",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "ability_golemthunderclap"
+    },
+    {
+     "id": "calc-paladin-holy-divine-intellect",
+     "name": "神圣智慧",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "spell_nature_sleep"
+    },
+    {
+     "id": "calc-paladin-holy-healing-light",
+     "name": "治疗之光",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_holy_holybolt"
+    },
+    {
+     "id": "calc-paladin-holy-spiritual-focus",
+     "name": "精神集中",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_arcane_blink"
+    },
+    {
+     "id": "calc-paladin-holy-improved-seals",
+     "name": "强化圣印",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_thunderbolt"
+    },
+    {
+     "id": "calc-paladin-holy-unyielding-faith",
+     "name": "不灭信仰",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 4,
+     "change": "modified",
+     "icon": "spell_holy_unyieldingfaith"
+    },
+    {
+     "id": "calc-paladin-holy-voice-of-truth",
+     "name": "真理之音",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 1,
+     "change": "added",
+     "icon": "inv_misc_horn_03"
+    },
+    {
+     "id": "calc-paladin-holy-reverence",
+     "name": "敬畏",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 2,
+     "change": "added",
+     "icon": "spell_holy_divineillumination"
+    },
+    {
+     "id": "calc-paladin-holy-purifying-power",
+     "name": "净化之力",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_holy_purifyingpower"
+    },
+    {
+     "id": "calc-paladin-holy-infusion-of-light",
+     "name": "圣光灌注",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_paladin_infusionoflight"
+    },
+    {
+     "id": "calc-paladin-holy-illumination",
+     "name": "启发",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_greaterheal"
+    },
+    {
+     "id": "calc-paladin-holy-divine-favor",
+     "name": "神恩术",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "moved",
+     "icon": "spell_holy_heal"
+    },
+    {
+     "id": "calc-paladin-holy-divine-precision",
+     "name": "神圣精准",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_holy_healingfocus"
+    },
+    {
+     "id": "calc-paladin-holy-holy-shock",
+     "name": "神圣震击",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_searinglight"
+    },
+    {
+     "id": "calc-paladin-holy-consecrated-ground",
+     "name": "奉献之地",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_holy_innerfire"
+    },
+    {
+     "id": "calc-paladin-holy-holy-power",
+     "name": "神圣强化",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_power"
+    },
+    {
+     "id": "calc-paladin-holy-light-s-vigil",
+     "name": "圣光守望",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_paladin_judgementofthepure"
+    }
+   ]
+  },
+  {
+   "title": "防护",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 46 V115",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 46 V115",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 154 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 154 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-paladin-protection-toughness",
+     "name": "坚韧",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "moved",
+     "icon": "spell_holy_devotion"
+    },
+    {
+     "id": "paladin-redoubt",
+     "name": "盾牌壁垒",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_defend"
+    },
+    {
+     "id": "calc-paladin-protection-precision",
+     "name": "精确",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_rogue_ambush"
+    },
+    {
+     "id": "calc-paladin-protection-guardian-s-favor",
+     "name": "守护者的宠爱",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_sealofprotection"
+    },
+    {
+     "id": "calc-paladin-protection-anticipation",
+     "name": "预知",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 4,
+     "change": "modified",
+     "icon": "spell_magic_lesserinvisibilty"
+    },
+    {
+     "id": "calc-paladin-protection-improved-seal-of-fury",
+     "name": "强化愤怒圣印",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 1,
+     "change": "added",
+     "icon": "spell_holy_righteousnessaura"
+    },
+    {
+     "id": "calc-paladin-protection-improved-righteous-fury",
+     "name": "强化正义之怒",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_sealoffury"
+    },
+    {
+     "id": "calc-paladin-protection-shield-specialization",
+     "name": "盾牌专精",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "inv_shield_06"
+    },
+    {
+     "id": "calc-paladin-protection-sacred-duty",
+     "name": "神圣职责",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 4,
+     "change": "added",
+     "icon": "spell_holy_divineintervention"
+    },
+    {
+     "id": "calc-paladin-protection-swift-judgement",
+     "name": "迅捷审判",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_paladin_judgementred"
+    },
+    {
+     "id": "calc-paladin-protection-one-handed-weapon-specialization",
+     "name": "单手武器专精",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "inv_sword_20"
+    },
+    {
+     "id": "calc-paladin-protection-improved-hammer-of-justice",
+     "name": "强化制裁之锤",
+     "maxRanks": 3,
+     "row": 4,
+     "col": 3,
+     "change": "moved",
+     "icon": "spell_holy_sealofmight"
+    },
+    {
+     "id": "calc-paladin-protection-templar-s-bulwark",
+     "name": "圣殿骑士壁垒",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_paladin_shieldofthetemplar"
+    },
+    {
+     "id": "calc-paladin-protection-reckoning",
+     "name": "清算",
+     "maxRanks": 5,
+     "row": 5,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_blessingofstrength"
+    },
+    {
+     "id": "calc-paladin-protection-iron-creed",
+     "name": "钢铁信条",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_holy_improvedresistanceauras"
+    },
+    {
+     "id": "calc-paladin-protection-holy-shield",
+     "name": "神圣之盾",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_holy_blessingofprotection"
+    }
+   ]
+  },
+  {
+   "title": "惩戒",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-paladin-retribution-deflection",
+     "name": "偏斜",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "moved",
+     "icon": "ability_parry"
+    },
+    {
+     "id": "calc-paladin-retribution-benediction",
+     "name": "祈福",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_frost_windwalkon"
+    },
+    {
+     "id": "calc-paladin-retribution-improved-judgement",
+     "name": "强化审判",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_holy_righteousfury"
+    },
+    {
+     "id": "calc-paladin-retribution-holy-conduit",
+     "name": "神圣导能",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 2,
+     "change": "added",
+     "icon": "spell_holy_devineaegis"
+    },
+    {
+     "id": "calc-paladin-retribution-conviction",
+     "name": "定罪",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_retributionaura"
+    },
+    {
+     "id": "calc-paladin-retribution-vindication",
+     "name": "辩护",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_holy_vindication"
+    },
+    {
+     "id": "calc-paladin-retribution-sanctified-judgement",
+     "name": "神圣审判",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_paladin_judgementblue"
+    },
+    {
+     "id": "calc-paladin-retribution-seal-of-command",
+     "name": "命令圣印",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "ability_warrior_innerrage"
+    },
+    {
+     "id": "calc-paladin-retribution-pursuit-of-justice",
+     "name": "正义追击",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 4,
+     "change": "modified",
+     "icon": "spell_holy_persuitofjustice"
+    },
+    {
+     "id": "calc-paladin-retribution-eye-for-an-eye",
+     "name": "以眼还眼",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_holy_eyeforaneye"
+    },
+    {
+     "id": "calc-paladin-retribution-sacred-arbiter",
+     "name": "神圣仲裁者",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "added",
+     "icon": "inv_sword_08"
+    },
+    {
+     "id": "calc-paladin-retribution-two-handed-weapon-specialization",
+     "name": "双手武器专精",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 1,
+     "change": "unchanged",
+     "icon": "inv_hammer_04"
+    },
+    {
+     "id": "calc-paladin-retribution-vengeance",
+     "name": "复仇",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_racial_avatar"
+    },
+    {
+     "id": "calc-paladin-retribution-repentance",
+     "name": "忏悔",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_prayerofhealing"
+    },
+    {
+     "id": "calc-paladin-retribution-champion-of-the-light",
+     "name": "光芒勇士",
+     "maxRanks": 3,
+     "row": 6,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_paladin_enlightenedjudgements"
+    },
+    {
+     "id": "calc-paladin-retribution-instrument-of-law",
+     "name": "律法之器",
+     "maxRanks": 2,
+     "row": 6,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_holy_divinepurpose"
+    },
+    {
+     "id": "calc-paladin-retribution-twist-of-light",
+     "name": "圣光扭转",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "spell_holy_blessedresillience"
+    }
+   ]
+  }
+ ],
+ "refs": [
+  {
+   "id": "calc-paladin-holy-divine-strength",
+   "name": "神圣之力",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的力量提高10%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的力量提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-divine-intellect",
+   "name": "神圣智慧",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的智力值上限提高10%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的智力值上限提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-healing-light",
+   "name": "治疗之光",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在神圣较低层投入 5 点",
+   "effect": "等级 3：使你的圣光术、圣光闪现和神圣震击的治疗量提高12%。",
+   "changeNote": "改动摘要：从第3层移到第2层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的圣光术、圣光闪现和神圣震击的治疗量提高4%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-spiritual-focus",
+   "name": "精神集中",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在神圣较低层投入 5 点",
+   "effect": "等级 2：使你的圣光闪现、圣光术和圣光守望有70%的几率在受到伤害时不损失施法时间。",
+   "changeNote": "改动摘要：最高等级从5变为2。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的圣光闪现、圣光术和圣光守望有35%的几率在受到伤害时不损失施法时间。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-improved-seals",
+   "name": "强化圣印",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在神圣较低层投入 5 点",
+   "effect": "等级 3：使你的圣印和审判造成的伤害提高15%。",
+   "changeNote": "改动摘要：经典旧世中名为强化正义圣印。最高等级从5变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的圣印和审判造成的伤害提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-unyielding-faith",
+   "name": "不灭信仰",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在神圣较低层投入 5 点",
+   "effect": "等级 2：使你受到的恐惧和迷惑效果的持续时间缩短30%。",
+   "changeNote": "改动摘要：从第3层移到第2层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你受到的恐惧和迷惑效果的持续时间缩短15%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-voice-of-truth",
+   "name": "真理之音",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 3 层 · 需在神圣较低层投入 10 点",
+   "effect": "等级 1：使你免疫沉默和打断效果，持续6秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你免疫沉默和打断效果，持续6秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-reverence",
+   "name": "敬畏",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 3 层 · 需在神圣较低层投入 10 点",
+   "effect": "等级 3：使你在施法时仍保持30%的法力值恢复速度。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你在施法时仍保持10%的法力值恢复速度。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-purifying-power",
+   "name": "净化之力",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 3 层 · 需在神圣较低层投入 10 点",
+   "effect": "等级 2：使你的清洁术和纯净术法力消耗降低20%，并使驱邪术和神圣愤怒的冷却时间缩短33%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的清洁术和纯净术法力消耗降低10%，并使驱邪术和神圣愤怒的冷却时间缩短17%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-infusion-of-light",
+   "name": "圣光灌注",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 4 层 · 需在神圣较低层投入 15 点",
+   "effect": "等级 2：你的神圣震击和圣光闪现造成爆击时，使你在15秒内下一次圣光术的施法时间缩短1.0秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的神圣震击和圣光闪现造成爆击时，使你在15秒内下一次圣光术的施法时间缩短0.5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-illumination",
+   "name": "启发",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 4 层 · 需在神圣较低层投入 15 点 · 前置：敬畏 3 点",
+   "effect": "等级 5：在你的圣光闪现、圣光术、圣光守夜或神圣震击治疗法术造成爆击效果后，你有100%的几率回复相当于该法术基础消耗50%的法力值。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "在你的圣光闪现、圣光术、圣光守夜或神圣震击治疗法术造成爆击效果后，你有20%的几率回复相当于该法术基础消耗50%的法力值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-divine-favor",
+   "name": "神恩术",
+   "tag": "移动",
+   "condition": "最高 1 级 · 第 4 层 · 需在神圣较低层投入 15 点",
+   "effect": "等级 1：激活之后，使你的下一个圣光闪现、圣光术或神圣震击有100%的几率造成极效治疗效果。",
+   "changeNote": "改动摘要：从第5层移到第4层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活之后，使你的下一个圣光闪现、圣光术或神圣震击有100%的几率造成极效治疗效果。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-divine-precision",
+   "name": "神圣精准",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 5 层 · 需在神圣较低层投入 20 点 · 前置：神圣震击 1 点",
+   "effect": "等级 3：使你的神圣法术命中几率提高18%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的神圣法术命中几率提高6%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-holy-shock",
+   "name": "神圣震击",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在神圣较低层投入 20 点",
+   "effect": "等级 1：以神圣能量冲击目标，对一个敌人造成129到139点神圣伤害，或者为一个友方目标恢复110到118点生命值。",
+   "changeNote": "改动摘要：从第7层移到第5层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "以神圣能量冲击目标，对一个敌人造成129到139点神圣伤害，或者为一个友方目标恢复110到118点生命值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-consecrated-ground",
+   "name": "奉献之地",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 5 层 · 需在神圣较低层投入 20 点",
+   "effect": "等级 2：使你的神圣法术对最先进入你的奉献的4个敌人造成的伤害提高10%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的神圣法术对最先进入你的奉献的4个敌人造成的伤害提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-holy-power",
+   "name": "神圣强化",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在神圣较低层投入 25 点",
+   "effect": "等级 5：使你的神圣震击和神圣打击的爆击几率提高15%，其他所有法术的爆击几率提高5%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的神圣震击和神圣打击的爆击几率提高3%，其他所有法术的爆击几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-holy-light-s-vigil",
+   "name": "圣光守望",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在神圣较低层投入 30 点 · 前置：神圣震击 1 点",
+   "effect": "等级 1：对目标施加圣光守望，持续30秒。你下一次对其施放的神圣震击不触发冷却：若目标是敌人，额外受到175到189点神圣伤害，并返还圣光守望75%的法力消耗；若目标是盟友，则为其小队恢复315到333点生命值。每个小队同时只能存在一个圣光守望。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "对目标施加圣光守望，持续30秒。你下一次对其施放的神圣震击不触发冷却：若目标是敌人，额外受到175到189点神圣伤害，并返还圣光守望75%的法力消耗；若目标是盟友，则为其小队恢复315到333点生命值。每个小队同时只能存在一个圣光守望。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-toughness",
+   "name": "坚韧",
+   "tag": "移动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你因装备而获得的护甲值提高10%。",
+   "changeNote": "改动摘要：从第2层移到第1层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你因装备而获得的护甲值提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "paladin-redoubt",
+   "name": "盾牌壁垒",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：对你造成伤害的近战攻击有10%的几率使你的格挡几率提高20%。持续10秒或格挡5次。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "对你造成伤害的近战攻击有10%的几率使你的格挡几率提高4%。持续10秒或格挡5次。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-precision",
+   "name": "精确",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 3：使你击中目标的几率提高3%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你击中目标的几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-guardian-s-favor",
+   "name": "守护者的宠爱",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 2：使你的保护祝福冷却时间缩短2分钟，并使自由祝福持续时间延长6秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的保护祝福冷却时间缩短1分钟，并使自由祝福持续时间延长3秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-anticipation",
+   "name": "预知",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在防护较低层投入 5 点",
+   "effect": "等级 5：使你的防御技能提高20点。",
+   "changeNote": "改动摘要：从第3层移到第2层。数值调整：20点（经典旧世：10点）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的防御技能提高4点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-improved-seal-of-fury",
+   "name": "强化愤怒圣印",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 3 层 · 需在防护较低层投入 10 点",
+   "effect": "等级 1：愤怒圣印提供的护盾被完全吸收时，恢复0点法力值。攻击者每比你高一级，恢复量提高15%，最高提高45%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "愤怒圣印提供的护盾被完全吸收时，恢复0点法力值。攻击者每比你高一级，恢复量提高15%，最高提高45%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-improved-righteous-fury",
+   "name": "强化正义之怒",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在防护较低层投入 10 点",
+   "effect": "等级 3：当正义之怒处于激活状态时，你所承受的一切伤害降低6%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "当正义之怒处于激活状态时，你所承受的一切伤害降低2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-shield-specialization",
+   "name": "盾牌专精",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在防护较低层投入 10 点 · 前置：盾牌壁垒 5 点",
+   "effect": "等级 3：使你的盾牌吸收的伤害提高30%，并使你的格挡有100%的几率恢复最大法力值的6%。每3秒最多触发一次。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的盾牌吸收的伤害提高10%，并使你的格挡有33%的几率恢复最大法力值的6%。每3秒最多触发一次。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-sacred-duty",
+   "name": "神圣职责",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 3 层 · 需在防护较低层投入 10 点",
+   "effect": "等级 2：使你的耐力总值提高4%，并使圣盾术、圣佑术和圣殿骑士壁垒的冷却时间缩短60秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的耐力总值提高2%，并使圣盾术、圣佑术和圣殿骑士壁垒的冷却时间缩短30秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-swift-judgement",
+   "name": "迅捷审判",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在防护较低层投入 15 点 · 前置：强化愤怒圣印 1 点",
+   "effect": "等级 1：结束审判的剩余冷却时间，并使你下一次审判消耗的法力值降低100%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "结束审判的剩余冷却时间，并使你下一次审判消耗的法力值降低100%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-one-handed-weapon-specialization",
+   "name": "单手武器专精",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 4 层 · 需在防护较低层投入 15 点",
+   "effect": "等级 3：使你的单手近战武器所能造成的伤害提高10%。",
+   "changeNote": "改动摘要：最高等级从5变为3。从第6层移到第4层。数值调整：10%（经典旧世：6%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的单手近战武器所能造成的伤害提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-improved-hammer-of-justice",
+   "name": "强化制裁之锤",
+   "tag": "移动",
+   "condition": "最高 3 级 · 第 4 层 · 需在防护较低层投入 15 点",
+   "effect": "等级 3：使你的制裁之锤的冷却时间减少15秒。",
+   "changeNote": "改动摘要：从第2列移到第3列。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的制裁之锤的冷却时间减少5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-templar-s-bulwark",
+   "name": "圣殿骑士壁垒",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 1：激活后获得一个吸收护盾，数值相当于你最大生命值的100%，持续8秒。同时使你获得自律效果，持续1分钟。自律效果存在时无法施放。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活后获得一个吸收护盾，数值相当于你最大生命值的100%，持续8秒。同时使你获得自律效果，持续1分钟。自律效果存在时无法施放。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-reckoning",
+   "name": "清算",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 5 层 · 需在防护较低层投入 20 点",
+   "effect": "等级 5：使你在格挡一次近战攻击后有40%的几率获得一次额外攻击，受到非周期性爆击之后有100%%的几率获得一次额外攻击。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你在格挡一次近战攻击后有8%的几率获得一次额外攻击，受到非周期性爆击之后有20%%的几率获得一次额外攻击。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-iron-creed",
+   "name": "钢铁信条",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 6 层 · 需在防护较低层投入 25 点",
+   "effect": "等级 5：使你的神圣打击产生的威胁值提高25%。正义之怒生效时，神圣打击还会使你受到的伤害降低10%，持续6秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的神圣打击产生的威胁值提高5%。正义之怒生效时，神圣打击还会使你受到的伤害降低2%，持续6秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-protection-holy-shield",
+   "name": "神圣之盾",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 7 层 · 需在防护较低层投入 30 点 · 前置：圣殿骑士壁垒 1 点",
+   "effect": "等级 1：使你的格挡几率提高30%，持续10秒。在此期间每次成功格挡都会对攻击者造成110点神圣伤害。神圣之盾造成的伤害额外产生20%的威胁值。每次格挡消耗一层充能。共4层。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的格挡几率提高30%，持续10秒。在此期间每次成功格挡都会对攻击者造成110点神圣伤害。神圣之盾造成的伤害额外产生20%的威胁值。每次格挡消耗一层充能。共4层。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-deflection",
+   "name": "偏斜",
+   "tag": "移动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的招架几率提高5%。",
+   "changeNote": "改动摘要：从第2层移到第1层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的招架几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-benediction",
+   "name": "祈福",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你所有瞬发法术和技能所消耗的法力值降低10%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你所有瞬发法术和技能所消耗的法力值降低2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-improved-judgement",
+   "name": "强化审判",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在惩戒较低层投入 5 点",
+   "effect": "等级 2：使你的审判技能冷却时间缩短2秒。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的审判技能冷却时间缩短1秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-holy-conduit",
+   "name": "神圣导能",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 2 层 · 需在惩戒较低层投入 5 点",
+   "effect": "等级 2：使你的奉献、神圣愤怒、驱邪术和愤怒之锤法力消耗降低40%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的奉献、神圣愤怒、驱邪术和愤怒之锤法力消耗降低20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-conviction",
+   "name": "定罪",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在惩戒较低层投入 5 点",
+   "effect": "等级 5：使你的近战攻击造成爆击的几率提高5%。",
+   "changeNote": "改动摘要：从第3层移到第2层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的近战攻击造成爆击的几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-vindication",
+   "name": "辩护",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在惩戒较低层投入 10 点",
+   "effect": "等级 3：使你的伤害性近战攻击有几率令目标的攻击强度降低6点，并使你的攻击强度提高3%，持续30秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的伤害性近战攻击有几率令目标的攻击强度降低2点，并使你的攻击强度提高1%，持续30秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-sanctified-judgement",
+   "name": "神圣审判",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 3 层 · 需在惩戒较低层投入 10 点",
+   "effect": "等级 3：使你的审判有100%几率返还被审判圣印法力消耗的60%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的审判有33%几率返还被审判圣印法力消耗的20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-seal-of-command",
+   "name": "命令圣印",
+   "tag": "未改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在惩戒较低层投入 10 点",
+   "effect": "等级 1：使圣骑士在攻击时有一定几率对目标造成与攻击伤害的70%等量的神圣伤害。圣骑士在同一时间内只能激活一种圣印。持续30秒。 释放这种圣印的能量将对目标造成审判效果，对其立刻造成46.5点神圣伤害，若目标昏迷或瘫痪则造成93到101点神圣伤害。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使圣骑士在攻击时有一定几率对目标造成与攻击伤害的70%等量的神圣伤害。圣骑士在同一时间内只能激活一种圣印。持续30秒。 释放这种圣印的能量将对目标造成审判效果，对其立刻造成46.5点神圣伤害，若目标昏迷或瘫痪则造成93到101点神圣伤害。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-pursuit-of-justice",
+   "name": "正义追击",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 3 层 · 需在惩戒较低层投入 10 点",
+   "effect": "等级 2：使你的移动速度和坐骑移动速度提高15%。这个效果不与其它同类效果叠加。",
+   "changeNote": "改动摘要：数值调整：15%（经典旧世：8%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的移动速度和坐骑移动速度提高8%。这个效果不与其它同类效果叠加。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-eye-for-an-eye",
+   "name": "以眼还眼",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 4 层 · 需在惩戒较低层投入 15 点",
+   "effect": "等级 2：所有对你造成的爆击也会对攻击者造成相当于你所受伤害10%的伤害。以眼还眼造成的伤害不会超过圣骑士总生命值的50%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "所有对你造成的爆击也会对攻击者造成相当于你所受伤害5%的伤害。以眼还眼造成的伤害不会超过圣骑士总生命值的50%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-sacred-arbiter",
+   "name": "神圣仲裁者",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在惩戒较低层投入 15 点",
+   "effect": "等级 1：使你的神圣打击造成的伤害提高20%，并刷新目标身上的所有审判效果。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的神圣打击造成的伤害提高20%，并刷新目标身上的所有审判效果。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-two-handed-weapon-specialization",
+   "name": "双手武器专精",
+   "tag": "未改动",
+   "condition": "最高 3 级 · 第 5 层 · 需在惩戒较低层投入 20 点",
+   "effect": "等级 3：使你的双手近战武器造成的伤害提高6%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的双手近战武器造成的伤害提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-vengeance",
+   "name": "复仇",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 5 层 · 需在惩戒较低层投入 20 点 · 前置：神圣审判 3 点",
+   "effect": "等级 3：非周期性伤害造成爆击后，你造成的物理和神圣伤害提高3%，持续30秒。最多叠加3次。",
+   "changeNote": "改动摘要：最高等级从5变为3。从第6层移到第5层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "非周期性伤害造成爆击后，你造成的物理和神圣伤害提高1%，持续30秒。最多叠加3次。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-repentance",
+   "name": "忏悔",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在惩戒较低层投入 20 点",
+   "effect": "等级 1：使敌方目标进入冥想状态，最多瘫痪6秒。造成任何伤害都会唤醒目标。只对人型生物有效。",
+   "changeNote": "改动摘要：从第7层移到第5层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使敌方目标进入冥想状态，最多瘫痪6秒。造成任何伤害都会唤醒目标。只对人型生物有效。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-champion-of-the-light",
+   "name": "光芒勇士",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 6 层 · 需在惩戒较低层投入 25 点",
+   "effect": "等级 3：使你的法术伤害提高，最多相当于你智力的60%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的法术伤害提高，最多相当于你智力的20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-instrument-of-law",
+   "name": "律法之器",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 6 层 · 需在惩戒较低层投入 25 点",
+   "effect": "等级 2：使你的愤怒之锤施法时间缩短1.0秒，并在正义之怒未激活时，你产生的所有威胁值降低20%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的愤怒之锤施法时间缩短0.5秒，并在正义之怒未激活时，你产生的所有威胁值降低10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-paladin-retribution-twist-of-light",
+   "name": "圣光扭转",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在惩戒较低层投入 30 点",
+   "effect": "等级 1：使你的圣印法术的法力消耗降低20%。当你用另一个圣印替换命令圣印、正义圣印、愤怒圣印或公正圣印时，你会获得被替换圣印的回响。你的下一次近战攻击会触发被替换圣印的效果，并消耗该回响。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的圣印法术的法力消耗降低20%。当你用另一个圣印替换命令圣印、正义圣印、愤怒圣印或公正圣印时，你会获得被替换圣印的回响。你的下一次近战攻击会触发被替换圣印的效果，并消耗该回响。"
+    }
+   ]
+  }
+ ]
+}

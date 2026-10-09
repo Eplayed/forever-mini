@@ -1,7 +1,7 @@
 {
  "classId": "hunter",
  "classNameCn": "猎人",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -46,7 +54,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-deadly-aspects",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-耐久训练",
@@ -75,7 +85,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-endurance-training",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-集中火力",
@@ -104,7 +116,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-focused-fire",
+     "changeState": "added"
     },
     {
      "id": "hunter-0-强化灵猴守护",
@@ -114,7 +128,7 @@
      "nameCn": "强化灵猴守护",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -133,7 +147,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-improved-aspect-of-the-monkey",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-寻路",
@@ -162,7 +178,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-pathfinding",
+     "changeState": "moved"
     },
     {
      "id": "hunter-0-强化复活宠物",
@@ -172,7 +190,7 @@
      "nameCn": "强化复活宠物",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -191,7 +209,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-improved-revive-pet",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-0-野兽迅捷",
@@ -201,7 +221,7 @@
      "nameCn": "野兽迅捷",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -220,7 +240,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-bestial-swiftness",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-狂怒释放",
@@ -249,7 +271,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-unleashed-fury",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-强化治疗宠物",
@@ -278,7 +302,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-improved-mend-pet",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-凶暴",
@@ -307,7 +333,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-ferocity",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-召唤雄鹰",
@@ -336,7 +364,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-summon-hawk",
+     "changeState": "added"
     },
     {
      "id": "hunter-0-灵魂联结",
@@ -346,7 +376,7 @@
      "nameCn": "灵魂联结",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -365,7 +395,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-spirit-bond",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-胁迫",
@@ -396,7 +428,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-intimidation",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-野兽戒律",
@@ -425,7 +459,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-bestial-discipline",
+     "changeState": "modified"
     },
     {
      "id": "hunter-0-狂乱",
@@ -435,7 +471,7 @@
      "nameCn": "狂乱",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -456,7 +492,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-frenzy",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-0-狂野怒火",
@@ -466,7 +504,7 @@
      "nameCn": "狂野怒火",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -487,7 +525,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-bestial-wrath",
+     "changeState": "unchanged"
     }
    ]
   },
@@ -523,7 +563,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-hawk-eye",
+     "changeState": "moved"
     },
     {
      "id": "hunter-1-强化震荡射击",
@@ -533,7 +575,7 @@
      "nameCn": "强化震荡射击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -552,7 +594,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-improved-concussive-shot",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-1-致命攻击",
@@ -581,7 +625,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-lethal-attacks",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-强化钉刺",
@@ -610,7 +656,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-improved-stings",
+     "changeState": "added"
     },
     {
      "id": "hunter-1-效率",
@@ -639,7 +687,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-efficiency",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-精确瞄准",
@@ -668,7 +718,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-careful-aim",
+     "changeState": "added"
     },
     {
      "id": "hunter-1-疾速杀戮",
@@ -697,7 +749,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-rapid-killing",
+     "changeState": "added"
     },
     {
      "id": "hunter-1-强化奥术射击",
@@ -726,7 +780,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-improved-arcane-shot",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-独来独往",
@@ -755,7 +811,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-lone-wolf",
+     "changeState": "added"
     },
     {
      "id": "hunter-1-强击光环",
@@ -784,7 +842,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-trueshot-aura",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-致死射击",
@@ -815,7 +875,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-mortal-shots",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-急速恢复",
@@ -825,7 +887,7 @@
      "nameCn": "急速恢复",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -846,7 +908,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-rapid-recuperation",
+     "changeState": "added"
     },
     {
      "id": "hunter-1-弹幕",
@@ -875,7 +939,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-barrage",
+     "changeState": "modified"
     },
     {
      "id": "hunter-1-驱散射击",
@@ -885,7 +951,7 @@
      "nameCn": "驱散射击",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -904,7 +970,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-scatter-shot",
+     "changeState": "moved"
     },
     {
      "id": "hunter-1-远程武器专精",
@@ -914,7 +982,7 @@
      "nameCn": "远程武器专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -933,7 +1001,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-ranged-weapon-specialization",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-1-狙击",
@@ -964,7 +1034,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-marksmanship-sniper-shot",
+     "changeState": "added"
     }
    ]
   },
@@ -1000,7 +1072,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-improved-tracking",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-偏斜",
@@ -1010,7 +1084,7 @@
      "nameCn": "偏斜",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1029,7 +1103,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-deflection",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-2-诱捕",
@@ -1058,7 +1134,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-entrapment",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-野蛮打击",
@@ -1087,7 +1165,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-savage-strikes",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-生存专家",
@@ -1116,7 +1196,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-survivalist",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-强化摔绊",
@@ -1145,7 +1227,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-improved-wing-clip",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-灵巧陷阱",
@@ -1155,7 +1239,7 @@
      "nameCn": "灵巧陷阱",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1174,7 +1258,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-clever-traps",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-2-稳固",
@@ -1203,7 +1289,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-surefooted",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-威慑",
@@ -1213,7 +1301,7 @@
      "nameCn": "威慑",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1232,7 +1320,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-deterrence",
+     "changeState": "unchanged"
     },
     {
      "id": "hunter-2-生存战术",
@@ -1261,7 +1351,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-survival-tactics",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-掠食者之锋",
@@ -1290,7 +1382,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-predator-s-edge",
+     "changeState": "added"
     },
     {
      "id": "hunter-2-反击",
@@ -1321,7 +1415,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-counterattack",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-游刃有余",
@@ -1350,7 +1446,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-resourcefulness",
+     "changeState": "added"
     },
     {
      "id": "hunter-2-暴露猎物",
@@ -1379,7 +1477,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-expose-prey",
+     "changeState": "added"
     },
     {
      "id": "hunter-2-生存专家的戒律",
@@ -1408,7 +1508,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-survivalist-s-discipline",
+     "changeState": "added"
     },
     {
      "id": "hunter-2-陆行鸟踢击",
@@ -1437,7 +1539,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-strider-kick",
+     "changeState": "added"
     },
     {
      "id": "hunter-2-闪电反射",
@@ -1466,7 +1570,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-lightning-reflexes",
+     "changeState": "modified"
     },
     {
      "id": "hunter-2-裂伤打击",
@@ -1497,7 +1603,9 @@
        "url": "https://nieyi.cn/f/talents/hunter.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-hunter-survival-lacerating-strikes",
+     "changeState": "added"
     }
    ]
   }
@@ -1507,5 +1615,13 @@
   "nameConflict": 9,
   "onlyInOneSource": 0
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/hunter",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }

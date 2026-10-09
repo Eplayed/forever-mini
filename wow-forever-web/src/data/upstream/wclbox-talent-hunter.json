@@ -1,0 +1,1362 @@
+{
+ "meta": {
+  "classId": "hunter",
+  "source": "https://wowforever.wclbox.com/tianfu/hunter",
+  "scrapedAt": "2026-10-09",
+  "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
+ },
+ "grids": [
+  {
+   "title": "野兽控制",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 154 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V277",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V277",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-hunter-beast-mastery-deadly-aspects",
+     "name": "致命守护",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_nature_ravenform"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-endurance-training",
+     "name": "耐久训练",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_nature_reincarnation"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-focused-fire",
+     "name": "集中火力",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 1,
+     "change": "added",
+     "icon": "inv_weapon_crossbow_10"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-improved-aspect-of-the-monkey",
+     "name": "强化灵猴守护",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_hunter_aspectofthemonkey"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-pathfinding",
+     "name": "寻路",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 3,
+     "change": "moved",
+     "icon": "ability_mount_jungletiger"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-improved-revive-pet",
+     "name": "强化复活宠物",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 4,
+     "change": "unchanged",
+     "icon": "ability_hunter_beastsoothe"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-bestial-swiftness",
+     "name": "野兽迅捷",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_druid_dash"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-unleashed-fury",
+     "name": "狂怒释放",
+     "maxRanks": 5,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_bullrush"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-improved-mend-pet",
+     "name": "强化治疗宠物",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_hunter_mendpet"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-ferocity",
+     "name": "凶暴",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "inv_misc_monsterclaw_04"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-summon-hawk",
+     "name": "召唤雄鹰",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_hunter_animalhandler"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-spirit-bond",
+     "name": "灵魂联结",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_druid_demoralizingroar"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-intimidation",
+     "name": "胁迫",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_devour"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-bestial-discipline",
+     "name": "野兽戒律",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 4,
+     "change": "modified",
+     "icon": "spell_nature_abolishmagic"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-frenzy",
+     "name": "狂乱",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "inv_misc_monsterclaw_03"
+    },
+    {
+     "id": "calc-hunter-beast-mastery-bestial-wrath",
+     "name": "狂野怒火",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "ability_druid_ferociousbite"
+    }
+   ]
+  },
+  {
+   "title": "射击",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 100 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 100 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 154 V223",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M27 154 V223",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 208 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 208 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-hunter-marksmanship-hawk-eye",
+     "name": "鹰眼",
+     "maxRanks": 3,
+     "row": 1,
+     "col": 1,
+     "change": "moved",
+     "icon": "ability_townwatch"
+    },
+    {
+     "id": "calc-hunter-marksmanship-improved-concussive-shot",
+     "name": "强化震荡射击",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "unchanged",
+     "icon": "spell_frost_stun"
+    },
+    {
+     "id": "calc-hunter-marksmanship-lethal-attacks",
+     "name": "致命攻击",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_searingarrow"
+    },
+    {
+     "id": "calc-hunter-marksmanship-improved-stings",
+     "name": "强化钉刺",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_hunter_quickshot"
+    },
+    {
+     "id": "calc-hunter-marksmanship-efficiency",
+     "name": "效率",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "spell_frost_wizardmark"
+    },
+    {
+     "id": "calc-hunter-marksmanship-careful-aim",
+     "name": "精确瞄准",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "added",
+     "icon": "ability_hunter_zenarchery"
+    },
+    {
+     "id": "calc-hunter-marksmanship-rapid-killing",
+     "name": "疾速杀戮",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_hunter_rapidkilling"
+    },
+    {
+     "id": "calc-hunter-marksmanship-improved-arcane-shot",
+     "name": "强化奥术射击",
+     "maxRanks": 5,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_impalingbolt"
+    },
+    {
+     "id": "calc-hunter-marksmanship-lone-wolf",
+     "name": "独来独往",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_mount_whitedirewolf"
+    },
+    {
+     "id": "calc-hunter-marksmanship-trueshot-aura",
+     "name": "强击光环",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_trueshot"
+    },
+    {
+     "id": "calc-hunter-marksmanship-mortal-shots",
+     "name": "致死射击",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_piercedamage"
+    },
+    {
+     "id": "calc-hunter-marksmanship-rapid-recuperation",
+     "name": "急速恢复",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_hunter_rapidregeneration"
+    },
+    {
+     "id": "calc-hunter-marksmanship-barrage",
+     "name": "弹幕",
+     "maxRanks": 3,
+     "row": 5,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_upgrademoonglaive"
+    },
+    {
+     "id": "calc-hunter-marksmanship-scatter-shot",
+     "name": "驱散射击",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 4,
+     "change": "moved",
+     "icon": "ability_golemstormbolt"
+    },
+    {
+     "id": "calc-hunter-marksmanship-ranged-weapon-specialization",
+     "name": "远程武器专精",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "inv_weapon_rifle_06"
+    },
+    {
+     "id": "calc-hunter-marksmanship-sniper-shot",
+     "name": "狙击",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "hunter_pvp_snipershot"
+    }
+   ]
+  },
+  {
+   "title": "生存",
+   "connectors": [
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-idle"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
+     "cls": "tf-arrowhead tf-arrowhead-active"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 154 V169",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    }
+   ],
+   "viewBox": "0 0 216 378",
+   "nodes": [
+    {
+     "id": "calc-hunter-survival-improved-tracking",
+     "name": "强化追踪",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 2,
+     "change": "modified",
+     "icon": "inv_misc_head_dragon_black"
+    },
+    {
+     "id": "calc-hunter-survival-deflection",
+     "name": "偏斜",
+     "maxRanks": 5,
+     "row": 1,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "ability_parry"
+    },
+    {
+     "id": "calc-hunter-survival-entrapment",
+     "name": "诱捕",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 1,
+     "change": "modified",
+     "icon": "spell_nature_stranglevines"
+    },
+    {
+     "id": "calc-hunter-survival-savage-strikes",
+     "name": "野蛮打击",
+     "maxRanks": 2,
+     "row": 2,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_racial_bloodrage"
+    },
+    {
+     "id": "calc-hunter-survival-survivalist",
+     "name": "生存专家",
+     "maxRanks": 5,
+     "row": 2,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_shadow_twilight"
+    },
+    {
+     "id": "calc-hunter-survival-improved-wing-clip",
+     "name": "强化摔绊",
+     "maxRanks": 3,
+     "row": 2,
+     "col": 4,
+     "change": "modified",
+     "icon": "ability_rogue_trip"
+    },
+    {
+     "id": "calc-hunter-survival-clever-traps",
+     "name": "灵巧陷阱",
+     "maxRanks": 2,
+     "row": 3,
+     "col": 1,
+     "change": "unchanged",
+     "icon": "spell_nature_timestop"
+    },
+    {
+     "id": "calc-hunter-survival-surefooted",
+     "name": "稳固",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 2,
+     "change": "modified",
+     "icon": "ability_kick"
+    },
+    {
+     "id": "calc-hunter-survival-deterrence",
+     "name": "威慑",
+     "maxRanks": 1,
+     "row": 3,
+     "col": 3,
+     "change": "unchanged",
+     "icon": "ability_whirlwind"
+    },
+    {
+     "id": "calc-hunter-survival-survival-tactics",
+     "name": "生存战术",
+     "maxRanks": 2,
+     "row": 4,
+     "col": 1,
+     "change": "modified",
+     "icon": "ability_ensnare"
+    },
+    {
+     "id": "calc-hunter-survival-predator-s-edge",
+     "name": "掠食者之锋",
+     "maxRanks": 5,
+     "row": 4,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_dualwield"
+    },
+    {
+     "id": "calc-hunter-survival-counterattack",
+     "name": "反击",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "modified",
+     "icon": "ability_warrior_challange"
+    },
+    {
+     "id": "calc-hunter-survival-resourcefulness",
+     "name": "游刃有余",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 1,
+     "change": "added",
+     "icon": "ability_hunter_resourcefulness"
+    },
+    {
+     "id": "calc-hunter-survival-expose-prey",
+     "name": "暴露猎物",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_hunter_swiftstrike"
+    },
+    {
+     "id": "calc-hunter-survival-survivalist-s-discipline",
+     "name": "生存专家的戒律",
+     "maxRanks": 2,
+     "row": 5,
+     "col": 3,
+     "change": "added",
+     "icon": "ability_hunter_mastertactitian"
+    },
+    {
+     "id": "calc-hunter-survival-strider-kick",
+     "name": "陆行鸟踢击",
+     "maxRanks": 1,
+     "row": 5,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_hunter_pet_tallstrider"
+    },
+    {
+     "id": "calc-hunter-survival-lightning-reflexes",
+     "name": "闪电反射",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_nature_invisibilty"
+    },
+    {
+     "id": "calc-hunter-survival-lacerating-strikes",
+     "name": "裂伤打击",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_gouge"
+    }
+   ]
+  }
+ ],
+ "refs": [
+  {
+   "id": "calc-hunter-beast-mastery-deadly-aspects",
+   "name": "致命守护",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：雄鹰守护激活时，自动射击有10%的几率使远程攻击速度提高30%，持续12秒。野兽守护激活时，所有近战自动攻击都有10%的几率使近战攻击速度提高30%，持续12秒。",
+   "changeNote": "改动摘要：经典旧世中名为强化雄鹰守护。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "雄鹰守护激活时，自动射击有2%的几率使远程攻击速度提高30%，持续12秒。野兽守护激活时，所有近战自动攻击都有2%的几率使近战攻击速度提高30%，持续12秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-endurance-training",
+   "name": "耐久训练",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的宠物生命值和护甲提高15%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物生命值和护甲提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-focused-fire",
+   "name": "集中火力",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 2 层 · 需在野兽控制较低层投入 5 点",
+   "effect": "等级 2：宠物激活时，使你和宠物造成的所有伤害提高2%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "宠物激活时，使你和宠物造成的所有伤害提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-improved-aspect-of-the-monkey",
+   "name": "强化灵猴守护",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在野兽控制较低层投入 5 点",
+   "effect": "等级 3：使你的灵猴守护提供的躲闪加成提高6%。此外，你的宠物获得灵猴守护效果的50%。",
+   "changeNote": "改动摘要：最高等级从5变为3。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的灵猴守护提供的躲闪加成提高2%。此外，你的宠物获得灵猴守护效果的50%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-pathfinding",
+   "name": "寻路",
+   "tag": "移动",
+   "condition": "最高 2 级 · 第 2 层 · 需在野兽控制较低层投入 5 点",
+   "effect": "等级 2：使你的猎豹守护和豹群守护的速度加成效果提高6%。",
+   "changeNote": "改动摘要：从第3层移到第2层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的猎豹守护和豹群守护的速度加成效果提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-improved-revive-pet",
+   "name": "强化复活宠物",
+   "tag": "未改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在野兽控制较低层投入 5 点",
+   "effect": "等级 2：使你的复活宠物法术的施法时间减少6秒，法力值消耗降低40%，宠物复活后的生命值提高30%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的复活宠物法术的施法时间减少3秒，法力值消耗降低20%，宠物复活后的生命值提高15%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-bestial-swiftness",
+   "name": "野兽迅捷",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在野兽控制较低层投入 10 点",
+   "effect": "等级 1：使你的宠物移动速度提高30%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物移动速度提高30%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-unleashed-fury",
+   "name": "狂怒释放",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 3 层 · 需在野兽控制较低层投入 10 点",
+   "effect": "等级 5：使你的宠物和雄鹰造成的伤害提高15%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物和雄鹰造成的伤害提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-improved-mend-pet",
+   "name": "强化治疗宠物",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 4 层 · 需在野兽控制较低层投入 15 点",
+   "effect": "等级 2：使你的治疗宠物每次治疗时有50%的几率净化宠物身上的1个诅咒、疾病、魔法或中毒效果，并使法力消耗降低20%。",
+   "changeNote": "改动摘要：从第2列移到第1列。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的治疗宠物每次治疗时有15%的几率净化宠物身上的1个诅咒、疾病、魔法或中毒效果，并使法力消耗降低10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-ferocity",
+   "name": "凶暴",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 4 层 · 需在野兽控制较低层投入 15 点",
+   "effect": "等级 5：使你的宠物和雄鹰的爆击几率提高10%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物和雄鹰的爆击几率提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-summon-hawk",
+   "name": "召唤雄鹰",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在野兽控制较低层投入 15 点",
+   "effect": "等级 1：命令一只雄鹰俯冲轰炸目标敌人，造成32点物理伤害并继续攻击18秒。同时最多只能激活2只雄鹰。召唤雄鹰与奥术射击共享冷却时间。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "命令一只雄鹰俯冲轰炸目标敌人，造成32点物理伤害并继续攻击18秒。同时最多只能激活2只雄鹰。召唤雄鹰与奥术射击共享冷却时间。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-spirit-bond",
+   "name": "灵魂联结",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在野兽控制较低层投入 20 点",
+   "effect": "等级 2：当你的宠物被激活后，你和你的宠物都会每5秒回复1%的生命值。",
+   "changeNote": "改动摘要：数值调整：5秒（经典旧世：10秒），1%（经典旧世：2%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "当你的宠物被激活后，你和你的宠物都会每10秒回复1%的生命值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-intimidation",
+   "name": "胁迫",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 5 层 · 需在野兽控制较低层投入 20 点 · 前置：野兽迅捷 1 点",
+   "effect": "等级 1：命令你的宠物在下次成功攻击时使目标昏迷3秒，且该次攻击的爆击几率提高100%。产生大量威胁值。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "命令你的宠物在下次成功攻击时使目标昏迷3秒，且该次攻击的爆击几率提高100%。产生大量威胁值。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-bestial-discipline",
+   "name": "野兽戒律",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 5 层 · 需在野兽控制较低层投入 20 点",
+   "effect": "等级 2：使你的宠物的集中值回复速度提高20%，并使你在施法时仍可保持50%的法力回复。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物的集中值回复速度提高10%，并使你在施法时仍可保持25%的法力回复。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-frenzy",
+   "name": "狂乱",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在野兽控制较低层投入 25 点 · 前置：凶暴 5 点",
+   "effect": "等级 5：使你的宠物有100%的几率在对敌人造成爆击后获得攻击速度提高30%的效果，持续8秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的宠物有20%的几率在对敌人造成爆击后获得攻击速度提高30%的效果，持续8秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-beast-mastery-bestial-wrath",
+   "name": "狂野怒火",
+   "tag": "未改动",
+   "condition": "最高 1 级 · 第 7 层 · 需在野兽控制较低层投入 30 点 · 前置：胁迫 1 点",
+   "effect": "等级 1：使宠物进入疯狂状态，对目标造成的伤害提高50%，持续18秒。在这种状态下，宠物不会有任何恐惧或怜悯，也无法停止下来，除非被杀死。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使宠物进入疯狂状态，对目标造成的伤害提高50%，持续18秒。在这种状态下，宠物不会有任何恐惧或怜悯，也无法停止下来，除非被杀死。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-hawk-eye",
+   "name": "鹰眼",
+   "tag": "移动",
+   "condition": "最高 3 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 3：使你的远程武器的射程延长6码。",
+   "changeNote": "改动摘要：从第3层移到第1层。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的远程武器的射程延长2码。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-improved-concussive-shot",
+   "name": "强化震荡射击",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的震荡射击有20%的几率令目标昏迷3秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的震荡射击有4%的几率令目标昏迷3秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-lethal-attacks",
+   "name": "致命攻击",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的所有攻击造成爆击的几率提高5%。",
+   "changeNote": "改动摘要：经典旧世中名为夺命射击。从第2层移到第1层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的所有攻击造成爆击的几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-improved-stings",
+   "name": "强化钉刺",
+   "tag": "新增",
+   "condition": "最高 3 级 · 第 2 层 · 需在射击较低层投入 5 点",
+   "effect": "等级 3：使你的毒蛇钉刺造成的伤害提高20%，蝰蛇钉刺的冷却时间缩短6秒，毒蝎钉刺的持续时间延长45秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的毒蛇钉刺造成的伤害提高6%，蝰蛇钉刺的冷却时间缩短2秒，毒蝎钉刺的持续时间延长15秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-efficiency",
+   "name": "效率",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在射击较低层投入 5 点",
+   "effect": "等级 5：使你的射击、钉刺和近战技能所消耗的法力值降低15%。",
+   "changeNote": "改动摘要：从第1层移到第2层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的射击、钉刺和近战技能所消耗的法力值降低3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-careful-aim",
+   "name": "精确瞄准",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 2 层 · 需在射击较低层投入 5 点",
+   "effect": "等级 5：使你的攻击强度提高，数值相当于你的智力值的100%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的攻击强度提高，数值相当于你的智力值的20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-rapid-killing",
+   "name": "疾速杀戮",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 3 层 · 需在射击较低层投入 10 点",
+   "effect": "等级 2：使你的急速射击冷却时间缩短2分钟。此外，当你消灭一个能为你提供经验值或荣誉值的敌人，或其在受到你的毒蛇钉刺影响时死亡，你获得疾速杀戮，使你在20秒内的下一个射击技能造成的伤害提高20%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的急速射击冷却时间缩短1分钟。此外，当你消灭一个能为你提供经验值或荣誉值的敌人，或其在受到你的毒蛇钉刺影响时死亡，你获得疾速杀戮，使你在20秒内的下一个射击技能造成的伤害提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-improved-arcane-shot",
+   "name": "强化奥术射击",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 3 层 · 需在射击较低层投入 10 点",
+   "effect": "等级 5：使你的奥术射击的冷却时间缩短1.5秒。不影响与奥术射击共享冷却时间的技能。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的奥术射击的冷却时间缩短0.3秒。不影响与奥术射击共享冷却时间的技能。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-lone-wolf",
+   "name": "独来独往",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 3 层 · 需在射击较低层投入 10 点",
+   "effect": "等级 1：没有激活的宠物时，你的所有攻击造成的伤害提高20%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "没有激活的宠物时，你的所有攻击造成的伤害提高20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-trueshot-aura",
+   "name": "强击光环",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 4 层 · 需在射击较低层投入 15 点",
+   "effect": "等级 1：使45码范围内小队成员的远程攻击强度提高30点。",
+   "changeNote": "改动摘要：从第7层移到第4层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使45码范围内小队成员的远程攻击强度提高30点。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-mortal-shots",
+   "name": "致死射击",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 4 层 · 需在射击较低层投入 15 点 · 前置：精确瞄准 5 点",
+   "effect": "等级 5：使你所有远程技能的爆击伤害加成提高30%。",
+   "changeNote": "改动摘要：数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你所有远程技能的爆击伤害加成提高6%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-rapid-recuperation",
+   "name": "急速恢复",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 5 层 · 需在射击较低层投入 20 点 · 前置：疾速杀戮 2 点",
+   "effect": "等级 2：用毒蛇钉刺命中目标时使你获得50%、消耗疾速杀戮时使你获得100%的施法时法力回复，持续15秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "用毒蛇钉刺命中目标时使你获得25%、消耗疾速杀戮时使你获得50%的施法时法力回复，持续15秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-barrage",
+   "name": "弹幕",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 5 层 · 需在射击较低层投入 20 点",
+   "effect": "等级 3：使你的多重射击、瞄准射击和乱射技能造成的伤害提高10%。",
+   "changeNote": "改动摘要：从第2列移到第3列。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的多重射击、瞄准射击和乱射技能造成的伤害提高3%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-scatter-shot",
+   "name": "驱散射击",
+   "tag": "移动",
+   "condition": "最高 1 级 · 第 5 层 · 需在射击较低层投入 20 点",
+   "effect": "等级 1：短程射击，对目标造成50%的武器伤害，并使其困惑4秒。任何伤害都会打断该效果。使用之后结束你的攻击。",
+   "changeNote": "改动摘要：从第1列移到第4列。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "短程射击，对目标造成50%的武器伤害，并使其困惑4秒。任何伤害都会打断该效果。使用之后结束你的攻击。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-ranged-weapon-specialization",
+   "name": "远程武器专精",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在射击较低层投入 25 点",
+   "effect": "等级 5：使你的远程武器造成的伤害提高5%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的远程武器造成的伤害提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-marksmanship-sniper-shot",
+   "name": "狙击",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在射击较低层投入 30 点 · 前置：强击光环 1 点",
+   "effect": "等级 1：远距离射击，造成远程武器伤害外加160点伤害，并使你接下来3次射击的射程提高10码，持续10秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "远距离射击，造成远程武器伤害外加160点伤害，并使你接下来3次射击的射程提高10码，持续10秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-improved-tracking",
+   "name": "强化追踪",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：在追踪野兽、恶魔、龙类、元素生物、巨人、人型生物或亡灵时，你对该被追踪生物类型造成的所有伤害提高5%。",
+   "changeNote": "改动摘要：经典旧世中名为怪物杀手。最高等级从3变为5。从第1列移到第2列。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "在追踪野兽、恶魔、龙类、元素生物、巨人、人型生物或亡灵时，你对该被追踪生物类型造成的所有伤害提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-deflection",
+   "name": "偏斜",
+   "tag": "未改动",
+   "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
+   "effect": "等级 5：使你的招架几率提高5%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的招架几率提高1%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-entrapment",
+   "name": "诱捕",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在生存较低层投入 5 点",
+   "effect": "等级 5：当你的陷阱被触发时，所有受影响的目标被诱捕，无法移动，持续5秒。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "当你的陷阱被触发时，所有受影响的目标被诱捕，无法移动，持续1秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-savage-strikes",
+   "name": "野蛮打击",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 2 层 · 需在生存较低层投入 5 点",
+   "effect": "等级 2：使你所有近战技能的爆击几率提高4%。",
+   "changeNote": "改动摘要：效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你所有近战技能的爆击几率提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-survivalist",
+   "name": "生存专家",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 2 层 · 需在生存较低层投入 5 点",
+   "effect": "等级 5：使你的总生命值提高10%。",
+   "changeNote": "改动摘要：从第3层移到第2层。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的总生命值提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-improved-wing-clip",
+   "name": "强化摔绊",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 2 层 · 需在生存较低层投入 5 点",
+   "effect": "等级 3：使你的摔绊技能有20%的几率令目标在5秒内无法移动。",
+   "changeNote": "改动摘要：最高等级从5变为3。从第3列移到第4列。数值调整：20%（经典旧世：12%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的摔绊技能有7%的几率令目标在5秒内无法移动。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-clever-traps",
+   "name": "灵巧陷阱",
+   "tag": "未改动",
+   "condition": "最高 2 级 · 第 3 层 · 需在生存较低层投入 10 点",
+   "effect": "等级 2：使你的冰冻陷阱和冰霜陷阱的效果持续时间提高30%，献祭陷阱和爆炸陷阱所造成的伤害提高30%。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的冰冻陷阱和冰霜陷阱的效果持续时间提高15%，献祭陷阱和爆炸陷阱所造成的伤害提高15%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-surefooted",
+   "name": "稳固",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在生存较低层投入 10 点",
+   "effect": "等级 3：使你的命中几率提高3%，并使你受到的移动限制效果的持续时间缩短30%。",
+   "changeNote": "改动摘要：从第4层移到第3层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的命中几率提高1%，并使你受到的移动限制效果的持续时间缩短10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-deterrence",
+   "name": "威慑",
+   "tag": "未改动",
+   "condition": "最高 1 级 · 第 3 层 · 需在生存较低层投入 10 点",
+   "effect": "等级 1：激活之后，使你的躲闪和招架几率提高25%，持续10秒。",
+   "changeNote": null,
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "激活之后，使你的躲闪和招架几率提高25%，持续10秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-survival-tactics",
+   "name": "生存战术",
+   "tag": "改动",
+   "condition": "最高 2 级 · 第 4 层 · 需在生存较低层投入 15 点",
+   "effect": "等级 2：使你的陷阱和假死的命中几率提高10%。",
+   "changeNote": "改动摘要：经典旧世中名为陷阱掌握。数值不变，措辞调整。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的陷阱和假死的命中几率提高5%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-predator-s-edge",
+   "name": "掠食者之锋",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 4 层 · 需在生存较低层投入 15 点",
+   "effect": "等级 5：使你的近战爆击伤害提高30%，副手武器伤害提高50%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的近战爆击伤害提高6%，副手武器伤害提高10%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-counterattack",
+   "name": "反击",
+   "tag": "改动",
+   "condition": "最高 1 级 · 第 4 层 · 需在生存较低层投入 15 点 · 前置：威慑 1 点",
+   "effect": "等级 1：招架对手的攻击后可使用。该攻击造成50%武器伤害外加26点伤害，并使目标无法移动5秒。反击无法被格挡、躲闪或招架。",
+   "changeNote": "改动摘要：从第5层移到第4层。效果改写。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "招架对手的攻击后可使用。该攻击造成50%武器伤害外加26点伤害，并使目标无法移动5秒。反击无法被格挡、躲闪或招架。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-resourcefulness",
+   "name": "游刃有余",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 5 层 · 需在生存较低层投入 20 点",
+   "effect": "等级 2：使你的陷阱技能和近战技能消耗的法力值降低60%。此外，你的爆击有一定几率使你在施法时仍可保持50%的法力回复速度，持续30秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的陷阱技能和近战技能消耗的法力值降低30%。此外，你的爆击有一定几率使你在施法时仍可保持50%的法力回复速度，持续30秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-expose-prey",
+   "name": "暴露猎物",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 5 层 · 需在生存较低层投入 20 点",
+   "effect": "等级 2：你对带有猎人印记的目标的攻击有10%的几率激活猫鼬撕咬，持续5秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你对带有猎人印记的目标的攻击有5%的几率激活猫鼬撕咬，持续5秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-survivalist-s-discipline",
+   "name": "生存专家的戒律",
+   "tag": "新增",
+   "condition": "最高 2 级 · 第 5 层 · 需在生存较低层投入 20 点",
+   "effect": "等级 2：使你的陷阱和威慑的冷却时间缩短40%。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的陷阱和威慑的冷却时间缩短20%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-strider-kick",
+   "name": "陆行鸟踢击",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 5 层 · 需在生存较低层投入 20 点",
+   "effect": "等级 1：一记有力的踢击，造成100%的近战武器伤害，并使你的移动速度提高30%，持续3秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "一记有力的踢击，造成100%的近战武器伤害，并使你的移动速度提高30%，持续3秒。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-lightning-reflexes",
+   "name": "闪电反射",
+   "tag": "改动",
+   "condition": "最高 5 级 · 第 6 层 · 需在生存较低层投入 25 点",
+   "effect": "等级 5：使你的敏捷提高10%。",
+   "changeNote": "改动摘要：数值调整：10%（经典旧世：15%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的敏捷提高2%。"
+    }
+   ]
+  },
+  {
+   "id": "calc-hunter-survival-lacerating-strikes",
+   "name": "裂伤打击",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在生存较低层投入 30 点 · 前置：暴露猎物 2 点",
+   "effect": "等级 1：你的猫鼬撕咬还会使目标流血，在21秒内受到相当于猫鼬撕咬伤害40%的伤害。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的猫鼬撕咬还会使目标流血，在21秒内受到相当于猫鼬撕咬伤害40%的伤害。"
+    }
+   ]
+  }
+ ]
+}

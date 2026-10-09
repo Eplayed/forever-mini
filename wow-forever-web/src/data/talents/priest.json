@@ -1,7 +1,7 @@
 {
  "classId": "priest",
  "classNameCn": "牧师",
- "structureStatus": "imported-unverified",
+ "structureStatus": "confirmed",
  "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
  "grid": {
   "rows": 7,
@@ -11,7 +11,15 @@
  "rules": {
   "totalPoints": 51,
   "levelCap": 60,
-  "tierUnlockCost": null
+  "tierUnlockCost": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30
+  ]
  },
  "trees": [
   {
@@ -27,7 +35,7 @@
      "nameCn": "圣光之力",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -46,7 +54,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-power-in-light",
+     "changeState": "added"
     },
     {
      "id": "priest-0-魔杖专精",
@@ -56,7 +66,7 @@
      "nameCn": "魔杖专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -75,7 +85,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-wand-specialization",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-双生戒律",
@@ -85,7 +97,7 @@
      "nameCn": "双生戒律",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -104,7 +116,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-twin-disciplines",
+     "changeState": "added"
     },
     {
      "id": "priest-0-无声消退",
@@ -114,7 +128,7 @@
      "nameCn": "无声消退",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -133,7 +147,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-silent-resolve",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-神圣精准",
@@ -143,7 +159,7 @@
      "nameCn": "神圣精准",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -162,7 +178,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-holy-precision",
+     "changeState": "added"
     },
     {
      "id": "priest-0-强化真言术盾",
@@ -172,7 +190,7 @@
      "nameCn": "强化真言术：盾",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -191,7 +209,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-improved-power-word-shield",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-殉难",
@@ -201,7 +221,7 @@
      "nameCn": "殉难",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -220,7 +240,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-martyrdom",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-精神敏锐",
@@ -230,7 +252,7 @@
      "nameCn": "精神敏锐",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -249,7 +271,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-mental-agility",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-心灵专注",
@@ -259,7 +283,7 @@
      "nameCn": "心灵专注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -278,7 +302,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-inner-focus",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-冥想",
@@ -288,7 +314,7 @@
      "nameCn": "冥想",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -307,7 +333,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-meditation",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-强化心灵之火",
@@ -317,7 +345,7 @@
      "nameCn": "强化心灵之火",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -336,7 +364,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-improved-inner-fire",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-心灵之力",
@@ -346,7 +376,7 @@
      "nameCn": "心灵之力",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -365,7 +395,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-mental-strength",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-灵魂守护",
@@ -375,7 +407,7 @@
      "nameCn": "灵魂守护",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -396,7 +428,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-soul-warding",
+     "changeState": "added"
     },
     {
      "id": "priest-0-强化法力燃烧",
@@ -406,7 +440,7 @@
      "nameCn": "强化法力燃烧",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -425,7 +459,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-improved-mana-burn",
+     "changeState": "modified"
     },
     {
      "id": "priest-0-苦修",
@@ -454,7 +490,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-penance",
+     "changeState": "added"
     },
     {
      "id": "priest-0-新生希望",
@@ -464,7 +502,7 @@
      "nameCn": "新生希望",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -485,7 +523,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-renewed-hope",
+     "changeState": "added"
     },
     {
      "id": "priest-0-神圣庇护",
@@ -495,7 +535,7 @@
      "nameCn": "神圣庇护",
      "nameAlt": "神御之盾",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -514,7 +554,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-divine-aegis",
+     "changeState": "added"
     },
     {
      "id": "priest-0-能量灌注",
@@ -524,7 +566,7 @@
      "nameCn": "能量灌注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -545,7 +587,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-discipline-power-infusion",
+     "changeState": "modified"
     }
    ]
   },
@@ -562,7 +606,7 @@
      "nameCn": "暮光专注",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -581,7 +625,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-twilight-focus",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-强化恢复",
@@ -591,7 +637,7 @@
      "nameCn": "强化恢复",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -610,7 +656,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-improved-renew",
+     "changeState": "unchanged"
     },
     {
      "id": "priest-1-神圣专精",
@@ -620,7 +668,7 @@
      "nameCn": "神圣专精",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -639,7 +687,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-holy-specialization",
+     "changeState": "unchanged"
     },
     {
      "id": "priest-1-法术屏障",
@@ -649,7 +699,7 @@
      "nameCn": "法术屏障",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -668,7 +718,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-spell-warding",
+     "changeState": "unchanged"
     },
     {
      "id": "priest-1-神圣之怒",
@@ -678,7 +730,7 @@
      "nameCn": "神圣之怒",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -697,7 +749,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-divine-fury",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-神圣新星",
@@ -707,7 +761,7 @@
      "nameCn": "神圣新星",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -726,7 +780,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-holy-nova",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-神恩回复",
@@ -736,7 +792,7 @@
      "nameCn": "神恩回复",
      "nameAlt": "祝福恢复",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -755,7 +811,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-blessed-recovery",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-灵感",
@@ -765,7 +823,7 @@
      "nameCn": "灵感",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -784,7 +842,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-inspiration",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-神圣延伸",
@@ -794,7 +854,7 @@
      "nameCn": "神圣延伸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -813,7 +873,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-holy-reach",
+     "changeState": "unchanged"
     },
     {
      "id": "priest-1-强化治疗术",
@@ -823,7 +885,7 @@
      "nameCn": "强化治疗术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -842,7 +904,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-improved-healing",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-灼热之光",
@@ -852,7 +916,7 @@
      "nameCn": "灼热之光",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -873,7 +937,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-searing-light",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-联结治疗",
@@ -902,7 +968,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-binding-heal",
+     "changeState": "added"
     },
     {
      "id": "priest-1-圣光连祷",
@@ -912,7 +980,7 @@
      "nameCn": "圣光连祷",
      "nameAlt": "圣光祷文",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -931,7 +999,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-litany-of-light",
+     "changeState": "added"
     },
     {
      "id": "priest-1-救赎之魂",
@@ -960,7 +1030,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-spirit-of-redemption",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-精神指引",
@@ -970,7 +1042,7 @@
      "nameCn": "精神指引",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -989,7 +1061,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-spiritual-guidance",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-精神治疗",
@@ -999,7 +1073,7 @@
      "nameCn": "精神治疗",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1018,7 +1092,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-spiritual-healing",
+     "changeState": "modified"
     },
     {
      "id": "priest-1-愈合祷言",
@@ -1049,7 +1125,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-holy-prayer-of-mending",
+     "changeState": "added"
     }
    ]
   },
@@ -1066,7 +1144,7 @@
      "nameCn": "暗影集中",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1085,7 +1163,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-shadow-focus",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-昏阙",
@@ -1114,7 +1194,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-blackout",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-精神分流",
@@ -1124,7 +1206,7 @@
      "nameCn": "精神分流",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1143,7 +1225,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-spirit-tap",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-暗影亲和",
@@ -1153,7 +1237,7 @@
      "nameCn": "暗影亲和",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1172,7 +1256,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-shadow-affinity",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-强化暗言术痛",
@@ -1182,7 +1268,7 @@
      "nameCn": "强化暗言术：痛",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1201,7 +1287,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-improved-shadow-word-pain",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-暗影延伸",
@@ -1211,7 +1299,7 @@
      "nameCn": "暗影延伸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1230,7 +1318,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-shadow-reach",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-强化心灵震爆",
@@ -1240,7 +1330,7 @@
      "nameCn": "强化心灵震爆",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1259,7 +1349,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-improved-mind-blast",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-强化心灵尖啸",
@@ -1269,7 +1361,7 @@
      "nameCn": "强化心灵尖啸",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1290,7 +1382,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-improved-psychic-scream",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-精神鞭笞",
@@ -1319,7 +1413,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-mind-flay",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-强化精神鞭笞",
@@ -1329,7 +1425,7 @@
      "nameCn": "强化精神鞭笞",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1350,7 +1446,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-improved-mind-flay",
+     "changeState": "added"
     },
     {
      "id": "priest-2-强化渐隐术",
@@ -1360,7 +1458,7 @@
      "nameCn": "强化渐隐术",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1379,7 +1477,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-improved-fade",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-吸血鬼的拥抱",
@@ -1408,7 +1508,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-vampiric-embrace",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-暗影之波",
@@ -1418,7 +1520,7 @@
      "nameCn": "暗影之波",
      "nameAlt": "暗影交织",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1437,7 +1539,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-shadow-weaving",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-沉默",
@@ -1466,7 +1570,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-silence",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-噬灵传染",
@@ -1476,7 +1582,7 @@
      "nameCn": "噬灵传染",
      "nameAlt": "噬灵蔓延",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1495,7 +1601,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-devouring-contagion",
+     "changeState": "added"
     },
     {
      "id": "priest-2-提早离世",
@@ -1505,7 +1613,7 @@
      "nameCn": "提早离世",
      "nameAlt": "早逝",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1524,7 +1632,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-early-demise",
+     "changeState": "added"
     },
     {
      "id": "priest-2-黑暗",
@@ -1534,7 +1644,7 @@
      "nameCn": "黑暗",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1553,7 +1663,9 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-darkness",
+     "changeState": "modified"
     },
     {
      "id": "priest-2-暗影形态",
@@ -1563,7 +1675,7 @@
      "nameCn": "暗影形态",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1584,9 +1696,12 @@
        "url": "https://nieyi.cn/f/talents/priest.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-priest-shadow-magic-shadowform",
+     "changeState": "modified"
     }
-   ]
+   ],
+   "nameAltUpstream": "暗影"
   }
  ],
  "stats": {
@@ -1594,5 +1709,13 @@
   "nameConflict": 7,
   "onlyInOneSource": 0
  },
- "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。"
+ "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
+ "structureSources": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/tianfu/priest",
+   "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
+   "checkedAt": "2026-10-09"
+  }
+ ]
 }
