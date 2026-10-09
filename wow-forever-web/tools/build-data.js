@@ -352,7 +352,7 @@ console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文�
 const artPath = path.join(ROOT, 'art.json');
 if (fs.existsSync(artPath)) {
   const art = JSON.parse(fs.readFileSync(artPath, 'utf8'));
-  ['classes', 'dungeons'].forEach((k) => {
+  ['classes', 'dungeons', 'maps'].forEach((k) => {
     Object.keys(art[k] || {}).forEach((id) => {
       if (!fs.existsSync(path.join(ROOT, '..', art[k][id]))) {
         errs.push(`art.json：${k}/${id} 指向的文件不存在（${art[k][id]}）`);
@@ -360,7 +360,8 @@ if (fs.existsSync(artPath)) {
     });
   });
   console.log('客户端原画：职业背景 ' + Object.keys(art.classes || {}).length +
-    ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张');
+    ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张 / 区域小地图 ' +
+    Object.keys(art.maps || {}).length + ' 张');
 } else {
   warns.push('art.json 缺失：客户端原画全部退回自绘（跑 tools/fetch-art.py 可补）');
 }
@@ -397,14 +398,132 @@ if (fs.existsSync(profPath)) {
     '）/ 采集点 ' + pn + ' 个');
 }
 
+// 缺图登记：界面会退回自绘块，但"缺哪些"必须是登记过的，不能靠 404 现场发现
+const gapPath = path.join(ROOT, 'icon-gaps.json');
+if (fs.existsSync(gapPath)) {
+  const gp = JSON.parse(fs.readFileSync(gapPath, 'utf8'));
+  const local = new Set(fs.readdirSync(path.join(ROOT, '..', 'img', 'icons')).filter((f) => f.endsWith('.jpg')).map((f) => f.slice(0, -4)));
+  const stale = (gp.keys || []).filter((k) => local.has(k));
+  if (stale.length) errs.push(`icon-gaps：登记说缺 ${stale.length} 个，其实本地已有（${stale.slice(0, 3).join('、')}），重跑 build-icon-map.py`);
+  warns.push('缺图登记 ' + (gp.keys || []).length + ' 个图标键（官方 CDN 没有这些文件，界面退回自绘块），' +
+    '按文件：' + Object.keys(gp.byFile || {}).map((f) => f + ' ' + gp.byFile[f]).join(' / '));
+} else {
+  errs.push('icon-gaps.json 缺失：跑 python3 tools/build-icon-map.py 生成缺图登记');
+}
+
+// 世界线：区域 / 稀有精英 / 书籍 / 睡袋（全部来自 _shuju 数据包整形）
+const worldPath = path.join(ROOT, 'world.json');
+let worldOut = null;
+if (fs.existsSync(worldPath)) {
+  const w = JSON.parse(fs.readFileSync(worldPath, 'utf8'));
+  worldOut = w;
+  const imgOK = (f) => !f || fs.existsSync(path.join(ROOT, '..', f));
+  const zoneNames = new Set((w.zones || []).map((z) => z.nameCn));
+  // 城市与地下城内的大陆也算"区域名"（书籍会放在铁炉堡这类主城），取客户端地图清单里的区域名做全集
+  (w.maps || []).forEach((m) => (m.zoneNames || []).forEach((n) => zoneNames.add(n)));
+  if ((w.meta || {}).mapIdMismatch && w.meta.mapIdMismatch.length) {
+    errs.push('world：mapId 两套来源对不上（paint 与稀有/书籍分组），先查上游是否改版：' + w.meta.mapIdMismatch.join('、'));
+  }
+  const ids = new Set();
+  const uniq = (kind, id) => {
+    if (ids.has(kind + '|' + id)) errs.push(`world ${kind}：id 重复 ${id}`);
+    ids.add(kind + '|' + id);
+  };
+  if (!(w.zones || []).length) errs.push('world：一个区域都没有，等于抓空了');
+  (w.zones || []).forEach((z) => {
+    uniq('zone', z.id);
+    if (!z.nameCn) errs.push(`world zone ${z.id}：缺中文名`);
+    if (!Array.isArray(z.levelRange) || z.levelRange.length !== 2) errs.push(`world zone ${z.id}：等级区间不是两个数`);
+    else if (z.levelRange[0] !== null && z.levelRange[0] > z.levelRange[1]) errs.push(`world zone ${z.id}：等级区间倒挂 ${z.levelRange}`);
+    else if (z.levelRange.indexOf(null) >= 0 && !z.levelStatus) errs.push(`world zone ${z.id}：等级缺一半却没写 levelStatus，界面会显示 null–null`);
+    if (!/(东部王国|卡利姆多|无限新增)/.test(z.continentCn || '')) errs.push(`world zone ${z.id}：不属于任何大陆`);
+    if (z.mapFile && !imgOK(z.mapFile)) errs.push(`world zone ${z.id}：小地图文件不存在（${z.mapFile}）`);
+    checkRecord('world zone', z);
+  });
+  // 上游"怎样去新区域"清单里的名字必须都能在区域表里找到，漏一个就是合并时重复建表或丢了
+  const newN = (w.zones || []).filter((z) => z.isNew);
+  if (!newN.length) errs.push('world：一个无限新增区域都没有，合并时把上游的新区域清单弄丢了');
+  if (newN.some((z) => !z.flightNote)) errs.push('world：标了新增却没写飞行路线状态，界面没法交代"怎么去"');
+  (w.rares || []).forEach((r) => {
+    uniq('rare', r.id);
+    if (!r.nameCn) errs.push(`world rare ${r.id}：缺中文名`);
+    if (r.zone && !zoneNames.has(r.zone)) errs.push(`world rare ${r.id}：所属区域「${r.zone}」不在区域清单里`);
+    if (!r.mark && !r.world) errs.push(`world rare ${r.id}：既没图上百分比坐标也没世界坐标，等于没位置`);
+    if (r.mapFile && !imgOK(r.mapFile)) errs.push(`world rare ${r.id}：小地图文件不存在（${r.mapFile}）`);
+    (r.drops || []).forEach((d, i) => {
+      if (!/^\d+$/.test(String(d.itemId || ''))) errs.push(`world rare ${r.id} 第 ${i} 件掉落缺物品 ID`);
+      if (!d.nameCn) errs.push(`world rare ${r.id} 第 ${i} 件掉落缺名称`);
+      scanNoPercent('world drop', d, r.id + '/' + i);
+    });
+    checkRecord('world rare', r);
+  });
+  const regionSum = (w.rareRegions || []).reduce((a, x) => a + (x.count || 0), 0);
+  if (regionSum !== (w.rares || []).length) {
+    errs.push(`world：地区汇总合计 ${regionSum} 与稀有明细 ${(w.rares || []).length} 不一致`);
+  }
+  (w.books || []).forEach((b) => {
+    uniq('book', b.id);
+    if (!b.nameCn) errs.push(`world book ${b.id}：缺中文名`);
+    // 主城（铁炉堡这类）不在大陆区域表里，但客户端给了单独一张图，按 zoneKind 放行
+    if (b.zone && b.zoneKind !== 'city' && !zoneNames.has(b.zone)) {
+      errs.push(`world book ${b.id}：所在区域「${b.zone}」不在区域清单里，也没标成主城`);
+    }
+    if (!b.mark && !b.world) errs.push(`world book ${b.id}：标了在册却没有坐标`);
+    if (b.mapFile && !imgOK(b.mapFile)) errs.push(`world book ${b.id}：小地图文件不存在（${b.mapFile}）`);
+    checkRecord('world book', b);
+  });
+  (w.booksMissing || []).forEach((b) => { if (!b.nameCn) errs.push('world booksMissing：缺中文名'); });
+  (w.bookRewards || []).forEach((r, i) => {
+    if (!r.title) errs.push(`world bookReward ${i}：缺称号`);
+    if (!(r.items || []).length && !r.noReward) errs.push(`world bookReward ${i}：有门槛没有奖励，又没标注未采集`);
+    (r.items || []).forEach((x) => {
+      if (!/^\d+$/.test(String(x.itemId || ''))) errs.push(`world bookReward ${i}：奖励缺物品 ID`);
+    });
+  });
+  if (!(w.librarians || []).length) errs.push('world：图书管理员一条都没有，书籍上交环节说不清楚');
+  (w.librarians || []).forEach((l) => { if (!l.nameCn) errs.push('world librarian：缺中文名'); });
+  const bt = w.bagTool || {};
+  if (bt.bag && !/^\d+$/.test(String(bt.bag.itemId || ''))) errs.push('world 睡袋：物品 ID 缺失');
+  if (bt.paramsLevel && bt.paramsLevel !== 'L2') errs.push('world 睡袋：机制数值没实测过，分级必须是 L2');
+  (bt.camps || []).forEach((c, i) => {
+    (c.places || []).forEach((p, j) => {
+      if (!p.zone) errs.push(`world 营地 ${i}-${j}：缺所在区域`);
+      if (p.mapFile && !imgOK(p.mapFile)) errs.push(`world 营地 ${i}-${j}：小地图文件不存在（${p.mapFile}）`);
+    });
+  });
+  // 没转存成功的图标要能数得出来：界面靠它决定贴图还是自绘块
+  const noIcon = [];
+  [w.rares, w.books, (w.rareSets || []).map((s) => s.pieces), (w.bookRewards || []).map((r) => r.items)]
+    .reduce((a, l) => a.concat(l || []), []).forEach((x) => {
+      (x.drops || [x]).forEach((d) => {
+        if (d && d.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', d.iconKey + '.jpg'))) noIcon.push(d.iconKey);
+      });
+    });
+  if (noIcon.length) warns.push(`world：${noIcon.length} 个图标键官方 CDN 取不到（多是无限新增装备），界面退回自绘块：` +
+    Array.from(new Set(noIcon)).slice(0, 6).join('、'));
+  const bagIcon = (w.rares || []).concat(w.books).filter((x) => x.mapFile).length;
+  console.log('世界：区域 ' + (w.zones || []).length + '（含无限新增 ' + newN.length + '）· 稀有 ' +
+    (w.rares || []).length + '（带掉落 ' + (w.rares || []).filter((r) => (r.drops || []).length).length +
+    '，未定位 ' + (w.raresUnplaced || []).length + '）· 书籍 ' + (w.books || []).length +
+    '（未定位 ' + (w.booksMissing || []).length + '）· 小地图 ' + bagIcon + ' 条引用');
+} else {
+  warns.push('world.json 缺失：世界页只显示区域与稀有的空态（跑 tools/merge-world.js 生成）');
+}
+
 // 报告
 function tally(arr) {
   const t = { L0: 0, L1: 0, L2: 0, L3: 0 };
   arr.forEach((l) => { t[l] === undefined ? t.L3++ : t[l]++; });
   return t;
 }
+const worldLevels = worldOut
+  ? [].concat((worldOut.zones || []).map((x) => x.level || 'L3'),
+    (worldOut.newZones || []).map((x) => x.level || 'L3'),
+    (worldOut.rares || []).map((x) => x.level || 'L3'),
+    (worldOut.books || []).map((x) => x.level || 'L3'))
+  : [];
 const pubLevels = [].concat(gl.items.map((x) => x.level || 'L3'),
-  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).map((d) => d.level || 'L3'));
+  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).map((d) => d.level || 'L3'), worldLevels);
 // 天赋节点必须计入总覆盖率，否则 L0 占比会虚高
 let talentNodes = 0, talentVerified = 0, talentLevels = [];
 fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {

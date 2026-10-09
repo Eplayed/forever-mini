@@ -14,6 +14,7 @@
       { href: 'races.html', t: '种族与职业组合', d: '10 个种族行 · 可选职业矩阵' },
       { href: 'races.html#traits', t: '种族特长', d: '40 条官方中文原名与整句' }] },
     { t: '世界', items: [
+      { href: 'world.html', t: '区域与稀有', d: '43 + 4 个区域 · 36 个稀有刷新点' },
       { href: 'dungeons.html', t: '副本手册', d: '35 座地下城 + 3 团本，按十级一档分' },
       { href: 'systems.html', t: '系统与新区域', d: '规则、区域、装备名的官方中文口径' }] },
     { t: '专业', href: 'professions.html', d: '13 个专业 · 配方与采集点' },
@@ -24,7 +25,7 @@
   ];
   // 结构上有位置、数据还没采到的：写清楚为什么空着，不做假页面
   var NAV_TODO = [
-    { t: '世界地图', d: '跑图坐标中文侧完全没有', href: 'dungeons.html#todo' },
+    { t: '交互世界地图', d: '底图瓦片是上游自己切的，本站不搬图，只做区域清单与坐标', href: 'world.html#todo' },
     { t: 'PvP', d: '官方中文未公布无限服 PvP 规则', href: 'dungeons.html#todo' },
     { t: '坐骑 / 套装 / 隐藏内容', d: '只有第三方线索，禁止搬数据', href: 'dungeons.html#todo' }
   ];
@@ -1345,6 +1346,346 @@
     }).catch(fail);
   }
 
+  /* ---------- 世界：区域 / 稀有精英 / 图书馆书籍 / 睡袋 ---------- */
+  var WTABS = [['zones', '区域'], ['rares', '稀有精英'], ['books', '图书馆书籍'], ['bag', '睡袋与营地']];
+  function world() {
+    Promise.all([D.load('data/world.json'), D.load('data/art.json').catch(function () { return {}; })])
+      .then(function (rs) {
+        var w = rs[0], f = { tab: 'zones', q: '', zone: '' };
+        var zByName = {};
+        (w.zones || []).forEach(function (z) { zByName[z.nameCn] = z; });
+        var newZones = (w.zones || []).filter(function (z) { return z.isNew; });
+        var kw = function () { return f.q.trim().toLowerCase(); };
+        var hit = function (x) {
+          var k = kw();
+          if (!k) return true;
+          return ((x.nameCn || '') + ' ' + (x.nameEn || '') + ' ' + (x.zone || '') + ' ' +
+            (x.zoneCn || '') + ' ' + (x.container || '')).toLowerCase().indexOf(k) >= 0;
+        };
+        function lvTxt(r) {
+          var a = r.levelRange || [];
+          var lo = a[0], hi = a[1];
+          if (lo === undefined || lo === null) return r.levelStatus && r.levelStatus !== 'ok' ? D.esc(r.levelStatus) : '—';
+          if (hi === undefined || hi === null || hi === lo) return lo + ' 级';
+          return lo + '–' + hi + ' 级';
+        }
+        // 没给等级的区域排在最后，别当 0 级排到最前面
+        function lvStart(z) {
+          return z && z.levelRange && z.levelRange[0] !== null && z.levelRange[0] !== undefined ? z.levelRange[0] : 99;
+        }
+        function facTxt(x) {
+          return x.faction ? D.esc(x.faction) : '<span class="dim">阵营未定</span>';
+        }
+        /* 小地图块：本地转存的区域图 + 数据里的百分比标记；标记位置在渲染后用 JS 写，
+           因为那是数据不是样式，不该把坐标值硬编进 class。 */
+        function mapBox(o, alt) {
+          if (!o.mapFile) {
+            return '<div class="zmap none"><span class="dim">上游没切这张小地图</span>' +
+              (o.mapId ? '<b class="mono">mapId ' + D.esc(o.mapId) + '</b>' : '') + '</div>';
+          }
+          return '<div class="zmap"><img src="' + D.esc(o.mapFile) + '" alt="' + D.esc(alt) +
+            '的区域小地图" loading="lazy" decoding="async" width="560" height="373" ' +
+            'onerror="this.className=\'bad\'">' +
+            (o.mark ? '<b class="zmark" data-x="' + o.mark.x + '" data-y="' + o.mark.y +
+              '" aria-hidden="true"></b>' : '') +
+            '<span class="dbn2-mark">客户端地图 · 本地转存</span></div>';
+        }
+        function coordTxt(o) {
+          var s = [];
+          if (o.mark) s.push('(' + o.mark.x + ', ' + o.mark.y + ')');
+          if (o.world) s.push('世界 ' + o.world.x + ', ' + o.world.y);
+          return '<span class="mono dim">' + (s.join(' · ') || '坐标未采') + '</span>';
+        }
+        function dropRow(d) {
+          return '<span class="loot-i q' + (d.quality || 0) + '">' +
+            iconCell(d.iconKey, d.itemId, d.nameCn, 1) + D.esc(d.nameCn) +
+            (d.itemLevel ? '<span class="dim mono">iLvl ' + d.itemLevel + '</span>' : '') +
+            (d.reqLevel ? '<span class="dim mono">需 ' + d.reqLevel + '</span>' : '') +
+            '<span class="dim mono">#' + D.esc(d.itemId) + '</span></span>';
+        }
+
+        /* --- 面板一：区域 --- */
+        function panelZones() {
+          var zs = (w.zones || []).filter(hit), nz = newZones.filter(hit);
+          var out = '';
+          if (nz.length) {
+            out += '<div class="band"><b>无限新增区域</b><span class="dim">客户端新加的，飞行路线多未定</span>' +
+              '<span class="dim mono">' + nz.length + ' 个</span></div><div class="zgrid">' +
+              nz.map(function (z) { return zoneCard(z, '新'); }).join('') + '</div>';
+          }
+          (w.continents || []).concat([{ id: 'new', nameCn: '单独成图的新区域' }]).forEach(function (c) {
+            var rows = zs.filter(function (z) { return z.continent === c.id && !z.isNew; });
+            if (!rows.length) return;
+            out += '<div class="band"><b>' + D.esc(c.nameCn) + '</b>' +
+              '<span class="dim">按进入等级排</span><span class="dim mono">' + rows.length + ' 个</span></div>' +
+              '<div class="zgrid">' + rows.map(function (z) { return zoneCard(z, ''); }).join('') + '</div>';
+          });
+          if (!out) out = '<div class="card"><div class="empty">没有匹配的区域，换个名字试试。</div></div>';
+          return out + '<div class="card"><h2>客户端里的地图清单</h2>' +
+            '<p class="note">有 ' + ((w.meta.mapsWithoutImage || []).length) + ' 个区域上游没切小地图（' +
+            D.esc(((w.meta.mapsWithoutImage || []).slice(0, 4)).join('、')) + ' 等），' +
+            '这些卡只显示 mapId 与坐标，不放假图。</p>' +
+            '<p class="note">48 张地图是解包出来的全量：' +
+            (w.maps || []).filter(function (m) { return m.group === '大陆'; }).length + ' 张大陆、' +
+            (w.maps || []).filter(function (m) { return m.isNew; }).length + ' 张无限新增、' +
+            (w.maps || []).filter(function (m) { return m.group === '副本'; }).length + ' 张副本、' +
+            (w.maps || []).filter(function (m) { return m.group === '战场'; }).length + ' 张战场。' +
+            '本站不做可缩放交互地图——那是上游自己切的 1715 张瓦片，只把区域名、等级与坐标取过来。</p>' +
+            '<div class="scrollx"><table class="entab"><thead><tr><th>地图</th><th>类型</th><th>mapId</th>' +
+            '<th>兴趣点</th><th>已切图</th></tr></thead><tbody>' +
+            (w.maps || []).filter(function (m) { return m.isNew || m.group === '大陆'; })
+              .map(function (m) {
+                return '<tr><td>' + D.esc(m.nameCn) + (m.isNew ? '<span class="tag">新</span>' : '') + '</td>' +
+                  '<td class="dim">' + D.esc(m.group || '—') + '</td>' +
+                  '<td class="mono dim">' + D.esc(m.mapId) + '</td>' +
+                  '<td class="mono">' + (m.placeCount === null ? '—' : m.placeCount) + '</td>' +
+                  '<td class="mono">' + (m.painted || 0) + '</td></tr>';
+              }).join('') + '</tbody></table></div></div>';
+        }
+        function zoneCard(z, seal) {
+          return '<button type="button" class="zcard' + (z.rareCount || z.bookCount ? ' lk' : '') +
+            '" data-zone="' + D.esc(z.nameCn) + '">' + mapBox(z, z.nameCn) +
+            '<div class="zbody"><b>' + D.esc(z.nameCn) + '</b>' +
+            (seal ? '<span class="tag new">' + seal + '</span>' : '') +
+            '<span class="dim mono">' + lvTxt(z) + '</span>' +
+            '<span class="dim">' + facTxt(z) + '</span>' +
+            (z.flight ? '<span class="dim">' + (z.flight === 'no-route' ? '客户端里还没有飞行路线' : '有飞行路线，站点待实测') + '</span>' : '') +
+            '<span class="zcnt">' + (z.rareCount ? z.rareCount + ' 个稀有' : '') +
+            (z.rareCount && z.bookCount ? ' · ' : '') + (z.bookCount ? z.bookCount + ' 本书' : '') +
+            (!z.rareCount && !z.bookCount ? '<i class="dim">本轮没采到东西</i>' : '') + '</span>' +
+            '</div></button>';
+        }
+
+        /* --- 面板二：稀有精英 --- */
+        function panelRares() {
+          var rows = (w.rares || []).filter(hit);
+          var byZone = {};
+          rows.forEach(function (r) { (byZone[r.zone || '未归区域'] = byZone[r.zone || '未归区域'] || []).push(r); });
+          var zorder = Object.keys(byZone).sort(function (a, b) {
+            return lvStart(zByName[a]) - lvStart(zByName[b]) || (a < b ? -1 : 1);
+          });
+          if (f.zone) zorder = zorder.filter(function (z) { return z === f.zone; });
+          var out = '<div class="card"><h2>先挑区域</h2><div class="picks">' +
+            '<button type="button" class="pick' + (f.zone ? '' : ' on') + '" data-z="">' +
+            '<b>全部</b><span class="dim mono">' + (w.rares || []).length + '</span></button>' +
+            (w.rareRegions || []).filter(function (r) { return r.count; }).map(function (r) {
+              return '<button type="button" class="pick' + (f.zone === r.zone ? ' on' : '') +
+                '" data-z="' + D.esc(r.zone) + '"><b>' + D.esc(r.zone) + '</b>' +
+                '<span class="dim mono">' + r.count + '</span></button>';
+            }).join('') + '</div>' +
+            '<p class="note">稀有精英是刷新型怪物，位置与掉落归属取自客户端解包；' +
+            '刷新间隔与 respawn 计时游戏里没有对应字段，本站不猜。</p></div>';
+          if (!zorder.length) {
+            out += '<div class="card"><div class="empty">这个筛选下没有稀有精英，换个区域或清空搜索。</div></div>';
+          }
+          zorder.forEach(function (z) {
+            var list = byZone[z], meta = zByName[z] || {};
+            out += '<div class="band"><b>' + D.esc(z) + '</b><span class="dim">' + lvTxt(meta) + ' · ' + facTxt(meta) +
+              '</span><span class="dim mono">' + list.length + ' 个</span></div><div class="rgrid">' +
+              list.map(function (r) {
+                return '<div class="rarecard">' + mapBox(r, z) +
+                  '<div class="rbody"><b>' + D.esc(r.nameCn) + '</b>' +
+                  (r.nameEn ? '<span class="dim mono">' + D.esc(r.nameEn) + '</span>' : '') +
+                  '<span class="rtags">' +
+                  '<span class="tag">' + (r.kind === 'rare-elite' ? '稀有精英' : '稀有') + '</span>' +
+                  (r.isNew ? '<span class="tag new">无限新增</span>' : '') +
+                  '<span class="dim mono">' + lvTxt(r) + '</span></span>' +
+                  coordTxt(r) +
+                  (r.drops.length
+                    ? '<div class="loot">' + r.drops.map(dropRow).join('') + '</div>'
+                    : '<div class="note">这个稀有的掉落上游没给，本站不补——等实测或等下一次解包。</div>') +
+                  '<button type="button" class="ghost wide" data-r="' + D.esc(r.id) + '">看这条的来源</button>' +
+                  '<div class="wdr" id="wr-' + D.esc(r.id) + '">' +
+                  '<h3>掉落清单</h3>' + (r.drops.length
+                    ? '<ul class="list">' + r.drops.map(function (d) {
+                      return '<li>' + D.esc(d.nameCn) + '（#' + D.esc(d.itemId) + '，' +
+                        (d.bind ? D.esc(d.bind) : '绑定方式未采') + '）</li>';
+                    }).join('') + '</ul>'
+                    : '<p class="dim">未采到。</p>') +
+                  '<h3>坐标口径</h3><p class="note">括号里是那张小地图上的百分比位置，"世界"是客户端原始坐标；两套都是同一次解包出来的。</p>' +
+                  '<h3>来源与核对</h3>' + D.sources(r.provenance) + '</div></div></div>';
+              }).join('') + '</div>';
+          });
+          var sets = (w.rareSets || []).map(function (s) {
+            return '<div class="card"><h2>套装 · ' + D.esc(s.nameCn) + '</h2>' +
+              '<p class="note">' + s.pieces.length + ' 件套，件名与物品 ID 取自客户端；套装效果那句本站不写，等官方中文稿。</p>' +
+              '<div class="loot">' + s.pieces.map(dropRow).join('') + '</div>' +
+              '<ul class="list">' + s.pieces.map(function (p) {
+                return '<li>' + D.esc(p.nameCn) + ' — ' + (p.fromRare ? '来自稀有「' + D.esc(p.fromRare) + '」' : '来源稀有未采') + '</li>';
+              }).join('') + '</ul></div>';
+          }).join('');
+          var un = (w.raresUnplaced || []);
+          return out + sets + (un.length ? '<div class="card"><h2>位置没核出来的 ' + un.length + ' 个稀有</h2>' +
+            '<p class="note">上游有这些名字，但没给坐标。名字留着当线索，不当数据——不猜位置。</p>' +
+            '<div class="chips">' + un.map(function (x) {
+              return '<span class="chipc">' + D.esc(x.nameCn) + '</span>';
+            }).join('') + '</div></div>' : '');
+        }
+
+        /* --- 面板三：书籍 --- */
+        function panelBooks() {
+          var rows = (w.books || []).filter(hit);
+          var byZone = {};
+          rows.forEach(function (b) { (byZone[b.zone || '未归区域'] = byZone[b.zone || '未归区域'] || []).push(b); });
+          var zname = Object.keys(byZone).sort(function (a, b) {
+            return lvStart(zByName[a]) - lvStart(zByName[b]) || (a < b ? -1 : 1);
+          });
+          var lib = (w.librarians || []).map(function (l) {
+            return '<div class="lrow"><b>' + D.esc(l.nameCn) + '</b><span class="dim">' + D.esc(l.faction || '') +
+              ' · ' + D.esc(l.city || '') + (l.quarter ? '，' + D.esc(l.quarter) : '') + '</span>' + coordTxt(l) + '</div>';
+          }).join('');
+          var rw = (w.bookRewards || []).map(function (r) {
+            return '<tr><td class="mono">' + r.books + ' 本</td><td>' + D.esc(r.title) + '</td>' +
+              '<td class="mono dim">' + (r.questId ? '#' + D.esc(r.questId) : '—') + '</td>' +
+              '<td>' + (r.noReward ? D.pill('L2') + ' <span class="dim">' + D.esc(r.noRewardNote) + '</span>'
+                : r.items.map(dropRow).join('')) + '</td></tr>';
+          }).join('');
+          var out = '<div class="card"><h2>先找书，再找管理员</h2>' +
+            '<p class="note">书名、所在容器与坐标取自客户端解包（第三方转述）。' +
+            '书本文字是第三方站的描述文案，本站不搬；只留"叫什么、在哪个容器、图上哪一点"。</p>' +
+            '<div class="stats"><div class="stat"><b>' + (w.books || []).length + '</b>本已定位</div>' +
+            '<div class="stat"><b>' + Object.keys(byZone).length + '</b>个区域有书</div>' +
+            '<div class="stat"><b>' + (w.booksMissing || []).length + '</b>本只有名字</div></div>' +
+            (lib ? '<h3>上交对象</h3>' + lib : '') + '</div>';
+          if (!zname.length) out += '<div class="card"><div class="empty">这个筛选下没有书。</div></div>';
+          zname.forEach(function (z) {
+            var list = byZone[z], meta = zByName[z] || {};
+            out += '<div class="band"><b>' + D.esc(z) + '</b><span class="dim">' + lvTxt(meta) +
+              (list[0].zoneKind === 'city' ? ' · 主城' : '') + '</span>' +
+              '<span class="dim mono">' + list.length + ' 本</span></div>' +
+              (list[0].mapFile ? '<div class="zthumb">' + mapBox(list[0], z) + '</div>' : '') +
+              '<div class="scrollx"><table class="entab bktab"><thead><tr><th class="ich">书</th><th>名称</th>' +
+              '<th>容器</th><th>位置</th><th>物品 ID</th></tr></thead><tbody>' +
+              list.map(function (b) {
+                return '<tr><td class="ich">' + iconCell(b.iconKey, b.itemId, b.nameCn, 1) + '</td>' +
+                  '<td><b>' + D.esc(b.nameCn) + '</b>' +
+                  (b.forever ? '<span class="tag new">无限新增</span>' : '') +
+                  (b.place ? '<span class="dim"> · ' + D.esc(b.place) + '</span>' : '') + '</td>' +
+                  '<td class="dim">' + D.esc(b.container || '—') + '</td>' +
+                  '<td>' + coordTxt(b) + '</td>' +
+                  '<td class="mono dim">' + (b.itemId ? '#' + D.esc(b.itemId) : '—') + '</td></tr>';
+              }).join('') + '</tbody></table></div>';
+          });
+          return out + (rw ? '<div class="card"><h2>上交多少本换什么</h2>' +
+            '<p class="note">门槛与称号取自客户端；奖励物品 ID 一并列出。上游没列奖励的那档写待实测，不编。</p>' +
+            '<div class="scrollx"><table class="entab"><thead><tr><th>门槛</th><th>称号</th><th>任务</th><th>奖励</th></tr></thead>' +
+            '<tbody>' + rw + '</tbody></table></div></div>' : '') +
+            ((w.booksMissing || []).length ? '<div class="card"><h2>只有名字、没给坐标的 ' + (w.booksMissing || []).length + ' 本</h2>' +
+              '<div class="chips">' + (w.booksMissing || []).map(function (b) {
+                return '<span class="chipc">' + D.esc(b.nameCn) + '<b class="mono dim">#' + D.esc(b.itemId) + '</b></span>';
+              }).join('') + '</div></div>' : '');
+        }
+
+        /* --- 面板四：睡袋 --- */
+        function panelBag() {
+          var bt = w.bagTool || {}, p = bt.params || {}, bag = bt.bag;
+          if (!bag) return '<div class="card"><div class="empty">睡袋这条上游没解析出物品，本轮不编。</div></div>';
+          var out = '<div class="card"><h2>睡袋本身</h2>' +
+            '<div class="itemrow">' + iconCell(bag.iconKey, bag.itemId, bag.nameCn) +
+            '<div><b>' + D.esc(bag.nameCn) + '</b>' +
+            '<span class="dim mono">#' + D.esc(bag.itemId) + '</span>' +
+            (bag.bind ? '<span class="dim">' + D.esc(bag.bind) + '</span>' : '') +
+            (bt.usableLevel ? '<span class="dim mono">' + bt.usableLevel + ' 级可用</span>' : '') + '</div></div>';
+          out += '<table class="mtx"><thead><tr><th>机制项</th><th>上游解析值</th><th>分级</th></tr></thead><tbody>' +
+            [['铺开耗时', p.castSec + ' 秒'], ['休息收益名', p.buffName || '—'],
+              ['收益持续', p.buffHours + ' 小时'], ['可叠层', p.stacks + ' 层'],
+              ['铺设冷却', p.cdMin + ' 分钟']]
+              .map(function (x) {
+                return '<tr><td>' + D.esc(x[0]) + '</td><td class="mono">' + D.esc(x[1]) + '</td>' +
+                  '<td>' + D.pill(bt.paramsLevel) + '</td></tr>';
+              }).join('') + '</tbody></table>' +
+            '<p class="note">' + D.esc(bt.paramsNote || '') + '</p></div>';
+          var camps = [];
+          (bt.camps || []).forEach(function (c) { camps = camps.concat(c.places || []); });
+          out += '<div class="card"><h2>上游列出的营地点 · ' + camps.length + '</h2>' +
+            '<p class="note">这里只回答"这些营点在哪个区域的哪一点"。' +
+            '睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p><div class="rgrid">' +
+            camps.map(function (c) {
+              return '<div class="rarecard">' + mapBox(c, c.zone) + '<div class="rbody">' +
+                '<b>' + D.esc(c.zone || '区域未标') + '</b>' +
+                (c.landmark ? '<span class="dim">' + D.esc(c.landmark) + '</span>' : '') +
+                (c.whereCn ? '<span class="dim">' + D.esc(c.whereCn) + '</span>' : '') +
+                coordTxt(c) + '</div></div>';
+            }).join('') + '</div></div>';
+          return out;
+        }
+
+        function draw() {
+          var body = f.tab === 'zones' ? panelZones() : f.tab === 'rares' ? panelRares()
+            : f.tab === 'books' ? panelBooks() : panelBag();
+          el('wbody').innerHTML = body +
+            '<div class="card" id="todo"><h2>这一页没有的</h2><ul class="list">' +
+            (w.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
+            '</ul><h3>坐标口径</h3><p class="note">' + D.esc(w.meta.coordinateNote || '') + '</p>' +
+            '<h3>来源与核对</h3>' + D.sources(w.provenance) + '</div>';
+          Array.prototype.forEach.call(document.querySelectorAll('.zmark'), function (b) {
+            b.style.left = b.dataset.x + '%'; b.style.top = b.dataset.y + '%';
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('[data-r]'), function (btn) {
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = '1';
+            var label = btn.textContent;
+            btn.onclick = function () {
+              var x = el('wr-' + btn.dataset.r);
+              var open = x.classList.toggle('open');
+              btn.textContent = open ? '收起' : label;
+            };
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('[data-z]'), function (btn) {
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = '1';
+            btn.onclick = function () { f.zone = btn.dataset.z; f.tab = 'rares'; paint(); draw(); };
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('.zcard[data-zone]'), function (btn) {
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = '1';
+            btn.onclick = function () {
+              if (!btn.classList.contains('lk')) return;
+              f.zone = btn.dataset.zone; f.tab = 'rares'; paint(); draw();
+            };
+          });
+        }
+        function tabBtn(t, n) {
+          return '<button type="button" class="pick' + (f.tab === t[0] ? ' on' : '') + '" data-t="' + t[0] + '"' +
+            ' aria-pressed="' + (f.tab === t[0] ? 'true' : 'false') + '"><b>' + t[1] + '</b>' +
+            '<span class="dim mono">' + n + '</span></button>';
+        }
+        function paint() {
+          Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (b) {
+            var on = b.dataset.t === f.tab;
+            b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+        }
+        var qi;
+        set('<div class="card"><h1 class="pt">世界：区域、稀有与书</h1>' +
+          '<p class="dim">区域等级与阵营、稀有精英的刷新点和掉落归属、图书馆书籍的位置，' +
+          '全部来自无限客户端解包（第三方资料站转述），逐条能点开看来源。' +
+          '刷新计时、冲级路线、任何掉落概率都不做。</p>' +
+          '<div class="stats"><div class="stat"><b>' + (w.zones || []).length + '</b>个区域</div>' +
+          '<div class="stat"><b>' + newZones.length + '</b>个无限新增</div>' +
+          '<div class="stat"><b>' + (w.rares || []).length + '</b>个已定位稀有</div>' +
+          '<div class="stat"><b>' + (w.books || []).length + '</b>本书有坐标</div>' +
+          '<div class="stat"><b>' + (w.maps || []).length + '</b>张客户端地图</div></div>' +
+          '<div class="picks">' + WTABS.map(function (t, i) {
+            return tabBtn(t, [
+              (w.zones || []).length,
+              (w.rares || []).length,
+              (w.books || []).length,
+              ((w.bagTool || {}).camps || []).length
+            ][i]);
+          }).join('') + '</div>' +
+          '<div class="field"><input type="search" id="wq" placeholder="搜区域、稀有或书名" value="' + D.esc(f.q) + '"></div></div>' +
+          '<div id="wbody"></div>');
+        paint();
+        Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (b) {
+          b.onclick = function () { f.tab = b.dataset.t; f.zone = ''; paint(); draw(); };
+        });
+        qi = el('wq');
+        qi.oninput = function () { f.q = qi.value; draw(); };
+        draw();
+      }).catch(fail);
+  }
+
   function fail(e) {
     set('<div class="card"><h2>数据没加载出来</h2><p class="dim">' + D.esc(e && e.message ? e.message : e) + '</p>' +
       '<p class="dim">这个站要读本地 JSON，不能用 file:// 直接打开。在项目里执行：<br>' +
@@ -1354,5 +1695,5 @@
   }
 
   shell();
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, world: world, glossary: glossary, provenance: provenance })[page]();
 })();

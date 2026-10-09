@@ -9,6 +9,7 @@ art/manifest.json 记来源与抓取日期 + 保留"整目录删除即回退到�
 用法：
     python3 tools/fetch-art.py --what classes     # 九职业背景图（从参考站首页现取带哈希的文件名）
     python3 tools/fetch-art.py --what dungeons    # 副本载入图（逐个 slug 试两台源）
+    python3 tools/fetch-art.py --what maps        # 区域小地图（只下世界线数据引用到的 mapId）
 """
 import argparse
 import datetime
@@ -127,31 +128,95 @@ def dungeons(man):
         print(u"  缺：%s" % u"、".join(miss[:20]))
 
 
+def zone_map_ids():
+    """要用的小地图 id：稀有精英/书籍/营地引用的那张，加上区域表里每个区域自己那张。"""
+    p = os.path.join(DATA, "upstream", "wclbox-world.json")
+    if not os.path.exists(p):
+        sys.exit(u"先跑 tools/scrape-wclbox-shuju.py 抓世界线数据包，才知道要下哪些小地图")
+    d = json.load(io.open(p, encoding="utf-8")).get("payload") or {}
+    out = {}
+
+    def walk(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if isinstance(v, str) and v.startswith("/ditu-xiao/"):
+                    m = re.search(r"/ditu-xiao/(\d+)\.", v)
+                    if m:
+                        out[m.group(1)] = v
+                else:
+                    walk(v)
+        elif isinstance(o, list):
+            for i in o:
+                walk(i)
+    walk(d)
+    # 区域表里每个区域都有自己那张图，id 写在大陆地图的 paint 上（areaId → 文件名）
+    zones = d.get("zones") or {}
+    byslug = {m.get("slug"): m for m in d.get("maps") or []}
+    for slug, rows in zones.items():
+        paint = {x.get("areaId"): x.get("file") for x in (byslug.get(slug) or {}).get("paint") or []
+                 if x.get("areaId") is not None and x.get("file")}
+        for z in rows or []:
+            f = paint.get(z.get("area"))
+            if f:
+                out[str(f).split(".")[0]] = "/ditu-xiao/%s" % f
+    return out
+
+
+def maps(man):
+    """区域小地图：560×373 的客户端地图渲染，托管在第三方站（官方 CDN 不提供这个尺寸）。
+    口径与副本载入图一致——只转存我们数据里真引用到的 id，整目录删除即回退到坐标文字。"""
+    want = zone_map_ids()
+    have = set(os.path.basename(x["file"]).split(".")[0] for x in man["items"] if "/maps/" in x["file"])
+    ok, miss = [], []
+    for mid, path in sorted(want.items()):
+        if mid in have:
+            continue
+        url = WBX + path
+        code, blob = http(url, binary=True)
+        if code == 200 and len(blob) > 2000 and blob[:4] == b"RIFF":
+            rec = save(os.path.join(ART, "maps", mid + ".webp"), blob, url, "zone-map")
+            man["items"] = [x for x in man["items"]
+                            if not (x["kind"] == "zone-map" and os.path.basename(x["file"]).split(".")[0] == mid)]
+            man["items"].append(rec)
+            ok.append(mid)
+        else:
+            miss.append(mid)
+            print(u"  取不到小地图 %s（%d）" % (mid, code))
+    print(u"区域小地图：需要 %d 张，本轮新增 %d，取不到 %d" % (len(want), len(ok), len(miss)))
+
+
 def write_art_index(man):
     """把 manifest 收成界面能直接用的索引：src/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
-    idx = {"classes": {}, "dungeons": {}, "meta": {}}
+    idx = {"classes": {}, "dungeons": {}, "maps": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
-        key = "classes" if x["kind"] == "class-bg" else "dungeons"
-        idx[key][name] = "img/" + rel
+        if x["kind"] == "class-bg":
+            idx["classes"][name] = "img/" + rel
+        elif x["kind"] == "zone-map":
+            idx["maps"][name] = "img/" + rel
+        else:
+            idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
                    "count": len(man["items"])}
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
-    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d）" % (len(idx["classes"]), len(idx["dungeons"])))
+    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d）" % (
+        len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"])))
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--what", choices=["classes", "dungeons", "all"], default="all")
+    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "all"], default="all")
     args = ap.parse_args()
     man = load_manifest()
     if args.what in ("classes", "all"):
         classes(man)
     if args.what in ("dungeons", "all"):
         dungeons(man)
+    if args.what in ("maps", "all"):
+        maps(man)
     man["fetchedAt"] = datetime.date.today().isoformat()
     man["total"] = len(man["items"])
     save_manifest(man)

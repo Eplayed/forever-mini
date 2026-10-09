@@ -6,64 +6,66 @@
 
 | 项 | 数 |
 | --- | --- |
-| 词条总数 | 368 |
-| 在声明的官方页里逐字命中 | 320 |
+| 词条总数 | 479 |
+| 在声明的官方页里逐字命中 | 431 |
 | 去掉汉字间排版空格才命中（要人眼确认） | 45 |
 | **未命中（要人工回原文看）** | 2 |
 | 已人工判定并留痕（见 audit-exceptions.json） | 1 |
 | **声称官方却核不到（L0/L1 缺官方链接）** | 0 |
 | 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | 0 |
 
-核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、亮点组合与天裔导语。
-| 命中率 | 87.0% |
+核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、`world.json` 的稀有精英名与掉落物名、书名与上交奖励名（区域名不在此列，见上）、`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、亮点组合与天裔导语。
+| 命中率 | 90.0% |
 
 ## 来源页
 
 | 状态 | 页面 | 承担词条 |
 | --- | --- | --- |
-| 缓存 | https://wow.blizzard.cn/news/24301515/index.html | 143 |
-| 缓存 | https://wow.blizzard.cn/news/24303313/index.html | 7 |
-| 缓存 | https://wow.blizzard.cn/news/24301514/index.html | 74 |
-| 缓存 | https://wow.blizzard.cn/news/24304075/index.html | 95 |
-| 缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 14 |
-| 缓存 | https://wow.blizzard.cn/news/24304160/index.html | 9 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/hall-of-thanes/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/ruins-of-lordaeron/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/excavation-site/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/city-of-dalaran/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/the-drowned-city/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/kroldok-stronghold/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/alcaz-prison/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/blackmaw-hold/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/shapers-terrace/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/ragefire-chasm/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/wailing-caverns/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/the-deadmines/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/shadowfang-keep/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/blackfathom-deeps/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/the-stockade/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/gnomeregan/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/razorfen-kraul/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/scarlet-monastery-library/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/scarlet-monastery-armory/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/razorfen-downs/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/uldaman/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/zulfarrak/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/maraudon/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/sunken-temple/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/blackrock-depths/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/dire-maul-east/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/lower-blackrock-spire/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/dire-maul-north/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/dire-maul-west/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/scholomance/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/stratholme-main-gate/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/stratholme-service-gate/ | 1 |
-| 已抓取 | https://wowforever.wclbox.com/fuben/upper-blackrock-spire/ | 1 |
-| 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
-| 缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
+| 仅缓存 | https://wow.blizzard.cn/news/24301515/index.html | 143 |
+| 仅缓存 | https://wow.blizzard.cn/news/24303313/index.html | 7 |
+| 仅缓存 | https://wow.blizzard.cn/news/24301514/index.html | 74 |
+| 仅缓存 | https://wow.blizzard.cn/news/24304075/index.html | 95 |
+| 仅缓存 | https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap | 14 |
+| 仅缓存 | https://wow.blizzard.cn/news/24304160/index.html | 9 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/hall-of-thanes/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/ruins-of-lordaeron/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/excavation-site/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/city-of-dalaran/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/the-drowned-city/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/kroldok-stronghold/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/alcaz-prison/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/blackmaw-hold/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/shapers-terrace/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/ragefire-chasm/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/wailing-caverns/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/the-deadmines/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/shadowfang-keep/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/blackfathom-deeps/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/the-stockade/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/gnomeregan/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/razorfen-kraul/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/scarlet-monastery-library/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/scarlet-monastery-armory/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/razorfen-downs/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/uldaman/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/zulfarrak/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/maraudon/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/sunken-temple/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/blackrock-depths/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/dire-maul-east/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/lower-blackrock-spire/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/dire-maul-north/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/dire-maul-west/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/scholomance/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/stratholme-main-gate/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/stratholme-service-gate/ | 1 |
+| 仅缓存 | https://wowforever.wclbox.com/fuben/upper-blackrock-spire/ | 1 |
+| 仅缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
+| 仅缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
+| 仅缓存 | https://wowforever.wclbox.com/xiyou | 66 |
+| 仅缓存 | https://wowforever.wclbox.com/shuji | 45 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）
 

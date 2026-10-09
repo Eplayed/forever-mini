@@ -360,8 +360,304 @@
    "source": "https://wowforever.wclbox.com/jiemian/dungeons/xiao/art-blackrockspire.webp",
    "kind": "dungeon-loading",
    "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1411.webp",
+   "bytes": 56784,
+   "sha1": "771e2c7295",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1411.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1412.webp",
+   "bytes": 46962,
+   "sha1": "0d42554554",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1412.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1413.webp",
+   "bytes": 51304,
+   "sha1": "ccb42769b7",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1413.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1416.webp",
+   "bytes": 58264,
+   "sha1": "5f6fff0f94",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1416.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1417.webp",
+   "bytes": 55952,
+   "sha1": "3562e0b201",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1417.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1418.webp",
+   "bytes": 48150,
+   "sha1": "dc0db8d487",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1418.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1419.webp",
+   "bytes": 49288,
+   "sha1": "ce05076336",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1419.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1420.webp",
+   "bytes": 53806,
+   "sha1": "8a483f4f58",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1420.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1421.webp",
+   "bytes": 55978,
+   "sha1": "9adfce9303",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1421.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1423.webp",
+   "bytes": 42784,
+   "sha1": "e44537d99f",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1423.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1425.webp",
+   "bytes": 55924,
+   "sha1": "778c6806ec",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1425.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1426.webp",
+   "bytes": 59202,
+   "sha1": "d28f5612c0",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1426.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1427.webp",
+   "bytes": 50700,
+   "sha1": "3acd42c9b2",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1427.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1428.webp",
+   "bytes": 48308,
+   "sha1": "3dd72a3508",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1428.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1429.webp",
+   "bytes": 57752,
+   "sha1": "841fa89649",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1429.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1432.webp",
+   "bytes": 59774,
+   "sha1": "123cd49f82",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1432.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1434.webp",
+   "bytes": 57248,
+   "sha1": "5ab87bb95b",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1434.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1435.webp",
+   "bytes": 57046,
+   "sha1": "50dd0cbafc",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1435.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1436.webp",
+   "bytes": 53020,
+   "sha1": "f83029ad2a",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1436.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1437.webp",
+   "bytes": 56158,
+   "sha1": "1529ba7b3e",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1437.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1438.webp",
+   "bytes": 60498,
+   "sha1": "406b671e6a",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1438.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1439.webp",
+   "bytes": 49982,
+   "sha1": "234dc64430",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1439.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1441.webp",
+   "bytes": 42026,
+   "sha1": "fff0f8e444",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1441.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1442.webp",
+   "bytes": 53456,
+   "sha1": "d5d23eeaf1",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1442.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1443.webp",
+   "bytes": 55420,
+   "sha1": "3d8355cbc6",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1443.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1444.webp",
+   "bytes": 49886,
+   "sha1": "8af20a15d7",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1444.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1445.webp",
+   "bytes": 54260,
+   "sha1": "93c02277c2",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1445.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1446.webp",
+   "bytes": 55400,
+   "sha1": "b92576baa0",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1446.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1447.webp",
+   "bytes": 53894,
+   "sha1": "5554483e73",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1447.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1455.webp",
+   "bytes": 49520,
+   "sha1": "6ed0c6d723",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1455.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/2482.webp",
+   "bytes": 59246,
+   "sha1": "fb5fd9a257",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/2482.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/2521.webp",
+   "bytes": 55712,
+   "sha1": "05e7df934b",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/2521.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1422.webp",
+   "bytes": 54028,
+   "sha1": "33db60287e",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1422.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1431.webp",
+   "bytes": 56432,
+   "sha1": "a08c4dfdd5",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1431.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1433.webp",
+   "bytes": 50502,
+   "sha1": "e0ca79c533",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1433.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1448.webp",
+   "bytes": 46838,
+   "sha1": "2bd73dc8fc",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1448.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/maps/1452.webp",
+   "bytes": 51982,
+   "sha1": "642f0d15c1",
+   "source": "https://wowforever.wclbox.com/ditu-xiao/1452.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-10-09"
   }
  ],
  "fetchedAt": "2026-10-09",
- "total": 45
+ "total": 82
 }

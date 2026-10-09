@@ -7,7 +7,7 @@
 
 用法：
     python3 tools/fetch-icons.py race_human_male class_warrior        # 取指定键
-    python3 tools/fetch-icons.py --from-json src/data/races.json --field iconKey --nested
+    python3 tools/fetch-icons.py --from-json src/data/world.json --field iconKey   # 递归收集该字段再补抓
     python3 tools/fetch-icons.py --list                              # 只报缺哪些，不下载
 """
 import argparse

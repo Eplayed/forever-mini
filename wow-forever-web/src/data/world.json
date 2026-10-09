@@ -1,0 +1,5423 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-09",
+  "kind": "client-datamine",
+  "method": "tools/scrape-wclbox-shuju.py 抓 _shuju 数据包 → tools/merge-world.js 整形",
+  "release": "r-1791485113190",
+  "foreverBuild": "1.60.1.70235",
+  "dropsAsOf": "2026-10-06",
+  "sources": [
+   {
+    "url": "https://wowforever.wclbox.com/ditu",
+    "label": "新手盒子 · 魔兽世界无限数据库 世界地图"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/xiyou",
+    "label": "新手盒子 · 稀有精英"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/shuji",
+    "label": "新手盒子 · 图书馆书籍"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/shuidai",
+    "label": "新手盒子 · 舒适的睡袋"
+   }
+  ],
+  "took": "区域等级与阵营、mapId 与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点",
+  "skipped": "上游的书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率",
+  "notCollected": [
+   "世界地图底图与可缩放交互：那是上游自己切的 1715 张瓦片，本站不搬图也不做交互地图，只给区域清单与坐标",
+   "睡袋页面的冲级路线（步骤、途经点顺序、收益讲解）：属攻略性质，本站红线不做，只保留地点与坐标",
+   "睡袋相关的 17 件杂物清单：上游把路线补给品混在一张表里，拆不出干净的物品口径",
+   "成就：上游已经放出 46 条结构化数据，本轮没接，属于另一个模块",
+   "区域人口、天气、稀有刷新计时：客户端里没有这类字段，编不出来"
+  ],
+  "levelNote": "本文件全部字段是无限客户端解包出来的游戏内中文（经第三方站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列",
+  "mapNote": "小地图只转存上游真的切出来的那些：上游没给的区域显示 mapId 与坐标，不放假图",
+  "coordinateNote": "坐标两套并存：mapId 定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包",
+  "mapIdMismatch": [],
+  "mapsWithoutImage": [
+   "希尔斯布莱德丘陵",
+   "河林",
+   "逆风小径",
+   "灰谷",
+   "安戈洛环形山",
+   "希利苏斯",
+   "辛德拉",
+   "达纳苏斯"
+  ]
+ },
+ "continents": [
+  {
+   "id": "ek",
+   "nameCn": "东部王国",
+   "slug": "eastern-kingdoms",
+   "mapId": "0",
+   "zoneCount": 23
+  },
+  {
+   "id": "kal",
+   "nameCn": "卡利姆多",
+   "slug": "kalimdor",
+   "mapId": "1",
+   "zoneCount": 20
+  }
+ ],
+ "zones": [
+  {
+   "id": "dun-morogh",
+   "level": "L0",
+   "nameCn": "丹莫罗",
+   "slug": "dun-morogh",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 1,
+   "mapId": "1426",
+   "mapFile": "img/art/maps/1426.webp",
+   "rareCount": 1,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    4,
+    12
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "elwynn-forest",
+   "level": "L0",
+   "nameCn": "艾尔文森林",
+   "slug": "elwynn-forest",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 12,
+   "mapId": "1429",
+   "mapFile": "img/art/maps/1429.webp",
+   "rareCount": 2,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    5,
+    10
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "tirisfal-glades",
+   "level": "L0",
+   "nameCn": "提瑞斯法林地",
+   "slug": "tirisfal-glades",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "部落",
+   "side": "h",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 85,
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "rareCount": 4,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    5,
+    12
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "westfall",
+   "level": "L0",
+   "nameCn": "西部荒野",
+   "slug": "westfall",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 40,
+   "mapId": "1436",
+   "mapFile": "img/art/maps/1436.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    9,
+    18
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "loch-modan",
+   "level": "L0",
+   "nameCn": "洛克莫丹",
+   "slug": "loch-modan",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 38,
+   "mapId": "1432",
+   "mapFile": "img/art/maps/1432.webp",
+   "rareCount": 1,
+   "bookCount": 2,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    10,
+    18
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "silverpine-forest",
+   "level": "L0",
+   "nameCn": "银松森林",
+   "slug": "silverpine-forest",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "部落",
+   "side": "h",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 130,
+   "mapId": "1421",
+   "mapFile": "img/art/maps/1421.webp",
+   "rareCount": 0,
+   "bookCount": 2,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    10,
+    20
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "redridge-mountains",
+   "level": "L0",
+   "nameCn": "赤脊山",
+   "slug": "redridge-mountains",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 44,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    15,
+    25
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "duskwood",
+   "level": "L0",
+   "nameCn": "暮色森林",
+   "slug": "duskwood",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 10,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    19,
+    30
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "hillsbrad-foothills",
+   "level": "L0",
+   "nameCn": "希尔斯布莱德丘陵",
+   "slug": "hillsbrad-foothills",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 267,
+   "mapId": "1424",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    20,
+    31
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "wetlands",
+   "level": "L0",
+   "nameCn": "湿地",
+   "slug": "wetlands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 11,
+   "mapId": "1437",
+   "mapFile": "img/art/maps/1437.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    20,
+    30
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "alterac-mountains",
+   "level": "L0",
+   "nameCn": "奥特兰克山脉",
+   "slug": "alterac-mountains",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 36,
+   "mapId": "1416",
+   "mapFile": "img/art/maps/1416.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    27,
+    39
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "arathi-highlands",
+   "level": "L0",
+   "nameCn": "阿拉希高地",
+   "slug": "arathi-highlands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 45,
+   "mapId": "1417",
+   "mapFile": "img/art/maps/1417.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    30,
+    40
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "stranglethorn-vale",
+   "level": "L0",
+   "nameCn": "荆棘谷",
+   "slug": "stranglethorn-vale",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 33,
+   "mapId": "1434",
+   "mapFile": "img/art/maps/1434.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    30,
+    44
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "badlands",
+   "level": "L0",
+   "nameCn": "荒芜之地",
+   "slug": "badlands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 3,
+   "mapId": "1418",
+   "mapFile": "img/art/maps/1418.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    36,
+    45
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "riverglades",
+   "level": "L0",
+   "nameCn": "河林",
+   "slug": "riverglades",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": true,
+   "ownMap": false,
+   "flight": "by-flight",
+   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "areaId": 16591,
+   "mapId": "2548",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    36,
+    44
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "swamp-of-sorrows",
+   "level": "L0",
+   "nameCn": "悲伤沼泽",
+   "slug": "swamp-of-sorrows",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 8,
+   "mapId": "1435",
+   "mapFile": "img/art/maps/1435.webp",
+   "rareCount": 1,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    36,
+    43
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "the-hinterlands",
+   "level": "L0",
+   "nameCn": "辛特兰",
+   "slug": "the-hinterlands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 47,
+   "mapId": "1425",
+   "mapFile": "img/art/maps/1425.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    41,
+    49
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "searing-gorge",
+   "level": "L0",
+   "nameCn": "灼热峡谷",
+   "slug": "searing-gorge",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 51,
+   "mapId": "1427",
+   "mapFile": "img/art/maps/1427.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    43,
+    48
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "blasted-lands",
+   "level": "L0",
+   "nameCn": "诅咒之地",
+   "slug": "blasted-lands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 4,
+   "mapId": "1419",
+   "mapFile": "img/art/maps/1419.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    46,
+    55
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "western-plaguelands",
+   "level": "L0",
+   "nameCn": "西瘟疫之地",
+   "slug": "western-plaguelands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 28,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    46,
+    57
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "burning-steppes",
+   "level": "L0",
+   "nameCn": "燃烧平原",
+   "slug": "burning-steppes",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 46,
+   "mapId": "1428",
+   "mapFile": "img/art/maps/1428.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    50,
+    59
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "deadwind-pass",
+   "level": "L0",
+   "nameCn": "逆风小径",
+   "slug": "deadwind-pass",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 41,
+   "mapId": "1430",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    50,
+    60
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "eastern-plaguelands",
+   "level": "L0",
+   "nameCn": "东瘟疫之地",
+   "slug": "eastern-plaguelands",
+   "continent": "ek",
+   "continentCn": "东部王国",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 139,
+   "mapId": "1423",
+   "mapFile": "img/art/maps/1423.webp",
+   "rareCount": 1,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    54,
+    59
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "durotar",
+   "level": "L0",
+   "nameCn": "杜隆塔尔",
+   "slug": "durotar",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "部落",
+   "side": "h",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 14,
+   "mapId": "1411",
+   "mapFile": "img/art/maps/1411.webp",
+   "rareCount": 2,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    5,
+    10
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "mulgore",
+   "level": "L0",
+   "nameCn": "莫高雷",
+   "slug": "mulgore",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "部落",
+   "side": "h",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 215,
+   "mapId": "1412",
+   "mapFile": "img/art/maps/1412.webp",
+   "rareCount": 3,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    5,
+    10
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "teldrassil",
+   "level": "L0",
+   "nameCn": "泰达希尔",
+   "slug": "teldrassil",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 141,
+   "mapId": "1438",
+   "mapFile": "img/art/maps/1438.webp",
+   "rareCount": 2,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    5,
+    11
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "the-barrens",
+   "level": "L0",
+   "nameCn": "贫瘠之地",
+   "slug": "the-barrens",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "部落",
+   "side": "h",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 17,
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "rareCount": 7,
+   "bookCount": 3,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    10,
+    25
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "darkshore",
+   "level": "L0",
+   "nameCn": "黑海岸",
+   "slug": "darkshore",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 148,
+   "mapId": "1439",
+   "mapFile": "img/art/maps/1439.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    11,
+    19
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "stonetalon-mountains",
+   "level": "L0",
+   "nameCn": "石爪山脉",
+   "slug": "stonetalon-mountains",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 406,
+   "mapId": "1442",
+   "mapFile": "img/art/maps/1442.webp",
+   "rareCount": 2,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    15,
+    25
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "ashenvale",
+   "level": "L0",
+   "nameCn": "灰谷",
+   "slug": "ashenvale",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 331,
+   "mapId": "1440",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    19,
+    30
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "thousand-needles",
+   "level": "L0",
+   "nameCn": "千针石林",
+   "slug": "thousand-needles",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 400,
+   "mapId": "1441",
+   "mapFile": "img/art/maps/1441.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    24,
+    35
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "desolace",
+   "level": "L0",
+   "nameCn": "凄凉之地",
+   "slug": "desolace",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 405,
+   "mapId": "1443",
+   "mapFile": "img/art/maps/1443.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    30,
+    39
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "dustwallow-marsh",
+   "level": "L0",
+   "nameCn": "尘泥沼泽",
+   "slug": "dustwallow-marsh",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 15,
+   "mapId": "1445",
+   "mapFile": "img/art/maps/1445.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    36,
+    43
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "tanaris",
+   "level": "L0",
+   "nameCn": "塔纳利斯",
+   "slug": "tanaris",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 440,
+   "mapId": "1446",
+   "mapFile": "img/art/maps/1446.webp",
+   "rareCount": 1,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    40,
+    50
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "feralas",
+   "level": "L0",
+   "nameCn": "菲拉斯",
+   "slug": "feralas",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 357,
+   "mapId": "1444",
+   "mapFile": "img/art/maps/1444.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    41,
+    60
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "azshara",
+   "level": "L0",
+   "nameCn": "艾萨拉",
+   "slug": "azshara",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 16,
+   "mapId": "1447",
+   "mapFile": "img/art/maps/1447.webp",
+   "rareCount": 0,
+   "bookCount": 1,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    42,
+    55
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "felwood",
+   "level": "L0",
+   "nameCn": "费伍德森林",
+   "slug": "felwood",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 361,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    47,
+    54
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "ungoro-crater",
+   "level": "L0",
+   "nameCn": "安戈洛环形山",
+   "slug": "ungoro-crater",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 490,
+   "mapId": "1449",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    48,
+    55
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "silithus",
+   "level": "L0",
+   "nameCn": "希利苏斯",
+   "slug": "silithus",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 1377,
+   "mapId": "1451",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    55,
+    59
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "winterspring",
+   "level": "L0",
+   "nameCn": "冬泉谷",
+   "slug": "winterspring",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 618,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    55,
+    60
+   ],
+   "levelStatus": "ok"
+  },
+  {
+   "id": "mount-hyjal",
+   "level": "L0",
+   "nameCn": "海加尔山",
+   "slug": "mount-hyjal",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": true,
+   "ownMap": false,
+   "flight": "by-flight",
+   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "areaId": 616,
+   "mapId": "2482",
+   "mapFile": "img/art/maps/2482.webp",
+   "rareCount": 1,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    null,
+    null
+   ],
+   "levelStatus": "客户端暂时没给出区域等级"
+  },
+  {
+   "id": "shendralas",
+   "level": "L0",
+   "nameCn": "辛德拉",
+   "slug": "shendralas",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": true,
+   "ownMap": false,
+   "flight": "no-route",
+   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "areaId": 16651,
+   "mapId": "2652",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    null,
+    null
+   ],
+   "levelStatus": "客户端暂时没给出区域等级"
+  },
+  {
+   "id": "darnassus",
+   "level": "L0",
+   "nameCn": "达纳苏斯",
+   "slug": "darnassus",
+   "continent": "kal",
+   "continentCn": "卡利姆多",
+   "faction": "联盟",
+   "side": "a",
+   "isNew": false,
+   "ownMap": false,
+   "flight": null,
+   "flightNote": null,
+   "areaId": 1657,
+   "mapId": "1457",
+   "mapFile": null,
+   "rareCount": 0,
+   "bookCount": 0,
+   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    null,
+    null
+   ],
+   "levelStatus": "客户端暂时没给出区域等级"
+  },
+  {
+   "id": "zephras-isle",
+   "level": "L0",
+   "nameCn": "泽风岛",
+   "slug": "zephras-isle",
+   "continent": "new",
+   "continentCn": "无限新增",
+   "faction": "争夺地带",
+   "side": "c",
+   "isNew": true,
+   "ownMap": true,
+   "flight": "no-route",
+   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "areaId": null,
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "rareCount": 8,
+   "bookCount": 0,
+   "levelNote": "客户端单独给了这张地图，不在东部王国／卡利姆多的区域表里",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/ditu",
+     "note": "新增区域的存在、阵营归属与等级档（经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ],
+   "levelRange": [
+    3,
+    12
+   ],
+   "levelStatus": "ok"
+  }
+ ],
+ "maps": [
+  {
+   "slug": "azeroth",
+   "mapId": "947",
+   "nameCn": "艾泽拉斯",
+   "group": "大陆",
+   "placeCount": 861,
+   "painted": 52,
+   "isNew": false,
+   "zoneNames": [
+    "希利苏斯",
+    "泰达希尔",
+    "贫瘠之地",
+    "塔纳利斯",
+    "冬泉谷",
+    "凄凉之地",
+    "石爪山脉",
+    "GM 岛",
+    "灰谷",
+    "莫高雷",
+    "海加尔山",
+    "菲拉斯",
+    "费伍德森林",
+    "杜隆塔尔",
+    "安戈洛环形山",
+    "黑海岸",
+    "千针石林",
+    "月光林地",
+    "艾萨拉",
+    "尘泥沼泽",
+    "辛德拉",
+    "奥格瑞玛",
+    "安其拉之门",
+    "雷霆崖",
+    "达纳苏斯",
+    "无尽之海",
+    "东瘟疫之地",
+    "丹莫罗",
+    "湿地",
+    "河林",
+    "吉尔尼斯",
+    "荆棘谷",
+    "阿拉希高地",
+    "提瑞斯法林地",
+    "灼热峡谷",
+    "辛特兰",
+    "鲨鱼出没的海域",
+    "银松森林",
+    "燃烧平原",
+    "艾尔文森林",
+    "吉利吉姆岛",
+    "西瘟疫之地",
+    "洛克莫丹",
+    "希尔斯布莱德丘陵",
+    "暮色森林",
+    "荒芜之地",
+    "诅咒之地",
+    "赤脊山",
+    "悲伤沼泽",
+    "西部荒野",
+    "暴风城",
+    "逆风小径",
+    "奥特兰克山脉",
+    "吉尔尼斯废墟"
+   ]
+  },
+  {
+   "slug": "eastern-kingdoms",
+   "mapId": "0",
+   "nameCn": "东部王国",
+   "group": "大陆",
+   "placeCount": 447,
+   "painted": 27,
+   "isNew": false,
+   "zoneNames": [
+    "东瘟疫之地",
+    "丹莫罗",
+    "湿地",
+    "河林",
+    "吉尔尼斯",
+    "荆棘谷",
+    "阿拉希高地",
+    "提瑞斯法林地",
+    "灼热峡谷",
+    "辛特兰",
+    "鲨鱼出没的海域",
+    "银松森林",
+    "燃烧平原",
+    "艾尔文森林",
+    "吉利吉姆岛",
+    "西瘟疫之地",
+    "洛克莫丹",
+    "希尔斯布莱德丘陵",
+    "暮色森林",
+    "荒芜之地",
+    "诅咒之地",
+    "赤脊山",
+    "悲伤沼泽",
+    "西部荒野",
+    "暴风城",
+    "逆风小径",
+    "奥特兰克山脉",
+    "吉尔尼斯废墟"
+   ]
+  },
+  {
+   "slug": "kalimdor",
+   "mapId": "1",
+   "nameCn": "卡利姆多",
+   "group": "大陆",
+   "placeCount": 415,
+   "painted": 24,
+   "isNew": false,
+   "zoneNames": [
+    "希利苏斯",
+    "泰达希尔",
+    "贫瘠之地",
+    "塔纳利斯",
+    "冬泉谷",
+    "凄凉之地",
+    "石爪山脉",
+    "GM 岛",
+    "灰谷",
+    "莫高雷",
+    "海加尔山",
+    "菲拉斯",
+    "费伍德森林",
+    "杜隆塔尔",
+    "安戈洛环形山",
+    "黑海岸",
+    "千针石林",
+    "月光林地",
+    "艾萨拉",
+    "尘泥沼泽",
+    "辛德拉",
+    "奥格瑞玛",
+    "安其拉之门",
+    "雷霆崖",
+    "达纳苏斯",
+    "无尽之海"
+   ]
+  },
+  {
+   "slug": "battle-for-gilneas",
+   "mapId": "3005",
+   "nameCn": "吉尔尼斯之战",
+   "group": "无限新增",
+   "placeCount": 6,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "city-of-dalaran",
+   "mapId": "2959",
+   "nameCn": "达拉然城",
+   "group": "无限新增",
+   "placeCount": 3,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": [
+    "希尔斯布莱德丘陵"
+   ]
+  },
+  {
+   "slug": "dalaran-city",
+   "mapId": "2980",
+   "nameCn": "达拉然城",
+   "group": "无限新增",
+   "placeCount": 0,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "darkspear-islands",
+   "mapId": "2997",
+   "nameCn": "暗矛群岛",
+   "group": "无限新增",
+   "placeCount": 5,
+   "painted": 1,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "eastern-kingdoms-preserved",
+   "mapId": "3021",
+   "nameCn": "东部王国（留存）",
+   "group": "无限新增",
+   "placeCount": 0,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "excavation-site-wetlands",
+   "mapId": "2998",
+   "nameCn": "挖掘场：湿地",
+   "group": "无限新增",
+   "placeCount": 5,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "hyjal-crater",
+   "mapId": "2995",
+   "nameCn": "海加尔火山口",
+   "group": "无限新增",
+   "placeCount": 0,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "ruins-of-lordaeron",
+   "mapId": "2999",
+   "nameCn": "洛丹伦废墟",
+   "group": "无限新增",
+   "placeCount": 5,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "the-hall-of-thanes",
+   "mapId": "3065",
+   "nameCn": "领主大厅",
+   "group": "无限新增",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "warsong-gulch-winter",
+   "mapId": "2996",
+   "nameCn": "战歌峡谷（冬季）",
+   "group": "无限新增",
+   "placeCount": 3,
+   "painted": 0,
+   "isNew": true,
+   "zoneNames": [
+    "战歌峡谷"
+   ]
+  },
+  {
+   "slug": "zephras-isle",
+   "mapId": "2991",
+   "nameCn": "泽风岛",
+   "group": "无限新增",
+   "placeCount": 24,
+   "painted": 1,
+   "isNew": true,
+   "zoneNames": []
+  },
+  {
+   "slug": "ahn-qiraj-temple",
+   "mapId": "531",
+   "nameCn": "安其拉神庙",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "安其拉"
+   ]
+  },
+  {
+   "slug": "blackwing-lair",
+   "mapId": "469",
+   "nameCn": "黑翼之巢",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "burning-of-andorhal",
+   "mapId": "2807",
+   "nameCn": "安多哈尔的燃烧",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "安多哈尔之焚"
+   ]
+  },
+  {
+   "slug": "caverns-of-time",
+   "mapId": "269",
+   "nameCn": "时光之穴",
+   "group": "副本",
+   "placeCount": 14,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "旧希尔斯布莱德丘陵",
+    "异时之境"
+   ]
+  },
+  {
+   "slug": "deadmines",
+   "mapId": "36",
+   "nameCn": "死亡矿井",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "deadwind-pass",
+   "mapId": "2853",
+   "nameCn": "逆风小径",
+   "group": "副本",
+   "placeCount": 31,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "暮色森林",
+    "艾尔文森林",
+    "诅咒之地",
+    "悲伤沼泽",
+    "赤脊山",
+    "荆棘谷"
+   ]
+  },
+  {
+   "slug": "demon-fall-canyon",
+   "mapId": "2784",
+   "nameCn": "屠魔峡谷",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "emerald-dream",
+   "mapId": "169",
+   "nameCn": "翡翠梦境",
+   "group": "副本",
+   "placeCount": 2,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "苍翠原野",
+    "翡翠森林"
+   ]
+  },
+  {
+   "slug": "karazhan-crypts",
+   "mapId": "2875",
+   "nameCn": "卡拉赞墓穴",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "naxxramas",
+   "mapId": "533",
+   "nameCn": "纳克萨玛斯",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "naxxramas-2921",
+   "mapId": "2921",
+   "nameCn": "纳克萨玛斯",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "nightmare-grove",
+   "mapId": "2832",
+   "nameCn": "梦魇林地",
+   "group": "副本",
+   "placeCount": 61,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "辛特兰",
+    "暮色森林",
+    "东瘟疫之地",
+    "艾尔文森林",
+    "菲拉斯",
+    "凄凉之地",
+    "艾萨拉",
+    "海加尔山",
+    "西部荒野"
+   ]
+  },
+  {
+   "slug": "razorfen-downs",
+   "mapId": "129",
+   "nameCn": "剃刀高地",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "razorfen-kraul",
+   "mapId": "47",
+   "nameCn": "剃刀沼泽",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "ruins-of-ahn-qiraj",
+   "mapId": "509",
+   "nameCn": "安其拉废墟",
+   "group": "副本",
+   "placeCount": 12,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "希利苏斯"
+   ]
+  },
+  {
+   "slug": "scarlet-enclave",
+   "mapId": "2856",
+   "nameCn": "血色领地",
+   "group": "副本",
+   "placeCount": 7,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "scarlet-monastery",
+   "mapId": "189",
+   "nameCn": "血色修道院",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "scholomance",
+   "mapId": "289",
+   "nameCn": "通灵学院",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "shadow-hold",
+   "mapId": "2806",
+   "nameCn": "暗影堡",
+   "group": "副本",
+   "placeCount": 14,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "费伍德森林"
+   ]
+  },
+  {
+   "slug": "shadowfang-keep",
+   "mapId": "33",
+   "nameCn": "影牙城堡",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "starfall-barrow-den",
+   "mapId": "2817",
+   "nameCn": "星坠洞窟",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "星风村"
+   ]
+  },
+  {
+   "slug": "storm-cliffs",
+   "mapId": "2791",
+   "nameCn": "风暴悬崖",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "stratholme",
+   "mapId": "329",
+   "nameCn": "斯坦索姆",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "the-crystal-vale",
+   "mapId": "2804",
+   "nameCn": "水晶谷",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "the-scarab-dais",
+   "mapId": "2902",
+   "nameCn": "甲虫之台",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "the-searing-basin",
+   "mapId": "2720",
+   "nameCn": "灼热盆地",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "the-tainted-scar",
+   "mapId": "2789",
+   "nameCn": "腐烂之痕",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "zul-farrak",
+   "mapId": "209",
+   "nameCn": "祖尔法拉克",
+   "group": "副本",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "zul-gurub",
+   "mapId": "309",
+   "nameCn": "祖尔格拉布",
+   "group": "副本",
+   "placeCount": 12,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "alterac-valley",
+   "mapId": "30",
+   "nameCn": "奥特兰克山谷",
+   "group": "战场",
+   "placeCount": 24,
+   "painted": 1,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "arathi-basin",
+   "mapId": "529",
+   "nameCn": "阿拉希盆地",
+   "group": "战场",
+   "placeCount": 8,
+   "painted": 1,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "warsong-gulch",
+   "mapId": "489",
+   "nameCn": "战歌峡谷",
+   "group": "战场",
+   "placeCount": 3,
+   "painted": 1,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "azshara-crater",
+   "mapId": "37",
+   "nameCn": "艾萨拉火山口",
+   "group": "其它",
+   "placeCount": 1,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": []
+  },
+  {
+   "slug": "eastern-plaguelands-scarlet-raid-phase",
+   "mapId": "2868",
+   "nameCn": "东瘟疫之地（血色团队阶段）",
+   "group": "其它",
+   "placeCount": 12,
+   "painted": 0,
+   "isNew": false,
+   "zoneNames": [
+    "东瘟疫之地",
+    "辛特兰"
+   ]
+  }
+ ],
+ "rareRegions": [
+  {
+   "zone": "泽风岛",
+   "count": 8,
+   "levelRange": [
+    10,
+    13
+   ],
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": "2521"
+  },
+  {
+   "zone": "贫瘠之地",
+   "count": 7,
+   "levelRange": [
+    10,
+    25
+   ],
+   "side": "h",
+   "faction": "部落",
+   "mapId": null
+  },
+  {
+   "zone": "提瑞斯法林地",
+   "count": 4,
+   "levelRange": [
+    5,
+    12
+   ],
+   "side": "h",
+   "faction": "部落",
+   "mapId": "1420"
+  },
+  {
+   "zone": "莫高雷",
+   "count": 3,
+   "levelRange": [
+    5,
+    10
+   ],
+   "side": "h",
+   "faction": "部落",
+   "mapId": "1412"
+  },
+  {
+   "zone": "泰达希尔",
+   "count": 2,
+   "levelRange": [
+    5,
+    11
+   ],
+   "side": "a",
+   "faction": "联盟",
+   "mapId": "1438"
+  },
+  {
+   "zone": "艾尔文森林",
+   "count": 2,
+   "levelRange": [
+    5,
+    10
+   ],
+   "side": "a",
+   "faction": "联盟",
+   "mapId": "1429"
+  },
+  {
+   "zone": "杜隆塔尔",
+   "count": 2,
+   "levelRange": [
+    5,
+    10
+   ],
+   "side": "h",
+   "faction": "部落",
+   "mapId": "1411"
+  },
+  {
+   "zone": "石爪山脉",
+   "count": 2,
+   "levelRange": [
+    15,
+    25
+   ],
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": null
+  },
+  {
+   "zone": "海加尔山",
+   "count": 1,
+   "levelRange": null,
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": "2482"
+  },
+  {
+   "zone": "丹莫罗",
+   "count": 1,
+   "levelRange": [
+    4,
+    12
+   ],
+   "side": "a",
+   "faction": "联盟",
+   "mapId": "1426"
+  },
+  {
+   "zone": "洛克莫丹",
+   "count": 1,
+   "levelRange": [
+    10,
+    18
+   ],
+   "side": "a",
+   "faction": "联盟",
+   "mapId": null
+  },
+  {
+   "zone": "悲伤沼泽",
+   "count": 1,
+   "levelRange": [
+    36,
+    43
+   ],
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": null
+  },
+  {
+   "zone": "塔纳利斯",
+   "count": 1,
+   "levelRange": [
+    40,
+    50
+   ],
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": null
+  },
+  {
+   "zone": "东瘟疫之地",
+   "count": 1,
+   "levelRange": [
+    54,
+    59
+   ],
+   "side": "c",
+   "faction": "争夺地带",
+   "mapId": "1423"
+  }
+ ],
+ "rares": [
+  {
+   "id": "Snarlsnout",
+   "level": "L0",
+   "nameCn": "咆鼻",
+   "nameEn": "Snarlsnout",
+   "zone": "莫高雷",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    10
+   ],
+   "mapId": "1412",
+   "mapFile": "img/art/maps/1412.webp",
+   "mark": {
+    "x": 32.7,
+    "y": 64.5
+   },
+   "world": {
+    "x": 15936,
+    "y": 18668,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 286753,
+     "nameCn": "糟鼻的火枪",
+     "quality": 2,
+     "iconKey": "inv_weapon_rifle_05",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Nightscreech",
+   "level": "L0",
+   "nameCn": "夜啸",
+   "nameEn": "Nightscreech",
+   "zone": "泰达希尔",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    10
+   ],
+   "mapId": "1438",
+   "mapFile": "img/art/maps/1438.webp",
+   "mark": {
+    "x": 40.1,
+    "y": 55.2
+   },
+   "world": {
+    "x": 14682,
+    "y": 6824,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 286750,
+     "nameCn": "慧眼魔杖",
+     "quality": 2,
+     "iconKey": "inv_wand_01",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Blightsculler",
+   "level": "L0",
+   "nameCn": "疫颅",
+   "nameEn": "Blightsculler",
+   "zone": "提瑞斯法林地",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    10
+   ],
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "mark": {
+    "x": 17.4,
+    "y": 55.1
+   },
+   "world": {
+    "x": 2451,
+    "y": 4053,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [
+    {
+     "itemId": 283460,
+     "nameCn": "腐纹腰带",
+     "quality": 2,
+     "iconKey": "inv_belt_03",
+     "itemLevel": 12,
+     "bind": "装备后绑定",
+     "reqLevel": 7
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Fernfeather",
+   "level": "L0",
+   "nameCn": "蕨羽",
+   "nameEn": "Fernfeather",
+   "zone": "泽风岛",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    10
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 52.6,
+    "y": 81.2
+   },
+   "world": {
+    "x": 2331,
+    "y": 3253,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 285272,
+     "nameCn": "天语者的腰带",
+     "quality": 2,
+     "iconKey": "inv_belt_cloth_skybornec60_b_01",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    },
+    {
+     "itemId": 285274,
+     "nameCn": "森达尔守望者的束腰",
+     "quality": 2,
+     "iconKey": "inv_belt_mail_skybornec60_b_01",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Galemender Delanea",
+   "level": "L0",
+   "nameCn": "愈风者德拉妮娅",
+   "nameEn": "Galemender Delanea",
+   "zone": "泽风岛",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    11
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 63.1,
+    "y": 62.3
+   },
+   "world": {
+    "x": 2892,
+    "y": 2580,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 285254,
+     "nameCn": "斥候游侠的手套",
+     "quality": 2,
+     "iconKey": "inv_glove_leather_skybornec60_b_02",
+     "itemLevel": 11,
+     "bind": "装备后绑定",
+     "reqLevel": 6
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Den'dralass",
+   "level": "L0",
+   "nameCn": "丹德拉拉斯",
+   "nameEn": "Den'dralass",
+   "zone": "泽风岛",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    13
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 61.4,
+    "y": 37.8
+   },
+   "world": {
+    "x": 2801,
+    "y": 1708,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 263937,
+     "nameCn": "觅天者巨杖",
+     "quality": 2,
+     "iconKey": "inv_staff_2h_skybornec60_b_01",
+     "itemLevel": 15,
+     "bind": "装备后绑定",
+     "reqLevel": 10
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Mystmane",
+   "level": "L0",
+   "nameCn": "雾鬃",
+   "nameEn": "Mystmane",
+   "zone": "泽风岛",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    13
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 59.6,
+    "y": 36.7
+   },
+   "world": {
+    "x": 2705,
+    "y": 1669,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 285228,
+     "nameCn": "秘鬃毛皮",
+     "quality": 2,
+     "iconKey": "inv_misc_cape_04",
+     "itemLevel": 15,
+     "bind": "拾取后绑定",
+     "reqLevel": 10
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Tel'daeor the Stormspeaker",
+   "level": "L0",
+   "nameCn": "风语者泰尔达奥",
+   "nameEn": "Tel'daeor the Stormspeaker",
+   "zone": "泽风岛",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    13
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 66,
+    "y": 53.4
+   },
+   "world": {
+    "x": 3046,
+    "y": 2263,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 263015,
+     "nameCn": "天语者的裤子",
+     "quality": 2,
+     "iconKey": "inv_pant_armor_skybornec60_d_01",
+     "itemLevel": 14,
+     "bind": "装备后绑定",
+     "reqLevel": 9
+    },
+    {
+     "itemId": 263016,
+     "nameCn": "斥候游侠的护腿",
+     "quality": 2,
+     "iconKey": "inv_pant_leather_skybornec60_b_02",
+     "itemLevel": 14,
+     "bind": "装备后绑定",
+     "reqLevel": 9
+    },
+    {
+     "itemId": 263017,
+     "nameCn": "森达尔守望者的护腿",
+     "quality": 2,
+     "iconKey": "inv_pant_mail_skybornec60_b_01",
+     "itemLevel": 14,
+     "bind": "装备后绑定",
+     "reqLevel": 9
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Rocklance",
+   "level": "L0",
+   "nameCn": "石枪",
+   "nameEn": "Rocklance",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    17
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 56.5,
+    "y": 41.6
+   },
+   "world": {
+    "x": 19362,
+    "y": 17534,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285339,
+     "nameCn": "半人马的战链腰带",
+     "quality": 3,
+     "iconKey": "inv_belt_22",
+     "itemLevel": 19,
+     "bind": "拾取后绑定",
+     "reqLevel": 14
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Takk the Leaper",
+   "level": "L0",
+   "nameCn": "“跳跃者”塔克",
+   "nameEn": "Takk the Leaper",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    19
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 59.6,
+    "y": 8.3
+   },
+   "world": {
+    "x": 19664,
+    "y": 15374,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285329,
+     "nameCn": "迅猛龙皮斗篷",
+     "quality": 3,
+     "iconKey": "inv_misc_cape_17",
+     "itemLevel": 21,
+     "bind": "拾取后绑定",
+     "reqLevel": 16
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Emogg the Crusher",
+   "level": "L0",
+   "nameCn": "摧毁者埃摩戈",
+   "nameEn": "Emogg the Crusher",
+   "zone": "洛克莫丹",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    19
+   ],
+   "mapId": "1432",
+   "mapFile": "img/art/maps/1432.webp",
+   "mark": {
+    "x": 73.1,
+    "y": 27
+   },
+   "world": {
+    "x": 8458,
+    "y": 10929,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [
+    {
+     "itemId": 282639,
+     "nameCn": "埃摩戈的“粉碎者”",
+     "quality": 3,
+     "iconKey": "inv_weapon_halberd_08",
+     "itemLevel": 21,
+     "bind": "拾取后绑定",
+     "reqLevel": 16
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Sister Rathtalon",
+   "level": "L0",
+   "nameCn": "莱丝塔伦",
+   "nameEn": "Sister Rathtalon",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    19
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 39.1,
+    "y": 15.3
+   },
+   "world": {
+    "x": 17670,
+    "y": 15828,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285345,
+     "nameCn": "羽毛衬垫软鞋",
+     "quality": 3,
+     "iconKey": "inv_boots_05",
+     "itemLevel": 21,
+     "bind": "拾取后绑定",
+     "reqLevel": 16
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Swiftmane",
+   "level": "L0",
+   "nameCn": "迅鬃斑马",
+   "nameEn": "Swiftmane",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    21
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 61.2,
+    "y": 34.5
+   },
+   "world": {
+    "x": 19820,
+    "y": 17074,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285330,
+     "nameCn": "斑马徽戒",
+     "quality": 3,
+     "iconKey": "inv_jewelry_ring_03",
+     "itemLevel": 23,
+     "bind": "拾取后绑定",
+     "reqLevel": 18
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Taskmaster Whipfang",
+   "level": "L0",
+   "nameCn": "工头维普弗恩",
+   "nameEn": "Taskmaster Whipfang",
+   "zone": "石爪山脉",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    22
+   ],
+   "mapId": "1442",
+   "mapFile": "img/art/maps/1442.webp",
+   "mark": {
+    "x": 64.5,
+    "y": 54.2
+   },
+   "world": {
+    "x": 16292,
+    "y": 15278,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 284386,
+     "nameCn": "维普弗恩的灼皮者",
+     "quality": 3,
+     "iconKey": "inv_weapon_shortblade_24",
+     "itemLevel": 24,
+     "bind": "拾取后绑定",
+     "reqLevel": 19
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Thora Feathermoon",
+   "level": "L0",
+   "nameCn": "索拉·羽月",
+   "nameEn": "Thora Feathermoon",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    25
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 48.5,
+    "y": 79.7
+   },
+   "world": {
+    "x": 18584,
+    "y": 20005,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285346,
+     "nameCn": "联盟信使的长剑",
+     "quality": 3,
+     "iconKey": "inv_sword_20",
+     "itemLevel": 27,
+     "bind": "拾取后绑定",
+     "reqLevel": 22
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Hagg Taurenbane",
+   "level": "L0",
+   "nameCn": "哈格",
+   "nameEn": "Hagg Taurenbane",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    26
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 43.7,
+    "y": 83
+   },
+   "world": {
+    "x": 18117,
+    "y": 20219,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285328,
+     "nameCn": "哈格的祖传劈肉斧",
+     "quality": 3,
+     "iconKey": "inv_axe_04",
+     "itemLevel": 28,
+     "bind": "拾取后绑定",
+     "reqLevel": 23
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Aean Swiftriver",
+   "level": "L0",
+   "nameCn": "艾恩·流水",
+   "nameEn": "Aean Swiftriver",
+   "zone": "贫瘠之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    26
+   ],
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "mark": {
+    "x": 48.5,
+    "y": 79.7
+   },
+   "world": {
+    "x": 18584,
+    "y": 20005,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 285347,
+     "nameCn": "联盟信使的弓箭",
+     "quality": 3,
+     "iconKey": "inv_weapon_bow_05",
+     "itemLevel": 27,
+     "bind": "拾取后绑定",
+     "reqLevel": 22
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Sorrow Wing",
+   "level": "L0",
+   "nameCn": "悲哀之翼",
+   "nameEn": "Sorrow Wing",
+   "zone": "石爪山脉",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    27
+   ],
+   "mapId": "1442",
+   "mapFile": "img/art/maps/1442.webp",
+   "mark": {
+    "x": 49.3,
+    "y": 36.2
+   },
+   "world": {
+    "x": 15579,
+    "y": 14716,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 284401,
+     "nameCn": "悲哀帷帽",
+     "quality": 3,
+     "iconKey": "inv_helmet_30",
+     "itemLevel": 29,
+     "bind": "拾取后绑定",
+     "reqLevel": 24
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Warleader Krazzilak",
+   "level": "L0",
+   "nameCn": "克莱吉拉克",
+   "nameEn": "Warleader Krazzilak",
+   "zone": "塔纳利斯",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    45
+   ],
+   "mapId": "1446",
+   "mapFile": "img/art/maps/1446.webp",
+   "mark": {
+    "x": 38.8,
+    "y": 21.7
+   },
+   "world": {
+    "x": 19164,
+    "y": 22982,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 286554,
+     "nameCn": "克莱吉拉克的印戒",
+     "quality": 3,
+     "iconKey": "inv_jewelry_ring_16",
+     "itemLevel": 47,
+     "bind": "拾取后绑定",
+     "reqLevel": 42
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Lord Captain Wyrmak",
+   "level": "L0",
+   "nameCn": "维尔玛克将军",
+   "nameEn": "Lord Captain Wyrmak",
+   "zone": "悲伤沼泽",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    45
+   ],
+   "mapId": "1435",
+   "mapFile": "img/art/maps/1435.webp",
+   "mark": {
+    "x": 68.9,
+    "y": 38.9
+   },
+   "world": {
+    "x": 8259,
+    "y": 15951,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [
+    {
+     "itemId": 282008,
+     "nameCn": "维尔玛克的胸甲",
+     "quality": 3,
+     "iconKey": "inv_chest_plate11",
+     "itemLevel": 47,
+     "bind": "拾取后绑定",
+     "reqLevel": 42
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Slydris",
+   "level": "L0",
+   "nameCn": "斯莱德里斯",
+   "nameEn": "Slydris",
+   "zone": "泽风岛",
+   "kind": "rare-elite",
+   "isNew": true,
+   "levelRange": null,
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 50.5,
+    "y": 51.5
+   },
+   "world": {
+    "x": 2219,
+    "y": 2195,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 285238,
+     "nameCn": "有缺口的法杖",
+     "quality": 2,
+     "iconKey": "inv_staff_08",
+     "itemLevel": 8,
+     "bind": "拾取后绑定",
+     "reqLevel": 3
+    },
+    {
+     "itemId": 285239,
+     "nameCn": "探险者短剑",
+     "quality": 2,
+     "iconKey": "inv_sword_24",
+     "itemLevel": 8,
+     "bind": "拾取后绑定",
+     "reqLevel": 3
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Snapbeak the Quick",
+   "level": "L0",
+   "nameCn": "迅捷的啄喙",
+   "nameEn": "Snapbeak the Quick",
+   "zone": "泽风岛",
+   "kind": "rare-elite",
+   "isNew": true,
+   "levelRange": null,
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 34.2,
+    "y": 60
+   },
+   "world": {
+    "x": 1348,
+    "y": 2498,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [
+    {
+     "itemId": 285264,
+     "nameCn": "天语者的便鞋",
+     "quality": 2,
+     "iconKey": "inv_boot_cloth_skybornec60_b_01",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    },
+    {
+     "itemId": 285269,
+     "nameCn": "森达尔守望者的护足",
+     "quality": 2,
+     "iconKey": "inv_boot_mail_skybornec60_b_01",
+     "itemLevel": 10,
+     "bind": "装备后绑定",
+     "reqLevel": 5
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Lost One",
+   "level": "L0",
+   "nameCn": "迷失者",
+   "nameEn": "The Lost One",
+   "zone": "泽风岛",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    10,
+    13
+   ],
+   "mapId": "2521",
+   "mapFile": "img/art/maps/2521.webp",
+   "mark": {
+    "x": 53,
+    "y": 47.2
+   },
+   "world": {
+    "x": 2352,
+    "y": 2042,
+    "z": 3
+   },
+   "mapSlug": "zephras-isle",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Pexmit",
+   "level": "L0",
+   "nameCn": "佩克斯米特",
+   "nameEn": "Pexmit",
+   "zone": "海加尔山",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": null,
+   "mapId": "2482",
+   "mapFile": "img/art/maps/2482.webp",
+   "mark": {
+    "x": 58.8,
+    "y": 41.8
+   },
+   "world": {
+    "x": 19230,
+    "y": 11261,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Ghostfang",
+   "level": "L0",
+   "nameCn": "幽魂之牙",
+   "nameEn": "Ghostfang",
+   "zone": "丹莫罗",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    4,
+    12
+   ],
+   "mapId": "1426",
+   "mapFile": "img/art/maps/1426.webp",
+   "mark": {
+    "x": 80.4,
+    "y": 45.2
+   },
+   "world": {
+    "x": 6679,
+    "y": 11291,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Condemned One",
+   "level": "L0",
+   "nameCn": "受诅者",
+   "nameEn": "The Condemned One",
+   "zone": "提瑞斯法林地",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    12
+   ],
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "mark": {
+    "x": 66,
+    "y": 44
+   },
+   "world": {
+    "x": 4559,
+    "y": 3732,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Coldrasp",
+   "level": "L0",
+   "nameCn": "寒嘶",
+   "nameEn": "Coldrasp",
+   "zone": "提瑞斯法林地",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    12
+   ],
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "mark": {
+    "x": 19.6,
+    "y": 64.7
+   },
+   "world": {
+    "x": 2546,
+    "y": 4331,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Decrepit Harvester",
+   "level": "L0",
+   "nameCn": "破旧的收割机",
+   "nameEn": "Decrepit Harvester",
+   "zone": "提瑞斯法林地",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    12
+   ],
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "mark": {
+    "x": 53.1,
+    "y": 56.7
+   },
+   "world": {
+    "x": 3999,
+    "y": 4100,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Wrathvine",
+   "level": "L0",
+   "nameCn": "怒藤",
+   "nameEn": "Wrathvine",
+   "zone": "泰达希尔",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    11
+   ],
+   "mapId": "1438",
+   "mapFile": "img/art/maps/1438.webp",
+   "mark": {
+    "x": 54.7,
+    "y": 68.8
+   },
+   "world": {
+    "x": 15396,
+    "y": 7268,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Thornstarter Igleg",
+   "level": "L0",
+   "nameCn": "引棘者伊格莱格",
+   "nameEn": "Thornstarter Igleg",
+   "zone": "莫高雷",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1412",
+   "mapFile": "img/art/maps/1412.webp",
+   "mark": {
+    "x": 59.2,
+    "y": 30.9
+   },
+   "world": {
+    "x": 17502,
+    "y": 17345,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Stormherald Ukta",
+   "level": "L0",
+   "nameCn": "风暴使者乌克塔",
+   "nameEn": "Stormherald Ukta",
+   "zone": "莫高雷",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1412",
+   "mapFile": "img/art/maps/1412.webp",
+   "mark": {
+    "x": 59.8,
+    "y": 58.4
+   },
+   "world": {
+    "x": 17537,
+    "y": 18428,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Elder Finseer",
+   "level": "L0",
+   "nameCn": "先知长老芬希尔",
+   "nameEn": "Elder Finseer",
+   "zone": "艾尔文森林",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1429",
+   "mapFile": "img/art/maps/1429.webp",
+   "mark": {
+    "x": 79.2,
+    "y": 55.1
+   },
+   "world": {
+    "x": 5773,
+    "y": 14990,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Matriarch Bristlefur",
+   "level": "L0",
+   "nameCn": "鬃毛女族长",
+   "nameEn": "Matriarch Bristlefur",
+   "zone": "艾尔文森林",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1429",
+   "mapFile": "img/art/maps/1429.webp",
+   "mark": {
+    "x": 65.1,
+    "y": 76.9
+   },
+   "world": {
+    "x": 5303,
+    "y": 15475,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Dustwind Eggtender",
+   "level": "L0",
+   "nameCn": "尘风护卵者",
+   "nameEn": "Dustwind Eggtender",
+   "zone": "杜隆塔尔",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1411",
+   "mapFile": "img/art/maps/1411.webp",
+   "mark": {
+    "x": 51.5,
+    "y": 21.2
+   },
+   "world": {
+    "x": 20882,
+    "y": 15365,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Shal'ma",
+   "level": "L0",
+   "nameCn": "沙尔玛",
+   "nameEn": "Shal'ma",
+   "zone": "杜隆塔尔",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    5,
+    10
+   ],
+   "mapId": "1411",
+   "mapFile": "img/art/maps/1411.webp",
+   "mark": {
+    "x": 60.7,
+    "y": 90
+   },
+   "world": {
+    "x": 21349,
+    "y": 17694,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Scarlet Captain",
+   "level": "L0",
+   "nameCn": "血色上尉",
+   "nameEn": "Scarlet Captain",
+   "zone": "东瘟疫之地",
+   "kind": "rare-elite",
+   "isNew": false,
+   "levelRange": [
+    54,
+    59
+   ],
+   "mapId": "1423",
+   "mapFile": "img/art/maps/1423.webp",
+   "mark": {
+    "x": 67.6,
+    "y": 83.2
+   },
+   "world": {
+    "x": 9566,
+    "y": 4890,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  }
+ ],
+ "rareSets": [
+  {
+   "nameCn": "卡利姆多的祝福",
+   "known": true,
+   "pieces": [
+    {
+     "itemId": 285329,
+     "nameCn": "迅猛龙皮斗篷",
+     "quality": 3,
+     "iconKey": "inv_misc_cape_17",
+     "itemLevel": 21,
+     "bind": "拾取后绑定",
+     "reqLevel": 16,
+     "fromRare": "“跳跃者”塔克"
+    },
+    {
+     "itemId": 285330,
+     "nameCn": "斑马徽戒",
+     "quality": 3,
+     "iconKey": "inv_jewelry_ring_03",
+     "itemLevel": 23,
+     "bind": "拾取后绑定",
+     "reqLevel": 18,
+     "fromRare": "迅鬃斑马"
+    },
+    {
+     "itemId": 285331,
+     "nameCn": "猎群领袖之徽",
+     "quality": 3,
+     "iconKey": "inv_jewelry_necklace_04",
+     "itemLevel": 25,
+     "bind": "拾取后绑定",
+     "reqLevel": 20,
+     "fromRare": null
+    }
+   ]
+  }
+ ],
+ "raresUnplaced": [
+  {
+   "nameCn": "被忽视的林恩"
+  },
+  {
+   "nameCn": "死亡哀嚎者"
+  },
+  {
+   "nameCn": "警觉者瓦克哈恩"
+  },
+  {
+   "nameCn": "不倦者加诺洛斯"
+  },
+  {
+   "nameCn": "不屈之眼"
+  },
+  {
+   "nameCn": "军团巨兽"
+  },
+  {
+   "nameCn": "虫翼萨林妮娅"
+  },
+  {
+   "nameCn": "老棘爪"
+  },
+  {
+   "nameCn": "迪菲亚酿酒师"
+  },
+  {
+   "nameCn": "布卢普洛"
+  },
+  {
+   "nameCn": "摇曳的婕泽瑞尔"
+  },
+  {
+   "nameCn": "洛丹伦上尉"
+  },
+  {
+   "nameCn": "雷吉纳德·霍姆斯比"
+  },
+  {
+   "nameCn": "旗翼幸存者"
+  },
+  {
+   "nameCn": "盲眼卡格拉"
+  },
+  {
+   "nameCn": "疯狂的马瑞乌斯"
+  },
+  {
+   "nameCn": "暮光铸造大师"
+  },
+  {
+   "nameCn": "古尔加什"
+  },
+  {
+   "nameCn": "莫什格拉"
+  },
+  {
+   "nameCn": "监工米奥雷斯"
+  },
+  {
+   "nameCn": "老铁牙"
+  },
+  {
+   "nameCn": "斯卡达隆"
+  },
+  {
+   "nameCn": "老锈嚎"
+  }
+ ],
+ "books": [
+  {
+   "id": "Archmage Theocritus' Research Journal",
+   "level": "L0",
+   "nameCn": "大法师塞欧克瑞图斯的研究日志",
+   "nameEn": "Archmage Theocritus' Research Journal",
+   "itemId": 203755,
+   "iconKey": "inv_misc_book_12",
+   "container": "图书馆书籍",
+   "zone": "艾尔文森林",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 65.4,
+    "y": 70.1
+   },
+   "world": {
+    "x": 5313,
+    "y": 15324,
+    "z": 5
+   },
+   "mapId": "1429",
+   "mapFile": "img/art/maps/1429.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Apothecary's Metaphysical Primer",
+   "level": "L0",
+   "nameCn": "药剂师的超自然读本",
+   "nameEn": "The Apothecary's Metaphysical Primer",
+   "itemId": 208185,
+   "iconKey": "inv_misc_book_05",
+   "container": "药剂师的会社读本",
+   "zone": "提瑞斯法林地",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 59.5,
+    "y": 52.3
+   },
+   "world": {
+    "x": 4277,
+    "y": 3973,
+    "z": 5
+   },
+   "mapId": "1420",
+   "mapFile": "img/art/maps/1420.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Rumi of Gnomeregan: The Collected Works",
+   "level": "L0",
+   "nameCn": "诺莫瑞根的鲁米：全集",
+   "nameEn": "Rumi of Gnomeregan: The Collected Works",
+   "itemId": 208860,
+   "iconKey": "inv_misc_book_12",
+   "container": "侏儒魔典",
+   "zone": "洛克莫丹",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 35.6,
+    "y": 48.9
+   },
+   "world": {
+    "x": 7465,
+    "y": 11316,
+    "z": 5
+   },
+   "mapId": "1432",
+   "mapFile": "img/art/maps/1432.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Runes of the Sorcerer-Kings",
+   "level": "L0",
+   "nameCn": "巫王的符文",
+   "nameEn": "Runes of the Sorcerer-Kings",
+   "itemId": 209850,
+   "iconKey": "inv_scroll_02",
+   "container": "卷轴",
+   "zone": "洛克莫丹",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 77.5,
+    "y": 14
+   },
+   "world": {
+    "x": 8574,
+    "y": 10699,
+    "z": 5
+   },
+   "mapId": "1432",
+   "mapFile": "img/art/maps/1432.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Bewitchments and Glamours",
+   "level": "L0",
+   "nameCn": "蛊惑与魅惑",
+   "nameEn": "Bewitchments and Glamours",
+   "itemId": 209845,
+   "iconKey": "inv_misc_book_01",
+   "container": "法术书",
+   "zone": "西部荒野",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 45.4,
+    "y": 70.4
+   },
+   "world": {
+    "x": 3237,
+    "y": 16745,
+    "z": 5
+   },
+   "mapId": "1436",
+   "mapFile": "img/art/maps/1436.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Dalaran Digest, Vol. 23",
+   "level": "L0",
+   "nameCn": "《达拉然文摘》第23卷",
+   "nameEn": "The Dalaran Digest, Vol. 23",
+   "itemId": 209844,
+   "iconKey": "inv_relics_libramoftruth",
+   "container": "达拉然文摘",
+   "zone": "银松森林",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 63.5,
+    "y": 63.1
+   },
+   "world": {
+    "x": 3856,
+    "y": 6240,
+    "z": 5
+   },
+   "mapId": "1421",
+   "mapFile": "img/art/maps/1421.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Ataeric: On Arcane Curiosities",
+   "level": "L0",
+   "nameCn": "阿塔瑞克：论奥术奇迹",
+   "nameEn": "Ataeric: On Arcane Curiosities",
+   "itemId": 210177,
+   "iconKey": "inv_misc_book_12",
+   "container": "奥术秘密",
+   "zone": "银松森林",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 43.4,
+    "y": 41.2
+   },
+   "world": {
+    "x": 3046,
+    "y": 5651,
+    "z": 5
+   },
+   "mapId": "1421",
+   "mapFile": "img/art/maps/1421.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Goaz Scrolls",
+   "level": "L0",
+   "nameCn": "戈阿兹卷轴",
+   "nameEn": "Goaz Scrolls",
+   "itemId": 209848,
+   "iconKey": "inv_scroll_15",
+   "container": "卷轴",
+   "zone": "湿地",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 33.6,
+    "y": 47.9
+   },
+   "world": {
+    "x": 6316,
+    "y": 9473,
+    "z": 5
+   },
+   "mapId": "1437",
+   "mapFile": "img/art/maps/1437.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Archmage Antonidas: The Unabridged Autobiography",
+   "level": "L0",
+   "nameCn": "大法师安东尼达斯：未删节的自传",
+   "nameEn": "Archmage Antonidas: The Unabridged Autobiography",
+   "itemId": 203754,
+   "iconKey": "inv_misc_book_12",
+   "container": "图书馆书籍",
+   "zone": "铁炉堡",
+   "continent": "ek",
+   "place": null,
+   "mark": {
+    "x": 75.6,
+    "y": 10.6
+   },
+   "world": {
+    "x": 5867,
+    "y": 10584,
+    "z": 5
+   },
+   "mapId": "1455",
+   "mapFile": "img/art/maps/1455.webp",
+   "zoneKind": "city",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Baxtan: On Destructive Magics",
+   "level": "L0",
+   "nameCn": "拜克斯坦：论毁灭性魔法",
+   "nameEn": "Baxtan: On Destructive Magics",
+   "itemId": 208800,
+   "iconKey": "inv_misc_book_12",
+   "container": "地精魔典",
+   "zone": "贫瘠之地",
+   "continent": "kal",
+   "place": null,
+   "mark": {
+    "x": 62.7,
+    "y": 36.3
+   },
+   "world": {
+    "x": 19965,
+    "y": 17190,
+    "z": 5
+   },
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Secrets of the Dreamers",
+   "level": "L0",
+   "nameCn": "梦中人的秘密",
+   "nameEn": "Secrets of the Dreamers",
+   "itemId": 209846,
+   "iconKey": "inv_scroll_09",
+   "container": "卷轴",
+   "zone": "贫瘠之地",
+   "continent": "kal",
+   "place": null,
+   "mark": {
+    "x": 49.3,
+    "y": 32.9
+   },
+   "world": {
+    "x": 18662,
+    "y": 16970,
+    "z": 5
+   },
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Arcanic Systems Manual",
+   "level": "L0",
+   "nameCn": "奥术系统手册",
+   "nameEn": "Arcanic Systems Manual",
+   "itemId": 209847,
+   "iconKey": "inv_misc_toy_05",
+   "container": "手册",
+   "zone": "贫瘠之地",
+   "continent": "kal",
+   "place": null,
+   "mark": {
+    "x": 56.3,
+    "y": 8.8
+   },
+   "world": {
+    "x": 19343,
+    "y": 15407,
+    "z": 5
+   },
+   "mapId": "1413",
+   "mapFile": "img/art/maps/1413.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Nar'thalas Almanac, Vol. 74",
+   "level": "L0",
+   "nameCn": "《纳萨拉斯年鉴》第74卷",
+   "nameEn": "Nar'thalas Almanac, Vol. 74",
+   "itemId": 209843,
+   "iconKey": "inv_scroll_12",
+   "container": "卷轴",
+   "zone": "黑海岸",
+   "continent": "kal",
+   "place": null,
+   "mark": {
+    "x": 59.6,
+    "y": 22.2
+   },
+   "world": {
+    "x": 17308,
+    "y": 9315,
+    "z": 5
+   },
+   "mapId": "1439",
+   "mapFile": "img/art/maps/1439.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Fury of the Land",
+   "level": "L0",
+   "nameCn": "大地之怒",
+   "nameEn": "Fury of the Land",
+   "itemId": 209851,
+   "iconKey": "inv_holiday_tow_spicebandage",
+   "container": "卷轴",
+   "zone": "石爪山脉",
+   "continent": "kal",
+   "place": null,
+   "mark": {
+    "x": 74.4,
+    "y": 85.7
+   },
+   "world": {
+    "x": 16756,
+    "y": 16263,
+    "z": 5
+   },
+   "mapId": "1442",
+   "mapFile": "img/art/maps/1442.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Defensive Magics 101",
+   "level": "L0",
+   "nameCn": "防御魔法入门基础",
+   "nameEn": "Defensive Magics 101",
+   "itemId": 215815,
+   "iconKey": "inv_misc_book_04",
+   "container": "手册",
+   "zone": "奥特兰克山脉",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 48.5,
+    "y": 57.7
+   },
+   "world": {
+    "x": 5160,
+    "y": 5738,
+    "z": 5
+   },
+   "mapId": "1416",
+   "mapFile": "img/art/maps/1416.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Geomancy: The Stone-Cold Truth",
+   "level": "L0",
+   "nameCn": "地卜术：真石事实",
+   "nameEn": "Geomancy: The Stone-Cold Truth",
+   "itemId": 215683,
+   "iconKey": "inv_misc_book_08",
+   "container": "卷轴",
+   "zone": "千针石林",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 34.5,
+    "y": 40.1
+   },
+   "world": {
+    "x": 18257,
+    "y": 21321,
+    "z": 5
+   },
+   "mapId": "1441",
+   "mapFile": "img/art/maps/1441.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "A Web of Lies: Debunking Myths and Legends",
+   "level": "L0",
+   "nameCn": "网罗谎言：神话传说的真面目",
+   "nameEn": "A Web of Lies: Debunking Myths and Legends",
+   "itemId": 215816,
+   "iconKey": "inv_misc_note_05",
+   "container": "卷轴",
+   "zone": "阿拉希高地",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 73.6,
+    "y": 65.2
+   },
+   "world": {
+    "x": 7984,
+    "y": 7774,
+    "z": 5
+   },
+   "mapId": "1417",
+   "mapFile": "img/art/maps/1417.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Demons and You",
+   "level": "L0",
+   "nameCn": "恶魔与你",
+   "nameEn": "Demons and You",
+   "itemId": 215817,
+   "iconKey": "inv_misc_book_01",
+   "container": "神秘的书籍",
+   "zone": "凄凉之地",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 55.1,
+    "y": 26.2
+   },
+   "world": {
+    "x": 14698,
+    "y": 16704,
+    "z": 5
+   },
+   "mapId": "1443",
+   "mapFile": "img/art/maps/1443.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Basilisks: Should Petrification be Feared?",
+   "level": "L0",
+   "nameCn": "蜥蜴：石化何必怕？",
+   "nameEn": "Basilisks: Should Petrification be Feared?",
+   "itemId": 213165,
+   "iconKey": "inv_inscription_scroll",
+   "container": "研究笔记",
+   "zone": "荆棘谷",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 41.5,
+    "y": 50.9
+   },
+   "world": {
+    "x": 5018,
+    "y": 18945,
+    "z": 5
+   },
+   "mapId": "1434",
+   "mapFile": "img/art/maps/1434.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "RwlRwlRwlRwl!",
+   "level": "L0",
+   "nameCn": "RwlRwlRwlRwl！",
+   "nameEn": "RwlRwlRwlRwl!",
+   "itemId": 215822,
+   "iconKey": "inv_misc_book_08",
+   "container": "浸水的书籍",
+   "zone": "尘泥沼泽",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 57.2,
+    "y": 20.8
+   },
+   "world": {
+    "x": 20203,
+    "y": 19035,
+    "z": 5
+   },
+   "mapId": "1445",
+   "mapFile": "img/art/maps/1445.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "A Luddite's Guide to Caring for Your Demonic Pet",
+   "level": "L0",
+   "nameCn": "守旧者的恶魔宠物照护指南",
+   "nameEn": "A Luddite's Guide to Caring for Your Demonic Pet",
+   "itemId": 215824,
+   "iconKey": "inv_misc_book_10",
+   "container": "书籍",
+   "zone": "悲伤沼泽",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 61.5,
+    "y": 22.5
+   },
+   "world": {
+    "x": 8096,
+    "y": 15710,
+    "z": 5
+   },
+   "mapId": "1435",
+   "mapFile": "img/art/maps/1435.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Mummies: A Guide to the Unsavory Undead",
+   "level": "L0",
+   "nameCn": "木乃伊：恼人亡灵指南",
+   "nameEn": "Mummies: A Guide to the Unsavory Undead",
+   "itemId": 215820,
+   "iconKey": "inv_scroll_01",
+   "container": "卷轴",
+   "zone": "荒芜之地",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 56.7,
+    "y": 39.9
+   },
+   "world": {
+    "x": 7958,
+    "y": 12433,
+    "z": 5
+   },
+   "mapId": "1418",
+   "mapFile": "img/art/maps/1418.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Liminal and the Arcane",
+   "level": "L0",
+   "nameCn": "阈值与奥术",
+   "nameEn": "The Liminal and the Arcane",
+   "itemId": 220347,
+   "iconKey": "inv_misc_book_08",
+   "container": "书籍",
+   "zone": "菲拉斯",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 50.6,
+    "y": 15.7
+   },
+   "world": {
+    "x": 14536,
+    "y": 19354,
+    "z": 5
+   },
+   "mapId": "1444",
+   "mapFile": "img/art/maps/1444.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Venomous Journeys",
+   "level": "L0",
+   "nameCn": "剧毒之旅",
+   "nameEn": "Venomous Journeys",
+   "itemId": 220350,
+   "iconKey": "inv_scroll_06",
+   "container": "书籍",
+   "zone": "辛特兰",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 36,
+    "y": 72.8
+   },
+   "world": {
+    "x": 7451,
+    "y": 6530,
+    "z": 5
+   },
+   "mapId": "1425",
+   "mapFile": "img/art/maps/1425.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Legends of the Tidesages",
+   "level": "L0",
+   "nameCn": "海潮贤者的传说",
+   "nameEn": "Legends of the Tidesages",
+   "itemId": 220346,
+   "iconKey": "inv_scroll_05",
+   "container": "书籍",
+   "zone": "塔纳利斯",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 72.6,
+    "y": 47.8
+   },
+   "world": {
+    "x": 21403,
+    "y": 24135,
+    "z": 5
+   },
+   "mapId": "1446",
+   "mapFile": "img/art/maps/1446.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "A Mind of Metal",
+   "level": "L0",
+   "nameCn": "金属的思维",
+   "nameEn": "A Mind of Metal",
+   "itemId": 220352,
+   "iconKey": "inv_misc_book_11",
+   "container": "书籍",
+   "zone": "灼热峡谷",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 37.8,
+    "y": 49.5
+   },
+   "world": {
+    "x": 5728,
+    "y": 12707,
+    "z": 5
+   },
+   "mapId": "1427",
+   "mapFile": "img/art/maps/1427.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Everyday Etiquette",
+   "level": "L0",
+   "nameCn": "日常小礼节",
+   "nameEn": "Everyday Etiquette",
+   "itemId": 220348,
+   "iconKey": "inv_misc_book_08",
+   "container": "书籍",
+   "zone": "艾萨拉",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 20.8,
+    "y": 62
+   },
+   "world": {
+    "x": 20543,
+    "y": 13269,
+    "z": 5
+   },
+   "mapId": "1447",
+   "mapFile": "img/art/maps/1447.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Conjurer's Codex",
+   "level": "L0",
+   "nameCn": "咒术师魔典",
+   "nameEn": "Conjurer's Codex",
+   "itemId": 220353,
+   "iconKey": "inv_misc_book_04",
+   "container": "书籍",
+   "zone": "诅咒之地",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 55.4,
+    "y": 32.3
+   },
+   "world": {
+    "x": 7582,
+    "y": 16981,
+    "z": 5
+   },
+   "mapId": "1419",
+   "mapFile": "img/art/maps/1419.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Stonewrought Design",
+   "level": "L0",
+   "nameCn": "巨石设计录",
+   "nameEn": "Stonewrought Design",
+   "itemId": 220349,
+   "iconKey": "inv_misc_book_11",
+   "container": "书籍",
+   "zone": "燃烧平原",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 29.1,
+    "y": 28.9
+   },
+   "world": {
+    "x": 5682,
+    "y": 13436,
+    "z": 5
+   },
+   "mapId": "1428",
+   "mapFile": "img/art/maps/1428.webp",
+   "zoneKind": "zone",
+   "forever": false,
+   "placed": true,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "A Study of the Light",
+   "level": "L0",
+   "nameCn": "圣光研究录",
+   "nameEn": "A Study of the Light",
+   "itemId": 228135,
+   "iconKey": "inv_misc_book_13",
+   "container": "书籍",
+   "zone": "东瘟疫之地",
+   "continent": null,
+   "place": "新阿瓦隆",
+   "mark": {
+    "x": 71.9,
+    "y": 48.3
+   },
+   "world": null,
+   "mapId": "1423",
+   "mapFile": "img/art/maps/1423.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "The Knight and the Lady",
+   "level": "L0",
+   "nameCn": "骑士与女士",
+   "nameEn": "The Knight and the Lady",
+   "itemId": 228138,
+   "iconKey": "inv_misc_book_04",
+   "container": "书籍",
+   "zone": "东瘟疫之地",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 47.4,
+    "y": 42.2
+   },
+   "world": null,
+   "mapId": "1423",
+   "mapFile": "img/art/maps/1423.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Scourge: Undead Menace or Misunderstood?",
+   "level": "L0",
+   "nameCn": "天灾：亡灵祸害还是误解所致？",
+   "nameEn": "Scourge: Undead Menace or Misunderstood?",
+   "itemId": 228140,
+   "iconKey": "inv_misc_book_01",
+   "container": "书籍",
+   "zone": "东瘟疫之地",
+   "continent": null,
+   "place": "病木林",
+   "mark": {
+    "x": 26.4,
+    "y": 15.1
+   },
+   "world": null,
+   "mapId": "1423",
+   "mapFile": "img/art/maps/1423.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Ka-Boom!",
+   "level": "L0",
+   "nameCn": "炸他个稀巴烂！",
+   "nameEn": "Ka-Boom!",
+   "itemId": 228136,
+   "iconKey": "inv_misc_book_11",
+   "container": "书籍",
+   "zone": "冬泉谷",
+   "continent": null,
+   "place": "冰蓟岭",
+   "mark": {
+    "x": 60.7,
+    "y": 37.7
+   },
+   "world": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Undead Potatoes",
+   "level": "L0",
+   "nameCn": "亡灵马铃薯",
+   "nameEn": "Undead Potatoes",
+   "itemId": 228132,
+   "iconKey": "inv_misc_book_09",
+   "container": "书籍",
+   "zone": "西瘟疫之地",
+   "continent": null,
+   "place": "安多哈尔废墟",
+   "mark": {
+    "x": 38.2,
+    "y": 54.6
+   },
+   "world": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Necromancy 101",
+   "level": "L0",
+   "nameCn": "通灵术基础入门",
+   "nameEn": "Necromancy 101",
+   "itemId": 228141,
+   "iconKey": "inv_misc_book_06",
+   "container": "书籍",
+   "zone": "西瘟疫之地",
+   "continent": null,
+   "place": "达隆米尔湖",
+   "mark": {
+    "x": 69.2,
+    "y": 72.3
+   },
+   "world": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "id": "Northern Kalimdor - A Comprehensive Guide",
+   "level": "L0",
+   "nameCn": "北卡利姆多——全方位指南",
+   "nameEn": "Northern Kalimdor - A Comprehensive Guide",
+   "itemId": 228134,
+   "iconKey": "inv_misc_book_03",
+   "container": "书籍",
+   "zone": "费伍德森林",
+   "continent": null,
+   "place": null,
+   "mark": {
+    "x": 65.2,
+    "y": 3.3
+   },
+   "world": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "zoneKind": "zone",
+   "forever": true,
+   "placed": true,
+   "afterLevel": 60,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  }
+ ],
+ "booksMissing": [
+  {
+   "nameCn": "塔佐的教训",
+   "nameEn": "The Lessons of Ta'zo",
+   "itemId": 207972,
+   "iconKey": "inv_scroll_02",
+   "placed": false,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "上游只给出书名与物品 ID，没给坐标",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "nameCn": "岩浆还是熔岩？",
+   "nameEn": "Magma or Lava?",
+   "itemId": 228133,
+   "iconKey": "inv_misc_book_10",
+   "placed": false,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "上游只给出书名与物品 ID，没给坐标",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  }
+ ],
+ "bookRewards": [
+  {
+   "books": 10,
+   "title": "图书馆之友",
+   "questId": 78150,
+   "level": null,
+   "items": [
+    {
+     "itemId": 277203,
+     "nameCn": "学者坠饰",
+     "quality": 2,
+     "iconKey": "inv_jewelry_necklace_11",
+     "itemLevel": 23,
+     "bind": "拾取后绑定",
+     "reqLevel": null
+    },
+    {
+     "itemId": 277204,
+     "nameCn": "博学者护符",
+     "quality": 2,
+     "iconKey": "inv_jewelry_necklace_01",
+     "itemLevel": 23,
+     "bind": "拾取后绑定",
+     "reqLevel": null
+    }
+   ],
+   "noReward": false,
+   "noRewardNote": null,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "books": 20,
+   "title": "图书馆的挚友",
+   "questId": 79536,
+   "level": 20,
+   "items": [
+    {
+     "itemId": 281634,
+     "nameCn": "野外研究员指环",
+     "quality": 3,
+     "iconKey": "inv_jewelry_ring_02",
+     "itemLevel": 35,
+     "bind": "拾取后绑定",
+     "reqLevel": null
+    },
+    {
+     "itemId": 281635,
+     "nameCn": "大慈善家的戒指",
+     "quality": 3,
+     "iconKey": "inv_jewelry_ring_14",
+     "itemLevel": 35,
+     "bind": "拾取后绑定",
+     "reqLevel": null
+    }
+   ],
+   "noReward": false,
+   "noRewardNote": null,
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "books": 25,
+   "title": "图书馆的挚友",
+   "questId": 82208,
+   "level": null,
+   "items": [],
+   "noReward": true,
+   "noRewardNote": "上游只给出上交门槛与任务 ID，奖励物品未采集",
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  }
+ ],
+ "librarians": [
+  {
+   "nameCn": "加里昂·温德尔",
+   "side": "a",
+   "faction": "联盟",
+   "quarter": "法师区",
+   "city": "暴风城",
+   "mark": {
+    "x": 48.8,
+    "y": 86.6
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  },
+  {
+   "nameCn": "欧文·萨德",
+   "side": "h",
+   "faction": "部落",
+   "quarter": "魔法区",
+   "city": "幽暗城",
+   "mark": {
+    "x": 73.4,
+    "y": 33
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/shuji",
+     "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-09"
+    }
+   ]
+  }
+ ],
+ "bagTool": {
+  "usableLevel": 14,
+  "bag": {
+   "itemId": 211527,
+   "nameCn": "舒适的睡袋",
+   "quality": 3,
+   "iconKey": "inv_misc_bag_bigbagofenchantments",
+   "itemLevel": 40,
+   "bind": "拾取后绑定",
+   "reqLevel": null
+  },
+  "params": {
+   "castSec": 15,
+   "lastsMin": 20,
+   "cdMin": 60,
+   "buffName": "精神饱满",
+   "stacks": 3,
+   "buffHours": 2
+  },
+  "paramsLevel": "L2",
+  "paramsNote": "机制数值取自上游对物品说明的解析，本站没有游戏内实测过；具体收益以游戏内为准",
+  "camps": [
+   {
+    "stop": "start",
+    "places": [
+     {
+      "zone": "西部荒野",
+      "whereCn": "月溪镇西北方",
+      "landmark": "焦焚残骸",
+      "mark": {
+       "x": 50,
+       "y": 50
+      },
+      "world": {
+       "x": 2969,
+       "y": 16304,
+       "z": 5
+      },
+      "mapSlug": "eastern-kingdoms",
+      "mapId": "1436",
+      "mapFile": "img/art/maps/1436.webp",
+      "provenance": [
+       {
+        "type": "datamine_cn",
+        "url": "https://wowforever.wclbox.com/shuidai",
+        "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
+        "checkedAt": "2026-10-09"
+       }
+      ]
+     },
+     {
+      "zone": "贫瘠之地",
+      "whereCn": "陶拉祖营地南方",
+      "landmark": "焦焚残骸",
+      "mark": {
+       "x": 50,
+       "y": 50
+      },
+      "world": {
+       "x": 18380,
+       "y": 19629,
+       "z": 5
+      },
+      "mapSlug": "kalimdor",
+      "mapId": "1413",
+      "mapFile": "img/art/maps/1413.webp",
+      "provenance": [
+       {
+        "type": "datamine_cn",
+        "url": "https://wowforever.wclbox.com/shuidai",
+        "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
+        "checkedAt": "2026-10-09"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "stop": "stonetalon",
+    "places": [
+     {
+      "zone": "石爪山脉",
+      "whereCn": "烈日石居西北方",
+      "landmark": "烈日石居",
+      "mark": {
+       "x": 67.16,
+       "y": 72.82
+      },
+      "world": {
+       "x": 15317,
+       "y": 15314,
+       "z": 5
+      },
+      "mapSlug": "kalimdor",
+      "mapId": "1442",
+      "mapFile": "img/art/maps/1442.webp",
+      "provenance": [
+       {
+        "type": "datamine_cn",
+        "url": "https://wowforever.wclbox.com/shuidai",
+        "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
+        "checkedAt": "2026-10-09"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "stop": "loch-modan",
+    "places": [
+     {
+      "zone": "洛克莫丹",
+      "whereCn": "巨石水坝",
+      "landmark": "雕刻塑像",
+      "mark": {
+       "x": 50,
+       "y": 50
+      },
+      "world": {
+       "x": 7830,
+       "y": 10680,
+       "z": 5
+      },
+      "mapSlug": "eastern-kingdoms",
+      "mapId": "1432",
+      "mapFile": "img/art/maps/1432.webp",
+      "provenance": [
+       {
+        "type": "datamine_cn",
+        "url": "https://wowforever.wclbox.com/shuidai",
+        "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
+        "checkedAt": "2026-10-09"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "stop": "thoradins-wall",
+    "places": [
+     {
+      "zone": "阿拉希高地",
+      "whereCn": "索拉丁之墙",
+      "landmark": "信使行囊",
+      "mark": {
+       "x": 50,
+       "y": 50
+      },
+      "world": {
+       "x": 6214,
+       "y": 6830,
+       "z": 5
+      },
+      "mapSlug": "eastern-kingdoms",
+      "mapId": "1417",
+      "mapFile": "img/art/maps/1417.webp",
+      "provenance": [
+       {
+        "type": "datamine_cn",
+        "url": "https://wowforever.wclbox.com/shuidai",
+        "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
+        "checkedAt": "2026-10-09"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "provenance": [
+  {
+   "type": "datamine_cn",
+   "url": "https://wowforever.wclbox.com/ditu",
+   "note": "世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做形状与口径",
+   "checkedAt": "2026-10-09"
+  }
+ ]
+}

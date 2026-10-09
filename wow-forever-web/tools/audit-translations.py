@@ -179,6 +179,36 @@ def main():
             items.append({"src": "天裔导语", "id": "skyborne-note", "cn": sky, "cls": "引用", "level": "L0",
                           "prov": [{"type": "official_cn", "url": page_url, "quote": sky}]})
 
+    # 世界线：稀有精英与书籍的中文名回它自己声明的那一页逐字核对。
+    # 区域名不在这批核对范围：它来自结构化接口而不是页面正文，改由 build-data 的 mapId 两套来源交叉验证把关。
+    wd_path = os.path.join(DATA, "world.json")
+    if os.path.exists(wd_path):
+        wd = json.load(io.open(wd_path, encoding="utf-8"))
+        for x in (wd.get("rares") or []):
+            items.append({"src": "世界稀有", "id": x["id"], "cn": x.get("nameCn"), "cls": x.get("zone"),
+                          "level": x.get("level"), "prov": x.get("provenance", [])})
+            for d in (x.get("drops") or []):
+                items.append({"src": "世界掉落", "id": "%s/%s" % (x["id"], d.get("itemId")), "cn": d.get("nameCn"),
+                              "cls": x.get("zone"), "level": x.get("level"), "prov": x.get("provenance", [])})
+        for s_ in (wd.get("rareSets") or []):
+            for d in (s_.get("pieces") or []):
+                items.append({"src": "世界套装", "id": "set-%s/%s" % (s_.get("nameCn"), d.get("itemId")),
+                              "cn": d.get("nameCn"), "cls": "套装", "level": "L0",
+                              "prov": (wd.get("rares") or [{}])[0].get("provenance", [])})
+        for x in (wd.get("books") or []):
+            items.append({"src": "世界书籍", "id": x["id"], "cn": x.get("nameCn"), "cls": x.get("zone"),
+                          "level": x.get("level"), "prov": x.get("provenance", [])})
+        for r in (wd.get("bookRewards") or []):
+            items.append({"src": "书籍称号", "id": "rw-%s" % r.get("books"), "cn": r.get("title"),
+                          "cls": "上交", "level": "L0", "prov": r.get("provenance", [])})
+            for d in (r.get("items") or []):
+                items.append({"src": "书籍奖励", "id": "rw-%s/%s" % (r.get("books"), d.get("itemId")),
+                              "cn": d.get("nameCn"), "cls": "上交", "level": "L0",
+                              "prov": r.get("provenance", [])})
+        for l in (wd.get("librarians") or []):
+            items.append({"src": "图书管理员", "id": "lib-%s" % l.get("nameCn"), "cn": l.get("nameCn"),
+                          "cls": l.get("city"), "level": "L0", "prov": l.get("provenance", [])})
+
     urls = []
     for it in items:
         for prov in it["prov"]:
@@ -259,6 +289,7 @@ def main():
     lines.append("| 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | %d |" % len(expected_unofficial))
     lines.append("")
     lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、"
+        "`world.json` 的稀有精英名与掉落物名、书名与上交奖励名（区域名不在此列，见上）、"
                  "`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、"
                  "亮点组合与天裔导语。")
     rate = len(hits) * 100.0 / max(len(items), 1)

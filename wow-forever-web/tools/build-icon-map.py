@@ -18,6 +18,38 @@ TALENTS = os.path.join(DATA, "talents")
 ICONS = os.path.join(ROOT, "src", "img", "icons")
 
 
+def collect_all_keys():
+    """扫全部数据文件里出现过的 iconKey，找出本地没转存下来的那些。
+
+    界面是"先画自绘块、有本地图再叠上去"，所以缺图会有一次 404。
+    这份清单把"哪些键本来就没有图"登记下来，回归脚本只放行清单里的，
+    多出来的 404 一律算失败——防止悄悄引入外链或漏抓。"""
+    keys = {}
+
+    def walk(node, src):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k == "iconKey" and isinstance(v, str) and v:
+                    keys.setdefault(v, set()).add(src)
+                else:
+                    walk(v, src)
+        elif isinstance(node, list):
+            for x in node:
+                walk(x, src)
+
+    names = ["dungeons.json", "professions.json", "races.json", "world.json",
+             "glossary.json", "abilities.json", "classes.json", "chooser.json", "systems.json"]
+    for fn in names:
+        fp = os.path.join(DATA, fn)
+        if os.path.exists(fp):
+            walk(json.load(open(fp, encoding="utf-8")), fn)
+    for fn in sorted(os.listdir(TALENTS)):
+        if fn.startswith("_") or not fn.endswith(".json"):
+            continue
+        walk(json.load(open(os.path.join(TALENTS, fn), encoding="utf-8")), "talents/" + fn)
+    return keys
+
+
 def main():
     mapping = {}
     dup = []
@@ -72,6 +104,33 @@ def main():
         print("  同名不同图标键 %d 处：%s" % (len(dup), "、".join(dup[:5])))
     if missing:
         print("  缺本地文件：%s" % "、".join(missing[:8]))
+
+    all_keys = collect_all_keys()
+    files = set(f[:-4] for f in os.listdir(ICONS) if f.endswith(".jpg"))
+    gaps = sorted(k for k in all_keys if k not in files)
+    _byfile = {}
+    for k in gaps:
+        for f in sorted(all_keys[k]):
+            _byfile[f] = _byfile.get(f, 0) + 1
+    gap_payload = {
+        "meta": {
+            "generatedAt": datetime.date.today().isoformat(),
+            "method": "tools/build-icon-map.py 扫全部数据文件的 iconKey，比对 src/img/icons/ 本地文件",
+            "note": "这些图标键在数据里被引用，但官方 CDN 没有对应文件（多是无限服新装备）。"
+                    "界面退回自绘块；回归脚本只放行这份清单里的 404。",
+            "count": len(gaps),
+            "localFiles": len(files),
+            "referenced": len(all_keys)
+        },
+        "keys": gaps,
+        "byFile": dict(sorted(_byfile.items()))
+    }
+    gp = os.path.join(DATA, "icon-gaps.json")
+    with open(gp, "w", encoding="utf-8") as fh:
+        fh.write(json.dumps(gap_payload, ensure_ascii=False, indent=1) + "\n")
+    print("缺图登记 %d 个键 → src/data/icon-gaps.json" % len(gaps))
+    if gaps:
+        print("  %s" % "、".join(gaps[:8]))
 
 
 if __name__ == "__main__":

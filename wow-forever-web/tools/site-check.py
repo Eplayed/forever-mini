@@ -31,7 +31,20 @@ TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
 PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races",
-         "professions", "glossary", "provenance"]
+         "professions", "world", "glossary", "provenance"]
+# 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
+# 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
+GAPS_PATH = os.path.join(SRC, "data", "icon-gaps.json")
+ICON_GAPS = set()
+if os.path.exists(GAPS_PATH):
+    import json as _json
+    ICON_GAPS = set(_json.load(open(GAPS_PATH, encoding="utf-8")).get("keys") or [])
+
+
+def tolerated(url):
+    if "/img/icons/" not in url:
+        return False
+    return url.split("/")[-1].replace(".jpg", "") in ICON_GAPS
 # 演示结构（_demo.json）里写死了层级门槛与前置链，用它做确定性断言
 DEMO_A00 = "a-0-0"
 DEMO_A01 = "a-0-1"
@@ -116,7 +129,8 @@ def test_pages(browser, base):
         page = ctx.new_page()
         errors, failed = [], []
         page.on("console", lambda m, e=errors: e.append(m.text[:120]) if m.type == "error" else None)
-        page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1])) if r.status >= 400 else None)
+        page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
+                if r.status >= 400 and not tolerated(r.url) else None)
         page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
         page.wait_for_timeout(1200)
         stats = page.evaluate("""() => ({
@@ -665,7 +679,7 @@ def test_grouping(browser, base):
         if hits:
             bad_pages.append("%s:%s" % (name, ",".join(hits)))
         dp.close()
-    check("十页正文没有调试文案与原始数据", not bad_pages, "; ".join(bad_pages))
+    check("%d 页正文没有调试文案与原始数据" % len(PAGES), not bad_pages, "; ".join(bad_pages))
     # 官方 CDN 取回来的职业 / 种族图标要真的显示出来，且一张都不许坏
     rp = ctx.new_page()
     rp.goto(base + "/races.html", wait_until="networkidle")
@@ -829,6 +843,115 @@ def test_professions(browser, base):
     ctx.close()
 
 
+def test_world(browser, base):
+    """世界页：区域卡、稀有卡与小地图标记、书籍表、睡袋参数，逐块对着 world.json 数。"""
+    print("\n[13] 世界线：区域 / 稀有 / 书籍 / 睡袋")
+    import json
+    w = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
+    zones, rares, books = w["zones"], w["rares"], w["books"]
+    exp_drops = sum(len(r.get("drops") or []) for r in rares)
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/world.html", wait_until="networkidle")
+    page.wait_for_timeout(1800)
+    check("世界页无脚本报错", not errs, "; ".join(errs[:2]))
+
+    tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
+    check("四个面板都能选", tabs == 4, "%d 个" % tabs)
+    zc = page.evaluate("() => document.querySelectorAll('#wbody .zcard').length")
+    check("区域卡数量对得上数据", zc == len(zones), "%d 张（数据 %d 个区域）" % (zc, len(zones)))
+    zstate = page.evaluate("""() => { const c = [...document.querySelectorAll('#wbody .zcard')];
+      return { img: c.filter(x => x.querySelector('.zmap img')).length,
+               honest: c.filter(x => x.querySelector('.zmap.none')).length,
+               bad: [...document.querySelectorAll('#wbody .zmap img')].filter(i => i.complete && i.naturalWidth === 0).length }; }""")
+    check("每张区域卡要么有本地图要么写明没切图", zstate["img"] + zstate["honest"] == zc and zstate["bad"] == 0,
+          json.dumps(zstate))
+    newtag = page.evaluate("""() => { const c = [...document.querySelectorAll('#wbody .zcard')]
+        .filter(x => x.querySelector('.tag.new'));
+      return { n: c.length, flight: c.filter(x => /飞行/.test(x.innerText)).length }; }""")
+    check("无限新增区域带标且写清怎么去", newtag["n"] == len([z for z in zones if z.get("isNew")]) and newtag["flight"] == newtag["n"],
+          json.dumps(newtag))
+
+    page.click('[data-t="rares"]')
+    page.wait_for_timeout(1400)
+    rc = page.evaluate("() => document.querySelectorAll('#wbody .rarecard').length")
+    check("稀有卡数量对得上数据", rc == len(rares), "%d 张（数据 %d 个）" % (rc, len(rares)))
+    marks = page.evaluate("""() => { const m = [...document.querySelectorAll('#wbody .zmark')];
+      return { n: m.length, placed: m.filter(b => b.style.left && b.style.top).length }; }""")
+    exp_marks = len([r for r in rares if r.get("mark")])
+    check("每个稀有标记点都按数据摆到图上", marks["n"] == exp_marks and marks["placed"] == exp_marks,
+          "%d 个点，%d 个已定位（数据 %d）" % (marks["n"], marks["placed"], exp_marks))
+    dl = page.evaluate("() => document.querySelectorAll('#wbody .rarecard .loot .loot-i').length")
+    check("掉落条目数量对得上数据", dl == exp_drops, "稀有卡上 %d 件（数据 %d 件）" % (dl, exp_drops))
+    body = page.evaluate("() => document.querySelector('#wbody').innerText")
+    pct = body.count(chr(37))
+    check("稀有面板正文不出现百分比", pct == 0, "出现 {0} 处".format(pct))
+    nodrop = page.evaluate("() => document.querySelectorAll('#wbody .rarecard .note').length")
+    check("没掉落的稀有写明而不是留白", nodrop >= len([r for r in rares if not (r.get("drops") or [])]),
+          "%d 条说明" % nodrop)
+    one = page.evaluate("() => { const b = document.querySelector('.picks .pick[data-z]:not([data-z=\"\"])'); b.click(); return b.dataset.z; }")
+    page.wait_for_timeout(1200)
+    only = page.evaluate("() => document.querySelectorAll('#wbody .rarecard').length")
+    exp_only = len([r for r in rares if r["zone"] == one])
+    check("按区域筛选生效", 0 < only < rc and only == exp_only, "「%s」%d 张（数据 %d）" % (one, only, exp_only))
+    page.evaluate("() => document.querySelector('.picks .pick[data-z=\"\"]').click()")
+    page.wait_for_timeout(1000)
+    page.fill("#wq", "泽风")
+    page.wait_for_timeout(900)
+    sq = page.evaluate("() => document.querySelectorAll('#wbody .rarecard').length")
+    check("搜索按区域名过滤", 0 < sq < rc, "「泽风」%d 张" % sq)
+    page.fill("#wq", "")
+    page.wait_for_timeout(800)
+    drawer = page.evaluate("""() => { const b = document.querySelector('#wbody [data-r]'); b.click();
+      const d = document.querySelector('#wbody .wdr.open');
+      return d ? d.innerText.length : 0; }""")
+    check("逐条来源能展开", drawer > 40, "抽屉 %d 字" % drawer)
+
+    page.click('[data-t="books"]')
+    page.wait_for_timeout(1500)
+    bt = page.evaluate("() => document.querySelectorAll('#wbody table.bktab tbody tr').length")
+    check("书籍表行数对得上数据", bt == len(books), "%d 行（数据 %d 本）" % (bt, len(books)))
+    bicon = page.evaluate("""() => { const a = [...document.querySelectorAll('#wbody table img')];
+      return { n: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length }; }""")
+    check("书本地图标用本地图且不出现坏图", bicon["n"] > 20 and bicon["broken"] == 0, json.dumps(bicon))
+    miss = page.evaluate("() => document.querySelectorAll('#wbody .chips .chipc').length")
+    check("没给坐标的书单独列出", miss == len(w.get("booksMissing") or []), "%d 本" % miss)
+    rew = page.evaluate("() => document.querySelectorAll('#wbody table .pill').length")
+    check("上游没给奖励的那档标待实测", rew >= len([r for r in w["bookRewards"] if r.get("noReward")]),
+          "%d 个待实测徽标" % rew)
+
+    page.click('[data-t="bag"]')
+    page.wait_for_timeout(1200)
+    bag = page.evaluate("""() => { const rows = [...document.querySelectorAll('#wbody table.mtx tbody tr')];
+      return { rows: rows.length, l2: rows.filter(r => /待实测/.test(r.innerText)).length,
+               camps: document.querySelectorAll('#wbody .rarecard').length }; }""")
+    exp_camps = sum(len(c.get("places") or []) for c in (w["bagTool"].get("camps") or []))
+    check("睡袋机制数值整表标待实测", bag["rows"] and bag["rows"] == bag["l2"], json.dumps(bag))
+    check("营地点数量对得上数据", bag["camps"] == exp_camps, "%d 处（数据 %d）" % (bag["camps"], exp_camps))
+
+    ext = page.evaluate("() => [...document.querySelectorAll('#main img')].filter(i => /^https?:/.test(i.getAttribute('src') || '')).length")
+    check("世界页没有一张外链图片", ext == 0, "%d 张外链" % ext)
+    page.screenshot(path=os.path.join(SHOT_DIR, "world-bag.png"))
+    ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(base + "/world.html", wait_until="networkidle")
+    mp.wait_for_timeout(1500)
+    mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const small = [...document.querySelectorAll('#wbody .zcard, #wbody .rarecard, .picks .pick, #wbody button.ghost')]
+        .filter(b => { const r = b.getBoundingClientRect(); return r.width && r.height && r.height < 44; }).length;
+      return { overflow: document.documentElement.scrollWidth > vw + 1, small: small }; }""")
+    check("移动端世界页不横向溢出且点击目标够高", not mob["overflow"] and mob["small"] == 0, json.dumps(mob))
+    mp.click('[data-t="rares"]')
+    mp.wait_for_timeout(1400)
+    mp.screenshot(path=os.path.join(SHOT_DIR, "world-rares-mobile.png"))
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -848,6 +971,7 @@ def main():
             test_grouping(browser, base)
             test_dungeon_data(browser, base)
             test_professions(browser, base)
+            test_world(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()
