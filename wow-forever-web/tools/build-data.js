@@ -352,7 +352,7 @@ console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文�
 const artPath = path.join(ROOT, 'art.json');
 if (fs.existsSync(artPath)) {
   const art = JSON.parse(fs.readFileSync(artPath, 'utf8'));
-  ['classes', 'dungeons', 'maps'].forEach((k) => {
+  ['classes', 'dungeons', 'maps', 'races', 'factions'].forEach((k) => {
     Object.keys(art[k] || {}).forEach((id) => {
       if (!fs.existsSync(path.join(ROOT, '..', art[k][id]))) {
         errs.push(`art.json：${k}/${id} 指向的文件不存在（${art[k][id]}）`);
@@ -361,7 +361,8 @@ if (fs.existsSync(artPath)) {
   });
   console.log('客户端原画：职业背景 ' + Object.keys(art.classes || {}).length +
     ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张 / 区域小地图 ' +
-    Object.keys(art.maps || {}).length + ' 张');
+    Object.keys(art.maps || {}).length + ' 张 / 种族头像 ' + Object.keys(art.races || {}).length +
+    ' 张 / 阵营徽标 ' + Object.keys(art.factions || {}).length + ' 张');
 } else {
   warns.push('art.json 缺失：客户端原画全部退回自绘（跑 tools/fetch-art.py 可补）');
 }

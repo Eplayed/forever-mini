@@ -185,10 +185,55 @@ def maps(man):
     print(u"区域小地图：需要 %d 张，本轮新增 %d，取不到 %d" % (len(want), len(ok), len(miss)))
 
 
+# 参考站种族页的文件名 → 我们的种族 id。只有两处对不上（nightelf / skyborne），其余同名；
+# 天裔两个子族共用这一张头像，与参考站一致，不另找图凑。
+RACE_FILE = {"human": "human", "dwarf": "dwarf", "nightelf": "night-elf", "gnome": "gnome",
+             "orc": "orc", "undead": "undead", "tauren": "tauren", "troll": "troll",
+             "skyborne": "skyborne"}
+
+
+def races(man):
+    """种族头像与阵营徽标：128×128 的客户端头像，官方 CDN 不提供，只能转存第三方副本。
+
+    口径与职业背景图、副本载入图完全一致：落独立目录 + manifest 记来源与抓取日期 +
+    整目录删除即回退到自绘方块。文件名里的哈希（天裔那张）会变，所以每次都从种族页现读。
+    """
+    code, html = http(WBX + "/zhongzu")
+    if code != 200:
+        sys.exit(u"取不到参考站种族页（%d）" % code)
+    found = sorted(set(re.findall(r'(/jiemian/(?:reference-art|custom)/(?:raceicon|faction)-[\w.-]+\.(?:webp|png))', html)))
+    print(u"种族页里找到 %d 张头像/徽标" % len(found))
+    ok, miss = [], []
+    for path in found:
+        name = os.path.basename(path)
+        m = re.match(r"raceicon-([a-z]+)(?:-[0-9a-f]{6,})?\.(webp|png)$", name)
+        f = re.match(r"faction-([a-z]+)\.(png|webp)$", name)
+        if m:
+            key = RACE_FILE.get(m.group(1))
+            if not key:
+                miss.append(name + u"（对不上我们的种族 id）")
+                continue
+            kind, dest, ext = "race-portrait", os.path.join(ART, "races", key + "." + m.group(2)), m.group(2)
+        elif f:
+            kind, dest, ext = "faction-emblem", os.path.join(ART, "factions", f.group(1) + "." + f.group(2)), f.group(2)
+        else:
+            continue
+        code, blob = http(WBX + path, binary=True)
+        if code != 200 or len(blob) < 800:
+            miss.append(name)
+            continue
+        rec = save(dest, blob, WBX + path, kind)
+        man["items"] = [x for x in man["items"] if x["file"] != rec["file"]] + [rec]
+        ok.append(rec["file"])
+    print(u"种族头像/徽标：新增或更新 %d，取不到 %d" % (len(ok), len(miss)))
+    if miss:
+        print(u"  缺：%s" % u"、".join(miss[:10]))
+
+
 def write_art_index(man):
     """把 manifest 收成界面能直接用的索引：src/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
-    idx = {"classes": {}, "dungeons": {}, "maps": {}, "meta": {}}
+    idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -196,19 +241,24 @@ def write_art_index(man):
             idx["classes"][name] = "img/" + rel
         elif x["kind"] == "zone-map":
             idx["maps"][name] = "img/" + rel
+        elif x["kind"] == "race-portrait":
+            idx["races"][name] = "img/" + rel
+        elif x["kind"] == "faction-emblem":
+            idx["factions"][name] = "img/" + rel
         else:
             idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
                    "count": len(man["items"])}
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
-    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d）" % (
-        len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"])))
+    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / 阵营徽标 %d）" % (
+        len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]),
+        len(idx["races"]), len(idx["factions"])))
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "all"], default="all")
+    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "all"], default="all")
     args = ap.parse_args()
     man = load_manifest()
     if args.what in ("classes", "all"):
@@ -217,6 +267,8 @@ def main():
         dungeons(man)
     if args.what in ("maps", "all"):
         maps(man)
+    if args.what in ("races", "all"):
+        races(man)
     man["fetchedAt"] = datetime.date.today().isoformat()
     man["total"] = len(man["items"])
     save_manifest(man)

@@ -656,8 +656,96 @@
    "source": "https://wowforever.wclbox.com/ditu-xiao/1452.webp",
    "kind": "zone-map",
    "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/skyborne.webp",
+   "bytes": 4390,
+   "sha1": "b35bf94154",
+   "source": "https://wowforever.wclbox.com/jiemian/custom/raceicon-skyborne-430ba4dd.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/factions/alliance.png",
+   "bytes": 15221,
+   "sha1": "cf09a92b1b",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/faction-alliance.png",
+   "kind": "faction-emblem",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/factions/horde.png",
+   "bytes": 23638,
+   "sha1": "ec18eadab8",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/faction-horde.png",
+   "kind": "faction-emblem",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/dwarf.webp",
+   "bytes": 4426,
+   "sha1": "bcd7ce9882",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-dwarf.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/gnome.webp",
+   "bytes": 4336,
+   "sha1": "09912c589c",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-gnome.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/human.webp",
+   "bytes": 4674,
+   "sha1": "858b0cc8b1",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-human.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/night-elf.webp",
+   "bytes": 4236,
+   "sha1": "90afeb7474",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-nightelf.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/orc.webp",
+   "bytes": 4874,
+   "sha1": "5d34ed42b9",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-orc.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/tauren.webp",
+   "bytes": 4344,
+   "sha1": "f4b966f317",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-tauren.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/troll.webp",
+   "bytes": 4662,
+   "sha1": "e87b92b025",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-troll.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/races/undead.webp",
+   "bytes": 3662,
+   "sha1": "625c7fb177",
+   "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-undead.webp",
+   "kind": "race-portrait",
+   "fetchedAt": "2026-10-09"
   }
  ],
  "fetchedAt": "2026-10-09",
- "total": 82
+ "total": 93
 }

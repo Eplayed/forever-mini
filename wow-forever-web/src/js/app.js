@@ -1171,11 +1171,13 @@
 
   /* ---------- 种族 ---------- */
   function races() {
-    Promise.all([D.load('data/races.json'), D.load('data/classes.json'), D.load('data/glossary.json')])
+    Promise.all([D.load('data/races.json'), D.load('data/classes.json'), D.load('data/glossary.json'),
+      D.load('data/art.json').catch(function () { return {}; })])
       .then(function (r) {
-        var R = r[0], classes = r[1].classes, gloss = r[2].items;
-        var CNAME = {};
-        classes.forEach(function (c) { CNAME[c.id] = c.cn; });
+        var R = r[0], classes = r[1].classes, gloss = r[2].items, ART = r[3] || {};
+        var CNAME = {}, CTILE = {};
+        classes.forEach(function (c) { CNAME[c.id] = c.cn; CTILE[c.id] = c.iconKey || null; });
+        var POR = ART.races || {}, EMB = ART.factions || {};
         var FAC = { horde: '部落', alliance: '联盟' };
         var cols = (R.classOrder || []).filter(function (id) { return CNAME[id]; });
         var traits = [];
@@ -1185,24 +1187,103 @@
           (list || []).forEach(function (t) { traits.push({ race: x, owner: owner, t: t }); });
         });
         var inGloss = gloss.filter(function (i) { return i.kind === 'racial' && i.raceId; }).length;
-        var f = { c: '', fac: '', q: '' };
+        // 深链 #race=horde-orc：阵营 + 种族 id，两边命名对不上时以阵营前缀为准
+        function keyOf(x) { return x.faction + '-' + x.id; }
+        var byKey = {};
+        R.races.forEach(function (x) { byKey[keyOf(x)] = x; });
+        var m0 = /#race=([\w-]+)/.exec(location.hash || '');
+        var f = { c: '', q: '', all: false, sel: (m0 && byKey[m0[1]]) ? m0[1] : keyOf(R.races[0]) };
 
         function srcBtn(id, name, prov) {
           return '<button class="info" data-src="' + D.esc(id) + '" data-name="' + D.esc(name) +
             '" data-prov="' + encodeURIComponent(JSON.stringify(prov || [])) +
             '" aria-label="查看「' + D.esc(name) + '」的来源">来源</button>';
         }
+        /* 头像：本地转存的客户端种族头像盖在自绘方块上；两边都没有就只留自绘块，不放假图 */
+        function faceOf(x) {
+          return x.id.indexOf('skyborne') === 0 ? (POR.skyborne || null) : (POR[x.id] || null);
+        }
+        function face(x, mod) {
+          var art = faceOf(x);
+          return '<span class="rface' + (mod ? ' ' + mod : '') + '">' +
+            Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
+            (art ? '<img class="rface-art" src="' + D.esc(art) + '" alt="" loading="lazy" decoding="async" ' +
+              'onerror="this.className=\'rface-art bad\'">' : '') + '</span>';
+        }
+        function raceName(x) {
+          return D.esc(x.subgroup ? x.subgroup.nameCn : x.nameCn);
+        }
+        function traitListOf(x) { return (x.subgroup ? x.subgroup.traits : x.traits) || []; }
+
+        function band(fac) {
+          var rows = R.races.filter(function (x) { return x.faction === fac; });
+          var n = rows.reduce(function (a, x) { return a + traitListOf(x).length; }, 0);
+          return '<div class="facband ' + fac + '"><div class="fhead">' +
+            (EMB[fac] ? '<img class="femb" src="' + D.esc(EMB[fac]) + '" alt="" loading="lazy" ' +
+              'onerror="this.className=\'femb bad\'">' : '') +
+            '<b>' + FAC[fac] + '</b><span class="dim">' + rows.length + ' 个种族行 · ' + n +
+            ' 条种族特长</span>' +
+            '<span class="dim mono">' + (fac === 'alliance' ? '人类 / 矮人 / 暗夜精灵 / 侏儒 / 天裔（高阶会）'
+              : '兽人 / 亡灵 / 牛头人 / 巨魔 / 天裔（塑风者）') + '</span></div>' +
+            '<div class="racegrid">' + rows.map(function (x) {
+              var on = f.sel === keyOf(x);
+              return '<button type="button" class="racecard' + (on ? ' on' : '') + '" data-race="' + keyOf(x) +
+                '" aria-pressed="' + (on ? 'true' : 'false') + '">' + face(x) +
+                '<span class="rcn">' + raceName(x) + '</span>' +
+                (x.id.indexOf('skyborne') === 0 ? '<span class="tag new">无限新增</span>' : '') +
+                '<span class="dim mono">' + x.classes.length + ' 职业 · ' + traitListOf(x).length + ' 特长</span>' +
+                D.pill(x.level) +
+                (faceOf(x) ? '' : '<span class="dim rcnote">没有可信头像，用自绘块</span>') +
+                '</button>';
+            }).join('') + '</div></div>';
+        }
+
+        function detail() {
+          var x = byKey[f.sel];
+          if (!x) return '<div class="empty">选一个种族看它的特长。</div>';
+          var tl = traitListOf(x);
+          var cf = (R.conflicts || []).filter(function (c) { return x.id.indexOf('skyborne') === 0; });
+          return '<div class="rdhead">' + face(x, 'lg') +
+            '<div class="rdt"><h2>' + raceName(x) +
+            (x.id.indexOf('skyborne') === 0 ? ' <span class="tag new">无限新增</span>' : '') + '</h2>' +
+            '<p class="dim">' + FAC[x.faction] + ' · 可选 ' + x.classes.length + ' 个职业 · ' + tl.length +
+            ' 条种族特长' + (x.nameEn ? ' · <span class="mono">' + D.esc(x.nameEn) + '</span>' : ' · 官方没给英文原名') + '</p>' +
+            '<div class="rdacts">' + D.pill(x.level) + srcBtn('rc-' + x.id, raceName(x), x.provenance) +
+            '<button type="button" class="ghost mini" data-jump="traits">这族的特长去哪找</button></div></div></div>' +
+            '<p class="lore">' + (x.lore || D.esc(R.meta.loreMissingNote || '官方本页没有这个种族的简介段。')) + '</p>' +
+            '<h3 class="rdh">可选职业</h3><div class="rdcls">' + cols.map(function (id) {
+              var ok = x.classes.indexOf(id) >= 0;
+              return '<span class="rdcl' + (ok ? '' : ' off') + '" title="' + D.esc(CNAME[id]) + (ok ? '可选' : '不可选') + '">' +
+                (window.Glyph ? Glyph.classTile(id, CNAME[id], CTILE[id], 'sm') : '') +
+                '<i>' + D.esc(CNAME[id]) + '</i></span>';
+            }).join('') + '</div>' +
+            '<h3 class="rdh">种族特长（官方整句原样引用）</h3>' +
+            (tl.length ? '<ul class="rdtr">' + tl.map(function (t) {
+              return '<li>' + iconCell(t.iconKey, x.id + t.name, t.name) +
+                '<div class="rdtr-b"><b>' + D.esc(t.name) + '</b>' +
+                '<span class="tag">' + (t.passive ? '被动' : '主动') + '</span>' +
+                '<p class="quote">' + D.esc(t.quote) + '</p></div>' +
+                srcBtn('dt-' + x.id + '-' + t.name, t.name, [{ type: 'official_cn', url: R.meta.sources[0].url,
+                  quote: t.quote, note: '官方种族公告·该特长列在「' + raceName(x) + '」小标题下',
+                  checkedAt: x.provenance[0].checkedAt }]) + '</li>';
+            }).join('') + '</ul>' : '<p class="dim">官方公告里这个小标题下没有列出可用的特长条目。</p>') +
+            (cf.length ? '<p class="conf">这个种族有' + cf.length + '处两种说法并存，见下方「同一页里两种说法并存」——两个都留着，不替玩家选。</p>' : '');
+        }
+
         function matrix() {
           var rows = R.races.filter(function (x) { return !f.fac || x.faction === f.fac; });
           return '<table class="mtx"><thead><tr><th class="rh">种族 \\ 职业</th>' +
             cols.map(function (id) {
               return '<th><button type="button" class="ch' + (f.c === id ? ' on' : '') + '" data-cl="' + id +
-                '" aria-pressed="' + (f.c === id ? 'true' : 'false') + '">' + D.esc(CNAME[id]) + '</button></th>';
+                '" aria-pressed="' + (f.c === id ? 'true' : 'false') + '">' +
+                (window.Glyph ? Glyph.classTile(id, CNAME[id], CTILE[id], 'sm') : '') +
+                '<span>' + D.esc(CNAME[id]) + '</span></button></th>';
             }).join('') + '</tr></thead><tbody>' +
             rows.map(function (x) {
               var hit = f.c && x.classes.indexOf(f.c) < 0;
-              return '<tr' + (hit ? ' class="off"' : '') + '><th class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
-                '<span>' + D.esc(x.nameCn) + (x.subgroup ? '<em>' + D.esc(x.subgroup.nameCn.replace(x.nameCn, '')) + '</em>' : '') +
+              return '<tr' + (hit ? ' class="off"' : '') + ' data-race="' + keyOf(x) + '"><th class="rh">' +
+                face(x, 'sm') + '<span>' + D.esc(x.nameCn) +
+                (x.subgroup ? '<em>' + D.esc(x.subgroup.nameCn.replace(x.nameCn, '')) + '</em>' : '') +
                 '</span></th>' +
                 cols.map(function (id) {
                   var ok = x.classes.indexOf(id) >= 0;
@@ -1212,6 +1293,12 @@
         }
         function traitTable() {
           var q = f.q.toLowerCase();
+          if (!q && !f.c && !f.fac && !f.all) {
+            return '<p class="dim">上面点任意种族就能看到它的全部特长与官方整句；' +
+              '要跨种族搜词（比如"潜行""亡灵"），在上面的框里输入。' +
+              '<button type="button" class="ghost mini" data-act="all">还是要一次看全 ' + traits.length +
+              ' 条</button></p>';
+          }
           var list = traits.filter(function (x) {
             if (f.fac && x.race.faction !== f.fac) return false;
             if (f.c && x.race.classes.indexOf(f.c) < 0) return false;
@@ -1225,9 +1312,9 @@
           });
           return byRace.length ? byRace.map(function (g) {
             var x = g.race;
-            return '<div class="lgrp">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
-              '<b>' + D.esc(x.subgroup ? x.subgroup.nameCn : x.nameCn) + '</b>' +
-              '<span class="dim mono">' + FAC[x.faction] + '</span><span class="dim">' + g.rows.length + ' 条</span></div>' +
+            return '<div class="lgrp">' + face(x, 'sm') + '<b>' + raceName(x) + '</b>' +
+              '<span class="dim mono">' + FAC[x.faction] + '</span><span class="dim">' + g.rows.length + ' 条</span>' +
+              '<button type="button" class="ghost mini" data-race="' + keyOf(x) + '">看这个种族</button></div>' +
               '<div class="scrollx"><table><thead><tr><th class="ich">图标</th><th>特长</th><th>类型</th><th>官方整句</th><th></th></tr></thead><tbody>' +
               g.rows.map(function (t) {
                 return '<tr><td class="ich">' + iconCell(t.t.iconKey, x.id + t.t.name, t.t.name) + '</td>' +
@@ -1241,6 +1328,8 @@
           }).join('') : '<div class="empty">没有匹配的特长。</div>';
         }
         function draw() {
+          el('facbands').innerHTML = band('alliance') + band('horde');
+          el('rdet').innerHTML = detail();
           el('mx').innerHTML = matrix();
           el('tt').innerHTML = traitTable();
           el('mhint').innerHTML = f.c
@@ -1251,60 +1340,73 @@
           Array.prototype.forEach.call(el('mx').querySelectorAll('button.ch'), function (b) {
             b.onclick = function () { f.c = f.c === b.dataset.cl ? '' : b.dataset.cl; draw(); };
           });
-          el('tcnt').textContent = el('tt').querySelectorAll('tbody tr').length + ' / ' + traits.length + ' 条';
+          // 点头像卡、点"看这个种族"都能换详情；矩阵行只负责读，不做点击（行里已有按钮，嵌套点击会打架）
+          Array.prototype.forEach.call(document.querySelectorAll('.racecard[data-race], .lgrp [data-race]'), function (b) {
+            b.onclick = function () {
+              f.sel = b.dataset.race;
+              if (history.replaceState) history.replaceState(null, '', '#race=' + f.sel);
+              draw();
+              var t = el('rdet');
+              if (t && t.scrollIntoView) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('[data-jump]'), function (b) {
+            b.onclick = function () {
+              var t = el(b.dataset.jump);
+              if (t && t.scrollIntoView) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              var fq = el('fq');
+              if (fq) { fq.value = raceName(byKey[f.sel]); f.q = fq.value; draw(); fq.focus(); }
+            };
+          });
+          var ab = document.querySelector('[data-act=all]');
+          if (ab) ab.onclick = function () { f.all = true; draw(); };
+          el('tcnt').textContent = (f.q || f.c || f.fac || f.all)
+            ? el('tt').querySelectorAll('tbody tr').length + ' / ' + traits.length + ' 条' : traits.length + ' 条';
           bindSrcToggles();
         }
 
         set('<div class="card"><h1 class="pt">种族与职业组合</h1>' +
-          '<p class="dim">数据全部来自国服官方中文公告，逐条带原文。英文原名官方没给的一律留空，不逐词硬造。</p>' +
-          '<div class="stats" style="margin-top:12px">' +
+          '<p class="dim">数据全部来自国服官方中文公告，逐条带原文。英文原名官方没给的一律留空，不逐词硬造。' +
+          '阵营是这一页的主线：左边联盟、右边部落，头像与徽标都是本地转存的客户端素材。</p>' +
+          '<div class="stats">' +
           '<div class="stat"><b>' + R.races.length + '</b>种族行</div>' +
           '<div class="stat"><b>' + traits.length + '</b>条种族特长</div>' +
           '<div class="stat"><b>' + R.newCombos.length + '</b>组亮点组合</div>' +
-          '<div class="stat"><b>' + inGloss + '</b>条已进速查</div></div>' +
-          (R.skyborneNote && R.skyborneNote.text ? '<p class="dim" style="margin-top:12px">' +
-            '<span class="tag">官方原文</span>' + D.esc(R.skyborneNote.text) + '</p>' : '') + '</div>' +
+          '<div class="stat"><b>' + inGloss + '</b>条已进速查</div>' +
+          '<div class="stat"><b>' + Object.keys(POR).length + '</b>张本地头像</div></div>' +
+          (R.skyborneNote && R.skyborneNote.text ? '<p class="dim"><span class="tag">官方原文</span>' +
+            D.esc(R.skyborneNote.text) + '</p>' : '') + '</div>' +
 
-          '<div class="card"><h2>种族 × 职业矩阵</h2><p class="dim" style="font-size:12.5px" id="mhint"></p>' +
+          '<div class="facwrap" id="facbands"></div>' +
+          '<div class="card rdetail" id="rdet"></div>' +
+
+          '<div class="card"><h2>种族 × 职业矩阵</h2><p class="dim" id="mhint"></p>' +
           '<div class="field"><label class="dim">阵营</label><select id="ff"><option value="">全部</option>' +
           '<option value="horde">部落</option><option value="alliance">联盟</option></select>' +
           '<label class="dim">找特长</label><input type="search" id="fq" placeholder="名称或效果里的词">' +
           '<span class="dim mono" id="tcnt"></span></div>' +
           '<div class="scrollx" id="mx"></div></div>' +
 
-          '<div class="card"><h2>种族一览</h2>' +
-          '<p class="dim" style="font-size:12.5px">矩阵表给"能不能选"，小标题下的段落给官方怎么写这个种族。两段都在同一篇公告里，没有第三方补的。</p>' +
-          R.races.map(function (x) {
-            var sub = x.subgroup;
-            var lore = sub ? sub.lore : x.lore;
-            var tl = sub ? sub.traits : x.traits;
-            return '<div class="rcard"><div class="rh">' + Glyph.raceTile(x.id, x.faction, x.nameCn, x.iconKey) +
-              '<div style="flex:1"><b>' + D.esc(x.nameCn) +
-              (sub ? '<span class="dim"> · ' + D.esc(sub.nameCn) + '</span>' : '') + '</b>' +
-              '<div class="dim" style="font-size:12px">' + FAC[x.faction] + ' · 可选 ' + x.classes.length +
-              ' 个职业 · ' + (tl || []).length + ' 条特长</div></div>' + D.pill(x.level) +
-              '<button class="ghost mini" data-d="' + D.esc(x.id) + '">来源</button></div>' +
-              '<p class="dim" style="margin:6px 0 0">' + (lore ? D.esc(lore) : '官方本页没有这个种族的简介段。') + '</p>' +
-              '<div class="chips">' + cols.map(function (id) {
-                return '<span class="chipc' + (x.classes.indexOf(id) >= 0 ? '' : ' off') + '">' + D.esc(CNAME[id]) + '</span>';
-              }).join('') + '</div>' +
-              '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none"><h3>来源与核对</h3>' +
-              D.sources(x.provenance) + '</div></div>';
-          }).join('') + '</div>' +
-
-          '<div class="card" id="traits"><h2>种族特长</h2>' +
-          '<p class="dim" style="font-size:12.5px">官方页把每条特长写成一个句子，这里整句原样引用；数值只到官方写出的那一句，不做推算。</p>' +
+          '<div class="card" id="traits"><h2>按词找特长</h2>' +
+          '<p class="dim">官方页把每条特长写成一个句子，这里整句原样引用；数值只到官方写出的那一句，不做推算。</p>' +
           '<div class="scrollx" id="tt"></div>' +
-          '<div class="srcbox" id="srcbox" style="display:none"></div></div>' +
+          '<div class="srcbox" id="srcbox"></div></div>' +
 
-          '<div class="card"><h2>新开放的组合</h2><p class="dim" style="font-size:12.5px">官方原文那句：' +
+          '<div class="card"><h2>新开放的组合</h2><p class="dim">官方原文那句：' +
           D.esc((R.newCombos[0] && R.newCombos[0].provenance[0].quote) || '') + '</p>' +
-          '<div class="pool">' + R.newCombos.map(function (c) {
-            return '<span class="term">' + D.esc(c.label) + srcBtn('nc-' + c.label, c.label, c.provenance) + '</span>';
+          '<div class="combos">' + R.newCombos.map(function (c) {
+            var x = R.races.filter(function (y) {
+              return (y.subgroup ? y.subgroup.nameCn : y.nameCn) === c.raceCn || y.nameCn === c.raceCn;
+            })[0];
+            return '<span class="combo">' + (x ? face(x, 'sm') : '') +
+              '<b>' + D.esc(c.raceCn) + '</b>' +
+              (window.Glyph ? Glyph.classTile(c.classId, c.classCn, CTILE[c.classId], 'sm') : '') +
+              '<b>' + D.esc(c.classCn) + '</b>' +
+              srcBtn('nc-' + c.label, c.label, c.provenance) + '</span>';
           }).join('') + '</div></div>' +
 
           (R.conflicts || []).map(function (cf) {
-            return '<div class="card"><h2>同一页里两种说法并存</h2><p class="dim" style="font-size:12.5px">' +
+            return '<div class="card"><h2>同一页里两种说法并存</h2><p class="dim">' +
               D.esc(cf.topic) + ' ' + D.pill(cf.level) + '</p>' +
               '<ul class="list"><li><b>矩阵表</b>：' + D.esc(cf.a.saying) +
               '<span class="dim">（明细：' + D.esc(cf.a.detail || '') + '。官方在表里只写 X，没有整句可引）</span></li>' +
@@ -1318,16 +1420,10 @@
 
         el('ff').onchange = function (e) { f.fac = e.target.value; draw(); };
         el('fq').oninput = function (e) { f.q = e.target.value.trim(); draw(); };
-        Array.prototype.forEach.call(document.querySelectorAll('.rcard [data-d]'), function (b) {
-          b.onclick = function () {
-            var x = el('d-' + b.dataset.d);
-            x.style.display = x.style.display === 'none' ? 'block' : 'none';
-            b.textContent = x.style.display === 'none' ? '来源' : '收起';
-          };
-        });
         draw();
       }).catch(fail);
   }
+
 
   /* ---------- 专业与配方 ---------- */
   function professions() {

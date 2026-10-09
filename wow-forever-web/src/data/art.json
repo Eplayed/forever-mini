@@ -87,9 +87,24 @@
   "1448": "img/art/maps/1448.webp",
   "1452": "img/art/maps/1452.webp"
  },
+ "races": {
+  "skyborne": "img/art/races/skyborne.webp",
+  "dwarf": "img/art/races/dwarf.webp",
+  "gnome": "img/art/races/gnome.webp",
+  "human": "img/art/races/human.webp",
+  "night-elf": "img/art/races/night-elf.webp",
+  "orc": "img/art/races/orc.webp",
+  "tauren": "img/art/races/tauren.webp",
+  "troll": "img/art/races/troll.webp",
+  "undead": "img/art/races/undead.webp"
+ },
+ "factions": {
+  "alliance": "img/art/factions/alliance.png",
+  "horde": "img/art/factions/horde.png"
+ },
  "meta": {
   "fetchedAt": "2026-10-09",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
-  "count": 82
+  "count": 93
  }
 }

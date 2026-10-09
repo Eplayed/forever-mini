@@ -494,7 +494,9 @@ def test_races(browser, base):
     check("✓ 与 — 铺满整表不留空", marks + dashes == rows * 9,
           "✓ %d + — %d，应 %d" % (marks, dashes, rows * 9))
     check("✓ 数等于数据里的可选职业总数", marks == n_marks, "DOM %d / 数据 %d" % (marks, n_marks))
-    check("特长表条数与数据一致", trs == n_traits, "DOM %d / 数据 %d" % (trs, n_traits))
+    check("默认不把 40 条特长再铺一遍（按种族浏览交给上方详情面板）",
+          trs == 0 and page.evaluate("() => !!document.querySelector('#traits button[data-act=\"all\"]')"),
+          "默认 %d 行 + 一个「看全 %d 条」按钮" % (trs, n_traits))
 
     col2 = page.evaluate("() => document.querySelectorAll('#mx tbody td:nth-child(2).y').length")
     page.click("#mx thead th:nth-child(2) button")
@@ -513,10 +515,15 @@ def test_races(browser, base):
     page.select_option("#ff", "")
     page.wait_for_timeout(200)
 
+    page.click('#traits button[data-act="all"]')
+    page.wait_for_timeout(250)
+    allrows = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
+    check("跨种族特长全表可展开且条数与数据一致", allrows == n_traits, "%d 条（数据 %d）" % (allrows, n_traits))
     page.fill("#fq", "昏迷")
     page.wait_for_timeout(250)
     found = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
-    check("特长搜索按整句生效", 0 < found < trs, "「昏迷」命中 %d 条" % found)
+    check("特长搜索按整句生效", 0 < found <= n_traits and found < allrows,
+          "「昏迷」命中 %d / 全表 %d" % (found, allrows))
     page.fill("#fq", "")
     page.wait_for_timeout(200)
 
@@ -531,13 +538,34 @@ def test_races(browser, base):
     check("矩阵与导语两种说法并存且写了处置",
           "同一页里两种说法并存" in text and "本站处置" in text)
     check("种族页写明没采集什么", "这一页没有的" in text and "英文原名" in text)
-    cards = page.evaluate("() => document.querySelectorAll('.rcard').length")
-    check("种族卡数量与矩阵行数一致", cards == n_races, "卡片 %d" % cards)
-    page.query_selector(".rcard button[data-d]").click()
-    page.wait_for_timeout(250)
-    dr = page.evaluate("() => { const d = document.querySelector('.rcard .drawer');"
-                       "return d && d.style.display !== 'none' ? d.innerText.length : 0; }")
-    check("种族卡来源抽屉能展开", dr > 20, "抽屉 %d 字" % dr)
+    cards = page.evaluate("() => document.querySelectorAll('.racecard').length")
+    check("种族头像卡数量与矩阵行数一致", cards == n_races, "卡片 %d" % cards)
+    bands = page.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => ({
+      fac: b.classList.contains('alliance') ? 'alliance' : 'horde',
+      n: b.querySelectorAll('.racecard').length, emb: !!b.querySelector('.femb')}))""")
+    check("联盟与部落各一条阵营带，各 5 个种族且带阵营徽标",
+          len(bands) == 2 and all(b["n"] == 5 and b["emb"] for b in bands) and
+          sorted(x["fac"] for x in bands) == ["alliance", "horde"], str(bands))
+    faces = page.evaluate("""() => { const a = [...document.querySelectorAll('.rface-art')];
+      return { n: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length }; }""")
+    check("种族头像用本地转存图且一张都不坏", faces["n"] >= 10 and faces["broken"] == 0,
+          "头像 %d 张 / 坏 %d" % (faces["n"], faces["broken"]))
+    page.click('.racecard[data-race="horde-troll"]')
+    page.wait_for_timeout(400)
+    det = page.evaluate("""() => ({ h2: document.querySelector('#rdet .rdt h2').innerText.trim(),
+      hash: location.hash, cls: document.querySelectorAll('#rdet .rdcl').length,
+      tr: document.querySelectorAll('#rdet .rdtr > li').length,
+      lore: (document.querySelector('#rdet .lore') || {}).innerText || '' })""")
+    check("点阵营里的种族卡会换下方详情并写进地址栏",
+          "巨魔" in det["h2"] and det["hash"] == "#race=horde-troll" and det["cls"] == 9 and
+          det["tr"] == 4 and len(det["lore"]) > 30, str(det))
+    check("详情里的可选职业把不能选的标灰",
+          page.evaluate("() => document.querySelectorAll('#rdet .rdcl.off').length") > 0)
+    page.click("#rdet button.info")
+    page.wait_for_timeout(300)
+    dr = page.evaluate("() => { const b = document.getElementById('srcbox');"
+                       "return b && b.innerText.trim() ? b.innerText.length : 0; }")
+    check("种族详情的来源能展开", dr > 20, "来源块 %d 字" % dr)
     page.screenshot(path=os.path.join(SHOT_DIR, "races-matrix.png"), full_page=True)
 
     groups = page.evaluate("() => [...document.querySelectorAll('nav.main .ndb')]"
@@ -647,6 +675,8 @@ def test_grouping(browser, base):
 
     page.goto(base + "/races.html", wait_until="networkidle")
     page.wait_for_timeout(1200)
+    page.click('#traits button[data-act="all"]')   # 改版后默认不铺全表，分组检查要先展开
+    page.wait_for_timeout(300)
     rt = page.evaluate("""() => ({ groups: [...document.querySelectorAll('#tt .lgrp')].map(x => x.innerText.replace(/\\n/g,' ').trim()),
         rows: [...document.querySelectorAll('#tt tbody tr')].length })""")
     check("种族特长表按种族分组", len(rt["groups"]) == 10 and rt["rows"] == 40,
@@ -690,7 +720,7 @@ def test_grouping(browser, base):
     rp.wait_for_timeout(1300)
     ri = rp.evaluate("""() => { const a = [...document.querySelectorAll('.liw img')];
       return { imgs: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length,
-               tiles: document.querySelectorAll('.rcard .liw.t').length }; }""")
+               tiles: document.querySelectorAll('.racecard .rface .liw.t').length }; }""")
     check("种族页用上本地官方图标", ri["imgs"] >= 21 and ri["broken"] == 0,
           "图 %d 张 / 坏 %d / 方块 %d" % (ri["imgs"], ri["broken"], ri["tiles"]))
     hp = ctx.new_page()
