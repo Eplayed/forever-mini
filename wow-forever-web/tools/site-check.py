@@ -53,6 +53,10 @@ DEMO_A11 = "a-1-1"
 results = []
 
 
+APP_BASE = os.environ.get("APP_BASE", "http://127.0.0.1:8821")
+APP_REQUIRED = False          # --app 时端口不通算失败，默认只跳过并说明
+
+
 def check(name, ok, detail=""):
     results.append((name, bool(ok), detail))
     print(("  PASS  " if ok else "  FAIL  ") + name + (("  — " + detail) if detail else ""))
@@ -1126,9 +1130,106 @@ def test_updates_rank(browser, base):
     m.close()
 
 
+def test_app(browser, base):
+    """新站（Vue 3 + Vite）冒烟：只跑已迁的页，断言口径与旧站第 1 节一致。
+
+    新站不在默认流程里跑是因为它要先 npm run build + vite preview；
+    端口没起时本函数记一条"跳过"并说明怎么起，--app 则把它变成硬失败。"""
+    print("\n[16] 新站（Vue）冒烟")
+    import json
+    S = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    pages = [("首页", "/#/", "index"), ("世界页", "/#/world", "world")]
+    reachable = True
+    try:
+        probe = browser.new_context(viewport={"width": 1440, "height": 1000})
+        pp = probe.new_page()
+        pp.goto(APP_BASE, timeout=8000)
+        pp.wait_for_timeout(500)
+        probe.close()
+    except Exception as e:
+        reachable = False
+        check("新站可访问", not APP_REQUIRED,
+              "%s 不通（%s）。先跑：cd app && npm run build && npx vite preview --port 8821" % (APP_BASE, str(e)[:60]))
+    if not reachable:
+        return
+    check("新站可访问", True, APP_BASE)
+    for label, path, key in pages:
+        ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+        page = ctx.new_page()
+        errs, failed = [], []
+        page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+        page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
+                if r.status >= 400 and not tolerated(r.url) else None)
+        page.goto(APP_BASE + path, wait_until="networkidle")
+        page.wait_for_timeout(2000)
+        st = page.evaluate("""() => ({
+          h1: document.querySelectorAll('#main h1').length,
+          chars: (document.querySelector('#main') || document.body).innerText.length,
+          ctl: document.querySelectorAll('#main button, #main a, #main input').length,
+          broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
+          noalt: [...document.querySelectorAll('img')].filter(i => !i.hasAttribute('alt')).length,
+          noname: [...document.querySelectorAll('#main button')].filter(b =>
+            !(b.innerText.trim() || b.getAttribute('aria-label'))).length,
+          shell: { top: !!document.querySelector('#top .brand'), foot: !!document.querySelector('#foot .in span') } })""")
+        check("新站 %s：一个 H1、有正文与控件" % label,
+              st["h1"] == 1 and st["chars"] > 200 and st["ctl"] > 5 and st["shell"]["top"] and st["shell"]["foot"],
+              "H1 %d / %d 字 / %d 控件" % (st["h1"], st["chars"], st["ctl"]))
+        check("新站 %s：无脚本报错与失败请求" % label, not errs and not failed,
+              "; ".join((errs + failed)[:2]) or "干净")
+        check("新站 %s：图片都有 alt 且无坏图" % label, st["noalt"] == 0 and st["broken"] == 0,
+              "缺 alt %d / 坏图 %d" % (st["noalt"], st["broken"]))
+        check("新站 %s：按钮都有可读名" % label, st["noname"] == 0, "%d 个缺名" % st["noname"])
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-%s.png" % key))
+        if key == "index":
+            nums = page.evaluate("""() => [...document.querySelectorAll('.covnum .pill b')].map(b => +b.textContent)""")
+            check("新站首页覆盖率四个数与 scale.json 一致",
+                  nums == [S["coverage"]["L0"], S["coverage"]["L1"], S["coverage"]["L2"], S["coverage"]["L3"]],
+                  "%s vs %s" % (nums, [S["coverage"][k] for k in ("L0", "L1", "L2", "L3")]))
+            strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
+            check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
+            mods = page.evaluate("() => document.querySelectorAll('.mod').length")
+            check("新站首页六张模块卡齐全", mods == 6, "%d 张" % mods)
+        else:
+            tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
+            check("新站世界页四个面板齐全", tabs == 4, "%d 个" % tabs)
+            for t in ["books", "bag", "zones"]:      # 切一圈再回到区域，验证面板切换不残留
+                page.click('[data-t="%s"]' % t)
+                page.wait_for_timeout(900)
+            zc = page.evaluate("() => document.querySelectorAll('.zcard').length")
+            check("新站区域卡数量与数据一致", zc == S["zones"], "%d 张（数据 %d）" % (zc, S["zones"]))
+            page.click('[data-t="rares"]')
+            page.wait_for_timeout(1200)
+            marks = page.evaluate("""() => { const m = [...document.querySelectorAll('.zmark')];
+              return { n: m.length, placed: m.filter(b => b.style.left).length }; }""")
+            check("新站稀有标记点按数据摆位", marks["n"] == marks["placed"] and marks["n"] > 30,
+                  "%d 个点全部定位" % marks["n"])
+            body = page.evaluate("() => document.querySelector('#main').innerText")
+            check("新站世界页正文没有面向开发的词",
+                  not [x for x in ["tools/", ".json", "undefined", "[object"] if x in body], "干净")
+            page.screenshot(path=os.path.join(SHOT_DIR, "app-world-rares.png"))
+        ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(APP_BASE + "/#/", wait_until="networkidle")
+    mp.wait_for_timeout(1600)
+    mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const small = [...document.querySelectorAll('#main a, #main button, #top nav a, #top nav button')]
+        .filter(b => { const r = b.getBoundingClientRect(); return r.width && r.height && r.height < 44; }).length;
+      return { overflow: document.documentElement.scrollWidth > vw + 1, small: small }; }""")
+    check("新站移动端首页不溢出、点击目标 ≥44px", not mob["overflow"] and mob["small"] == 0, json.dumps(mob))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-index-mobile.png"), full_page=True)
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.parse_args()
+    parser.add_argument("--app", action="store_true",
+                        help="强制跑新站（Vue）那组断言，端口不通就直接失败")
+    parser.add_argument("--app-base", default=os.environ.get("APP_BASE", "http://127.0.0.1:8821"))
+    args = parser.parse_args()
+    global APP_BASE, APP_REQUIRED
+    APP_BASE, APP_REQUIRED = args.app_base, args.app
     if not os.path.isdir(SHOT_DIR):
         os.makedirs(SHOT_DIR)
     httpd, base = start_server()
@@ -1148,6 +1249,7 @@ def main():
             test_world(browser, base)
             test_home(browser, base)
             test_updates_rank(browser, base)
+            test_app(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

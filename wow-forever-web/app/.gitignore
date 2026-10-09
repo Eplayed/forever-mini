@@ -1,0 +1,6 @@
+node_modules/
+dist/
+# public/data 与 public/img 是 tools/app-assets.py 从 ../src 同步出来的副本，不入库
+public/
+.vite/
+coverage/

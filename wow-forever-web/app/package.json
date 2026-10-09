@@ -1,0 +1,26 @@
+{
+  "name": "wow-forever-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "无限服中文资料站 · Vue 3 表现层（迁移中，数据仍读 ../src/data）",
+  "type": "module",
+  "scripts": {
+    "sync": "python3 ../tools/app-assets.py",
+    "dev": "python3 ../tools/app-assets.py && vite",
+    "build": "python3 ../tools/app-assets.py && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^26.0.0",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}
