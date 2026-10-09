@@ -6,6 +6,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', 'src', 'data');
 const errs = [];
 const warns = [];
+const datamineOnly = [];
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 
 function isOfficial(src) {
@@ -53,7 +54,7 @@ function checkRecord(kind, rec, sourcesField) {
     }
   });
   if (lvl === 'L0' && !srcs.some((s) => s.type === 'official_cn') && srcs.some((s) => s.type === 'datamine_cn')) {
-    warns.push(`${kind} ${rec.id || ''}：L0 只有客户端解包支撑（官方中文页还没覆盖到这条）`);
+    datamineOnly.push(`${kind} ${rec.id || ''}`);
   }
   const FAN = /^https?:\/\/(www\.)?(wowhead|foreverchanges|wowclassicforever)/i;
   // 粉丝站链接可以作"人工参照"并存，但不能是 L0 的支撑：有官方中文来源时才允许留 L0
@@ -339,7 +340,11 @@ if (!fs.existsSync(icPath)) {
   });
   const dupN = ((ic.meta || {}).sameNameDifferentIcon || []).length;
   if (dupN) warns.push(`icons.json：${dupN} 处同职业同名挂了两个图标键，映射取后出现的那个（界面只用它做展示，不影响数据）`);
-  console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文件 ' +
+  if (datamineOnly.length) {
+  warns.push('L0 只有客户端解包支撑（官方中文页没覆盖到）的记录 ' + datamineOnly.length + ' 条：' +
+    datamineOnly.slice(0, 8).join('、') + (datamineOnly.length > 8 ? ' 等' : ''));
+}
+console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文件 ' +
     fs.readdirSync(path.join(ROOT, '..', 'img', 'icons')).filter((f) => f.endsWith('.jpg')).length + ' 张');
 }
 
@@ -358,6 +363,38 @@ if (fs.existsSync(artPath)) {
     ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张');
 } else {
   warns.push('art.json 缺失：客户端原画全部退回自绘（跑 tools/fetch-art.py 可补）');
+}
+
+// 专业：配方与采集点的口径检查（数据全部来自客户端解包转述）
+const profPath = path.join(ROOT, 'professions.json');
+if (fs.existsSync(profPath)) {
+  const pf = JSON.parse(fs.readFileSync(profPath, 'utf8'));
+  const pids = new Set();
+  (pf.professions || []).forEach((p) => {
+    if (pids.has(p.id)) errs.push(`professions：id 重复 ${p.id}`);
+    pids.add(p.id);
+    if (!p.nameCn) errs.push(`professions ${p.id}：缺中文名`);
+    if (!(p.provenance || []).length) errs.push(`professions ${p.id}：无来源记录`);
+    if (p.unparsed && !p.note) errs.push(`professions ${p.id}：标了未解析却没写原因`);
+    if (!p.unparsed && !(p.recipes || []).length && !(p.nodes || []).length) {
+      errs.push(`professions ${p.id}：既没配方也没采集点，又没标未解析——那是抓漏了`);
+    }
+    (p.recipes || []).forEach((x, i) => {
+      if (!x.itemId || !/^\d+$/.test(String(x.itemId))) errs.push(`professions ${p.id} 第 ${i} 条配方缺物品 ID`);
+      if (!x.nameCn) errs.push(`professions ${p.id} 第 ${i} 条配方缺名称`);
+      scanNoPercent('recipe', x, p.id + '/' + (x.nameCn || i));
+    });
+    (p.nodes || []).forEach((x, i) => {
+      if (!x.nameCn) errs.push(`professions ${p.id} 第 ${i} 个采集点缺名称`);
+      scanNoPercent('node', x, p.id + '/' + (x.nameCn || i));
+    });
+    checkRecord('professions', p);
+  });
+  const pr = (pf.professions || []).reduce((s, p) => s + (p.recipes || []).length, 0);
+  const pn = (pf.professions || []).reduce((s, p) => s + (p.nodes || []).length, 0);
+  const pnew = (pf.professions || []).reduce((s, p) => s + ((p.counts || {}).newRecipes || 0), 0);
+  console.log('专业 ' + (pf.professions || []).length + ' 个 / 配方 ' + pr + ' 条（无限新增 ' + pnew +
+    '）/ 采集点 ' + pn + ' 个');
 }
 
 // 报告

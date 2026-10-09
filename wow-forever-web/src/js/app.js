@@ -14,8 +14,9 @@
       { href: 'races.html', t: '种族与职业组合', d: '10 个种族行 · 可选职业矩阵' },
       { href: 'races.html#traits', t: '种族特长', d: '40 条官方中文原名与整句' }] },
     { t: '世界', items: [
-      { href: 'dungeons.html', t: '副本手册', d: '9 新本 + 10 经典本 + 3 团本' },
+      { href: 'dungeons.html', t: '副本手册', d: '35 座地下城 + 3 团本，按十级一档分' },
       { href: 'systems.html', t: '系统与新区域', d: '规则、区域、装备名的官方中文口径' }] },
+    { t: '专业', href: 'professions.html', d: '13 个专业 · 配方与采集点' },
     { t: '工具', items: [
       { href: 'glossary.html', t: '术语速查', d: '官方中文词条，点一下即复制' },
       { href: 'timeline.html', t: '上线时间表', d: '11 个时间点带官方原文' },
@@ -1221,6 +1222,129 @@
       }).catch(fail);
   }
 
+  /* ---------- 专业与配方 ---------- */
+  function professions() {
+    D.load('data/professions.json').then(function (doc) {
+      var ps = doc.professions || [], sel = ps[0];
+      var q = new URLSearchParams(location.search);
+      var byId = {};
+      ps.forEach(function (p) { byId[p.id] = p; });
+      if (q.get('p') && byId[q.get('p')]) sel = byId[q.get('p')];
+      var f = { q: '', lv: '', onlyNew: false };
+
+      function skillCell(sk) {
+        if (!sk) return '<span class="dim">—</span>';
+        var k = [['orange', '橙'], ['yellow', '黄'], ['green', '绿'], ['grey', '灰']];
+        return '<span class="sk">' + k.map(function (x) {
+          return sk[x[0]] === undefined ? '' :
+            '<i class="sk-t sk-' + x[0] + '" title="' + x[1] + '色起点">' + x[1] + '<b>' + sk[x[0]] + '</b></i>';
+        }).join('').replace(/<i class="sk-t sk-[a-z]+"[^>]*><\/i>/g, '') + '</span>';
+      }
+      function learnable(sk) {
+        if (!sk || !f.lv) return true;
+        return sk.orange <= f.lv;
+      }
+      function draw() {
+        var kw = f.q.toLowerCase();
+        var recipes = (sel.recipes || []).filter(function (x) {
+          if (f.onlyNew && !x.isNew) return false;
+          if (!learnable(x.skill)) return false;
+          if (!kw) return true;
+          return (x.nameCn || '').toLowerCase().indexOf(kw) >= 0 ||
+            (x.mats || []).some(function (m) { return (m.nameCn || '').toLowerCase().indexOf(kw) >= 0; });
+        });
+        var nodes = (sel.nodes || []).filter(function (x) {
+          return !kw || (x.nameCn || '').toLowerCase().indexOf(kw) >= 0 ||
+            (x.yields || []).join(' ').toLowerCase().indexOf(kw) >= 0;
+        });
+        var head = '<div class="card"><h2>' + D.esc(sel.nameCn) +
+          (sel.nameEn ? ' <span class="dim mono">' + D.esc(sel.nameEn) + '</span>' : '') +
+          ' <span class="dim">' + (sel.kind === 'gather' ? '采集' : '制作') + '</span></h2>' +
+          '<p class="note">' + D.esc(sel.levelNote || '') + '</p>' +
+          '<div class="field"><input type="search" id="pq" placeholder="搜制成品或材料名" value="' + D.esc(f.q) + '">' +
+          '<input type="number" id="plv" min="1" max="300" placeholder="我的技能 1–300" value="' + D.esc(f.lv) + '" class="lv">' +
+          '<button type="button" class="pick tog' + (f.onlyNew ? ' on' : '') + '" id="pn" aria-pressed="' +
+          (f.onlyNew ? 'true' : 'false') + '">只看无限新增</button>' +
+          '<span class="dim mono" id="pcnt"></span></div></div>';
+        var body = '';
+        if (sel.unparsed) {
+          body = '<div class="card"><div class="empty">' + D.esc(sel.note || '这一页上游不是表格结构，本轮没解析出条目。') +
+            '</div></div>';
+        }
+        if (nodes.length) {
+          body += '<div class="card"><h2>采集点 · ' + nodes.length + '</h2><div class="scrollx"><table class="entab">' +
+            '<thead><tr><th class="ich">图标</th><th>' + (sel.id === 'herbalism' ? '草药点' : sel.id === 'fishing' ? '水域' : '采集点') +
+            '</th><th>可得</th><th>最多区域</th><th>技能</th></tr></thead><tbody>' +
+            nodes.map(function (n) {
+              return '<tr><td class="ich">' + iconCell(n.iconKey, n.nameCn, n.nameCn) + '</td>' +
+                '<td>' + D.hl(n.nameCn, f.q) + '</td>' +
+                '<td class="dim">' + D.esc((n.yields || []).join('、')) + '</td>' +
+                '<td class="dim">' + D.esc(n.zone || '—') + '</td>' +
+                '<td>' + skillCell(n.skill) + '</td></tr>';
+            }).join('') + '</tbody></table></div></div>';
+        }
+        if (recipes.length) {
+          body += '<div class="card"><h2>配方 · ' + recipes.length + ' 条</h2>' +
+            '<p class="note">技能四档是这条配方在什么点数变橙 / 黄 / 绿 / 灰；灰 = 技能超过它就不再涨点。' +
+            '材料后面的 ×N 是单次制作消耗量。</p>' +
+            '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">制成品</th><th>材料</th><th>技能</th><th>来源</th></tr></thead><tbody>' +
+            recipes.map(function (x) {
+              return '<tr><td>' + iconCell(x.iconKey, x.itemId, x.nameCn, 1) +
+                '<span class="q' + (x.quality || 0) + '">' + D.hl(x.nameCn, f.q) + '</span>' +
+                (x.isNew ? '<span class="tag">新</span>' : '') +
+                '<span class="dim mono"> #' + D.esc(x.itemId) + '</span></td>' +
+                '<td class="mats">' + ((x.mats || []).length
+                  ? x.mats.map(function (m) {
+                    return '<span class="mat">' + iconCell(m.iconKey, m.nameCn, m.nameCn, 1) +
+                      D.esc(m.nameCn) + '<b class="mono">×' + m.count + '</b></span>';
+                  }).join('')
+                  : '<span class="dim">无需材料</span>') + '</td>' +
+                '<td>' + skillCell(x.skill) + '</td>' +
+                '<td class="dim">' + D.esc(x.source || '—') + '</td></tr>';
+            }).join('') + '</tbody></table></div></div>';
+        }
+        if (!nodes.length && !recipes.length && !sel.unparsed) {
+          body += '<div class="card"><div class="empty">这个专业没有匹配条目，试试放宽搜索或技能等级。</div></div>';
+        }
+        el('pbody').innerHTML = head + body +
+          '<div class="card"><h2>这一页没有的</h2><ul class="list">' +
+          (doc.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
+          '</ul><h3>来源与核对</h3>' + D.sources(sel.provenance) + '</div>';
+        el('pcnt').textContent = (recipes.length + nodes.length) + ' 条';
+        var qi = el('pq');
+        qi.oninput = function () { f.q = qi.value.trim(); draw(); };
+        var li = el('plv');
+        li.oninput = function () { f.lv = parseInt(li.value, 10) || ''; draw(); };
+        var ni = el('pn');
+        ni.onclick = function () { f.onlyNew = !f.onlyNew; draw(); };
+      }
+
+      set('<div class="card"><h1 class="pt">专业与配方</h1>' +
+        '<p class="dim">配方、材料、数量与技能档位都取自无限客户端解包（第三方资料站转述），逐条能点开看来源。' +
+        '不做冲级路线与性价比建议——那是攻略，本站红线不碰。</p>' +
+        '<div class="stats" style="margin-top:12px">' +
+        '<div class="stat"><b>' + ps.length + '</b>个专业</div>' +
+        '<div class="stat"><b>' + ps.reduce(function (s, p) { return s + p.counts.recipes; }, 0) + '</b>条配方</div>' +
+        '<div class="stat"><b>' + ps.reduce(function (s, p) { return s + p.counts.newRecipes; }, 0) + '</b>条无限新增</div>' +
+        '<div class="stat"><b>' + ps.reduce(function (s, p) { return s + p.counts.nodes; }, 0) + '</b>个采集点</div></div>' +
+        '<div class="picks">' + ps.map(function (p) {
+          return '<button class="pick' + (p.id === sel.id ? ' on' : '') + '" data-p="' + D.esc(p.id) + '">' +
+            '<b>' + D.esc(p.nameCn) + '</b><span class="dim mono">' +
+            (p.counts.recipes || p.counts.nodes) + '</span></button>';
+        }).join('') + '</div></div><div id="pbody"></div>');
+      Array.prototype.forEach.call(document.querySelectorAll('[data-p]'), function (b) {
+        b.onclick = function () {
+          sel = byId[b.dataset.p];
+          Array.prototype.forEach.call(document.querySelectorAll('[data-p]'), function (o) {
+            o.classList.toggle('on', o === b);
+          });
+          draw();
+        };
+      });
+      draw();
+    }).catch(fail);
+  }
+
   function fail(e) {
     set('<div class="card"><h2>数据没加载出来</h2><p class="dim">' + D.esc(e && e.message ? e.message : e) + '</p>' +
       '<p class="dim">这个站要读本地 JSON，不能用 file:// 直接打开。在项目里执行：<br>' +
@@ -1230,5 +1354,5 @@
   }
 
   shell();
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, glossary: glossary, provenance: provenance })[page]();
 })();

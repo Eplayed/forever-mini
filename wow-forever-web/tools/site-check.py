@@ -30,7 +30,8 @@ SRC = os.path.join(ROOT, "src")
 TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races", "glossary", "provenance"]
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races",
+         "professions", "glossary", "provenance"]
 # 演示结构（_demo.json）里写死了层级门槛与前置链，用它做确定性断言
 DEMO_A00 = "a-0-0"
 DEMO_A01 = "a-0-1"
@@ -759,6 +760,75 @@ def test_dungeon_data(browser, base):
     tp.close()
 
 
+def test_professions(browser, base):
+    """专业与配方：配方表、采集点表、三个筛选器、没解析出来时的空态。"""
+    print("\n[12] 专业与配方")
+    import json
+    pf = json.load(open(os.path.join(SRC, "data", "professions.json"), encoding="utf-8"))
+    profs = pf["professions"]
+    exp_rec = sum(len(p.get("recipes") or []) for p in profs)
+    exp_node = sum(len(p.get("nodes") or []) for p in profs)
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/professions.html", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    check("专业页无脚本报错", not errs, "; ".join(errs[:2]))
+    picks = page.evaluate("() => document.querySelectorAll('.picks .pick[data-p]').length")
+    check("13 个专业都能选", picks == len(profs), "%d 个" % picks)
+    first = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    check("默认专业有配方表", first > 50, "%d 行" % first)
+    page.fill("#pq", "治疗")
+    page.wait_for_timeout(500)
+    hit = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    check("按名称筛选生效", 0 < hit < first, "「治疗」%d 行" % hit)
+    page.fill("#pq", "")
+    page.wait_for_timeout(400)
+    page.fill("#plv", "1")
+    page.wait_for_timeout(500)
+    low = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    page.fill("#plv", "300")
+    page.wait_for_timeout(500)
+    high = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    check("按技能等级筛选生效", low < high and high >= first, "1 级 %d 行 / 300 级 %d 行" % (low, high))
+    page.fill("#plv", "")
+    page.click("#pn")
+    page.wait_for_timeout(500)
+    onlynew = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    tags = page.evaluate("() => document.querySelectorAll('#pbody .tag').length")
+    check("只看无限新增生效", 0 < onlynew < high and tags >= onlynew,
+          "%d 行、%d 个\"新\"标" % (onlynew, tags))
+    page.click("#pn")
+    page.wait_for_timeout(400)
+
+    page.click(".pick[data-p=mining]")
+    page.wait_for_timeout(800)
+    mt = page.evaluate("() => document.querySelectorAll('#pbody table').length")
+    mr = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
+    check("采集型专业同时有采集点表与配方表", mt == 2 and mr > 20, "%d 张表 %d 行" % (mt, mr))
+    page.click(".pick[data-p=camping]")
+    page.wait_for_timeout(700)
+    empty = page.evaluate("() => (document.querySelector('.empty') || {}).textContent || ''")
+    check("没解析出来的专业写原因而不是留白", "没解析" in empty, empty[:44])
+
+    page.click(".pick[data-p=alchemy]")
+    page.wait_for_timeout(900)
+    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(1500)
+    icons = page.evaluate("""() => { const a = [...document.querySelectorAll('#pbody .liw img')];
+      return { n: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length }; }""")
+    check("配方与材料图标用上本地官方图", icons["n"] > 100 and icons["broken"] == 0,
+          "%d 张图、坏 %d" % (icons["n"], icons["broken"]))
+    pct = page.evaluate("() => (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/g) || []).slice(0,3)")
+    check("专业页不出现百分比", not pct, str(pct))
+    src = page.evaluate("() => document.querySelectorAll('#main .src li').length")
+    check("每个专业带来源与核对", src >= 1, "%d 条来源" % src)
+    page.screenshot(path=os.path.join(SHOT_DIR, "professions.png"))
+    ctx.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -777,6 +847,7 @@ def main():
             test_races(browser, base)
             test_grouping(browser, base)
             test_dungeon_data(browser, base)
+            test_professions(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()
