@@ -823,6 +823,53 @@ scale.search = SIDX.length;
 console.log('全站搜索索引 ' + SIDX.length + ' 条 / ' + Object.keys(SK).length + ' 类 → src/data/search.json（' +
   Math.round(fs.statSync(sidPath).size / 1024) + ' KB）');
 
+// ---------- 首页只读天赋树预览的轻量数据 ----------
+// 首页不该为了预览把九份 43 KB 的天赋文件全拉下来，所以这里只留画一棵树要的六个字段。
+// 它是派生件，不许手改；节点总数必须与 talentNodes 对得上，对不上就是哪里漏了。
+const pvClasses = {};
+let pvNodes = 0;
+fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
+  if (f.charAt(0) === '_' || !f.endsWith('.json')) return;
+  const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
+  const cid = t.classId || f.slice(0, -5);
+  pvClasses[cid] = {
+    cn: t.classNameCn || cid,
+    trees: (t.trees || []).map((tr) => ({
+      n: tr.nameCn || '',
+      nodes: (tr.nodes || []).map((nd) => {
+        pvNodes++;
+        return [nd.tier, nd.column, nd.nameCn || nd.nameEn || '', nd.iconKey || '',
+          nd.maxRanks === undefined ? null : nd.maxRanks, nd.changeState || ''];
+      })
+    }))
+  };
+});
+const pvPath = path.join(ROOT, 'talent-preview.json');
+fs.writeFileSync(pvPath, JSON.stringify({
+  meta: {
+    generatedAt: new Date().toISOString().slice(0, 10),
+    method: 'tools/build-data.js 从 src/data/talents/*.json 派生，别手抄也别手改',
+    fields: ['行', '列', '名称', '图标键', '上限层数', '与经典旧世相比的改动状态'],
+    note: '首页那棵只读预览树用的轻量数据；加点与前置判定仍在天赋计算器里，那里读完整文件。'
+  },
+  classes: pvClasses
+}));
+scale.talentPreview = pvNodes;
+if (pvNodes !== talentNodes) {
+  errs.push('talent-preview：收了 ' + pvNodes + ' 个节点，但天赋树里一共 ' + talentNodes + ' 个，首页预览会少画格子');
+}
+const pvClassN = (cl.classes || []).length;
+if (Object.keys(pvClasses).length !== pvClassN) {
+  errs.push('talent-preview：只有 ' + Object.keys(pvClasses).length + ' 个职业，classes.json 里有 ' + pvClassN + ' 个');
+}
+Object.keys(pvClasses).forEach((cid) => {
+  const ts = pvClasses[cid].trees;
+  if (ts.length !== 3) errs.push('talent-preview ' + cid + '：' + ts.length + ' 棵树，应为 3 系');
+  ts.forEach((tr) => { if (!tr.n) errs.push('talent-preview ' + cid + '：有一棵树没有系名'); });
+});
+console.log('天赋预览数据 ' + pvNodes + ' 个节点 / ' + Object.keys(pvClasses).length +
+  ' 个职业 → src/data/talent-preview.json（' + Math.round(fs.statSync(pvPath).size / 1024) + ' KB）');
+
 // 上线日期只许有 meta.json 一处真相：前端那个 LAUNCH 常量对不上就会两处打脸
 const metaJson = read('meta.json');
 const appJsPath = path.join(ROOT, '..', 'js', 'app.js');

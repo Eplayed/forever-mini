@@ -541,6 +541,21 @@ def test_races(browser, base):
     check("种族页写明没采集什么", "这一页没有的" in text and "英文原名" in text)
     cards = page.evaluate("() => document.querySelectorAll('.racecard').length")
     check("种族头像卡数量与矩阵行数一致", cards == n_races, "卡片 %d" % cards)
+    fac = page.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => ({
+      cls: b.className, bg: !!b.querySelector('.fembg img'),
+      src: (b.querySelector('.fembg img') || {}).src || '',
+      mark: (b.querySelector('.artmark') || {}).textContent || '',
+      pe: getComputedStyle(b.querySelector('.fembg') || b).pointerEvents,
+      broken: [...b.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0
+        && !/bad/.test(i.className)).length }))""")
+    check("两条阵营带都铺了城市原画", len(fac) == 2 and all(x["bg"] for x in fac),
+          json.dumps([{k: v for k, v in x.items() if k in ("cls", "bg")} for x in fac], ensure_ascii=False))
+    check("阵营原画是本地文件且没有坏图",
+          all("/img/art/factions/city-" in x["src"] for x in fac) and sum(x["broken"] for x in fac) == 0,
+          json.dumps([x["src"].split("/")[-1] for x in fac], ensure_ascii=False))
+    check("原画右上角标明素材出处", all("本地转存" in x["mark"] for x in fac),
+          " / ".join(x["mark"] for x in fac))
+    check("背景层不挡种族卡的点击", all(x["pe"] == "none" for x in fac), json.dumps([x["pe"] for x in fac]))
     bands = page.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => ({
       fac: b.classList.contains('alliance') ? 'alliance' : 'horde',
       n: b.querySelectorAll('.racecard').length, emb: !!b.querySelector('.femb')}))""")
@@ -1022,11 +1037,63 @@ def test_home(browser, base):
                box: document.querySelector('.cov').getBoundingClientRect().width }; }""")
     check("覆盖率条四段宽度加起来等于条宽", bar["n"] == 4 and abs(bar["sum"] - bar["box"]) < 3,
           "四段 %.0fpx / 条 %.0fpx" % (bar["sum"], bar["box"]))
-    strip = page.evaluate("""() => { const a = [...document.querySelectorAll('.stripc')];
-      return { n: a.length, ok: a.filter(x => /^talent\.html\?c=/.test(x.getAttribute('href'))).length,
-               img: a.filter(x => x.querySelector('img')).length }; }""")
-    check("九职业条每格都直接进天赋树", strip["n"] == sc["classes"] and strip["ok"] == strip["n"],
-          json.dumps(strip))
+    # 首页的招牌动作从"点职业跳计算器"改成"点职业看真树"，所以断言也跟着换：
+    # 格子数必须等于派生数据里那一系的节点数，空格补到整行，不许少画。
+    pv = json.load(open(os.path.join(SRC, "data", "talent-preview.json"), encoding="utf-8"))
+    first_cls = page.evaluate("() => [...document.querySelectorAll('#treecard [data-pvc]')][0].dataset.pvc")
+    tree0 = pv["classes"][first_cls]["trees"][0]
+    rows0 = max(n[0] for n in tree0["nodes"]) + 1
+    strip = page.evaluate("""() => { const t = document.querySelector('#treecard');
+      const a = [...t.querySelectorAll('.stripc')];
+      return { n: a.length, tag: a.map(x => x.tagName), on: t.querySelectorAll('.stripc.on').length,
+               nodes: t.querySelectorAll('.pnode').length, empty: t.querySelectorAll('.pempty').length,
+               tabs: [...t.querySelectorAll('.pvpicks .pick')].map(x => x.innerText.replace(/\\n/g, ' ').trim()),
+               meta: t.querySelector('.pvmeta').innerText.replace(/\\n/g, ' '),
+               broken: [...t.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
+               href: t.querySelector('.pnode').getAttribute('href'),
+               cta: t.querySelector('.cta').getAttribute('href') }; }""")
+    check("首页预览卡：九职业切换都在，且只有一个选中",
+          strip["n"] == sc["classes"] and strip["on"] == 1 and set(strip["tag"]) == {"BUTTON"},
+          json.dumps({"n": strip["n"], "on": strip["on"], "tag": strip["tag"][:1]}, ensure_ascii=False))
+    check("首页预览画的格子与派生数据一致",
+          strip["nodes"] == len(tree0["nodes"]) and
+          strip["nodes"] + strip["empty"] == rows0 * 4,
+          "%d 格 + %d 空 = %d 行 × 4（数据 %d 个天赋）" % (
+              strip["nodes"], strip["empty"], rows0, len(tree0["nodes"])))
+    check("预览没有加载失败的图标", strip["broken"] == 0, "坏图 %d" % strip["broken"])
+    counts = [int(x) for x in re.findall(r"(\d+)(?!\d)", strip["meta"])]
+    check("预览下方的状态计数加起来等于这棵系的节点数",
+          sum(counts) == len(tree0["nodes"]), "%s（应 %d）" % (strip["meta"], len(tree0["nodes"])))
+    # 换职业/换系都按派生数据核对，不假设"格子数一定变"（两棵系的节点数可能相同）
+    page.click("#treecard [data-pvc]:nth-of-type(4)")
+    page.wait_for_timeout(700)
+    cid2 = page.evaluate("() => [...document.querySelectorAll('#treecard [data-pvc]')][3].dataset.pvc")
+    after = page.evaluate("""() => { const t = document.querySelector('#treecard');
+      return { nodes: t.querySelectorAll('.pnode').length, on: t.querySelector('.stripc.on').dataset.pvc,
+               tabs: [...t.querySelectorAll('.pvpicks .pick b')].map(x => x.textContent),
+               cta: t.querySelector('.cta').getAttribute('href') }; }""")
+    t0b = pv["classes"][cid2]["trees"][0]
+    check("点职业换树：选中态、系名与格子数都跟着这份职业的数据走",
+          after["on"] == cid2 and after["tabs"] == [x["n"] for x in pv["classes"][cid2]["trees"]]
+          and after["nodes"] == len(t0b["nodes"]) and ("c=" + cid2) in after["cta"],
+          json.dumps(after, ensure_ascii=False))
+    page.click("#treecard .pvpicks .pick:nth-of-type(2)")
+    page.wait_for_timeout(700)
+    t1 = pv["classes"][cid2]["trees"][1]
+    t2 = page.evaluate("""() => ({ nodes: document.querySelectorAll('#treecard .pnode').length,
+      on: document.querySelector('.pvpicks .pick.on b').textContent,
+      tab: document.querySelector('.pnode').getAttribute('href') })""")
+    check("点系切换第二棵：画的确实是那一棵",
+          t2["on"] == t1["n"] and t2["nodes"] == len(t1["nodes"]) and "tree=1" in t2["tab"],
+          json.dumps(t2, ensure_ascii=False))
+    page.evaluate("() => document.querySelector('#treecard .pnode').click()")
+    page.wait_for_timeout(1800)
+    land = page.evaluate("""() => ({ url: location.href, q: (document.getElementById('tq') || {}).value,
+      lit: [...document.querySelectorAll('.node')].filter(n => n.style.outline).length })""")
+    check("点格子进计算器：带着职业、哪一系与天赋名，落地就描边",
+          "tree=" in land["url"] and bool(land["q"]) and land["lit"] >= 1, json.dumps(land, ensure_ascii=False))
+    page.go_back()
+    page.wait_for_timeout(1400)
     mods = page.evaluate("""() => { const a = [...document.querySelectorAll('.mod')];
       return { n: a.length, nums: a.reduce((s, x) => s + x.querySelectorAll('.modn b').length, 0),
                pills: a.filter(x => x.querySelector('.pill')).length,
@@ -1239,6 +1306,18 @@ def test_app(browser, base):
             import re
             cd = page.inner_text(".cd i").strip()
             check("新站倒计时同样到秒", re.match(r"^\d{2}:\d{2}:\d{2}$", cd) is not None, cd)
+            pv2 = page.evaluate("""() => { const t = document.querySelector('#treecard');
+              if (!t) return null;
+              return { nodes: t.querySelectorAll('.pnode').length, empty: t.querySelectorAll('.pempty').length,
+                       cls: t.querySelectorAll('.stripc').length, on: t.querySelectorAll('.stripc.on').length,
+                       broken: [...t.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
+                       href: (t.querySelector('.pnode') || {}).getAttribute
+                             ? t.querySelector('.pnode').getAttribute('href') : '' }; }""")
+            check("新站首页也有只读天赋树预览",
+                  pv2 and pv2["nodes"] > 10 and pv2["cls"] == S["classes"] and pv2["on"] == 1,
+                  json.dumps(pv2, ensure_ascii=False))
+            check("新站预览没有坏图，格子也链回计算器",
+                  pv2 and pv2["broken"] == 0 and "talent.html?c=" in pv2["href"], pv2 and pv2["href"])
         else:
             tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
             check("新站世界页四个面板齐全", tabs == 4, "%d 个" % tabs)

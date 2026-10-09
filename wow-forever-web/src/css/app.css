@@ -560,6 +560,53 @@ button.info:hover{border-color:var(--gold);color:var(--gold)}
 .flowrow>div{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
 .flowrow p{margin:2px 0 0;font-size:12.5px;flex:1 1 100%}
 
+/* 首页只读天赋树预览：格子 = 客户端里的天赋本身，点格子进计算器 */
+.treewrap{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:var(--s6);
+  align-items:start;margin-top:var(--s3)}
+.pvpicks{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+.pv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);max-width:330px}
+.pnode{display:flex;align-items:center;justify-content:center;aspect-ratio:1;position:relative;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:5px}
+.pnode:hover{border-color:var(--gold);text-decoration:none}
+.pnode:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pnode .ico-wrap{position:relative;width:46px;height:46px}
+.pnode .ico-wrap svg{width:100%;height:100%}
+.pnode .ico{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.pnode .ico.bad{opacity:0}
+.pnode.chg-added::after,.pnode.chg-modified::after,.pnode.chg-moved::after,.pnode.chg-unchanged::after{
+  content:"";position:absolute;right:2px;top:2px;width:7px;height:7px;border-radius:50%}
+.pnode.chg-added::after{background:var(--ok)}
+.pnode.chg-modified::after{background:var(--txt-caution)}
+.pnode.chg-moved::after{background:var(--blue)}
+.pnode.chg-unchanged::after{background:var(--lead)}
+.pempty{aspect-ratio:1}
+.pvmeta{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);margin:var(--s3) 0 0;
+  font-size:11.5px;color:var(--txt-dim)}
+.pvmeta b{font-family:var(--font-mono);font-weight:500;color:var(--txt);font-variant-numeric:tabular-nums}
+.pvmeta .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lead);
+  margin-right:5px;vertical-align:1px}
+.pvmeta .dot.chg-added{background:var(--ok)}
+.pvmeta .dot.chg-modified{background:var(--txt-caution)}
+.pvmeta .dot.chg-moved{background:var(--blue)}
+.tright{display:flex;flex-direction:column;gap:var(--s3)}
+button.stripc{font:inherit;font-size:13px;cursor:pointer;text-align:center}
+.stripc.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-deep);color:var(--txt)}
+.stripc.on b{color:var(--gold)}
+
+/* 种族页阵营带：城市原画压暗当氛围底，取不到就退回纯色带 */
+.facband{position:relative;overflow:hidden}
+.fembg{position:absolute;left:0;top:0;right:0;bottom:0;z-index:0;pointer-events:none}
+.fembg img{width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:.34;
+  filter:saturate(.75) contrast(1.05)}
+.fembg::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;
+  background:linear-gradient(180deg,rgba(14,16,19,.18) 0%,rgba(14,16,19,.72) 55%,rgba(14,16,19,.94) 100%)}
+.fembg.bad{display:none}
+.facband>*{position:relative;z-index:1}
+.facband>.fembg{position:absolute;z-index:0}
+.facband .artmark{position:absolute;right:var(--s3);top:var(--s3);z-index:2;
+  font:10px var(--font-mono);color:var(--txt-dim);background:rgba(14,16,19,.6);
+  border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+
 /* 后写的组件规则会盖过上面那个媒体查询里的同名属性，所以新增块的移动端规则统一放在最后 */
 @media (max-width:600px){
   .zmap{aspect-ratio:560/340}
@@ -656,5 +703,10 @@ table.mtx th.rh .rface{width:26px;height:26px}
   .gres{max-height:280px}
   .cd i{font-size:15px}
   .cd b{font-size:28px}
+  .treewrap{grid-template-columns:1fr;gap:var(--s4)}
+  .pv{max-width:none;gap:6px}
+  .pnode{min-height:44px}
+  .pnode .ico-wrap{width:40px;height:40px}
+  .fembg img{object-position:center 20%}
 }
 

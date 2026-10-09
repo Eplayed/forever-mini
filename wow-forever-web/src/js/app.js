@@ -306,6 +306,87 @@
     return i;
   }
 
+
+  /* ---------- 首页的只读天赋树预览 ----------
+     数据是 build-data.js 从完整天赋文件派生的轻量件（28 KB，只有画格子要的六个字段）。
+     九职业条从"每个都跳计算器"改成"点谁就看谁的树"：先让人看见真结构，再给一个明确的入口。
+     格子本身是链接，点下去进计算器并把那个天赋描边高亮。 */
+  var PV = { c: 'hunter', t: 0, data: null, classes: [] };
+  var PV_CHG = { added: '新增', modified: '改动', moved: '换层或换系', unchanged: '未变', removed: '已移除' };
+
+  function pvNode(cid, ti, nd) {
+    var stTxt = nd[5] ? (PV_CHG[nd[5]] || '') : '';
+    var label = nd[2] + '，上限 ' + (nd[4] === null || nd[4] === undefined ? '未核实' : nd[4] + ' 层') +
+      (stTxt ? '；与经典旧世相比：' + stTxt : '；没有对照结果');
+    return '<a class="pnode' + (nd[5] ? ' chg-' + D.esc(nd[5]) : '') + '" href="talent.html?c=' +
+      encodeURIComponent(cid) + '&tree=' + ti + '&q=' + encodeURIComponent(nd[2]) +
+      '" title="' + D.esc(label) + '" aria-label="' + D.esc(label) + '">' +
+      '<span class="ico-wrap">' + (window.Glyph ? Glyph.talentTile(cid + '-' + ti + '-' + nd[0] + '-' + nd[1], nd[2]) : '') +
+      (nd[3] ? '<img class="ico" src="img/icons/' + encodeURIComponent(nd[3]) + '.jpg" alt="" loading="lazy" ' +
+        'onerror="this.className=\'ico bad\'">' : '') + '</span></a>';
+  }
+  function pvGrid() {
+    var cls = (PV.data && PV.data.classes) ? PV.data.classes[PV.c] : null;
+    if (!cls || !cls.trees.length) return '<div class="empty">这个职业的结构还没收录。</div>';
+    var t = cls.trees[PV.t] || cls.trees[0];
+    var rows = 0, byPos = {};
+    t.nodes.forEach(function (n) {
+      byPos[n[0] + '-' + n[1]] = n;
+      if (n[0] > rows) rows = n[0];
+    });
+    var out = '';
+    for (var r = 0; r <= rows; r++) {
+      for (var c = 0; c < 4; c++) {
+        var n = byPos[r + '-' + c];
+        out += n ? pvNode(PV.c, PV.t, n) : '<span class="pempty"></span>';
+      }
+    }
+    return '<div class="pv">' + out + '</div>';
+  }
+  function pvCounts() {
+    var cls = PV.data.classes[PV.c], t = (cls.trees[PV.t] || cls.trees[0]), cnt = {};
+    t.nodes.forEach(function (n) { cnt[n[5] || 'none'] = (cnt[n[5] || 'none'] || 0) + 1; });
+    return ['added', 'modified', 'moved', 'unchanged'].filter(function (k) { return cnt[k]; })
+      .map(function (k) { return '<span><i class="dot chg-' + k + '"></i>' + PV_CHG[k] + ' <b class="mono">' + cnt[k] + '</b></span>'; }).join('') +
+      (cnt.none ? '<span><i class="dot"></i>没有对照结果 <b class="mono">' + cnt.none + '</b></span>' : '');
+  }
+  function treeCard() {
+    var cls = PV.data && PV.data.classes ? PV.data.classes[PV.c] : null;
+    var cnOf = {};
+    PV.classes.forEach(function (c) { cnOf[c.id] = c.cn; });
+    if (!cls) return '<div class="empty">天赋预览数据没加载出来。</div>';
+    return '<div class="pvpicks">' + cls.trees.map(function (tr, i) {
+      return '<button type="button" class="pick' + (i === PV.t ? ' on' : '') + '" data-pvt="' + i + '"' +
+        ' aria-pressed="' + (i === PV.t ? 'true' : 'false') + '"><b>' + D.esc(tr.n) + '</b>' +
+        '<span class="dim mono">' + tr.nodes.length + '</span></button>';
+    }).join('') + '</div>' +
+      '<div class="treewrap"><div class="treeleft">' + pvGrid() +
+      '<div class="pvmeta">' + pvCounts() + '</div></div>' +
+      '<aside class="tright"><div class="strip">' + PV.classes.map(function (c) {
+        return '<button type="button" class="stripc' + (c.id === PV.c ? ' on' : '') + '" data-pvc="' + D.esc(c.id) + '"' +
+          ' aria-pressed="' + (c.id === PV.c ? 'true' : 'false') + '">' +
+          (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey) : '') +
+          '<b>' + D.esc(c.cn) + '</b><span class="dim mono">' + (c.talentCount || 0) + ' 天赋</span></button>';
+      }).join('') + '</div>' +
+      '<p class="note">树的结构、每层上限与前置都来自客户端解包（第三方资料站转述），格子位置就是游戏里的位置；' +
+      '层级点数门槛按 5 / 10 / 15 / 20 / 25 / 30 摆，未在游戏内核实。' +
+      '角标是与经典旧世对照的结果，没角标 = 没有对照结果，不代表没变。</p>' +
+      '<a class="cta" href="talent.html?c=' + encodeURIComponent(PV.c) + '&tree=' + PV.t + '">打开' +
+      D.esc(cnOf[PV.c] || PV.c) + ' · ' + D.esc((cls.trees[PV.t] || {}).n || '') +
+      ' 的完整计算器（能加点、能存方案）→</a></aside></div>';
+  }
+  function bindPreview() {
+    var card = el('treecard');
+    if (!card || !PV.data) return;
+    var paint = function () { card.innerHTML = treeCard(); bindPreview(); };
+    Array.prototype.forEach.call(card.querySelectorAll('[data-pvt]'), function (b) {
+      b.onclick = function () { PV.t = +b.dataset.pvt; paint(); };
+    });
+    Array.prototype.forEach.call(card.querySelectorAll('[data-pvc]'), function (b) {
+      b.onclick = function () { PV.c = b.dataset.pvc; PV.t = 0; paint(); };
+    });
+  }
+
   /* ---------- 首页 ---------- */
   // 时间表里有"待定""择期"这类没有具体日期的条目，排序时让真日期排前面，别顶掉首屏
   function byDate(a, b) {
@@ -325,25 +406,20 @@
     Promise.all([
       D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'),
       D.load('data/meta.json'), D.load('data/scale.json'), D.load('data/timeline.json'),
-      D.load('data/releases.json').catch(function () { return { items: [] }; }),
+      D.load('data/releases.json').catch(function () { return { items: [] }; }),      D.load('data/talent-preview.json').catch(function () { return { classes: {} }; }),
       D.load('data/art.json').catch(function () { return {}; })
     ]).then(function (r) {
       var classes = r[0].classes, gl = r[1].items, meta = r[3], S = r[4].scale, tl = r[5].items || [];
       var cl = (r[6] || {}).items || [];
+      PV.data = r[7] || { classes: {} }; PV.classes = classes;
+      // 默认看 classes.json 里的第一个职业：两栈必须同一个起点，否则对拍会差在选中态
+      if (classes.length) PV.c = classes[0].id;
       var rankTop = (S.classRank || []).slice(0, 3);
       // 首页的覆盖率用 build-data 算出来的全站口径（含天赋节点与世界线），
       // 页脚那条"不含天赋节点"是另一个口径，两边都写明各自范围，别让数字看着互相打脸。
       var cov = { L0: S.coverage.L0, L1: S.coverage.L1, L2: S.coverage.L2, L3: S.coverage.L3, total: S.coverageTotal };
       var left = launchLeft();
       var recent = tl.slice().sort(byDate).slice(0, 3);
-
-      /* 九职业条：首页的招牌动作就是点开一棵树 */
-      var strip = '<div class="strip">' + classes.map(function (c) {
-        return '<a class="stripc" href="talent.html?c=' + D.esc(c.id) + '">' +
-          (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey) : '') +
-          '<b>' + D.esc(c.cn) + '</b>' +
-          '<span class="dim mono">' + (c.talentCount || 0) + ' 天赋</span></a>';
-      }).join('') + '</div>';
 
       function mod(m) {
         return '<a class="mod" href="' + m.href + '"><h2>' + m.t + '</h2>' +
@@ -408,7 +484,9 @@
         '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p>' +
         '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
         '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
-        '<section class="card"><h2>挑一个职业，直接开一棵树</h2>' + strip + '</section>' +
+        '<section class="card" id="treecard"><h2>挑一个职业，先看一棵真树</h2>' +
+        '<p class="dim">格子就是客户端里的天赋本身，位置、每层上限、与经典旧世的差异都按真结构摆；' +
+        '这里只能看，点格子进计算器并高亮那一格。</p>' + treeCard() + '</section>' +
         '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
         [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
           ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统规则'], ['skills.html', '技能书'],
@@ -450,6 +528,7 @@
           return '<div class="flowrow"><b>' + D.esc(x[0]) + '</b><span class="dim">' + D.esc(x[1]) + '</span></div>';
         }).join('') + '</div></div>');
       bindSearch();
+      bindPreview();
       tickCountdown();
     }).catch(fail);
   }
@@ -461,6 +540,9 @@
     var q = new URLSearchParams(location.search);
     tstate.classId = q.get('c') || 'hunter';
     tstate.q = q.get('q') || '';
+    // 首页预览点格子跳进来时带着是哪一系（移动端只显示当前那一系）
+    var tt = parseInt(q.get('tree'), 10);
+    if (tt >= 0 && tt < 3) tstate.active = tt;
     Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'),
       D.load('data/art.json').catch(function () { return {}; })]).then(function (r) {
       tstate.classes = r[0].classes; tstate.gloss = r[1].items; tstate.art = r[2] || {};
@@ -1331,7 +1413,7 @@
         var R = r[0], classes = r[1].classes, gloss = r[2].items, ART = r[3] || {};
         var CNAME = {}, CTILE = {};
         classes.forEach(function (c) { CNAME[c.id] = c.cn; CTILE[c.id] = c.iconKey || null; });
-        var POR = ART.races || {}, EMB = ART.factions || {};
+        var POR = ART.races || {}, EMB = ART.factions || {}, CITY = ART.factionCities || {};
         var FAC = { horde: '部落', alliance: '联盟' };
         var cols = (R.classOrder || []).filter(function (id) { return CNAME[id]; });
         var traits = [];
@@ -1374,7 +1456,12 @@
         function band(fac) {
           var rows = R.races.filter(function (x) { return x.faction === fac; });
           var n = rows.reduce(function (a, x) { return a + traitListOf(x).length; }, 0);
-          return '<div class="facband ' + fac + '"><div class="fhead">' +
+          return '<div class="facband ' + fac + '">' +
+            // 阵营城市原画压暗当氛围底；取不到就整个不渲染，纯色带照常显示
+            (CITY[fac] ? '<div class="fembg"><img src="' + D.esc(CITY[fac]) + '" alt="" loading="lazy" ' +
+              'onerror="this.parentNode.className=\'fembg bad\'"></div>' +
+              '<span class="artmark">客户端原画 · 本地转存</span>' : '') +
+            '<div class="fhead">' +
             (EMB[fac] ? '<img class="femb" src="' + D.esc(EMB[fac]) + '" alt="" loading="lazy" ' +
               'onerror="this.className=\'femb bad\'">' : '') +
             '<b>' + FAC[fac] + '</b><span class="dim">' + rows.length + ' 个种族行 · ' + n +

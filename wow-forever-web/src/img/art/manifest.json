@@ -744,8 +744,26 @@
    "source": "https://wowforever.wclbox.com/jiemian/reference-art/raceicon-undead.webp",
    "kind": "race-portrait",
    "fetchedAt": "2026-10-09"
+  },
+  {
+   "file": "art/factions/city-alliance.webp",
+   "bytes": 105872,
+   "sha1": "b5a9abb687",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/lianmeng.webp",
+   "kind": "faction-city",
+   "fetchedAt": "2026-10-09",
+   "what": "暴风城英雄谷"
+  },
+  {
+   "file": "art/factions/city-horde.webp",
+   "bytes": 60788,
+   "sha1": "3b444e2eb4",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/buluo.webp",
+   "kind": "faction-city",
+   "fetchedAt": "2026-10-09",
+   "what": "奥格瑞玛正门"
   }
  ],
  "fetchedAt": "2026-10-09",
- "total": 93
+ "total": 95
 }

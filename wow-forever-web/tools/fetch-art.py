@@ -230,10 +230,41 @@ def races(man):
         print(u"  缺：%s" % u"、".join(miss[:10]))
 
 
+# 阵营城市背景：参考站按拼音命名（lianmeng=联盟=暴风城英雄谷，buluo=部落=奥格瑞玛正门），
+# 两张都人眼确认过画的是什么，不是靠文件名猜。落到我们自己的语义名，来源记进 manifest。
+CITY_FILE = {"lianmeng": ("alliance", u"暴风城英雄谷"), "buluo": ("horde", u"奥格瑞玛正门")}
+
+
+def factions(man):
+    """阵营城市背景原画：种族页两条阵营带要用它做底，压暗后当氛围图。
+
+    口径与职业背景图一致：第三方站托管的客户端原画副本，落独立目录 + manifest 记来源与抓取日期，
+    整目录删掉即回退到现在的纯色带。取不到就跳过，不放别的图凑数。
+    """
+    ok, miss = [], []
+    for src, (key, what) in CITY_FILE.items():
+        url = WBX + "/peitu/changjing/" + src + ".webp"
+        code, blob = http(url, binary=True)
+        if code != 200 or len(blob) < 8000:
+            miss.append(src + u"（HTTP %s）" % code)
+            continue
+        dest = os.path.join(ART, "factions", "city-" + key + ".webp")
+        rec = save(dest, blob, url, "faction-city")
+        rec["what"] = what
+        man["items"] = [x for x in man["items"] if x["file"] != rec["file"]] + [rec]
+        ok.append(u"%s → %s（%s，%d KB）" % (src, rec["file"], what, len(blob) // 1024))
+    print(u"阵营城市背景：新增或更新 %d，取不到 %d" % (len(ok), len(miss)))
+    for x in ok:
+        print(u"  " + x)
+    if miss:
+        print(u"  缺：%s" % u"、".join(miss))
+
+
 def write_art_index(man):
     """把 manifest 收成界面能直接用的索引：src/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
-    idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {}, "meta": {}}
+    idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {},
+           "factionCities": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -245,20 +276,24 @@ def write_art_index(man):
             idx["races"][name] = "img/" + rel
         elif x["kind"] == "faction-emblem":
             idx["factions"][name] = "img/" + rel
+        elif x["kind"] == "faction-city":
+            idx["factionCities"][name.replace("city-", "")] = "img/" + rel
         else:
             idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
                    "count": len(man["items"])}
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
-    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / 阵营徽标 %d）" % (
-        len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]),
-        len(idx["races"]), len(idx["factions"])))
+    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
+          u"阵营徽标 %d / 阵营城市 %d）" % (
+              len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]), len(idx["races"]),
+              len(idx["factions"]), len(idx["factionCities"])))
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "all"], default="all")
+    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "factions", "all"],
+                    default="all")
     args = ap.parse_args()
     man = load_manifest()
     if args.what in ("classes", "all"):
@@ -269,6 +304,8 @@ def main():
         maps(man)
     if args.what in ("races", "all"):
         races(man)
+    if args.what in ("factions", "all"):
+        factions(man)
     man["fetchedAt"] = datetime.date.today().isoformat()
     man["total"] = len(man["items"])
     save_manifest(man)

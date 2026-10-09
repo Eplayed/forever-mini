@@ -30,16 +30,7 @@
       </aside>
     </section>
 
-    <section class="card">
-      <h2>挑一个职业，直接开一棵树</h2>
-      <div class="strip">
-        <a v-for="c in classes" :key="c.id" class="stripc" :href="legacy('talent.html?c=' + c.id)">
-          <ClassTile :class-id="c.id" :cn="c.cn" :icon-key="c.iconKey || ''" />
-          <b>{{ c.cn }}</b>
-          <span class="dim mono">{{ c.talentCount || 0 }} 天赋</span>
-        </a>
-      </div>
-    </section>
+    <TalentPreview :preview="pv" :classes="classes" />
 
     <div class="chipsrow">
       <span class="dim">还要去哪：</span>
@@ -108,7 +99,7 @@ import { useCountdown } from '../lib/countdown.js';
 import { legacyUrl } from '../lib/nav.js';
 import CovBar from '../components/CovBar.vue';
 import SiteSearch from '../components/SiteSearch.vue';
-import ClassTile from '../components/ClassTile.vue';
+import TalentPreview from '../components/TalentPreview.vue';
 import LevelPill from '../components/LevelPill.vue';
 
 const legacy = legacyUrl;
@@ -129,20 +120,22 @@ const meta = ref({ dataBaseline: {} });
 const tl = ref([]);
 const cl = ref([]);
 const err = ref('');
+const pv = ref({ classes: {} });
 const gen = ref('');
 const { left } = useCountdown();
 
 function boot() {
   err.value = '';
   loadAll(['data/classes.json', 'data/meta.json', 'data/scale.json', 'data/timeline.json',
-    'data/releases.json'])
-    .then(([c, m, sc, t, ch]) => {
+    'data/releases.json', 'data/talent-preview.json'])
+    .then(([c, m, sc, t, ch, pr]) => {
       classes.value = c.classes || [];
       meta.value = m;
       S.value = sc.scale;
       gen.value = (sc.meta || {}).generatedAt || '';
       tl.value = t.items || [];
       cl.value = (ch && ch.items) || [];
+      pv.value = pr || { classes: {} };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }

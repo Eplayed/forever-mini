@@ -13,6 +13,7 @@
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
+#   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
 #   tools/refresh.sh check       # 只跑门禁，不碰网络
 #   tools/refresh.sh publish     # 门禁 + 新站构建 + 小程序导出，全绿才算能发
 #
@@ -64,6 +65,10 @@ case "${1:-}" in
     run python3 tools/extract-abilities.py --write
     run python3 tools/extract-races.py --write --link-glossary
     gate
+    ;;
+  art)
+    run python3 tools/fetch-art.py --what all
+    run node tools/build-data.js
     ;;
   icons)
     run python3 tools/build-icon-map.py

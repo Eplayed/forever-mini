@@ -102,9 +102,13 @@
   "alliance": "img/art/factions/alliance.png",
   "horde": "img/art/factions/horde.png"
  },
+ "factionCities": {
+  "alliance": "img/art/factions/city-alliance.webp",
+  "horde": "img/art/factions/city-horde.webp"
+ },
  "meta": {
   "fetchedAt": "2026-10-09",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
-  "count": 93
+  "count": 95
  }
 }
