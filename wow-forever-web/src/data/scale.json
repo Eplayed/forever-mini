@@ -15,6 +15,85 @@
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
+  "changes": 964,
+  "changesTalents": 544,
+  "changesSpells": 420,
+  "changesNew": 112,
+  "changesRemoved": 77,
+  "classRank": [
+   {
+    "classId": "hunter",
+    "official": 125,
+    "datamine": 110,
+    "total": 235,
+    "share": 53.2,
+    "place": 1
+   },
+   {
+    "classId": "druid",
+    "official": 119,
+    "datamine": 114,
+    "total": 233,
+    "share": 51.1,
+    "place": 2
+   },
+   {
+    "classId": "warrior",
+    "official": 95,
+    "datamine": 102,
+    "total": 197,
+    "share": 48.2,
+    "place": 3
+   },
+   {
+    "classId": "priest",
+    "official": 80,
+    "datamine": 107,
+    "total": 187,
+    "share": 42.8,
+    "place": 4
+   },
+   {
+    "classId": "rogue",
+    "official": 53,
+    "datamine": 107,
+    "total": 160,
+    "share": 33.1,
+    "place": 5
+   },
+   {
+    "classId": "mage",
+    "official": 53,
+    "datamine": 105,
+    "total": 158,
+    "share": 33.5,
+    "place": 6
+   },
+   {
+    "classId": "warlock",
+    "official": 52,
+    "datamine": 113,
+    "total": 165,
+    "share": 31.5,
+    "place": 7
+   },
+   {
+    "classId": "paladin",
+    "official": 50,
+    "datamine": 112,
+    "total": 162,
+    "share": 30.9,
+    "place": 8
+   },
+   {
+    "classId": "shaman",
+    "official": 50,
+    "datamine": 107,
+    "total": 157,
+    "share": 31.8,
+    "place": 9
+   }
+  ],
   "glossary": 215,
   "classes": 9,
   "talentNodes": 473,

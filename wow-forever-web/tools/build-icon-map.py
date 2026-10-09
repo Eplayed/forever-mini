@@ -37,7 +37,7 @@ def collect_all_keys():
             for x in node:
                 walk(x, src)
 
-    names = ["dungeons.json", "professions.json", "races.json", "world.json",
+    names = ["dungeons.json", "professions.json", "races.json", "world.json", "changes.json",
              "glossary.json", "abilities.json", "classes.json", "chooser.json", "systems.json"]
     for fn in names:
         fp = os.path.join(DATA, fn)

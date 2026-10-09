@@ -2,36 +2,11 @@
  "source": "https://render.worldofwarcraft.com/us/icons/56/",
  "format": "56x56 jpg",
  "fetchedAt": "2026-10-09",
- "total": 1817,
- "ok": 1817,
- "missing": [
-  "inv_belt_cloth_skybornec60_b_01",
-  "inv_belt_mail_skybornec60_b_01",
-  "inv_glove_leather_skybornec60_b_02",
-  "inv_staff_2h_skybornec60_b_01",
-  "inv_pant_armor_skybornec60_d_01",
-  "inv_pant_leather_skybornec60_b_02",
-  "inv_pant_mail_skybornec60_b_01",
-  "inv_boot_cloth_skybornec60_b_01",
-  "inv_boot_mail_skybornec60_b_01"
- ],
+ "total": 1970,
+ "ok": 1970,
+ "missing": [],
  "note": "图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。",
  "batches": [
-  {
-   "at": "2026-10-08",
-   "added": 9,
-   "unavailable": [],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
-  {
-   "at": "2026-10-08",
-   "added": 6,
-   "unavailable": [
-    "race_scourge_male",
-    "race_nightelf_male"
-   ],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
   {
    "at": "2026-10-08",
    "added": 1,
@@ -156,6 +131,20 @@
     "inv_boot_cloth_skybornec60_b_01",
     "inv_boot_mail_skybornec60_b_01"
    ],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-10-09",
+   "added": 153,
+   "unavailable": [
+    "ability_warlock_incubus"
+   ],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-10-09",
+   "added": 0,
+   "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   }
  ]

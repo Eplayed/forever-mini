@@ -31,7 +31,7 @@ TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
 PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races",
-         "professions", "world", "glossary", "provenance"]
+         "professions", "world", "updates", "rank", "glossary", "provenance"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
 # 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
 GAPS_PATH = os.path.join(SRC, "data", "icon-gaps.json")
@@ -1029,6 +1029,103 @@ def test_home(browser, base):
     m.close()
 
 
+def test_updates_rank(browser, base):
+    """动态页与排行页：改动清单只许有名称与类别，排行数字必须与 scale.json 逐项一致。"""
+    print("\n[15] 最新动态与资料完整度排行")
+    import json
+    ch = json.load(open(os.path.join(SRC, "data", "changes.json"), encoding="utf-8"))
+    cl = json.load(open(os.path.join(SRC, "data", "changelog.json"), encoding="utf-8"))
+    S = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    items = ch["items"]
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/updates.html", wait_until="networkidle")
+    page.wait_for_timeout(2200)
+    check("动态页无脚本报错", not errs, "; ".join(errs[:2]))
+    cards = page.evaluate("() => ['k0','k1','k2'].filter(id => document.getElementById(id)).length")
+    check("动态页三块都在（官方时间点 / 客户端改动 / 本站变更）", cards == 3, "%d 块" % cards)
+    rows = page.evaluate("() => document.querySelectorAll('#chbody tbody tr').length")
+    cnt = page.evaluate("() => document.querySelector('#ccnt').textContent")
+    check("改动清单默认列到上限并报出全量", rows == 400 and str(len(items)) in cnt,
+          "%d 行 / 计数 %s（数据 %d 条）" % (rows, cnt, len(items)))
+    page.select_option("#ck", "removed")
+    page.wait_for_timeout(900)
+    rm = page.evaluate("() => document.querySelectorAll('#chbody tbody tr').length")
+    check("按「移除」筛出的条数与卡口数一致", rm == S["changesRemoved"], "%d 条（scale %s）" % (rm, S["changesRemoved"]))
+    page.select_option("#ck", "all")
+    page.select_option("#cw", "spell")
+    page.wait_for_timeout(900)
+    sp = page.evaluate("() => parseInt(document.querySelector('#ccnt').textContent, 10)")
+    check("只看法术 = 420 条", sp == S["changesSpells"], "%d（scale %s）" % (sp, S["changesSpells"]))
+    page.select_option("#cw", "all")
+    page.evaluate("() => document.querySelector('[data-c=hunter]').click()")
+    page.wait_for_timeout(900)
+    hu = page.evaluate("() => parseInt(document.querySelector('#ccnt').textContent, 10)")
+    exp_hu = len([x for x in items if x["classId"] == "hunter"])
+    check("按职业筛与数据一致", hu == exp_hu, "猎人 %d（数据 %d）" % (hu, exp_hu))
+    body = page.evaluate("() => document.querySelector('#main').innerText")
+    # 红线断言：改动清单只该有名称与类别，出现 tooltip 句式就是文本没删干净
+    leaky = [w for w in ["使你的", "造成", "点伤害", "冷却时间", "生命值"] if w in body]
+    check("动态页不出现技能描述句", not leaky, "疑似漏进句子：%s" % (leaky or "无"))
+    tech = [w for w in ["tools/", ".json", ".py", "undefined", "[object"] if w in body]
+    check("动态页正文没有面向开发的词", not tech, str(tech))
+    logs = page.evaluate("() => document.querySelectorAll('#k2 .flowrow').length")
+    check("本站变更日志条数与数据一致", logs == len(cl["entries"]), "%d 条（数据 %d）" % (logs, len(cl["entries"])))
+    page.screenshot(path=os.path.join(SHOT_DIR, "updates.png"))
+    ctx.close()
+
+    c2 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    rp = c2.new_page()
+    rp.goto(base + "/rank.html", wait_until="networkidle")
+    rp.wait_for_timeout(1500)
+    rk = rp.evaluate("""() => [...document.querySelectorAll('.ranktab tbody tr')].map(tr =>
+      [...tr.querySelectorAll('td')].map(td => td.innerText.trim()))""")
+    data = S["classRank"]
+    check("排行九行且名次与 scale.json 一致",
+          len(rk) == len(data) == 9 and all(int(r[0]) == d["place"] for r, d in zip(rk, data)),
+          "%d 行" % len(rk))
+    ok_cells = all(int(r[2]) == d["official"] and int(r[3]) == d["datamine"] and int(r[4]) == d["total"]
+                   for r, d in zip(rk, data))
+    check("排行每一列数字都来自数据现算", ok_cells,
+          "首行 页面 %s/%s/%s vs 数据 %s/%s/%s" % (rk[0][2], rk[0][3], rk[0][4],
+                                            data[0]["official"], data[0]["datamine"], data[0]["total"]))
+    rt = rp.evaluate("() => document.querySelector('.ranktab tbody tr td:last-child').innerText")
+    check("排行覆盖率与页脚口径同源", ("%s%%" % data[0]["share"]) in rt, "首行显示 %s，数据 %s%%" % (rt, data[0]["share"]))
+    rtxt = rp.evaluate("() => document.querySelector('#main').innerText")
+    check("排行页写明不是强度排行", ("不是强度排行" in rtxt or "不回答哪个职业强" in rtxt) and "DPS" in rtxt,
+          "缺免责声明" if "强度" not in rtxt else "已写明")
+    rp.screenshot(path=os.path.join(SHOT_DIR, "rank.png"))
+    c2.close()
+
+    hp = browser.new_context(viewport={"width": 1440, "height": 1000})
+    hpg = hp.new_page()
+    hpg.goto(base + "/index.html", wait_until="networkidle")
+    hpg.wait_for_timeout(1800)
+    hb = hpg.evaluate("""() => { const c = [...document.querySelectorAll('.card')]
+        .find(x => /最新动态/.test((x.querySelector('h2') || {}).innerText || ''));
+      if (!c) return null;
+      return { rows: c.querySelectorAll('.flowrow').length, nums: c.querySelectorAll('.chgl span').length,
+               links: [...c.querySelectorAll('a')].map(a => a.getAttribute('href')) }; }""")
+    check("首页动态卡有摘要与两个入口", hb and hb["rows"] >= 4 and hb["nums"] >= 6
+          and "updates.html" in hb["links"] and "rank.html" in hb["links"], str(hb))
+    hp.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(base + "/updates.html", wait_until="networkidle")
+    mp.wait_for_timeout(1800)
+    mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const small = [...document.querySelectorAll('#chbody .pick, .field select, .field input, #main a.cta, .chipsrow a')]
+        .filter(b => { const r = b.getBoundingClientRect(); return r.height && r.height < 44; }).length;
+      return { overflow: document.documentElement.scrollWidth > vw + 1, small: small }; }""")
+    check("移动端动态页不溢出且控件够高", not mob["overflow"] and mob["small"] == 0, json.dumps(mob))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "updates-mobile.png"))
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -1050,6 +1147,7 @@ def main():
             test_professions(browser, base)
             test_world(browser, base)
             test_home(browser, base)
+            test_updates_rank(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

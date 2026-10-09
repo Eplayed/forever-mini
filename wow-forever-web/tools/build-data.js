@@ -555,6 +555,103 @@ console.log('全站覆盖率：L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + co
 const rcTraitN = (rc.races || []).reduce((a, x) => a + (x.traits || []).length + (((x.subgroup && x.subgroup.traits) || []).length), 0);
 console.log('种族 ' + (rc.races || []).length + ' 行 / 特长 ' + rcTraitN + ' 条 / 亮点组合 ' + (rc.newCombos || []).length +
   ' 组，全部出自国服官方中文公告；已回填种族归属的词条 ' + gl.items.filter((x) => x.raceId).length + ' 条');
+// 改动清单：只许有名称与类别，出现任何句子字段就是抓取阶段没删干净
+const chPath = path.join(ROOT, 'changes.json');
+let chItems = [];
+if (fs.existsSync(chPath)) {
+  const ch = JSON.parse(fs.readFileSync(chPath, 'utf8'));
+  chItems = ch.items || [];
+  const banned = ['rank_texts', 'rankTexts', 'summary', 'forever_note', 'foreverNote',
+    'uncertainties', 'tooltip', 'description'];
+  const leaked = chItems.filter((x) => banned.some((k) => k in x));
+  if (leaked.length) {
+    errs.push(`changes：${leaked.length} 条带着句子字段回来了，抓取阶段没删干净（${banned.join('/')}）`);
+  }
+  const chIds = new Set();
+  chItems.forEach((x) => {
+    if (chIds.has(x.id)) errs.push(`changes：id 重复 ${x.id}`);
+    chIds.add(x.id);
+    if (!x.nameCn) errs.push(`changes ${x.id}：缺中文名`);
+    if (!x.classId) errs.push(`changes ${x.id}：缺职业`);
+    if (x.kind !== 'talent' && x.kind !== 'spell') errs.push(`changes ${x.id}：kind 不是 talent/spell`);
+    if (!x.changeKind) errs.push(`changes ${x.id}：缺改动类别`);
+    scanNoPercent('change', x, x.id);
+    checkRecord('change', x);
+  });
+  const U = (ch.meta || {}).upstreamCounts || {};
+  const cnt = (f) => chItems.filter(f).length;
+  const mine = {
+    all: chItems.length,
+    spells: cnt((x) => x.kind === 'spell'),
+    changed: cnt((x) => x.changeKind !== 'unchanged'),
+    newTalents: cnt((x) => x.kind === 'talent' && x.changeKind === 'added'),
+    changedTalents: cnt((x) => x.kind === 'talent' && (x.changeKind === 'modified' || x.changeKind === 'moved')),
+    removedTalents: cnt((x) => x.kind === 'talent' && x.changeKind === 'removed'),
+    spellsChanged: cnt((x) => x.kind === 'spell' && x.changeKind !== 'unchanged')
+  };
+  Object.keys(mine).forEach((k) => {
+    if (U[k] !== undefined && U[k] !== mine[k]) {
+      errs.push(`changes：${k} 本站数出 ${mine[k]}，上游自报 ${U[k]}，抄漏或抄重了`);
+    }
+  });
+  scale.changes = chItems.length;
+  scale.changesTalents = cnt((x) => x.kind === 'talent');
+  scale.changesSpells = mine.spells;
+  scale.changesNew = mine.newTalents;
+  scale.changesRemoved = mine.removedTalents;
+  console.log('改动清单 ' + chItems.length + ' 条（新增天赋 ' + mine.newTalents + ' / 改动天赋 ' +
+    mine.changedTalents + ' / 移除 ' + mine.removedTalents + ' / 法术有变 ' + mine.spellsChanged +
+    '），与上游自报计数逐项一致');
+} else {
+  warns.push('changes.json 缺失：动态页只余时间线与变更日志（跑 tools/merge-changes.js 生成）');
+}
+
+// 职业资料完整度排行：不另建一份手抄表，全部从现有数据派生
+const rank = {};
+function rk(id) {
+  if (!id) return null;
+  if (!rank[id]) rank[id] = { classId: id, official: 0, datamine: 0, total: 0 };
+  return rank[id];
+}
+function hasOfficial(x) {
+  return (x.provenance || []).some((p) => p.type === 'official_cn');
+}
+gl.items.forEach((x) => {
+  const b = rk(x.classId);
+  if (!b) return;
+  b.total++;
+  if (hasOfficial(x)) b.official++; else b.datamine++;
+});
+(JSON.parse(fs.readFileSync(path.join(ROOT, 'abilities.json'), 'utf8')).items || []).forEach((x) => {
+  const b = rk(x.classId);
+  if (!b) return;
+  b.total++;
+  if (hasOfficial(x)) b.official++; else b.datamine++;
+});
+chItems.forEach((x) => {
+  const b = rk(x.classId);
+  if (!b) return;
+  b.total++; b.datamine++;
+});
+fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
+  if (f.charAt(0) === '_' || !f.endsWith('.json')) return;
+  const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
+  const b = rk(t.classId || f.slice(0, -5));
+  if (!b) return;
+  (t.trees || []).forEach((tr) => (tr.nodes || []).forEach((n) => {
+    b.total++;
+    if (n.nameVerified) b.official++; else b.datamine++;
+  }));
+});
+const rankList = Object.keys(rank).map((k) => {
+  const r = rank[k];
+  r.share = r.total ? Math.round((r.official / r.total) * 1000) / 10 : 0;
+  return r;
+}).sort((a, b) => b.official - a.official || b.total - a.total);
+rankList.forEach((r, i) => { r.place = i + 1; });
+if (rankList.length !== 9) warns.push('职业完整度排行只有 ' + rankList.length + ' 个职业有数据');
+scale.classRank = rankList;
+
 // 规模快照：首页与溯源页显示的数字一律从这里来，避免页面里手抄一份和真实数据漂移
 const dalls = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []);
 Object.assign(scale, {

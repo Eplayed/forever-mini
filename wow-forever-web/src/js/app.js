@@ -21,6 +21,8 @@
     { t: '工具', items: [
       { href: 'glossary.html', t: '术语速查', d: '官方中文词条，点一下即复制' },
       { href: 'timeline.html', t: '上线时间表', d: '11 个时间点带官方原文' },
+      { href: 'updates.html', t: '最新动态', d: '官方时间点 + 客户端改动 + 本站变更（仅网页）' },
+      { href: 'rank.html', t: '资料完整度排行', d: '本站覆盖排序，不是强度排行（仅网页）' },
       { href: 'provenance.html', t: '溯源与覆盖率', d: '哪些已核实、哪些只是线索' }] }
   ];
   // 结构上有位置、数据还没采到的：写清楚为什么空着，不做假页面
@@ -181,6 +183,13 @@
     var now = new Date('2026-11-05T00:00:00+08:00').getTime() - Date.now();
     return { d: Math.max(0, Math.floor(now / 86400000)), h: Math.max(0, Math.floor(now / 3600000) % 24) };
   }
+  // 时间表里有"待定""择期"这类没有具体日期的条目，排序时让真日期排前面，别顶掉首屏
+  function byDate(a, b) {
+    var ra = /^\d{4}-\d{2}-\d{2}$/.test(a.date || ''), rb = /^\d{4}-\d{2}-\d{2}$/.test(b.date || '');
+    if (ra && rb) return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+    if (ra !== rb) return ra ? -1 : 1;
+    return 0;
+  }
   var NOT_DOING = [
     ['DPS 与强度排行', '个人主体 + 零 UGC 的类目下不做排行；而且无限服的战斗数据我们没实测过。'],
     ['宏与循环提示', '属攻略性质，本站红线不写打法。'],
@@ -192,14 +201,17 @@
     Promise.all([
       D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'),
       D.load('data/meta.json'), D.load('data/scale.json'), D.load('data/timeline.json'),
+      D.load('data/changelog.json').catch(function () { return { entries: [] }; }),
       D.load('data/art.json').catch(function () { return {}; })
     ]).then(function (r) {
       var classes = r[0].classes, gl = r[1].items, meta = r[3], S = r[4].scale, tl = r[5].items || [];
+      var cl = (r[6] || {}).entries || [];
+      var rankTop = (S.classRank || []).slice(0, 3);
       // 首页的覆盖率用 build-data 算出来的全站口径（含天赋节点与世界线），
       // 页脚那条"不含天赋节点"是另一个口径，两边都写明各自范围，别让数字看着互相打脸。
       var cov = { L0: S.coverage.L0, L1: S.coverage.L1, L2: S.coverage.L2, L3: S.coverage.L3, total: S.coverageTotal };
       var left = launchLeft();
-      var recent = tl.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 4);
+      var recent = tl.slice().sort(byDate).slice(0, 3);
 
       /* 九职业条：首页的招牌动作就是点开一棵树 */
       var strip = '<div class="strip">' + classes.map(function (c) {
@@ -262,20 +274,40 @@
         '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
         '<section class="card"><h2>挑一个职业，直接开一棵树</h2>' + strip + '</section>' +
         '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
-        [['timeline.html', '上线时间表'], ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统口径'],
-          ['skills.html', '技能书'], ['dungeons.html#todo', '我们没采的']].map(function (x) {
+        [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
+          ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统口径'], ['skills.html', '技能书'],
+          ['dungeons.html#todo', '我们没采的']].map(function (x) {
             return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
           }).join('') + '</div>' +
         '<div class="modgrid">' + MODS.map(mod).join('') + '</div>' +
         '<div class="grid g2">' +
-        '<div class="card"><h2>官方口径里的时间点</h2>' +
-        '<p class="note">这里只列官方公告写过的时间点，本站不做新闻流与更新评论。</p>' +
-        recent.map(function (x) {
+        '<div class="card"><h2>最新动态</h2>' +
+        '<p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。' +
+        '不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。</p>' +
+        '<h3>官方口径里的时间点</h3>' +
+        recent.slice(0, 3).map(function (x) {
           return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
             '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
             '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
         }).join('') +
-        '<a class="cta" href="timeline.html">全部 ' + S.timeline + ' 个时间点 →</a></div>' +
+        '<h3>客户端改动清单</h3>' +
+        '<div class="chgl">' +
+        '<span><b class="mono">' + S.changes + '</b>条已入库</span>' +
+        '<span><b class="mono">' + S.changesNew + '</b>个新增天赋</span>' +
+        '<span><b class="mono">' + S.changesRemoved + '</b>个移除天赋</span>' +
+        '<span><b class="mono">' + (S.changes - S.changesNew - S.changesRemoved) + '</b>条是改动或移位</span>' +
+        '</div><p class="note">清单只列名称与改动类别，前后对照的句子本站不复制。</p>' +
+        '<h3>资料完整度前三</h3><div class="chgl">' + rankTop.map(function (x, i) {
+          var nm = (classes.filter(function (c) { return c.id === x.classId; })[0] || {}).cn || x.classId;
+          return '<span><b class="mono">' + x.place + '</b>' + D.esc(nm) + ' · ' + x.official + ' 条有官方中文</span>';
+        }).join('') + '</div>' +
+        (cl.length ? '<h3>本站最近改了什么</h3>' + cl.slice(0, 3).map(function (e) {
+          return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b>' +
+            '<div><b>' + D.esc(e.subject) + '</b></div></div>';
+        }).join('') : '') +
+        '<a class="cta" href="updates.html">全部动态（' + S.timeline + ' 个时间点 · ' + S.changes +
+        ' 条改动 · ' + cl.length + ' 条本站变更）→</a>' +
+        '<a class="cta" href="rank.html">资料完整度排行全表 →</a></div>' +
         '<div class="card"><h2>这一站刻意不做的</h2>' +
         '<p class="note">不是漏了，是决定不做。理由逐条写在这。</p>' +
         NOT_DOING.map(function (x) {
@@ -1760,6 +1792,176 @@
       }).catch(fail);
   }
 
+  /* ---------- 最新动态：官方时间点 + 客户端改动清单 + 本站数据变更日志 ---------- */
+  var CH_KINDS = [['all', '全部类别'], ['added', '新增'], ['modified', '改动'], ['moved', '换层或换系'],
+    ['removed', '移除'], ['renamed', '改名'], ['unchanged', '未变']];
+  function updates() {
+    Promise.all([D.load('data/changes.json'), D.load('data/timeline.json'),
+      D.load('data/changelog.json'), D.load('data/classes.json'), D.load('data/scale.json')])
+      .then(function (r) {
+        var ch = r[0], tl = (r[1].items || []).slice().sort(byDate), cl = r[2].entries || [],
+          classes = r[3].classes, S = r[4].scale;
+        var f = { cls: '', kind: 'all', what: 'all', q: '' };
+        var cnOf = {};
+        classes.forEach(function (c) { cnOf[c.id] = c.cn; });
+
+        function rows() {
+          var kw = f.q.trim().toLowerCase();
+          return (ch.items || []).filter(function (x) {
+            if (f.cls && x.classId !== f.cls) return false;
+            if (f.what !== 'all' && x.kind !== f.what) return false;
+            if (f.kind !== 'all' && x.changeKind !== f.kind) return false;
+            if (kw && (x.nameCn || '').toLowerCase().indexOf(kw) < 0 &&
+              (x.tree || '').toLowerCase().indexOf(kw) < 0) return false;
+            return true;
+          });
+        }
+        function draw() {
+          var list = rows();
+          el('chbody').innerHTML = '<div class="picks">' +
+            '<button type="button" class="pick' + (f.cls ? '' : ' on') + '" data-c="">' +
+            '<b>全职业</b><span class="dim mono">' + (ch.items || []).length + '</span></button>' +
+            classes.map(function (c) {
+              var n = (ch.items || []).filter(function (x) { return x.classId === c.id; }).length;
+              return '<button type="button" class="pick' + (f.cls === c.id ? ' on' : '') +
+                '" data-c="' + D.esc(c.id) + '"><b>' + D.esc(c.cn) + '</b>' +
+                '<span class="dim mono">' + n + '</span></button>';
+            }).join('') + '</div>' +
+            '<div class="field">' +
+            '<select id="cw" aria-label="按天赋或法术筛">' +
+            [['all', '天赋 + 法术'], ['talent', '只看天赋'], ['spell', '只看法术']].map(function (x) {
+              return '<option value="' + x[0] + '"' + (f.what === x[0] ? ' selected' : '') + '>' + x[1] + '</option>';
+            }).join('') + '</select>' +
+            '<select id="ck" aria-label="按改动类别筛">' + CH_KINDS.map(function (x) {
+              return '<option value="' + x[0] + '"' + (f.kind === x[0] ? ' selected' : '') + '>' + x[1] + '</option>';
+            }).join('') + '</select>' +
+            '<input type="search" id="cq" placeholder="搜天赋名或系名" value="' + D.esc(f.q) + '">' +
+            '<span class="dim mono" id="ccnt"></span></div>' +
+            (list.length ? '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">图标</th>' +
+              '<th>名称</th><th>职业</th><th>所在系</th><th>类型</th><th>改动</th><th>核到哪天</th></tr></thead><tbody>' +
+              list.slice(0, 400).map(function (x) {
+                return '<tr><td class="ich">' + iconCell(x.iconKey, x.id, x.nameCn, 1) + '</td>' +
+                  '<td>' + D.hl(x.nameCn, f.q) + (x.oldNameCn ? '<span class="dim">（旧名 ' +
+                    D.esc(x.oldNameCn) + '）</span>' : '') + '</td>' +
+                  '<td>' + D.esc(cnOf[x.classId] || x.classId) + '</td>' +
+                  '<td class="dim">' + D.esc(x.tree || '—') + '</td>' +
+                  '<td class="dim">' + (x.kind === 'spell' ? '法术' : '天赋') +
+                  (x.maxRank ? ' <span class="mono">' + x.maxRank + ' 层</span>' : '') + '</td>' +
+                  '<td><span class="tag' + (x.changeKind === 'added' ? ' new' : '') + '">' +
+                  D.esc(x.changeCn) + '</span></td>' +
+                  '<td class="mono dim">' + D.esc(x.discoveredAt || '—') + '</td></tr>';
+              }).join('') + '</tbody></table></div>' +
+              (list.length > 400 ? '<p class="note">一次只列 400 条（当前命中 ' + list.length +
+                ' 条），把职业或类别收紧一点再看其余的。</p>' : '')
+              : '<div class="empty">这个筛选下没有条目。</div>');
+          el('ccnt').textContent = list.length + ' 条';
+          Array.prototype.forEach.call(document.querySelectorAll('[data-c]'), function (b) {
+            b.onclick = function () { f.cls = b.dataset.c; draw(); };
+          });
+          el('cw').onchange = function () { f.what = el('cw').value; draw(); };
+          el('ck').onchange = function () { f.kind = el('ck').value; draw(); };
+          var qi = el('cq');
+          qi.oninput = function () { f.q = qi.value; draw(); };
+        }
+
+        var K = ['官方时间点', '客户端改动', '本站变更'];
+        set('<div class="card"><h1 class="pt">最新动态</h1>' +
+          '<p class="dim">这一页把"什么变了"拆成三件事各说各的：官方公告里写过的时间点、' +
+          '客户端解包出来的职业改动清单、以及我们这座站自己改了什么。' +
+          '<b>只在网页提供</b>——小程序按红线不做动态流与排行。</p>' +
+          '<div class="stats">' +
+          '<div class="stat"><b>' + tl.length + '</b>个官方时间点</div>' +
+          '<div class="stat"><b>' + (ch.items || []).length + '</b>条客户端改动</div>' +
+          '<div class="stat"><b>' + S.changesNew + '</b>个新增天赋</div>' +
+          '<div class="stat"><b>' + S.changesRemoved + '</b>个移除天赋</div>' +
+          '<div class="stat"><b>' + cl.length + '</b>条本站变更</div></div>' +
+          '<div class="picks">' + K.map(function (t, i) {
+            return '<a class="pick" href="#k' + i + '"><b>' + t + '</b></a>';
+          }).join('') + '</div></div>' +
+
+          '<div class="card" id="k0"><h2>官方口径里的时间点</h2>' +
+          '<p class="note">只列官方公告写过的原话与日期，本站不做新闻转载与评论；中英文两个上线口径并存，不替玩家选。</p>' +
+          tl.map(function (x) {
+            return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
+              '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
+              '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
+          }).join('') +
+          '<h3>来源与核对</h3>' + D.sources((tl[0] || {}).provenance) + '</div>' +
+
+          '<div class="card" id="k1"><h2>客户端改动清单 · ' + (ch.items || []).length + ' 条</h2>' +
+          '<p class="note">口径（' + D.esc(ch.meta.generatedAt) + ' 定）：<b>只列名称与改动类别，不列改动的具体句子</b>。' +
+          '上游 JSON 里那些前后对照的 tooltip 原文，抓取阶段就删掉了，本站不复制别人转述的游戏文案；' +
+          '要看逐字对照请去来源页。改动类别是客户端解包比对经典旧世的结果，未经游戏内实测。</p>' +
+          '<div id="chbody"></div>' +
+          '<h3>来源与核对</h3>' + D.sources((ch.items || [])[0] ? (ch.items[0].provenance) : []) +
+          '<p class="note">' + D.esc(ch.meta.textPolicy) + '</p></div>' +
+
+          '<div class="card" id="k2"><h2>本站数据变更日志 · ' + cl.length + ' 条</h2>' +
+          '<p class="note">这一栏只报我们自己做了什么：一条对应仓库里一个真实提交，' +
+          '标签是这次动到的板块。不含官方消息，也不做任何评价。</p>' +
+          cl.map(function (e) {
+            var tags = e.tags.filter(function (t) {
+              return ['文档', '截图证据', '交接台账', '协作规则'].indexOf(t) < 0;
+            }).slice(0, 5);
+            return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b><div><b>' +
+              D.esc(e.subject) + '</b>' +
+              '<span class="chips">' + tags.map(function (t) {
+                return '<span class="chipc">' + D.esc(t) + '</span>';
+              }).join('') + '</span></div></div>';
+          }).join('') + '</div>');
+        draw();
+      }).catch(fail);
+  }
+
+  /* ---------- 资料完整度排行：本站覆盖排序，不是强度排行 ---------- */
+  function rank() {
+    Promise.all([D.load('data/scale.json'), D.load('data/classes.json'),
+      D.load('data/art.json').catch(function () { return {}; })])
+      .then(function (r) {
+        var S = r[0].scale, classes = r[1].classes, cnOf = {};
+        classes.forEach(function (c) { cnOf[c.id] = c.cn; });
+        var rows = S.classRank || [];
+        var max = rows.reduce(function (m, x) { return Math.max(m, x.total); }, 1);
+        set('<div class="card"><h1 class="pt">职业资料完整度排行</h1>' +
+          '<p class="dim">这是<b>本站资料覆盖度</b>的排序：哪个职业在我们这儿查得到的东西多、' +
+          '哪部分还是只有客户端解包撑着。它回答"这个职业的资料全不全"，' +
+          '<b>不回答哪个职业强</b>——我们没有战斗日志与实测数据，也不做强度排行。</p>' +
+          '<div class="banner">排序口径：先按"官方中文佐证的条数"，再按"本站条目合计"。' +
+          '全部由数据文件现算，改数据重跑校验脚本就会变，不是人工排的名次。</div>' +
+          '<div class="scrollx"><table class="entab ranktab"><thead><tr><th class="ich">名次</th><th>职业</th>' +
+          '<th>官方中文佐证</th><th>客户端解包</th><th>本站条目合计</th><th>覆盖情况</th></tr></thead><tbody>' +
+          rows.map(function (x) {
+            return '<tr><td class="ich"><b class="rankno mono">' + x.place + '</b></td>' +
+              '<td>' + iconCell((classes.filter(function (c) { return c.id === x.classId; })[0] || {}).iconKey,
+                x.classId, cnOf[x.classId] || x.classId, 1) +
+              '<b>' + D.esc(cnOf[x.classId] || x.classId) + '</b>' +
+              '<span class="dim mono">' + D.esc(x.classId) + '</span></td>' +
+              '<td class="mono">' + x.official + '</td>' +
+              '<td class="mono">' + x.datamine + '</td>' +
+              '<td class="mono">' + x.total + '</td>' +
+              '<td><span class="cov mini"><i class="L0" style="width:' +
+              Math.round(x.official / max * 100) + '%"></i><i class="L2" style="width:' +
+              Math.round(x.datamine / max * 100) + '%"></i></span>' +
+              '<span class="mono dim">' + x.share + '% 有官方中文</span></td></tr>';
+          }).join('') + '</tbody></table></div>' +
+          '<h3>每一列是怎么算出来的</h3><ul class="list">' +
+          '<li>官方中文佐证：国服官方公告里出现过同名整句的天赋节点、词条与技能四态条目。</li>' +
+          '<li>客户端解包：只有无限客户端解包（第三方站转述）支撑的名称与改动记录。</li>' +
+          '<li>本站条目合计：天赋节点 + 术语词条 + 技能四态 + 客户端改动清单里挂在该职业名下的全部条目。</li>' +
+          '<li>百分比：官方中文佐证 ÷ 合计。剩下的不是缺数据，是官方中文稿还没写到那块。</li>' +
+          '</ul>' +
+          '<div class="legend"><span><i class="sw L0"></i>官方中文已核</span>' +
+          '<span><i class="sw L2"></i>客户端解包 / 待实测</span></div>' +
+          '<h2>这一页刻意没有的</h2><ul class="list">' +
+          '<li>DPS、副本强度、PvP 胜率：没有战斗数据，也不做（小程序侧更是红线）。</li>' +
+          '<li>第三方站的 BiS 与梯队结论：属他人判断，不搬。</li>' +
+          '<li>"推荐玩什么职业"：那是玩法取向，走选职业问答页，不混进这张表。</li></ul>' +
+          '<h3>来源与核对</h3>' + D.sources([{ type: 'site-note', url: '',
+            note: '本页数字由校验脚本从各数据文件现算，无外部链接：本站自己的统计' }]) + '</div>');
+      }).catch(fail);
+  }
+
+
   function fail(e) {
     set('<div class="card"><h2>数据没加载出来</h2><p class="dim">' + D.esc(e && e.message ? e.message : e) + '</p>' +
       '<p class="dim">这个站要读本地 JSON，不能用 file:// 直接打开。在项目里执行：<br>' +
@@ -1769,5 +1971,5 @@
   }
 
   shell();
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, world: world, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

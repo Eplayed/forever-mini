@@ -400,10 +400,20 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 | `xiyou.json` | 22 KB | 36 个稀有精英（含掉落归属与两套坐标）+ 14 个地区汇总 + 23 个只有名字没坐标的 |
 | `shuji.json` | 20 KB | 36 本书（容器、区域、图上百分比 + 世界坐标）+ 3 档上交奖励 + 2 名管理员 + 2 本没给坐标的 |
 | `shuidai.json` | 8 KB | 睡袋物品与机制数值 + 5 处营地点 |
+| `changes.json` | **1.7 MB** | 964 条职业改动（544 天赋 + 420 法术）：职业、所在系、名称、改动类别、层数、图标键，**以及前后两版 tooltip 原句** |
+| `chengjiu.json` | 25 KB | 成就 46 条（本轮没接） |
 
 **发布号会随上游发版变**（形如 `r-1791485113190`），所以 `tools/scrape-wclbox-shuju.py` 每次都先从页面 HTML 里现读，不写死。
 另有 `chengjiu.json`（成就 46 条）与 `map/<slug>.json`（单张地图的兴趣点、飞行线、航线）本轮没接。
 `/ditu` 的可缩放底图是它自己切的 1715 张瓦片（`/ditu-tu/`），**不在我们的授权范围内，不搬**。
+`/gaidong` 页面正文同样是客户端渲染，SSR 里只有抽样名字——所以 P4 的 964 条改动名做逐字体检时，
+来源必须指到这个 JSON 端点，不能指到 `/gaidong`（指过去会 859 条"未命中"，是核对方法错而不是数据错）。
+
+**P4 已接 `changes.json`（2026-10-09）**：按用户口径"动态只放名称与改动类型，不放句子"，
+`tools/scrape-wclbox-changes.py` 在落盘前删掉 `rank_texts` / `estimated_rank_texts` / `summary` /
+`forever_note` / `uncertainties` / `spellbook` 等全部文本字段，仓库里不留别人转述的游戏文案；
+卡口两处盯：数据里再出现句子字段就失败，本站七项计数必须与上游 `meta.json` 自报的逐项一致。
+实测还查出上游一个键名带尾点（`spell_shadow_devouringplague.`），去掉尾点才从官方 CDN 取到图。
 
 ### 8.5 已澄清的旧未决项
 

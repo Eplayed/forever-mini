@@ -3,11 +3,12 @@
   "generatedAt": "2026-10-09",
   "method": "tools/build-icon-map.py 扫全部数据文件的 iconKey，比对 src/img/icons/ 本地文件",
   "note": "这些图标键在数据里被引用，但官方 CDN 没有对应文件（多是无限服新装备）。界面退回自绘块；回归脚本只放行这份清单里的 404。",
-  "count": 80,
-  "localFiles": 1817,
-  "referenced": 1897
+  "count": 81,
+  "localFiles": 1970,
+  "referenced": 2051
  },
  "keys": [
+  "ability_warlock_incubus",
   "inv_10_alchemy2_quenchingfluid_color2",
   "inv_10_alchemy2_quenchingfluid_color3",
   "inv_10_alchemy2_quenchingfluid_color4",
@@ -90,6 +91,7 @@
   "inv_ventureco_ring02_color4"
  ],
  "byFile": {
+  "changes.json": 1,
   "dungeons.json": 1,
   "professions.json": 77,
   "world.json": 9

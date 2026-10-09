@@ -548,3 +548,18 @@ button.info:hover{border-color:var(--gold);color:var(--gold)}
   .covnum>span:last-child{margin-left:0;flex:1 1 100%}
   .flowrow{grid-template-columns:1fr;gap:2px}
 }
+
+/* ---------- 资料完整度排行 ---------- */
+.ranktab td .rankno{display:inline-block;min-width:20px;font-size:15px;color:var(--gold);
+  font-variant-numeric:tabular-nums}
+.ranktab td:nth-child(2){white-space:nowrap}
+.cov.mini{display:inline-flex;height:8px;width:130px;border-radius:4px;vertical-align:middle}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;margin-top:var(--s2);
+  font-size:12px;color:var(--txt-dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .sw{width:12px;height:8px;border-radius:2px;display:inline-block}
+.legend .sw.L0{background:var(--ok)} .legend .sw.L2{background:var(--warn)}
+.chips.inline{display:inline-flex;margin-left:var(--s2)}
+.chgl{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);margin:var(--s2) 0}
+.chgl span{font-size:12px;color:var(--txt-dim)}
+.chgl b{color:var(--txt);font-size:15px;margin-right:4px;font-variant-numeric:tabular-nums}
