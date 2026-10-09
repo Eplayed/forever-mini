@@ -164,7 +164,8 @@
             return '<a role="menuitem" href="' + it.href + '"' + (page === navKey(it.href) ? ' class="on"' : '') +
               '><b>' + it.t + '</b><span>' + it.d + '</span></a>';
           }).join('') + '</div></div>';
-      }).join('') + '</nav><div class="chip">距上线 ' + d + ' 天 ' + h + ' 时</div></div>';
+      }).join('') + '</nav><div class="chip mono" id="lchip">距上线 ' + d + ' 天 ' + pad2(h) + ':' +
+      pad2(left.m) + ':' + pad2(left.s) + '</div></div>';
     bindNav();
     Promise.all([D.load('data/meta.json'), D.load('data/scale.json')])
       .then(function (r) {
@@ -177,12 +178,159 @@
       }).catch(function () { });
   }
 
-  /* ---------- 首页 ---------- */
-  // 上线倒计时：顶栏 chip 与首页共用一个算法，两处数字不许各算各的
+  /* ---------- 上线倒计时：顶栏 chip 与首页共用一个算法与同一个定时器 ---------- */
+  // 日期与 data/meta.json 的 launch 字段对齐，build-data.js 会卡两边不一致，别在这里手改日期
+  var LAUNCH = '2026-11-05T00:00:00+08:00';
   function launchLeft() {
-    var now = new Date('2026-11-05T00:00:00+08:00').getTime() - Date.now();
-    return { d: Math.max(0, Math.floor(now / 86400000)), h: Math.max(0, Math.floor(now / 3600000) % 24) };
+    var ms = Math.max(0, new Date(LAUNCH).getTime() - Date.now());
+    return {
+      d: Math.floor(ms / 86400000), h: Math.floor(ms / 3600000) % 24,
+      m: Math.floor(ms / 60000) % 60, s: Math.floor(ms / 1000) % 60
+    };
   }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  // 每秒只改两个节点的文本，不重排页面；节点没渲染出来就跳过这一跳（其他页没有倒计时块）
+  function tickCountdown() {
+    var l = launchLeft(), t = pad2(l.h) + ':' + pad2(l.m) + ':' + pad2(l.s);
+    var chip = el('lchip');
+    if (chip) chip.textContent = '距上线 ' + l.d + ' 天 ' + t;
+    var d = el('cdD'), h = el('cdT');
+    if (d) d.textContent = String(l.d);
+    if (h) h.textContent = t;
+  }
+
+  /* ---------- 全站搜索：一个框搜到所有板块 ----------
+     索引由 build-data.js 从已校验的数据派生（src/data/search.json），
+     只收「名称 + 归属」，命中后带着词跳进对应页面，由那一页自己的筛选器接手。 */
+  var SX = { idx: null, kinds: null, job: null, rows: [] };
+  // 分组显示顺序：先身份类，再内容类，配方与采集点这种长尾放后面
+  var SKIND_ORDER = ['cls', 'race', 'tal', 'chg', 'term', 'abl', 'dun', 'boss', 'zone', 'rare',
+    'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+  var SSHOWN = 5;
+
+  function searchIdx() {
+    if (SX.idx) return Promise.resolve(SX.idx);
+    if (!SX.job) {
+      SX.job = D.load('data/search.json').then(function (j) {
+        SX.kinds = j.meta.kinds; SX.idx = j.items; return SX.idx;
+      }).catch(function (e) { SX.job = null; throw e; });
+    }
+    return SX.job;
+  }
+  function sHref(it) {
+    var kd = SX.kinds[it[0]];
+    if (!kd) return 'index.html';
+    var parts = [];
+    if (it[3]) parts.push(it[3]);
+    if (kd[2]) parts.push(kd[2] + '=' + encodeURIComponent(it[1]));
+    return kd[1] + (parts.length ? '?' + parts.join('&') : '');
+  }
+  function sScore(n, k) {
+    if (n === k) return 0;
+    if (n.indexOf(k) === 0) return 1;
+    if (n.indexOf(k) > 0) return 2;
+    return -1;
+  }
+  function sRun(q) {
+    var k = q.trim().toLowerCase();
+    if (!k || !SX.idx) return [];
+    var hits = [];
+    SX.idx.forEach(function (it) {
+      var sc = sScore(String(it[1]).toLowerCase(), k);
+      if (sc < 0) return;
+      hits.push([sc, SKIND_ORDER.indexOf(it[0]), String(it[1]).length, it]);
+    });
+    hits.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1] || a[2] - b[2]; });
+    return hits.slice(0, 120).map(function (h) { return h[3]; });
+  }
+  function sGroups(hits) {
+    var g = {};
+    hits.forEach(function (it) { (g[it[0]] = g[it[0]] || []).push(it); });
+    return SKIND_ORDER.filter(function (k) { return g[k] && SX.kinds[k]; }).map(function (k) {
+      return { k: k, label: SX.kinds[k][0], page: SX.kinds[k][1], param: SX.kinds[k][2],
+        all: g[k].length, show: g[k].slice(0, SSHOWN) };
+    });
+  }
+  function sRender(q) {
+    var box = el('gres'), inp = el('gs');
+    if (!box || !inp) return;
+    var k = q.trim();
+    SX.rows = [];
+    inp.setAttribute('aria-expanded', k ? 'true' : 'false');
+    if (!k) { box.hidden = true; box.innerHTML = ''; return; }
+    if (!SX.idx) {
+      box.hidden = false;
+      box.innerHTML = '<p class="gsl">正在读索引…</p>';
+      return;
+    }
+    var hits = sRun(k);
+    if (!hits.length) {
+      box.hidden = false;
+      box.innerHTML = '<p class="gsl">索引里没有叫「' + D.esc(k) + '」的条目。本站按官方中文原名收录，' +
+        '别名与英文请进对应页面搜；也不搜攻略说法。</p>';
+      return;
+    }
+    box.hidden = false;
+    box.innerHTML = sGroups(hits).map(function (g) {
+      var all = g.param ? g.page + '?' + g.param + '=' + encodeURIComponent(k) : g.page;
+      return '<div class="gsh"><b>' + D.esc(g.label) + '</b><a href="' + D.esc(all) + '">' +
+        (g.all > SSHOWN ? '这一类共 ' + g.all + ' 条，进去看全部 →' : g.all + ' 条 →') + '</a></div>' +
+        g.show.map(function (it) {
+          SX.rows.push(it);
+          return '<a class="gsr" href="' + D.esc(sHref(it)) + '">' +
+            '<b>' + D.hl(it[1], k) + '</b>' +
+            '<span class="dim">' + D.esc(it[2]) + '</span>' +
+            (it[4] && it[4] !== 'L0' ? '<em class="lv ' + D.esc(it[4]) + '">' + D.pillName(it[4]) + '</em>' : '') +
+            '</a>';
+        }).join('');
+    }).join('') +
+      '<p class="gsl dim mono">命中 ' + hits.length + ' 条，这里先列 ' + SX.rows.length + ' 条</p>';
+  }
+  function bindSearch() {
+    var inp = el('gs');
+    if (!inp) return;
+    var run = function () {
+      var v = inp.value;
+      var ready = SX.idx ? Promise.resolve(SX.idx) : searchIdx().catch(function () { return null; });
+      ready.then(function () { if (el('gs') === inp && inp.value === v) sRender(v); });
+    };
+    inp.oninput = run;
+    inp.onkeydown = function (e) {
+      if (e.key === 'Escape') { inp.value = ''; sRender(''); inp.blur(); return; }
+      if (e.key === 'ArrowDown') {
+        var a = document.querySelector('#gres .gsr');
+        if (a) { a.focus(); e.preventDefault(); }
+        return;
+      }
+      if (e.key === 'Enter' && SX.rows.length) location.href = sHref(SX.rows[0]);
+    };
+    // 点框外收起：结果区里点链接会自己跳转，不需要额外处理
+    document.addEventListener('click', function (e) {
+      var box = el('gres');
+      if (!box || box.hidden) return;
+      var w = document.querySelector('.gsearch');
+      if (w && !w.contains(e.target)) sRender('');
+    });
+    // 示例词：给不知道搜什么的人一个起点，点了就当真搜一遍
+    Array.prototype.forEach.call(document.querySelectorAll('.gsx'), function (b) {
+      b.onclick = function () {
+        inp.value = b.dataset.s;
+        inp.focus();
+        run();
+      };
+    });
+  }
+  function urlQ(name) {
+    try { return new URLSearchParams(location.search).get(name) || ''; } catch (e) { return ''; }
+  }
+  // 跳进来的页面把词填进自己的搜索框，用户落地就看到筛好的结果
+  function prefill(id, val) {
+    var i = el(id);
+    if (i && val && !i.value) { i.value = val; if (i.oninput) i.oninput({ target: i }); }
+    return i;
+  }
+
+  /* ---------- 首页 ---------- */
   // 时间表里有"待定""择期"这类没有具体日期的条目，排序时让真日期排前面，别顶掉首屏
   function byDate(a, b) {
     var ra = /^\d{4}-\d{2}-\d{2}$/.test(a.date || ''), rb = /^\d{4}-\d{2}-\d{2}$/.test(b.date || '');
@@ -260,6 +408,16 @@
         '<h1 class="pt">《魔兽世界：无限》中文资料站</h1>' +
         '<p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
         '每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>' +
+        '<div class="gsearch" role="search">' +
+        '<input type="search" id="gs" autocomplete="off" aria-controls="gres" aria-expanded="false" ' +
+        'aria-label="全站搜索：天赋、改动、术语、副本、区域、配方、种族" ' +
+        'placeholder="搜天赋、副本、区域、配方、种族特长（共 ' + S.search + ' 条）">' +
+        '<p class="gsex">' + [['潜行', '同一个词在改动清单和配方里都有'], ['领主大厅', '副本名'],
+          ['咆鼻', '稀有精英'], ['舒适的睡袋', '世界页的营点']].map(function (x) {
+            return '<button type="button" class="gsx" data-s="' + D.esc(x[0]) + '" title="' + D.esc(x[1]) + '">' +
+              x[0] + '</button>';
+          }).join('') + '<span class="dim">只搜名称与归属，不搜攻略说法，也不搜别人站的正文。</span></p>' +
+        '<div class="gres" id="gres" hidden></div></div>' +
         D.covBar(cov) +
         '<div class="covnum">' +
         ['L0', 'L1', 'L2', 'L3'].map(function (k) {
@@ -268,8 +426,10 @@
         '<p class="note">数据基线：' + D.esc(meta.dataBaseline.build) + '，核对于 ' +
         D.esc(meta.dataBaseline.checkedAt) + '；规模快照 ' + D.esc(r[4].meta.generatedAt) +
         '。本站基于测试服资料整理，正式服上线后需整体重核。</p></div>' +
-        '<aside class="heros"><div class="cd"><b class="mono">' + left.d + '</b><span>天到正式服' +
-        '（2026-11-05）</span><i class="dim mono">' + left.h + ' 时</i></div>' +
+        '<aside class="heros"><div class="cd"><div class="cdrow"><b class="mono" id="cdD">' + left.d +
+        '</b><span>天</span><i class="mono" id="cdT">' + pad2(left.h) + ':' + pad2(left.m) + ':' +
+        pad2(left.s) + '</i></div>' +
+        '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p>' +
         '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
         '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
         '<section class="card"><h2>挑一个职业，直接开一棵树</h2>' + strip + '</section>' +
@@ -313,15 +473,18 @@
         NOT_DOING.map(function (x) {
           return '<div class="flowrow"><b>' + D.esc(x[0]) + '</b><span class="dim">' + D.esc(x[1]) + '</span></div>';
         }).join('') + '</div></div>');
+      bindSearch();
+      tickCountdown();
     }).catch(fail);
   }
 
   /* ---------- 天赋计算器 ---------- */
-  var tstate = { classId: 'hunter', file: null, state: {}, mode: 'add', active: 0 };
+  var tstate = { classId: 'hunter', file: null, state: {}, mode: 'add', active: 0, q: '' };
 
   function talent() {
     var q = new URLSearchParams(location.search);
     tstate.classId = q.get('c') || 'hunter';
+    tstate.q = q.get('q') || '';
     Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'),
       D.load('data/art.json').catch(function () { return {}; })]).then(function (r) {
       tstate.classes = r[0].classes; tstate.gloss = r[1].items; tstate.art = r[2] || {};
@@ -447,7 +610,7 @@
         'onerror="this.className=\'bad\'"><span class="dbn2-mark">客户端原画 · 本地转存</span></div>' : '') +
       '<div class="thead"><h1 class="title">' + D.esc(c.cn || '') + ' 天赋</h1>' +
       '<span class="pts">剩余 <b>' + Math.max(0, r.totalPoints - E.spent(tstate.state, trees)) + '</b>/' + r.totalPoints + '</span>' +
-      '<input type="search" id="tq" placeholder="搜天赋名" style="max-width:180px">' +
+      '<input type="search" id="tq" class="tqs" placeholder="搜天赋名" value="' + D.esc(tstate.q) + '">' +
       '<button class="ghost" id="cmp" aria-pressed="false">与经典旧世对比</button>' +
       '<span class="dim mono" id="sel"></span></div>' +
       '<div class="tlegend"><span><i class="lg added"></i>新增</span><span><i class="lg modified"></i>改动</span>' +
@@ -638,6 +801,8 @@
         n.style.outline = v && n.title.toLowerCase().indexOf(v) >= 0 ? '2px solid var(--warn)' : '';
       });
     };
+    // 带着词跳进来时立刻描一遍，落地就能看到高亮的是哪个格子
+    if (q && q.value) q.oninput();
   }
   function act(ti, id, force) {
     var f = tstate.file, t = f.trees[+ti];
@@ -807,7 +972,7 @@
       D.load('data/icons.json'), D.load('data/races.json')]).then(function (r) {
       var items = r[0].items, cls = r[1].classes, ab = r[2] || { items: [], meta: {} };
       var ICONS = (r[3] || {}).map || {}, RC = (r[4] || {}).races || [];
-      var f = { c: '', k: '', q: '' };
+      var f = { c: '', k: '', q: urlQ('q') };
       var KIND = { talent: '天赋/技能', item: '装备', dungeon: '副本', boss: 'BOSS', system: '系统', zone: '地名', skill: '技能', racial: '种族特长' };
       var RACE = raceLookup(RC);
       function draw() {
@@ -879,7 +1044,7 @@
       }
       set('<div class="card"><h1 class="pt">技能书</h1><p class="dim">按职业与种族分组。英文原名与专精归属是待补项，缺的地方直接写「待补」，不做机翻。</p>' +
         '<p class="note">图标：能显出图案的是本地转存的官方天赋图标；字母块是自绘占位，代表这一条没有可信图标来源，不是游戏里的样子。</p>' +
-        '<div class="field"><input type="search" id="q" placeholder="搜中文或英文">' +
+        '<div class="field"><input type="search" id="q" placeholder="搜中文或英文" value="' + D.esc(f.q) + '">' +
         '<select id="c"><option value="">全部职业</option>' + cls.map(function (x) { return '<option value="' + x.id + '">' + D.esc(x.cn) + '</option>'; }).join('') + '</select>' +
         '<select id="k"><option value="">全部类型</option>' + Object.keys(KIND).filter(function (k) {
           return items.some(function (x) { return x.kind === k; });
@@ -1022,6 +1187,19 @@
           b.textContent = x.style.display === 'none' ? label : '收起';
         };
       });
+      // 从首页搜索跳进来：替用户点开那座本的速览并滚到它，不靠人自己在一堆卡片里找
+      var dd = urlQ('d');
+      if (dd) {
+        var target = null;
+        Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (b) {
+          if (!target && b.dataset.d === dd) target = b;
+        });
+        if (target) {
+          target.click();
+          var card = target.parentNode;
+          if (card && card.scrollIntoView) card.scrollIntoView({ block: 'center' });
+        }
+      }
     }).catch(fail);
   }
 
@@ -1032,7 +1210,7 @@
       var items = r[0].items, RACE = raceLookup(r[1].races), classes = r[2].classes;
       var ICONS = (r[3] || {}).map || {};
       var KIND = { talent: '天赋/技能', item: '装备', racial: '种族特长' };
-      var f = { q: '', race: '', kind: '' };
+      var f = { q: urlQ('q'), race: '', kind: '' };
       var raceIds = [];
       items.forEach(function (x) {
         if (!x.raceId) return;
@@ -1068,7 +1246,7 @@
       set('<div class="card"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制，「来源」看这条中文名出自哪句官方原文。' +
         '英文原名官方没给的一律留空，所以有「待补」。</p>' +
         '<p class="note">按职业与种族分组。字母块是自绘占位，代表这一条没有可信图标来源。</p>' +
-        '<div class="field"><input type="search" id="q" placeholder="输入中文或英文">' +
+        '<div class="field"><input type="search" id="q" placeholder="输入中文或英文" value="' + D.esc(f.q) + '">' +
         '<select id="fk" aria-label="按类型筛选"><option value="">全部类型</option>' +
         Object.keys(KIND).map(function (k) { return '<option value="' + k + '">' + KIND[k] + '</option>'; }).join('') + '</select>' +
         '<select id="fr" aria-label="按种族筛选"><option value="">全部种族</option>' +
@@ -1192,7 +1370,9 @@
         var byKey = {};
         R.races.forEach(function (x) { byKey[keyOf(x)] = x; });
         var m0 = /#race=([\w-]+)/.exec(location.hash || '');
-        var f = { c: '', q: '', all: false, sel: (m0 && byKey[m0[1]]) ? m0[1] : keyOf(R.races[0]) };
+        var rq = urlQ('r');
+        var f = { c: '', q: urlQ('q'), all: false,
+          sel: byKey[rq] ? rq : ((m0 && byKey[m0[1]]) ? m0[1] : keyOf(R.races[0])) };
 
         function srcBtn(id, name, prov) {
           return '<button class="info" data-src="' + D.esc(id) + '" data-name="' + D.esc(name) +
@@ -1383,7 +1563,7 @@
           '<div class="card"><h2>种族 × 职业矩阵</h2><p class="dim" id="mhint"></p>' +
           '<div class="field"><label class="dim">阵营</label><select id="ff"><option value="">全部</option>' +
           '<option value="horde">部落</option><option value="alliance">联盟</option></select>' +
-          '<label class="dim">找特长</label><input type="search" id="fq" placeholder="名称或效果里的词">' +
+          '<label class="dim">找特长</label><input type="search" id="fq" placeholder="名称或效果里的词" value="' + D.esc(f.q) + '">' +
           '<span class="dim mono" id="tcnt"></span></div>' +
           '<div class="scrollx" id="mx"></div></div>' +
 
@@ -1433,7 +1613,7 @@
       var byId = {};
       ps.forEach(function (p) { byId[p.id] = p; });
       if (q.get('p') && byId[q.get('p')]) sel = byId[q.get('p')];
-      var f = { q: '', lv: '', onlyNew: false };
+      var f = { q: q.get('q') || '', lv: '', onlyNew: false };
 
       function skillCell(sk) {
         if (!sk) return '<span class="dim">—</span>';
@@ -1553,7 +1733,10 @@
   function world() {
     Promise.all([D.load('data/world.json'), D.load('data/art.json').catch(function () { return {}; })])
       .then(function (rs) {
-        var w = rs[0], f = { tab: 'zones', q: '', zone: '' };
+        var w = rs[0], f = { tab: 'zones', q: urlQ('q'), zone: '' };
+        // 搜索结果带着板块跳进来（稀有、书、营地在不同板块里），板块名不认识就留在默认页
+        var rt = urlQ('t');
+        if (WTABS.some(function (t) { return t[0] === rt; })) f.tab = rt;
         var zByName = {};
         (w.zones || []).forEach(function (z) { zByName[z.nameCn] = z; });
         var newZones = (w.zones || []).filter(function (z) { return z.isNew; });
@@ -1799,16 +1982,22 @@
             '<p class="note">' + D.esc(bt.paramsNote || '') + '</p></div>';
           var camps = [];
           (bt.camps || []).forEach(function (c) { camps = camps.concat(c.places || []); });
-          out += '<div class="card"><h2>上游列出的营地点 · ' + camps.length + '</h2>' +
+          var kk = kw();
+          if (kk) camps = camps.filter(function (c) {
+            return ((c.zone || '') + ' ' + (c.whereCn || '') + ' ' + (c.landmark || '')).toLowerCase().indexOf(kk) >= 0;
+          });
+          out += '<div class="card"><h2>上游列出的营地点 · ' + camps.length +
+            (kk ? '（搜索 ' + D.esc(f.q) + ' 命中）' : '') + '</h2>' +
             '<p class="note">这里只回答"这些营点在哪个区域的哪一点"。' +
-            '睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p><div class="rgrid">' +
-            camps.map(function (c) {
+            '睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p>' +
+            (camps.length ? '<div class="rgrid">' + camps.map(function (c) {
               return '<div class="rarecard">' + mapBox(c, c.zone) + '<div class="rbody">' +
                 '<b>' + D.esc(c.zone || '区域未标') + '</b>' +
                 (c.landmark ? '<span class="dim">' + D.esc(c.landmark) + '</span>' : '') +
                 (c.whereCn ? '<span class="dim">' + D.esc(c.whereCn) + '</span>' : '') +
                 coordTxt(c) + '</div></div>';
-            }).join('') + '</div></div>';
+            }).join('') + '</div>' : '<div class="empty">这个关键词下没有营点，上面的关键词是按区域或地标名搜的。</div>') +
+            '</div>';
           return out;
         }
 
@@ -1897,7 +2086,11 @@
       .then(function (r) {
         var ch = r[0], tl = (r[1].items || []).slice().sort(byDate), cl = r[2].entries || [],
           classes = r[3].classes, S = r[4].scale;
-        var f = { cls: '', kind: 'all', what: 'all', q: '' };
+        var f = { cls: '', kind: 'all', what: 'all', q: urlQ('q') };
+        // 搜索结果是带着职业与「天赋/法术」跳进来的，落地就停在那张表上
+        var uc = urlQ('c'), uw = urlQ('w');
+        if (classes.some(function (c) { return c.id === uc; })) f.cls = uc;
+        if (uw === 'talent' || uw === 'spell') f.what = uw;
         var cnOf = {};
         classes.forEach(function (c) { cnOf[c.id] = c.cn; });
 
@@ -2006,6 +2199,11 @@
               }).join('') + '</span></div></div>';
           }).join('') + '</div>');
         draw();
+        // 从首页搜索跳进来时直接滚到那张表，别让人自己找
+        if (f.q) {
+          var k1 = el('k1');
+          if (k1 && k1.scrollIntoView) k1.scrollIntoView({ block: 'start' });
+        }
       }).catch(fail);
   }
 
@@ -2067,5 +2265,7 @@
   }
 
   shell();
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
   ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

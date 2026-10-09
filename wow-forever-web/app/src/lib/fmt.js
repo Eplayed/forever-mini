@@ -17,12 +17,23 @@ export function typeLabel(t) {
   return TYPE_LABEL[t] || t || '来源';
 }
 
-/* 上线时间固定：2026-11-05 00:00 +08:00（国服口径）。倒计时只算一次，别两处各算。 */
+/* 上线时间固定：2026-11-05 00:00 +08:00（国服口径）。
+   日期只有 data/meta.json 一处真相，tools/build-data.js 会卡这里和旧站 app.js 的常量是否一致。 */
 export const LAUNCH_AT = Date.parse('2026-11-05T00:00:00+08:00');
 
 export function launchLeft(now) {
   const ms = Math.max(0, LAUNCH_AT - (now === undefined ? Date.now() : now));
-  return { d: Math.floor(ms / 86400000), h: Math.floor(ms / 3600000) % 24 };
+  return {
+    d: Math.floor(ms / 86400000), h: Math.floor(ms / 3600000) % 24,
+    m: Math.floor(ms / 60000) % 60, s: Math.floor(ms / 1000) % 60
+  };
+}
+
+export function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+/* 倒计时读数：顶栏那条写"26 天 04:23:11"，首页那块把天数单独放大 */
+export function clockText(l) {
+  return pad2(l.h) + ':' + pad2(l.m) + ':' + pad2(l.s);
 }
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  hlParts, levelRangeText, byDate, launchLeft, pillLevel, PILL_NAME, typeLabel, lvStart
+  hlParts, levelRangeText, byDate, launchLeft, clockText, pillLevel, PILL_NAME, typeLabel, lvStart
 } from '../src/lib/fmt.js';
 
 describe('搜索高亮拆片段', () => {
@@ -47,13 +47,18 @@ describe('时间表排序', () => {
 });
 
 describe('倒计时与分级', () => {
-  it('距上线按 +08:00 的 11-05 零点算', () => {
+  it('距上线按 +08:00 的 11-05 零点算，时分秒一起给', () => {
     const a = launchLeft(Date.parse('2026-10-09T00:00:00+08:00'));
     expect(a.d).toBe(27);            // 10-09 零点 → 11-05 零点 = 整 27 天
     expect(a.h).toBe(0);
+    expect(a.m).toBe(0);
+    expect(a.s).toBe(0);
+    const b = launchLeft(Date.parse('2026-11-04T20:05:09+08:00'));
+    expect(b).toEqual({ d: 0, h: 3, m: 54, s: 51 });
+    expect(clockText(b)).toBe('03:54:51');   // 个位数补零，倒计时跳动时不会左右晃
   });
   it('上线时间过了不出现负数', () => {
-    expect(launchLeft(Date.parse('2027-01-01T00:00:00+08:00'))).toEqual({ d: 0, h: 0 });
+    expect(launchLeft(Date.parse('2027-01-01T00:00:00+08:00'))).toEqual({ d: 0, h: 0, m: 0, s: 0 });
   });
   it('未知等级一律落到 L3，不猜', () => {
     expect(pillLevel('L0')).toBe('L0');

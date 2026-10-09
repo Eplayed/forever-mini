@@ -32,15 +32,16 @@ export function legacyUrl(file) {
   return LEGACY.replace(/\/$/, '/') + clean;
 }
 
-/* 返回 { to } 走 router-link，或 { href } 走旧站。锚点（races.html#traits）一律回旧站。 */
+/* 返回 { to } 走 router-link，或 { href } 走旧站。锚点（races.html#traits）一律回旧站。
+   带查询串的入口（world.html?t=rares&q=…）按文件名查表，query 交给调用方传。 */
 export function linkFor(file) {
-  const base = String(file || '').split('#')[0];
+  const base = String(file || '').split(/[?#]/)[0];
   if (/#/.test(file)) return { href: legacyUrl(file) };
   return MIGRATED[base] ? { to: MIGRATED[base] } : { href: legacyUrl(file) };
 }
 
 export function isMigrated(file) {
-  return !!MIGRATED[String(file || '').split('#')[0]];
+  return !!MIGRATED[String(file || '').split(/[?#]/)[0]];
 }
 
 /* 迁完一页要做两件事：路由表加一条，这里标记一下已迁（导航才会走内部链接） */

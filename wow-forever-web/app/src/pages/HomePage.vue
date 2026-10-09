@@ -10,6 +10,7 @@
       <div class="herot">
         <h1 class="pt">《魔兽世界：无限》中文资料站</h1>
         <p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>
+        <SiteSearch :total="S.search || 0" />
         <CovBar :cov="cov" />
         <div class="covnum">
           <span v-for="k in ['L0', 'L1', 'L2', 'L3']" :key="k" class="pill" :class="k">
@@ -21,7 +22,8 @@
       </div>
       <aside class="heros">
         <div class="cd">
-          <b class="mono">{{ left.d }}</b><span>天到正式服（2026-11-05）</span><i class="dim mono">{{ left.h }} 时</i>
+          <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
+          <p class="dim">到正式服上线（{{ meta.launch }}）· 差秒按本地时钟走</p>
         </div>
         <a class="cta" :href="legacy('chooser.html')">不知道选哪个职业？做 7 题玩法问答 →</a>
         <span class="dim">问答是本站整理的玩法取向，不是强度排行。</span>
@@ -101,9 +103,11 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { loadAll } from '../lib/data.js';
-import { launchLeft, byDate, PILL_NAME } from '../lib/fmt.js';
+import { byDate, clockText, PILL_NAME } from '../lib/fmt.js';
+import { useCountdown } from '../lib/countdown.js';
 import { legacyUrl } from '../lib/nav.js';
 import CovBar from '../components/CovBar.vue';
+import SiteSearch from '../components/SiteSearch.vue';
 import ClassTile from '../components/ClassTile.vue';
 import LevelPill from '../components/LevelPill.vue';
 
@@ -126,7 +130,7 @@ const tl = ref([]);
 const cl = ref([]);
 const err = ref('');
 const gen = ref('');
-const left = launchLeft();
+const { left } = useCountdown();
 
 function boot() {
   err.value = '';

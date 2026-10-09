@@ -507,9 +507,39 @@ button.info:hover{border-color:var(--gold);color:var(--gold)}
 .heros{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
 .cd{display:flex;flex-direction:column;width:100%;background:var(--panel-2);
   border:1px solid var(--gold-deep);border-radius:var(--r-card);padding:var(--s3) var(--s4)}
+.cdrow{display:flex;align-items:baseline;gap:6px}
 .cd b{font-size:34px;line-height:1.05;color:var(--gold);font-variant-numeric:tabular-nums}
 .cd span{font-size:12px;color:var(--txt-dim)}
-.cd i{font-style:normal;font-size:11.5px;color:var(--txt-dim);margin-top:2px}
+.cd i{font-style:normal;font-size:17px;color:var(--txt);font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.cd p{margin:var(--s1) 0 0;font-size:11.5px}
+
+/* 首页全站搜索：输入框 + 分组结果下拉（索引见 src/data/search.json） */
+.gsearch{position:relative;margin:var(--s3) 0 0}
+.gsearch input{width:100%;min-height:44px;padding:10px 12px;font-size:14px}
+.gsex{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center;margin:var(--s2) 0 0}
+.gsex span{flex:1 1 160px}
+.gsx{min-height:32px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;
+  background:var(--panel-2);color:var(--txt-dim);font:12px var(--font-cn);cursor:pointer}
+.gsx:hover{border-color:var(--gold-deep);color:var(--txt)}
+.gres{position:absolute;z-index:12;top:100%;left:0;right:0;margin-top:4px;max-height:340px;overflow:auto;
+  background:var(--panel);border:1px solid var(--gold-deep);border-radius:var(--r-card);
+  box-shadow:0 12px 28px rgba(0,0,0,.5);padding:var(--s2) 0}
+.gsh{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);
+  padding:var(--s1) var(--s4);border-top:1px solid var(--line);font-size:11.5px;
+  color:var(--gold);letter-spacing:.5px}
+.gsh:first-child{border-top:0}
+.gsh a{color:var(--txt-dim);white-space:nowrap;min-width:44px;text-align:right;padding:4px 2px}
+.gsh a:hover{color:var(--gold)}
+.gsr{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:var(--s3);align-items:baseline;
+  padding:7px var(--s4);color:var(--txt)}
+.gsr:hover,.gsr:focus-visible{background:var(--panel-2);text-decoration:none;outline-offset:-2px}
+.gsr>b{font-weight:600;overflow-wrap:anywhere}
+.gsr>span{font-size:11.5px;white-space:nowrap}
+.gsr .lv{font:11px var(--font-mono);font-style:normal;color:var(--txt-caution);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:1px 6px}
+.gsl{margin:0;padding:var(--s2) var(--s4);font-size:12px}
+.tqs{max-width:180px}
 .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--s2);margin-top:var(--s3)}
 .stripc{display:flex;flex-direction:column;align-items:center;gap:5px;padding:var(--s2) 4px;
   background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-card);
@@ -622,5 +652,13 @@ table.mtx th.rh .rface{width:26px;height:26px}
   .racecard{min-height:96px}
   .rdtr>li{flex-wrap:wrap}
   .rdacts button.ghost, .lgrp button.ghost{min-height:44px}
+  .gsx{min-height:44px;padding:10px 14px}
+  .gsh a{display:inline-flex;align-items:center;min-height:44px}
+  .gsh{padding:var(--s2) var(--s4)}
+
+  .gsr{min-height:44px;grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+  .gres{max-height:280px}
+  .cd i{font-size:15px}
+  .cd b{font-size:28px}
 }
 

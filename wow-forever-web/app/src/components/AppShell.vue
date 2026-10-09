@@ -28,7 +28,7 @@
           </div>
         </template>
       </nav>
-      <div class="chip">距上线 {{ left.d }} 天 {{ left.h }} 时</div>
+      <div class="chip mono" id="lchip">距上线 {{ left.d }} 天 {{ clockText(left) }}</div>
     </div>
   </div>
 
@@ -49,12 +49,13 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { NAV, linkFor } from '../lib/nav.js';
-import { launchLeft } from '../lib/fmt.js';
+import { clockText } from '../lib/fmt.js';
+import { useCountdown } from '../lib/countdown.js';
 import { load } from '../lib/data.js';
 
 const route = useRoute();
 const open = ref('');
-const left = launchLeft();
+const { left } = useCountdown();
 const foot = ref(null);
 const stackNote = '本页跑在新站（Vue 3）上，未迁的页面仍在旧站。';
 

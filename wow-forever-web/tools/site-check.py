@@ -1219,6 +1219,15 @@ def test_app(browser, base):
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
             check("新站首页六张模块卡齐全", mods == 6, "%d 张" % mods)
+            gs = page.evaluate("() => !!document.querySelector('#gs')")
+            check("新站首页也接了全站搜索框", gs)
+            page.fill("#gs", "咆鼻")
+            page.wait_for_timeout(1400)
+            arows = page.evaluate("() => [...document.querySelectorAll('#gres .gsr')].length")
+            check("新站搜索框能出结果", arows >= 1, "%d 条" % arows)
+            import re
+            cd = page.inner_text(".cd i").strip()
+            check("新站倒计时同样到秒", re.match(r"^\d{2}:\d{2}:\d{2}$", cd) is not None, cd)
         else:
             tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
             check("新站世界页四个面板齐全", tabs == 4, "%d 个" % tabs)
@@ -1252,6 +1261,127 @@ def test_app(browser, base):
     m.close()
 
 
+def test_search(browser, base):
+    """全站搜索：索引完整性 + 首页框的结果分组 + 「跳进去确实筛好了」+ 倒计时到秒。
+       只验界面接得住索引，不验索引对不对——那归 build-data.js 与溯源页管。"""
+    print("\n[17] 全站搜索与倒计时")
+    import json
+    import re
+    idx = json.load(open(os.path.join(SRC, "data", "search.json"), encoding="utf-8"))
+    sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    kinds = idx["meta"]["kinds"]
+    pages = sorted(set(kd[1] for kd in kinds.values()))
+    check("索引板块指向的页面都真实存在",
+          all(os.path.exists(os.path.join(SRC, p)) for p in pages), "%d 个页面" % len(pages))
+    check("索引条数与规模快照一致", len(idx["items"]) == sc["search"],
+          "JSON %d / scale %d" % (len(idx["items"]), sc["search"]))
+    built = set(it[0] for it in idx["items"])
+    check("每个板块都建了条目", built == set(kinds), "没条目的板块 %s" % sorted(set(kinds) - built))
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/index.html", wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    ph = page.get_attribute("#gs", "placeholder") or ""
+    check("首页搜索框写着索引条数", str(sc["search"]) in ph, ph)
+    check("没输入时结果区不占屏", page.evaluate("() => document.querySelector('#gres').hidden"))
+
+    page.fill("#gs", "这个词一定搜不到")
+    page.wait_for_timeout(900)
+    check("搜不到时直说没有", "索引里没有" in page.inner_text("#gres"),
+          page.inner_text("#gres")[:40])
+
+    page.fill("#gs", "潜行")
+    page.wait_for_timeout(1300)
+    grp = page.evaluate("() => [...document.querySelectorAll('#gres .gsh b')].map(x => x.textContent)")
+    check("同一个词按板块分组列出", len(grp) >= 2, "、".join(grp))
+    rows = page.evaluate("() => [...document.querySelectorAll('#gres .gsr')].map(a => a.getAttribute('href'))")
+    check("每组先只列几条，总数受上限约束", 0 < len(rows) <= 5 * len(grp),
+          "%d 条 / %d 组" % (len(rows), len(grp)))
+    check("每条结果都跳到有数据的板块页",
+          all(r.split("?")[0] in pages for r in rows), str(rows[:2]))
+    subs = page.evaluate("() => [...document.querySelectorAll('#gres .gsr span')].map(s => s.textContent)")
+    check("结果只写名称与归属，不夹句子", max(len(s) for s in subs) <= 44,
+          "最长 %d 字" % max(len(s) for s in subs))
+    lvs = page.evaluate("() => [...document.querySelectorAll('#gres .gsr .lv')].map(x => x.textContent)")
+    check("非已核实的条除颜色外带分级文字", all(lvs) and len(lvs) >= 1,
+          json.dumps(lvs[:3], ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "home-search-open.png"))
+
+    def first_row(query, prefix):
+        page.goto(base + "/index.html", wait_until="networkidle")
+        page.wait_for_timeout(1200)
+        page.fill("#gs", query)
+        page.wait_for_timeout(1000)
+        return page.evaluate("""(pre) => { const a = [...document.querySelectorAll('#gres .gsr')]
+            .find(x => (x.getAttribute('href') || '').indexOf(pre) === 0);
+          return a ? a.getAttribute('href') : null; }""", prefix)
+
+    def rare_tab_on():
+        return page.input_value("#wq") == "咆鼻" and "on" in page.get_attribute("[data-t=rares]", "class")
+
+    LAND = [
+        ("咆鼻", "world.html", rare_tab_on),
+        ("莫高雷", "world.html", lambda: page.input_value("#wq") == "莫高雷"),
+        ("舒适的睡袋", "world.html", lambda: "睡袋本身" in page.inner_text("#wbody")),
+        ("领主大厅", "dungeons.html",
+         lambda: page.evaluate("() => document.querySelector('#d-hall-of-thanes').style.display") == "block"),
+        ("预知", "talent.html",
+         lambda: page.input_value("#tq") == "预知" and
+         page.evaluate("() => [...document.querySelectorAll('.node')].filter(n => n.style.outline).length") >= 1),
+        ("潜行者52型", "professions.html", lambda: page.input_value("#pq") == "潜行者52型"),
+        ("强化英勇打击", "updates.html",
+         lambda: page.input_value("#cq") == "强化英勇打击" and
+         page.inner_text("#ccnt").strip() == "1 条"),
+        ("影遁", "races.html", lambda: page.input_value("#fq") == "影遁"),
+        ("影遁", "glossary.html", lambda: page.input_value("#q") == "影遁"),
+        ("兽人", "races.html",
+         lambda: page.get_attribute(".racecard.on", "data-race") == "horde-orc"),
+    ]
+    for query, prefix, judge in LAND:
+        href = first_row(query, prefix)
+        if not href:
+            check("搜索结果里有 %s（%s）" % (prefix, query), False, "索引没给这条")
+            continue
+        page.goto(base + "/" + href, wait_until="networkidle")
+        page.wait_for_timeout(1500 if prefix in ("talent.html", "races.html") else 1100)
+        check("跳进 %s 后已经筛好（%s）" % (prefix, query), bool(judge()), href)
+    ctx.close()
+
+    ctx2 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    p2 = ctx2.new_page()
+    p2.goto(base + "/index.html", wait_until="networkidle")
+    p2.wait_for_timeout(1200)
+    t1 = p2.inner_text("#cdT").strip()
+    chip = p2.inner_text("#lchip")
+    meta = json.load(open(os.path.join(SRC, "data", "meta.json"), encoding="utf-8"))
+    check("首页倒计时精确到秒", re.match(r"^\d{2}:\d{2}:\d{2}$", t1) is not None, t1)
+    check("顶栏那条与首页同一读数", chip.count(":") == 2 and "天" in chip, chip)
+    check("倒计时写的就是 meta.json 那个上线日", meta["launch"] in p2.inner_text(".heros"),
+          p2.inner_text(".heros")[:48].replace("\n", " "))
+    p2.wait_for_timeout(2200)
+    check("倒计时每秒在走", p2.inner_text("#cdT").strip() != t1,
+          "%s → %s" % (t1, p2.inner_text("#cdT").strip()))
+    ctx2.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = m.new_page()
+    mp.goto(base + "/index.html", wait_until="networkidle")
+    mp.wait_for_timeout(1200)
+    mp.fill("#gs", "睡袋")
+    mp.wait_for_timeout(1100)
+    small = mp.evaluate("""() => [...document.querySelectorAll('#main button, #main a, #main input')]
+        .filter(e => { const b = e.getBoundingClientRect();
+          return b.width > 0 && b.height > 0 && Math.min(b.width, b.height) < 44; })
+        .map(e => e.tagName + '.' + e.className)""")
+    check("移动端展开结果后点击目标仍 ≥44px", not small, json.dumps(small[:3], ensure_ascii=False))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "home-search-mobile.png"))
+    m.close()
+    check("搜索这一轮无脚本报错", not errs, "; ".join(errs[:2]))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--app", action="store_true",
@@ -1279,6 +1409,7 @@ def main():
             test_world(browser, base)
             test_home(browser, base)
             test_updates_rank(browser, base)
+            test_search(browser, base)
             test_app(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)

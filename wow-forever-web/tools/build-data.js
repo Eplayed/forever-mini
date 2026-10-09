@@ -372,8 +372,10 @@ const scale = {};
 
 // 专业：配方与采集点的口径检查（数据全部来自客户端解包转述）
 const profPath = path.join(ROOT, 'professions.json');
+let profOut = null;
 if (fs.existsSync(profPath)) {
   const pf = JSON.parse(fs.readFileSync(profPath, 'utf8'));
+  profOut = pf;
   const pids = new Set();
   (pf.professions || []).forEach((p) => {
     if (pids.has(p.id)) errs.push(`professions：id 重复 ${p.id}`);
@@ -652,6 +654,192 @@ const rankList = Object.keys(rank).map((k) => {
 rankList.forEach((r, i) => { r.place = i + 1; });
 if (rankList.length !== 9) warns.push('职业完整度排行只有 ' + rankList.length + ' 个职业有数据');
 scale.classRank = rankList;
+
+// ---------- 全站搜索索引 ----------
+// 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
+// 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——
+// 第三方转述的原文句子本站不复制，天赋效果原文也不进（红线）。
+const SK = {
+  tal: ['天赋', 'talent.html', 'q'],
+  chg: ['客户端改动', 'updates.html', 'q'],
+  term: ['中英术语', 'glossary.html', 'q'],
+  abl: ['技能四态', 'skills.html', 'q'],
+  dun: ['副本', 'dungeons.html', ''],
+  boss: ['副本首领', 'dungeons.html', ''],
+  zone: ['区域', 'world.html', 'q'],
+  rare: ['稀有精英', 'world.html', 'q'],
+  bok: ['书籍', 'world.html', 'q'],
+  camp: ['睡袋与营地', 'world.html', 'q'],
+  prof: ['专业', 'professions.html', ''],
+  rec: ['配方', 'professions.html', 'q'],
+  gnd: ['采集点', 'professions.html', 'q'],
+  tra: ['种族特长', 'races.html', 'q'],
+  race: ['种族', 'races.html', ''],
+  cls: ['职业', 'talent.html', '']
+};
+const clsCn = {};
+(cl.classes || []).forEach((c) => { clsCn[c.id] = c.cn; });
+const SIDX = [];
+const SBY = new Map();
+// 一条 = [类型, 名称, 归属副标题, 跳转附加参数, 分级]，字段顺序写进 meta.fields。
+// 同名且跳转也相同的条目（同一职业技能在两个系里、同一个配方两个专业都能做）合并成一条，
+// 副标题把两边的归属都列出来——搜索结果里出现两行一模一样跳过去的东西只会让人以为页面坏了。
+const sPush = (k, n, s, x, l) => {
+  if (!n) return;
+  const key = k + '|' + String(n) + '|' + (x || '');
+  const cur = SBY.get(key);
+  if (cur) {
+    if (s && cur.subs.indexOf(String(s)) < 0) cur.subs.push(String(s));
+    // 两个来源分级不一样时取更差的那个，别因为合并把"待实测"说成"已核"
+    if (String(l || 'L3') > cur.l) cur.l = String(l || 'L3');
+    return;
+  }
+  SBY.set(key, { k: k, n: String(n), subs: s ? [String(s)] : [], x: x || '', l: String(l || 'L3') });
+};
+const sFinish = () => {
+  SBY.forEach((e) => {
+    let s = e.subs.join(' / ');
+    if (e.subs.length > 2) s = e.subs.slice(0, 2).join(' / ') + ' 等 ' + e.subs.length + ' 处';
+    SIDX.push([e.k, e.n, s, e.x, e.l]);
+  });
+};
+
+const lvRangeTxt = (r) => {
+  const a = r.levelRange || [];
+  if (a[0] === null || a[0] === undefined) return r.levelStatus || '等级未定';
+  if (a[1] === null || a[1] === undefined || a[1] === a[0]) return a[0] + ' 级';
+  return a[0] + '–' + a[1] + ' 级';
+};
+
+fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
+  if (f.charAt(0) === '_' || !f.endsWith('.json')) return;
+  const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
+  const cid = t.classId || f.slice(0, -5);
+  (t.trees || []).forEach((tr) => (tr.nodes || []).forEach((n) => {
+    sPush('tal', n.nameCn, (clsCn[cid] || cid) + ' · ' + (tr.nameCn || ''), 'c=' + cid, n.level);
+  }));
+});
+chItems.forEach((x) => {
+  sPush('chg', x.nameCn, (clsCn[x.classId] || x.classId) + ' · ' + (x.changeCn || ''),
+    'c=' + x.classId + (x.kind === 'spell' ? '&w=spell' : ''), x.level);
+});
+gl.items.forEach((x) => {
+  sPush('term', x.cn, x.en || (clsCn[x.classId] || '其他词条'), '', x.level);
+});
+(ab.items || []).forEach((x) => {
+  sPush('abl', x.name, clsCn[x.classId] || x.classId, '', x.level);
+});
+[].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).forEach((d) => {
+  const kindCn = d.kind === 'raid' ? '团队副本' : d.kind === 'new' ? '无限新增' : '经典本';
+  sPush('dun', d.nameCn || d.nameEn, kindCn + ' · ' + (d.levelRange || '区间未定'), 'd=' + d.id, d.level);
+  (d.bosses || []).forEach((b) => {
+    sPush('boss', b.nameCn || b.nameEn, d.nameCn || d.nameEn || '', 'd=' + d.id, b.level);
+  });
+});
+if (worldOut) {
+  // 睡袋本身也是一条可搜的名称（营点是地标名，容易搜不到）
+  const sbbag = (worldOut.bagTool || {}).bag;
+  if (sbbag) {
+    sPush('camp', sbbag.nameCn, '睡袋 · ' + (sbbag.itemLevel ? sbbag.itemLevel + ' 级物品' : '等级未采'),
+      't=bag', (worldOut.bagTool || {}).paramsLevel || 'L2');
+  }
+  (worldOut.zones || []).forEach((z) => {
+    sPush('zone', z.nameCn, z.continentCn + ' · ' + lvRangeTxt(z), 't=zones', z.level);
+  });
+  (worldOut.rares || []).forEach((r) => {
+    sPush('rare', r.nameCn, r.zone || '区域未定', 't=rares', r.level);
+  });
+  (worldOut.raresUnplaced || []).forEach((r) => {
+    sPush('rare', r.nameCn, '上游未给坐标', 't=rares', 'L3');
+  });
+  (worldOut.books || []).forEach((b) => {
+    sPush('bok', b.nameCn, b.zone || '区域未定', 't=books', b.level);
+  });
+  ((worldOut.bagTool || {}).camps || []).forEach((c) => {
+    (c.places || []).forEach((p) => {
+      sPush('camp', p.landmark || p.whereCn, p.zone || '区域未定', 't=bag', p.level || 'L2');
+    });
+  });
+}
+if (profOut) {
+  (profOut.professions || []).forEach((p) => {
+    const cnt = (p.counts || {}).recipes;
+    sPush('prof', p.nameCn, (p.kind === 'craft' ? '制造专业' : '采集专业') + ' · ' +
+      (cnt === undefined ? '配方数未采' : cnt + ' 条配方'), 'p=' + p.id, p.level);
+    (p.recipes || []).forEach((x) => {
+      sPush('rec', x.nameCn, p.nameCn + (x.isNew ? ' · 无限新增' : ''), 'p=' + p.id, x.level || p.level);
+    });
+    (p.nodes || []).forEach((x) => {
+      sPush('gnd', x.nameCn, p.nameCn, 'p=' + p.id, x.level || p.level);
+    });
+  });
+}
+const facCn = {};
+(rc.factions || []).forEach((x) => { facCn[x.id] = x.nameCn; });
+(rc.races || []).forEach((r) => {
+  // 天裔的两个子族官方就叫"塑风者天裔/高阶会天裔"，不必再前缀"天裔·"
+  const sub = r.subgroup ? r.subgroup.nameCn || r.subgroup.label || '' : '';
+  const nm = sub && sub.indexOf(r.nameCn) >= 0 ? sub : (sub ? r.nameCn + '·' + sub : r.nameCn);
+  sPush('race', nm, (facCn[r.faction] || r.faction || '阵营未定') + ' · ' +
+    (r.classes || []).length + ' 个职业可选', 'r=' + r.faction + '-' + r.id, r.level);
+  (r.traits || []).concat(r.subgroup ? r.subgroup.traits || [] : []).forEach((t) => {
+    sPush('tra', t.name, nm, '', r.level);
+  });
+});
+(cl.classes || []).forEach((c) => {
+  sPush('cls', c.cn, (c.talentCount || 0) + ' 个天赋节点', 'c=' + c.id, c.nameLevel);
+});
+
+sFinish();
+// 索引自身的卡口：名字里混进句子、页面不存在、类型没登记，都是数据出问题的信号
+const seenSid = new Set();
+SIDX.forEach((it) => {
+  const k = it[0], n = it[1], s = it[2];
+  if (!SK[k]) errs.push(`search：类型 ${k} 没在 SK 里登记`);
+  if (n.length > 40) errs.push(`search：名称太长像句子（${k} ${n.slice(0, 24)}…）`);
+  if (s.length > 44) errs.push(`search：副标题太长像句子（${k} ${n} → ${s.slice(0, 24)}…）`);
+  const idu = k + '|' + n + '|' + it[3];
+  if (seenSid.has(idu)) errs.push(`search：合并后仍有重复 ${k} ${n}`);
+  seenSid.add(idu);
+});
+Object.keys(SK).forEach((k) => {
+  if (!fs.existsSync(path.join(ROOT, '..', SK[k][1]))) {
+    errs.push(`search：${k} 指向的页面 ${SK[k][1]} 不存在`);
+  }
+  if (!SIDX.some((it) => it[0] === k)) warns.push(`search：类型 ${k} 一条都没有，页面或数据可能没接上`);
+});
+const sidPath = path.join(ROOT, 'search.json');
+fs.writeFileSync(sidPath, JSON.stringify({
+  meta: {
+    generatedAt: new Date().toISOString().slice(0, 10),
+    method: 'tools/build-data.js 从已校验的数据派生，别手抄也别另建',
+    fields: ['类型', '名称', '归属副标题', '跳转附加参数', '分级'],
+    kinds: SK,
+    note: '首页全站搜索用。只收名称与归属，不含任何描述句子；缺数据的地方显示"待实测"。'
+  },
+  items: SIDX
+}));
+scale.search = SIDX.length;
+console.log('全站搜索索引 ' + SIDX.length + ' 条 / ' + Object.keys(SK).length + ' 类 → src/data/search.json（' +
+  Math.round(fs.statSync(sidPath).size / 1024) + ' KB）');
+
+// 上线日期只许有 meta.json 一处真相：前端那个 LAUNCH 常量对不上就会两处打脸
+const metaJson = read('meta.json');
+const appJsPath = path.join(ROOT, '..', 'js', 'app.js');
+const mLaunch = /var LAUNCH = '([^']+)'/.exec(fs.readFileSync(appJsPath, 'utf8'));
+if (!mLaunch) errs.push('app.js：找不到 LAUNCH 常量，倒计时没处取日期');
+else if (mLaunch[1].slice(0, 10) !== metaJson.launch) {
+  errs.push(`上线日期两处不一致：meta.json 写 ${metaJson.launch}，app.js 的 LAUNCH 是 ${mLaunch[1].slice(0, 10)}（改一处要改两处）`);
+}
+// 新站那个 LAUNCH_AT 也算第三处，一起卡住
+const fmtPath = path.join(ROOT, '..', '..', 'app', 'src', 'lib', 'fmt.js');
+if (fs.existsSync(fmtPath)) {
+  const mFmt = /LAUNCH_AT = Date\.parse\('([^']+)'\)/.exec(fs.readFileSync(fmtPath, 'utf8'));
+  if (!mFmt) errs.push('app/src/lib/fmt.js：找不到 LAUNCH_AT，新站倒计时没处取日期');
+  else if (mFmt[1].slice(0, 10) !== metaJson.launch) {
+    errs.push(`上线日期不一致：meta.json 写 ${metaJson.launch}，新站 fmt.js 是 ${mFmt[1].slice(0, 10)}`);
+  }
+}
 
 // 规模快照：首页与溯源页显示的数字一律从这里来，避免页面里手抄一份和真实数据漂移
 const dalls = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []);

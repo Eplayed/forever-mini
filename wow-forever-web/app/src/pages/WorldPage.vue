@@ -242,9 +242,10 @@
           <p class="note">{{ bag.paramsNote }}</p>
         </div>
         <div class="card">
-          <h2>上游列出的营地点 · {{ camps.length }}</h2>
+          <h2>上游列出的营地点 · {{ camps.length }}<template v-if="q.trim()">（搜索 {{ q }} 命中）</template></h2>
           <p class="note">这里只回答"这些营点在哪个区域的哪一点"。睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p>
-          <div class="rgrid">
+          <div v-if="!camps.length" class="empty">这个关键词下没有营点，上面的关键词是按区域或地标名搜的。</div>
+          <div v-else class="rgrid">
             <div v-for="(c, i) in camps" :key="i" class="rarecard">
               <ZoneMap :map-file="c.mapFile" :map-id="c.mapId" :mark="c.mark" :alt="c.zone" />
               <div class="rbody">
@@ -270,6 +271,7 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
 import { levelRangeText as lvTxt, lvStart } from '../lib/fmt.js';
 import ZoneCard from '../components/ZoneCard.vue';
@@ -299,7 +301,12 @@ function boot() {
     .then((d) => { w.value = d; })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
-onMounted(boot);
+// 首页搜索带着板块与词跳进来（#/world?t=rares&q=…），落地就该是筛好的样子
+const route = useRoute();
+if (TABS.some((t) => t[0] === route.query.t)) tab.value = String(route.query.t);
+if (route.query.q) q.value = String(route.query.q);
+boot();
+onMounted(boot);   // 从别的页切回来看不到数据时（比如 JSON 改名），重新拉一次
 
 const zones = computed(() => (w.value && w.value.zones) || []);
 const newZones = computed(() => zones.value.filter((z) => z.isNew));
@@ -311,7 +318,14 @@ const rewards = computed(() => (w.value && w.value.bookRewards) || []);
 const missingBooks = computed(() => (w.value && w.value.booksMissing) || []);
 const unplaced = computed(() => (w.value && w.value.raresUnplaced) || []);
 const bag = computed(() => (w.value && w.value.bagTool) || {});
-const camps = computed(() => (bag.value.camps || []).reduce((a, c) => a.concat(c.places || []), []));
+const allCamps = computed(() => (bag.value.camps || []).reduce((a, c) => a.concat(c.places || []), []));
+// 营点按区域/地标名筛，和旧站一致：搜索框里有词就只看命中的那几个
+const camps = computed(() => {
+  const k = kw.value;
+  if (!k) return allCamps.value;
+  return allCamps.value.filter((c) => ((c.zone || '') + ' ' + (c.whereCn || '') + ' ' +
+    (c.landmark || '')).toLowerCase().indexOf(k) >= 0);
+});
 const stopCount = computed(() => ((bag.value.camps) || []).length);
 const tabCount = computed(() => [zones.value.length, rares.value.length, books.value.length, stopCount.value]);
 const zByName = computed(() => {
