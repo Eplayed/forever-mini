@@ -708,5 +708,7 @@ table.mtx th.rh .rface{width:26px;height:26px}
   .pnode{min-height:44px}
   .pnode .ico-wrap{width:40px;height:40px}
   .fembg img{object-position:center 20%}
+  /* 窄屏放不下右上角的绝对定位标注，会和阵营标题重叠：改成跟在标题下面的一行小字 */
+  .facband .artmark{position:static;display:block;margin:2px 0 0 var(--s3)}
 }
 
