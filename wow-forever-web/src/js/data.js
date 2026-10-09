@@ -10,20 +10,8 @@ window.WowData = (function () {
       });
     return cache[path];
   }
-  function levelOf(rec) { return rec.level || 'L3'; }
-  function tally(levels) {
-    var t = { L0: 0, L1: 0, L2: 0, L3: 0, total: levels.length };
-    levels.forEach(function (l) { if (t[l] === undefined) l = 'L3'; t[l]++; });
-    return t;
-  }
-  function coverage(dungeons, classes, glossary) {
-    var levels = [];
-    (dungeons.newDungeons || []).concat(dungeons.classicDungeons || [], dungeons.raids || [])
-      .forEach(function (d) { levels.push(levelOf(d)); });
-    (glossary.items || []).forEach(function (g) { levels.push(levelOf(g)); });
-    classes.classes.forEach(function (c) { levels.push(c.structureStatus === 'confirmed' ? 'L0' : 'L2'); });
-    return tally(levels);
-  }
+  /* 覆盖率一律读 src/data/scale.json（由 build-data.js 在校验时算出并写出）。
+     这里以前另算一份，只数术语 + 副本 + 职业，和卡口那份对不上，同一站两个覆盖率互相打脸，已删。 */
   function covBar(t) {
     var keys = ['L0', 'L1', 'L2', 'L3'], names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
     var total = Math.max(t.total, 1);
@@ -83,5 +71,5 @@ window.WowData = (function () {
     try { document.execCommand('copy'); } catch (e) { }
     document.body.removeChild(ta);
   }
-  return { load: load, coverage: coverage, pillName: pillName, tally: tally, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy, levelOf: levelOf };
+  return { load: load, pillName: pillName, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy };
 })();

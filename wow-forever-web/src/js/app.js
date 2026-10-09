@@ -164,13 +164,14 @@
           }).join('') + '</div></div>';
       }).join('') + '</nav><div class="chip">距上线 ' + d + ' 天 ' + h + ' 时</div></div>';
     bindNav();
-    Promise.all([D.load('data/meta.json'), D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json')])
+    Promise.all([D.load('data/meta.json'), D.load('data/scale.json')])
       .then(function (r) {
-        var meta = r[0], cov = D.coverage(r[3], r[1], r[2]);
+        var meta = r[0], sc = r[1].scale, cov = sc.pubCoverage;
         el('foot').innerHTML = '<div class="in"><span>' + D.esc(meta.disclaimer) + '</span>' +
           '<span>数据口径：<span class="mono">' + D.esc(meta.dataBaseline.build) + '</span>，核对于 ' +
           D.esc(meta.dataBaseline.checkedAt) + '</span>' +
-          '<span>词条覆盖率（不含天赋节点）L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 + ' / L3 ' + cov.L3 + '</span></div>';
+          '<span>词条覆盖率（不含天赋节点）L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 +
+          ' / L3 ' + cov.L3 + '，共 ' + sc.pubTotal + ' 条</span></div>';
       }).catch(function () { });
   }
 
@@ -1052,10 +1053,13 @@
 
   /* ---------- 溯源 ---------- */
   function provenance() {
-    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'), D.load('data/meta.json'), D.load('data/method.json')])
+    Promise.all([D.load('data/meta.json'), D.load('data/method.json'), D.load('data/scale.json')])
       .then(function (r) {
-        var cov = D.coverage(r[2], r[1] ? r[0] : r[0], r[1]);
-        var m = r[4] || {};
+        var sc = r[2].scale;
+        // covBar 按 total 算四段宽度，scale.json 里的分级不带 total，这里显式补上
+        var cov = { L0: sc.pubCoverage.L0, L1: sc.pubCoverage.L1, L2: sc.pubCoverage.L2,
+          L3: sc.pubCoverage.L3, total: sc.pubTotal };
+        var m = r[1] || {};
         var names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
         var refs = [['wow.blizzard.cn/news/', '国服官方公告与职业深度解析', '可入自动化'],
         ['wow.blizzard.cn/24266320/', '国服在线修正', '可入自动化（需整页比对）'],
@@ -1067,10 +1071,12 @@
         ['news.17173.com', '中文蓝贴转载', '旁证，需回校官方'],
         ['github.com/cmangos/classic-db', '1.12 国服中文 locale（GPL-3.0）', '只取译名与结构'],
         ['search.bilibili.com', '测试服实测视频', 'ASR + 关键帧识别后人工确认']];
-        var ti = r[3].talentImport;
+        var ti = r[0].talentImport;
         set('<div class="card"><h1 class="pt">溯源与覆盖率</h1><p class="dim">每条数据从哪来、什么时候核的、哪些刻意没拿，全部摊在这里。</p></div>' +
-          '<div class="card"><h2>数据覆盖率</h2>' + D.covBar(cov) +
-          '<div class="stats" style="margin-top:12px">' + Object.keys(names).map(function (k) {
+          '<div class="card"><h2>数据覆盖率</h2><p class="note">这条与页脚同一个数：' + sc.pubTotal +
+          ' 条对外词条（术语 + 副本 + 世界线），不含天赋节点。首页那条是全站口径 ' + sc.coverageTotal +
+          ' 条，多出来的 ' + (sc.coverageTotal - sc.pubTotal) + ' 条是九棵天赋树的节点。</p>' + D.covBar(cov) +
+          '<div class="stats">' + Object.keys(names).map(function (k) {
             return '<div class="stat"><b>' + cov[k] + '</b>' + names[k] + '</div>';
           }).join('') + '</div>' +
           '<p class="dim">口径：一条数据只有挂着官方来源且人工核过，才算 L0；粉丝站与转载一律最高 L2。</p></div>' +
@@ -1098,12 +1104,12 @@
             (m.recheck ? '<h3 style="margin-top:var(--s4)">什么时候重核</h3><p class="dim">' + D.esc(m.recheck) + '</p>' : '') +
             '<p class="src">方法说明核对日期：' + D.esc((m.meta || {}).generatedAt || '—') + '</p></div>' : '') +
           '<div class="card"><h2>还没被证实的</h2><ol class="q">' +
-          (r[3].openQuestions || []).map(function (q) { return '<li>' + D.esc(q) + '</li>'; }).join('') + '</ol></div>' +
+          (r[0].openQuestions || []).map(function (q) { return '<li>' + D.esc(q) + '</li>'; }).join('') + '</ol></div>' +
           '<div class="card"><h2>来源站点与用法边界</h2><table><thead><tr><th>站点</th><th>能给什么</th><th>怎么用</th></tr></thead><tbody>' +
           refs.map(function (x) { return '<tr><td class="mono">' + x[0] + '</td><td>' + x[1] + '</td><td>' + x[2] + '</td></tr>'; }).join('') +
           '</tbody></table></div>' +
           '<div class="card"><h2>规则（构建时卡口）</h2><ul>' +
-          (r[3].rules || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul></div>');
+          (r[0].rules || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul></div>');
       }).catch(fail);
   }
 

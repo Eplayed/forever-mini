@@ -33,6 +33,13 @@
    "L2": 360,
    "L3": 2
   },
-  "coverageTotal": 842
+  "coverageTotal": 842,
+  "pubCoverage": {
+   "L0": 366,
+   "L1": 0,
+   "L2": 1,
+   "L3": 2
+  },
+  "pubTotal": 369
  }
 }

@@ -998,6 +998,17 @@ def test_home(browser, base):
     check("首页规模数字都渲染出来了", not hard, "缺 %s" % (hard or "无"))
     nd = page.evaluate("() => document.querySelectorAll('.flowrow').length")
     check("刻意不做的与时间点都在页上", nd >= 9, "%d 行" % nd)
+    foot = page.evaluate("() => document.querySelector('#foot').innerText")
+    check("页脚用的是 scale.json 那份词条口径", str(sc["pubTotal"]) in foot and "842" not in foot,
+          "页脚写 %s，应含 %s 且不含全站数" % (foot.replace("\n", " ")[-40:], sc["pubTotal"]))
+    pp = ctx.new_page()
+    pp.goto(base + "/provenance.html", wait_until="networkidle")
+    pp.wait_for_timeout(1200)
+    pt = pp.evaluate("() => document.querySelector('#main').innerText")
+    ok = ("%d条对外词条" % sc["pubTotal"]) in pt.replace(" ", "") and str(sc["coverageTotal"]) in pt
+    check("溯源页两个口径都写明且与 scale.json 一致", ok,
+          "应含「%d 条对外词条」与全站 %s" % (sc["pubTotal"], sc["coverageTotal"]))
+    pp.close()
     page.screenshot(path=os.path.join(SHOT_DIR, "home-redesign.png"))
     ctx.close()
 

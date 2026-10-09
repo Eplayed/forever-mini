@@ -570,7 +570,8 @@ Object.assign(scale, {
   traits: rcTraitN,
   timeline: (JSON.parse(fs.readFileSync(path.join(ROOT, 'timeline.json'), 'utf8')).items || []).length,
   abilities: (JSON.parse(fs.readFileSync(path.join(ROOT, 'abilities.json'), 'utf8')).items || []).length,
-  coverage: cov, coverageTotal: total
+  coverage: cov, coverageTotal: total,
+  pubCoverage: pub, pubTotal: pubLevels.length
 });
 const scalePath = path.join(ROOT, 'scale.json');
 fs.writeFileSync(scalePath, JSON.stringify({
