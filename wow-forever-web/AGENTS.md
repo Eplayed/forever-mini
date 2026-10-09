@@ -31,7 +31,10 @@ docs/           PRD / UI / reference-gap / wow-infinite-*（方案、流程、�
 ## 命令
 
 ```bash
-node tools/build-data.js        # 改数据必跑：校验 + 覆盖率，非 0 退出即未完成
+tools/refresh.sh <world|changes|prof|dungeons|talents|official|icons|check|publish>
+                              # 一条链跑完：抓取 → 合并 → 四道门禁；顺序错了会把半成品当成品发出去
+                              # 详见 docs/DATA-MAINTENANCE.md（数据从哪来、多久动一次、动完怎么确认没坏）
+node tools/build-data.js        # 改数据必跑：校验 + 覆盖率 + 禁词体检，非 0 退出即未完成
 node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，谨慎）
 node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
 node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
@@ -41,7 +44,9 @@ python3 tools/site-check.py --app # 加跑新站（Vue）冒烟：要先 cd app 
 python3 tools/app-assets.py       # 把 src/data 与 src/img 增量同步进 app/public（新站构建前必跑）
 python3 tools/app-parity.py --strict   # 新旧两站逐页对拍（结构计数 / 类名 / 正文文本 / 链接 / 图片）
 cd app && npm run build && npx vitest run   # 新站构建 + 组件级单测
-python3 tools/audit-translations.py  # 译名体检：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
+python3 tools/audit-translations.py  # 译名体检
+python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 src/data/releases.json）
+：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
 python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
 cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地 JSON）
 ```
@@ -59,4 +64,6 @@ cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地
 4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`src/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
 5. 层级点数门槛未核实前，`rules.tierUnlockCost` 保持 `null`，界面只按坐标摆位，不做解锁判定。
 6. 每个内容页必须自动产出「本页还没确认的」清单（由数据缺口推导，不靠手写），文案面向玩家，不出现内部术语。
+   - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 第 18 节扫 14 页与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
+   - 网页上的「本站更新」读 **手写的 `src/data/releases.json`**（一条对应一个真实提交，`build-data.js` 会回仓库核对提交号）；git 自动生成的开发日志在 `docs/CHANGELOG-DEV.md`，**不进页面**。改了玩家能看到的东西就要补一条。
 7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。

@@ -54,7 +54,7 @@
       {
        "type": "official_cn",
        "url": "https://wow.blizzard.cn/news/24302070/index.html",
-       "note": "官方口径：取消传统服务器，按普通/PvP/RP/专家规则集匹配（2026-10-08 译名体检逐字命中）",
+       "note": "官方公告：取消传统服务器，按普通/PvP/RP/专家规则集匹配（2026-10-08 译名体检逐字命中）",
        "checkedAt": "2026-10-08"
       }
      ]
@@ -84,7 +84,7 @@
       {
        "type": "official_en",
        "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
-       "note": "官方回顾 + 媒体汇总口径一致",
+       "note": "官方回顾 + 媒体汇总说法一致",
        "checkedAt": null
       },
       {
@@ -195,7 +195,7 @@
       {
        "type": "fan_db",
        "url": "https://wowclassicforever.info/races/skyborne",
-       "note": "参考站同口径",
+       "note": "参考站说法一致",
        "checkedAt": null
       }
      ]
@@ -216,7 +216,7 @@
       {
        "type": "fan_db",
        "url": "https://wowclassicforever.info/races/skyborne",
-       "note": "参考站同口径",
+       "note": "参考站说法一致",
        "checkedAt": null
       }
      ]
@@ -276,8 +276,8 @@
   }
  ],
  "unconfirmed": [
-  "3 座团队副本的名称与 BOSS 数量：本轮三个来源互相矛盾，需人工核对官方与 Wowhead 后重建",
-  "每座本的 BOSS 名单与数量：官方与可信源均未给出，只能靠实测视频或自己打",
+  "3 座团队副本的名称与 BOSS 数量：三个来源互相矛盾，等人工核对官方与资料站后再定",
+  "每座本的 BOSS 名单与数量：官方与可信来源都未公布，只能靠实测视频或自己打",
   "掉落表：所有来源都是零碎注记，且禁止写百分比",
   "Whelgar's Excavation 与 Excavation Site: Wetlands 哪个是正式服最终英文名",
   "官方 Beta 公告里的「监狱」是新本 Alcaz Prison 还是经典 The Stockade",

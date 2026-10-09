@@ -16,6 +16,7 @@ import datetime
 import functools
 import http.server
 import os
+import re
 import socketserver
 import sys
 import threading
@@ -568,53 +569,63 @@ def test_races(browser, base):
     check("种族详情的来源能展开", dr > 20, "来源块 %d 字" % dr)
     page.screenshot(path=os.path.join(SHOT_DIR, "races-matrix.png"), full_page=True)
 
-    groups = page.evaluate("() => [...document.querySelectorAll('nav.main .ndb')]"
-                           ".map(b => b.textContent.replace('▾', '').trim())")
-    check("导航收拢成 5 个分组", groups == ["天赋", "职业", "种族", "世界", "工具"], str(groups))
-    page.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
-                  ".find(x => x.textContent.indexOf('世界') >= 0); b.click(); }")
-    page.wait_for_timeout(250)
-    panel = page.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
-                          ".find(x => x.textContent.indexOf('世界') >= 0);"
-                          "const p = b.parentNode.querySelector('.ndp');"
-                          "return {open: b.parentNode.className.indexOf('open') >= 0,"
-                          " items: [...p.querySelectorAll('a b')].map(a => a.textContent)}; }")
-    check("点「世界」展开面板并列出副本手册",
-          panel["open"] and any("副本手册" in i for i in panel["items"]), str(panel["items"]))
-    page.keyboard.press("Escape")
-    page.wait_for_timeout(200)
-    check("Esc 关闭面板", page.evaluate("() => document.querySelectorAll('nav.main .nd.open').length") == 0)
-    onb = page.evaluate("() => { const b = document.querySelector('nav.main .ndb.on');"
-                        "return b ? b.textContent.trim() : ''; }")
-    check("当前页所在分组高亮", "种族" in onb, "高亮「%s」" % onb)
+    labels = page.evaluate("() => [...document.querySelectorAll('nav.main .ngt')].map(b => b.textContent.trim())")
+    subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')].map(a => a.textContent.trim())")
+    check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
+    check("15 个二级入口全部常驻，不用点开",
+          len(subs) == 15 and all(x in subs for x in ["首页", "区域与稀有", "副本", "系统规则", "排行"]), str(subs))
+    check("导航里不再有任何下拉面板",
+          page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
+    navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
+    check("桌面导航排在一行内", navh <= 44, "%d px" % navh)
+    onb = page.evaluate("() => { const a = document.querySelector('nav.main a.nl.on');"
+                        "return a ? a.textContent.trim() : ''; }")
+    check("当前页在导航里高亮", onb == "总览", "高亮「%s」" % onb)
+    hitg = page.evaluate("() => { const g = document.querySelector('nav.main .ngrp.hit');"
+                         "return g ? g.querySelector('.ngt').textContent.trim() : ''; }")
+    check("当前页所在分组的标签转金色", hitg == "种族", "分组「%s」" % hitg)
+    tip = page.evaluate("() => { const a = [...document.querySelectorAll('nav.main a.nl')]"
+                        ".find(x => x.textContent.trim() === '副本'); return a ? a.getAttribute('title') : ''; }")
+    check("页面说明收进悬停提示，不占版面", bool(tip) and "38 座" in tip, tip)
     ctx.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780}, is_mobile=True, has_touch=True)
     mp = m.new_page()
     mp.goto(base + "/races.html", wait_until="networkidle")
     mp.wait_for_timeout(1000)
-    small = mp.evaluate("() => [...document.querySelectorAll('nav.main .ndb, nav.main a, #mx thead button.ch')]"
+    small = mp.evaluate("() => [...document.querySelectorAll('nav.main a.nl, #mx thead button.ch')]"
                         ".filter(e => e.offsetHeight && e.offsetHeight < 44)"
                         ".map(e => (e.className || 'a') + ':' + e.offsetHeight)")
     check("移动端导航与矩阵表头点击目标 ≥44px", not small, str(small[:4]))
-    mp.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
-                ".find(x => x.textContent.indexOf('世界') >= 0); b.click(); }")
+    mob = mp.evaluate("""() => { const nav = document.querySelector('nav.main');
+      const inr = nav.querySelector('.in'), vw = document.documentElement.clientWidth;
+      const links = [...nav.querySelectorAll('a.nl')];
+      const on = links.find(a => a.classList.contains('on'));
+      const r = on ? on.getBoundingClientRect() : null;
+      return { rows: new Set(links.map(e => Math.round(e.getBoundingClientRect().top))).size,
+               scrollable: inr.scrollWidth > inr.clientWidth + 8, overflow: inr.scrollWidth - inr.clientWidth,
+               vw: vw, right: Math.round(nav.getBoundingClientRect().right),
+               onVisible: r ? (r.left >= 0 && r.right <= vw) : false,
+               head: Math.round(document.querySelector('.top').getBoundingClientRect().height),
+               pos: getComputedStyle(document.querySelector('.top')).position }; }""")
+    check("移动端导航排成一条可横滑的导航带", mob["rows"] == 1 and mob["scrollable"],
+          json.dumps(mob, ensure_ascii=False))
+    check("移动端顶栏整体不超过 100px", mob["head"] <= 100 and mob["pos"] == "sticky", str(mob["head"]))
+    check("当前页那一项已滚进可视区", mob["onVisible"], json.dumps(mob, ensure_ascii=False))
+    mp.evaluate("() => document.querySelector('nav.main .in').scrollLeft = 9999")
     mp.wait_for_timeout(250)
-    mob = mp.evaluate("() => { const b = [...document.querySelectorAll('nav.main .ndb')]"
-                      ".find(x => x.textContent.indexOf('世界') >= 0);"
-                      "const p = b.parentNode.querySelector('.ndp'); const r = p.getBoundingClientRect();"
-                      "const hs = [...p.querySelectorAll('a')].map(a => a.offsetHeight);"
-                      "const lefts = [...p.querySelectorAll('a b')].map(x => Math.round(x.getBoundingClientRect().x - r.x));"
-                      "return {right: Math.round(r.right), vw: window.innerWidth, min: Math.min.apply(null, hs), lefts: lefts}; }")
-    check("移动端下拉不顶出视口且面板项 ≥44px",
-          mob["right"] <= mob["vw"] and mob["min"] >= 44, json.dumps(mob, ensure_ascii=False))
-    # 面板项是纵向 flex，移动端通用规则给的 align-items:center 会把标题与说明居中，这里必须左对齐
-    check("移动端面板条目左对齐", all(v < 24 for v in mob["lefts"]), "文字左边缘偏移 %s" % mob["lefts"])
+    tail = mp.evaluate("() => { const inr = document.querySelector('nav.main .in');"
+                       "const links = [...inr.querySelectorAll('a.nl')];"
+                       "const last = links[links.length - 1].getBoundingClientRect();"
+                       "return { atEnd: inr.scrollLeft + inr.clientWidth >= inr.scrollWidth - 2,"
+                       " lastVisible: last.right <= document.documentElement.clientWidth + 1 }; }")
+    check("滑到右端能点到最后一个入口（溯源）", tail["atEnd"] and tail["lastVisible"], json.dumps(tail))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "nav-mobile-flat.png"))
     mp.goto(base + "/dungeons.html", wait_until="networkidle")
     mp.wait_for_timeout(1000)
     dtext = mp.evaluate("() => document.querySelector('#main').innerText")
-    check("副本页写明「世界」里还没采集的板块",
-          "还没采集的" in dtext and "世界地图" in dtext and "PvP" in dtext)
+    check("副本页写明「世界」里还没有数据的板块",
+          "还没有数据" in dtext and "世界地图" in dtext and "PvP" in dtext)
     mp.screenshot(path=os.path.join(SHOT_DIR, "nav-mobile-open.png"))
     m.close()
 
@@ -859,7 +870,7 @@ def test_professions(browser, base):
     page.click(".pick[data-p=camping]")
     page.wait_for_timeout(700)
     empty = page.evaluate("() => (document.querySelector('.empty') || {}).textContent || ''")
-    check("没解析出来的专业写原因而不是留白", "没解析" in empty, empty[:44])
+    check("拆不出条目的专业写原因而不是留白", "还没拆出条目" in empty, empty[:44])
 
     page.click(".pick[data-p=alchemy]")
     page.wait_for_timeout(900)
@@ -1068,7 +1079,7 @@ def test_updates_rank(browser, base):
     print("\n[15] 最新动态与资料完整度排行")
     import json
     ch = json.load(open(os.path.join(SRC, "data", "changes.json"), encoding="utf-8"))
-    cl = json.load(open(os.path.join(SRC, "data", "changelog.json"), encoding="utf-8"))
+    cl = json.load(open(os.path.join(SRC, "data", "releases.json"), encoding="utf-8"))
     S = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
     items = ch["items"]
 
@@ -1080,7 +1091,7 @@ def test_updates_rank(browser, base):
     page.wait_for_timeout(2200)
     check("动态页无脚本报错", not errs, "; ".join(errs[:2]))
     cards = page.evaluate("() => ['k0','k1','k2'].filter(id => document.getElementById(id)).length")
-    check("动态页三块都在（官方时间点 / 客户端改动 / 本站变更）", cards == 3, "%d 块" % cards)
+    check("动态页三块都在（官方时间点 / 客户端改动 / 本站更新）", cards == 3, "%d 块" % cards)
     rows = page.evaluate("() => document.querySelectorAll('#chbody tbody tr').length")
     cnt = page.evaluate("() => document.querySelector('#ccnt').textContent")
     check("改动清单默认列到上限并报出全量", rows == 400 and str(len(items)) in cnt,
@@ -1107,7 +1118,7 @@ def test_updates_rank(browser, base):
     tech = [w for w in ["tools/", ".json", ".py", "undefined", "[object"] if w in body]
     check("动态页正文没有面向开发的词", not tech, str(tech))
     logs = page.evaluate("() => document.querySelectorAll('#k2 .flowrow').length")
-    check("本站变更日志条数与数据一致", logs == len(cl["entries"]), "%d 条（数据 %d）" % (logs, len(cl["entries"])))
+    check("本站更新条数与数据一致", logs == len(cl["items"]), "%d 条（数据 %d）" % (logs, len(cl["items"])))
     page.screenshot(path=os.path.join(SHOT_DIR, "updates.png"))
     ctx.close()
 
@@ -1381,6 +1392,70 @@ def test_search(browser, base):
     m.close()
     check("搜索这一轮无脚本报错", not errs, "; ".join(errs[:2]))
 
+def test_copy(browser, base):
+    """面向维护者的词不许出现在玩家看的正文里。词表与 build-data.js 用的是同一份
+       tools/copy-banned.json：数据侧扫 JSON，这里扫渲染后的文字（app.js 里的句子只有渲染才看得见）。"""
+    print("\n[18] 正文禁词")
+    import json
+    ban = json.load(open(os.path.join(ROOT, "tools", "copy-banned.json"), encoding="utf-8"))
+    pats = [(p["re"], p["why"]) for p in ban["patterns"]]
+    strips = ban.get("strip", [])
+
+    def scan(label, text):
+        t = text
+        for s in strips:
+            t = t.replace(s, "")
+        bad = []
+        for pat, why in pats:
+            m = re.search(pat, t)
+            if m:
+                at = m.start()
+                bad.append("%s：%s" % (pat, t[max(0, at - 22):at + 34].replace("\n", " ")))
+        check("正文无维护者措辞 %s" % label, not bad, " ｜ ".join(bad[:2]))
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    for name in PAGES:
+        page = ctx.new_page()
+        page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+        page.wait_for_timeout(1300)
+        text = page.evaluate("""() => [document.querySelector('.top'), document.querySelector('#main'),
+            document.querySelector('.foot')].filter(Boolean).map(e => e.innerText).join('\\n')""")
+        scan(name, text)
+        page.close()
+    ctx.close()
+
+    # 来源抽屉点开后的文字也在扫描范围内：那一段默认收起，但它是玩家真会点开的地方
+    ctx2 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx2.new_page()
+    page.goto("%s/dungeons.html" % base, wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    page.evaluate("() => document.querySelectorAll('[data-d]').forEach(b => b.click())")
+    page.wait_for_timeout(600)
+    scan("副本页来源展开后", page.evaluate("() => document.querySelector('#main').innerText"))
+    page.goto("%s/talent.html" % base, wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    page.evaluate("() => { const b = document.getElementById('tsrcbtn'); if (b) b.click(); }")
+    page.wait_for_timeout(500)
+    scan("天赋页来源展开后", page.evaluate("() => document.querySelector('#main').innerText"))
+    ctx2.close()
+
+    # 新站（Vue）那两页也扫一遍：两栈共用一份数据，但页面里的句子是各写各的
+    ctx3 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    ap = ctx3.new_page()
+    for route, label in [("#/", "新站首页"), ("#/world", "新站世界页")]:
+        try:
+            ap.goto("%s/%s" % (APP_BASE, route), wait_until="networkidle")
+        except Exception:
+            check("%s正文可访问" % label, False, "新站没起来：%s" % APP_BASE)
+            continue
+        ap.wait_for_timeout(1600)
+        scan(label, ap.evaluate("""() => [document.querySelector('.top'), document.querySelector('#main')]
+            .filter(Boolean).map(e => e.innerText).join('\\n')"""))
+    ap.close()
+    ctx3.close()
+
+
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -1410,6 +1485,7 @@ def main():
             test_home(browser, base)
             test_updates_rank(browser, base)
             test_search(browser, base)
+            test_copy(browser, base)
             test_app(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)

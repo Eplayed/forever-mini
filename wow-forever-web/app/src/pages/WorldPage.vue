@@ -1,8 +1,7 @@
 <template>
   <div v-if="err" class="card">
     <h2>数据没加载出来</h2>
-    <p class="dim">{{ err }}</p>
-    <p class="dim">新站要读同步进 app/public 的数据；先跑 <span class="mono">npm run sync</span> 再刷新。</p>
+    <p class="dim">刷新一下试试；如果一直这样，请把这一页的地址发给我们。</p>
     <button @click="boot">重试</button>
   </div>
 
@@ -44,11 +43,11 @@
 
       <div class="card">
         <h2>客户端里的地图清单</h2>
-        <p class="note">有 {{ (w.meta.mapsWithoutImage || []).length }} 个区域上游没切小地图（{{ (w.meta.mapsWithoutImage || []).slice(0, 4).join('、') }} 等），这些卡只显示 mapId 与坐标，不放假图。</p>
-        <p class="note">48 张地图是解包出来的全量：{{ nGroup('大陆') }} 张大陆、{{ nNew() }} 张无限新增、{{ nGroup('副本') }} 张副本、{{ nGroup('战场') }} 张战场。本站不做可缩放交互地图——那是上游自己切的 1715 张瓦片，只把区域名、等级与坐标取过来。</p>
+        <p class="note">有 {{ (w.meta.mapsWithoutImage || []).length }} 个区域没有对应的小地图（{{ (w.meta.mapsWithoutImage || []).slice(0, 4).join('、') }} 等），这些卡只显示地图编号与坐标，不放假图。</p>
+        <p class="note">48 张地图是解包出来的全量：{{ nGroup('大陆') }} 张大陆、{{ nNew() }} 张无限新增、{{ nGroup('副本') }} 张副本、{{ nGroup('战场') }} 张战场。本站不做可缩放交互地图——那套底图瓦片是别人自己切的，不搬；只把区域名、等级与坐标取过来。</p>
         <div class="scrollx">
           <table class="entab">
-            <thead><tr><th>地图</th><th>类型</th><th>mapId</th><th>兴趣点</th><th>已切图</th></tr></thead>
+            <thead><tr><th>地图</th><th>类型</th><th>地图编号</th><th>兴趣点</th><th>已切图</th></tr></thead>
             <tbody>
               <tr v-for="m in listedMaps" :key="m.slug">
                 <td>{{ m.nameCn }}<span v-if="m.isNew" class="tag">新</span></td>
@@ -101,7 +100,7 @@
                   <span class="dim mono">#{{ d.itemId }}</span>
                 </span>
               </div>
-              <div v-else class="note">这个稀有的掉落上游没给，本站不补——等实测或等下一次解包。</div>
+              <div v-else class="note">这一条没有掉落记录，本站不补——等实测或下一次数据核对。</div>
               <button type="button" class="ghost wide" :data-r="r.id" @click="toggleDrawer(r.id)">{{ drawerOf(r.id) ? '收起' : '看这条的来源' }}</button>
               <div v-show="drawerOf(r.id)" class="wdr" :class="{ open: drawerOf(r.id) }">
                 <h3>掉落清单</h3>
@@ -109,7 +108,7 @@
                   <li v-for="d in r.drops" :key="d.itemId">{{ d.nameCn }}（#{{ d.itemId }}，{{ d.bind || '绑定方式未采' }}）</li>
                 </ul>
                 <p v-else class="dim">未采到。</p>
-                <h3>坐标口径</h3>
+                <h3>坐标说明</h3>
                 <p class="note">括号里是那张小地图上的百分比位置，"世界"是客户端原始坐标；两套都是同一次解包出来的。</p>
                 <h3>来源与核对</h3>
                 <SourceList :list="r.provenance" />
@@ -136,7 +135,7 @@
       </div>
       <div v-if="unplaced.length" class="card">
         <h2>位置没核出来的 {{ unplaced.length }} 个稀有</h2>
-        <p class="note">上游有这些名字，但没给坐标。名字留着当线索，不当数据——不猜位置。</p>
+        <p class="note">名单里有这些名字，但没有坐标。名字留着当线索，不当数据——不猜位置。</p>
         <div class="chips"><span v-for="u in unplaced" :key="u.nameCn" class="chipc">{{ u.nameCn }}</span></div>
       </div>
     </template>
@@ -186,7 +185,7 @@
       </template>
       <div v-if="rewards.length" class="card">
         <h2>上交多少本换什么</h2>
-        <p class="note">门槛与称号取自客户端；奖励物品 ID 一并列出。上游没列奖励的那档写待实测，不编。</p>
+        <p class="note">门槛与称号取自客户端；奖励物品 ID 一并列出。没有奖励记录的那一档写待实测，不编。</p>
         <div class="scrollx">
           <table class="entab">
             <thead><tr><th>门槛</th><th>称号</th><th>任务</th><th>奖励</th></tr></thead>
@@ -221,7 +220,7 @@
 
     <!-- 面板四：睡袋与营地 -->
     <template v-else>
-      <div v-if="!bag.bag" class="card"><div class="empty">睡袋这条上游没解析出物品，本轮不编。</div></div>
+      <div v-if="!bag.bag" class="card"><div class="empty">睡袋这一条还没有可信的物品记录，本站不编。</div></div>
       <template v-else>
         <div class="card">
           <h2>睡袋本身</h2>
@@ -232,7 +231,7 @@
               <span v-if="bag.usableLevel" class="dim mono">{{ bag.usableLevel }} 级可用</span></div>
           </div>
           <table class="mtx">
-            <thead><tr><th>机制项</th><th>上游解析值</th><th>分级</th></tr></thead>
+            <thead><tr><th>机制项</th><th>记录值</th><th>分级</th></tr></thead>
             <tbody>
               <tr v-for="p in bagRows" :key="p[0]">
                 <td>{{ p[0] }}</td><td class="mono">{{ p[1] }}</td><td><LevelPill :level="bag.paramsLevel" /></td>
@@ -242,7 +241,7 @@
           <p class="note">{{ bag.paramsNote }}</p>
         </div>
         <div class="card">
-          <h2>上游列出的营地点 · {{ camps.length }}<template v-if="q.trim()">（搜索 {{ q }} 命中）</template></h2>
+          <h2>营地点清单 · {{ camps.length }}<template v-if="q.trim()">（搜索 {{ q }} 命中）</template></h2>
           <p class="note">这里只回答"这些营点在哪个区域的哪一点"。睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p>
           <div v-if="!camps.length" class="empty">这个关键词下没有营点，上面的关键词是按区域或地标名搜的。</div>
           <div v-else class="rgrid">
@@ -263,7 +262,7 @@
     <div class="card" id="todo">
       <h2>这一页没有的</h2>
       <ul class="list"><li v-for="x in w.meta.notCollected" :key="x">{{ x }}</li></ul>
-      <h3>坐标口径</h3><p class="note">{{ w.meta.coordinateNote }}</p>
+      <h3>坐标说明</h3><p class="note">{{ w.meta.coordinateNote }}</p>
       <h3>来源与核对</h3><SourceList :list="w.provenance" />
     </div>
   </template>

@@ -750,7 +750,7 @@ if (worldOut) {
     sPush('rare', r.nameCn, r.zone || '区域未定', 't=rares', r.level);
   });
   (worldOut.raresUnplaced || []).forEach((r) => {
-    sPush('rare', r.nameCn, '上游未给坐标', 't=rares', 'L3');
+    sPush('rare', r.nameCn, '没有坐标记录', 't=rares', 'L3');
   });
   (worldOut.books || []).forEach((b) => {
     sPush('bok', b.nameCn, b.zone || '区域未定', 't=books', b.level);
@@ -840,6 +840,77 @@ if (fs.existsSync(fmtPath)) {
     errs.push(`上线日期不一致：meta.json 写 ${metaJson.launch}，新站 fmt.js 是 ${mFmt[1].slice(0, 10)}`);
   }
 }
+
+// 「本站更新」是人工写的玩家向说明（网页只读这一份，git 那份在 docs/CHANGELOG-DEV.md）。
+// 每条必须能回查：写清日期、标题、板块标签与对应提交号，提交号在仓库里找不到就是编的。
+const relPath = path.join(ROOT, 'releases.json');
+if (fs.existsSync(relPath)) {
+  const rel = read('releases.json');
+  const items = rel.items || [];
+  if (!items.length) errs.push('releases：一条更新说明都没有，动态页那块会空着');
+  let known = null;
+  try {
+    const cp = require('child_process');
+    known = new Set(cp.execSync('git log --pretty=format:%h', {
+      cwd: path.join(ROOT, '..', '..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']
+    }).trim().split('\n'));
+  } catch (e) {
+    warns.push('releases：拿不到 git 历史，这一轮没核对提交号是否真存在');
+  }
+  items.forEach((x, i) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x.date || '')) errs.push(`releases #${i}：日期不是 YYYY-MM-DD`);
+    if (!x.title || x.title.length > 130) errs.push(`releases #${i}：标题缺失或超过 130 字`);
+    if (!(x.tags || []).length) errs.push(`releases #${i}：没有板块标签`);
+    if (!x.commit) errs.push(`releases #${i}：没写对应提交，等于一句没法回查的话`);
+    else if (known && !known.has(x.commit)) errs.push(`releases #${i}：提交 ${x.commit} 在仓库里找不到`);
+  });
+  scale.releases = items.length;
+  console.log('本站更新 ' + items.length + ' 条（每条带提交号，可回查）');
+} else {
+  warns.push('releases.json 缺失：动态页的「本站更新」会是空的');
+}
+
+// ---------- 面向维护者的词不许进玩家看的正文与数据 ----------
+// 词表在 tools/copy-banned.json，site-check.py 拿同一份扫渲染后的页面文字（两处一把尺子）。
+const BAN = JSON.parse(fs.readFileSync(path.join(__dirname, 'copy-banned.json'), 'utf8'));
+// 大小写敏感：不然 DOM 会命中 martyrdom、NaN 会命中 penance 这类标识符（栽过一次）
+const BRES = BAN.patterns.map((x) => ({ re: new RegExp(x.re), why: x.why }));
+const banClean = (v) => BAN.strip.reduce((a, t) => a.split(t).join(''), v);
+const banHits = new Map();
+function banScan(key, val, where) {
+  if (BAN.skipKeys.indexOf(key) >= 0) return;
+  if (typeof val === 'string') {
+    const t = banClean(val);
+    BRES.forEach((b) => {
+      if (!b.re.test(t)) return;
+      // 同一句话在 964 条记录里重复出现，只报一条，否则错误列表全是同一种错
+      if (!banHits.has(val)) banHits.set(val, where + ' 命中 ' + b.re.source + ' —— ' + b.why);
+    });
+    return;
+  }
+  if (Array.isArray(val)) { val.forEach((x, i) => banScan(key, x, where + '#' + i)); return; }
+  if (val && typeof val === 'object') {
+    // meta 大多是工具元数据，但里面有几个键会直接渲染到页面上，只放行清单里那几个
+    const keys = key === 'meta' ? (BAN.metaKeys || []) : Object.keys(val);
+    keys.forEach((k) => banScan(k, val[k], where + '.' + k));
+  }
+}
+fs.readdirSync(ROOT).forEach((f) => {
+  if (!f.endsWith('.json')) return;
+  banScan(f, read(f), f);
+});
+(BAN.dirs || []).forEach((d) => {
+  const dir = path.join(ROOT, d);
+  if (!fs.existsSync(dir)) return;
+  fs.readdirSync(dir).forEach((f) => {
+    if (!f.endsWith('.json') || f.charAt(0) === '_') return;
+    banScan(d + '/' + f, JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')), d + '/' + f);
+  });
+});
+Array.from(banHits.entries()).slice(0, 40).forEach(([v, w]) =>
+  errs.push('禁词 ' + w + '：「' + v.slice(0, 70) + '」'));
+console.log(banHits.size ? '禁词体检：' + banHits.size + ' 种说法命中（词表 tools/copy-banned.json）'
+  : '禁词体检：数据文件干净');
 
 // 规模快照：首页与溯源页显示的数字一律从这里来，避免页面里手抄一份和真实数据漂移
 const dalls = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []);

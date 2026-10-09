@@ -7,7 +7,7 @@
    {
     "type": "fan_db",
     "url": "https://wowclassicforever.info/talent/warrior/",
-    "note": "参考站页脚口径：经典三系 51 点结构；本站结构字段仍需自行实测确认（2026-10-08 纠正：参考站是粉丝站，不是官方中文，类型由 official_cn 改为 fan_db）",
+    "note": "参考站页脚写法：经典三系 51 点结构；本站的结构仍需自行实测确认（2026-10-08 纠正：参考站是粉丝站，不是官方中文，类型由 official_cn 改为 fan_db）",
     "checkedAt": "2026-10-07"
    }
   ]
@@ -28,7 +28,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_warrior 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_warrior 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -48,7 +48,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_paladin 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_paladin 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -68,7 +68,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_hunter 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_hunter 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -88,7 +88,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_rogue 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_rogue 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -108,7 +108,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_priest 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_priest 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -128,7 +128,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_shaman 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_shaman 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -148,7 +148,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_mage 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_mage 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -168,7 +168,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_warlock 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_warlock 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -188,7 +188,7 @@
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/talents/",
-     "note": "图标文件名 class_druid 取自参考站的事实性标识符；图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地",
+     "note": "图标文件名 class_druid 取自参考站，只是标识符；图片字节从暴雪官方图片服务器取回本地",
      "checkedAt": "2026-10-08"
     }
    ]

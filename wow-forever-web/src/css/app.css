@@ -23,38 +23,27 @@ h1{font-size:20px} h2{font-size:15px} h3{font-size:14px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 var(--s4) var(--s6)}
 
 /* 顶栏 */
+/* 顶栏两行：第一行品牌 + 上线倒计时，第二行两级常驻导航。
+   一级是分组标签（只说明归属、不可点），二级项全部平铺露出——玩家不点任何东西也能看到这站有什么。 */
 .top{position:sticky;top:0;z-index:20;background:rgba(14,16,19,.94);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line)}
-.top .in{max-width:1180px;margin:0 auto;padding:10px var(--s4);display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
-.brand{font-size:16px;font-weight:600;color:var(--gold);white-space:nowrap}
+.top .in{max-width:1180px;margin:0 auto;padding:8px var(--s4);display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
+.brand{font-size:16px;font-weight:600;color:var(--gold);white-space:nowrap;text-decoration:none}
 .brand span{color:var(--txt)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap}
-nav.main a{padding:6px 10px;border-radius:var(--r-ctl);color:var(--txt-dim);font-size:13px}
-nav.main a:hover{background:var(--panel-2);color:var(--txt);text-decoration:none}
-nav.main a.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
+.brand:hover{text-decoration:none;color:var(--gold)}
 .chip{margin-left:auto;font:12px var(--font-mono);color:var(--gold);border:1px solid var(--line);
   border-radius:999px;padding:3px 10px;background:var(--panel);white-space:nowrap}
-
-/* 分组下拉导航 */
-nav.main .nd{position:relative}
-nav.main .ndb{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border:0;background:none;cursor:pointer;
-  border-radius:var(--r-ctl);color:var(--txt-dim);font:13px var(--font-cn);font-family:var(--font-cn)}
-nav.main .ndb:hover{background:var(--panel-2);color:var(--txt)}
-nav.main .ndb.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
-nav.main .ndb .cr{font-size:9px;color:var(--lead);transition:transform .12s}
-nav.main .nd.open .ndb .cr{transform:rotate(180deg)}
-nav.main .ndp{display:none;position:absolute;left:0;top:calc(100% + 6px);min-width:246px;z-index:30;
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
-  box-shadow:0 10px 26px rgba(0,0,0,.5);padding:var(--s2)}
-nav.main .nd.open .ndp,nav.main .nd:focus-within .ndp{display:block}
-nav.main .ndp a{display:flex;flex-direction:column;align-items:stretch;gap:1px;padding:7px 9px;border-radius:var(--r-ctl);color:var(--txt)}
-nav.main .ndp a b{font-size:13px;font-weight:600}
-nav.main .ndp a span{font-size:11.5px;color:var(--txt-dim);line-height:1.45}
-nav.main .ndp a:hover{background:var(--panel-2);text-decoration:none}
-nav.main .ndp a.on{color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
-@media (hover:hover) and (min-width:601px){
-  nav.main .nd:hover .ndp{display:block}
-}
+nav.main{border-top:1px solid var(--line);background:rgba(23,26,31,.5)}
+nav.main .in{max-width:1180px;margin:0 auto;padding:0 var(--s4);display:flex;align-items:center;
+  gap:2px var(--s3);flex-wrap:wrap}
+nav.main a.nl{display:inline-flex;align-items:center;min-height:38px;padding:0 9px;border-radius:var(--r-ctl);
+  color:var(--txt-dim);font-size:12.5px;text-decoration:none}
+nav.main a.nl:hover{background:var(--panel-2);color:var(--txt);text-decoration:none}
+nav.main a.nl.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
+.ngrp{display:inline-flex;align-items:center;gap:2px;position:relative;padding-left:11px}
+.ngrp::before{content:"";position:absolute;left:0;top:50%;margin-top:-8px;width:1px;height:16px;background:var(--line)}
+.ngt{font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--lead);white-space:nowrap;padding-right:3px}
+.ngrp.hit .ngt{color:var(--gold)}
 
 /* 横幅 */
 .banner{border:1px solid var(--warn);background:rgba(217,161,59,.1);color:#f0c67e;
@@ -405,11 +394,18 @@ ul.list{margin:var(--s2) 0 0 18px;color:var(--txt-dim);font-size:12.5px}
   .term{display:inline-flex;align-items:center;min-height:44px;padding:12px 14px;font-size:14px;line-height:1.2}
   button.info{min-height:44px;min-width:44px;margin-left:8px;font-size:12px}
   button.ghost, button.ghost.mini{min-height:44px;min-width:44px;padding:10px 14px;font-size:13px}
-  .top nav a{min-height:44px;display:inline-flex;align-items:center}
-  .top nav .ndb{min-height:44px}
-  /* 移动端下拉不靠右对齐（会顶出视口），改成贴着顶栏铺满一行 */
-  .top nav .nd{position:static}
-  .top nav .ndp{position:absolute;left:var(--s4);right:var(--s4);top:calc(100% + 2px);width:auto;min-width:0}
+  /* 手机上二级项排成一条可横滑的导航带：不折叠、不点开菜单，滑一下全看得到；
+     整条带渐隐提示右边还有内容，当前页加载后自动滚到中间。 */
+  .top .in{padding:2px var(--s3)}
+  .brand{display:inline-flex;align-items:center;min-height:44px}
+  nav.main{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
+  nav.main .in{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;padding:0 var(--s3);gap:2px var(--s2);scrollbar-width:none}
+  nav.main .in::-webkit-scrollbar{display:none}
+  nav.main a.nl{min-height:44px;font-size:13.5px;padding:0 12px;flex:0 0 auto;scroll-snap-align:center}
+  .ngt{font-size:12px;padding-right:6px}
+  .ngrp{padding-left:10px;flex:0 0 auto}
   .src a{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
   .field input[type=search], .thead input[type=search]{min-height:44px}
   .field select, .field input{min-height:44px}

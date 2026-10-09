@@ -75,11 +75,11 @@ describe('ZoneMap', () => {
     expect(w.find('.zmark').attributes('style')).toContain('left: 32.7%');
     expect(w.text()).toContain('本地转存');
   });
-  it('上游没切图时给 mapId 与说明，不放假图', () => {
+  it('客户端没切图时给地图编号与说明，不放假图', () => {
     const w = mount(ZoneMap, { props: { mapFile: '', mapId: 2548, alt: '河林' } });
     expect(w.find('img').exists()).toBe(false);
     expect(w.classes()).toContain('none');
-    expect(w.text()).toContain('mapId 2548');
+    expect(w.text()).toContain('地图编号 2548');
   });
   it('图坏了也退回文字态', async () => {
     const w = mount(ZoneMap, { props: { mapFile: 'img/art/maps/9999.webp', mapId: 9999, alt: 'x' } });
@@ -99,12 +99,12 @@ describe('ZoneCard', () => {
     expect(w.text()).toContain('8 个稀有');
     expect(w.text()).toContain('客户端里还没有飞行路线');
   });
-  it('这轮没采到东西的区域不可点，也不发 open', async () => {
+  it('这一版没有数据的区域不可点，也不发 open', async () => {
     const w = mount(ZoneCard, { props: { z: Object.assign({}, z, { rareCount: 0, bookCount: 0 }) } });
     expect(w.classes()).not.toContain('lk');
     await w.trigger('click');
     expect(w.emitted('open')).toBeFalsy();
-    expect(w.text()).toContain('本轮没采到东西');
+    expect(w.text()).toContain('这一版还没有数据');
   });
 });
 

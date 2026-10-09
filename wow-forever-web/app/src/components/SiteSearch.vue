@@ -30,7 +30,7 @@
             <em v-if="r.it[4] && r.it[4] !== 'L0'" class="lv" :class="r.it[4]">{{ PILL_NAME[r.it[4]] }}</em>
           </component>
         </div>
-        <p class="gsl dim mono">命中 {{ hitTotal }} 条，这里先列 {{ shownCount }} 条</p>
+        <p v-if="groups.length" class="gsl dim mono">命中 {{ hitTotal }} 条，这里先列 {{ shownCount }} 条</p>
       </template>
     </div>
   </div>

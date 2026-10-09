@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""由 git 历史生成 src/data/changelog.json —— 本站数据变更日志。
+"""由 git 历史生成 docs/CHANGELOG-DEV.md —— 面向维护者的开发日志（不进网页）。
 
-为什么要它：首页要"有东西在更新"，但红线不做新闻流与转载评论。最诚实的做法是报我们自己做了什么：
-每一条都对应仓库里一个真实提交，改了哪个板块、哪一天，全部可回溯，不写一句没法验证的话。
+为什么要单独一份：网页上那条「本站更新」是写给玩家看的（src/data/releases.json，人工随改动一起写，
+一条对应一个真实提交）。提交标题里全是脚本名、文件名和 fix/feat 这类话，不能原样进页面，
+所以 git 自动生成的这份只给维护者看，放在 docs/ 里，构建卡口也不检查它。
 
-界面不显示提交哈希与文件路径（那是面向开发的东西），只显示日期 + 提交标题 + 板块标签；
-板块标签由路径映射成中文，映射不到的按"其他"处理，不猜。
+要改网页上的更新说明，改 src/data/releases.json；这份文件不用管。
 
 用法：
     python3 tools/build-changelog.py            # 重新生成
@@ -22,7 +22,7 @@ import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # wow-forever-web
 REPO = os.path.dirname(ROOT)                                           # monorepo 根
-OUT = os.path.join(ROOT, "src", "data", "changelog.json")
+OUT = os.path.join(ROOT, "docs", "CHANGELOG-DEV.md")
 
 # 路径前缀 → 界面显示的板块名（顺序即优先级，命中第一个就用）
 SCOPE = [
@@ -31,7 +31,7 @@ SCOPE = [
     ("src/data/dungeons.json", "副本数据"), ("src/data/races.json", "种族数据"),
     ("src/data/glossary.json", "术语词条"), ("src/data/abilities.json", "技能四态"),
     ("src/data/changes.json", "改动清单"), ("src/data/timeline.json", "上线时间表"),
-    ("src/data/changelog.json", "变更日志"), ("src/data/scale.json", "规模快照"),
+    ("src/data/releases.json", "本站更新"), ("src/data/scale.json", "规模快照"),
     ("src/data/meta.json", "口径与未决项"), ("src/data/upstream", "上游快照"),
     ("src/img/icons", "图标"), ("src/img/art", "客户端原画"),
     ("src/js", "界面逻辑"), ("src/css", "样式"), ("src/", "页面"),
@@ -45,7 +45,7 @@ NON_CONTENT = set(["文档", "截图证据", "交接台账", "协作规则"])
 # 这里把它们换成板块中文名；认不出的 *.json 归"数据文件"、*.py / *.js 归"脚本"。
 GLOSS = [
     (r"scale\.json", "规模快照"), (r"changes\.json", "改动清单"), (r"world\.json", "世界数据"),
-    (r"professions\.json", "专业数据"), (r"changelog\.json", "变更日志"), (r"icons?\.json", "图标映射"),
+    (r"professions\.json", "专业数据"), (r"icons?\.json", "图标映射"),
     (r"dungeons\.json", "副本数据"), (r"races\.json", "种族数据"), (r"glossary\.json", "术语词条"),
     (r"abilities\.json", "技能四态"), (r"timeline\.json", "上线时间表"), (r"meta\.json", "口径文件"),
     (r"talent-text/?\*", "天赋文本"), (r"talents/\*", "天赋数据"), (r"src/data/upstream", "上游快照"),
@@ -117,23 +117,22 @@ def main():
         tags = tags_for(paths)
         if not [t for t in tags if t not in NON_CONTENT]:
             continue          # 只改文档/台账/截图的提交不进"数据变更日志"
-        entries.append({"date": date, "subject": gloss(subject), "tags": tags, "files": len(paths)})
+        entries.append({"date": date, "hash": head[1], "raw": subject, "subject": gloss(subject),
+                       "tags": tags, "files": len(paths)})
     entries = entries[:a.max]
 
-    payload = {
-        "meta": {
-            "generatedAt": datetime.date.today().isoformat(),
-            "method": "tools/build-changelog.py 读 git 历史生成，一条对应一个真实提交",
-            "note": "这是本站自己做了什么，不是官方新闻，也不含任何转载与评价。"
-                    "界面只显示日期、标题与板块，不显示提交号与文件路径。",
-            "count": len(entries),
-            "since": a.since
-        },
-        "entries": entries
-    }
-    io.open(OUT, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=1) + "\n")
-    print("变更日志 %d 条 → src/data/changelog.json（最早 %s，最新 %s）" % (
-        len(entries), entries[-1]["date"] if entries else "—", entries[0]["date"] if entries else "—"))
+    lines = [u"# 开发日志（自动生成，不进网页）", u"",
+             u"由 `tools/build-changelog.py` 读 git 历史生成。玩家看的那份是 "
+             u"`src/data/releases.json`（人工写、卡口把关），不是这份。", u"",
+             u"生成时间：%s ｜ 起于 %s ｜ 共 %d 条" % (datetime.date.today().isoformat(), a.since, len(entries)),
+             u"", u"| 日期 | 提交 | 标题 | 动到的板块 | 文件数 |", u"| --- | --- | --- | --- | --- |"]
+    for e in entries:
+        lines.append(u"| %s | `%s` | %s | %s | %d |" % (
+            e["date"], e["hash"], e["raw"].replace("|", "\|"), u"、".join(e["tags"]) or u"—", e["files"]))
+    io.open(OUT, "w", encoding="utf-8").write(u"\n".join(lines) + u"\n")
+    print(u"开发日志 %d 条 → docs/CHANGELOG-DEV.md（最早 %s，最新 %s）" % (
+        len(entries), entries[-1]["date"] if entries else u"—", entries[0]["date"] if entries else u"—"))
+    print(u"提醒：网页上的「本站更新」读的是 src/data/releases.json，需要人工同步一条。")
 
 
 if __name__ == "__main__":

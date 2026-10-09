@@ -67,7 +67,7 @@
 | 缓存 | https://wowforever.wclbox.com/xiyou | 66 |
 | 缓存 | https://wowforever.wclbox.com/shuji | 45 |
 | 缓存 | https://wowforever.wclbox.com/gaidong | 964 |
-| 已抓取 | https://wowforever.wclbox.com/_shuju/r-1791485113190/changes.json | 964 |
+| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791485113190/changes.json | 964 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）
 

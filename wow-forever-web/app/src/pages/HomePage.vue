@@ -1,7 +1,7 @@
 <template>
   <div v-if="err" class="card">
     <h2>数据没加载出来</h2>
-    <p class="dim">{{ err }}</p>
+    <p class="dim">刷新一下试试；如果一直这样，请把这一页的地址发给我们。</p>
     <button @click="boot">重试</button>
   </div>
 
@@ -18,7 +18,7 @@
           </span>
           <span class="dim mono">全站 {{ cov.total }} 条（含天赋节点）</span>
         </div>
-        <p class="note">数据基线：{{ meta.dataBaseline.build }}，核对于 {{ meta.dataBaseline.checkedAt }}；规模快照 {{ gen }}。本站基于测试服资料整理，正式服上线后需整体重核。</p>
+        <p class="note">数据基线：{{ meta.dataBaseline.build }}，核对于 {{ meta.dataBaseline.checkedAt }}；本站统计 {{ gen }}。本站基于测试服资料整理，正式服上线后需整体重核。</p>
       </div>
       <aside class="heros">
         <div class="cd">
@@ -61,7 +61,7 @@
       <div class="card">
         <h2>最新动态</h2>
         <p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。</p>
-        <h3>官方口径里的时间点</h3>
+        <h3>官方公告里的时间点</h3>
         <div v-for="x in recent" :key="x.id" class="flowrow">
           <b class="mono">{{ x.date }}</b>
           <div><b>{{ x.title }}</b> <LevelPill :level="x.level" /><p class="dim">{{ x.what }}</p></div>
@@ -82,10 +82,10 @@
         <template v-if="cl.length">
           <h3>本站最近改了什么</h3>
           <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
-            <b class="mono">{{ e.date }}</b><div><b>{{ e.subject }}</b></div>
+            <b class="mono">{{ e.date }}</b><div><b>{{ e.title }}</b></div>
           </div>
         </template>
-        <a class="cta" :href="legacy('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站变更）→</a>
+        <a class="cta" :href="legacy('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
         <a class="cta" :href="legacy('rank.html')">资料完整度排行全表 →</a>
       </div>
 
@@ -114,11 +114,11 @@ import LevelPill from '../components/LevelPill.vue';
 const legacy = legacyUrl;
 const CHIPS = [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
   ['provenance.html', '溯源与覆盖率'],
-  ['systems.html', '系统口径'], ['skills.html', '技能书'], ['dungeons.html#todo', '我们没采的']];
+  ['systems.html', '系统规则'], ['skills.html', '技能书'], ['dungeons.html#todo', '还没有数据的']];
 const NOT_DOING = [
   ['DPS 与强度排行', '个人主体 + 零 UGC 的类目下不做排行；而且无限服的战斗数据我们没实测过。'],
   ['宏与循环提示', '属攻略性质，本站红线不写打法。'],
-  ['掉落概率', '上游给的是"谁掉什么"，不是百分比；暴雪说过无限服重做过掉落。'],
+  ['掉落概率', '资料里只有"谁掉什么"，没有百分比；官方说过无限服重做过掉落。'],
   ['角色查询 / 战斗日志', '要登录态与个人数据，类目与合规都不允许。'],
   ['新闻流与评论区', '只做资料与工具，不做内容 feed，也不开 UGC。']
 ];
@@ -135,14 +135,14 @@ const { left } = useCountdown();
 function boot() {
   err.value = '';
   loadAll(['data/classes.json', 'data/meta.json', 'data/scale.json', 'data/timeline.json',
-    'data/changelog.json'])
+    'data/releases.json'])
     .then(([c, m, sc, t, ch]) => {
       classes.value = c.classes || [];
       meta.value = m;
       S.value = sc.scale;
       gen.value = (sc.meta || {}).generatedAt || '';
       tl.value = t.items || [];
-      cl.value = (ch && ch.entries) || [];
+      cl.value = (ch && ch.items) || [];
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
@@ -169,7 +169,7 @@ const MODS = computed(() => {
     { href: 'world.html', lv: 'L0', t: '区域与稀有精英',
       p: '每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。',
       n: [[s.zones, '区域'], [s.rares, '已定位稀有'], [s.books, '本书有坐标']],
-      note: '刷新计时游戏里没字段，不猜' },
+      note: '刷新计时游戏里没有这个数据，不猜' },
     { href: 'dungeons.html', lv: 'L2', t: '副本手册',
       p: '按十级一档排的 38 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。',
       n: [[s.dungeons, '座'], [s.bosses, '个首领'], [s.drops, '条掉落归属']],

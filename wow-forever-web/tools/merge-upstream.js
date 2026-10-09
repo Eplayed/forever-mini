@@ -120,7 +120,7 @@ CLS.forEach((c) => {
   });
   fs.writeFileSync(path.join(DATA, 'talents', c + '.json'), JSON.stringify({
     classId: c, classNameCn: CN[c], structureStatus: 'imported-unverified',
-    dataVersion: 'forever-beta 双源对齐 · 上游自述采集 2026-09-13',
+    dataVersion: '两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13',
     grid: { rows: 7, cols: 4, note: '两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实' },
     rules: { totalPoints: 51, levelCap: 60, tierUnlockCost: null },
     trees,

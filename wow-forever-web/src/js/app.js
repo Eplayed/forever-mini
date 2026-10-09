@@ -1,35 +1,30 @@
 /* 页面渲染与交互 */
 (function () {
   var D = window.WowData, E = window.TalentEngine;
-  // 分组导航：与参考站同构（天赋/职业/种族/世界/工具/溯源），但只挂我们自己有数据的页。
-  // 参考站的「攻略」「新动态」不挂：本站红线不做攻略正文与新闻流。
+  /* 两级常驻导航：一级是分组标签（不可点），二级项全部平铺露出，说明文字收进 title 悬停提示。
+     参考站的「攻略」「新动态」不挂：本站红线不做攻略正文与新闻流。 */
   var NAV = [
-    { t: '首页', href: 'index.html', d: '数据覆盖率与入口' },
+    { t: '首页', href: 'index.html', d: '数据覆盖率与全部入口' },
     { t: '天赋', items: [
-      { href: 'talent.html', t: '天赋计算器', d: '9 职业 · 树结构与加点' }] },
+      { href: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
     { t: '职业', items: [
-      { href: 'chooser.html', t: '选职业问答', d: '7 题玩法问答（非强度排行）' },
+      { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
       { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' }] },
     { t: '种族', items: [
-      { href: 'races.html', t: '种族与职业组合', d: '10 个种族行 · 可选职业矩阵' },
-      { href: 'races.html#traits', t: '种族特长', d: '40 条官方中文原名与整句' }] },
+      { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
+      { href: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
     { t: '世界', items: [
-      { href: 'world.html', t: '区域与稀有', d: '43 + 4 个区域 · 36 个稀有刷新点' },
-      { href: 'dungeons.html', t: '副本手册', d: '35 座地下城 + 3 团本，按十级一档分' },
-      { href: 'systems.html', t: '系统与新区域', d: '规则、区域、装备名的官方中文口径' }] },
-    { t: '专业', href: 'professions.html', d: '13 个专业 · 配方与采集点' },
+      { href: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
+      { href: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
+      { href: 'systems.html', t: '系统规则', d: '规则、区域、装备名的官方中文说法' }] },
+    { t: '专业', items: [
+      { href: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
     { t: '工具', items: [
-      { href: 'glossary.html', t: '术语速查', d: '官方中文词条，点一下即复制' },
-      { href: 'timeline.html', t: '上线时间表', d: '11 个时间点带官方原文' },
-      { href: 'updates.html', t: '最新动态', d: '官方时间点 + 客户端改动 + 本站变更（仅网页）' },
-      { href: 'rank.html', t: '资料完整度排行', d: '本站覆盖排序，不是强度排行（仅网页）' },
-      { href: 'provenance.html', t: '溯源与覆盖率', d: '哪些已核实、哪些只是线索' }] }
-  ];
-  // 结构上有位置、数据还没采到的：写清楚为什么空着，不做假页面
-  var NAV_TODO = [
-    { t: '交互世界地图', d: '底图瓦片是上游自己切的，本站不搬图，只做区域清单与坐标', href: 'world.html#todo' },
-    { t: 'PvP', d: '官方中文未公布无限服 PvP 规则', href: 'dungeons.html#todo' },
-    { t: '坐骑 / 套装 / 隐藏内容', d: '只有第三方线索，禁止搬数据', href: 'dungeons.html#todo' }
+      { href: 'glossary.html', t: '速查', d: '中英术语，点一下即复制' },
+      { href: 'timeline.html', t: '时间表', d: '11 个上线时间点带官方原文' },
+      { href: 'updates.html', t: '动态', d: '官方时间点 + 客户端改动（仅网页）' },
+      { href: 'rank.html', t: '排行', d: '本站资料完整度排序，不是强度（仅网页）' },
+      { href: 'provenance.html', t: '溯源', d: '哪些已核实、哪些只是线索' }] }
   ];
   var LS = 'wfs.build.';
   var page = document.body.getAttribute('data-page');
@@ -72,29 +67,6 @@
   function navKey(href) {
     var f = href.replace('.html', '').split('#')[0];
     return f === 'index' ? 'home' : f;
-  }
-  function bindNav() {
-    var groups = Array.prototype.slice.call(document.querySelectorAll('.nd'));
-    function closeAll(except) {
-      groups.forEach(function (g) {
-        if (g === except) return;
-        g.classList.remove('open');
-        var b = g.querySelector('.ndb'); if (b) b.setAttribute('aria-expanded', 'false');
-      });
-    }
-    groups.forEach(function (g) {
-      var b = g.querySelector('.ndb');
-      b.onclick = function (e) {
-        e.stopPropagation();
-        var open = g.classList.toggle('open');
-        b.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (open) closeAll(g);
-      };
-    });
-    document.addEventListener('click', function () { closeAll(null); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' || e.key === 'Esc') closeAll(null);
-    });
   }
   /* 图标格：有本地转存的官方图标就显示图，没有就显示自绘占位块。
      占位块垫在图后面，图加载失败（onerror 换类名）时自动露出来，不留空白。 */
@@ -151,29 +123,33 @@
     return out;
   }
   function shell() {
-    var left = launchLeft(), d = left.d, h = left.h;
-    el('top').innerHTML = '<div class="in"><div class="brand">无限<span>资料站</span></div><nav class="main" aria-label="主导航">' +
-      NAV.map(function (g) {
-        if (g.href) {
-          return '<a href="' + g.href + '" class="' + (page === navKey(g.href) ? 'on' : '') + '">' + g.t + '</a>';
-        }
+    var left = launchLeft();
+    // 一级是分组标签（只说明归属，不可点），二级项全部平铺：玩家不用点开菜单就知道这站有什么
+    function navLink(it) {
+      return '<a class="nl' + (page === navKey(it.href) ? ' on' : '') + '" href="' + it.href +
+        '" title="' + D.esc(it.d) + '">' + it.t + '</a>';
+    }
+    el('top').innerHTML = '<div class="in"><a class="brand" href="index.html">无限<span>资料站</span></a>' +
+      '<div class="chip mono" id="lchip">距上线 ' + left.d + ' 天 ' + pad2(left.h) + ':' +
+      pad2(left.m) + ':' + pad2(left.s) + '</div></div>' +
+      '<nav class="main" aria-label="主导航"><div class="in">' + NAV.map(function (g) {
+        if (g.href) return navLink(g);
         var hit = g.items.some(function (it) { return page === navKey(it.href); });
-        return '<div class="nd"><button type="button" class="ndb' + (hit ? ' on' : '') +
-          '" aria-haspopup="true" aria-expanded="false">' + g.t + '<span class="cr" aria-hidden="true">▾</span></button>' +
-          '<div class="ndp" role="menu">' + g.items.map(function (it) {
-            return '<a role="menuitem" href="' + it.href + '"' + (page === navKey(it.href) ? ' class="on"' : '') +
-              '><b>' + it.t + '</b><span>' + it.d + '</span></a>';
-          }).join('') + '</div></div>';
-      }).join('') + '</nav><div class="chip mono" id="lchip">距上线 ' + d + ' 天 ' + pad2(h) + ':' +
-      pad2(left.m) + ':' + pad2(left.s) + '</div></div>';
-    bindNav();
+        return '<span class="ngrp' + (hit ? ' hit' : '') + '"><b class="ngt">' + g.t + '</b>' +
+          g.items.map(navLink).join('') + '</span>';
+      }).join('') + '</div></nav>';
+    // 手机上是横滑导航带：把当前页那一项先滚到中间，免得进来只看到别的分组
+    var cur = el('top').querySelector('nav.main a.nl.on');
+    if (cur && cur.scrollIntoView && window.innerWidth <= 600) {
+      cur.scrollIntoView({ inline: 'center', block: 'nearest' });
+    }
     Promise.all([D.load('data/meta.json'), D.load('data/scale.json')])
       .then(function (r) {
         var meta = r[0], sc = r[1].scale, cov = sc.pubCoverage;
         el('foot').innerHTML = '<div class="in"><span>' + D.esc(meta.disclaimer) + '</span>' +
-          '<span>数据口径：<span class="mono">' + D.esc(meta.dataBaseline.build) + '</span>，核对于 ' +
+          '<span>数据来源版本：<span class="mono">' + D.esc(meta.dataBaseline.build) + '</span>，核对于 ' +
           D.esc(meta.dataBaseline.checkedAt) + '</span>' +
-          '<span>词条覆盖率（不含天赋节点）L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 +
+          '<span>资料覆盖率（不含天赋）L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 +
           ' / L3 ' + cov.L3 + '，共 ' + sc.pubTotal + ' 条</span></div>';
       }).catch(function () { });
   }
@@ -341,7 +317,7 @@
   var NOT_DOING = [
     ['DPS 与强度排行', '个人主体 + 零 UGC 的类目下不做排行；而且无限服的战斗数据我们没实测过。'],
     ['宏与循环提示', '属攻略性质，本站红线不写打法。'],
-    ['掉落概率', '上游给的是"谁掉什么"，不是百分比；暴雪说过无限服重做过掉落。'],
+    ['掉落概率', '资料里只有"谁掉什么"，没有百分比；官方说过无限服重做过掉落。'],
     ['角色查询 / 战斗日志', '要登录态与个人数据，类目与合规都不允许。'],
     ['新闻流与评论区', '只做资料与工具，不做内容 feed，也不开 UGC。']
   ];
@@ -349,11 +325,11 @@
     Promise.all([
       D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'),
       D.load('data/meta.json'), D.load('data/scale.json'), D.load('data/timeline.json'),
-      D.load('data/changelog.json').catch(function () { return { entries: [] }; }),
+      D.load('data/releases.json').catch(function () { return { items: [] }; }),
       D.load('data/art.json').catch(function () { return {}; })
     ]).then(function (r) {
       var classes = r[0].classes, gl = r[1].items, meta = r[3], S = r[4].scale, tl = r[5].items || [];
-      var cl = (r[6] || {}).entries || [];
+      var cl = (r[6] || {}).items || [];
       var rankTop = (S.classRank || []).slice(0, 3);
       // 首页的覆盖率用 build-data 算出来的全站口径（含天赋节点与世界线），
       // 页脚那条"不含天赋节点"是另一个口径，两边都写明各自范围，别让数字看着互相打脸。
@@ -385,7 +361,7 @@
         { href: 'world.html', t: '区域与稀有精英', lv: 'L0',
           p: '每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。',
           n: [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']],
-          note: '刷新计时游戏里没字段，不猜' },
+          note: '刷新计时游戏里没有这个数据，不猜' },
         { href: 'dungeons.html', t: '副本手册', lv: 'L2',
           p: '按十级一档排的 38 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。',
           n: [[S.dungeons, '座'], [S.bosses, '个首领'], [S.drops, '条掉落归属']],
@@ -424,7 +400,7 @@
           return '<span class="pill ' + k + '">' + D.pillName(k) + ' <b>' + (cov[k] || 0) + '</b></span>';
         }).join('') + '<span class="dim mono">全站 ' + cov.total + ' 条（含天赋节点）</span></div>' +
         '<p class="note">数据基线：' + D.esc(meta.dataBaseline.build) + '，核对于 ' +
-        D.esc(meta.dataBaseline.checkedAt) + '；规模快照 ' + D.esc(r[4].meta.generatedAt) +
+        D.esc(meta.dataBaseline.checkedAt) + '；本站统计 ' + D.esc(r[4].meta.generatedAt) +
         '。本站基于测试服资料整理，正式服上线后需整体重核。</p></div>' +
         '<aside class="heros"><div class="cd"><div class="cdrow"><b class="mono" id="cdD">' + left.d +
         '</b><span>天</span><i class="mono" id="cdT">' + pad2(left.h) + ':' + pad2(left.m) + ':' +
@@ -435,8 +411,8 @@
         '<section class="card"><h2>挑一个职业，直接开一棵树</h2>' + strip + '</section>' +
         '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
         [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
-          ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统口径'], ['skills.html', '技能书'],
-          ['dungeons.html#todo', '我们没采的']].map(function (x) {
+          ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统规则'], ['skills.html', '技能书'],
+          ['dungeons.html#todo', '还没有数据的']].map(function (x) {
             return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
           }).join('') + '</div>' +
         '<div class="modgrid">' + MODS.map(mod).join('') + '</div>' +
@@ -444,7 +420,7 @@
         '<div class="card"><h2>最新动态</h2>' +
         '<p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。' +
         '不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。</p>' +
-        '<h3>官方口径里的时间点</h3>' +
+        '<h3>官方公告里的时间点</h3>' +
         recent.slice(0, 3).map(function (x) {
           return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
             '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
@@ -463,10 +439,10 @@
         }).join('') + '</div>' +
         (cl.length ? '<h3>本站最近改了什么</h3>' + cl.slice(0, 3).map(function (e) {
           return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b>' +
-            '<div><b>' + D.esc(e.subject) + '</b></div></div>';
+            '<div><b>' + D.esc(e.title) + '</b></div></div>';
         }).join('') : '') +
         '<a class="cta" href="updates.html">全部动态（' + S.timeline + ' 个时间点 · ' + S.changes +
-        ' 条改动 · ' + cl.length + ' 条本站变更）→</a>' +
+        ' 条改动 · ' + cl.length + ' 条本站更新）→</a>' +
         '<a class="cta" href="rank.html">资料完整度排行全表 →</a></div>' +
         '<div class="card"><h2>这一站刻意不做的</h2>' +
         '<p class="note">不是漏了，是决定不做。理由逐条写在这。</p>' +
@@ -540,9 +516,9 @@
   function compareHtml(t) {
     var nodes = (t && t.nodes) || {};
     var ids = Object.keys(nodes).filter(function (id) { return nodes[id].changeNote || (nodes[id].ranks || []).length; });
-    if (!ids.length) return '<p class="dim">上游没有给出这些条目的对照文本。</p>';
+    if (!ids.length) return '<p class="dim">这些条目没有可对照的官方文本。</p>';
     return '<h3>与经典旧世逐条对照 · ' + ids.length + ' 条</h3><p class="note">' + CMP_TIP +
-      '，只列上游写了差异的条目；措辞照录，本站不改写。</p>' +
+      '，只列官方原文里写了差异的条目；措辞照录，本站不改写。</p>' +
       ids.map(function (id) {
         var e = nodes[id];
         return '<div class="cmprow"><b>' + D.esc(e.name || '') + '</b>' +
@@ -615,7 +591,7 @@
       '<span class="dim mono" id="sel"></span></div>' +
       '<div class="tlegend"><span><i class="lg added"></i>新增</span><span><i class="lg modified"></i>改动</span>' +
       '<span><i class="lg moved"></i>换层</span><span><i class="lg unchanged"></i>未变</span>' +
-      '<span class="dim">标记按客户端解包与经典旧世对照给出；没标 = 上游没这条</span></div>' +
+      '<span class="dim">标记来自客户端解包与经典旧世的对照；没标记 = 这一条没有对照结果</span></div>' +
       '<div class="ttabs">' + trees.map(function (t, i) {
         return '<button data-tab="' + i + '" class="' + (i === tstate.active ? 'on' : '') + '">' + D.esc(t.nameCn) + '</button>';
       }).join('') + '</div>' + body +
@@ -1066,7 +1042,7 @@
     if (x.nameCnConflict) g.push('中文名定稿：官方与转载两种叫法并存');
     if (!x.levelRange) g.push('可进入的等级区间');
     if (!(x.bosses || []).length) g.push('首领名单：客户端解包里还没有这座本的数据');
-    else if (!(x.drops || []).length) g.push('掉落归属：上游开放数据库里还没有它的首领掉落');
+    else if (!(x.drops || []).length) g.push('掉落归属：公开数据库里还没有它的首领掉落');
     else g.push('掉落的实装情况与概率（本站不写百分比，等正式服实测）');
     if (!(x.route || []).length) g.push('跑图路线与跳怪点');
     if (x.kind === 'raid') g.push('开放时间、团队规模——仅有第三方说法');
@@ -1090,7 +1066,7 @@
   };
   var WORLD_TODO = [
     ['世界地图', '跑图坐标在中文侧完全没有：官方公告不含坐标，第三方库的数据本站禁止搬，只能等实测或官方地图工具。'],
-    ['PvP', '无限服的 PvP 规则、战场与积分口径官方还没给中文稿；且强度排行是本站红线，不做。'],
+    ['PvP', '无限服的 PvP 规则、战场与积分官方还没给中文稿；且强度排行是本站红线，不做。'],
     ['坐骑', '只有第三方"新物品"清单的线索，没有官方中文名与原文整句。'],
     ['套装', '套装件数与效果在官方中文稿里还没出现，硬写等于编造。'],
     ['隐藏内容', '属攻略性质，本站红线不做攻略正文与机制清单。']
@@ -1099,15 +1075,15 @@
     var p = x.provenance || [];
     var off = p.some(function (s) { return (s.type || '').indexOf('official') === 0; });
     if (off || x.level !== 'L0') return DUN_STATE[x.level] || '';
-    return '名单与等级区间取自客户端解包（第三方资料站转述），未逐条进游戏核对';
+    return '客户端解包名单 · 未实测';
   }
   function dunLoot(x) {
     var bosses = x.bosses || [], drops = x.drops || [];
-    if (!bosses.length) return '<p class="dim">客户端解包还没给出这座本的首领名单——无限新增副本里这种的掉落表上游也还没有，不猜。</p>';
+    if (!bosses.length) return '<p class="dim">客户端解包还没给出这座本的首领名单——无限新增副本里这种的掉落表也还没有可信来源，不猜。</p>';
     return '<ul class="bosslist">' + bosses.map(function (b) {
       var mine = drops.filter(function (y) { return y.bossId === b.id; });
       return '<li><div class="bh"><b>' + D.esc(b.nameCn) + '</b>' +
-        (mine.length ? '<span class="dim">' + mine.length + ' 件掉落</span>' : '<span class="dim">掉落未列</span>') + '</div>' +
+        (mine.length ? '<span class="dim">' + mine.length + ' 件掉落</span>' : '<span class="dim">掉落待补</span>') + '</div>' +
         (mine.length ? '<div class="loot">' + mine.map(function (y) {
           return '<span class="loot-i">' + iconCell(y.iconKey, y.itemId, y.nameCn, 1) +
             D.esc(y.nameCn) + '<span class="dim mono">#' + D.esc(y.itemId) + '</span>' + D.pill('L2') + '</span>';
@@ -1140,10 +1116,10 @@
           return '<div class="dcard2">' + banner +
             '<div class="dmeta">' + D.pill(x.level) +
             '<span>' + ((x.bosses || []).length || '待补') + ' 个首领</span>' +
-            '<span>' + ((x.drops || []).length || '未列') + ' 件掉落</span>' +
+            '<span>' + ((x.drops || []).length ? (x.drops || []).length + ' 件掉落' : '掉落待补') + '</span>' +
             '<span class="dim">' + dunStateText(x) + (x.nameCn ? '' : '；中文定名未公布') + '</span></div>' +
             (x.levelRangeAlt ? '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) +
-              '」（官方公告），上游卡片写「' + D.esc(x.levelRangeAlt) + '」，待定稿</div>' : '') +
+              '」（官方公告），另一份资料写「' + D.esc(x.levelRangeAlt) + '」，待定稿</div>' : '') +
             (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
               D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
             '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
@@ -1170,10 +1146,10 @@
         set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
           (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
           (d.raids || []).length + ' 座团本，按十级一档分。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
-          '名单与等级区间取自客户端解包（第三方资料站转述）；掉落是上游按经典旧世开放数据库推的，一律标待实测。</p></div>' +
+          '名单与等级区间取自客户端解包（由第三方资料站转述）；掉落是按经典旧世公开数据库推出来的，一律标待实测。</p></div>' +
         '<div class="banner">掉落数据本站<b>不写百分比</b>：这里只回答"谁掉了什么"，不回答"多大概率"。暴雪说过无限服重做过掉落，正式开放可能变化。</div>' +
         body +
-        '<div class="card" id="todo"><h2>「世界」里还没采集的</h2>' +
+        '<div class="card" id="todo"><h2>「世界」里还没有数据的</h2>' +
         '<p class="note">这几项在参考站都有独立页面，我们这里只有位置、没有数据。' +
         '原因逐条写清楚，不做空壳页糊人。</p>' +
         '<table><thead><tr><th>板块</th><th>为什么还空着</th></tr></thead><tbody>' +
@@ -1244,7 +1220,7 @@
         });
       }
       set('<div class="card"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制，「来源」看这条中文名出自哪句官方原文。' +
-        '英文原名官方没给的一律留空，所以有「待补」。</p>' +
+        '官方未公布的英文原名一律留空，所以有「待补」。</p>' +
         '<p class="note">按职业与种族分组。字母块是自绘占位，代表这一条没有可信图标来源。</p>' +
         '<div class="field"><input type="search" id="q" placeholder="输入中文或英文" value="' + D.esc(f.q) + '">' +
         '<select id="fk" aria-label="按类型筛选"><option value="">全部类型</option>' +
@@ -1284,12 +1260,12 @@
         var ti = r[0].talentImport;
         set('<div class="card"><h1 class="pt">溯源与覆盖率</h1><p class="dim">每条数据从哪来、什么时候核的、哪些刻意没拿，全部摊在这里。</p></div>' +
           '<div class="card"><h2>数据覆盖率</h2><p class="note">这条与页脚同一个数：' + sc.pubTotal +
-          ' 条对外词条（术语 + 副本 + 世界线），不含天赋节点。首页那条是全站口径 ' + sc.coverageTotal +
+          ' 条对外词条（术语 + 副本 + 世界线），不含天赋。首页那条是全站统计 ' + sc.coverageTotal +
           ' 条，多出来的 ' + (sc.coverageTotal - sc.pubTotal) + ' 条是九棵天赋树的节点。</p>' + D.covBar(cov) +
           '<div class="stats">' + Object.keys(names).map(function (k) {
             return '<div class="stat"><b>' + cov[k] + '</b>' + names[k] + '</div>';
           }).join('') + '</div>' +
-          '<p class="dim">口径：一条数据只有挂着官方来源且人工核过，才算 L0；粉丝站与转载一律最高 L2。</p></div>' +
+          '<p class="dim">判定标准：一条数据只有挂着官方来源且人工核过，才算已核实；粉丝站与转载最高只算待实测。</p></div>' +
           (ti ? '<div class="card"><h2>天赋数据来源与风险</h2>' +
             '<div class="grid g2"><div><h3>来源与方法</h3><p class="dim">' + D.esc(ti.method) + '<br>' +
             (ti.sources || []).map(function (s) { return '<span class="mono" style="font-size:11.5px">' + D.esc(s) + '</span>'; }).join('<br>') +
@@ -1318,7 +1294,7 @@
           '<div class="card"><h2>来源站点与用法边界</h2><table><thead><tr><th>站点</th><th>能给什么</th><th>怎么用</th></tr></thead><tbody>' +
           refs.map(function (x) { return '<tr><td class="mono">' + x[0] + '</td><td>' + x[1] + '</td><td>' + x[2] + '</td></tr>'; }).join('') +
           '</tbody></table></div>' +
-          '<div class="card"><h2>规则（构建时卡口）</h2><ul>' +
+          '<div class="card"><h2>发布前的检查规则</h2><ul>' +
           (r[0].rules || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul></div>');
       }).catch(fail);
   }
@@ -1333,7 +1309,7 @@
   function systems() {
     D.load('data/systems.json').then(function (s) {
       var q = document.body.getAttribute('data-page');
-      set('<div class="card"><h1 class="pt">系统与新区域</h1><p class="dim">规则、区域、种族与装备名的官方中文口径，逐条带来源。</p></div>' +
+      set('<div class="card"><h1 class="pt">系统与新区域</h1><p class="dim">规则、区域、种族与装备名的官方中文说法，逐条带来源。</p></div>' +
         s.groups.map(function (g) {
         return '<div class="grp">' + D.esc(g.label) + ' · ' + g.items.length + '</div>' +
           g.items.map(function (x) {
@@ -1427,7 +1403,7 @@
             '<div class="rdt"><h2>' + raceName(x) +
             (x.id.indexOf('skyborne') === 0 ? ' <span class="tag new">无限新增</span>' : '') + '</h2>' +
             '<p class="dim">' + FAC[x.faction] + ' · 可选 ' + x.classes.length + ' 个职业 · ' + tl.length +
-            ' 条种族特长' + (x.nameEn ? ' · <span class="mono">' + D.esc(x.nameEn) + '</span>' : ' · 官方没给英文原名') + '</p>' +
+            ' 条种族特长' + (x.nameEn ? ' · <span class="mono">' + D.esc(x.nameEn) + '</span>' : ' · 官方未公布英文原名') + '</p>' +
             '<div class="rdacts">' + D.pill(x.level) + srcBtn('rc-' + x.id, raceName(x), x.provenance) +
             '<button type="button" class="ghost mini" data-jump="traits">这族的特长去哪找</button></div></div></div>' +
             '<p class="lore">' + (x.lore || D.esc(R.meta.loreMissingNote || '官方本页没有这个种族的简介段。')) + '</p>' +
@@ -1546,7 +1522,7 @@
         }
 
         set('<div class="card"><h1 class="pt">种族与职业组合</h1>' +
-          '<p class="dim">数据全部来自国服官方中文公告，逐条带原文。英文原名官方没给的一律留空，不逐词硬造。' +
+          '<p class="dim">数据全部来自国服官方中文公告，逐条带原文。官方未公布的英文原名一律留空，不逐词硬造。' +
           '阵营是这一页的主线：左边联盟、右边部落，头像与徽标都是本地转存的客户端素材。</p>' +
           '<div class="stats">' +
           '<div class="stat"><b>' + R.races.length + '</b>种族行</div>' +
@@ -1651,7 +1627,7 @@
           '<span class="dim mono" id="pcnt"></span></div></div>';
         var body = '';
         if (sel.unparsed) {
-          body = '<div class="card"><div class="empty">' + D.esc(sel.note || '这一页上游不是表格结构，本轮没解析出条目。') +
+          body = '<div class="card"><div class="empty">' + D.esc(sel.note || '这一页目前只有叙述文字，还没拆出可列的条目。') +
             '</div></div>';
         }
         if (nodes.length) {
@@ -1765,8 +1741,8 @@
            因为那是数据不是样式，不该把坐标值硬编进 class。 */
         function mapBox(o, alt) {
           if (!o.mapFile) {
-            return '<div class="zmap none"><span class="dim">上游没切这张小地图</span>' +
-              (o.mapId ? '<b class="mono">mapId ' + D.esc(o.mapId) + '</b>' : '') + '</div>';
+            return '<div class="zmap none"><span class="dim">这一张客户端没有切出小地图</span>' +
+              (o.mapId ? '<b class="mono">地图编号 ' + D.esc(o.mapId) + '</b>' : '') + '</div>';
           }
           return '<div class="zmap"><img src="' + D.esc(o.mapFile) + '" alt="' + D.esc(alt) +
             '的区域小地图" loading="lazy" decoding="async" width="560" height="373" ' +
@@ -1807,16 +1783,16 @@
           });
           if (!out) out = '<div class="card"><div class="empty">没有匹配的区域，换个名字试试。</div></div>';
           return out + '<div class="card"><h2>客户端里的地图清单</h2>' +
-            '<p class="note">有 ' + ((w.meta.mapsWithoutImage || []).length) + ' 个区域上游没切小地图（' +
+            '<p class="note">有 ' + ((w.meta.mapsWithoutImage || []).length) + ' 个区域没有对应的小地图（' +
             D.esc(((w.meta.mapsWithoutImage || []).slice(0, 4)).join('、')) + ' 等），' +
-            '这些卡只显示 mapId 与坐标，不放假图。</p>' +
+            '这些卡只显示地图编号与坐标，不放假图。</p>' +
             '<p class="note">48 张地图是解包出来的全量：' +
             (w.maps || []).filter(function (m) { return m.group === '大陆'; }).length + ' 张大陆、' +
             (w.maps || []).filter(function (m) { return m.isNew; }).length + ' 张无限新增、' +
             (w.maps || []).filter(function (m) { return m.group === '副本'; }).length + ' 张副本、' +
             (w.maps || []).filter(function (m) { return m.group === '战场'; }).length + ' 张战场。' +
-            '本站不做可缩放交互地图——那是上游自己切的 1715 张瓦片，只把区域名、等级与坐标取过来。</p>' +
-            '<div class="scrollx"><table class="entab"><thead><tr><th>地图</th><th>类型</th><th>mapId</th>' +
+            '本站不做可缩放交互地图——那套底图瓦片是别人自己切的，不搬；只把区域名、等级与坐标取过来。</p>' +
+            '<div class="scrollx"><table class="entab"><thead><tr><th>地图</th><th>类型</th><th>地图编号</th>' +
             '<th>兴趣点</th><th>已切图</th></tr></thead><tbody>' +
             (w.maps || []).filter(function (m) { return m.isNew || m.group === '大陆'; })
               .map(function (m) {
@@ -1837,7 +1813,7 @@
             (z.flight ? '<span class="dim">' + (z.flight === 'no-route' ? '客户端里还没有飞行路线' : '有飞行路线，站点待实测') + '</span>' : '') +
             '<span class="zcnt">' + (z.rareCount ? z.rareCount + ' 个稀有' : '') +
             (z.rareCount && z.bookCount ? ' · ' : '') + (z.bookCount ? z.bookCount + ' 本书' : '') +
-            (!z.rareCount && !z.bookCount ? '<i class="dim">本轮没采到东西</i>' : '') + '</span>' +
+            (!z.rareCount && !z.bookCount ? '<i class="dim">这一版还没有数据</i>' : '') + '</span>' +
             '</div></button>';
         }
 
@@ -1878,7 +1854,7 @@
                   coordTxt(r) +
                   (r.drops.length
                     ? '<div class="loot">' + r.drops.map(dropRow).join('') + '</div>'
-                    : '<div class="note">这个稀有的掉落上游没给，本站不补——等实测或等下一次解包。</div>') +
+                    : '<div class="note">这一条没有掉落记录，本站不补——等实测或下一次数据核对。</div>') +
                   '<button type="button" class="ghost wide" data-r="' + D.esc(r.id) + '">看这条的来源</button>' +
                   '<div class="wdr" id="wr-' + D.esc(r.id) + '">' +
                   '<h3>掉落清单</h3>' + (r.drops.length
@@ -1887,7 +1863,7 @@
                         (d.bind ? D.esc(d.bind) : '绑定方式未采') + '）</li>';
                     }).join('') + '</ul>'
                     : '<p class="dim">未采到。</p>') +
-                  '<h3>坐标口径</h3><p class="note">括号里是那张小地图上的百分比位置，"世界"是客户端原始坐标；两套都是同一次解包出来的。</p>' +
+                  '<h3>坐标说明</h3><p class="note">括号里是那张小地图上的百分比位置，"世界"是客户端原始坐标；两套都是同一次解包出来的。</p>' +
                   '<h3>来源与核对</h3>' + D.sources(r.provenance) + '</div></div></div>';
               }).join('') + '</div>';
           });
@@ -1901,7 +1877,7 @@
           }).join('');
           var un = (w.raresUnplaced || []);
           return out + sets + (un.length ? '<div class="card"><h2>位置没核出来的 ' + un.length + ' 个稀有</h2>' +
-            '<p class="note">上游有这些名字，但没给坐标。名字留着当线索，不当数据——不猜位置。</p>' +
+            '<p class="note">名单里有这些名字，但没有坐标。名字留着当线索，不当数据——不猜位置。</p>' +
             '<div class="chips">' + un.map(function (x) {
               return '<span class="chipc">' + D.esc(x.nameCn) + '</span>';
             }).join('') + '</div></div>' : '');
@@ -1952,7 +1928,7 @@
               }).join('') + '</tbody></table></div>';
           });
           return out + (rw ? '<div class="card"><h2>上交多少本换什么</h2>' +
-            '<p class="note">门槛与称号取自客户端；奖励物品 ID 一并列出。上游没列奖励的那档写待实测，不编。</p>' +
+            '<p class="note">门槛与称号取自客户端；奖励物品 ID 一并列出。没有奖励记录的那一档写待实测，不编。</p>' +
             '<div class="scrollx"><table class="entab"><thead><tr><th>门槛</th><th>称号</th><th>任务</th><th>奖励</th></tr></thead>' +
             '<tbody>' + rw + '</tbody></table></div></div>' : '') +
             ((w.booksMissing || []).length ? '<div class="card"><h2>只有名字、没给坐标的 ' + (w.booksMissing || []).length + ' 本</h2>' +
@@ -1964,14 +1940,14 @@
         /* --- 面板四：睡袋 --- */
         function panelBag() {
           var bt = w.bagTool || {}, p = bt.params || {}, bag = bt.bag;
-          if (!bag) return '<div class="card"><div class="empty">睡袋这条上游没解析出物品，本轮不编。</div></div>';
+          if (!bag) return '<div class="card"><div class="empty">睡袋这一条还没有可信的物品记录，本站不编。</div></div>';
           var out = '<div class="card"><h2>睡袋本身</h2>' +
             '<div class="itemrow">' + iconCell(bag.iconKey, bag.itemId, bag.nameCn) +
             '<div><b>' + D.esc(bag.nameCn) + '</b>' +
             '<span class="dim mono">#' + D.esc(bag.itemId) + '</span>' +
             (bag.bind ? '<span class="dim">' + D.esc(bag.bind) + '</span>' : '') +
             (bt.usableLevel ? '<span class="dim mono">' + bt.usableLevel + ' 级可用</span>' : '') + '</div></div>';
-          out += '<table class="mtx"><thead><tr><th>机制项</th><th>上游解析值</th><th>分级</th></tr></thead><tbody>' +
+          out += '<table class="mtx"><thead><tr><th>机制项</th><th>记录值</th><th>分级</th></tr></thead><tbody>' +
             [['铺开耗时', p.castSec + ' 秒'], ['休息收益名', p.buffName || '—'],
               ['收益持续', p.buffHours + ' 小时'], ['可叠层', p.stacks + ' 层'],
               ['铺设冷却', p.cdMin + ' 分钟']]
@@ -1986,7 +1962,7 @@
           if (kk) camps = camps.filter(function (c) {
             return ((c.zone || '') + ' ' + (c.whereCn || '') + ' ' + (c.landmark || '')).toLowerCase().indexOf(kk) >= 0;
           });
-          out += '<div class="card"><h2>上游列出的营地点 · ' + camps.length +
+          out += '<div class="card"><h2>营地点清单 · ' + camps.length +
             (kk ? '（搜索 ' + D.esc(f.q) + ' 命中）' : '') + '</h2>' +
             '<p class="note">这里只回答"这些营点在哪个区域的哪一点"。' +
             '睡袋页面本身是一条冲级路线，步骤与收益讲解属攻略性质，本站红线不搬。</p>' +
@@ -2007,7 +1983,7 @@
           el('wbody').innerHTML = body +
             '<div class="card" id="todo"><h2>这一页没有的</h2><ul class="list">' +
             (w.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
-            '</ul><h3>坐标口径</h3><p class="note">' + D.esc(w.meta.coordinateNote || '') + '</p>' +
+            '</ul><h3>坐标说明</h3><p class="note">' + D.esc(w.meta.coordinateNote || '') + '</p>' +
             '<h3>来源与核对</h3>' + D.sources(w.provenance) + '</div>';
           Array.prototype.forEach.call(document.querySelectorAll('.zmark'), function (b) {
             b.style.left = b.dataset.x + '%'; b.style.top = b.dataset.y + '%';
@@ -2077,14 +2053,14 @@
       }).catch(fail);
   }
 
-  /* ---------- 最新动态：官方时间点 + 客户端改动清单 + 本站数据变更日志 ---------- */
+  /* ---------- 最新动态：官方时间点 + 客户端改动清单 + 本站更新 ---------- */
   var CH_KINDS = [['all', '全部类别'], ['added', '新增'], ['modified', '改动'], ['moved', '换层或换系'],
     ['removed', '移除'], ['renamed', '改名'], ['unchanged', '未变']];
   function updates() {
     Promise.all([D.load('data/changes.json'), D.load('data/timeline.json'),
-      D.load('data/changelog.json'), D.load('data/classes.json'), D.load('data/scale.json')])
+      D.load('data/releases.json'), D.load('data/classes.json'), D.load('data/scale.json')])
       .then(function (r) {
-        var ch = r[0], tl = (r[1].items || []).slice().sort(byDate), cl = r[2].entries || [],
+        var ch = r[0], tl = (r[1].items || []).slice().sort(byDate), cl = r[2].items || [],
           classes = r[3].classes, S = r[4].scale;
         var f = { cls: '', kind: 'all', what: 'all', q: urlQ('q') };
         // 搜索结果是带着职业与「天赋/法术」跳进来的，落地就停在那张表上
@@ -2153,7 +2129,7 @@
           qi.oninput = function () { f.q = qi.value; draw(); };
         }
 
-        var K = ['官方时间点', '客户端改动', '本站变更'];
+        var K = ['官方时间点', '客户端改动', '本站更新'];
         set('<div class="card"><h1 class="pt">最新动态</h1>' +
           '<p class="dim">这一页把"什么变了"拆成三件事各说各的：官方公告里写过的时间点、' +
           '客户端解包出来的职业改动清单、以及我们这座站自己改了什么。' +
@@ -2163,13 +2139,13 @@
           '<div class="stat"><b>' + (ch.items || []).length + '</b>条客户端改动</div>' +
           '<div class="stat"><b>' + S.changesNew + '</b>个新增天赋</div>' +
           '<div class="stat"><b>' + S.changesRemoved + '</b>个移除天赋</div>' +
-          '<div class="stat"><b>' + cl.length + '</b>条本站变更</div></div>' +
+          '<div class="stat"><b>' + cl.length + '</b>条本站更新</div></div>' +
           '<div class="picks">' + K.map(function (t, i) {
             return '<a class="pick" href="#k' + i + '"><b>' + t + '</b></a>';
           }).join('') + '</div></div>' +
 
-          '<div class="card" id="k0"><h2>官方口径里的时间点</h2>' +
-          '<p class="note">只列官方公告写过的原话与日期，本站不做新闻转载与评论；中英文两个上线口径并存，不替玩家选。</p>' +
+          '<div class="card" id="k0"><h2>官方公告里的时间点</h2>' +
+          '<p class="note">只列官方公告写过的原话与日期，本站不做新闻转载与评论；中英文两个上线日期并存，不替玩家选一个。</p>' +
           tl.map(function (x) {
             return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
               '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
@@ -2178,22 +2154,20 @@
           '<h3>来源与核对</h3>' + D.sources((tl[0] || {}).provenance) + '</div>' +
 
           '<div class="card" id="k1"><h2>客户端改动清单 · ' + (ch.items || []).length + ' 条</h2>' +
-          '<p class="note">口径（' + D.esc(ch.meta.generatedAt) + ' 定）：<b>只列名称与改动类别，不列改动的具体句子</b>。' +
-          '上游 JSON 里那些前后对照的 tooltip 原文，抓取阶段就删掉了，本站不复制别人转述的游戏文案；' +
-          '要看逐字对照请去来源页。改动类别是客户端解包比对经典旧世的结果，未经游戏内实测。</p>' +
+          '<p class="note">本站写法（' + D.esc(ch.meta.generatedAt) + ' 定）：<b>只列名称与改动类别，不列改动的具体句子</b>。' +
+          '别人整理的前后对照文本本站不复制，也不改写；' +
+          '要看逐字对照请去来源页。改动类别是把客户端数据和经典旧世比对出来的，没进游戏实测。</p>' +
           '<div id="chbody"></div>' +
           '<h3>来源与核对</h3>' + D.sources((ch.items || [])[0] ? (ch.items[0].provenance) : []) +
           '<p class="note">' + D.esc(ch.meta.textPolicy) + '</p></div>' +
 
-          '<div class="card" id="k2"><h2>本站数据变更日志 · ' + cl.length + ' 条</h2>' +
-          '<p class="note">这一栏只报我们自己做了什么：一条对应仓库里一个真实提交，' +
-          '标签是这次动到的板块。不含官方消息，也不做任何评价。</p>' +
+          '<div class="card" id="k2"><h2>本站更新 · ' + cl.length + ' 条</h2>' +
+          '<p class="note">这一栏只报我们自己改了什么：每一条都对应仓库里一个真实提交，能回查。' +
+          '不含官方消息，也不做任何评价。</p>' +
           cl.map(function (e) {
-            var tags = e.tags.filter(function (t) {
-              return ['文档', '截图证据', '交接台账', '协作规则'].indexOf(t) < 0;
-            }).slice(0, 5);
+            var tags = (e.tags || []).slice(0, 5);
             return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b><div><b>' +
-              D.esc(e.subject) + '</b>' +
+              D.esc(e.title) + '</b>' +
               '<span class="chips">' + tags.map(function (t) {
                 return '<span class="chipc">' + D.esc(t) + '</span>';
               }).join('') + '</span></div></div>';
@@ -2220,8 +2194,8 @@
           '<p class="dim">这是<b>本站资料覆盖度</b>的排序：哪个职业在我们这儿查得到的东西多、' +
           '哪部分还是只有客户端解包撑着。它回答"这个职业的资料全不全"，' +
           '<b>不回答哪个职业强</b>——我们没有战斗日志与实测数据，也不做强度排行。</p>' +
-          '<div class="banner">排序口径：先按"官方中文佐证的条数"，再按"本站条目合计"。' +
-          '全部由数据文件现算，改数据重跑校验脚本就会变，不是人工排的名次。</div>' +
+          '<div class="banner">排序依据：先按"官方中文佐证的条数"，再按"本站条目合计"。' +
+          '全部由数据现算，改了数据重新生成就会变，不是人工排的名次。</div>' +
           '<div class="scrollx"><table class="entab ranktab"><thead><tr><th class="ich">名次</th><th>职业</th>' +
           '<th>官方中文佐证</th><th>客户端解包</th><th>本站条目合计</th><th>覆盖情况</th></tr></thead><tbody>' +
           rows.map(function (x) {
@@ -2251,16 +2225,19 @@
           '<li>第三方站的 BiS 与梯队结论：属他人判断，不搬。</li>' +
           '<li>"推荐玩什么职业"：那是玩法取向，走选职业问答页，不混进这张表。</li></ul>' +
           '<h3>来源与核对</h3>' + D.sources([{ type: 'site-note', url: '',
-            note: '本页数字由校验脚本从各数据文件现算，无外部链接：本站自己的统计' }]) + '</div>');
+            note: '本页数字是拿本站自己的数据现算的，没有外部链接' }]) + '</div>');
       }).catch(fail);
   }
 
 
   function fail(e) {
-    set('<div class="card"><h2>数据没加载出来</h2><p class="dim">' + D.esc(e && e.message ? e.message : e) + '</p>' +
-      '<p class="dim">这个站要读本地 JSON，不能用 file:// 直接打开。在项目里执行：<br>' +
-      '<code>cd src &amp;&amp; python3 -m http.server 8812</code>，再访问 <code>http://127.0.0.1:8812</code></p>' +
-      '<button id="rt">重试</button></div>');
+    if (window.console) console.error('数据加载失败', e);
+    // 只有真的用 file:// 打开时才给本地服务命令，否则页面上不该出现这些
+    var local = location.protocol === 'file:';
+    set('<div class="card"><h2>数据没加载出来</h2><p class="dim">刷新一下试试；' +
+      (local ? '这个站要起一个本地服务才能读数据：在项目里执行 <code>cd src &amp;&amp; python3 -m http.server 8812</code>，' +
+        '再访问 <code>http://127.0.0.1:8812</code>。' : '如果一直这样，请把这一页的地址发给我们。') +
+      '</p><button id="rt">重试</button></div>');
     var b = el('rt'); if (b) b.onclick = function () { location.reload(); };
   }
 

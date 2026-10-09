@@ -83,6 +83,9 @@ def norm_text(t):
     out = []
     for line in t.split("\n"):
         line = re.sub(r"\s+", " ", line).strip()
+        # 倒计时到秒后，两站的快照本来就差着零点几秒，读数不该算成差异
+        # （"顶栏与首页同一读数"由 site-check 在同一页内断言）
+        line = re.sub(r"\d{2}:\d{2}:\d{2}", "⟨读数⟩", line)
         if line:
             out.append(line)
     return out

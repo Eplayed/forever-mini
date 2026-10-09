@@ -1,0 +1,82 @@
+{
+ "note": "面向维护者的词不许出现在玩家看的正文与数据里。tools/build-data.js 用它扫 src/data/*.json 的字符串值，tools/site-check.py 用它扫 14 页渲染后的文字。加词前先想清楚替代说法，别把合理的中文词禁掉。",
+ "strip": [
+  "大口径",
+  "小口径"
+ ],
+ "skipKeys": [
+  "url",
+  "method",
+  "iconKey",
+  "mapFile",
+  "mapId",
+  "areaId",
+  "art",
+  "file",
+  "id",
+  "slug",
+  "en",
+  "nameEn",
+  "oldNameEn",
+  "key",
+  "hue",
+  "seed"
+ ],
+ "patterns": [
+  {
+   "re": "上游",
+   "why": "玩家不知道上游是谁，写清主体：客户端解包 / 参考站 / 官方"
+  },
+  {
+   "re": "mapId|areaId",
+   "why": "界面里改成「地图编号」"
+  },
+  {
+   "re": "\\bslug\\b",
+   "why": "网址片段不是玩家语言"
+  },
+  {
+   "re": "tools/|build-data|site-check|export-mini|app-parity|npm run",
+   "why": "脚本名不进正文"
+  },
+  {
+   "re": "\\.json\\b",
+   "why": "文件名不进正文"
+  },
+  {
+   "re": "本轮|未解析|解析出|结构化|字段",
+   "why": "采集过程的话，改成「这一版还没有…」"
+  },
+  {
+   "re": "口径",
+   "why": "改成说法 / 依据 / 标准（武器与物品名里的「大口径」除外）"
+  },
+  {
+   "re": "快照",
+   "why": "改成「统计」或直接写日期"
+  },
+  {
+   "re": "校验脚本|回归脚本|断言|卡口|构建|\\bDOM\\b|\\bCSS\\b",
+   "why": "内部工程词"
+  },
+  {
+   "re": "undefined|\\[object|\\bNaN\\b|null",
+   "why": "渲染事故"
+  },
+  {
+   "re": "fix:|feat:|chore:|docs:",
+   "why": "提交标题不许原样上页面"
+  },
+  {
+   "re": "调试|\\bTODO\\b|\\bFIXME\\b",
+   "why": "开发残留"
+  }
+ ],
+ "metaKeys": [
+  "coordinateNote",
+  "notCollected"
+ ],
+ "dirs": [
+  "talents"
+ ]
+}

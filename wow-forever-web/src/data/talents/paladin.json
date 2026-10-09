@@ -2,7 +2,7 @@
  "classId": "paladin",
  "classNameCn": "圣骑士",
  "structureStatus": "confirmed",
- "dataVersion": "forever-beta 双源对齐 · 上游自述采集 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
  "grid": {
   "rows": 7,
   "cols": 4,

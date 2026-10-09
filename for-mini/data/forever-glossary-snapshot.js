@@ -116,7 +116,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -219,7 +219,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -322,7 +322,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -408,7 +408,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -494,7 +494,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -512,7 +512,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析；原文并写「冰霜 与 火焰 陷阱」，非逐字摘录（见 audit-exceptions.json）",
+     "note": "国服官方职业深度解析；原文并写「冰霜 与 火焰 陷阱」，非逐字摘录（例外已登记在案）",
      "checkedAt": "2026-10-07"
     }
    ]
@@ -580,7 +580,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -666,7 +666,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -752,7 +752,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -838,7 +838,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -924,7 +924,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],
@@ -1010,7 +1010,7 @@ module.exports = {
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填",
+     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
      "checkedAt": "2026-10-08"
     }
    ],

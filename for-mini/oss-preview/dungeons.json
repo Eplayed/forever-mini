@@ -3,7 +3,7 @@
   "generatedAt": "2026-10-07",
   "note": "掉落与 BOSS 技能未经实测的一律留空并标 L2/L3，不编造。",
   "updatedAt": "2026-10-07",
-  "lootDisclaimer": "掉落归属是上游按经典旧世开放数据库推的，暴雪说过无限服重做过掉落，正式开放可能变化——所以掉落一律标 L2 待实测，本站不写百分比。",
+  "lootDisclaimer": "掉落是按经典旧世公开数据库推出来的，官方说过无限服重做过掉落，正式开放可能变化——所以掉落一律标待实测，本站不写百分比。",
   "upstream": {
    "site": "新手盒子 · 魔兽世界无限数据库",
    "source": "https://wowforever.wclbox.com/fuben",
@@ -23,19 +23,19 @@
      "id": "faldrim-anvilmar",
      "nameCn": "法德林·安威玛尔",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "infurnus",
      "nameCn": "茵弗努斯",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "plunder",
      "nameCn": "劫掠者",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "durgen-dirgehammer",
@@ -117,13 +117,13 @@
      "id": "the-abandoned",
      "nameCn": "被遗弃者",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "the-butcher",
      "nameCn": "屠夫",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "rath-mael",
@@ -135,19 +135,19 @@
      "id": "lordaeron-captain",
      "nameCn": "洛丹伦上尉",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "viktor-the-vile",
      "nameCn": "邪恶的维克多",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "bjork",
      "nameCn": "比约克",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     }
    ],
    "route": [],
@@ -226,7 +226,7 @@
      "id": "saltspine",
      "nameCn": "盐脊",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "shadetooth",
@@ -244,7 +244,7 @@
      "id": "relic-guardian",
      "nameCn": "遗迹守卫者",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     }
    ],
    "route": [],
@@ -597,7 +597,7 @@
      "id": "bazzalan",
      "nameCn": "巴扎兰",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     }
    ],
    "route": [],
@@ -2187,7 +2187,7 @@
      "id": "lorgus-jett",
      "nameCn": "洛古斯·杰特",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "baron-aquanis",
@@ -2416,7 +2416,7 @@
      "id": "hamhock",
      "nameCn": "哈姆霍克",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "dextren-ward",
@@ -3010,7 +3010,7 @@
      "id": "roogug",
      "nameCn": "鲁古格",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "aggem-thorncurse",
@@ -4498,7 +4498,7 @@
      "id": "sandarr-dunereaver",
      "nameCn": "杉达尔·沙掠者",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "dustwraith",
@@ -5456,7 +5456,7 @@
      "id": "avatar-of-hakkar",
      "nameCn": "哈卡的化身",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "shade-of-eranikus",
@@ -5468,7 +5468,7 @@
      "id": "hazzas",
      "nameCn": "哈扎斯",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "morphaz",
@@ -5480,13 +5480,13 @@
      "id": "weaver",
      "nameCn": "德拉维沃尔",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "dreamscythe",
      "nameCn": "德姆塞卡尔",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "jammal-an-the-prophet",
@@ -5773,7 +5773,7 @@
      "id": "the-seven",
      "nameCn": "黑铁七贤",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "magmus",
@@ -8158,7 +8158,7 @@
      "id": "guard-slip-kik",
      "nameCn": "卫兵斯里基克",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "captain-kromcrush",
@@ -9853,7 +9853,7 @@
      "id": "malor-the-zealous",
      "nameCn": "狂热的玛洛尔",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "cannon-master-willey",
@@ -9889,7 +9889,7 @@
      "id": "ezra-grimm",
      "nameCn": "艾兹拉·格里姆",
      "level": "L2",
-     "note": "上游标了：开放数据库里还没有它的掉落。"
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "postmaster-malown",

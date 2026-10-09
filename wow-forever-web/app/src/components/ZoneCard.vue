@@ -13,7 +13,7 @@
           <template v-if="z.rareCount && z.bookCount"> · </template>
           <template v-if="z.bookCount">{{ z.bookCount }} 本书</template>
         </template>
-        <i v-else class="dim">本轮没采到东西</i>
+        <i v-else class="dim">这一版还没有数据</i>
       </span>
     </div>
   </button>

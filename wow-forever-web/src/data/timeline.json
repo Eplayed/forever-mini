@@ -1,11 +1,11 @@
 {
  "meta": {
   "generatedAt": "2026-10-08",
-  "note": "时间点全部标来源与核对日期。官方中英文两个上线口径并存，本站不替玩家选一个，换算那条单独标为推断。",
+  "note": "时间点全部标来源与核对日期。官方中英文两个上线日期并存，本站不替玩家选一个，换算那条单独标为推断。",
   "timezoneConflict": {
    "cn": "国服官方：2026年11月5日全球同步上线",
    "en": "官方英文回顾：launches globally on November 4, 2026, at 3:00 p.m. PST",
-   "ours": "本站按 PST(UTC-8) → 北京(UTC+8) 相差 16 小时换算：11 月 4 日 15:00 PST = 11 月 5 日 07:00 北京时间，两个口径不矛盾。",
+   "ours": "本站按 PST(UTC-8) → 北京(UTC+8) 相差 16 小时换算：11 月 4 日 15:00 PST = 11 月 5 日 07:00 北京时间，两个日期不矛盾。",
    "level": "L2",
    "why": "换算结论是本站推算，官方没有公布北京时间的具体钟点，所以标 L2 待实测。"
   }
@@ -86,7 +86,7 @@
    "id": "beta-cap-raise",
    "date": "待定",
    "title": "Beta 等级上限提高至 30 级",
-   "what": "官方只说「在Beta测试后期提高至30级」，没给具体日期。",
+   "what": "官方只说「在Beta测试后期提高至30级」，未公布具体日期。",
    "level": "L2",
    "provenance": [
     {
@@ -117,7 +117,7 @@
   {
    "id": "launch-en",
    "date": "2026-11-04",
-   "title": "全球上线（官方英文口径）",
+   "title": "全球上线（官方英文公告）",
    "what": "PST 下午 3:00。换算成北京时间是 11 月 5 日早上 7:00。",
    "level": "L1",
    "provenance": [
@@ -125,7 +125,7 @@
      "type": "official_en",
      "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
      "quote": "World of Warcraft: Forever launches globally on November 4, 2026, at 3:00 p.m. PST",
-     "note": "英文口径，与国服「11月5日」不矛盾，见页首时区说明",
+     "note": "英文公告的日期，与国服「11月5日」不矛盾，见页首时区说明",
      "checkedAt": "2026-10-08"
     }
    ]
@@ -133,7 +133,7 @@
   {
    "id": "launch-cn",
    "date": "2026-11-05",
-   "title": "全球同步上线（国服口径）",
+   "title": "全球同步上线（国服公告）",
    "what": "正式服开放，本站数据以当天客户端为准整批重核。",
    "level": "L0",
    "provenance": [
@@ -141,7 +141,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304160/index.html",
      "quote": "《魔兽世界》：“无限”将于2026年11月5日全球同步上线",
-     "note": "国服首页与公告均为此口径",
+     "note": "国服首页与公告都是这个日期",
      "checkedAt": "2026-10-08"
     }
    ]

@@ -25,17 +25,17 @@
    }
   ],
   "took": "区域等级与阵营、mapId 与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点",
-  "skipped": "上游的书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率",
+  "skipped": "书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率",
   "notCollected": [
-   "世界地图底图与可缩放交互：那是上游自己切的 1715 张瓦片，本站不搬图也不做交互地图，只给区域清单与坐标",
+   "世界地图底图与可缩放交互：那套底图瓦片是别人自己切的，本站不搬图也不做交互地图，只给区域清单与坐标",
    "睡袋页面的冲级路线（步骤、途经点顺序、收益讲解）：属攻略性质，本站红线不做，只保留地点与坐标",
-   "睡袋相关的 17 件杂物清单：上游把路线补给品混在一张表里，拆不出干净的物品口径",
-   "成就：上游已经放出 46 条结构化数据，本轮没接，属于另一个模块",
-   "区域人口、天气、稀有刷新计时：客户端里没有这类字段，编不出来"
+   "睡袋相关的 17 件杂物清单：补给品和杂物混在同一张表里，拆不出干净的物品清单",
+   "成就：那边已经能给出 46 条能列成表的数据，这一版还没接进来，属于另一个模块",
+   "区域人口、天气、稀有刷新计时：客户端里没有这类数据，编不出来"
   ],
   "levelNote": "本文件全部字段是无限客户端解包出来的游戏内中文（经第三方站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列",
-  "mapNote": "小地图只转存上游真的切出来的那些：上游没给的区域显示 mapId 与坐标，不放假图",
-  "coordinateNote": "坐标两套并存：mapId 定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包",
+  "mapNote": "小地图只转存客户端真有的那些：没有的区域显示地图编号与坐标，不放假图",
+  "coordinateNote": "坐标两套并存：地图编号定位到具体那张图，百分比是图上的位置，「世界」是客户端里的原始坐标；三者都来自同一份记录",
   "mapIdMismatch": [],
   "mapsWithoutImage": [
    "希尔斯布莱德丘陵",
@@ -83,7 +83,7 @@
    "mapFile": "img/art/maps/1426.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -116,7 +116,7 @@
    "mapFile": "img/art/maps/1429.webp",
    "rareCount": 2,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -149,7 +149,7 @@
    "mapFile": "img/art/maps/1420.webp",
    "rareCount": 4,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -182,7 +182,7 @@
    "mapFile": "img/art/maps/1436.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -215,7 +215,7 @@
    "mapFile": "img/art/maps/1432.webp",
    "rareCount": 1,
    "bookCount": 2,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -248,7 +248,7 @@
    "mapFile": "img/art/maps/1421.webp",
    "rareCount": 0,
    "bookCount": 2,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -281,7 +281,7 @@
    "mapFile": "img/art/maps/1433.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -314,7 +314,7 @@
    "mapFile": "img/art/maps/1431.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -347,7 +347,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -380,7 +380,7 @@
    "mapFile": "img/art/maps/1437.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -413,7 +413,7 @@
    "mapFile": "img/art/maps/1416.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -446,7 +446,7 @@
    "mapFile": "img/art/maps/1417.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -479,7 +479,7 @@
    "mapFile": "img/art/maps/1434.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -512,7 +512,7 @@
    "mapFile": "img/art/maps/1418.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -539,13 +539,13 @@
    "isNew": true,
    "ownMap": false,
    "flight": "by-flight",
-   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
    "areaId": 16591,
    "mapId": "2548",
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -578,7 +578,7 @@
    "mapFile": "img/art/maps/1435.webp",
    "rareCount": 1,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -611,7 +611,7 @@
    "mapFile": "img/art/maps/1425.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -644,7 +644,7 @@
    "mapFile": "img/art/maps/1427.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -677,7 +677,7 @@
    "mapFile": "img/art/maps/1419.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -710,7 +710,7 @@
    "mapFile": "img/art/maps/1422.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -743,7 +743,7 @@
    "mapFile": "img/art/maps/1428.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -776,7 +776,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -809,7 +809,7 @@
    "mapFile": "img/art/maps/1423.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -842,7 +842,7 @@
    "mapFile": "img/art/maps/1411.webp",
    "rareCount": 2,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -875,7 +875,7 @@
    "mapFile": "img/art/maps/1412.webp",
    "rareCount": 3,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -908,7 +908,7 @@
    "mapFile": "img/art/maps/1438.webp",
    "rareCount": 2,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -941,7 +941,7 @@
    "mapFile": "img/art/maps/1413.webp",
    "rareCount": 7,
    "bookCount": 3,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -974,7 +974,7 @@
    "mapFile": "img/art/maps/1439.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1007,7 +1007,7 @@
    "mapFile": "img/art/maps/1442.webp",
    "rareCount": 2,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1040,7 +1040,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1073,7 +1073,7 @@
    "mapFile": "img/art/maps/1441.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1106,7 +1106,7 @@
    "mapFile": "img/art/maps/1443.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1139,7 +1139,7 @@
    "mapFile": "img/art/maps/1445.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1172,7 +1172,7 @@
    "mapFile": "img/art/maps/1446.webp",
    "rareCount": 1,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1205,7 +1205,7 @@
    "mapFile": "img/art/maps/1444.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1238,7 +1238,7 @@
    "mapFile": "img/art/maps/1447.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1271,7 +1271,7 @@
    "mapFile": "img/art/maps/1448.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1304,7 +1304,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1337,7 +1337,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1370,7 +1370,7 @@
    "mapFile": "img/art/maps/1452.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1397,13 +1397,13 @@
    "isNew": true,
    "ownMap": false,
    "flight": "by-flight",
-   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
    "areaId": 616,
    "mapId": "2482",
    "mapFile": "img/art/maps/2482.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1416,7 +1416,7 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "这一版没有区域等级数据"
   },
   {
    "id": "shendralas",
@@ -1430,13 +1430,13 @@
    "isNew": true,
    "ownMap": false,
    "flight": "no-route",
-   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
    "areaId": 16651,
    "mapId": "2652",
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1449,7 +1449,7 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "这一版没有区域等级数据"
   },
   {
    "id": "darnassus",
@@ -1469,7 +1469,7 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营同一条上游记录，两处在用的表没有冲突",
+   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -1482,7 +1482,7 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "这一版没有区域等级数据"
   },
   {
    "id": "zephras-isle",
@@ -1496,7 +1496,7 @@
    "isNew": true,
    "ownMap": true,
    "flight": "no-route",
-   "flightNote": "飞行路线的存在性取自上游，具体站点待实测",
+   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
    "areaId": null,
    "mapId": "2521",
    "mapFile": "img/art/maps/2521.webp",
@@ -5091,7 +5091,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
-     "note": "上游只给出书名与物品 ID，没给坐标",
+     "note": "只有书名与物品编号，没有坐标",
      "checkedAt": "2026-10-09"
     }
    ]
@@ -5106,7 +5106,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
-     "note": "上游只给出书名与物品 ID，没给坐标",
+     "note": "只有书名与物品编号，没有坐标",
      "checkedAt": "2026-10-09"
     }
    ]
@@ -5192,7 +5192,7 @@
    "level": null,
    "items": [],
    "noReward": true,
-   "noRewardNote": "上游只给出上交门槛与任务 ID，奖励物品未采集",
+   "noRewardNote": "只有上交门槛与任务编号，奖励物品还没拿到",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -5263,7 +5263,7 @@
    "buffHours": 2
   },
   "paramsLevel": "L2",
-  "paramsNote": "机制数值取自上游对物品说明的解析，本站没有游戏内实测过；具体收益以游戏内为准",
+  "paramsNote": "机制数值是从物品说明里读出来的，本站没有在游戏内实测过；具体收益以游戏内为准",
   "camps": [
    {
     "stop": "start",
@@ -5416,7 +5416,7 @@
   {
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/ditu",
-   "note": "世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做形状与口径",
+   "note": "世界线整块数据取自无限客户端解包（经第三方资料站转述），本站只负责整理成能查的样子",
    "checkedAt": "2026-10-09"
   }
  ]

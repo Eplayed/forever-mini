@@ -1,24 +1,22 @@
 <template>
   <div class="card">
-    <h1 class="pt">这页还没迁到新站</h1>
-    <p class="dim">新站目前只有 <b>首页</b> 与 <b>世界页</b> 两页；其余页面仍在旧站上，内容完全一样。
-      迁移期间两栈并存，数据是同一份。</p>
-    <p class="note">你刚才要找的是 <span class="mono">{{ want }}</span>。</p>
-    <a class="cta" :href="legacy">回到旧站这一页 →</a>
-    <h2>已经能在新站看的页</h2>
-    <ul class="list">
-      <li><router-link to="/">首页 · 数据覆盖率与入口</router-link></li>
-      <li><router-link to="/world">世界 · 区域、稀有与书</router-link></li>
-    </ul>
+    <p class="dim">正在打开这一页…</p>
+    <a class="cta" :href="target">点这里打开 →</a>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { legacyUrl } from '../lib/nav.js';
+import { NAV, legacyUrl } from '../lib/nav.js';
+
+/* 还没迁到新站的地址不摆"迁移中"的告示牌——那是在跟用户解释我们的工程进度，不是他要看的东西。
+   认得出的页直接送到有内容的那一份；认不出的回首页。 */
+const FILES = NAV.reduce((a, g) => a.concat(g.file ? [g.file] : (g.items || []).map((it) => it.file)), []);
 
 const route = useRoute();
-const want = computed(() => String(route.params.all || '未知页'));
-const legacy = computed(() => legacyUrl(want.value + '.html'));
+const want = String(route.params.all || '') + '.html';
+const target = computed(() => legacyUrl(FILES.indexOf(want) >= 0 ? want : 'index.html'));
+
+onMounted(() => { window.location.replace(target.value); });
 </script>

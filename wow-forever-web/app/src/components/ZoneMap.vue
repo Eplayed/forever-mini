@@ -6,8 +6,8 @@
     <span class="dbn2-mark">客户端地图 · 本地转存</span>
   </div>
   <div v-else class="zmap none">
-    <span class="dim">{{ broken ? '这张小地图本地文件读不出来' : '上游没切这张小地图' }}</span>
-    <b v-if="mapId" class="mono">mapId {{ mapId }}</b>
+    <span class="dim">{{ broken ? '这张小地图本地文件读不出来' : '这一张客户端没有切出小地图' }}</span>
+    <b v-if="mapId" class="mono">地图编号 {{ mapId }}</b>
   </div>
 </template>
 
