@@ -149,8 +149,7 @@
     return out;
   }
   function shell() {
-    var now = new Date('2026-11-05T00:00:00+08:00').getTime() - Date.now();
-    var d = Math.max(0, Math.floor(now / 86400000)), h = Math.max(0, Math.floor(now / 3600000) % 24);
+    var left = launchLeft(), d = left.d, h = left.h;
     el('top').innerHTML = '<div class="in"><div class="brand">无限<span>资料站</span></div><nav class="main" aria-label="主导航">' +
       NAV.map(function (g) {
         if (g.href) {
@@ -176,43 +175,112 @@
   }
 
   /* ---------- 首页 ---------- */
+  // 上线倒计时：顶栏 chip 与首页共用一个算法，两处数字不许各算各的
+  function launchLeft() {
+    var now = new Date('2026-11-05T00:00:00+08:00').getTime() - Date.now();
+    return { d: Math.max(0, Math.floor(now / 86400000)), h: Math.max(0, Math.floor(now / 3600000) % 24) };
+  }
+  var NOT_DOING = [
+    ['DPS 与强度排行', '个人主体 + 零 UGC 的类目下不做排行；而且无限服的战斗数据我们没实测过。'],
+    ['宏与循环提示', '属攻略性质，本站红线不写打法。'],
+    ['掉落概率', '上游给的是"谁掉什么"，不是百分比；暴雪说过无限服重做过掉落。'],
+    ['角色查询 / 战斗日志', '要登录态与个人数据，类目与合规都不允许。'],
+    ['新闻流与评论区', '只做资料与工具，不做内容 feed，也不开 UGC。']
+  ];
   function home() {
-    Promise.all([D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'), D.load('data/meta.json')])
-      .then(function (r) {
-        var classes = r[0].classes, gl = r[1].items, dg = r[3];
-        var cov = D.coverage(r[2], r[0], r[1]);
-        var dn = r[2].newDungeons.length;
-        set('<div class="card"><h1 class="pt">《魔兽世界：无限》中文资料</h1>' +
-          '<p class="dim">天赋、种族与职业组合、技能中英对照、副本与掉落。每条数据都标了来源与核对状态——' +
-          '没核实的地方直接写「待实测」，不编造。</p>' + D.covBar(cov) +
-          '<div class="stats" style="margin-top:12px">' +
-          '<div class="stat"><b>' + gl.length + '</b>官方中文词条</div>' +
-          '<div class="stat"><b>' + dn + '</b>新副本</div>' +
-          '<div class="stat"><b>' + classes.length + '</b>职业</div>' +
-          '<div class="stat"><b>11-05</b>上线</div></div></div>' +
-          '<div class="banner">本站基于测试服资料整理，正式服 2026-11-05 上线后需整体重核。</div>' +
-          '<div class="card"><h2>选职业</h2>' +
-          '<p class="dim" style="margin-bottom:var(--s3)">第一次接触无限服、不知道选哪个？' +
-          '<a class="cta" href="chooser.html">做个 7 题玩法问答 →</a>（本站整理，不是强度排行）</p>' +
-          '<div class="grid g9">' +
-          classes.map(function (c) {
-            var n = gl.filter(function (g) { return g.classId === c.id; }).length;
-            var lv = c.talentCount ? (c.nameVerified ? 'L2' : 'L2') : 'L3';
-            return '<a class="cls" style="text-decoration:none" href="talent.html?c=' + c.id + '">' +
-              '<div class="ic">' + (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey) : D.esc((c.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(c.cn) + '</div>' +
-              '<div class="e">' + D.esc(c.en) + '</div>' +
-              '<div style="margin-top:5px">' + D.pill(lv) + '</div>' +
-              '<div class="e">' + (c.talentCount || 0) + ' 天赋' +
-              (c.nameVerified ? ' · ' + c.nameVerified + ' 名与官网一致' : ' · 待实测') + '</div>' +
-              (n ? '<div class="e">官方词条 ' + n + ' 条</div>' : '') + '</a>';
-          }).join('') + '</div></div>' +
-          '<div class="grid g3">' +
-          '<div class="card"><h2>副本手册</h2><p class="dim">' + dn + ' 座新副本名单与等级区间，BOSS 与掉落按实测进度补。</p><a href="dungeons.html">进入 →</a></div>' +
-          '<div class="card"><h2>中英术语速查</h2><p class="dim">' + gl.length + ' 条官方中文技能与天赋名，点一下即复制。</p><a href="glossary.html">进入 →</a></div>' +
-          '<div class="card"><h2>种族与职业组合</h2><p class="dim">10 个种族行 × 9 职业的官方中文矩阵，40 条种族特长带整句。</p><a href="races.html">进入 →</a></div>' +
-          '<div class="card"><h2>上线时间表</h2><p class="dim">Beta 与正式服的 11 个时间点，中英文两个上线口径都留着。</p><a href="timeline.html">进入 →</a></div>' +
-          '<div class="card"><h2>溯源与覆盖率</h2><p class="dim">哪些已核实、哪些只是线索、哪些根本没有来源，全部摊开。</p><a href="provenance.html">进入 →</a></div></div>');
-      }).catch(fail);
+    Promise.all([
+      D.load('data/classes.json'), D.load('data/glossary.json'), D.load('data/dungeons.json'),
+      D.load('data/meta.json'), D.load('data/scale.json'), D.load('data/timeline.json'),
+      D.load('data/art.json').catch(function () { return {}; })
+    ]).then(function (r) {
+      var classes = r[0].classes, gl = r[1].items, meta = r[3], S = r[4].scale, tl = r[5].items || [];
+      // 首页的覆盖率用 build-data 算出来的全站口径（含天赋节点与世界线），
+      // 页脚那条"不含天赋节点"是另一个口径，两边都写明各自范围，别让数字看着互相打脸。
+      var cov = { L0: S.coverage.L0, L1: S.coverage.L1, L2: S.coverage.L2, L3: S.coverage.L3, total: S.coverageTotal };
+      var left = launchLeft();
+      var recent = tl.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 4);
+
+      /* 九职业条：首页的招牌动作就是点开一棵树 */
+      var strip = '<div class="strip">' + classes.map(function (c) {
+        return '<a class="stripc" href="talent.html?c=' + D.esc(c.id) + '">' +
+          (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey) : '') +
+          '<b>' + D.esc(c.cn) + '</b>' +
+          '<span class="dim mono">' + (c.talentCount || 0) + ' 天赋</span></a>';
+      }).join('') + '</div>';
+
+      function mod(m) {
+        return '<a class="mod" href="' + m.href + '"><h2>' + m.t + '</h2>' +
+          '<p class="dim">' + m.p + '</p>' +
+          '<div class="modn">' + m.n.map(function (x) {
+            return '<span><b class="mono">' + x[0] + '</b>' + x[1] + '</span>';
+          }).join('') + '</div>' +
+          '<div class="modf">' + D.pill(m.lv) + '<span class="dim">' + m.note + '</span></div></a>';
+      }
+      var MODS = [
+        { href: 'talent.html', t: '全职业天赋模拟器', lv: 'L2',
+          p: '九棵树都是 7 行 × 4 列的客户端真实结构，层级门槛 5 / 10 / 15 / 20 / 25 / 30，能加点、能存链接、能和经典旧世逐格对照。',
+          n: [[S.classes, '职业'], [S.talentNodes, '天赋节点'], [S.talentVerified, '名与官网一致']],
+          note: '结构与译名来自客户端解包，未经游戏内核实' },
+        { href: 'world.html', t: '区域与稀有精英', lv: 'L0',
+          p: '每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。',
+          n: [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']],
+          note: '刷新计时游戏里没字段，不猜' },
+        { href: 'dungeons.html', t: '副本手册', lv: 'L2',
+          p: '按十级一档排的 38 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。',
+          n: [[S.dungeons, '座'], [S.bosses, '个首领'], [S.drops, '条掉落归属']],
+          note: '掉落不写百分比' },
+        { href: 'professions.html', t: '专业与配方', lv: 'L0',
+          p: '13 个专业的配方、材料数量、技能橙黄绿灰四档与采集点，能按"我的技能等级"筛。',
+          n: [[S.professions, '个专业'], [S.recipes, '条配方'], [S.gatherNodes, '个采集点']],
+          note: '冲级路线与性价比建议属攻略，不做' },
+        { href: 'races.html', t: '种族与职业组合', lv: 'L0',
+          p: '国服官方中文公告里的 10 个种族行与可选职业矩阵，40 条种族特长带官方整句。',
+          n: [[S.races, '个种族行'], [S.traits, '条特长整句'], [S.classes, '职业可选']],
+          note: '整句直接抄官方，不改写' },
+        { href: 'glossary.html', t: '中英术语速查', lv: 'L0',
+          p: '技能与天赋的中英对照，按职业与种族分组，点一下即复制；38 条带与经典旧世的四态差异。',
+          n: [[S.glossary, '条词条'], [S.abilities, '条四态对照'], [S.classes, '组职业']],
+          note: '只有官方英文的算 L1，不冒充已核' }
+      ];
+
+      set('<section class="card hero"><div class="herot">' +
+        '<h1 class="pt">《魔兽世界：无限》中文资料站</h1>' +
+        '<p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
+        '每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>' +
+        D.covBar(cov) +
+        '<div class="covnum">' +
+        ['L0', 'L1', 'L2', 'L3'].map(function (k) {
+          return '<span class="pill ' + k + '">' + D.pillName(k) + ' <b>' + (cov[k] || 0) + '</b></span>';
+        }).join('') + '<span class="dim mono">全站 ' + cov.total + ' 条（含天赋节点）</span></div>' +
+        '<p class="note">数据基线：' + D.esc(meta.dataBaseline.build) + '，核对于 ' +
+        D.esc(meta.dataBaseline.checkedAt) + '；规模快照 ' + D.esc(r[4].meta.generatedAt) +
+        '。本站基于测试服资料整理，正式服上线后需整体重核。</p></div>' +
+        '<aside class="heros"><div class="cd"><b class="mono">' + left.d + '</b><span>天到正式服' +
+        '（2026-11-05）</span><i class="dim mono">' + left.h + ' 时</i></div>' +
+        '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
+        '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
+        '<section class="card"><h2>挑一个职业，直接开一棵树</h2>' + strip + '</section>' +
+        '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
+        [['timeline.html', '上线时间表'], ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统口径'],
+          ['skills.html', '技能书'], ['dungeons.html#todo', '我们没采的']].map(function (x) {
+            return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
+          }).join('') + '</div>' +
+        '<div class="modgrid">' + MODS.map(mod).join('') + '</div>' +
+        '<div class="grid g2">' +
+        '<div class="card"><h2>官方口径里的时间点</h2>' +
+        '<p class="note">这里只列官方公告写过的时间点，本站不做新闻流与更新评论。</p>' +
+        recent.map(function (x) {
+          return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
+            '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
+            '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
+        }).join('') +
+        '<a class="cta" href="timeline.html">全部 ' + S.timeline + ' 个时间点 →</a></div>' +
+        '<div class="card"><h2>这一站刻意不做的</h2>' +
+        '<p class="note">不是漏了，是决定不做。理由逐条写在这。</p>' +
+        NOT_DOING.map(function (x) {
+          return '<div class="flowrow"><b>' + D.esc(x[0]) + '</b><span class="dim">' + D.esc(x[1]) + '</span></div>';
+        }).join('') + '</div></div>');
+    }).catch(fail);
   }
 
   /* ---------- 天赋计算器 ---------- */

@@ -496,3 +496,55 @@ button.info:hover{border-color:var(--gold);color:var(--gold)}
 .lrow>b{font-size:13.5px}
 .itemrow{display:flex;gap:var(--s3);align-items:center;margin-bottom:var(--s3)}
 .itemrow>div{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+
+/* ---------- 首页 ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:var(--s5);align-items:start}
+.hero .pt{font-size:26px;letter-spacing:.5px}
+.herot>p{margin:var(--s2) 0 var(--s4);max-width:64ch}
+.covnum{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:baseline;margin-top:var(--s3)}
+.covnum .pill b{margin-left:4px;font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.covnum>span:last-child{margin-left:auto}
+.heros{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
+.cd{display:flex;flex-direction:column;width:100%;background:var(--panel-2);
+  border:1px solid var(--gold-deep);border-radius:var(--r-card);padding:var(--s3) var(--s4)}
+.cd b{font-size:34px;line-height:1.05;color:var(--gold);font-variant-numeric:tabular-nums}
+.cd span{font-size:12px;color:var(--txt-dim)}
+.cd i{font-style:normal;font-size:11.5px;color:var(--txt-dim);margin-top:2px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--s2);margin-top:var(--s3)}
+.stripc{display:flex;flex-direction:column;align-items:center;gap:5px;padding:var(--s2) 4px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-card);
+  color:var(--txt-dim);text-decoration:none}
+.stripc:hover{border-color:var(--gold-deep);color:var(--txt)}
+.stripc b{color:var(--txt);font-size:13px;font-weight:600}
+.chipsrow{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:center;margin:var(--s4) 0 var(--s2)}
+.chipsrow a{font-size:12.5px}
+.modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s3);margin-top:var(--s3)}
+.mod{display:flex;flex-direction:column;gap:var(--s2);background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:var(--s4);color:var(--txt);text-decoration:none}
+.mod:hover{border-color:var(--gold-deep)}
+.mod h2{font-size:15px;color:var(--gold)}
+.mod p{margin:0;font-size:12.5px}
+.modn{display:flex;flex-wrap:wrap;gap:var(--s4);margin-top:auto;padding-top:var(--s3)}
+.modn span{font-size:11.5px;color:var(--txt-dim)}
+.modn b{display:block;font-size:19px;color:var(--txt);font-variant-numeric:tabular-nums}
+.modf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-top:1px solid var(--line);
+  padding-top:var(--s2);font-size:11.5px;color:var(--txt-dim)}
+.flowrow{display:grid;grid-template-columns:86px 1fr;gap:var(--s3);padding:var(--s2) 0;
+  border-top:1px solid var(--line);align-items:baseline}
+.flowrow>div{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.flowrow p{margin:2px 0 0;font-size:12.5px;flex:1 1 100%}
+
+/* 后写的组件规则会盖过上面那个媒体查询里的同名属性，所以新增块的移动端规则统一放在最后 */
+@media (max-width:600px){
+  .zmap{aspect-ratio:560/340}
+  .hero{grid-template-columns:1fr;gap:var(--s4)}
+  .hero .pt{font-size:21px}
+  .heros{flex-direction:row;flex-wrap:wrap;align-items:stretch}
+  .cd{flex:1 1 150px}
+  .chipsrow a{display:inline-flex;align-items:center;min-height:44px}
+  .stripc{min-height:64px}
+  .mod{min-height:44px}
+  .modgrid{grid-template-columns:1fr}
+  .covnum>span:last-child{margin-left:0;flex:1 1 100%}
+  .flowrow{grid-template-columns:1fr;gap:2px}
+}

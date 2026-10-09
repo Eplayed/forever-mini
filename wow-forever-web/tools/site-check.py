@@ -692,7 +692,7 @@ def test_grouping(browser, base):
     hp = ctx.new_page()
     hp.goto(base + "/index.html", wait_until="networkidle")
     hp.wait_for_timeout(1300)
-    hi = hp.evaluate("""() => { const a = [...document.querySelectorAll('.cls .liw img')];
+    hi = hp.evaluate("""() => { const a = [...document.querySelectorAll('.stripc .liw img')];
       return { imgs: a.length, broken: a.filter(i => i.complete && i.naturalWidth === 0).length }; }""")
     check("首页职业卡用上官方职业图标", hi["imgs"] == 9 and hi["broken"] == 0, json.dumps(hi))
     hp.screenshot(path=os.path.join(SHOT_DIR, "index-class-icons.png"))
@@ -952,6 +952,72 @@ def test_world(browser, base):
     m.close()
 
 
+def test_home(browser, base):
+    """首页：数字必须来自 scale.json，模块卡必须都指向真存在的页面。"""
+    print("\n[14] 首页布局与数字来源")
+    import json
+    sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/index.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    check("首页无脚本报错", not errs, "; ".join(errs[:2]))
+    nums = page.evaluate("""() => ({
+      cov: [...document.querySelectorAll('.covnum .pill')].map(p => +p.querySelector('b').textContent),
+      total: (document.querySelector('.covnum > span:last-child').textContent.match(/\\d+/) || [0])[0] })""")
+    check("首页覆盖率四个数来自 scale.json",
+          nums["cov"] == [sc["coverage"]["L0"], sc["coverage"]["L1"], sc["coverage"]["L2"], sc["coverage"]["L3"]],
+          "页面 %s / 数据 %s" % (nums["cov"], [sc["coverage"][k] for k in ("L0", "L1", "L2", "L3")]))
+    check("首页总条数与数据一致", int(nums["total"]) == sc["coverageTotal"],
+          "页面 %s / 数据 %s" % (nums["total"], sc["coverageTotal"]))
+    bar = page.evaluate("""() => { const i = [...document.querySelectorAll('.cov i')];
+      return { n: i.length, sum: i.reduce((a, x) => a + x.getBoundingClientRect().width, 0),
+               box: document.querySelector('.cov').getBoundingClientRect().width }; }""")
+    check("覆盖率条四段宽度加起来等于条宽", bar["n"] == 4 and abs(bar["sum"] - bar["box"]) < 3,
+          "四段 %.0fpx / 条 %.0fpx" % (bar["sum"], bar["box"]))
+    strip = page.evaluate("""() => { const a = [...document.querySelectorAll('.stripc')];
+      return { n: a.length, ok: a.filter(x => /^talent\.html\?c=/.test(x.getAttribute('href'))).length,
+               img: a.filter(x => x.querySelector('img')).length }; }""")
+    check("九职业条每格都直接进天赋树", strip["n"] == sc["classes"] and strip["ok"] == strip["n"],
+          json.dumps(strip))
+    mods = page.evaluate("""() => { const a = [...document.querySelectorAll('.mod')];
+      return { n: a.length, nums: a.reduce((s, x) => s + x.querySelectorAll('.modn b').length, 0),
+               pills: a.filter(x => x.querySelector('.pill')).length,
+               notes: a.filter(x => x.querySelector('.modf .dim')).length }; }""")
+    check("六张模块卡都带规模数字与口径说明", mods["n"] == 6 and mods["nums"] == 18 and mods["pills"] == 6 and mods["notes"] == 6,
+          json.dumps(mods))
+    hrefs = page.evaluate("""() => [...document.querySelectorAll('.mod, .chipsrow a, .hero .cta')]
+      .map(a => (a.getAttribute('href') || '').split('#')[0].split('?')[0].replace('.html', ''))
+      .filter(h => h && !/^https?:/.test(h))""")
+    unknown = sorted({h for h in hrefs if h not in PAGES})
+    check("首页所有入口都指向真存在的页", not unknown, "指向不存在的页：%s" % (unknown or "无"))
+    hard = page.evaluate("""() => { const t = document.querySelector('#main').innerText;
+      return ['1990', '1055', '473', '366'].filter(n => !t.includes(n)); }""")
+    check("首页规模数字都渲染出来了", not hard, "缺 %s" % (hard or "无"))
+    nd = page.evaluate("() => document.querySelectorAll('.flowrow').length")
+    check("刻意不做的与时间点都在页上", nd >= 9, "%d 行" % nd)
+    page.screenshot(path=os.path.join(SHOT_DIR, "home-redesign.png"))
+    ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(base + "/index.html", wait_until="networkidle")
+    mp.wait_for_timeout(1300)
+    mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const h1 = document.querySelector('h1').getBoundingClientRect();
+      const small = [...document.querySelectorAll('.stripc, .chipsrow a, .mod, .hero .cta')]
+        .filter(b => { const r = b.getBoundingClientRect(); return r.height && r.height < 44; }).length;
+      return { overflow: document.documentElement.scrollWidth > vw + 1, h1w: Math.round(h1.width),
+               h1h: Math.round(h1.height), small: small }; }""")
+    check("移动端首页不溢出、标题不换成一字一行",
+          not mob["overflow"] and mob["h1w"] > 280 and mob["h1h"] <= 60, json.dumps(mob))
+    check("移动端首页点击目标 ≥44px", mob["small"] == 0, "%d 个偏小" % mob["small"])
+    mp.screenshot(path=os.path.join(SHOT_DIR, "home-redesign-mobile.png"), full_page=True)
+    m.close()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.parse_args()
@@ -972,6 +1038,7 @@ def main():
             test_dungeon_data(browser, base)
             test_professions(browser, base)
             test_world(browser, base)
+            test_home(browser, base)
             test_design_baseline(browser, base)
             test_mobile(browser, base)
             browser.close()

@@ -366,6 +366,9 @@ if (fs.existsSync(artPath)) {
   warns.push('art.json 缺失：客户端原画全部退回自绘（跑 tools/fetch-art.py 可补）');
 }
 
+// 首页与溯源页要的规模数字，边校验边收集，最后统一写进 scale.json（单一来源，不手抄）
+const scale = {};
+
 // 专业：配方与采集点的口径检查（数据全部来自客户端解包转述）
 const profPath = path.join(ROOT, 'professions.json');
 if (fs.existsSync(profPath)) {
@@ -396,6 +399,8 @@ if (fs.existsSync(profPath)) {
   const pnew = (pf.professions || []).reduce((s, p) => s + ((p.counts || {}).newRecipes || 0), 0);
   console.log('专业 ' + (pf.professions || []).length + ' 个 / 配方 ' + pr + ' 条（无限新增 ' + pnew +
     '）/ 采集点 ' + pn + ' 个');
+  scale.professions = (pf.professions || []).length;
+  scale.recipes = pr; scale.recipesNew = pnew; scale.gatherNodes = pn;
 }
 
 // 缺图登记：界面会退回自绘块，但"缺哪些"必须是登记过的，不能靠 404 现场发现
@@ -502,6 +507,9 @@ if (fs.existsSync(worldPath)) {
   if (noIcon.length) warns.push(`world：${noIcon.length} 个图标键官方 CDN 取不到（多是无限新增装备），界面退回自绘块：` +
     Array.from(new Set(noIcon)).slice(0, 6).join('、'));
   const bagIcon = (w.rares || []).concat(w.books).filter((x) => x.mapFile).length;
+  scale.zones = (w.zones || []).length; scale.newZones = newN.length;
+  scale.rares = (w.rares || []).length; scale.raresUnplaced = (w.raresUnplaced || []).length;
+  scale.books = (w.books || []).length; scale.clientMaps = (w.maps || []).length;
   console.log('世界：区域 ' + (w.zones || []).length + '（含无限新增 ' + newN.length + '）· 稀有 ' +
     (w.rares || []).length + '（带掉落 ' + (w.rares || []).filter((r) => (r.drops || []).length).length +
     '，未定位 ' + (w.raresUnplaced || []).length + '）· 书籍 ' + (w.books || []).length +
@@ -547,6 +555,33 @@ console.log('全站覆盖率：L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + co
 const rcTraitN = (rc.races || []).reduce((a, x) => a + (x.traits || []).length + (((x.subgroup && x.subgroup.traits) || []).length), 0);
 console.log('种族 ' + (rc.races || []).length + ' 行 / 特长 ' + rcTraitN + ' 条 / 亮点组合 ' + (rc.newCombos || []).length +
   ' 组，全部出自国服官方中文公告；已回填种族归属的词条 ' + gl.items.filter((x) => x.raceId).length + ' 条');
+// 规模快照：首页与溯源页显示的数字一律从这里来，避免页面里手抄一份和真实数据漂移
+const dalls = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []);
+Object.assign(scale, {
+  glossary: gl.items.length,
+  classes: (JSON.parse(fs.readFileSync(path.join(ROOT, 'classes.json'), 'utf8')).classes || []).length,
+  talentNodes: talentNodes,
+  talentVerified: talentVerified,
+  dungeons: dalls.length,
+  dungeonsNew: (dg.newDungeons || []).length,
+  bosses: dalls.reduce((a, x) => a + (x.bosses || []).length, 0),
+  drops: dalls.reduce((a, x) => a + (x.drops || []).length, 0),
+  races: (rc.races || []).length,
+  traits: rcTraitN,
+  timeline: (JSON.parse(fs.readFileSync(path.join(ROOT, 'timeline.json'), 'utf8')).items || []).length,
+  abilities: (JSON.parse(fs.readFileSync(path.join(ROOT, 'abilities.json'), 'utf8')).items || []).length,
+  coverage: cov, coverageTotal: total
+});
+const scalePath = path.join(ROOT, 'scale.json');
+fs.writeFileSync(scalePath, JSON.stringify({
+  meta: {
+    generatedAt: new Date().toISOString().slice(0, 10),
+    method: 'tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数',
+    note: '首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。'
+  },
+  scale: scale
+}, null, 1) + '\n');
+console.log('规模快照 → src/data/scale.json（' + Object.keys(scale).length + ' 项）');
 warns.forEach((w) => console.log('  提示 ' + w));
 if (errs.length) {
   console.error('\n校验失败 ' + errs.length + ' 项：');

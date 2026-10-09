@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-09",
+  "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
+  "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
+ },
+ "scale": {
+  "professions": 13,
+  "recipes": 1990,
+  "recipesNew": 889,
+  "gatherNodes": 55,
+  "zones": 44,
+  "newZones": 4,
+  "rares": 36,
+  "raresUnplaced": 23,
+  "books": 36,
+  "clientMaps": 48,
+  "glossary": 215,
+  "classes": 9,
+  "talentNodes": 473,
+  "talentVerified": 460,
+  "dungeons": 38,
+  "dungeonsNew": 9,
+  "bosses": 235,
+  "drops": 1055,
+  "races": 10,
+  "traits": 40,
+  "timeline": 11,
+  "abilities": 38,
+  "coverage": {
+   "L0": 366,
+   "L1": 114,
+   "L2": 360,
+   "L3": 2
+  },
+  "coverageTotal": 842
+ }
+}

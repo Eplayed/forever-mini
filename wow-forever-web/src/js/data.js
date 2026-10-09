@@ -32,6 +32,7 @@ window.WowData = (function () {
     }).join('') + '</div>';
   }
   var PILL = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
+  function pillName(level) { return PILL[level] || PILL.L3; }
   function pill(level) {
     var l = PILL[level] ? level : 'L3';
     return '<span class="pill ' + l + '">' + PILL[l] + '</span>';
@@ -82,5 +83,5 @@ window.WowData = (function () {
     try { document.execCommand('copy'); } catch (e) { }
     document.body.removeChild(ta);
   }
-  return { load: load, coverage: coverage, tally: tally, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy, levelOf: levelOf };
+  return { load: load, coverage: coverage, pillName: pillName, tally: tally, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy, levelOf: levelOf };
 })();
