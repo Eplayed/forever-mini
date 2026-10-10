@@ -639,13 +639,21 @@
           return '<div class="grphead"><h2>' + g.line + '</h2><span>' + g.items.length +
             ' 个板块</span></div><div class="modgrid">' + g.items.map(mod).join('') + '</div>';
         }).join('') +
-        '<div class="grphead"><h2>自经典旧世以来的改动</h2><span>客户端解包 · 964 条</span></div>' +
+        '<div class="grphead"><h2>自经典旧世以来的改动</h2><span>客户端解包 · ' + S.changes + ' 条</span></div>' +
         '<section class="card"><div class="mline">改动清单 · <b>' + S.changes + '</b> 条 · ' +
           '与来源站自报计数逐项一致</div>' +
         '<div class="four"><div><b>' + S.changesNew + '</b><s>新增天赋</s></div>' +
         '<div><b>' + S.changesModified + '</b><s>改动天赋</s></div>' +
         '<div><b>' + S.changesRemoved + '</b><s>移除</s></div>' +
         '<div><b>' + S.changesSpellsChanged + '</b><s>法术有变</s></div></div>' +
+        // 四格之和与卡头的 964 是两个数，不写清就是在自己打自己的脸（和数现算，不抄常量）
+        '<div class="kv"><span>这四格加起来比上面的 ' + S.changes + ' 少 ' +
+          (S.changes - S.changesNew - S.changesModified - S.changesRemoved - S.changesSpellsChanged) + ' 条</span>' +
+          '<b>' + S.changes + ' = 天赋 ' + S.changesTalents + ' + 法术 ' +
+          (S.changes - S.changesTalents) + '</b></div>' +
+        '<p class="dim">清单把 ' + S.changes + ' 条客户端条目都列了出来，其中 ' +
+          (S.changesNew + S.changesModified + S.changesRemoved + S.changesSpellsChanged) +
+          ' 条在无限服真的动了（新增、改动、移除，或法术说明有变）；剩下的只是列进对照表、本身没变。</p>' +
         '<div class="kv"><span>只放名称与改动类别，前后对照的句子是别人转述的，本站不复制</span>' +
           '<a class="mono" href="updates.html">→ updates.html</a></div>' +
         '<div class="kv"><span>资料最全的职业</span><b>' + cnOf(rankTop[0].classId) + ' ' +

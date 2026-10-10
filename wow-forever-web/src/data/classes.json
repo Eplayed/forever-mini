@@ -21,7 +21,7 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 54,
+   "talentCount": 56,
    "nameVerified": 16,
    "iconKey": "class_warrior",
    "provenance": [
@@ -181,7 +181,7 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 52,
+   "talentCount": 53,
    "nameVerified": 38,
    "iconKey": "class_druid",
    "provenance": [

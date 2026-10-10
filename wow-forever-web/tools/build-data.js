@@ -537,13 +537,28 @@ const pubLevels = [].concat(gl.items.map((x) => x.level || 'L3'),
   [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).map((d) => d.level || 'L3'), worldLevels);
 // 天赋节点必须计入总覆盖率，否则 L0 占比会虚高
 let talentNodes = 0, talentVerified = 0, talentLevels = [];
+const perClassNodes = {};
 fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
   if (f.charAt(0) === '_') return;
   const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
+  const cid = f.replace(/\.json$/, '');
+  perClassNodes[cid] = 0;
   (t.trees || []).forEach((tr) => tr.nodes.forEach((n) => {
-    talentNodes++; talentLevels.push(n.level || 'L3');
+    talentNodes++; talentLevels.push(n.level || 'L3'); perClassNodes[cid]++;
     if (n.nameVerified) talentVerified++;
   }));
+});
+// classes.json 的 talentCount 是手抄的，抄漏过两次（战士写 54 实际 56、德鲁伊写 52 实际 53），
+// 而首页职业条与职业页都直接显示它。天赋文件才是真相：对不上就别让它上页面。
+(cl.classes || []).forEach((c) => {
+  const n = perClassNodes[c.id];
+  if (n === undefined) {
+    if (c.talentCount) errs.push(`classes ${c.id}：写着 talentCount ${c.talentCount}，但没有 talents/${c.id}.json`);
+    return;
+  }
+  if (c.talentCount !== n) {
+    errs.push(`classes ${c.id}：talentCount 写的是 ${c.talentCount}，talents/${c.id}.json 里实际有 ${n} 个节点`);
+  }
 });
 const cov = tally(pubLevels.concat(talentLevels));
 const pub = tally(pubLevels);

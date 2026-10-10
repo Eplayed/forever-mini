@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
-  "scrapedAt": "2026-10-09",
+  "scrapedAt": "2026-10-10",
   "note": "渲染后 DOM 抓取：卡片含载入图路径、所在区域与阵营、首领与掉落计数"
  },
  "cards": [
@@ -78,8 +78,8 @@
    "isNew": false,
    "zone": "灰谷",
    "art": "/jiemian/dungeons/xiao/art-blackfathomdeeps.webp",
-   "bosses": "8 个首领",
-   "drops": "17 件掉落",
+   "bosses": "5 个首领",
+   "drops": "16 件掉落",
    "href": "/fuben/blackfathom-deeps"
   },
   {
@@ -122,8 +122,8 @@
    "isNew": false,
    "zone": "丹莫罗",
    "art": "/jiemian/dungeons/xiao/art-gnomeregan.webp",
-   "bosses": "6 个首领",
-   "drops": "38 件掉落",
+   "bosses": "5 个首领",
+   "drops": "34 件掉落",
    "href": "/fuben/gnomeregan"
   },
   {

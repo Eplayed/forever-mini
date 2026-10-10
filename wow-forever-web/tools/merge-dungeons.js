@@ -51,7 +51,10 @@ function build(d) {
   const bosses = (d.bosses || []).map((b, i) => ({
     id: b.id, nameCn: b.nameCn,
     level: (d.drops || []).some((x) => x.bossId === b.id) ? 'L0' : 'L2',
-    note: (d.drops || []).some((x) => x.bossId === b.id) ? null : '上游标了：' + (b.noLootNote || '还没有掉落记录')
+    // 这句是玩家看到的，不能写「上游标了：」（禁词卡口会红，2026-10-10 实测：
+    // 重跑副本线就把这句带回过数据里）。上游原话是「开放数据库里还没有它的掉落。」，
+    // 意思一样，这里用站得住的说法写死，不整句转述别人的话。
+    note: (d.drops || []).some((x) => x.bossId === b.id) ? null : '公开数据库里还没有它的掉落记录。'
   }));
   const drops = (d.drops || []).map((x) => ({
     itemId: x.itemId, nameCn: x.nameCn, iconKey: x.iconKey || null, quality: x.quality === undefined ? null : x.quality,
@@ -93,7 +96,10 @@ const isNew = (x) => x.kind === 'new';
 dg.newDungeons = merged.filter(isNew);
 dg.classicDungeons = merged.filter((x) => !isNew(x)).concat(kept.filter((x) => !isNew(x)));
 dg.meta = dg.meta || {};
-dg.meta.lootDisclaimer = '掉落归属是上游按经典旧世开放数据库推的，暴雪说过无限服重做过掉落，正式开放可能变化——所以掉落一律标 L2 待实测，本站不写百分比。';
+// 这句会写进数据、玩家看得到：不能出现「上游」这类维护者措辞（禁词卡口管），
+// 也不点名厂商。改文案要连这里一起改，只改 JSON 的话下次重跑副本线就被盖回去。
+dg.meta.lootDisclaimer = '掉落是按经典旧世公开数据库推出来的，官方说过无限服重做过掉落，'
+  + '正式开放可能变化——所以掉落一律标待实测，本站不写百分比。';
 dg.meta.upstream = { site: up.meta.site, source: up.meta.source, scrapedAt: up.meta.scrapedAt };
 
 const cardsPath = path.join(ROOT, 'upstream', 'wclbox-cards.json');

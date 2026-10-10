@@ -1337,6 +1337,7 @@ def test_updates_rank(browser, base):
                fourtxt: chg ? [...chg.querySelectorAll('.four b')].map(b => b.innerText.trim()) : [],
                head: head.replace(/\\s+/g, ' ').slice(0, 40),
                kv: chg ? chg.querySelectorAll('.kv').length : 0,
+               chgText: chg ? chg.innerText.replace(/\\s+/g, ' ') : '',
                chgl: document.querySelectorAll('#main .chgl').length }; }""")
     check("首页动态卡有时间点与两个入口", hb and hb["rows"] >= 4
           and any("updates.html" in x for x in hb["links"])
@@ -1348,6 +1349,13 @@ def test_updates_rank(browser, base):
     check("改动四格挂在「自经典旧世以来的改动」这张卡上，且带对照行",
           hb and hb["four"] == 4 and "自经典旧世以来的改动" in hb["head"] and hb["kv"] >= 3,
           str(hb and {"head": hb["head"], "kv": hb["kv"]}))
+    # 964（全部条目）与四格之和 751（真有变化的）同屏出现，不解释清楚就是自己打脸
+    sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    _sum = sum(int(x) for x in hb["fourtxt"])
+    check("改动卡自己解释清「全部 964 条」与「四格之和 751」差在哪",
+          hb and str(_sum) in hb["chgText"] and str(sc["changes"]) in hb["chgText"] and
+          str(sc["changesTalents"]) in hb["chgText"] and "本身没变" in hb["chgText"],
+          str(hb and hb["chgText"][:150]))
     check("动态卡写明这三件事怎么分开", hb and "三件事分开说" in hb["note"], (hb or {}).get("note", "")[:40])
     hp.close()
 
