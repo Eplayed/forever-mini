@@ -2,10 +2,16 @@
 /* 把 upstream/wclbox-dungeons.json 并进 src/data/dungeons.json。
  *
  * 规则：
- *  - 名单 / 等级区间 / BOSS / 掉落归属来自上游（客户端解包转述），来源记 datamine_cn + 抓取日期。
- *  - 我们自己攒的官方来源、译名冲突、英文原名一律保留，不被上游覆盖。
- *  - 掉落是上游按经典旧世开放数据库推的（它自己也这么写），所以掉落记 L2 待实测，不升 L0，也不写百分比。
- *  - 上游没有的条目（我们的 3 座团本）原样留着。
+ *  - 名单 / 等级区间 / BOSS / 掉落归属来自解包站（客户端数据转述），来源记 datamine_cn + 抓取日期。
+ *  - 我们自己攒的官方来源、译名冲突、英文原名一律保留，不被解包站覆盖。
+ *  - 掉落是它按经典旧世开放数据库推的（它自己也这么写），所以掉落记 L2 待实测，不升 L0，也不写百分比。
+ *  - 它没有的条目（我们的 3 座团本）原样留着。
+ *  - 客户端队伍查找器表（upstream/db2-group-finder.json，由 tools/fetch-db2-groupfinder.py 取回）
+ *    在这里做第三方的对账：补英文原名、写进入人数上限、并列客户端的等级区间。
+ *    对账一律**每次从这份表全量重算**，字段一致时写 null——不然改一次数据就永久留一层旧结论（重跑必须幂等）。
+ *  - 对账结果另外落一份 src/data/queue.json：客户端里现在能排到、本站还没有名单的条目。
+ *    它单独成文件，因为 tools/export-mini.js 会把整份 dungeons 原样打进小程序，
+ *    混进去会让首页把座数虚报。
  */
 const fs = require('fs');
 const path = require('path');
@@ -19,7 +25,8 @@ const up = read('upstream/wclbox-dungeons.json');
 const ALIAS = {
   'the-deadmines': 'deathmine',
   'the-stockade': 'the-stocks',
-  'razorfen-downs': 'razor-krendor'
+  'razorfen-downs': 'razor-krendor',
+  'excavation-site': 'whelgars-excavation'
 };
 // 我们那条聚合的"血色修道院"要拆成上游的四区
 const RETIRE = { 'scarlet-monastery': true };
@@ -86,8 +93,11 @@ function build(d) {
   }));
   const row = {
     id: mine ? mine.id : slug,
+    // 这条链接是为了让后面的卡片信息与客户端对账能找到同一条：我们的 id 与它的 slug 不同名
+    upstreamSlug: slug,
     nameCn: (mine && mine.nameCn) || d.nameCn,
-    nameEn: (mine && mine.nameEn) || null,
+    // 上一轮由客户端表补出来的英文名不当成"我们原有的名字"，每轮重算
+    nameEn: (mine && mine.nameEnFrom !== 'db2' && mine.nameEn) || null,
     nameCnConflict: mine ? mine.nameCnConflict : null,
     kind: d.isNew ? 'new' : 'classic',
     levelRange: (mine && mine.levelRange) || d.levelRange || null,
@@ -133,7 +143,9 @@ if (fs.existsSync(cardsPath)) {
   const artIdx = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).dungeons || {};
   let z = 0;
   [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
-    const c = bySlug[d.id];
+    // 以前这里只按我们的 id 找卡片，四座不同名的（死亡矿井 / 监狱 / 剃刀高地 / 湿地挖掘场）
+    // 一直没有所在区域、卡片计数与载入图——2026-10-10 实测补上
+    const c = bySlug[d.upstreamSlug || d.id] || bySlug[d.id];
     if (!c) return;
     if (c.zone) { d.zoneCn = c.zone; z += 1; }
     if (c.range) {
@@ -145,6 +157,157 @@ if (fs.existsSync(cardsPath)) {
     d.art = artIdx[d.id] || null;
   });
   console.log('卡片信息：补上所在区域 %d 条', z);
+}
+
+/* ---------- 排队元数据包（_shuju/<发布号>/dungeons.json）：补阵营与所在区域 ---------- */
+const metaPath = path.join(ROOT, 'upstream', 'wclbox-dungeon-meta.json');
+if (fs.existsSync(metaPath)) {
+  const dm = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+  const bySlug2 = {};
+  (dm.dungeons || []).forEach((r) => { bySlug2[r.id] = r; });
+  let fac = 0, zone = 0, stateDiff = 0;
+  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+    const r = bySlug2[d.upstreamSlug || d.id];
+    if (!r) return;
+    // 阵营原来只混在「丹莫罗，铁炉堡地下 · 联盟」这种字符串里，没法拿来分组
+    d.faction = r.faction || null;
+    if (r.faction) fac += 1;
+    if (!d.zoneCn && r.zone) {
+      d.zoneCn = r.zone + (r.faction ? ' · ' + r.faction : '');
+      zone += 1;
+    }
+    if (r.status && d.kind && r.status !== d.kind) {
+      stateDiff += 1;
+      console.log('%s 是不是无限新增，两份资料说法不同（本站记 %s / 它记 %s）——先不动，人工核',
+        d.id, d.kind, r.status);
+    }
+  });
+  console.log('排队元数据包：写上阵营 %d 座 / 补上所在区域 %d 座 / 新增说法不一致 %d 座',
+    fac, zone, stateDiff);
+} else {
+  console.log('没有 upstream/wclbox-dungeon-meta.json（先跑 scrape-wclbox-shuju.py --group dungeons），本轮不补阵营');
+}
+
+/* ---------- 客户端队伍查找器表：英文原名 / 人数上限 / 等级区间对账 ---------- */
+const DB2_PATH = path.join(ROOT, 'upstream', 'db2-group-finder.json');
+const norm = (s) => String(s || '').toLowerCase()
+  .replace(/['`’´]/g, '')            // 客户端名里的撇号不算分隔符：Zul'Farrak 与 zulfarrak 是同一条
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^the-/, '')
+  .replace(/^-+|-+$/g, '');
+// 我们的 id 与客户端英文原名对不上的四条。这只是"怎么找到同一条"的连接提示，
+// 不是替它们改名——真正显示什么，由下面的规则决定。
+const EN_ALIAS = {
+  deathmine: 'deadmines',                            // 客户端写 Deadmines，我们最早用了 deathmine
+  'the-stocks': 'stormwind-stockades',               // 客户端写 Stormwind Stockades
+  'razor-krendor': 'razorfen-downs',                 // 参考站给过 The Razor Krendor，客户端写 Razorfen Downs
+  'whelgars-excavation': 'excavation-site-wetlands'  // 官方回顾写 Whelgar's Excavation，客户端写 Excavation Site: Wetlands
+};
+const QUEUE_KIND = { Dungeons: 'dungeon', Raids: 'raid' };
+
+function buildQueue(data) {
+  if (!data) return null;
+  const all = [].concat(dg.newDungeons, dg.classicDungeons, dg.raids);
+  const rows = (data.activities || []).filter((a) => QUEUE_KIND[a.categoryName]);
+  // 按活动号排序再去重：同一座团本在表里有两行，不排序的话每次重跑 diff 都在漂
+  rows.sort((a, b) => a.activityId - b.activityId);
+  const byName = {};
+  rows.forEach((a) => { const k = norm(a.nameEn); (byName[k] = byName[k] || []).push(a); });
+  const ownName = (d) => (d.nameEnFrom === 'db2' ? null : d.nameEn) || null;
+  const findRows = (d) => {
+    const keys = [];
+    if (EN_ALIAS[d.id]) keys.push(EN_ALIAS[d.id]);
+    if (ownName(d)) keys.push(norm(ownName(d)));
+    keys.push(norm(d.id));
+    for (let i = 0; i < keys.length; i += 1) if (byName[keys[i]]) return byName[keys[i]];
+    return [];
+  };
+  const checked = data.meta.fetchedAt;
+  const srcUrl = data.meta.url;
+  // 用到这份表的条目都要挂上它的出处，不能只在 queue.json 里记一次——
+  // 界面上"来源"点开的是这座本自己的来源清单
+  const prov = {
+    type: 'datamine_en', url: srcUrl,
+    note: '客户端版本 ' + data.meta.build + ' 的队伍查找器：英文原名、等级与人数上限'
+      + '（经第三方客户端数据站取回）',
+    checkedAt: checked
+  };
+  const matched = {};
+  const st = { nameEn: 0, party: 0, range: 0, nameDiff: 0, noQueue: 0, sizeAlt: 0 };
+
+  all.forEach((d) => {
+    const hits = findRows(d);
+    // 主数取「地下城」类那行；同一座另有的团队类条目只当分歧，不当成新的一座本
+    const main = hits.filter((r) => r.categoryName === 'Dungeons')[0] || hits[0] || null;
+    hits.forEach((r) => { matched[r.activityId] = d.id; });
+    const own = ownName(d);
+    d.nameEn = own;                        // 每轮从这份表重算，不带上一轮的补值
+    d.nameEnFrom = own ? null : (main ? 'db2' : null);
+    d.clientActivityId = main ? main.activityId : null;
+    d.partySize = main ? main.maxPlayers : null;
+    d.partySizeAlt = null;
+    d.clientAltIds = null;
+    d.levelRangeClient = null;
+    d.nameEnClient = null;
+    if (!main) { st.noQueue += 1; return; }
+    d.provenance = d.provenance || [];
+    if (!d.provenance.some((p) => p.type === prov.type && p.url === prov.url)) d.provenance.push(prov);
+    if (!own) { d.nameEn = main.nameEn || null; if (d.nameEn) st.nameEn += 1; }
+    else if (norm(own) !== norm(main.nameEn)) { d.nameEnClient = main.nameEn; st.nameDiff += 1; }
+    const cli = main.minLevel + '-' + main.maxLevel;
+    const ours = d.levelRange ? String(d.levelRange).replace(/[–—~]/g, '-') : null;
+    if (ours !== cli) { d.levelRangeClient = cli; st.range += 1; }
+    const sizes = [];
+    hits.forEach((r) => { if (r.maxPlayers && sizes.indexOf(r.maxPlayers) < 0) sizes.push(r.maxPlayers); });
+    if (sizes.length > 1) {
+      d.partySizeAlt = sizes.filter((v) => v !== d.partySize)[0] || null;
+      if (d.partySizeAlt) st.sizeAlt += 1;
+    }
+    // 同一座在表里不止一条时，其余活动号也记下来：两份文件互相能认，卡口才对得上账
+    const others = [];
+    hits.forEach((r) => { if (r !== main && others.indexOf(r.activityId) < 0) others.push(r.activityId); });
+    d.clientAltIds = others.length ? others.sort((a, b) => a - b) : null;
+    if (d.partySize) st.party += 1;
+  });
+
+  const items = rows.map((r) => ({
+    activityId: r.activityId,
+    nameEn: r.nameEn,
+    kind: QUEUE_KIND[r.categoryName],
+    categoryName: r.categoryName,
+    levelRange: r.minLevel + '-' + r.maxLevel,
+    partySize: r.maxPlayers || null,
+    mapId: r.mapId === undefined ? null : r.mapId,
+    matchedId: matched[r.activityId] || null,
+    level: 'L1',
+    provenance: [prov]
+  }));
+  console.log('客户端排队表：补英文名 %d 座 / 写人数上限 %d 座 / 等级区间另有一说 %d 座 / '
+      + '英文名另有一说 %d 座 / 同一座有两种人数 %d 座 / 表里还没有排队条目 %d 座',
+    st.nameEn, st.party, st.range, st.nameDiff, st.sizeAlt, st.noQueue);
+  return {
+    meta: {
+      generatedAt: checked,
+      build: data.meta.build,
+      source: data.meta.url,
+      note: '这一份是客户端队伍查找器里现在的排队条目，不是本站的副本名单。'
+        + '没对上本站的那几条，是「客户端能排到、本站还没有首领与掉落名单」的：'
+        + '英文名取自客户端，中文定名还没公布，正式开放前可能变化。',
+      categories: ['Dungeons', 'Raids'],
+      counts: { total: items.length, unlisted: items.filter((i) => !i.matchedId).length }
+    },
+    items: items
+  };
+}
+
+const db2 = fs.existsSync(DB2_PATH) ? JSON.parse(fs.readFileSync(DB2_PATH, 'utf8')) : null;
+const queueOut = buildQueue(db2);
+if (queueOut) {
+  fs.writeFileSync(path.join(ROOT, 'queue.json'), JSON.stringify(queueOut, null, 1) + '\n');
+  console.log('已写 queue.json：排队条目 %d 条，其中本站还没有名单 %d 条',
+    queueOut.meta.counts.total, queueOut.meta.counts.unlisted);
+} else {
+  console.log('没有 upstream/db2-group-finder.json（先跑 tools/fetch-db2-groupfinder.py），本轮不做客户端排队表对账');
 }
 
 fs.writeFileSync(path.join(ROOT, 'dungeons.json'), JSON.stringify(dg, null, 1) + '\n');

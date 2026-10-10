@@ -1,0 +1,987 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-10",
+  "build": "1.60.1.70334",
+  "source": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+  "note": "这一份是客户端队伍查找器里现在的排队条目，不是本站的副本名单。没对上本站的那几条，是「客户端能排到、本站还没有首领与掉落名单」的：英文名取自客户端，中文定名还没公布，正式开放前可能变化。",
+  "categories": [
+   "Dungeons",
+   "Raids"
+  ],
+  "counts": {
+   "total": 51,
+   "unlisted": 16
+  }
+ },
+ "items": [
+  {
+   "activityId": 796,
+   "nameEn": "Wailing Caverns",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "15-24",
+   "partySize": 5,
+   "mapId": 43,
+   "matchedId": "wailing-caverns",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 797,
+   "nameEn": "Scholomance",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "58-60",
+   "partySize": 5,
+   "mapId": 289,
+   "matchedId": "scholomance",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 798,
+   "nameEn": "Ragefire Chasm",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "13-18",
+   "partySize": 5,
+   "mapId": 389,
+   "matchedId": "ragefire-chasm",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 799,
+   "nameEn": "Deadmines",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "17-26",
+   "partySize": 5,
+   "mapId": 36,
+   "matchedId": "deathmine",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 800,
+   "nameEn": "Shadowfang Keep",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "20-30",
+   "partySize": 5,
+   "mapId": 33,
+   "matchedId": "shadowfang-keep",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 801,
+   "nameEn": "Blackfathom Deeps",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "24-32",
+   "partySize": 5,
+   "mapId": 48,
+   "matchedId": "blackfathom-deeps",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 802,
+   "nameEn": "Stormwind Stockades",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "24-32",
+   "partySize": 5,
+   "mapId": 34,
+   "matchedId": "the-stocks",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 803,
+   "nameEn": "Gnomeregan",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "29-38",
+   "partySize": 5,
+   "mapId": 90,
+   "matchedId": "gnomeregan",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 804,
+   "nameEn": "Razorfen Kraul",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "29-38",
+   "partySize": 5,
+   "mapId": 47,
+   "matchedId": "razorfen-kraul",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 805,
+   "nameEn": "Scarlet Monastery - Graveyard",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "30-38",
+   "partySize": 5,
+   "mapId": 189,
+   "matchedId": "scarlet-monastery-graveyard",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 806,
+   "nameEn": "Razorfen Downs",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "37-46",
+   "partySize": 5,
+   "mapId": 129,
+   "matchedId": "razor-krendor",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 807,
+   "nameEn": "Uldaman",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "41-51",
+   "partySize": 5,
+   "mapId": 70,
+   "matchedId": "uldaman",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 808,
+   "nameEn": "Zul'Farrak",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "44-54",
+   "partySize": 5,
+   "mapId": 209,
+   "matchedId": "zulfarrak",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 809,
+   "nameEn": "Maraudon",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "46-55",
+   "partySize": 5,
+   "mapId": 349,
+   "matchedId": "maraudon",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 810,
+   "nameEn": "Sunken Temple",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "50-60",
+   "partySize": 5,
+   "mapId": 109,
+   "matchedId": "sunken-temple",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 811,
+   "nameEn": "Blackrock Depths",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "52-60",
+   "partySize": 5,
+   "mapId": 230,
+   "matchedId": "blackrock-depths",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 812,
+   "nameEn": "Lower Blackrock Spire",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "55-60",
+   "partySize": 5,
+   "mapId": 229,
+   "matchedId": "lower-blackrock-spire",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 813,
+   "nameEn": "Dire Maul (East)",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "54-60",
+   "partySize": 5,
+   "mapId": 429,
+   "matchedId": "dire-maul-east",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 814,
+   "nameEn": "Dire Maul (West)",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "56-60",
+   "partySize": 5,
+   "mapId": 429,
+   "matchedId": "dire-maul-west",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 815,
+   "nameEn": "Dire Maul (North)",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "56-60",
+   "partySize": 5,
+   "mapId": 429,
+   "matchedId": "dire-maul-north",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 816,
+   "nameEn": "Stratholme (Main Gate)",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "58-60",
+   "partySize": 5,
+   "mapId": 329,
+   "matchedId": "stratholme-main-gate",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 827,
+   "nameEn": "Scarlet Monastery - Armory",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "36-44",
+   "partySize": 5,
+   "mapId": 189,
+   "matchedId": "scarlet-monastery-armory",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 828,
+   "nameEn": "Scarlet Monastery - Cathedral",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "38-46",
+   "partySize": 5,
+   "mapId": 189,
+   "matchedId": "scarlet-monastery-cathedral",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 829,
+   "nameEn": "Scarlet Monastery - Library",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "33-41",
+   "partySize": 5,
+   "mapId": 189,
+   "matchedId": "scarlet-monastery-library",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 836,
+   "nameEn": "Zul'Gurub",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 20,
+   "mapId": 309,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 837,
+   "nameEn": "Upper Blackrock Spire",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "59-60",
+   "partySize": 10,
+   "mapId": 229,
+   "matchedId": "upper-blackrock-spire",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 838,
+   "nameEn": "Onyxia's Lair",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 249,
+   "matchedId": "onyxias-lair",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 839,
+   "nameEn": "Molten Core",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 409,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 840,
+   "nameEn": "Blackwing Lair",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 469,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 841,
+   "nameEn": "Naxxramas",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 533,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 842,
+   "nameEn": "Ahn'Qiraj Ruins",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 20,
+   "mapId": 509,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 843,
+   "nameEn": "Ahn'Qiraj Temple",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 531,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1603,
+   "nameEn": "Stratholme (Service Gate)",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "58-60",
+   "partySize": 5,
+   "mapId": 329,
+   "matchedId": "stratholme-service-gate",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1604,
+   "nameEn": "Blackfathom Deeps",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "25-32",
+   "partySize": 10,
+   "mapId": 48,
+   "matchedId": "blackfathom-deeps",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1605,
+   "nameEn": "Gnomeregan",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "40-49",
+   "partySize": 10,
+   "mapId": 90,
+   "matchedId": "gnomeregan",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1606,
+   "nameEn": "Sunken Temple",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "50-60",
+   "partySize": 20,
+   "mapId": 109,
+   "matchedId": "sunken-temple",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1607,
+   "nameEn": "Demon Fall Canyon",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "60-60",
+   "partySize": 5,
+   "mapId": 2784,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1608,
+   "nameEn": "Storm Cliffs",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 2791,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1609,
+   "nameEn": "The Tainted Scar",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 2789,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1610,
+   "nameEn": "Nightmare Grove",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 2832,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1611,
+   "nameEn": "The Crystal Vale",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 2804,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1612,
+   "nameEn": "Onyxia's Lair",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 249,
+   "matchedId": "onyxias-lair",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1613,
+   "nameEn": "Molten Core",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 409,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1614,
+   "nameEn": "Ahn'Qiraj Temple",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 25,
+   "mapId": 531,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1615,
+   "nameEn": "Ahn'Qiraj Ruins",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 15,
+   "mapId": 509,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1693,
+   "nameEn": "Karazhan Crypts",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "60-60",
+   "partySize": 5,
+   "mapId": 2875,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1710,
+   "nameEn": "Scarlet Enclave",
+   "kind": "raid",
+   "categoryName": "Raids",
+   "levelRange": "60-60",
+   "partySize": 40,
+   "mapId": 2856,
+   "matchedId": null,
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1981,
+   "nameEn": "Excavation Site: Wetlands",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "26-33",
+   "partySize": 5,
+   "mapId": 2998,
+   "matchedId": "whelgars-excavation",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1982,
+   "nameEn": "Ruins of Lordaeron",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "15-22",
+   "partySize": 5,
+   "mapId": 2999,
+   "matchedId": "ruins-of-lordaeron",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1983,
+   "nameEn": "City of Dalaran",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "28-35",
+   "partySize": 5,
+   "mapId": 2959,
+   "matchedId": "city-of-dalaran",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "activityId": 1984,
+   "nameEn": "Hall of Thanes",
+   "kind": "dungeon",
+   "categoryName": "Dungeons",
+   "levelRange": "13-20",
+   "partySize": 5,
+   "mapId": 3065,
+   "matchedId": "hall-of-thanes",
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
+    }
+   ]
+  }
+ ]
+}

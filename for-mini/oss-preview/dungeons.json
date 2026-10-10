@@ -13,6 +13,7 @@
  "newDungeons": [
   {
    "id": "hall-of-thanes",
+   "upstreamSlug": "hall-of-thanes",
    "nameCn": "领主大厅",
    "nameEn": "Hall of Thanes",
    "nameCnConflict": "诸王大厅",
@@ -88,6 +89,12 @@
      "url": "https://wowforever.wclbox.com/fuben/hall-of-thanes/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "officialBacked": true,
@@ -97,10 +104,19 @@
     "bosses": "4 个首领",
     "drops": "1 件掉落"
    },
-   "art": "img/art/dungeons/hall-of-thanes.webp"
+   "art": "img/art/dungeons/hall-of-thanes.webp",
+   "faction": "联盟",
+   "nameEnFrom": null,
+   "clientActivityId": 1984,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "13-20",
+   "nameEnClient": null
   },
   {
    "id": "ruins-of-lordaeron",
+   "upstreamSlug": "ruins-of-lordaeron",
    "nameCn": "洛丹伦废墟",
    "nameEn": "Ruins of Lordaeron",
    "nameCnConflict": null,
@@ -203,6 +219,12 @@
      "url": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "officialBacked": true,
@@ -212,10 +234,19 @@
     "bosses": "7 个首领",
     "drops": "2 件掉落"
    },
-   "art": "img/art/dungeons/ruins-of-lordaeron.webp"
+   "art": "img/art/dungeons/ruins-of-lordaeron.webp",
+   "faction": "部落",
+   "nameEnFrom": null,
+   "clientActivityId": 1982,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "15-22",
+   "nameEnClient": null
   },
   {
    "id": "whelgars-excavation",
+   "upstreamSlug": "excavation-site",
    "nameCn": "挖掘场：湿地",
    "nameEn": "Whelgar's Excavation",
    "nameCnConflict": null,
@@ -309,12 +340,34 @@
      "url": "https://wowforever.wclbox.com/fuben/excavation-site/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
-   "officialBacked": true
+   "officialBacked": true,
+   "zoneCn": "湿地，维尔加挖掘场一带",
+   "levelRangeAlt": "26-33",
+   "cardCounts": {
+    "bosses": "4 个首领",
+    "drops": "3 件掉落"
+   },
+   "art": "img/art/dungeons/whelgars-excavation.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 1981,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "26-33",
+   "nameEnClient": "Excavation Site: Wetlands"
   },
   {
    "id": "city-of-dalaran",
+   "upstreamSlug": "city-of-dalaran",
    "nameCn": "达拉然",
    "nameEn": "City of Dalaran",
    "nameCnConflict": null,
@@ -349,6 +402,12 @@
      "url": "https://wowforever.wclbox.com/fuben/city-of-dalaran/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "officialBacked": true,
@@ -358,10 +417,19 @@
     "bosses": "9 个首领",
     "drops": "1 件掉落"
    },
-   "art": "img/art/dungeons/city-of-dalaran.webp"
+   "art": "img/art/dungeons/city-of-dalaran.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 1983,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "28-35",
+   "nameEnClient": null
   },
   {
    "id": "the-drowned-city",
+   "upstreamSlug": "the-drowned-city",
    "nameCn": "沉没之城",
    "nameEn": "The Drowned City",
    "nameCnConflict": null,
@@ -404,10 +472,19 @@
     "bosses": "尚未公布首领",
     "drops": "嘉年华演示"
    },
-   "art": "img/art/dungeons/the-drowned-city.webp"
+   "art": "img/art/dungeons/the-drowned-city.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "kroldok-stronghold",
+   "upstreamSlug": "kroldok-stronghold",
    "nameCn": "克罗多克要塞",
    "nameEn": "Krol'dok Stronghold",
    "nameCnConflict": null,
@@ -444,10 +521,19 @@
     "bosses": "尚未公布首领",
     "drops": null
    },
-   "art": "img/art/dungeons/kroldok-stronghold.webp"
+   "art": "img/art/dungeons/kroldok-stronghold.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "alcaz-prison",
+   "upstreamSlug": "alcaz-prison",
    "nameCn": "奥卡兹监狱",
    "nameEn": "Alcaz Prison",
    "nameCnConflict": null,
@@ -484,10 +570,19 @@
     "bosses": "尚未公布首领",
     "drops": null
    },
-   "art": "img/art/dungeons/alcaz-prison.webp"
+   "art": "img/art/dungeons/alcaz-prison.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "blackmaw-hold",
+   "upstreamSlug": "blackmaw-hold",
    "nameCn": "黑喉要塞",
    "nameEn": "Blackmaw Hold",
    "nameCnConflict": null,
@@ -524,10 +619,19 @@
     "bosses": "尚未公布首领",
     "drops": null
    },
-   "art": "img/art/dungeons/blackmaw-hold.webp"
+   "art": "img/art/dungeons/blackmaw-hold.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "shapers-terrace",
+   "upstreamSlug": "shapers-terrace",
    "nameCn": "塑源者平台",
    "nameEn": "Shaper's Terrace",
    "nameCnConflict": null,
@@ -564,12 +668,21 @@
     "bosses": "尚未公布首领",
     "drops": null
    },
-   "art": "img/art/dungeons/shapers-terrace.webp"
+   "art": "img/art/dungeons/shapers-terrace.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   }
  ],
  "classicDungeons": [
   {
    "id": "ragefire-chasm",
+   "upstreamSlug": "ragefire-chasm",
    "nameCn": "怒焰裂谷",
    "nameEn": "Ragefire Chasm",
    "kind": "classic",
@@ -689,6 +802,12 @@
      "url": "https://wowforever.wclbox.com/fuben/ragefire-chasm/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "奥格瑞玛 · 部落",
@@ -696,10 +815,19 @@
     "bosses": "4 个首领",
     "drops": "8 件掉落"
    },
-   "art": "img/art/dungeons/ragefire-chasm.webp"
+   "art": "img/art/dungeons/ragefire-chasm.webp",
+   "faction": "部落",
+   "nameEnFrom": null,
+   "clientActivityId": 798,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "wailing-caverns",
+   "upstreamSlug": "wailing-caverns",
    "nameCn": "哀嚎洞穴",
    "nameEn": "The Wailing Caverns",
    "kind": "classic",
@@ -1236,6 +1364,12 @@
      "url": "https://wowforever.wclbox.com/fuben/wailing-caverns/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "贫瘠之地",
@@ -1244,10 +1378,19 @@
     "bosses": "9 个首领",
     "drops": "50 件掉落"
    },
-   "art": "img/art/dungeons/wailing-caverns.webp"
+   "art": "img/art/dungeons/wailing-caverns.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 796,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "15-24",
+   "nameEnClient": null
   },
   {
    "id": "deathmine",
+   "upstreamSlug": "the-deadmines",
    "nameCn": "死亡矿井",
    "nameEn": "The Deadmines",
    "kind": "classic",
@@ -1643,11 +1786,32 @@
      "url": "https://wowforever.wclbox.com/fuben/the-deadmines/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
-   ]
+   ],
+   "zoneCn": "西部荒野",
+   "cardCounts": {
+    "bosses": "9 个首领",
+    "drops": "34 件掉落"
+   },
+   "art": "img/art/dungeons/deathmine.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 799,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "shadowfang-keep",
+   "upstreamSlug": "shadowfang-keep",
    "nameCn": "影牙城堡",
    "nameEn": "Shadowfang Keep",
    "kind": "classic",
@@ -2130,6 +2294,12 @@
      "url": "https://wowforever.wclbox.com/fuben/shadowfang-keep/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "银松森林",
@@ -2138,10 +2308,19 @@
     "bosses": "9 个首领",
     "drops": "43 件掉落"
    },
-   "art": "img/art/dungeons/shadowfang-keep.webp"
+   "art": "img/art/dungeons/shadowfang-keep.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 800,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": "20-30",
+   "nameEnClient": null
   },
   {
    "id": "blackfathom-deeps",
+   "upstreamSlug": "blackfathom-deeps",
    "nameCn": "黑暗深渊",
    "nameEn": "Blackfathom Deeps",
    "kind": "classic",
@@ -2357,6 +2536,12 @@
      "url": "https://wowforever.wclbox.com/fuben/blackfathom-deeps/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "灰谷",
@@ -2364,12 +2549,23 @@
     "bosses": "5 个首领",
     "drops": "16 件掉落"
    },
-   "art": "img/art/dungeons/blackfathom-deeps.webp"
+   "art": "img/art/dungeons/blackfathom-deeps.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 801,
+   "partySize": 5,
+   "partySizeAlt": 10,
+   "clientAltIds": [
+    1604
+   ],
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "the-stocks",
+   "upstreamSlug": "the-stockade",
    "nameCn": "监狱",
-   "nameEn": null,
+   "nameEn": "Stormwind Stockades",
    "kind": "classic",
    "levelRange": "24-32",
    "bosses": [
@@ -2541,11 +2737,32 @@
      "url": "https://wowforever.wclbox.com/fuben/the-stockade/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
-   ]
+   ],
+   "zoneCn": "暴风城 · 联盟",
+   "cardCounts": {
+    "bosses": "6 个首领",
+    "drops": "10 件掉落"
+   },
+   "art": "img/art/dungeons/the-stocks.webp",
+   "faction": "联盟",
+   "nameEnFrom": "db2",
+   "clientActivityId": 802,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "gnomeregan",
+   "upstreamSlug": "gnomeregan",
    "nameCn": "诺莫瑞根",
    "nameEn": "Gnomeregan",
    "kind": "classic",
@@ -2920,6 +3137,12 @@
      "url": "https://wowforever.wclbox.com/fuben/gnomeregan/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "丹莫罗",
@@ -2927,12 +3150,23 @@
     "bosses": "5 个首领",
     "drops": "34 件掉落"
    },
-   "art": "img/art/dungeons/gnomeregan.webp"
+   "art": "img/art/dungeons/gnomeregan.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 803,
+   "partySize": 5,
+   "partySizeAlt": 10,
+   "clientAltIds": [
+    1605
+   ],
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "razorfen-kraul",
+   "upstreamSlug": "razorfen-kraul",
    "nameCn": "剃刀沼泽",
-   "nameEn": null,
+   "nameEn": "Razorfen Kraul",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "29-38",
@@ -3177,6 +3411,12 @@
      "url": "https://wowforever.wclbox.com/fuben/razorfen-kraul/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "贫瘠之地",
@@ -3184,12 +3424,21 @@
     "bosses": "8 个首领",
     "drops": "21 件掉落"
    },
-   "art": "img/art/dungeons/razorfen-kraul.webp"
+   "art": "img/art/dungeons/razorfen-kraul.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 804,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "scarlet-monastery-graveyard",
+   "upstreamSlug": "scarlet-monastery-graveyard",
    "nameCn": "血色修道院墓地",
-   "nameEn": null,
+   "nameEn": "Scarlet Monastery - Graveyard",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "30-38",
@@ -3353,6 +3602,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3360,12 +3615,21 @@
     "bosses": "5 个首领",
     "drops": "13 件掉落"
    },
-   "art": "img/art/dungeons/scarlet-monastery-graveyard.webp"
+   "art": "img/art/dungeons/scarlet-monastery-graveyard.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 805,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "scarlet-monastery-library",
+   "upstreamSlug": "scarlet-monastery-library",
    "nameCn": "血色修道院图书馆",
-   "nameEn": null,
+   "nameEn": "Scarlet Monastery - Library",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "33-41",
@@ -3457,6 +3721,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-library/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3464,12 +3734,21 @@
     "bosses": "2 个首领",
     "drops": "7 件掉落"
    },
-   "art": "img/art/dungeons/scarlet-monastery-library.webp"
+   "art": "img/art/dungeons/scarlet-monastery-library.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 829,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "scarlet-monastery-armory",
+   "upstreamSlug": "scarlet-monastery-armory",
    "nameCn": "血色修道院军械库",
-   "nameEn": null,
+   "nameEn": "Scarlet Monastery - Armory",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "36-44",
@@ -3519,6 +3798,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-armory/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3526,10 +3811,19 @@
     "bosses": "1 个首领",
     "drops": "3 件掉落"
    },
-   "art": "img/art/dungeons/scarlet-monastery-armory.webp"
+   "art": "img/art/dungeons/scarlet-monastery-armory.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 827,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "razor-krendor",
+   "upstreamSlug": "razorfen-downs",
    "nameCn": "剃刀高地",
    "nameEn": "The Razor Krendor",
    "kind": "classic",
@@ -3796,13 +4090,34 @@
      "url": "https://wowforever.wclbox.com/fuben/razorfen-downs/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
-   ]
+   ],
+   "zoneCn": "贫瘠之地",
+   "cardCounts": {
+    "bosses": "6 个首领",
+    "drops": "23 件掉落"
+   },
+   "art": "img/art/dungeons/razor-krendor.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 806,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": "Razorfen Downs"
   },
   {
    "id": "scarlet-monastery-cathedral",
+   "upstreamSlug": "scarlet-monastery-cathedral",
    "nameCn": "血色修道院大教堂",
-   "nameEn": null,
+   "nameEn": "Scarlet Monastery - Cathedral",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "38-46",
@@ -3945,6 +4260,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3952,10 +4273,19 @@
     "bosses": "3 个首领",
     "drops": "12 件掉落"
    },
-   "art": "img/art/dungeons/scarlet-monastery-cathedral.webp"
+   "art": "img/art/dungeons/scarlet-monastery-cathedral.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 828,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "uldaman",
+   "upstreamSlug": "uldaman",
    "nameCn": "奥达曼",
    "nameEn": "Uldaman",
    "kind": "classic",
@@ -4342,6 +4672,12 @@
      "url": "https://wowforever.wclbox.com/fuben/uldaman/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "荒芜之地",
@@ -4349,12 +4685,21 @@
     "bosses": "10 个首领",
     "drops": "33 件掉落"
    },
-   "art": "img/art/dungeons/uldaman.webp"
+   "art": "img/art/dungeons/uldaman.webp",
+   "faction": null,
+   "nameEnFrom": null,
+   "clientActivityId": 807,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "zulfarrak",
+   "upstreamSlug": "zulfarrak",
    "nameCn": "祖尔法拉克",
-   "nameEn": null,
+   "nameEn": "Zul'Farrak",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "44-54",
@@ -4929,6 +5274,12 @@
      "url": "https://wowforever.wclbox.com/fuben/zulfarrak/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "塔纳利斯",
@@ -4936,12 +5287,21 @@
     "bosses": "12 个首领",
     "drops": "44 件掉落"
    },
-   "art": "img/art/dungeons/zulfarrak.webp"
+   "art": "img/art/dungeons/zulfarrak.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 808,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "maraudon",
+   "upstreamSlug": "maraudon",
    "nameCn": "玛拉顿",
-   "nameEn": null,
+   "nameEn": "Maraudon",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "46-55",
@@ -5354,6 +5714,12 @@
      "url": "https://wowforever.wclbox.com/fuben/maraudon/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "凄凉之地",
@@ -5361,12 +5727,21 @@
     "bosses": "9 个首领",
     "drops": "38 件掉落"
    },
-   "art": "img/art/dungeons/maraudon.webp"
+   "art": "img/art/dungeons/maraudon.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 809,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "sunken-temple",
+   "upstreamSlug": "sunken-temple",
    "nameCn": "沉没的神庙",
-   "nameEn": null,
+   "nameEn": "Sunken Temple",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "50-60",
@@ -5581,6 +5956,12 @@
      "url": "https://wowforever.wclbox.com/fuben/sunken-temple/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "悲伤沼泽",
@@ -5588,12 +5969,23 @@
     "bosses": "9 个首领",
     "drops": "15 件掉落"
    },
-   "art": "img/art/dungeons/sunken-temple.webp"
+   "art": "img/art/dungeons/sunken-temple.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 810,
+   "partySize": 5,
+   "partySizeAlt": 20,
+   "clientAltIds": [
+    1606
+   ],
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "blackrock-depths",
+   "upstreamSlug": "blackrock-depths",
    "nameCn": "黑石深渊",
-   "nameEn": null,
+   "nameEn": "Blackrock Depths",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "52-60",
@@ -6927,6 +7319,12 @@
      "url": "https://wowforever.wclbox.com/fuben/blackrock-depths/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "黑石山",
@@ -6934,12 +7332,21 @@
     "bosses": "20 个首领",
     "drops": "133 件掉落"
    },
-   "art": "img/art/dungeons/blackrock-depths.webp"
+   "art": "img/art/dungeons/blackrock-depths.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 811,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "dire-maul-east",
+   "upstreamSlug": "dire-maul-east",
    "nameCn": "厄运之槌东区",
-   "nameEn": null,
+   "nameEn": "Dire Maul (East)",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "54-60",
@@ -7265,6 +7672,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-east/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -7272,12 +7685,21 @@
     "bosses": "5 个首领",
     "drops": "31 件掉落"
    },
-   "art": "img/art/dungeons/dire-maul-east.webp"
+   "art": "img/art/dungeons/dire-maul-east.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 813,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "lower-blackrock-spire",
+   "upstreamSlug": "lower-blackrock-spire",
    "nameCn": "黑石塔下层",
-   "nameEn": null,
+   "nameEn": "Lower Blackrock Spire",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "55-60",
@@ -8038,6 +8460,12 @@
      "url": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "黑石山",
@@ -8045,12 +8473,21 @@
     "bosses": "16 个首领",
     "drops": "72 件掉落"
    },
-   "art": "img/art/dungeons/lower-blackrock-spire.webp"
+   "art": "img/art/dungeons/lower-blackrock-spire.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 812,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "dire-maul-north",
+   "upstreamSlug": "dire-maul-north",
    "nameCn": "厄运之槌北区",
-   "nameEn": null,
+   "nameEn": "Dire Maul (North)",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "56-60",
@@ -8379,6 +8816,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-north/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -8386,12 +8829,21 @@
     "bosses": "7 个首领",
     "drops": "31 件掉落"
    },
-   "art": "img/art/dungeons/dire-maul-north.webp"
+   "art": "img/art/dungeons/dire-maul-north.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 815,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "dire-maul-west",
+   "upstreamSlug": "dire-maul-west",
    "nameCn": "厄运之槌西区",
-   "nameEn": null,
+   "nameEn": "Dire Maul (West)",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "56-60",
@@ -8855,6 +9307,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-west/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -8862,12 +9320,21 @@
     "bosses": "7 个首领",
     "drops": "45 件掉落"
    },
-   "art": "img/art/dungeons/dire-maul-west.webp"
+   "art": "img/art/dungeons/dire-maul-west.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 814,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "scholomance",
+   "upstreamSlug": "scholomance",
    "nameCn": "通灵学院",
-   "nameEn": null,
+   "nameEn": "Scholomance",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
@@ -9733,6 +10200,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scholomance/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "西瘟疫之地",
@@ -9740,12 +10213,21 @@
     "bosses": "14 个首领",
     "drops": "78 件掉落"
    },
-   "art": "img/art/dungeons/scholomance.webp"
+   "art": "img/art/dungeons/scholomance.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 797,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "stratholme-main-gate",
+   "upstreamSlug": "stratholme-main-gate",
    "nameCn": "斯坦索姆正门",
-   "nameEn": null,
+   "nameEn": "Stratholme (Main Gate)",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
@@ -10377,6 +10859,12 @@
      "url": "https://wowforever.wclbox.com/fuben/stratholme-main-gate/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "东瘟疫之地",
@@ -10384,12 +10872,21 @@
     "bosses": "11 个首领",
     "drops": "61 件掉落"
    },
-   "art": "img/art/dungeons/stratholme-main-gate.webp"
+   "art": "img/art/dungeons/stratholme-main-gate.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 816,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "stratholme-service-gate",
+   "upstreamSlug": "stratholme-service-gate",
    "nameCn": "斯坦索姆侧门",
-   "nameEn": null,
+   "nameEn": "Stratholme (Service Gate)",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
@@ -11156,6 +11653,12 @@
      "url": "https://wowforever.wclbox.com/fuben/stratholme-service-gate/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "东瘟疫之地",
@@ -11163,12 +11666,21 @@
     "bosses": "8 个首领",
     "drops": "78 件掉落"
    },
-   "art": "img/art/dungeons/stratholme-service-gate.webp"
+   "art": "img/art/dungeons/stratholme-service-gate.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 1603,
+   "partySize": 5,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   },
   {
    "id": "upper-blackrock-spire",
+   "upstreamSlug": "upper-blackrock-spire",
    "nameCn": "黑石塔上层",
-   "nameEn": null,
+   "nameEn": "Upper Blackrock Spire",
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "59-60",
@@ -12040,6 +12552,12 @@
      "url": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
    ],
    "zoneCn": "黑石山 · 10 人",
@@ -12047,7 +12565,15 @@
     "bosses": "9 个首领",
     "drops": "89 件掉落"
    },
-   "art": "img/art/dungeons/upper-blackrock-spire.webp"
+   "art": "img/art/dungeons/upper-blackrock-spire.webp",
+   "faction": null,
+   "nameEnFrom": "db2",
+   "clientActivityId": 837,
+   "partySize": 10,
+   "partySizeAlt": null,
+   "clientAltIds": null,
+   "levelRangeClient": null,
+   "nameEnClient": null
   }
  ],
  "raids": [
@@ -12067,7 +12593,14 @@
      "note": "参考站称首个团本；官方未公布中文名与 BOSS 数",
      "checkedAt": null
     }
-   ]
+   ],
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "clientAltIds": null
   },
   {
    "id": "hyjal-summit",
@@ -12085,7 +12618,14 @@
      "note": "参考站列为 20 人团本，官方未证实",
      "checkedAt": null
     }
-   ]
+   ],
+   "nameEnFrom": null,
+   "clientActivityId": null,
+   "partySize": null,
+   "partySizeAlt": null,
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "clientAltIds": null
   },
   {
    "id": "onyxias-lair",
@@ -12102,7 +12642,22 @@
      "url": "https://wowclassicforever.info/raids",
      "note": "参考站列为 40 人团本，官方未证实",
      "checkedAt": null
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+     "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-10"
     }
+   ],
+   "nameEnFrom": null,
+   "clientActivityId": 838,
+   "partySize": 40,
+   "partySizeAlt": null,
+   "levelRangeClient": "60-60",
+   "nameEnClient": null,
+   "clientAltIds": [
+    1612
    ]
   }
  ]

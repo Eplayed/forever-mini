@@ -9,12 +9,13 @@
 #   tools/refresh.sh world       # 世界线（区域 / 稀有 / 书籍 / 睡袋）重抓重整
 #   tools/refresh.sh changes     # 客户端改动清单
 #   tools/refresh.sh prof        # 专业与配方
-#   tools/refresh.sh dungeons    # 副本：首领名单与掉落 + 卡片（两个抓取器都要跑）
+#   tools/refresh.sh dungeons    # 副本：首领名单与掉落 + 卡片 + 客户端排队表（四个抓取器都要跑）
 #   tools/refresh.sh legacy      # 传承：三棵专长树 + 65 项挑战（句子在落盘前就删）
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
 #   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
+#   tools/refresh.sh status      # 数据体检：还缺什么、哪些我们能补、哪些只能等（报告，不是门禁）
 #   tools/refresh.sh check       # 只跑门禁，不碰网络
 #   tools/refresh.sh publish     # 门禁 + 新站构建 + 小程序导出，全绿才算能发
 #
@@ -54,6 +55,9 @@ case "${1:-}" in
     # （2026-10-10 实测：卡片线重跑过，名单还是 235 个 BOSS，而详情页已经是 232 个）
     run python3 tools/scrape-wclbox.py --what dungeons --write
     run python3 tools/scrape-wclbox-dom.py --what cards
+    # 客户端排队表与排队元数据：等级区间、进入人数、英文原名的第三方可回查来源
+    run python3 tools/scrape-wclbox-shuju.py --group dungeons
+    run python3 tools/fetch-db2-groupfinder.py
     run node tools/merge-dungeons.js
     gate
     ;;
@@ -87,6 +91,10 @@ case "${1:-}" in
     run python3 tools/fetch-icons.py --list
     run python3 tools/audit-assets.py
     gate
+    ;;
+  status)
+    # 体检只说话不拦人：任何一步非 0 都会把后面的链断掉，见 DATA-MAINTENANCE.md 第四节
+    run python3 tools/data-status.py
     ;;
   check)
     gate

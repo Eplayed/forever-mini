@@ -52,6 +52,13 @@ function checkRecord(kind, rec, sourcesField) {
       else if (!/wclbox\.com|wowclassicforever\.info/.test(u)) errs.push(`${kind} ${rec.id || ''}：datamine_cn 指向未知的解包站 ${u}`);
       if (!s.checkedAt) errs.push(`${kind} ${rec.id || ''}：datamine_cn 缺抓取日期`);
     }
+    // datamine_en = 客户端表里的英文原文（经第三方客户端数据站取回）。
+    // 它只算 L1：不是暴雪域名，也不像 datamine_cn 那样是中文定名的依据，所以不进 isOfficial。
+    if (t === 'datamine_en') {
+      if (!u) errs.push(`${kind} ${rec.id || ''}：datamine_en 没有 url，无法回查`);
+      else if (!/wago\.tools/.test(u)) errs.push(`${kind} ${rec.id || ''}：datamine_en 指向未知的客户端数据站 ${u}`);
+      if (!s.checkedAt) errs.push(`${kind} ${rec.id || ''}：datamine_en 缺取回日期`);
+    }
   });
   if (lvl === 'L0' && !srcs.some((s) => s.type === 'official_cn') && srcs.some((s) => s.type === 'datamine_cn')) {
     datamineOnly.push(`${kind} ${rec.id || ''}`);
@@ -105,13 +112,94 @@ const dg = read('dungeons.json');
         warns.push(`dungeon ${d.id}：掉落图标 ${x.iconKey} 本地没有，界面退回自绘块`);
       }
     });
-    if ((d.drops || []).length && !d.lootNote) warns.push(`dungeon ${d.id}：有掉落却没写上上游口径说明（lootNote）`);
+    if ((d.drops || []).length && !d.lootNote) warns.push(`dungeon ${d.id}：有掉落却没写上来源说明（lootNote）`);
+    // 客户端排队表对账带回来的四个数：要么合规格，要么就是没对上，不许留半成品
+    [['partySize', d.partySize], ['partySizeAlt', d.partySizeAlt]].forEach(([k, v]) => {
+      if (v === null || v === undefined) return;
+      if (!Number.isInteger(v) || v < 1 || v > 40) errs.push(`dungeon ${d.id}：${k}=${v} 不像人数上限（应为 1–40 的整数）`);
+    });
+    if (d.partySizeAlt && d.partySize === d.partySizeAlt) {
+      errs.push(`dungeon ${d.id}：人数上限与另一种说法写成同一个数，那就不该并列摆出来`);
+    }
+    if (d.levelRangeClient && !/^\d+-\d+$/.test(String(d.levelRangeClient))) {
+      errs.push(`dungeon ${d.id}：levelRangeClient=「${d.levelRangeClient}」不是「最低-最高」的写法`);
+    }
+    if (d.levelRangeClient && d.levelRange &&
+      String(d.levelRange).replace(/[–—~]/g, '-') === String(d.levelRangeClient)) {
+      errs.push(`dungeon ${d.id}：等级区间客户端与本站已经一致了，还留着另一种说法，界面上会自相矛盾`);
+    }
+    if (d.nameEnClient && d.nameEn && d.nameEnClient === d.nameEn) {
+      errs.push(`dungeon ${d.id}：英文名另一种说法与本站写的同一个词`);
+    }
+    if (d.clientActivityId !== null && d.clientActivityId !== undefined &&
+      d.clientActivityId !== '' && !Number.isInteger(d.clientActivityId)) {
+      errs.push(`dungeon ${d.id}：clientActivityId=${d.clientActivityId} 不是整数`);
+    }
+    if (d.clientAltIds !== null && d.clientAltIds !== undefined &&
+      !(Array.isArray(d.clientAltIds) && d.clientAltIds.every((v) => Number.isInteger(v)))) {
+      errs.push(`dungeon ${d.id}：clientAltIds 要写成整数数组或留空`);
+    }
     scanIcons('dungeon', d, d.id);
     checkRecord('dungeon', d);
   });
 });
 const ids = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).map((d) => d.id);
 if (new Set(ids).size !== ids.length) errs.push('dungeons：存在重复 id');
+
+// 客户端队伍查找器条目：单独一份文件（打进小程序会把座数带歪），界面在副本页并列显示
+const qu = read('queue.json');
+const qMeta = qu.meta || {};
+if (!/^\d+\.\d+\.\d+\.\d+$/.test(String(qMeta.build || ''))) {
+  errs.push(`queue：meta.build=「${qMeta.build}」不像客户端版本号，取回时没读到版本`);
+}
+if (!/wago\.tools/.test(String(qMeta.source || ''))) {
+  errs.push(`queue：meta.source 必须指向客户端数据站，现在是「${qMeta.source}」`);
+}
+if (!qMeta.generatedAt) errs.push('queue：缺取回日期');
+const qIdx = {};
+let qUnlisted = 0;
+(qu.items || []).forEach((x) => {
+  const k = String(x.activityId);
+  if (qIdx[k]) errs.push(`queue：活动号 ${k} 出现两次（${qIdx[k]} 与 ${x.nameEn}）`);
+  qIdx[k] = x.nameEn;
+  if (!x.nameEn) errs.push(`queue ${x.activityId}：缺英文原名`);
+  if (['dungeon', 'raid'].indexOf(x.kind) < 0) errs.push(`queue ${x.activityId}：kind=${x.kind}`);
+  if (!/^\d+-\d+$/.test(String(x.levelRange || ''))) errs.push(`queue ${x.activityId}：等级区间写法不对「${x.levelRange}」`);
+  if (x.partySize !== null && (!Number.isInteger(x.partySize) || x.partySize < 1)) {
+    errs.push(`queue ${x.activityId}：人数上限不对「${x.partySize}」`);
+  }
+  if (x.matchedId && ids.indexOf(x.matchedId) < 0) {
+    errs.push(`queue ${x.activityId}：说对上了本站的「${x.matchedId}」，副本名单里没有这一座`);
+  }
+  if (!x.matchedId) qUnlisted += 1;
+  const p = (x.provenance || [])[0] || {};
+  if (p.type !== 'datamine_en' || !p.checkedAt) errs.push(`queue ${x.activityId}：来源没记成客户端数据表 + 取回日期`);
+});
+if (qMeta.counts && qMeta.counts.total !== (qu.items || []).length) {
+  errs.push(`queue：meta.counts.total 写 ${qMeta.counts.total}，实际 ${(qu.items || []).length} 条——手抄的数会漂，改成现算`);
+}
+if (qMeta.counts && qMeta.counts.unlisted !== qUnlisted) {
+  errs.push(`queue：meta.counts.unlisted 写 ${qMeta.counts.unlisted}，实际 ${qUnlisted} 条`);
+}
+// 两份文件必须互相认得：副本条目记了活动号，队列里就得有这一条；反之亦然
+[].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).forEach((d) => {
+  if (d.clientActivityId && !qIdx[String(d.clientActivityId)]) {
+    errs.push(`dungeon ${d.id}：记了活动号 ${d.clientActivityId}，排队条目里却没有这一条`);
+  }
+});
+Object.keys(qIdx).forEach((k) => {
+  const row = (qu.items || []).filter((x) => String(x.activityId) === k)[0];
+  if (row && row.matchedId) {
+    const d = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || [])
+      .filter((y) => y.id === row.matchedId)[0];
+    // 同一座在表里可以有多条（比如黑暗深渊既有 5 人条目又有 10 人条目），
+    // 主号与其余活动号都要认得，否则两份文件就在各说各话
+    const known = [String(d && d.clientActivityId)].concat((d && d.clientAltIds) || []).map(String);
+    if (d && known.indexOf(k) < 0) {
+      errs.push(`queue/dungeon 对不上：${row.nameEn} 指向 ${row.matchedId}，但那座本记的活动号是 ${d.clientActivityId}／${(d.clientAltIds || []).join('、')}`);
+    }
+  }
+});
 
 // 系统卡片
 const sy = read('systems.json');
@@ -1113,6 +1201,8 @@ console.log(banHits.size ? '禁词体检：' + banHits.size + ' 种说法命中�
 
 // 规模快照：首页与溯源页显示的数字一律从这里来，避免页面里手抄一份和真实数据漂移
 const dalls = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []);
+const noEn = dalls.filter((x) => !x.nameEn).map((x) => x.id);
+if (noEn.length) warns.push(`副本条目还缺英文原名 ${noEn.length} 座：${noEn.join('、')}（客户端排队表里也对不上）`);
 Object.assign(scale, {
   glossary: gl.items.length,
   classes: (JSON.parse(fs.readFileSync(path.join(ROOT, 'classes.json'), 'utf8')).classes || []).length,
@@ -1122,6 +1212,12 @@ Object.assign(scale, {
   dungeonsNew: (dg.newDungeons || []).length,
   bosses: dalls.reduce((a, x) => a + (x.bosses || []).length, 0),
   drops: dalls.reduce((a, x) => a + (x.drops || []).length, 0),
+  // 副本线补齐程度：这三个数决定页面上还有几处"待补"，改数据后一定要重算，别手抄
+  dungeonNameEn: dalls.filter((x) => x.nameEn).length,
+  dungeonParty: dalls.filter((x) => x.partySize).length,
+  dungeonRangeTwoSay: dalls.filter((x) => x.levelRangeClient).length,
+  queueRows: (qu.items || []).length,
+  queueUnlisted: qUnlisted,
   races: (rc.races || []).length,
   traits: rcTraitN,
   timeline: (JSON.parse(fs.readFileSync(path.join(ROOT, 'timeline.json'), 'utf8')).items || []).length,
