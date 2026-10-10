@@ -21,7 +21,7 @@
     </nav>
   </div>
 
-  <main id="main" class="wrap"><slot /></main>
+  <main id="main" class="wrap" ref="mainEl"><slot /></main>
 
   <footer id="foot">
     <div class="in" v-if="foot">
@@ -34,16 +34,21 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { NAV, linkFor } from '../lib/nav.js';
 import { clockText } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
 import { load } from '../lib/data.js';
+import { applyRails } from '../lib/rails.js';
 
 const route = useRoute();
 const { left } = useCountdown();
 const foot = ref(null);
+const mainEl = ref(null);
+/* 来源轨：与旧站同一套规则，切路由/局部重渲染后补一次（已定级的卡跳过，重复调用无副作用） */
+let railObs = null;
+function refreshRails() { applyRails(mainEl.value); }
 
 /* 高亮只看一件事：这个入口指向的旧文件，是否正好对应当前已迁路由 */
 function activeFor(file) {
@@ -55,6 +60,16 @@ function groupOn(g) {
 }
 
 onMounted(() => {
+  refreshRails();
+  if (window.MutationObserver && mainEl.value) {
+    let queued = false;
+    railObs = new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(() => { queued = false; refreshRails(); });
+    });
+    railObs.observe(mainEl.value, { childList: true, subtree: true });
+  }
   Promise.all([load('data/meta.json'), load('data/scale.json')])
     .then(([m, s]) => {
       const sc = s.scale;
@@ -66,4 +81,5 @@ onMounted(() => {
     })
     .catch(() => { /* 页脚拿不到数据不影响正文，与旧站行为一致 */ });
 });
+onBeforeUnmount(() => { if (railObs) railObs.disconnect(); });
 </script>

@@ -71,5 +71,15 @@ window.WowData = (function () {
     try { document.execCommand('copy'); } catch (e) { }
     document.body.removeChild(ta);
   }
-  return { load: load, pillName: pillName, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy };
+  /* 一批记录里最弱的那一级——给"来源轨"用：一屏数据混着不同分级时，轨按最差的那条说话。 */
+  var LVO = { L0: 0, L1: 1, L2: 2, L3: 3 };
+  function worstLevel(list) {
+    var w = null;
+    (list || []).forEach(function (x) {
+      var k = x && x.level;
+      if (LVO.hasOwnProperty(k) && (w === null || LVO[k] > LVO[w])) w = k;
+    });
+    return w;
+  }
+  return { load: load, pillName: pillName, covBar: covBar, pill: pill, sources: sources, esc: esc, hl: hl, toast: toast, copy: copy, worstLevel: worstLevel };
 })();

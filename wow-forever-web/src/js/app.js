@@ -31,7 +31,50 @@
   var page = document.body.getAttribute('data-page');
 
   function el(id) { return document.getElementById(id); }
-  function set(html) { el('main').innerHTML = html; }
+  /* 来源轨（签名元素）：卡片左缘一条竖轨，填充程度 = 这张卡最弱的那条数据的分级。
+     级别从两处现读，不额外发明一份真相：
+       ① 卡里已渲染出的分级徽标（.pill L0…L3）；
+       ② 卡里的来源类型标签（.src .st）——官方中文/官方英文/客户端解包按既定口径可支撑 L0，
+          第三方资料站与转载属 L2，没有任何来源记录属 L3。
+     两处都有时取更弱的那个。卡里既没徽标也没来源就不上轨——没定级就别装作定了级。 */
+  var LV_ORDER = { L0: 0, L1: 1, L2: 2, L3: 3 };
+  var ST_LV = { official_cn: 'L0', official_en: 'L1', datamine_cn: 'L0',
+    fan_db: 'L2', media_cn: 'L2', video: 'L2' };
+  function applyRails(scope) {
+    Array.prototype.forEach.call((scope || document).querySelectorAll('.card, .mod, .dcard, .drawer'), function (c) {
+      if (c.dataset.lv) { c.classList.add('rail'); return; }   // 渲染时已显式定级的卡，补类不走推断
+      var worst = null;
+      function take(k) {
+        if (!LV_ORDER.hasOwnProperty(k)) return;
+        if (worst === null || LV_ORDER[k] > LV_ORDER[worst]) worst = k;
+      }
+      Array.prototype.forEach.call(c.querySelectorAll('.pill'), function (p) {
+        // 图例（覆盖率条那一排、四态图例、板块 chips）里的徽标是在数全站分布，
+        // 不是这张卡自己的数据；拿它定轨会把"汇总卡"标成缺数据。
+        if (p.closest('.covnum, .legend, .tlegend, .chipsrow, .cov')) return;
+        var m = /\bL([0-3])\b/.exec(p.className);
+        if (m) take('L' + m[1]);
+      });
+      Array.prototype.forEach.call(c.querySelectorAll('.src .st'), function (s) {
+        take(ST_LV[Array.prototype.filter.call(s.classList, function (x) { return x !== 'st'; })[0]]);
+      });
+      if (!worst) return;
+      c.classList.add('rail'); c.dataset.lv = worst;
+    });
+  }
+  function set(html) { el('main').innerHTML = html; applyRails(el('main')); }
+  /* 各页切 tab / 开抽屉时是局部重渲染，不经过 set()。用一个 observer 兜住：
+     #main 里新增节点后补一次轨（已定过级的卡直接跳过，重复调用无副作用）。 */
+  function watchRails() {
+    var m = el('main');
+    if (!m || !window.MutationObserver) return;
+    var queued = false;
+    new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      (window.requestAnimationFrame || setTimeout)(function () { queued = false; applyRails(m); });
+    }).observe(m, { childList: true, subtree: true });
+  }
   function store(key, val) {
     try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); return null; }
     catch (e) { D.toast('本机存储不可用，方案仅本次有效'); return null; }
@@ -1012,7 +1055,7 @@
           '<div class="tl-h">' + D.esc(x.title) + ' ' + D.pill(x.level) + ' <span class="tag">' + state + '</span></div>' +
           '<p class="dim">' + D.esc(x.what) + '</p>' + D.sources(x.provenance, { quote: true }) + '</div></div>';
       }).join('');
-      set('<div class="card"><h1 class="pt">上线与 Beta 时间表</h1><p class="dim">' + D.esc(m.note || '') + '</p>' +
+      set('<div class="card" data-lv="' + (D.worstLevel(items) || 'L3') + '"><h1 class="pt">上线与 Beta 时间表</h1><p class="dim">' + D.esc(m.note || '') + '</p>' +
         '<div class="stats"><div class="stat"><b>' + items.length + '</b>个时间点</div>' +
         '<div class="stat"><b>' + done + '</b>已过</div><div class="stat"><b>' + upcoming + '</b>待来</div>' +
         '<div class="stat"><b>' + (items.length - done - upcoming) + '</b>日期未定</div></div></div>' +
@@ -1232,7 +1275,7 @@
         }).join('') +
           bandBlock('区间未定', '等级区间还没核', list.filter(function (x) { return dunBand(x) === null; })) +
           bandBlock('团队副本', '开放时间未定', d.raids || []);
-        set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
+        set('<div class="card" data-lv="' + (D.worstLevel(all) || 'L3') + '"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
           (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
           (d.raids || []).length + ' 座团本，按十级一档分。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
           '名单与等级区间取自客户端解包（由第三方资料站转述）；掉落是按经典旧世公开数据库推出来的，一律标待实测。</p></div>' +
@@ -1308,7 +1351,7 @@
           t.onclick = function () { D.copy(t.dataset.c); };
         });
       }
-      set('<div class="card"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制，「来源」看这条中文名出自哪句官方原文。' +
+      set('<div class="card" data-lv="' + (D.worstLevel(items) || 'L3') + '"><h1 class="pt">中英术语速查</h1><p class="dim">点词条即复制，「来源」看这条中文名出自哪句官方原文。' +
         '官方未公布的英文原名一律留空，所以有「待补」。</p>' +
         '<p class="note">按职业与种族分组。字母块是自绘占位，代表这一条没有可信图标来源。</p>' +
         '<div class="field"><input type="search" id="q" placeholder="输入中文或英文" value="' + D.esc(f.q) + '">' +
@@ -2520,6 +2563,7 @@
   }
 
   shell();
+  watchRails();
   tickCountdown();
   setInterval(tickCountdown, 1000);
   ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();

@@ -1137,13 +1137,18 @@ def test_home(browser, base):
     mp.goto(base + "/index.html", wait_until="networkidle")
     mp.wait_for_timeout(1300)
     mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
-      const h1 = document.querySelector('h1').getBoundingClientRect();
+      const h1e = document.querySelector('h1'); const h1 = h1e.getBoundingClientRect();
+      const h1fs = parseFloat(getComputedStyle(h1e).fontSize) || 0;
       const small = [...document.querySelectorAll('.stripc, .chipsrow a, .mod, .hero .cta')]
         .filter(b => { const r = b.getBoundingClientRect(); return r.height && r.height < 44; }).length;
       return { overflow: document.documentElement.scrollWidth > vw + 1, h1w: Math.round(h1.width),
-               h1h: Math.round(h1.height), small: small }; }""")
-    check("移动端首页不溢出、标题不换成一字一行",
-          not mob["overflow"] and mob["h1w"] > 280 and mob["h1h"] <= 60, json.dumps(mob))
+               h1h: Math.round(h1.height), h1fs: Math.round(h1fs), small: small }; }""")
+    # 判据本意是"标题别被挤成一字一行"，所以按行数算而不是按绝对像素：
+    # 改版后 H1 从 17px 提到移动端 28px，两行是正常排版，三行才算被挤。
+    lines = mob["h1h"] / max(mob["h1fs"], 1) / 1.18
+    check("移动端首页不溢出、标题不超过两行",
+          not mob["overflow"] and mob["h1w"] > 280 and lines <= 2.2,
+          "高 %dpx / 字号 %dpx ≈ %.1f 行" % (mob["h1h"], mob["h1fs"], lines))
     check("移动端首页点击目标 ≥44px", mob["small"] == 0, "%d 个偏小" % mob["small"])
     mp.screenshot(path=os.path.join(SHOT_DIR, "home-redesign-mobile.png"), full_page=True)
     m.close()
@@ -1737,6 +1742,139 @@ def test_legacy(browser, base):
     m.close()
 
 
+def test_design_system(browser, base):
+    """改版判据（docs/DESIGN-REFRESH-2026-10-10.md 第八节）：颜色对比度、来源轨、
+       琥珀金不再兼任"待实测"、动效可关、焦点可见。判据全部取计算值，不看源码。"""
+    print("\n[20] 设计系统：对比度 / 来源轨 / 动效可关 / 焦点可见")
+    import json
+
+    # 页内取色：文字色沿祖先找到第一个不透明背景，再算 WCAG 对比度
+    PROBE = """() => {
+      const lum = (c) => { const v = c.map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+        return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+      const rgb = (s) => (s.match(/\\d+(\\.\\d+)?/g) || []).slice(0, 4).map(Number);
+      const ratio = (fg, bg) => { const a = lum(fg.slice(0, 3)), b = lum(bg.slice(0, 3));
+        return +(((Math.max(a, b) + .05) / (Math.min(a, b) + .05)).toFixed(2)); };
+      const bgOf = (e) => { let n = e;
+        while (n && n !== document.documentElement) { const c = rgb(getComputedStyle(n).backgroundColor);
+          if (c.length < 4 || c[3] > .92) return c; n = n.parentElement; }
+        return [255, 255, 255]; };
+      const px = (e) => parseFloat(getComputedStyle(e).fontSize) || 0;
+      const samples = [];
+      const push = (label, e) => { if (!e) return;
+        const f = getComputedStyle(e); const fg = rgb(f.color);
+        samples.push({ label, size: px(e), weight: +f.fontWeight, fg, bg: bgOf(e),
+          cr: ratio(fg, bgOf(e)) }); };
+      push('h1', document.querySelector('#main h1'));
+      push('正文', document.querySelector('#main p'));
+      push('note', document.querySelector('#main .note'));
+      push('dim', document.querySelector('#main .dim'));
+      push('徽标', document.querySelector('#main .pill'));
+      push('conf', document.querySelector('#main .conf'));
+      push('链接', document.querySelector('#main a'));
+      const mono = [...document.querySelectorAll('#main .mono, #main .mline')][0];
+      push('等宽元数据', mono);
+      const bad = samples.filter(s => { const large = s.size >= 24 || (s.size >= 18.66 && s.weight >= 700);
+        return s.cr < (large ? 3 : 4.5); });
+      const lv = {};
+      document.querySelectorAll('#main .pill').forEach(p => {
+        const m = /\\bL([0-3])\\b/.exec(p.className); if (!m) return;
+        const c = getComputedStyle(p).color; lv['L' + m[1]] = lv['L' + m[1]] === undefined ? c : (lv['L' + m[1]] === c ? c : 'MIX');
+      });
+      const marks = [...document.querySelectorAll('#main .pill')].map(p => {
+        const b = getComputedStyle(p, '::before');
+        return { bg: b.backgroundImage === 'none' ? b.backgroundColor : b.backgroundImage,
+                 r: b.borderRadius, w: b.width };
+      });
+      return { samples, bad, lv,
+        rails: document.querySelectorAll('#main .rail[data-lv]').length,
+        // 「本站说明 / 本站承诺」不是数据来源，不算声明了分级——这种卡不该有轨
+        claims: document.querySelectorAll('#main .pill, #main .src .st:not(.site-note):not(.site-promise)').length,
+        railLv: [...new Set([...document.querySelectorAll('#main .rail')].map(c => c.dataset.lv))].sort(),
+        railShapes: [...new Set([...document.querySelectorAll('#main .rail')].map(c => {
+          const b = getComputedStyle(c, '::before'); return (b.backgroundImage || '') + '|' + b.borderStyle + '|' + b.backgroundColor; }))].length,
+        goldOnPill: lv.L2 === getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()
+          || Object.entries(lv).filter(([, v]) => v === 'rgb(224, 169, 109)').length };
+    }"""
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    weak = {}
+    rails_seen = 0
+    for name in PAGES:
+        page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+        page.wait_for_timeout(1300)
+        r = page.evaluate(PROBE)
+        check("%s 页文字对比度达 AA" % name, not r["bad"],
+              json.dumps([{"位": b["label"], "比": b["cr"], "字": b["size"]} for b in r["bad"][:3]], ensure_ascii=False))
+        weak[name] = r["bad"]
+        rails_seen += r["rails"]
+        if r["claims"]:
+            check("%s 页声明了分级/来源，卡片就有来源轨" % name, r["rails"] >= 1,
+                  "声明 %d 处 / 上轨 %d 张" % (r["claims"], r["rails"]))
+    check("来源轨在全站铺得开（15 页合计 ≥20 张）", rails_seen >= 20, "%d 张" % rails_seen)
+
+    # 琥珀金从此只表示交互与品牌：任何分级徽标都不许用它
+    page.goto(base + "/systems.html", wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    r = page.evaluate(PROBE)
+    gold = [k for k, v in r["lv"].items() if v == "rgb(224, 169, 109)"]
+    check("分级徽标不再借用品牌金（L2 曾与琥珀金同色）", not gold, json.dumps(r["lv"], ensure_ascii=False))
+    shapes = page.evaluate("""() => {
+      const out = {};
+      ['L0','L1','L2','L3'].forEach(k => {
+        const p = document.querySelector('.pill.' + k); if (!p) return;
+        const b = getComputedStyle(p, '::before');
+        out[k] = [b.backgroundImage.slice(0, 40), b.backgroundColor, b.borderRadius, b.borderTopWidth].join('|');
+      });
+      return out; }""")
+    check("四种分级的徽标形状各不相同", len(set(shapes.values())) == len(shapes) and len(shapes) >= 3,
+          json.dumps(shapes, ensure_ascii=False))
+
+    # 动效可关：模拟系统"减少动态效果"，卡片与轨道的动画必须归零
+    rm = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
+    rp = rm.new_page()
+    rp.goto(base + "/legacy.html", wait_until="networkidle")
+    rp.wait_for_timeout(1200)
+    m = rp.evaluate("""() => { const c = document.querySelector('#main .card');
+      const r = document.querySelector('#main .rail'); const cs = getComputedStyle(c);
+      return { card: cs.animationName + '/' + cs.animationDuration,
+        rail: r ? getComputedStyle(r, '::before').animationDuration : 'no-rail',
+        btn: getComputedStyle(document.querySelector('button')).transitionDuration }; }""")
+    def secs(v):
+        v = (v or '').strip()
+        try:
+            return float(v[:-1]) / (1000 if v.endswith('ms') else 1)
+        except ValueError:
+            return 9.99
+    check("减少动效时卡片动画关闭（保留最终态不隐藏内容）",
+          secs(m["card"].split('/')[1]) < 0.005 and secs(m["rail"]) < 0.005,
+          json.dumps(m, ensure_ascii=False))
+    check("减少动效时卡片仍完整可见", rp.evaluate("() => { const c = document.querySelector('#main .card');"
+          "return +getComputedStyle(c).opacity > .99; }"), "opacity 应回到 1")
+    rm.close()
+
+    # 键盘焦点：Tab 到第一个链接必须有可见焦点环
+    fk = browser.new_context(viewport={"width": 1440, "height": 1000})
+    fp = fk.new_page()
+    fp.goto(base + "/index.html", wait_until="networkidle")
+    fp.wait_for_timeout(1200)
+    fp.keyboard.press("Tab")
+    ring = fp.evaluate("""() => { const e = document.activeElement; const s = getComputedStyle(e);
+      return { tag: e.tagName, cls: (e.className || '').slice(0, 20),
+        w: parseFloat(s.outlineWidth) || 0, style: s.outlineStyle }; }""")
+    check("键盘 Tab 有可见焦点环（≥2px 实线）", ring["w"] >= 2 and ring["style"] != "none",
+          json.dumps(ring, ensure_ascii=False))
+    fk.close()
+
+    # 组件规则里的裸色值只许减少不许增加（基线取 2026-10-10 改版后实测）
+    css = open(os.path.join(SRC, "css", "app.css"), encoding="utf-8").read()
+    body = css.split("}", 1)[1]
+    raw = len(re.findall(r"#[0-9a-fA-F]{6}\b", body))
+    check("组件规则里的裸色值不增（基线 34 处，只降不升）", raw <= 34, "现 %d 处" % raw)
+    ctx.close()
+
+
 def test_copy(browser, base):
     """面向维护者的词不许出现在玩家看的正文里。词表与 build-data.js 用的是同一份
        tools/copy-banned.json：数据侧扫 JSON，这里扫渲染后的文字（app.js 里的句子只有渲染才看得见）。"""
@@ -1831,6 +1969,7 @@ def main():
             test_updates_rank(browser, base)
             test_search(browser, base)
             test_legacy(browser, base)
+            test_design_system(browser, base)
             test_copy(browser, base)
             test_app(browser, base)
             test_design_baseline(browser, base)
