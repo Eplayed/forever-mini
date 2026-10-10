@@ -1186,11 +1186,17 @@
         var t = /^\d{4}-\d{2}-\d{2}$/.test(x.date) ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
         var state = t === null ? '未定' : (t <= now ? '已过' : '待来');
         var days = t === null ? '' : (t <= now ? '已过 ' + Math.round((now - t) / 86400000) + ' 天' : '还有 ' + Math.ceil((t - now) / 86400000) + ' 天');
-        return '<div class="tlrow tl-' + state + '"><div class="tl-date"><b class="mono">' + D.esc(x.date) + '</b>' +
+        return '<div class="tlrow tl-' + state + '"><i class="tldot" aria-hidden="true"></i><div class="tl-date"><b class="mono">' + D.esc(x.date) + '</b>' +
           '<span class="dim">' + D.esc(days) + '</span></div><div class="tl-body">' +
           '<div class="tl-h">' + D.esc(x.title) + ' ' + D.pill(x.level) + ' <span class="tag">' + state + '</span></div>' +
           '<p class="dim">' + D.esc(x.what) + '</p>' + D.sources(x.provenance, { quote: true }) + '</div></div>';
       }).join('');
+      // 轴的意义是"现在站在哪"：在第一个待来之前钉一格今天，没有待来就钉在末尾
+      var nowRow = '<div class="tlrow tl-now"><i class="tldot now" aria-hidden="true"></i>' +
+        '<div class="tl-body"><b class="mono">今天</b>' +
+        '<span class="dim"> · 轴上这一格是现在：上面已过、下面待来</span></div></div>';
+      if (rows.indexOf('tl-待来') >= 0) rows = rows.replace('<div class="tlrow tl-待来"', nowRow + '<div class="tlrow tl-待来"');
+      else rows += nowRow;
       set('<div class="card" data-lv="' + (D.worstLevel(items) || 'L3') + '"><h1 class="pt">上线与 Beta 时间表</h1><p class="dim">' + D.esc(m.note || '') + '</p>' +
         '<div class="stats"><div class="stat"><b>' + items.length + '</b>个时间点</div>' +
         '<div class="stat"><b>' + done + '</b>已过</div><div class="stat"><b>' + upcoming + '</b>待来</div>' +
@@ -2578,7 +2584,15 @@
         }
         function draw() {
           var list = rows();
-          el('chbody').innerHTML = '<div class="picks">' +
+          el('chbody').innerHTML = '<div class="kchips" role="group" aria-label="按改动类别筛">' +
+            CH_KINDS.map(function (x) {
+              var n = (ch.items || []).filter(function (it) {
+                return x[0] === 'all' || it.kind === x[0]; }).length;
+              return '<button type="button" class="kchip' + (f.kind === x[0] ? ' on' : '') +
+                '" data-k="' + x[0] + '" aria-pressed="' + (f.kind === x[0] ? 'true' : 'false') + '">' +
+                x[1] + ' <b class="mono">' + n + '</b></button>';
+            }).join('') + '</div>' +
+            '<div class="picks">' +
             '<button type="button" class="pick' + (f.cls ? '' : ' on') + '" data-c="">' +
             '<b>全职业</b><span class="dim mono">' + (ch.items || []).length + '</span></button>' +
             classes.map(function (c) {
@@ -2620,6 +2634,9 @@
           });
           el('cw').onchange = function () { f.what = el('cw').value; draw(); };
           el('ck').onchange = function () { f.kind = el('ck').value; draw(); };
+          Array.prototype.forEach.call(document.querySelectorAll('.kchip'), function (b) {
+            b.onclick = function () { f.kind = b.dataset.k; draw(); };
+          });
           var qi = el('cq');
           qi.oninput = function () { f.q = qi.value; draw(); };
         }
@@ -2691,6 +2708,15 @@
           '<b>不回答哪个职业强</b>——我们没有战斗日志与实测数据，也不做强度排行。</p>' +
           '<div class="banner">排序依据：先按"官方中文佐证的条数"，再按"本站条目合计"。' +
           '全部由数据现算，改了数据重新生成就会变，不是人工排的名次。</div>' +
+          '<div class="card"><h2>九职业的官方中文佐证，先比长短</h2>' +
+          '<div class="rankbars">' + rows.map(function (x) {
+            return '<div class="rb"><b>' + D.esc(cnOf[x.classId] || x.classId) + '</b>' +
+              '<i><s style="width:' + Math.round(x.official / max * 100) + '%"></s>' +
+              '<u style="width:' + Math.round(x.datamine / max * 100) + '%"></u></i>' +
+              '<em class="mono">' + x.official + ' / ' + x.datamine + '</em></div>';
+          }).join('') + '</div>' +
+          '<p class="note">上条是官方中文佐证的条数，下条是只有客户端解包支撑的条数；' +
+          '长短按全站最多的那个职业归一。表格在下面，给的是同一批数的精确值。</p></div>' +
           '<div class="scrollx"><table class="entab ranktab"><thead><tr><th class="ich">名次</th><th>职业</th>' +
           '<th>官方中文佐证</th><th>客户端解包</th><th>本站条目合计</th><th>覆盖情况</th></tr></thead><tbody>' +
           rows.map(function (x) {
