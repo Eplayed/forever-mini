@@ -53,6 +53,16 @@ def squeeze(text):
     return text
 
 
+def around(text, needle, span=46):
+    """取词条在原文里的那一句，供人工判定用。报告里没有片段，
+       「排版空格才命中」就永远是一句没法复核的话。"""
+    i = text.find(needle)
+    if i < 0:
+        return ""
+    s = text[max(0, i - span):i + len(needle) + span]
+    return re.sub(r"\s+", " ", s).strip()
+
+
 def fetch_raw(url):
     """取页面原文。macOS 自带 python 常缺 CA，urllib 会 CERTIFICATE_VERIFY_FAILED，
        所以依次尝试：系统证书 → certifi → 系统 curl（curl 用钥匙串，一定能过）。"""
@@ -268,6 +278,7 @@ def main():
             bucket.append((it, "没有官方来源 URL（%s）" % (it.get("level") or "L3")))
             continue
         found_in, loose = None, False
+        snip = ""
         for url in srcs:
             text = pages.get(url)
             if not text:
@@ -275,11 +286,15 @@ def main():
             if cn in text:
                 found_in, loose = url, False
                 break
-            if cn in squeeze(text):
-                found_in, loose = url, True
+            sq = squeeze(text)
+            if cn in sq:
+                found_in, loose, snip = url, True, around(sq, cn)
                 break
-        if found_in and loose:
-            loose_hits.append((it, found_in))
+        if found_in and loose and it.get("id") in exceptions:
+            # 人眼过完并记了判定的，不再算待确认；判定连原文片段一起存在例外表里
+            judged.append((it, exceptions[it["id"]]))
+        elif found_in and loose:
+            loose_hits.append((it, found_in, snip))
         elif found_in:
             hits.append((it, found_in))
         elif it.get("id") in exceptions:
@@ -332,10 +347,11 @@ def main():
         lines.append("官方页用加粗标签强调词的一部分时，转成纯文本会在汉字中间留下空格。"
                      "下列词条属于这种情况，**脚本没法替你判断是不是同一个词，要人眼过一遍**。")
         lines.append("")
-        lines.append("| 词条 | 职业 | 出处 |")
-        lines.append("| --- | --- | --- |")
-        for it, url in loose_hits:
-            lines.append("| %s | %s %s | %s |" % (it["cn"], it["src"], it["cls"] or "", url))
+        lines.append("| 词条 | id | 职业 | 出处 | 原文片段 |")
+        lines.append("| --- | --- | --- | --- | --- |")
+        for it, url, snip in loose_hits:
+            lines.append("| %s | `%s` | %s %s | %s | %s |"
+                         % (it["cn"], it.get("id") or "", it["src"], it["cls"] or "", url, snip))
         lines.append("")
     if judged:
         lines.append("## 已人工判定并留痕")
@@ -386,29 +402,36 @@ def main():
     lines.append("")
     lines.append("1. 未命中条目先人工回原文比对：确实官方写过 → 把 `provenance.url` 改成真正那篇；"
                  "官方没写过 → 降级 L2 并在页面显示待实测，**不允许留着 L0**。")
-    lines.append("2. 改完重跑 `node tools/build-data.js` 与本脚本，命中率必须回升。")
-    lines.append("3. 掉落与 BOSS 技能不在本脚本范围内：目前 22 座副本的 `bosses` 与 `drops` 是空的，"
+    lines.append("2. `--strict` 只在**声称官方（L0/L1）的条目没逐字命中**或有结构性问题时退出码非 0；"
+                 "L2/L3 的未命中与「去掉排版空格才命中」都只出警告——前者本来就没声称官方，"
+                 "后者是 HTML 强调标签把词从中间拆开造成的转换产物（squeeze 只删汉字之间的空白，"
+                 "不可能把错词拼成对词）。**但并写形式指代的词（如官方写「冰霜与火焰陷阱」）不是转换产物，"
+                 "必须逐条走 `audit-exceptions.json` 留人工判定**，不能靠这条降级蒙过去。")
+    lines.append("3. 改完重跑 `node tools/build-data.js` 与本脚本，命中率必须回升。")
+    lines.append("4. 掉落与 BOSS 技能不在本脚本范围内：目前 22 座副本的 `bosses` 与 `drops` 是空的，"
                  "没有数据就没有写错的风险；等实测有数据时，`build-data.js` 的百分比卡口负责拦。")
     lines.append("")
     io.open(out, "w", encoding="utf-8").write("\n".join(lines))
 
     print("\n命中 %d / 排版空格才命中 %d / 未命中 %d / 结构问题 %d → 报告 %s"
           % (len(hits), len(loose_hits), len(misses), len(no_source), os.path.relpath(out, ROOT)))
-    if loose_hits:
-        lines.append("## 只在去掉排版空格后命中（人工确认这几条）")
-        lines.append("")
-        lines.append("官方页用加粗标签强调词的一部分时，转成纯文本会在汉字中间留下空格。"
-                     "下列词条属于这种情况，**脚本没法替你判断是不是同一个词，要人眼过一遍**。")
-        lines.append("")
-        lines.append("| 词条 | 职业 | 出处 |")
-        lines.append("| --- | --- | --- |")
-        for it, url in loose_hits:
-            lines.append("| %s | %s %s | %s |" % (it["cn"], it["src"], it["cls"] or "", url))
-        lines.append("")
     if misses:
         print("未命中前 10 条：" + "、".join(it.get("cn", "?") for it, _ in misses[:10]))
-    if args.strict and (misses or no_source or loose_hits):
+    # 卡口只拦两类真正会骗人的：① 声称官方（L0/L1）却在它自己声明的那页原文里找不到的名字
+    # ——那就是我们抄错了或编的；② 结构性问题（没有中文名、L0/L1 给不出官方链接）。
+    # 「去掉排版空格才命中」不再算失败：squeeze 只删汉字之间的空白，不可能把错词拼成对词，
+    # 抄错的风险它已经覆盖。这一桶降级成警告，但报告里逐条附原文片段；
+    # 官方用并写形式指代的词（如「冰霜与火焰陷阱」）仍要走 audit-exceptions.json 留人工判定，
+    # 不能靠这条降级蒙过去。L2/L3 的未命中本来就没声称官方，同样只警告。
+    hard = [(it, s) for it, s in misses if it.get("level") in ("L0", "L1")]
+    if args.strict and (hard or no_source):
+        print("卡口失败：L0/L1 未命中 %d 条 / 结构问题 %d 条" % (len(hard), len(no_source)))
+        for it, _ in hard[:10]:
+            print("  - %s（%s / %s）" % (it["cn"], it["src"], it.get("level")))
         sys.exit(1)
+    if misses or loose_hits:
+        print("警告（不卡口）：没声称官方的未命中 %d 条、排版空格才命中 %d 条，逐条见报告"
+              % (len(misses) - len(hard), len(loose_hits)))
 
 
 if __name__ == "__main__":
