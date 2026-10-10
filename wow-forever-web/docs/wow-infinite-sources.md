@@ -402,6 +402,7 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 | `shuidai.json` | 8 KB | 睡袋物品与机制数值 + 5 处营地点 |
 | `changes.json` | **1.7 MB** | 964 条职业改动（544 天赋 + 420 法术）：职业、所在系、名称、改动类别、层数、图标键，**以及前后两版 tooltip 原句** |
 | `chengjiu.json` | 25 KB | 成就 46 条（本轮没接） |
+| `dungeons.json` | 14.9 KB | 35 座副本的**排队元数据**：中文名、等级区间、阵营与所在区域、载入图键、`status`（new/classic）、`sources`（指到客户端队伍查找器表）。**一条首领与掉落数据都没有**，替代不了 `/fuben/<slug>` 详情页（2026-10-10 实测，已接成 `upstream/wclbox-dungeon-meta.json`） |
 
 **发布号会随上游发版变**（形如 `r-1791485113190`），所以 `tools/scrape-wclbox-shuju.py` 每次都先从页面 HTML 里现读，不写死。
 另有 `chengjiu.json`（成就 46 条）与 `map/<slug>.json`（单张地图的兴趣点、飞行线、航线）本轮没接。
@@ -422,3 +423,31 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
   P3 又添一组反例：世界线 56 个图标键里 9 个取不到，全是 `inv_*_skybornec60_*` 这类天裔新装备。
 - 区域 mapId 能不能信：大陆地图 `paint[]` 的 `areaId → 文件名` 与稀有/书籍分组自带的 `id` 是两套独立字段，
   44 个区域逐一对齐零冲突，这条交叉验证已进 `build-data.js`（对不上直接失败）。
+
+### 8.6 2026-10-10 新增源：wago.tools 的客户端 DB2 转储（实测可达）
+
+| 项 | 实测结果 |
+| --- | --- |
+| 是什么 | 把暴雪客户端解包出来的 DB2 表转成 CSV 提供的第三方站，**不是暴雪域名** |
+| 能取 | `curl` 直接 200：`/db2/GroupFinderActivity/csv?build=1.60.1.70334` → 9.3 KB / 109 行；`/db2/GroupFinderCategory/csv` → 5 个类别（2=Dungeons、114=Raids、116=Quests & Zones、118=Battlegrounds、120=Custom） |
+| 有无限服内容 | 有。9 座无限新增本里的 4 座、以及 5 个陌生团本名都在这张排队表里 |
+| 限制 | 只留最近几个构建号，旧构建会 400/404（脚本报错并说明，不静默用旧的）；表里的 `Description_lang` 一类说明文本按红线不落盘 |
+| 我们用它做什么 | 副本的**英文原名**（客户端里游戏内就叫这个）、**等级区间**、**一次几人**（`MaxPlayers`）。取回日期与 URL 逐条挂进数据，卡口要求 `datamine_en` 必须有链接与日期 |
+| 定级 | 英文名属"官方英文原文、经第三方转述" → **L1**，不像 `datamine_cn` 那样支撑 L0（`build-data.js` 的 `isOfficial()` 里刻意没有它） |
+| 脚本 | `tools/fetch-db2-groupfinder.py` → `src/data/upstream/db2-group-finder.json`；构建号从 `_shuju/<发布号>/meta.json` 的 `foreverBuild` 现读 |
+
+同一轮把 `_shuju/<发布号>/dungeons.json` 也接进来了（`tools/scrape-wclbox-shuju.py --group dungeons`）。
+它的 `enter` 列**没有采**：逐列与上面这张客户端表比对过，对不上任何一列（怒焰裂谷写 8，客户端 `MinLevel` 是 13），
+归不了因就说明那是它自己拍的数，不是客户端里的字段。它的 `summary` 是介绍句子，同样不落盘。
+
+### 8.7 这条源顺手澄清 / 新留下的问题
+
+- **澄清**：38 座副本里 18 座一直没有英文原名，现在从客户端排队表补齐 —— 38 座全部有英文原名，其中 18 座来自这张表。
+- **澄清**：黑石塔上层在客户端里是 **10 人**条目（不是记忆里的 5 人），黑暗深渊 / 诺莫瑞根 / 沉没的神庙除了 5 人条目外**另有一条 10/20 人的排队条目**。是不是同一个本两种规模，进游戏才能定，界面上两个数都摆着。
+- **新缺口**：客户端排队表里还有 13 个本站没有名单的名字——地下城 2 座（Demon Fall Canyon、Karazhan Crypts，都 60 级 5 人），
+  团本 11 个（含熔火之心、黑翼之巢、纳克萨玛斯、祖尔格拉布、安其拉两处，以及 Storm Cliffs / The Tainted Scar / Nightmare Grove / The Crystal Vale / Scarlet Enclave 这 5 个陌生新名）。
+  副本页单列一张表说明"客户端能排到、本站还没有首领与掉落来源"，不当成成品数据。
+- **新缺口**：9 座无限新增本里有 5 座（沉没之城、克罗多克要塞、奥卡兹监狱、黑喉要塞、塑源者平台）**在客户端的队伍查找器里还没有条目**，
+  也就是现在还排不到队。卡片逐条写明，不猜开放日期。
+- **仍分歧**：剃刀高地的英文原名，参考站写 "The Razor Krendor"，客户端排队表写 "Razorfen Downs"；
+  湿地那座官方回顾写 "Whelgar's Excavation"，客户端写 "Excavation Site: Wetlands"。两个都留。

@@ -35,14 +35,17 @@
 | 官方中文（技能四态 / 种族） | 国服官方公告页 | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻 |
 | 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
 | 原画（职业背景 / 载入图 / 小地图） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退 |
-| 副本结构化端点（**待接**） | 解包站 `_shuju/<发布号>/dungeons.json`（实测 14.9 KB 可取） | 还没做进 `refresh.sh dungeons` | 接上后可与现在浏览器渲染抓的 38 座逐项对账 |
-| 英文原名 / ID / 图标名对账 | wowhead Forever 区（**只有英文**，`/cn/forever` 是 404） | 手工比对，未成脚本 | 只取标识符与计数；中文名一律不由它提供，图标字节仍只走暴雪官方 CDN |
+| 副本排队元数据 | 解包站 `_shuju/<发布号>/dungeons.json`（35 条，**没有首领与掉落**） | `python3 tools/scrape-wclbox-shuju.py --group dungeons` | 已接进 `refresh.sh dungeons`：补阵营与所在区域；它的 `enter` 列对不上客户端表，**不采** |
+| 客户端排队表 | `wago.tools/db2/GroupFinderActivity/csv?build=<客户端版本>` | `python3 tools/fetch-db2-groupfinder.py` | 英文原名、等级区间、一次几人。非暴雪域名 → 英文名只算 L1；构建号从 `_shuju/…/meta.json` 现读 |
+| 英文原名 / ID / 图标名对账 | wowhead Forever 区（**只有英文**，`/cn/forever` 是 404） | `python3 tools/audit-wowhead.py --write` | 对账不是门禁：天赋线已跑通（461/473 对上、图标零真分歧）；只取标识符与计数，中文名一律不由它提供 |
 | 只跑检查不碰网络 | — | `tools/refresh.sh check` | 提交前必跑 |
+| **先看还缺什么** | 现成的数据文件，不碰网络 | `tools/refresh.sh status` | 体检报告：缺口分「我们能补 / 要人工进游戏核 / 只能等外部」，每条附下一步命令与上游新鲜度。**它不是门禁，永远退出 0** |
 
 ## 三、什么时候动
 
 | 触发 | 动作 | 时限 |
 | --- | --- | --- |
+| **每次开工第一步** | `tools/refresh.sh status`：看缺口与哪些上游超过 14 天没重抓 | 每次 |
 | 解包站发了新构建包 | 对应板块 `refresh.sh <板块>` | 当天 |
 | 官方中文发了新公告（尤其 5 个还没有中文名的职业） | `refresh.sh official` + 译名体检 | 当天 |
 | 每周固定 | `tools/audit-assets.py`（素材缺口）+ `tools/refresh.sh check` | 周一 |
@@ -100,6 +103,9 @@
 3. 提交与推送：只提自己改的文件，`git fetch` 后再推。
 
 ## 七、缺口只有三种归宿，不许有第四种
+
+`tools/refresh.sh status` 就是按这三档把缺口列出来的（能补 / 要人工核 / 等外部），
+每条带数量与下一步命令——想知道"这次该动哪一块"，先跑它，别靠记忆。
 
 - **等外部**：官方没发中文稿、CDN 没有那个文件、上游没切图 → 界面上写明"待实测 / 未公布"，登记在 `icon-gaps.json` 与 `docs/ASSET-GAPS-*.md`。
 - **退回自绘**：图标与原图取不到 → 自绘块，绝不热链别人的图。
