@@ -1,0 +1,537 @@
+{
+ "meta": {
+  "source": "https://wowforever.wclbox.com/_shuju/r-1791619179598/dungeons.json",
+  "release": "r-1791619179598",
+  "scrapedAt": "2026-10-10",
+  "took": "等级区间、阵营与所在区域、载入图键、人数上限、是否无限新增",
+  "skipped": "上游写的介绍句子（summary）、它对不上客户端表的 enter 列、上游自定的中文简称（abbr/short）、含义不明的标记位（demo/top）",
+  "note": "这一份里一条首领与掉落数据都没有，替代不了详情页名单，接它只为拿卡片元数据这一层。"
+ },
+ "dungeons": [
+  {
+   "id": "ragefire-chasm",
+   "nameCn": "怒焰裂谷",
+   "status": "classic",
+   "levels": [
+    13,
+    18
+   ],
+   "zone": "奥格瑞玛",
+   "faction": "部落",
+   "art": "ragefirechasm",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "hall-of-thanes",
+   "nameCn": "领主大厅",
+   "status": "new",
+   "levels": [
+    13,
+    20
+   ],
+   "zone": "丹莫罗，铁炉堡地下",
+   "faction": "联盟",
+   "art": "hall-of-thanes",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "ruins-of-lordaeron",
+   "nameCn": "洛丹伦废墟",
+   "status": "new",
+   "levels": [
+    15,
+    22
+   ],
+   "zone": "提瑞斯法林地，洛丹伦废墟",
+   "faction": "部落",
+   "art": "ruins-of-lordaeron",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "wailing-caverns",
+   "nameCn": "哀嚎洞穴",
+   "status": "classic",
+   "levels": [
+    15,
+    24
+   ],
+   "zone": "贫瘠之地",
+   "faction": null,
+   "art": "wailingcaverns",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "the-deadmines",
+   "nameCn": "死亡矿井",
+   "status": "classic",
+   "levels": [
+    17,
+    26
+   ],
+   "zone": "西部荒野",
+   "faction": null,
+   "art": "deadmines",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "shadowfang-keep",
+   "nameCn": "影牙城堡",
+   "status": "classic",
+   "levels": [
+    20,
+    30
+   ],
+   "zone": "银松森林",
+   "faction": null,
+   "art": "shadowfangkeep",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "blackfathom-deeps",
+   "nameCn": "黑暗深渊",
+   "status": "classic",
+   "levels": [
+    24,
+    32
+   ],
+   "zone": "灰谷",
+   "faction": null,
+   "art": "blackfathomdeeps",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "the-stockade",
+   "nameCn": "暴风城监狱",
+   "status": "classic",
+   "levels": [
+    24,
+    32
+   ],
+   "zone": "暴风城",
+   "faction": "联盟",
+   "art": "stockade",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "excavation-site",
+   "nameCn": "挖掘场：湿地",
+   "status": "new",
+   "levels": [
+    26,
+    33
+   ],
+   "zone": "湿地，维尔加挖掘场一带",
+   "faction": null,
+   "art": "excavation-site",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "city-of-dalaran",
+   "nameCn": "达拉然城",
+   "status": "new",
+   "levels": [
+    28,
+    35
+   ],
+   "zone": "奥特兰克山脉",
+   "faction": null,
+   "art": "city-of-dalaran",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "gnomeregan",
+   "nameCn": "诺莫瑞根",
+   "status": "classic",
+   "levels": [
+    29,
+    38
+   ],
+   "zone": "丹莫罗",
+   "faction": null,
+   "art": "gnomeregan",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "razorfen-kraul",
+   "nameCn": "剃刀沼泽",
+   "status": "classic",
+   "levels": [
+    29,
+    38
+   ],
+   "zone": "贫瘠之地",
+   "faction": null,
+   "art": "razorfenkraul",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "scarlet-monastery-graveyard",
+   "nameCn": "血色修道院墓地",
+   "status": "classic",
+   "levels": [
+    30,
+    38
+   ],
+   "zone": "提瑞斯法林地",
+   "faction": null,
+   "art": "scarletmonastery",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "scarlet-monastery-library",
+   "nameCn": "血色修道院图书馆",
+   "status": "classic",
+   "levels": [
+    33,
+    41
+   ],
+   "zone": "提瑞斯法林地",
+   "faction": null,
+   "art": "scarlethalls",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "the-drowned-city",
+   "nameCn": "沉没之城",
+   "status": "new",
+   "levels": [
+    35,
+    40
+   ],
+   "zone": "荆棘谷外海",
+   "faction": null,
+   "art": "the-drowned-city",
+   "players": null,
+   "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/krol%E2%80%99dok-stronghold/2349672",
+   "sourceType": "official"
+  },
+  {
+   "id": "scarlet-monastery-armory",
+   "nameCn": "血色修道院军械库",
+   "status": "classic",
+   "levels": [
+    36,
+    44
+   ],
+   "zone": "提瑞斯法林地",
+   "faction": null,
+   "art": "scarlethalls",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "razorfen-downs",
+   "nameCn": "剃刀高地",
+   "status": "classic",
+   "levels": [
+    37,
+    46
+   ],
+   "zone": "贫瘠之地",
+   "faction": null,
+   "art": "razorfendowns",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "scarlet-monastery-cathedral",
+   "nameCn": "血色修道院大教堂",
+   "status": "classic",
+   "levels": [
+    38,
+    46
+   ],
+   "zone": "提瑞斯法林地",
+   "faction": null,
+   "art": "scarletmonastery",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "kroldok-stronghold",
+   "nameCn": "克罗多克要塞",
+   "status": "new",
+   "levels": [
+    40,
+    45
+   ],
+   "zone": "河林（新区域）",
+   "faction": null,
+   "art": "kroldok-stronghold",
+   "players": null,
+   "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/krol%E2%80%99dok-stronghold/2349672",
+   "sourceType": "official"
+  },
+  {
+   "id": "uldaman",
+   "nameCn": "奥达曼",
+   "status": "classic",
+   "levels": [
+    41,
+    51
+   ],
+   "zone": "荒芜之地",
+   "faction": null,
+   "art": "uldaman",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "zulfarrak",
+   "nameCn": "祖尔法拉克",
+   "status": "classic",
+   "levels": [
+    44,
+    54
+   ],
+   "zone": "塔纳利斯",
+   "faction": null,
+   "art": "zulfarrak",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "maraudon",
+   "nameCn": "玛拉顿",
+   "status": "classic",
+   "levels": [
+    46,
+    55
+   ],
+   "zone": "凄凉之地",
+   "faction": null,
+   "art": "maraudon",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "alcaz-prison",
+   "nameCn": "奥卡兹监狱",
+   "status": "new",
+   "levels": [
+    48,
+    53
+   ],
+   "zone": "尘泥沼泽，奥卡兹岛",
+   "faction": null,
+   "art": "alcaz-prison",
+   "players": null,
+   "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/krol%E2%80%99dok-stronghold/2349672",
+   "sourceType": "official"
+  },
+  {
+   "id": "sunken-temple",
+   "nameCn": "沉没的神庙",
+   "status": "classic",
+   "levels": [
+    50,
+    60
+   ],
+   "zone": "悲伤沼泽",
+   "faction": null,
+   "art": "sunkentemple",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "blackrock-depths",
+   "nameCn": "黑石深渊",
+   "status": "classic",
+   "levels": [
+    52,
+    60
+   ],
+   "zone": "黑石山",
+   "faction": null,
+   "art": "blackrockdepths",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "dire-maul-east",
+   "nameCn": "厄运之槌东",
+   "status": "classic",
+   "levels": [
+    54,
+    60
+   ],
+   "zone": "菲拉斯",
+   "faction": null,
+   "art": "diremaul",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "blackmaw-hold",
+   "nameCn": "黑颚要塞",
+   "status": "new",
+   "levels": [
+    55,
+    60
+   ],
+   "zone": "艾萨拉",
+   "faction": null,
+   "art": "blackmaw-hold",
+   "players": null,
+   "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/krol%E2%80%99dok-stronghold/2349672",
+   "sourceType": "official"
+  },
+  {
+   "id": "lower-blackrock-spire",
+   "nameCn": "黑石塔下层",
+   "status": "classic",
+   "levels": [
+    55,
+    60
+   ],
+   "zone": "黑石山",
+   "faction": null,
+   "art": "blackrockspire",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "dire-maul-north",
+   "nameCn": "厄运之槌北",
+   "status": "classic",
+   "levels": [
+    56,
+    60
+   ],
+   "zone": "菲拉斯",
+   "faction": null,
+   "art": "diremaul",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "dire-maul-west",
+   "nameCn": "厄运之槌西",
+   "status": "classic",
+   "levels": [
+    56,
+    60
+   ],
+   "zone": "菲拉斯",
+   "faction": null,
+   "art": "diremaul",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "scholomance",
+   "nameCn": "通灵学院",
+   "status": "classic",
+   "levels": [
+    58,
+    60
+   ],
+   "zone": "西瘟疫之地",
+   "faction": null,
+   "art": "scholomance",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "shapers-terrace",
+   "nameCn": "塑造者平台",
+   "status": "new",
+   "levels": [
+    58,
+    60
+   ],
+   "zone": "安戈洛环形山",
+   "faction": null,
+   "art": "shapers-terrace",
+   "players": null,
+   "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/krol%E2%80%99dok-stronghold/2349672",
+   "sourceType": "official"
+  },
+  {
+   "id": "stratholme-main-gate",
+   "nameCn": "斯坦索姆主门",
+   "status": "classic",
+   "levels": [
+    58,
+    60
+   ],
+   "zone": "东瘟疫之地",
+   "faction": null,
+   "art": "stratholme",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "stratholme-service-gate",
+   "nameCn": "斯坦索姆仆从入口",
+   "status": "classic",
+   "levels": [
+    58,
+    60
+   ],
+   "zone": "东瘟疫之地",
+   "faction": null,
+   "art": "stratholme",
+   "players": null,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  },
+  {
+   "id": "upper-blackrock-spire",
+   "nameCn": "黑石塔上层",
+   "status": "classic",
+   "levels": [
+    59,
+    60
+   ],
+   "zone": "黑石山",
+   "faction": null,
+   "art": "blackrockspire",
+   "players": 10,
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
+   "sourceType": "client_data"
+  }
+ ]
+}
