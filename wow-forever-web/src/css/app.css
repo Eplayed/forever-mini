@@ -612,7 +612,7 @@ button.stripc{font:inherit;font-size:13px;cursor:pointer;text-align:center}
    并排之后"点左边、右边出结果"，空态也有地方摆 */
 .ltreewrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:var(--s4);align-items:start}
 .ltreewrap > .card{margin-bottom:0}
-.ltreecard h2{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3)}
+.ltreecard h2, .lchgrp h2{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3)}
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);
   max-width:520px;margin-top:var(--s3)}
 .lslot{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;

@@ -1647,6 +1647,11 @@ def test_legacy(browser, base):
           tbl and tbl["icoW"] == 26 and tbl["rowH"] <= 60, json.dumps(tbl, ensure_ascii=False))
     check("分组卡整块铺开，表格宽度占满卡片", tbl and tbl["fill"] > 0.95 and tbl["groups"] == 6,
           json.dumps(tbl, ensure_ascii=False))
+    # 组名与计数必须分开摆：套 flex 规则前实测连成「职业27 项」这种读法
+    h2p = page.evaluate("""() => { const h = document.querySelector('#lch .lchgrp h2');
+      const s = h.querySelector('span'); const hb = h.getBoundingClientRect(), sb = s.getBoundingClientRect();
+      return { spread: sb.right >= hb.right - 8, nameW: Math.round(hb.width - sb.width) }; }""")
+    check("分组标题的计数靠右，不与组名连读", h2p["spread"], json.dumps(h2p, ensure_ascii=False))
     # 截图要拍默认状态：树回到第一棵、并排那格摆一个打开的详情
     page.evaluate("(id) => { const b = [...document.querySelectorAll('.picks [data-t]')]"
                   ".find(x => x.dataset.t === id); if (b) b.click(); }", L["trees"][0]["id"])
