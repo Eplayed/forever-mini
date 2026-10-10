@@ -48,14 +48,37 @@ function provFor(row, d) {
 function build(d) {
   const slug = d.slug;
   const mine = byId[ALIAS[slug] || slug] || byCn[d.nameCn];
-  const bosses = (d.bosses || []).map((b, i) => ({
+  // 「小怪」不是首领名：上游 2026-10-10 的黑暗深渊名单里有一条就叫「小怪」，
+  // 直接收进来会在副本页上出现一个假首领。
+  const junk = (s) => !s || /^(小怪|精英怪|trash|other)$/i.test(String(s).trim());
+  const upB = (d.bosses || []).filter((b) => !junk(b.nameCn));
+  const mineB = (mine && mine.bosses) || [];
+  // 上游删掉的有名首领不跟着删：我们没法进游戏数首领，删错了就是丢数据。
+  // 保留原名单、追加上游新增的，并把差额报出来等人工核。
+  const gone = mineB.filter((b) => !junk(b.nameCn) &&
+    !upB.some((u) => u.id === b.id || u.nameCn === b.nameCn));
+  const fresh = upB.filter((u) => !mineB.some((b) => b.id === u.id || b.nameCn === u.nameCn));
+  const junkMine = mineB.filter((b) => junk(b.nameCn));
+  if (junkMine.length) console.log('%s 去掉 %d 条不是首领名的行（%s）——我们自己以前的数据里也有',
+    slug, junkMine.length, junkMine.map((b) => b.nameCn).join('、'));
+  if (gone.length) {
+    console.log('%s 上游名单少了 %d 个首领（保留我们已有的，等人工核）：%s',
+      slug, gone.length, gone.map((b) => b.nameCn).join('、'));
+  }
+  if (fresh.length) console.log('%s 上游新增首领 %d 个：%s', slug, fresh.length,
+    fresh.map((b) => b.nameCn).join('、'));
+  const mk = (b) => ({
     id: b.id, nameCn: b.nameCn,
     level: (d.drops || []).some((x) => x.bossId === b.id) ? 'L0' : 'L2',
     // 这句是玩家看到的，不能写「上游标了：」（禁词卡口会红，2026-10-10 实测：
     // 重跑副本线就把这句带回过数据里）。上游原话是「开放数据库里还没有它的掉落。」，
     // 意思一样，这里用站得住的说法写死，不整句转述别人的话。
     note: (d.drops || []).some((x) => x.bossId === b.id) ? null : '公开数据库里还没有它的掉落记录。'
-  }));
+  });
+  const bosses = upB.map(mk).concat(gone.map((b) => ({
+    id: b.id, nameCn: b.nameCn, level: b.level || 'L2',
+    note: (d.drops || []).some((x) => x.bossId === b.id) ? null : b.note || '公开数据库里还没有它的掉落记录。'
+  })));
   const drops = (d.drops || []).map((x) => ({
     itemId: x.itemId, nameCn: x.nameCn, iconKey: x.iconKey || null, quality: x.quality === undefined ? null : x.quality,
     bossId: x.bossId, bossCn: x.bossCn,

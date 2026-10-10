@@ -9,7 +9,7 @@
 #   tools/refresh.sh world       # 世界线（区域 / 稀有 / 书籍 / 睡袋）重抓重整
 #   tools/refresh.sh changes     # 客户端改动清单
 #   tools/refresh.sh prof        # 专业与配方
-#   tools/refresh.sh dungeons    # 副本卡片与掉落
+#   tools/refresh.sh dungeons    # 副本：首领名单与掉落 + 卡片（两个抓取器都要跑）
 #   tools/refresh.sh legacy      # 传承：三棵专长树 + 65 项挑战（句子在落盘前就删）
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
@@ -50,6 +50,9 @@ case "${1:-}" in
     gate
     ;;
   dungeons)
+    # 卡片与首领名单是两个抓取器：只跑 cards 那条，BOSS 与掉落会一直停在第一次抓的版上
+    # （2026-10-10 实测：卡片线重跑过，名单还是 235 个 BOSS，而详情页已经是 232 个）
+    run python3 tools/scrape-wclbox.py --what dungeons --write
     run python3 tools/scrape-wclbox-dom.py --what cards
     run node tools/merge-dungeons.js
     gate

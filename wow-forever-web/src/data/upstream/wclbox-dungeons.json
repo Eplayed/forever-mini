@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-10-08",
+  "scrapedAt": "2026-10-10",
   "method": "tools/scrape-wclbox.py --what dungeons --write",
   "took": "名单/等级区间/新本标记/BOSS 名/掉落归属/物品 ID/图标文件名；不取描述文案与攻略"
  },
@@ -1513,18 +1513,8 @@
      "noLootNote": null
     },
     {
-     "id": "old-serra-kis",
-     "nameCn": "瑟拉吉斯",
-     "noLootNote": null
-    },
-    {
-     "id": "twilight-lord-kelris",
-     "nameCn": "暮光领主克尔里斯",
-     "noLootNote": null
-    },
-    {
-     "id": "aku-mai",
-     "nameCn": "阿库麦尔",
+     "id": "trash-mobs",
+     "nameCn": "小怪",
      "noLootNote": null
     }
    ],
@@ -1594,75 +1584,67 @@
      "quality": 2
     },
     {
+     "itemId": "1155",
+     "iconKey": "inv_staff_06",
+     "nameCn": "梦游者魔棒",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "quality": 3
+    },
+    {
      "itemId": "6901",
      "iconKey": "inv_misc_monsterscales_03",
      "nameCn": "发光的蛇颈龙斗篷",
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "quality": 3
     },
     {
      "itemId": "6902",
      "iconKey": "inv_bracer_08",
      "nameCn": "瑟拉吉斯指环",
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
-     "quality": 3
-    },
-    {
-     "itemId": "6904",
-     "iconKey": "inv_misc_monsterfang_01",
-     "nameCn": "瑟拉吉斯之刺",
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
-     "quality": 3
-    },
-    {
-     "itemId": "1155",
-     "iconKey": "inv_staff_06",
-     "nameCn": "梦游者魔棒",
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "quality": 3
     },
     {
      "itemId": "6903",
      "iconKey": "inv_pants_02",
      "nameCn": "凝望短裤",
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "quality": 3
     },
     {
-     "itemId": "5881",
-     "iconKey": "inv_misc_head_orc_01",
-     "nameCn": "克尔里斯的头颅",
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
-     "quality": 1
-    },
-    {
-     "itemId": "6910",
-     "iconKey": "inv_pants_14",
-     "nameCn": "吸血短裤",
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
-     "quality": 3
-    },
-    {
-     "itemId": "6911",
-     "iconKey": "inv_belt_25",
-     "nameCn": "苔藓腰带",
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
+     "itemId": "6904",
+     "iconKey": "inv_misc_monsterfang_01",
+     "nameCn": "瑟拉吉斯之刺",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "quality": 3
     },
     {
      "itemId": "6909",
      "iconKey": "inv_sword_42",
      "nameCn": "海蛇之击",
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "quality": 3
+    },
+    {
+     "itemId": "6910",
+     "iconKey": "inv_pants_14",
+     "nameCn": "吸血短裤",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "quality": 3
+    },
+    {
+     "itemId": "6911",
+     "iconKey": "inv_belt_25",
+     "nameCn": "苔藓腰带",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "quality": 3
     }
    ],
@@ -1825,11 +1807,6 @@
    "levelRange": "29-38",
    "bosses": [
     {
-     "id": "grubbis",
-     "nameCn": "格鲁比斯",
-     "noLootNote": null
-    },
-    {
      "id": "viscous-fallout",
      "nameCn": "粘性辐射尘",
      "noLootNote": null
@@ -1856,38 +1833,6 @@
     }
    ],
    "drops": [
-    {
-     "itemId": "9445",
-     "iconKey": "inv_gauntlets_17",
-     "nameCn": "格鲁比斯的爪子",
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "quality": 3
-    },
-    {
-     "itemId": "6400",
-     "iconKey": "inv_shield_05",
-     "nameCn": "微光之盾",
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "quality": 2
-    },
-    {
-     "itemId": "6407",
-     "iconKey": "inv_bracer_07",
-     "nameCn": "夜空护腕",
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "quality": 2
-    },
-    {
-     "itemId": "12039",
-     "iconKey": "inv_jewelry_necklace_11",
-     "nameCn": "苔原项链",
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "quality": 2
-    },
     {
      "itemId": "9454",
      "iconKey": "inv_boots_05",

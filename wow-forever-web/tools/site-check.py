@@ -1207,9 +1207,13 @@ def test_home(browser, base):
       .filter(h => h && !/^https?:/.test(h))""")
     unknown = sorted({h for h in hrefs if h not in PAGES})
     check("首页所有入口都指向真存在的页", not unknown, "指向不存在的页：%s" % (unknown or "无"))
-    hard = page.evaluate("""() => { const t = document.querySelector('#main').innerText;
-      return ['1990', '1055', '473', '366'].filter(n => !t.includes(n)); }""")
-    check("首页规模数字都渲染出来了", not hard, "缺 %s" % (hard or "无"))
+    # 这几个数原来写死在断言里（'1055' 与 '366'）：上游一更新就红，红了之后人就去改断言，
+    # 等于把卡口变成摆设。改成从 scale.json 现取，页面漏渲染哪个数就报哪个。
+    need = [str(sc["recipes"]), str(sc["drops"]), str(sc["talentNodes"]),
+            str(sc["bosses"]), str(sc["changes"])]
+    hard = page.evaluate("""(need) => { const t = document.querySelector('#main').innerText;
+      return need.filter(n => !t.includes(n)); }""", need)
+    check("首页规模数字都渲染出来了（要渲染的数从 scale.json 现取）", not hard, "缺 %s" % (hard or "无"))
     nd = page.evaluate("() => document.querySelectorAll('.flowrow').length")
     check("刻意不做的与时间点都在页上", nd >= 9, "%d 行" % nd)
     foot = page.evaluate("() => document.querySelector('#foot').innerText")

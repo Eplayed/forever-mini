@@ -7,7 +7,7 @@
   "upstream": {
    "site": "新手盒子 · 魔兽世界无限数据库",
    "source": "https://wowforever.wclbox.com/fuben",
-   "scrapedAt": "2026-10-08"
+   "scrapedAt": "2026-10-10"
   }
  },
  "newDungeons": [
@@ -758,12 +758,6 @@
      "nameCn": "变异精灵龙",
      "level": "L0",
      "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
-     "level": "L0",
-     "note": null
     }
    ],
    "route": [],
@@ -1312,12 +1306,6 @@
      "nameCn": "艾德温·范克里夫",
      "level": "L0",
      "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
-     "level": "L0",
-     "note": null
     }
    ],
    "route": [],
@@ -1716,12 +1704,6 @@
     {
      "id": "deathsworn-captain",
      "nameCn": "死亡之誓",
-     "level": "L0",
-     "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
      "level": "L0",
      "note": null
     }
@@ -2199,19 +2181,19 @@
      "id": "old-serra-kis",
      "nameCn": "瑟拉吉斯",
      "level": "L0",
-     "note": null
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "twilight-lord-kelris",
      "nameCn": "暮光领主克尔里斯",
      "level": "L0",
-     "note": null
+     "note": "公开数据库里还没有它的掉落记录。"
     },
     {
      "id": "aku-mai",
      "nameCn": "阿库麦尔",
      "level": "L0",
-     "note": null
+     "note": "公开数据库里还没有它的掉落记录。"
     }
    ],
    "route": [],
@@ -2289,12 +2271,21 @@
      "level": "L2"
     },
     {
+     "itemId": "1155",
+     "nameCn": "梦游者魔棒",
+     "iconKey": "inv_staff_06",
+     "quality": 3,
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "level": "L2"
+    },
+    {
      "itemId": "6901",
      "nameCn": "发光的蛇颈龙斗篷",
      "iconKey": "inv_misc_monsterscales_03",
      "quality": 3,
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "level": "L2"
     },
     {
@@ -2302,26 +2293,8 @@
      "nameCn": "瑟拉吉斯指环",
      "iconKey": "inv_bracer_08",
      "quality": 3,
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "6904",
-     "nameCn": "瑟拉吉斯之刺",
-     "iconKey": "inv_misc_monsterfang_01",
-     "quality": 3,
-     "bossId": "old-serra-kis",
-     "bossCn": "瑟拉吉斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "1155",
-     "nameCn": "梦游者魔棒",
-     "iconKey": "inv_staff_06",
-     "quality": 3,
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "level": "L2"
     },
     {
@@ -2329,35 +2302,17 @@
      "nameCn": "凝望短裤",
      "iconKey": "inv_pants_02",
      "quality": 3,
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "level": "L2"
     },
     {
-     "itemId": "5881",
-     "nameCn": "克尔里斯的头颅",
-     "iconKey": "inv_misc_head_orc_01",
-     "quality": 1,
-     "bossId": "twilight-lord-kelris",
-     "bossCn": "暮光领主克尔里斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "6910",
-     "nameCn": "吸血短裤",
-     "iconKey": "inv_pants_14",
+     "itemId": "6904",
+     "nameCn": "瑟拉吉斯之刺",
+     "iconKey": "inv_misc_monsterfang_01",
      "quality": 3,
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
-     "level": "L2"
-    },
-    {
-     "itemId": "6911",
-     "nameCn": "苔藓腰带",
-     "iconKey": "inv_belt_25",
-     "quality": 3,
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "level": "L2"
     },
     {
@@ -2365,8 +2320,26 @@
      "nameCn": "海蛇之击",
      "iconKey": "inv_sword_42",
      "quality": 3,
-     "bossId": "aku-mai",
-     "bossCn": "阿库麦尔",
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "level": "L2"
+    },
+    {
+     "itemId": "6910",
+     "nameCn": "吸血短裤",
+     "iconKey": "inv_pants_14",
+     "quality": 3,
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
+     "level": "L2"
+    },
+    {
+     "itemId": "6911",
+     "nameCn": "苔藓腰带",
+     "iconKey": "inv_belt_25",
+     "quality": 3,
+     "bossId": "trash-mobs",
+     "bossCn": "小怪",
      "level": "L2"
     }
    ],
@@ -2433,12 +2406,6 @@
     {
      "id": "bruegal-ironknuckle",
      "nameCn": "布鲁高·铁拳",
-     "level": "L0",
-     "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
      "level": "L0",
      "note": null
     }
@@ -2585,12 +2552,6 @@
    "levelRange": "29-38",
    "bosses": [
     {
-     "id": "grubbis",
-     "nameCn": "格鲁比斯",
-     "level": "L0",
-     "note": null
-    },
-    {
      "id": "viscous-fallout",
      "nameCn": "粘性辐射尘",
      "level": "L0",
@@ -2619,46 +2580,16 @@
      "nameCn": "黑铁大师",
      "level": "L0",
      "note": null
+    },
+    {
+     "id": "grubbis",
+     "nameCn": "格鲁比斯",
+     "level": "L0",
+     "note": "公开数据库里还没有它的掉落记录。"
     }
    ],
    "route": [],
    "drops": [
-    {
-     "itemId": "9445",
-     "nameCn": "格鲁比斯的爪子",
-     "iconKey": "inv_gauntlets_17",
-     "quality": 3,
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "6400",
-     "nameCn": "微光之盾",
-     "iconKey": "inv_shield_05",
-     "quality": 2,
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "6407",
-     "nameCn": "夜空护腕",
-     "iconKey": "inv_bracer_07",
-     "quality": 2,
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "level": "L2"
-    },
-    {
-     "itemId": "12039",
-     "nameCn": "苔原项链",
-     "iconKey": "inv_jewelry_necklace_11",
-     "quality": 2,
-     "bossId": "grubbis",
-     "bossCn": "格鲁比斯",
-     "level": "L2"
-    },
     {
      "itemId": "9454",
      "nameCn": "酸性长靴",
@@ -3637,12 +3568,6 @@
     {
      "id": "amnennar-the-coldbringer",
      "nameCn": "寒冰之王亚门纳尔",
-     "level": "L0",
-     "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
      "level": "L0",
      "note": null
     }
@@ -5790,12 +5715,6 @@
     {
      "id": "emperor-dagran-thaurissan",
      "nameCn": "达格兰·索瑞森大帝",
-     "level": "L0",
-     "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
      "level": "L0",
      "note": null
     }
@@ -9034,12 +8953,6 @@
     {
      "id": "darkmaster-gandling",
      "nameCn": "黑暗院长加丁",
-     "level": "L0",
-     "note": null
-    },
-    {
-     "id": "trash-mobs",
-     "nameCn": "小怪",
      "level": "L0",
      "note": null
     }
