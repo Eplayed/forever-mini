@@ -1095,19 +1095,43 @@
   function drawChooser() {
     var total = cstate.qs.length, done = cstate.step >= total;
     var answered = Object.keys(cstate.answers).length;
-    var progress = '<div class="card"><div class="crow"><span class="dim">第 ' + Math.min(cstate.step + 1, total) + ' / ' + total + ' 题</span>' +
+    var live = chooserScores();
+    var ids = cstate.classes.map(function (c) { return c.id; });
+    var maxScore = Math.max.apply(null, ids.map(function (i) { return live.score[i]; }).concat([0]));
+    var lead = maxScore ? ids.filter(function (i) { return live.score[i] === maxScore; }) : [];
+    var pool = (answered && maxScore) ? ids.filter(function (i) { return live.score[i] > 0; }) : ids;
+    /* 这一页的内容就是"9 个职业被 7 题逐步筛掉"，所以把 9 个职业一直摆在屏幕上：
+       答一题，掉出候选的变暗、领先的转金。进度不再是细条，而是"还剩几个候选"。 */
+    function board() {
+      var order = ids.slice().sort(function (a, b) { return live.score[b] - live.score[a]; });
+      return '<aside class="cboard"><div class="mline">九个职业都在这儿 · 还在候选 ' +
+        '<b>' + pool.length + '</b> 个' + (answered ? '' : '（答第一题才开始筛）') + '</div><div class="ctiles">' +
+        order.map(function (id) {
+          var c = cstate.classes.filter(function (x) { return x.id === id; })[0] || { id: id, cn: id };
+          var s = live.score[id];
+          return '<div class="ctile' + (answered && !s ? ' off' : '') +
+            (lead.indexOf(id) >= 0 && answered ? ' lead' : '') + '"><span class="ci">' +
+            (window.Glyph ? Glyph.classTile(id, c.cn, c.iconKey, '') : D.esc((c.cn || '?').slice(0, 1))) +
+            '</span><b>' + D.esc(c.cn) + '</b><em class="mono">' + s + '</em>' +
+            '<span class="en dim">' + D.esc(c.en || '') + '</span>' +
+            '<i class="cs"><s style="width:' + (maxScore ? Math.round(s / maxScore * 100) : 0) + '%"></s></i>' +
+            '</div>';
+        }).join('') + '</div></aside>';
+    }
+    var progress = '<div class="card cstep"><div class="crow">' +
+      '<span class="dim mono">第 ' + Math.min(cstate.step + 1, total) + ' / ' + total + ' 题</span>' +
       '<span class="sp"></span><button class="ghost" id="creset">重新开始</button></div>' +
       '<div class="cov">' + cstate.qs.map(function (q, i) {
         var w = (100 / total).toFixed(2) + '%';
         var cls = cstate.answers[q.id] ? (i < cstate.step ? 'L0' : 'L1') : 'L3';
         return '<i class="' + cls + '" style="width:' + w + '" title="' + D.esc(q.q) + '"></i>';
       }).join('') + '</div></div>';
-    var head = '<div class="card"><h1 class="pt">选职业问答</h1><p class="dim">' + D.esc(cstate.meta.note || '') + '</p></div>';
+    var head = '<div class="card chead"><div class="mline">本站整理 · 7 题 · 9 职业</div>' +
+      '<h1 class="pt">选职业问答</h1><p class="dim">' + D.esc(cstate.meta.note || '') + '</p></div>';
     var body;
     if (done) {
-      var s = chooserScores(), ids = Object.keys(s.score);
-      var max = Math.max.apply(null, ids.map(function (id) { return s.score[id]; }).concat([1]));
-      var ranked = ids.sort(function (a, b) { return s.score[b] - s.score[a]; });
+      var s = live, ranked = ids.slice().sort(function (a, b) { return s.score[b] - s.score[a]; });
+      var max = Math.max.apply(null, ranked.map(function (id) { return s.score[id]; }).concat([1]));
       var byId = {};
       cstate.classes.forEach(function (c) { byId[c.id] = c; });
       var top = ranked.slice(0, 3);
@@ -1123,16 +1147,19 @@
         '<p class="dim" style="margin-top:8px">分数差距小于 2 分时应视为同样合适。想换个答案再算一次，点上面「重新开始」。</p></div>';
     } else {
       var q = cstate.qs[cstate.step];
-      body = '<div class="card"><h2>' + D.esc(q.q) + '</h2>' +
+      body = '<div class="card cq"><div class="mline">已答 ' + answered + ' 题 · 还剩 ' +
+        pool.length + ' 个候选</div><h2>' + D.esc(q.q) + '</h2>' +
         (q.hint ? '<p class="dim">' + D.esc(q.hint) + '</p>' : '') +
-        '<div class="qopts">' + q.options.map(function (o) {
-          return '<button class="qopt' + (cstate.answers[q.id] === o.id ? ' on' : '') + '" data-o="' + o.id + '">' + D.esc(o.label) + '</button>';
+        '<div class="qopts">' + q.options.map(function (o, i) {
+          return '<button class="qopt' + (cstate.answers[q.id] === o.id ? ' on' : '') + '" data-o="' + o.id + '">' +
+            '<span class="qi mono">' + 'ABC'.slice(i, i + 1) + '</span>' + D.esc(o.label) + '</button>';
         }).join('') + '</div>' +
         '<div class="crow" style="margin-top:10px">' +
         (cstate.step ? '<button class="ghost" id="cprev">← 上一题</button><span class="sp"></span>' : '') +
-        '<span class="dim">已答 ' + answered + ' 题</span></div></div>';
+        '<span class="dim">选一个，右边那排候选会跟着动</span>' +
+        '<span class="dim cqhint">（手机上在题目下面）</span></div></div>';
     }
-    set(head + progress + body);
+    set(head + progress + '<div class="csplit">' + body + board() + '</div>');
     var rs = el('creset'); if (rs) rs.onclick = function () { cstate.answers = {}; cstate.step = 0; drawChooser(); };
     var pv = el('cprev'); if (pv) pv.onclick = function () { cstate.step = Math.max(0, cstate.step - 1); drawChooser(); };
     Array.prototype.forEach.call(document.querySelectorAll('.qopt'), function (b) {
