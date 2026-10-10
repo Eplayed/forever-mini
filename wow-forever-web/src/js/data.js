@@ -26,6 +26,7 @@ window.WowData = (function () {
     return '<span class="pill ' + l + '">' + PILL[l] + '</span>';
   }
   var TYPE_LABEL = { official_cn: '官方中文', official_en: '官方英文', datamine_cn: '客户端解包',
+    datamine_en: '客户端数据表',
     fan_db: '第三方资料站', media_cn: '中文转载', video: '实测视频', 'site-promise': '本站承诺', 'site-note': '本站说明' };
   function sources(list) {
     if (!list || !list.length) return '<div class="dim" style="font-size:12px">无来源记录</div>';

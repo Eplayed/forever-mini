@@ -4,6 +4,7 @@
 const LV_ORDER = { L0: 0, L1: 1, L2: 2, L3: 3 };
 const ST_LV = {
   official_cn: 'L0', official_en: 'L1', datamine_cn: 'L0',
+  datamine_en: 'L1',
   fan_db: 'L2', media_cn: 'L2', video: 'L2'
 };
 const SEL = '.card, .mod, .dcard, .drawer';

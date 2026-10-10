@@ -39,6 +39,7 @@
      两处都有时取更弱的那个。卡里既没徽标也没来源就不上轨——没定级就别装作定了级。 */
   var LV_ORDER = { L0: 0, L1: 1, L2: 2, L3: 3 };
   var ST_LV = { official_cn: 'L0', official_en: 'L1', datamine_cn: 'L0',
+    datamine_en: 'L1',
     fan_db: 'L2', media_cn: 'L2', video: 'L2' };
   function applyRails(scope) {
     Array.prototype.forEach.call((scope || document).querySelectorAll('.card, .mod, .dcard, .drawer'), function (c) {
@@ -1374,12 +1375,34 @@
     return null;
   }
   function dungeons() {
-    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
+    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; }),
+      D.load('data/queue.json').catch(function () { return {}; })])
       .then(function (rs) {
-      var d = rs[0], ART = rs[1] || {};
+      var d = rs[0], ART = rs[1] || {}, QU = rs[2] || {};
       var all = [].concat(d.newDungeons || [], d.classicDungeons || [], d.raids || []);
       var nb = all.reduce(function (s, x) { return s + (x.bosses || []).length; }, 0);
       var nd = all.reduce(function (s, x) { return s + (x.drops || []).length; }, 0);
+      var nParty = all.filter(function (x) { return x.partySize; }).length;
+      var nTwo = all.filter(function (x) { return x.levelRangeClient || x.partySizeAlt || x.nameEnClient; }).length;
+        // 等级区间到底几种说法：卡片那种与客户端那种常常是同一个数，分开说不然看着像三个结论
+        function rangeNote(x) {
+          var cli = x.levelRangeClient, alt = x.levelRangeAlt;
+          if (!cli && !alt) return '';
+          if (cli && alt && cli === alt) {
+            return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
+              + '客户端的队伍查找器与副本卡片都写「' + D.esc(cli) + '」，待定稿</div>';
+          }
+          if (cli && alt) {
+            return '<div class="conf">等级区间有三种说法：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
+              + '另一份资料写「' + D.esc(alt) + '」，客户端的队伍查找器写「' + D.esc(cli) + '」，都留着待定稿</div>';
+          }
+          if (cli) {
+            return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」，'
+              + '客户端的队伍查找器写「' + D.esc(cli) + '」，两个都留着</div>';
+          }
+          return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
+            + '另一份资料写「' + D.esc(alt) + '」，待定稿</div>';
+        }
         function card(x) {
           var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
             x.nameCn || x.nameEn || '未定名',
@@ -1391,11 +1414,18 @@
             '<div class="dmeta">' + D.pill(x.level) +
             '<span>' + ((x.bosses || []).length || '待补') + ' 个首领</span>' +
             '<span>' + ((x.drops || []).length ? (x.drops || []).length + ' 件掉落' : '掉落待补') + '</span>' +
+            (x.partySize ? '<span>一次 ' + x.partySize + ' 人</span>' : '') +
+            (x.levelRange || x.levelRangeClient ? '' : '<span class="dim">等级区间待实测</span>') +
             '<span class="dim">' + dunStateText(x) + (x.nameCn ? '' : '；中文定名未公布') + '</span></div>' +
-            (x.levelRangeAlt ? '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) +
-              '」（官方公告），另一份资料写「' + D.esc(x.levelRangeAlt) + '」，待定稿</div>' : '') +
+            rangeNote(x) +
+            (x.partySizeAlt ? '<div class="conf">客户端的队伍查找器里它另有一条 ' + x.partySizeAlt +
+              ' 人的排队条目，与本站的 ' + x.partySize + ' 人并列，是不是同一个本两种规模要实测</div>' : '') +
+            (x.nameEnClient ? '<div class="conf">英文原名两说：本站写「' + D.esc(x.nameEn) + '」，'
+              + '客户端写「' + D.esc(x.nameEnClient) + '」</div>' : '') +
             (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
               D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
+            (!x.clientActivityId ? '<div class="note">客户端的队伍查找器里还没有这座本，'
+              + '所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>' : '') +
             '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
             '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
             '<h3>首领与掉落</h3>' + dunLoot(x) +
@@ -1409,6 +1439,44 @@
             '<span class="dim mono">' + rows.length + ' 座</span></div>' +
             '<div class="dgrid">' + rows.map(card).join('') + '</div>';
         }
+        // 客户端的队伍查找器里现在能排到、本站还没有首领与掉落名单的那些：按名字归并，
+        // 同一个本在客户端里挂两条（比如两种规模）只说一次，免得看着像两座本
+        function queueBand() {
+          var rows = (QU.items || []).filter(function (x) { return !x.matchedId; });
+          if (!rows.length) return '';
+          var g = {}, order = [];
+          rows.forEach(function (x) {
+            var k = x.nameEn;
+            if (!g[k]) {
+              g[k] = { nameEn: k, kind: x.kind, levelRange: x.levelRange, sizes: [], n: 0, prov: x.provenance || [] };
+              order.push(k);
+            }
+            g[k].n += 1;
+            if (x.partySize && g[k].sizes.indexOf(x.partySize) < 0) g[k].sizes.push(x.partySize);
+          });
+          var items = order.map(function (k) { return g[k]; });
+          function table(list) {
+            return '<table class="entab"><thead><tr><th>客户端里的名字</th><th>排队等级</th>'
+              + '<th>一次几人</th><th>客户端记了几条</th></tr></thead><tbody>' +
+              list.map(function (x) {
+                return '<tr><td><b>' + D.esc(x.nameEn) + '</b><span class="dim">　中文定名未公布</span></td>'
+                  + '<td class="mono">' + D.esc(x.levelRange) + ' 级</td>'
+                  + '<td class="mono">' + (x.sizes.length ? x.sizes.join(' / ') + ' 人' : '未标') + '</td>'
+                  + '<td class="mono">' + x.n + (x.n > 1
+                    ? (x.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）') : '') + '</td></tr>';
+              }).join('') + '</tbody></table>';
+          }
+          var dun = items.filter(function (x) { return x.kind === 'dungeon'; });
+          var raid = items.filter(function (x) { return x.kind === 'raid'; });
+          var prov = ((QU.items || [])[0] || {}).provenance || [];
+          return '<div class="card" id="queue"><h2>客户端的队伍查找器里，本站还没有名单的</h2>'
+            + '<p class="note">这 ' + items.length + ' 座此刻能在游戏里排到队，但我们还没有它们的首领与掉落来源：'
+            + '有的连中文名都还没公布。名字与人数取自客户端版本 ' + D.esc((QU.meta || {}).build || '') +
+            ' 的队伍查找器，正式开放前可能变化，所以只列在这里、不当成成品数据。</p>'
+            + (dun.length ? '<h3>地下城</h3>' + table(dun) : '')
+            + (raid.length ? '<h3>团队副本</h3>' + table(raid) : '')
+            + '<h3>来源与核对</h3>' + D.sources(prov) + '</div>';
+        }
         var list = (d.newDungeons || []).concat(d.classicDungeons || []);
         var body = DUN_BANDS.map(function (b, i) {
           var rows = list.filter(function (x) { return dunBand(x) === i; })
@@ -1416,11 +1484,14 @@
           return bandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2], rows);
         }).join('') +
           bandBlock('区间未定', '等级区间还没核', list.filter(function (x) { return dunBand(x) === null; })) +
-          bandBlock('团队副本', '开放时间未定', d.raids || []);
+          bandBlock('团队副本', '开放时间未定', d.raids || []) +
+          queueBand();
         set('<div class="card" data-lv="' + (D.worstLevel(all) || 'L3') + '"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
           (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
           (d.raids || []).length + ' 座团本，按十级一档分。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
-          '名单与等级区间取自客户端解包（由第三方资料站转述）；掉落是按经典旧世公开数据库推出来的，一律标待实测。</p></div>' +
+          '名单与等级区间取自客户端解包（由第三方资料站转述），一次几人取自客户端的队伍查找器（' + nParty + ' 座有数）。' +
+          '另有 ' + nTwo + ' 座在两份客户端资料里说的数不一样，冲突的两个数都摆在卡片上，不做取舍。' +
+          '掉落是按经典旧世公开数据库推出来的，一律标待实测。</p></div>' +
         '<div class="banner">掉落数据本站<b>不写百分比</b>：这里只回答"谁掉了什么"，不回答"多大概率"。暴雪说过无限服重做过掉落，正式开放可能变化。</div>' +
         body +
         '<div class="card" id="todo"><h2>「世界」里还没有数据的</h2>' +
@@ -1526,6 +1597,8 @@
         ['news.blizzard.com', '官方英文回顾与上线时间', '可入自动化'],
         ['worldofwarcraft.blizzard.com/en-us/forever', '官方英文 forever 页', '可入自动化'],
         ['wowhead.com/forever', '逐本指南、天赋计算器、天梯', '人工参照，禁止搬数据'],
+        ['wago.tools/db2', '客户端数据表的 CSV 转储（非暴雪域名，只留最近几个版本）',
+          '只取英文名、ID、等级与人数；文案一律不搬'],
         ['wowclassicforever.info', '最接近数据库的粉丝站', '人工参照，禁止搬数据'],
         ['foreverchanges.pro', '9 新本名单与区间', '线索，禁止整库复制'],
         ['news.17173.com', '中文蓝贴转载', '旁证，需回校官方'],

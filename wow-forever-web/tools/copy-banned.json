@@ -36,8 +36,8 @@
    "why": "网址片段不是玩家语言"
   },
   {
-   "re": "tools/|build-data|site-check|export-mini|app-parity|npm run",
-   "why": "脚本名不进正文"
+   "re": "tools/[A-Za-z0-9_.-]*[.](?:py|js|sh|json)|build-data|site-check|export-mini|app-parity|npm run",
+   "why": "我们自己的脚本路径不进正文。第三方域名里的 tools/（如 wago.tools/db2）不算——客户端数据必须能点开看到是哪个站转述的，那是红线要求"
   },
   {
    "re": "\\.json\\b",

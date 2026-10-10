@@ -64,6 +64,19 @@ def check(name, ok, detail=""):
     print(("  PASS  " if ok else "  FAIL  ") + name + (("  — " + detail) if detail else ""))
 
 
+# 正文里出现脚本路径、原始文件名或未替换占位符，就是开发残留漏进了玩家视野。
+# 注意只拦**我们自己的**脚本路径：第三方域名里的 tools/（wago.tools/db2/…）是来源链接，
+# 红线要求客户端数据能点开看到是哪个站转述的，把它一起禁掉等于逼着页面藏来源。
+SCRIPT_PATH = re.compile(r"tools/[A-Za-z0-9_.-]*[.](?:py|js|sh|json)")
+
+
+def dev_word_hits(body):
+    hits = [w for w in [".json", ".py", "[{", "undefined", "NaN", "[object"] if w in body]
+    if SCRIPT_PATH.search(body):
+        hits.append("脚本路径")
+    return hits
+
+
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *_args):
         pass
@@ -765,7 +778,7 @@ def test_grouping(browser, base):
         dp.goto("%s/%s.html" % (base, name), wait_until="networkidle")
         dp.wait_for_timeout(1100)
         t = dp.evaluate("() => document.querySelector('#main').innerText")
-        hits = [w for w in ["tools/", ".py", ".json", "[{", "undefined", "NaN", "[object"] if w in t]
+        hits = dev_word_hits(t)
         if hits:
             bad_pages.append("%s:%s" % (name, ",".join(hits)))
         dp.close()
@@ -828,6 +841,53 @@ def test_dungeon_data(browser, base):
     check("掉落条目与逐条来源都在 DOM 里", st["loot"] >= 1, "首张卡掉落 %d 件" % st["loot"])
     check("掉落不写百分比", not st["pct"], "出现 %s" % st["pct"])
     check("本地转存的副本原画加载成功", st["art"] >= 5, "加载 %d 张" % st["art"])
+    # 客户端队伍查找器对账：人数、三种分歧、还不能排队的说明，以及本站没有名单的那几张表
+    qc = json.load(open(os.path.join(SRC, "data", "queue.json"), encoding="utf-8"))
+    exp = {
+        "party": len([x for x in rows if x.get("partySize")]),
+        "twoRange": len([x for x in rows if x.get("levelRangeClient") or x.get("levelRangeAlt")]),
+        "twoSize": len([x for x in rows if x.get("partySizeAlt")]),
+        "twoName": len([x for x in rows if x.get("nameEnClient")]),
+        "noqueue": len([x for x in rows if not x.get("clientActivityId")]),
+        "src": len([x for x in rows if any(p.get("type") == "datamine_en"
+                                           for p in (x.get("provenance") or []))]),
+        "queue": len({i["nameEn"] for i in qc["items"] if not i.get("matchedId")}),
+    }
+    got = page.evaluate("""() => {
+      const spans = [...document.querySelectorAll('.dmeta span')];
+      const conf = [...document.querySelectorAll('#main .conf')].map(e => e.textContent);
+      const q = document.querySelector('#queue');
+      return {
+        party: spans.filter(s => /^一次 \\d+ 人$/.test(s.textContent.trim())).length,
+        twoRange: conf.filter(t => /等级区间/.test(t)).length,
+        twoSize: conf.filter(t => /另有一条/.test(t)).length,
+        twoName: conf.filter(t => /英文原名两说/.test(t)).length,
+        noqueue: [...document.querySelectorAll('.dcard2 .note')]
+          .filter(e => /队伍查找器里还没有这座本/.test(e.textContent)).length,
+        src: document.querySelectorAll('.st.datamine_en').length,
+        qrows: q ? q.querySelectorAll('tbody tr').length : -1,
+        qnames: q ? [...q.querySelectorAll('tbody tr td b')].map(b => b.textContent.trim()) : [],
+        intro: (document.querySelector('.card .dim') || {}).textContent || ''
+      }; }""")
+    check("进入人数按客户端给的数逐座摆出来", got["party"] == exp["party"],
+          "卡面 %d / 数据 %d" % (got["party"], exp["party"]))
+    check("等级区间分歧每一条都有标注", got["twoRange"] == exp["twoRange"],
+          "%d / %d" % (got["twoRange"], exp["twoRange"]))
+    check("同一座有两种排队人数的都写明", got["twoSize"] == exp["twoSize"],
+          "%d / %d" % (got["twoSize"], exp["twoSize"]))
+    check("英文原名两说的都并列不取舍", got["twoName"] == exp["twoName"],
+          "%d / %d" % (got["twoName"], exp["twoName"]))
+    check("客户端还不能排队的本逐条说明", got["noqueue"] == exp["noqueue"],
+          "%d / %d" % (got["noqueue"], exp["noqueue"]))
+    # 徽章数 = 用到这份数据的副本卡各一枚 + 那张排队条目表一枚
+    check("用到客户端排队数据的都挂着它的出处", got["src"] == exp["src"] + 1,
+          "徽章 %d / 条目 %d" % (got["src"], exp["src"]))
+    check("客户端能排到、本站没名单的单列一张表", got["qrows"] == exp["queue"],
+          "表 %d 行 / 应有 %d 行" % (got["qrows"], exp["queue"]))
+    have = {x.get("nameEn") for x in rows}
+    dup = [n for n in got["qnames"] if n in have]
+    check("那张表里不重复列本站已有的本", not dup, str(dup[:3]))
+    check("首段交代了人数与分歧的来处", "一次几人取自客户端的队伍查找器" in got["intro"], got["intro"][:60])
     bands = page.evaluate("() => [...document.querySelectorAll('.band b')].map(x => x.textContent.trim())")
     check("地下城按十级一档分档", len(bands) >= 5 and any("40" in x for x in bands), str(bands))
     seals = page.evaluate("() => document.querySelectorAll('.dbn2-seal').length")
@@ -1321,7 +1381,7 @@ def test_updates_rank(browser, base):
     # 红线断言：改动清单只该有名称与类别，出现 tooltip 句式就是文本没删干净
     leaky = [w for w in ["使你的", "造成", "点伤害", "冷却时间", "生命值"] if w in body]
     check("动态页不出现技能描述句", not leaky, "疑似漏进句子：%s" % (leaky or "无"))
-    tech = [w for w in ["tools/", ".json", ".py", "undefined", "[object"] if w in body]
+    tech = dev_word_hits(body)
     check("动态页正文没有面向开发的词", not tech, str(tech))
     logs = page.evaluate("() => document.querySelectorAll('#k2 .flowrow').length")
     check("本站更新条数与数据一致", logs == len(cl["items"]), "%d 条（数据 %d）" % (logs, len(cl["items"])))
@@ -1499,8 +1559,7 @@ def test_app(browser, base):
             check("新站稀有标记点按数据摆位", marks["n"] == marks["placed"] and marks["n"] > 30,
                   "%d 个点全部定位" % marks["n"])
             body = page.evaluate("() => document.querySelector('#main').innerText")
-            check("新站世界页正文没有面向开发的词",
-                  not [x for x in ["tools/", ".json", "undefined", "[object"] if x in body], "干净")
+            check("新站世界页正文没有面向开发的词", not dev_word_hits(body), "干净")
             page.screenshot(path=os.path.join(SHOT_DIR, "app-world-rares.png"))
         ctx.close()
 
