@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>首页改版设计稿 · 无限资料站（2026-10-10）</title>
+<!--
+  设计稿，不是线上页面。数字全部取自 src/data/scale.json 的真实值，图标走仓库内相对路径，
+  请从仓库里直接打开本文件。每个模块右上角的标注写明它抄的是哪家的优点。
+  判据：docs/DESIGN-REFRESH-2026-10-10.md；令牌：docs/UI.md 第二节。
+-->
+<style>
+:root{
+  --bg:#0e1013; --panel:#171a1f; --panel-2:#1e222a; --line:#2b3038;
+  --txt:#e7e9ee; --txt-dim:#98a1af; --gold:#e0a96d; --gold-deep:#b8813f;
+  --blue:#6fa8ff; --ok:#4caf72; --warn:#d9a13b; --lead:#7f8ea8; --bad:#c9564a;
+  --txt-alert:#ff9b8f; --txt-caution:#f0c67e;
+  --lv0:#cfe8dd; --lv1:#a9b8c6; --lv2:#9aa3ae; --lv3:#8b93a1;
+  --font-cn:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --r-ctl:6px; --r-card:8px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.75 var(--font-cn);
+  background-image:radial-gradient(1200px 600px at 50% -10%, rgba(120,72,32,.28), transparent 70%)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--s5)}
+a{color:var(--gold);text-decoration:none}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.dim{color:var(--txt-dim)}
+h1,h2,h3{margin:0;line-height:1.18}
+h1{font-size:clamp(28px,4.4vw,42px);font-weight:700}
+h2{font-size:20px;font-weight:650}
+h3{font-size:14px}
+/* 元数据行：等宽小字拉开字距 */
+.mline{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s1) var(--s3);
+  font:500 11.5px/1.6 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--txt-dim)}
+.mline b{color:var(--txt);font-weight:600}
+/* 分级徽标：形状即级别 */
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.6;
+  border:1px solid var(--line);border-radius:4px;padding:0 6px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;flex:none;border:1px solid currentColor}
+.L0{color:var(--lv0)} .pill.L0::before{background:currentColor}
+.L1{color:var(--lv1)} .pill.L1::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.L2{color:var(--lv2)} .pill.L2::before{border-radius:50%}
+.L3{color:var(--lv3)} .pill.L3::before{background:repeating-linear-gradient(45deg,currentColor,currentColor 1.5px,transparent 1.5px,transparent 3px)}
+/* 卡片 + 来源轨 */
+section{position:relative}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:var(--s4) var(--s4) var(--s4) calc(var(--s4) + 9px);margin-bottom:var(--s4)}
+.card::before{content:"";position:absolute;left:0;top:var(--s3);bottom:var(--s3);width:3px;border-radius:2px;background:var(--line)}
+.card.lv0::before{background:var(--lv0)}
+.card.lv1::before{background:linear-gradient(180deg,var(--lv1) 50%,var(--line) 50%)}
+.card.lv2::before{background:none;border:1px solid var(--lv2)}
+.card.lv3::before{background:repeating-linear-gradient(45deg,var(--line),var(--line) 2px,transparent 2px,transparent 5px)}
+/* 设计稿标注 */
+.tag{position:absolute;top:var(--s3);right:var(--s3);font:500 10.5px/1.5 var(--font-mono);
+  letter-spacing:.04em;color:var(--gold);border:1px dashed var(--gold-deep);border-radius:3px;padding:1px 6px;opacity:.85}
+.tag.own{color:var(--lv0);border-color:rgba(207,232,221,.4)}
+.tag.no{color:var(--txt-alert);border-color:rgba(255,155,143,.4)}
+/* 顶栏 */
+.top{border-bottom:1px solid var(--line);background:rgba(14,16,19,.92)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:var(--s2) 0}
+.brand{font-size:19px;font-weight:700;color:var(--gold)}
+.brand span{color:var(--txt)}
+.cd{font:600 13px/1 var(--font-mono);color:var(--gold);border:1px solid var(--gold-deep);border-radius:999px;padding:5px 11px}
+.cd b{font-size:17px}
+nav.main{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);padding:var(--s2) 0 var(--s3);font-size:13.5px}
+.grp{display:inline-flex;align-items:center;gap:var(--s2)}
+.grp>span{color:var(--gold);font:600 11px/1 var(--font-mono);letter-spacing:.09em;text-transform:uppercase}
+nav.main a{color:var(--txt-dim);padding:6px 2px;display:inline-flex;align-items:center;gap:5px}
+nav.main a.on{color:var(--gold);border-bottom:2px solid var(--gold)}
+.dot{font:500 9.5px/1.4 var(--font-mono);letter-spacing:.04em;border-radius:3px;padding:1px 4px;
+  border:1px solid rgba(207,232,221,.35);color:var(--lv0)}
+.dot.new{border-color:rgba(170,211,114,.45);color:#aad372}
+/* hero */
+.hero{padding:var(--s6) 0 var(--s5)}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--s6);align-items:start}
+.search{display:flex;gap:var(--s2);margin:var(--s5) 0 var(--s3)}
+.search input{flex:1;min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-ctl);
+  padding:12px var(--s3);color:var(--txt);font:inherit}
+.search button{background:var(--gold);color:#1a1206;border:0;border-radius:var(--r-ctl);padding:0 var(--s5);font-weight:650}
+.hints{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.hints b{font:500 11.5px/1 var(--font-mono);border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:var(--txt-dim)}
+/* 选职业（两家共同动线） */
+.pickcls{border-top:1px solid var(--line);padding-top:var(--s4);position:relative;margin-top:var(--s4)}
+.clsrow{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s3)}
+.cls{text-align:center;width:58px}
+.cls i{display:block;width:52px;height:52px;margin:0 auto 5px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel-2) center/cover no-repeat;font-style:normal}
+.cls s{display:block;text-decoration:none;font-size:11.5px;color:var(--txt-dim)}
+.cls:hover s{color:var(--gold)}
+/* 可信度条 */
+.cov{display:flex;height:10px;border-radius:5px;overflow:hidden;border:1px solid var(--line);background:var(--panel-2)}
+.cov i{display:block;height:100%}
+.cov .L0{background:var(--lv0)} .cov .L1{background:var(--lv1)} .cov .L2{background:var(--lv2)} .cov .L3{background:#3a4250}
+.stats{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+.stat{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:12px;color:var(--txt-dim)}
+.stat b{color:var(--txt);font-size:15px;margin-right:4px;font-family:var(--font-mono)}
+/* 大卡：真树 + 进度条 */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4)}
+.tree{display:grid;grid-template-columns:repeat(4,52px);gap:6px;margin:var(--s3) 0}
+.nd{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:5px;background:var(--panel-2) center/cover no-repeat}
+.nd em{position:absolute;right:2px;bottom:1px;font:500 9.5px/1 var(--font-mono);font-style:normal;color:var(--gold)}
+.nd.add{border-color:rgba(170,211,114,.6)}
+.bar{height:8px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);overflow:hidden;margin:var(--s2) 0}
+.bar i{display:block;height:100%;background:var(--lv0)}
+.kv{display:flex;justify-content:space-between;gap:var(--s3);font-size:12.5px;padding:5px 0;border-top:1px dashed var(--line)}
+.kv:first-of-type{border-top:0}
+.kv b{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+/* 模块分组 */
+.sect{margin:var(--s6) 0 var(--s3);position:relative;padding-top:var(--s4)}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s4)}
+.mod h3{margin-bottom:6px}
+.mod p{margin:0 0 var(--s3);font-size:13.5px;color:var(--txt-dim)}
+.modn{display:flex;gap:var(--s3);flex-wrap:wrap;font-size:12px;color:var(--txt-dim)}
+.modn b{color:var(--txt);font-family:var(--font-mono);font-size:14px;margin-right:3px}
+.modf{display:flex;align-items:center;gap:var(--s2);margin-top:var(--s3);font-size:11.5px;color:var(--txt-dim)}
+/* 改动四格 */
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.four div{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:var(--s3);text-align:center}
+.four b{display:block;font:700 24px/1.1 var(--font-mono);font-variant-numeric:tabular-nums}
+.four s{text-decoration:none;font-size:11.5px;color:var(--txt-dim)}
+/* 不做清单 */
+.list{margin:0;padding-left:1.1em;font-size:13.5px;color:var(--txt-dim)}
+.list li{margin:4px 0}
+footer{border-top:1px solid var(--line);margin-top:var(--s6);padding:var(--s5) 0;font-size:12px;color:var(--txt-dim)}
+@media (max-width:820px){
+  .hero .grid,.two{grid-template-columns:1fr}
+  .four{grid-template-columns:repeat(2,1fr)}
+  .tag{position:static;display:inline-block;margin-bottom:var(--s2)}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topbar">
+    <div class="brand">无限<span>资料站</span></div>
+    <div class="cd">距上线 <b>25</b> 天 17:26:22</div>
+  </div>
+  <div class="wrap">
+    <nav class="main">
+      <a class="on" href="#">首页</a>
+      <span class="grp"><span>天赋</span><a href="#">天赋计算器</a><a href="#">传承<span class="dot new">本版新增</span></a></span>
+      <span class="grp"><span>职业</span><a href="#">玩法问答</a><a href="#">技能书</a></span>
+      <span class="grp"><span>种族</span><a href="#">种族与组合</a><a href="#">特长速查</a></span>
+      <span class="grp"><span>世界</span><a href="#">区域与稀有</a><a href="#">副本</a><a href="#">系统规则</a></span>
+      <span class="grp"><span>专业</span><a href="#">配方</a></span>
+      <span class="grp"><span>工具</span><a href="#">速查</a><a href="#">时间表</a><a href="#">动态<span class="dot">已更新</span></a><a href="#">排行</a><a href="#">溯源</a></span>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- M1 -->
+  <section class="hero">
+    <span class="tag own">我们独有：承诺句写"核没核过"</span>
+    <h1>《魔兽世界：无限》中文资料站</h1>
+    <p class="dim" style="max-width:62ch">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>
+    <div class="search">
+      <input placeholder="搜天赋、副本、区域、配方、种族特长（共 4,292 条）">
+      <button>搜索</button>
+    </div>
+    <div class="hints"><span class="dim mono" style="font-size:11.5px">只搜名称与归属，不搜攻略说法：</span><b>潜行</b><b>领主大厅</b><b>咆鼻</b><b>舒适的睡袋</b></div>
+
+    <div class="pickcls">
+      <span class="tag">借两家：先挑职业</span>
+      <div class="mline">选择你的职业 · <b>9</b> 个职业各有一页改动、天赋与技能</div>
+      <div class="clsrow">
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_warrior.jpg)"></i><s>战士</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_hunter.jpg)"></i><s>猎人</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_mage.jpg)"></i><s>法师</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_rogue.jpg)"></i><s>潜行者</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_priest.jpg)"></i><s>牧师</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_warlock.jpg)"></i><s>术士</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_paladin.jpg)"></i><s>圣骑士</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_druid.jpg)"></i><s>德鲁伊</s></a>
+        <a class="cls" href="#"><i style="background-image:url(../../src/img/icons/classicon_shaman.jpg)"></i><s>萨满祭司</s></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- M2 -->
+  <section class="card lv1">
+    <span class="tag own">我们独有：两家都没有可信度条</span>
+    <div class="mline">核对状态 · 核对于 <b>2026-10-07</b> · 数据基线 <b>forever-beta 1.60.x</b></div>
+    <div class="cov"><i class="L0" style="width:43.5%"></i><i class="L1" style="width:13.5%"></i><i class="L2" style="width:42.8%"></i><i class="L3" style="width:0.2%"></i></div>
+    <div class="stats">
+      <span class="stat"><b>366</b>已官方核实</span>
+      <span class="stat"><b>114</b>仅官方英文</span>
+      <span class="stat"><b>360</b>待实测</span>
+      <span class="stat"><b>2</b>缺数据</span>
+      <span class="stat"><b>842</b>全站条数（含 473 个天赋节点）</span>
+    </div>
+  </section>
+
+  <!-- M3 -->
+  <div class="sect"><span class="tag">借 wclbox：最常用的两个在最前面</span><h2>最常用的两个</h2></div>
+  <div class="two">
+    <section class="card lv2" style="margin:0">
+      <div class="mline">工具 · 天赋 · <b>9</b> 职业 <b>473</b> 节点</div>
+      <h3 style="font-size:19px;margin-bottom:6px">先看一棵真树，再进计算器</h3>
+      <p class="dim" style="font-size:13px;margin:0 0 var(--s3)">格子就是客户端里的天赋本身，位置、每层上限、与经典旧世的差异都按真结构摆。这里只能看，点格子进计算器并高亮那一格。</p>
+      <div class="tree">
+        <div class="nd" style="background-image:url(../../src/img/icons/spell_holy_unyieldingfaith.jpg)"><em>5/5</em></div>
+        <div class="nd add" style="background-image:url(../../src/img/icons/inv_weapon_shortsword_32.jpg)"><em>1/1</em></div>
+        <div class="nd" style="background-image:url(../../src/img/icons/spell_holy_holyprotection.jpg)"><em>2/2</em></div>
+        <div class="nd" style="background-image:url(../../src/img/icons/ability_warrior_innerrage.jpg)"><em>0/3</em></div>
+        <div class="nd add" style="background-image:url(../../src/img/icons/inv_shield_49.jpg)"><em>1/1</em></div>
+        <div class="nd" style="background-image:url(../../src/img/icons/spell_holy_blessingofprotection.jpg)"><em>0/2</em></div>
+        <div class="nd" style="background-image:url(../../src/img/icons/ability_rogue_sprint.jpg)"><em>3/3</em></div>
+        <div class="nd" style="background-image:url(../../src/img/icons/inv_sword_48.jpg)"><em>0/5</em></div>
+      </div>
+      <div class="mline" style="margin-bottom:2px">名称与官网中文一致 <b>460 / 473</b></div>
+      <div class="bar"><i style="width:97.3%"></i></div>
+      <div class="kv"><span class="dim">结构与译名出自客户端解包，未经游戏内核实</span><span class="pill L2">待实测</span></div>
+      <a class="mono" style="font-size:12.5px" href="#">打开战士 · 武器的完整计算器 →</a>
+    </section>
+
+    <section class="card lv2" style="margin:0">
+      <div class="mline">世界 · 副本 · <b>38</b> 座 <b>235</b> 首领 <b>1,055</b> 条掉落归属</div>
+      <h3 style="font-size:19px;margin-bottom:6px">副本手册</h3>
+      <p class="dim" style="font-size:13px;margin:0 0 var(--s3)">按十级一档排的 38 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。</p>
+      <div class="kv"><span>无限新增</span><b>9 座</b></div>
+      <div class="kv"><span>经典旧世本</span><b>26 座</b></div>
+      <div class="kv"><span>团队副本</span><b>3 座</b></div>
+      <div class="kv"><span>掉落写百分比吗</span><b>不写</b></div>
+      <div class="kv"><span>首领名单来源</span><span class="pill L2">待实测</span></div>
+      <a class="mono" style="font-size:12.5px" href="#">按十级一档看全部 38 座 →</a>
+    </section>
+  </div>
+
+  <!-- M4 -->
+  <div class="sect"><span class="tag">借 wclbox：其余按类型分组</span><h2>探索无限</h2>
+    <p class="dim mono" style="font-size:12px">角色线 · 世界线 · 工具线，共 7 张卡</p></div>
+
+  <div class="mods">
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">角色 · 种族 <b>10</b> 行</div>
+      <h3>种族与职业组合</h3>
+      <p>国服官方中文公告里的 10 个种族行与可选职业矩阵，40 条种族特长带官方整句。</p>
+      <div class="modn"><span><b>10</b>种族行</span><span><b>40</b>条特长整句</span><span><b>9</b>职业可选</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>整句直接抄官方，不改写</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <span class="tag new">本版新增</span>
+      <div class="mline">角色 · 传承 <b>21</b> 专长</div>
+      <h3>传承专长与挑战</h3>
+      <p>三棵传承树 27 个槽位（6 格还没公开）、65 项挑战各给 1 点、首发上限 16 点。</p>
+      <div class="modn"><span><b>21</b>专长有明细</span><span><b>65</b>项挑战</span><span><b>6</b>格未公开</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>每层效果说明本站不复制</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">角色 · 技能 <b>38</b> 个官方中文技能</div>
+      <h3>技能书</h3>
+      <p>按职业与种族分组的技能页，官方中文原句逐条挂着；与经典旧世的差异用四态标出。</p>
+      <div class="modn"><span><b>215</b>条技能书</span><span><b>38</b>条有官方整句</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>英文原名待补，不机翻</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">世界 · 区域 <b>44</b> 个</div>
+      <h3>区域与稀有精英</h3>
+      <p>每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。</p>
+      <div class="modn"><span><b>44</b>区域</span><span><b>36</b>已定位稀有</span><span><b>36</b>本书有坐标</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>刷新计时游戏里没这数据，不猜</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">专业 · <b>13</b> 个</div>
+      <h3>专业与配方</h3>
+      <p>13 个专业的配方、材料数量、技能橙黄绿灰四档与采集点，能按"我的技能等级"筛。</p>
+      <div class="modn"><span><b>13</b>个专业</span><span><b>1,990</b>条配方</span><span><b>55</b>个采集点</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>冲级路线与性价比属攻略，不做</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">工具 · 词条 <b>215</b> 条</div>
+      <h3>中英术语速查</h3>
+      <p>按职业与种族分组的中文叫法与英文原名对照，点词条即复制，来源能点开看到出自哪句官方原文。</p>
+      <div class="modn"><span><b>215</b>条词条</span><span><b>33</b>条回填种族</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>别名与英文请进对应页搜</span></div>
+    </section>
+
+    <section class="card lv0 mod" style="margin:0">
+      <div class="mline">工具 · 问答 <b>7</b> 题</div>
+      <h3>不知道选哪个职业</h3>
+      <p>回答 7 个玩法取向问题，给出候选与理由。这是本站整理的主观取向，不是强度排行。</p>
+      <div class="modn"><span><b>7</b>题</span><span><b>9</b>职业候选</span></div>
+      <div class="modf"><span class="pill L0">已官方核实</span><span>权重口径写在页上</span></div>
+    </section>
+
+    <section class="card lv2 mod" style="margin:0">
+      <div class="mline">工具 · 时间点 <b>11</b> 个</div>
+      <h3>上线与 Beta 时间表</h3>
+      <p>官方给过的时间点、已过与待来，以及"上线日期为什么有两个说法"。</p>
+      <div class="modn"><span><b>11</b>个时间点</span></div>
+      <div class="modf"><span class="pill L2">待实测</span><span>两说两个都留</span></div>
+    </section>
+
+    <section class="card lv1 mod" style="margin:0">
+      <div class="mline">工具 · 规则 <b>20</b> 条</div>
+      <h3>系统与新区域</h3>
+      <p>规则、区域、种族与装备名的官方中文说法，逐条带来源。</p>
+      <div class="modn"><span><b>20</b>条规则</span></div>
+      <div class="modf"><span class="pill L1">仅官方英文</span><span>没有中文整句的标出来</span></div>
+    </section>
+  </div>
+
+  <!-- M5 -->
+  <div class="sect"><span class="tag">借两家：与经典旧世对照</span><h2>自经典旧世以来的改动</h2></div>
+  <section class="card lv0">
+    <div class="mline">客户端改动清单 · <b>964</b> 条 · 与上游自报计数逐项一致</div>
+    <div class="four">
+      <div><b>112</b><s>新增天赋</s></div>
+      <div><b>306</b><s>改动天赋</s></div>
+      <div><b>77</b><s>移除</s></div>
+      <div><b>256</b><s>法术有变</s></div>
+    </div>
+    <div class="kv" style="margin-top:var(--s3)"><span>只放名称与改动类别，前后对照的句子是别人转述的，本站不复制</span><span class="mono dim">→ updates.html</span></div>
+    <div class="kv"><span>资料最全的职业</span><b>猎人 53.2% 有官方中文</b></div>
+    <div class="kv"><span>资料最少的职业</span><b>萨满祭司 31.8%</b></div>
+    <div class="kv"><span>这个排行是什么</span><span class="dim">本站整理的资料完整度，不是强度排行</span></div>
+  </section>
+
+  <!-- M6 -->
+  <div class="sect"><span class="tag own">我们独有：把缺口摆在首页</span><h2>这一站刻意不做的</h2></div>
+  <section class="card lv3">
+    <ul class="list">
+      <li>BIS 毕业装与配装结论 —— 没有战斗数据，抄别人结论等于把他人判断当事实</li>
+      <li>一键宏与循环提示 —— 红线不做</li>
+      <li>攻略正文、"阅读量最高指南" —— 不做攻略站</li>
+      <li>角色查询、战斗日志、DPS 排行 —— 需要登录与个人数据，类目不允许</li>
+      <li>掉落百分比 —— 上游自己写着无限服重做过掉落，给了就是编</li>
+      <li>插件 / 小程序 / 短视频引流位 —— 资料站本体不带货</li>
+    </ul>
+  </section>
+
+  <!-- M7 -->
+  <div class="sect"><h2>本站更新</h2><p class="dim mono" style="font-size:12px">共 17 条，每条带提交号可回查</p></div>
+  <section class="card lv0">
+    <div class="kv"><span class="mono dim">2026-10-10</span><span>整站换了排印与配色规矩：可信等级改用形状与明度表示</span></div>
+    <div class="kv"><span class="mono dim">2026-10-10</span><span>传承页上线：三棵树 27 个槽位，6 格官方还没公布</span></div>
+    <div class="kv"><span class="mono dim">2026-10-09</span><span>首页打开就能看一棵真天赋树，点格子进计算器并高亮</span></div>
+    <div class="kv"><span class="mono dim">2026-10-09</span><span>全站搜索：4,292 条只收名称与归属，跳进去那页已经筛好</span></div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <div>非官方粉丝资料站，与暴雪娱乐及网易无关。</div>
+  <div class="mono" style="font-size:11.5px;margin-top:6px">数据来源版本 forever-beta 1.60.x，核对于 2026-10-07 · 资料覆盖率（不含天赋）L0 366 / L1 0 / L2 1 / L3 2，共 369 条</div>
+</div></footer>
+</body>
+</html>
