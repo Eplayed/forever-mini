@@ -85,6 +85,14 @@ CLASSES.forEach((cid) => {
         n.nameConflict = true;
         n.posMismatch = true;
         problems.push('同位置名字不同（不合并字段）：' + n.nameCn + ' / ' + u.name);
+        // 图标是「这一格」的属性，不是名字的属性：两边都承认这一格有一个上限相同的节点、
+        // 只是中文叫法不同时，把格子的图标补过来不是覆盖，是填空缺。
+        // 上限不同就跳过——那说明两源说的可能根本不是同一个天赋。
+        if (!n.iconKey && u.icon && u.maxRanks && u.maxRanks === n.maxRanks) {
+          n.iconKey = u.icon;
+          n.iconFromCell = true;
+          problems.push('补同格图标（译名分歧但位置与上限一致）：' + n.nameCn + ' / ' + u.name + ' → ' + u.icon);
+        }
       } else {
         n.changeState = u.change || null;
         if (u.maxRanks && u.maxRanks !== n.maxRanks) {

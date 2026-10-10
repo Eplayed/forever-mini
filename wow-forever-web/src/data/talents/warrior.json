@@ -796,7 +796,7 @@
      "nameSources": [
       "fengshen"
      ],
-     "iconKey": null,
+     "iconKey": "ability_warrior_intensifyrage",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -807,7 +807,8 @@
       }
      ],
      "upstreamId": "calc-warrior-fury-boundless-rage",
-     "posMismatch": true
+     "posMismatch": true,
+     "iconFromCell": true
     },
     {
      "id": "warrior-1-双武器专精",
@@ -1659,7 +1660,7 @@
      "nameSources": [
       "fengshen"
      ],
-     "iconKey": null,
+     "iconKey": "inv_shield_04",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1670,7 +1671,8 @@
       }
      ],
      "upstreamId": "calc-warrior-protection-bastion",
-     "posMismatch": true
+     "posMismatch": true,
+     "iconFromCell": true
     },
     {
      "id": "warrior-2-专注怒气",
