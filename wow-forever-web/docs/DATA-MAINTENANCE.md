@@ -58,6 +58,11 @@
 | 界面回归 | `python3 tools/site-check.py`（加 `--app` 跑新站） | 页面渲染坏、点不动、375px 点击目标偏小、**渲染后的文字里出现维护者措辞**、搜索跳过去没筛好 |
 | 两栈对拍 | `python3 tools/app-parity.py --strict` | 迁一页时新旧两版内容悄悄不一样（结构 / 类名 / 正文 / 链接 / 图片） |
 
+**对账（不是门禁，不拦提交）**：`python3 tools/audit-wowhead.py --write` → `docs/DATA-WOWHEAD-<日期>.md`。
+拿 wowhead 的无限服天赋表对**条目数、英文原名、法术 ID、改动状态、图标文件名**——
+它对不了任何中文名（Forever 区只有英文），也不产生"谁对"的结论，只给"另一家怎么说"这一层。
+要真浏览器（curl 403），所以不进门禁；季度或大改天赋线之后跑一次即可。
+
 小程序导出 `node tools/export-mini.js` 额外拦一条：产物必须可复现（重跑后 `git status` 干净）且不超主包预算。
 
 > **2026-10-10 修掉一个让整条产线跑不完的门禁**：`audit-translations.py --strict` 原来把
