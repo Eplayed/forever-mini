@@ -1,0 +1,1312 @@
+{
+ "meta": {
+  "source": "https://wowforever.wclbox.com/chuancheng",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1791561473931/legacy.json",
+  "build": "r-1791561473931",
+  "clientBuild": "1.60.1.70235",
+  "upstreamUpdatedAt": "2026-10-05",
+  "fetchedAt": "2026-10-10",
+  "method": "tools/scrape-wclbox-legacy.py 取 _shuju/<发布号>/legacy.json，发布号现读",
+  "textPolicy": "落盘前删掉的字段见 droppedFields；效果说明与整句文本一律不存仓库",
+  "droppedFields": {
+   "challenge": [
+    "criteria",
+    "text"
+   ],
+   "perk": [
+    "account_scope",
+    "calculator_eligible",
+    "cast_ms",
+    "class",
+    "comparison_status",
+    "context_only",
+    "cooldown_ms",
+    "effect_rank",
+    "kind",
+    "rank_texts",
+    "reported_change_kind",
+    "sources",
+    "spell",
+    "tree_id",
+    "tree_index",
+    "unranked_effect"
+   ]
+  },
+  "droppedBlocks": [
+   "research.faq（问答整段是别人的表述）",
+   "progress_track.claim（领取说明）",
+   "tree.share_code_order",
+   "tree.additional_perks",
+   "顶层 items（与 challenges 重复）"
+  ],
+  "sources": [
+   {
+    "id": "client_legacy",
+    "type": "client_data",
+    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70235",
+    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70235"
+   }
+  ]
+ },
+ "rules": {
+  "point_per_challenge": 1,
+  "launch_spending_cap": 16,
+  "launch_earnable_total": 65
+ },
+ "challengeMeta": {
+  "total": 65,
+  "build": "1.60.1.70235",
+  "unlock": "账号里第一个角色升到 25 级后开放。"
+ },
+ "trees": [
+  {
+   "name": "专业",
+   "portrait": "/chuancheng-tu/portrait-professions.jpg",
+   "nodes": [
+    {
+     "perk": "legacy-perk-master-chef",
+     "row": 0,
+     "col": 2,
+     "spent": 5
+    },
+    {
+     "perk": "legacy-perk-working-overtime",
+     "row": 1,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-bartering",
+     "row": 1,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "perk": "legacy-perk-dedicated-study",
+     "row": 1,
+     "col": 2,
+     "spent": 10
+    },
+    {
+     "perk": "legacy-perk-bountiful-harvest",
+     "row": 2,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-performance-bonus",
+     "row": 2,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "id": "unknown-113508",
+     "row": 2,
+     "col": 2
+    },
+    {
+     "id": "unknown-113506",
+     "row": 2,
+     "col": 3
+    },
+    {
+     "perk": "legacy-perk-luremaster",
+     "row": 3,
+     "col": 2,
+     "spent": 5
+    }
+   ],
+   "links": [
+    [
+     "legacy-perk-bartering",
+     "legacy-perk-dedicated-study"
+    ],
+    [
+     "legacy-perk-bountiful-harvest",
+     "legacy-perk-performance-bonus"
+    ],
+    [
+     "unknown-113508",
+     "unknown-113506"
+    ]
+   ]
+  },
+  {
+   "name": "冒险",
+   "portrait": "/chuancheng-tu/portrait-adventure.jpg",
+   "nodes": [
+    {
+     "perk": "legacy-perk-high-alert",
+     "row": 0,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "perk": "legacy-perk-well-rested",
+     "row": 1,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-talented",
+     "row": 1,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "id": "unknown-113511",
+     "row": 1,
+     "col": 2
+    },
+    {
+     "id": "unknown-113510",
+     "row": 1,
+     "col": 3
+    },
+    {
+     "perk": "legacy-perk-thrill-of-adventure",
+     "row": 2,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-field-guide",
+     "row": 2,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "perk": "legacy-perk-frequent-flier",
+     "row": 2,
+     "col": 2,
+     "spent": 10
+    },
+    {
+     "perk": "legacy-perk-field-medicine",
+     "row": 3,
+     "col": 1,
+     "spent": 5
+    }
+   ],
+   "links": [
+    [
+     "legacy-perk-well-rested",
+     "legacy-perk-talented"
+    ],
+    [
+     "unknown-113511",
+     "unknown-113510"
+    ],
+    [
+     "legacy-perk-field-guide",
+     "legacy-perk-frequent-flier"
+    ]
+   ]
+  },
+  {
+   "name": "资源",
+   "portrait": "/chuancheng-tu/portrait-resourcefulness.jpg",
+   "nodes": [
+    {
+     "perk": "legacy-perk-for-great-honor",
+     "row": 0,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "perk": "legacy-perk-gourmand",
+     "row": 1,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-permanence",
+     "row": 1,
+     "col": 1,
+     "spent": 5
+    },
+    {
+     "id": "unknown-113513",
+     "row": 1,
+     "col": 2
+    },
+    {
+     "id": "unknown-113512",
+     "row": 1,
+     "col": 3
+    },
+    {
+     "perk": "legacy-perk-the-quick-and-the-dead",
+     "row": 2,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-reagent-economy",
+     "row": 2,
+     "col": 2,
+     "spent": 10
+    },
+    {
+     "perk": "legacy-perk-reinforce",
+     "row": 3,
+     "col": 0,
+     "spent": 0
+    },
+    {
+     "perk": "legacy-perk-diplomat",
+     "row": 3,
+     "col": 1,
+     "spent": 5
+    }
+   ],
+   "links": [
+    [
+     "legacy-perk-gourmand",
+     "legacy-perk-permanence"
+    ],
+    [
+     "unknown-113513",
+     "unknown-113512"
+    ],
+    [
+     "legacy-perk-the-quick-and-the-dead",
+     "legacy-perk-reagent-economy"
+    ]
+   ]
+  }
+ ],
+ "perks": [
+  {
+   "id": "legacy-perk-master-chef",
+   "name": "厨师长",
+   "tree_name": "专业",
+   "icon": "achievement_profession_chefhat",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 0,
+    "col": 2,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-working-overtime",
+   "name": "加班加点",
+   "tree_name": "专业",
+   "icon": "inv_misc_pocketwatch_03",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 1,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-bartering",
+   "name": "以物易物",
+   "tree_name": "专业",
+   "icon": "inv_misc_coin_06",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 1,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-dedicated-study",
+   "name": "潜心研究",
+   "tree_name": "专业",
+   "icon": "inv_misc_book_08",
+   "evidence_status": "client_data",
+   "max_rank": 1,
+   "structure": {
+    "tier": 1,
+    "col": 2,
+    "prerequisite": "Bartering",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-bountiful-harvest",
+   "name": "大丰收",
+   "tree_name": "专业",
+   "icon": "inv_misc_bag_18",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 2,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-performance-bonus",
+   "name": "绩效奖金",
+   "tree_name": "专业",
+   "icon": "racial_dwarf_findtreasure",
+   "evidence_status": "client_data",
+   "max_rank": 3,
+   "structure": {
+    "tier": 2,
+    "col": 1,
+    "prerequisite": "Bountiful Harvest",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-luremaster",
+   "name": "诱饵大师",
+   "tree_name": "专业",
+   "icon": "inv_misc_basket_04",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 3,
+    "col": 2,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-high-alert",
+   "name": "戒备森严",
+   "tree_name": "冒险",
+   "icon": "spell_shadow_detectlesserinvisibility",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 0,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-well-rested",
+   "name": "精神抖擞",
+   "tree_name": "冒险",
+   "icon": "spell_nature_sleep",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 1,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-talented",
+   "name": "才华横溢",
+   "tree_name": "冒险",
+   "icon": "ability_marksmanship",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 1,
+    "col": 1,
+    "prerequisite": "Well Rested",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-thrill-of-adventure",
+   "name": "冒险刺激",
+   "tree_name": "冒险",
+   "icon": "ability_hunter_huntervswild",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 2,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-field-guide",
+   "name": "野外指南",
+   "tree_name": "冒险",
+   "icon": "inv_fishingchair",
+   "evidence_status": "client_data",
+   "max_rank": 3,
+   "structure": {
+    "tier": 2,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-frequent-flier",
+   "name": "飞行常客",
+   "tree_name": "冒险",
+   "icon": "achievement_guild_ridelikethewind",
+   "evidence_status": "client_data",
+   "max_rank": 1,
+   "structure": {
+    "tier": 2,
+    "col": 2,
+    "prerequisite": "Field Guide",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-field-medicine",
+   "name": "战地急救",
+   "tree_name": "冒险",
+   "icon": "inv_misc_bandage_05",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 3,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-for-great-honor",
+   "name": "无上的荣耀",
+   "tree_name": "资源",
+   "icon": "achievement_bg_winwsg",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 0,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-gourmand",
+   "name": "食神",
+   "tree_name": "资源",
+   "icon": "inv_misc_food_64",
+   "evidence_status": "client_data",
+   "max_rank": 3,
+   "structure": {
+    "tier": 1,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-permanence",
+   "name": "恒久",
+   "tree_name": "资源",
+   "icon": "spell_misc_emotionhappy",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 1,
+    "col": 1,
+    "prerequisite": "Gourmand",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-the-quick-and-the-dead",
+   "name": "生者与死者",
+   "tree_name": "资源",
+   "icon": "spell_shadow_deadofnight",
+   "evidence_status": "client_data",
+   "max_rank": 2,
+   "structure": {
+    "tier": 2,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-reagent-economy",
+   "name": "材料节约",
+   "tree_name": "资源",
+   "icon": "inv_misc_candle_02",
+   "evidence_status": "client_data",
+   "max_rank": 1,
+   "structure": {
+    "tier": 2,
+    "col": 2,
+    "prerequisite": "The Quick and the Dead",
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-reinforce",
+   "name": "强固",
+   "tree_name": "资源",
+   "icon": "inv_misc_armorkit_17",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 3,
+    "col": 0,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  },
+  {
+   "id": "legacy-perk-diplomat",
+   "name": "外交家",
+   "tree_name": "资源",
+   "icon": "inv_scroll_03",
+   "evidence_status": "client_data",
+   "max_rank": 5,
+   "structure": {
+    "tier": 3,
+    "col": 1,
+    "prerequisite": null,
+    "prerequisite_status": "client_data",
+    "position_status": "client_data",
+    "max_rank_status": "client_data"
+   },
+   "discovered_at": "2026-09-29"
+  }
+ ],
+ "challenges": [
+  {
+   "name": "职业",
+   "subcategories": [
+    "德鲁伊",
+    "猎人",
+    "法师",
+    "圣骑士",
+    "牧师",
+    "潜行者",
+    "萨满祭司",
+    "术士",
+    "战士"
+   ],
+   "items": [
+    {
+     "id": 61502,
+     "name": "新手德鲁伊",
+     "requirement": "首次将德鲁伊升到25级",
+     "sub": "德鲁伊",
+     "icon": "classicon_druid",
+     "points": 1,
+     "group": "德鲁伊"
+    },
+    {
+     "id": 61503,
+     "name": "熟练德鲁伊",
+     "requirement": "首次将德鲁伊升到45级",
+     "sub": "德鲁伊",
+     "icon": "classicon_druid",
+     "points": 1,
+     "group": "德鲁伊"
+    },
+    {
+     "id": 61504,
+     "name": "高阶德鲁伊",
+     "requirement": "首次将德鲁伊升到60级",
+     "sub": "德鲁伊",
+     "icon": "classicon_druid",
+     "points": 1,
+     "group": "德鲁伊"
+    },
+    {
+     "id": 61989,
+     "name": "新手猎人",
+     "requirement": "首次将猎人升到25级",
+     "sub": "猎人",
+     "icon": "classicon_hunter",
+     "points": 1,
+     "group": "猎人"
+    },
+    {
+     "id": 61992,
+     "name": "熟练猎人",
+     "requirement": "首次将猎人升到45级",
+     "sub": "猎人",
+     "icon": "classicon_hunter",
+     "points": 1,
+     "group": "猎人"
+    },
+    {
+     "id": 61993,
+     "name": "高阶猎人",
+     "requirement": "首次将猎人升到60级",
+     "sub": "猎人",
+     "icon": "classicon_hunter",
+     "points": 1,
+     "group": "猎人"
+    },
+    {
+     "id": 61994,
+     "name": "新手法师",
+     "requirement": "首次将法师升到25级",
+     "sub": "法师",
+     "icon": "classicon_mage",
+     "points": 1,
+     "group": "法师"
+    },
+    {
+     "id": 61995,
+     "name": "熟练法师",
+     "requirement": "首次将法师升到45级",
+     "sub": "法师",
+     "icon": "classicon_mage",
+     "points": 1,
+     "group": "法师"
+    },
+    {
+     "id": 61996,
+     "name": "高阶法师",
+     "requirement": "首次将法师升到60级",
+     "sub": "法师",
+     "icon": "classicon_mage",
+     "points": 1,
+     "group": "法师"
+    },
+    {
+     "id": 61997,
+     "name": "新手圣骑士",
+     "requirement": "首次将圣骑士升到25级",
+     "sub": "圣骑士",
+     "icon": "classicon_paladin",
+     "points": 1,
+     "group": "圣骑士"
+    },
+    {
+     "id": 61998,
+     "name": "熟练圣骑士",
+     "requirement": "首次将圣骑士升到45级",
+     "sub": "圣骑士",
+     "icon": "classicon_paladin",
+     "points": 1,
+     "group": "圣骑士"
+    },
+    {
+     "id": 61999,
+     "name": "高阶圣骑士",
+     "requirement": "首次将圣骑士升到60级",
+     "sub": "圣骑士",
+     "icon": "classicon_paladin",
+     "points": 1,
+     "group": "圣骑士"
+    },
+    {
+     "id": 62000,
+     "name": "新手牧师",
+     "requirement": "首次将牧师升到25级",
+     "sub": "牧师",
+     "icon": "classicon_priest",
+     "points": 1,
+     "group": "牧师"
+    },
+    {
+     "id": 62001,
+     "name": "熟练牧师",
+     "requirement": "首次将牧师升到45级",
+     "sub": "牧师",
+     "icon": "classicon_priest",
+     "points": 1,
+     "group": "牧师"
+    },
+    {
+     "id": 62002,
+     "name": "高阶牧师",
+     "requirement": "首次将牧师升到60级",
+     "sub": "牧师",
+     "icon": "classicon_priest",
+     "points": 1,
+     "group": "牧师"
+    },
+    {
+     "id": 62003,
+     "name": "新手潜行者",
+     "requirement": "首次将潜行者升到25级",
+     "sub": "潜行者",
+     "icon": "classicon_rogue",
+     "points": 1,
+     "group": "潜行者"
+    },
+    {
+     "id": 62004,
+     "name": "熟练潜行者",
+     "requirement": "首次将潜行者升到45级",
+     "sub": "潜行者",
+     "icon": "classicon_rogue",
+     "points": 1,
+     "group": "潜行者"
+    },
+    {
+     "id": 62005,
+     "name": "高阶潜行者",
+     "requirement": "首次将潜行者升到60级",
+     "sub": "潜行者",
+     "icon": "classicon_rogue",
+     "points": 1,
+     "group": "潜行者"
+    },
+    {
+     "id": 62006,
+     "name": "新手萨满祭司",
+     "requirement": "首次将萨满祭司升到25级",
+     "sub": "萨满祭司",
+     "icon": "classicon_shaman",
+     "points": 1,
+     "group": "萨满祭司"
+    },
+    {
+     "id": 62007,
+     "name": "熟练萨满祭司",
+     "requirement": "首次将萨满祭司升到45级",
+     "sub": "萨满祭司",
+     "icon": "classicon_shaman",
+     "points": 1,
+     "group": "萨满祭司"
+    },
+    {
+     "id": 62008,
+     "name": "高阶萨满祭司",
+     "requirement": "首次将萨满祭司升到60级",
+     "sub": "萨满祭司",
+     "icon": "classicon_shaman",
+     "points": 1,
+     "group": "萨满祭司"
+    },
+    {
+     "id": 62009,
+     "name": "新手术士",
+     "requirement": "首次将术士升到25级",
+     "sub": "术士",
+     "icon": "classicon_warlock",
+     "points": 1,
+     "group": "术士"
+    },
+    {
+     "id": 62010,
+     "name": "熟练术士",
+     "requirement": "首次将术士升到45级",
+     "sub": "术士",
+     "icon": "classicon_warlock",
+     "points": 1,
+     "group": "术士"
+    },
+    {
+     "id": 62011,
+     "name": "高阶术士",
+     "requirement": "首次将术士升到60级",
+     "sub": "术士",
+     "icon": "classicon_warlock",
+     "points": 1,
+     "group": "术士"
+    },
+    {
+     "id": 61499,
+     "name": "新手战士",
+     "requirement": "首次将战士升到25级",
+     "sub": "战士",
+     "icon": "classicon_warrior",
+     "points": 1,
+     "group": "战士"
+    },
+    {
+     "id": 61500,
+     "name": "熟练战士",
+     "requirement": "首次将战士升到45级",
+     "sub": "战士",
+     "icon": "classicon_warrior",
+     "points": 1,
+     "group": "战士"
+    },
+    {
+     "id": 61501,
+     "name": "高阶战士",
+     "requirement": "首次将战士升到60级",
+     "sub": "战士",
+     "icon": "classicon_warrior",
+     "points": 1,
+     "group": "战士"
+    }
+   ]
+  },
+  {
+   "name": "商业技能",
+   "subcategories": [
+    "炼金术",
+    "锻造",
+    "附魔",
+    "工程学",
+    "制皮",
+    "裁缝"
+   ],
+   "items": [
+    {
+     "id": 62012,
+     "name": "中级炼金术",
+     "requirement": "首次达到150点炼金术技能",
+     "sub": "炼金术",
+     "icon": "trade_alchemy",
+     "points": 1,
+     "group": "炼金术"
+    },
+    {
+     "id": 62013,
+     "name": "高级炼金术",
+     "requirement": "首次达到225点炼金术技能",
+     "sub": "炼金术",
+     "icon": "trade_alchemy",
+     "points": 1,
+     "group": "炼金术"
+    },
+    {
+     "id": 62014,
+     "name": "专家级炼金术",
+     "requirement": "首次达到300点炼金术技能",
+     "sub": "炼金术",
+     "icon": "trade_alchemy",
+     "points": 1,
+     "group": "炼金术"
+    },
+    {
+     "id": 62015,
+     "name": "中级锻造",
+     "requirement": "首次达到150点锻造技能",
+     "sub": "锻造",
+     "icon": "trade_blacksmithing",
+     "points": 1,
+     "group": "锻造"
+    },
+    {
+     "id": 62016,
+     "name": "高级锻造",
+     "requirement": "首次达到225点锻造技能",
+     "sub": "锻造",
+     "icon": "trade_blacksmithing",
+     "points": 1,
+     "group": "锻造"
+    },
+    {
+     "id": 62017,
+     "name": "专家级锻造",
+     "requirement": "首次达到300点锻造技能",
+     "sub": "锻造",
+     "icon": "trade_blacksmithing",
+     "points": 1,
+     "group": "锻造"
+    },
+    {
+     "id": 62018,
+     "name": "中级附魔",
+     "requirement": "首次达到150点附魔技能",
+     "sub": "附魔",
+     "icon": "trade_engraving",
+     "points": 1,
+     "group": "附魔"
+    },
+    {
+     "id": 62019,
+     "name": "高级附魔",
+     "requirement": "首次达到225点附魔技能",
+     "sub": "附魔",
+     "icon": "trade_engraving",
+     "points": 1,
+     "group": "附魔"
+    },
+    {
+     "id": 62020,
+     "name": "专家级附魔",
+     "requirement": "首次达到300点附魔技能",
+     "sub": "附魔",
+     "icon": "trade_engraving",
+     "points": 1,
+     "group": "附魔"
+    },
+    {
+     "id": 62021,
+     "name": "中级工程学",
+     "requirement": "首次达到150点工程学技能",
+     "sub": "工程学",
+     "icon": "trade_engineering",
+     "points": 1,
+     "group": "工程学"
+    },
+    {
+     "id": 62022,
+     "name": "高级工程学",
+     "requirement": "首次达到225点工程学技能",
+     "sub": "工程学",
+     "icon": "trade_engineering",
+     "points": 1,
+     "group": "工程学"
+    },
+    {
+     "id": 62023,
+     "name": "专家级工程学",
+     "requirement": "首次达到300点工程学技能",
+     "sub": "工程学",
+     "icon": "trade_engineering",
+     "points": 1,
+     "group": "工程学"
+    },
+    {
+     "id": 62024,
+     "name": "中级制皮",
+     "requirement": "首次达到150点制皮技能",
+     "sub": "制皮",
+     "icon": "trade_leatherworking",
+     "points": 1,
+     "group": "制皮"
+    },
+    {
+     "id": 62025,
+     "name": "高级制皮",
+     "requirement": "首次达到225点制皮技能",
+     "sub": "制皮",
+     "icon": "trade_leatherworking",
+     "points": 1,
+     "group": "制皮"
+    },
+    {
+     "id": 62026,
+     "name": "专家级制皮",
+     "requirement": "首次达到300点制皮技能",
+     "sub": "制皮",
+     "icon": "trade_leatherworking",
+     "points": 1,
+     "group": "制皮"
+    },
+    {
+     "id": 62028,
+     "name": "中级裁缝",
+     "requirement": "首次达到150点裁缝技能",
+     "sub": "裁缝",
+     "icon": "trade_tailoring",
+     "points": 1,
+     "group": "裁缝"
+    },
+    {
+     "id": 62029,
+     "name": "高级裁缝",
+     "requirement": "首次达到225点裁缝技能",
+     "sub": "裁缝",
+     "icon": "trade_tailoring",
+     "points": 1,
+     "group": "裁缝"
+    },
+    {
+     "id": 62030,
+     "name": "专家级裁缝",
+     "requirement": "首次达到300点裁缝技能",
+     "sub": "裁缝",
+     "icon": "trade_tailoring",
+     "points": 1,
+     "group": "裁缝"
+    }
+   ]
+  },
+  {
+   "name": "地下城",
+   "subcategories": [],
+   "items": [
+    {
+     "id": 62031,
+     "name": "新手探地者",
+     "requirement": "完成以下地下城",
+     "sub": null,
+     "icon": "inv_shield_1h_lordaeron_d_01",
+     "points": 1,
+     "group": null
+    },
+    {
+     "id": 62032,
+     "name": "熟练探地者",
+     "requirement": "完成以下地下城",
+     "sub": null,
+     "icon": "achievement_reputation_ogre",
+     "points": 1,
+     "group": null
+    },
+    {
+     "id": 62033,
+     "name": "高阶探地者",
+     "requirement": "完成以下地下城",
+     "sub": null,
+     "icon": "achievement_reputation_timbermaw",
+     "points": 1,
+     "group": null
+    }
+   ]
+  },
+  {
+   "name": "团队副本",
+   "subcategories": [],
+   "items": [
+    {
+     "id": 62034,
+     "name": "荒野征服者",
+     "requirement": "在海加尔峰击败下列首领",
+     "sub": null,
+     "icon": "achievement_zone_mount-hyjal",
+     "points": 1,
+     "group": null
+    },
+    {
+     "id": 62035,
+     "name": "深渊征服者",
+     "requirement": "在深穴击败下列首领",
+     "sub": null,
+     "icon": "achievement_dungeon_vaultofthewardens",
+     "points": 1,
+     "group": null
+    },
+    {
+     "id": 684,
+     "name": "巢穴征服者",
+     "requirement": "击败60级版本的奥妮克希亚",
+     "sub": null,
+     "icon": "achievement_boss_onyxia",
+     "points": 1,
+     "group": null
+    }
+   ]
+  },
+  {
+   "name": "玩家对战",
+   "subcategories": [
+    "军衔",
+    "声望",
+    "赛季旅程"
+   ],
+   "items": [
+    {
+     "id": 62041,
+     "name": "等级 3",
+     "requirement": "在PvP荣誉系统中达到中士军衔",
+     "sub": "军衔",
+     "icon": "achievement_pvp_g_03",
+     "points": 1,
+     "group": "军衔"
+    },
+    {
+     "id": 62042,
+     "name": "等级 7",
+     "requirement": "在PvP荣誉系统中达到骑士中尉或血卫士军衔",
+     "sub": "军衔",
+     "icon": "achievement_pvp_g_07",
+     "points": 1,
+     "group": "军衔"
+    },
+    {
+     "id": 62043,
+     "name": "等级 10",
+     "requirement": "在PvP荣誉系统中达到少校或勇士军衔",
+     "sub": "军衔",
+     "icon": "achievement_pvp_g_10",
+     "points": 1,
+     "group": "军衔"
+    },
+    {
+     "id": 62044,
+     "name": "等级 13",
+     "requirement": "在PvP荣誉系统中达到元帅或督军军衔",
+     "sub": "军衔",
+     "icon": "achievement_pvp_g_13",
+     "points": 1,
+     "group": "军衔"
+    },
+    {
+     "id": 62045,
+     "name": "等级 14",
+     "requirement": "在PvP荣誉系统中达到大元帅或高阶督军军衔",
+     "sub": "军衔",
+     "icon": "achievement_pvp_g_14",
+     "points": 1,
+     "group": "军衔"
+    },
+    {
+     "id": 62046,
+     "name": "奥特兰克山谷主宰",
+     "requirement": "在霜狼氏族或雷矛卫队中达到崇拜声望",
+     "sub": "声望",
+     "icon": "achievement_zone_alteracmountains_01",
+     "points": 1,
+     "group": "声望"
+    },
+    {
+     "id": 62047,
+     "name": "阿拉希盆地主宰",
+     "requirement": "在污染者或阿拉索联军中达到崇拜声望",
+     "sub": "声望",
+     "icon": "achievement_zone_arathihighlands_01",
+     "points": 1,
+     "group": "声望"
+    },
+    {
+     "id": 62048,
+     "name": "战歌峡谷主宰",
+     "requirement": "在战歌氏族或银翼要塞中达到崇拜声望",
+     "sub": "声望",
+     "icon": "achievement_bg_winwsg",
+     "points": 1,
+     "group": "声望"
+    },
+    {
+     "id": 62049,
+     "name": "暗矛群岛主宰",
+     "requirement": "在暗矛突袭者或塞拉摩远征军中达到崇拜声望",
+     "sub": "声望",
+     "icon": "trade_archaeology_troll_tablet",
+     "points": 1,
+     "group": "声望"
+    },
+    {
+     "id": 63340,
+     "name": "荣誉之地：第4周",
+     "requirement": "完成荣誉之地：第4周",
+     "sub": "赛季旅程",
+     "icon": "achievement_rankedpvp_01",
+     "points": 1,
+     "group": "赛季旅程"
+    },
+    {
+     "id": 63341,
+     "name": "荣誉之地：第7周",
+     "requirement": "完成荣誉之地：第7周",
+     "sub": "赛季旅程",
+     "icon": "achievement_rankedpvp_01",
+     "points": 1,
+     "group": "赛季旅程"
+    },
+    {
+     "id": 63342,
+     "name": "荣誉之地：第10周",
+     "requirement": "完成荣誉之地：第10周",
+     "sub": "赛季旅程",
+     "icon": "achievement_rankedpvp_01",
+     "points": 1,
+     "group": "赛季旅程"
+    }
+   ]
+  },
+  {
+   "name": "冒险",
+   "subcategories": [],
+   "items": [
+    {
+     "id": 62054,
+     "name": "让瓦塔拉克公爵安息",
+     "requirement": "完成以“热心的建议”开始，以“最后的奖赏”结束的任务线",
+     "sub": null,
+     "icon": "achievement_dungeon_upperblackrockspire",
+     "points": 1,
+     "group": null
+    },
+    {
+     "id": 62382,
+     "name": "探索者",
+     "requirement": "拥有一个获得“探索艾泽拉斯”成就的角色",
+     "sub": null,
+     "icon": "inv_misc_map08",
+     "points": 1,
+     "group": null
+    }
+   ]
+  }
+ ],
+ "rewards": [
+  {
+   "at": 15,
+   "name": "装入枪套的铁炉堡气枪复刻版",
+   "item": 276236,
+   "item_name": "装入枪套的铁炉堡气枪复刻版",
+   "icon": "inv_weapon_rifle_22"
+  },
+  {
+   "at": 25,
+   "name": "鬼灵熊崽",
+   "item": 277714,
+   "item_name": "鬼灵熊崽",
+   "icon": "inv_pet_babyblizzardbear"
+  },
+  {
+   "at": 40,
+   "name": "鬼灵熊战袍",
+   "item": 277717,
+   "item_name": "鬼灵熊战袍",
+   "icon": "inv_tabard_legacyc60_b_01"
+  },
+  {
+   "at": 55,
+   "name": "鬼灵熊的缰绳",
+   "item": 277718,
+   "item_name": "鬼灵熊的缰绳",
+   "icon": "inv_bearmountblizzard"
+  }
+ ]
+}

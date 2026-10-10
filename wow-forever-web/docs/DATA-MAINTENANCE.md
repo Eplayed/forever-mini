@@ -31,6 +31,7 @@
 | 世界线 | 解包站 `_shuju/<发布号>/*.json` | `tools/refresh.sh world` | 发布号每次从页面现读，别手抄 |
 | 专业与配方 | 解包站专业页 | `tools/refresh.sh prof` | 野营那一页没有结构化数据，不编 |
 | 客户端改动清单 | 解包站 `_shuju/…/changes.json` | `tools/refresh.sh changes` | **入库前就删掉前后对照句子**，只留名称与类别 |
+| 传承（专长树 / 挑战 / 奖励） | 解包站 `_shuju/…/legacy.json` | `tools/refresh.sh legacy` | 同样**落盘前删句子**：每层效果说明、常见问题、领取说明一律不进仓库；未公开的槽位留空标"未公开" |
 | 官方中文（技能四态 / 种族） | 国服官方公告页 | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻 |
 | 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
 | 原画（职业背景 / 载入图 / 小地图） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退 |

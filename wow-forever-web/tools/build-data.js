@@ -655,6 +655,119 @@ rankList.forEach((r, i) => { r.place = i + 1; });
 if (rankList.length !== 9) warns.push('职业完整度排行只有 ' + rankList.length + ' 个职业有数据');
 scale.classRank = rankList;
 
+// ---------- 传承（Legacy）：专长树 + 65 个挑战 ----------
+// 口径与改动清单一致：只许有名称与数值结构，出现任何效果说明句子就是抓取阶段没删干净。
+const lgPath = path.join(ROOT, 'legacy.json');
+let legacyOut = null;
+if (fs.existsSync(lgPath)) {
+  const lg = JSON.parse(fs.readFileSync(lgPath, 'utf8'));
+  legacyOut = lg;
+  const LM = lg.meta || {};
+  const rules = LM.rules || {};
+  const counts = LM.counts || {};
+  const LTEXT = ['rank_texts', 'rankTexts', 'unranked_effect', 'unrankedEffect', 'effectRank',
+    'faq', 'answer', 'claim', 'tooltip', 'description', 'summary'];
+  const lLeaked = [];
+  (function walk(node, where) {
+    if (Array.isArray(node)) { node.forEach((x, i) => walk(x, where + '#' + i)); return; }
+    if (!node || typeof node !== 'object') return;
+    Object.keys(node).forEach((k) => {
+      if (LTEXT.indexOf(k) >= 0) lLeaked.push(where + '.' + k);
+      walk(node[k], where + '.' + k);
+    });
+  })({ perks: lg.perks, challenges: lg.challenges, rewards: lg.rewards, trees: lg.trees }, 'legacy');
+  if (lLeaked.length) {
+    errs.push('legacy：' + lLeaked.length + ' 处带着效果句子回来了，抓取阶段没删干净（' + lLeaked.slice(0, 4).join('、') + '）');
+  }
+
+  const perkIds = new Set();
+  const treeIds = new Set((lg.trees || []).map((t) => t.id));
+  (lg.perks || []).forEach((p) => {
+    if (perkIds.has(p.id)) errs.push(`legacy perk：id 重复 ${p.id}`);
+    perkIds.add(p.id);
+    if (!p.nameCn) errs.push(`legacy perk ${p.id}：缺中文名`);
+    if (!p.treeId || !treeIds.has(p.treeId)) errs.push(`legacy perk ${p.id}：所属树 ${p.treeId} 不在清单里`);
+    if (!(p.maxRank >= 1)) errs.push(`legacy perk ${p.id}：层数上限缺失或为 0`);
+    if (p.row === undefined || p.col === undefined) errs.push(`legacy perk ${p.id}：没有槽位坐标`);
+    if (p.prerequisite && !perkIds.has(p.prerequisite) && !(lg.perks || []).some((q) => q.id === p.prerequisite)) {
+      errs.push(`legacy perk ${p.id}：前置指向不存在的专长 ${p.prerequisite}`);
+    }
+    scanNoPercent('legacy perk', p, p.id);
+    checkRecord('legacy perk', p);
+  });
+  (lg.trees || []).forEach((t) => {
+    const real = (t.slots || []).filter((x) => !x.empty);
+    const unknown = real.filter((x) => x.unknown);
+    const named = real.filter((x) => !x.unknown);
+    if (real.length !== 9) errs.push(`legacy tree ${t.id}：${real.length} 个槽位，客户端树里每棵是 9 个`);
+    if (!t.nameCn) errs.push(`legacy tree ${t.id}：缺中文系名`);
+    named.forEach((x) => {
+      if (!perkIds.has(x.perk)) errs.push(`legacy tree ${t.id}：槽位里的 ${x.perk} 在专长表里没有明细`);
+    });
+    unknown.forEach((x) => {
+      if (!/^unknown-/.test(String(x.perk))) errs.push(`legacy tree ${t.id}：未公开槽位的 id 不像未公开（${x.perk}）`);
+    });
+    (t.links || []).forEach((l) => {
+      [l.from, l.to].forEach((id) => {
+        if (!perkIds.has(id) && !/^unknown-/.test(String(id))) {
+          errs.push(`legacy tree ${t.id}：前置连线指向对不上任何专长槽位（${id}）`);
+        }
+      });
+    });
+  });
+  const lchIds = new Set();
+  let lchN = 0;
+  (lg.challenges || []).forEach((c) => {
+    if (!c.nameCn) errs.push('legacy challenge 分类：缺中文名');
+    (c.items || []).forEach((x) => {
+      lchN++;
+      if (!/^\d+$/.test(String(x.id || ''))) errs.push(`legacy challenge ${x.nameCn}：缺数字 id`);
+      if (lchIds.has(x.id)) errs.push(`legacy challenge：id 重复 ${x.id}`);
+      lchIds.add(x.id);
+      if (!x.nameCn) errs.push(`legacy challenge ${x.id}：缺名称`);
+      if (!x.requirement) errs.push(`legacy challenge ${x.id}：没有完成条件，这条等于空壳`);
+      if (x.points !== rules.pointPerChallenge) {
+        errs.push(`legacy challenge ${x.id}：点数 ${x.points} 与规则「每项 ${rules.pointPerChallenge} 点」不一致`);
+      }
+      scanNoPercent('legacy challenge', x, x.id);
+      checkRecord('legacy challenge', x);
+    });
+  });
+  if (counts.challenges !== lchN) errs.push(`legacy：挑战明细数出 ${lchN}，meta 写着 ${counts.challenges}`);
+  if (LM.counts.upstreamChallengeTotal !== undefined &&
+    LM.counts.upstreamChallengeTotal !== lchN) {
+    errs.push(`legacy：本站 ${lchN} 项挑战，上游自报 ${LM.counts.upstreamChallengeTotal}，抄漏或抄重了`);
+  }
+  if ((LM.counts.perks || 0) !== (lg.perks || []).length) errs.push('legacy：专长条数与 meta 对不上');
+  if ((LM.counts.slots || 0) !== (lg.perks || []).length + (lg.unknownSlots || []).length) {
+    errs.push('legacy：槽位数 ≠ 专长数 + 未公开数，树与明细脱节了');
+  }
+  let lastAt = 0;
+  (lg.rewards || []).forEach((r, i) => {
+    if (!(r.at > lastAt)) errs.push(`legacy reward ${i}：门槛 ${r.at} 没有比上一档高`);
+    lastAt = r.at;
+    if (!r.nameCn) errs.push(`legacy reward ${i}：缺名称`);
+    if (!/^\d+$/.test(String(r.itemId || ''))) errs.push(`legacy reward ${i}：缺物品 ID`);
+    checkRecord('legacy reward', r);
+  });
+  if (!(rules.pointPerChallenge >= 1)) errs.push('legacy：每挑战点数缺失，规则没法交代');
+  if (!(rules.launchSpendingCap >= 1 && rules.launchEarnableTotal >= rules.launchSpendingCap)) {
+    errs.push(`legacy：首发上限 ${rules.launchSpendingCap} 与可得合计 ${rules.launchEarnableTotal} 说不通`);
+  }
+  if (!rules.unlock) errs.push('legacy：没写这套系统什么时候开放');
+  if (!(LM.notCollected || []).length) errs.push('legacy：没有「这一页没有的」清单，缺口没交代');
+  scale.legacy = {
+    perks: (lg.perks || []).length, slots: LM.counts.slots || 0,
+    unknown: (lg.unknownSlots || []).length, challenges: lchN, rewards: (lg.rewards || []).length,
+    cap: rules.launchSpendingCap, total: rules.launchEarnableTotal
+  };
+  console.log('传承：专长 ' + scale.legacy.perks + ' 个（另有 ' + scale.legacy.unknown +
+    ' 个槽位未公开）· 挑战 ' + lchN + ' 项（每项 ' + rules.pointPerChallenge + ' 点，首发上限 ' +
+    rules.launchSpendingCap + '）· 进度奖励 ' + scale.legacy.rewards + ' 档');
+} else {
+  warns.push('legacy.json 缺失：传承页只显示空态（跑 tools/scrape-wclbox-legacy.py + tools/merge-legacy.js 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——
@@ -675,6 +788,8 @@ const SK = {
   gnd: ['采集点', 'professions.html', 'q'],
   tra: ['种族特长', 'races.html', 'q'],
   race: ['种族', 'races.html', ''],
+  lpg: ['传承专长', 'legacy.html', 'q'],
+  lch: ['传承挑战', 'legacy.html', 'q'],
   cls: ['职业', 'talent.html', '']
 };
 const clsCn = {};
@@ -789,6 +904,15 @@ const facCn = {};
 (cl.classes || []).forEach((c) => {
   sPush('cls', c.cn, (c.talentCount || 0) + ' 个天赋节点', 'c=' + c.id, c.nameLevel);
 });
+if (legacyOut) {
+  (legacyOut.perks || []).forEach((x) => {
+    sPush('lpg', x.nameCn, '传承 · ' + (x.treeCn || '') + ' · 最多 ' + (x.maxRank || '?') + ' 层', '', 'L0');
+  });
+  (legacyOut.challenges || []).forEach((grp) => (grp.items || []).forEach((x) => {
+    sPush('lch', x.nameCn, '传承挑战 · ' + (grp.nameCn || '') +
+      (x.sub ? ' · ' + x.sub : ''), '', x.level);
+  }));
+}
 
 sFinish();
 // 索引自身的卡口：名字里混进句子、页面不存在、类型没登记，都是数据出问题的信号

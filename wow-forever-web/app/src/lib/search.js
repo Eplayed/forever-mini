@@ -4,8 +4,8 @@
 import { linkFor, legacyUrl } from './nav.js';
 
 // 一条 = [类型, 名称, 归属副标题, 跳转附加参数, 分级]
-export const KIND_ORDER = ['cls', 'race', 'tal', 'chg', 'term', 'abl', 'dun', 'boss', 'zone',
-  'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+export const KIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss',
+  'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
 export const GROUP_SHOWN = 5;
 export const HIT_LIMIT = 120;
 

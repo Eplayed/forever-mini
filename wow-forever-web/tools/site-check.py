@@ -20,6 +20,7 @@ import re
 import socketserver
 import sys
 import threading
+import urllib.parse
 
 try:
     from playwright.sync_api import sync_playwright
@@ -32,7 +33,7 @@ TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
 PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races",
-         "professions", "world", "updates", "rank", "glossary", "provenance"]
+         "professions", "world", "legacy", "updates", "rank", "glossary", "provenance"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
 # 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
 GAPS_PATH = os.path.join(SRC, "data", "icon-gaps.json")
@@ -66,6 +67,12 @@ def check(name, ok, detail=""):
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *_args):
         pass
+
+    def handle_exception(self, exc):
+        # 浏览器提前关掉连接（换页、关 context）时 write 会抛 BrokenPipe，
+        # 默认实现会把整段 traceback 打到 stderr，把真正的断言输出淹掉。这里静默。
+        if not isinstance(exc, (BrokenPipeError, ConnectionResetError)):
+            http.server.BaseHTTPRequestHandler.handle_exception(self, exc)
 
 
 class ThreadingServer(socketserver.ThreadingTCPServer):
@@ -587,8 +594,9 @@ def test_races(browser, base):
     labels = page.evaluate("() => [...document.querySelectorAll('nav.main .ngt')].map(b => b.textContent.trim())")
     subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')].map(a => a.textContent.trim())")
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
-    check("15 个二级入口全部常驻，不用点开",
-          len(subs) == 15 and all(x in subs for x in ["首页", "区域与稀有", "副本", "系统规则", "排行"]), str(subs))
+    check("16 个二级入口全部常驻，不用点开",
+          len(subs) == 16 and all(x in subs for x in ["首页", "区域与稀有", "副本", "系统规则", "传承", "排行"]),
+          str(subs))
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
     navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
@@ -1098,7 +1106,7 @@ def test_home(browser, base):
       return { n: a.length, nums: a.reduce((s, x) => s + x.querySelectorAll('.modn b').length, 0),
                pills: a.filter(x => x.querySelector('.pill')).length,
                notes: a.filter(x => x.querySelector('.modf .dim')).length }; }""")
-    check("六张模块卡都带规模数字与口径说明", mods["n"] == 6 and mods["nums"] == 18 and mods["pills"] == 6 and mods["notes"] == 6,
+    check("七张模块卡都带规模数字与口径说明", mods["n"] == 7 and mods["nums"] == 21 and mods["pills"] == 7 and mods["notes"] == 7,
           json.dumps(mods))
     hrefs = page.evaluate("""() => [...document.querySelectorAll('.mod, .chipsrow a, .hero .cta')]
       .map(a => (a.getAttribute('href') || '').split('#')[0].split('?')[0].replace('.html', ''))
@@ -1296,7 +1304,7 @@ def test_app(browser, base):
             strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
-            check("新站首页六张模块卡齐全", mods == 6, "%d 张" % mods)
+            check("新站首页模块卡与旧站一样多", mods == 7, "%d 张" % mods)
             gs = page.evaluate("() => !!document.querySelector('#gs')")
             check("新站首页也接了全站搜索框", gs)
             page.fill("#gs", "咆鼻")
@@ -1471,6 +1479,259 @@ def test_search(browser, base):
     m.close()
     check("搜索这一轮无脚本报错", not errs, "; ".join(errs[:2]))
 
+
+def test_legacy(browser, base):
+    """传承页：格子数、未公开槽、点数与分级徽标都要能对上 legacy.json，
+       并且这条红线要有证据——每层效果说明不许出现在渲染文字里（详情卡只许一句话的长度）。"""
+    print("\n[19] 传承页：三棵专长树与 65 项挑战")
+    import json
+    L = json.load(open(os.path.join(SRC, "data", "legacy.json"), encoding="utf-8"))
+    cnt = L["meta"]["counts"]
+    rules = L["meta"]["rules"]
+    total = sum(len(c["items"]) for c in L["challenges"])
+    by_tree = {t["id"]: t for t in L["trees"]}
+    named_by_tree = {}
+    for t in L["trees"]:
+        named_by_tree[t["id"]] = len([s for s in t["slots"] if not s["empty"] and not s["unknown"]])
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs, bad = [], []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.on("response", lambda r: bad.append(r.url) if r.status >= 400 and not tolerated(r.url) else None)
+    page.goto(base + "/legacy.html", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    check("传承页无脚本报错", not errs, "; ".join(errs[:2]))
+    check("传承页无非白名单失败请求", not bad, "; ".join(bad[:2]))
+
+    def snap():
+        return page.evaluate("""() => ({
+          h1: [...document.querySelectorAll('#main h1')].map(e => e.innerText.trim()),
+          stats: [...document.querySelectorAll('.stats .stat b')].map(e => +e.textContent),
+          tabs: [...document.querySelectorAll('.picks [data-t]')].map(e => e.dataset.t),
+          onTab: (document.querySelector('.picks [data-t].on') || {}).dataset,
+          treeName: (document.querySelector('#ltree h2') || {}).innerText,
+          cells: [...document.querySelectorAll('#ltree .lslot')].map(e => e.className),
+          names: [...document.querySelectorAll('#ltree .lslot .nm')].map(e => e.innerText.trim()),
+          unkTxt: [...document.querySelectorAll('#ltree .lslot.unk')].map(e => e.innerText.trim()),
+          ranks: [...document.querySelectorAll('#ltree .rk')].map(e => e.innerText.trim()),
+          det: [...document.querySelectorAll('#ldet .ldetail h2')].map(e => e.innerText.replace(/\\n/g, ' ')),
+          detTxt: ((document.getElementById('ldet') || {}).innerText || ''),
+          detBody: (() => { const d = document.getElementById('ldet'); if (!d) return '';
+            const c = d.cloneNode(true); c.querySelectorAll('.src').forEach(e => e.remove());
+            return (c.textContent || '').replace(/\\s+/g, ' ').trim(); })(),
+          detSrc: document.querySelectorAll('#ldet .src a').length,
+          detPill: [...document.querySelectorAll('#ldet .pill')].map(e => e.innerText.trim()),
+          on: [...document.querySelectorAll('#ltree .lslot.on')].length,
+          cnt: (document.getElementById('lcnt') || {}).innerText,
+          chRows: document.querySelectorAll('#lch .ltab tbody tr').length,
+          chPills: [...document.querySelectorAll('#lch .pill')].map(e => e.innerText.trim()),
+          pts: [...document.querySelectorAll('#lch .ltab tbody tr td:last-child')].map(e => e.innerText.trim()),
+          reRows: document.querySelectorAll('#main > .card').length,
+          rePill: [...document.querySelectorAll('#main table .pill')].map(e => e.innerText.trim()).slice(-4),
+          src: document.querySelectorAll('#main .src').length,
+          hot: [...document.querySelectorAll('img')].filter(i => /^https?:/.test(i.getAttribute('src') || '')).length,
+          local: [...document.querySelectorAll('img')].filter(i => !(i.getAttribute('src') || '').startsWith('img/')).length
+        })""")
+
+    s0 = snap()
+    check("传承页只有一个 H1", len(s0["h1"]) == 1, json.dumps(s0["h1"], ensure_ascii=False))
+    check("页顶四个规模数等于 legacy.json（专长/未公开/挑战/奖励）",
+          s0["stats"] == [cnt["perks"], cnt["unknownSlots"], total, cnt["rewards"]],
+          "页面 %s / 数据 %s" % (s0["stats"], [cnt["perks"], cnt["unknownSlots"], total, cnt["rewards"]]))
+    check("三棵传承树都在且顺序与数据一致", s0["tabs"] == [t["id"] for t in L["trees"]],
+          json.dumps(s0["tabs"], ensure_ascii=False))
+    check("挑战每条都带「待实测」徽标，点数每条都是 %s" % rules["pointPerChallenge"],
+          len(s0["chPills"]) == total and set(s0["chPills"]) == {"待实测"} and
+          set(s0["pts"]) == {str(rules["pointPerChallenge"])},
+          "徽标 %d 个 / 行 %d / 点数集合 %s" % (
+              len(s0["chPills"]), s0["chRows"], json.dumps(sorted(set(s0["pts"])), ensure_ascii=False)))
+    check("进度奖励四条都标了待实测", set(s0["rePill"] or []) == {"待实测"},
+          json.dumps(s0["rePill"], ensure_ascii=False))
+    check("图全部是本地文件，没有热链", s0["hot"] == 0 and s0["local"] == 0,
+          "外链 %d / 非 img 目录 %d" % (s0["hot"], s0["local"]))
+    # 页面级来源块 1 块；点开某个专长才多一块（那条断言在下面的详情里查）
+    check("页顶与页尾的来源块渲染出来了", s0["src"] >= 1, "%d 块来源" % s0["src"])
+
+    # 逐棵树核对格子：矩形格子数 = 行×列，具名 + 未公开 + 空格三者必须刚好铺满
+    per_tree = []
+    for tid in s0["tabs"]:
+        page.evaluate("(id) => { const b = [...document.querySelectorAll('.picks [data-t]')]"
+                      ".find(x => x.dataset.t === id); if (b) b.click(); }", tid)
+        page.wait_for_timeout(500)
+        s = snap()
+        t = by_tree[tid]
+        expect_cells = t["rows"] * t["cols"]
+        per_tree.append({
+            "id": tid, "cells": len(s["cells"]), "named": len(s["names"]),
+            "unk": s["cells"].count("lslot unk"), "empty": s["cells"].count("lslot none"),
+            "name": (s["treeName"] or "").replace("\n", " "), "unkTxt": s["unkTxt"], "ranks": s["ranks"],
+        })
+    check("每棵树画的格子数 = 行 × 列（空格也画出来，位置才是客户端里的位置）",
+          all(x["cells"] == by_tree[x["id"]]["rows"] * by_tree[x["id"]]["cols"] for x in per_tree),
+          json.dumps([{k: x[k] for k in ("id", "cells")} for x in per_tree], ensure_ascii=False))
+    check("具名专长 + 未公开 + 空格 = 格子总数，且具名数与数据一致",
+          all(x["named"] + x["unk"] + x["empty"] == x["cells"] and
+              x["named"] == named_by_tree[x["id"]] for x in per_tree),
+          json.dumps([{k: x[k] for k in ("id", "named", "unk", "empty")} for x in per_tree], ensure_ascii=False))
+    check("未公开槽位用文字交代（不是只靠一个虚线框）",
+          all(x["unk"] == 0 or all("未公开" in u for u in x["unkTxt"]) for x in per_tree),
+          json.dumps([x["unkTxt"][:1] for x in per_tree], ensure_ascii=False))
+    check("三棵树加起来正好 21 个具名专长、6 格未公开",
+          sum(x["named"] for x in per_tree) == cnt["perks"] and
+          sum(x["unk"] for x in per_tree) == cnt["unknownSlots"],
+          "具名 %d / 未公开 %d（应 %d / %d）" % (
+              sum(x["named"] for x in per_tree), sum(x["unk"] for x in per_tree),
+              cnt["perks"], cnt["unknownSlots"]))
+    check("每个格子的层数上限都写出来了（没有的写 ?，不许留空）",
+          all(re.match(r"^\d+ 层$|^\?$", r) for x in per_tree for r in x["ranks"]),
+          json.dumps([x["ranks"][:3] for x in per_tree], ensure_ascii=False))
+
+    # 点开一格看详情：详情卡必须短，长起来就说明把每层效果说明抄回来了
+    page.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').click()")
+    page.wait_for_timeout(500)
+    s1 = snap()
+    first_id = page.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').dataset.perk")
+    perk = [p for p in L["perks"] if p["id"] == first_id][0]
+    check("点格子展开该专长的详情（名字、上限、前置、位置）",
+          len(s1["det"]) == 1 and s1["on"] == 1 and perk["nameCn"] in s1["det"][0],
+          json.dumps({"det": s1["det"][:1], "on": s1["on"], "id": first_id}, ensure_ascii=False))
+    check("详情里带分级徽标与可点开的来源",
+          s1["detPill"] == ["已官方核实"] and s1["detSrc"] >= 1,
+          json.dumps({"pill": s1["detPill"], "src": s1["detSrc"]}, ensure_ascii=False))
+    # 长度这条是红线的兜底：详情里除了"本站不复制"那句声明，只剩名称/上限/位置/前置/日期。
+    # 谁把每层效果说明抄回来，这段正文一定会撑破 200 字。
+    check("详情没把每层效果说明抄回来（来源块以外 ≤200 字）",
+          len(s1["detBody"]) <= 200 and "不写" in s1["detBody"] and "前置" in s1["detBody"],
+          "详情正文 %d 字：%s" % (len(s1["detBody"]), s1["detBody"][:90]))
+    page.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').click()")
+    page.wait_for_timeout(400)
+    check("再点一次收起，同一时刻只许有一个选中格",
+          len(snap()["det"]) == 0 and snap()["on"] == 0, json.dumps(snap()["det"], ensure_ascii=False))
+    # 收起后右侧不许留白：给一个告诉玩家"点哪儿"的空态
+    es = page.evaluate("""() => { const e = document.querySelector('#ldet .leempty');
+      return { has: !!e, txt: e ? e.innerText.replace(/\\n/g, ' ').slice(0, 20) : '' }; }""")
+    check("没选专长时那块给的是空态说明，不是留白",
+          es["has"] and "点一个专长" in es["txt"], json.dumps(es, ensure_ascii=False))
+
+    # 挑战搜索：命中数、计数行、空态
+    page.evaluate("() => { const i = document.getElementById('lq'); i.value = '25级'; i.oninput(); }")
+    page.wait_for_timeout(500)
+    s2 = snap()
+    n25 = len([x for c in L["challenges"] for x in c["items"]
+               if "25级" in ((x.get("nameCn") or "") + " " + (x.get("requirement") or "") + " " +
+                             (x.get("sub") or "") + " " + (x.get("group") or ""))])
+    check("搜「25级」筛出 %d 条，计数行跟着走" % n25,
+          s2["chRows"] == n25 and s2["cnt"] == "%d / %d 项" % (n25, total),
+          json.dumps({"rows": s2["chRows"], "cnt": s2["cnt"], "应": n25}, ensure_ascii=False))
+    page.evaluate("() => { const i = document.getElementById('lq'); i.value = 'zzz不存在'; i.oninput(); }")
+    page.wait_for_timeout(400)
+    s3 = snap()
+    empty = page.evaluate("() => [...document.querySelectorAll('#lch .empty')].map(e => e.innerText)")
+    check("搜不到时给的是玩家能照着改的空态，不是空白",
+          s3["chRows"] == 0 and len(empty) == 1 and "试试" in empty[0],
+          json.dumps(empty[:1], ensure_ascii=False))
+    page.evaluate("() => { const i = document.getElementById('lq'); i.value = ''; i.oninput(); }")
+    page.wait_for_timeout(300)
+    # 分组卡必须是整块：第一版把它套在 .lgrp（别处是一行 flex 的分组条）上，
+    # 结果表格被挤成 487px 靠右摆、图标按原图 56px 把行高撑到 110px，人眼一看才发现。
+    tbl = page.evaluate("""() => { const g = document.querySelector('#lch .lchgrp');
+      if (!g) return null;
+      const tr = g.querySelector('tbody tr').getBoundingClientRect();
+      const ico = g.querySelector('tbody tr .liw');
+      const sx = g.querySelector('.scrollx').getBoundingClientRect();
+      const card = g.getBoundingClientRect();
+      return { rowH: Math.round(tr.height), icoW: ico ? Math.round(ico.getBoundingClientRect().width) : 0,
+               fill: +(sx.width / card.width).toFixed(2), groups: document.querySelectorAll('#lch .lchgrp').length }; }""")
+    check("挑战表用全站统一的 26px 图标格，行高没被撑开",
+          tbl and tbl["icoW"] == 26 and tbl["rowH"] <= 60, json.dumps(tbl, ensure_ascii=False))
+    check("分组卡整块铺开，表格宽度占满卡片", tbl and tbl["fill"] > 0.95 and tbl["groups"] == 6,
+          json.dumps(tbl, ensure_ascii=False))
+    # 截图要拍默认状态：树回到第一棵、并排那格摆一个打开的详情
+    page.evaluate("(id) => { const b = [...document.querySelectorAll('.picks [data-t]')]"
+                  ".find(x => x.dataset.t === id); if (b) b.click(); }", L["trees"][0]["id"])
+    page.wait_for_timeout(400)
+    page.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').click()")
+    page.wait_for_timeout(400)
+    lay = page.evaluate("""() => { const t = document.querySelector('#ltree').getBoundingClientRect();
+      const d = document.querySelector('#ldet .ldetail').getBoundingClientRect();
+      return { right: d.left >= t.right - 4, gridW: document.querySelector('.lgrid').getBoundingClientRect().width }; }""")
+    check("桌面是「树在左、详情在右」并排（详情原来落在下面，右侧一大片空）",
+          lay["right"] and lay["gridW"] <= 520, json.dumps(lay, ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "legacy-desktop.png"), full_page=True)
+    check("传承这一轮无脚本报错", not errs, "; ".join(errs[:2]))
+    ctx.close()
+
+    # 深链：从首页搜索带专长名跳进来 → 直接展开那条，而且不许把下面的挑战筛选抢掉
+    dc = browser.new_context(viewport={"width": 1440, "height": 1000})
+    dp = dc.new_page()
+    target = [p for p in L["perks"] if p["treeId"] != L["trees"][0]["id"]][0]
+    dp.goto("%s/legacy.html?q=%s" % (base, urllib.parse.quote(target["nameCn"])),
+            wait_until="networkidle")
+    dp.wait_for_timeout(1300)
+    deep = dp.evaluate("""() => ({
+      det: [...document.querySelectorAll('#ldet .ldetail h2')].map(e => e.innerText.replace(/\\n/g, ' ')),
+      on: document.querySelectorAll('#ltree .lslot.on').length,
+      onTab: (document.querySelector('.picks [data-t].on') || {}).dataset,
+      lq: (document.getElementById('lq') || {}).value,
+      cnt: (document.getElementById('lcnt') || {}).innerText })""")
+    check("带专长名跳进来：落在它所在的树上并直接展开详情",
+          len(deep["det"]) == 1 and target["nameCn"] in deep["det"][0] and deep["on"] == 1 and
+          (deep["onTab"] or {}).get("t") == target["treeId"],
+          json.dumps(deep, ensure_ascii=False))
+    check("跳进来后挑战不被误筛（搜索框留空，仍是全部 %d 项）" % total,
+          deep["lq"] == "" and deep["cnt"] == "%d / %d 项" % (total, total),
+          json.dumps({"lq": deep["lq"], "cnt": deep["cnt"]}, ensure_ascii=False))
+    dp.goto("%s/legacy.html?t=%s" % (base, L["trees"][-1]["id"]), wait_until="networkidle")
+    dp.wait_for_timeout(1200)
+    tid = dp.evaluate("() => (document.querySelector('.picks [data-t].on') || {}).dataset")
+    check("带 ?t= 跳进来直接切到那棵树", (tid or {}).get("t") == L["trees"][-1]["id"],
+          json.dumps(tid, ensure_ascii=False))
+    dp.goto("%s/legacy.html?t=不存在" % base, wait_until="networkidle")
+    dp.wait_for_timeout(1200)
+    fell = dp.evaluate("() => document.querySelectorAll('#ltree .lslot').length")
+    check("乱写的 ?t= 不会把页面搞成空白（退回第一棵）", fell == by_tree[L["trees"][0]["id"]]["rows"] *
+          by_tree[L["trees"][0]["id"]]["cols"], "%d 格" % fell)
+    dc.close()
+
+    # 375px：格子是这页最容易挤的地方，横向不溢出 + 点击目标够大 + 名字不能被吃掉
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(base + "/legacy.html", wait_until="networkidle")
+    mp.wait_for_timeout(1400)
+    mm = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const cells = [...document.querySelectorAll('#ltree .lslot')];
+      const small = [...document.querySelectorAll('#main button, #main a, #main input')]
+        .filter(e => { const b = e.getBoundingClientRect();
+          return b.width > 0 && b.height > 0 && Math.min(b.width, b.height) < 44; })
+        .map(e => e.tagName + '.' + e.className);
+      const grid = document.querySelector('.lgrid').getBoundingClientRect();
+      return { over: document.documentElement.scrollWidth - vw, small: small,
+               named: cells.filter(c => c.querySelector('.nm')).length,
+               nameless: cells.filter(c => c.querySelector('.nm') && !c.querySelector('.nm').innerText.trim()).length,
+               gridW: grid.width, vw: vw,
+               unkHasText: [...document.querySelectorAll('.lslot.unk')].every(e => e.innerText.includes('未公开')),
+               tabMin: Math.min(...[...document.querySelectorAll('.picks [data-t]')]
+                 .map(e => e.getBoundingClientRect().height)) }; }""")
+    check("移动端不横向溢出", mm["over"] <= 0, "溢出 %dpx" % mm["over"])
+    check("移动端点击目标都 ≥44px（含切树按钮 %.0fpx）" % mm["tabMin"], not mm["small"],
+          json.dumps(mm["small"][:3], ensure_ascii=False))
+    check("移动端格子仍画得下且不把专长名吞成空",
+          mm["named"] == 7 and mm["nameless"] == 0 and mm["gridW"] <= mm["vw"],
+          json.dumps({k: mm[k] for k in ("named", "nameless", "gridW", "vw")}))
+    check("移动端的未公开格也带文字说明", mm["unkHasText"], "看未公开格的文字")
+    mp.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').click()")
+    mp.wait_for_timeout(400)
+    mlay = mp.evaluate("""() => { const t = document.querySelector('#ltree').getBoundingClientRect();
+      const d = document.querySelector('#ldet .ldetail').getBoundingClientRect();
+      const vw = document.documentElement.clientWidth;
+      return { below: d.top >= t.bottom - 4, over: d.right > vw }; }""")
+    check("移动端详情回到树卡下面而不是并排（窄屏并排会把格子挤没）", mlay["below"] and not mlay["over"],
+          json.dumps(mlay, ensure_ascii=False))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "legacy-mobile.png"), full_page=True)
+    m.close()
+
+
 def test_copy(browser, base):
     """面向维护者的词不许出现在玩家看的正文里。词表与 build-data.js 用的是同一份
        tools/copy-banned.json：数据侧扫 JSON，这里扫渲染后的文字（app.js 里的句子只有渲染才看得见）。"""
@@ -1564,6 +1825,7 @@ def main():
             test_home(browser, base)
             test_updates_rank(browser, base)
             test_search(browser, base)
+            test_legacy(browser, base)
             test_copy(browser, base)
             test_app(browser, base)
             test_design_baseline(browser, base)

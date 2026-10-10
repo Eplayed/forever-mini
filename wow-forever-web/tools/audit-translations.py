@@ -217,6 +217,19 @@ def main():
             items.append({"src": "改动清单", "id": x["id"], "cn": x.get("nameCn"), "cls": x.get("classId"),
                           "level": x.get("level"), "prov": x.get("provenance", [])})
 
+    lg_path = os.path.join(DATA, "legacy.json")
+    if os.path.exists(lg_path):
+        lgd = json.load(io.open(lg_path, encoding="utf-8"))
+        # 只核名称：每层效果说明本站不存，也就没什么可核的
+        for x in (lgd.get("perks") or []):
+            items.append({"src": "传承专长", "id": x["id"], "cn": x.get("nameCn"),
+                          "cls": x.get("treeCn"), "level": x.get("level"),
+                          "prov": x.get("provenance", [])})
+        for x in (lgd.get("rewards") or []):
+            items.append({"src": "传承奖励", "id": "legacy-reward-%s" % x.get("itemId"),
+                          "cn": x.get("nameCn"), "cls": None, "level": x.get("level"),
+                          "prov": x.get("provenance", [])})
+
     urls = []
     for it in items:
         for prov in it["prov"]:
@@ -299,6 +312,7 @@ def main():
     lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、"
         "`world.json` 的稀有精英名与掉落物名、书名与上交奖励名（区域名不在此列，见上）、"
         "`changes.json` 的 964 条天赋与法术名（只核名称，句子本站不存）、"
+        "`legacy.json` 的传承专长名与进度奖励名（同样只核名称），"
                  "`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、"
                  "亮点组合与天裔导语。")
     rate = len(hits) * 100.0 / max(len(items), 1)

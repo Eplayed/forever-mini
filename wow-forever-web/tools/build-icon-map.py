@@ -37,8 +37,11 @@ def collect_all_keys():
             for x in node:
                 walk(x, src)
 
-    names = ["dungeons.json", "professions.json", "races.json", "world.json", "changes.json",
-             "glossary.json", "abilities.json", "classes.json", "chooser.json", "systems.json"]
+    # 以前这里写死了一份文件清单，加一个新模块就会漏登记（传承页差点带着未登记的 404 上线）。
+    # 现在扫 data 目录下所有数据文件，只排除两份自身就是登记结果的。
+    SKIP = {"icons.json", "icon-gaps.json"}
+    names = sorted(fn for fn in os.listdir(DATA)
+                   if fn.endswith(".json") and fn not in SKIP)
     for fn in names:
         fp = os.path.join(DATA, fn)
         if os.path.exists(fp):

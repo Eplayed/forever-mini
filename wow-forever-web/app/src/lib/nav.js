@@ -8,7 +8,8 @@ export const NAV = [
     { file: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
   { t: '职业', items: [
     { file: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
-    { file: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' }] },
+    { file: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
+    { file: 'legacy.html', t: '传承', d: '21 个专长 · 65 项挑战 · 每完成 1 项得 1 点' }] },
   { t: '种族', items: [
     { file: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
     { file: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },

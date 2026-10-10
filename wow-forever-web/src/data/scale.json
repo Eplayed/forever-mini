@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-09",
+  "generatedAt": "2026-10-10",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -94,7 +94,16 @@
     "place": 9
    }
   ],
-  "search": 4206,
+  "legacy": {
+   "perks": 21,
+   "slots": 27,
+   "unknown": 6,
+   "challenges": 65,
+   "rewards": 4,
+   "cap": 16,
+   "total": 65
+  },
+  "search": 4292,
   "talentPreview": 473,
   "releases": 15,
   "glossary": 215,

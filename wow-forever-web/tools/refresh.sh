@@ -10,6 +10,7 @@
 #   tools/refresh.sh changes     # 客户端改动清单
 #   tools/refresh.sh prof        # 专业与配方
 #   tools/refresh.sh dungeons    # 副本卡片与掉落
+#   tools/refresh.sh legacy      # 传承：三棵专长树 + 65 项挑战（句子在落盘前就删）
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
@@ -51,6 +52,14 @@ case "${1:-}" in
   dungeons)
     run python3 tools/scrape-wclbox-dom.py --what cards
     run node tools/merge-dungeons.js
+    gate
+    ;;
+  legacy)
+    # 抓取脚本在写盘前就把每层效果说明删掉，仓库里不会留下转述句子
+    run python3 tools/scrape-wclbox-legacy.py
+    run node tools/merge-legacy.js
+    run python3 tools/build-icon-map.py
+    run python3 tools/fetch-icons.py --from-json src/data/legacy.json --field iconKey
     gate
     ;;
   talents)

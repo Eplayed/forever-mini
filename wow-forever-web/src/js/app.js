@@ -9,7 +9,8 @@
       { href: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
     { t: '职业', items: [
       { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
-      { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' }] },
+      { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
+      { href: 'legacy.html', t: '传承', d: '21 个专长 · 65 项挑战 · 每完成 1 项得 1 点' }] },
     { t: '种族', items: [
       { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
       { href: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
@@ -180,8 +181,8 @@
      只收「名称 + 归属」，命中后带着词跳进对应页面，由那一页自己的筛选器接手。 */
   var SX = { idx: null, kinds: null, job: null, rows: [] };
   // 分组显示顺序：先身份类，再内容类，配方与采集点这种长尾放后面
-  var SKIND_ORDER = ['cls', 'race', 'tal', 'chg', 'term', 'abl', 'dun', 'boss', 'zone', 'rare',
-    'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+  var SKIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss',
+    'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
   var SSHOWN = 5;
 
   function searchIdx() {
@@ -450,6 +451,12 @@
           p: '国服官方中文公告里的 10 个种族行与可选职业矩阵，40 条种族特长带官方整句。',
           n: [[S.races, '个种族行'], [S.traits, '条特长整句'], [S.classes, '职业可选']],
           note: '整句直接抄官方，不改写' },
+        { href: 'legacy.html', t: '传承专长与挑战', lv: 'L0',
+          p: '三棵传承树 27 个槽位（6 个还没公开）、65 项挑战各给 1 点、首发上限 16 点，' +
+            '每个专长写清上限与前置。',
+          n: [[S.legacy ? S.legacy.perks : 0, '个专长有明细'], [S.legacy ? S.legacy.challenges : 0, '项挑战'],
+            [S.legacy ? S.legacy.unknown : 0, '格未公开']],
+          note: '每层效果说明本站不复制' },
         { href: 'glossary.html', t: '中英术语速查', lv: 'L0',
           p: '技能与天赋的中英对照，按职业与种族分组，点一下即复制；38 条带与经典旧世的四态差异。',
           n: [[S.glossary, '条词条'], [S.abilities, '条四态对照'], [S.classes, '组职业']],
@@ -1791,6 +1798,190 @@
     }).catch(fail);
   }
 
+  /* ---------- 传承（Legacy）：三棵专长树 + 65 项挑战 ---------- */
+  function legacy() {
+    Promise.all([D.load('data/legacy.json'), D.load('data/icons.json').catch(function () { return { map: {} }; })])
+      .then(function (r) {
+        var L = r[0];
+        var M = L.meta || {}, rules = M.rules || {}, cnt = M.counts || {};
+        var perkById = {};
+        (L.perks || []).forEach(function (p) { perkById[p.id] = p; });
+        var total = (L.challenges || []).reduce(function (a, c) { return a + c.items.length; }, 0);
+        var f = {
+          tree: urlQ('t') && (L.trees || []).some(function (t) { return t.id === urlQ('t'); })
+            ? urlQ('t') : ((L.trees || [])[0] || {}).id || '',
+          q: urlQ('q'), open: urlQ('p')
+        };
+        // 从首页搜索带着专长名跳进来：直接展开那条并切到它所在的树，别让人自己找格子。
+        // 只认全等，避免"搜索挑战时命中一个同名的专长"把下面的挑战筛选给抢掉。
+        if (f.q && !f.open) {
+          var lk = f.q.trim().toLowerCase();
+          var hitp = (L.perks || []).filter(function (x) {
+            return String(x.nameCn || '').toLowerCase() === lk;
+          })[0];
+          if (hitp) {
+            f.jumpFrom = hitp.nameCn;
+            f.open = hitp.id;
+            f.tree = hitp.treeId || f.tree;
+            f.q = '';
+          }
+        }
+
+        function iconOf(key, seed, cn) {
+          var ph = window.Glyph ? Glyph.talentTile(seed || cn, cn) : '';
+          var img = key ? '<img class="ico" src="img/icons/' + encodeURIComponent(key) + '.jpg" alt="" ' +
+            'loading="lazy" onerror="this.className=\'ico bad\'">' : '';
+          return '<span class="ico-wrap">' + ph + img + '</span>';
+        }
+        function perkCell(s) {
+          if (s.empty) return '<div class="lslot none" aria-hidden="true"></div>';
+          if (s.unknown) {
+            return '<div class="lslot unk" title="这一格客户端里有，但官方还没公布是什么">' +
+              '<b>?</b><span class="dim">未公开</span></div>';
+          }
+          var p = perkById[s.perk];
+          if (!p) return '<div class="lslot unk"><b>?</b></div>';
+          var on = f.open === p.id;
+          return '<button type="button" class="lslot' + (on ? ' on' : '') + '" data-perk="' + D.esc(p.id) + '"' +
+            ' aria-pressed="' + (on ? 'true' : 'false') + '"><span class="lcell">' +
+            iconOf(p.iconKey, p.id, p.nameCn) + '<span class="rk mono">' +
+            (p.maxRank == null ? '?' : p.maxRank) + ' 层</span></span>' +
+            '<span class="nm">' + D.esc(p.nameCn) + '</span></button>';
+        }
+        function treeGrid(t) {
+          var out = '<div class="lgrid">';
+          for (var row = 0; row < t.rows; row++) {
+            for (var col = 0; col < t.cols; col++) {
+              var s = t.slots.filter(function (x) { return x.row === row && x.col === col; })[0];
+              out += perkCell(s || { empty: true });
+            }
+          }
+          return out + '</div>';
+        }
+        function treePanel() {
+          var t = (L.trees || []).filter(function (x) { return x.id === f.tree; })[0];
+          if (!t) return '<div class="empty">这棵树还没收录。</div>';
+          var n = t.slots.filter(function (x) { return !x.empty && !x.unknown; }).length;
+          var unk = t.slots.filter(function (x) { return x.unknown; }).length;
+          return '<h2>' + D.esc(t.nameCn) + '<span class="dim mono">' + n + ' 个专长' +
+            (unk ? ' · ' + unk + ' 格未公开' : '') + '</span></h2>' + treeGrid(t) +
+            '<p class="note">格子位置就是客户端树里的位置；点一个专长看它的上限与前置。' +
+            '每层效果本站不复制。</p>';
+        }
+        function perkDetail() {
+          var p = perkById[f.open];
+          if (!p) return '<div class="card leempty"><h2>点一个专长看细节</h2>' +
+            '<p class="dim">左边格子里点任意一个，这里显示它最多几层、在第几排第几列、点它之前要先点什么。</p>' +
+            '<p class="note">虚线格是客户端里有、但官方还没公布内容的槽位；空格子是这棵树还没填满的位置。</p></div>';
+          return '<div class="card ldetail"><h2>' + D.esc(p.nameCn) +
+            ' <span class="dim mono">最多 ' + (p.maxRank == null ? '未核实' : p.maxRank + ' 层') + '</span> ' +
+            D.pill(p.level) + '</h2>' +
+            '<div class="lmeta"><span>属于：<b>' + D.esc(p.treeCn) + '</b></span>' +
+            '<span>位置：第 ' + (p.row + 1) + ' 排第 ' + (p.col + 1) + ' 列</span>' +
+            '<span>前置：' + (p.prerequisiteCn ? '<b>' + D.esc(p.prerequisiteCn) + '</b>'
+              : '<span class="dim">没有前置</span>') + '</span>' +
+            '<span>解包日期：<span class="mono">' + D.esc(p.discoveredAt || '未记录') + '</span></span></div>' +
+            '<div class="banner gray">每层的具体效果本站不写：那是客户端说明文本由第三方站转述的，红线不复制；' +
+            '数值以游戏内为准。</div>' + D.sources(p.provenance) + '</div>';
+        }
+        function rowsOf(c) {
+          var kw = f.q.trim().toLowerCase();
+          if (!kw) return c.items;
+          return c.items.filter(function (x) {
+            return ((x.nameCn || '') + ' ' + (x.requirement || '') + ' ' + (x.sub || '') + ' ' +
+              (x.group || '')).toLowerCase().indexOf(kw) >= 0;
+          });
+        }
+        function challengeBlock(c) {
+          var rows = rowsOf(c);
+          if (!rows.length) return '';
+          return '<div class="card lchgrp"><h2>' + D.esc(c.nameCn) +
+            '<span class="dim mono">' + rows.length + (rows.length === c.items.length ? '' : ' / ' + c.items.length) +
+            ' 项 · 每项 ' + (rules.pointPerChallenge || '?') + ' 点</span></h2>' +
+            (c.subcategories.length ? '<div class="chips">' + c.subcategories.map(function (s) {
+              var n = c.items.filter(function (x) { return x.sub === s || x.group === s; }).length;
+              return n ? '<span class="chipc">' + D.esc(s) + '<b class="mono">' + n + '</b></span>' : '';
+            }).join('') + '</div>' : '') +
+            '<div class="scrollx"><table class="entab ltab"><thead><tr><th class="ich">图标</th><th>挑战</th>' +
+            '<th>完成条件</th><th>归属</th><th>点数</th></tr></thead><tbody>' +
+            rows.map(function (x) {
+              return '<tr><td class="ich">' + iconCell(x.iconKey, x.id, x.nameCn) + '</td>' +
+                '<td>' + D.hl(x.nameCn, f.q) + '<span class="dim mono">#' + D.esc(x.id) + '</span>' +
+                D.pill(x.level) + '</td>' +
+                '<td class="dim">' + D.hl(x.requirement || '未记录', f.q) + '</td>' +
+                '<td class="dim">' + D.esc(x.sub || x.group || c.nameCn) + '</td>' +
+                '<td class="mono">' + (x.points == null ? '—' : x.points) + '</td></tr>';
+            }).join('') + '</tbody></table></div></div>';
+        }
+        function challengeArea() {
+          var body = (L.challenges || []).map(challengeBlock).join('');
+          var shown = (L.challenges || []).reduce(function (a, c) { return a + rowsOf(c).length; }, 0);
+          return body + (!shown ? '<div class="card"><div class="empty">这个关键词下没有挑战，' +
+            '换个说法试试（比如"25 级""烹饪""军衔"）。</div></div>' : '');
+        }
+
+        set('<div class="card"><h1 class="pt">传承专长与传承挑战</h1>' +
+          '<p class="dim">完成传承挑战拿传承点数，用点数在三棵传承树里点永久专长（账号级，不随角色重置）。' +
+          '每完成 <b class="mono">' + (rules.pointPerChallenge || '?') + '</b> 项挑战得 1 点；客户端里的规则写着' +
+          '首发可花 <b class="mono">' + (rules.launchSpendingCap || '?') + '</b> 点、挑战合计 <b class="mono">' +
+          (rules.launchEarnableTotal || '?') + '</b> 项；' + D.esc(rules.unlock || '') + '</p>' +
+          '<div class="stats"><div class="stat"><b>' + cnt.perks + '</b>个专长有明细</div>' +
+          '<div class="stat"><b>' + cnt.unknownSlots + '</b>格还没公开</div>' +
+          '<div class="stat"><b>' + total + '</b>项挑战</div>' +
+          '<div class="stat"><b>' + cnt.rewards + '</b>档进度奖励</div></div>' +
+          '<div class="picks">' + (L.trees || []).map(function (t) {
+            return '<button type="button" class="pick' + (f.tree === t.id ? ' on' : '') + '" data-t="' +
+              D.esc(t.id) + '"><b>' + D.esc(t.nameCn) + '</b><span class="dim mono">' +
+              t.slots.filter(function (x) { return !x.empty; }).length + '</span></button>';
+          }).join('') + '</div>' +
+          '<p class="note">数据出自无限测试版客户端解包（第三方资料站转述）：专长名与槽位结构记为已核实，' +
+          '挑战的完成条件没进游戏一项项打过，一律标待实测。<b>每层效果说明本站不复制</b>。</p></div>' +
+          '<div class="ltreewrap"><div class="card ltreecard" id="ltree">' + treePanel() + '</div>' +
+          '<div id="ldet">' + perkDetail() + '</div></div>' +
+          '<div class="card"><h2>传承挑战 · ' + total + ' 项</h2>' +
+          '<p class="dim">按客户端里的分类列，每项 1 点。这里只回答"做什么算完成"，不讲"先做哪个划算"——那是攻略。</p>' +
+          '<div class="field"><input type="search" id="lq" placeholder="搜挑战名、完成条件或归属" value="' +
+          D.esc(f.q) + '"><span class="dim mono" id="lcnt"></span></div></div>' +
+          '<div id="lch">' + challengeArea() + '</div>' +
+          '<div class="card"><h2>攒到一定挑战数给的奖励 · ' + cnt.rewards + ' 档</h2>' +
+          '<div class="scrollx"><table class="entab ltab"><thead><tr><th class="ich">图标</th><th>奖励</th>' +
+          '<th>需要的挑战数</th><th>物品编号</th></tr></thead><tbody>' +
+          (L.rewards || []).map(function (x) {
+            return '<tr><td class="ich">' + iconCell(x.iconKey, x.itemId, x.nameCn) + '</td>' +
+              '<td>' + D.esc(x.nameCn) + D.pill(x.level) + '</td><td class="mono">' + x.at + '</td>' +
+              '<td class="dim mono">#' + D.esc(x.itemId) + '</td></tr>';
+          }).join('') + '</tbody></table></div>' +
+          '<p class="note">奖励名称与物品编号出自客户端解包；外观与坐骑在游戏里长什么样，本站不放图也不描述。</p></div>' +
+          '<div class="card" id="todo"><h2>这一页没有的</h2><ul class="list">' +
+          (M.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
+          '</ul><h3>来源与核对</h3>' + D.sources(M.provenance) + '</div>');
+
+        function repaint() {
+          el('ltree').innerHTML = treePanel();
+          el('ldet').innerHTML = perkDetail();
+          bindCells();
+        }
+        function bindCells() {
+          Array.prototype.forEach.call(document.querySelectorAll('[data-perk]'), function (b) {
+            b.onclick = function () { f.open = f.open === b.dataset.perk ? '' : b.dataset.perk; repaint(); };
+          });
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.picks [data-t]'), function (b) {
+          b.onclick = function () { f.tree = b.dataset.t; repaint(); };
+        });
+        bindCells();
+        var qi = el('lq'), lc = el('lcnt');
+        var shown = (L.challenges || []).reduce(function (a, c) { return a + rowsOf(c).length; }, 0);
+        lc.textContent = shown + ' / ' + total + ' 项';
+        qi.oninput = function () {
+          f.q = qi.value;
+          el('lch').innerHTML = challengeArea();
+          lc.textContent = (L.challenges || []).reduce(function (a, c) { return a + rowsOf(c).length; }, 0) +
+            ' / ' + total + ' 项';
+        };
+      }).catch(fail);
+  }
+
   /* ---------- 世界：区域 / 稀有精英 / 图书馆书籍 / 睡袋 ---------- */
   var WTABS = [['zones', '区域'], ['rares', '稀有精英'], ['books', '图书馆书籍'], ['bag', '睡袋与营地']];
   function world() {
@@ -2331,5 +2522,5 @@
   shell();
   tickCountdown();
   setInterval(tickCountdown, 1000);
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

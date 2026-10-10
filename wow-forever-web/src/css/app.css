@@ -607,6 +607,39 @@ button.stripc{font:inherit;font-size:13px;cursor:pointer;text-align:center}
   font:10px var(--font-mono);color:var(--txt-dim);background:rgba(14,16,19,.6);
   border:1px solid var(--line);border-radius:3px;padding:1px 5px}
 
+/* 传承页：三棵专长树 + 挑战清单 */
+/* 树卡与详情并排：格子只有 520px 宽，详情放下面会在右侧留一大片空，
+   并排之后"点左边、右边出结果"，空态也有地方摆 */
+.ltreewrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:var(--s4);align-items:start}
+.ltreewrap > .card{margin-bottom:0}
+.ltreecard h2{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3)}
+.lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);
+  max-width:520px;margin-top:var(--s3)}
+.lslot{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:6px 4px 5px;min-height:78px;color:var(--txt-dim);font:inherit;cursor:pointer;text-align:center}
+.lslot:hover{border-color:var(--gold);text-decoration:none}
+.lslot:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.lslot.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-deep)}
+.lslot.none{background:none;border-style:dashed;border-color:var(--line);opacity:.45;cursor:default}
+.lslot.unk{border-style:dashed;cursor:default;justify-content:center;gap:0}
+.lslot.unk b{font-size:22px;line-height:1;color:var(--lead);font-weight:500}
+.lslot.unk .dim{font-size:10.5px}
+.lslot .lcell{position:relative;width:40px;height:40px}
+.lslot .ico-wrap{position:relative;display:block;width:40px;height:40px}
+.lslot .ico-wrap svg{width:100%;height:100%}
+.lslot .ico{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.lslot .ico.bad{opacity:0}
+.lslot .rk{position:absolute;right:-3px;bottom:-4px;font-size:10px;color:var(--gold);
+  background:rgba(14,16,19,.82);border-radius:3px;padding:0 3px;font-variant-numeric:tabular-nums}
+.lslot .nm{font-size:11px;line-height:1.2;color:var(--txt);word-break:break-all}
+.ldetail .lmeta{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);font-size:12.5px;
+  color:var(--txt-dim);margin:var(--s2) 0 var(--s3)}
+.ldetail .lmeta b{color:var(--txt);font-weight:600}
+.ltab td .dim.mono{margin-left:6px;font-size:11.5px}
+.ltab .pill{margin-left:8px}
+.lchgrp .chipc b{margin-left:5px;font-variant-numeric:tabular-nums}
+
 /* 后写的组件规则会盖过上面那个媒体查询里的同名属性，所以新增块的移动端规则统一放在最后 */
 @media (max-width:600px){
   .zmap{aspect-ratio:560/340}
@@ -710,5 +743,9 @@ table.mtx th.rh .rface{width:26px;height:26px}
   .fembg img{object-position:center 20%}
   /* 窄屏放不下右上角的绝对定位标注，会和阵营标题重叠：改成跟在标题下面的一行小字 */
   .facband .artmark{position:static;display:block;margin:2px 0 0 var(--s3)}
+  .lgrid{max-width:none}
+  .lslot{min-height:78px}
+  /* 窄屏放不下并排：详情回到树卡下面，顺序仍是"树 → 详情 → 挑战" */
+  .ltreewrap{grid-template-columns:1fr;gap:var(--s4)}
 }
 
