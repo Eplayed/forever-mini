@@ -616,6 +616,22 @@ def test_races(browser, base):
                         ".find(x => x.textContent.replace(/新$/, '').trim() === '副本');"
                         "return a ? a.getAttribute('title') : ''; }")
     check("页面说明收进悬停提示，不占版面", bool(tip) and "38 座" in tip, tip)
+    # 玩法问答的候选板：九格常驻，答过题才有人掉出候选，卡头读数要跟压暗数对上
+    np = ctx.new_page()
+    np.goto(base + "/chooser.html", wait_until="networkidle")
+    np.wait_for_timeout(1200)
+    board0 = np.evaluate("() => document.querySelectorAll('.ctile').length")
+    for _ in range(3):
+        np.click(".qopts .qopt >> nth=0")
+        np.wait_for_timeout(260)
+    bd = np.evaluate("""() => ({ off: document.querySelectorAll('.ctile.off').length,
+      lead: document.querySelectorAll('.ctile.lead').length,
+      pool: +(((document.querySelector('.cboard .mline') || {}).innerText || '')
+        .match(/还在候选\\s*(\\d+)/) || [])[1] })""")
+    check("问答页候选板九格常驻，答完题有人掉出候选且读数一致",
+          board0 == 9 and bd["off"] > 0 and bd["lead"] >= 1 and bd["pool"] == 9 - bd["off"],
+          json.dumps(bd, ensure_ascii=False))
+    np.close()
     ctx.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780}, is_mobile=True, has_touch=True)
@@ -895,7 +911,19 @@ def test_professions(browser, base):
     page.wait_for_timeout(800)
     mt = page.evaluate("() => document.querySelectorAll('#pbody table').length")
     mr = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
-    check("采集型专业同时有采集点表与配方表", mt == 2 and mr > 20, "%d 张表 %d 行" % (mt, mr))
+    bands = page.evaluate("() => [...document.querySelectorAll('#pbody .rbandh')]"
+                          ".map(e => e.innerText.replace(/\\s+/g, ' ').trim())")
+    check("采集型专业既有采集点表，配方又按技能档位分了箱",
+          mt >= 2 and mr > 20 and len(bands) >= 2 and any("学徒" in b or "熟练" in b for b in bands),
+          "%d 张表 %d 行 / 分箱 %s" % (mt, mr, json.dumps(bands, ensure_ascii=False)))
+    # 分箱不许吞条目：各箱计数之和必须等于卡头报的配方总数
+    pchk = page.evaluate("""() => { const h = [...document.querySelectorAll('#pbody h2')]
+        .find(e => /配方/.test(e.innerText || ''));
+      const total = +(((h || {}).innerText || '').match(/(\\d+) 条/) || [])[1];
+      const bins = [...document.querySelectorAll('#pbody .rbandh b')].map(e => +e.innerText);
+      return { total, sum: bins.reduce((a, b) => a + b, 0), bins }; }""")
+    check("配方按档位分箱后一条都没丢", pchk["total"] and pchk["sum"] == pchk["total"],
+          json.dumps(pchk, ensure_ascii=False))
     page.click(".pick[data-p=camping]")
     page.wait_for_timeout(700)
     empty = page.evaluate("() => (document.querySelector('.empty') || {}).textContent || ''")

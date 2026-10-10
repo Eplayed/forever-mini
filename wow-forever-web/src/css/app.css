@@ -962,3 +962,50 @@ nav.main a.nl{position:relative}
 @media (prefers-reduced-motion:reduce){
   .ctile,.qopt{transition:none}
 }
+
+/* ---------- 专业与配方：按技能档位分箱 + 材料条（2026-10-10 逐页重做第二页） ---------- */
+.rband{font:500 11px/1.5 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;
+  color:var(--txt-dim);margin:var(--s3) 0 var(--s2)}
+.rbandh{display:flex;align-items:baseline;gap:var(--s2);margin:var(--s5) 0 var(--s2);
+  font-size:14px;font-weight:600;border-top:1px solid var(--line);padding-top:var(--s3)}
+.rbandh:first-of-type{margin-top:var(--s3)}
+.rbandh b{font-size:13px;color:var(--lv0)}
+.mats{position:relative}
+.mbar{display:block;height:3px;width:88px;background:var(--panel-2);border-radius:2px;
+  overflow:hidden;margin-bottom:5px}
+.mbar s{display:block;height:100%;background:var(--lv1);text-decoration:none}
+@media (max-width:600px){
+  .rbandh{margin-top:var(--s4)}
+  .mbar{width:64px}
+}
+
+/* ---------- 质感层（2026-10-10 全站） ----------
+   近黑底原来是一块纯平的黑，卡片像贴上去的纸片。这一层只做"材质"，不改信息：
+   底面给两层极淡的光 + 一层 1px 细网格，卡片给上缘内高光与更深的落影，
+   表头吸顶加双线，控件给 inset 阴影让它有"按下去"的手感。
+   全部用 background-image 与 box-shadow，不动 background-color 令牌，
+   所以对比度断言量到的底色不变；也不引任何字体/图标/远程素材。 */
+body{background-image:
+  radial-gradient(1100px 520px at 12% -6%, rgba(224,169,109,.055), transparent 62%),
+  radial-gradient(900px 480px at 96% 4%, rgba(120,150,190,.045), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 4px),
+  repeating-linear-gradient(90deg, rgba(255,255,255,.010) 0 1px, transparent 1px 4px)}
+.card{box-shadow:inset 0 1px 0 rgba(255,255,255,.045), 0 10px 26px -14px rgba(0,0,0,.72);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 34%)}
+.card h1.pt,.card h2{letter-spacing:.012em}
+table.entab thead th{position:sticky;top:0;z-index:2;background:var(--panel);
+  box-shadow:inset 0 -2px 0 var(--line), inset 0 -1px 0 rgba(255,255,255,.05)}
+table.entab tbody tr{transition:background var(--dur-1) linear, box-shadow var(--dur-1) linear}
+table.entab tbody tr:hover{background:rgba(255,255,255,.028);
+  box-shadow:inset 2px 0 0 var(--gold-deep)}
+input,select,button{box-shadow:inset 0 1px 0 rgba(255,255,255,.04), inset 0 -1px 0 rgba(0,0,0,.35)}
+button:active,input:active{box-shadow:inset 0 2px 5px rgba(0,0,0,.5)}
+button:focus-visible,input:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.mline{letter-spacing:.11em}
+.mono b,b.mono{letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){
+  table.entab tbody tr{transition:none}
+}
+@media (max-width:600px){
+  table.entab thead th{position:static}
+}

@@ -1916,24 +1916,62 @@
             }).join('') + '</tbody></table></div></div>';
         }
         if (recipes.length) {
-          body += '<div class="card"><h2>配方 · ' + recipes.length + ' 条</h2>' +
-            '<p class="note">技能四档是这条配方在什么点数变橙 / 黄 / 绿 / 灰；灰 = 技能超过它就不再涨点。' +
-            '材料后面的 ×N 是单次制作消耗量。</p>' +
-            '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">制成品</th><th>材料</th><th>技能</th><th>来源</th></tr></thead><tbody>' +
-            recipes.map(function (x) {
-              return '<tr><td>' + iconCell(x.iconKey, x.itemId, x.nameCn, 1) +
-                '<span class="q' + (x.quality || 0) + '">' + D.hl(x.nameCn, f.q) + '</span>' +
-                (x.isNew ? '<span class="tag">新</span>' : '') +
-                '<span class="dim mono"> #' + D.esc(x.itemId) + '</span></td>' +
-                '<td class="mats">' + ((x.mats || []).length
-                  ? x.mats.map(function (m) {
+          /* 这一页的任务是"我这点技能能做什么、下一步要什么"，所以配方不排成一张
+             一万像素高的平表：按技能橙点分成 1–75 / 76–150 / 151–225 / 226–300 四箱，
+             每箱报条数，材料画成条——"要 20 个草"和"只要 1 个矿"得一眼看出来不一样。 */
+          var bands = [[1, 75, '学徒 · 1–75'], [76, 150, '熟练 · 76–150'],
+            [151, 225, '专家 · 151–225'], [226, 300, '大师 · 226–300']];
+          var inBand = function (x, b) {
+            var o = (x.skill || {}).orange;
+            return typeof o === 'number' && o >= b[0] && o <= b[1];
+          };
+          var maxMat = Math.max.apply(null, recipes.map(function (x) {
+            return (x.mats || []).reduce(function (a, m) { return a + (m.count || 1); }, 0);
+          }).concat([1]));
+          var rowOf = function (x) {
+            var mats = x.mats || [];
+            var total = mats.reduce(function (a, m) { return a + (m.count || 1); }, 0);
+            return '<tr><td>' + iconCell(x.iconKey, x.itemId, x.nameCn, 1) +
+              '<span class="q' + (x.quality || 0) + '">' + D.hl(x.nameCn, f.q) + '</span>' +
+              (x.isNew ? '<span class="tag">新</span>' : '') +
+              '<span class="dim mono"> #' + D.esc(x.itemId) + '</span></td>' +
+              '<td class="mats">' + (mats.length
+                ? '<i class="mbar" aria-hidden="true"><s style="width:' +
+                  Math.max(6, Math.round(total / maxMat * 100)) + '%"></s></i>' +
+                  mats.map(function (m) {
                     return '<span class="mat">' + iconCell(m.iconKey, m.nameCn, m.nameCn, 1) +
                       D.esc(m.nameCn) + '<b class="mono">×' + m.count + '</b></span>';
                   }).join('')
-                  : '<span class="dim">无需材料</span>') + '</td>' +
-                '<td>' + skillCell(x.skill) + '</td>' +
-                '<td class="dim">' + D.esc(x.source || '—') + '</td></tr>';
-            }).join('') + '</tbody></table></div></div>';
+                : '<span class="dim">无需材料</span>') + '</td>' +
+              '<td>' + skillCell(x.skill) + '</td>' +
+              '<td class="dim">' + D.esc(x.source || '—') + '</td></tr>';
+          };
+          var table = function (list) {
+            return '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">制成品</th>' +
+              '<th>材料</th><th>技能</th><th>来源</th></tr></thead><tbody>' +
+              list.map(rowOf).join('') + '</tbody></table></div>';
+          };
+          var boded = 0;
+          body += '<div class="card"><h2>配方 · ' + recipes.length + ' 条</h2>' +
+            '<p class="note">技能四档是这条配方在什么点数变橙 / 黄 / 绿 / 灰；灰 = 技能超过它就不再涨点。' +
+            '材料后面的 ×N 是单次制作消耗量，材料名左边那条是它一共吃多少料，满格 = 这批里最吃料的那条，所以长短能直接比。</p>' +
+            '<div class="rband">按技能档位分箱，先看你够得着哪一箱</div>' +
+            bands.map(function (b) {
+              var list = recipes.filter(function (x) { return inBand(x, b); });
+              if (!list.length) return '';
+              boded += list.length;
+              return '<h3 class="rbandh">' + b[2] + ' <b class="mono">' + list.length + '</b></h3>' + table(list);
+            }).join('');
+          var rest = recipes.filter(function (x) {
+            return !bands.some(function (b) { return inBand(x, b); });
+          });
+          if (rest.length) {
+            body += '<h3 class="rbandh">技能档位没标出来 <b class="mono">' + rest.length + '</b></h3>' + table(rest);
+          }
+          body += '</div>';
+          if (boded !== recipes.length) { /* 分箱数与总数对不上就是逻辑漏了，不静默吞条目 */
+            console.warn('配方分箱漏条', boded, recipes.length);
+          }
         }
         if (!nodes.length && !recipes.length && !sel.unparsed) {
           body += '<div class="card"><div class="empty">这个专业没有匹配条目，试试放宽搜索或技能等级。</div></div>';
