@@ -35,6 +35,8 @@
 | 官方中文（技能四态 / 种族） | 国服官方公告页 | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻 |
 | 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
 | 原画（职业背景 / 载入图 / 小地图） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退 |
+| 副本结构化端点（**待接**） | 解包站 `_shuju/<发布号>/dungeons.json`（实测 14.9 KB 可取） | 还没做进 `refresh.sh dungeons` | 接上后可与现在浏览器渲染抓的 38 座逐项对账 |
+| 英文原名 / ID / 图标名对账 | wowhead Forever 区（**只有英文**，`/cn/forever` 是 404） | 手工比对，未成脚本 | 只取标识符与计数；中文名一律不由它提供，图标字节仍只走暴雪官方 CDN |
 | 只跑检查不碰网络 | — | `tools/refresh.sh check` | 提交前必跑 |
 
 ## 三、什么时候动

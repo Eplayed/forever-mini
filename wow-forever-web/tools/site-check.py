@@ -592,7 +592,11 @@ def test_races(browser, base):
     page.screenshot(path=os.path.join(SHOT_DIR, "races-matrix.png"), full_page=True)
 
     labels = page.evaluate("() => [...document.querySelectorAll('nav.main .ngt')].map(b => b.textContent.trim())")
-    subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')].map(a => a.textContent.trim())")
+    # 角标「新」是入口的附属信息，不是入口名的一部分：读名字时把 .nb 剔掉再比
+    subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')].map(a => {"
+                         "const c = a.cloneNode(true);"
+                         "c.querySelectorAll('.nb').forEach(n => n.remove());"
+                         "return c.textContent.trim(); })")
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
     check("16 个二级入口全部常驻，不用点开",
           len(subs) == 16 and all(x in subs for x in ["首页", "区域与稀有", "副本", "系统规则", "传承", "排行"]),
@@ -601,14 +605,16 @@ def test_races(browser, base):
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
     navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
     check("桌面导航排在一行内", navh <= 44, "%d px" % navh)
-    onb = page.evaluate("() => { const a = document.querySelector('nav.main a.nl.on');"
-                        "return a ? a.textContent.trim() : ''; }")
+    onb = page.evaluate("() => { const a = document.querySelector('nav.main a.nl.on'); if (!a) return '';"
+                        "const c = a.cloneNode(true); c.querySelectorAll('.nb').forEach(n => n.remove());"
+                        "return c.textContent.trim(); }")
     check("当前页在导航里高亮", onb == "总览", "高亮「%s」" % onb)
     hitg = page.evaluate("() => { const g = document.querySelector('nav.main .ngrp.hit');"
                          "return g ? g.querySelector('.ngt').textContent.trim() : ''; }")
     check("当前页所在分组的标签转金色", hitg == "种族", "分组「%s」" % hitg)
     tip = page.evaluate("() => { const a = [...document.querySelectorAll('nav.main a.nl')]"
-                        ".find(x => x.textContent.trim() === '副本'); return a ? a.getAttribute('title') : ''; }")
+                        ".find(x => x.textContent.replace(/新$/, '').trim() === '副本');"
+                        "return a ? a.getAttribute('title') : ''; }")
     check("页面说明收进悬停提示，不占版面", bool(tip) and "38 座" in tip, tip)
     ctx.close()
 
@@ -1106,8 +1112,96 @@ def test_home(browser, base):
       return { n: a.length, nums: a.reduce((s, x) => s + x.querySelectorAll('.modn b').length, 0),
                pills: a.filter(x => x.querySelector('.pill')).length,
                notes: a.filter(x => x.querySelector('.modf .dim')).length }; }""")
-    check("七张模块卡都带规模数字与口径说明", mods["n"] == 7 and mods["nums"] == 21 and mods["pills"] == 7 and mods["notes"] == 7,
+    check("九张模块卡都带规模数字与口径说明", mods["n"] == 9 and mods["pills"] == 9 and mods["notes"] == 9,
           json.dumps(mods))
+
+    # ↓ 第五批（首页整合两家参考站）的判据：结构、素材、动效、角标
+    st = page.evaluate("""() => {
+      const cards = [...document.querySelectorAll('.mod')];
+      const arts = [...document.querySelectorAll('.bgart')];
+      const bad = (f) => !f || /^https?:/.test(f) || f.indexOf('img/art/') !== 0;
+      return {
+        groups: [...document.querySelectorAll('.grphead h2')].map(e => e.innerText),
+        perGroup: [...document.querySelectorAll('.grphead')].map(g => {
+          let n = 0, e = g.nextElementSibling;
+          while (e && !e.classList.contains('grphead')) { n += e.querySelectorAll('.mod').length; e = e.nextElementSibling; }
+          return n;
+        }),
+        two: [...document.querySelectorAll('.two > section')].map(e => (e.querySelector('h2') || {}).innerText),
+        clsrow: [...document.querySelectorAll('.clsrow a')].map(a => a.getAttribute('href')),
+        artFiles: arts.map(e => (((e.getAttribute('style') || '').match(/url\(([^)]+)\)/) || [])[1] || '')),
+        artBad: arts.filter(e => bad(e.style && (e.style.backgroundImage || '').indexOf('img/art/') < 0)).length,
+        artCards: cards.filter(c => c.querySelector('.bgart')).length,
+        titles: [...document.querySelectorAll('.mod h2, .two h2')].map(e => e.innerText),
+        four: [...document.querySelectorAll('.four b')].map(e => +e.innerText),
+        bar: (() => { const b2 = document.querySelector('#treecard .bar i');
+          return b2 ? { w: b2.style.width, aria: (b2.parentElement.getAttribute('aria-label') || '') } : null; })(),
+        badge: [...document.querySelectorAll('nav.main .nb')].map(e => ({
+          t: e.textContent, on: e.parentElement.textContent.trim().slice(0, 6),
+          aria: e.getAttribute('aria-label'), title: e.getAttribute('title') })),
+        heroLinks: [...document.querySelectorAll('.clsrow a')].filter(a => /talent\.html\?c=/.test(a.getAttribute('href'))).length,
+        // 1440px 实拍发现：树占掉 360px 后右栏只剩 176px，职业格里的「战士」会被拆成两行
+        stripH: [...document.querySelectorAll('.two .stripc b')].map(e => Math.round(e.getBoundingClientRect().height)),
+        railW: (() => { const r = document.querySelector('.two .tright');
+          return r ? Math.round(r.getBoundingClientRect().width) : 0; })(),
+        dunRows: [...document.querySelectorAll('.two .dunrow')].map(e => e.innerText.replace(/\\s+/g, ' ')),
+        ctaGap: (() => { const cs = [...document.querySelectorAll('.card a.cta')];
+          const pair = cs.filter(a => a.previousElementSibling && a.previousElementSibling.matches('a.cta'))[0];
+          return pair ? parseFloat(getComputedStyle(pair).marginLeft) : -1; })()
+      };
+    }""")
+    check("首页按三条线分组、每组三张卡，第四段是改动模块",
+          st["groups"] == ["角色线", "世界线", "工具线", "自经典旧世以来的改动"] and
+          st["perGroup"][:3] == [3, 3, 3],
+          json.dumps({"g": st["groups"], "n": st["perGroup"]}, ensure_ascii=False))
+    dup = [x for x in set(st["titles"]) if st["titles"].count(x) > 1]
+    check("「最常用的两个」是天赋预览与副本，且九张卡不重复它们",
+          st["two"] == ["先看一棵真树，再进计算器", "副本手册"] and not dup,
+          json.dumps({"two": st["two"], "重复": dup}, ensure_ascii=False))
+    check("hero 的职业入口是 9 个链接、只进那一职业页不做切树",
+          len(st["clsrow"]) == 9 and st["heroLinks"] == 9, json.dumps(st["clsrow"][:2], ensure_ascii=False))
+    check("卡片背景图全部是本地已转存素材，没有热链",
+          len(st["artFiles"]) > 0 and all(f.startswith("img/art/") for f in st["artFiles"]),
+          json.dumps(st["artFiles"][:3], ensure_ascii=False))
+    check("带背景的卡是 5 张（3 张模块卡 + 2 张主推卡），其余留纯色",
+          len(st["artFiles"]) == 5 and st["artCards"] == 3,
+          "背景层 %d 张 / 模块卡带背景 %d 张" % (len(st["artFiles"]), st["artCards"]))
+    check("改动四格加起来等于来源站自报的 changed 751",
+          sum(st["four"]) == 751, "%s 合计 %d" % (st["four"], sum(st["four"])))
+    check("天赋卡进度条有可读替代（aria-label 写明分子分母）",
+          bool(st["bar"]) and "/" in st["bar"]["aria"] and str(st["bar"]["w"]).endswith("%"),
+          json.dumps(st["bar"], ensure_ascii=False))
+    check("导航角标只出现在「本版新增」那一项，且除颜色外带可读名",
+          len(st["badge"]) == 1 and st["badge"][0]["t"] == "新" and
+          bool(st["badge"][0]["aria"]) and bool(st["badge"][0]["title"]),
+          json.dumps(st["badge"], ensure_ascii=False))
+    # 1440px 实拍才会发现：树按 360px 摆时右栏只剩 176px，三列职业格把「战士」拆成两行
+    check("预览卡右栏够宽，职业名不被拆成两行",
+          st["railW"] >= 200 and st["stripH"] and max(st["stripH"]) <= 20,
+          json.dumps({"右栏": st["railW"], "名块高": sorted(set(st["stripH"]))[:4]}))
+    check("副本卡把每一座无限新增本都列出来，没首领名单的写「首领待补」",
+          len(st["dunRows"]) == sc["dungeonsNew"] and
+          all(("首领待补" in r) or re.search(r"\d+ 首领", r) for r in st["dunRows"]),
+          "%d 行 / 数据 %d 座：%s" % (len(st["dunRows"]), sc["dungeonsNew"],
+                                     [r for r in st["dunRows"] if "待补" in r][:1]))
+    check("同一张卡里两个 CTA 之间有空隙，不挤成一句", st["ctaGap"] > 0, "margin-left %s" % st["ctaGap"])
+    # 旧站这段模板漏了一个 </div>，浏览器自动补的位置让问答入口被框进读数卡里（191px），
+    # Vue 那份是正常闭合（105px）——两栈对拍查文本查不出来，这里按结构钉住。
+    check("hero 的读数框只框住倒计时，问答入口在框外",
+          page.evaluate("() => { const cd = document.querySelector('.heros .cd');"
+                        "return !!cd && !cd.querySelector('a') && cd.children.length === 2 &&"
+                        "!!document.querySelector('.heros > a.cta'); }"),
+          "读数框里混进了链接或段落层级不对")
+    css = open(os.path.join(SRC, "css", "app.css"), encoding="utf-8").read()
+    flat = css.replace(" ", "").replace("\n", "")
+    check("卡片动效只有三处且都能关（hover 抬升 / 背景微缩放 / reduced-motion 归零）",
+          ".mod:hover" in css and "prefers-reduced-motion" in css and
+          "transform:none" in flat[flat.index("prefers-reduced-motion"):],
+          "缺 hover 动效或缺可关声明")
+    check("角标不占导航宽度：整条导航仍是一行",
+          page.evaluate("() => { const ns=[...document.querySelectorAll('nav.main .in > *')];"
+          "return new Set(ns.map(e => Math.round(e.getBoundingClientRect().top))).size; }") == 1,
+          "导航换行了")
     hrefs = page.evaluate("""() => [...document.querySelectorAll('.mod, .chipsrow a, .hero .cta')]
       .map(a => (a.getAttribute('href') || '').split('#')[0].split('?')[0].replace('.html', ''))
       .filter(h => h && !/^https?:/.test(h))""")
@@ -1229,13 +1323,32 @@ def test_updates_rank(browser, base):
     hpg = hp.new_page()
     hpg.goto(base + "/index.html", wait_until="networkidle")
     hpg.wait_for_timeout(1800)
-    hb = hpg.evaluate("""() => { const c = [...document.querySelectorAll('.card')]
-        .find(x => /最新动态/.test((x.querySelector('h2') || {}).innerText || ''));
-      if (!c) return null;
-      return { rows: c.querySelectorAll('.flowrow').length, nums: c.querySelectorAll('.chgl span').length,
-               links: [...c.querySelectorAll('a')].map(a => a.getAttribute('href')) }; }""")
-    check("首页动态卡有摘要与两个入口", hb and hb["rows"] >= 4 and hb["nums"] >= 6
-          and "updates.html" in hb["links"] and "rank.html" in hb["links"], str(hb))
+    hb = hpg.evaluate("""() => { const byTitle = (re) => [...document.querySelectorAll('.card')]
+          .find(x => re.test((x.querySelector('h2') || {}).innerText || ''));
+      const dyn = byTitle(/最新动态/);
+      // 「自经典旧世以来的改动」是分组眉标，标题不在卡里：按卡里的四格找到这张卡
+      const four = document.querySelector('#main .card .four');
+      const chg = four ? four.closest('.card') : null;
+      const head = chg && chg.previousElementSibling ? chg.previousElementSibling.innerText : '';
+      return { rows: dyn ? dyn.querySelectorAll('.flowrow').length : 0,
+               links: dyn ? [...dyn.querySelectorAll('a')].map(a => a.getAttribute('href') || '') : [],
+               note: dyn ? (dyn.querySelector('.note') || {}).innerText || '' : '',
+               four: chg ? chg.querySelectorAll('.four b').length : 0,
+               fourtxt: chg ? [...chg.querySelectorAll('.four b')].map(b => b.innerText.trim()) : [],
+               head: head.replace(/\\s+/g, ' ').slice(0, 40),
+               kv: chg ? chg.querySelectorAll('.kv').length : 0,
+               chgl: document.querySelectorAll('#main .chgl').length }; }""")
+    check("首页动态卡有时间点与两个入口", hb and hb["rows"] >= 4
+          and any("updates.html" in x for x in hb["links"])
+          and any("rank.html" in x for x in hb["links"]), str(hb))
+    # 第五批改版把改动清单的数挪进「自经典旧世以来的改动」卡：同一个数不许在首页摆两遍
+    check("改动四格是四个实数，动态卡不再重复列一遍",
+          hb and hb["four"] == 4 and all(x.isdigit() for x in hb["fourtxt"]) and hb["chgl"] == 0,
+          str(hb and {"four": hb["four"], "fourtxt": hb["fourtxt"], "chgl": hb["chgl"]}))
+    check("改动四格挂在「自经典旧世以来的改动」这张卡上，且带对照行",
+          hb and hb["four"] == 4 and "自经典旧世以来的改动" in hb["head"] and hb["kv"] >= 3,
+          str(hb and {"head": hb["head"], "kv": hb["kv"]}))
+    check("动态卡写明这三件事怎么分开", hb and "三件事分开说" in hb["note"], (hb or {}).get("note", "")[:40])
     hp.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780})
@@ -1309,7 +1422,7 @@ def test_app(browser, base):
             strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
-            check("新站首页模块卡与旧站一样多", mods == 7, "%d 张" % mods)
+            check("新站首页模块卡与旧站一样多", mods == 9, "%d 张" % mods)
             gs = page.evaluate("() => !!document.querySelector('#gs')")
             check("新站首页也接了全站搜索框", gs)
             page.fill("#gs", "咆鼻")

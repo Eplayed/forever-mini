@@ -19,6 +19,8 @@
   "changesTalents": 544,
   "changesSpells": 420,
   "changesNew": 112,
+  "changesModified": 306,
+  "changesSpellsChanged": 256,
   "changesRemoved": 77,
   "classRank": [
    {
@@ -106,6 +108,11 @@
   "search": 4292,
   "talentPreview": 473,
   "releases": 17,
+  "navNew": [
+   "全站",
+   "传承",
+   "搜索"
+  ],
   "glossary": 215,
   "classes": 9,
   "talentNodes": 473,

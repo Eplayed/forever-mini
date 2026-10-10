@@ -81,3 +81,14 @@ export function lvStart(rec) {
   const a = (rec && rec.levelRange) || [];
   return (a[0] === null || a[0] === undefined) ? 99 : a[0];
 }
+/* 时间点分档：与旧站 src/js/app.js 的 tlCounts 同一算法；now 由调用方给，方便单测。 */
+export function tlCounts(items, now) {
+  const n = now === undefined ? Date.now() : now;
+  let done = 0, upcoming = 0;
+  (items || []).forEach((x) => {
+    const t = /^\d{4}-\d{2}-\d{2}$/.test(x.date || '') ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
+    if (t === null) return;
+    if (t <= n) done += 1; else upcoming += 1;
+  });
+  return { done: done, upcoming: upcoming };
+}

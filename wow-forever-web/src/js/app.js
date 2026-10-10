@@ -190,6 +190,18 @@
     Promise.all([D.load('data/meta.json'), D.load('data/scale.json')])
       .then(function (r) {
         var meta = r[0], sc = r[1].scale, cov = sc.pubCoverage;
+        // 角标由 releases.json 派生（本版新增 / 近期更新），只在标签正好等于某个导航项名字时出现
+        (el('top').querySelectorAll('nav.main a.nl') || []).forEach(function (a) {
+          var t = a.textContent.trim();
+          if ((sc.navNew || []).indexOf(t) < 0) return;   // 标签对不上导航项名字就不画，不硬凑
+          var i = document.createElement('i');
+          i.className = 'nb new';
+          // 一个字：整条导航宽 1180px，写「本版新增」会把这一项挤到第二行（实测 39→79px）
+          i.textContent = '新';
+          i.setAttribute('title', '这一版新开了这一页');
+          i.setAttribute('aria-label', '这一版新开了这一页');
+          a.appendChild(i);
+        });
         el('foot').innerHTML = '<div class="in"><span>' + D.esc(meta.disclaimer) + '</span>' +
           '<span>数据来源版本：<span class="mono">' + D.esc(meta.dataBaseline.build) + '</span>，核对于 ' +
           D.esc(meta.dataBaseline.checkedAt) + '</span>' +
@@ -439,6 +451,18 @@
     if (ra !== rb) return ra ? -1 : 1;
     return 0;
   }
+  /* 时间点分"已过 / 待来 / 日期未定"：按 +08:00 的当日零点比，和上线日期同一个时区口径。
+     首页那张卡的两个数与时间表页必须同一算法，否则同一站两处数互相打脸。 */
+  function tlCounts(items) {
+    var now = Date.now(), done = 0, up = 0;
+    (items || []).forEach(function (x) {
+      var t = /^\d{4}-\d{2}-\d{2}$/.test(x.date || '')
+        ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
+      if (t === null) return;
+      if (t <= now) done += 1; else up += 1;
+    });
+    return { done: done, upcoming: up };
+  }
   var NOT_DOING = [
     ['DPS 与强度排行', '个人主体 + 零 UGC 的类目下不做排行；而且无限服的战斗数据我们没实测过。'],
     ['宏与循环提示', '属攻略性质，本站红线不写打法。'],
@@ -459,6 +483,19 @@
       // 默认看 classes.json 里的第一个职业：两栈必须同一个起点，否则对拍会差在选中态
       if (classes.length) PV.c = classes[0].id;
       var rankTop = (S.classRank || []).slice(0, 3);
+      var rankAll = (S.classRank || []).slice().sort(function (a, b) { return a.share - b.share; });
+      var rankLast = rankAll[0] || { classId: '', share: 0 };
+      var ART = r[8] || {};
+      var cnOf = function (id) {
+        return (classes.filter(function (c) { return c.id === id; })[0] || {}).cn || id;
+      };
+      // 副本卡的背景取第一座"无限新增"本的载入图；素材没转存到位就不加背景层
+      var DUN = { art: '' };
+      (r[2].newDungeons || []).some(function (x) {
+        var f = (ART.dungeons || {})[x.slug || x.id];
+        if (f) { DUN.art = f; return true; }
+        return false;
+      });
       // 首页的覆盖率用 build-data 算出来的全站口径（含天赋节点与世界线），
       // 页脚那条"不含天赋节点"是另一个口径，两边都写明各自范围，别让数字看着互相打脸。
       var cov = { L0: S.coverage.L0, L1: S.coverage.L1, L2: S.coverage.L2, L3: S.coverage.L3, total: S.coverageTotal };
@@ -466,44 +503,64 @@
       var recent = tl.slice().sort(byDate).slice(0, 3);
 
       function mod(m) {
-        return '<a class="mod" href="' + m.href + '"><h2>' + m.t + '</h2>' +
+        // 背景图只在有本地原画时加：没有对应素材的卡留纯色，不拿别的板块的图凑数
+        return '<a class="mod' + (m.art ? ' hasart' : '') + '" href="' + m.href + '">' +
+          (m.art ? '<span class="bgart" aria-hidden="true" style="background-image:url(' + m.art + ')"></span>' : '') +
+          '<div class="mline">' + D.esc(m.kicker) + '</div>' +
+          '<h2>' + m.t + '</h2>' +
           '<p class="dim">' + m.p + '</p>' +
           '<div class="modn">' + m.n.map(function (x) {
             return '<span><b class="mono">' + x[0] + '</b>' + x[1] + '</span>';
           }).join('') + '</div>' +
           '<div class="modf">' + D.pill(m.lv) + '<span class="dim">' + m.note + '</span></div></a>';
       }
+      // 「最常用的两个」是天赋预览与副本，单独放在前面（下面按三条线分组的卡不再重复它们）
       var MODS = [
-        { href: 'talent.html', t: '全职业天赋模拟器', lv: 'L2',
-          p: '九棵树都是 7 行 × 4 列的客户端真实结构，层级门槛 5 / 10 / 15 / 20 / 25 / 30，能加点、能存链接、能和经典旧世逐格对照。',
-          n: [[S.classes, '职业'], [S.talentNodes, '天赋节点'], [S.talentVerified, '名与官网一致']],
-          note: '结构与译名来自客户端解包，未经游戏内核实' },
-        { href: 'world.html', t: '区域与稀有精英', lv: 'L0',
-          p: '每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。',
-          n: [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']],
-          note: '刷新计时游戏里没有这个数据，不猜' },
-        { href: 'dungeons.html', t: '副本手册', lv: 'L2',
-          p: '按十级一档排的 38 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。',
-          n: [[S.dungeons, '座'], [S.bosses, '个首领'], [S.drops, '条掉落归属']],
-          note: '掉落不写百分比' },
-        { href: 'professions.html', t: '专业与配方', lv: 'L0',
-          p: '13 个专业的配方、材料数量、技能橙黄绿灰四档与采集点，能按"我的技能等级"筛。',
-          n: [[S.professions, '个专业'], [S.recipes, '条配方'], [S.gatherNodes, '个采集点']],
-          note: '冲级路线与性价比建议属攻略，不做' },
-        { href: 'races.html', t: '种族与职业组合', lv: 'L0',
+        { line: '角色线', items: [
+        { href: 'races.html', t: '种族与职业组合', lv: 'L0', kicker: '角色 · 种族 ' + S.races + ' 行',
+          art: (ART.races || {})['skyborne'] || (ART.races || {})['alliance'] || '',
           p: '国服官方中文公告里的 10 个种族行与可选职业矩阵，40 条种族特长带官方整句。',
           n: [[S.races, '个种族行'], [S.traits, '条特长整句'], [S.classes, '职业可选']],
           note: '整句直接抄官方，不改写' },
-        { href: 'legacy.html', t: '传承专长与挑战', lv: 'L0',
-          p: '三棵传承树 27 个槽位（6 个还没公开）、65 项挑战各给 1 点、首发上限 16 点，' +
-            '每个专长写清上限与前置。',
-          n: [[S.legacy ? S.legacy.perks : 0, '个专长有明细'], [S.legacy ? S.legacy.challenges : 0, '项挑战'],
-            [S.legacy ? S.legacy.unknown : 0, '格未公开']],
+        { href: 'legacy.html', t: '传承专长与挑战', lv: 'L0', kicker: '角色 · 传承 · 本版新增',
+          p: '三棵传承树 27 个槽位（6 个还没公开）、65 项挑战各给 1 点、首发上限 16 点，每个专长写清上限与前置。',
+          n: [[S.legacy.perks, '个专长有明细'], [S.legacy.challenges, '项挑战'], [S.legacy.unknown, '格未公开']],
           note: '每层效果说明本站不复制' },
-        { href: 'glossary.html', t: '中英术语速查', lv: 'L0',
+        { href: 'skills.html', t: '技能书', lv: 'L0', kicker: '角色 · 技能 · ' + S.abilities + ' 条官方整句',
+          p: '按职业与种族分组的技能页；与经典旧世的差异用新增/改动/删除/未变四态标出。',
+          n: [[S.glossary, '条技能书'], [S.abilities, '条官方整句']],
+          note: '英文原名待补，不机翻' }
+        ] },
+        { line: '世界线', items: [
+        { href: 'world.html', t: '区域与稀有精英', lv: 'L0', kicker: '世界 · 区域 ' + S.zones + ' 个',
+          art: (ART.maps || {})['1411'] || '',
+          p: '每个区域多少级、什么阵营、哪只稀有在哪个坐标、掉了什么；书在哪个容器也标了。',
+          n: [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']],
+          note: '刷新计时游戏里没有这个数据，不猜' },
+        { href: 'professions.html', t: '专业与配方', lv: 'L0', kicker: '专业 · ' + S.professions + ' 个',
+          p: '13 个专业的配方、材料数量、技能橙黄绿灰四档与采集点，能按"我的技能等级"筛。',
+          n: [[S.professions, '个专业'], [S.recipes, '条配方'], [S.gatherNodes, '个采集点']],
+          note: '冲级路线与性价比建议属攻略，不做' },
+        { href: 'glossary.html', t: '中英术语速查', lv: 'L0', kicker: '世界 · 词条 ' + S.glossary + ' 条',
           p: '技能与天赋的中英对照，按职业与种族分组，点一下即复制；38 条带与经典旧世的四态差异。',
           n: [[S.glossary, '条词条'], [S.abilities, '条四态对照'], [S.classes, '组职业']],
           note: '只有官方英文的算 L1，不冒充已核' }
+        ] },
+        { line: '工具线', items: [
+        { href: 'chooser.html', t: '不知道选哪个职业', lv: 'L0', kicker: '工具 · 问答 7 题',
+          p: '回答 7 个玩法取向问题，给出候选与理由。每题的权重都写在页上。',
+          n: [[7, '题'], [S.classes, '职业候选'], [S.talentNodes, '节点参与算分']],
+          note: '本站整理的取向，不是强度排行' },
+        { href: 'timeline.html', t: '上线与 Beta 时间表', lv: 'L1', kicker: '工具 · 时间点 ' + S.timeline + ' 个',
+          art: (ART.factionCities || {})['alliance'] || '',
+          p: '官方给过的时间点、已过与待来，以及上线日期为什么有两个说法。',
+          n: [[S.timeline, '个时间点'], [tlCounts(tl).done, '个已过'], [tlCounts(tl).upcoming, '个待来']],
+          note: '两说两个都留，不挑一个当准' },
+        { href: 'systems.html', t: '系统与新区域', lv: 'L1', kicker: '工具 · 规则条目',
+          p: '规则、区域、种族与装备名的官方中文说法，逐条带来源。',
+          n: [[S.newZones, '个新区域'], [S.pubTotal, '条对外词条']],
+          note: '没有中文整句的标出来，不猜' }
+        ] }
       ];
 
       set('<section class="card hero"><div class="herot">' +
@@ -520,6 +577,13 @@
               x[0] + '</button>';
           }).join('') + '<span class="dim">只搜名称与归属，不搜攻略说法，也不搜别人站的正文。</span></p>' +
         '<div class="gres" id="gres" hidden></div></div>' +
+        '<div class="pickcls"><div class="mline">选择你的职业 · <b>' + S.classes +
+          '</b> 个职业各有一页改动、天赋与技能</div><div class="clsrow">' +
+          classes.map(function (c) {
+            var ic = (ART.classes || {})[c.id];
+            return '<a href="talent.html?c=' + encodeURIComponent(c.id) + '"><i' +
+              (ic ? ' style="background-image:url(' + ic + ')"' : '') + '></i>' + D.esc(c.cn) + '</a>';
+          }).join('') + '</div></div>' +
         D.covBar(cov) +
         '<div class="covnum">' +
         ['L0', 'L1', 'L2', 'L3'].map(function (k) {
@@ -531,19 +595,65 @@
         '<aside class="heros"><div class="cd"><div class="cdrow"><b class="mono" id="cdD">' + left.d +
         '</b><span>天</span><i class="mono" id="cdT">' + pad2(left.h) + ':' + pad2(left.m) + ':' +
         pad2(left.s) + '</i></div>' +
-        '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p>' +
+        '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p></div>' +
         '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
         '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
-        '<section class="card" id="treecard"><h2>挑一个职业，先看一棵真树</h2>' +
+        '<div class="sect"><h2>最常用的两个</h2></div><div class="two">' +
+        '<section class="card hasart" id="treecard"><span class="bgart" aria-hidden="true" style="' +
+          ((ART.classes || {})[PV.c] ? 'background-image:url(' + ART.classes[PV.c] + ')' : '') +
+          '"></span><div class="mline">工具 · 天赋 · <b>' + S.classes + '</b> 职业 <b>' + S.talentNodes +
+          '</b> 节点</div><h2>先看一棵真树，再进计算器</h2>' +
         '<p class="dim">格子就是客户端里的天赋本身，位置、每层上限、与经典旧世的差异都按真结构摆；' +
-        '这里只能看，点格子进计算器并高亮那一格。</p>' + treeCard() + '</section>' +
+        '这里只能看，点格子进计算器并高亮那一格。</p>' + treeCard() +
+        '<div class="mline" style="margin-top:var(--s4)">名称与官网中文一致 <b>' + S.talentVerified +
+          ' / ' + S.talentNodes + '</b></div>' +
+        '<div class="bar" role="img" aria-label="天赋名称与官网中文一致 ' + S.talentVerified + ' / ' +
+          S.talentNodes + ' 个节点"><i style="width:' +
+          (S.talentVerified / Math.max(S.talentNodes, 1) * 100).toFixed(1) + '%"></i></div></section>' +
+        '<section class="card hasart"><span class="bgart" aria-hidden="true" style="' +
+          (DUN.art ? 'background-image:url(' + DUN.art + ')' : '') + '"></span>' +
+        '<div class="mline">世界 · 副本 · <b>' + S.dungeons + '</b> 座 <b>' + S.bosses +
+          '</b> 首领 <b>' + S.drops + '</b> 条掉落归属</div><h2>副本手册</h2>' +
+        '<p class="dim">按十级一档排的 ' + S.dungeons + ' 座本：首领名单、谁掉什么、等级区间两说的地方两个都留着。</p>' +
+        '<div class="kv"><span>无限新增</span><b>' + S.dungeonsNew + ' 座</b></div>' +
+        '<div class="kv"><span>首领名单</span>' + D.pill('L2') + '</div>' +
+        '<div class="kv"><span>掉落写百分比吗</span><b>不写</b></div>' +
+        '<div class="mline" style="margin-top:var(--s3)">无限新增的 ' + (r[2].newDungeons || []).length +
+          ' 座</div>' +
+        (r[2].newDungeons || []).map(function (x) {
+          var nb = (x.bosses || []).length;
+          return '<div class="dunrow"><i' + (x.art ? ' style="background-image:url(' + x.art + ')"' : '') +
+            ' aria-hidden="true"></i><b>' + D.esc(x.nameCn) + '</b>' +
+            '<span class="dim mono">' + D.esc(typeof x.levelRange === 'string' ? x.levelRange + ' 级'
+              : ((x.levelRange || [])[0] ? x.levelRange.join('–') + ' 级' : '等级待补')) + '</span>' +
+            '<span class="dim mono">' + (nb ? nb + ' 首领' : '首领待补') + '</span></div>';
+        }).join('') +
+        '<a class="cta" href="dungeons.html">按十级一档看全部 ' + S.dungeons + ' 座 →</a></section></div>' +
         '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
         [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
           ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统规则'], ['skills.html', '技能书'],
           ['dungeons.html#todo', '还没有数据的']].map(function (x) {
             return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
           }).join('') + '</div>' +
-        '<div class="modgrid">' + MODS.map(mod).join('') + '</div>' +
+        MODS.map(function (g) {
+          return '<div class="grphead"><h2>' + g.line + '</h2><span>' + g.items.length +
+            ' 个板块</span></div><div class="modgrid">' + g.items.map(mod).join('') + '</div>';
+        }).join('') +
+        '<div class="grphead"><h2>自经典旧世以来的改动</h2><span>客户端解包 · 964 条</span></div>' +
+        '<section class="card"><div class="mline">改动清单 · <b>' + S.changes + '</b> 条 · ' +
+          '与来源站自报计数逐项一致</div>' +
+        '<div class="four"><div><b>' + S.changesNew + '</b><s>新增天赋</s></div>' +
+        '<div><b>' + S.changesModified + '</b><s>改动天赋</s></div>' +
+        '<div><b>' + S.changesRemoved + '</b><s>移除</s></div>' +
+        '<div><b>' + S.changesSpellsChanged + '</b><s>法术有变</s></div></div>' +
+        '<div class="kv"><span>只放名称与改动类别，前后对照的句子是别人转述的，本站不复制</span>' +
+          '<a class="mono" href="updates.html">→ updates.html</a></div>' +
+        '<div class="kv"><span>资料最全的职业</span><b>' + cnOf(rankTop[0].classId) + ' ' +
+          rankTop[0].share + '% 有官方中文</b></div>' +
+        '<div class="kv"><span>资料最少的职业</span><b>' + cnOf(rankLast.classId) + ' ' +
+          rankLast.share + '%</b></div>' +
+        '<div class="kv"><span>这个排行是什么</span><span class="dim">本站整理的资料完整度，不是强度排行' +
+          ' · <a href="rank.html">全表 →</a></span></div></section>' +
         '<div class="grid g2">' +
         '<div class="card"><h2>最新动态</h2>' +
         '<p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。' +
@@ -554,17 +664,8 @@
             '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
             '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
         }).join('') +
-        '<h3>客户端改动清单</h3>' +
-        '<div class="chgl">' +
-        '<span><b class="mono">' + S.changes + '</b>条已入库</span>' +
-        '<span><b class="mono">' + S.changesNew + '</b>个新增天赋</span>' +
-        '<span><b class="mono">' + S.changesRemoved + '</b>个移除天赋</span>' +
-        '<span><b class="mono">' + (S.changes - S.changesNew - S.changesRemoved) + '</b>条是改动或移位</span>' +
-        '</div><p class="note">清单只列名称与改动类别，前后对照的句子本站不复制。</p>' +
-        '<h3>资料完整度前三</h3><div class="chgl">' + rankTop.map(function (x, i) {
-          var nm = (classes.filter(function (c) { return c.id === x.classId; })[0] || {}).cn || x.classId;
-          return '<span><b class="mono">' + x.place + '</b>' + D.esc(nm) + ' · ' + x.official + ' 条有官方中文</span>';
-        }).join('') + '</div>' +
+        '<h3>客户端改动与资料完整度</h3><p class="note">这两块的数在上面的「自经典旧世以来的改动」里，' +
+        '动态页只按职业与时间列清单，同一个数不在首页摆两遍。</p>' +
         (cl.length ? '<h3>本站最近改了什么</h3>' + cl.slice(0, 3).map(function (e) {
           return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b>' +
             '<div><b>' + D.esc(e.title) + '</b></div></div>';

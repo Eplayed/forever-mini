@@ -1,6 +1,8 @@
 <template>
-  <section class="card" id="treecard">
-    <h2>挑一个职业，先看一棵真树</h2>
+  <section class="card hasart" id="treecard">
+    <span class="bgart" aria-hidden="true" :style="bgStyle"></span>
+    <div class="mline">工具 · 天赋 · <b>{{ S.classes || 0 }}</b> 职业 <b>{{ S.talentNodes || 0 }}</b> 节点</div>
+    <h2>先看一棵真树，再进计算器</h2>
     <p class="dim">格子就是客户端里的天赋本身，位置、每层上限、与经典旧世的差异都按真结构摆；这里只能看，点格子进计算器并高亮那一格。</p>
     <div class="pvpicks">
       <button v-for="(tr, i) in trees" :key="tr.n" type="button" class="pick" :class="{ on: i === ti }"
@@ -49,6 +51,11 @@
         </component>
       </aside>
     </div>
+    <div class="mline" style="margin-top:var(--s4)">名称与官网中文一致
+      <b>{{ S.talentVerified || 0 }} / {{ S.talentNodes || 0 }}</b></div>
+    <div class="bar" role="img" :aria-label="'天赋名称与官网中文一致 ' + (S.talentVerified || 0) + ' / ' + (S.talentNodes || 0) + ' 个节点'">
+      <i :style="{ width: share + '%' }"></i>
+    </div>
   </section>
 </template>
 
@@ -61,12 +68,15 @@ import ClassTile from './ClassTile.vue';
 
 const props = defineProps({
   preview: { type: Object, default: () => ({ classes: {} }) },
-  classes: { type: Array, default: () => [] }
+  classes: { type: Array, default: () => [] },
+  scale: { type: Object, default: () => ({}) },
+  art: { type: Object, default: () => ({}) }
 });
 
 const cid = ref(props.classes.length ? props.classes[0].id : 'hunter');
 const ti = ref(0);
 const gone = ref({});
+const S = computed(() => props.scale || {});
 
 const trees = computed(() => (((props.preview.classes || {})[cid.value] || {}).trees) || []);
 const cells = computed(() => gridCells(treeOf(props.preview, cid.value, ti.value)));
@@ -74,6 +84,15 @@ const states = computed(() => countStates(treeOf(props.preview, cid.value, ti.va
 const cnOf = computed(() => {
   const c = props.classes.filter((x) => x.id === cid.value)[0];
   return c ? c.cn : cid.value;
+});
+// 卡片背景随选中的职业换：素材只用已转存的本地原画，没有就不加背景层
+const bgStyle = computed(() => {
+  const f = (props.art.classes || {})[cid.value];
+  return f ? { backgroundImage: 'url(' + f + ')' } : {};
+});
+const share = computed(() => {
+  const t = S.value.talentNodes || 0;
+  return t ? ((S.value.talentVerified || 0) / t * 100).toFixed(1) : '0';
 });
 
 function pick(id) { cid.value = id; ti.value = 0; }

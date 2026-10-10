@@ -601,6 +601,8 @@ if (fs.existsSync(chPath)) {
   scale.changesTalents = cnt((x) => x.kind === 'talent');
   scale.changesSpells = mine.spells;
   scale.changesNew = mine.newTalents;
+  scale.changesModified = mine.changedTalents;   // 改动 + 移位，与来源站自报的 306 同口径
+  scale.changesSpellsChanged = mine.spellsChanged;   // 法术里真有过变化的那 256 条（420 是全部法术条目）
   scale.changesRemoved = mine.removedTalents;
   console.log('改动清单 ' + chItems.length + ' 条（新增天赋 ' + mine.newTalents + ' / 改动天赋 ' +
     mine.changedTalents + ' / 移除 ' + mine.removedTalents + ' / 法术有变 ' + mine.spellsChanged +
@@ -1036,6 +1038,17 @@ if (fs.existsSync(relPath)) {
     else if (known && !known.has(x.commit)) errs.push(`releases #${i}：提交 ${x.commit} 在仓库里找不到`);
   });
   scale.releases = items.length;
+  /* 导航角标不手写：拿「本站更新」里最新一天的标签当"本版新增"，往前再数三天当"近期更新"。
+     口径相对最新一条算，不掺"今天"，所以同一份数据重跑出来的 scale.json 是一样的。 */
+  const relDays = [...new Set(items.map((x) => x.date))].sort().reverse();
+  const newest = relDays[0];
+  const recent3 = relDays.slice(1, 4);
+  scale.navNew = [...new Set(items.filter((x) => x.date === newest).flatMap((x) => x.tags || []))];
+  // 只做「本版新增」一种角标：试算过，"近期更新"会同时命中 16 个导航项里的 8 个，
+  // 满排都是标记就等于没有标记。要加回来得先想清楚上限怎么定。
+  if (recent3.length > 3) warns.push('releases：近三天有更新的板块标签 ' +
+    [...new Set(items.filter((x) => recent3.includes(x.date)).flatMap((x) => x.tags || []))].length +
+    ' 个，暂未做成角标');
   console.log('本站更新 ' + items.length + ' 条（每条带提交号，可回查）');
 } else {
   warns.push('releases.json 缺失：动态页的「本站更新」会是空的');

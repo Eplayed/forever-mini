@@ -829,3 +829,93 @@ button:hover{transform:translateY(-1px)}
   .rail::before{top:var(--s2);bottom:var(--s2)}
   .mline{gap:2px var(--s2);letter-spacing:.06em}
 }
+
+/* ============================================================
+   首页模块卡（2026-10-10 第五批：整合两家参考站的首页布局）
+   背景图只用 src/img/art 里已转存的本地原画；没有对应素材的卡不加背景层。
+   ============================================================ */
+.hasart{position:relative;overflow:hidden}
+.hasart>.bgart{position:absolute;inset:0;z-index:0;background:center/cover no-repeat;opacity:.17;
+  transform:scale(1.02);transition:transform var(--dur-3) var(--ease-out),opacity var(--dur-3) linear}
+/* 压暗渐变：图在上半部露出来，正文那半压到接近实色，保证对比度不被素材吃掉 */
+.hasart::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(14,16,19,.30),rgba(23,26,31,.93) 62%,var(--panel) 100%)}
+.hasart>*:not(.bgart){position:relative;z-index:1}
+.rail::before{z-index:2}
+/* 边框与动效：hover 只抬 2px、图放大 5%、边框转金；不动任何布局属性 */
+.mod,.two>.card{transition:transform var(--dur-1) var(--ease-out),border-color var(--dur-1) linear,
+  box-shadow var(--dur-1) linear}
+.mod:hover,.mod:focus-visible,.two>.card:hover{transform:translateY(-2px);
+  border-color:var(--gold-deep);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.mod:hover>.bgart,.mod:focus-visible>.bgart{transform:scale(1.05);opacity:.24}
+/* 职业入口条：hero 里只做"进那一职业页"的入口，切树仍在预览卡里，两处不重复职责 */
+.clsrow{display:flex;flex-wrap:wrap;gap:var(--s3);margin:var(--s3) 0 0}
+.clsrow a{width:60px;text-align:center;color:var(--txt-dim);font-size:11.5px;line-height:1.4;
+  padding:var(--s1) 2px;border:1px solid transparent;border-radius:var(--r-ctl);min-height:44px}
+.clsrow a i{display:block;width:44px;height:44px;margin:0 auto 5px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--line);background:var(--panel-2) center/cover no-repeat;font-style:normal}
+.clsrow a:hover{color:var(--gold);border-color:var(--gold-deep)}
+.clsrow a:hover i{border-color:var(--gold)}
+/* 分组眉标：让"角色线 / 世界线 / 工具线"读起来是分组，不是又一批卡片 */
+.grphead{display:flex;align-items:baseline;gap:var(--s3);margin:var(--s6) 0 var(--s3)}
+.grphead h2{font-size:15px;letter-spacing:.02em}
+.grphead span{font:500 11px/1.5 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--txt-dim)}
+/* 卡内的键值行与进度条 */
+.kv{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);
+  font-size:12.5px;padding:5px 0;border-top:1px dashed var(--line)}
+.kv:first-of-type{border-top:0}
+.kv b{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+/* kv 行里的链接是行内元素，实测只有 15–43px 高、有的宽也只有 40px，
+   手机上两个方向都不够点：命中区同时兜住宽和高 */
+.kv a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:2px 6px}
+/* .cta 没有基础样式（只在移动端补过命中区），两个 CTA 挨着会挤成一行：给个间隔 */
+a.cta + a.cta{margin-left:var(--s4)}
+.bar{height:8px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);
+  overflow:hidden;margin:var(--s2) 0 var(--s3)}
+.bar i{display:block;height:100%;background:var(--lv0)}
+.sect{margin:var(--s6) 0 var(--s3)}
+.sect h2{font-size:15px}
+/* 主推两卡与改动四格 */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4);align-items:start}
+/* 卡变窄后，九职业切换条从"竖着排九张"改成 3×3 方块：
+   否则左边的树很短、右边一条九格的长列把卡片撑到一倍高 */
+.two .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+/* 树仍按 360px 摆的话，右栏只剩 176px，三列每格 56px，「战士 54 天赋」会断成
+   「战士 / 54 天 / 赋」三行（1440px 实拍发现的，断言只查点击尺寸查不出来）。
+   树收到 280px：格子仍有 62px，右栏拿到 240px，名称与计数各占一行。 */
+.two .treewrap{grid-template-columns:minmax(0,280px) minmax(0,1fr)}
+.two .pv{max-width:280px}
+.two .stripc{padding:6px 4px}
+.two .stripc b{font-size:12px}
+.two .stripc .mono,.two .stripc span{font-size:10.5px}
+.two .tright{display:flex;flex-direction:column;gap:var(--s2)}
+.dunrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto;align-items:center;gap:var(--s2);
+  padding:5px 0;border-top:1px dashed var(--line);font-size:13px}
+.dunrow i{width:44px;height:30px;border-radius:4px;border:1px solid var(--line);
+  background:var(--panel-2) center/cover no-repeat}
+.dunrow b{font-weight:600}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3);margin:var(--s3) 0}
+.four>div{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:var(--s3);text-align:center}
+.four b{display:block;font:700 24px/1.15 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--txt)}
+.four s{text-decoration:none;font-size:11.5px;color:var(--txt-dim)}
+/* 导航角标：除颜色外必须带文字，且只在 releases.json 真写过那一页时出现 */
+/* 角标不占导航宽度：整条导航 1180px 实测余量只有十几像素，
+   内联一个「新」字就会把最后一项挤到第二行（39px → 79px）。所以钉在链接右上角。 */
+nav.main a.nl{position:relative}
+.nb{position:absolute;right:-3px;top:-4px;font:600 9px/1 var(--font-mono);border-radius:3px;
+  padding:2px 3px;border:1px solid var(--line);color:var(--txt-dim);white-space:nowrap;pointer-events:none}
+.nb.new{border-color:rgba(207,232,221,.42);color:var(--lv0)}
+@media (prefers-reduced-motion:reduce){
+  .mod:hover,.mod:focus-visible,.two>.card:hover{transform:none}
+  .hasart>.bgart{transform:none}
+}
+@media (max-width:600px){
+  .two{grid-template-columns:1fr}
+  /* 单列时卡就是整屏宽，树不必再收，右栏恢复成整块往下排 */
+  .two .treewrap{grid-template-columns:1fr}
+  .two .pv{max-width:none}
+  .four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hasart::after{background:linear-gradient(180deg,rgba(14,16,19,.42),rgba(23,26,31,.95) 52%,var(--panel) 100%)}
+  .hasart>.bgart{opacity:.14}
+  .clsrow a{width:56px}
+}

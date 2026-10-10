@@ -64,8 +64,8 @@
 | 缓存 | https://wowforever.wclbox.com/fuben/upper-blackrock-spire/ | 1 |
 | 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
 | 缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
-| 缓存 | https://wowforever.wclbox.com/xiyou | 66 |
-| 缓存 | https://wowforever.wclbox.com/shuji | 45 |
+| 已抓取 | https://wowforever.wclbox.com/xiyou | 66 |
+| 已抓取 | https://wowforever.wclbox.com/shuji | 45 |
 | 缓存 | https://wowforever.wclbox.com/gaidong | 964 |
 | 缓存 | https://wowforever.wclbox.com/_shuju/r-1791485113190/changes.json | 964 |
 | 缓存 | https://wowforever.wclbox.com/chuancheng | 25 |

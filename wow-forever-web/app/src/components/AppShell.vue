@@ -9,12 +9,14 @@
       <div class="in">
         <template v-for="g in NAV" :key="g.t">
           <component v-if="g.file" :is="linkFor(g.file).to ? 'router-link' : 'a'" v-bind="linkFor(g.file)"
-                     class="nl" :class="{ on: activeFor(g.file) }" :title="g.d">{{ g.t }}</component>
+                     class="nl" :class="{ on: activeFor(g.file) }" :title="g.d">{{ g.t }}<i v-if="isNavNew(g.t)" class="nb new"
+                       title="这一版新开了这一页" aria-label="这一版新开了这一页">新</i></component>
           <span v-else class="ngrp" :class="{ hit: groupOn(g) }">
             <b class="ngt">{{ g.t }}</b>
             <component v-for="it in g.items" :key="it.file"
                        :is="linkFor(it.file).to ? 'router-link' : 'a'" v-bind="linkFor(it.file)"
-                       class="nl" :class="{ on: activeFor(it.file) }" :title="it.d">{{ it.t }}</component>
+                       class="nl" :class="{ on: activeFor(it.file) }" :title="it.d">{{ it.t }}<i v-if="isNavNew(it.t)" class="nb new"
+                         title="这一版新开了这一页" aria-label="这一版新开了这一页">新</i></component>
           </span>
         </template>
       </div>
@@ -58,6 +60,12 @@ function activeFor(file) {
 function groupOn(g) {
   return (g.items || []).some((it) => activeFor(it.file));
 }
+/* 角标不手写：scale.navNew 由 build-data 从「本站更新」最新一天的标签派生，
+   标签对不上导航项名字就不画。只此一种——"近期更新"会一次命中 16 项里的 8 项，满排都是标记等于没有 */
+function isNavNew(label) {
+  return ((scale.value || {}).navNew || []).indexOf(label) >= 0;
+}
+const scale = ref(null);
 
 onMounted(() => {
   refreshRails();
@@ -73,6 +81,7 @@ onMounted(() => {
   Promise.all([load('data/meta.json'), load('data/scale.json')])
     .then(([m, s]) => {
       const sc = s.scale;
+      scale.value = sc;
       foot.value = {
         disclaimer: m.disclaimer, build: m.dataBaseline.build, checkedAt: m.dataBaseline.checkedAt,
         L0: sc.pubCoverage.L0, L1: sc.pubCoverage.L1, L2: sc.pubCoverage.L2, L3: sc.pubCoverage.L3,
