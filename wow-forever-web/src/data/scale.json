@@ -15,13 +15,13 @@
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
-  "changes": 964,
-  "changesTalents": 544,
+  "changes": 965,
+  "changesTalents": 545,
   "changesSpells": 420,
-  "changesNew": 112,
-  "changesModified": 306,
-  "changesSpellsChanged": 256,
-  "changesRemoved": 77,
+  "changesNew": 113,
+  "changesModified": 304,
+  "changesSpellsChanged": 257,
+  "changesRemoved": 79,
   "classRank": [
    {
     "classId": "hunter",
@@ -42,9 +42,9 @@
    {
     "classId": "warrior",
     "official": 95,
-    "datamine": 102,
-    "total": 197,
-    "share": 48.2,
+    "datamine": 103,
+    "total": 198,
+    "share": 48,
     "place": 3
    },
    {
@@ -56,28 +56,36 @@
     "place": 4
    },
    {
-    "classId": "rogue",
-    "official": 53,
-    "datamine": 107,
-    "total": 160,
-    "share": 33.1,
+    "classId": "warlock",
+    "official": 73,
+    "datamine": 113,
+    "total": 186,
+    "share": 39.2,
     "place": 5
    },
    {
     "classId": "mage",
-    "official": 53,
+    "official": 64,
     "datamine": 105,
-    "total": 158,
-    "share": 33.5,
+    "total": 169,
+    "share": 37.9,
     "place": 6
    },
    {
-    "classId": "warlock",
-    "official": 52,
-    "datamine": 113,
-    "total": 165,
-    "share": 31.5,
+    "classId": "rogue",
+    "official": 60,
+    "datamine": 107,
+    "total": 167,
+    "share": 35.9,
     "place": 7
+   },
+   {
+    "classId": "shaman",
+    "official": 59,
+    "datamine": 107,
+    "total": 166,
+    "share": 35.5,
+    "place": 8
    },
    {
     "classId": "paladin",
@@ -85,14 +93,6 @@
     "datamine": 112,
     "total": 162,
     "share": 30.9,
-    "place": 8
-   },
-   {
-    "classId": "shaman",
-    "official": 50,
-    "datamine": 107,
-    "total": 157,
-    "share": 31.8,
     "place": 9
    }
   ],
@@ -100,12 +100,12 @@
    "perks": 21,
    "slots": 27,
    "unknown": 6,
-   "challenges": 65,
+   "challenges": 66,
    "rewards": 4,
    "cap": 16,
-   "total": 65
+   "total": 81
   },
-  "search": 4302,
+  "search": 4351,
   "talentPreview": 473,
   "releases": 24,
   "navNew": [
@@ -137,7 +137,7 @@
   "races": 10,
   "traits": 40,
   "timeline": 11,
-  "abilities": 38,
+  "abilities": 86,
   "coverage": {
    "L0": 366,
    "L1": 114,

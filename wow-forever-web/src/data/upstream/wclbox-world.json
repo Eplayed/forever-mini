@@ -7,45 +7,45 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1791485113190",
-  "foreverBuild": "1.60.1.70235",
+  "release": "r-1791702948979",
+  "foreverBuild": "1.60.1.70338",
   "classicBuild": "1.15.9.70003",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-10-09",
+  "scrapedAt": "2026-10-11",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1791485113190/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1791485113190/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1791485113190/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1791485113190/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1791485113190/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1791485113190/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1791485113190/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1791702948979/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1791702948979/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1791702948979/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1791702948979/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1791702948979/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1791702948979/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1791702948979/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70235",
+   "foreverBuild": "1.60.1.70338",
    "classicBuild": "1.15.9.70003",
-   "navBuild": "1.60.1.70235",
+   "navBuild": "1.60.1.70338",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70235",
+    "build": "1.60.1.70338",
     "month": 10,
-    "day": 5
+    "day": 10
    },
    "counts": {
-    "all": 964,
-    "changed": 751,
-    "newTalents": 112,
-    "changedTalents": 306,
-    "removedTalents": 77,
+    "all": 965,
+    "changed": 753,
+    "newTalents": 113,
+    "changedTalents": 304,
+    "removedTalents": 79,
     "spells": 420,
-    "spellsChanged": 256
+    "spellsChanged": 257
    }
   },
   "maps": [
@@ -3709,6 +3709,7 @@
          "18 - 35 点伤害\t速度 1.70",
          "(每秒伤害 15.6)",
          "需要等级 19",
+         "击中时有几率：灼烧目标的血肉，造成67到101点火焰伤害。",
          "售价：2铜"
         ]
        }

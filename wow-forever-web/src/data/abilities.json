@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generatedAt": "2026-10-08",
+  "generatedAt": "2026-10-11",
   "kind": "official-cn-extract",
-  "method": "tools/extract-abilities.py 按官方页小标题分段（职业解析 → 基础技能/宠物/天赋 → 专精），只收「名称：（状态标记。）…」这种整句，名称必须原样出现在句里，否则丢弃。",
+  "method": "tools/extract-abilities.py 按官方页小标题分段（职业小标题 → 基础技能/宠物/天赋 → 具体专精），只收「名称：（状态标记。）…」这种整句，名称必须原样出现在句里，否则丢弃。职业小标题两种写法都认：「万千形态：德鲁伊职业解析」与「法师：因时制宜，施放恰当的法术」。",
   "states": {
    "new": "新增",
    "changed": "改动",
@@ -11,7 +11,8 @@
   },
   "notCollected": [
    "未变：官方不会列出没改的东西，缺就是缺，不拿沉默当证据",
-   "圣骑士/萨满祭司/法师/术士/潜行者：官方中文深度解析稿尚未发布",
+   "圣骑士：官方中文深度解析稿尚未发布（法师与萨满祭司、潜行者与术士两篇已于 2026-10-11 收进来）",
+   "官方稿里没带状态标记的句子（例如只写「冰锥术：持续时间缩短。」）不进这张表，因为它没有可核对的新增/改动/移除判定，收进来等于我们替官方下结论",
    "数值细节：除原文写出的那句之外，不做推算"
   ],
   "sources": [
@@ -22,6 +23,14 @@
    {
     "url": "https://wow.blizzard.cn/news/24301514/index.html",
     "label": "牧师与战士职业深度解析"
+   },
+   {
+    "url": "https://wow.blizzard.cn/news/24302097/index.html",
+    "label": "法师与萨满祭司职业深度解析"
+   },
+   {
+    "url": "https://wow.blizzard.cn/news/24310968/index.html",
+    "label": "潜行者与术士职业深度解析"
    }
   ]
  },
@@ -45,7 +54,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "野兽控制 致命守护 ：（原 强化雄鹰守护 。）激活 野兽守护 时，近战攻击现在也有几率提高攻击速度。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -68,7 +77,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "召唤雄鹰 ：（新增第16点关键天赋。）立即造成伤害，并召唤一只雄鹰攻击猎人的当前目标，持续18秒。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -91,7 +100,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "精确瞄准 ：（新增天赋。）根据猎人智力的20/40/60/80/100%，提高近战和远程攻击强度。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -114,7 +123,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "疾速杀戮 ：（新增天赋。）缩短 急速射击 的冷却时间。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -137,7 +146,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "独来独往 ：（新增第11点关键天赋。）没有宠物在场时，使猎人所有攻击造成的伤害提高20%。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -160,7 +169,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "急速恢复 ：（新增天赋。）需要先点出 疾速杀戮 。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -183,7 +192,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "诱捕 ：（小幅重做。）现在只要陷阱触发，就必定生效。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -206,7 +215,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "野蛮打击 ：（重做。）现在使所有近战伤害提高2/4%，不再使 猛禽一击 和 猫鼬撕咬 的伤害提高10/20%。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -229,7 +238,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "生存战术 ：（原陷阱掌握。）除了陷阱外，现在还会提高 假死 的命中几率。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -252,7 +261,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "掠食者之锋 ：（新增天赋。）提高近战爆击的额外伤害，以及双持时副手武器造成的伤害。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -275,7 +284,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "游刃有余 ：（新增天赋。）降低所有陷阱和近战技能的法力值消耗。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -298,7 +307,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "暴露猎物 ：（新增天赋。）近战或远程攻击命中带有你 猎人印记 的目标时，有几率激活 猫鼬撕咬 ，效果如同成功躲闪一次攻击。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -321,7 +330,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "生存专家的戒律 ：（新增天赋。）缩短 陷阱 和 威慑 的冷却时间。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -344,7 +353,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "猛虎之怒 ：（移除。）已由野性战斗系的新天赋 变形之力 取代。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -367,7 +376,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "起源 ：（第1层新增天赋。）提高德鲁伊法术和技能造成的所有周期性伤害与治疗效果。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -390,7 +399,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "自然的威严 ：（第2层新增天赋。）提高所有法术和近战攻击的爆击几率。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -413,7 +422,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "繁茂 ：（第5层新增天赋。）现在 纠缠根须 最多可同时困住3个目标。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -436,7 +445,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "日月之蚀 ：（第5层新增天赋。）施放 愤怒 可缩短接下来2次 星火术 的施法时间，该效果最多可累积4次。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -459,7 +468,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "大地母亲的恩赐 ：（新增第11点关键天赋。）使 回春术 、 迅捷治愈 和 野性成长 的公共冷却时间缩短0.5秒。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -482,7 +491,7 @@
      "url": "https://wow.blizzard.cn/news/24301515/index.html",
      "quote": "生命之魂 ：（第5层新增天赋。）按百分比提高精神。",
      "note": "猎人与德鲁伊职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -505,7 +514,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "戒律 圣光之力 ：（第1层新增天赋。）提高 惩击 和 苦修 对受到你 神圣之火 影响的目标造成的伤害。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -528,7 +537,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "双生戒律 ：（第1层新增天赋。）提高瞬发法术造成的伤害和治疗效果。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -551,7 +560,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "苦修 ：（新增第21点关键天赋。）引导时间为2秒，冷却时间为12秒。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -574,7 +583,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "新生希望 ：（新增天赋。）需要先点出 灵魂守护 。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -597,7 +606,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "灼热之光 ：（重做。）现在可提高所有神圣伤害，但加成比例降低。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -620,7 +629,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "联结治疗 ：（新增第16点关键天赋。） 新增法术，无冷却时间。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -643,7 +652,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "愈合祷言 ：（新增第31点关键天赋。）需要先点出 救赎之魂 。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -666,7 +675,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "噬灵传染 ：（第5层新增天赋。）降低 噬灵瘟疫 的法力值消耗。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -689,7 +698,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "提早离世 ：（第6层新增天赋。）提高 暗言术：灭 对生命值低于20%的目标的爆击几率。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -712,7 +721,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "武器 强化战术掌握 ：（原战术掌握。）每点天赋可使切换姿态时保留的怒气增加3点，最多可保留25点。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -735,7 +744,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "穿刺打击 ：（新增第16点关键天赋。）消耗15点怒气，立即发动攻击，冷却时间为20秒。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -758,7 +767,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "血之气息 ：（第5层新增天赋。）主手攻击命中受到 撕裂 影响的敌人时，有几率激活 压制 ，可在6秒内使用。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -781,7 +790,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "武器大师： （第5层新增天赋。）将所有武器专精天赋的效果合并为一个天赋。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -804,7 +813,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "怒击 ：（新增第16点关键天赋。）双持时，旋风斩会用两把武器同时攻击。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -827,7 +836,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "狂怒 ：（重做。）现在受到任何伤害都有几率触发。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -850,7 +859,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "强化复仇 ：（重做。）现在会提高复仇造成的伤害，不再有几率使目标昏迷。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -873,7 +882,7 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "强化盾墙 ：（重做。）现在会大幅缩短 盾墙 的冷却时间。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -896,7 +905,1111 @@
      "url": "https://wow.blizzard.cn/news/24301514/index.html",
      "quote": "怒火聚焦 ：（第6层新增天赋。）降低所有攻击技能的怒气消耗。",
      "note": "牧师与战士职业深度解析原文整句",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-奥术集中-38",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "奥术集中",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "奥术集中 ：（重做。）现在提高奥术法术的命中几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "奥术集中 ：（重做。）现在提高奥术法术的命中几率。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-强化引导-39",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "强化引导",
+   "state": "renamed",
+   "officialTag": "原 强化奥术飞弹 。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化引导 ：（原 强化奥术飞弹 。）现在也能降低 奥术冲击 在施法时因受到伤害而被打断的几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "强化引导 ：（原 强化奥术飞弹 。）现在也能降低 奥术冲击 在施法时因受到伤害而被打断的几率。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-奥术冲撞-40",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "奥术冲撞",
+   "state": "renamed",
+   "officialTag": "原 强化魔爆术 。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "奥术冲撞 ：（原 强化魔爆术 。）现在提高所有奥术法术的爆击几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "奥术冲撞 ：（原 强化魔爆术 。）现在提高所有奥术法术的爆击几率。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-奥术冲击-41",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "奥术冲击",
+   "state": "new",
+   "officialTag": "新增第11点关键天赋。全新法术。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 11,
+   "quote": "奥术冲击 ：（新增第11点关键天赋。全新法术。）这个版本的 奥术冲击 ，是对早期 《魔兽世界》 资料片中同名法术的重新设计。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "奥术冲击 ：（新增第11点关键天赋。全新法术。）这个版本的 奥术冲击 ，是对早期 《魔兽世界》 资料片中同名法术的重新设计。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-奥术护盾-42",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "奥术护盾",
+   "state": "renamed",
+   "officialTag": "原强化法力护盾。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "奥术护盾 ：（原强化法力护盾。）进一步降低 法力护盾 的法力消耗，现在还会提高 魔甲术 提供的抗性。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "奥术护盾 ：（原强化法力护盾。）进一步降低 法力护盾 的法力消耗，现在还会提高 魔甲术 提供的抗性。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-强化法术反制-43",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "强化法术反制",
+   "state": "changed",
+   "officialTag": "小幅重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化法术反制 ：（小幅重做。）现在只投入1点天赋时，也必定施加一个持续时间较短的 沉默 效果，而不再只有50%的几率施加 沉默 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "强化法术反制 ：（小幅重做。）现在只投入1点天赋时，也必定施加一个持续时间较短的 沉默 效果，而不再只有50%的几率施加 沉默 。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-奥术心智-44",
+   "classId": "mage",
+   "spec": "arcane",
+   "kind": "talent",
+   "name": "奥术心智",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "奥术心智 ：（重做。）现在提高智力，而不再提高法力值上限。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "奥术心智 ：（重做。）现在提高智力，而不再提高法力值上限。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-火焰余波-45",
+   "classId": "mage",
+   "spec": "fire",
+   "kind": "talent",
+   "name": "火焰余波",
+   "state": "renamed",
+   "officialTag": "原强化火焰冲击。",
+   "tierHint": 1,
+   "tierFrom": 2,
+   "milestone": null,
+   "quote": "火焰 火焰余波 ：（原强化火焰冲击。）从第2层上移至第1层，进一步缩短 火焰冲击 的冷却时间；",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "火焰 火焰余波 ：（原强化火焰冲击。）从第2层上移至第1层，进一步缩短 火焰冲击 的冷却时间；",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-烧尽-46",
+   "classId": "mage",
+   "spec": "fire",
+   "kind": "talent",
+   "name": "烧尽",
+   "state": "renamed",
+   "officialTag": "原烧尽。",
+   "tierHint": 1,
+   "tierFrom": 3,
+   "milestone": null,
+   "quote": "烧尽 ：（原烧尽。）从第3层上移至第1层。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "烧尽 ：（原烧尽。）从第3层上移至第1层。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-极寒冰霜-47",
+   "classId": "mage",
+   "spec": "frost",
+   "kind": "talent",
+   "name": "极寒冰霜",
+   "state": "changed",
+   "officialTag": "小幅重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "极寒冰霜 ：（小幅重做。）不再将所有冰冷效果的持续时间延长1/2/3秒，改为延长11/22/33%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "极寒冰霜 ：（小幅重做。）不再将所有冰冷效果的持续时间延长1/2/3秒，改为延长11/22/33%。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "mage-寒冰指-48",
+   "classId": "mage",
+   "spec": "frost",
+   "kind": "talent",
+   "name": "寒冰指",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "寒冰指 ：（第5层新增天赋。）需要先点出 冰枪术 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "寒冰指 ：（第5层新增天赋。）需要先点出 冰枪术 。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-元素迅捷-49",
+   "classId": "shaman",
+   "spec": "elemental-combat",
+   "kind": "talent",
+   "name": "元素迅捷",
+   "state": "renamed",
+   "officialTag": "原 闪电掌握 。",
+   "tierHint": 3,
+   "tierFrom": 6,
+   "milestone": null,
+   "quote": "元素迅捷 ：（原 闪电掌握 。）从第6层上移至第3层。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "元素迅捷 ：（原 闪电掌握 。）从第6层上移至第3层。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-强化火焰新星-50",
+   "classId": "shaman",
+   "spec": "elemental-combat",
+   "kind": "talent",
+   "name": "强化火焰新星",
+   "state": "changed",
+   "officialTag": "原 强化火焰图腾 。重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化火焰新星 ：（原 强化火焰图腾 。重做。）现在提高 火焰新星 的伤害，并缩短其冷却时间。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "强化火焰新星 ：（原 强化火焰图腾 。重做。）现在提高 火焰新星 的伤害，并缩短其冷却时间。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-风暴之眼-51",
+   "classId": "shaman",
+   "spec": "elemental-combat",
+   "kind": "talent",
+   "name": "风暴之眼",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "风暴之眼 ：（重做。）这个天赋现在可以减少施放 闪电箭 、 闪电链 和 熔岩爆裂 时，因受到伤害而产生的施法推迟。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "风暴之眼 ：（重做。）这个天赋现在可以减少施放 闪电箭 、 闪电链 和 熔岩爆裂 时，因受到伤害而产生的施法推迟。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-聪慧-52",
+   "classId": "shaman",
+   "spec": "enhancement",
+   "kind": "talent",
+   "name": "聪慧",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "聪慧 ：（第2层新增天赋。）按照智力的一定比例提高你的攻击强度。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "聪慧 ：（第2层新增天赋。）按照智力的一定比例提高你的攻击强度。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-灵魂武器-53",
+   "classId": "shaman",
+   "spec": "enhancement",
+   "kind": "talent",
+   "name": "灵魂武器",
+   "state": "renamed",
+   "officialTag": "原招架。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "灵魂武器 ：（原招架。）这个第21点天赋现在还会在你未使用 石化武器 时降低威胁值，并在使用 石化武器 时提高威胁值。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "灵魂武器 ：（原招架。）这个第21点天赋现在还会在你未使用 石化武器 时降低威胁值，并在使用 石化武器 时提高威胁值。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-精神敏锐-54",
+   "classId": "shaman",
+   "spec": "enhancement",
+   "kind": "talent",
+   "name": "精神敏锐",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "精神敏锐 ：（第5层新增天赋。）按照智力的一定比例提高你的法术伤害和治疗效果。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "精神敏锐 ：（第5层新增天赋。）按照智力的一定比例提高你的法术伤害和治疗效果。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-全神贯注-55",
+   "classId": "shaman",
+   "spec": "restoration",
+   "kind": "talent",
+   "name": "全神贯注",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "全神贯注 ：（第2层新增天赋。）让萨满祭司在施法期间也能利用精神属性回复法力值。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "全神贯注 ：（第2层新增天赋。）让萨满祭司在施法期间也能利用精神属性回复法力值。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-自然优雅-56",
+   "classId": "shaman",
+   "spec": "restoration",
+   "kind": "talent",
+   "name": "自然优雅",
+   "state": "renamed",
+   "officialTag": "原治疗之赐 。",
+   "tierHint": 2,
+   "tierFrom": 3,
+   "milestone": null,
+   "quote": "自然优雅 ：（ 原治疗之赐 。）从第3层上移至第2层。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "自然优雅 ：（ 原治疗之赐 。）从第3层上移至第2层。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "shaman-激流-57",
+   "classId": "shaman",
+   "spec": "restoration",
+   "kind": "talent",
+   "name": "激流",
+   "state": "new",
+   "officialTag": "新增第31点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 31,
+   "quote": "激流 ：（新增第31点关键天赋。）需要先点出 治疗之道 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24302097/index.html",
+     "quote": "激流 ：（新增第31点关键天赋。）需要先点出 治疗之道 。",
+     "note": "法师与萨满祭司职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-强化破甲-58",
+   "classId": "rogue",
+   "spec": "assassination",
+   "kind": "talent",
+   "name": "强化破甲",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化破甲 ：（重做。）不再提高 破甲 的效果，改为降低 破甲 的能量消耗，并在消耗5个连击点数施放 破甲 时返还连击点数。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "强化破甲 ：（重做。）不再提高 破甲 的效果，改为降低 破甲 的能量消耗，并在消耗5个连击点数施放 破甲 时返还连击点数。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-毁伤-59",
+   "classId": "rogue",
+   "spec": "assassination",
+   "kind": "talent",
+   "name": "毁伤",
+   "state": "new",
+   "officialTag": "新增第21点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 21,
+   "quote": "毁伤 ：（新增第21点关键天赋。）这个消耗60点能量、产生连击点数的技能，会用双手武器分别造成武器伤害，但两把武器都必须是匕首。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "毁伤 ：（新增第21点关键天赋。）这个消耗60点能量、产生连击点数的技能，会用双手武器分别造成武器伤害，但两把武器都必须是匕首。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-穿刺之伤-60",
+   "classId": "rogue",
+   "spec": "combat",
+   "kind": "talent",
+   "name": "穿刺之伤",
+   "state": "renamed",
+   "officialTag": "原 强化背刺 。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "穿刺之伤 ：（原 强化背刺 。）现在也会提高 毁伤 的伤害，但加成比例较低，同时让 背刺 有几率额外产生一个连击点数。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "穿刺之伤 ：（原 强化背刺 。）现在也会提高 毁伤 的伤害，但加成比例较低，同时让 背刺 有几率额外产生一个连击点数。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-武器专家-61",
+   "classId": "rogue",
+   "spec": "combat",
+   "kind": "talent",
+   "name": "武器专家",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "武器专家 ：（重做。）现在降低目标躲闪或招架你攻击的几率。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "武器专家 ：（重做。）现在降低目标躲闪或招架你攻击的几率。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-强化扰乱-62",
+   "classId": "rogue",
+   "spec": "subtlety",
+   "kind": "talent",
+   "name": "强化扰乱",
+   "state": "new",
+   "officialTag": "第3层新增天赋。",
+   "tierHint": 3,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化扰乱 ：（第3层新增天赋。）提高 扰乱 的作用半径，并进一步降低被扰乱敌人的 潜行 侦测能力。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "强化扰乱 ：（第3层新增天赋。）提高 扰乱 的作用半径，并进一步降低被扰乱敌人的 潜行 侦测能力。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-寂灭-63",
+   "classId": "rogue",
+   "spec": "subtlety",
+   "kind": "talent",
+   "name": "寂灭",
+   "state": "new",
+   "officialTag": "第6层新增天赋。",
+   "tierHint": 6,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "寂灭 ：（第6层新增天赋。）需要先点出 卑鄙 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "寂灭 ：（第6层新增天赋。）需要先点出 卑鄙 。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "rogue-割喉-64",
+   "classId": "rogue",
+   "spec": "subtlety",
+   "kind": "talent",
+   "name": "割喉",
+   "state": "new",
+   "officialTag": "第6层新增天赋。",
+   "tierHint": 6,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "割喉： （第6层新增天赋。）你的 背刺 有几率让下一个 伏击 无须 潜行 即可施放。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "割喉： （第6层新增天赋。）你的 背刺 有几率让下一个 伏击 无须 潜行 即可施放。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-压制-65",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "压制",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "压制 ：（重做。）使你的命中几率最多提高5%，产生的威胁值最多降低20%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "压制 ：（重做。）使你的命中几率最多提高5%，产生的威胁值最多降低20%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-邪咒-66",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "邪咒",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "邪咒 ：（第2层新增天赋。）使你的术士法术造成的所有周期性伤害最多提高5%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "邪咒 ：（第2层新增天赋。）使你的术士法术造成的所有周期性伤害最多提高5%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-强化吸取-67",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "强化吸取",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化吸取 ：（第2层新增天赋。）使你的 吸取生命 、 吸取灵魂 和 折磨 吸取的生命值或造成的伤害最多提高20%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "强化吸取 ：（第2层新增天赋。）使你的 吸取生命 、 吸取灵魂 和 折磨 吸取的生命值或造成的伤害最多提高20%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-强化痛苦灾祸-68",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "强化痛苦灾祸",
+   "state": "renamed",
+   "officialTag": "原 强化痛苦诅咒 。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "强化痛苦灾祸 ：（原 强化痛苦诅咒 。）伤害提高，现在是2点天赋，原为3点。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "强化痛苦灾祸 ：（原 强化痛苦诅咒 。）伤害提高，现在是2点天赋，原为3点。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-恶疾-69",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "恶疾",
+   "state": "new",
+   "officialTag": "第3层新增天赋。",
+   "tierHint": 3,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "恶疾 ：（第3层新增天赋。）使你的 腐蚀术 、 痛苦灾祸 、 末日灾祸 、 吸取灵魂 、 吸取生命 、 生命虹吸 和 折磨 的爆击伤害加成最多提高100%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "恶疾 ：（第3层新增天赋。）使你的 腐蚀术 、 痛苦灾祸 、 末日灾祸 、 吸取灵魂 、 吸取生命 、 生命虹吸 和 折磨 的爆击伤害加成最多提高100%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-怨毒-70",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "怨毒",
+   "state": "new",
+   "officialTag": "第4层新增天赋。",
+   "tierHint": 4,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "怨毒 ：（第4层新增天赋。）使你的暗影法术的爆击几率最多提高5%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "怨毒 ：（第4层新增天赋。）使你的暗影法术的爆击几率最多提高5%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-灵魂虹吸-71",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "灵魂虹吸",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "灵魂虹吸 ：（第5层新增天赋。）目标身上每有一个你的其他 痛苦 法术效果，就会使你的 吸取生命 、 吸取灵魂 和 折磨 造成的伤害或吸取的生命值最多提高12%，总加成最多为36%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "灵魂虹吸 ：（第5层新增天赋。）目标身上每有一个你的其他 痛苦 法术效果，就会使你的 吸取生命 、 吸取灵魂 和 折磨 造成的伤害或吸取的生命值最多提高12%，总加成最多为36%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-折磨-72",
+   "classId": "warlock",
+   "spec": "affliction",
+   "kind": "talent",
+   "name": "折磨",
+   "state": "new",
+   "officialTag": "新增第31点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 31,
+   "quote": "折磨 ：（新增第31点关键天赋。）从内部撕裂目标，每秒造成暗影伤害，并使你的其他暗影持续伤害效果对目标造成的伤害提高10%，持续6秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "折磨 ：（新增第31点关键天赋。）从内部撕裂目标，每秒造成暗影伤害，并使你的其他暗影持续伤害效果对目标造成的伤害提高10%，持续6秒。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-恶魔庇护-73",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "恶魔庇护",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "恶魔庇护 ：（第2层新增天赋。）使你的 恶魔皮肤 和 魔甲术 的效果最多提高30%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "恶魔庇护 ：（第2层新增天赋。）使你的 恶魔皮肤 和 魔甲术 的效果最多提高30%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-邪能活力-74",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "邪能活力",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "邪能活力 ：（第2层新增天赋。）使你的 小鬼、虚空行者 、 魅魔 、 夜魔 和 地狱猎犬 的生命值与法力值上限最多提高15%，并使你的法力值上限最多提高15%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "邪能活力 ：（第2层新增天赋。）使你的 小鬼、虚空行者 、 魅魔 、 夜魔 和 地狱猎犬 的生命值与法力值上限最多提高15%，并使你的法力值上限最多提高15%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-恶魔能量-75",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "恶魔能量",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "恶魔能量 ：（第2层新增天赋。）你每次造成法术伤害时，都会为宠物恢复生命值，数值最多相当于所造成伤害的15%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "恶魔能量 ：（第2层新增天赋。）你每次造成法术伤害时，都会为宠物恢复生命值，数值最多相当于所造成伤害的15%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-恶魔牺牲-76",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "恶魔牺牲",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 11,
+   "quote": "恶魔牺牲： （重做。）现在是第11点关键天赋。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "恶魔牺牲： （重做。）现在是第11点关键天赋。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-灭杀-77",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "灭杀",
+   "state": "new",
+   "officialTag": "第4层新增天赋。",
+   "tierHint": 4,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "灭杀 ：（第4层新增天赋。）使你的 灵魂之火 冷却时间最多缩短90%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "灭杀 ：（第4层新增天赋。）使你的 灵魂之火 冷却时间最多缩短90%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-恶魔印记-78",
+   "classId": "warlock",
+   "spec": "demonology",
+   "kind": "talent",
+   "name": "恶魔印记",
+   "state": "new",
+   "officialTag": "第4层新增天赋。",
+   "tierHint": 4,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "恶魔印记 ：（第4层新增天赋。）你的 灼热之痛 产生的威胁值降低，并在目标身上留下印记，使宠物接下来的2次攻击造成火焰或暗影伤害，伤害类型取决于宠物。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "恶魔印记 ：（第4层新增天赋。）你的 灼热之痛 产生的威胁值降低，并在目标身上留下印记，使宠物接下来的2次攻击造成火焰或暗影伤害，伤害类型取决于宠物。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-熔岩之肤-79",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "熔岩之肤",
+   "state": "new",
+   "officialTag": "第2层新增天赋。",
+   "tierHint": 2,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "熔岩之肤 ：（第2层新增天赋。）使受到的所有伤害最多降低10%。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "熔岩之肤 ：（第2层新增天赋。）使受到的所有伤害最多降低10%。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-清算-80",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "清算",
+   "state": "changed",
+   "officialTag": "重做。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "清算： （重做。）使 献祭 的初始伤害最多提高50%，并使 燃烧 最多有100%的几率使目标 眩晕 ，移动速度降低50%，持续5秒。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "清算： （重做。）使 献祭 的初始伤害最多提高50%，并使 燃烧 最多有100%的几率使目标 眩晕 ，移动速度降低50%，持续5秒。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-苦痛之焰-81",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "苦痛之焰",
+   "state": "renamed",
+   "officialTag": "原强化灼热之痛。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "苦痛之焰 ：（原强化灼热之痛。）现在只需投入3点天赋。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "苦痛之焰 ：（原强化灼热之痛。）现在只需投入3点天赋。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-硫磺烈火-82",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "硫磺烈火",
+   "state": "new",
+   "officialTag": "第5层新增天赋。",
+   "tierHint": 5,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "硫磺烈火 ：（第5层新增天赋。）需要先点出 燃烧 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "硫磺烈火 ：（第5层新增天赋。）需要先点出 燃烧 。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-浩劫灾祸-83",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "浩劫灾祸",
+   "state": "new",
+   "officialTag": "新增第21点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 21,
+   "quote": "浩劫灾祸 ：（新增第21点关键天赋。）使目标受到灾祸影响，持续5分钟；",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "浩劫灾祸 ：（新增第21点关键天赋。）使目标受到灾祸影响，持续5分钟；",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-影与焰-84",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "影与焰",
+   "state": "new",
+   "officialTag": "第6层新增天赋。",
+   "tierHint": 6,
+   "tierFrom": null,
+   "milestone": null,
+   "quote": "影与焰 ：（第6层新增天赋。） 燃烧 命中敌人后，会提高你造成的所有暗影伤害，持续20秒；",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "影与焰 ：（第6层新增天赋。） 燃烧 命中敌人后，会提高你造成的所有暗影伤害，持续20秒；",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
+    }
+   ]
+  },
+  {
+   "id": "warlock-烧尽-85",
+   "classId": "warlock",
+   "spec": "destruction",
+   "kind": "talent",
+   "name": "烧尽",
+   "state": "new",
+   "officialTag": "新增第31点关键天赋。",
+   "tierHint": null,
+   "tierFrom": null,
+   "milestone": 31,
+   "quote": "烧尽 ：（新增第31点关键天赋。）需要先点出 浩劫灾祸 。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24310968/index.html",
+     "quote": "烧尽 ：（新增第31点关键天赋。）需要先点出 浩劫灾祸 。",
+     "note": "潜行者与术士职业深度解析原文整句",
+     "checkedAt": "2026-10-11"
     }
    ]
   }

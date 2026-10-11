@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/zhuanye",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-10-09",
+  "scrapedAt": "2026-10-11",
   "method": "tools/scrape-wclbox-prof.py --write",
   "took": "制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、采集点与可得物",
   "skipped": "冲级路线建议、BiS 结论、攻略文字、任何百分比",
@@ -6536,7 +6536,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -21428,7 +21428,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -23195,7 +23195,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -26729,8 +26729,8 @@
      "skill": {
       "orange": 205,
       "yellow": 205,
-      "green": 205,
-      "grey": 205
+      "green": 207,
+      "grey": 210
      },
      "source": null
     },
@@ -30662,7 +30662,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -48476,7 +48476,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -62884,7 +62884,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -63457,7 +63457,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -63942,7 +63942,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -64066,7 +64066,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -64327,6 +64327,32 @@
      "source": null
     },
     {
+     "itemId": "249865",
+     "nameCn": "宁神茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      },
+      {
+       "nameCn": "宁神花",
+       "count": 2,
+       "iconKey": "inv_misc_flower_02"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 30,
+      "green": 37,
+      "grey": 45
+     },
+     "source": null
+    },
+    {
      "itemId": "249871",
      "nameCn": "毒味冰沙",
      "iconKey": "inv_drink_21",
@@ -64351,9 +64377,9 @@
      ],
      "skill": {
       "orange": 25,
-      "yellow": 5,
-      "green": 10,
-      "grey": 15
+      "yellow": 30,
+      "green": 37,
+      "grey": 45
      },
      "source": null
     },
@@ -64377,35 +64403,9 @@
      ],
      "skill": {
       "orange": 25,
-      "yellow": 20,
-      "green": 32,
+      "yellow": 30,
+      "green": 37,
       "grey": 45
-     },
-     "source": null
-    },
-    {
-     "itemId": "249865",
-     "nameCn": "宁神茶",
-     "iconKey": "inv_drink_15",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "清凉的泉水",
-       "count": 1,
-       "iconKey": "inv_drink_07"
-      },
-      {
-       "nameCn": "宁神花",
-       "count": 2,
-       "iconKey": "inv_misc_flower_02"
-      }
-     ],
-     "skill": {
-      "orange": 25,
-      "yellow": 25,
-      "green": 45,
-      "grey": 65
      },
      "source": null
     },
@@ -64481,8 +64481,8 @@
      ],
      "skill": {
       "orange": 35,
-      "yellow": 30,
-      "green": 42,
+      "yellow": 40,
+      "green": 47,
       "grey": 55
      },
      "source": null
@@ -64840,9 +64840,9 @@
      ],
      "skill": {
       "orange": 75,
-      "yellow": 75,
-      "green": 92,
-      "grey": 110
+      "yellow": 80,
+      "green": 87,
+      "grey": 95
      },
      "source": null
     },
@@ -65100,9 +65100,9 @@
      ],
      "skill": {
       "orange": 90,
-      "yellow": 90,
-      "green": 115,
-      "grey": 140
+      "yellow": 95,
+      "green": 100,
+      "grey": 105
      },
      "source": null
     },
@@ -65204,8 +65204,8 @@
      ],
      "skill": {
       "orange": 100,
-      "yellow": 85,
-      "green": 105,
+      "yellow": 105,
+      "green": 115,
       "grey": 125
      },
      "source": null
@@ -65235,9 +65235,9 @@
      ],
      "skill": {
       "orange": 100,
-      "yellow": 85,
-      "green": 90,
-      "grey": 95
+      "yellow": 105,
+      "green": 112,
+      "grey": 120
      },
      "source": null
     },
@@ -65656,9 +65656,9 @@
      ],
      "skill": {
       "orange": 140,
-      "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "yellow": 145,
+      "green": 147,
+      "grey": 150
      },
      "source": null
     },
@@ -66131,6 +66131,32 @@
      "source": null
     },
     {
+     "itemId": "250073",
+     "nameCn": "狂暴迅猛龙肋排",
+     "iconKey": "inv_misc_food_legion_spicedribroast",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 3,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 180,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null
+    },
+    {
      "itemId": "274976",
      "nameCn": "普通的苍牙野猪",
      "iconKey": "inv_misc_food_16",
@@ -66171,9 +66197,9 @@
      ],
      "skill": {
       "orange": 200,
-      "yellow": 200,
+      "yellow": 205,
       "green": 212,
-      "grey": 225
+      "grey": 220
      },
      "source": null
     },
@@ -66389,9 +66415,9 @@
      ],
      "skill": {
       "orange": 225,
-      "yellow": 225,
-      "green": 240,
-      "grey": 255
+      "yellow": 230,
+      "green": 237,
+      "grey": 245
      },
      "source": null
     },
@@ -66415,9 +66441,9 @@
      ],
      "skill": {
       "orange": 225,
-      "yellow": 225,
+      "yellow": 230,
       "green": 237,
-      "grey": 250
+      "grey": 245
      },
      "source": null
     },
@@ -66675,9 +66701,9 @@
      ],
      "skill": {
       "orange": 250,
-      "yellow": 240,
-      "green": 245,
-      "grey": 250
+      "yellow": 255,
+      "green": 262,
+      "grey": 270
      },
      "source": null
     },
@@ -66755,16 +66781,42 @@
      "source": null
     },
     {
-     "itemId": "250072",
-     "nameCn": "迅击肉排",
-     "iconKey": "inv_misc_food_49",
+     "itemId": "250066",
+     "nameCn": "翱翔的潘普洛纳",
+     "iconKey": "inv_misc_food_meat_cooked_05",
      "quality": 1,
      "isNew": true,
      "mats": [
       {
-       "nameCn": "虎肉",
+       "nameCn": "秃鹫的翅膀",
        "count": 3,
-       "iconKey": "inv_misc_food_14"
+       "iconKey": "inv_misc_monsterscales_02"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null
+    },
+    {
+     "itemId": "250067",
+     "nameCn": "蝙蝠肉碎",
+     "iconKey": "inv_misc_food_115_condorsoup",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "肥美翅根",
+       "count": 3,
+       "iconKey": "inv_misc_pelt_bear_ruin_05"
       },
       {
        "nameCn": "舒心草",
@@ -66774,61 +66826,9 @@
      ],
      "skill": {
       "orange": 275,
-      "yellow": 175,
-      "green": 190,
-      "grey": 205
-     },
-     "source": null
-    },
-    {
-     "itemId": "250073",
-     "nameCn": "狂暴迅猛龙肋排",
-     "iconKey": "inv_misc_food_legion_spicedribroast",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "迅猛龙肉",
-       "count": 2,
-       "iconKey": "inv_misc_food_69"
-      },
-      {
-       "nameCn": "辣椒",
-       "count": 3,
-       "iconKey": "inv_misc_food_legion_dalapenopepper"
-      }
-     ],
-     "skill": {
-      "orange": 275,
-      "yellow": 185,
-      "green": 200,
-      "grey": 215
-     },
-     "source": null
-    },
-    {
-     "itemId": "250081",
-     "nameCn": "蛤蜊扁面条",
-     "iconKey": "inv_misc_bowl_01",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "美味的蚌肉",
-       "count": 3,
-       "iconKey": "inv_misc_food_51"
-      },
-      {
-       "nameCn": "舒心草",
-       "count": 4,
-       "iconKey": "inv_misc_food_vendor_rice"
-      }
-     ],
-     "skill": {
-      "orange": 275,
-      "yellow": 200,
-      "green": 220,
-      "grey": 240
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
      },
      "source": null
     },
@@ -66852,86 +66852,8 @@
      ],
      "skill": {
       "orange": 275,
-      "yellow": 260,
-      "green": 280,
-      "grey": 300
-     },
-     "source": null
-    },
-    {
-     "itemId": "250071",
-     "nameCn": "冒热气的雄鹿排",
-     "iconKey": "inv_misc_food_meat_cooked_01",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "鹿肉",
-       "count": 3,
-       "iconKey": "inv_misc_pelt_wolf_ruin_03"
-      },
-      {
-       "nameCn": "舒心草",
-       "count": 4,
-       "iconKey": "inv_misc_food_vendor_rice"
-      }
-     ],
-     "skill": {
-      "orange": 275,
-      "yellow": 260,
-      "green": 280,
-      "grey": 300
-     },
-     "source": null
-    },
-    {
-     "itemId": "250075",
-     "nameCn": "史前手撕迅猛龙肉",
-     "iconKey": "inv_misc_food_124_skewer",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "迅猛龙肉",
-       "count": 3,
-       "iconKey": "inv_misc_food_69"
-      },
-      {
-       "nameCn": "舒心草",
-       "count": 4,
-       "iconKey": "inv_misc_food_vendor_rice"
-      }
-     ],
-     "skill": {
-      "orange": 275,
-      "yellow": 260,
-      "green": 280,
-      "grey": 300
-     },
-     "source": null
-    },
-    {
-     "itemId": "250066",
-     "nameCn": "翱翔的潘普洛纳",
-     "iconKey": "inv_misc_food_meat_cooked_05",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "秃鹫的翅膀",
-       "count": 3,
-       "iconKey": "inv_misc_monsterscales_02"
-      },
-      {
-       "nameCn": "舒心草",
-       "count": 3,
-       "iconKey": "inv_misc_food_vendor_rice"
-      }
-     ],
-     "skill": {
-      "orange": 275,
-      "yellow": 275,
-      "green": 292,
+      "yellow": 280,
+      "green": 295,
       "grey": 310
      },
      "source": null
@@ -66956,27 +66878,105 @@
      ],
      "skill": {
       "orange": 275,
-      "yellow": 275,
-      "green": 290,
-      "grey": 305
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
      },
      "source": null
     },
     {
-     "itemId": "250067",
-     "nameCn": "蝙蝠肉碎",
-     "iconKey": "inv_misc_food_115_condorsoup",
+     "itemId": "250071",
+     "nameCn": "冒热气的雄鹿排",
+     "iconKey": "inv_misc_food_meat_cooked_01",
      "quality": 1,
      "isNew": true,
      "mats": [
       {
-       "nameCn": "肥美翅根",
+       "nameCn": "鹿肉",
        "count": 3,
-       "iconKey": "inv_misc_pelt_bear_ruin_05"
+       "iconKey": "inv_misc_pelt_wolf_ruin_03"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null
+    },
+    {
+     "itemId": "250072",
+     "nameCn": "迅击肉排",
+     "iconKey": "inv_misc_food_49",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "虎肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_14"
       },
       {
        "nameCn": "舒心草",
        "count": 2,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null
+    },
+    {
+     "itemId": "250075",
+     "nameCn": "史前手撕迅猛龙肉",
+     "iconKey": "inv_misc_food_124_skewer",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null
+    },
+    {
+     "itemId": "250081",
+     "nameCn": "蛤蜊扁面条",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "美味的蚌肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
        "iconKey": "inv_misc_food_vendor_rice"
       }
      ],
@@ -67223,7 +67223,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -67323,7 +67323,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -68126,7 +68126,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -68137,13 +68137,13 @@
    "recipes": [],
    "nodes": [],
    "unparsed": true,
-   "note": "上游这一页不是配方或采集点表格，本轮没解析出条目；有页面但不编数据",
+   "note": "这一页不是配方表或采集点表的形式，条目这一版还没能拆出来；有页面但不编数据",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   }

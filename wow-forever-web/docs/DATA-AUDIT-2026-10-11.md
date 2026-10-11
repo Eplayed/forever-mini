@@ -6,8 +6,8 @@
 
 | 项 | 数 |
 | --- | --- |
-| 词条总数 | 1468 |
-| 在声明的官方页里逐字命中 | 1420 |
+| 词条总数 | 1517 |
+| 在声明的官方页里逐字命中 | 1469 |
 | 去掉汉字间排版空格才命中（要人眼确认） | 44 |
 | **未命中（要人工回原文看）** | 2 |
 | 已人工判定并留痕（见 audit-exceptions.json） | 2 |
@@ -15,7 +15,7 @@
 | 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | 0 |
 
 核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、`world.json` 的稀有精英名与掉落物名、书名与上交奖励名（区域名不在此列，见上）、`changes.json` 的 964 条天赋与法术名（只核名称，句子本站不存）、`legacy.json` 的传承专长名与进度奖励名（同样只核名称），`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、亮点组合与天裔导语。
-| 命中率 | 96.7% |
+| 命中率 | 96.8% |
 
 ## 来源页
 
@@ -64,12 +64,14 @@
 | 缓存 | https://wowforever.wclbox.com/fuben/upper-blackrock-spire/ | 1 |
 | 缓存 | https://wow.blizzard.cn/news/24302070/index.html | 2 |
 | 缓存 | https://worldofwarcraft.blizzard.com/en-us/forever | 2 |
+| 缓存 | https://wow.blizzard.cn/news/24302097/index.html | 20 |
+| 缓存 | https://wow.blizzard.cn/news/24310968/index.html | 28 |
 | 缓存 | https://wowforever.wclbox.com/xiyou | 66 |
 | 缓存 | https://wowforever.wclbox.com/shuji | 45 |
-| 缓存 | https://wowforever.wclbox.com/gaidong | 964 |
-| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791485113190/changes.json | 964 |
+| 缓存 | https://wowforever.wclbox.com/gaidong | 965 |
+| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791702948979/changes.json | 965 |
 | 缓存 | https://wowforever.wclbox.com/chuancheng | 25 |
-| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791561473931/legacy.json | 25 |
+| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json | 25 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）
 

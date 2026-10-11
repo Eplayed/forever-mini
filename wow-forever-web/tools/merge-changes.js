@@ -41,7 +41,7 @@ const items = (up.rows || []).map((x) => {
         checkedAt: up.meta.scrapedAt },
       // /gaidong 页面正文是客户端渲染的，SSR 里只有抽样；逐字回查要打到它渲染用的那份 JSON
       { type: 'datamine_cn', url: up.meta.endpoint,
-        note: '本页渲染用的结构化记录，名称与改动类别以此为准',
+        note: '这一页渲染用的那份客户端记录，名称与改动类别以此为准',
         checkedAt: up.meta.scrapedAt }
     ]
   };
@@ -78,11 +78,11 @@ const payload = {
     classicBuild: up.meta.classicBuild,
     sources: [{ url: up.meta.source, label: '新手盒子 · 改动页（其源为 wago.tools 客户端 DB）' }],
     upstreamCounts: U,
-    textPolicy: '入库前删掉的字段：' + (up.meta.droppedFields || []).join('、') +
-      '。界面只列名称与改动类别，要看逐字前后对照请去上游页，本站不复制。',
+    textPolicy: '落盘前删掉的：' + (up.meta.droppedFields || []).join('、') +
+      '。界面只列名称与改动类别，要看逐字前后对照请去那家资料站的改动页，本站不复制。',
     notCollected: [
-      '改动前后的技能/天赋文本：属描述文案，2026-10-09 口径明确不搬',
-      '上游自己写的改动摘要与备注（summary / forever_note / uncertainties）：第三方判断，不搬',
+      '改动前后的技能/天赋文本：属描述文案，2026-10-09 定下的做法就是不搬',
+      '那家资料站自己写的改动摘要与备注（summary / forever_note / uncertainties）：第三方判断，不搬',
       '法术在技能书里的排列顺序：客户端里有这项数据，但对查资料没用，先不存',
       '强度影响评价：不做强度排行，这条只在资料完整度排行里出现'
     ],

@@ -2,7 +2,7 @@
  "meta": {
   "classId": "mage",
   "source": "https://wowforever.wclbox.com/tianfu/mage",
-  "scrapedAt": "2026-10-09",
+  "scrapedAt": "2026-10-11",
   "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
  },
  "grids": [

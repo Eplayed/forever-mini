@@ -3,8 +3,8 @@ module.exports = {
  "site": "无限中文资料站",
  "disclaimer": "非官方粉丝资料站，与暴雪娱乐及网易无关。",
  "dataBaseline": {
-  "build": "forever-beta 1.60.x（未逐条核对）",
-  "checkedAt": "2026-10-07"
+  "build": "无限 Beta 客户端 1.60.1.70338（天赋树成品仍是两份第三方资料站 2026-10-07 的对齐结果）",
+  "checkedAt": "2026-10-11"
  },
  "launch": "2026-11-05",
  "checkedAt": "2026-10-07",

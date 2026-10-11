@@ -93,13 +93,13 @@ CONTINENTS.forEach((c) => {
       faction: z.faction || (r ? r.faction : null),
       side: SIDE_OF[z.faction] || (r ? SIDE_OF[r.faction] : null),
       isNew: !!r, ownMap: r ? r.ownMap : false, flight: r ? r.flight : null,
-      flightNote: r ? '飞行路线的存在性取自上游，具体站点待实测' : null,
+      flightNote: r ? '客户端记录里有飞行路线这件事，具体站点待实测' : null,
       areaId: typeof z.area === 'number' ? z.area : null,
       mapId: mapId,
       mapFile: mapId && MAP_IMG[mapId] ? MAP_IMG[mapId] : null,
       rareCount: rareCountByZone[z.name] || 0,
       bookCount: bookCountByZone[z.name] || 0,
-      levelNote: '等级与阵营同一条上游记录，两处在用的表没有冲突',
+      levelNote: '等级与阵营来自同一条客户端记录，两处用的表没有冲突',
       provenance: prov(SRC, '区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）')
     }, ranged(z.min, z.max)));
   });
@@ -115,7 +115,7 @@ Object.keys(reachBy).forEach((name) => {
     nameCn: name, slug: r.ownMapSlug || null, continent: 'new', continentCn: '无限新增',
     faction: r.faction, side: SIDE_OF[r.faction] || null,
     isNew: true, ownMap: r.ownMap, flight: r.flight,
-    flightNote: '飞行路线的存在性取自上游，具体站点待实测',
+    flightNote: '客户端记录里有飞行路线这件事，具体站点待实测',
     areaId: null, mapId: mapId,
     mapFile: mapId && MAP_IMG[mapId] ? MAP_IMG[mapId] : null,
     rareCount: rareCountByZone[name] || 0, bookCount: bookCountByZone[name] || 0,
@@ -251,14 +251,14 @@ const books = [];
 });
 const booksMissing = (P.shuji ? P.shuji.missing || [] : []).map((b) => ({
   nameCn: b.name, nameEn: b.key || null, itemId: b.item || null, iconKey: b.icon || null, placed: false,
-  provenance: prov(PAGE.book, '上游只给出书名与物品 ID，没给坐标')
+  provenance: prov(PAGE.book, '客户端记录里只有书名与物品 ID，没有坐标')
 }));
 const bookRewards = ((P.shuji || {}).rewards || []).map((r) => ({
   books: r.books, title: r.title, questId: r.quest || null, level: typeof r.level === 'number' ? r.level : null,
   items: (r.items || []).map(itemOf).filter(Boolean),
   // 上游这一档只给了门槛和任务 ID，没列奖励物品：写清楚，界面显示"待实测"而不是留白
   noReward: !(r.items || []).length,
-  noRewardNote: (r.items || []).length ? null : '上游只给出上交门槛与任务 ID，奖励物品未采集',
+  noRewardNote: (r.items || []).length ? null : '客户端记录里只有上交门槛与任务 ID，奖励物品这一版还没有',
   provenance: prov(PAGE.book, '上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）')
 }));
 const librarians = ((P.shuji || {}).librarians || []).map((l) => ({
@@ -292,7 +292,7 @@ const bagTool = {
     stacks: sd.bag.stacks, buffHours: sd.bag.buffSec ? Math.round(sd.bag.buffSec / 3600) : null
   } : null,
   paramsLevel: 'L2',
-  paramsNote: '机制数值取自上游对物品说明的解析，本站没有游戏内实测过；具体收益以游戏内为准',
+  paramsNote: '数值来自客户端里这件物品的说明，本站没有在游戏内实测过；具体收益以游戏内为准',
   camps: camps
 };
 
@@ -308,18 +308,18 @@ const payload = {
       { url: PAGE.book, label: '新手盒子 · 图书馆书籍' },
       { url: PAGE.bag, label: '新手盒子 · 舒适的睡袋' }
     ],
-    took: '区域等级与阵营、mapId 与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点',
-    skipped: '上游的书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率',
+    took: '区域等级与阵营、地图编号与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点',
+    skipped: '书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率',
     notCollected: [
-      '世界地图底图与可缩放交互：那是上游自己切的 1715 张瓦片，本站不搬图也不做交互地图，只给区域清单与坐标',
+      '世界地图底图与可缩放交互：那是第三方资料站自己切的 1715 张瓦片，本站不搬图也不做交互地图，只给区域清单与坐标',
       '睡袋页面的冲级路线（步骤、途经点顺序、收益讲解）：属攻略性质，本站红线不做，只保留地点与坐标',
-      '睡袋相关的 17 件杂物清单：上游把路线补给品混在一张表里，拆不出干净的物品口径',
-      '成就：上游已经放出 46 条结构化数据，本轮没接，属于另一个模块',
-      '区域人口、天气、稀有刷新计时：客户端里没有这类字段，编不出来'
+      '睡袋相关的 17 件杂物清单：客户端记录把路线补给品混在一张表里，拆不出干净的物品清单',
+      '成就：客户端已经放出 46 条记录，这一版还没接进来，属于另一个模块',
+      '区域人口、天气、稀有刷新计时：客户端里没有这类数据，编不出来'
     ],
-    levelNote: '本文件全部字段是无限客户端解包出来的游戏内中文（经第三方站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列',
-    mapNote: '小地图只转存上游真的切出来的那些：上游没给的区域显示 mapId 与坐标，不放假图',
-    coordinateNote: '坐标两套并存：mapId 定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包',
+    levelNote: '这一份记录是无限客户端里的游戏内中文（经第三方资料站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列',
+    mapNote: '小地图只转存客户端里真有的那几张：没有的区域显示地图编号与坐标，不放假图',
+    coordinateNote: '坐标两套并存：地图编号定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包',
     mapIdMismatch: mismatches
   },
   continents: CONTINENTS.map((c) => ({
@@ -338,7 +338,7 @@ const payload = {
   bookRewards: bookRewards,
   librarians: librarians,
   bagTool: bagTool,
-  provenance: prov(SRC, '世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做形状与口径')
+  provenance: prov(SRC, '世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做整理与核对')
 };
 // 上游没切出小地图的区域：写进 meta，界面据此说明"为什么这块是空的"
 payload.meta.mapsWithoutImage = zones.filter((z) => z.mapId && !z.mapFile).map((z) => z.nameCn);

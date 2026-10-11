@@ -853,27 +853,35 @@ if (fs.existsSync(lgPath)) {
     });
   });
   const lchIds = new Set();
-  let lchN = 0;
+  let lchN = 0, lchSum = 0;
+  const declaredVariants = new Set((rules.pointVariants || []).flatMap((v) => (v.ids || []).map(String)));
   (lg.challenges || []).forEach((c) => {
     if (!c.nameCn) errs.push('legacy challenge 分类：缺中文名');
     (c.items || []).forEach((x) => {
       lchN++;
+      lchSum += Number(x.points) || 0;
       if (!/^\d+$/.test(String(x.id || ''))) errs.push(`legacy challenge ${x.nameCn}：缺数字 id`);
       if (lchIds.has(x.id)) errs.push(`legacy challenge：id 重复 ${x.id}`);
       lchIds.add(x.id);
       if (!x.nameCn) errs.push(`legacy challenge ${x.id}：缺名称`);
       if (!x.requirement) errs.push(`legacy challenge ${x.id}：没有完成条件，这条等于空壳`);
-      if (x.points !== rules.pointPerChallenge) {
-        errs.push(`legacy challenge ${x.id}：点数 ${x.points} 与规则「每项 ${rules.pointPerChallenge} 点」不一致`);
+      // 每条挑战的点数以明细为准；与"每项 N 点"不一样的那些，必须在 meta.rules.pointVariants
+      // 里逐条声明过——两个说法都留在数据里，但不许静默摆着一个没交代的偏差。
+      if (x.points !== rules.pointPerChallenge && !declaredVariants.has(String(x.id))) {
+        errs.push(`legacy challenge ${x.id}：点数 ${x.points} 既不等于规则的「每项 ${rules.pointPerChallenge} 点」，也没在 pointVariants 里声明`);
       }
       scanNoPercent('legacy challenge', x, x.id);
       checkRecord('legacy challenge', x);
     });
   });
   if (counts.challenges !== lchN) errs.push(`legacy：挑战明细数出 ${lchN}，meta 写着 ${counts.challenges}`);
+  // 客户端给的这个合计是"点数之和"而不是"条数"（每项都是 1 点时两者相等，所以历史上没暴露过）
   if (LM.counts.upstreamChallengeTotal !== undefined &&
-    LM.counts.upstreamChallengeTotal !== lchN) {
-    errs.push(`legacy：本站 ${lchN} 项挑战，上游自报 ${LM.counts.upstreamChallengeTotal}，抄漏或抄重了`);
+    LM.counts.upstreamChallengeTotal !== lchSum) {
+    errs.push(`legacy：${lchN} 项挑战的点数合计 ${lchSum}，客户端给的合计 ${LM.counts.upstreamChallengeTotal}，抄漏或抄重了`);
+  }
+  if (rules.rulesConflict && !declaredVariants.size && rules.clientRulePointPerChallenge === rules.pointPerChallenge) {
+    errs.push('legacy：写了点数说法冲突，却没声明任何偏差条目');
   }
   if ((LM.counts.perks || 0) !== (lg.perks || []).length) errs.push('legacy：专长条数与 meta 对不上');
   if ((LM.counts.slots || 0) !== (lg.perks || []).length + (lg.unknownSlots || []).length) {

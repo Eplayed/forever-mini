@@ -1,11 +1,11 @@
 {
  "meta": {
   "table": "GroupFinderActivity",
-  "build": "1.60.1.70334",
-  "release": "r-1791619179598",
-  "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
-  "categoryUrl": "https://wago.tools/db2/GroupFinderCategory/csv?build=1.60.1.70334",
-  "fetchedAt": "2026-10-10",
+  "build": "1.60.1.70338",
+  "release": "r-1791702948979",
+  "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+  "categoryUrl": "https://wago.tools/db2/GroupFinderCategory/csv?build=1.60.1.70338",
+  "fetchedAt": "2026-10-11",
   "took": "活动 ID、英文原名、类别、最低等级与建议上限等级、人数上限、地图 ID",
   "skipped": "表里的说明文本列；本站不转述别人的描述",
   "note": "wago.tools 是客户端 DB2 的 CSV 转储站，不是暴雪域名。这里的英文名属「官方英文原文，经第三方转述」，界面按 L1 显示，不支撑 L0。",

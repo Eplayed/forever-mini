@@ -7,7 +7,7 @@
   "upstream": {
    "site": "新手盒子 · 魔兽世界无限数据库",
    "source": "https://wowforever.wclbox.com/fuben",
-   "scrapedAt": "2026-10-10"
+   "scrapedAt": "2026-10-11"
   }
  },
  "newDungeons": [
@@ -95,6 +95,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "officialBacked": true,
@@ -225,6 +231,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "officialBacked": true,
@@ -346,6 +358,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "officialBacked": true,
@@ -408,6 +426,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "officialBacked": true,
@@ -808,6 +832,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "奥格瑞玛 · 部落",
@@ -1370,6 +1400,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "贫瘠之地",
@@ -1792,6 +1828,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "西部荒野",
@@ -2300,6 +2342,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "银松森林",
@@ -2542,6 +2590,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "灰谷",
@@ -2743,6 +2797,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "暴风城 · 联盟",
@@ -3143,6 +3203,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "丹莫罗",
@@ -3417,6 +3483,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "贫瘠之地",
@@ -3608,6 +3680,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3727,6 +3805,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -3804,6 +3888,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -4096,6 +4186,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "贫瘠之地",
@@ -4266,6 +4362,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "提瑞斯法林地",
@@ -4678,6 +4780,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "荒芜之地",
@@ -5280,6 +5388,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "塔纳利斯",
@@ -5720,6 +5834,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "凄凉之地",
@@ -5962,6 +6082,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "悲伤沼泽",
@@ -7325,6 +7451,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "黑石山",
@@ -7678,6 +7810,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -8466,6 +8604,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "黑石山",
@@ -8822,6 +8966,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -9313,6 +9463,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "菲拉斯",
@@ -10206,6 +10362,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "西瘟疫之地",
@@ -10865,6 +11027,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "东瘟疫之地",
@@ -11659,6 +11827,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "东瘟疫之地",
@@ -12558,6 +12732,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-11"
     }
    ],
    "zoneCn": "黑石山 · 10 人",
@@ -12661,6 +12841,12 @@
      "type": "fan_db",
      "url": "https://wowclassicforever.info/raids/onyxias-lair",
      "note": "它把这座列为 40 人团队条目，并写了\"官方还没说\"的推测段；本站只取人数这一个数，不搬它的讲解",
+     "checkedAt": "2026-10-11"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+     "note": "客户端版本 1.60.1.70338 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-11"
     }
    ],

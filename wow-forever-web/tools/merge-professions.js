@@ -20,7 +20,7 @@ const professions = (up.professions || []).map((p) => {
     id: p.id,
     nameCn: p.nameCn,
     nameEn: EN[p.id] || null,
-    nameEnSource: EN[p.id] ? '上游 URL slug，不是官方英文页用词' : null,
+    nameEnSource: EN[p.id] ? '英文名叫法取自那家资料站的网址用词，不是官方英文页的原词' : null,
     kind: p.kind,
     unparsed: !!p.unparsed,
     note: p.note || null,
@@ -53,7 +53,7 @@ const payload = {
     took: up.meta.took,
     skipped: up.meta.skipped,
     notCollected: [
-      '野营（camping）：上游那一页不是表格结构，本轮没解析出条目；有页面但不编数据',
+      '野营（camping）：那一页不是表格形式，条目这一版还没能拆出来；有页面但不编数据',
       '冲级路线与材料性价比建议：属攻略性质，本站红线不做',
       '商人青睐配方与专业专精选择建议：同上',
       '配方产物的装备属性与强度评价：不做强度排行'

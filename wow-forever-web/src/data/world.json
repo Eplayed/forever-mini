@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generatedAt": "2026-10-09",
+  "generatedAt": "2026-10-11",
   "kind": "client-datamine",
   "method": "tools/scrape-wclbox-shuju.py 抓 _shuju 数据包 → tools/merge-world.js 整形",
-  "release": "r-1791485113190",
-  "foreverBuild": "1.60.1.70235",
+  "release": "r-1791702948979",
+  "foreverBuild": "1.60.1.70338",
   "dropsAsOf": "2026-10-06",
   "sources": [
    {
@@ -24,18 +24,18 @@
     "label": "新手盒子 · 舒适的睡袋"
    }
   ],
-  "took": "区域等级与阵营、mapId 与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点",
+  "took": "区域等级与阵营、地图编号与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点",
   "skipped": "书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率",
   "notCollected": [
-   "世界地图底图与可缩放交互：那套底图瓦片是别人自己切的，本站不搬图也不做交互地图，只给区域清单与坐标",
+   "世界地图底图与可缩放交互：那是第三方资料站自己切的 1715 张瓦片，本站不搬图也不做交互地图，只给区域清单与坐标",
    "睡袋页面的冲级路线（步骤、途经点顺序、收益讲解）：属攻略性质，本站红线不做，只保留地点与坐标",
-   "睡袋相关的 17 件杂物清单：补给品和杂物混在同一张表里，拆不出干净的物品清单",
-   "成就：那边已经能给出 46 条能列成表的数据，这一版还没接进来，属于另一个模块",
+   "睡袋相关的 17 件杂物清单：客户端记录把路线补给品混在一张表里，拆不出干净的物品清单",
+   "成就：客户端已经放出 46 条记录，这一版还没接进来，属于另一个模块",
    "区域人口、天气、稀有刷新计时：客户端里没有这类数据，编不出来"
   ],
-  "levelNote": "本文件全部字段是无限客户端解包出来的游戏内中文（经第三方站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列",
-  "mapNote": "小地图只转存客户端真有的那些：没有的区域显示地图编号与坐标，不放假图",
-  "coordinateNote": "坐标两套并存：地图编号定位到具体那张图，百分比是图上的位置，「世界」是客户端里的原始坐标；三者都来自同一份记录",
+  "levelNote": "这一份记录是无限客户端里的游戏内中文（经第三方资料站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列",
+  "mapNote": "小地图只转存客户端里真有的那几张：没有的区域显示地图编号与坐标，不放假图",
+  "coordinateNote": "坐标两套并存：地图编号定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包",
   "mapIdMismatch": [],
   "mapsWithoutImage": [
    "希尔斯布莱德丘陵",
@@ -83,13 +83,13 @@
    "mapFile": "img/art/maps/1426.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -116,13 +116,13 @@
    "mapFile": "img/art/maps/1429.webp",
    "rareCount": 2,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -149,13 +149,13 @@
    "mapFile": "img/art/maps/1420.webp",
    "rareCount": 4,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -182,13 +182,13 @@
    "mapFile": "img/art/maps/1436.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -215,13 +215,13 @@
    "mapFile": "img/art/maps/1432.webp",
    "rareCount": 1,
    "bookCount": 2,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -248,13 +248,13 @@
    "mapFile": "img/art/maps/1421.webp",
    "rareCount": 0,
    "bookCount": 2,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -281,13 +281,13 @@
    "mapFile": "img/art/maps/1433.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -314,13 +314,13 @@
    "mapFile": "img/art/maps/1431.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -347,13 +347,13 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -380,13 +380,13 @@
    "mapFile": "img/art/maps/1437.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -413,13 +413,13 @@
    "mapFile": "img/art/maps/1416.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -446,13 +446,13 @@
    "mapFile": "img/art/maps/1417.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -479,13 +479,13 @@
    "mapFile": "img/art/maps/1434.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -512,13 +512,13 @@
    "mapFile": "img/art/maps/1418.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -539,19 +539,19 @@
    "isNew": true,
    "ownMap": false,
    "flight": "by-flight",
-   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
+   "flightNote": "客户端记录里有飞行路线这件事，具体站点待实测",
    "areaId": 16591,
    "mapId": "2548",
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -578,13 +578,13 @@
    "mapFile": "img/art/maps/1435.webp",
    "rareCount": 1,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -611,13 +611,13 @@
    "mapFile": "img/art/maps/1425.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -644,13 +644,13 @@
    "mapFile": "img/art/maps/1427.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -677,13 +677,13 @@
    "mapFile": "img/art/maps/1419.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -710,13 +710,13 @@
    "mapFile": "img/art/maps/1422.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -743,13 +743,13 @@
    "mapFile": "img/art/maps/1428.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -776,13 +776,13 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -809,13 +809,13 @@
    "mapFile": "img/art/maps/1423.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -842,13 +842,13 @@
    "mapFile": "img/art/maps/1411.webp",
    "rareCount": 2,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -875,13 +875,13 @@
    "mapFile": "img/art/maps/1412.webp",
    "rareCount": 3,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -908,13 +908,13 @@
    "mapFile": "img/art/maps/1438.webp",
    "rareCount": 2,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -941,13 +941,13 @@
    "mapFile": "img/art/maps/1413.webp",
    "rareCount": 7,
    "bookCount": 3,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -974,13 +974,13 @@
    "mapFile": "img/art/maps/1439.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1007,13 +1007,13 @@
    "mapFile": "img/art/maps/1442.webp",
    "rareCount": 2,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1040,13 +1040,13 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1073,13 +1073,13 @@
    "mapFile": "img/art/maps/1441.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1106,13 +1106,13 @@
    "mapFile": "img/art/maps/1443.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1139,13 +1139,13 @@
    "mapFile": "img/art/maps/1445.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1172,13 +1172,13 @@
    "mapFile": "img/art/maps/1446.webp",
    "rareCount": 1,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1205,13 +1205,13 @@
    "mapFile": "img/art/maps/1444.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1238,13 +1238,13 @@
    "mapFile": "img/art/maps/1447.webp",
    "rareCount": 0,
    "bookCount": 1,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1271,13 +1271,13 @@
    "mapFile": "img/art/maps/1448.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1304,13 +1304,13 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1337,13 +1337,13 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1370,13 +1370,13 @@
    "mapFile": "img/art/maps/1452.webp",
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -1397,26 +1397,26 @@
    "isNew": true,
    "ownMap": false,
    "flight": "by-flight",
-   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
+   "flightNote": "客户端记录里有飞行路线这件事，具体站点待实测",
    "areaId": 616,
    "mapId": "2482",
    "mapFile": "img/art/maps/2482.webp",
    "rareCount": 1,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
     null,
     null
    ],
-   "levelStatus": "这一版没有区域等级数据"
+   "levelStatus": "客户端暂时没给出区域等级"
   },
   {
    "id": "shendralas",
@@ -1430,26 +1430,26 @@
    "isNew": true,
    "ownMap": false,
    "flight": "no-route",
-   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
+   "flightNote": "客户端记录里有飞行路线这件事，具体站点待实测",
    "areaId": 16651,
    "mapId": "2652",
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
     null,
     null
    ],
-   "levelStatus": "这一版没有区域等级数据"
+   "levelStatus": "客户端暂时没给出区域等级"
   },
   {
    "id": "darnassus",
@@ -1469,20 +1469,20 @@
    "mapFile": null,
    "rareCount": 0,
    "bookCount": 0,
-   "levelNote": "等级与阵营出自同一份记录，两处用的表没有冲突",
+   "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
     null,
     null
    ],
-   "levelStatus": "这一版没有区域等级数据"
+   "levelStatus": "客户端暂时没给出区域等级"
   },
   {
    "id": "zephras-isle",
@@ -1496,7 +1496,7 @@
    "isNew": true,
    "ownMap": true,
    "flight": "no-route",
-   "flightNote": "有飞行路线这件事有记录，具体站点待实测",
+   "flightNote": "客户端记录里有飞行路线这件事，具体站点待实测",
    "areaId": null,
    "mapId": "2521",
    "mapFile": "img/art/maps/2521.webp",
@@ -1508,7 +1508,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "新增区域的存在、阵营归属与等级档（经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ],
    "levelRange": [
@@ -2344,7 +2344,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2387,7 +2387,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2430,7 +2430,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2482,7 +2482,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2525,7 +2525,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2568,7 +2568,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2611,7 +2611,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2672,7 +2672,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2715,7 +2715,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2758,7 +2758,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2801,7 +2801,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2844,7 +2844,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2887,7 +2887,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2930,7 +2930,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -2973,7 +2973,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3016,7 +3016,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3059,7 +3059,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3102,7 +3102,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3145,7 +3145,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3188,7 +3188,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3238,7 +3238,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3288,7 +3288,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3322,7 +3322,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3353,7 +3353,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3387,7 +3387,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3421,7 +3421,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3455,7 +3455,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3489,7 +3489,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3523,7 +3523,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3557,7 +3557,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3591,7 +3591,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3625,7 +3625,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3659,7 +3659,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3693,7 +3693,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3727,7 +3727,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3761,7 +3761,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   }
@@ -3906,7 +3906,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3940,7 +3940,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -3974,7 +3974,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4008,7 +4008,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4042,7 +4042,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4076,7 +4076,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4110,7 +4110,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4144,7 +4144,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4178,7 +4178,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4212,7 +4212,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4246,7 +4246,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4280,7 +4280,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4314,7 +4314,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4348,7 +4348,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4382,7 +4382,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4416,7 +4416,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4450,7 +4450,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4484,7 +4484,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4518,7 +4518,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4552,7 +4552,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4586,7 +4586,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4620,7 +4620,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4654,7 +4654,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4688,7 +4688,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4722,7 +4722,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4756,7 +4756,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4790,7 +4790,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4824,7 +4824,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4858,7 +4858,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4889,7 +4889,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4920,7 +4920,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4951,7 +4951,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -4982,7 +4982,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5013,7 +5013,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5044,7 +5044,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5075,7 +5075,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   }
@@ -5091,8 +5091,8 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
-     "note": "只有书名与物品编号，没有坐标",
-     "checkedAt": "2026-10-09"
+     "note": "客户端记录里只有书名与物品 ID，没有坐标",
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5106,8 +5106,8 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
-     "note": "只有书名与物品编号，没有坐标",
-     "checkedAt": "2026-10-09"
+     "note": "客户端记录里只有书名与物品 ID，没有坐标",
+     "checkedAt": "2026-10-11"
     }
    ]
   }
@@ -5145,7 +5145,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5181,7 +5181,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5192,13 +5192,13 @@
    "level": null,
    "items": [],
    "noReward": true,
-   "noRewardNote": "只有上交门槛与任务编号，奖励物品还没拿到",
+   "noRewardNote": "客户端记录里只有上交门槛与任务 ID，奖励物品这一版还没有",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   }
@@ -5219,7 +5219,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   },
@@ -5238,7 +5238,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-09"
+     "checkedAt": "2026-10-11"
     }
    ]
   }
@@ -5263,7 +5263,7 @@
    "buffHours": 2
   },
   "paramsLevel": "L2",
-  "paramsNote": "机制数值是从物品说明里读出来的，本站没有在游戏内实测过；具体收益以游戏内为准",
+  "paramsNote": "数值来自客户端里这件物品的说明，本站没有在游戏内实测过；具体收益以游戏内为准",
   "camps": [
    {
     "stop": "start",
@@ -5289,7 +5289,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-09"
+        "checkedAt": "2026-10-11"
        }
       ]
      },
@@ -5314,7 +5314,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-09"
+        "checkedAt": "2026-10-11"
        }
       ]
      }
@@ -5344,7 +5344,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-09"
+        "checkedAt": "2026-10-11"
        }
       ]
      }
@@ -5374,7 +5374,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-09"
+        "checkedAt": "2026-10-11"
        }
       ]
      }
@@ -5404,7 +5404,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-09"
+        "checkedAt": "2026-10-11"
        }
       ]
      }
@@ -5416,8 +5416,8 @@
   {
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/ditu",
-   "note": "世界线整块数据取自无限客户端解包（经第三方资料站转述），本站只负责整理成能查的样子",
-   "checkedAt": "2026-10-09"
+   "note": "世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做整理与核对",
+   "checkedAt": "2026-10-11"
   }
  ]
 }

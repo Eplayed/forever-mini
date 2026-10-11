@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
-  "scrapedAt": "2026-10-10",
+  "scrapedAt": "2026-10-11",
   "note": "渲染后 DOM 抓取：卡片含载入图路径、所在区域与阵营、首领与掉落计数"
  },
  "cards": [

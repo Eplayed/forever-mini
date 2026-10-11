@@ -181,7 +181,7 @@ def main():
         if not p["recipes"] and not p["nodes"]:
             # 上游这一页不是配方/采集点表格结构（野营就是卡片页）——如实记没解析，别写成"没有内容"
             p["unparsed"] = True
-            p["note"] = u"上游这一页不是配方或采集点表格，本轮没解析出条目；有页面但不编数据"
+            p["note"] = u"这一页不是配方表或采集点表的形式，条目这一版还没能拆出来；有页面但不编数据"
         p["provenance"] = [{"type": "datamine_cn", "url": "%s/zhuanye/%s" % (BASE, p["id"]),
                             "note": u"配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
                             "checkedAt": today}]

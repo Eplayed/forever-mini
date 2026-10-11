@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-10-10",
+  "scrapedAt": "2026-10-11",
   "method": "tools/scrape-wclbox.py --what dungeons --write",
   "took": "名单/等级区间/新本标记/BOSS 名/掉落归属/物品 ID/图标文件名；不取描述文案与攻略"
  },

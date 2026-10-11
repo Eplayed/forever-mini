@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1791561473931/legacy.json",
-  "build": "r-1791561473931",
-  "clientBuild": "1.60.1.70235",
-  "upstreamUpdatedAt": "2026-10-05",
-  "fetchedAt": "2026-10-10",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+  "build": "r-1791702948979",
+  "clientBuild": "1.60.1.70338",
+  "upstreamUpdatedAt": "2026-10-10",
+  "fetchedAt": "2026-10-11",
   "method": "tools/scrape-wclbox-legacy.py 取 _shuju/<发布号>/legacy.json，发布号现读",
   "textPolicy": "落盘前删掉的字段见 droppedFields；效果说明与整句文本一律不存仓库",
   "droppedFields": {
@@ -43,19 +43,19 @@
    {
     "id": "client_legacy",
     "type": "client_data",
-    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70235",
-    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70235"
+    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70338",
+    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70338"
    }
   ]
  },
  "rules": {
-  "point_per_challenge": 1,
+  "point_per_challenge": 16,
   "launch_spending_cap": 16,
-  "launch_earnable_total": 65
+  "launch_earnable_total": 81
  },
  "challengeMeta": {
-  "total": 65,
-  "build": "1.60.1.70235",
+  "total": 81,
+  "build": "1.60.1.70338",
   "unlock": "账号里第一个角色升到 25 级后开放。"
  },
  "trees": [
@@ -1258,6 +1258,15 @@
    "name": "冒险",
    "subcategories": [],
    "items": [
+    {
+     "id": 64283,
+     "name": "参与过《魔兽世界：无限》测试",
+     "requirement": "参与《魔兽世界：无限》测试",
+     "sub": null,
+     "icon": "inv_misc_gift_01",
+     "points": 16,
+     "group": null
+    },
     {
      "id": 62054,
      "name": "让瓦塔拉克公爵安息",

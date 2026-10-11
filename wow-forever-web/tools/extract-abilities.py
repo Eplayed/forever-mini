@@ -31,13 +31,23 @@ _spec.loader.exec_module(at)
 PAGES = [
     {"url": "https://wow.blizzard.cn/news/24301515/index.html", "label": "猎人与德鲁伊职业深度解析"},
     {"url": "https://wow.blizzard.cn/news/24301514/index.html", "label": "牧师与战士职业深度解析"},
+    {"url": "https://wow.blizzard.cn/news/24302097/index.html", "label": "法师与萨满祭司职业深度解析"},
+    {"url": "https://wow.blizzard.cn/news/24310968/index.html", "label": "潜行者与术士职业深度解析"},
 ]
 
-CLASS_HEAD = [(u"猎人", "hunter"), (u"德鲁伊", "druid"), (u"牧师", "priest"), (u"战士", "warrior")]
+CLASS_HEAD = [(u"猎人", "hunter"), (u"德鲁伊", "druid"), (u"牧师", "priest"), (u"战士", "warrior"),
+              (u"法师", "mage"), (u"萨满祭司", "shaman"), (u"潜行者", "rogue"), (u"术士", "warlock")]
+# 专精名一律用官方页小标题里的原词（2026-10-11 逐页核对四个职业共 12 个小标题）。
+# 排序有讲究：head_spec 是"等于或以该词开头"，所以长词必须排在短词前面，
+# 否则官方写的「元素战斗」会被切成「元素」。
 SPEC_HEAD = [(u"野兽控制", "beast-mastery"), (u"射击", "marksmanship"), (u"生存", "survival"),
              (u"野性战斗", "feral"), (u"恢复", "restoration"), (u"平衡", "balance"),
              (u"戒律", "discipline"), (u"神圣", "holy"), (u"暗影", "shadow"),
-             (u"武器", "arms"), (u"狂怒", "fury"), (u"防护", "protection")]
+             (u"武器", "arms"), (u"狂怒", "fury"), (u"防护", "protection"),
+             (u"奥术", "arcane"), (u"火焰", "fire"), (u"冰霜", "frost"),
+             (u"元素战斗", "elemental-combat"), (u"增强", "enhancement"),
+             (u"奇袭", "assassination"), (u"战斗", "combat"), (u"敏锐", "subtlety"),
+             (u"痛苦", "affliction"), (u"恶魔学识", "demonology"), (u"毁灭", "destruction")]
 KIND_HEAD = [(u"基础技能", "skill"), (u"职业基础技能", "skill"), (u"宠物", "pet"), (u"天赋", "talent")]
 
 HEAD_RE = re.compile(r"<h([2-4])[^>]*>([\s\S]*?)</h\1>", re.I)
@@ -68,10 +78,14 @@ def state_of(tag):
 
 
 def head_class(title):
-    if u"职业解析" not in title:
-        return None
+    # 老两类稿的小标题写成「万千形态：德鲁伊职业解析」；2026-10-11 新增的四篇写成
+    # 「法师：因时制宜，施放恰当的法术」——不带「职业解析」四个字，改成"以职业名开头 + 冒号"。
+    # 两种都要认，而且只认小标题开头那个职业名，避免正文里提到别的职业就串了段。
+    t = title.strip()
     for cn, en in CLASS_HEAD:
-        if cn in title:
+        if u"职业解析" in title and cn in title:
+            return en
+        if t.startswith(cn + u"：") or t.startswith(cn + u":"):
             return en
     return None
 
@@ -193,11 +207,14 @@ def main():
         "meta": {
             "generatedAt": datetime.date.today().isoformat(),
             "kind": "official-cn-extract",
-            "method": u"tools/extract-abilities.py 按官方页小标题分段（职业解析 → 基础技能/宠物/天赋 → 专精），"
-                      u"只收「名称：（状态标记。）…」这种整句，名称必须原样出现在句里，否则丢弃。",
+            "method": u"tools/extract-abilities.py 按官方页小标题分段（职业小标题 → 基础技能/宠物/天赋 → 具体专精），"
+                      u"只收「名称：（状态标记。）…」这种整句，名称必须原样出现在句里，否则丢弃。"
+                      u"职业小标题两种写法都认：「万千形态：德鲁伊职业解析」与「法师：因时制宜，施放恰当的法术」。",
             "states": {"new": u"新增", "changed": u"改动", "renamed": u"改名（原X）", "removed": u"移除"},
             "notCollected": [u"未变：官方不会列出没改的东西，缺就是缺，不拿沉默当证据",
-                             u"圣骑士/萨满祭司/法师/术士/潜行者：官方中文深度解析稿尚未发布",
+                             u"圣骑士：官方中文深度解析稿尚未发布（法师与萨满祭司、潜行者与术士两篇已于 2026-10-11 收进来）",
+                             u"官方稿里没带状态标记的句子（例如只写「冰锥术：持续时间缩短。」）不进这张表，"
+                             u"因为它没有可核对的新增/改动/移除判定，收进来等于我们替官方下结论",
                              u"数值细节：除原文写出的那句之外，不做推算"],
             "sources": [{"url": p["url"], "label": p["label"]} for p in PAGES]
         },

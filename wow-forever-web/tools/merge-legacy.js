@@ -108,6 +108,26 @@ const rewards = (raw.rewards || []).map((r) => ({
 
 const rules = raw.rules || {};
 const cm = raw.challengeMeta || {};
+/* 每项挑战给几点：界面把它直接写成"每项 N 点"，所以它必须等于明细里的普遍值。
+   1.60.1.70338 起客户端规则栏写 16，而 66 条明细里 65 条各写 1 点、只有"参与过测试"那条写 16
+   （65 + 16 = 81，正好等于它自己给的合计）——两个说法冲突，这里都不静默改：
+   界面用的取明细普遍值，客户端那个说法原样留在 rulesClientPointPerChallenge 里，
+   冲突本身写进 rulesConflict，并在 pointVariants 里逐条声明，交给 build-data.js 拦"没声明的偏差"。 */
+const chItems = challenges.reduce((a, c) => a.concat(c.items), []);
+const chPointSum = chItems.reduce((a, x) => a + (Number(x.points) || 0), 0);
+const pointTally = {};
+chItems.forEach((x) => { pointTally[x.points] = (pointTally[x.points] || 0) + 1; });
+const modalPoint = Object.keys(pointTally).sort((a, b) => pointTally[b] - pointTally[a])[0];
+const pointVariants = Object.keys(pointTally).filter((k) => k !== modalPoint).map((k) => ({
+  points: +k, count: pointTally[k], ids: chItems.filter((x) => String(x.points) === k).map((x) => String(x.id))
+}));
+const rulesConflict = (modalPoint === undefined ||
+  (rules.point_per_challenge === +modalPoint && !pointVariants.length)) ? null :
+  ('每项挑战给多少点有两个说法：客户端的规则栏写 ' + rules.point_per_challenge + ' 点，'
+    + '而挑战明细里 ' + (pointTally[modalPoint] || 0) + ' 项各写 ' + modalPoint + ' 点'
+    + (pointVariants.length ? '、' + pointVariants.map((v) => v.count + ' 项写 ' + v.points + ' 点').join('、') : '')
+    + '。明细的点数合计 ' + chPointSum + ' 与客户端给的合计能对上。没进游戏逐项打过之前，'
+    + '界面按每条自己的点数摆，不拿规则栏那个说法覆盖明细。');
 const out = {
   meta: {
     kind: 'legacy',
@@ -118,7 +138,10 @@ const out = {
     textPolicy: '只留名称与数值结构。每个专长的每层效果说明、常见问题与领取说明都是别人转述的文本，' +
       '本站不存也不显示；要看逐字效果请去来源页。',
     rules: {
-      pointPerChallenge: rules.point_per_challenge === undefined ? null : rules.point_per_challenge,
+      pointPerChallenge: modalPoint === undefined ? null : +modalPoint,
+      pointVariants: pointVariants,
+      clientRulePointPerChallenge: rules.point_per_challenge === undefined ? null : rules.point_per_challenge,
+      rulesConflict: rulesConflict,
       launchSpendingCap: rules.launch_spending_cap === undefined ? null : rules.launch_spending_cap,
       launchEarnableTotal: rules.launch_earnable_total === undefined ? null : rules.launch_earnable_total,
       unlock: cm.unlock || null
@@ -128,7 +151,8 @@ const out = {
       // 格子是矩形（4×4），"槽位"只数真放了专长的位置
       slots: trees.reduce((a, t) => a + t.slots.filter((x) => !x.empty).length, 0),
       unknownSlots: unknownSlots.length,
-      challenges: challenges.reduce((a, c) => a + c.items.length, 0),
+      challenges: chItems.length,
+      challengePointSum: chPointSum,
       upstreamChallengeTotal: cm.total === undefined ? null : cm.total,
       rewards: rewards.length
     },
@@ -147,7 +171,9 @@ const out = {
 const n = out.meta.counts;
 fs.writeFileSync(path.join(ROOT, 'legacy.json'), JSON.stringify(out, null, 1) + '\n');
 console.log('传承 → src/data/legacy.json：专长 ' + n.perks + ' / 槽位 ' + n.slots +
-  '（未公开 ' + n.unknownSlots + '）/ 挑战 ' + n.challenges +
-  '（上游自报 ' + n.upstreamChallengeTotal + '）/ 进度奖励 ' + n.rewards +
-  '｜规则：每挑战 ' + out.meta.rules.pointPerChallenge + ' 点，首发上限 ' +
-  out.meta.rules.launchSpendingCap + ' 点，可得合计 ' + out.meta.rules.launchEarnableTotal + ' 点');
+  '（未公开 ' + n.unknownSlots + '）/ 挑战 ' + n.challenges + ' 项，点数合计 ' + n.challengePointSum +
+  '（客户端给的合计 ' + n.upstreamChallengeTotal + '）/ 进度奖励 ' + n.rewards +
+  '｜每项挑战 ' + out.meta.rules.pointPerChallenge + ' 点' +
+  (n.challengePointSum !== n.challenges ? '（另有 ' + out.meta.rules.pointVariants.reduce((a, v) => a + v.count, 0) +
+    ' 项不是这个数）' : '') + '，首发上限 ' + out.meta.rules.launchSpendingCap + ' 点；' +
+  (out.meta.rules.rulesConflict || '点数说法无冲突'));
