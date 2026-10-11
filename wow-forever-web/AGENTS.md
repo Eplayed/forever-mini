@@ -44,6 +44,7 @@ python3 tools/site-check.py       # 界面回归自检：16 页渲染 + 天赋�
 python3 tools/site-check.py --app # 加跑新站（Vue）冒烟：要先 cd app && npm run build && npx vite preview --port 8821
 python3 tools/app-assets.py       # 把 src/data 与 src/img 增量同步进 app/public（新站构建前必跑）
 python3 tools/app-parity.py --strict   # 新旧两站逐页对拍（结构计数 / 类名 / 正文文本 / 链接 / 图片）
+python3 tools/visual-check.py --check  # 视觉回归：像素 + 生效值指纹两层（改版后跑；基线见 docs/UI-VISUAL-REGRESSION-2026-10-11.md）
 cd app && npm run build && npx vitest run   # 新站构建 + 组件级单测
 python3 tools/audit-translations.py  # 译名体检
 python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 src/data/releases.json）
