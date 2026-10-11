@@ -7,7 +7,12 @@
 
   <template v-else-if="w">
     <div class="card">
-      <h1 class="pt">世界：区域、稀有与书</h1>
+      <!-- 卡片头：与旧站 decoratePageHead() 产出的结构逐字一致（改版第二批）。
+           世界页的图就是首页图标轨「世界」那一格用的同一张本地原画，站内同一板块同一张脸。 -->
+      <div class="cdhead big">
+        <span class="hicon"><img :src="HEAD_ART" alt="" loading="lazy"></span>
+        <h1 class="pt">世界：区域、稀有与书</h1>
+      </div>
       <p class="dim">区域等级与阵营、稀有精英的刷新点和掉落归属、图书馆书籍的位置，全部来自无限客户端解包（第三方资料站转述），逐条能点开看来源。刷新计时、冲级路线、任何掉落概率都不做。</p>
       <div class="stats">
         <div class="stat"><b>{{ zones.length }}</b>个区域</div>
@@ -277,6 +282,11 @@ import ZoneCard from '../components/ZoneCard.vue';
 import ZoneMap from '../components/ZoneMap.vue';
 import IconCell from '../components/IconCell.vue';
 import LevelPill from '../components/LevelPill.vue';
+
+/* 主卡卡片头用的图：与首页图标轨「世界」那一格同一张本地原画（站内同一板块同一张脸）。
+   必须走 JS 常量而不是模板里的字符串字面量——Vite 会去解析静态 src，public 下的路径不在
+   构建图里，直接写会让 `npm run build` 报 Rollup failed to resolve。 */
+const HEAD_ART = 'img/art/dungeons/city-of-dalaran.webp';
 import SourceList from '../components/SourceList.vue';
 import HlText from '../components/HlText.vue';
 

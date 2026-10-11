@@ -64,7 +64,24 @@
       c.classList.add('rail'); c.dataset.lv = worst;
     });
   }
-  function set(html) { el('main').innerHTML = html; applyRails(el('main')); }
+  /* 卡片头（改版第二批）：每页主卡的 H1 换成「圆图标 + 标题」。
+     图标只允许一种来源——这一页所属板块在首页图标轨上用的那张本地原画（同一板块站内同一张脸）。
+     时间表 / 速查 / 动态 / 排行 / 溯源这五页讲的是本站的观点或流水，没有对应的板块原画，
+     就不放图（cdHead 的 noart 分支保留标题左侧蓝线），不拿不相干的图凑数。
+     放在 set() 里做而不是改 14 处字符串：主卡标题的写法各页不同（有的带 data-lv、有的后面紧跟
+     .mline），一处装饰函数比 14 次字符串手术少得多出错面；重复调用无副作用（没 h1.pt 就跳过）。 */
+  var PAGE_HEAD_SEC = { talent: 'talent', chooser: 'chooser', skills: 'skills', dungeons: 'dungeons',
+    raids: 'raids', races: 'races', professions: 'professions', legacy: 'legacy', world: 'world' };
+  function decoratePageHead() {
+    var m = el('main');
+    if (!m || page === 'home') return;   // 首页主卡在 hero 里，第一批已经给它单独排过（kicker + 图标轨）
+    var card = m.querySelector('.card');
+    var h1 = card && card.querySelector('h1.pt');
+    if (!h1 || !card) return;
+    var sec = PAGE_HEAD_SEC[page];
+    h1.outerHTML = cdHead(h1.innerHTML, { h1: 1, img: sec ? secArt(sec) : '' });
+  }
+  function set(html) { el('main').innerHTML = html; decoratePageHead(); applyRails(el('main')); }
   /* 各页切 tab / 开抽屉时是局部重渲染，不经过 set()。用一个 observer 兜住：
      #main 里新增节点后补一次轨（已定过级的卡直接跳过，重复调用无副作用）。 */
   function watchRails() {
@@ -126,6 +143,30 @@
   function iconKeyOf(x) {
     return (x.kind === 'racial' ? (x.raceId || '') : (x.classId || '')) + '|' + x.cn;
   }
+  /* 卡片头（2026-10-11 改版第二批）：图标 + 标题 + 右侧读数。
+     o.img 只允许两种来源——这张卡讲的那个具体实体自己的本地图，或 secArt() 给的板块图；
+     没有就传空，标题保留蓝线，不放不相干的图凑数。o.act 是这张卡自己的计数或出口，
+     不再塞在标题后面当后缀（"配方 · 118 条"读起来要拐一下，右对齐一眼就扫到）。 */
+  function cdHead(title, o) {
+    o = o || {};
+    var ic = o.img ? '<span class="hicon"><img src="' + D.esc(o.img) + '" alt="" loading="lazy"></span>' : '';
+    var t = o.h1 ? '<h1 class="pt">' + title + '</h1>' : '<h2>' + title + '</h2>';
+    return '<div class="cdhead' + (ic ? '' : ' noart') + (o.h1 ? ' big' : '') + '">' + ic + t +
+      (o.act ? '<span class="cdact">' + o.act + '</span>' : '') + '</div>';
+  }
+  /* 板块图：页级主卡与首页图标轨共用这一份表，同一板块在站内始终是同一张脸。
+     值是本地文件路径；由 site-check 断言每个路径都出现在 src/data/art.json 的清单里
+     （专业那格除外，它用的是官方 CDN 转存的专业图标）——没登记过的图不许上页面。
+     做成常量表而不是从 art.json 现取，是因为各页的数据加载清单不一样，
+     现取会让没引 art.json 的那几页静默没有图标，卡口查不出来。 */
+  var SEC_ART = {
+    talent: 'img/art/classes/druid.webp', chooser: 'img/art/classes/paladin.webp',
+    skills: 'img/art/classes/mage.webp', legacy: 'img/art/races/skyborne.webp',
+    races: 'img/art/races/human.webp', world: 'img/art/dungeons/city-of-dalaran.webp',
+    dungeons: 'img/art/dungeons/blackrock-depths.webp', raids: 'img/art/dungeons/blackmaw-hold.webp',
+    professions: 'img/icons/10prof_table_tailoring01.jpg'
+  };
+  function secArt(sec) { return SEC_ART[sec] || null; }
   /* 词条归属：职业词条按职业分组，种族特长按种族分组，剩下的进「装备与其他」。
      技能书页与术语速查页共用这一份，避免两处分组口径不一致。 */
   function raceLookup(races) {
@@ -168,6 +209,20 @@
     if (rest.length) out.push({ tile: '', name: '装备与其他', sub: '', rows: rest });
     return out;
   }
+  /* 吸顶头部的真实高度写回 --hd-h：锚点让位（#main [id] 的 scroll-margin-top）与
+     吸顶表头都读这一个值。头部高度是内容撑出来的（搜索框、导航带行数、移动端单行），
+     在 CSS 里写死常数一定会飘——2026-10-11 用户反馈"跳锚点顶部被遮挡"就是这么来的。 */
+  function syncHeaderH() {
+    var t = el('top');
+    if (!t) return;
+    var h = Math.round(t.getBoundingClientRect().height);
+    if (h) document.documentElement.style.setProperty('--hd-h', h + 'px');
+  }
+  var hdTimer = 0;
+  window.addEventListener('resize', function () {
+    clearTimeout(hdTimer);
+    hdTimer = setTimeout(syncHeaderH, 120);
+  });
   function shell() {
     var left = launchLeft();
     // 一级是分组标签（只说明归属，不可点），二级项全部平铺：玩家不用点开菜单就知道这站有什么
@@ -186,17 +241,20 @@
         '<button type="submit" class="gsgo">搜索</button></form>' +
         '<div class="chip mono" id="lchip">距上线 ' + left.d + ' 天 ' + pad2(left.h) + ':' +
         pad2(left.m) + ':' + pad2(left.s) + '</div></div></div>' +
-      '<nav class="main" aria-label="主导航"><div class="in">' + NAV.map(function (g) {
-        if (g.href) return navLink(g);
+      '<nav class="main" aria-label="主导航"><div class="in">' + NAV.map(function (g, i) {
+        // 上下两级：组名一块、它的入口排在下面，组与组靠竖分隔与组色区分（见 app.css .ngrp）
+        if (g.href) return '<span class="ngrp solo"><span class="ngi">' + navLink(g) + '</span></span>';
         var hit = g.items.some(function (it) { return page === navKey(it.href); });
-        return '<span class="ngrp' + (hit ? ' hit' : '') + '"><b class="ngt">' + g.t + '</b>' +
-          g.items.map(navLink).join('') + '</span>';
+        return '<span class="ngrp g' + i + (hit ? ' hit' : '') + '" role="group" aria-label="' +
+          D.esc(g.t) + '"><b class="ngt">' + g.t + '</b><span class="ngi">' +
+          g.items.map(navLink).join('') + '</span></span>';
       }).join('') + '</div></nav>';
     // 手机上是横滑导航带：把当前页那一项先滚到中间，免得进来只看到别的分组
     var cur = el('top').querySelector('nav.main a.nl.on');
     if (cur && cur.scrollIntoView && window.innerWidth <= 600) {
       cur.scrollIntoView({ inline: 'center', block: 'nearest' });
     }
+    syncHeaderH();
     Promise.all([D.load('data/meta.json'), D.load('data/scale.json')])
       .then(function (r) {
         var meta = r[0], sc = r[1].scale, cov = sc.pubCoverage;
@@ -616,17 +674,16 @@
         // 板块入口的图标轨：Wowhead 的"美术填充层"就是这么用的——每格一张本地原画，
         // 指向真页面；没有本地图的格子退回字母块，不热链别人的图。
         (function () {
-          var A = ART.classes || {}, R = ART.races || {}, DU = ART.dungeons || {};
           var tiles = [
-            ['天赋计算器', 'talent.html', A.druid, 'D'],
-            ['玩法问答', 'chooser.html', A.paladin, 'P'],
-            ['技能书', 'skills.html', A.mage, 'M'],
-            ['传承', 'legacy.html', R.skyborne, 'L'],
-            ['种族', 'races.html', R.human, 'H'],
-            ['世界', 'world.html', DU['city-of-dalaran'], 'W'],
-            ['副本', 'dungeons.html', DU['blackrock-depths'], 'D'],
-            ['团本', 'raids.html', DU['blackmaw-hold'], 'R'],
-            ['专业', 'professions.html', 'img/icons/10prof_table_tailoring01.jpg', 'C']
+            ['天赋计算器', 'talent.html', secArt('talent'), 'D'],
+            ['玩法问答', 'chooser.html', secArt('chooser'), 'P'],
+            ['技能书', 'skills.html', secArt('skills'), 'M'],
+            ['传承', 'legacy.html', secArt('legacy'), 'L'],
+            ['种族', 'races.html', secArt('races'), 'H'],
+            ['世界', 'world.html', secArt('world'), 'W'],
+            ['副本', 'dungeons.html', secArt('dungeons'), 'D'],
+            ['团本', 'raids.html', secArt('raids'), 'R'],
+            ['专业', 'professions.html', secArt('professions'), 'C']
           ];
           var isNew = (S.navNew || []);
           return '<div class="hrail" aria-label="板块入口">' + tiles.map(function (t) {
@@ -704,19 +761,22 @@
         '<div class="grid g2">' +
         '<div class="card"><h2>最新动态</h2>' +
         '<p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。' +
-        '不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。</p>' +
-        '<h3>官方公告里的时间点</h3>' +
+        '不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。' +
+        '改动条数与完整度在上面的「自经典旧世以来的改动」里，同一个数不在首页摆两遍。</p>' +
+        /* 首页只给摘要：每块三条 + 一个出口，整段提交说明在两行处收住，
+           要读全文点进动态页（2026-10-11 用户反馈这一卡读起来像流水账）。 */
+        '<div class="nsec"><h3>官方公告里的时间点<span class="nact"><a href="updates.html#k0">全部 ' +
+          recent.length + ' 个 →</a></span></h3>' +
         recent.slice(0, 3).map(function (x) {
           return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
-            '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
-            '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
-        }).join('') +
-        '<h3>客户端改动与资料完整度</h3><p class="note">这两块的数在上面的「自经典旧世以来的改动」里，' +
-        '动态页只按职业与时间列清单，同一个数不在首页摆两遍。</p>' +
-        (cl.length ? '<h3>本站最近改了什么</h3>' + cl.slice(0, 3).map(function (e) {
+            '<div><b class="clamp2">' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
+            '<p class="dim clamp2">' + D.esc(x.what) + '</p></div></div>';
+        }).join('') + '</div>' +
+        (cl.length ? '<div class="nsec"><h3>本站最近改了什么<span class="nact"><a href="updates.html#k2">全部 ' +
+          cl.length + ' 条 →</a></span></h3>' + cl.slice(0, 3).map(function (e) {
           return '<div class="flowrow"><b class="mono">' + D.esc(e.date) + '</b>' +
-            '<div><b>' + D.esc(e.title) + '</b></div></div>';
-        }).join('') : '') +
+            '<div><b class="clamp2">' + D.esc(e.title) + '</b></div></div>';
+        }).join('') + '</div>' : '') +
         '<a class="cta" href="updates.html">全部动态（' + S.timeline + ' 个时间点 · ' + S.changes +
         ' 条改动 · ' + cl.length + ' 条本站更新）→</a>' +
         '<a class="cta" href="rank.html">资料完整度排行全表 →</a></div>' +
@@ -2890,25 +2950,50 @@
         }
 
         var K = ['官方时间点', '客户端改动', '本站更新'];
+        /* 时间轴要能一眼看出"下一件是哪件"：只提亮最近的那一条（不是"30 天内的全部"——
+           实测那样会一次亮 4 行，等于没有重点），已过去的整行降一档。差多少天按今天现算。 */
+        var TODAY0 = new Date(new Date().toDateString()).getTime();
+        var tsOf = function (x) {
+          return /^\d{4}-\d{2}-\d{2}$/.test(x.date || '')
+            ? new Date(x.date + 'T00:00:00+08:00').getTime() : null;
+        };
+        var nextI = -1, nextT = 0;
+        // 这一页的时间轴是**倒序**排的（最近的日期在最上面），所以"下一件"不能取第一条 ≥ 今天的：
+        // 那样会把 12 月那条当成下一件。按日期取"还没发生里最早的那一条"，与排序方向无关。
+        tl.forEach(function (x, i) {
+          var t = tsOf(x);
+          if (t === null || t < TODAY0) return;
+          if (nextI < 0 || t < nextT) { nextI = i; nextT = t; }
+        });
+        function tlState(x, i) {
+          var t = tsOf(x);
+          if (t === null) return { cls: '', note: '' };
+          var d = Math.round((t - TODAY0) / 86400000);
+          if (i === nextI) return { cls: ' near', note: d === 0 ? '就是今天' : '还有 ' + d + ' 天' };
+          if (d < 0) return { cls: ' past', note: '已过 ' + (-d) + ' 天' };
+          return { cls: '', note: '还有 ' + d + ' 天' };
+        }
         set('<div class="card"><h1 class="pt">最新动态</h1>' +
           '<p class="dim">这一页把"什么变了"拆成三件事各说各的：官方公告里写过的时间点、' +
           '客户端解包出来的职业改动清单、以及我们这座站自己改了什么。' +
           '<b>只在网页提供</b>——小程序按红线不做动态流与排行。</p>' +
-          '<div class="stats">' +
+          '<div class="stats readout">' +
           '<div class="stat"><b>' + tl.length + '</b>个官方时间点</div>' +
           '<div class="stat"><b>' + (ch.items || []).length + '</b>条客户端改动</div>' +
           '<div class="stat"><b>' + S.changesNew + '</b>个新增天赋</div>' +
           '<div class="stat"><b>' + S.changesRemoved + '</b>个移除天赋</div>' +
           '<div class="stat"><b>' + cl.length + '</b>条本站更新</div></div>' +
-          '<div class="picks">' + K.map(function (t, i) {
-            return '<a class="pick" href="#k' + i + '"><b>' + t + '</b></a>';
+          '<div class="picks utabs" role="group" aria-label="跳到本页三个板块">' + K.map(function (t, i) {
+            return '<a class="pick" href="#k' + i + '"><b>' + t + '</b><span class="dim">跳 ↓</span></a>';
           }).join('') + '</div></div>' +
 
           '<div class="card" id="k0"><h2>官方公告里的时间点</h2>' +
           '<p class="note">只列官方公告写过的原话与日期，本站不做新闻转载与评论；中英文两个上线日期并存，不替玩家选一个。</p>' +
-          tl.map(function (x) {
-            return '<div class="flowrow"><b class="mono">' + D.esc(x.date) + '</b>' +
+          tl.map(function (x, i) {
+            var st = tlState(x, i);
+            return '<div class="flowrow' + st.cls + '"><b class="mono">' + D.esc(x.date) + '</b>' +
               '<div><b>' + D.esc(x.title) + '</b> ' + D.pill(x.level) +
+              (st.note ? ' <span class="when mono">' + st.note + '</span>' : '') +
               '<p class="dim">' + D.esc(x.what) + '</p></div></div>';
           }).join('') +
           '<h3>来源与核对</h3>' + D.sources((tl[0] || {}).provenance) + '</div>' +
@@ -3004,8 +3089,8 @@
     // 只有真的用 file:// 打开时才给本地服务命令，否则页面上不该出现这些
     var local = location.protocol === 'file:';
     set('<div class="card"><h2>数据没加载出来</h2><p class="dim">刷新一下试试；' +
-      (local ? '这个站要起一个本地服务才能读数据：在项目里执行 <code>cd src &amp;&amp; python3 -m http.server 8812</code>，' +
-        '再访问 <code>http://127.0.0.1:8812</code>。' : '如果一直这样，请把这一页的地址发给我们。') +
+      (local ? '这个站要起一个本地服务才能读数据：在项目里执行 <code>bash tools/serve.sh</code>，' +
+        '再访问 <code>http://127.0.0.1:8817</code>。' : '如果一直这样，请把这一页的地址发给我们。') +
       '</p><button id="rt">重试</button></div>');
     var b = el('rt'); if (b) b.onclick = function () { location.reload(); };
   }

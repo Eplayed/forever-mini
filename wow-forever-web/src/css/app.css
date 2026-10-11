@@ -14,30 +14,47 @@ h1{font-size:20px} h2{font-size:var(--fs-h2);font-weight:650} h3{font-size:14px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 var(--s4) var(--s6)}
 
 /* 顶栏 */
-/* 顶栏两行：第一行品牌 + 上线倒计时，第二行两级常驻导航。
-   一级是分组标签（只说明归属、不可点），二级项全部平铺露出——玩家不点任何东西也能看到这站有什么。 */
-.top{position:sticky;top:0;z-index:20;background:rgba(14,16,19,.94);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line)}
+/* 顶栏两行：第一行品牌 + 全站搜索 + 上线读数，第二行导航。
+   导航是**上下两级**（2026-10-11 用户反馈"平铺看不清"）：每个分组是一块，
+   组名在上、这一组的入口在下，组与组之间靠一条竖分隔 + 各自的组色区分；
+   以前组名和二级项挤在同一行、只差 1.5px 字号与两档灰，读起来就是 17 个并列链接。 */
+.top{position:sticky;top:0;z-index:20;background:var(--top-bg);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .in{max-width:1180px;margin:0 auto;padding:8px var(--s4);display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
 .brand{font-size:16px;font-weight:600;color:var(--gold);white-space:nowrap;text-decoration:none}
 .brand span{color:var(--txt)}
 .brand:hover{text-decoration:none;color:var(--gold)}
 .chip{margin-left:auto;font:12px var(--font-mono);color:var(--gold);border:1px solid var(--line);
   border-radius:999px;padding:3px 10px;background:var(--panel);white-space:nowrap}
-nav.main{border-top:1px solid var(--line);background:rgba(23,26,31,.5)}
+nav.main{border-top:1px solid var(--line);background:var(--panel-2)}
 /* 导航整条要排在 1180 这一行里（与 .wrap 同宽，不许比正文宽）。
-   加了第 17 项「团本」后实测需要 1183px 会换行，所以间距 12→9、项内边距 9→8，
-   留 17px 余量；再往上加项就要动标签字数或分组方式，别继续压字号。 */
-nav.main .in{max-width:1180px;margin:0 auto;padding:0 var(--s4);display:flex;align-items:center;
-  gap:2px 9px;flex-wrap:wrap}
-nav.main a.nl{display:inline-flex;align-items:center;min-height:38px;padding:0 8px;border-radius:var(--r-ctl);
+   改成上下两级后每块变窄（组名不再和项抢横向空间），实测 17 项合计比原来省 ~40px；
+   再加项就动分组，别压字号——字号已经 12.5px。 */
+nav.main .in{max-width:1180px;margin:0 auto;padding:0 var(--s4);display:flex;align-items:flex-end;
+  gap:0;flex-wrap:wrap}
+nav.main a.nl{display:inline-flex;align-items:center;min-height:34px;padding:0 8px;border-radius:var(--r-ctl);
   color:var(--txt-dim);font-size:12.5px;text-decoration:none}
 nav.main a.nl:hover{background:var(--panel-2);color:var(--txt);text-decoration:none}
 nav.main a.nl.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
-.ngrp{display:inline-flex;align-items:center;gap:2px;position:relative;padding-left:11px}
-.ngrp::before{content:"";position:absolute;left:0;top:50%;margin-top:-8px;width:1px;height:16px;background:var(--line)}
-.ngt{font-size:11px;font-weight:600;letter-spacing:.6px;color:var(--lead);white-space:nowrap;padding-right:3px}
-.ngrp.hit .ngt{color:var(--gold)}
+/* 组块左右各 7px：改成上下两级后组名不再与项抢横向空间，但 6 个组的内边距
+   实测把整条导航撑到超出 1180 容器约 50px（断言"桌面导航排在一行内"报的就是这个），
+   所以从 10px 收到 7px，加上角标回到绝对定位，回到一行内。再加项就要动分组，别压字号。 */
+.ngrp{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:0 7px;
+  --gc:var(--txt-muted)}
+.ngrp::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:1px;background:var(--line)}
+.ngrp.solo{padding-left:0}
+.ngrp.solo::before{display:none}
+/* 「首页」没有组名，容易被读成下一组的成员，所以在它右边补一条分隔（其余组是左边一条） */
+.ngrp.solo::after{content:"";position:absolute;right:0;top:9px;bottom:9px;width:1px;background:var(--line-2)}
+.ngrp .ngi{display:flex;align-items:center;gap:2px}
+.ngt{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--gc);opacity:.62;
+  white-space:nowrap;padding:2px 0 0 2px;line-height:1.2}
+.ngt::before{content:"";display:inline-block;width:8px;height:2px;background:var(--gc);
+  vertical-align:3px;margin-right:4px}
+.ngrp.hit .ngt{opacity:1}
+/* 分组色：只表归属哪一组，不承载数据含义；组名本身是文字，色是第二通道 */
+.ngrp.g1{--gc:var(--nav-1)} .ngrp.g2{--gc:var(--nav-2)} .ngrp.g3{--gc:var(--nav-3)}
+.ngrp.g4{--gc:var(--nav-4)} .ngrp.g5{--gc:var(--nav-5)} .ngrp.g6{--gc:var(--nav-6)}
 
 /* 横幅 */
 .banner{border:1px solid var(--warn);background:rgba(217,161,59,.1);color:var(--txt-caution);
@@ -45,7 +62,11 @@ nav.main a.nl.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 
 .banner.gray{border-color:var(--line);background:var(--panel);color:var(--txt-dim)}
 
 /* 卡片 */
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s4);margin-bottom:var(--s4)}
+.card{background:var(--panel);border:1px solid var(--card-line);border-radius:var(--r-card);padding:var(--s4);margin-bottom:var(--s4)}
+/* 锚点让位：站内跳 #id 与 scrollIntoView 都要给吸顶头部留出高度，
+   否则跳过去目标正好被头部压住（2026-10-11 用户反馈"点击跳转的锚点位置不对，顶部被遮挡"）。
+   --hd-h 由 app.js 量真实头部高度写回，不是拍脑袋的常数。 */
+#main [id]{scroll-margin-top:calc(var(--hd-h) + 14px)}
 .card h2{margin-bottom:var(--s3);color:var(--gold)}
 .grid{display:grid;gap:var(--s3)}
 .g9{grid-template-columns:repeat(auto-fill,minmax(112px,1fr))}
@@ -85,7 +106,7 @@ input[type=search]{flex:1;min-width:180px}
 .cov .L0{background:var(--lv0)} .cov .L1{background:var(--lv1)}
 .cov .L2{background:var(--lv2)} .cov .L3{background:var(--hatch)}
 .stats{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:12px;color:var(--txt-dim)}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:5px 11px;font-size:12px;color:var(--txt-dim)}
 .stat b{color:var(--txt);font-size:15px;margin-right:3px;font-family:var(--font-mono)}
 
 /* 职业条 */
@@ -227,7 +248,9 @@ input[type=range]{width:150px;padding:0;background:transparent;border:none;accen
 /* 表格 */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{color:var(--txt-dim);font-weight:500;font-size:12px;background:var(--sunk);position:sticky;top:0}
+/* 表头吸顶要让开吸顶头部：原来写 top:0，表头停在视口顶 = 正好被头部压住
+   （2026-10-11 实测：副本页那张裸表格表头顶 0px，头部高 104px）。 */
+th{color:var(--txt-dim);font-weight:500;font-size:12px;background:var(--sunk);position:sticky;top:var(--hd-h)}
 tr:hover td{background:rgba(255,255,255,.02)}
 td.en{font:12px var(--font-mono);color:var(--txt-dim)}
 mark{background:rgba(217,161,59,.35);color:var(--mark-ink);border-radius:2px;padding:0 1px}
@@ -236,6 +259,14 @@ mark{background:rgba(217,161,59,.35);color:var(--mark-ink);border-radius:2px;pad
 .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
 /* 分组表在窄屏靠横向滚，别把中文名列挤成一字一行 */
 .scrollx > table{min-width:540px}
+/* 横向滚的容器里**纵向吸顶不成立**：overflow-x:auto 会把 .scrollx 变成滚动容器，
+   而它的高度等于内容高，永远不产生纵向滚动，于是 thead 的 sticky 只是摆设
+   （实测专业/传承/世界/团本页 12 张表表头都跟着表格一起滚走）。
+   这里明确写 static，不留"看起来有吸顶其实没有"的假象；
+   首列 .rh 的左吸顶是真的生效（横向滚），保留。欠账与两个可选方案记在 docs/UI.md 7.3。 */
+.scrollx thead th{position:static}
+/* 首列表头（.rh）的**左**吸顶在横滚里是真生效的，保留；上面那条只是取消纵向吸顶 */
+.scrollx thead th.rh{position:sticky;left:0}
 .tblbox{padding:0;overflow-y:auto;max-height:72vh}
 
 /* 种族 × 职业矩阵 */
@@ -406,8 +437,14 @@ ul.list{margin:var(--s2) 0 0 18px;color:var(--txt-dim);font-size:12.5px}
     -webkit-overflow-scrolling:touch;padding:0 var(--s3);gap:2px var(--s2);scrollbar-width:none}
   nav.main .in::-webkit-scrollbar{display:none}
   nav.main a.nl{min-height:44px;font-size:13.5px;padding:0 12px;flex:0 0 auto;scroll-snap-align:center}
-  .ngt{font-size:12px;padding-right:6px}
-  .ngrp{padding-left:10px;flex:0 0 auto}
+  /* 手机上不做上下两级：组名回到项前面同一行。二级项 44px 命中区 + 组名另占一行
+     会把顶栏顶到 104px，超过"移动端顶栏不超过 100px"这条自己的判据；
+     横向滑动带本来就是靠组名当"段落开头"来读的，颜色区分保留。 */
+  .ngrp{flex-direction:row;align-items:center;padding-left:10px;flex:0 0 auto}
+  .ngrp.solo{padding-left:0}
+  .ngrp .ngi{gap:2px}
+  .ngt{font-size:12px;padding:0 6px 0 0}
+  .ngt::before{display:none}
   .src a{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
   .field input[type=search], .thead input[type=search]{min-height:44px}
   .field select, .field input{min-height:44px}
@@ -894,8 +931,13 @@ a.cta + a.cta{margin-left:var(--s4)}
 /* 角标不占导航宽度：整条导航 1180px 实测余量只有十几像素，
    内联一个「新」字就会把最后一项挤到第二行（39px → 79px）。所以钉在链接右上角。 */
 nav.main a.nl{position:relative}
-.nb{position:absolute;right:-3px;top:-4px;font:600 9px/1 var(--font-mono);border-radius:3px;
-  padding:2px 3px;border:1px solid var(--line);color:var(--txt-dim);white-space:nowrap;pointer-events:none}
+/* 角标：绝对定位在项内右上角，**不占导航宽度**（断言"角标不占导航宽度"就靠这条），
+   同时收在项框内——原来 top:-4px 会飘出导航带压到第一行条上（截图里"新"字浮在外面）。
+   带角标的项右侧多留 9px，免得文字钻到角标底下。 */
+.nb{position:absolute;right:1px;top:1px;display:inline-flex;align-items:center;
+  font:600 9px/1 var(--font-mono);border-radius:var(--r-ctl);padding:2px 3px;
+  border:1px solid var(--line);color:var(--txt-dim);white-space:nowrap;pointer-events:none}
+nav.main a.nl:has(.nb){padding-right:17px}
 .nb.new{border-color:rgba(207,232,221,.42);color:var(--lv0)}
 @media (prefers-reduced-motion:reduce){
   .mod:hover,.mod:focus-visible,.two>.card:hover{transform:none}
@@ -985,8 +1027,11 @@ body{background-image:
 .card{box-shadow:inset 0 1px 0 rgba(255,255,255,.045), 0 10px 26px -14px rgba(0,0,0,.72);
   background-image:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 34%)}
 .card h1.pt,.card h2{letter-spacing:.012em}
-table.entab thead th{position:sticky;top:0;z-index:2;background:var(--panel);
+table.entab thead th{position:sticky;top:var(--hd-h);z-index:2;background:var(--panel);
   box-shadow:inset 0 -2px 0 var(--line), inset 0 -1px 0 rgba(255,255,255,.05)}
+/* 这条必须排在上面那条之后：.scrollx 里的 entab（团本页两张表、副本页排队表）
+   纵向吸顶不成立，写 sticky 就是假吸顶——见 254 行那条注释 */
+.scrollx table.entab thead th{position:static}
 table.entab tbody tr{transition:background var(--dur-1) linear, box-shadow var(--dur-1) linear}
 table.entab tbody tr:hover{background:rgba(255,255,255,.028);
   box-shadow:inset 2px 0 0 var(--gold-deep)}
@@ -1117,6 +1162,65 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .node .rank{color:var(--orange)}
 .node:hover{border-color:var(--orange-ring)}
 
+/* ---- 卡片头 .cdhead（2026-10-11 改版第二批）：圆图标 + 标题 + 右侧读数 ----
+   图标只有两种合法来源：这张卡讲的那个具体实体自己的本地图（种族头像 / 职业图 / 副本载入图），
+   或与首页图标轨同一板块的那张图（页级主卡，同一板块在站内始终是同一张脸）。
+   方法、缺口、来源这类卡不放图——配一张不相干的原画是美术噪声，比留白更糟。
+   类名先 grep 过：.card-head/.hicon 空闲，稿子里的 .act 已被表格单元占用，所以这里叫 .cdact。 */
+.cdhead{display:flex;align-items:center;gap:9px;margin:0 0 var(--s3);
+  padding-bottom:8px;border-bottom:1px solid var(--line)}
+.cdhead h2{margin:0;font-size:15px;line-height:1.35;min-width:0}
+.hicon{flex:none;width:26px;height:26px;border-radius:50%;overflow:hidden;
+  background:var(--elev);border:1px solid var(--line-2);display:grid;place-items:center}
+.hicon img{width:100%;height:100%;object-fit:cover;display:block}
+.cdact{margin-left:auto;flex:none;color:var(--txt-muted);font-size:12px;
+  font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cdact a{color:var(--txt-dim)}
+.cdact a:hover{color:var(--txt)}
+/* 有图标的卡头用圆圈本身标层级，不再加蓝线；没图标的保留那道蓝线。
+   分隔线只在有图标的那一档出现——这样一页里"已套卡片头"和"还没套"的标题长得一样，
+   改版可以一页一页推，不会出现半页有下边框半页没有。 */
+.cdhead h2{border-left:0;padding-left:0}
+.cdhead.noart{border-bottom:0;padding-bottom:0;margin-bottom:var(--s3)}
+.cdhead.noart h2{border-left:2px solid var(--accent-deep);padding-left:9px}
+/* 页标题那一档（H1）：图标放大、不带下边框——标题下面通常紧跟一句说明，画一条线会把它切断 */
+.cdhead.big{border-bottom:0;padding-bottom:0;margin-bottom:var(--s2)}
+.cdhead.big .hicon{width:34px;height:34px}
+.cdhead.big h1.pt{font-size:var(--fs-h1);margin-bottom:0}
+
+/* ---- 动态模块（2026-10-11 用户"页面动态好像也不太满意"）----
+   实测三处毛病：① 顶部 5 个读数与下面 3 个跳转器长得一模一样（都是带边框的小块），
+   数字看着像按钮；② 时间轴 11 行同一重量，看不出哪件还没发生；
+   ③ 首页那张卡把三个小标题塞进一张卡，其中一段只有一句解释没有内容。 */
+.stats.readout{gap:0;border:1px solid var(--card-line);border-radius:var(--r-card);
+  background:var(--sunk);margin-bottom:var(--s3)}
+.stats.readout .stat{border:0;border-right:1px solid var(--line);border-radius:0;background:transparent;
+  padding:8px 14px;display:flex;align-items:baseline;gap:5px}
+.stats.readout .stat:last-child{border-right:0}
+.stats.readout .stat b{font-size:19px;line-height:1}
+/* 跳转器：明确"这是跳过去的"，不是筛选器也不是数字 */
+.picks.utabs{margin-top:0}
+.picks.utabs .pick{background:transparent;border:1px solid var(--line);border-radius:var(--r-ctl);
+  font-size:12.5px;color:var(--txt-dim);padding:5px 10px}
+.picks.utabs .pick:hover{border-color:var(--accent-deep);color:var(--txt);text-decoration:none}
+.picks.utabs .pick .dim{font-size:10.5px;letter-spacing:.04em}
+/* 时间轴：下一件事提亮 + 左侧一道蓝，已过去的整行降一档 */
+.flowrow.near{background:linear-gradient(90deg,rgba(29,141,205,.13),transparent 62%);
+  box-shadow:inset 2px 0 0 var(--accent-deep);padding-left:10px;margin-left:-10px}
+.flowrow.near>div>b{color:var(--txt)}
+.flowrow.past{opacity:.62}
+.when{font-size:11px;color:var(--txt-muted);letter-spacing:.02em;white-space:nowrap}
+.flowrow.near .when{color:var(--accent)}
+/* 首页摘要卡里的小节：标题与出口一行两端对齐，比正文小一档但比正文重 */
+.nsec h3{display:flex;align-items:baseline;gap:10px;margin:var(--s4) 0 var(--s2);
+  font:700 12.5px/1.4 var(--font-display);letter-spacing:.05em;color:var(--txt-dim);
+  border-bottom:1px solid var(--line);padding-bottom:5px}
+.nsec h3 .nact{margin-left:auto;font-weight:400;letter-spacing:0}
+.nsec h3 .nact a{font-size:11.5px;color:var(--accent);text-decoration:none;white-space:nowrap}
+.nsec h3 .nact a:hover{text-decoration:underline}
+/* 摘要收两行：整段提交说明在首页不铺开，全文在动态页 */
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
 @media (max-width:600px){
   /* 外壳在 375px：品牌与搜索各占一行，搜索框与按钮都到 44px 命中区 */
   /* 手机上顶栏只许占一行 + 导航一行（断言卡 100px）：搜索框与品牌并排，
@@ -1133,9 +1237,17 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
   .rb{grid-template-columns:48px minmax(0,1fr) 64px}
   /* 正文与表格里的行内链接也是点击目标：团本页一半的出口是表格里的链接，
      副本页分档标题那句"完整名单在团本那一页"也是 */
-  .card p a,.list li a,.entab a,.empty a,.band a{display:inline-flex;align-items:center;min-height:44px}
+  .card p a,.list li a,.entab a,.empty a,.band a,.cdact a,.nsec .nact a{display:inline-flex;align-items:center;min-height:44px}
   /* 团本页两张表五列，375px 不撑开的话链接会被挤成一竖条；外层 .scrollx 负责横滚 */
   .rtab{min-width:660px}
+  /* 动态页的读数带在手机上两列排（一行五个会把"个官方时间点"挤成一字一行） */
+  .stats.readout{flex-wrap:wrap}
+  .stats.readout .stat{flex:1 1 40%;border-bottom:1px solid var(--line);padding:7px 10px}
+  .flowrow.near{padding-left:8px;margin-left:-8px}
+  /* 卡片头在 375px：读数允许换行，标题拿到剩余宽度（不换行的话"配方 · 118 条"会把标题挤没） */
+  .cdhead{gap:8px}
+  .cdhead h2{font-size:14.5px}
+  .cdact{white-space:normal;text-align:right;max-width:44%}
 }
 @media (prefers-reduced-motion:reduce){
   .kchip,.lcell{transition:none}

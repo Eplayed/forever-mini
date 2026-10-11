@@ -618,7 +618,13 @@ def test_races(browser, base):
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
     navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
-    check("桌面导航排在一行内", navh <= 44, "%d px" % navh)
+    # 这条原来卡 navh<=44，编码的是"导航只有一行"的旧设计。2026-10-11 用户要求改成上下两级
+    # （组名在上、入口在下），导航带必然变高，所以判据改成它真正要防的事：
+    # 入口不许换行溢出、整条带子不超过 56px（再高就吃掉正文首屏）。
+    nav_one = page.evaluate("() => new Set([...document.querySelectorAll('nav.main a.nl')]"
+                            ".map(a => Math.round(a.getBoundingClientRect().top))).size")
+    check("桌面导航排在一行内（两级结构：组名行 + 入口行）",
+          navh <= 56 and nav_one == 1, "导航带 %dpx / 入口占了 %d 行" % (navh, nav_one))
     onb = page.evaluate("() => { const a = document.querySelector('nav.main a.nl.on'); if (!a) return '';"
                         "const c = a.cloneNode(true); c.querySelectorAll('.nb').forEach(n => n.remove());"
                         "return c.textContent.trim(); }")
@@ -1369,9 +1375,11 @@ def test_home(browser, base):
           ".mod:hover" in css and "prefers-reduced-motion" in css and
           "transform:none" in flat[flat.index("prefers-reduced-motion"):],
           "缺 hover 动效或缺可关声明")
+    # 角标不能把导航撑出第二行。判据从"所有 .in 子块 top 相同"改成"所有入口 top 相同"——
+    # 上下两级后，没有组名的「首页」块天然比别的块矮，比子块 top 会把这种正常差异当成换行。
     check("角标不占导航宽度：整条导航仍是一行",
-          page.evaluate("() => { const ns=[...document.querySelectorAll('nav.main .in > *')];"
-          "return new Set(ns.map(e => Math.round(e.getBoundingClientRect().top))).size; }") == 1,
+          page.evaluate("() => new Set([...document.querySelectorAll('nav.main a.nl')]"
+          ".map(a => Math.round(a.getBoundingClientRect().top))).size") == 1,
           "导航换行了")
     hrefs = page.evaluate("""() => [...document.querySelectorAll('.mod, .chipsrow a, .hero .cta')]
       .map(a => (a.getAttribute('href') || '').split('#')[0].split('?')[0].replace('.html', ''))
@@ -2235,6 +2243,144 @@ def test_design_system(browser, base):
     check("顶栏搜索跳到首页并直接出结果",
           "index.html" in ok["url"] and ok["box"] == "领主大厅" and ok["rows"] >= 1,
           json.dumps(ok, ensure_ascii=False))
+
+    # ---- 改版第三批（2026-10-11 用户反馈：导航平铺看不清 / 卡片边框不对 / 跳锚点被头部遮挡）----
+    # ① 导航必须真是上下两级：组名那一行在二级项之上，且六个组名颜色互不相同。
+    #    只断言"组名存在"没用——上一版就是这样，组名和项挤在同一行、只差 1.5px 字号。
+    page.goto(base + "/index.html", wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    nv = page.evaluate("""() => {
+      const labs = [...document.querySelectorAll('nav.main .ngt')];
+      const items = [...document.querySelectorAll('nav.main a.nl')];
+      const top = (e) => Math.round(e.getBoundingClientRect().top);
+      const cs = (e) => getComputedStyle(e);
+      const b = document.querySelector('.nb');
+      const box = b ? b.getBoundingClientRect() : null;
+      const ab = b ? b.closest('a.nl').getBoundingClientRect() : null;
+      return { labTop: Math.max(...labs.map(top)), itemTop: Math.min(...items.map(top)),
+               labels: labs.length, n: items.length,
+               itemRows: [...new Set(items.map(top))].length,
+               hues: [...new Set(labs.map(l => cs(l).color))],
+               itemHue: cs(items.find(a => !a.classList.contains('on'))).color,
+               badgeIn: b ? (box.top >= ab.top - 1 && box.right <= ab.right + 1
+                             && box.bottom <= ab.bottom + 1) : true };
+    }""")
+    check("导航是上下两级：组名行在二级项行之上", nv["labTop"] < nv["itemTop"],
+          "组名底 %s / 项顶 %s / 组 %d 个 / 项 %d 个" % (nv["labTop"], nv["itemTop"], nv["labels"], nv["n"]))
+    check("六个分组标签颜色互不相同，且不跟正文项同色",
+          len(nv["hues"]) == nv["labels"] and nv["itemHue"] not in nv["hues"],
+          "色相 %d 种 / 项色 %s" % (len(nv["hues"]), nv["itemHue"]))
+    check("「新」角标收在项框内：不飘出导航带，也不把入口挤成两行",
+          nv["badgeIn"] and nv["itemRows"] == 1,
+          "角标越界=%s 入口行数=%d" % (not nv["badgeIn"], nv["itemRows"]))
+
+    # ② 卡片描边要真看得见：算一次卡面与描边的边界对比，白 10% 时只有 1.06:1（等于没边）
+    edge = page.evaluate("""() => {
+      const lum = (c) => { const v = c.map(x => { x /= 255; return x <= .03928 ? x / 12.92 : Math.pow((x + .055) / 1.055, 2.4); });
+        return .2126 * v[0] + .7152 * v[1] + .0722 * v[2]; };
+      const rgba = (s) => { const a = (s.match(/[\\d.]+/g) || []).map(Number);
+        return { c: a.slice(0, 3), al: a.length > 3 ? a[3] : 1 }; };
+      const r = (a, b) => (Math.max(lum(a), lum(b)) + .05) / (Math.min(lum(a), lum(b)) + .05);
+      const cs = getComputedStyle(document.querySelector('#main .card'));
+      const pageBg = rgba(getComputedStyle(document.body).backgroundColor).c;
+      const cardBg = rgba(cs.backgroundColor).c;
+      const bd = rgba(cs.borderTopColor);
+      // 描边是半透明白，落在卡面上才看得见：先按 alpha 合成到卡面，再与页面底比边界对比
+      const mix = bd.c.map((v, i) => Math.round(v * bd.al + cardBg[i] * (1 - bd.al)));
+      return { w: cs.borderTopWidth, style: cs.borderTopStyle, al: bd.al,
+               edgeVsPage: +r(mix, pageBg).toFixed(2), cardVsPage: +r(cardBg, pageBg).toFixed(2) };
+    }""")
+    check("卡片描边看得见（边界对页面底 ≥1.15:1，原来白 10% 只有 1.06）",
+          edge["w"] != "0px" and edge["style"] != "none" and edge["edgeVsPage"] >= 1.15,
+          json.dumps(edge, ensure_ascii=False))
+
+    # ③ 锚点与吸顶表头都要让开吸顶头部：逐页跳页内锚点，目标顶部不许落在头部下沿之内
+    hd_bad, th_bad, head_ok = [], [], 0
+    for name in PAGES:
+        page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+        page.wait_for_timeout(1100)
+        r = page.evaluate("""() => {
+          const hd = Math.round(document.querySelector('.top').getBoundingClientRect().height);
+          const hdVar = Math.round(parseFloat(getComputedStyle(document.documentElement)
+            .getPropertyValue('--hd-h')) || 0);
+          const seen = new Set(); const bad = [];
+          document.querySelectorAll('a[href^="#"]').forEach(a => {
+            const id = a.getAttribute('href').slice(1);
+            if (!id || seen.has(id)) return;
+            seen.add(id);
+            const t = document.getElementById(id);
+            if (!t) { bad.push('#' + id + ' 不存在'); return; }
+            t.scrollIntoView();
+            const top = Math.round(t.getBoundingClientRect().top);
+            if (top < hd - 2) bad.push('#' + id + ' 顶 ' + top + ' < 头部 ' + hd);
+          });
+          const ths = [];
+          document.querySelectorAll('#main table').forEach(tb => {
+            const th = tb.querySelector('thead th'); if (!th) return;
+            const cs = getComputedStyle(th);
+            const inX = !!tb.closest('.scrollx');
+            if (cs.position === 'sticky' && !inX) {
+              const rows = tb.querySelectorAll('tbody tr');
+              if (rows.length > 3) {
+                rows[Math.floor(rows.length / 2)].scrollIntoView({ block: 'start' });
+                if (Math.round(th.getBoundingClientRect().top) < hd - 2)
+                  ths.push(tb.className + ' 表头顶 ' + Math.round(th.getBoundingClientRect().top));
+              }
+            }
+            if (cs.position === 'sticky' && inX && !th.classList.contains('rh'))
+              ths.push('假吸顶：' + tb.className + ' 在 .scrollx 里还写 sticky');
+          });
+          const cd = document.querySelector('#main .cdhead');
+          const img = cd && cd.querySelector('img');
+          return { hd, hdVar, bad, ths, head: !!cd,
+                   noart: cd ? cd.className.indexOf('noart') >= 0 : false,
+                   broken: img ? (img.complete && img.naturalWidth === 0) : false,
+                   h1: document.querySelectorAll('#main h1').length };
+        }""")
+        if r["bad"]:
+            hd_bad.append("%s：%s" % (name, r["bad"][0]))
+        if r["ths"]:
+            th_bad.append("%s：%s" % (name, r["ths"][0]))
+        if abs(r["hdVar"] - r["hd"]) > 2:
+            th_bad.append("%s：--hd-h %s 与真实头部高 %s 不一致" % (name, r["hdVar"], r["hd"]))
+        if r["head"] and not r["broken"] and r["h1"] == 1:
+            head_ok += 1
+    check("16 页页内锚点跳过去都不被吸顶头部压住", not hd_bad, "; ".join(hd_bad[:3]))
+    check("吸顶表头让开头部，且横向滚的容器里不留假吸顶", not th_bad, "; ".join(th_bad[:3]))
+    # 主卡卡片头：14 个内容页里除了首页与天赋页都该有（这两页第一批已单独排过）
+    check("14 个内容页的主卡都换上卡片头（首页/天赋页除外）", head_ok >= 14,
+          "合格 %d / 16 页" % head_ok)
+
+    # ④ 动态模块：读数带不能像按钮，"下一件"只能有一条，首页摘要必须收口
+    page.goto(base + "/updates.html", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    up = page.evaluate("""() => {
+      const st = document.querySelector('.stats.readout .stat');
+      const pk = document.querySelector('.picks.utabs .pick');
+      return { stats: document.querySelectorAll('.stats.readout .stat').length,
+               statBordered: st ? getComputedStyle(st).borderTopWidth : 'none',
+               readoutBoxed: !!document.querySelector('.stats.readout'),
+               tabs: document.querySelectorAll('.picks.utabs .pick').length,
+               near: document.querySelectorAll('#main .flowrow.near').length,
+               past: document.querySelectorAll('#main .flowrow.past').length,
+               when: document.querySelectorAll('#main .when').length };
+    }""")
+    check("动态页顶部是读数带不是按钮墙", up["stats"] >= 5 and up["readoutBoxed"],
+          json.dumps(up, ensure_ascii=False)[:120])
+    check("时间轴只提亮最近那一件，已过去的降一档", up["near"] == 1 and up["past"] >= 3,
+          "下一件 %d / 已过 %d / 带天数 %d" % (up["near"], up["past"], up["when"]))
+    page.goto(base + "/index.html", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    hn = page.evaluate("""() => ({
+      sec: document.querySelectorAll('#main .nsec h3').length,
+      acts: document.querySelectorAll('#main .nsec .nact a').length,
+      clamp: document.querySelectorAll('#main .clamp2').length,
+      rows: document.querySelectorAll('#main .nsec .flowrow').length,
+      emptyH3: [...document.querySelectorAll('#main .nsec h3')].filter(h => !h.innerText.trim()).length })""")
+    check("首页「最新动态」收成两节摘要，每节都带回动态页的出口",
+          hn["sec"] == 2 and hn["acts"] == 2 and hn["rows"] <= 6 and hn["emptyH3"] == 0,
+          json.dumps(hn, ensure_ascii=False))
+    check("首页摘要长句在两行处收住（全文去动态页读）", hn["clamp"] >= 4, "%d 处收行" % hn["clamp"])
     ctx.close()
 
 

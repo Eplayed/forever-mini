@@ -109,20 +109,22 @@
     <div class="grid g2">
       <div class="card">
         <h2>最新动态</h2>
-        <p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。</p>
-        <h3>官方公告里的时间点</h3>
-        <div v-for="x in recent" :key="x.id" class="flowrow">
-          <b class="mono">{{ x.date }}</b>
-          <div><b>{{ x.title }}</b> <LevelPill :level="x.level" /><p class="dim">{{ x.what }}</p></div>
-        </div>
-        <h3>客户端改动与资料完整度</h3>
-        <p class="note">这两块的数在上面的「自经典旧世以来的改动」里，动态页只按职业与时间列清单，同一个数不在首页摆两遍。</p>
-        <template v-if="cl.length">
-          <h3>本站最近改了什么</h3>
-          <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
-            <b class="mono">{{ e.date }}</b><div><b>{{ e.title }}</b></div>
+        <p class="note">三件事分开说：官方公告里的时间点、客户端解包出的职业改动条数、本站自己改了什么。不做新闻转载与评价；这一页只在网页有，小程序按红线不做动态与排行。改动条数与完整度在上面的「自经典旧世以来的改动」里，同一个数不在首页摆两遍。</p>
+        <!-- 与旧站 home() 同一套摘要结构：每节一个小标题 + 一个回动态页的出口，
+             长句收两行，全文去动态页读（改版第三批，对拍要求两栈一致） -->
+        <div class="nsec">
+          <h3>官方公告里的时间点<span class="nact"><a :href="legacy('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
+          <div v-for="x in recent.slice(0, 3)" :key="x.id" class="flowrow">
+            <b class="mono">{{ x.date }}</b>
+            <div><b class="clamp2">{{ x.title }}</b> <LevelPill :level="x.level" /><p class="dim clamp2">{{ x.what }}</p></div>
           </div>
-        </template>
+        </div>
+        <div v-if="cl.length" class="nsec">
+          <h3>本站最近改了什么<span class="nact"><a :href="legacy('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
+          <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
+            <b class="mono">{{ e.date }}</b><div><b class="clamp2">{{ e.title }}</b></div>
+          </div>
+        </div>
         <a class="cta" :href="legacy('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
         <a class="cta" :href="legacy('rank.html')">资料完整度排行全表 →</a>
       </div>
