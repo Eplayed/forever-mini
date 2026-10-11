@@ -67,8 +67,10 @@ Scarlet Monastery - Graveyard / Library / Armory / Cathedral、祖尔法拉克 Z
 Ahn'Qiraj Ruins（2 条）、Ahn'Qiraj Temple（2 条），以及 5 个陌生新名
 **Storm Cliffs、The Tainted Scar、Nightmare Grove、The Crystal Vale、Scarlet Enclave**（都 40 人 60 级）。
 
-副本页单列一张表摆这些，按英文原名归并（同名两条说成"客户端记了几条"，不让玩家误以为两座本），
-写明"中文定名未公布、开放前可能变化"。**要不要给团本开一页是策划决策，不在本轮范围。**
+副本页先单列一张表摆这些，按英文原名归并（同名两条说成"客户端记了几条"，不让玩家误以为两座本），
+写明"中文定名未公布、开放前可能变化"。**2026-10-11 已按用户批准展开成第 16 页 `raids.html`**：
+15 个团队条目名字按人数分档、同名两条归并并写明"两种规模 / 同规模的两个入口"、参考站自述的 3 座并列对照。
+规格见 `UI.md` 3.26，剩下的待办见 `PLAN-open-items.md` 8i / 8j。
 
 ## 五、没有采的（写清楚为什么）
 

@@ -5,8 +5,9 @@
 ## 目录
 
 ```
-src/            14 个页面（index / talent / chooser / timeline / skills / dungeons / systems / races /
-                professions / world / updates / rank / glossary / provenance）——零构建，当前可发布版本
+src/            16 个页面（index / talent / chooser / timeline / skills / dungeons / raids / systems /
+                races / professions / world / legacy / updates / rank / glossary / provenance）
+                ——零构建，当前可发布版本（页数以 ls src/*.html 为准）
   css/app.css   设计令牌与组件样式（令牌表见 docs/UI.md）
   js/           data.js 加载与溯源、talent.js 天赋引擎、glyph.js 本地占位图、app.js 页面渲染
   data/         站点数据：classes / glossary / dungeons / systems / meta / timeline / abilities /
@@ -38,7 +39,7 @@ node tools/build-data.js        # 改数据必跑：校验 + 覆盖率 + 禁词�
 node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，谨慎）
 node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
 node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
-python3 tools/site-check.py       # 界面回归自检：14 页渲染 + 天赋交互 + 分组导航 + 地下城 + 专业 + 世界线 +
+python3 tools/site-check.py       # 界面回归自检：16 页渲染 + 天赋交互 + 分组导航 + 地下城 + 专业 + 世界线 +
                                   # 首页 + 动态/排行 + 设计基线 + 375px，非 0 即不通过
 python3 tools/site-check.py --app # 加跑新站（Vue）冒烟：要先 cd app && npm run build && npx vite preview --port 8821
 python3 tools/app-assets.py       # 把 src/data 与 src/img 增量同步进 app/public（新站构建前必跑）
@@ -54,7 +55,7 @@ cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地
 ## 站点硬规矩
 
 1. **表现层允许 Vue 3 + Vite**（2026-10-09 用户决策，按页迁移中）。仍然不许破的：无 Web 字体、无图标库、素材一律本地文件、不热链第三方域名、不引 UI 组件库、先不上 TypeScript。
-   - 迁移期**两栈并存**：`src/` 是旧的零构建静态站（当前可发布版本，全部 14 页），`app/` 是新的 Vite + Vue 3 工程。旧站没删干净之前，它仍是线上口径。
+   - 迁移期**两栈并存**：`src/` 是旧的零构建静态站（当前可发布版本，全部 16 页），`app/` 是新的 Vite + Vue 3 工程。旧站没删干净之前，它仍是线上口径。
    - **`src/data/*.json` 是两栈唯一的数据基底**，新站一律运行时读同一份数据，不得自带第二份、不得在组件里写死内容数字。
    - 旧 `src/js/` 继续守无框架约束（不用 `?.` 与 `??`、不引依赖）；`app/` 里可以用现代语法，但**必须过同一套卡口**（`build-data.js` 校验数据、`site-check.py` 校验界面、`audit-translations.py` 校验译名，断言总数只增不减）。
    - **每迁一页必须与旧页逐条对拍**（DOM 结构、文案、类名、图片数量与缺口回退），差异要么归零要么逐条写明理由；对拍没过的页不许当"已迁完"。
@@ -64,6 +65,6 @@ cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地
 4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`src/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
 5. 层级点数门槛未核实前，`rules.tierUnlockCost` 保持 `null`，界面只按坐标摆位，不做解锁判定。
 6. 每个内容页必须自动产出「本页还没确认的」清单（由数据缺口推导，不靠手写），文案面向玩家，不出现内部术语。
-   - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 第 18 节扫 14 页与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
+   - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 第 18 节扫全部页面与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
    - 网页上的「本站更新」读 **手写的 `src/data/releases.json`**（一条对应一个真实提交，`build-data.js` 会回仓库核对提交号）；git 自动生成的开发日志在 `docs/CHANGELOG-DEV.md`，**不进页面**。改了玩家能看到的东西就要补一条。
 7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。
