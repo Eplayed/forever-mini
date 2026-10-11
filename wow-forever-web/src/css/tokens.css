@@ -1,0 +1,59 @@
+/* ============================================================
+   tokens.css —— 全站设计令牌的单一事实源（2026-10-11 改版）
+   来源：docs/UI-WOWHEAD-STYLE-2026-10-11.md 第二节实测值 +
+        docs/design/wowhead-style-2026-10-11.html 的 :root
+   规则：组件里不许再写裸色值；要新色先加到这里。旧站 src/ 与新站 app/ 共用这一份。
+   ============================================================ */
+@import url('fonts.css');   /* 自托管字体：Open Sans（正文）+ Hanken Grotesk（标题） */
+
+:root{
+  /* ---- 中性黑灰体系：Wowhead 实测 body #101010 / 条 #202020 / 卡片页脚 #181818 / 悬停 #2a2a2a ---- */
+  --bg:#101010; --panel:#202020; --panel-2:#181818; --elev:#2a2a2a;
+  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.20);
+  --txt:#ffffff; --txt-dim:#bbbbbb; --txt-muted:#8a8a8a;
+
+  /* ---- 品牌与交互色：无限蓝。琥珀金从品牌位退出，只留在 --warn 这类功能语义上 ---- */
+  --accent:#49aee9; --accent-deep:#1d8dcd; --accent-ink:#175b8c;
+  /* 旧令牌名保留一版映射：app.css 里 79 处 var(--gold) 不用一次改完，
+     值换到蓝即可。新组件请直接用 --accent*，别再写 --gold。 */
+  --gold:var(--accent); --gold-deep:var(--accent-deep);
+  --blue:var(--accent); --lead:#8a8a8a;
+
+  /* ---- 内嵌面与控件面：中性黑体系里的"凹下去"的那几档，
+         原来散在组件里是冷蓝灰（#12151a / #191d24 / #20242c / #141821 / #101318），
+         换体系后不三不四，一律收到这里 ---- */
+  --sunk:#141414; --sunk-2:#0f0f0f; --hatch:#3d3d3d;
+  --field:#141414; --field-line:#333333; --ink-on-bright:#0a1a0a; --mark-ink:#ffe1a8;
+
+  /* ---- 功能色（不承担品牌）---- */
+  --ok:#4caf72; --warn:#d9a13b; --bad:#c9564a;
+  --txt-alert:#ff9b8f; --txt-caution:#f0c67e;
+
+  /* ---- 天赋计算器橙：点数、专精环（稿子实测 #ff9900 / 环 #cc7a18）---- */
+  --orange:#ff9900; --orange-ring:#cc7a18;
+
+  /* ---- 物品品质六色：游戏原生语义，只在物品/掉落语境出现 ----
+     精良蓝 #0070dd 在近黑底上对比只有 3.5，读不清，所以取同色相的提亮版；
+     这一条偏离稿子的实测值，理由写在这里，不当"色相不准"改掉。 */
+  --q0:#9d9d9d; --q1:#ffffff; --q2:#1eff00; --q3:#4aa3ff; --q4:#a335ee; --q5:#ff8000;
+  --violet:var(--q4);
+
+  /* ---- 分级四态 L0/L1/L2/L3：有序量，用明度阶梯 + 徽标形状 + 文字三通道，不靠色相 ---- */
+  --lv0:#e2ecf5; --lv1:#b6c2cd; --lv2:#a0a7b0; --lv3:#8c939c;
+
+  /* ---- 字体：自托管可变字体；中文继续走系统字体（没有可商用的中文 Web 字体）---- */
+  --font-body:'Open Sans',-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --font-display:'Hanken Grotesk','Open Sans',-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  --font-cn:var(--font-body);          /* 旧名保留映射，组件不用改 */
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* ---- 尺度：间距与容器宽度沿用旧站实测（导航 17 项要在 1180 里排一行），
+       圆角收到 3px——稿子实测 Wowhead 是 2–3px，我们原来 6–8px 偏软 ---- */
+  --fs-h1:clamp(28px,4.4vw,44px); --fs-h2:20px; --fs-body:15px; --fs-meta:11.5px;
+  --lh-tight:1.16; --lh-body:1.7;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --r-ctl:3px; --r-card:3px;
+
+  /* ---- 动效：时长与缓动不变，reduced-motion 下整体归零 ---- */
+  --ease-out:cubic-bezier(.16,1,.3,1); --dur-1:140ms; --dur-2:220ms; --dur-3:240ms;
+}

@@ -2090,7 +2090,8 @@ def test_design_system(browser, base):
         railShapes: [...new Set([...document.querySelectorAll('#main .rail')].map(c => {
           const b = getComputedStyle(c, '::before'); return (b.backgroundImage || '') + '|' + b.borderStyle + '|' + b.backgroundColor; }))].length,
         goldOnPill: lv.L2 === getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()
-          || Object.entries(lv).filter(([, v]) => v === 'rgb(224, 169, 109)').length };
+          || Object.entries(lv).filter(([, v]) => v === 'rgb(224, 169, 109)').length,
+        brandHex: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() };
     }"""
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
@@ -2108,14 +2109,19 @@ def test_design_system(browser, base):
         if r["claims"]:
             check("%s 页声明了分级/来源，卡片就有来源轨" % name, r["rails"] >= 1,
                   "声明 %d 处 / 上轨 %d 张" % (r["claims"], r["rails"]))
-    check("来源轨在全站铺得开（15 页合计 ≥20 张）", rails_seen >= 20, "%d 张" % rails_seen)
+    check("来源轨在全站铺得开（16 页合计 ≥20 张）", rails_seen >= 20, "%d 张" % rails_seen)
 
     # 琥珀金从此只表示交互与品牌：任何分级徽标都不许用它
     page.goto(base + "/systems.html", wait_until="networkidle")
     page.wait_for_timeout(1300)
     r = page.evaluate(PROBE)
-    gold = [k for k, v in r["lv"].items() if v == "rgb(224, 169, 109)"]
-    check("分级徽标不再借用品牌金（L2 曾与琥珀金同色）", not gold, json.dumps(r["lv"], ensure_ascii=False))
+    # 品牌色不兼任分级色。2026-10-11 品牌色从琥珀金换成无限蓝，所以这里读实时值比对，
+    # 不再写死某个 rgb——否则下次换色这条断言会静默失效。
+    bh = (r.get("brandHex") or "#49aee9").lstrip("#")
+    brand = "rgb(%d, %d, %d)" % (int(bh[0:2], 16), int(bh[2:4], 16), int(bh[4:6], 16))
+    gold = [k for k, v in r["lv"].items() if v in (brand, "rgb(224, 169, 109)")]
+    check("分级徽标不借用品牌色（曾与琥珀金同色，现在是无限蓝）", not gold,
+          json.dumps({"品牌色": brand, "徽标": r["lv"]}, ensure_ascii=False))
     shapes = page.evaluate("""() => {
       const out = {};
       ['L0','L1','L2','L3'].forEach(k => {
@@ -2163,11 +2169,59 @@ def test_design_system(browser, base):
           json.dumps(ring, ensure_ascii=False))
     fk.close()
 
-    # 组件规则里的裸色值只许减少不许增加（基线取 2026-10-10 改版后实测）
+    # 组件规则里的裸色值只许减少不许增加。2026-10-11 把令牌搬进 css/tokens.css 后，
+    # 组件层从 18 处降到 1 处（那处还是注释里的说明文字），基线跟着收到 6。
     css = open(os.path.join(SRC, "css", "app.css"), encoding="utf-8").read()
     body = css.split("}", 1)[1]
     raw = len(re.findall(r"#[0-9a-fA-F]{6}\b", body))
-    check("组件规则里的裸色值不增（基线 34 处，只降不升）", raw <= 34, "现 %d 处" % raw)
+    check("组件规则里的裸色值不增（2026-10-11 基线 6 处，只降不升）", raw <= 6, "现 %d 处" % raw)
+
+    # 令牌只有一个家：组件文件里再出现 :root 就是有人又抄了一份色值
+    tk = os.path.join(SRC, "css", "tokens.css")
+    # 组件文件里可以有响应式的尺度覆盖（媒体查询里改 --fs-*），但不许再定义颜色令牌
+    stray = [m.group(1) for m in re.finditer(r":root\s*\{([^}]*)\}", css)
+             if re.search(r"#[0-9a-fA-F]{3,6}\b|rgba?\(", m.group(1))]
+    check("设计令牌只有 tokens.css 一处定义颜色（app.css 里只许媒体查询改尺度）",
+          os.path.exists(tk) and not stray,
+          "app.css 里又定义了色值：%s" % (stray[0][:70] if stray else "无"))
+
+    # 字体：自托管可以，字体 CDN 一个字都不许出现（红线 2026-10-11 放开的是前者，不是后者）
+    blob = css + open(os.path.join(SRC, "css", "tokens.css"), encoding="utf-8").read() \
+        + open(os.path.join(SRC, "css", "fonts.css"), encoding="utf-8").read()
+    cdn = [w for w in ("fonts.googleapis", "fonts.gstatic", "@import url(\"http", "@import url('http") if w in blob]
+    fonts_local = all(os.path.exists(os.path.join(SRC, "fonts", f))
+                      for f in ("open-sans-var.woff2", "hanken-grotesk-var.woff2", "FONTS-LICENSE.txt"))
+    check("字体是自托管的本地文件，没有任何字体 CDN", not cdn and fonts_local,
+          "命中 %s / 本地文件 %s" % (cdn or "无", "齐" if fonts_local else "缺"))
+
+    # 首页图标轨：九格、图都真加载出来、每格都指向真存在的页面
+    page.goto(base + "/index.html", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    rail = page.evaluate("""() => { const a = [...document.querySelectorAll('.hrail .hrt')];
+      return { n: a.length, hrefs: a.map(x => (x.getAttribute('href') || '').split('?')[0]),
+        imgs: a.filter(x => x.querySelector('img')).length,
+        broken: a.reduce((n, x) => n + [...x.querySelectorAll('img')]
+          .filter(i => i.complete && i.naturalWidth === 0).length, 0),
+        alt: a.reduce((n, x) => n + [...x.querySelectorAll('img')]
+          .filter(i => i.getAttribute('alt') === null).length, 0) }; }""")
+    check("首页图标轨九格、图全部本地加载、alt 齐全",
+          rail["n"] == 9 and rail["imgs"] == 9 and rail["broken"] == 0 and rail["alt"] == 0,
+          json.dumps(rail, ensure_ascii=False)[:160])
+    check("图标轨每格都指向真存在的页",
+          all(h.replace(".html", "") in PAGES for h in rail["hrefs"]), str(rail["hrefs"][:4]))
+
+    # 顶栏那颗搜索框不是装饰：在别的页输入回车，要落到首页搜索并出结果
+    page.goto(base + "/dungeons.html", wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    page.fill("#gstop", "领主大厅")
+    page.press("#gstop", "Enter")
+    page.wait_for_timeout(1600)
+    ok = page.evaluate("""() => ({ url: location.pathname + location.search,
+      box: (document.querySelector('#gs') || {}).value || '',
+      rows: document.querySelectorAll('#gres .gsr').length })""")
+    check("顶栏搜索跳到首页并直接出结果",
+          "index.html" in ok["url"] and ok["box"] == "领主大厅" and ok["rows"] >= 1,
+          json.dumps(ok, ensure_ascii=False))
     ctx.close()
 
 

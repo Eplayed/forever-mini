@@ -42,7 +42,7 @@ import { load } from '../lib/data.js';
 import { hlParts, PILL_NAME } from '../lib/fmt.js';
 import { GROUP_SHOWN, itemLink, searchGroups, groupLink } from '../lib/search.js';
 
-const props = defineProps({ total: { type: Number, default: 0 } });
+const props = defineProps({ total: { type: Number, default: 0 }, initial: { type: String, default: '' } });
 
 // 示例词：给不知道搜什么的人一个起点，都是索引里真有的名字
 const SAMPLES = [
@@ -52,7 +52,7 @@ const SAMPLES = [
   ['舒适的睡袋', '世界页的营点']
 ];
 
-const q = ref('');
+const q = ref(props.initial || '');
 const open = ref(false);
 const busy = ref(false);
 const box = ref(null);
@@ -66,7 +66,11 @@ function outside(e) {
   if (list.value && list.value.contains(e.target)) return;
   open.value = false;
 }
-onMounted(() => document.addEventListener('click', outside));
+onMounted(() => {
+  document.addEventListener('click', outside);
+  // 顶栏那颗搜索框跳过来会带 ?q=，这里接住：填进去并立刻出结果，不让人重打一遍
+  if (q.value) onType();
+});
 onBeforeUnmount(() => document.removeEventListener('click', outside));
 
 function ensureIdx() {

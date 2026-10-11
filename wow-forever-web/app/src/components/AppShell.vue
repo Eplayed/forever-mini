@@ -1,10 +1,20 @@
 <template>
   <div id="top" class="top">
-    <div class="in">
-      <router-link class="brand" to="/">无限<span>资料站</span></router-link>
-      <div class="chip mono" id="lchip">距上线 {{ left.d }} 天 {{ clockText(left) }}</div>
+    <!-- 第一行：品牌 + 全站搜索 + 上线读数。稿子里这排是「WOW / RETAIL / CLASSIC」版本页签，
+         本站红线不许出现商标词，而且只有一款游戏，所以这一排放自己的东西，只借它的排印语法。 -->
+    <div class="hd hd-top">
+      <div class="in bar-flex">
+        <router-link class="brand" to="/">无限<span>资料站</span></router-link>
+        <form class="top-search" role="search" @submit.prevent="goSearch">
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 105.3 14.3l5 5 1.4-1.4-5-5A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+          <input ref="qBox" type="search" v-model="qText" placeholder="搜全站词条、天赋、副本、配方"
+                 aria-label="全站搜索：跳到首页搜索框并带上这个词">
+          <button type="submit" class="gsgo">搜索</button>
+        </form>
+        <div class="chip mono" id="lchip">距上线 {{ left.d }} 天 {{ clockText(left) }}</div>
+      </div>
     </div>
-    <!-- 两级常驻：一级是分组标签（不可点），二级项全部平铺，说明收进 title -->
+    <!-- 第二行：两级常驻，一级是分组标签（不可点），二级项全部平铺，说明收进 title -->
     <nav class="main" aria-label="主导航">
       <div class="in">
         <template v-for="g in NAV" :key="g.t">
@@ -37,7 +47,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { NAV, linkFor } from '../lib/nav.js';
 import { clockText } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
@@ -45,9 +55,17 @@ import { load } from '../lib/data.js';
 import { applyRails } from '../lib/rails.js';
 
 const route = useRoute();
+const router = useRouter();
 const { left } = useCountdown();
 const foot = ref(null);
 const mainEl = ref(null);
+/* 顶栏搜索：这一行的框只负责把词带到首页的搜索框，不重复实现一遍索引匹配 */
+const qText = ref('');
+const qBox = ref(null);
+function goSearch() {
+  const v = qText.value.trim();
+  router.push(v ? { path: '/', query: { q: v } } : { path: '/' });
+}
 /* 来源轨：与旧站同一套规则，切路由/局部重渲染后补一次（已定级的卡跳过，重复调用无副作用） */
 let railObs = null;
 function refreshRails() { applyRails(mainEl.value); }

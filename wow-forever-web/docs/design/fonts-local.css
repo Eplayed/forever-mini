@@ -1,0 +1,3 @@
+/* 自托管可变字体（latin 子集），来源 Google Fonts，OFL 开源许可可商用；中文仍走系统字体 */
+@font-face{font-family:'Open Sans';font-style:normal;font-weight:400 800;font-display:swap;src:url('fonts/open-sans-var.woff2') format('woff2');}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:400 800;font-display:swap;src:url('fonts/hanken-grotesk-var.woff2') format('woff2');}

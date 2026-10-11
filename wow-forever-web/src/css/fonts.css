@@ -1,0 +1,13 @@
+/* ============================================================
+   fonts.css —— 自托管可变字体（2026-10-11 用户批准放开红线）
+   两个 woff2 随仓库走，**不引任何字体 CDN**；中文仍走系统字体。
+   授权与来源见 src/fonts/FONTS-LICENSE.txt
+   ============================================================ */
+@font-face{
+  font-family:'Open Sans';font-style:normal;font-weight:400 800;font-display:swap;
+  src:url('../fonts/open-sans-var.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Hanken Grotesk';font-style:normal;font-weight:400 800;font-display:swap;
+  src:url('../fonts/hanken-grotesk-var.woff2') format('woff2');
+}

@@ -8,9 +8,10 @@
   <template v-else-if="S">
     <section class="card hero">
       <div class="herot">
+        <span class="kicker">Forever · 无限服中文资料</span>
         <h1 class="pt">《魔兽世界：无限》中文资料站</h1>
         <p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>
-        <SiteSearch :total="S.search || 0" />
+        <SiteSearch :total="S.search || 0" :initial="String($route.query.q || '')" />
         <!-- 两家参考站都把"先挑职业"放在首屏：这里只做进那一职业页的入口，切树仍在下面的预览卡里 -->
         <div class="pickcls">
           <div class="mline">选择你的职业 · <b>{{ S.classes || 0 }}</b> 个职业各有一页改动、天赋与技能</div>
@@ -38,6 +39,8 @@
         <span class="dim">问答是本站整理的玩法取向，不是强度排行。</span>
       </aside>
     </section>
+
+    <HubRail :art="ART" :nav-new="S.navNew || []" />
 
     <div class="sect"><h2>最常用的两个</h2></div>
     <div class="two">
@@ -143,6 +146,7 @@ import { useCountdown } from '../lib/countdown.js';
 import { legacyUrl } from '../lib/nav.js';
 import CovBar from '../components/CovBar.vue';
 import SiteSearch from '../components/SiteSearch.vue';
+import HubRail from '../components/HubRail.vue';
 import TalentPreview from '../components/TalentPreview.vue';
 import LevelPill from '../components/LevelPill.vue';
 

@@ -1,0 +1,32 @@
+自托管字体说明（2026-10-11）
+================================
+
+这一轮改版放开的是根 AGENTS.md 里「无 Web 字体」那一条，改成
+「允许自托管 OFL 字体文件，禁止任何字体 CDN」。素材仍然一律本地，不热链。
+
+两个文件都是 latin 子集的可变字体（weight 400–800），浏览器直接从这里加载，
+不走 fonts.googleapis.com / fonts.gstatic.com。
+
+Open Sans（正文与大写标签）
+  文件：open-sans-var.woff2  42,964 字节
+  设计者：Steve Matteson
+  授权：SIL Open Font License (OFL)，可商用
+  来源：https://fonts.google.com/specimen/Open+Sans
+  授权依据：google/fonts 仓库 ofl/opensans/METADATA.pb 里 license: "OFL"
+            （2026-10-11 核对该文件；早期上游曾标 Apache 2.0，以 Google Fonts
+             当前发布的 OFL 版为准）
+
+Hanken Grotesk（标题与数字读数）
+  文件：hanken-grotesk-var.woff2  34,664 字节
+  设计者：Alfredo Marco Pradil, Hanken Design Co.
+  授权：SIL Open Font License (OFL)，可商用
+  来源：https://fonts.google.com/specimen/Hanken+Grotesk
+  授权依据：google/fonts 仓库 ofl/hankengrotesk/METADATA.pb 里 license: "OFL"
+  为什么用它：稿子里 Wowhead 的标题字 Brother 1816 是商业字体，不能下载也不能用，
+            Hanken Grotesk 是气质最接近的 OFL 替代品（诊断文档第四节）。
+
+中文没有走 Web 字体：可商用的中文字体单文件都在 MB 级，主包与首屏都吃不下，
+所以中文继续用系统的 PingFang SC / 微软雅黑，字体栈里排在 Open Sans 之后。
+
+下线方案：删掉本目录与 src/css/fonts.css 里的两段 @font-face，
+tokens.css 的 --font-body / --font-display 会自动回落到系统字体，页面不坏。

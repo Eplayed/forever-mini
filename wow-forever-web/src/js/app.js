@@ -175,9 +175,17 @@
       return '<a class="nl' + (page === navKey(it.href) ? ' on' : '') + '" href="' + it.href +
         '" title="' + D.esc(it.d) + '">' + it.t + '</a>';
     }
-    el('top').innerHTML = '<div class="in"><a class="brand" href="index.html">无限<span>资料站</span></a>' +
-      '<div class="chip mono" id="lchip">距上线 ' + left.d + ' 天 ' + pad2(left.h) + ':' +
-      pad2(left.m) + ':' + pad2(left.s) + '</div></div>' +
+    el('top').innerHTML =
+      '<div class="hd hd-top"><div class="in bar-flex">' +
+        '<a class="brand" href="index.html">无限<span>资料站</span></a>' +
+        '<form class="top-search" role="search" action="index.html" method="get">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 105.3 14.3l5 5 ' +
+        '1.4-1.4-5-5A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>' +
+        '<input type="search" id="gstop" name="q" autocomplete="off" placeholder="搜全站词条、天赋、副本、配方" ' +
+        'aria-label="全站搜索：跳到首页搜索框并带上这个词">' +
+        '<button type="submit" class="gsgo">搜索</button></form>' +
+        '<div class="chip mono" id="lchip">距上线 ' + left.d + ' 天 ' + pad2(left.h) + ':' +
+        pad2(left.m) + ':' + pad2(left.s) + '</div></div></div>' +
       '<nav class="main" aria-label="主导航"><div class="in">' + NAV.map(function (g) {
         if (g.href) return navLink(g);
         var hit = g.items.some(function (it) { return page === navKey(it.href); });
@@ -330,6 +338,9 @@
       ready.then(function () { if (el('gs') === inp && inp.value === v) sRender(v); });
     };
     inp.oninput = run;
+    // 顶栏搜索框跳到首页会带 ?q=，这里接住：填进去并立刻出结果，不让人重打一遍
+    var q0 = urlQ('q');
+    if (q0 && !inp.value) { inp.value = q0; run(); }
     inp.onkeydown = function (e) {
       if (e.key === 'Escape') { inp.value = ''; sRender(''); inp.blur(); return; }
       if (e.key === 'ArrowDown') {
@@ -567,6 +578,7 @@
       ];
 
       set('<section class="card hero"><div class="herot">' +
+        '<span class="kicker">Forever · 无限服中文资料</span>' +
         '<h1 class="pt">《魔兽世界：无限》中文资料站</h1>' +
         '<p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
         '每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>' +
@@ -601,6 +613,30 @@
         '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p></div>' +
         '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
         '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
+        // 板块入口的图标轨：Wowhead 的"美术填充层"就是这么用的——每格一张本地原画，
+        // 指向真页面；没有本地图的格子退回字母块，不热链别人的图。
+        (function () {
+          var A = ART.classes || {}, R = ART.races || {}, DU = ART.dungeons || {};
+          var tiles = [
+            ['天赋计算器', 'talent.html', A.druid, 'D'],
+            ['玩法问答', 'chooser.html', A.paladin, 'P'],
+            ['技能书', 'skills.html', A.mage, 'M'],
+            ['传承', 'legacy.html', R.skyborne, 'L'],
+            ['种族', 'races.html', R.human, 'H'],
+            ['世界', 'world.html', DU['city-of-dalaran'], 'W'],
+            ['副本', 'dungeons.html', DU['blackrock-depths'], 'D'],
+            ['团本', 'raids.html', DU['blackmaw-hold'], 'R'],
+            ['专业', 'professions.html', 'img/icons/10prof_table_tailoring01.jpg', 'C']
+          ];
+          var isNew = (S.navNew || []);
+          return '<div class="hrail" aria-label="板块入口">' + tiles.map(function (t) {
+            return '<a class="hrt" href="' + t[1] + '" title="' + D.esc(t[0]) + '">' +
+              '<span class="hrt-b">' + (t[2] ? '<img src="' + D.esc(t[2]) + '" alt="" loading="lazy">'
+                : '<i class="hrt-x">' + t[3] + '</i>') +
+              (isNew.indexOf(t[0]) >= 0 ? '<em class="hrt-n">新</em>' : '') + '</span>' +
+              '<span class="hrt-l">' + t[0] + '</span></a>';
+          }).join('') + '</div>';
+        })() +
         '<div class="sect"><h2>最常用的两个</h2></div><div class="two">' +
         '<section class="card hasart" id="treecard"><span class="bgart" aria-hidden="true" style="' +
           ((ART.classes || {})[PV.c] ? 'background-image:url(' + ART.classes[PV.c] + ')' : '') +

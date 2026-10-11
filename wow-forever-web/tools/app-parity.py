@@ -38,6 +38,10 @@ PAGES = [
 # 有意差异：新站改了行为、且比旧站更对的，白名单列在这里并写清理由。
 # 只有 --strict 模式下这些键会被放行；出现没登记过的差异仍然算失败。
 INTENTIONAL = {
+    ("home", "（默认）"): {
+        "link:#/world": u"首页图标轨的「世界」一格：新站走内部路由 #/world，旧站是相对链接 world.html。"
+                        u"同一去处、两种栈的正常差别——图标轨与导航不同，它落在 #main 里所以会被数到"
+    },
     ("world", "rares"): {
         "img": u"旧站对缺图仍渲染 <img> 靠 onerror 兜底（每次访问产生 9 个 404 请求），"
                      u"新站直接不渲染、自绘块可见：可见结果一致，请求数更少",
@@ -165,8 +169,10 @@ def report(all_rows, strict):
             dcs += u"｜有意差异 %d 项：%s" % (len(notes), u"、".join(sorted(set(notes))))
         la = [link_key(x, LEGACY) for x in A["links"]]
         lb = [link_key(x, APP) for x in B["links"]]
-        only_a = sorted(set(la) - set(lb))[:8]
-        only_b = sorted(set(lb) - set(la))[:8]
+        # 有意差异也能覆盖链接：写 "link:<归一化后的链接>"，两栈路由形态不同不该算迁坏
+        allow_l = {k.split(':', 1)[1] for k in allow if k.startswith('link:')}
+        only_a = sorted(set(la) - set(lb) - allow_l)[:8]
+        only_b = sorted(set(lb) - set(la) - allow_l)[:8]
         lines += [u"### %s / %s" % (key, tab), u""]
         lines.append(u"- H1：旧 %s ／ 新 %s %s" % (
           A["h1"], B["h1"], u"✅" if A["h1"] == B["h1"] else u"❌"))
