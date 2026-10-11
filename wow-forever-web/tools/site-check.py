@@ -2194,6 +2194,19 @@ def test_design_system(browser, base):
     check("字体是自托管的本地文件，没有任何字体 CDN", not cdn and fonts_local,
           "命中 %s / 本地文件 %s" % (cdn or "无", "齐" if fonts_local else "缺"))
 
+    # HTML 里的 theme-color 是手机地址栏的底色，值必须跟着令牌的 --bg。
+    # 2026-10-11 换色时它被留在旧值 #0e1013 上——"把令牌值抄一份到别处"这类漂移
+    # 肉眼看不出来（只在真机上表现为浏览器边框一条色差），所以在这里钉住。
+    mbg = re.search(r"--bg\s*:\s*(#[0-9a-fA-F]{6})", open(tk, encoding="utf-8").read())
+    bg = mbg.group(1).lower() if mbg else ""
+    tc_files = [os.path.join(SRC, f) for f in sorted(os.listdir(SRC)) if f.endswith(".html")]
+    tc_files.append(os.path.join(ROOT, "app", "index.html"))
+    stale = ["%s:%s" % (os.path.relpath(f, ROOT), tc) for f in tc_files
+             for tc in re.findall(r'name="theme-color"\s+content="([^"]+)"',
+                                  open(f, encoding="utf-8").read()) if tc.lower() != bg]
+    check("每个页面的 theme-color 等于令牌 --bg（%s）" % bg, bg and not stale,
+          "不一致：%s" % " ".join(stale[:4]) if stale else "%d 个文件一致" % len(tc_files))
+
     # 首页图标轨：九格、图都真加载出来、每格都指向真存在的页面
     page.goto(base + "/index.html", wait_until="networkidle")
     page.wait_for_timeout(1600)
