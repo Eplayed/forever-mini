@@ -8,7 +8,7 @@
 
 | 目录 | 是什么 | 状态 |
 | --- | --- | --- |
-| `wow-forever-web/` | 资料站：纯静态 9 页（`src/`）、站点数据（`src/data/`）、构建与导出脚本（`tools/`）、全部角色产出（`docs/`） | 已跑通，`node tools/build-data.js` 通过 |
+| `wow-forever-web/` | 资料站：纯静态 16 页（`src/`，页数以 `ls src/*.html` 为准）+ Vue 新站（`app/`，按页迁移中）、站点数据（`src/data/`）、构建与导出脚本（`tools/`）、全部角色产出（`docs/`） | 已跑通，`node tools/build-data.js` 通过 |
 | `for-mini/` | 无限服小程序：原生微信小程序，与站点共用同一份数据基底 | 底子：数据层 + 中英速查 + 首页完整度已可用，四个模块待实现 |
 | `backend/`（将来） | 数据生产与上传服务 | 未建 |
 
@@ -21,8 +21,8 @@ cd wow-forever-web && node tools/build-data.js
 # 导出小程序产物：oss-preview/ 全量 JSON + data/*-snapshot.js 打包快照
 node tools/export-mini.js
 
-# 本地预览静态站
-cd src && python3 -m http.server 8812
+# 本地预览：旧站 :8817 + Vue 新站 :8821（和 app-parity.py 默认连的两个口对齐）
+bash tools/serve.sh            # 起；bash tools/serve.sh stop 关
 
 # 上游天赋数据对齐（会改写 src/data/talents，谨慎）
 node tools/merge-upstream.js

@@ -64,7 +64,7 @@
 1. 改动数据后必跑：`cd wow-forever-web && node tools/build-data.js`（非 0 退出即未完成）。
 2. 改小程序产物后加跑：`node wow-forever-web/tools/export-mini.js`（超主包预算即失败；重跑后 `git status` 应为空，产物必须可复现）。
 3. 界面改动必须有渲染证据，构建通过不算完成：
-   - 站点：`cd wow-forever-web/src && python3 -m http.server 8812` + 无头 Chrome 截图，存 `wow-forever-web/docs/screenshots/`（桌面 + 375px 移动端）。
+   - 站点：`cd wow-forever-web && bash tools/serve.sh`（旧站 :8817、Vue 新站 :8821，与 `app-parity.py` 默认端口一致）+ 无头 Chrome 截图，存 `wow-forever-web/docs/screenshots/`（桌面 + 375px 移动端）。
    - 小程序：微信开发者工具（`cli auto --project for-mini --auto-port 9421` + automator）截图，存 `for-mini/docs/screenshots/`。
 4. 点击类动作在本机 automator 上会稳定超时（`element.tap()`、带 setData 回调的 `callMethod()`），拿不到证据时**必须在验证记录里单列"没验到的"并要人工手测**，不许用 `page.setData` 造出来的示意截图冒充逻辑通过。
 5. 每轮结束在仓库根 `ROLES.md` 的交接记录表加一行，带 `已定 / 待用户确认 / 阻塞（原因）` 状态。

@@ -50,7 +50,8 @@ python3 tools/audit-translations.py  # 译名体检
 python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 src/data/releases.json）
 ：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
 python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
-cd src && python3 -m http.server 8812   # 本地预览（file:// 打不开本地 JSON）
+bash tools/serve.sh            # 本地预览：旧站 :8817 + 新站 :8821（file:// 打不开本地 JSON）
+                               # 端口跟 tools/app-parity.py 的默认值对齐；stop 子命令关掉
 ```
 
 ## 站点硬规矩
