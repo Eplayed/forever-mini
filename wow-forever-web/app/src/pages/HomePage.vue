@@ -242,7 +242,7 @@ const MOD_GROUPS = computed(() => {
         n: [[s.races, '个种族行'], [s.traits, '条特长整句'], [s.classes, '职业可选']],
         note: '整句直接抄官方，不改写' },
       { href: 'legacy.html', lv: 'L0', t: '传承专长与挑战', kicker: '角色 · 传承 · 本版新增',
-        p: '三棵传承树 27 个槽位（6 个还没公开）、65 项挑战各给 1 点、首发上限 16 点，每个专长写清上限与前置。',
+        p: `三棵传承树 ${(s.legacy || {}).slots} 个槽位（${(s.legacy || {}).unknown} 个还没公开）、${(s.legacy || {}).challenges} 项挑战，客户端给的点合计 ${(s.legacy || {}).total}（其中一项给 16 点，不是每项 1 点），首发上限 ${(s.legacy || {}).cap} 点。每个专长写清上限与前置。`,
         n: [[(s.legacy || {}).perks, '个专长有明细'], [(s.legacy || {}).challenges, '项挑战'],
           [(s.legacy || {}).unknown, '格未公开']],
         note: '每层效果说明本站不复制' },

@@ -10,7 +10,7 @@
     { t: '职业', items: [
       { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
       { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
-      { href: 'legacy.html', t: '传承', d: '21 个专长 · 65 项挑战 · 每完成 1 项得 1 点' }] },
+      { href: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' }] },
     { t: '种族', items: [
       { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
       { href: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
@@ -595,7 +595,9 @@
           n: [[S.races, '个种族行'], [S.traits, '条特长整句'], [S.classes, '职业可选']],
           note: '整句直接抄官方，不改写' },
         { href: 'legacy.html', t: '传承专长与挑战', lv: 'L0', kicker: '角色 · 传承 · 本版新增',
-          p: '三棵传承树 27 个槽位（6 个还没公开）、65 项挑战各给 1 点、首发上限 16 点，每个专长写清上限与前置。',
+          p: '三棵传承树 ' + S.legacy.slots + ' 个槽位（' + S.legacy.unknown + ' 个还没公开）、' +
+          S.legacy.challenges + ' 项挑战，客户端给的点合计 ' + S.legacy.total +
+          '（其中一项给 16 点，不是每项 1 点），首发上限 ' + S.legacy.cap + ' 点。每个专长写清上限与前置。',
           n: [[S.legacy.perks, '个专长有明细'], [S.legacy.challenges, '项挑战'], [S.legacy.unknown, '格未公开']],
           note: '每层效果说明本站不复制' },
         { href: 'skills.html', t: '技能书', lv: 'L0', kicker: '角色 · 技能 · ' + S.abilities + ' 条官方整句',
@@ -2338,6 +2340,11 @@
         var perkById = {};
         (L.perks || []).forEach(function (p) { perkById[p.id] = p; });
         var total = (L.challenges || []).reduce(function (a, c) { return a + c.items.length; }, 0);
+        /* 点数说法要能从数据里自己长出来：客户端明细里多数挑战给 1 点、有一项给 16 点，
+           写死"每项 1 点"就是假的，上游哪天再改数也会悄悄过期。 */
+        var allPts = (L.challenges || []).reduce(function (a, c) { return a.concat(c.items || []); }, []);
+        var onesN = allPts.filter(function (x) { return (x.points || 0) === 1; }).length;
+        var oddPts = allPts.filter(function (x) { return (x.points || 0) !== 1; });
         var f = {
           tree: urlQ('t') && (L.trees || []).some(function (t) { return t.id === urlQ('t'); })
             ? urlQ('t') : ((L.trees || [])[0] || {}).id || '',
@@ -2426,9 +2433,12 @@
         function challengeBlock(c) {
           var rows = rowsOf(c);
           if (!rows.length) return '';
+          // 组头不写"每项 N 点"：客户端明细里 65 项各给 1 点、有一项给 16 点，
+          // 统一说"每项 1 点"就是假的。逐条点数在表格最后一列，组头只给合计。
+          var sum = rows.reduce(function (a, x) { return a + (x.points || 0); }, 0);
           return '<div class="card lchgrp"><h2>' + D.esc(c.nameCn) +
             '<span class="dim mono">' + rows.length + (rows.length === c.items.length ? '' : ' / ' + c.items.length) +
-            ' 项 · 每项 ' + (rules.pointPerChallenge || '?') + ' 点</span></h2>' +
+            ' 项 · 合计 ' + sum + ' 点</span></h2>' +
             (c.subcategories.length ? '<div class="chips">' + c.subcategories.map(function (s) {
               var n = c.items.filter(function (x) { return x.sub === s || x.group === s; }).length;
               return n ? '<span class="chipc">' + D.esc(s) + '<b class="mono">' + n + '</b></span>' : '';
@@ -2453,9 +2463,12 @@
 
         set('<div class="card"><h1 class="pt">传承专长与传承挑战</h1>' +
           '<p class="dim">完成传承挑战拿传承点数，用点数在三棵传承树里点永久专长（账号级，不随角色重置）。' +
-          '每完成 <b class="mono">' + (rules.pointPerChallenge || '?') + '</b> 项挑战得 1 点；客户端里的规则写着' +
-          '首发可花 <b class="mono">' + (rules.launchSpendingCap || '?') + '</b> 点、挑战合计 <b class="mono">' +
-          (rules.launchEarnableTotal || '?') + '</b> 项；' + D.esc(rules.unlock || '') + '</p>' +
+          '客户端里 <b class="mono">' + total + '</b> 项挑战的点数加起来是 ' +
+          '<b class="mono">' + (rules.launchEarnableTotal || '?') + '</b> 点，' +
+          '首发能花的上限写着 <b class="mono">' + (rules.launchSpendingCap || '?') + '</b> 点；' +
+          D.esc(rules.unlock || '') + '</p>' +
+          /* 每项给多少点有两个说法，两个都摆出来，不替玩家挑一个（红线：两源分歧两个都留） */
+          (rules.rulesConflict ? '<p class="note">' + D.esc(rules.rulesConflict) + '</p>' : '') +
           '<div class="stats"><div class="stat"><b>' + cnt.perks + '</b>个专长有明细</div>' +
           '<div class="stat"><b>' + cnt.unknownSlots + '</b>格还没公开</div>' +
           '<div class="stat"><b>' + total + '</b>项挑战</div>' +
@@ -2470,7 +2483,10 @@
           '<div class="ltreewrap"><div class="card ltreecard" id="ltree">' + treePanel() + '</div>' +
           '<div id="ldet">' + perkDetail() + '</div></div>' +
           '<div class="card"><h2>传承挑战 · ' + total + ' 项</h2>' +
-          '<p class="dim">按客户端里的分类列，每项 1 点。这里只回答"做什么算完成"，不讲"先做哪个划算"——那是攻略。</p>' +
+          '<p class="dim">按客户端里的分类列，每条点数照客户端写（' + onesN + ' 项各 1 点' +
+          (oddPts.length ? '，另有 ' + oddPts.map(function (x) {
+            return D.esc(x.nameCn) + ' 给 ' + x.points + ' 点';
+          }).join('、') : '') + '）。这里只回答"做什么算完成"，不讲"先做哪个划算"——那是攻略。</p>' +
           '<div class="field"><input type="search" id="lq" placeholder="搜挑战名、完成条件或归属" value="' +
           D.esc(f.q) + '"><span class="dim mono" id="lcnt"></span></div></div>' +
           '<div id="lch">' + challengeArea() + '</div>' +

@@ -856,8 +856,9 @@ def test_dungeon_data(browser, base):
         "twoSize": len([x for x in rows if x.get("partySizeAlt")]),
         "twoName": len([x for x in rows if x.get("nameEnClient")]),
         "noqueue": len([x for x in rows if not x.get("clientActivityId")]),
-        "src": len([x for x in rows if any(p.get("type") == "datamine_en"
-                                           for p in (x.get("provenance") or []))]),
+        "src": len([x for x in rows if x.get("clientActivityId") or x.get("levelRangeClient")
+                    or x.get("levelRangeAlt") or x.get("partySize") or x.get("partySizeAlt")
+                    or x.get("nameEnClient")]),
         "queue": len({i["nameEn"] for i in qc["items"] if not i.get("matchedId")}),
     }
     got = page.evaluate("""() => {
@@ -871,7 +872,13 @@ def test_dungeon_data(browser, base):
         twoName: conf.filter(t => /英文原名两说/.test(t)).length,
         noqueue: [...document.querySelectorAll('.dcard2 .note')]
           .filter(e => /队伍查找器里还没有这座本/.test(e.textContent)).length,
-        src: document.querySelectorAll('.st.datamine_en').length,
+        // 数"挂了出处的本卡"而不是标记个数：一张卡可能同时为人数、区间、英文名各挂一枚
+        // （2026-10-11 重抓后标记有 63 枚但只有 31 张本卡用到客户端字段，按枚数比必然对不上）。
+        // 队列表不在 .dcard2 里，它那一枚由 check 的 "+1" 负责。
+        src: (() => {
+          const bs = [...document.querySelectorAll('.st.datamine_en')];
+          return new Set(bs.map(e => e.closest('.dcard2')).filter(Boolean)).size;
+        })(),
         qrows: q ? q.querySelectorAll('tbody tr').length : -1,
         qnames: q ? [...q.querySelectorAll('tbody tr td b')].map(b => b.textContent.trim()) : [],
         intro: (document.querySelector('.card .dim') || {}).textContent || ''
@@ -886,9 +893,9 @@ def test_dungeon_data(browser, base):
           "%d / %d" % (got["twoName"], exp["twoName"]))
     check("客户端还不能排队的本逐条说明", got["noqueue"] == exp["noqueue"],
           "%d / %d" % (got["noqueue"], exp["noqueue"]))
-    # 徽章数 = 用到这份数据的副本卡各一枚 + 那张排队条目表一枚
-    check("用到客户端排队数据的都挂着它的出处", got["src"] == exp["src"] + 1,
-          "徽章 %d / 条目 %d" % (got["src"], exp["src"]))
+    # 徽章数 = 用到这份数据的本卡数（队列表那张单独在下面的行里查它自己的出处）
+    check("用到客户端排队数据的都挂着它的出处", got["src"] == exp["src"],
+          "带出处的本卡 %d / 用到这份数据 %d" % (got["src"], exp["src"]))
     check("客户端能排到、本站没名单的单列一张表", got["qrows"] == exp["queue"],
           "表 %d 行 / 应有 %d 行" % (got["qrows"], exp["queue"]))
     have = {x.get("nameEn") for x in rows}
@@ -1072,7 +1079,9 @@ def test_professions(browser, base):
     page.click(".pick[data-p=camping]")
     page.wait_for_timeout(700)
     empty = page.evaluate("() => (document.querySelector('.empty') || {}).textContent || ''")
-    check("拆不出条目的专业写原因而不是留白", "还没拆出条目" in empty, empty[:44])
+    # 判据只认"它有没有把原因说出来"，不认具体措辞——这句话由生成器写，改一个字就红没有意义
+    check("拆不出条目的专业写原因而不是留白",
+          "拆" in empty and ("没" in empty or "未" in empty) and len(empty) >= 12, empty[:44])
 
     page.click(".pick[data-p=alchemy]")
     page.wait_for_timeout(900)
@@ -1339,8 +1348,13 @@ def test_home(browser, base):
     check("带背景的卡是 5 张（3 张模块卡 + 2 张主推卡），其余留纯色",
           len(st["artFiles"]) == 5 and st["artCards"] == 3,
           "背景层 %d 张 / 模块卡带背景 %d 张" % (len(st["artFiles"]), st["artCards"]))
-    check("改动四格加起来等于来源站自报的 changed 751",
-          sum(st["four"]) == 751, "%s 合计 %d" % (st["four"], sum(st["four"])))
+    # 四格的和要等于上游自报的 changed——这个数从 changes.json 的 upstreamCounts 现读，
+    # 不写死常数：2026-10-11 重抓后上游自报从 751 变成 753，写死的断言当时就红了。
+    self_reported = json.load(open(os.path.join(SRC, "data", "changes.json"),
+                                   encoding="utf-8"))["meta"]["upstreamCounts"]["changed"]
+    check("改动四格加起来等于来源站自报的 changed %d" % self_reported,
+          sum(st["four"]) == self_reported, "%s 合计 %d / 上游自报 %d"
+          % (st["four"], sum(st["four"]), self_reported))
     check("天赋卡进度条有可读替代（aria-label 写明分子分母）",
           bool(st["bar"]) and "/" in st["bar"]["aria"] and str(st["bar"]["w"]).endswith("%"),
           json.dumps(st["bar"], ensure_ascii=False))
@@ -1850,11 +1864,15 @@ def test_legacy(browser, base):
           "页面 %s / 数据 %s" % (s0["stats"], [cnt["perks"], cnt["unknownSlots"], total, cnt["rewards"]]))
     check("三棵传承树都在且顺序与数据一致", s0["tabs"] == [t["id"] for t in L["trees"]],
           json.dumps(s0["tabs"], ensure_ascii=False))
-    check("挑战每条都带「待实测」徽标，点数每条都是 %s" % rules["pointPerChallenge"],
-          len(s0["chPills"]) == total and set(s0["chPills"]) == {"待实测"} and
-          set(s0["pts"]) == {str(rules["pointPerChallenge"])},
-          "徽标 %d 个 / 行 %d / 点数集合 %s" % (
-              len(s0["chPills"]), s0["chRows"], json.dumps(sorted(set(s0["pts"])), ensure_ascii=False)))
+    # 点数不是"每条都一样"：客户端明细里 65 项各 1 点、有一项 16 点。
+    # 断言因此改成"每行的点数都必须在数据声明过的取值里"——出现没声明过的点数才是回归。
+    allowed = {str(rules["pointPerChallenge"])} | {str(v["points"]) for v in rules.get("pointVariants") or []}
+    check("挑战每条都带「待实测」徽标，且每条点数都在数据声明过的取值里",
+          len(s0["chPills"]) == total and set(s0["chPills"]) == {"待实测"}
+          and set(s0["pts"]) <= allowed,
+          "徽标 %d 个 / 行 %d / 点数集合 %s（允许 %s）" % (
+              len(s0["chPills"]), s0["chRows"],
+              json.dumps(sorted(set(s0["pts"])), ensure_ascii=False), sorted(allowed)))
     check("进度奖励四条都标了待实测", set(s0["rePill"] or []) == {"待实测"},
           json.dumps(s0["rePill"], ensure_ascii=False))
     check("图全部是本地文件，没有热链", s0["hot"] == 0 and s0["local"] == 0,
