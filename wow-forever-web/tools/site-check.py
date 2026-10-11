@@ -32,7 +32,7 @@ SRC = os.path.join(ROOT, "src")
 TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "systems", "races",
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "raids", "systems", "races",
          "professions", "world", "legacy", "updates", "rank", "glossary", "provenance"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
 # 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
@@ -611,9 +611,10 @@ def test_races(browser, base):
                          "c.querySelectorAll('.nb').forEach(n => n.remove());"
                          "return c.textContent.trim(); })")
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
-    check("16 个二级入口全部常驻，不用点开",
-          len(subs) == 16 and all(x in subs for x in ["首页", "区域与稀有", "副本", "系统规则", "传承", "排行"]),
-          str(subs))
+    check("全部二级入口常驻，不用点开",
+          len(subs) == len(PAGES) + 1 and all(x in subs for x in ["首页", "区域与稀有", "副本", "团本",
+                                                                  "系统规则", "传承", "排行"]),
+          "%d 项：%s" % (len(subs), subs))
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
     navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
@@ -922,6 +923,84 @@ def test_dungeon_data(browser, base):
     check("与经典旧世对比能展开且有内容", cmpn >= 20, "%d 条对照" % cmpn)
     page.screenshot(path=os.path.join(SHOT_DIR, "talent-class-art.png"))
     tp.close()
+
+
+def test_raids(browser, base):
+    """团本页：两份名单并列摆、四个读数与数据一致、筛选与深链接得住、条目进索引。"""
+    print("\n[11b] 团本页（客户端排队条目 × 另一份名单）")
+    import json
+    qu = json.load(open(os.path.join(SRC, "data", "queue.json"), encoding="utf-8"))
+    dg = json.load(open(os.path.join(SRC, "data", "dungeons.json"), encoding="utf-8"))
+    idx = json.load(open(os.path.join(SRC, "data", "search.json"), encoding="utf-8"))
+    rows = [x for x in qu["items"] if x["kind"] == "raid"]
+    names = sorted({x["nameEn"] for x in rows})
+    claimed = dg["raids"] or []
+    linked_names = {x["nameEn"] for x in rows if x.get("matchedId")}
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1100})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/raids.html", wait_until="networkidle")
+    page.wait_for_selector("#client tbody tr", timeout=15000)
+    check("团本页无脚本报错", not errs, "; ".join(errs[:2]))
+    g = page.evaluate("""() => {
+      const rows=[...document.querySelectorAll('#client tbody tr')];
+      return { rows: rows.length,
+        names: rows.map(r=>r.querySelector('b').textContent.trim()),
+        links: [...document.querySelectorAll('#client td a')].map(a=>a.getAttribute('href')),
+        claimed: [...document.querySelectorAll('#claimed tbody tr')].length,
+        noMatch: [...document.querySelectorAll('#claimed tbody tr')].filter(r=>/没有对应的排队条目/.test(r.textContent)).length,
+        stats: [...document.querySelectorAll('.stat b')].map(x=>x.textContent.trim()),
+        missing: document.querySelectorAll('#missing li').length,
+        badges: document.querySelectorAll('.st.datamine_en').length,
+        bands: [...document.querySelectorAll('#client .band b')].map(x=>x.textContent.trim()),
+        h1: document.querySelectorAll('#main h1').length }; }""")
+    check("一张 H1、按人数分档摆", g["h1"] == 1 and len(g["bands"]) >= 3, str(g["bands"]))
+    check("表里行数 = 客户端团队条目去重后的名字数", g["rows"] == len(names),
+          "%d / %d" % (g["rows"], len(names)))
+    check("同一个名字只占一行", len(set(g["names"])) == g["rows"],
+          "重复 %s" % [n for n in g["names"] if g["names"].count(n) > 1][:3])
+    check("对得上的都链回副本页", len(g["links"]) == len(linked_names),
+          "%d 条 / 数据 %d 座" % (len(g["links"]), len(linked_names)))
+    check("链接都指向副本页那一座", all(str(h).startswith("dungeons.html?d=") for h in g["links"]),
+          str(g["links"][:2]))
+    check("另一份名单自述的几座都在", g["claimed"] == len(claimed), "%d / %d" % (g["claimed"], len(claimed)))
+    check("两边对不上的直说没有对应条目",
+          g["noMatch"] == len([r for r in claimed if not r.get("clientActivityId")]), "%d 座" % g["noMatch"])
+    exp_stats = [str(len(names)), str(len(claimed)),
+                 str(len([r for r in claimed if r.get("clientActivityId")])),
+                 str(len([r for r in claimed if r.get("nameCn")]))]
+    check("四个规模读数等于数据现算", g["stats"] == exp_stats,
+          "页面 %s / 数据 %s" % (g["stats"], exp_stats))
+    check("「这一页还没有的」逐条交代", g["missing"] >= 5, "%d 条" % g["missing"])
+    check("用到客户端排队数据的挂着出处", g["badges"] >= 2, "%d 枚" % g["badges"])
+    page.fill("#rq", "Storm")
+    page.wait_for_timeout(600)
+    exp_storm = len([n for n in names if "storm" in n.lower()])
+    one = page.evaluate("() => ({rows: document.querySelectorAll('#client tbody tr').length,"
+                        " cnt: document.querySelector('#rcnt').textContent})")
+    check("按英文名筛真的筛了", one["rows"] == exp_storm and one["cnt"].startswith(str(exp_storm)),
+          json.dumps(one, ensure_ascii=False))
+    page.fill("#rq", "中文词搜不到")
+    page.wait_for_timeout(600)
+    check("筛不到时说明这里只有英文原名", "中文定名" in page.inner_text("#client"),
+          page.inner_text("#client")[:50].replace("\n", " "))
+    page.close()
+    page = ctx.new_page()
+    page.goto("%s/raids.html?q=Molten" % base, wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    exp_molten = len([n for n in names if "molten" in n.lower()])
+    check("带词跳进来已经筛好", page.input_value("#rq") == "Molten" and
+          page.evaluate("() => document.querySelectorAll('#client tbody tr').length") == exp_molten,
+          page.input_value("#rq"))
+    page.close()
+    ctx.close()
+    rdd = [it for it in idx["items"] if it[0] == "rdd"]
+    check("团本条目进了全站搜索索引", len(rdd) >= len(names),
+          "%d 条 / 名字 %d 个" % (len(rdd), len(names)))
+    check("索引里团本板块指向这一页",
+          (idx["meta"]["kinds"].get("rdd") or [None, ""])[1] == "raids.html",
+          str(idx["meta"]["kinds"].get("rdd")))
 
 
 def test_professions(browser, base):
@@ -1259,10 +1338,14 @@ def test_home(browser, base):
     check("天赋卡进度条有可读替代（aria-label 写明分子分母）",
           bool(st["bar"]) and "/" in st["bar"]["aria"] and str(st["bar"]["w"]).endswith("%"),
           json.dumps(st["bar"], ensure_ascii=False))
-    check("导航角标只出现在「本版新增」那一项，且除颜色外带可读名",
-          len(st["badge"]) == 1 and st["badge"][0]["t"] == "新" and
-          bool(st["badge"][0]["aria"]) and bool(st["badge"][0]["title"]),
-          json.dumps(st["badge"], ensure_ascii=False))
+    # 角标不是手写的：app.js 拿 scale.navNew（「本站更新」最新一天的板块标签）去对导航项名字，
+    # 对得上才画。所以这里不能写死"只有一枚"，要按同一条规则核。
+    nav_new = sc.get("navNew") or []
+    bad_labels = {re.sub(r"新$", "", str(x["on"]).strip()) for x in st["badge"]}
+    check("导航角标只挂在最新一批更新对得上的项上，且除颜色外带可读名",
+          len(st["badge"]) >= 1 and all(x["t"] == "新" and x["aria"] and x["title"] for x in st["badge"])
+          and bool(bad_labels) and bad_labels <= set(nav_new),
+          json.dumps({"角标项": sorted(bad_labels), "最新一批标签": nav_new}, ensure_ascii=False))
     # 1440px 实拍才会发现：树按 360px 摆时右栏只剩 176px，三列职业格把「战士」拆成两行
     check("预览卡右栏够宽，职业名不被拆成两行",
           st["railW"] >= 200 and st["stripH"] and max(st["stripH"]) <= 20,
@@ -1652,6 +1735,7 @@ def test_search(browser, base):
          page.inner_text("#ccnt").strip() == "1 条"),
         ("影遁", "races.html", lambda: page.input_value("#fq") == "影遁"),
         ("影遁", "glossary.html", lambda: page.input_value("#q") == "影遁"),
+        ("Molten Core", "raids.html", lambda: page.input_value("#rq") == "Molten Core"),
         ("兽人", "races.html",
          lambda: page.get_attribute(".racecard.on", "data-race") == "horde-orc"),
     ]
@@ -2175,6 +2259,7 @@ def main():
             test_races(browser, base)
             test_grouping(browser, base)
             test_dungeon_data(browser, base)
+            test_raids(browser, base)
             test_professions(browser, base)
             test_world(browser, base)
             test_home(browser, base)

@@ -277,6 +277,8 @@ function buildQueue(data) {
     categoryName: r.categoryName,
     levelRange: r.minLevel + '-' + r.maxLevel,
     partySize: r.maxPlayers || null,
+    // 条目号：同一座在表里挂两条时，靠它说清是"两种规模"还是"两个入口"，不靠猜
+    difficultyId: r.difficultyId === undefined ? null : r.difficultyId,
     mapId: r.mapId === undefined ? null : r.mapId,
     matchedId: matched[r.activityId] || null,
     level: 'L1',

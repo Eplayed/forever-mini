@@ -17,6 +17,7 @@
     { t: '世界', items: [
       { href: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
       { href: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
+      { href: 'raids.html', t: '团本', d: '客户端能排到的团队条目与另一份名单对照' },
       { href: 'systems.html', t: '系统规则', d: '规则、区域、装备名的官方中文说法' }] },
     { t: '专业', items: [
       { href: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
@@ -237,8 +238,9 @@
      只收「名称 + 归属」，命中后带着词跳进对应页面，由那一页自己的筛选器接手。 */
   var SX = { idx: null, kinds: null, job: null, rows: [] };
   // 分组显示顺序：先身份类，再内容类，配方与采集点这种长尾放后面
-  var SKIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss',
+  var SKIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss', 'rdd',
     'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+  // 加一个板块必须同时进这张表：不在表里的板块，首页搜索会直接搜不到（build-data.js 卡这条）
   var SSHOWN = 5;
 
   function searchIdx() {
@@ -1484,7 +1486,8 @@
           return bandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2], rows);
         }).join('') +
           bandBlock('区间未定', '等级区间还没核', list.filter(function (x) { return dunBand(x) === null; })) +
-          bandBlock('团队副本', '开放时间未定', d.raids || []) +
+          bandBlock('团队副本', '开放时间未定；客户端能排到的团队条目与另一份名单的对照在'
+            + '<a href="raids.html">团本那一页</a>', d.raids || []) +
           queueBand();
         set('<div class="card" data-lv="' + (D.worstLevel(all) || 'L3') + '"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
           (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
@@ -1521,6 +1524,142 @@
           if (card && card.scrollIntoView) card.scrollIntoView({ block: 'center' });
         }
       }
+    }).catch(fail);
+  }
+
+  /* ---------- 团本 ---------- */
+  function raids() {
+    Promise.all([D.load('data/queue.json').catch(function () { return {}; }), D.load('data/dungeons.json')])
+      .then(function (rs) {
+      var QU = rs[0] || {}, DG = rs[1];
+      var rows = (QU.items || []).filter(function (x) { return x.kind === 'raid'; });
+      var claimed = DG.raids || [];
+      var dunIds = {};
+      [].concat(DG.newDungeons || [], DG.classicDungeons || []).forEach(function (x) { dunIds[x.id] = x; });
+      var raidById = {};
+      claimed.forEach(function (x) { raidById[x.id] = x; });
+      // 同名两条归并成一座，条目数留着：说清到底是"两种规模"还是"两个入口"，不靠猜
+      var grp = {}, order = [];
+      rows.forEach(function (x) {
+        if (!grp[x.nameEn]) { grp[x.nameEn] = []; order.push(x.nameEn); }
+        grp[x.nameEn].push(x);
+      });
+      var names = order.map(function (k) {
+        var list = grp[k], sizes = [], matched = null;
+        list.forEach(function (x) {
+          if (x.partySize && sizes.indexOf(x.partySize) < 0) sizes.push(x.partySize);
+          if (x.matchedId && !matched) matched = x.matchedId;
+        });
+        sizes.sort(function (a, b) { return b - a; });
+        var diffs = {};
+        list.forEach(function (x) { diffs[String(x.partySize)] = 1; });
+        return {
+          nameEn: k, entries: list.length, sizes: sizes,
+          multiSize: Object.keys(diffs).length > 1,
+          levelRange: list[0].levelRange,
+          matched: matched, matchedIn: matched ? (raidById[matched] ? 'raid' : (dunIds[matched] ? 'dungeon' : '')) : '',
+          prov: list[0].provenance || []
+        };
+      });
+      names.sort(function (a, b) {
+        return (b.sizes[0] || 0) - (a.sizes[0] || 0) || a.nameEn.localeCompare(b.nameEn);
+      });
+      var both = names.filter(function (x) { return x.matchedIn === 'raid'; }).length;
+      var f = { q: urlQ('q') || '' };
+
+      function statusText(x) {
+        if (x.matchedIn === 'raid') {
+          var rr = raidById[x.matched];
+          return '<span class="dim">已有这一座：</span><a href="dungeons.html?d=' + D.esc(x.matched) + '">'
+            + D.esc((rr && (rr.nameCn || rr.nameEn)) || x.matched) + '</a>';
+        }
+        if (x.matchedIn === 'dungeon') {
+          var dn = dunIds[x.matched];
+          return '<span class="dim">按地下城收录：</span><a href="dungeons.html?d=' + D.esc(x.matched) + '">'
+            + D.esc((dn && dn.nameCn) || x.matched) + '</a>';
+        }
+        return '<span class="dim">还没有名单</span>';
+      }
+      function sizeText(x) {
+        return x.sizes.length ? x.sizes.join(' / ') + ' 人' : '未标';
+      }
+      function entryText(x) {
+        if (x.entries < 2) return '1 条';
+        return x.entries + ' 条（' + (x.multiSize ? '两种规模' : '同规模的两个入口') + '）';
+      }
+      function table(list) {
+        return '<div class="scrollx"><table class="entab rtab"><thead><tr><th>客户端里的名字</th><th>排队等级</th>'
+          + '<th>一次几人</th><th>排队条目</th><th>本站</th></tr></thead><tbody>' +
+          list.map(function (x) {
+            return '<tr><td><b>' + D.esc(x.nameEn) + '</b><span class="dim">　中文定名未公布</span></td>'
+              + '<td class="mono">' + D.esc(x.levelRange) + ' 级</td>'
+              + '<td class="mono">' + sizeText(x) + '</td>'
+              + '<td class="mono">' + entryText(x) + '</td>'
+              + '<td>' + statusText(x) + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+      function draw() {
+        var k = f.q.trim().toLowerCase();
+        var shown = k ? names.filter(function (x) { return x.nameEn.toLowerCase().indexOf(k) >= 0; }) : names;
+        var bands = '';
+        [40, 25, 20, 15, 10].forEach(function (n) {
+          var pick = shown.filter(function (x) { return (x.sizes[0] || 0) === n; });
+          if (!pick.length) return;
+          bands += '<div class="band"><b>' + n + ' 人团队条目</b><span class="dim mono">' + pick.length + ' 座</span></div>' + table(pick);
+        });
+        var rest = shown.filter(function (x) { return [40, 25, 20, 15, 10].indexOf(x.sizes[0] || 0) < 0; });
+        if (rest.length) bands += '<div class="band"><b>人数未标</b></div>' + table(rest);
+        set('<div class="card" data-lv="' + (D.worstLevel([{ level: 'L1' }].concat(claimed)) || 'L3') + '">'
+          + '<h1 class="pt">团队副本</h1><p class="dim">这一页只有两份名单，没有攻略：'
+          + '一份是客户端的队伍查找器里现在能排到的团队条目（' + names.length + ' 个名字、' + rows.length + ' 条），'
+          + '一份是第三方资料站自己列的 ' + claimed.length + ' 座。两边都对得上的只有 ' + both + ' 座（'
+          + '奥妮克希亚的巢穴），谁也没能给出中文名。</p>'
+          + '<div class="stats"><div class="stat"><b>' + names.length + '</b>客户端里的团队条目</div>'
+          + '<div class="stat"><b>' + claimed.length + '</b>另一份资料自述</div>'
+          + '<div class="stat"><b>' + both + '</b>两边对得上</div>'
+          + '<div class="stat"><b>' + claimed.filter(function (r) { return r.nameCn; }).length + '</b>有中文名</div></div>'
+          + '<p class="note">官方英文回顾只说过新团本 12 月 9 日开放、之后还有更多，没给名字与首领数：'
+          + '<a href="timeline.html">看时间表那一页</a>。</p></div>'
+          + '<div class="card" id="client"><h2>客户端的队伍查找器里能排到的</h2>'
+          + '<div class="field"><input type="search" id="rq" placeholder="按英文名筛，例如 Storm" aria-label="按英文名筛团本" value="'
+          + D.esc(f.q) + '"><span class="dim mono" id="rcnt">' + shown.length + ' / ' + names.length + '</span></div>'
+          + (shown.length ? bands : '<div class="empty">没有匹配的名字。这一页只有客户端与另一份资料给的名字，'
+              + '中文定名还没公布，所以中文词搜不到。</div>')
+          + '<p class="dim">同一座挂两条的，是客户端里有两个排队条目：两种规模的写"两种规模"，'
+          + '人数一样的写"同规模的两个入口"——到底是难度分层还是分区排队，进游戏才知道，这里不解释。</p></div>'
+          + '<div class="card" id="claimed"><h2>另一份资料自述的 ' + claimed.length + ' 座</h2>'
+          + '<p class="dim">第三方资料站列的团本名单，它自己写着"官方还没说"。本站只取它给的人数这一个数，'
+          + '不搬它的推测段落。</p>'
+          + '<div class="scrollx"><table class="entab rtab"><thead><tr><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th>'
+          + '<th>分级</th></tr></thead><tbody>' +
+          claimed.map(function (r) {
+            var inClient = names.filter(function (x) { return x.matchedIn === 'raid' && x.matched === r.id; })[0];
+            return '<tr><td><b>' + D.esc(r.nameEn || r.nameCn || '未定名') + '</b>'
+              + (r.nameCn ? '<span class="dim">　' + D.esc(r.nameCn) + '</span>' : '<span class="dim">　中文定名未公布</span>')
+              + '</td><td class="mono">' + D.esc(r.sizeClaim || '未写') + ' 人</td>'
+              + '<td>' + (inClient ? '有这一条：' + sizeText(inClient) + '、' + entryText(inClient)
+                  : '<span class="dim">没有对应的排队条目</span>') + '</td>'
+              + '<td>' + D.pill(r.level) + '</td></tr>';
+          }).join('') + '</tbody></table></div>'
+          + (claimed.some(function (r) { return r.sizeClaim && r.partySize && String(r.sizeClaim) !== String(r.partySize); })
+            ? '<div class="conf">规模两说：另一份资料自报的人数与客户端排队条目写的不是一个数，两个都摆着等定稿。</div>' : '')
+          + '<h3>来源与核对</h3>' + claimed.map(function (r) { return D.sources(r.provenance); }).join('') + '</div>'
+          + '<div class="card" id="missing"><h2>这一页还没有的</h2><ul class="list">'
+          + '<li>中文名：官方中文稿没发，客户端与另一份资料给的都是英文原名，不机翻。</li>'
+          + '<li>首领名单与掉落：客户端的队伍查找器里只有排队条目，没有首领；'
+          + '第三方资料站的团本页是推测段落，本站不搬进正文。</li>'
+          + '<li>开放顺序与具体日期：官方英文只给了 12 月 9 日这一档，国服公告没重复。</li>'
+          + '<li>团队规则细节（重置周期、规模上限、是否需要进度记录）：'
+          + '<a href="systems.html">系统规则那一页</a>有官方中文说法的才写在这里。</li>'
+          + '<li>打法、职业配置、装备推荐：本站红线不做攻略正文。</li>'
+          + '</ul></div>'
+          + '<div class="card"><h2>来源与核对</h2>' + D.sources((rows[0] || {}).provenance || [])
+          + '<p class="dim">这一页与副本页那张「客户端能排到、本站还没有名单」的表同源，'
+          + '不是第二份数据：客户端版本 ' + D.esc((QU.meta || {}).build || '') + ' 的队伍查找器。</p></div>');
+        var box = el('rq');
+        if (box) box.oninput = function () { f.q = box.value; var p = document.activeElement === box; draw(); if (p) { el('rq').focus(); el('rq').setSelectionRange(9999, 9999); } };
+      }
+      draw();
     }).catch(fail);
   }
 
@@ -2839,5 +2978,5 @@
   watchRails();
   tickCountdown();
   setInterval(tickCountdown, 1000);
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

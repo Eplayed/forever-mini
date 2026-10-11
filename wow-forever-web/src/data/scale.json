@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-10",
+  "generatedAt": "2026-10-11",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -105,7 +105,7 @@
    "cap": 16,
    "total": 65
   },
-  "search": 4285,
+  "search": 4302,
   "talentPreview": 473,
   "releases": 21,
   "navNew": [
@@ -128,6 +128,14 @@
   "dungeonRangeTwoSay": 7,
   "queueRows": 51,
   "queueUnlisted": 16,
+  "raids": {
+   "entries": 19,
+   "names": 15,
+   "claimed": 3,
+   "matched": 1,
+   "named": 0,
+   "dungeonVariants": 3
+  },
   "races": 10,
   "traits": 40,
   "timeline": 11,

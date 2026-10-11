@@ -201,6 +201,38 @@ Object.keys(qIdx).forEach((k) => {
   }
 });
 
+// 团本页：客户端的队伍查找器里有哪些团队条目、参考站自述了哪几座，两边对得上几个
+const raidRows = (qu.items || []).filter((x) => x.kind === 'raid');
+const raidNames = {};
+raidRows.forEach((x) => { (raidNames[x.nameEn] = raidNames[x.nameEn] || []).push(x); });
+const claimed = (dg.raids || []).filter((r) => r.sizeClaim);
+const bothSides = (dg.raids || []).filter((r) => r.clientActivityId).map((r) => r.id);
+raidRows.forEach((x) => {
+  if (!x.difficultyId && x.difficultyId !== 0) {
+    errs.push(`queue ${x.activityId}：没记条目号，同名两条就没法说清是两种规模还是两个入口`);
+  }
+});
+claimed.forEach((r) => {
+  if (!/^\d+$/.test(String(r.sizeClaim))) errs.push(`raid ${r.id}：自报规模「${r.sizeClaim}」不是个数`);
+  if (r.partySize && String(r.partySize) !== String(r.sizeClaim)) {
+    warns.push(`raid ${r.id}：参考站说 ${r.sizeClaim} 人、客户端排队条目写 ${r.partySize} 人，界面上两个都要摆`);
+  }
+});
+if (!(dg.raids || []).length) errs.push('dungeons：团本一段是空的，团本页会没内容');
+// 规模数字先算着，等下面 scale 定义好再挂上去（在这之前访问 scale 会直接崩）
+const raidStats = {
+  entries: raidRows.length,
+  names: Object.keys(raidNames).length,
+  claimed: claimed.length,
+  matched: bothSides.length,
+  named: (dg.raids || []).filter((r) => r.nameCn).length,
+  dungeonVariants: raidRows.filter((x) => x.matchedId && x.matchedId !== 'onyxias-lair'
+    && [].concat(dg.newDungeons || [], dg.classicDungeons || []).some((y) => y.id === x.matchedId)).length
+};
+console.log('团本：客户端排队条目 ' + raidStats.entries + ' 条 / ' + raidStats.names +
+  ' 个名字，参考站自述 ' + raidStats.claimed + ' 座，两边都对得上的 ' + raidStats.matched +
+  ' 座，有中文名的 ' + raidStats.named + ' 座');
+
 // 系统卡片
 const sy = read('systems.json');
 (sy.groups || []).forEach((g) => {
@@ -884,6 +916,7 @@ const SK = {
   abl: ['技能四态', 'skills.html', 'q'],
   dun: ['副本', 'dungeons.html', ''],
   boss: ['副本首领', 'dungeons.html', ''],
+  rdd: ['团本', 'raids.html', 'q'],
   zone: ['区域', 'world.html', 'q'],
   rare: ['稀有精英', 'world.html', 'q'],
   bok: ['书籍', 'world.html', 'q'],
@@ -956,8 +989,22 @@ gl.items.forEach((x) => {
     sPush('boss', b.nameCn || b.nameEn, d.nameCn || d.nameEn || '', 'd=' + d.id, b.level);
   });
 });
-if (worldOut) {
-  // 睡袋本身也是一条可搜的名称（营点是地标名，容易搜不到）
+// 团本条目进索引：客户端里的名字是英文原文，本站还没有中文名，搜英文要能跳进来
+Object.keys(raidNames).sort().forEach((nm) => {
+  const list = raidNames[nm];
+  const sizes = [];
+  list.forEach((x) => { if (x.partySize && sizes.indexOf(x.partySize) < 0) sizes.push(x.partySize); });
+  const matched = list.filter((x) => x.matchedId)[0];
+  // 跳转参数留空：板块表里 rdd 已经声明用 q 带名字，这里再写一遍会拼出两个 q=
+  sPush('rdd', nm, (sizes.length ? sizes.join('/') + ' 人' : '人数未标') +
+    ' · ' + (matched ? '本站已有条目' : '还没有名单'), '', 'L1');
+});
+(dg.raids || []).forEach((r) => {
+  if (!r.nameEn) return;
+  sPush('rdd', r.nameEn, '参考站自述 ' + (r.sizeClaim || '?') + ' 人 · 中文名未公布',
+    '', r.level || 'L2');
+});
+if (worldOut) {  // 睡袋本身也是一条可搜的名称（营点是地标名，容易搜不到）
   const sbbag = (worldOut.bagTool || {}).bag;
   if (sbbag) {
     sPush('camp', sbbag.nameCn, '睡袋 · ' + (sbbag.itemLevel ? sbbag.itemLevel + ' 级物品' : '等级未采'),
@@ -1020,6 +1067,26 @@ if (legacyOut) {
 }
 
 sFinish();
+// 首页搜索的分组顺序表在 src/js/app.js 里手写。漏一个板块，那一类条目就"在索引里但搜不出来"——
+// 这种错界面上看不出来，只能在这里拦。
+const appJs = fs.readFileSync(path.join(ROOT, '..', 'js', 'app.js'), 'utf8');
+const orderM = appJs.match(/SKIND_ORDER\s*=\s*\[([^\]]*)\]/);
+if (!orderM) {
+  errs.push('app.js：找不到搜索的板块顺序表 SKIND_ORDER，首页搜索的分组无从排起');
+} else {
+  const listed = (orderM[1].match(/'[^']+'/g) || []).map((s) => s.replace(/'/g, ''));
+  const missing = Object.keys(SK).filter((k) => listed.indexOf(k) < 0);
+  if (missing.length) errs.push('app.js 的搜索分组表缺板块：' + missing.join('、') + '（这些板块的条目在索引里但首页搜不出来）');
+  const stale = listed.filter((k) => !(k in SK));
+  if (stale.length) warns.push('app.js 的搜索分组表里有索引中不存在的板块：' + stale.join('、'));
+}
+// 条目自带的跳转参数不许和板块声明的重复，否则拼出来的链接有两个 q=，目标页只认第一个
+SIDX.forEach((it) => {
+  const param = (SK[it[0]] || [])[2];
+  if (param && String(it[3] || '').split('&').some((kv) => kv.split('=')[0] === param)) {
+    errs.push(`搜索索引 ${it[0]}「${it[1]}」：条目自己带了 ${param}=，板块也声明了 ${param}=，跳过去会有两个同名参数`);
+  }
+});
 // 索引自身的卡口：名字里混进句子、页面不存在、类型没登记，都是数据出问题的信号
 const seenSid = new Set();
 SIDX.forEach((it) => {
@@ -1218,6 +1285,7 @@ Object.assign(scale, {
   dungeonRangeTwoSay: dalls.filter((x) => x.levelRangeClient).length,
   queueRows: (qu.items || []).length,
   queueUnlisted: qUnlisted,
+  raids: raidStats,
   races: (rc.races || []).length,
   traits: rcTraitN,
   timeline: (JSON.parse(fs.readFileSync(path.join(ROOT, 'timeline.json'), 'utf8')).items || []).length,

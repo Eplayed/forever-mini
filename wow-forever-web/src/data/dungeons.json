@@ -12600,7 +12600,8 @@
    "partySizeAlt": null,
    "levelRangeClient": null,
    "nameEnClient": null,
-   "clientAltIds": null
+   "clientAltIds": null,
+   "sizeClaim": "10"
   },
   {
    "id": "hyjal-summit",
@@ -12617,6 +12618,12 @@
      "url": "https://wowclassicforever.info/raids",
      "note": "参考站列为 20 人团本，官方未证实",
      "checkedAt": null
+    },
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/raids/hyjal-summit",
+     "note": "它把这座列为 20 人团队条目，并写了\"官方还没说\"的推测段；本站只取人数这一个数，不搬它的讲解",
+     "checkedAt": "2026-10-11"
     }
    ],
    "nameEnFrom": null,
@@ -12625,7 +12632,8 @@
    "partySizeAlt": null,
    "levelRangeClient": null,
    "nameEnClient": null,
-   "clientAltIds": null
+   "clientAltIds": null,
+   "sizeClaim": "20"
   },
   {
    "id": "onyxias-lair",
@@ -12648,6 +12656,12 @@
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70334",
      "note": "客户端版本 1.60.1.70334 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
      "checkedAt": "2026-10-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://wowclassicforever.info/raids/onyxias-lair",
+     "note": "它把这座列为 40 人团队条目，并写了\"官方还没说\"的推测段；本站只取人数这一个数，不搬它的讲解",
+     "checkedAt": "2026-10-11"
     }
    ],
    "nameEnFrom": null,
@@ -12658,7 +12672,8 @@
    "nameEnClient": null,
    "clientAltIds": [
     1612
-   ]
+   ],
+   "sizeClaim": "40"
   }
  ]
 }

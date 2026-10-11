@@ -84,6 +84,15 @@ def build_rows():
     un = [i for i in (qu.get("items") or []) if not i.get("matchedId")]
     rows.append(("副本", "客户端能排到、本站没有名单的", len(un), "A",
                  "逐座补首领与掉落（要先有可信来源，别猜）" if un else "—"))
+    raid_rows = [i for i in (qu.get("items") or []) if i.get("kind") == "raid"]
+    raid_names = {i["nameEn"] for i in raid_rows}
+    no_cn = len([n for n in raid_names if not any(
+        (r.get("nameEn") or "").lower() == n.lower() and r.get("nameCn")
+        for r in (dg.get("raids") or []))])
+    rows.append(("团本", "客户端能排到、还没有中文定名的团本条目", no_cn, "W",
+                 "官方中文稿没发；团本页只列英文原名与人数，不机翻" if no_cn else "—"))
+    rows.append(("团本", "团本的首领名单与掉落", len(raid_names), "W",
+                 "客户端排队表里没有首领数据，参考站那份是推测段落不搬——等能进游戏或官方公布"))
 
     # ---- 天赋线 ----
     # 以 _ 开头的文件是草稿，build-data.js 也不算它们，这里必须同一口径
