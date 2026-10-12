@@ -1403,7 +1403,7 @@
     }).catch(fail);
   }
 
-  /* ---------- 技能书 ---------- */
+  /* ---------- 技能四态与专精名的用表（技能书页与职业页共用这一份）---------- */
   var AB_STATE = { new: '新增', changed: '改动', renamed: '改名', removed: '移除' };
   var AB_KIND = { talent: '天赋', skill: '技能', pet: '宠物技能' };
   var AB_SPEC = { 'beast-mastery': '野兽控制', marksmanship: '射击', survival: '生存', feral: '野性战斗',
@@ -1598,7 +1598,7 @@
             '<p class="dim">只列名称、归属与客户端解包给出的改动类别，不复制别人的逐字前后对照；' +
             '官方中文稿里出现过的名字，把原句整句贴在下面。</p>' +
             (noAb ? '<div class="note">' + D.esc(noAb) + '</div>' : '') +
-            listHtml +
+            '<div class="chgs">' + listHtml + '</div>' +
             (abs.length ? '<div class="chipsrow"><a href="skills.html">这一职业在技能书里的四态整句 →</a></div>' : '') +
             '</section>';
 

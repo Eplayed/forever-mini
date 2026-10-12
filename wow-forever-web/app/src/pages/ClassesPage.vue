@@ -78,6 +78,7 @@
         <h2>技能变化<span class="dim mono">{{ sel ? ' 只看 ' + sel : ' 三系都列' }}</span><span class="dim mono"> · {{ shown.length }} 条</span></h2>
         <p class="dim">只列名称、归属与客户端解包给出的改动类别，不复制别人的逐字前后对照；官方中文稿里出现过的名字，把原句整句贴在下面。</p>
         <div v-if="noAb" class="note">{{ noAb }}</div>
+        <div class="chgs">
         <template v-if="groups.length">
           <template v-for="g in groups" :key="g.k">
             <div class="lgrp"><b>{{ g.label }}</b><span class="dim">{{ g.rows.length }} 条</span>
@@ -98,6 +99,7 @@
           </template>
         </template>
         <div v-else class="empty">这一系还没有客户端改动记录，等下一次客户端更新再看。</div>
+        </div>
         <div v-if="abs.length" class="chipsrow"><a :href="bookHref">这一职业在技能书里的四态整句 →</a></div>
       </section>
     </div>

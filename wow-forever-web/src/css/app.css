@@ -1395,6 +1395,11 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .chtab{min-width:620px}
 .chtab th,.chtab td:nth-child(2),.chtab td:nth-child(3){white-space:nowrap}
 .chtab td:nth-child(1){width:52%}
+/* 那一长列封顶滚动：95 条不封顶会把两栏拉成一长一短（1440 实拍右栏 ~2500px、左栏 ~600px，
+   左栏下面一整块空）。封顶口径与全站长表一致（.tblbox 的 72vh），
+   收窄的出口就是上面那三张系卡，不必靠翻页。 */
+.chgs{max-height:72vh;overflow-y:auto;padding-right:2px}
+.chgs .lgrp{top:0}
 
 @media (max-width:980px){
   .tools6{grid-template-columns:repeat(2,1fr)}
