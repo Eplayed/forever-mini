@@ -282,11 +282,37 @@
           i.setAttribute('aria-label', '这一版新开了这一页');
           a.appendChild(i);
         });
-        el('foot').innerHTML = '<div class="in"><span>' + D.esc(meta.disclaimer) + '</span>' +
-          '<span>数据来源版本：<span class="mono">' + D.esc(meta.dataBaseline.build) + '</span>，核对于 ' +
-          D.esc(meta.dataBaseline.checkedAt) + '</span>' +
-          '<span>资料覆盖率（不含天赋）L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + cov.L2 +
-          ' / L3 ' + cov.L3 + '，共 ' + sc.pubTotal + ' 条</span></div>';
+        /* 页脚按设计稿换成三栏铭牌（1.6fr 1fr 1fr + 一条底栏）。
+           原来那三条事实一条不少：免责句、数据版本与核对日期、覆盖率——只是换了位置。
+           两栏链接不写死名单：从 NAV 那张表里挑，标签与说明跟导航同源，
+           导航改名/挪页时页脚不会留一份过期副本（稿子里那 8 项是 <span> 假链接，这里全做成能点的）。 */
+        var TOOL = { 'talent.html': 1, 'chooser.html': 1, 'glossary.html': 1, 'timeline.html': 1,
+          'updates.html': 1, 'rank.html': 1, 'systems.html': 1, 'provenance.html': 1 };
+        var cols = { tool: [], data: [] };
+        NAV.forEach(function (g) {
+          (g.items || [{ href: g.href, t: g.t, d: g.d }]).forEach(function (it) {
+            if (!it.href || it.href === 'index.html') return;
+            (TOOL[it.href.split('#')[0]] ? cols.tool : cols.data).push(it);
+          });
+        });
+        function fcol(c) {
+          return '<div class="fcol">' + c.map(function (x) {
+            return '<a href="' + D.esc(x.href) + '" title="' + D.esc(x.d || '') + '">' + D.esc(x.t) + '</a>';
+          }).join('') + '</div>';
+        }
+        el('foot').innerHTML = '<div class="fwrap"><div class="fgrid">' +
+          '<div class="fcol fbrand"><span class="fstar"><svg viewBox="0 0 48 48" aria-hidden="true">' +
+          '<circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/>' +
+          '<path d="M24 8 L28 22 L42 24 L28 26 L24 40 L20 26 L6 24 L20 22 Z" fill="currentColor"/></svg></span>' +
+          '<b>无限资料站</b>' +
+          '<p>' + D.esc(meta.disclaimer) + '。数据取自测试版客户端解包，与经典旧世逐条对照，随版本继续核。</p>' +
+          '<p class="mono">数据版本 ' + D.esc(meta.dataBaseline.build) + ' · 核对于 ' +
+          D.esc(meta.dataBaseline.checkedAt) + '</p></div>' +
+          '<div><div class="fh">工具</div>' + fcol(cols.tool) + '</div>' +
+          '<div><div class="fh">资料</div>' + fcol(cols.data) + '</div></div>' +
+          '<div class="fbar"><span>资料覆盖率（不含天赋）L0 ' + cov.L0 + ' / L1 ' + cov.L1 +
+          ' / L2 ' + cov.L2 + ' / L3 ' + cov.L3 + '，共 ' + sc.pubTotal + ' 条</span>' +
+          '<span>每一条都能点开看它出自哪里</span></div></div>';
       }).catch(function () { });
   }
 

@@ -1383,3 +1383,34 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
   background:rgba(11,15,22,.7);padding:3px 8px;border:1px solid var(--line)}
 /* 页首 banner 上"示意图"角标与状态牌会撞在同一个右上角：角标改到底边，状态牌留在顶上 */
 .dhero .dmark{left:14px;right:auto;top:auto;bottom:12px}
+
+/* 页脚三栏（稿子 2.13）：底比页面更深一档、顶上一道金线，栏目标题金色，链接走中性色 */
+#foot{background:var(--foot-bg);border-top:1px solid var(--gold-line)}
+#foot .fwrap{max-width:var(--wrap);margin:0 auto;padding:36px 20px 0}
+#foot .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
+#foot .fbrand b{font-family:var(--font-display);font-size:17px;color:var(--gold-hi);letter-spacing:2px}
+#foot .fstar{display:inline-flex;vertical-align:-8px;margin-right:8px;color:var(--gold)}
+#foot .fstar svg{width:28px;height:28px}
+#foot .fbrand p{font-size:13px;line-height:1.8;color:var(--txt-muted);max-width:420px;margin:12px 0 0}
+#foot .fh{font-size:14px;color:var(--gold);margin-bottom:14px}
+#foot .fcol{display:flex;flex-direction:column;gap:10px;font-size:13px}
+#foot .fcol a{color:var(--txt-dim);text-decoration:none}
+#foot .fcol a:hover{color:var(--gold-hi)}
+#foot .fbar{margin-top:28px;padding:18px 0;border-top:1px solid var(--gold-line-soft);
+  display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:12px;color:var(--txt-muted)}
+@media (max-width:860px){ #foot .fgrid{grid-template-columns:1fr 1fr} #foot .fbrand{grid-column:1/-1} }
+@media (max-width:600px){ #foot .fgrid{grid-template-columns:1fr;gap:var(--s5)}
+  /* 页脚链接在手机上必须是点击目标：13px 行高的裸链接量出来只有 16px 高，摸不到 */
+  #foot .fcol a{display:flex;align-items:center;min-height:44px} }
+
+/* 稿子第二批的通用细节（只调既组件的字体与描边，不动结构）：
+   表头金色小字距、行分隔走金 10%、分档标题的等级区间用等宽金字、副本卡名走衬线 */
+th{color:var(--gold);letter-spacing:1px;font-weight:600}
+tbody td{border-bottom:1px solid var(--gold-line-soft)}
+tbody tr:last-child td{border-bottom:none}
+.band b{font-family:var(--font-display);letter-spacing:.5px}
+.band .mono,.dbn2-r{font-family:var(--font-mono);color:var(--gold-hi)}
+.dbn2-n{font-family:var(--font-display);letter-spacing:.5px}
+.grp{color:var(--gold);border-bottom-color:var(--gold-line-soft)}
+/* 天赋已学格：稿子用金色双层（外描边 + 内发光），未学格压暗一档 */
+.tnode.on img,.tnode.on{box-shadow:0 0 10px var(--gold-glow),inset 0 0 6px var(--gold-glow)}
