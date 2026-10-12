@@ -27,14 +27,14 @@
 | 板块 | 源 | 一条命令 | 备注 |
 | --- | --- | --- | --- |
 | 天赋树 | 两家解包站（fengshen / nieyi）双源 | `tools/refresh.sh talents` | 双源按坐标对齐，名字分歧两个都留。**2026-10-12 起默认强制现读**（本地有快照也不偷懒，否则拿旧译名对新格位就是造事实）；`--use-cache` 只在离线应急时用，且会把"用了快照"写进产物。`classes.json` 的 `talentCount / nameVerified` 由这一步同步，不再手抄 |
-| 副本与掉落 | 解包站副本卡片（浏览器渲染） | `tools/refresh.sh dungeons` | 掉落只取"谁掉什么"，**不写百分比** |
+| 副本与掉落 | 解包站副本卡片（浏览器渲染） | `tools/refresh.sh dungeons` | 掉落只取"谁掉什么"，**不写百分比**；链路里含首领头像两小步（先 `--what bossfaces` 读真实路径，再 `fetch-art --what bosses` 转存） |
 | 世界线 | 解包站 `_shuju/<发布号>/*.json` | `tools/refresh.sh world` | 发布号每次从页面现读，别手抄 |
 | 专业与配方 | 解包站专业页 | `tools/refresh.sh prof` | 野营那一页没有结构化数据，不编 |
 | 客户端改动清单 | 解包站 `_shuju/…/changes.json` | `tools/refresh.sh changes` | **入库前就删掉前后对照句子**，只留名称与类别 |
 | 传承（专长树 / 挑战 / 奖励） | 解包站 `_shuju/…/legacy.json` | `tools/refresh.sh legacy` | 同样**落盘前删句子**：每层效果说明、常见问题、领取说明一律不进仓库；未公开的槽位留空标"未公开" |
 | 官方中文（技能四态 / 种族） | 国服官方公告页（现有 4 篇职业深度解析：猎人+德鲁伊、牧师+战士、法师+萨满祭司、潜行者+术士） | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻。**2026-10-12 采到第 4 篇后，466 个天赋名里 462 个（99.1%）能与官网对上**；只剩圣骑士没发稿，它的三个系名保持现状不猜 |
 | 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
-| 原画（职业背景 / 载入图 / 小地图） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退 |
+| 原画（职业背景 / 载入图 / 小地图 / 首领头像） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退。**首领头像不许拼 URL**：源站文件名是它自己那套首领键（`rhahkzor`），与我们存的 id（`rhahk-zor`）不同名，必须先 `scrape-wclbox-dom.py --what bossfaces` 把真实路径读回来 |
 | 副本排队元数据 | 解包站 `_shuju/<发布号>/dungeons.json`（35 条，**没有首领与掉落**） | `python3 tools/scrape-wclbox-shuju.py --group dungeons` | 已接进 `refresh.sh dungeons`：补阵营与所在区域；它的 `enter` 列对不上客户端表，**不采** |
 | 客户端排队表 | `wago.tools/db2/GroupFinderActivity/csv?build=<客户端版本>` | `python3 tools/fetch-db2-groupfinder.py` | 英文原名、等级区间、一次几人。非暴雪域名 → 英文名只算 L1；构建号从 `_shuju/…/meta.json` 现读 |
 | 英文原名 / ID / 图标名对账 | wowhead Forever 区（**只有英文**，`/cn/forever` 是 404） | `python3 tools/audit-wowhead.py --write` | 对账不是门禁：天赋线已跑通（461/473 对上、图标零真分歧）；只取标识符与计数，中文名一律不由它提供 |

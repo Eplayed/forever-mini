@@ -55,6 +55,10 @@ case "${1:-}" in
     # （2026-10-10 实测：卡片线重跑过，名单还是 235 个 BOSS，而详情页已经是 232 个）
     run python3 tools/scrape-wclbox.py --what dungeons --write
     run python3 tools/scrape-wclbox-dom.py --what cards
+    # 首领头像：源站的头像文件名是它自己那套首领键（rhahkzor），跟我们存的 id（rhahk-zor）不同名，
+    # 只能逐个副本页把真实路径读回来再下，猜地址会大面积 404（2026-10-12 实测踩过一次）
+    run python3 tools/scrape-wclbox-dom.py --what bossfaces
+    run python3 tools/fetch-art.py --what bosses
     # 客户端排队表与排队元数据：等级区间、进入人数、英文原名的第三方可回查来源
     run python3 tools/scrape-wclbox-shuju.py --group dungeons
     run python3 tools/fetch-db2-groupfinder.py

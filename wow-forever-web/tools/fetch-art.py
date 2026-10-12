@@ -260,11 +260,92 @@ def factions(man):
         print(u"  缺：%s" % u"、".join(miss))
 
 
+def boss_rows():
+    """dungeons.json 里的全部首领：[(本 id, 首领 id, 首领中文名)]，按出现顺序。"""
+    dg = json.load(io.open(os.path.join(DATA, "dungeons.json"), encoding="utf-8"))
+    rows = []
+    for key in ("newDungeons", "classicDungeons", "raids"):
+        for d in dg.get(key) or []:
+            for b in d.get("bosses") or []:
+                rows.append((d["id"], b["id"], b.get("nameCn")))
+    return rows
+
+
+def boss_face_map():
+    """从 DOM 抓回来的首领头像路径表：键是"去掉连字符小写"的首领键，值是该页真实读到的路径。
+
+    为什么不能自己拼：源站的头像文件名是它自己那套首领键（rhahkzor），与我们 dungeons.json
+    里的 id（rhahk-zor）不同名，猜出来的地址会大面积 404——那是我们的错，不是源站缺。
+    """
+    p = os.path.join(DATA, "upstream", "wclbox-boss-faces.json")
+    if not os.path.exists(p):
+        sys.exit(u"先跑 tools/scrape-wclbox-dom.py --what bossfaces，才有头像路径可对")
+    doc = json.load(io.open(p, encoding="utf-8"))
+    norm = lambda s: re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    out, allkeys = {}, {}
+    for f in doc.get("faces") or []:
+        k = norm(f.get("bossKey"))
+        if not k:
+            continue
+        allkeys[k] = f
+        if f.get("face"):
+            out[k] = f
+    return out, allkeys
+
+
+def bosses(man, probe_only=False):
+    """首领头像：客户端遭遇战手册里的方头像，托管在第三方站（官方 CDN 不提供）。
+
+    这不是图标而是暴雪的游戏美术，与副本载入图同一类，所以走同一套口径——
+    落独立目录 art/bosses/ + manifest 记来源与抓取日期 + 整目录删除即回退到自绘方块。
+    无限新增的首领（如领主大厅那四位）源站自己也标着 data-unknown，我们这边同样拿不到，
+    一律留空不猜图、不拿别的种族的脸凑。
+    """
+    rows = boss_rows()
+    faces, allkeys = boss_face_map()
+    have = set(os.path.basename(x["file"]).split(".")[0]
+               for x in man["items"] if "/bosses/" in x["file"])
+    ok, miss, nomatch = [], [], []
+    for dun_id, bid, name in rows:
+        key = re.sub(r"[^a-z0-9]", "", bid.lower())
+        f = faces.get(key)
+        if not f:
+            if key in allkeys:
+                miss.append(bid)
+            else:
+                nomatch.append(bid)
+            continue
+        if bid in have:
+            continue
+        url = WBX + f["face"]
+        if probe_only:
+            code, blob = http(url, binary=True)
+            (ok if code == 200 and blob[8:12] == b"WEBP" else miss).append(bid)
+            continue
+        code, blob = http(url, binary=True)
+        if code == 200 and len(blob) > 400 and blob[8:12] == b"WEBP":
+            rec = save(os.path.join(ART, "bosses", bid + ".webp"), blob, url, "boss-portrait")
+            rec["dungeon"] = dun_id
+            man["items"] = [x for x in man["items"]
+                            if not (x["kind"] == "boss-portrait"
+                                    and os.path.basename(x["file"]).split(".")[0] == bid)]
+            man["items"].append(rec)
+            ok.append(bid)
+        else:
+            miss.append(bid + u"（HTTP %s）" % code)
+    print(u"首领头像：首领共 %d ｜ 源站有脸且已下盘 %d ｜ 源站标了没有 %d ｜ 源站页面上没这一节 %d" % (
+        len(rows), len(ok) + len(have), len(miss), len(nomatch)))
+    if miss:
+        print(u"  源站没有这张脸：%s" % u"、".join([str(x) for x in miss[:16]]))
+    if nomatch:
+        print(u"  名字对不上（不猜）：%s" % u"、".join(nomatch[:16]))
+
+
 def write_art_index(man):
     """把 manifest 收成界面能直接用的索引：src/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
     idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {},
-           "factionCities": {}, "meta": {}}
+           "factionCities": {}, "bosses": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -278,6 +359,8 @@ def write_art_index(man):
             idx["factions"][name] = "img/" + rel
         elif x["kind"] == "faction-city":
             idx["factionCities"][name.replace("city-", "")] = "img/" + rel
+        elif x["kind"] == "boss-portrait":
+            idx["bosses"][name] = "img/" + rel
         else:
             idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
@@ -285,17 +368,22 @@ def write_art_index(man):
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
     print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
-          u"阵营徽标 %d / 阵营城市 %d）" % (
+          u"阵营徽标 %d / 阵营城市 %d / 首领头像 %d）" % (
               len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]), len(idx["races"]),
-              len(idx["factions"]), len(idx["factionCities"])))
+              len(idx["factions"]), len(idx["factionCities"]), len(idx["bosses"])))
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "factions", "all"],
-                    default="all")
+    ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "factions",
+                                       "bosses", "all"], default="all")
+    ap.add_argument("--probe", action="store_true",
+                    help="只问源站有没有这张图，不落盘（首领头像用它先量缺口）")
     args = ap.parse_args()
     man = load_manifest()
+    if args.what == "bosses" and args.probe:
+        bosses(man, probe_only=True)
+        return
     if args.what in ("classes", "all"):
         classes(man)
     if args.what in ("dungeons", "all"):
@@ -306,6 +394,8 @@ def main():
         races(man)
     if args.what in ("factions", "all"):
         factions(man)
+    if args.what in ("bosses", "all"):
+        bosses(man)
     man["fetchedAt"] = datetime.date.today().isoformat()
     man["total"] = len(man["items"])
     save_manifest(man)

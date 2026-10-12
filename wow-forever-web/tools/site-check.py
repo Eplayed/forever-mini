@@ -909,6 +909,18 @@ def test_dungeon_data(browser, base):
     check("无限新增本带\"新\"角标", seals == newn, "%d 个角标 / %d 座新本" % (seals, newn))
     conf = page.evaluate("() => document.querySelectorAll('#main .conf').length")
     check("区间或译名两说的条目都摆在卡面上", conf >= 5, "%d 处冲突标注" % conf)
+    # 首领头像：方块数要等于首领数（没脸的也得有个自绘块），只有数据里挂了本地转存路径的才放图
+    faces = page.evaluate("""() => ({
+      tiles: document.querySelectorAll('.bosslist .bh > .liw').length,
+      imgs: [...document.querySelectorAll('.bosslist .bh > .liw img')].map(i => i.getAttribute('src'))})""")
+    bosses = [b for k in ("newDungeons", "classicDungeons", "raids")
+              for d in (dg.get(k) or []) for b in (d.get("bosses") or [])]
+    with_p = [b for b in bosses if b.get("portrait")]
+    check("每个首领位都有一个头像方块", faces["tiles"] == len(bosses),
+          "%d 个方块 / 数据 %d 个首领" % (faces["tiles"], len(bosses)))
+    check("只有本地转存到脸的首领才放图",
+          sorted(faces["imgs"]) == sorted([b["portrait"] for b in with_p]),
+          "%d 张图 / 数据 %d 张" % (len(faces["imgs"]), len(with_p)))
     page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-with-loot.png"))
     ctx.close()
 
@@ -980,6 +992,18 @@ def test_raids(browser, base):
     check("另一份名单自述的几座都在", g["claimed"] == len(claimed), "%d / %d" % (g["claimed"], len(claimed)))
     check("两边对不上的直说没有对应条目",
           g["noMatch"] == len([r for r in claimed if not r.get("clientActivityId")]), "%d 座" % g["noMatch"])
+    # 载入图那一列：数据里有本地转存路径的才放图，没有的写"源站没有"，不放别的图凑
+    arts = page.evaluate("""() => [...document.querySelectorAll('#claimed tbody tr')].map(r => {
+      const i = r.querySelector('td.ich img');
+      return i ? (i.getAttribute('src') || '') : null; })""")
+    exp_arts = [c.get("art") or None for c in claimed]
+    check("团本那一列按数据摆载入图，缺的直说缺",
+          len(arts) == len(exp_arts) and all(a == e for a, e in zip(arts, exp_arts)),
+          "页面 %s / 数据 %s" % (arts, exp_arts))
+    check("没有载入图的座数在「这一页还没有的」里交代",
+          any("载入图" in t for t in page.evaluate(
+              "() => [...document.querySelectorAll('#missing li')].map(x => x.textContent)")),
+          "%d 座里没有一张" % len([e for e in exp_arts if not e]))
     exp_stats = [str(len(names)), str(len(claimed)),
                  str(len([r for r in claimed if r.get("clientActivityId")])),
                  str(len([r for r in claimed if r.get("nameCn")]))]

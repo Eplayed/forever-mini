@@ -1,0 +1,1636 @@
+{
+ "meta": {
+  "source": "https://wowforever.wclbox.com/fuben 各副本页",
+  "scrapedAt": "2026-10-12",
+  "method": "渲染后 DOM 读 section.sj-boss 的 span.sj-face 内联背景路径",
+  "note": "只取头像文件路径这一个标识符；data-unknown 表示源站自己也没有这张脸",
+  "bosses": 232,
+  "withFace": 146
+ },
+ "faces": [
+  {
+   "bossKey": "ghamoo-ra",
+   "face": "/jiemian/bosses/ej/ghamoora.webp",
+   "unknown": false,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "lady-sarevess",
+   "face": "/jiemian/bosses/ej/ladysarevess.webp",
+   "unknown": false,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "geilhast",
+   "face": "/jiemian/bosses/ej/gelihast.webp",
+   "unknown": false,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "lorgus-jett",
+   "face": "/jiemian/bosses/ej/lorgusjett.webp",
+   "unknown": false,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "baron-aquanis",
+   "face": "/jiemian/bosses/ej/baronaquanis.webp",
+   "unknown": false,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackfathom-deeps",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackfathom-deeps"
+  },
+  {
+   "bossKey": "high-interrogator-gerstahn",
+   "face": "/jiemian/bosses/ej/highinterrogatorgerstahn.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "lord-roccor",
+   "face": "/jiemian/bosses/ej/lordroccor.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "houndmaster-grebmar",
+   "face": "/jiemian/bosses/ej/houndmastergrebmar.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "ring-of-law",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "pyromancer-loregrain",
+   "face": "/jiemian/bosses/ej/pyromancerloregrain.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "lord-incendius",
+   "face": "/jiemian/bosses/ej/lordincendius.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "warder-stilgiss",
+   "face": "/jiemian/bosses/ej/warderstilgiss.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "fineous-darkvire",
+   "face": "/jiemian/bosses/ej/fineousdarkvire.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "bael-gar",
+   "face": "/jiemian/bosses/ej/baelgar.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "general-angerforge",
+   "face": "/jiemian/bosses/ej/generalangerforge.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "golem-lord-argelmach",
+   "face": "/jiemian/bosses/ej/golemlordargelmach.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "hurley-blackbreath",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "phalanx",
+   "face": "/jiemian/bosses/ej/phalanx.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "ribbly-screwspigot",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "plugger-spazzring",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "ambassador-flamelash",
+   "face": "/jiemian/bosses/ej/ambassadorflamelash.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "the-seven",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "magmus",
+   "face": "/jiemian/bosses/ej/magmus.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "princess-moira-bronzebeard",
+   "face": "/jiemian/bosses/ej/princessmoirabronzebeard.webp",
+   "unknown": false,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "emperor-dagran-thaurissan",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "blackrock-depths",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/blackrock-depths"
+  },
+  {
+   "bossKey": "zevrim-thornhoof",
+   "face": "/jiemian/bosses/ej/zevrimthornhoof.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-east",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-east"
+  },
+  {
+   "bossKey": "hydrospawn",
+   "face": "/jiemian/bosses/ej/hydrospawn.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-east",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-east"
+  },
+  {
+   "bossKey": "lethtendris",
+   "face": "/jiemian/bosses/ej/lethtendris.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-east",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-east"
+  },
+  {
+   "bossKey": "pusillin",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "dire-maul-east",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-east"
+  },
+  {
+   "bossKey": "alzzin-the-wildshaper",
+   "face": "/jiemian/bosses/ej/alzzinthewildshaper.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-east",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-east"
+  },
+  {
+   "bossKey": "guard-mol-dar",
+   "face": "/jiemian/bosses/ej/guardmoldar.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "stomper-kreeg",
+   "face": "/jiemian/bosses/ej/stomperkreeg.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "guard-fengus",
+   "face": "/jiemian/bosses/ej/guardfengus.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "guard-slip-kik",
+   "face": "/jiemian/bosses/ej/guardslipkik.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "captain-kromcrush",
+   "face": "/jiemian/bosses/ej/captainkromcrush.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "cho-rush-the-observer",
+   "face": "/jiemian/bosses/ej/chorushtheobserver.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "king-gordok",
+   "face": "/jiemian/bosses/ej/kinggordok.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-north",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-north"
+  },
+  {
+   "bossKey": "tendris-warpwood",
+   "face": "/jiemian/bosses/ej/tendriswarpwood.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "illyanna-ravenoak",
+   "face": "/jiemian/bosses/ej/illyannaravenoak.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "magister-kalendris",
+   "face": "/jiemian/bosses/ej/magisterkalendris.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "immol-thar",
+   "face": "/jiemian/bosses/ej/immolthar.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "prince-tortheldrin",
+   "face": "/jiemian/bosses/ej/princetortheldrin.webp",
+   "unknown": false,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "lord-hel-nurath",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "tsu-zee",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "dire-maul-west",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/dire-maul-west"
+  },
+  {
+   "bossKey": "saltspine",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "excavation-site",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/excavation-site"
+  },
+  {
+   "bossKey": "shadetooth",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "excavation-site",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/excavation-site"
+  },
+  {
+   "bossKey": "highland-horror",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "excavation-site",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/excavation-site"
+  },
+  {
+   "bossKey": "relic-guardian",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "excavation-site",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/excavation-site"
+  },
+  {
+   "bossKey": "viscous-fallout",
+   "face": "/jiemian/bosses/ej/viscousfallout.webp",
+   "unknown": false,
+   "dungeonSlug": "gnomeregan",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/gnomeregan"
+  },
+  {
+   "bossKey": "electrocutioner-6000",
+   "face": "/jiemian/bosses/ej/electrocutioner.webp",
+   "unknown": false,
+   "dungeonSlug": "gnomeregan",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/gnomeregan"
+  },
+  {
+   "bossKey": "crowd-pummeler-9-60",
+   "face": "/jiemian/bosses/ej/crowdpummeler.webp",
+   "unknown": false,
+   "dungeonSlug": "gnomeregan",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/gnomeregan"
+  },
+  {
+   "bossKey": "mekgineer-thermaplugg",
+   "face": "/jiemian/bosses/ej/mekgineerthermaplugg.webp",
+   "unknown": false,
+   "dungeonSlug": "gnomeregan",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/gnomeregan"
+  },
+  {
+   "bossKey": "dark-iron-ambassador",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "gnomeregan",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/gnomeregan"
+  },
+  {
+   "bossKey": "faldrim-anvilmar",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "hall-of-thanes",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/hall-of-thanes"
+  },
+  {
+   "bossKey": "infurnus",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "hall-of-thanes",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/hall-of-thanes"
+  },
+  {
+   "bossKey": "plunder",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "hall-of-thanes",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/hall-of-thanes"
+  },
+  {
+   "bossKey": "durgen-dirgehammer",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "hall-of-thanes",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/hall-of-thanes"
+  },
+  {
+   "bossKey": "highlord-omokk",
+   "face": "/jiemian/bosses/ej/highlordomokk.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "shadow-hunter-vosh-gajin",
+   "face": "/jiemian/bosses/ej/shadowhuntervoshgajin.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "war-master-voone",
+   "face": "/jiemian/bosses/ej/warmastervoone.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "mother-smolderweb",
+   "face": "/jiemian/bosses/ej/mothersmolderweb.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "urok-doomhowl",
+   "face": "/jiemian/bosses/ej/urokdoomhowl.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "quartermaster-zigris",
+   "face": "/jiemian/bosses/ej/quartermasterzigris.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "halycon",
+   "face": "/jiemian/bosses/ej/halycon.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "gizrul-the-slavener",
+   "face": "/jiemian/bosses/ej/gizrultheslavener.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "overlord-wyrmthalak",
+   "face": "/jiemian/bosses/ej/overlordwyrmthalak.webp",
+   "unknown": false,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "spirestone-butcher",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "spirestone-battle-lord",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "spirestone-lord-magus",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "bannok-grimaxe",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "ghok-bashguud",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "crystal-fang",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "burning-felguard",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "lower-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire"
+  },
+  {
+   "bossKey": "noxxion",
+   "face": "/jiemian/bosses/ej/noxxion.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "razorlash",
+   "face": "/jiemian/bosses/ej/razorlash.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "tinkerer-gizlock",
+   "face": "/jiemian/bosses/ej/tinkerergizlock.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "lord-vyletongue",
+   "face": "/jiemian/bosses/ej/lordvyletongue.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "celebras-the-cursed",
+   "face": "/jiemian/bosses/ej/celebrasthecursed.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "landslide",
+   "face": "/jiemian/bosses/ej/landslide.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "rotgrip",
+   "face": "/jiemian/bosses/ej/rotgrip.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "princess-theradras",
+   "face": "/jiemian/bosses/ej/princesstheradras.webp",
+   "unknown": false,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "meshlok-the-harvester",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "maraudon",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/maraudon"
+  },
+  {
+   "bossKey": "oggleflint",
+   "face": "/jiemian/bosses/ej/oggleflint.webp",
+   "unknown": false,
+   "dungeonSlug": "ragefire-chasm",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ragefire-chasm"
+  },
+  {
+   "bossKey": "taragaman-the-hungerer",
+   "face": "/jiemian/bosses/ej/taragamanthehungerer.webp",
+   "unknown": false,
+   "dungeonSlug": "ragefire-chasm",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ragefire-chasm"
+  },
+  {
+   "bossKey": "jergosh-the-invoker",
+   "face": "/jiemian/bosses/ej/jergoshtheinvoker.webp",
+   "unknown": false,
+   "dungeonSlug": "ragefire-chasm",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ragefire-chasm"
+  },
+  {
+   "bossKey": "bazzalan",
+   "face": "/jiemian/bosses/ej/bazzalan.webp",
+   "unknown": false,
+   "dungeonSlug": "ragefire-chasm",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ragefire-chasm"
+  },
+  {
+   "bossKey": "tuten-kash",
+   "face": "/jiemian/bosses/ej/tutenkash.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "plaguemaw-the-rotting",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "mordresh-fire-eye",
+   "face": "/jiemian/bosses/ej/mordreshfireeye.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "ragglesnout",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "glutton",
+   "face": "/jiemian/bosses/ej/glutton.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "amnennar-the-coldbringer",
+   "face": "/jiemian/bosses/ej/amnennarthecoldbringer.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "razorfen-downs",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-downs"
+  },
+  {
+   "bossKey": "roogug",
+   "face": "/jiemian/bosses/ej/roogug.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "aggem-thorncurse",
+   "face": "/jiemian/bosses/ej/aggemthorncurse.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "death-speaker-jargba",
+   "face": "/jiemian/bosses/ej/deathspeakerjargba.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "overlord-ramtusk",
+   "face": "/jiemian/bosses/ej/overlordramtusk.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "agathelos-the-raging",
+   "face": "/jiemian/bosses/ej/agathelostheraging.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "charlga-razorflank",
+   "face": "/jiemian/bosses/ej/charlgarazorflank.webp",
+   "unknown": false,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "blind-hunter",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "earthcaller-halmgar",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "razorfen-kraul",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/razorfen-kraul"
+  },
+  {
+   "bossKey": "witherfang",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "the-abandoned",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "the-butcher",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "rath-mael",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "lordaeron-captain",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "viktor-the-vile",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "bjork",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "ruins-of-lordaeron",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron"
+  },
+  {
+   "bossKey": "herod",
+   "face": "/jiemian/bosses/ej/herod.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-armory",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-armory"
+  },
+  {
+   "bossKey": "high-inquisitor-fairbanks",
+   "face": "/jiemian/bosses/ej/highinquisitorfairbanks.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-cathedral",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral"
+  },
+  {
+   "bossKey": "scarlet-commander-mograine",
+   "face": "/jiemian/bosses/ej/scarletcommandermograine.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-cathedral",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral"
+  },
+  {
+   "bossKey": "high-inquisitor-whitemane",
+   "face": "/jiemian/bosses/ej/highinquisitorwhitemane.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-cathedral",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral"
+  },
+  {
+   "bossKey": "interrogator-vishas",
+   "face": "/jiemian/bosses/ej/interrogatorvishas.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-graveyard",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard"
+  },
+  {
+   "bossKey": "bloodmage-thalnos",
+   "face": "/jiemian/bosses/ej/bloodmagethalnos.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-graveyard",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard"
+  },
+  {
+   "bossKey": "ironspine",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "scarlet-monastery-graveyard",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard"
+  },
+  {
+   "bossKey": "azshir-the-sleepless",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "scarlet-monastery-graveyard",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard"
+  },
+  {
+   "bossKey": "fallen-champion",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "scarlet-monastery-graveyard",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard"
+  },
+  {
+   "bossKey": "houndmaster-loksey",
+   "face": "/jiemian/bosses/ej/houndmasterloksey.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-library",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-library"
+  },
+  {
+   "bossKey": "arcanist-doan",
+   "face": "/jiemian/bosses/ej/arcanistdoan.webp",
+   "unknown": false,
+   "dungeonSlug": "scarlet-monastery-library",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scarlet-monastery-library"
+  },
+  {
+   "bossKey": "kirtonos",
+   "face": "/jiemian/bosses/ej/kirtonostheherald.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "jandice-barov",
+   "face": "/jiemian/bosses/ej/jandicebarov.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "rattlegore",
+   "face": "/jiemian/bosses/ej/rattlegore.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "marduk-blackpool",
+   "face": "/jiemian/bosses/ej/mardukblackpool.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "vectus",
+   "face": "/jiemian/bosses/ej/vectus.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "kormok",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "ras-frostwhisperer",
+   "face": "/jiemian/bosses/ej/rasfrostwhisper.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "instructor-malicia",
+   "face": "/jiemian/bosses/ej/instructormalicia.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "doctor-theolen-krastinov",
+   "face": "/jiemian/bosses/ej/doctortheolenkrastinov.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "lorekeeper-polkelt",
+   "face": "/jiemian/bosses/ej/lorekeeperpolkelt.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "the-ravenian",
+   "face": "/jiemian/bosses/ej/theravenian.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "lord-alexei-barov",
+   "face": "/jiemian/bosses/ej/lordalexeibarov.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "lady-illucia-barov",
+   "face": "/jiemian/bosses/ej/ladyilluciabarov.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "darkmaster-gandling",
+   "face": "/jiemian/bosses/ej/darkmastergandling.webp",
+   "unknown": false,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "scholomance",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/scholomance"
+  },
+  {
+   "bossKey": "rethilgore",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "razorclaw-the-butcher",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "baron-silverlaine",
+   "face": "/jiemian/bosses/ej/baronsilverlaine.webp",
+   "unknown": false,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "commander-springvale",
+   "face": "/jiemian/bosses/ej/commanderspringvale.webp",
+   "unknown": false,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "odo-the-blindwatcher",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "fenrus-the-devourer",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "wolf-master-nandos",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "archmage-arugal",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "deathsworn-captain",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "shadowfang-keep",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/shadowfang-keep"
+  },
+  {
+   "bossKey": "hearthsinger-forresten",
+   "face": "/jiemian/bosses/ej/hearthsingerforresten.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "timmy-the-cruel",
+   "face": "/jiemian/bosses/ej/timmythecruel.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "malor-the-zealous",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "cannon-master-willey",
+   "face": "/jiemian/bosses/ej/willeyhopebreaker.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "archivist-galford",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "balnazzar",
+   "face": "/jiemian/bosses/ej/balnazzar.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "the-unforgiven",
+   "face": "/jiemian/bosses/ej/theunforgiven.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "crimson-hammersmith",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "ezra-grimm",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "postmaster-malown",
+   "face": "/jiemian/bosses/ej/postmastermalown.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "skul",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-main-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-main-gate"
+  },
+  {
+   "bossKey": "baroness-anastari",
+   "face": "/jiemian/bosses/ej/baronessanastari.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "nerub-enkan",
+   "face": "/jiemian/bosses/ej/nerubenkan.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "maleki-the-pallid",
+   "face": "/jiemian/bosses/ej/malekithepallid.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "magistrate-barthilas",
+   "face": "/jiemian/bosses/ej/magistratebarthilas.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "ramstein-the-gorger",
+   "face": "/jiemian/bosses/ej/ramsteinthegorger.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "baron-rivendare",
+   "face": "/jiemian/bosses/ej/lordauriusrivendare.webp",
+   "unknown": false,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "black-guard-swordsmith",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "stonespine",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "stratholme-service-gate",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/stratholme-service-gate"
+  },
+  {
+   "bossKey": "atal-alarion",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "avatar-of-hakkar",
+   "face": "/jiemian/bosses/ej/avatarofhakkar.webp",
+   "unknown": false,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "shade-of-eranikus",
+   "face": "/jiemian/bosses/ej/shadeoferanikus.webp",
+   "unknown": false,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "hazzas",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "morphaz",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "weaver",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "dreamscythe",
+   "face": "/jiemian/bosses/ej/dreamscythe.webp",
+   "unknown": false,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "jammal-an-the-prophet",
+   "face": "/jiemian/bosses/ej/jammalantheprophet.webp",
+   "unknown": false,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "ogom-the-wretched",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "sunken-temple",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/sunken-temple"
+  },
+  {
+   "bossKey": "rhahk-zor",
+   "face": "/jiemian/bosses/ej/rhahkzor.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "sneed",
+   "face": "/jiemian/bosses/ej/sneed.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "sneed-s-shredder",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "miner-johnson",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "gilnid",
+   "face": "/jiemian/bosses/ej/gilnid.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "captain-greenskin",
+   "face": "/jiemian/bosses/ej/captaingreenskin.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "mr-smite",
+   "face": "/jiemian/bosses/ej/mrsmite.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "cookie",
+   "face": "/jiemian/bosses/ej/cookie.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "edwin-vancleef",
+   "face": "/jiemian/bosses/ej/edwinvancleef.webp",
+   "unknown": false,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-deadmines",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-deadmines"
+  },
+  {
+   "bossKey": "targorr-the-dread",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "kam-deepfury",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "hamhock",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "dextren-ward",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "bazil-thredd",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "bruegal-ironknuckle",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "the-stockade",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/the-stockade"
+  },
+  {
+   "bossKey": "revelosh",
+   "face": "/jiemian/bosses/ej/revelosh.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "baelog",
+   "face": "/jiemian/bosses/ej/baelog.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "olaf",
+   "face": "/jiemian/bosses/ej/olaf.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "eric-the-swift",
+   "face": "/jiemian/bosses/ej/erictheswift.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "ironaya",
+   "face": "/jiemian/bosses/ej/ironaya.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "obsidian-sentinel",
+   "face": "/jiemian/bosses/ej/obsidiansentinel.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "ancient-stone-keeper",
+   "face": "/jiemian/bosses/ej/ancientstonekeeper.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "galgann-firehammer",
+   "face": "/jiemian/bosses/ej/galgannfirehammer.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "grimlok",
+   "face": "/jiemian/bosses/ej/grimlok.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "archaedas",
+   "face": "/jiemian/bosses/ej/archaedas.webp",
+   "unknown": false,
+   "dungeonSlug": "uldaman",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/uldaman"
+  },
+  {
+   "bossKey": "pyroguard-emberseer",
+   "face": "/jiemian/bosses/ej/pyroguardemberseer.webp",
+   "unknown": false,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "solakar-flamewreath",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "goraluk-anvilcrack",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "warchief-rend-blackhand",
+   "face": "/jiemian/bosses/ej/warchiefrendblackhand.webp",
+   "unknown": false,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "gyth",
+   "face": "/jiemian/bosses/ej/gyth.webp",
+   "unknown": false,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "the-beast",
+   "face": "/jiemian/bosses/ej/thebeast.webp",
+   "unknown": false,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "general-drakkisath",
+   "face": "/jiemian/bosses/ej/generaldrakkisath.webp",
+   "unknown": false,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "lord-valthalak",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "jed-runewatcher",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "upper-blackrock-spire",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire"
+  },
+  {
+   "bossKey": "lady-anacondra",
+   "face": "/jiemian/bosses/ej/ladyanacondra.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "lord-cobrahn",
+   "face": "/jiemian/bosses/ej/lordcobrahn.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "kresh",
+   "face": "/jiemian/bosses/ej/kresh.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "lord-pythas",
+   "face": "/jiemian/bosses/ej/lordpythas.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "skum",
+   "face": "/jiemian/bosses/ej/skum.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "lord-serpentis",
+   "face": "/jiemian/bosses/ej/lordserpentis.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "verdan-the-everliving",
+   "face": "/jiemian/bosses/ej/verdantheeverliving.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "mutanus-the-devourer",
+   "face": "/jiemian/bosses/ej/mutanusthedevourer.webp",
+   "unknown": false,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "deviate-faerie-dragon",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "trash-mobs",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "wailing-caverns",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/wailing-caverns"
+  },
+  {
+   "bossKey": "hydromancer-velratha",
+   "face": "/jiemian/bosses/ej/hydromancervelratha.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "gahz-rilla",
+   "face": "/jiemian/bosses/ej/gahzrilla.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "antu-sul",
+   "face": "/jiemian/bosses/ej/antusul.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "theka-the-martyr",
+   "face": "/jiemian/bosses/ej/thekathemartyr.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "witch-doctor-zum-rah",
+   "face": "/jiemian/bosses/ej/witchdoctorzumrah.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "nekrum-gutchewer",
+   "face": "/jiemian/bosses/ej/nekrumgutchewer.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "sergeant-bly",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "shadowpriest-sezz-ziz",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "chief-ukorz-sandscalp",
+   "face": "/jiemian/bosses/ej/chiefukorzsandscalp.webp",
+   "unknown": false,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "zerillis",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "sandarr-dunereaver",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  },
+  {
+   "bossKey": "dustwraith",
+   "face": null,
+   "unknown": true,
+   "dungeonSlug": "zulfarrak",
+   "sourceUrl": "https://wowforever.wclbox.com/fuben/zulfarrak"
+  }
+ ]
+}

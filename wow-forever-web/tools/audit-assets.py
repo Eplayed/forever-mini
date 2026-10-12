@@ -182,10 +182,21 @@ def main():
     art = load(os.path.join(DATA, "art.json")) or {}
     artmiss = []
     for kind, m in (("classes", art.get("classes") or {}), ("dungeons", art.get("dungeons") or {}),
-                    ("maps", art.get("maps") or {})):
+                    ("maps", art.get("maps") or {}), ("bosses", art.get("bosses") or {})):
         for k, rel in m.items():
             if not os.path.exists(os.path.join(ROOT, "src", rel)):
                 artmiss.append("%s/%s" % (kind, k))
+
+    # 首领头像：数据里挂了 portrait 的才算有脸；孤儿文件（转存了但没首领引用）也报出来
+    allb = [(x.get("id"), b.get("id"), b.get("nameCn") or b.get("id"), bool(b.get("portrait")))
+            for x in rows for b in (x.get("bosses") or [])]
+    withp = len([1 for a in allb if a[3]])
+    used = set(b[1] for b in allb if b[3])
+    orphan = sorted(set((art.get("bosses") or {}).keys()) - used)
+    gap_by_dun = {}
+    for dun, bid, nm, has in allb:
+        if not has:
+            gap_by_dun.setdefault(dun, []).append(nm)
 
     today = datetime.date.today().isoformat()
     lines = [u"# 素材缺口审计 · %s（wow-data + wow-dev）" % today, u"",
@@ -200,8 +211,17 @@ def main():
              u"| 官方 CDN 五个候选路径都取不到（实测 403/404，不是我们没试） | %d |" % len([x for x in still if x[2] == "cdn-missing"]),
              u"| 键名不合法（脚本不试，回数据里查） | %d |" % len([x for x in still if x[2] == "bad-key"]),
              u"| art.json 指向但文件不存在 | %d |" % len(artmiss),
-             u"", u"## 缺的图标按引用来源分布", u"",
-             u"| 图标键 | 引用处 | 判定 |", u"| --- | --- | --- |"]
+             u"| 首领总数 / 挂上本地转存头像 | %d / %d |" % (len(allb), withp),
+             u"| 头像转存了但数据里没引用（孤儿文件） | %d |" % len(orphan),
+             u"| 副本与团本载入图缺口 | %d 座 |" % len(art_rows),
+             u"", u"## 首领头像缺口（按本）", u"",
+             u"| 副本 | 没脸的首领 |", u"| --- | --- |"]
+    for dun, names in sorted(gap_by_dun.items()):
+        lines.append(u"| %s | %s |" % (dun, u"、".join(names)))
+    if orphan:
+        lines += [u"", u"## 转存了但没人引用的头像", u""] + [u"- `%s`" % x for x in orphan]
+    lines += [u"", u"## 缺的图标按引用来源分布", u"",
+              u"| 图标键 | 引用处 | 判定 |", u"| --- | --- | --- |"]
     for k, srcs, why in still:
         lines.append(u"| `%s` | %s | %s |" % (k, "、".join(srcs),
           u"官方 CDN 五个候选路径（us/eu/kr/tw 的 56 尺寸 + us 的 0 尺寸）都取不到，实测回 403 = 无此文件"

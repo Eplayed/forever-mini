@@ -86,5 +86,19 @@ window.Glyph = (function () {
       '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="hsl(' + hue + ',62%,76%)" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
     return tileWrap(art, iconKey, mod);
   }
-  return { classTile: classTile, dungeonBanner: dungeonBanner, talentTile: talentTile, raceTile: raceTile, color: CLASS_COLOR };
+  /* 首领头像方块：源站也没有这张脸的时候就是个自绘块，有则盖在上面。
+     228 个首领里 146 个有本地转存的脸，其余按口径留空——不拿别的本或别的种族的脸凑。
+     外壳复用 .liw t（自绘块垫底 + 图盖上面 + onerror 露出自绘），不另起一套尺寸。 */
+  function bossFace(seed, cn, portrait, mod) {
+    var h = hash(seed || cn || ''), hue = (32 + h % 300) % 360;
+    var art = '<svg viewBox="0 0 40 40" aria-hidden="true">' +
+      '<rect width="40" height="40" rx="6" fill="hsl(' + hue + ',22%,16%)" stroke="hsl(' + hue + ',30%,42%)" stroke-opacity=".65"/>' +
+      '<text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="hsl(' + hue + ',46%,78%)" font-family="PingFang SC,Microsoft YaHei,sans-serif">' + esc((cn || '?').charAt(0)) + '</text></svg>';
+    var img = portrait ? '<img src="' + esc(portrait) + '" alt="" loading="lazy" onerror="this.className=\'bad\'">' : '';
+    return '<span class="liw t' + (mod ? ' ' + mod : '') + '">' + art + img + '</span>';
+  }
+  return {
+    classTile: classTile, dungeonBanner: dungeonBanner, talentTile: talentTile,
+    raceTile: raceTile, bossFace: bossFace, color: CLASS_COLOR
+  };
 })();

@@ -322,7 +322,7 @@ input.lv{max-width:150px}
 .bosslist{list-style:none;margin:0;padding:0}
 .bosslist>li{border-top:1px dashed var(--line);padding:6px 0}
 .bosslist>li:first-child{border-top:none}
-.bosslist .bh{display:flex;gap:8px;align-items:baseline}
+.bosslist .bh{display:flex;gap:8px;align-items:center}
 .bosslist .bh b{font-size:13px}
 .loot{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .loot-i{display:inline-flex;align-items:center;gap:5px;background:var(--panel-2);

@@ -1474,7 +1474,8 @@
     if (!bosses.length) return '<p class="dim">客户端解包还没给出这座本的首领名单——无限新增副本里这种的掉落表也还没有可信来源，不猜。</p>';
     return '<ul class="bosslist">' + bosses.map(function (b) {
       var mine = drops.filter(function (y) { return y.bossId === b.id; });
-      return '<li><div class="bh"><b>' + D.esc(b.nameCn) + '</b>' +
+      return '<li><div class="bh">' + window.Glyph.bossFace(b.id, b.nameCn, b.portrait, 'sm') +
+        '<b>' + D.esc(b.nameCn) + '</b>' +
         (mine.length ? '<span class="dim">' + mine.length + ' 件掉落</span>' : '<span class="dim">掉落待补</span>') + '</div>' +
         (mine.length ? '<div class="loot">' + mine.map(function (y) {
           return '<span class="loot-i">' + iconCell(y.iconKey, y.itemId, y.nameCn, 1) +
@@ -1745,11 +1746,14 @@
           + '<div class="card" id="claimed"><h2>另一份资料自述的 ' + claimed.length + ' 座</h2>'
           + '<p class="dim">第三方资料站列的团本名单，它自己写着"官方还没说"。本站只取它给的人数这一个数，'
           + '不搬它的推测段落。</p>'
-          + '<div class="scrollx"><table class="entab rtab"><thead><tr><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th>'
+          + '<div class="scrollx"><table class="entab rtab"><thead><tr><th>载入图</th><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th>'
           + '<th>分级</th></tr></thead><tbody>' +
           claimed.map(function (r) {
             var inClient = names.filter(function (x) { return x.matchedIn === 'raid' && x.matched === r.id; })[0];
-            return '<tr><td><b>' + D.esc(r.nameEn || r.nameCn || '未定名') + '</b>'
+            return '<tr><td class="ich">' + (r.art
+                ? '<span class="liw t"><img src="' + D.esc(r.art) + '" alt="' + D.esc(r.nameEn || '') + ' 的客户端载入图" loading="lazy" onerror="this.className=\'bad\'"></span>'
+                : '<span class="dim">源站没有</span>') + '</td>'
+              + '<td><b>' + D.esc(r.nameEn || r.nameCn || '未定名') + '</b>'
               + (r.nameCn ? '<span class="dim">　' + D.esc(r.nameCn) + '</span>' : '<span class="dim">　中文定名未公布</span>')
               + '</td><td class="mono">' + D.esc(r.sizeClaim || '未写') + ' 人</td>'
               + '<td>' + (inClient ? '有这一条：' + sizeText(inClient) + '、' + entryText(inClient)
@@ -1763,6 +1767,8 @@
           + '<li>中文名：官方中文稿没发，客户端与另一份资料给的都是英文原名，不机翻。</li>'
           + '<li>首领名单与掉落：客户端的队伍查找器里只有排队条目，没有首领；'
           + '第三方资料站的团本页是推测段落，本站不搬进正文。</li>'
+          + '<li>载入图：' + claimed.filter(function (r) { return !r.art; }).length + ' 座连第三方站托管的副本都没有'
+          + '（逐个地址实测过，回的是"没有这张图"），不放别的图凑数。</li>'
           + '<li>开放顺序与具体日期：官方英文只给了 12 月 9 日这一档，国服公告没重复。</li>'
           + '<li>团队规则细节（重置周期、规模上限、是否需要进度记录）：'
           + '<a href="systems.html">系统规则那一页</a>有官方中文说法的才写在这里。</li>'

@@ -8,6 +8,7 @@ curl 拿不到。产出只写 data/upstream/，不直接改成品数据文件—
 用法：
     python3 tools/scrape-wclbox-dom.py --what cards
     python3 tools/scrape-wclbox-dom.py --what talents
+    python3 tools/scrape-wclbox-dom.py --what bossfaces   # 35 个副本页逐个读，约 2–3 分钟
 """
 import argparse
 import datetime
@@ -151,9 +152,72 @@ def talents(browser):
     print("合计节点 %d、说明 %d" % (total_nodes, total_refs))
 
 
+BOSS_FACES_JS = r"""() => {
+  const out = [];
+  document.querySelectorAll('section.sj-boss').forEach(s => {
+    const h = s.querySelector('h2'), f = s.querySelector('span.sj-face');
+    if (!h) return;
+    const style = f ? (f.getAttribute('style') || '') : '';
+    const face = (/(?:url\(([^)]+)\)|background-image:\s*url\(([^)]+)\))/).exec(style);
+    out.push({
+      // h2 的 id 形如 "h-rhahkzor"，去掉前缀就是它的键；我们 dungeons.json 里的首领 id
+      // 可能带连字符（rhahk-zor），两边不同名，所以只认这里读回来的头像路径，不自己拼
+      bossKey: (h.id || '').replace(/^h-/, ''),
+      face: face ? (face[1] || face[2] || '').replace(/^["']|["']$/g, '') : null,
+      unknown: f ? f.hasAttribute('data-unknown') : null
+    });
+  });
+  return out;
+}"""
+
+
+def boss_faces(browser):
+    """逐个副本页读首领头像的真实路径。
+
+    为什么不能自己拼 URL：源站的头像文件名是它自己那套首领键（rhahkzor），
+    与我们 dungeons.json 里的 id（rhahk-zor）不同名，猜出来的地址会大面积 404，
+    那是我们的错不是源站缺。只取路径这一件事实性标识符，不取页面上的任何文字。
+    """
+    cards_p = os.path.join(UP, "wclbox-cards.json")
+    if not os.path.exists(cards_p):
+        sys.exit(u"先跑 --what cards，拿到副本页地址才有得读")
+    doc = json.load(io.open(cards_p, encoding="utf-8"))
+    rows = {}
+    for c in doc.get("cards") or []:
+        href = c.get("href") or ("/fuben/" + c["slug"])
+        rows[c["slug"]] = href
+    print(u"副本页 %d 个，逐个读首领头像路径" % len(rows))
+    out, total, with_face = [], 0, 0
+    for slug, href in sorted(rows.items()):
+        page = browser.new_page(viewport={"width": 1440, "height": 1000})
+        try:
+            page.goto(BASE + href, wait_until="networkidle", timeout=45000)
+            page.wait_for_timeout(1800)
+            faces = page.evaluate(BOSS_FACES_JS)
+        except Exception as e:
+            print(u"  %s 读失败：%s" % (slug, str(e)[:60]))
+            faces = []
+        page.close()
+        for f in faces:
+            f["dungeonSlug"] = slug
+            f["sourceUrl"] = BASE + href
+        total += len(faces)
+        n = len([f for f in faces if f["face"]])
+        with_face += n
+        out += faces
+        print(u"  %-28s 首领 %d ｜ 有头像 %d" % (slug, len(faces), n))
+    write("wclbox-boss-faces.json", {
+        "meta": {"source": BASE + "/fuben 各副本页", "scrapedAt": datetime.date.today().isoformat(),
+                 "method": u"渲染后 DOM 读 section.sj-boss 的 span.sj-face 内联背景路径",
+                 "note": u"只取头像文件路径这一个标识符；data-unknown 表示源站自己也没有这张脸",
+                 "bosses": total, "withFace": with_face},
+        "faces": out})
+    print(u"合计首领 %d，源站有头像 %d，没有 %d" % (total, with_face, total - with_face))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--what", choices=["cards", "talents", "all"], default="all")
+    ap.add_argument("--what", choices=["cards", "talents", "bossfaces", "all"], default="all")
     args = ap.parse_args()
     with sync_playwright() as pw:
         browser = pw.chromium.launch(channel="chrome", headless=True)
@@ -161,6 +225,8 @@ def main():
             cards(browser)
         if args.what in ("talents", "all"):
             talents(browser)
+        if args.what in ("bossfaces",):
+            boss_faces(browser)
         browser.close()
 
 

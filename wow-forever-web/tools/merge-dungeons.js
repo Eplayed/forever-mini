@@ -143,6 +143,9 @@ if (fs.existsSync(cardsPath)) {
   const artIdx = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).dungeons || {};
   let z = 0;
   [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+    // 载入图先挂：团本不在卡片列表里（卡片只有 35 座地下城），以前 return 得太早，
+    // 结果奥妮克希亚的巢穴明明转存到了本地却一直挂不上，团本页整列都是空的
+    d.art = artIdx[d.id] || null;
     // 以前这里只按我们的 id 找卡片，四座不同名的（死亡矿井 / 监狱 / 剃刀高地 / 湿地挖掘场）
     // 一直没有所在区域、卡片计数与载入图——2026-10-10 实测补上
     const c = bySlug[d.upstreamSlug || d.id] || bySlug[d.id];
@@ -154,9 +157,30 @@ if (fs.existsSync(cardsPath)) {
       else if (!d.levelRange) d.levelRange = up;
     }
     d.cardCounts = { bosses: c.bosses || null, drops: c.drops || null };
-    d.art = artIdx[d.id] || null;
   });
   console.log('卡片信息：补上所在区域 %d 条', z);
+}
+
+/* ---------- 首领头像：把 art.json 的 bosses 索引按首领 id 挂到每条首领上 ---------- */
+// 只有源站页面上真的摆着这张脸的才挂得上来（146/228），剩下的 portrait 为 null，
+// 界面退回自绘方块——不拿别的种族或别的本的脸凑。
+try {
+  const bossArt = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).bosses || {};
+  let n = 0, tot = 0;
+  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+    (d.bosses || []).forEach((b) => {
+      tot += 1;
+      b.portrait = bossArt[b.id] || null;
+      if (b.portrait) n += 1;
+    });
+  });
+  dg.meta.bossPortraits = { total: tot, withPortrait: n,
+    note: '客户端遭遇战手册头像，经第三方站转存在本地 img/art/bosses/；源站自己标"没有这张脸"的首领留空',
+    manifest: 'src/img/art/manifest.json' };
+  console.log('首领头像：%d / %d 挂上本地转存的脸，其余 %d 个源站也没有（界面留自绘占位）',
+    n, tot, tot - n);
+} catch (e) {
+  console.log('首领头像：读不到 art.json，本轮不挂（%s）', e.message);
 }
 
 /* ---------- 排队元数据包（_shuju/<发布号>/dungeons.json）：补阵营与所在区域 ---------- */
