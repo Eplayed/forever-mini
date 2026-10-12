@@ -6,23 +6,18 @@
   </div>
 
   <template v-else-if="S">
-    <section class="card hero dh">
+    <section class="card hero dh mhero">
       <!-- 整幅底图带与旧站同一件：图是本站自生成的氛围图，角标必须写明"非游戏原画" -->
       <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
       <span class="dmark">示意图 · 本站自生成，非游戏原画</span>
       <div class="herot">
-        <span class="kicker">Forever · 无限服中文资料</span>
-        <h1 class="pt">《魔兽世界：无限》中文资料站</h1>
-        <p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>
+        <span class="bbadge"><i></i>测试服进行中 · 客户端 {{ buildTail }}</span>
+        <h1 class="pt">回到最初的世界<br><em>探索无限的可能</em></h1>
+        <p class="lead">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>
         <SiteSearch :total="S.search || 0" :initial="String($route.query.q || '')" />
-        <!-- 两家参考站都把"先挑职业"放在首屏：这里只做进那一职业页的入口，切树仍在下面的预览卡里 -->
-        <div class="pickcls">
-          <div class="mline">选择你的职业 · <b>{{ S.classes || 0 }}</b> 个职业各有一页改动、天赋与技能</div>
-          <div class="clsrow">
-            <a v-for="c in classes" :key="c.id" :href="legacy('talent.html?c=' + encodeURIComponent(c.id))">
-              <i :style="clsBg(c.id)"></i>{{ c.cn }}
-            </a>
-          </div>
+        <div class="herobtns">
+          <a class="cta cta-line" :href="legacy('updates.html')">看这一版改了什么</a>
+          <a class="cta cta-mute" :href="legacy('chooser.html')">不知道选哪个职业：做 7 题玩法问答</a>
         </div>
         <CovBar :cov="cov" />
         <div class="covnum">
@@ -33,14 +28,44 @@
         </div>
         <p class="note">数据基线：{{ meta.dataBaseline.build }}，核对于 {{ meta.dataBaseline.checkedAt }}；本站统计 {{ gen }}。本站基于测试服资料整理，正式服上线后需整体重核。</p>
       </div>
+      <!-- 读数框里只放倒计时：旧站这条被对拍与断言双双钉住（框里混进链接就算回归） -->
       <aside class="heros">
         <div class="cd">
           <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
           <p class="dim">到正式服上线（{{ meta.launch }}）· 差秒按本地时钟走</p>
         </div>
-        <a class="cta" :href="legacy('chooser.html')">不知道选哪个职业？做 7 题玩法问答 →</a>
-        <span class="dim">问答是本站整理的玩法取向，不是强度排行。</span>
       </aside>
+    </section>
+
+    <!-- 下面三块是稿子首页的骨架：选择你的职业 → 六个入口 → 四条读数。
+         数字全部从 scale.json 现取，稿子里写死的 753 / 5353 / 6 开放 一个都不抄。 -->
+    <section class="hsec">
+      <div class="krow">
+        <div><div class="kicker">CHOOSE YOUR CLASS</div><h2>选择你的职业</h2></div>
+        <a class="kall" :href="legacy('chooser.html')">7 题玩法问答 · 帮你定一个 →</a>
+      </div>
+      <div class="cls9">
+        <a v-for="c in classes" :key="c.id" :href="legacy('talent.html?c=' + encodeURIComponent(c.id))">
+          <img v-if="clsArt(c.id)" :src="clsArt(c.id)" alt="" loading="lazy">
+          <i v-else class="hrt-x">{{ (c.cn || '?').charAt(0) }}</i>
+          <b>{{ c.cn }}</b>
+        </a>
+      </div>
+    </section>
+
+    <section class="hsec">
+      <div class="krow"><div><div class="kicker">EXPLORE TOOLS</div><h2>这座站的六个入口</h2></div></div>
+      <div class="tools6">
+        <a v-for="t in TOOLS6" :key="t[1]" class="tool plate" :href="legacy(t[0])">
+          <span class="tico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1" /><path d="M9 12h6M12 9v6" /></svg></span>
+          <h3>{{ t[1] }}</h3><p>{{ t[3] }}</p>
+          <span class="foot"><em>{{ t[2] }}</em><i>进入 →</i></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="stats4 plate big">
+      <div v-for="x in STATS4" :key="x[1]" class="scell"><b>{{ x[0] }}</b><span>{{ x[1] }}</span></div>
     </section>
 
     <HubRail :art="ART" :nav-new="S.navNew || []" />
@@ -218,10 +243,35 @@ function cnOf(id) {
   const c = classes.value.filter((x) => x.id === id)[0];
   return c ? c.cn : id;
 }
-function clsBg(id) {
-  const f = (ART.value.classes || {})[id];
-  return f ? { backgroundImage: 'url(' + f + ')' } : {};
+// 客户端号那一串里取最后一段（build 形如 1.60.1.70338（…对齐结果），页面上只报_build 尾号_）
+const buildTail = computed(() => String(((meta.value || {}).dataBaseline || {}).build || '').split('.').pop());
+function clsArt(id) {
+  return ((ART.value || {}).classes || {})[id] || '';
 }
+/* 六个入口与四条读数：与旧站 home() 逐字同一份文案，数字全部现取。
+   改这里必须同时改 src/js/app.js，否则 app-parity 会按行报差异。 */
+const TOOLS6 = computed(() => {
+  const s = S.value || {};
+  return [
+    ['talent.html', '天赋计算器', s.talentNodes + ' 个节点 · ' + s.classes + ' 职业',
+      '格子里就是客户端解出来的天赋本身：位置、每层上限、与经典旧世的差异都按真结构摆，点格子进计算器并亮那一格。'],
+    ['updates.html', '这一版改了什么', s.changes + ' 条改动清单',
+      '官方公告里的时间点、客户端解出的职业改动、本站自己改了什么，三件事分开摆。改动只列名称与类别，不抄别人的前后对照句子。'],
+    ['dungeons.html', '副本与掉落', s.dungeons + ' 座 · ' + s.bosses + ' 个首领',
+      '按十级一档排：首领名单、谁掉了什么、等级区间两说的两个数都留着。掉落只回答"谁掉了什么"，不写概率。'],
+    ['skills.html', '技能书', s.abilities + ' 条官方中文整句',
+      '新增 / 改动 / 移除 / 未变四态与经典旧世并排；中文名出自国服官方公告的整句，名称不在句里就不收。'],
+    ['professions.html', '专业与配方', s.professions + ' 个专业 · ' + s.recipes + ' 条配方',
+      '每个专业的配方、所需材料与采集点，含无限新增那一批。野营那一页摆不出一条能核的清单，就不编。'],
+    ['glossary.html', '中英术语速查', s.glossary + ' 条词条',
+      '天赋、技能、物品、种族特长的中英对照，按职业与种族分组，两个叫法都留着，不替你做取舍。']
+  ];
+});
+const STATS4 = computed(() => {
+  const s = S.value || {}, c = cov.value;
+  return [[c.L0, '条已对过官方中文'], [s.talentNodes, '个天赋节点已入库'],
+    [s.dungeons, '座副本有名单'], [s.search, '条内容可搜']];
+});
 // 副本卡背景取第一座"无限新增"本的载入图；素材没到位就不加背景层
 const newDungeons = computed(() => DUN.value);
 const dunBg = computed(() => {

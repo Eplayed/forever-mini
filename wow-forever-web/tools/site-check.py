@@ -32,6 +32,10 @@ SRC = os.path.join(ROOT, "src")
 TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
+# 刻意不在导航里挂入口的页：技能书页 2026-10-12 用户实拍后从导航撤下，页面本身还在、
+# 首页六个入口与职业页都还链着它。这些页跑渲染与通用判据，但不要求"导航里有高亮"。
+NO_NAV_ENTRY = {"skills"}
+
 PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "raids", "systems", "races",
          "professions", "world", "legacy", "updates", "rank", "glossary", "provenance", "classes"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
@@ -165,7 +169,10 @@ def test_pages(browser, base):
             broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length })""")
         nav_on = page.evaluate("() => { const a = document.querySelector('.top nav a.on'); return a ? a.textContent.trim() : ''; }")
         page.screenshot(path=os.path.join(SHOT_DIR, "page-%s.png" % name))
-        check("导航高亮 %s" % name, bool(nav_on), "当前高亮「%s」" % nav_on)
+        if name in NO_NAV_ENTRY:
+            check("导航高亮 %s（刻意不在导航里，只要求不报错）" % name, not nav_on, "高亮「%s」" % nav_on)
+        else:
+            check("导航高亮 %s" % name, bool(nav_on), "当前高亮「%s」" % nav_on)
         # 问答这类页面首屏本来就短，所以看"有内容 + 有可交互控件"，不卡固定字数
         check("页面 %s" % name,
               stats["chars"] > 100 and stats["ctl"] > 0 and not errors and not failed and stats["broken"] == 0,
@@ -509,15 +516,33 @@ def test_races(browser, base):
     cols = page.evaluate("() => document.querySelectorAll('#mx thead th').length - 1")
     marks = page.evaluate("() => document.querySelectorAll('#mx td.y').length")
     dashes = page.evaluate("() => document.querySelectorAll('#mx td.n').length")
-    trs = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
     check("矩阵行数与数据一致", rows == n_races, "DOM %d / 数据 %d" % (rows, n_races))
     check("矩阵覆盖 9 个职业列", cols == 9, "列 %d" % cols)
     check("✓ 与 — 铺满整表不留空", marks + dashes == rows * 9,
           "✓ %d + — %d，应 %d" % (marks, dashes, rows * 9))
     check("✓ 数等于数据里的可选职业总数", marks == n_marks, "DOM %d / 数据 %d" % (marks, n_marks))
-    check("默认不把 40 条特长再铺一遍（按种族浏览交给上方详情面板）",
-          trs == 0 and page.evaluate("() => !!document.querySelector('#traits button[data-act=\"all\"]')"),
-          "默认 %d 行 + 一个「看全 %d 条」按钮" % (trs, n_traits))
+    # 2026-10-12 用户实拍反馈：「按词找特长」那张卡撤了——40 条特长在种族详情里逐条带官方整句，
+    # 同一份内容不该在页面上铺两遍；跨种族搜词由顶栏搜索承担（索引里每条特长都带种族号）。
+    check("「按词找特长」那张卡已撤，特长不再铺第二遍",
+          page.evaluate("() => !document.querySelector('#tt') && "
+                        "!(document.querySelector('#main').innerText.indexOf('按词找特长') >= 0)"))
+    first = rc["races"][0]
+    n_first = len(first.get("traits") or []) + len(((first.get("subgroup") or {}).get("traits") or []))
+    det = page.evaluate("""() => ({ rows: document.querySelectorAll('#rdet .rdtr > li').length,
+      quotes: document.querySelectorAll('#rdet .rdtr .quote').length,
+      src: document.querySelectorAll('#rdet .rdtr [data-src]').length,
+      name: ((document.querySelector('#rdet h2') || {}).innerText || '').trim() })""")
+    check("特长改由种族详情逐条给：条数、官方整句、来源三项齐",
+          det["rows"] == n_first and det["quotes"] == n_first and det["src"] == n_first,
+          "「%s」详情 %d 条 / 整句 %d / 来源 %d / 数据 %d"
+          % (det["name"], det["rows"], det["quotes"], det["src"], n_first))
+    page.click("#rdet .rdtr [data-src] >> nth=0")
+    page.wait_for_timeout(300)
+    box = page.evaluate("() => { const b = document.getElementById('srcbox');"
+                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
+    check("特长逐条来源可展开并指向官方中文页",
+          "官方中文" in box and "wow.blizzard.cn" in box,
+          box[:56].replace("\n", " "))
 
     col2 = page.evaluate("() => document.querySelectorAll('#mx tbody td:nth-child(2).y').length")
     page.click("#mx thead th:nth-child(2) button")
@@ -536,29 +561,31 @@ def test_races(browser, base):
     page.select_option("#ff", "")
     page.wait_for_timeout(200)
 
-    page.click('#traits button[data-act="all"]')
-    page.wait_for_timeout(250)
-    allrows = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
-    check("跨种族特长全表可展开且条数与数据一致", allrows == n_traits, "%d 条（数据 %d）" % (allrows, n_traits))
-    page.fill("#fq", "昏迷")
-    page.wait_for_timeout(250)
-    found = page.evaluate("() => document.querySelectorAll('#tt tbody tr').length")
-    check("特长搜索按整句生效", 0 < found <= n_traits and found < allrows,
-          "「昏迷」命中 %d / 全表 %d" % (found, allrows))
-    page.fill("#fq", "")
-    page.wait_for_timeout(200)
-
-    page.click("#tt tbody tr:first-child button.info")
-    page.wait_for_timeout(300)
-    box = page.evaluate("() => { const b = document.getElementById('srcbox');"
-                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
-    check("特长逐条来源可展开并指向官方中文页",
-          ("官方中文" in box or "official_cn" in box) and "wow.blizzard.cn" in box,
-          box[:56].replace("\n", " "))
     text = page.evaluate("() => document.querySelector('#main').innerText")
-    check("矩阵与导语两种说法并存且写了处置",
-          "同一页里两种说法并存" in text and "本站处置" in text)
-    check("种族页写明没采集什么", "这一页没有的" in text and "英文原名" in text)
+    # 冲突不再单开一张卡，但话必须还说：矩阵与导语两种说法 + 本站处置，压成矩阵下面一行红字
+    check("矩阵与导语两种说法并存，压成一行红字仍然说清楚",
+          "天裔到底能选几个职业" in text and "两个都留" in text
+          and page.evaluate("() => !!document.querySelector('#main p.conf')"),
+          "红字 %d 处" % page.evaluate("() => document.querySelectorAll('#main p.conf').length"))
+    check("「这一页没有的」那张卡已撤（缺口改由溯源页集中说）",
+          "这一页没有的" not in text)
+    # 头像：矩阵那一列原来被两层 6px 左边距推出格子、压住种族名（用户实拍图4）
+    geo = page.evaluate("""() => { const th = document.querySelector('#mx tbody th.rh');
+      const f = th.querySelector('.rface'), l = th.querySelector(':scope > span:not(.rface)');
+      const a = f.getBoundingClientRect(), b = l.getBoundingClientRect();
+      const card = document.querySelector('.racecard .rface');
+      const cb = card.getBoundingClientRect(), ci = card.querySelector('img').getBoundingClientRect();
+      return { faceRight: Math.round(a.right), labelLeft: Math.round(b.left),
+        faceW: Math.round(a.width), liwMargin: getComputedStyle(f.querySelector('.liw')).marginLeft,
+        cardFace: Math.round(cb.width), cardImgInside:
+          Math.round(ci.left) >= Math.round(cb.left) - 1 && Math.round(ci.right) <= Math.round(cb.right) + 1 }; }""")
+    check("矩阵头像不再压住种族名（两层 6px 左边距那个坑）",
+          geo["labelLeft"] >= geo["faceRight"] and geo["liwMargin"] == "0px",
+          "头像右 %d / 名字左 %d / 内层 margin %s"
+          % (geo["faceRight"], geo["labelLeft"], geo["liwMargin"]))
+    check("阵营带里的种族头像整张在框内，格子放到 72px",
+          geo["cardImgInside"] and geo["cardFace"] >= 72,
+          "卡内头像 %dpx，图在框内=%s" % (geo["cardFace"], geo["cardImgInside"]))
     cards = page.evaluate("() => document.querySelectorAll('.racecard').length")
     check("种族头像卡数量与矩阵行数一致", cards == n_races, "卡片 %d" % cards)
     fac = page.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => ({
@@ -611,10 +638,17 @@ def test_races(browser, base):
                          "c.querySelectorAll('.nb').forEach(n => n.remove());"
                          "return c.textContent.trim(); })")
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
-    check("全部二级入口常驻，不用点开",
-          len(subs) == len(PAGES) + 1 and all(x in subs for x in ["首页", "区域与稀有", "副本", "团本",
-                                                                  "系统规则", "传承", "排行", "职业"]),
+    # 导航二级项是一份对外契约，逐项写死比"数量等于页数+1"更能说明预期：
+    # 2026-10-12 用户实拍后撤了「技能书」与「特长」两格（页面本身还在，见 NO_NAV_ENTRY）。
+    NAV_ENTRIES = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
+                   "区域与稀有", "副本", "团本", "系统规则", "配方",
+                   "速查", "时间表", "动态", "排行", "溯源"]
+    check("导航二级项就是这 16 格，顺序与名字不许漂", subs == NAV_ENTRIES,
           "%d 项：%s" % (len(subs), subs))
+    nav_files = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
+                              ".map(a => (a.getAttribute('href') || '').split('#')[0])")
+    no_entry = [p for p in PAGES if (p + ".html") not in nav_files and p not in NO_NAV_ENTRY]
+    check("除刻意撤下入口的那几页，每个页面都能从导航走到", not no_entry, "导航里找不到：%s" % no_entry)
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
     navh = page.evaluate("() => Math.round(document.querySelector('nav.main').getBoundingClientRect().height)")
@@ -751,12 +785,12 @@ def test_grouping(browser, base):
 
     page.goto(base + "/races.html", wait_until="networkidle")
     page.wait_for_timeout(1200)
-    page.click('#traits button[data-act="all"]')   # 改版后默认不铺全表，分组检查要先展开
-    page.wait_for_timeout(300)
-    rt = page.evaluate("""() => ({ groups: [...document.querySelectorAll('#tt .lgrp')].map(x => x.innerText.replace(/\\n/g,' ').trim()),
-        rows: [...document.querySelectorAll('#tt tbody tr')].length })""")
-    check("种族特长表按种族分组", len(rt["groups"]) == 10 and rt["rows"] == 40,
-          "%d 组 / %d 行" % (len(rt["groups"]), rt["rows"]))
+    # 「按词找特长」那张跨种族全表已撤（2026-10-12 用户实拍反馈），分组检查改看种族详情
+    rt = page.evaluate("""() => ({ groups: [...document.querySelectorAll('#rdet .rdtr > li b')]
+          .map(x => x.textContent.trim()), quotes: document.querySelectorAll('#rdet .rdtr .quote').length })""")
+    check("种族详情把这一族的特长逐条列出来，每条带官方整句",
+          len(rt["groups"]) >= 4 and rt["quotes"] == len(rt["groups"]),
+          "%d 条 / 整句 %d" % (len(rt["groups"]), rt["quotes"]))
     ctx.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
@@ -976,7 +1010,8 @@ def test_raids(browser, base):
         claimed: [...document.querySelectorAll('#claimed tbody tr')].length,
         noMatch: [...document.querySelectorAll('#claimed tbody tr')].filter(r=>/没有对应的排队条目/.test(r.textContent)).length,
         stats: [...document.querySelectorAll('.stat b')].map(x=>x.textContent.trim()),
-        missing: document.querySelectorAll('#missing li').length,
+        noArt: [...document.querySelectorAll('#claimed tbody tr')].filter(r => /源站没有/.test(r.textContent)).length,
+        missingCard: !!document.querySelector('#missing'),
         badges: document.querySelectorAll('.st.datamine_en').length,
         bands: [...document.querySelectorAll('#client .band b')].map(x=>x.textContent.trim()),
         h1: document.querySelectorAll('#main h1').length }; }""")
@@ -1000,16 +1035,15 @@ def test_raids(browser, base):
     check("团本那一列按数据摆载入图，缺的直说缺",
           len(arts) == len(exp_arts) and all(a == e for a, e in zip(arts, exp_arts)),
           "页面 %s / 数据 %s" % (arts, exp_arts))
-    check("没有载入图的座数在「这一页还没有的」里交代",
-          any("载入图" in t for t in page.evaluate(
-              "() => [...document.querySelectorAll('#missing li')].map(x => x.textContent)")),
-          "%d 座里没有一张" % len([e for e in exp_arts if not e]))
     exp_stats = [str(len(names)), str(len(claimed)),
                  str(len([r for r in claimed if r.get("clientActivityId")])),
                  str(len([r for r in claimed if r.get("nameCn")]))]
     check("四个规模读数等于数据现算", g["stats"] == exp_stats,
           "页面 %s / 数据 %s" % (g["stats"], exp_stats))
-    check("「这一页还没有的」逐条交代", g["missing"] >= 5, "%d 条" % g["missing"])
+    check("缺载入图的那几座在表格里逐座写明，页尾不再挂缺口卡",
+          not g["missingCard"] and g["noArt"] == len([e for e in exp_arts if not e]),
+          "表里 %d 座写「源站没有」/ 数据缺 %d 座"
+          % (g["noArt"], len([e for e in exp_arts if not e])))
     check("用到客户端排队数据的挂着出处", g["badges"] >= 2, "%d 枚" % g["badges"])
     page.fill("#rq", "Storm")
     page.wait_for_timeout(600)
@@ -1540,7 +1574,8 @@ def test_updates_rank(browser, base):
     rt = rp.evaluate("() => document.querySelector('.ranktab tbody tr td:last-child').innerText")
     check("排行覆盖率与页脚口径同源", ("%s%%" % data[0]["share"]) in rt, "首行显示 %s，数据 %s%%" % (rt, data[0]["share"]))
     rtxt = rp.evaluate("() => document.querySelector('#main').innerText")
-    check("排行页写明不是强度排行", ("不是强度排行" in rtxt or "不回答哪个职业强" in rtxt) and "DPS" in rtxt,
+    check("排行页写明不是强度排行",
+          ("不是强度排行" in rtxt or "不回答哪个职业强" in rtxt) and "战斗日志" in rtxt,
           "缺免责声明" if "强度" not in rtxt else "已写明")
     rp.screenshot(path=os.path.join(SHOT_DIR, "rank.png"))
     c2.close()
@@ -1784,7 +1819,9 @@ def test_search(browser, base):
         ("强化英勇打击", "updates.html",
          lambda: page.input_value("#cq") == "强化英勇打击" and
          page.inner_text("#ccnt").strip() == "1 条"),
-        ("影遁", "races.html", lambda: page.input_value("#fq") == "影遁"),
+        ("影遁", "races.html",
+         lambda: page.get_attribute(".racecard.on", "data-race") == "alliance-night-elf"
+         and "影遁" in page.inner_text("#rdet")),
         ("影遁", "glossary.html", lambda: page.input_value("#q") == "影遁"),
         ("Molten Core", "raids.html", lambda: page.input_value("#rq") == "Molten Core"),
         ("兽人", "races.html",
@@ -2115,6 +2152,10 @@ def test_classes(browser, base):
     war_races = [r for r in rc["races"] if "warrior" in (r.get("classes") or [])]
     war_abs = [x for x in (ab.get("items") or []) if x.get("classId") == "warrior"]
     arms = len([x for x in war_chg if x.get("tree") == "武器"])
+    # 战士的改动分几档就渲染几张表：四态之外（换层 / 改名 / 学得更早…）合并成"其它说法"一档
+    CL_KEYS = ("added", "modified", "removed", "unchanged")
+    war_groups = len({(x.get("changeKind") if x.get("changeKind") in CL_KEYS else "other")
+                      for x in war_chg})
     # 职业色的唯一来源是 glyph.js 那张表，断言也从那里读，不再抄一份十六进制
     gtxt = open(os.path.join(SRC, "js", "glyph.js"), encoding="utf-8").read()
     mg = re.search(r"warrior:\s*'(#[0-9a-fA-F]{6})'", gtxt)
@@ -2147,6 +2188,15 @@ def test_classes(browser, base):
         specTitles: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('title') || ''),
         pressed: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('aria-pressed')),
         rows: document.querySelectorAll('#main table tbody tr').length,
+        cols: (() => { const t = document.querySelector('#main table.chtab');
+          return t ? t.querySelectorAll('thead th').length : 0; })(),
+        chgTables: document.querySelectorAll('#main table.chtab').length,
+        rowIcons: document.querySelectorAll('#main table.chtab tbody td.ich .liw').length,
+        actCells: document.querySelectorAll('#main table.chtab tbody td.act').length,
+        rowPills: document.querySelectorAll('#main table.chtab tbody .pill').length,
+        chgsBox: (() => { const b = document.querySelector('.chgs'); if (!b) return null;
+          const cs = getComputedStyle(b);
+          return { maxH: cs.maxHeight, scroll: b.scrollHeight > b.clientHeight + 40 }; })(),
         chgHead: t('.two .card:nth-of-type(2) h2'),
         kvs: [...document.querySelectorAll('.kv')].map(x => x.innerText.replace(/\\s+/g, ' ').trim()),
         chips: [...document.querySelectorAll('.racerow .tag')].map(x => x.innerText.trim()),
@@ -2176,9 +2226,14 @@ def test_classes(browser, base):
           json.dumps(st["specs"], ensure_ascii=False))
     check("两源叫法不同的系，红框悬停把另一个叫法说清楚",
           st["specTitles"] == ["", "", ""], "战士无分歧：%s" % json.dumps(st["specTitles"], ensure_ascii=False))
-    check("每条改动都占一行，且都带得开来源的按钮",
-          st["rows"] == len(war_chg) * 2 and st["srcBtns"] >= len(war_chg),
-          "行 %d（改动 %d 条）/ 来源按钮 %d" % (st["rows"], len(war_chg), st["srcBtns"]))
+    check("每条改动占一行，行数与数据一致；行首带图标",
+          st["rows"] == len(war_chg) and st["rowIcons"] >= len(war_chg) - 1,
+          "行 %d（改动 %d 条）/ 行内图标 %d" % (st["rows"], len(war_chg), st["rowIcons"]))
+    check("表格只剩名称 / 类别 / 哪一系三列（分级徽标与来源两列按用户反馈撤了）",
+          st["cols"] == 3 and st["actCells"] == 0 and st["rowPills"] == 0
+          and st["chgTables"] == war_groups,
+          "每表 %d 列 / 分档 %d 张（数据 %d 档）/ 来源格 %d / 行内徽标 %d"
+          % (st["cols"], st["chgTables"], war_groups, st["actCells"], st["rowPills"]))
     check("官方中文整句按名字对上，贴的是整句不是改写",
           st["quotes"] == len(war_abs), "页内整句 %d / 数据 %d" % (st["quotes"], len(war_abs)))
     page.click(".spec >> nth=0")
@@ -2187,12 +2242,15 @@ def test_classes(browser, base):
       head: (document.querySelector('.two .card:nth-of-type(2) h2') || {}).innerText || '',
       pressed: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('aria-pressed')) })""")
     check("点一系就把技能变化收到那一系，条数与选中态同步",
-          one["rows"] == arms * 2 and "只看 武器" in one["head"] and one["pressed"][0] == "true",
+          one["rows"] == arms and "只看 武器" in one["head"] and one["pressed"][0] == "true",
           json.dumps({"行": one["rows"], "标题": one["head"][:24], "选中": one["pressed"]}, ensure_ascii=False))
     page.click(".spec >> nth=0")
     page.wait_for_timeout(1100)
     check("再点一次回到三系都列",
-          page.evaluate("document.querySelectorAll('#main table tbody tr').length") == len(war_chg) * 2)
+          page.evaluate("document.querySelectorAll('#main table tbody tr').length") == len(war_chg))
+    check("长列在卡内封顶滚动，不把两栏拉成一长一短",
+          bool(st["chgsBox"]) and st["chgsBox"]["maxH"].endswith("px") and st["chgsBox"]["scroll"],
+          json.dumps(st["chgsBox"], ensure_ascii=False))
     check("可选种族用 races.json 的正式中文名，一个阵营一行全列出来",
           len(st["chips"]) == len(war_races) and "塑风者天裔" in st["chips"]
           and "高阶会天裔" in st["chips"], "%d 个：%s" % (len(st["chips"]), st["chips"]))
@@ -2204,14 +2262,18 @@ def test_classes(browser, base):
           and any(str(war_nodes) in x for x in st["kvs"]), "%d 行" % len(st["kvs"]))
     check("底部三个出口指向计算器、技能书与玩法问答",
           st["exits"] == ["talent.html?c=warrior", "skills.html", "chooser.html"], str(st["exits"]))
-    check("本页未确认清单由数据推导，至少三条",
-          len(st["gaps"]) >= 3 and all(len(g) > 8 for g in st["gaps"]),
-          json.dumps(st["gaps"][:2], ensure_ascii=False))
-    page.click("#main table tbody tr >> nth=0 >> [data-src]")
+    check("页尾那张「本页还没确认的」卡已撤，只留一句层级门槛的口径",
+          not st["gaps"] and "第几层要点满多少还没在正式服实测"
+          in page.evaluate("() => document.querySelector('#main').innerText"))
+    check("逐条来源撤了，但职业名与改动清单两行仍给得开来源",
+          st["srcBtns"] == 2 and page.evaluate("() => !!document.querySelector('.kv [data-src]')"),
+          "本页来源按钮 %d 个" % st["srcBtns"])
+    page.click(".kv [data-src] >> nth=0")
     page.wait_for_timeout(500)
-    src = page.evaluate("() => { const r = [...document.querySelectorAll('.srow')]"
-                        ".find(x => x.style.display !== 'none'); return r ? r.innerText.length : 0; }")
-    check("改动那一条点开能看到是哪个来源核的", src > 20, "来源块 %d 字" % src)
+    src = page.evaluate("() => { const b = document.getElementById('srcbox');"
+                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
+    check("左栏那个来源点开能看到是哪个站转述的", "wowclassicforever" in src or "官方" in src,
+          src[:56].replace("\n", " "))
     page.click(".cls[data-c='hunter']")
     page.wait_for_timeout(1400)
     sw = page.evaluate("""() => ({ url: location.search,

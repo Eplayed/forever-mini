@@ -264,9 +264,9 @@
       </template>
     </template>
 
-    <div class="card" id="todo">
-      <h2>这一页没有的</h2>
-      <ul class="list"><li v-for="x in w.meta.notCollected" :key="x">{{ x }}</li></ul>
+    <!-- 2026-10-12 用户实拍反馈：「这一页没有的」那张卡撤掉，与旧站一致；
+         坐标说明与来源这两段不是缺口清单，留着。 -->
+    <div class="card">
       <h3>坐标说明</h3><p class="note">{{ w.meta.coordinateNote }}</p>
       <h3>来源与核对</h3><SourceList :list="w.provenance" />
     </div>

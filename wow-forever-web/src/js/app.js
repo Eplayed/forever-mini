@@ -9,14 +9,17 @@
       { href: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
     /* 2026-10-12：这一组的第一格改成「职业」页（每职业一页），技能书降成二级项。
        导航项的名字必须与「本站更新」里的板块标签一字不差，角标才会画出来（见 shell() 里那段）。 */
+    /* 2026-10-12 用户实拍后决定：导航这条「技能书」先撤。
+       技能书页本身还在站上（首页六个入口与职业页都还链着它），只是不占导航这一格——
+       导航要留给"每职业一页"这种玩家会反复找的入口。*/
     { t: '职业', items: [
       { href: 'classes.html', t: '职业', d: '9 职业逐页：三系与节点数、技能变化、可选种族' },
-      { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
       { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
       { href: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' }] },
+    /* 「特长」那一格也撤了：它指向 races.html 里那张「按词找特长」卡，卡片按用户要求已去掉，
+       40 条特长仍在种族详情里逐条带官方整句；搜索点特长会直接落到所属种族那一行。 */
     { t: '种族', items: [
-      { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
-      { href: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
+      { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' }] },
     { t: '世界', items: [
       { href: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
       { href: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
@@ -1032,8 +1035,7 @@
       '<span class="sp">' + D.esc(E.describe(trees, tstate.state)) + '</span></div>' +
       '<div class="src">来源：' + D.esc(f.dataVersion) + ' ｜ ' + D.esc(f.note || '') +
       '<button class="ghost" id="tsrcbtn">本页节点来源</button></div>' +
-      '<div class="srcbox" id="tsrc" style="display:none"></div></div>' +
-      unconfBlock(talentGaps(f, trees), '本页还没确认的'));
+      '<div class="srcbox" id="tsrc" style="display:none"></div></div>');
     bindTalent();
     drawLinks();
     var cbtn = el('cmp');
@@ -1094,26 +1096,6 @@
     var sp = E.treeSpent(t, tstate.state);
     for (var i = 0; i < r.tierUnlockCost.length; i++) if (sp < r.tierUnlockCost[i]) return '再投 ' + (r.tierUnlockCost[i] - sp) + ' 点解锁第 ' + (i + 1) + ' 层';
     return '全部层已解锁';
-  }
-  function talentGaps(f, trees) {
-    var all = [], g = [];
-    trees.forEach(function (t) { t.nodes.forEach(function (n) { all.push(n); }); });
-    if (!all.length) return ['该职业尚无可用天赋数据'];
-    if (!f.rules || !f.rules.tierUnlockCost) g.push('每层需要投入多少点才解锁下一层（层级门槛）——没有可信来源');
-    if (all.some(function (n) { return !n.nameEn; })) g.push('英文原名：' + all.filter(function (n) { return !n.nameEn; }).length + ' 个缺失，缺失即留空不猜');
-    g.push('天赋效果描述：第三方站的中文文案不复制，需自采或实测');
-    var conf = all.filter(function (n) { return n.nameConflict; }).length;
-    if (conf) g.push(conf + ' 个天赋有两个叫法（红框），等官方中文定名');
-    // 系名也可能有两个叫法（官方定名后另一来源的写法留在 nameAlt）
-    var tconf = (f.trees || []).filter(function (t) { return t.nameConflict && t.nameAlt; });
-    if (tconf.length) g.push('系名有两个叫法：' + tconf.map(function (t) {
-      return '「' + t.nameCn + '」另一来源作「' + t.nameAlt + '」';
-    }).join('、') + '（按官方定名显示）');
-    var withReq = all.filter(function (n) { return (n.requires || []).length; }).length;
-    g.push('前置链不完整：仅 ' + withReq + '/' + all.length + ' 个天赋带前置');
-    var unverified = all.filter(function (n) { return !n.nameVerified; }).length;
-    if (unverified) g.push(unverified + ' 个天赋名尚未与官网中文对上，标黄点，以游戏内为准');
-    return g;
   }
   var lastLongPress = 0;
   function bindLongPress(node) {
@@ -1397,9 +1379,7 @@
           '<p class="dim">' + D.esc(tz.cn) + '<br>' + D.esc(tz.en) + '</p>' +
           '<p>' + D.esc(tz.ours) + '<span class="tag">本站推算 ' + D.esc(tz.level) + '</span></p>' +
           '<p class="dim">' + D.esc(tz.why) + '</p></div>' : '') +
-        '<div class="tl">' + rows + '</div>' +
-        unconfBlock(['Beta 等级上限提高到 30 级的具体日期', '专家模式（硬核）开放时间', '12 月 9 日之后各批内容的具体清单与国服对应日期',
-          '三座团队副本与官方所说"new raids"是否同一批'], '还没确认的'));
+        '<div class="tl">' + rows + '</div>');
     }).catch(fail);
   }
 
@@ -1576,19 +1556,17 @@
             return '<div class="lgrp"><b>' + (k === 'other' ? '其它说法' : CL_STATE[k]) + '</b>' +
               '<span class="dim">' + rows.length + ' 条</span>' +
               (k === 'unchanged' ? '<span class="dim">客户端里这条和经典旧世一样</span>' : '') + '</div>' +
-              '<div class="scrollx"><table class="entab chtab"><thead><tr><th>名称</th><th>类别</th>' +
-              '<th>哪一系</th><th></th></tr></thead><tbody>' +
+              '<div class="scrollx"><table class="entab chtab"><thead><tr><th class="ich">名称</th>' +
+              '<th>类别</th><th>哪一系</th></tr></thead><tbody>' +
               rows.map(function (x, i) {
-                var ab = abm[x.nameCn], uid = c.id + '-' + k + '-' + i;
-                return '<tr><td><b>' + D.esc(x.nameCn || '未命名') + '</b>' +
+                var ab = abm[x.nameCn];
+                return '<tr><td class="ich">' + iconCell(x.iconKey, x.id || x.nameCn, x.nameCn) +
+                  '<b>' + D.esc(x.nameCn || '未命名') + '</b>' +
                   (x.maxRank ? '<span class="dim"> · 最多 ' + D.esc(x.maxRank) + ' 层</span>' : '') +
                   (ab ? '<span class="quote">' + D.esc(ab.quote) + '</span>' : '') + '</td>' +
                   '<td>' + (CL_KIND[x.kind] || '其他') + (k === 'other' && x.changeCn
                     ? '<br><span class="tag">' + D.esc(x.changeCn) + '</span>' : '') + '</td>' +
-                  '<td>' + (x.tree ? D.esc(x.tree) : '<span class="dim">未归系</span>') + '</td>' +
-                  '<td class="act">' + D.pill(x.level) + ' ' + srcBtn(uid, x.nameCn || '这一条', x.provenance) + '</td></tr>' +
-                  '<tr class="srow" id="s-' + uid + '" style="display:none"><td colspan="4">' +
-                  D.sources(x.provenance) + '</td></tr>';
+                  '<td>' + (x.tree ? D.esc(x.tree) : '<span class="dim">未归系</span>') + '</td></tr>';
               }).join('') + '</tbody></table></div>';
           }).join('') : '<div class="empty">这一系还没有客户端改动记录，等下一次客户端更新再看。</div>';
           var chg = '<section class="card"><h2>技能变化' +
@@ -1618,18 +1596,12 @@
                 '<span class="foot"><em>' + t[2] + '</em><i>进入 →</i></span></a>';
             }).join('') + '</div></section>';
 
-          var gaps = [];
-          if (!trees.length) gaps.push('这一职业的天赋结构还没有可信来源，三系与节点数都空着');
-          gaps.push('第几层需要点满多少点：客户端解包给过一组数，正式服没实测，' +
-            '这一页只按坐标摆位，不做「够点才能点下一层」的判定');
-          if (!abs.length) gaps.push('官方中文的职业深度解析稿还没发，这一页没有官方整句');
-          if (c.nameLevel !== 'L0') gaps.push('职业中文名的官方中文说法还没逐字核到');
-          gaps.push('这个职业用什么资源、穿什么护甲、能用什么武器、在团队里顶什么位置：' +
-            '官方中文里还没有能核对的说法，这一页就不写');
-          gaps.push('三系各自在副本与 PvP 里的实际手感需要实测，本站不做强度与胜率结论');
-
-          set(hero + bar + spec + '<div class="two">' + have + chg + '</div>' + tools +
-            unconfBlock(gaps, '本页还没确认的'));
+          /* 2026-10-12 用户实拍后决定：这一页不再挂「本页还没确认的」那张卡。
+             缺什么仍然如实写在数据里，集中到溯源页与动态页看；
+             这一页只留"层级门槛没实测"这类会误导加点的口径，收进三系卡下面一句话。 */
+          set(hero + bar + spec + '<p class="note">三系的格子只按客户端里的位置摆，' +
+            '第几层要点满多少还没在正式服实测，所以不做「够点才能点下一层」的判定。</p>' +
+            '<div class="two">' + have + chg + '</div>' + tools);
           Array.prototype.forEach.call(document.querySelectorAll('.cls[data-c]'), function (b) {
             b.onclick = function () { if (b.dataset.c !== f.c) openClass(b.dataset.c); };
           });
@@ -1735,18 +1707,6 @@
   }
 
   /* ---------- 副本手册 ---------- */
-  function dunGaps(x) {
-    var g = [];
-    if (!x.nameCn) g.push('中文定名（现在保留英文原名，未机翻）');
-    if (x.nameCnConflict) g.push('中文名定稿：官方与转载两种叫法并存');
-    if (!x.levelRange) g.push('可进入的等级区间');
-    if (!(x.bosses || []).length) g.push('首领名单：客户端解包里还没有这座本的数据');
-    else if (!(x.drops || []).length) g.push('掉落归属：公开数据库里还没有它的首领掉落');
-    else g.push('掉落的实装情况与概率（本站不写百分比，等正式服实测）');
-    if (!(x.route || []).length) g.push('跑图路线与跳怪点');
-    if (x.kind === 'raid') g.push('开放时间、团队规模——仅有第三方说法');
-    return g;
-  }
   function dunRoute(arr) {
     if (!arr || !arr.length) return '';
     return '<ul class="list">' + arr.map(function (r) {
@@ -1855,7 +1815,6 @@
             '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
             '<h3>首领与掉落</h3>' + dunLoot(x) +
             '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
-            '<h3>这座本还没确认的</h3><ul class="list">' + dunGaps(x).map(function (g) { return '<li>' + D.esc(g) + '</li>'; }).join('') + '</ul>' +
             '<h3>来源与核对</h3>' + D.sources(x.provenance) + '</div></div>';
         }
         function bandBlock(title, sub, rows) {
@@ -2134,17 +2093,6 @@
           + (claimed.some(function (r) { return r.sizeClaim && r.partySize && String(r.sizeClaim) !== String(r.partySize); })
             ? '<div class="conf">规模两说：另一份资料自报的人数与客户端排队条目写的不是一个数，两个都摆着等定稿。</div>' : '')
           + '<h3>来源与核对</h3>' + claimed.map(function (r) { return D.sources(r.provenance); }).join('') + '</div>'
-          + '<div class="card" id="missing"><h2>这一页还没有的</h2><ul class="list">'
-          + '<li>中文名：官方中文稿没发，客户端与另一份资料给的都是英文原名，不机翻。</li>'
-          + '<li>首领名单与掉落：客户端的队伍查找器里只有排队条目，没有首领；'
-          + '第三方资料站的团本页是推测段落，本站不搬进正文。</li>'
-          + '<li>载入图：' + claimed.filter(function (r) { return !r.art; }).length + ' 座连第三方站托管的副本都没有'
-          + '（逐个地址实测过，回的是"没有这张图"），不放别的图凑数。</li>'
-          + '<li>开放顺序与具体日期：官方英文只给了 12 月 9 日这一档，国服公告没重复。</li>'
-          + '<li>团队规则细节（重置周期、规模上限、是否需要进度记录）：'
-          + '<a href="systems.html">系统规则那一页</a>有官方中文说法的才写在这里。</li>'
-          + '<li>打法、职业配置、装备推荐：本站红线不做攻略正文。</li>'
-          + '</ul></div>'
           + '<div class="card"><h2>来源与核对</h2>' + D.sources((rows[0] || {}).provenance || [])
           + '<p class="dim">这一页与副本页那张「客户端能排到、本站还没有名单」的表同源，'
           + '不是第二份数据：客户端版本 ' + D.esc((QU.meta || {}).build || '') + ' 的队伍查找器。</p></div>');
@@ -2279,12 +2227,6 @@
   }
 
   /* ---------- 系统与新区域 ---------- */
-  function unconfBlock(items, title) {
-    if (!items || !items.length) return '';
-    return '<div class="card"><h2>' + (title || '还没确认的') + '</h2><ol class="q">' +
-      items.map(function (t) { return '<li>' + D.esc(t) + '</li>'; }).join('') + '</ol>' +
-      '<p class="dim" style="margin-top:6px">这些条目缺官方来源或未实测，宁可空着也不编。</p></div>';
-  }
   function systems() {
     D.load('data/systems.json').then(function (s) {
       var q = document.body.getAttribute('data-page');
@@ -2298,7 +2240,7 @@
               (x.note ? '<div class="dim" style="font-size:12.5px;margin:4px 0">' + D.esc(x.note) + '</div>' : '') +
               D.sources(x.provenance) + '</div>';
           }).join('');
-      }).join('') + unconfBlock(s.unconfirmed, '还没确认的设定'));
+      }).join(''));
     }).catch(fail);
   }
 
@@ -2407,7 +2349,8 @@
                   quote: t.quote, note: '官方种族公告·该特长列在「' + raceName(x) + '」小标题下',
                   checkedAt: x.provenance[0].checkedAt }]) + '</li>';
             }).join('') + '</ul>' : '<p class="dim">官方公告里这个小标题下没有列出可用的特长条目。</p>') +
-            (cf.length ? '<p class="conf">这个种族有' + cf.length + '处两种说法并存，见下方「同一页里两种说法并存」——两个都留着，不替玩家选。</p>' : '');
+            (cf.length ? '<p class="conf">这个种族有' + cf.length +
+              '处两种说法并存（矩阵表与官方导语各说各的），两个都留着，不替玩家选。</p>' : '');
         }
 
         function matrix() {
@@ -2431,47 +2374,12 @@
                 }).join('') + '</tr>';
             }).join('') + '</tbody></table>';
         }
-        function traitTable() {
-          var q = f.q.toLowerCase();
-          if (!q && !f.c && !f.fac && !f.all) {
-            return '<p class="dim">上面点任意种族就能看到它的全部特长与官方整句；' +
-              '要跨种族搜词（比如"潜行""亡灵"），在上面的框里输入。' +
-              '<button type="button" class="ghost mini" data-act="all">还是要一次看全 ' + traits.length +
-              ' 条</button></p>';
-          }
-          var list = traits.filter(function (x) {
-            if (f.fac && x.race.faction !== f.fac) return false;
-            if (f.c && x.race.classes.indexOf(f.c) < 0) return false;
-            if (q && (x.t.name + x.t.effect + x.owner).toLowerCase().indexOf(q) < 0) return false;
-            return true;
-          });
-          var byRace = [];
-          R.races.forEach(function (x) {
-            var rows = list.filter(function (t) { return t.race.id === x.id; });
-            if (rows.length) byRace.push({ race: x, rows: rows });
-          });
-          return byRace.length ? byRace.map(function (g) {
-            var x = g.race;
-            return '<div class="lgrp">' + face(x, 'sm') + '<b>' + raceName(x) + '</b>' +
-              '<span class="dim mono">' + FAC[x.faction] + '</span><span class="dim">' + g.rows.length + ' 条</span>' +
-              '<button type="button" class="ghost mini" data-race="' + keyOf(x) + '">看这个种族</button></div>' +
-              '<div class="scrollx"><table><thead><tr><th class="ich">图标</th><th>特长</th><th>类型</th><th>官方整句</th><th></th></tr></thead><tbody>' +
-              g.rows.map(function (t) {
-                return '<tr><td class="ich">' + iconCell(t.t.iconKey, x.id + t.t.name, t.t.name) + '</td>' +
-                  '<td>' + D.hl(t.t.name, f.q) + '</td>' +
-                  '<td>' + (t.t.passive ? '被动' : '主动') + '</td>' +
-                  '<td class="quote">' + D.hl(t.t.quote, f.q) + '</td>' +
-                  '<td class="act">' + srcBtn('tr-' + x.id + '-' + t.t.name, t.t.name,
-                    [{ type: 'official_cn', url: R.meta.sources[0].url, quote: t.t.quote,
-                       note: '官方种族公告·该特长列在「' + t.owner + '」小标题下', checkedAt: x.provenance[0].checkedAt }]) + '</td></tr>';
-              }).join('') + '</tbody></table></div>';
-          }).join('') : '<div class="empty">没有匹配的特长。</div>';
-        }
+        /* 「按词找特长」那张卡按 2026-10-12 用户实拍反馈撤掉了：40 条特长在下面的种族详情里
+           逐条带官方整句，跨种族搜词由全站搜索承担（索引里每条特长直接落到所属种族那一行）。 */
         function draw() {
           el('facbands').innerHTML = band('alliance') + band('horde');
           el('rdet').innerHTML = detail();
           el('mx').innerHTML = matrix();
-          el('tt').innerHTML = traitTable();
           el('mhint').innerHTML = f.c
             ? '已按「' + D.esc(CNAME[f.c]) + '」筛选：灰色行是不能选该职业的种族。<button type="button" class="ghost mini" id="cx">清除</button>'
             : '点表头职业名可筛选。✓ 与 — 直接来自官方表格里的 X 标记，没有第三方补的。';
@@ -2494,14 +2402,8 @@
             b.onclick = function () {
               var t = el(b.dataset.jump);
               if (t && t.scrollIntoView) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              var fq = el('fq');
-              if (fq) { fq.value = raceName(byKey[f.sel]); f.q = fq.value; draw(); fq.focus(); }
             };
           });
-          var ab = document.querySelector('[data-act=all]');
-          if (ab) ab.onclick = function () { f.all = true; draw(); };
-          el('tcnt').textContent = (f.q || f.c || f.fac || f.all)
-            ? el('tt').querySelectorAll('tbody tr').length + ' / ' + traits.length + ' 条' : traits.length + ' 条';
           bindSrcToggles();
         }
 
@@ -2523,13 +2425,14 @@
           '<div class="card"><h2>种族 × 职业矩阵</h2><p class="dim" id="mhint"></p>' +
           '<div class="field"><label class="dim">阵营</label><select id="ff"><option value="">全部</option>' +
           '<option value="horde">部落</option><option value="alliance">联盟</option></select>' +
-          '<label class="dim">找特长</label><input type="search" id="fq" placeholder="名称或效果里的词" value="' + D.esc(f.q) + '">' +
-          '<span class="dim mono" id="tcnt"></span></div>' +
-          '<div class="scrollx" id="mx"></div></div>' +
-
-          '<div class="card" id="traits"><h2>按词找特长</h2>' +
-          '<p class="dim">官方页把每条特长写成一个句子，这里整句原样引用；数值只到官方写出的那一句，不做推算。</p>' +
-          '<div class="scrollx" id="tt"></div>' +
+          '<span class="dim">特长请点上面的种族看，跨种族搜词走顶栏那个框。</span></div>' +
+          '<div class="scrollx" id="mx"></div>' +
+          /* 两种说法并存不再单开一张卡（2026-10-12 用户实拍反馈），压成矩阵下面一行红字：
+             话还是要说，但别占一整块版面。明细在种族详情与溯源页。 */
+          (R.conflicts || []).map(function (cf) {
+            return '<p class="conf">' + D.esc(cf.topic) + '——' + D.esc(cf.a.saying) +
+              D.esc(cf.b.saying) + D.esc(cf.handling) + ' ' + D.pill(cf.level) + '</p>';
+          }).join('') +
           '<div class="srcbox" id="srcbox"></div></div>' +
 
           '<div class="card"><h2>新开放的组合</h2><p class="dim">官方原文那句：' +
@@ -2543,23 +2446,9 @@
               (window.Glyph ? Glyph.classTile(c.classId, c.classCn, CTILE[c.classId], 'sm') : '') +
               '<b>' + D.esc(c.classCn) + '</b>' +
               srcBtn('nc-' + c.label, c.label, c.provenance) + '</span>';
-          }).join('') + '</div></div>' +
-
-          (R.conflicts || []).map(function (cf) {
-            return '<div class="card"><h2>同一页里两种说法并存</h2><p class="dim">' +
-              D.esc(cf.topic) + ' ' + D.pill(cf.level) + '</p>' +
-              '<ul class="list"><li><b>矩阵表</b>：' + D.esc(cf.a.saying) +
-              '<span class="dim">（明细：' + D.esc(cf.a.detail || '') + '。官方在表里只写 X，没有整句可引）</span></li>' +
-              '<li><b>导语</b>：' + D.esc(cf.b.saying) + '<span class="quote">原文：' + D.esc(cf.b.quote) + '</span></li>' +
-              '<li><b>本站处置</b>：' + D.esc(cf.handling) + '</li></ul></div>';
-          }).join('') +
-
-          '<div class="card"><h2>这一页没有的</h2><ul class="list">' +
-          (R.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
-          '</ul></div>');
+          }).join('') + '</div></div>');
 
         el('ff').onchange = function (e) { f.fac = e.target.value; draw(); };
-        el('fq').oninput = function (e) { f.q = e.target.value.trim(); draw(); };
         draw();
       }).catch(fail);
   }
@@ -2688,9 +2577,7 @@
           body += '<div class="card"><div class="empty">这个专业没有匹配条目，试试放宽搜索或技能等级。</div></div>';
         }
         el('pbody').innerHTML = head + body +
-          '<div class="card"><h2>这一页没有的</h2><ul class="list">' +
-          (doc.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
-          '</ul><h3>来源与核对</h3>' + D.sources(sel.provenance) + '</div>';
+          '<div class="card"><h3>来源与核对</h3>' + D.sources(sel.provenance) + '</div>';
         el('pcnt').textContent = (recipes.length + nodes.length) + ' 条';
         var qi = el('pq');
         qi.oninput = function () { f.q = qi.value.trim(); draw(); };
@@ -2894,9 +2781,7 @@
               '<td class="dim mono">#' + D.esc(x.itemId) + '</td></tr>';
           }).join('') + '</tbody></table></div>' +
           '<p class="note">奖励名称与物品编号出自客户端解包；外观与坐骑在游戏里长什么样，本站不放图也不描述。</p></div>' +
-          '<div class="card" id="todo"><h2>这一页没有的</h2><ul class="list">' +
-          (M.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
-          '</ul><h3>来源与核对</h3>' + D.sources(M.provenance) + '</div>');
+          '<div class="card"><h3>来源与核对</h3>' + D.sources(M.provenance) + '</div>');
 
         function repaint() {
           el('ltree').innerHTML = treePanel();
@@ -3201,9 +3086,7 @@
           var body = f.tab === 'zones' ? panelZones() : f.tab === 'rares' ? panelRares()
             : f.tab === 'books' ? panelBooks() : panelBag();
           el('wbody').innerHTML = body +
-            '<div class="card" id="todo"><h2>这一页没有的</h2><ul class="list">' +
-            (w.meta.notCollected || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') +
-            '</ul><h3>坐标说明</h3><p class="note">' + D.esc(w.meta.coordinateNote || '') + '</p>' +
+            '<div class="card"><h3>坐标说明</h3><p class="note">' + D.esc(w.meta.coordinateNote || '') + '</p>' +
             '<h3>来源与核对</h3>' + D.sources(w.provenance) + '</div>';
           Array.prototype.forEach.call(document.querySelectorAll('.zmark'), function (b) {
             b.style.left = b.dataset.x + '%'; b.style.top = b.dataset.y + '%';
@@ -3485,10 +3368,6 @@
           '</ul>' +
           '<div class="legend"><span><i class="sw L0"></i>官方中文已核</span>' +
           '<span><i class="sw L2"></i>客户端解包 / 待实测</span></div>' +
-          '<h2>这一页刻意没有的</h2><ul class="list">' +
-          '<li>DPS、副本强度、PvP 胜率：没有战斗数据，也不做（小程序侧更是红线）。</li>' +
-          '<li>第三方站的 BiS 与梯队结论：属他人判断，不搬。</li>' +
-          '<li>"推荐玩什么职业"：那是玩法取向，走选职业问答页，不混进这张表。</li></ul>' +
           '<h3>来源与核对</h3>' + D.sources([{ type: 'site-note', url: '',
             note: '本页数字是拿本站自己的数据现算的，没有外部链接' }]) + '</div>');
       }).catch(fail);

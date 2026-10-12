@@ -47,6 +47,10 @@
       </button>
     </section>
 
+    <!-- 2026-10-12 用户实拍后决定：这一页不再挂「本页还没确认的」那张卡；
+         只留一句会误导加点的口径（层级门槛没实测）。 -->
+    <p class="note">三系的格子只按客户端里的位置摆，第几层要点满多少还没在正式服实测，所以不做「够点才能点下一层」的判定。</p>
+
     <div class="two">
       <section class="card">
         <h2>这一职业有什么</h2>
@@ -83,18 +87,12 @@
           <template v-for="g in groups" :key="g.k">
             <div class="lgrp"><b>{{ g.label }}</b><span class="dim">{{ g.rows.length }} 条</span>
               <span v-if="g.k === 'unchanged'" class="dim">客户端里这条和经典旧世一样</span></div>
-            <div class="scrollx"><table class="entab chtab"><thead><tr><th>名称</th><th>类别</th><th>哪一系</th><th></th></tr></thead><tbody>
-              <template v-for="(x, i) in g.rows" :key="x.id || (g.k + i)">
-                <tr>
-                  <td><b>{{ x.nameCn || '未命名' }}</b><span v-if="x.maxRank" class="dim"> · 最多 {{ x.maxRank }} 层</span><span v-if="abm[x.nameCn]" class="quote">{{ abm[x.nameCn].quote }}</span></td>
-                  <td>{{ CL_KIND[x.kind] || '其他' }}<template v-if="g.k === 'other' && x.changeCn"><br><span class="tag">{{ x.changeCn }}</span></template></td>
-                  <td><template v-if="x.tree">{{ x.tree }}</template><span v-else class="dim">未归系</span></td>
-                  <td class="act"><LevelPill :level="x.level" /> <button type="button" class="ghost" :data-src="uid(g.k, i)" :data-name="x.nameCn || '这一条'" :aria-label="'查看「' + (x.nameCn || '这一条') + '」的来源'" @click="toggleRow(uid(g.k, i))">{{ openRow === uid(g.k, i) ? '收起' : '来源' }}</button></td>
-                </tr>
-                <tr class="srow" :id="'s-' + uid(g.k, i)" :style="{ display: openRow === uid(g.k, i) ? 'table-row' : 'none' }">
-                  <td colspan="4"><SourceList :list="x.provenance" /></td>
-                </tr>
-              </template>
+            <div class="scrollx"><table class="entab chtab"><thead><tr><th class="ich">名称</th><th>类别</th><th>哪一系</th></tr></thead><tbody>
+              <tr v-for="(x, i) in g.rows" :key="x.id || (g.k + i)">
+                <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id || x.nameCn" :cn="x.nameCn" /><b>{{ x.nameCn || '未命名' }}</b><span v-if="x.maxRank" class="dim"> · 最多 {{ x.maxRank }} 层</span><span v-if="abm[x.nameCn]" class="quote">{{ abm[x.nameCn].quote }}</span></td>
+                <td>{{ CL_KIND[x.kind] || '其他' }}<template v-if="g.k === 'other' && x.changeCn"><br><span class="tag">{{ x.changeCn }}</span></template></td>
+                <td><template v-if="x.tree">{{ x.tree }}</template><span v-else class="dim">未归系</span></td>
+              </tr>
             </tbody></table></div>
           </template>
         </template>
@@ -114,12 +112,6 @@
         </component>
       </div>
     </section>
-
-    <div v-if="gaps.length" class="card">
-      <h2>本页还没确认的</h2>
-      <ol class="q"><li v-for="(g, i) in gaps" :key="i">{{ g }}</li></ol>
-      <p class="dim" style="margin-top:6px">这些条目缺官方来源或未实测，宁可空着也不编。</p>
-    </div>
   </template>
 </template>
 
@@ -127,13 +119,16 @@
 /* 职业页（每职业一页）· 与旧站 src/classes.html + app.js 的 classPage() 逐块对齐。
    任务书 docs/PLAN-classes-and-nav-2026-10-12.md：内容一条都不写死，全部从 src/data 现取；
    稿子「职业概览」那六行里我们没有可核对来源的五行（战斗定位 / 核心资源 / 护甲类型 /
-   可用武器 / 团队职责）不显示，缺的进本页未确认清单。 */
+   可用武器 / 团队职责）不显示。
+   2026-10-12 用户实拍后：页尾那张「本页还没确认的」卡与技能变化表的最后两列都撤掉了，
+   列表行改成带图标；逐条来源仍在这页左栏（职业名与改动清单两行）与溯源页。 */
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
 import { legacyUrl, linkFor } from '../lib/nav.js';
 import { CLASS_COLOR } from '../lib/glyph.js';
 import ClassTile from '../components/ClassTile.vue';
+import IconCell from '../components/IconCell.vue';
 import LevelPill from '../components/LevelPill.vue';
 import SourceList from '../components/SourceList.vue';
 
@@ -146,7 +141,6 @@ const base = ref(null);
 const tree = ref(null);
 const err = ref('');
 const sel = ref('');
-const openRow = ref('');
 const box = ref(null);
 const boxFor = ref('');
 const artBad = ref(false);
@@ -168,13 +162,9 @@ const cid = computed(() => {
   return hit ? hit.id : ((CLS.value[0] || {}).id || '');
 });
 watch(cid, (v) => {
-  sel.value = ''; openRow.value = ''; box.value = null; boxFor.value = ''; artBad.value = false;
+  sel.value = ''; box.value = null; boxFor.value = ''; artBad.value = false;
   if (!v) return;
   load('data/talents/' + v + '.json').then((d) => { tree.value = d; }).catch(() => { tree.value = null; });
-});
-watch(() => route.query.c, (v) => {
-  // 地址里换了职业号但还没落到数据上（例如从别页带 ?c= 进来）：清掉上一职业的展开态
-  if (String(v || '') !== cid.value) { openRow.value = ''; box.value = null; boxFor.value = ''; }
 });
 onMounted(boot);
 
@@ -182,8 +172,6 @@ function pick(id) {
   if (id !== cid.value) router.replace({ path: '/classes', query: { c: id } });
 }
 function pickSpec(name) { sel.value = sel.value === name ? '' : name; }
-function uid(k, i) { return cid.value + '-' + k + '-' + i; }
-function toggleRow(id) { openRow.value = openRow.value === id ? '' : id; }
 function openBox(id, name, list) {
   if (boxFor.value === id && box.value) { box.value = null; boxFor.value = ''; return; }
   boxFor.value = id; box.value = { name: name, list: list || [] };
@@ -285,15 +273,5 @@ const exits = computed(() => {
         : { href: l.href + (x[4] ? '?c=' + encodeURIComponent(x[4].c) : '') }
     };
   });
-});
-const gaps = computed(() => {
-  const out = [];
-  if (!trees.value.length) out.push('这一职业的天赋结构还没有可信来源，三系与节点数都空着');
-  out.push('第几层需要点满多少点：客户端解包给过一组数，正式服没实测，这一页只按坐标摆位，不做「够点才能点下一层」的判定');
-  if (!abs.value.length) out.push('官方中文的职业深度解析稿还没发，这一页没有官方整句');
-  if (c.value && c.value.nameLevel !== 'L0') out.push('职业中文名的官方中文说法还没逐字核到');
-  out.push('这个职业用什么资源、穿什么护甲、能用什么武器、在团队里顶什么位置：官方中文里还没有能核对的说法，这一页就不写');
-  out.push('三系各自在副本与 PvP 里的实际手感需要实测，本站不做强度与胜率结论');
-  return out;
 });
 </script>

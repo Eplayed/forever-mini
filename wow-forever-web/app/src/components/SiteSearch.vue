@@ -1,10 +1,14 @@
 <template>
-  <div class="gsearch" role="search">
+  <!-- 与旧站首页那颗搜索框同一件（.gsearch.hs）：稿子里框里带一颗实心"立即搜索"，
+       有结果就进第一条，没结果就只是把结果展开。 -->
+  <div class="gsearch hs" role="search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
     <input id="gs" ref="box" type="search" autocomplete="off" aria-controls="gres"
            :aria-expanded="open ? 'true' : 'false'"
            aria-label="全站搜索：天赋、改动、术语、副本、区域、配方、种族"
            :placeholder="'搜天赋、副本、区域、配方、种族特长（共 ' + total + ' 条）'"
            v-model="q" @input="onType" @keydown="onKey">
+    <button type="button" class="cta cta-gold" id="ggo" @click="go">立即搜索</button>
     <p class="gsex">
       <button v-for="x in SAMPLES" :key="x[0]" type="button" class="gsx"
               :title="x[1]" @click="pick(x[0])">{{ x[0] }}</button>
@@ -38,11 +42,13 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { load } from '../lib/data.js';
 import { hlParts, PILL_NAME } from '../lib/fmt.js';
 import { GROUP_SHOWN, itemLink, searchGroups, groupLink } from '../lib/search.js';
 
 const props = defineProps({ total: { type: Number, default: 0 }, initial: { type: String, default: '' } });
+const router = useRouter();
 
 // 示例词：给不知道搜什么的人一个起点，都是索引里真有的名字
 const SAMPLES = [
@@ -109,6 +115,20 @@ function pick(w) {
   q.value = w;
   onType();
   if (box.value) box.value.focus();
+}
+/* 实心「立即搜索」：与旧站同一件事——有结果就进第一条，没结果就只是把结果展开。
+   索引是懒加载的，第一次点要先等它到，否则永远"没有结果"。 */
+function go() {
+  if (!q.value.trim()) return;
+  const jump = () => {
+    const g = groups.value[0];
+    if (!g || !g.rows.length) return;
+    const l = g.rows[0].link;
+    if (l.to) router.push(l.to); else window.location.href = l.href;
+  };
+  if (idx.value) { onType(); jump(); return; }
+  onType();
+  ensureIdx().then(jump).catch(() => { open.value = false; });
 }
 function onKey(e) {
   if (e.key === 'Escape') {

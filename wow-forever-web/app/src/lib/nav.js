@@ -11,12 +11,10 @@ export const NAV = [
     { file: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
   { t: '职业', items: [
     { file: 'classes.html', t: '职业', d: '9 职业逐页：三系与节点数、技能变化、可选种族' },
-    { file: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
     { file: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
     { file: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' }] },
   { t: '种族', items: [
-    { file: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
-    { file: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
+    { file: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' }] },
   { t: '世界', items: [
     { file: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
     { file: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },

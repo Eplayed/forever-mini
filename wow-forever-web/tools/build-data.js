@@ -947,7 +947,8 @@ const SK = {
   prof: ['专业', 'professions.html', ''],
   rec: ['配方', 'professions.html', 'q'],
   gnd: ['采集点', 'professions.html', 'q'],
-  tra: ['种族特长', 'races.html', 'q'],
+  // 种族特长页那张跨种族全表已撤（2026-10-12 用户反馈），所以词条直接落到所属种族那一行
+  tra: ['种族特长', 'races.html', ''],
   race: ['种族', 'races.html', ''],
   lpg: ['传承专长', 'legacy.html', 'q'],
   lch: ['传承挑战', 'legacy.html', 'q'],
@@ -1074,7 +1075,8 @@ const facCn = {};
   sPush('race', nm, (facCn[r.faction] || r.faction || '阵营未定') + ' · ' +
     (r.classes || []).length + ' 个职业可选', 'r=' + r.faction + '-' + r.id, r.level);
   (r.traits || []).concat(r.subgroup ? r.subgroup.traits || [] : []).forEach((t) => {
-    sPush('tra', t.name, nm, '', r.level);
+    // 带上种族号：种族页那张跨种族全表撤了，点搜索结果要直接落到这个种族的详情上
+    sPush('tra', t.name, nm, 'r=' + r.faction + '-' + r.id, r.level);
   });
 });
 (cl.classes || []).forEach((c) => {
