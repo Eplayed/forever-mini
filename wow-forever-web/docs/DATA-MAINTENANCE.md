@@ -26,13 +26,13 @@
 
 | 板块 | 源 | 一条命令 | 备注 |
 | --- | --- | --- | --- |
-| 天赋树 | 两家解包站（fengshen / nieyi）双源 | `tools/refresh.sh talents` | 双源按坐标对齐，名字分歧两个都留 |
+| 天赋树 | 两家解包站（fengshen / nieyi）双源 | `tools/refresh.sh talents` | 双源按坐标对齐，名字分歧两个都留。**2026-10-12 起默认强制现读**（本地有快照也不偷懒，否则拿旧译名对新格位就是造事实）；`--use-cache` 只在离线应急时用，且会把"用了快照"写进产物。`classes.json` 的 `talentCount / nameVerified` 由这一步同步，不再手抄 |
 | 副本与掉落 | 解包站副本卡片（浏览器渲染） | `tools/refresh.sh dungeons` | 掉落只取"谁掉什么"，**不写百分比** |
 | 世界线 | 解包站 `_shuju/<发布号>/*.json` | `tools/refresh.sh world` | 发布号每次从页面现读，别手抄 |
 | 专业与配方 | 解包站专业页 | `tools/refresh.sh prof` | 野营那一页没有结构化数据，不编 |
 | 客户端改动清单 | 解包站 `_shuju/…/changes.json` | `tools/refresh.sh changes` | **入库前就删掉前后对照句子**，只留名称与类别 |
 | 传承（专长树 / 挑战 / 奖励） | 解包站 `_shuju/…/legacy.json` | `tools/refresh.sh legacy` | 同样**落盘前删句子**：每层效果说明、常见问题、领取说明一律不进仓库；未公开的槽位留空标"未公开" |
-| 官方中文（技能四态 / 种族） | 国服官方公告页 | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻 |
+| 官方中文（技能四态 / 种族） | 国服官方公告页（现有 4 篇职业深度解析：猎人+德鲁伊、牧师+战士、法师+萨满祭司、潜行者+术士） | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻。**2026-10-12 采到第 4 篇后，466 个天赋名里 462 个（99.1%）能与官网对上**；只剩圣骑士没发稿，它的三个系名保持现状不猜 |
 | 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
 | 原画（职业背景 / 载入图 / 小地图） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退 |
 | 副本排队元数据 | 解包站 `_shuju/<发布号>/dungeons.json`（35 条，**没有首领与掉落**） | `python3 tools/scrape-wclbox-shuju.py --group dungeons` | 已接进 `refresh.sh dungeons`：补阵营与所在区域；它的 `enter` 列对不上客户端表，**不采** |
@@ -47,12 +47,12 @@
 | --- | --- | --- |
 | **每次开工第一步** | `tools/refresh.sh status`：看缺口与哪些上游超过 14 天没重抓 | 每次 |
 | 解包站发了新构建包 | 对应板块 `refresh.sh <板块>` | 当天 |
-| 官方中文发了新公告（尤其 5 个还没有中文名的职业） | `refresh.sh official` + 译名体检 | 当天 |
+| 官方中文发了新公告（尤其**圣骑士**——9 个职业里只剩它没有中文解析稿） | `refresh.sh official` + 译名体检 | 当天 |
 | 每周固定 | `tools/audit-assets.py`（素材缺口）+ `tools/refresh.sh check` | 周一 |
 | **2026-11-05 正式服上线后 48 小时内** | 整批重核：全部板块重跑 + 覆盖率重算 + 溯源页写清变化 | 已在 `method.json` 里对外承诺 |
 | 每次改界面或数据要提交 | `tools/refresh.sh check`，界面改动还要补截图 | 提交前 |
 
-## 四、四道门禁各拦什么
+## 四、五道门禁各拦什么
 
 | 门禁 | 命令 | 拦的事故 |
 | --- | --- | --- |
@@ -60,6 +60,7 @@
 | 译名逐字回查 | `python3 tools/audit-translations.py --strict` | 我们抄错了官方原句：**声称 L0/L1 的条目**拿回它自己声明的那个 URL 里逐字找不到 → 退出码非 0。L2/L3 的未命中与"去掉排版空格才命中"只出警告（后者是官方页用强调标签把词从中间拆开的转换产物，squeeze 只删汉字之间的空白，不可能把错词拼成对词）；但并写形式指代的词（官方写「冰霜与火焰陷阱」）必须逐条走 `src/data/audit-exceptions.json` 留人工判定，不能靠降级蒙过去 |
 | 界面回归 | `python3 tools/site-check.py`（加 `--app` 跑新站） | 页面渲染坏、点不动、375px 点击目标偏小、**渲染后的文字里出现维护者措辞**、搜索跳过去没筛好 |
 | 两栈对拍 | `python3 tools/app-parity.py --strict` | 迁一页时新旧两版内容悄悄不一样（结构 / 类名 / 正文 / 链接 / 图片） |
+| 视觉回归 | `python3 tools/visual-check.py --check` | 改完"像不像"以前没有任何机器能判（历史上三次走样都是人眼在截图里发现的）。两层：像素层查整页尺寸 + 变化占比 + 平均色差，生效值指纹层查每页 121 个**实际生效**的样式值——把卡片圆角从 3px 改回 8px 这种像素看不出来的漂移，只有指纹层点得名。取图默认从 git 版本取（`--rev`），不受正在改的工作区影响；像素基线 18 MB 是本机资产不进仓库，130 KB 的指纹进仓库。**没挂进 `refresh.sh`**：合法改版必须人工看过差异图才允许 `--make` 重冻 |
 
 **对账（不是门禁，不拦提交）**：`python3 tools/audit-wowhead.py --write` → `docs/DATA-WOWHEAD-<日期>.md`。
 拿 wowhead 的无限服天赋表对**条目数、英文原名、法术 ID、改动状态、图标文件名**——
