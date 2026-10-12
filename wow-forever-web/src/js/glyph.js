@@ -58,8 +58,9 @@ window.Glyph = (function () {
     // 有本地转存的客户端原画就盖在自绘横幅上；图取不到时（onerror）自动露出自绘版
     var photo = opts.art ? '<img class="dbn-art" src="' + esc(opts.art) + '" alt="" loading="lazy" ' +
       'onerror="this.className=\'dbn-art bad\'">' : '';
+    // 2026-10-12 站主决定：横幅上的素材出处角标（客户端原画 · 本地转存 / 示意图 · 非游戏原画）撤掉。
+    // 那是讲我们自己素材来路的备注，玩家不需要看；出处集中在溯源页说。
     return '<div class="dbn2"><span class="dbn2-shade"></span>' + art + photo +
-      '<span class="dbn2-mark">' + (opts.art ? '客户端原画 · 本地转存' : '示意图 · 非游戏原画') + '</span>' +
       (opts.seal ? '<span class="dbn2-seal">' + esc(opts.seal) + '</span>' : '') +
       '<span class="dbn2-txt">' +
       (opts.range ? '<span class="dbn2-r">' + esc(opts.range) + '</span>' : '') +

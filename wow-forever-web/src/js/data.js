@@ -10,9 +10,18 @@ window.WowData = (function () {
       });
     return cache[path];
   }
+  /* 2026-10-12 用户决定：这是一个给游戏玩家看的资料站，内容页只留标题和数据。
+     分级徽标（已官方核实 / 待实测 / 缺数据）、逐条来源块、覆盖率条这类"讲我们自己数据质量"的东西
+     不再上内容页——出处与分级全部集中在溯源页（provenance.html）说，数据层里照旧带着
+     provenance 与 level，build-data.js 的卡口一条没放松。
+     做成按页面开关而不是去 20 多个调用点各删一遍，是为了让这条规矩有个唯一的落点：
+     下一轮加新页面时不会又顺手把徽标画回去，site-check 也照这一条反向断言。 */
+  var SHOW_PROV = typeof document !== 'undefined' && !!document.body &&
+    document.body.getAttribute('data-page') === 'provenance';
   /* 覆盖率一律读 src/data/scale.json（由 build-data.js 在校验时算出并写出）。
      这里以前另算一份，只数术语 + 副本 + 职业，和卡口那份对不上，同一站两个覆盖率互相打脸，已删。 */
   function covBar(t) {
+    if (!SHOW_PROV) return '';
     var keys = ['L0', 'L1', 'L2', 'L3'], names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
     var total = Math.max(t.total, 1);
     return '<div class="cov">' + keys.map(function (k) {
@@ -22,6 +31,7 @@ window.WowData = (function () {
   var PILL = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
   function pillName(level) { return PILL[level] || PILL.L3; }
   function pill(level) {
+    if (!SHOW_PROV) return '';
     var l = PILL[level] ? level : 'L3';
     return '<span class="pill ' + l + '">' + PILL[l] + '</span>';
   }
@@ -29,6 +39,7 @@ window.WowData = (function () {
     datamine_en: '客户端数据表',
     fan_db: '第三方资料站', media_cn: '中文转载', video: '实测视频', 'site-promise': '本站承诺', 'site-note': '本站说明' };
   function sources(list) {
+    if (!SHOW_PROV) return '';
     if (!list || !list.length) return '<div class="dim" style="font-size:12px">无来源记录</div>';
     return '<ul class="src">' + list.map(function (s) {
       return '<li><span class="st ' + esc(s.type) + '">' + esc(TYPE_LABEL[s.type] || s.type) + '</span>' +
