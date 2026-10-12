@@ -7,16 +7,16 @@
 
   <template v-else-if="c">
     <!-- 页首职业带：套全站页首 banner 件 .dhero，只补两列布局与 158px 立绘框（CSS 见 app.css 的 .clhero 一节）。
-         英文原名吃这一职业的职业色；职业色唯一来源是 lib/glyph.js 那张表，不在这里另抄一份。 -->
+         英文原名吃这一职业的职业色；职业色唯一来源是 lib/glyph.js 那张表，不在这里另抄一份。
+         2026-10-12 站主决定：素材出处角标（客户端原画 · 本地转存）与讲数据出处的备注句已撤，
+         出处集中在溯源页（provenance.html）。 -->
     <section class="dhero clhero" :style="clStyle">
       <span class="dx"></span>
       <div class="db">
         <div class="clt">
           <div class="kicker">{{ kicker }}</div>
           <h1 class="pt">{{ c.cn || '未定名' }}<span v-if="c.en" class="clen">{{ c.en }}</span></h1>
-          <div class="clline">三系 <b>{{ trees.length }}</b> · 天赋节点 <b>{{ tcnt }}</b> · 客户端改动 <b>{{ bc.all || 0 }}</b> 条 · 官方中文整句 <b>{{ abs.length }}</b> 条</div>
-          <p class="clnote">{{ c.note || FALLBACK_NOTE }}</p>
-          <span class="dmark">{{ art ? '客户端原画 · 本地转存' : '自绘占位 · 非游戏原画' }}</span>
+          <div class="clline">三系 <b>{{ trees.length }}</b> · 天赋节点 <b>{{ tcnt }}</b> · 改动 <b>{{ bc.all || 0 }}</b> 条 · 技能说明 <b>{{ abs.length }}</b> 条</div>
         </div>
         <div class="chart">
           <ClassTile :class-id="c.id" :cn="c.cn" :icon-key="c.iconKey" mod="lg" />
@@ -54,15 +54,14 @@
     <div class="two">
       <section class="card">
         <h2>这一职业有什么</h2>
-        <div class="kv"><span>职业中文名</span><b>{{ c.cn }}{{ c.en ? ' / ' + c.en : '' }} <LevelPill :level="c.nameLevel || 'L3'" /> <button type="button" class="ghost" :data-src="'cls-' + c.id" :data-name="c.cn" :aria-label="'查看「' + c.cn + '」的来源'" @click="openBox('cls-' + c.id, c.cn, c.provenance)">{{ boxFor === 'cls-' + c.id ? '收起' : '来源' }}</button></b></div>
+        <div class="kv"><span>职业中文名</span><b>{{ c.cn }}{{ c.en ? ' / ' + c.en : '' }}</b></div>
         <div class="kv"><span>三系</span><b>{{ treeNames }}</b></div>
         <div class="kv"><span>天赋节点</span><b>{{ tcnt }} 个<component :is="calcLink.to ? 'router-link' : 'a'" v-bind="calcLink">打开计算器 →</component></b></div>
         <div class="kv"><span>名称与官网中文一致</span><b>{{ vcnt }} / {{ tcnt }}</b></div>
         <div class="kv"><span>两个来源叫法不同</span><b>{{ cflTxt }}</b></div>
-        <div class="kv"><span>官方中文整句</span><b>{{ abs.length ? abs.length + ' 条' : '' }}<span v-if="!abs.length" class="dim">还没有</span></b></div>
-        <div class="kv"><span>客户端改动</span><b>{{ bc.all || 0 }} 条{{ bc.changed ? '（其中 ' + bc.changed + ' 条与经典旧世不同）' : '' }} <button type="button" class="ghost" :data-src="'chg-' + c.id" :data-name="c.cn + '的改动清单'" :aria-label="'查看「' + c.cn + '的改动清单」的来源'" @click="openBox('chg-' + c.id, c.cn + '的改动清单', firstChProv)">{{ boxFor === 'chg-' + c.id ? '收起' : '来源' }}</button></b></div>
-        <div class="kv"><span>本站资料完整度</span><b>{{ rankTxt }}</b></div>
-        <p class="note">这是按本站能核对的条目数排的资料完整度，是本站自己整理的排序，不是职业强度排行。</p>
+        <div class="kv"><span>技能说明</span><b>{{ abs.length ? abs.length + ' 条' : '' }}<span v-if="!abs.length" class="dim">还没有</span></b></div>
+        <div class="kv"><span>改动条目</span><b>{{ bc.all || 0 }} 条{{ bc.changed ? '（其中 ' + bc.changed + ' 条与经典旧世不同）' : '' }}</b></div>
+        <div class="kv"><span>资料完整度</span><b>{{ rankTxt }}<span class="dim">（本站整理，不是强度排行）</span></b></div>
         <template v-if="raceRows.length">
           <h3 class="rdh">谁可以选这一职业</h3>
           <div v-for="r in raceRows" :key="r.fac" class="racerow">
@@ -72,21 +71,14 @@
           </div>
           <p v-if="skyCfl" class="conf">天裔能选几个职业，两份说法还没对上（同页两张矩阵表与导语不一致），<a :href="racesHref">种族页两个都留着</a></p>
         </template>
-        <div class="srcbox" id="srcbox" :style="{ display: box ? 'block' : 'none' }">
-          <h3 v-if="box">{{ box.name }} · 来源与核对</h3>
-          <SourceList v-if="box" :list="box.list" />
-        </div>
       </section>
 
       <section class="card">
         <h2>技能变化<span class="dim mono">{{ sel ? ' 只看 ' + sel : ' 三系都列' }}</span><span class="dim mono"> · {{ shown.length }} 条</span></h2>
-        <p class="dim">只列名称、归属与客户端解包给出的改动类别，不复制别人的逐字前后对照；官方中文稿里出现过的名字，把原句整句贴在下面。</p>
-        <div v-if="noAb" class="note">{{ noAb }}</div>
         <div class="chgs">
         <template v-if="groups.length">
           <template v-for="g in groups" :key="g.k">
-            <div class="lgrp"><b>{{ g.label }}</b><span class="dim">{{ g.rows.length }} 条</span>
-              <span v-if="g.k === 'unchanged'" class="dim">客户端里这条和经典旧世一样</span></div>
+            <div class="lgrp"><b>{{ g.label }}</b><span class="dim">{{ g.rows.length }} 条</span></div>
             <div class="scrollx"><table class="entab chtab"><thead><tr><th class="ich">名称</th><th>类别</th><th>哪一系</th></tr></thead><tbody>
               <tr v-for="(x, i) in g.rows" :key="x.id || (g.k + i)">
                 <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id || x.nameCn" :cn="x.nameCn" /><b>{{ x.nameCn || '未命名' }}</b><span v-if="x.maxRank" class="dim"> · 最多 {{ x.maxRank }} 层</span><span v-if="abm[x.nameCn]" class="quote">{{ abm[x.nameCn].quote }}</span></td>
@@ -96,18 +88,19 @@
             </tbody></table></div>
           </template>
         </template>
-        <div v-else class="empty">这一系还没有客户端改动记录，等下一次客户端更新再看。</div>
+        <div v-else class="empty">这一系没有改动条目。</div>
         </div>
-        <div v-if="abs.length" class="chipsrow"><a :href="bookHref">这一职业在技能书里的四态整句 →</a></div>
+        <div v-if="abs.length" class="chipsrow"><a :href="bookHref">这一职业在技能书里的条目 →</a></div>
       </section>
     </div>
 
     <section class="card">
       <h2>接着看这一职业</h2>
       <div class="tools6">
+        <!-- 出口卡同样只留标题与条数，讲"这页数据从哪来、本站不做什么"的那句说明已删 -->
         <component v-for="t in exits" :is="t.link.to ? 'router-link' : 'a'" v-bind="t.link" :key="t.name" class="tool plate">
           <span class="tico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1" /><path d="M9 12h6M12 9v6" /></svg></span>
-          <h3>{{ t.name }}</h3><p>{{ t.desc }}</p>
+          <h3>{{ t.name }}</h3>
           <span class="foot"><em>{{ t.read }}</em><i>进入 →</i></span>
         </component>
       </div>
@@ -129,8 +122,6 @@ import { legacyUrl, linkFor } from '../lib/nav.js';
 import { CLASS_COLOR } from '../lib/glyph.js';
 import ClassTile from '../components/ClassTile.vue';
 import IconCell from '../components/IconCell.vue';
-import LevelPill from '../components/LevelPill.vue';
-import SourceList from '../components/SourceList.vue';
 
 const CL_STATE = { added: '新增', modified: '改动', removed: '移除', unchanged: '未变' };
 const CL_ORDER = ['added', 'modified', 'removed', 'unchanged'];
@@ -141,8 +132,6 @@ const base = ref(null);
 const tree = ref(null);
 const err = ref('');
 const sel = ref('');
-const box = ref(null);
-const boxFor = ref('');
 const artBad = ref(false);
 const route = useRoute();
 const router = useRouter();
@@ -162,7 +151,7 @@ const cid = computed(() => {
   return hit ? hit.id : ((CLS.value[0] || {}).id || '');
 });
 watch(cid, (v) => {
-  sel.value = ''; box.value = null; boxFor.value = ''; artBad.value = false;
+  
   if (!v) return;
   load('data/talents/' + v + '.json').then((d) => { tree.value = d; }).catch(() => { tree.value = null; });
 });
@@ -172,10 +161,6 @@ function pick(id) {
   if (id !== cid.value) router.replace({ path: '/classes', query: { c: id } });
 }
 function pickSpec(name) { sel.value = sel.value === name ? '' : name; }
-function openBox(id, name, list) {
-  if (boxFor.value === id && box.value) { box.value = null; boxFor.value = ''; return; }
-  boxFor.value = id; box.value = { name: name, list: list || [] };
-}
 function altTip(t) {
   return t.nameConflict && t.nameAlt
     ? '这一系有两个叫法：官方中文写「' + t.nameCn + '」，另一来源译作「' + t.nameAlt + '」，待定稿' : null;
@@ -217,7 +202,6 @@ const abm = computed(() => {
 const allCh = computed(() => (CHR.value.items || []).filter((x) => x.classId === cid.value));
 const shown = computed(() => allCh.value.filter((x) => !sel.value || x.tree === sel.value));
 const bc = computed(() => ((CHR.value.meta || {}).byClass || []).filter((x) => x.classId === cid.value)[0] || {});
-const firstChProv = computed(() => ((allCh.value[0] || {}).provenance) || []);
 const rank = computed(() => (SC.value.classRank || []).filter((x) => x.classId === cid.value)[0] || {});
 const rankTxt = computed(() => (rank.value.share !== undefined ? rank.value.share + '%' : '未排') +
   (rank.value.place ? ' · 第 ' + rank.value.place + ' 位' : ''));
@@ -258,19 +242,17 @@ const calcLink = computed(() => {
     : { href: l.href + '?c=' + encodeURIComponent(cid.value) };
 });
 const exits = computed(() => {
+  // 与旧站同一份三个出口：只给标题与条数，不再各带一句说明
   const items = [
-    ['talent.html', '天赋计算器', tcnt.value + ' 个节点 · 三棵真树',
-      '格子就是客户端里的天赋本身：位置、每层上限、与经典旧世的差异都按真结构摆。', { c: cid.value }],
-    ['skills.html', '技能书', abs.value.length + ' 条官方中文整句（这一职业）',
-      '中英对照与新增 / 改动 / 改名 / 移除四态，整句出自国服官方公告，名称不在句里就不收。', null],
-    ['chooser.html', '玩法问答', '答完题才知道这一职业合不合手',
-      '按玩法取向问答，不给强度排行——那是本站红线。', null]];
+    ['talent.html', '天赋计算器', tcnt.value + ' 个节点 · 三系天赋树', { c: cid.value }],
+    ['skills.html', '技能书', abs.value.length + ' 条技能说明（这一职业）', null],
+    ['chooser.html', '玩法问答', '答完题才知道这一职业合不合手', null]];
   return items.map((x) => {
     const l = linkFor(x[0]);
     return {
-      name: x[1], read: x[2], desc: x[3],
-      link: l.to ? { to: { path: l.to, query: x[4] || {} } }
-        : { href: l.href + (x[4] ? '?c=' + encodeURIComponent(x[4].c) : '') }
+      name: x[1], read: x[2],
+      link: l.to ? { to: { path: l.to, query: x[3] || {} } }
+        : { href: l.href + (x[3] ? '?c=' + encodeURIComponent(x[3].c) : '') }
     };
   });
 });

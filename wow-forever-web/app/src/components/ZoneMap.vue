@@ -3,16 +3,16 @@
     <img :src="src" :alt="alt + '的区域小地图'" loading="lazy" decoding="async" width="560" height="373"
          @error="broken = true">
     <b v-if="mark" class="zmark" aria-hidden="true" :style="pos"></b>
-    <span class="dbn2-mark">客户端地图 · 本地转存</span>
   </div>
   <div v-else class="zmap none">
-    <span class="dim">{{ broken ? '这张小地图本地文件读不出来' : '这一张客户端没有切出小地图' }}</span>
     <b v-if="mapId" class="mono">地图编号 {{ mapId }}</b>
   </div>
 </template>
 
 <script setup>
 /* 区域小地图块：本地图 + 数据里的百分比标记点。
+   2026-10-12 用户决定：素材出处角标（客户端地图 · 本地转存）与"这一张客户端没有切出小地图"
+   这类讲我们数据的句子不上内容页，缺图时只留地图编号这一个数据值。
    标记点位置是数据不是样式，所以用 :style 绑定（旧站是渲染后拿 JS 写 left/top，
    那正是 innerHTML 时代没法做的写法）。图缺失时不放假图，退回文字 + mapId。 */
 import { computed, ref, watch } from 'vue';

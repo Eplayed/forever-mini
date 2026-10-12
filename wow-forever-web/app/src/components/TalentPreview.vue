@@ -3,7 +3,6 @@
     <span class="bgart" aria-hidden="true" :style="bgStyle"></span>
     <div class="mline">工具 · 天赋 · <b>{{ S.classes || 0 }}</b> 职业 <b>{{ S.talentNodes || 0 }}</b> 节点</div>
     <h2>先看一棵真树，再进计算器</h2>
-    <p class="dim">格子就是客户端里的天赋本身，位置、每层上限、与经典旧世的差异都按真结构摆；这里只能看，点格子进计算器并高亮那一格。</p>
     <div class="pvpicks">
       <button v-for="(tr, i) in trees" :key="tr.n" type="button" class="pick" :class="{ on: i === ti }"
               :aria-pressed="i === ti ? 'true' : 'false'" @click="ti = i">
@@ -45,16 +44,10 @@
             <b>{{ c.cn }}</b><span class="dim mono">{{ c.talentCount || 0 }} 天赋</span>
           </button>
         </div>
-        <p class="note">树的结构、每层上限与前置都来自客户端解包（第三方资料站转述），格子位置就是游戏里的位置；层级点数门槛按 5 / 10 / 15 / 20 / 25 / 30 摆，未在游戏内核实。角标是与经典旧世对照的结果，没角标 = 没有对照结果，不代表没变。</p>
         <component :is="linkFor(calcFile(cid, ti)).to ? 'router-link' : 'a'" v-bind="linkFor(calcFile(cid, ti))" class="cta">
           打开{{ cnOf }} · {{ (trees[ti] || {}).n || '' }} 的完整计算器（能加点、能存方案）→
         </component>
       </aside>
-    </div>
-    <div class="mline" style="margin-top:var(--s4)">名称与官网中文一致
-      <b>{{ S.talentVerified || 0 }} / {{ S.talentNodes || 0 }}</b></div>
-    <div class="bar" role="img" :aria-label="'天赋名称与官网中文一致 ' + (S.talentVerified || 0) + ' / ' + (S.talentNodes || 0) + ' 个节点'">
-      <i :style="{ width: share + '%' }"></i>
     </div>
   </section>
 </template>
@@ -90,10 +83,8 @@ const bgStyle = computed(() => {
   const f = (props.art.classes || {})[cid.value];
   return f ? { backgroundImage: 'url(' + f + ')' } : {};
 });
-const share = computed(() => {
-  const t = S.value.talentNodes || 0;
-  return t ? ((S.value.talentVerified || 0) / t * 100).toFixed(1) : '0';
-});
+// 2026-10-12 站主决定：卡尾那条"名称与官网中文一致 462 / 466"的读数与进度条撤下，
+// 覆盖率只在溯源页给一处，所以这里不再算 share。
 
 function pick(id) { cid.value = id; ti.value = 0; }
 function keyOf(nd) { return cid.value + '-' + ti.value + '-' + nd[0] + '-' + nd[1]; }

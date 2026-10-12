@@ -31,7 +31,6 @@
                      class="gsr" v-bind="r.link">
             <b><template v-for="(p, j) in hlParts(r.it[1], q)" :key="j"><template v-if="p.hit"><mark>{{ p.t }}</mark></template><template v-else>{{ p.t }}</template></template></b>
             <span class="dim">{{ r.it[2] }}</span>
-            <em v-if="r.it[4] && r.it[4] !== 'L0'" class="lv" :class="r.it[4]">{{ PILL_NAME[r.it[4]] }}</em>
           </component>
         </div>
         <p v-if="groups.length" class="gsl dim mono">命中 {{ hitTotal }} 条，这里先列 {{ shownCount }} 条</p>
@@ -44,7 +43,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { load } from '../lib/data.js';
-import { hlParts, PILL_NAME } from '../lib/fmt.js';
+import { hlParts } from '../lib/fmt.js';
 import { GROUP_SHOWN, itemLink, searchGroups, groupLink } from '../lib/search.js';
 
 const props = defineProps({ total: { type: Number, default: 0 }, initial: { type: String, default: '' } });

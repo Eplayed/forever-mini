@@ -1,5 +1,6 @@
 <template>
-  <div class="cov">
+  <!-- 覆盖率条属于"讲我们数据质量"的东西，2026-10-12 起不上内容页（见 lib/prov.js） -->
+  <div v-if="SHOW_PROV" class="cov">
     <i v-for="s in segs" :key="s.k" :class="s.k" :style="{ width: s.w }" :title="s.title"></i>
   </div>
 </template>
@@ -11,6 +12,7 @@
    注意 v-for 与 v-if 不能写在同一个元素上（Vue 3 里 v-if 先算，拿不到循环变量），所以先算 segs。 */
 import { computed } from 'vue';
 import { PILL_NAME } from '../lib/fmt.js';
+import { SHOW_PROV } from '../lib/prov.js';
 
 const props = defineProps({ cov: { type: Object, required: true } });
 const KEYS = ['L0', 'L1', 'L2', 'L3'];

@@ -10,14 +10,14 @@ import SourceList from '../src/components/SourceList.vue';
 import HlText from '../src/components/HlText.vue';
 
 describe('LevelPill', () => {
-  it('除颜色外一定带文字（红线：不靠颜色承载信息）', () => {
-    const w = mount(LevelPill, { props: { level: 'L2' } });
-    expect(w.classes()).toContain('pill');
-    expect(w.classes()).toContain('L2');
-    expect(w.text()).toBe('待实测');
+  // 2026-10-12 用户决定：内容页只留标题与数据，分级徽标不上页面（出处集中在溯源页）。
+  // 这两条钉的是"不许再画回去"，不是徽标长什么样——纯函数的映射由 fmt.spec 管。
+  it('内容页不渲染分级徽标', () => {
+    expect(mount(LevelPill, { props: { level: 'L2' } }).text()).toBe('');
+    expect(mount(LevelPill, { props: { level: 'L2' } }).find('.pill').exists()).toBe(false);
   });
-  it('脏等级落到 L3 而不是留空', () => {
-    expect(mount(LevelPill, { props: { level: 'x' } }).text()).toBe('缺数据');
+  it('脏等级也不会漏出一个空壳', () => {
+    expect(mount(LevelPill, { props: { level: 'x' } }).text()).toBe('');
   });
 });
 
@@ -50,19 +50,11 @@ describe('ClassTile', () => {
 });
 
 describe('CovBar', () => {
-  it('四段宽度加起来等于 100%', () => {
+  // 覆盖率条属于"讲我们数据质量"的东西，2026-10-12 起不上内容页（见 src/lib/prov.js）
+  it('内容页不渲染覆盖率条', () => {
     const w = mount(CovBar, { props: { cov: { L0: 366, L1: 114, L2: 360, L3: 2, total: 842 } } });
-    const sum = w.findAll('i').reduce((a, i) => a + parseFloat(i.attributes('style').match(/([\d.]+)%/)[1]), 0);
-    expect(Math.round(sum)).toBe(100);
-  });
-  it('缺 total 时按四段之和兜底（旧站这里就是没兜住才把条画爆的）', () => {
-    const w = mount(CovBar, { props: { cov: { L0: 50, L1: 0, L2: 50, L3: 0 } } });
-    expect(w.findAll('i').length).toBe(2);
-    expect(w.findAll('i')[0].attributes('title')).toContain('已官方核实 50 条');
-  });
-  it('零计数不渲染段，避免 0 宽的假分段', () => {
-    const w = mount(CovBar, { props: { cov: { L0: 10, L1: 0, L2: 0, L3: 0, total: 10 } } });
-    expect(w.findAll('i').length).toBe(1);
+    expect(w.find('.cov').exists()).toBe(false);
+    expect(w.text()).toBe('');
   });
 });
 
@@ -73,13 +65,15 @@ describe('ZoneMap', () => {
     });
     expect(w.find('img').attributes('alt')).toBe('莫高雷的区域小地图');
     expect(w.find('.zmark').attributes('style')).toContain('left: 32.7%');
-    expect(w.text()).toContain('本地转存');
+    // 素材出处角标不上内容页了（2026-10-12），但图与标记点照旧
+    expect(w.text()).not.toContain('本地转存');
   });
   it('客户端没切图时给地图编号与说明，不放假图', () => {
     const w = mount(ZoneMap, { props: { mapFile: '', mapId: 2548, alt: '河林' } });
     expect(w.find('img').exists()).toBe(false);
     expect(w.classes()).toContain('none');
     expect(w.text()).toContain('地图编号 2548');
+    expect(w.text()).not.toContain('没有切出小地图');
   });
   it('图坏了也退回文字态', async () => {
     const w = mount(ZoneMap, { props: { mapFile: 'img/art/maps/9999.webp', mapId: 9999, alt: 'x' } });
@@ -97,35 +91,28 @@ describe('ZoneCard', () => {
     await w.trigger('click');
     expect(w.emitted('open')[0]).toEqual(['泽风岛']);
     expect(w.text()).toContain('8 个稀有');
-    expect(w.text()).toContain('客户端里还没有飞行路线');
+    // 「没有飞行路线」回答的是玩家会问的事（这块地方能不能飞），与旧站 zoneCard 同一句
+    expect(w.text()).toContain('没有飞行路线');
   });
-  it('这一版没有数据的区域不可点，也不发 open', async () => {
+  it('这一版没有数据的区域不可点，也不发 open，卡上不留占位句', async () => {
     const w = mount(ZoneCard, { props: { z: Object.assign({}, z, { rareCount: 0, bookCount: 0 }) } });
     expect(w.classes()).not.toContain('lk');
     await w.trigger('click');
     expect(w.emitted('open')).toBeFalsy();
-    expect(w.text()).toContain('这一版还没有数据');
+    // 旧站那一格是空 span，不写"这一版还没有数据"这种讲我们自己的话
+    expect(w.find('.zcnt').text()).toBe('');
   });
 });
 
 describe('SourceList', () => {
-  it('没有 url 时不能渲染空链接（旧站被无障碍审计抓到过）', () => {
-    const w = mount(SourceList, { props: { list: [{ type: 'site-note', note: '本站说明' }] } });
-    expect(w.find('a').exists()).toBe(false);
-    expect(w.text()).toContain('无外部链接');
-  });
-  it('有 url 才给可点开的来源，并带上核对日期与原句', () => {
-    const w = mount(SourceList, { props: { list: [{
+  // 逐条来源不上内容页（2026-10-12 用户决定）：数据层照旧带 provenance，出处在溯源页集中说
+  it('内容页不渲染来源块，也不留空壳', () => {
+    const full = mount(SourceList, { props: { list: [{
       type: 'datamine_cn', url: 'https://wowforever.wclbox.com/xiyou', note: '客户端解包',
-      checkedAt: '2026-10-09', quote: '咆鼻'
-    }] } });
-    expect(w.find('a').attributes('rel')).toBe('noopener');
-    expect(w.find('a').text()).toContain('wclbox.com');
-    expect(w.text()).toContain('核对于 2026-10-09');
-    expect(w.find('.quote').text()).toContain('原文：咆鼻');
-  });
-  it('空清单也要说明，不留空白块', () => {
-    expect(mount(SourceList, { props: { list: [] } }).text()).toContain('无来源记录');
+      checkedAt: '2026-10-09', quote: '咆鼻' }] } });
+    expect(full.find('.src').exists()).toBe(false);
+    expect(full.text()).toBe('');
+    expect(mount(SourceList, { props: { list: [] } }).text()).toBe('');
   });
 });
 

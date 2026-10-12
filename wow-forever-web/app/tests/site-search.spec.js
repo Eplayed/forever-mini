@@ -67,13 +67,13 @@ describe('SiteSearch 全站搜索框', () => {
       .toContain('professions.html?p=engineering&q=%E6%BD%9C%E8%A1%8C%E8%80%8552%E5%9E%8B');
     w.unmount();
   });
-  it('分级不是 L0 的结果除颜色外还带文字（红线：不靠颜色承载信息）', async () => {
+  it('搜索结果不再挂分级文字（2026-10-12：内容页只留标题与数据）', async () => {
     const w = mount(SiteSearch, { props: { total: 4 }, ...ROUTER });
     await w.find('input').setValue('潜行者');
     await flushPromises();
-    const lv = w.find('.gsr .lv');
-    expect(lv.text()).toBe('缺数据');
-    expect(lv.classes()).toContain('L3');
+    expect(w.findAll('.gsr').length).toBeGreaterThan(0);
+    expect(w.find('.gsr .lv').exists()).toBe(false);
+    expect(w.find('.gsr').text()).not.toContain('缺数据');
     w.unmount();
   });
   it('搜不到时直说没有，不硬凑结果', async () => {
