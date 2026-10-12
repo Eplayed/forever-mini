@@ -1,18 +1,21 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import HomePage from './pages/HomePage.vue';
 import WorldPage from './pages/WorldPage.vue';
+import ClassesPage from './pages/ClassesPage.vue';
 import Unmigrated from './pages/Unmigrated.vue';
 
 /* 哪些旧页已经迁到新站：键是旧站的 html 文件名。
    导航与首页入口都查这张表决定走 router-link 还是链回旧站，避免"迁完一页忘了改链接"。 */
 export const MIGRATED = {
   'index.html': '/',
-  'world.html': '/world'
+  'world.html': '/world',
+  'classes.html': '/classes'
 };
 
 const routes = [
   { path: '/', name: 'home', component: HomePage, meta: { title: '《魔兽世界：无限》中文资料' } },
   { path: '/world', name: 'world', component: WorldPage, meta: { title: '世界：区域、稀有与书' } },
+  { path: '/classes', name: 'classes', component: ClassesPage, meta: { title: '职业：三系、技能变化与可选种族' } },
   // 还没迁的路径不 404，明确告诉用户这页在旧站上
   { path: '/:all(.*)', name: 'unmigrated', component: Unmigrated, meta: { title: '这页还没迁过来' } }
 ];

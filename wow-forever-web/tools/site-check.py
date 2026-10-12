@@ -33,7 +33,7 @@ TODAY = datetime.date.today().isoformat()
 SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 
 PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "raids", "systems", "races",
-         "professions", "world", "legacy", "updates", "rank", "glossary", "provenance"]
+         "professions", "world", "legacy", "updates", "rank", "glossary", "provenance", "classes"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
 # 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
 GAPS_PATH = os.path.join(SRC, "data", "icon-gaps.json")
@@ -613,7 +613,7 @@ def test_races(browser, base):
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
     check("全部二级入口常驻，不用点开",
           len(subs) == len(PAGES) + 1 and all(x in subs for x in ["首页", "区域与稀有", "副本", "团本",
-                                                                  "系统规则", "传承", "排行"]),
+                                                                  "系统规则", "传承", "排行", "职业"]),
           "%d 项：%s" % (len(subs), subs))
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
@@ -2093,6 +2093,184 @@ def test_legacy(browser, base):
     m.close()
 
 
+def test_classes(browser, base):
+    """职业页（docs/PLAN-classes-and-nav-2026-10-12.md 第二节）。
+       这一页的红线是"内容一条都不许写死"，所以判据全部拿 src/data 里的数去对页面文本：
+       页面上那个数与 JSON 现算的数不一致，就是渲染漏了或抄成了常数。"""
+    print("\n[21] 职业页 classes.html")
+    import json
+
+    def j(*p):
+        return json.load(open(os.path.join(SRC, *p), encoding="utf-8"))
+
+    cl = j("data", "classes.json")["classes"]
+    byid = {c["id"]: c for c in cl}
+    war = j("data", "talents", "warrior.json")
+    ch = j("data", "changes.json")["items"]
+    rc = j("data", "races.json")
+    ab = j("data", "abilities.json")
+    sc = j("data", "scale.json")["scale"]
+    war_nodes = sum(len(t.get("nodes") or []) for t in war["trees"])
+    war_chg = [x for x in ch if x.get("classId") == "warrior"]
+    war_races = [r for r in rc["races"] if "warrior" in (r.get("classes") or [])]
+    war_abs = [x for x in (ab.get("items") or []) if x.get("classId") == "warrior"]
+    arms = len([x for x in war_chg if x.get("tree") == "武器"])
+    # 职业色的唯一来源是 glyph.js 那张表，断言也从那里读，不再抄一份十六进制
+    gtxt = open(os.path.join(SRC, "js", "glyph.js"), encoding="utf-8").read()
+    mg = re.search(r"warrior:\s*'(#[0-9a-fA-F]{6})'", gtxt)
+    war_rgb = ""
+    if mg:
+        war_rgb = "rgb(%d, %d, %d)" % tuple(int(mg.group(1)[i:i + 2], 16) for i in (1, 3, 5))
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/classes.html?c=warrior", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    st = page.evaluate("""() => {
+      const t = (s) => { const e = document.querySelector(s); return e ? e.innerText.replace(/\\s+/g, ' ').trim() : ''; };
+      const cs = (s, p) => { const e = document.querySelector(s); return e ? getComputedStyle(e)[p] : ''; };
+      const hero = document.querySelector('.clhero'), chart = document.querySelector('.chart');
+      const on = document.querySelector('nav.main a.nl.on');
+      let onb = null;
+      if (on) { const c = on.cloneNode(true); c.querySelectorAll('.nb').forEach(n => n.remove());
+        onb = { t: c.textContent.trim(), href: on.getAttribute('href'), badge: !!on.querySelector('.nb'),
+                group: (on.closest('.ngrp').querySelector('.ngt') || {}).textContent.trim() }; }
+      return {
+        h1: t('#main h1'), kicker: t('.clhero .kicker'),
+        enColor: cs('.clen', 'color'), chartBorder: cs('.chart', 'borderTopColor'),
+        heroH: hero ? Math.round(hero.getBoundingClientRect().height) : 0,
+        chartW: chart ? Math.round(chart.getBoundingClientRect().width) : 0,
+        heroLine: t('.clhero .clline'), artMark: t('.clhero .dmark'),
+        specs: [...document.querySelectorAll('.spec')].map(s => s.innerText.replace(/\\s+/g, ' ').trim()),
+        specTitles: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('title') || ''),
+        pressed: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('aria-pressed')),
+        rows: document.querySelectorAll('#main table tbody tr').length,
+        chgHead: t('.two .card:nth-of-type(2) h2'),
+        kvs: [...document.querySelectorAll('.kv')].map(x => x.innerText.replace(/\\s+/g, ' ').trim()),
+        chips: [...document.querySelectorAll('.racerow .tag')].map(x => x.innerText.trim()),
+        gaps: [...document.querySelectorAll('ol.q li')].map(x => x.innerText.trim()),
+        exits: [...document.querySelectorAll('.tools6 a')].map(a => a.getAttribute('href')),
+        srcBtns: document.querySelectorAll('#main [data-src]').length,
+        quotes: document.querySelectorAll('#main .quote').length,
+        broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
+        on: onb };
+    }""")
+    check("职业页没有脚本报错、没有坏图", not errs and st["broken"] == 0,
+          "报错 %s / 坏图 %d" % (errs[:2], st["broken"]))
+    check("页首带 300px、立绘框 158px，英文原名与框边都吃职业色",
+          st["heroH"] == 300 and st["chartW"] == 158 and st["enColor"] == war_rgb
+          and st["chartBorder"] == war_rgb,
+          "带高 %s / 框宽 %s / 英文字色 %s / 期望 %s" % (st["heroH"], st["chartW"], st["enColor"], war_rgb))
+    check("页首写的是职业自己的名字与英文原名，不机翻不硬凑",
+          "战士" in st["h1"] and "Warrior" in st["h1"] and st["kicker"] == "CLASS · WARRIOR",
+          "%s ／ %s" % (st["h1"], st["kicker"]))
+    check("页首读数与数据现算一致（节点数、改动条数都来自 JSON）",
+          str(war_nodes) in st["heroLine"] and str(len(war_chg)) in st["heroLine"]
+          and str(len(war_abs)) in st["heroLine"], st["heroLine"])
+    check("客户端原画写明是本地转存，不冒充游戏内图", "本地转存" in st["artMark"], st["artMark"])
+    check("三系卡就是那一职业的三系，卡上是系名与节点数",
+          len(st["specs"]) == 3 and all(t["nameCn"] in s for t, s in zip(war["trees"], st["specs"]))
+          and all(str(len(t["nodes"])) in s for t, s in zip(war["trees"], st["specs"])),
+          json.dumps(st["specs"], ensure_ascii=False))
+    check("两源叫法不同的系，红框悬停把另一个叫法说清楚",
+          st["specTitles"] == ["", "", ""], "战士无分歧：%s" % json.dumps(st["specTitles"], ensure_ascii=False))
+    check("每条改动都占一行，且都带得开来源的按钮",
+          st["rows"] == len(war_chg) * 2 and st["srcBtns"] >= len(war_chg),
+          "行 %d（改动 %d 条）/ 来源按钮 %d" % (st["rows"], len(war_chg), st["srcBtns"]))
+    check("官方中文整句按名字对上，贴的是整句不是改写",
+          st["quotes"] == len(war_abs), "页内整句 %d / 数据 %d" % (st["quotes"], len(war_abs)))
+    page.click(".spec >> nth=0")
+    page.wait_for_timeout(1200)
+    one = page.evaluate("""() => ({ rows: document.querySelectorAll('#main table tbody tr').length,
+      head: (document.querySelector('.two .card:nth-of-type(2) h2') || {}).innerText || '',
+      pressed: [...document.querySelectorAll('.spec')].map(s => s.getAttribute('aria-pressed')) })""")
+    check("点一系就把技能变化收到那一系，条数与选中态同步",
+          one["rows"] == arms * 2 and "只看 武器" in one["head"] and one["pressed"][0] == "true",
+          json.dumps({"行": one["rows"], "标题": one["head"][:24], "选中": one["pressed"]}, ensure_ascii=False))
+    page.click(".spec >> nth=0")
+    page.wait_for_timeout(1100)
+    check("再点一次回到三系都列",
+          page.evaluate("document.querySelectorAll('#main table tbody tr').length") == len(war_chg) * 2)
+    check("可选种族用 races.json 的正式中文名，一个阵营一行全列出来",
+          len(st["chips"]) == len(war_races) and "塑风者天裔" in st["chips"]
+          and "高阶会天裔" in st["chips"], "%d 个：%s" % (len(st["chips"]), st["chips"]))
+    check("天裔两份说法没对上时，这一页也摆出来而不是藏起来",
+          page.evaluate("() => { const c = document.querySelector('#main .conf');"
+                        "return c ? c.innerText : ''; }").count("天裔") >= 1)
+    check("左栏每一行都是现取的数，含资料完整度与两源分歧",
+          len(st["kvs"]) >= 8 and any("资料完整度" in x for x in st["kvs"])
+          and any(str(war_nodes) in x for x in st["kvs"]), "%d 行" % len(st["kvs"]))
+    check("底部三个出口指向计算器、技能书与玩法问答",
+          st["exits"] == ["talent.html?c=warrior", "skills.html", "chooser.html"], str(st["exits"]))
+    check("本页未确认清单由数据推导，至少三条",
+          len(st["gaps"]) >= 3 and all(len(g) > 8 for g in st["gaps"]),
+          json.dumps(st["gaps"][:2], ensure_ascii=False))
+    page.click("#main table tbody tr >> nth=0 >> [data-src]")
+    page.wait_for_timeout(500)
+    src = page.evaluate("() => { const r = [...document.querySelectorAll('.srow')]"
+                        ".find(x => x.style.display !== 'none'); return r ? r.innerText.length : 0; }")
+    check("改动那一条点开能看到是哪个来源核的", src > 20, "来源块 %d 字" % src)
+    page.click(".cls[data-c='hunter']")
+    page.wait_for_timeout(1400)
+    sw = page.evaluate("""() => ({ url: location.search,
+      h1: (document.querySelector('#main h1') || {}).innerText,
+      rows: document.querySelectorAll('#main table tbody tr').length,
+      specs: [...document.querySelectorAll('.spec b')].map(b => b.innerText.trim()) })""")
+    check("换职业是同一页换数据：地址、标题、条数与三系一起变",
+          "c=hunter" in sw["url"] and "猎人" in sw["h1"] and sw["rows"] > 0
+          and sw["specs"] != ["武器", "狂怒", "防护"], json.dumps(sw, ensure_ascii=False))
+    page.goto(base + "/classes.html?c=paladin", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    pal = page.evaluate("""() => { const t = document.querySelector('#main').innerText;
+      return { abs: [...document.querySelectorAll('.kv')].map(x => x.innerText).find(s => /官方中文整句/.test(s)) || '',
+               note: t.indexOf('深度解析稿还没发') >= 0 || t.indexOf('尚未发布') >= 0,
+               quotes: document.querySelectorAll('#main .quote').length,
+               rows: document.querySelectorAll('#main table tbody tr').length }; }""")
+    check("官方中文稿还没发的职业，直说没有而不是凑数",
+          "还没有" in pal["abs"] and pal["note"] and pal["quotes"] == 0 and pal["rows"] > 0,
+          json.dumps(pal, ensure_ascii=False))
+    page.goto(base + "/classes.html?c=not_a_class", wait_until="networkidle")
+    page.wait_for_timeout(1300)
+    check("地址里职业认不出来就落回第一个职业，不白屏",
+          page.evaluate("() => (document.querySelector('#main h1') || {}).innerText || ''")
+          .startswith(byid[cl[0]["id"]]["cn"]) and not page.evaluate("() => !!document.querySelector('.fail')"),
+          page.evaluate("() => (document.querySelector('#main h1') || {}).innerText"))
+    check("导航里「职业」这一格指向新页，当前页高亮且组名跟着亮",
+          bool(st["on"]) and st["on"]["t"] == "职业" and st["on"]["href"] == "classes.html"
+          and st["on"]["group"] == "职业", json.dumps(st["on"], ensure_ascii=False))
+    nav_new = sc.get("navNew") or []
+    if "职业" in nav_new:
+        check("「本站更新」最新一批打了「职业」标签，导航那一格就长出「新」角标",
+              bool(st["on"]["badge"]), json.dumps(st["on"], ensure_ascii=False))
+    else:
+        check("角标跟着「本站更新」的标签走：这一版没打「职业」标签就不该画",
+              not st["on"]["badge"], json.dumps(st["on"], ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "classes-desktop.png"), full_page=True)
+    ctx.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = m.new_page()
+    mp.goto(base + "/classes.html?c=warrior", wait_until="networkidle")
+    mp.wait_for_timeout(1400)
+    mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
+      const els = [...document.querySelectorAll('button, a, input, .cls, .spec')];
+      const small = els.filter(e => { const b = e.getBoundingClientRect();
+        return b.width > 0 && b.height > 0 && Math.min(b.width, b.height) < 44; })
+        .map(e => e.tagName + '.' + String(e.className).split(' ')[0]);
+      const sp = [...document.querySelectorAll('.spec')];
+      return { overflow: document.documentElement.scrollWidth > vw + 1, small,
+        stacked: new Set(sp.map(e => Math.round(e.getBoundingClientRect().top))).size === sp.length,
+        chart: Math.round(document.querySelector('.chart').getBoundingClientRect().width),
+        h1: document.querySelectorAll('h1').length }; }""")
+    check("移动端职业页不横向溢出、三系卡上下排、点击目标够大",
+          not mob["overflow"] and mob["stacked"] and not mob["small"] and mob["h1"] == 1,
+          json.dumps(mob, ensure_ascii=False)[:170])
+    mp.screenshot(path=os.path.join(SHOT_DIR, "classes-mobile.png"), full_page=True)
+    m.close()
+
+
 def test_design_system(browser, base):
     """改版判据（docs/DESIGN-REFRESH-2026-10-10.md 第八节）：颜色对比度、来源轨、
        琥珀金不再兼任"待实测"、动效可关、焦点可见。判据全部取计算值，不看源码。"""
@@ -2164,7 +2342,7 @@ def test_design_system(browser, base):
         if r["claims"]:
             check("%s 页声明了分级/来源，卡片就有来源轨" % name, r["rails"] >= 1,
                   "声明 %d 处 / 上轨 %d 张" % (r["claims"], r["rails"]))
-    check("来源轨在全站铺得开（16 页合计 ≥20 张）", rails_seen >= 20, "%d 张" % rails_seen)
+    check("来源轨在全站铺得开（%d 页合计 ≥20 张）" % len(PAGES), rails_seen >= 20, "%d 张" % rails_seen)
 
     # 琥珀金从此只表示交互与品牌：任何分级徽标都不许用它
     page.goto(base + "/systems.html", wait_until="networkidle")
@@ -2394,11 +2572,13 @@ def test_design_system(browser, base):
             th_bad.append("%s：--hd-h %s 与真实头部高 %s 不一致" % (name, r["hdVar"], r["hd"]))
         if r["head"] and not r["broken"] and r["h1"] == 1:
             head_ok += 1
-    check("16 页页内锚点跳过去都不被吸顶头部压住", not hd_bad, "; ".join(hd_bad[:3]))
+    check("%d 页页内锚点跳过去都不被吸顶头部压住" % len(PAGES), not hd_bad, "; ".join(hd_bad[:3]))
     check("吸顶表头让开头部，且横向滚的容器里不留假吸顶", not th_bad, "; ".join(th_bad[:3]))
-    # 主卡卡片头：14 个内容页里除了首页与天赋页都该有（这两页第一批已单独排过）
-    check("14 个内容页的主卡都换上卡片头（首页/天赋页除外）", head_ok >= 14,
-          "合格 %d / 16 页" % head_ok)
+    # 主卡卡片头：除首页与天赋页外，每个内容页都要有卡片头或页首 banner（这两页第一批已单独排过）
+    # 页数会随新页变化，判据按 len(PAGES) 算，不写死常数——写死的常数在新页上线那天就会悄悄少一页。
+    need_head = len(PAGES) - 2
+    check("%d 个内容页的主卡都换上卡片头或页首 banner（首页/天赋页除外）" % need_head,
+          head_ok >= need_head, "合格 %d / %d 页" % (head_ok, len(PAGES)))
 
     # ④ 动态模块：读数带不能像按钮，"下一件"只能有一条，首页摘要必须收口
     page.goto(base + "/updates.html", wait_until="networkidle")
@@ -2528,6 +2708,7 @@ def main():
             test_updates_rank(browser, base)
             test_search(browser, base)
             test_legacy(browser, base)
+            test_classes(browser, base)
             test_design_system(browser, base)
             test_copy(browser, base)
             test_app(browser, base)

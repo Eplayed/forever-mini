@@ -2,20 +2,25 @@
    但只写"旧文件名"，由 linkFor() 决定这个入口走新站路由还是回旧站——迁一页改一处，不会漏改。 */
 import { MIGRATED } from '../router.js';
 
+/* 与旧站 src/js/app.js 的 NAV 同一份表：项名、顺序、说明文字（title）逐字对齐。
+   两栈各写一份必然会飘（2026-10-12 就发现这里少了「团本」一格、传承的说明也不是同一句），
+   改导航必须两处一起改，改完跑 tools/app-parity.py --strict 与 site-check 的导航那组断言。 */
 export const NAV = [
   { t: '首页', file: 'index.html', d: '数据覆盖率与全部入口' },
   { t: '天赋', items: [
     { file: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
   { t: '职业', items: [
-    { file: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
+    { file: 'classes.html', t: '职业', d: '9 职业逐页：三系与节点数、技能变化、可选种族' },
     { file: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
-    { file: 'legacy.html', t: '传承', d: '21 个专长 · 65 项挑战 · 每完成 1 项得 1 点' }] },
+    { file: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
+    { file: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' }] },
   { t: '种族', items: [
     { file: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
     { file: 'races.html#traits', t: '特长', d: '40 条官方中文原名与整句' }] },
   { t: '世界', items: [
     { file: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
     { file: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
+    { file: 'raids.html', t: '团本', d: '客户端能排到的团队条目与另一份名单对照' },
     { file: 'systems.html', t: '系统规则', d: '规则、区域、装备名的官方中文说法' }] },
   { t: '专业', items: [
     { file: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
@@ -47,4 +52,4 @@ export function isMigrated(file) {
 }
 
 /* 迁完一页要做两件事：路由表加一条，这里标记一下已迁（导航才会走内部链接） */
-export const MIGRATION_NOTE = '新站已迁：首页 / 世界页；其余 12 页仍在旧站。';
+export const MIGRATION_NOTE = '新站已迁：首页 / 世界页 / 职业页；其余 14 页仍在旧站。';

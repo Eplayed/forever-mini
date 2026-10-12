@@ -7,9 +7,12 @@
     { t: '首页', href: 'index.html', d: '数据覆盖率与全部入口' },
     { t: '天赋', items: [
       { href: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
+    /* 2026-10-12：这一组的第一格改成「职业」页（每职业一页），技能书降成二级项。
+       导航项的名字必须与「本站更新」里的板块标签一字不差，角标才会画出来（见 shell() 里那段）。 */
     { t: '职业', items: [
-      { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
+      { href: 'classes.html', t: '职业', d: '9 职业逐页：三系与节点数、技能变化、可选种族' },
       { href: 'skills.html', t: '技能书', d: '中英对照 + 与经典旧世的四态差异' },
+      { href: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
       { href: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' }] },
     { t: '种族', items: [
       { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' },
@@ -1406,6 +1409,239 @@
   var AB_SPEC = { 'beast-mastery': '野兽控制', marksmanship: '射击', survival: '生存', feral: '野性战斗',
     restoration: '恢复', balance: '平衡', discipline: '戒律', holy: '神圣', shadow: '暗影',
     arms: '武器', fury: '狂怒', protection: '防护' };
+  /* ---------- 职业页（每职业一页 · 2026-10-12 补）----------
+     任务书 docs/PLAN-classes-and-nav-2026-10-12.md 第二节。版式按设计稿 3.2 节那四块
+     （页首职业带 300px + 右侧 158px 立绘框 → 三系专精卡 → 左「这一职业有什么」右「技能变化」两栏
+     → 底部三个出口），内容一律从 src/data 现取，一条都不写死：
+       职业名 / 英文原名 / 分级 ← classes.json，职业色 ← glyph.js 那份职业色表；
+       三系、节点数、两源叫法 ← data/talents/<职业>；
+       官方中文整句 ← abilities.json（按职业过滤，只有官方句子里出现的名字才收）；
+       改动类别与计数 ← changes.json 按职业聚合（只列名称与类别，不复制逐字前后对照）；
+       可选种族与阵营 ← races.json 的职业矩阵（用正式中文名，不抄稿子里的简称）。
+     稿子「职业概览」六行里除了可选种族，其余五条（战斗定位 / 核心资源 / 护甲类型 / 可用武器 /
+     团队职责）是写死的常识描述，我们没有能核对的官方中文来源，这一页就不显示，
+     缺的那几行进本页的未确认清单——不把别人的描述句当数据搬进来。 */
+  var CL_STATE = { added: '新增', modified: '改动', removed: '移除', unchanged: '未变' };
+  var CL_ORDER = ['added', 'modified', 'removed', 'unchanged'];
+  var CL_KIND = { talent: '天赋', spell: '技能' };
+  function classPage() {
+    Promise.all([D.load('data/classes.json'), D.load('data/scale.json'),
+      D.load('data/abilities.json'), D.load('data/changes.json'), D.load('data/races.json'),
+      D.load('data/art.json').catch(function () { return {}; })])
+      .then(function (rs) {
+        var CLS = rs[0].classes || [], SC = rs[1].scale || {}, AB = rs[2] || { items: [], meta: {} };
+        var CHR = rs[3] || {}, CH = CHR.items || [], RC = rs[4] || {}, ART = rs[5] || {};
+        var byId = {}; CLS.forEach(function (c) { byId[c.id] = c; });
+        var want = urlQ('c');
+        var f = { c: byId[want] ? want : (CLS[0] || {}).id, s: '' };
+
+        function facName(id) {
+          var hit = (RC.factions || []).filter(function (x) { return x.id === id; })[0];
+          return hit ? hit.nameCn : id;
+        }
+        /* 可选种族：矩阵里存的是职业 id，展示用 races.json 的正式中文名；
+           天裔在两张表里各一行，官方给的名字本来就带子族（塑风者天裔 / 高阶会天裔），照官方写法。 */
+        function racesOf(cid) {
+          var out = { horde: [], alliance: [], skyborne: false };
+          (RC.races || []).forEach(function (r) {
+            if ((r.classes || []).indexOf(cid) < 0) return;
+            var nm = (r.subgroup && r.subgroup.nameCn) || r.nameCn;
+            if (out[r.faction]) out[r.faction].push(nm); else out[r.faction] = [nm];
+            if (String(r.id).indexOf('skyborne') === 0) out.skyborne = true;
+          });
+          return out;
+        }
+        function chListOf(cid, tree) {
+          return CH.filter(function (x) { return x.classId === cid && (!tree || x.tree === tree); });
+        }
+        function abListOf(cid) {
+          return (AB.items || []).filter(function (x) { return x.classId === cid; });
+        }
+        function srcBtn(id, name, prov) {
+          return '<button type="button" class="ghost" data-src="' + D.esc(id) + '" data-name="' +
+            D.esc(name) + '" data-prov="' + encodeURIComponent(JSON.stringify(prov || [])) +
+            '" aria-label="查看「' + D.esc(name) + '」的来源">来源</button>';
+        }
+        function loadInto(cid, done) {
+          D.load('data/talents/' + cid + '.json').then(function (T) { done(T); }).catch(function () { done(null); });
+        }
+        function openClass(cid) {
+          f.c = cid; f.s = '';
+          try { history.replaceState(null, '', 'classes.html?c=' + encodeURIComponent(cid)); } catch (e) { /* 演示环境不支持就不改地址 */ }
+          loadInto(cid, draw);
+        }
+        function draw(T) {
+          var c = byId[f.c] || {}, trees = (T && T.trees) || [], st = (T && T.stats) || {};
+          /* 名称核对数与分歧数：stats 里只有节点级分歧，系名的两个叫法记在 trees[] 自己身上
+             （潜行者「奇袭 / 刺杀」、萨满「元素战斗 / 元素」、牧师「暗影 / 暗影魔法」），
+             所以这两个数按节点与系各现数一遍，不拿 classes.json 那个粗数凑。 */
+          var tcnt = 0, vcnt = 0;
+          trees.forEach(function (t) {
+            (t.nodes || []).forEach(function (n) { tcnt++; if (n.nameVerified) vcnt++; });
+          });
+          if (!tcnt) tcnt = st.nodes || 0;
+          var altTrees = trees.filter(function (t) { return t.nameConflict && t.nameAlt; });
+          var col = (window.Glyph && Glyph.color) ? (Glyph.color[c.id] || '') : '';
+          var art = (ART.classes || {})[c.id] || '';
+          var all = chListOf(c.id, ''), abs = abListOf(c.id);
+          var abm = {}; abs.forEach(function (x) { if (x.name && !abm[x.name]) abm[x.name] = x; });
+          var bc = ((CHR.meta || {}).byClass || []).filter(function (x) { return x.classId === c.id; })[0] || {};
+          var rank = (SC.classRank || []).filter(function (x) { return x.classId === c.id; })[0] || {};
+          var R3 = racesOf(c.id);
+          // 官方中文稿还没发的那些职业：这句话在 abilities.json 的「没收到的」里，不另写一遍
+          var noAb = ((AB.meta || {}).notCollected || []).filter(function (s) {
+            return String(s).indexOf(c.cn || '__none__') >= 0;
+          })[0] || '';
+
+          var hero = '<section class="dhero clhero"' + (col ? ' style="--cl:' + col + '"' : '') + '>' +
+            '<span class="dx"></span><div class="db"><div class="clt">' +
+            '<div class="kicker">' + D.esc('CLASS · ' + String(c.en || c.id || '').toUpperCase()) + '</div>' +
+            '<h1 class="pt">' + D.esc(c.cn || '未定名') +
+            (c.en ? '<span class="clen">' + D.esc(c.en) + '</span>' : '') + '</h1>' +
+            '<div class="clline">三系 <b>' + trees.length + '</b> · 天赋节点 <b>' + tcnt +
+            '</b> · 客户端改动 <b>' + (bc.all || 0) + '</b> 条 · 官方中文整句 <b>' + abs.length + '</b> 条</div>' +
+            '<p class="clnote">' + D.esc(c.note || '这一职业的说法以客户端解包为准，游戏内层级未获得。') + '</p>' +
+            (art ? '<span class="dmark">客户端原画 · 本地转存</span>'
+              : '<span class="dmark">自绘占位 · 非游戏原画</span>') +
+            '</div><div class="chart">' +
+            (window.Glyph ? Glyph.classTile(c.id, c.cn, c.iconKey, 'lg') : '') +
+            (art ? '<img src="' + D.esc(art) + '" alt="' + D.esc((c.cn || '') + '的职业立绘') +
+              '" loading="lazy" onerror="this.className=\'bad\'">' : '') +
+            '</div></div></section>';
+
+          var bar = '<div class="card" style="padding-bottom:0"><div class="classbar" role="group" aria-label="换一个职业">' +
+            CLS.map(function (x) {
+              return '<button type="button" class="cls' + (x.id === f.c ? ' on' : '') + '" data-c="' +
+                D.esc(x.id) + '" style="min-width:78px" aria-pressed="' + (x.id === f.c ? 'true' : 'false') + '">' +
+                '<div class="ic">' + (window.Glyph ? Glyph.classTile(x.id, x.cn, x.iconKey)
+                  : D.esc((x.cn || '?').slice(0, 1))) + '</div><div class="n">' + D.esc(x.cn) + '</div></button>';
+            }).join('') + '</div></div>';
+
+          /* 三系卡：选中那一系就把右边的技能变化收到这一系，再点一次回到三系都列。
+             系名用官方定名，另一来源的叫法走红框悬停（与天赋页同一套符号，见 treeName / treeAltTip）。 */
+          var spec = trees.length ? '<section class="spec3" aria-label="这一职业的三系专精">' +
+            trees.map(function (t) {
+              var on = f.s === t.nameCn;
+              return '<button type="button" class="spec plate' + (on ? ' on' : '') + '" data-s="' +
+                D.esc(t.nameCn) + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + treeAltTip(t) + '>' +
+                '<b>' + treeName(t) + '</b><span>' + (t.nodes || []).length + ' 个节点</span>' +
+                '<span class="spnote">' + (on ? '已只看这一系，再点一次看全部' : '只看这一系的改动') + '</span>' +
+                '</button>';
+            }).join('') + '</section>' : '';
+
+          function kv(k, v, ex) {
+            return '<div class="kv"><span>' + k + '</span><b>' + v + (ex ? ' ' + ex : '') + '</b></div>';
+          }
+          var raceChips = ['horde', 'alliance'].map(function (fid) {
+            var list = R3[fid] || [];
+            if (!list.length) return '';
+            return '<div class="racerow"><b>' + D.esc(facName(fid)) + '</b>' +
+              '<span class="chips">' + list.map(function (n) {
+                return '<span class="tag">' + D.esc(n) + '</span>';
+              }).join('') + '</span><a href="races.html">矩阵 →</a></div>';
+          }).join('');
+          var skyCfl = R3.skyborne && (RC.conflicts || []).length
+            ? '<p class="conf">天裔能选几个职业，两份说法还没对上（同页两张矩阵表与导语不一致），' +
+              '<a href="races.html">种族页两个都留着</a></p>' : '';
+          var have = '<section class="card"><h2>这一职业有什么</h2>' +
+            kv('职业中文名', D.esc(c.cn || '') + (c.en ? ' / ' + D.esc(c.en) : ''),
+              D.pill(c.nameLevel || 'L3') + ' ' + srcBtn('cls-' + c.id, c.cn || '这一职业', (c.provenance || []))) +
+            kv('三系', trees.map(function (t) { return treeName(t); }).join(' · ') || '待补') +
+            kv('天赋节点', tcnt + ' 个' +
+              '<a href="talent.html?c=' + encodeURIComponent(c.id) + '">打开计算器 →</a>') +
+            kv('名称与官网中文一致', vcnt + ' / ' + tcnt) +
+            kv('两个来源叫法不同', ((st.nameConflict || 0) + (altTrees.length ? ' 个节点、' + altTrees.length + ' 个系名' : ' 个节点')) +
+              '（两个都留着）') +
+            kv('官方中文整句', abs.length ? abs.length + ' 条' : '<span class="dim">还没有</span>') +
+            kv('客户端改动', (bc.all || 0) + ' 条' + (bc.changed ? '（其中 ' + bc.changed + ' 条与经典旧世不同）' : '') +
+              ' ' + srcBtn('chg-' + c.id, (c.cn || '') + '的改动清单', ((CH.filter(function (x) {
+                return x.classId === c.id;
+              })[0] || {}).provenance || []))) +
+            kv('本站资料完整度', (rank.share !== undefined ? rank.share + '%' : '未排') +
+              (rank.place ? ' · 第 ' + rank.place + ' 位' : '')) +
+            '<p class="note">这是按本站能核对的条目数排的资料完整度，是本站自己整理的排序，不是职业强度排行。</p>' +
+            (raceChips ? '<h3 class="rdh">谁可以选这一职业</h3>' + raceChips + skyCfl : '') +
+            '<div class="srcbox" id="srcbox" style="display:none"></div></section>';
+
+          var shown = chListOf(c.id, f.s);
+          var grp = {};
+          shown.forEach(function (x) {
+            var k = CL_STATE[x.changeKind] ? x.changeKind : 'other';
+            (grp[k] = grp[k] || []).push(x);
+          });
+          var order = CL_ORDER.filter(function (k) { return grp[k]; });
+          if (grp.other) order.push('other');
+          var listHtml = shown.length ? order.map(function (k) {
+            var rows = grp[k];
+            return '<div class="lgrp"><b>' + (k === 'other' ? '其它说法' : CL_STATE[k]) + '</b>' +
+              '<span class="dim">' + rows.length + ' 条</span>' +
+              (k === 'unchanged' ? '<span class="dim">客户端里这条和经典旧世一样</span>' : '') + '</div>' +
+              '<div class="scrollx"><table class="entab chtab"><thead><tr><th>名称</th><th>类别</th>' +
+              '<th>哪一系</th><th></th></tr></thead><tbody>' +
+              rows.map(function (x, i) {
+                var ab = abm[x.nameCn], uid = c.id + '-' + k + '-' + i;
+                return '<tr><td><b>' + D.esc(x.nameCn || '未命名') + '</b>' +
+                  (x.maxRank ? '<span class="dim"> · 最多 ' + D.esc(x.maxRank) + ' 层</span>' : '') +
+                  (ab ? '<span class="quote">' + D.esc(ab.quote) + '</span>' : '') + '</td>' +
+                  '<td>' + (CL_KIND[x.kind] || '其他') + (k === 'other' && x.changeCn
+                    ? '<br><span class="tag">' + D.esc(x.changeCn) + '</span>' : '') + '</td>' +
+                  '<td>' + (x.tree ? D.esc(x.tree) : '<span class="dim">未归系</span>') + '</td>' +
+                  '<td class="act">' + D.pill(x.level) + ' ' + srcBtn(uid, x.nameCn || '这一条', x.provenance) + '</td></tr>' +
+                  '<tr class="srow" id="s-' + uid + '" style="display:none"><td colspan="4">' +
+                  D.sources(x.provenance) + '</td></tr>';
+              }).join('') + '</tbody></table></div>';
+          }).join('') : '<div class="empty">这一系还没有客户端改动记录，等下一次客户端更新再看。</div>';
+          var chg = '<section class="card"><h2>技能变化' +
+            (f.s ? '<span class="dim mono"> 只看 ' + D.esc(f.s) + '</span>'
+              : '<span class="dim mono"> 三系都列</span>') +
+            '<span class="dim mono"> · ' + shown.length + ' 条</span></h2>' +
+            '<p class="dim">只列名称、归属与客户端解包给出的改动类别，不复制别人的逐字前后对照；' +
+            '官方中文稿里出现过的名字，把原句整句贴在下面。</p>' +
+            (noAb ? '<div class="note">' + D.esc(noAb) + '</div>' : '') +
+            listHtml +
+            (abs.length ? '<div class="chipsrow"><a href="skills.html">这一职业在技能书里的四态整句 →</a></div>' : '') +
+            '</section>';
+
+          var tools = '<section class="card"><h2>接着看这一职业</h2><div class="tools6">' +
+            [['talent.html?c=' + encodeURIComponent(c.id), '天赋计算器',
+              tcnt + ' 个节点 · 三棵真树',
+              '格子就是客户端里的天赋本身：位置、每层上限、与经典旧世的差异都按真结构摆。'],
+            ['skills.html', '技能书', abs.length + ' 条官方中文整句（这一职业）',
+              '中英对照与新增 / 改动 / 改名 / 移除四态，整句出自国服官方公告，名称不在句里就不收。'],
+            ['chooser.html', '玩法问答', '答完题才知道这一职业合不合手',
+              '按玩法取向问答，不给强度排行——那是本站红线。']].map(function (t) {
+              return '<a class="tool plate" href="' + t[0] + '">' +
+                '<span class="tico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" ' +
+                'stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/>' +
+                '<path d="M9 12h6M12 9v6"/></svg></span>' +
+                '<h3>' + t[1] + '</h3><p>' + t[3] + '</p>' +
+                '<span class="foot"><em>' + t[2] + '</em><i>进入 →</i></span></a>';
+            }).join('') + '</div></section>';
+
+          var gaps = [];
+          if (!trees.length) gaps.push('这一职业的天赋结构还没有可信来源，三系与节点数都空着');
+          gaps.push('第几层需要点满多少点：客户端解包给过一组数，正式服没实测，' +
+            '这一页只按坐标摆位，不做「够点才能点下一层」的判定');
+          if (!abs.length) gaps.push('官方中文的职业深度解析稿还没发，这一页没有官方整句');
+          if (c.nameLevel !== 'L0') gaps.push('职业中文名的官方中文说法还没逐字核到');
+          gaps.push('这个职业用什么资源、穿什么护甲、能用什么武器、在团队里顶什么位置：' +
+            '官方中文里还没有能核对的说法，这一页就不写');
+          gaps.push('三系各自在副本与 PvP 里的实际手感需要实测，本站不做强度与胜率结论');
+
+          set(hero + bar + spec + '<div class="two">' + have + chg + '</div>' + tools +
+            unconfBlock(gaps, '本页还没确认的'));
+          Array.prototype.forEach.call(document.querySelectorAll('.cls[data-c]'), function (b) {
+            b.onclick = function () { if (b.dataset.c !== f.c) openClass(b.dataset.c); };
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('.spec[data-s]'), function (b) {
+            b.onclick = function () { f.s = f.s === b.dataset.s ? '' : b.dataset.s; loadInto(f.c, draw); };
+          });
+          bindSrcToggles(el('main'));
+        }
+        loadInto(f.c, draw);
+      }).catch(fail);
+  }
+
   function skills() {
     Promise.all([D.load('data/glossary.json'), D.load('data/classes.json'), D.load('data/abilities.json'),
       D.load('data/icons.json'), D.load('data/races.json')]).then(function (r) {
@@ -3274,5 +3510,5 @@
   watchRails();
   tickCountdown();
   setInterval(tickCountdown, 1000);
-  ({ home: home, talent: talent, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, classes: classPage, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

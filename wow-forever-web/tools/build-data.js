@@ -951,7 +951,8 @@ const SK = {
   race: ['种族', 'races.html', ''],
   lpg: ['传承专长', 'legacy.html', 'q'],
   lch: ['传承挑战', 'legacy.html', 'q'],
-  cls: ['职业', 'talent.html', '']
+  // 职业词条跳职业页（2026-10-12 起每职业一页），带着职业号落到那一页上
+  cls: ['职业', 'classes.html', '']
 };
 const clsCn = {};
 (cl.classes || []).forEach((c) => { clsCn[c.id] = c.cn; });

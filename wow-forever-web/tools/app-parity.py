@@ -34,6 +34,7 @@ APP = os.environ.get("APP_BASE", "http://127.0.0.1:8821")
 PAGES = [
     {"key": "home", "legacy": "/index.html", "app": "/#/", "tabs": []},
     {"key": "world", "legacy": "/world.html", "app": "/#/world", "tabs": ["zones", "rares", "books", "bag"]},
+    {"key": "classes", "legacy": "/classes.html", "app": "/#/classes", "tabs": []},
 ]
 # 有意差异：新站改了行为、且比旧站更对的，白名单列在这里并写清理由。
 # 只有 --strict 模式下这些键会被放行；出现没登记过的差异仍然算失败。

@@ -944,7 +944,7 @@ nav.main a.nl:has(.nb){padding-right:17px}
   .hasart>.bgart{transform:none}
 }
 @media (max-width:600px){
-  .two{grid-template-columns:1fr}
+  .two{grid-template-columns:minmax(0,1fr)}
   /* 单列时卡就是整屏宽，树不必再收，右栏恢复成整块往下排 */
   .two .treewrap{grid-template-columns:1fr}
   .two .pv{max-width:none}
@@ -1352,10 +1352,55 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .cls9 b{font-size:14px;color:var(--txt-dim);font-weight:400;display:block}
 .cls9 a:hover b{color:var(--gold-hi)}
 
+/* 职业页（2026-10-12 补，docs/PLAN-classes-and-nav-2026-10-12.md）：
+   页首职业带沿用 .dhero 那套压暗与描边，只补两列布局与立绘框；三系专精卡是新件。
+   几何按稿子 3.2 节：带高 300px、右侧立绘框 158px、英文原名吃职业色。
+   --cl 是这一职业的职业色，由渲染时从 glyph.js 那份职业色表写进内联样式——
+   色不在令牌层是有意的：职业色是游戏语义（九个各一个），不是本站的品牌或分级色。 */
+.clhero{height:300px}
+.clhero .db{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s6);height:100%}
+.clhero .clt{max-width:760px}
+.clhero h1.pt{font-family:var(--font-display);font-size:clamp(32px,4.4vw,52px);font-weight:700;
+  color:var(--txt-title);letter-spacing:1px;line-height:1.12;margin:12px 0 8px}
+.clhero .clen{font-family:var(--font-mono);font-size:24px;font-weight:400;letter-spacing:.06em;
+  color:var(--cl);margin-left:14px}
+.clhero .clline{font-size:14px;color:var(--txt-banner);line-height:1.8}
+.clhero .clline b{color:var(--gold-hi);font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.clhero .clnote{font-size:13px;color:var(--txt-muted);line-height:1.7;margin:10px 0 0;max-width:60ch}
+.chart{position:relative;width:158px;height:158px;flex:0 0 auto;
+  border:1px solid var(--cl,var(--gold-line-2));box-shadow:0 0 0 4px rgba(11,15,22,.55)}
+.chart .liw,.chart .liw.t.lg{width:100%;height:100%}
+.chart img{object-position:center 22%}
+.chart img.bad{display:none}
+
+/* 三系专精卡：选中那张吃金边与提亮底（.plate + --elev），卡片上是系名与节点数。
+   点一下把右边的技能变化收到这一系，再点一次回到三系都列——只做筛选，不做强度判断。 */
+.spec3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin:var(--s4) 0}
+.spec{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
+  padding:18px 20px;min-height:96px;cursor:pointer;color:var(--txt-dim)}
+.spec b{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:.5px;
+  color:var(--txt-title)}
+.spec>span{font:12.5px var(--font-mono);color:var(--txt-dim)}
+.spec .spnote{font-family:var(--font-body);color:var(--txt-muted)}
+.spec:hover{border-color:var(--gold-line-2)}
+.spec.on{border-color:var(--gold);color:var(--txt);
+  background:linear-gradient(180deg,var(--elev),var(--panel))}
+/* 可选种族那一组：阵营名 + 官方中文种族名，两个来源不一致的天裔单独用 .conf 说明 */
+.racerow{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--s2) var(--s3);margin-top:var(--s2)}
+.racerow b{font:12.5px var(--font-mono);color:var(--gold)}
+.racerow .chips{flex:1 1 200px;margin-top:0}
+.racerow a{font-size:12.5px}
+/* 技能变化那张表：名称列吃掉一半宽，类别与那一系两列不许竖排
+   （1440 实测「哪一系」被挤成三行，表头读起来像坏了） */
+.chtab{min-width:620px}
+.chtab th,.chtab td:nth-child(2),.chtab td:nth-child(3){white-space:nowrap}
+.chtab td:nth-child(1){width:52%}
+
 @media (max-width:980px){
   .tools6{grid-template-columns:repeat(2,1fr)}
   .raidgrid{grid-template-columns:1fr}
   .cls9{grid-template-columns:repeat(5,1fr)}
+  .spec3{grid-template-columns:repeat(3,1fr)}
   .tl3{flex-direction:column;align-items:stretch;gap:var(--s4)}
   .tl3 .link{display:none}
 }
@@ -1364,6 +1409,15 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
   .cls9{grid-template-columns:repeat(3,1fr)}
   .krow{flex-direction:column;align-items:flex-start;gap:var(--s2)}
   .dhero .db{padding:var(--s5) var(--s4)}
+  /* 职业带在手机上不硬撑 300px：立绘框收到 118px，正文与图上下排，带高由内容长出来 */
+  .clhero{height:auto}
+  .clhero .db{flex-direction:column;align-items:flex-start;gap:var(--s4)}
+  .clhero .clt{max-width:none}
+  .chart{width:118px;height:118px}
+  .clhero .clen{display:block;margin:6px 0 0}
+  .spec3{grid-template-columns:1fr}
+  /* 阵营那一行的「矩阵 →」是行内链接，13px 行高量出来只有 21px，手机上摸不到 */
+  .racerow a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:2px 6px}
   .dhero .dstate{position:static;margin-top:var(--s4);display:inline-flex}
   /* 手机上文字块会延伸到角标那一行，绝对定位的"示意图"会压在日期上：改成跟在正文后面排 */
   .dhero .dmark,.hero.dh .dmark{position:static;display:inline-block;margin-top:var(--s3)}

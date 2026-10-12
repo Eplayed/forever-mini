@@ -59,8 +59,8 @@ case "${1:-start}" in
   stop) stop_all ;;
   start) start_all
     echo
-    echo "看整站 16 页（当前可发布口径）：http://127.0.0.1:$LEGACY_PORT/index.html"
-    echo "看 Vue 新站（只迁了首页与世界页）：http://127.0.0.1:$APP_PORT/"
+    echo "看整站 17 页（当前可发布口径）：http://127.0.0.1:$LEGACY_PORT/index.html"
+    echo "看 Vue 新站（已迁首页 / 世界页 / 职业页）：http://127.0.0.1:$APP_PORT/"
     echo "手机尺寸自查：浏览器 devtools 切 375×812，或 bash tools/site-check.py 出的截图在 docs/screenshots/"
     ;;
   *) echo "用法：bash tools/serve.sh [start|stop]"; exit 2 ;;
