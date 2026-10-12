@@ -71,14 +71,6 @@
   },
   {
    "tree": 0,
-   "name": "自然平衡",
-   "max": 5,
-   "row": 2,
-   "col": 3,
-   "preName": null
-  },
-  {
-   "tree": 0,
    "name": "虫群",
    "max": 1,
    "row": 3,
@@ -103,7 +95,7 @@
   },
   {
    "tree": 0,
-   "name": "蔓生",
+   "name": "繁茂",
    "max": 2,
    "row": 4,
    "col": 0,
@@ -119,7 +111,7 @@
   },
   {
    "tree": 0,
-   "name": "月蚀",
+   "name": "日月之蚀",
    "max": 3,
    "row": 4,
    "col": 2,
@@ -159,7 +151,7 @@
   },
   {
    "tree": 1,
-   "name": "野性迅捷",
+   "name": "豹之迅捷",
    "max": 2,
    "row": 1,
    "col": 0,
@@ -191,6 +183,14 @@
   },
   {
    "tree": 1,
+   "name": "撕碎攻击",
+   "max": 3,
+   "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
    "name": "野蛮暴怒",
    "max": 2,
    "row": 2,
@@ -215,15 +215,15 @@
   },
   {
    "tree": 1,
-   "name": "撕碎攻击",
-   "max": 3,
+   "name": "变形之力",
+   "max": 1,
    "row": 3,
    "col": 0,
-   "preName": null
+   "preName": "撕碎攻击"
   },
   {
    "tree": 1,
-   "name": "裂伤",
+   "name": "原始撕咬",
    "max": 1,
    "row": 3,
    "col": 1,
@@ -239,7 +239,7 @@
   },
   {
    "tree": 1,
-   "name": "原始狂怒",
+   "name": "血性狂乱",
    "max": 2,
    "row": 3,
    "col": 3,
@@ -247,11 +247,11 @@
   },
   {
    "tree": 1,
-   "name": "狩猎天性",
+   "name": "强化变形之力",
    "max": 2,
    "row": 4,
    "col": 0,
-   "preName": null
+   "preName": "变形之力"
   },
   {
    "tree": 1,
@@ -263,8 +263,8 @@
   },
   {
    "tree": 1,
-   "name": "丛林之王",
-   "max": 3,
+   "name": "掠食本能",
+   "max": 2,
    "row": 4,
    "col": 3,
    "preName": null
@@ -295,7 +295,7 @@
   },
   {
    "tree": 2,
-   "name": "自然专注",
+   "name": "自然集中",
    "max": 5,
    "row": 0,
    "col": 1,

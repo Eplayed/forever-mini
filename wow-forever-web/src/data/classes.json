@@ -21,8 +21,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 56,
-   "nameVerified": 16,
+   "talentCount": 52,
+   "nameVerified": 52,
    "iconKey": "class_warrior",
    "provenance": [
     {
@@ -41,8 +41,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 52,
-   "nameVerified": 0,
+   "talentCount": 50,
+   "nameVerified": 50,
    "iconKey": "class_paladin",
    "provenance": [
     {
@@ -62,7 +62,7 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 50,
-   "nameVerified": 28,
+   "nameVerified": 50,
    "iconKey": "class_hunter",
    "provenance": [
     {
@@ -82,7 +82,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 53,
-   "nameVerified": 0,
+   "nameVerified": 53,
    "iconKey": "class_rogue",
    "provenance": [
     {
@@ -102,7 +102,7 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 53,
-   "nameVerified": 7,
+   "nameVerified": 53,
    "iconKey": "class_priest",
    "provenance": [
     {
@@ -122,7 +122,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 50,
-   "nameVerified": 0,
+   "nameVerified": 50,
    "iconKey": "class_shaman",
    "provenance": [
     {
@@ -142,7 +142,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 54,
-   "nameVerified": 0,
+   "nameVerified": 53,
    "iconKey": "class_mage",
    "provenance": [
     {
@@ -162,7 +162,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 0,
+   "nameVerified": 51,
    "iconKey": "class_warlock",
    "provenance": [
     {
@@ -181,8 +181,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 53,
-   "nameVerified": 38,
+   "talentCount": 52,
+   "nameVerified": 50,
    "iconKey": "class_druid",
    "provenance": [
     {

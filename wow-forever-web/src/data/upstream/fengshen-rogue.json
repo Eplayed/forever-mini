@@ -39,7 +39,7 @@
   },
   {
    "tree": 0,
-   "name": "谋杀",
+   "name": "密谋",
    "max": 2,
    "row": 1,
    "col": 1,
@@ -135,7 +135,7 @@
   },
   {
    "tree": 0,
-   "name": "剧毒",
+   "name": "毒针",
    "max": 1,
    "row": 6,
    "col": 1,
@@ -143,7 +143,7 @@
   },
   {
    "tree": 1,
-   "name": "强化剔骨",
+   "name": "强化刺骨",
    "max": 3,
    "row": 0,
    "col": 0,
@@ -223,7 +223,7 @@
   },
   {
    "tree": 1,
-   "name": "无休锋刃",
+   "name": "完美处刑",
    "max": 1,
    "row": 3,
    "col": 1,
@@ -235,7 +235,7 @@
    "max": 5,
    "row": 3,
    "col": 2,
-   "preName": null
+   "preName": "精确"
   },
   {
    "tree": 1,
@@ -247,7 +247,7 @@
   },
   {
    "tree": 1,
-   "name": "劈砍",
+   "name": "劈斩",
    "max": 5,
    "row": 4,
    "col": 2,
@@ -259,7 +259,7 @@
    "max": 2,
    "row": 5,
    "col": 1,
-   "preName": null
+   "preName": "剑刃乱舞"
   },
   {
    "tree": 1,
@@ -267,7 +267,7 @@
    "max": 3,
    "row": 5,
    "col": 2,
-   "preName": "劈砍"
+   "preName": "劈斩"
   },
   {
    "tree": 1,
@@ -319,7 +319,7 @@
   },
   {
    "tree": 2,
-   "name": "卑鄙伎俩",
+   "name": "邪恶计谋",
    "max": 2,
    "row": 1,
    "col": 2,
@@ -411,7 +411,7 @@
    "max": 5,
    "row": 5,
    "col": 0,
-   "preName": null
+   "preName": "卑鄙"
   },
   {
    "tree": 2,

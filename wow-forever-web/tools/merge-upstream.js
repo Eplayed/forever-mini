@@ -52,24 +52,37 @@ const officialNames = {};
 const gl = JSON.parse(fs.readFileSync(path.join(DATA, 'glossary.json'), 'utf8')).items;
 gl.forEach((x) => { if (x.classId) (officialNames[x.classId] = officialNames[x.classId] || new Set()).add(x.cn); });
 
-let stat = { nodes: 0, conflict: 0, icon: 0, onlyOne: 0, req: 0 };
+let stat = { nodes: 0, conflict: 0, icon: 0, onlyOne: 0, req: 0, verified: 0 };
+/* 2026-10-12 改的两处"会造出假事实"：
+   ① 原来只要本地有快照就不现读（if (!existsSync) fetch）。上游客户端都出到 70338 了，
+      还拿 10-07 落盘的旧译名去对齐新格位，跑一次就把过期数据当成刚采的。
+      现在默认强制现读，只有显式 --use-cache 才走本地（离线应急），并把这个事实写进产物。
+   ② 采集日期、nameVerified 114、分歧 89 条都写死在代码里——跑多少次都不变，
+      等于把上一次的数量永久冻成"事实"。现在全部从本次结果派生。 */
+const USE_CACHE = process.argv.includes('--use-cache');
+const TODAY = new Date().toISOString().slice(0, 10);
+const fetched = {};
 CLS.forEach((c) => {
   const fFile = path.join(UP, 'fengshen-' + c + '.json');
   const nFile = path.join(UP, 'nieyi-' + c + '.json');
-  if (!fs.existsSync(fFile)) {
+  if (USE_CACHE && fs.existsSync(fFile)) fetched[c] = 'cache';
+  else {
     const tmp = path.join(UP, '_f.js');
     if (!get('https://www.fengshen.cn/wuxian/talents/' + c + '/data.js', tmp)) { console.error('  ✗ fengshen ' + c); return; }
     const p = parseFengshen(fs.readFileSync(tmp, 'utf8'));
     fs.unlinkSync(tmp);
     fs.writeFileSync(fFile, JSON.stringify(p, null, 1));
+    fetched[c] = 'live';
   }
-  if (!fs.existsSync(nFile)) {
+  if (USE_CACHE && fs.existsSync(nFile)) fetched[c] += '+cache';
+  else {
     const tmp = path.join(UP, '_n.html');
     if (!get('https://nieyi.cn/f/talents/' + c + '.html', tmp)) { console.error('  ✗ nieyi ' + c); return; }
     const p = parseNieyi(fs.readFileSync(tmp, 'utf8'));
     fs.unlinkSync(tmp);
     if (!p) { console.error('  ✗ 解析 nieyi ' + c); return; }
     fs.writeFileSync(nFile, JSON.stringify({ rows: p.rows.map((r) => ({ tree: r.tree, name: r.name, max: r.max, row: r.row, col: r.col, icon: r.icon, preId: r.preId, nid: r.nid })) }, null, 1));
+    fetched[c] += '+live';
   }
   const F = JSON.parse(fs.readFileSync(fFile, 'utf8'));
   const N = JSON.parse(fs.readFileSync(nFile, 'utf8'));
@@ -103,6 +116,7 @@ CLS.forEach((c) => {
     };
     nodesByKey[k] = node;
     stat.nodes++; if (conflict) stat.conflict++; if (!a || !b) stat.onlyOne++;
+    if (node.nameVerified) stat.verified++;
     if (node.iconKey) stat.icon++;
     const ti = +k.split(':')[0];
     (trees[ti] || (trees[ti] = { id: c + '-' + ti, nameCn: '第 ' + (ti + 1) + ' 系', nameEn: null, nodes: [] })).nodes.push(node);
@@ -118,9 +132,11 @@ CLS.forEach((c) => {
     if (target) { node.requires = [target.id]; stat.req++; }
     else if (pn || bid) { (node.requiresUnresolved = node.requiresUnresolved || []).push({ name: pn || bid }); }
   });
+  const srcNote = fetched[c] === 'live+live' ? '两源本次现读' :
+    (USE_CACHE ? '用了本地快照（--use-cache），非本次现读' : '部分本地快照');
   fs.writeFileSync(path.join(DATA, 'talents', c + '.json'), JSON.stringify({
     classId: c, classNameCn: CN[c], structureStatus: 'imported-unverified',
-    dataVersion: '两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13',
+    dataVersion: '两份客户端解包按坐标对齐 · 本站对齐于 ' + TODAY + '（' + srcNote + '）',
     grid: { rows: 7, cols: 4, note: '两源坐标一致，按 (系,行,列) 对齐；层级点数门槛仍未核实' },
     rules: { totalPoints: 51, levelCap: 60, tierUnlockCost: null },
     trees,
@@ -135,16 +151,19 @@ console.log('\n合计节点 ' + stat.nodes + ' ｜ 名字分歧 ' + stat.conflic
 try {
   const mf = path.join(DATA, 'meta.json');
   const meta = JSON.parse(fs.readFileSync(mf, 'utf8'));
+  const liveN = Object.values(fetched).filter((v) => v === 'live+live').length;
   meta.talentImport = {
     method: '两个第三方数据挖掘源按 (系,行,列) 坐标对齐，名字不一致的两边都保留',
     sources: ['fengshen.cn/wuxian/talents/*/data.js', 'nieyi.cn/f/talents/*.html'],
-    collectedAt: '2026-09-13（上游自述），本站对齐于 ' + new Date().toISOString().slice(0, 10),
+    // 采集日期与条数一律本次派生：写死就会把上一次的数量当事实一直挂着
+    collectedAt: TODAY + '（' + (USE_CACHE ? '部分走本地快照' : '两源现读 ' + liveN + ' / ' + CLS.length + ' 个职业') + '）',
     nodes: stat.nodes, nameConflict: stat.conflict, onlyInOneSource: stat.onlyOne,
     withIcon: stat.icon, resolvedRequires: stat.req,
-    nameVerified: 114,
+    nameVerified: stat.verified,
     excluded: '未取任何一方的天赋描述文案；图标只取文件名标识符，图片来自暴雪官方 CDN',
-    stillMissing: '游戏内层级点数门槛、英文原名、天赋描述、完整前置链、官方中文定名（89 条两源分歧）',
-    risk: '两源均为个人站数据挖掘、无授权声明，且彼此译名不一致 89 条，说明其中含自行翻译成分；全部标 L2，正式服上线后需逐条回校'
+    stillMissing: '游戏内层级点数门槛、英文原名、天赋描述、完整前置链、官方中文定名（' + stat.conflict + ' 条两源分歧）',
+    risk: '两源均为个人站数据挖掘、无授权声明，且彼此译名不一致 ' + stat.conflict +
+      ' 条，说明其中含自行翻译成分；全部标 L2，正式服上线后需逐条回校'
   };
   fs.writeFileSync(mf, JSON.stringify(meta, null, 1));
   console.log('meta.talentImport 已更新');

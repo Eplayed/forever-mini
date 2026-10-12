@@ -77,15 +77,15 @@
    "fengshen.cn/wuxian/talents/*/data.js",
    "nieyi.cn/f/talents/*.html"
   ],
-  "collectedAt": "2026-09-13（该站自述采集日），本站对齐于 2026-10-07",
-  "nodes": 473,
-  "nameConflict": 89,
-  "onlyInOneSource": 10,
+  "collectedAt": "2026-10-12（两源现读 9 / 9 个职业）",
+  "nodes": 466,
+  "nameConflict": 0,
+  "onlyInOneSource": 0,
   "withIcon": 466,
-  "resolvedRequires": 77,
-  "nameVerified": 114,
+  "resolvedRequires": 74,
+  "nameVerified": 111,
   "excluded": "未取任何一方的天赋描述文案；图标只取文件名标识符，图片来自暴雪官方 CDN",
-  "stillMissing": "游戏内层级点数门槛、英文原名、天赋描述、完整前置链、官方中文定名（89 条两源分歧）",
-  "risk": "两源均为个人站数据挖掘、无授权声明，且彼此译名不一致 89 条，说明其中含自行翻译成分；全部标 L2，正式服上线后需逐条回校"
+  "stillMissing": "游戏内层级点数门槛、英文原名、天赋描述、完整前置链、官方中文定名（0 条两源分歧）",
+  "risk": "两源均为个人站数据挖掘、无授权声明，且彼此译名不一致 0 条，说明其中含自行翻译成分；全部标 L2，正式服上线后需逐条回校"
  }
 }

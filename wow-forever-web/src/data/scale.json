@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-11",
+  "generatedAt": "2026-10-12",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -33,18 +33,18 @@
    },
    {
     "classId": "druid",
-    "official": 119,
+    "official": 118,
     "datamine": 114,
-    "total": 233,
-    "share": 51.1,
+    "total": 232,
+    "share": 50.9,
     "place": 2
    },
    {
     "classId": "warrior",
-    "official": 95,
-    "datamine": 103,
-    "total": 198,
-    "share": 48,
+    "official": 99,
+    "datamine": 95,
+    "total": 194,
+    "share": 51,
     "place": 3
    },
    {
@@ -57,10 +57,10 @@
    },
    {
     "classId": "warlock",
-    "official": 73,
-    "datamine": 113,
+    "official": 72,
+    "datamine": 114,
     "total": 186,
-    "share": 39.2,
+    "share": 38.7,
     "place": 5
    },
    {
@@ -90,9 +90,9 @@
    {
     "classId": "paladin",
     "official": 50,
-    "datamine": 112,
-    "total": 162,
-    "share": 30.9,
+    "datamine": 110,
+    "total": 160,
+    "share": 31.3,
     "place": 9
    }
   ],
@@ -105,8 +105,8 @@
    "cap": 16,
    "total": 81
   },
-  "search": 4351,
-  "talentPreview": 473,
+  "search": 4347,
+  "talentPreview": 466,
   "releases": 25,
   "navNew": [
    "技能",
@@ -115,8 +115,9 @@
   ],
   "glossary": 215,
   "classes": 9,
-  "talentNodes": 473,
-  "talentVerified": 460,
+  "talentNodes": 466,
+  "talentTreeConflict": 3,
+  "talentVerified": 462,
   "dungeons": 38,
   "dungeonsNew": 9,
   "bosses": 228,
@@ -140,11 +141,11 @@
   "abilities": 86,
   "coverage": {
    "L0": 366,
-   "L1": 114,
-   "L2": 360,
+   "L1": 111,
+   "L2": 356,
    "L3": 2
   },
-  "coverageTotal": 842,
+  "coverageTotal": 835,
   "pubCoverage": {
    "L0": 366,
    "L1": 0,

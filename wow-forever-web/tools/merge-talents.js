@@ -53,6 +53,19 @@ function tierCosts(refs) {
   return cost;
 }
 
+/* 官方中文专精名（2026-10-12 逐页核过，只取"专精叫什么"这一个事实）：
+   24301515 猎人与德鲁伊 · 24301514 牧师与战士 · 24302097 法师与萨满祭司 · 24310968 潜行者与术士。
+   顺序按官方页里三个专精出现的先后，对应我们的 tree 0/1/2。圣骑士官方还没发解析稿，所以不在表里。
+   规则（用户 2026-10-12 定）：树名以官方为准；官方与上游或我们不一致时，两个名字都留，
+   官方那个当显示名，另一个进 nameAlt，页面按节点级的同一套约定露出第二个叫法。 */
+const OFFICIAL_SPEC = {
+  hunter: ['野兽控制', '射击', '生存'], druid: ['平衡', '野性战斗', '恢复'],
+  priest: ['戒律', '神圣', '暗影'], warrior: ['武器', '狂怒', '防护'],
+  mage: ['奥术', '火焰', '冰霜'], shaman: ['元素战斗', '增强', '恢复'],
+  rogue: ['奇袭', '战斗', '敏锐'], warlock: ['痛苦', '恶魔学识', '毁灭']
+};
+const OFFICIAL_SPEC_SRC = 'https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968';
+
 let report = [];
 CLASSES.forEach((cid) => {
   const mine = read(path.join('talents', cid + '.json'));
@@ -67,6 +80,23 @@ CLASSES.forEach((cid) => {
     if (g.title && tr.nameCn && g.title !== tr.nameCn) {
       tr.nameAltUpstream = g.title;
       problems.push('树名不一致：我们「' + tr.nameCn + '」/ 上游「' + g.title + '」');
+    }
+    /* 定名：官方写过哪个就用哪个，另一个名字不删——两个都留并标冲突（红线：分歧不取舍）。
+       官方没覆盖的职业（圣骑士）保持现状，只留上游别名。
+       注意幂等：第二次跑时 nameCn 已经是官方名，"另一个叫法"只存在于上一轮写下的 nameAlt 里，
+       所以候选名要把已有的 nameAlt 也算进来，否则重跑一次就把分歧记录冲没了（实测踩过）。 */
+    const off = (OFFICIAL_SPEC[cid] || [])[ti];
+    const others = Array.from(new Set([tr.nameCn, tr.nameAltUpstream, tr.nameAlt]
+      .filter((x) => x && x !== off)));
+    if (off && tr.nameCn !== off) {
+      problems.push('树名按官方定名：「' + tr.nameCn + '」→「' + off + '」（另一个叫法留在 nameAlt）');
+      tr.nameCn = off;
+    }
+    if (off) {
+      tr.nameAlt = others[0] || null;
+      tr.nameConflict = !!tr.nameAlt;
+      tr.nameVerified = true;
+      tr.nameSource = OFFICIAL_SPEC_SRC;
     }
     const byPos = {};
     g.nodes.forEach((n) => { byPos[n.row + ':' + n.col] = n; });
@@ -152,3 +182,23 @@ report.forEach((r) => {
   console.log(r.cid.padEnd(9) + ' 节点 ' + n + ' · 还原前置连线 ' + l + ' · 问题 ' + r.problems.length);
   r.problems.slice(0, 4).forEach((p) => console.log('    · ' + p));
 });
+
+/* classes.json 的 talentCount / nameVerified 是手抄的，抄漏过两次（build-data 为此专门设了断言）。
+   天赋文件才是这两个数的真相，所以由这一步同步，不再靠人记——每次合并完自动对上。 */
+try {
+  const cls = read('classes.json');
+  let touched = 0;
+  (cls.classes || []).forEach((c) => {
+    let f;
+    try { f = read('talents/' + c.id + '.json'); } catch (e) { return; }
+    const nodes = f.trees.reduce((a, t) => a + t.nodes.length, 0);
+    const ver = f.trees.reduce((a, t) => a + t.nodes.filter((x) => x.nameVerified).length, 0);
+    if (c.talentCount !== nodes || c.nameVerified !== ver) {
+      console.log('  classes ' + c.id + '：talentCount ' + c.talentCount + '→' + nodes +
+        ' ｜ nameVerified ' + c.nameVerified + '→' + ver);
+      c.talentCount = nodes; c.nameVerified = ver; touched++;
+    }
+  });
+  if (touched) write('classes.json', cls);
+  console.log('classes.json 的天赋数与核实数已按 talent 文件同步（' + touched + ' 个职业）');
+} catch (e) { console.error('classes.json 同步失败：' + e.message); }

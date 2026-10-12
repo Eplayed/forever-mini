@@ -2,7 +2,7 @@
  "classId": "hunter",
  "classNameCn": "猎人",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -250,8 +250,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "狂怒释放",
-     "nameAlt": "释放怒火",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -529,7 +529,11 @@
      "upstreamId": "calc-hunter-beast-mastery-bestial-wrath",
      "changeState": "unchanged"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "hunter-1",
@@ -697,8 +701,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "精确瞄准",
-     "nameAlt": "精心瞄准",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -728,8 +732,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "疾速杀戮",
-     "nameAlt": "急速杀戮",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -790,8 +794,8 @@
      "column": 3,
      "maxRanks": 1,
      "nameCn": "独来独往",
-     "nameAlt": "孤狼",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1038,7 +1042,11 @@
      "upstreamId": "calc-hunter-marksmanship-sniper-shot",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "hunter-2",
@@ -1361,8 +1369,8 @@
      "column": 1,
      "maxRanks": 5,
      "nameCn": "掠食者之锋",
-     "nameAlt": "掠食者之刃",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1425,8 +1433,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "游刃有余",
-     "nameAlt": "足智多谋",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1487,8 +1495,8 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "生存专家的戒律",
-     "nameAlt": "生存专家之纪律",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1518,8 +1526,8 @@
      "column": 3,
      "maxRanks": 1,
      "nameCn": "陆行鸟踢击",
-     "nameAlt": "疾行踢",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1580,8 +1588,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "裂伤打击",
-     "nameAlt": "撕裂打击",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1607,12 +1615,16 @@
      "upstreamId": "calc-hunter-survival-lacerating-strikes",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   }
  ],
  "stats": {
   "nodes": 50,
-  "nameConflict": 9,
+  "nameConflict": 0,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1621,7 +1633,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/hunter",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }

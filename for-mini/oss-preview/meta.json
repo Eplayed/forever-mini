@@ -10,16 +10,16 @@
  "source": "wow-forever-web/src/data",
  "coverage": {
   "L0": 250,
-  "L1": 114,
-  "L2": 360,
+  "L1": 111,
+  "L2": 356,
   "L3": 2,
-  "total": 726
+  "total": 719
  },
  "counts": {
   "terms": 215,
   "dungeons": 38,
-  "talentNodes": 473,
-  "talentNameVerified": 460
+  "talentNodes": 466,
+  "talentNameVerified": 462
  },
  "openQuestions": [
   "天赋结构已按客户端解包核对（格子位置、点数上限、前置连线、层级门槛 5/10/15/20/25/30），473 个节点里 114 个名称与官网中文稿逐字一致；其余名称仍只有解包来源，等官方中文稿或实测再收口",

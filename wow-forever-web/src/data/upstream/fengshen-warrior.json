@@ -1,7 +1,7 @@
 {
  "trees": [
   "武器",
-  "狂暴",
+  "狂怒",
   "防护"
  ],
  "rows": [
@@ -71,7 +71,7 @@
   },
   {
    "tree": 0,
-   "name": "长矛突刺",
+   "name": "穿刺打击",
    "max": 1,
    "row": 3,
    "col": 0,
@@ -95,7 +95,7 @@
   },
   {
    "tree": 0,
-   "name": "血涌",
+   "name": "血之气息",
    "max": 5,
    "row": 4,
    "col": 0,
@@ -159,7 +159,7 @@
   },
   {
    "tree": 1,
-   "name": "钢铁意志",
+   "name": "余怒",
    "max": 5,
    "row": 1,
    "col": 1,
@@ -175,7 +175,7 @@
   },
   {
    "tree": 1,
-   "name": "强化顺劈斩",
+   "name": "狂怒精准",
    "max": 3,
    "row": 2,
    "col": 0,
@@ -199,14 +199,6 @@
   },
   {
    "tree": 1,
-   "name": "无边怒气",
-   "max": 3,
-   "row": 2,
-   "col": 3,
-   "preName": null
-  },
-  {
-   "tree": 1,
    "name": "双武器专精",
    "max": 5,
    "row": 3,
@@ -215,7 +207,7 @@
   },
   {
    "tree": 1,
-   "name": "狂怒连击",
+   "name": "怒击",
    "max": 1,
    "row": 3,
    "col": 1,
@@ -239,8 +231,8 @@
   },
   {
    "tree": 1,
-   "name": "精准",
-   "max": 3,
+   "name": "强化狂暴之怒",
+   "max": 2,
    "row": 4,
    "col": 0,
    "preName": null
@@ -263,16 +255,16 @@
   },
   {
    "tree": 1,
-   "name": "强化狂暴之怒",
-   "max": 2,
+   "name": "乱舞",
+   "max": 5,
    "row": 5,
-   "col": 0,
-   "preName": null
+   "col": 1,
+   "preName": "死亡之愿"
   },
   {
    "tree": 1,
-   "name": "疾风",
-   "max": 5,
+   "name": "饮血者",
+   "max": 2,
    "row": 5,
    "col": 2,
    "preName": "狂怒"
@@ -283,7 +275,15 @@
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": "死亡之愿"
+   "preName": "乱舞"
+  },
+  {
+   "tree": 2,
+   "name": "强化血性狂暴",
+   "max": 2,
+   "row": 0,
+   "col": 0,
+   "preName": null
   },
   {
    "tree": 2,
@@ -295,7 +295,7 @@
   },
   {
    "tree": 2,
-   "name": "预知",
+   "name": "钢铁意志",
    "max": 5,
    "row": 0,
    "col": 2,
@@ -303,16 +303,16 @@
   },
   {
    "tree": 2,
-   "name": "强化血性狂暴",
-   "max": 2,
+   "name": "预知",
+   "max": 5,
    "row": 1,
    "col": 0,
    "preName": null
   },
   {
    "tree": 2,
-   "name": "坚韧",
-   "max": 5,
+   "name": "强化复仇",
+   "max": 3,
    "row": 1,
    "col": 2,
    "preName": null
@@ -331,7 +331,7 @@
    "max": 1,
    "row": 2,
    "col": 0,
-   "preName": null
+   "preName": "预知"
   },
   {
    "tree": 2,
@@ -343,7 +343,7 @@
   },
   {
    "tree": 2,
-   "name": "强化复仇",
+   "name": "强化缴械",
    "max": 3,
    "row": 2,
    "col": 2,
@@ -367,16 +367,16 @@
   },
   {
    "tree": 2,
-   "name": "强化缴械",
-   "max": 3,
+   "name": "先锋",
+   "max": 1,
    "row": 3,
    "col": 1,
-   "preName": "防御大师"
+   "preName": null
   },
   {
    "tree": 2,
-   "name": "先锋",
-   "max": 1,
+   "name": "强化盾击",
+   "max": 2,
    "row": 3,
    "col": 2,
    "preName": null
@@ -395,35 +395,19 @@
    "max": 1,
    "row": 4,
    "col": 1,
-   "preName": "强化缴械"
+   "preName": null
   },
   {
    "tree": 2,
-   "name": "强化盾击",
-   "max": 2,
+   "name": "怒火聚焦",
+   "max": 3,
    "row": 4,
    "col": 2,
    "preName": null
   },
   {
    "tree": 2,
-   "name": "活力",
-   "max": 5,
-   "row": 4,
-   "col": 3,
-   "preName": null
-  },
-  {
-   "tree": 2,
-   "name": "专注怒气",
-   "max": 3,
-   "row": 5,
-   "col": 0,
-   "preName": null
-  },
-  {
-   "tree": 2,
-   "name": "堡垒",
+   "name": "坚城",
    "max": 5,
    "row": 5,
    "col": 2,

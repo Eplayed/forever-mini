@@ -656,17 +656,23 @@ const worldLevels = worldOut
 const pubLevels = [].concat(gl.items.map((x) => x.level || 'L3'),
   [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).map((d) => d.level || 'L3'), worldLevels);
 // 天赋节点必须计入总覆盖率，否则 L0 占比会虚高
-let talentNodes = 0, talentVerified = 0, talentLevels = [];
+let talentNodes = 0, talentVerified = 0, talentLevels = [], talentTreeConflict = 0;
 const perClassNodes = {};
 fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
   if (f.charAt(0) === '_') return;
   const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'talents', f), 'utf8'));
   const cid = f.replace(/\.json$/, '');
   perClassNodes[cid] = 0;
-  (t.trees || []).forEach((tr) => tr.nodes.forEach((n) => {
-    talentNodes++; talentLevels.push(n.level || 'L3'); perClassNodes[cid]++;
-    if (n.nameVerified) talentVerified++;
-  }));
+  (t.trees || []).forEach((tr) => {
+    // 树级分歧也要计数：2026-10-12 实测有 3 处（奇袭/刺杀、暗影/暗影魔法、元素战斗/元素）。
+    // 以前只数节点级，两个解包源收敛成一个叫法之后溯源页写着"0 分歧"，
+    // 而树名还在打架——那是把"没记录"当成"没问题"。
+    if (tr.nameConflict && tr.nameAlt) talentTreeConflict++;
+    tr.nodes.forEach((n) => {
+      talentNodes++; talentLevels.push(n.level || 'L3'); perClassNodes[cid]++;
+      if (n.nameVerified) talentVerified++;
+    });
+  });
 });
 // classes.json 的 talentCount 是手抄的，抄漏过两次（战士写 54 实际 56、德鲁伊写 52 实际 53），
 // 而首页职业条与职业页都直接显示它。天赋文件才是真相：对不上就别让它上页面。
@@ -1282,6 +1288,7 @@ Object.assign(scale, {
   glossary: gl.items.length,
   classes: (JSON.parse(fs.readFileSync(path.join(ROOT, 'classes.json'), 'utf8')).classes || []).length,
   talentNodes: talentNodes,
+  talentTreeConflict: talentTreeConflict,
   talentVerified: talentVerified,
   dungeons: dalls.length,
   dungeonsNew: (dg.newDungeons || []).length,

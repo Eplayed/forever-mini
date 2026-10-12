@@ -2,7 +2,7 @@
  "classId": "shaman",
  "classNameCn": "萨满祭司",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -219,8 +219,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "元素集中",
-     "nameAlt": "元素专注",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -250,8 +250,8 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "元素迅捷",
-     "nameAlt": "元素之怒",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -379,8 +379,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "元素射程",
-     "nameAlt": "元素延伸",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -410,8 +410,8 @@
      "column": 1,
      "maxRanks": 3,
      "nameCn": "闪电超载",
-     "nameAlt": "闪电过载",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -472,8 +472,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "元素之怒",
-     "nameAlt": "元素迅捷",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -533,7 +533,11 @@
      "changeState": "added"
     }
    ],
-   "nameAltUpstream": "元素"
+   "nameAltUpstream": "元素",
+   "nameAlt": "元素",
+   "nameConflict": true,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "shaman-1",
@@ -670,8 +674,8 @@
      "column": 1,
      "maxRanks": 3,
      "nameCn": "聪慧",
-     "nameAlt": "心灵敏捷",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -887,8 +891,8 @@
      "column": 1,
      "maxRanks": 5,
      "nameCn": "乱舞",
-     "nameAlt": "疾风",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -982,8 +986,8 @@
      "column": 1,
      "maxRanks": 2,
      "nameCn": "精神敏锐",
-     "nameAlt": "心灵迅捷",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1104,7 +1108,11 @@
      "upstreamId": "shaman-rage-of-the-farseer",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "shaman-2",
@@ -1148,8 +1156,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "图腾集中",
-     "nameAlt": "潮汐掌握",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1179,8 +1187,8 @@
      "column": 0,
      "maxRanks": 3,
      "nameCn": "全神贯注",
-     "nameAlt": "静心",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1241,8 +1249,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "潮汐集中",
-     "nameAlt": "潮汐专注",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1272,8 +1280,8 @@
      "column": 3,
      "maxRanks": 2,
      "nameCn": "强化复生",
-     "nameAlt": "强化重生",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1365,8 +1373,8 @@
      "column": 2,
      "maxRanks": 1,
      "nameCn": "水之护盾",
-     "nameAlt": "水之盾",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1396,8 +1404,8 @@
      "column": 0,
      "maxRanks": 5,
      "nameCn": "潮汐掌握",
-     "nameAlt": "图腾专注",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1609,12 +1617,16 @@
      "upstreamId": "calc-shaman-restoration-riptide",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   }
  ],
  "stats": {
   "nodes": 50,
-  "nameConflict": 14,
+  "nameConflict": 0,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1623,7 +1635,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/shaman",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }

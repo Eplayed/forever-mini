@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -285,8 +285,8 @@
      "column": 0,
      "maxRanks": 1,
      "nameCn": "穿刺打击",
-     "nameAlt": "长矛突刺",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -355,7 +355,9 @@
       "nieyi"
      ],
      "iconKey": "ability_searingarrow",
-     "requires": [],
+     "requires": [
+      "warrior-0-重伤"
+     ],
      "level": "L2",
      "provenance": [
       {
@@ -378,8 +380,8 @@
      "column": 0,
      "maxRanks": 5,
      "nameCn": "血之气息",
-     "nameAlt": "血涌",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -560,11 +562,15 @@
      "upstreamId": "calc-warrior-arms-mortal-strike",
      "changeState": "unchanged"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "warrior-1",
-   "nameCn": "狂暴",
+   "nameCn": "狂怒",
    "nameEn": null,
    "nodes": [
     {
@@ -630,13 +636,13 @@
      "changeState": "modified"
     },
     {
-     "id": "warrior-1-钢铁意志",
+     "id": "warrior-1-余怒",
      "tier": 1,
      "column": 1,
      "maxRanks": 5,
-     "nameCn": "钢铁意志",
-     "nameAlt": "余怒",
-     "nameConflict": true,
+     "nameCn": "余怒",
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -644,7 +650,7 @@
      ],
      "iconKey": "ability_warrior_secondwind",
      "requires": [],
-     "level": "L1",
+     "level": "L2",
      "provenance": [
       {
        "type": "fan_db",
@@ -657,8 +663,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-iron-will",
-     "changeState": "modified"
+     "upstreamId": "calc-warrior-fury-lingering-rage",
+     "changeState": "added"
     },
     {
      "id": "warrior-1-怒不可遏",
@@ -697,9 +703,9 @@
      "column": 0,
      "maxRanks": 3,
      "nameCn": "狂怒精准",
-     "nameAlt": "强化顺劈斩",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -719,8 +725,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-improved-cleave",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-fury-furious-precision",
+     "changeState": "added"
     },
     {
      "id": "warrior-1-刺耳怒吼",
@@ -785,32 +791,6 @@
      "changeState": "modified"
     },
     {
-     "id": "warrior-1-无边怒气",
-     "tier": 2,
-     "column": 3,
-     "maxRanks": 3,
-     "nameCn": "无边怒气",
-     "nameAlt": "无尽怒气",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": "ability_warrior_intensifyrage",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ],
-     "upstreamId": "calc-warrior-fury-boundless-rage",
-     "posMismatch": true,
-     "iconFromCell": true
-    },
-    {
      "id": "warrior-1-双武器专精",
      "tier": 3,
      "column": 0,
@@ -847,8 +827,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "怒击",
-     "nameAlt": "狂怒连击",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -935,13 +915,13 @@
      "changeState": "moved"
     },
     {
-     "id": "warrior-1-精准",
+     "id": "warrior-1-强化狂暴之怒",
      "tier": 4,
      "column": 0,
-     "maxRanks": 3,
-     "nameCn": "精准",
-     "nameAlt": "强化狂暴之怒",
-     "nameConflict": true,
+     "maxRanks": 2,
+     "nameCn": "强化狂暴之怒",
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -949,7 +929,7 @@
      ],
      "iconKey": "spell_nature_ancestralguardian",
      "requires": [],
-     "level": "L1",
+     "level": "L2",
      "provenance": [
       {
        "type": "fan_db",
@@ -962,8 +942,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-precision",
-     "changeState": "added"
+     "upstreamId": "warrior-improved-berserker-rage",
+     "changeState": "modified"
     },
     {
      "id": "warrior-1-死亡之愿",
@@ -1028,31 +1008,6 @@
      "changeState": "unchanged"
     },
     {
-     "id": "warrior-1-强化狂暴之怒",
-     "tier": 5,
-     "column": 0,
-     "maxRanks": 2,
-     "nameCn": "强化狂暴之怒",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": "spell_nature_ancestralguardian",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ],
-     "upstreamId": "warrior-improved-berserker-rage",
-     "changeState": "modified"
-    },
-    {
      "id": "warrior-1-乱舞",
      "tier": 5,
      "column": 1,
@@ -1062,6 +1017,7 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_ghoulfrenzy",
@@ -1072,10 +1028,17 @@
      "provenance": [
       {
        "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warrior-fury-flurry",
+     "changeState": "modified"
     },
     {
      "id": "warrior-1-饮血者",
@@ -1083,9 +1046,9 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "饮血者",
-     "nameAlt": "乱舞",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1107,8 +1070,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-flurry",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-fury-gore-drinker",
+     "changeState": "added"
     },
     {
      "id": "warrior-1-嗜血",
@@ -1144,7 +1107,10 @@
      "changeState": "modified"
     }
    ],
-   "nameAltUpstream": "狂怒"
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "warrior-2",
@@ -1159,8 +1125,9 @@
      "nameCn": "强化血性狂暴",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_racial_bloodrage",
@@ -1169,10 +1136,17 @@
      "provenance": [
       {
        "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-warrior-protection-improved-bloodrage",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-盾牌专精",
@@ -1206,13 +1180,13 @@
      "changeState": "modified"
     },
     {
-     "id": "warrior-2-预知",
+     "id": "warrior-2-钢铁意志",
      "tier": 0,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "预知",
-     "nameAlt": "钢铁意志",
-     "nameConflict": true,
+     "nameCn": "钢铁意志",
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1233,17 +1207,17 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-anticipation",
+     "upstreamId": "calc-warrior-fury-iron-will",
      "changeState": "modified"
     },
     {
-     "id": "warrior-2-预知-r1c0",
+     "id": "warrior-2-预知",
      "tier": 1,
      "column": 0,
      "maxRanks": 5,
      "nameCn": "预知",
-     "nameAlt": "强化血性狂暴",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1264,8 +1238,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-improved-bloodrage",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-protection-anticipation",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-强化复仇",
@@ -1273,9 +1247,9 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "强化复仇",
-     "nameAlt": "坚韧",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1295,8 +1269,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-toughness",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-protection-improved-revenge",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-强化雷霆一击",
@@ -1344,8 +1318,7 @@
      ],
      "iconKey": "spell_holy_ashestoashes",
      "requires": [
-      "warrior-2-强化血性狂暴",
-      "warrior-2-预知-r1c0"
+      "warrior-2-强化血性狂暴"
      ],
      "level": "L2",
      "provenance": [
@@ -1402,9 +1375,9 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "强化缴械",
-     "nameAlt": "强化复仇",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1424,8 +1397,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-improved-revenge",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-protection-improved-disarm",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-挑衅",
@@ -1495,47 +1468,14 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "先锋",
-     "nameAlt": "强化缴械",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_warrior_shieldcharge",
-     "requires": [
-      "warrior-2-防御大师"
-     ],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/warrior.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-warrior-protection-improved-disarm",
-     "posMismatch": true
-    },
-    {
-     "id": "warrior-2-先锋-r3c2",
-     "tier": 3,
-     "column": 2,
-     "maxRanks": 1,
-     "nameCn": "先锋",
-     "nameAlt": "强化盾击",
-     "nameConflict": true,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_warrior_shieldbash",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -1552,6 +1492,37 @@
      ],
      "upstreamId": "calc-warrior-protection-vanguard",
      "changeState": "added"
+    },
+    {
+     "id": "warrior-2-强化盾击",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "强化盾击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_warrior_shieldbash",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-warrior-protection-improved-shield-bash",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-强化盾墙",
@@ -1598,9 +1569,7 @@
       "nieyi"
      ],
      "iconKey": "ability_thunderbolt",
-     "requires": [
-      "warrior-2-先锋"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1623,8 +1592,8 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "怒火聚焦",
-     "nameAlt": "强化盾击",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1645,57 +1614,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-improved-shield-bash",
-     "posMismatch": true
-    },
-    {
-     "id": "warrior-2-活力",
-     "tier": 4,
-     "column": 3,
-     "maxRanks": 5,
-     "nameCn": "活力",
-     "nameAlt": "坚城",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": "inv_shield_04",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ],
-     "upstreamId": "calc-warrior-protection-bastion",
-     "posMismatch": true,
-     "iconFromCell": true
-    },
-    {
-     "id": "warrior-2-专注怒气",
-     "tier": 5,
-     "column": 0,
-     "maxRanks": 3,
-     "nameCn": "专注怒气",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": null,
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ]
+     "upstreamId": "calc-warrior-protection-focused-rage",
+     "changeState": "added"
     },
     {
      "id": "warrior-2-坚城",
@@ -1703,8 +1623,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "坚城",
-     "nameAlt": "怒火聚焦",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1725,8 +1645,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-protection-focused-rage",
-     "posMismatch": true
+     "upstreamId": "calc-warrior-protection-bastion",
+     "changeState": "modified"
     },
     {
      "id": "warrior-2-盾牌猛击",
@@ -1761,13 +1681,17 @@
      "upstreamId": "calc-warrior-protection-shield-slam",
      "changeState": "modified"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   }
  ],
  "stats": {
-  "nodes": 56,
-  "nameConflict": 15,
-  "onlyInOneSource": 6
+  "nodes": 52,
+  "nameConflict": 0,
+  "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1775,7 +1699,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "classId": "druid",
  "classNameCn": "德鲁伊",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -280,29 +280,6 @@
      "changeState": "added"
     },
     {
-     "id": "druid-0-自然平衡",
-     "tier": 2,
-     "column": 3,
-     "maxRanks": 5,
-     "nameCn": "自然平衡",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": null,
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ]
-    },
-    {
      "id": "druid-0-虫群",
      "tier": 3,
      "column": 0,
@@ -403,8 +380,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "繁茂",
-     "nameAlt": "蔓生",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -465,8 +442,8 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "日月之蚀",
-     "nameAlt": "月蚀",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -552,7 +529,11 @@
      "upstreamId": "calc-druid-balance-moonkin-form",
      "changeState": "modified"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "druid-1",
@@ -627,8 +608,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "豹之迅捷",
-     "nameAlt": "野性迅捷",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -755,12 +736,18 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_shadow_vampiricaura",
      "requires": [],
      "level": "L1",
      "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/druid.html",
@@ -864,11 +851,11 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-1-撕碎攻击-r3c0",
+     "id": "druid-1-变形之力",
      "tier": 3,
      "column": 0,
      "maxRanks": 1,
-     "nameCn": "撕碎攻击",
+     "nameCn": "变形之力",
      "nameAlt": "变换之力",
      "nameConflict": true,
      "nameVerified": true,
@@ -902,8 +889,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "原始撕咬",
-     "nameAlt": "裂伤",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1008,7 +995,7 @@
      ],
      "iconKey": "ability_hunter_aspectmastery",
      "requires": [
-      "druid-1-撕碎攻击-r3c0"
+      "druid-1-变形之力"
      ],
      "level": "L1",
      "provenance": [
@@ -1063,9 +1050,9 @@
      "column": 3,
      "maxRanks": 2,
      "nameCn": "掠食本能",
-     "nameAlt": "丛林之王",
+     "nameAlt": "自然本能",
      "nameConflict": true,
-     "nameVerified": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1085,8 +1072,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-druid-feral-combat-predatory-instincts",
-     "changeState": "added"
+     "upstreamId": "calc-druid-feral-combat-natural-instinct",
+     "posMismatch": true
     },
     {
      "id": "druid-1-自然反射",
@@ -1185,7 +1172,11 @@
      "upstreamId": "druid-berserk",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "druid-2",
@@ -1198,8 +1189,8 @@
      "column": 1,
      "maxRanks": 5,
      "nameCn": "自然集中",
-     "nameAlt": "自然专注",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1694,13 +1685,17 @@
      "upstreamId": "calc-druid-restoration-wild-growth",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   }
  ],
  "stats": {
-  "nodes": 53,
-  "nameConflict": 9,
-  "onlyInOneSource": 2
+  "nodes": 52,
+  "nameConflict": 0,
+  "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1708,7 +1703,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/druid",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }

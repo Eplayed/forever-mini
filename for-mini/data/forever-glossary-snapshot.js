@@ -12,10 +12,10 @@ module.exports = {
   "snapshot": true,
   "coverage": {
    "L0": 250,
-   "L1": 114,
-   "L2": 360,
+   "L1": 111,
+   "L2": 356,
    "L3": 2,
-   "total": 726
+   "total": 719
   }
  },
  "items": [

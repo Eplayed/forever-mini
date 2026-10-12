@@ -143,6 +143,17 @@
   function iconKeyOf(x) {
     return (x.kind === 'racial' ? (x.raceId || '') : (x.classId || '')) + '|' + x.cn;
   }
+  /* 树名与节点名同一套约定（2026-10-12）：官方定名当显示名，另一个叫法不删——
+     红框小标 + 悬停说明，跟节点级分歧长得一样，玩家不用学第二套符号。
+     以前 nameAltUpstream 只写在数据里没人读，等于"我们记录了分歧但决定不告诉你"。 */
+  function treeAltTip(t) {
+    return t && t.nameConflict && t.nameAlt
+      ? ' title="这一系有两个叫法：官方中文写「' + D.esc(t.nameCn) + '」，另一来源译作「' + D.esc(t.nameAlt) + '」，待定稿"' : '';
+  }
+  function treeName(t) {
+    if (!t || !t.nameCn) return '';
+    return D.esc(t.nameCn) + (t.nameConflict && t.nameAlt ? '<i class="cfl" aria-hidden="true"></i>' : '');
+  }
   /* 卡片头（2026-10-11 改版第二批）：图标 + 标题 + 右侧读数。
      o.img 只允许两种来源——这张卡讲的那个具体实体自己的本地图，或 secArt() 给的板块图；
      没有就传空，标题保留蓝线，不放不相干的图凑数。o.act 是这张卡自己的计数或出口，
@@ -935,7 +946,8 @@
       '<span><i class="lg moved"></i>换层</span><span><i class="lg unchanged"></i>未变</span>' +
       '<span class="dim">标记来自客户端解包与经典旧世的对照；没标记 = 这一条没有对照结果</span></div>' +
       '<div class="ttabs">' + trees.map(function (t, i) {
-        return '<button data-tab="' + i + '" class="' + (i === tstate.active ? 'on' : '') + '">' + D.esc(t.nameCn) + '</button>';
+        return '<button data-tab="' + i + '" class="' + (i === tstate.active ? 'on' : '') + '"' +
+          treeAltTip(t) + '>' + treeName(t) + '</button>';
       }).join('') + '</div>' + body +
       '<div class="cmpbox" id="cmpbox" style="display:none"></div>' +
       '<div class="tfoot"><label class="dim">等级 <span class="mono" id="lvv">60</span></label>' +
@@ -970,7 +982,7 @@
         }).join('')
         : '<div class="flow">' + t.nodes.map(function (n) { return cell(n, t, ti, r, trees, true); }).join('') + '</div>';
       return '<div class="tree t' + (ti % 3) + ' ' + (document.body.clientWidth < 861 && ti !== tstate.active ? 'hide' : '') + '" data-tree="' + ti + '">' +
-        '<h3><span>' + D.esc(t.nameCn) + ' <span class="dim mono">' + D.esc(t.nameEn || '') + '</span></span>' +
+        '<h3><span' + treeAltTip(t) + '>' + treeName(t) + ' <span class="dim mono">' + D.esc(t.nameEn || '') + '</span></span>' +
         '<button class="ghost" data-clear="' + ti + '" style="font-size:11px;padding:2px 6px">清空</button></h3>' +
         '<div class="hint">已投 ' + sp + ' 点 · ' + t.nodes.length + ' 个天赋 · ' + nextGate(t, r) + '</div>' + grid + '</div>';
     }).join('') + '</div>';
@@ -1017,7 +1029,12 @@
     if (all.some(function (n) { return !n.nameEn; })) g.push('英文原名：' + all.filter(function (n) { return !n.nameEn; }).length + ' 个缺失，缺失即留空不猜');
     g.push('天赋效果描述：第三方站的中文文案不复制，需自采或实测');
     var conf = all.filter(function (n) { return n.nameConflict; }).length;
-    if (conf) g.push(conf + ' 个天赋两源译名不一致（红框），等官方中文定名');
+    if (conf) g.push(conf + ' 个天赋有两个叫法（红框），等官方中文定名');
+    // 系名也可能有两个叫法（官方定名后另一来源的写法留在 nameAlt）
+    var tconf = (f.trees || []).filter(function (t) { return t.nameConflict && t.nameAlt; });
+    if (tconf.length) g.push('系名有两个叫法：' + tconf.map(function (t) {
+      return '「' + t.nameCn + '」另一来源作「' + t.nameAlt + '」';
+    }).join('、') + '（按官方定名显示）');
     var withReq = all.filter(function (n) { return (n.requires || []).length; }).length;
     g.push('前置链不完整：仅 ' + withReq + '/' + all.length + ' 个天赋带前置');
     var unverified = all.filter(function (n) { return !n.nameVerified; }).length;
@@ -1857,7 +1874,8 @@
             '<div class="stats" style="margin-top:10px">' +
             '<div class="stat"><b>' + ti.nodes + '</b>天赋节点</div>' +
             '<div class="stat"><b>' + ti.nameVerified + '</b>名与官网一致</div>' +
-            '<div class="stat"><b>' + ti.nameConflict + '</b>两源译名分歧</div>' +
+            '<div class="stat"><b>' + (ti.nameConflict + (sc.talentTreeConflict || 0)) +
+            '</b>译名有两个叫法' + (sc.talentTreeConflict ? '（含 ' + sc.talentTreeConflict + ' 个系名）' : '') + '</div>' +
             '<div class="stat"><b>' + ti.onlyInOneSource + '</b>仅单源出现</div>' +
             '<div class="stat"><b>' + ti.withIcon + '</b>带图标</div>' +
             '<div class="stat"><b>' + ti.resolvedRequires + '</b>带前置</div></div></div>' +

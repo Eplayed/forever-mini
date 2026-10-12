@@ -2,7 +2,7 @@
  "classId": "priest",
  "classNameCn": "牧师",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -533,8 +533,8 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "神圣庇护",
-     "nameAlt": "神御之盾",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -591,7 +591,11 @@
      "upstreamId": "calc-priest-discipline-power-infusion",
      "changeState": "modified"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "priest-1",
@@ -790,8 +794,8 @@
      "column": 1,
      "maxRanks": 3,
      "nameCn": "神恩回复",
-     "nameAlt": "祝福恢复",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -978,8 +982,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "圣光连祷",
-     "nameAlt": "圣光祷文",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1129,11 +1133,15 @@
      "upstreamId": "calc-priest-holy-prayer-of-mending",
      "changeState": "added"
     }
-   ]
+   ],
+   "nameAlt": null,
+   "nameConflict": false,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   },
   {
    "id": "priest-2",
-   "nameCn": "暗影魔法",
+   "nameCn": "暗影",
    "nameEn": null,
    "nodes": [
     {
@@ -1173,8 +1181,8 @@
      "column": 1,
      "maxRanks": 5,
      "nameCn": "昏阙",
-     "nameAlt": "昏厥",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1518,8 +1526,8 @@
      "column": 2,
      "maxRanks": 3,
      "nameCn": "暗影之波",
-     "nameAlt": "暗影交织",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1580,8 +1588,8 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "噬灵传染",
-     "nameAlt": "噬灵蔓延",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1611,8 +1619,8 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "提早离世",
-     "nameAlt": "早逝",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1701,12 +1709,16 @@
      "changeState": "modified"
     }
    ],
-   "nameAltUpstream": "暗影"
+   "nameAltUpstream": "暗影",
+   "nameAlt": "暗影魔法",
+   "nameConflict": true,
+   "nameVerified": true,
+   "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
   }
  ],
  "stats": {
   "nodes": 53,
-  "nameConflict": 7,
+  "nameConflict": 0,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1715,7 +1727,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/priest",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "classId": "paladin",
  "classNameCn": "圣骑士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 该站自述采集于 2026-09-13",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -27,29 +27,6 @@
    "nameCn": "神圣",
    "nameEn": null,
    "nodes": [
-    {
-     "id": "paladin-0-强化神圣打击",
-     "tier": 0,
-     "column": 0,
-     "maxRanks": 2,
-     "nameCn": "强化神圣打击",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": null,
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ]
-    },
     {
      "id": "paladin-0-神圣之力",
      "tier": 0,
@@ -118,8 +95,8 @@
      "column": 0,
      "maxRanks": 3,
      "nameCn": "治疗之光",
-     "nameAlt": "治愈之光",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -242,8 +219,8 @@
      "column": 0,
      "maxRanks": 1,
      "nameCn": "真理之音",
-     "nameAlt": "真理之声",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -273,8 +250,8 @@
      "column": 1,
      "maxRanks": 3,
      "nameCn": "敬畏",
-     "nameAlt": "崇敬",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -658,8 +635,8 @@
      "column": 0,
      "maxRanks": 3,
      "nameCn": "精确",
-     "nameAlt": "精准",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1198,8 +1175,8 @@
      "column": 1,
      "maxRanks": 2,
      "nameCn": "神圣导能",
-     "nameAlt": "圣光导管",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1441,29 +1418,6 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-2-十字军",
-     "tier": 3,
-     "column": 3,
-     "maxRanks": 2,
-     "nameCn": "十字军",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": null,
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ]
-    },
-    {
      "id": "paladin-2-双手武器专精",
      "tier": 4,
      "column": 0,
@@ -1564,8 +1518,8 @@
      "column": 1,
      "maxRanks": 3,
      "nameCn": "光芒勇士",
-     "nameAlt": "圣光勇士",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1655,9 +1609,9 @@
   }
  ],
  "stats": {
-  "nodes": 52,
-  "nameConflict": 6,
-  "onlyInOneSource": 2
+  "nodes": 50,
+  "nameConflict": 0,
+  "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1665,7 +1619,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/paladin",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-09"
+   "checkedAt": "2026-10-12"
   }
  ]
 }
