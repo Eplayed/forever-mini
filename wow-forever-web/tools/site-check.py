@@ -2374,7 +2374,9 @@ def test_design_system(browser, base):
           });
           const cd = document.querySelector('#main .cdhead');
           const img = cd && cd.querySelector('img');
-          return { hd, hdVar, bad, ths, head: !!cd,
+          // 页首标题件有两种：卡片头，或设计稿那套页首 banner（团本页 2026-10-12 起用后者）
+          const head = !!cd || !!document.querySelector('#main .dhero .pt');
+          return { hd, hdVar, bad, ths, head,
                    noart: cd ? cd.className.indexOf('noart') >= 0 : false,
                    broken: img ? (img.complete && img.naturalWidth === 0) : false,
                    h1: document.querySelectorAll('#main h1').length };

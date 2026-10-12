@@ -27,3 +27,6 @@ __pycache__/
 # 基线对应的提交号写在 baseline.json 里，要复现：python3 tools/visual-check.py --make --rev <提交号>
 wow-forever-web/docs/screenshots/baseline/
 wow-forever-web/docs/screenshots/visual-diff-*/
+
+# AI 出图的原图（PNG，几十 MB）；入库的是 src/img/gen/ 里裁过并转 webp 的那三份
+vibe_images/

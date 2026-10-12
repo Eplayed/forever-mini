@@ -472,7 +472,7 @@ console.log('图标映射 ' + Object.keys(got).length + ' 条，本地图标文�
 const artPath = path.join(ROOT, 'art.json');
 if (fs.existsSync(artPath)) {
   const art = JSON.parse(fs.readFileSync(artPath, 'utf8'));
-  ['classes', 'dungeons', 'maps', 'races', 'factions', 'factionCities', 'bosses'].forEach((k) => {
+  ['classes', 'dungeons', 'maps', 'races', 'factions', 'factionCities', 'bosses', 'gen'].forEach((k) => {
     Object.keys(art[k] || {}).forEach((id) => {
       if (!fs.existsSync(path.join(ROOT, '..', art[k][id]))) {
         errs.push(`art.json：${k}/${id} 指向的文件不存在（${art[k][id]}）`);

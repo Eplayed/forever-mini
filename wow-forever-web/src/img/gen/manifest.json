@@ -1,0 +1,42 @@
+{
+ "note": "本站自生成的氛围底图（AI），不是游戏原画也不是第三方站图片。整目录删除即回退到 CSS 渐变底 + 自绘横幅。",
+ "kind": "generated-atmosphere",
+ "items": [
+  {
+   "file": "gen/hero-ruins.webp",
+   "bytes": 49180,
+   "sha1": "36da9927c6",
+   "size": "1792x896",
+   "kind": "atmosphere",
+   "what": "首页 hero：远山废墟 + 铜金落日，左半留暗部放标题与搜索框",
+   "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
+   "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
+   "processed": "裁掉底部 128px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
+   "fetchedAt": "2026-10-12"
+  },
+  {
+   "file": "gen/banner-cloudsea.webp",
+   "bytes": 22408,
+   "sha1": "0641be17d6",
+   "size": "2560x950",
+   "kind": "atmosphere",
+   "what": "内页通用 banner：云海与远处塔尖剪影，一条微弱金色天光",
+   "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
+   "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
+   "processed": "裁掉底部 130px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
+   "fetchedAt": "2026-10-12"
+  },
+  {
+   "file": "gen/cavern-hall.webp",
+   "bytes": 114786,
+   "sha1": "0165b45348",
+   "size": "1792x896",
+   "kind": "atmosphere",
+   "what": "地下城/团本氛围：石柱大厅 + 远处火光与地缝金光",
+   "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
+   "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
+   "processed": "裁掉底部 128px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
+   "fetchedAt": "2026-10-12"
+  }
+ ]
+}

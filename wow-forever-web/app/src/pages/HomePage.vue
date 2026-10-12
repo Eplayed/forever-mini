@@ -6,7 +6,10 @@
   </div>
 
   <template v-else-if="S">
-    <section class="card hero">
+    <section class="card hero dh">
+      <!-- 整幅底图带与旧站同一件：图是本站自生成的氛围图，角标必须写明"非游戏原画" -->
+      <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
+      <span class="dmark">示意图 · 本站自生成，非游戏原画</span>
       <div class="herot">
         <span class="kicker">Forever · 无限服中文资料</span>
         <h1 class="pt">《魔兽世界：无限》中文资料站</h1>
@@ -153,6 +156,7 @@ import TalentPreview from '../components/TalentPreview.vue';
 import LevelPill from '../components/LevelPill.vue';
 
 const legacy = legacyUrl;
+const HERO_ART = 'img/gen/hero-ruins.webp';
 const CHIPS = [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
   ['provenance.html', '溯源与覆盖率'],
   ['systems.html', '系统规则'], ['skills.html', '技能书'], ['dungeons.html#todo', '还没有数据的']];

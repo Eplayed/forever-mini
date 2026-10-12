@@ -71,7 +71,8 @@
      放在 set() 里做而不是改 14 处字符串：主卡标题的写法各页不同（有的带 data-lv、有的后面紧跟
      .mline），一处装饰函数比 14 次字符串手术少得多出错面；重复调用无副作用（没 h1.pt 就跳过）。 */
   var PAGE_HEAD_SEC = { talent: 'talent', chooser: 'chooser', skills: 'skills', dungeons: 'dungeons',
-    raids: 'raids', races: 'races', professions: 'professions', legacy: 'legacy', world: 'world' };
+    races: 'races', professions: 'professions', legacy: 'legacy', world: 'world' };
+    // 团本页不在这张表里：它 2026-10-12 起按设计稿改用页首 banner（.dhero 里放 H1），不再套卡片头 
   function decoratePageHead() {
     var m = el('main');
     if (!m || page === 'home') return;   // 首页主卡在 hero 里，第一批已经给它单独排过（kicker + 图标轨）
@@ -648,7 +649,12 @@
         ] }
       ];
 
-      set('<section class="card hero"><div class="herot">' +
+      /* 首页主卡按设计稿改成整幅底图带：图是本站自生成的氛围图（不是游戏原画，右下角标"示意图"），
+         左边压到 97% 暗给标题与搜索框，正文 DOM 一个不动——搜索框、倒计时、覆盖率那些断言都还吃这套结构。 */
+      set('<section class="card hero dh"><img class="dhbg" src="img/gen/hero-ruins.webp" alt="" ' +
+        'style="object-position:center 42%"><span class="dhx"></span>' +
+        '<span class="dmark">示意图 · 本站自生成，非游戏原画</span>' +
+        '<div class="herot">' +
         '<span class="kicker">Forever · 无限服中文资料</span>' +
         '<h1 class="pt">《魔兽世界：无限》中文资料站</h1>' +
         '<p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
@@ -1645,9 +1651,10 @@
 
   /* ---------- 团本 ---------- */
   function raids() {
-    Promise.all([D.load('data/queue.json').catch(function () { return {}; }), D.load('data/dungeons.json')])
+    Promise.all([D.load('data/queue.json').catch(function () { return {}; }), D.load('data/dungeons.json'),
+      D.load('data/timeline.json').catch(function () { return { items: [] }; })])
       .then(function (rs) {
-      var QU = rs[0] || {}, DG = rs[1];
+      var QU = rs[0] || {}, DG = rs[1], TL = (rs[2] || {}).items || [];
       var rows = (QU.items || []).filter(function (x) { return x.kind === 'raid'; });
       var claimed = DG.raids || [];
       var dunIds = {};
@@ -1717,6 +1724,53 @@
       function draw() {
         var k = f.q.trim().toLowerCase();
         var shown = k ? names.filter(function (x) { return x.nameEn.toLowerCase().indexOf(k) >= 0; }) : names;
+        /* 页首那一排团本卡按设计稿的版式件摆（稿子 docs/DESIGN-DOUBAO-2026-10-12.md 第 3.7 节）。
+           卡上的图一律是本站自生成的氛围底图，不是这三座的真实原画——所以每张都带"示意图"角标，
+           不拿一张通用风景冒充某个团本的载入图。名字与人数只用我们数据里有的说法：
+           中文定名没公布就写英文原名，两说的两个数都摆，不学稿子写"深穴 / 海加尔峰"那种拟译。 */
+        var HERO = 'img/gen/banner-cloudsea.webp';
+        var CARD_ART = { 'barrow-deeps': 'img/gen/cavern-hall.webp', 'hyjal-summit': HERO,
+          'onyxias-lair': 'img/gen/hero-ruins.webp' };
+        var first = claimed[0] || {};
+        var nextRaid = TL.filter(function (x) { return /团本|团队副本/.test(x.title || ''); })[0] || null;
+        var beta = TL.filter(function (x) { return /国服 Beta 开启/.test(x.title || ''); })[0] || null;
+        var launch = TL.filter(function (x) { return /国服/.test(x.title || '') && /上线/.test(x.title || ''); })[0] || null;
+        var hero = '<section class="dhero" style="height:300px">' +
+          '<img src="' + HERO + '" alt="" style="object-position:center 25%">' +
+          '<span class="dx"></span>' +
+          '<div class="db" style="padding-top:104px">' +
+          '<div class="kicker">RAID</div>' +
+          '<h1 class="pt" style="font-family:var(--font-display);font-size:46px;margin:10px 0 8px;color:#f2ead8">团队副本</h1>' +
+          '<div style="font-size:15px;color:var(--txt-dim)">客户端里现在能排到 ' + names.length + ' 个团队条目；' +
+          '本站有名单的 ' + both + ' 座。' +
+          (nextRaid ? '官方英文回顾写过新团本 <b style="color:var(--gold-hi);font-family:var(--font-mono)">' +
+            D.esc(nextRaid.date.slice(5).replace('-', ' 月 ')) + ' 日</b> 开放。' : '') + '</div></div>' +
+          '<div class="dstate"><i></i><b>' + (both ? '部分已有名单' : '全部未开放') + '</b></div>' +
+          '<span class="dmark">示意图 · 本站自生成，非游戏原画</span></section>';
+        var cards = '<section style="padding:36px 0 0"><div class="raidgrid">' + claimed.map(function (r, i) {
+          var inClient = names.filter(function (x) { return x.matchedIn === 'raid' && x.matched === r.id; })[0];
+          var sizes = [];
+          if (r.sizeClaim) sizes.push(String(r.sizeClaim));
+          if (inClient && inClient.sizes) inClient.sizes.forEach(function (s) {
+            if (sizes.indexOf(String(s)) < 0) sizes.push(String(s));
+          });
+          return '<div class="raidcard"><div class="art">' +
+            '<img src="' + (CARD_ART[r.id] || HERO) + '" alt="" loading="lazy">' +
+            '<span class="sh"></span>' +
+            '<span class="goldtag">' + (sizes.length ? D.esc(sizes[0]) + ' 人' : '人数未定') + '</span>' +
+            '<span class="chip-open">' + ((r.bosses || []).length ? '名单已收录' : '未开放') + '</span>' +
+            '<h3>' + D.esc(r.nameEn || r.nameCn || '未定名') + '</h3></div>' +
+            '<div class="bd"><div class="facts">' +
+            (sizes.length > 1 ? '人数两说：' + sizes.map(function (s) { return '<b>' + D.esc(s) + '</b>'; }).join(' / ') + ' 人（一座自报、一条排队条目）'
+              : sizes.length ? '按这份名单是 <b>' + D.esc(sizes[0]) + '</b> 人' : '进入人数还没有可信说法') +
+            '<br>' + (r.nameCn ? D.esc(r.nameCn) : '中文定名未公布，这里只写客户端与资料给的英文原名。') +
+            '</div>' +
+            '<div class="dashedbox">' + ((r.bosses || []).length ? '首领 ' + (r.bosses || []).length + ' 个已收录'
+              : '首领名单与掉落还没有可信来源——不猜名单，也不猜掉落归属。') + '</div>' +
+            (inClient ? '<a class="cta-cut" href="dungeons.html?d=' + D.esc(r.id) + '">看这一座的收录情况</a>'
+              : '<a class="cta-cut" href="timeline.html">看上线时间表那一页</a>') +
+            '</div></div>';
+        }).join('') + '</div></section>';
         var bands = '';
         [40, 25, 20, 15, 10].forEach(function (n) {
           var pick = shown.filter(function (x) { return (x.sizes[0] || 0) === n; });
@@ -1725,8 +1779,24 @@
         });
         var rest = shown.filter(function (x) { return [40, 25, 20, 15, 10].indexOf(x.sizes[0] || 0) < 0; });
         if (rest.length) bands += '<div class="band"><b>人数未标</b></div>' + table(rest);
-        set('<div class="card" data-lv="' + (D.worstLevel([{ level: 'L1' }].concat(claimed)) || 'L3') + '">'
-          + '<h1 class="pt">团队副本</h1><p class="dim">这一页只有两份名单，没有攻略：'
+        /* 三步带：日期全部取自 timeline.json（官方那条怎么写就怎么摆），
+           不抄稿子写死的"12 月 10 日"——官方英文回顾给的是 12 月 9 日。 */
+        function tlNode(x, col, lab) {
+          if (!x) return '';
+          return '<div class="node"><i style="background:' + col + '"></i><div>' +
+            '<b>' + D.esc(lab || x.title) + '</b>' +
+            '<span style="color:' + col + '">' + D.esc(x.date === '待定' || x.date === '择期' ? x.date : x.date) + '</span>' +
+            '</div></div>';
+        }
+        var tl3 = '<section class="tl3" style="margin-top:32px">' +
+          tlNode(beta, 'var(--ok)', '国服 Beta 进行中') +
+          (beta && launch ? '<span class="link"></span>' : '') +
+          tlNode(launch, 'var(--gold)') +
+          (launch && nextRaid ? '<span class="link"></span>' : '') +
+          tlNode(nextRaid, 'var(--warn)') + '</section>';
+        set(hero + cards + tl3 +
+          '<div class="card" data-lv="' + (D.worstLevel([{ level: 'L1' }].concat(claimed)) || 'L3') + '">'
+          + '<p class="dim">这一页把"什么算团本"这件事拆成两份名单：'
           + '一份是客户端的队伍查找器里现在能排到的团队条目（' + names.length + ' 个名字、' + rows.length + ' 条），'
           + '一份是第三方资料站自己列的 ' + claimed.length + ' 座。两边都对得上的只有 ' + both + ' 座（'
           + '奥妮克希亚的巢穴），谁也没能给出中文名。</p>'

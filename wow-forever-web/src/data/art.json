@@ -258,5 +258,10 @@
   "fetchedAt": "2026-10-12",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
   "count": 241
+ },
+ "gen": {
+  "hero-ruins": "img/gen/hero-ruins.webp",
+  "banner-cloudsea": "img/gen/banner-cloudsea.webp",
+  "cavern-hall": "img/gen/cavern-hall.webp"
  }
 }
