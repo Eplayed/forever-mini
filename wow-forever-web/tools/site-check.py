@@ -1334,7 +1334,7 @@ def test_home(browser, base):
           return n;
         }),
         two: [...document.querySelectorAll('.two > section')].map(e => (e.querySelector('h2') || {}).innerText),
-        clsrow: [...document.querySelectorAll('.clsrow a')].map(a => a.getAttribute('href')),
+        clsrow: [...document.querySelectorAll('.cls9 a')].map(a => a.getAttribute('href')),
         artFiles: arts.map(e => (((e.getAttribute('style') || '').match(/url\(([^)]+)\)/) || [])[1] || '')),
         artBad: arts.filter(e => bad(e.style && (e.style.backgroundImage || '').indexOf('img/art/') < 0)).length,
         artCards: cards.filter(c => c.querySelector('.bgart')).length,
@@ -1364,8 +1364,11 @@ def test_home(browser, base):
     check("「最常用的两个」是天赋预览与副本，且九张卡不重复它们",
           st["two"] == ["先看一棵真树，再进计算器", "副本手册"] and not dup,
           json.dumps({"two": st["two"], "重复": dup}, ensure_ascii=False))
-    check("hero 的职业入口是 9 个链接、只进那一职业页不做切树",
-          len(st["clsrow"]) == 9 and st["heroLinks"] == 9, json.dumps(st["clsrow"][:2], ensure_ascii=False))
+    # 2026-10-12 按稿改版：职业入口从 hero 里搬出来，成为 hero 之下独立一节（.cls9）。
+    # 判据不变——9 个、只进那一职业的页、不在首页切树；只是找的元素换了。
+    check("职业入口是 9 个链接、只进那一职业页不做切树",
+          len(st["clsrow"]) == 9 and all("talent.html?c=" in x for x in st["clsrow"]),
+          json.dumps(st["clsrow"][:2], ensure_ascii=False))
     check("卡片背景图全部是本地已转存素材，没有热链",
           len(st["artFiles"]) > 0 and all(f.startswith("img/art/") for f in st["artFiles"]),
           json.dumps(st["artFiles"][:3], ensure_ascii=False))
@@ -1402,11 +1405,13 @@ def test_home(browser, base):
     check("同一张卡里两个 CTA 之间有空隙，不挤成一句", st["ctaGap"] > 0, "margin-left %s" % st["ctaGap"])
     # 旧站这段模板漏了一个 </div>，浏览器自动补的位置让问答入口被框进读数卡里（191px），
     # Vue 那份是正常闭合（105px）——两栈对拍查文本查不出来，这里按结构钉住。
-    check("hero 的读数框只框住倒计时，问答入口在框外",
+    # 稿子的 hero 右侧只放一枚读数牌；两个出口按钮排在正文下方，不进读数框
+    check("hero 的读数框只框住倒计时，出口按钮在框外",
           page.evaluate("() => { const cd = document.querySelector('.heros .cd');"
                         "return !!cd && !cd.querySelector('a') && cd.children.length === 2 &&"
-                        "!!document.querySelector('.heros > a.cta'); }"),
-          "读数框里混进了链接或段落层级不对")
+                        "!!document.querySelector('.hero .herobtns a.cta') &&"
+                        "!document.querySelector('.heros a'); }"),
+          "读数框里混进了链接，或出口按钮没排在框外")
     css = open(os.path.join(SRC, "css", "app.css"), encoding="utf-8").read()
     flat = css.replace(" ", "").replace("\n", "")
     check("卡片动效只有三处且都能关（hover 抬升 / 背景微缩放 / reduced-motion 归零）",

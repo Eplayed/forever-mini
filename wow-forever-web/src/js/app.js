@@ -434,6 +434,12 @@
       ready.then(function () { if (el('gs') === inp && inp.value === v) sRender(v); });
     };
     inp.oninput = run;
+    // 稿子在搜索框里放了一颗实心"立即搜索"：有结果就进第一条，没结果就只是把结果展开
+    var go = el('ggo');
+    if (go) go.onclick = function () {
+      run();
+      if (SX.rows && SX.rows.length) location.href = sHref(SX.rows[0]);
+    };
     // 顶栏搜索框跳到首页会带 ?q=，这里接住：填进去并立刻出结果，不让人重打一遍
     var q0 = urlQ('q');
     if (q0 && !inp.value) { inp.value = q0; run(); }
@@ -677,31 +683,29 @@
 
       /* 首页主卡按设计稿改成整幅底图带：图是本站自生成的氛围图（不是游戏原画，右下角标"示意图"），
          左边压到 97% 暗给标题与搜索框，正文 DOM 一个不动——搜索框、倒计时、覆盖率那些断言都还吃这套结构。 */
-      set('<section class="card hero dh"><img class="dhbg" src="img/gen/hero-ruins.webp" alt="" ' +
+      set('<section class="card hero dh mhero"><img class="dhbg" src="img/gen/hero-ruins.webp" alt="" ' +
         'style="object-position:center 42%"><span class="dhx"></span>' +
         '<span class="dmark">示意图 · 本站自生成，非游戏原画</span>' +
         '<div class="herot">' +
-        '<span class="kicker">Forever · 无限服中文资料</span>' +
-        '<h1 class="pt">《魔兽世界：无限》中文资料站</h1>' +
-        '<p class="dim">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
+        '<span class="bbadge"><i></i>测试服进行中 · 客户端 ' + D.esc(String(meta.dataBaseline.build).split('.').pop()) + '</span>' +
+        '<h1 class="pt">回到最初的世界<br><em>探索无限的可能</em></h1>' +
+        '<p class="lead">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语——' +
         '每条数据都挂着来源与核对状态，没核实的地方直接写「待实测」，不编也不机翻。</p>' +
-        '<div class="gsearch" role="search">' +
+        '<div class="gsearch hs" role="search">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' +
         '<input type="search" id="gs" autocomplete="off" aria-controls="gres" aria-expanded="false" ' +
         'aria-label="全站搜索：天赋、改动、术语、副本、区域、配方、种族" ' +
         'placeholder="搜天赋、副本、区域、配方、种族特长（共 ' + S.search + ' 条）">' +
+        '<button type="button" class="cta cta-gold" id="ggo">立即搜索</button>' +
         '<p class="gsex">' + [['潜行', '同一个词在改动清单和配方里都有'], ['领主大厅', '副本名'],
           ['咆鼻', '稀有精英'], ['舒适的睡袋', '世界页的营点']].map(function (x) {
             return '<button type="button" class="gsx" data-s="' + D.esc(x[0]) + '" title="' + D.esc(x[1]) + '">' +
               x[0] + '</button>';
           }).join('') + '<span class="dim">只搜名称与归属，不搜攻略说法，也不搜别人站的正文。</span></p>' +
         '<div class="gres" id="gres" hidden></div></div>' +
-        '<div class="pickcls"><div class="mline">选择你的职业 · <b>' + S.classes +
-          '</b> 个职业各有一页改动、天赋与技能</div><div class="clsrow">' +
-          classes.map(function (c) {
-            var ic = (ART.classes || {})[c.id];
-            return '<a href="talent.html?c=' + encodeURIComponent(c.id) + '"><i' +
-              (ic ? ' style="background-image:url(' + ic + ')"' : '') + '></i>' + D.esc(c.cn) + '</a>';
-          }).join('') + '</div></div>' +
+        '<div class="herobtns">' +
+        '<a class="cta cta-line" href="updates.html">看这一版改了什么</a>' +
+        '<a class="cta cta-mute" href="chooser.html">不知道选哪个职业：做 7 题玩法问答</a></div>' +
         D.covBar(cov) +
         '<div class="covnum">' +
         ['L0', 'L1', 'L2', 'L3'].map(function (k) {
@@ -713,9 +717,44 @@
         '<aside class="heros"><div class="cd"><div class="cdrow"><b class="mono" id="cdD">' + left.d +
         '</b><span>天</span><i class="mono" id="cdT">' + pad2(left.h) + ':' + pad2(left.m) + ':' +
         pad2(left.s) + '</i></div>' +
-        '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p></div>' +
-        '<a class="cta" href="chooser.html">不知道选哪个职业？做 7 题玩法问答 →</a>' +
-        '<span class="dim">问答是本站整理的玩法取向，不是强度排行。</span></aside></section>' +
+        '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p></div></aside></section>' +
+        /* 下面三块是稿子首页的骨架：选择你的职业 → 六个入口 → 四条读数。
+           数字全部从 scale.json 现取，稿子里写死的 753 / 5353 / 6 开放 一个都不抄。 */
+        '<section class="hsec"><div class="krow"><div><div class="kicker">CHOOSE YOUR CLASS</div>' +
+        '<h2>选择你的职业</h2></div><a class="kall" href="chooser.html">7 题玩法问答 · 帮你定一个 →</a></div>' +
+        '<div class="cls9">' + classes.map(function (c) {
+          var ic = (ART.classes || {})[c.id];
+          return '<a href="talent.html?c=' + encodeURIComponent(c.id) + '">' +
+            (ic ? '<img src="' + D.esc(ic) + '" alt="" loading="lazy">'
+              : '<i class="hrt-x">' + D.esc((c.cn || '?').charAt(0)) + '</i>') +
+            '<b>' + D.esc(c.cn) + '</b></a>';
+        }).join('') + '</div></section>' +
+        '<section class="hsec"><div class="krow"><div><div class="kicker">EXPLORE TOOLS</div>' +
+        '<h2>这座站的六个入口</h2></div></div><div class="tools6">' +
+        [['talent.html', '天赋计算器', S.talentNodes + ' 个节点 · ' + S.classes + ' 职业',
+          '格子里就是客户端解出来的天赋本身：位置、每层上限、与经典旧世的差异都按真结构摆，点格子进计算器并亮那一格。'],
+        ['updates.html', '这一版改了什么', S.changes + ' 条改动清单',
+          '官方公告里的时间点、客户端解出的职业改动、本站自己改了什么，三件事分开摆。改动只列名称与类别，不抄别人的前后对照句子。'],
+        ['dungeons.html', '副本与掉落', S.dungeons + ' 座 · ' + S.bosses + ' 个首领',
+          '按十级一档排：首领名单、谁掉了什么、等级区间两说的两个数都留着。掉落只回答"谁掉了什么"，不写概率。'],
+        ['skills.html', '技能书', S.abilities + ' 条官方中文整句',
+          '新增 / 改动 / 移除 / 未变四态与经典旧世并排；中文名出自国服官方公告的整句，名称不在句里就不收。'],
+        ['professions.html', '专业与配方', S.professions + ' 个专业 · ' + S.recipes + ' 条配方',
+          '每个专业的配方、所需材料与采集点，含无限新增那一批。野营那一页摆不出一条能核的清单，就不编。'],
+        ['glossary.html', '中英术语速查', S.glossary + ' 条词条',
+          '天赋、技能、物品、种族特长的中英对照，按职业与种族分组，两个叫法都留着，不替你做取舍。']].map(function (t) {
+          return '<a class="tool plate" href="' + t[0] + '">' +
+            '<span class="tico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" ' +
+            'stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/>' +
+            '<path d="M9 12h6M12 9v6"/></svg></span>' +
+            '<h3>' + t[1] + '</h3><p>' + t[3] + '</p>' +
+            '<span class="foot"><em>' + t[2] + '</em><i>进入 →</i></span></a>';
+        }).join('') + '</div></section>' +
+        '<section class="stats4 plate big">' +
+        [[cov.L0, '条已对过官方中文'], [S.talentNodes, '个天赋节点已入库'],
+        [S.dungeons, '座副本有名单'], [S.search, '条内容可搜']].map(function (x) {
+          return '<div class="scell"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>';
+        }).join('') + '</section>' +
         // 板块入口的图标轨：Wowhead 的"美术填充层"就是这么用的——每格一张本地原画，
         // 指向真页面；没有本地图的格子退回字母块，不热链别人的图。
         (function () {

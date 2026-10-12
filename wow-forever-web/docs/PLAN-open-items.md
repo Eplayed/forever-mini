@@ -66,3 +66,4 @@
 - 批次与参考站对比：`PLAN-reference-layouts.md`。
 - 两栈迁移进度：`APP-PARITY-2026-10-09.md` 与 `app/src/lib/nav.js` 的 `MIGRATED` 表。
 - 小程序侧：根 `AGENTS.md` 的仓库地图与 `for-mini/AGENTS.md`。
+| 13 | **Vue 新站首页落后于按稿重排后的旧站首页**：`app-parity --strict` home 这组必红（差 20 个类名、14 行正文）。旧站仍是发布口径。下一轮按 `docs/DESIGN-DOUBAO-2026-10-12.md` 第三节把 hero 徽章 / 两行标题 / 大搜索 / 职业 9 格 / 六个入口卡 / 四条读数镜像进 `HomePage.vue`，过不了对拍不算迁完 | **未做（本轮已知缺口，故意留下）** | wow-dev |

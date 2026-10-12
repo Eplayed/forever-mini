@@ -1312,7 +1312,7 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .raidcard .art .goldtag{position:absolute;left:14px;top:14px}
 .raidcard .art .chip-open{position:absolute;right:14px;top:14px}
 .raidcard .art h3{position:absolute;left:18px;bottom:14px;right:18px;margin:0;
-  font-family:var(--font-display);font-size:25px;color:#f2ead8;font-weight:700;line-height:1.25}
+  font-family:var(--font-display);font-size:25px;color:var(--txt-title);font-weight:700;line-height:1.25}
 .raidcard .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:14px}
 .raidcard .facts{font-size:14px;line-height:1.7;color:var(--txt-dim)}
 .raidcard .facts b{color:var(--gold-hi);font-family:var(--font-mono)}
@@ -1324,7 +1324,7 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .tl3 .node{flex:1;display:flex;align-items:center;gap:14px}
 .tl3 .node i{width:14px;height:14px;border-radius:50%;flex:0 0 auto;
   box-shadow:0 0 0 4px var(--gold-glow)}
-.tl3 .node b{display:block;font-size:16px;color:#f2ead8}
+.tl3 .node b{display:block;font-size:16px;color:var(--txt-title)}
 .tl3 .node span{display:block;font-size:13px;margin-top:3px;font-family:var(--font-mono)}
 .tl3 .link{flex:0 0 90px;height:1px;background:var(--gold-line);margin:0 10px}
 
@@ -1334,7 +1334,7 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
 .tool .tico{width:44px;height:44px;border:1px solid var(--gold-line);display:flex;align-items:center;
   justify-content:center;background:rgba(11,15,22,.35)}
 .tool .tico svg{stroke:var(--gold)}
-.tool h3{font-family:var(--font-display);font-size:20px;color:#f2ead8;margin:0;font-weight:700}
+.tool h3{font-family:var(--font-display);font-size:20px;color:var(--txt-title);margin:0;font-weight:700}
 .tool p{font-size:14px;line-height:1.7;color:var(--txt-dim);margin:0;min-height:48px}
 .tool .foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
   border-top:1px solid var(--gold-line-soft);padding-top:10px;margin-top:2px}
@@ -1414,3 +1414,42 @@ tbody tr:last-child td{border-bottom:none}
 .grp{color:var(--gold);border-bottom-color:var(--gold-line-soft)}
 /* 天赋已学格：稿子用金色双层（外描边 + 内发光），未学格压暗一档 */
 .tnode.on img,.tnode.on{box-shadow:0 0 10px var(--gold-glow),inset 0 0 6px var(--gold-glow)}
+
+/* 首页按稿重排后的专属件：更高的 hero、BETA 徽章、两行衬线大标题、大搜索框与实心按钮、
+   两个出口按钮、区块容器、四条读数带 */
+.hero.mhero{padding:0}
+.hero.mhero .herot{padding:56px 40px 40px}
+.hero.mhero h1.pt{font-family:var(--font-display);font-size:clamp(34px,4.6vw,58px);line-height:1.18;
+  margin:22px 0 0;color:var(--txt-title);letter-spacing:1px}
+.hero.mhero h1.pt em{font-style:normal;color:var(--gold-hi)}
+.hero.mhero .lead{font-size:16px;line-height:1.8;color:var(--txt-banner);margin:20px 0 28px;max-width:520px}
+.bbadge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;font-size:13px;letter-spacing:4px;
+  color:var(--gold);border:1px solid var(--gold-line-2);background:rgba(16,23,37,.5)}
+.bbadge i{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.gsearch.hs{position:relative;display:flex;align-items:center;width:100%;max-width:540px;height:58px;
+  padding:0 8px 0 20px;background:rgba(16,23,37,.92);border:1px solid var(--gold);color:var(--gold);
+  clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%)}
+.gsearch.hs input{flex:1;min-width:0;border:none;background:none;color:var(--txt);font:15px var(--font-body);outline:none}
+.gsearch.hs input::placeholder{color:var(--txt-hint)}
+.cta-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--ink-on-bright);
+  font-weight:700;font-size:15px;border:none;cursor:pointer;height:42px;padding:0 26px;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.cta-line,.cta-mute{display:inline-block;text-align:center;text-decoration:none;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);padding:12px 24px;font-size:15px}
+.cta-line{border:1px solid var(--gold);color:var(--gold-hi)}
+.cta-mute{border:1px solid var(--gold-line);color:var(--txt-banner)}
+.herobtns{display:flex;flex-wrap:wrap;gap:16px;margin-top:26px}
+.hsec{max-width:var(--wrap);margin:0 auto;padding:52px 20px 0}
+.stats4{display:grid;grid-template-columns:repeat(4,1fr);margin-top:36px}
+.stats4 .scell{padding:26px;text-align:center;border-right:1px solid var(--gold-line-soft)}
+.stats4 .scell:last-child{border-right:none}
+.stats4 b{display:block;font-family:var(--font-display);font-size:40px;color:var(--gold-hi);line-height:1}
+.stats4 span{display:block;font-size:14px;color:var(--txt-dim);margin-top:6px}
+@media (max-width:860px){ .stats4{grid-template-columns:repeat(2,1fr)}
+  .stats4 .scell:nth-child(2){border-right:none}
+  .hero.mhero .herot{padding:36px 20px 28px} }
+@media (max-width:600px){ .gsearch.hs{height:auto;flex-wrap:wrap;padding:12px 16px;clip-path:none}
+  .gsearch.hs .cta-gold{margin-top:10px;width:100%}
+  .herobtns .cta-line,.herobtns .cta-mute{display:flex;align-items:center;justify-content:center;min-height:44px;flex:1 1 100%}
+  .cta-gold{min-height:44px;height:auto}
+  .krow .kall{display:inline-flex;align-items:center;min-height:44px} }

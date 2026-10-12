@@ -28,6 +28,8 @@
   --sunk:#0d121c; --sunk-2:#0b0f16; --hatch:#46506a;
   --field:#101725; --field-line:#2c3850; --ink-on-bright:#1a1408; --mark-ink:#ffe1a8;
   --foot-bg:#080b11;
+  /* 稿子的标题白比正文暖白亮一档、banner 副标题与搜索占位各一档，都是纯装饰层级，不承载数据 */
+  --txt-title:#f2ead8; --txt-banner:#aeb6c4; --txt-hint:#7e8696;
 
   /* ---- 功能色（不承担品牌）---- */
   --ok:#67c267; --warn:#dd9f44; --bad:#c75c5c;
