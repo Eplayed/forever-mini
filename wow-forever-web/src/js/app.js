@@ -726,6 +726,9 @@
         '<p class="dim">到正式服上线（' + LAUNCH.slice(0, 10) + '）· 差秒按本地时钟走</p></div></aside></section>' +
         /* 下面三块是稿子首页的骨架：选择你的职业 → 六个入口 → 四条读数。
            数字全部从 scale.json 现取，稿子里写死的 753 / 5353 / 6 开放 一个都不抄。 */
+        /* 这九格点进去是"那一职业的天赋计算器"，不是职业页——2026-10-12 用户实拍后确认这样是对的，
+           别"顺手"改成 classes.html：这一节的语义是"选一个职业开始加点"，
+           职业页的入口在导航条那一格与页脚「资料」栏。 */
         '<section class="hsec"><div class="krow"><div><div class="kicker">CHOOSE YOUR CLASS</div>' +
         '<h2>选择你的职业</h2></div><a class="kall" href="chooser.html">7 题玩法问答 · 帮你定一个 →</a></div>' +
         '<div class="cls9">' + classes.map(function (c) {
