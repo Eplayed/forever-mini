@@ -326,6 +326,7 @@ def test_talent(browser, base):
 
 def test_dungeon_banner(browser, base):
     print("\n[4] 副本横幅渲染（防拉伸回归）")
+    import json
     ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
     page = ctx.new_page()
     page.goto(base + "/dungeons.html", wait_until="networkidle")
@@ -344,12 +345,14 @@ def test_dungeon_banner(browser, base):
     check("横幅标题无 transform 变形", geo["transform"] in ("none", "matrix(1, 0, 0, 1, 0, 0)"), geo["transform"])
     check("标题字宽未被横向拉伸", per_char <= geo["font"] * 1.35,
           "字号 %.0fpx，单字实测宽 %.1fpx" % (geo["font"], per_char))
-    marks = page.evaluate("() => [...document.querySelectorAll('.dbn2-mark')].map(m => m.textContent.trim())")
-    honest = [m for m in marks if ("非游戏原画" in m) or ("客户端原画" in m)]
-    check("每张横幅都标明图是示意图还是客户端原画", len(honest) == len(marks) and marks,
-          "%d/%d 带标注" % (len(honest), len(marks)))
-    check("有客户端原画的副本用上了本地图",
-          any("客户端原画" in m for m in marks), "标注种类 %s" % sorted(set(marks)))
+    marks = page.evaluate("() => document.querySelectorAll('.dbn2 .dbn2-mark').length")
+    # 2026-10-12 站主决定：横幅上的素材出处角标（"客户端原画 · 本地转存"/"示意图 · 非游戏原画"）撤掉，
+    # 这里从"每张都要标"改成反向断言"角标不许回来"；有原画的卡仍然必须真的挂上本地图。
+    check("横幅上的素材出处角标已撤", marks == 0, "%d 个角标残留" % marks)
+    art = page.evaluate("""() => ({photo: document.querySelectorAll('.dbn2 img.dbn-art').length,
+      svg: document.querySelectorAll('svg.dbn-art').length})""")
+    check("有客户端原画的副本用上了本地图片，没原画的仍是自绘横幅",
+          art["photo"] >= 1 and art["svg"] >= 1, json.dumps(art, ensure_ascii=False))
     body = page.evaluate("() => document.querySelector('#main').innerText")
     check("副本页不出现内部口径话术", "口径见来源" not in body and "provenance" not in body)
     page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-banner.png"))
@@ -420,8 +423,8 @@ def test_abilities(browser, base):
           page.evaluate("() => {const t=document.querySelector('#abtbl').innerText; return t.indexOf('beast-mastery')<0 && t.indexOf('marksmanship')<0;}"))
     page.evaluate("() => { const s = document.getElementById('c'); s.value='paladin'; s.dispatchEvent(new Event('change')); }")
     page.wait_for_timeout(900)
-    check("无官方稿的职业显示空态而不是空表",
-          "还没有官方中文深度解析稿" in page.evaluate("() => document.querySelector('#abtbl').innerText"))
+    check("无官方稿的职业显示空态而不是空表（原因取自 abilities.json 的「没收到的」）",
+          "深度解析稿" in page.evaluate("() => document.querySelector('#abtbl').innerText"))
     page.screenshot(path=os.path.join(SHOT_DIR, "skills-abilities.png"))
     ctx.close()
 
@@ -532,17 +535,12 @@ def test_races(browser, base):
       quotes: document.querySelectorAll('#rdet .rdtr .quote').length,
       src: document.querySelectorAll('#rdet .rdtr [data-src]').length,
       name: ((document.querySelector('#rdet h2') || {}).innerText || '').trim() })""")
-    check("特长改由种族详情逐条给：条数、官方整句、来源三项齐",
-          det["rows"] == n_first and det["quotes"] == n_first and det["src"] == n_first,
-          "「%s」详情 %d 条 / 整句 %d / 来源 %d / 数据 %d"
+    # 2026-10-12 站主决定：逐条「来源」按钮从内容页撤了，出处集中在溯源页说。
+    # 这条从"条数/整句/来源三项齐"改成"条数与官方整句齐，且不再有来源按钮"。
+    check("特长由种族详情逐条给：条数与官方整句齐，逐条来源按钮已撤",
+          det["rows"] == n_first and det["quotes"] == n_first and det["src"] == 0,
+          "「%s」详情 %d 条 / 整句 %d / 来源按钮 %d / 数据 %d"
           % (det["name"], det["rows"], det["quotes"], det["src"], n_first))
-    page.click("#rdet .rdtr [data-src] >> nth=0")
-    page.wait_for_timeout(300)
-    box = page.evaluate("() => { const b = document.getElementById('srcbox');"
-                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
-    check("特长逐条来源可展开并指向官方中文页",
-          "官方中文" in box and "wow.blizzard.cn" in box,
-          box[:56].replace("\n", " "))
 
     col2 = page.evaluate("() => document.querySelectorAll('#mx tbody td:nth-child(2).y').length")
     page.click("#mx thead th:nth-child(2) button")
@@ -600,7 +598,8 @@ def test_races(browser, base):
     check("阵营原画是本地文件且没有坏图",
           all("/img/art/factions/city-" in x["src"] for x in fac) and sum(x["broken"] for x in fac) == 0,
           json.dumps([x["src"].split("/")[-1] for x in fac], ensure_ascii=False))
-    check("原画右上角标明素材出处", all("本地转存" in x["mark"] for x in fac),
+    check("阵营原画右上角的素材出处角标已撤（2026-10-12 站主决定）",
+          all(not x["mark"] for x in fac),
           " / ".join(x["mark"] for x in fac))
     check("背景层不挡种族卡的点击", all(x["pe"] == "none" for x in fac), json.dumps([x["pe"] for x in fac]))
     bands = page.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => ({
@@ -624,11 +623,11 @@ def test_races(browser, base):
           det["tr"] == 4 and len(det["lore"]) > 30, str(det))
     check("详情里的可选职业把不能选的标灰",
           page.evaluate("() => document.querySelectorAll('#rdet .rdcl.off').length") > 0)
-    page.click("#rdet button.info")
-    page.wait_for_timeout(300)
-    dr = page.evaluate("() => { const b = document.getElementById('srcbox');"
-                       "return b && b.innerText.trim() ? b.innerText.length : 0; }")
-    check("种族详情的来源能展开", dr > 20, "来源块 %d 字" % dr)
+    # 2026-10-12 站主决定：详情里那个「来源」展开按钮一并撤下（原来点这里会展开 #srcbox）。
+    # 反向断言：内容页上不该再有点开来源的入口。
+    check("种族详情没有来源按钮，也没有来源展开块",
+          page.evaluate("() => !document.querySelector('#rdet [data-src]') && "
+                        "![...document.querySelectorAll('.srcbox')].some(b => b.innerText.trim())"))
     page.screenshot(path=os.path.join(SHOT_DIR, "races-matrix.png"), full_page=True)
 
     labels = page.evaluate("() => [...document.querySelectorAll('nav.main .ngt')].map(b => b.textContent.trim())")
@@ -723,8 +722,10 @@ def test_races(browser, base):
     mp.goto(base + "/dungeons.html", wait_until="networkidle")
     mp.wait_for_timeout(1000)
     dtext = mp.evaluate("() => document.querySelector('#main').innerText")
-    check("副本页写明「世界」里还没有数据的板块",
-          "还没有数据" in dtext and "世界地图" in dtext and "PvP" in dtext)
+    check("副本页那张「世界」里还没有数据的缺口卡已撤，锚点跟着撤（两栈同步）",
+          "还没有数据" not in dtext and "#todo" not in mp.evaluate(
+              "() => document.querySelector('#main').innerHTML"),
+          "正文残留 %s" % [x for x in ("还没有数据", "世界地图") if x in dtext])
     mp.screenshot(path=os.path.join(SHOT_DIR, "nav-mobile-open.png"))
     m.close()
 
@@ -927,9 +928,10 @@ def test_dungeon_data(browser, base):
           "%d / %d" % (got["twoName"], exp["twoName"]))
     check("客户端还不能排队的本逐条说明", got["noqueue"] == exp["noqueue"],
           "%d / %d" % (got["noqueue"], exp["noqueue"]))
-    # 徽章数 = 用到这份数据的本卡数（队列表那张单独在下面的行里查它自己的出处）
-    check("用到客户端排队数据的都挂着它的出处", got["src"] == exp["src"],
-          "带出处的本卡 %d / 用到这份数据 %d" % (got["src"], exp["src"]))
+    # 2026-10-12 站主决定：逐条出处标记退出内容页，客户端排队数据的出处集中在溯源页讲——
+    # 这条从"每张用到这份数据的本卡都挂出处"改成"内容页一枚都不许有"（数据侧的 provenance 仍由 build-data 卡口核）。
+    check("副本卡不再挂逐条出处标记（出处集中在溯源页）", got["src"] == 0,
+          "残留 %d 张卡挂出处" % got["src"])
     check("客户端能排到、本站没名单的单列一张表", got["qrows"] == exp["queue"],
           "表 %d 行 / 应有 %d 行" % (got["qrows"], exp["queue"]))
     have = {x.get("nameEn") for x in rows}
@@ -1010,7 +1012,7 @@ def test_raids(browser, base):
         claimed: [...document.querySelectorAll('#claimed tbody tr')].length,
         noMatch: [...document.querySelectorAll('#claimed tbody tr')].filter(r=>/没有对应的排队条目/.test(r.textContent)).length,
         stats: [...document.querySelectorAll('.stat b')].map(x=>x.textContent.trim()),
-        noArt: [...document.querySelectorAll('#claimed tbody tr')].filter(r => /源站没有/.test(r.textContent)).length,
+        noArt: [...document.querySelectorAll('#claimed tbody tr')].filter(r => /没有这张载入图/.test(r.textContent)).length,
         missingCard: !!document.querySelector('#missing'),
         badges: document.querySelectorAll('.st.datamine_en').length,
         bands: [...document.querySelectorAll('#client .band b')].map(x=>x.textContent.trim()),
@@ -1042,9 +1044,9 @@ def test_raids(browser, base):
           "页面 %s / 数据 %s" % (g["stats"], exp_stats))
     check("缺载入图的那几座在表格里逐座写明，页尾不再挂缺口卡",
           not g["missingCard"] and g["noArt"] == len([e for e in exp_arts if not e]),
-          "表里 %d 座写「源站没有」/ 数据缺 %d 座"
+          "表里 %d 座写「没有这张载入图」/ 数据缺 %d 座"
           % (g["noArt"], len([e for e in exp_arts if not e])))
-    check("用到客户端排队数据的挂着出处", g["badges"] >= 2, "%d 枚" % g["badges"])
+    check("团本页不再挂逐条出处标记（出处集中在溯源页）", g["badges"] == 0, "%d 枚" % g["badges"])
     page.fill("#rq", "Storm")
     page.wait_for_timeout(600)
     exp_storm = len([n for n in names if "storm" in n.lower()])
@@ -1152,7 +1154,8 @@ def test_professions(browser, base):
     pct = page.evaluate("() => (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/g) || []).slice(0,3)")
     check("专业页不出现百分比", not pct, str(pct))
     src = page.evaluate("() => document.querySelectorAll('#main .src li').length")
-    check("每个专业带来源与核对", src >= 1, "%d 条来源" % src)
+    # 2026-10-12 站主决定：内容页不再挂逐条来源，出处集中在溯源页——这条改成反向断言。
+    check("专业页没有来源块（出处只在溯源页）", src == 0, "%d 条来源残留" % src)
     page.screenshot(path=os.path.join(SHOT_DIR, "professions.png"))
     ctx.close()
 
@@ -1186,7 +1189,10 @@ def test_world(browser, base):
     newtag = page.evaluate("""() => { const c = [...document.querySelectorAll('#wbody .zcard')]
         .filter(x => x.querySelector('.tag.new'));
       return { n: c.length, flight: c.filter(x => /飞行/.test(x.innerText)).length }; }""")
-    check("无限新增区域带标且写清怎么去", newtag["n"] == len([z for z in zones if z.get("isNew")]) and newtag["flight"] == newtag["n"],
+    # 「有没有飞行路线」回答的是玩家会问的事（这块地方能不能飞），不是讲我们数据过程的备注，
+    # 所以这一行留在卡上；2026-10-12 撤掉的是素材出处角标与来源说明。
+    check("无限新增区域带「新」角标，且卡上写清能不能飞",
+          newtag["n"] == len([z for z in zones if z.get("isNew")]) and newtag["flight"] == newtag["n"],
           json.dumps(newtag))
 
     page.click('[data-t="rares"]')
@@ -1221,8 +1227,11 @@ def test_world(browser, base):
     page.wait_for_timeout(800)
     drawer = page.evaluate("""() => { const b = document.querySelector('#wbody [data-r]'); b.click();
       const d = document.querySelector('#wbody .wdr.open');
-      return d ? d.innerText.length : 0; }""")
-    check("逐条来源能展开", drawer > 40, "抽屉 %d 字" % drawer)
+      return { txt: d ? d.innerText : '', src: d ? d.querySelectorAll('.src').length : 0 }; }""")
+    # 抽屉本身留着（里面是掉落清单，是数据），但"来源与核对"那一节已经移出内容页。
+    check("稀有卡的掉落抽屉能展开，且抽屉里不再挂来源块",
+          len(drawer["txt"]) > 40 and drawer["src"] == 0,
+          "抽屉 %d 字 / 来源块 %d" % (len(drawer["txt"]), drawer["src"]))
 
     page.click('[data-t="books"]')
     page.wait_for_timeout(1500)
@@ -1233,17 +1242,24 @@ def test_world(browser, base):
     check("书本地图标用本地图且不出现坏图", bicon["n"] > 20 and bicon["broken"] == 0, json.dumps(bicon))
     miss = page.evaluate("() => document.querySelectorAll('#wbody .chips .chipc').length")
     check("没给坐标的书单独列出", miss == len(w.get("booksMissing") or []), "%d 本" % miss)
-    rew = page.evaluate("() => document.querySelectorAll('#wbody table .pill').length")
-    check("上游没给奖励的那档标待实测", rew >= len([r for r in w["bookRewards"] if r.get("noReward")]),
-          "%d 个待实测徽标" % rew)
+    rew = page.evaluate("() => [...document.querySelectorAll('#wbody table tbody tr')]"
+                        ".filter(r => /奖励待补/.test(r.innerText)).length")
+    # 2026-10-12 站主决定：L0-L3 徽标退出内容页，"这一档上游没给奖励"改用取值「奖励待补」直接写在格子里。
+    check("上游没给奖励的那档在格子里写「奖励待补」",
+          rew == len([r for r in w["bookRewards"] if r.get("noReward")]),
+          "%d 行（数据 %d 档）" % (rew, len([r for r in w["bookRewards"] if r.get("noReward")])))
 
     page.click('[data-t="bag"]')
     page.wait_for_timeout(1200)
     bag = page.evaluate("""() => { const rows = [...document.querySelectorAll('#wbody table.mtx tbody tr')];
-      return { rows: rows.length, l2: rows.filter(r => /待实测/.test(r.innerText)).length,
+      return { rows: rows.length, cols: rows.length ? rows[0].querySelectorAll('td').length : 0,
+               l2: rows.filter(r => /待实测/.test(r.innerText)).length,
                camps: document.querySelectorAll('#wbody .rarecard').length }; }""")
     exp_camps = sum(len(c.get("places") or []) for c in (w["bagTool"].get("camps") or []))
-    check("睡袋机制数值整表标待实测", bag["rows"] and bag["rows"] == bag["l2"], json.dumps(bag))
+    # 原来这张表有三列（机制项 / 记录值 / 分级徽标），分级徽标撤下后那一列整列删掉，
+    # 不留空壳——所以判据从"每行都标待实测"改成"表只剩两列且行数是那五项"。
+    check("睡袋机制数值表只剩机制项与记录值两列",
+          bag["rows"] == 5 and bag["cols"] == 2 and bag["l2"] == 0, json.dumps(bag))
     check("营地点数量对得上数据", bag["camps"] == exp_camps, "%d 处（数据 %d）" % (bag["camps"], exp_camps))
 
     ext = page.evaluate("() => [...document.querySelectorAll('#main img')].filter(i => /^https?:/.test(i.getAttribute('src') || '')).length")
@@ -1278,19 +1294,18 @@ def test_home(browser, base):
     page.goto(base + "/index.html", wait_until="networkidle")
     page.wait_for_timeout(1500)
     check("首页无脚本报错", not errs, "; ".join(errs[:2]))
-    nums = page.evaluate("""() => ({
-      cov: [...document.querySelectorAll('.covnum .pill')].map(p => +p.querySelector('b').textContent),
-      total: (document.querySelector('.covnum > span:last-child').textContent.match(/\\d+/) || [0])[0] })""")
-    check("首页覆盖率四个数来自 scale.json",
-          nums["cov"] == [sc["coverage"]["L0"], sc["coverage"]["L1"], sc["coverage"]["L2"], sc["coverage"]["L3"]],
-          "页面 %s / 数据 %s" % (nums["cov"], [sc["coverage"][k] for k in ("L0", "L1", "L2", "L3")]))
-    check("首页总条数与数据一致", int(nums["total"]) == sc["coverageTotal"],
-          "页面 %s / 数据 %s" % (nums["total"], sc["coverageTotal"]))
-    bar = page.evaluate("""() => { const i = [...document.querySelectorAll('.cov i')];
-      return { n: i.length, sum: i.reduce((a, x) => a + x.getBoundingClientRect().width, 0),
-               box: document.querySelector('.cov').getBoundingClientRect().width }; }""")
-    check("覆盖率条四段宽度加起来等于条宽", bar["n"] == 4 and abs(bar["sum"] - bar["box"]) < 3,
-          "四段 %.0fpx / 条 %.0fpx" % (bar["sum"], bar["box"]))
+    # 2026-10-12 站主决定：首页 hero 不再放覆盖率条、四枚分级读数与"数据基线…"那行，
+    # 也不放四条规模读数——这两条从"数字对不对"改成"这些读数不许回到首页"，
+    # 覆盖率那条宽度断言挪到溯源页（见本函数末尾）。
+    home_cov = page.evaluate("""() => ({covnum: document.querySelectorAll('.covnum').length,
+      stats4: document.querySelectorAll('.stats4').length,
+      cov: document.querySelectorAll('.cov').length,
+      pill: document.querySelectorAll('#main .pill').length})""")
+    check("首页不再有覆盖率读数与规模四格",
+          home_cov == {"covnum": 0, "stats4": 0, "cov": 0, "pill": 0}, json.dumps(home_cov))
+    check("首页导语不提来源与核对状态",
+          page.evaluate("() => !/来源|核对|待实测|机翻/.test((document.querySelector('.hero .lead') || {}).innerText || '')"),
+          page.evaluate("() => (document.querySelector('.hero .lead') || {}).innerText || ''"))
     # 首页的招牌动作从"点职业跳计算器"改成"点职业看真树"，所以断言也跟着换：
     # 格子数必须等于派生数据里那一系的节点数，空格补到整行，不许少画。
     pv = json.load(open(os.path.join(SRC, "data", "talent-preview.json"), encoding="utf-8"))
@@ -1351,8 +1366,11 @@ def test_home(browser, base):
     mods = page.evaluate("""() => { const a = [...document.querySelectorAll('.mod')];
       return { n: a.length, nums: a.reduce((s, x) => s + x.querySelectorAll('.modn b').length, 0),
                pills: a.filter(x => x.querySelector('.pill')).length,
-               notes: a.filter(x => x.querySelector('.modf .dim')).length }; }""")
-    check("九张模块卡都带规模数字与口径说明", mods["n"] == 9 and mods["pills"] == 9 and mods["notes"] == 9,
+               foot: a.filter(x => x.querySelector('.modf')).length }; }""")
+    # 2026-10-12 站主决定：板块卡底下那一行（分级徽标 + "整句直接抄官方"这类口径说明）撤了，
+    # 卡里只留标题、板块归属和规模数字。
+    check("九张模块卡都带规模数字，且都不再挂徽标与口径说明行",
+          mods["n"] == 9 and mods["nums"] >= 9 and mods["pills"] == 0 and mods["foot"] == 0,
           json.dumps(mods))
 
     # ↓ 第五批（首页整合两家参考站）的判据：结构、素材、动效、角标
@@ -1416,9 +1434,12 @@ def test_home(browser, base):
     check("改动四格加起来等于来源站自报的 changed %d" % self_reported,
           sum(st["four"]) == self_reported, "%s 合计 %d / 上游自报 %d"
           % (st["four"], sum(st["four"]), self_reported))
-    check("天赋卡进度条有可读替代（aria-label 写明分子分母）",
-          bool(st["bar"]) and "/" in st["bar"]["aria"] and str(st["bar"]["w"]).endswith("%"),
-          json.dumps(st["bar"], ensure_ascii=False))
+    # 2026-10-12 站主决定：天赋预览卡下面那条"名称与官网中文一致 462 / 466"的进度条与
+    # 讲数据出处的说明段一起移出内容页（这条读数仍在溯源页）。
+    check("天赋预览卡不再挂覆盖率进度条与出处说明段",
+          st["bar"] is None and page.evaluate(
+              "() => !document.querySelector('#treecard .note')"),
+          json.dumps({"bar": st["bar"]}, ensure_ascii=False))
     # 角标不是手写的：app.js 拿 scale.navNew（「本站更新」最新一天的板块标签）去对导航项名字，
     # 对得上才画。所以这里不能写死"只有一枚"，要按同一条规则核。
     nav_new = sc.get("navNew") or []
@@ -1471,10 +1492,17 @@ def test_home(browser, base):
       return need.filter(n => !t.includes(n)); }""", need)
     check("首页规模数字都渲染出来了（要渲染的数从 scale.json 现取）", not hard, "缺 %s" % (hard or "无"))
     nd = page.evaluate("() => document.querySelectorAll('.flowrow').length")
-    check("刻意不做的与时间点都在页上", nd >= 9, "%d 行" % nd)
+    # 「这一站刻意不做的」那张卡按站主决定撤了（它是讲我们取舍的说明，不是玩家要查的东西），
+    # 所以这里只剩「最新动态」两节摘要各三条：判据从 >=9 改成 >=6，并且钉住那张卡不再回来。
+    check("首页「最新动态」两节摘要都在，「刻意不做的」那张卡不再回来",
+          nd >= 6 and "刻意不做" not in page.evaluate(
+              "() => document.querySelector('#main').innerText"), "%d 行" % nd)
     foot = page.evaluate("() => document.querySelector('#foot').innerText")
-    check("页脚用的是 scale.json 那份词条口径", str(sc["pubTotal"]) in foot and "842" not in foot,
-          "页脚写 %s，应含 %s 且不含全站数" % (foot.replace("\n", " ")[-40:], sc["pubTotal"]))
+    # 2026-10-12 站主决定：页脚那条覆盖率与"数据版本 · 核对于"移出内容页，只留免责句 + 两栏入口。
+    # 免责句是合规固定项，不能跟着一起删，所以这里两头都钉住。
+    check("页脚保留免责句，且不再挂覆盖率与核对日期",
+          ("与暴雪娱乐及网易无关" in foot) and ("L0" not in foot) and ("核对于" not in foot),
+          foot.replace("\n", " ")[-60:])
     pp = ctx.new_page()
     pp.goto(base + "/provenance.html", wait_until="networkidle")
     pp.wait_for_timeout(1200)
@@ -1608,7 +1636,7 @@ def test_updates_rank(browser, base):
           hb and hb["four"] == 4 and all(x.isdigit() for x in hb["fourtxt"]) and hb["chgl"] == 0,
           str(hb and {"four": hb["four"], "fourtxt": hb["fourtxt"], "chgl": hb["chgl"]}))
     check("改动四格挂在「自经典旧世以来的改动」这张卡上，且带对照行",
-          hb and hb["four"] == 4 and "自经典旧世以来的改动" in hb["head"] and hb["kv"] >= 3,
+          hb and hb["four"] == 4 and "自经典旧世以来的改动" in hb["head"] and hb["kv"] >= 1,
           str(hb and {"head": hb["head"], "kv": hb["kv"]}))
     # 964（全部条目）与四格之和 751（真有变化的）同屏出现，不解释清楚就是自己打脸
     sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
@@ -1684,10 +1712,13 @@ def test_app(browser, base):
         check("新站 %s：按钮都有可读名" % label, st["noname"] == 0, "%d 个缺名" % st["noname"])
         page.screenshot(path=os.path.join(SHOT_DIR, "app-%s.png" % key))
         if key == "index":
-            nums = page.evaluate("""() => [...document.querySelectorAll('.covnum .pill b')].map(b => +b.textContent)""")
-            check("新站首页覆盖率四个数与 scale.json 一致",
-                  nums == [S["coverage"]["L0"], S["coverage"]["L1"], S["coverage"]["L2"], S["coverage"]["L3"]],
-                  "%s vs %s" % (nums, [S["coverage"][k] for k in ("L0", "L1", "L2", "L3")]))
+            # 2026-10-12 站主决定：新站首页与旧站一样不再挂覆盖率读数，
+            # 这条从"四个数与 scale.json 一致"改成"这三样都不许出现"。
+            cov_left = page.evaluate("""() => ({covnum: document.querySelectorAll('.covnum').length,
+              stats4: document.querySelectorAll('.stats4').length,
+              pill: document.querySelectorAll('#main .pill').length})""")
+            check("新站首页不再挂覆盖率读数与分级徽标（与旧站同一口径）",
+                  cov_left == {"covnum": 0, "stats4": 0, "pill": 0}, json.dumps(cov_left))
             strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
@@ -1790,8 +1821,8 @@ def test_search(browser, base):
     check("结果只写名称与归属，不夹句子", max(len(s) for s in subs) <= 44,
           "最长 %d 字" % max(len(s) for s in subs))
     lvs = page.evaluate("() => [...document.querySelectorAll('#gres .gsr .lv')].map(x => x.textContent)")
-    check("非已核实的条除颜色外带分级文字", all(lvs) and len(lvs) >= 1,
-          json.dumps(lvs[:3], ensure_ascii=False))
+    # 2026-10-12 站主决定：搜索结果不挂分级文字，结果行只留名称与归属
+    check("搜索结果不再挂分级文字", lvs == [], json.dumps(lvs[:3], ensure_ascii=False))
     page.screenshot(path=os.path.join(SHOT_DIR, "home-search-open.png"))
 
     def first_row(query, prefix):
@@ -1917,6 +1948,8 @@ def test_legacy(browser, base):
           chPills: [...document.querySelectorAll('#lch .pill')].map(e => e.innerText.trim()),
           pts: [...document.querySelectorAll('#lch .ltab tbody tr td:last-child')].map(e => e.innerText.trim()),
           reRows: document.querySelectorAll('#main > .card').length,
+          reRewards: (() => { const t = [...document.querySelectorAll('#main table.ltab')].pop();
+            return t ? t.querySelectorAll('tbody tr').length : 0; })(),
           rePill: [...document.querySelectorAll('#main table .pill')].map(e => e.innerText.trim()).slice(-4),
           src: document.querySelectorAll('#main .src').length,
           hot: [...document.querySelectorAll('img')].filter(i => /^https?:/.test(i.getAttribute('src') || '')).length,
@@ -1933,18 +1966,19 @@ def test_legacy(browser, base):
     # 点数不是"每条都一样"：客户端明细里 65 项各 1 点、有一项 16 点。
     # 断言因此改成"每行的点数都必须在数据声明过的取值里"——出现没声明过的点数才是回归。
     allowed = {str(rules["pointPerChallenge"])} | {str(v["points"]) for v in rules.get("pointVariants") or []}
-    check("挑战每条都带「待实测」徽标，且每条点数都在数据声明过的取值里",
-          len(s0["chPills"]) == total and set(s0["chPills"]) == {"待实测"}
-          and set(s0["pts"]) <= allowed,
+    check("挑战每条点数都在数据声明过的取值里，且行内不再挂分级徽标",
+          not s0["chPills"] and set(s0["pts"]) <= allowed,
           "徽标 %d 个 / 行 %d / 点数集合 %s（允许 %s）" % (
               len(s0["chPills"]), s0["chRows"],
               json.dumps(sorted(set(s0["pts"])), ensure_ascii=False), sorted(allowed)))
-    check("进度奖励四条都标了待实测", set(s0["rePill"] or []) == {"待实测"},
-          json.dumps(s0["rePill"], ensure_ascii=False))
+    check("进度奖励每一档都在表里，且不再挂待实测徽标",
+          not s0["rePill"] and s0["reRewards"] == cnt["rewards"],
+          json.dumps({"rePill": s0["rePill"], "奖励行": s0["reRewards"], "数据": cnt["rewards"]},
+                     ensure_ascii=False))
     check("图全部是本地文件，没有热链", s0["hot"] == 0 and s0["local"] == 0,
           "外链 %d / 非 img 目录 %d" % (s0["hot"], s0["local"]))
-    # 页面级来源块 1 块；点开某个专长才多一块（那条断言在下面的详情里查）
-    check("页顶与页尾的来源块渲染出来了", s0["src"] >= 1, "%d 块来源" % s0["src"])
+    # 2026-10-12 站主决定：分级徽标与来源块退出内容页，出处集中在溯源页说。
+    check("传承页不再挂来源块", s0["src"] == 0, "%d 块来源" % s0["src"])
 
     # 逐棵树核对格子：矩形格子数 = 行×列，具名 + 未公开 + 空格三者必须刚好铺满
     per_tree = []
@@ -1989,13 +2023,13 @@ def test_legacy(browser, base):
     check("点格子展开该专长的详情（名字、上限、前置、位置）",
           len(s1["det"]) == 1 and s1["on"] == 1 and perk["nameCn"] in s1["det"][0],
           json.dumps({"det": s1["det"][:1], "on": s1["on"], "id": first_id}, ensure_ascii=False))
-    check("详情里带分级徽标与可点开的来源",
-          s1["detPill"] == ["已官方核实"] and s1["detSrc"] >= 1,
+    check("详情里不再挂分级徽标与来源块",
+          not s1["detPill"] and s1["detSrc"] == 0,
           json.dumps({"pill": s1["detPill"], "src": s1["detSrc"]}, ensure_ascii=False))
-    # 长度这条是红线的兜底：详情里除了"本站不复制"那句声明，只剩名称/上限/位置/前置/日期。
+    # 长度这条是红线的兜底：详情只剩名称/层数/归属/位置/前置。
     # 谁把每层效果说明抄回来，这段正文一定会撑破 200 字。
-    check("详情没把每层效果说明抄回来（来源块以外 ≤200 字）",
-          len(s1["detBody"]) <= 200 and "不写" in s1["detBody"] and "前置" in s1["detBody"],
+    check("详情没把每层效果说明抄回来（≤200 字，且仍给归属/位置/前置）",
+          len(s1["detBody"]) <= 200 and "位置" in s1["detBody"] and "前置" in s1["detBody"],
           "详情正文 %d 字：%s" % (len(s1["detBody"]), s1["detBody"][:90]))
     page.evaluate("() => document.querySelector('#ltree .lslot[data-perk]').click()")
     page.wait_for_timeout(400)
@@ -2219,7 +2253,8 @@ def test_classes(browser, base):
     check("页首读数与数据现算一致（节点数、改动条数都来自 JSON）",
           str(war_nodes) in st["heroLine"] and str(len(war_chg)) in st["heroLine"]
           and str(len(war_abs)) in st["heroLine"], st["heroLine"])
-    check("客户端原画写明是本地转存，不冒充游戏内图", "本地转存" in st["artMark"], st["artMark"])
+    check("页首不再挂素材出处角标（2026-10-12 站主决定，出处集中在溯源页）",
+          not st["artMark"], st["artMark"])
     check("三系卡就是那一职业的三系，卡上是系名与节点数",
           len(st["specs"]) == 3 and all(t["nameCn"] in s for t, s in zip(war["trees"], st["specs"]))
           and all(str(len(t["nodes"])) in s for t, s in zip(war["trees"], st["specs"])),
@@ -2254,7 +2289,7 @@ def test_classes(browser, base):
     check("可选种族用 races.json 的正式中文名，一个阵营一行全列出来",
           len(st["chips"]) == len(war_races) and "塑风者天裔" in st["chips"]
           and "高阶会天裔" in st["chips"], "%d 个：%s" % (len(st["chips"]), st["chips"]))
-    check("天裔两份说法没对上时，这一页也摆出来而不是藏起来",
+    check("天裔两份说法没对上时，这一页也摆出来而不是藏起来（红线：两源分歧两个都留）",
           page.evaluate("() => { const c = document.querySelector('#main .conf');"
                         "return c ? c.innerText : ''; }").count("天裔") >= 1)
     check("左栏每一行都是现取的数，含资料完整度与两源分歧",
@@ -2265,15 +2300,12 @@ def test_classes(browser, base):
     check("页尾那张「本页还没确认的」卡已撤，只留一句层级门槛的口径",
           not st["gaps"] and "第几层要点满多少还没在正式服实测"
           in page.evaluate("() => document.querySelector('#main').innerText"))
-    check("逐条来源撤了，但职业名与改动清单两行仍给得开来源",
-          st["srcBtns"] == 2 and page.evaluate("() => !!document.querySelector('.kv [data-src]')"),
-          "本页来源按钮 %d 个" % st["srcBtns"])
-    page.click(".kv [data-src] >> nth=0")
-    page.wait_for_timeout(500)
-    src = page.evaluate("() => { const b = document.getElementById('srcbox');"
-                        "return b && b.style.display !== 'none' ? b.innerText : ''; }")
-    check("左栏那个来源点开能看到是哪个站转述的", "wowclassicforever" in src or "官方" in src,
-          src[:56].replace("\n", " "))
+    # 2026-10-12 站主决定：逐条来源按钮整批撤下，出处集中在溯源页——这里改成反向断言，
+    # 免得下次有人把「来源」按钮顺手加回左栏那两行。
+    check("本页没有任何来源按钮与来源展开块",
+          st["srcBtns"] == 0 and page.evaluate(
+              "() => ![...document.querySelectorAll('.srcbox')].some(b => b.innerText.trim())"),
+          "来源按钮 %d 个" % st["srcBtns"])
     page.click(".cls[data-c='hunter']")
     page.wait_for_timeout(1400)
     sw = page.evaluate("""() => ({ url: location.search,
@@ -2286,12 +2318,14 @@ def test_classes(browser, base):
     page.goto(base + "/classes.html?c=paladin", wait_until="networkidle")
     page.wait_for_timeout(1400)
     pal = page.evaluate("""() => { const t = document.querySelector('#main').innerText;
-      return { abs: [...document.querySelectorAll('.kv')].map(x => x.innerText).find(s => /官方中文整句/.test(s)) || '',
-               note: t.indexOf('深度解析稿还没发') >= 0 || t.indexOf('尚未发布') >= 0,
+      return { abs: [...document.querySelectorAll('.kv')].map(x => x.innerText).find(s => /技能说明/.test(s)) || '',
+               heroNote: (document.querySelector('.clhero .clnote') || {}).innerText || '',
                quotes: document.querySelectorAll('#main .quote').length,
                rows: document.querySelectorAll('#main table tbody tr').length }; }""")
-    check("官方中文稿还没发的职业，直说没有而不是凑数",
-          "还没有" in pal["abs"] and pal["note"] and pal["quotes"] == 0 and pal["rows"] > 0,
+    # 页首那句"天赋名与上限已入库（第三方数据挖掘，待实测）"是给维护者看的备注，已撤；
+    # 但"这个职业还没有官方中文整句"是数据事实，留在左栏那一行里。
+    check("官方中文稿还没发的职业：左栏直说没有，页首不再挂维护者备注",
+          "还没有" in pal["abs"] and not pal["heroNote"] and pal["quotes"] == 0 and pal["rows"] > 0,
           json.dumps(pal, ensure_ascii=False))
     page.goto(base + "/classes.html?c=not_a_class", wait_until="networkidle")
     page.wait_for_timeout(1300)
@@ -2331,6 +2365,69 @@ def test_classes(browser, base):
           json.dumps(mob, ensure_ascii=False)[:170])
     mp.screenshot(path=os.path.join(SHOT_DIR, "classes-mobile.png"), full_page=True)
     m.close()
+
+
+def test_player_facing(browser, base):
+    """内容页只留标题和数据（2026-10-12 用户决定，面对游戏玩家）。
+
+    这一节是**反向断言**：不是检查说明文字在不在，而是检查它们不许再出现在内容页上——
+    分级徽标、逐条来源按钮、来源块、来源轨、素材出处角标、覆盖率条、"数据基线…"那行。
+    出处与分级集中在溯源页（provenance.html）说，那一页反过来必须带着它们。
+    谁把这些画回内容页，这里就红，不用靠人记着 AGENTS.md 第 3a 条。
+    注意「待实测」不在这张黑名单里：那是数据值（缺数据显示"待实测"是仓库根红线），
+    撤掉的只是它作为 L0-L3 徽标的那层皮，不是这三个字。
+    文字这一半对 updates.html 放行：那一页的第二栏本来就是"本站自己改了什么"的流水账，
+    条目里出现"本站"是内容本身，不是备注；元素类检查（徽标/来源/角标）仍然照它跑。"""
+    import json
+    print("\n[22] 内容页只留标题与数据")
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    probes = {
+        "pill": "document.querySelectorAll('#main .pill').length",
+        "srcBtn": "document.querySelectorAll('#main [data-src]').length",
+        "srcList": "document.querySelectorAll('#main .src li').length",
+        "rail": "document.querySelectorAll('#main .rail').length",
+        "mark": "document.querySelectorAll('#main .dmark, #main .artmark, #main .dbn2-mark').length",
+        "cov": "document.querySelectorAll('#main .covnum, #main .stats4').length",
+    }
+    WORDS = (u"来源与核对", u"本地转存", u"示意图 ·", u"已官方核实", u"仅官方英文",
+             u"数据基线", u"逐条带来源", u"不机翻", u"本站不复制")
+    bad = {}
+    for name in PAGES:
+        if name == "provenance":
+            continue
+        page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+        page.wait_for_timeout(1300)
+        got = {k: page.evaluate("(function(){return %s})()" % v) for k, v in probes.items()}
+        txt = page.evaluate("() => document.querySelector('#main').innerText")
+        leftover = [w for w in WORDS if (w in txt and name != "updates")]
+        left = {k: v for k, v in got.items() if v}
+        if left or leftover:
+            bad[name] = {"元素": left, "文字": leftover}
+    check("%d 个内容页都不挂分级徽标 / 来源按钮 / 来源块 / 来源轨 / 素材角标 / 覆盖率读数" % (len(PAGES) - 1),
+          not bad, json.dumps(bad, ensure_ascii=False)[:300])
+
+    # 溯源页是唯一的例外，反过来必须带着这些东西，否则"集中说"就变成"没人说"
+    page.goto(base + "/provenance.html", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    pv = page.evaluate("""() => ({ bar: document.querySelectorAll('#main .cov i').length,
+      pill: document.querySelectorAll('#main .pill').length,
+      stats: [...document.querySelectorAll('#main .stats .stat')].map(e => e.innerText.replace(/\\s+/g, ' ')),
+      src: document.querySelectorAll('#main .src, #main .src li').length,
+      txt: document.querySelector('#main').innerText })""")
+    # 覆盖率条只有某一档计数为 0 时那一段不画（旧站一直是这个口径），所以按"至少三段"而不是死等于四段
+    check("出处与分级集中在溯源页说：那一页仍有覆盖率条、四档读数与分级徽标",
+          pv["bar"] >= 3 and len(pv["stats"]) >= 4 and pv["pill"] >= 4,
+          json.dumps({"条宽段": pv["bar"], "徽标": pv["pill"], "读数": len(pv["stats"])}, ensure_ascii=False))
+    bar = page.evaluate("""() => { const i = [...document.querySelectorAll('#main .cov i')];
+      return { n: i.length, sum: i.reduce((a, x) => a + x.getBoundingClientRect().width, 0),
+               box: document.querySelector('#main .cov').getBoundingClientRect().width }; }""")
+    check("溯源页覆盖率条四段宽度加起来等于条宽", abs(bar["sum"] - bar["box"]) < 3,
+          "%d 段共 %.0fpx / 条 %.0fpx" % (bar["n"], bar["sum"], bar["box"]))
+    check("溯源页写明内容页为什么不挂标记",
+          u"内容页" in pv["txt"] and (u"这一页" in pv["txt"] or u"集中" in pv["txt"]),
+          pv["txt"][:80].replace("\n", " "))
+    ctx.close()
 
 
 def test_design_system(browser, base):
@@ -2392,7 +2489,6 @@ def test_design_system(browser, base):
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     weak = {}
-    rails_seen = 0
     for name in PAGES:
         page.goto("%s/%s.html" % (base, name), wait_until="networkidle")
         page.wait_for_timeout(1300)
@@ -2400,22 +2496,25 @@ def test_design_system(browser, base):
         check("%s 页文字对比度达 AA" % name, not r["bad"],
               json.dumps([{"位": b["label"], "比": b["cr"], "字": b["size"]} for b in r["bad"][:3]], ensure_ascii=False))
         weak[name] = r["bad"]
-        rails_seen += r["rails"]
-        if r["claims"]:
-            check("%s 页声明了分级/来源，卡片就有来源轨" % name, r["rails"] >= 1,
-                  "声明 %d 处 / 上轨 %d 张" % (r["claims"], r["rails"]))
-    check("来源轨在全站铺得开（%d 页合计 ≥20 张）" % len(PAGES), rails_seen >= 20, "%d 张" % rails_seen)
+
+    # 2026-10-12 站主决定：分级徽标与来源轨退出内容页，全部集中到溯源页。
+    # 所以这三条不再遍历 17 页，而是只在溯源页验——签名元素还在，只是只出现在该出现的那一页。
+    page.goto(base + "/provenance.html", wait_until="networkidle")
+    page.wait_for_timeout(1400)
+    r = page.evaluate(PROBE)
+    check("溯源页声明了分级的卡片都上来源轨", r["claims"] >= 1 and r["rails"] >= 1,
+          json.dumps({"声明": r["claims"], "上轨": r["rails"]}, ensure_ascii=False))
+    check("来源轨只在溯源页出现（内容页一处都不许有，见第 22 节）",
+          r["rails"] >= 1 and r["claims"] >= r["rails"],
+          json.dumps({"声明": r["claims"], "上轨": r["rails"], "级别": r["railLv"]}, ensure_ascii=False))
 
     # 琥珀金从此只表示交互与品牌：任何分级徽标都不许用它
-    page.goto(base + "/systems.html", wait_until="networkidle")
-    page.wait_for_timeout(1300)
-    r = page.evaluate(PROBE)
     # 品牌色不兼任分级色。2026-10-11 品牌色从琥珀金换成无限蓝，所以这里读实时值比对，
     # 不再写死某个 rgb——否则下次换色这条断言会静默失效。
     bh = (r.get("brandHex") or "#49aee9").lstrip("#")
     brand = "rgb(%d, %d, %d)" % (int(bh[0:2], 16), int(bh[2:4], 16), int(bh[4:6], 16))
     gold = [k for k, v in r["lv"].items() if v in (brand, "rgb(224, 169, 109)")]
-    check("分级徽标不借用品牌色（曾与琥珀金同色，现在是无限蓝）", not gold,
+    check("分级徽标不借用品牌色（曾与琥珀金同色，现在是无限蓝）", r["lv"] and not gold,
           json.dumps({"品牌色": brand, "徽标": r["lv"]}, ensure_ascii=False))
     shapes = page.evaluate("""() => {
       const out = {};
@@ -2429,15 +2528,17 @@ def test_design_system(browser, base):
           json.dumps(shapes, ensure_ascii=False))
 
     # 动效可关：模拟系统"减少动态效果"，卡片与轨道的动画必须归零
+    # 轨道现在只在溯源页有，所以这一组也在那一页取——换页别把这条断言变成"永远走 no-rail 分支"。
     rm = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
     rp = rm.new_page()
-    rp.goto(base + "/legacy.html", wait_until="networkidle")
+    rp.goto(base + "/provenance.html", wait_until="networkidle")
     rp.wait_for_timeout(1200)
     m = rp.evaluate("""() => { const c = document.querySelector('#main .card');
       const r = document.querySelector('#main .rail'); const cs = getComputedStyle(c);
+      const b = document.querySelector('button') || document.querySelector('a');
       return { card: cs.animationName + '/' + cs.animationDuration,
         rail: r ? getComputedStyle(r, '::before').animationDuration : 'no-rail',
-        btn: getComputedStyle(document.querySelector('button')).transitionDuration }; }""")
+        btn: b ? getComputedStyle(b).transitionDuration : 'none' }; }""")
     def secs(v):
         v = (v or '').strip()
         try:
@@ -2738,6 +2839,32 @@ def test_copy(browser, base):
     ctx3.close()
 
 
+# 全跑一次 13 分钟，改一条新断言时等不起。SECTIONS 把顺序固定下来，--only 按名字挑着跑，
+# 用来做 30 秒探针；正式门禁仍然不带 --only。
+SECTIONS = [
+    ("pages", test_pages),
+    ("talent", test_talent),
+    ("dungeon_banner", test_dungeon_banner),
+    ("chooser", test_chooser),
+    ("abilities", test_abilities),
+    ("races", test_races),
+    ("grouping", test_grouping),
+    ("dungeon_data", test_dungeon_data),
+    ("raids", test_raids),
+    ("professions", test_professions),
+    ("world", test_world),
+    ("home", test_home),
+    ("updates_rank", test_updates_rank),
+    ("search", test_search),
+    ("legacy", test_legacy),
+    ("classes", test_classes),
+    ("player_facing", test_player_facing),
+    ("design_system", test_design_system),
+    ("copy", test_copy),
+    ("app", test_app),
+    ("design_baseline", test_design_baseline),
+    ("mobile", test_mobile),
+]
 
 
 def main():
@@ -2745,9 +2872,18 @@ def main():
     parser.add_argument("--app", action="store_true",
                         help="强制跑新站（Vue）那组断言，端口不通就直接失败")
     parser.add_argument("--app-base", default=os.environ.get("APP_BASE", "http://127.0.0.1:8821"))
+    parser.add_argument("--only", default="",
+                        help="只跑逗号指定的小节（如 player_facing,home），用于改断言时的快速探针")
     args = parser.parse_args()
     global APP_BASE, APP_REQUIRED
     APP_BASE, APP_REQUIRED = args.app_base, args.app
+    todo = SECTIONS
+    if args.only:
+        want = [x.strip() for x in args.only.split(",") if x.strip()]
+        unknown = [w for w in want if w not in dict(SECTIONS)]
+        if unknown:
+            parser.error("没有这组断言：%s（可选 %s）" % ("、".join(unknown), ",".join(k for k, _ in SECTIONS)))
+        todo = [s for s in SECTIONS if s[0] in want]
     if not os.path.isdir(SHOT_DIR):
         os.makedirs(SHOT_DIR)
     httpd, base = start_server()
@@ -2755,27 +2891,8 @@ def main():
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(channel="chrome", headless=True)
-            test_pages(browser, base)
-            test_talent(browser, base)
-            test_dungeon_banner(browser, base)
-            test_chooser(browser, base)
-            test_abilities(browser, base)
-            test_races(browser, base)
-            test_grouping(browser, base)
-            test_dungeon_data(browser, base)
-            test_raids(browser, base)
-            test_professions(browser, base)
-            test_world(browser, base)
-            test_home(browser, base)
-            test_updates_rank(browser, base)
-            test_search(browser, base)
-            test_legacy(browser, base)
-            test_classes(browser, base)
-            test_design_system(browser, base)
-            test_copy(browser, base)
-            test_app(browser, base)
-            test_design_baseline(browser, base)
-            test_mobile(browser, base)
+            for name, fn in todo:
+                fn(browser, base)
             browser.close()
     finally:
         httpd.shutdown()
