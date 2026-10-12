@@ -107,12 +107,14 @@
   },
   "search": 4347,
   "talentPreview": 466,
-  "releases": 26,
+  "releases": 27,
   "navNew": [
+   "副本",
+   "团本",
+   "素材",
    "天赋",
    "技能",
-   "传承",
-   "副本"
+   "传承"
   ],
   "glossary": 215,
   "classes": 9,
