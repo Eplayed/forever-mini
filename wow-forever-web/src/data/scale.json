@@ -107,8 +107,10 @@
   },
   "search": 4350,
   "talentPreview": 466,
-  "releases": 32,
+  "releases": 33,
   "navNew": [
+   "副本",
+   "搜索",
    "首页",
    "计算器",
    "职业"
