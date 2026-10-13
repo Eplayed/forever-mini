@@ -134,6 +134,30 @@ def main():
             quests.append(c)
             seen[key] = c
 
+        # 同名任务合并成一条（站主 2026-10-13 就「无尽的折磨」定的做法，推广到全部）：
+        # 留信息最全的那一行——有接取人又有地点的优先，其次看有没有经验值。
+        # 被合掉的那些不删干净，条数记在 variants 里留在数据中，只是页面上不再出现
+        # "同一任务 N 个版本"这种给维护者看的话。
+        merged, byName = [], {}
+        for y in quests:
+            k = y.get("nameCn")
+            if k not in byName:
+                byName[k] = y
+                merged.append(y)
+                continue
+            cur, new = byName[k], y
+            score = lambda v: (1 if v.get("pickupNpc") else 0) + (1 if v.get("pickupZone") else 0) \
+                + (1 if v.get("xp") is not None else 0) + (1 if v.get("reqLevel") is not None else 0)
+            cur["variants"] = (cur.get("variants") or 1) + 1
+            if score(new) > score(cur):
+                new["variants"] = cur["variants"]
+                merged[merged.index(cur)] = new
+                byName[k] = new
+                st["deduped"] += 1
+            else:
+                st["deduped"] += 1
+        quests = merged
+
         # wclbox 整条没列、wowhead 有的任务，补在最后并标来源
         have = set(q["nameCn"] for q in quests)
         for m in wh_quests:

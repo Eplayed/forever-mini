@@ -5,7 +5,7 @@
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
  "scale": {
-  "dungeonQuests": 396,
+  "dungeonQuests": 367,
   "dungeonQuestDungeons": 28,
   "professions": 13,
   "recipes": 1990,

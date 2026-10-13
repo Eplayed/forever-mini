@@ -6,11 +6,11 @@
   "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，没实测过。",
   "counts": {
    "dungeons": 35,
-   "quests": 396,
+   "quests": 367,
    "xpFromWowhead": 11,
    "xpConflict": 2,
    "addedFromWowhead": 1,
-   "deduped": 12,
+   "deduped": 41,
    "itemStart": 50
   }
  },
@@ -118,26 +118,12 @@
      "questLevel": 21,
      "reqLevel": 16,
      "xp": 1650,
-     "pickupNpc": null,
-     "pickupZone": null,
-     "startItem": "憎恶头颅",
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1,
-     "xpFrom": "wowhead",
-     "nameEn": "Unending Torment"
-    },
-    {
-     "nameCn": "无尽的折磨",
-     "questLevel": 21,
-     "reqLevel": 16,
-     "xp": 1650,
      "pickupNpc": "大药剂师法拉尼尔",
      "pickupZone": "幽暗城",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 3,
+     "variants": 2,
      "xpFrom": "wowhead"
     },
     {
@@ -1137,18 +1123,6 @@
     },
     {
      "nameCn": "上古之神的仆从",
-     "questLevel": 22,
-     "reqLevel": 17,
-     "xp": 1750,
-     "pickupNpc": null,
-     "pickupZone": null,
-     "startItem": "潮湿的便笺",
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "上古之神的仆从",
      "questLevel": 26,
      "reqLevel": 17,
      "xp": 2650,
@@ -1157,7 +1131,7 @@
      "startItem": null,
      "preQuest": "上古之神的仆从",
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "黑暗深渊中的邪恶",
@@ -1471,25 +1445,13 @@
      "nameCn": "超级清洁器5200型！",
      "questLevel": 30,
      "reqLevel": 25,
-     "xp": null,
-     "pickupNpc": "超级清洁器5200型",
-     "pickupZone": "诺莫瑞根",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 3
-    },
-    {
-     "nameCn": "超级清洁器5200型！",
-     "questLevel": 30,
-     "reqLevel": 25,
      "xp": 2450,
      "pickupNpc": "超级清洁器5200型",
      "pickupZone": "诺莫瑞根",
      "startItem": null,
      "preQuest": "超级清洁器5200型！",
      "source": "wclbox",
-     "variants": 2
+     "variants": 5
     },
     {
      "nameCn": "再次使用超级清洁器",
@@ -1502,18 +1464,6 @@
      "preQuest": "超级清洁器5200型！",
      "source": "wclbox",
      "variants": 3
-    },
-    {
-     "nameCn": "超级清洁器5200型！",
-     "questLevel": 30,
-     "reqLevel": 25,
-     "xp": null,
-     "pickupNpc": "超级清洁器5200型",
-     "pickupZone": "诺莫瑞根",
-     "startItem": null,
-     "preQuest": "超级清洁器5200型！",
-     "source": "wclbox",
-     "variants": 1
     },
     {
      "nameCn": "脏兮兮的戒指",
@@ -2535,19 +2485,7 @@
      "startItem": null,
      "preQuest": "邪恶的盟友",
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "邪恶的盟友",
-     "questLevel": 36,
-     "reqLevel": 28,
-     "xp": 3500,
-     "pickupNpc": null,
-     "pickupZone": null,
-     "startItem": "小卷轴",
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "寒冰之王",
@@ -2855,7 +2793,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "一线希望",
@@ -2951,7 +2889,7 @@
      "startItem": null,
      "preQuest": "荒芜之地的材料",
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "回到奥达曼",
@@ -3005,25 +2943,13 @@
      "nameCn": "修复项链",
      "questLevel": 44,
      "reqLevel": 37,
-     "xp": 925,
-     "pickupNpc": "塔瓦斯德的占卜之碗",
-     "pickupZone": null,
-     "startItem": null,
-     "preQuest": "寻找宝石",
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "修复项链",
-     "questLevel": 44,
-     "reqLevel": 37,
      "xp": 5600,
      "pickupNpc": "塔瓦斯德·基瑟尔",
      "pickupZone": "铁炉堡",
      "startItem": null,
      "preQuest": "修复项链",
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "意志石板",
@@ -3036,18 +2962,6 @@
      "preQuest": "邪恶的使者",
      "source": "wclbox",
      "variants": 1
-    },
-    {
-     "nameCn": "白金圆盘",
-     "questLevel": 47,
-     "reqLevel": 40,
-     "xp": 5250,
-     "pickupNpc": "诺甘农圆盘",
-     "pickupZone": "奥达曼",
-     "startItem": null,
-     "preQuest": "白金圆盘",
-     "source": "wclbox",
-     "variants": 2
     },
     {
      "nameCn": "搜寻项链",
@@ -3074,18 +2988,6 @@
      "variants": 1
     },
     {
-     "nameCn": "奥达曼的蘑菇",
-     "questLevel": 42,
-     "reqLevel": 36,
-     "xp": 3450,
-     "pickupNpc": "加卡尔",
-     "pickupZone": "荒芜之地",
-     "startItem": null,
-     "preQuest": "荒芜之地的试剂",
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
      "nameCn": "翻译日记",
      "questLevel": 42,
      "reqLevel": 37,
@@ -3095,19 +2997,7 @@
      "startItem": null,
      "preQuest": "搜寻项链",
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "翻译日记",
-     "questLevel": 42,
-     "reqLevel": 37,
-     "xp": 350,
-     "pickupNpc": "加卡尔",
-     "pickupZone": "荒芜之地",
-     "startItem": null,
-     "preQuest": "翻译日记",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "寻找宝物",
@@ -3775,7 +3665,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "维利塔恩的污染",
@@ -3787,7 +3677,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "大地的污染",
@@ -3799,43 +3689,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "暗影残片",
-     "questLevel": 42,
-     "reqLevel": 38,
-     "xp": 3450,
-     "pickupNpc": "尤塞尔奈",
-     "pickupZone": "奥格瑞玛",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "维利塔恩的污染",
-     "questLevel": 47,
-     "reqLevel": 41,
-     "xp": 5250,
-     "pickupNpc": "瓦克·战痕",
-     "pickupZone": "凄凉之地",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "大地的污染",
-     "questLevel": 51,
-     "reqLevel": 45,
-     "xp": 6100,
-     "pickupNpc": "瑟琳德拉",
-     "pickupZone": "凄凉之地",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     }
    ],
    "questItems": [
@@ -4245,19 +4099,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "黑铁的遗产",
-     "questLevel": 52,
-     "reqLevel": 48,
-     "xp": 5100,
-     "pickupNpc": "弗兰克罗恩·铸铁",
-     "pickupZone": null,
-     "startItem": null,
-     "preQuest": "黑铁的遗产",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "雷布里·斯库比格特",
@@ -4557,19 +4399,7 @@
      "startItem": null,
      "preQuest": "指挥官哥沙克",
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "出了什么事？",
-     "questLevel": 54,
-     "reqLevel": 48,
-     "xp": 550,
-     "pickupNpc": "指挥官哥沙克",
-     "pickupZone": null,
-     "startItem": null,
-     "preQuest": "出了什么事？",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "东部王国",
@@ -5107,13 +4937,13 @@
      "nameCn": "戈多克食人魔的事务",
      "questLevel": 60,
      "reqLevel": 56,
-     "xp": 6600,
-     "pickupNpc": null,
-     "pickupZone": null,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克食人魔装",
@@ -5125,19 +4955,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "戈多克食人魔装",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": null,
-     "pickupNpc": "诺特·希姆加克",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": "戈多克食人魔装",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克好酒",
@@ -5296,18 +5114,6 @@
      "variants": 1
     },
     {
-     "nameCn": "戈多克食人魔的事务",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": 8300,
-     "pickupNpc": "克罗卡斯",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
      "nameCn": "安泰恩的老朋友",
      "questLevel": 60,
      "reqLevel": 58,
@@ -5365,7 +5171,7 @@
      "startItem": null,
      "preQuest": "羽月要塞",
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "羽月要塞",
@@ -5401,19 +5207,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "蕾瑟塔蒂丝的网",
-     "questLevel": 57,
-     "reqLevel": 54,
-     "xp": 7550,
-     "pickupNpc": "塔罗·刺蹄",
-     "pickupZone": "菲拉斯",
-     "startItem": null,
-     "preQuest": "莫沙彻营地",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "莫沙彻营地",
@@ -5422,18 +5216,6 @@
      "xp": 1500,
      "pickupNpc": "公告员高拉克",
      "pickupZone": "奥格瑞玛",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "精灵的传说",
-     "questLevel": 60,
-     "reqLevel": 54,
-     "xp": 8550,
-     "pickupNpc": "先知科鲁拉克",
-     "pickupZone": "菲拉斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
@@ -5903,19 +5685,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "晋升印章",
-     "questLevel": 60,
-     "reqLevel": 57,
-     "xp": 9950,
-     "pickupNpc": "维埃兰",
-     "pickupZone": null,
-     "startItem": null,
-     "preQuest": "晋升印章",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "蛛后的乳汁",
@@ -6047,7 +5817,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "给麦克斯韦尔的消息",
@@ -6142,18 +5912,6 @@
      "pickupZone": "荒芜之地",
      "startItem": null,
      "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "比修的装置",
-     "questLevel": 59,
-     "reqLevel": 55,
-     "xp": 6400,
-     "pickupNpc": "比修",
-     "pickupZone": "黑石塔",
-     "startItem": null,
-     "preQuest": "狡猾的比修",
      "source": "wclbox",
      "variants": 1
     },
@@ -6561,13 +6319,13 @@
      "nameCn": "戈多克食人魔的事务",
      "questLevel": 60,
      "reqLevel": 56,
-     "xp": 6600,
-     "pickupNpc": null,
-     "pickupZone": null,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克食人魔装",
@@ -6579,19 +6337,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "戈多克食人魔装",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": null,
-     "pickupNpc": "诺特·希姆加克",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": "戈多克食人魔装",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "逃出生天！",
@@ -6603,7 +6349,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克好酒",
@@ -6614,18 +6360,6 @@
      "pickupZone": "厄运之槌",
      "startItem": null,
      "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "逃出生天！",
-     "questLevel": 60,
-     "reqLevel": 57,
-     "xp": null,
-     "pickupNpc": "诺特·希姆加克",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": "逃出生天！",
      "source": "wclbox",
      "variants": 1
     },
@@ -6798,18 +6532,6 @@
      "variants": 1
     },
     {
-     "nameCn": "戈多克食人魔的事务",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": 8300,
-     "pickupNpc": "克罗卡斯",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
      "nameCn": "安泰恩的老朋友",
      "questLevel": 60,
      "reqLevel": 58,
@@ -6903,7 +6625,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "莫沙彻营地",
@@ -6912,18 +6634,6 @@
      "xp": 1500,
      "pickupNpc": "公告员高拉克",
      "pickupZone": "奥格瑞玛",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "精灵的传说",
-     "questLevel": 60,
-     "reqLevel": 54,
-     "xp": 8550,
-     "pickupNpc": "先知科鲁拉克",
-     "pickupZone": "菲拉斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
@@ -7387,13 +7097,13 @@
      "nameCn": "戈多克食人魔的事务",
      "questLevel": 60,
      "reqLevel": 56,
-     "xp": 6600,
-     "pickupNpc": null,
-     "pickupZone": null,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克食人魔装",
@@ -7405,19 +7115,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "戈多克食人魔装",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": null,
-     "pickupNpc": "诺特·希姆加克",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": "戈多克食人魔装",
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "戈多克好酒",
@@ -7576,18 +7274,6 @@
      "variants": 1
     },
     {
-     "nameCn": "戈多克食人魔的事务",
-     "questLevel": 60,
-     "reqLevel": 56,
-     "xp": 8300,
-     "pickupNpc": "克罗卡斯",
-     "pickupZone": "厄运之槌",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
      "nameCn": "安泰恩的老朋友",
      "questLevel": 60,
      "reqLevel": 58,
@@ -7669,7 +7355,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "莫沙彻营地",
@@ -7678,18 +7364,6 @@
      "xp": 1500,
      "pickupNpc": "公告员高拉克",
      "pickupZone": "奥格瑞玛",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "精灵的传说",
-     "questLevel": 60,
-     "reqLevel": 54,
-     "xp": 8550,
-     "pickupNpc": "先知科鲁拉克",
-     "pickupZone": "菲拉斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
@@ -8171,19 +7845,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "巴罗夫家族的宝藏",
-     "questLevel": 60,
-     "reqLevel": 52,
-     "xp": 6600,
-     "pickupNpc": "阿莱克斯·巴罗夫",
-     "pickupZone": "提瑞斯法林地",
-     "startItem": null,
-     "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
+     "variants": 2
     }
    ],
    "questItems": [
@@ -9197,7 +8859,7 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 2
     },
     {
      "nameCn": "给麦克斯韦尔的消息",
@@ -9292,18 +8954,6 @@
      "pickupZone": "荒芜之地",
      "startItem": null,
      "preQuest": null,
-     "source": "wclbox",
-     "variants": 1
-    },
-    {
-     "nameCn": "比修的装置",
-     "questLevel": 59,
-     "reqLevel": 55,
-     "xp": 6400,
-     "pickupNpc": "比修",
-     "pickupZone": "黑石塔",
-     "startItem": null,
-     "preQuest": "狡猾的比修",
      "source": "wclbox",
      "variants": 1
     },

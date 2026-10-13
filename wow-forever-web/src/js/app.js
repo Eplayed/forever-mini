@@ -1623,10 +1623,8 @@
       out.push('英文原名两说：本站写「' + D.esc(x.nameEn) + '」，'
         + '客户端写「' + D.esc(x.nameEnClient) + '」');
     }
-    if (x.nameCnConflict) {
-      out.push('译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
-        D.esc(x.nameCnConflict) + '」，待定稿');
-    }
+    // 译名 2026-10-13 站主定：一律按官方来，页面上只写官方那个名字。
+    // 转载的另一个写法留在 nameCnConflict 里（卡口与溯源都还在），但不再摆"待定稿"。
     return out;
   }
   function dunConfHtml(x) {
@@ -1934,19 +1932,20 @@
       var q = ((QD.dungeons || {})[x.id]) || {};
       var quests = q.quests || [], qItems = q.questItems || [], qStarts = q.questStarts || [];
       function num(v) { return v === null || v === undefined ? '—' : D.esc(v); }
+      /* 站主 2026-10-13：这一节是给玩家看的，"只有单一来源""这一条只有另一份资料有"
+         "接取地点待补""同一任务 N 个版本"这类讲资料出处与缺口的话一律不上页面。
+         数据里该怎么记还怎么记（source / xpFrom / variants 都留着，卡口照查），
+         只是不摆给玩家看。缺的格子留空，不写"待补"。
+         唯一留下的两句：①「用物品开启：X」——那是玩法信息，玩家真的要用物品开任务；
+         ②经验值有两个说法时把两个数都摆出来（红线要求两源分歧不许藏），
+         但换成"850 / 1050，还没实测"这种玩家读得懂的说法。 */
       function questRow(y) {
-        var xp = y.xp === null || y.xp === undefined
-          ? '<span class="dim">经验待补</span>'
-          : '<b class="mono">' + D.esc(y.xp) + '</b>' +
-            (y.xpFrom === 'wowhead' ? '<span class="dim">　只有单一来源</span>' : '');
+        var xp = y.xp === null || y.xp === undefined ? '' : '<b class="mono">' + D.esc(y.xp) + '</b>';
         var where = y.pickupNpc ? D.esc(y.pickupNpc) + (y.pickupZone ? '<span class="dim">，' + D.esc(y.pickupZone) + '</span>' : '')
-          : (y.startItem ? '<span class="dim">用物品开启：' + D.esc(y.startItem) + '</span>'
-            : '<span class="dim">接取地点待补</span>');
+          : (y.startItem ? '<span class="dim">用物品开启：' + D.esc(y.startItem) + '</span>' : '');
         return '<tr><td><b>' + D.esc(y.nameCn) + '</b>' +
-          (y.variants > 1 ? '<span class="dim">　同一任务 ' + y.variants + ' 个版本</span>' : '') +
-          (y.source === 'wowhead' ? '<span class="dim">　这一条只有另一份资料有</span>' : '') +
           (y.preQuest ? '<span class="dim">　前置：' + D.esc(y.preQuest) + '</span>' : '') +
-          (y.xpAlt ? '<div class="conf">经验值两说：本站取「' + D.esc(y.xp) + '」，另一份资料写「' + D.esc(y.xpAlt) + '」，两个都留着</div>' : '') +
+          (y.xpAlt ? '<div class="conf">经验值有两个说法：' + D.esc(y.xp) + ' / ' + D.esc(y.xpAlt) + '，还没实测</div>' : '') +
           '</td><td class="mono">' + num(y.reqLevel) + '</td><td class="mono">' + num(y.questLevel) +
           '</td><td class="mono">' + xp + '</td><td>' + where + '</td></tr>';
       }
@@ -1971,7 +1970,7 @@
         (qItems.length ? '<h3>进本之前要带的东西</h3>' : '') +
         simpleTable(qItems, ['任务物品', '谁掉', '对应任务'], function (y) {
           return ['<b>' + D.esc(y.itemCn || '—') + '</b>',
-            y.from && y.from !== '—' ? D.esc(y.from) : '<span class="dim">未标</span>',
+            y.from && y.from !== '—' ? D.esc(y.from) : '',
             D.esc(y.quest || '—') + (y.faction ? '<span class="dim">　' + D.esc(y.faction) + '</span>' : '')];
         }) +
         (qStarts.length ? '<h3>在哪儿接</h3>' : '') +

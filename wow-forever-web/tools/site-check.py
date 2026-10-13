@@ -968,10 +968,15 @@ def test_dungeon_data(browser, base):
     newn = len([x for x in (dg.get("newDungeons") or []) if x.get("kind") == "new"])
     check("无限新增本带\"新\"角标", seals == newn, "%d 个角标 / %d 座新本" % (seals, newn))
     conf = page.evaluate("() => document.querySelectorAll('#main .conf').length")
-    exp_conf = len([x for x in rows if x.get("partySizeAlt")]) + exp["twoName"] \
-        + len([x for x in rows if x.get("nameCnConflict")])
-    check("还活着的那些分歧（人数 / 英文原名 / 译名）一条都没漏", conf == exp_conf,
+    exp_conf = len([x for x in rows if x.get("partySizeAlt")]) + exp["twoName"]
+    check("还活着的那些分歧（人数 / 英文原名）一条都没漏", conf == exp_conf,
           "%d 处 / 应有 %d 处" % (conf, exp_conf))
+    # 译名按官方来：冲突行不许回来，但另一个写法必须还在数据里（不是删掉，是不摆）
+    confCn = page.evaluate("() => [...document.querySelectorAll('#main .conf')]"
+                           ".filter(e => /译名|待定稿/.test(e.textContent)).length")
+    hasAlt = len([x for x in rows if x.get("nameCnConflict")])
+    check("译名只写官方那个（页面上没有译名冲突行），另一个写法仍留在数据里",
+          confCn == 0 and hasAlt >= 1, "页面 %d 行 / 数据 %d 座留着" % (confCn, hasAlt))
     # 首领头像：方块数要等于首领数（没脸的也得有个自绘块），只有数据里挂了本地转存路径的才放图
     faces = page.evaluate("""() => ({
       tiles: document.querySelectorAll('.bosslist .bh > .liw').length,
@@ -1032,13 +1037,12 @@ def test_dungeon_detail(browser, base):
     new_duns = [x for x in duns if x.get("kind") == "new"]
 
     def nconf(x):
-        # 等级区间 2026-10-13 按参考站卡片定稿，界面上不再出这一条（见 test_dungeon_data）
+        # 等级区间按参考站卡片定稿、译名按官方来，这两类 2026-10-13 起界面上都不再摆"两说"
+        # （数据里都还留着，见 test_dungeon_data 的反向断言）。只剩人数与英文原名两类。
         c = 0
         if x.get("partySizeAlt"):
             c += 1
         if x.get("nameEnClient"):
-            c += 1
-        if x.get("nameCnConflict"):
             c += 1
         return c
 
@@ -1190,11 +1194,14 @@ def test_dungeon_detail(browser, base):
               "有 %d 条" % len(qqs) if qqs else d["qEmpty"][:34])
         check("%s：经验值两说的逐条写明两个都留着" % did,
               len(d["qConf"]) == exp_conf, "%d 处 / 数据 %d 条" % (len(d["qConf"]), exp_conf))
-        check("%s：只用上一份资料的那几条标出来，不冒充两源印证" % did,
-              len([r for r in d["qRows"]
-                   if "单一来源" in " ".join(r) or "另一份资料有" in " ".join(r)]) == exp_single,
-              "页面 %d / 数据 %d" % (len([r for r in d["qRows"]
-                                          if "单一来源" in " ".join(r) or "另一份资料有" in " ".join(r)]), exp_single))
+        # 站主 2026-10-13：讲资料出处与缺口的话不许上这一页。反向钉住，数据侧照旧留档。
+        check("%s：任务表里不出现讲资料来源与缺口的话" % did,
+              not re.search("单一来源|另一份资料|待补|未标|个版本", d["qEmpty"]),
+              re.search("单一来源|另一份资料|待补|未标|个版本", d["qEmpty"]).group(0)
+              if re.search("单一来源|另一份资料|待补|未标|个版本", d["qEmpty"]) else "干净")
+        check("%s：合并同名任务后一条名字不重复出现" % did,
+              len(set(r[0].split(" ")[0] for r in d["qRows"])) == len(d["qRows"]),
+              "%d 行里有重名" % len(d["qRows"]))
         check("%s：任务与任务物品里不出现百分比" % did,
               not re.search(r"\d+(\.\d+)?\s*%", d["qEmpty"]), d["qEmpty"][:40])
         check("%s：图不坏、无脚本报错" % did, d["broken"] == 0 and not errs,

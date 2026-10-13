@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben 各副本页",
-  "scrapedAt": "2026-10-12",
+  "scrapedAt": "2026-10-13",
   "method": "渲染后 DOM 读 section.sj-boss 的 span.sj-face 内联背景路径",
   "note": "只取头像文件路径这一个标识符；data-unknown 表示源站自己也没有这张脸",
   "bosses": 232,
