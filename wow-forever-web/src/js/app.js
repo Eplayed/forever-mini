@@ -1853,9 +1853,10 @@
      「路线」2026-10-13 站主说暂时先不要，整块撤了：数据里 route 三十八条全是空数组，
      画出来永远是"待实测"，占位没有信息量。要恢复先看 dungeons.json 的 route 字段。 */
   function dungeonPage() {
-    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
+    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; }),
+      D.load('data/dungeon-quests.json').catch(function () { return {}; })])
       .then(function (rs) {
-      var d = rs[0], ART = rs[1] || {};
+      var d = rs[0], ART = rs[1] || {}, QD = rs[2] || {};
       var duns = [].concat(d.newDungeons || [], d.classicDungeons || []);
       var all = duns.concat(d.raids || []);
       var id = urlQ('d') || urlQ('id') || '';
@@ -1926,6 +1927,59 @@
         '<s>' + (x.partySize ? '取自客户端的队伍查找器' : '客户端里还没有它') + '</s></div>' +
         '<div><s>掉落</s><b>' + (drops.length || '待补') + '</b>' +
         '<s>' + (drops.length ? '件，按首领分组' : '还没有名单') + '</s></div></div>';
+      /* ---------- 本里的任务 ----------
+         2026-10-13 站主定的优先级：wclbox 为准，wclbox 没有的按 wowhead 来。
+         谁赢谁输在 tools/merge-dungeon-quests.py 里就定完了，页面只负责把
+         "另一个数也留着"和"这一条只有一个来源"说出来——那是红线要看的两件事。 */
+      var q = ((QD.dungeons || {})[x.id]) || {};
+      var quests = q.quests || [], qItems = q.questItems || [], qStarts = q.questStarts || [];
+      function num(v) { return v === null || v === undefined ? '—' : D.esc(v); }
+      function questRow(y) {
+        var xp = y.xp === null || y.xp === undefined
+          ? '<span class="dim">经验待补</span>'
+          : '<b class="mono">' + D.esc(y.xp) + '</b>' +
+            (y.xpFrom === 'wowhead' ? '<span class="dim">　只有单一来源</span>' : '');
+        var where = y.pickupNpc ? D.esc(y.pickupNpc) + (y.pickupZone ? '<span class="dim">，' + D.esc(y.pickupZone) + '</span>' : '')
+          : (y.startItem ? '<span class="dim">用物品开启：' + D.esc(y.startItem) + '</span>'
+            : '<span class="dim">接取地点待补</span>');
+        return '<tr><td><b>' + D.esc(y.nameCn) + '</b>' +
+          (y.variants > 1 ? '<span class="dim">　同一任务 ' + y.variants + ' 个版本</span>' : '') +
+          (y.source === 'wowhead' ? '<span class="dim">　这一条只有另一份资料有</span>' : '') +
+          (y.preQuest ? '<span class="dim">　前置：' + D.esc(y.preQuest) + '</span>' : '') +
+          (y.xpAlt ? '<div class="conf">经验值两说：本站取「' + D.esc(y.xp) + '」，另一份资料写「' + D.esc(y.xpAlt) + '」，两个都留着</div>' : '') +
+          '</td><td class="mono">' + num(y.reqLevel) + '</td><td class="mono">' + num(y.questLevel) +
+          '</td><td class="mono">' + xp + '</td><td>' + where + '</td></tr>';
+      }
+      function simpleTable(rows, head, cells) {
+        if (!rows.length) return '';
+        return '<div class="scrollx"><table class="entab"><thead><tr>' +
+          head.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr></thead><tbody>' +
+          rows.map(function (y) { return '<tr>' + cells(y).map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>'; }).join('') +
+          '</tbody></table></div>';
+      }
+      var qSum = q.summary || {};
+      var questBlock = '<div class="card" id="dquests"><h2>本里的任务</h2>' +
+        (quests.length
+          ? '<p class="dim">共 ' + quests.length + ' 条' +
+            (qSum.xpTotal ? '，合计 ' + D.esc(qSum.xpTotal) + ' 点经验' : '') +
+            (qSum.faction ? '，' + D.esc(qSum.faction) + '一侧' : '') +
+            '。经验与可接等级是经典旧世的数字，无限服可能调整，本站没实测过。</p>' +
+            '<div class="scrollx"><table class="entab qtab"><thead><tr><th>任务</th><th>几级能接</th>' +
+            '<th>任务等级</th><th>经验</th><th>在哪接</th></tr></thead><tbody>' +
+            quests.map(questRow).join('') + '</tbody></table></div>'
+          : '<p class="dim">这座本还没有任务记录。</p>') +
+        (qItems.length ? '<h3>进本之前要带的东西</h3>' : '') +
+        simpleTable(qItems, ['任务物品', '谁掉', '对应任务'], function (y) {
+          return ['<b>' + D.esc(y.itemCn || '—') + '</b>',
+            y.from && y.from !== '—' ? D.esc(y.from) : '<span class="dim">未标</span>',
+            D.esc(y.quest || '—') + (y.faction ? '<span class="dim">　' + D.esc(y.faction) + '</span>' : '')];
+        }) +
+        (qStarts.length ? '<h3>在哪儿接</h3>' : '') +
+        simpleTable(qStarts, ['谁给任务', '在哪儿', '能接到什么'], function (y) {
+          return ['<b>' + D.esc(y.npc || '—') + '</b>', D.esc(y.zone || '—'),
+            D.esc(y.quest || '—') + (y.faction ? '<span class="dim">　' + D.esc(y.faction) + '</span>' : '')];
+        }) +
+        '</div>';
       set('<section class="dhero dunh' + (art ? '' : ' noart') + '">' +
         (art ? '<img src="' + D.esc(art) + '" alt="">' : '') +
         '<span class="dx"></span><div class="db">' +
@@ -1937,7 +1991,8 @@
         '<div class="dhline">' + (bosses.length ? bosses.length + ' 个首领 · ' : '首领待补 · ') +
           (drops.length ? drops.length + ' 件掉落归属' : '掉落待补') + ' · ' +
           (x.faction ? D.esc(x.faction) : '阵营未标') +
-          (x.partySize ? ' · 一次 ' + x.partySize + ' 人' : '') + '</div>' +
+          (x.partySize ? ' · 一次 ' + x.partySize + ' 人' : '') +
+          (quests.length ? ' · ' + quests.length + ' 条任务' : '') + '</div>' +
         (zone ? '<a class="cta" href="world.html?q=' + encodeURIComponent(zone) +
           '">在世界那一页找「' + D.esc(zone) + '」</a>' : '') +
         '</div></section>' +
@@ -1954,7 +2009,7 @@
         '<div class="card"><h2>首领与掉落</h2>' +
         (bosses.length ? bosses.map(bossBlock).join('')
           : '<p class="dim">这座本还没有首领名单，掉落也就没有归属可写。</p>') +
-        '</div>' +
+        '</div>' + questBlock +
         '<div class="card"><h2>换一座</h2>' +
         '<select id="dpick" class="dunsel" aria-label="跳到另一座地下城的详情页">' +
         '<option value="">按等级段找一座</option>' +
@@ -2214,7 +2269,8 @@
   /* ---------- 溯源 ---------- */
   function provenance() {
     Promise.all([D.load('data/meta.json'), D.load('data/method.json'), D.load('data/scale.json'),
-      D.load('data/dungeons.json').catch(function () { return {}; })])
+      D.load('data/dungeons.json').catch(function () { return {}; }),
+      D.load('data/dungeon-quests.json').catch(function () { return {}; })])
       .then(function (r) {
         var sc = r[2].scale;
         // covBar 按 total 算四段宽度，scale.json 里的分级不带 total，这里显式补上
@@ -2222,6 +2278,7 @@
           L3: sc.pubCoverage.L3, total: sc.pubTotal };
         var m = r[1] || {};
         var RS = (r[3] || {}).meta || {};
+        var QS = (r[4] || {}).meta || {};
         var names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
         var refs = [['wow.blizzard.cn/news/', '国服官方公告与职业深度解析', '可入自动化'],
         ['wow.blizzard.cn/24266320/', '国服在线修正', '可入自动化（需整页比对）'],
@@ -2284,6 +2341,12 @@
              但"以前有两个数、按哪个定的、另一个去哪了"必须有人交代，写在数据里由这一页读出来。 */
           (RS.levelRangeSettled ? '<p class="dim" style="margin-top:var(--s3)">' +
             D.esc(RS.levelRangeSettled.by) + '：' + D.esc(RS.levelRangeSettled.note) + '</p>' : '') +
+          /* 副本任务的取数顺序也是站主定的决定，和内容页那句"两个都留着"配套看。 */
+          (QS.counts ? '<p class="dim">' + D.esc(QS.pageNote || '') + ' 这一份共 ' +
+            D.esc(QS.counts.quests) + ' 条任务，其中经验值退到另一份资料的 ' +
+            D.esc(QS.counts.xpFromWowhead) + ' 条、两份数不一样留着两个的 ' +
+            D.esc(QS.counts.xpConflict) + ' 条、只有一份资料有的 ' + D.esc(QS.counts.addedFromWowhead) +
+            ' 条。</p>' : '') +
           '</div>' +
           '<div class="card"><h2>发布前的检查规则</h2><ul>' +
           (r[0].rules || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul></div>');

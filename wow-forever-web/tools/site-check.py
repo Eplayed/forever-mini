@@ -1133,6 +1133,11 @@ def test_dungeon_detail(browser, base):
           noLoot: [...document.querySelectorAll('.brow .bt')].filter(e => /掉落待补/.test(e.innerText)).length,
           broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
           heroArt: !!document.querySelector('.dunh img'),
+          qRows: [...document.querySelectorAll('#dquests .qtab tbody tr')]
+            .map(r => [...r.querySelectorAll('td')].map(c => c.innerText.replace(/\s+/g, ' ').trim())),
+          qTables: document.querySelectorAll('#dquests table').length,
+          qEmpty: (document.querySelector('#dquests') || {}).innerText || '',
+          qConf: [...document.querySelectorAll('#dquests .conf')].map(e => e.innerText),
           pct: (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/) || [])[0] || '',
           hasRoute: /路线/.test(document.querySelector('#main').innerText),
           shownRange: (((document.querySelectorAll('.dhfact b') || [])[1] || {}).innerText || '').trim(),
@@ -1145,7 +1150,12 @@ def test_dungeon_detail(browser, base):
               "%d / %d" % (d["bosses"], len(x.get("bosses") or [])))
         check("%s：掉落格数等于数据" % did, d["items"] == len(x.get("drops") or []),
               "%d / %d" % (d["items"], len(x.get("drops") or [])))
-        check("%s：分歧逐条摆着" % did, d["conf"] == nconf(x), "%d / %d" % (d["conf"], nconf(x)))
+        # 分歧有两个来源：这座本自己的（人数 / 英文原名 / 译名），加上任务经验值那份两说
+        qe0 = json.load(open(os.path.join(SRC, "data", "dungeon-quests.json"), encoding="utf-8"))
+        qxp = len([y for y in ((qe0.get("dungeons") or {}).get(did) or {}).get("quests", [])
+                   if y.get("xpAlt") is not None])
+        check("%s：分歧逐条摆着（本级别 + 任务经验两说）" % did,
+              d["conf"] == nconf(x) + qxp, "%d / 应有 %d+%d" % (d["conf"], nconf(x), qxp))
         check("%s：没脸的直说没有这张头像，不拿别的脸凑" % did,
               d["noFace"] == len([b for b in (x.get("bosses") or []) if not b.get("portrait")]),
               "%d 个" % d["noFace"])
@@ -1168,6 +1178,25 @@ def test_dungeon_detail(browser, base):
         check("%s：进本之前四格齐、区间显示的就是定稿后那个数" % did,
               d["fact"] == 4 and d["shownRange"] == (x.get("levelRange") or "待实测"),
               "四格 %d / 页面 %s 数据 %s" % (d["fact"], d["shownRange"], x.get("levelRange")))
+        qe = json.load(open(os.path.join(SRC, "data", "dungeon-quests.json"), encoding="utf-8"))
+        qd = (qe.get("dungeons") or {}).get(did) or {}
+        qqs = qd.get("quests") or []
+        exp_conf = len([y for y in qqs if y.get("xpAlt") is not None])
+        exp_single = len([y for y in qqs if y.get("xpFrom") == "wowhead" or y.get("source") == "wowhead"])
+        check("%s：任务那一节按数据摆，行数等于任务条数" % did,
+              len(d["qRows"]) == len(qqs), "页面 %d 行 / 数据 %d 条" % (len(d["qRows"]), len(qqs)))
+        check("%s：没有任务的本直说没有，不留空表" % did,
+              (len(qqs) > 0) == ("还没有任务记录" not in d["qEmpty"]),
+              "有 %d 条" % len(qqs) if qqs else d["qEmpty"][:34])
+        check("%s：经验值两说的逐条写明两个都留着" % did,
+              len(d["qConf"]) == exp_conf, "%d 处 / 数据 %d 条" % (len(d["qConf"]), exp_conf))
+        check("%s：只用上一份资料的那几条标出来，不冒充两源印证" % did,
+              len([r for r in d["qRows"]
+                   if "单一来源" in " ".join(r) or "另一份资料有" in " ".join(r)]) == exp_single,
+              "页面 %d / 数据 %d" % (len([r for r in d["qRows"]
+                                          if "单一来源" in " ".join(r) or "另一份资料有" in " ".join(r)]), exp_single))
+        check("%s：任务与任务物品里不出现百分比" % did,
+              not re.search(r"\d+(\.\d+)?\s*%", d["qEmpty"]), d["qEmpty"][:40])
         check("%s：图不坏、无脚本报错" % did, d["broken"] == 0 and not errs,
               "坏图 %d / 报错 %s" % (d["broken"], errs[:1]))
         page.screenshot(path=os.path.join(SHOT_DIR, "dungeon-%s.png" % did))

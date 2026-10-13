@@ -158,6 +158,55 @@ const dg = read('dungeons.json');
 const ids = [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).map((d) => d.id);
 if (new Set(ids).size !== ids.length) errs.push('dungeons：存在重复 id');
 
+/* ---------- 副本任务（2026-10-13 站主定：wclbox 为准，wclbox 没有的按 wowhead 来） ----------
+   这份单独一个文件（dungeon-quests.json），不塞进 dungeons.json：副本详情页才用得到，
+   列表页与新站都不读它，没必要让每次加载都背上这 230 KB。 */
+const dqs = read('dungeon-quests.json');
+const dqIds = new Set(ids);
+let dqN = 0;
+Object.keys(dqs.dungeons || {}).forEach((did) => {
+  if (!dqIds.has(did)) { errs.push(`dungeon-quests：${did} 在 dungeons.json 里没有这座本`); return; }
+  const e = dqs.dungeons[did];
+  (e.quests || []).forEach((y, i) => {
+    dqN += 1;
+    if (!y.nameCn) errs.push(`dungeon-quests ${did} 第 ${i + 1} 条：没有任务名`);
+    ['xp', 'questLevel', 'reqLevel'].forEach((k) => {
+      if (y[k] !== null && y[k] !== undefined && !Number.isInteger(y[k])) {
+        errs.push(`dungeon-quests ${did}/${y.nameCn}：${k}=「${y[k]}」不是整数`);
+      }
+    });
+    // 两源不一致必须两边都留着：留了 xpAlt 就得同时说明它来自哪
+    if (y.xpAlt !== undefined && y.xpAlt === y.xp) {
+      errs.push(`dungeon-quests ${did}/${y.nameCn}：xpAlt 与本站取的数一样，那是装样子，删掉`);
+    }
+    if (y.xpAlt !== undefined && !y.xpAltFrom) {
+      errs.push(`dungeon-quests ${did}/${y.nameCn}：留了另一个经验值却没写它来自哪份资料`);
+    }
+    if (!y.source) errs.push(`dungeon-quests ${did}/${y.nameCn}：没写这条是从哪份资料来的`);
+    // 红线：掉落与任务一律不许出现概率
+    if (/%/.test(JSON.stringify(y))) errs.push(`dungeon-quests ${did}/${y.nameCn}：出现了百分号，本站不写概率`);
+  });
+  (e.questItems || []).forEach((y) => {
+    if (!y.itemCn) errs.push(`dungeon-quests ${did}：任务物品有一条没有物品名`);
+    if (/%/.test(JSON.stringify(y))) errs.push(`dungeon-quests ${did}/${y.itemCn}：任务物品里出现了百分号`);
+  });
+  if (!(e.provenance || []).length) errs.push(`dungeon-quests ${did}：一条任务都没有出处记录`);
+  (e.provenance || []).forEach((p) => {
+    if (!p.url) errs.push(`dungeon-quests ${did}：出处没带链接`);
+    if (!p.checkedAt) errs.push(`dungeon-quests ${did}：出处没带核对日期`);
+  });
+});
+if ((dqs.meta || {}).counts && dqs.meta.counts.quests !== dqN) {
+  errs.push(`dungeon-quests：meta.counts.quests=${dqs.meta.counts.quests} 与实际 ${dqN} 条不一致`);
+}
+const noQuest = ids.filter((i) => { const e = (dqs.dungeons || {})[i] || {}; return !(e.quests || []).length; });
+// 这一段跑在 `const scale = {}` 之前，直接写 scale 会踩暂时性死区（node --check 查不出来，
+// 一跑就 ReferenceError）。先收到 var 里，等 scale 建好再挂上去。
+var DQ_TOTAL = dqN;
+var DQ_DUNGEONS = Object.keys(dqs.dungeons || {}).filter((k) => ((dqs.dungeons[k] || {}).quests || []).length).length;
+warns.push(`副本任务：${dqN} 条 / ${DQ_DUNGEONS} 座有记录，`
+  + `${noQuest.length} 座两份资料都没有（多为无限新增本，这条本身就是结论）`);
+
 // 客户端队伍查找器条目：单独一份文件（打进小程序会把座数带歪），界面在副本页并列显示
 const qu = read('queue.json');
 const qMeta = qu.meta || {};
@@ -510,6 +559,8 @@ if (fs.existsSync(artPath)) {
 
 // 首页与溯源页要的规模数字，边校验边收集，最后统一写进 scale.json（单一来源，不手抄）
 const scale = {};
+scale.dungeonQuests = DQ_TOTAL;
+scale.dungeonQuestDungeons = DQ_DUNGEONS;
 
 // 专业：配方与采集点的口径检查（数据全部来自客户端解包转述）
 const profPath = path.join(ROOT, 'professions.json');

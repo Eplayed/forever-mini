@@ -1,0 +1,9715 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-13",
+  "method": "tools/merge-dungeon-quests.js 合 upstream 两份任务快照；优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。",
+  "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上。任务目标那句话与掉落概率都没采——第三方站只取名称与数字，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，本站没实测过。",
+  "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，没实测过。",
+  "counts": {
+   "dungeons": 35,
+   "quests": 396,
+   "xpFromWowhead": 11,
+   "xpConflict": 2,
+   "addedFromWowhead": 1,
+   "deduped": 12,
+   "itemStart": 50
+  }
+ },
+ "dungeons": {
+  "hall-of-thanes": {
+   "quests": [
+    {
+     "nameCn": "远古的宿怨",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "reqFrom": "wowhead",
+     "nameEn": "An Ancient Grudge"
+    },
+    {
+     "nameCn": "永不安息的亡者",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "The Restless Dead"
+    },
+    {
+     "nameCn": "重要的传家宝",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1350,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "Important Heirlooms"
+    },
+    {
+     "nameCn": "旧铁炉堡入侵",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "Old Ironforge Incursion"
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "矮人的篝火",
+     "from": "—",
+     "quest": "重要的传家宝",
+     "faction": null
+    },
+    {
+     "itemCn": "杜根·挽锤的头颅",
+     "from": "杜根·挽锤",
+     "quest": "旧铁炉堡入侵",
+     "faction": null
+    }
+   ],
+   "questStarts": [],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 4,
+    "xpTotal": null,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/hall-of-thanes",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://www.wowhead.com/forever/zone=16919/the-hall-of-thanes",
+     "note": "wclbox 没给的那几项经验值与任务，按站主定的顺序退到这份来源",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "ruins-of-lordaeron": {
+   "quests": [
+    {
+     "nameCn": "无尽的折磨",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "憎恶头颅",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "Unending Torment"
+    },
+    {
+     "nameCn": "无尽的折磨",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "pickupNpc": "大药剂师法拉尼尔",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 3,
+     "xpFrom": "wowhead"
+    },
+    {
+     "nameCn": "惊恐的求援",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "A Frightened Request"
+    },
+    {
+     "nameCn": "圣光的正义",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "Light's Justice"
+    },
+    {
+     "nameCn": "拉斯玛尔之怒",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "The Wrath of Rath'mael"
+    },
+    {
+     "nameCn": "洛丹伦纹章",
+     "questLevel": 22,
+     "reqLevel": 16,
+     "xp": 2600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "洛丹伦纹章",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead",
+     "nameEn": "Crest of Lordaeron"
+    },
+    {
+     "nameCn": "新的瘟疫",
+     "questLevel": 22,
+     "reqLevel": 16,
+     "xp": 2600,
+     "pickupNpc": "萨多雷·格雷夫",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpFrom": "wowhead"
+    },
+    {
+     "nameCn": "憎恶生物",
+     "nameEn": "Abominable Creatures",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "variants": 1,
+     "source": "wowhead"
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "剧毒骨帽",
+     "from": "—",
+     "quest": "无尽的折磨",
+     "faction": null
+    },
+    {
+     "itemCn": "水疱草",
+     "from": "—",
+     "quest": "无尽的折磨",
+     "faction": null
+    },
+    {
+     "itemCn": "苦楚精华",
+     "from": "—",
+     "quest": "无尽的折磨",
+     "faction": null
+    },
+    {
+     "itemCn": "完好的肢体",
+     "from": "等",
+     "quest": "圣光的正义",
+     "faction": null
+    },
+    {
+     "itemCn": "剧毒的毒株",
+     "from": "枯牙",
+     "quest": "新的瘟疫",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "憎恶头颅",
+     "zone": "—",
+     "quest": "无尽的折磨",
+     "faction": null
+    },
+    {
+     "npc": "大药剂师法拉尼尔",
+     "zone": "幽暗城",
+     "quest": "无尽的折磨，无尽的折磨，无尽的折磨",
+     "faction": null
+    },
+    {
+     "npc": "洛丹伦纹章",
+     "zone": "—",
+     "quest": "洛丹伦纹章",
+     "faction": null
+    },
+    {
+     "npc": "萨多雷·格雷夫",
+     "zone": "幽暗城",
+     "quest": "新的瘟疫",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 9,
+    "xpTotal": null,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_en",
+     "url": "https://www.wowhead.com/forever/zone=16611/ruins-of-lordaeron",
+     "note": "wclbox 没给的那几项经验值与任务，按站主定的顺序退到这份来源",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "whelgars-excavation": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/excavation-site",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "city-of-dalaran": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/city-of-dalaran",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "the-drowned-city": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/the-drowned-city",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "kroldok-stronghold": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/kroldok-stronghold",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "alcaz-prison": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/alcaz-prison",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "blackmaw-hold": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/blackmaw-hold",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "shapers-terrace": {
+   "quests": [],
+   "questItems": [],
+   "questStarts": [],
+   "summary": {
+    "faction": null,
+    "questCount": null,
+    "xpTotal": null,
+    "note": null
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/shapers-terrace",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "ragefire-chasm": {
+   "quests": [
+    {
+     "nameCn": "试探敌人",
+     "questLevel": 15,
+     "reqLevel": 9,
+     "xp": 850,
+     "pickupNpc": "拉哈罗",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpAlt": 1050,
+     "xpAltFrom": "wowhead"
+    },
+    {
+     "nameCn": "寻找背包",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 875,
+     "pickupNpc": "拉哈罗",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1,
+     "xpAlt": 880,
+     "xpAltFrom": "wowhead"
+    },
+    {
+     "nameCn": "归还背包",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "pickupNpc": "玛尔·恐怖图腾",
+     "pickupZone": "怒焰裂谷",
+     "startItem": null,
+     "preQuest": "寻找背包",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "毁灭之力",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "pickupNpc": "瓦里玛萨斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "隐藏的敌人",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1150,
+     "pickupNpc": "萨尔",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "隐藏的敌人",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "饥饿者塔拉加曼",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1150,
+     "pickupNpc": "尼尔鲁·火刃",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "恐怖图腾背包",
+     "from": "—",
+     "quest": "归还背包",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "暗影法术研究",
+     "from": "燃刃信徒，燃刃术士",
+     "quest": "毁灭之力",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "扭曲虚空的魔法",
+     "from": "燃刃信徒，燃刃术士",
+     "quest": "毁灭之力",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "塔拉加曼的心脏",
+     "from": "饥饿者塔拉加曼",
+     "quest": "饥饿者塔拉加曼",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "拉哈罗",
+     "zone": "雷霆崖",
+     "quest": "试探敌人，寻找背包",
+     "faction": "部落"
+    },
+    {
+     "npc": "玛尔·恐怖图腾",
+     "zone": "怒焰裂谷",
+     "quest": "归还背包",
+     "faction": "部落"
+    },
+    {
+     "npc": "瓦里玛萨斯",
+     "zone": "幽暗城",
+     "quest": "毁灭之力",
+     "faction": "部落"
+    },
+    {
+     "npc": "萨尔",
+     "zone": "奥格瑞玛",
+     "quest": "隐藏的敌人",
+     "faction": "部落"
+    },
+    {
+     "npc": "尼尔鲁·火刃",
+     "zone": "奥格瑞玛",
+     "quest": "饥饿者塔拉加曼",
+     "faction": "部落"
+    }
+   ],
+   "summary": {
+    "faction": "部落",
+    "questCount": 6,
+    "xpTotal": 6925,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/ragefire-chasm",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "wailing-caverns": {
+   "quests": [
+    {
+     "nameCn": "变异皮革",
+     "questLevel": 17,
+     "reqLevel": 13,
+     "xp": 1600,
+     "pickupNpc": "纳尔帕克",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "港口的麻烦",
+     "questLevel": 18,
+     "reqLevel": 14,
+     "xp": 1350,
+     "pickupNpc": "起重机操作员比戈弗兹",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "智慧饮料",
+     "questLevel": 18,
+     "reqLevel": 13,
+     "xp": 1350,
+     "pickupNpc": "麦伯克·米希瑞克斯",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": "迅猛龙角",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "清除变异者",
+     "questLevel": 21,
+     "reqLevel": 15,
+     "xp": 2050,
+     "pickupNpc": "厄布鲁",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "发光的碎片",
+     "questLevel": 26,
+     "reqLevel": 15,
+     "xp": 2650,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "发光的碎片",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "哈缪尔·符文图腾",
+     "questLevel": 16,
+     "reqLevel": 12,
+     "xp": 290,
+     "pickupNpc": "图加·符文图腾",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": "变异的生物",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "纳拉·蛮鬃",
+     "questLevel": 16,
+     "reqLevel": 12,
+     "xp": 120,
+     "pickupNpc": "大德鲁伊哈缪尔·符文图腾",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": "哈缪尔·符文图腾",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "毒蛇花",
+     "questLevel": 18,
+     "reqLevel": 14,
+     "xp": 1350,
+     "pickupNpc": "药剂师扎玛",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "尖牙德鲁伊",
+     "questLevel": 22,
+     "reqLevel": 11,
+     "xp": 2200,
+     "pickupNpc": "纳拉·蛮鬃",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": "纳拉·蛮鬃",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "变异皮革 ×20",
+     "from": "变异曲蛇，变异刺鞭蛇，变异爬行者等",
+     "quest": "变异皮革",
+     "faction": null
+    },
+    {
+     "itemCn": "99年波尔多陈酿",
+     "from": "疯狂的马格利什",
+     "quest": "港口的麻烦",
+     "faction": null
+    },
+    {
+     "itemCn": "毒蛇花 ×10",
+     "from": "毒蛇花",
+     "quest": "毒蛇花",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "哀嚎香精 ×6",
+     "from": "吞噬软浆怪，大型软浆怪，噩梦软浆怪等",
+     "quest": "智慧饮料",
+     "faction": null
+    },
+    {
+     "itemCn": "考布莱恩宝石",
+     "from": "考布莱恩",
+     "quest": "尖牙德鲁伊",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "安娜科德拉宝石",
+     "from": "安娜科德拉",
+     "quest": "尖牙德鲁伊",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "皮萨斯宝石",
+     "from": "皮萨斯",
+     "quest": "尖牙德鲁伊",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瑟芬迪斯宝石",
+     "from": "瑟芬迪斯",
+     "quest": "尖牙德鲁伊",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "发光的碎片",
+     "from": "吞噬者穆坦努斯",
+     "quest": "发光的碎片",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "图加·符文图腾",
+     "zone": "贫瘠之地",
+     "quest": "哈缪尔·符文图腾",
+     "faction": "部落"
+    },
+    {
+     "npc": "大德鲁伊哈缪尔·符文图腾",
+     "zone": "雷霆崖",
+     "quest": "纳拉·蛮鬃",
+     "faction": "部落"
+    },
+    {
+     "npc": "纳尔帕克",
+     "zone": "贫瘠之地",
+     "quest": "变异皮革",
+     "faction": null
+    },
+    {
+     "npc": "起重机操作员比戈弗兹",
+     "zone": "贫瘠之地",
+     "quest": "港口的麻烦",
+     "faction": null
+    },
+    {
+     "npc": "药剂师扎玛",
+     "zone": "雷霆崖",
+     "quest": "毒蛇花",
+     "faction": "部落"
+    },
+    {
+     "npc": "麦伯克·米希瑞克斯",
+     "zone": "贫瘠之地",
+     "quest": "智慧饮料",
+     "faction": null
+    },
+    {
+     "npc": "厄布鲁",
+     "zone": "贫瘠之地",
+     "quest": "清除变异者",
+     "faction": null
+    },
+    {
+     "npc": "纳拉·蛮鬃",
+     "zone": "雷霆崖",
+     "quest": "尖牙德鲁伊",
+     "faction": "部落"
+    },
+    {
+     "npc": "发光的碎片",
+     "zone": "—",
+     "quest": "发光的碎片",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 5,
+    "xpTotal": 9000,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/wailing-caverns",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "deathmine": {
+   "quests": [
+    {
+     "nameCn": "红色丝质面罩",
+     "questLevel": 17,
+     "reqLevel": 14,
+     "xp": 1250,
+     "pickupNpc": "哨兵瑞尔",
+     "pickupZone": "西部荒野",
+     "startItem": null,
+     "preQuest": "迪菲亚兄弟会",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "收集记忆",
+     "questLevel": 18,
+     "reqLevel": 14,
+     "xp": 1350,
+     "pickupNpc": "维尔德·蓟草",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "我的兄弟……",
+     "questLevel": 20,
+     "reqLevel": 15,
+     "xp": 1550,
+     "pickupNpc": "维尔德·蓟草",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "地底突袭",
+     "questLevel": 20,
+     "reqLevel": 15,
+     "xp": 1550,
+     "pickupNpc": "沉默的舒尼",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "迪菲亚兄弟会",
+     "questLevel": 22,
+     "reqLevel": 14,
+     "xp": 2600,
+     "pickupNpc": "格里安·斯托曼",
+     "pickupZone": "西部荒野",
+     "startItem": null,
+     "preQuest": "迪菲亚兄弟会",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "红色丝质面罩 ×10",
+     "from": "迪菲亚匪徒，迪菲亚矿工，迪菲亚咒术师等",
+     "quest": "红色丝质面罩",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "矿业工会会员卡 ×4",
+     "from": "骷髅矿工，亡灵挖掘者，亡灵爆破者",
+     "quest": "收集记忆",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "希斯耐特的徽章",
+     "from": "工头希斯耐特",
+     "quest": "我的兄弟……",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "小型高能发动机",
+     "from": "斯尼德的伐木机",
+     "quest": "地底突袭",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "范克里夫的头颅",
+     "from": "艾德温·范克里夫",
+     "quest": "迪菲亚兄弟会",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "哨兵瑞尔",
+     "zone": "西部荒野",
+     "quest": "红色丝质面罩",
+     "faction": "联盟"
+    },
+    {
+     "npc": "维尔德·蓟草",
+     "zone": "暴风城",
+     "quest": "收集记忆，我的兄弟……",
+     "faction": "联盟"
+    },
+    {
+     "npc": "沉默的舒尼",
+     "zone": "暴风城",
+     "quest": "地底突袭",
+     "faction": "联盟"
+    },
+    {
+     "npc": "格里安·斯托曼",
+     "zone": "西部荒野",
+     "quest": "迪菲亚兄弟会",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 5,
+    "xpTotal": 8300,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/the-deadmines",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "shadowfang-keep": {
+   "quests": [
+    {
+     "nameCn": "影牙城堡里的亡灵哨兵",
+     "questLevel": 25,
+     "reqLevel": 18,
+     "xp": 2000,
+     "pickupNpc": "高级执行官哈德瑞克",
+     "pickupZone": "银松森林",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "乌尔之书",
+     "questLevel": 26,
+     "reqLevel": 16,
+     "xp": 2100,
+     "pickupNpc": "看守者贝尔杜加",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "除掉阿鲁高",
+     "questLevel": 27,
+     "reqLevel": 18,
+     "xp": 3300,
+     "pickupNpc": "达拉尔·道恩维沃尔",
+     "pickupZone": "银松森林",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "乌尔之书",
+     "from": "乌尔之书",
+     "quest": "乌尔之书",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "阿鲁高的头颅",
+     "from": "大法师阿鲁高，阿鲁高",
+     "quest": "除掉阿鲁高",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "高级执行官哈德瑞克",
+     "zone": "银松森林",
+     "quest": "影牙城堡里的亡灵哨兵",
+     "faction": "部落"
+    },
+    {
+     "npc": "看守者贝尔杜加",
+     "zone": "幽暗城",
+     "quest": "乌尔之书",
+     "faction": "部落"
+    },
+    {
+     "npc": "达拉尔·道恩维沃尔",
+     "zone": "银松森林",
+     "quest": "除掉阿鲁高",
+     "faction": "部落"
+    }
+   ],
+   "summary": {
+    "faction": "部落",
+    "questCount": 3,
+    "xpTotal": 7400,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/shadowfang-keep",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "blackfathom-deeps": {
+   "quests": [
+    {
+     "nameCn": "深渊中的知识",
+     "questLevel": 23,
+     "reqLevel": 10,
+     "xp": 2750,
+     "pickupNpc": "葛利·硬骨",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找塞尔瑞德",
+     "questLevel": 24,
+     "reqLevel": 18,
+     "xp": 2400,
+     "pickupNpc": "哨兵山德拉斯",
+     "pickupZone": "达纳苏斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "研究堕落",
+     "questLevel": 24,
+     "reqLevel": 18,
+     "xp": 2400,
+     "pickupNpc": "戈沙拉·夜语",
+     "pickupZone": "黑海岸",
+     "startItem": null,
+     "preQuest": "遥远的旅途",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "暮光之锤的末日",
+     "questLevel": 25,
+     "reqLevel": 20,
+     "xp": 2550,
+     "pickupNpc": "银月守卫玛纳杜斯",
+     "pickupZone": "达纳苏斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑暗深渊中的恶魔",
+     "questLevel": 27,
+     "reqLevel": 18,
+     "xp": 1700,
+     "pickupNpc": "银月守卫塞尔瑞德",
+     "pickupZone": "黑暗深渊",
+     "startItem": null,
+     "preQuest": "寻找塞尔瑞德",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "帮助耶努萨克雷",
+     "questLevel": 22,
+     "reqLevel": 17,
+     "xp": 440,
+     "pickupNpc": "苏纳曼",
+     "pickupZone": "石爪山脉",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "阿库麦尔水晶",
+     "questLevel": 22,
+     "reqLevel": 17,
+     "xp": 1750,
+     "pickupNpc": "耶努萨克雷",
+     "pickupZone": "灰谷",
+     "startItem": null,
+     "preQuest": "帮助耶努萨克雷",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "上古之神的仆从",
+     "questLevel": 22,
+     "reqLevel": 17,
+     "xp": 1750,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "潮湿的便笺",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "上古之神的仆从",
+     "questLevel": 26,
+     "reqLevel": 17,
+     "xp": 2650,
+     "pickupNpc": "耶努萨克雷",
+     "pickupZone": "灰谷",
+     "startItem": null,
+     "preQuest": "上古之神的仆从",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑暗深渊中的邪恶",
+     "questLevel": 27,
+     "reqLevel": 18,
+     "xp": 1700,
+     "pickupNpc": "银月守卫塞尔瑞德",
+     "pickupZone": "黑暗深渊",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "废墟之间",
+     "questLevel": 27,
+     "reqLevel": 21,
+     "xp": 2750,
+     "pickupNpc": "耶努萨克雷",
+     "pickupZone": "灰谷",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "阿库麦尔蓝宝石 ×20",
+     "from": "阿库麦尔蓝宝石，阿库麦尔蓝宝石",
+     "quest": "阿库麦尔水晶",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "潮湿的便笺",
+     "from": "黑暗深渊海潮祭司",
+     "quest": "上古之神的仆从",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "洛迦里斯手稿",
+     "from": "铁箱，文件箱",
+     "quest": "深渊中的知识",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "堕落者的脑干 ×8",
+     "from": "腐根萨特，腐根游荡者，腐根巡影者等",
+     "quest": "研究堕落",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "暮光坠饰 ×10",
+     "from": "暮光侍僧，暮光劫掠者，暮光水占师等",
+     "quest": "暮光之锤的末日",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "克尔里斯的头颅",
+     "from": "梦游者克尔里斯",
+     "quest": "黑暗深渊中的恶魔",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "克尔里斯的头颅",
+     "from": "梦游者克尔里斯",
+     "quest": "黑暗深渊中的邪恶",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "深渊之核",
+     "from": "深渊之石",
+     "quest": "废墟之间",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "苏纳曼",
+     "zone": "石爪山脉",
+     "quest": "帮助耶努萨克雷",
+     "faction": "部落"
+    },
+    {
+     "npc": "耶努萨克雷",
+     "zone": "灰谷",
+     "quest": "阿库麦尔水晶，上古之神的仆从，废墟之间",
+     "faction": "部落"
+    },
+    {
+     "npc": "潮湿的便笺",
+     "zone": "—",
+     "quest": "上古之神的仆从",
+     "faction": "部落"
+    },
+    {
+     "npc": "葛利·硬骨",
+     "zone": "铁炉堡",
+     "quest": "深渊中的知识",
+     "faction": "联盟"
+    },
+    {
+     "npc": "哨兵山德拉斯",
+     "zone": "达纳苏斯",
+     "quest": "寻找塞尔瑞德",
+     "faction": "联盟"
+    },
+    {
+     "npc": "戈沙拉·夜语",
+     "zone": "黑海岸",
+     "quest": "研究堕落",
+     "faction": "联盟"
+    },
+    {
+     "npc": "银月守卫玛纳杜斯",
+     "zone": "达纳苏斯",
+     "quest": "暮光之锤的末日",
+     "faction": "联盟"
+    },
+    {
+     "npc": "银月守卫塞尔瑞德",
+     "zone": "黑暗深渊",
+     "quest": "黑暗深渊中的恶魔，黑暗深渊中的邪恶",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 5,
+    "xpTotal": 11800,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/blackfathom-deeps",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "the-stocks": {
+   "quests": [
+    {
+     "nameCn": "伸张正义",
+     "questLevel": 25,
+     "reqLevel": 22,
+     "xp": 2000,
+     "pickupNpc": "卫兵伯尔顿",
+     "pickupZone": "赤脊山",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "罪与罚",
+     "questLevel": 26,
+     "reqLevel": 22,
+     "xp": 2100,
+     "pickupNpc": "议员米尔斯迪普",
+     "pickupZone": "暮色森林",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "镇压暴动",
+     "questLevel": 26,
+     "reqLevel": 22,
+     "xp": 2650,
+     "pickupNpc": "典狱官塞尔沃特",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "鲜血的颜色",
+     "questLevel": 26,
+     "reqLevel": 22,
+     "xp": 2650,
+     "pickupNpc": "尼科瓦·拉斯克",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡姆·深怒",
+     "questLevel": 27,
+     "reqLevel": 22,
+     "xp": 2750,
+     "pickupNpc": "莫特雷·加玛森",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": "黑铁战争",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "监狱暴动",
+     "questLevel": 29,
+     "reqLevel": 16,
+     "xp": 2650,
+     "pickupNpc": "典狱官塞尔沃特",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": "巴吉尔·特雷德",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "塔格尔的头颅",
+     "from": "可怕的塔格尔",
+     "quest": "伸张正义",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "迪克斯特·瓦德的手掌",
+     "from": "迪克斯特·瓦德",
+     "quest": "罪与罚",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "红色毛纺面罩 ×10",
+     "from": "迪克斯特·瓦德，迪菲亚囚徒，迪菲亚俘虏等",
+     "quest": "鲜血的颜色",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "卡姆·深怒的头颅",
+     "from": "卡姆·深怒",
+     "quest": "卡姆·深怒",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "巴基尔·斯瑞德的头颅",
+     "from": "巴吉尔·特雷德",
+     "quest": "监狱暴动",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "卫兵伯尔顿",
+     "zone": "赤脊山",
+     "quest": "伸张正义",
+     "faction": "联盟"
+    },
+    {
+     "npc": "议员米尔斯迪普",
+     "zone": "暮色森林",
+     "quest": "罪与罚",
+     "faction": "联盟"
+    },
+    {
+     "npc": "典狱官塞尔沃特",
+     "zone": "暴风城",
+     "quest": "镇压暴动，监狱暴动",
+     "faction": "联盟"
+    },
+    {
+     "npc": "尼科瓦·拉斯克",
+     "zone": "暴风城",
+     "quest": "鲜血的颜色",
+     "faction": "联盟"
+    },
+    {
+     "npc": "莫特雷·加玛森",
+     "zone": "湿地",
+     "quest": "卡姆·深怒",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 6,
+    "xpTotal": 14800,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/the-stockade",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "gnomeregan": {
+   "quests": [
+    {
+     "nameCn": "一团混乱",
+     "questLevel": 30,
+     "reqLevel": 24,
+     "xp": 2450,
+     "pickupNpc": "克努比",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "超级清洁器5200型！",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": null,
+     "pickupNpc": "超级清洁器5200型",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 3
+    },
+    {
+     "nameCn": "超级清洁器5200型！",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": 2450,
+     "pickupNpc": "超级清洁器5200型",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": "超级清洁器5200型！",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "再次使用超级清洁器",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": null,
+     "pickupNpc": "超级清洁器5200型",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": "超级清洁器5200型！",
+     "source": "wclbox",
+     "variants": 3
+    },
+    {
+     "nameCn": "超级清洁器5200型！",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": null,
+     "pickupNpc": "超级清洁器5200型",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": "超级清洁器5200型！",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "脏兮兮的戒指",
+     "questLevel": 34,
+     "reqLevel": 28,
+     "xp": 2700,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "脏兮兮的戒指",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "拯救尖端机器人！",
+     "questLevel": 26,
+     "reqLevel": 20,
+     "xp": 2650,
+     "pickupNpc": "工匠大师欧沃斯巴克",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "工匠大师欧沃斯巴克",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "工匠大师欧沃斯巴克",
+     "questLevel": 26,
+     "reqLevel": 20,
+     "xp": 210,
+     "pickupNpc": "萨尔努修士",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "诺恩",
+     "questLevel": 27,
+     "reqLevel": 20,
+     "xp": 2200,
+     "pickupNpc": "奥齐·电环",
+     "pickupZone": "丹莫罗",
+     "startItem": null,
+     "preQuest": "灾难之后",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "灾难之后",
+     "questLevel": 27,
+     "reqLevel": 20,
+     "xp": 220,
+     "pickupNpc": "诺恩",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡斯派普的任务",
+     "questLevel": 28,
+     "reqLevel": 25,
+     "xp": 230,
+     "pickupNpc": "加克希姆·尘链",
+     "pickupZone": "石爪山脉",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "基础模组",
+     "questLevel": 30,
+     "reqLevel": 24,
+     "xp": 3050,
+     "pickupNpc": "科罗莫特·钢尺",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "帮助科劳莫特",
+     "questLevel": 30,
+     "reqLevel": 24,
+     "xp": 250,
+     "pickupNpc": "玛希尔",
+     "pickupZone": "达纳苏斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "陀螺式挖掘机",
+     "questLevel": 30,
+     "reqLevel": 20,
+     "xp": 2450,
+     "pickupNpc": "沉默的舒尼",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "抢救数据",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": 3650,
+     "pickupNpc": "大机械师卡斯派普",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "更多的辐射尘！",
+     "questLevel": 30,
+     "reqLevel": 20,
+     "xp": 2450,
+     "pickupNpc": "奥齐·电环",
+     "pickupZone": "丹莫罗",
+     "startItem": null,
+     "preQuest": "诺恩",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戒指归来",
+     "questLevel": 34,
+     "reqLevel": 28,
+     "xp": 2700,
+     "pickupNpc": "超级清洁器5200型",
+     "pickupZone": "诺莫瑞根",
+     "startItem": null,
+     "preQuest": "脏兮兮的戒指",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "大叛徒",
+     "questLevel": 35,
+     "reqLevel": 25,
+     "xp": 2750,
+     "pickupNpc": "大工匠梅卡托克",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "设备之战",
+     "questLevel": 35,
+     "reqLevel": 25,
+     "xp": 2750,
+     "pickupNpc": "诺格",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "主工程师斯库提",
+     "questLevel": 35,
+     "reqLevel": 25,
+     "xp": 280,
+     "pickupNpc": "索维克",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "出发！诺莫瑞根！",
+     "questLevel": 35,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "斯库提",
+     "pickupZone": "荆棘谷",
+     "startItem": null,
+     "preQuest": "主工程师斯库提",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "尖端机器人的存储器核心",
+     "from": "尖端机器人",
+     "quest": "拯救尖端机器人！",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "装满的铅瓶",
+     "from": "—",
+     "quest": "诺恩",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "基础模组 ×12",
+     "from": "机械储存柜",
+     "quest": "基础模组",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "机械内胆 ×24",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "陀螺式挖掘机",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "彩色穿孔卡片",
+     "from": "—",
+     "quest": "抢救数据",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "超级清洁器5200型！",
+     "faction": null
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "再次使用超级清洁器",
+     "faction": null
+    },
+    {
+     "itemCn": "高强度辐射尘",
+     "from": "—",
+     "quest": "更多的辐射尘！",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "沉重的铅瓶",
+     "from": "—",
+     "quest": "更多的辐射尘！",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "超级清洁器5200型！",
+     "faction": null
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "超级清洁器5200型！",
+     "faction": null
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "再次使用超级清洁器",
+     "faction": null
+    },
+    {
+     "itemCn": "脏兮兮的东西",
+     "from": "洞窟穴居者，洞窟伏击者，洞窟入侵者等",
+     "quest": "再次使用超级清洁器",
+     "faction": null
+    },
+    {
+     "itemCn": "脏兮兮的戒指",
+     "from": "黑铁密探",
+     "quest": "脏兮兮的戒指",
+     "faction": null
+    },
+    {
+     "itemCn": "闪亮的金戒指",
+     "from": "—",
+     "quest": "戒指归来",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "闪亮的金戒指",
+     "from": "—",
+     "quest": "戒指归来",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "钻探设备蓝图",
+     "from": "瑟玛普拉格的保险箱",
+     "quest": "设备之战",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瑟玛普拉格的保险箱密码",
+     "from": "机械师瑟玛普拉格等",
+     "quest": "设备之战",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "工匠大师欧沃斯巴克",
+     "zone": "铁炉堡",
+     "quest": "拯救尖端机器人！",
+     "faction": "联盟"
+    },
+    {
+     "npc": "萨尔努修士",
+     "zone": "暴风城",
+     "quest": "工匠大师欧沃斯巴克",
+     "faction": "联盟"
+    },
+    {
+     "npc": "奥齐·电环",
+     "zone": "丹莫罗",
+     "quest": "诺恩，更多的辐射尘！",
+     "faction": "联盟"
+    },
+    {
+     "npc": "诺恩",
+     "zone": "铁炉堡",
+     "quest": "灾难之后",
+     "faction": "联盟"
+    },
+    {
+     "npc": "加克希姆·尘链",
+     "zone": "石爪山脉",
+     "quest": "卡斯派普的任务",
+     "faction": "联盟"
+    },
+    {
+     "npc": "克努比",
+     "zone": "诺莫瑞根",
+     "quest": "一团混乱",
+     "faction": null
+    },
+    {
+     "npc": "科罗莫特·钢尺",
+     "zone": "铁炉堡",
+     "quest": "基础模组",
+     "faction": "联盟"
+    },
+    {
+     "npc": "玛希尔",
+     "zone": "达纳苏斯",
+     "quest": "帮助科劳莫特",
+     "faction": "联盟"
+    },
+    {
+     "npc": "沉默的舒尼",
+     "zone": "暴风城",
+     "quest": "陀螺式挖掘机",
+     "faction": "联盟"
+    },
+    {
+     "npc": "大机械师卡斯派普",
+     "zone": "铁炉堡",
+     "quest": "抢救数据",
+     "faction": "联盟"
+    },
+    {
+     "npc": "超级清洁器5200型",
+     "zone": "诺莫瑞根",
+     "quest": "超级清洁器5200型！，超级清洁器5200型！，再次使用超级清洁器，戒指归来，戒指归来",
+     "faction": null
+    },
+    {
+     "npc": "超级清洁器5200型",
+     "zone": "诺莫瑞根",
+     "quest": "超级清洁器5200型！，再次使用超级清洁器，超级清洁器5200型！",
+     "faction": null
+    },
+    {
+     "npc": "超级清洁器5200型",
+     "zone": "诺莫瑞根",
+     "quest": "超级清洁器5200型！，再次使用超级清洁器，超级清洁器5200型！",
+     "faction": null
+    },
+    {
+     "npc": "脏兮兮的戒指",
+     "zone": "—",
+     "quest": "脏兮兮的戒指",
+     "faction": null
+    },
+    {
+     "npc": "诺格",
+     "zone": "奥格瑞玛",
+     "quest": "设备之战",
+     "faction": "部落"
+    },
+    {
+     "npc": "索维克",
+     "zone": "奥格瑞玛",
+     "quest": "主工程师斯库提",
+     "faction": "部落"
+    },
+    {
+     "npc": "斯库提",
+     "zone": "荆棘谷",
+     "quest": "出发！诺莫瑞根！",
+     "faction": "部落"
+    },
+    {
+     "npc": "大工匠梅卡托克",
+     "zone": "铁炉堡",
+     "quest": "大叛徒",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 23,
+    "xpTotal": 32860,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/gnomeregan",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "razorfen-kraul": {
+   "quests": [
+    {
+     "nameCn": "蓝叶薯",
+     "questLevel": 26,
+     "reqLevel": 20,
+     "xp": 2100,
+     "pickupNpc": "麦伯克·米希瑞克斯",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "进口商威利克斯",
+     "questLevel": 30,
+     "reqLevel": 23,
+     "xp": 3050,
+     "pickupNpc": "进口商威利克斯",
+     "pickupZone": "剃刀沼泽",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "临终遗言",
+     "questLevel": 30,
+     "reqLevel": 25,
+     "xp": 3050,
+     "pickupNpc": "赫尔拉斯·静水",
+     "pickupZone": "剃刀沼泽",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡尔加·刺肋",
+     "questLevel": 34,
+     "reqLevel": 29,
+     "xp": 3350,
+     "pickupNpc": "法芬德尔",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": "亨里格的日记",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蝙蝠的粪便",
+     "questLevel": 33,
+     "reqLevel": 30,
+     "xp": 3300,
+     "pickupNpc": "大药剂师法拉尼尔",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥尔德的报复",
+     "questLevel": 34,
+     "reqLevel": 29,
+     "xp": 4050,
+     "pickupNpc": "奥尔德·石塔",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "蓝叶薯 ×6",
+     "from": "蓝叶薯",
+     "quest": "蓝叶薯",
+     "faction": null
+    },
+    {
+     "itemCn": "开孔的箱子",
+     "from": "开孔的箱子",
+     "quest": "蓝叶薯",
+     "faction": null
+    },
+    {
+     "itemCn": "地鼠训练手册",
+     "from": "地鼠训练手册",
+     "quest": "蓝叶薯",
+     "faction": null
+    },
+    {
+     "itemCn": "地鼠指挥棒",
+     "from": "地鼠指挥棒",
+     "quest": "蓝叶薯",
+     "faction": null
+    },
+    {
+     "itemCn": "塔莎拉的坠饰",
+     "from": "主宰拉姆塔斯，卡尔加·刺肋，阿格姆等",
+     "quest": "临终遗言",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "沼泽蝙蝠的粪便",
+     "from": "沼泽蝙蝠，巨型沼泽蝙蝠，盲眼猎手",
+     "quest": "蝙蝠的粪便",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "卡尔加·刺肋的徽章",
+     "from": "卡尔加·刺肋",
+     "quest": "卡尔加·刺肋",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "卡尔加·刺肋的心脏",
+     "from": "卡尔加·刺肋",
+     "quest": "奥尔德的报复",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "麦伯克·米希瑞克斯",
+     "zone": "贫瘠之地",
+     "quest": "蓝叶薯",
+     "faction": null
+    },
+    {
+     "npc": "赫尔拉斯·静水",
+     "zone": "剃刀沼泽",
+     "quest": "临终遗言",
+     "faction": "联盟"
+    },
+    {
+     "npc": "进口商威利克斯",
+     "zone": "剃刀沼泽",
+     "quest": "进口商威利克斯",
+     "faction": null
+    },
+    {
+     "npc": "大药剂师法拉尼尔",
+     "zone": "幽暗城",
+     "quest": "蝙蝠的粪便",
+     "faction": "部落"
+    },
+    {
+     "npc": "法芬德尔",
+     "zone": "菲拉斯",
+     "quest": "卡尔加·刺肋",
+     "faction": "联盟"
+    },
+    {
+     "npc": "奥尔德·石塔",
+     "zone": "雷霆崖",
+     "quest": "奥尔德的报复",
+     "faction": "部落"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 4,
+    "xpTotal": 11550,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/razorfen-kraul",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "scarlet-monastery-graveyard": {
+   "quests": [
+    {
+     "nameCn": "泰坦神话",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "图书馆员麦伊·苍尘",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "沃瑞尔的复仇",
+     "questLevel": 33,
+     "reqLevel": 25,
+     "xp": 3300,
+     "pickupNpc": "沃瑞尔·森加斯",
+     "pickupZone": "血色修道院",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "知识试炼",
+     "questLevel": 36,
+     "reqLevel": 25,
+     "xp": 2100,
+     "pickupNpc": "帕科瓦·芬塔拉斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "知识试炼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "堕落者纲要",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "圣者图希克",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "沃瑞尔的结婚戒指",
+     "from": "南希·韦沙斯",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "亡灵的起源",
+     "from": "亡灵的起源",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "堕落者纲要",
+     "from": "堕落者纲要，能量仪祭",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "泰坦神话",
+     "from": "泰坦神话",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "沃瑞尔·森加斯",
+     "zone": "血色修道院",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "npc": "帕科瓦·芬塔拉斯",
+     "zone": "幽暗城",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "npc": "圣者图希克",
+     "zone": "雷霆崖",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "npc": "图书馆员麦伊·苍尘",
+     "zone": "铁炉堡",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 1,
+    "xpTotal": 3550,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "scarlet-monastery-library": {
+   "quests": [
+    {
+     "nameCn": "泰坦神话",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "图书馆员麦伊·苍尘",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "沃瑞尔的复仇",
+     "questLevel": 33,
+     "reqLevel": 25,
+     "xp": 3300,
+     "pickupNpc": "沃瑞尔·森加斯",
+     "pickupZone": "血色修道院",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "知识试炼",
+     "questLevel": 36,
+     "reqLevel": 25,
+     "xp": 2100,
+     "pickupNpc": "帕科瓦·芬塔拉斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "知识试炼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "堕落者纲要",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "圣者图希克",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "沃瑞尔的结婚戒指",
+     "from": "南希·韦沙斯",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "亡灵的起源",
+     "from": "亡灵的起源",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "堕落者纲要",
+     "from": "堕落者纲要，能量仪祭",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "泰坦神话",
+     "from": "泰坦神话",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "沃瑞尔·森加斯",
+     "zone": "血色修道院",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "npc": "帕科瓦·芬塔拉斯",
+     "zone": "幽暗城",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "npc": "圣者图希克",
+     "zone": "雷霆崖",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "npc": "图书馆员麦伊·苍尘",
+     "zone": "铁炉堡",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 1,
+    "xpTotal": 3550,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-library",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "scarlet-monastery-armory": {
+   "quests": [
+    {
+     "nameCn": "泰坦神话",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "图书馆员麦伊·苍尘",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "沃瑞尔的复仇",
+     "questLevel": 33,
+     "reqLevel": 25,
+     "xp": 3300,
+     "pickupNpc": "沃瑞尔·森加斯",
+     "pickupZone": "血色修道院",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "知识试炼",
+     "questLevel": 36,
+     "reqLevel": 25,
+     "xp": 2100,
+     "pickupNpc": "帕科瓦·芬塔拉斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "知识试炼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "堕落者纲要",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "圣者图希克",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "沃瑞尔的结婚戒指",
+     "from": "南希·韦沙斯",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "亡灵的起源",
+     "from": "亡灵的起源",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "堕落者纲要",
+     "from": "堕落者纲要，能量仪祭",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "泰坦神话",
+     "from": "泰坦神话",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "沃瑞尔·森加斯",
+     "zone": "血色修道院",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "npc": "帕科瓦·芬塔拉斯",
+     "zone": "幽暗城",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "npc": "圣者图希克",
+     "zone": "雷霆崖",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "npc": "图书馆员麦伊·苍尘",
+     "zone": "铁炉堡",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 1,
+    "xpTotal": 3550,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-armory",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "razor-krendor": {
+   "quests": [
+    {
+     "nameCn": "邪恶之地",
+     "questLevel": 35,
+     "reqLevel": 28,
+     "xp": 3450,
+     "pickupNpc": "麦雷姆·月歌",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "剃刀高地的亡灵天灾",
+     "questLevel": 37,
+     "reqLevel": 32,
+     "xp": 290,
+     "pickupNpc": "奔尼斯特拉兹",
+     "pickupZone": "剃刀高地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "封印神像",
+     "questLevel": 37,
+     "reqLevel": 32,
+     "xp": 4250,
+     "pickupNpc": "奔尼斯特拉兹",
+     "pickupZone": "剃刀高地",
+     "startItem": null,
+     "preQuest": "剃刀高地的亡灵天灾",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "与圣光同在",
+     "questLevel": 42,
+     "reqLevel": 39,
+     "xp": 4300,
+     "pickupNpc": "大主教本尼迪塔斯",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "邪恶的盟友",
+     "questLevel": 36,
+     "reqLevel": 28,
+     "xp": 5250,
+     "pickupNpc": "瓦里玛萨斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "邪恶的盟友",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "邪恶的盟友",
+     "questLevel": 36,
+     "reqLevel": 28,
+     "xp": 3500,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "小卷轴",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "寒冰之王",
+     "questLevel": 42,
+     "reqLevel": 37,
+     "xp": 4300,
+     "pickupNpc": "安德鲁·布隆奈尔",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "玛克林大使的头颅",
+     "from": "玛克林大使",
+     "quest": "邪恶的盟友",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "小卷轴",
+     "from": "卡尔加·刺肋",
+     "quest": "邪恶的盟友",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "奔尼斯特拉兹的誓言石",
+     "from": "—",
+     "quest": "剃刀高地的亡灵天灾",
+     "faction": null
+    },
+    {
+     "itemCn": "寒冰之王的颅骨",
+     "from": "寒冰之王亚门纳尔",
+     "quest": "寒冰之王",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "麦雷姆·月歌",
+     "zone": "贫瘠之地",
+     "quest": "邪恶之地",
+     "faction": null
+    },
+    {
+     "npc": "瓦里玛萨斯",
+     "zone": "幽暗城",
+     "quest": "邪恶的盟友",
+     "faction": "部落"
+    },
+    {
+     "npc": "小卷轴",
+     "zone": "—",
+     "quest": "邪恶的盟友",
+     "faction": "部落"
+    },
+    {
+     "npc": "奔尼斯特拉兹",
+     "zone": "剃刀高地",
+     "quest": "剃刀高地的亡灵天灾，封印神像",
+     "faction": null
+    },
+    {
+     "npc": "安德鲁·布隆奈尔",
+     "zone": "幽暗城",
+     "quest": "寒冰之王",
+     "faction": "部落"
+    },
+    {
+     "npc": "大主教本尼迪塔斯",
+     "zone": "暴风城",
+     "quest": "与圣光同在",
+     "faction": "联盟"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 4,
+    "xpTotal": 12290,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/razorfen-downs",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "scarlet-monastery-cathedral": {
+   "quests": [
+    {
+     "nameCn": "泰坦神话",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "图书馆员麦伊·苍尘",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "以圣光之名",
+     "questLevel": 40,
+     "reqLevel": 34,
+     "xp": 4700,
+     "pickupNpc": "虔诚的莱雷恩",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": "血色之路",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "沃瑞尔的复仇",
+     "questLevel": 33,
+     "reqLevel": 25,
+     "xp": 3300,
+     "pickupNpc": "沃瑞尔·森加斯",
+     "pickupZone": "血色修道院",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "狂热之心",
+     "questLevel": 33,
+     "reqLevel": 30,
+     "xp": 3300,
+     "pickupNpc": "大药剂师法拉尼尔",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "蝙蝠的粪便",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "知识试炼",
+     "questLevel": 36,
+     "reqLevel": 25,
+     "xp": 2100,
+     "pickupNpc": "帕科瓦·芬塔拉斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": "知识试炼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "堕落者纲要",
+     "questLevel": 38,
+     "reqLevel": 28,
+     "xp": 3550,
+     "pickupNpc": "圣者图希克",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "深入血色修道院",
+     "questLevel": 42,
+     "reqLevel": 33,
+     "xp": 5150,
+     "pickupNpc": "瓦里玛萨斯",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "沃瑞尔的结婚戒指",
+     "from": "南希·韦沙斯",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "狂热之心 ×20",
+     "from": "驯犬者洛克希，赫洛德，血色十字军指挥官莫格莱尼等",
+     "quest": "狂热之心",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "亡灵的起源",
+     "from": "亡灵的起源",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "堕落者纲要",
+     "from": "堕落者纲要，能量仪祭",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "泰坦神话",
+     "from": "泰坦神话",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "沃瑞尔·森加斯",
+     "zone": "血色修道院",
+     "quest": "沃瑞尔的复仇",
+     "faction": "部落"
+    },
+    {
+     "npc": "大药剂师法拉尼尔",
+     "zone": "幽暗城",
+     "quest": "狂热之心",
+     "faction": "部落"
+    },
+    {
+     "npc": "帕科瓦·芬塔拉斯",
+     "zone": "幽暗城",
+     "quest": "知识试炼",
+     "faction": "部落"
+    },
+    {
+     "npc": "圣者图希克",
+     "zone": "雷霆崖",
+     "quest": "堕落者纲要",
+     "faction": "部落"
+    },
+    {
+     "npc": "图书馆员麦伊·苍尘",
+     "zone": "铁炉堡",
+     "quest": "泰坦神话",
+     "faction": "联盟"
+    },
+    {
+     "npc": "虔诚的莱雷恩",
+     "zone": "希尔斯布莱德丘陵",
+     "quest": "以圣光之名",
+     "faction": "联盟"
+    },
+    {
+     "npc": "瓦里玛萨斯",
+     "zone": "幽暗城",
+     "quest": "深入血色修道院",
+     "faction": "部落"
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 2,
+    "xpTotal": 8250,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "uldaman": {
+   "quests": [
+    {
+     "nameCn": "能量石",
+     "questLevel": 36,
+     "reqLevel": 30,
+     "xp": 3500,
+     "pickupNpc": "里格弗兹",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "化解灾难",
+     "questLevel": 40,
+     "reqLevel": 30,
+     "xp": 3150,
+     "pickupNpc": "迷失者塞尔杜林",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "白金圆盘",
+     "questLevel": 47,
+     "reqLevel": 40,
+     "xp": 4200,
+     "pickupNpc": "诺甘农圆盘",
+     "pickupZone": "奥达曼",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "一线希望",
+     "questLevel": 35,
+     "reqLevel": 35,
+     "xp": 2750,
+     "pickupNpc": "勘察员雷杜尔",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "一线希望",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "阿戈莫德的命运",
+     "questLevel": 38,
+     "reqLevel": 30,
+     "xp": 2850,
+     "pickupNpc": "勘察员基恩萨·铁环",
+     "pickupZone": "洛克莫丹",
+     "startItem": null,
+     "preQuest": "莫达洛克",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "铁趾的护符",
+     "questLevel": 40,
+     "reqLevel": 35,
+     "xp": 3150,
+     "pickupNpc": "铁趾格雷兹",
+     "pickupZone": "洛克莫丹",
+     "startItem": null,
+     "preQuest": "一线希望",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "密室",
+     "questLevel": 40,
+     "reqLevel": 35,
+     "xp": 3900,
+     "pickupNpc": "巴尔洛戈",
+     "pickupZone": "奥达曼",
+     "startItem": null,
+     "preQuest": "失踪的矮人",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "失踪的矮人",
+     "questLevel": 40,
+     "reqLevel": 35,
+     "xp": 240,
+     "pickupNpc": "勘察员塔伯斯·雷矛",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "破碎的项链",
+     "questLevel": 41,
+     "reqLevel": 37,
+     "xp": 3300,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "破碎的项链",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "昂贵的知识",
+     "questLevel": 41,
+     "reqLevel": 37,
+     "xp": 2450,
+     "pickupNpc": "塔瓦斯德·基瑟尔",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "破碎的项链",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥达曼的蘑菇",
+     "questLevel": 42,
+     "reqLevel": 36,
+     "xp": 3450,
+     "pickupNpc": "加克",
+     "pickupZone": "洛克莫丹",
+     "startItem": null,
+     "preQuest": "荒芜之地的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "回到奥达曼",
+     "questLevel": 42,
+     "reqLevel": 37,
+     "xp": 2550,
+     "pickupNpc": "塔瓦斯德·基瑟尔",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "昂贵的知识",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "占卜之瓶",
+     "questLevel": 42,
+     "reqLevel": 37,
+     "xp": null,
+     "pickupNpc": "塔瓦斯德·基瑟尔",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "失而复得",
+     "questLevel": 43,
+     "reqLevel": 33,
+     "xp": 3600,
+     "pickupNpc": "克罗姆·粗臂",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找宝石",
+     "questLevel": 43,
+     "reqLevel": 40,
+     "xp": 3600,
+     "pickupNpc": "圣骑士的遗体",
+     "pickupZone": "奥达曼",
+     "startItem": null,
+     "preQuest": "回到奥达曼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "修复项链",
+     "questLevel": 44,
+     "reqLevel": 37,
+     "xp": 925,
+     "pickupNpc": "塔瓦斯德的占卜之碗",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "寻找宝石",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "修复项链",
+     "questLevel": 44,
+     "reqLevel": 37,
+     "xp": 5600,
+     "pickupNpc": "塔瓦斯德·基瑟尔",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "修复项链",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "意志石板",
+     "questLevel": 45,
+     "reqLevel": 35,
+     "xp": 5850,
+     "pickupNpc": "顾问贝尔格拉姆",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "邪恶的使者",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "白金圆盘",
+     "questLevel": 47,
+     "reqLevel": 40,
+     "xp": 5250,
+     "pickupNpc": "诺甘农圆盘",
+     "pickupZone": "奥达曼",
+     "startItem": null,
+     "preQuest": "白金圆盘",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "搜寻项链",
+     "questLevel": 41,
+     "reqLevel": 37,
+     "xp": 2450,
+     "pickupNpc": "德兰·杜佛斯",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "搜寻项链，再来一次",
+     "questLevel": 41,
+     "reqLevel": 37,
+     "xp": 2450,
+     "pickupNpc": "德兰·杜佛斯",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "搜寻项链",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥达曼的蘑菇",
+     "questLevel": 42,
+     "reqLevel": 36,
+     "xp": 3450,
+     "pickupNpc": "加卡尔",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "荒芜之地的试剂",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "翻译日记",
+     "questLevel": 42,
+     "reqLevel": 37,
+     "xp": 700,
+     "pickupNpc": "圣骑士的遗体",
+     "pickupZone": "奥达曼",
+     "startItem": null,
+     "preQuest": "搜寻项链",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "翻译日记",
+     "questLevel": 42,
+     "reqLevel": 37,
+     "xp": 350,
+     "pickupNpc": "加卡尔",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "翻译日记",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找宝物",
+     "questLevel": 43,
+     "reqLevel": 33,
+     "xp": 3600,
+     "pickupNpc": "帕特里克·加瑞特",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找宝贝",
+     "questLevel": 44,
+     "reqLevel": 37,
+     "xp": 3750,
+     "pickupNpc": "加卡尔",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "翻译日记",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "交付宝石",
+     "questLevel": 44,
+     "reqLevel": 37,
+     "xp": 1850,
+     "pickupNpc": "加卡尔",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "寻找宝贝",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "项链任务的终结",
+     "questLevel": 44,
+     "reqLevel": 40,
+     "xp": 5600,
+     "pickupNpc": "德兰·杜佛斯",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "交付宝石",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "德提亚姆能量石 ×8",
+     "from": "暗炉勘探员，暗炉恶棍，暗炉掘地工等",
+     "quest": "能量石",
+     "faction": null
+    },
+    {
+     "itemCn": "安纳洛姆能量石 ×8",
+     "from": "暗炉勘探员，暗炉恶棍，暗炉掘地工等",
+     "quest": "能量石",
+     "faction": null
+    },
+    {
+     "itemCn": "雕纹石罐 ×4",
+     "from": "雕纹石罐",
+     "quest": "阿戈莫德的命运",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "雷乌纳石板",
+     "from": "古代储物箱",
+     "quest": "化解灾难",
+     "faction": null
+    },
+    {
+     "itemCn": "铁趾的护符",
+     "from": "马格雷甘·深影",
+     "quest": "铁趾的护符",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎的项链",
+     "from": "暗炉勘探员，暗炉恶棍，暗炉掘地工等",
+     "quest": "破碎的项链",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "银锭 ×5",
+     "from": "破碎的箱子",
+     "quest": "昂贵的知识",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎的项链",
+     "from": "暗炉勘探员，暗炉恶棍，暗炉掘地工等",
+     "quest": "搜寻项链",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "紫色蘑菇 ×12",
+     "from": "紫色蘑菇，紫色蘑菇",
+     "quest": "奥达曼的蘑菇",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "紫色蘑菇 ×12",
+     "from": "紫色蘑菇，紫色蘑菇",
+     "quest": "奥达曼的蘑菇",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "未翻译的日记",
+     "from": "—",
+     "quest": "翻译日记",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "法力药水",
+     "from": "血顶斥候，血顶猎人，血顶巫医等",
+     "quest": "占卜之瓶",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "煤块",
+     "from": "因弗努斯大使，烈焰流放者，达拉然矿工等",
+     "quest": "占卜之瓶",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "蜂蜜饮料",
+     "from": "达希，码头管理员巴伦，缝合怪等",
+     "quest": "占卜之瓶",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "克罗姆·粗臂的宝藏",
+     "from": "克罗姆·粗臂的箱子",
+     "quest": "失而复得",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎项链上的红宝石",
+     "from": "暗影熔炉地窖",
+     "quest": "寻找宝石",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎项链上的蓝宝石",
+     "from": "格瑞姆洛克",
+     "quest": "寻找宝石",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎项链上的黄宝石",
+     "from": "显眼的石罐",
+     "quest": "寻找宝石",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "加勒特的家族宝藏",
+     "from": "加勒特的宝箱",
+     "quest": "寻找宝物",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "破碎项链的能量源",
+     "from": "阿扎达斯",
+     "quest": "修复项链",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "破碎项链上的红宝石",
+     "from": "暗影熔炉地窖",
+     "quest": "寻找宝贝",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "破碎项链上的蓝宝石",
+     "from": "格瑞姆洛克",
+     "quest": "寻找宝贝",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "破碎项链上的黄宝石",
+     "from": "显眼的石罐",
+     "quest": "寻找宝贝",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "破碎项链的能量源",
+     "from": "阿扎达斯",
+     "quest": "寻找宝贝",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "项链和珠宝",
+     "from": "—",
+     "quest": "交付宝石",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "意志石板",
+     "from": "意志石板",
+     "quest": "意志石板",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "迷你白金圆盘",
+     "from": "—",
+     "quest": "白金圆盘",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "迷你白金圆盘",
+     "from": "—",
+     "quest": "白金圆盘",
+     "faction": "部落"
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "勘察员雷杜尔",
+     "zone": "荒芜之地",
+     "quest": "一线希望",
+     "faction": "联盟"
+    },
+    {
+     "npc": "里格弗兹",
+     "zone": "荒芜之地",
+     "quest": "能量石",
+     "faction": null
+    },
+    {
+     "npc": "勘察员基恩萨·铁环",
+     "zone": "洛克莫丹",
+     "quest": "阿戈莫德的命运",
+     "faction": "联盟"
+    },
+    {
+     "npc": "迷失者塞尔杜林",
+     "zone": "荒芜之地",
+     "quest": "化解灾难",
+     "faction": null
+    },
+    {
+     "npc": "铁趾格雷兹",
+     "zone": "洛克莫丹",
+     "quest": "铁趾的护符",
+     "faction": "联盟"
+    },
+    {
+     "npc": "巴尔洛戈",
+     "zone": "奥达曼",
+     "quest": "密室",
+     "faction": "联盟"
+    },
+    {
+     "npc": "勘察员塔伯斯·雷矛",
+     "zone": "铁炉堡",
+     "quest": "失踪的矮人",
+     "faction": "联盟"
+    },
+    {
+     "npc": "破碎的项链",
+     "zone": "—",
+     "quest": "破碎的项链",
+     "faction": "联盟"
+    },
+    {
+     "npc": "塔瓦斯德·基瑟尔",
+     "zone": "铁炉堡",
+     "quest": "昂贵的知识，回到奥达曼，占卜之瓶，修复项链",
+     "faction": "联盟"
+    },
+    {
+     "npc": "德兰·杜佛斯",
+     "zone": "奥格瑞玛",
+     "quest": "搜寻项链，搜寻项链，再来一次，项链任务的终结",
+     "faction": "部落"
+    },
+    {
+     "npc": "加克",
+     "zone": "洛克莫丹",
+     "quest": "奥达曼的蘑菇",
+     "faction": "联盟"
+    },
+    {
+     "npc": "加卡尔",
+     "zone": "荒芜之地",
+     "quest": "奥达曼的蘑菇，翻译日记，寻找宝贝，交付宝石",
+     "faction": "部落"
+    },
+    {
+     "npc": "圣骑士的遗体",
+     "zone": "奥达曼",
+     "quest": "翻译日记，寻找宝石",
+     "faction": null
+    },
+    {
+     "npc": "克罗姆·粗臂",
+     "zone": "铁炉堡",
+     "quest": "失而复得",
+     "faction": "联盟"
+    },
+    {
+     "npc": "帕特里克·加瑞特",
+     "zone": "幽暗城",
+     "quest": "寻找宝物",
+     "faction": "部落"
+    },
+    {
+     "npc": "塔瓦斯德的占卜之碗",
+     "zone": "—",
+     "quest": "修复项链",
+     "faction": "联盟"
+    },
+    {
+     "npc": "顾问贝尔格拉姆",
+     "zone": "铁炉堡",
+     "quest": "意志石板",
+     "faction": "联盟"
+    },
+    {
+     "npc": "诺甘农圆盘",
+     "zone": "奥达曼",
+     "quest": "白金圆盘，白金圆盘，白金圆盘",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 19,
+    "xpTotal": 60315,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/uldaman",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "zulfarrak": {
+   "quests": [
+    {
+     "nameCn": "特兰雷克",
+     "questLevel": 45,
+     "reqLevel": 40,
+     "xp": 390,
+     "pickupNpc": "克拉兹克",
+     "pickupZone": "荆棘谷",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "圣甲虫的壳",
+     "questLevel": 45,
+     "reqLevel": 40,
+     "xp": 3900,
+     "pickupNpc": "特兰雷克",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "特兰雷克",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "巨魔调和剂",
+     "questLevel": 45,
+     "reqLevel": 40,
+     "xp": 3900,
+     "pickupNpc": "特伦顿·轻锤",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "深渊皇冠",
+     "questLevel": 46,
+     "reqLevel": 40,
+     "xp": 6050,
+     "pickupNpc": "塔贝萨",
+     "pickupZone": "尘泥沼泽",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "塔贝萨的任务",
+     "questLevel": 46,
+     "reqLevel": 40,
+     "xp": 410,
+     "pickupNpc": "奥松·格鲁尔",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "探水棒",
+     "questLevel": 47,
+     "reqLevel": 40,
+     "xp": 6300,
+     "pickupNpc": "首席工程师沙克斯·比格维兹",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "摩沙鲁的预言",
+     "questLevel": 47,
+     "reqLevel": 40,
+     "xp": 5250,
+     "pickupNpc": "叶基亚",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "尖啸者的灵魂",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "加兹瑞拉",
+     "questLevel": 50,
+     "reqLevel": 40,
+     "xp": 7100,
+     "pickupNpc": "维兹尔·铜栓",
+     "pickupZone": "千针石林",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "耐克鲁姆的徽章",
+     "questLevel": 47,
+     "reqLevel": 40,
+     "xp": 5250,
+     "pickupNpc": "萨迪斯·格希德",
+     "pickupZone": "诅咒之地",
+     "startItem": null,
+     "preQuest": "萨迪斯·格希德",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蜘蛛之神",
+     "questLevel": 45,
+     "reqLevel": 40,
+     "xp": 4850,
+     "pickupNpc": "加德林大师",
+     "pickupZone": "杜隆塔尔",
+     "startItem": null,
+     "preQuest": "请教加德林大师",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "完整的圣甲虫壳 ×5",
+     "from": "圣甲虫",
+     "quest": "圣甲虫的壳",
+     "faction": null
+    },
+    {
+     "itemCn": "巨魔调和剂 ×20",
+     "from": "沙怒暗影法师，沙怒饮血者，沙怒巫医等",
+     "quest": "巨魔调和剂",
+     "faction": null
+    },
+    {
+     "itemCn": "深渊皇冠",
+     "from": "水占师维蕾萨",
+     "quest": "深渊皇冠",
+     "faction": null
+    },
+    {
+     "itemCn": "探水棒",
+     "from": "布莱中士",
+     "quest": "探水棒",
+     "faction": null
+    },
+    {
+     "itemCn": "耐克鲁姆的徽章",
+     "from": "耐克鲁姆",
+     "quest": "耐克鲁姆的徽章",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "第一块摩沙鲁石板",
+     "from": "殉教者塞卡，瑟卡",
+     "quest": "摩沙鲁的预言",
+     "faction": null
+    },
+    {
+     "itemCn": "第二块摩沙鲁石板",
+     "from": "水占师维蕾萨",
+     "quest": "摩沙鲁的预言",
+     "faction": null
+    },
+    {
+     "itemCn": "加兹瑞拉的鳞片",
+     "from": "加兹瑞拉",
+     "quest": "加兹瑞拉",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "克拉兹克",
+     "zone": "荆棘谷",
+     "quest": "特兰雷克",
+     "faction": null
+    },
+    {
+     "npc": "特兰雷克",
+     "zone": "塔纳利斯",
+     "quest": "圣甲虫的壳",
+     "faction": null
+    },
+    {
+     "npc": "加德林大师",
+     "zone": "杜隆塔尔",
+     "quest": "蜘蛛之神",
+     "faction": "部落"
+    },
+    {
+     "npc": "特伦顿·轻锤",
+     "zone": "塔纳利斯",
+     "quest": "巨魔调和剂",
+     "faction": null
+    },
+    {
+     "npc": "塔贝萨",
+     "zone": "尘泥沼泽",
+     "quest": "深渊皇冠",
+     "faction": null
+    },
+    {
+     "npc": "奥松·格鲁尔",
+     "zone": "雷霆崖",
+     "quest": "塔贝萨的任务",
+     "faction": null
+    },
+    {
+     "npc": "首席工程师沙克斯·比格维兹",
+     "zone": "塔纳利斯",
+     "quest": "探水棒",
+     "faction": null
+    },
+    {
+     "npc": "萨迪斯·格希德",
+     "zone": "诅咒之地",
+     "quest": "耐克鲁姆的徽章",
+     "faction": "联盟"
+    },
+    {
+     "npc": "叶基亚",
+     "zone": "塔纳利斯",
+     "quest": "摩沙鲁的预言",
+     "faction": null
+    },
+    {
+     "npc": "维兹尔·铜栓",
+     "zone": "千针石林",
+     "quest": "加兹瑞拉",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 9,
+    "xpTotal": 38550,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/zulfarrak",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "maraudon": {
+   "quests": [
+    {
+     "nameCn": "扭曲的邪恶",
+     "questLevel": 47,
+     "reqLevel": 41,
+     "xp": 5250,
+     "pickupNpc": "维洛",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "贱民的指引",
+     "questLevel": 48,
+     "reqLevel": 39,
+     "xp": 5450,
+     "pickupNpc": "半人马贱民",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "玛拉顿的传说",
+     "questLevel": 49,
+     "reqLevel": 41,
+     "xp": 3400,
+     "pickupNpc": "凯雯德拉",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "塞雷布拉斯节杖",
+     "questLevel": 49,
+     "reqLevel": 41,
+     "xp": 5700,
+     "pickupNpc": "赎罪的塞雷布拉斯",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "玛拉顿的传说",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "生命之种",
+     "questLevel": 51,
+     "reqLevel": 45,
+     "xp": 6100,
+     "pickupNpc": "扎尔塔的灵魂",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "暗影残片",
+     "questLevel": 42,
+     "reqLevel": 38,
+     "xp": 3450,
+     "pickupNpc": "大法师特沃什",
+     "pickupZone": "尘泥沼泽",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "维利塔恩的污染",
+     "questLevel": 47,
+     "reqLevel": 41,
+     "xp": 5250,
+     "pickupNpc": "塔琳德莉亚",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "大地的污染",
+     "questLevel": 51,
+     "reqLevel": 45,
+     "xp": 6100,
+     "pickupNpc": "守护者玛兰迪斯",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "暗影残片",
+     "questLevel": 42,
+     "reqLevel": 38,
+     "xp": 3450,
+     "pickupNpc": "尤塞尔奈",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "维利塔恩的污染",
+     "questLevel": 47,
+     "reqLevel": 41,
+     "xp": 5250,
+     "pickupNpc": "瓦克·战痕",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "大地的污染",
+     "questLevel": 51,
+     "reqLevel": 45,
+     "xp": 6100,
+     "pickupNpc": "瑟琳德拉",
+     "pickupZone": "凄凉之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "暗影残片 ×10",
+     "from": "暗影碎片巡游者，暗影碎片击碎者",
+     "quest": "暗影残片",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "暗影残片 ×10",
+     "from": "暗影碎片巡游者，暗影碎片击碎者",
+     "quest": "暗影残片",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "瑟莱德丝水晶雕像 ×15",
+     "from": "被诅咒的半人马，腐烂萨特，腐烂欺骗者等",
+     "quest": "扭曲的邪恶",
+     "faction": null
+    },
+    {
+     "itemCn": "装满水的天蓝水瓶",
+     "from": "—",
+     "quest": "维利塔恩的污染",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "装满水的天蓝水瓶",
+     "from": "—",
+     "quest": "维利塔恩的污染",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "联合坠饰",
+     "from": "—",
+     "quest": "贱民的指引",
+     "faction": null
+    },
+    {
+     "itemCn": "塞雷布拉斯钻石",
+     "from": "维利塔恩",
+     "quest": "玛拉顿的传说",
+     "faction": null
+    },
+    {
+     "itemCn": "塞雷布拉斯魔棒",
+     "from": "诺克赛恩，诺克赛恩产物",
+     "quest": "玛拉顿的传说",
+     "faction": null
+    },
+    {
+     "itemCn": "生命之种",
+     "from": "—",
+     "quest": "生命之种",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "尤塞尔奈",
+     "zone": "奥格瑞玛",
+     "quest": "暗影残片",
+     "faction": "部落"
+    },
+    {
+     "npc": "大法师特沃什",
+     "zone": "尘泥沼泽",
+     "quest": "暗影残片",
+     "faction": "联盟"
+    },
+    {
+     "npc": "维洛",
+     "zone": "凄凉之地",
+     "quest": "扭曲的邪恶",
+     "faction": null
+    },
+    {
+     "npc": "瓦克·战痕",
+     "zone": "凄凉之地",
+     "quest": "维利塔恩的污染",
+     "faction": "部落"
+    },
+    {
+     "npc": "塔琳德莉亚",
+     "zone": "凄凉之地",
+     "quest": "维利塔恩的污染",
+     "faction": "联盟"
+    },
+    {
+     "npc": "半人马贱民",
+     "zone": "凄凉之地",
+     "quest": "贱民的指引",
+     "faction": null
+    },
+    {
+     "npc": "凯雯德拉",
+     "zone": "凄凉之地",
+     "quest": "玛拉顿的传说",
+     "faction": null
+    },
+    {
+     "npc": "赎罪的塞雷布拉斯",
+     "zone": "—",
+     "quest": "塞雷布拉斯节杖",
+     "faction": null
+    },
+    {
+     "npc": "瑟琳德拉",
+     "zone": "凄凉之地",
+     "quest": "大地的污染",
+     "faction": "部落"
+    },
+    {
+     "npc": "守护者玛兰迪斯",
+     "zone": "凄凉之地",
+     "quest": "大地的污染",
+     "faction": "联盟"
+    },
+    {
+     "npc": "扎尔塔的灵魂",
+     "zone": "—",
+     "quest": "生命之种",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 8,
+    "xpTotal": 40700,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/maraudon",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "sunken-temple": {
+   "quests": [
+    {
+     "nameCn": "深入神庙",
+     "questLevel": 51,
+     "reqLevel": 46,
+     "xp": 4900,
+     "pickupNpc": "玛尔冯·瑞文斯克",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "石环",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "雕像群的秘密",
+     "questLevel": 51,
+     "reqLevel": 46,
+     "xp": 6100,
+     "pickupNpc": "玛尔冯·瑞文斯克",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "石环",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "预言者迦玛兰",
+     "questLevel": 53,
+     "reqLevel": 38,
+     "xp": 6550,
+     "pickupNpc": "阿塔莱流放者",
+     "pickupZone": "辛特兰",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "神灵哈卡",
+     "questLevel": 53,
+     "reqLevel": 40,
+     "xp": 7900,
+     "pickupNpc": "叶基亚",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "远古之卵",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "伊兰尼库斯精华",
+     "questLevel": 55,
+     "reqLevel": 48,
+     "xp": 2800,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "伊兰尼库斯精华",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "伊兰尼库斯，梦境之暴君",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 6600,
+     "pickupNpc": "玛法里奥·怒风",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "进入阿塔哈卡神庙",
+     "questLevel": 50,
+     "reqLevel": 41,
+     "xp": 7100,
+     "pickupNpc": "布罗哈恩·铁桶",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": "拉普索迪的故事",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "阿塔哈卡神庙",
+     "questLevel": 50,
+     "reqLevel": 38,
+     "xp": 5900,
+     "pickupNpc": "费泽鲁尔",
+     "pickupZone": "悲伤沼泽",
+     "startItem": null,
+     "preQuest": "向费泽鲁尔复命",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "沉没的神庙",
+     "questLevel": 51,
+     "reqLevel": 46,
+     "xp": 3650,
+     "pickupNpc": "巫医尤克里",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "除草器的燃料",
+     "questLevel": 52,
+     "reqLevel": 47,
+     "xp": 5100,
+     "pickupNpc": "莉芙·雷兹菲克斯",
+     "pickupZone": "贫瘠之地",
+     "startItem": null,
+     "preQuest": "玛尔冯的车间",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "哈卡神像 ×20",
+     "from": "被诅咒的阿塔莱巨魔，阿塔莱战士，阿塔莱巫医等",
+     "quest": "阿塔哈卡神庙",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "阿塔莱石板 ×10",
+     "from": "阿塔莱石板",
+     "quest": "进入阿塔哈卡神庙",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "阿塔莱石环",
+     "from": "—",
+     "quest": "深入神庙",
+     "faction": null
+    },
+    {
+     "itemCn": "空除草器",
+     "from": "—",
+     "quest": "除草器的燃料",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "阿塔莱之雾 ×5",
+     "from": "黑暗虫，深色软泥怪，神庙深渊潜伏者",
+     "quest": "除草器的燃料",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "加玛兰的头颅",
+     "from": "预言者迦玛兰",
+     "quest": "预言者迦玛兰",
+     "faction": null
+    },
+    {
+     "itemCn": "装满的哈卡之卵",
+     "from": "—",
+     "quest": "神灵哈卡",
+     "faction": null
+    },
+    {
+     "itemCn": "伊兰尼库斯精华",
+     "from": "伊兰尼库斯的阴影",
+     "quest": "伊兰尼库斯精华",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "费泽鲁尔",
+     "zone": "悲伤沼泽",
+     "quest": "阿塔哈卡神庙",
+     "faction": "部落"
+    },
+    {
+     "npc": "布罗哈恩·铁桶",
+     "zone": "暴风城",
+     "quest": "进入阿塔哈卡神庙",
+     "faction": "联盟"
+    },
+    {
+     "npc": "巫医尤克里",
+     "zone": "菲拉斯",
+     "quest": "沉没的神庙",
+     "faction": "部落"
+    },
+    {
+     "npc": "玛尔冯·瑞文斯克",
+     "zone": "塔纳利斯",
+     "quest": "深入神庙，雕像群的秘密",
+     "faction": null
+    },
+    {
+     "npc": "莉芙·雷兹菲克斯",
+     "zone": "贫瘠之地",
+     "quest": "除草器的燃料",
+     "faction": "部落"
+    },
+    {
+     "npc": "阿塔莱流放者",
+     "zone": "辛特兰",
+     "quest": "预言者迦玛兰",
+     "faction": null
+    },
+    {
+     "npc": "叶基亚",
+     "zone": "塔纳利斯",
+     "quest": "神灵哈卡",
+     "faction": null
+    },
+    {
+     "npc": "伊兰尼库斯精华",
+     "zone": "—",
+     "quest": "伊兰尼库斯精华",
+     "faction": null
+    },
+    {
+     "npc": "玛法里奥·怒风",
+     "zone": "—",
+     "quest": "伊兰尼库斯，梦境之暴君",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 7,
+    "xpTotal": 41950,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/sunken-temple",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "blackrock-depths": {
+   "quests": [
+    {
+     "nameCn": "罗克诺特的麦酒",
+     "questLevel": 1,
+     "reqLevel": 1,
+     "xp": null,
+     "pickupNpc": "罗克诺特下士",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑铁的遗产",
+     "questLevel": 52,
+     "reqLevel": 48,
+     "xp": 500,
+     "pickupNpc": "弗兰克罗恩·铸铁",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑铁的遗产",
+     "questLevel": 52,
+     "reqLevel": 48,
+     "xp": 5100,
+     "pickupNpc": "弗兰克罗恩·铸铁",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "黑铁的遗产",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "雷布里·斯库比格特",
+     "questLevel": 53,
+     "reqLevel": 48,
+     "xp": 2650,
+     "pickupNpc": "尤卡·斯库比格特",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "尤卡·斯库比格特",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "尤卡·斯库比格特",
+     "questLevel": 53,
+     "reqLevel": 48,
+     "xp": 2650,
+     "pickupNpc": "尤尔巴·斯库比格特",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "爱情药水",
+     "questLevel": 54,
+     "reqLevel": 50,
+     "xp": 5450,
+     "pickupNpc": "娜玛拉小姐",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "鬼魂之杯",
+     "questLevel": 55,
+     "reqLevel": 40,
+     "xp": 575,
+     "pickupNpc": "鬼魂之杯",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "山脉之心",
+     "questLevel": 55,
+     "reqLevel": 50,
+     "xp": 5650,
+     "pickupNpc": "麦克斯沃特·尤博格林",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "烈焰精华",
+     "questLevel": 58,
+     "reqLevel": 52,
+     "xp": 6200,
+     "pickupNpc": "塞勒斯·萨雷芬图斯",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "烈焰精华、烈焰精华",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瑟银兄弟会契约",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "瑟银兄弟会契约",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "挑战",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "法尔林·树影",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "旗帜上的附魔",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "温德索尔元帅",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": 5450,
+     "pickupNpc": "麦克斯韦尔元帅",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "真正的主人",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "被遗弃的希望",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": 5450,
+     "pickupNpc": "温德索尔元帅",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "温德索尔元帅",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "霍尔雷·黑须",
+     "questLevel": 55,
+     "reqLevel": 50,
+     "xp": 5650,
+     "pickupNpc": "拉格纳·雷酒",
+     "pickupZone": "丹莫罗",
+     "startItem": null,
+     "preQuest": "拉格纳·雷酒",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "拉格纳·雷酒",
+     "questLevel": 55,
+     "reqLevel": 50,
+     "xp": 550,
+     "pickupNpc": "恩诺哈尔·雷酒",
+     "pickupZone": "诅咒之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "伊森迪奥斯！",
+     "questLevel": 56,
+     "reqLevel": 48,
+     "xp": 5800,
+     "pickupNpc": "加琳达",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "征服者派隆",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "好东西",
+     "questLevel": 56,
+     "reqLevel": 50,
+     "xp": 5800,
+     "pickupNpc": "奥拉留斯",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "弄皱的便笺",
+     "questLevel": 58,
+     "reqLevel": 50,
+     "xp": 6200,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "弄皱的便笺",
+     "preQuest": "被遗弃的希望",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "一丝希望",
+     "questLevel": 58,
+     "reqLevel": 50,
+     "xp": 6200,
+     "pickupNpc": "温德索尔元帅",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "弄皱的便笺",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "冲破牢笼！",
+     "questLevel": 58,
+     "reqLevel": 50,
+     "xp": 7750,
+     "pickupNpc": "温德索尔元帅",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "一丝希望",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡兰·巨锤",
+     "questLevel": 59,
+     "reqLevel": 50,
+     "xp": 5800,
+     "pickupNpc": "国王麦格尼·铜须",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "索瑞森废墟",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡兰的故事",
+     "questLevel": 59,
+     "reqLevel": 50,
+     "xp": 1600,
+     "pickupNpc": "卡兰·巨锤",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "糟糕的消息",
+     "questLevel": 59,
+     "reqLevel": 50,
+     "xp": 6400,
+     "pickupNpc": "卡兰·巨锤",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "卡兰·巨锤",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "王国的命运",
+     "questLevel": 59,
+     "reqLevel": 50,
+     "xp": 8050,
+     "pickupNpc": "国王麦格尼·铜须",
+     "pickupZone": "铁炉堡",
+     "startItem": null,
+     "preQuest": "糟糕的消息",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "语出惊人的公主",
+     "questLevel": 59,
+     "reqLevel": 50,
+     "xp": 9650,
+     "pickupNpc": "铁炉堡公主茉艾拉·铜须",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "王国的命运",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "指挥官哥沙克",
+     "questLevel": 52,
+     "reqLevel": 48,
+     "xp": 5100,
+     "pickupNpc": "神射手贾拉玛弗",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "不和谐的烈焰",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "格杀勿论：黑铁矮人",
+     "questLevel": 52,
+     "reqLevel": 48,
+     "xp": 5100,
+     "pickupNpc": "通缉",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "出了什么事？",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": 4350,
+     "pickupNpc": "指挥官哥沙克",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "指挥官哥沙克",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "出了什么事？",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": 550,
+     "pickupNpc": "指挥官哥沙克",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "出了什么事？",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "东部王国",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": null,
+     "pickupNpc": "萨尔",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "出了什么事？",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "格杀勿论：高阶黑铁军官",
+     "questLevel": 54,
+     "reqLevel": 50,
+     "xp": 5450,
+     "pickupNpc": "格杀勿论",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "格杀勿论：黑铁矮人",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "最后的元素",
+     "questLevel": 54,
+     "reqLevel": 48,
+     "xp": 5450,
+     "pickupNpc": "暗法师薇薇安·拉格雷",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "薇薇安·拉格雷",
+     "questLevel": 55,
+     "reqLevel": 50,
+     "xp": 550,
+     "pickupNpc": "药剂师金格",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "遗失的雷酒秘方",
+     "questLevel": 55,
+     "reqLevel": 50,
+     "xp": 5650,
+     "pickupNpc": "暗法师薇薇安·拉格雷",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "薇薇安·拉格雷",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "不和谐的火焰",
+     "questLevel": 56,
+     "reqLevel": 48,
+     "xp": 7300,
+     "pickupNpc": "桑德哈特",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "不和谐的烈焰",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "机器的崛起",
+     "questLevel": 58,
+     "reqLevel": 52,
+     "xp": 6200,
+     "pickupNpc": "鲁特维尔·沃拉图斯",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "机器的崛起",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "押送囚徒",
+     "questLevel": 58,
+     "reqLevel": 52,
+     "xp": 7750,
+     "pickupNpc": "格拉克·洛克鲁布",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "格拉克·洛克鲁布",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "格拉克·洛克鲁布",
+     "questLevel": 58,
+     "reqLevel": 52,
+     "xp": 6200,
+     "pickupNpc": "雷克斯洛特",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "行动：杀死安格弗将军",
+     "questLevel": 58,
+     "reqLevel": 52,
+     "xp": 7750,
+     "pickupNpc": "军官高图斯",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "押送囚徒",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "拯救公主",
+     "questLevel": 59,
+     "reqLevel": 48,
+     "xp": 8050,
+     "pickupNpc": "萨尔",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "东部王国",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "拯救公主？",
+     "questLevel": 60,
+     "reqLevel": 48,
+     "xp": 9950,
+     "pickupNpc": "铁炉堡公主茉艾拉·铜须",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "拯救公主",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "黑铁酒杯 ×2",
+     "from": "维特·沃特玛，铁怒军官，恐怖的奴隶主等",
+     "quest": "罗克诺特的麦酒",
+     "faction": null
+    },
+    {
+     "itemCn": "铁胆之锤",
+     "from": "弗诺斯·达克维尔",
+     "quest": "黑铁的遗产",
+     "faction": null
+    },
+    {
+     "itemCn": "雷布里的头颅",
+     "from": "雷布里·斯库比格特",
+     "quest": "雷布里·斯库比格特",
+     "faction": null
+    },
+    {
+     "itemCn": "格罗姆之血 ×4",
+     "from": "锐刺鞭笞者",
+     "quest": "爱情药水",
+     "faction": null
+    },
+    {
+     "itemCn": "巨型银矿 ×10",
+     "from": "峭壁击碎者，峭壁咆哮者，峭壁行者",
+     "quest": "爱情药水",
+     "faction": null
+    },
+    {
+     "itemCn": "装满水的娜玛拉之瓶",
+     "from": "—",
+     "quest": "爱情药水",
+     "faction": null
+    },
+    {
+     "itemCn": "元素精华 ×10",
+     "from": "斯卡尔德，战斗傀儡，狂怒傀儡等",
+     "quest": "最后的元素",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "星光红宝石 ×2",
+     "from": "石元素，蓝色龙人，血顶猎人等",
+     "quest": "鬼魂之杯",
+     "faction": null
+    },
+    {
+     "itemCn": "金锭 ×20",
+     "from": "破损的箱子，坚固的箱子",
+     "quest": "鬼魂之杯",
+     "faction": null
+    },
+    {
+     "itemCn": "真银锭 ×10",
+     "from": "坚固的箱子，坚固的箱子",
+     "quest": "鬼魂之杯",
+     "faction": null
+    },
+    {
+     "itemCn": "山脉之心",
+     "from": "山脉之心",
+     "quest": "山脉之心",
+     "faction": null
+    },
+    {
+     "itemCn": "遗失的雷酒秘方",
+     "from": "霍尔雷·黑须，黑须的亲信",
+     "quest": "霍尔雷·黑须",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "遗失的雷酒秘方",
+     "from": "霍尔雷·黑须，黑须的亲信",
+     "quest": "遗失的雷酒秘方",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "库尔尼亚石板",
+     "from": "伊森迪奥斯",
+     "quest": "不和谐的火焰",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "黑铁挎包 ×20",
+     "from": "铁怒监军，铁怒狱卒，铁怒卫士等",
+     "quest": "好东西",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "包起来的烈焰精华",
+     "from": "—",
+     "quest": "烈焰精华",
+     "faction": null
+    },
+    {
+     "itemCn": "阿格曼奇的头颅",
+     "from": "傀儡统帅阿格曼奇",
+     "quest": "机器的崛起",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "完整的元素核心 ×10",
+     "from": "战斗傀儡，狂怒傀儡，怒锤傀儡等",
+     "quest": "机器的崛起",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瑟银镣铐",
+     "from": "—",
+     "quest": "押送囚徒",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "弄皱的便笺",
+     "from": "铁怒监军，铁怒狱卒，铁怒卫士等",
+     "quest": "弄皱的便笺",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "温德索尔元帅遗失的情报",
+     "from": "安格弗将军",
+     "quest": "一丝希望",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "温德索尔元帅遗失的情报",
+     "from": "傀儡统帅阿格曼奇",
+     "quest": "一丝希望",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "瑟银兄弟会契约",
+     "from": "—",
+     "quest": "瑟银兄弟会契约",
+     "faction": null
+    },
+    {
+     "itemCn": "萨弗隆铁锭",
+     "from": "焚化者古雷曼格",
+     "quest": "瑟银兄弟会契约",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的上瓣",
+     "from": "塞尔德林",
+     "quest": "挑战",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "罗克诺特下士",
+     "zone": "—",
+     "quest": "罗克诺特的麦酒",
+     "faction": null
+    },
+    {
+     "npc": "弗兰克罗恩·铸铁",
+     "zone": "—",
+     "quest": "黑铁的遗产，黑铁的遗产",
+     "faction": null
+    },
+    {
+     "npc": "神射手贾拉玛弗",
+     "zone": "荒芜之地",
+     "quest": "指挥官哥沙克",
+     "faction": "部落"
+    },
+    {
+     "npc": "通缉",
+     "zone": "荒芜之地",
+     "quest": "格杀勿论：黑铁矮人",
+     "faction": "部落"
+    },
+    {
+     "npc": "尤卡·斯库比格特",
+     "zone": "燃烧平原",
+     "quest": "雷布里·斯库比格特",
+     "faction": null
+    },
+    {
+     "npc": "尤尔巴·斯库比格特",
+     "zone": "塔纳利斯",
+     "quest": "尤卡·斯库比格特",
+     "faction": null
+    },
+    {
+     "npc": "指挥官哥沙克",
+     "zone": "—",
+     "quest": "出了什么事？，出了什么事？",
+     "faction": "部落"
+    },
+    {
+     "npc": "萨尔",
+     "zone": "奥格瑞玛",
+     "quest": "东部王国，拯救公主",
+     "faction": "部落"
+    },
+    {
+     "npc": "格杀勿论",
+     "zone": "荒芜之地",
+     "quest": "格杀勿论：高阶黑铁军官",
+     "faction": "部落"
+    },
+    {
+     "npc": "娜玛拉小姐",
+     "zone": "—",
+     "quest": "爱情药水",
+     "faction": null
+    },
+    {
+     "npc": "麦克斯韦尔元帅",
+     "zone": "燃烧平原",
+     "quest": "温德索尔元帅",
+     "faction": "联盟"
+    },
+    {
+     "npc": "温德索尔元帅",
+     "zone": "—",
+     "quest": "被遗弃的希望，一丝希望，冲破牢笼！",
+     "faction": "联盟"
+    },
+    {
+     "npc": "暗法师薇薇安·拉格雷",
+     "zone": "荒芜之地",
+     "quest": "最后的元素，遗失的雷酒秘方",
+     "faction": "部落"
+    },
+    {
+     "npc": "鬼魂之杯",
+     "zone": "—",
+     "quest": "鬼魂之杯",
+     "faction": null
+    },
+    {
+     "npc": "麦克斯沃特·尤博格林",
+     "zone": "燃烧平原",
+     "quest": "山脉之心",
+     "faction": null
+    },
+    {
+     "npc": "拉格纳·雷酒",
+     "zone": "丹莫罗",
+     "quest": "霍尔雷·黑须",
+     "faction": "联盟"
+    },
+    {
+     "npc": "恩诺哈尔·雷酒",
+     "zone": "诅咒之地",
+     "quest": "拉格纳·雷酒",
+     "faction": "联盟"
+    },
+    {
+     "npc": "药剂师金格",
+     "zone": "幽暗城",
+     "quest": "薇薇安·拉格雷",
+     "faction": "部落"
+    },
+    {
+     "npc": "桑德哈特",
+     "zone": "荒芜之地",
+     "quest": "不和谐的火焰",
+     "faction": "部落"
+    },
+    {
+     "npc": "加琳达",
+     "zone": "燃烧平原",
+     "quest": "伊森迪奥斯！",
+     "faction": "联盟"
+    },
+    {
+     "npc": "奥拉留斯",
+     "zone": "燃烧平原",
+     "quest": "好东西",
+     "faction": "联盟"
+    },
+    {
+     "npc": "塞勒斯·萨雷芬图斯",
+     "zone": "燃烧平原",
+     "quest": "烈焰精华",
+     "faction": null
+    },
+    {
+     "npc": "鲁特维尔·沃拉图斯",
+     "zone": "荒芜之地",
+     "quest": "机器的崛起",
+     "faction": "部落"
+    },
+    {
+     "npc": "格拉克·洛克鲁布",
+     "zone": "燃烧平原",
+     "quest": "押送囚徒",
+     "faction": "部落"
+    },
+    {
+     "npc": "雷克斯洛特",
+     "zone": "荒芜之地",
+     "quest": "格拉克·洛克鲁布",
+     "faction": "部落"
+    },
+    {
+     "npc": "军官高图斯",
+     "zone": "荒芜之地",
+     "quest": "行动：杀死安格弗将军",
+     "faction": "部落"
+    },
+    {
+     "npc": "弄皱的便笺",
+     "zone": "—",
+     "quest": "弄皱的便笺",
+     "faction": "联盟"
+    },
+    {
+     "npc": "国王麦格尼·铜须",
+     "zone": "铁炉堡",
+     "quest": "卡兰·巨锤，王国的命运",
+     "faction": "联盟"
+    },
+    {
+     "npc": "卡兰·巨锤",
+     "zone": "—",
+     "quest": "卡兰的故事，糟糕的消息",
+     "faction": "联盟"
+    },
+    {
+     "npc": "铁炉堡公主茉艾拉·铜须",
+     "zone": "—",
+     "quest": "语出惊人的公主，拯救公主？",
+     "faction": null
+    },
+    {
+     "npc": "瑟银兄弟会契约",
+     "zone": "—",
+     "quest": "瑟银兄弟会契约",
+     "faction": null
+    },
+    {
+     "npc": "法尔林·树影",
+     "zone": "厄运之槌",
+     "quest": "挑战",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 25,
+    "xpTotal": 115725,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/blackrock-depths",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "dire-maul-east": {
+   "quests": [
+    {
+     "nameCn": "普希林和埃斯托尔迪",
+     "questLevel": 58,
+     "reqLevel": 54,
+     "xp": 7750,
+     "pickupNpc": "埃斯托尔迪",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "破碎的陷阱",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "损坏的陷阱",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "戈多克食人魔装",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克好酒",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": null,
+     "pickupNpc": "践踏者克雷格",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "久违的法师",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 6600,
+     "pickupNpc": "博学者莱德罗斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "迦罗娜：潜行与诡计研究",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "迦罗娜：潜行与诡计研究",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "防御宝典",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "防御宝典",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥法师的食谱",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "奥法师的食谱",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "圣光之力",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "圣光之力",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "束缚之影",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "束缚之影",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "最伟大的猎手",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "最伟大的猎手",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "光明不会告诉你的事情",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "光明不会告诉你的事情",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "你与冰霜震击",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "你与冰霜震击",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "翡翠梦境……",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "翡翠梦境",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "诺斯特罗的屠龙技术纲要",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "诺斯特罗的屠龙技术纲要",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "铸造奎尔塞拉",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "黯淡的精灵剑",
+     "preQuest": "诺斯特罗的屠龙技术纲要",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "安泰恩的老朋友",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "安泰恩·哈尔蒙",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "安泰恩的奇怪请求",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "旗帜上的附魔",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "法尔林·树影",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "法尔林的复仇",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蕾瑟塔蒂丝的网",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 7550,
+     "pickupNpc": "拉托尼库斯·月矛",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": "羽月要塞",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "羽月要塞",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员古德曼",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "辛德拉的宝藏",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 675,
+     "pickupNpc": "辛德拉古灵",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "伊莫塔尔的疯狂",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "学者卢索恩·纹角",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蕾瑟塔蒂丝的网",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 7550,
+     "pickupNpc": "塔罗·刺蹄",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": "莫沙彻营地",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "莫沙彻营地",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员高拉克",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "先知科鲁拉克",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "蕾瑟塔蒂丝的网",
+     "from": "蕾瑟塔蒂丝",
+     "quest": "蕾瑟塔蒂丝的网",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "蕾瑟塔蒂丝的网",
+     "from": "蕾瑟塔蒂丝",
+     "quest": "蕾瑟塔蒂丝的网",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "咒术之书",
+     "from": "普希林",
+     "quest": "普希林和埃斯托尔迪",
+     "faction": null
+    },
+    {
+     "itemCn": "瑟银零件",
+     "from": "铁怒队长，狂爪龙人，黑手铁卫士等",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "冰霜之油",
+     "from": "邪枝巫医，焦油爬行者，死木园丁",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "海多斯博恩精华",
+     "from": "海多斯博恩",
+     "quest": "久违的法师",
+     "faction": null
+    },
+    {
+     "itemCn": "迦罗娜：潜行与诡计研究",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "itemCn": "防御宝典",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "itemCn": "奥法师的食谱",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "itemCn": "圣光之力",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "itemCn": "束缚之影",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "itemCn": "最伟大的猎手",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "itemCn": "光明不会告诉你的事情",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "itemCn": "你与冰霜震击",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "itemCn": "翡翠梦境",
+     "from": "克罗卡斯",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "itemCn": "诺斯特罗的屠龙技术纲要",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "itemCn": "黯淡的精灵剑",
+     "from": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "未完成的挑衅之旗",
+     "from": "—",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "itemCn": "游荡鬼灵的精华",
+     "from": "艾德雷斯巫师，艾德雷斯鬼怪，艾德雷斯鬼巫等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "黑暗符文 ×4",
+     "from": "通灵学院亡灵法师，伊露希亚·巴罗夫，讲师玛丽希亚等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×8",
+     "from": "—",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "拉托尼库斯·月矛",
+     "zone": "菲拉斯",
+     "quest": "蕾瑟塔蒂丝的网",
+     "faction": "联盟"
+    },
+    {
+     "npc": "塔罗·刺蹄",
+     "zone": "菲拉斯",
+     "quest": "蕾瑟塔蒂丝的网",
+     "faction": "部落"
+    },
+    {
+     "npc": "公告员高拉克",
+     "zone": "奥格瑞玛",
+     "quest": "莫沙彻营地",
+     "faction": "部落"
+    },
+    {
+     "npc": "公告员古德曼",
+     "zone": "暴风城",
+     "quest": "羽月要塞",
+     "faction": "联盟"
+    },
+    {
+     "npc": "埃斯托尔迪",
+     "zone": "菲拉斯",
+     "quest": "普希林和埃斯托尔迪",
+     "faction": null
+    },
+    {
+     "npc": "损坏的陷阱",
+     "zone": "厄运之槌",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "npc": "诺特·希姆加克",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔装，戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "npc": "践踏者克雷格",
+     "zone": "厄运之槌",
+     "quest": "戈多克好酒",
+     "faction": null
+    },
+    {
+     "npc": "辛德拉古灵",
+     "zone": "厄运之槌",
+     "quest": "辛德拉的宝藏，辛德拉的宝藏",
+     "faction": null
+    },
+    {
+     "npc": "博学者莱德罗斯",
+     "zone": "厄运之槌",
+     "quest": "久违的法师",
+     "faction": null
+    },
+    {
+     "npc": "先知科鲁拉克",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "部落"
+    },
+    {
+     "npc": "学者卢索恩·纹角",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "联盟"
+    },
+    {
+     "npc": "迦罗娜：潜行与诡计研究",
+     "zone": "—",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "npc": "防御宝典",
+     "zone": "—",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "npc": "奥法师的食谱",
+     "zone": "—",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "npc": "圣光之力",
+     "zone": "—",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "npc": "束缚之影",
+     "zone": "—",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "npc": "最伟大的猎手",
+     "zone": "—",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "npc": "光明不会告诉你的事情",
+     "zone": "—",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "npc": "你与冰霜震击",
+     "zone": "—",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "npc": "翡翠梦境",
+     "zone": "—",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "npc": "诺斯特罗的屠龙技术纲要",
+     "zone": "—",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "npc": "黯淡的精灵剑",
+     "zone": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "npc": "克罗卡斯",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "npc": "安泰恩·哈尔蒙",
+     "zone": "东瘟疫之地",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "npc": "法尔林·树影",
+     "zone": "厄运之槌",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 27,
+    "xpTotal": 161475,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/dire-maul-east",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "lower-blackrock-spire": {
+   "quests": [
+    {
+     "nameCn": "最后的石板",
+     "questLevel": 58,
+     "reqLevel": 40,
+     "xp": 7750,
+     "pickupNpc": "勘查员詹斯·铁靴",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "失落的摩沙鲁石板",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "基布雷尔的特殊宠物",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "基布雷尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蜘蛛卵",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "基布雷尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "冷冻龙蛋",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 8300,
+     "pickupNpc": "丁奇·斯迪波尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "返回丁奇身边",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "收集龙蛋",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "丁奇·斯迪波尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "冷冻龙蛋",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "晋升印章",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 8300,
+     "pickupNpc": "维埃兰",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "晋升印章",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "维埃兰",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "晋升印章",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蛛后的乳汁",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 9950,
+     "pickupNpc": "狼狈不堪的约翰",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "乌洛克",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 9950,
+     "pickupNpc": "瓦罗什",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "丁奇·斯迪波尔",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "菲诺克",
+     "pickupZone": "冬泉谷",
+     "startItem": null,
+     "preQuest": "返回丁奇身边",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "皮普·急智，为您效劳！",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 7050,
+     "pickupNpc": "皮普·急智",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "恶魔熔炉",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": "罗拉克斯",
+     "pickupZone": "冬泉谷",
+     "startItem": null,
+     "preQuest": "罗拉克斯的故事",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "监护者",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "奥比",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑手的命令",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "黑手的命令",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "座狼之源",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "赫林迪斯·河角",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的装置",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "给麦克斯韦尔的消息",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "比修的装置",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "末日扣环",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 1650,
+     "pickupNpc": "玛亚拉·布莱特文",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "玛亚拉·布莱特文",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瑞治维尔的箱子",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "玛亚拉·布莱特文",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "末日扣环",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "玛亚拉·布莱特文",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "雷明顿·瑞治维尔伯爵",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "麦克斯韦尔的任务",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8550,
+     "pickupNpc": "麦克斯韦尔元帅",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "给麦克斯韦尔的消息",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "达基萨斯将军的命令",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6850,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "达基萨斯将军的命令",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "座狼的首领",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "神射手贾拉玛弗",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "狡猾的比修",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "雷克斯洛特",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的装置",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "狡猾的比修",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的侦察报告",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "比修的装置",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑暗石板",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 8300,
+     "pickupNpc": "暗法师薇薇安·拉格雷",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "薇薇安·拉格雷和黑暗石板",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "薇薇安·拉格雷和黑暗石板",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "药剂师金格",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "高图斯的命令",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8550,
+     "pickupNpc": "军官高图斯",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "第五块摩沙鲁石板",
+     "from": "第五块摩沙鲁石板",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "itemCn": "第六块摩沙鲁石板",
+     "from": "第六块摩沙鲁石板",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "itemCn": "笼中的座狼幼崽",
+     "from": "—",
+     "quest": "基布雷尔的特殊宠物",
+     "faction": null
+    },
+    {
+     "itemCn": "尖塔蜘蛛卵 ×15",
+     "from": "尖塔蜘蛛卵，尖塔蜘蛛卵",
+     "quest": "蜘蛛卵",
+     "faction": null
+    },
+    {
+     "itemCn": "比修的装置",
+     "from": "比修的装置",
+     "quest": "比修的装置",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比修的侦察报告",
+     "from": "—",
+     "quest": "比修的侦察报告",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比修的装置",
+     "from": "比修的装置",
+     "quest": "比修的装置",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "比修的情报",
+     "from": "—",
+     "quest": "给麦克斯韦尔的消息",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "龙蛋冷冻器初号机",
+     "from": "—",
+     "quest": "冷冻龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "收集到的龙蛋 ×8",
+     "from": "—",
+     "quest": "收集龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "电动采集模块",
+     "from": "—",
+     "quest": "收集龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "尖石宝钻",
+     "from": "欧莫克大王",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "燃棘宝钻",
+     "from": "指挥官沃恩",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "血斧宝钻",
+     "from": "维姆萨拉克",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "原始晋升印章",
+     "from": "裂盾步兵，裂盾哨兵，裂盾侍僧等",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "铸造好的晋升印章",
+     "from": "晋升徽记",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "末日扣环",
+     "from": "末日扣环之箱",
+     "quest": "末日扣环",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "瑞治维尔的箱子",
+     "from": "—",
+     "quest": "瑞治维尔的箱子",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "黑暗石板",
+     "from": "黑暗石板",
+     "quest": "黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瓦罗什的魔精",
+     "from": "乌洛克",
+     "quest": "乌洛克",
+     "faction": null
+    },
+    {
+     "itemCn": "重要的黑石文件",
+     "from": "森格，尖石战斗法师，尖石秘法师等",
+     "quest": "高图斯的命令",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比斯巨兽的发光肉块",
+     "from": "—",
+     "quest": "皮普·急智，为您效劳！",
+     "faction": null
+    },
+    {
+     "itemCn": "达基萨斯将军的命令",
+     "from": "维姆萨拉克",
+     "quest": "达基萨斯将军的命令",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "穿魂长矛",
+     "from": "—",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "itemCn": "未铸造的符文覆饰胸甲",
+     "from": "未铸成的符文胸甲",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "itemCn": "奥比的鳞片",
+     "from": "—",
+     "quest": "监护者",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "勘查员詹斯·铁靴",
+     "zone": "塔纳利斯",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "npc": "赫林迪斯·河角",
+     "zone": "燃烧平原",
+     "quest": "座狼之源",
+     "faction": "联盟"
+    },
+    {
+     "npc": "神射手贾拉玛弗",
+     "zone": "荒芜之地",
+     "quest": "座狼的首领",
+     "faction": "部落"
+    },
+    {
+     "npc": "基布雷尔",
+     "zone": "燃烧平原",
+     "quest": "基布雷尔的特殊宠物，蜘蛛卵",
+     "faction": null
+    },
+    {
+     "npc": "雷克斯洛特",
+     "zone": "荒芜之地",
+     "quest": "狡猾的比修",
+     "faction": "部落"
+    },
+    {
+     "npc": "比修",
+     "zone": "黑石塔",
+     "quest": "比修的装置，比修的侦察报告，比修的装置，给麦克斯韦尔的消息",
+     "faction": null
+    },
+    {
+     "npc": "丁奇·斯迪波尔",
+     "zone": "燃烧平原",
+     "quest": "冷冻龙蛋，收集龙蛋",
+     "faction": null
+    },
+    {
+     "npc": "维埃兰",
+     "zone": "—",
+     "quest": "晋升印章，晋升印章",
+     "faction": null
+    },
+    {
+     "npc": "玛亚拉·布莱特文",
+     "zone": "燃烧平原",
+     "quest": "末日扣环，瑞治维尔的箱子",
+     "faction": "联盟"
+    },
+    {
+     "npc": "雷明顿·瑞治维尔伯爵",
+     "zone": "暴风城",
+     "quest": "玛亚拉·布莱特文",
+     "faction": "联盟"
+    },
+    {
+     "npc": "暗法师薇薇安·拉格雷",
+     "zone": "荒芜之地",
+     "quest": "黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "npc": "药剂师金格",
+     "zone": "幽暗城",
+     "quest": "薇薇安·拉格雷和黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "npc": "狼狈不堪的约翰",
+     "zone": "燃烧平原",
+     "quest": "蛛后的乳汁",
+     "faction": null
+    },
+    {
+     "npc": "瓦罗什",
+     "zone": "黑石塔",
+     "quest": "乌洛克",
+     "faction": null
+    },
+    {
+     "npc": "军官高图斯",
+     "zone": "荒芜之地",
+     "quest": "高图斯的命令",
+     "faction": "部落"
+    },
+    {
+     "npc": "菲诺克",
+     "zone": "冬泉谷",
+     "quest": "丁奇·斯迪波尔",
+     "faction": null
+    },
+    {
+     "npc": "皮普·急智",
+     "zone": "—",
+     "quest": "皮普·急智，为您效劳！",
+     "faction": null
+    },
+    {
+     "npc": "麦克斯韦尔元帅",
+     "zone": "燃烧平原",
+     "quest": "麦克斯韦尔的任务",
+     "faction": "联盟"
+    },
+    {
+     "npc": "达基萨斯将军的命令",
+     "zone": "—",
+     "quest": "达基萨斯将军的命令",
+     "faction": "联盟"
+    },
+    {
+     "npc": "罗拉克斯",
+     "zone": "冬泉谷",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "npc": "奥比",
+     "zone": "黑石塔",
+     "quest": "监护者",
+     "faction": null
+    },
+    {
+     "npc": "黑手的命令",
+     "zone": "—",
+     "quest": "黑手的命令",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 24,
+    "xpTotal": 166250,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "dire-maul-north": {
+   "quests": [
+    {
+     "nameCn": "破碎的陷阱",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "损坏的陷阱",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "戈多克食人魔装",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "逃出生天！",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克好酒",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": null,
+     "pickupNpc": "践踏者克雷格",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "逃出生天！",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": null,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "逃出生天！",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "急速圣典",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": null,
+     "pickupNpc": "博学者莱德罗斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "专注圣典",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": null,
+     "pickupNpc": "博学者莱德罗斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "防护圣典",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": null,
+     "pickupNpc": "博学者莱德罗斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "迦罗娜：潜行与诡计研究",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "迦罗娜：潜行与诡计研究",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "防御宝典",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "防御宝典",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥法师的食谱",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "奥法师的食谱",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "圣光之力",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "圣光之力",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "束缚之影",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "束缚之影",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "最伟大的猎手",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "最伟大的猎手",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "光明不会告诉你的事情",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "光明不会告诉你的事情",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "你与冰霜震击",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "你与冰霜震击",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "翡翠梦境……",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "翡翠梦境",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "诺斯特罗的屠龙技术纲要",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "诺斯特罗的屠龙技术纲要",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "铸造奎尔塞拉",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "黯淡的精灵剑",
+     "preQuest": "诺斯特罗的屠龙技术纲要",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "安泰恩的老朋友",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "安泰恩·哈尔蒙",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "安泰恩的奇怪请求",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "法尔林的复仇",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "法尔林·树影",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "安泰恩的老朋友",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "旗帜上的附魔",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "法尔林·树影",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "法尔林的复仇",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "羽月要塞",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员古德曼",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "辛德拉的宝藏",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 675,
+     "pickupNpc": "辛德拉古灵",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "伊莫塔尔的疯狂",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "学者卢索恩·纹角",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "莫沙彻营地",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员高拉克",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "先知科鲁拉克",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "瑟银零件",
+     "from": "铁怒队长，狂爪龙人，黑手铁卫士等",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "冰霜之油",
+     "from": "邪枝巫医，焦油爬行者，死木园丁",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克镣铐钥匙",
+     "from": "戈多克蛮兵，戈多克大法师，戈多克领主等",
+     "quest": "逃出生天！",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克镣铐钥匙",
+     "from": "戈多克蛮兵，戈多克大法师，戈多克领主等",
+     "quest": "逃出生天！",
+     "faction": null
+    },
+    {
+     "itemCn": "急速圣典",
+     "from": "戈多克蛮兵，戈多克大法师，戈多克领主等",
+     "quest": "急速圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "原始黑钻石",
+     "from": "骷髅军官，血肉傀儡，血色占星师等",
+     "quest": "急速圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×2",
+     "from": "—",
+     "quest": "急速圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "英雄之血 ×2",
+     "from": "英雄之血",
+     "quest": "急速圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "专注圣典",
+     "from": "戈多克蛮兵，戈多克大法师，戈多克领主等",
+     "quest": "专注圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "原始黑钻石",
+     "from": "骷髅军官，血肉傀儡，血色占星师等",
+     "quest": "专注圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×4",
+     "from": "—",
+     "quest": "专注圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "暗影之皮 ×2",
+     "from": "复活的构造体，复活的骷髅守卫，伊露希亚·巴罗夫等",
+     "quest": "专注圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "防护圣典",
+     "from": "戈多克蛮兵，戈多克大法师，戈多克领主等",
+     "quest": "防护圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "原始黑钻石",
+     "from": "骷髅军官，血肉傀儡，血色占星师等",
+     "quest": "防护圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×2",
+     "from": "—",
+     "quest": "防护圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "磨损的憎恶缝合线",
+     "from": "缝补憎恶，喷胆者，泼毒者等",
+     "quest": "防护圣典",
+     "faction": null
+    },
+    {
+     "itemCn": "迦罗娜：潜行与诡计研究",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "itemCn": "防御宝典",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "itemCn": "奥法师的食谱",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "itemCn": "圣光之力",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "itemCn": "束缚之影",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "itemCn": "最伟大的猎手",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "itemCn": "光明不会告诉你的事情",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "itemCn": "你与冰霜震击",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "itemCn": "翡翠梦境",
+     "from": "克罗卡斯",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "itemCn": "诺斯特罗的屠龙技术纲要",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "itemCn": "黯淡的精灵剑",
+     "from": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "未完成的挑衅之旗",
+     "from": "—",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔珠串 ×25",
+     "from": "欧莫克大王，尖石战斗法师，尖石秘法师等",
+     "quest": "法尔林的复仇",
+     "faction": null
+    },
+    {
+     "itemCn": "游荡鬼灵的精华",
+     "from": "艾德雷斯巫师，艾德雷斯鬼怪，艾德雷斯鬼巫等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "黑暗符文 ×4",
+     "from": "通灵学院亡灵法师，伊露希亚·巴罗夫，讲师玛丽希亚等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×8",
+     "from": "—",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "公告员高拉克",
+     "zone": "奥格瑞玛",
+     "quest": "莫沙彻营地",
+     "faction": "部落"
+    },
+    {
+     "npc": "公告员古德曼",
+     "zone": "暴风城",
+     "quest": "羽月要塞",
+     "faction": "联盟"
+    },
+    {
+     "npc": "损坏的陷阱",
+     "zone": "厄运之槌",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "npc": "诺特·希姆加克",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔装，戈多克食人魔装，逃出生天！，逃出生天！",
+     "faction": null
+    },
+    {
+     "npc": "践踏者克雷格",
+     "zone": "厄运之槌",
+     "quest": "戈多克好酒",
+     "faction": null
+    },
+    {
+     "npc": "辛德拉古灵",
+     "zone": "厄运之槌",
+     "quest": "辛德拉的宝藏，辛德拉的宝藏",
+     "faction": null
+    },
+    {
+     "npc": "先知科鲁拉克",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "部落"
+    },
+    {
+     "npc": "学者卢索恩·纹角",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "联盟"
+    },
+    {
+     "npc": "博学者莱德罗斯",
+     "zone": "厄运之槌",
+     "quest": "急速圣典，专注圣典，防护圣典",
+     "faction": null
+    },
+    {
+     "npc": "迦罗娜：潜行与诡计研究",
+     "zone": "—",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "npc": "防御宝典",
+     "zone": "—",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "npc": "奥法师的食谱",
+     "zone": "—",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "npc": "圣光之力",
+     "zone": "—",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "npc": "束缚之影",
+     "zone": "—",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "npc": "最伟大的猎手",
+     "zone": "—",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "npc": "光明不会告诉你的事情",
+     "zone": "—",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "npc": "你与冰霜震击",
+     "zone": "—",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "npc": "翡翠梦境",
+     "zone": "—",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "npc": "诺斯特罗的屠龙技术纲要",
+     "zone": "—",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "npc": "黯淡的精灵剑",
+     "zone": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "npc": "克罗卡斯",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "npc": "安泰恩·哈尔蒙",
+     "zone": "东瘟疫之地",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "npc": "法尔林·树影",
+     "zone": "厄运之槌",
+     "quest": "法尔林的复仇，旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 30,
+    "xpTotal": 152775,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/dire-maul-north",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "dire-maul-west": {
+   "quests": [
+    {
+     "nameCn": "破碎的陷阱",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "损坏的陷阱",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔装",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": null,
+     "pickupNpc": "诺特·希姆加克",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "戈多克食人魔装",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克好酒",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": null,
+     "pickupNpc": "践踏者克雷格",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "伊莫塔尔的疯狂",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 10250,
+     "pickupNpc": "辛德拉古灵",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "迦罗娜：潜行与诡计研究",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "迦罗娜：潜行与诡计研究",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "防御宝典",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "防御宝典",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥法师的食谱",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "奥法师的食谱",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "圣光之力",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "圣光之力",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "束缚之影",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "束缚之影",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "最伟大的猎手",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "最伟大的猎手",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "光明不会告诉你的事情",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "光明不会告诉你的事情",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "你与冰霜震击",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "你与冰霜震击",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "翡翠梦境……",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "翡翠梦境",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "诺斯特罗的屠龙技术纲要",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "诺斯特罗的屠龙技术纲要",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "铸造奎尔塞拉",
+     "questLevel": 60,
+     "reqLevel": 60,
+     "xp": 7050,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "黯淡的精灵剑",
+     "preQuest": "诺斯特罗的屠龙技术纲要",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "戈多克食人魔的事务",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 8300,
+     "pickupNpc": "克罗卡斯",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "安泰恩的老朋友",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "安泰恩·哈尔蒙",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "安泰恩的奇怪请求",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "旗帜上的附魔",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 6600,
+     "pickupNpc": "法尔林·树影",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "法尔林的复仇",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "羽月要塞",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员古德曼",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "辛德拉的宝藏",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 675,
+     "pickupNpc": "辛德拉古灵",
+     "pickupZone": "厄运之槌",
+     "startItem": null,
+     "preQuest": "伊莫塔尔的疯狂",
+     "source": "wclbox",
+     "variants": 2
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "学者卢索恩·纹角",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "莫沙彻营地",
+     "questLevel": 57,
+     "reqLevel": 54,
+     "xp": 1500,
+     "pickupNpc": "公告员高拉克",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "精灵的传说",
+     "questLevel": 60,
+     "reqLevel": 54,
+     "xp": 8550,
+     "pickupNpc": "先知科鲁拉克",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "瑟银零件",
+     "from": "铁怒队长，狂爪龙人，黑手铁卫士等",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "冰霜之油",
+     "from": "邪枝巫医，焦油爬行者，死木园丁",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文布卷 ×4",
+     "from": "暮光之王艾沃兰",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "硬甲皮 ×8",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "符文线 ×2",
+     "from": "—",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "食人魔鞣酸",
+     "from": "地狱猎犬，戈多克术士，戈多克掠夺者等",
+     "quest": "戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "itemCn": "迦罗娜：潜行与诡计研究",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "itemCn": "防御宝典",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "itemCn": "奥法师的食谱",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "itemCn": "圣光之力",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "itemCn": "束缚之影",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "itemCn": "最伟大的猎手",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "itemCn": "光明不会告诉你的事情",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "itemCn": "你与冰霜震击",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "itemCn": "翡翠梦境",
+     "from": "克罗卡斯",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "itemCn": "诺斯特罗的屠龙技术纲要",
+     "from": "布满灰尘的书籍，布满灰尘的书籍",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "itemCn": "黯淡的精灵剑",
+     "from": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "itemCn": "戈多克力量护手",
+     "from": "王子的箱子",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "itemCn": "未完成的挑衅之旗",
+     "from": "—",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "itemCn": "游荡鬼灵的精华",
+     "from": "艾德雷斯巫师，艾德雷斯鬼怪，艾德雷斯鬼巫等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "黑暗符文 ×4",
+     "from": "通灵学院亡灵法师，伊露希亚·巴罗夫，讲师玛丽希亚等",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "大块魔光碎片 ×8",
+     "from": "—",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "公告员高拉克",
+     "zone": "奥格瑞玛",
+     "quest": "莫沙彻营地",
+     "faction": "部落"
+    },
+    {
+     "npc": "公告员古德曼",
+     "zone": "暴风城",
+     "quest": "羽月要塞",
+     "faction": "联盟"
+    },
+    {
+     "npc": "损坏的陷阱",
+     "zone": "厄运之槌",
+     "quest": "破碎的陷阱",
+     "faction": null
+    },
+    {
+     "npc": "诺特·希姆加克",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔装，戈多克食人魔装",
+     "faction": null
+    },
+    {
+     "npc": "践踏者克雷格",
+     "zone": "厄运之槌",
+     "quest": "戈多克好酒",
+     "faction": null
+    },
+    {
+     "npc": "辛德拉古灵",
+     "zone": "厄运之槌",
+     "quest": "伊莫塔尔的疯狂，辛德拉的宝藏，辛德拉的宝藏",
+     "faction": null
+    },
+    {
+     "npc": "先知科鲁拉克",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "部落"
+    },
+    {
+     "npc": "学者卢索恩·纹角",
+     "zone": "菲拉斯",
+     "quest": "精灵的传说",
+     "faction": "联盟"
+    },
+    {
+     "npc": "迦罗娜：潜行与诡计研究",
+     "zone": "—",
+     "quest": "迦罗娜：潜行与诡计研究",
+     "faction": null
+    },
+    {
+     "npc": "防御宝典",
+     "zone": "—",
+     "quest": "防御宝典",
+     "faction": null
+    },
+    {
+     "npc": "奥法师的食谱",
+     "zone": "—",
+     "quest": "奥法师的食谱",
+     "faction": null
+    },
+    {
+     "npc": "圣光之力",
+     "zone": "—",
+     "quest": "圣光之力",
+     "faction": null
+    },
+    {
+     "npc": "束缚之影",
+     "zone": "—",
+     "quest": "束缚之影",
+     "faction": null
+    },
+    {
+     "npc": "最伟大的猎手",
+     "zone": "—",
+     "quest": "最伟大的猎手",
+     "faction": null
+    },
+    {
+     "npc": "光明不会告诉你的事情",
+     "zone": "—",
+     "quest": "光明不会告诉你的事情",
+     "faction": null
+    },
+    {
+     "npc": "你与冰霜震击",
+     "zone": "—",
+     "quest": "你与冰霜震击",
+     "faction": null
+    },
+    {
+     "npc": "翡翠梦境",
+     "zone": "—",
+     "quest": "翡翠梦境……",
+     "faction": null
+    },
+    {
+     "npc": "诺斯特罗的屠龙技术纲要",
+     "zone": "—",
+     "quest": "诺斯特罗的屠龙技术纲要",
+     "faction": null
+    },
+    {
+     "npc": "黯淡的精灵剑",
+     "zone": "—",
+     "quest": "铸造奎尔塞拉",
+     "faction": null
+    },
+    {
+     "npc": "克罗卡斯",
+     "zone": "厄运之槌",
+     "quest": "戈多克食人魔的事务",
+     "faction": null
+    },
+    {
+     "npc": "安泰恩·哈尔蒙",
+     "zone": "东瘟疫之地",
+     "quest": "安泰恩的老朋友",
+     "faction": null
+    },
+    {
+     "npc": "法尔林·树影",
+     "zone": "厄运之槌",
+     "quest": "旗帜上的附魔",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 25,
+    "xpTotal": 149825,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/dire-maul-west",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "scholomance": {
+   "quests": [
+    {
+     "nameCn": "瘟疫之龙",
+     "questLevel": 58,
+     "reqLevel": 55,
+     "xp": 6200,
+     "pickupNpc": "贝蒂娜·比格辛克",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "健康的龙鳞",
+     "questLevel": 58,
+     "reqLevel": 55,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "健康的龙鳞",
+     "preQuest": "瘟疫之龙",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黎明先锋",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "贝蒂娜·比格辛克",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "贝蒂娜·比格辛克",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瑟尔林·卡斯迪诺夫教授",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "艾瓦·萨克霍夫",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "传令官基尔图诺斯",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": "艾瓦·萨克霍夫",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "卡斯迪诺夫的恐惧之袋",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "巫妖莱斯·霜语",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "马杜克镇长",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "禁锢灵魂的遗物",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "卡斯迪诺夫的恐惧之袋",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "艾瓦·萨克霍夫",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "瑟尔林·卡斯迪诺夫教授",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "贝蒂娜·比格辛克",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 1650,
+     "pickupNpc": "莱尼德·巴萨罗梅",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "莱尼德·巴萨罗梅",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "巴罗夫家族的宝藏",
+     "questLevel": 60,
+     "reqLevel": 52,
+     "xp": 6600,
+     "pickupNpc": "维尔顿·巴罗夫",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "巴罗夫家族的宝藏",
+     "questLevel": 60,
+     "reqLevel": 52,
+     "xp": 6600,
+     "pickupNpc": "阿莱克斯·巴罗夫",
+     "pickupZone": "提瑞斯法林地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "健康的龙鳞",
+     "from": "瘟疫龙崽",
+     "quest": "健康的龙鳞",
+     "faction": null
+    },
+    {
+     "itemCn": "布瑞尔地契",
+     "from": "布瑞尔地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "凯尔达隆地契",
+     "from": "凯尔达隆地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "南海镇地契",
+     "from": "南海镇地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "塔伦米尔地契",
+     "from": "塔伦米尔地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "布瑞尔地契",
+     "from": "布瑞尔地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "凯尔达隆地契",
+     "from": "凯尔达隆地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "南海镇地契",
+     "from": "南海镇地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "塔伦米尔地契",
+     "from": "塔伦米尔地契",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "莱斯·霜语的头颅",
+     "from": "莱斯·霜语",
+     "quest": "巫妖莱斯·霜语",
+     "faction": null
+    },
+    {
+     "itemCn": "卡斯迪诺夫的恐惧之袋",
+     "from": "詹迪斯·巴罗夫",
+     "quest": "卡斯迪诺夫的恐惧之袋",
+     "faction": null
+    },
+    {
+     "itemCn": "冰冻的龙蛋",
+     "from": "—",
+     "quest": "贝蒂娜·比格辛克",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "贝蒂娜·比格辛克",
+     "zone": "东瘟疫之地",
+     "quest": "瘟疫之龙，黎明先锋",
+     "faction": null
+    },
+    {
+     "npc": "健康的龙鳞",
+     "zone": "—",
+     "quest": "健康的龙鳞",
+     "faction": null
+    },
+    {
+     "npc": "阿莱克斯·巴罗夫",
+     "zone": "提瑞斯法林地",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "部落"
+    },
+    {
+     "npc": "维尔顿·巴罗夫",
+     "zone": "西瘟疫之地",
+     "quest": "巴罗夫家族的宝藏",
+     "faction": "联盟"
+    },
+    {
+     "npc": "艾瓦·萨克霍夫",
+     "zone": "西瘟疫之地",
+     "quest": "瑟尔林·卡斯迪诺夫教授，传令官基尔图诺斯，卡斯迪诺夫的恐惧之袋",
+     "faction": null
+    },
+    {
+     "npc": "马杜克镇长",
+     "zone": "西瘟疫之地",
+     "quest": "巫妖莱斯·霜语",
+     "faction": null
+    },
+    {
+     "npc": "莱尼德·巴萨罗梅",
+     "zone": "东瘟疫之地",
+     "quest": "贝蒂娜·比格辛克",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 11,
+    "xpTotal": 72450,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/scholomance",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "stratholme-main-gate": {
+   "quests": [
+    {
+     "nameCn": "信仰奖章",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": null,
+     "pickupNpc": "奥里克斯",
+     "pickupZone": "斯坦索姆",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥里克斯的清算",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8850,
+     "pickupNpc": "奥里克斯",
+     "pickupZone": "斯坦索姆",
+     "startItem": null,
+     "preQuest": "信仰奖章",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "活跃的探子",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6850,
+     "pickupNpc": "贝蒂娜·比格辛克",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "血肉不会撒谎",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "了不起的艾兹拉·格里姆",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8550,
+     "pickupNpc": "烟鬼拉鲁恩",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "神圣之屋",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "莱尼德·巴萨罗梅",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "档案管理员",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": "尼古拉斯·瑟伦霍夫公爵",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "可怕的真相",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "巴纳扎尔的头颅",
+     "preQuest": "档案管理员",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "永不安息的灵魂",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8850,
+     "pickupNpc": "埃根",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "永不安息的灵魂",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "米奈希尔的礼物",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "莱尼德·巴萨罗梅",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "亡灵莱斯·霜语",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "爱与家庭",
+     "questLevel": 60,
+     "reqLevel": 52,
+     "xp": 6600,
+     "pickupNpc": "画家瑞弗蕾",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "爱与家庭",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "死人的请求",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "安泰恩·哈尔蒙",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "寻找安泰恩、寻找安泰恩",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "信仰奖章",
+     "from": "玛洛尔的保险箱",
+     "quest": "信仰奖章",
+     "faction": null
+    },
+    {
+     "itemCn": "天灾军团档案",
+     "from": "天灾军团档案",
+     "quest": "活跃的探子",
+     "faction": null
+    },
+    {
+     "itemCn": "格里姆的优质香烟",
+     "from": "艾兹拉·格里姆",
+     "quest": "了不起的艾兹拉·格里姆",
+     "faction": null
+    },
+    {
+     "itemCn": "斯坦索姆圣水 ×5",
+     "from": "补给箱，斯坦索姆物资箱",
+     "quest": "神圣之屋",
+     "faction": null
+    },
+    {
+     "itemCn": "巴纳扎尔的头颅",
+     "from": "巴纳扎尔",
+     "quest": "可怕的真相",
+     "faction": null
+    },
+    {
+     "itemCn": "巫妖生前的遗物",
+     "from": "巫妖生前的遗物",
+     "quest": "米奈希尔的礼物",
+     "faction": null
+    },
+    {
+     "itemCn": "爱与家庭",
+     "from": "未完成的油画",
+     "quest": "爱与家庭",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "奥里克斯",
+     "zone": "斯坦索姆",
+     "quest": "信仰奖章，奥里克斯的清算",
+     "faction": null
+    },
+    {
+     "npc": "贝蒂娜·比格辛克",
+     "zone": "东瘟疫之地",
+     "quest": "活跃的探子",
+     "faction": null
+    },
+    {
+     "npc": "烟鬼拉鲁恩",
+     "zone": "东瘟疫之地",
+     "quest": "了不起的艾兹拉·格里姆",
+     "faction": null
+    },
+    {
+     "npc": "莱尼德·巴萨罗梅",
+     "zone": "东瘟疫之地",
+     "quest": "神圣之屋，米奈希尔的礼物",
+     "faction": null
+    },
+    {
+     "npc": "尼古拉斯·瑟伦霍夫公爵",
+     "zone": "东瘟疫之地",
+     "quest": "档案管理员",
+     "faction": null
+    },
+    {
+     "npc": "巴纳扎尔的头颅",
+     "zone": "—",
+     "quest": "可怕的真相",
+     "faction": null
+    },
+    {
+     "npc": "埃根",
+     "zone": "东瘟疫之地",
+     "quest": "永不安息的灵魂",
+     "faction": null
+    },
+    {
+     "npc": "画家瑞弗蕾",
+     "zone": "西瘟疫之地",
+     "quest": "爱与家庭",
+     "faction": null
+    },
+    {
+     "npc": "安泰恩·哈尔蒙",
+     "zone": "东瘟疫之地",
+     "quest": "死人的请求",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 13,
+    "xpTotal": 94400,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/stratholme-main-gate",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "stratholme-service-gate": {
+   "quests": [
+    {
+     "nameCn": "信仰奖章",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": null,
+     "pickupNpc": "奥里克斯",
+     "pickupZone": "斯坦索姆",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "奥里克斯的清算",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8850,
+     "pickupNpc": "奥里克斯",
+     "pickupZone": "斯坦索姆",
+     "startItem": null,
+     "preQuest": "信仰奖章",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "血肉不会撒谎",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "贝蒂娜·比格辛克",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "活跃的探子",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6850,
+     "pickupNpc": "贝蒂娜·比格辛克",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "血肉不会撒谎",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "了不起的艾兹拉·格里姆",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8550,
+     "pickupNpc": "烟鬼拉鲁恩",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "神圣之屋",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "莱尼德·巴萨罗梅",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "可怕的真相",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "巴纳扎尔的头颅",
+     "preQuest": "档案管理员",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "超越",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": "尼古拉斯·瑟伦霍夫公爵",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "可怕的真相",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "永不安息的灵魂",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8850,
+     "pickupNpc": "埃根",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "永不安息的灵魂",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "米奈希尔的礼物",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "莱尼德·巴萨罗梅",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "亡灵莱斯·霜语",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "爱与家庭",
+     "questLevel": 60,
+     "reqLevel": 52,
+     "xp": 6600,
+     "pickupNpc": "画家瑞弗蕾",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "爱与家庭",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "死人的请求",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "安泰恩·哈尔蒙",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "寻找安泰恩、寻找安泰恩",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "吞咽者拉姆斯登",
+     "questLevel": 60,
+     "reqLevel": 56,
+     "xp": 6600,
+     "pickupNpc": "纳萨诺斯·凋零者",
+     "pickupZone": "东瘟疫之地",
+     "startItem": null,
+     "preQuest": "暗翼蝠",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "信仰奖章",
+     "from": "玛洛尔的保险箱",
+     "quest": "信仰奖章",
+     "faction": null
+    },
+    {
+     "itemCn": "瘟疫肉块 ×10",
+     "from": "被毁坏的死尸，被撕裂的死尸，恶疫食尸鬼等",
+     "quest": "血肉不会撒谎",
+     "faction": null
+    },
+    {
+     "itemCn": "天灾军团档案",
+     "from": "天灾军团档案",
+     "quest": "活跃的探子",
+     "faction": null
+    },
+    {
+     "itemCn": "格里姆的优质香烟",
+     "from": "艾兹拉·格里姆",
+     "quest": "了不起的艾兹拉·格里姆",
+     "faction": null
+    },
+    {
+     "itemCn": "斯坦索姆圣水 ×5",
+     "from": "补给箱，斯坦索姆物资箱",
+     "quest": "神圣之屋",
+     "faction": null
+    },
+    {
+     "itemCn": "巴纳扎尔的头颅",
+     "from": "巴纳扎尔",
+     "quest": "可怕的真相",
+     "faction": null
+    },
+    {
+     "itemCn": "瑞文戴尔男爵的头颅",
+     "from": "瑞文戴尔男爵",
+     "quest": "超越",
+     "faction": null
+    },
+    {
+     "itemCn": "巫妖生前的遗物",
+     "from": "巫妖生前的遗物",
+     "quest": "米奈希尔的礼物",
+     "faction": null
+    },
+    {
+     "itemCn": "爱与家庭",
+     "from": "未完成的油画",
+     "quest": "爱与家庭",
+     "faction": null
+    },
+    {
+     "itemCn": "吞咽者拉姆斯登的头颅",
+     "from": "吞咽者拉姆斯登",
+     "quest": "吞咽者拉姆斯登",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "奥里克斯",
+     "zone": "斯坦索姆",
+     "quest": "信仰奖章，奥里克斯的清算",
+     "faction": null
+    },
+    {
+     "npc": "贝蒂娜·比格辛克",
+     "zone": "东瘟疫之地",
+     "quest": "血肉不会撒谎，活跃的探子",
+     "faction": null
+    },
+    {
+     "npc": "烟鬼拉鲁恩",
+     "zone": "东瘟疫之地",
+     "quest": "了不起的艾兹拉·格里姆",
+     "faction": null
+    },
+    {
+     "npc": "莱尼德·巴萨罗梅",
+     "zone": "东瘟疫之地",
+     "quest": "神圣之屋，米奈希尔的礼物",
+     "faction": null
+    },
+    {
+     "npc": "巴纳扎尔的头颅",
+     "zone": "—",
+     "quest": "可怕的真相",
+     "faction": null
+    },
+    {
+     "npc": "尼古拉斯·瑟伦霍夫公爵",
+     "zone": "东瘟疫之地",
+     "quest": "超越",
+     "faction": null
+    },
+    {
+     "npc": "埃根",
+     "zone": "东瘟疫之地",
+     "quest": "永不安息的灵魂",
+     "faction": null
+    },
+    {
+     "npc": "画家瑞弗蕾",
+     "zone": "西瘟疫之地",
+     "quest": "爱与家庭",
+     "faction": null
+    },
+    {
+     "npc": "纳萨诺斯·凋零者",
+     "zone": "东瘟疫之地",
+     "quest": "吞咽者拉姆斯登",
+     "faction": "部落"
+    },
+    {
+     "npc": "安泰恩·哈尔蒙",
+     "zone": "东瘟疫之地",
+     "quest": "死人的请求",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 14,
+    "xpTotal": 101000,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/stratholme-service-gate",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  },
+  "upper-blackrock-spire": {
+   "quests": [
+    {
+     "nameCn": "最后的石板",
+     "questLevel": 58,
+     "reqLevel": 40,
+     "xp": 7750,
+     "pickupNpc": "勘查员詹斯·铁靴",
+     "pickupZone": "塔纳利斯",
+     "startItem": null,
+     "preQuest": "失落的摩沙鲁石板",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "基布雷尔的特殊宠物",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "基布雷尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蜘蛛卵",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "基布雷尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "冷冻龙蛋",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 8300,
+     "pickupNpc": "丁奇·斯迪波尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "返回丁奇身边",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "收集龙蛋",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "丁奇·斯迪波尔",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "冷冻龙蛋",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "晋升印章",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 9950,
+     "pickupNpc": "维埃兰",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "晋升印章",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "蛛后的乳汁",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 9950,
+     "pickupNpc": "狼狈不堪的约翰",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "丁奇·斯迪波尔",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "菲诺克",
+     "pickupZone": "冬泉谷",
+     "startItem": null,
+     "preQuest": "返回丁奇身边",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "皮普·急智，为您效劳！",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 7050,
+     "pickupNpc": "皮普·急智",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "恶魔熔炉",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 8300,
+     "pickupNpc": "罗拉克斯",
+     "pickupZone": "冬泉谷",
+     "startItem": null,
+     "preQuest": "罗拉克斯的故事",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "监护者",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "奥比",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑手的命令",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "黑手的命令",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的左瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克饰品的右瓣",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 8300,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "更多重要的材料",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瓦塔拉克公爵",
+     "questLevel": 60,
+     "reqLevel": 58,
+     "xp": 9950,
+     "pickupNpc": "伯德雷",
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": "最后的准备",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的装置",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "给麦克斯韦尔的消息",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "比修的装置",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "末日扣环",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 1650,
+     "pickupNpc": "玛亚拉·布莱特文",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "玛亚拉·布莱特文",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "瑞治维尔的箱子",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 6600,
+     "pickupNpc": "玛亚拉·布莱特文",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "末日扣环",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "玛亚拉·布莱特文",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "雷明顿·瑞治维尔伯爵",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "达基萨斯将军的命令",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6850,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": "达基萨斯将军的命令",
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "达基萨斯将军之死",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 9950,
+     "pickupNpc": "麦克斯韦尔元帅",
+     "pickupZone": "燃烧平原",
+     "startItem": null,
+     "preQuest": "达基萨斯将军的命令",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "龙火护符",
+     "questLevel": 60,
+     "reqLevel": 50,
+     "xp": 9050,
+     "pickupNpc": "哈尔琳",
+     "pickupZone": "冬泉谷",
+     "startItem": null,
+     "preQuest": "巨龙之眼",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "狡猾的比修",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "雷克斯洛特",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的装置",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "狡猾的比修",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "比修的侦察报告",
+     "questLevel": 59,
+     "reqLevel": 55,
+     "xp": 6400,
+     "pickupNpc": "比修",
+     "pickupZone": "黑石塔",
+     "startItem": null,
+     "preQuest": "比修的装置",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑暗石板",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 8300,
+     "pickupNpc": "暗法师薇薇安·拉格雷",
+     "pickupZone": "荒芜之地",
+     "startItem": null,
+     "preQuest": "薇薇安·拉格雷和黑暗石板",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "薇薇安·拉格雷和黑暗石板",
+     "questLevel": 60,
+     "reqLevel": 57,
+     "xp": 650,
+     "pickupNpc": "药剂师金格",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "为部落而战！",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 10900,
+     "pickupNpc": "萨尔",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": "伊崔格的智慧",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑龙幻象",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 6600,
+     "pickupNpc": "巫女麦兰达",
+     "pickupZone": "西瘟疫之地",
+     "startItem": null,
+     "preQuest": "雷克萨的证明",
+     "source": "wclbox",
+     "variants": 1
+    },
+    {
+     "nameCn": "黑龙勇士之血",
+     "questLevel": 60,
+     "reqLevel": 55,
+     "xp": 9950,
+     "pickupNpc": "雷克萨",
+     "pickupZone": "菲拉斯",
+     "startItem": null,
+     "preQuest": "晋升……",
+     "source": "wclbox",
+     "variants": 1
+    }
+   ],
+   "questItems": [
+    {
+     "itemCn": "第五块摩沙鲁石板",
+     "from": "第五块摩沙鲁石板",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "itemCn": "第六块摩沙鲁石板",
+     "from": "第六块摩沙鲁石板",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "itemCn": "笼中的座狼幼崽",
+     "from": "—",
+     "quest": "基布雷尔的特殊宠物",
+     "faction": null
+    },
+    {
+     "itemCn": "尖塔蜘蛛卵 ×15",
+     "from": "尖塔蜘蛛卵，尖塔蜘蛛卵",
+     "quest": "蜘蛛卵",
+     "faction": null
+    },
+    {
+     "itemCn": "比修的装置",
+     "from": "比修的装置",
+     "quest": "比修的装置",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比修的侦察报告",
+     "from": "—",
+     "quest": "比修的侦察报告",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比修的装置",
+     "from": "比修的装置",
+     "quest": "比修的装置",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "比修的情报",
+     "from": "—",
+     "quest": "给麦克斯韦尔的消息",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "龙蛋冷冻器初号机",
+     "from": "—",
+     "quest": "冷冻龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "收集到的龙蛋 ×8",
+     "from": "—",
+     "quest": "收集龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "电动采集模块",
+     "from": "—",
+     "quest": "收集龙蛋",
+     "faction": null
+    },
+    {
+     "itemCn": "铸造好的晋升印章",
+     "from": "晋升徽记",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "itemCn": "末日扣环",
+     "from": "末日扣环之箱",
+     "quest": "末日扣环",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "瑞治维尔的箱子",
+     "from": "—",
+     "quest": "瑞治维尔的箱子",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "黑暗石板",
+     "from": "黑暗石板",
+     "quest": "黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "雷德·黑手的头颅",
+     "from": "大酋长雷德·黑手",
+     "quest": "为部落而战！",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "比斯巨兽的发光肉块",
+     "from": "—",
+     "quest": "皮普·急智，为您效劳！",
+     "faction": null
+    },
+    {
+     "itemCn": "达基萨斯将军的命令",
+     "from": "维姆萨拉克",
+     "quest": "达基萨斯将军的命令",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "穿魂长矛",
+     "from": "—",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "itemCn": "未铸造的符文覆饰胸甲",
+     "from": "未铸成的符文胸甲",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "itemCn": "奥比的鳞片",
+     "from": "—",
+     "quest": "监护者",
+     "faction": null
+    },
+    {
+     "itemCn": "黑龙勇士之血",
+     "from": "达基萨斯将军",
+     "quest": "龙火护符",
+     "faction": "联盟"
+    },
+    {
+     "itemCn": "黑色龙兽的眼球 ×20",
+     "from": "狂爪龙人，维姆萨拉克，狂爪火鳞龙人等",
+     "quest": "黑龙幻象",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "黑龙勇士之血",
+     "from": "达基萨斯将军",
+     "quest": "黑龙勇士之血",
+     "faction": "部落"
+    },
+    {
+     "itemCn": "瓦塔拉克饰品的左瓣",
+     "from": "莫尔·灰蹄，伊萨莉恩，亚雷恩等",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的左瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "召唤火盆",
+     "from": "—",
+     "quest": "瓦塔拉克饰品的右瓣",
+     "faction": null
+    },
+    {
+     "itemCn": "瓦塔拉克饰品",
+     "from": "—",
+     "quest": "瓦塔拉克公爵",
+     "faction": null
+    }
+   ],
+   "questStarts": [
+    {
+     "npc": "勘查员詹斯·铁靴",
+     "zone": "塔纳利斯",
+     "quest": "最后的石板",
+     "faction": null
+    },
+    {
+     "npc": "基布雷尔",
+     "zone": "燃烧平原",
+     "quest": "基布雷尔的特殊宠物，蜘蛛卵",
+     "faction": null
+    },
+    {
+     "npc": "雷克斯洛特",
+     "zone": "荒芜之地",
+     "quest": "狡猾的比修",
+     "faction": "部落"
+    },
+    {
+     "npc": "比修",
+     "zone": "黑石塔",
+     "quest": "比修的装置，比修的侦察报告，比修的装置，给麦克斯韦尔的消息",
+     "faction": null
+    },
+    {
+     "npc": "丁奇·斯迪波尔",
+     "zone": "燃烧平原",
+     "quest": "冷冻龙蛋，收集龙蛋",
+     "faction": null
+    },
+    {
+     "npc": "维埃兰",
+     "zone": "—",
+     "quest": "晋升印章",
+     "faction": null
+    },
+    {
+     "npc": "玛亚拉·布莱特文",
+     "zone": "燃烧平原",
+     "quest": "末日扣环，瑞治维尔的箱子",
+     "faction": "联盟"
+    },
+    {
+     "npc": "雷明顿·瑞治维尔伯爵",
+     "zone": "暴风城",
+     "quest": "玛亚拉·布莱特文",
+     "faction": "联盟"
+    },
+    {
+     "npc": "暗法师薇薇安·拉格雷",
+     "zone": "荒芜之地",
+     "quest": "黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "npc": "药剂师金格",
+     "zone": "幽暗城",
+     "quest": "薇薇安·拉格雷和黑暗石板",
+     "faction": "部落"
+    },
+    {
+     "npc": "狼狈不堪的约翰",
+     "zone": "燃烧平原",
+     "quest": "蛛后的乳汁",
+     "faction": null
+    },
+    {
+     "npc": "菲诺克",
+     "zone": "冬泉谷",
+     "quest": "丁奇·斯迪波尔",
+     "faction": null
+    },
+    {
+     "npc": "萨尔",
+     "zone": "奥格瑞玛",
+     "quest": "为部落而战！",
+     "faction": "部落"
+    },
+    {
+     "npc": "皮普·急智",
+     "zone": "—",
+     "quest": "皮普·急智，为您效劳！",
+     "faction": null
+    },
+    {
+     "npc": "达基萨斯将军的命令",
+     "zone": "—",
+     "quest": "达基萨斯将军的命令",
+     "faction": "联盟"
+    },
+    {
+     "npc": "麦克斯韦尔元帅",
+     "zone": "燃烧平原",
+     "quest": "达基萨斯将军之死",
+     "faction": "联盟"
+    },
+    {
+     "npc": "罗拉克斯",
+     "zone": "冬泉谷",
+     "quest": "恶魔熔炉",
+     "faction": null
+    },
+    {
+     "npc": "奥比",
+     "zone": "黑石塔",
+     "quest": "监护者",
+     "faction": null
+    },
+    {
+     "npc": "哈尔琳",
+     "zone": "冬泉谷",
+     "quest": "龙火护符",
+     "faction": "联盟"
+    },
+    {
+     "npc": "巫女麦兰达",
+     "zone": "西瘟疫之地",
+     "quest": "黑龙幻象",
+     "faction": "部落"
+    },
+    {
+     "npc": "雷克萨",
+     "zone": "菲拉斯",
+     "quest": "黑龙勇士之血",
+     "faction": "部落"
+    },
+    {
+     "npc": "黑手的命令",
+     "zone": "—",
+     "quest": "黑手的命令",
+     "faction": null
+    },
+    {
+     "npc": "伯德雷",
+     "zone": "—",
+     "quest": "瓦塔拉克饰品的左瓣，瓦塔拉克饰品的右瓣，瓦塔拉克公爵",
+     "faction": null
+    }
+   ],
+   "summary": {
+    "faction": "联盟",
+    "questCount": 23,
+    "xpTotal": 162000,
+    "note": "该站自报的汇总，本站只列它给的数"
+   },
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire",
+     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "checkedAt": "2026-10-13"
+    }
+   ]
+  }
+ }
+}

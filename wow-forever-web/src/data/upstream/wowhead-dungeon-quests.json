@@ -24,10 +24,78 @@
    "usable": true,
    "usableNote": "四条都有正式中文串、都标 new，条数与本内首领量级相符，可按座收录",
    "quests": [
-    {"id": 96393, "name": "旧铁炉堡入侵", "nameEn": "Old Ironforge Incursion", "questLevel": 16, "reqLevel": 9, "xp": 1450, "moneyCopper": 800, "side": 1, "rewardItemIds": [279894, 279895, 279896], "reputationIds": [47, 54], "wowheadChange": "new"},
-    {"id": 96394, "name": "永不安息的亡者", "nameEn": "The Restless Dead", "questLevel": 15, "reqLevel": 10, "xp": 1050, "moneyCopper": 700, "side": 1, "rewardItemIds": [279897, 280095], "reputationIds": [47], "wowheadChange": "new"},
-    {"id": 96395, "name": "远古的宿怨", "nameEn": "An Ancient Grudge", "questLevel": 15, "reqLevel": 10, "xp": 1050, "moneyCopper": 0, "side": 0, "rewardItemIds": [279899, 279900], "reputationIds": [], "wowheadChange": "new"},
-    {"id": 96403, "name": "重要的传家宝", "nameEn": "Important Heirlooms", "questLevel": 15, "reqLevel": 10, "xp": 1350, "moneyCopper": 700, "side": 1, "rewardItemIds": [279898, 280096], "reputationIds": [369], "wowheadChange": "new"}
+    {
+     "id": 96393,
+     "name": "旧铁炉堡入侵",
+     "nameEn": "Old Ironforge Incursion",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "moneyCopper": 800,
+     "side": 1,
+     "rewardItemIds": [
+      279894,
+      279895,
+      279896
+     ],
+     "reputationIds": [
+      47,
+      54
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 96394,
+     "name": "永不安息的亡者",
+     "nameEn": "The Restless Dead",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1050,
+     "moneyCopper": 700,
+     "side": 1,
+     "rewardItemIds": [
+      279897,
+      280095
+     ],
+     "reputationIds": [
+      47
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 96395,
+     "name": "远古的宿怨",
+     "nameEn": "An Ancient Grudge",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1050,
+     "moneyCopper": 0,
+     "side": 0,
+     "rewardItemIds": [
+      279899,
+      279900
+     ],
+     "reputationIds": [],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 96403,
+     "name": "重要的传家宝",
+     "nameEn": "Important Heirlooms",
+     "questLevel": 15,
+     "reqLevel": 10,
+     "xp": 1350,
+     "moneyCopper": 700,
+     "side": 1,
+     "rewardItemIds": [
+      279898,
+      280096
+     ],
+     "reputationIds": [
+      369
+     ],
+     "wowheadChange": "new"
+    }
    ]
   },
   {
@@ -39,47 +107,315 @@
    "usable": true,
    "usableNote": "经典旧世就在的本内任务，六条全有正式中文串；四条标 unchanged、一条 updated，说明无限服没动过任务线",
    "quests": [
-    {"id": 5722, "name": "寻找背包", "nameEn": "Searching for the Lost Satchel", "questLevel": 16, "reqLevel": 9, "xp": 880, "moneyCopper": 0, "side": 2, "rewardItemIds": [], "reputationIds": [], "wowheadChange": "unchanged"},
-    {"id": 5723, "name": "试探敌人", "nameEn": "Testing an Enemy's Strength", "questLevel": 15, "reqLevel": 9, "xp": 1050, "moneyCopper": 700, "side": 2, "rewardItemIds": [], "reputationIds": [81], "wowheadChange": "unchanged"},
-    {"id": 5724, "name": "归还背包", "nameEn": "Returning the Lost Satchel", "questLevel": 16, "reqLevel": 9, "xp": 1450, "moneyCopper": 0, "side": 2, "rewardItemIds": [15452, 15453, 270003], "reputationIds": [81], "wowheadChange": "updated"},
-    {"id": 5725, "name": "毁灭之力", "nameEn": "The Power to Destroy...", "questLevel": 16, "reqLevel": 9, "xp": 1450, "moneyCopper": 0, "side": 2, "rewardItemIds": [15449, 15450, 15451], "reputationIds": [68], "wowheadChange": "unchanged"},
-    {"id": 5728, "name": "隐藏的敌人", "nameEn": "Hidden Enemies", "questLevel": 16, "reqLevel": 9, "xp": 1150, "moneyCopper": 800, "side": 2, "rewardItemIds": [], "reputationIds": [76], "wowheadChange": "unchanged"},
-    {"id": 5761, "name": "饥饿者塔拉加曼", "nameEn": "Slaying the Beast", "questLevel": 16, "reqLevel": 9, "xp": 1150, "moneyCopper": 800, "side": 2, "rewardItemIds": [], "reputationIds": [], "wowheadChange": "unchanged"}
+    {
+     "id": 5722,
+     "name": "寻找背包",
+     "nameEn": "Searching for the Lost Satchel",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 880,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [],
+     "reputationIds": [],
+     "wowheadChange": "unchanged"
+    },
+    {
+     "id": 5723,
+     "name": "试探敌人",
+     "nameEn": "Testing an Enemy's Strength",
+     "questLevel": 15,
+     "reqLevel": 9,
+     "xp": 1050,
+     "moneyCopper": 700,
+     "side": 2,
+     "rewardItemIds": [],
+     "reputationIds": [
+      81
+     ],
+     "wowheadChange": "unchanged"
+    },
+    {
+     "id": 5724,
+     "name": "归还背包",
+     "nameEn": "Returning the Lost Satchel",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      15452,
+      15453,
+      270003
+     ],
+     "reputationIds": [
+      81
+     ],
+     "wowheadChange": "updated"
+    },
+    {
+     "id": 5725,
+     "name": "毁灭之力",
+     "nameEn": "The Power to Destroy...",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1450,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      15449,
+      15450,
+      15451
+     ],
+     "reputationIds": [
+      68
+     ],
+     "wowheadChange": "unchanged"
+    },
+    {
+     "id": 5728,
+     "name": "隐藏的敌人",
+     "nameEn": "Hidden Enemies",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1150,
+     "moneyCopper": 800,
+     "side": 2,
+     "rewardItemIds": [],
+     "reputationIds": [
+      76
+     ],
+     "wowheadChange": "unchanged"
+    },
+    {
+     "id": 5761,
+     "name": "饥饿者塔拉加曼",
+     "nameEn": "Slaying the Beast",
+     "questLevel": 16,
+     "reqLevel": 9,
+     "xp": 1150,
+     "moneyCopper": 800,
+     "side": 2,
+     "rewardItemIds": [],
+     "reputationIds": [],
+     "wowheadChange": "unchanged"
+    }
+   ]
+  },
+  {
+   "zoneId": 16611,
+   "wowheadNameEn": "Ruins of Lordaeron",
+   "matchedDungeonId": "ruins-of-lordaeron",
+   "url": "https://www.wowhead.com/forever/zone=16611/ruins-of-lordaeron",
+   "questCount": 15,
+   "usable": true,
+   "usableNote": "15 条里 5 条是方括号未记录串（92415 / 92459 / 95189 / 95195 / 97287），已丢；剩下 10 条有正式中文串，可用。其中 97288 / 97289 / 97291 / 97292 是同名「无尽的折磨」的四个不同任务号。",
+   "quests": [
+    {
+     "id": 92401,
+     "name": "惊恐的求援",
+     "nameEn": "A Frightened Request",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      251485,
+      251486
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 92421,
+     "name": "圣光的正义",
+     "nameEn": "Light's Justice",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "moneyCopper": 4500,
+     "side": 2,
+     "rewardItemIds": [
+      279874,
+      279875
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 92422,
+     "name": "拉斯玛尔之怒",
+     "nameEn": "The Wrath of Rath'mael",
+     "questLevel": 22,
+     "reqLevel": 15,
+     "xp": 2200,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      251533,
+      251534
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 95204,
+     "name": "洛丹伦纹章",
+     "nameEn": "Crest of Lordaeron",
+     "questLevel": 22,
+     "reqLevel": 16,
+     "xp": 2600,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      280567
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 95216,
+     "name": "新的瘟疫",
+     "nameEn": "The New Plague",
+     "questLevel": 22,
+     "reqLevel": 16,
+     "xp": 2600,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [
+      279876,
+      279877
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 95250,
+     "name": "憎恶生物",
+     "nameEn": "Abominable Creatures",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "moneyCopper": 0,
+     "side": 1,
+     "rewardItemIds": [
+      279864,
+      279865,
+      279867
+     ],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 97288,
+     "name": "无尽的折磨",
+     "nameEn": "Unending Torment",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "moneyCopper": 0,
+     "side": 2,
+     "rewardItemIds": [],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 97289,
+     "name": "无尽的折磨",
+     "nameEn": "Unending Torment",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "moneyCopper": 1300,
+     "side": 2,
+     "rewardItemIds": [],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 97291,
+     "name": "无尽的折磨",
+     "nameEn": "Unending Torment",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "moneyCopper": 1300,
+     "side": 2,
+     "rewardItemIds": [],
+     "wowheadChange": "new"
+    },
+    {
+     "id": 97292,
+     "name": "无尽的折磨",
+     "nameEn": "Unending Torment",
+     "questLevel": 21,
+     "reqLevel": 16,
+     "xp": 1650,
+     "moneyCopper": 1300,
+     "side": 2,
+     "rewardItemIds": [],
+     "wowheadChange": "new"
+    }
    ]
   }
  ],
  "collectedButNotUsable": [
   {
-   "zoneId": 16611, "matchedDungeonId": "ruins-of-lordaeron", "questCount": 15,
-   "whyNot": "15 条里 6 条是方括号未记录串（[Remember That I Love You] / [Friend of the Kirin Tor] / [Crest of Lordaeron] / [Bloodied Insignia] / [Shrewd Negotiations]），且 97288 / 97289 / 97291 / 97292 四条同名「无尽的折磨」是同一任务的不同版本，去重规则还没定"
-  },
-  {
-   "zoneId": 16732, "matchedDungeonId": "whelgars-excavation", "questCount": 14,
+   "zoneId": 16732,
+   "matchedDungeonId": "whelgars-excavation",
+   "questCount": 14,
    "whyNot": "14 条里 13 条是方括号未记录串，只有 98823「大地的回音」有正式中文名。基本等于没有"
   },
   {
-   "zoneId": 16544, "matchedDungeonId": "city-of-dalaran", "questCount": 8,
+   "zoneId": 16544,
+   "matchedDungeonId": "city-of-dalaran",
+   "questCount": 8,
    "whyNot": "8 条里 4 条方括号；另有 16560 同号重名的第二个达拉然区域，条目 n=0，两座哪个算本站这座还没对上"
   },
   {
-   "zoneId": 718, "matchedDungeonId": "wailing-caverns", "questCount": 13,
+   "zoneId": 718,
+   "matchedDungeonId": "wailing-caverns",
+   "questCount": 13,
    "whyNot": "区域任务含本外前置链与猎人/专业专属任务（如 1489/1490 是给单个职业的小任务、7944 是 60 级的兄弟会任务），不能整片当「哀嚎洞穴的本内任务」"
   },
   {
-   "zoneId": 1584, "matchedDungeonId": "blackrock-depths", "questCount": 64,
+   "zoneId": 1584,
+   "matchedDungeonId": "blackrock-depths",
+   "questCount": 64,
    "whyNot": "64 条里含 12 条同名「告别安泰恩」的不同职业版本、5 条兄弟会好感捐献任务、以及 <NYI> <TXT> / <UNUSED> 占位串（4299、4295 等级为 1 的废条目）。要先定清洗规则"
   },
   {
-   "zoneId": 2557, "matchedDungeonId": "dire-maul-east/north/west", "questCount": 46,
+   "zoneId": 2557,
+   "matchedDungeonId": "dire-maul-east/north/west",
+   "questCount": 46,
    "whyNot": "一个区域盖住我们拆开的三座（东/北/西），任务归不到具体那一座；且含大量专业与声望线任务"
   },
   {
-   "zoneId": 2017, "matchedDungeonId": "stratholme-main-gate/service-gate", "questCount": 20,
+   "zoneId": 2017,
+   "matchedDungeonId": "stratholme-main-gate/service-gate",
+   "questCount": 20,
    "whyNot": "同上：一个区域两座门；6201 是 <UNUSED> 串"
   },
-  {"zoneId": 796, "matchedDungeonId": "scarlet-monastery 四座", "questCount": 8, "whyNot": "一个区域四座本，归不到具体那一座"},
-  {"zoneId": 719, "matchedDungeonId": "blackfathom-deeps", "questCount": 0, "whyNot": "该站这个区域一条任务都没有"},
-  {"zoneId": 1417, "matchedDungeonId": "sunken-temple", "questCount": 0, "whyNot": "1417 与 1477 两个号都指阿塔哈卡神庙，1417 空、1477 有 11 条，得先定用哪个"}
+  {
+   "zoneId": 796,
+   "matchedDungeonId": "scarlet-monastery 四座",
+   "questCount": 8,
+   "whyNot": "一个区域四座本，归不到具体那一座"
+  },
+  {
+   "zoneId": 719,
+   "matchedDungeonId": "blackfathom-deeps",
+   "questCount": 0,
+   "whyNot": "该站这个区域一条任务都没有"
+  },
+  {
+   "zoneId": 1417,
+   "matchedDungeonId": "sunken-temple",
+   "questCount": 0,
+   "whyNot": "1417 与 1477 两个号都指阿塔哈卡神庙，1417 空、1477 有 11 条，得先定用哪个"
+  }
  ],
- "notOnWowhead": ["the-drowned-city", "kroldok-stronghold", "alcaz-prison", "blackmaw-hold", "shapers-terrace", "barrow-deeps", "onyxias-lair"]
+ "notOnWowhead": [
+  "the-drowned-city",
+  "kroldok-stronghold",
+  "alcaz-prison",
+  "blackmaw-hold",
+  "shapers-terrace",
+  "barrow-deeps",
+  "onyxias-lair"
+ ]
 }
