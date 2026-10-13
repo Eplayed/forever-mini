@@ -937,8 +937,11 @@ const SK = {
   chg: ['客户端改动', 'updates.html', 'q'],
   term: ['中英术语', 'glossary.html', 'q'],
   abl: ['技能四态', 'skills.html', 'q'],
-  dun: ['副本', 'dungeons.html', ''],
-  boss: ['副本首领', 'dungeons.html', ''],
+  // 2026-10-13 副本线加了"每座本一页"（dungeon.html?d=<本>）：搜到一座本或一个首领，
+  // 直接落到那一座的整页，不再落到列表页等人在一堆卡里自己找。
+  // 跳转参数仍由条目自己带（见下面 sPush），这里只换落在哪一页。
+  dun: ['副本', 'dungeon.html', ''],
+  boss: ['副本首领', 'dungeon.html', ''],
   rdd: ['团本', 'raids.html', 'q'],
   zone: ['区域', 'world.html', 'q'],
   rare: ['稀有精英', 'world.html', 'q'],
@@ -1011,7 +1014,8 @@ gl.items.forEach((x) => {
   const kindCn = d.kind === 'raid' ? '团队副本' : d.kind === 'new' ? '无限新增' : '经典本';
   sPush('dun', d.nameCn || d.nameEn, kindCn + ' · ' + (d.levelRange || '区间未定'), 'd=' + d.id, d.level);
   (d.bosses || []).forEach((b) => {
-    sPush('boss', b.nameCn || b.nameEn, d.nameCn || d.nameEn || '', 'd=' + d.id, b.level);
+    // 带上首领自己的编号：落地后详情页会滚到那个首领那一栏，不用人在整页里再找一次
+    sPush('boss', b.nameCn || b.nameEn, d.nameCn || d.nameEn || '', 'd=' + d.id + '&b=' + b.id, b.level);
   });
 });
 // 团本条目进索引：客户端里的名字是英文原文，本站还没有中文名，搜英文要能跳进来

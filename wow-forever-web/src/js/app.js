@@ -111,6 +111,10 @@
     var f = href.replace('.html', '').split('#')[0];
     return f === 'index' ? 'home' : f;
   }
+  /* 详情页不给自己的导航项：副本详情（dungeon.html）仍然亮着列表页那一格「副本」，
+     不然点进一座本之后导航整条都不认得你在哪儿了。加一页"某类东西的一页"就进这张表。 */
+  var NAV_OF = { dungeon: 'dungeons' };
+  function navPage() { return NAV_OF[page] || page; }
   /* 图标格：有本地转存的官方图标就显示图，没有就显示自绘占位块。
      占位块垫在图后面，图加载失败（onerror 换类名）时自动露出来，不留空白。 */
   function iconCell(ic, seed, cn, small) {
@@ -224,7 +228,7 @@
     var left = launchLeft();
     // 一级是分组标签（只说明归属，不可点），二级项全部平铺：玩家不用点开菜单就知道这站有什么
     function navLink(it) {
-      return '<a class="nl' + (page === navKey(it.href) ? ' on' : '') + '" href="' + it.href +
+      return '<a class="nl' + (navPage() === navKey(it.href) ? ' on' : '') + '" href="' + it.href +
         '" title="' + D.esc(it.d) + '">' + it.t + '</a>';
     }
     el('top').innerHTML =
@@ -241,7 +245,7 @@
       '<nav class="main" aria-label="主导航"><div class="in">' + NAV.map(function (g, i) {
         // 上下两级：组名一块、它的入口排在下面，组与组靠竖分隔与组色区分（见 app.css .ngrp）
         if (g.href) return '<span class="ngrp solo"><span class="ngi">' + navLink(g) + '</span></span>';
-        var hit = g.items.some(function (it) { return page === navKey(it.href); });
+        var hit = g.items.some(function (it) { return navPage() === navKey(it.href); });
         return '<span class="ngrp g' + i + (hit ? ' hit' : '') + '" role="group" aria-label="' +
           D.esc(g.t) + '"><b class="ngt">' + g.t + '</b><span class="ngi">' +
           g.items.map(navLink).join('') + '</span></span>';
@@ -1594,133 +1598,228 @@
     for (var i = 0; i < DUN_BANDS.length; i++) if (s >= DUN_BANDS[i][0] && s <= DUN_BANDS[i][1]) return i;
     return null;
   }
+  /* ---------- 副本手册：列表页 + 每座本一页 ----------
+     2026-10-13 按站主给的参考站（副本列表 + 副本详情）改版。列表页卡面上只留"挑一座"要看
+     的四件事：原画横幅与等级区间、首领数、掉落件数、一次几人。两源分歧与"客户端还排不到"
+     那几行从卡面收进速览抽屉与详情页——收进去不是删掉：红线要求的"两个数都摆""缺数据直说"
+     两处都在，test_dungeon_data 仍然按数据逐条数这些标注的数量。 */
+  var DUN = { list: [], ART: {}, f: { lv: '', kind: 'all' } };
+  function dunRange(x) {
+    var m = String(x.levelRange || '').match(/(\d+)\D+(\d+)/);
+    return m ? [parseInt(m[1], 10), parseInt(m[2], 10)] : null;
+  }
+  function dunLvMatch(x, lv) {
+    var r = dunRange(x);
+    return !!r && lv >= r[0] && lv <= r[1];
+  }
+  function dunSort(a, b) {
+    var ra = dunRange(a) || [99, 99], rb = dunRange(b) || [99, 99];
+    if (ra[0] !== rb[0]) return ra[0] - rb[0];
+    if (ra[1] !== rb[1]) return ra[1] - rb[1];
+    return String(a.nameCn || a.nameEn || '').localeCompare(String(b.nameCn || b.nameEn || ''));
+  }
+  /* 一座本上有几处"两个来源说法不一样"，逐条攒成数组：列表页的抽屉与详情页共用这一份措辞，
+     不在两处各写一遍，免得改了这边忘了那边。 */
+  function dunConf(x) {
+    var out = [];
+    var cli = x.levelRangeClient, alt = x.levelRangeAlt;
+    if (cli && alt && cli === alt) {
+      out.push('等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
+        + '客户端的队伍查找器与副本卡片都写「' + D.esc(cli) + '」，待定稿');
+    } else if (cli && alt) {
+      out.push('等级区间有三种说法：本站取「' + D.esc(x.levelRange || '还没核') + '」（官方公告），'
+        + '另一份资料写「' + D.esc(alt) + '」，客户端的队伍查找器写「' + D.esc(cli) + '」，都留着待定稿');
+    } else if (cli) {
+      out.push('等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」，'
+        + '客户端的队伍查找器写「' + D.esc(cli) + '」，两个都留着');
+    } else if (alt) {
+      out.push('等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」（官方公告），'
+        + '另一份资料写「' + D.esc(alt) + '」，待定稿');
+    }
+    if (x.partySizeAlt) {
+      out.push('客户端的队伍查找器里它另有一条 ' + x.partySizeAlt +
+        ' 人的排队条目，与本站的 ' + x.partySize + ' 人并列，是不是同一个本两种规模要实测');
+    }
+    if (x.nameEnClient) {
+      out.push('英文原名两说：本站写「' + D.esc(x.nameEn) + '」，'
+        + '客户端写「' + D.esc(x.nameEnClient) + '」');
+    }
+    if (x.nameCnConflict) {
+      out.push('译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
+        D.esc(x.nameCnConflict) + '」，待定稿');
+    }
+    return out;
+  }
+  function dunConfHtml(x) {
+    return dunConf(x).map(function (t) { return '<div class="conf">' + t + '</div>'; }).join('');
+  }
+  function dunNoQueue(x) {
+    return x.clientActivityId ? '' : '<div class="note">客户端的队伍查找器里还没有这座本，'
+      + '所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>';
+  }
+  function dunBandBlock(title, sub, rows) {
+    if (!rows.length) return '';
+    return '<div class="band"><b>' + title + '</b>' + (sub ? '<span class="dim">' + sub + '</span>' : '') +
+      '<span class="dim mono">' + rows.length + ' 座</span></div>' +
+      '<div class="dgrid">' + rows.map(dunCard).join('') + '</div>';
+  }
+  function dunCard(x) {
+    var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
+      x.nameCn || x.nameEn || '未定名',
+      { kind: x.kind, sub: x.zoneCn || ((x.nameCn && x.nameEn) ? x.nameEn : ''),
+        art: x.art || (DUN.ART.dungeons || {})[x.id] || null,
+        seal: x.kind === 'new' ? '新' : null,
+        range: x.levelRange ? x.levelRange + ' 级' : null }) : '';
+    var nm = D.esc(x.nameCn || x.nameEn || '这座本');
+    return '<div class="dcard2">' + banner +
+      '<div class="dmeta">' +
+      '<span>' + ((x.bosses || []).length ? (x.bosses || []).length + ' 个首领' : '首领待补') + '</span>' +
+      '<span>' + ((x.drops || []).length ? (x.drops || []).length + ' 件掉落' : '掉落待补') + '</span>' +
+      (x.partySize ? '<span>一次 ' + x.partySize + ' 人</span>' : '') +
+      (x.levelRange || x.levelRangeClient ? '' : '<span class="dim">等级区间待实测</span>') +
+      (x.nameCn ? '' : '<span class="dim">中文定名未公布</span>') + '</div>' +
+      '<a class="dstretch" href="dungeon.html?d=' + D.esc(x.id) + '" aria-label="看「' + nm + '」这一座的整页"></a>' +
+      '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
+      '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
+      dunConfHtml(x) + dunNoQueue(x) +
+      '<h3>首领与掉落</h3>' + dunLoot(x) +
+      '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
+      '<a class="cta-cut" href="dungeon.html?d=' + D.esc(x.id) + '">看这一座的整页 →</a>' +
+      '</div></div>';
+  }
+  // 筛选只重画卡片那一段，不重新加载数据
+  function dunListHtml() {
+    var lv = parseInt(DUN.f.lv, 10) || 0, k = DUN.f.kind;
+    var rows = DUN.list.filter(function (x) {
+      if (k === 'new' && x.kind !== 'new') return false;
+      if (k === 'classic' && x.kind === 'new') return false;
+      if (lv && !dunLvMatch(x, lv)) return false;
+      return true;
+    });
+    var head = lv ? '<p class="dim">' + lv + ' 级落在 ' + rows.length +
+      ' 座本的等级区间里。区间用本站采用的那个数，另有 ' +
+      rows.filter(function (x) { return x.levelRangeClient || x.levelRangeAlt; }).length +
+      ' 座有两种说法，展开卡片里的速览看两个数。</p>' : '';
+    var bands = DUN_BANDS.map(function (b, i) {
+      return dunBandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2],
+        rows.filter(function (x) { return dunBand(x) === i; }).sort(dunSort));
+    }).join('') +
+      dunBandBlock('区间未定', '', rows.filter(function (x) { return dunBand(x) === null; }));
+    var which = k === 'new' ? '无限新增的' : (k === 'classic' ? '经典旧世的' : '');
+    return head + (bands || '<p class="empty">' + (lv ? lv + ' 级还没有对得上的' + which + '地下城。'
+      : '这一类还没有本。') + '换一个等级或切回"全部"再看看。</p>');
+  }
+  function bindDunCards() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (b) {
+      var label = b.textContent;
+      b.onclick = function () {
+        var x = el('d-' + b.dataset.d);
+        x.style.display = x.style.display === 'none' ? 'block' : 'none';
+        b.textContent = x.style.display === 'none' ? label : '收起';
+      };
+    });
+  }
+  function drawDunList() {
+    var n = el('dlist');
+    if (!n) return;
+    n.innerHTML = dunListHtml();
+    bindDunCards();
+  }
+  function bindDunBar() {
+    var pick = el('dpick');
+    if (pick) pick.onchange = function () {
+      if (pick.value) location.href = 'dungeon.html?d=' + encodeURIComponent(pick.value);
+    };
+    var lv = el('dlv');
+    function pushLv() {
+      var v = parseInt(lv.value, 10);
+      DUN.f.lv = (v >= 1 && v <= 70) ? String(v) : '';
+      drawDunList();
+    }
+    if (lv) { lv.oninput = pushLv; }
+    Array.prototype.forEach.call(document.querySelectorAll('.fchip'), function (b) {
+      b.onclick = function () {
+        DUN.f.kind = b.dataset.k;
+        Array.prototype.forEach.call(document.querySelectorAll('.fchip'), function (o) {
+          o.classList.toggle('on', o === b);
+        });
+        drawDunList();
+      };
+    });
+    var clr = el('dlvc');
+    if (clr) clr.onclick = function () {
+      DUN.f.lv = ''; if (lv) lv.value = ''; drawDunList();
+    };
+  }
   function dungeons() {
     Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; }),
       D.load('data/queue.json').catch(function () { return {}; })])
       .then(function (rs) {
       var d = rs[0], ART = rs[1] || {}, QU = rs[2] || {};
-      var all = [].concat(d.newDungeons || [], d.classicDungeons || [], d.raids || []);
+      DUN.ART = ART;
+      DUN.list = [].concat(d.newDungeons || [], d.classicDungeons || []);
+      var all = DUN.list.concat(d.raids || []);
       var nb = all.reduce(function (s, x) { return s + (x.bosses || []).length; }, 0);
       var nd = all.reduce(function (s, x) { return s + (x.drops || []).length; }, 0);
       var nParty = all.filter(function (x) { return x.partySize; }).length;
       var nTwo = all.filter(function (x) { return x.levelRangeClient || x.partySizeAlt || x.nameEnClient; }).length;
-        /* 下面这几段 .conf 不是"备注文案"，是红线要求的两源分歧标注：同一座本的等级区间、
-           排队人数、英文原名在官方公告 / 参考站 / 客户端排队表里说法不一致，两个都得摆出来。
-           2026-10-12 撤掉的是卡片上的分级徽标与逐条来源，不是这些分歧本身。 */
-        function rangeNote(x) {
-          var cli = x.levelRangeClient, alt = x.levelRangeAlt;
-          if (!cli && !alt) return '';
-          if (cli && alt && cli === alt) {
-            return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
-              + '客户端的队伍查找器与副本卡片都写「' + D.esc(cli) + '」，待定稿</div>';
-          }
-          if (cli && alt) {
-            return '<div class="conf">等级区间有三种说法：本站取「' + D.esc(x.levelRange || '还没核') + '」（官方公告），'
-              + '另一份资料写「' + D.esc(alt) + '」，客户端的队伍查找器写「' + D.esc(cli) + '」，都留着待定稿</div>';
-          }
-          if (cli) {
-            return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」，'
-              + '客户端的队伍查找器写「' + D.esc(cli) + '」，两个都留着</div>';
-          }
-          return '<div class="conf">等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
-            + '另一份资料写「' + D.esc(alt) + '」，待定稿</div>';
-        }
-        function card(x) {
-          var banner = window.Glyph ? Glyph.dungeonBanner(x.id,
-            x.nameCn || x.nameEn || '未定名',
-            { kind: x.kind, sub: x.zoneCn || ((x.nameCn && x.nameEn) ? x.nameEn : ''),
-              art: x.art || (ART.dungeons || {})[x.id] || null,
-              seal: x.kind === 'new' ? '新' : null,
-              range: x.levelRange ? x.levelRange + ' 级' : null }) : '';
-          return '<div class="dcard2">' + banner +
-            '<div class="dmeta">' +
-            '<span>' + ((x.bosses || []).length || '待补') + ' 个首领</span>' +
-            '<span>' + ((x.drops || []).length ? (x.drops || []).length + ' 件掉落' : '掉落待补') + '</span>' +
-            (x.partySize ? '<span>一次 ' + x.partySize + ' 人</span>' : '') +
-            (x.levelRange || x.levelRangeClient ? '' : '<span class="dim">等级区间待实测</span>') +
-            (x.nameCn ? '' : '<span class="dim">中文定名未公布</span>') + '</div>' +
-            rangeNote(x) +
-            (x.partySizeAlt ? '<div class="conf">客户端的队伍查找器里它另有一条 ' + x.partySizeAlt +
-              ' 人的排队条目，与本站的 ' + x.partySize + ' 人并列，是不是同一个本两种规模要实测</div>' : '') +
-            (x.nameEnClient ? '<div class="conf">英文原名两说：本站写「' + D.esc(x.nameEn) + '」，'
-              + '客户端写「' + D.esc(x.nameEnClient) + '」</div>' : '') +
-            (x.nameCnConflict ? '<div class="conf">译名冲突：官方写「' + D.esc(x.nameCn) + '」，转载写作「' +
-              D.esc(x.nameCnConflict) + '」，待定稿</div>' : '') +
-            (!x.clientActivityId ? '<div class="note">客户端的队伍查找器里还没有这座本，'
-              + '所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>' : '') +
-            '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
-            '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
-            '<h3>首领与掉落</h3>' + dunLoot(x) +
-            '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') + '</div></div>';
-        }
-        function bandBlock(title, sub, rows) {
-          if (!rows.length) return '';
-          return '<div class="band"><b>' + title + '</b>' + (sub ? '<span class="dim">' + sub + '</span>' : '') +
-            '<span class="dim mono">' + rows.length + ' 座</span></div>' +
-            '<div class="dgrid">' + rows.map(card).join('') + '</div>';
-        }
-        // 客户端的队伍查找器里现在能排到、本站还没有首领与掉落名单的那些：按名字归并，
-        // 同一个本在客户端里挂两条（比如两种规模）只说一次，免得看着像两座本
-        function queueBand() {
-          var rows = (QU.items || []).filter(function (x) { return !x.matchedId; });
-          if (!rows.length) return '';
-          var g = {}, order = [];
-          rows.forEach(function (x) {
-            var k = x.nameEn;
-            if (!g[k]) {
-              g[k] = { nameEn: k, kind: x.kind, levelRange: x.levelRange, sizes: [], n: 0, prov: x.provenance || [] };
-              order.push(k);
-            }
-            g[k].n += 1;
-            if (x.partySize && g[k].sizes.indexOf(x.partySize) < 0) g[k].sizes.push(x.partySize);
-          });
-          var items = order.map(function (k) { return g[k]; });
-          function table(list) {
-            return '<table class="entab"><thead><tr><th>客户端里的名字</th><th>排队等级</th>'
-              + '<th>一次几人</th><th>客户端记了几条</th></tr></thead><tbody>' +
-              list.map(function (x) {
-                return '<tr><td><b>' + D.esc(x.nameEn) + '</b><span class="dim">　中文定名未公布</span></td>'
-                  + '<td class="mono">' + D.esc(x.levelRange) + ' 级</td>'
-                  + '<td class="mono">' + (x.sizes.length ? x.sizes.join(' / ') + ' 人' : '未标') + '</td>'
-                  + '<td class="mono">' + x.n + (x.n > 1
-                    ? (x.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）') : '') + '</td></tr>';
-              }).join('') + '</tbody></table>';
-          }
-          var dun = items.filter(function (x) { return x.kind === 'dungeon'; });
-          var raid = items.filter(function (x) { return x.kind === 'raid'; });
-          return '<div class="card" id="queue"><h2>能排到队、还没有名单的本</h2>'
-            + (dun.length ? '<h3>地下城</h3>' + table(dun) : '')
-            + (raid.length ? '<h3>团队副本</h3>' + table(raid) : '') + '</div>';
-        }
-        var list = (d.newDungeons || []).concat(d.classicDungeons || []);
-        var body = DUN_BANDS.map(function (b, i) {
-          var rows = list.filter(function (x) { return dunBand(x) === i; })
-            .sort(function (p, q) { return parseInt(p.levelRange, 10) - parseInt(q.levelRange, 10); });
-          return bandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2], rows);
-        }).join('') +
-          bandBlock('区间未定', '', list.filter(function (x) { return dunBand(x) === null; })) +
-          bandBlock('团队副本', '开放时间未定 · <a href="raids.html">团本那一页</a>', d.raids || []) +
-          queueBand();
-        /* 2026-10-12 站主决定：这一页只留本数、首领与掉落这些数——讲名单与区间从哪份解包来、
-           为什么不写百分比的那两段说明已删，「世界里还没有数据的」那张缺口卡也撤了。
-           但"哪几座有两种说法"必须留在首段：那是玩家决定信哪个数的依据。 */
-        set('<div class="card"><h1 class="pt">副本手册</h1><p class="dim">共 ' + all.length + ' 座：' +
-          (d.newDungeons || []).length + ' 座无限新增、' + (d.classicDungeons || []).length + ' 座经典本、' +
-          (d.raids || []).length + ' 座团本，按十级一档分。首领 ' + nb + ' 个、掉落归属 ' + nd + ' 件。' +
-          '一次几人取自客户端的队伍查找器（' + nParty + ' 座有数）。' +
-          '另有 ' + nTwo + ' 座的等级区间或人数有两种说法，两个数都摆在卡片上，不做取舍。' +
-          '掉落只回答"谁掉了什么"，不写概率。</p></div>' +
-        body);
-      Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (b) {
-        var label = b.textContent;
-        b.onclick = function () {
-          var x = el('d-' + b.dataset.d);
-          x.style.display = x.style.display === 'none' ? 'block' : 'none';
-          b.textContent = x.style.display === 'none' ? label : '收起';
-        };
+      var newN = (d.newDungeons || []).length, clN = (d.classicDungeons || []).length;
+      var lo = 99, hi = 0;
+      DUN.list.forEach(function (x) {
+        var r = dunRange(x); if (!r) return;
+        if (r[0] < lo) lo = r[0];
+        if (r[1] > hi) hi = r[1];
       });
+      function opt(x) {
+        return '<option value="' + D.esc(x.id) + '">' + D.esc(x.nameCn || x.nameEn || x.id) +
+          (x.levelRange ? '（' + D.esc(x.levelRange) + ' 级）' : '') + '</option>';
+      }
+      var picks = DUN_BANDS.map(function (b, i) {
+        var rows = DUN.list.filter(function (x) { return dunBand(x) === i; }).sort(dunSort);
+        return rows.length ? '<optgroup label="' + b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) +
+          ' 级 · ' + b[2] + '">' + rows.map(opt).join('') + '</optgroup>' : '';
+      }).join('');
+      var rest = DUN.list.filter(function (x) { return dunBand(x) === null; });
+      if (rest.length) picks += '<optgroup label="区间未定">' + rest.map(opt).join('') + '</optgroup>';
       // 从首页搜索跳进来：替用户点开那座本的速览并滚到它，不靠人自己在一堆卡片里找
       var dd = urlQ('d');
+      if (dd) {
+        var hit = DUN.list.filter(function (x) { return x.id === dd; })[0];
+        if (hit) DUN.f.lv = String((dunRange(hit) || [0, 0])[0]);
+      }
+      set('<div class="card hero dunhero"><div class="herot">' +
+        '<span class="kicker">副本 · ' + lo + ' 至 ' + hi + ' 级</span>' +
+        '<h1 class="pt">副本手册</h1>' +
+        '<p class="dim">共 ' + all.length + ' 座：' + newN + ' 座无限新增、' + clN + ' 座经典本、' +
+        (d.raids || []).length + ' 座团本，按十级一档分。一次几人取自客户端的队伍查找器（' + nParty +
+        ' 座有数）。另有 ' + nTwo + ' 座的等级区间、人数或英文原名有两种说法，两个数都留着，不做取舍。' +
+        '掉落只回答"谁掉了什么"，不写概率。</p>' +
+        '<div class="four dunstat">' +
+        '<div><s>地下城</s><b>' + (newN + clN) + '</b><s>座</s></div>' +
+        '<div><s>无限新增</s><b>' + newN + '</b><s>座</s></div>' +
+        '<div><s>首领</s><b>' + nb + '</b><s>个</s></div>' +
+        '<div><s>掉落归属</s><b>' + nd + '</b><s>条</s></div></div>' +
+        '</div><div class="heros"><div class="cd">' +
+        '<span>首领与掉落表</span><b class="cdttl">选一座地下城</b>' +
+        '<select id="dpick" class="dunsel" aria-label="直接跳到某一座地下城的详情页">' +
+        '<option value="">按等级段找一座</option>' + picks + '</select>' +
+        '<a class="cta-cut" href="raids.html">团本那一页 →</a>' +
+        '</div></div></div>' +
+        '<div class="card dunbar"><span class="dim">我的等级</span>' +
+        '<input id="dlv" type="number" min="1" max="70" step="1" inputmode="numeric" ' +
+        'placeholder="填你的等级" aria-label="填你的等级，只列等级区间对得上的地下城" ' +
+        'value="' + D.esc(DUN.f.lv) + '">' +
+        '<button class="ghost" id="dlvc" type="button">清空等级</button>' +
+        '<span class="fchips">' +
+        '<button class="fchip on" type="button" data-k="all">全部 ' + (newN + clN) + '</button>' +
+        '<button class="fchip" type="button" data-k="new">无限新增 ' + newN + '</button>' +
+        '<button class="fchip" type="button" data-k="classic">经典旧世 ' + clN + '</button>' +
+        '</span></div>' +
+        '<div id="dlist">' + dunListHtml() + '</div>' +
+        dunBandBlock('团队副本', '开放时间未定 · <a href="raids.html">团本那一页</a>', d.raids || []) +
+        queueBand(QU));
+      bindDunBar();
+      bindDunCards();
       if (dd) {
         var target = null;
         Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (b) {
@@ -1728,9 +1827,174 @@
         });
         if (target) {
           target.click();
-          var card = target.parentNode;
-          if (card && card.scrollIntoView) card.scrollIntoView({ block: 'center' });
+          var holder = target.parentNode;
+          if (holder && holder.scrollIntoView) holder.scrollIntoView({ block: 'center' });
         }
+      }
+    }).catch(fail);
+  }
+  /* 客户端的队伍查找器里现在能排到、本站还没有首领与掉落名单的那些：按名字归并，
+     同一个本在客户端里挂两条（比如两种规模）只说一次，免得看着像两座本 */
+  function queueBand(QU) {
+    var rows = (QU.items || []).filter(function (x) { return !x.matchedId; });
+    if (!rows.length) return '';
+    var g = {}, order = [];
+    rows.forEach(function (x) {
+      var k = x.nameEn;
+      if (!g[k]) {
+        g[k] = { nameEn: k, kind: x.kind, levelRange: x.levelRange, sizes: [], n: 0 };
+        order.push(k);
+      }
+      g[k].n += 1;
+      if (x.partySize && g[k].sizes.indexOf(x.partySize) < 0) g[k].sizes.push(x.partySize);
+    });
+    var items = order.map(function (k) { return g[k]; });
+    function table(list) {
+      return '<table class="entab"><thead><tr><th>客户端里的名字</th><th>排队等级</th>'
+        + '<th>一次几人</th><th>客户端记了几条</th></tr></thead><tbody>' +
+        list.map(function (x) {
+          return '<tr><td><b>' + D.esc(x.nameEn) + '</b><span class="dim">　中文定名未公布</span></td>'
+            + '<td class="mono">' + D.esc(x.levelRange) + ' 级</td>'
+            + '<td class="mono">' + (x.sizes.length ? x.sizes.join(' / ') + ' 人' : '未标') + '</td>'
+            + '<td class="mono">' + x.n + (x.n > 1
+              ? (x.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）') : '') + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    }
+    var dun = items.filter(function (x) { return x.kind === 'dungeon'; });
+    var raid = items.filter(function (x) { return x.kind === 'raid'; });
+    return '<div class="card" id="queue"><h2>能排到队、还没有名单的本</h2>'
+      + (dun.length ? '<h3>地下城</h3>' + table(dun) : '')
+      + (raid.length ? '<h3>团队副本</h3>' + table(raid) : '') + '</div>';
+  }
+
+  /* ---------- 每座本一页 ----------
+     参考站的详情页有"任务 / 任务物品 / 任务起始地点 / 任务经验"四块，我们数据里一条都没有
+     （upstream/wclbox-dungeons.json 只带首领与掉落），所以那几块不画——缺数据不许编。
+     这一页画的是我们有的：载入图、等级区间与两种说法、所在区域与阵营、一次几人、
+     首领名单与头像、按首领归组的掉落、路线。 */
+  function dungeonPage() {
+    Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
+      .then(function (rs) {
+      var d = rs[0], ART = rs[1] || {};
+      var duns = [].concat(d.newDungeons || [], d.classicDungeons || []);
+      var all = duns.concat(d.raids || []);
+      var id = urlQ('d') || urlQ('id') || '';
+      if (!id) {
+        /* 直接打开 dungeon.html（没有带本号）：给一张目录，别让人对着空页发愣。
+           这一页本来就是"一座本一页"，没有本号就等于没选本。 */
+        var byBand = DUN_BANDS.map(function (b, i) {
+          var rows = duns.filter(function (y) { return dunBand(y) === i; }).sort(dunSort);
+          if (!rows.length) return '';
+          return '<h3>' + b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级 · ' + b[2] + '</h3>' +
+            '<p class="dirl">' + rows.map(function (y) {
+              return '<a href="dungeon.html?d=' + D.esc(y.id) + '">' + D.esc(y.nameCn || y.nameEn || y.id) +
+                '<span class="dim mono">' + D.esc(y.levelRange || '未定') + '</span></a>';
+            }).join('') + '</p>';
+        }).join('');
+        set('<div class="card"><h1 class="pt">先挑一座本</h1>' +
+          '<p class="dim">这一页是一座本一页：等级区间、一次几人、首领名单与按首领分组的掉落都在里面。' +
+          '下面按十级一档列出本站收录的 ' + duns.length + ' 座，点一个就过去。</p>' +
+          byBand +
+          '<a class="cta" href="dungeons.html">回列表页，填等级一次看一档 →</a></div>');
+        return;
+      }
+      var x = null;
+      all.forEach(function (y) { if (!x && y.id === id) x = y; });
+      if (!x) {
+        set('<div class="card"><h1 class="pt">这座本还没收录</h1>' +
+          '<p class="dim">地址里那座本（' + D.esc(id) + '）不在本站的副本名单里。' +
+          '名单以正式开放的为准，能查到的都已经在列表页里了。</p>' +
+          '<a class="cta" href="dungeons.html">回到副本手册，按等级挑一座 →</a></div>');
+        return;
+      }
+      var bosses = x.bosses || [], drops = x.drops || [];
+      var art = x.art || ((ART.dungeons || {})[x.id] || '');
+      var kindCn = x.kind === 'new' ? '无限新增' : (x.kind === 'raid' ? '团队副本' : '经典旧世');
+      var nm = x.nameCn || x.nameEn || '未定名';
+      document.title = nm + ' · 副本手册';
+      var sibs = (x.kind === 'raid' ? (d.raids || []) : duns).slice(0).sort(dunSort);
+      var at = 0;
+      sibs.forEach(function (y, i) { if (y.id === x.id) at = i; });
+      var prev = sibs[at - 1], next = sibs[at + 1];
+      function sibLink(y, word, endText) {
+        if (!y) return '<span class="dim">' + endText + '</span>';
+        return '<a class="dnear-l" href="dungeon.html?d=' + D.esc(y.id) + '">' + word + ' ' +
+          '<b>' + D.esc(y.nameCn || y.nameEn || y.id) + '</b>' +
+          '<span class="dim mono">' + D.esc(y.levelRange || '区间未定') + '</span></a>';
+      }
+      function itemCell(y) {
+        return '<div class="itemc"><b class="q' + (y.quality || 0) + '">' +
+          iconCell(y.iconKey, y.itemId, y.nameCn, 1) + D.esc(y.nameCn) + '</b>' +
+          '<span class="dim mono">#' + D.esc(y.itemId) + '</span></div>';
+      }
+      function bossBlock(b) {
+        var mine = drops.filter(function (y) { return y.bossId === b.id; });
+        return '<div class="brow" id="b-' + D.esc(b.id) + '">' +
+          '<div class="bh">' + (window.Glyph ? Glyph.bossFace(b.id, b.nameCn, b.portrait, 'lg') : '') +
+          '<div class="bt"><b>' + D.esc(b.nameCn) + '</b>' +
+          '<span class="dim">' + (mine.length ? '这座本里它掉 ' + mine.length + ' 件' : '掉落待补') + '</span>' +
+          (b.portrait ? '' : '<span class="dim">没有这张头像</span>') + '</div></div>' +
+          (mine.length ? '<div class="items">' + mine.map(itemCell).join('') + '</div>' : '') +
+          '</div>';
+      }
+      var zone = String(x.zoneCn || '').split(/[，·]/)[0].trim();
+      var fact = '<div class="four dhfact">' +
+        '<div><s>位置</s><b class="t">' + D.esc(x.zoneCn || '待补') + '</b></div>' +
+        '<div><s>等级区间</s><b>' + D.esc(x.levelRange || '待实测') + '</b>' +
+        '<s>' + (x.levelRange ? '推荐等级范围' : '还没有核到的数') + '</s></div>' +
+        '<div><s>一次几人</s><b>' + (x.partySize ? x.partySize : '未标') + '</b>' +
+        '<s>' + (x.partySize ? '取自客户端的队伍查找器' : '客户端里还没有它') + '</s></div>' +
+        '<div><s>掉落</s><b>' + (drops.length || '待补') + '</b>' +
+        '<s>' + (drops.length ? '件，按首领分组' : '还没有名单') + '</s></div></div>';
+      set('<section class="dhero dunh' + (art ? '' : ' noart') + '">' +
+        (art ? '<img src="' + D.esc(art) + '" alt="">' : '') +
+        '<span class="dx"></span><div class="db">' +
+        '<div class="crumb"><a href="dungeons.html">副本手册</a><i>›</i>' +
+        '<b>' + D.esc(nm) + '</b></div>' +
+        '<div class="kicker">' + kindCn + (x.levelRange ? ' · ' + D.esc(x.levelRange) + ' 级' : '') + '</div>' +
+        '<h1 class="pt">' + D.esc(nm) + '</h1>' +
+        '<div class="dhen">' + (x.nameEn ? D.esc(x.nameEn) : '中文与英文定名都还没公布') + '</div>' +
+        '<div class="dhline">' + (bosses.length ? bosses.length + ' 个首领 · ' : '首领待补 · ') +
+          (drops.length ? drops.length + ' 件掉落归属' : '掉落待补') + ' · ' +
+          (x.faction ? D.esc(x.faction) : '阵营未标') +
+          (x.partySize ? ' · 一次 ' + x.partySize + ' 人' : '') + '</div>' +
+        (zone ? '<a class="cta" href="world.html?q=' + encodeURIComponent(zone) +
+          '">在世界那一页找「' + D.esc(zone) + '」</a>' : '') +
+        '</div></section>' +
+        '<div class="card dnear">' + sibLink(prev, '上一座', '这一档的第一座') +
+          '<span class="dim mono">' + (at + 1) + ' / ' + sibs.length + '</span>' +
+          sibLink(next, '下一座', '这一档的最后一座') + '</div>' +
+        '<div class="card"><h2>进本之前</h2>' + fact + dunConfHtml(x) + dunNoQueue(x) +
+        (x.nameCn ? '' : '<p class="note">中文定名未公布，这一页的标题用的是客户端里的原名。</p>') +
+        '<h3>首领顺序</h3>' +
+        (bosses.length ? '<ol class="dunord">' + bosses.map(function (b) {
+          return '<li><a href="#b-' + D.esc(b.id) + '">' + D.esc(b.nameCn) + '</a></li>';
+        }).join('') + '</ol>' : '<p class="dim">这座本还没有首领名单。</p>') +
+        '</div>' +
+        '<div class="card"><h2>首领与掉落</h2>' +
+        (bosses.length ? bosses.map(bossBlock).join('')
+          : '<p class="dim">这座本还没有首领名单，掉落也就没有归属可写。</p>') +
+        '</div>' +
+        '<div class="card" id="droute"><h2>路线</h2>' + (dunRoute(x.route) ||
+          '<p class="dim">待实测。这一版还没有走过这座本的路线记录，不拿别人的攻略填进来。</p>') +
+        '</div>' +
+        '<div class="card"><h2>换一座</h2>' +
+        '<select id="dpick" class="dunsel" aria-label="跳到另一座地下城的详情页">' +
+        '<option value="">按等级段找一座</option>' +
+        sibs.map(function (y) {
+          return '<option value="' + D.esc(y.id) + '"' + (y.id === x.id ? ' selected' : '') + '>' +
+            D.esc(y.nameCn || y.nameEn || y.id) +
+            (y.levelRange ? '（' + D.esc(y.levelRange) + ' 级）' : '') + '</option>';
+        }).join('') + '</select>' +
+        '<a class="cta" href="dungeons.html">回列表，按等级段挑 →</a></div>');
+      var pick = el('dpick');
+      if (pick) pick.onchange = function () {
+        if (pick.value) location.href = 'dungeon.html?d=' + encodeURIComponent(pick.value);
+      };
+      var bb = urlQ('b');
+      if (bb) {
+        var node = el('b-' + bb);
+        if (node && node.scrollIntoView) node.scrollIntoView({ block: 'center' });
       }
     }).catch(fail);
   }
@@ -1779,12 +2043,12 @@
       function statusText(x) {
         if (x.matchedIn === 'raid') {
           var rr = raidById[x.matched];
-          return '<span class="dim">已有这一座：</span><a href="dungeons.html?d=' + D.esc(x.matched) + '">'
+          return '<span class="dim">已有这一座：</span><a href="dungeon.html?d=' + D.esc(x.matched) + '">'
             + D.esc((rr && (rr.nameCn || rr.nameEn)) || x.matched) + '</a>';
         }
         if (x.matchedIn === 'dungeon') {
           var dn = dunIds[x.matched];
-          return '<span class="dim">按地下城收录：</span><a href="dungeons.html?d=' + D.esc(x.matched) + '">'
+          return '<span class="dim">按地下城收录：</span><a href="dungeon.html?d=' + D.esc(x.matched) + '">'
             + D.esc((dn && dn.nameCn) || x.matched) + '</a>';
         }
         return '<span class="dim">还没有名单</span>';
@@ -1854,7 +2118,7 @@
             // 红线：两份名单人数不一致时两个都摆着，不替玩家挑一个
             (sizes.length > 1 ? '<div class="conf">规模两说：另一份资料自报的人数与客户端排队条目写的不是一个数，'
               + '两个都摆着等定稿。</div>' : '') +
-            (inClient ? '<a class="cta-cut" href="dungeons.html?d=' + D.esc(r.id) + '">看这一座的收录情况</a>'
+            (inClient ? '<a class="cta-cut" href="dungeon.html?d=' + D.esc(r.id) + '">看这一座的收录情况</a>'
               : '<a class="cta-cut" href="timeline.html">看上线时间表那一页</a>') +
             '</div></div>';
         }).join('') + '</div></section>';
@@ -3157,5 +3421,5 @@
   watchRails();
   tickCountdown();
   setInterval(tickCountdown, 1000);
-  ({ home: home, talent: talent, classes: classPage, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, classes: classPage, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, dungeon: dungeonPage, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

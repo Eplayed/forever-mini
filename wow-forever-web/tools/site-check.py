@@ -36,7 +36,12 @@ SHOT_DIR = os.path.join(ROOT, "docs", "screenshots", "check-" + TODAY)
 # 首页六个入口与职业页都还链着它。这些页跑渲染与通用判据，但不要求"导航里有高亮"。
 NO_NAV_ENTRY = {"skills"}
 
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "raids", "systems", "races",
+# "某一类东西的一页"：不占导航格子，但必须亮着它所属列表页那一格（app.js 的 NAV_OF）。
+# 加这类页就进这张表，否则"每个页面都能从导航走到"那条会把它当成走丢的页。
+DETAIL_PARENT = {"dungeon": "dungeons"}
+
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "dungeon", "raids",
+         "systems", "races",
          "professions", "world", "legacy", "updates", "rank", "glossary", "provenance", "classes"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
 # 只有登记在 icon-gaps.json 里的键允许 404，多出来的失败请求一律算回归不通过。
@@ -646,7 +651,8 @@ def test_races(browser, base):
           "%d 项：%s" % (len(subs), subs))
     nav_files = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
                               ".map(a => (a.getAttribute('href') || '').split('#')[0])")
-    no_entry = [p for p in PAGES if (p + ".html") not in nav_files and p not in NO_NAV_ENTRY]
+    no_entry = [p for p in PAGES if (p + ".html") not in nav_files
+                and p not in NO_NAV_ENTRY and p not in DETAIL_PARENT]
     check("除刻意撤下入口的那几页，每个页面都能从导航走到", not no_entry, "导航里找不到：%s" % no_entry)
     check("导航里不再有任何下拉面板",
           page.evaluate("() => document.querySelectorAll('.ndp, .ndb, [aria-haspopup]').length") == 0)
@@ -986,6 +992,183 @@ def test_dungeon_data(browser, base):
     tp.close()
 
 
+def test_dungeon_detail(browser, base):
+    """副本线改版（2026-10-13）：列表页只留"挑一座"要看的四件事，每座本另有一页。
+       钉三件事：① 卡面收进抽屉的分歧一条都没少（按数据逐座数）；② 筛选是按等级区间真筛，
+       不是把卡片藏起来；③ 详情页的数与图都来自数据，缺的直说缺，不写概率。"""
+    import json
+    print("\n[11a] 副本列表筛选与每座本一页")
+    dg = json.load(open(os.path.join(SRC, "data", "dungeons.json"), encoding="utf-8"))
+    duns = (dg.get("newDungeons") or []) + (dg.get("classicDungeons") or [])
+    raids = dg.get("raids") or []
+    allrows = duns + raids
+    art = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
+
+    def rng(x):
+        m = re.search(r"(\d+)\D+(\d+)", str(x.get("levelRange") or ""))
+        return (int(m.group(1)), int(m.group(2))) if m else None
+
+    new_duns = [x for x in duns if x.get("kind") == "new"]
+
+    def nconf(x):
+        c = 0
+        if x.get("levelRangeClient") or x.get("levelRangeAlt"):
+            c += 1
+        if x.get("partySizeAlt"):
+            c += 1
+        if x.get("nameEnClient"):
+            c += 1
+        if x.get("nameCnConflict"):
+            c += 1
+        return c
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(base + "/dungeons.html", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    g = page.evaluate("""() => ({
+      stat: [...document.querySelectorAll('.dunstat b')].map(x => x.textContent.trim()),
+      cards: document.querySelectorAll('#dlist .dcard2').length,
+      faceConf: [...document.querySelectorAll('.dcard2 > .conf')].length,
+      drawerConf: [...document.querySelectorAll('.dcard2 .drawer .conf')].length,
+      notes: [...document.querySelectorAll('.dcard2 .drawer .note')].length,
+      links: [...document.querySelectorAll('a.dstretch')].map(a => a.getAttribute('href')),
+      opts: [...document.querySelectorAll('#dpick option')].map(o => o.value).filter(Boolean).length,
+      chips: [...document.querySelectorAll('.fchip')].map(x => x.textContent.trim()),
+      bands: [...document.querySelectorAll('#dlist .band b')].map(x => x.textContent.trim()) })""")
+    check("页首四格读数等于数据现算",
+          g["stat"] == [str(len(duns)), str(len(dg.get("newDungeons") or [])),
+                        str(sum(len(x.get("bosses") or []) for x in allrows)),
+                        str(sum(len(x.get("drops") or []) for x in allrows))],
+          "页面 %s" % g["stat"])
+    check("列表页一张卡都不漏，卡片数等于地下城数", g["cards"] == len(duns),
+          "DOM %d / 数据 %d" % (g["cards"], len(duns)))
+    check("卡面上不再直接压着分歧行（收进速览与详情页）", g["faceConf"] == 0,
+          "卡面残留 %d 条" % g["faceConf"])
+    exp_conf = sum(nconf(x) for x in duns) + sum(nconf(x) for x in raids)
+    check("分歧一条都没少：抽屉里仍然按数据逐条摆", g["drawerConf"] == exp_conf,
+          "抽屉 %d / 应有 %d" % (g["drawerConf"], exp_conf))
+    exp_note = len([x for x in allrows if not x.get("clientActivityId")])
+    check("客户端还排不到的本仍然逐座写明", g["notes"] == exp_note, "%d / %d" % (g["notes"], exp_note))
+    check("每张卡都链向那一座的详情页", 
+          len(g["links"]) == len(duns) + len(raids)
+          and all(l.startswith("dungeon.html?d=") for l in g["links"]), str(g["links"][:2]))
+    check("页首那座下拉能点到每一座地下城", g["opts"] == len(duns),
+          "%d 个选项 / %d 座" % (g["opts"], len(duns)))
+    check("筛选按钮上的数与数据一致",
+          g["chips"] == ["全部 %d" % len(duns),
+                         "无限新增 %d" % len(dg.get("newDungeons") or []),
+                         "经典旧世 %d" % len(dg.get("classicDungeons") or [])], str(g["chips"]))
+    check("地下城仍按十级一档分档", len(g["bands"]) >= 5 and any("40" in x for x in g["bands"]),
+          str(g["bands"]))
+
+    for lv in (18, 25, 44, 60):
+        hit = len([x for x in duns if rng(x) and rng(x)[0] <= lv <= rng(x)[1]])
+        page.fill("#dlv", str(lv))
+        page.wait_for_timeout(450)
+        got = page.evaluate("() => document.querySelectorAll('#dlist .dcard2').length")
+        check("填 %d 级只剩等级区间对得上的本" % lv, got == hit, "页面 %d / 数据 %d" % (got, hit))
+    page.click(".fchip[data-k='new']")
+    page.wait_for_timeout(450)
+    got_new = page.evaluate("""() => [...document.querySelectorAll('#dlist .dcard2 .dbn2-n')]
+      .map(x => x.textContent.trim())""")
+    exp_new = [x.get("nameCn") or x.get("nameEn") for x in duns
+               if x.get("kind") == "new" and rng(x) and rng(x)[0] <= 60 <= rng(x)[1]]
+    check("等级与来源两个筛是叠加的（60 级的无限新增本）", sorted(got_new) == sorted(exp_new),
+          "%s / %s" % (got_new[:3], exp_new[:3]))
+    page.click("#dlvc")
+    page.wait_for_timeout(400)
+    # 「清空等级」只管等级那格：来源筛还停在"无限新增"，两个控件互不越界
+    check("清空等级只清等级、不动来源筛",
+          page.evaluate("() => document.querySelectorAll('#dlist .dcard2').length") == len(new_duns),
+          "页面 %d / 无限新增 %d" % (
+              page.evaluate("() => document.querySelectorAll('#dlist .dcard2').length"), len(new_duns)))
+    page.click(".fchip[data-k='all']")
+    page.wait_for_timeout(400)
+    check("切回全部后回到整份名单",
+          page.evaluate("() => document.querySelectorAll('#dlist .dcard2').length") == len(duns))
+    page.screenshot(path=os.path.join(SHOT_DIR, "dungeons-list-2026-10-13.png"))
+
+    # 抽三座：有分歧的、有掉落的、还没有首领名单的（团本）
+    samples = [x for x in allrows if x.get("id") in
+               ("hall-of-thanes", "ragefire-chasm", "onyxias-lair")]
+    check("抽样本在数据里都在", len(samples) == 3, str([x["id"] for x in samples]))
+    for x in samples:
+        did = x["id"]
+        page.goto(base + "/dungeon.html?d=" + did, wait_until="networkidle")
+        page.wait_for_timeout(1300)
+        d = page.evaluate("""() => ({
+          title: document.title, h1: document.querySelectorAll('#main h1').length,
+          h1t: (document.querySelector('#main h1') || {}).innerText,
+          bosses: document.querySelectorAll('.brow').length,
+          items: document.querySelectorAll('.itemc').length,
+          conf: document.querySelectorAll('#main .conf').length,
+          note: document.querySelectorAll('#main .note').length,
+          near: [...document.querySelectorAll('.dnear a')].map(a => a.getAttribute('href')),
+          sel: document.querySelectorAll('#dpick option').length,
+          nearText: (document.querySelector('.dnear') || {}).innerText || '',
+          noFace: [...document.querySelectorAll('.brow .bt')].filter(e => /没有这张头像/.test(e.innerText)).length,
+          noLoot: [...document.querySelectorAll('.brow .bt')].filter(e => /掉落待补/.test(e.innerText)).length,
+          route: (document.querySelector('#droute') || {}).innerText || '',
+          broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
+          heroArt: !!document.querySelector('.dunh img'),
+          pct: (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/) || [])[0] || '' })""")
+        nm = x.get("nameCn") or x.get("nameEn")
+        check("%s：标题与 H1 都是这一座，且只有一个 H1" % did,
+              d["h1"] == 1 and nm in d["title"] and d["h1t"].strip() == nm,
+              "%s / %s" % (d["title"], d["h1t"]))
+        check("%s：首领栏数等于数据" % did, d["bosses"] == len(x.get("bosses") or []),
+              "%d / %d" % (d["bosses"], len(x.get("bosses") or [])))
+        check("%s：掉落格数等于数据" % did, d["items"] == len(x.get("drops") or []),
+              "%d / %d" % (d["items"], len(x.get("drops") or [])))
+        check("%s：分歧逐条摆着" % did, d["conf"] == nconf(x), "%d / %d" % (d["conf"], nconf(x)))
+        check("%s：没脸的直说没有这张头像，不拿别的脸凑" % did,
+              d["noFace"] == len([b for b in (x.get("bosses") or []) if not b.get("portrait")]),
+              "%d 个" % d["noFace"])
+        check("%s：没有掉落的首领写掉落待补" % did,
+              d["noLoot"] == len([b for b in (x.get("bosses") or [])
+                                  if not any(y.get("bossId") == b.get("id") for y in (x.get("drops") or []))]),
+              "%d 个" % d["noLoot"])
+        check("%s：掉落不写百分比" % did, not d["pct"], d["pct"])
+        # 兄弟本按等级区间排，中文名的先后两边排序规则不完全一样，所以这里不钉死第几位，
+        # 只钉"链出去的两个本号都得在数据里"与"到档的那一侧必须直说，不留空位"。
+        ids = {y["id"] for y in allrows}
+        linked = [str(n).split("d=")[-1] for n in d["near"]]
+        ends = bool(re.search("这一档的(第一座|最后一座)", d["nearText"]))
+        check("%s：上一座 / 下一座链到真存在的本，到档那侧直说" % did,
+              linked and all(l in ids for l in linked) and (len(linked) == 2 or ends),
+              "%s / %s" % (linked[:2], d["nearText"][:22].replace("\n", " ")))
+        check("%s：路线没数据就直说待实测" % did,
+              ("待实测" in d["route"]) == (not (x.get("route") or [])), d["route"][:36])
+        check("%s：图不坏、无脚本报错" % did, d["broken"] == 0 and not errs,
+              "坏图 %d / 报错 %s" % (d["broken"], errs[:1]))
+        page.screenshot(path=os.path.join(SHOT_DIR, "dungeon-%s.png" % did))
+    ctx.close()
+
+    # 直接打开详情页（没带本号）：给目录，不给空页
+    ctx2 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    p2 = ctx2.new_page()
+    p2.goto(base + "/dungeon.html", wait_until="networkidle")
+    p2.wait_for_timeout(1300)
+    pk = p2.evaluate("""() => ({ h1: document.querySelectorAll('#main h1').length,
+      links: [...document.querySelectorAll('.dirl a')].map(a => a.getAttribute('href')),
+      chars: document.querySelector('#main').innerText.length })""")
+    check("不带本号打开详情页时给一张按等级段排好的目录",
+          pk["h1"] == 1 and len(pk["links"]) == len(duns) and pk["chars"] > 100,
+          "%d 条 / %d 字" % (len(pk["links"]), pk["chars"]))
+    check("目录里每一条都指向某一座的详情页",
+          all(l.startswith("dungeon.html?d=") for l in pk["links"]), str(pk["links"][:2]))
+    p2.goto(base + "/dungeon.html?d=%E6%B2%A1%E8%BF%99%E5%BA%A7", wait_until="networkidle")
+    p2.wait_for_timeout(1100)
+    check("本号对不上时直说没收录，并给回列表的路",
+          "这座本还没收录" in p2.inner_text("#main")
+          and "dungeons.html" in p2.evaluate(
+              "() => [...document.querySelectorAll('#main a')].map(a => a.getAttribute('href')).join(',')"))
+    ctx2.close()
+
+
 def test_raids(browser, base):
     """团本页：两份名单并列摆、四个读数与数据一致、筛选与深链接得住、条目进索引。"""
     print("\n[11b] 团本页（客户端排队条目 × 另一份名单）")
@@ -1024,7 +1207,7 @@ def test_raids(browser, base):
           "重复 %s" % [n for n in g["names"] if g["names"].count(n) > 1][:3])
     check("对得上的都链回副本页", len(g["links"]) == len(linked_names),
           "%d 条 / 数据 %d 座" % (len(g["links"]), len(linked_names)))
-    check("链接都指向副本页那一座", all(str(h).startswith("dungeons.html?d=") for h in g["links"]),
+    check("链接都指向那一座的详情页", all(str(h).startswith("dungeon.html?d=") for h in g["links"]),
           str(g["links"][:2]))
     check("另一份名单自述的几座都在", g["claimed"] == len(claimed), "%d / %d" % (g["claimed"], len(claimed)))
     check("两边对不上的直说没有对应条目",
@@ -1850,8 +2033,13 @@ def test_search(browser, base):
         ("咆鼻", "world.html", rare_tab_on),
         ("莫高雷", "world.html", lambda: page.input_value("#wq") == "莫高雷"),
         ("舒适的睡袋", "world.html", lambda: "睡袋本身" in page.inner_text("#wbody")),
-        ("领主大厅", "dungeons.html",
-         lambda: page.evaluate("() => document.querySelector('#d-hall-of-thanes').style.display") == "block"),
+        ("领主大厅", "dungeon.html",
+         lambda: page.evaluate("() => document.title").startswith("领主大厅")
+         and page.evaluate("() => document.querySelectorAll('.brow').length") == 4),
+        # 首领词条跳的是"那一座本的整页"，并且带首领号滚到那个首领那一栏
+        ("法德林·安威玛尔", "dungeon.html",
+         lambda: "&b=faldrim-anvilmar" in page.url
+         and page.evaluate("() => !!document.getElementById('b-faldrim-anvilmar')")),
         ("预知", "talent.html",
          lambda: page.input_value("#tq") == "预知" and
          page.evaluate("() => [...document.querySelectorAll('.node')].filter(n => n.style.outline).length") >= 1),
@@ -2859,6 +3047,7 @@ SECTIONS = [
     ("races", test_races),
     ("grouping", test_grouping),
     ("dungeon_data", test_dungeon_data),
+    ("dungeon_detail", test_dungeon_detail),
     ("raids", test_raids),
     ("professions", test_professions),
     ("world", test_world),

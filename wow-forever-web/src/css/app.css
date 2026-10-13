@@ -1566,3 +1566,92 @@ tbody tr:last-child td{border-bottom:none}
   .herobtns .cta-line,.herobtns .cta-mute{display:flex;align-items:center;justify-content:center;min-height:44px;flex:1 1 100%}
   .cta-gold{min-height:44px;height:auto}
   .krow .kall{display:inline-flex;align-items:center;min-height:44px} }
+
+/* ---------- 副本线（2026-10-13 改版：列表页挑一座 + 每座本一页） ----------
+   列表页卡面只留"挑一座"要看的四件事，两源分歧与"还不能排队"收进速览抽屉，
+   所以卡面上多了一层整卡链接（.dstretch）：抽屉与按钮必须压在它上面才点得动。 */
+.dunhero .herot>.kicker{margin-bottom:8px;letter-spacing:.06em}
+/* 375px 实测整页横向溢出 45px：网格子项的默认最小宽度是内容的 min-content，
+   下拉框里"提瑞斯法林地，洛丹伦废墟（15-22 级）"这种长选项名会把整栏顶宽。
+   两栏都放开到 0，长文本自己折行。 */
+.dunhero>*{min-width:0}
+.dunhero .dunsel{max-width:100%}
+.dunstat{grid-template-columns:repeat(auto-fit,minmax(96px,1fr));max-width:560px;text-align:left}
+.dunstat>div{text-align:left;padding:var(--s2) var(--s3)}
+.dunstat b{font-size:26px;color:var(--gold-hi)}
+.dunhero .cdttl{font-size:17px;color:var(--txt);line-height:1.4}
+.dunsel{display:block;width:100%;min-height:44px;margin:var(--s2) 0;background:var(--panel);
+  color:var(--txt);border:1px solid var(--gold-deep);border-radius:var(--r-ctl);padding:8px 10px;font:13px var(--font-cn)}
+.dirl{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s2) 0 var(--s3)}
+.dirl a{display:inline-flex;align-items:baseline;gap:6px;min-height:44px;padding:6px 10px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-ctl);
+  color:var(--txt);font-size:13px;text-decoration:none}
+.dirl a:hover{border-color:var(--gold-deep)}
+.dunbar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:center}
+.dunbar input[type=number]{width:104px;min-height:44px;background:var(--panel-2);color:var(--txt);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:8px 10px;font:14px var(--font-mono)}
+.dunbar .ghost{min-height:44px}
+.fchips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-left:auto}
+.fchip{min-height:34px;padding:5px 13px;background:var(--panel-2);color:var(--txt-dim);
+  border:1px solid var(--line);border-radius:999px;font:12.5px var(--font-cn);cursor:pointer}
+.fchip:hover{border-color:var(--gold-deep);color:var(--txt)}
+.fchip.on{background:rgba(224,169,109,.14);border-color:var(--gold);color:var(--gold-hi);font-weight:600}
+.dcard2{position:relative}
+.dcard2:hover{border-color:var(--gold-deep)}
+/* 卡面上的原画加高到 118px，并把压暗罩做厚：浅色那张（洛丹伦废墟、哀嚎洞穴）在原来
+   只有底部 85% 一档渐变下，白色本名几乎糊进图里。文字靠左，所以左侧也压一道。 */
+.dcard2 .dbn2{height:118px}
+.dcard2 .dbn2-shade{background:linear-gradient(180deg,rgba(11,15,22,.2) 0%,rgba(11,15,22,.66) 46%,
+  rgba(11,15,22,.95) 100%),linear-gradient(90deg,rgba(11,15,22,.55),rgba(11,15,22,0) 62%)}
+.dcard2 .dbn2-e{color:var(--txt-banner)}
+.dstretch{position:absolute;inset:0;z-index:1;border-radius:var(--r-card)}
+.dstretch:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+.dcard2>button,.dcard2>.drawer{position:relative;z-index:2}
+/* 详情页：页首那条本的载入图压在暗罩下面，标题走设计稿的展示字 */
+.dunh{margin-top:var(--s4)}
+.dunh.noart{background:linear-gradient(160deg,var(--panel-2),var(--bg))}
+.dunh .db{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  min-height:322px;gap:var(--s2)}
+.dunh .kicker{letter-spacing:.06em}
+.dunh h1.pt{font-family:var(--font-display);font-size:clamp(30px,4.2vw,48px);font-weight:700;
+  color:var(--txt-title);letter-spacing:1px;line-height:1.12;margin:0}
+.crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:12.5px;color:var(--txt-dim)}
+.crumb i{font-style:normal;color:var(--txt-muted)}
+.crumb b{color:var(--txt);font-weight:600}
+.dhen{font:13px var(--font-mono);color:var(--txt-banner);letter-spacing:.05em}
+.dhline{font-size:13.5px;color:var(--txt-dim)}
+.dhline b{color:var(--gold-hi);font-family:var(--font-mono)}
+.dunh .cta-line{min-height:44px;display:inline-flex;align-items:center;margin-top:var(--s2)}
+.dhfact{max-width:820px}
+.dhfact b.t{font:600 15px/1.5 var(--font-cn)}
+/* 上一座 / 下一座：整条是一行三格，中间那个读数吃剩余宽度 */
+.dnear{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;justify-content:space-between}
+.dnear-l{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-height:44px;
+  padding:6px 10px;border:1px solid var(--line);border-radius:var(--r-ctl);background:var(--panel-2);
+  color:var(--txt-dim);font-size:12.5px;text-decoration:none}
+.dnear-l:hover{border-color:var(--gold-deep);color:var(--txt)}
+.dnear-l b{font-size:14.5px;color:var(--txt);font-weight:600}
+.dnear>span{margin:0 auto}
+.dunord{margin:var(--s2) 0 0;padding-left:22px;font-size:13.5px}
+.dunord li{padding:3px 0}
+.brow{border-top:1px solid var(--line);padding:var(--s3) 0}
+.brow:first-of-type{border-top:none}
+.brow>.bh{display:flex;gap:var(--s3);align-items:center}
+.brow .bt{display:flex;flex-wrap:wrap;gap:4px var(--s3);align-items:baseline}
+.brow .bt b{font-size:15.5px}
+.items{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s2)}
+.itemc{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:5px 10px 5px 6px;font-size:12.5px}
+.itemc b{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.itemc .mono{font-size:10.5px}
+.dunbar,.dunhero{margin-bottom:var(--s4)}
+@media (max-width:600px){
+  .fchips{margin-left:0;width:100%}
+  .fchip{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+  .dunh .db{min-height:0;padding:var(--s5) var(--s4)}
+  .dnear{flex-direction:column;align-items:stretch}
+  .dnear-l{justify-content:center}
+  .dnear>span{order:-1}
+  .dunord a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:2px 8px}
+  .crumb a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:2px 8px}
+}

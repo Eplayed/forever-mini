@@ -50,4 +50,4 @@ export function isMigrated(file) {
 }
 
 /* 迁完一页要做两件事：路由表加一条，这里标记一下已迁（导航才会走内部链接） */
-export const MIGRATION_NOTE = '新站已迁：首页 / 世界页 / 职业页；其余 14 页仍在旧站。';
+export const MIGRATION_NOTE = '新站已迁：首页 / 世界页 / 职业页；其余 15 页仍在旧站。';
