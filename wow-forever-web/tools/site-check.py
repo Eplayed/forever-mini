@@ -1369,8 +1369,9 @@ def test_home(browser, base):
                foot: a.filter(x => x.querySelector('.modf')).length }; }""")
     # 2026-10-12 站主决定：板块卡底下那一行（分级徽标 + "整句直接抄官方"这类口径说明）撤了，
     # 卡里只留标题、板块归属和规模数字。
-    check("九张模块卡都带规模数字，且都不再挂徽标与口径说明行",
-          mods["n"] == 9 and mods["nums"] >= 9 and mods["pills"] == 0 and mods["foot"] == 0,
+    # 2026-10-13 首页重排：入口卡 13 张（两组各 6 + 一张「这一版改了什么」大卡）
+    check("13 张入口卡都带读数，且都不挂徽标与口径说明行",
+          mods["n"] == 13 and mods["nums"] >= 13 and mods["pills"] == 0 and mods["foot"] == 0,
           json.dumps(mods))
 
     # ↓ 第五批（首页整合两家参考站）的判据：结构、素材、动效、角标
@@ -1408,9 +1409,10 @@ def test_home(browser, base):
           return pair ? parseFloat(getComputedStyle(pair).marginLeft) : -1; })()
       };
     }""")
-    check("首页按三条线分组、每组三张卡，第四段是改动模块",
-          st["groups"] == ["角色线", "世界线", "工具线", "自经典旧世以来的改动"] and
-          st["perGroup"][:3] == [3, 3, 3],
+    # 2026-10-13：三条线（角色线/世界线/工具线）与「自经典旧世以来的改动」那组读数撤掉，
+    # 首页只剩两组入口卡；改动那块改成一张入口卡 + 一行站方口径小入口。
+    check("首页两组入口卡各 6 张，不再有第三条线与改动读数分组",
+          st["groups"] == ["角色与职业", "世界与冒险"] and st["perGroup"][:2] == [6, 6],
           json.dumps({"g": st["groups"], "n": st["perGroup"]}, ensure_ascii=False))
     dup = [x for x in set(st["titles"]) if st["titles"].count(x) > 1]
     check("「最常用的两个」是天赋预览与副本，且九张卡不重复它们",
@@ -1424,16 +1426,15 @@ def test_home(browser, base):
     check("卡片背景图全部是本地已转存素材，没有热链",
           len(st["artFiles"]) > 0 and all(f.startswith("img/art/") for f in st["artFiles"]),
           json.dumps(st["artFiles"][:3], ensure_ascii=False))
-    check("带背景的卡是 5 张（3 张模块卡 + 2 张主推卡），其余留纯色",
-          len(st["artFiles"]) == 5 and st["artCards"] == 3,
+    # 用户实拍："卡片背景要的是图片，不是把图标当背景"。现在每张入口卡都必须带一张
+    # art/ 下已转存的真图（13 张卡 + 2 张主推卡 = 15 层背景），一张都不许多。
+    check("13 张入口卡每张都带本地原画背景，加两张主推卡共 15 层",
+          len(st["artFiles"]) == 15 and st["artCards"] == 13,
           "背景层 %d 张 / 模块卡带背景 %d 张" % (len(st["artFiles"]), st["artCards"]))
-    # 四格的和要等于上游自报的 changed——这个数从 changes.json 的 upstreamCounts 现读，
-    # 不写死常数：2026-10-11 重抓后上游自报从 751 变成 753，写死的断言当时就红了。
-    self_reported = json.load(open(os.path.join(SRC, "data", "changes.json"),
-                                   encoding="utf-8"))["meta"]["upstreamCounts"]["changed"]
-    check("改动四格加起来等于来源站自报的 changed %d" % self_reported,
-          sum(st["four"]) == self_reported, "%s 合计 %d / 上游自报 %d"
-          % (st["four"], sum(st["four"]), self_reported))
+    # 改动四格与"全部 vs 四格之和"的对照行搬去动态页（首页只留入口），
+    # 和等于上游自报 changed 那条断言跟着挪到 test_updates_rank。
+    check("首页不再有改动四格（搬到动态页 #k1）",
+          st["four"] == [], json.dumps(st["four"]))
     # 2026-10-12 站主决定：天赋预览卡下面那条"名称与官网中文一致 462 / 466"的进度条与
     # 讲数据出处的说明段一起移出内容页（这条读数仍在溯源页）。
     check("天赋预览卡不再挂覆盖率进度条与出处说明段",
@@ -1612,40 +1613,48 @@ def test_updates_rank(browser, base):
     hpg = hp.new_page()
     hpg.goto(base + "/index.html", wait_until="networkidle")
     hpg.wait_for_timeout(1800)
-    hb = hpg.evaluate("""() => { const byTitle = (re) => [...document.querySelectorAll('.card')]
-          .find(x => re.test((x.querySelector('h2') || {}).innerText || ''));
-      const dyn = byTitle(/最新动态/);
-      // 「自经典旧世以来的改动」是分组眉标，标题不在卡里：按卡里的四格找到这张卡
-      const four = document.querySelector('#main .card .four');
-      const chg = four ? four.closest('.card') : null;
-      const head = chg && chg.previousElementSibling ? chg.previousElementSibling.innerText : '';
+    hb = hpg.evaluate("""() => { const dyn = [...document.querySelectorAll('.card')]
+          .find(x => /最新动态/.test((x.querySelector('h2') || {}).innerText || ''));
       return { rows: dyn ? dyn.querySelectorAll('.flowrow').length : 0,
                links: dyn ? [...dyn.querySelectorAll('a')].map(a => a.getAttribute('href') || '') : [],
                note: dyn ? (dyn.querySelector('.note') || {}).innerText || '' : '',
-               four: chg ? chg.querySelectorAll('.four b').length : 0,
-               fourtxt: chg ? [...chg.querySelectorAll('.four b')].map(b => b.innerText.trim()) : [],
-               head: head.replace(/\\s+/g, ' ').slice(0, 40),
-               kv: chg ? chg.querySelectorAll('.kv').length : 0,
-               chgText: chg ? chg.innerText.replace(/\\s+/g, ' ') : '',
+               four: document.querySelectorAll('#main .four b').length,
                chgl: document.querySelectorAll('#main .chgl').length }; }""")
     check("首页动态卡有时间点与两个入口", hb and hb["rows"] >= 4
           and any("updates.html" in x for x in hb["links"])
           and any("rank.html" in x for x in hb["links"]), str(hb))
-    # 第五批改版把改动清单的数挪进「自经典旧世以来的改动」卡：同一个数不许在首页摆两遍
-    check("改动四格是四个实数，动态卡不再重复列一遍",
-          hb and hb["four"] == 4 and all(x.isdigit() for x in hb["fourtxt"]) and hb["chgl"] == 0,
-          str(hb and {"four": hb["four"], "fourtxt": hb["fourtxt"], "chgl": hb["chgl"]}))
-    check("改动四格挂在「自经典旧世以来的改动」这张卡上，且带对照行",
-          hb and hb["four"] == 4 and "自经典旧世以来的改动" in hb["head"] and hb["kv"] >= 1,
-          str(hb and {"head": hb["head"], "kv": hb["kv"]}))
-    # 964（全部条目）与四格之和 751（真有变化的）同屏出现，不解释清楚就是自己打脸
-    sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
-    _sum = sum(int(x) for x in hb["fourtxt"])
-    check("改动卡自己解释清「全部 964 条」与「四格之和 751」差在哪",
-          hb and str(_sum) in hb["chgText"] and str(sc["changes"]) in hb["chgText"] and
-          str(sc["changesTalents"]) in hb["chgText"] and "本身没变" in hb["chgText"],
-          str(hb and hb["chgText"][:150]))
     check("动态卡写明这三件事怎么分开", hb and "三件事分开说" in hb["note"], (hb or {}).get("note", "")[:40])
+    # 2026-10-13 用户：首页那些读数像数据变动明细，不像资料站入口——四格与对照行搬到动态页，
+    # 首页一张入口卡都不许多带读数（这条钉住别再搬回来）。
+    check("首页不再有改动四格", hb["four"] == 0, "首页还有 %d 格" % hb["four"])
+
+    hpg.goto(base + "/updates.html", wait_until="networkidle")
+    hpg.wait_for_timeout(1800)
+    k1 = hpg.evaluate("""() => { const c = document.querySelector('#k1'); if (!c) return null;
+      return { four: c.querySelectorAll('.four b').length,
+               fourtxt: [...c.querySelectorAll('.four b')].map(b => b.innerText.trim()),
+               kv: c.querySelectorAll('.kv').length,
+               head: ((c.querySelector('h2') || {}).innerText || '').replace(/\s+/g, ' ').slice(0, 30),
+               text: c.innerText.replace(/\s+/g, ' ') }; }""")
+    check("改动四格挂在动态页「客户端改动清单」那张卡上，且带对照行",
+          k1 and k1["four"] == 4 and k1["kv"] >= 1 and all(x.isdigit() for x in k1["fourtxt"])
+          and "客户端改动清单" in k1["head"], json.dumps(k1 and {"head": k1["head"], "four": k1["four"],
+                                                                "kv": k1["kv"]}, ensure_ascii=False))
+    # 四格之和要等于上游自报的 changed——这个数从 changes.json 的 upstreamCounts 现读，
+    # 不写死常数：2026-10-11 重抓后上游自报从 751 变成 753，写死的断言当时就红了。
+    self_reported = json.load(open(os.path.join(SRC, "data", "changes.json"),
+                                   encoding="utf-8"))["meta"]["upstreamCounts"]["changed"]
+    check("改动四格加起来等于来源站自报的 changed %d" % self_reported,
+          k1 and sum(int(x) for x in k1["fourtxt"]) == self_reported,
+          "%s 合计 %d / 上游自报 %d" % (k1 and k1["fourtxt"], k1 and sum(int(x) for x in k1["fourtxt"]),
+                                       self_reported))
+    # 全部条目与四格之和同屏出现，不解释清楚就是自己打脸
+    sc = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    _sum = sum(int(x) for x in (k1 or {}).get("fourtxt") or [])
+    check("改动卡自己解释清「全部 %d 条」与「四格之和 %d」差在哪" % (sc["changes"], _sum),
+          k1 and str(_sum) in k1["text"] and str(sc["changes"]) in k1["text"] and
+          str(sc["changesTalents"]) in k1["text"] and "本身没变" in k1["text"],
+          str(k1 and k1["text"][:150]))
     hp.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780})
@@ -1722,7 +1731,7 @@ def test_app(browser, base):
             strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
-            check("新站首页模块卡与旧站一样多", mods == 9, "%d 张" % mods)
+            check("新站首页入口卡与旧站一样多（12 张分组卡 + 1 张大卡）", mods == 13, "%d 张" % mods)
             gs = page.evaluate("() => !!document.querySelector('#gs')")
             check("新站首页也接了全站搜索框", gs)
             page.fill("#gs", "咆鼻")
