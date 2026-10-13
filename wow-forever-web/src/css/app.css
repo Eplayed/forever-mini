@@ -891,6 +891,46 @@ button:hover{transform:translateY(-1px)}
 .mod:hover,.mod:focus-visible,.two>.card:hover{transform:translateY(-2px);
   border-color:var(--gold-deep);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .mod:hover>.bgart,.mod:focus-visible>.bgart{transform:scale(1.05);opacity:.24}
+/* ============================================================
+   首页入口卡（2026-10-13 用户实拍：卡片背景要的是图，不是把 128 的图标拉开放大）
+   入口卡的图要"看得见"：把不透明度从 .17 提到 .5，同时把压暗渐变从上下改成左右——
+   文字在左侧实色区，画在右侧露出来。对比度靠这层遮罩保，不靠把图调暗。
+   ============================================================ */
+.mod.hasart>.bgart{opacity:.5;background-position:78% 22%}
+/* 两张主推卡是内容卡（树格子 / 副本名单压在图上），图提到 .30 就够看出是原画，不再高 */
+.two>.card.hasart>.bgart{opacity:.3}
+.mod.hasart::after{background:linear-gradient(100deg,rgba(11,15,22,.96) 0%,rgba(11,15,22,.9) 38%,
+  rgba(11,15,22,.34) 100%)}
+.modgrid .mod.hasart{min-height:176px}
+.mod.big{display:block;position:relative;margin-top:var(--s3);min-height:210px;padding:var(--s4)}
+.mod.big h2{font-family:var(--font-display);font-size:26px;letter-spacing:.01em;margin:var(--s2) 0}
+.mod.big .modn{margin-top:var(--s3)}
+.mod.big .modn b{font-size:22px}
+/* 整卡当入口的两张主推卡：光标与焦点态要像链接，键盘也能进 */
+.go{cursor:pointer}
+.two>.card.go:focus-visible{outline:2px solid var(--gold);outline-offset:2px;
+  border-color:var(--gold-deep)}
+@media (max-width:600px){
+  /* 窄屏文字压在图上面，遮罩改回自上而下，右侧留白不够 */
+  .mod.hasart::after{background:linear-gradient(180deg,rgba(11,15,22,.42) 0%,rgba(11,15,22,.94) 58%,
+    var(--panel) 100%)}
+  .mod.hasart>.bgart{background-position:50% 18%}
+  .modgrid .mod.hasart{min-height:150px}
+  .mod.big{min-height:170px}
+}
+/* ============================================================
+   专精原画当背景（2026-10-13 用户实拍：天赋图每个职业每一系都是一张背景图）
+   图垫在渐变色底与格子之间：.tbg 是 z-index 0 的图层，格子那一排抬到 1，
+   依赖连线仍在 0 但 DOM 在后，所以顺序是 图 → 线 → 格子。
+   底部用 inset 阴影压暗，标题与"已投 N 点"那行不吃素材的亮度。
+   ============================================================ */
+.tbg,.sbg{position:absolute;inset:0;z-index:0;background:center/cover no-repeat;opacity:.32;
+  pointer-events:none;box-shadow:inset 0 -70px 70px -24px var(--panel-2)}
+.tree>h3,.tree>.hint,.tree>.row,.tree>.flow{position:relative;z-index:1}
+.spec{position:relative;overflow:hidden}
+.spec>*:not(.sbg){position:relative;z-index:1}
+.spec>.sbg{opacity:.30;background-position:72% 22%}
+.spec.on>.sbg{opacity:.4}
 /* 职业入口条：hero 里只做"进那一职业页"的入口，切树仍在预览卡里，两处不重复职责 */
 .clsrow{display:flex;flex-wrap:wrap;gap:var(--s3);margin:var(--s3) 0 0}
 .clsrow a{width:60px;text-align:center;color:var(--txt-dim);font-size:11.5px;line-height:1.4;

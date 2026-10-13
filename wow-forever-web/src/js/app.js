@@ -158,6 +158,12 @@
     professions: 'img/icons/10prof_table_tailoring01.jpg'
   };
   function secArt(sec) { return SEC_ART[sec] || null; }
+  /* 专精背景图（27 张，每系一张 320×384）：来自 art.json 的 specs 键，键名是「职业-第几系」。
+     取不到就退回该职业的横幅，再没有就留空——不拿 128 的图标放大凑数（用户实拍指的就是这个）。 */
+  function specArt(A, cid, ti) {
+    var S = (A || {}).specs || {};
+    return S[(cid || '') + '-' + (ti === undefined ? 0 : ti)] || S[(cid || '') + '-0'] || '';
+  }
   /* 词条归属：职业词条按职业分组，种族特长按种族分组，剩下的进「装备与其他」。
      技能书页与术语速查页共用这一份，避免两处分组口径不一致。 */
   function raceLookup(races) {
@@ -582,9 +588,12 @@
       var chgSum = (S.changesNew || 0) + (S.changesModified || 0) + (S.changesRemoved || 0) +
         (S.changesSpellsChanged || 0);
 
+      /* 入口卡：一张卡 = 一个去处，背景一定是"图"（客户端原画 / 载入图 / 场景图），
+         不是把 128 的图标拉开放大。2026-10-13 用户实拍：以前那些卡拿职业图标当背景，
+         放大就是一团糊的；这次每格都从 art.json 里取真图，取不到留纯色，不放假图。
+         卡上只留三样：板块归属一行、标题、一行读数。 */
+      function artOf(group, key) { return ((ART[group] || {})[key]) || ''; }
       function mod(m) {
-        // 背景图只在有本地原画时加：没有对应素材的卡留纯色，不拿别的板块的图凑数
-        // 2026-10-12 站主决定：板块卡只留标题与读数，讲数据出处与取舍的那两句已删掉，出处集中在溯源页。
         return '<a class="mod' + (m.art ? ' hasart' : '') + '" href="' + m.href + '">' +
           (m.art ? '<span class="bgart" aria-hidden="true" style="background-image:url(' + m.art + ')"></span>' : '') +
           '<div class="mline">' + D.esc(m.kicker) + '</div>' +
@@ -593,36 +602,43 @@
             return '<span><b class="mono">' + x[0] + '</b>' + x[1] + '</span>';
           }).join('') + '</div></a>';
       }
-      // 「最常用的两个」是天赋预览与副本，单独放在前面（下面按三条线分组的卡不再重复它们）
+      function E(href, t, kicker, n, art) { return { href: href, t: t, kicker: kicker, n: n, art: art }; }
       var MODS = [
-        { line: '角色线', items: [
-        { href: 'races.html', t: '种族与职业组合', kicker: '角色 · 种族 ' + S.races + ' 行',
-          art: (ART.races || {})['skyborne'] || (ART.races || {})['alliance'] || '',
-          n: [[S.races, '个种族行'], [S.traits, '条特长整句'], [S.classes, '职业可选']] },
-        { href: 'legacy.html', t: '传承专长与挑战', kicker: '角色 · 传承 · 本版新增',
-          n: [[S.legacy.perks, '个专长有明细'], [S.legacy.challenges, '项挑战'], [S.legacy.unknown, '格未公开']] },
-        { href: 'skills.html', t: '技能书', kicker: '角色 · 技能 · ' + S.abilities + ' 条',
-          n: [[S.glossary, '条技能书'], [S.abilities, '条官方整句']] }
+        { line: '角色与职业', items: [
+        E('talent.html', '天赋计算器', '工具 · ' + S.classes + ' 职业',
+          [[S.talentNodes, '个天赋节点'], [S.changesNew, '个新增天赋']], artOf('panels', 'talent')),
+        E('classes.html', '职业总览', '职业 · ' + S.classes + ' 页',
+          [[S.classes, '个职业'], [S.abilities, '条技能说明']], artOf('classBanners', 'warrior')),
+        E('chooser.html', '不知道选哪个职业', '工具 · 问答 7 题',
+          [[7, '题'], [S.classes, '职业候选']], artOf('classBanners', 'druid')),
+        E('skills.html', '技能书', '角色 · 技能',
+          [[S.abilities, '条官方整句'], [S.glossary, '条四态对照']], artOf('panels', 'spellbook')),
+        E('legacy.html', '传承专长与挑战', '角色 · 本版新增',
+          [[S.legacy.perks, '个专长有明细'], [S.legacy.unknown, '格未公开']], artOf('scenes', 'guangshu')),
+        E('races.html', '种族与职业组合', '角色 · 种族 ' + S.races + ' 行',
+          [[S.races, '个种族行'], [S.traits, '条特长整句']], artOf('factionCities', 'alliance'))
         ] },
-        { line: '世界线', items: [
-        { href: 'world.html', t: '区域与稀有精英', kicker: '世界 · 区域 ' + S.zones + ' 个',
-          art: (ART.maps || {})['1411'] || '',
-          n: [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']] },
-        { href: 'professions.html', t: '专业与配方', kicker: '专业 · ' + S.professions + ' 个',
-          n: [[S.professions, '个专业'], [S.recipes, '条配方'], [S.gatherNodes, '个采集点']] },
-        { href: 'glossary.html', t: '中英术语速查', kicker: '世界 · 词条 ' + S.glossary + ' 条',
-          n: [[S.glossary, '条词条'], [S.abilities, '条四态对照'], [S.classes, '组职业']] }
-        ] },
-        { line: '工具线', items: [
-        { href: 'chooser.html', t: '不知道选哪个职业', kicker: '工具 · 问答 7 题',
-          n: [[7, '题'], [S.classes, '职业候选'], [S.talentNodes, '节点参与算分']] },
-        { href: 'timeline.html', t: '上线与 Beta 时间表', kicker: '工具 · 时间点 ' + S.timeline + ' 个',
-          art: (ART.factionCities || {})['alliance'] || '',
-          n: [[S.timeline, '个时间点'], [tlCounts(tl).done, '个已过'], [tlCounts(tl).upcoming, '个待来']] },
-        { href: 'systems.html', t: '系统与新区域', kicker: '工具 · 规则条目',
-          n: [[S.newZones, '个新区域'], [S.pubTotal, '条对外词条']] }
+        { line: '世界与冒险', items: [
+        E('world.html', '区域与稀有精英', '世界 · 区域 ' + S.zones + ' 个',
+          [[S.zones, '区域'], [S.rares, '已定位稀有'], [S.books, '本书有坐标']], artOf('maps', '1411')),
+        E('dungeons.html', '副本与掉落', '世界 · ' + S.dungeons + ' 座',
+          [[S.dungeons, '座本'], [S.bosses, '个首领'], [S.drops, '条掉落']], artOf('dungeons', 'city-of-dalaran')),
+        E('raids.html', '团队副本', '世界 · 团本',
+          [[(S.raids || {}).names || 0, '个团队条目'], [(S.raids || {}).claimed || 0, '座有名单']],
+          artOf('scenes', 'tielu-dadian')),
+        E('professions.html', '专业与配方', '专业 · ' + S.professions + ' 个',
+          [[S.professions, '个专业'], [S.recipes, '条配方'], [S.gatherNodes, '个采集点']], artOf('scenes', 'gulin')),
+        E('glossary.html', '中英术语速查', '世界 · 词条',
+          [[S.glossary, '条词条'], [S.classes, '组职业']], artOf('classBanners', 'mage')),
+        E('timeline.html', '上线与 Beta 时间表', '工具 · 时间点',
+          [[S.timeline, '个时间点'], [tlCounts(tl).done, '个已过'], [tlCounts(tl).upcoming, '个待来']],
+          artOf('factionCities', 'horde'))
         ] }
       ];
+      /* 站方那几个去处不做卡片了（2026-10-13 用户：首页要留一行小入口）：
+         排行 / 溯源 / 系统规则 / 最新动态，一行文字链，点得进但不抢版面。 */
+      var MINILINKS = [['rank.html', '资料完整度排行'], ['provenance.html', '溯源与覆盖率'],
+        ['systems.html', '系统与新区域'], ['updates.html', '这一版改了什么']];
 
       /* 首页主卡按设计稿改成整幅底图带：图是本站自生成的氛围图，左边压到 97% 暗给标题与搜索框。
          2026-10-12 站主决定：内容页只留标题与数据——「示意图」角标、覆盖率条与数据基线那几段
@@ -667,24 +683,9 @@
               : '<i class="hrt-x">' + D.esc((c.cn || '?').charAt(0)) + '</i>') +
             '<b>' + D.esc(c.cn) + '</b></a>';
         }).join('') + '</div></section>' +
-        '<section class="hsec"><div class="krow"><div><div class="kicker">EXPLORE TOOLS</div>' +
-        '<h2>这座站的六个入口</h2></div></div><div class="tools6">' +
-        /* 2026-10-12 站主决定：六个入口卡只留标题与条数，讲"这页的数据从哪来、本站不做什么"
-           的那句说明已删掉，出处集中在溯源页。 */
-        [['talent.html', '天赋计算器', S.talentNodes + ' 个节点 · ' + S.classes + ' 职业'],
-        ['updates.html', '这一版改了什么', S.changes + ' 条改动清单'],
-        ['dungeons.html', '副本与掉落', S.dungeons + ' 座 · ' + S.bosses + ' 个首领'],
-        ['skills.html', '技能书', S.abilities + ' 条'],
-        ['professions.html', '专业与配方', S.professions + ' 个专业 · ' + S.recipes + ' 条配方'],
-        ['glossary.html', '中英术语速查', S.glossary + ' 条词条']].map(function (t) {
-          return '<a class="tool plate" href="' + t[0] + '">' +
-            '<span class="tico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" ' +
-            'stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/>' +
-            '<path d="M9 12h6M12 9v6"/></svg></span>' +
-            '<h3>' + t[1] + '</h3>' +
-            '<span class="foot"><em>' + t[2] + '</em><i>进入 →</i></span></a>';
-        }).join('') + '</div></section>' +
-        // 板块入口的图标轨：每格一张本地原画，指向真页面；没有本地图的格子退回字母块。
+        /* 首页只留"去哪儿"：六个文字入口卡与三条线分组卡的读数版式一起撤掉（2026-10-13 用户实拍：
+           入口重复、那些读数像数据变动明细不像资料站）。留图标轨 + 一组带真原画的入口卡。 */
+        // 图标轨：一格一张本地原画的快速入口，没有图的退回字母块（用户实拍：这一排要留着）
         (function () {
           var tiles = [
             ['天赋计算器', 'talent.html', secArt('talent'), 'D'],
@@ -706,13 +707,15 @@
               '<span class="hrt-l">' + t[0] + '</span></a>';
           }).join('') + '</div>';
         })() +
-        '<div class="sect"><h2>最常用的两个</h2></div><div class="two">' +
-        '<section class="card hasart" id="treecard"><span class="bgart" aria-hidden="true" style="' +
-          ((ART.classes || {})[PV.c] ? 'background-image:url(' + ART.classes[PV.c] + ')' : '') +
+        /* 两张主推卡整卡可点（用户：「最常用的两个」那行标题不要了，卡片本身当入口）。
+           data-go 的跳转由 bindGo() 做：点在卡里的链接或按钮上时不抢它们自己的去向。 */
+        '<div class="two">' +
+        '<section class="card hasart go" id="treecard" tabindex="0" data-go="talent.html?c=' + encodeURIComponent(PV.c) + '"><span class="bgart" aria-hidden="true" style="' +
+          (specArt(ART, PV.c, PV.t) ? 'background-image:url(' + specArt(ART, PV.c, PV.t) + ')' : '') +
           '"></span><div class="mline">工具 · 天赋 · <b>' + S.classes + '</b> 职业 <b>' + S.talentNodes +
           '</b> 节点</div><h2>先看一棵真树，再进计算器</h2>' + treeCard() + '</section>' +
-        '<section class="card hasart"><span class="bgart" aria-hidden="true" style="' +
-          (DUN.art ? 'background-image:url(' + DUN.art + ')' : '') + '"></span>' +
+        '<section class="card hasart go" tabindex="0" data-go="dungeons.html"><span class="bgart" ' +
+          'aria-hidden="true" style="' + (DUN.art ? 'background-image:url(' + DUN.art + ')' : '') + '"></span>' +
         '<div class="mline">世界 · 副本 · <b>' + S.dungeons + '</b> 座 <b>' + S.bosses +
           '</b> 首领 <b>' + S.drops + '</b> 条掉落归属</div><h2>副本手册</h2>' +
         '<div class="kv"><span>无限新增</span><b>' + S.dungeonsNew + ' 座</b></div>' +
@@ -727,27 +730,23 @@
             '<span class="dim mono">' + (nb ? nb + ' 首领' : '首领待补') + '</span></div>';
         }).join('') +
         '<a class="cta" href="dungeons.html">按十级一档看全部 ' + S.dungeons + ' 座 →</a></section></div>' +
-        '<div class="chipsrow"><span class="dim">还要去哪：</span>' +
-        [['updates.html', '最新动态'], ['rank.html', '资料完整度排行'], ['timeline.html', '上线时间表'],
-          ['provenance.html', '溯源与覆盖率'], ['systems.html', '系统规则'], ['skills.html', '技能书']].map(function (x) {
-            return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
-          }).join('') + '</div>' +
         MODS.map(function (g) {
-          return '<div class="grphead"><h2>' + g.line + '</h2><span>' + g.items.length +
-            ' 个板块</span></div><div class="modgrid">' + g.items.map(mod).join('') + '</div>';
+          return '<div class="grphead"><h2>' + g.line + '</h2></div>' +
+            '<div class="modgrid">' + g.items.map(mod).join('') + '</div>';
         }).join('') +
-        '<div class="grphead"><h2>自经典旧世以来的改动</h2><span>' + S.changes + ' 条</span></div>' +
-        '<section class="card"><div class="mline">改动清单 · <b>' + S.changes + '</b> 条</div>' +
-        '<div class="four"><div><b>' + S.changesNew + '</b><s>新增天赋</s></div>' +
-        '<div><b>' + S.changesModified + '</b><s>改动天赋</s></div>' +
-        '<div><b>' + S.changesRemoved + '</b><s>移除</s></div>' +
-        '<div><b>' + S.changesSpellsChanged + '</b><s>法术有变</s></div></div>' +
-        /* 这两行不是说明文案，是数与数之间的对照：全部条目 965 与四格之和 751 同屏出现，
-           不把差在哪写清楚就是自己打脸。 */
-        '<div class="kv"><span>这四格加起来比上面的 ' + S.changes + ' 少 ' + (S.changes - chgSum) + ' 条</span>' +
-        '<b>' + S.changes + ' = 天赋 ' + S.changesTalents + ' + 法术 ' + (S.changes - S.changesTalents) + '</b></div>' +
-        '<p class="dim">清单把 ' + S.changes + ' 条客户端条目都列了出来，其中 ' + chgSum +
-        ' 条在无限服真的动了（新增、改动、移除，或法术说明有变）；剩下的只是列进对照表、本身没变。</p></section>' +
+        /* 「自经典旧世以来的改动」那四格与"全部 vs 四格之和"的对照行搬去动态页
+           （2026-10-13 用户：那是数据明细，首页要的是入口）。这里只留一张入口卡。 */
+        '<a class="mod big hasart" href="updates.html">' +
+        '<span class="bgart" aria-hidden="true" style="background-image:url(' +
+          (((ART.scenes || {}).yunhai) || ((ART.panels || {}).talent)) + ')"></span>' +
+        '<div class="mline">这一版 · 客户端改动</div><h2>自经典旧世以来改了什么</h2>' +
+        '<div class="modn"><span><b class="mono">' + S.changes + '</b>条改动</span>' +
+        '<span><b class="mono">' + S.changesNew + '</b>个新增天赋</span>' +
+        '<span><b class="mono">' + cl.length + '</b>条本站更新</span></div></a>' +
+        // 站方口径的去处：一行文字链，点得进但不占卡位
+        '<div class="chipsrow"><span class="dim">更多入口：</span>' + MINILINKS.map(function (x) {
+          return '<a href="' + x[0] + '">' + x[1] + ' →</a>';
+        }).join('') + '</div>' +
         // 原来这里是 .grid.g2 两栏（最新动态 + 「这一站刻意不做的」）；后一张卡按站主决定撤掉后只剩一张，
         // 两栏会空出半行，所以连壳一起换成整宽单卡。
         '<div class="card"><h2>最新动态</h2>' +
@@ -769,8 +768,24 @@
         '<a class="cta" href="updates.html">全部动态（' + S.timeline + ' 个时间点 · ' + S.changes +
         ' 条改动 · ' + cl.length + ' 条本站更新）→</a>' +
         '<a class="cta" href="rank.html">资料完整度排行全表 →</a></div>');
+      /* 整卡当入口（2026-10-13 用户：「最常用的两个」那行标题不要了，卡片本身点进去）：
+         点在卡里的链接或按钮上时让给它们自己，只有点在卡的空白处才按 data-go 跳。
+         键盘用 tabindex + Enter，不用 <a> 套 <a>（HTML 不允许，浏览器会把内层拆出去）。 */
+      function bindGo() {
+        Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (c) {
+          if (c.dataset.gobound) return;
+          c.dataset.gobound = '1';
+          function go(e) {
+            if (e && e.target && e.target.closest && e.target.closest('a, button, .stripc, .pnode, .pick')) return;
+            location.href = c.dataset.go;
+          }
+          c.onclick = go;
+          c.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(e); } };
+        });
+      }
       bindSearch();
       bindPreview();
+      bindGo();
       tickCountdown();
     }).catch(fail);
   }
@@ -942,7 +957,9 @@
           return '<div class="row" style="grid-template-columns:repeat(' + cols + ',1fr)">' + slots(row, cols).map(function (n) { return cell(n, t, ti, r, trees); }).join('') + '</div>';
         }).join('')
         : '<div class="flow">' + t.nodes.map(function (n) { return cell(n, t, ti, r, trees, true); }).join('') + '</div>';
+      var bg = specArt(tstate.art, tstate.classId, ti);
       return '<div class="tree t' + (ti % 3) + ' ' + (document.body.clientWidth < 861 && ti !== tstate.active ? 'hide' : '') + '" data-tree="' + ti + '">' +
+        (bg ? '<span class="tbg" aria-hidden="true" style="background-image:url(' + bg + ')"></span>' : '') +
         '<h3><span' + treeAltTip(t) + '>' + treeName(t) + ' <span class="dim mono">' + D.esc(t.nameEn || '') + '</span></span>' +
         '<button class="ghost" data-clear="' + ti + '" style="font-size:11px;padding:2px 6px">清空</button></h3>' +
         '<div class="hint">已投 ' + sp + ' 点 · ' + t.nodes.length + ' 个天赋 · ' + nextGate(t, r) + '</div>' + grid + '</div>';
@@ -1317,7 +1334,10 @@
 
           /* 2026-10-12 站主决定：职业页只留职业名与条数——讲数据出处（客户端解包 / 官方中文稿）
              与素材来源的角标、备注那几段已删，出处集中在溯源页（provenance.html）。 */
+          // artOf 是 home() 里的局部函数，这里不能用它——直接取，取不到退回这一职业第一系的原画
+          var banner = ((ART.classBanners || {})[c.id]) || specArt(ART, c.id, 0);
           var hero = '<section class="dhero clhero"' + (col ? ' style="--cl:' + col + '"' : '') + '>' +
+            (banner ? '<img src="' + D.esc(banner) + '" alt="" loading="lazy">' : '') +
             '<span class="dx"></span><div class="db"><div class="clt">' +
             '<div class="kicker">' + D.esc('CLASS · ' + String(c.en || c.id || '').toUpperCase()) + '</div>' +
             '<h1 class="pt">' + D.esc(c.cn || '未定名') +
@@ -1341,10 +1361,12 @@
           /* 三系卡：选中那一系就把右边的技能变化收到这一系，再点一次回到三系都列。
              系名用官方定名，另一来源的叫法走红框悬停（与天赋页同一套符号，见 treeName / treeAltTip）。 */
           var spec = trees.length ? '<section class="spec3" aria-label="这一职业的三系专精">' +
-            trees.map(function (t) {
+            trees.map(function (t, ti) {
               var on = f.s === t.nameCn;
               return '<button type="button" class="spec plate' + (on ? ' on' : '') + '" data-s="' +
                 D.esc(t.nameCn) + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + treeAltTip(t) + '>' +
+                (specArt(ART, c.id, ti) ? '<span class="sbg" aria-hidden="true" style="background-image:url(' +
+                  specArt(ART, c.id, ti) + ')"></span>' : '') +
                 '<b>' + treeName(t) + '</b><span>' + (t.nodes || []).length + ' 个节点</span>' +
                 '<span class="spnote">' + (on ? '已只看这一系，再点一次看全部' : '只看这一系的改动') + '</span>' +
                 '</button>';
@@ -2919,6 +2941,9 @@
         if (uw === 'talent' || uw === 'spell') f.what = uw;
         var cnOf = {};
         classes.forEach(function (c) { cnOf[c.id] = c.cn; });
+        // 四格之和现算（与首页同一口径），不写死
+        var chgSum2 = (S.changesNew || 0) + (S.changesModified || 0) + (S.changesRemoved || 0) +
+          (S.changesSpellsChanged || 0);
 
         function rows() {
           var kw = f.q.trim().toLowerCase();
@@ -3038,6 +3063,17 @@
           }).join('') + '</div>' +
 
           '<div class="card" id="k1"><h2>客户端改动清单 · ' + (ch.items || []).length + ' 条</h2>' +
+          /* 这四格与下面那行对照从首页搬来（2026-10-13 用户：首页那些读数像数据变动明细，
+             不像资料站入口）。放在它描述的那张表头上，才对得上"全部 965 条 vs 四格之和 751"。 */
+          '<div class="four"><div><b>' + S.changesNew + '</b><s>新增天赋</s></div>' +
+          '<div><b>' + S.changesModified + '</b><s>改动天赋</s></div>' +
+          '<div><b>' + S.changesRemoved + '</b><s>移除</s></div>' +
+          '<div><b>' + S.changesSpellsChanged + '</b><s>法术有变</s></div></div>' +
+          '<div class="kv"><span>这四格加起来比上面的 ' + (ch.items || []).length + ' 少 ' +
+          ((ch.items || []).length - chgSum2) + ' 条</span><b>' + (ch.items || []).length +
+          ' = 天赋 ' + S.changesTalents + ' + 法术 ' + ((ch.items || []).length - S.changesTalents) + '</b></div>' +
+          '<p class="dim">清单把 ' + (ch.items || []).length + ' 条客户端条目都列了出来，其中 ' + chgSum2 +
+          ' 条在无限服真的动了（新增、改动、移除，或法术说明有变）；剩下的只是列进对照表、本身没变。</p>' +
           '<div id="chbody"></div></div>' +
 
           '<div class="card" id="k2"><h2>本站更新 · ' + cl.length + ' 条</h2>' +
