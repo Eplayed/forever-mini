@@ -128,6 +128,18 @@ const dg = read('dungeons.json');
       String(d.levelRange).replace(/[–—~]/g, '-') === String(d.levelRangeClient)) {
       errs.push(`dungeon ${d.id}：等级区间客户端与本站已经一致了，还留着另一种说法，界面上会自相矛盾`);
     }
+    // 2026-10-13 站主决定等级区间按参考站的副本卡片定稿：界面上只摆一个数，
+    // 定稿前官方公告那个数留在 levelRangeOfficial 里（撤掉分歧不等于扔掉另一个数）。
+    // 这条校验保证那个"留档"是真留了东西：留一个和现在一样的数，就是装样子。
+    if (d.levelRangeOfficial !== undefined && d.levelRangeOfficial !== null) {
+      const off = String(d.levelRangeOfficial).replace(/[–—~]/g, '-');
+      if (!/^\d+-\d+$/.test(off)) {
+        errs.push(`dungeon ${d.id}：levelRangeOfficial=「${d.levelRangeOfficial}」不是「最低-最高」的写法`);
+      }
+      if (off === String(d.levelRange || '').replace(/[–—~]/g, '-')) {
+        errs.push(`dungeon ${d.id}：定稿前那个数与本站采用的数一样，levelRangeOfficial 是空留档，删掉`);
+      }
+    }
     if (d.nameEnClient && d.nameEn && d.nameEnClient === d.nameEn) {
       errs.push(`dungeon ${d.id}：英文名另一种说法与本站写的同一个词`);
     }

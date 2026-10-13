@@ -1566,16 +1566,6 @@
   }
 
   /* ---------- 副本手册 ---------- */
-  function dunRoute(arr) {
-    if (!arr || !arr.length) return '';
-    return '<ul class="list">' + arr.map(function (r) {
-      var o = r && typeof r === 'object' ? r : {};
-      var txt = typeof r === 'string' ? r : (r.label || r.name || r.text || '');
-      var at = o.at || '';
-      return '<li>' + D.esc(txt || '—') +
-        (at ? ' <span class="dim mono">' + D.esc(at) + '</span>' : '') + '</li>';
-    }).join('') + '</ul>';
-  }
   function dunLoot(x) {
     var bosses = x.bosses || [], drops = x.drops || [];
     if (!bosses.length) return '<p class="dim">这座本还没有首领名单。</p>';
@@ -1619,23 +1609,12 @@
     return String(a.nameCn || a.nameEn || '').localeCompare(String(b.nameCn || b.nameEn || ''));
   }
   /* 一座本上有几处"两个来源说法不一样"，逐条攒成数组：列表页的抽屉与详情页共用这一份措辞，
-     不在两处各写一遍，免得改了这边忘了那边。 */
+     不在两处各写一遍，免得改了这边忘了那边。
+     等级区间这一条 2026-10-13 站主拍板按参考站卡片显示的那个数定稿，不再摆"两说"——
+     官方公告那个数没丢，留在数据的 levelRangeOfficial 里，出处与决定写在溯源页。
+     剩下三条还是活的分歧，一条都不许撤（红线）。 */
   function dunConf(x) {
     var out = [];
-    var cli = x.levelRangeClient, alt = x.levelRangeAlt;
-    if (cli && alt && cli === alt) {
-      out.push('等级区间两说：本站取「' + D.esc(x.levelRange) + '」（官方公告），'
-        + '客户端的队伍查找器与副本卡片都写「' + D.esc(cli) + '」，待定稿');
-    } else if (cli && alt) {
-      out.push('等级区间有三种说法：本站取「' + D.esc(x.levelRange || '还没核') + '」（官方公告），'
-        + '另一份资料写「' + D.esc(alt) + '」，客户端的队伍查找器写「' + D.esc(cli) + '」，都留着待定稿');
-    } else if (cli) {
-      out.push('等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」，'
-        + '客户端的队伍查找器写「' + D.esc(cli) + '」，两个都留着');
-    } else if (alt) {
-      out.push('等级区间两说：本站取「' + D.esc(x.levelRange || '还没核') + '」（官方公告），'
-        + '另一份资料写「' + D.esc(alt) + '」，待定稿');
-    }
     if (x.partySizeAlt) {
       out.push('客户端的队伍查找器里它另有一条 ' + x.partySizeAlt +
         ' 人的排队条目，与本站的 ' + x.partySize + ' 人并列，是不是同一个本两种规模要实测');
@@ -1676,14 +1655,13 @@
       '<span>' + ((x.bosses || []).length ? (x.bosses || []).length + ' 个首领' : '首领待补') + '</span>' +
       '<span>' + ((x.drops || []).length ? (x.drops || []).length + ' 件掉落' : '掉落待补') + '</span>' +
       (x.partySize ? '<span>一次 ' + x.partySize + ' 人</span>' : '') +
-      (x.levelRange || x.levelRangeClient ? '' : '<span class="dim">等级区间待实测</span>') +
+      (x.levelRange ? '' : '<span class="dim">等级区间待实测</span>') +
       (x.nameCn ? '' : '<span class="dim">中文定名未公布</span>') + '</div>' +
       '<a class="dstretch" href="dungeon.html?d=' + D.esc(x.id) + '" aria-label="看「' + nm + '」这一座的整页"></a>' +
       '<button class="ghost wide" data-d="' + D.esc(x.id) + '">速览首领与掉落</button>' +
       '<div class="drawer" id="d-' + D.esc(x.id) + '" style="display:none">' +
       dunConfHtml(x) + dunNoQueue(x) +
       '<h3>首领与掉落</h3>' + dunLoot(x) +
-      '<h3>路线</h3>' + (dunRoute(x.route) || '<p class="dim">待实测。</p>') +
       '<a class="cta-cut" href="dungeon.html?d=' + D.esc(x.id) + '">看这一座的整页 →</a>' +
       '</div></div>';
   }
@@ -1697,9 +1675,7 @@
       return true;
     });
     var head = lv ? '<p class="dim">' + lv + ' 级落在 ' + rows.length +
-      ' 座本的等级区间里。区间用本站采用的那个数，另有 ' +
-      rows.filter(function (x) { return x.levelRangeClient || x.levelRangeAlt; }).length +
-      ' 座有两种说法，展开卡片里的速览看两个数。</p>' : '';
+      ' 座本的等级区间里。区间取本站采用的那个数。</p>' : '';
     var bands = DUN_BANDS.map(function (b, i) {
       return dunBandBlock(b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级', b[2],
         rows.filter(function (x) { return dunBand(x) === i; }).sort(dunSort));
@@ -1762,7 +1738,8 @@
       var nb = all.reduce(function (s, x) { return s + (x.bosses || []).length; }, 0);
       var nd = all.reduce(function (s, x) { return s + (x.drops || []).length; }, 0);
       var nParty = all.filter(function (x) { return x.partySize; }).length;
-      var nTwo = all.filter(function (x) { return x.levelRangeClient || x.partySizeAlt || x.nameEnClient; }).length;
+      var nTwo = all.filter(function (x) { return x.partySizeAlt || x.nameEnClient; }).length;
+      var nSettled = all.filter(function (x) { return x.levelRangeOfficial; }).length;
       var newN = (d.newDungeons || []).length, clN = (d.classicDungeons || []).length;
       var lo = 99, hi = 0;
       DUN.list.forEach(function (x) {
@@ -1792,7 +1769,8 @@
         '<h1 class="pt">副本手册</h1>' +
         '<p class="dim">共 ' + all.length + ' 座：' + newN + ' 座无限新增、' + clN + ' 座经典本、' +
         (d.raids || []).length + ' 座团本，按十级一档分。一次几人取自客户端的队伍查找器（' + nParty +
-        ' 座有数）。另有 ' + nTwo + ' 座的等级区间、人数或英文原名有两种说法，两个数都留着，不做取舍。' +
+        ' 座有数）。另有 ' + nTwo + ' 座的一次几人或英文原名有两种说法，两个数都留着，不做取舍。' +
+        '等级区间一座只给一个数，其中 ' + nSettled + ' 座按参考站的副本卡片定过稿。' +
         '掉落只回答"谁掉了什么"，不写概率。</p>' +
         '<div class="four dunstat">' +
         '<div><s>地下城</s><b>' + (newN + clN) + '</b><s>座</s></div>' +
@@ -1870,8 +1848,10 @@
   /* ---------- 每座本一页 ----------
      参考站的详情页有"任务 / 任务物品 / 任务起始地点 / 任务经验"四块，我们数据里一条都没有
      （upstream/wclbox-dungeons.json 只带首领与掉落），所以那几块不画——缺数据不许编。
-     这一页画的是我们有的：载入图、等级区间与两种说法、所在区域与阵营、一次几人、
-     首领名单与头像、按首领归组的掉落、路线。 */
+     这一页画的是我们有的：载入图、定过稿的等级区间、所在区域与阵营、一次几人、
+     首领名单与头像、按首领归组的掉落。
+     「路线」2026-10-13 站主说暂时先不要，整块撤了：数据里 route 三十八条全是空数组，
+     画出来永远是"待实测"，占位没有信息量。要恢复先看 dungeons.json 的 route 字段。 */
   function dungeonPage() {
     Promise.all([D.load('data/dungeons.json'), D.load('data/art.json').catch(function () { return {}; })])
       .then(function (rs) {
@@ -1974,9 +1954,6 @@
         '<div class="card"><h2>首领与掉落</h2>' +
         (bosses.length ? bosses.map(bossBlock).join('')
           : '<p class="dim">这座本还没有首领名单，掉落也就没有归属可写。</p>') +
-        '</div>' +
-        '<div class="card" id="droute"><h2>路线</h2>' + (dunRoute(x.route) ||
-          '<p class="dim">待实测。这一版还没有走过这座本的路线记录，不拿别人的攻略填进来。</p>') +
         '</div>' +
         '<div class="card"><h2>换一座</h2>' +
         '<select id="dpick" class="dunsel" aria-label="跳到另一座地下城的详情页">' +
@@ -2236,18 +2213,22 @@
 
   /* ---------- 溯源 ---------- */
   function provenance() {
-    Promise.all([D.load('data/meta.json'), D.load('data/method.json'), D.load('data/scale.json')])
+    Promise.all([D.load('data/meta.json'), D.load('data/method.json'), D.load('data/scale.json'),
+      D.load('data/dungeons.json').catch(function () { return {}; })])
       .then(function (r) {
         var sc = r[2].scale;
         // covBar 按 total 算四段宽度，scale.json 里的分级不带 total，这里显式补上
         var cov = { L0: sc.pubCoverage.L0, L1: sc.pubCoverage.L1, L2: sc.pubCoverage.L2,
           L3: sc.pubCoverage.L3, total: sc.pubTotal };
         var m = r[1] || {};
+        var RS = (r[3] || {}).meta || {};
         var names = { L0: '已官方核实', L1: '仅官方英文', L2: '待实测', L3: '缺数据' };
         var refs = [['wow.blizzard.cn/news/', '国服官方公告与职业深度解析', '可入自动化'],
         ['wow.blizzard.cn/24266320/', '国服在线修正', '可入自动化（需整页比对）'],
         ['news.blizzard.com', '官方英文回顾与上线时间', '可入自动化'],
         ['worldofwarcraft.blizzard.com/en-us/forever', '官方英文 forever 页', '可入自动化'],
+        ['wowforever.wclbox.com', '客户端解包转述的中文名、副本卡片与等级区间、首领头像',
+          '只取名称、编号、区间、图标文件名与原画转存；它的攻略正文与掉落概率一律不搬'],
         ['wowhead.com/forever', '逐本指南、天赋计算器、天梯', '人工参照，禁止搬数据'],
         ['wago.tools/db2', '客户端数据表的 CSV 转储（非暴雪域名，只留最近几个版本）',
           '只取英文名、ID、等级与人数；文案一律不搬'],
@@ -2298,7 +2279,12 @@
           (r[0].openQuestions || []).map(function (q) { return '<li>' + D.esc(q) + '</li>'; }).join('') + '</ol></div>' +
           '<div class="card"><h2>来源站点与用法边界</h2><table><thead><tr><th>站点</th><th>能给什么</th><th>怎么用</th></tr></thead><tbody>' +
           refs.map(function (x) { return '<tr><td class="mono">' + x[0] + '</td><td>' + x[1] + '</td><td>' + x[2] + '</td></tr>'; }).join('') +
-          '</tbody></table></div>' +
+          '</tbody></table>' +
+          /* 副本等级区间定稿这条决定写在溯源页：内容页只摆定稿后的那一个数，
+             但"以前有两个数、按哪个定的、另一个去哪了"必须有人交代，写在数据里由这一页读出来。 */
+          (RS.levelRangeSettled ? '<p class="dim" style="margin-top:var(--s3)">' +
+            D.esc(RS.levelRangeSettled.by) + '：' + D.esc(RS.levelRangeSettled.note) + '</p>' : '') +
+          '</div>' +
           '<div class="card"><h2>发布前的检查规则</h2><ul>' +
           (r[0].rules || []).map(function (x) { return '<li>' + D.esc(x) + '</li>'; }).join('') + '</ul></div>');
       }).catch(fail);

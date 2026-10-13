@@ -14,6 +14,12 @@
    "withPortrait": 146,
    "note": "客户端遭遇战手册头像，经第三方站转存在本地 img/art/bosses/；源站自己标\"没有这张脸\"的首领留空",
    "manifest": "src/img/art/manifest.json"
+  },
+  "levelRangeSettled": {
+   "at": "2026-10-13",
+   "by": "参考站 wowforever.wclbox.com 的副本卡片",
+   "url": "https://wowforever.wclbox.com/fuben",
+   "note": "同一座本的等级区间以前有官方公告与参考站卡片两个数，2026-10-13 站主决定按参考站卡片定稿。官方公告那个数没有删，还留在这座本的记录里（定稿前那个数），界面上只摆定稿后的那一个。"
   }
  },
  "newDungeons": [
@@ -24,7 +30,8 @@
    "nameEn": "Hall of Thanes",
    "nameCnConflict": "诸王大厅",
    "kind": "new",
-   "levelRange": "13-18",
+   "levelRange": "13-20",
+   "levelRangeOfficial": "13-18",
    "bosses": [
     {
      "id": "faldrim-anvilmar",
@@ -116,7 +123,6 @@
    "officialBacked": true,
    "art": "img/art/dungeons/hall-of-thanes.webp",
    "zoneCn": "丹莫罗，铁炉堡地下 · 联盟",
-   "levelRangeAlt": "13-20",
    "cardCounts": {
     "bosses": "4 个首领",
     "drops": "1 件掉落"
@@ -127,8 +133,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "13-20",
-   "nameEnClient": null
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "ruins-of-lordaeron",
@@ -137,7 +144,8 @@
    "nameEn": "Ruins of Lordaeron",
    "nameCnConflict": null,
    "kind": "new",
-   "levelRange": "15-20",
+   "levelRange": "15-22",
+   "levelRangeOfficial": "15-20",
    "bosses": [
     {
      "id": "witherfang",
@@ -259,7 +267,6 @@
    "officialBacked": true,
    "art": "img/art/dungeons/ruins-of-lordaeron.webp",
    "zoneCn": "提瑞斯法林地，洛丹伦废墟 · 部落",
-   "levelRangeAlt": "15-22",
    "cardCounts": {
     "bosses": "7 个首领",
     "drops": "2 件掉落"
@@ -270,8 +277,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "15-22",
-   "nameEnClient": null
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "whelgars-excavation",
@@ -280,7 +288,8 @@
    "nameEn": "Whelgar's Excavation",
    "nameCnConflict": null,
    "kind": "new",
-   "levelRange": "26-31",
+   "levelRange": "26-33",
+   "levelRangeOfficial": "26-31",
    "bosses": [
     {
      "id": "saltspine",
@@ -390,7 +399,6 @@
    "officialBacked": true,
    "art": "img/art/dungeons/whelgars-excavation.webp",
    "zoneCn": "湿地，维尔加挖掘场一带",
-   "levelRangeAlt": "26-33",
    "cardCounts": {
     "bosses": "4 个首领",
     "drops": "3 件掉落"
@@ -401,8 +409,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "26-33",
-   "nameEnClient": "Excavation Site: Wetlands"
+   "levelRangeClient": null,
+   "nameEnClient": "Excavation Site: Wetlands",
+   "levelRangeAlt": null
   },
   {
    "id": "city-of-dalaran",
@@ -411,7 +420,8 @@
    "nameEn": "City of Dalaran",
    "nameCnConflict": null,
    "kind": "new",
-   "levelRange": "28-33",
+   "levelRange": "28-35",
+   "levelRangeOfficial": "28-33",
    "bosses": [],
    "route": [],
    "drops": [],
@@ -458,7 +468,6 @@
    "officialBacked": true,
    "art": "img/art/dungeons/city-of-dalaran.webp",
    "zoneCn": "奥特兰克山脉",
-   "levelRangeAlt": "28-35",
    "cardCounts": {
     "bosses": "9 个首领",
     "drops": "1 件掉落"
@@ -469,8 +478,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "28-35",
-   "nameEnClient": null
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "the-drowned-city",
@@ -480,6 +490,7 @@
    "nameCnConflict": null,
    "kind": "new",
    "levelRange": "35-40",
+   "levelRangeOfficial": null,
    "bosses": [],
    "route": [],
    "drops": [],
@@ -525,7 +536,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "kroldok-stronghold",
@@ -535,6 +547,7 @@
    "nameCnConflict": null,
    "kind": "new",
    "levelRange": "40-45",
+   "levelRangeOfficial": null,
    "bosses": [],
    "route": [],
    "drops": [],
@@ -574,7 +587,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "alcaz-prison",
@@ -584,6 +598,7 @@
    "nameCnConflict": null,
    "kind": "new",
    "levelRange": "48-53",
+   "levelRangeOfficial": null,
    "bosses": [],
    "route": [],
    "drops": [],
@@ -623,7 +638,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "blackmaw-hold",
@@ -633,6 +649,7 @@
    "nameCnConflict": null,
    "kind": "new",
    "levelRange": "55-60",
+   "levelRangeOfficial": null,
    "bosses": [],
    "route": [],
    "drops": [],
@@ -672,7 +689,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "shapers-terrace",
@@ -682,6 +700,7 @@
    "nameCnConflict": null,
    "kind": "new",
    "levelRange": "58-60",
+   "levelRangeOfficial": null,
    "bosses": [],
    "route": [],
    "drops": [],
@@ -721,7 +740,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   }
  ],
  "classicDungeons": [
@@ -732,6 +752,7 @@
    "nameEn": "Ragefire Chasm",
    "kind": "classic",
    "levelRange": "13-18",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "oggleflint",
@@ -878,7 +899,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "wailing-caverns",
@@ -886,7 +908,8 @@
    "nameCn": "哀嚎洞穴",
    "nameEn": "The Wailing Caverns",
    "kind": "classic",
-   "levelRange": "17-24",
+   "levelRange": "15-24",
+   "levelRangeOfficial": "17-24",
    "bosses": [
     {
      "id": "lady-anacondra",
@@ -1444,7 +1467,6 @@
    ],
    "art": "img/art/dungeons/wailing-caverns.webp",
    "zoneCn": "贫瘠之地",
-   "levelRangeAlt": "15-24",
    "cardCounts": {
     "bosses": "9 个首领",
     "drops": "50 件掉落"
@@ -1455,8 +1477,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "15-24",
-   "nameEnClient": null
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "deathmine",
@@ -1465,6 +1488,7 @@
    "nameEn": "The Deadmines",
    "kind": "classic",
    "levelRange": "17-26",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "rhahk-zor",
@@ -1892,7 +1916,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "shadowfang-keep",
@@ -1900,7 +1925,8 @@
    "nameCn": "影牙城堡",
    "nameEn": "Shadowfang Keep",
    "kind": "classic",
-   "levelRange": "22-30",
+   "levelRange": "20-30",
+   "levelRangeOfficial": "22-30",
    "bosses": [
     {
      "id": "rethilgore",
@@ -2404,7 +2430,6 @@
    ],
    "art": "img/art/dungeons/shadowfang-keep.webp",
    "zoneCn": "银松森林",
-   "levelRangeAlt": "20-30",
    "cardCounts": {
     "bosses": "9 个首领",
     "drops": "43 件掉落"
@@ -2415,8 +2440,9 @@
    "partySize": 5,
    "partySizeAlt": null,
    "clientAltIds": null,
-   "levelRangeClient": "20-30",
-   "nameEnClient": null
+   "levelRangeClient": null,
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "blackfathom-deeps",
@@ -2425,6 +2451,7 @@
    "nameEn": "Blackfathom Deeps",
    "kind": "classic",
    "levelRange": "24-32",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "ghamoo-ra",
@@ -2673,7 +2700,8 @@
     1604
    ],
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "the-stocks",
@@ -2682,6 +2710,7 @@
    "nameEn": "Stormwind Stockades",
    "kind": "classic",
    "levelRange": "24-32",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "targorr-the-dread",
@@ -2884,7 +2913,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "gnomeregan",
@@ -2893,6 +2923,7 @@
    "nameEn": "Gnomeregan",
    "kind": "classic",
    "levelRange": "29-38",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "viscous-fallout",
@@ -3298,7 +3329,8 @@
     1605
    ],
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "razorfen-kraul",
@@ -3308,6 +3340,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "29-38",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "roogug",
@@ -3584,7 +3617,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "scarlet-monastery-graveyard",
@@ -3594,6 +3628,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "30-38",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "interrogator-vishas",
@@ -3786,7 +3821,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "scarlet-monastery-library",
@@ -3796,6 +3832,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "33-41",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "houndmaster-loksey",
@@ -3913,7 +3950,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "scarlet-monastery-armory",
@@ -3923,6 +3961,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "36-44",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "herod",
@@ -3997,7 +4036,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "razor-krendor",
@@ -4006,6 +4046,7 @@
    "nameEn": "The Razor Krendor",
    "kind": "classic",
    "levelRange": "37-46",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "tuten-kash",
@@ -4301,7 +4342,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": "Razorfen Downs"
+   "nameEnClient": "Razorfen Downs",
+   "levelRangeAlt": null
   },
   {
    "id": "scarlet-monastery-cathedral",
@@ -4311,6 +4353,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "38-46",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "high-inquisitor-fairbanks",
@@ -4480,7 +4523,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "uldaman",
@@ -4489,6 +4533,7 @@
    "nameEn": "Uldaman",
    "kind": "classic",
    "levelRange": "41-51",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "revelosh",
@@ -4908,7 +4953,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "zulfarrak",
@@ -4918,6 +4964,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "44-54",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "hydromancer-velratha",
@@ -5528,7 +5575,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "maraudon",
@@ -5538,6 +5586,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "46-55",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "noxxion",
@@ -5983,7 +6032,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "sunken-temple",
@@ -5993,6 +6043,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "50-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "atal-alarion",
@@ -6242,7 +6293,8 @@
     1606
    ],
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "blackrock-depths",
@@ -6252,6 +6304,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "52-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "high-interrogator-gerstahn",
@@ -7629,7 +7682,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "dire-maul-east",
@@ -7639,6 +7693,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "54-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "zevrim-thornhoof",
@@ -7993,7 +8048,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "lower-blackrock-spire",
@@ -8003,6 +8059,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "55-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "highlord-omokk",
@@ -8803,7 +8860,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "dire-maul-north",
@@ -8813,6 +8871,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "56-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "guard-mol-dar",
@@ -9172,7 +9231,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "dire-maul-west",
@@ -9182,6 +9242,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "56-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "tendris-warpwood",
@@ -9676,7 +9737,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "scholomance",
@@ -9686,6 +9748,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "kirtonos",
@@ -10589,7 +10652,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "stratholme-main-gate",
@@ -10599,6 +10663,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "hearthsinger-forresten",
@@ -11265,7 +11330,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "stratholme-service-gate",
@@ -11275,6 +11341,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "58-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "baroness-anastari",
@@ -12073,7 +12140,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   },
   {
    "id": "upper-blackrock-spire",
@@ -12083,6 +12151,7 @@
    "nameCnConflict": null,
    "kind": "classic",
    "levelRange": "59-60",
+   "levelRangeOfficial": null,
    "bosses": [
     {
      "id": "pyroguard-emberseer",
@@ -12987,7 +13056,8 @@
    "partySizeAlt": null,
    "clientAltIds": null,
    "levelRangeClient": null,
-   "nameEnClient": null
+   "nameEnClient": null,
+   "levelRangeAlt": null
   }
  ],
  "raids": [
@@ -13016,7 +13086,8 @@
    "nameEnClient": null,
    "clientAltIds": null,
    "sizeClaim": "10",
-   "art": null
+   "art": null,
+   "levelRangeAlt": null
   },
   {
    "id": "hyjal-summit",
@@ -13049,14 +13120,15 @@
    "nameEnClient": null,
    "clientAltIds": null,
    "sizeClaim": "20",
-   "art": null
+   "art": null,
+   "levelRangeAlt": null
   },
   {
    "id": "onyxias-lair",
    "nameCn": null,
    "nameEn": "Onyxia's Lair",
    "kind": "raid",
-   "levelRange": null,
+   "levelRange": "60-60",
    "bosses": [],
    "route": [],
    "level": "L3",
@@ -13090,13 +13162,14 @@
    "clientActivityId": 838,
    "partySize": 40,
    "partySizeAlt": null,
-   "levelRangeClient": "60-60",
+   "levelRangeClient": null,
    "nameEnClient": null,
    "clientAltIds": [
     1612
    ],
    "sizeClaim": "40",
-   "art": "img/art/dungeons/onyxias-lair.webp"
+   "art": "img/art/dungeons/onyxias-lair.webp",
+   "levelRangeAlt": null
   }
  ]
 }

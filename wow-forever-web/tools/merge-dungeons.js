@@ -101,6 +101,9 @@ function build(d) {
     nameCnConflict: mine ? mine.nameCnConflict : null,
     kind: d.isNew ? 'new' : 'classic',
     levelRange: (mine && mine.levelRange) || d.levelRange || null,
+    // 定稿前那个数（官方公告）要一轮一轮往下带：不带的话第二次重跑就把留档洗掉了，
+    // 而界面上已经只显示定稿值，等于"记录了但决定不告诉你"。下面定稿那一段负责写它。
+    levelRangeOfficial: (mine && mine.levelRangeOfficial) || null,
     bosses, route: (mine && mine.route) || [],
     drops,
     lootNote: drops.length ? (d.lootSourceNote || null) : null,
@@ -334,6 +337,48 @@ if (queueOut) {
     queueOut.meta.counts.total, queueOut.meta.counts.unlisted);
 } else {
   console.log('没有 upstream/db2-group-finder.json（先跑 tools/fetch-db2-groupfinder.py），本轮不做客户端排队表对账');
+}
+
+/* ---------- 等级区间按参考站的副本卡片定稿（2026-10-13 站主决定） ----------
+   同一座本的等级区间以前有三个数在打架：官方公告（levelRange）、参考站的副本卡片
+   （levelRangeAlt）、客户端的队伍查找器（levelRangeClient）。站主拍板：按参考站卡片上
+   显示的那个数定稿，界面上不再摆"两说"（卡片与客户端在分歧的那几座上本来就是同一个数）。
+   定稿不等于把另一个数扔掉——官方公告那个留在 levelRangeOfficial 里，出处与这条决定
+   写在溯源页；客户端那个数只有在和定稿值不一致时才留着，那说明还没对上，不是旧说法。 */
+const RANGE_SETTLED_AT = '2026-10-13';
+let settled = 0, filled = 0;
+[].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+  const norm = (v) => (v ? String(v).replace(/[–—~]/g, '-') : null);
+  const card = norm(d.levelRangeAlt);
+  if (!card) {
+    // 卡片没列这座本（团本就不在那 35 张卡里）：客户端有数而本站空着，就用客户端的补上
+    if (!d.levelRange && d.levelRangeClient) {
+      d.levelRange = norm(d.levelRangeClient);
+      d.levelRangeClient = null;
+      filled += 1;
+    }
+    return;
+  }
+  if (d.levelRange && d.levelRange !== card && !d.levelRangeOfficial) d.levelRangeOfficial = d.levelRange;
+  d.levelRange = card;
+  d.levelRangeAlt = null;
+  if (norm(d.levelRangeClient) === card) d.levelRangeClient = null;
+  settled += 1;
+});
+// 定稿之后这个键一律留着（值是 null）：不留的话第二次重跑因为"卡片与本站已经一样、
+// 这一支根本没走到"而把键整个丢掉，JSON 少一行，重跑两次 md5 就对不上（幂等是硬要求）。
+[].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+  if (d.levelRangeAlt === undefined) d.levelRangeAlt = null;
+});
+dg.meta.levelRangeSettled = {
+  at: RANGE_SETTLED_AT,
+  by: '参考站 wowforever.wclbox.com 的副本卡片',
+  url: 'https://wowforever.wclbox.com/fuben',
+  note: '同一座本的等级区间以前有官方公告与参考站卡片两个数，2026-10-13 站主决定按参考站卡片定稿。'
+    + '官方公告那个数没有删，还留在这座本的记录里（定稿前那个数），界面上只摆定稿后的那一个。'
+};
+if (settled || filled) {
+  console.log('等级区间定稿：按参考站卡片改写 %d 座 / 用客户端数补上空值 %d 座', settled, filled);
 }
 
 fs.writeFileSync(path.join(ROOT, 'dungeons.json'), JSON.stringify(dg, null, 1) + '\n');

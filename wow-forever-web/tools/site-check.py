@@ -893,7 +893,8 @@ def test_dungeon_data(browser, base):
     qc = json.load(open(os.path.join(SRC, "data", "queue.json"), encoding="utf-8"))
     exp = {
         "party": len([x for x in rows if x.get("partySize")]),
-        "twoRange": len([x for x in rows if x.get("levelRangeClient") or x.get("levelRangeAlt")]),
+        "twoRange": 0,   # 2026-10-13 站主定稿：等级区间只摆一个数，界面上不再出"两说"行
+        "settled": len([x for x in rows if x.get("levelRangeOfficial")]),
         "twoSize": len([x for x in rows if x.get("partySizeAlt")]),
         "twoName": len([x for x in rows if x.get("nameEnClient")]),
         "noqueue": len([x for x in rows if not x.get("clientActivityId")]),
@@ -926,8 +927,25 @@ def test_dungeon_data(browser, base):
       }; }""")
     check("进入人数按客户端给的数逐座摆出来", got["party"] == exp["party"],
           "卡面 %d / 数据 %d" % (got["party"], exp["party"]))
-    check("等级区间分歧每一条都有标注", got["twoRange"] == exp["twoRange"],
-          "%d / %d" % (got["twoRange"], exp["twoRange"]))
+    check("等级区间不再摆两说（站主 2026-10-13 按参考站卡片定稿）", got["twoRange"] == 0,
+          "页面上还有 %d 条等级区间的两说行" % got["twoRange"])
+    # 定稿不是把另一个数扔掉：官方公告那个必须还在数据里，且确实与采用的数不同
+    bad_settled = [x["id"] for x in rows if x.get("levelRangeOfficial")
+                   and str(x["levelRangeOfficial"]).replace("–", "-") == str(x.get("levelRange")).replace("–", "-")]
+    check("定稿过的本仍留着定稿前那个数，且与采用的数确实不同",
+          not bad_settled and exp["settled"] == 6, "留档 %d 座 / 一样的 %s" % (exp["settled"], bad_settled[:3]))
+    # 界面上摆的区间要就是数据里那个数——防止"数据改了、页面还在渲染旧的那份"
+    shown = page.evaluate("""() => [...document.querySelectorAll('.dcard2')]
+      .map(c => { const r = c.querySelector('.dbn2-r'); const n = c.querySelector('.dbn2-n');
+        return { id: (c.querySelector('[data-d]') || {}).dataset || null,
+                 range: r ? r.textContent.replace(/\\s*级$/, '').trim() : '',
+                 name: n ? n.textContent.trim() : '' }; })""")
+    by_name = {}
+    for x in rows:
+        by_name[x.get("nameCn") or x.get("nameEn") or x["id"]] = str(x.get("levelRange") or "")
+    wrong = [s["name"] for s in shown if s["name"] in by_name
+             and by_name[s["name"]] and s["range"] != by_name[s["name"]]]
+    check("卡面横幅上的区间等于数据里定稿后的数", not wrong, "对不上：%s" % wrong[:3])
     check("同一座有两种排队人数的都写明", got["twoSize"] == exp["twoSize"],
           "%d / %d" % (got["twoSize"], exp["twoSize"]))
     check("英文原名两说的都并列不取舍", got["twoName"] == exp["twoName"],
@@ -950,7 +968,10 @@ def test_dungeon_data(browser, base):
     newn = len([x for x in (dg.get("newDungeons") or []) if x.get("kind") == "new"])
     check("无限新增本带\"新\"角标", seals == newn, "%d 个角标 / %d 座新本" % (seals, newn))
     conf = page.evaluate("() => document.querySelectorAll('#main .conf').length")
-    check("区间或译名两说的条目都摆在卡面上", conf >= 5, "%d 处冲突标注" % conf)
+    exp_conf = len([x for x in rows if x.get("partySizeAlt")]) + exp["twoName"] \
+        + len([x for x in rows if x.get("nameCnConflict")])
+    check("还活着的那些分歧（人数 / 英文原名 / 译名）一条都没漏", conf == exp_conf,
+          "%d 处 / 应有 %d 处" % (conf, exp_conf))
     # 首领头像：方块数要等于首领数（没脸的也得有个自绘块），只有数据里挂了本地转存路径的才放图
     faces = page.evaluate("""() => ({
       tiles: document.querySelectorAll('.bosslist .bh > .liw').length,
@@ -1011,9 +1032,8 @@ def test_dungeon_detail(browser, base):
     new_duns = [x for x in duns if x.get("kind") == "new"]
 
     def nconf(x):
+        # 等级区间 2026-10-13 按参考站卡片定稿，界面上不再出这一条（见 test_dungeon_data）
         c = 0
-        if x.get("levelRangeClient") or x.get("levelRangeAlt"):
-            c += 1
         if x.get("partySizeAlt"):
             c += 1
         if x.get("nameEnClient"):
@@ -1111,10 +1131,12 @@ def test_dungeon_detail(browser, base):
           nearText: (document.querySelector('.dnear') || {}).innerText || '',
           noFace: [...document.querySelectorAll('.brow .bt')].filter(e => /没有这张头像/.test(e.innerText)).length,
           noLoot: [...document.querySelectorAll('.brow .bt')].filter(e => /掉落待补/.test(e.innerText)).length,
-          route: (document.querySelector('#droute') || {}).innerText || '',
           broken: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length,
           heroArt: !!document.querySelector('.dunh img'),
-          pct: (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/) || [])[0] || '' })""")
+          pct: (document.querySelector('#main').innerText.match(/\\d+(\\.\\d+)?\\s*%/) || [])[0] || '',
+          hasRoute: /路线/.test(document.querySelector('#main').innerText),
+          shownRange: (((document.querySelectorAll('.dhfact b') || [])[1] || {}).innerText || '').trim(),
+          fact: document.querySelectorAll('.dhfact > div').length })""")
         nm = x.get("nameCn") or x.get("nameEn")
         check("%s：标题与 H1 都是这一座，且只有一个 H1" % did,
               d["h1"] == 1 and nm in d["title"] and d["h1t"].strip() == nm,
@@ -1140,8 +1162,12 @@ def test_dungeon_detail(browser, base):
         check("%s：上一座 / 下一座链到真存在的本，到档那侧直说" % did,
               linked and all(l in ids for l in linked) and (len(linked) == 2 or ends),
               "%s / %s" % (linked[:2], d["nearText"][:22].replace("\n", " ")))
-        check("%s：路线没数据就直说待实测" % did,
-              ("待实测" in d["route"]) == (not (x.get("route") or [])), d["route"][:36])
+        # 「路线」2026-10-13 站主说暂时先不要，整块撤了。这条反过来钉住它不许自己长回来。
+        check("%s：路线那一块已经撤掉，不许自己长回来" % did, not d["hasRoute"],
+              "页面上又出现「路线」了" if d["hasRoute"] else "整页没有「路线」")
+        check("%s：进本之前四格齐、区间显示的就是定稿后那个数" % did,
+              d["fact"] == 4 and d["shownRange"] == (x.get("levelRange") or "待实测"),
+              "四格 %d / 页面 %s 数据 %s" % (d["fact"], d["shownRange"], x.get("levelRange")))
         check("%s：图不坏、无脚本报错" % did, d["broken"] == 0 and not errs,
               "坏图 %d / 报错 %s" % (d["broken"], errs[:1]))
         page.screenshot(path=os.path.join(SHOT_DIR, "dungeon-%s.png" % did))
