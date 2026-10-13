@@ -158,7 +158,10 @@ wowhead 攻略正文**两个来源，wowhead 数据库里的等级区间字段�
 | `python3 tools/merge-dungeon-quests.py` | 396 条任务；经验值退到 wowhead 11 条、两源不一致留档 2 条、补 wowhead 独有 1 条、去重合并 12 条、物品开启 50 条 |
 | `node tools/build-data.js` | 校验通过；`scale` 多两项（dungeonQuests 396 / 28 座有记录） |
 | `python3 tools/site-check.py --only dungeon_detail,dungeon_data` | **95 / 95** |
-| 全跑 `--app` / `app-parity --strict` / vitest | **GATE5 / PARITY5 / VITEST5** |
+| 全跑 `python3 tools/site-check.py --app` | **638 / 638 全绿**（上一轮 623，+15 条是任务这一节的判据） |
+| `python3 tools/app-parity.py --strict` | **全部组合无差异** |
+| `npx vitest run` | **69 / 69** |
+| 加完「本站更新」后定向复跑 `--only updates_rank,pages,copy,player_facing,design_system` | **127 / 127** |
 
 **页面上长什么样**：怒焰裂谷 6 条任务，其中「试探敌人」「寻找背包」两行底下各带一句红字
 `经验值两说：本站取「850」，另一份资料写「1050」，两个都留着`；领主大厅 4 条的经验值
