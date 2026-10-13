@@ -254,14 +254,64 @@
   "the-beast": "img/art/bosses/the-beast.webp",
   "general-drakkisath": "img/art/bosses/general-drakkisath.webp"
  },
- "meta": {
-  "fetchedAt": "2026-10-12",
-  "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
-  "count": 241
+ "specs": {
+  "warrior-0": "img/art/specs/warrior-0.webp",
+  "warrior-1": "img/art/specs/warrior-1.webp",
+  "warrior-2": "img/art/specs/warrior-2.webp",
+  "hunter-0": "img/art/specs/hunter-0.webp",
+  "hunter-1": "img/art/specs/hunter-1.webp",
+  "hunter-2": "img/art/specs/hunter-2.webp",
+  "rogue-0": "img/art/specs/rogue-0.webp",
+  "rogue-1": "img/art/specs/rogue-1.webp",
+  "priest-0": "img/art/specs/priest-0.webp",
+  "priest-1": "img/art/specs/priest-1.webp",
+  "priest-2": "img/art/specs/priest-2.webp",
+  "shaman-0": "img/art/specs/shaman-0.webp",
+  "shaman-1": "img/art/specs/shaman-1.webp",
+  "shaman-2": "img/art/specs/shaman-2.webp",
+  "mage-0": "img/art/specs/mage-0.webp",
+  "mage-1": "img/art/specs/mage-1.webp",
+  "mage-2": "img/art/specs/mage-2.webp",
+  "warlock-1": "img/art/specs/warlock-1.webp",
+  "warlock-2": "img/art/specs/warlock-2.webp",
+  "druid-0": "img/art/specs/druid-0.webp",
+  "druid-1": "img/art/specs/druid-1.webp",
+  "druid-2": "img/art/specs/druid-2.webp",
+  "rogue-2": "img/art/specs/rogue-2.webp",
+  "warlock-0": "img/art/specs/warlock-0.webp",
+  "paladin-0": "img/art/specs/paladin-0.webp",
+  "paladin-1": "img/art/specs/paladin-1.webp",
+  "paladin-2": "img/art/specs/paladin-2.webp"
  },
- "gen": {
-  "hero-ruins": "img/gen/hero-ruins.webp",
-  "banner-cloudsea": "img/gen/banner-cloudsea.webp",
-  "cavern-hall": "img/gen/cavern-hall.webp"
+ "classBanners": {
+  "warrior": "img/art/classbanners/warrior.webp",
+  "paladin": "img/art/classbanners/paladin.webp",
+  "hunter": "img/art/classbanners/hunter.webp",
+  "rogue": "img/art/classbanners/rogue.webp",
+  "priest": "img/art/classbanners/priest.webp",
+  "shaman": "img/art/classbanners/shaman.webp",
+  "mage": "img/art/classbanners/mage.webp",
+  "warlock": "img/art/classbanners/warlock.webp",
+  "druid": "img/art/classbanners/druid.webp"
+ },
+ "panels": {
+  "spellbook": "img/art/panels/spellbook.webp",
+  "map": "img/art/panels/map.webp",
+  "library": "img/art/panels/library.webp",
+  "talent": "img/art/panels/talent.webp"
+ },
+ "scenes": {
+  "yunhai": "img/art/scenes/yunhai.webp",
+  "gulin": "img/art/scenes/gulin.webp",
+  "tielu-dadian": "img/art/scenes/tielu-dadian.webp",
+  "guangshu": "img/art/scenes/guangshu.webp"
+ },
+ "texture": {
+  "stone": "img/art/texture/stone.webp"
+ },
+ "meta": {
+  "fetchedAt": "2026-10-13",
+  "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
+  "count": 286
  }
 }

@@ -10,6 +10,8 @@ art/manifest.json 记来源与抓取日期 + 保留"整目录删除即回退到�
     python3 tools/fetch-art.py --what classes     # 九职业背景图（从参考站首页现取带哈希的文件名）
     python3 tools/fetch-art.py --what dungeons    # 副本载入图（逐个 slug 试两台源）
     python3 tools/fetch-art.py --what maps        # 区域小地图（只下世界线数据引用到的 mapId）
+    python3 tools/fetch-art.py --what specbg      # 27 棵专精背景：下四角图拼成整图（要 PIL）
+    python3 tools/fetch-art.py --what panels      # 职业横幅 9 张 + 板块图 + 场景图 + 石板纹理
 """
 import argparse
 import datetime
@@ -341,11 +343,209 @@ def bosses(man, probe_only=False):
         print(u"  名字对不上（不猜）：%s" % u"、".join(nomatch[:16]))
 
 
+# ---------------------------------------------------------------------------
+# 专精背景图与板块配图（2026-10-13 用户实拍："卡片背景要的是图片，不是把图标当背景拉伸"）
+# ---------------------------------------------------------------------------
+# 27 棵天赋树的英文键名是从参考站天赋页 DOM 现挖的（文件名规律 tianfu-beijing/<Class><Tree>-<角>.webp，
+# 每系四张角图：TopLeft / TopRight / BottomLeft / BottomRight）。括号里是我们
+# src/data/talents/<职业>.json 里那一系的 nameCn——下载前逐条回对，对不上就停，不靠位置猜。
+# 为什么必须回对：无限服改过系名，术士三系的键是 Curses / Summoning / Destruction，
+# 萨满第一系叫 ElementalCombat，都不按经典旧世的规矩来。
+SPEC_TREES = {
+    "warrior": [("WarriorArms", u"武器"), ("WarriorFury", u"狂怒"), ("WarriorProtection", u"防护")],
+    "paladin": [("PALADINHOLY", u"神圣"), ("PALADINPROTECTION", u"防护"), ("PALADINCOMBAT", u"惩戒")],
+    "hunter": [("HunterBeastMastery", u"野兽控制"), ("HunterMarksmanship", u"射击"), ("HunterSurvival", u"生存")],
+    "rogue": [("RogueAssassination", u"奇袭"), ("RogueCombat", u"战斗"), ("RogueSubtlety", u"敏锐")],
+    "priest": [("PriestDiscipline", u"戒律"), ("PriestHoly", u"神圣"), ("PriestShadow", u"暗影")],
+    "shaman": [("ShamanElementalCombat", u"元素战斗"), ("ShamanEnhancement", u"增强"),
+               ("ShamanRestoration", u"恢复")],
+    "mage": [("MageArcane", u"奥术"), ("MageFire", u"火焰"), ("MageFrost", u"冰霜")],
+    "warlock": [("WarlockCurses", u"痛苦"), ("WarlockSummoning", u"恶魔学识"),
+                ("WarlockDestruction", u"毁灭")],
+    "druid": [("DruidBalance", u"平衡"), ("DruidFeralCombat", u"野性战斗"), ("DruidRestoration", u"恢复")],
+}
+# 第二台源（jjwow）的键名：只有圣骑士三家写法不同（它全用驼峰），其余同名。
+# 为什么要两台：wclbox 自己页面上圣骑士那 12 张角图就是坏的（浏览器实测 naturalWidth=0、直接请求 404）。
+JJ_KEY = {"PALADINHOLY": "PaladinHoly", "PALADINPROTECTION": "PaladinProtection",
+          "PALADINCOMBAT": "PaladinCombat"}
+JJ = "https://jjwow.cn"
+
+CORNERS = ["TopLeft", "TopRight", "BottomLeft", "BottomRight"]
+
+# 板块入口卡的配图：职业横幅是 614×345 的职业原画（不是 128 的图标），
+# 板块图与场景图是参考站首页 / 天赋页上真正在用的那几张。带 hash 的从页面现读，不写死。
+CLASS_BANNER_DIR = "/peitu/zhiye/"
+PANEL_SOURCES = {
+    "spellbook": "/shouye-tu/spellbook.webp",
+    "map": "/shouye-tu/ditu.webp",
+    "library": "/shouye-tu/ditu.webp",
+}
+PANEL_HASHED = {"talent": r"/assets/talent-calculator-[0-9a-zA-Z]+\.webp",
+                "spellbook2": r"/assets/spellbook-[0-9a-zA-Z]+\.webp"}
+SCENES = {"yunhai": u"云海（部落营地氛围）", "gulin": u"古林（联盟营地氛围）",
+          "zhong/tielu-dadian": u"铁路大殿", "zhong/guangshu": u"光树"}
+TEXTURE = "/shiban/shi-ping.webp"
+
+
+def our_tree_names():
+    """我们数据里每个职业的三系中文名，用来回对参考站的键名顺序。"""
+    out = {}
+    for cid in SPEC_TREES:
+        p = os.path.join(DATA, "talents", cid + ".json")
+        if not os.path.exists(p):
+            out[cid] = []
+            continue
+        d = json.load(io.open(p, encoding="utf-8"))
+        out[cid] = [(t.get("nameCn") or "") for t in d.get("trees") or []]
+    return out
+
+
+def _paste_corner(canvas, img, corner):
+    """四角图按各自位置贴进一张画布：左上角原点，右上角靠右，下两排靠下。"""
+    w, h = canvas.size
+    iw, ih = img.size
+    x = 0 if corner.endswith("Left") else max(0, w - iw)
+    y = 0 if corner.startswith("Top") else max(0, h - ih)
+    canvas.paste(img, (x, y), img if img.mode == "RGBA" else None)
+
+
+def _is_image(blob):
+    """只认文件头，不认体积：右下角那种 64×128 的角图本来就只有一百来字节，
+       按体积阈值判会把好图当成缺图。"""
+    return blob[:4] == b"RIFF" and blob[8:12] == b"WEBP" or blob[:4] == b"\x89PNG"
+
+
+def fetch_tile(key, corner):
+    """一棵树的一张角图：先试 wclbox（.webp），404 或坏图再试 jjwow（.PNG）。
+       圣骑士在 wclbox 上是坏的，就是靠这条兜回来的。"""
+    cands = [WBX + "/tianfu-beijing/%s-%s.webp" % (key, corner)]
+    jk = JJ_KEY.get(key, key)
+    cands.append(JJ + "/assets/talent-backgrounds/%s-%s.PNG" % (jk, corner))
+    for url in cands:
+        code, blob = http(url, binary=True)
+        if code == 200 and _is_image(blob):
+            return (url, blob)
+    return None
+
+
+def specbg(man, force=False):
+    """27 棵专精树各一张背景：下四角图 → 拼成一张 → 落 art/specs/<职业>-<第几系>.webp。
+
+    为什么不直接存四张角图：那是给它们的九宫格布局用的，我们只要一张能当卡片底的整图，
+    拼好之后 27 个文件、每系一张，页面 CSS 一行就能用，也不用在两栈各写一套四角定位。
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        sys.exit(u"拼角图要 PIL（pillow）。没装就先 pip3 install pillow，或跳过 --what specbg")
+    mine = our_tree_names()
+    bad = []
+    for cid, rows in SPEC_TREES.items():
+        names = mine.get(cid) or []
+        for i, (key, cn) in enumerate(rows):
+            if i >= len(names) or (names[i] or "").strip() != cn:
+                bad.append(u"%s 第 %d 系：我们写「%s」，键名表写「%s」（%s）"
+                           % (cid, i + 1, names[i] if i < len(names) else u"缺系", cn, key))
+    if bad:
+        sys.exit(u"专精键名表与我们的天赋数据对不上，先人工核：\n  " + u"\n  ".join(bad))
+    ok, miss = [], []
+    for cid, rows in SPEC_TREES.items():
+        for i, (key, cn) in enumerate(rows):
+            dest = os.path.join(ART, "specs", "%s-%d.webp" % (cid, i))
+            if os.path.exists(dest) and not force:
+                ok.append(u"%s-%d（已有，--force 重抓）" % (cid, i))
+                continue
+            parts, urls = [], []
+            for corner in CORNERS:
+                got = fetch_tile(key, corner)
+                if not got:
+                    miss.append(u"%s/%s（两台源都取不到）" % (key, corner))
+                    parts = []
+                    break
+                url, blob = got
+                parts.append((corner, blob))
+                urls.append(url)
+            if len(parts) != 4:
+                continue
+            imgs = {}
+            for corner, blob in parts:
+                im = Image.open(io.BytesIO(blob)).convert("RGBA")
+                imgs[corner] = im
+            tl, tr = imgs["TopLeft"], imgs["TopRight"]
+            bl, br = imgs["BottomLeft"], imgs["BottomRight"]
+            W, H = tl.width + tr.width, tl.height + bl.height
+            canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            for corner, im in imgs.items():
+                _paste_corner(canvas, im, corner)
+            if not os.path.isdir(os.path.dirname(dest)):
+                os.makedirs(os.path.dirname(dest))
+            buf = io.BytesIO()
+            canvas.save(buf, "WEBP", quality=82, method=4)
+            blob = buf.getvalue()
+            rec = save(dest, blob, urls[0], "spec-bg")
+            rec["tree"] = key
+            rec["treeCn"] = cn
+            rec["tiles"] = urls
+            rec["size"] = "%dx%d" % (W, H)
+            man["items"] = [x for x in man["items"] if x["file"] != rec["file"]] + [rec]
+            ok.append(u"%s-%d %s（%s，%dx%d，%d KB）" % (cid, i, key, cn, W, H, len(blob) // 1024))
+    print(u"专精背景：拼好 %d / 27，取不到 %d" % (len(ok), len(miss)))
+    for x in miss[:12]:
+        print(u"  缺 " + x)
+
+
+def panels(man):
+    """板块入口卡的配图：职业横幅 9 张 + 板块图 + 场景图 + 石板纹理。
+
+    这些都是"图"不是"图标"——用户实拍指出：以前板块卡拿 128×128 的职业图标当背景，
+    拉开放大就是糊的一团。这里全部按原尺寸转存，来源与抓取日期进 manifest。
+    """
+    ok, miss = [], []
+
+    def grab(url, subdir, name, kind, what=None):
+        code, blob = http(url, binary=True)
+        if code != 200 or len(blob) < 1500 or blob[:4] == b"<":
+            miss.append(u"%s/%s（HTTP %s）" % (subdir, name, code))
+            return None
+        dest = os.path.join(ART, subdir, name + ".webp")
+        rec = save(dest, blob, url, kind)
+        if what:
+            rec["what"] = what
+        man["items"] = [x for x in man["items"] if x["file"] != rec["file"]] + [rec]
+        ok.append(u"%s/%s（%d KB）" % (subdir, name, len(blob) // 1024))
+        return rec
+
+    code, html = http(WBX + "/")
+    hashed = {}
+    if code == 200:
+        for k, pat in PANEL_HASHED.items():
+            m = re.search(pat, html)
+            if m:
+                hashed[k] = m.group(0)
+    for cid in ["warrior", "paladin", "hunter", "rogue", "priest", "shaman", "mage", "warlock", "druid"]:
+        grab(WBX + CLASS_BANNER_DIR + cid + ".webp", "classbanners", cid, "class-banner")
+    for name, path in PANEL_SOURCES.items():
+        grab(WBX + path, "panels", name, "panel")
+    for k in ["talent", "spellbook2"]:
+        if k in hashed:
+            grab(WBX + hashed[k], "panels", "talent" if k == "talent" else "spellbook-full", "panel")
+        else:
+            miss.append(u"panels/%s（首页 HTML 里没找到这个文件名）" % k)
+    for src, what in SCENES.items():
+        key = src.split("/")[-1]
+        grab(WBX + "/peitu/changjing/" + src + ".webp", "scenes", key, "scene", what)
+    grab(WBX + TEXTURE, "texture", "stone", "texture", u"石板纹理")
+    print(u"板块配图：新增或更新 %d，取不到 %d" % (len(ok), len(miss)))
+    for x in miss[:10]:
+        print(u"  缺 " + x)
+
+
 def write_art_index(man):
     """把 manifest 收成界面能直接用的索引：src/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
     idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {},
-           "factionCities": {}, "bosses": {}, "meta": {}}
+           "factionCities": {}, "bosses": {}, "specs": {}, "classBanners": {},
+           "panels": {}, "scenes": {}, "texture": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -361,6 +561,17 @@ def write_art_index(man):
             idx["factionCities"][name.replace("city-", "")] = "img/" + rel
         elif x["kind"] == "boss-portrait":
             idx["bosses"][name] = "img/" + rel
+        elif x["kind"] == "spec-bg":
+            # 只放路径；系名在 talents/*.json 里，索引不重复存一份（存了就会漂）
+            idx["specs"][name] = "img/" + rel
+        elif x["kind"] == "class-banner":
+            idx["classBanners"][name] = "img/" + rel
+        elif x["kind"] == "panel":
+            idx["panels"][name] = "img/" + rel
+        elif x["kind"] == "scene":
+            idx["scenes"][name] = "img/" + rel
+        elif x["kind"] == "texture":
+            idx["texture"][name] = "img/" + rel
         else:
             idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
@@ -368,19 +579,31 @@ def write_art_index(man):
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
     print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
-          u"阵营徽标 %d / 阵营城市 %d / 首领头像 %d）" % (
+          u"阵营徽标 %d / 阵营城市 %d / 首领头像 %d / 专精背景 %d / 职业横幅 %d / "
+          u"板块图 %d / 场景图 %d / 纹理 %d）" % (
               len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]), len(idx["races"]),
-              len(idx["factions"]), len(idx["factionCities"]), len(idx["bosses"])))
+              len(idx["factions"]), len(idx["factionCities"]), len(idx["bosses"]),
+              len([k for k in idx["specs"] if not k.endswith(":cn")]),
+              len(idx["classBanners"]), len(idx["panels"]), len(idx["scenes"]),
+              len(idx["texture"])))
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--what", choices=["classes", "dungeons", "maps", "races", "factions",
-                                       "bosses", "all"], default="all")
+                                       "bosses", "specbg", "panels", "all"], default="all")
+    ap.add_argument("--force", action="store_true",
+                    help="专精背景图已存在的也重抓（源站换了角图时用）")
+    ap.add_argument("--index-only", action="store_true",
+                    help="不下载，只按现有 manifest 重算 src/data/art.json")
     ap.add_argument("--probe", action="store_true",
                     help="只问源站有没有这张图，不落盘（首领头像用它先量缺口）")
     args = ap.parse_args()
     man = load_manifest()
+    if args.index_only:
+        write_art_index(man)
+        print(u"manifest 共 %d 条 → src/img/art/manifest.json" % len(man["items"]))
+        return
     if args.what == "bosses" and args.probe:
         bosses(man, probe_only=True)
         return
@@ -396,6 +619,10 @@ def main():
         factions(man)
     if args.what in ("bosses", "all"):
         bosses(man)
+    if args.what in ("specbg", "all"):
+        specbg(man, force=args.force)
+    if args.what in ("panels", "all"):
+        panels(man)
     man["fetchedAt"] = datetime.date.today().isoformat()
     man["total"] = len(man["items"])
     save_manifest(man)

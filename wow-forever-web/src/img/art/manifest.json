@@ -2076,8 +2076,616 @@
    "kind": "boss-portrait",
    "fetchedAt": "2026-10-12",
    "dungeon": "upper-blackrock-spire"
+  },
+  {
+   "file": "art/specs/warrior-0.webp",
+   "bytes": 6446,
+   "sha1": "40d9de6300",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarriorArms-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarriorArms",
+   "treeCn": "武器",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorArms-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorArms-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorArms-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorArms-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/warrior-1.webp",
+   "bytes": 7566,
+   "sha1": "f678e0d2bf",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarriorFury-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarriorFury",
+   "treeCn": "狂怒",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorFury-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorFury-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorFury-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorFury-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/warrior-2.webp",
+   "bytes": 6256,
+   "sha1": "43451df9cb",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarriorProtection-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarriorProtection",
+   "treeCn": "防护",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorProtection-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorProtection-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorProtection-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarriorProtection-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/hunter-0.webp",
+   "bytes": 9696,
+   "sha1": "6906c22969",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/HunterBeastMastery-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "HunterBeastMastery",
+   "treeCn": "野兽控制",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterBeastMastery-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterBeastMastery-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterBeastMastery-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterBeastMastery-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/hunter-1.webp",
+   "bytes": 9574,
+   "sha1": "f41ddedc38",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/HunterMarksmanship-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "HunterMarksmanship",
+   "treeCn": "射击",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterMarksmanship-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterMarksmanship-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterMarksmanship-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterMarksmanship-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/hunter-2.webp",
+   "bytes": 11370,
+   "sha1": "0267a9d5ca",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/HunterSurvival-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "HunterSurvival",
+   "treeCn": "生存",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterSurvival-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterSurvival-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterSurvival-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/HunterSurvival-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/rogue-0.webp",
+   "bytes": 6532,
+   "sha1": "afdbf5b797",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/RogueAssassination-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "RogueAssassination",
+   "treeCn": "奇袭",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueAssassination-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueAssassination-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueAssassination-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueAssassination-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/rogue-1.webp",
+   "bytes": 6674,
+   "sha1": "7f043fd6b5",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/RogueCombat-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "RogueCombat",
+   "treeCn": "战斗",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueCombat-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueCombat-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueCombat-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueCombat-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/priest-0.webp",
+   "bytes": 10598,
+   "sha1": "71cbe5fc06",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/PriestDiscipline-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PriestDiscipline",
+   "treeCn": "戒律",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestDiscipline-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestDiscipline-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestDiscipline-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestDiscipline-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/priest-1.webp",
+   "bytes": 7442,
+   "sha1": "25903a821b",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/PriestHoly-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PriestHoly",
+   "treeCn": "神圣",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestHoly-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestHoly-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestHoly-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestHoly-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/priest-2.webp",
+   "bytes": 6712,
+   "sha1": "4f45b21582",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/PriestShadow-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PriestShadow",
+   "treeCn": "暗影",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestShadow-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestShadow-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestShadow-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/PriestShadow-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/shaman-0.webp",
+   "bytes": 7778,
+   "sha1": "4d6a3ab921",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/ShamanElementalCombat-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "ShamanElementalCombat",
+   "treeCn": "元素战斗",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanElementalCombat-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanElementalCombat-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanElementalCombat-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanElementalCombat-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/shaman-1.webp",
+   "bytes": 6724,
+   "sha1": "7357081739",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/ShamanEnhancement-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "ShamanEnhancement",
+   "treeCn": "增强",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanEnhancement-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanEnhancement-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanEnhancement-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanEnhancement-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/shaman-2.webp",
+   "bytes": 15740,
+   "sha1": "c6b2b25d88",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/ShamanRestoration-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "ShamanRestoration",
+   "treeCn": "恢复",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanRestoration-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanRestoration-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanRestoration-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/ShamanRestoration-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/mage-0.webp",
+   "bytes": 11568,
+   "sha1": "6927219ddc",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/MageArcane-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "MageArcane",
+   "treeCn": "奥术",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/MageArcane-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageArcane-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageArcane-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageArcane-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/mage-1.webp",
+   "bytes": 7486,
+   "sha1": "354931a749",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/MageFire-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "MageFire",
+   "treeCn": "火焰",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFire-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFire-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFire-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFire-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/mage-2.webp",
+   "bytes": 5740,
+   "sha1": "fcd3dd480f",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/MageFrost-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "MageFrost",
+   "treeCn": "冰霜",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFrost-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFrost-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFrost-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/MageFrost-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/warlock-1.webp",
+   "bytes": 9682,
+   "sha1": "5858dfc977",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarlockSummoning-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarlockSummoning",
+   "treeCn": "恶魔学识",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockSummoning-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockSummoning-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockSummoning-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockSummoning-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/warlock-2.webp",
+   "bytes": 8548,
+   "sha1": "2c11c6b257",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarlockDestruction-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarlockDestruction",
+   "treeCn": "毁灭",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockDestruction-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockDestruction-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockDestruction-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockDestruction-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/druid-0.webp",
+   "bytes": 10972,
+   "sha1": "8632ee3033",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/DruidBalance-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "DruidBalance",
+   "treeCn": "平衡",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidBalance-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidBalance-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidBalance-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidBalance-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/druid-1.webp",
+   "bytes": 6764,
+   "sha1": "71168fca8b",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/DruidFeralCombat-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "DruidFeralCombat",
+   "treeCn": "野性战斗",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidFeralCombat-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidFeralCombat-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidFeralCombat-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidFeralCombat-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/druid-2.webp",
+   "bytes": 8382,
+   "sha1": "1cbece4e15",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/DruidRestoration-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "DruidRestoration",
+   "treeCn": "恢复",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidRestoration-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidRestoration-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidRestoration-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/DruidRestoration-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/rogue-2.webp",
+   "bytes": 5868,
+   "sha1": "c3868d5a53",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/RogueSubtlety-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "RogueSubtlety",
+   "treeCn": "敏锐",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueSubtlety-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueSubtlety-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueSubtlety-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/RogueSubtlety-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/warlock-0.webp",
+   "bytes": 7930,
+   "sha1": "029272b594",
+   "source": "https://wowforever.wclbox.com/tianfu-beijing/WarlockCurses-TopLeft.webp",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "WarlockCurses",
+   "treeCn": "痛苦",
+   "tiles": [
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockCurses-TopLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockCurses-TopRight.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockCurses-BottomLeft.webp",
+    "https://wowforever.wclbox.com/tianfu-beijing/WarlockCurses-BottomRight.webp"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/paladin-0.webp",
+   "bytes": 8352,
+   "sha1": "30d7c02ab8",
+   "source": "https://jjwow.cn/assets/talent-backgrounds/PaladinHoly-TopLeft.PNG",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PALADINHOLY",
+   "treeCn": "神圣",
+   "tiles": [
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinHoly-TopLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinHoly-TopRight.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinHoly-BottomLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinHoly-BottomRight.PNG"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/paladin-1.webp",
+   "bytes": 8822,
+   "sha1": "1b86b78db8",
+   "source": "https://jjwow.cn/assets/talent-backgrounds/PaladinProtection-TopLeft.PNG",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PALADINPROTECTION",
+   "treeCn": "防护",
+   "tiles": [
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinProtection-TopLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinProtection-TopRight.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinProtection-BottomLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinProtection-BottomRight.PNG"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/specs/paladin-2.webp",
+   "bytes": 14454,
+   "sha1": "dd1c1cea12",
+   "source": "https://jjwow.cn/assets/talent-backgrounds/PaladinCombat-TopLeft.PNG",
+   "kind": "spec-bg",
+   "fetchedAt": "2026-10-13",
+   "tree": "PALADINCOMBAT",
+   "treeCn": "惩戒",
+   "tiles": [
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinCombat-TopLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinCombat-TopRight.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinCombat-BottomLeft.PNG",
+    "https://jjwow.cn/assets/talent-backgrounds/PaladinCombat-BottomRight.PNG"
+   ],
+   "size": "320x384"
+  },
+  {
+   "file": "art/classbanners/warrior.webp",
+   "bytes": 17612,
+   "sha1": "a8dd0f460a",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/warrior.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/paladin.webp",
+   "bytes": 28954,
+   "sha1": "e6084a5160",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/paladin.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/hunter.webp",
+   "bytes": 18416,
+   "sha1": "6f09d25492",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/hunter.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/rogue.webp",
+   "bytes": 14788,
+   "sha1": "7734b6af8b",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/rogue.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/priest.webp",
+   "bytes": 19904,
+   "sha1": "5ce26988a5",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/priest.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/shaman.webp",
+   "bytes": 15832,
+   "sha1": "4641d0d100",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/shaman.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/mage.webp",
+   "bytes": 22542,
+   "sha1": "fb7d31298b",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/mage.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/warlock.webp",
+   "bytes": 27798,
+   "sha1": "6a7288cb6a",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/warlock.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/classbanners/druid.webp",
+   "bytes": 13092,
+   "sha1": "849a71ac8b",
+   "source": "https://wowforever.wclbox.com/peitu/zhiye/druid.webp",
+   "kind": "class-banner",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/panels/spellbook.webp",
+   "bytes": 71916,
+   "sha1": "495a0e6944",
+   "source": "https://wowforever.wclbox.com/shouye-tu/spellbook.webp",
+   "kind": "panel",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/panels/map.webp",
+   "bytes": 41692,
+   "sha1": "5e49e8f16e",
+   "source": "https://wowforever.wclbox.com/shouye-tu/ditu.webp",
+   "kind": "panel",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/panels/library.webp",
+   "bytes": 41692,
+   "sha1": "5e49e8f16e",
+   "source": "https://wowforever.wclbox.com/shouye-tu/ditu.webp",
+   "kind": "panel",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/panels/talent.webp",
+   "bytes": 57466,
+   "sha1": "e31189669d",
+   "source": "https://wowforever.wclbox.com/assets/talent-calculator-u5yu5ovX.webp",
+   "kind": "panel",
+   "fetchedAt": "2026-10-13"
+  },
+  {
+   "file": "art/scenes/yunhai.webp",
+   "bytes": 66672,
+   "sha1": "89929be683",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/yunhai.webp",
+   "kind": "scene",
+   "fetchedAt": "2026-10-13",
+   "what": "云海（部落营地氛围）"
+  },
+  {
+   "file": "art/scenes/gulin.webp",
+   "bytes": 132430,
+   "sha1": "bb12e53b70",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/gulin.webp",
+   "kind": "scene",
+   "fetchedAt": "2026-10-13",
+   "what": "古林（联盟营地氛围）"
+  },
+  {
+   "file": "art/scenes/tielu-dadian.webp",
+   "bytes": 28522,
+   "sha1": "5def272f04",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/zhong/tielu-dadian.webp",
+   "kind": "scene",
+   "fetchedAt": "2026-10-13",
+   "what": "铁路大殿"
+  },
+  {
+   "file": "art/scenes/guangshu.webp",
+   "bytes": 41244,
+   "sha1": "7f19e87a16",
+   "source": "https://wowforever.wclbox.com/peitu/changjing/zhong/guangshu.webp",
+   "kind": "scene",
+   "fetchedAt": "2026-10-13",
+   "what": "光树"
+  },
+  {
+   "file": "art/texture/stone.webp",
+   "bytes": 1678,
+   "sha1": "ead3169d8f",
+   "source": "https://wowforever.wclbox.com/shiban/shi-ping.webp",
+   "kind": "texture",
+   "fetchedAt": "2026-10-13",
+   "what": "石板纹理"
   }
  ],
- "fetchedAt": "2026-10-12",
- "total": 241
+ "fetchedAt": "2026-10-13",
+ "total": 286
 }
