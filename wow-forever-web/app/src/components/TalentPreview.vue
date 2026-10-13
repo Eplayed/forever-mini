@@ -1,5 +1,8 @@
 <template>
-  <section class="card hasart" id="treecard">
+  <!-- 整卡当入口（2026-10-13 用户：「最常用的两个」那行标题不要了，卡片本身点进计算器）。
+       背景是"当前这一系"的专精原画（320×384），不是 128 的职业图标放大。 -->
+  <section class="card hasart go" id="treecard" tabindex="0" :data-go="legacy(calcFile(cid, ti))"
+           @click="goCard" @keydown="goKey">
     <span class="bgart" aria-hidden="true" :style="bgStyle"></span>
     <div class="mline">工具 · 天赋 · <b>{{ S.classes || 0 }}</b> 职业 <b>{{ S.talentNodes || 0 }}</b> 节点</div>
     <h2>先看一棵真树，再进计算器</h2>
@@ -57,6 +60,19 @@ import { computed, ref } from 'vue';
 import { linkFor } from '../lib/nav.js';
 import { tileStyle, iconUrl } from '../lib/glyph.js';
 import { gridCells, countStates, nodeLabel, nodeFile, calcFile, treeOf } from '../lib/preview.js';
+import { specArt } from '../lib/art.js';
+import { legacyUrl } from '../lib/nav.js';
+
+const legacy = legacyUrl;
+/* 点在卡里的链接、按钮、格子、职业条上时让给它们自己，只有点在空白处才按 data-go 跳
+   （与旧站 bindGo 同一套判断）。data-go 用旧站那套 .html 地址，linkFor 认得它就换站内路由。 */
+function goCard(e) {
+  if (e.target && e.target.closest && e.target.closest('a, button, .stripc, .pnode, .pick')) return;
+  const to = linkFor(String(e.currentTarget.getAttribute('data-go') || '').split('?')[0]);
+  if (to.to) { window.location.hash = to.to + ('?' + String(e.currentTarget.getAttribute('data-go')).split('?')[1] || ''); return; }
+  window.location.href = e.currentTarget.getAttribute('data-go');
+}
+function goKey(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goCard(e); } }
 import ClassTile from './ClassTile.vue';
 
 const props = defineProps({
@@ -79,8 +95,9 @@ const cnOf = computed(() => {
   return c ? c.cn : cid.value;
 });
 // 卡片背景随选中的职业换：素材只用已转存的本地原画，没有就不加背景层
+// 背景用"当前这一系"的专精原画；那一系没图就退回该职业第一系，再没有就留纯色
 const bgStyle = computed(() => {
-  const f = (props.art.classes || {})[cid.value];
+  const f = specArt(props.art, cid.value, ti.value);
   return f ? { backgroundImage: 'url(' + f + ')' } : {};
 });
 // 2026-10-12 站主决定：卡尾那条"名称与官网中文一致 462 / 466"的读数与进度条撤下，

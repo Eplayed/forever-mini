@@ -11,6 +11,9 @@
          2026-10-12 站主决定：素材出处角标（客户端原画 · 本地转存）与讲数据出处的备注句已撤，
          出处集中在溯源页（provenance.html）。 -->
     <section class="dhero clhero" :style="clStyle">
+      <!-- 页首横幅：这一职业的原画（614×345），取不到退回该职业第一系的专精图，
+           再没有就留纯色——不拿 128 的图标放大凑数。 -->
+      <img v-if="banner" :src="banner" alt="" loading="lazy">
       <span class="dx"></span>
       <div class="db">
         <div class="clt">
@@ -38,9 +41,11 @@
     <!-- 三系卡：点一下把右边的技能变化收到那一系，再点一次回到三系都列。
          系名用官方定名，另一来源的叫法走红框悬停（与天赋页同一套符号）。 -->
     <section v-if="trees.length" class="spec3" aria-label="这一职业的三系专精">
-      <button v-for="t in trees" :key="t.id" type="button" class="spec plate" :class="{ on: sel === t.nameCn }"
+      <button v-for="(t, ti) in trees" :key="t.id" type="button" class="spec plate" :class="{ on: sel === t.nameCn }"
               :data-s="t.nameCn" :aria-pressed="sel === t.nameCn ? 'true' : 'false'" :title="altTip(t)"
               @click="pickSpec(t.nameCn)">
+        <span v-if="specArt(ART, c.id, ti)" class="sbg" aria-hidden="true"
+              :style="{ backgroundImage: 'url(' + specArt(ART, c.id, ti) + ')' }"></span>
         <b>{{ t.nameCn }}<i v-if="t.nameConflict && t.nameAlt" class="cfl" aria-hidden="true"></i></b>
         <span>{{ (t.nodes || []).length }} 个节点</span>
         <span class="spnote">{{ sel === t.nameCn ? '已只看这一系，再点一次看全部' : '只看这一系的改动' }}</span>
@@ -120,6 +125,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
 import { legacyUrl, linkFor } from '../lib/nav.js';
 import { CLASS_COLOR } from '../lib/glyph.js';
+import { artOf, specArt } from '../lib/art.js';
 import ClassTile from '../components/ClassTile.vue';
 import IconCell from '../components/IconCell.vue';
 
@@ -187,8 +193,12 @@ const cflTxt = computed(() => ((st.value.nameConflict || 0) +
 const col = computed(() => (c.value && CLASS_COLOR[c.value.id]) || '');
 const clStyle = computed(() => (col.value ? '--cl:' + col.value : ''));
 const kicker = computed(() => 'CLASS · ' + String((c.value && (c.value.en || c.value.id)) || '').toUpperCase());
-const art = computed(() => (c.value && base.value && (base.value.ART.classes || {})[c.value.id]) || '');
+const ART = computed(() => (base.value && base.value.ART) || {});
+const art = computed(() => artOf(ART.value, 'classes', c.value && c.value.id));
 const artSrc = computed(() => (art.value ? assetUrl(art.value) : ''));
+// 页首横幅：classBanners 优先（614×345 原画），没有就退回这一职业第一系的专精图
+const banner = computed(() => artOf(ART.value, 'classBanners', c.value && c.value.id)
+  || specArt(ART.value, c.value && c.value.id, 0));
 const SC = computed(() => (base.value && base.value.SC) || {});
 const AB = computed(() => (base.value && base.value.AB) || { items: [], meta: {} });
 const CHR = computed(() => (base.value && base.value.CHR) || {});

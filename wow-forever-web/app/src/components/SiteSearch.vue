@@ -12,7 +12,6 @@
     <p class="gsex">
       <button v-for="x in SAMPLES" :key="x[0]" type="button" class="gsx"
               :title="x[1]" @click="pick(x[0])">{{ x[0] }}</button>
-      <span class="dim">只搜名称与归属，不搜攻略说法，也不搜别人站的正文。</span>
     </p>
     <div id="gres" ref="list" class="gres" :hidden="!open">
       <p v-if="busy" class="gsl">正在读索引…</p>
