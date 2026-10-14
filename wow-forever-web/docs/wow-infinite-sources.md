@@ -586,3 +586,47 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 - 不抓取、不依赖、不进任何自动化管线；仅作为**参照存档**（本节即存档）。
 - 第 2 点的 ID 交叉核对：待物品库二批详情抓取排期时顺带比对（低优先级）。
 - 第 3 点的采集范式：留给将来"L2 实测数据收集器"立项时引用，当前不执行。
+
+## 十三、GearInsight 插件家族能不能当数据源 —— 2026-10-14 判过，结论：不能进数据基底；按"参照"档处理
+
+站主提供拷贝 `D:\project\wow\`：GearInsight 0.97.9 主插件 + GearInsight_Talents（天赋库）+
+GearInsight_Rotation（手法）+ GearInsight_Macros（宏库）+ GearInsight_Layout 等分模块。
+作者"枫叶大象-格瑞姆巴托/yinpeng"，CurseForge 项目 1554172，Interface 120100/120007，
+更新极活跃（判定当天 0.97.9 还在发版），**明确三客户端适配**：正式服 / 无限 Forever / 时光服 Titan
+（`GIWidgets.lua` 的 GAME_TXT 三分支，多处"无限客户端实测"注释；站主客户端即 `C:\GAME\World of Warcraft\_retail_`）。
+SavedVariables：`GearInsightDB`（GearReader+StatReader 的角色装备快照）/ `GearInsightRecsDB`；WTF 实测存档本轮未拷。
+
+### 13.1 内置数据是什么、从哪来（判定依据）
+
+- **BisData.lua**：文件头自述 "Live BiS data from WarcraftLogs V2 — Zone 53（烈毒之渊 S2）, Mythic —
+  auto-fetched"，2026-09-27 生成，40 专精 / 2993 件——**正式服当前赛季**的团本 BiS。
+- **GearInsight_Talents**（PopularTalents/PvpTalents.lua）：文件头自述由 `build_popular_talents.py`
+  生成，"WCL 顶尖天赋（团本/冲分/割草 前5；常规 = +12 第 300~500 名附近 5 人）"——**WCL 排行聚合**。
+- **CheeseData.lua**：正式服 S2 玩法情报（ROLL 币全流程、周常捷径等），正文自己注明转载自
+  "魔兽阿落、熊本超人、星空心语、冰糖雪栗儿"等创作者——**攻略聚合转述**。
+- 判定：三样都不是"官方/客户端解包"级事实，而是**第三方聚合排行与攻略转述**——按本站分级到不了
+  L0/L1；且内容对应正式服 S2 赛季（烈毒之渊、地下堡、化生台、ROLL 币），与无限服经典旧世进程
+  （站内 35 座本、经典团本排期）几乎不重叠，站内同类字段（物品/天赋/掉落）已有 L0 解包源。
+- **红线冲突**：站内已定"抄 BiS = 红线、排行只声明『本站整理的排序』、零 UGC"——BiS / 使用率 /
+  顶尖构筑三类数据整块踩线；WCL 也不构成无限服证据（其 logs 不覆盖无限服）。
+- **授权与合规**：数据是作者脚本从 WCL API 抓取的产物，插件自带 Supporters 赞助体系，整包搬用等于
+  复制他人数据产品；GearInsight_Rotation（手法助手）与 GearInsight_Macros（宏库）属
+  9-24《付费插件及其违规商业化行为专项治理公告》敏感区——**本站与变现线一律不碰、不推广、不引用**。
+
+### 13.2 那它有什么用（同第十二节"参照"档）
+
+- **无限服客户端兼容写法的一手情报**（最有价值的一块）：作者对无限客户端的兼容注释很具体——
+  "无限客户端可能没有 C_AddOns → 退回老的全局函数"（GuildTab.lua）、"只用 60 级经典客户端也有的
+  贴图（无限/时光服客户端里一定存在）"（GIWidgets.lua）、按无限英文客户端截图修布局（LayoutPage.lua）、
+  无限纸娃娃版式参照（GearMap.lua，引 **addon-forever** PagePlan.lua）。将来 L2 实测收集器或
+  小程序做同款功能时，这些"哪个 API 在无限客户端没有/怎么退"的记录能省大量试错；
+  `addon-forever` 这个项目名同时是一条新线索：**无限服已存在自己的插件生态**。
+- **schema 参照**：BisData 头部 `version / updatedAt / source` 显式声明的写法与站内产物 manifest
+  同构，值得学（学的是格式，不取数据）。
+- SavedVariables 装备快照 = 第十二节 FishingLedger 同款"客户端内实测"范式，本轮无增量。
+
+### 13.3 一个待核实口
+
+作者对无限服适配的深度本轮没全验：若其 BiS 页在无限服内出的是经典进程内容，说明作者另有无限服
+数据管线（比 wclbox 更早的玩家侧聚合）——那也改变不了"聚合源不进数据基底"的结论，顶多将来当
+交叉核对的第三证据，且需重新取证（抓取端点、更新频率、覆盖范围）。
