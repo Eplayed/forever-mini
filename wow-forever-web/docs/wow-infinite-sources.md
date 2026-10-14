@@ -542,3 +542,47 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
   这条本身就是结论：**无限新增本大部分没有副本任务**，不是我们没采到。
   领主大厅两边都是 4 条，可交叉印证。
 - 还没做：挂进 `dungeons.json` 与详情页那一块（wow-dev 的活），要先定两源分歧怎么摆。
+
+## 十二、网易DD 上的"钓鱼手账 FishingLedger"插件 API 分析（2026-10-14）
+
+站主在网易DD 装了"老牌轻量化钓鱼助手-功能全面"，本地实为 `FishingLedger` v0.6.6
+（`C:\GAME\World of Warcraft\_retail_\Interface\AddOns\FishingLedger\`，15 个 Lua 单文件插件，无外部依赖库）。
+作者自称"使用公开的 api"，逐文件读源码核实：**属实**。定位结论先给：**它不是数据源，是一条"无限服客户端 API 能力"的一手参照 + 将来玩家侧实测采集的现成范式**，按"人工参照"档处理（同第十节对 DD 插件的原则，不进自动化）。
+
+### 12.1 作者"公开 API"的核实结论
+
+- **全部调用是暴雪公开文档化的 UI Lua API**，没有私服魔改接口、没有未公开函数、没有内存读写。
+- **零网络通信**：无 `SendAddonMessage` / `SendChatMessage` / `SendMail`（WoW 插件沙盒本就不允许联网），统计只存角色本地 SavedVariables（`FishingLedgerDB`）。
+- **操作辅助走合法边界**：单击/双击抛竿与右键互动全部由玩家真实硬件点击触发，用 `SecureHandlerStateTemplate` + `RegisterStateDriver("[combat] combat; …")` + `SetOverrideBinding` 实现，战斗锁自动解绑，实际施法由客户端校验——这是暴雪明确允许的插件写法。
+- 改过的 CVar（软交互开关、音量）都记录原值、退出时恢复。
+- 全部 API 调用包 `pcall` + **按能力探测降级**（源码注释原话 "capability-based, not number-based"），同一份代码跑六种客户端。
+
+### 12.2 它用到的 API 全清单（按模块）
+
+| 模块 | 新接口（正式服/无限用） | 旧接口降级 | 用途 |
+| --- | --- | --- | --- |
+| 物品 | `C_Item.GetItemInfo` / `GetItemInfoInstant` / `GetItemIconByID` / `GetItemSpell` / `GetItemCount` / `RequestLoadItemDataByID` | `GetItemInfo` / `GetItemIcon` / `GetItemSpell` / `GetItemCount` | 物品名/品质/图标、鱼竿判定（classID=2 subclassID=20）、鱼饵来源 |
+| 容器 | `C_Container.GetContainerNumSlots/GetContainerItemID/GetContainerItemLink/GetContainerItemInfo` | 同名旧函数 | 背包扫描（拾取空间、鱼饵物品反查） |
+| 法术 | `C_Spell.GetSpellName/GetSpellTexture`、`C_SpellBook.IsSpellKnown` | `GetSpellInfo` / `GetSpellTexture` / `IsPlayerSpell` / `IsSpellKnown` | 钓鱼技能识别（法术 ID 7620/7731/7732/18248/33095/51294/88868/110410/131474） |
+| 引导 | `UnitChannelInfo` | 同 | 读钓鱼引导起止时间（统计收杆时长） |
+| 光环 | `C_UnitAuras.GetAuraDataByIndex`、`C_TooltipInfo.GetUnitBuff` | `UnitBuff`、隐藏 GameTooltip `SetUnitBuff` 扫描器 | 鱼饵/增益剩余时间与描述（扫描器不污染玩家可见 tooltip） |
+| 专业 | `GetProfessions` + `GetProfessionInfo`、`C_TradeSkillUI.GetProfessionSlots`、`C_PaperDollInfo.GetTemporaryEnchantmentInfo` | `GetNumSkillLines` + `GetSkillLineInfo`、`GetWeaponEnchantInfo` | 钓鱼技能值、专业装备槽、鱼竿临时附魔 |
+| 地区 | `C_Map.GetBestMapForUnit` + `C_Map.GetMapInfo`（沿 parentMapID 上溯到 mapType=3 的大区） | `GetRealZoneText`/`GetZoneText`/`GetSubZoneText` | 每竿按抛竿瞬间大地区归档 |
+| 拾取 | `IsFishingLoot`、`GetNumLootItems`/`GetLootSlotLink`/`GetLootSlotInfo` | 同 | **只记实证**：`IsFishingLoot()` 确认钓鱼拾取 + 槽位实际清除确认 + `CHAT_MSG_LOOT` 交叉去重 |
+| 软交互 | `UnitGUID("softinteract")`、`UnitIsInInteractRange`、事件 `PLAYER_SOFT_INTERACT_CHANGED`、CVar `SoftTargetInteract/Arc/Range` | — | 鱼漂互动范围红绿字判定；GUID 解析物件 ID **35591**（普通鱼漂）识别 |
+| 客户端识别 | `GetBuildInfo`、`WOW_PROJECT_ID` | 同 | 接口号 16001–16999 且有 `C_Spell`/`C_Item` → 判定为"魔兽世界：无限 Beta"，命令行加挂 `/flf` |
+
+事件面（60+ 个，均在 `Main.lua` 注册）：钓鱼链路 `UNIT_SPELLCAST_CHANNEL_START/UPDATE/STOP/INTERRUPTED/FAILED`、`LOOT_READY/OPENED/SLOT_CLEARED/CLOSED`、`CHAT_MSG_LOOT`、`UI_ERROR_MESSAGE`、`LOOT_BIND_CONFIRM`；状态面 `PLAYER_REGEN_*/PLAYER_DEAD/UNIT_ENTERED_VEHICLE/ZONE_CHANGED*/GET_ITEM_INFO_RECEIVED` 等。
+
+### 12.3 对我们项目的四点价值
+
+1. **无限服客户端 API 能力表（最有价值的一手情报）**：作者把无限服当一等客户端适配——判定条件（16001 + 现代 `C_Spell`/`C_Item` 命名空间存在）说明**无限服客户端是正式服代码基础改的，10.0+ 的 `C_*` API 面可用**；README 还记录了"无限 Beta 自身的 SavedVariables 读取故障"这种踩坑实录。将来若做采集插件，`Compat.lua` 的能力探测写法可直接参照，不必重踩。
+2. **内置 ID 表可交叉核对我们 items.json**：约 130 个钓鱼物品 ID（经典→Midnight 分组）、鱼饵附魔 ID（263–5386）、增益光环 ID（1237974 等 6 个）、鱼饵物品 ID（6529–68049）、鱼漂物件 35591、钓鱼法术 9 个。这些是事实性标识符，符合红线取数边界；Midnight 组注释写明交叉核对自 "GatherBuffs' author-maintained fishing catalog"，溯源链条清晰。**只对 ID 核存在性与覆盖，不搬它的任何文案**。
+3. **"客户端内实测采集"范式的活样本（战略级参考）**：我们的 L2 待实测数据（掉落、服务器实测内容）缺采集管道。这个插件证明了在无限服上可稳定读到 物品信息 + 拾取（`IsFishingLoot` 确认 + 实际拾取确认 + 聊天事件交叉验证去重）+ 地区（mapID 上溯归档）+ 时间，玩家侧存 `itemID→数量→mapID→时间`。这正是 wowhead 靠玩家插件众包实测数据的模式——将来做"无限服实测掉落/鱼种分布"采集器时，它的**确认口径**（只记实证、证据不全归未知、不从背包增量猜来源）与我们的 L0/L2 分级方法论同构，SavedVariables 导出 → `tools/` 解析 → 进基底即可衔接现有管线。
+4. **帮不上的部分**：它明确"没有自动聊天、分享或上传"，所以它本身不产出可采集的数据；钓鱼内容也只是很小的板块，不改变物品库优先的排期。
+
+### 12.4 处置
+
+- 不抓取、不依赖、不进任何自动化管线；仅作为**参照存档**（本节即存档）。
+- 第 2 点的 ID 交叉核对：待物品库二批详情抓取排期时顺带比对（低优先级）。
+- 第 3 点的采集范式：留给将来"L2 实测数据收集器"立项时引用，当前不执行。
