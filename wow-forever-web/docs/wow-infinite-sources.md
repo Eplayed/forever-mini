@@ -630,3 +630,46 @@ SavedVariables：`GearInsightDB`（GearReader+StatReader 的角色装备快照�
 作者对无限服适配的深度本轮没全验：若其 BiS 页在无限服内出的是经典进程内容，说明作者另有无限服
 数据管线（比 wclbox 更早的玩家侧聚合）——那也改变不了"聚合源不进数据基底"的结论，顶多将来当
 交叉核对的第三证据，且需重新取证（抓取端点、更新频率、覆盖范围）。
+
+> **13.3 的口子当晚就闭合了**：站主补拷了作者另发的无限服专版 `GearInsight_Forever`（见第十四节）
+> ——第十三节判的正式服全家桶与本节口子无关，无限服数据管线确实存在，且出处声明相当规范。
+
+## 十四、GearInsight_Forever（无限版 0.4.29）数据文件盘点 —— 2026-10-14，结论：可按既有"转述"档当交叉核对与缺口补充源；不整包搬
+
+站主补拷 `D:\project\wow\GearInsight_Forever\`（5.2MB，v0.4.29，文件日期 2026-10-13，Interface
+16001/11507——16001 正是台账已知的无限服接口号；`dd_author.toc` 带网易DD 分发指纹，说明经 DD
+渠道安装，与第十节"DD 平台本身无无限服内容"不矛盾）。**与第十三节的正式服全家桶不是同一份东西**。
+
+### 14.1 出处结构（文件头自述，逐文件核实）
+
+- **Data.lua**（3.5MB）：`scripts/gi_forever_addon_data.py` 自动生成，源 = **Forever beta client
+  1.60.1.69876（2026-10-03）**；其中 loot 表自带二级出处：`foreverchanges.pro（Beta 实测掉落 ·
+  build 1.60.1.69913）`。build 69876 **旧于**站内 wclbox 现行 70338。
+- **DungeonQuestData.lua**（494KB）：源 = Dungeon Assistant（CurseForge，Shadowblade，取自
+  **Wowhead WoW: Forever 1.60.1**）；中文名 vmangos + 游戏内现读；地名《无限》客户端 DB2。
+- 出处声明规范（来源/build/生成脚本/日期齐全），与站内产物 manifest 同构——这点本身就值得学。
+
+### 14.2 表清单与对站内基底的交叉核对数（本轮实测）
+
+| 表 | 量级 | 内容 | 对站内的意义 |
+| --- | --- | --- | --- |
+| `gear` | 1,515 件 | id/中英名/图标/slot/**ilvl/需要等级**/品质/来源 | 1,501 件在站内 items.json（21,077）；**14 件站内没有**（腐疗者套 5 件 + 273022~273030 连号绿蓝装，wclbox 索引漏收或后续 build 移除，物品二批时核对）；**ilvl/req 正是物品二批要的字段** |
+| `loot` | 1,875 条 | **Beta 实测掉落**（foreverchanges.pro，build 69913），**无概率字段**（红线不破） | 站内掉落是 wclbox 解包 1,050 条——"实测"对"解包"是双向交叉的好对子；foreverchanges.pro 即台账记过的竞品站（Ko-fi、明写无广告） |
+| `DungeonQuestData` | 29 座 / 387 qid | 副本任务（Wowhead Forever 1.60.1 系），每座带入口坐标 | **能补 2 座空座**：whelgars-excavation 14 条、city-of-dalaran 15 条；其余 5 座空座它也是 0；lbrs/ubrs 反而站内更全（29/30 vs 18/23）——双向各有覆盖；ragefire 标 13-18（Wowhead 口径，站内定稿 13-20 的第三证据，支持官方值那一侧） |
+| `rares` | 338 条 | npc id/中英名/品质/等级区间/区域/**坐标** | 站内世界线 36 稀有是"配书"口径，覆盖面不同；坐标准备率是亮点（将来世界线扩容可引） |
+| `achievements` | 211 条 | id/中英名/描述 | 站内 upstream **还没有成就文件**（wclbox chengjiu.json 当时"顺手有了"但没入库）——GAP ③ 的两路原料在此 |
+| `spells` | 1,480 条 | 九职业技能表（lv/id/名/描述/auto/tal） | GAP ② 法术书（现 86 条，目标 420+）的第二源 |
+| `talents` | 9 职业 27 树 | 节点级 n/c/m/r/col/**s=changed\|same\|moved（对照经典旧世）**/图标/中英描述 | 站内 changes 线与天赋线的交叉核对材料；注意 build 旧于 70338，且中文名是作者/vmangos 人工译名，**不能升译名等级** |
+| `tier` | 18 套 | T1 套装（9 职业 × 2 角色） | 套装页未立项，存档 |
+| `keys`/`questSeries`/`leveling` | — | 键位推荐 / 职业任务线（含接取人坐标）/ 升级里程碑 | 职业任务线是事实性内容，低优先 |
+| `MacroData`/`KeysRot`/`DefaultBuildsData` | — | 宏库 / 循环 / 天赋构筑推荐 | **不碰**：前两者踩 9-24 公告敏感区；构筑推荐是强度导向（红线邻区） |
+
+### 14.3 判定与用法
+
+- **可进站内管线**：按既有 L0 解包转述档（wclbox 同级）与实测转述档（foreverchanges.pro 系，
+  记双跳出处），**逐表挂 provenance 做交叉核对与缺口补充**；不整包搬、不取攻略文案、不升译名等级。
+- **授权**：仍属作者数据产品（CurseForge 项目 + 网易DD 分发 + Supporters 赞助体系）；用法克制
+  （交叉核对 + 补空 + 引用登记），不复制其产品形态，不与其构成同类竞争功能。
+- **待拍板的三件**（与既有台账欠账并轨）：① 物品二批的 ilvl/req 从这取还是 wclbox 抓、两源怎么
+  并；② 法术书 GAP② 与成就 GAP③ 动工前两源并评；③ 掉落实测↔解包抽 2 座本逐条比对，差异清单
+  交站主。
