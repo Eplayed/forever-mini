@@ -13,7 +13,8 @@
       <div class="cdhead noart big"><h1 class="pt">物品库</h1></div>
       <p class="dim">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。
         名录出自客户端解包（经<a :href="srcUrl" target="_blank" rel="noopener">新手盒子</a>转述，
-        {{ d.meta.fetched }} 取回），只记名称、品质、类型与等级这些事实，不含描述文案。
+        {{ d.meta.fetched }} 取回），只记名称、品质、类型与等级这些事实；点任意一行可看详情——
+        属性、卖价与出处由两份客户端数据补齐，没有的那一段就不显示。
         图标取自暴雪官方 CDN 本地转存，取不到的用占位块。</p>
       <div class="stats readout">
         <div class="stat"><b>{{ items.length }}</b>件全量</div>
@@ -73,7 +74,9 @@
       <table class="itt">
         <thead><tr><th>名称</th><th>类型 / 材质</th><th class="num">物品等级</th><th class="num">需要等级</th><th>状态</th><th class="num">编号</th></tr></thead>
         <tbody>
-          <tr v-for="(x, i) in pageRows" :key="x.id" :style="{ animationDelay: Math.min(i * 14, 280) + 'ms' }">
+          <tr v-for="(x, i) in pageRows" :key="x.id" :style="{ animationDelay: Math.min(i * 14, 280) + 'ms' }"
+              class="row" tabindex="0" :aria-label="x.name + ' 详情'"
+              @click="openRow(x)" @keydown.enter.prevent="openRow(x)">
             <td data-k="名称">
               <span class="icell"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" />
                 <span class="nm" :class="'q' + (x.quality || 0)"><HlText :text="x.name" :q="q" /></span></span>
@@ -96,6 +99,43 @@
         <span class="pinfo">共 {{ rows.length }} 件 · 第 {{ page }}/{{ pages }} 页</span>
       </div>
     </div>
+
+    <!-- 详情抽屉（物品线二批，方案 A）：首次点行才拉 items-detail.json，列表页首屏零负担。
+         字段来源固定——属性按 stFrom 标注（GI 实测转述优先 / XR 社区稿兜底）、
+         卖价只有 XR 有、出处只有 GI 有；两份都没有的就不显示那一段，不摆占位。 -->
+    <div v-if="sel" class="idmask" @click="close"></div>
+    <aside v-if="sel" class="idrawer" role="dialog" aria-modal="true" :aria-label="sel.name + ' 详情'">
+      <div class="idh">
+        <IconCell :icon-key="sel.iconKey || ''" :seed="sel.id" :cn="sel.name" />
+        <div class="idt">
+          <div class="nm" :class="'q' + (sel.quality || 0)">{{ sel.name }}</div>
+          <div class="ids">#{{ sel.id }} · {{ typeText(sel) }}</div>
+          <div class="ids">物品等级 {{ sel.ilvl == null ? '—' : sel.ilvl }} · 需要等级 {{ sel.rlvl == null ? '—' : sel.rlvl }}</div>
+        </div>
+        <span class="ist" :class="'ist-' + sel.status">{{ STN[sel.status] || sel.status }}</span>
+        <button type="button" class="idclose" aria-label="关闭详情" @click="close">×</button>
+      </div>
+      <div v-if="dErr" class="idempty">详情数据没加载出来，刷新一下再试。</div>
+      <div v-else-if="!itd" class="idempty">详情加载中…</div>
+      <template v-else>
+        <div v-if="rec && rec.st && rec.st.length" class="idsec">
+          <h3 class="idh3">属性 / 提示
+            <span class="idbadge">{{ rec.stFrom === 'gi' ? 'beta 实测 · GearInsight 转述' : '社区整理 · XR 助手转述' }}</span>
+          </h3>
+          <ul class="idl"><li v-for="(s, i) in rec.st" :key="i">{{ s }}</li></ul>
+        </div>
+        <div v-if="rec && rec.sell" class="idsec">
+          <h3 class="idh3">卖价 <span class="idbadge">社区整理 · XR 助手转述</span></h3>
+          <div class="idv">{{ rec.sell }}</div>
+        </div>
+        <div v-if="rec && rec.src" class="idsec">
+          <h3 class="idh3">出处 <span class="idbadge">beta 解包 · GearInsight 转述</span></h3>
+          <div class="idv">{{ SRCN[rec.src] || rec.src }}<template v-if="rec.srcName"> · {{ rec.srcName }}</template></div>
+        </div>
+        <div v-if="!rec" class="idempty">这一件的详情还没收录。</div>
+      </template>
+      <p class="dim idnote">详情由两份客户端数据补齐：属性与出处按 beta 解包与实测掉落（GearInsight 无限版转述），卖价按社区整理稿（XR 全能助手转述）。</p>
+    </aside>
   </template>
 </template>
 
@@ -104,7 +144,7 @@
    筛选/排序/分页全在本页内存里做——21,077 条线性扫一遍在毫秒级，不需要后端。
    物品不进全站搜索索引（会把 search.json 撑大一倍），本页自带页内搜索；
    ?q= 与 ?st= 仍接住：将来任何入口（更新说明、副本掉落反链）带着词跳进来都能落地。 */
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
 import IconCell from '../components/IconCell.vue';
@@ -114,6 +154,7 @@ const STN = { new: '新增', changed: '改动', rebuilt: '重建', same: '不变
 const ST_ORDER = ['new', 'changed', 'rebuilt', 'same', 'missing'];
 const PER = 50;
 const srcUrl = 'https://wowforever.wclbox.com/wupin';
+const SRCN = { dungeon: '地下城', quest: '任务' };
 
 const route = useRoute();
 const d = ref(null);
@@ -129,6 +170,29 @@ const qRaw = ref(q.value);
 const sort = ref('id');
 const page = ref(1);
 const tableCard = ref(null);
+
+/* 详情抽屉：sel 是列表行对象；itd 是懒加载的 items-detail.json（首次点行才拉） */
+const sel = ref(null);
+const itd = ref(null);
+const dErr = ref(false);
+let itdStarted = false;
+
+function openRow(x) {
+  sel.value = x;
+  if (!itdStarted) {
+    itdStarted = true;
+    load('data/items-detail.json').then((r) => { itd.value = r; }).catch(() => { dErr.value = true; });
+  }
+}
+function close() { sel.value = null; }
+function onKey(e) { if (e.key === 'Escape') close(); }
+onMounted(() => window.addEventListener('keydown', onKey));
+onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); close(); });
+
+const rec = computed(() => {
+  if (!itd.value || !sel.value) return null;
+  return itd.value.items[String(sel.value.id)] || null;
+});
 
 function boot() {
   err.value = '';
@@ -286,4 +350,30 @@ function typeText(x) {
   .itt td:first-child{padding-top:12px}
   .itt td:last-child{padding-bottom:12px}
 }
+/* 详情抽屉：右侧滑出，移动端整宽；令牌取 tokens.css 不新开颜色 */
+.row{cursor:pointer}
+.row:focus-visible{outline:1px solid var(--gold);outline-offset:-1px}
+.idmask{position:fixed;inset:0;background:rgba(4,7,12,.62);z-index:70}
+.idrawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);z-index:71;
+  background:var(--sunk);border-left:1px solid var(--gold-line,rgba(200,163,92,.3));
+  overflow-y:auto;padding:18px 18px 24px;animation:idr .22s ease both}
+@keyframes idr{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+.idh{display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.idt{flex:1;min-width:0}
+.idt .nm{font-weight:700;font-size:15.5px}
+.ids{color:var(--lead);font-size:12px;margin-top:2px}
+.idclose{flex:none;background:none;border:1px solid var(--line);color:var(--lead);
+  width:32px;height:32px;font-size:18px;line-height:1;cursor:pointer}
+.idclose:hover{color:var(--gold);border-color:var(--gold)}
+.idh .ist{flex:none;margin-top:2px}
+.idsec{margin-top:16px}
+.idh3{font-size:11.5px;color:var(--lead);font-weight:600;letter-spacing:1px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.idbadge{font-size:10.5px;color:var(--lead);border:1px solid var(--line);
+  padding:1px 7px;letter-spacing:.5px;font-weight:400;white-space:nowrap}
+.idl{margin:0;padding:0;list-style:none;font-size:13.5px;line-height:1.75}
+.idl li{padding:2px 0;border-bottom:1px dashed rgba(44,56,80,.35)}
+.idv{font-size:13.5px}
+.idempty{margin-top:18px;color:var(--lead);font-size:13px;border:1px dashed var(--line);padding:12px 14px}
+.idnote{font-size:11.5px;margin-top:20px;line-height:1.7}
 </style>

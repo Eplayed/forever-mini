@@ -2053,6 +2053,38 @@ def test_app(browser, base):
     check("新站物品库：正文没有面向开发的词", not dev_word_hits(body), "干净")
     check("新站物品库：无脚本报错与失败请求", not errs and not failed,
           "; ".join((errs + failed)[:2]) or "干净")
+
+    # —— 详情抽屉（物品线二批，2026-10-14 站主拍板方案 A）：搜一件名字唯一、属性 ≥3 行的物品，
+    #    点行开抽屉，属性行数与 items-detail.json 逐条一致；遮罩能关；没有掉率字样。
+    itd = json.load(open(os.path.join(SRC, "data", "items-detail.json"), encoding="utf-8"))["items"]
+    name_count = {}
+    for x in it:
+        name_count[x["name"]] = name_count.get(x["name"], 0) + 1
+    pick = next(x for x in it
+                if name_count.get(x["name"]) == 1 and len((itd.get(str(x["id"])) or {}).get("st", [])) >= 3)
+    exp = itd[str(pick["id"])]
+    page.fill(".qsearch", pick["name"])
+    page.wait_for_timeout(900)
+    page.click(".itt tbody tr:first-child")
+    page.wait_for_timeout(1200)
+    dr = page.evaluate("""() => { const d = document.querySelector('.idrawer');
+      if (!d) return { open: false };
+      return { open: true, name: (d.querySelector('.idt .nm') || {}).innerText.trim(),
+               st: d.querySelectorAll('.idl li').length,
+               badges: d.querySelectorAll('.idbadge').length }; }""")
+    check("新站物品详情抽屉：点行能开、名字与属性行数和数据一致",
+          dr.get("open") and dr.get("name") == pick["name"] and dr.get("st") == len(exp.get("st", []))
+          and dr.get("badges", 0) >= 1, json.dumps(dr, ensure_ascii=False))
+    drtext = page.evaluate("() => (document.querySelector('.idrawer') || {}).innerText || ''")
+    check("新站物品详情抽屉：没有掉率字样（红线）",
+          "掉率" not in drtext and "掉落概率" not in drtext and "掉落几率" not in drtext, "干净")
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail.png"))
+    page.click(".idmask")
+    page.wait_for_timeout(300)
+    check("新站物品详情抽屉：点遮罩能关",
+          page.evaluate("() => !document.querySelector('.idrawer')"), "已关")
+    page.fill(".qsearch", "")
+    page.wait_for_timeout(700)
     page.screenshot(path=os.path.join(SHOT_DIR, "app-items.png"))
     ctx.close()
 
@@ -2076,7 +2108,20 @@ def test_app(browser, base):
       return { overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
                card: tr ? getComputedStyle(tr).display === 'block' : false }; }""")
     check("新站物品库移动端：行卡片化、375 不横滚", not mit["overflow"] and mit["card"], json.dumps(mit))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-mobile.png"))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-mobile.png"), full_page=True)
+    # 移动端抽屉：整宽、能开能关（物品线二批）
+    mp.fill(".qsearch", pick["name"])
+    mp.wait_for_timeout(900)
+    mp.click(".itt tbody tr:first-child")
+    mp.wait_for_timeout(1200)
+    mid = mp.evaluate("""() => { const d = document.querySelector('.idrawer');
+      if (!d) return { open: false };
+      const vw = document.documentElement.clientWidth;
+      return { open: true, w: d.getBoundingClientRect().width, vw: vw,
+               overflow: document.documentElement.scrollWidth > vw + 1 }; }""")
+    check("新站物品详情抽屉移动端：整宽、不横滚",
+          mid.get("open") and abs(mid["w"] - mid["vw"]) <= 1 and not mid["overflow"], json.dumps(mid))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-m.png"))
     m.close()
 
 

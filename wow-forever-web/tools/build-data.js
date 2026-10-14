@@ -1014,6 +1014,42 @@ if (fs.existsSync(itPath)) {
   warns.push('items.json 缺失：物品库页将空态（跑 tools/scrape-wclbox-items.py + tools/merge-items.py 生成）');
 }
 
+// ---------- 物品详情（物品线二批，方案 A，2026-10-14 站主拍板） ----------
+// 独立文件只有详情抽屉懒加载，不进 search.json、不进小程序导出。字段全部事实性
+// （属性/卖价/出处），描述正文与概率不收；禁词扫描自动覆盖本文件，这里查结构。
+const itdPath = path.join(ROOT, 'items-detail.json');
+if (fs.existsSync(itdPath)) {
+  const itd = JSON.parse(fs.readFileSync(itdPath, 'utf8'));
+  const itdItems = itd.items || {};
+  const ids = Object.keys(itdItems);
+  // its 在上面物品段的作用域里，这里自己读名录（items-detail 由 items.json 派生，缺失即结构错）
+  const baseIds = new Set(JSON.parse(fs.readFileSync(itPath, 'utf8')).items.map((x) => x.id));
+  const unknown = ids.filter((id) => !baseIds.has(Number(id)));
+  if (unknown.length) errs.push(`items-detail：${unknown.length} 个 id 不在 items.json 名录里（如 ${unknown.slice(0, 3).join('、')}）`);
+  const SRC_WHITELIST = ['dungeon', 'quest'];
+  let badSt = 0, badSell = 0, badSrc = 0, rateHit = 0;
+  for (const id of ids) {
+    const r = itdItems[id] || {};
+    if (r.st !== undefined && (!Array.isArray(r.st) || r.st.some((s) => typeof s !== 'string'))) badSt++;
+    if (r.sell !== undefined && (typeof r.sell !== 'string' || /%/.test(r.sell))) badSell++;
+    if (r.src !== undefined && SRC_WHITELIST.indexOf(r.src) < 0) badSrc++;
+    if (/掉率|掉落概率/.test(JSON.stringify(r))) rateHit++;
+    if (r.stFrom !== undefined && ['gi', 'xr'].indexOf(r.stFrom) < 0) badSrc++;
+  }
+  if (badSt) errs.push(`items-detail：${badSt} 条 st 不是字符串数组`);
+  if (badSell) errs.push(`items-detail：${badSell} 条 sell 不是字符串或含百分号`);
+  if (badSrc) errs.push(`items-detail：${badSrc} 条 src/stFrom 越界（只允许 dungeon/quest 与 gi/xr）`);
+  if (rateHit) errs.push(`items-detail：${rateHit} 条出现掉率措辞（红线）`);
+  const c = (itd.meta || {}).counts || {};
+  if (ids.length !== c.total) errs.push(`items-detail：条数 ${ids.length} 与 meta.counts.total ${c.total} 对不上`);
+  const nSt = ids.filter((id) => itdItems[id].st).length;
+  if (nSt !== c.st) errs.push(`items-detail：属性条数 ${nSt} 与 meta.counts.st ${c.st} 对不上`);
+  console.log('物品详情：' + ids.length + ' 件（属性 ' + nSt + ' · 卖价 ' + c.sell + ' · 出处 ' + c.src
+    + ' · 两源差异留档 ' + c.conflicts + ' · 名录外孤儿 ' + c.orphans + '）·懒加载不改列表页');
+} else {
+  warns.push('items-detail.json 缺失：物品库详情抽屉将是空态（跑 tools/extract-addon-items-detail.py + tools/merge-items-detail.py 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——
