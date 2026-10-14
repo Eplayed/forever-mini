@@ -28,5 +28,15 @@ __pycache__/
 wow-forever-web/docs/screenshots/baseline/
 wow-forever-web/docs/screenshots/visual-diff-*/
 
+# 历史截图批次归档（2026-10-13 起：旧 check-* 整批 tar 后移出 git，只留本地）。
+# 仓库历史里仍带着归档前的原图，新克隆体积要等历史重写才会真正变小。
+wow-forever-web/docs/screenshots-archive/
+
 # AI 出图的原图（PNG，几十 MB）；入库的是 src/img/gen/ 里裁过并转 webp 的那三份
 vibe_images/
+
+# Trae 本地分享包产物（非项目源码）
+.trae-html-share-packages/
+
+# 工具运行期临时清单
+wow-forever-web/tools/_tmp_*

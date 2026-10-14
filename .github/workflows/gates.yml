@@ -1,0 +1,40 @@
+# 最简门禁：把仓库根 AGENTS.md「验证基线」里不依赖界面截图的两道卡口搬上 CI。
+# 界面渲染证据（site-check / 截图）需要起服务 + 无头 Chrome，仍按规矩在本地跑，不进这条流水线。
+name: gates
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # build-data.js 要回 git 历史核对「本站更新」的提交号，浅克隆会核对不了
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: wow-forever-web/app/package-lock.json
+
+      - name: 数据门禁（校验 + 覆盖率 + 禁词，非 0 即失败）
+        working-directory: wow-forever-web
+        run: node tools/build-data.js
+
+      - name: 新站安装依赖
+        working-directory: wow-forever-web/app
+        run: npm ci
+
+      # npm run build 内部先跑 python3 ../tools/app-assets.py 同步数据副本，ubuntu 自带 python3
+      - name: 新站构建
+        working-directory: wow-forever-web/app
+        run: npm run build
+
+      - name: 新站单测
+        working-directory: wow-forever-web/app
+        run: npx vitest run
