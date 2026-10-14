@@ -31,7 +31,21 @@ function stubFetch(map) {
   });
 }
 
-const ROUTER = { global: { stubs: { RouterLink: { props: ['to'], template: '<a><slot /></a>' } } } };
+// 全量迁移后所有板块都走路由：stub 把 { to, query } 渲染成可断言的 href（#/路径?query）
+const ROUTER = { global: { stubs: { RouterLink: {
+  props: ['to'],
+  computed: {
+    href() {
+      const t = this.to;
+      if (t && typeof t === 'object') {
+        const q = Object.keys(t.query || {}).map((k) => k + '=' + encodeURIComponent(t.query[k])).join('&');
+        return '#' + (t.path || '') + (q ? '?' + q : '');
+      }
+      return t;
+    }
+  },
+  template: '<a :href="href"><slot /></a>'
+} } } };
 
 describe('SiteSearch 全站搜索框', () => {
   beforeEach(() => { forget('data/search.json'); stubFetch({ 'data/search.json': FAKE }); });
@@ -55,16 +69,18 @@ describe('SiteSearch 全站搜索框', () => {
     expect(w.text()).toContain('命中 3 条');
     w.unmount();
   });
-  it('跳转目标：已迁的页走站内路由，没迁的链回旧站文件并带上编码后的词', async () => {
+  it('跳转目标：全量迁移后所有页都走站内路由并带上编码后的词', async () => {
     const w = mount(SiteSearch, { props: { total: 4 }, ...ROUTER });
-    await w.find('input').setValue('咆鼻');          // world.html 已迁 → router-link
+    await w.find('input').setValue('咆鼻');          // world.html → router-link
     await flushPromises();
     expect(w.findAll('.gsr').length).toBe(1);
     expect(w.find('.gsr').text()).toContain('莫高雷');
-    await w.find('input').setValue('潜行者52型');     // professions.html 未迁 → 旧站链接
+    expect(w.find('.gsr').attributes('href'))
+      .toContain('#/world?t=rares&q=%E5%92%86%E9%BC%BB');
+    await w.find('input').setValue('潜行者52型');     // professions.html 已迁 → 站内路由
     await flushPromises();
     expect(w.find('.gsr').attributes('href'))
-      .toContain('professions.html?p=engineering&q=%E6%BD%9C%E8%A1%8C%E8%80%8552%E5%9E%8B');
+      .toContain('/professions?p=engineering&q=%E6%BD%9C%E8%A1%8C%E8%80%8552%E5%9E%8B');
     w.unmount();
   });
   it('搜索结果不再挂分级文字（2026-10-12：内容页只留标题与数据）', async () => {

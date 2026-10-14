@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物品库 · 原型 — 无限志</title>
+<style>
+:root{
+  --bg:#0b0f16;--panel:#1b2335;--panel2:#131a28;--elev:#2a364c;
+  --line:#2c3850;--line2:#3a465e;
+  --txt:#e9e2d2;--dim:#aeb6c4;--muted:#8a93a5;
+  --gold:#c8a35c;--gold-hi:#e6c886;--gold-deep:#a8863f;
+  --gold-line:rgba(200,163,92,.30);--gold-line-soft:rgba(200,163,92,.15);
+  --azure:#49aee9;--sunk:#0d121c;--field:#101725;
+  --ok:#67c267;--warn:#dd9f44;--bad:#c75c5c;
+  --q0:#9d9d9d;--q1:#ffffff;--q2:#1eff00;--q3:#4aa3ff;--q4:#a335ee;--q5:#ff8000;
+  --serif:Georgia,'Songti SC','STSong','SimSun',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --cut:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--txt);font:15px/1.7 var(--sans);
+  background-image:radial-gradient(1200px 500px at 70% -10%,rgba(200,163,92,.05),transparent 60%)}
+a{color:var(--gold);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+/* ── 站头 ── */
+.top{background:rgba(8,11,17,.92);border-bottom:1px solid var(--gold-line);position:sticky;top:0;z-index:9}
+.top .wrap{display:flex;align-items:center;gap:22px;height:56px}
+.brand{font-family:var(--serif);font-size:19px;color:var(--gold);letter-spacing:2px;white-space:nowrap}
+.brand small{color:var(--muted);font-size:11px;letter-spacing:1px;margin-left:8px;font-family:var(--sans)}
+nav{display:flex;gap:16px;font-size:13px;color:var(--muted);overflow-x:auto}
+nav a{color:var(--muted);white-space:nowrap;padding:4px 2px;border-bottom:2px solid transparent}
+nav a.on{color:var(--gold);border-bottom-color:var(--gold)}
+/* ── 卡片：零圆角 + 对角切角 + 金细线 ── */
+.card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);
+  border:1px solid var(--gold-line);margin-top:16px;
+  clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));
+  padding:20px 22px;position:relative}
+.kicker{font-size:12px;color:var(--gold);letter-spacing:3px;font-family:var(--mono)}
+.cdhead{display:flex;align-items:center;gap:14px;margin:6px 0 10px}
+.hicon{width:46px;height:46px;flex:none;display:grid;place-items:center;
+  background:var(--sunk);border:1px solid var(--gold-line)}
+.hicon svg{width:30px;height:30px}
+h1{font-family:var(--serif);font-size:clamp(26px,4vw,38px);letter-spacing:2px;line-height:1.16}
+.note{color:var(--dim);font-size:13.5px;max-width:72ch}
+.note a{border-bottom:1px dotted var(--gold-deep)}
+/* 读数 */
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.four>div{background:var(--sunk);border:1px solid var(--line);padding:10px 14px;
+  font-size:12px;color:var(--muted);display:flex;align-items:baseline;gap:8px}
+.four b{font-size:22px;color:var(--gold-hi);font-family:var(--mono)}
+.four .u{color:var(--muted);font-size:11px}
+/* ── 筛选 ── */
+.frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.flabel{font-size:12px;color:var(--muted);width:52px;flex:none}
+.chip{background:var(--field);border:1px solid var(--line);color:var(--dim);
+  font:12.5px var(--sans);padding:5px 12px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.chip b{font-family:var(--mono);font-weight:600;color:var(--muted);font-size:11.5px}
+.chip:hover{border-color:var(--gold-deep);color:var(--txt)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#1a1408;font-weight:600}
+.chip.on b{color:#1a1408}
+select,input[type=search],input[type=number]{background:var(--field);border:1px solid var(--line);
+  color:var(--txt);font:13px var(--sans);padding:6px 10px;outline:none}
+select:focus,input:focus{border-color:var(--gold)}
+.rng{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:12.5px}
+.rng input{width:64px}
+.qsearch{width:100%;margin-top:12px;padding:10px 14px;font-size:14px;
+  background:var(--sunk);border:1px solid var(--line)}
+.qsearch::placeholder{color:#5c667c}
+.reset{background:none;border:1px solid var(--line);color:var(--muted);font-size:12px;
+  padding:5px 12px;cursor:pointer;margin-left:auto}
+.reset:hover{color:var(--gold);border-color:var(--gold-deep)}
+/* ── 清单表 ── */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11.5px;color:var(--muted);font-weight:600;text-align:left;letter-spacing:1px;
+  padding:8px 10px;border-bottom:1px solid var(--gold-line);white-space:nowrap}
+th.num,td.num{text-align:right;font-family:var(--mono)}
+td{padding:8px 10px;border-bottom:1px solid rgba(44,56,80,.45);vertical-align:middle}
+tr:hover td{background:rgba(200,163,92,.05)}
+tbody tr{animation:rin .3s var(--e-out) both}
+@keyframes rin{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+/* 图标：本地真图，缺则占位块 */
+.iw{width:34px;height:34px;flex:none;display:grid;place-items:center;position:relative;
+  background:var(--sunk);border:1px solid var(--line);overflow:hidden}
+.iw img{width:100%;height:100%;object-fit:cover;display:block}
+.iw .ph{font-family:var(--serif);font-size:16px;color:var(--dim)}
+.icell{display:flex;gap:10px;align-items:center;min-width:0}
+.icell .nm{min-width:0}
+.icell .nm a{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.icell small{color:var(--muted);font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q0{color:var(--q0)}.q1{color:var(--q1)}.q2{color:var(--q2)}.q3{color:var(--q3)}.q4{color:var(--q4)}.q5{color:var(--q5)}
+/* 状态章 */
+.st{font-size:10.5px;padding:1.5px 7px;letter-spacing:1px;white-space:nowrap;font-family:var(--sans)}
+.st-new{background:var(--gold);color:#1a1408;font-weight:700}
+.st-changed{color:var(--azure);border:1px solid rgba(73,174,233,.5)}
+.st-rebuilt{color:#c993e8;border:1px solid rgba(163,53,238,.55)}
+.st-same{color:var(--muted);border:1px solid var(--line)}
+.st-missing{color:#ff9b8f;border:1px solid rgba(199,92,92,.5)}
+td.num{color:var(--dim)}
+td .iid{color:#5c667c;font-size:12px}
+/* 分页 */
+.pager{display:flex;gap:6px;justify-content:center;align-items:center;margin-top:16px;flex-wrap:wrap}
+.pager button{background:var(--field);border:1px solid var(--line);color:var(--dim);
+  min-width:34px;height:32px;font:12.5px var(--mono);cursor:pointer}
+.pager button.on{background:var(--gold);color:#1a1408;font-weight:700;border-color:var(--gold)}
+.pager button:disabled{opacity:.35;cursor:default}
+.pager .info{color:var(--muted);font-size:12px;margin:0 8px}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+.empty b{color:var(--gold);font-family:var(--serif);font-size:17px;display:block;margin-bottom:6px}
+/* 页脚 */
+.foot{margin-top:28px;border-top:1px solid var(--gold-line-soft);background:#080b11;
+  padding:18px 0 26px;color:#5c667c;font-size:12px;text-align:center}
+/* 原型徽标 */
+.proto{position:fixed;right:14px;bottom:14px;background:rgba(200,163,92,.12);border:1px solid var(--gold-line);
+  color:var(--gold);font-size:11px;padding:5px 12px;letter-spacing:1px;z-index:9;font-family:var(--mono)}
+/* 响应式 */
+@media(max-width:720px){
+  .four{grid-template-columns:repeat(2,1fr)}
+  .card{padding:16px 14px}
+  .flabel{width:100%}
+  /* 表格转卡片 */
+  .itable thead{display:none}
+  .itable tr{display:block;border:1px solid var(--line);margin:8px 0;background:var(--sunk);
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+  .itable td{border:0;display:flex;justify-content:space-between;gap:10px;padding:7px 12px}
+  .itable td::before{content:attr(data-k);color:var(--muted);font-size:11.5px;flex:none}
+  .itable td:first-child{padding-top:12px}
+  .itable td:last-child{padding-bottom:12px}
+  .itable td.num,td.num{text-align:right}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">无限志<small>非官方资料站</small></div>
+  <nav><a href="#">首页</a><a href="#">副本</a><a href="#">世界</a><a href="#">职业</a><a href="#">天赋</a><a class="on" href="#">物品库</a></nav>
+</div></header>
+
+<main class="wrap">
+  <!-- 页首卡 -->
+  <section class="card">
+    <span class="kicker">物品 · 装备 · 套装</span>
+    <div class="cdhead">
+      <span class="hicon"><svg viewBox="0 0 24 24" fill="none" stroke="#c8a35c" stroke-width="1.5"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4z"/><path d="M12 8v8M8 12h8" opacity=".5"/></svg></span>
+      <h1>物品库</h1>
+    </div>
+    <p class="note">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。<b style="color:var(--gold-hi)">数据出自客户端解包</b>（经<a href="https://wowforever.wclbox.com/wupin" target="_blank" rel="noopener">新手盒子</a>转述，抓取日 2026-10-13），只有事实字段，没有描述文案；掉落只回答"谁掉了什么"。</p>
+    <div class="four">
+      <div><b>21,077</b><span class="u">件全量</span></div>
+      <div><b>5,346</b><span class="u">无限新增</span></div>
+      <div><b>6,102</b><span class="u">有改动</span></div>
+      <div><b>1,944</b><span class="u">无限中没有</span></div>
+    </div>
+  </section>
+
+  <!-- 筛选板 -->
+  <section class="card">
+    <div class="frow"><span class="flabel">状态</span><span id="stChips"></span></div>
+    <div class="frow"><span class="flabel">分类</span><span id="catChips"></span><button class="reset" id="reset">重置筛选</button></div>
+    <div class="frow" id="refRow">
+      <span class="flabel">细分</span>
+      <span id="matChips"></span>
+      <select id="slotSel"><option value="">全部部位</option></select>
+      <span class="rng">物品等级 <input type="number" id="ilMin" placeholder="最低" min="1"> – <input type="number" id="ilMax" placeholder="最高"></span>
+      <select id="sortSel">
+        <option value="id">按编号</option>
+        <option value="ilvl-d">物品等级 高→低</option>
+        <option value="ilvl">物品等级 低→高</option>
+        <option value="rlvl">需要等级 低→高</option>
+        <option value="name">按名称</option>
+      </select>
+    </div>
+    <input type="search" class="qsearch" id="q" placeholder="搜物品名，比如：雷霆之怒、秘法、护腕…">
+  </section>
+
+  <!-- 清单 -->
+  <section class="card">
+    <table class="itable">
+      <thead><tr><th>名称</th><th>类型 / 材质</th><th class="num">物品等级</th><th class="num">需要等级</th><th>状态</th><th class="num">编号</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden><b>没有匹配的物品</b>换个说法，或清掉几个筛选再试。</div>
+    <div class="pager" id="pager"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">非官方粉丝资料站，与暴雪娱乐及网易无关 · 物品数据出自客户端解包（新手盒子转述） · 图标取自暴雪官方 CDN，取不到的用占位块，不猜图</div>
+</footer>
+<div class="proto">原型 · 抽样 334 / 21,077 件</div>
+
+<script id="ITEMS" type="application/json">[{"id":276337,"name":"塞勒马奇斯的护符","q":2,"icon":"inv_jewelry_talisman_09","cat":"护甲","slot":"饰品","mat":"其它","ilvl":60,"rlvl":null,"st":"new"},{"id":255718,"name":"优质药膏","q":1,"icon":"inv_10_alchemy2_quenchingfluid_color3","cat":"其它","slot":"","mat":"","ilvl":36,"rlvl":null,"st":"new"},{"id":249431,"name":"翠绿染料","q":2,"icon":"inv_inscription_inkgreen01","cat":"其它","slot":"","mat":"","ilvl":60,"rlvl":null,"st":"new"},{"id":277103,"name":"泽风便鞋","q":1,"icon":"inv_boot_cloth_skybornec60_b_01","cat":"护甲","slot":"脚","mat":"布甲","ilvl":14,"rlvl":9,"st":"new"},{"id":273398,"name":"精锐骑士队长的梦皮束带","q":4,"icon":"inv_belt_23","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":65,"rlvl":60,"st":"new"},{"id":270313,"name":"赞达拉语的伊拉莱传说","q":1,"icon":"inv_scroll_12","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":272756,"name":"精锐骑士队长的兽皮束带","q":4,"icon":"inv_belt_23","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":65,"rlvl":60,"st":"new"},{"id":263406,"name":"苍穹之鞋","q":2,"icon":"inv_boot_cloth_skybornec60_b_01","cat":"护甲","slot":"脚","mat":"布甲","ilvl":15,"rlvl":null,"st":"new"},{"id":277505,"name":"遗失的包裹","q":1,"icon":"inv_misc_paperpackage01a","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":254019,"name":"土灵丝质护腕","q":2,"icon":"inv_bracer_09","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":40,"rlvl":35,"st":"new"},{"id":273584,"name":"附魔披风 - 强效火焰抗性","q":1,"icon":"inv_misc_enchantedscroll","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":281286,"name":"高阶会坠饰","q":2,"icon":"inv_jewelry_necklace_32","cat":"其它","slot":"颈部","mat":"其它","ilvl":57,"rlvl":null,"st":"new"},{"id":272626,"name":"精锐科多兽皮胸甲","q":3,"icon":"inv_chest_leather_07","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":60,"rlvl":55,"st":"new"},{"id":272695,"name":"骑士彩带","q":1,"icon":"inv_misc_tabardpvp_03","cat":"护甲","slot":"战袍","mat":"其它","ilvl":40,"rlvl":null,"st":"new"},{"id":272459,"name":"精锐魔导师法袍","q":3,"icon":"inv_chest_cloth_28","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":60,"rlvl":55,"st":"new"},{"id":278515,"name":"穆斯哈雷失窃的补给品","q":1,"icon":"inv_misc_bag_22","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":247892,"name":"翠绿的叶子","q":1,"icon":"inv_misc_herb_jadetealeaf","cat":"任务","slot":"","mat":"","ilvl":60,"rlvl":null,"st":"new"},{"id":274746,"name":"海巨人的脚趾环","q":2,"icon":"inv_jewelry_ring_02","cat":"护甲","slot":"手指","mat":"其它","ilvl":35,"rlvl":30,"st":"new"},{"id":260632,"name":"雪泥浆果白兰地","q":1,"icon":"inv_drink_28_gilneanfortifiedbrandy","cat":"其它","slot":"","mat":"","ilvl":15,"rlvl":null,"st":"new"},{"id":250377,"name":"配方：强效魔血药剂","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":266253,"name":"驯兽棒","q":1,"icon":"ability_hunter_beasttaming","cat":"任务","slot":"","mat":"","ilvl":10,"rlvl":null,"st":"new"},{"id":275482,"name":"巴顿的侦察报告","q":1,"icon":"inv_misc_book_09","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":250485,"name":"纹银护手","q":2,"icon":"inv_gauntlets_05","cat":"护甲","slot":"手","mat":"锁甲","ilvl":26,"rlvl":21,"st":"new"},{"id":276967,"name":"图样：蔚蓝风缠皮带","q":2,"icon":"inv_scroll_06","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":270013,"name":"矿工工作靴","q":2,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"皮甲","ilvl":20,"rlvl":null,"st":"new"},{"id":268540,"name":"血污徽章","q":1,"icon":"inv_jewelry_necklace_37","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":249895,"name":"冰霜鞭笞幼蕾","q":1,"icon":"inv_10_herb_seed_magiccolor1","cat":"其它","slot":"","mat":"","ilvl":50,"rlvl":null,"st":"new"},{"id":277718,"name":"鬼灵熊的缰绳","q":4,"icon":"inv_bearmountblizzard","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":60,"st":"new"},{"id":284146,"name":"艾森的水囊","q":1,"icon":"inv_drink_waterskin_04","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":274420,"name":"智爪图腾","q":3,"icon":"inv_staff_51","cat":"武器","slot":"双手","mat":"法杖","ilvl":58,"rlvl":53,"st":"new"},{"id":272509,"name":"精锐将军的迫击板甲护肩","q":4,"icon":"inv_shoulder_11","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":65,"rlvl":60,"st":"new"},{"id":275619,"name":"巢穴看守护手","q":3,"icon":"inv_gauntlets_13","cat":"护甲","slot":"手","mat":"锁甲","ilvl":58,"rlvl":53,"st":"new"},{"id":271659,"name":"森达尔学徒之靴","q":1,"icon":"inv_boots_06","cat":"护甲","slot":"脚","mat":"布甲","ilvl":1,"rlvl":null,"st":"new"},{"id":274017,"name":"设计图：荣耀护手","q":4,"icon":"inv_scroll_04","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":271754,"name":"申多雷观天者的护肩","q":1,"icon":"inv_shoulder_armor_skybornec60_d_01","cat":"护甲","slot":"肩部","mat":"外观","ilvl":1,"rlvl":1,"st":"new"},{"id":272999,"name":"野蛮十字弓","q":3,"icon":"inv_weapon_crossbow_02","cat":"武器","slot":"远程","mat":"弩","ilvl":18,"rlvl":13,"st":"new"},{"id":272859,"name":"精锐大元帅的迅捷之刃","q":4,"icon":"inv_sword_05","cat":"武器","slot":"单手","mat":"单手剑","ilvl":65,"rlvl":60,"st":"new"},{"id":270053,"name":"毁灭之戒","q":2,"icon":"inv_jewelry_ring_08","cat":"护甲","slot":"手指","mat":"其它","ilvl":35,"rlvl":null,"st":"new"},{"id":281712,"name":"修复的板甲护腕","q":2,"icon":"inv_bracer_27b","cat":"护甲","slot":"手腕","mat":"板甲","ilvl":1,"rlvl":1,"st":"new"},{"id":285280,"name":"秘银铁匠锤","q":2,"icon":"inv_hammer_20","cat":"武器","slot":"投掷","mat":"投掷武器","ilvl":39,"rlvl":34,"st":"new"},{"id":270071,"name":"黑心战锤","q":2,"icon":"inv_hammer_16","cat":"武器","slot":"双手","mat":"双手锤","ilvl":40,"rlvl":null,"st":"new"},{"id":267087,"name":"扎尔莫克的头颅","q":1,"icon":"inv_misc_head_orc_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":250371,"name":"配方：强效坚韧药剂","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":248779,"name":"密封的精英板条箱","q":3,"icon":"inv_crate_03","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":277045,"name":"黯云风缠披肩","q":2,"icon":"inv_shoulder_leather_skybornec60_b_01","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":35,"rlvl":30,"st":"new"},{"id":275645,"name":"重铸之矛","q":2,"icon":"inv_spear_03","cat":"武器","slot":"双手","mat":"长柄武器","ilvl":59,"rlvl":null,"st":"new"},{"id":270104,"name":"行石者便鞋","q":2,"icon":"inv_boots_01","cat":"护甲","slot":"脚","mat":"皮甲","ilvl":50,"rlvl":null,"st":"new"},{"id":275916,"name":"飞刃","q":0,"icon":"inv_sword_09","cat":"武器","slot":"副手","mat":"单手斧","ilvl":1,"rlvl":1,"st":"new"},{"id":276504,"name":"塞拉摩军服","q":1,"icon":"inv_tabard_theramorec60","cat":"护甲","slot":"战袍","mat":"其它","ilvl":20,"rlvl":null,"st":"new"},{"id":276888,"name":"野猪人牙签","q":2,"icon":"inv_weapon_shortblade_01","cat":"武器","slot":"主手","mat":"匕首","ilvl":24,"rlvl":1,"st":"new"},{"id":250955,"name":"屠兽药水","q":1,"icon":"inv_alchemy_80_potion02yellow","cat":"其它","slot":"","mat":"","ilvl":55,"rlvl":40,"st":"new"},{"id":250524,"name":"卫兵的镀银链甲护腿","q":3,"icon":"inv_pants_mail_16","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":30,"rlvl":25,"st":"new"},{"id":273464,"name":"附魔护腕 - 初级耐力","q":1,"icon":"inv_misc_enchantedscroll","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":286205,"name":"吃了一半的鱼","q":1,"icon":"inv_fishing_innards_bones","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":264040,"name":"工匠文书：采药人手套","q":3,"icon":"inv_misc_note_01","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":10,"st":"new"},{"id":277010,"name":"黯云雷缝外衣","q":2,"icon":"inv_chest-_cloth_skybornec60_b_01","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":12,"rlvl":7,"st":"new"},{"id":281259,"name":"斯通纳德重靴","q":2,"icon":"inv_boots_01","cat":"护甲","slot":"脚","mat":"板甲","ilvl":50,"rlvl":null,"st":"new"},{"id":273292,"name":"达兹卡·影眠的骨头","q":1,"icon":"inv_misc_bone_orcskull_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"new"},{"id":273518,"name":"附魔披风 - 强效防御","q":1,"icon":"inv_misc_enchantedscroll","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"new"},{"id":270091,"name":"海狗的破旧腕轮","q":2,"icon":"inv_bracer_09","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":44,"rlvl":null,"st":"new"},{"id":22097,"name":"五雷罩帽","q":4,"icon":"inv_helmet_04","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":60,"rlvl":null,"st":"changed"},{"id":4203,"name":"魔典：瘟疫术 II","q":1,"icon":"inv_misc_book_06","cat":"其它","slot":"","mat":"","ilvl":26,"rlvl":26,"st":"changed"},{"id":5126,"name":"知识：迪菲亚伪装","q":1,"icon":"inv_scroll_05","cat":"其它","slot":"","mat":"","ilvl":13,"rlvl":13,"st":"changed"},{"id":7332,"name":"华丽护甲","q":2,"icon":"inv_shirt_03","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":45,"rlvl":40,"st":"changed"},{"id":13932,"name":"水煮阳鳞鲑鱼","q":1,"icon":"inv_misc_fish_19","cat":"其它","slot":"","mat":"","ilvl":45,"rlvl":35,"st":"changed"},{"id":13325,"name":"绿色荧光机械陆行鸟","q":3,"icon":"ability_mount_mechastrider","cat":"其它","slot":"","mat":"","ilvl":40,"rlvl":40,"st":"changed"},{"id":3058,"name":"森林皮手套","q":2,"icon":"inv_gauntlets_21","cat":"护甲","slot":"手","mat":"皮甲","ilvl":25,"rlvl":20,"st":"changed"},{"id":20191,"name":"污染者的皮甲束带","q":3,"icon":"inv_belt_17","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":33,"rlvl":28,"st":"changed"},{"id":3389,"name":"次级防御药剂","q":1,"icon":"inv_potion_64","cat":"其它","slot":"","mat":"","ilvl":26,"rlvl":16,"st":"changed"},{"id":15681,"name":"胜利披风","q":2,"icon":"inv_misc_cape_14","cat":"护甲","slot":"背部","mat":"布甲","ilvl":58,"rlvl":53,"st":"changed"},{"id":2692,"name":"辣椒","q":1,"icon":"inv_misc_food_legion_dalapenopepper","cat":"其它","slot":"","mat":"","ilvl":20,"rlvl":null,"st":"changed"},{"id":14439,"name":"毒丝护臂","q":2,"icon":"inv_bracer_06","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":47,"rlvl":42,"st":"changed"},{"id":22425,"name":"救赎外套","q":4,"icon":"inv_chest_chain_15","cat":"护甲","slot":"胸部","mat":"板甲","ilvl":92,"rlvl":60,"st":"changed"},{"id":13091,"name":"莫里斯元帅的勋章","q":3,"icon":"inv_jewelry_talisman_08","cat":"其它","slot":"颈部","mat":"其它","ilvl":57,"rlvl":52,"st":"changed"},{"id":975,"name":"秘典：冰链术","q":1,"icon":"inv_misc_book_07","cat":"其它","slot":"","mat":"","ilvl":10,"rlvl":10,"st":"changed"},{"id":19687,"name":"原始蝙蝠皮护腕","q":3,"icon":"inv_bracer_07","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":65,"rlvl":60,"st":"changed"},{"id":13010,"name":"梦歌护腿","q":3,"icon":"inv_pants_03","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":26,"rlvl":21,"st":"changed"},{"id":15110,"name":"刚硬腰带","q":2,"icon":"inv_belt_05","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":20,"rlvl":15,"st":"changed"},{"id":4088,"name":"萤火虫","q":2,"icon":"inv_sword_41","cat":"武器","slot":"单手","mat":"匕首","ilvl":47,"rlvl":42,"st":"changed"},{"id":15729,"name":"图样：奇美拉手套","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":53,"rlvl":null,"st":"changed"},{"id":7682,"name":"烙铁棍","q":3,"icon":"inv_spear_01","cat":"武器","slot":"单手","mat":"匕首","ilvl":34,"rlvl":29,"st":"changed"},{"id":10195,"name":"十字军圆盾","q":2,"icon":"inv_shield_10","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":55,"rlvl":50,"st":"changed"},{"id":6047,"name":"设计图：金鳞罩盔","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":38,"rlvl":null,"st":"changed"},{"id":15284,"name":"长战弓","q":2,"icon":"inv_weapon_bow_01","cat":"武器","slot":"远程","mat":"弓","ilvl":29,"rlvl":24,"st":"changed"},{"id":6512,"name":"信徒长袍","q":2,"icon":"inv_chest_cloth_22","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":13,"rlvl":8,"st":"changed"},{"id":9957,"name":"好战者的护胸","q":2,"icon":"inv_chest_samurai","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":50,"rlvl":45,"st":"changed"},{"id":14301,"name":"白骨法师束腕","q":2,"icon":"inv_bracer_17","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":53,"rlvl":48,"st":"changed"},{"id":4697,"name":"抛光链甲束带","q":2,"icon":"inv_belt_34","cat":"护甲","slot":"腰部","mat":"锁甲","ilvl":20,"rlvl":15,"st":"changed"},{"id":15287,"name":"十字军长弓","q":2,"icon":"inv_weapon_bow_02","cat":"武器","slot":"远程","mat":"弓","ilvl":45,"rlvl":40,"st":"changed"},{"id":728,"name":"食谱：杂味炖肉","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":15,"rlvl":null,"st":"changed"},{"id":16672,"name":"元素护手","q":3,"icon":"inv_gauntlets_11","cat":"护甲","slot":"手","mat":"锁甲","ilvl":59,"rlvl":54,"st":"changed"},{"id":5244,"name":"神圣魔杖","q":2,"icon":"inv_wand_02","cat":"武器","slot":"远程","mat":"魔杖","ilvl":30,"rlvl":null,"st":"changed"},{"id":9834,"name":"缀鳞皮甲护肩","q":2,"icon":"inv_shoulder_08","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":32,"rlvl":27,"st":"changed"},{"id":18264,"name":"设计图：元素磨刀石","q":3,"icon":"inv_scroll_05","cat":"其它","slot":"","mat":"","ilvl":60,"rlvl":null,"st":"changed"},{"id":9089,"name":"石板：冰霜震击 II","q":1,"icon":"inv_misc_stonetablet_05","cat":"其它","slot":"","mat":"","ilvl":34,"rlvl":34,"st":"changed"},{"id":1220,"name":"豺狼人战斧","q":2,"icon":"inv_axe_14","cat":"武器","slot":"双手","mat":"双手斧","ilvl":20,"rlvl":15,"st":"changed"},{"id":13519,"name":"配方：泰坦合剂","q":2,"icon":"inv_scroll_06","cat":"其它","slot":"","mat":"","ilvl":60,"rlvl":null,"st":"changed"},{"id":6598,"name":"僧侣圆盾","q":2,"icon":"inv_shield_10","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":28,"rlvl":23,"st":"changed"},{"id":9778,"name":"歹徒圆盾","q":2,"icon":"inv_shield_09","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":20,"rlvl":15,"st":"changed"},{"id":8135,"name":"铬铁盾牌","q":2,"icon":"inv_shield_04","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":46,"rlvl":41,"st":"changed"},{"id":8631,"name":"条纹霜刃豹缰绳","q":3,"icon":"ability_mount_whitetiger","cat":"其它","slot":"","mat":"","ilvl":40,"rlvl":40,"st":"changed"},{"id":9891,"name":"精灵腰带","q":2,"icon":"inv_belt_17","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":39,"rlvl":34,"st":"changed"},{"id":9033,"name":"圣典：心灵之火 VI","q":1,"icon":"inv_misc_book_09","cat":"其它","slot":"","mat":"","ilvl":60,"rlvl":60,"st":"changed"},{"id":16731,"name":"勇气头盔","q":3,"icon":"inv_helmet_02","cat":"护甲","slot":"头部","mat":"板甲","ilvl":62,"rlvl":57,"st":"changed"},{"id":7925,"name":"秘银板甲手套","q":2,"icon":"inv_gauntlets_31","cat":"护甲","slot":"手","mat":"锁甲","ilvl":44,"rlvl":40,"st":"changed"},{"id":17605,"name":"元帅的绸缎外衣","q":4,"icon":"inv_chest_cloth_02","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":74,"rlvl":60,"st":"changed"},{"id":3205,"name":"铭文皮护腕","q":2,"icon":"inv_bracer_07","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":17,"rlvl":12,"st":"changed"},{"id":2074,"name":"结实的短剑","q":2,"icon":"inv_sword_23","cat":"武器","slot":"单手","mat":"单手剑","ilvl":19,"rlvl":null,"st":"changed"},{"id":15058,"name":"雷暴护肩","q":3,"icon":"inv_shoulder_05","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":59,"rlvl":54,"st":"changed"},{"id":21727,"name":"结构图：大型蓝色烟花","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":35,"rlvl":null,"st":"changed"},{"id":15371,"name":"狼骑兵披风","q":2,"icon":"inv_misc_cape_22","cat":"护甲","slot":"背部","mat":"布甲","ilvl":41,"rlvl":36,"st":"changed"},{"id":20296,"name":"绿色龙鳞护手","q":3,"icon":"inv_gauntlets_12","cat":"护甲","slot":"手","mat":"锁甲","ilvl":56,"rlvl":51,"st":"changed"},{"id":7727,"name":"守卫肩铠","q":3,"icon":"inv_shoulder_23","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":32,"rlvl":27,"st":"changed"},{"id":11985,"name":"天蓝戒指","q":2,"icon":"inv_jewelry_ring_08","cat":"护甲","slot":"手指","mat":"其它","ilvl":35,"rlvl":30,"st":"changed"},{"id":12056,"name":"天堂戒指","q":2,"icon":"inv_jewelry_ring_10","cat":"护甲","slot":"手指","mat":"其它","ilvl":56,"rlvl":51,"st":"changed"},{"id":1929,"name":"银丝长裤","q":3,"icon":"inv_pants_02","cat":"护甲","slot":"腿部","mat":"布甲","ilvl":18,"rlvl":13,"st":"changed"},{"id":20744,"name":"初级巫师之油","q":1,"icon":"inv_poison_mindnumbing","cat":"其它","slot":"","mat":"","ilvl":15,"rlvl":5,"st":"changed"},{"id":15344,"name":"拓荒者短裤","q":2,"icon":"inv_pants_07","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":31,"rlvl":26,"st":"changed"},{"id":16414,"name":"骑士队长的丝质护腿","q":3,"icon":"inv_pants_08","cat":"护甲","slot":"腿部","mat":"布甲","ilvl":63,"rlvl":58,"st":"changed"},{"id":12216,"name":"辣椒蟹肉","q":1,"icon":"inv_misc_food_48","cat":"其它","slot":"","mat":"","ilvl":35,"rlvl":25,"st":"changed"},{"id":5458,"name":"泥木腰带","q":1,"icon":"inv_belt_04","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":10,"rlvl":null,"st":"same"},{"id":14650,"name":"纳拉其营地礼品券","q":1,"icon":"inv_misc_gift_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"same"},{"id":11113,"name":"食物箱","q":1,"icon":"inv_crate_04","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":16307,"name":"格雷什卡的信","q":1,"icon":"inv_misc_note_03","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":8430,"name":"干涸的露水腺","q":0,"icon":"inv_misc_bone_10","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":21203,"name":"青铜龙军团的徽记之戒","q":4,"icon":"inv_jewelry_ring_40","cat":"护甲","slot":"手指","mat":"其它","ilvl":70,"rlvl":60,"st":"same"},{"id":19317,"name":"冰线枪弹","q":2,"icon":"spell_frost_frostblast","cat":"武器","slot":"弹药","mat":"子弹","ilvl":54,"rlvl":51,"st":"same"},{"id":7388,"name":"颅骨钥匙","q":1,"icon":"inv_misc_bone_02","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":7126,"name":"烟雾铁锭","q":1,"icon":"inv_ore_tin_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":1262,"name":"一桶雷霆啤酒","q":1,"icon":"inv_cask_02","cat":"其它","slot":"","mat":"","ilvl":15,"rlvl":null,"st":"same"},{"id":6533,"name":"水下诱鱼器","q":1,"icon":"inv_misc_food_26","cat":"其它","slot":"","mat":"","ilvl":30,"rlvl":null,"st":"same"},{"id":12355,"name":"堕落护符","q":1,"icon":"inv_jewelry_talisman_04","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":1836,"name":"肮脏的皮护腕","q":1,"icon":"inv_bracer_04","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":5,"rlvl":1,"st":"same"},{"id":16325,"name":"魔典：血契（等级 5）","q":1,"icon":"inv_misc_book_06","cat":"其它","slot":"","mat":"","ilvl":50,"rlvl":50,"st":"same"},{"id":3912,"name":"灵魂宝石","q":1,"icon":"inv_misc_orb_04","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":15407,"name":"熟化毛皮","q":1,"icon":"inv_misc_pelt_bear_03","cat":"其它","slot":"","mat":"","ilvl":50,"rlvl":null,"st":"same"},{"id":15299,"name":"灰白斗篷","q":1,"icon":"inv_misc_cape_10","cat":"护甲","slot":"背部","mat":"布甲","ilvl":10,"rlvl":5,"st":"same"},{"id":1362,"name":"杉德尔宝藏的最终线索","q":1,"icon":"inv_misc_leatherscrap_03","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":11830,"name":"精细的双帆龙鳞片","q":1,"icon":"inv_misc_monsterscales_16","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":22484,"name":"死灵符文","q":2,"icon":"inv_stone_02","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":20448,"name":"召唤节杖：雷","q":1,"icon":"inv_wand_11","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":20611,"name":"厚实的黑爪","q":1,"icon":"inv_misc_bone_06","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":11270,"name":"已签署给尼克斯的保密协议","q":1,"icon":"inv_misc_note_02","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":22469,"name":"碎地者护手","q":4,"icon":"inv_gauntlets_25","cat":"护甲","slot":"手","mat":"锁甲","ilvl":88,"rlvl":60,"st":"same"},{"id":2450,"name":"石南草","q":1,"icon":"inv_misc_root_01","cat":"其它","slot":"","mat":"","ilvl":15,"rlvl":null,"st":"same"},{"id":13370,"name":"玻璃放大镜","q":1,"icon":"inv_staff_06","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":12253,"name":"鲜亮的红披风","q":2,"icon":"inv_misc_cape_18","cat":"护甲","slot":"背部","mat":"布甲","ilvl":41,"rlvl":36,"st":"same"},{"id":3989,"name":"格挡轻盾","q":0,"icon":"inv_shield_09","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":42,"rlvl":37,"st":"same"},{"id":21685,"name":"石化甲虫","q":4,"icon":"inv_misc_ahnqirajtrinket_01","cat":"护甲","slot":"饰品","mat":"其它","ilvl":76,"rlvl":60,"st":"same"},{"id":15107,"name":"诺奥拉赫宝珠","q":3,"icon":"inv_misc_orb_03","cat":"护甲","slot":"副手物品","mat":"其它","ilvl":40,"rlvl":null,"st":"same"},{"id":7006,"name":"翻修过的书籍","q":1,"icon":"inv_misc_book_08","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":13153,"name":"玛辛·沃拉尔之书","q":1,"icon":"inv_misc_book_01","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":3908,"name":"祖玛维战利品","q":1,"icon":"inv_misc_bone_humanskull_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":20122,"name":"高地锁甲护胫","q":3,"icon":"inv_boots_chain_02","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":43,"rlvl":40,"st":"same"},{"id":18238,"name":"影皮手套","q":3,"icon":"inv_gauntlets_32","cat":"护甲","slot":"手","mat":"皮甲","ilvl":40,"rlvl":35,"st":"same"},{"id":13207,"name":"暗影领主费尔丹的头颅","q":1,"icon":"inv_misc_head_orc_01","cat":"任务","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"same"},{"id":13511,"name":"精炼智慧合剂","q":1,"icon":"inv_potion_97","cat":"其它","slot":"","mat":"","ilvl":60,"rlvl":50,"st":"same"},{"id":15970,"name":"天然木枝","q":2,"icon":"inv_wand_03","cat":"护甲","slot":"副手物品","mat":"其它","ilvl":15,"rlvl":10,"st":"same"},{"id":20622,"name":"龙心项链","q":4,"icon":"inv_jewelry_necklace_18","cat":"其它","slot":"颈部","mat":"其它","ilvl":71,"rlvl":60,"st":"same"},{"id":18358,"name":"奥法师的食谱","q":3,"icon":"inv_misc_book_01","cat":"任务","slot":"","mat":"","ilvl":60,"rlvl":54,"st":"same"},{"id":20834,"name":"华丽望远镜XT型","q":2,"icon":"inv_misc_spyglass_01","cat":"其它","slot":"","mat":"","ilvl":27,"rlvl":null,"st":"missing"},{"id":13394,"name":"斯库尔的寒冷拥抱","q":3,"icon":"inv_chest_chain_15","cat":"护甲","slot":"胸部","mat":"板甲","ilvl":59,"rlvl":54,"st":"missing"},{"id":18341,"name":"奎尔多雷腰带","q":2,"icon":"inv_belt_32","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":59,"rlvl":54,"st":"missing"},{"id":21452,"name":"废墟法杖","q":4,"icon":"inv_staff_12","cat":"武器","slot":"双手","mat":"法杖","ilvl":72,"rlvl":60,"st":"missing"},{"id":19920,"name":"首领指环","q":3,"icon":"inv_jewelry_ring_47","cat":"护甲","slot":"手指","mat":"其它","ilvl":68,"rlvl":60,"st":"missing"},{"id":16957,"name":"审判马靴","q":4,"icon":"inv_boots_plate_09","cat":"护甲","slot":"脚","mat":"板甲","ilvl":76,"rlvl":60,"st":"missing"},{"id":13282,"name":"食人魔先知长靴","q":3,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"布甲","ilvl":59,"rlvl":54,"st":"missing"},{"id":11685,"name":"碎鳞护肩","q":3,"icon":"inv_shoulder_13","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":55,"rlvl":50,"st":"missing"},{"id":10585,"name":"地精无线电","q":1,"icon":"spell_holy_dizzy","cat":"护甲","slot":"饰品","mat":"其它","ilvl":44,"rlvl":null,"st":"missing"},{"id":10828,"name":"恐惧龙指","q":3,"icon":"inv_weapon_shortblade_16","cat":"武器","slot":"单手","mat":"匕首","ilvl":56,"rlvl":51,"st":"missing"},{"id":16948,"name":"无尽风暴护手","q":4,"icon":"inv_gauntlets_11","cat":"护甲","slot":"手","mat":"锁甲","ilvl":76,"rlvl":60,"st":"missing"},{"id":22326,"name":"阿玛加姆的指环","q":3,"icon":"inv_jewelry_ring_19","cat":"护甲","slot":"手指","mat":"其它","ilvl":63,"rlvl":58,"st":"missing"},{"id":9431,"name":"教皇毡帽","q":3,"icon":"inv_helmet_28","cat":"护甲","slot":"头部","mat":"布甲","ilvl":43,"rlvl":38,"st":"missing"},{"id":12603,"name":"深夜外套","q":3,"icon":"inv_chest_plate06","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":61,"rlvl":56,"st":"missing"},{"id":13539,"name":"女妖之触","q":2,"icon":"inv_gauntlets_29","cat":"护甲","slot":"手","mat":"板甲","ilvl":60,"rlvl":55,"st":"missing"},{"id":16856,"name":"秩序之源肩铠","q":4,"icon":"inv_shoulder_20","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":66,"rlvl":60,"st":"missing"},{"id":18696,"name":"无序符文盾","q":3,"icon":"inv_shield_02","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":62,"rlvl":57,"st":"missing"},{"id":16828,"name":"塞纳里奥腰带","q":4,"icon":"inv_belt_06","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":66,"rlvl":60,"st":"missing"},{"id":20509,"name":"图样：沙行者护腕","q":1,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":62,"rlvl":null,"st":"missing"},{"id":1317,"name":"硬根法杖","q":2,"icon":"inv_staff_16","cat":"武器","slot":"双手","mat":"法杖","ilvl":25,"rlvl":null,"st":"missing"},{"id":10836,"name":"侵蚀魔棒","q":3,"icon":"inv_wand_04","cat":"武器","slot":"远程","mat":"魔杖","ilvl":56,"rlvl":51,"st":"missing"},{"id":19347,"name":"克洛玛古斯之爪","q":4,"icon":"inv_weapon_shortblade_28","cat":"武器","slot":"单手","mat":"匕首","ilvl":77,"rlvl":60,"st":"missing"},{"id":11749,"name":"灼鳞护腿","q":3,"icon":"inv_pants_03","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":53,"rlvl":48,"st":"missing"},{"id":19856,"name":"哈卡之眼","q":4,"icon":"inv_jewelry_necklace_22","cat":"其它","slot":"颈部","mat":"其它","ilvl":68,"rlvl":60,"st":"missing"},{"id":10581,"name":"亡首外衣","q":3,"icon":"inv_chest_leather_08","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":40,"rlvl":35,"st":"missing"},{"id":21500,"name":"裁决腰带","q":3,"icon":"inv_belt_05","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":71,"rlvl":60,"st":"missing"},{"id":11814,"name":"熔岩之拳","q":3,"icon":"inv_gauntlets_04","cat":"护甲","slot":"手","mat":"锁甲","ilvl":58,"rlvl":53,"st":"missing"},{"id":16846,"name":"巨人追猎者头盔","q":4,"icon":"inv_helmet_05","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":66,"rlvl":60,"st":"missing"},{"id":21743,"name":"大型烟花束设计图","q":1,"icon":"inv_scroll_06","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":null,"st":"missing"},{"id":22721,"name":"惩戒指环","q":4,"icon":"inv_jewelry_ring_16","cat":"护甲","slot":"手指","mat":"其它","ilvl":65,"rlvl":60,"st":"missing"},{"id":273942,"name":"恶魔之心肩甲","q":4,"icon":"inv_shoulder_cloth_raidwarlockhyjalc60_d_01","cat":"护甲","slot":"肩部","mat":"布甲","ilvl":61,"rlvl":60,"st":"rebuilt"},{"id":254685,"name":"图样：雷织护肩","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":49,"rlvl":1,"st":"rebuilt"},{"id":254682,"name":"图样：雷织手套","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":1,"rlvl":1,"st":"rebuilt"},{"id":254681,"name":"图样：雷织短裤","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":44,"rlvl":1,"st":"rebuilt"},{"id":254686,"name":"图样：雷织长靴","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":50,"rlvl":1,"st":"rebuilt"},{"id":254684,"name":"图样：雷织头带","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":48,"rlvl":1,"st":"rebuilt"},{"id":254683,"name":"图样：雷织外衣","q":2,"icon":"inv_scroll_03","cat":"其它","slot":"","mat":"","ilvl":45,"rlvl":1,"st":"rebuilt"},{"id":274178,"name":"精锐鳞甲头盔","q":3,"icon":"inv_helmet_09","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":60,"rlvl":55,"st":"new"},{"id":275739,"name":"狂野腕甲","q":3,"icon":"inv_bracer_12","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":61,"rlvl":null,"st":"new"},{"id":277003,"name":"黯云风织战靴","q":2,"icon":"inv_boot_leather_skybornec60_b_01","cat":"护甲","slot":"脚","mat":"皮甲","ilvl":11,"rlvl":6,"st":"new"},{"id":271928,"name":"聪明远征军的法术之刃","q":3,"icon":"inv_weapon_shortblade_18","cat":"武器","slot":"主手","mat":"匕首","ilvl":63,"rlvl":58,"st":"new"},{"id":273369,"name":"精锐月皮束带","q":3,"icon":"inv_belt_23","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":60,"rlvl":55,"st":"new"},{"id":257943,"name":"猎人的简易披风","q":2,"icon":"inv_cape_leather_skybornec60_b_01","cat":"护甲","slot":"背部","mat":"布甲","ilvl":8,"rlvl":null,"st":"new"},{"id":271751,"name":"申多雷观天者的头盔","q":1,"icon":"inv_helm_armor_skybornec60_d_01","cat":"护甲","slot":"头部","mat":"外观","ilvl":1,"rlvl":1,"st":"new"},{"id":277108,"name":"泽风小刀","q":1,"icon":"inv_knife_1h_skybornec60_b_01","cat":"武器","slot":"单手","mat":"匕首","ilvl":14,"rlvl":9,"st":"new"},{"id":252584,"name":"追踪者的锁甲护手","q":3,"icon":"inv_gauntlets_29","cat":"护甲","slot":"手","mat":"锁甲","ilvl":55,"rlvl":50,"st":"new"},{"id":253991,"name":"烈焰护腿","q":3,"icon":"inv_pants_06","cat":"护甲","slot":"腿部","mat":"布甲","ilvl":30,"rlvl":25,"st":"new"},{"id":273298,"name":"卢基的望远镜","q":3,"icon":"inv_misc_spyglass_01","cat":"护甲","slot":"饰品","mat":"其它","ilvl":23,"rlvl":18,"st":"new"},{"id":271909,"name":"塞拉摩徽记之戒","q":3,"icon":"inv_jewelry_ring_28","cat":"护甲","slot":"手指","mat":"其它","ilvl":53,"rlvl":48,"st":"new"},{"id":276332,"name":"阿比盖尔的希望","q":2,"icon":"inv_weapon_crossbow_07","cat":"武器","slot":"远程","mat":"弩","ilvl":60,"rlvl":null,"st":"new"},{"id":270021,"name":"雄鹿皮护臂","q":3,"icon":"inv_bracer_07","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":26,"rlvl":null,"st":"new"},{"id":277672,"name":"粗制铜质链甲战靴","q":2,"icon":"inv_boots_01","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":10,"rlvl":4,"st":"new"},{"id":250586,"name":"祝福板甲肩铠","q":2,"icon":"inv_shoulder_10","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":52,"rlvl":47,"st":"new"},{"id":277239,"name":"镶珠宝的拳套","q":2,"icon":"inv_gauntlets_04","cat":"护甲","slot":"手","mat":"板甲","ilvl":45,"rlvl":40,"st":"new"},{"id":280312,"name":"卡键的护目镜","q":2,"icon":"inv_helmet_47","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":45,"rlvl":40,"st":"new"},{"id":284282,"name":"女王卫士的皇家印戒","q":3,"icon":"inv_jewelry_ring_09","cat":"护甲","slot":"手指","mat":"其它","ilvl":50,"rlvl":45,"st":"new"},{"id":272843,"name":"精锐大元帅的匕首","q":4,"icon":"inv_weapon_shortblade_26","cat":"武器","slot":"单手","mat":"匕首","ilvl":65,"rlvl":60,"st":"new"},{"id":254031,"name":"光辉裹手","q":3,"icon":"inv_gauntlets_16","cat":"护甲","slot":"手","mat":"布甲","ilvl":40,"rlvl":35,"st":"new"},{"id":282557,"name":"剥下的断牙毛皮","q":2,"icon":"inv_chest_leather_01","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":39,"rlvl":34,"st":"new"},{"id":285192,"name":"狗头人点火棒","q":2,"icon":"inv_torch_lit","cat":"护甲","slot":"副手物品","mat":"其它","ilvl":30,"rlvl":25,"st":"new"},{"id":7066,"name":"异域丝裙","q":1,"icon":"inv_shirt_12","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":27,"rlvl":22,"st":"new"},{"id":250541,"name":"闪耀秘银护肩","q":2,"icon":"inv_shoulder_29","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":45,"rlvl":40,"st":"new"},{"id":273403,"name":"精锐元帅的梦皮胸甲","q":4,"icon":"inv_chest_cloth_07","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":65,"rlvl":60,"st":"new"},{"id":274244,"name":"精锐板鳞甲胸甲","q":3,"icon":"inv_chest_plate03","cat":"护甲","slot":"胸部","mat":"板甲","ilvl":60,"rlvl":55,"st":"new"},{"id":277910,"name":"秘花种子","q":2,"icon":"inv_farm_pumpkinseed_blue","cat":"护甲","slot":"饰品","mat":"其它","ilvl":40,"rlvl":35,"st":"new"},{"id":252553,"name":"雕花皮甲护手","q":2,"icon":"inv_gauntlets_27","cat":"护甲","slot":"手","mat":"皮甲","ilvl":57,"rlvl":52,"st":"new"},{"id":273805,"name":"黑石护甲","q":3,"icon":"inv_chest_leather_04","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":26,"rlvl":21,"st":"new"},{"id":273897,"name":"丛林守护者手甲","q":4,"icon":"inv_glove_leather_raiddruidhyjalc60_d_01","cat":"护甲","slot":"手","mat":"皮甲","ilvl":61,"rlvl":60,"st":"new"},{"id":275984,"name":"坚定的观察者印戒","q":4,"icon":"inv_jewelry_ring_10","cat":"护甲","slot":"手指","mat":"其它","ilvl":65,"rlvl":60,"st":"new"},{"id":270057,"name":"激流堡特工长裤","q":2,"icon":"inv_pants_07","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":37,"rlvl":null,"st":"new"},{"id":272811,"name":"精锐虚空布护腕","q":3,"icon":"inv_bracer_09","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":60,"rlvl":55,"st":"new"},{"id":277105,"name":"泽风之刃","q":1,"icon":"inv_sword_1h_skybornec60_b_01","cat":"武器","slot":"单手","mat":"单手剑","ilvl":14,"rlvl":9,"st":"new"},{"id":272508,"name":"精锐将军的迫击板甲腿甲","q":4,"icon":"inv_pants_04","cat":"护甲","slot":"腿部","mat":"板甲","ilvl":65,"rlvl":60,"st":"new"},{"id":252441,"name":"防御者的皮靴","q":3,"icon":"inv_boots_cloth_07","cat":"护甲","slot":"脚","mat":"皮甲","ilvl":22,"rlvl":17,"st":"new"},{"id":273905,"name":"法力闪焰手套","q":4,"icon":"inv_glove_cloth_raidmagehyjalc60_d_01","cat":"护甲","slot":"手","mat":"布甲","ilvl":61,"rlvl":60,"st":"new"},{"id":274241,"name":"精锐将军的缀鳞肩甲","q":4,"icon":"inv_shoulder_20","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":65,"rlvl":60,"st":"new"},{"id":252493,"name":"智慧皮甲","q":3,"icon":"inv_chest_fur","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":20,"rlvl":15,"st":"new"},{"id":272754,"name":"精锐骑士队长的兽皮护腕","q":4,"icon":"inv_bracer_02","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":65,"rlvl":60,"st":"new"},{"id":260185,"name":"角鹰兽皮靴","q":3,"icon":"inv_boots_chain_04","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":55,"rlvl":null,"st":"new"},{"id":281250,"name":"森林神谕者披风","q":2,"icon":"inv_misc_cape_17","cat":"护甲","slot":"背部","mat":"布甲","ilvl":11,"rlvl":null,"st":"new"},{"id":254009,"name":"金色便鞋","q":3,"icon":"inv_boots_cloth_06","cat":"护甲","slot":"脚","mat":"布甲","ilvl":35,"rlvl":30,"st":"new"},{"id":254779,"name":"翻滚风暴阿沙拉姆","q":2,"icon":"inv_sword_1h_arakkoa_c_02","cat":"武器","slot":"单手","mat":"单手剑","ilvl":12,"rlvl":null,"st":"new"},{"id":272100,"name":"袭击者手套","q":4,"icon":"inv_gauntlets_27","cat":"护甲","slot":"手","mat":"皮甲","ilvl":55,"rlvl":50,"st":"new"},{"id":271098,"name":"魔像守卫护胸","q":3,"icon":"inv_chest_chain","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":18,"rlvl":13,"st":"new"},{"id":277087,"name":"泽风护腕","q":1,"icon":"inv_bracer_leather_skybornec60_b_01","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":14,"rlvl":9,"st":"new"},{"id":274751,"name":"日晒护肩","q":2,"icon":"inv_shoulder_08","cat":"护甲","slot":"肩部","mat":"皮甲","ilvl":45,"rlvl":40,"st":"new"},{"id":252576,"name":"追踪者的锁甲马靴","q":3,"icon":"inv_boots_chain_12","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":52,"rlvl":47,"st":"new"},{"id":273361,"name":"精锐环甲护腕","q":3,"icon":"inv_bracer_16","cat":"护甲","slot":"手腕","mat":"锁甲","ilvl":60,"rlvl":55,"st":"new"},{"id":254081,"name":"镀金腰索","q":3,"icon":"inv_belt_07","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":52,"rlvl":47,"st":"new"},{"id":273417,"name":"精锐军团士兵的科多兽皮护腕","q":4,"icon":"inv_bracer_03","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":65,"rlvl":60,"st":"new"},{"id":274230,"name":"精锐缀鳞胸甲","q":3,"icon":"inv_chest_plate03","cat":"护甲","slot":"胸部","mat":"板甲","ilvl":60,"rlvl":55,"st":"new"},{"id":279507,"name":"弧形兽人匕首","q":1,"icon":"inv_weapon_shortblade_04","cat":"武器","slot":"副手","mat":"匕首","ilvl":22,"rlvl":22,"st":"new"},{"id":282642,"name":"羽缝软鞋","q":2,"icon":"inv_boots_04","cat":"护甲","slot":"脚","mat":"皮甲","ilvl":27,"rlvl":22,"st":"new"},{"id":272815,"name":"精锐虚空布护腿","q":3,"icon":"inv_pants_06","cat":"护甲","slot":"腿部","mat":"布甲","ilvl":60,"rlvl":55,"st":"new"},{"id":276340,"name":"剑圣褶裙","q":2,"icon":"inv_pants_02","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":60,"rlvl":null,"st":"new"},{"id":260821,"name":"简易投掷和安全型号野外传送器：海加尔山","q":2,"icon":"inv_misc_enggizmos_10","cat":"护甲","slot":"饰品","mat":"其它","ilvl":60,"rlvl":60,"st":"new"},{"id":252568,"name":"散兵的锁甲护肩","q":3,"icon":"inv_shoulder_23","cat":"护甲","slot":"肩部","mat":"锁甲","ilvl":47,"rlvl":42,"st":"new"},{"id":274417,"name":"树皮小珠","q":3,"icon":"inv_misc_bag_10_black","cat":"护甲","slot":"副手物品","mat":"其它","ilvl":58,"rlvl":53,"st":"new"},{"id":270112,"name":"狮鹫骑士短鞭","q":2,"icon":"inv_staff_13","cat":"护甲","slot":"副手物品","mat":"其它","ilvl":53,"rlvl":null,"st":"new"},{"id":249397,"name":"白银之手的信条","q":3,"icon":"inv_misc_book_13","cat":"武器","slot":"圣物","mat":"圣契","ilvl":25,"rlvl":20,"st":"new"},{"id":277225,"name":"羽饰护腿","q":2,"icon":"inv_pants_02","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":45,"rlvl":40,"st":"new"},{"id":274196,"name":"精锐平甲护头","q":3,"icon":"inv_helmet_09","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":60,"rlvl":55,"st":"new"},{"id":272713,"name":"精锐链锁战靴","q":3,"icon":"inv_boots_07","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":60,"rlvl":55,"st":"new"},{"id":282636,"name":"丝纺手套","q":2,"icon":"inv_gauntlets_16","cat":"护甲","slot":"手","mat":"布甲","ilvl":21,"rlvl":16,"st":"new"},{"id":281721,"name":"修复的切肉斧","q":2,"icon":"inv_axe_04","cat":"武器","slot":"双手","mat":"双手斧","ilvl":1,"rlvl":1,"st":"new"},{"id":273435,"name":"精锐督军的柔丝法袍","q":4,"icon":"inv_chest_leather_01","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":65,"rlvl":60,"st":"new"},{"id":16422,"name":"骑士队长的龙皮护腿","q":3,"icon":"inv_pants_06","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":63,"rlvl":58,"st":"changed"},{"id":4738,"name":"帝王皮带","q":2,"icon":"inv_belt_12","cat":"护甲","slot":"腰部","mat":"皮甲","ilvl":42,"rlvl":37,"st":"changed"},{"id":9288,"name":"野战板甲束带","q":2,"icon":"inv_belt_03","cat":"护甲","slot":"腰部","mat":"板甲","ilvl":41,"rlvl":40,"st":"changed"},{"id":6482,"name":"踏火靴","q":2,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"布甲","ilvl":24,"rlvl":null,"st":"changed"},{"id":6573,"name":"防御者战靴","q":2,"icon":"inv_boots_plate_01","cat":"护甲","slot":"脚","mat":"锁甲","ilvl":23,"rlvl":18,"st":"changed"},{"id":15639,"name":"铁皮护腕","q":2,"icon":"inv_bracer_09","cat":"护甲","slot":"手腕","mat":"锁甲","ilvl":50,"rlvl":45,"st":"changed"},{"id":17600,"name":"骑士队长的绸缎长袍","q":3,"icon":"inv_chest_cloth_11","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":63,"rlvl":58,"st":"changed"},{"id":20069,"name":"铁皮法杖","q":4,"icon":"inv_wand_04","cat":"武器","slot":"双手","mat":"法杖","ilvl":65,"rlvl":60,"st":"changed"},{"id":10408,"name":"镶带头盔","q":2,"icon":"inv_helmet_36","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":32,"rlvl":27,"st":"changed"},{"id":13856,"name":"符文布腰带","q":2,"icon":"inv_belt_15","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":51,"rlvl":46,"st":"changed"},{"id":10154,"name":"水银束带","q":2,"icon":"inv_belt_11","cat":"护甲","slot":"腰部","mat":"锁甲","ilvl":61,"rlvl":56,"st":"changed"},{"id":7539,"name":"勇士护腿","q":2,"icon":"inv_pants_03","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":48,"rlvl":43,"st":"changed"},{"id":7455,"name":"骑士腿甲","q":2,"icon":"inv_pants_04","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":39,"rlvl":34,"st":"changed"},{"id":14436,"name":"逐风宝冠","q":2,"icon":"inv_helmet_13","cat":"护甲","slot":"头部","mat":"布甲","ilvl":46,"rlvl":41,"st":"changed"},{"id":10266,"name":"乌贼胸甲","q":2,"icon":"inv_chest_plate16","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":65,"rlvl":60,"st":"changed"},{"id":16714,"name":"野性之心护腕","q":3,"icon":"inv_bracer_09","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":57,"rlvl":52,"st":"changed"},{"id":9698,"name":"洞察手套","q":2,"icon":"inv_gauntlets_21","cat":"护甲","slot":"手","mat":"皮甲","ilvl":33,"rlvl":null,"st":"changed"},{"id":10165,"name":"圣殿骑士护手","q":2,"icon":"inv_gauntlets_29","cat":"护甲","slot":"手","mat":"板甲","ilvl":55,"rlvl":50,"st":"changed"},{"id":16705,"name":"鬼雾手套","q":3,"icon":"inv_gauntlets_32","cat":"护甲","slot":"手","mat":"布甲","ilvl":59,"rlvl":54,"st":"changed"},{"id":14161,"name":"异教徒斗篷","q":2,"icon":"inv_misc_cape_10","cat":"护甲","slot":"背部","mat":"布甲","ilvl":18,"rlvl":13,"st":"changed"},{"id":13053,"name":"厄运制造者","q":3,"icon":"inv_sword_01","cat":"武器","slot":"双手","mat":"双手剑","ilvl":60,"rlvl":55,"st":"changed"},{"id":1990,"name":"断脊锤","q":2,"icon":"inv_mace_06","cat":"武器","slot":"双手","mat":"双手锤","ilvl":36,"rlvl":31,"st":"changed"},{"id":8257,"name":"蛇皮护腕","q":2,"icon":"inv_bracer_03","cat":"护甲","slot":"手腕","mat":"皮甲","ilvl":50,"rlvl":45,"st":"changed"},{"id":10026,"name":"黑色魔纹之靴","q":2,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"布甲","ilvl":46,"rlvl":41,"st":"changed"},{"id":2966,"name":"战士短裤","q":2,"icon":"inv_pants_03","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":10,"rlvl":5,"st":"changed"},{"id":7423,"name":"重装步兵护腿","q":2,"icon":"inv_pants_04","cat":"护甲","slot":"腿部","mat":"锁甲","ilvl":34,"rlvl":29,"st":"changed"},{"id":14125,"name":"礼节护腿","q":2,"icon":"inv_pants_09","cat":"护甲","slot":"腿部","mat":"布甲","ilvl":21,"rlvl":16,"st":"changed"},{"id":21374,"name":"风暴召唤者的护甲","q":4,"icon":"inv_chest_chain_13","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":88,"rlvl":60,"st":"changed"},{"id":899,"name":"毒蜘蛛的牙齿","q":2,"icon":"inv_misc_monsterfang_01","cat":"武器","slot":"单手","mat":"匕首","ilvl":19,"rlvl":14,"st":"changed"},{"id":10164,"name":"圣殿骑士胸甲","q":2,"icon":"inv_chest_plate16","cat":"护甲","slot":"胸部","mat":"板甲","ilvl":58,"rlvl":53,"st":"changed"},{"id":9902,"name":"狂战士头盔","q":2,"icon":"inv_helmet_37","cat":"护甲","slot":"头部","mat":"锁甲","ilvl":41,"rlvl":36,"st":"changed"},{"id":8349,"name":"羽饰胸甲","q":3,"icon":"inv_chest_leather_06","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":50,"rlvl":45,"st":"changed"},{"id":14367,"name":"秘术师手套","q":2,"icon":"inv_gauntlets_18","cat":"护甲","slot":"手","mat":"布甲","ilvl":19,"rlvl":14,"st":"changed"},{"id":23295,"name":"骑士队长的龙皮护腿","q":3,"icon":"inv_pants_06","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":68,"rlvl":60,"st":"changed"},{"id":3854,"name":"霜虎之刃","q":2,"icon":"inv_sword_05","cat":"武器","slot":"双手","mat":"双手剑","ilvl":40,"rlvl":35,"st":"changed"},{"id":23289,"name":"骑士中尉的绸缎便鞋","q":3,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"布甲","ilvl":66,"rlvl":60,"st":"changed"},{"id":22744,"name":"血帆长靴","q":2,"icon":"inv_boots_05","cat":"护甲","slot":"脚","mat":"外观","ilvl":1,"rlvl":1,"st":"changed"},{"id":12777,"name":"闪耀轻剑","q":3,"icon":"inv_sword_30","cat":"武器","slot":"单手","mat":"单手剑","ilvl":56,"rlvl":51,"st":"changed"},{"id":15508,"name":"步兵斗篷","q":2,"icon":"inv_misc_cape_14","cat":"护甲","slot":"背部","mat":"布甲","ilvl":19,"rlvl":14,"st":"changed"},{"id":6552,"name":"吟游诗人外套","q":2,"icon":"inv_shirt_11","cat":"护甲","slot":"胸部","mat":"皮甲","ilvl":19,"rlvl":14,"st":"changed"},{"id":1717,"name":"双链链甲外套","q":3,"icon":"inv_chest_chain","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":30,"rlvl":25,"st":"changed"},{"id":14216,"name":"地卜师外套","q":2,"icon":"inv_chest_cloth_05","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":41,"rlvl":36,"st":"changed"},{"id":6395,"name":"银丝披肩","q":2,"icon":"inv_shoulder_05","cat":"护甲","slot":"肩部","mat":"布甲","ilvl":29,"rlvl":24,"st":"changed"},{"id":16679,"name":"野兽追猎者衬肩","q":3,"icon":"inv_shoulder_10","cat":"护甲","slot":"肩部","mat":"锁甲","ilvl":60,"rlvl":55,"st":"changed"},{"id":11306,"name":"强韧的弯弓","q":2,"icon":"inv_weapon_bow_07","cat":"武器","slot":"远程","mat":"弓","ilvl":32,"rlvl":27,"st":"changed"},{"id":1935,"name":"刺客之刃","q":3,"icon":"inv_weapon_shortblade_24","cat":"武器","slot":"单手","mat":"匕首","ilvl":24,"rlvl":19,"st":"changed"},{"id":15334,"name":"牧者手套","q":2,"icon":"inv_gauntlets_27","cat":"护甲","slot":"手","mat":"皮甲","ilvl":27,"rlvl":22,"st":"changed"},{"id":3231,"name":"杀手肩铠","q":2,"icon":"inv_shoulder_07","cat":"护甲","slot":"肩部","mat":"锁甲","ilvl":29,"rlvl":24,"st":"changed"},{"id":14148,"name":"水晶腕轮","q":3,"icon":"inv_bracer_13","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":18,"rlvl":13,"st":"changed"},{"id":15504,"name":"先驱者盾牌","q":2,"icon":"inv_shield_10","cat":"护甲","slot":"盾牌","mat":"盾牌","ilvl":22,"rlvl":17,"st":"changed"},{"id":810,"name":"北风","q":4,"icon":"inv_hammer_11","cat":"武器","slot":"主手","mat":"单手锤","ilvl":54,"rlvl":49,"st":"changed"},{"id":8108,"name":"寒冬护腕","q":2,"icon":"inv_bracer_06","cat":"护甲","slot":"手腕","mat":"布甲","ilvl":47,"rlvl":42,"st":"changed"},{"id":22502,"name":"霜火腰带","q":4,"icon":"inv_belt_03","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":88,"rlvl":60,"st":"changed"},{"id":14859,"name":"前锋腿铠","q":2,"icon":"inv_pants_03","cat":"护甲","slot":"腿部","mat":"板甲","ilvl":57,"rlvl":52,"st":"changed"},{"id":11976,"name":"红玛瑙指环","q":2,"icon":"inv_jewelry_ring_04","cat":"护甲","slot":"手指","mat":"其它","ilvl":52,"rlvl":47,"st":"changed"},{"id":14304,"name":"白骨法师腰带","q":2,"icon":"inv_belt_30","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":55,"rlvl":50,"st":"changed"},{"id":16676,"name":"野兽追猎者手套","q":3,"icon":"inv_gauntlets_10","cat":"护甲","slot":"手","mat":"锁甲","ilvl":59,"rlvl":54,"st":"changed"},{"id":7526,"name":"薄纱腰带","q":2,"icon":"inv_belt_07","cat":"护甲","slot":"腰部","mat":"布甲","ilvl":46,"rlvl":41,"st":"changed"},{"id":10374,"name":"恶魔板甲肩铠","q":2,"icon":"inv_shoulder_02","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":59,"rlvl":54,"st":"changed"},{"id":15174,"name":"权力手套","q":2,"icon":"inv_gauntlets_12","cat":"护甲","slot":"手","mat":"皮甲","ilvl":50,"rlvl":45,"st":"changed"},{"id":2233,"name":"暗纹护腿","q":2,"icon":"inv_pants_12","cat":"护甲","slot":"腿部","mat":"皮甲","ilvl":27,"rlvl":22,"st":"changed"},{"id":15383,"name":"怒爪手套","q":2,"icon":"inv_gauntlets_22","cat":"护甲","slot":"手","mat":"皮甲","ilvl":48,"rlvl":43,"st":"changed"},{"id":23280,"name":"骑士中尉的龙皮护手","q":3,"icon":"inv_gauntlets_25","cat":"护甲","slot":"手","mat":"皮甲","ilvl":66,"rlvl":60,"st":"changed"},{"id":5071,"name":"暗影魔杖","q":2,"icon":"inv_weapon_shortblade_09","cat":"武器","slot":"远程","mat":"魔杖","ilvl":14,"rlvl":9,"st":"changed"},{"id":16680,"name":"野兽追猎者腰带","q":3,"icon":"inv_belt_28","cat":"护甲","slot":"腰部","mat":"锁甲","ilvl":58,"rlvl":53,"st":"changed"},{"id":10092,"name":"哥特板甲肩胄","q":2,"icon":"inv_shoulder_08","cat":"护甲","slot":"肩部","mat":"板甲","ilvl":47,"rlvl":42,"st":"changed"},{"id":12624,"name":"野刺锁甲","q":3,"icon":"inv_chest_chain_12","cat":"护甲","slot":"胸部","mat":"锁甲","ilvl":54,"rlvl":49,"st":"changed"},{"id":14150,"name":"招魂法袍","q":3,"icon":"inv_chest_cloth_24","cat":"护甲","slot":"胸部","mat":"布甲","ilvl":18,"rlvl":13,"st":"changed"}]</script>
+<script>
+const ITEMS = JSON.parse(document.getElementById('ITEMS').textContent);
+const PER = 50;
+const S = {st:'', cat:'', mat:'', slot:'', ilMin:null, ilMax:null, q:'', sort:'id', page:1};
+const $ = (s) => document.querySelector(s);
+const STN = {new:'新增', changed:'改动', rebuilt:'重建', same:'不变', missing:'无限中没有'};
+const STO = {new:0, changed:1, rebuilt:2, same:3, missing:4};
+
+function chipList(host, key, pairs){
+  host.innerHTML = '';
+  pairs.forEach(([v,label,n]) => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (S[key] === v ? ' on' : '');
+    b.innerHTML = label + (n != null ? ` <b>${n}</b>` : '');
+    b.onclick = () => { S[key] = (S[key]===v && v!=='') ? '' : v; S.page = 1;
+      if (key === 'cat') { S.mat=''; S.slot=''; }
+      buildRef(); render(); };
+    host.appendChild(b);
+  });
+}
+function buildChips2(){
+  const stN = {}; ITEMS.forEach(x => stN[x.st]=(stN[x.st]||0)+1);
+  chipList($('#stChips'),'st',[['','全部',ITEMS.length],
+    ...Object.keys(STO).filter(k=>stN[k]).map(k=>[k,STN[k],stN[k]])]);
+  const cats = [...new Set(ITEMS.map(x=>x.cat))].sort();
+  chipList($('#catChips'),'cat',[['','全部',ITEMS.length],
+    ...cats.map(c=>[c,c,ITEMS.filter(x=>x.cat===c).length])]);
+}
+function buildRef(){
+  /* 材质：只在护甲下有意义 */
+  const mats = [...new Set(ITEMS.filter(x=>x.mat).map(x=>x.mat))];
+  chipList($('#matChips'),'mat', S.cat==='护甲'
+    ? mats.map(m=>[m,m,ITEMS.filter(x=>x.mat===m).length])
+    : []);
+  /* 部位随分类 */
+  const slots = [...new Set(ITEMS.filter(x=>x.slot && (!S.cat||x.cat===S.cat) && (!S.mat||x.mat===S.mat)).map(x=>x.slot))].sort();
+  const sel = $('#slotSel'); const cur = S.slot;
+  sel.innerHTML = '<option value="">全部部位</option>' + slots.map(s=>`<option ${s===cur?'selected':''}>${s}</option>`).join('');
+  sel.onchange = () => { S.slot = sel.value; S.page = 1; render(); };
+}
+function filtered(){
+  const q = S.q.trim().toLowerCase();
+  let xs = ITEMS.filter(x =>
+    (!S.st || x.st === S.st) &&
+    (!S.cat || x.cat === S.cat) &&
+    (!S.mat || x.mat === S.mat) &&
+    (!S.slot || x.slot === S.slot) &&
+    (S.ilMin == null || (x.ilvl && x.ilvl >= S.ilMin)) &&
+    (S.ilMax == null || (x.ilvl && x.ilvl <= S.ilMax)) &&
+    (!q || x.name.toLowerCase().includes(q)));
+  const by = {
+    id:(a,b)=>a.id-b.id,
+    'ilvl-d':(a,b)=>(b.ilvl||0)-(a.ilvl||0)||a.id-b.id,
+    ilvl:(a,b)=>(a.ilvl||99)-(b.ilvl||99)||a.id-b.id,
+    rlvl:(a,b)=>(a.rlvl||99)-(b.rlvl||99)||a.id-b.id,
+    name:(a,b)=>a.name.localeCompare(b.name,'zh'),
+  }[S.sort];
+  return xs.sort(by);
+}
+function ph(x){ /* 缺图占位块：品质色首字 */
+  return `<span class="ph q${x.q}" style="opacity:.8">${x.name.slice(0,1)}</span>`;
+}
+function iconCell(x){
+  return `<span class="iw"><img loading="lazy" alt="" src="../../../src/img/icons/${x.icon}.jpg" onerror="this.outerHTML='${ph(x).replace(/"/g,'&quot;')}'"></span>`;
+}
+function render(){
+  const xs = filtered();
+  const pages = Math.max(1, Math.ceil(xs.length / PER));
+  S.page = Math.min(S.page, pages);
+  const rows = xs.slice((S.page-1)*PER, S.page*PER);
+  $('#empty').hidden = xs.length > 0;
+  $('#rows').innerHTML = rows.map((x,i) => `
+    <tr style="animation-delay:${Math.min(i*14,280)}ms">
+      <td data-k="名称"><span class="icell">${iconCell(x)}<span class="nm"><a class="q${x.q}" href="#" onclick="return false">${x.name}</a></span></span></td>
+      <td data-k="类型">${x.slot ? x.slot + (x.mat ? ' · '+x.mat : '') : (x.cat==='其它' ? (x.slot||x.mat||'—') : x.cat)}</td>
+      <td class="num" data-k="物品等级">${x.ilvl ?? '—'}</td>
+      <td class="num" data-k="需要等级">${x.rlvl ?? '—'}</td>
+      <td data-k="状态"><span class="st st-${x.st}">${STN[x.st]}</span></td>
+      <td class="num" data-k="编号"><span class="iid">#${x.id}</span></td>
+    </tr>`).join('');
+  /* 分页器 */
+  const win = []; const lo = Math.max(1, S.page-2), hi = Math.min(pages, S.page+2);
+  for (let p=lo; p<=hi; p++) win.push(p);
+  $('#pager').innerHTML = xs.length
+    ? `<button ${S.page===1?'disabled':''} data-p="1">«</button><button ${S.page===1?'disabled':''} data-p="${S.page-1}">‹</button>`
+      + win.map(p=>`<button class="${p===S.page?'on':''}" data-p="${p}">${p}</button>`).join('')
+      + `<button ${S.page===pages?'disabled':''} data-p="${S.page+1}">›</button><button ${S.page===pages?'disabled':''} data-p="${pages}">»</button>`
+      + `<span class="info">共 ${xs.length} 件 · 第 ${S.page}/${pages} 页</span>`
+    : '';
+  $('#pager').querySelectorAll('button[data-p]').forEach(b =>
+    b.onclick = () => { S.page = +b.dataset.p; render(); window.scrollTo({top:$('.itable').offsetTop-80, behavior:'smooth'}); });
+}
+/* 事件绑定 */
+buildChips2(); buildRef();
+$('#ilMin').oninput = $('#ilMax').oninput = () => {
+  S.ilMin = +$('#ilMin').value || null; S.ilMax = +$('#ilMax').value || null; S.page = 1; render();
+};
+let qt; $('#q').oninput = () => { clearTimeout(qt); qt = setTimeout(() => { S.q = $('#q').value; S.page = 1; render(); }, 150); };
+$('#sortSel').onchange = () => { S.sort = $('#sortSel').value; render(); };
+$('#reset').onclick = () => { Object.assign(S, {st:'',cat:'',mat:'',slot:'',ilMin:null,ilMax:null,q:'',sort:'id',page:1});
+  $('#q').value=''; $('#ilMin').value=''; $('#ilMax').value=''; $('#sortSel').value='id'; buildRef(); render(); };
+render();
+</script>
+</body>
+</html>

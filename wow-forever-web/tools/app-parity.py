@@ -31,10 +31,27 @@ LEGACY = os.environ.get("LEGACY_BASE", "http://127.0.0.1:8817")
 APP = os.environ.get("APP_BASE", "http://127.0.0.1:8821")
 
 # 每页：旧站路径、新站 hash 路由、要依次点的 tab（data-t 值，空表示不切）
+# 2026-10-13 全量迁移：18 页全部收进新站，dungeon 详情页带 ?d= 取一座真实本作样本。
 PAGES = [
     {"key": "home", "legacy": "/index.html", "app": "/#/", "tabs": []},
     {"key": "world", "legacy": "/world.html", "app": "/#/world", "tabs": ["zones", "rares", "books", "bag"]},
     {"key": "classes", "legacy": "/classes.html", "app": "/#/classes", "tabs": []},
+    {"key": "talent", "legacy": "/talent.html", "app": "/#/talent", "tabs": []},
+    {"key": "chooser", "legacy": "/chooser.html", "app": "/#/chooser", "tabs": []},
+    {"key": "legacy", "legacy": "/legacy.html", "app": "/#/legacy", "tabs": []},
+    {"key": "races", "legacy": "/races.html", "app": "/#/races", "tabs": []},
+    {"key": "dungeons", "legacy": "/dungeons.html", "app": "/#/dungeons", "tabs": []},
+    {"key": "dungeon", "legacy": "/dungeon.html?d=hall-of-thanes",
+     "app": "/#/dungeon?d=hall-of-thanes", "tabs": []},
+    {"key": "raids", "legacy": "/raids.html", "app": "/#/raids", "tabs": []},
+    {"key": "systems", "legacy": "/systems.html", "app": "/#/systems", "tabs": []},
+    {"key": "professions", "legacy": "/professions.html", "app": "/#/professions", "tabs": []},
+    {"key": "glossary", "legacy": "/glossary.html", "app": "/#/glossary", "tabs": []},
+    {"key": "timeline", "legacy": "/timeline.html", "app": "/#/timeline", "tabs": []},
+    {"key": "skills", "legacy": "/skills.html", "app": "/#/skills", "tabs": []},
+    {"key": "updates", "legacy": "/updates.html", "app": "/#/updates", "tabs": []},
+    {"key": "rank", "legacy": "/rank.html", "app": "/#/rank", "tabs": []},
+    {"key": "provenance", "legacy": "/provenance.html", "app": "/#/provenance", "tabs": []},
 ]
 # 有意差异：新站改了行为、且比旧站更对的，白名单列在这里并写清理由。
 # 只有 --strict 模式下这些键会被放行；出现没登记过的差异仍然算失败。
@@ -51,11 +68,29 @@ INTENTIONAL = {
 }
 
 
+# 全量迁移后的链接归一：同一去处两种栈形态——旧站 xxx.html?q=..、新站 #/xxx?q=..。
+# 都折算成「路由 + query」再比，路由形态差异不再逐条登记白名单（去处不同仍会报）。
+ROUTE_OF = {
+    "": "/", "index": "/", "world": "/world", "classes": "/classes", "talent": "/talent",
+    "chooser": "/chooser", "legacy": "/legacy", "races": "/races", "dungeons": "/dungeons",
+    "dungeon": "/dungeon", "raids": "/raids", "systems": "/systems", "professions": "/professions",
+    "glossary": "/glossary", "timeline": "/timeline", "skills": "/skills", "updates": "/updates",
+    "rank": "/rank", "provenance": "/provenance"
+}
+
+
 def link_key(h, base):
     h = h or ""
     h = h.replace(base, "/")
     h = re.sub(r"^https?://[^/]+", "", h)
-    return h.lstrip("/")          # 旧站是相对链接、新站是根绝对，比对时只看同一个形状
+    h = h.lstrip("/")          # 旧站是相对链接、新站是根绝对，比对时只看同一个形状
+    m = re.match(r"^#/?([^?]*)(\?.*)?$", h)
+    if m:
+        return ROUTE_OF.get(m.group(1).rstrip("/"), "/" + m.group(1)) + (m.group(2) or "")
+    m = re.match(r"^([^/?#]+)\.html([?#].*)?$", h)
+    if m:
+        return ROUTE_OF.get(m.group(1), "/" + m.group(1)) + (m.group(2) or "")
+    return h
 
 
 SELECTORS = ["#top", "#main", "#foot", ".card", ".band", ".picks .pick", "table", "tbody tr",

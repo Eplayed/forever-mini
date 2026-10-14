@@ -57,25 +57,24 @@ describe('结果分组', () => {
 });
 
 describe('跳转目标', () => {
-  it('附加参数在前、关键词在后，中文词按 URL 编码', () => {
+  it('附加参数在前、关键词在后，query 进 to 对象（平铺会被 v-bind 丢掉）', () => {
     expect(queryString('t=rares', 'q', '咆鼻')).toBe('?t=rares&q=%E5%92%86%E9%BC%BB');
-    // talent.html 还没迁到新站，所以这里必须是完整的旧站文件链接
-    expect(itemLink(KINDS, ['tal', '预知', '战士 · 防护', 'c=warrior', 'L1']).href)
-      .toContain('talent.html?c=warrior&q=%E9%A2%84%E7%9F%A5');
+    // talent.html 已迁到新站：站内路由 + query（2026-10-13 全量迁移）
+    expect(itemLink(KINDS, ['tal', '预知', '战士 · 防护', 'c=warrior', 'L1'])).toEqual({
+      to: { path: '/talent', query: { c: 'warrior', q: '预知' } }
+    });
   });
   it('没有关键词的板块（副本用 d=）只带附加参数，不留空问号', () => {
     const l = itemLink(KINDS, ['dun', '领主大厅', '无限新增', 'd=hall-of-thanes', 'L0']);
-    expect(l.href).toContain('dungeons.html?d=hall-of-thanes');
-    expect(l.href.indexOf('?d=hall-of-thanes?')).toBe(-1);
+    expect(l).toEqual({ to: { path: '/dungeons', query: { d: 'hall-of-thanes' } } });
   });
-  it('已迁的页走路由并带 query，没迁的链回旧站文件', () => {
-    expect(itemLink(KINDS, ['rare', '咆鼻', '莫高雷', 't=rares', 'L0']).to).toBe('/world');
-    expect(itemLink(KINDS, ['rare', '咆鼻', '莫高雷', 't=rares', 'L0']).query).toEqual({ t: 'rares', q: '咆鼻' });
-    expect(itemLink(KINDS, ['tal', '预知', '战士 · 防护', 'c=warrior', 'L1']).href)
-      .toContain('talent.html?c=warrior&q=%E9%A2%84%E7%9F%A5');
+  it('已迁的页走路由并带 query（全量迁移后所有页都走站内路由）', () => {
+    expect(itemLink(KINDS, ['rare', '咆鼻', '莫高雷', 't=rares', 'L0']).to.path).toBe('/world');
+    expect(itemLink(KINDS, ['rare', '咆鼻', '莫高雷', 't=rares', 'L0']).to.query).toEqual({ t: 'rares', q: '咆鼻' });
+    expect(itemLink(KINDS, ['tal', '预知', '战士 · 防护', 'c=warrior', 'L1']).to.path).toBe('/talent');
   });
   it('组头那条"进去看全部"同样按板块生成，不认识的类型不会炸', () => {
-    expect(groupLink(KINDS, { page: 'talent.html', param: 'q' }, '潜行').href).toContain('talent.html?q=%E6%BD%9C%E8%A1%8C');
+    expect(groupLink(KINDS, { page: 'talent.html', param: 'q' }, '潜行')).toEqual({ to: '/talent' });
     expect(itemLink({}, ['???', 'x', '', '', 'L3']).href).toContain('index.html');
   });
 });

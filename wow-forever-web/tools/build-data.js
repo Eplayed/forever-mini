@@ -991,6 +991,29 @@ if (fs.existsSync(lgPath)) {
   warns.push('legacy.json 缺失：传承页只显示空态（跑 tools/scrape-wclbox-legacy.py + tools/merge-legacy.js 生成）');
 }
 
+// ---------- 物品名录（物品线一期） ----------
+// 单源 L0（wclbox 转述客户端解包，同 datamine_cn 口径）：清单级五件套，无描述文案。
+// 禁词扫描会自动覆盖这个文件（上面的 readdirSync），这里只查结构一致性与规模快照。
+const itPath = path.join(ROOT, 'items.json');
+if (fs.existsSync(itPath)) {
+  const it = JSON.parse(fs.readFileSync(itPath, 'utf8'));
+  const its = it.items || [];
+  if (its.length !== (it.meta.counts || {}).total) {
+    errs.push(`items：物品条数 ${its.length} 与 meta.counts.total ${it.meta.counts.total} 对不上`);
+  }
+  const itIds = new Set(its.map((x) => x.id));
+  if (itIds.size !== its.length) errs.push(`items：物品 id 重复 ${its.length - itIds.size} 个`);
+  const stBad = its.filter((x) => ['new', 'changed', 'same', 'missing', 'rebuilt'].indexOf(x.status) < 0).length;
+  if (stBad) errs.push(`items：status 越界 ${stBad} 条（只允许 new/changed/same/missing）`);
+  const noIcon = its.filter((x) => !x.iconKey).length;
+  if (noIcon) warns.push(`items：${noIcon} 件没有图标文件名（缺图要走 icon-gaps 自绘占位，不猜图）`);
+  scale.items = its.length;
+  scale.itemsNew = (it.meta.counts || {}).new || 0;
+  console.log('物品名录：' + its.length + ' 件（无限新增 ' + scale.itemsNew + '）·抓取日 ' + (it.meta.fetched || '缺失'));
+} else {
+  warns.push('items.json 缺失：物品库页将空态（跑 tools/scrape-wclbox-items.py + tools/merge-items.py 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——

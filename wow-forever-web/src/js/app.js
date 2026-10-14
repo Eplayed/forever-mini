@@ -2009,19 +2009,27 @@
         (bosses.length ? bosses.map(bossBlock).join('')
           : '<p class="dim">这座本还没有首领名单，掉落也就没有归属可写。</p>') +
         '</div>' + questBlock +
+        /* 「换一座」2026-10-13 站主要求全部平铺：五档 + 团本全摆出来，不再藏进下拉。
+           当前这座不挂链接（加粗），分组与目录页同一份 DUN_BANDS。 */
         '<div class="card"><h2>换一座</h2>' +
-        '<select id="dpick" class="dunsel" aria-label="跳到另一座地下城的详情页">' +
-        '<option value="">按等级段找一座</option>' +
-        sibs.map(function (y) {
-          return '<option value="' + D.esc(y.id) + '"' + (y.id === x.id ? ' selected' : '') + '>' +
-            D.esc(y.nameCn || y.nameEn || y.id) +
-            (y.levelRange ? '（' + D.esc(y.levelRange) + ' 级）' : '') + '</option>';
-        }).join('') + '</select>' +
+        (function () {
+          function swapItem(y) {
+            var inner = D.esc(y.nameCn || y.nameEn || y.id) +
+              '<span class="dim mono">' + D.esc(y.levelRange || '未定') + '</span>';
+            return y.id === x.id ? '<b>' + inner + '</b>'
+              : '<a href="dungeon.html?d=' + D.esc(y.id) + '">' + inner + '</a>';
+          }
+          var out = DUN_BANDS.map(function (b, i) {
+            var rows = duns.filter(function (y) { return dunBand(y) === i; }).sort(dunSort);
+            if (!rows.length) return '';
+            return '<h3>' + b[0] + (b[1] > 60 ? '–60' : '–' + b[1]) + ' 级 · ' + b[2] + '</h3>' +
+              '<p class="dirl">' + rows.map(swapItem).join('') + '</p>';
+          }).join('');
+          var raids = (d.raids || []).slice(0).sort(dunSort);
+          if (raids.length) out += '<h3>团队副本</h3><p class="dirl">' + raids.map(swapItem).join('') + '</p>';
+          return out;
+        })() +
         '<a class="cta" href="dungeons.html">回列表，按等级段挑 →</a></div>');
-      var pick = el('dpick');
-      if (pick) pick.onchange = function () {
-        if (pick.value) location.href = 'dungeon.html?d=' + encodeURIComponent(pick.value);
-      };
       var bb = urlQ('b');
       if (bb) {
         var node = el('b-' + bb);

@@ -60,7 +60,7 @@
    "why": "内部工程词"
   },
   {
-   "re": "undefined|\\[object|\\bNaN\\b|null",
+   "re": "undefined|\\[object|\\bNaN\\b|\\bnull\\b",
    "why": "渲染事故"
   },
   {

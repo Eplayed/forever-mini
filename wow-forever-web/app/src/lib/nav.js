@@ -23,6 +23,7 @@ export const NAV = [
   { t: '专业', items: [
     { file: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
   { t: '工具', items: [
+    { file: 'items.html', t: '物品库', d: '全部物品名录：新增、改动与等级对照（仅网页）' },
     { file: 'glossary.html', t: '速查', d: '中英术语，点一下即复制' },
     { file: 'timeline.html', t: '时间表', d: '11 个上线时间点带官方原文' },
     { file: 'updates.html', t: '动态', d: '官方时间点 + 客户端改动（仅网页）' },
@@ -49,5 +50,22 @@ export function isMigrated(file) {
   return !!MIGRATED[String(file || '').split(/[?#]/)[0]];
 }
 
+/* 带查询串的旧站文件链接 → 站内 { to: { path, query } }。linkFor 只按文件名查表（query 会丢），
+   首页天赋预览的格子（talent.html?c=..&tree=..&q=..）这类要保参数的入口走这里。
+   to 用 router-link 原生的对象形式——平铺成 { to, query } 再 v-bind 的话 query 会掉进
+   fallthrough 属性里静默丢失（2026-10-13 全量迁移时发现并修正）。
+   未迁的页原样返回 { href }（含 query），与 linkFor 一致。 */
+export function linkForQ(file) {
+  const l = linkFor(file);
+  if (!l.to) return l;
+  const query = {};
+  (String(file || '').split('?')[1] || '').split('&').forEach((p) => {
+    if (!p) return;
+    const i = p.indexOf('=');
+    query[i < 0 ? p : p.slice(0, i)] = i < 0 ? '' : decodeURIComponent(p.slice(i + 1));
+  });
+  return { to: { path: l.to, query } };
+}
+
 /* 迁完一页要做两件事：路由表加一条，这里标记一下已迁（导航才会走内部链接） */
-export const MIGRATION_NOTE = '新站已迁：首页 / 世界页 / 职业页；其余 15 页仍在旧站。';
+export const MIGRATION_NOTE = '2026-10-13 全量迁移：18 个旧页已全部迁入 Vue 新站。';

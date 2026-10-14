@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数据管线控制台 · 无限服资料线</title>
+<style>
+/* ===== 内部工具 · 暗色工程控制台。与玩家站同血统（暗蓝炭黑 + 暖金），但这是军需台账不是展厅：
+        等宽字体主导、密度优先、缺口一律显形。零外部请求（红线：禁字体 CDN）。 ===== */
+:root{
+  --bg:#0a0e14; --panel:#10151f; --panel2:#0d1119; --line:#232c3b; --line2:#2e394d;
+  --ink:#d7dbe2; --dim:#8b94a3; --faint:#5b6473;
+  --gold:#c8a35c; --gold-hi:#e6c98a; --gold-dim:rgba(200,163,92,.14);
+  --ok:#7fc08a; --err:#d06a5e; --warn:#c9a15c; --info:#7da7c9;
+  --serif:Georgia,"Times New Roman","STZhongsong","SimSun",serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New","Microsoft YaHei",monospace;
+  --sans:"Segoe UI","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font:14px/1.6 var(--mono);
+  background-image:
+    radial-gradient(1200px 600px at 70% -10%, rgba(200,163,92,.05), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(200,163,92,.025) 27px 28px),
+    repeating-linear-gradient(90deg, transparent 0 27px, rgba(200,163,92,.02) 27px 28px);
+  min-height:100vh;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold-hi)}
+
+/* ===== 顶部图纸标题栏 ===== */
+header{
+  margin:26px 0 8px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);
+  padding:20px 24px 16px;position:relative;
+}
+header::before{content:"";position:absolute;inset:4px;border:1px solid var(--gold-dim);pointer-events:none;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.kicker{font:600 11px var(--mono);letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+h1{font:400 30px/1.2 var(--serif);letter-spacing:.06em;margin:6px 0 2px}
+h1 b{color:var(--gold);font-weight:400}
+.sub{color:var(--faint);font-size:12px;letter-spacing:.1em}
+.stamp{
+  position:absolute;top:18px;right:34px;transform:rotate(6deg);
+  border:2px solid var(--err);color:var(--err);font:700 11px var(--mono);
+  letter-spacing:.28em;padding:4px 10px 4px 13px;opacity:.85;pointer-events:none;
+}
+.readouts{display:flex;flex-wrap:wrap;gap:0;margin-top:16px;border-top:1px solid var(--line)}
+.readouts div{padding:8px 18px 0 0;margin-right:18px;border-right:1px dashed var(--line)}
+.readouts div:last-child{border-right:0}
+.readouts s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--faint)}
+.readouts b{font-weight:400;color:var(--ink);font-size:13px}
+.readouts b em{font-style:normal;color:var(--gold)}
+
+nav{display:flex;gap:22px;margin:10px 2px 30px;font-size:12px;letter-spacing:.12em}
+nav a{color:var(--dim)}
+nav a:hover{color:var(--gold)}
+nav i{font-style:normal;color:var(--gold);margin-right:6px}
+
+/* ===== 分区与卡片 ===== */
+section{margin-bottom:34px;animation:rise .5s both}
+section:nth-of-type(2){animation-delay:.08s}
+section:nth-of-type(3){animation-delay:.16s}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h2{font:400 19px var(--serif);letter-spacing:.1em;margin-bottom:12px;display:flex;align-items:baseline;gap:12px}
+h2 i{font:600 11px var(--mono);color:var(--gold);letter-spacing:.3em;font-style:normal}
+h2 small{font:400 12px var(--mono);color:var(--faint);letter-spacing:0}
+.card{
+  border:1px solid var(--line);background:var(--panel);position:relative;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+}
+.card::after{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:.5}
+.pad{padding:14px 16px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.duo>.card,.gates>.gate{min-width:0}  /* grid 格子默认 min-width:auto，会让里面的宽表格把布局撑爆 */
+@media (max-width:860px){.duo{grid-template-columns:1fr}}
+h3{font:600 12px var(--mono);letter-spacing:.22em;color:var(--dim);margin-bottom:10px}
+h3 b{color:var(--gold)}
+
+/* ===== 表格 ===== */
+.scrollx{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{
+  text-align:left;font:600 10.5px var(--mono);letter-spacing:.18em;color:var(--faint);
+  border-bottom:1px solid var(--line2);padding:6px 10px;white-space:nowrap;
+}
+td{border-bottom:1px solid var(--line);padding:6px 10px;vertical-align:top;white-space:nowrap}
+tbody tr:hover{background:var(--gold-dim)}
+td.num,th.num{text-align:right}
+td .en{color:var(--faint);font-size:11px;margin-left:8px}
+.dim{color:var(--dim)} .faint{color:var(--faint)}
+.miss{color:var(--warn)} .miss::before{content:"◦";margin-right:2px}
+.bad{color:var(--err)}
+tr.band td{
+  background:var(--panel2);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);
+  font:600 11px var(--mono);letter-spacing:.24em;color:var(--gold);padding:7px 10px;
+}
+tr.band td span{color:var(--faint);letter-spacing:.05em;margin-left:10px}
+.conflict{color:var(--err);font-size:11px;margin-left:8px}
+.conflict::before{content:"两源分歧 "}
+.lvl{display:inline-block;min-width:26px;text-align:center;border:1px solid;padding:0 4px;font-size:10.5px;letter-spacing:.08em}
+.lvl.L0{color:var(--ok);border-color:var(--ok)}
+.lvl.L1{color:var(--info);border-color:var(--info)}
+.lvl.L2{color:var(--warn);border-color:var(--warn)}
+.lvl.L3{color:var(--err);border-color:var(--err)}
+.noart{color:var(--err);font-size:10.5px;border:1px solid var(--err);padding:0 4px;letter-spacing:.15em}
+.yesart{color:var(--faint)}
+.stale{color:var(--warn)} .fresh{color:var(--ok)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:var(--faint)}
+.dot.fresh{background:var(--ok)} .dot.stale{background:var(--warn)}
+tr.click{cursor:pointer}
+
+/* ===== 门禁 ===== */
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){.gates{grid-template-columns:1fr}}
+.gate{padding:14px 16px}
+.gate h4{font:400 15px var(--serif);letter-spacing:.08em;margin-bottom:2px}
+.gate .cmd{font-size:11px;color:var(--faint);word-break:break-all;margin-bottom:10px}
+.gate .row{display:flex;align-items:center;gap:10px}
+button{
+  font:600 12px var(--mono);letter-spacing:.2em;color:var(--gold);background:none;
+  border:1px solid var(--gold);padding:6px 16px;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);
+  transition:background .15s,color .15s;
+}
+button:hover{background:var(--gold);color:#141005}
+button:disabled{opacity:.4;cursor:wait}
+.gate .last{font-size:11px;color:var(--faint);margin-left:auto}
+.gate .last.ok{color:var(--ok)} .gate .last.err{color:var(--err)}
+.gate.running .last{color:var(--gold);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.35}}
+#term{
+  margin-top:16px;background:#070a0f;border:1px solid var(--line);padding:14px 16px;
+  font-size:12px;line-height:1.7;max-height:340px;overflow:auto;white-space:pre-wrap;word-break:break-all;
+}
+#term .head{color:var(--gold);letter-spacing:.15em}
+#term .head.err{color:var(--err)}
+#term .out{color:var(--dim)}
+
+/* ===== 底部抽屉：单本字段检查器 ===== */
+#drawer{
+  position:fixed;left:0;right:0;bottom:0;background:var(--panel2);border-top:2px solid var(--gold);
+  transform:translateY(100%);transition:transform .25s;max-height:62vh;overflow:auto;z-index:9;
+  box-shadow:0 -18px 50px rgba(0,0,0,.5);
+}
+#drawer.open{transform:none}
+#drawer .inner{max-width:1180px;margin:0 auto;padding:16px 20px 26px}
+#drawer h5{font:400 16px var(--serif);letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+#drawer h5 button{margin-left:auto;letter-spacing:.1em;padding:3px 10px}
+#drawer pre{font-size:12px;line-height:1.7;color:var(--dim);white-space:pre-wrap;word-break:break-all}
+
+footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;border-top:1px solid var(--line);padding-top:12px}
+.errbanner{border:1px solid var(--err);color:var(--err);padding:10px 14px;margin-bottom:16px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">WoW Forever · Internal Console</div>
+    <h1>数据管线<b>控制台</b></h1>
+    <div class="sub">upstream → src/data → 构建副本 ｜ 面板是眼睛，不是手：改数据仍走 upstream / merge-*.js + refresh.sh</div>
+    <div class="stamp">内部 · 非玩家页面</div>
+    <div class="readouts" id="readouts">
+      <div><s>基底生成</s><b id="r-gen">—</b></div>
+      <div><s>上游抓取</s><b id="r-scrape">—</b></div>
+      <div><s>首领头像</s><b id="r-faces">—</b></div>
+      <div><s>基底文件</s><b id="r-files">—</b></div>
+      <div><s>不新鲜快照</s><b id="r-stale">—</b></div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#s1"><i>01</i>基底与上游</a>
+    <a href="#s2"><i>02</i>副本缺口台账</a>
+    <a href="#s3"><i>03</i>门禁</a>
+  </nav>
+
+  <div class="errbanner" id="errbanner"></div>
+
+  <section id="s1">
+    <h2><i>01</i>基底与上游 <small>成品文件在左（唯一真相），原始转述在右（页面永不读）</small></h2>
+    <div class="duo">
+      <div class="card"><div class="pad">
+        <h3>成品基底 <b>src/data/*.json</b></h3>
+        <div class="scrollx"><table id="t-files">
+          <thead><tr><th>文件</th><th class="num">条目</th><th class="num">大小</th><th>更新</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div></div>
+      <div class="card"><div class="pad">
+        <h3>上游快照 <b>src/data/upstream/</b> <span class="faint" id="stale-hint"></span></h3>
+        <div class="scrollx"><table id="t-up">
+          <thead><tr><th>快照</th><th class="num">天数</th><th>更新</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="s2">
+    <h2><i>02</i>副本缺口台账 <small>38 座 · 缺的字段亮黄，两源分歧标红，缺原画盖「缺」章 · 点任意一行看字段 JSON</small></h2>
+    <div class="card"><div class="pad">
+      <div class="scrollx"><table id="t-dun">
+        <thead><tr>
+          <th>本名</th><th>区间·采用</th><th>官方源</th><th>客户端源</th>
+          <th class="num">人数</th><th class="num">首领</th><th class="num">掉落</th><th>分级</th><th>原画</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div></div>
+  </section>
+
+  <section id="s3">
+    <h2><i>03</i>门禁 <small>白名单命令 · 在仓库根执行 · 输出截断 64KB</small></h2>
+    <div class="gates" id="gates"></div>
+    <div id="term"><span class="faint">▸ 门禁输出会打在这里。status／build-data 秒级，site-dun 约一分钟。</span></div>
+  </section>
+
+  <footer>无限服资料线 · 数据管理面板 ｜ 只绑 127.0.0.1 ｜ 与资料站（8817／8821）互不相干 ｜ 口径：docs/DATA-MAINTENANCE.md</footer>
+</div>
+
+<div id="drawer"><div class="inner">
+  <h5><span id="d-title"></span><button onclick="drawerClose()">关闭 ×</button></h5>
+  <pre id="d-pre"></pre>
+</div></div>
+
+<script>
+"use strict";
+const $ = (s, el) => (el || document).querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtKB = n => n >= 1024 ? (n / 1024).toFixed(1) + " KB" : n + " B";
+const cell = (v, miss) => v == null || v === "" ? '<td class="miss">' + (miss || "缺") + "</td>" : "<td>" + esc(v) + "</td>";
+
+function fail(msg) {
+  const b = $("#errbanner");
+  b.style.display = "block";
+  b.textContent = "✗ " + msg;
+}
+
+async function jget(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(url + " → HTTP " + r.status);
+  return r.json();
+}
+
+/* ===== 01 基底与上游 ===== */
+function drawOverview(d) {
+  const m = d.meta || {};
+  $("#r-gen").innerHTML = esc(m.generatedAt || "—");
+  $("#r-scrape").innerHTML = esc(m.scrapedAt || "—");
+  const bp = m.bossPortraits || {};
+  if (bp.total) {
+    const pct = Math.round((bp.withPortrait / bp.total) * 100);
+    $("#r-faces").innerHTML = '<em>' + bp.withPortrait + "</em> / " + bp.total + "（" + pct + "%）";
+  } else $("#r-faces").textContent = "—";
+  $("#r-files").innerHTML = "<em>" + d.files.length + "</em> 个";
+  const stale = d.upstream.filter(u => u.stale).length;
+  $("#r-stale").innerHTML = stale ? '<em style="color:var(--warn)">' + stale + "</em> / " + d.upstream.length : "<em>" + 0 + "</em> / " + d.upstream.length;
+  $("#stale-hint").textContent = "（超过 " + d.staleDays + " 天亮黄）";
+
+  $("#t-files tbody").innerHTML = d.files.map(f =>
+    "<tr><td>" + esc(f.name) + "</td><td class='num'>" + esc(f.items) + "</td><td class='num dim'>" + fmtKB(f.size) + "</td><td class='dim'>" + esc(f.mtimeTxt) + "</td></tr>"
+  ).join("");
+
+  $("#t-up tbody").innerHTML = d.upstream.map(u =>
+    "<tr><td><i class='dot " + (u.stale ? "stale" : "fresh") + "'></i>" + esc(u.name.replace("upstream/", "")) + "</td>" +
+    "<td class='num " + (u.stale ? "stale" : "fresh") + "'>" + u.age + "</td><td class='dim'>" + esc(u.mtimeTxt) + "</td></tr>"
+  ).join("");
+}
+
+/* ===== 02 副本台账 ===== */
+const KINDS = [["new", "无限新增"], ["classic", "经典旧世"], ["raid", "团队副本"]];
+function drawDungeons(d) {
+  const tb = $("#t-dun tbody");
+  let html = "";
+  for (const [kind, label] of KINDS) {
+    const rows = d.rows.filter(r => r.kind === kind);
+    if (!rows.length) continue;
+    html += '<tr class="band"><td colspan="9">' + label + "<span>" + rows.length + " 座</span></td></tr>";
+    html += rows.map(r => {
+      const name = esc(r.nameCn || r.nameEn || r.id) +
+        (r.nameCn !== r.nameEn ? '<span class="en">' + esc(r.nameEn || "") + "</span>" : "") +
+        (r.nameCnConflict ? '<span class="conflict">' + esc(r.nameCnConflict) + "</span>" : "");
+      const party = (r.partySize == null ? '<span class="miss">缺</span>' : r.partySize) +
+        (r.partySizeAlt ? '<span class="conflict">另有 ' + esc(r.partySizeAlt) + "</span>" : "");
+      return '<tr class="click" data-id="' + esc(r.id) + '">' +
+        "<td>" + name + "</td>" +
+        cell(r.levelRange) + cell(r.rangeOfficial) + cell(r.rangeClient) +
+        "<td class='num'>" + party + "</td>" +
+        "<td class='num" + (r.bosses ? "" : " miss") + "'>" + (r.bosses || "缺") + "</td>" +
+        "<td class='num" + (r.drops ? "" : " miss") + "'>" + (r.drops || "缺") + "</td>" +
+        "<td><span class='lvl " + esc(r.level || "L3") + "'>" + esc(r.level || "?") + "</span></td>" +
+        "<td>" + (r.art ? "<span class='yesart'>有</span>" : "<span class='noart'>缺</span>") + "</td></tr>";
+    }).join("");
+  }
+  tb.innerHTML = html;
+  tb.addEventListener("click", e => {
+    const tr = e.target.closest("tr.click");
+    if (tr) openDrawer(tr.dataset.id);
+  });
+}
+
+function openDrawer(id) {
+  jget("/api/dungeons").then(d => {
+    const r = d.rows.filter(x => x.id === id)[0];
+    if (!r) return;
+    $("#d-title").textContent = (r.nameCn || r.nameEn || r.id) + " ｜ " + r.id;
+    $("#d-pre").textContent = JSON.stringify(r, null, 2);
+    $("#drawer").classList.add("open");
+  }).catch(e => fail(e.message));
+}
+function drawerClose() { $("#drawer").classList.remove("open"); }
+document.addEventListener("keydown", e => { if (e.key === "Escape") drawerClose(); });
+
+/* ===== 03 门禁 ===== */
+const GATES = [
+  { id: "status", label: "上游新鲜度", cmd: "python tools/data-status.py", hint: "秒级" },
+  { id: "build-data", label: "数据校验", cmd: "node tools/build-data.js", hint: "秒级" },
+  { id: "site-dun", label: "副本详情回归", cmd: "python tools/site-check.py --only dungeon_detail", hint: "约一分钟" },
+];
+let running = false;
+function drawGates() {
+  $("#gates").innerHTML = GATES.map(g =>
+    '<div class="card gate" id="g-' + g.id + '"><div class="pad">' +
+    "<h4>" + g.label + "</h4>" +
+    "<div class='cmd'>$ " + esc(g.cmd) + "</div>" +
+    "<div class='row'><button onclick=\"runGate('" + g.id + "')\">运行 ▸</button>" +
+    "<span class='faint'>" + g.hint + "</span><span class='last'>未跑过</span></div>" +
+    "</div></div>"
+  ).join("");
+}
+async function runGate(id) {
+  if (running) return;
+  running = true;
+  const card = $("#g-" + id), last = $(".last", card);
+  card.classList.add("running");
+  GATES.forEach(g => $("#g-" + g.id + " button").disabled = true);
+  last.textContent = "运行中…";
+  const t0 = Date.now();
+  $("#term").insertAdjacentHTML("beforeend", '\n<span class="head">▸ ' + esc(GATES.find(g => g.id === id).label) + " · 运行中</span>\n");
+  try {
+    const r = await fetch("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) });
+    const d = await r.json();
+    if (!r.ok || d.error) throw new Error(d.error || ("HTTP " + r.status));
+    const ok = d.code === 0;
+    last.textContent = (ok ? "✓ 通过" : "✗ 退出码 " + d.code) + " · " + (d.ms / 1000).toFixed(1) + "s";
+    last.className = "last " + (ok ? "ok" : "err");
+    $("#term").insertAdjacentHTML("beforeend",
+      '<span class="head' + (ok ? "" : " err") + '">' + (ok ? "✓" : "✗") + " " + esc(d.label) + " · 退出码 " + d.code + " · " + (d.ms / 1000).toFixed(1) + "s</span>\n" +
+      '<span class="out">' + esc(d.out || "(无输出)") + "</span>\n");
+    $("#term").scrollTop = $("#term").scrollHeight;
+  } catch (e) {
+    last.textContent = "✗ " + e.message;
+    last.className = "last err";
+    $("#term").insertAdjacentHTML("beforeend", '<span class="head err">✗ ' + esc(e.message) + "</span>\n");
+  }
+  card.classList.remove("running");
+  GATES.forEach(g => $("#g-" + g.id + " button").disabled = false);
+  running = false;
+}
+
+/* ===== 装载 ===== */
+drawGates();
+jget("/api/overview").then(drawOverview).catch(e => fail(e.message));
+jget("/api/dungeons").then(drawDungeons).catch(e => fail(e.message));
+</script>
+</body>
+</html>

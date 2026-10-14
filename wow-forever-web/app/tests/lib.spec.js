@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { fnv, tileStyle, classStyle, raceStyle, iconUrl, CLASS_COLOR, firstChar } from '../src/lib/glyph.js';
-import { linkFor, legacyUrl, isMigrated, NAV } from '../src/lib/nav.js';
+import { linkFor, linkForQ, legacyUrl, isMigrated, NAV } from '../src/lib/nav.js';
 import { load, loadedKeys, forget, assetUrl } from '../src/lib/data.js';
 
 describe('自绘占位图形', () => {
@@ -33,11 +33,17 @@ describe('自绘占位图形', () => {
 });
 
 describe('导航链接归属', () => {
-  it('已迁的页走路由，未迁的页回旧站', () => {
+  it('2026-10-13 全量迁移：18 页全部走路由', () => {
     expect(linkFor('index.html')).toEqual({ to: '/' });
-    expect(linkFor('world.html')).toEqual({ to: '/world' });
-    expect(linkFor('dungeons.html').href).toBeDefined();
-    expect(isMigrated('professions.html')).toBe(false);
+    expect(linkFor('dungeons.html')).toEqual({ to: '/dungeons' });
+    expect(isMigrated('professions.html')).toBe(true);
+    expect(isMigrated('talent.html')).toBe(true);
+  });
+  it('带查询串的入口用 linkForQ 保住参数（linkFor 只认文件名）', () => {
+    expect(linkForQ('talent.html?c=warrior&tree=2&q=%E7%9B%BE%E7%89%8C')).toEqual({
+      to: { path: '/talent', query: { c: 'warrior', tree: '2', q: '盾牌' } }
+    });
+    expect(linkForQ('dungeons.html')).toEqual({ to: { path: '/dungeons', query: {} } });
   });
   it('带锚点的入口一律回旧站（新站是 hash 路由，锚点会打架）', () => {
     expect(linkFor('races.html#traits').href).toContain('races.html#traits');

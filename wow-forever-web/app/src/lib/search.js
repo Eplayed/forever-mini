@@ -56,7 +56,8 @@ export function queryString(extra, param, name) {
   return qs.length ? '?' + qs.join('&') : '';
 }
 
-/* 迁移期：目标页已迁到新站就走路由（带 query），没迁就链回旧站文件。 */
+/* 全站已迁：目标页一律走站内路由，query 塞进 to 对象（平铺 { to, query } 经 v-bind
+   会把 query 掉进 fallthrough 属性静默丢失——2026-10-13 修正，与 ClassesPage calcLink 同形）。 */
 export function itemLink(kinds, it) {
   const kd = kinds && kinds[it[0]];
   if (!kd) return { href: legacyUrl('index.html') };
@@ -70,7 +71,7 @@ export function itemLink(kinds, it) {
       query[i < 0 ? p : p.slice(0, i)] = i < 0 ? '' : decodeURIComponent(p.slice(i + 1));
     });
     if (kd[2]) query[kd[2]] = it[1];
-    return { to: lk.to, query };
+    return { to: { path: lk.to, query } };
   }
   return { href: legacyUrl(file) };
 }

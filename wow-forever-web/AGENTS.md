@@ -89,4 +89,4 @@ bash tools/serve.sh            # 本地预览：旧站 :8817 + 新站 :8821（fi
    文案面向玩家，不出现内部术语。**别把删掉的卡又加回来**——要恢复先改这条。
    - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 第 18 节扫全部页面与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
    - 网页上的「本站更新」读 **手写的 `src/data/releases.json`**（一条对应一个真实提交，`build-data.js` 会回仓库核对提交号）；git 自动生成的开发日志在 `docs/CHANGELOG-DEV.md`，**不进页面**。改了玩家能看到的东西就要补一条。
-7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。
+7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。**留存口径（2026-10-13 起）**：`docs/screenshots/` 只留当前有效的一套——按日整站重拍进 `check-YYYY-MM-DD/`，新批次落库时把上一批 tar 进 `docs/screenshots-archive/`（已 gitignore，不入库）再删原目录；根目录散图同页重拍直接覆盖，不无限新增。翻旧图去 `screenshots-archive/*.tar.gz`（清单见其 `MANIFEST.txt`）；旧 VERIFY 记录里引用的归档路径已失效，以 tar 内文件为准。仓库新克隆体积要等 git 历史重写才会真正变小（`wow-forever-web/docs/ARCH-REVIEW-2026-10-13.md` P0-2）。

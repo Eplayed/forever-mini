@@ -1131,7 +1131,6 @@ def test_dungeon_detail(browser, base):
           conf: document.querySelectorAll('#main .conf').length,
           note: document.querySelectorAll('#main .note').length,
           near: [...document.querySelectorAll('.dnear a')].map(a => a.getAttribute('href')),
-          sel: document.querySelectorAll('#dpick option').length,
           nearText: (document.querySelector('.dnear') || {}).innerText || '',
           noFace: [...document.querySelectorAll('.brow .bt')].filter(e => /没有这张头像/.test(e.innerText)).length,
           noLoot: [...document.querySelectorAll('.brow .bt')].filter(e => /掉落待补/.test(e.innerText)).length,
@@ -1996,8 +1995,8 @@ def test_app(browser, base):
             check("新站首页也有只读天赋树预览",
                   pv2 and pv2["nodes"] > 10 and pv2["cls"] == S["classes"] and pv2["on"] == 1,
                   json.dumps(pv2, ensure_ascii=False))
-            check("新站预览没有坏图，格子也链回计算器",
-                  pv2 and pv2["broken"] == 0 and "talent.html?c=" in pv2["href"], pv2 and pv2["href"])
+            check("新站预览没有坏图，格子也链回计算器（全量迁移后是站内路由 #/talent）",
+                  pv2 and pv2["broken"] == 0 and "/talent?c=" in (pv2["href"] or ""), pv2 and pv2["href"])
         else:
             tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
             check("新站世界页四个面板齐全", tabs == 4, "%d 个" % tabs)
@@ -2017,6 +2016,46 @@ def test_app(browser, base):
             page.screenshot(path=os.path.join(SHOT_DIR, "app-world-rares.png"))
         ctx.close()
 
+    # 物品库（新站独有页，2026-10-14 站主拍板原型后实现）。断言照拍板口径：
+    # 每页 50 行、筛选芯片与四个读数、页内搜索接得住、正文没有面向开发的词。
+    # 行图标按本地库存如实渲染：取不到官方图的（icon-gaps.json 登记）本就该退占位块，
+    # 所以"该有图的行数"由 items.json 前 50 行对照 icon-gaps 推导，404 只放行登记过的键。
+    it = json.load(open(os.path.join(SRC, "data", "items.json"), encoding="utf-8"))["items"]
+    it.sort(key=lambda x: x["id"])
+    expect_lico = 50 - sum(1 for x in it[:50] if not x.get("iconKey") or x.get("iconKey") in ICON_GAPS)
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs, failed = [], []
+    page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+    page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
+            if r.status >= 400 and not tolerated(r.url) else None)
+    page.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    page.wait_for_timeout(2000)
+    st = page.evaluate("""() => ({
+      rows: document.querySelectorAll('.itt tbody tr').length,
+      chips: document.querySelectorAll('.kchip').length,
+      reads: document.querySelectorAll('.stats.readout .stat').length,
+      lico: document.querySelectorAll('.itt tbody img.lico').length,
+      broken: [...document.querySelectorAll('.itt tbody img.lico')]
+        .filter(i => i.complete && i.naturalWidth === 0).length })""")
+    check("新站物品库：每页 50 行、筛选芯片与四个读数齐全",
+          st["rows"] == 50 and st["chips"] >= 9 and st["reads"] == 4, json.dumps(st))
+    check("新站物品库：行图标按本地库存如实渲染、无坏图", st["lico"] == expect_lico and st["broken"] == 0,
+          "图标 %d/%d（%d 行本就取不到官方图走占位）" % (st["lico"], expect_lico, 50 - expect_lico))
+    page.fill(".qsearch", "护腕")
+    page.wait_for_timeout(900)
+    hit = page.evaluate("""() => { const n = document.querySelector('.itt tbody tr .nm');
+      return { rows: document.querySelectorAll('.itt tbody tr').length,
+               first: n ? n.innerText.trim() : '' }; }""")
+    check("新站物品库：页内搜索接得住", hit["rows"] >= 1 and "护腕" in hit["first"],
+          json.dumps(hit, ensure_ascii=False))
+    body = page.evaluate("() => document.querySelector('#main').innerText")
+    check("新站物品库：正文没有面向开发的词", not dev_word_hits(body), "干净")
+    check("新站物品库：无脚本报错与失败请求", not errs and not failed,
+          "; ".join((errs + failed)[:2]) or "干净")
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-items.png"))
+    ctx.close()
+
     m = browser.new_context(viewport={"width": 375, "height": 780})
     mp = m.new_page()
     mp.goto(APP_BASE + "/#/", wait_until="networkidle")
@@ -2027,6 +2066,17 @@ def test_app(browser, base):
       return { overflow: document.documentElement.scrollWidth > vw + 1, small: small }; }""")
     check("新站移动端首页不溢出、点击目标 ≥44px", not mob["overflow"] and mob["small"] == 0, json.dumps(mob))
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-index-mobile.png"), full_page=True)
+    m.close()
+
+    m = browser.new_context(viewport={"width": 375, "height": 780})
+    mp = m.new_page()
+    mp.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    mp.wait_for_timeout(1800)
+    mit = mp.evaluate("""() => { const tr = document.querySelector('.itt tbody tr');
+      return { overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+               card: tr ? getComputedStyle(tr).display === 'block' : false }; }""")
+    check("新站物品库移动端：行卡片化、375 不横滚", not mit["overflow"] and mit["card"], json.dumps(mit))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-mobile.png"))
     m.close()
 
 

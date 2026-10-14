@@ -1,0 +1,289 @@
+<template>
+  <div v-if="err" class="card">
+    <h2>数据没加载出来</h2>
+    <p class="dim">刷新一下试试；如果一直这样，请把这一页的地址发给我们。</p>
+    <button @click="boot">重试</button>
+  </div>
+
+  <template v-else-if="d">
+    <!-- 新站独有页（旧站已冻结，无对拍基准）。交互口径照站主拍板的原型
+         docs/prototypes/items-page-prototype.html：状态/分类/细分/等级区间/搜索/排序/分页。
+         数据全部来自 src/data/items.json（21,077 件全量名录），单源 L0：客户端解包经参考站转述。 -->
+    <div class="card">
+      <div class="cdhead noart big"><h1 class="pt">物品库</h1></div>
+      <p class="dim">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。
+        名录出自客户端解包（经<a :href="srcUrl" target="_blank" rel="noopener">新手盒子</a>转述，
+        {{ d.meta.fetched }} 取回），只记名称、品质、类型与等级这些事实，不含描述文案。
+        图标取自暴雪官方 CDN 本地转存，取不到的用占位块。</p>
+      <div class="stats readout">
+        <div class="stat"><b>{{ items.length }}</b>件全量</div>
+        <div class="stat"><b>{{ C.new }}</b>无限新增</div>
+        <div class="stat"><b>{{ C.changed }}</b>有改动</div>
+        <div class="stat"><b>{{ C.missing }}</b>无限中没有</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field irow">
+        <span class="flabel">状态</span>
+        <span class="kchips">
+          <button v-for="x in stChips" :key="x[0]" type="button" class="kchip"
+                  :class="{ on: st === x[0] }" :aria-pressed="st === x[0] ? 'true' : 'false'"
+                  @click="st = st === x[0] && x[0] ? '' : x[0]">{{ x[1] }} <b class="mono">{{ x[2] }}</b></button>
+        </span>
+      </div>
+      <div class="field irow">
+        <span class="flabel">分类</span>
+        <span class="kchips">
+          <button v-for="x in catChips" :key="x[0]" type="button" class="kchip"
+                  :class="{ on: cat === x[0] }" :aria-pressed="cat === x[0] ? 'true' : 'false'"
+                  @click="pickCat(x[0])">{{ x[1] }} <b class="mono">{{ x[2] }}</b></button>
+        </span>
+        <button type="button" class="reset" @click="reset">重置筛选</button>
+      </div>
+      <div class="field irow">
+        <span class="flabel">细分</span>
+        <span v-if="cat === '护甲'" class="kchips">
+          <button v-for="x in matChips" :key="x[0]" type="button" class="kchip"
+                  :class="{ on: mat === x[0] }" :aria-pressed="mat === x[0] ? 'true' : 'false'"
+                  @click="mat = mat === x[0] ? '' : x[0]; page = 1">{{ x[0] }} <b class="mono">{{ x[1] }}</b></button>
+        </span>
+        <select v-model="slot" aria-label="按部位筛" @change="page = 1">
+          <option value="">全部部位</option>
+          <option v-for="s in slotOpts" :key="s" :value="s">{{ s }}</option>
+        </select>
+        <span class="rng">物品等级
+          <input v-model.number="ilMin" type="number" min="1" placeholder="最低" aria-label="物品等级最低">
+          –
+          <input v-model.number="ilMax" type="number" min="1" placeholder="最高" aria-label="物品等级最高">
+        </span>
+        <select v-model="sort" aria-label="排序方式" @change="page = 1">
+          <option value="id">按编号</option>
+          <option value="ilvl-d">物品等级 高→低</option>
+          <option value="ilvl">物品等级 低→高</option>
+          <option value="rlvl">需要等级 低→高</option>
+          <option value="name">按名称</option>
+        </select>
+      </div>
+      <div class="field"><input v-model="qRaw" type="search" class="qsearch"
+             placeholder="搜物品名，比如：雷霆之怒、秘法、护腕…" aria-label="搜物品名"></div>
+    </div>
+
+    <div class="card" ref="tableCard">
+      <table class="itt">
+        <thead><tr><th>名称</th><th>类型 / 材质</th><th class="num">物品等级</th><th class="num">需要等级</th><th>状态</th><th class="num">编号</th></tr></thead>
+        <tbody>
+          <tr v-for="(x, i) in pageRows" :key="x.id" :style="{ animationDelay: Math.min(i * 14, 280) + 'ms' }">
+            <td data-k="名称">
+              <span class="icell"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" />
+                <span class="nm" :class="'q' + (x.quality || 0)"><HlText :text="x.name" :q="q" /></span></span>
+            </td>
+            <td data-k="类型">{{ typeText(x) }}</td>
+            <td class="num" data-k="物品等级">{{ x.ilvl == null ? '—' : x.ilvl }}</td>
+            <td class="num" data-k="需要等级">{{ x.rlvl == null ? '—' : x.rlvl }}</td>
+            <td data-k="状态"><span class="ist" :class="'ist-' + x.status">{{ STN[x.status] || x.status }}</span></td>
+            <td class="num" data-k="编号"><span class="iid">#{{ x.id }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="!rows.length" class="empty">这个筛选下没有条目。换个说法，或清掉几个筛选再试。</div>
+      <div v-if="pages > 1" class="pager">
+        <button type="button" :disabled="page === 1" @click="go(1)">«</button>
+        <button type="button" :disabled="page === 1" @click="go(page - 1)">‹</button>
+        <button v-for="p in pagerWin" :key="p" type="button" :class="{ on: p === page }" @click="go(p)">{{ p }}</button>
+        <button type="button" :disabled="page === pages" @click="go(page + 1)">›</button>
+        <button type="button" :disabled="page === pages" @click="go(pages)">»</button>
+        <span class="pinfo">共 {{ rows.length }} 件 · 第 {{ page }}/{{ pages }} 页</span>
+      </div>
+    </div>
+  </template>
+</template>
+
+<script setup>
+/* 物品库：全量名录的筛与查。一次载入 items.json（约 5MB，gzip 后小得多），
+   筛选/排序/分页全在本页内存里做——21,077 条线性扫一遍在毫秒级，不需要后端。
+   物品不进全站搜索索引（会把 search.json 撑大一倍），本页自带页内搜索；
+   ?q= 与 ?st= 仍接住：将来任何入口（更新说明、副本掉落反链）带着词跳进来都能落地。 */
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { load } from '../lib/data.js';
+import IconCell from '../components/IconCell.vue';
+import HlText from '../components/HlText.vue';
+
+const STN = { new: '新增', changed: '改动', rebuilt: '重建', same: '不变', missing: '无限中没有' };
+const ST_ORDER = ['new', 'changed', 'rebuilt', 'same', 'missing'];
+const PER = 50;
+const srcUrl = 'https://wowforever.wclbox.com/wupin';
+
+const route = useRoute();
+const d = ref(null);
+const err = ref('');
+const st = ref(String(route.query.st || ''));
+const cat = ref('');
+const mat = ref('');
+const slot = ref('');
+const ilMin = ref(null);
+const ilMax = ref(null);
+const q = ref(String(route.query.q || ''));
+const qRaw = ref(q.value);
+const sort = ref('id');
+const page = ref(1);
+const tableCard = ref(null);
+
+function boot() {
+  err.value = '';
+  load('data/items.json')
+    .then((r) => {
+      d.value = r;
+      // 带着状态或词跳进来时，筛好再给看，别让人自己点一遍
+      if (st.value && !ST_ORDER.includes(st.value)) st.value = '';
+    })
+    .catch((e) => { err.value = (e && e.message) || String(e); });
+}
+onMounted(boot);
+
+/* hash 路由同路径换 query 时组件复用（router-view 按 path 做 key），补齐重读 */
+watch(() => route.query, () => {
+  const nq = String(route.query.q || '');
+  const ns = String(route.query.st || '');
+  q.value = nq; qRaw.value = nq;
+  st.value = ST_ORDER.includes(ns) ? ns : '';
+  page.value = 1;
+});
+
+/* 搜索 150ms 防抖：输入框即时回显，筛选延迟生效 */
+let qTimer = 0;
+watch(qRaw, (v) => {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { q.value = v; page.value = 1; }, 150);
+});
+watch([st, cat, mat, slot, ilMin, ilMax], () => { page.value = 1; });
+
+const items = computed(() => (d.value && d.value.items) || []);
+const C = computed(() => ((d.value || {}).meta || {}).counts || {});
+const stChips = computed(() => {
+  const n = {};
+  items.value.forEach((x) => { n[x.status] = (n[x.status] || 0) + 1; });
+  return [['', '全部', items.value.length],
+    ...ST_ORDER.filter((k) => n[k]).map((k) => [k, STN[k], n[k]])];
+});
+const catChips = computed(() => {
+  const n = {};
+  items.value.forEach((x) => { n[x.cat] = (n[x.cat] || 0) + 1; });
+  return [['', '全部', items.value.length],
+    ...Object.keys(n).sort().map((k) => [k, k, n[k]])];
+});
+/* 材质只在护甲下有意义；部位跟着分类与材质走 */
+const matChips = computed(() => {
+  if (cat.value !== '护甲') return [];
+  const n = {};
+  items.value.forEach((x) => { if (x.cat === '护甲' && x.mat) n[x.mat] = (n[x.mat] || 0) + 1; });
+  return Object.keys(n).sort().map((k) => [k, n[k]]);
+});
+const slotOpts = computed(() => {
+  const s = new Set();
+  items.value.forEach((x) => {
+    if (x.slot && (!cat.value || x.cat === cat.value) && (!mat.value || x.mat === mat.value)) s.add(x.slot);
+  });
+  return [...s].sort();
+});
+function pickCat(v) {
+  cat.value = cat.value === v && v ? '' : v;
+  mat.value = ''; slot.value = '';
+}
+
+const rows = computed(() => {
+  const kw = q.value.trim().toLowerCase();
+  const lo = Number.isFinite(ilMin.value) ? ilMin.value : null;
+  const hi = Number.isFinite(ilMax.value) ? ilMax.value : null;
+  const xs = items.value.filter((x) =>
+    (!st.value || x.status === st.value) &&
+    (!cat.value || x.cat === cat.value) &&
+    (!mat.value || x.mat === mat.value) &&
+    (!slot.value || x.slot === slot.value) &&
+    (lo == null || (x.ilvl != null && x.ilvl >= lo)) &&
+    (hi == null || (x.ilvl != null && x.ilvl <= hi)) &&
+    (!kw || x.name.toLowerCase().indexOf(kw) >= 0));
+  const by = {
+    id: (a, b) => a.id - b.id,
+    'ilvl-d': (a, b) => ((b.ilvl || 0) - (a.ilvl || 0)) || a.id - b.id,
+    ilvl: (a, b) => ((a.ilvl == null ? 9999 : a.ilvl) - (b.ilvl == null ? 9999 : b.ilvl)) || a.id - b.id,
+    rlvl: (a, b) => ((a.rlvl == null ? 9999 : a.rlvl) - (b.rlvl == null ? 9999 : b.rlvl)) || a.id - b.id,
+    name: (a, b) => a.name.localeCompare(b.name, 'zh')
+  }[sort.value];
+  return xs.slice().sort(by);
+});
+const pages = computed(() => Math.max(1, Math.ceil(rows.value.length / PER)));
+const pageRows = computed(() => rows.value.slice((page.value - 1) * PER, page.value * PER));
+const pagerWin = computed(() => {
+  const w = [];
+  for (let p = Math.max(1, page.value - 2); p <= Math.min(pages.value, page.value + 2); p++) w.push(p);
+  return w;
+});
+watch(pages, (n) => { if (page.value > n) page.value = n; });
+
+function go(p) {
+  page.value = Math.min(Math.max(1, p), pages.value);
+  const el = tableCard.value;
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start' });
+}
+function reset() {
+  st.value = ''; cat.value = ''; mat.value = ''; slot.value = '';
+  ilMin.value = null; ilMax.value = null;
+  q.value = ''; qRaw.value = '';
+  sort.value = 'id'; page.value = 1;
+}
+function typeText(x) {
+  if (x.slot) return x.slot + (x.mat ? ' · ' + x.mat : '');
+  return x.cat === '其它' ? (x.mat || '—') : x.cat;
+}
+</script>
+
+<style scoped>
+/* 本页专属件：筛选行标签、状态章、分页器、清单表与移动端卡片化。
+   令牌全部取 tokens.css，不新开颜色（状态章三色照拍板的原型稿）。 */
+.irow{flex-wrap:wrap;align-items:center}
+.flabel{font-size:12px;color:var(--lead);flex:none;min-width:34px}
+.reset{margin-left:auto;background:none;border:1px solid var(--line);color:var(--lead);
+  font-size:12px;padding:6px 14px;cursor:pointer}
+.reset:hover{color:var(--gold);border-color:var(--gold)}
+.rng{display:flex;gap:6px;align-items:center;color:var(--lead);font-size:12.5px}
+.rng input{width:72px}
+.qsearch{width:100%;margin-top:2px}
+/* 状态章（ist：不与共享的溯源章 .st 混用） */
+.ist{font-size:10.5px;padding:1.5px 7px;letter-spacing:1px;white-space:nowrap}
+.ist-new{background:var(--gold);color:#1a1408;font-weight:700}
+.ist-changed{color:var(--azure);border:1px solid rgba(73,174,233,.5)}
+.ist-rebuilt{color:#c993e8;border:1px solid rgba(163,53,238,.55)}
+.ist-same{color:var(--lead);border:1px solid var(--line)}
+.ist-missing{color:#ff9b8f;border:1px solid rgba(199,92,92,.5)}
+/* 清单表 */
+.itt{width:100%;border-collapse:collapse;font-size:13.5px}
+.itt th{font-size:11.5px;color:var(--lead);font-weight:600;text-align:left;letter-spacing:1px;
+  padding:8px 10px;border-bottom:1px solid var(--gold-line,rgba(200,163,92,.3));white-space:nowrap}
+.itt td{padding:8px 10px;border-bottom:1px solid rgba(44,56,80,.45);vertical-align:middle}
+.itt tbody tr{animation:itn .3s ease both}
+.itt tbody tr:hover td{background:rgba(200,163,92,.05)}
+@keyframes itn{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.itt .num{text-align:right;font-family:var(--font-mono);color:var(--lead)}
+.itt .iid{color:var(--lead);opacity:.75;font-size:12px}
+.icell{display:flex;gap:10px;align-items:center;min-width:0}
+.icell .nm{min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.itt .q0{color:var(--q0)}
+/* 分页器 */
+.pager{display:flex;gap:6px;justify-content:center;align-items:center;margin-top:16px;flex-wrap:wrap}
+.pager button{background:var(--sunk);border:1px solid var(--line);color:var(--lead);
+  min-width:34px;height:32px;font:12.5px var(--font-mono);cursor:pointer}
+.pager button.on{background:var(--gold);color:#1a1408;font-weight:700;border-color:var(--gold)}
+.pager button:disabled{opacity:.35;cursor:default}
+.pinfo{color:var(--lead);font-size:12px;margin:0 8px}
+/* 移动端：行变卡（照拍板的原型稿，375px 不横滚） */
+@media (max-width:720px){
+  .itt thead{display:none}
+  .itt tbody tr{display:block;border:1px solid var(--line);margin:8px 0;background:var(--sunk)}
+  .itt td{border:0;display:flex;justify-content:space-between;gap:10px;padding:7px 12px}
+  .itt td::before{content:attr(data-k);color:var(--lead);font-size:11.5px;flex:none;align-self:center}
+  .itt td:first-child{padding-top:12px}
+  .itt td:last-child{padding-bottom:12px}
+}
+</style>

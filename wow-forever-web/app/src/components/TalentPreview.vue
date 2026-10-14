@@ -16,8 +16,8 @@
       <div class="treeleft">
         <div class="pv">
           <template v-for="(nd, i) in cells" :key="i">
-            <component v-if="nd" :is="linkFor(nodeFile(cid, ti, nd[2])).to ? 'router-link' : 'a'"
-                       v-bind="linkFor(nodeFile(cid, ti, nd[2]))"
+            <component v-if="nd" :is="linkForQ(nodeFile(cid, ti, nd[2])).to ? 'router-link' : 'a'"
+                       v-bind="linkForQ(nodeFile(cid, ti, nd[2]))"
                        class="pnode" :class="nd[5] ? 'chg-' + nd[5] : ''"
                        :title="nodeLabel(nd)" :aria-label="nodeLabel(nd)">
               <span class="ico-wrap">
@@ -47,7 +47,7 @@
             <b>{{ c.cn }}</b><span class="dim mono">{{ c.talentCount || 0 }} 天赋</span>
           </button>
         </div>
-        <component :is="linkFor(calcFile(cid, ti)).to ? 'router-link' : 'a'" v-bind="linkFor(calcFile(cid, ti))" class="cta">
+        <component :is="linkForQ(calcFile(cid, ti)).to ? 'router-link' : 'a'" v-bind="linkForQ(calcFile(cid, ti))" class="cta">
           打开{{ cnOf }} · {{ (trees[ti] || {}).n || '' }} 的完整计算器（能加点、能存方案）→
         </component>
       </aside>
@@ -57,11 +57,10 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { linkFor } from '../lib/nav.js';
+import { linkFor, linkForQ, legacyUrl } from '../lib/nav.js';
 import { tileStyle, iconUrl } from '../lib/glyph.js';
 import { gridCells, countStates, nodeLabel, nodeFile, calcFile, treeOf } from '../lib/preview.js';
 import { specArt } from '../lib/art.js';
-import { legacyUrl } from '../lib/nav.js';
 
 const legacy = legacyUrl;
 /* 点在卡里的链接、按钮、格子、职业条上时让给它们自己，只有点在空白处才按 data-go 跳

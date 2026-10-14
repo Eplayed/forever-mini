@@ -124,3 +124,6 @@
 | 对拍报差异 | 只改了一栈 | 两栈同一处一起改，或把有意差异登记进 `app-parity.py` 的 `INTENTIONAL` |
 | 页面上冒出"上游 / mapId / 本轮" | 新写的句子没过禁词表 | 按 `tools/copy-banned.json` 的 `why` 改成人话，别往表里加豁免 |
 | 搜索结果跳过去没筛好 | 那一页没接 `?q=` | 每加一个板块入口，就要在目标页接住词（`site-check.py` 第 17 节会红） |
+| `refresh.sh` 报 `set: pipefail\r: invalid option name` | 本机三条凑齐：`bash` 只有 WSL 入口（无 Git Bash）+ 仓库 `.sh` 是 CRLF 行尾 + 脚本里写 `python3` | 不修脚本不装 Git Bash：查该场景背后**等价的 python/node 单命令**直接跑（面板 8830 的门禁就是拆好的单命令）；完整链路要跑时走 WSL 侧或先统一行尾（2026-10-13 站主拍板：本机日常就用单命令口径） |
+
+**Windows 本机口径（2026-10-13 站主确认）**：数据操作在本机一律拆成 refresh.sh 背后的那条 python/node 单命令跑，`refresh.sh` 的多步链路（world/dungeons/check/publish 等）本机不跑；它的价值在把顺序写死，跑之前先照脚本把命令按顺序手打一遍。数据管线控制台（`python tools/admin/server.py`，127.0.0.1:8830，内部工具非玩家页面）就是按这个口径做的壳：只读 + 白名单单命令。

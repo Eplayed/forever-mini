@@ -58,7 +58,21 @@ describe('跳转与读数', () => {
 });
 
 describe('TalentPreview 组件', () => {
-  const ROUTER = { global: { stubs: { RouterLink: { props: ['to'], template: '<a><slot /></a>' } } } };
+  // 全量迁移后格子与 CTA 都是 router-link（站内 /talent）：stub 把 to 渲染成可断言的 href
+  const ROUTER = { global: { stubs: { RouterLink: {
+    props: ['to'],
+    computed: {
+      href() {
+        const t = this.to;
+        if (t && typeof t === 'object') {
+          const q = Object.keys(t.query || {}).map((k) => k + '=' + encodeURIComponent(t.query[k])).join('&');
+          return '#' + (t.path || '') + (q ? '?' + q : '');
+        }
+        return t;
+      }
+    },
+    template: '<a :href="href"><slot /></a>'
+  } } } };
 
   it('默认看第一个职业的第一系，格子数 = 数据里的节点 + 空格', () => {
     const w = mount(TalentPreview, { props: { preview: PV, classes: CLASSES }, ...ROUTER });
@@ -77,10 +91,10 @@ describe('TalentPreview 组件', () => {
     expect(w.find('.cta').text()).toContain('狂暴');
     w.unmount();
   });
-  it('每个格子都是进计算器的链接，标题写着这格是什么', () => {
+  it('每个格子都是进计算器的站内链接（带 c/tree/q），标题写着这格是什么', () => {
     const w = mount(TalentPreview, { props: { preview: PV, classes: CLASSES }, ...ROUTER });
     const n = w.find('.pnode');
-    expect(n.attributes('href')).toContain('talent.html?c=warrior&tree=0&q=');
+    expect(n.attributes('href')).toContain('#/talent?c=warrior&tree=0&q=');
     expect(n.attributes('aria-label')).toBe('强化英勇打击，上限 3 层；与经典旧世相比：改动');
     expect(n.classes()).toContain('chg-modified');
     w.unmount();
