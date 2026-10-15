@@ -1,12 +1,12 @@
 {
  "meta": {
-  "generatedAt": "2026-10-14",
+  "generatedAt": "2026-10-15",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
  "scale": {
-  "dungeonQuests": 367,
-  "dungeonQuestDungeons": 28,
+  "dungeonQuests": 396,
+  "dungeonQuestDungeons": 30,
   "professions": 13,
   "recipes": 1990,
   "recipesNew": 889,

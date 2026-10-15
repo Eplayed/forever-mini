@@ -1,17 +1,18 @@
 {
  "meta": {
   "generatedAt": "2026-10-13",
-  "method": "tools/merge-dungeon-quests.js 合 upstream 两份任务快照；优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。",
-  "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上。任务目标那句话与掉落概率都没采——第三方站只取名称与数字，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，本站没实测过。",
-  "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，没实测过。",
+  "method": "tools/merge-dungeon-quests.js 合 upstream 任务快照；优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。2026-10-14 起空任务座按 PLAN 第 4 节用 GearInsight_Forever DungeonQuestData 补（Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，只补空座，经验值该源没给）。",
+  "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上；个别座（挖掘场/达拉然）两份资料都没有，按 Wowhead 无限服数据的插件转述源补齐。任务目标那句话与掉落概率都没采——第三方站只取名称与数字，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，本站没实测过。",
+  "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，没实测过。GI 补的两座任务名来自 vmangos+游戏内现读，不是 wclbox 口径。",
   "counts": {
    "dungeons": 35,
-   "quests": 367,
+   "quests": 396,
    "xpFromWowhead": 11,
    "xpConflict": 2,
    "addedFromWowhead": 1,
    "deduped": 41,
-   "itemStart": 50
+   "itemStart": 50,
+   "fromGi": 29
   }
  },
  "dungeons": {
@@ -289,7 +290,190 @@
    ]
   },
   "whelgars-excavation": {
-   "quests": [],
+   "quests": [
+    {
+     "nameCn": "高地恐魔",
+     "nameEn": "Horrors in the Highland",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "绿色守护者瑞瑟尔",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "迷失在灌木丛中",
+     "nameEn": "Lost in the Thicket Things",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "凯特琳·格拉斯曼",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "龙喉传闻",
+     "nameEn": "Dragonmaw Rumors",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "萨鲁克",
+     "pickupZone": "阿拉希高地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "长者的学识",
+     "nameEn": "Elder Knowledge",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "打开巨口",
+     "nameEn": "Open the Maw",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "亡灵哨兵特工",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "口味变了",
+     "nameEn": "Changing Tastes",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "博斯坦",
+     "pickupZone": "奥格瑞玛",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找凯特琳",
+     "nameEn": "Seeking Caitlin",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "拉娜",
+     "pickupZone": "灰谷",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "寻找歌刃",
+     "nameEn": "Songblade Search",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "多林·歌刃",
+     "pickupZone": "赤脊山",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "倒在沼泽",
+     "nameEn": "Fallen in the Fen",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "心织",
+     "nameEn": "Heartwoven",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "失落圣物的运送",
+     "nameEn": "Lost Relic Carry",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "高地兽皮",
+     "nameEn": "Highland Hides",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "詹姆斯·哈洛兰",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "大地回响",
+     "nameEn": "Earthen Echo",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "巴珊娜·符文图腾",
+     "pickupZone": "雷霆崖",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "史前棱镜",
+     "nameEn": "Prehistoric Prism",
+     "questLevel": 24,
+     "reqLevel": 20,
+     "xp": null,
+     "pickupNpc": "勘察员维尔加",
+     "pickupZone": "湿地",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    }
+   ],
    "questItems": [],
    "questStarts": [],
    "summary": {
@@ -302,13 +486,215 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/excavation-site",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座任务表为空（无记录），任务数据按下一条转述源补齐",
+     "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://www.wowhead.com/forever/zone=16732/x",
+     "note": "任务名/等级/接取人取自 GearInsight_Forever 0.4.29 的 DungeonQuestData（自述源：Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，中文名 vmangos+游戏内现读）。直采该 zone 时任务名多为方括号「未记录」串，故走此转述源；该源没给经验值，经验列留空",
      "checkedAt": "2026-10-13"
     }
    ]
   },
   "city-of-dalaran": {
-   "quests": [],
+   "quests": [
+    {
+     "nameCn": "入室偷窃",
+     "nameEn": "Prison Break In",
+     "questLevel": 34,
+     "reqLevel": 30,
+     "xp": null,
+     "pickupNpc": "大法师沃迪恩·伍德格莱尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "达拉然巡逻队",
+     "nameEn": "Dalaran Patrols",
+     "questLevel": 35,
+     "reqLevel": 30,
+     "xp": null,
+     "pickupNpc": "大法师沃迪恩·伍德格莱尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "石雕",
+     "nameEn": "Stone Tokens",
+     "questLevel": 32,
+     "reqLevel": 30,
+     "xp": null,
+     "pickupNpc": "看守者贝瓦里尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "地缚护腕",
+     "nameEn": "Bracers of Binding",
+     "questLevel": 34,
+     "reqLevel": 30,
+     "xp": null,
+     "pickupNpc": "看守者贝瓦里尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "令人担忧的请求",
+     "nameEn": "An Alarming Request",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "使者雅克",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "血染街头",
+     "nameEn": "Blood in the Streets",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "大法师沃迪恩·伍德格莱尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "绿色样本",
+     "nameEn": "A Green Sample",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "希拉米尔",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "饥渴的奥术",
+     "nameEn": "Starving Arcane",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "大法师莫德拉的影像",
+     "pickupZone": "奥特兰克山脉",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "扰乱之心",
+     "nameEn": "Heart of Disruption",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "大法师莫德拉的影像",
+     "pickupZone": "奥特兰克山脉",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "力量压倒一切",
+     "nameEn": "Power Overwhelming",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "高阶巫师安德罗麦斯",
+     "pickupZone": "暴风城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "城市的钥匙",
+     "nameEn": "Key to the City",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "大法师沃迪恩·伍德格莱尔",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "扰乱之心",
+     "nameEn": "Heart of Disruption",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "大法师莫德拉的影像",
+     "pickupZone": "奥特兰克山脉",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "墓穴骑士",
+     "nameEn": "The Grave Knight",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "梅里萨拉",
+     "pickupZone": "希尔斯布莱德丘陵",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "趁机上课",
+     "nameEn": "Opportunistic Education",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": null,
+     "pickupZone": null,
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    },
+    {
+     "nameCn": "力量之源",
+     "nameEn": "Source of Power",
+     "questLevel": 28,
+     "reqLevel": 24,
+     "xp": null,
+     "pickupNpc": "马丁·费尔本",
+     "pickupZone": "幽暗城",
+     "startItem": null,
+     "preQuest": null,
+     "source": "gi",
+     "variants": 1
+    }
+   ],
    "questItems": [],
    "questStarts": [],
    "summary": {
@@ -321,7 +707,13 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/city-of-dalaran",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座任务表为空（无记录），任务数据按下一条转述源补齐",
+     "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://www.wowhead.com/forever/zone=16544/x",
+     "note": "任务名/等级/接取人取自 GearInsight_Forever 0.4.29 的 DungeonQuestData（自述源：Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，中文名 vmangos+游戏内现读）。直采该 zone 时任务名多为方括号「未记录」串，故走此转述源；该源没给经验值，经验列留空",
      "checkedAt": "2026-10-13"
     }
    ]
@@ -340,7 +732,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/the-drowned-city",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座没有任务记录，两份资料与转述源都没有",
      "checkedAt": "2026-10-13"
     }
    ]
@@ -359,7 +751,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/kroldok-stronghold",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座没有任务记录，两份资料与转述源都没有",
      "checkedAt": "2026-10-13"
     }
    ]
@@ -378,7 +770,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/alcaz-prison",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座没有任务记录，两份资料与转述源都没有",
      "checkedAt": "2026-10-13"
     }
    ]
@@ -397,7 +789,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/blackmaw-hold",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座没有任务记录，两份资料与转述源都没有",
      "checkedAt": "2026-10-13"
     }
    ]
@@ -416,7 +808,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/shapers-terrace",
-     "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+     "note": "该站此座没有任务记录，两份资料与转述源都没有",
      "checkedAt": "2026-10-13"
     }
    ]

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把两份上游任务数据合成成品文件 src/data/dungeon-quests.json。
+"""把上游任务数据合成成品文件 src/data/dungeon-quests.json。
 
 站主 2026-10-13 定的优先级：**wclbox 为准，wclbox 没有的按 wowhead 来。**
 落成三条规则（都在这个脚本里，页面不参与判断）：
@@ -8,6 +8,15 @@
      wowhead 那个原样留在 xpAlt 里（分歧不许被覆盖掉，溯源页交代）。
   2. wclbox 根本没给这个字段（新本的经验值全是空的）→ 用 wowhead 的，标 xpFrom=wowhead。
   3. wclbox 没列、wowhead 有的任务（洛丹伦废墟的「憎恶生物」）→ 补进来，标 source=wowhead。
+
+2026-10-14 加第三源（PLAN 第 4 节，只补空任务座）：wclbox 与 wowhead 都没有任务的两座
+（维尔加挖掘场 / 达拉然城），用 GearInsight_Forever 的 DungeonQuestData 补——它是
+Wowhead Forever 1.60.1 经 Dungeon Assistant 转手的转述源，中文名 vmangos+游戏内现读
+（判定见 docs/wow-infinite-sources.md 第十四节）。**只补空座，已有数据的座不掺 GI**：
+lbrs/ubrs 站内更全，ragefire 等级已按官方值定稿，掺了反而降级。wowhead 直采这两座
+zone 页时任务名多为方括号「未记录」串（见 upstream/wowhead-dungeon-quests.json 的
+collectedButNotUsable），所以空座只能走这条转述源。GI 没给经验值（xp=0 是占位），
+经验列留空不造假。
 
 顺带做两件清洗，都是上游原样搬上页面会出问题的地方：
   - wclbox 把"用物品开启的任务"的接取人写成「物品：憎恶头颅」——那不是 NPC，拆成 startItem。
@@ -26,6 +35,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "src", "data")
 WCL = os.path.join(D, "upstream", "wclbox-dungeon-quests.json")
 WH = os.path.join(D, "upstream", "wowhead-dungeon-quests.json")
+GIQ = os.path.join(D, "upstream", "gi-dungeon-quests.json")
+# GI 座键 → (wclbox 上游 slug, Wowhead Forever zone 页 url)。zone id 是站内直采时
+# 实测记下的（upstream/wowhead-dungeon-quests.json collectedButNotUsable）；url 挂
+# 数据系源头（Wowhead Forever 1.60.1），实际取数渠道是 GI 插件转述，见 provenance note。
+GI_SEATS = {
+    "excavation": ("excavation-site", "https://www.wowhead.com/forever/zone=16732/x"),
+    "dalaran": ("city-of-dalaran", "https://www.wowhead.com/forever/zone=16544/x"),
+}
+GI_SEATS_BY_WCL = {v[0]: (k, v[1]) for k, v in GI_SEATS.items()}
 OUT = os.path.join(D, "dungeon-quests.json")
 
 
@@ -73,9 +91,37 @@ def clean_quest(q):
     }
 
 
+def clean_gi_quest(q):
+    """GI DungeonQuestData 的任务行。xp=0 是它没给经验值的占位，不是 0 经验，
+    一律转成 None（页面缺格留空的口径），不造假。英文名它逐条自带。"""
+    npc = norm(q.get("pickupNpc"))
+    start_item = None
+    if npc and (npc.startswith("物品：") or npc.startswith("物品:")):
+        start_item = re.sub(r"^物品[：:]", "", npc).strip()
+        npc = None
+    xp = q.get("xp")
+    if xp == 0:
+        xp = None
+    return {
+        "nameCn": norm(q.get("name")),
+        "nameEn": norm(q.get("nameEn")),
+        "questLevel": q.get("questLevel"),
+        "reqLevel": q.get("reqLevel"),
+        "xp": xp,
+        "pickupNpc": npc,
+        "pickupZone": norm(q.get("pickupZone")),
+        "startItem": start_item,
+        "preQuest": norm(q.get("preQuest")),
+        "source": "gi",
+        "variants": 1,
+    }
+
+
 def main():
     wcl = load(WCL)
     wh = load(WH)
+    gi = load(GIQ)
+    gi_meta = gi.get("meta") or {}
     dg = load(os.path.join(D, "dungeons.json"))
     by_slug = {}
     for row in (dg.get("newDungeons") or []) + (dg.get("classicDungeons") or []):
@@ -87,7 +133,7 @@ def main():
 
     out = {}
     st = {"dungeons": 0, "quests": 0, "fromWowhead": 0, "addedFromWowhead": 0,
-          "xpKept": 0, "xpAlt": 0, "deduped": 0, "itemStart": 0}
+          "xpKept": 0, "xpAlt": 0, "deduped": 0, "itemStart": 0, "fromGi": 0}
 
     for slug, raw in (wcl.get("dungeons") or {}).items():
         our_id = by_slug.get(slug)
@@ -171,6 +217,20 @@ def main():
                            "source": "wowhead"})
             st["addedFromWowhead"] += 1
 
+        # GI 补空任务座（2026-10-14 PLAN 第 4 节）：wclbox 与 wowhead 都是 0 的两座，
+        # 用 GearInsight_Forever DungeonQuestData 整座填上。只动空座——已有数据的座
+        # 不掺（lbrs/ubrs 站内更全，ragefire 等级已按官方值定稿）。
+        gi_seat = GI_SEATS_BY_WCL.get(slug)
+        gi_used = False
+        if not quests and gi_seat:
+            gi_key, _zone_url = gi_seat
+            gi_d = (gi.get("dungeons") or {}).get(gi_key) or {}
+            for q in gi_d.get("quests") or []:
+                quests.append(clean_gi_quest(q))
+                st["fromGi"] += 1
+            if quests:
+                gi_used = True
+
         items = []
         for it in raw.get("questItems") or []:
             qn, fac = split_cell(it.get("对应任务"))
@@ -182,13 +242,25 @@ def main():
             starts.append({"npc": norm(s.get("任务发布者")), "zone": norm(s.get("位置")),
                            "quest": qn, "faction": fac})
 
+        if gi_used:
+            wcl_note = "该站此座任务表为空（无记录），任务数据按下一条转述源补齐"
+        elif quests:
+            wcl_note = "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）"
+        else:
+            wcl_note = "该站此座没有任务记录，两份资料与转述源都没有"
         prov = [{"type": "datamine_cn", "url": raw.get("url"),
-                 "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
+                 "note": wcl_note,
                  "checkedAt": wcl.get("meta", {}).get("scrapedAt")}]
         if whz and any(q.get("xpFrom") == "wowhead" or q.get("source") == "wowhead" for q in quests):
             prov.append({"type": "datamine_en", "url": whz.get("url"),
                          "note": "wclbox 没给的那几项经验值与任务，按站主定的顺序退到这份来源",
                          "checkedAt": wh.get("meta", {}).get("collectedAt")})
+        if gi_used:
+            prov.append({"type": "datamine_cn", "url": gi_seat[1],
+                         "note": "任务名/等级/接取人取自 GearInsight_Forever 0.4.29 的 DungeonQuestData"
+                                 "（自述源：Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，中文名 vmangos+游戏内现读）。"
+                                 "直采该 zone 时任务名多为方括号「未记录」串，故走此转述源；该源没给经验值，经验列留空",
+                         "checkedAt": gi_meta.get("fetched")})
 
         sumq, sumf, sumxp = None, None, None
         s = raw.get("questSummary") or {}
@@ -217,26 +289,30 @@ def main():
     doc = {
         "meta": {
             "generatedAt": wcl.get("meta", {}).get("scrapedAt"),
-            "method": "tools/merge-dungeon-quests.js 合 upstream 两份任务快照；"
-                      "优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。",
-            "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上。"
+            "method": "tools/merge-dungeon-quests.js 合 upstream 任务快照；"
+                      "优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。"
+                      "2026-10-14 起空任务座按 PLAN 第 4 节用 GearInsight_Forever DungeonQuestData 补"
+                      "（Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，只补空座，经验值该源没给）。",
+            "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上；"
+                        "个别座（挖掘场/达拉然）两份资料都没有，按 Wowhead 无限服数据的插件转述源补齐。"
                         "任务目标那句话与掉落概率都没采——第三方站只取名称与数字，本站掉落不写概率。"
                         "经验值是经典旧世的数字，无限服可能调整，本站没实测过。",
             "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。"
-                    "经验值是经典旧世的数字，无限服可能调整，没实测过。",
+                    "经验值是经典旧世的数字，无限服可能调整，没实测过。"
+                    "GI 补的两座任务名来自 vmangos+游戏内现读，不是 wclbox 口径。",
             "counts": {"dungeons": st["dungeons"], "quests": st["quests"],
                        "xpFromWowhead": st["fromWowhead"], "xpConflict": st["xpAlt"],
                        "addedFromWowhead": st["addedFromWowhead"], "deduped": st["deduped"],
-                       "itemStart": st["itemStart"]}
+                       "itemStart": st["itemStart"], "fromGi": st["fromGi"]}
         },
         "dungeons": out
     }
     io.open(OUT, "w", encoding="utf-8").write(json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
     c = doc["meta"]["counts"]
     print("已写 dungeon-quests.json：%d 座 / 任务 %d 条；经验值退到 wowhead %d 条 / 两源不一致留档 %d 条 / "
-          "补 wowhead 独有 %d 条 / 去重合并 %d 条 / 物品开启的任务 %d 条" % (
+          "补 wowhead 独有 %d 条 / GI 补空座 %d 条 / 去重合并 %d 条 / 物品开启的任务 %d 条" % (
               c["dungeons"], c["quests"], c["xpFromWowhead"], c["xpConflict"],
-              c["addedFromWowhead"], c["deduped"], c["itemStart"]))
+              c["addedFromWowhead"], c["fromGi"], c["deduped"], c["itemStart"]))
 
 
 if __name__ == "__main__":
