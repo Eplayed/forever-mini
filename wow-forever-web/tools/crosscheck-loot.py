@@ -140,10 +140,12 @@ def main():
             lines.append('### 仅解包有（物品 ID）')
             lines.append(', '.join(sorted(only_s, key=int)))
             lines.append('')
-        # 首领级口径差
+        # 首领级口径差（注意：按中文名字符串比对，GI 中文名是 vmangos 口径、站内是客户端
+        # 解包口径，译名差异会误报——2026-10-15 实抓复核两座时 4 个"缺失"里 3 个是译名差异；
+        # 这行结论只当初筛，定性前必须抓 wclbox 副本页逐名复核）
         gb, sb = set(g['bosses']), set(s_bosses)
         if gb - sb:
-            lines.append('GI 有掉落而站内首领名单没有的首领：%s' % '、'.join(sorted(gb - sb)))
+            lines.append('GI 有掉落而站内首领名单没有的首领（初筛，译名差异可能误报，需实抓复核）：%s' % '、'.join(sorted(gb - sb)))
             lines.append('')
     p = os.path.join(ROOT, 'docs', 'ITEMS-LOOT-CROSSCHECK-2026-10-14.md')
     with open(p, 'w', encoding='utf-8', newline='\n') as f:
