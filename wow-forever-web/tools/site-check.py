@@ -1639,6 +1639,7 @@ def test_home(browser, base):
         four: [...document.querySelectorAll('.four b')].map(e => +e.innerText),
         bar: (() => { const b2 = document.querySelector('#treecard .bar i');
           return b2 ? { w: b2.style.width, aria: (b2.parentElement.getAttribute('aria-label') || '') } : null; })(),
+        navItems: [...document.querySelectorAll('nav.main a')].map(e => e.innerText.trim()),
         badge: [...document.querySelectorAll('nav.main .nb')].map(e => ({
           t: e.textContent, on: e.parentElement.textContent.trim().slice(0, 6),
           aria: e.getAttribute('aria-label'), title: e.getAttribute('title') })),
@@ -1686,13 +1687,19 @@ def test_home(browser, base):
               "() => !document.querySelector('#treecard .note')"),
           json.dumps({"bar": st["bar"]}, ensure_ascii=False))
     # 角标不是手写的：app.js 拿 scale.navNew（「本站更新」最新一天的板块标签）去对导航项名字，
-    # 对得上才画。所以这里不能写死"只有一枚"，要按同一条规则核。
+    # 对得上才画、对不上就不画（app.js 原话："标签对不上导航项名字就不画，不硬凑"）。
+    # 2026-10-16 起这条不能再要求"至少一枚"：物品库只有新站有，旧站导航里根本没这一项，
+    # 那一轮更新在旧站首页就该画 0 枚——为了出角标去凑一个对得上的标签才是错的。
+    # 改成按同一条规则算期望：应画的 = 导航项名字 ∩ 最新一批标签，数量与名字都必须等。
     nav_new = sc.get("navNew") or []
-    bad_labels = {re.sub(r"新$", "", str(x["on"]).strip()) for x in st["badge"]}
+    nav_labels = [re.sub(r"新$", "", str(x)).strip() for x in st["navItems"] if str(x).strip()]
+    expect = sorted(l for l in set(nav_labels) if l in set(nav_new))
+    bad_labels = sorted({re.sub(r"新$", "", str(x["on"]).strip()) for x in st["badge"]})
     check("导航角标只挂在最新一批更新对得上的项上，且除颜色外带可读名",
-          len(st["badge"]) >= 1 and all(x["t"] == "新" and x["aria"] and x["title"] for x in st["badge"])
-          and bool(bad_labels) and bad_labels <= set(nav_new),
-          json.dumps({"角标项": sorted(bad_labels), "最新一批标签": nav_new}, ensure_ascii=False))
+          bad_labels == expect and len(st["badge"]) == len(expect)
+          and all(x["t"] == "新" and x["aria"] and x["title"] for x in st["badge"]),
+          json.dumps({"角标项": bad_labels, "应画": expect,
+                      "最新一批标签": nav_new}, ensure_ascii=False))
     # 1440px 实拍才会发现：树按 360px 摆时右栏只剩 176px，三列职业格把「战士」拆成两行
     check("预览卡右栏够宽，职业名不被拆成两行",
           st["railW"] >= 200 and st["stripH"] and max(st["stripH"]) <= 20,
