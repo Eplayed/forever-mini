@@ -1014,40 +1014,76 @@ if (fs.existsSync(itPath)) {
   warns.push('items.json 缺失：物品库页将空态（跑 tools/scrape-wclbox-items.py + tools/merge-items.py 生成）');
 }
 
-// ---------- 物品详情（物品线二批，方案 A，2026-10-14 站主拍板） ----------
+// ---------- 物品详情（物品线二批：方案 A + W2-3 全量后重排层级，2026-10-15 站主拍板） ----------
 // 独立文件只有详情抽屉懒加载，不进 search.json、不进小程序导出。字段全部事实性
 // （属性/卖价/出处），描述正文与概率不收；禁词扫描自动覆盖本文件，这里查结构。
+// 属性与卖价取值顺序：无限测试版客户端解包 > Beta 实测掉落转述 > 社区整理稿。
 const itdPath = path.join(ROOT, 'items-detail.json');
 if (fs.existsSync(itdPath)) {
   const itd = JSON.parse(fs.readFileSync(itdPath, 'utf8'));
   const itdItems = itd.items || {};
   const ids = Object.keys(itdItems);
-  // its 在上面物品段的作用域里，这里自己读名录（items-detail 由 items.json 派生，缺失即结构错）
-  const baseIds = new Set(JSON.parse(fs.readFileSync(itPath, 'utf8')).items.map((x) => x.id));
+  // 名录在这里干两件事：当 id 白名单，也当"这件在无限客户端里到底还有没有"的状态来源
+  const baseList = JSON.parse(fs.readFileSync(itPath, 'utf8')).items;
+  const baseIds = new Set(baseList.map((x) => x.id));
+  const baseStatus = {};
+  baseList.forEach((x) => { baseStatus[x.id] = x.status; });
   const unknown = ids.filter((id) => !baseIds.has(Number(id)));
   if (unknown.length) errs.push(`items-detail：${unknown.length} 个 id 不在 items.json 名录里（如 ${unknown.slice(0, 3).join('、')}）`);
   const SRC_WHITELIST = ['dungeon', 'quest'];
-  let badSt = 0, badSell = 0, badSrc = 0, rateHit = 0;
+  const ST_FROM = ['wclbox', 'gi', 'xr'];
+  const SELL_FROM = ['wclbox', 'xr'];
+  let badSt = 0, badSell = 0, badSrc = 0, rateHit = 0, badStFrom = 0, badSellFrom = 0;
+  let flavor = 0, missingAsForever = 0, badUse = 0;
   for (const id of ids) {
     const r = itdItems[id] || {};
     if (r.st !== undefined && (!Array.isArray(r.st) || r.st.some((s) => typeof s !== 'string'))) badSt++;
+    // 教益句是一段一句的纯文本，且必须是去过引号的原文（带引号就是风味句漏进来了）
+    if (r.use !== undefined && (typeof r.use !== 'string' || /^[“"]|[”"]$/.test(r.use.trim()))) badUse++;
+    if (r.useFrom !== undefined && ['gi', 'xr'].indexOf(r.useFrom) < 0) badUse++;
     if (r.sell !== undefined && (typeof r.sell !== 'string' || /%/.test(r.sell))) badSell++;
     if (r.src !== undefined && SRC_WHITELIST.indexOf(r.src) < 0) badSrc++;
     if (/掉率|掉落概率/.test(JSON.stringify(r))) rateHit++;
-    if (r.stFrom !== undefined && ['gi', 'xr'].indexOf(r.stFrom) < 0) badSrc++;
+    if (r.stFrom !== undefined && ST_FROM.indexOf(r.stFrom) < 0) badStFrom++;
+    if (r.sellFrom !== undefined && SELL_FROM.indexOf(r.sellFrom) < 0) badSellFrom++;
+    // 红线：tooltip 里"整行被引号包住"的那种风味框（"血色十字军领袖之剑"）不是事实字段。
+    // 只拦整行引号——"使用：为角色解锁“炼金师”头衔"这类功能句里的引号是内容本身，不能误删。
+    // wclbox 抓取阶段已按 .wp-flavor 丢过，GI/XR 两份是 2026-10-16 才在这条闸上被发现夹了 142 行，
+    // 合并层同样剔除，这里做第二道闸（上游快照仍留着原文，删除可回退）。
+    (r.st || []).forEach((s) => { if (/^[“"](.*)[”"]$/.test(s.trim())) flavor += 1; });
+    // 名录标「无限中没有」的那些件，属性只能来自实测/社区稿；拿经典侧的数值冒充无限的数是编造。
+    if (r.stFrom === 'wclbox' && baseStatus[Number(id)] === 'missing') missingAsForever += 1;
   }
   if (badSt) errs.push(`items-detail：${badSt} 条 st 不是字符串数组`);
+  if (badUse) errs.push(`items-detail：${badUse} 条 use/useFrom 不对（use 要是不带引号的一句话，useFrom 只允许 gi/xr）`);
   if (badSell) errs.push(`items-detail：${badSell} 条 sell 不是字符串或含百分号`);
-  if (badSrc) errs.push(`items-detail：${badSrc} 条 src/stFrom 越界（只允许 dungeon/quest 与 gi/xr）`);
+  if (badSrc) errs.push(`items-detail：${badSrc} 条 src 越界（只允许 dungeon/quest）`);
+  if (badStFrom) errs.push(`items-detail：${badStFrom} 条 stFrom 越界（只允许 wclbox/gi/xr）`);
+  if (badSellFrom) errs.push(`items-detail：${badSellFrom} 条 sellFrom 越界（只允许 wclbox/xr）`);
+  if (flavor) errs.push(`items-detail：${flavor} 行属性里带中文引号（那是风味描述，红线不收）`);
+  if (missingAsForever) errs.push(`items-detail：${missingAsForever} 件名录标「无限中没有」却按无限解包取属性`);
   if (rateHit) errs.push(`items-detail：${rateHit} 条出现掉率措辞（红线）`);
   const c = (itd.meta || {}).counts || {};
   if (ids.length !== c.total) errs.push(`items-detail：条数 ${ids.length} 与 meta.counts.total ${c.total} 对不上`);
   const nSt = ids.filter((id) => itdItems[id].st).length;
   if (nSt !== c.st) errs.push(`items-detail：属性条数 ${nSt} 与 meta.counts.st ${c.st} 对不上`);
-  console.log('物品详情：' + ids.length + ' 件（属性 ' + nSt + ' · 卖价 ' + c.sell + ' · 出处 ' + c.src
-    + ' · 两源差异留档 ' + c.conflicts + ' · 名录外孤儿 ' + c.orphans + '）·懒加载不改列表页');
+  const nSell = ids.filter((id) => itdItems[id].sell).length;
+  if (nSell !== c.sell) errs.push(`items-detail：卖价条数 ${nSell} 与 meta.counts.sell ${c.sell} 对不上`);
+  const nUse = ids.filter((id) => itdItems[id].use).length;
+  if (nUse !== c.use) errs.push(`items-detail：教益句 ${nUse} 件与 meta.counts.use ${c.use} 对不上`);
+  const nWb = ids.filter((id) => itdItems[id].stFrom === 'wclbox').length;
+  if (c.stWb === undefined && nWb === 0) {
+    errs.push('items-detail：这份还是只有两份插件源的旧版（W2-3 全量没进来）——'
+      + '跑 tools/scrape-wclbox-items-detail.py 再跑 tools/merge-items-detail.py 重生成');
+  } else if (nWb !== c.stWb) {
+    errs.push(`items-detail：按无限解包取属性的 ${nWb} 件与 meta.counts.stWb ${c.stWb} 对不上`);
+  }
+  console.log('物品详情：' + ids.length + ' 件（属性 ' + nSt + '：无限解包 ' + c.stWb + ' / 实测 ' + c.stGi
+    + ' / 社区稿 ' + c.stXr + ' · 教益句 ' + nUse + ' · 卖价 ' + nSell + ' · 出处 ' + c.src
+    + ' · 数值真不同留档 ' + c.conflicts + ' · 只是写法不同 ' + c.formatOnly
+    + ' · 名录外孤儿 ' + c.orphans + '）·懒加载不改列表页');
 } else {
-  warns.push('items-detail.json 缺失：物品库详情抽屉将是空态（跑 tools/extract-addon-items-detail.py + tools/merge-items-detail.py 生成）');
+  warns.push('items-detail.json 缺失：物品库详情抽屉将是空态（跑 tools/extract-addon-items-detail.py + tools/scrape-wclbox-items-detail.py + tools/merge-items-detail.py 生成）');
 }
 
 // ---------- 全站搜索索引 ----------
@@ -1344,11 +1380,16 @@ if (fs.existsSync(relPath)) {
   const items = rel.items || [];
   if (!items.length) errs.push('releases：一条更新说明都没有，动态页那块会空着');
   let known = null;
+  let fullShas = null;
   try {
     const cp = require('child_process');
-    known = new Set(cp.execSync('git log --pretty=format:%h', {
+    // 短号长度是 git 按本地仓库对象数临时定的（同一个仓库重新克隆就可能从 7 位变 8 位），
+    // 所以这里不按 %h 比字符串——那样换台机器就满屏"提交找不到"。改成拿完整号做前缀匹配：
+    // 台账里写 7 位还是 8 位都能回查，前提是它真在这条历史里。
+    fullShas = cp.execSync('git log --pretty=format:%H', {
       cwd: path.join(ROOT, '..', '..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']
-    }).trim().split('\n'));
+    }).trim().split('\n');
+    known = new Set(fullShas);
   } catch (e) {
     warns.push('releases：拿不到 git 历史，这一轮没核对提交号是否真存在');
   }
@@ -1357,7 +1398,9 @@ if (fs.existsSync(relPath)) {
     if (!x.title || x.title.length > 130) errs.push(`releases #${i}：标题缺失或超过 130 字`);
     if (!(x.tags || []).length) errs.push(`releases #${i}：没有板块标签`);
     if (!x.commit) errs.push(`releases #${i}：没写对应提交，等于一句没法回查的话`);
-    else if (known && !known.has(x.commit)) errs.push(`releases #${i}：提交 ${x.commit} 在仓库里找不到`);
+    else if (!/^[0-9a-f]{7,40}$/.test(x.commit)) errs.push(`releases #${i}：提交号「${x.commit}」不成个号（要 7 位以上十六进制）`);
+    else if (known && !known.has(x.commit) && !fullShas.some((s) => s.indexOf(x.commit) === 0))
+      errs.push(`releases #${i}：提交 ${x.commit} 在仓库里找不到`);
   });
   scale.releases = items.length;
   /* 导航角标不手写：拿「本站更新」里最新一天的标签当"本版新增"，往前再数三天当"近期更新"。

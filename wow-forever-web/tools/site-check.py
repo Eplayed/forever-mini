@@ -2083,6 +2083,122 @@ def test_app(browser, base):
     page.wait_for_timeout(300)
     check("新站物品详情抽屉：点遮罩能关",
           page.evaluate("() => !document.querySelector('.idrawer')"), "已关")
+
+    # —— W2-3 全量后的层级核对（2026-10-16）：属性与卖价的取值顺序换成
+    #    无限测试版客户端解包 > Beta 实测掉落 > 社区整理稿，而且三份的覆盖范围不一样，
+    #    所以玩家能看出"这一条是按哪一份补的"就是硬要求：徽标必须与数据里的 stFrom/sellFrom 对齐。
+    #    这张表与 ItemsPage.vue 的 FROMN 是同一份文字（页面文案不在数据里，只能两处各写一遍、
+    #    在这里钉住）——改了页面不改这里，断言会红。
+    FROMN = {"wclbox": "无限测试版 · 客户端解包", "gi": "beta 实测 · GearInsight 转述",
+             "xr": "社区整理 · XR 助手转述"}
+    itd_all = json.load(open(os.path.join(SRC, "data", "items-detail.json"), encoding="utf-8"))
+    itd_items = itd_all["items"]
+    st_from = {}
+    for x in it:
+        r = itd_items.get(str(x["id"])) or {}
+        if r.get("stFrom"):
+            st_from.setdefault(r["stFrom"], []).append(x)
+    picks = []
+    for key in ("wclbox", "gi", "xr"):
+        cand = [x for x in st_from.get(key, [])
+                if name_count.get(x["name"]) == 1 and len((itd_items.get(str(x["id"])) or {}).get("st", [])) >= 2]
+        if cand:
+            picks.append((key, cand[0]))
+    check("物品详情三份来源都还有人看得见（不是只剩一份在撑页面）",
+          len(picks) >= 2, "可各抽一件的来源：" + ",".join(k for k, _ in picks))
+    for key, x in picks:
+        page.fill(".qsearch", x["name"])
+        page.wait_for_timeout(800)
+        page.click(".itt tbody tr:first-child")
+        page.wait_for_timeout(1100)
+        dr2 = page.evaluate("""() => { const d = document.querySelector('.idrawer');
+          if (!d) return null;
+          const sec = [...d.querySelectorAll('.idsec')].map((s) => ({
+            h: (s.querySelector('.idh3') || {}).innerText || '',
+            badge: (s.querySelector('.idbadge') || {}).innerText || '',
+            rows: s.querySelectorAll('.idl li').length }));
+          return { name: (d.querySelector('.idt .nm') || {}).innerText.trim(), sec: sec,
+                   note: (d.querySelector('.idnote') || {}).innerText || '' }; }""")
+        got = next((s for s in (dr2 or {}).get("sec", []) if s["h"].startswith("属性")), None)
+        check("物品详情「%s」这一件按%s补：徽标写的就是%s" % (x["name"], key, FROMN[key]),
+              bool(dr2) and dr2["name"] == x["name"] and got and FROMN[key] in got["badge"]
+              and got["rows"] == len(itd_items[str(x["id"])]["st"]),
+              json.dumps(got, ensure_ascii=False)[:160])
+        if key == "wclbox":
+            # 抽屉底部那段口径说明改成从数据里取（meta.pageNote），页面不再另抄一份文案，
+            # 这条断言钉住"改了源，页面跟着变"
+            check("抽屉那段来源说明取自数据里的 pageNote，页面没另抄一份",
+                  (dr2 or {}).get("note", "").strip() == (itd_all["meta"].get("pageNote") or "").strip()
+                  and len((dr2 or {}).get("note", "")) > 30,
+                  json.dumps((dr2 or {}).get("note", ""), ensure_ascii=False)[:150])
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-%s.png" % key))
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(250)
+        page.fill(".qsearch", "")
+        page.wait_for_timeout(500)
+    # 名录标「无限中没有」而详情仍有属性的那些件：值只能来自实测或社区稿，挂上"无限测试版"的标
+    # 就等于拿经典旧世的提示框冒充无限的数值（红线：不许编）。这类件在详情里有一千多件。
+    miss = [x for x in it if x.get("status") == "missing"
+            and (itd_items.get(str(x["id"])) or {}).get("st") and name_count.get(x["name"]) == 1]
+    miss_wb = [x for x in miss if (itd_items.get(str(x["id"])) or {}).get("stFrom") == "wclbox"]
+    check("数据层就没有「无限中没有却按无限解包取属性」的件",
+          not miss_wb, "%d 件（应 0）" % len(miss_wb))
+    if miss:
+        x = miss[0]
+        page.fill(".qsearch", x["name"])
+        page.wait_for_timeout(800)
+        page.click(".itt tbody tr:first-child")
+        page.wait_for_timeout(1100)
+        got3 = page.evaluate("""() => { const d = document.querySelector('.idrawer');
+          if (!d) return null;
+          const s = [...d.querySelectorAll('.idsec')].find((e) => (e.querySelector('.idh3') || {}).innerText.startsWith('属性'));
+          return s ? (s.querySelector('.idbadge') || {}).innerText : null; }""")
+        check("名录标无限中没有的「%s」在页面上没冒充无限解包" % x["name"],
+              bool(got3) and FROMN["wclbox"] not in got3, json.dumps(got3, ensure_ascii=False)[:120])
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(250)
+    # —— 教益句那一段：图样/秘典/公式/设计图这类件，客户端把"教你学会制作X"放在斜体风味框里，
+    #    参考站按类名把它当风味句丢、插件源整句带引号抄回。直接一刀切引号会让 1,197 件
+    #    只剩"需要工程学 (125)"这种行（比上一版还倒退），所以它单独成段、单独标来源。
+    use_rows = {k: v for k, v in itd_items.items() if v.get("use")}
+    check("教益句收进了成品（图样/秘典那类件不再只剩一句需求等级）",
+          len(use_rows) >= 1000, "%d 件" % len(use_rows))
+    pick_u = next((x for x in it if str(x["id"]) in use_rows and name_count.get(x["name"]) == 1), None)
+    if pick_u:
+        page.fill(".qsearch", pick_u["name"])
+        page.wait_for_timeout(800)
+        page.click(".itt tbody tr:first-child")
+        page.wait_for_timeout(1100)
+        u = page.evaluate("""() => { const d = document.querySelector('.idrawer');
+          if (!d) return null;
+          const s = [...d.querySelectorAll('.idsec')].find((e) => (e.querySelector('.idh3') || {}).innerText.startsWith('学会'));
+          return s ? { v: (s.querySelector('.idv') || {}).innerText,
+                       badge: (s.querySelector('.idbadge') || {}).innerText } : null; }""")
+        exp_u = use_rows[str(pick_u["id"])]
+        check("「%s」的教益句按数据原样显示，并写明出自哪一份" % pick_u["name"],
+              bool(u) and u["v"] == exp_u["use"] and u["badge"] in (FROMN["gi"], FROMN["xr"]),
+              json.dumps(u, ensure_ascii=False)[:170])
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-use.png"))
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(250)
+    # 整行引号的文案一条都不该出现在成品里（风味句），教益句则必须是去过引号的
+    still_quoted = [s for r in itd_items.values() for s in ((r.get("st") or []) + [r.get("use") or ""])
+                    if s and ((s.strip().startswith("“") and s.strip().endswith("”"))
+                              or (s.strip().startswith('"') and s.strip().endswith('"')))]
+    check("成品里没有整行带引号的文案（风味句红线；教益句已去引号）",
+          not still_quoted, "%d 行（应 0）" % len(still_quoted))
+    body_itd = page.evaluate("() => document.querySelector('#main').innerText")
+    check("物品库说明已跟着改口：不再写「由两份客户端数据补齐」",
+          "两份客户端数据" not in body_itd, "正文干净")
+    # 风味句的尺子与 build-data 同一把：**整行**被引号包住的才算（"使用：解锁“炼金师”头衔"
+    # 这类句中引号是功能文本本身，留着是对的，一刀切会把 8 条真信息删掉）。
+    quoted_whole = [s for r in itd_items.values() for s in (r.get("st") or [])
+                    if s.strip().startswith("“") and s.strip().endswith("”")]
+    quoted_inner = [s for r in itd_items.values() for s in (r.get("st") or [])
+                    if "“" in s and s not in quoted_whole]
+    check("物品详情抽屉不带整行引号的风味句（红线）",
+          not quoted_whole, "%d 行整句引号 / 另有 %d 行是句中引号（功能文本，允许）"
+          % (len(quoted_whole), len(quoted_inner)))
     page.fill(".qsearch", "")
     page.wait_for_timeout(700)
     page.screenshot(path=os.path.join(SHOT_DIR, "app-items.png"))

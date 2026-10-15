@@ -14,7 +14,8 @@
       <p class="dim">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。
         名录出自客户端解包（经<a :href="srcUrl" target="_blank" rel="noopener">新手盒子</a>转述，
         {{ d.meta.fetched }} 取回），只记名称、品质、类型与等级这些事实；点任意一行可看详情——
-        属性、卖价与出处由两份客户端数据补齐，没有的那一段就不显示。
+        属性与卖价按当前测试版客户端补齐，客户端里没有的回落到实测掉落记录与社区整理稿；
+        出处按 Beta 实测掉落记录补。没有的那一段就不显示。
         图标取自暴雪官方 CDN 本地转存，取不到的用占位块。</p>
       <div class="stats readout">
         <div class="stat"><b>{{ items.length }}</b>件全量</div>
@@ -100,9 +101,9 @@
       </div>
     </div>
 
-    <!-- 详情抽屉（物品线二批，方案 A）：首次点行才拉 items-detail.json，列表页首屏零负担。
-         字段来源固定——属性按 stFrom 标注（GI 实测转述优先 / XR 社区稿兜底）、
-         卖价只有 XR 有、出处只有 GI 有；两份都没有的就不显示那一段，不摆占位。 -->
+    <!-- 详情抽屉（物品线二批，方案 A + W2-3 全量后重排层级）：首次点行才拉 items-detail.json，列表页首屏零负担。
+         属性与卖价按"无限测试版客户端解包 → Beta 实测 → 社区整理稿"取值，徽标写明这一条出自哪一份；
+         出处（哪座本、哪个首领）只有实测掉落记录有；三份都没有的就不显示那一段，不摆占位。 -->
     <div v-if="sel" class="idmask" @click="close"></div>
     <aside v-if="sel" class="idrawer" role="dialog" aria-modal="true" :aria-label="sel.name + ' 详情'">
       <div class="idh">
@@ -120,12 +121,16 @@
       <template v-else>
         <div v-if="rec && rec.st && rec.st.length" class="idsec">
           <h3 class="idh3">属性 / 提示
-            <span class="idbadge">{{ rec.stFrom === 'gi' ? 'beta 实测 · GearInsight 转述' : '社区整理 · XR 助手转述' }}</span>
+            <span class="idbadge">{{ FROMN[rec.stFrom] || '客户端数据' }}</span>
           </h3>
           <ul class="idl"><li v-for="(s, i) in rec.st" :key="i">{{ s }}</li></ul>
         </div>
+        <div v-if="rec && rec.use" class="idsec">
+          <h3 class="idh3">学会 / 启动 <span class="idbadge">{{ FROMN[rec.useFrom] || '客户端数据' }}</span></h3>
+          <div class="idv">{{ rec.use }}</div>
+        </div>
         <div v-if="rec && rec.sell" class="idsec">
-          <h3 class="idh3">卖价 <span class="idbadge">社区整理 · XR 助手转述</span></h3>
+          <h3 class="idh3">卖价 <span class="idbadge">{{ FROMN[rec.sellFrom] || FROMN.xr }}</span></h3>
           <div class="idv">{{ rec.sell }}</div>
         </div>
         <div v-if="rec && rec.src" class="idsec">
@@ -134,7 +139,8 @@
         </div>
         <div v-if="!rec" class="idempty">这一件的详情还没收录。</div>
       </template>
-      <p class="dim idnote">详情由两份客户端数据补齐：属性与出处按 beta 解包与实测掉落（GearInsight 无限版转述），卖价按社区整理稿（XR 全能助手转述）。</p>
+      <!-- 这段说明由合并脚本写在数据里（meta.pageNote），页面不另抄一份，避免改了源忘了改文案 -->
+      <p v-if="itd && itd.meta" class="dim idnote">{{ itd.meta.pageNote }}</p>
     </aside>
   </template>
 </template>
@@ -155,6 +161,13 @@ const ST_ORDER = ['new', 'changed', 'rebuilt', 'same', 'missing'];
 const PER = 50;
 const srcUrl = 'https://wowforever.wclbox.com/wupin';
 const SRCN = { dungeon: '地下城', quest: '任务' };
+/* 属性与卖价各按哪一份补的：抽屉里逐条标出来，顺序就是取值顺序——
+   无限测试版客户端解包 → Beta 实测掉落 → 社区整理稿（站主 2026-10-15 拍板的重排）。 */
+const FROMN = {
+  wclbox: '无限测试版 · 客户端解包',
+  gi: 'beta 实测 · GearInsight 转述',
+  xr: '社区整理 · XR 助手转述'
+};
 
 const route = useRoute();
 const d = ref(null);
