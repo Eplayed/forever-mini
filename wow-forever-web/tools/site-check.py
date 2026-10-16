@@ -873,6 +873,8 @@ def test_races(browser, base):
     check("导航一级只剩分组标签", labels == ["天赋", "职业", "种族", "世界", "专业", "工具"], str(labels))
     # 导航二级项是一份对外契约，逐项写死比"数量等于页数+1"更能说明预期：
     # 2026-10-12 用户实拍后撤了「技能书」与「特长」两格（页面本身还在，见 NO_NAV_ENTRY）。
+    # **2026-10-16 起这一份是旧站的（已冻结）**：新站导航收窄成 11 格，两栈有意不同，
+    # 别把这里改成跟新站对齐，也别把新站那 7 格补回来——新站的钉在 [16] 节 test_app 里。
     NAV_ENTRIES = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
                    "区域与稀有", "成就", "副本", "团本", "系统规则", "配方",
                    "速查", "时间表", "动态", "排行", "溯源"]
@@ -2208,6 +2210,44 @@ def test_app(browser, base):
     if not reachable:
         return
     check("新站可访问", True, APP_BASE)
+    # ---- 新站导航收窄（2026-10-16 站主：世界只留三格、工具只留排行）----
+    # 旧站那条 17 格的断言故意不动——旧站已冻结，两栈的导航**从此有意不同**。
+    # 这里钉的是新站这一份：名字与顺序逐项比，摘掉的七格不许被"顺手同步"补回来。
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    page.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    app_subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
+                             ".map(a => a.textContent.trim())")
+    APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
+               "区域与稀有", "副本", "团本", "配方", "排行"]
+    check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
+          "%d 项：%s" % (len(app_subs), app_subs))
+    check("世界与工具两组按收窄后的口径（3 格 / 1 格）",
+          page.evaluate("""() => { const g = [...document.querySelectorAll('nav.main .ngrp')];
+            const of = (n) => { const b = g.find(x => (x.querySelector('.ngt')||{}).textContent === n);
+              return b ? b.querySelectorAll('a.nl').length : -1; };
+            return [of('世界'), of('工具')]; }""") == [3, 1])
+    # 被摘掉导航的页不许成孤页：物品库与成就靠首页那行"更多入口"进（旧站没有物品库这一页，
+    # 所以这一行必须走站内路由而不是写死旧站地址——写死就是 404）。
+    page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    page.wait_for_timeout(1800)
+    chips = page.evaluate("() => [...document.querySelectorAll('.chipsrow a')]"
+                          ".map(a => ({ t: a.textContent.trim(), h: a.getAttribute('href') || '' }))")
+    want = {"#/items": "物品库", "#/achievements": "成就"}
+    got = {c["h"]: c["t"] for c in chips}
+    miss = [v for k, v in want.items() if k not in got]
+    check("首页那行入口补上了被摘导航的物品库与成就", not miss,
+          "缺 %s ／ 现有 %s" % (miss or "无", [c["t"] for c in chips]))
+    bad = [k for k in got if not k.startswith("#/")]
+    check("首页那行入口全走站内路由（不回落已冻结的旧站）", not bad, "回旧站：%s" % (bad or "无"))
+    counts = [got[k] for k in want if k in got]
+    sc2 = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    check("那两格带的数是 scale.json 算出来的，不是手抄",
+          str(sc2["items"]) in got.get("#/items", "") and str(sc2["achievements"]) in got.get("#/achievements", ""),
+          " / ".join(counts) + "（数据 items %s、achievements %s）" % (sc2["items"], sc2["achievements"]))
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-nav-narrow.png"))
+    ctx.close()
     for label, path, key in pages:
         ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
         page = ctx.new_page()

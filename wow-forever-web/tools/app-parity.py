@@ -183,6 +183,9 @@ def report(all_rows, strict):
     lines = [u"# 新旧站对拍 · %s（wow-dev）" % datetime.date.today().isoformat(), u"",
              u"脚本：`python3 tools/app-parity.py`。旧站 %s（`src/`），新站 %s（`app/dist`，vite preview）。" % (LEGACY, APP),
              u"对拍口径：结构计数、类名集合、正文文本行、图片与链接。差异要么是有意为之（写进「有意差异」），要么就是迁坏了。", u"",
+             u"**已知有意差异（不用逐页看）**：2026-10-16 站主把新站导航收窄成 11 格（世界只留区域与稀有/副本/团本，"
+             u"工具只留排行），旧站已冻结保持 17 格。所以**每一页都会报「链接只在旧站有」成就、系统规则、物品库、"
+             u"速查、时间表、动态、溯源这几条**——那是导航带上的差，不是页面内容丢了。", u"",
              u"## 逐页结果", u""]
     for key, tab, A, B in all_rows:
         dc = {k: (A["count"][k], B["count"][k]) for k in SELECTORS if A["count"][k] != B["count"][k]}

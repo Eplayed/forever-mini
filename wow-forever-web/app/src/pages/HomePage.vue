@@ -107,7 +107,10 @@
     <!-- 站方那几个去处：一行文字链，点得进但不占卡位 -->
     <div class="chipsrow">
       <span class="dim">更多入口：</span>
-      <a v-for="x in MINILINKS" :key="x[0]" :href="legacy(x[0])">{{ x[1] }} →</a>
+      <!-- 走 linkFor 而不是直接写旧站地址：已迁的页留在新站，没迁的自动回落旧站，
+           不用每迁一页回来改这里（物品库旧站根本没有这一页） -->
+      <component v-for="x in MINILINKS" :key="x[0]" :is="linkFor(x[0]).to ? 'router-link' : 'a'"
+                 v-bind="linkFor(x[0])">{{ miniText(x) }} →</component>
     </div>
 
     <div class="card">
@@ -149,8 +152,20 @@ const legacy = legacyUrl;
 const HERO_ART = 'img/gen/hero-ruins.webp';
 /* 站方口径的去处不做卡片（2026-10-13 用户：首页留一行小入口就够）：
    排行 / 溯源 / 系统规则 / 这一版改了什么，一行文字链。 */
+/* 首页底部那行"更多入口"。2026-10-16 站主收窄导航（世界只留三格、工具只留排行）后，
+   被摘掉导航的页面靠这一行 + 上面的板块卡进。**物品库与成就是这一轮补进来的**：
+   全站扫了一遍引用，这两页除了导航没有任何入口，导航一摘就成了孤页。
+   第三、四个元素是 scale.json 里的计数字段名与量词——数不写死，上游一动这里跟着动。
+   拼成一个字符串而不是用 <b> 包一层：模板编译会压缩元素之间的空白文本节点，
+   "物品库 21077" 会渲染成"物品库21077"（探针实测）。 */
 const MINILINKS = [['rank.html', '资料完整度排行'], ['provenance.html', '溯源与覆盖率'],
-  ['systems.html', '系统与新区域'], ['updates.html', '这一版改了什么']];
+  ['systems.html', '系统与新区域'], ['updates.html', '这一版改了什么'],
+  ['items.html', '物品库', 'items', '件'], ['achievements.html', '成就目录', 'achievements', '条']];
+
+function miniText(x) {
+  if (!x[2] || !S.value) return x[1];
+  return x[1] + ' ' + S.value[x[2]] + ' ' + x[3];
+}
 
 const classes = ref([]);
 const S = ref(null);
