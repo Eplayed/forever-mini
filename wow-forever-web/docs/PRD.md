@@ -10,11 +10,11 @@
 
 | 项目 | 内容 |
 |------|------|
-| 版本号 | v1.0 |
+| 版本号 | v1.1（2026-10-16 起按阶段拆文档，见下条变更日志） |
 | 创建日期 | 2026-10-07 |
 | 作者 | Qoder（与 zyjwb 协作） |
 | 审核人 | zyjwb |
-| 关联文档 | `docs/wow-infinite-plan.md`、`wow-infinite-workflow.md`、`wow-infinite-sources.md`、`wow-infinite-data/forever-seed.json` |
+| 关联文档 | `docs/wow-infinite-plan.md`、`wow-infinite-workflow.md`、`wow-infinite-sources.md`、`wow-infinite-data/forever-seed.json`、**阶段 PRD：`PRD-web-parity-2026-10-16.md`（Web 内容对齐与验收门）**、**源全景：`DATA-SOURCES-MAP-2026-10-16.md`** |
 
 ---
 
@@ -23,6 +23,7 @@
 | 时间 | 版本号 | 变更人 | 主要变更内容 |
 |------|--------|--------|-------------|
 | 2026-10-07 | v1.0 | Qoder | 首版：确定纯静态架构、数据契约、天赋计算器为 P0 |
+| 2026-10-16 | v1.1 | wow-pm | 站主定顺序"数据源以插件为准 → Web 内容对齐 → 站主验收 → 才开小程序"。本文件保留总纲，**阶段范围/验收标准/里程碑拆到 `PRD-web-parity-2026-10-16.md`**：北极星=对齐度 12/12 P0 板块，验收看数字（法术 ≥420、成就 ≥211、稀有 ≥338、门禁只增不减），并写死"以插件为准"的两种读法与默认值（Q1） |
 
 ---
 
