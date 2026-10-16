@@ -1,0 +1,97 @@
+/* =============================================================================
+   新站专用视觉层（2026-10-16 起，方案见 docs/DESIGN-app-upgrade-2026-10-16.md）
+
+   为什么单独一个文件、而不是往 src/css/app.css 里加：两栈共用 app.css，
+   而旧站 19 页 2026-10-16 已冻结——任何新规则都可能把旧站一起改了。
+   这个文件只由 app/src/main.js 引入，旧站根本不加载它；类名也全部是新的
+   （.board / .chip-st / .bhead），旧站 DOM 里不存在，物理上不会串味。
+
+   只解决四类毛病：列宽失控、状态没有视觉重量、长表没有分组导航、移动端整表横滚没提示。
+   颜色一律用 tokens.css 里已有的语义色（--ok 绿 / --warn 金 / --azure 蓝 / --bad 红），
+   不新造配色。
+   ========================================================================== */
+
+/* ---- 板块头：标题 + 一句读数 + 筛选控件，同一张卡里一行摆不下再换行 ---- */
+.bhead { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s2) var(--s4) }
+.bhead .bt { font-size:16px; font-weight:600; color:var(--gold); margin:0 }
+.bhead .bn { font:12.5px/1.6 var(--font-mono); color:var(--txt-dim); letter-spacing:.02em }
+.bhead .bf { flex:1 1 320px; display:flex; flex-wrap:wrap; gap:var(--s2); min-width:0 }
+.bhead .bf input[type=search] { flex:1 1 200px; min-width:0 }
+
+/* ---- 板块表 ---- */
+.boardwrap { overflow-x:auto; -webkit-overflow-scrolling:touch }
+/* 桌面不横滚，表头的纵向吸附才成立（.scrollx 里 sticky 是假吸顶，app.css 里已有那条教训） */
+@media (min-width:900px) { .boardwrap { overflow:visible } }
+
+.board { width:100%; border-collapse:separate; border-spacing:0; table-layout:fixed; font-size:13.5px }
+.board > thead > tr > th { text-align:left; font-weight:600; color:var(--gold);
+  font-size:11.5px; letter-spacing:.06em; padding:8px 10px; background:var(--panel);
+  border-bottom:1px solid var(--line); position:sticky; top:var(--hd-h); z-index:3 }
+.board td { padding:9px 10px; border-bottom:1px solid var(--line-2); vertical-align:top }
+.board tbody tr:hover { background:rgba(255,255,255,.028); box-shadow:inset 2px 0 0 var(--gold-deep) }
+.board .nm { font-weight:600; color:var(--txt-title) }
+.board .sub { display:block; font-size:12px; color:var(--txt-dim); margin-top:2px }
+.board .en { font:12px/1.5 var(--font-mono); color:var(--txt-muted); word-break:break-word }
+.board .id { font:11.5px/1.5 var(--font-mono); color:var(--txt-muted) }
+.board .num { font-family:var(--font-mono); font-size:12.5px; white-space:nowrap }
+.board .conf { display:block; margin-top:3px; font-size:11.5px; line-height:1.5; color:var(--txt-alert) }
+
+/* 列宽：名字列吃剩余，数值/状态/编号固定窄宽。
+   原来 table-layout 是 auto，浏览器把富余宽度全塞在名字列后面，
+   中间一大片空白，眼睛得从名字跨半屏去找数值（技能书、成就、专业三页实拍为证）。 */
+.board .c-ico { width:46px }
+.board .c-num { width:92px }
+.board .c-num2 { width:96px }
+.board .c-st { width:126px }
+.board .c-id { width:92px }
+.board .c-name { width:auto }
+/* 名字列给固定百分比、最后一列吃剩余：剩余空间落到行尾而不是卡在名字与数值之间
+   （法术书那一页原来就是"名字 → 跨半屏空白 → 数值"，眼睛得找列） */
+.board .w-name { width:30% }
+.board .w-tail { width:auto }
+/* 配方表那两页要更宽的正文列（材料与来源都是多条短词，挤成竖排就没法读） */
+.board .c-item { width:27% }
+.board .c-src { width:29% }
+.board .c-mat { width:auto }
+
+/* 分组头：滚动时吸附在表头下面，长表里"我在哪"不用再翻 */
+.board tbody.grp > tr.grp2h > th { position:sticky; top:calc(var(--hd-h) + 33px); z-index:2;
+  text-align:left; font-weight:600; font-size:12.5px; color:var(--txt-title);
+  padding:7px 10px; background:var(--panel-2);
+  box-shadow:inset 0 0 0 1px var(--line), inset 3px 0 0 var(--gold-deep) }
+.board tbody.grp > tr.grp2h > th .gcount { font:11.5px var(--font-mono); color:var(--txt-dim); margin-left:6px }
+.board tbody.grp > tr.grp2h > th .gtag { font-size:11.5px; color:var(--txt-muted); margin-left:6px }
+.board tbody.grp > tr.grp2h > th img { width:20px; height:20px; border-radius:4px;
+  vertical-align:-4px; margin-right:7px }
+
+/* ---- 状态 chip：这一列是全站信息量最大的一列，不该只是一行字 ---- */
+.chip-st { display:inline-block; font-size:11.5px; line-height:1.7; padding:0 8px;
+  border-radius:999px; border:1px solid var(--line); color:var(--txt-dim); white-space:nowrap }
+.chip-st.same { color:var(--txt-muted) }
+.chip-st.changed { color:var(--txt-caution); border-color:rgba(221,159,68,.5); background:rgba(221,159,68,.1) }
+.chip-st.new { color:var(--ok); border-color:rgba(103,194,103,.5); background:rgba(103,194,103,.1) }
+.chip-st.renamed { color:var(--azure); border-color:rgba(73,174,233,.45); background:rgba(73,174,233,.1) }
+.chip-st.removed { color:var(--txt-alert); border-color:rgba(199,92,92,.5); background:rgba(199,92,92,.1) }
+/* 无限新增这一类东西（本版本新加的条目）在别处也叫"新"，颜色与 chip.new 对齐 */
+.board .tag { font-size:11px; padding:0 6px; border-radius:3px; margin-left:6px;
+  color:var(--ok); border:1px solid rgba(103,194,103,.5); background:rgba(103,194,103,.1) }
+
+/* ---- 首页那颗搜索框（实拍 1440 发现的两个毛病）----
+   1) 放大镜压在斜切角上：clip-path 把左边 12px 切掉，图标正好落在切口里，看着像被裁了；
+   2) 示例词那一排（.gsex）和输入框、按钮挤在同一个 flex 行里，把输入框压到只能显示六个字，
+      占位文案"搜天赋、法术、成就…"根本读不完。改成让示例词换到自己的那一行。 */
+.gsearch.hs { flex-wrap:wrap; height:auto; min-height:58px; padding:9px 8px 9px 24px }
+.gsearch.hs svg { flex:0 0 auto; margin-right:8px }
+.gsearch.hs .gsex { flex:1 0 100%; margin:6px 0 2px }
+
+/* ---- 移动端：整表横滚时给一条"右边还有内容"的渐隐，别让人以为表格到头了 ---- */
+@media (max-width:899px) {
+  .boardwrap { position:relative }
+  .boardwrap::after { content:""; position:absolute; top:0; right:0; width:26px; height:100%;
+    pointer-events:none; background:linear-gradient(90deg, transparent, rgba(11,15,22,.85)) }
+  .board { min-width:640px }
+  /* 窄屏下 .boardwrap 是横向滚动容器，sticky 的参照物就变成这个容器本身，
+     表头与分组头不再吸附视口——留着声明只会在表格顶部画出一条空带（375 实拍发现）。
+     与旧站 app.css 里那条 ".scrollx thead th{position:static}" 是同一个教训，这里显式关掉。 */
+  .board > thead > tr > th, .board tbody.grp > tr.grp2h > th { position:static }
+}

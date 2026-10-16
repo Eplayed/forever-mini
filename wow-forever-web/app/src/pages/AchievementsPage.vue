@@ -20,32 +20,34 @@
       </div>
     </div>
 
-    <div class="card tblbox">
-      <div id="tbl">
-        <template v-if="blocks.length">
-          <template v-for="b in blocks" :key="b.gid + '-' + b.cat">
-            <div class="lgrp">
-              <b>{{ b.top }}</b>
-              <span class="dim mono">{{ b.cat }}</span>
-              <span class="dim">{{ b.rows.length }} 条</span>
-            </div>
-            <div class="scrollx">
-              <table class="entab">
-                <thead><tr><th class="ich">图标</th><th>成就</th><th>英文原名</th><th>编号</th></tr></thead>
-                <tbody>
-                  <tr v-for="x in b.rows" :key="x.id">
-                    <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
-                    <td><b><HlText :text="x.name" :q="q" /></b><br v-if="x.forever"><span v-if="x.forever" class="dim">无限新增</span></td>
-                    <td class="en"><HlText v-if="x.nameEn" :text="x.nameEn" :q="q" /></td>
-                    <td class="mono dim">#{{ x.achId }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </template>
-        </template>
-        <div v-else class="empty">没有匹配的成就，换个词或放宽大类筛选。</div>
+    <!-- 10-16 视觉升级第一批：换 .board（列宽固定 + 分组头吸附），
+         与技能页的法术书同一套骨架，两页不再各长各的。 -->
+    <div class="card">
+      <div class="bhead">
+        <span class="bn">{{ list.length }} / {{ rows.length }} 条 · {{ blocks.length }} 组</span>
       </div>
+      <div class="boardwrap">
+        <table class="board" id="tbl">
+          <thead><tr>
+            <th class="c-ico">图标</th><th class="c-name">成就</th>
+            <th class="c-name">英文原名</th><th class="c-id">编号</th>
+          </tr></thead>
+          <tbody class="grp" v-for="b in blocks" :key="b.gid + '-' + b.cat">
+            <tr class="grp2h"><th colspan="4">
+              {{ b.top }}<span class="gtag">{{ b.cat }}</span>
+              <span class="gcount">{{ b.rows.length }} 条</span>
+            </th></tr>
+            <tr v-for="x in b.rows" :key="x.id">
+              <td class="c-ico"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
+              <td><span class="nm"><HlText :text="x.name" :q="q" /></span>
+                <span v-if="x.forever" class="tag">无限新增</span></td>
+              <td class="en"><HlText v-if="x.nameEn" :text="x.nameEn" :q="q" /></td>
+              <td class="c-id id">#{{ x.achId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-if="!blocks.length" class="empty">没有匹配的成就，换个词或放宽大类筛选。</div>
     </div>
   </template>
 </template>

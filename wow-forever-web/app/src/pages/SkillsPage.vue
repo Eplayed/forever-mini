@@ -29,36 +29,42 @@
       </div>
     </div>
 
-    <!-- 法术书（M2，2026-10-16）：495 条按「职业 · 系」分组，只列名称、级数、起学等级与
-         与经典旧世的对照状态。级数或起学等级两边说法不一样的，两个数都摆（红线：两源分歧两个都留），
-         写成玩家读得懂的那一句；描述正文一条不落。 -->
-    <div class="card tblbox">
-      <h2>法术书<span class="dim mono" id="spcnt"> · {{ spList.length }} 条</span></h2>
-      <div id="sptbl">
-        <template v-for="b in spBlocks" :key="b.cid + '-' + b.tab">
-          <div class="lgrp">
-            <ClassTile :class-id="b.cid" :cn="b.cname" :icon-key="b.iconKey" />
-            <b>{{ b.cname }}</b>
-            <span class="dim mono">{{ b.tab }}</span>
-            <span class="dim">{{ b.rows.length }} 条</span>
-          </div>
-          <div class="scrollx">
-            <table class="entab">
-              <thead><tr><th class="ich">图标</th><th>法术</th><th>级数</th><th>起学等级</th><th>与经典旧世</th></tr></thead>
-              <tbody>
-                <tr v-for="x in b.rows" :key="x.id">
-                  <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
-                  <td><b><HlText :text="x.name" :q="q" /></b><br v-if="x.relation"><span v-if="x.relation" class="dim">{{ SP_REL[x.relation] || x.relation }}</span></td>
-                  <td class="mono">{{ x.ranks ? x.ranks + ' 级' : '' }}<div v-if="x.ranksAlt" class="conf">级数有两个说法：{{ x.ranks }} / {{ x.ranksAlt }}，还没实测</div></td>
-                  <td class="mono">{{ x.learnLevel ? x.learnLevel + ' 级起' : '' }}<div v-if="x.learnAlt" class="conf">起学等级有两个说法：{{ x.learnLevel }} / {{ x.learnAlt }}，还没实测</div></td>
-                  <td>{{ x.state ? (SP_STATE[x.state] || x.state) : '' }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </template>
-        <div v-if="!spBlocks.length" class="empty">没有匹配的法术，换个词或放宽职业筛选。</div>
+    <!-- 法术书（M2 数据 / 10-16 视觉升级第一批）：按「职业 · 系」分组，只列名称、级数、
+         起学等级与与经典旧世的对照状态。级数或起学等级两边说法不一样的，两个数都摆
+         （红线：两源分歧两个都留），写成玩家读得懂的那一句；描述正文一条不落。
+         表格换成 .board：列宽固定（原来富余宽度全塞在名字列后面，中间一大片空白）、
+         状态做成 chip、分组头滚动时吸附在表头下面。样式在 src/css/board.css，旧站不加载。 -->
+    <div class="card">
+      <div class="bhead">
+        <h2 class="bt">法术书</h2>
+        <span class="bn" id="spcnt">{{ spList.length }} 条 · {{ spBlocks.length }} 组</span>
       </div>
+      <div class="boardwrap">
+        <table class="board" id="sptbl">
+          <thead><tr>
+            <th class="c-ico">图标</th><th class="w-name">法术</th>
+            <th class="c-num">级数</th><th class="c-num2">起学等级</th><th class="w-tail">与经典旧世</th>
+          </tr></thead>
+          <tbody class="grp" v-for="b in spBlocks" :key="b.cid + '-' + b.tab">
+            <tr class="grp2h"><th colspan="5">
+              <ClassTile :class-id="b.cid" :cn="b.cname" :icon-key="b.iconKey" />
+              {{ b.cname }}<span class="gtag">{{ b.tab }}</span>
+              <span class="gcount">{{ b.rows.length }} 条</span>
+            </th></tr>
+            <tr v-for="x in b.rows" :key="x.id">
+              <td class="c-ico"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
+              <td><span class="nm"><HlText :text="x.name" :q="q" /></span>
+                <span v-if="x.relation" class="sub">{{ SP_REL[x.relation] || x.relation }}</span></td>
+              <td class="c-num num">{{ x.ranks ? x.ranks + ' 级' : '' }}
+                <span v-if="x.ranksAlt" class="conf">级数有两个说法：{{ x.ranks }} / {{ x.ranksAlt }}，还没实测</span></td>
+              <td class="c-num2 num">{{ x.learnLevel ? x.learnLevel + ' 级起' : '' }}
+                <span v-if="x.learnAlt" class="conf">起学等级有两个说法：{{ x.learnLevel }} / {{ x.learnAlt }}，还没实测</span></td>
+              <td class="w-tail"><span v-if="x.state" class="chip-st" :class="x.state">{{ SP_STATE[x.state] || x.state }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-if="!spBlocks.length" class="empty">没有匹配的法术，换个词或放宽职业筛选。</div>
     </div>
 
     <!-- 与经典旧世的差异（四态）：abilities.json 现取，跟着职业筛选走（不吃搜索词与类型筛选）。

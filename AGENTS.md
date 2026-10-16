@@ -8,7 +8,7 @@
 
 | 目录 | 是什么 | 状态 |
 | --- | --- | --- |
-| `wow-forever-web/` | 资料站：`src/` 零构建静态站（17 页，当前可发布）、**`app/` Vue 3 + Vite 新站（迁移中，已迁首页、世界页与职业页）**、`src/data/` 全线唯一数据基底、`tools/` 脚本、`docs/` 文档与站点截图 | 已跑通，17 页；新站按页迁移中 |
+| `wow-forever-web/` | 资料站：**`app/` Vue 3 + Vite 站（2026-10-16 起是唯一在做的产品，21 条路由）**、`src/` 零构建静态站 19 页（**已冻结**，不再加功能与改视觉，只留数据基底与回归参照）、`src/data/` 全线唯一数据基底、`tools/` 脚本、`docs/` 文档与站点截图 | 新站为准；旧站只读 |
 | `for-mini/` | 无限服小程序：原生微信小程序，与站点共用数据基底，`docs/` 放小程序侧截图与验证记录 | 底子：数据层 + 中英速查 + 首页完整度可用，四模块待实现 |
 | `ROLES.md`（仓库根） | 角色交接台账：状态快照、待确认项、交接记录 | 每轮更新 |
 | `backend/`（将来） | 数据生产与上传服务 | 未建 |
@@ -64,7 +64,11 @@
 1. 改动数据后必跑：`cd wow-forever-web && node tools/build-data.js`（非 0 退出即未完成）。
 2. 改小程序产物后加跑：`node wow-forever-web/tools/export-mini.js`（超主包预算即失败；重跑后 `git status` 应为空，产物必须可复现）。
 3. 界面改动必须有渲染证据，构建通过不算完成：
-   - 站点：`cd wow-forever-web && bash tools/serve.sh`（旧站 :8817、Vue 新站 :8821，与 `app-parity.py` 默认端口一致）+ 无头 Chrome 截图，存 `wow-forever-web/docs/screenshots/`（桌面 + 375px 移动端）。
+   - 站点：**以新站为准**。`cd wow-forever-web && bash tools/serve.sh`（新站 :8821、旧站 :8817 只读参照）
+     + 无头 Chrome 截图，存 `wow-forever-web/docs/screenshots/`（桌面 + 375px 移动端）；
+     界面回归用 `python3 tools/site-check.py --app`（**这条才是新站的门槛**）。
+     `tools/app-parity.py` 自 2026-10-16 起降级为参考报告——它比的是"新站像不像旧站"，
+     旧站已冻结，红不代表做错，只用来确认没把已迁页的公共结构改散。
    - 小程序：微信开发者工具（`cli auto --project for-mini --auto-port 9421` + automator）截图，存 `for-mini/docs/screenshots/`。
 4. 点击类动作在本机 automator 上会稳定超时（`element.tap()`、带 setData 回调的 `callMethod()`），拿不到证据时**必须在验证记录里单列"没验到的"并要人工手测**，不许用 `page.setData` 造出来的示意截图冒充逻辑通过。
 5. 每轮结束在仓库根 `ROLES.md` 的交接记录表加一行，带 `已定 / 待用户确认 / 阻塞（原因）` 状态。

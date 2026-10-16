@@ -469,6 +469,8 @@ def test_spellbook(browser, base):
     sp_groups = len(set((x["classId"], x["tab"] or "未分系") for x in sp))
     n_alt = len([x for x in sp if x.get("ranksAlt")]) + len([x for x in sp if x.get("learnAlt")])
     ach_groups = len(set((a["gid"], a["cat"] or "未分类") for a in show))
+    # 分组条在两栈是两种实现：旧站是一行 .lgrp，新站 10-16 起改成表内吸附的 tbody.grp
+    GRPS = "() => document.querySelectorAll('%s .lgrp, %s tbody.grp').length"
 
     for label, url in ((u"旧站", base + "/skills.html"), (u"新站", APP_BASE + "/#/skills")):
         if label == u"新站" and not app_up(browser):
@@ -482,23 +484,24 @@ def test_spellbook(browser, base):
         page.goto(url, wait_until="networkidle")
         page.wait_for_timeout(1500)
         check("%s 法术书行数等于数据条数" % label,
-              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == S["spells"],
-              "%d 行 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length"),
+              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length") == S["spells"],
+              "%d 行 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length"),
                                    S["spells"]))
+        # 分组条在两栈是两种实现：旧站一行 .lgrp，新站 10-16 起改成表内吸附的 tbody.grp
         check("%s 按职业与系分组" % label,
-              page.evaluate("() => document.querySelectorAll('#sptbl .lgrp').length") == sp_groups,
-              "%d 组 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .lgrp').length"), sp_groups))
+              page.evaluate(GRPS % ("#sptbl", "#sptbl")) == sp_groups,
+              "%d 组 / 期望 %d" % (page.evaluate(GRPS % ("#sptbl", "#sptbl")), sp_groups))
         check("%s 读数写着条数" % label,
               str(S["spells"]) in page.evaluate("() => document.getElementById('spcnt').textContent"))
         check("%s 两说的行两个数都摆着" % label,
               page.evaluate("() => document.querySelectorAll('#sptbl .conf').length") == n_alt,
               "%d 处 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .conf').length"), n_alt))
         cell = page.evaluate(r"""() => {
-          const td = [...document.querySelectorAll('#sptbl tbody tr td')];
+          const td = [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h) td')];
           return td.filter(x => x.innerText.includes('有两个说法') && !/\d+\s*\/\s*\d+/.test(x.innerText)).length;
         }""")
         check("%s 两说那一行确实摆着两个数" % label, cell == 0, "%d 处只有一个数" % cell)
-        long_txt = page.evaluate(r"""() => [...document.querySelectorAll('#sptbl tbody tr')].map(tr =>
+        long_txt = page.evaluate(r"""() => [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h)')].map(tr =>
           [...tr.children].reduce((a, td) => Math.max(a, td.innerText.replace(/\n/g, ' ').length), 0))""")
         check("%s 法术书每格都是短取值，没有描述正文" % label,
               long_txt and max(long_txt) <= 30, "最长 %d 字" % (max(long_txt) if long_txt else 0))
@@ -510,8 +513,8 @@ def test_spellbook(browser, base):
                       "s.dispatchEvent(new Event('change')); }", one)
         page.wait_for_timeout(700)
         check("%s 按职业筛选后行数对得上" % label,
-              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == exp_one,
-              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length"), exp_one))
+              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length") == exp_one,
+              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length"), exp_one))
         page.screenshot(path=os.path.join(SHOT_DIR, "spellbook-%s.png" % ("app" if label == u"新站" else "legacy")))
         check("%s 法术书页无报错与失败请求" % label, not errs and not failed,
               "; ".join((errs + failed)[:2]) or "干净")
@@ -525,7 +528,7 @@ def test_spellbook(browser, base):
               wait_until="networkidle")
     page.wait_for_timeout(1200)
     check("搜索带着职业与词跳进来，落地只剩那一条",
-          page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == 1
+          page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length") == 1
           and page.evaluate("() => document.getElementById('q').value") == tgt["name"],
           page.evaluate("() => document.getElementById('cnt').textContent"))
     ctx.close()
@@ -539,12 +542,12 @@ def test_spellbook(browser, base):
         page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
         page.goto(url, wait_until="networkidle")
         page.wait_for_timeout(1500)
-        got = page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length")
+        got = page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length")
         check("%s 成就列出的条数等于「能拿的那些」" % label, got == len(show),
               "%d 行 / 数据可列 %d（总 %d）" % (got, len(show), ameta["total"]))
         check("%s 成就分组数对得上数据" % label,
-              page.evaluate("() => document.querySelectorAll('#tbl .lgrp').length") == ach_groups,
-              "%d 组 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl .lgrp').length"), ach_groups))
+              page.evaluate(GRPS % ("#tbl", "#tbl")) == ach_groups,
+              "%d 组 / 期望 %d" % (page.evaluate(GRPS % ("#tbl", "#tbl")), ach_groups))
         opts = page.evaluate(r"""() => [...document.querySelectorAll('#g option')].slice(1)
           .map(o => parseInt(o.textContent.match(/（(\d+)）/)[1], 10))""")
         check("%s 下拉里每个大类的数与屏幕上看到的一致" % label,
@@ -553,7 +556,7 @@ def test_spellbook(browser, base):
         body = page.evaluate("() => document.querySelector('#main').innerText")
         leak = [n for n in dev if n in body]
         check("%s 客户端里的开发埋点一条都不上页面" % label, not leak, "漏出 %s" % leak[:3])
-        en_missing = page.evaluate(r"""() => [...document.querySelectorAll('#tbl tbody tr')]
+        en_missing = page.evaluate(r"""() => [...document.querySelectorAll('#tbl tbody tr:not(.grp2h)')]
           .filter(tr => !tr.children[2].innerText.trim()).length""")
         check("%s 每条都带着英文原名（没中文名的不机翻）" % label, en_missing == 0,
               "%d 行缺英文原名" % en_missing)
@@ -566,8 +569,8 @@ def test_spellbook(browser, base):
                       "s.dispatchEvent(new Event('change')); }", g0)
         page.wait_for_timeout(700)
         check("%s 按大类筛选后行数对得上" % label,
-              page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") == exp_g,
-              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length"), exp_g))
+              page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length") == exp_g,
+              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length"), exp_g))
         page.screenshot(path=os.path.join(SHOT_DIR, "achievements-%s.png" %
                                           ("app" if label == u"新站" else "legacy")))
         ctx.close()
@@ -577,10 +580,58 @@ def test_spellbook(browser, base):
     page.goto(base + "/achievements.html?q=" + urllib.parse.quote(show[0]["name"]), wait_until="networkidle")
     page.wait_for_timeout(1200)
     check("搜索词跳进成就页就已是筛好的",
-          page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") > 0
+          page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length") > 0
           and page.evaluate("() => document.getElementById('q').value") == show[0]["name"],
           page.evaluate("() => document.getElementById('cnt').textContent"))
     ctx.close()
+
+    # ---- 新站视觉层（docs/DESIGN-app-upgrade-2026-10-16.md）----
+    # 旧站已冻结：新样式全部走新类名 + 单独一份 board.css（只由 app 引入），
+    # 这三条钉的就是"隔离真的成立"——旧站 DOM 里出现 .board/.chip-st 说明新规则漏了作用域。
+    if app_up(browser):
+        ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+        page = ctx.new_page()
+        page.goto(base + "/skills.html", wait_until="networkidle")
+        page.wait_for_timeout(1200)
+        check("旧站（已冻结）DOM 里不出现新站的表结构",
+              page.evaluate("() => document.querySelectorAll('.board, .chip-st, .bhead, .grp2h').length") == 0,
+              page.evaluate("() => document.querySelectorAll('.board, .chip-st').length"))
+        ctx.close()
+
+        ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+        page = ctx.new_page()
+        page.goto(APP_BASE + "/#/skills", wait_until="networkidle")
+        page.wait_for_timeout(1800)
+        exp_state = len([x for x in sp if x.get("state")])
+        chips = page.evaluate("() => document.querySelectorAll('#sptbl .chip-st').length")
+        check("新站状态徽标条数等于数据里有对照状态的条数", chips == exp_state,
+              "%d 枚 / 数据 %d 条" % (chips, exp_state))
+        lay = page.evaluate("""() => { const t = document.querySelector('#sptbl');
+          if (!t) return null; const cs = getComputedStyle(t);
+          const th = [...t.querySelectorAll(':scope > thead th')].map(x => Math.round(x.getBoundingClientRect().width));
+          return { layout: cs.tableLayout, cols: th, over: document.documentElement.scrollWidth - innerWidth }; }""")
+        check("新站板块表列宽受控（fixed + 图标列 ≤ 60px + 整页不横向溢出）",
+              lay and lay["layout"] == "fixed" and lay["cols"][0] <= 60 and lay["over"] <= 1,
+              json.dumps(lay, ensure_ascii=False))
+        sticky = page.evaluate("""() => { const th = document.querySelector('#sptbl > thead th');
+          return th ? getComputedStyle(th).position : null; }""")
+        check("新站表头在桌面是吸附的（窄屏由 board.css 显式关掉，见那条注释）",
+              sticky == "sticky", sticky)
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-board-skills.png"))
+        ctx.close()
+
+        ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+        page = ctx.new_page()
+        page.goto(APP_BASE + "/#/professions", wait_until="networkidle")
+        page.wait_for_timeout(1800)
+        m = page.evaluate("""() => ({ over: document.documentElement.scrollWidth - innerWidth,
+          fade: [...document.querySelectorAll('.boardwrap')].length,
+          src: [...document.querySelectorAll('.board .c-src')].filter(x => x.innerText.indexOf('商人') >= 0).length })""")
+        check("新站专业页 375 下整页不横向溢出（表在容器里滚）", m["over"] <= 1, json.dumps(m))
+        check("新站专业页来源那一格仍写着商人（视觉改版没把 M2-G 的层弄丢）", m["src"] > 0,
+              "%d 行" % m["src"])
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-board-prof-m.png"))
+        ctx.close()
 
 
 def test_design_baseline(browser, base):
@@ -906,7 +957,7 @@ def test_grouping(browser, base):
     page.wait_for_timeout(1500)
     st = page.evaluate("""() => {
       const groups = [...document.querySelectorAll('#tbl .lgrp')];
-      const rows = [...document.querySelectorAll('#tbl tbody tr')].filter(r => !r.classList.contains('srow'));
+      const rows = [...document.querySelectorAll('#tbl tbody tr:not(.grp2h)')].filter(r => !r.classList.contains('srow'));
       return { groups: groups.map(g => g.innerText.replace(/\\n/g, ' ').trim()),
                rows: rows.length,
                everyRowHasCell: rows.every(r => r.querySelector('.liw')),
@@ -2548,11 +2599,11 @@ def test_search(browser, base):
         (uniq_spl["name"], "skills.html",
          lambda: page.input_value("#c") == uniq_spl["classId"]
          and page.input_value("#q") == uniq_spl["name"]
-         and page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") >= 1),
+         and page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length") >= 1),
         (uniq_ach["name"], "achievements.html",
          lambda: page.input_value("#q") == uniq_ach["name"]
          and page.input_value("#g") == uniq_ach["gid"]
-         and page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") >= 1),
+         and page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length") >= 1),
     ]
     for query, prefix, judge in LAND:
         href = first_row(query, prefix)

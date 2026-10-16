@@ -51,17 +51,23 @@
       </div>
 
       <div v-if="shownNodes.length" class="card">
-        <h2>采集点 · {{ shownNodes.length }}</h2>
-        <div class="scrollx">
-          <table class="entab">
-            <thead><tr><th class="ich">图标</th><th>{{ nodeHeadLabel }}</th><th>可得</th><th>最多区域</th><th>技能</th></tr></thead>
+        <div class="bhead">
+          <h2 class="bt">采集点</h2>
+          <span class="bn">{{ shownNodes.length }} 个</span>
+        </div>
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr>
+              <th class="c-ico">图标</th><th class="c-name">{{ nodeHeadLabel }}</th>
+              <th class="c-mat">可得</th><th class="c-num2">最多区域</th><th class="c-num">技能</th>
+            </tr></thead>
             <tbody>
               <tr v-for="(n, i) in shownNodes" :key="n.nameCn + '-' + i">
-                <td class="ich"><IconCell :icon-key="n.iconKey || ''" :seed="n.nameCn" :cn="n.nameCn" /></td>
-                <td><HlText :text="n.nameCn" :q="q" /></td>
-                <td class="dim">{{ (n.yields || []).join('、') }}</td>
-                <td class="dim">{{ n.zone || '—' }}</td>
-                <td><span v-if="!n.skill" class="dim">—</span><span v-else class="sk"><i
+                <td class="c-ico"><IconCell :icon-key="n.iconKey || ''" :seed="n.nameCn" :cn="n.nameCn" /></td>
+                <td><span class="nm"><HlText :text="n.nameCn" :q="q" /></span></td>
+                <td class="c-mat dim">{{ (n.yields || []).join('、') }}</td>
+                <td class="c-num2 dim">{{ n.zone || '—' }}</td>
+                <td class="c-num"><span v-if="!n.skill" class="dim">—</span><span v-else class="sk"><i
                   v-for="s in skList(n.skill)" :key="s.k" class="sk-t" :class="'sk-' + s.k"
                   :title="s.cn + '色起点'">{{ s.cn }}<b>{{ n.skill[s.k] }}</b></i></span></td>
               </tr>
@@ -71,42 +77,48 @@
       </div>
 
       <div v-if="shownRecipes.length" class="card">
-        <h2>配方 · {{ shownRecipes.length }} 条</h2>
-        <template v-for="b in bands" :key="b.label">
-          <template v-if="b.rows.length">
-            <h3 class="rbandh">{{ b.label }} <b class="mono">{{ b.rows.length }}</b></h3>
-            <div class="scrollx">
-              <table class="entab">
-                <thead><tr><th class="ich">制成品</th><th>材料</th><th>技能</th><th>来源</th></tr></thead>
-                <tbody>
-                  <tr v-for="(x, i) in b.rows" :key="x.itemId + '-' + i">
-                    <td>
-                      <IconCell :icon-key="x.iconKey || ''" :seed="x.itemId" :cn="x.nameCn" small />
-                      <span :class="'q' + (x.quality || 0)"><HlText :text="x.nameCn" :q="q" /></span>
-                      <span v-if="x.isNew" class="tag">新</span>
-                      <span class="dim mono"> #{{ x.itemId }}</span>
-                    </td>
-                    <td class="mats">
-                      <template v-if="(x.mats || []).length">
-                        <i class="mbar" aria-hidden="true"><s :style="{ width: matPct(x) + '%' }"></s></i>
-                        <span v-for="(m, j) in x.mats" :key="j" class="mat"><IconCell
-                          :icon-key="m.iconKey || ''" :seed="m.nameCn" :cn="m.nameCn" small />{{ m.nameCn }}<b
-                          class="mono">×{{ m.count }}</b></span>
-                      </template>
-                      <span v-else class="dim">无需材料</span>
-                    </td>
-                    <td><span v-if="!x.skill" class="dim">—</span><span v-else class="sk"><i
-                      v-for="s in skList(x.skill)" :key="s.k" class="sk-t" :class="'sk-' + s.k"
-                      :title="s.cn + '色起点'">{{ s.cn }}<b>{{ x.skill[s.k] }}</b></i></span></td>
-                    <td class="dim"><template v-if="srcLines(x).length"><template
-                        v-for="(l, i) in srcLines(x)" :key="i"><br v-if="i">{{ l }}</template></template><template
-                        v-else>—</template></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </template>
-        </template>
+        <div class="bhead">
+          <h2 class="bt">配方</h2>
+          <span class="bn">{{ shownRecipes.length }} 条 · 按技能橙点分箱</span>
+        </div>
+        <!-- 10-16 视觉升级第一批：四张分箱表合成一张 .board（列宽固定 + 分箱头吸附），
+             原来每箱一个 <h3> + 一张 .entab，列宽各算各的，四张表的"技能"列根本不对齐 -->
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr>
+              <th class="c-item">制成品</th><th class="c-mat">材料</th>
+              <th class="c-num">技能</th><th class="c-src">来源</th>
+            </tr></thead>
+            <tbody class="grp" v-for="b in bands" :key="b.label">
+              <tr class="grp2h" v-if="b.rows.length"><th colspan="4">
+                {{ b.label }}<span class="gcount">{{ b.rows.length }} 条</span>
+              </th></tr>
+              <tr v-for="(x, i) in b.rows" :key="x.itemId + '-' + i">
+                <td class="c-item">
+                  <IconCell :icon-key="x.iconKey || ''" :seed="x.itemId" :cn="x.nameCn" small />
+                  <span class="nm" :class="'q' + (x.quality || 0)"><HlText :text="x.nameCn" :q="q" /></span>
+                  <span v-if="x.isNew" class="tag">新</span>
+                  <span class="id"> #{{ x.itemId }}</span>
+                </td>
+                <td class="mats c-mat">
+                  <template v-if="(x.mats || []).length">
+                    <i class="mbar" aria-hidden="true"><s :style="{ width: matPct(x) + '%' }"></s></i>
+                    <span v-for="(m, j) in x.mats" :key="j" class="mat"><IconCell
+                      :icon-key="m.iconKey || ''" :seed="m.nameCn" :cn="m.nameCn" small />{{ m.nameCn }}<b
+                      class="mono">×{{ m.count }}</b></span>
+                  </template>
+                  <span v-else class="dim">无需材料</span>
+                </td>
+                <td class="c-num"><span v-if="!x.skill" class="dim">—</span><span v-else class="sk"><i
+                  v-for="s in skList(x.skill)" :key="s.k" class="sk-t" :class="'sk-' + s.k"
+                  :title="s.cn + '色起点'">{{ s.cn }}<b>{{ x.skill[s.k] }}</b></i></span></td>
+                <td class="c-src dim"><template v-if="srcLines(x).length"><template
+                    v-for="(l, i) in srcLines(x)" :key="i"><br v-if="i">{{ l }}</template></template><template
+                    v-else>—</template></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div v-if="!shownNodes.length && !shownRecipes.length && !sel.unparsed" class="card">

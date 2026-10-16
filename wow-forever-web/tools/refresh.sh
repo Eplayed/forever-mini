@@ -25,13 +25,23 @@ cd "$(dirname "$0")/.."
 
 run() { printf '\n\033[1m▶ %s\033[0m\n' "$*"; "$@"; }
 
-# 所有场景收尾都跑同一套门禁：数据校验 → 图标映射 → 译名逐字回查 → 界面回归
+# 只出报告、不拦人的那一步（2026-10-16 起 app-parity 属于这类：旧站已冻结，
+# "新站与旧站不一样"不再是错误）。失败会打一行提醒但继续走。
+soft() {
+  printf '\n\033[1m▶ %s\033[0m（报告模式，不拦人）\n' "$*"
+  "$@" || printf '\033[1;33m  ↑ 这一步报了差异：旧站已冻结，红不代表做错，看一眼理由即可。\033[0m\n'
+  return 0
+}
+
+# 所有场景收尾都跑同一套门禁：数据校验 → 图标映射 → 译名逐字回查 → 界面回归（含新站）
 gate() {
   run node tools/build-data.js
   run python3 tools/build-icon-map.py
   run node tools/build-data.js
   run python3 tools/audit-translations.py --strict
-  run python3 tools/site-check.py
+  # --app：新站（Vue）那组断言是硬门槛，端口不通直接失败——2026-10-16 起新站是唯一在做的产品
+  run python3 tools/site-check.py --app
+  soft python3 tools/app-parity.py --strict
 }
 
 case "${1:-}" in
@@ -108,13 +118,14 @@ case "${1:-}" in
     gate
     ;;
   publish)
+    # 先构建新站再跑门禁：site-check --app 连的是 app/dist 的预览端口，
+    # 不先 build 会拿上一版产物当这一版验
+    (cd app && npm ci --silent && npx vitest run && npm run build)
     gate
     run python3 tools/build-changelog.py
     run python3 tools/app-assets.py
     run node tools/export-mini.js
-    (cd app && npm ci --silent && npx vitest run && npm run build)
-    run python3 tools/app-parity.py --strict
-    printf '\n\033[1;32m全绿：可以发布。发布动作本身要人工确认（见 docs/DATA-MAINTENANCE.md 第六节）。\033[0m\n'
+    printf '\n\033[1;32m全绿：可以发布（发布的是 app/dist）。发布动作本身要人工确认，见 docs/DATA-MAINTENANCE.md 第六节。\033[0m\n'
     ;;
   *)
     awk '/^#   tools\/refresh\.sh/ { print } /^# 详见/ { print; exit }' "$0"
