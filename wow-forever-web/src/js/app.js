@@ -2764,6 +2764,26 @@
           var maxMat = Math.max.apply(null, recipes.map(function (x) {
             return (x.mats || []).reduce(function (a, m) { return a + (m.count || 1); }, 0);
           }).concat([1]));
+          /* 来源那一格现在有三层信息，各来自不同资料、缺哪层就不写哪层（不写"待补"）：
+             参考站给的类别（训练师…）、哪几个商人在哪个区域卖这张图纸、图纸从谁身上掉。
+             掉率那一层是红线，源里本来也没填，界面上永远不该出现百分号。 */
+          function srcCell(x) {
+            var out = [];
+            if (x.source) out.push(D.esc(x.source));
+            var vs = x.vendors || [];
+            if (vs.length) {
+              out.push('商人：' + vs.slice(0, 2).map(function (v) {
+                return D.esc(v.name) + (v.zone ? '（' + D.esc(v.zone) + '）' : '');
+              }).join('、') + (vs.length > 2 ? ' 等 ' + (vs.length + (x.vMore || 0)) + ' 处' : ''));
+            }
+            var ds = x.formulaDrops || [];
+            if (ds.length) {
+              out.push('图纸掉落：' + ds.slice(0, 2).map(function (d) {
+                return D.esc(d.npc) + (d.zone ? '（' + D.esc(d.zone) + '）' : '');
+              }).join('、') + (ds.length > 2 ? ' 等 ' + (ds.length + (x.dMore || 0)) + ' 处' : ''));
+            }
+            return out.length ? out.join('<br>') : '—';
+          }
           var rowOf = function (x) {
             var mats = x.mats || [];
             var total = mats.reduce(function (a, m) { return a + (m.count || 1); }, 0);
@@ -2780,7 +2800,7 @@
                   }).join('')
                 : '<span class="dim">无需材料</span>') + '</td>' +
               '<td>' + skillCell(x.skill) + '</td>' +
-              '<td class="dim">' + D.esc(x.source || '—') + '</td></tr>';
+              '<td class="dim">' + srcCell(x) + '</td></tr>';
           };
           var table = function (list) {
             return '<div class="scrollx"><table class="entab"><thead><tr><th class="ich">制成品</th>' +

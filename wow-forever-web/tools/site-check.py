@@ -1504,6 +1504,32 @@ def test_professions(browser, base):
     page.wait_for_timeout(500)
     high = page.evaluate("() => document.querySelectorAll('#pbody tbody tr').length")
     check("按技能等级筛选生效", low < high and high >= first, "1 级 %d 行 / 300 级 %d 行" % (low, high))
+    # M2-G（2026-10-16）：来源那一格现在有三层——参考站给的类别 / 哪几个商人卖 / 图纸从谁身上掉。
+    # 新字段全部来自 XR 那份插件的快照，缺哪层就不写哪层，所以判据是"行数与数据条数对上"而不是"都有值"。
+    page.fill("#plv", "")
+    page.wait_for_timeout(400)
+    vend_rows = page.evaluate("() => [...document.querySelectorAll('#pbody tbody tr')]"
+                              ".filter(tr => (tr.children[3].innerText || '').indexOf('商人：') >= 0).length")
+    exp_vend = len([x for x in (profs[0].get("recipes") or []) if (x.get("vendors") or [])])
+    check("默认专业里写出来源商人的行数与数据一致", vend_rows == exp_vend,
+          "%d 行 / 数据 %d 条" % (vend_rows, exp_vend))
+    body = page.evaluate("() => document.querySelector('#pbody').innerText")
+    check("配方来源那一格不写掉率与概率（红线）", "%" not in body and "概率" not in body)
+    with_drop = next((p for p in profs if any(x.get("formulaDrops") for x in (p.get("recipes") or []))), None)
+    if with_drop:
+        page.evaluate("(pid) => { const el = document.querySelector('.picks .pick[data-p=\"' + pid + '\"]');"
+                      " if (el) el.click(); }", with_drop["id"])
+        page.wait_for_timeout(700)
+        d_rows = page.evaluate("() => [...document.querySelectorAll('#pbody tbody tr')]"
+                               ".filter(tr => (tr.children[3].innerText || '').indexOf('图纸掉落：') >= 0).length")
+        exp_d = len([x for x in (with_drop.get("recipes") or []) if (x.get("formulaDrops") or [])])
+        check("换到有图纸掉落的专业，那一段真写出来了", d_rows == exp_d and d_rows > 0,
+              "%s：%d 行 / 数据 %d 条" % (with_drop["id"], d_rows, exp_d))
+        names = page.evaluate(r"""() => [...document.querySelectorAll('#pbody tbody tr')]
+          .map(tr => (tr.children[3].innerText || '')).filter(t => t.indexOf('图纸掉落：') >= 0)""")
+        bad = [t for t in names if len(t) > 160]
+        check("图纸掉落那一行是专名不是整段讲解", not bad, "%d 行过长" % len(bad))
+        page.screenshot(path=os.path.join(SHOT_DIR, "professions-source.png"))
     page.fill("#plv", "")
     page.click("#pn")
     page.wait_for_timeout(500)

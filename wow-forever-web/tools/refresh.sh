@@ -48,6 +48,10 @@ case "${1:-}" in
   prof)
     run python3 tools/scrape-wclbox-prof.py --write
     run node tools/merge-professions.js
+    # 商人与图纸掉落来自 XR 那份插件（原件在仓库外 .scratch/wow），顺序不能倒：
+    # merge-professions.js 会整表重写配方，先并后 merge 会被冲掉
+    run python3 tools/extract-xr-prof.py
+    run python3 tools/merge-prof-sources.py
     gate
     ;;
   dungeons)

@@ -582,6 +582,25 @@ if (fs.existsSync(profPath)) {
       if (!x.itemId || !/^\d+$/.test(String(x.itemId))) errs.push(`professions ${p.id} 第 ${i} 条配方缺物品 ID`);
       if (!x.nameCn) errs.push(`professions ${p.id} 第 ${i} 条配方缺名称`);
       scanNoPercent('recipe', x, p.id + '/' + (x.nameCn || i));
+      // 来源那一层（商人 / 图纸掉落）是 XR 并进来的，字段形状与出处标记一起钉：
+      // 商人必须是游戏内专名（不带句子标点），srcFrom 只许 xr，截断计数必须是整数
+      if (x.srcFrom !== undefined && x.srcFrom !== 'xr') {
+        errs.push(`professions ${p.id}/${x.nameCn || i}：srcFrom 只能是 xr（现在 ${x.srcFrom}）`);
+      }
+      [['vendors', 'name'], ['formulaDrops', 'npc']].forEach(([key, nameField]) => {
+        (x[key] || []).forEach((v) => {
+          if (!v || !v[nameField]) { errs.push(`professions ${p.id}/${x.nameCn || i}：${key} 里有一条没有名字`); return; }
+          const nm = String(v[nameField]);
+          if (/[。；;]/.test(nm)) errs.push(`professions ${p.id}/${x.nameCn || i}：${key} 的名字像句子（${nm.slice(0, 20)}）`);
+          if (/%/.test(nm)) errs.push(`professions ${p.id}/${x.nameCn || i}：${key} 里出现百分号（红线）`);
+        });
+        if (x[key] && !x.srcFrom) errs.push(`professions ${p.id}/${x.nameCn || i}：有 ${key} 却没标 srcFrom`);
+      });
+      ['vMore', 'dMore'].forEach((k) => {
+        if (x[k] !== undefined && (!Number.isInteger(x[k]) || x[k] < 1)) {
+          errs.push(`professions ${p.id}/${x.nameCn || i}：${k} 必须是正整数`);
+        }
+      });
     });
     (p.nodes || []).forEach((x, i) => {
       if (!x.nameCn) errs.push(`professions ${p.id} 第 ${i} 个采集点缺名称`);
@@ -592,8 +611,20 @@ if (fs.existsSync(profPath)) {
   const pr = (pf.professions || []).reduce((s, p) => s + (p.recipes || []).length, 0);
   const pn = (pf.professions || []).reduce((s, p) => s + (p.nodes || []).length, 0);
   const pnew = (pf.professions || []).reduce((s, p) => s + ((p.counts || {}).newRecipes || 0), 0);
+  const allRec = (pf.professions || []).reduce((s, p) => s.concat(p.recipes || []), []);
+  const pv = allRec.filter((x) => (x.vendors || []).length).length;
+  const pd = allRec.filter((x) => (x.formulaDrops || []).length).length;
+  scale.profVendors = pv; scale.profDrops = pd;
+  // 合并脚本自报的两个数与实际逐条对数：对不上就是"快照与成品不是同一次合并跑出来的"
+  const xp = (pf.meta || {}).xrProf || {};
+  if (!Object.keys(xp).length) {
+    warns.push('professions.meta.xrProf 缺失：配方那一层的商人与图纸掉落没并进来（跑 tools/merge-prof-sources.py）');
+  } else {
+    if (xp.withVendors !== pv) errs.push(`professions：meta.xrProf.withVendors 记 ${xp.withVendors} · 实数 ${pv}`);
+    if (xp.withDrops !== pd) errs.push(`professions：meta.xrProf.withDrops 记 ${xp.withDrops} · 实数 ${pd}`);
+  }
   console.log('专业 ' + (pf.professions || []).length + ' 个 / 配方 ' + pr + ' 条（无限新增 ' + pnew +
-    '）/ 采集点 ' + pn + ' 个');
+    '）/ 采集点 ' + pn + ' 个 · 带来源商人 ' + pv + ' 条 · 带图纸掉落 ' + pd + ' 条');
   scale.professions = (pf.professions || []).length;
   scale.recipes = pr; scale.recipesNew = pnew; scale.gatherNodes = pn;
 }

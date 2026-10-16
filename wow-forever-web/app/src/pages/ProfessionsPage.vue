@@ -98,7 +98,9 @@
                     <td><span v-if="!x.skill" class="dim">—</span><span v-else class="sk"><i
                       v-for="s in skList(x.skill)" :key="s.k" class="sk-t" :class="'sk-' + s.k"
                       :title="s.cn + '色起点'">{{ s.cn }}<b>{{ x.skill[s.k] }}</b></i></span></td>
-                    <td class="dim">{{ x.source || '—' }}</td>
+                    <td class="dim"><template v-if="srcLines(x).length"><template
+                        v-for="(l, i) in srcLines(x)" :key="i"><br v-if="i">{{ l }}</template></template><template
+                        v-else>—</template></td>
                   </tr>
                 </tbody>
               </table>
@@ -171,6 +173,23 @@ const lvNum = computed(() => { const n = parseInt(lv.value, 10); return isNaN(n)
 const SK_KEYS = [['orange', '橙'], ['yellow', '黄'], ['green', '绿'], ['grey', '灰']];
 function skList(sk) {
   return SK_KEYS.filter((x) => sk[x[0]] !== undefined).map((x) => ({ k: x[0], cn: x[1] }));
+}
+/* 来源那一格的三层信息，与旧站 srcCell 同一算法（各来自不同资料，缺哪层就不写哪层）：
+   参考站给的类别 → 哪几个商人在哪卖这张图纸 → 图纸从谁身上掉。掉率是红线，源里也没有。 */
+function srcLines(x) {
+  const out = [];
+  if (x.source) out.push(x.source);
+  const vs = x.vendors || [];
+  if (vs.length) {
+    out.push('商人：' + vs.slice(0, 2).map((v) => v.name + (v.zone ? '（' + v.zone + '）' : '')).join('、')
+      + (vs.length > 2 ? ' 等 ' + (vs.length + (x.vMore || 0)) + ' 处' : ''));
+  }
+  const ds = x.formulaDrops || [];
+  if (ds.length) {
+    out.push('图纸掉落：' + ds.slice(0, 2).map((d) => d.npc + (d.zone ? '（' + d.zone + '）' : '')).join('、')
+      + (ds.length > 2 ? ' 等 ' + (ds.length + (x.dMore || 0)) + ' 处' : ''));
+  }
+  return out;
 }
 function learnable(sk) {
   if (!sk || lvNum.value === '') return true;

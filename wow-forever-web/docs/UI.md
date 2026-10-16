@@ -1172,6 +1172,26 @@ M1 把数据做完了，界面还是旧的：技能页只有 86 条官方整句�
 `tools/build-data.js` 加图标键格式、`devOnly` 判定、`groups.count/shown` 两套数对账、
 "数据有条数、索引必须一条不少"的逐类对数（+ 反向测试 6 条全部咬住，见 `docs/VERIFY-m2-ui-2026-10-16.md`）。
 
+### 3.43 配方「来源」那一格分成三层（2026-10-16，M2-G）
+
+原来只有一格 `source`，取值是"训练师"或空——玩家看了等于没看。现在这一格按三层写，
+**缺哪层就不写哪层**（不写"待补"，按 3.35 那条口径）：
+
+1. 参考站给的来源类别（`source`，如"训练师"）；
+2. `商人：山达·细须（洛克莫丹）、哈格鲁斯（奥格瑞尔）`，超过两个写 `… 等 N 处`；
+3. `图纸掉落：Gnarlpine Gardener（泰达希尔）`，同样超过两个写 `等 N 处`。
+
+两栈同轮改：旧站 `src/js/app.js` 的 `srcCell()`、新站 `ProfessionsPage.vue` 的 `srcLines()`，
+DOM 上都是 `.dim` 单元格里用 `<br>` 分行，`app-parity --strict` 无差异。
+新字段来自 XR 插件那份专业库（`tools/extract-xr-prof.py` → `upstream/xr-prof.json` →
+`tools/merge-prof-sources.py`），**掉率百分比在抽取阶段就丢了**（红线），
+卡口再钉一道：名字里不许有百分号与句子标点、`srcFrom` 只许 `xr`、
+`meta.xrProf.withVendors/withDrops` 必须等于实际逐条数。
+
+**「学习门槛」这一列这一版故意没做**：XR 行里那两个数含义没定（详见
+`docs/VERIFY-m2g-prof-2026-10-16.md` §三与开放项 26），没有依据就不发数——
+这条是红线"禁止猜"在界面上的直接体现，别看到列空着就去补。
+
 ## 四b、新站（Vue 3 + Vite）的视觉与交互约束（2026-10-09 起）2026-10-09 用户决策把表现层迁到 Vue 3 + Vite，**按页迁移、两栈并存**，`src/data/*.json` 仍是唯一数据基底。
 本节只写新站必须守住的视觉与交互约束，工程约束在 `wow-forever-web/AGENTS.md`。
 
