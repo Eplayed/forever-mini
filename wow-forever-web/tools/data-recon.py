@@ -33,7 +33,11 @@ def jload(rel):
 
 
 def dig(spec):
-    """spec 形如 "scale:spells" / "items-detail.json:meta.counts.total"，取不到返回 None。"""
+    """spec 形如 "scale:spells" / "items-detail.json:meta.counts.total"，取不到返回 None。
+       末尾带 "*" 的是"字典套列表"那种（参考站的区域表按大陆分两组），展平后数条数。"""
+    flat = spec.endswith("*")
+    if flat:
+        spec = spec[:-1]
     if spec.startswith("scale:"):
         sc = jload("scale.json")
         if not sc:
@@ -48,6 +52,11 @@ def dig(spec):
         if not isinstance(cur, dict) or k not in cur:
             return None
         cur = cur[k]
+    if flat and isinstance(cur, dict):
+        n = 0
+        for v in cur.values():
+            n += len(v) if isinstance(v, list) else 1
+        return n
     return cur if isinstance(cur, (int, float)) else None
 
 
@@ -81,14 +90,19 @@ ROWS = [
      "站内 38 座里 9 座是无限新增，等级区间已逐座对过（0 座不一致）"),
     ("首领与掉落", None, "scale:bosses", "每座本一页",
      "首领 228 / 掉落 1,050 条；掉落全部标待实测（源站自己写着无限服重做过掉落）→ 概率一类刻意不拿"),
-    ("专业与配方", None, "scale:recipes", "专业页",
-     "源侧专业页没自报配方总数（抓取时未记）→ 要人工核；站内 13 专业 / 1,990 条配方"),
+    ("专业与配方", "upstream/xr-prof.json:meta.counts.total", "scale:recipes", "专业页",
+     "两份口径不同，不是谁漏了：站内 1,990 条配方里 1,890 条能在 XR 那份里找到"
+     "（XR 侧 1,886 个物品号，4 条是同一物品在两个专业各列一次）；"
+     "XR 有、站内没有 16 条；站内多出的 100 条是参考站口径更宽（附魔、营地物件那几类 XR 没铺）。"
+     "来源商人与图纸掉落这两层就是从 XR 那 1,886 条里并进来的（647 / 336 条有值）"),
     ("传承", None, "legacy.json:meta.counts.challenges", "传承页",
      "参考站那份快照的 meta 没有自报挑战条数（只有 build 与抓取日期）→ 要人工核；"
      "站内 66 项、点数合计 81 与上游那页自报的 81 对上（legacy.json 的 "
      "meta.counts.upstreamChallengeTotal），条数这一层两家没在同一颗粒度上比过"),
-    ("世界区域", None, "scale:zones", "世界页「区域」",
-     "源侧区域表自报 43，站内 44：多出来的一格是站内单列的城市/新区域行（源侧把它归到别组）→ 要人工核"),
+    ("世界区域", "upstream/wclbox-world.json:payload.zones*", "scale:zones", "世界页「区域」",
+     "差的 1 个是**泽风岛**：参考站的区域表（按大陆分两组共 43 个）里没有它，"
+     "但同站的「怎样去新区域」那份清单里有（阵营与等级档都在），合并时按那条收进来。"
+     "所以 44 = 43 + 1，两个数都对，各指源站的不同接口"),
     ("天赋节点", None, "scale:talentNodes", "天赋计算器九棵树",
      "源侧按系自报、站内按节点计，两个颗粒度不能直接减 → 要人工核；"
      "改动清单那份的自报数（changes.json 的 upstreamCounts 七个数）已逐个对上"),
