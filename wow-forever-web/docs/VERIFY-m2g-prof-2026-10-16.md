@@ -71,4 +71,5 @@ XR 那份配方行里有两个数看着就是"学习门槛"，但**含义没定�
 | `python3 tools/site-check.py --only professions` | 16 / 16 通过（含新增 4 条） |
 | `python3 tools/app-parity.py --strict --page professions` | 全部组合无差异 |
 | `python3 /tmp/m2g-reverse.py` | 4 条脏数据全部拦下 + 还原 md5 一致 |
-| 整站全量 + 两栈全量 | 见文末补记 |
+| 整站全量 `python3 tools/site-check.py` | **721 / 721 全通过**，exit 0（上一批 717，专业段 +4 条） |
+| 两栈全量 `python3 tools/app-parity.py --strict` | **全部组合无差异**（20 页） |
