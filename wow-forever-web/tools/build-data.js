@@ -1086,6 +1086,66 @@ if (fs.existsSync(itdPath)) {
   warns.push('items-detail.json 缺失：物品库详情抽屉将是空态（跑 tools/extract-addon-items-detail.py + tools/scrape-wclbox-items-detail.py + tools/merge-items-detail.py 生成）');
 }
 
+// ---------- 法术书（M1-A，2026-10-16 站主定"以插件为准"后的第一条新板块） ----------
+// 名字与状态的口径来自参考站对无限测试版客户端的转述（按 2026-10-08 的定档算 L0，可逐字回查）；
+// 两份插件只回填每级 spellId 与学习等级，它们的描述字段在抽取阶段就没落盘。
+// 这里查结构与红线：句子不进名字、两说要留档、来源必须可点回。
+const spellsPath = path.join(ROOT, 'spells.json');
+if (fs.existsSync(spellsPath)) {
+  const sp = JSON.parse(fs.readFileSync(spellsPath, 'utf8'));
+  const list = sp.spells || [];
+  const classIds = new Set((read('classes.json').classes || []).map((c) => c.id));
+  const STATES = ['same', 'changed', 'new', 'removed', 'renamed'];
+  const RELATIONS = ['talent', 'race', 'earlier', 'baseline'];
+  const badName = [], badClass = [], badProv = [], badState = [], badAlt = [], badRank = [], pct = [];
+  const seenIds = new Set();
+  let dupIds = 0;
+  list.forEach((r, i) => {
+    if (!r.name || /[。！？]|\bTODO\b/.test(r.name)) badName.push(r.name || '(空名)');
+    if (/%/.test(String(r.name))) pct.push(r.name);
+    if (!classIds.has(r.classId)) badClass.push(r.id);
+    if (!(r.provenance || []).length || r.provenance.some((p) => !p.url || !p.checkedAt)) badProv.push(r.id);
+    if (r.state != null && STATES.indexOf(r.state) < 0) badState.push(r.id);
+    if (r.relation != null && RELATIONS.indexOf(r.relation) < 0) badState.push(r.id);
+    // 四态与来历是两族标签：同一条既"有改动"又"天赋技能"说明抓取层把 class 归错族了
+    if (r.state != null && r.relation != null) badState.push(r.id + '(两族都有)');
+    if (r.ranksAlt !== undefined && r.ranksAlt === r.ranks) badAlt.push(r.id + ':ranks');
+    if (r.learnAlt !== undefined && r.learnAlt === r.learnLevel) badAlt.push(r.id + ':learn');
+    if (r.ranks != null && !Number.isInteger(r.ranks)) badRank.push(r.id);
+    (r.spellRanks || []).forEach((k) => {
+      if (!Number.isInteger(k.spellId)) badRank.push(r.id + '#id');
+    });
+    if (seenIds.has(r.id)) dupIds += 1;
+    seenIds.add(r.id);
+  });
+  if (badName.length) errs.push(`spells：${badName.length} 条名字不合规（空或带句子标点，例：${badName.slice(0, 2).join('、')}）`);
+  if (pct.length) errs.push(`spells：${pct.length} 条名字里带百分号（那不是名称该有的东西）`);
+  if (badClass.length) errs.push(`spells：${badClass.length} 条 classId 不在 classes.json 里（${badClass.slice(0, 3).join('、')}）`);
+  if (badProv.length) errs.push(`spells：${badProv.length} 条没有可回查的来源（要带 url + 抓取日期）`);
+  if (badState.length) errs.push(`spells：${badState.length} 条状态/来历越界或两族混填（${badState.slice(0, 3).join('、')}）`);
+  if (badAlt.length) errs.push(`spells：${badAlt.length} 条"另一说"与主值相同，那不算分歧（${badAlt.slice(0, 3).join('、')}）`);
+  if (badRank.length) errs.push(`spells：${badRank.length} 条等级数字段不是整数（${badRank.slice(0, 3).join('、')}）`);
+  if (dupIds) errs.push(`spells：${dupIds} 条 id 重复`);
+  const c = (sp.meta || {}).counts || {};
+  if (c.total !== list.length) errs.push(`spells：条数 ${list.length} 与 meta.counts.total ${c.total} 对不上`);
+  const byClass = {};
+  list.forEach((r) => { byClass[r.classId] = (byClass[r.classId] || 0) + 1; });
+  if (JSON.stringify(Object.keys(byClass).sort().map((k) => [k, byClass[k]]))
+    !== JSON.stringify(Object.keys(c.byClass || {}).sort().map((k) => [k, c.byClass[k]]))) {
+    errs.push('spells：分职业条数与 meta.counts.byClass 对不上');
+  }
+  const stSum = STATES.reduce((a, k) => a + (c.byState && c.byState[k] || 0), 0);
+  if (stSum + (c.byState ? c.byState.null || 0 : 0) !== list.length) {
+    errs.push(`spells：状态计数合计 ${stSum + (c.byState ? c.byState.null || 0 : 0)} 与总条数 ${list.length} 对不上`);
+  }
+  scale.spells = list.length;
+  console.log('法术书：' + list.length + ' 条 / ' + Object.keys(byClass).length + ' 职业（带每级编号 '
+    + c.withId + ' · 等级数两说 ' + c.ranksAlt + ' · 起学等级两说 ' + c.learnAlt
+    + ' · 插件都没对上 ' + c.noPluginMatch + '）·定名档 L0 可回查');
+} else {
+  warns.push('spells.json 缺失：法术书那一块会空着（跑 tools/scrape-wclbox-spells.py + tools/merge-spells.py 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——
