@@ -19,6 +19,7 @@ import UpdatesPage from './pages/UpdatesPage.vue';
 import RankPage from './pages/RankPage.vue';
 import ProvenancePage from './pages/ProvenancePage.vue';
 import ItemsPage from './pages/ItemsPage.vue';
+import BisPage from './pages/BisPage.vue';
 import Unmigrated from './pages/Unmigrated.vue';
 
 /* 哪些旧页已经迁到新站：键是旧站的 html 文件名。
@@ -47,7 +48,9 @@ export const MIGRATED = {
   'updates.html': '/updates',
   'rank.html': '/rank',
   'provenance.html': '/provenance',
-  'items.html': '/items'
+  'items.html': '/items',
+  // 配装页旧站没有对应文件，这一条只是让导航与首页入口能用 linkFor('bis.html') 走站内路由
+  'bis.html': '/bis'
 };
 
 const routes = [
@@ -72,6 +75,8 @@ const routes = [
   { path: '/provenance', name: 'provenance', component: ProvenancePage, meta: { title: '溯源与覆盖率' } },
   // 新站独有页：数据来自 src/data/items.json（21,077 件全量名录）
   { path: '/items', name: 'items', component: ItemsPage, meta: { title: '物品库' } },
+  // 新站独有页：配装名单（2026-10-16 站主拍板，数据 src/data/bis.json）
+  { path: '/bis', name: 'bis', component: BisPage, meta: { title: '配装名单' } },
   // 全部迁完后这里只兜住旧书签里可能残留的其它地址
   { path: '/:all(.*)', name: 'unmigrated', component: Unmigrated, meta: { title: '这页还没迁过来' } }
 ];

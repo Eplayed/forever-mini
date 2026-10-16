@@ -663,6 +663,95 @@ def test_spellbook(browser, base):
             ctx.close()
 
 
+def test_bis(browser, base):
+    """配装页（2026-10-16 站主拍板走 C 方案）。盯四件事：
+       ① 界面上的数与名字全部来自我们自己的数据（bis.json 的顺序 + items.json 的名字）；
+       ② 点部位换备选、切阵营换装备这两条交互真的动；
+       ③ 红线：不许出现百分比与掉率措辞、口径那一句必须在；
+       ④ 桌面与 375 都不横溢。"""
+    print("\n[6b] 配装页")
+    import json
+    if not app_up(browser):
+        return
+    bis = json.load(open(os.path.join(SRC, "data", "bis.json"), encoding="utf-8"))
+    items = json.load(open(os.path.join(SRC, "data", "items.json"), encoding="utf-8"))["items"]
+    by_id = {x["id"]: x for x in items}
+    sets = bis["sets"]
+    w = [s for s in sets if s["cls"] == "warrior"][0]
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.on("console", lambda m: errs.append(m.text[:120]) if m.type == "error" else None)
+    page.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    page.wait_for_timeout(2200)
+    r = page.evaluate("""() => ({
+      h1: (document.querySelector('#main h1')||{}).innerText || '',
+      cells: document.querySelectorAll('.pzcell').length,
+      cellNames: [...document.querySelectorAll('.pzcell .pzname')].map(x => x.textContent.trim()),
+      alts: document.querySelectorAll('#pzalts tbody tr').length,
+      first: (document.querySelector('#pzalts tbody tr .nm')||{}).innerText || '',
+      src: (document.querySelector('#pzalts tbody tr .w-tail')||{}).innerText || '',
+      reads: [...document.querySelectorAll('.pz-read span')].map(x => x.innerText.replace(/\\s+/g,' ')),
+      note: (document.querySelector('#main .note')||{}).innerText || '',
+      over: document.documentElement.scrollWidth - innerWidth,
+      body: document.querySelector('#main').innerText })""")
+    check("配装页可访问且没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    check("配装页一个 H1 且写着等级段", r["h1"].startswith(u"30 级配装"), r["h1"])
+    check("纸娃娃格数等于数据里这一套的格数", r["cells"] == len(w["doll"]["alliance"]),
+          "%d 格（数据 %d）" % (r["cells"], len(w["doll"]["alliance"])))
+    want_names = [by_id[c["item"]]["name"] for c in w["doll"]["alliance"]]
+    check("纸娃娃上每件装备的名字都取自本站名录（不是抄参考站的写法）",
+          r["cellNames"] == want_names,
+          "不一致：%s" % [x for x in zip(r["cellNames"], want_names) if x[0] != x[1]][:3] or "全对")
+    head_rows = w["alts"]["alliance"]["head"]
+    check("点头部那一格列出的备选条数等于数据里的行数", r["alts"] == len(head_rows),
+          "%d 行（数据 %d）" % (r["alts"], len(head_rows)))
+    check("备选第一件就是这套选的那件，且来源那一格填得出来",
+          r["first"] == by_id[head_rows[0]]["name"] and len(r["src"]) > 0,
+          "%s ｜ 来源：%s" % (r["first"], r["src"]))
+    check("读数那五个数是从数据算出来的",
+          r["reads"][0].startswith(str(bis["meta"]["counts"]["sets"]))
+          and r["reads"][3].split(u"件")[0].strip() == str(bis["meta"]["counts"]["items"]),
+          " / ".join(r["reads"]))
+    check("红线口径那一句在页面上（本站整理、不是官方结论、没做模拟计算）",
+          u"不是官方结论" in r["note"] and u"没做模拟计算" in r["note"])
+    pct = re.findall(r"\d+(?:\.\d+)?\s*%|掉率", r["body"])
+    check("配装页不出现百分比与掉率措辞（红线）", not pct, str(pct[:4]))
+    check("配装页正文没有面向开发的词", not dev_word_hits(r["body"]), "干净")
+    check("配装页桌面不横向溢出", r["over"] <= 1, "溢出 %dpx" % r["over"])
+    # 交互：点第三个部位（肩部）→ 备选表跟着换
+    page.click(".pzdoll .pzcell:nth-child(3)")
+    page.wait_for_timeout(700)
+    a = page.evaluate("""() => ({slot: (document.querySelector('.pzcell.on .pzslot')||{}).innerText,
+      first: (document.querySelector('#pzalts tbody tr .nm')||{}).innerText})""")
+    sh = w["alts"]["alliance"].get("shoulder") or []
+    check("点部位会换备选表（切到肩部且第一件对得上数据）",
+          a["slot"] == u"肩部" and sh and a["first"] == by_id[sh[0]]["name"], json.dumps(a, ensure_ascii=False))
+    # 交互：切部落 → 至少一个部位的首选与联盟不同（战士实测差 4 件）
+    page.click(".pz-mode .pick:last-child")
+    page.wait_for_timeout(800)
+    hz = page.evaluate("() => [...document.querySelectorAll('.pzcell .pzname')].map(x => x.textContent.trim())")
+    diff = [i for i, (x, y) in enumerate(zip(r["cellNames"], hz)) if x != y]
+    data_diff = [i for i, (x, y) in enumerate(zip(w["doll"]["alliance"], w["doll"]["horde"])) if x["item"] != y["item"]]
+    check("切阵营会换装备，且换掉的部位与数据里不一致的部位数一致",
+          len(diff) > 0 and len(diff) == len(data_diff), "界面 %d 处 / 数据 %d 处" % (len(diff), len(data_diff)))
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis.png"))
+    ctx.close()
+
+    ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = ctx.new_page()
+    mp.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    mp.wait_for_timeout(2000)
+    mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - innerWidth,
+      small: [...document.querySelectorAll('.pzcell, .pz-mode .pick, .pz-cls .pick')]
+        .filter(b => b.getBoundingClientRect().height < 44).length })""")
+    check("配装页 375 不横向溢出", mm["over"] <= 1, json.dumps(mm))
+    check("配装页 375 点击目标不低于 44px", mm["small"] == 0, "%d 个偏小" % mm["small"])
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-m.png"))
+    ctx.close()
+
+
 def test_design_baseline(browser, base):
     """吸收自通用设计走查规则的量化底线：每屏一个 H1、触屏点击目标 ≥44px、
        控件有可读名、图片有 alt、数字用等宽对齐。见 docs/UI.md 第七节。"""
@@ -2220,7 +2309,7 @@ def test_app(browser, base):
     app_subs = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
                              ".map(a => a.textContent.trim())")
     APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
-               "区域与稀有", "副本", "团本", "配方", "排行"]
+               "区域与稀有", "副本", "团本", "配方", "配装", "排行"]
     check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
           "%d 项：%s" % (len(app_subs), app_subs))
     check("世界与工具两组按收窄后的口径（3 格 / 1 格）",
@@ -3664,6 +3753,7 @@ SECTIONS = [
     ("chooser", test_chooser),
     ("abilities", test_abilities),
     ("spellbook", test_spellbook),
+    ("bis", test_bis),
     ("races", test_races),
     ("grouping", test_grouping),
     ("dungeon_data", test_dungeon_data),

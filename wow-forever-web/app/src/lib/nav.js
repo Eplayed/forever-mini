@@ -25,6 +25,9 @@ export const NAV = [
     { file: 'raids.html', t: '团本', d: '客户端能排到的团队条目与另一份名单对照' }] },
   { t: '专业', items: [
     { file: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
+  // 站主 2026-10-16 定：配装单独一组（旧站没有这一页，linkFor 走 MIGRATED 里的 bis.html → /bis）
+  { t: '配装', items: [
+    { file: 'bis.html', t: '配装', d: '30 级各职业各专精的部位名单与同部位备选（本站整理，不是官方结论）' }] },
   { t: '工具', items: [
     { file: 'rank.html', t: '排行', d: '本站资料完整度排序，不是强度（仅网页）' }] }
 ];

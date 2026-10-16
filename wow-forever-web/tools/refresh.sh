@@ -11,6 +11,7 @@
 #   tools/refresh.sh prof        # 专业与配方
 #   tools/refresh.sh dungeons    # 副本：首领名单与掉落 + 卡片 + 客户端排队表（四个抓取器都要跑）
 #   tools/refresh.sh legacy      # 传承：三棵专长树 + 65 项挑战（句子在落盘前就删）
+#   tools/refresh.sh bis         # 配装名单：38 套 + 同部位备选（要开真浏览器点阵营，见 case 里的注释）
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
@@ -77,6 +78,13 @@ case "${1:-}" in
     run python3 tools/scrape-wclbox-shuju.py --group dungeons
     run python3 tools/fetch-db2-groupfinder.py
     run node tools/merge-dungeons.js
+    gate
+    ;;
+  bis)
+    # 配装线必须开真浏览器：部落那一版是点 .pz-faction 按钮才换数据的，SSR 只给联盟版
+    # （URL 变体与静态接口都试过，全是 404）。抓取阶段就把参考站写的句子与掉率百分比丢掉。
+    run python3 tools/scrape-wclbox-bis.py
+    run python3 tools/merge-bis.py
     gate
     ;;
   legacy)

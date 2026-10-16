@@ -1281,6 +1281,62 @@ if (fs.existsSync(achPath)) {
   warns.push('achievements.json 缺失：成就会空着（跑 tools/scrape-wclbox-achievements.py + tools/merge-achievements.py 生成）');
 }
 
+// ---------- 配装名单（2026-10-16 站主拍板走 C 方案，红线例外条款见仓库根 AGENTS.md 第五节） ----------
+// 这份数据只存"哪件装备在哪个部位、按什么顺序"，数值与名称一律回 items.json 查。
+// 卡口因此盯四件事：① 名单里的物品 ID 必须都在我们名录里（否则页面上就是空白格）；
+// ② 每套必须带 url + 抓取日（红线要求能回查是哪家列的）；③ 整份文件不许出现掉率与百分比
+// （参考站那一栏原文里有"掉率约 0.3%"，抓取阶段已丢，这里再钉一道，防合并脚本改回去）；
+// ④ 分级只许 L1——只有一家资料站列过，没人逐字核过"推荐对不对"，不许自己升 L0。
+const bisPath = path.join(ROOT, 'bis.json');
+let bisSets = [];
+if (fs.existsSync(bisPath)) {
+  const bis = JSON.parse(fs.readFileSync(bisPath, 'utf8'));
+  bisSets = bis.sets || [];
+  const baseIds = new Set(JSON.parse(fs.readFileSync(itPath, 'utf8')).items.map((x) => x.id));
+  const bErr = [], bMiss = new Set(), bSeen = new Set();
+  const clsOf = {};
+  bisSets.forEach((s) => {
+    if (!s.id || bSeen.has(s.id)) bErr.push('套装 id 缺失或重复:' + s.id);
+    bSeen.add(s.id);
+    if (!s.cls || !s.clsCn || !s.mode) bErr.push((s.id || '?') + ' 缺 cls/clsCn/mode');
+    if (!/^https:\/\//.test(String(s.url || ''))) bErr.push((s.id || '?') + ' 没有可回查的 url');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(s.fetched || ''))) bErr.push((s.id || '?') + ' fetched 不是日期');
+    if (!s.level) bErr.push((s.id || '?') + ' 没写等级段');
+    (clsOf[s.cls] = clsOf[s.cls] || []).push(s.mode);
+    const ids = [];
+    ['alliance', 'horde'].forEach((f) => {
+      const d = (s.doll || {})[f] || [];
+      if (f === 'alliance' && !d.length) bErr.push((s.id || '?') + ' 联盟纸娃娃是空的');
+      d.forEach((c) => { if (!c.slot) bErr.push((s.id || '?') + ' 有格子没有部位名'); ids.push(c.item); });
+      Object.keys((s.alts || {})[f] || {}).forEach((k) => {
+        ((s.alts[f] || {})[k] || []).forEach((i) => ids.push(i));
+      });
+      ((s.enchants || {})[f] || []).forEach((e) => { ids.push(e.item); if (!e.slots || !e.slots.length) bErr.push((s.id || '?') + ' 附魔没写贴哪个部位'); });
+      ((s.consumables || {})[f] || []).forEach((i) => ids.push(i));
+    });
+    ids.forEach((i) => { if (!baseIds.has(i)) bMiss.add(i); });
+  });
+  if (bMiss.size) bErr.push(bMiss.size + ' 个物品 ID 不在 items.json 名录里（如 ' + Array.from(bMiss).slice(0, 5).join('、') + '）');
+  if (Object.keys(clsOf).length !== 9) bErr.push('职业数 ' + Object.keys(clsOf).length + '，应该是 9 个');
+  if (bisSets.length < 30) bErr.push('套数 ' + bisSets.length + '，比参考站自报的 38 少太多，像是抓漏了');
+  const blob = JSON.stringify(bis);
+  if (/掉率|掉落概率/.test(blob)) bErr.push('配装名单里出现掉率措辞（红线：掉落不写百分比）');
+  const pct = blob.match(/\d+(?:\.\d+)?%/);
+  if (pct) bErr.push('配装名单里出现百分比 ' + pct[0] + '（红线同上）');
+  if ((bis.meta || {}).level_grading !== 'L1') bErr.push('配装线分级必须是 L1（只有一家列过），现在是 ' + (bis.meta || {}).level_grading);
+  const c = (bis.meta || {}).counts || {};
+  if (c.sets !== bisSets.length) bErr.push(`bis：套数 ${bisSets.length} 与 meta.counts.sets ${c.sets} 对不上`);
+  if (bErr.length) errs.push('配装名单：' + bErr.slice(0, 6).join(' ｜ ') + (bErr.length > 6 ? ` …共 ${bErr.length} 条` : ''));
+  scale.bisSets = bisSets.length;
+  scale.bisClasses = Object.keys(clsOf).length;
+  scale.bisItems = (c.items || 0);
+  console.log('配装名单：' + bisSets.length + ' 套 / ' + scale.bisClasses + ' 职业 / 等级段 '
+    + ((bis.meta || {}).level || '?') + ' 级 / 用到 ' + scale.bisItems + ' 件装备'
+    + '（L1 单源，名字与部位已与本站名录逐条对平：分歧 ' + (c.nameConflicts || 0) + ' / ' + (c.slotMismatch || 0) + ' 处）');
+} else {
+  warns.push('bis.json 缺失：配装页会空着（跑 tools/scrape-wclbox-bis.py + tools/merge-bis.py 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——
