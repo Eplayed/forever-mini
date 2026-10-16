@@ -794,9 +794,11 @@ def test_races(browser, base):
     # 导航二级项是一份对外契约，逐项写死比"数量等于页数+1"更能说明预期：
     # 2026-10-12 用户实拍后撤了「技能书」与「特长」两格（页面本身还在，见 NO_NAV_ENTRY）。
     NAV_ENTRIES = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
-                   "区域与稀有", "副本", "团本", "系统规则", "配方",
+                   "区域与稀有", "成就", "副本", "团本", "系统规则", "配方",
                    "速查", "时间表", "动态", "排行", "溯源"]
-    check("导航二级项就是这 16 格，顺序与名字不许漂", subs == NAV_ENTRIES,
+    # 格数从表里算，不写在句子中——2026-10-16 加成就页时那句"就是这 16 格"就成了假话
+    # （断言本身是对的，名字与顺序照旧逐项比，只有标题里的数字会漂）。
+    check("导航二级项就是这 %d 格，顺序与名字不许漂" % len(NAV_ENTRIES), subs == NAV_ENTRIES,
           "%d 项：%s" % (len(subs), subs))
     nav_files = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
                               ".map(a => (a.getAttribute('href') || '').split('#')[0])")
@@ -2433,8 +2435,19 @@ def test_search(browser, base):
     check("成就（能列的那些）全部进了搜索索引", got_ach == exp_ach,
           "索引 %d / 数据去重后 %d（开发埋点 %d 条不列）" % (got_ach, exp_ach, len(ach_all) - len(ach_show)))
     other_names = set(it[1] for it in idx["items"] if it[0] not in ("spl", "ach"))
-    uniq_spl = next(x for x in sp_all if x["name"] not in other_names)
-    uniq_ach = next(x for x in ach_show if x["name"] not in other_names)
+    # 落地断言要挑一条"跳过去只可能是这一类"的名字。判据不是"全站不重名"——495 条法术名
+    # 全都和改动清单重名（那是同一条法术在另一个板块的说法），而是**没有别的板块也落在这同一页**：
+    # 首行取的是第一条命中，技能四态（abl）与法术书同页，撞名就会断言打到错误的行上。
+    def pick_uniq_on_page(kind, src):
+        page = kinds[kind][1]
+        comp = set(it[1] for it in idx["items"]
+                   if it[0] != kind and kinds[it[0]][1] == page)
+        return next((x for x in src if x["name"] not in comp), None)
+    uniq_spl = pick_uniq_on_page("spl", sp_all)
+    uniq_ach = pick_uniq_on_page("ach", ach_show)
+    check("法术书与成就各找得到一条不与同页板块撞名的条目用于落地断言",
+          bool(uniq_spl) and bool(uniq_ach),
+          "法术 %s / 成就 %s" % (uniq_spl and uniq_spl["name"], uniq_ach and uniq_ach["name"]))
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
