@@ -85,7 +85,7 @@ def fetch_raw(url):
             return urllib.request.urlopen(req, timeout=25, context=ctx).read().decode("utf-8", "replace")
         except Exception as exc:
             last = exc
-    out = subprocess.run(["curl", "-sSL", "--max-time", "25", "-A", UA, url],
+    out = subprocess.run(["curl", "-sSL", "--http1.1", "--max-time", "25", "-A", UA, url],
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if out.returncode != 0 or not out.stdout:
         raise RuntimeError("urllib 与 curl 都失败：%s / %s" % (last, out.stderr.decode("utf-8", "replace")[:120]))
@@ -227,6 +227,25 @@ def main():
             items.append({"src": "改动清单", "id": x["id"], "cn": x.get("nameCn"), "cls": x.get("classId"),
                           "level": x.get("level"), "prov": x.get("provenance", [])})
 
+    # 法术书 495 条（M2-E，2026-10-16）：名字回它自己声明的那一页 /fashu/<职业> 逐字核对。
+    # 这条补的是 L0 的另一半——build-data 只能证明"挂着来源"，证明不了"抄的时候没抄错字"。
+    sp_path = os.path.join(DATA, "spells.json")
+    if os.path.exists(sp_path):
+        spd = json.load(io.open(sp_path, encoding="utf-8"))
+        for x in (spd.get("spells") or []):
+            items.append({"src": "法术书", "id": x["id"], "cn": x.get("name"), "cls": x.get("classId"),
+                          "level": x.get("level"), "prov": x.get("provenance", [])})
+    # 成就只核那 46 条两源互证的：其余 165 条本来就只有一处插件说过、没声称可回查，
+    # 把它们算进"核不到"是拿体检表制造假问题。
+    ac_path = os.path.join(DATA, "achievements.json")
+    if os.path.exists(ac_path):
+        acd = json.load(io.open(ac_path, encoding="utf-8"))
+        for x in (acd.get("achievements") or []):
+            if x.get("level") != "L0":
+                continue
+            items.append({"src": "成就", "id": x["id"], "cn": x.get("name"), "cls": x.get("top"),
+                          "level": x.get("level"), "prov": x.get("provenance", [])})
+
     lg_path = os.path.join(DATA, "legacy.json")
     if os.path.exists(lg_path):
         lgd = json.load(io.open(lg_path, encoding="utf-8"))
@@ -262,6 +281,10 @@ def main():
     judged = []
     hits, misses, no_source, loose_hits = [], [], [], []
     expected_unofficial = []
+    # 只有插件来源（本地 Lua 文件）的那一类：本来就没有能回查的网页，不是"声称官方却核不到"。
+    # 混在 no_source 里会让体检表制造假问题（M1-C 那 326 只单源稀有 + 它们的掉落全落在这格），
+    # 所以单列一格，写清它是按单源定 L1 的设计结果。
+    addon_only = []
     exc_path = os.path.join(DATA, "audit-exceptions.json")
     exceptions = {}
     if os.path.exists(exc_path):
@@ -273,6 +296,9 @@ def main():
             no_source.append((it, "词条没有中文名"))
             continue
         if not srcs:
+            if any((p.get("type") or "") == "addon" for p in it["prov"]):
+                addon_only.append((it, "只有插件来源（本地 Lua，没有可回查的网页）"))
+                continue
             # L0/L1 声称官方却给不出官方链接才是问题；L2/L3 本来就用转载/开放数据，属预期
             bucket = no_source if it.get("level") in ("L0", "L1") else expected_unofficial
             bucket.append((it, "没有官方来源 URL（%s）" % (it.get("level") or "L3")))
@@ -322,14 +348,19 @@ def main():
     lines.append("| **未命中（要人工回原文看）** | %d |" % len(misses))
     lines.append("| 已人工判定并留痕（见 audit-exceptions.json） | %d |" % len(judged))
     lines.append("| **声称官方却核不到（L0/L1 缺官方链接）** | %d |" % len(no_source))
+    lines.append("| 只有插件来源、按设计就没有可回查网页 | %d |" % len(addon_only))
     lines.append("| 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | %d |" % len(expected_unofficial))
     lines.append("")
-    lines.append("核对范围含 `glossary.json` 词条、`dungeons.json` 副本中文名、`systems.json` 系统卡片中文名、"
-        "`world.json` 的稀有精英名与掉落物名、书名与上交奖励名（区域名不在此列，见上）、"
-        "`changes.json` 的 964 条天赋与法术名（只核名称，句子本站不存）、"
-        "`legacy.json` 的传承专长名与进度奖励名（同样只核名称），"
-                 "`timeline.json` 与 `abilities.json` 的官方整句，以及 `races.json` 的种族简介、种族特长整句、"
-                 "亮点组合与天裔导语。")
+    # 核对范围那句话按实际进来的条目生成，不手写条数——
+    # 上一版写死的「changes.json 的 964 条」在今天上游走到 967 之后就成了报告里的假数
+    per_src = {}
+    for it in items:
+        per_src[it["src"]] = per_src.get(it["src"], 0) + 1
+    lines.append("核对范围（按进来的条目数，全部从成品现算）：" +
+                 "、".join("%s %d 条" % (k, per_src[k]) for k in sorted(per_src, key=lambda x: -per_src[x])) +
+                 "。区域名不在这批：它来自结构化接口而不是页面正文，"
+                 "由 build-data.js 的两套 mapId 交叉验证把关；天赋与法术、传承与成就都只核名称，"
+                 "句子本站不存，也就没有可核的对象。")
     rate = len(hits) * 100.0 / max(len(items), 1)
     lines.append("| 命中率 | %.1f%% |" % rate)
     lines.append("")
@@ -397,6 +428,23 @@ def main():
         lines.append("")
         for it, why in no_source:
             lines.append("- %s / %s（%s）：%s" % (it["src"], it["id"], it["cn"], why))
+        lines.append("")
+    if addon_only:
+        lines.append("## 只有插件来源的那一类（按设计不可逐字回查，不算冒充官方）")
+        lines.append("")
+        lines.append("这一格 %d 条的支撑来源是本地插件那份表（GearInsight / XR 的 Data.lua），"
+                     "**它根本没有对应的网页可以点开核对**，所以逐字回查这条路对它们不适用。"
+                     "这些条目在成品里一律定 L1 并写明「只有插件一家说过」，界面按单源处理——"
+                     "不是漏挂链接，是这条线的来源形态决定的。要升 L0 得等第二处能逐字回查的源"
+                     "（官方中文列表，或开服后游戏内逐条对）。" % len(addon_only))
+        lines.append("")
+        by_src = {}
+        for it, why in addon_only:
+            by_src[it["src"]] = by_src.get(it["src"], 0) + 1
+        lines.append("| 出处 | 条数 |")
+        lines.append("| --- | --- |")
+        for k in sorted(by_src, key=lambda x: -by_src[x]):
+            lines.append("| %s | %d |" % (k, by_src[k]))
         lines.append("")
     lines.append("## 处置规则")
     lines.append("")
