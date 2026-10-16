@@ -56,10 +56,11 @@ def dig(spec):
 ROWS = [
     ("法术书", "upstream/wclbox-spells.json:meta.counts.total", "scale:spells",
      "技能页「法术书」表（site-check 6a 钉行数）",
-     "参考站九页法术逐行取回，成品一条没丢；级数与起学等级两边说法不同的 34 条两个数都留着"),
+     "参考站九页法术逐行取回，成品一条没丢；级数与起学等级两边说法不同的那些条，两个数都摆着（条数见 spells.json 的 meta.counts）"),
     ("成就", "upstream/gi-achievements.json:meta.counts.total", "scale:achievements",
      "成就页（列 198 条，可列数在 achievements.json 的 meta.counts.shown）",
-     "差的 13 条是客户端里的开发条目（Hidden / UNUSED / 测试问卷），玩家拿不到所以不列，条目没删"),
+     "差的那些是客户端里的开发条目（Hidden / UNUSED / 测试问卷），玩家拿不到所以不列，条目没删；" +
+     "可列数在 achievements.json 的 meta.counts.shown"),
     ("稀有精英", "upstream/gi-rares.json:meta.counts.total", "scale:rares",
      "世界页「稀有」",
      "站内是两家的并集：插件那份 338 + 参考站 36 − 重合 12 = 362。参考站那 36 的自报数没落进快照 "
@@ -102,6 +103,19 @@ ROWS = [
 ]
 
 
+def stamps(spec):
+    """从源侧那份快照的 meta 里取「抓取日 + 客户端版本」——验收要看的不只是条数对没对，
+       还有"这个数是哪天从哪一版读来的"。取不到就返回 None，表里显示 —。"""
+    if not spec or not spec.startswith("upstream/"):
+        return None, None
+    doc = jload(spec.split(":")[0]) or {}
+    m = doc.get("meta") or {}
+    d = m.get("fetched") or m.get("fetchedAt") or m.get("generatedAt") or m.get("scrapedAt")
+    b = (m.get("foreverBuild") or m.get("upstreamBuild") or m.get("clientBuild")
+         or m.get("build") or (m.get("builds") or [None])[0])
+    return d, b
+
+
 def gen_date():
     sc = jload("scale.json") or {}
     return (sc.get("meta") or {}).get("generatedAt") or "日期读不到"
@@ -117,8 +131,9 @@ def main():
         ours = dig(ours_spec)
         diff = None if (src is None or ours is None) else ours - src
         manual = diff is None or (diff != 0 and not why)
+        snap, build = stamps(src_spec)
         out.append({"board": name, "source": src, "ours": ours, "diff": diff,
-                    "page": page, "explain": why,
+                    "page": page, "explain": why, "snapshot": snap, "build": build,
                     "status": ("已对齐" if diff == 0 else
                                ("差值有解释" if diff is not None and why else "要人工核")),
                     "needHuman": bool(manual),
@@ -128,12 +143,14 @@ def main():
         return 0
     print("板块对账表 · 三个数全部现读（数据日期 %s）" % gen_date())
     print("=" * 78)
-    print("%-8s %10s %10s %8s  %s" % ("板块", "源侧自报", "站内", "差", "这一行的结论"))
+    print("%-8s %10s %10s %8s  %-11s %-13s %s"
+          % ("板块", "源侧自报", "站内", "差", "快照日", "客户端版本", "结论"))
     for r in out:
         s = "—" if r["source"] is None else "{:,}".format(r["source"])
         o = "—" if r["ours"] is None else "{:,}".format(r["ours"])
         df = "?" if r["diff"] is None else ("%+d" % r["diff"])
-        print("%-8s %10s %10s %8s  %s" % (r["board"], s, o, df, r["status"]))
+        print("%-8s %10s %10s %8s  %-11s %-13s %s"
+              % (r["board"], s, o, df, r["snapshot"] or "—", r["build"] or "—", r["status"]))
         print("         页面：%s" % r["page"])
         print("         说明：%s" % r["explain"])
     need = [r["board"] for r in out if r["needHuman"]]
@@ -143,6 +160,11 @@ def main():
     print("逐数对上（差 0）：%d 行（%s）" % (len(zero), "、".join(zero)))
     print("有差但已解释：%d 行（%s）" % (len(exp), "、".join(exp)))
     print("要人工核：%d / %d（%s）" % (len(need), len(out), "、".join(need)))
+    builds = sorted({str(r["build"]) for r in out if r["build"]})
+    print("各线读到的客户端版本：%s" % "、".join(builds) if builds else "各线版本：都没记在快照 meta 里")
+    if len(builds) > 1:
+        print("→ 这几行不是同一版读来的。版本最高那组才是当前值，其余按各自快照日排队重抓"
+              "（顺序与判据见根 ROLES.md 的 D6）。")
     print("「源侧自报」那列是 — 的不是漏抓，是那一侧当时没把自报数落进快照——"
           "补法是让对应抓取脚本把源侧自报数写进 meta（下一批重抓时带上）。")
     print("这一份是验收件不是门禁：对不上也退出 0，拦人的是 build-data.js、site-check.py。")

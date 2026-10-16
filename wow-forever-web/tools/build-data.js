@@ -1122,6 +1122,8 @@ if (fs.existsSync(spellsPath)) {
     if (/%/.test(String(r.name))) pct.push(r.name);
     if (!classIds.has(r.classId)) badClass.push(r.id);
     if (!(r.provenance || []).length || r.provenance.some((p) => !p.url || !p.checkedAt)) badProv.push(r.id);
+    // 来源 URL 必须是真地址：写成 /fashu/<职业> 这种模板，玩家点不开、逐字回查也跑不动
+    if ((r.provenance || []).some((p) => /[<>]/.test(String(p.url || '')))) badProv.push(r.id + ':模板链接');
     if (r.state != null && STATES.indexOf(r.state) < 0) badState.push(r.id);
     if (r.relation != null && RELATIONS.indexOf(r.relation) < 0) badState.push(r.id);
     // 四态与来历是两族标签：同一条既"有改动"又"天赋技能"说明抓取层把 class 归错族了

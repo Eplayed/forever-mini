@@ -109,7 +109,12 @@ def main():
                     counts['learnAlt'] += 1
         if not g and not x:
             counts['noPluginMatch'] += 1
-        rec['provenance'] = [prov_wb]
+        # 每条挂自己那一页的真地址（抓取时已写进 upstream 的 url）。
+        # 红线要求 L0 的每条都带能点开的 url + 日期，写 /fashu/<职业> 这种模板等于没给。
+        prov_rec = dict(prov_wb)
+        if s.get('url'):
+            prov_rec['url'] = s['url']
+        rec['provenance'] = [prov_rec]
         if g:
             rec['provenance'].append(prov_gi)
         if x:
@@ -139,7 +144,10 @@ def main():
                            '插件来源（作者译名 / Wowhead 转译）不参与定名。',
             'sources': [
                 {'key': 'wclbox', 'name': '无限数据库 · 法术书', 'kind': '当前 beta 客户端解包转述',
-                 'url': prov_wb['url'], 'date': prov_wb['checkedAt']},
+                 'url': prov_wb['url'], 'date': prov_wb['checkedAt'],
+                 'build': wb['meta'].get('foreverBuild'), 'release': wb['meta'].get('release'),
+                 # 九个真地址逐条列着：逐字回查（tools/audit-translations.py）按职业取那一页
+                 'pages': (wb['meta'].get('pageUrls') or {})},
                 {'key': 'gi', 'name': 'GearInsight 无限版 0.4.29', 'kind': 'beta 解包转述（回填 id 与标记）',
                  'date': gi['meta']['fetched']},
                 {'key': 'xr', 'name': 'XR 全能助手 0.37.1', 'kind': '社区整理稿（回填每级学习等级）',

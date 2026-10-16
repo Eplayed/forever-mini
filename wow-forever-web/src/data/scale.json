@@ -17,13 +17,13 @@
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
-  "changes": 965,
-  "changesTalents": 545,
-  "changesSpells": 420,
-  "changesNew": 113,
-  "changesModified": 304,
-  "changesSpellsChanged": 257,
-  "changesRemoved": 79,
+  "changes": 967,
+  "changesTalents": 546,
+  "changesSpells": 421,
+  "changesNew": 114,
+  "changesModified": 305,
+  "changesSpellsChanged": 260,
+  "changesRemoved": 80,
   "classRank": [
    {
     "classId": "hunter",
@@ -52,25 +52,25 @@
    {
     "classId": "priest",
     "official": 80,
-    "datamine": 107,
-    "total": 187,
-    "share": 42.8,
+    "datamine": 108,
+    "total": 188,
+    "share": 42.6,
     "place": 4
    },
    {
     "classId": "warlock",
     "official": 72,
-    "datamine": 114,
-    "total": 186,
-    "share": 38.7,
+    "datamine": 113,
+    "total": 185,
+    "share": 38.9,
     "place": 5
    },
    {
     "classId": "mage",
     "official": 64,
-    "datamine": 105,
-    "total": 169,
-    "share": 37.9,
+    "datamine": 107,
+    "total": 171,
+    "share": 37.4,
     "place": 6
    },
    {
@@ -109,9 +109,9 @@
   },
   "items": 21077,
   "itemsNew": 5346,
-  "spells": 495,
+  "spells": 498,
   "achievements": 211,
-  "search": 5302,
+  "search": 5307,
   "talentPreview": 466,
   "releases": 41,
   "navNew": [

@@ -110,6 +110,9 @@ def parse_page(html, class_id, class_cn):
                'iconKey': ic.group(1) if ic else None, 'tab': tab,
                'ranks': ranks if ranks else None, 'learnLevel': learn,
                'state': row_state, 'stateTag': tag_state, 'relation': relation,
+               # 每条都带真正那一页的地址：L0 的代价就是"来源要能点开看到是谁转述的"，
+               # 写 /fashu/<职业> 这种模板等于没给链接，逐字回查也没法自动跑
+               'url': BASE + '/fashu/' + class_id,
                'level': 'L0'}
         if row_state is None and relation is None:
             rec['stateUnknown'] = m.group(1)
@@ -122,6 +125,7 @@ def main():
         else os.path.join(ROOT, 'src', 'data', 'upstream')
     os.makedirs(out_dir, exist_ok=True)
     spells, per_class, pages = [], {}, {}
+    page_build, page_release = None, None
     for cid, cname in CLASSES:
         path = '/fashu/' + cid
         html = fetch(path)
@@ -129,6 +133,12 @@ def main():
         spells.extend(rows)
         per_class[cid] = len(rows)
         pages[cid] = len(html)
+        if not page_build:
+            mb = re.search(r'1\.60\.\d+\.\d+', html)
+            page_build = mb.group(0) if mb else None
+        if not page_release:
+            mr = re.search(r'r-\d{13}', html)
+            page_release = mr.group(0) if mr else None
         print('  %-8s %3d 条（页面 %d KB）' % (cid, len(rows), len(html) // 1024), flush=True)
         time.sleep(0.5)
 
@@ -137,6 +147,14 @@ def main():
     doc = {
         'meta': {
             'source': BASE + '/fashu/<职业>（九职业法术书，服务端渲染逐页取，共 9 页）',
+            # 页面自己写着当前客户端版本与那次部署的发布号，抓的时候就一并记下来：
+            # 10-16 那天上游白天重发一版（70374 → 70425），"条数没变"完全可能等于"内容变了"，
+            # 没有这个号就没人能发现我们读的是哪一版
+            'foreverBuild': page_build or None,
+            'release': page_release or None,
+            # 九个真地址逐条列出来：合并脚本把对应那一页写进每条的 provenance.url，
+            # 界面与 audit-translations.py 都读那一个，不再拿模板串凑
+            'pageUrls': {cid: BASE + '/fashu/' + cid for cid, _ in CLASSES},
             'fetched': date.today().isoformat(),
             'counts': {'total': len(spells), 'byClass': per_class, 'noIcon': no_icon},
             'tabs': tabs,
