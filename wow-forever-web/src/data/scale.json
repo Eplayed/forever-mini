@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-15",
+  "generatedAt": "2026-10-16",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },

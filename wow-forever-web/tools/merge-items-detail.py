@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 # 合并三份 upstream 快照 → src/data/items-detail.json（物品线二批：W2-3 全量抓取后重排层级）。
 #
-# 优先级（站主 2026-10-15 拍板按 docs/ITEMS-DETAIL-SOURCE-EVAL-2026-10-14.md 结论执行）：
-#   属性 st / 卖价 sell：wclbox 物品详情（当前 beta 客户端解包转述）
-#                        > GI loot（foreverchanges Beta 实测转述）
-#                        > XR（社区整理稿）
-#   —— 评估实测：双方都有属性的 106 件里，数值确实随 build 改过（硬根法杖 44-67/每秒 16.8/+8 精神
-#      对旧稿 36-54/每秒 13.6/+9 精神+20 法术强度），线上原来展示的是旧 build 的数。
+# 优先级（**站主 2026-10-16 拍板「取值也以插件为准」，层级反转**；
+#   10-15 那次定的"wclbox 当前 build 优先"同日作废，两条决定都记在 ROLES.md 与 PRD §四）：
+#   属性 st：GI loot（Beta 实测转述，build 1.60.1.69913）
+#            > XR（社区整理稿，2026-09-20）
+#            > wclbox（当前 beta 客户端解包转述，1.60.1.70374）—— 退为兜底
+#   卖价 sell：XR > wclbox
+#   代价已实测写清（不是猜的）：11,250 件会显示插件那套值，其中 2,487 件与当前 build 的数值真的不同
+#   （例：硬根法杖 插件 36-54/每秒 13.6/+9 精神+20 法术强度 vs 当前解包 44-67/每秒 16.8/+8 精神）；
+#   **覆盖率不受影响**——只有 wclbox 有属性的 5,973 件（含无限新增 1,374 件）仍由 wclbox 兜住。
+#   两说的原始数值都留在 upstream 三份快照里，随时可反向重跑。
 #   出处 src/srcName：只有 GI 有（"本 · 首领"口径），维持不变；
-#   教益句 use（"教你学会制作X"这一句）：单独一段，按 GI > XR 补——参考站把它当风味句摆，
+#   教益句 use（"教你学会制作X"这一句）：单独一段，按 GI > XR 补（参考站把它当风味句摆，
 #   本轮快照没带这层，抓取脚本已改为下一轮重抓时自己带上（详见 split_st 的注释）；
 #   wclbox 的"来源：NPC/容器 + 区域"这层**不落成品**——它是掉落归属的另一套口径，
 #   红线要等实测，先只留在 upstream 快照里，进页面得单独拍板。
@@ -113,7 +117,7 @@ def main():
     real_conflicts = []
     sell_conflicts = []
     n = {'st': 0, 'stWb': 0, 'stGi': 0, 'stXr': 0, 'sell': 0, 'sellWb': 0, 'sellXr': 0,
-         'src': 0, 'wbSame': 0, 'formatOnly': 0, 'wbMissingKept': 0, 'droppedFlavor': 0, 'use': 0}
+         'src': 0, 'sameText': 0, 'formatOnly': 0, 'wbMissingKept': 0, 'droppedFlavor': 0, 'use': 0}
     for kid in sorted(valid_ids, key=int):
         rec = {}
         w = wb_items.get(kid) or {}
@@ -125,56 +129,58 @@ def main():
         # 自报 missing（无限客户端里没有这个 id）与 held（保留了数据行、没有属性）的那些件，
         # 页面摆的是经典侧的提示框，不能当无限的数用——只能回落实测与社区稿
         w_ok = bool(w_st) and not w.get('tipIsClassic') and w.get('status') not in ('missing', 'held')
-        if w_ok:
-            rec['st'] = w_st
-            rec['stFrom'] = 'wclbox'
-            n['st'] += 1
-            n['stWb'] += 1
-            for other, key in ((g_st, 'gi'), (x_st, 'xr')):
-                if not other:
-                    continue
-                if norm(other) == norm(w_st):
-                    n['wbSame'] += 1
-                elif nums(other) == nums(w_st):
-                    n['formatOnly'] += 1
-                else:
-                    real_conflicts.append({'id': int(kid), 'wclbox': w_st, key: other, 'with': key})
-        elif g_st:
+        if g_st:
             rec['st'] = g_st
             rec['stFrom'] = 'gi'
             n['st'] += 1
             n['stGi'] += 1
-            if w.get('status') in ('missing', 'held'):
-                n['wbMissingKept'] += 1
-            if x_st and x_st != g_st:
-                real_conflicts.append({'id': int(kid), 'gi': g_st, 'xr': x_st})
+            for other, key in ((x_st, 'xr'), (w_st if w_ok else None, 'wclbox')):
+                if not other:
+                    continue
+                if norm(other) == norm(g_st):
+                    n['sameText'] += 1
+                elif nums(other) == nums(g_st):
+                    n['formatOnly'] += 1
+                else:
+                    real_conflicts.append({'id': int(kid), 'gi': g_st, key: other, 'with': key})
         elif x_st:
             rec['st'] = x_st
             rec['stFrom'] = 'xr'
             n['st'] += 1
             n['stXr'] += 1
+            if w_ok and nums(w_st) != nums(x_st):
+                real_conflicts.append({'id': int(kid), 'xr': x_st, 'wclbox': w_st, 'with': 'wclbox'})
+        elif w_ok:
+            # 插件两份都没有的件才用当前解包兜底；无限新增那 1,374 件全走这一路
+            rec['st'] = w_st
+            rec['stFrom'] = 'wclbox'
+            n['st'] += 1
+            n['stWb'] += 1
+        if not g_st and w.get('status') in ('missing', 'held'):
+            n['wbMissingKept'] += 1
         # 教益句单独立一段，不混进属性列表里（一段一个来源，徽标才说得清这一句是谁给的）。
         # 本轮的无限解包快照没带这一层：参考站把"教你学会制作X"按风味句的类名摆，抓取时照它的
         # 分类丢了；抓取脚本已改成下一轮按 build 重抓时会自己补上 use，那时这里就换成解包优先。
-        u = w.get('use') or w_use or g_use or x_use
+        u = g_use or x_use or w.get('use') or w_use
         if u:
             rec['use'] = u
-            rec['useFrom'] = 'wclbox' if (w.get('use') or w_use) else ('gi' if g_use else 'xr')
+            rec['useFrom'] = 'gi' if g_use else ('xr' if x_use else 'wclbox')
             n['use'] += 1
         w_sell = w.get('sell')
         x_sell = (xr_items.get(kid) or {}).get('sell')
-        if w_sell:
-            rec['sell'] = w_sell
-            rec['sellFrom'] = 'wclbox'
-            n['sell'] += 1
-            n['sellWb'] += 1
-            if x_sell and x_sell != w_sell:
-                sell_conflicts.append({'id': int(kid), 'wclbox': w_sell, 'xr': x_sell})
-        elif x_sell:
+        if x_sell:
+            # 站主定的"以插件为准"：卖价先取社区稿，wclbox 只兜它没有的
             rec['sell'] = x_sell
             rec['sellFrom'] = 'xr'
             n['sell'] += 1
             n['sellXr'] += 1
+            if w_sell and w_sell != x_sell:
+                sell_conflicts.append({'id': int(kid), 'xr': x_sell, 'wclbox': w_sell, 'with': 'wclbox'})
+        elif w_sell:
+            rec['sell'] = w_sell
+            rec['sellFrom'] = 'wclbox'
+            n['sell'] += 1
+            n['sellWb'] += 1
         g = gi_src.get(kid)
         if g:
             rec['src'] = g['src']
@@ -190,14 +196,15 @@ def main():
                       '（tools/scrape-wclbox-items-detail.py 逐件全量抓物品详情页）、'
                       'gi-items-detail.json 与 xr-items-detail.json'
                       '（tools/extract-addon-items-detail.py 从两份无限服插件 Data.lua 抽取）。'
-                      '属性与卖价按 wclbox（当前 beta 解包）> GI（Beta 实测转述）> XR（社区稿）取值，'
-                      '教益句（教你学会制作X）单独一段按 GI > XR 补，纯风味句丢掉；'
-                      '归一化后仍不一致的进 conflicts，只有写法不同的计 formatOnly；'
+                      '属性与卖价按 GI（Beta 实测转述）> XR（社区稿）> wclbox（当前 beta 解包，兜底）取值'
+                      '（站主 2026-10-16 定：取值以插件为准）；教益句单独一段按 GI > XR 补，纯风味句丢掉；'
+                      '数值签名不一致的进 conflicts，只有写法不同的计 formatOnly；'
                       '出处只有 GI 有；英文名按站主拍板不取。',
-            'pageNote': '属性与卖价先按无限测试版客户端（经新手盒子转述）；客户端里没有的那些件，'
-                        '回落到 Beta 实测掉落记录与社区整理稿，标题右边的小标写明这一条出自哪一份。'
-                        '"教你学会制作…"那一句按实测掉落记录与社区整理稿补——测试版客户端把它排在'
-                        '风味框里，这一版没从解包中取到。出处（哪座本、哪个首领掉落）只有实测掉落记录有。'
+            'pageNote': '属性与卖价先按两份插件资料：Beta 实测掉落记录（GearInsight 无限版转述）与'
+                        '社区整理稿（XR 全能助手转述）；这两份都没有的那些件（含无限新增的大部分），'
+                        '改按无限测试版客户端（经新手盒子转述）补。标题右边的小标写明这一条出自哪一份。'
+                        '同一件在几份资料里数值不同的，都留了档，等实测逐件定。'
+                        '出处（哪座本、哪个首领掉落）只有实测掉落记录有。'
                         '几份资料都没有的那一件，详情里就不显示那一段。',
             'sources': [
                 {'key': 'wclbox', 'name': '无限数据库 · 物品详情页', 'kind': '当前 beta 客户端解包转述',
@@ -221,10 +228,12 @@ def main():
     with open(p, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
         f.write('\n')
-    print('物品详情：%d 件（属性 %d：wclbox %d / GI %d / XR %d · 教益句 %d · 卖价 %d：wclbox %d / XR %d · '
-          '出处 %d · 数值真不同 %d · 只是写法不同 %d · 丢掉纯风味句 %d · 名录外孤儿 %d）'
-          % (len(out), n['st'], n['stWb'], n['stGi'], n['stXr'], n['use'], n['sell'], n['sellWb'],
-             n['sellXr'], n['src'], len(real_conflicts), n['formatOnly'], n['droppedFlavor'], len(orphans)))
+    print('物品详情：%d 件（属性 %d：GI %d / XR %d / 解包兜底 %d · 教益句 %d · '
+          '卖价 %d：XR %d / 解包兜底 %d · 出处 %d · 与另一说数值不同 %d · 只是写法不同 %d · '
+          '逐字相同 %d · 丢掉纯风味句 %d · 名录外孤儿 %d）'
+          % (len(out), n['st'], n['stGi'], n['stXr'], n['stWb'], n['use'], n['sell'], n['sellXr'],
+             n['sellWb'], n['src'], len(real_conflicts), n['formatOnly'], n['sameText'],
+             n['droppedFlavor'], len(orphans)))
 
 
 if __name__ == '__main__':
