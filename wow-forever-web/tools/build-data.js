@@ -1090,6 +1090,18 @@ if (fs.existsSync(itdPath)) {
 // 名字与状态的口径来自参考站对无限测试版客户端的转述（按 2026-10-08 的定档算 L0，可逐字回查）；
 // 两份插件只回填每级 spellId 与学习等级，它们的描述字段在抽取阶段就没落盘。
 // 这里查结构与红线：句子不进名字、两说要留档、来源必须可点回。
+// 稀有（M1-C）：GI 补进来的那些必须自己说清单源身份，不许混进 L0
+(list0 => {
+  if (!list0) return;
+  const l1 = list0.filter((r) => r.level === 'L1');
+  const badL1 = l1.filter((r) => !(r.provenance || []).some((p) => p.type === 'addon'));
+  const badLv = list0.filter((r) => ['L0', 'L1', 'L2'].indexOf(r.level) < 0);
+  const pct = list0.filter((r) => /%|掉率|概率/.test(JSON.stringify(r.drops || [])));
+  if (badLv.length) errs.push(`世界：${badLv.length} 条稀有的分级越界（只允许 L0/L1/L2）`);
+  if (badL1.length) errs.push(`世界：${badL1.length} 条 L1 稀有没标"只有插件一家说过"的来源`);
+  if (pct.length) errs.push(`世界：${pct.length} 条稀有的掉落里出现百分号或掉率措辞（红线）`);
+})((worldOut || {}).rares || null);
+
 const spellsPath = path.join(ROOT, 'spells.json');
 if (fs.existsSync(spellsPath)) {
   const sp = JSON.parse(fs.readFileSync(spellsPath, 'utf8'));

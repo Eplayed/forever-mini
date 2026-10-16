@@ -13,7 +13,7 @@
   "gatherNodes": 55,
   "zones": 44,
   "newZones": 4,
-  "rares": 36,
+  "rares": 362,
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
@@ -111,7 +111,7 @@
   "itemsNew": 5346,
   "spells": 495,
   "achievements": 211,
-  "search": 4350,
+  "search": 4675,
   "talentPreview": 466,
   "releases": 38,
   "navNew": [
@@ -145,17 +145,17 @@
   "abilities": 86,
   "coverage": {
    "L0": 366,
-   "L1": 111,
+   "L1": 437,
    "L2": 356,
    "L3": 2
   },
-  "coverageTotal": 835,
+  "coverageTotal": 1161,
   "pubCoverage": {
    "L0": 366,
-   "L1": 0,
+   "L1": 326,
    "L2": 1,
    "L3": 2
   },
-  "pubTotal": 369
+  "pubTotal": 695
  }
 }

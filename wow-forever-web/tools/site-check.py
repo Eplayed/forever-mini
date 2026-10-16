@@ -1445,7 +1445,14 @@ def test_world(browser, base):
     check("稀有卡数量对得上数据", rc == len(rares), "%d 张（数据 %d 个）" % (rc, len(rares)))
     marks = page.evaluate("""() => { const m = [...document.querySelectorAll('#wbody .zmark')];
       return { n: m.length, placed: m.filter(b => b.style.left && b.style.top).length }; }""")
-    exp_marks = len([r for r in rares if r.get("mark")])
+    # 有坐标但**本地图它没切**的那些（GI 补进来的 73 只里有这种）画不出点，
+    # 页面走"没切图"的兜底 + 文字坐标——所以期望值必须同时要求 mark 与 mapFile，
+    # 否则会拿一个页面根本做不到的数去卡（2026-10-16 接 GI 稀有时就踩过这条）
+    exp_marks = len([r for r in rares if r.get("mark") and r.get("mapFile")])
+    no_map = len([r for r in rares if r.get("mark") and not r.get("mapFile")])
+    honest = page.evaluate("() => document.querySelectorAll('#wbody .zmap.none').length")
+    check("没切图的那几只走兜底：标「没切图」并写文字坐标，不是静默丢掉",
+          honest >= no_map, "%d 处兜底 / 数据 %d 只缺点" % (honest, no_map))
     check("每个稀有标记点都按数据摆到图上", marks["n"] == exp_marks and marks["placed"] == exp_marks,
           "%d 个点，%d 个已定位（数据 %d）" % (marks["n"], marks["placed"], exp_marks))
     dl = page.evaluate("() => document.querySelectorAll('#wbody .rarecard .loot .loot-i').length")

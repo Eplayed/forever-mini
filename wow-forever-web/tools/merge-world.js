@@ -165,6 +165,7 @@ function itemOf(it) {
   };
 }
 
+let addonStats = null;
 /* ---------- 稀有精英：22 个带掉落的 + 9 个区域内卡片，合计 36 ---------- */
 const rares = [];
 ((P.xiyou || {}).hunts || []).forEach((h) => {
@@ -204,6 +205,88 @@ const rareRegions = ((P.xiyou || {}).where || []).map((w) => ({
   faction: SIDE[w.side] || null,
   mapId: w.anchor && /^zone-\d+$/.test(w.anchor) ? w.anchor.split('-')[1] : null
 }));
+
+/* ---------- M1-C：接上 GI 那份 338 只稀有（2026-10-16） ----------
+ * 分级：参考站那 36 只已逐字回查，保持 L0 一条不动；GI 独有的按"单源"定 L1；
+ *       两边都有的（按中文名对上）在原行标 alsoFrom:'gi'，不改它的名字与坐标。
+ * mapId：只认"区域名能在地图表里查到"的，查不到就进 unplaced 名单，不猜点。
+ * 掉落：GI 那份带 1,604 条掉落项（253 只带）——归属是事实字段可以列，
+ *       但掉落本身按红线保持 L2 待实测，这里只补"谁掉什么"，不写概率、不改现有 36 只的掉落。 */
+let addon = null;
+try {
+  addon = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'gi-rares.json'), 'utf8'));
+} catch (e) {
+  console.log('稀有：没找到 upstream/gi-rares.json，本轮只出参考站那 36 只');
+}
+if (addon) {
+  const itemsIdx = {};
+  try {
+    JSON.parse(fs.readFileSync(path.join(ROOT, 'items.json'), 'utf8')).items.forEach((x) => { itemsIdx[x.id] = x; });
+  } catch (e) { /* 名录没生成时不做富化，至少名字与坐标留着 */ }
+  const zoneToMap = {};
+  (P.maps || []).forEach((m) => {
+    (m.zoneNames || []).forEach((n) => { if (m.mapId != null) zoneToMap[n] = String(m.mapId); });
+  });
+  Object.keys(idByName).forEach((n) => { zoneToMap[n] = String(idByName[n]); });
+  rareRegions.forEach((r) => { if (r.mapId && !zoneToMap[r.zone]) zoneToMap[r.zone] = String(r.mapId); });
+
+  const byCn = {};
+  rares.forEach((r) => { byCn[r.nameCn] = r; });
+  let matched = 0, added = 0, unmapped = 0;
+  (addon.rares || []).forEach((g) => {
+    if (!g.name) return;
+    const hit = byCn[g.name];
+    if (hit) {
+      matched += 1;
+      hit.alsoFrom = 'gi';
+      if (!hit.levelRange && g.lvMin != null) hit.levelRange = g.lvMin === g.lvMax ? [g.lvMin] : [g.lvMin, g.lvMax];
+      return;
+    }
+    const mid = zoneToMap[g.zone] || null;
+    const drops = (g.items || []).map((it) => {
+      const base = itemsIdx[it.itemId] || null;
+      return { itemId: it.itemId, nameCn: it.name || (base ? base.name : null),
+               quality: base ? (typeof base.quality === 'number' ? base.quality : null) : null,
+               iconKey: base ? (base.icon || '').replace(/\.(jpg|webp|png)$/, '') : null,
+               itemLevel: base && typeof base.ilvl === 'number' ? base.ilvl : null,
+               bind: null, dropsLevel: 'L2' };
+    }).filter((d) => d.nameCn);
+    rares.push({
+      id: 'gi-' + g.npcId, level: 'L1',
+      nameCn: g.name, nameEn: g.nameEn || null, zone: g.zone || null, kind: null, kindRaw: g.rareKind || null,
+      isNew: null,
+      levelRange: g.lvMin == null ? null : (g.lvMin === g.lvMax ? [g.lvMin] : [g.lvMin, g.lvMax]),
+      mapId: mid, mapFile: mid && MAP_IMG[mid] ? MAP_IMG[mid] : null,
+      mark: typeof g.x === 'number' && typeof g.y === 'number' ? { x: g.x, y: g.y } : null,
+      world: null, mapSlug: null,
+      drops: drops,
+      provenance: [{ type: 'addon', url: 'GearInsight_Forever 0.4.29 Data.lua（rares 表）',
+                     note: '稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）',
+                     checkedAt: addon.meta ? addon.meta.fetched : null }]
+    });
+    added += 1;
+    if (!mid) unmapped += 1;
+  });
+  // 区域分组跟着重算：新增的那些区域原来不在 where 名单里，不补的话页面筛不到它们
+  const have = {};
+  rareRegions.forEach((r) => { have[r.zone] = true; });
+  const countByZone = {};
+  rares.forEach((r) => { if (r.zone) countByZone[r.zone] = (countByZone[r.zone] || 0) + 1; });
+  Object.keys(countByZone).forEach((z) => {
+    if (have[z]) {
+      const r = rareRegions.find((x) => x.zone === z);
+      if (r) r.count = countByZone[z];
+      return;
+    }
+    const mid = zoneToMap[z] || null;
+    rareRegions.push({ zone: z, count: countByZone[z], levelRange: null, side: null, faction: null, mapId: mid });
+  });
+  rareRegions.sort((a, b) => (b.count - a.count) || String(a.zone).localeCompare(String(b.zone)));
+  addonStats = { matched: matched, added: added, unmapped: unmapped, source: (addon.rares || []).length };
+  console.log('稀有：参考站 36 只保持 L0 不动 · GI 对上台数 ' + matched +
+    ' · 新收 ' + added + ' 只（区域查不到地图的 ' + unmapped + ' 只，进未定位）· 合计 ' + rares.length);
+}
+
 const rareSets = ((P.xiyou || {}).sets || []).map((s) => ({
   nameCn: s.name, known: !!s.known,
   pieces: (s.pieces || []).map((p) => {
@@ -331,6 +414,7 @@ const payload = {
   maps: maps,
   rareRegions: rareRegions,
   rares: rares,
+  rareRegionsFromAddon: addonStats,
   rareSets: rareSets,
   raresUnplaced: raresUnplaced,
   books: books,
