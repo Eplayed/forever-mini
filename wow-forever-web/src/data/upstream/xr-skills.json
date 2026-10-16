@@ -26,15 +26,15 @@
  "classes": {
   "Warrior": [
    {
-    "name": "震荡猛击",
-    "iconKey": "ability_thunderbolt",
+    "name": "战士",
+    "iconKey": "class_warrior",
     "learnLevels": [
      1
     ]
    },
    {
-    "name": "横扫攻击",
-    "iconKey": "ability_rogue_slicedice",
+    "name": "武器",
+    "iconKey": null,
     "learnLevels": [
      1
     ]
@@ -167,8 +167,8 @@
     "learnLevels": []
    },
    {
-    "name": "死亡之愿",
-    "iconKey": "spell_shadow_deathpact",
+    "name": "狂怒",
+    "iconKey": null,
     "learnLevels": [
      1,
      12,
@@ -316,8 +316,8 @@
     "learnLevels": []
    },
    {
-    "name": "震荡猛击",
-    "iconKey": "ability_thunderbolt",
+    "name": "防护",
+    "iconKey": null,
     "learnLevels": [
      10
     ]
@@ -419,8 +419,8 @@
   ],
   "Paladin": [
    {
-    "name": "召唤战马",
-    "iconKey": "ability_mount_charger",
+    "name": "圣骑士",
+    "iconKey": "class_paladin",
     "learnLevels": [
      1,
      6,
@@ -434,8 +434,8 @@
     ]
    },
    {
-    "name": "神恩术",
-    "iconKey": "spell_holy_heal",
+    "name": "神圣",
+    "iconKey": null,
     "learnLevels": [
      1,
      6,
@@ -664,8 +664,8 @@
     "learnLevels": []
    },
    {
-    "name": "圣殿骑士壁垒",
-    "iconKey": "ability_paladin_shieldofthetemplar",
+    "name": "防护",
+    "iconKey": null,
     "learnLevels": [
      1,
      10,
@@ -862,8 +862,8 @@
     "learnLevels": []
    },
    {
-    "name": "忏悔",
-    "iconKey": "spell_holy_prayerofhealing",
+    "name": "惩戒",
+    "iconKey": null,
     "learnLevels": [
      4,
      12,
@@ -956,8 +956,8 @@
     "learnLevels": []
    },
    {
-    "name": "召唤战马",
-    "iconKey": "ability_mount_charger",
+    "name": "坐骑",
+    "iconKey": null,
     "learnLevels": [
      40
     ]
@@ -979,15 +979,15 @@
   ],
   "Hunter": [
    {
-    "name": "雷霆践踏",
-    "iconKey": "ability_hunter_pet_gorilla",
+    "name": "猎人",
+    "iconKey": "class_hunter",
     "learnLevels": [
      10
     ]
    },
    {
-    "name": "狂野怒火",
-    "iconKey": "ability_druid_ferociousbite",
+    "name": "野兽控制",
+    "iconKey": null,
     "learnLevels": [
      10
     ]
@@ -1150,8 +1150,8 @@
     "learnLevels": []
    },
    {
-    "name": "驱散射击",
-    "iconKey": "ability_golemstormbolt",
+    "name": "射击",
+    "iconKey": null,
     "learnLevels": [
      1
     ]
@@ -1313,8 +1313,8 @@
     "learnLevels": []
    },
    {
-    "name": "陆行鸟踢击",
-    "iconKey": "ability_hunter_pet_tallstrider",
+    "name": "生存",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -1499,7 +1499,7 @@
    },
    {
     "name": "训练野兽",
-    "iconKey": "ability_hunter_beastcall02",
+    "iconKey": null,
     "learnLevels": [
      10
     ]
@@ -1512,8 +1512,8 @@
     ]
    },
    {
-    "name": "雷霆践踏",
-    "iconKey": "ability_hunter_pet_gorilla",
+    "name": "宠物技能",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -1856,8 +1856,8 @@
   ],
   "Rogue": [
    {
-    "name": "致盲粉",
-    "iconKey": "inv_misc_ammo_gunpowder_02",
+    "name": "潜行者",
+    "iconKey": "class_rogue",
     "learnLevels": [
      1,
      8,
@@ -1871,8 +1871,8 @@
     ]
    },
    {
-    "name": "毒针",
-    "iconKey": "inv_sword_31",
+    "name": "奇袭",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -1991,8 +1991,8 @@
     "learnLevels": []
    },
    {
-    "name": "冲动",
-    "iconKey": "spell_shadow_shadowworddominate",
+    "name": "战斗",
+    "iconKey": null,
     "learnLevels": [
      1,
      6,
@@ -2096,8 +2096,8 @@
     "learnLevels": []
    },
    {
-    "name": "出血",
-    "iconKey": "spell_shadow_lifedrain",
+    "name": "敏锐",
+    "iconKey": null,
     "learnLevels": [
      1,
      20,
@@ -2196,7 +2196,7 @@
    },
    {
     "name": "开锁",
-    "iconKey": "spell_nature_moonkey",
+    "iconKey": null,
     "learnLevels": [
      1
     ]
@@ -2209,8 +2209,8 @@
     ]
    },
    {
-    "name": "致盲粉",
-    "iconKey": "inv_misc_ammo_gunpowder_02",
+    "name": "毒药",
+    "iconKey": null,
     "learnLevels": [
      20,
      50
@@ -2283,8 +2283,8 @@
   ],
   "Priest": [
    {
-    "name": "暗影形态",
-    "iconKey": "spell_shadow_shadowform",
+    "name": "牧师",
+    "iconKey": "class_priest",
     "learnLevels": [
      1,
      12,
@@ -2295,8 +2295,8 @@
     ]
    },
    {
-    "name": "能量灌注",
-    "iconKey": "spell_holy_powerinfusion",
+    "name": "戒律",
+    "iconKey": null,
     "learnLevels": [
      1,
      12,
@@ -2476,8 +2476,8 @@
     "learnLevels": []
    },
    {
-    "name": "愈合祷言",
-    "iconKey": "spell_holy_prayerofmendingtga",
+    "name": "神圣",
+    "iconKey": null,
     "learnLevels": [
      1,
      4,
@@ -2688,8 +2688,8 @@
     ]
    },
    {
-    "name": "暗影形态",
-    "iconKey": "spell_shadow_shadowform",
+    "name": "暗影魔法",
+    "iconKey": null,
     "learnLevels": [
      4,
      10,
@@ -2893,8 +2893,8 @@
   ],
   "Shaman": [
    {
-    "name": "自然迅捷",
-    "iconKey": "spell_nature_ravenform",
+    "name": "萨满祭司",
+    "iconKey": "class_shaman",
     "learnLevels": [
      1,
      8,
@@ -2909,8 +2909,8 @@
     ]
    },
    {
-    "name": "熔岩爆裂",
-    "iconKey": "spell_shaman_lavaburst",
+    "name": "元素战斗",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -3083,8 +3083,8 @@
     ]
    },
    {
-    "name": "先知之怒",
-    "iconKey": "spell_nature_bloodlust",
+    "name": "增强",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -3308,8 +3308,8 @@
     "learnLevels": []
    },
    {
-    "name": "自然迅捷",
-    "iconKey": "spell_nature_ravenform",
+    "name": "恢复",
+    "iconKey": null,
     "learnLevels": [
      1,
      6,
@@ -3465,8 +3465,8 @@
   ],
   "Mage": [
    {
-    "name": "学习",
-    "iconKey": "inv_misc_book_08",
+    "name": "法师",
+    "iconKey": "class_mage",
     "learnLevels": [
      1,
      14,
@@ -3476,8 +3476,8 @@
     ]
    },
    {
-    "name": "奥术强化",
-    "iconKey": "spell_nature_lightning",
+    "name": "奥术",
+    "iconKey": null,
     "learnLevels": [
      1,
      14,
@@ -3790,8 +3790,8 @@
     "learnLevels": []
    },
    {
-    "name": "燃烧",
-    "iconKey": "spell_fire_sealoffire",
+    "name": "火焰",
+    "iconKey": null,
     "learnLevels": [
      1,
      6,
@@ -3919,8 +3919,8 @@
     "learnLevels": []
    },
    {
-    "name": "急速冷却",
-    "iconKey": "spell_frost_wizardmark",
+    "name": "冰霜",
+    "iconKey": null,
     "learnLevels": [
      1,
      10,
@@ -4040,8 +4040,8 @@
     "learnLevels": []
    },
    {
-    "name": "学习",
-    "iconKey": "inv_misc_book_08",
+    "name": "理解",
+    "iconKey": null,
     "learnLevels": [
      6
     ]
@@ -4063,8 +4063,8 @@
   ],
   "Warlock": [
    {
-    "name": "诱惑",
-    "iconKey": "spell_shadow_mindsteal",
+    "name": "术士",
+    "iconKey": "class_warlock",
     "learnLevels": [
      4,
      14,
@@ -4076,8 +4076,8 @@
     ]
    },
    {
-    "name": "折磨",
-    "iconKey": "ability_deathknight_hemorrhagicfever",
+    "name": "痛苦",
+    "iconKey": null,
     "learnLevels": [
      4,
      14,
@@ -4256,8 +4256,8 @@
     "learnLevels": []
    },
    {
-    "name": "灵魂链接",
-    "iconKey": "spell_shadow_gathershadows",
+    "name": "恶魔学识",
+    "iconKey": null,
     "learnLevels": [
      1,
      10
@@ -4472,8 +4472,8 @@
     "learnLevels": []
    },
    {
-    "name": "浩劫灾祸",
-    "iconKey": "ability_warlock_baneofhavoc",
+    "name": "毁灭",
+    "iconKey": null,
     "learnLevels": [
      1,
      10,
@@ -4590,8 +4590,8 @@
     "learnLevels": []
    },
    {
-    "name": "召唤恐惧战马",
-    "iconKey": "ability_mount_dreadsteed",
+    "name": "坐骑",
+    "iconKey": null,
     "learnLevels": [
      40
     ]
@@ -4611,8 +4611,8 @@
     ]
    },
    {
-    "name": "诱惑",
-    "iconKey": "spell_shadow_mindsteal",
+    "name": "恶魔技能",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,
@@ -4765,8 +4765,8 @@
   ],
   "Druid": [
    {
-    "name": "自然迅捷",
-    "iconKey": "spell_nature_ravenform",
+    "name": "德鲁伊",
+    "iconKey": "class_druid",
     "learnLevels": [
      1,
      6,
@@ -4779,8 +4779,8 @@
     ]
    },
    {
-    "name": "枭兽形态",
-    "iconKey": "spell_nature_forceofnature",
+    "name": "平衡",
+    "iconKey": null,
     "learnLevels": [
      1,
      6,
@@ -4946,8 +4946,8 @@
     "learnLevels": []
    },
    {
-    "name": "狂暴",
-    "iconKey": "ability_druid_berserk",
+    "name": "野性战斗",
+    "iconKey": null,
     "learnLevels": []
    },
    {
@@ -5211,8 +5211,8 @@
     "learnLevels": []
    },
    {
-    "name": "自然迅捷",
-    "iconKey": "spell_nature_ravenform",
+    "name": "恢复",
+    "iconKey": null,
     "learnLevels": [
      1,
      8,

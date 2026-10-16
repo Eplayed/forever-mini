@@ -36,7 +36,7 @@
    "ranksAlt": 31,
    "learnAlt": 3,
    "withId": 415,
-   "withLevels": 419,
+   "withLevels": 424,
    "noPluginMatch": 16,
    "noIcon": 1
   },
@@ -4630,6 +4630,9 @@
     }
    ],
    "auto": false,
+   "learnLevels": [
+    60
+   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8903,9 +8906,6 @@
     }
    ],
    "auto": false,
-   "learnLevels": [
-    20
-   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -9049,6 +9049,9 @@
    "stateTag": "same",
    "relation": null,
    "level": "L0",
+   "learnLevels": [
+    34
+   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -11378,6 +11381,11 @@
    ],
    "auto": true,
    "talentGated": true,
+   "learnLevels": [
+    40,
+    50,
+    60
+   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -13182,6 +13190,11 @@
    ],
    "auto": false,
    "talentGated": true,
+   "learnLevels": [
+    40,
+    50,
+    60
+   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -18030,6 +18043,9 @@
    "stateTag": "new",
    "relation": null,
    "level": "L0",
+   "learnLevels": [
+    6
+   ],
    "provenance": [
     {
      "type": "datamine_cn",
@@ -20651,6 +20667,9 @@
     }
    ],
    "auto": false,
+   "learnLevels": [
+    60
+   ],
    "provenance": [
     {
      "type": "datamine_cn",

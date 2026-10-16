@@ -1,0 +1,496 @@
+{
+ "meta": {
+  "source": "https://wowforever.wclbox.com/_shuju/r-1791987485943/chengjiu.json",
+  "page": "https://wowforever.wclbox.com/chengjiu",
+  "fetched": "2026-10-16",
+  "upstreamBuild": "1.60.1.70205",
+  "counts": {
+   "total": 46,
+   "forever": 3,
+   "withCriteria": 46
+  },
+  "categories": [
+   {
+    "id": "meta",
+    "name": "探索者"
+   },
+   {
+    "id": "eastern-kingdoms",
+    "name": "东部王国"
+   },
+   {
+    "id": "kalimdor",
+    "name": "卡利姆多"
+   }
+  ],
+  "droppedFields": [
+   "text（成就描述整句）",
+   "criteria[].text（子条件说明句）"
+  ],
+  "note": "这一份只覆盖区域探索一类（46 条），但它是能逐字回查的客户端解包转述；插件那份 211 条里只有对得上这里的才升 L0。"
+ },
+ "achievements": [
+  {
+   "achId": 62053,
+   "category": "meta",
+   "name": "探索艾泽拉斯",
+   "iconKey": "inv_misc_map09",
+   "forever": false,
+   "criteriaCount": 2,
+   "criteriaAchievements": [
+    62353,
+    62355
+   ]
+  },
+  {
+   "achId": 62353,
+   "category": "meta",
+   "name": "探索东部王国",
+   "iconKey": "achievement_zone_easternkingdoms_01",
+   "forever": false,
+   "criteriaCount": 23,
+   "criteriaAchievements": [
+    627,
+    760,
+    761,
+    765,
+    766,
+    768,
+    769,
+    770,
+    771,
+    772,
+    773,
+    774,
+    775,
+    776,
+    777,
+    778,
+    779,
+    780,
+    781,
+    782,
+    802,
+    841,
+    62354
+   ]
+  },
+  {
+   "achId": 62355,
+   "category": "meta",
+   "name": "探索卡利姆多",
+   "iconKey": "achievement_zone_kalimdor_01",
+   "forever": false,
+   "criteriaCount": 20,
+   "criteriaAchievements": [
+    728,
+    736,
+    750,
+    842,
+    844,
+    845,
+    846,
+    847,
+    848,
+    849,
+    850,
+    851,
+    852,
+    853,
+    854,
+    855,
+    856,
+    857,
+    62356,
+    63684
+   ]
+  },
+  {
+   "achId": 760,
+   "category": "eastern-kingdoms",
+   "name": "探索奥特兰克山脉",
+   "iconKey": "achievement_zone_alteracmountains_01",
+   "forever": false,
+   "criteriaCount": 15,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 761,
+   "category": "eastern-kingdoms",
+   "name": "探索阿拉希高地",
+   "iconKey": "achievement_zone_arathihighlands_01",
+   "forever": false,
+   "criteriaCount": 16,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 765,
+   "category": "eastern-kingdoms",
+   "name": "探索荒芜之地",
+   "iconKey": "achievement_zone_badlands_01",
+   "forever": false,
+   "criteriaCount": 14,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 766,
+   "category": "eastern-kingdoms",
+   "name": "探索诅咒之地",
+   "iconKey": "achievement_zone_blastedlands_01",
+   "forever": false,
+   "criteriaCount": 9,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 775,
+   "category": "eastern-kingdoms",
+   "name": "探索燃烧平原",
+   "iconKey": "achievement_zone_burningsteppes_01",
+   "forever": false,
+   "criteriaCount": 10,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 777,
+   "category": "eastern-kingdoms",
+   "name": "探索逆风小径",
+   "iconKey": "achievement_zone_deadwindpass",
+   "forever": false,
+   "criteriaCount": 3,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 627,
+   "category": "eastern-kingdoms",
+   "name": "探索丹莫罗",
+   "iconKey": "achievement_zone_dunmorogh",
+   "forever": false,
+   "criteriaCount": 18,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 778,
+   "category": "eastern-kingdoms",
+   "name": "探索暮色森林",
+   "iconKey": "achievement_zone_duskwood",
+   "forever": false,
+   "criteriaCount": 13,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 771,
+   "category": "eastern-kingdoms",
+   "name": "探索东瘟疫之地",
+   "iconKey": "achievement_zone_easternplaguelands",
+   "forever": false,
+   "criteriaCount": 22,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 776,
+   "category": "eastern-kingdoms",
+   "name": "探索艾尔文森林",
+   "iconKey": "achievement_zone_elwynnforest",
+   "forever": false,
+   "criteriaCount": 12,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 772,
+   "category": "eastern-kingdoms",
+   "name": "探索希尔斯布莱德丘陵",
+   "iconKey": "achievement_zone_hillsbradfoothills",
+   "forever": false,
+   "criteriaCount": 12,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 779,
+   "category": "eastern-kingdoms",
+   "name": "探索洛克莫丹",
+   "iconKey": "achievement_zone_lochmodan",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 780,
+   "category": "eastern-kingdoms",
+   "name": "探索赤脊山",
+   "iconKey": "achievement_zone_redridgemountains",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 62354,
+   "category": "eastern-kingdoms",
+   "name": "探索河林",
+   "iconKey": "achievement_zone_nagrand_02",
+   "forever": true,
+   "criteriaCount": 12,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 774,
+   "category": "eastern-kingdoms",
+   "name": "探索灼热峡谷",
+   "iconKey": "achievement_zone_searinggorge_01",
+   "forever": false,
+   "criteriaCount": 7,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 769,
+   "category": "eastern-kingdoms",
+   "name": "探索银松森林",
+   "iconKey": "achievement_zone_silverpine_01",
+   "forever": false,
+   "criteriaCount": 15,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 781,
+   "category": "eastern-kingdoms",
+   "name": "探索荆棘谷",
+   "iconKey": "achievement_zone_stranglethorn_01",
+   "forever": false,
+   "criteriaCount": 27,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 782,
+   "category": "eastern-kingdoms",
+   "name": "探索悲伤沼泽",
+   "iconKey": "achievement_zone_swampsorrows_01",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 773,
+   "category": "eastern-kingdoms",
+   "name": "探索辛特兰",
+   "iconKey": "achievement_zone_hinterlands_01",
+   "forever": false,
+   "criteriaCount": 14,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 768,
+   "category": "eastern-kingdoms",
+   "name": "探索提瑞斯法林地",
+   "iconKey": "achievement_zone_tirisfalglades_01",
+   "forever": false,
+   "criteriaCount": 16,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 770,
+   "category": "eastern-kingdoms",
+   "name": "探索西瘟疫之地",
+   "iconKey": "achievement_zone_westernplaguelands_01",
+   "forever": false,
+   "criteriaCount": 13,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 802,
+   "category": "eastern-kingdoms",
+   "name": "探索西部荒野",
+   "iconKey": "achievement_zone_westfall_01",
+   "forever": false,
+   "criteriaCount": 14,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 841,
+   "category": "eastern-kingdoms",
+   "name": "探索湿地",
+   "iconKey": "achievement_zone_wetlands_01",
+   "forever": false,
+   "criteriaCount": 15,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 845,
+   "category": "kalimdor",
+   "name": "探索灰谷",
+   "iconKey": "achievement_zone_ashenvale_01",
+   "forever": false,
+   "criteriaCount": 18,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 852,
+   "category": "kalimdor",
+   "name": "探索艾萨拉",
+   "iconKey": "achievement_zone_azshara_01",
+   "forever": false,
+   "criteriaCount": 19,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 844,
+   "category": "kalimdor",
+   "name": "探索黑海岸",
+   "iconKey": "achievement_zone_darkshore_01",
+   "forever": false,
+   "criteriaCount": 9,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 848,
+   "category": "kalimdor",
+   "name": "探索凄凉之地",
+   "iconKey": "achievement_zone_desolace",
+   "forever": false,
+   "criteriaCount": 15,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 728,
+   "category": "kalimdor",
+   "name": "探索杜隆塔尔",
+   "iconKey": "achievement_zone_durotar",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 850,
+   "category": "kalimdor",
+   "name": "探索尘泥沼泽",
+   "iconKey": "achievement_zone_dustwallowmarsh",
+   "forever": false,
+   "criteriaCount": 7,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 853,
+   "category": "kalimdor",
+   "name": "探索费伍德森林",
+   "iconKey": "achievement_zone_felwood",
+   "forever": false,
+   "criteriaCount": 12,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 849,
+   "category": "kalimdor",
+   "name": "探索菲拉斯",
+   "iconKey": "achievement_zone_feralas",
+   "forever": false,
+   "criteriaCount": 16,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 855,
+   "category": "kalimdor",
+   "name": "探索月光林地",
+   "iconKey": "spell_arcane_teleportmoonglade",
+   "forever": false,
+   "criteriaCount": 1,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 62356,
+   "category": "kalimdor",
+   "name": "探索海加尔山",
+   "iconKey": "achievement_zone_mount-hyjal",
+   "forever": true,
+   "criteriaCount": 9,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 736,
+   "category": "kalimdor",
+   "name": "探索莫高雷",
+   "iconKey": "achievement_zone_mulgore_01",
+   "forever": false,
+   "criteriaCount": 14,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 63684,
+   "category": "kalimdor",
+   "name": "探索辛德拉",
+   "iconKey": "ability_warstomp",
+   "forever": true,
+   "criteriaCount": 6,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 856,
+   "category": "kalimdor",
+   "name": "探索希利苏斯",
+   "iconKey": "achievement_zone_silithus_01",
+   "forever": false,
+   "criteriaCount": 6,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 847,
+   "category": "kalimdor",
+   "name": "探索石爪山脉",
+   "iconKey": "achievement_zone_stonetalon_01",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 851,
+   "category": "kalimdor",
+   "name": "探索塔纳利斯",
+   "iconKey": "achievement_zone_tanaris_01",
+   "forever": false,
+   "criteriaCount": 20,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 842,
+   "category": "kalimdor",
+   "name": "探索泰达希尔",
+   "iconKey": "achievement_zone_darnassus",
+   "forever": false,
+   "criteriaCount": 11,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 750,
+   "category": "kalimdor",
+   "name": "探索贫瘠之地",
+   "iconKey": "achievement_zone_barrens_01",
+   "forever": false,
+   "criteriaCount": 25,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 846,
+   "category": "kalimdor",
+   "name": "探索千针石林",
+   "iconKey": "achievement_zone_thousandneedles_01",
+   "forever": false,
+   "criteriaCount": 9,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 854,
+   "category": "kalimdor",
+   "name": "探索安戈洛环形山",
+   "iconKey": "achievement_zone_ungorocrater_01",
+   "forever": false,
+   "criteriaCount": 7,
+   "criteriaAchievements": []
+  },
+  {
+   "achId": 857,
+   "category": "kalimdor",
+   "name": "探索冬泉谷",
+   "iconKey": "achievement_zone_winterspring",
+   "forever": false,
+   "criteriaCount": 13,
+   "criteriaAchievements": []
+  }
+ ]
+}

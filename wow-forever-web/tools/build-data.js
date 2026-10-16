@@ -1146,6 +1146,47 @@ if (fs.existsSync(spellsPath)) {
   warns.push('spells.json 缺失：法术书那一块会空着（跑 tools/scrape-wclbox-spells.py + tools/merge-spells.py 生成）');
 }
 
+// ---------- 成就（M1-B，2026-10-16） ----------
+// 目录来自插件那份 211 条；能升到 L0 的只有参考站端点也给出、且中文名逐字相同的那些。
+// 成就描述整句两份都不落（抽取阶段删），这里再钉一道：描述进了成品就是构建失败。
+const achPath = path.join(ROOT, 'achievements.json');
+if (fs.existsSync(achPath)) {
+  const ach = JSON.parse(fs.readFileSync(achPath, 'utf8'));
+  const list = ach.achievements || [];
+  const lvCount = { L0: 0, L1: 0 };
+  const bad = [], badProv = [], dupId = [], sentence = [];
+  const seen = new Set();
+  list.forEach((r) => {
+    if (!r.name || !r.achId) bad.push(r.id || String(r.achId));
+    if (r.level === 'L0') lvCount.L0 += 1; else if (r.level === 'L1') lvCount.L1 += 1;
+    else bad.push((r.id || '?') + ' 分级越界:' + r.level);
+    // L0 必须是两源都给且名字一致——只有插件一家的，无论多像都不许升
+    const provs = r.provenance || [];
+    if (!provs.length || provs.some((p) => !p.url || !p.checkedAt)) badProv.push(r.id);
+    if (r.level === 'L0' && !(provs.length >= 2)) badProv.push((r.id || '?') + ' 升 L0 但只有一处来源');
+    if (r.nameAlt && r.nameAlt === r.name) bad.push(r.id + ' nameAlt 与主值相同');
+    if (/[。；]/.test(String(r.name)) || /掉率|掉落概率/.test(JSON.stringify(r))) sentence.push(r.id);
+    if (seen.has(r.id)) dupId.push(r.id);
+    seen.add(r.id);
+  });
+  const c = (ach.meta || {}).counts || {};
+  if (c.total !== list.length) errs.push(`achievements：条数 ${list.length} 与 meta.counts.total ${c.total} 对不上`);
+  if (c.l0 !== lvCount.L0 || c.l1 !== lvCount.L1) {
+    errs.push(`achievements：分级计数（记 L0 ${c.l0}/L1 ${c.l1} · 实数 L0 ${lvCount.L0}/L1 ${lvCount.L1}）对不上`);
+  }
+  const topSum = Object.keys(c.byTop || {}).reduce((a, k) => a + c.byTop[k], 0);
+  if (topSum !== list.length) errs.push(`achievements：分大类合计 ${topSum} 与总条数 ${list.length} 对不上`);
+  if (bad.length) errs.push(`achievements：${bad.length} 条结构不合规（如 ${bad.slice(0, 3).join('、')}）`);
+  if (badProv.length) errs.push(`achievements：${badProv.length} 条来源不可回查或缺 checkedAt（如 ${badProv.slice(0, 2).join('、')}）`);
+  if (sentence.length) errs.push(`achievements：${sentence.length} 条夹了句子或掉率措辞（红线）`);
+  if (dupId.length) errs.push(`achievements：${dupId.length} 条 id 重复`);
+  scale.achievements = list.length;
+  console.log('成就：' + list.length + ' 条 / ' + Object.keys(c.byTop || {}).length + ' 大类（L0 两源互证 '
+    + lvCount.L0 + ' · L1 单源待回查 ' + lvCount.L1 + '）·描述整句两份都不落');
+} else {
+  warns.push('achievements.json 缺失：成就会空着（跑 tools/scrape-wclbox-achievements.py + tools/merge-achievements.py 生成）');
+}
+
 // ---------- 全站搜索索引 ----------
 // 首页那一个搜索框要能搜到所有板块。条目全部从上面已经校验过的数据派生，
 // 不另建第二份真相；只收「名称 + 归属」，任何描述性句子都不进索引——

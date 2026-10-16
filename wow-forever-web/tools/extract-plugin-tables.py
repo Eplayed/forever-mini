@@ -67,8 +67,25 @@ def table_seg(src, name, nxt, indent=2):
     return src[a.end() - 1:b.start()] if b else src[a.end() - 1:]
 
 
+def top_only(e):
+    """把嵌套表挖空再返回文本。
+    不这么做会踩一次：GI 的 rares 每行末尾挂着 items={...}，掉落物也用自己的 n/nEn 字段，
+    直接对整行取 k=v 会让**最后那件掉落物的名字盖掉这只怪的名字**——
+    338 行量出来只剩 190 个"名字"、还全是装备名。嵌套层层挖到没有为止（pts 是两层）。"""
+    s = e.strip()
+    if s.startswith('{') and s.endswith('}'):
+        s = s[1:-1]          # 先去掉这一行自己的那层括号，否则连它自己也会被下面挖掉
+    prev = None
+    while prev != s:
+        prev = s
+        # 注意不能写成 =\{...\}：GI 的 items={{id=...}, {id=...}} 里第二件起没有等号，
+        # 那样挖不干净，掉落物的 n/nEn 还是会盖掉这只怪自己的名字（2026-10-16 就被这么骗过一次）
+        s = re.sub(r'\{[^{}]*\}', '', s)
+    return s
+
+
 def entry_fields(e):
-    """一条 Lua 记录里的 k=v（字符串值与整数/布尔值），不碰嵌套表。"""
+    """一条 Lua 记录里的 k=v（字符串值与整数/布尔值）。只在**去嵌套之后**的文本上取。"""
     out = {}
     for m in re.finditer(r'(?<![\w])([a-zA-Z]{1,6})\s*=\s*(?:"((?:[^"\\]|\\.)*)"|([^",}\s]+))', e):
         out[m.group(1)] = m.group(2) if m.group(2) is not None else m.group(3)
@@ -103,7 +120,7 @@ def gi_achievements(src):
     rows = []
     for m in re.finditer(r'\{id=', seg):
         e = seg[m.start():brace_match(seg, m.start()) + 1]
-        f = entry_fields(e)
+        f = entry_fields(top_only(e))
         if not f.get('id') or not f.get('t'):
             continue
         rows.append({'achId': int(f['id']), 'name': f['t'], 'nameEn': f.get('tEn'),
@@ -127,7 +144,7 @@ def gi_rares(src):
     rows = []
     for m in re.finditer(r'\{npc=', seg):
         e = seg[m.start():brace_match(seg, m.start()) + 1]
-        f = entry_fields(e)
+        f = entry_fields(top_only(e))
         items = []
         im = re.search(r'items=\{', e)
         if im:
@@ -161,7 +178,7 @@ def xr_skills(src):
         rows = []
         for sm in re.finditer(r'\{\s*zh\s*=', body):
             e = body[sm.start():brace_match(body, sm.start()) + 1]
-            f = entry_fields(e)
+            f = entry_fields(top_only(e))
             lv = re.search(r'lv\s*=\s*\{([^}]*)\}', e)
             levels = [int(x) for x in re.findall(r'\d+', lv.group(1))] if lv else []
             if not f.get('zh'):
