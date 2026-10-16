@@ -113,8 +113,11 @@
   "achievements": 211,
   "search": 5302,
   "talentPreview": 466,
-  "releases": 39,
+  "releases": 41,
   "navNew": [
+   "成就",
+   "技能",
+   "搜索",
    "世界",
    "物品库"
   ],

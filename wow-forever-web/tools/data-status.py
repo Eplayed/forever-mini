@@ -281,6 +281,8 @@ def main():
     if can:
         print("要动手就跑对应板块那一条链，例如：bash tools/refresh.sh dungeons")
     print("只跑检查不碰网络：bash tools/refresh.sh check")
+    print("验收要的那张「源侧自报 / 站内 / 差多少 / 差的为什么」对账表在另一支："
+          "python3 tools/data-recon.py（它只管现读，不拦人）")
     print("这一份是报告不是门禁——拦人的是 build-data.js、audit-translations.py、site-check.py。")
     return 0
 
