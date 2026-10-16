@@ -44,6 +44,12 @@
 .board .c-num2 { width:96px }
 .board .c-st { width:126px }
 .board .c-id { width:92px }
+/* 日期一类的短列：等宽字 10 字符 + 左右内边距 ≈ 101px，宽度给小了会断成
+   "2026-09-" / "29" 两行（动态页实拍为证）。列宽交给 colgroup，这里只保证不折行。 */
+.board td.dt { white-space:nowrap }
+/* 名字后面跟的等宽小注（职业英文名、#ID）：排行榜那张原来没有间距，
+   渲染成"猎人hunter"粘在一起（1280 实拍为证）。统一留 6px。 */
+.board td .dim.mono { margin-left:6px }
 .board .c-name { width:auto }
 /* 名字列给固定百分比、最后一列吃剩余：剩余空间落到行尾而不是卡在名字与数值之间
    （法术书那一页原来就是"名字 → 跨半屏空白 → 数值"，眼睛得找列） */
@@ -53,6 +59,10 @@
 .board .c-item { width:27% }
 .board .c-src { width:29% }
 .board .c-mat { width:auto }
+/* .chtab 在 app.css（两栈共用）里带着旧站布局下的 min-width:620px。
+   新站职业页那张卡只有 530 宽，于是整表顶出 90px 横向溢出（1280 桌面实拍量出来）。
+   旧站已经冻结不能动，所以只在这个新站才加载的文件里把它放开。 */
+.board.chtab { min-width:0 }
 
 /* 分组头：滚动时吸附在表头下面，长表里"我在哪"不用再翻 */
 .board tbody.grp > tr.grp2h > th { position:sticky; top:calc(var(--hd-h) + 33px); z-index:2;

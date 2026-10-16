@@ -99,9 +99,10 @@
               <span v-if="chipCount(blk.c, s)" class="chipc">{{ s }}<b class="mono">{{ chipCount(blk.c, s) }}</b></span>
             </template>
           </div>
-          <div class="scrollx">
-            <table class="entab ltab">
-              <thead><tr><th class="ich">图标</th><th>挑战</th><th>完成条件</th><th>归属</th><th>点数</th></tr></thead>
+          <div class="boardwrap">
+            <table class="board ltab">
+              <colgroup><col class="c-ico"><col style="width:26%"><col><col style="width:14%"><col class="c-num"></colgroup>
+              <thead><tr><th class="c-ico">图标</th><th>挑战</th><th>完成条件</th><th>归属</th><th class="c-num">点数</th></tr></thead>
               <tbody>
                 <tr v-for="(x, i) in blk.rows" :key="x.id !== undefined ? x.id : i">
                   <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.nameCn" /></td>
@@ -122,9 +123,10 @@
 
     <div class="card">
       <h2>攒到一定挑战数给的奖励 · {{ cnt.rewards }} 档</h2>
-      <div class="scrollx">
-        <table class="entab ltab">
-          <thead><tr><th class="ich">图标</th><th>奖励</th><th>需要的挑战数</th><th>物品编号</th></tr></thead>
+      <div class="boardwrap">
+        <table class="board ltab">
+          <colgroup><col class="c-ico"><col><col style="width:150px"><col class="c-id"></colgroup>
+          <thead><tr><th class="c-ico">图标</th><th>奖励</th><th>需要的挑战数</th><th class="c-id">物品编号</th></tr></thead>
           <tbody>
             <tr v-for="x in rewards" :key="x.itemId">
               <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.itemId" :cn="x.nameCn" /></td>

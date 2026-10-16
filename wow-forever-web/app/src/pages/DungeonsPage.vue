@@ -179,37 +179,33 @@
       </div>
     </template>
 
-    <!-- 能排到队、还没有名单的本（queueBand）：按名字归并，同一座本挂两条只说一次 -->
+    <!-- 能排到队、还没有名单的本（queueBand）：按名字归并，同一座本挂两条只说一次。
+         10-16 视觉第二批：两张 .entab 合成一张 .board，地下城 / 团队副本做成吸附分组头，
+         列宽固定（原来四列的文字长短不一，两张表的"排队等级"列根本不对齐） -->
     <div v-if="queueRows.length" class="card" id="queue">
-      <h2>能排到队、还没有名单的本</h2>
-      <template v-if="queueDun.length">
-        <h3>地下城</h3>
-        <table class="entab">
-          <thead><tr><th>客户端里的名字</th><th>排队等级</th><th>一次几人</th><th>客户端记了几条</th></tr></thead>
-          <tbody>
-            <tr v-for="g in queueDun" :key="g.nameEn">
-              <td><b>{{ g.nameEn }}</b><span class="dim">　中文定名未公布</span></td>
-              <td class="mono">{{ g.levelRange }} 级</td>
-              <td class="mono">{{ g.sizes.length ? g.sizes.join(' / ') + ' 人' : '未标' }}</td>
-              <td class="mono">{{ g.n }}<template v-if="g.n > 1">{{ g.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）' }}</template></td>
+      <div class="bhead">
+        <h2 class="bt">能排到队、还没有名单的本</h2>
+        <span class="bn">{{ queueRows.length }} 条</span>
+      </div>
+      <div class="boardwrap">
+        <table class="board">
+          <thead><tr>
+            <th class="w-name">客户端里的名字</th><th class="c-num2">排队等级</th>
+            <th class="c-num2">一次几人</th><th class="w-tail">客户端记了几条</th>
+          </tr></thead>
+          <tbody class="grp" v-for="q in queueGroups" :key="q.label">
+            <tr class="grp2h" v-if="q.rows.length"><th colspan="4">
+              {{ q.label }}<span class="gcount">{{ q.rows.length }} 条</span>
+            </th></tr>
+            <tr v-for="g in q.rows" :key="g.nameEn">
+              <td><span class="nm">{{ g.nameEn }}</span><span class="sub">中文定名未公布</span></td>
+              <td class="c-num2 num">{{ g.levelRange }} 级</td>
+              <td class="c-num2 num">{{ g.sizes.length ? g.sizes.join(' / ') + ' 人' : '未标' }}</td>
+              <td class="w-tail num">{{ g.n }}<template v-if="g.n > 1">{{ g.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）' }}</template></td>
             </tr>
           </tbody>
         </table>
-      </template>
-      <template v-if="queueRaid.length">
-        <h3>团队副本</h3>
-        <table class="entab">
-          <thead><tr><th>客户端里的名字</th><th>排队等级</th><th>一次几人</th><th>客户端记了几条</th></tr></thead>
-          <tbody>
-            <tr v-for="g in queueRaid" :key="g.nameEn">
-              <td><b>{{ g.nameEn }}</b><span class="dim">　中文定名未公布</span></td>
-              <td class="mono">{{ g.levelRange }} 级</td>
-              <td class="mono">{{ g.sizes.length ? g.sizes.join(' / ') + ' 人' : '未标' }}</td>
-              <td class="mono">{{ g.n }}<template v-if="g.n > 1">{{ g.sizes.length > 1 ? ' 条（同一座本两种人数）' : ' 条（同名两个入口，人数一样）' }}</template></td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
+      </div>
     </div>
   </template>
 </template>
@@ -431,6 +427,11 @@ const queueRows = computed(() => {
 });
 const queueDun = computed(() => queueRows.value.filter((x) => x.kind === 'dungeon'));
 const queueRaid = computed(() => queueRows.value.filter((x) => x.kind === 'raid'));
+// 两张表合成一张：分组头做成表内吸附的 tbody.grp（与技能页法术书同一套骨架）
+const queueGroups = computed(() => ([
+  { label: '地下城', rows: queueDun.value },
+  { label: '团队副本', rows: queueRaid.value }
+]));
 
 function toggleDrawer(id) { drawers.value[id] = !drawers.value[id]; }
 function drawerOf(id) { return !!drawers.value[id]; }

@@ -633,6 +633,35 @@ def test_spellbook(browser, base):
         page.screenshot(path=os.path.join(SHOT_DIR, "app-board-prof-m.png"))
         ctx.close()
 
+        # ---- 第二批：板块表骨架铺满剩余页面（2026-10-16 用户"就这么做"）----
+        # 每页只钉三件事：确有 .board 且是 fixed；桌面整页不横溢；375 整页不横溢
+        # （表在 .boardwrap 里自己滚）。列宽的具体数值随数据变，钉死会变成又一处
+        # "把会变的数抄进不会变的地方"，所以这里只量溢出与骨架存在性。
+        BOARD_PAGES = [("world", "/#/world"), ("legacy", "/#/legacy"), ("raids", "/#/raids"),
+                       ("dungeons", "/#/dungeons"), ("dungeon", "/#/dungeon?d=gnomeregan"),
+                       ("updates", "/#/updates"), ("systems", "/#/systems"),
+                       ("rank", "/#/rank"), ("classes", "/#/classes"), ("skills", "/#/skills")]
+        for vp_tag, vp, mob in (("桌面", {"width": 1440, "height": 1000}, False),
+                                ("移动 375", {"width": 375, "height": 812}, True)):
+            ctx = browser.new_context(viewport=vp, is_mobile=mob, has_touch=mob)
+            for pn, ppath in BOARD_PAGES:
+                page = ctx.new_page()
+                page.goto(APP_BASE + ppath, wait_until="networkidle")
+                page.wait_for_timeout(1500)
+                r = page.evaluate("""() => {
+                  const ts = [...document.querySelectorAll('table.board')];
+                  return { n: ts.length,
+                    fixed: ts.filter(t => getComputedStyle(t).tableLayout === 'fixed').length,
+                    wrap: document.querySelectorAll('.boardwrap').length,
+                    over: document.documentElement.scrollWidth - innerWidth }; }""")
+                check("新站 %s 页 %s：板块表骨架在位（%d 张，fixed %d，横滚容器 %d）" % (
+                      pn, vp_tag, r["n"], r["fixed"], r["wrap"]),
+                      r["n"] > 0 and r["fixed"] == r["n"], json.dumps(r, ensure_ascii=False))
+                check("新站 %s 页 %s：整页不横向溢出（宽表在容器里滚）" % (pn, vp_tag),
+                      r["over"] <= 1, "溢出 %dpx" % r["over"])
+                page.close()
+            ctx.close()
+
 
 def test_design_baseline(browser, base):
     """吸收自通用设计走查规则的量化底线：每屏一个 H1、触屏点击目标 ≥44px、

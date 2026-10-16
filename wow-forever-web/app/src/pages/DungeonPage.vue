@@ -104,16 +104,19 @@
       <h2>本里的任务</h2>
       <template v-if="quests.length">
         <p class="dim">共 {{ quests.length }} 条<template v-if="qSum.xpTotal">，合计 {{ qSum.xpTotal }} 点经验</template><template v-if="qSum.faction">，{{ qSum.faction }}一侧</template>。经验与可接等级是经典旧世的数字，无限服可能调整，本站没实测过。</p>
-        <div class="scrollx">
-          <table class="entab qtab">
-            <thead><tr><th>任务</th><th>几级能接</th><th>任务等级</th><th>经验</th><th>在哪接</th></tr></thead>
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr>
+              <th class="w-name">任务</th><th class="c-num2">几级能接</th><th class="c-num2">任务等级</th>
+              <th class="c-num">经验</th><th class="w-tail">在哪接</th>
+            </tr></thead>
             <tbody>
               <tr v-for="(y, i) in quests" :key="y.nameCn + '-' + i">
-                <td><b>{{ y.nameCn }}</b><template v-if="y.preQuest"><span class="dim">　前置：{{ y.preQuest }}</span></template><div v-if="y.xpAlt" class="conf">经验值有两个说法：{{ y.xp }} / {{ y.xpAlt }}，还没实测</div></td>
-                <td class="mono">{{ num(y.reqLevel) }}</td>
-                <td class="mono">{{ num(y.questLevel) }}</td>
-                <td class="mono"><b v-if="y.xp !== null && y.xp !== undefined" class="mono">{{ y.xp }}</b></td>
-                <td><template v-if="y.pickupNpc">{{ y.pickupNpc }}<span v-if="y.pickupZone" class="dim">，{{ y.pickupZone }}</span></template><span v-else-if="y.startItem" class="dim">用物品开启：{{ y.startItem }}</span></td>
+                <td><span class="nm">{{ y.nameCn }}</span><span v-if="y.preQuest" class="sub">前置：{{ y.preQuest }}</span><span v-if="y.xpAlt" class="conf">经验值有两个说法：{{ y.xp }} / {{ y.xpAlt }}，还没实测</span></td>
+                <td class="c-num2 num">{{ num(y.reqLevel) }}</td>
+                <td class="c-num2 num">{{ num(y.questLevel) }}</td>
+                <td class="c-num num"><b v-if="y.xp !== null && y.xp !== undefined">{{ y.xp }}</b></td>
+                <td class="w-tail"><template v-if="y.pickupNpc">{{ y.pickupNpc }}<span v-if="y.pickupZone" class="dim">，{{ y.pickupZone }}</span></template><span v-else-if="y.startItem" class="dim">用物品开启：{{ y.startItem }}</span></td>
               </tr>
             </tbody>
           </table>
@@ -122,14 +125,14 @@
       <p v-else class="dim">这座本还没有任务记录。</p>
       <template v-if="qItems.length">
         <h3>进本之前要带的东西</h3>
-        <div class="scrollx">
-          <table class="entab">
-            <thead><tr><th>任务物品</th><th>谁掉</th><th>对应任务</th></tr></thead>
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr><th class="w-name">任务物品</th><th class="c-num2">谁掉</th><th class="w-tail">对应任务</th></tr></thead>
             <tbody>
               <tr v-for="(y, i) in qItems" :key="i">
-                <td><b>{{ y.itemCn || '—' }}</b></td>
-                <td>{{ y.from && y.from !== '—' ? y.from : '' }}</td>
-                <td>{{ y.quest || '—' }}<template v-if="y.faction"><span class="dim">　{{ y.faction }}</span></template></td>
+                <td><span class="nm">{{ y.itemCn || '—' }}</span></td>
+                <td class="c-num2">{{ y.from && y.from !== '—' ? y.from : '' }}</td>
+                <td class="w-tail">{{ y.quest || '—' }}<span v-if="y.faction" class="dim">　{{ y.faction }}</span></td>
               </tr>
             </tbody>
           </table>
@@ -137,14 +140,14 @@
       </template>
       <template v-if="qStarts.length">
         <h3>在哪儿接</h3>
-        <div class="scrollx">
-          <table class="entab">
-            <thead><tr><th>谁给任务</th><th>在哪儿</th><th>能接到什么</th></tr></thead>
+        <div class="boardwrap">
+          <table class="board">
+            <thead><tr><th class="w-name">谁给任务</th><th class="c-num2">在哪儿</th><th class="w-tail">能接到什么</th></tr></thead>
             <tbody>
               <tr v-for="(y, i) in qStarts" :key="i">
-                <td><b>{{ y.npc || '—' }}</b></td>
-                <td>{{ y.zone || '—' }}</td>
-                <td>{{ y.quest || '—' }}<template v-if="y.faction"><span class="dim">　{{ y.faction }}</span></template></td>
+                <td><span class="nm">{{ y.npc || '—' }}</span></td>
+                <td class="c-num2">{{ y.zone || '—' }}</td>
+                <td class="w-tail">{{ y.quest || '—' }}<span v-if="y.faction" class="dim">　{{ y.faction }}</span></td>
               </tr>
             </tbody>
           </table>

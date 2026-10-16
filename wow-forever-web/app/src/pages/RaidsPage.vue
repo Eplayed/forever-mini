@@ -77,8 +77,9 @@
       <template v-if="shown.length">
         <template v-for="b in bands" :key="b.key">
           <div class="band"><b>{{ b.label }}</b><span v-if="b.count !== null" class="dim mono">{{ b.count }} 座</span></div>
-          <div class="scrollx">
-            <table class="entab rtab">
+          <div class="boardwrap">
+            <table class="board rtab">
+              <colgroup><col style="width:30%"><col style="width:14%"><col style="width:12%"><col style="width:12%"><col></colgroup>
               <thead><tr><th>客户端里的名字</th><th>排队等级</th><th>一次几人</th><th>排队条目</th><th>本站</th></tr></thead>
               <tbody>
                 <tr v-for="x in b.rows" :key="x.nameEn">
@@ -103,9 +104,10 @@
 
     <div class="card" id="claimed">
       <h2>名单里的 {{ P.claimed.length }} 座</h2>
-      <div class="scrollx">
-        <table class="entab rtab">
-          <thead><tr><th>载入图</th><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th></tr></thead>
+      <div class="boardwrap">
+        <table class="board rtab">
+          <colgroup><col class="c-ico"><col style="width:34%"><col style="width:18%"><col></colgroup>
+          <thead><tr><th class="c-ico">载入图</th><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th></tr></thead>
           <tbody>
             <tr v-for="r in P.claimed" :key="r.id">
               <td class="ich">

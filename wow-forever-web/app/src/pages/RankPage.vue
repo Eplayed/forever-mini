@@ -22,9 +22,10 @@
         </div>
         <p class="note">上条是官方中文佐证的条数，下条是只有客户端解包支撑的条数；长短按全站最多的那个职业归一。表格在下面，给的是同一批数的精确值。</p>
       </div>
-      <div class="scrollx">
-        <table class="entab ranktab">
-          <thead><tr><th class="ich">名次</th><th>职业</th><th>官方中文佐证</th><th>客户端解包</th><th>本站条目合计</th><th>覆盖情况</th></tr></thead>
+      <div class="boardwrap">
+        <table class="board ranktab">
+          <colgroup><col class="c-num"><col style="width:16%"><col style="width:16%"><col style="width:14%"><col style="width:16%"><col></colgroup>
+          <thead><tr><th class="c-num">名次</th><th>职业</th><th>官方中文佐证</th><th>客户端解包</th><th>本站条目合计</th><th>覆盖情况</th></tr></thead>
           <tbody>
             <tr v-for="x in rows" :key="x.classId">
               <td class="ich"><b class="rankno mono">{{ x.place }}</b></td>

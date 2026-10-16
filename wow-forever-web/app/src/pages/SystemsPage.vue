@@ -16,8 +16,9 @@
          所以改成一组一张表：这一页本来就是"这个词官方中文叫什么"的对照表。 -->
     <div v-for="g in s.groups" :key="g.id" class="card">
       <h2>{{ g.label }}<span class="dim mono"> · {{ g.items.length }} 条</span></h2>
-      <div class="scrollx">
-        <table class="entab">
+      <div class="boardwrap">
+        <table class="board">
+          <colgroup><col style="width:46%"><col></colgroup>
           <thead><tr><th>中文名</th><th>英文原名</th></tr></thead>
           <tbody>
             <tr v-for="x in g.items" :key="x.id">

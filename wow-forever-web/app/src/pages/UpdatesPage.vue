@@ -61,9 +61,13 @@
           <input type="search" id="cq" placeholder="搜天赋名或系名" :value="q" @input="onQ">
           <span class="dim mono" id="ccnt">{{ rows.length }} 条</span>
         </div>
-        <div v-if="rows.length" class="scrollx">
-          <table class="entab">
-            <thead><tr><th class="ich">图标</th><th>名称</th><th>职业</th><th>所在系</th><th>类型</th><th>改动</th><th>核到哪天</th></tr></thead>
+        <div v-if="rows.length" class="boardwrap">
+          <table class="board">
+            <!-- 七列百分比合计正好 100%：table-layout:fixed 下只要指定宽度之和小于表宽，
+                 浏览器就把富余按比例摊到每一列上，图标列会被撑到 81px、日期列 197px（实拍量出来）。
+                 摊不掉，所以这里让百分比凑满 100%，富余全部留在名字列（它是阅读起点，宽一点不别扭）。 -->
+            <colgroup><col style="width:4%"><col style="width:34%"><col style="width:10%"><col style="width:11%"><col style="width:12%"><col style="width:17%"><col style="width:12%"></colgroup>
+            <thead><tr><th>图标</th><th>名称</th><th>职业</th><th>所在系</th><th>类型</th><th>改动</th><th>核到哪天</th></tr></thead>
             <tbody>
               <tr v-for="x in pageRows" :key="x.id">
                 <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.nameCn" small /></td>
@@ -72,7 +76,7 @@
                 <td class="dim">{{ x.tree || '—' }}</td>
                 <td class="dim">{{ x.kind === 'spell' ? '法术' : '天赋' }}{{ x.maxRank ? ' ' : '' }}<span v-if="x.maxRank" class="mono">{{ x.maxRank }} 层</span></td>
                 <td><span class="tag" :class="{ new: x.changeKind === 'added' }">{{ x.changeCn }}</span></td>
-                <td class="mono dim">{{ x.discoveredAt || '—' }}</td>
+                <td class="mono dim dt">{{ x.discoveredAt || '—' }}</td>
               </tr>
             </tbody>
           </table>

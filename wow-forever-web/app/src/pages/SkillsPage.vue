@@ -77,8 +77,9 @@
           <template v-for="st in AB_STATES" :key="st">
             <template v-if="(byState[st] || []).length">
               <h3>{{ AB_STATE[st] }} · {{ byState[st].length }} 条</h3>
-              <div class="scrollx">
-                <table class="abtab">
+              <div class="boardwrap">
+                <table class="board abtab">
+                  <colgroup><col style="width:20%"><col style="width:16%"><col style="width:18%"><col></colgroup>
                   <thead><tr><th>名称</th><th>职业/专精</th><th>层级线索</th><th>官方原句</th></tr></thead>
                   <tbody>
                     <tr v-for="x in byState[st]" :key="x.id">
@@ -120,9 +121,10 @@
               <span v-if="g.sub" class="dim mono">{{ g.sub }}</span>
               <span class="dim">{{ g.rows.length }} 条</span>
             </div>
-            <div class="scrollx">
-              <table class="entab">
-                <thead><tr><th class="ich">图标</th><th>中文名</th><th>英文原名</th><th>类型</th><th></th></tr></thead>
+            <div class="boardwrap">
+              <table class="board">
+                <colgroup><col class="c-ico"><col style="width:28%"><col style="width:30%"><col class="c-num2"><col class="c-num"></colgroup>
+                <thead><tr><th class="c-ico">图标</th><th>中文名</th><th>英文原名</th><th class="c-num2">类型</th><th class="c-num"></th></tr></thead>
                 <tbody>
                   <tr v-for="x in g.rows" :key="x.id">
                     <td class="ich"><IconCell :icon-key="ICONS[iconKeyOf(x)] || ''" :seed="x.id" :cn="x.cn" /></td>

@@ -51,8 +51,9 @@
            那两段说明已删，素材与缺口集中在溯源页。 -->
       <div class="card">
         <h2>地图清单</h2>
-        <div class="scrollx">
-          <table class="entab">
+        <div class="boardwrap">
+          <table class="board">
+            <colgroup><col style="width:34%"><col style="width:13%"><col style="width:13%"><col style="width:14%"><col></colgroup>
             <thead><tr><th>地图</th><th>类型</th><th>地图编号</th><th>兴趣点</th><th>已切图</th></tr></thead>
             <tbody>
               <tr v-for="m in listedMaps" :key="m.slug">
@@ -165,9 +166,10 @@
         <div v-if="g.rows[0].mapFile" class="zthumb">
           <ZoneMap :map-file="g.rows[0].mapFile" :map-id="g.rows[0].mapId" :mark="g.rows[0].mark" :alt="g.zone" />
         </div>
-        <div class="scrollx">
-          <table class="entab bktab">
-            <thead><tr><th class="ich">书</th><th>名称</th><th>容器</th><th>位置</th><th>物品 ID</th></tr></thead>
+        <div class="boardwrap">
+          <table class="board bktab">
+            <colgroup><col class="c-ico"><col style="width:26%"><col style="width:16%"><col><col class="c-id"></colgroup>
+            <thead><tr><th class="c-ico">书</th><th>名称</th><th>容器</th><th>位置</th><th class="c-id">物品 ID</th></tr></thead>
             <tbody>
               <tr v-for="b in g.rows" :key="b.id">
                 <td class="ich"><IconCell :icon-key="b.iconKey || ''" :seed="b.itemId" :cn="b.nameCn" small /></td>
@@ -184,9 +186,10 @@
       </template>
       <div v-if="rewards.length" class="card">
         <h2>上交多少本换什么</h2>
-        <div class="scrollx">
-          <table class="entab">
-            <thead><tr><th>门槛</th><th>称号</th><th>任务</th><th>奖励</th></tr></thead>
+        <div class="boardwrap">
+          <table class="board">
+            <colgroup><col class="c-num"><col style="width:22%"><col class="c-id"><col></colgroup>
+            <thead><tr><th class="c-num">门槛</th><th>称号</th><th>任务</th><th>奖励</th></tr></thead>
             <tbody>
               <tr v-for="rw in rewards" :key="rw.books">
                 <td class="mono">{{ rw.books }} 本</td>

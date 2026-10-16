@@ -84,7 +84,7 @@
         <template v-if="groups.length">
           <template v-for="g in groups" :key="g.k">
             <div class="lgrp"><b>{{ g.label }}</b><span class="dim">{{ g.rows.length }} 条</span></div>
-            <div class="scrollx"><table class="entab chtab"><thead><tr><th class="ich">名称</th><th>类别</th><th>哪一系</th></tr></thead><tbody>
+            <div class="boardwrap"><table class="board chtab"><colgroup><col style="width:52%"><col class="c-num2"><col></colgroup><thead><tr><th>名称</th><th class="c-num2">类别</th><th>哪一系</th></tr></thead><tbody>
               <tr v-for="(x, i) in g.rows" :key="x.id || (g.k + i)">
                 <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id || x.nameCn" :cn="x.nameCn" /><b>{{ x.nameCn || '未命名' }}</b><span v-if="x.maxRank" class="dim"> · 最多 {{ x.maxRank }} 层</span><span v-if="abm[x.nameCn]" class="quote">{{ abm[x.nameCn].quote }}</span></td>
                 <td>{{ CL_KIND[x.kind] || '其他' }}<template v-if="g.k === 'other' && x.changeCn"><br><span class="tag">{{ x.changeCn }}</span></template></td>
