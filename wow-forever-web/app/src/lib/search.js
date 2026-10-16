@@ -4,8 +4,11 @@
 import { linkFor, legacyUrl } from './nav.js';
 
 // 一条 = [类型, 名称, 归属副标题, 跳转附加参数, 分级]
-export const KIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss',
-  'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+// 必须与旧站 src/js/app.js 的 SKIND_ORDER 同一份表（build-data.js 只核对旧站那份）。
+// 少一个板块不是"顺序不同"，是那一类在新站搜索里根本不出结果——分组是按这张表列出来的，
+// 不在表里的类型会被静默丢掉。2026-10-16 补齐时顺手发现 'rdd'（团本）原来就漏在这里。
+export const KIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'spl', 'ach',
+  'dun', 'boss', 'rdd', 'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
 export const GROUP_SHOWN = 5;
 export const HIT_LIMIT = 120;
 

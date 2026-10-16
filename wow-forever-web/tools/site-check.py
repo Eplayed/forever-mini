@@ -40,7 +40,7 @@ NO_NAV_ENTRY = {"skills"}
 # 加这类页就进这张表，否则"每个页面都能从导航走到"那条会把它当成走丢的页。
 DETAIL_PARENT = {"dungeon": "dungeons"}
 
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "dungeon", "raids",
+PAGES = ["index", "talent", "chooser", "timeline", "skills", "achievements", "dungeons", "dungeon", "raids",
          "systems", "races",
          "professions", "world", "legacy", "updates", "rank", "glossary", "provenance", "classes"]
 # 官方 CDN 没有这些图标文件（多是无限服新装备），界面本来就该退回自绘块。
@@ -56,6 +56,28 @@ def tolerated(url):
     if "/img/icons/" not in url:
         return False
     return url.split("/")[-1].replace(".jpg", "") in ICON_GAPS
+
+
+_APP_UP = None
+
+
+def app_up(browser):
+    """新站（Vue）端口通不通，一次探测全组复用。
+       默认不通就跳过新站那几条并记一条通过；带 --app 时必须通，不然就是失败。"""
+    global _APP_UP
+    if _APP_UP is None:
+        try:
+            ctx = browser.new_context()
+            p = ctx.new_page()
+            p.goto(APP_BASE, timeout=6000)
+            p.close()
+            ctx.close()
+            _APP_UP = True
+        except Exception as e:
+            _APP_UP = False
+            check("新站可访问（法术书与成就这组要用）", not APP_REQUIRED,
+                  "%s 不通（%s）" % (APP_BASE, str(e)[:60]))
+    return _APP_UP
 # 演示结构（_demo.json）里写死了层级门槛与前置链，用它做确定性断言
 DEMO_A00 = "a-0-0"
 DEMO_A01 = "a-0-1"
@@ -431,6 +453,133 @@ def test_abilities(browser, base):
     check("无官方稿的职业显示空态而不是空表（原因取自 abilities.json 的「没收到的」）",
           "深度解析稿" in page.evaluate("() => document.querySelector('#abtbl').innerText"))
     page.screenshot(path=os.path.join(SHOT_DIR, "skills-abilities.png"))
+    ctx.close()
+
+
+def test_spellbook(browser, base):
+    """M2（2026-10-16）：法术书接进技能页、成就独立成页。
+       两栈同页同断言——数字全部从 src/data 现算，不在脚本里写死条数。"""
+    print("\n[6a] 法术书与成就页")
+    import json
+    S = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
+    sp = json.load(open(os.path.join(SRC, "data", "spells.json"), encoding="utf-8"))["spells"]
+    ad = json.load(open(os.path.join(SRC, "data", "achievements.json"), encoding="utf-8"))
+    ach, ameta = ad["achievements"], ad["meta"]["counts"]
+    show = [a for a in ach if not a.get("devOnly")]
+    sp_groups = len(set((x["classId"], x["tab"] or "未分系") for x in sp))
+    n_alt = len([x for x in sp if x.get("ranksAlt")]) + len([x for x in sp if x.get("learnAlt")])
+    ach_groups = len(set((a["gid"], a["cat"] or "未分类") for a in show))
+
+    for label, url in ((u"旧站", base + "/skills.html"), (u"新站", APP_BASE + "/#/skills")):
+        if label == u"新站" and not app_up(browser):
+            break
+        ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
+        page = ctx.new_page()
+        errs, failed = [], []
+        page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+        page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
+                if r.status >= 400 and not tolerated(r.url) else None)
+        page.goto(url, wait_until="networkidle")
+        page.wait_for_timeout(1500)
+        check("%s 法术书行数等于数据条数" % label,
+              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == S["spells"],
+              "%d 行 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length"),
+                                   S["spells"]))
+        check("%s 按职业与系分组" % label,
+              page.evaluate("() => document.querySelectorAll('#sptbl .lgrp').length") == sp_groups,
+              "%d 组 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .lgrp').length"), sp_groups))
+        check("%s 读数写着条数" % label,
+              str(S["spells"]) in page.evaluate("() => document.getElementById('spcnt').textContent"))
+        check("%s 两说的行两个数都摆着" % label,
+              page.evaluate("() => document.querySelectorAll('#sptbl .conf').length") == n_alt,
+              "%d 处 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .conf').length"), n_alt))
+        cell = page.evaluate(r"""() => {
+          const td = [...document.querySelectorAll('#sptbl tbody tr td')];
+          return td.filter(x => x.innerText.includes('有两个说法') && !/\d+\s*\/\s*\d+/.test(x.innerText)).length;
+        }""")
+        check("%s 两说那一行确实摆着两个数" % label, cell == 0, "%d 处只有一个数" % cell)
+        long_txt = page.evaluate(r"""() => [...document.querySelectorAll('#sptbl tbody tr')].map(tr =>
+          [...tr.children].reduce((a, td) => Math.max(a, td.innerText.replace(/\n/g, ' ').length), 0))""")
+        check("%s 法术书每格都是短取值，没有描述正文" % label,
+              long_txt and max(long_txt) <= 30, "最长 %d 字" % (max(long_txt) if long_txt else 0))
+        check("%s 没有百分号（掉率与概率都不该出现在这页）" % label,
+              "%" not in page.evaluate("() => document.getElementById('sptbl').innerText"))
+        one = sp[0]["classId"]
+        exp_one = len([x for x in sp if x["classId"] == one])
+        page.evaluate("(c) => { const s = document.getElementById('c'); s.value = c; "
+                      "s.dispatchEvent(new Event('change')); }", one)
+        page.wait_for_timeout(700)
+        check("%s 按职业筛选后行数对得上" % label,
+              page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == exp_one,
+              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length"), exp_one))
+        page.screenshot(path=os.path.join(SHOT_DIR, "spellbook-%s.png" % ("app" if label == u"新站" else "legacy")))
+        check("%s 法术书页无报错与失败请求" % label, not errs and not failed,
+              "; ".join((errs + failed)[:2]) or "干净")
+        ctx.close()
+
+    # 搜索索引点一条法术跳进来要已经是筛好的（带 c=<职业>&q=<名字>）
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
+    page = ctx.new_page()
+    tgt = [x for x in sp if x["classId"] == "warrior"][0]
+    page.goto(base + "/skills.html?c=%s&q=%s" % (tgt["classId"], urllib.parse.quote(tgt["name"])),
+              wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    check("搜索带着职业与词跳进来，落地只剩那一条",
+          page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") == 1
+          and page.evaluate("() => document.getElementById('q').value") == tgt["name"],
+          page.evaluate("() => document.getElementById('cnt').textContent"))
+    ctx.close()
+
+    for label, url in ((u"旧站", base + "/achievements.html"), (u"新站", APP_BASE + "/#/achievements")):
+        if label == u"新站" and not app_up(browser):
+            break
+        ctx = browser.new_context(viewport={"width": 1440, "height": 1200})
+        page = ctx.new_page()
+        errs = []
+        page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+        page.goto(url, wait_until="networkidle")
+        page.wait_for_timeout(1500)
+        got = page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length")
+        check("%s 成就列出的条数等于「能拿的那些」" % label, got == len(show),
+              "%d 行 / 数据可列 %d（总 %d）" % (got, len(show), ameta["total"]))
+        check("%s 成就分组数对得上数据" % label,
+              page.evaluate("() => document.querySelectorAll('#tbl .lgrp').length") == ach_groups,
+              "%d 组 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl .lgrp').length"), ach_groups))
+        opts = page.evaluate(r"""() => [...document.querySelectorAll('#g option')].slice(1)
+          .map(o => parseInt(o.textContent.match(/（(\d+)）/)[1], 10))""")
+        check("%s 下拉里每个大类的数与屏幕上看到的一致" % label,
+              sum(opts) == got, "下拉合计 %d / 页面 %d 行" % (sum(opts), got))
+        dev = [a["name"] for a in ach if a.get("devOnly")]
+        body = page.evaluate("() => document.querySelector('#main').innerText")
+        leak = [n for n in dev if n in body]
+        check("%s 客户端里的开发埋点一条都不上页面" % label, not leak, "漏出 %s" % leak[:3])
+        en_missing = page.evaluate(r"""() => [...document.querySelectorAll('#tbl tbody tr')]
+          .filter(tr => !tr.children[2].innerText.trim()).length""")
+        check("%s 每条都带着英文原名（没中文名的不机翻）" % label, en_missing == 0,
+              "%d 行缺英文原名" % en_missing)
+        check("%s 成就页没有完成条件正文与百分号（红线）" % label,
+              "%" not in body and "criteria" not in body.lower())
+        check("%s 成就页无脚本报错" % label, not errs, "; ".join(errs[:2]) or "干净")
+        g0 = show[0]["gid"]
+        exp_g = len([a for a in show if a["gid"] == g0])
+        page.evaluate("(g) => { const s = document.getElementById('g'); s.value = g; "
+                      "s.dispatchEvent(new Event('change')); }", g0)
+        page.wait_for_timeout(700)
+        check("%s 按大类筛选后行数对得上" % label,
+              page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") == exp_g,
+              "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length"), exp_g))
+        page.screenshot(path=os.path.join(SHOT_DIR, "achievements-%s.png" %
+                                          ("app" if label == u"新站" else "legacy")))
+        ctx.close()
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    page.goto(base + "/achievements.html?q=" + urllib.parse.quote(show[0]["name"]), wait_until="networkidle")
+    page.wait_for_timeout(1200)
+    check("搜索词跳进成就页就已是筛好的",
+          page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") > 0
+          and page.evaluate("() => document.getElementById('q').value") == show[0]["name"],
+          page.evaluate("() => document.getElementById('cnt').textContent"))
     ctx.close()
 
 
@@ -2271,6 +2420,21 @@ def test_search(browser, base):
           "JSON %d / scale %d" % (len(idx["items"]), sc["search"]))
     built = set(it[0] for it in idx["items"])
     check("每个板块都建了条目", built == set(kinds), "没条目的板块 %s" % sorted(set(kinds) - built))
+    # M2 新接的两类：数据里每一条能上界面的都必须在索引里（差一条就是"页面接了、搜索忘了接"）
+    sp_all = json.load(open(os.path.join(SRC, "data", "spells.json"), encoding="utf-8"))["spells"]
+    ach_all = json.load(open(os.path.join(SRC, "data", "achievements.json"),
+                             encoding="utf-8"))["achievements"]
+    ach_show = [a for a in ach_all if not a.get("devOnly")]
+    exp_spl = len(set((x["name"], "c=" + x["classId"]) for x in sp_all))
+    exp_ach = len(set((x["name"], "g=" + x["gid"]) for x in ach_show))
+    got_spl = len([it for it in idx["items"] if it[0] == "spl"])
+    got_ach = len([it for it in idx["items"] if it[0] == "ach"])
+    check("法术书全部进了搜索索引", got_spl == exp_spl, "索引 %d / 数据去重后 %d" % (got_spl, exp_spl))
+    check("成就（能列的那些）全部进了搜索索引", got_ach == exp_ach,
+          "索引 %d / 数据去重后 %d（开发埋点 %d 条不列）" % (got_ach, exp_ach, len(ach_all) - len(ach_show)))
+    other_names = set(it[1] for it in idx["items"] if it[0] not in ("spl", "ach"))
+    uniq_spl = next(x for x in sp_all if x["name"] not in other_names)
+    uniq_ach = next(x for x in ach_show if x["name"] not in other_names)
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
@@ -2341,6 +2505,15 @@ def test_search(browser, base):
         ("Molten Core", "raids.html", lambda: page.input_value("#rq") == "Molten Core"),
         ("兽人", "races.html",
          lambda: page.get_attribute(".racecard.on", "data-race") == "horde-orc"),
+        # M2 新接的两类：法术名跳进技能页要把职业与词都带上，成就名跳进成就页要已筛好
+        (uniq_spl["name"], "skills.html",
+         lambda: page.input_value("#c") == uniq_spl["classId"]
+         and page.input_value("#q") == uniq_spl["name"]
+         and page.evaluate("() => document.querySelectorAll('#sptbl tbody tr').length") >= 1),
+        (uniq_ach["name"], "achievements.html",
+         lambda: page.input_value("#q") == uniq_ach["name"]
+         and page.input_value("#g") == uniq_ach["gid"]
+         and page.evaluate("() => document.querySelectorAll('#tbl tbody tr').length") >= 1),
     ]
     for query, prefix, judge in LAND:
         href = first_row(query, prefix)
@@ -3331,6 +3504,7 @@ SECTIONS = [
     ("dungeon_banner", test_dungeon_banner),
     ("chooser", test_chooser),
     ("abilities", test_abilities),
+    ("spellbook", test_spellbook),
     ("races", test_races),
     ("grouping", test_grouping),
     ("dungeon_data", test_dungeon_data),

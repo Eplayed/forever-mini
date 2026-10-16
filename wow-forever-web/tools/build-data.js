@@ -1102,14 +1102,19 @@ if (fs.existsSync(itdPath)) {
   if (pct.length) errs.push(`世界：${pct.length} 条稀有的掉落里出现百分号或掉率措辞（红线）`);
 })((worldOut || {}).rares || null);
 
+// 法术书与成就的清单要在下面的搜索索引里再派生一遍，这里留个出口给索引段用
+let spellList = [];
 const spellsPath = path.join(ROOT, 'spells.json');
+// 合法图标文件名，与 tools/fetch-icons.py 的 KEY_RE、merge-achievements.py 的 ICON_OK_RE 同一条
+const ICON_OK = /^[a-z0-9_]{3,64}$/;
 if (fs.existsSync(spellsPath)) {
   const sp = JSON.parse(fs.readFileSync(spellsPath, 'utf8'));
   const list = sp.spells || [];
+  spellList = list;
   const classIds = new Set((read('classes.json').classes || []).map((c) => c.id));
   const STATES = ['same', 'changed', 'new', 'removed', 'renamed'];
   const RELATIONS = ['talent', 'race', 'earlier', 'baseline'];
-  const badName = [], badClass = [], badProv = [], badState = [], badAlt = [], badRank = [], pct = [];
+  const badName = [], badClass = [], badProv = [], badState = [], badAlt = [], badRank = [], pct = [], badIcon = [];
   const seenIds = new Set();
   let dupIds = 0;
   list.forEach((r, i) => {
@@ -1124,6 +1129,8 @@ if (fs.existsSync(spellsPath)) {
     if (r.ranksAlt !== undefined && r.ranksAlt === r.ranks) badAlt.push(r.id + ':ranks');
     if (r.learnAlt !== undefined && r.learnAlt === r.learnLevel) badAlt.push(r.id + ':learn');
     if (r.ranks != null && !Number.isInteger(r.ranks)) badRank.push(r.id);
+    // 图标键就是拼进 <img src> 的文件名：带空格或斜杠的键每次访问稳定 404，还会让两栈的图数对不上
+    if (r.iconKey != null && !ICON_OK.test(String(r.iconKey))) badIcon.push(r.id + ':' + r.iconKey);
     (r.spellRanks || []).forEach((k) => {
       if (!Number.isInteger(k.spellId)) badRank.push(r.id + '#id');
     });
@@ -1137,6 +1144,7 @@ if (fs.existsSync(spellsPath)) {
   if (badState.length) errs.push(`spells：${badState.length} 条状态/来历越界或两族混填（${badState.slice(0, 3).join('、')}）`);
   if (badAlt.length) errs.push(`spells：${badAlt.length} 条"另一说"与主值相同，那不算分歧（${badAlt.slice(0, 3).join('、')}）`);
   if (badRank.length) errs.push(`spells：${badRank.length} 条等级数字段不是整数（${badRank.slice(0, 3).join('、')}）`);
+  if (badIcon.length) errs.push(`spells：${badIcon.length} 条图标键不可能是文件名（${badIcon.slice(0, 3).join('、')}）`);
   if (dupIds) errs.push(`spells：${dupIds} 条 id 重复`);
   const c = (sp.meta || {}).counts || {};
   if (c.total !== list.length) errs.push(`spells：条数 ${list.length} 与 meta.counts.total ${c.total} 对不上`);
@@ -1161,15 +1169,29 @@ if (fs.existsSync(spellsPath)) {
 // ---------- 成就（M1-B，2026-10-16） ----------
 // 目录来自插件那份 211 条；能升到 L0 的只有参考站端点也给出、且中文名逐字相同的那些。
 // 成就描述整句两份都不落（抽取阶段删），这里再钉一道：描述进了成品就是构建失败。
+// DEV_MARK 与 tools/merge-achievements.py 的 DEV_RE 是同一条规则，两边各留一份是为了互相验证：
+// "标了 devOnly 但名字里没有开发标记"这种错只有两处规则一致才不会误伤，改一边立刻红。
+const DEV_MARK = /hidden|unused|tracking achievement|beta survey|\bbeta\b/i;
+let achList = [];
 const achPath = path.join(ROOT, 'achievements.json');
 if (fs.existsSync(achPath)) {
   const ach = JSON.parse(fs.readFileSync(achPath, 'utf8'));
   const list = ach.achievements || [];
+  achList = list;
   const lvCount = { L0: 0, L1: 0 };
   const bad = [], badProv = [], dupId = [], sentence = [];
   const seen = new Set();
   list.forEach((r) => {
     if (!r.name || !r.achId) bad.push(r.id || String(r.achId));
+    // 短号是界面筛选与搜索跳转的落点，缺一条就等于那一类在页面上筛不到
+    if (!r.gid) bad.push((r.id || '?') + ' 缺 gid');
+    // devOnly 只许标在"客户端没给中文名 + 名字带开发标记"的行上：
+    // 标错了就是把一条真成就从玩家眼前藏掉，这种错界面上永远看不出来，只能在这里拦。
+    if (r.devOnly === true) {
+      if (/[\u4e00-\u9fff]/.test(String(r.name || ''))) bad.push(r.id + ' 标 devOnly 但有中文名');
+      else if (!DEV_MARK.test(String(r.name || ''))) bad.push(r.id + ' 标 devOnly 但名字没有开发标记');
+    } else if (r.devOnly !== undefined) bad.push((r.id || '?') + ' devOnly 取值不是 true');
+    if (r.iconKey != null && !ICON_OK.test(String(r.iconKey))) bad.push(r.id + ' 图标键不合法:' + r.iconKey);
     if (r.level === 'L0') lvCount.L0 += 1; else if (r.level === 'L1') lvCount.L1 += 1;
     else bad.push((r.id || '?') + ' 分级越界:' + r.level);
     // L0 必须是两源都给且名字一致——只有插件一家的，无论多像都不许升
@@ -1188,13 +1210,40 @@ if (fs.existsSync(achPath)) {
   }
   const topSum = Object.keys(c.byTop || {}).reduce((a, k) => a + c.byTop[k], 0);
   if (topSum !== list.length) errs.push(`achievements：分大类合计 ${topSum} 与总条数 ${list.length} 对不上`);
+  // 下拉与页面上的读数是两件事：groups[].count 对得上源侧自报，groups[].shown 才是屏幕上看到的。
+  // 这两套数任何一处对不上，玩家就会看到"大类写 60、翻出来只有 51"这种自相矛盾的页面。
+  const gs = c.groups || [];
+  const devRows = list.filter((r) => r.devOnly === true);
+  if (c.devOnly !== devRows.length) {
+    errs.push(`achievements：meta.counts.devOnly 记 ${c.devOnly} · 实数 ${devRows.length} 条开发埋点`);
+  }
+  if (c.shown !== list.length - devRows.length) {
+    errs.push(`achievements：meta.counts.shown 记 ${c.shown} · 应为 ${list.length - devRows.length}`);
+  }
+  if (!gs.length) errs.push('achievements：meta.counts.groups 缺失，成页面的大类筛选无从建起');
+  if (gs.reduce((a, x) => a + (x.count || 0), 0) !== list.length) {
+    errs.push('achievements：groups 的 count 合计与总条数对不上');
+  }
+  if (gs.reduce((a, x) => a + (x.shown || 0), 0) !== list.length - devRows.length) {
+    errs.push('achievements：groups 的 shown 合计与页面应列出的条数对不上');
+  }
+  if (gs.some((x) => !x.gid || !x.top)) errs.push('achievements：groups 里有缺 gid/top 的大类');
+  const gidSeen = new Set(gs.map((x) => x.gid));
+  const orphanGid = list.filter((r) => !gidSeen.has(r.gid)).length;
+  if (orphanGid) errs.push(`achievements：${orphanGid} 条的 gid 不在 groups 里（点进那一类会筛空）`);
+  // 缺图登记：noIcon 是"这一条没图标、界面走自绘块"的条数，badIcon 是"上游给的键根本不像文件名、
+  // 被丢掉"的条数。这两个数飘了就说明合并脚本与成品不是同一份逻辑跑出来的。
+  const noIconRows = list.filter((x) => !x.iconKey).length;
+  if (c.noIcon !== noIconRows) errs.push(`achievements：meta.counts.noIcon 记 ${c.noIcon} · 实数 ${noIconRows}`);
+  if ((c.badIcon || 0) > noIconRows) errs.push('achievements：badIcon 比缺图条数还多，自相矛盾');
   if (bad.length) errs.push(`achievements：${bad.length} 条结构不合规（如 ${bad.slice(0, 3).join('、')}）`);
   if (badProv.length) errs.push(`achievements：${badProv.length} 条来源不可回查或缺 checkedAt（如 ${badProv.slice(0, 2).join('、')}）`);
   if (sentence.length) errs.push(`achievements：${sentence.length} 条夹了句子或掉率措辞（红线）`);
   if (dupId.length) errs.push(`achievements：${dupId.length} 条 id 重复`);
   scale.achievements = list.length;
   console.log('成就：' + list.length + ' 条 / ' + Object.keys(c.byTop || {}).length + ' 大类（L0 两源互证 '
-    + lvCount.L0 + ' · L1 单源待回查 ' + lvCount.L1 + '）·描述整句两份都不落');
+    + lvCount.L0 + ' · L1 单源待回查 ' + lvCount.L1 + ' · 页面列出 ' + (list.length - devRows.length)
+    + '，开发埋点 ' + devRows.length + ' 条不列）·描述整句两份都不落');
 } else {
   warns.push('achievements.json 缺失：成就会空着（跑 tools/scrape-wclbox-achievements.py + tools/merge-achievements.py 生成）');
 }
@@ -1208,6 +1257,10 @@ const SK = {
   chg: ['客户端改动', 'updates.html', 'q'],
   term: ['中英术语', 'glossary.html', 'q'],
   abl: ['技能四态', 'skills.html', 'q'],
+  // 2026-10-16 M2：法术书（495 条）与成就目录（211 条）进索引。跳转各带自己的归属参数
+  // （法术带 c=职业、成就带 g=大类），这样同名条目（两个职业都有「反击」）不会并成一条。
+  spl: ['法术书', 'skills.html', 'q'],
+  ach: ['成就', 'achievements.html', 'q'],
   // 2026-10-13 副本线加了"每座本一页"（dungeon.html?d=<本>）：搜到一座本或一个首领，
   // 直接落到那一座的整页，不再落到列表页等人在一堆卡里自己找。
   // 跳转参数仍由条目自己带（见下面 sPush），这里只换落在哪一页。
@@ -1280,6 +1333,16 @@ gl.items.forEach((x) => {
 });
 (ab.items || []).forEach((x) => {
   sPush('abl', x.name, clsCn[x.classId] || x.classId, '', x.level);
+});
+// 法术书：一条一行，归属写「职业 · 系」。只带名称与归属，任何 tooltip 句子都不进索引（红线）。
+spellList.forEach((r) => {
+  sPush('spl', r.name, (clsCn[r.classId] || r.classId) + ' · ' + (r.tab || '系未标'),
+    'c=' + r.classId, r.level);
+});
+// 成就：短号 gid 由 merge-achievements.py 写在数据里（界面与索引用同一个号，不各写一份映射）。
+// devOnly 那几条（客户端里的开发埋点、问卷、已废弃条目）不进索引——玩家搜不到不该存在的东西。
+achList.filter((r) => !r.devOnly).forEach((r) => {
+  sPush('ach', r.name, (r.top || '') + ' · ' + (r.cat || ''), 'g=' + (r.gid || 'other'), r.level);
 });
 [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).forEach((d) => {
   const kindCn = d.kind === 'raid' ? '团队副本' : d.kind === 'new' ? '无限新增' : '经典本';
@@ -1398,6 +1461,17 @@ SIDX.forEach((it) => {
   const idu = k + '|' + n + '|' + it[3];
   if (seenSid.has(idu)) errs.push(`search：合并后仍有重复 ${k} ${n}`);
   seenSid.add(idu);
+});
+// 「数据里有 N 条、索引里一条都没派生出来」是 M1 那批最容易犯的错：数据落地了、门禁读了它，
+// 页面与搜索忘了接。这里按「名称 + 跳转参数」去重后逐类对数，差一条就失败。
+[['spl', spellList, (r) => 'c=' + r.classId],
+ ['ach', achList.filter((r) => !r.devOnly), (r) => 'g=' + (r.gid || 'other')]].forEach(([k, src, extraOf]) => {
+  if (!src.length) return;
+  const exp = new Set(src.map((r) => k + '|' + r.name + '|' + extraOf(r))).size;
+  const got = SIDX.filter((it) => it[0] === k).length;
+  if (exp !== got) {
+    errs.push(`search：${k} 数据侧去重后应有 ${exp} 条，索引里只有 ${got} 条（页面或索引没接上）`);
+  }
 });
 Object.keys(SK).forEach((k) => {
   if (!fs.existsSync(path.join(ROOT, '..', SK[k][1]))) {

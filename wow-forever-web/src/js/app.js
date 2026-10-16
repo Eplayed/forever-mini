@@ -21,7 +21,10 @@
     { t: '种族', items: [
       { href: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' }] },
     { t: '世界', items: [
-      { href: 'world.html', t: '区域与稀有', d: '44 个区域 · 36 个稀有刷新点 · 书籍与营地' },
+      // 这一格的说明不写稀有条数：条数会随采集变（10-16 就从 36 走到 362），
+      // 导航文案里那个"36"会变成玩家眼前的假数。条数在页面上有读数。
+      { href: 'world.html', t: '区域与稀有', d: '44 个区域 · 稀有精英刷新点 · 书籍与营地' },
+      { href: 'achievements.html', t: '成就', d: '按大类列出的成就目录：名称、编号与英文原名' },
       { href: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
       { href: 'raids.html', t: '团本', d: '客户端能排到的团队条目与另一份名单对照' },
       { href: 'systems.html', t: '系统规则', d: '规则、区域、装备名的官方中文说法' }] },
@@ -327,7 +330,8 @@
      只收「名称 + 归属」，命中后带着词跳进对应页面，由那一页自己的筛选器接手。 */
   var SX = { idx: null, kinds: null, job: null, rows: [] };
   // 分组显示顺序：先身份类，再内容类，配方与采集点这种长尾放后面
-  var SKIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'dun', 'boss', 'rdd',
+  var SKIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'spl', 'ach',
+    'dun', 'boss', 'rdd',
     'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
   // 加一个板块必须同时进这张表：不在表里的板块，首页搜索会直接搜不到（build-data.js 卡这条）
   var SSHOWN = 5;
@@ -616,7 +620,7 @@
         E('chooser.html', '不知道选哪个职业', '工具 · 问答 7 题',
           [[7, '题'], [S.classes, '职业候选']], artOf('classBanners', 'druid')),
         E('skills.html', '技能书', '角色 · 技能',
-          [[S.abilities, '条官方整句'], [S.glossary, '条四态对照']], artOf('panels', 'spellbook')),
+          [[S.spells, '条法术'], [S.abilities, '条官方整句四态']], artOf('panels', 'spellbook')),
         E('legacy.html', '传承专长与挑战', '角色 · 本版新增',
           [[S.legacy.perks, '个专长有明细'], [S.legacy.unknown, '格未公开']], artOf('scenes', 'guangshu')),
         E('races.html', '种族与职业组合', '角色 · 种族 ' + S.races + ' 行',
@@ -656,8 +660,8 @@
         '<div class="gsearch hs" role="search">' +
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' +
         '<input type="search" id="gs" autocomplete="off" aria-controls="gres" aria-expanded="false" ' +
-        'aria-label="全站搜索：天赋、改动、术语、副本、区域、配方、种族" ' +
-        'placeholder="搜天赋、副本、区域、配方、种族特长（共 ' + S.search + ' 条）">' +
+        'aria-label="全站搜索：天赋、法术、成就、改动、术语、副本、区域、配方、种族" ' +
+        'placeholder="搜天赋、法术、成就、副本、区域、配方（共 ' + S.search + ' 条）">' +
         '<button type="button" class="cta cta-gold" id="ggo">立即搜索</button>' +
         '<p class="gsex">' + [['潜行', '同一个词在改动清单和配方里都有'], ['领主大厅', '副本名'],
           ['咆鼻', '稀有精英'], ['舒适的睡袋', '世界页的营点']].map(function (x) {
@@ -1475,10 +1479,15 @@
 
   function skills() {
     Promise.all([D.load('data/glossary.json'), D.load('data/classes.json'), D.load('data/abilities.json'),
-      D.load('data/icons.json'), D.load('data/races.json')]).then(function (r) {
+      D.load('data/icons.json'), D.load('data/races.json'), D.load('data/spells.json')]).then(function (r) {
       var items = r[0].items, cls = r[1].classes, ab = r[2] || { items: [], meta: {} };
       var ICONS = (r[3] || {}).map || {}, RC = (r[4] || {}).races || [];
-      var f = { c: '', k: '', q: urlQ('q') };
+      var sp = (r[5] || {}).spells || [];
+      var f = { c: urlQ('c'), k: '', q: urlQ('q') };
+      /* 法术书的两个标签族：state 是"与经典旧世对照到哪儿"，relation 是"这条从哪来"。
+         同一条只会有其中一族（build-data.js 卡这条），所以一格显示就够，不并排摆两列。 */
+      var SP_STATE = { same: '与经典一致', changed: '改动', new: '无限新增', removed: '已移除', renamed: '改名' };
+      var SP_REL = { talent: '天赋赋予', race: '种族技能', earlier: '比经典更早学会', baseline: '职业技能' };
       var KIND = { talent: '天赋/技能', item: '装备', dungeon: '副本', boss: 'BOSS', system: '系统', zone: '地名', skill: '技能', racial: '种族特长' };
       var RACE = raceLookup(RC);
       function draw() {
@@ -1504,6 +1513,7 @@
             }).join('') + '</tbody></table></div>';
         }).join('') : '<div class="empty">没有匹配条目，试试放宽筛选。</div>';
         el('cnt').textContent = list.length + ' / ' + items.length + ' 条 · 有图标 ' + withIcon + ' 条';
+        drawSpells();
         drawAbilities();
       }
       function drawAbilities() {
@@ -1549,18 +1559,126 @@
           b.onclick = function () { D.copy(b.dataset.copy); };
         });
       }
+      function drawSpells() {
+        var list = sp.filter(function (x) {
+          if (f.c && x.classId !== f.c) return false;
+          if (f.q && String(x.name || '').toLowerCase().indexOf(f.q.toLowerCase()) < 0) return false;
+          return true;
+        });
+        var byCls = {};
+        list.forEach(function (x) {
+          var g = byCls[x.classId] || (byCls[x.classId] = { order: [], rows: {} });
+          var tab = x.tab || '未分系';
+          if (!g.rows[tab]) { g.rows[tab] = []; g.order.push(tab); }
+          g.rows[tab].push(x);
+        });
+        function row(x) {
+          var rk = x.ranks ? D.esc(x.ranks) + ' 级' : '';
+          var lr = x.learnLevel ? D.esc(x.learnLevel) + ' 级起' : '';
+          return '<tr><td class="ich">' + iconCell(x.iconKey, x.id, x.name) + '</td>' +
+            '<td><b>' + D.hl(x.name, f.q) + '</b>' +
+            (x.relation ? '<br><span class="dim">' + D.esc(SP_REL[x.relation] || x.relation) + '</span>' : '') + '</td>' +
+            '<td class="mono">' + rk +
+            (x.ranksAlt ? '<div class="conf">级数有两个说法：' + D.esc(x.ranks) + ' / ' + D.esc(x.ranksAlt) + '，还没实测</div>' : '') + '</td>' +
+            '<td class="mono">' + lr +
+            (x.learnAlt ? '<div class="conf">起学等级有两个说法：' + D.esc(x.learnLevel) + ' / ' + D.esc(x.learnAlt) + '，还没实测</div>' : '') + '</td>' +
+            '<td>' + (x.state ? D.esc(SP_STATE[x.state] || x.state) : '') + '</td></tr>';
+        }
+        var out = [];
+        cls.forEach(function (c) {
+          var g = byCls[c.id];
+          if (!g) return;
+          g.order.forEach(function (tab) {
+            var rows = g.rows[tab];
+            out.push('<div class="lgrp">' + Glyph.classTile(c.id, c.cn, c.iconKey) +
+              '<b>' + D.esc(c.cn) + '</b><span class="dim mono">' + D.esc(tab) + '</span>' +
+              '<span class="dim">' + rows.length + ' 条</span></div>' +
+              '<div class="scrollx"><table class="entab"><thead><tr>' +
+              '<th class="ich">图标</th><th>法术</th><th>级数</th><th>起学等级</th><th>与经典旧世</th>' +
+              '</tr></thead><tbody>' + rows.map(row).join('') + '</tbody></table></div>');
+          });
+        });
+        el('sptbl').innerHTML = out.length ? out.join('')
+          : '<div class="empty">没有匹配的法术，换个词或放宽职业筛选。</div>';
+        el('spcnt').textContent = ' · ' + list.length + ' 条';
+      }
       set('<div class="card"><h1 class="pt">技能书</h1>' +
         '<div class="field"><input type="search" id="q" placeholder="搜中文或英文" value="' + D.esc(f.q) + '">' +
-        '<select id="c"><option value="">全部职业</option>' + cls.map(function (x) { return '<option value="' + x.id + '">' + D.esc(x.cn) + '</option>'; }).join('') + '</select>' +
+        '<select id="c"><option value="">全部职业</option>' + cls.map(function (x) { return '<option value="' + x.id + '"' + (f.c === x.id ? ' selected' : '') + '>' + D.esc(x.cn) + '</option>'; }).join('') + '</select>' +
         '<select id="k"><option value="">全部类型</option>' + Object.keys(KIND).filter(function (k) {
           return items.some(function (x) { return x.kind === k; });
         }).map(function (k) { return '<option value="' + k + '">' + KIND[k] + '</option>'; }).join('') + '</select>' +
         '<span class="dim mono" id="cnt"></span></div></div>' +
+        '<div class="card tblbox"><h2>法术书<span class="dim mono" id="spcnt"></span></h2><div id="sptbl"></div></div>' +
         '<div class="card"><h2>与经典旧世的差异（四态）<span class="dim mono" id="abcnt"></span></h2><div id="abtbl"></div></div>' +
         '<div class="card tblbox"><div id="tbl"></div></div>');
       el('q').oninput = function (e) { f.q = e.target.value; draw(); };
       el('c').onchange = function (e) { f.c = e.target.value; draw(); };
       el('k').onchange = function (e) { f.k = e.target.value; draw(); };
+      draw();
+    }).catch(fail);
+  }
+
+  /* ---------- 成就目录（M2，2026-10-16） ---------- */
+  /* 这一页只列目录：编号、中文名、英文原名、大类与小类。成就的完成条件文本三份资料里都有，
+     那是转述站写的正文（红线：不复制描述文案），所以一格都不落，界面上也不写"这里没有条件"
+     这类讲缺口的话——按 2026-10-13 口径，缺的格子留空。 */
+  function achievements() {
+    Promise.all([D.load('data/achievements.json')]).then(function (r) {
+      var doc = r[0] || {};
+      // 开发埋点那几条（Hidden / UNUSED / 测试问卷）不是玩家能拿的成就，页面上不列；
+      // 条目仍在数据里，差额由 meta.counts.devOnly 点名，溯源页说。
+      var rows = (doc.achievements || []).filter(function (x) { return !x.devOnly; });
+      var groups = ((doc.meta || {}).counts || {}).groups || [];
+      var f = { g: urlQ('g'), q: urlQ('q') };
+      function draw() {
+        var list = rows.filter(function (x) {
+          if (f.g && x.gid !== f.g) return false;
+          if (f.q && (String(x.name || '') + String(x.nameEn || '')).toLowerCase()
+            .indexOf(f.q.toLowerCase()) < 0) return false;
+          return true;
+        });
+        var out = [];
+        // 分组顺序跟着 meta.counts.groups（数据里自带），小类按这一类里首次出现的顺序
+        groups.forEach(function (grp) {
+          var sub = {}, order = [];
+          list.forEach(function (x) {
+            if (x.gid !== grp.gid) return;
+            var k = x.cat || '未分类';
+            if (!sub[k]) { sub[k] = []; order.push(k); }
+            sub[k].push(x);
+          });
+          order.forEach(function (k) {
+            var rs = sub[k];
+            out.push('<div class="lgrp"><b>' + D.esc(grp.top) + '</b>' +
+              '<span class="dim mono">' + D.esc(k) + '</span>' +
+              '<span class="dim">' + rs.length + ' 条</span></div>' +
+              '<div class="scrollx"><table class="entab"><thead><tr>' +
+              '<th class="ich">图标</th><th>成就</th><th>英文原名</th><th>编号</th></tr></thead><tbody>' +
+              rs.map(function (x) {
+                return '<tr><td class="ich">' + iconCell(x.iconKey, x.id, x.name) + '</td>' +
+                  '<td><b>' + D.hl(x.name, f.q) + '</b>' +
+                  (x.forever ? '<br><span class="dim">无限新增</span>' : '') + '</td>' +
+                  '<td class="en">' + (x.nameEn ? D.hl(x.nameEn, f.q) : '') + '</td>' +
+                  '<td class="mono dim">#' + D.esc(x.achId) + '</td></tr>';
+              }).join('') + '</tbody></table></div>');
+          });
+        });
+        el('tbl').innerHTML = out.length ? out.join('')
+          : '<div class="empty">没有匹配的成就，换个词或放宽大类筛选。</div>';
+        el('cnt').textContent = list.length + ' / ' + rows.length + ' 条';
+      }
+      set('<div class="card"><h1 class="pt">成就目录</h1>' +
+        '<div class="field"><input type="search" id="q" placeholder="搜中文或英文" value="' + D.esc(f.q) + '">' +
+        '<select id="g" aria-label="按大类筛选"><option value="">全部大类</option>' +
+        groups.map(function (x) {
+          return '<option value="' + D.esc(x.gid) + '"' + (f.g === x.gid ? ' selected' : '') + '>' +
+            D.esc(x.top) + '（' + (x.shown === undefined ? x.count : x.shown) + '）</option>';
+        }).join('') + '</select>' +
+        '<span class="dim mono" id="cnt"></span></div></div>' +
+        '<div class="card tblbox"><div id="tbl"></div></div>');
+      el('q').oninput = function (e) { f.q = e.target.value; draw(); };
+      el('g').onchange = function (e) { f.g = e.target.value; draw(); };
       draw();
     }).catch(fail);
   }
@@ -3477,5 +3595,5 @@
   watchRails();
   tickCountdown();
   setInterval(tickCountdown, 1000);
-  ({ home: home, talent: talent, classes: classPage, chooser: chooser, timeline: timeline, skills: skills, dungeons: dungeons, dungeon: dungeonPage, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
+  ({ home: home, talent: talent, classes: classPage, chooser: chooser, timeline: timeline, skills: skills, achievements: achievements, dungeons: dungeons, dungeon: dungeonPage, raids: raids, systems: systems, races: races, professions: professions, legacy: legacy, world: world, updates: updates, rank: rank, glossary: glossary, provenance: provenance })[page]();
 })();

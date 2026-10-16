@@ -5,8 +5,8 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
     <input id="gs" ref="box" type="search" autocomplete="off" aria-controls="gres"
            :aria-expanded="open ? 'true' : 'false'"
-           aria-label="全站搜索：天赋、改动、术语、副本、区域、配方、种族"
-           :placeholder="'搜天赋、副本、区域、配方、种族特长（共 ' + total + ' 条）'"
+           aria-label="全站搜索：天赋、法术、成就、改动、术语、副本、区域、配方、种族"
+           :placeholder="'搜天赋、法术、成就、副本、区域、配方（共 ' + total + ' 条）'"
            v-model="q" @input="onType" @keydown="onKey">
     <button type="button" class="cta cta-gold" id="ggo" @click="go">立即搜索</button>
     <p class="gsex">

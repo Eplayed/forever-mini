@@ -49,6 +49,7 @@ PAGES = [
     {"key": "glossary", "legacy": "/glossary.html", "app": "/#/glossary", "tabs": []},
     {"key": "timeline", "legacy": "/timeline.html", "app": "/#/timeline", "tabs": []},
     {"key": "skills", "legacy": "/skills.html", "app": "/#/skills", "tabs": []},
+    {"key": "achievements", "legacy": "/achievements.html", "app": "/#/achievements", "tabs": []},
     {"key": "updates", "legacy": "/updates.html", "app": "/#/updates", "tabs": []},
     {"key": "rank", "legacy": "/rank.html", "app": "/#/rank", "tabs": []},
     {"key": "provenance", "legacy": "/provenance.html", "app": "/#/provenance", "tabs": []},

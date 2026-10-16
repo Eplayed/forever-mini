@@ -29,6 +29,38 @@
       </div>
     </div>
 
+    <!-- 法术书（M2，2026-10-16）：495 条按「职业 · 系」分组，只列名称、级数、起学等级与
+         与经典旧世的对照状态。级数或起学等级两边说法不一样的，两个数都摆（红线：两源分歧两个都留），
+         写成玩家读得懂的那一句；描述正文一条不落。 -->
+    <div class="card tblbox">
+      <h2>法术书<span class="dim mono" id="spcnt"> · {{ spList.length }} 条</span></h2>
+      <div id="sptbl">
+        <template v-for="b in spBlocks" :key="b.cid + '-' + b.tab">
+          <div class="lgrp">
+            <ClassTile :class-id="b.cid" :cn="b.cname" :icon-key="b.iconKey" />
+            <b>{{ b.cname }}</b>
+            <span class="dim mono">{{ b.tab }}</span>
+            <span class="dim">{{ b.rows.length }} 条</span>
+          </div>
+          <div class="scrollx">
+            <table class="entab">
+              <thead><tr><th class="ich">图标</th><th>法术</th><th>级数</th><th>起学等级</th><th>与经典旧世</th></tr></thead>
+              <tbody>
+                <tr v-for="x in b.rows" :key="x.id">
+                  <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
+                  <td><b><HlText :text="x.name" :q="q" /></b><br v-if="x.relation"><span v-if="x.relation" class="dim">{{ SP_REL[x.relation] || x.relation }}</span></td>
+                  <td class="mono">{{ x.ranks ? x.ranks + ' 级' : '' }}<div v-if="x.ranksAlt" class="conf">级数有两个说法：{{ x.ranks }} / {{ x.ranksAlt }}，还没实测</div></td>
+                  <td class="mono">{{ x.learnLevel ? x.learnLevel + ' 级起' : '' }}<div v-if="x.learnAlt" class="conf">起学等级有两个说法：{{ x.learnLevel }} / {{ x.learnAlt }}，还没实测</div></td>
+                  <td>{{ x.state ? (SP_STATE[x.state] || x.state) : '' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </template>
+        <div v-if="!spBlocks.length" class="empty">没有匹配的法术，换个词或放宽职业筛选。</div>
+      </div>
+    </div>
+
     <!-- 与经典旧世的差异（四态）：abilities.json 现取，跟着职业筛选走（不吃搜索词与类型筛选）。
          2026-10-12 站主决定：这一页只留词条与原句，讲"原句出自哪份稿子、为什么没有未变这一档"
          的那几段已删，出处集中在溯源页。 -->
@@ -121,6 +153,10 @@ import HlText from '../components/HlText.vue';
 const HEAD_ART = 'img/art/classes/mage.webp';
 
 const KIND = { talent: '天赋/技能', item: '装备', dungeon: '副本', boss: 'BOSS', system: '系统', zone: '地名', skill: '技能', racial: '种族特长' };
+/* 法术书的两个标签族：state 是"与经典旧世对照到哪儿"，relation 是"这条从哪来"。
+   同一条只会有其中一族（build-data.js 卡这条），所以一格显示就够，不并排摆两列。 */
+const SP_STATE = { same: '与经典一致', changed: '改动', new: '无限新增', removed: '已移除', renamed: '改名' };
+const SP_REL = { talent: '天赋赋予', race: '种族技能', earlier: '比经典更早学会', baseline: '职业技能' };
 const AB_STATE = { new: '新增', changed: '改动', renamed: '改名', removed: '移除' };
 const AB_STATES = ['new', 'changed', 'renamed', 'removed'];
 const AB_KIND = { talent: '天赋', skill: '技能', pet: '宠物技能' };
@@ -136,15 +172,18 @@ const fk = ref('');
 const route = useRoute();
 // 首页搜索带着 q 跳进来（#/skills?q=…），落地就该是筛好的样子；旧站 skills 的 q 不 trim
 q.value = String(route.query.q || '');
+// 搜索索引点一条法术会带 c=<职业> 跳进来（同名技能在不同职业是两条），落地就该是筛好的样子
+fc.value = String(route.query.c || '');
 
 function boot() {
   err.value = '';
   Promise.all([load('data/glossary.json'), load('data/classes.json'), load('data/abilities.json'),
-    load('data/icons.json'), load('data/races.json')])
+    load('data/icons.json'), load('data/races.json'), load('data/spells.json')])
     .then((r) => {
       d.value = {
         items: r[0].items, cls: r[1].classes, ab: r[2] || { items: [], meta: {} },
-        ICONS: (r[3] || {}).map || {}, RACE: raceLookup((r[4] || {}).races || [])
+        ICONS: (r[3] || {}).map || {}, RACE: raceLookup((r[4] || {}).races || []),
+        SP: (r[5] || {}).spells || []
       };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
@@ -217,6 +256,32 @@ const list = computed(() => items.value.filter((x) => {
 }));
 const groups = computed(() => groupEntries(list.value, cls.value, RACE.value));
 const withIcon = computed(() => list.value.filter((x) => ICONS.value[iconKeyOf(x)]).length);
+
+/* ---- 法术书（spells.json）：跟职业与搜索词走，与旧站 drawSpells 同一算法 ---- */
+const spAll = computed(() => (d.value && d.value.SP) || []);
+const spList = computed(() => spAll.value.filter((x) => {
+  if (fc.value && x.classId !== fc.value) return false;
+  if (q.value && String(x.name || '').toLowerCase().indexOf(q.value.toLowerCase()) < 0) return false;
+  return true;
+}));
+const spBlocks = computed(() => {
+  const byCls = {};
+  spList.value.forEach((x) => {
+    const g = byCls[x.classId] || (byCls[x.classId] = { order: [], rows: {} });
+    const tab = x.tab || '未分系';
+    if (!g.rows[tab]) { g.rows[tab] = []; g.order.push(tab); }
+    g.rows[tab].push(x);
+  });
+  const out = [];
+  cls.value.forEach((c) => {
+    const g = byCls[c.id];
+    if (!g) return;
+    g.order.forEach((tab) => {
+      out.push({ cid: c.id, cname: c.cn, iconKey: c.iconKey, tab: tab, rows: g.rows[tab] });
+    });
+  });
+  return out;
+});
 function onQ(e) { q.value = e.target.value; }
 function tileImgBad(e) { e.target.className = 'bad'; }
 

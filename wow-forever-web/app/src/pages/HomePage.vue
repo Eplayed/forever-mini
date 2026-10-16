@@ -243,7 +243,7 @@ const MOD_GROUPS = computed(() => {
         n: [[7, '题'], [s.classes, '职业候选']] },
       { href: 'skills.html', t: '技能书', kicker: '角色 · 技能',
         art: artOf(A, 'panels', 'spellbook'),
-        n: [[s.abilities, '条官方整句'], [s.glossary, '条四态对照']] },
+        n: [[s.spells, '条法术'], [s.abilities, '条官方整句四态']] },
       { href: 'legacy.html', t: '传承专长与挑战', kicker: '角色 · 本版新增',
         art: artOf(A, 'scenes', 'guangshu'),
         n: [[(s.legacy || {}).perks, '个专长有明细'], [(s.legacy || {}).unknown, '格未公开']] },
