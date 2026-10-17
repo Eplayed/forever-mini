@@ -2510,11 +2510,16 @@ def test_app(browser, base):
             return Math.round(b.getBoundingClientRect().top - a.getBoundingClientRect().bottom); }""") >= 12)
     # 4) 导航带：一条带（组标签同一行、链接同一行）、不换第二排、选中项确实带 .on，
     #    并且选中项下面那条金线画出来了（::after 的 transform 不再是 scaleX(0)）。
+    # 读当前项文本要先把「新」角标剔掉——上面那条 12 格的断言就是栽在这里的，
+    # 结果我新写的这一条又原样犯了一遍：加上"首页"这条本站更新后，navNew 里有了"首页"，
+    # 角标挂到当前项上，textContent 读出"首页新"，809 条里就它红（2026-10-18 全量门禁抓到）。
     nav1440 = page.evaluate("""() => { const n = document.querySelector('nav.main');
       const on = n.querySelector('a.nl.on');
       const tf = on ? getComputedStyle(on, '::after').transform : '';
       return { h: Math.round(n.getBoundingClientRect().height),
-        on: on ? on.textContent.trim() : null,
+        on: on ? (() => { const c = on.cloneNode(true);
+               c.querySelectorAll('.nb').forEach(x => x.remove());
+               return c.textContent.trim(); })() : null,
         grpRows: new Set([...n.querySelectorAll('.ngt')].map(e => Math.round(e.getBoundingClientRect().top))).size,
         line: new Set([...n.querySelectorAll('a.nl')].map(e => Math.round(e.getBoundingClientRect().top))).size,
         bb: on ? getComputedStyle(on).borderBottomColor : '',
