@@ -129,6 +129,13 @@ function boot() {
       if (d.value.classes.some((c) => c.id === uc)) cls.value = uc;
       if (uw === 'talent' || uw === 'spell') what.value = uw;
       if (routeQ) nextTick(scrollTok1);
+      // 首页那两个「全部 N 个 →」以前是 updates.html#k0 这种旧站锚点，
+      // 现在走 #/updates?to=k0，落地后滚到那一张卡（hash 路由里不能再嵌 '#'）
+      const to = String(route.query.to || '');
+      if (to) nextTick(() => {
+        const el = document.getElementById(to);
+        if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      });
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }

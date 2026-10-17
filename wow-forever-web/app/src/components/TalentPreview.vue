@@ -57,12 +57,12 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { linkFor, linkForQ, legacyUrl } from '../lib/nav.js';
+import { linkFor, linkForQ, hrefOf } from '../lib/nav.js';
 import { tileStyle, iconUrl } from '../lib/glyph.js';
 import { gridCells, countStates, nodeLabel, nodeFile, calcFile, treeOf } from '../lib/preview.js';
 import { specArt } from '../lib/art.js';
 
-const legacy = legacyUrl;
+const legacy = hrefOf;
 /* 点在卡里的链接、按钮、格子、职业条上时让给它们自己，只有点在空白处才按 data-go 跳
    （与旧站 bindGo 同一套判断）。data-go 用旧站那套 .html 地址，linkFor 认得它就换站内路由。 */
 function goCard(e) {

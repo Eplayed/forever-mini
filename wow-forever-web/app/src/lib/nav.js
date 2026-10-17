@@ -39,6 +39,28 @@ export function legacyUrl(file) {
   return LEGACY.replace(/\/$/, '/') + clean;
 }
 
+/* 给 <a href> 用的站内地址（2026-10-18 修首页失效链接）。
+   为什么不能继续写 legacyUrl()：新站由 vite preview 服务，它带 SPA 兜底——
+   /talent.html 这类地址返回的是 200 + index.html，于是 hash 路由拿不到路由，
+   点完只是"重新回到首页"，看起来就是**点了没反应**。实测首页 12 处里
+   职业条九格、12 张板块卡、hero 两个按钮全是这个毛病。
+   已迁的页一律出 #/路由；带查询的照带；旧站那种 #锚点 改成 ?to=，由目标页自己滚。
+   没迁的页仍然回旧站（那是 legacyUrl 该干的事）。 */
+export function hrefOf(file) {
+  const s = String(file || '');
+  const base = s.split('?')[0].split('#')[0];
+  const to = MIGRATED[base];
+  if (!to) return legacyUrl(s);
+  const qi = s.indexOf('?');
+  const hi = s.indexOf('#');
+  const q = qi >= 0 ? s.slice(qi + 1).split('#')[0] : '';
+  const frag = hi >= 0 ? s.slice(hi + 1) : '';
+  const qs = [];
+  if (q) qs.push(q);
+  if (frag) qs.push('to=' + encodeURIComponent(frag));
+  return '#' + to + (qs.length ? '?' + qs.join('&') : '');
+}
+
 /* 返回 { to } 走 router-link，或 { href } 走旧站。锚点（races.html#traits）一律回旧站。
    带查询串的入口（world.html?t=rares&q=…）按文件名查表，query 交给调用方传。 */
 export function linkFor(file) {

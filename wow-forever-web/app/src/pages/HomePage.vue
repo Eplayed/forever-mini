@@ -18,8 +18,8 @@
         <!-- 2026-10-12 用户决定：首页 hero 不再放覆盖率条、L0-L3 四枚徽标与「数据基线…」那行，
              也不放四条规模读数——出处与数据质量集中在溯源页说，首页只留标题、搜索与入口。 -->
         <div class="herobtns">
-          <a class="cta cta-line" :href="legacy('updates.html')">看这一版改了什么</a>
-          <a class="cta cta-mute" :href="legacy('chooser.html')">不知道选哪个职业：做 7 题玩法问答</a>
+          <a class="cta cta-line" :href="hrefOf('updates.html')">看这一版改了什么</a>
+          <a class="cta cta-mute" :href="hrefOf('chooser.html')">不知道选哪个职业：做 7 题玩法问答</a>
         </div>
       </div>
       <!-- 读数框里只放倒计时：旧站这条被对拍与断言双双钉住（框里混进链接就算回归） -->
@@ -38,13 +38,15 @@
     <section class="hsec">
       <div class="krow">
         <div><div class="kicker">CHOOSE YOUR CLASS</div><h2>选择你的职业</h2></div>
-        <a class="kall" :href="legacy('chooser.html')">7 题玩法问答 · 帮你定一个 →</a>
+        <a class="kall" :href="hrefOf('chooser.html')">7 题玩法问答 · 帮你定一个 →</a>
       </div>
       <div class="cls9">
-        <a v-for="c in classes" :key="c.id" :href="legacy('talent.html?c=' + encodeURIComponent(c.id))">
+        <a v-for="c in classes" :key="c.id" :href="hrefOf('talent.html?c=' + encodeURIComponent(c.id))"
+           :title="'打开 ' + c.cn + ' 的天赋计算器'">
           <img v-if="clsArt(c.id)" :src="clsArt(c.id)" alt="" loading="lazy">
           <i v-else class="hrt-x">{{ (c.cn || '?').charAt(0) }}</i>
           <b>{{ c.cn }}</b>
+          <small v-if="c.talentCount">{{ c.talentCount }} 点</small>
         </a>
       </div>
     </section>
@@ -57,7 +59,7 @@
          data-go 的跳转由 goCard() 做：点在卡里的链接、按钮、格子、职业条上时不抢它们自己的去向。 -->
     <div class="two">
       <TalentPreview :preview="pv" :classes="classes" :scale="S" :art="ART" />
-      <section class="card hasart go" tabindex="0" :data-go="legacy('dungeons.html')" @click="goCard"
+      <section class="card hasart go" tabindex="0" :data-go="hrefOf('dungeons.html')" @click="goCard"
                @keydown="goKey">
         <span class="bgart" aria-hidden="true" :style="dunBg"></span>
         <div class="mline">世界 · 副本 · <b>{{ S.dungeons }}</b> 座 <b>{{ S.bosses }}</b> 首领
@@ -71,7 +73,7 @@
           <span class="dim mono">{{ dunLv(x) }}</span>
           <span class="dim mono">{{ (x.bosses || []).length ? (x.bosses || []).length + ' 首领' : '首领待补' }}</span>
         </div>
-        <a class="cta" :href="legacy('dungeons.html')">按十级一档看全部 {{ S.dungeons }} 座 →</a>
+        <a class="cta" :href="hrefOf('dungeons.html')">按十级一档看全部 {{ S.dungeons }} 座 →</a>
       </section>
     </div>
 
@@ -80,7 +82,7 @@
     <template v-for="g in MOD_GROUPS" :key="g.line">
       <div class="grphead"><h2>{{ g.line }}</h2></div>
       <div class="modgrid">
-        <a v-for="m in g.items" :key="m.href" class="mod hasart" :href="legacy(m.href)">
+        <a v-for="m in g.items" :key="m.href" class="mod hasart" :href="hrefOf(m.href)">
           <span v-if="m.art" class="bgart" aria-hidden="true" :style="{ backgroundImage: 'url(' + m.art + ')' }"></span>
           <div class="mline">{{ m.kicker }}</div>
           <h2>{{ m.t }}</h2>
@@ -93,7 +95,7 @@
 
     <!-- 「自经典旧世以来的改动」那四格与"全部 vs 四格之和"的对照行搬去动态页
          （2026-10-13 用户：那是数据明细，首页要的是入口）。这里只留一张入口卡。 -->
-    <a class="mod big hasart" :href="legacy('updates.html')">
+    <a class="mod big hasart" :href="hrefOf('updates.html')">
       <span class="bgart" aria-hidden="true" :style="{ backgroundImage: 'url(' + (artOf(ART, 'scenes', 'yunhai') || artOf(ART, 'panels', 'talent')) + ')' }"></span>
       <div class="mline">这一版 · 客户端改动</div>
       <h2>自经典旧世以来改了什么</h2>
@@ -119,20 +121,20 @@
       <!-- 与旧站 home() 同一套摘要结构：每节一个小标题 + 一个回动态页的出口，
            长句收两行，全文去动态页读（改版第三批，对拍要求两栈一致） -->
       <div class="nsec">
-        <h3>官方公告里的时间点<span class="nact"><a :href="legacy('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
+        <h3>官方公告里的时间点<span class="nact"><a :href="hrefOf('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
         <div v-for="x in recent.slice(0, 3)" :key="x.id" class="flowrow">
           <b class="mono">{{ x.date }}</b>
           <div><b class="clamp2">{{ x.title }}</b><p class="dim clamp2">{{ x.what }}</p></div>
         </div>
       </div>
       <div v-if="cl.length" class="nsec">
-        <h3>本站最近改了什么<span class="nact"><a :href="legacy('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
+        <h3>本站最近改了什么<span class="nact"><a :href="hrefOf('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
         <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
           <b class="mono">{{ e.date }}</b><div><b class="clamp2">{{ e.title }}</b></div>
         </div>
       </div>
-      <a class="cta" :href="legacy('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
-      <a class="cta" :href="legacy('rank.html')">资料完整度排行全表 →</a>
+      <a class="cta" :href="hrefOf('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
+      <a class="cta" :href="hrefOf('rank.html')">资料完整度排行全表 →</a>
     </div>
   </template>
 </template>
@@ -142,13 +144,12 @@ import { computed, onMounted, ref } from 'vue';
 import { loadAll } from '../lib/data.js';
 import { byDate, clockText, tlCounts } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
-import { legacyUrl, linkFor } from '../lib/nav.js';
+import { linkFor, hrefOf } from '../lib/nav.js';
 import { artOf } from '../lib/art.js';
 import SiteSearch from '../components/SiteSearch.vue';
 import HubRail from '../components/HubRail.vue';
 import TalentPreview from '../components/TalentPreview.vue';
 
-const legacy = legacyUrl;
 const HERO_ART = 'img/gen/hero-ruins.webp';
 /* 站方口径的去处不做卡片（2026-10-13 用户：首页留一行小入口就够）：
    排行 / 溯源 / 系统规则 / 这一版改了什么，一行文字链。 */

@@ -123,7 +123,7 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
-import { legacyUrl, linkFor } from '../lib/nav.js';
+import { linkFor, hrefOf } from '../lib/nav.js';
 import { CLASS_COLOR } from '../lib/glyph.js';
 import { artOf, specArt } from '../lib/art.js';
 import ClassTile from '../components/ClassTile.vue';
@@ -244,8 +244,8 @@ const raceRows = computed(() => {
 const hasSky = computed(() => (RC.value.races || []).some((r) =>
   (r.classes || []).indexOf(cid.value) >= 0 && String(r.id).indexOf('skyborne') === 0));
 const skyCfl = computed(() => hasSky.value && (RC.value.conflicts || []).length > 0);
-const racesHref = legacyUrl('races.html');
-const bookHref = legacyUrl('skills.html');
+const racesHref = hrefOf('races.html');
+const bookHref = hrefOf('skills.html');
 const calcLink = computed(() => {
   const l = linkFor('talent.html');
   return l.to ? { to: { path: l.to, query: { c: cid.value } } }

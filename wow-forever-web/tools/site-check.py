@@ -2482,6 +2482,75 @@ def test_app(browser, base):
     check("那两格带的数是 scale.json 算出来的，不是手抄",
           str(sc2["items"]) in got.get("#/items", "") and str(sc2["achievements"]) in got.get("#/achievements", ""),
           " / ".join(counts) + "（数据 items %s、achievements %s）" % (sc2["items"], sc2["achievements"]))
+    # ---- 10-18 站主实拍：首页"点了没反应" + 底部一条横向滚动条 + 导航太素 ----
+    # 三条各钉一个断言，因为这三个毛病没有一个能靠"构建通过"发现。
+    # 1) 死链：首页把已迁页的地址写成旧站文件式地址（/talent.html）时，
+    #    vite preview 的 SPA 兜底会返回 200 + index.html，哈希路由静默停在首页——
+    #    页面不报错、链接不是 404、门禁全绿，只有人点上去才发现。所以直接钉住：
+    #    首页正文里任何链接都不许再出现文件式地址。
+    file_links = page.evaluate("""() => [...document.querySelectorAll('#main a[href]')]
+      .map(a => a.getAttribute('href'))
+      .filter(h => !/^#/.test(h) && !/^https?:/.test(h))""")
+    check("首页正文没有文件式地址（那种点了没反应的链接）", not file_links,
+          "%d 条：%s" % (len(file_links), file_links[:6] or "无"))
+    # 2) 横向滚动条：原来 .hrail 是 overflow-x:auto 的一条横滑轨，9 格 × 132px
+    #    在 1440 以下必然溢出。改成网格后钉两层——页面不许横向溢出、轨本身不许溢出。
+    ov = page.evaluate("""() => ({doc: document.documentElement.scrollWidth - window.innerWidth,
+      rails: [...document.querySelectorAll('.hrail,.cls9,.modgrid,.chipsrow')]
+        .map(x => x.className + ':' + (x.scrollWidth - x.clientWidth))})""")
+    bad_rails = [r for r in ov["rails"] if not r.endswith(":0")]
+    check("首页 1440 没有横向滚动，两条九格轨也不溢出",
+          ov["doc"] == 0 and not bad_rails,
+          "页面溢出 %d ／ 轨 %s" % (ov["doc"], bad_rails or "全部 0"))
+    # 3) 两排 9 格不许读成同一条：中间必须有可见间距（站主截图里那两条是贴在一起的）
+    check("职业条与板块轨之间留了间距，不贴成一条",
+          page.evaluate("""() => { const a = document.querySelector('.cls9');
+            const b = document.querySelector('.hrail');
+            if (!a || !b) return -1;
+            return Math.round(b.getBoundingClientRect().top - a.getBoundingClientRect().bottom); }""") >= 12)
+    # 4) 导航带：一条带（组标签同一行、链接同一行）、不换第二排、选中项确实带 .on，
+    #    并且选中项下面那条金线画出来了（::after 的 transform 不再是 scaleX(0)）。
+    nav1440 = page.evaluate("""() => { const n = document.querySelector('nav.main');
+      const on = n.querySelector('a.nl.on');
+      const tf = on ? getComputedStyle(on, '::after').transform : '';
+      return { h: Math.round(n.getBoundingClientRect().height),
+        on: on ? on.textContent.trim() : null,
+        grpRows: new Set([...n.querySelectorAll('.ngt')].map(e => Math.round(e.getBoundingClientRect().top))).size,
+        line: new Set([...n.querySelectorAll('a.nl')].map(e => Math.round(e.getBoundingClientRect().top))).size,
+        bb: on ? getComputedStyle(on).borderBottomColor : '',
+        scaleX: tf }; }""")
+    # app.css 给当前项留了一条 2px 的实底边，和这条金色下划线叠在一起会变成一条 4px 的脏线
+    # （10-18 改导航带时踩到，只有看图才发现）。桌面让底边透明，窄屏反过来用底边当选中态。
+    check("首页导航：一条带、选中项是「首页」且带金色下划线",
+          nav1440["on"] == "首页" and nav1440["grpRows"] == 1 and nav1440["line"] == 1
+          and nav1440["h"] >= 44 and nav1440["h"] <= 96
+          and nav1440["bb"] in ("rgba(0, 0, 0, 0)", "transparent")
+          and nav1440["scaleX"] not in ("", "none", "matrix(0, 0, 0, 0, 0, 0)"),
+          json.dumps(nav1440, ensure_ascii=False))
+    ctx375 = browser.new_context(viewport={"width": 375, "height": 812})
+    p375 = ctx375.new_page()
+    p375.goto(APP_BASE + "/#/", wait_until="networkidle")
+    p375.wait_for_timeout(2000)
+    m = p375.evaluate("""() => { const g = document.querySelector('.cls9');
+      const h = document.querySelector('.hrail');
+      const rows = (e) => new Set([...e.children].map(k => Math.round(k.getBoundingClientRect().top))).size;
+      return {doc: document.documentElement.scrollWidth - window.innerWidth,
+        clsRows: g ? rows(g) : 0, hubRows: h ? rows(h) : 0,
+        bb: (() => { const on = document.querySelector('nav.main a.nl.on');
+          return on ? getComputedStyle(on).borderBottomColor : ''; })(),
+        minW: g ? Math.round(Math.min(...[...g.children].map(k => k.getBoundingClientRect().width))) : 0,
+        cut: g ? [...g.children].some(k => k.getBoundingClientRect().right > window.innerWidth + 1) : false}; }""")
+    check("首页 375 整页不横滚，职业条换成三列且没有格子被切掉",
+          m["doc"] == 0 and m["clsRows"] == 3 and m["hubRows"] == 3 and not m["cut"],
+          json.dumps(m, ensure_ascii=False))
+    # 窄屏把那条会长度的下划线关了，选中态必须落到 2px 底边上——
+    # 两边都关掉的话手机上就没人告诉你"当前在哪一页"（这一条是补上面那次改动的反面）
+    check("首页 375 的选中项仍有可见底边（下划线让位给底边，不是两个都没了）",
+          m["bb"] not in ("", "rgba(0, 0, 0, 0)", "transparent"), m["bb"])
+    p375.screenshot(path=os.path.join(SHOT_DIR, "app-home-375.png"))
+    ctx375.close()
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-home-1440.png"), clip=None, full_page=False)
+
     page.screenshot(path=os.path.join(SHOT_DIR, "app-nav-narrow.png"))
     ctx.close()
     for label, path, key in pages:

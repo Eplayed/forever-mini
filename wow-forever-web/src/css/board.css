@@ -105,3 +105,112 @@
      与旧站 app.css 里那条 ".scrollx thead th{position:static}" 是同一个教训，这里显式关掉。 */
   .board > thead > tr > th, .board tbody.grp > tr.grp2h > th { position:static }
 }
+
+/* =============================================================================
+   10-18 站主：导航带"太简单，很丑"、首页那两排要重排且不许有横向滚动条。
+   全部写在这个只由新站加载的文件里覆盖 app.css——旧站那 19 页已冻结，
+   同一个类名（.ngrp / .hrail / .cls9）两栈都在用，改 app.css 会一起改掉已发布版式。
+   动效只用 transition 与"播一次"的 animation：这是查资料的站，不是发布会。
+   ============================================================================= */
+
+/* ---- 导航带：分组各占一块，块与块靠一条竖分隔；当前组底部亮起本组色 ---- */
+nav.main { border-top:1px solid var(--line); background:linear-gradient(180deg,#161d2b,var(--panel-2)) }
+nav.main .in { align-items:stretch; padding-top:5px; padding-bottom:0 }
+.ngrp { padding:0 10px 0 12px; gap:1px }
+/* 「首页」这一格没有组名，只有它自己。上面把 .in 改成 stretch 之后它会跟着整条带
+   垂直居中，比右边那些入口高出一截（1440 实测顶边 59 vs 75，站主截图里也能看出来）。
+   把它压到底，跟各组的入口行对齐。 */
+.ngrp.solo { justify-content:flex-end }
+.ngrp::before { top:7px; bottom:0 }
+.ngrp .ngt { opacity:.5; transition:opacity var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out) }
+.ngrp .ngi { padding-bottom:0 }
+/* 组底那根 2px 的"当前在这一组"指示条：平时是暗的，命中或悬停时亮起本组色 */
+.ngrp::after { content:""; position:absolute; left:10px; right:10px; bottom:0; height:2px;
+  background:var(--gc, var(--line-2)); opacity:.14; border-radius:2px 2px 0 0;
+  transform:scaleX(.34); transform-origin:left center;
+  transition:opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out) }
+.ngrp:hover::after, .ngrp.hit::after { opacity:.9; transform:scaleX(1) }
+.ngrp.hit .ngt { opacity:1; color:var(--gc) }
+
+/* 入口：常态是灰字，悬停起底，当前项用金字 + 从左边长出来的下划线（不再是灰底方框） */
+nav.main a.nl { position:relative; min-height:36px; padding:0 9px; border-radius:4px 4px 0 0;
+  color:var(--txt-dim); font-weight:500; letter-spacing:.01em }
+nav.main a.nl:hover { background:rgba(255,255,255,.045); color:var(--txt) }
+nav.main a.nl::after { content:""; position:absolute; left:9px; right:9px; bottom:0; height:2px;
+  background:var(--gold); border-radius:2px 2px 0 0; transform:scaleX(0); transform-origin:left center;
+  transition:transform var(--dur-2) var(--ease-out) }
+nav.main a.nl:hover::after { transform:scaleX(.42) }
+nav.main a.nl.on { background:none; color:var(--gold-hi); box-shadow:none; font-weight:700;
+  /* app.css:1183 给当前项留了一条 2px 的 --accent 底边，和这条金色下划线是两回事，
+     叠在一起成一条 4px 的脏线。桌面只认 ::after 这条，底边让位（窄屏反过来，见下面）。 */
+  border-bottom-color:transparent }
+nav.main a.nl.on::after { transform:scaleX(1) }
+nav.main a.nl:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
+/* 「新」角标跟着下划线让位，不再压住字 */
+.nb { top:3px; right:2px }
+
+/* ---- 首页：职业条与板块轨都改成会换行的网格，横向滚动条从根上去掉 ---- */
+/* 原来 .hrail 是 overflow-x:auto 的一条横滑轨：9 格 × 132px 在 1440 以下必然溢出，
+   站主截图底部那条滚动条就是它。改成网格后任何宽度都不再需要横滑。 */
+.hrail { display:grid; grid-template-columns:repeat(9, minmax(0, 1fr));
+  gap:12px 10px; overflow:visible; padding:2px 0 16px; margin-top:24px; scroll-snap-type:none }
+.hrt { width:auto; min-width:0 }
+.hrt-b { height:78px; transition:border-color var(--dur-1) var(--ease-out),
+  box-shadow var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out) }
+.hrt:hover .hrt-b, .hrt:focus-visible .hrt-b { transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,.34) }
+.hrt:hover .hrt-b img { transform:scale(1.05) }
+.hrt-l { white-space:normal; overflow-wrap:anywhere; line-height:1.3 }
+
+.cls9 { grid-template-columns:repeat(9, minmax(0, 1fr)); gap:10px }
+.cls9 a { padding:13px 8px 11px;
+  transition:border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-1) var(--ease-out) }
+.cls9 a:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.3) }
+.cls9 img { width:46px; height:46px; margin-bottom:6px }
+.cls9 b { font-size:13.5px }
+/* 每格补一行天赋节点数：这一节的语义是"选一个职业开始加点"，
+   光有头像和名字，九个圆看起来是一排装饰，不像九个入口 */
+.cls9 small { display:block; margin-top:3px; font:11px/1.3 var(--font-mono); color:var(--txt-muted) }
+.cls9 a:hover small { color:var(--txt-dim) }
+
+/* 入场：整排一次性的淡入上移，28ms 递进，播完就静止（不循环、不抢读内容的戏） */
+@keyframes pzRowIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
+.cls9 > a, .hrail > a { animation:pzRowIn .26s var(--ease-out) both }
+.cls9 > a:nth-child(2), .hrail > a:nth-child(2) { animation-delay:28ms }
+.cls9 > a:nth-child(3), .hrail > a:nth-child(3) { animation-delay:56ms }
+.cls9 > a:nth-child(4), .hrail > a:nth-child(4) { animation-delay:84ms }
+.cls9 > a:nth-child(5), .hrail > a:nth-child(5) { animation-delay:112ms }
+.cls9 > a:nth-child(6), .hrail > a:nth-child(6) { animation-delay:140ms }
+.cls9 > a:nth-child(7), .hrail > a:nth-child(7) { animation-delay:168ms }
+.cls9 > a:nth-child(8), .hrail > a:nth-child(8) { animation-delay:196ms }
+.cls9 > a:nth-child(n+9), .hrail > a:nth-child(n+9) { animation-delay:224ms }
+
+@media (prefers-reduced-motion: reduce) {
+  .cls9 > a, .hrail > a { animation:none }
+  .ngrp::after, nav.main a.nl::after { transition:none }
+  .hrt:hover .hrt-b, .cls9 a:hover { transform:none }
+}
+
+@media (max-width:899px) {
+  /* 窄屏导航带本来就是横滑的一条（那条是设计要的），这里只保证格子不被下划线撑高 */
+  nav.main a.nl { min-height:44px; border-radius:4px }
+  nav.main a.nl::after { display:none }
+  /* 窄屏不做那条会长度的下划线，改用 app.css 本来就有的 2px 底边当选中态，
+     不然上面把 border-bottom-color 清掉之后，手机上就没有"当前在哪一页"了 */
+  nav.main a.nl.on { border-bottom-color:var(--gold) }
+  .ngrp::after { display:none }
+  .hrt-b { height:62px }
+}
+
+/* 两轨都是 9 格，列数按 9 / 5 / 3 写死，不用 auto-fit。
+   auto-fit 在 1000px 会算出 8 列，第 9 格单独掉到第二行最左边、右边留一大片空，
+   看着像漏了一格（2026-10-18 实测 1000px 时第二行右侧空 821px）。
+   9 → 一整行；5 → 5+4，只最后一行少一格；3 → 三行齐。minmax(0,1fr) 保证窄列不撑破容器。 */
+@media (max-width:999px) {
+  .hrail, .cls9 { grid-template-columns:repeat(5, minmax(0, 1fr)) }
+}
+@media (max-width:699px) {
+  .hrail, .cls9 { grid-template-columns:repeat(3, minmax(0, 1fr)) }
+  .cls9 img { width:40px; height:40px }
+}
