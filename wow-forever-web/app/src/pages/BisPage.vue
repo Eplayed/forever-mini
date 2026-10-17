@@ -54,7 +54,7 @@
       <div class="pz-three">
         <div class="pzcol">
           <BisCell v-for="c in colLeft" :key="c.slot + '-' + c.cell" :cell="c"
-                   :on="sel === c.slot" @pick="sel = $event" />
+                   :on="sel === c.slot" @pick="open" />
         </div>
         <div class="pzmid">
           <div class="pzart" :style="artStyle">
@@ -62,12 +62,12 @@
           </div>
           <div class="pzrow">
             <BisCell v-for="c in colBottom" :key="c.slot + '-' + c.cell" :cell="c"
-                     :on="sel === c.slot" @pick="sel = $event" />
+                     :on="sel === c.slot" @pick="open" />
           </div>
         </div>
         <div class="pzcol">
           <BisCell v-for="c in colRight" :key="c.slot + '-' + c.cell" :cell="c"
-                   :on="sel === c.slot" @pick="sel = $event" />
+                   :on="sel === c.slot" @pick="open" />
         </div>
       </div>
 
@@ -82,26 +82,28 @@
     </div>
 
     <div class="card" v-if="cur">
-      <h2>{{ sel }}：这一套选的是它，往下是同部位备选</h2>
+      <div class="bhead">
+        <h2 class="bt">这一套一览</h2>
+        <span class="bn">{{ overview.length }} 个部位 · 点一行看这个部位还能换什么</span>
+      </div>
       <div class="boardwrap">
-        <table class="board pztab-t" id="pzalts">
-          <colgroup><col class="c-ico"><col style="width:26%"><col class="c-num"><col class="c-num"><col></colgroup>
-          <thead><tr><th class="c-ico">图标</th><th>装备</th><th class="c-num">装等</th>
-            <th class="c-num">需要等级</th><th class="w-tail">从哪儿拿</th></tr></thead>
+        <table class="board" id="pzover">
+          <colgroup><col style="width:11%"><col class="c-ico"><col style="width:28%"><col class="c-num"><col class="c-num"><col></colgroup>
+          <thead><tr><th>部位</th><th class="c-ico">图标</th><th>这一套选的</th>
+            <th class="c-num">装等</th><th class="c-num">可换</th><th class="w-tail">从哪儿拿</th></tr></thead>
           <tbody>
-            <tr v-for="(x, i) in altRows" :key="x.item + '-' + i" :class="{ cur: i === 0 }">
-              <td class="c-ico"><span class="qbox" :class="'bq' + (qo(x.item) || 0)"><IconCell :icon-key="ic(x.item)" :seed="x.item" :cn="nm(x.item)" small /></span></td>
-              <td><span class="nm" :class="'q' + (qo(x.item) || 0)">{{ nm(x.item) }}</span>
-                <span v-if="i === 0" class="tag">这套选的</span>
-                <span class="sub" v-if="stOf(x.item)">{{ stOf(x.item) }}</span></td>
-              <td class="c-num num">{{ il(x.item) }}</td>
-              <td class="c-num num">{{ rl(x.item) }}</td>
-              <td class="w-tail dim">{{ srcOf(x.item) }}</td>
+            <tr v-for="x in overview" :key="x.slot + '-' + x.cell" class="pzrow2" @click="open(x.slot, $event.currentTarget)">
+              <td><button type="button" class="pzlink">{{ x.slot }}<span v-if="x.cell > 1" class="mono"> · {{ x.cell }}</span></button></td>
+              <td class="c-ico"><span class="qbox" :class="'bq' + (x.quality || 0)"><IconCell :icon-key="x.iconKey" :seed="x.item" :cn="x.name" small /></span></td>
+              <td><span class="nm" :class="'q' + (x.quality || 0)">{{ x.name }}</span>
+                <span class="sub" v-if="x.st">{{ x.st }}</span></td>
+              <td class="c-num num">{{ x.ilvl }}</td>
+              <td class="c-num num">{{ x.n }}</td>
+              <td class="w-tail dim">{{ x.src }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div v-if="!altRows.length" class="empty">这个部位这一套没列备选。</div>
     </div>
 
     <div class="card" v-if="cur">
@@ -144,6 +146,11 @@
       <p class="note">附魔与消耗品是这一套列的清单，本站没有第二处可以核对，也没实测过；
         配方要什么材料、做出来要多少技能点，点上面的物品名去物品库那一页看。</p>
     </div>
+
+    <!-- 备选 popover：站主 2026-10-17 改口径——不要 modal 弹窗，要贴着点的那一格弹出来。
+         纸娃娃那一格与下面一览表的那一行开同一个 popover，anchor 传的是被点的元素。 -->
+    <BisPop v-if="pick" :slot="pick" :rows="pickerRows" :head="pickerHead"
+            :anchor="anchorEl" @close="pick = ''" />
   </template>
 </template>
 
@@ -162,6 +169,7 @@ import { loadAll, assetUrl } from '../lib/data.js';
 import { artOf } from '../lib/art.js';
 import IconCell from '../components/IconCell.vue';
 import BisCell from '../components/BisCell.vue';
+import BisPop from '../components/BisPop.vue';
 
 const FACS = [['alliance', '联盟'], ['horde', '部落']];
 /* 纸娃娃三栏的部位归属（16 种标签实测枚举，见 docs/VERIFY-bis-2026-10-16.md） */
@@ -177,6 +185,15 @@ const cls = ref(String(route.query.c || 'warrior'));
 const setId = ref(String(route.query.s || ''));
 const fac = ref(route.query.f === 'horde' ? 'horde' : 'alliance');
 const sel = ref('头部');
+const pick = ref('');
+
+
+/* 备选 popover：记着"贴着谁弹"。ESC 与点外面由 BisPop 自己收，
+   这里只负责换职业/换套/换阵营时把它关掉——不然 anchor 换了、内容也换了，
+   浮层还停在旧位置指着上一格。 */
+const anchorEl = ref(null);
+function open(slot, el) { sel.value = slot; pick.value = slot; anchorEl.value = el || null; }
+function closePop() { pick.value = ''; anchorEl.value = null; }
 
 function boot() {
   err.value = '';
@@ -230,13 +247,35 @@ const KEY_CN = { head: '头部', neck: '项链', shoulder: '肩部', back: '背�
   wrist: '手腕', hands: '手', waist: '腰部', legs: '腿部', feet: '脚', finger: '戒指',
   trinket: '饰品', 'main-hand': '主手', 'off-hand': '副手', 'two-hand': '双手武器',
   shield: '副手：盾牌', held: '副手：手持物品', ranged: '远程', relic: '圣物' };
-const selKey = computed(() => {
-  const k = Object.keys(KEY_CN).filter((x) => KEY_CN[x] === sel.value)[0];
-  return k || sel.value;
-});
-const altRows = computed(() => {
-  const a = (((cur.value || {}).alts || {})[fac.value] || {})[selKey.value] || [];
-  return a.map((i) => ({ item: i }));
+function keyOf(label) {
+  const k = Object.keys(KEY_CN).filter((x) => KEY_CN[x] === label)[0];
+  return k || label;
+}
+/* 纸娃娃上只有"主手/副手"两格，可名单里双手武器、盾牌、手持物品是分开的节，
+   所以一个标签可能对应好几个键，按顺序找第一个有内容的。 */
+const SIB = { '主手': ['main-hand', 'two-hand'], '副手': ['off-hand', 'shield', 'held'] };
+function altsFor(label) {
+  const all = ((cur.value || {}).alts || {})[fac.value] || {};
+  const keys = SIB[label] || [keyOf(label)];
+  for (let i = 0; i < keys.length; i++) { if ((all[keys[i]] || []).length) return all[keys[i]]; }
+  return [];
+}
+const altRows = computed(() => altsFor(sel.value).map((i) => ({ item: i })));
+/* 一览表的每一行：这一套的每个部位 + 它选的那件 + 这个部位一共列了几件可换 */
+const overview = computed(() => cells.value.map((c) => ({
+  slot: c.slot, cell: c.cell, item: c.item, name: c.name, iconKey: c.iconKey,
+  quality: c.quality, ilvl: c.ilvl, st: stOf(c.item), src: srcOf(c.item),
+  n: altsFor(c.slot).length
+})));
+const pickerRows = computed(() => altRows.value.map((x) => ({
+  item: x.item, name: nm(x.item), iconKey: ic(x.item), quality: qo(x.item),
+  ilvl: il(x.item), rlvl: rl(x.item), st: stOf(x.item), src: srcOf(x.item)
+})));
+const pickerHead = computed(() => {
+  const c = cur.value;
+  if (!c) return '';
+  return c.clsCn + ' · ' + c.mode + ' · ' + (fac.value === 'horde' ? '部落' : '联盟')
+    + ' · ' + c.level + ' 级';
 });
 const enchRows = computed(() => (((cur.value || {}).enchants || {})[fac.value] || []));
 const consRows = computed(() => (((cur.value || {}).consumables || {})[fac.value] || []));
@@ -266,10 +305,11 @@ function pickClass(v) {
   const first = (classes.value.filter((c) => c.cls === v)[0] || {}).sets || [];
   setId.value = first.length ? first[0].id : '';
   sel.value = '头部';
+  closePop();
   sync();
 }
-function pickSet(v) { setId.value = v; sync(); }
-function pickFac(v) { fac.value = v; sync(); }
+function pickSet(v) { setId.value = v; closePop(); sync(); }
+function pickFac(v) { fac.value = v; closePop(); sync(); }
 function sync() {
   router.replace({ path: '/bis', query: { c: cls.value, s: setId.value, f: fac.value } });
 }
@@ -315,10 +355,10 @@ function srcOf(id) {
 /* 职业条：一格一个职业，图标 + 名字 + 本职业套数（参考站那条也是带图标的） */
 .pzrail { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px }
 .pztab { display: flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 12px;
-  background: var(--bg-1); border: 1px solid var(--line-2); border-radius: 5px;
+  background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 5px;
   color: var(--txt); cursor: pointer; font-size: 13.5px }
 .pztab:hover { border-color: var(--gold-deep) }
-.pztab.on { border-color: var(--gold); background: var(--bg-2); color: var(--txt-title); font-weight: 600 }
+.pztab.on { border-color: var(--gold); background: var(--panel); color: var(--txt-title); font-weight: 600 }
 .pztab-c { font-size: 11.5px; color: var(--txt-muted) }
 .pz-picks { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 12px 0 14px }
 .pz-mode, .pz-fac { margin: 0 }
@@ -329,7 +369,7 @@ function srcOf(id) {
 .pzcol { display: flex; flex-direction: column; gap: 7px }
 .pzmid { display: flex; flex-direction: column; gap: 7px }
 .pzart { height: 300px; border-radius: 6px; border: 1px solid var(--line-2);
-  background-size: cover; background-position: center 22%; background-color: var(--bg-2);
+  background-size: cover; background-position: center 22%; background-color: var(--panel);
   position: relative; overflow: hidden }
 .pzart-tag { position: absolute; left: 8px; bottom: 7px; font-size: 11.5px;
   background: rgba(8, 10, 14, .72); color: var(--txt-dim); padding: 2px 7px; border-radius: 3px }
@@ -347,7 +387,19 @@ function srcOf(id) {
 .pzsum-i { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--txt-dim) }
 .pzsum-i b { color: var(--ok); font-size: 15px; margin-right: 4px }
 .pztab-t tr.cur { background: rgba(201, 162, 74, .07) }
+/* 一览表整行可点开弹窗。行里那个"部位"渲染成 button 是为了键盘能 Tab 到，
+   但点击热区是整行，所以 button 自己不带边框与内边距。 */
+#pzover tbody tr.pzrow2 { cursor: pointer }
+#pzover tbody tr.pzrow2:hover td { background: rgba(201, 162, 74, .05) }
+.pzlink { background: none; border: 0; padding: 0; font: inherit; color: var(--txt-title);
+  text-align: left; cursor: pointer }
+.pzlink:hover { color: var(--gold) }
 .pz-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start }
+/* grid 子项的 min-width 默认是 auto，会被里面那张 min-width:640px 的 .board 顶开——
+   实测 375 下附魔与消耗品那两张 .boardwrap 变成 640 宽，连带把布局视口撑到 674
+   （Chrome 移动端于是整体缩放，innerWidth 报 674、"整页不横溢"那条断言反而还是 0）。
+   显式给 0，让 .boardwrap 自己横滚。 */
+.pz-two > * { min-width: 0 }
 @media (max-width: 899px) {
   .pz-three { grid-template-columns: 1fr }
   .pzart { height: 190px }
