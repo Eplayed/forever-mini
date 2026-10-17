@@ -700,10 +700,17 @@ def test_bis(browser, base):
     check("配装页一个 H1 且写着等级段", r["h1"].startswith(u"30 级配装"), r["h1"])
     check("纸娃娃格数等于数据里这一套的格数", r["cells"] == len(w["doll"]["alliance"]),
           "%d 格（数据 %d）" % (r["cells"], len(w["doll"]["alliance"])))
-    want_names = [by_id[c["item"]]["name"] for c in w["doll"]["alliance"]]
+    # 纸娃娃是三栏摆的，DOM 顺序（左列→下排→右列）不等于数据顺序，
+    # 所以比的是「部位 + 序号 → 装备名」这一组对应关系，不是列表顺序。
+    cell_pairs = page.evaluate("""() => [...document.querySelectorAll('.pzcell')].map(c => {
+      const s = c.querySelector('.pzslot'), n = c.querySelector('.pzname');
+      return [(s ? s.textContent : '').trim(), (n ? n.textContent : '').trim()]; })""")
+    want_names = [[c["slot"] + ("" if c["cell"] < 2 else " · %d" % c["cell"]), by_id[c["item"]]["name"]]
+                  for c in w["doll"]["alliance"]]
+    bad = [x for x in cell_pairs if x not in want_names]
     check("纸娃娃上每件装备的名字都取自本站名录（不是抄参考站的写法）",
-          r["cellNames"] == want_names,
-          "不一致：%s" % [x for x in zip(r["cellNames"], want_names) if x[0] != x[1]][:3] or "全对")
+          len(cell_pairs) == len(want_names) and not bad,
+          "对不上：%s" % bad[:3] if bad else "%d 格全对" % len(cell_pairs))
     head_rows = w["alts"]["alliance"]["head"]
     check("点头部那一格列出的备选条数等于数据里的行数", r["alts"] == len(head_rows),
           "%d 行（数据 %d）" % (r["alts"], len(head_rows)))
@@ -720,8 +727,8 @@ def test_bis(browser, base):
     check("配装页不出现百分比与掉率措辞（红线）", not pct, str(pct[:4]))
     check("配装页正文没有面向开发的词", not dev_word_hits(r["body"]), "干净")
     check("配装页桌面不横向溢出", r["over"] <= 1, "溢出 %dpx" % r["over"])
-    # 交互：点第三个部位（肩部）→ 备选表跟着换
-    page.click(".pzdoll .pzcell:nth-child(3)")
+    # 交互：点左列第三个部位（头部→项链→肩部）→ 备选表跟着换
+    page.click(".pzcol:first-child .pzcell:nth-child(3)")
     page.wait_for_timeout(700)
     a = page.evaluate("""() => ({slot: (document.querySelector('.pzcell.on .pzslot')||{}).innerText,
       first: (document.querySelector('#pzalts tbody tr .nm')||{}).innerText})""")
@@ -729,13 +736,58 @@ def test_bis(browser, base):
     check("点部位会换备选表（切到肩部且第一件对得上数据）",
           a["slot"] == u"肩部" and sh and a["first"] == by_id[sh[0]]["name"], json.dumps(a, ensure_ascii=False))
     # 交互：切部落 → 至少一个部位的首选与联盟不同（战士实测差 4 件）
-    page.click(".pz-mode .pick:last-child")
+    page.click(".pz-fac .pick:last-child")
     page.wait_for_timeout(800)
     hz = page.evaluate("() => [...document.querySelectorAll('.pzcell .pzname')].map(x => x.textContent.trim())")
     diff = [i for i, (x, y) in enumerate(zip(r["cellNames"], hz)) if x != y]
     data_diff = [i for i, (x, y) in enumerate(zip(w["doll"]["alliance"], w["doll"]["horde"])) if x["item"] != y["item"]]
     check("切阵营会换装备，且换掉的部位与数据里不一致的部位数一致",
           len(diff) > 0 and len(diff) == len(data_diff), "界面 %d 处 / 数据 %d 处" % (len(diff), len(data_diff)))
+    # 10-17 站主实拍后补的三样：职业条要带职业图标、阵营要带徽记、纸娃娃要照参考站那样
+    # 左右两列夹中间一块。这三条都是"少了没人报错、只能看图"的东西，所以钉成断言。
+    page.click(".pz-fac .pick:first-child")   # 切回联盟，下面按联盟那一版算期望
+    page.wait_for_timeout(800)
+    ic = page.evaluate("""() => {
+      const ok = (b) => { const i = b.querySelector('img'); return !!i && i.complete && i.naturalWidth > 0; };
+      return {
+        rail: [...document.querySelectorAll('.pzrail .pztab')].map(b => ({ t: b.innerText.replace(/\\s+/g,' ').trim(), img: ok(b) })),
+        fac: [...document.querySelectorAll('.pz-fac .pick')].map(b => ({ t: b.innerText.trim(), img: ok(b) })),
+        cols: [document.querySelectorAll('.pzcol')[0].querySelectorAll('.pzcell').length,
+               document.querySelectorAll('.pzcol')[1].querySelectorAll('.pzcell').length,
+               document.querySelectorAll('.pzrow .pzcell').length],
+        art: getComputedStyle(document.querySelector('.pzart')).backgroundImage.indexOf('url(') >= 0,
+        sum: [...document.querySelectorAll('.pzsum-i span')].map(x => x.innerText.replace(/\\s+/g,' ').trim()) }; }""")
+    check("职业条九格齐全且每格都画出职业图标",
+          len(ic["rail"]) == bis["meta"]["counts"]["classes"] and all(x["img"] for x in ic["rail"]),
+          "%d 格，缺图 %s" % (len(ic["rail"]), [x["t"] for x in ic["rail"] if not x["img"]] or "无"))
+    check("联盟与部落两个按钮各带本阵营徽记（用本地 art/factions，不热链）",
+          [x["t"] for x in ic["fac"]] == [u"联盟", u"部落"] and all(x["img"] for x in ic["fac"]),
+          json.dumps(ic["fac"], ensure_ascii=False))
+    LEFT = [u"头部", u"项链", u"肩部", u"背部", u"胸部", u"手腕"]
+    BOTTOM = [u"主手", u"副手", u"远程", u"圣物"]
+    dl = w["doll"]["alliance"]
+    want_cols = [len([c for c in dl if c["slot"] in LEFT]),
+                 len([c for c in dl if c["slot"] not in LEFT and c["slot"] not in BOTTOM]),
+                 len([c for c in dl if c["slot"] in BOTTOM])]
+    check("纸娃娃三栏的部位归属与数据一致（左 %d / 右 %d / 下 %d）" % tuple(want_cols),
+          ic["cols"] == want_cols, "界面 %s" % ic["cols"])
+    check("中间那一块铺了职业原画（不是空框，也不拿别的图冒充人物）", ic["art"])
+    # 属性合计：门禁这边独立按同一份 items-detail 解析一遍，跟界面上那排数比
+    det = json.load(open(os.path.join(SRC, "data", "items-detail.json"), encoding="utf-8"))["items"]
+    tot = {}
+    for c in dl:
+        for l in (det.get(str(c["item"]), {}) or {}).get("st") or []:
+            s = str(l).strip()
+            m = re.match(r"^\+\s*(\d+)\s*(力量|敏捷|耐力|智力|精神)$", s)
+            if m:
+                tot[m.group(2)] = tot.get(m.group(2), 0) + int(m.group(1))
+                continue
+            m = re.match(r"^(\d+)\s*点护甲$", s) or re.match(r"^护甲值\s*(\d+)$", s)
+            if m:
+                tot[u"护甲"] = tot.get(u"护甲", 0) + int(m.group(1))
+    want_sum = ["%s%s" % (tot[k], k) for k in [u"力量", u"敏捷", u"耐力", u"智力", u"精神", u"护甲"] if k in tot]
+    check("属性合计那排等于门禁独立解析的结果（纯加法，不含基础值与附魔）",
+          ic["sum"] == want_sum, "界面 %s ／ 数据 %s" % (ic["sum"], want_sum))
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis.png"))
     ctx.close()
 
