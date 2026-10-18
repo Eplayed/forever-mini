@@ -2508,30 +2508,60 @@ def test_app(browser, base):
             const b = document.querySelector('.hrail');
             if (!a || !b) return -1;
             return Math.round(b.getBoundingClientRect().top - a.getBoundingClientRect().bottom); }""") >= 12)
-    # 4) 导航带：一条带（组标签同一行、链接同一行）、不换第二排、选中项确实带 .on，
-    #    并且选中项下面那条金线画出来了（::after 的 transform 不再是 scaleX(0)）。
-    # 读当前项文本要先把「新」角标剔掉——上面那条 12 格的断言就是栽在这里的，
-    # 结果我新写的这一条又原样犯了一遍：加上"首页"这条本站更新后，navNew 里有了"首页"，
-    # 角标挂到当前项上，textContent 读出"首页新"，809 条里就它红（2026-10-18 全量门禁抓到）。
+    # 4) 导航带：2026-10-18 站主选 B 方案改成"胶囊分组"。这里钉的是**形状**不是配色——
+    #    好不好看只有看图能判，但"是不是八颗丸、丸有没有描边、当前项是不是丸内一颗填充小药丸、
+    #    上一版的指示条与下划线撤干净没有"全都可以量。
+    #    读当前项文本一律先剔「新」角标：上一轮刚在姊妹断言上栽过，这条别再犯一遍。
     nav1440 = page.evaluate("""() => { const n = document.querySelector('nav.main');
+      const pills = [...n.querySelectorAll('.ngrp')];
       const on = n.querySelector('a.nl.on');
-      const tf = on ? getComputedStyle(on, '::after').transform : '';
+      const cs = (e, p) => getComputedStyle(e, p || null);
+      // 伪元素"没画"有两种表现：display:none，或压根没有 content（不生成盒子）
+      const gone = (e, p) => { const c = cs(e, p);
+        return c.display === 'none' || c.content === 'none' || c.content === ''; };
+      const rad = (e) => parseFloat(cs(e).borderTopLeftRadius) || 0;
+      // 把某个元素作用域里的 --gc 解析成 rgb：当前项的字色必须等于本组色，
+      // 但组色是令牌，不该把 rgb 抄进断言，所以现场解析出来比。
+      const gcOf = (host) => { const t = document.createElement('i');
+        t.style.color = 'var(--gc)'; host.appendChild(t);
+        const v = cs(t).color; t.remove(); return v; };
       return { h: Math.round(n.getBoundingClientRect().height),
         on: on ? (() => { const c = on.cloneNode(true);
                c.querySelectorAll('.nb').forEach(x => x.remove());
                return c.textContent.trim(); })() : null,
-        grpRows: new Set([...n.querySelectorAll('.ngt')].map(e => Math.round(e.getBoundingClientRect().top))).size,
-        line: new Set([...n.querySelectorAll('a.nl')].map(e => Math.round(e.getBoundingClientRect().top))).size,
-        bb: on ? getComputedStyle(on).borderBottomColor : '',
-        scaleX: tf }; }""")
-    # app.css 给当前项留了一条 2px 的实底边，和这条金色下划线叠在一起会变成一条 4px 的脏线
-    # （10-18 改导航带时踩到，只有看图才发现）。桌面让底边透明，窄屏反过来用底边当选中态。
-    check("首页导航：一条带、选中项是「首页」且带金色下划线",
-          nav1440["on"] == "首页" and nav1440["grpRows"] == 1 and nav1440["line"] == 1
-          and nav1440["h"] >= 44 and nav1440["h"] <= 96
-          and nav1440["bb"] in ("rgba(0, 0, 0, 0)", "transparent")
-          and nav1440["scaleX"] not in ("", "none", "matrix(0, 0, 0, 0, 0, 0)"),
-          json.dumps(nav1440, ensure_ascii=False))
+        pills: pills.length,
+        pillRound: pills.every(p => rad(p) >= p.getBoundingClientRect().height / 2 - 1),
+        pillBordered: pills.every(p => cs(p).borderTopWidth === '1px'
+          && cs(p).borderTopStyle === 'solid'),
+        pillRaised: pills.every(p => cs(p).backgroundColor !== 'rgba(0, 0, 0, 0)'),
+        oneRow: new Set([...n.querySelectorAll('a.nl')].map(e => Math.round(e.getBoundingClientRect().top))).size,
+        chipRound: on ? rad(on) >= on.getBoundingClientRect().height / 2 - 1 : false,
+        chipFill: on ? cs(on).backgroundColor : '',
+        chipIsGroupColor: on ? cs(on).color === gcOf(on.closest('.ngrp')) : false,
+        dotShown: cs(n.querySelector('.ngt'), '::before').display !== 'none',
+        railGone: gone(pills[0], '::after') && gone(pills[0], '::before') && gone(on, '::after'),
+        dotShown: cs(n.querySelector('.ngt'), '::before').display !== 'none' }; }""")
+    # 组色单独量：七组七个色，少定义任何一组就会落回 --txt-muted 默认灰，Set 立刻少一个。
+    # （「工具」这一组在 app.css 里只写到 g6，一直是灰的——胶囊描边把这个老问题照出来了。）
+    gcols = page.evaluate("""() => [...document.querySelectorAll('nav.main .ngrp:not(.solo)')]
+      .map(g => getComputedStyle(g.querySelector('.ngt')).color)""")
+    check("首页导航是八颗圆角胶囊：丸有描边、有底色、入口排在一行",
+          nav1440["pills"] == 8 and nav1440["pillRound"] and nav1440["pillBordered"]
+          and nav1440["pillRaised"] and nav1440["oneRow"] == 1
+          and nav1440["h"] >= 44 and nav1440["h"] <= 96,
+          json.dumps({k: nav1440[k] for k in ("h", "pills", "pillRound", "pillBordered",
+                                              "pillRaised", "oneRow")}, ensure_ascii=False))
+    check("当前项是丸内一颗填充的小药丸，字色就是本组色（不抄硬编码 rgb，现场解析 --gc）",
+          nav1440["on"] == "首页" and nav1440["chipRound"]
+          and nav1440["chipFill"] not in ("", "rgba(0, 0, 0, 0)", "transparent")
+          and nav1440["chipIsGroupColor"],
+          json.dumps({k: nav1440[k] for k in ("on", "chipRound", "chipFill", "chipIsGroupColor")},
+                     ensure_ascii=False))
+    check("上一版的组底指示条、竖分隔、项下划线都撤干净了，组名圆点在",
+          nav1440["railGone"] and nav1440["dotShown"],
+          json.dumps({k: nav1440[k] for k in ("railGone", "dotShown")}, ensure_ascii=False))
+    check("七个分组各有自己的颜色（少定义任何一组就会落回默认灰，这里 Set 会少一个）",
+          len(set(gcols)) == len(gcols) == 7, "%d 组 %d 色：%s" % (len(gcols), len(set(gcols)), gcols))
     ctx375 = browser.new_context(viewport={"width": 375, "height": 812})
     p375 = ctx375.new_page()
     p375.goto(APP_BASE + "/#/", wait_until="networkidle")
@@ -2541,17 +2571,19 @@ def test_app(browser, base):
       const rows = (e) => new Set([...e.children].map(k => Math.round(k.getBoundingClientRect().top))).size;
       return {doc: document.documentElement.scrollWidth - window.innerWidth,
         clsRows: g ? rows(g) : 0, hubRows: h ? rows(h) : 0,
-        bb: (() => { const on = document.querySelector('nav.main a.nl.on');
-          return on ? getComputedStyle(on).borderBottomColor : ''; })(),
+        chip: (() => { const on = document.querySelector('nav.main a.nl.on');
+          const c = on ? getComputedStyle(on) : null;
+          return c ? c.backgroundColor + '|' + c.borderBottomWidth : ''; })(),
         minW: g ? Math.round(Math.min(...[...g.children].map(k => k.getBoundingClientRect().width))) : 0,
         cut: g ? [...g.children].some(k => k.getBoundingClientRect().right > window.innerWidth + 1) : false}; }""")
     check("首页 375 整页不横滚，职业条换成三列且没有格子被切掉",
           m["doc"] == 0 and m["clsRows"] == 3 and m["hubRows"] == 3 and not m["cut"],
           json.dumps(m, ensure_ascii=False))
-    # 窄屏把那条会长度的下划线关了，选中态必须落到 2px 底边上——
-    # 两边都关掉的话手机上就没人告诉你"当前在哪一页"（这一条是补上面那次改动的反面）
-    check("首页 375 的选中项仍有可见底边（下划线让位给底边，不是两个都没了）",
-          m["bb"] not in ("", "rgba(0, 0, 0, 0)", "transparent"), m["bb"])
+    # 窄屏这一条仍然要钉：上一版手机上靠 2px 底边当选中态（那时丸内的填充被下划线方案占了），
+    # 胶囊方案改成桌面与窄屏共用丸内填充，底边彻底撤掉。这一条盯的是"填充还在、底边没了"。
+    check("首页 375 的选中项仍靠丸内填充标出，2px 底边已彻底撤掉",
+          m["chip"].split("|")[0] not in ("", "rgba(0, 0, 0, 0)", "transparent")
+          and m["chip"].split("|")[1] == "0px", m["chip"])
     p375.screenshot(path=os.path.join(SHOT_DIR, "app-home-375.png"))
     ctx375.close()
     page.screenshot(path=os.path.join(SHOT_DIR, "app-home-1440.png"), clip=None, full_page=False)

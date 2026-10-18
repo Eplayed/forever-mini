@@ -113,41 +113,52 @@
    动效只用 transition 与"播一次"的 animation：这是查资料的站，不是发布会。
    ============================================================================= */
 
-/* ---- 导航带：分组各占一块，块与块靠一条竖分隔；当前组底部亮起本组色 ---- */
-nav.main { border-top:1px solid var(--line); background:linear-gradient(180deg,#161d2b,var(--panel-2)) }
-nav.main .in { align-items:stretch; padding-top:5px; padding-bottom:0 }
-.ngrp { padding:0 10px 0 12px; gap:1px }
-/* 「首页」这一格没有组名，只有它自己。上面把 .in 改成 stretch 之后它会跟着整条带
-   垂直居中，比右边那些入口高出一截（1440 实测顶边 59 vs 75，站主截图里也能看出来）。
-   把它压到底，跟各组的入口行对齐。 */
-.ngrp.solo { justify-content:flex-end }
-.ngrp::before { top:7px; bottom:0 }
-.ngrp .ngt { opacity:.5; transition:opacity var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out) }
-.ngrp .ngi { padding-bottom:0 }
-/* 组底那根 2px 的"当前在这一组"指示条：平时是暗的，命中或悬停时亮起本组色 */
-.ngrp::after { content:""; position:absolute; left:10px; right:10px; bottom:0; height:2px;
-  background:var(--gc, var(--line-2)); opacity:.14; border-radius:2px 2px 0 0;
-  transform:scaleX(.34); transform-origin:left center;
-  transition:opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out) }
-.ngrp:hover::after, .ngrp.hit::after { opacity:.9; transform:scaleX(1) }
-.ngrp.hit .ngt { opacity:1; color:var(--gc) }
+/* ---- 导航带：胶囊分组（2026-10-18 站主选 B 方案，替换上一版"渐变带 + 组底指示条 + 金色下划线"）----
+   每组一颗药丸：丸的左半边是本组色的圆点 + 组名，右半边是它的入口。
+   竖分隔、组底指示条、项下划线全部撤掉——"你在哪一组"由这颗丸的描边说，
+   "你在哪一页"由丸内那颗实心小药丸说。带底用比页面还暗一档的 --sunk、丸用 --panel-2，
+   靠明度差让丸浮起来，不靠阴影（阴影在这种深蓝底上会糊成一片脏边）。 */
+nav.main { border-top:1px solid var(--line); background:var(--sunk) }
+nav.main .in { align-items:center; padding-top:8px; padding-bottom:8px }
+/* 丸的横向尺寸是算过的：容器内宽 1148（1180 减去 .in 左右各 16），
+   八颗丸本体 1094 + 间距必须塞进去。第一版 margin 4px / 入口内边距 10px 时总宽 1158，
+   1440 下就折成两排（带高从 50 涨到 94）。这里收到 3px + 9px，留 30px 余量。 */
+.ngrp { flex-direction:row; align-items:center; gap:4px; margin:0 3px; padding:3px 4px 3px 12px;
+  border:1px solid var(--line); border-radius:999px; background:var(--panel-2);
+  --gc-soft:rgba(174,182,196,.14);
+  transition:border-color var(--dur-1) var(--ease-out) }
+/* 上一版靠这两条画分隔与指示条，胶囊方案里都是噪声 */
+.ngrp::before, .ngrp::after { display:none }
+.ngrp.solo { padding-left:5px; --gc:var(--gold); --gc-soft:rgba(200,163,92,.2) }
+.ngrp.g1 { --gc-soft:rgba(73,174,233,.17) }  .ngrp.g2 { --gc-soft:rgba(111,199,189,.17) }
+.ngrp.g3 { --gc-soft:rgba(123,196,127,.17) } .ngrp.g4 { --gc-soft:rgba(216,178,106,.19) }
+.ngrp.g5 { --gc-soft:rgba(171,155,214,.18) } .ngrp.g6 { --gc-soft:rgba(217,139,122,.18) }
+/* 第七组「工具」在 app.css 里根本没有颜色（只写到 g6），一直是灰的。
+   上一版看不出来是因为组色只用在 2px 的短横上；改成丸描边后就露馅了，补一个钢灰蓝。 */
+.ngrp.g7 { --gc:var(--nav-7); --gc-soft:rgba(143,155,179,.18) }
+.ngrp:hover, .ngrp.hit { border-color:var(--gc) }
 
-/* 入口：常态是灰字，悬停起底，当前项用金字 + 从左边长出来的下划线（不再是灰底方框） */
-nav.main a.nl { position:relative; min-height:36px; padding:0 9px; border-radius:4px 4px 0 0;
-  color:var(--txt-dim); font-weight:500; letter-spacing:.01em }
-nav.main a.nl:hover { background:rgba(255,255,255,.045); color:var(--txt) }
-nav.main a.nl::after { content:""; position:absolute; left:9px; right:9px; bottom:0; height:2px;
-  background:var(--gold); border-radius:2px 2px 0 0; transform:scaleX(0); transform-origin:left center;
-  transition:transform var(--dur-2) var(--ease-out) }
-nav.main a.nl:hover::after { transform:scaleX(.42) }
-nav.main a.nl.on { background:none; color:var(--gold-hi); box-shadow:none; font-weight:700;
-  /* app.css:1183 给当前项留了一条 2px 的 --accent 底边，和这条金色下划线是两回事，
-     叠在一起成一条 4px 的脏线。桌面只认 ::after 这条，底边让位（窄屏反过来，见下面）。 */
-  border-bottom-color:transparent }
-nav.main a.nl.on::after { transform:scaleX(1) }
+.ngrp .ngt { opacity:.7; padding:0 0 0 2px; line-height:1;
+  transition:opacity var(--dur-1) var(--ease-out) }
+.ngrp:hover .ngt, .ngrp.hit .ngt { opacity:1 }
+/* 组名前那根 8×2 的短横改成 6px 圆点——丸里放横条读起来像进度条，点更像"归属标记" */
+.ngt::before { width:6px; height:6px; border-radius:50%; vertical-align:0; margin-right:5px }
+.ngrp .ngi { gap:1px; padding-bottom:0 }
+
+/* 入口：丸内的一颗小药丸。常态灰字，悬停起一层白底，当前项填本组色 + 本组色字。
+   app.css:1181 给每个入口留了 border-radius:0 与 2px 底边，这两条在丸里都是错的形状，一起撤。 */
+nav.main a.nl { position:relative; min-height:30px; padding:0 9px; border-radius:999px;
+  color:var(--txt-dim); font-weight:500; letter-spacing:.01em; border-bottom:0;
+  transition:background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out) }
+nav.main a.nl:hover { background:rgba(255,255,255,.06); color:var(--txt) }
+nav.main a.nl.on { background:var(--gc-soft); color:var(--gc); box-shadow:none; font-weight:700 }
 nav.main a.nl:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
-/* 「新」角标跟着下划线让位，不再压住字 */
-.nb { top:3px; right:2px }
+/* 「新」角标改成随文字走，不再绝对定位。
+   app.css 那套是"绝对定位 + 给链接留 17px 右内边距"，在 30px 高的丸里会压到最后一个字
+   （1440 实拍：首页那颗丸的「新」直接盖在"页"上）。改成行内小标，丸自己会长够宽。 */
+nav.main .nb { position:static; transform:none; margin-left:5px; border-radius:999px;
+  padding:1px 4px; font-size:9px }
+nav.main a.nl:has(.nb) { padding-right:10px }
 
 /* ---- 首页：职业条与板块轨都改成会换行的网格，横向滚动条从根上去掉 ---- */
 /* 原来 .hrail 是 overflow-x:auto 的一条横滑轨：9 格 × 132px 在 1440 以下必然溢出，
@@ -185,21 +196,26 @@ nav.main a.nl:focus-visible { outline:2px solid var(--azure); outline-offset:-2p
 .cls9 > a:nth-child(7), .hrail > a:nth-child(7) { animation-delay:168ms }
 .cls9 > a:nth-child(8), .hrail > a:nth-child(8) { animation-delay:196ms }
 .cls9 > a:nth-child(n+9), .hrail > a:nth-child(n+9) { animation-delay:224ms }
+/* 导航那八颗丸同样播一次，22ms 递进；导航是每次换页都重挂的，
+   所以时长压到 .2s、位移 4px——比内容区那两排更短，免得读内容前先看它晃 */
+.ngrp { animation:pzRowIn .2s var(--ease-out) both }
+.ngrp:nth-child(2) { animation-delay:22ms } .ngrp:nth-child(3) { animation-delay:44ms }
+.ngrp:nth-child(4) { animation-delay:66ms } .ngrp:nth-child(5) { animation-delay:88ms }
+.ngrp:nth-child(6) { animation-delay:110ms } .ngrp:nth-child(7) { animation-delay:132ms }
+.ngrp:nth-child(n+8) { animation-delay:154ms }
 
 @media (prefers-reduced-motion: reduce) {
-  .cls9 > a, .hrail > a { animation:none }
-  .ngrp::after, nav.main a.nl::after { transition:none }
+  .cls9 > a, .hrail > a, .ngrp { animation:none }
+  .ngrp, nav.main a.nl, .ngrp .ngt { transition:none }
   .hrt:hover .hrt-b, .cls9 a:hover { transform:none }
 }
 
 @media (max-width:899px) {
-  /* 窄屏导航带本来就是横滑的一条（那条是设计要的），这里只保证格子不被下划线撑高 */
-  nav.main a.nl { min-height:44px; border-radius:4px }
-  nav.main a.nl::after { display:none }
-  /* 窄屏不做那条会长度的下划线，改用 app.css 本来就有的 2px 底边当选中态，
-     不然上面把 border-bottom-color 清掉之后，手机上就没有"当前在哪一页"了 */
-  nav.main a.nl.on { border-bottom-color:var(--gold) }
-  .ngrp::after { display:none }
+  /* 窄屏这一条本来就是横向滑动的（那条是设计要的）。丸要跟着变高一点才够 44px 命中区，
+     选中态仍然靠丸内那颗实心小药丸——上一版"手机上改回 2px 底边"的兜底不再需要了。 */
+  nav.main .in { padding-top:6px; padding-bottom:6px }
+  .ngrp { margin:0 3px; padding-left:9px }
+  nav.main a.nl { min-height:44px; padding:0 12px }
   .hrt-b { height:62px }
 }
 
