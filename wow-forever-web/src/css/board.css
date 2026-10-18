@@ -138,11 +138,13 @@ nav.main .in { align-items:center; padding-top:8px; padding-bottom:8px }
 .ngrp.g7 { --gc:var(--nav-7); --gc-soft:rgba(143,155,179,.18) }
 .ngrp:hover, .ngrp.hit { border-color:var(--gc) }
 
-.ngrp .ngt { opacity:.7; padding:0 0 0 2px; line-height:1;
+.ngrp .ngt { opacity:.85; padding:0 2px; line-height:1;
   transition:opacity var(--dur-1) var(--ease-out) }
 .ngrp:hover .ngt, .ngrp.hit .ngt { opacity:1 }
-/* 组名前那根 8×2 的短横改成 6px 圆点——丸里放横条读起来像进度条，点更像"归属标记" */
-.ngt::before { width:6px; height:6px; border-radius:50%; vertical-align:0; margin-right:5px }
+/* 组名前那根标记撤掉。2026-10-18 站主看过胶囊版明确说"不接受胶囊前面有圆点"——
+   先是从 8×2 短横改成 6px 圆点，现在连圆点也不要。组色仍然留给组名字与丸描边，
+   两条通道够用。**别把点或短横画回来**，site-check [16] 有一条反向断言钉着。 */
+.ngt::before { display:none }
 .ngrp .ngi { gap:1px; padding-bottom:0 }
 
 /* 入口：丸内的一颗小药丸。常态灰字，悬停起一层白底，当前项填本组色 + 本组色字。

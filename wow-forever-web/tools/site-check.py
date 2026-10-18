@@ -2540,7 +2540,7 @@ def test_app(browser, base):
         chipIsGroupColor: on ? cs(on).color === gcOf(on.closest('.ngrp')) : false,
         dotShown: cs(n.querySelector('.ngt'), '::before').display !== 'none',
         railGone: gone(pills[0], '::after') && gone(pills[0], '::before') && gone(on, '::after'),
-        dotShown: cs(n.querySelector('.ngt'), '::before').display !== 'none' }; }""")
+        dotGone: gone(n.querySelector('.ngt'), '::before') }; }""")
     # 组色单独量：七组七个色，少定义任何一组就会落回 --txt-muted 默认灰，Set 立刻少一个。
     # （「工具」这一组在 app.css 里只写到 g6，一直是灰的——胶囊描边把这个老问题照出来了。）
     gcols = page.evaluate("""() => [...document.querySelectorAll('nav.main .ngrp:not(.solo)')]
@@ -2557,9 +2557,9 @@ def test_app(browser, base):
           and nav1440["chipIsGroupColor"],
           json.dumps({k: nav1440[k] for k in ("on", "chipRound", "chipFill", "chipIsGroupColor")},
                      ensure_ascii=False))
-    check("上一版的组底指示条、竖分隔、项下划线都撤干净了，组名圆点在",
-          nav1440["railGone"] and nav1440["dotShown"],
-          json.dumps({k: nav1440[k] for k in ("railGone", "dotShown")}, ensure_ascii=False))
+    check("上一版的组底指示条、竖分隔、项下划线都撤干净了，组名前也不许再画点或短横",
+          nav1440["railGone"] and nav1440["dotGone"],
+          json.dumps({k: nav1440[k] for k in ("railGone", "dotGone")}, ensure_ascii=False))
     check("七个分组各有自己的颜色（少定义任何一组就会落回默认灰，这里 Set 会少一个）",
           len(set(gcols)) == len(gcols) == 7, "%d 组 %d 色：%s" % (len(gcols), len(set(gcols)), gcols))
     ctx375 = browser.new_context(viewport={"width": 375, "height": 812})
