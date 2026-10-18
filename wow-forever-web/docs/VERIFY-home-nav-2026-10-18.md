@@ -222,7 +222,9 @@ sticky 又不占位，格子留在原位被这条不透明组头压住。
 ```
 cd app && npm run build                    # ✓ built in 5.45s
 python3 -u tools/site-check.py --app --only app   # 通过 62 / 62（上一轮 59，+3）
-python3 -u tools/site-check.py --app       # 整站最终数见台账那一行
+python3 -u tools/site-check.py --app       # 整站：通过 836 / 836，全部通过（上一轮 833，+3）
 ```
+
+补完第 52 条本站更新（`releases` 51 → 52）后又重跑了一遍整站，最终数以台账与提交说明里那次为准。
 
 截图：`docs/screenshots/check-2026-10-18/app-races-heads-1440.png` 与 `-375.png`。
