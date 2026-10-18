@@ -356,3 +356,93 @@ nav.main a.nl:has(.nb) { padding-right:10px }
    实测两栈一样（旧站 :8817 也重叠 32px），是共享样式的老问题，不是这轮改出来的。
    带内本来就不会滚，sticky 在这里毫无作用——直接改回 static。 */
 .fhead { position:static }
+
+/* =============================================================================
+   10-18 站主：世界页「稀有精英」改成一区域一张图——点位平时虚着，指上去实体并弹信息。
+   原来每条稀有各带一张同样的区域图（一个区域八条就是八张重复图），
+   掉落清单还藏在每张卡下面的小抽屉里。
+   ============================================================================= */
+.zband { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 330px);
+  gap:var(--s4); align-items:start; margin:0 0 var(--s5) }
+/* 图不能裁：overflow:hidden 会把贴在边缘的浮层切掉，所以这里放开（卡片本来就没有圆角，--r-card:0） */
+.zbig { position:relative; background:var(--sunk); border:1px solid var(--line); overflow:visible }
+/* 画布层只装地图与点位，浮层是它的兄弟：点位按这一层的高度摆百分比，
+   这一层的高度永远等于图高，浮层再怎么撑也不会把点位挪走 */
+.zcanvas { position:relative }
+.zcanvas img { display:block; width:100%; height:auto }
+.zbig.noimg .zcanvas { min-height:120px; display:flex; align-items:center; justify-content:center }
+.zbig-id { font:12px var(--font-mono); color:var(--txt-muted) }
+
+/* 点位：默认是"虚"的——半透明 + 0.6px 模糊，像还没定下来的点；
+   指上去 / 键盘聚焦 / 点住不放时才实体（去模糊、放大、填金色）。
+   20px 是点击区，里面那颗 18px 的圆才是视觉尺寸。 */
+.zdot { position:absolute; width:20px; height:20px; margin:-10px 0 0 -10px; padding:0;
+  border:0; background:none; cursor:pointer; opacity:.55; filter:blur(.6px);
+  transition:opacity var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out) }
+.zdot-n { display:block; width:18px; height:18px; border:1px solid var(--gold-deep);
+  border-radius:50%; background:rgba(19,26,40,.82); color:var(--gold-hi);
+  font:700 10.5px/17px var(--font-mono); text-align:center }
+.zdot:hover { opacity:.85; filter:blur(.2px) }
+.zdot.on { opacity:1; filter:none; transform:scale(1.3); z-index:3 }
+.zdot.on .zdot-n { background:var(--gold); border-color:var(--gold-hi); color:var(--ink-on-bright) }
+.zdot:focus-visible { outline:2px solid var(--azure); outline-offset:1px; opacity:1; filter:none }
+
+/* 浮层：位置与朝向由组件按点位百分比算（见 popStyle），这里只管长相。
+   pointer-events:none 是故意的——浮层会盖住它自己那颗点位，
+   能接收指针的话鼠标一移上去就触发 leave、浮层闪断。代价是里面的字不能选、不能滚，
+   所以掉落清单同时摆在右边的列表行上。 */
+.zpop { position:absolute; z-index:4; width:min(320px, 62vw); pointer-events:none;
+  background:var(--panel); border:1px solid var(--gold-deep); padding:10px 11px;
+  box-shadow:0 8px 22px rgba(0, 0, 0, .5) }
+.zpop-h { display:flex; flex-direction:column; gap:2px }
+.zpop-h b { font:700 15px/1.25 var(--font-display); color:var(--txt-title) }
+.zpop-t { display:flex; flex-wrap:wrap; align-items:center; gap:5px 8px; margin:7px 0 8px;
+  font-size:11.5px }
+.zpop-d { display:flex; flex-direction:column; gap:5px; padding-top:8px;
+  border-top:1px solid var(--line) }
+.zpop-i { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--txt-dim) }
+.zpop-i .nm2 { color:var(--txt); font-weight:600; flex:1 1 auto; min-width:78px }
+/* 数字那几列不许拆开：375 上"iLvl 10 需 5"原来会被断到两行，两行之间对不齐 */
+.zpop-i .mono { font-size:10.5px; white-space:nowrap }
+.zpop-i.q2 .nm2 { color:var(--q2) } .zpop-i.q3 .nm2 { color:var(--q3) }
+.zpop-i.q4 .nm2 { color:var(--q4) } .zpop-i.q5 .nm2 { color:var(--q5) }
+
+/* 右边的编号列表：与点位共用同一个序号，两边互相高亮。
+   手机上没有悬停，这张列表就是主入口，不能只活在浮层里 */
+.zlist { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;
+  max-height:520px; overflow:auto }
+.zrow { display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; width:100%;
+  min-height:34px; padding:5px 8px; text-align:left; cursor:pointer;
+  background:var(--panel-2); border:1px solid var(--line); border-left-width:2px;
+  color:var(--txt-dim); font-size:12px;
+  transition:border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out) }
+.zrow .zn { flex:0 0 18px; height:18px; border:1px solid var(--gold-deep); border-radius:50%;
+  font:700 10.5px/17px var(--font-mono); text-align:center; color:var(--gold-hi) }
+.zrow .znm { color:var(--txt); font-weight:600 }
+.zrow:hover, .zrow.on { border-left-color:var(--gold); background:var(--gold-line-soft) }
+.zrow.on .zn { background:var(--gold); border-color:var(--gold-hi); color:var(--ink-on-bright) }
+.zrow:focus-visible { outline:2px solid var(--azure); outline-offset:1px }
+/* 没有地图文件的那几条不标点（坐标是不是同一张图的空间没法确认，不猜位置），
+   序号列画一条横杠，列表里照样能看到、能查 */
+.zrow.nopin .zn { border-color:var(--line-2); color:var(--txt-muted) }
+
+@media (prefers-reduced-motion: reduce) {
+  .zdot, .zrow, .zpop { transition:none }
+  .zdot.on { transform:none }
+}
+
+@media (max-width:899px) {
+  .zband { grid-template-columns:minmax(0, 1fr) }
+  .zlist { max-height:none; overflow:visible }
+  .zrow { min-height:44px }
+  /* 窄屏浮层不跟着点位跑，也不盖在图上（盖住就把别的点位一起藏了）：
+     改成 position:static 挂在画布正下方，撑高的是 .zbig 不是 .zcanvas，点位不动。
+     transform 是组件里内联算给桌面的，static 元素上 transform 仍然生效，必须 !important 才盖得掉 */
+  .zpop { position:static; width:auto; max-width:none; margin:8px -1px -1px;
+    border-left:0; border-right:0; border-bottom:0; box-shadow:none; transform:none !important }
+  /* 点位命中区放大到 34px（视觉那颗仍是 18px）。地图针做不到 44px——
+     贫瘠之地一张图 33 个针，44px 的命中区会互相压住；手机上真正的主入口是下面那张列表 */
+  .zdot { width:34px; height:34px; margin:-17px 0 0 -17px }
+  .zdot-n { margin:8px auto }
+}

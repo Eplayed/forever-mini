@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
-  hlParts, levelRangeText, byDate, launchLeft, clockText, pillLevel, PILL_NAME, typeLabel, lvStart
+  hlParts, levelRangeText, byDate, launchLeft, clockText, pillLevel, PILL_NAME, typeLabel, lvStart,
+  coordText
 } from '../src/lib/fmt.js';
 
 describe('搜索高亮拆片段', () => {
@@ -69,5 +70,21 @@ describe('倒计时与分级', () => {
   it('来源类型有中文名，未知类型原样显示', () => {
     expect(typeLabel('datamine_cn')).toBe('客户端解包');
     expect(typeLabel('weird_type')).toBe('weird_type');
+  });
+});
+
+describe('坐标那一行（世界页与稀有精英点位图共用）', () => {
+  it('图上百分比与世界坐标都有时，两个都写', () => {
+    expect(coordText({ mark: { x: 52.6, y: 81.2 }, world: { x: 2331, y: 3253 } }))
+      .toBe('(52.6, 81.2) · 世界 2331, 3253');
+  });
+  it('缺哪个就少说哪个，不拿 0 补位', () => {
+    expect(coordText({ mark: { x: 61.4, y: 37.8 } })).toBe('(61.4, 37.8)');
+    expect(coordText({ world: { x: 10, y: 20 } })).toBe('世界 10, 20');
+  });
+  it('两个都没有才写"坐标待补"，空对象与 undefined 都不崩', () => {
+    expect(coordText({})).toBe('坐标待补');
+    expect(coordText(undefined)).toBe('坐标待补');
+    expect(coordText(null)).toBe('坐标待补');
   });
 });

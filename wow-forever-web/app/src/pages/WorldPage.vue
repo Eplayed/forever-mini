@@ -85,39 +85,10 @@
       <template v-for="g in rareGroups" :key="g.zone">
         <div class="band"><b>{{ g.zone }}</b><span class="dim">{{ lvTxt(g.meta) }} · {{ g.meta.faction || '阵营未定' }}</span>
           <span class="dim mono">{{ g.rows.length }} 个</span></div>
-        <div class="rgrid">
-          <div v-for="r in g.rows" :key="r.id" class="rarecard">
-            <ZoneMap :map-file="r.mapFile" :map-id="r.mapId" :mark="r.mark" :alt="g.zone" />
-            <div class="rbody">
-              <b>{{ r.nameCn }}</b>
-              <span v-if="r.nameEn" class="dim mono">{{ r.nameEn }}</span>
-              <span class="rtags">
-                <span class="tag">{{ r.kind === 'rare-elite' ? '稀有精英' : '稀有' }}</span>
-                <span v-if="r.isNew" class="tag new">无限新增</span>
-                <span class="dim mono">{{ lvTxt(r) }}</span>
-              </span>
-              <span class="mono dim">{{ coordTxt(r) }}</span>
-              <div v-if="r.drops.length" class="loot">
-                <span v-for="d in r.drops" :key="d.itemId" class="loot-i" :class="'q' + (d.quality || 0)">
-                  <IconCell :icon-key="d.iconKey || ''" :seed="d.itemId" :cn="d.nameCn" small />
-                  {{ d.nameCn }}
-                  <span v-if="d.itemLevel" class="dim mono">iLvl {{ d.itemLevel }}</span>
-                  <span v-if="d.reqLevel" class="dim mono">需 {{ d.reqLevel }}</span>
-                  <span class="dim mono">#{{ d.itemId }}</span>
-                </span>
-              </div>
-              <div v-else class="note">这一条没有掉落记录。</div>
-              <button type="button" class="ghost wide" :data-r="r.id" @click="toggleDrawer(r.id)">{{ drawerOf(r.id) ? '收起' : '掉落与坐标' }}</button>
-              <div v-show="drawerOf(r.id)" class="wdr" :class="{ open: drawerOf(r.id) }">
-                <h3>掉落清单</h3>
-                <ul v-if="r.drops.length" class="list">
-                  <li v-for="d in r.drops" :key="d.itemId">{{ d.nameCn }}（#{{ d.itemId }}，{{ d.bind || '绑定方式待补' }}）</li>
-                </ul>
-                <p v-else class="dim">待补。</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- 2026-10-18 站主：一个区域一张图，稀有直接标在图上，平时虚着、指上去实体并弹信息。
+             原来这里是"每条稀有各带一张同样的区域图 + 一个展开掉落的小抽屉"，
+             一个区域八条就是八张重复图；掉落清单整个搬进点位浮层，抽屉撤掉。 -->
+        <RareMap :zone="g.zone" :rows="g.rows" />
       </template>
       <div v-for="s in w.rareSets" :key="s.nameCn" class="card">
         <h2>套装 · {{ s.nameCn }}</h2>
@@ -265,9 +236,10 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
-import { levelRangeText as lvTxt, lvStart } from '../lib/fmt.js';
+import { levelRangeText as lvTxt, lvStart, coordText as coordTxt } from '../lib/fmt.js';
 import ZoneCard from '../components/ZoneCard.vue';
 import ZoneMap from '../components/ZoneMap.vue';
+import RareMap from '../components/RareMap.vue';
 import IconCell from '../components/IconCell.vue';
 
 /* 主卡卡片头用的图：与首页图标轨「世界」那一格同一张本地原画（站内同一板块同一张脸）。
@@ -282,14 +254,7 @@ const err = ref('');
 const tab = ref('zones');
 const q = ref('');
 const zone = ref('');
-const drawers = ref({});
 
-function coordTxt(o) {
-  const s = [];
-  if (o.mark) s.push('(' + o.mark.x + ', ' + o.mark.y + ')');
-  if (o.world) s.push('世界 ' + o.world.x + ', ' + o.world.y);
-  return s.join(' · ') || '坐标待补';
-}
 function boot() {
   err.value = '';
   load('data/world.json')
@@ -374,8 +339,6 @@ const bagRows = computed(() => {
     ['可叠层', p.stacks + ' 层'], ['铺设冷却', p.cdMin + ' 分钟']];
 });
 
-function toggleDrawer(id) { drawers.value[id] = !drawers.value[id]; }
-function drawerOf(id) { return !!drawers.value[id]; }
 function pickTab(t) { tab.value = t; zone.value = ''; }
 function goZone(name) { zone.value = name; tab.value = 'rares'; }
 </script>

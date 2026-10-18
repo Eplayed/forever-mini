@@ -82,6 +82,15 @@ export function lvStart(rec) {
   const a = (rec && rec.levelRange) || [];
   return (a[0] === null || a[0] === undefined) ? 99 : a[0];
 }
+/* 坐标那一行：图上百分比 + 世界坐标，缺哪个就少说哪个，两个都没有才写"坐标待补"。
+   2026-10-18 从 WorldPage 里提出来——区域稀有那张点位图（RareMap）要用同一句说法，
+   两处各写一遍迟早会漂。 */
+export function coordText(o) {
+  const s = [];
+  if (o && o.mark) s.push('(' + o.mark.x + ', ' + o.mark.y + ')');
+  if (o && o.world) s.push('世界 ' + o.world.x + ', ' + o.world.y);
+  return s.join(' · ') || '坐标待补';
+}
 /* 时间点分档：与旧站 src/js/app.js 的 tlCounts 同一算法；now 由调用方给，方便单测。 */
 export function tlCounts(items, now) {
   const n = now === undefined ? Date.now() : now;

@@ -2949,11 +2949,145 @@ def test_app(browser, base):
             zc = page.evaluate("() => document.querySelectorAll('.zcard').length")
             check("新站区域卡数量与数据一致", zc == S["zones"], "%d 张（数据 %d）" % (zc, S["zones"]))
             page.click('[data-t="rares"]')
-            page.wait_for_timeout(1200)
-            marks = page.evaluate("""() => { const m = [...document.querySelectorAll('.zmark')];
-              return { n: m.length, placed: m.filter(b => b.style.left).length }; }""")
-            check("新站稀有标记点按数据摆位", marks["n"] == marks["placed"] and marks["n"] > 30,
-                  "%d 个点全部定位" % marks["n"])
+            page.wait_for_timeout(1400)
+            # ---- 10-18 站主：一区域一张图，稀有直接标在图上 ----
+            # 原来这里只数 `.zmark` 的个数（每条稀有卡上一个点），换结构之后那个类已经没有了。
+            # 新的判据要能抓住三件真会出错的事：点位与坐标对不上、没图的稀有被"猜"上图、
+            # 以及悬停不生效（只有看图才知道，所以这里去量计算样式）。
+            W = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
+            rs = W.get("rares") or []
+            groups = {}
+            for r in rs:
+                groups.setdefault(r.get("zone") or "未归区域", []).append(r)
+            want_bands = len(groups)
+            want_dots = len([r for r in rs if r.get("mapFile") and r.get("mark")])
+            want_maps = len([k for k, v in groups.items() if any(r.get("mapFile") for r in v)])
+            geo = page.evaluate("""() => { const bands = [...document.querySelectorAll('.zband')];
+              return { bands: bands.length,
+                maps: document.querySelectorAll('.zbig img').length,
+                dots: document.querySelectorAll('.zdot').length,
+                rows: document.querySelectorAll('.zrow').length,
+                old: document.querySelectorAll('.rarecard').length,
+                perBand: bands.map(b => ({ d: b.querySelectorAll('.zdot').length,
+                  r: b.querySelectorAll('.zrow').length, img: !!b.querySelector('.zbig img') })),
+                badPos: [...document.querySelectorAll('.zdot')].filter(d => {
+                  const l = d.style.left, t = d.style.top;
+                  return !/%$/.test(l) || !/%$/.test(t); }).length,
+                over: document.documentElement.scrollWidth - window.innerWidth}; }""")
+            check("一个区域一张图：带数、图数、点位数、列表行数全部对得上数据",
+                  geo["bands"] == want_bands and geo["maps"] == want_maps
+                  and geo["dots"] == want_dots and geo["rows"] == len(rs) and geo["badPos"] == 0,
+                  "带 %d（数据 %d）／图 %d（应 %d）／点 %d（数据有图有坐标的 %d）／行 %d（数据 %d）／没坐标的 %d"
+                  % (geo["bands"], want_bands, geo["maps"], want_maps, geo["dots"], want_dots,
+                     geo["rows"], len(rs), geo["badPos"]))
+            check("旧的「每条稀有各带一张同样的区域图」已经撤掉（反向钉，别搬回来）",
+                  geo["old"] == 0, "还剩 %d 张 rarecard" % geo["old"])
+            # 每个点位的 left/top 必须等于这条稀有自己数据里的百分比——不猜位置、不重排
+            pos = page.evaluate("""() => [...document.querySelectorAll('.zdot')].map(d => ({
+              id: d.dataset.r, l: d.style.left, t: d.style.top }))""")
+            byid = {str(r["id"]): r for r in rs}
+            badp = []
+            for x in pos:
+                r = byid.get(str(x["id"]))
+                if not r:
+                    badp.append("页面上有个点位在数据里找不到：%s" % x["id"]); continue
+                want = "(%s%%, %s%%)" % (r["mark"]["x"], r["mark"]["y"])
+                got = "(%s, %s)" % (x["l"], x["t"])
+                if want != got:
+                    badp.append("%s 应 %s 实 %s" % (r["nameCn"], want, got))
+            check("每个点位就摆在这条稀有自己的坐标百分比上，一个都不偏移",
+                  not badp, "；".join(badp[:4]) or "%d 个点逐位核对通过" % len(pos))
+            # 没地图文件的那 73 条不许出现在图上（只进列表），这是"不猜位置"的可执行版本
+            plotted = set(x["id"] for x in pos)
+            should = set(str(r["id"]) for r in rs if r.get("mapFile") and r.get("mark"))
+            extra = plotted - {int(s) if str(s).isdigit() else s for s in should}
+            check("没有地图文件的稀有不标点（只在列表里出现，不拿别的图猜位置）",
+                  not extra and len(plotted) == len(should),
+                  "多标 %d 个／应标 %d 个／实标 %d 个" % (len(extra), len(should), len(plotted)))
+            # 悬停：默认虚、指上去实体并弹层，右边对应行同时高亮
+            page.evaluate("() => document.querySelector('.zband').scrollIntoView({block:'center'})")
+            page.wait_for_timeout(400)
+            before = page.evaluate("""() => { const d = getComputedStyle(document.querySelector('.zdot'));
+              return {op: parseFloat(d.opacity), blur: d.filter, pop: !!document.querySelector('.zpop')}; }""")
+            first = page.evaluate("() => document.querySelector('.zdot').dataset.r")
+            page.hover(".zdot")
+            page.wait_for_timeout(500)
+            hov = page.evaluate("""() => { const d = document.querySelector('.zdot.on');
+              const c = getComputedStyle(d); const p = document.querySelector('.zpop');
+              const r = p && p.getBoundingClientRect();
+              return {op: parseFloat(c.opacity), blur: c.filter, has: !!p,
+                title: p ? (p.querySelector('b') || {}).innerText : '',
+                drops: p ? p.querySelectorAll('.zpop-i').length : -1,
+                rows: document.querySelectorAll('.zrow.on').length,
+                out: r ? (r.left < 0 || r.right > window.innerWidth || r.top < 0) : null}; }""")
+            wr = byid.get(str(first)) or {}
+            check("点位平时是虚的（半透明 + 模糊），指上去才实体",
+                  before["op"] < 0.8 and "blur" in before["blur"] and not before["pop"]
+                  and hov["op"] > 0.99 and hov["blur"] == "none",
+                  "默认 透明度 %.2f/%s → 悬停 透明度 %.2f/%s"
+                  % (before["op"], before["blur"], hov["op"], hov["blur"]))
+            check("悬停弹出的浮层写的就是这一条：名字、掉落件数与数据一致，且不越出视口",
+                  hov["has"] and hov["title"] == wr.get("nameCn")
+                  and hov["drops"] == len(wr.get("drops") or []) and not hov["out"],
+                  "标题 %s（数据 %s）／掉落 %d（数据 %d）／越界 %s"
+                  % (hov["title"], wr.get("nameCn"), hov["drops"],
+                     len(wr.get("drops") or []), hov["out"]))
+            check("点位与右边列表双向联动：指点位，对应那一行也亮",
+                  hov["rows"] == 1, "%d 行高亮" % hov["rows"])
+            page.click(".zdot")
+            page.mouse.move(10, 300)
+            page.wait_for_timeout(400)
+            check("手机上没有悬停，所以点一下要把这层钉住（移开鼠标仍在）",
+                  page.evaluate("() => !!document.querySelector('.zpop')"))
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(400)
+            check("按 ESC 收掉浮层", page.evaluate("() => !document.querySelector('.zpop')"))
+            page.hover(".zlist .zrow")
+            page.wait_for_timeout(400)
+            check("反过来指列表那一行，图上的点位也实体并弹层",
+                  page.evaluate("""() => ({dot: document.querySelectorAll('.zdot.on').length,
+                    pop: !!document.querySelector('.zpop')})""") == {"dot": 1, "pop": True})
+            check("换结构之后这一页仍然不横向溢出", geo["over"] == 0, "溢出 %d" % geo["over"])
+            # 375 上浮层改成挂在图下面（桌面是 absolute，手机不行——手机上盖住图就等于盖住别的点位）。
+            # 而点位是按父盒高度的百分比摆的，所以必须验：浮层一开，父盒不能变高、点位不能集体跳位。
+            jc = browser.new_context(viewport={"width": 375, "height": 812})
+            jp = jc.new_page()
+            jp.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
+            jp.wait_for_timeout(2200)
+            jp.evaluate("() => document.querySelector('.zband').scrollIntoView({block:'center'})")
+            jp.wait_for_timeout(400)
+            # 注意 Vue 的 DOM 更新是异步的：click 与"查 .zpop / 量点位"必须分成两次 evaluate，
+            # 中间等一次。写在同一个 evaluate 里永远查不到（第一版就是这么假红的）。
+            # 量的是 offsetLeft/offsetTop 而不是 getBoundingClientRect：
+            # 被点中的那颗会 transform:scale(1.3)，rect 会跟着涨 3px——那是设计要的放大，不是跳位。
+            # offset* 只看布局位置，不吃 transform，才能把"父盒被撑高导致全体下移"和"这一颗自己变大"分开。
+            jp.evaluate("""() => { const band = document.querySelector('.zband');
+              window.__shot = () => [...band.querySelectorAll('.zdot')].map((d) => [d.offsetLeft, d.offsetTop]);
+              window.__before = window.__shot();
+              band.querySelector('.zdot').click(); }""")
+            jp.wait_for_timeout(600)
+            jump = jp.evaluate("""() => { const band = document.querySelector('.zband');
+              const after = window.__shot();
+              const before = window.__before;
+              const pop = band.querySelector('.zpop');
+              const pr = pop ? pop.getBoundingClientRect() : null;
+              const mr = band.querySelector('.zcanvas').getBoundingClientRect();
+              const moved = before.filter((b, i) => !after[i]
+                || b[0] !== after[i][0] || b[1] !== after[i][1]).length;
+              return { n: before.length, moved: moved, pop: !!pop,
+                over: document.documentElement.scrollWidth - window.innerWidth,
+                full: pr ? (Math.round(pr.left - mr.left) <= 2 && Math.round(mr.right - pr.right) <= 2) : null,
+                below: pr ? pr.top >= mr.bottom - 2 : null }; }""")
+            check("375 打开浮层时点位不许集体跳位（浮层撑高的是外层盒，不是点位参照的那层画布）",
+                  jump["pop"] and jump["n"] > 1 and jump["moved"] == 0,
+                  "%d 个点里 %d 个动了" % (jump["n"], jump["moved"]))
+            check("375 浮层整宽贴在地图下方、不盖住图、也不溢出屏幕",
+                  jump["over"] == 0 and jump["full"] and jump["below"],
+                  "横向溢出 %d ／ 整宽 %s ／ 贴在图下方 %s"
+                  % (jump["over"], jump["full"], jump["below"]))
+            # 这张图存的是"浮层展开态"：上面那一步刚点开了第一个点位，正好拍到手感
+            jp.screenshot(path=os.path.join(SHOT_DIR, "app-rares-m.png"))
+            jc.close()
             body = page.evaluate("() => document.querySelector('#main').innerText")
             check("新站世界页正文没有面向开发的词", not dev_word_hits(body), "干净")
             page.screenshot(path=os.path.join(SHOT_DIR, "app-world-rares.png"))
