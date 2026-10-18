@@ -686,7 +686,9 @@ def test_css_tokens(browser, base):
     declared = set()
     for fp in decl_src:
         t = read(fp)
-        for m in re.finditer(r"(--[A-Za-z0-9_-]+)\s*:", t):
+        # 声明点有两种写法：CSS 里的 --x: 值，和 JS/Vue 内联 style 里的 '--x': 值
+        # （传承页的列数就是后者：:style="{ '--cols': curTree.cols }"，第一版没认这种，误报了一次）
+        for m in re.finditer(r"['\"]?(--[A-Za-z0-9_-]+)['\"]?\s*:", t):
             declared.add(m.group(1))
         for m in re.finditer(r"setProperty\(\s*['\"](--[A-Za-z0-9_-]+)['\"]", t):
             declared.add(m.group(1))
@@ -703,6 +705,244 @@ def test_css_tokens(browser, base):
           not missing,
           "没声明：%s" % "; ".join("%s→%s" % (k, ",".join(v[:2])) for k, v in sorted(missing.items()))[:220]
           if missing else "干净")
+
+def test_legacy_app(browser, base):
+    """新站传承页（2026-10-18 视觉与交互重做，站主定"只用我们自己采到的那份数据"）。
+       盯四件事：① 界面上每个数与每个名字都等于 legacy.json 现算的结果，一个都不手抄；
+       ② 三条新交互真的动——点专长出详情、点前置跳过去、六组挑战折叠与搜索自动展开；
+       ③ 换树不许把上一棵的选中态留在空栏里；
+       ④ 桌面与 375 都不横溢、点击目标够大、锚点走站内路由。"""
+    print("\n[6d] 新站传承页")
+    import json
+    L = json.load(open(os.path.join(SRC, "data", "legacy.json"), encoding="utf-8"))
+    trees = L.get("trees") or []
+    perks = {p["id"]: p for p in (L.get("perks") or [])}
+    groups = L.get("challenges") or []
+    all_items = [x for g in groups for x in (g.get("items") or [])]
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:140]))
+    page.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    page.wait_for_timeout(2400)
+    check("新站传承页可加载且无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+
+    def known(t):
+        return len([s for s in t["slots"] if not s.get("empty") and not s.get("unknown")])
+
+    def unk(t):
+        return len([s for s in t["slots"] if s.get("unknown")])
+
+    # ---- ① 三棵树胶囊与格子：全部对着 legacy.json 现算 ----
+    tabs = page.evaluate("() => [...document.querySelectorAll('.lge-tabs [data-t]')].map(e => {"
+                         "const c = e.cloneNode(true);"
+                         "return {t: e.dataset.t, name: (e.querySelector('b')||{}).textContent,"
+                         " mono: [...e.querySelectorAll('.mono')].map(x => x.textContent.trim()),"
+                         " on: e.classList.contains('on')}; })")
+    want_tabs = [t["id"] for t in trees]
+    check("三棵树的胶囊切换按数据列，默认选中第一棵",
+          [x["t"] for x in tabs] == want_tabs and len(tabs) == 3 and tabs[0]["on"]
+          and not any(x["on"] for x in tabs[1:]),
+          "%s（数据 %s）" % ([x["t"] for x in tabs], want_tabs))
+    bad_counts = []
+    for x, t in zip(tabs, trees):
+        if x["mono"] != ["%d 格" % known(t), "· 未公开 %d" % unk(t)]:
+            bad_counts.append("%s 画 %s，数据是 %d 格 / %d 未公开" % (x["name"], x["mono"], known(t), unk(t)))
+    check("胶囊上那两个数是数据算出来的（格数与未公开数），不是手抄",
+          not bad_counts, "；".join(bad_counts) or "三棵都对得上")
+
+    def grid_state():
+        return page.evaluate("""() => { const t = document.querySelector('.lge-cells');
+          const cells = [...document.querySelectorAll('#ltree .lslot')];
+          return {tabs: document.querySelectorAll('.lge-tabs [data-t]').length,
+            rails: [...document.querySelectorAll('.lge-rail')].map(e => e.innerText.trim()),
+            rows: document.querySelectorAll('.lge-rowwrap').length,
+            cols: t ? getComputedStyle(t).gridTemplateColumns.split(' ').length : 0,
+            cells: cells.length,
+            perk: cells.filter(e => e.tagName === 'BUTTON').length,
+            unk: cells.filter(e => e.classList.contains('unk')).length,
+            none: cells.filter(e => e.classList.contains('none')).length,
+            names: cells.filter(e => e.tagName === 'BUTTON').map(e => (e.querySelector('.nm')||{}).innerText.trim()),
+            tags: cells.filter(e => e.querySelector('.lge-tag')).length,
+            h2: (document.querySelector('#ltree h2')||{}).innerText.replace(/\\s+/g,' ').trim()}; }""")
+
+    g = grid_state()
+    t0 = trees[0]
+    # 注意"未公开"的格子也带 perk 号（形如 unknown-113508，不在这 21 个专长里），
+    # 所以挑真专长必须同时排掉 empty 与 unknown——只判 perk 存在会把它们算进来（第一版就崩在这）。
+    named = lambda t: [s for s in t["slots"] if s.get("perk") and not s.get("empty") and not s.get("unknown")]
+    want_names = [perks[s["perk"]]["nameCn"] for s in
+                  sorted(named(t0), key=lambda s: (s["row"], s["col"]))]
+    check("格子按客户端坐标铺满 rows × cols，排号一行一个",
+          g["rows"] == t0["rows"] and g["cells"] == t0["rows"] * t0["cols"]
+          and g["cols"] == t0["cols"] and g["rails"] == ["第%d排" % (i + 1) for i in range(t0["rows"])],
+          "%d 排 × %d 列 = %d 格（数据 %d × %d），排号 %s" % (g["rows"], g["cols"], g["cells"],
+                                                        t0["rows"], t0["cols"], g["rails"]))
+    check("三种格子各是各的数：专长 / 未公开 / 这一排没这个位置",
+          g["perk"] == known(t0) and g["unk"] == unk(t0)
+          and g["perk"] + g["unk"] + g["none"] == t0["rows"] * t0["cols"],
+          "专长 %d / 未公开 %d / 空 %d（数据 %d / %d）" % (g["perk"], g["unk"], g["none"],
+                                                      known(t0), unk(t0)))
+    check("格子里的专长名与顺序等于这份数据按坐标排出来的",
+          g["names"] == want_names, "页面 %s ／ 数据 %s" % (g["names"], want_names))
+    pre_n = len([p for p in perks.values() if p["treeId"] == t0["id"] and p.get("prerequisiteCn")])
+    check("有前置的格子都挂了角标，数量与数据一致", g["tags"] == pre_n,
+          "画 %d 个，数据里这一棵有前置的 %d 个" % (g["tags"], pre_n))
+
+    # ---- ② 详情栏：没选时不空，选了说这个专长 ----
+    det0 = page.evaluate("""() => ({legend: document.querySelectorAll('.lge-legend li').length,
+      read: [...document.querySelectorAll('#ldet .lge-read > span')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
+      perk: !!document.querySelector('.lge-perk')})""")
+    t0perks = [p for p in perks.values() if p["treeId"] == t0["id"]]
+    # 读数里 <b>数</b>标签 是紧挨着写的（间距靠 CSS 的 gap），innerText 里不会有空格，
+    # 所以比的是"去掉所有空白之后一样"，不是比字符串相等——否则这条会假红。
+    want_read = ["%d个专长" % len(t0perks),
+                 "%d层最多可点" % sum(p.get("maxRank") or 0 for p in t0perks),
+                 "%d个要先点前置" % len([p for p in t0perks if p.get("prerequisiteCn")])]
+    squash = lambda xs: [re.sub(r"\s+", "", x) for x in xs]
+    check("没选专长时详情栏仍有内容（图例三条 + 这一棵的三行读数）",
+          det0["legend"] == 3 and not det0["perk"] and squash(det0["read"]) == squash(want_read),
+          "读数 %s ／ 数据 %s" % (det0["read"], want_read))
+    withpre = [p for p in t0perks if p.get("prerequisiteCn")]
+    pid = withpre[0]["id"]
+    page.evaluate("() => document.querySelector('[data-perk=\"%s\"]').click()" % pid)
+    page.wait_for_timeout(700)
+    d = page.evaluate("""() => { const c = document.querySelector('.lge-perk'); if (!c) return null;
+      return {name: (c.querySelector('h2')||{}).innerText.trim(),
+        dots: c.querySelectorAll('.lge-ranks .rd').length,
+        rank: (c.querySelector('.lge-ranks .mono')||{}).innerText.trim(),
+        meta: [...c.querySelectorAll('.lmeta > span')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
+        jump: (c.querySelector('.lge-jump')||{}).innerText,
+        on: document.querySelectorAll('#ltree .lslot.on').length,
+        bad: [...c.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth === 0).length}; }""")
+    p0 = perks[pid]
+    check("点一个专长：详情说的名字、层数、位置、所属树全部对得上数据",
+          d and d["name"] == p0["nameCn"] and d["rank"] == "最多 %d 层" % p0["maxRank"]
+          and d["dots"] == min(p0["maxRank"], 8)
+          and ("位置：第 %d 排第 %d 列" % (p0["row"] + 1, p0["col"] + 1)) in d["meta"]
+          and ("属于：%s" % p0["treeCn"]) in d["meta"] and d["on"] == 1 and d["bad"] == 0,
+          json.dumps(d, ensure_ascii=False))
+    pre_name = d.get("jump") or ""
+    page.evaluate("() => document.querySelector('.lge-jump').click()")
+    page.wait_for_timeout(700)
+    d2 = page.evaluate("""() => { const c = document.querySelector('.lge-perk');
+      return c ? {name: (c.querySelector('h2')||{}).innerText.trim(),
+        on: [...document.querySelectorAll('#ltree .lslot.on')].map(e => e.dataset.perk),
+        tree: (document.querySelector('.lge-tab.on b')||{}).innerText.trim()} : null; }""")
+    hit = [p for p in perks.values() if p["nameCn"] == pre_name]
+    check("点前置那个名字：直接选中前置专长，树也跟着切过去",
+          d2 and hit and d2["name"] == pre_name and d2["on"] == [hit[0]["id"]]
+          and d2["tree"] == hit[0]["treeCn"],
+          "点的是「%s」→ %s" % (pre_name, json.dumps(d2, ensure_ascii=False)))
+
+    # ---- ③ 换树清选中，别把上一棵的选中态留在空栏里 ----
+    t1 = trees[1]
+    page.evaluate("() => document.querySelector('[data-t=\"%s\"]').click()" % t1["id"])
+    page.wait_for_timeout(700)
+    sw = page.evaluate("""() => ({on: document.querySelectorAll('#ltree .lslot.on').length,
+      perk: !!document.querySelector('.lge-perk'),
+      names: [...document.querySelectorAll('#ltree BUTTON.lslot .nm')].map(e => e.innerText.trim()),
+      cells: document.querySelectorAll('#ltree .lslot').length})""")
+    want1 = [perks[s["perk"]]["nameCn"] for s in
+             sorted(named(t1), key=lambda s: (s["row"], s["col"]))]
+    check("换一棵树：格子与名字跟着换，上一棵的选中态清掉、详情回到概览",
+          sw["on"] == 0 and not sw["perk"] and sw["names"] == want1
+          and sw["cells"] == t1["rows"] * t1["cols"],
+          "%d 格 / 选中 %d / %s" % (sw["cells"], sw["on"], sw["names"][:3]))
+
+    # ---- ④ 六组挑战：默认只开第一组，搜索自动展开，内容一条不少 ----
+    ch = page.evaluate("""() => ({blocks: document.querySelectorAll('#lch .lchgrp').length,
+      open: [...document.querySelectorAll('#lch [aria-expanded]')].filter(e => e.getAttribute('aria-expanded') === 'true').length,
+      vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length,
+      all: document.querySelectorAll('#lch tbody tr').length,
+      heads: [...document.querySelectorAll('.lchhead > b')].map(e => e.innerText.trim()),
+      sums: [...document.querySelectorAll('.lchhead > .mono')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
+      counter: (document.querySelector('.field .mono')||{}).innerText.trim()})""")
+    g0 = groups[0]
+    want_sums = ["%d 项 · 合计 %d 点" % (len(g["items"]), sum(x.get("points") or 0 for x in g["items"]))
+                 for g in groups]
+    check("六组挑战的组头写着项数与合计点数，数全部来自明细",
+          ch["blocks"] == len(groups) == 6 and ch["heads"] == [g["nameCn"] for g in groups]
+          and ch["sums"] == want_sums, "；".join(ch["sums"]) + " ／ 数据 " + "；".join(want_sums))
+    check("默认只展开第一组，但 66 行内容一条不少（折叠是藏起来不是删掉）",
+          ch["open"] == 1 and ch["vis"] == len(g0["items"]) and ch["all"] == len(all_items)
+          and ch["counter"] == "%d / %d 项" % (len(all_items), len(all_items)),
+          "展开 %d 组，可见 %d 行 / DOM %d 行（数据 %d 项）" % (ch["open"], ch["vis"], ch["all"], len(all_items)))
+    page.evaluate("() => document.querySelectorAll('.lchhead')[1].click()")
+    page.wait_for_timeout(500)
+    ch2 = page.evaluate("""() => ({open: [...document.querySelectorAll('#lch [aria-expanded]')]
+        .filter(e => e.getAttribute('aria-expanded') === 'true').length,
+      vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length})""")
+    check("点第二组的组头能展开，可见行数跟着加上去",
+          ch2["open"] == 2 and ch2["vis"] == len(g0["items"]) + len(groups[1]["items"]),
+          "展开 %d 组 / 可见 %d 行（前两组 %d + %d）"
+          % (ch2["open"], ch2["vis"], len(g0["items"]), len(groups[1]["items"])))
+    k = "25级"
+    hits = [x for x in all_items if k in ((x.get("nameCn") or "") + " " + (x.get("requirement") or "")
+            + " " + (x.get("sub") or "") + " " + (x.get("group") or ""))]
+    page.fill(".field input[type=search]", k)
+    page.wait_for_timeout(900)
+    cs = page.evaluate("""() => ({blocks: document.querySelectorAll('#lch .lchgrp').length,
+      open: [...document.querySelectorAll('#lch [aria-expanded]')].filter(e => e.getAttribute('aria-expanded') === 'true').length,
+      vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length,
+      counter: (document.querySelector('.field .mono')||{}).innerText.trim(),
+      hl: document.querySelectorAll('#lch mark, #lch .hl').length})""")
+    check("搜索时命中的组自动展开（折叠不会把搜索结果藏起来），计数按命中走",
+          cs["blocks"] >= 1 and cs["open"] == cs["blocks"] and cs["vis"] == len(hits)
+          and cs["counter"] == "%d / %d 项" % (len(hits), len(all_items)),
+          "命中 %d 组 / 展开 %d / 可见 %d 行（数据 %d 条含「%s」）" % (cs["blocks"], cs["open"], cs["vis"], len(hits), k))
+    page.fill(".field input[type=search]", "")
+    page.wait_for_timeout(700)
+    # 清空搜索后应该回到"用户自己点开的那两组"（第一组默认开 + 上面手动开的第二组），
+    # 不是停在搜索时的全部展开。期望值写 2 不写 1：这一步之前确实手动展开过一组，
+    # 要求搜索把用户自己的展开状态也清掉不是这一轮定的行为。
+    back = page.evaluate("() => ({open: [...document.querySelectorAll('#lch [aria-expanded]')]"
+                         ".filter(e => e.getAttribute('aria-expanded') === 'true').length,"
+                         " blocks: document.querySelectorAll('#lch .lchgrp').length})")
+    check("清空搜索回到用户自己的展开状态，不是停在全部展开；六组都回来了",
+          back == {"open": 2, "blocks": len(groups)},
+          "%s（应 %d 组展开 / %d 组都在）" % (back, 2, len(groups)))
+
+    # ---- ⑤ 锚点走站内路由（首页那批死链就是栽在裸 #id 上），点一下真的滚 ----
+    anch = page.evaluate("""() => [...document.querySelectorAll('.lge-anchor a')].map(a => ({
+      t: a.innerText.trim(), h: a.getAttribute('href')}))""")
+    check("页内三个锚点走站内路由地址，不写裸 #id",
+          [a["t"] for a in anch] == ["传承树", "传承挑战", "进度奖励"]
+          and all(a["h"].startswith("#/legacy?to=") for a in anch),
+          json.dumps(anch, ensure_ascii=False))
+    page.evaluate("() => window.scrollTo(0, 0)")
+    page.wait_for_timeout(300)
+    page.evaluate("() => document.querySelectorAll('.lge-anchor a')[2].click()")
+    page.wait_for_timeout(1200)
+    check("点锚点真的滚到那一段",
+          page.evaluate("() => { const r = document.getElementById('lgr').getBoundingClientRect();"
+                        "return window.scrollY > 400 && r.top < window.innerHeight; }"))
+
+    # ---- ⑥ 两档视口的几何与红线 ----
+    body = page.evaluate("() => document.querySelector('#main').innerText")
+    check("这一页不出现百分比与掉率措辞（红线）",
+          not re.search(r"\d+\s*%|掉率", body), "干净")
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-legacy.png"), full_page=True)
+    ctx.close()
+    mctx = browser.new_context(viewport={"width": 375, "height": 812})
+    mp = mctx.new_page()
+    mp.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    mp.wait_for_timeout(2200)
+    mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
+      cells: getComputedStyle(document.querySelector('.lge-cells')).gridTemplateColumns.split(' ').length,
+      wrap: getComputedStyle(document.querySelector('.ltreewrap')).gridTemplateColumns.split(' ').length,
+      small: [...document.querySelectorAll('.lge-tab, .lchhead, #ltree .lslot BUTTON, .lge-jump')]
+        .filter(e => { const r = e.getBoundingClientRect();
+          return r.width > 0 && Math.min(r.width, r.height) < 44; }).length,
+      cut: [...document.querySelectorAll('#ltree .lslot')].some(e => e.getBoundingClientRect().right > window.innerWidth + 1)})""")
+    check("传承页 375：整页不横溢、树仍按四列摆、详情叠到下面、没有格子被切掉",
+          mm["over"] == 0 and mm["cells"] == 4 and mm["wrap"] == 1 and not mm["cut"],
+          json.dumps(mm, ensure_ascii=False))
+    check("传承页 375：胶囊、组头、专长格、前置链接都够 44px 点击区",
+          mm["small"] == 0, "%d 个不够 44px" % mm["small"])
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-legacy-m.png"), full_page=True)
+    mctx.close()
+
 
 def test_bis(browser, base):
     """配装页（2026-10-16 站主拍板走 C 方案）。盯四件事：
@@ -4008,6 +4248,7 @@ SECTIONS = [
     ("spellbook", test_spellbook),
     ("bis", test_bis),
     ("css_tokens", test_css_tokens),
+    ("legacy_app", test_legacy_app),
     ("races", test_races),
     ("grouping", test_grouping),
     ("dungeon_data", test_dungeon_data),

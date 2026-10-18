@@ -232,3 +232,116 @@ nav.main a.nl:has(.nb) { padding-right:10px }
   .hrail, .cls9 { grid-template-columns:repeat(3, minmax(0, 1fr)) }
   .cls9 img { width:40px; height:40px }
 }
+
+/* =============================================================================
+   10-18 传承页视觉与交互重做（站主定：只用我们自己采到的那份数据，不再开红线）
+   新类一律 .lge-* / .lchhead 这种前缀，覆盖 app.css 里两栈共用的老类名只写在
+   这个"只由新站加载"的文件里——旧站那 19 页已冻结，不能跟着变。
+   ============================================================================= */
+
+/* 主卡那排读数：原来四颗小方框（.stats/.stat）读起来像四个按钮，改成一行"数 + 单位"的读数带 */
+.lge-read { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:var(--s3); font-size:12px;
+  color:var(--txt-dim) }
+.lge-read > span { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap }
+.lge-read b { font:700 19px/1 var(--font-mono); color:var(--gold-hi) }
+
+/* 三棵树：与导航带同一套语言（1px 描边 + 999px 圆角 + 选中填本角色） */
+.lge-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-top:var(--s4) }
+.lge-tab { display:inline-flex; align-items:center; gap:7px; min-height:36px; padding:0 14px;
+  background:var(--panel-2); border:1px solid var(--line); border-radius:999px;
+  color:var(--txt-dim); cursor:pointer;
+  transition:border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out) }
+.lge-tab b { font-size:13.5px; font-weight:600; color:var(--txt) }
+.lge-tab .mono { font-size:11.5px; color:var(--gold) }
+.lge-tab .dim { color:var(--txt-muted); font-size:11px }
+.lge-tab:hover { border-color:var(--gold-deep) }
+.lge-tab.on { background:var(--gold-line-soft); border-color:var(--gold); color:var(--gold-hi) }
+.lge-tab.on b { color:var(--gold-hi) }
+.lge-tab:focus-visible { outline:2px solid var(--azure); outline-offset:2px }
+
+/* 页内三段锚点：href 走 hrefOf 出合法路由，点击只做平滑滚动（见 LegacyPage 的注释） */
+.lge-anchor { display:flex; gap:16px; margin-top:var(--s3); padding-top:var(--s3);
+  border-top:1px solid var(--line); font-size:12.5px }
+.lge-anchor a { color:var(--txt-muted); text-decoration:none; position:relative;
+  transition:color var(--dur-1) var(--ease-out) }
+.lge-anchor a:hover { color:var(--gold-hi); text-decoration:none }
+
+/* 树格：每排左边挂排号，"行"从此有意义；格子仍按客户端坐标摆，不重排 */
+/* --cols 由模板按那一棵树的列数写进内联 style（:style="{ '--cols': curTree.cols }"）。
+   这里给一个默认值兜底：内联 style 优先级更高，正常永远被覆盖，
+   只有 JS 没跑起来时才会退回四列——总比网格塌成一列好。 */
+.lge-grid { display:flex; flex-direction:column; gap:var(--s2); margin-top:var(--s2); --cols:4 }
+.lge-rowwrap { display:flex; align-items:stretch; gap:10px }
+.lge-rail { flex:0 0 46px; display:flex; align-items:center; justify-content:flex-end;
+  font-size:10.5px; color:var(--txt-muted); letter-spacing:.02em; white-space:nowrap }
+.lge-cells { flex:1 1 auto; min-width:0; display:grid; gap:var(--s2);
+  grid-template-columns:repeat(var(--cols, 4), minmax(0, 1fr)) }
+/* 空格与"未公开"从此不是一回事：空格子只剩一点轮廓，虚线框整页只有未公开在用 */
+.lslot.none { background:none; border:1px solid rgba(255,255,255,.045); opacity:1 }
+.lslot.unk { border-color:var(--line-2) }
+/* 有前置的格子在图标角上挂一个极小的标，别等到点开才知道 */
+.lge-tag { position:absolute; left:-2px; top:-6px; font:600 9px/1 var(--font-mono);
+  font-style:normal; color:var(--txt-muted); background:var(--panel-2);
+  border:1px solid var(--line); border-radius:999px; padding:2px 5px }
+.lslot .lcell { position:relative }
+
+/* 详情栏默认态：三行读数 + 图例，不再是一个空盒子等人点 */
+.lge-legend { list-style:none; margin:var(--s4) 0 0; padding:0; display:flex;
+  flex-direction:column; gap:9px; font-size:12.5px; color:var(--txt-dim) }
+.lge-legend li { display:flex; align-items:center; gap:9px }
+.lg { flex:0 0 auto; width:18px; height:18px; border-radius:4px }
+.lg-perk { background:var(--elev); border:1px solid var(--gold-deep) }
+.lg-unk { background:none; border:1px dashed var(--line-2) }
+.lg-none { background:none; border:1px solid rgba(255,255,255,.06) }
+
+/* 详情栏选中态：大图标 + 名字 + 层数点条 + 三行元信息 */
+.lge-prow { display:flex; align-items:center; gap:var(--s3) }
+.lge-pico { position:relative; display:block; width:52px; height:52px; flex:0 0 auto }
+.lge-pico svg { width:100%; height:100% }
+.lge-pico .ico { position:absolute; left:0; top:0; width:100%; height:100%;
+  object-fit:cover; border-radius:6px }
+.lge-ptitle h2 { margin:0 0 6px }
+.lge-ranks { display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--txt-dim) }
+.lge-ranks .rd { width:8px; height:8px; border-radius:50%; background:var(--gold-deep) }
+.lge-ranks .mono { margin-left:4px; color:var(--gold) }
+.ldetail .lmeta { margin-top:var(--s4) }
+/* 前置可点：点了直接选中那个专长（跨树会先切树，见 selectPerk） */
+.lge-jump { background:none; border:0; border-bottom:1px dashed var(--gold-deep);
+  padding:0; color:var(--gold-hi); font:inherit; font-weight:600; cursor:pointer }
+.lge-jump:hover { border-bottom-style:solid }
+.lge-jump:focus-visible { outline:2px solid var(--azure); outline-offset:2px }
+
+/* 六组挑战改成可折叠：整页原来 4900 多像素，六张表连着铺没人滚得完 */
+.lchhead { display:flex; align-items:center; gap:var(--s3); width:100%; text-align:left;
+  background:none; border:0; padding:0; margin:0 0 var(--s2); cursor:pointer;
+  min-height:44px; color:var(--txt-title); font-family:var(--font-display); font-size:19px; font-weight:700 }
+.lchhead > .mono { margin-left:auto; font-family:var(--font-mono); font-size:12px;
+  color:var(--txt-dim); font-weight:400 }
+.lchcaret { flex:0 0 auto; width:9px; height:9px; margin-left:2px;
+  border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+  transform:rotate(45deg) translate(-2px, -2px);
+  transition:transform var(--dur-1) var(--ease-out) }
+.lchgrp.closed .lchcaret { transform:rotate(-45deg) translate(-1px, -1px) }
+.lchhead:focus-visible { outline:2px solid var(--azure); outline-offset:3px }
+.lchgrp { transition:border-color var(--dur-1) var(--ease-out) }
+.lchgrp.closed { border-color:var(--line) }
+.lchgrp:hover { border-color:var(--gold-deep) }
+
+/* 入场只在树切换与折叠展开时给一次轻反馈，不做循环 */
+@keyframes lgeFade { from { opacity:0; transform:translateY(4px) } to { opacity:1; transform:none } }
+.lge-cells { animation:lgeFade .2s var(--ease-out) both }
+.lchbody { animation:lgeFade .18s var(--ease-out) both }
+@media (prefers-reduced-motion: reduce) {
+  .lge-cells, .lchbody { animation:none }
+  .lge-tab, .lchcaret, .lge-anchor a, .lchgrp { transition:none }
+}
+
+@media (max-width:899px) {
+  .ltreewrap { grid-template-columns:minmax(0, 1fr) }
+  .lge-rail { flex:0 0 30px; font-size:9.5px }
+  .lge-tab { min-height:44px; padding:0 13px }
+  .lge-anchor { gap:14px }
+  .lge-read b { font-size:17px }
+  .lchhead { font-size:17px }
+  .lchhead > .mono { font-size:11px }
+}
