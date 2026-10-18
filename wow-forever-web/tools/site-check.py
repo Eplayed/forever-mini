@@ -2828,6 +2828,56 @@ def test_app(browser, base):
     ctx375.close()
     page.screenshot(path=os.path.join(SHOT_DIR, "app-home-1440.png"), clip=None, full_page=False)
 
+    # ---- 10-18 站主实拍：种族页第一排头像被阵营条的组头盖掉一半 ----
+    # 成因不在这一页：app.css 给 .fhead 写了 position:sticky;top:44px，而它外面那层 .facband
+    # 是 overflow:hidden（城市原画要裁进圆角里），sticky 的参照物于是变成这条带自己。
+    # 带不滚，top:44px 就成了"把组头从常规流里往下推 44px"，而 sticky 不额外占位，
+    # 下面的格子留在原位被这条不透明、z-index 更高的组头压住 32px。
+    # 所以这里钉两层：① 组头不许再是 sticky（改回 static 是这一版的定案）；
+    # ② 每个头像的顶边中点与左边中点必须命中自己——**命中测试要先把元素滚进视口**，
+    #    在视口外 elementFromPoint 返回 null，第一版探针就是那样把"在屏幕外"误报成"被盖住"的。
+    def face_hits(vp):
+        c2 = browser.new_context(viewport={"width": vp, "height": 812})
+        p2 = c2.new_page()
+        p2.goto(APP_BASE + "/#/races", wait_until="networkidle")
+        p2.wait_for_timeout(2200)
+        geo = p2.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => {
+          const h = b.querySelector('.fhead'), g = b.querySelector('.racegrid');
+          return {pos: h ? getComputedStyle(h).position : '', z: h ? getComputedStyle(h).zIndex : '',
+            overlap: (h && g) ? Math.round(h.getBoundingClientRect().bottom - g.getBoundingClientRect().top) : null,
+            bandOverflow: getComputedStyle(b).overflow}; })""")
+        n = p2.evaluate("() => document.querySelectorAll('.racecard .rface').length")
+        bad = []
+        for i in range(n):
+            p2.evaluate("i => document.querySelectorAll('.racecard .rface')[i]"
+                        ".scrollIntoView({block:'center'})", i)
+            p2.wait_for_timeout(110)
+            r = p2.evaluate("""i => { const f = document.querySelectorAll('.racecard .rface')[i];
+              const b = f.getBoundingClientRect();
+              const hits = [[b.left + b.width / 2, b.top + 3], [b.left + 3, b.top + b.height / 2]]
+                .map(([x, y]) => { const el = document.elementFromPoint(x, y);
+                  if (!el) return '视口外';
+                  if (el === f || f.contains(el)) return null;
+                  return el.tagName + '.' + (typeof el.className === 'string' ? el.className : ''); })
+                .filter(Boolean);
+              return {race: (f.closest('.racecard').querySelector('.rcn') || {}).innerText, hits: hits}; }""", i)
+            if r["hits"]:
+                bad.append("%s→%s" % (r["race"], r["hits"]))
+        p2.screenshot(path=os.path.join(SHOT_DIR, "app-races-heads-%s.png" % vp))
+        c2.close()
+        return geo, bad
+
+    geo_d, bad_d = face_hits(1440)
+    check("种族页：阵营条的组头不再 sticky（sticky 落在 overflow:hidden 的带里会把组头推下 44px 盖住头像）",
+          len(geo_d) == 2 and all(x["pos"] == "static" and (x["overlap"] or 0) <= 0
+                                  and x["bandOverflow"] == "hidden" for x in geo_d),
+          json.dumps(geo_d, ensure_ascii=False))
+    check("种族页 1440：十个头像逐格做命中测试，没有一个被别的元素盖住",
+          not bad_d, "；".join(bad_d) or "10 个全部露出")
+    geo_m, bad_m = face_hits(375)
+    check("种族页 375：头像同样没有一个被盖住", not bad_m, "；".join(bad_m) or "10 个全部露出")
+    page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    page.wait_for_timeout(1200)
     page.screenshot(path=os.path.join(SHOT_DIR, "app-nav-narrow.png"))
     ctx.close()
     for label, path, key in pages:

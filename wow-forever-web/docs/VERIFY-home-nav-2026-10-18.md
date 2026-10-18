@@ -187,3 +187,42 @@ python3 -u tools/site-check.py --app       # 整站结果见下
 方向必须反过来，否则下一轮谁把点画回来都没人发现。
 
 跑完 `--only app` 与整站的结果记在下面，别凭印象写。
+
+---
+
+# 追加二：种族页头像被盖住（同日，站主发来截图"种族页面中图片被遮挡了"）
+
+## 十一、量出来的数与成因
+
+站主截图里联盟/部落两条带的第一排种族头像头顶被切。实测 **`.fhead` 底边压在 `.racegrid` 顶边下面 32px**。
+成因是一条 sticky 落错了参照物：`app.css:1145` `.fhead{position:sticky;top:44px;z-index:2;background:var(--panel)}`
+本意"滚动时吸在站头下面"，但它的祖先 `.facband` 是 `overflow:hidden`（城市原画要裁进圆角），
+**sticky 的参照物于是变成这条带自己**，而带不产生纵向滚动 → `top:44px` 变成"把组头往下推 44px"，
+sticky 又不占位，格子留在原位被这条不透明组头压住。
+
+与 `board.css` 里那条"窄屏 `.boardwrap` 是横滚容器，sticky 参照物变成它"是**同一类错的第二个实例**。
+
+## 十二、改法与验证
+
+`.fhead{position:static}`，只写在 app 独有的 `board.css`。带内本来就不会滚，去掉不损失任何行为。
+重叠 **32 → −12**（留 12px 间距）。旧站实测同样 32px（:8817 与 :8821 数值一致），
+说明是共享样式的老问题不是这轮改出来的——旧站冻结，列进**开放项 36** 等站主定。
+
+断言 +3（`[16]` 节）：组头必须 `static` 且与格子重叠 ≤ 0；十个头像在 1440 与 375 各做一次**命中测试**
+（顶边中点 + 左边中点，`elementFromPoint` 必须命中自己或后代）。
+
+**这一轮自己踩的探针坑值得记**：第一版命中测试没先 `scrollIntoView`，375 上报"2 个头像被盖住"——
+实际是那些格子在视口外，`elementFromPoint` 返回 `null` 被我当成了"被盖住"。
+滚进视口再测才是 0。教训：**命中测试必须先保证目标在视口内**，否则报的是视口，不是层叠。
+
+反向验过：改回 `static` 之前实测 `pos: sticky / overlap: 32`，那两条断言当时都会红（旧站现在仍然是这个值）。
+
+## 十三、跑了什么
+
+```
+cd app && npm run build                    # ✓ built in 5.45s
+python3 -u tools/site-check.py --app --only app   # 通过 62 / 62（上一轮 59，+3）
+python3 -u tools/site-check.py --app       # 整站最终数见台账那一行
+```
+
+截图：`docs/screenshots/check-2026-10-18/app-races-heads-1440.png` 与 `-375.png`。

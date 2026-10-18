@@ -345,3 +345,14 @@ nav.main a.nl:has(.nb) { padding-right:10px }
   .lchhead { font-size:17px }
   .lchhead > .mono { font-size:11px }
 }
+
+/* ---- 种族页：阵营条的组头把头像盖住一半（2026-10-18 站主实拍发现）----
+   app.css:1145 给 .fhead 写了 position:sticky; top:44px; z-index:2; background:var(--panel)，
+   本意是"滚动时吸在站头下面"。但它外面那层 .facband 是 overflow:hidden（阵营城市原画要裁进圆角里），
+   sticky 的参照物于是变成这条带自己——而这条带永远不产生纵向滚动，
+   所以 top:44px 不是吸顶，是把组头从常规流里往下推了 44px。
+   sticky 不额外占位，下面的 .racegrid 留在原位，被这条不透明、z-index 更高的组头
+   压住顶部 32px：第一排种族头像就是在那里被切掉的。
+   实测两栈一样（旧站 :8817 也重叠 32px），是共享样式的老问题，不是这轮改出来的。
+   带内本来就不会滚，sticky 在这里毫无作用——直接改回 static。 */
+.fhead { position:static }
