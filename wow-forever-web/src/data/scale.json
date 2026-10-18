@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-17",
+  "generatedAt": "2026-10-18",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -118,10 +118,10 @@
   "bisItems": 175,
   "search": 5307,
   "talentPreview": 466,
-  "releases": 49,
+  "releases": 50,
   "navNew": [
-   "首页",
    "界面",
+   "首页",
    "配装"
   ],
   "glossary": 215,
