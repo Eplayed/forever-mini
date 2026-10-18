@@ -47,8 +47,11 @@
 ```
 cd app && npm run build                    # ✓ built in 4.50s
 python3 -u tools/site-check.py --app --only legacy_app   # 通过 21 / 21，全部通过
-python3 -u tools/site-check.py --app       # 整站：见下面补的最终数
+python3 -u tools/site-check.py --app       # 整站：通过 833 / 833，全部通过（上一轮 812，+21）
 ```
+
+跑的顺序：`--only css_tokens,legacy_app` 先 22/22，再整站 833/833；
+补完第 51 条本站更新（`releases` 50 → 51、`navNew` 多出「传承」）后**又重跑了一遍整站，仍是 833/833**。
 
 `[6d]` 节 21 条全部对着 `legacy.json` 现算，关键读数：
 `4 排 × 4 列 = 16 格`、`专长 7 / 未公开 2 / 空 7`、
