@@ -15,13 +15,8 @@
         <span class="hicon"><img :src="HEAD_ART" alt="" loading="lazy"></span>
         <h1 class="pt">世界：区域、稀有与书</h1>
       </div>
-      <div class="stats">
-        <div class="stat"><b>{{ zones.length }}</b>个区域</div>
-        <div class="stat"><b>{{ newZones.length }}</b>个无限新增</div>
-        <div class="stat"><b>{{ rares.length }}</b>个已定位稀有</div>
-        <div class="stat"><b>{{ books.length }}</b>本书有坐标</div>
-        <div class="stat"><b>{{ maps.length }}</b>张客户端地图</div>
-      </div>
+      <!-- 2026-10-19 站主：这一排五个读数不要了（红框圈出来那句）。
+           四个面板的标签上本来就各带自己的数，这排是把同一批数换个说法再列一遍。 -->
       <div class="picks">
         <button v-for="(t, i) in TABS" :key="t[0]" type="button" class="pick" :class="{ on: tab === t[0] }"
                 :data-t="t[0]" :aria-pressed="tab === t[0] ? 'true' : 'false'" @click="pickTab(t[0])">
@@ -38,12 +33,12 @@
       <template v-if="newZoneRows.length">
         <div class="band"><b>无限新增区域</b><span class="dim">飞行路线多未定</span>
           <span class="dim mono">{{ newZoneRows.length }} 个</span></div>
-        <div class="zgrid"><ZoneCard v-for="z in newZoneRows" :key="z.id" :z="z" seal="新" @open="goZone" /></div>
+        <div class="zgrid"><ZoneCard v-for="z in newZoneRows" :key="z.id" :z="z" :items="zoneItems(z)" seal="新" @open="goZone" /></div>
       </template>
       <template v-for="c in continentRows" :key="c.id">
         <div class="band"><b>{{ c.nameCn }}</b>
           <span class="dim mono">{{ c.rows.length }} 个</span></div>
-        <div class="zgrid"><ZoneCard v-for="z in c.rows" :key="z.id" :z="z" @open="goZone" /></div>
+        <div class="zgrid"><ZoneCard v-for="z in c.rows" :key="z.id" :z="z" :items="zoneItems(z)" @open="goZone" /></div>
       </template>
       <div v-if="!zoneRows.length" class="card"><div class="empty">没有匹配的区域，换个名字试试。</div></div>
 
@@ -72,7 +67,7 @@
     <!-- 面板二：稀有精英 -->
     <template v-else-if="tab === 'rares'">
       <div class="card">
-        <h2>先挑区域</h2>
+        <!-- 2026-10-19 站主：「先挑区域」那行标题不要了，筛选胶囊自己说清楚就行 -->
         <div class="picks">
           <button type="button" class="pick" :class="{ on: !zone }" data-z="" @click="zone = ''">
             <b>全部</b><span class="dim mono">{{ rares.length }}</span></button>
@@ -86,9 +81,8 @@
         <div class="band"><b>{{ g.zone }}</b><span class="dim">{{ lvTxt(g.meta) }} · {{ g.meta.faction || '阵营未定' }}</span>
           <span class="dim mono">{{ g.rows.length }} 个</span></div>
         <!-- 2026-10-18 站主：一个区域一张图，稀有直接标在图上，平时虚着、指上去实体并弹信息。
-             原来这里是"每条稀有各带一张同样的区域图 + 一个展开掉落的小抽屉"，
-             一个区域八条就是八张重复图；掉落清单整个搬进点位浮层，抽屉撤掉。 -->
-        <RareMap :zone="g.zone" :rows="g.rows" />
+             2026-10-19 抽成 PinMap，四个面板共用（掉落清单在浮层与列表两处，小抽屉已撤）。 -->
+        <PinMap :alt="g.zone + '的区域地图'" :items="rareItems(g.rows)" />
       </template>
       <div v-for="s in w.rareSets" :key="s.nameCn" class="card">
         <h2>套装 · {{ s.nameCn }}</h2>
@@ -134,26 +128,10 @@
       <template v-for="g in bookGroups" :key="g.zone">
         <div class="band"><b>{{ g.zone }}</b><span class="dim">{{ lvTxt(g.meta) }}{{ g.rows[0].zoneKind === 'city' ? ' · 主城' : '' }}</span>
           <span class="dim mono">{{ g.rows.length }} 本</span></div>
-        <div v-if="g.rows[0].mapFile" class="zthumb">
-          <ZoneMap :map-file="g.rows[0].mapFile" :map-id="g.rows[0].mapId" :mark="g.rows[0].mark" :alt="g.zone" />
-        </div>
-        <div class="boardwrap">
-          <table class="board bktab">
-            <colgroup><col class="c-ico"><col style="width:26%"><col style="width:16%"><col><col class="c-id"></colgroup>
-            <thead><tr><th class="c-ico">书</th><th>名称</th><th>容器</th><th>位置</th><th class="c-id">物品 ID</th></tr></thead>
-            <tbody>
-              <tr v-for="b in g.rows" :key="b.id">
-                <td class="ich"><IconCell :icon-key="b.iconKey || ''" :seed="b.itemId" :cn="b.nameCn" small /></td>
-                <td><b><HlText :text="b.nameCn" :q="q" /></b>
-                  <span v-if="b.forever" class="tag new">无限新增</span>
-                  <span v-if="b.place" class="dim"> · {{ b.place }}</span></td>
-                <td class="dim">{{ b.container || '—' }}</td>
-                <td><span class="mono dim">{{ coordTxt(b) }}</span></td>
-                <td class="mono dim">{{ b.itemId ? '#' + b.itemId : '—' }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <!-- 2026-10-19：书也换成同一套点位图。原来这里是一张只标了一个点的缩略图 + 一张五列表，
+             那张图上一个点都对不上"这一区有几本书"；现在每本书一个点位，
+             容器/位置/物品编号进浮层，列表行带上容器，一条信息都没少。 -->
+        <PinMap :alt="g.zone + '的书籍地图'" :items="bookItems(g.rows)" />
       </template>
       <div v-if="rewards.length" class="card">
         <h2>上交多少本换什么</h2>
@@ -203,43 +181,45 @@
               <span v-if="bag.bag.bind" class="dim">{{ bag.bag.bind }}</span>
               <span v-if="bag.usableLevel" class="dim mono">{{ bag.usableLevel }} 级可用</span></div>
           </div>
-          <table class="mtx">
-            <thead><tr><th>机制项</th><th>记录值</th></tr></thead>
-            <tbody>
-              <tr v-for="p in bagRows" :key="p[0]">
-                <td>{{ p[0] }}</td><td class="mono">{{ p[1] }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- 这张表原来是裸 <table class="mtx">，375 上撑到 680px 宽、整页横溢 338px
+               （本轮新增的窄屏断言照出来的既有问题，不是这版改出来的）。
+               收进 .board 骨架：table-layout:fixed + 列宽百分比，值再长也只在自己列里换行。 -->
+          <div class="boardwrap">
+            <table class="board bagtab">
+              <colgroup><col style="width:40%"><col></colgroup>
+              <thead><tr><th>机制项</th><th>记录值</th></tr></thead>
+              <tbody>
+                <tr v-for="p in bagRows" :key="p[0]">
+                  <td>{{ p[0] }}</td><td class="mono">{{ p[1] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="card">
           <h2>营地点清单 · {{ camps.length }}<template v-if="q.trim()">（搜索 {{ q }} 命中）</template></h2>
           <div v-if="!camps.length" class="empty">这个关键词下没有营点。</div>
-          <div v-else class="rgrid">
-            <div v-for="(c, i) in camps" :key="i" class="rarecard">
-              <ZoneMap :map-file="c.mapFile" :map-id="c.mapId" :mark="c.mark" :alt="c.zone" />
-              <div class="rbody">
-                <b>{{ c.zone || '区域未标' }}</b>
-                <span v-if="c.landmark" class="dim">{{ c.landmark }}</span>
-                <span v-if="c.whereCn" class="dim">{{ c.whereCn }}</span>
-                <span class="mono dim">{{ coordTxt(c) }}</span>
-              </div>
-            </div>
-          </div>
         </div>
+        <!-- 2026-10-19：营地也走点位图。原来五条各带一张同样的区域缩略图，
+             现在按区域归到一张图上标点，一条图对应一个去处 -->
+        <template v-for="g in campGroups" :key="g.zone">
+          <div class="band"><b>{{ g.zone }}</b><span class="dim">{{ lvTxt(g.meta) }} · {{ g.meta.faction || '阵营未定' }}</span>
+            <span class="dim mono">{{ g.rows.length }} 处</span></div>
+          <PinMap :alt="g.zone + '的营地点地图'" :items="campItems(g.rows)" />
+        </template>
       </template>
     </template>
   </template>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
 import { levelRangeText as lvTxt, lvStart, coordText as coordTxt } from '../lib/fmt.js';
 import ZoneCard from '../components/ZoneCard.vue';
 import ZoneMap from '../components/ZoneMap.vue';
-import RareMap from '../components/RareMap.vue';
+import PinMap from '../components/PinMap.vue';
 import IconCell from '../components/IconCell.vue';
 
 /* 主卡卡片头用的图：与首页图标轨「世界」那一格同一张本地原画（站内同一板块同一张脸）。
@@ -261,10 +241,17 @@ function boot() {
     .then((d) => { w.value = d; })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
-// 首页搜索带着板块与词跳进来（#/world?t=rares&q=…），落地就该是筛好的样子
+// 首页搜索带着板块与词跳进来（#/world?t=rares&q=…），落地就该是筛好的样子。
+// 必须 watch：这一页自己也在 /world 上，从"区域"跳到"稀有"只换查询参数、
+// 不换组件实例——只在建立时读一次的话，点了不会切面板（2026-10-19 实测到）。
 const route = useRoute();
-if (TABS.some((t) => t[0] === route.query.t)) tab.value = String(route.query.t);
-if (route.query.q) q.value = String(route.query.q);
+function applyQuery() {
+  const t = String(route.query.t || '');
+  if (TABS.some((x) => x[0] === t)) { tab.value = t; zone.value = ''; }
+  if (route.query.q !== undefined) q.value = String(route.query.q || '');
+}
+applyQuery();
+watch(() => [route.query.t, route.query.q], applyQuery);
 boot();
 onMounted(boot);   // 从别的页切回来看不到数据时（比如 JSON 改名），重新拉一次
 
@@ -341,4 +328,63 @@ const bagRows = computed(() => {
 
 function pickTab(t) { tab.value = t; zone.value = ''; }
 function goZone(name) { zone.value = name; tab.value = 'rares'; }
+
+/* ---- 四个面板共用的点位数据（2026-10-19）----
+   把各自的记录归一成 PinMap 认的形状：kind 决定点位颜色与浮层长相，
+   pin 表示"这条到底能不能标在图上"——没有 mapFile 就不标，不猜位置。 */
+function base(r) {
+  return {
+    key: r.id, pin: !!(r.mapFile && r.mark),
+    x: r.mark ? r.mark.x : null, y: r.mark ? r.mark.y : null,
+    mapFile: r.mapFile || '', mapId: r.mapId || '',
+    name: r.nameCn || '', en: r.nameEn || ''
+  };
+}
+function rareItems(rows) {
+  return rows.map((r) => Object.assign(base(r), {
+    kind: 'rare', tag: r.kind === 'rare-elite' ? '稀有精英' : '稀有',
+    isNew: !!r.isNew, level: lvTxt(r), coord: coordTxt(r),
+    drops: r.drops || [],
+    hint: (r.drops || []).length ? '掉落 ' + r.drops.length + ' 件' : ''
+  }));
+}
+function bookItems(rows) {
+  return rows.map((b) => Object.assign(base(b), {
+    kind: 'book', tag: '书', isNew: !!b.forever,
+    level: b.afterLevel ? b.afterLevel + ' 级后' : '',
+    coord: coordTxt(b),
+    rows: [['容器', b.container || '—'], ['位置', b.place || '—'],
+      ['物品编号', b.itemId ? '#' + b.itemId : '—']],
+    hint: b.place || b.container || ''
+  }));
+}
+function campItems(rows) {
+  return rows.map((c, i) => Object.assign(base(c), {
+    // 营地记录没有 id，用「区域 + 序号」当键；名字用区域名，地标进浮层那两行
+    key: (c.zone || 'x') + '-' + i, name: c.zone || '区域未标', kind: 'camp',
+    tag: '营地', isNew: false, level: '', coord: coordTxt(c),
+    rows: [['地标', c.landmark || '—'], ['方位', c.whereCn || '—']],
+    hint: c.landmark || ''
+  }));
+}
+
+function groupBy(list) {
+  const m = {};
+  list.forEach((x) => { const k = x.zone || '未归区域'; (m[k] = m[k] || []).push(x); });
+  return m;
+}
+const campGroups = computed(() => {
+  const by = groupBy(camps.value);
+  return Object.keys(by)
+    .sort((a, b) => lvStart(zByName.value[a]) - lvStart(zByName.value[b]) || (a < b ? -1 : 1))
+    .map((k) => ({ zone: k, rows: by[k], meta: zByName.value[k] || {} }));
+});
+/* 区域卡上那张图要一次标三类东西：本区域的稀有 + 书 + 营地。
+   顺序固定按 稀有→书→营地，编号才稳定（断言与列表都靠编号对位） */
+function zoneItems(z) {
+  const n = z.nameCn;
+  return rareItems(rares.value.filter((r) => r.zone === n))
+    .concat(bookItems(books.value.filter((x) => x.zone === n)))
+    .concat(campItems(allCamps.value.filter((c) => c.zone === n)));
+}
 </script>

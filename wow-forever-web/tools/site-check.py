@@ -706,6 +706,168 @@ def test_css_tokens(browser, base):
           "没声明：%s" % "; ".join("%s→%s" % (k, ",".join(v[:2])) for k, v in sorted(missing.items()))[:220]
           if missing else "干净")
 
+def test_world_pins(browser, base):
+    """世界页四个面板共用一套点位图（2026-10-19 站主：把稀有那版铺到其余三个面板）。
+       盯六件事：① 每个面板的带数/点位数/列表行数都等于 world.json 现算的数；
+       ② 区域卡上一张图混标三类，颜色分得开、总数等于该区域的 rareCount+bookCount+营地数；
+       ③ 区域卡的点位与"跳到该区域稀有列表"的按钮不互相嵌套（按钮套按钮是无效 HTML）；
+       ④ 红框里那两处文字确实没了（首屏五格读数、"先挑区域"标题）；
+       ⑤ 只换查询参数也要切面板（/world?t=zones → ?t=books 不换组件实例）；
+       ⑥ 桌面与 375 都不横溢。"""
+    print("\n[6e] 世界页四面板共用点位图")
+    import json
+    W = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
+    zones = W.get("zones") or []
+    rares = W.get("rares") or []
+    books = W.get("books") or []
+    camps = [p for c in ((W.get("bagTool") or {}).get("camps") or []) for p in (c.get("places") or [])]
+    pin = lambda x: bool(x.get("mapFile") and x.get("mark"))
+    znames = {z["nameCn"] for z in zones}
+    want_zone_pins = len([x for x in rares + books + camps if pin(x) and x.get("zone") in znames])
+    book_zones = {b.get("zone") for b in books if b.get("zone")}
+    camp_zones = {c.get("zone") for c in camps if c.get("zone")}
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:140]))
+
+    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    page.wait_for_timeout(2400)
+    z = page.evaluate("""() => { const cards = [...document.querySelectorAll('.zcard')];
+      return { cards: cards.length, compact: document.querySelectorAll('.zband.compact').length,
+        dots: document.querySelectorAll('.zcard .zdot').length,
+        kinds: [...new Set([...document.querySelectorAll('.zcard .zdot')].map(d => d.dataset.kind))],
+        nested: cards.filter(c => c.matches('button') || c.querySelector('button button')).length,
+        bodyBtn: document.querySelectorAll('.zcard button.zbody').length,
+        noimg: [...document.querySelectorAll('.zcard .zbig-id')].map(e => e.innerText.trim()),
+        listInCompact: document.querySelectorAll('.zband.compact .zlist').length,
+        heroStats: (document.querySelector('.cdhead.big').closest('.card').querySelectorAll('.stats') || []).length,
+        over: document.documentElement.scrollWidth - window.innerWidth}; }""")
+    check("区域卡每张都带一张点位图，三类点混标在同一张上",
+          z["cards"] == len(zones) == 44 and z["compact"] == 44
+          and z["dots"] == want_zone_pins and sorted(z["kinds"]) == ["book", "camp", "rare"]
+          and z["listInCompact"] == 0,
+          "%d 张卡 / %d 个点（数据能标在区域卡上的 %d）/ 类型 %s"
+          % (z["cards"], z["dots"], want_zone_pins, z["kinds"]))
+    check("区域卡不是按钮套按钮（点位自己是按钮，整卡改成外层 div + 下半截按钮）",
+          z["nested"] == 0 and z["bodyBtn"] == len(zones),
+          "嵌套 %d 处 / 信息区按钮 %d 个" % (z["nested"], z["bodyBtn"]))
+    check("整张图都标不出点的区域，仍然写明这是哪张地图的编号，不留空盒",
+          len(z["noimg"]) == len([x for x in zones if not x.get("mapFile")])
+          and all("地图编号" in t for t in z["noimg"]),
+          "%d 张没图的：%s" % (len(z["noimg"]), z["noimg"]))
+    check("首屏那排五格读数按站主要求撤掉了", z["heroStats"] == 0, "还剩 %d 组" % z["heroStats"])
+    check("区域面板不横向溢出", z["over"] == 0, "溢出 %d" % z["over"])
+    # 某一张卡上的点数必须等于该区域 rareCount + bookCount + 营地数（数据是本轮重算过的）
+    per = page.evaluate("""() => { const out = {};
+      [...document.querySelectorAll('.zcard')].forEach(c => {
+        out[c.dataset.zone] = c.querySelectorAll('.zdot').length; });
+      return out; }""")
+    camp_by = {}
+    for c in camps:
+        if pin(c):
+            camp_by[c["zone"]] = camp_by.get(c["zone"], 0) + 1
+    bad = []
+    for zz in zones:
+        n = zz["nameCn"]
+        want = int(zz.get("rareCount") or 0) + int(zz.get("bookCount") or 0) + camp_by.get(n, 0)
+        if per.get(n) != want:
+            bad.append("%s 画 %s 个，数据 %s 稀有 + %s 书 + %s 营地 = %d"
+                       % (n, per.get(n), zz.get("rareCount"), zz.get("bookCount"),
+                          camp_by.get(n, 0), want))
+    check("每张区域卡上的点数 = 该区域的稀有数 + 书本数（+ 营地），逐张核过",
+          not bad, "；".join(bad[:3]) or "44 张全部对得上")
+    # 计数是这一轮刚从"抄上游汇总"改成"按实际条数算"的，钉住别又漂回去
+    drift = [z2["nameCn"] for z2 in zones
+             if int(z2.get("rareCountSource") or 0) != int(z2.get("rareTotal") or 0)]
+    check("数据侧：上游那份汇总的说法留在 rareCountSource 里没删，页面用的是按实际算的那份",
+          all("rareCountSource" in z2 and "rareTotal" in z2 for z2 in zones) and len(drift) > 0,
+          "%d 个区域的上游汇总与实际条数不一致（正是本轮改掉的）" % len(drift))
+
+    page.goto(APP_BASE + "/#/world?t=books", wait_until="networkidle")
+    page.wait_for_timeout(2200)
+    bk = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
+      dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
+      kinds: [...new Set([...document.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
+      old: document.querySelectorAll('.zthumb, table.bktab').length,
+      over: document.documentElement.scrollWidth - window.innerWidth})""")
+    check("书籍面板也走点位图：一个有书的区域一张图，36 本全标出来",
+          bk["bands"] == len(book_zones) and bk["dots"] == len([x for x in books if pin(x)])
+          and bk["rows"] == len(books) and bk["kinds"] == ["book"],
+          "%d 张图 / %d 个点 / %d 行（数据 %d 本、有坐标的 %d 个区域）"
+          % (bk["bands"], bk["dots"], bk["rows"], len(books), len(book_zones)))
+    check("书籍原来那张只标一个点的缩略图与五列表已撤掉（信息搬进浮层与列表行）",
+          bk["old"] == 0 and bk["over"] == 0, "残留 %d 处" % bk["old"])
+    page.evaluate("() => document.querySelectorAll('.zband')[0].scrollIntoView({block:'center'})")
+    page.wait_for_timeout(300)
+    page.hover(".zdot")
+    page.wait_for_timeout(500)
+    pop = page.evaluate("""() => { const p = document.querySelector('.zpop'); if (!p) return null;
+      return {kind: p.className, title: (p.querySelector('b') || {}).innerText.trim(),
+        rows: [...p.querySelectorAll('.zpop-x > div')]
+        .map(e => e.innerText.replace(/\\s+/g, ' ').trim())}; }""")
+    # 页面第一个浮层是"按等级排下来第一个有书的区域"的第一本书，
+    # 不能拿数据里的 books[0] 去比（那是另一本）——按浮层标题回数据里找它自己
+    b0 = [x for x in books if pin(x) and x.get("nameCn") == (pop or {}).get("title")]
+    want0 = b0 and ["容器 %s" % (b0[0].get("container") or "—"),
+                    "位置 %s" % (b0[0].get("place") or "—"),
+                    "物品编号 #%s" % b0[0].get("itemId")]
+    check("书点位浮层把原来表格里那三列带回来了（容器 / 位置 / 物品编号）",
+          pop and "k-book" in pop["kind"] and pop["rows"] == want0,
+          json.dumps({"pop": pop, "want": want0}, ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-world-books.png"))
+
+    page.goto(APP_BASE + "/#/world?t=bag", wait_until="networkidle")
+    page.wait_for_timeout(2200)
+    bg = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
+      dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
+      kinds: [...new Set([...document.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
+      old: document.querySelectorAll('#main .rarecard').length,
+      over: document.documentElement.scrollWidth - window.innerWidth})""")
+    check("营地面板也走点位图：5 处按区域归到图上，旧的「五条各一张缩略图」撤掉",
+          bg["bands"] == len(camp_zones) and bg["dots"] == len([c for c in camps if pin(c)])
+          and bg["rows"] == len(camps) and bg["kinds"] == ["camp"] and bg["old"] == 0
+          and bg["over"] == 0,
+          "%d 张图 / %d 个点 / %d 行（数据 %d 处）" % (bg["bands"], bg["dots"], bg["rows"], len(camps)))
+
+    # 只换查询参数也要切面板：/world?t=zones → ?t=books 不换组件实例，
+    # 只在建立时读一次 route.query 的话点了不会动（2026-10-19 实测到，搜索跳这一页就撞这条）
+    # 先归位到"区域"再只换查询参数——不先归位的话上一段停在营地面板，比的是残留状态
+    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    page.wait_for_timeout(1800)
+    first_tab = page.evaluate("() => (document.querySelector('.pick.on b') || {}).innerText")
+    page.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
+    page.wait_for_timeout(1800)
+    now = page.evaluate("""() => ({tab: (document.querySelector('.pick.on b') || {}).innerText,
+      bands: document.querySelectorAll('.zband').length,
+      stats: document.querySelectorAll('#main .stats').length,
+      head: document.querySelector('#main').innerText.indexOf('先挑区域') >= 0})""")
+    check("只换查询参数（不换组件）也要切面板",
+          first_tab == "区域" and now["tab"] == "稀有精英" and now["bands"] == 41,
+          "%s → %s（%d 张图）" % (first_tab, now["tab"], now["bands"]))
+    check("「先挑区域」那行标题按站主要求撤掉了", not now["head"],
+          "页面上还有" if now["head"] else "已无")
+
+    mctx = browser.new_context(viewport={"width": 375, "height": 812})
+    mp = mctx.new_page()
+    for t in ("zones", "books", "bag"):
+        mp.goto(APP_BASE + "/#/world?t=" + t, wait_until="networkidle")
+        mp.wait_for_timeout(2000)
+        mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
+          cut: [...document.querySelectorAll('.zdot')].some(d => { const r = d.getBoundingClientRect();
+            return r.width && (r.right > window.innerWidth + 1 || r.left < -1); }),
+          small: [...document.querySelectorAll('.zbody')].filter(e => {
+            const r = e.getBoundingClientRect(); return r.width && r.height < 44; }).length})""")
+        check("世界页 %s 面板 375：整页不横溢、点位没被切到屏外、区域信息区够 44px 点击区" % t,
+              mm["over"] == 0 and not mm["cut"] and mm["small"] == 0,
+              json.dumps(mm, ensure_ascii=False))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-world-zones-m.png"))
+    mctx.close()
+    check("世界页四个面板走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    ctx.close()
+
+
 def test_legacy_app(browser, base):
     """新站传承页（2026-10-18 视觉与交互重做，站主定"只用我们自己采到的那份数据"）。
        盯四件事：① 界面上每个数与每个名字都等于 legacy.json 现算的结果，一个都不手抄；
@@ -4432,6 +4594,7 @@ SECTIONS = [
     ("spellbook", test_spellbook),
     ("bis", test_bis),
     ("css_tokens", test_css_tokens),
+    ("world_pins", test_world_pins),
     ("legacy_app", test_legacy_app),
     ("races", test_races),
     ("grouping", test_grouping),

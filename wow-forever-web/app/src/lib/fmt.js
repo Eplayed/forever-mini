@@ -83,7 +83,7 @@ export function lvStart(rec) {
   return (a[0] === null || a[0] === undefined) ? 99 : a[0];
 }
 /* 坐标那一行：图上百分比 + 世界坐标，缺哪个就少说哪个，两个都没有才写"坐标待补"。
-   2026-10-18 从 WorldPage 里提出来——区域稀有那张点位图（RareMap）要用同一句说法，
+   2026-10-18 从 WorldPage 里提出来给点位图用；2026-10-19 点位图抽成 PinMap、四个面板共用，
    两处各写一遍迟早会漂。 */
 export function coordText(o) {
   const s = [];

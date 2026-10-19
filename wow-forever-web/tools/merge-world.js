@@ -427,6 +427,39 @@ const payload = {
 // 上游没切出小地图的区域：写进 meta，界面据此说明"为什么这块是空的"
 payload.meta.mapsWithoutImage = zones.filter((z) => z.mapId && !z.mapFile).map((z) => z.nameCn);
 
+/* 区域卡上"几个稀有 / 几本书"原来是直接抄另一份上游汇总（xiyou.where[].count / shuji.zones[].books），
+   和我们真正合并进这份文件的 rares[] / books[] 是两本账：2026-10-19 实测 44 个区域里 29 个对不上
+   （丹莫罗卡上写 1、实际 7 条；西部荒野写 0、实际 9 条；银松森林写 0、实际 7 条）。
+   汇总那份不删——它记的是"上游当时说这块地方有几个"，改存 rareCountSource / bookCountSource；
+   页面显示的 rareCount / bookCount 一律按这份文件里真实存在的条数现算，
+   并且只算"有图有坐标、地图上真能标出一个点"的那些——标不出来的不占数，
+   免得卡上写 8 个、点开来只有 7 个（那正是上一轮稀有精英页定的口径）。 */
+const rarePin = {}, rareAll = {}, bookPin = {}, bookAll = {};
+rares.forEach((r) => {
+  const k = r.zone; if (!k) return;
+  rareAll[k] = (rareAll[k] || 0) + 1;
+  if (r.mapFile && r.mark) rarePin[k] = (rarePin[k] || 0) + 1;
+});
+books.forEach((b) => {
+  const k = b.zone; if (!k) return;
+  bookAll[k] = (bookAll[k] || 0) + 1;
+  if (b.mapFile && b.mark) bookPin[k] = (bookPin[k] || 0) + 1;
+});
+let drift = 0;
+zones.forEach((z) => {
+  const n = z.nameCn;
+  z.rareCountSource = rareCountByZone[n] || 0;
+  z.bookCountSource = bookCountByZone[n] || 0;
+  z.rareTotal = rareAll[n] || 0;
+  z.bookTotal = bookAll[n] || 0;
+  z.rareCount = rarePin[n] || 0;
+  z.bookCount = bookPin[n] || 0;
+  if (z.rareCountSource !== z.rareTotal || z.bookCountSource !== z.bookTotal) drift++;
+});
+payload.meta.countNote = '区域卡上的稀有数与书本数按这一份文件里真实存在、且地图上能标出点的条数现算；'
+  + '上游另有一份"这块地方有几个"的汇总，原样留在 rareCountSource / bookCountSource，没有删。';
+console.log('区域计数对账：44 个区域里 %d 个的"上游汇总"与"实际条数"不一致，已改成按实际算', drift);
+
 fs.writeFileSync(path.join(ROOT, 'world.json'), JSON.stringify(payload, null, 1) + '\n');
 const has = (k) => payload[k].length;
 console.log('区域 %d（%s）· 其中无限新增 %d · 客户端地图 %d',

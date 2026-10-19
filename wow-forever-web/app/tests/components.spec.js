@@ -84,20 +84,32 @@ describe('ZoneMap', () => {
 
 describe('ZoneCard', () => {
   const z = { nameCn: '泽风岛', levelRange: [3, 12], faction: '争夺地带', rareCount: 8, bookCount: 0, isNew: true, flight: 'no-route', mapFile: '', mapId: 2521 };
-  it('整卡可点并带上区域名钩子', async () => {
+  const pin = (n, kind) => ({
+    key: 'k' + n, kind: kind || 'rare', pin: true, name: '怪' + n, en: '', x: 40 + n, y: 50 + n,
+    mapFile: 'img/art/maps/2521.webp', mapId: 2521, tag: '稀有', isNew: false, level: '', coord: '', drops: [], rows: []
+  });
+  it('整卡可点并带上区域名钩子（2026-10-19 起可点的是下半截信息区，不是整张卡）', async () => {
     const w = mount(ZoneCard, { props: { z, seal: '新' } });
     expect(w.classes()).toContain('lk');
     expect(w.attributes('data-zone')).toBe('泽风岛');
-    await w.trigger('click');
+    await w.find('.zbody').trigger('click');
     expect(w.emitted('open')[0]).toEqual(['泽风岛']);
     expect(w.text()).toContain('8 个稀有');
     // 「没有飞行路线」回答的是玩家会问的事（这块地方能不能飞），与旧站 zoneCard 同一句
     expect(w.text()).toContain('没有飞行路线');
   });
+  it('卡里那张图带点位，且点位不是信息区按钮的子节点（按钮套按钮是无效 HTML）', () => {
+    const w = mount(ZoneCard, { props: { z, items: [pin(1), pin(2, 'book')] } });
+    const dots = w.findAll('.zcard .zdot');
+    expect(dots.length).toBe(2);
+    expect(w.find('.zband.compact').exists()).toBe(true);
+    expect(w.find('.zband.compact .zlist').exists()).toBe(false);   // 紧凑版不带列表
+    dots.forEach((d) => expect(d.element.closest('.zbody')).toBeNull());
+  });
   it('这一版没有数据的区域不可点，也不发 open，卡上不留占位句', async () => {
     const w = mount(ZoneCard, { props: { z: Object.assign({}, z, { rareCount: 0, bookCount: 0 }) } });
     expect(w.classes()).not.toContain('lk');
-    await w.trigger('click');
+    await w.find('.zbody').trigger('click');
     expect(w.emitted('open')).toBeFalsy();
     // 旧站那一格是空 span，不写"这一版还没有数据"这种讲我们自己的话
     expect(w.find('.zcnt').text()).toBe('');

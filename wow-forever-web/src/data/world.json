@@ -46,7 +46,8 @@
    "希利苏斯",
    "辛德拉",
    "达纳苏斯"
-  ]
+  ],
+  "countNote": "区域卡上的稀有数与书本数按这一份文件里真实存在、且地图上能标出点的条数现算；上游另有一份\"这块地方有几个\"的汇总，原样留在 rareCountSource / bookCountSource，没有删。"
  },
  "continents": [
   {
@@ -81,7 +82,7 @@
    "areaId": 1,
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
-   "rareCount": 1,
+   "rareCount": 7,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -96,7 +97,11 @@
     4,
     12
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 1,
+   "bookCountSource": 0,
+   "rareTotal": 7,
+   "bookTotal": 0
   },
   {
    "id": "elwynn-forest",
@@ -114,7 +119,7 @@
    "areaId": 12,
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
-   "rareCount": 2,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -129,7 +134,11 @@
     5,
     10
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 2,
+   "bookCountSource": 1,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "tirisfal-glades",
@@ -147,7 +156,7 @@
    "areaId": 85,
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
-   "rareCount": 4,
+   "rareCount": 13,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -162,7 +171,11 @@
     5,
     12
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 4,
+   "bookCountSource": 1,
+   "rareTotal": 13,
+   "bookTotal": 1
   },
   {
    "id": "westfall",
@@ -180,7 +193,7 @@
    "areaId": 40,
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -195,7 +208,11 @@
     9,
     18
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "loch-modan",
@@ -213,7 +230,7 @@
    "areaId": 38,
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
-   "rareCount": 1,
+   "rareCount": 7,
    "bookCount": 2,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -228,7 +245,11 @@
     10,
     18
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 1,
+   "bookCountSource": 2,
+   "rareTotal": 7,
+   "bookTotal": 2
   },
   {
    "id": "silverpine-forest",
@@ -246,7 +267,7 @@
    "areaId": 130,
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
-   "rareCount": 0,
+   "rareCount": 7,
    "bookCount": 2,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -261,7 +282,11 @@
     10,
     20
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 2,
+   "rareTotal": 7,
+   "bookTotal": 2
   },
   {
    "id": "redridge-mountains",
@@ -294,7 +319,11 @@
     15,
     25
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 8,
+   "bookTotal": 0
   },
   {
    "id": "duskwood",
@@ -327,7 +356,11 @@
     19,
     30
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 6,
+   "bookTotal": 0
   },
   {
    "id": "hillsbrad-foothills",
@@ -360,7 +393,11 @@
     20,
     31
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 6,
+   "bookTotal": 0
   },
   {
    "id": "wetlands",
@@ -378,7 +415,7 @@
    "areaId": 11,
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -393,7 +430,11 @@
     20,
     30
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "alterac-mountains",
@@ -411,7 +452,7 @@
    "areaId": 36,
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -426,7 +467,11 @@
     27,
     39
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "arathi-highlands",
@@ -444,7 +489,7 @@
    "areaId": 45,
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
-   "rareCount": 0,
+   "rareCount": 10,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -459,7 +504,11 @@
     30,
     40
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 10,
+   "bookTotal": 1
   },
   {
    "id": "stranglethorn-vale",
@@ -477,7 +526,7 @@
    "areaId": 33,
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -492,7 +541,11 @@
     30,
     44
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "badlands",
@@ -510,7 +563,7 @@
    "areaId": 3,
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -525,7 +578,11 @@
     36,
     45
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "riverglades",
@@ -558,7 +615,11 @@
     36,
     44
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 0,
+   "bookTotal": 0
   },
   {
    "id": "swamp-of-sorrows",
@@ -576,7 +637,7 @@
    "areaId": 8,
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
-   "rareCount": 1,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -591,7 +652,11 @@
     36,
     43
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 1,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "the-hinterlands",
@@ -609,7 +674,7 @@
    "areaId": 47,
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
-   "rareCount": 0,
+   "rareCount": 10,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -624,7 +689,11 @@
     41,
     49
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 10,
+   "bookTotal": 1
   },
   {
    "id": "searing-gorge",
@@ -642,7 +711,7 @@
    "areaId": 51,
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -657,7 +726,11 @@
     43,
     48
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "blasted-lands",
@@ -675,7 +748,7 @@
    "areaId": 4,
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -690,7 +763,11 @@
     46,
     55
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "western-plaguelands",
@@ -709,7 +786,7 @@
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
    "rareCount": 0,
-   "bookCount": 0,
+   "bookCount": 2,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
@@ -723,7 +800,11 @@
     46,
     57
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 11,
+   "bookTotal": 2
   },
   {
    "id": "burning-steppes",
@@ -741,7 +822,7 @@
    "areaId": 46,
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -756,7 +837,11 @@
     50,
     59
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "deadwind-pass",
@@ -789,7 +874,11 @@
     50,
     60
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 0,
+   "bookTotal": 0
   },
   {
    "id": "eastern-plaguelands",
@@ -807,8 +896,8 @@
    "areaId": 139,
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
-   "rareCount": 1,
-   "bookCount": 0,
+   "rareCount": 10,
+   "bookCount": 3,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
@@ -822,7 +911,11 @@
     54,
     59
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 1,
+   "bookCountSource": 0,
+   "rareTotal": 10,
+   "bookTotal": 3
   },
   {
    "id": "durotar",
@@ -840,7 +933,7 @@
    "areaId": 14,
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
-   "rareCount": 2,
+   "rareCount": 8,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -855,7 +948,11 @@
     5,
     10
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 2,
+   "bookCountSource": 0,
+   "rareTotal": 8,
+   "bookTotal": 0
   },
   {
    "id": "mulgore",
@@ -873,7 +970,7 @@
    "areaId": 215,
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
-   "rareCount": 3,
+   "rareCount": 12,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -888,7 +985,11 @@
     5,
     10
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 3,
+   "bookCountSource": 0,
+   "rareTotal": 12,
+   "bookTotal": 0
   },
   {
    "id": "teldrassil",
@@ -906,7 +1007,7 @@
    "areaId": 141,
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
-   "rareCount": 2,
+   "rareCount": 8,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -921,7 +1022,11 @@
     5,
     11
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 2,
+   "bookCountSource": 0,
+   "rareTotal": 8,
+   "bookTotal": 0
   },
   {
    "id": "the-barrens",
@@ -939,7 +1044,7 @@
    "areaId": 17,
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
-   "rareCount": 7,
+   "rareCount": 33,
    "bookCount": 3,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -954,7 +1059,11 @@
     10,
     25
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 7,
+   "bookCountSource": 3,
+   "rareTotal": 33,
+   "bookTotal": 3
   },
   {
    "id": "darkshore",
@@ -972,7 +1081,7 @@
    "areaId": 148,
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -987,7 +1096,11 @@
     11,
     19
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "stonetalon-mountains",
@@ -1005,7 +1118,7 @@
    "areaId": 406,
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
-   "rareCount": 2,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1020,7 +1133,11 @@
     15,
     25
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 2,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "ashenvale",
@@ -1053,7 +1170,11 @@
     19,
     30
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 12,
+   "bookTotal": 0
   },
   {
    "id": "thousand-needles",
@@ -1071,7 +1192,7 @@
    "areaId": 400,
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1086,7 +1207,11 @@
     24,
     35
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "desolace",
@@ -1104,7 +1229,7 @@
    "areaId": 405,
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
-   "rareCount": 0,
+   "rareCount": 6,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1119,7 +1244,11 @@
     30,
     39
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 6,
+   "bookTotal": 1
   },
   {
    "id": "dustwallow-marsh",
@@ -1137,7 +1266,7 @@
    "areaId": 15,
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1152,7 +1281,11 @@
     36,
     43
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "tanaris",
@@ -1170,7 +1303,7 @@
    "areaId": 440,
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
-   "rareCount": 1,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1185,7 +1318,11 @@
     40,
     50
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 1,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "feralas",
@@ -1203,7 +1340,7 @@
    "areaId": 357,
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
-   "rareCount": 0,
+   "rareCount": 9,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1218,7 +1355,11 @@
     41,
     60
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 9,
+   "bookTotal": 1
   },
   {
    "id": "azshara",
@@ -1236,7 +1377,7 @@
    "areaId": 16,
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
-   "rareCount": 0,
+   "rareCount": 10,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1251,7 +1392,11 @@
     42,
     55
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 1,
+   "rareTotal": 10,
+   "bookTotal": 1
   },
   {
    "id": "felwood",
@@ -1270,7 +1415,7 @@
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
    "rareCount": 0,
-   "bookCount": 0,
+   "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
@@ -1284,7 +1429,11 @@
     47,
     54
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 8,
+   "bookTotal": 1
   },
   {
    "id": "ungoro-crater",
@@ -1317,7 +1466,11 @@
     48,
     55
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 5,
+   "bookTotal": 0
   },
   {
    "id": "silithus",
@@ -1350,7 +1503,11 @@
     55,
     59
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 9,
+   "bookTotal": 0
   },
   {
    "id": "winterspring",
@@ -1369,7 +1526,7 @@
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
    "rareCount": 0,
-   "bookCount": 0,
+   "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
     {
@@ -1383,7 +1540,11 @@
     55,
     60
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 7,
+   "bookTotal": 1
   },
   {
    "id": "mount-hyjal",
@@ -1416,7 +1577,11 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "客户端暂时没给出区域等级",
+   "rareCountSource": 1,
+   "bookCountSource": 0,
+   "rareTotal": 1,
+   "bookTotal": 0
   },
   {
    "id": "shendralas",
@@ -1449,7 +1614,11 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "客户端暂时没给出区域等级",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 0,
+   "bookTotal": 0
   },
   {
    "id": "darnassus",
@@ -1482,7 +1651,11 @@
     null,
     null
    ],
-   "levelStatus": "客户端暂时没给出区域等级"
+   "levelStatus": "客户端暂时没给出区域等级",
+   "rareCountSource": 0,
+   "bookCountSource": 0,
+   "rareTotal": 0,
+   "bookTotal": 0
   },
   {
    "id": "zephras-isle",
@@ -1515,7 +1688,11 @@
     3,
     12
    ],
-   "levelStatus": "ok"
+   "levelStatus": "ok",
+   "rareCountSource": 8,
+   "bookCountSource": 0,
+   "rareTotal": 8,
+   "bookTotal": 0
   }
  ],
  "maps": [

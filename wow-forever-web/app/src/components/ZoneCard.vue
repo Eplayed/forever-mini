@@ -1,7 +1,14 @@
 <template>
-  <button type="button" class="zcard" :class="{ lk: clickable }" :data-zone="z.nameCn" @click="click">
-    <ZoneMap :map-file="z.mapFile" :map-id="z.mapId" :alt="z.nameCn" />
-    <div class="zbody">
+  <div class="zcard" :class="{ lk: clickable }" :data-zone="z.nameCn">
+    <!-- 2026-10-19：卡里的地图换成 PinMap 紧凑版——这一张图上标出该区域能找到的
+         稀有 / 书 / 营地，指上去弹同一套浮层。根节点从 <button> 改成 <div>：
+         点位自己是按钮，按钮里套按钮是无效 HTML，浏览器会把内层挪出去，布局就散了。
+         下半截信息区改成按钮，点它仍然跳到该区域的稀有列表（与原来整卡可点等效）。
+         注释必须写在根节点里面：写在 <template> 与根元素之间会多出第二个根节点，
+         组件单测里 wrapper.classes() 直接变空数组（本轮踩过）。 -->
+    <PinMap :alt="z.nameCn + '的区域地图'" :items="items" compact
+            :fallback-map-file="z.mapFile || ''" :fallback-map-id="z.mapId || ''" />
+    <button type="button" class="zbody" :disabled="!clickable" :data-open="z.nameCn" @click="click">
       <b>{{ z.nameCn }}</b>
       <span v-if="seal" class="tag new">{{ seal }}</span>
       <span class="dim mono">{{ lv }}</span>
@@ -12,8 +19,8 @@
         <template v-if="z.rareCount && z.bookCount"> · </template>
         <template v-if="z.bookCount">{{ z.bookCount }} 本书</template>
       </span>
-    </div>
-  </button>
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -22,10 +29,11 @@
    （这块地方能不能飞），不是讲我们数据过程的备注。 */
 import { computed } from 'vue';
 import { levelRangeText as lvTxt } from '../lib/fmt.js';
-import ZoneMap from './ZoneMap.vue';
+import PinMap from './PinMap.vue';
 
 const props = defineProps({
   z: { type: Object, required: true },
+  items: { type: Array, default: () => [] },
   seal: { type: String, default: '' }
 });
 const emit = defineEmits(['open']);
