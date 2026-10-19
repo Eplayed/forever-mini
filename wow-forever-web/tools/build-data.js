@@ -207,6 +207,62 @@ var DQ_DUNGEONS = Object.keys(dqs.dungeons || {}).filter((k) => ((dqs.dungeons[k
 warns.push(`副本任务：${dqN} 条 / ${DQ_DUNGEONS} 座有记录，`
   + `${noQuest.length} 座两份资料都没有（多为无限新增本，这条本身就是结论）`);
 
+/* ---------- 副本坐标（2026-10-19 站主定：从 DF 那份插件只取"入口在哪"与"首领在副本里的哪儿"） ----------
+   单独一个文件（dungeon-geo.json），只有副本详情页读得到，列表页不背这份。
+   卡三件事：坐标必须在 0–100、首领名必须是这座本真有的那一条（不许凭空多出一个名字）、
+   没有那张底图时必须明确标 noMap——否则页面上会出现"有个点却画不出图"这种半句话。 */
+const geo = read('dungeon-geo.json');
+const geoArtMaps = new Set(Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).maps || {}));
+const geoBossNames = {};
+[].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || [])
+  .forEach((d) => { geoBossNames[d.id] = new Set((d.bosses || []).map((b) => b.nameCn)); });
+let geoEntry = 0, geoBossRows = 0, geoBossPts = 0, geoNoMap = 0;
+Object.keys(geo.dungeons || {}).forEach((did) => {
+  if (!ids.includes(did)) errs.push(`dungeon-geo：${did} 在 dungeons.json 里没有这座本`);
+  const e = geo.dungeons[did] || {};
+  const en = e.entry;
+  if (en) {
+    geoEntry += 1;
+    const bad = [[en.x, 'x'], [en.y, 'y']].filter((p) => !(p[0] >= 0 && p[0] <= 100));
+    if (bad.length) errs.push(`dungeon-geo ${did}：入口坐标 ${en.x},${en.y} 不在 0–100`);
+    if (!en.mapId) errs.push(`dungeon-geo ${did}：入口没带地图号，等于没说这组百分比是对着哪张图`);
+    if (!en.zone) errs.push(`dungeon-geo ${did}：入口没写在哪片区域`);
+    if (en.mapFile && !geoArtMaps.has(String(en.mapId))) {
+      errs.push(`dungeon-geo ${did}：mapFile 与地图号对不上（${en.mapId} → ${en.mapFile}）`);
+    }
+    if (!en.mapFile && !en.noMap) errs.push(`dungeon-geo ${did}：本地没那张图却没标 noMap`);
+    if (en.mapFile && en.noMap) errs.push(`dungeon-geo ${did}：既有 mapFile 又标 noMap`);
+    if (en.noMap) geoNoMap += 1;
+  }
+  Object.keys(e.bossPos || {}).forEach((bn) => {
+    if (!(geoBossNames[did] || new Set()).has(bn)) {
+      errs.push(`dungeon-geo ${did}：首领「${bn}」不在这座本的名单里，不许凭空多一个名字`);
+    }
+    geoBossRows += 1;      // 按首领条数算；一只首领可能给好几个刷新点，点数在下面单独数
+    (e.bossPos[bn] || []).forEach((p, i) => {
+      geoBossPts += 1;
+      if (!(p.x >= 0 && p.x <= 100) || !(p.y >= 0 && p.y <= 100)) {
+        errs.push(`dungeon-geo ${did}/${bn} 第 ${i + 1} 个点：${p.x},${p.y} 不在 0–100`);
+      }
+    });
+  });
+  if (!(e.provenance || []).length) errs.push(`dungeon-geo ${did}：没有出处记录`);
+  (e.provenance || []).forEach((p) => {
+    if (!p.url) errs.push(`dungeon-geo ${did}：出处没带来源`);
+    if (!p.checkedAt) errs.push(`dungeon-geo ${did}：出处没带核对日期`);
+  });
+});
+// 红线：这一份里不许出现任何概率措辞，也不许混进对方的讲解句子（百分号是最容易漏的信号）
+if (/%/.test(JSON.stringify(geo.dungeons || {}))) errs.push('dungeon-geo：坐标文件里出现了百分号');
+if ((geo.meta || {}).counts && geo.meta.counts.bossRows !== geoBossRows) {
+  errs.push(`dungeon-geo：meta.counts.bossRows=${geo.meta.counts.bossRows} 与实际 ${geoBossRows} 条不一致`);
+}
+var GEO_ENTRY = geoEntry;
+var GEO_BOSS_ROWS = geoBossRows;
+var GEO_BOSS_PTS = geoBossPts;
+warns.push(`副本坐标：入口 ${geoEntry} 座（本地缺那张区域图的 ${geoNoMap} 座）· `
+  + `首领位置 ${geoBossRows} 条首领 / ${geoBossPts} 个点（快照里名字对不上、没进成品的另计）`);
+
 // 客户端队伍查找器条目：单独一份文件（打进小程序会把座数带歪），界面在副本页并列显示
 const qu = read('queue.json');
 const qMeta = qu.meta || {};
@@ -560,6 +616,9 @@ if (fs.existsSync(artPath)) {
 // 首页与溯源页要的规模数字，边校验边收集，最后统一写进 scale.json（单一来源，不手抄）
 const scale = {};
 scale.dungeonQuests = DQ_TOTAL;
+scale.dungeonGeoEntry = GEO_ENTRY;      // 有入口坐标的座数
+scale.dungeonGeoBoss = GEO_BOSS_ROWS;   // 有位置的首领条数
+scale.dungeonGeoBossPoints = GEO_BOSS_PTS;  // 点数（一只首领可能给好几个）
 scale.dungeonQuestDungeons = DQ_DUNGEONS;
 
 // 专业：配方与采集点的口径检查（数据全部来自客户端解包转述）

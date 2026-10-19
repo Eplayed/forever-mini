@@ -1,0 +1,1892 @@
+{
+ "meta": {
+  "source": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+  "originFiles": [
+   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_DungeonEntry.lua",
+   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_BossPos.lua",
+   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_DungeonLoot.lua"
+  ],
+  "fetched": "2026-10-19",
+  "what": "副本入口在区域图上的百分比坐标 + 各首领在副本内部图上的百分比坐标（第三值是该图的层号）",
+  "boundary": "只取坐标、地图号与名字映射。DF 的 LICENSE 是「保留所有权利」，它的任何成段说明、任务目标文本、攻略句子、自绘副本图与载入图一律不取",
+  "nameBridge": "首领位置以英文名为键，站内首领只有中文名，中间过 Data_DungeonLoot 的「英文名→中文名」那一层（那座桥只取前两列，掉落与掉率不读）",
+  "slugAlias": {
+   "excavation_wetlands": "whelgars-excavation",
+   "razorfen_downs": "razor-krendor",
+   "sm_armory": "scarlet-monastery-armory",
+   "sm_cathedral": "scarlet-monastery-cathedral",
+   "sm_graveyard": "scarlet-monastery-graveyard",
+   "sm_library": "scarlet-monastery-library",
+   "stratholme_main": "stratholme-main-gate",
+   "stratholme_service": "stratholme-service-gate",
+   "the_deadmines": "deathmine",
+   "the_stockade": "the-stocks",
+   "zul_farrak": "zulfarrak"
+  },
+  "counts": {
+   "entryDungeons": 28,
+   "entrySkipped": 0,
+   "bossDungeons": 28,
+   "bossRows": 181,
+   "bossSkipped": 25
+  }
+ },
+ "entry": {
+  "blackfathom-deeps": {
+   "mapId": 1440,
+   "x": 14.1,
+   "y": 13.1,
+   "zone": "灰谷",
+   "dfSlug": "blackfathom_deeps"
+  },
+  "city-of-dalaran": {
+   "mapId": 1416,
+   "x": 8.0,
+   "y": 61.2,
+   "zone": "奥特兰克山脉",
+   "dfSlug": "city_of_dalaran"
+  },
+  "dire-maul-east": {
+   "mapId": 1444,
+   "x": 64.8,
+   "y": 30.2,
+   "zone": "菲拉斯",
+   "dfSlug": "dire_maul_east"
+  },
+  "dire-maul-north": {
+   "mapId": 1444,
+   "x": 62.5,
+   "y": 24.9,
+   "zone": "菲拉斯",
+   "dfSlug": "dire_maul_north"
+  },
+  "dire-maul-west": {
+   "mapId": 1444,
+   "x": 60.3,
+   "y": 30.2,
+   "zone": "菲拉斯",
+   "dfSlug": "dire_maul_west"
+  },
+  "whelgars-excavation": {
+   "mapId": 1437,
+   "x": 47.8,
+   "y": 56.3,
+   "zone": "湿地",
+   "dfSlug": "excavation_wetlands"
+  },
+  "gnomeregan": {
+   "mapId": 1426,
+   "x": 24.4,
+   "y": 39.8,
+   "zone": "丹莫罗",
+   "dfSlug": "gnomeregan"
+  },
+  "hall-of-thanes": {
+   "mapId": 1455,
+   "x": 28.2,
+   "y": 47.7,
+   "zone": "铁炉堡",
+   "dfSlug": "hall_of_thanes"
+  },
+  "maraudon": {
+   "mapId": 1443,
+   "x": 29.1,
+   "y": 62.5,
+   "zone": "凄凉之地",
+   "dfSlug": "maraudon"
+  },
+  "onyxias-lair": {
+   "mapId": 1445,
+   "x": 52.3,
+   "y": 76.1,
+   "zone": "尘泥沼泽",
+   "dfSlug": "onyxias_lair"
+  },
+  "ragefire-chasm": {
+   "mapId": 1454,
+   "x": 51.5,
+   "y": 49.7,
+   "zone": "奥格瑞玛",
+   "dfSlug": "ragefire_chasm"
+  },
+  "razor-krendor": {
+   "mapId": 1413,
+   "x": 49.1,
+   "y": 93.4,
+   "zone": "贫瘠之地",
+   "dfSlug": "razorfen_downs"
+  },
+  "razorfen-kraul": {
+   "mapId": 1413,
+   "x": 41.8,
+   "y": 89.4,
+   "zone": "贫瘠之地",
+   "dfSlug": "razorfen_kraul"
+  },
+  "ruins-of-lordaeron": {
+   "mapId": 1420,
+   "x": 65.0,
+   "y": 70.0,
+   "zone": "提瑞斯法林地",
+   "dfSlug": "ruins_of_lordaeron"
+  },
+  "scholomance": {
+   "mapId": 1422,
+   "x": 68.9,
+   "y": 72.8,
+   "zone": "西瘟疫之地",
+   "dfSlug": "scholomance"
+  },
+  "shadowfang-keep": {
+   "mapId": 1421,
+   "x": 44.8,
+   "y": 67.8,
+   "zone": "银松森林",
+   "dfSlug": "shadowfang_keep"
+  },
+  "scarlet-monastery-armory": {
+   "mapId": 1420,
+   "x": 85.2,
+   "y": 32.1,
+   "zone": "提瑞斯法林地",
+   "dfSlug": "sm_armory"
+  },
+  "scarlet-monastery-cathedral": {
+   "mapId": 1420,
+   "x": 85.2,
+   "y": 32.1,
+   "zone": "提瑞斯法林地",
+   "dfSlug": "sm_cathedral"
+  },
+  "scarlet-monastery-graveyard": {
+   "mapId": 1420,
+   "x": 85.2,
+   "y": 32.1,
+   "zone": "提瑞斯法林地",
+   "dfSlug": "sm_graveyard"
+  },
+  "scarlet-monastery-library": {
+   "mapId": 1420,
+   "x": 85.2,
+   "y": 32.1,
+   "zone": "提瑞斯法林地",
+   "dfSlug": "sm_library"
+  },
+  "stratholme-main-gate": {
+   "mapId": 1423,
+   "x": 27.1,
+   "y": 10.7,
+   "zone": "东瘟疫之地",
+   "dfSlug": "stratholme_main"
+  },
+  "stratholme-service-gate": {
+   "mapId": 1423,
+   "x": 43.5,
+   "y": 19.4,
+   "zone": "东瘟疫之地",
+   "dfSlug": "stratholme_service"
+  },
+  "sunken-temple": {
+   "mapId": 1435,
+   "x": 69.5,
+   "y": 52.5,
+   "zone": "悲伤沼泽",
+   "dfSlug": "sunken_temple"
+  },
+  "deathmine": {
+   "mapId": 1436,
+   "x": 42.5,
+   "y": 71.7,
+   "zone": "西部荒野",
+   "dfSlug": "the_deadmines"
+  },
+  "the-stocks": {
+   "mapId": 1453,
+   "x": 50.4,
+   "y": 66.4,
+   "zone": "暴风城",
+   "dfSlug": "the_stockade"
+  },
+  "uldaman": {
+   "mapId": 1418,
+   "x": 44.6,
+   "y": 12.1,
+   "zone": "荒芜之地",
+   "dfSlug": "uldaman"
+  },
+  "wailing-caverns": {
+   "mapId": 1413,
+   "x": 46.0,
+   "y": 36.4,
+   "zone": "贫瘠之地",
+   "dfSlug": "wailing_caverns"
+  },
+  "zulfarrak": {
+   "mapId": 1446,
+   "x": 38.7,
+   "y": 20.0,
+   "zone": "塔纳利斯",
+   "dfSlug": "zul_farrak"
+  }
+ },
+ "bosses": {
+  "blackfathom-deeps": {
+   "阿库麦尔": [
+    {
+     "x": 85.6,
+     "y": 86.6,
+     "floor": 2
+    }
+   ],
+   "阿奎尼斯男爵": [
+    {
+     "x": 41.5,
+     "y": 75.4,
+     "floor": 2
+    }
+   ],
+   "格里哈斯特": [
+    {
+     "x": 52.3,
+     "y": 55.1,
+     "floor": null
+    }
+   ],
+   "加摩拉": [
+    {
+     "x": 32.9,
+     "y": 60.2,
+     "floor": null
+    }
+   ],
+   "萨利维丝": [
+    {
+     "x": 10.1,
+     "y": 36.0,
+     "floor": null
+    }
+   ],
+   "洛古斯·杰特": [
+    {
+     "x": 38.8,
+     "y": 20.0,
+     "floor": 2
+    },
+    {
+     "x": 44.1,
+     "y": 23.4,
+     "floor": 2
+    },
+    {
+     "x": 35.4,
+     "y": 48.3,
+     "floor": 2
+    },
+    {
+     "x": 33.8,
+     "y": 72.3,
+     "floor": 2
+    }
+   ],
+   "瑟拉吉斯": [
+    {
+     "x": 60.6,
+     "y": 31.2,
+     "floor": 3
+    }
+   ]
+  },
+  "blackrock-depths": {
+   "弗莱拉斯大使": [
+    {
+     "x": 53.8,
+     "y": 48.8,
+     "floor": 2
+    }
+   ],
+   "贝尔加": [
+    {
+     "x": 24.0,
+     "y": 51.6,
+     "floor": null
+    }
+   ],
+   "达格兰·索瑞森大帝": [
+    {
+     "x": 93.2,
+     "y": 11.9,
+     "floor": 2
+    }
+   ],
+   "弗诺斯·达克维尔": [
+    {
+     "x": 61.3,
+     "y": 24.2,
+     "floor": null
+    }
+   ],
+   "安格弗将军": [
+    {
+     "x": 35.6,
+     "y": 57.0,
+     "floor": null
+    },
+    {
+     "x": 36.6,
+     "y": 84.4,
+     "floor": 2
+    }
+   ],
+   "傀儡统帅阿格曼奇": [
+    {
+     "x": 36.9,
+     "y": 65.0,
+     "floor": 2
+    }
+   ],
+   "审讯官格斯塔恩": [
+    {
+     "x": 47.5,
+     "y": 93.4,
+     "floor": null
+    }
+   ],
+   "驯犬者格雷布玛尔": [
+    {
+     "x": 49.5,
+     "y": 61.7,
+     "floor": null
+    }
+   ],
+   "伊森迪奥斯": [
+    {
+     "x": 56.1,
+     "y": 31.2,
+     "floor": null
+    }
+   ],
+   "洛考尔": [
+    {
+     "x": 49.4,
+     "y": 56.7,
+     "floor": null
+    }
+   ],
+   "玛格姆斯": [
+    {
+     "x": 81.7,
+     "y": 11.9,
+     "floor": 2
+    }
+   ],
+   "法拉克斯": [
+    {
+     "x": 53.2,
+     "y": 64.9,
+     "floor": 2
+    }
+   ],
+   "铁炉堡公主茉艾拉·铜须": [
+    {
+     "x": 93.1,
+     "y": 11.5,
+     "floor": 2
+    }
+   ],
+   "控火师罗格雷恩": [
+    {
+     "x": 54.2,
+     "y": 96.5,
+     "floor": 2
+    }
+   ],
+   "典狱官斯迪尔基斯": [
+    {
+     "x": 60.7,
+     "y": 67.3,
+     "floor": 2
+    }
+   ]
+  },
+  "dire-maul-east": {
+   "奥兹恩": [
+    {
+     "x": 55.4,
+     "y": 26.9,
+     "floor": 6
+    }
+   ],
+   "海多斯博恩": [
+    {
+     "x": 56.5,
+     "y": 68.5,
+     "floor": 6
+    }
+   ],
+   "蕾瑟塔蒂丝": [
+    {
+     "x": 42.6,
+     "y": 48.2,
+     "floor": 5
+    }
+   ],
+   "普希林": [
+    {
+     "x": 12.2,
+     "y": 31.0,
+     "floor": 5
+    }
+   ],
+   "瑟雷姆·刺蹄": [
+    {
+     "x": 57.5,
+     "y": 74.6,
+     "floor": 6
+    }
+   ]
+  },
+  "dire-maul-north": {
+   "克罗卡斯": [
+    {
+     "x": 31.8,
+     "y": 49.7,
+     "floor": null
+    }
+   ],
+   "观察者克鲁什": [
+    {
+     "x": 31.2,
+     "y": 25.4,
+     "floor": null
+    }
+   ],
+   "卫兵芬古斯": [
+    {
+     "x": 49.3,
+     "y": 81.6,
+     "floor": null
+    }
+   ],
+   "卫兵摩尔达": [
+    {
+     "x": 69.9,
+     "y": 75.2,
+     "floor": null
+    }
+   ],
+   "卫兵斯里基克": [
+    {
+     "x": 27.7,
+     "y": 58.8,
+     "floor": null
+    }
+   ],
+   "戈多克大王": [
+    {
+     "x": 31.9,
+     "y": 25.9,
+     "floor": null
+    }
+   ],
+   "践踏者克雷格": [
+    {
+     "x": 62.0,
+     "y": 65.7,
+     "floor": null
+    }
+   ]
+  },
+  "dire-maul-west": {
+   "伊琳娜·暗木": [
+    {
+     "x": 28.2,
+     "y": 85.1,
+     "floor": 2
+    }
+   ],
+   "伊莫塔尔": [
+    {
+     "x": 35.0,
+     "y": 57.6,
+     "floor": 4
+    }
+   ],
+   "卡雷迪斯镇长": [
+    {
+     "x": 29.4,
+     "y": 43.6,
+     "floor": 3
+    }
+   ],
+   "托塞德林王子": [
+    {
+     "x": 59.9,
+     "y": 23.5,
+     "floor": 4
+    }
+   ],
+   "特迪斯·扭木": [
+    {
+     "x": 33.2,
+     "y": 53.0,
+     "floor": 2
+    }
+   ],
+   "苏斯": [
+    {
+     "x": 32.2,
+     "y": 14.3,
+     "floor": 3
+    }
+   ]
+  },
+  "whelgars-excavation": {
+   "盐脊": [
+    {
+     "x": 62.0,
+     "y": 47.1,
+     "floor": null
+    }
+   ],
+   "暗齿": [
+    {
+     "x": 40.6,
+     "y": 53.6,
+     "floor": null
+    }
+   ]
+  },
+  "gnomeregan": {
+   "群体打击者9-60": [
+    {
+     "x": 43.8,
+     "y": 86.5,
+     "floor": 3
+    }
+   ],
+   "黑铁大师": [
+    {
+     "x": 29.5,
+     "y": 54.0,
+     "floor": 4
+    }
+   ],
+   "电刑器6000型": [
+    {
+     "x": 24.8,
+     "y": 67.9,
+     "floor": 2
+    }
+   ],
+   "格鲁比斯": [
+    {
+     "x": 81.9,
+     "y": 65.1,
+     "floor": null
+    }
+   ],
+   "机械师瑟玛普拉格": [
+    {
+     "x": 31.3,
+     "y": 30.0,
+     "floor": 4
+    }
+   ],
+   "粘性辐射尘": [
+    {
+     "x": 57.6,
+     "y": 56.6,
+     "floor": null
+    }
+   ]
+  },
+  "hall-of-thanes": {
+   "杜根·挽锤": [
+    {
+     "x": 50.5,
+     "y": 23.1,
+     "floor": null
+    }
+   ],
+   "法德林·安威玛尔": [
+    {
+     "x": 50.4,
+     "y": 63.6,
+     "floor": null
+    }
+   ]
+  },
+  "lower-blackrock-spire": {
+   "班诺克·巨斧": [
+    {
+     "x": 46.9,
+     "y": 64.1,
+     "floor": null
+    },
+    {
+     "x": 49.5,
+     "y": 56.0,
+     "floor": null
+    }
+   ],
+   "水晶之牙": [
+    {
+     "x": 54.1,
+     "y": 74.9,
+     "floor": 2
+    }
+   ],
+   "霍克·巴什古德": [
+    {
+     "x": 34.8,
+     "y": 60.0,
+     "floor": 5
+    },
+    {
+     "x": 39.5,
+     "y": 67.5,
+     "floor": 5
+    }
+   ],
+   "哈雷肯": [
+    {
+     "x": 39.3,
+     "y": 84.3,
+     "floor": 5
+    }
+   ],
+   "欧莫克大王": [
+    {
+     "x": 35.1,
+     "y": 55.3,
+     "floor": 3
+    }
+   ],
+   "烟网蛛后": [
+    {
+     "x": 65.0,
+     "y": 74.4,
+     "floor": 2
+    }
+   ],
+   "维姆萨拉克": [
+    {
+     "x": 56.0,
+     "y": 55.3,
+     "floor": 6
+    }
+   ],
+   "军需官兹格雷斯": [
+    {
+     "x": 54.8,
+     "y": 83.8,
+     "floor": 5
+    }
+   ],
+   "暗影猎手沃什加斯": [
+    {
+     "x": 55.6,
+     "y": 72.0,
+     "floor": 2
+    }
+   ],
+   "尖石统帅": [
+    {
+     "x": 35.8,
+     "y": 60.4,
+     "floor": 3
+    }
+   ],
+   "尖石屠夫": [
+    {
+     "x": 44.8,
+     "y": 57.8,
+     "floor": 3
+    }
+   ],
+   "尖石首席法师": [
+    {
+     "x": 37.4,
+     "y": 61.4,
+     "floor": 3
+    }
+   ],
+   "指挥官沃恩": [
+    {
+     "x": 52.9,
+     "y": 53.2,
+     "floor": null
+    }
+   ]
+  },
+  "maraudon": {
+   "被诅咒的塞雷布拉斯": [
+    {
+     "x": 24.5,
+     "y": 14.4,
+     "floor": 2
+    }
+   ],
+   "兰斯利德": [
+    {
+     "x": 40.6,
+     "y": 48.2,
+     "floor": 2
+    }
+   ],
+   "维利塔恩": [
+    {
+     "x": 37.7,
+     "y": 69.4,
+     "floor": null
+    }
+   ],
+   "收割者麦什洛克": [
+    {
+     "x": 24.6,
+     "y": 87.4,
+     "floor": null
+    }
+   ],
+   "诺克赛恩": [
+    {
+     "x": 34.8,
+     "y": 10.7,
+     "floor": null
+    }
+   ],
+   "瑟莱德丝公主": [
+    {
+     "x": 24.2,
+     "y": 78.4,
+     "floor": 2
+    }
+   ],
+   "锐刺鞭笞者": [
+    {
+     "x": 16.2,
+     "y": 34.0,
+     "floor": null
+    }
+   ],
+   "洛特格里普": [
+    {
+     "x": 33.3,
+     "y": 77.1,
+     "floor": 2
+    }
+   ],
+   "工匠吉兹洛克": [
+    {
+     "x": 48.4,
+     "y": 68.6,
+     "floor": 2
+    }
+   ]
+  },
+  "ragefire-chasm": {
+   "巴扎兰": [
+    {
+     "x": 41.5,
+     "y": 86.2,
+     "floor": null
+    }
+   ],
+   "祈求者耶戈什": [
+    {
+     "x": 33.0,
+     "y": 84.5,
+     "floor": null
+    }
+   ],
+   "奥格弗林特": [
+    {
+     "x": 56.1,
+     "y": 38.0,
+     "floor": null
+    }
+   ],
+   "饥饿者塔拉加曼": [
+    {
+     "x": 41.0,
+     "y": 57.7,
+     "floor": null
+    }
+   ]
+  },
+  "razor-krendor": {
+   "寒冰之王亚门纳尔": [
+    {
+     "x": 45.0,
+     "y": 59.1,
+     "floor": null
+    }
+   ],
+   "暴食者": [
+    {
+     "x": 38.5,
+     "y": 45.2,
+     "floor": null
+    }
+   ],
+   "火眼莫德雷斯": [
+    {
+     "x": 85.8,
+     "y": 45.7,
+     "floor": null
+    }
+   ],
+   "拉戈斯诺特": [
+    {
+     "x": 52.9,
+     "y": 67.2,
+     "floor": null
+    }
+   ]
+  },
+  "razorfen-kraul": {
+   "暴怒的阿迦赛罗斯": [
+    {
+     "x": 11.2,
+     "y": 72.4,
+     "floor": null
+    }
+   ],
+   "阿格姆": [
+    {
+     "x": 80.8,
+     "y": 54.5,
+     "floor": null
+    }
+   ],
+   "盲眼猎手": [
+    {
+     "x": 11.0,
+     "y": 30.3,
+     "floor": null
+    }
+   ],
+   "卡尔加·刺肋": [
+    {
+     "x": 26.4,
+     "y": 32.4,
+     "floor": null
+    }
+   ],
+   "亡语者贾格巴": [
+    {
+     "x": 87.9,
+     "y": 41.4,
+     "floor": null
+    }
+   ],
+   "唤地者哈穆加": [
+    {
+     "x": 49.4,
+     "y": 47.1,
+     "floor": null
+    }
+   ],
+   "主宰拉姆塔斯": [
+    {
+     "x": 56.9,
+     "y": 29.8,
+     "floor": null
+    }
+   ],
+   "鲁古格": [
+    {
+     "x": 64.8,
+     "y": 42.1,
+     "floor": null
+    }
+   ]
+  },
+  "ruins-of-lordaeron": {
+   "比约克": [
+    {
+     "x": 34.7,
+     "y": 42.5,
+     "floor": null
+    }
+   ],
+   "洛丹伦上尉": [
+    {
+     "x": 38.5,
+     "y": 25.0,
+     "floor": null
+    }
+   ],
+   "拉斯玛尔": [
+    {
+     "x": 41.3,
+     "y": 62.7,
+     "floor": null
+    }
+   ],
+   "被遗弃者": [
+    {
+     "x": 36.5,
+     "y": 53.3,
+     "floor": null
+    }
+   ],
+   "枯牙": [
+    {
+     "x": 66.8,
+     "y": 39.2,
+     "floor": null
+    }
+   ]
+  },
+  "scholomance": {
+   "瑟尔林·卡斯迪诺夫教授": [
+    {
+     "x": 95.6,
+     "y": 45.9,
+     "floor": 3
+    }
+   ],
+   "讲师玛丽希亚": [
+    {
+     "x": 72.8,
+     "y": 80.9,
+     "floor": 3
+    }
+   ],
+   "詹迪斯·巴罗夫": [
+    {
+     "x": 54.3,
+     "y": 14.4,
+     "floor": 3
+    }
+   ],
+   "伊露希亚·巴罗夫": [
+    {
+     "x": 67.0,
+     "y": 6.1,
+     "floor": 4
+    }
+   ],
+   "阿雷克斯·巴罗夫": [
+    {
+     "x": 84.4,
+     "y": 30.8,
+     "floor": 4
+    }
+   ],
+   "博学者普克尔特": [
+    {
+     "x": 72.0,
+     "y": 12.0,
+     "floor": 3
+    }
+   ],
+   "马杜克·布莱克波尔": [
+    {
+     "x": 44.4,
+     "y": 63.9,
+     "floor": 2
+    }
+   ],
+   "莱斯·霜语": [
+    {
+     "x": 40.6,
+     "y": 88.4,
+     "floor": 4
+    }
+   ],
+   "血骨傀儡": [
+    {
+     "x": 30.4,
+     "y": 62.4,
+     "floor": 3
+    }
+   ],
+   "拉文尼亚": [
+    {
+     "x": 67.5,
+     "y": 52.1,
+     "floor": 4
+    }
+   ],
+   "维克图斯": [
+    {
+     "x": 48.2,
+     "y": 66.2,
+     "floor": 2
+    }
+   ]
+  },
+  "shadowfang-keep": {
+   "大法师阿鲁高": [
+    {
+     "x": 63.9,
+     "y": 20.0,
+     "floor": 6
+    }
+   ],
+   "席瓦莱恩男爵": [
+    {
+     "x": 29.5,
+     "y": 80.3,
+     "floor": 2
+    }
+   ],
+   "指挥官斯普林瓦尔": [
+    {
+     "x": 27.9,
+     "y": 59.3,
+     "floor": null
+    }
+   ],
+   "死亡之誓": [
+    {
+     "x": 63.0,
+     "y": 52.5,
+     "floor": 7
+    }
+   ],
+   "吞噬者芬鲁斯": [
+    {
+     "x": 55.7,
+     "y": 64.5,
+     "floor": 6
+    }
+   ],
+   "盲眼守卫奥杜": [
+    {
+     "x": 55.1,
+     "y": 77.1,
+     "floor": 7
+    }
+   ],
+   "屠夫拉佐克劳": [
+    {
+     "x": 48.0,
+     "y": 29.0,
+     "floor": 2
+    }
+   ],
+   "雷希戈尔": [
+    {
+     "x": 66.1,
+     "y": 71.1,
+     "floor": null
+    }
+   ],
+   "狼王南杜斯": [
+    {
+     "x": 59.0,
+     "y": 53.3,
+     "floor": 6
+    }
+   ]
+  },
+  "scarlet-monastery-armory": {
+   "赫洛德": [
+    {
+     "x": 78.6,
+     "y": 10.8,
+     "floor": 3
+    }
+   ]
+  },
+  "scarlet-monastery-cathedral": {
+   "大检察官法尔班克斯": [
+    {
+     "x": 55.4,
+     "y": 26.1,
+     "floor": 4
+    }
+   ],
+   "大检察官怀特迈恩": [
+    {
+     "x": 49.0,
+     "y": 16.9,
+     "floor": 4
+    }
+   ],
+   "血色十字军指挥官莫格莱尼": [
+    {
+     "x": 49.1,
+     "y": 27.2,
+     "floor": 4
+    }
+   ]
+  },
+  "scarlet-monastery-graveyard": {
+   "永醒的艾希尔": [
+    {
+     "x": 41.6,
+     "y": 67.9,
+     "floor": null
+    },
+    {
+     "x": 40.9,
+     "y": 46.6,
+     "floor": null
+    },
+    {
+     "x": 36.7,
+     "y": 43.9,
+     "floor": null
+    },
+    {
+     "x": 35.5,
+     "y": 66.4,
+     "floor": null
+    }
+   ],
+   "血法师萨尔诺斯": [
+    {
+     "x": 24.4,
+     "y": 50.8,
+     "floor": null
+    }
+   ],
+   "死灵勇士": [
+    {
+     "x": 41.6,
+     "y": 67.9,
+     "floor": null
+    },
+    {
+     "x": 40.9,
+     "y": 46.6,
+     "floor": null
+    },
+    {
+     "x": 36.7,
+     "y": 43.9,
+     "floor": null
+    },
+    {
+     "x": 35.5,
+     "y": 66.4,
+     "floor": null
+    }
+   ],
+   "审讯员韦沙斯": [
+    {
+     "x": 71.5,
+     "y": 58.9,
+     "floor": null
+    }
+   ],
+   "铁脊死灵": [
+    {
+     "x": 41.6,
+     "y": 67.9,
+     "floor": null
+    },
+    {
+     "x": 40.9,
+     "y": 46.6,
+     "floor": null
+    },
+    {
+     "x": 36.7,
+     "y": 43.9,
+     "floor": null
+    },
+    {
+     "x": 35.5,
+     "y": 66.4,
+     "floor": null
+    }
+   ]
+  },
+  "scarlet-monastery-library": {
+   "奥法师杜安": [
+    {
+     "x": 83.2,
+     "y": 74.5,
+     "floor": 2
+    }
+   ],
+   "驯犬者洛克希": [
+    {
+     "x": 30.8,
+     "y": 87.8,
+     "floor": 2
+    }
+   ]
+  },
+  "stratholme-main-gate": {
+   "档案管理员加尔福特": [
+    {
+     "x": 27.1,
+     "y": 75.1,
+     "floor": null
+    }
+   ],
+   "炮手威利": [
+    {
+     "x": 3.6,
+     "y": 50.1,
+     "floor": null
+    }
+   ],
+   "弗雷斯特恩": [
+    {
+     "x": 84.7,
+     "y": 45.4,
+     "floor": null
+    },
+    {
+     "x": 85.1,
+     "y": 27.5,
+     "floor": null
+    },
+    {
+     "x": 63.9,
+     "y": 24.8,
+     "floor": null
+    },
+    {
+     "x": 59.8,
+     "y": 26.7,
+     "floor": null
+    }
+   ],
+   "狂热的玛洛尔": [
+    {
+     "x": 30.4,
+     "y": 40.0,
+     "floor": null
+    }
+   ],
+   "斯库尔": [
+    {
+     "x": 81.5,
+     "y": 43.8,
+     "floor": null
+    },
+    {
+     "x": 57.5,
+     "y": 69.7,
+     "floor": null
+    }
+   ],
+   "不可宽恕者": [
+    {
+     "x": 72.9,
+     "y": 19.3,
+     "floor": null
+    }
+   ]
+  },
+  "stratholme-service-gate": {
+   "瑞文戴尔男爵": [
+    {
+     "x": 37.2,
+     "y": 19.9,
+     "floor": 2
+    }
+   ],
+   "安娜丝塔丽男爵夫人": [
+    {
+     "x": 75.0,
+     "y": 46.8,
+     "floor": 2
+    }
+   ],
+   "巴瑟拉斯镇长": [
+    {
+     "x": 65.3,
+     "y": 75.5,
+     "floor": 2
+    }
+   ],
+   "苍白的玛勒基": [
+    {
+     "x": 68.2,
+     "y": 19.9,
+     "floor": 2
+    }
+   ],
+   "奈鲁布恩坎": [
+    {
+     "x": 56.4,
+     "y": 46.9,
+     "floor": 2
+    }
+   ],
+   "石脊": [
+    {
+     "x": 64.9,
+     "y": 48.9,
+     "floor": 2
+    }
+   ]
+  },
+  "sunken-temple": {
+   "哈扎斯": [
+    {
+     "x": 44.8,
+     "y": 85.1,
+     "floor": null
+    }
+   ],
+   "预言者迦玛兰": [
+    {
+     "x": 76.0,
+     "y": 37.0,
+     "floor": null
+    }
+   ],
+   "摩弗拉斯": [
+    {
+     "x": 46.1,
+     "y": 84.5,
+     "floor": null
+    }
+   ],
+   "可悲的奥戈姆": [
+    {
+     "x": 76.7,
+     "y": 36.1,
+     "floor": null
+    }
+   ],
+   "伊兰尼库斯的阴影": [
+    {
+     "x": 68.6,
+     "y": 87.4,
+     "floor": null
+    }
+   ]
+  },
+  "deathmine": {
+   "绿皮船长": [
+    {
+     "x": 61.7,
+     "y": 35.9,
+     "floor": 2
+    }
+   ],
+   "曲奇": [
+    {
+     "x": 69.7,
+     "y": 42.0,
+     "floor": 2
+    }
+   ],
+   "艾德温·范克里夫": [
+    {
+     "x": 60.6,
+     "y": 45.9,
+     "floor": 2
+    }
+   ],
+   "基尔尼格": [
+    {
+     "x": 11.9,
+     "y": 73.1,
+     "floor": 2
+    }
+   ],
+   "矿工约翰森": [
+    {
+     "x": 52.7,
+     "y": 50.5,
+     "floor": null
+    }
+   ],
+   "重拳先生": [
+    {
+     "x": 56.1,
+     "y": 26.5,
+     "floor": 2
+    }
+   ],
+   "拉克佐": [
+    {
+     "x": 38.6,
+     "y": 60.9,
+     "floor": null
+    }
+   ],
+   "斯尼德": [
+    {
+     "x": 45.0,
+     "y": 88.9,
+     "floor": null
+    }
+   ],
+   "斯尼德的伐木机": [
+    {
+     "x": 48.5,
+     "y": 92.4,
+     "floor": null
+    }
+   ]
+  },
+  "the-stocks": {
+   "布鲁高·铁拳": [
+    {
+     "x": 38.1,
+     "y": 24.0,
+     "floor": null
+    },
+    {
+     "x": 29.5,
+     "y": 44.7,
+     "floor": null
+    },
+    {
+     "x": 61.6,
+     "y": 48.3,
+     "floor": null
+    },
+    {
+     "x": 61.5,
+     "y": 25.1,
+     "floor": null
+    }
+   ],
+   "迪克斯特·瓦德": [
+    {
+     "x": 14.6,
+     "y": 21.4,
+     "floor": null
+    },
+    {
+     "x": 25.0,
+     "y": 16.5,
+     "floor": null
+    },
+    {
+     "x": 17.5,
+     "y": 41.7,
+     "floor": null
+    }
+   ],
+   "哈姆霍克": [
+    {
+     "x": 78.2,
+     "y": 45.7,
+     "floor": null
+    }
+   ],
+   "卡姆·深怒": [
+    {
+     "x": 69.2,
+     "y": 30.9,
+     "floor": null
+    }
+   ],
+   "可怕的塔格尔": [
+    {
+     "x": 49.9,
+     "y": 24.2,
+     "floor": null
+    },
+    {
+     "x": 42.4,
+     "y": 46.4,
+     "floor": null
+    },
+    {
+     "x": 57.8,
+     "y": 55.2,
+     "floor": null
+    },
+    {
+     "x": 33.3,
+     "y": 37.5,
+     "floor": null
+    }
+   ]
+  },
+  "uldaman": {
+   "古代的石头看守者": [
+    {
+     "x": 47.4,
+     "y": 40.7,
+     "floor": null
+    }
+   ],
+   "阿扎达斯": [
+    {
+     "x": 55.4,
+     "y": 50.6,
+     "floor": 2
+    }
+   ],
+   "巴尔洛戈": [
+    {
+     "x": 59.1,
+     "y": 93.5,
+     "floor": null
+    }
+   ],
+   "加加恩·火锤": [
+    {
+     "x": 25.8,
+     "y": 36.0,
+     "floor": null
+    }
+   ],
+   "格瑞姆洛克": [
+    {
+     "x": 21.2,
+     "y": 24.8,
+     "floor": null
+    }
+   ],
+   "黑曜石哨兵": [
+    {
+     "x": 28.8,
+     "y": 61.8,
+     "floor": null
+    }
+   ],
+   "奥拉夫": [
+    {
+     "x": 57.4,
+     "y": 94.2,
+     "floor": null
+    }
+   ],
+   "鲁维罗什": [
+    {
+     "x": 52.3,
+     "y": 72.6,
+     "floor": null
+    },
+    {
+     "x": 53.1,
+     "y": 73.5,
+     "floor": null
+    },
+    {
+     "x": 54.1,
+     "y": 72.2,
+     "floor": null
+    }
+   ]
+  },
+  "wailing-caverns": {
+   "变异精灵龙": [
+    {
+     "x": 65.1,
+     "y": 33.7,
+     "floor": null
+    }
+   ],
+   "克雷什": [
+    {
+     "x": 25.8,
+     "y": 44.6,
+     "floor": null
+    }
+   ],
+   "安娜科德拉": [
+    {
+     "x": 30.5,
+     "y": 43.2,
+     "floor": null
+    },
+    {
+     "x": 28.1,
+     "y": 31.8,
+     "floor": null
+    },
+    {
+     "x": 47.0,
+     "y": 45.6,
+     "floor": null
+    },
+    {
+     "x": 40.3,
+     "y": 27.4,
+     "floor": null
+    }
+   ],
+   "考布莱恩": [
+    {
+     "x": 15.6,
+     "y": 58.5,
+     "floor": null
+    }
+   ],
+   "皮萨斯": [
+    {
+     "x": 85.6,
+     "y": 28.4,
+     "floor": null
+    }
+   ],
+   "瑟芬迪斯": [
+    {
+     "x": 62.5,
+     "y": 53.3,
+     "floor": null
+    }
+   ],
+   "吞噬者穆坦努斯": [
+    {
+     "x": 34.2,
+     "y": 15.8,
+     "floor": null
+    }
+   ],
+   "斯卡姆": [
+    {
+     "x": 93.1,
+     "y": 79.7,
+     "floor": null
+    }
+   ],
+   "永生者沃尔丹": [
+    {
+     "x": 56.4,
+     "y": 47.4,
+     "floor": null
+    }
+   ]
+  },
+  "zulfarrak": {
+   "安图苏尔": [
+    {
+     "x": 69.0,
+     "y": 25.6,
+     "floor": null
+    }
+   ],
+   "乌克兹·沙顶": [
+    {
+     "x": 43.9,
+     "y": 35.3,
+     "floor": null
+    }
+   ],
+   "灰尘怨灵": [
+    {
+     "x": 31.7,
+     "y": 46.0,
+     "floor": null
+    },
+    {
+     "x": 49.3,
+     "y": 25.9,
+     "floor": null
+    },
+    {
+     "x": 31.0,
+     "y": 15.2,
+     "floor": null
+    },
+    {
+     "x": 44.2,
+     "y": 15.2,
+     "floor": null
+    }
+   ],
+   "水占师维蕾萨": [
+    {
+     "x": 28.9,
+     "y": 40.3,
+     "floor": null
+    }
+   ],
+   "杉达尔·沙掠者": [
+    {
+     "x": 46.3,
+     "y": 57.8,
+     "floor": null
+    },
+    {
+     "x": 52.4,
+     "y": 42.3,
+     "floor": null
+    }
+   ],
+   "布莱中士": [
+    {
+     "x": 23.5,
+     "y": 18.3,
+     "floor": null
+    }
+   ],
+   "殉教者塞卡": [
+    {
+     "x": 55.4,
+     "y": 29.6,
+     "floor": null
+    }
+   ],
+   "巫医祖穆拉恩": [
+    {
+     "x": 44.0,
+     "y": 15.2,
+     "floor": null
+    }
+   ],
+   "泽雷利斯": [
+    {
+     "x": 53.8,
+     "y": 37.3,
+     "floor": null
+    }
+   ]
+  }
+ },
+ "unmapped": {
+  "entry": [],
+  "bosses": [
+   {
+    "dfSlug": "blackfathom_deeps",
+    "nameEn": "Twilight Lord Kelris",
+    "nameCn": "梦游者克尔里斯",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "blackrock_depths",
+    "nameEn": "Panzor the Invincible",
+    "nameCn": "无敌的潘佐尔",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "blackrock_depths",
+    "nameEn": "Verek",
+    "nameCn": "维雷克",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Arcane Anomaly",
+    "nameCn": "奥术异常体",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Arcanic Enigma",
+    "nameCn": "奥术谜团",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Atrexis the Grave Knight",
+    "nameCn": "墓穴骑士阿特雷克西斯",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Fel Ancient",
+    "nameCn": "邪能古树",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Lyn the Ignored",
+    "nameCn": "被无视的琳",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Mana Devourer",
+    "nameCn": "法力吞噬者",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Shade of the Archmage",
+    "nameCn": "大法师之影",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "city_of_dalaran",
+    "nameEn": "Unstable Sentinel",
+    "nameCn": "不稳定的哨兵",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "excavation_wetlands",
+    "nameEn": "Highland Horror",
+    "nameCn": "高地惊魂",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "excavation_wetlands",
+    "nameEn": "Relic Guardian",
+    "nameCn": "遗物守护者",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "hall_of_thanes",
+    "nameEn": "Magmatus",
+    "nameCn": "玛格玛图斯",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "hall_of_thanes",
+    "nameEn": "Plunder",
+    "nameCn": "普兰德",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "onyxias_lair",
+    "nameEn": "Onyxia",
+    "nameCn": "奥妮克希亚",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "razorfen_kraul",
+    "nameEn": "Razorfen Spearhide",
+    "nameCn": "剃刀沼泽刺鬃守卫",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "ruins_of_lordaeron",
+    "nameEn": "The Baron",
+    "nameCn": "男爵",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "ruins_of_lordaeron",
+    "nameEn": "Viktor the Vile",
+    "nameCn": "邪恶的维克托",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "scholomance",
+    "nameEn": "Blood Steward of Kirtonos",
+    "nameCn": "基尔图诺斯的卫士",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "shadowfang_keep",
+    "nameEn": "Fel Steed / Shadow Charger",
+    "nameCn": "邪恶战马 / 暗影战马",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "stratholme_main",
+    "nameEn": "Stratholme Courier",
+    "nameCn": "斯坦索姆信使",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "sunken_temple",
+    "nameEn": "Spawn of Hakkar",
+    "nameCn": "哈卡的后代",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "the_stockade",
+    "nameEn": "Bazil Thredd",
+    "nameCn": "巴基尔·斯瑞德",
+    "why": "站内这座本没有同名首领"
+   },
+   {
+    "dfSlug": "zul_farrak",
+    "nameEn": "Sandfury Executioner",
+    "nameCn": "沙怒刽子手",
+    "why": "站内这座本没有同名首领"
+   }
+  ]
+ }
+}

@@ -6,6 +6,9 @@
  },
  "scale": {
   "dungeonQuests": 396,
+  "dungeonGeoEntry": 28,
+  "dungeonGeoBoss": 181,
+  "dungeonGeoBossPoints": 217,
   "dungeonQuestDungeons": 30,
   "profVendors": 647,
   "profDrops": 336,
