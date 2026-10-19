@@ -20,12 +20,14 @@ Python 默认的 certifi 信任库不认，但 **curl 用 macOS 钥匙串、认�
     python3 tools/scrape-nga-forever.py board --pages 1 --no-body
     python3 tools/scrape-nga-forever.py board --pages 5 --rebuild-view
 
-产物（都在 docs/nga-hot/ 下，这个目录应被 gitignore）：
+产物（默认全在 `~/.nga/data/`，不入库；可用 NGA_DATA_DIR 改）：
     hot-<日期>.json          热帖快照
     board-<日期>.json        列表快照（含 tid 全量元数据）
     index.json               已见过的 tid 台账（增量靠它判重）
     threads/<tid>.json       单帖正文
-    view.html                本地打开就能看的汇总页
+    view.html                本地双击就能看的汇总页
+
+改了本文件要同步一份到 ~/.nga/scrape-nga-forever.py，launchd 跑的是那份副本。
 """
 import argparse
 import json
@@ -47,10 +49,11 @@ COOKIE_FILE = os.path.expanduser("~/.nga/cookie.txt")
 JAR_FILE = os.path.expanduser("~/.nga/jar.txt")   # 运行时会话 cookie，仓库外
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# 数据目录默认在仓库里的 docs/nga-hot（已被 .gitignore 挡着，不入库）。
-# 但 launchd 起的 bash 读不到 ~/Documents（macOS TCC 限制），所以无人值守那套用
-# NGA_DATA_DIR 指到 ~/.nga/data —— 手动在 IDE/终端里跑则默认落仓库，两边都能看。
-OUT_DIR = os.environ.get("NGA_DATA_DIR") or os.path.join(ROOT, "docs", "nga-hot")
+# 数据只往一个地方落：~/.nga/data —— 手动跑和 launchd 跑看的是同一份。
+# 为什么不落仓库 docs/nga-hot：① launchd 起的 bash 读不到 ~/Documents（macOS TCC）；
+# ② 产物含玩家原创正文，仓库远程是公开的，提交进去等于我替他们转载。
+# 要用别处就设环境变量 NGA_DATA_DIR。
+OUT_DIR = os.environ.get("NGA_DATA_DIR") or os.path.expanduser("~/.nga/data")
 THREAD_DIR = os.path.join(OUT_DIR, "threads")
 INDEX_FILE = os.path.join(OUT_DIR, "index.json")
 
