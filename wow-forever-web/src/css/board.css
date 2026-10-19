@@ -382,6 +382,7 @@ nav.main a.nl:has(.nb) { padding-right:10px }
   transition:opacity var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out),
     transform var(--dur-1) var(--ease-out) }
 .zdot.k-book { --pc:var(--pin-book) } .zdot.k-camp { --pc:var(--pin-camp) }
+.zdot.k-entry { --pc:var(--pin-entry) }
 .zdot-n { display:block; width:18px; height:18px; border:1px solid var(--pc);
   border-radius:50%; background:rgba(19,26,40,.82); color:var(--pc);
   font:700 10.5px/17px var(--font-mono); text-align:center }
@@ -480,6 +481,14 @@ nav.main a.nl:has(.nb) { padding-right:10px }
 /* 三类点位混在一张图上，颜色得有地方解释——浮层与列表行的左边条跟着点位色走 */
 .zrow { --pc:var(--pin-rare) }
 .zrow.k-book { --pc:var(--pin-book) } .zrow.k-camp { --pc:var(--pin-camp) }
+.zrow.k-entry { --pc:var(--pin-entry) }
+/* 副本详情页那一块只有一颗入口点，列表那一列空着不好看也不带信息：收成图占满、
+   入口那一行写在图下面（见 .dgeo-line） */
+.dgeo .zband { grid-template-columns:minmax(0, 1fr) }
+.dgeo .zlist { display:none }
+.dgeo-line { display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline;
+  margin:calc(-1 * var(--s3)) 0 var(--s3); font-size:12.5px }
+@media (max-width:899px) { .dgeo .zband { padding-bottom:0 } }
 .zrow .zn { border-color:var(--pc); color:var(--pc) }
 .zrow:hover, .zrow.on { border-left-color:var(--pc) }
 .zrow.on .zn { background:var(--pc); border-color:var(--pc); color:var(--ink-on-bright) }

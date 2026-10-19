@@ -85,6 +85,9 @@
             <div class="bt"><b>{{ b.nameCn }}</b>
               <span class="dim">{{ b.mine.length ? '这座本里它掉 ' + b.mine.length + ' 件' : '掉落待补' }}</span>
               <span v-if="!b.portrait" class="dim">没有这张头像</span>
+              <!-- 本内位置：坐标的参照物是这座本自己的内部图，本站目前没有那批图，
+                   所以先给数字（游戏里地图上的百分比就是这套数），等有图了再画点 -->
+              <span v-if="b.pos" class="dim mono">本内 {{ b.posText }}</span>
             </div>
           </div>
           <div v-if="b.mine.length" class="items">
@@ -96,6 +99,23 @@
         </div>
       </template>
       <p v-else class="dim">这座本还没有首领名单，掉落也就没有归属可写。</p>
+    </div>
+
+    <!-- 入口在哪（2026-10-19 接上副本坐标这一层）：一颗点画在所在区域那张图上，
+         与世界页同一套点位组件。本地没有那张区域图时不假画，退成"地图编号 + 坐标"一行。 -->
+    <div v-if="entry" class="card dgeo">
+      <h2>入口在哪</h2>
+      <PinMap v-if="entryItems.length" :alt="nm + '的入口位置'" :items="entryItems"
+              :fallback-map-file="entry.mapFile || ''" :fallback-map-id="entry.mapId || ''" />
+      <p class="dgeo-line">
+        <b>{{ entry.zone }}</b>
+        <span class="dim mono">{{ entry.x }}，{{ entry.y }}</span>
+        <span v-if="!entry.mapFile" class="dim">这一片的区域图本站还没有，只给坐标：地图编号 {{ entry.mapId }}</span>
+        <span v-else class="dim">指上去或点住那个点能看到细节</span>
+      </p>
+      <router-link class="cta" :to="{ path: '/world', query: { t: 'zones', q: entry.zone } }">
+        看「{{ entry.zone }}」这一片还有什么 →
+      </router-link>
     </div>
 
     <!-- 本里的任务（2026-10-13 口径：讲资料出处的句子一律不上页面；唯一保留的是
@@ -182,6 +202,7 @@ import { useRoute } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
 import { fnv } from '../lib/glyph.js';
 import IconCell from '../components/IconCell.vue';
+import PinMap from '../components/PinMap.vue';
 
 // 按十级一档分：与旧站同一份表（目录页与上一座/下一座的分档都靠它）
 const DUN_BANDS = [[10, 19, '起步'], [20, 29, '前期'], [30, 39, '中期'], [40, 49, '中后期'], [50, 99, '满级前后']];
@@ -189,6 +210,7 @@ const DUN_BANDS = [[10, 19, '起步'], [20, 29, '前期'], [30, 39, '中期'], [
 const D = ref(null);
 const ART = ref({});
 const QD = ref({});
+const GEO = ref({});
 const err = ref('');
 const badFace = ref({});
 const route = useRoute();
@@ -233,8 +255,10 @@ function boot() {
   err.value = '';
   Promise.all([load('data/dungeons.json'),
     load('data/art.json').catch(() => ({})),
-    load('data/dungeon-quests.json').catch(() => ({}))])
-    .then((rs) => { D.value = rs[0]; ART.value = rs[1] || {}; QD.value = rs[2] || {}; })
+    load('data/dungeon-quests.json').catch(() => ({})),
+    // 坐标这一层缺了不挡页：没有入口的本就不显示那一节
+    load('data/dungeon-geo.json').catch(() => ({}))])
+    .then((rs) => { D.value = rs[0]; ART.value = rs[1] || {}; QD.value = rs[2] || {}; GEO.value = rs[3] || {}; })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
 boot();
@@ -310,11 +334,34 @@ const at = computed(() => {
 const prevD = computed(() => sibs.value[at.value - 1] || null);
 const nextD = computed(() => sibs.value[at.value + 1] || null);
 
+/* 坐标这一层（2026-10-19 接上）：入口画在所在区域那张图上，首领位置先只给数字 */
+const geo = computed(() => ((GEO.value.dungeons || {})[(x.value || {}).id]) || {});
+const entry = computed(() => geo.value.entry || null);
+const entryItems = computed(() => {
+  const e = entry.value;
+  if (!e) return [];
+  return [{
+    key: (x.value || {}).id + '-entry', kind: 'entry',
+    pin: !!e.mapFile,                       // 没那张区域图就不画点，不猜位置
+    x: e.x, y: e.y, mapFile: e.mapFile || '', mapId: e.mapId || '',
+    name: nm.value + ' · 入口', en: '', tag: '入口', isNew: false, level: '',
+    coord: e.x + '，' + e.y,
+    rows: [['所在区域', e.zone || '—'], ['区域地图编号', e.mapId || '—']],
+    drops: [], hint: ''
+  }];
+});
+
 /* 首领块：带掉落归属与头像参数 */
-const bossRows = computed(() => bosses.value.map((b) => ({
-  id: b.id, nameCn: b.nameCn, portrait: b.portrait, f: faceOf(b),
-  mine: drops.value.filter((y) => y.bossId === b.id)
-})));
+const bossRows = computed(() => bosses.value.map((b) => {
+  const pts = (geo.value.bossPos || {})[b.nameCn] || [];
+  return {
+    id: b.id, nameCn: b.nameCn, portrait: b.portrait, f: faceOf(b),
+    mine: drops.value.filter((y) => y.bossId === b.id),
+    // 一只首领可能给好几个刷新点，全列出来；层号（多层的本才有）跟着各自那个点
+    pos: pts.length,
+    posText: pts.map((p) => p.x + '，' + p.y + (p.floor ? ' · 第 ' + p.floor + ' 层' : '')).join('　')
+  };
+}));
 
 function jump(id) {
   const node = document.getElementById(id);

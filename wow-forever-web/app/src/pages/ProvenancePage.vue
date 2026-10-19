@@ -99,6 +99,11 @@
       <p v-if="RS.levelRangeSettled" class="dim" style="margin-top:var(--s3)">{{ RS.levelRangeSettled.by }}：{{ RS.levelRangeSettled.note }}</p>
       <!-- 副本任务的取数顺序也是站主定的决定，和内容页那句"两个都留着"配套看。 -->
       <p v-if="QS.counts" class="dim">{{ QS.pageNote || '' }} 这一份共 {{ QS.counts.quests }} 条任务，其中经验值退到另一份资料的 {{ QS.counts.xpFromWowhead }} 条、两份数不一样留着两个的 {{ QS.counts.xpConflict }} 条、只有一份资料有的 {{ QS.counts.addedFromWowhead }} 条。</p>
+      <!-- 副本坐标这一层的边界也在这页说：从哪家插件取的、只取了什么、没凑上的有多少 -->
+      <p v-if="GEO.counts" class="dim">{{ GEO.sources[0].name }}：入口 {{ GEO.counts.entryDungeons }} 座、
+        本内首领位置 {{ GEO.counts.bossDungeons }} 座 {{ GEO.counts.bossRows }} 条。
+        只取坐标与地图号，作者写的说明与自绘地图都没拿；两边首领名字对不上的 {{ GEO.counts.droppedRows }} 条没有硬凑，
+        留在没采用的名单里。这些数本站没进游戏核过。</p>
     </div>
 
     <div class="card">
@@ -126,6 +131,10 @@ const REFS = [
   ['worldofwarcraft.blizzard.com/en-us/forever', '官方英文 forever 页', '可入自动化'],
   ['wowforever.wclbox.com', '客户端解包转述的中文名、副本卡片与等级区间、首领头像',
     '只取名称、编号、区间、图标文件名与原画转存；它的攻略正文与掉落概率一律不搬'],
+  ['插件 GearInsight_Forever · XR_DungeonGuide · DungeonsForever',
+   '客户端里读出的稀有精英与掉落、法术书、成就、配方来源、区域→地图号、副本入口与本内首领位置',
+   '只取名称、编号、坐标与图标文件名。作者写的讲解与攻略句子、自绘的副本地图一律不搬；' +
+   'DungeonsForever 的 LICENSE 是「保留所有权利」，所以只取坐标这一层'],
   ['wowhead.com/forever', '逐本指南、天赋计算器、天梯', '人工参照，禁止搬数据'],
   ['wago.tools/db2', '客户端数据表的 CSV 转储（非暴雪域名，只留最近几个版本）',
     '只取英文名、ID、等级与人数；文案一律不搬'],
@@ -143,10 +152,11 @@ function boot() {
   err.value = '';
   Promise.all([load('data/meta.json'), load('data/method.json'), load('data/scale.json'),
     load('data/dungeons.json').catch(() => ({})),
-    load('data/dungeon-quests.json').catch(() => ({}))])
+    load('data/dungeon-quests.json').catch(() => ({})),
+    load('data/dungeon-geo.json').catch(() => ({}))])
     .then((r) => {
       d.value = { meta: r[0] || {}, method: r[1] || {}, scale: (r[2] || {}).scale || {},
-        RS: (r[3] || {}).meta || {}, QS: (r[4] || {}).meta || {} };
+        RS: (r[3] || {}).meta || {}, QS: (r[4] || {}).meta || {}, GEO: (r[5] || {}).meta || {} };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
@@ -157,6 +167,7 @@ const ti = computed(() => d.value.meta.talentImport);
 const m = computed(() => d.value.method || {});
 const RS = computed(() => d.value.RS);
 const QS = computed(() => d.value.QS);
+const GEO = computed(() => d.value.GEO);
 const openQuestions = computed(() => d.value.meta.openQuestions || []);
 const rules = computed(() => d.value.meta.rules || []);
 

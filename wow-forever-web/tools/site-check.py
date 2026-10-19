@@ -916,6 +916,99 @@ def test_world_pins(browser, base):
     ctx.close()
 
 
+def test_dungeon_geo(browser, base):
+    """副本详情页的坐标那一层（2026-10-19 接上：入口画在区域图上、首领位置先给数字）。
+       盯四件事：① 入口点数 = 这座本有没有那张区域图（没图就是 0 个，不猜位置）；
+       ② 那个点就摆在数据给的那组百分比上；③ 首领行里的坐标条数等于成品里这座本的条数；
+       ④ 溯源页把这一层的来源与"没凑上多少条"说清楚。"""
+    print("\n[6f] 副本入口与本内首领坐标")
+    import json
+    G = json.load(open(os.path.join(SRC, "data", "dungeon-geo.json"), encoding="utf-8"))
+    geo = G.get("dungeons") or {}
+    gm = G.get("meta") or {}
+    withmap = [k for k, v in geo.items() if (v.get("entry") or {}).get("mapFile")]
+    nomap = [k for k, v in geo.items() if (v.get("entry") or {}).get("noMap")]
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:140]))
+
+    def shot(did):
+        page.goto(APP_BASE + "/#/dungeon?d=" + did, wait_until="networkidle")
+        page.wait_for_timeout(1800)
+        return page.evaluate("""() => { const c = document.querySelector('.dgeo');
+          const dots = [...document.querySelectorAll('.dgeo .zdot')];
+          const img = document.querySelector('.dgeo .zcanvas img');
+          return { has: !!c, dots: dots.length,
+            pos: dots.map(x => [x.style.left, x.style.top]),
+            kind: dots.map(x => x.dataset.kind),
+            img: img ? { w: img.naturalWidth, ok: img.complete && img.naturalWidth > 0 } : null,
+            line: c ? c.querySelector('.dgeo-line').innerText.replace(/\\s+/g, ' ').trim() : '',
+            pos2: [...document.querySelectorAll('.brow .bt .mono')].map(e => e.innerText.trim()),
+            over: document.documentElement.scrollWidth - window.innerWidth }; }""")
+
+    check("有入口坐标的本都画出这一节，且入口那一颗点是「entry」这一类",
+          len(withmap) == gm["counts"]["entryDungeons"] - len(nomap) and withmap,
+          "%d 座有图可画 / %d 座只有坐标 · 数据里入口共 %d 座"
+          % (len(withmap), len(nomap), gm["counts"]["entryDungeons"]))
+    w0 = withmap[0]
+    r = shot(w0)
+    e0 = geo[w0]["entry"]
+    # 比数值不比字符串：JS 把 8.0 打成 "8"，Python 的 %s 会打成 "8.0"，按字面比必假红
+    got_pos = [[float(x.rstrip('%')) for x in one] for one in r["pos"]]
+    check("入口那一颗点就摆在数据给的那组百分比上，图也真加载出来了",
+          r["has"] and r["dots"] == 1 and got_pos == [[float(e0["x"]), float(e0["y"])]]
+          and r["kind"] == ["entry"] and r["img"] and r["img"]["ok"],
+          "%s → %s · 图 %s" % (w0, r["pos"], r["img"]))
+    check("这一节不横向溢出", r["over"] == 0, "溢出 %d" % r["over"])
+    n0 = nomap[0]
+    r2 = shot(n0)
+    check("本地没有那张区域图的本：一个点都不许多画，改成写明地图编号与坐标",
+          r2["has"] and r2["dots"] == 0 and "地图编号" in r2["line"]
+          and str(geo[n0]["entry"]["mapId"]) in r2["line"],
+          "%s：%s" % (n0, r2["line"][:60]))
+    # 首领行里的坐标条数 = 成品里这座本给的那几条
+    bd = [k for k, v in geo.items() if (v.get("bossPos") or {})]
+    b0 = bd[0]
+    r3 = shot(b0)
+    want = len(geo[b0]["bossPos"])
+    got = len([x for x in r3["pos2"] if x.startswith("本内")])
+    check("首领那一行的「本内 x，y」条数等于这座本数据里的条数，一条不多一条不少",
+          got == want, "%s：页面 %d 条 / 数据 %d 条" % (b0, got, want))
+    check("首领位置只给数字，不谎称画在图上（这一层还没有副本内部图）",
+          "副本内部图" not in r3["line"] and all("本内" in x for x in r3["pos2"][:want]),
+          "例：%s" % (r3["pos2"][0] if r3["pos2"] else "无"))
+    page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    # 取"哪一段讲了这一层"要按整段取，别按句子切——三个数分在两句里，按句切就会把数切没了
+    pv = page.evaluate("""() => [...document.querySelectorAll('#main .card p.dim')]
+        .map(e => e.innerText.replace(/\\s+/g, ' ').trim())
+        .filter(x => x.indexOf('入口') >= 0 && x.indexOf('首领位置') >= 0).join(' | ')""")
+    check("溯源页说清这一层从哪来、有多少、没凑上的多少条",
+          "DungeonsForever" in pv and str(gm["counts"]["entryDungeons"]) in pv
+          and str(gm["counts"]["bossRows"]) in pv and str(gm["counts"]["droppedRows"]) in pv,
+          pv[:120] or "溯源页没有这一段")
+    # 红线：这一层整份不许出现概率措辞（数据侧 build-data 也卡了一道，这里看渲染出来的）
+    check("渲染出来的入口行与首领坐标行里都不许出现百分号（防掉率混进这一层）",
+          "%" not in r3["line"] + " ".join(r3["pos2"]),
+          "干净" if "%" not in r3["line"] + " ".join(r3["pos2"]) else "有百分号")
+    mctx = browser.new_context(viewport={"width": 375, "height": 812})
+    mp = mctx.new_page()
+    mp.goto(APP_BASE + "/#/dungeon?d=" + w0, wait_until="networkidle")
+    mp.wait_for_timeout(1800)
+    mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
+      mapW: (document.querySelector('.dgeo .zbig') || { offsetWidth: 0 }).offsetWidth,
+      dot: (() => { const d = document.querySelector('.dgeo .zdot'); if (!d) return null;
+        const r = d.getBoundingClientRect(); return r.width >= 30; })()})""")
+    check("375 上入口那张图占满一整块、点够大、整页不横溢",
+          mm["over"] == 0 and mm["mapW"] >= 0.7 * 375 and mm["dot"] is not False,
+          json.dumps(mm, ensure_ascii=False))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-dungeon-geo-m.png"))
+    mctx.close()
+    check("副本坐标这一层走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    ctx.close()
+
+
 def test_legacy_app(browser, base):
     """新站传承页（2026-10-18 视觉与交互重做，站主定"只用我们自己采到的那份数据"）。
        盯四件事：① 界面上每个数与每个名字都等于 legacy.json 现算的结果，一个都不手抄；
@@ -4643,6 +4736,7 @@ SECTIONS = [
     ("bis", test_bis),
     ("css_tokens", test_css_tokens),
     ("world_pins", test_world_pins),
+    ("dungeon_geo", test_dungeon_geo),
     ("legacy_app", test_legacy_app),
     ("races", test_races),
     ("grouping", test_grouping),
