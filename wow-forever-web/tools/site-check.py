@@ -1459,19 +1459,43 @@ def test_bis(browser, base):
     check("纸娃娃三栏的部位归属与数据一致（左 %d / 右 %d / 下 %d）" % tuple(want_cols),
           ic["cols"] == want_cols, "界面 %s" % ic["cols"])
     check("中间那一块铺了职业原画（不是空框，也不拿别的图冒充人物）", ic["art"])
-    # 属性合计：门禁这边独立按同一份 items-detail 解析一遍，跟界面上那排数比
+    # 属性合计：门禁这边独立按同一份 items-detail 解析一遍，跟界面上那排数比。
+    # 2026-10-19 修：装备的基础护甲在库里有三种写法（"84点护甲" / "90 护甲" / "护甲值 74"）。
+    # 原来这里和页面各写了同一条只认两种的正则，把 #9509 的 "90 护甲" 漏掉——
+    # 两边一致只证明一致，525 是错的，逐件相加应为 615。这一版照原始属性行重新枚举三种写法，
+    # 并加一条"没落档的护甲行"断言：以后库里冒出第四种写法，这里直接红，不会再静默少算。
     det = json.load(open(os.path.join(SRC, "data", "items-detail.json"), encoding="utf-8"))["items"]
+    BASE_ARMOR = (r"^([0-9]+)\s*点护甲$", r"^([0-9]+)\s*护甲$", r"^护甲值\s*([0-9]+)$")
+    NOT_BASE = (r"^[+-]", r"护甲（[0-9]+/[0-9]+）$",
+                u"(加成|装备|使用|套装|击中时可能|命中率|触发|机会|持续|需要|附魔|%)")
     tot = {}
+    offlist = []
+    base_rows = 0
+    other_rows = 0
     for c in dl:
         for l in (det.get(str(c["item"]), {}) or {}).get("st") or []:
             s = str(l).strip()
-            m = re.match(r"^\+\s*(\d+)\s*(力量|敏捷|耐力|智力|精神)$", s)
+            m = re.match(r"^\+\s*([0-9]+)\s*(力量|敏捷|耐力|智力|精神)$", s)
             if m:
                 tot[m.group(2)] = tot.get(m.group(2), 0) + int(m.group(1))
                 continue
-            m = re.match(r"^(\d+)\s*点护甲$", s) or re.match(r"^护甲值\s*(\d+)$", s)
-            if m:
-                tot[u"护甲"] = tot.get(u"护甲", 0) + int(m.group(1))
+            hit = None
+            for pat in BASE_ARMOR:
+                m = re.match(pat, s)
+                if m:
+                    hit = int(m.group(1))
+                    break
+            if hit is not None:
+                tot[u"护甲"] = tot.get(u"护甲", 0) + hit
+                base_rows += 1
+                continue
+            if u"护甲" in s:
+                other_rows += 1
+                if not any(re.search(p, s) for p in NOT_BASE):
+                    offlist.append(u"%s #%s：%s" % (c["slot"], c["item"], s))
+    check("这一套每条带护甲的行都落进了已知写法（新写法不许静默漏算）",
+          not offlist, "计入基础护甲 %d 行 / 加成与效果句 %d 行 / 没认出来：%s"
+                       % (base_rows, other_rows, offlist[:5] or "无"))
     want_sum = ["%s%s" % (tot[k], k) for k in [u"力量", u"敏捷", u"耐力", u"智力", u"精神", u"护甲"] if k in tot]
     check("属性合计那排等于门禁独立解析的结果（纯加法，不含基础值与附魔）",
           ic["sum"] == want_sum, "界面 %s ／ 数据 %s" % (ic["sum"], want_sum))

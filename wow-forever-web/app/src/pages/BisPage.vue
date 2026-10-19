@@ -167,6 +167,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { loadAll, assetUrl } from '../lib/data.js';
 import { artOf } from '../lib/art.js';
+import { sumStatLines } from '../lib/item-stats.js';
 import IconCell from '../components/IconCell.vue';
 import BisCell from '../components/BisCell.vue';
 import BisPop from '../components/BisPop.vue';
@@ -283,22 +284,12 @@ const artStyle = computed(() => {
   const u = artOf((P.value || {}).art, 'classes', (cur.value || {}).cls || '');
   return u ? { backgroundImage: 'url(' + assetUrl(u) + ')' } : {};
 });
-/* 属性合计：把这套装备的属性行相加。两种护甲写法（"173点护甲" / "护甲值 173"）都收进护甲，
-   "+N 护甲加成" 是另一回事，不并进护甲；效果句（装备：…）不参与。 */
-const sum = computed(() => {
-  const out = {};
-  doll.value.forEach((c) => {
-    const lines = (((P.value || {}).det || {})[String(c.item)] || {}).st || [];
-    lines.forEach((l) => {
-      const s = String(l).trim();
-      let m = /^\+\s*(\d+)\s*(力量|敏捷|耐力|智力|精神)$/.exec(s);
-      if (m) { out[m[2]] = (out[m[2]] || 0) + Number(m[1]); return; }
-      m = /^(\d+)\s*点护甲$/.exec(s) || /^护甲值\s*(\d+)$/.exec(s);
-      if (m) out['护甲'] = (out['护甲'] || 0) + Number(m[1]);
-    });
-  });
-  return out;
-});
+/* 属性合计：把这套装备的属性行相加。解析在 lib/item-stats.js（可单测），
+   基础护甲的三种写法都收，"+N 护甲" 与 "+N 护甲加成" 是加成不是基础护甲、不计，
+   效果句与收藏计数行也不计——2026-10-19 那次就是漏了 "90 护甲" 这一种写法。 */
+const sum = computed(() => sumStatLines(doll.value.map((c) => {
+  return (((P.value || {}).det || {})[String(c.item)] || {}).st || [];
+})));
 
 function pickClass(v) {
   cls.value = v;
