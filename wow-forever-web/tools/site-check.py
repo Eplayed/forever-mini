@@ -722,10 +722,13 @@ def test_world_pins(browser, base):
     rares = W.get("rares") or []
     books = W.get("books") or []
     camps = [p for c in ((W.get("bagTool") or {}).get("camps") or []) for p in (c.get("places") or [])]
+    # art.json 的 maps 键就是地图号，值是本地图文件——"有没有这张图"以它为准，不靠猜
+    art_maps = set((json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
+                    .get("maps") or {}).keys())
     pin = lambda x: bool(x.get("mapFile") and x.get("mark"))
     znames = {z["nameCn"] for z in zones}
     want_zone_pins = len([x for x in rares + books + camps if pin(x) and x.get("zone") in znames])
-    # 列表那一列比图上多：没 mapFile 的 73 条稀有不上图但要能查到，所以行数按全部条数算
+    # 列表那一列比图上多：本地没切到那张图的稀有不上图但要能查到，所以行数按全部条数算
     want_zone_rows = len([x for x in rares + books + camps if x.get("zone") in znames])
     book_zones = {b.get("zone") for b in books if b.get("zone")}
     camp_zones = {c.get("zone") for c in camps if c.get("zone")}
@@ -798,6 +801,20 @@ def test_world_pins(browser, base):
     check("数据侧：上游那份汇总的说法留在 rareCountSource 里没删，页面用的是按实际算的那份",
           all("rareCountSource" in z2 and "rareTotal" in z2 for z2 in zones) and len(drift) > 0,
           "%d 个区域的上游汇总与实际条数不一致（正是本轮改掉的）" % len(drift))
+    # 2026-10-19：73 只有坐标没地图号的稀有，靠插件那份「区域→地图号」补上。
+    # 这一层是**补位不是覆盖**，两份独立反推要对得上，对不上就得当场看见而不是悄悄发出去
+    zm = (W.get("meta") or {}).get("zoneMapFill") or {}
+    filled = [r for r in rares if r.get("mapIdFrom") == "xr-zonemap"]
+    check("数据侧：区域→地图号那一层只补空位、两份对账零冲突，补上的每条都有地图号",
+          bool(zm) and not (zm.get("conflicts") or []) and all(r.get("mapId") for r in filled),
+          "补 %d 只 · 与站内已有值一致 %d 条 · 冲突 %d 条 · 只 XR 有的区域 %d 个"
+          % (len(filled), zm.get("agreeWithSite"), len(zm.get("conflicts") or []),
+             zm.get("zonesOnlyHere")))
+    check("补上地图号不等于就能标点：只有本地真有那张贴图的才许上图",
+          all(bool(r.get("mapFile")) == (str(r.get("mapId")) in art_maps) for r in filled),
+          "%d 只补了地图号，其中 %d 只本地有贴图可标、%d 只仍只进列表"
+          % (len(filled), len([r for r in filled if r.get("mapFile")]),
+             len([r for r in filled if not r.get("mapFile")])))
 
     page.goto(APP_BASE + "/#/world?t=books", wait_until="networkidle")
     page.wait_for_timeout(2200)
@@ -857,9 +874,13 @@ def test_world_pins(browser, base):
       bands: document.querySelectorAll('.zband').length,
       stats: document.querySelectorAll('#main .stats').length,
       head: document.querySelector('#main').innerText.indexOf('先挑区域') >= 0})""")
+    # 带数按数据现算，不写死：区域分组数会随稀有增减而变（2026-10-19 补地图号那一层之后
+    # 有稀有点位的区域从 31 涨到 36，写死的数下一次就是假绿或假红）
+    want_rare_bands = len({(r.get("zone") or "未归区域") for r in rares})
     check("只换查询参数（不换组件）也要切面板",
-          first_tab == "区域" and now["tab"] == "稀有精英" and now["bands"] == 41,
-          "%s → %s（%d 张图）" % (first_tab, now["tab"], now["bands"]))
+          first_tab == "区域" and now["tab"] == "稀有精英" and now["bands"] == want_rare_bands,
+          "%s → %s（%d 张图，数据 %d 个区域分组）"
+          % (first_tab, now["tab"], now["bands"], want_rare_bands))
     check("「先挑区域」那行标题按站主要求撤掉了", not now["head"],
           "页面上还有" if now["head"] else "已无")
 
@@ -2343,7 +2364,7 @@ def test_world(browser, base):
     check("稀有卡数量对得上数据", rc == len(rares), "%d 张（数据 %d 个）" % (rc, len(rares)))
     marks = page.evaluate("""() => { const m = [...document.querySelectorAll('#wbody .zmark')];
       return { n: m.length, placed: m.filter(b => b.style.left && b.style.top).length }; }""")
-    # 有坐标但**本地图它没切**的那些（GI 补进来的 73 只里有这种）画不出点，
+    # 有坐标但**本地图它没切**的那些（GI 补进来的那些里有这种）画不出点，
     # 页面走"没切图"的兜底 + 文字坐标——所以期望值必须同时要求 mark 与 mapFile，
     # 否则会拿一个页面根本做不到的数去卡（2026-10-16 接 GI 稀有时就踩过这条）
     exp_marks = len([r for r in rares if r.get("mark") and r.get("mapFile")])
@@ -3177,7 +3198,7 @@ def test_app(browser, base):
                     badp.append("%s 应 %s 实 %s" % (r["nameCn"], want, got))
             check("每个点位就摆在这条稀有自己的坐标百分比上，一个都不偏移",
                   not badp, "；".join(badp[:4]) or "%d 个点逐位核对通过" % len(pos))
-            # 没地图文件的那 73 条不许出现在图上（只进列表），这是"不猜位置"的可执行版本
+            # 没有地图文件的那些不许出现在图上（只进列表），这是"不猜位置"的可执行版本
             plotted = set(x["id"] for x in pos)
             should = set(str(r["id"]) for r in rs if r.get("mapFile") and r.get("mark"))
             extra = plotted - {int(s) if str(s).isdigit() else s for s in should}

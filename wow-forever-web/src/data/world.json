@@ -22,6 +22,10 @@
    {
     "url": "https://wowforever.wclbox.com/shuidai",
     "label": "新手盒子 · 舒适的睡袋"
+   },
+   {
+    "url": "upstream/xr-zonemap.json",
+    "label": "插件 XR_DungeonGuide 的区域→地图号对照（只取这一层映射）"
    }
   ],
   "took": "区域等级与阵营、地图编号与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点",
@@ -37,6 +41,14 @@
   "mapNote": "小地图只转存客户端里真有的那几张：没有的区域显示地图编号与坐标，不放假图",
   "coordinateNote": "坐标两套并存：地图编号定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包",
   "mapIdMismatch": [],
+  "zoneMapFill": {
+   "source": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+   "fetched": "2026-10-19",
+   "entries": 80,
+   "agreeWithSite": 31,
+   "conflicts": [],
+   "zonesOnlyHere": 49
+  },
   "mapsWithoutImage": [
    "希尔斯布莱德丘陵",
    "河林",
@@ -304,7 +316,7 @@
    "areaId": 44,
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -341,7 +353,7 @@
    "areaId": 10,
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "rareCount": 0,
+   "rareCount": 6,
    "bookCount": 0,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -785,7 +797,7 @@
    "areaId": 28,
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "rareCount": 0,
+   "rareCount": 11,
    "bookCount": 2,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1414,7 +1426,7 @@
    "areaId": 361,
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "rareCount": 0,
+   "rareCount": 8,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -1525,7 +1537,7 @@
    "areaId": 618,
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "rareCount": 0,
+   "rareCount": 7,
    "bookCount": 1,
    "levelNote": "等级与阵营来自同一条客户端记录，两处用的表没有冲突",
    "provenance": [
@@ -2357,7 +2369,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1440"
   },
   {
    "zone": "莫高雷",
@@ -2376,7 +2388,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1422"
   },
   {
    "zone": "东瘟疫之地",
@@ -2438,7 +2450,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1451"
   },
   {
    "zone": "悲伤沼泽",
@@ -2600,7 +2612,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1448"
   },
   {
    "zone": "赤脊山",
@@ -2608,7 +2620,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1433"
   },
   {
    "zone": "丹莫罗",
@@ -2627,7 +2639,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1452"
   },
   {
    "zone": "洛克莫丹",
@@ -2662,7 +2674,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1424"
   },
   {
    "zone": "暮色森林",
@@ -2670,7 +2682,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1431"
   },
   {
    "zone": "安戈洛环形山",
@@ -2678,7 +2690,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1449"
   },
   {
    "zone": "暴风城",
@@ -2686,7 +2698,7 @@
    "levelRange": null,
    "side": null,
    "faction": null,
-   "mapId": null
+   "mapId": "1453"
   },
   {
    "zone": "海加尔山",
@@ -7106,8 +7118,9 @@
    "levelRange": [
     17
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 16.1,
     "y": 65.3
@@ -7194,6 +7207,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7459,8 +7478,9 @@
    "levelRange": [
     18
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 42.5,
     "y": 31
@@ -7547,6 +7567,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8287,8 +8313,9 @@
    "levelRange": [
     19
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 38.7,
     "y": 56.3
@@ -8375,6 +8402,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8778,8 +8811,9 @@
    "levelRange": [
     21
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 60.1,
     "y": 56.2
@@ -8866,6 +8900,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8881,8 +8921,9 @@
    "levelRange": [
     22
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 33.2,
     "y": 21.1
@@ -8978,6 +9019,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9042,8 +9089,9 @@
    "levelRange": [
     22
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 13.6,
     "y": 24.7
@@ -9130,6 +9178,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9243,8 +9297,9 @@
    "levelRange": [
     22
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 26.8,
     "y": 18.4
@@ -9331,6 +9386,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9547,8 +9608,9 @@
    "levelRange": [
     23
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 52.1,
     "y": 45.2
@@ -9635,6 +9697,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9865,8 +9933,9 @@
    "levelRange": [
     23
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 32.6,
     "y": 25.8
@@ -9899,6 +9968,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9963,8 +10038,9 @@
    "levelRange": [
     23
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 19.4,
     "y": 42.7
@@ -10051,6 +10127,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10169,8 +10251,9 @@
    "levelRange": [
     24
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 38.6,
     "y": 58.4
@@ -10257,6 +10340,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11057,8 +11146,9 @@
    "levelRange": [
     25
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 88.9,
     "y": 66.8
@@ -11145,6 +11235,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11160,8 +11256,9 @@
    "levelRange": [
     25
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 46.5,
     "y": 44.3
@@ -11248,6 +11345,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11518,8 +11621,9 @@
    "levelRange": [
     25
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 35.8,
     "y": 36.6
@@ -11606,6 +11710,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11621,8 +11731,9 @@
    "levelRange": [
     26
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 25.6,
     "y": 63.5
@@ -11709,6 +11820,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11724,8 +11841,9 @@
    "levelRange": [
     26
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 75.5,
     "y": 39.6
@@ -11758,6 +11876,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11822,8 +11946,9 @@
    "levelRange": [
     27
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 86,
     "y": 39.9
@@ -11910,6 +12035,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12131,8 +12262,9 @@
    "levelRange": [
     27
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 52.8,
     "y": 70
@@ -12219,6 +12351,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12346,8 +12484,9 @@
    "levelRange": [
     27
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1433",
+   "mapFile": "img/art/maps/1433.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 34.9,
     "y": 8.3
@@ -12380,6 +12519,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12395,8 +12540,9 @@
    "levelRange": [
     27
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 86.4,
     "y": 47.6
@@ -12429,6 +12575,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12444,8 +12596,9 @@
    "levelRange": [
     27
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 56,
     "y": 62.8
@@ -12532,6 +12685,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12753,8 +12912,9 @@
    "levelRange": [
     28
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 65.7,
     "y": 60.1
@@ -12841,6 +13001,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12959,8 +13125,9 @@
    "levelRange": [
     28
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 70.7,
     "y": 78
@@ -13047,6 +13214,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13420,8 +13593,9 @@
    "levelRange": [
     30
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 29.1,
     "y": 73.6
@@ -13508,6 +13682,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13832,8 +14012,9 @@
    "levelRange": [
     31
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 21.1,
     "y": 27.2
@@ -13857,6 +14038,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13921,8 +14108,9 @@
    "levelRange": [
     31
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 83.4,
     "y": 48.5
@@ -14009,6 +14197,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14024,8 +14218,9 @@
    "levelRange": [
     32
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 18,
     "y": 37.9
@@ -14058,6 +14253,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14176,8 +14377,9 @@
    "levelRange": [
     32
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 61.7,
     "y": 36.9
@@ -14210,6 +14412,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14328,8 +14536,9 @@
    "levelRange": [
     32
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 81.6,
     "y": 48.5
@@ -14416,6 +14625,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14431,8 +14646,9 @@
    "levelRange": [
     32
    ],
-   "mapId": null,
+   "mapId": "1440",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 49.8,
     "y": 39.6
@@ -14465,6 +14681,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14480,8 +14702,9 @@
    "levelRange": [
     33
    ],
-   "mapId": null,
+   "mapId": "1424",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 64.5,
     "y": 79.7
@@ -14568,6 +14791,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14789,8 +15018,9 @@
    "levelRange": [
     34
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1431",
+   "mapFile": "img/art/maps/1431.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 63.5,
     "y": 83.7
@@ -14823,6 +15053,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20385,8 +20621,9 @@
    "levelRange": [
     49
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 50,
     "y": 77.1
@@ -20400,6 +20637,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20686,8 +20929,9 @@
    "levelRange": [
     50
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 47,
     "y": 84
@@ -20701,6 +20945,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20756,8 +21006,9 @@
    "levelRange": [
     50
    ],
-   "mapId": null,
+   "mapId": "1449",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 62.4,
     "y": 66
@@ -20771,6 +21022,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20786,8 +21043,9 @@
    "levelRange": [
     50
    ],
-   "mapId": null,
+   "mapId": "1453",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 66.5,
     "y": 31.4
@@ -20801,6 +21059,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21284,8 +21548,9 @@
    "levelRange": [
     51
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 47.7,
     "y": 93.1
@@ -21299,6 +21564,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21344,8 +21615,9 @@
    "levelRange": [
     51
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 42.2,
     "y": 49.9
@@ -21432,6 +21704,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21447,8 +21725,9 @@
    "levelRange": [
     52
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 46.3,
     "y": 52.4
@@ -21535,6 +21814,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21590,8 +21875,9 @@
    "levelRange": [
     52
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 50.2,
     "y": 32.8
@@ -21678,6 +21964,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21900,8 +22192,9 @@
     52,
     53
    ],
-   "mapId": null,
+   "mapId": "1449",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 68.5,
     "y": 12.7
@@ -21988,6 +22281,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22312,8 +22611,9 @@
    "levelRange": [
     54
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 40.2,
     "y": 85.2
@@ -22400,6 +22700,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22415,8 +22721,9 @@
    "levelRange": [
     54
    ],
-   "mapId": null,
+   "mapId": "1449",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 48.7,
     "y": 85.3
@@ -22503,6 +22810,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22930,8 +23243,9 @@
    "levelRange": [
     55
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 45,
     "y": 37.4
@@ -23018,6 +23332,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23372,8 +23692,9 @@
    "levelRange": [
     56
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 57.8,
     "y": 22.3
@@ -23460,6 +23781,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23476,8 +23803,9 @@
     56,
     57
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 55.3,
     "y": 49.8
@@ -23564,6 +23892,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23682,8 +24016,9 @@
    "levelRange": [
     56
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1448",
+   "mapFile": "img/art/maps/1448.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 43.1,
     "y": 41.4
@@ -23770,6 +24105,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23785,8 +24126,9 @@
    "levelRange": [
     56
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 63.2,
     "y": 16.7
@@ -23873,6 +24215,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23888,8 +24236,9 @@
    "levelRange": [
     56
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 54.2,
     "y": 80.4
@@ -23976,6 +24325,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24300,8 +24655,9 @@
    "levelRange": [
     57
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 39.3,
     "y": 55.4
@@ -24388,6 +24744,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24403,8 +24765,9 @@
    "levelRange": [
     57
    ],
-   "mapId": null,
+   "mapId": "1449",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 38,
     "y": 75.5
@@ -24491,6 +24854,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24649,8 +25018,9 @@
    "levelRange": [
     57
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 51.1,
     "y": 10.8
@@ -24737,6 +25107,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24752,8 +25128,9 @@
    "levelRange": [
     57
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 45.8,
     "y": 28.1
@@ -24840,6 +25217,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24958,8 +25341,9 @@
    "levelRange": [
     58
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 49,
     "y": 32.7
@@ -25046,6 +25430,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25061,8 +25451,9 @@
    "levelRange": [
     58
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 44.4,
     "y": 80.8
@@ -25149,6 +25540,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25164,8 +25561,9 @@
    "levelRange": [
     58
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 21.6,
     "y": 24.1
@@ -25252,6 +25650,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25267,8 +25671,9 @@
    "levelRange": [
     58
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 48,
     "y": 67.4
@@ -25355,6 +25760,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25576,8 +25987,9 @@
    "levelRange": [
     59
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 66.7,
     "y": 53.8
@@ -25664,6 +26076,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25679,8 +26097,9 @@
    "levelRange": [
     59
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 66.9,
     "y": 35.6
@@ -25767,6 +26186,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25988,8 +26413,9 @@
    "levelRange": [
     59
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 44.4,
     "y": 13.5
@@ -26076,6 +26502,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26091,8 +26523,9 @@
    "levelRange": [
     59
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 21,
     "y": 61.3
@@ -26179,6 +26612,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26400,8 +26839,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 63.4,
     "y": 70.2
@@ -26488,6 +26928,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26503,8 +26949,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
+   "mapId": "1449",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 35.3,
     "y": 36
@@ -26591,6 +27038,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26606,8 +27059,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 58,
     "y": 79.4
@@ -26694,6 +27148,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26915,8 +27375,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 45.7,
     "y": 18.8
@@ -27003,6 +27464,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27018,8 +27485,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 42.2,
     "y": 18.5
@@ -27106,6 +27574,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27224,8 +27698,9 @@
    "levelRange": [
     60
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 18.3,
     "y": 85.8
@@ -27312,6 +27787,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27430,8 +27911,9 @@
    "levelRange": [
     61
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1452",
+   "mapFile": "img/art/maps/1452.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 65,
     "y": 80.3
@@ -27518,6 +28000,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27533,8 +28021,9 @@
    "levelRange": [
     61
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 45.1,
     "y": 15.3
@@ -27621,6 +28110,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27636,8 +28131,9 @@
    "levelRange": [
     61
    ],
-   "mapId": null,
+   "mapId": "1451",
    "mapFile": null,
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 29.6,
     "y": 86.6
@@ -27724,6 +28220,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27739,8 +28241,9 @@
    "levelRange": [
     62
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 45.6,
     "y": 9.2
@@ -27827,6 +28330,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27842,8 +28351,9 @@
    "levelRange": [
     62
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 62.1,
     "y": 36.3
@@ -27930,6 +28440,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27945,8 +28461,9 @@
    "levelRange": [
     63
    ],
-   "mapId": null,
-   "mapFile": null,
+   "mapId": "1422",
+   "mapFile": "img/art/maps/1422.webp",
+   "mapIdFrom": "xr-zonemap",
    "mark": {
     "x": 56.9,
     "y": 34.8
@@ -28033,6 +28550,12 @@
      "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
      "checkedAt": "2026-10-16"
+    },
+    {
+     "type": "addon",
+     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
+     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
+     "checkedAt": "2026-10-19"
     }
    ]
   }
@@ -28040,7 +28563,8 @@
  "rareRegionsFromAddon": {
   "matched": 12,
   "added": 326,
-  "unmapped": 73,
+  "unmapped": 0,
+  "mapIdFromXr": 73,
   "source": 338
  },
  "rareSets": [

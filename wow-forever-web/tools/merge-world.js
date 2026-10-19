@@ -5,6 +5,8 @@
  *  - 只留事实性标识符：中文名、英文 key、等级区间、阵营、areaId/mapId、坐标、图标文件名、物品 ID；
  *  - 上游 JSON 里的书本正文（book.text）、营地路线讲解（stops 的 steps/landmarks/rewards）一律不进；
  *  - 坐标有两个来源可以互相验：地图 paint 的 areaId→mapId，和稀有/书籍分组自带的 id，不一致就报警。
+ *  - 2026-10-19 起还有第三层：插件 XR 那份「中文区域名→地图号」（upstream/xr-zonemap.json），
+ *    只补前两层都查不到的那些，不覆盖已有值，并顺手对一次账写进 meta.zoneMapFill。
  *  - 小地图只在本地图存在时才写 mapFile，页面据此决定贴图还是纯文字坐标。
  */
 const fs = require('fs');
@@ -213,6 +215,7 @@ const rareRegions = ((P.xiyou || {}).where || []).map((w) => ({
  * 掉落：GI 那份带 1,604 条掉落项（253 只带）——归属是事实字段可以列，
  *       但掉落本身按红线保持 L2 待实测，这里只补"谁掉什么"，不写概率、不改现有 36 只的掉落。 */
 let addon = null;
+let xrStats = null;   // 区域→地图号那一层的对账结果，写进 payload.meta
 try {
   addon = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'gi-rares.json'), 'utf8'));
 } catch (e) {
@@ -229,10 +232,44 @@ if (addon) {
   });
   Object.keys(idByName).forEach((n) => { zoneToMap[n] = String(idByName[n]); });
   rareRegions.forEach((r) => { if (r.mapId && !zoneToMap[r.zone]) zoneToMap[r.zone] = String(r.mapId); });
+  /* 2026-10-19：再补一层——插件 XR 那份「中文区域名 → 地图号」80 条（upstream/xr-zonemap.json）。
+     上面三层（地图 paint / 稀有与书籍分组自带 id / rareRegions）都查不到的区域，以前就 null 着，
+     73 条稀有因此"有百分比坐标却没有地图号可标"。这一层**只补 null 的那些**，
+     已有的一个都不覆盖；靠它补上地图号的稀有带 mapIdFrom:'xr-zonemap' 与第二条出处，能逐条回查。
+     坐标本身没换，仍是 GI 那份——这里补的是"这组坐标挂在哪张图上"，不是坐标。 */
+  let xrZone = null;
+  try {
+    xrZone = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'xr-zonemap.json'), 'utf8'));
+  } catch (e) {
+    console.log('稀有：没找到 upstream/xr-zonemap.json，区域→地图号这一层本轮不补' +
+      '（先跑 python3 tools/extract-xr-zonemap.py）');
+  }
+  const xrOnly = {};
+  const xrConflict = [];
+  let xrAgree = 0;
+  if (xrZone) {
+    Object.keys(xrZone.zones || {}).forEach((n) => {
+      const v = String(xrZone.zones[n]);
+      if (!zoneToMap[n]) { zoneToMap[n] = v; xrOnly[n] = true; return; }
+      // 这一层不覆盖已有值，但要拿它对一遍账：两份独立反推要是打架，得当场知道
+      if (zoneToMap[n] === v) xrAgree += 1;
+      else xrConflict.push(n + '：站内 ' + zoneToMap[n] + ' / XR ' + v);
+    });
+    console.log('区域→地图号对账：XR 那 80 条里与站内已有值一致 ' + xrAgree +
+      ' 条、冲突 ' + xrConflict.length + ' 条、只 XR 有的区域 ' + Object.keys(xrOnly).length + ' 个' +
+      (xrConflict.length ? '（' + xrConflict.join('；') + '）' : ''));
+  }
+  xrStats = xrZone ? {
+    source: (xrZone.meta || {}).source || 'upstream/xr-zonemap.json',
+    fetched: (xrZone.meta || {}).fetched || null,
+    entries: Object.keys(xrZone.zones || {}).length,
+    agreeWithSite: xrAgree, conflicts: xrConflict,
+    zonesOnlyHere: Object.keys(xrOnly).length
+  } : null;
 
   const byCn = {};
   rares.forEach((r) => { byCn[r.nameCn] = r; });
-  let matched = 0, added = 0, unmapped = 0;
+  let matched = 0, added = 0, unmapped = 0, fromXr = 0;
   (addon.rares || []).forEach((g) => {
     if (!g.name) return;
     const hit = byCn[g.name];
@@ -257,15 +294,23 @@ if (addon) {
       isNew: null,
       levelRange: g.lvMin == null ? null : (g.lvMin === g.lvMax ? [g.lvMin] : [g.lvMin, g.lvMax]),
       mapId: mid, mapFile: mid && MAP_IMG[mid] ? MAP_IMG[mid] : null,
+      // 只在"这一条的地图号是 XR 那份补的"时才留这个键——不然 362 条里 289 条都挂一个 null，
+      // 读的人分不清"没来源"和"来源是站内那三层"
+      ...(mid && xrOnly[g.zone] ? { mapIdFrom: 'xr-zonemap' } : {}),
       mark: typeof g.x === 'number' && typeof g.y === 'number' ? { x: g.x, y: g.y } : null,
       world: null, mapSlug: null,
       drops: drops,
       provenance: [{ type: 'addon', url: 'GearInsight_Forever 0.4.29 Data.lua（rares 表）',
                      note: '稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）',
                      checkedAt: addon.meta ? addon.meta.fetched : null }]
+        .concat(mid && xrOnly[g.zone] ? [{ type: 'addon',
+            url: (xrZone.meta && xrZone.meta.source) || 'upstream/xr-zonemap.json',
+            note: '地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补"挂在哪张图上"）',
+            checkedAt: xrZone.meta ? xrZone.meta.fetched : null }] : [])
     });
     added += 1;
     if (!mid) unmapped += 1;
+    else if (xrOnly[g.zone]) fromXr += 1;
   });
   // 区域分组跟着重算：新增的那些区域原来不在 where 名单里，不补的话页面筛不到它们
   const have = {};
@@ -282,9 +327,12 @@ if (addon) {
     rareRegions.push({ zone: z, count: countByZone[z], levelRange: null, side: null, faction: null, mapId: mid });
   });
   rareRegions.sort((a, b) => (b.count - a.count) || String(a.zone).localeCompare(String(b.zone)));
-  addonStats = { matched: matched, added: added, unmapped: unmapped, source: (addon.rares || []).length };
+  addonStats = { matched: matched, added: added, unmapped: unmapped, mapIdFromXr: fromXr,
+                 source: (addon.rares || []).length };
   console.log('稀有：参考站 36 只保持 L0 不动 · GI 对上台数 ' + matched +
     ' · 新收 ' + added + ' 只（区域查不到地图的 ' + unmapped + ' 只，进未定位）· 合计 ' + rares.length);
+  console.log('  地图号这一层：' + fromXr + ' 只是靠 XR 那份区域→地图号补上的' +
+    '（补完有图可标 ' + rares.filter((r) => r.mapFile && r.mark).length + ' / ' + rares.length + '）');
 }
 
 const rareSets = ((P.xiyou || {}).sets || []).map((s) => ({
@@ -389,7 +437,8 @@ const payload = {
       { url: PAGE.map, label: '新手盒子 · 魔兽世界无限数据库 世界地图' },
       { url: PAGE.rare, label: '新手盒子 · 稀有精英' },
       { url: PAGE.book, label: '新手盒子 · 图书馆书籍' },
-      { url: PAGE.bag, label: '新手盒子 · 舒适的睡袋' }
+      { url: PAGE.bag, label: '新手盒子 · 舒适的睡袋' },
+      { url: 'upstream/xr-zonemap.json', label: '插件 XR_DungeonGuide 的区域→地图号对照（只取这一层映射）' }
     ],
     took: '区域等级与阵营、地图编号与区域坐标、稀有精英位置与掉落归属、书籍容器与坐标、睡袋物品与营地点',
     skipped: '书本正文、营地路线讲解与步骤、任何攻略性建议、任何百分比概率',
@@ -403,7 +452,10 @@ const payload = {
     levelNote: '这一份记录是无限客户端里的游戏内中文（经第三方资料站转述），按 2026-10-08 决策记 L0；未经游戏内实测的部分单列',
     mapNote: '小地图只转存客户端里真有的那几张：没有的区域显示地图编号与坐标，不放假图',
     coordinateNote: '坐标两套并存：地图编号定位到具体那张图，mark 是图上百分比，world 是客户端世界坐标；三者都来自同一次解包',
-    mapIdMismatch: mismatches
+    mapIdMismatch: mismatches,
+    // 这一层是 2026-10-19 加的：73 条稀有有百分比坐标却没有地图号，靠插件那份区域→地图号补，
+    // 只补查不到的、不覆盖已有值，顺带把两份独立反推对了一次账
+    zoneMapFill: xrStats
   },
   continents: CONTINENTS.map((c) => ({
     id: c.id, nameCn: c.nameCn, slug: c.slug,
