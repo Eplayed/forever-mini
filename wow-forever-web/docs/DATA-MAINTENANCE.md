@@ -127,3 +127,22 @@
 | `refresh.sh` 报 `set: pipefail\r: invalid option name` | 本机三条凑齐：`bash` 只有 WSL 入口（无 Git Bash）+ 仓库 `.sh` 是 CRLF 行尾 + 脚本里写 `python3` | 不修脚本不装 Git Bash：查该场景背后**等价的 python/node 单命令**直接跑（面板 8830 的门禁就是拆好的单命令）；完整链路要跑时走 WSL 侧或先统一行尾（2026-10-13 站主拍板：本机日常就用单命令口径） |
 
 **Windows 本机口径（2026-10-13 站主确认）**：数据操作在本机一律拆成 refresh.sh 背后的那条 python/node 单命令跑，`refresh.sh` 的多步链路（world/dungeons/check/publish 等）本机不跑；它的价值在把顺序写死，跑之前先照脚本把命令按顺序手打一遍。数据管线控制台（`python tools/admin/server.py`，127.0.0.1:8830，内部工具非玩家页面）就是按这个口径做的壳：只读 + 白名单单命令。
+
+## 改完数据要让 :8821 跟上，是两步不是一步（2026-10-19 踩过）
+
+```bash
+node tools/build-data.js          # ① 重算 src/data/*.json
+python3 tools/app-assets.py       # ② 同步到 app/public/
+cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的是这一份
+```
+
+**`vite preview` 服务的是 `app/dist`，不是 `app/public`。** `public/` 里的东西是在 `npm run build`
+时才被复制进 `dist/` 的，所以只跑 ② 不跑 ③，页面读到的还是上一版数据——
+而且**文件在磁盘上是对的**，`curl` 打 :8821 拿到的是旧的，很容易误判成"渲染没跟上"去查组件。
+
+2026-10-19 加第 58 条「本站更新」时就撞了这条：导航那个「新」角标按 `scale.navNew` 画，
+磁盘上 `navNew` 已经是 `['副本','世界']`、服务里还是 `['世界']`，门禁红了一条
+（红是对的红，但原因不在断言也不在组件）。补跑 ③ 之后 94/94。
+
+**记这条的判断口径**：改过 `src/data/**` 之后，只要要看页面或跑 `site-check --app`，
+②③ 两步都得跑；`tools/serve.sh` 起的服务也一样，它不会替你做构建。
