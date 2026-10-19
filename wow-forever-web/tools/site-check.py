@@ -1313,6 +1313,52 @@ def test_legacy_app(browser, base):
     mctx.close()
 
 
+# 装备属性行的独立解析（2026-10-19 护甲漏算之后钉在这里）。
+# 这份与 app/src/lib/item-stats.js 是各写各的两份实现、互不引用：页面那份改了，
+# 门禁这份还能把它兜回来。当初正是两边抄同一条正则，才让 525 这个错数一起 PASS 了半个月。
+BASE_ARMOR_RE = (r"^([0-9]+)\s*点护甲$", r"^([0-9]+)\s*护甲$", r"^护甲值\s*([0-9]+)$")
+NOT_BASE_ARMOR_RE = (r"^[+-]", r"护甲（[0-9]+/[0-9]+）$",
+                     u"(加成|装备|使用|套装|击中时可能|命中率|触发|机会|持续|需要|附魔|%)")
+STAT_RE = r"^\+\s*([0-9]+)\s*(力量|敏捷|耐力|智力|精神)$"
+SUM_ORDER = [u"力量", u"敏捷", u"耐力", u"智力", u"精神", u"护甲"]
+
+
+def stat_totals(det, doll):
+    """照 items-detail 的原始属性行算一遍这套装备的属性合计。
+       返回 (合计, 带护甲却没落进已知档的行, 计入的基础护甲行数, 加成与效果句行数)。
+       第三种返回值是留给人的读数，第四种连同第二种用来兜"库里又冒了一种新写法"。"""
+    tot = {}
+    offlist = []
+    base_rows = 0
+    other_rows = 0
+    for c in doll:
+        for l in (det.get(str(c["item"]), {}) or {}).get("st") or []:
+            s = str(l).strip()
+            m = re.match(STAT_RE, s)
+            if m:
+                tot[m.group(2)] = tot.get(m.group(2), 0) + int(m.group(1))
+                continue
+            hit = None
+            for pat in BASE_ARMOR_RE:
+                m = re.match(pat, s)
+                if m:
+                    hit = int(m.group(1))
+                    break
+            if hit is not None:
+                tot[u"护甲"] = tot.get(u"护甲", 0) + hit
+                base_rows += 1
+                continue
+            if u"护甲" in s:
+                other_rows += 1
+                if not any(re.search(p, s) for p in NOT_BASE_ARMOR_RE):
+                    offlist.append(u"%s #%s：%s" % (c["slot"], c["item"], s))
+    return tot, offlist, base_rows, other_rows
+
+
+def sum_expect(tot):
+    return ["%s%s" % (tot[k], k) for k in SUM_ORDER if k in tot]
+
+
 def test_bis(browser, base):
     """配装页（2026-10-16 站主拍板走 C 方案）。盯四件事：
        ① 界面上的数与名字全部来自我们自己的数据（bis.json 的顺序 + items.json 的名字）；
@@ -1460,46 +1506,43 @@ def test_bis(browser, base):
           ic["cols"] == want_cols, "界面 %s" % ic["cols"])
     check("中间那一块铺了职业原画（不是空框，也不拿别的图冒充人物）", ic["art"])
     # 属性合计：门禁这边独立按同一份 items-detail 解析一遍，跟界面上那排数比。
-    # 2026-10-19 修：装备的基础护甲在库里有三种写法（"84点护甲" / "90 护甲" / "护甲值 74"）。
-    # 原来这里和页面各写了同一条只认两种的正则，把 #9509 的 "90 护甲" 漏掉——
-    # 两边一致只证明一致，525 是错的，逐件相加应为 615。这一版照原始属性行重新枚举三种写法，
-    # 并加一条"没落档的护甲行"断言：以后库里冒出第四种写法，这里直接红，不会再静默少算。
+    # 2026-10-19 修：装备的基础护甲在库里有三种写法（"84点护甲" / "90 护甲" / "护甲值 74"），
+    # 原来这里和页面各抄了同一条只认两种半的正则，把 #9509 的 "90 护甲" 漏掉——
+    # 两边一致只证明一致，525 是错的，逐件相加应为 615。现在解析挪到 stat_totals 里
+    # 按写法枚举，并加一条落档断言：以后库里冒出第四种写法，这里直接红，不会静默少算。
     det = json.load(open(os.path.join(SRC, "data", "items-detail.json"), encoding="utf-8"))["items"]
-    BASE_ARMOR = (r"^([0-9]+)\s*点护甲$", r"^([0-9]+)\s*护甲$", r"^护甲值\s*([0-9]+)$")
-    NOT_BASE = (r"^[+-]", r"护甲（[0-9]+/[0-9]+）$",
-                u"(加成|装备|使用|套装|击中时可能|命中率|触发|机会|持续|需要|附魔|%)")
-    tot = {}
-    offlist = []
-    base_rows = 0
-    other_rows = 0
-    for c in dl:
-        for l in (det.get(str(c["item"]), {}) or {}).get("st") or []:
-            s = str(l).strip()
-            m = re.match(r"^\+\s*([0-9]+)\s*(力量|敏捷|耐力|智力|精神)$", s)
-            if m:
-                tot[m.group(2)] = tot.get(m.group(2), 0) + int(m.group(1))
-                continue
-            hit = None
-            for pat in BASE_ARMOR:
-                m = re.match(pat, s)
-                if m:
-                    hit = int(m.group(1))
-                    break
-            if hit is not None:
-                tot[u"护甲"] = tot.get(u"护甲", 0) + hit
-                base_rows += 1
-                continue
-            if u"护甲" in s:
-                other_rows += 1
-                if not any(re.search(p, s) for p in NOT_BASE):
-                    offlist.append(u"%s #%s：%s" % (c["slot"], c["item"], s))
+    tot, offlist, base_rows, other_rows = stat_totals(det, dl)
     check("这一套每条带护甲的行都落进了已知写法（新写法不许静默漏算）",
           not offlist, "计入基础护甲 %d 行 / 加成与效果句 %d 行 / 没认出来：%s"
                        % (base_rows, other_rows, offlist[:5] or "无"))
-    want_sum = ["%s%s" % (tot[k], k) for k in [u"力量", u"敏捷", u"耐力", u"智力", u"精神", u"护甲"] if k in tot]
+    want_sum = sum_expect(tot)
     check("属性合计那排等于门禁独立解析的结果（纯加法，不含基础值与附魔）",
           ic["sum"] == want_sum, "界面 %s ／ 数据 %s" % (ic["sum"], want_sum))
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis.png"))
+    # 上面比的是页面默认落在的战士那一套——偏偏那一套全是 "N点护甲"，
+    # 一条漏算的写法都碰不到，所以它单独证明不了这次修的东西。
+    # 这一条走玩家真点的路径换到猎人 PvE 联盟（#9509 浸油护腿的 "90 护甲" 就在这套里），
+    # 再按同一份门禁解析比一遍。点职业条而不是改地址：这个组件只在 setup 读一次 query，
+    # 光换 hash 不会让它换职业。
+    hi = page.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
+      .findIndex(b => b.innerText.indexOf('猎人') >= 0)""")
+    check("职业条里找得到猎人那一格", hi >= 0, "第 %d 格" % hi)
+    page.click(".pzrail .pztab >> nth=%d" % hi)
+    page.wait_for_timeout(1500)
+    hdoll = [s for s in sets if s["id"] == "hunter"][0]["doll"]["alliance"]
+    hsum = page.evaluate("() => [...document.querySelectorAll('.pzsum-i span')]"
+                         ".map(x => x.innerText.replace(/\\s+/g,' ').trim())")
+    htot, hoff, hbase, hother = stat_totals(det, hdoll)
+    check("猎人 PvE 联盟每条带护甲的行都落进了已知写法（「90 护甲」这一种以前被漏掉）",
+          not hoff, "计入基础护甲 %d 行 / 加成与效果句 %d 行 / 没认出来：%s"
+                    % (hbase, hother, hoff[:5] or "无"))
+    check("猎人 PvE 联盟那排属性合计等于门禁独立解析的结果",
+          hsum == sum_expect(htot), "界面 %s ／ 数据 %s" % (hsum, sum_expect(htot)))
+    # 证据两张：一张把「这套装备给的属性」那一排行滚进视口拍清楚，一张整页留全貌
+    page.locator(".pzsum").scroll_into_view_if_needed()
+    page.wait_for_timeout(300)
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor.png"))
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-full.png"), full_page=True)
     ctx.close()
 
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
@@ -1512,6 +1555,14 @@ def test_bis(browser, base):
     check("配装页 375 不横向溢出", mm["over"] <= 1, json.dumps(mm))
     check("配装页 375 点击目标不低于 44px", mm["small"] == 0, "%d 个偏小" % mm["small"])
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-m.png"))
+    # 375 上补一张猎人那套的合计行（这次修的就是这一排）
+    hmi = mp.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
+      .findIndex(b => b.innerText.indexOf('猎人') >= 0)""")
+    mp.click(".pzrail .pztab >> nth=%d" % hmi)
+    mp.wait_for_timeout(1500)
+    mp.locator(".pzsum").scroll_into_view_if_needed()
+    mp.wait_for_timeout(300)
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-m.png"))
     ctx.close()
 
 
