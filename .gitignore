@@ -40,3 +40,9 @@ vibe_images/
 
 # 工具运行期临时清单
 wow-forever-web/tools/_tmp_*
+
+# NGA 采集产物（含玩家原创正文，绝不入库：远程仓库公开=转载）
+# 采集脚本 tools/scrape-nga-forever.py 入库，它产出的数据不入库。
+wow-forever-web/docs/nga-hot/
+# 登录 cookie 与 jar 在 ~/.nga/ 下（仓库外），这里只是防一手误放进来
+.nga/

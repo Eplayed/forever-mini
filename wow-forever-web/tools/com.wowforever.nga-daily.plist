@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.wowforever.nga-daily</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/zhangyajun/.nga/nga-daily.sh</string>
+  </array>
+
+  <!-- 每天 08:40 与 20:40 各跑一次。
+       为什么是两次而不是每小时一次：服务端结果缓存约 1 小时，板块按发帖时间倒序，
+       一天两跑能覆盖早晚两个发帖高峰；跑密了只是白打接口、还更容易把登录会话打进风控。 -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>40</integer></dict>
+    <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>40</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/zhangyajun/.nga/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/zhangyajun/.nga/launchd.err.log</string>
+
+  <!-- 上一轮还没跑完就不叠加 -->
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
