@@ -950,6 +950,7 @@ def test_dungeon_geo(browser, base):
             kind: dots.map(x => x.dataset.kind),
             bdots: bd.length, brows: document.querySelectorAll('.dboss .zrow').length,
             bkind: [...new Set(bd.map(x => x.dataset.kind))],
+            btag: (document.querySelector('.dboss .dmap-tag') || {}).innerText || '',
             bpos: bd.map(x => [x.style.left, x.style.top]),
             bimg: bi ? { w: bi.naturalWidth, h: bi.naturalHeight,
                          ok: bi.complete && bi.naturalWidth > 0,
@@ -1018,6 +1019,14 @@ def test_dungeon_geo(browser, base):
           "%s（%s）：预留 %s · 真实 %sx%s · 数据写 %s"
           % (d0, geo[d0].get("bossMapKind"), bi.get("attr"), bi.get("w"), bi.get("h"),
              geo[d0].get("bossMapRatio")))
+    # 2026-10-19 站主拍板：作者自绘的那几张要就地标一句（AGENTS.md 素材那一条的窄例外）。
+    # 两条一起看才有效：该标的标了，不该标的不许冒出来——否则又变回满站挂角标。
+    check("自绘示意图那一类在标题旁就地标一句，话里说清不是游戏里的图",
+          bool(drawn) and "示意图" in r5["btag"] and "不是游戏里" in r5["btag"],
+          "%s：%s" % (d0, r5["btag"][:40] or "没标"))
+    check("游戏内地图截图那一类不标（别把提醒做成第二个角标）",
+          geo[b1].get("bossMapKind") == "game-capture" and not r4["btag"],
+          "%s（%s）：%s" % (b1, geo[b1].get("bossMapKind"), r4["btag"] or "没标，对的"))
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
     page.wait_for_timeout(1500)
     # 取"哪一段讲了这一层"要按整段取，别按句子切——三个数分在两句里，按句切就会把数切没了

@@ -491,6 +491,14 @@ nav.main a.nl:has(.nb) { padding-right:10px }
 .dgeo-line { display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline;
   margin:calc(-1 * var(--s3)) 0 var(--s3); font-size:12.5px }
 @media (max-width:899px) { .dgeo .zband { padding-bottom:0 } }
+/* 自绘底图就地提醒（AGENTS.md 素材那一条：这类图不是游戏里的地图，别拿它找路）。
+   只在 bossMapKind==='addon-drawn' 的那三座出现。它和被全站撤掉的"素材出处角标"不是一回事：
+   角标说的是"这张图从哪来"（归溯源页），这一条说的是"这张图能不能照着走"——
+   所以用虚线框 + 警示色，不用实心徽标，也不给颜色底。 */
+.dmap-tag { display:inline-block; margin-left:10px; padding:1px 8px; vertical-align:2px;
+  border:1px dashed var(--line-2); border-radius:999px;
+  font-size:11.5px; font-weight:400; line-height:1.7; color:var(--txt-caution) }
+@media (max-width:639px) { .dmap-tag { display:block; margin:4px 0 0 } }
 .zrow .zn { border-color:var(--pc); color:var(--pc) }
 .zrow:hover, .zrow.on { border-left-color:var(--pc) }
 .zrow.on .zn { background:var(--pc); border-color:var(--pc); color:var(--ink-on-bright) }

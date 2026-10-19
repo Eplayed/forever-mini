@@ -119,9 +119,12 @@
     </div>
 
     <!-- 首领在哪个位置（2026-10-19：副本内部底图接进来之后，坐标从数字变成点）。
-         一个刷新点一颗点，同一只首领有多个点就出多颗；层号写在浮层与列表行里。 -->
+         一个刷新点一颗点，同一只首领有多个点就出多颗；层号写在浮层与列表行里。
+         底图分两种来源（AGENTS.md 素材那一条）：游戏里那张图的截图 / 插件作者自绘。
+         自绘的必须就地标一句——这是"内容页只留标题与数据"那条的一个窄例外（2026-10-19 站主拍板），
+         它不是素材出处角标，是"别拿这张找路"的提醒。 -->
     <div v-if="bossMapItems.length" class="card dboss">
-      <h2>首领在哪个位置</h2>
+      <h2>首领在哪个位置<span v-if="mapIsDrawn" class="dmap-tag">这张是示意图，不是游戏里的地图</span></h2>
       <PinMap :alt="nm + '的首领位置图'" :items="bossMapItems" :ratio="geo.bossMapRatio || '512/512'" />
       <p class="dim">点一下钉住、再点收掉；手机上直接点右边那一行。同一只首领有多个刷新点就出多颗。</p>
     </div>
@@ -344,6 +347,8 @@ const nextD = computed(() => sibs.value[at.value + 1] || null);
 
 /* 坐标这一层（2026-10-19 接上）：入口画在所在区域那张图上，首领位置先只给数字 */
 const geo = computed(() => ((GEO.value.dungeons || {})[(x.value || {}).id]) || {});
+/* 底图是插件作者自绘的那一类（游戏内没有这张图）——标题旁边要就地标一句，见模板注释 */
+const mapIsDrawn = computed(() => geo.value.bossMapKind === 'addon-drawn');
 const entry = computed(() => geo.value.entry || null);
 const entryItems = computed(() => {
   const e = entry.value;
