@@ -1,14 +1,17 @@
 {
  "meta": {
-  "source": "GearInsight_Forever 0.4.29 Data.lua 的 rares 表",
+  "source": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+  "addonVersion": "0.4.32",
   "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/GearInsight_Forever/Data.lua",
-  "fetched": "2026-10-16",
+  "fetched": "2026-10-19",
   "counts": {
    "total": 338,
    "withItems": 253,
-   "withCoords": 338
+   "withCoords": 338,
+   "withUiMap": 338
   }
  },
+ "note": "ui=<地图号> 与坐标出自同一行，合并层按它定\"标在哪张图上\"；respawnRaw（刷新间隔秒数）与 pts（多个刷新点）留在快照里不进成品——刷新计时目前只有这一家说，按红线要等第二处才上页面",
  "rares": [
   {
    "npcId": 1531,
@@ -21,6 +24,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 53.2,
    "y": 48.4,
+   "uiMapId": 1420,
    "spawnPoints": 3,
    "respawnRaw": "3600",
    "items": []
@@ -36,6 +40,7 @@
    "zoneEn": "Teldrassil",
    "x": 52.0,
    "y": 50.5,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -51,6 +56,7 @@
    "zoneEn": "Teldrassil",
    "x": 67.9,
    "y": 59.4,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -66,6 +72,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 38.0,
    "y": 49.6,
+   "uiMapId": 1420,
    "spawnPoints": 4,
    "respawnRaw": "3600",
    "items": []
@@ -81,6 +88,7 @@
    "zoneEn": "Teldrassil",
    "x": 34.4,
    "y": 34.7,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -96,6 +104,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 45.6,
    "y": 31.6,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -111,6 +120,7 @@
    "zoneEn": "Teldrassil",
    "x": 58.1,
    "y": 76.7,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": [
@@ -132,6 +142,7 @@
    "zoneEn": "Dun Morogh",
    "x": 39.0,
    "y": 47.5,
+   "uiMapId": 1426,
    "spawnPoints": 2,
    "respawnRaw": "3600",
    "items": []
@@ -147,6 +158,7 @@
    "zoneEn": "Durotar",
    "x": 43.2,
    "y": 39.3,
+   "uiMapId": 1411,
    "spawnPoints": 3,
    "respawnRaw": "3600",
    "items": [
@@ -166,8 +178,9 @@
    "lvMax": 9,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 50.4,
-   "y": 42.6,
+   "x": 49.1,
+   "y": 48.7,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "9000",
    "items": [
@@ -187,8 +200,9 @@
    "lvMax": 9,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 48.4,
-   "y": 72.0,
+   "x": 47.4,
+   "y": 73.3,
+   "uiMapId": 1412,
    "spawnPoints": 2,
    "respawnRaw": "3600",
    "items": []
@@ -204,6 +218,7 @@
    "zoneEn": "Durotar",
    "x": 47.9,
    "y": 77.4,
+   "uiMapId": 1411,
    "spawnPoints": 3,
    "respawnRaw": "3600",
    "items": []
@@ -219,6 +234,7 @@
    "zoneEn": "Durotar",
    "x": 59.2,
    "y": 58.5,
+   "uiMapId": 1411,
    "spawnPoints": 2,
    "respawnRaw": "3600",
    "items": []
@@ -234,6 +250,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 39.9,
    "y": 42.2,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": [
@@ -255,6 +272,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 30.8,
    "y": 64.7,
+   "uiMapId": 1429,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": [
@@ -276,6 +294,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 62.1,
    "y": 48.0,
+   "uiMapId": 1429,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": [
@@ -297,6 +316,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 36.5,
    "y": 42.4,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -312,6 +332,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 40.9,
    "y": 77.5,
+   "uiMapId": 1429,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": []
@@ -325,8 +346,9 @@
    "lvMax": 10,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 53.4,
-   "y": 17.0,
+   "x": 51.6,
+   "y": 27.4,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "9000",
    "items": [
@@ -348,6 +370,7 @@
    "zoneEn": "Dun Morogh",
    "x": 34.2,
    "y": 41.8,
+   "uiMapId": 1426,
    "spawnPoints": 3,
    "respawnRaw": "3600",
    "items": []
@@ -363,6 +386,7 @@
    "zoneEn": "Durotar",
    "x": 42.6,
    "y": 39.0,
+   "uiMapId": 1411,
    "spawnPoints": 3,
    "respawnRaw": "5400",
    "items": []
@@ -378,6 +402,7 @@
    "zoneEn": "Durotar",
    "x": 36.5,
    "y": 49.7,
+   "uiMapId": 1411,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -391,8 +416,9 @@
    "lvMax": 11,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 40.4,
-   "y": 15.7,
+   "x": 40.8,
+   "y": 26.3,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -408,6 +434,7 @@
    "zoneEn": "Durotar",
    "x": 52.8,
    "y": 9.0,
+   "uiMapId": 1411,
    "spawnPoints": 3,
    "respawnRaw": "19800",
    "items": []
@@ -423,6 +450,7 @@
    "zoneEn": "Dun Morogh",
    "x": 27.4,
    "y": 36.2,
+   "uiMapId": 1426,
    "spawnPoints": 2,
    "respawnRaw": "5400",
    "items": [
@@ -449,6 +477,7 @@
    "zoneEn": "Dun Morogh",
    "x": 22.8,
    "y": 52.1,
+   "uiMapId": 1426,
    "spawnPoints": 6,
    "respawnRaw": "5400",
    "items": [
@@ -470,6 +499,7 @@
    "zoneEn": "Teldrassil",
    "x": 40.1,
    "y": 80.0,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -491,6 +521,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 42.9,
    "y": 67.6,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -504,8 +535,9 @@
    "lvMax": 11,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 36.2,
-   "y": 11.3,
+   "x": 37.2,
+   "y": 22.6,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -521,6 +553,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 52.7,
    "y": 58.9,
+   "uiMapId": 1429,
    "spawnPoints": 6,
    "respawnRaw": "5400",
    "items": []
@@ -536,6 +569,7 @@
    "zoneEn": "Dun Morogh",
    "x": 55.6,
    "y": 58.5,
+   "uiMapId": 1426,
    "spawnPoints": 4,
    "respawnRaw": "5400",
    "items": []
@@ -551,6 +585,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 63.3,
    "y": 27.5,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -572,6 +607,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 68.1,
    "y": 44.9,
+   "uiMapId": 1429,
    "spawnPoints": 4,
    "respawnRaw": "5400",
    "items": [
@@ -593,6 +629,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 77.0,
    "y": 60.4,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -612,8 +649,9 @@
    "lvMax": 12,
    "zone": "莫高雷",
    "zoneEn": "Mulgore",
-   "x": 33.2,
-   "y": 25.2,
+   "x": 34.7,
+   "y": 34.2,
+   "uiMapId": 1412,
    "spawnPoints": 3,
    "respawnRaw": "5400",
    "items": []
@@ -629,6 +667,7 @@
    "zoneEn": "Elwynn Forest",
    "x": 25.4,
    "y": 89.8,
+   "uiMapId": 1429,
    "spawnPoints": 5,
    "respawnRaw": "5400",
    "items": []
@@ -644,6 +683,7 @@
    "zoneEn": "Dun Morogh",
    "x": 71.5,
    "y": 51.3,
+   "uiMapId": 1426,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -665,6 +705,7 @@
    "zoneEn": "Teldrassil",
    "x": 44.0,
    "y": 30.2,
+   "uiMapId": 1438,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -680,6 +721,7 @@
    "zoneEn": "The Barrens",
    "x": 49.6,
    "y": 15.8,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -736,6 +778,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 59.5,
    "y": 7.6,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -792,6 +835,7 @@
    "zoneEn": "Darkshore",
    "x": 40.3,
    "y": 40.5,
+   "uiMapId": 1439,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -853,6 +897,7 @@
    "zoneEn": "Tirisfal Glades",
    "x": 88.2,
    "y": 51.4,
+   "uiMapId": 1420,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": []
@@ -868,6 +913,7 @@
    "zoneEn": "Darkshore",
    "x": 45.7,
    "y": 36.4,
+   "uiMapId": 1439,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -924,6 +970,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 53.9,
    "y": 51.9,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -980,6 +1027,7 @@
    "zoneEn": "The Barrens",
    "x": 59.2,
    "y": 24.4,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1006,6 +1054,7 @@
    "zoneEn": "Loch Modan",
    "x": 34.6,
    "y": 27.1,
+   "uiMapId": 1432,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1032,6 +1081,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 35.7,
    "y": 8.2,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1088,6 +1138,7 @@
    "zoneEn": "Darkshore",
    "x": 56.6,
    "y": 34.9,
+   "uiMapId": 1439,
    "spawnPoints": 3,
    "respawnRaw": "5400",
    "items": [
@@ -1149,6 +1200,7 @@
    "zoneEn": "Westfall",
    "x": 46.4,
    "y": 19.1,
+   "uiMapId": 1436,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1170,6 +1222,7 @@
    "zoneEn": "The Barrens",
    "x": 48.0,
    "y": 19.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1196,6 +1249,7 @@
    "zoneEn": "Westfall",
    "x": 47.0,
    "y": 10.9,
+   "uiMapId": 1436,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1222,6 +1276,7 @@
    "zoneEn": "The Barrens",
    "x": 42.0,
    "y": 24.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5400",
    "items": [
@@ -1278,6 +1333,7 @@
    "zoneEn": "Darkshore",
    "x": 39.4,
    "y": 53.5,
+   "uiMapId": 1439,
    "spawnPoints": 5,
    "respawnRaw": "7200",
    "items": [
@@ -1334,6 +1390,7 @@
    "zoneEn": "Darkshore",
    "x": 36.8,
    "y": 67.6,
+   "uiMapId": 1439,
    "spawnPoints": 2,
    "respawnRaw": "7200",
    "items": [
@@ -1390,6 +1447,7 @@
    "zoneEn": "Loch Modan",
    "x": 77.7,
    "y": 74.9,
+   "uiMapId": 1432,
    "spawnPoints": 4,
    "respawnRaw": "14400",
    "items": [
@@ -1446,6 +1504,7 @@
    "zoneEn": "The Barrens",
    "x": 57.1,
    "y": 41.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -1502,6 +1561,7 @@
    "zoneEn": "Darkshore",
    "x": 43.0,
    "y": 61.1,
+   "uiMapId": 1439,
    "spawnPoints": 1,
    "respawnRaw": "9000",
    "items": [
@@ -1561,8 +1621,9 @@
    "lvMax": 17,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 16.1,
+   "x": 11.1,
    "y": 65.3,
+   "uiMapId": 1433,
    "spawnPoints": 6,
    "respawnRaw": "7200",
    "items": [
@@ -1619,6 +1680,7 @@
    "zoneEn": "The Barrens",
    "x": 56.5,
    "y": 41.6,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -1675,6 +1737,7 @@
    "zoneEn": "The Barrens",
    "x": 41.1,
    "y": 22.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -1731,6 +1794,7 @@
    "zoneEn": "Westfall",
    "x": 44.0,
    "y": 78.3,
+   "uiMapId": 1436,
    "spawnPoints": 1,
    "respawnRaw": "3600",
    "items": [
@@ -1757,6 +1821,7 @@
    "zoneEn": "Westfall",
    "x": 42.2,
    "y": 79.9,
+   "uiMapId": 1436,
    "spawnPoints": 3,
    "respawnRaw": "3600",
    "items": [
@@ -1783,6 +1848,7 @@
    "zoneEn": "Westfall",
    "x": 36.9,
    "y": 31.9,
+   "uiMapId": 1436,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -1807,8 +1873,9 @@
    "lvMax": 18,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 42.5,
+   "x": 37.4,
    "y": 31.0,
+   "uiMapId": 1433,
    "spawnPoints": 6,
    "respawnRaw": "7200",
    "items": [
@@ -1865,6 +1932,7 @@
    "zoneEn": "Westfall",
    "x": 27.3,
    "y": 44.5,
+   "uiMapId": 1436,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -1891,6 +1959,7 @@
    "zoneEn": "Loch Modan",
    "x": 73.1,
    "y": 27.0,
+   "uiMapId": 1432,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -1947,6 +2016,7 @@
    "zoneEn": "The Barrens",
    "x": 56.2,
    "y": 8.8,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -2003,6 +2073,7 @@
    "zoneEn": "Darkshore",
    "x": 38.7,
    "y": 87.6,
+   "uiMapId": 1439,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2064,6 +2135,7 @@
    "zoneEn": "The Barrens",
    "x": 56.4,
    "y": 8.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2120,6 +2192,7 @@
    "zoneEn": "The Barrens",
    "x": 43.2,
    "y": 52.1,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "7200",
    "items": [
@@ -2176,6 +2249,7 @@
    "zoneEn": "Westfall",
    "x": 43.0,
    "y": 27.0,
+   "uiMapId": 1436,
    "spawnPoints": 5,
    "respawnRaw": "7200",
    "items": [
@@ -2202,6 +2276,7 @@
    "zoneEn": "Loch Modan",
    "x": 78.1,
    "y": 52.4,
+   "uiMapId": 1432,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2258,6 +2333,7 @@
    "zoneEn": "The Barrens",
    "x": 39.1,
    "y": 15.3,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -2314,6 +2390,7 @@
    "zoneEn": "The Barrens",
    "x": 56.7,
    "y": 8.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2368,8 +2445,9 @@
    "lvMax": 19,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 38.7,
+   "x": 33.6,
    "y": 56.3,
+   "uiMapId": 1433,
    "spawnPoints": 6,
    "respawnRaw": "7200",
    "items": [
@@ -2426,6 +2504,7 @@
    "zoneEn": "The Barrens",
    "x": 59.6,
    "y": 8.3,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2487,6 +2566,7 @@
    "zoneEn": "The Barrens",
    "x": 48.3,
    "y": 33.1,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "172800",
    "items": [
@@ -2513,6 +2593,7 @@
    "zoneEn": "The Barrens",
    "x": 49.1,
    "y": 33.9,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -2539,6 +2620,7 @@
    "zoneEn": "Westfall",
    "x": 44.8,
    "y": 35.4,
+   "uiMapId": 1436,
    "spawnPoints": 6,
    "respawnRaw": "14400",
    "items": [
@@ -2560,6 +2642,7 @@
    "zoneEn": "The Barrens",
    "x": 46.5,
    "y": 39.5,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "61200",
    "items": [
@@ -2586,6 +2669,7 @@
    "zoneEn": "Darkshore",
    "x": 34.8,
    "y": 87.3,
+   "uiMapId": 1439,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -2642,6 +2726,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 63.5,
    "y": 63.4,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -2668,6 +2753,7 @@
    "zoneEn": "Loch Modan",
    "x": 70.1,
    "y": 66.4,
+   "uiMapId": 1432,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2692,8 +2778,9 @@
    "lvMax": 21,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 60.1,
+   "x": 55.0,
    "y": 56.2,
+   "uiMapId": 1433,
    "spawnPoints": 3,
    "respawnRaw": "61200",
    "items": [
@@ -2750,6 +2837,7 @@
    "zoneEn": "The Barrens",
    "x": 61.2,
    "y": 34.5,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -2811,6 +2899,7 @@
    "zoneEn": "Ashenvale",
    "x": 33.2,
    "y": 21.1,
+   "uiMapId": 1440,
    "spawnPoints": 3,
    "respawnRaw": "14400",
    "items": [
@@ -2872,6 +2961,7 @@
    "zoneEn": "Loch Modan",
    "x": 68.1,
    "y": 65.9,
+   "uiMapId": 1432,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -2898,6 +2988,7 @@
    "zoneEn": "Ashenvale",
    "x": 13.6,
    "y": 24.7,
+   "uiMapId": 1440,
    "spawnPoints": 2,
    "respawnRaw": "14400",
    "items": [
@@ -2954,6 +3045,7 @@
    "zoneEn": "Darkshore",
    "x": 57.8,
    "y": 21.4,
+   "uiMapId": 1439,
    "spawnPoints": 6,
    "respawnRaw": "30600",
    "items": [
@@ -2980,6 +3072,7 @@
    "zoneEn": "Loch Modan",
    "x": 58.9,
    "y": 31.1,
+   "uiMapId": 1432,
    "spawnPoints": 2,
    "respawnRaw": "19800",
    "items": [
@@ -3006,6 +3099,7 @@
    "zoneEn": "Ashenvale",
    "x": 26.8,
    "y": 18.4,
+   "uiMapId": 1440,
    "spawnPoints": 2,
    "respawnRaw": "30600",
    "items": [
@@ -3062,6 +3156,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 56.8,
    "y": 70.2,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3088,6 +3183,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 64.7,
    "y": 23.1,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -3114,6 +3210,7 @@
    "zoneEn": "The Barrens",
    "x": 40.8,
    "y": 45.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -3170,6 +3267,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 64.5,
    "y": 54.2,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -3224,8 +3322,9 @@
    "lvMax": 23,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 52.1,
+   "x": 47.0,
    "y": 45.2,
+   "uiMapId": 1433,
    "spawnPoints": 6,
    "respawnRaw": "14400",
    "items": [
@@ -3282,6 +3381,7 @@
    "zoneEn": "The Barrens",
    "x": 62.0,
    "y": 33.3,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -3343,6 +3443,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 58.6,
    "y": 69.3,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -3399,6 +3500,7 @@
    "zoneEn": "Duskwood",
    "x": 32.6,
    "y": 25.8,
+   "uiMapId": 1431,
    "spawnPoints": 6,
    "respawnRaw": "14400",
    "items": [
@@ -3425,6 +3527,7 @@
    "zoneEn": "Wetlands",
    "x": 48.1,
    "y": 74.7,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3451,6 +3554,7 @@
    "zoneEn": "Ashenvale",
    "x": 19.4,
    "y": 42.7,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "30600",
    "items": [
@@ -3507,6 +3611,7 @@
    "zoneEn": "Silverpine Forest",
    "x": 65.1,
    "y": 25.1,
+   "uiMapId": 1421,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3563,6 +3668,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 38.6,
    "y": 58.4,
+   "uiMapId": 1424,
    "spawnPoints": 1,
    "respawnRaw": "30600",
    "items": [
@@ -3619,6 +3725,7 @@
    "zoneEn": "The Barrens",
    "x": 47.5,
    "y": 85.5,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3675,6 +3782,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 66.7,
    "y": 52.3,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3731,6 +3839,7 @@
    "zoneEn": "Wetlands",
    "x": 30.1,
    "y": 30.7,
+   "uiMapId": 1437,
    "spawnPoints": 6,
    "respawnRaw": "61200",
    "items": [
@@ -3787,6 +3896,7 @@
    "zoneEn": "The Barrens",
    "x": 48.5,
    "y": 79.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5686",
    "items": []
@@ -3802,6 +3912,7 @@
    "zoneEn": "The Barrens",
    "x": 47.0,
    "y": 84.0,
+   "uiMapId": 1413,
    "spawnPoints": 2,
    "respawnRaw": "14400",
    "items": [
@@ -3858,6 +3969,7 @@
    "zoneEn": "Wetlands",
    "x": 47.3,
    "y": 59.2,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3884,6 +3996,7 @@
    "zoneEn": "The Barrens",
    "x": 48.5,
    "y": 79.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5311",
    "items": []
@@ -3899,6 +4012,7 @@
    "zoneEn": "The Barrens",
    "x": 43.1,
    "y": 70.1,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5277",
    "items": [
@@ -3920,6 +4034,7 @@
    "zoneEn": "The Barrens",
    "x": 48.1,
    "y": 79.8,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -3981,6 +4096,7 @@
    "zoneEn": "The Barrens",
    "x": 48.5,
    "y": 79.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5141",
    "items": []
@@ -3996,6 +4112,7 @@
    "zoneEn": "The Barrens",
    "x": 44.8,
    "y": 64.1,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -4055,8 +4172,9 @@
    "lvMax": 25,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 88.9,
+   "x": 83.8,
    "y": 66.8,
+   "uiMapId": 1433,
    "spawnPoints": 1,
    "respawnRaw": "30600",
    "items": [
@@ -4113,6 +4231,7 @@
    "zoneEn": "Ashenvale",
    "x": 46.5,
    "y": 44.3,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -4169,6 +4288,7 @@
    "zoneEn": "The Barrens",
    "x": 49.6,
    "y": 84.3,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "19800",
    "items": [
@@ -4225,6 +4345,7 @@
    "zoneEn": "Wetlands",
    "x": 23.7,
    "y": 29.4,
+   "uiMapId": 1437,
    "spawnPoints": 6,
    "respawnRaw": "30600",
    "items": [
@@ -4281,6 +4402,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 53.8,
    "y": 36.3,
+   "uiMapId": 1442,
    "spawnPoints": 2,
    "respawnRaw": "14400",
    "items": [
@@ -4307,6 +4429,7 @@
    "zoneEn": "Ashenvale",
    "x": 35.8,
    "y": 36.6,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "14400",
    "items": [
@@ -4363,6 +4486,7 @@
    "zoneEn": "The Barrens",
    "x": 48.5,
    "y": 79.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "5706",
    "items": []
@@ -4378,6 +4502,7 @@
    "zoneEn": "Ashenvale",
    "x": 25.6,
    "y": 63.5,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -4434,6 +4559,7 @@
    "zoneEn": "The Barrens",
    "x": 43.2,
    "y": 83.2,
+   "uiMapId": 1413,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -4493,8 +4619,9 @@
    "lvMax": 26,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 75.5,
+   "x": 70.4,
    "y": 39.6,
+   "uiMapId": 1433,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": [
@@ -4521,6 +4648,7 @@
    "zoneEn": "Westfall",
    "x": 50.6,
    "y": 43.5,
+   "uiMapId": 1436,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": [
@@ -4547,6 +4675,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 86.0,
    "y": 39.9,
+   "uiMapId": 1424,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -4603,6 +4732,7 @@
    "zoneEn": "The Barrens",
    "x": 47.3,
    "y": 73.2,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -4659,6 +4789,7 @@
    "zoneEn": "The Barrens",
    "x": 49.5,
    "y": 83.9,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -4715,6 +4846,7 @@
    "zoneEn": "Ashenvale",
    "x": 52.8,
    "y": 70.0,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -4771,6 +4903,7 @@
    "zoneEn": "Thousand Needles",
    "x": 32.5,
    "y": 26.8,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -4830,8 +4963,9 @@
    "lvMax": 27,
    "zone": "赤脊山",
    "zoneEn": "Redridge Mountains",
-   "x": 34.9,
+   "x": 29.8,
    "y": 8.3,
+   "uiMapId": 1433,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": [
@@ -4858,6 +4992,7 @@
    "zoneEn": "Duskwood",
    "x": 86.4,
    "y": 47.6,
+   "uiMapId": 1431,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -4884,6 +5019,7 @@
    "zoneEn": "Ashenvale",
    "x": 56.0,
    "y": 62.8,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -4940,6 +5076,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 35.2,
    "y": 15.0,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -4996,6 +5133,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 49.3,
    "y": 36.2,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -5052,6 +5190,7 @@
    "zoneEn": "Thousand Needles",
    "x": 55.6,
    "y": 50.5,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -5108,6 +5247,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 65.7,
    "y": 60.1,
+   "uiMapId": 1424,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5164,6 +5304,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 29.6,
    "y": 69.4,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -5220,6 +5361,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 70.7,
    "y": 78.0,
+   "uiMapId": 1424,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -5276,6 +5418,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 28.1,
    "y": 12.2,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -5332,6 +5475,7 @@
    "zoneEn": "Wetlands",
    "x": 38.4,
    "y": 46.1,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5358,6 +5502,7 @@
    "zoneEn": "Wetlands",
    "x": 45.3,
    "y": 44.4,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "27000",
    "items": [
@@ -5414,6 +5559,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 25.6,
    "y": 11.5,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -5470,6 +5616,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 29.1,
    "y": 73.6,
+   "uiMapId": 1424,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5526,6 +5673,7 @@
    "zoneEn": "Wetlands",
    "x": 12.6,
    "y": 67.5,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -5582,6 +5730,7 @@
    "zoneEn": "Stonetalon Mountains",
    "x": 30.4,
    "y": 68.1,
+   "uiMapId": 1442,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5638,6 +5787,7 @@
    "zoneEn": "Thousand Needles",
    "x": 22.7,
    "y": 37.5,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5694,6 +5844,7 @@
    "zoneEn": "Duskwood",
    "x": 21.1,
    "y": 27.2,
+   "uiMapId": 1431,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -5715,6 +5866,7 @@
    "zoneEn": "Wetlands",
    "x": 69.9,
    "y": 29.2,
+   "uiMapId": 1437,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -5741,6 +5893,7 @@
    "zoneEn": "Ashenvale",
    "x": 83.4,
    "y": 48.5,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -5797,6 +5950,7 @@
    "zoneEn": "Duskwood",
    "x": 18.0,
    "y": 37.9,
+   "uiMapId": 1431,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -5823,6 +5977,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 37.3,
    "y": 19.8,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -5879,6 +6034,7 @@
    "zoneEn": "Duskwood",
    "x": 61.7,
    "y": 36.9,
+   "uiMapId": 1431,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -5905,6 +6061,7 @@
    "zoneEn": "Thousand Needles",
    "x": 16.8,
    "y": 41.5,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -5961,6 +6118,7 @@
    "zoneEn": "Ashenvale",
    "x": 81.6,
    "y": 48.5,
+   "uiMapId": 1440,
    "spawnPoints": 2,
    "respawnRaw": "18000",
    "items": [
@@ -6017,6 +6175,7 @@
    "zoneEn": "Ashenvale",
    "x": 49.8,
    "y": 39.6,
+   "uiMapId": 1440,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -6043,6 +6202,7 @@
    "zoneEn": "Hillsbrad Foothills",
    "x": 64.5,
    "y": 79.7,
+   "uiMapId": 1424,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -6099,6 +6259,7 @@
    "zoneEn": "Desolace",
    "x": 78.9,
    "y": 21.2,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -6155,6 +6316,7 @@
    "zoneEn": "Desolace",
    "x": 61.3,
    "y": 28.9,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -6211,6 +6373,7 @@
    "zoneEn": "Duskwood",
    "x": 63.5,
    "y": 83.7,
+   "uiMapId": 1431,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -6237,6 +6400,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 32.3,
    "y": 31.0,
+   "uiMapId": 1417,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -6263,6 +6427,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 30.2,
    "y": 72.1,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -6319,6 +6484,7 @@
    "zoneEn": "Thousand Needles",
    "x": 70.5,
    "y": 72.9,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -6375,6 +6541,7 @@
    "zoneEn": "The Barrens",
    "x": 47.7,
    "y": 90.7,
+   "uiMapId": 1413,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -6431,6 +6598,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 58.2,
    "y": 41.9,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -6487,6 +6655,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 30.4,
    "y": 43.8,
+   "uiMapId": 1417,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -6508,6 +6677,7 @@
    "zoneEn": "Thousand Needles",
    "x": 68.4,
    "y": 82.3,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "27000",
    "items": [
@@ -6529,6 +6699,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 31.4,
    "y": 51.5,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -6555,6 +6726,7 @@
    "zoneEn": "Badlands",
    "x": 52.4,
    "y": 19.5,
+   "uiMapId": 1418,
    "spawnPoints": 3,
    "respawnRaw": "37800",
    "items": [
@@ -6611,6 +6783,7 @@
    "zoneEn": "Badlands",
    "x": 59.7,
    "y": 29.4,
+   "uiMapId": 1418,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": [
@@ -6672,6 +6845,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 39.5,
    "y": 18.9,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -6728,6 +6902,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 34.9,
    "y": 22.7,
+   "uiMapId": 1434,
    "spawnPoints": 4,
    "respawnRaw": "37800",
    "items": [
@@ -6784,6 +6959,7 @@
    "zoneEn": "Desolace",
    "x": 52.9,
    "y": 50.1,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -6840,6 +7016,7 @@
    "zoneEn": "Thousand Needles",
    "x": 87.2,
    "y": 78.4,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "108000",
    "items": [
@@ -6861,6 +7038,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 65.2,
    "y": 22.8,
+   "uiMapId": 1435,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -6917,6 +7095,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 64.6,
    "y": 73.2,
+   "uiMapId": 1417,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -6943,6 +7122,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 64.7,
    "y": 44.8,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -6999,6 +7179,7 @@
    "zoneEn": "Desolace",
    "x": 42.2,
    "y": 19.0,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -7055,6 +7236,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 59.0,
    "y": 9.4,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -7111,6 +7293,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 48.1,
    "y": 16.0,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -7167,6 +7350,7 @@
    "zoneEn": "Badlands",
    "x": 34.6,
    "y": 23.1,
+   "uiMapId": 1418,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -7198,6 +7382,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 37.4,
    "y": 31.2,
+   "uiMapId": 1434,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -7254,6 +7439,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 26.5,
    "y": 60.7,
+   "uiMapId": 1417,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": [
@@ -7310,6 +7496,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 52.1,
    "y": 46.9,
+   "uiMapId": 1416,
    "spawnPoints": 2,
    "respawnRaw": "75600",
    "items": [
@@ -7341,6 +7528,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 62.0,
    "y": 21.2,
+   "uiMapId": 1435,
    "spawnPoints": 5,
    "respawnRaw": "37800",
    "items": [
@@ -7397,6 +7585,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 54.6,
    "y": 79.7,
+   "uiMapId": 1417,
    "spawnPoints": 3,
    "respawnRaw": "37800",
    "items": [
@@ -7453,6 +7642,7 @@
    "zoneEn": "Thousand Needles",
    "x": 62.5,
    "y": 0.1,
+   "uiMapId": 1441,
    "spawnPoints": 2,
    "respawnRaw": "37800",
    "items": [
@@ -7509,6 +7699,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 18.1,
    "y": 68.8,
+   "uiMapId": 1417,
    "spawnPoints": 2,
    "respawnRaw": "75600",
    "items": [
@@ -7565,6 +7756,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 31.1,
    "y": 20.4,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -7621,6 +7813,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 82.8,
    "y": 32.2,
+   "uiMapId": 1417,
    "spawnPoints": 1,
    "respawnRaw": "57600",
    "items": []
@@ -7636,6 +7829,7 @@
    "zoneEn": "Desolace",
    "x": 51.1,
    "y": 86.1,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -7692,6 +7886,7 @@
    "zoneEn": "Badlands",
    "x": 41.5,
    "y": 29.8,
+   "uiMapId": 1418,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -7748,6 +7943,7 @@
    "zoneEn": "Badlands",
    "x": 19.9,
    "y": 56.6,
+   "uiMapId": 1418,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": [
@@ -7804,6 +8000,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 64.8,
    "y": 73.5,
+   "uiMapId": 1417,
    "spawnPoints": 6,
    "respawnRaw": "172800",
    "items": [
@@ -7860,6 +8057,7 @@
    "zoneEn": "Badlands",
    "x": 55.1,
    "y": 83.6,
+   "uiMapId": 1418,
    "spawnPoints": 6,
    "respawnRaw": "115200",
    "items": [
@@ -7916,6 +8114,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 52.0,
    "y": 62.9,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "38000",
    "items": [
@@ -7972,6 +8171,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 19.4,
    "y": 90.2,
+   "uiMapId": 1417,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -7993,6 +8193,7 @@
    "zoneEn": "Arathi Highlands",
    "x": 20.4,
    "y": 66.9,
+   "uiMapId": 1417,
    "spawnPoints": 4,
    "respawnRaw": "115200",
    "items": [
@@ -8049,6 +8250,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 38.1,
    "y": 61.1,
+   "uiMapId": 1434,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -8105,6 +8307,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 34.5,
    "y": 38.8,
+   "uiMapId": 1435,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": [
@@ -8161,6 +8364,7 @@
    "zoneEn": "The Hinterlands",
    "x": 11.9,
    "y": 53.7,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -8217,6 +8421,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 36.0,
    "y": 63.1,
+   "uiMapId": 1445,
    "spawnPoints": 3,
    "respawnRaw": "115200",
    "items": [
@@ -8273,6 +8478,7 @@
    "zoneEn": "Feralas",
    "x": 80.2,
    "y": 39.6,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -8329,6 +8535,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 36.5,
    "y": 57.1,
+   "uiMapId": 1434,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": [
@@ -8385,6 +8592,7 @@
    "zoneEn": "Desolace",
    "x": 30.4,
    "y": 60.2,
+   "uiMapId": 1443,
    "spawnPoints": 1,
    "respawnRaw": "27000",
    "items": [
@@ -8441,6 +8649,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 61.4,
    "y": 83.7,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -8497,6 +8706,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 95.9,
    "y": 64.4,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -8553,6 +8763,7 @@
    "zoneEn": "Tanaris",
    "x": 52.3,
    "y": 33.3,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -8568,6 +8779,7 @@
    "zoneEn": "Feralas",
    "x": 59.5,
    "y": 59.4,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -8624,6 +8836,7 @@
    "zoneEn": "Thousand Needles",
    "x": 75.5,
    "y": 2.6,
+   "uiMapId": 1441,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": []
@@ -8639,6 +8852,7 @@
    "zoneEn": "The Hinterlands",
    "x": 32.4,
    "y": 56.9,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -8695,6 +8909,7 @@
    "zoneEn": "Feralas",
    "x": 69.2,
    "y": 57.3,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -8710,6 +8925,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 57.8,
    "y": 61.6,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": []
@@ -8725,6 +8941,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 49.8,
    "y": 30.9,
+   "uiMapId": 1434,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -8746,6 +8963,7 @@
    "zoneEn": "Alterac Mountains",
    "x": 73.7,
    "y": 65.3,
+   "uiMapId": 1416,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -8761,6 +8979,7 @@
    "zoneEn": "The Hinterlands",
    "x": 37.1,
    "y": 45.3,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": []
@@ -8776,6 +8995,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 29.2,
    "y": 84.9,
+   "uiMapId": 1434,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -8791,6 +9011,7 @@
    "zoneEn": "Badlands",
    "x": 23.7,
    "y": 74.2,
+   "uiMapId": 1418,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -8806,6 +9027,7 @@
    "zoneEn": "Dustwallow Marsh",
    "x": 42.1,
    "y": 75.9,
+   "uiMapId": 1445,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -8821,6 +9043,7 @@
    "zoneEn": "Feralas",
    "x": 36.6,
    "y": 51.4,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -8836,6 +9059,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 68.9,
    "y": 38.9,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -8851,6 +9075,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 28.3,
    "y": 62.6,
+   "uiMapId": 1434,
    "spawnPoints": 2,
    "respawnRaw": "18000",
    "items": [
@@ -8877,6 +9102,7 @@
    "zoneEn": "Badlands",
    "x": 14.7,
    "y": 89.3,
+   "uiMapId": 1418,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": []
@@ -8892,6 +9118,7 @@
    "zoneEn": "Stranglethorn Vale",
    "x": 43.4,
    "y": 45.7,
+   "uiMapId": 1434,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": [
@@ -8918,6 +9145,7 @@
    "zoneEn": "Tanaris",
    "x": 38.8,
    "y": 21.7,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -8933,6 +9161,7 @@
    "zoneEn": "The Hinterlands",
    "x": 33.1,
    "y": 70.3,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -8948,6 +9177,7 @@
    "zoneEn": "Searing Gorge",
    "x": 45.9,
    "y": 67.8,
+   "uiMapId": 1427,
    "spawnPoints": 5,
    "respawnRaw": "37800",
    "items": []
@@ -8963,6 +9193,7 @@
    "zoneEn": "Tanaris",
    "x": 49.4,
    "y": 36.0,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": []
@@ -8978,6 +9209,7 @@
    "zoneEn": "Tanaris",
    "x": 36.6,
    "y": 24.6,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -8993,6 +9225,7 @@
    "zoneEn": "Feralas",
    "x": 28.2,
    "y": 67.6,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9008,6 +9241,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 70.0,
    "y": 53.2,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9023,6 +9257,7 @@
    "zoneEn": "Tanaris",
    "x": 73.2,
    "y": 48.7,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9038,6 +9273,7 @@
    "zoneEn": "Feralas",
    "x": 76.7,
    "y": 66.2,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9053,6 +9289,7 @@
    "zoneEn": "Searing Gorge",
    "x": 58.6,
    "y": 56.5,
+   "uiMapId": 1427,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9068,6 +9305,7 @@
    "zoneEn": "Feralas",
    "x": 55.6,
    "y": 74.2,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -9083,6 +9321,7 @@
    "zoneEn": "Feralas",
    "x": 52.0,
    "y": 60.9,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -9098,6 +9337,7 @@
    "zoneEn": "Tanaris",
    "x": 41.3,
    "y": 54.7,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9113,6 +9353,7 @@
    "zoneEn": "Blasted Lands",
    "x": 45.2,
    "y": 16.0,
+   "uiMapId": 1419,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": []
@@ -9128,6 +9369,7 @@
    "zoneEn": "Searing Gorge",
    "x": 61.9,
    "y": 73.2,
+   "uiMapId": 1427,
    "spawnPoints": 5,
    "respawnRaw": "75600",
    "items": []
@@ -9143,6 +9385,7 @@
    "zoneEn": "The Hinterlands",
    "x": 50.5,
    "y": 64.1,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9158,6 +9401,7 @@
    "zoneEn": "Azshara",
    "x": 17.9,
    "y": 65.6,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9173,6 +9417,7 @@
    "zoneEn": "Azshara",
    "x": 13.2,
    "y": 74.2,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "27000",
    "items": []
@@ -9188,6 +9433,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 78.8,
    "y": 43.8,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9203,6 +9449,7 @@
    "zoneEn": "Swamp of Sorrows",
    "x": 77.5,
    "y": 39.4,
+   "uiMapId": 1435,
    "spawnPoints": 1,
    "respawnRaw": "28800",
    "items": []
@@ -9218,6 +9465,7 @@
    "zoneEn": "Feralas",
    "x": 44.8,
    "y": 25.0,
+   "uiMapId": 1444,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9233,6 +9481,7 @@
    "zoneEn": "Felwood",
    "x": 50.0,
    "y": 77.1,
+   "uiMapId": 1448,
    "spawnPoints": 4,
    "respawnRaw": "75600",
    "items": []
@@ -9248,6 +9497,7 @@
    "zoneEn": "Blasted Lands",
    "x": 50.2,
    "y": 20.7,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": []
@@ -9263,6 +9513,7 @@
    "zoneEn": "Azshara",
    "x": 38.3,
    "y": 32.1,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -9278,6 +9529,7 @@
    "zoneEn": "The Hinterlands",
    "x": 30.2,
    "y": 48.0,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9293,6 +9545,7 @@
    "zoneEn": "Searing Gorge",
    "x": 51.1,
    "y": 46.8,
+   "uiMapId": 1427,
    "spawnPoints": 2,
    "respawnRaw": "75600",
    "items": []
@@ -9308,6 +9561,7 @@
    "zoneEn": "The Hinterlands",
    "x": 58.9,
    "y": 43.1,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9323,6 +9577,7 @@
    "zoneEn": "Azshara",
    "x": 16.6,
    "y": 54.1,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9338,6 +9593,7 @@
    "zoneEn": "The Hinterlands",
    "x": 70.2,
    "y": 55.4,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": []
@@ -9353,6 +9609,7 @@
    "zoneEn": "Blasted Lands",
    "x": 56.1,
    "y": 31.1,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "115200",
    "items": []
@@ -9368,6 +9625,7 @@
    "zoneEn": "Tanaris",
    "x": 53.3,
    "y": 73.8,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": []
@@ -9383,6 +9641,7 @@
    "zoneEn": "Felwood",
    "x": 47.0,
    "y": 84.0,
+   "uiMapId": 1448,
    "spawnPoints": 4,
    "respawnRaw": "115200",
    "items": []
@@ -9398,6 +9657,7 @@
    "zoneEn": "Tanaris",
    "x": 38.7,
    "y": 55.6,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -9419,6 +9679,7 @@
    "zoneEn": "Un'Goro Crater",
    "x": 62.4,
    "y": 66.0,
+   "uiMapId": 1449,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": []
@@ -9432,8 +9693,9 @@
    "lvMax": 50,
    "zone": "暴风城",
    "zoneEn": "Stormwind City",
-   "x": 66.5,
-   "y": 31.4,
+   "x": 71.2,
+   "y": 48.8,
+   "uiMapId": 1453,
    "spawnPoints": 2,
    "respawnRaw": "7286",
    "items": []
@@ -9449,6 +9711,7 @@
    "zoneEn": "Searing Gorge",
    "x": 42.4,
    "y": 23.1,
+   "uiMapId": 1427,
    "spawnPoints": 5,
    "respawnRaw": "18000",
    "items": []
@@ -9464,6 +9727,7 @@
    "zoneEn": "Searing Gorge",
    "x": 29.5,
    "y": 62.4,
+   "uiMapId": 1427,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -9479,6 +9743,7 @@
    "zoneEn": "Tanaris",
    "x": 34.1,
    "y": 44.7,
+   "uiMapId": 1446,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9494,6 +9759,7 @@
    "zoneEn": "Searing Gorge",
    "x": 25.6,
    "y": 87.7,
+   "uiMapId": 1427,
    "spawnPoints": 1,
    "respawnRaw": "108000",
    "items": [
@@ -9515,6 +9781,7 @@
    "zoneEn": "Azshara",
    "x": 41.3,
    "y": 54.0,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -9536,6 +9803,7 @@
    "zoneEn": "Searing Gorge",
    "x": 14.5,
    "y": 37.2,
+   "uiMapId": 1427,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": []
@@ -9551,6 +9819,7 @@
    "zoneEn": "The Hinterlands",
    "x": 81.5,
    "y": 49.2,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": []
@@ -9566,6 +9835,7 @@
    "zoneEn": "Azshara",
    "x": 35.4,
    "y": 55.7,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9581,6 +9851,7 @@
    "zoneEn": "Azshara",
    "x": 58.5,
    "y": 30.9,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -9637,6 +9908,7 @@
    "zoneEn": "Azshara",
    "x": 66.3,
    "y": 16.7,
+   "uiMapId": 1447,
    "spawnPoints": 3,
    "respawnRaw": "75600",
    "items": [
@@ -9693,6 +9965,7 @@
    "zoneEn": "Felwood",
    "x": 47.7,
    "y": 93.1,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": []
@@ -9708,6 +9981,7 @@
    "zoneEn": "Blasted Lands",
    "x": 58.6,
    "y": 35.6,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": []
@@ -9723,6 +9997,7 @@
    "zoneEn": "Felwood",
    "x": 42.2,
    "y": 49.9,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -9779,6 +10054,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 46.3,
    "y": 52.4,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -9835,6 +10111,7 @@
    "zoneEn": "The Hinterlands",
    "x": 63.9,
    "y": 77.6,
+   "uiMapId": 1425,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -9856,6 +10133,7 @@
    "zoneEn": "Felwood",
    "x": 50.2,
    "y": 32.8,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -9912,6 +10190,7 @@
    "zoneEn": "Azshara",
    "x": 52.6,
    "y": 47.4,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -9968,6 +10247,7 @@
    "zoneEn": "Blasted Lands",
    "x": 58.8,
    "y": 42.6,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": [
@@ -10024,6 +10304,7 @@
    "zoneEn": "Un'Goro Crater",
    "x": 68.5,
    "y": 12.7,
+   "uiMapId": 1449,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -10080,6 +10361,7 @@
    "zoneEn": "Blasted Lands",
    "x": 48.3,
    "y": 38.7,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": [
@@ -10136,6 +10418,7 @@
    "zoneEn": "Burning Steppes",
    "x": 87.4,
    "y": 50.5,
+   "uiMapId": 1428,
    "spawnPoints": 4,
    "respawnRaw": "18000",
    "items": [
@@ -10192,6 +10475,7 @@
    "zoneEn": "Blasted Lands",
    "x": 51.3,
    "y": 53.1,
+   "uiMapId": 1419,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -10248,6 +10532,7 @@
    "zoneEn": "Felwood",
    "x": 40.2,
    "y": 85.2,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -10304,6 +10589,7 @@
    "zoneEn": "Un'Goro Crater",
    "x": 48.7,
    "y": 85.3,
+   "uiMapId": 1449,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -10360,6 +10646,7 @@
    "zoneEn": "Burning Steppes",
    "x": 80.5,
    "y": 41.5,
+   "uiMapId": 1428,
    "spawnPoints": 5,
    "respawnRaw": "75600",
    "items": [
@@ -10416,6 +10703,7 @@
    "zoneEn": "Burning Steppes",
    "x": 80.5,
    "y": 48.0,
+   "uiMapId": 1428,
    "spawnPoints": 4,
    "respawnRaw": "37800",
    "items": [
@@ -10472,6 +10760,7 @@
    "zoneEn": "Azshara",
    "x": 76.2,
    "y": 25.4,
+   "uiMapId": 1447,
    "spawnPoints": 1,
    "respawnRaw": "172800",
    "items": [
@@ -10526,8 +10815,9 @@
    "lvMax": 55,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 39.3,
-   "y": 70.5,
+   "x": 33.7,
+   "y": 59.7,
+   "uiMapId": 1423,
    "spawnPoints": 6,
    "respawnRaw": "37800",
    "items": [
@@ -10584,6 +10874,7 @@
    "zoneEn": "Winterspring",
    "x": 45.0,
    "y": 37.4,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -10640,6 +10931,7 @@
    "zoneEn": "Searing Gorge",
    "x": 43.3,
    "y": 99.2,
+   "uiMapId": 1427,
    "spawnPoints": 1,
    "respawnRaw": "60",
    "items": []
@@ -10655,6 +10947,7 @@
    "zoneEn": "Burning Steppes",
    "x": 41.9,
    "y": 46.5,
+   "uiMapId": 1428,
    "spawnPoints": 6,
    "respawnRaw": "75600",
    "items": [
@@ -10711,6 +11004,7 @@
    "zoneEn": "Badlands",
    "x": 56.1,
    "y": 61.7,
+   "uiMapId": 1418,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -10765,8 +11059,9 @@
    "lvMax": 56,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 85.7,
-   "y": 45.3,
+   "x": 75.4,
+   "y": 37.0,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -10823,6 +11118,7 @@
    "zoneEn": "Felwood",
    "x": 57.8,
    "y": 22.3,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -10879,6 +11175,7 @@
    "zoneEn": "Winterspring",
    "x": 55.3,
    "y": 49.8,
+   "uiMapId": 1452,
    "spawnPoints": 3,
    "respawnRaw": "37800",
    "items": [
@@ -10933,8 +11230,9 @@
    "lvMax": 56,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 74.3,
-   "y": 53.0,
+   "x": 65.2,
+   "y": 43.9,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -10991,6 +11289,7 @@
    "zoneEn": "Felwood",
    "x": 43.1,
    "y": 41.4,
+   "uiMapId": 1448,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -11047,6 +11346,7 @@
    "zoneEn": "Silithus",
    "x": 63.2,
    "y": 16.7,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -11103,6 +11403,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 54.2,
    "y": 80.4,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -11159,6 +11460,7 @@
    "zoneEn": "Blasted Lands",
    "x": 47.2,
    "y": 47.1,
+   "uiMapId": 1419,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -11215,6 +11517,7 @@
    "zoneEn": "Burning Steppes",
    "x": 79.2,
    "y": 29.7,
+   "uiMapId": 1428,
    "spawnPoints": 5,
    "respawnRaw": "37800",
    "items": [
@@ -11271,6 +11574,7 @@
    "zoneEn": "Blasted Lands",
    "x": 41.3,
    "y": 38.7,
+   "uiMapId": 1419,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -11327,6 +11631,7 @@
    "zoneEn": "Silithus",
    "x": 39.3,
    "y": 55.4,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -11383,6 +11688,7 @@
    "zoneEn": "Un'Goro Crater",
    "x": 38.0,
    "y": 75.5,
+   "uiMapId": 1449,
    "spawnPoints": 1,
    "respawnRaw": "108000",
    "items": [
@@ -11437,8 +11743,9 @@
    "lvMax": 57,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 55.4,
-   "y": 24.9,
+   "x": 48.2,
+   "y": 18.7,
+   "uiMapId": 1423,
    "spawnPoints": 4,
    "respawnRaw": "115200",
    "items": [
@@ -11493,8 +11800,9 @@
    "lvMax": 57,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 26.2,
-   "y": 32.8,
+   "x": 22.0,
+   "y": 25.8,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -11516,6 +11824,7 @@
    "zoneEn": "Winterspring",
    "x": 51.1,
    "y": 10.8,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -11572,6 +11881,7 @@
    "zoneEn": "Silithus",
    "x": 45.8,
    "y": 28.1,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -11628,6 +11938,7 @@
    "zoneEn": "Burning Steppes",
    "x": 54.2,
    "y": 39.1,
+   "uiMapId": 1428,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -11684,6 +11995,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 49.0,
    "y": 32.7,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -11740,6 +12052,7 @@
    "zoneEn": "Silithus",
    "x": 44.4,
    "y": 80.8,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "54000",
    "items": [
@@ -11796,6 +12109,7 @@
    "zoneEn": "Silithus",
    "x": 21.6,
    "y": 24.1,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -11852,6 +12166,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 48.0,
    "y": 67.4,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "172800",
    "items": [
@@ -11908,6 +12223,7 @@
    "zoneEn": "Mulgore",
    "x": 22.5,
    "y": 98.1,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "25200",
    "items": [
@@ -11962,8 +12278,9 @@
    "lvMax": 58,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 72.2,
-   "y": 14.0,
+   "x": 63.3,
+   "y": 8.8,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -12020,6 +12337,7 @@
    "zoneEn": "Winterspring",
    "x": 66.7,
    "y": 53.8,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -12076,6 +12394,7 @@
    "zoneEn": "Winterspring",
    "x": 66.9,
    "y": 35.6,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -12132,6 +12451,7 @@
    "zoneEn": "Burning Steppes",
    "x": 42.1,
    "y": 54.8,
+   "uiMapId": 1428,
    "spawnPoints": 6,
    "respawnRaw": "18000",
    "items": [
@@ -12186,8 +12506,9 @@
    "lvMax": 59,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 88.5,
-   "y": 86.5,
+   "x": 78.0,
+   "y": 74.1,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -12244,6 +12565,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 44.4,
    "y": 13.5,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -12300,6 +12622,7 @@
    "zoneEn": "Silithus",
    "x": 21.0,
    "y": 61.3,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -12354,8 +12677,9 @@
    "lvMax": 59,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 72.2,
-   "y": 16.9,
+   "x": 63.3,
+   "y": 11.4,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -12412,6 +12736,7 @@
    "zoneEn": "Burning Steppes",
    "x": 22.4,
    "y": 60.0,
+   "uiMapId": 1428,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -12468,6 +12793,7 @@
    "zoneEn": "Winterspring",
    "x": 63.4,
    "y": 70.2,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "75600",
    "items": [
@@ -12524,6 +12850,7 @@
    "zoneEn": "Un'Goro Crater",
    "x": 35.3,
    "y": 36.0,
+   "uiMapId": 1449,
    "spawnPoints": 1,
    "respawnRaw": "108000",
    "items": [
@@ -12580,6 +12907,7 @@
    "zoneEn": "Silithus",
    "x": 58.0,
    "y": 79.4,
+   "uiMapId": 1451,
    "spawnPoints": 2,
    "respawnRaw": "115200",
    "items": [
@@ -12636,6 +12964,7 @@
    "zoneEn": "Mulgore",
    "x": 22.5,
    "y": 98.1,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "25200",
    "items": [
@@ -12690,8 +13019,9 @@
    "lvMax": 60,
    "zone": "东瘟疫之地",
    "zoneEn": "Eastern Plaguelands",
-   "x": 52.2,
-   "y": 18.5,
+   "x": 45.3,
+   "y": 12.9,
+   "uiMapId": 1423,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -12748,6 +13078,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 45.7,
    "y": 18.8,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -12804,6 +13135,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 42.2,
    "y": 18.5,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "37800",
    "items": [
@@ -12860,6 +13192,7 @@
    "zoneEn": "Mulgore",
    "x": 22.4,
    "y": 98.0,
+   "uiMapId": 1412,
    "spawnPoints": 1,
    "respawnRaw": "25200",
    "items": [
@@ -12916,6 +13249,7 @@
    "zoneEn": "Silithus",
    "x": 18.3,
    "y": 85.8,
+   "uiMapId": 1451,
    "spawnPoints": 3,
    "respawnRaw": "18000",
    "items": [
@@ -12972,6 +13306,7 @@
    "zoneEn": "Burning Steppes",
    "x": 74.3,
    "y": 37.8,
+   "uiMapId": 1428,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -13028,6 +13363,7 @@
    "zoneEn": "Winterspring",
    "x": 65.0,
    "y": 80.3,
+   "uiMapId": 1452,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -13084,6 +13420,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 45.1,
    "y": 15.3,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -13140,6 +13477,7 @@
    "zoneEn": "Silithus",
    "x": 29.6,
    "y": 86.6,
+   "uiMapId": 1451,
    "spawnPoints": 1,
    "respawnRaw": "172800",
    "items": [
@@ -13196,6 +13534,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 45.6,
    "y": 9.2,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "18000",
    "items": [
@@ -13252,6 +13591,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 62.1,
    "y": 36.3,
+   "uiMapId": 1422,
    "spawnPoints": 1,
    "respawnRaw": "115200",
    "items": [
@@ -13308,6 +13648,7 @@
    "zoneEn": "Western Plaguelands",
    "x": 56.9,
    "y": 34.8,
+   "uiMapId": 1422,
    "spawnPoints": 3,
    "respawnRaw": "75600",
    "items": [

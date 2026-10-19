@@ -37,9 +37,10 @@ def main():
     xk = load(os.path.join(UP, 'xr-skills.json'))
     prov_wb = {'type': 'datamine_cn', 'url': wb['meta']['source'].split('（')[0],
                'checkedAt': wb['meta']['fetched']}
-    prov_gi = {'type': 'addon', 'url': 'GearInsight_Forever 0.4.29 Data.lua',
+    # 版本号从快照自己的 meta 里读（插件升到 0.4.32 之后这里还写 0.4.29，等于给每条记录盖过期出处）
+    prov_gi = {'type': 'addon', 'url': gi['meta']['source'].split(' 的')[0],
                'checkedAt': gi['meta']['fetched']}
-    prov_xr = {'type': 'addon', 'url': 'XR_DungeonGuide 0.37.1 Data_Skills.lua',
+    prov_xr = {'type': 'addon', 'url': xk['meta']['source'].split('（')[0],
                'checkedAt': xk['meta']['fetched']}
 
     # 插件索引：(职业, 名字) → 行；同名在同职业里重复出现的，整条不参与回填（宁缺不猜）
@@ -148,9 +149,9 @@ def main():
                  'build': wb['meta'].get('foreverBuild'), 'release': wb['meta'].get('release'),
                  # 九个真地址逐条列着：逐字回查（tools/audit-translations.py）按职业取那一页
                  'pages': (wb['meta'].get('pageUrls') or {})},
-                {'key': 'gi', 'name': 'GearInsight 无限版 0.4.29', 'kind': 'beta 解包转述（回填 id 与标记）',
+                {'key': 'gi', 'name': 'GearInsight 无限版 ' + (gi['meta'].get('addonVersion') or '版本未记'), 'kind': 'beta 解包转述（回填 id 与标记）',
                  'date': gi['meta']['fetched']},
-                {'key': 'xr', 'name': 'XR 全能助手 0.37.1', 'kind': '社区整理稿（回填每级学习等级）',
+                {'key': 'xr', 'name': 'XR 全能助手 ' + (xk['meta'].get('addonVersion') or '版本未记'), 'kind': '社区整理稿（回填每级学习等级）',
                  'date': xk['meta']['fetched']}],
         },
         'spells': spells,

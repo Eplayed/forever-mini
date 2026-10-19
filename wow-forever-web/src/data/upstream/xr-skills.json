@@ -1,18 +1,19 @@
 {
  "meta": {
-  "source": "XR_DungeonGuide 0.37.1 Data_Skills.lua（源：权威资料库/zh-cn/spellbook 页内嵌 JSON，2026-10-02 抓）",
+  "source": "XR_DungeonGuide 65 Data_Skills.lua（源：权威资料库/zh-cn/spellbook 页内嵌 JSON）",
+  "addonVersion": "65",
   "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/XR_DungeonGuide/Data_Skills.lua",
-  "fetched": "2026-10-16",
+  "fetched": "2026-10-19",
   "counts": {
-   "total": 577,
+   "total": 583,
    "byClass": {
     "Warrior": 46,
-    "Paladin": 61,
+    "Paladin": 62,
     "Hunter": 95,
     "Rogue": 48,
-    "Priest": 60,
-    "Shaman": 60,
-    "Mage": 65,
+    "Priest": 61,
+    "Shaman": 61,
+    "Mage": 68,
     "Warlock": 77,
     "Druid": 65
    }
@@ -667,12 +668,27 @@
     "name": "防护",
     "iconKey": null,
     "learnLevels": [
-     1,
-     10,
-     20,
-     30,
-     40,
-     50,
+     26
+    ]
+   },
+   {
+    "name": "拯救",
+    "iconKey": "spell_holy_sealofsalvation",
+    "learnLevels": [
+     26
+    ]
+   },
+   {
+    "name": "撤销",
+    "iconKey": "spell_holy_revoke",
+    "learnLevels": [
+     26
+    ]
+   },
+   {
+    "name": "群体拯救",
+    "iconKey": "spell_holy_masssalvation",
+    "learnLevels": [
      60
     ]
    },
@@ -722,7 +738,7 @@
     "learnLevels": [
      10,
      18,
-     25,
+     26,
      34,
      42,
      50,
@@ -762,13 +778,6 @@
     "iconKey": "spell_holy_sealofwrath",
     "learnLevels": [
      22
-    ]
-   },
-   {
-    "name": "拯救祝福",
-    "iconKey": "spell_holy_sealofsalvation",
-    "learnLevels": [
-     26
     ]
    },
    {
@@ -840,13 +849,6 @@
    {
     "name": "强效王者祝福",
     "iconKey": "spell_magic_greaterblessingofkings",
-    "learnLevels": [
-     60
-    ]
-   },
-   {
-    "name": "强效拯救祝福",
-    "iconKey": "spell_holy_greaterblessingofsalvation",
     "learnLevels": [
      60
     ]
@@ -982,6 +984,7 @@
     "name": "猎人",
     "iconKey": "class_hunter",
     "learnLevels": [
+     10,
      10
     ]
    },
@@ -989,6 +992,7 @@
     "name": "野兽控制",
     "iconKey": null,
     "learnLevels": [
+     10,
      10
     ]
    },
@@ -996,6 +1000,7 @@
     "name": "驯服野兽",
     "iconKey": "ability_hunter_beasttaming",
     "learnLevels": [
+     10,
      10
     ]
    },
@@ -2029,6 +2034,7 @@
      36,
      44,
      52,
+     60,
      60
     ]
    },
@@ -2494,7 +2500,7 @@
     ]
    },
    {
-    "name": "惩击",
+    "name": "责罚",
     "iconKey": "spell_holy_holysmite",
     "learnLevels": [
      20,
@@ -2502,6 +2508,20 @@
      40,
      50,
      60
+    ]
+   },
+   {
+    "name": "惩击",
+    "iconKey": "spell_holy_holysmite",
+    "learnLevels": [
+     1,
+     6,
+     14,
+     22,
+     30,
+     38,
+     46,
+     54
     ]
    },
    {
@@ -2639,6 +2659,7 @@
      30,
      40,
      50,
+     60,
      60
     ]
    },
@@ -2895,34 +2916,17 @@
    {
     "name": "萨满祭司",
     "iconKey": "class_shaman",
-    "learnLevels": [
-     1,
-     8,
-     14,
-     20,
-     26,
-     32,
-     38,
-     44,
-     50,
-     56
-    ]
+    "learnLevels": []
    },
    {
     "name": "元素战斗",
     "iconKey": null,
-    "learnLevels": [
-     1,
-     8,
-     14,
-     20,
-     26,
-     32,
-     38,
-     44,
-     50,
-     56
-    ]
+    "learnLevels": []
+   },
+   {
+    "name": "元素掌握",
+    "iconKey": "spell_nature_wispsplode",
+    "learnLevels": []
    },
    {
     "name": "闪电箭",
@@ -3077,6 +3081,7 @@
     "name": "熔岩爆裂",
     "iconKey": "spell_shaman_lavaburst",
     "learnLevels": [
+     30,
      40,
      50,
      60
@@ -3406,6 +3411,7 @@
     "iconKey": "spell_frost_summonwaterelemental",
     "learnLevels": [
      25,
+     38,
      48,
      58
     ]
@@ -3424,6 +3430,7 @@
     "name": "复生",
     "iconKey": "spell_nature_reincarnation",
     "learnLevels": [
+     30,
      30
     ]
    },
@@ -3468,22 +3475,30 @@
     "name": "法师",
     "iconKey": "class_mage",
     "learnLevels": [
-     1,
-     14,
-     28,
-     42,
-     56
+     25,
+     36,
+     48,
+     60
     ]
    },
    {
     "name": "奥术",
     "iconKey": null,
     "learnLevels": [
-     1,
-     14,
-     28,
-     42,
-     56
+     25,
+     36,
+     48,
+     60
+    ]
+   },
+   {
+    "name": "奥术愤怒",
+    "iconKey": "spell_arcane_arcanewrath",
+    "learnLevels": [
+     25,
+     36,
+     48,
+     60
     ]
    },
    {
@@ -3533,6 +3548,7 @@
      32,
      40,
      48,
+     56,
      56
     ]
    },
@@ -3803,6 +3819,7 @@
      42,
      48,
      54,
+     60,
      60
     ]
    },
@@ -3820,6 +3837,7 @@
      42,
      48,
      54,
+     60,
      60
     ]
    },
@@ -3922,9 +3940,18 @@
     "name": "冰霜",
     "iconKey": null,
     "learnLevels": [
-     1,
-     10,
-     20
+     24,
+     36,
+     48
+    ]
+   },
+   {
+    "name": "冰霜冲击",
+    "iconKey": "spell_frost_frostblast",
+    "learnLevels": [
+     24,
+     36,
+     48
     ]
    },
    {
@@ -4042,6 +4069,13 @@
    {
     "name": "理解",
     "iconKey": null,
+    "learnLevels": [
+     6
+    ]
+   },
+   {
+    "name": "理解卷轴",
+    "iconKey": "inv_misc_scroll_untranscribed",
     "learnLevels": [
      6
     ]
@@ -4481,6 +4515,7 @@
      30,
      40,
      50,
+     60,
      60
     ]
    },
@@ -4494,6 +4529,7 @@
      30,
      40,
      50,
+     60,
      60
     ]
    },
@@ -4509,6 +4545,7 @@
      36,
      44,
      52,
+     60,
      60
     ]
    },
@@ -4951,7 +4988,7 @@
     "learnLevels": []
    },
    {
-    "name": "变换之力",
+    "name": "变形之力",
     "iconKey": "spell_druid_shiftingpower",
     "learnLevels": []
    },
@@ -5077,7 +5114,7 @@
     "name": "撕碎",
     "iconKey": "spell_shadow_vampiricaura",
     "learnLevels": [
-     22,
+     20,
      30,
      38,
      46,

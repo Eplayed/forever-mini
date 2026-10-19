@@ -801,20 +801,29 @@ def test_world_pins(browser, base):
     check("数据侧：上游那份汇总的说法留在 rareCountSource 里没删，页面用的是按实际算的那份",
           all("rareCountSource" in z2 and "rareTotal" in z2 for z2 in zones) and len(drift) > 0,
           "%d 个区域的上游汇总与实际条数不一致（正是本轮改掉的）" % len(drift))
-    # 2026-10-19：73 只有坐标没地图号的稀有，靠插件那份「区域→地图号」补上。
-    # 这一层是**补位不是覆盖**，两份独立反推要对得上，对不上就得当场看见而不是悄悄发出去
-    zm = (W.get("meta") or {}).get("zoneMapFill") or {}
+    # 2026-10-19：地图号这一层现在有三份来源，顺位写死在 merge-world 里——
+    #   ① GI 每条稀有行自带的 ui=（坐标与地图号出自同一行，最硬）② 站内那三层（paint / 分组 id / rareRegions）
+    #   ③ XR 那份「区域名→地图号」只补前两层都查不到的空位。三份要对得上，
+    #   对不上不悄悄取舍：记进 meta.mapIdMismatch 与 meta.zoneMapFill.conflicts，让人当场看见
+    gi_ui = [r for r in rares if r.get("mapIdFrom") == "gi-ui"]
     filled = [r for r in rares if r.get("mapIdFrom") == "xr-zonemap"]
-    check("数据侧：区域→地图号那一层只补空位、两份对账零冲突，补上的每条都有地图号",
-          bool(zm) and not (zm.get("conflicts") or []) and all(r.get("mapId") for r in filled),
-          "补 %d 只 · 与站内已有值一致 %d 条 · 冲突 %d 条 · 只 XR 有的区域 %d 个"
-          % (len(filled), zm.get("agreeWithSite"), len(zm.get("conflicts") or []),
-             zm.get("zonesOnlyHere")))
+    zm = (W.get("meta") or {}).get("zoneMapFill") or {}
+    check("数据侧：地图号以 GI 行内 ui 为主源，XR 那张名字表退成兜底（只补空位）",
+          len(gi_ui) >= 300 and all(r.get("mapId") for r in gi_ui) and
+          all(r.get("mapId") for r in filled),
+          "gi-ui %d 只 · XR 补 %d 只 · 名字表与站内一致 %s 条 / 只 XR 有的区域 %d 个"
+          % (len(gi_ui), len(filled), zm.get("agreeWithSite"), zm.get("zonesOnlyHere")))
+    check("数据侧：三份来源对账零冲突（mapIdMismatch 与 zoneMapFill.conflicts 都得是空的）",
+          not (W.get("meta") or {}).get("mapIdMismatch") and not (zm.get("conflicts") or []),
+          "稀有层冲突 %d 条 · 名字表冲突 %d 条"
+          % (len((W.get("meta") or {}).get("mapIdMismatch") or []), len(zm.get("conflicts") or [])))
     check("补上地图号不等于就能标点：只有本地真有那张贴图的才许上图",
-          all(bool(r.get("mapFile")) == (str(r.get("mapId")) in art_maps) for r in filled),
-          "%d 只补了地图号，其中 %d 只本地有贴图可标、%d 只仍只进列表"
-          % (len(filled), len([r for r in filled if r.get("mapFile")]),
-             len([r for r in filled if not r.get("mapFile")])))
+          all(bool(r.get("mapFile")) == (str(r.get("mapId")) in art_maps)
+              for r in rares if r.get("mapId") and r.get("mark")),
+          "%d 只有地图号，其中 %d 只本地有贴图可标、%d 只仍只进列表"
+          % (len([r for r in rares if r.get("mapId") and r.get("mark")]),
+             len([r for r in rares if r.get("mapFile") and r.get("mark")]),
+             len([r for r in rares if r.get("mapId") and r.get("mark") and not r.get("mapFile")])))
 
     page.goto(APP_BASE + "/#/world?t=books", wait_until="networkidle")
     page.wait_for_timeout(2200)

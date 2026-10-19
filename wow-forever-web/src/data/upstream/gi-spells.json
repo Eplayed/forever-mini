@@ -1,8 +1,9 @@
 {
  "meta": {
-  "source": "GearInsight_Forever 0.4.29 Data.lua 的 spells 表（源：Forever beta client 1.60.1.69876，2026-10-03）",
+  "source": "GearInsight_Forever 0.4.32 Data.lua 的 spells 表（源：Forever beta 客户端解包）",
+  "addonVersion": "0.4.32",
   "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/GearInsight_Forever/Data.lua",
-  "fetched": "2026-10-16",
+  "fetched": "2026-10-19",
   "counts": {
    "total": 1480,
    "byClass": {

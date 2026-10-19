@@ -54,7 +54,8 @@ def main():
     gi = load(os.path.join('upstream', 'gi-achievements.json'))
     w = {x['achId']: x for x in wb['achievements']}
     prov_w = {'type': 'datamine_cn', 'url': wb['meta']['source'], 'checkedAt': wb['meta']['fetched']}
-    prov_g = {'type': 'addon', 'url': 'GearInsight_Forever 0.4.29 Data.lua',
+    # 版本号从快照 meta 读，别写死（0.4.29 → 0.4.32 这类升级会把出处变成假话）
+    prov_g = {'type': 'addon', 'url': gi['meta']['source'].split(' 的')[0],
               'checkedAt': gi['meta']['fetched']}
     cats_w = {c['id']: c['name'] for c in wb['meta'].get('categories') or []}
 
@@ -131,7 +132,7 @@ def main():
                        'badIcon': n['badIcon'],
                        'l0': n['l0'], 'l1': n['l1'], 'nameDiff': n['nameDiff'],
                        'onlyInReference': n['onlyWb'], 'noIcon': n['noIcon']},
-            'sources': [{'key': 'gi', 'name': 'GearInsight 无限版 0.4.29', 'kind': 'beta 客户端解包转述',
+            'sources': [{'key': 'gi', 'name': 'GearInsight 无限版 ' + (gi['meta'].get('addonVersion') or '版本未记'), 'kind': 'beta 客户端解包转述',
                          'date': gi['meta']['fetched']},
                         {'key': 'wclbox', 'name': '无限数据库 · 成就端点', 'kind': '当前 beta 客户端解包转述',
                          'url': prov_w['url'], 'build': wb['meta'].get('upstreamBuild'),

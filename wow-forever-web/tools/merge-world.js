@@ -279,7 +279,20 @@ if (addon) {
       if (!hit.levelRange && g.lvMin != null) hit.levelRange = g.lvMin === g.lvMax ? [g.lvMin] : [g.lvMin, g.lvMax];
       return;
     }
-    const mid = zoneToMap[g.zone] || null;
+    /* 地图号这一层的顺位（2026-10-19 按插件 0.4.32 重排）：
+       ① GI 这一行自带的 ui= —— 坐标与"挂在哪张图上"出自同一条记录，最硬；
+       ② 站内那三层（地图 paint / 稀有与书籍分组自带 id / rareRegions）；
+       ③ XR 那份「区域名→地图号」只补前两层都查不到的空位。
+       ①②都有值却不一致时不悄悄取舍，记进 meta.mapIdMismatch 让人看见。 */
+    const giUi = g.uiMapId ? String(g.uiMapId) : null;
+    const zoneMid = zoneToMap[g.zone] || null;
+    if (giUi && zoneMid && giUi !== zoneMid) {
+      mismatches.push('稀有 ' + g.name + '（' + g.zone + '）：GI 行内 ui=' + giUi + ' / 站内那三层 ' + zoneMid);
+    }
+    const mid = giUi || zoneMid || null;
+    // 地图号到底从哪一层来的：gi-ui = 这条稀有自己的那行；xr-zonemap = 靠区域名对照补的；
+    // 没有这个键 = 站内那三层（paint / 分组自带 id / rareRegions）本来就认得
+    const mapFrom = giUi ? 'gi-ui' : (zoneMid ? null : (xrOnly[g.zone] ? 'xr-zonemap' : null));
     const drops = (g.items || []).map((it) => {
       const base = itemsIdx[it.itemId] || null;
       return { itemId: it.itemId, nameCn: it.name || (base ? base.name : null),
@@ -294,23 +307,22 @@ if (addon) {
       isNew: null,
       levelRange: g.lvMin == null ? null : (g.lvMin === g.lvMax ? [g.lvMin] : [g.lvMin, g.lvMax]),
       mapId: mid, mapFile: mid && MAP_IMG[mid] ? MAP_IMG[mid] : null,
-      // 只在"这一条的地图号是 XR 那份补的"时才留这个键——不然 362 条里 289 条都挂一个 null，
-      // 读的人分不清"没来源"和"来源是站内那三层"
-      ...(mid && xrOnly[g.zone] ? { mapIdFrom: 'xr-zonemap' } : {}),
+      // 只在真由某一层补上时留这个键（其余不挂 null），读数据的人不必分辨"没来源"和"站内本来就认得"
+      ...(mapFrom ? { mapIdFrom: mapFrom } : {}),
       mark: typeof g.x === 'number' && typeof g.y === 'number' ? { x: g.x, y: g.y } : null,
       world: null, mapSlug: null,
       drops: drops,
-      provenance: [{ type: 'addon', url: 'GearInsight_Forever 0.4.29 Data.lua（rares 表）',
+      provenance: [{ type: 'addon', url: (addon.meta && addon.meta.source) || 'GearInsight_Forever Data.lua（rares 表）',
                      note: '稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）',
                      checkedAt: addon.meta ? addon.meta.fetched : null }]
-        .concat(mid && xrOnly[g.zone] ? [{ type: 'addon',
+        .concat(mapFrom === 'xr-zonemap' ? [{ type: 'addon',
             url: (xrZone.meta && xrZone.meta.source) || 'upstream/xr-zonemap.json',
             note: '地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补"挂在哪张图上"）',
             checkedAt: xrZone.meta ? xrZone.meta.fetched : null }] : [])
     });
     added += 1;
     if (!mid) unmapped += 1;
-    else if (xrOnly[g.zone]) fromXr += 1;
+    else if (mapFrom === 'xr-zonemap') fromXr += 1;
   });
   // 区域分组跟着重算：新增的那些区域原来不在 where 名单里，不补的话页面筛不到它们
   const have = {};
@@ -328,11 +340,12 @@ if (addon) {
   });
   rareRegions.sort((a, b) => (b.count - a.count) || String(a.zone).localeCompare(String(b.zone)));
   addonStats = { matched: matched, added: added, unmapped: unmapped, mapIdFromXr: fromXr,
+                 mapIdFromGiUi: rares.filter((r) => r.mapIdFrom === 'gi-ui').length,
                  source: (addon.rares || []).length };
   console.log('稀有：参考站 36 只保持 L0 不动 · GI 对上台数 ' + matched +
     ' · 新收 ' + added + ' 只（区域查不到地图的 ' + unmapped + ' 只，进未定位）· 合计 ' + rares.length);
-  console.log('  地图号这一层：' + fromXr + ' 只是靠 XR 那份区域→地图号补上的' +
-    '（补完有图可标 ' + rares.filter((r) => r.mapFile && r.mark).length + ' / ' + rares.length + '）');
+  console.log('  地图号来源：GI 行内 ui ' + addonStats.mapIdFromGiUi + ' 只 · 靠 XR 区域名对照补 ' + fromXr +
+    ' 只 · 补完有图可标 ' + rares.filter((r) => r.mapFile && r.mark).length + ' / ' + rares.length);
 }
 
 const rareSets = ((P.xiyou || {}).sets || []).map((s) => ({

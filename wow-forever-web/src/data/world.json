@@ -4197,6 +4197,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 53.2,
     "y": 48.4
@@ -4207,9 +4208,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4227,6 +4228,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52,
     "y": 50.5
@@ -4237,9 +4239,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4257,6 +4259,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 67.9,
     "y": 59.4
@@ -4267,9 +4270,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4287,6 +4290,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38,
     "y": 49.6
@@ -4297,9 +4301,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4317,6 +4321,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.4,
     "y": 34.7
@@ -4327,9 +4332,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4348,6 +4353,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.6,
     "y": 31.6
@@ -4358,9 +4364,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4378,6 +4384,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.1,
     "y": 76.7
@@ -4398,9 +4405,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4418,6 +4425,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 39,
     "y": 47.5
@@ -4428,9 +4436,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4448,6 +4456,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.2,
     "y": 39.3
@@ -4468,9 +4477,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4488,9 +4497,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 50.4,
-    "y": 42.6
+    "x": 49.1,
+    "y": 48.7
    },
    "world": null,
    "mapSlug": null,
@@ -4508,9 +4518,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4528,9 +4538,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 48.4,
-    "y": 72
+    "x": 47.4,
+    "y": 73.3
    },
    "world": null,
    "mapSlug": null,
@@ -4538,9 +4549,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4558,6 +4569,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.9,
     "y": 77.4
@@ -4568,9 +4580,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4588,6 +4600,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59.2,
     "y": 58.5
@@ -4598,9 +4611,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4618,6 +4631,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 39.9,
     "y": 42.2
@@ -4638,9 +4652,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4658,6 +4672,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.8,
     "y": 64.7
@@ -4678,9 +4693,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4698,6 +4713,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62.1,
     "y": 48
@@ -4718,9 +4734,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4738,6 +4754,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.5,
     "y": 42.4
@@ -4748,9 +4765,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4768,6 +4785,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 40.9,
     "y": 77.5
@@ -4778,9 +4796,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4798,9 +4816,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 53.4,
-    "y": 17
+    "x": 51.6,
+    "y": 27.4
    },
    "world": null,
    "mapSlug": null,
@@ -4818,9 +4837,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4838,6 +4857,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.2,
     "y": 41.8
@@ -4848,9 +4868,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4868,6 +4888,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.6,
     "y": 39
@@ -4878,9 +4899,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4898,6 +4919,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.5,
     "y": 49.7
@@ -4908,9 +4930,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4928,9 +4950,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 40.4,
-    "y": 15.7
+    "x": 40.8,
+    "y": 26.3
    },
    "world": null,
    "mapSlug": null,
@@ -4938,9 +4961,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4958,6 +4981,7 @@
    ],
    "mapId": "1411",
    "mapFile": "img/art/maps/1411.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.8,
     "y": 9
@@ -4968,9 +4992,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4988,6 +5012,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 27.4,
     "y": 36.2
@@ -5017,9 +5042,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5037,6 +5062,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.8,
     "y": 52.1
@@ -5057,9 +5083,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5077,6 +5103,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 40.1,
     "y": 80
@@ -5097,9 +5124,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5117,6 +5144,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.9,
     "y": 67.6
@@ -5127,9 +5155,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5147,9 +5175,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 36.2,
-    "y": 11.3
+    "x": 37.2,
+    "y": 22.6
    },
    "world": null,
    "mapSlug": null,
@@ -5157,9 +5186,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5177,6 +5206,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.7,
     "y": 58.9
@@ -5187,9 +5217,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5207,6 +5237,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 55.6,
     "y": 58.5
@@ -5217,9 +5248,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5237,6 +5268,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.3,
     "y": 27.5
@@ -5257,9 +5289,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5277,6 +5309,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 68.1,
     "y": 44.9
@@ -5297,9 +5330,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5317,6 +5350,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 77,
     "y": 60.4
@@ -5337,9 +5371,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5357,9 +5391,10 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 33.2,
-    "y": 25.2
+    "x": 34.7,
+    "y": 34.2
    },
    "world": null,
    "mapSlug": null,
@@ -5367,9 +5402,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5387,6 +5422,7 @@
    ],
    "mapId": "1429",
    "mapFile": "img/art/maps/1429.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 25.4,
     "y": 89.8
@@ -5397,9 +5433,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5417,6 +5453,7 @@
    ],
    "mapId": "1426",
    "mapFile": "img/art/maps/1426.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 71.5,
     "y": 51.3
@@ -5437,9 +5474,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5457,6 +5494,7 @@
    ],
    "mapId": "1438",
    "mapFile": "img/art/maps/1438.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44,
     "y": 30.2
@@ -5467,9 +5505,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5487,6 +5525,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.6,
     "y": 15.8
@@ -5570,9 +5609,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5590,6 +5629,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59.5,
     "y": 7.6
@@ -5673,9 +5713,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5693,6 +5733,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 40.3,
     "y": 40.5
@@ -5785,9 +5826,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5805,6 +5846,7 @@
    ],
    "mapId": "1420",
    "mapFile": "img/art/maps/1420.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 88.2,
     "y": 51.4
@@ -5815,9 +5857,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5835,6 +5877,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.7,
     "y": 36.4
@@ -5918,9 +5961,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -5938,6 +5981,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 53.9,
     "y": 51.9
@@ -6021,9 +6065,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6041,6 +6085,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59.2,
     "y": 24.4
@@ -6070,9 +6115,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6090,6 +6135,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.6,
     "y": 27.1
@@ -6119,9 +6165,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6139,6 +6185,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 35.7,
     "y": 8.2
@@ -6222,9 +6269,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6243,6 +6290,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.6,
     "y": 34.9
@@ -6335,9 +6383,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6355,6 +6403,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 46.4,
     "y": 19.1
@@ -6375,9 +6424,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6395,6 +6444,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48,
     "y": 19.2
@@ -6424,9 +6474,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6444,6 +6494,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47,
     "y": 10.9
@@ -6473,9 +6524,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6493,6 +6544,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42,
     "y": 24.7
@@ -6576,9 +6628,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6596,6 +6648,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 39.4,
     "y": 53.5
@@ -6679,9 +6732,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6699,6 +6752,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.8,
     "y": 67.6
@@ -6782,9 +6836,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6802,6 +6856,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 77.7,
     "y": 74.9
@@ -6885,9 +6940,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -6905,6 +6960,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 57.1,
     "y": 41.2
@@ -6988,9 +7044,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7008,6 +7064,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43,
     "y": 61.1
@@ -7100,9 +7157,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7120,9 +7177,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 16.1,
+    "x": 11.1,
     "y": 65.3
    },
    "world": null,
@@ -7204,14 +7261,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -7230,6 +7281,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.1,
     "y": 22.2
@@ -7313,9 +7365,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7333,6 +7385,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44,
     "y": 78.3
@@ -7362,9 +7415,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7382,6 +7435,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.2,
     "y": 79.9
@@ -7411,9 +7465,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7431,6 +7485,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.9,
     "y": 31.9
@@ -7460,9 +7515,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7480,9 +7535,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 42.5,
+    "x": 37.4,
     "y": 31
    },
    "world": null,
@@ -7564,14 +7619,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -7590,6 +7639,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 27.3,
     "y": 44.5
@@ -7619,9 +7669,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7639,6 +7689,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.2,
     "y": 8.8
@@ -7722,9 +7773,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7742,6 +7793,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.7,
     "y": 87.6
@@ -7834,9 +7886,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7854,6 +7906,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.4,
     "y": 8.2
@@ -7937,9 +7990,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -7957,6 +8010,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.2,
     "y": 52.1
@@ -8040,9 +8094,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8060,6 +8114,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43,
     "y": 27
@@ -8089,9 +8144,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8109,6 +8164,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 78.1,
     "y": 52.4
@@ -8192,9 +8248,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8212,6 +8268,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.7,
     "y": 8.2
@@ -8295,9 +8352,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8315,9 +8372,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 38.7,
+    "x": 33.6,
     "y": 56.3
    },
    "world": null,
@@ -8399,14 +8456,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -8425,6 +8476,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.3,
     "y": 33.1
@@ -8454,9 +8506,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8474,6 +8526,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.1,
     "y": 33.9
@@ -8503,9 +8556,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8523,6 +8576,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44.8,
     "y": 35.4
@@ -8543,9 +8597,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8563,6 +8617,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 46.5,
     "y": 39.5
@@ -8592,9 +8647,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8612,6 +8667,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.8,
     "y": 87.3
@@ -8695,9 +8751,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8715,6 +8771,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.5,
     "y": 63.4
@@ -8744,9 +8801,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8764,6 +8821,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 70.1,
     "y": 66.4
@@ -8793,9 +8851,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -8813,9 +8871,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 60.1,
+    "x": 55,
     "y": 56.2
    },
    "world": null,
@@ -8897,14 +8955,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -8923,7 +8975,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 33.2,
     "y": 21.1
@@ -9016,14 +9068,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -9042,6 +9088,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 68.1,
     "y": 65.9
@@ -9071,9 +9118,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9091,7 +9138,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 13.6,
     "y": 24.7
@@ -9175,14 +9222,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -9201,6 +9242,7 @@
    ],
    "mapId": "1439",
    "mapFile": "img/art/maps/1439.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 57.8,
     "y": 21.4
@@ -9230,9 +9272,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9250,6 +9292,7 @@
    ],
    "mapId": "1432",
    "mapFile": "img/art/maps/1432.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.9,
     "y": 31.1
@@ -9279,9 +9322,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9299,7 +9342,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 26.8,
     "y": 18.4
@@ -9383,14 +9426,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -9409,6 +9446,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.8,
     "y": 70.2
@@ -9438,9 +9476,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9458,6 +9496,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 64.7,
     "y": 23.1
@@ -9487,9 +9526,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9507,6 +9546,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 40.8,
     "y": 45.2
@@ -9590,9 +9630,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9610,9 +9650,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 52.1,
+    "x": 47,
     "y": 45.2
    },
    "world": null,
@@ -9694,14 +9734,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -9720,6 +9754,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62,
     "y": 33.3
@@ -9812,9 +9847,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9832,6 +9867,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.6,
     "y": 69.3
@@ -9915,9 +9951,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -9935,7 +9971,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 32.6,
     "y": 25.8
@@ -9965,14 +10001,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -9991,6 +10021,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.1,
     "y": 74.7
@@ -10020,9 +10051,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10040,7 +10071,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 19.4,
     "y": 42.7
@@ -10124,14 +10155,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -10150,6 +10175,7 @@
    ],
    "mapId": "1421",
    "mapFile": "img/art/maps/1421.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 65.1,
     "y": 25.1
@@ -10233,9 +10259,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10253,7 +10279,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.6,
     "y": 58.4
@@ -10337,14 +10363,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -10363,6 +10383,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.5,
     "y": 85.5
@@ -10446,9 +10467,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10466,6 +10487,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 66.7,
     "y": 52.3
@@ -10549,9 +10571,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10569,6 +10591,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.1,
     "y": 30.7
@@ -10652,9 +10675,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10672,6 +10695,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.5,
     "y": 79.7
@@ -10682,9 +10706,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10702,6 +10726,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47,
     "y": 84
@@ -10785,9 +10810,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10805,6 +10830,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.3,
     "y": 59.2
@@ -10834,9 +10860,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10854,6 +10880,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.5,
     "y": 79.7
@@ -10864,9 +10891,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10884,6 +10911,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.1,
     "y": 70.1
@@ -10904,9 +10932,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -10924,6 +10952,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.1,
     "y": 79.8
@@ -11016,9 +11045,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11036,6 +11065,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44.8,
     "y": 64.1
@@ -11128,9 +11158,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11148,9 +11178,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 88.9,
+    "x": 83.8,
     "y": 66.8
    },
    "world": null,
@@ -11232,14 +11262,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -11258,7 +11282,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 46.5,
     "y": 44.3
@@ -11342,14 +11366,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -11368,6 +11386,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.6,
     "y": 84.3
@@ -11451,9 +11470,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11471,6 +11490,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 23.7,
     "y": 29.4
@@ -11554,9 +11574,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11574,6 +11594,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 53.8,
     "y": 36.3
@@ -11603,9 +11624,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11623,7 +11644,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 35.8,
     "y": 36.6
@@ -11707,14 +11728,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -11733,7 +11748,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 25.6,
     "y": 63.5
@@ -11817,14 +11832,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -11843,9 +11852,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 75.5,
+    "x": 70.4,
     "y": 39.6
    },
    "world": null,
@@ -11873,14 +11882,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -11899,6 +11902,7 @@
    ],
    "mapId": "1436",
    "mapFile": "img/art/maps/1436.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 50.6,
     "y": 43.5
@@ -11928,9 +11932,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -11948,7 +11952,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 86,
     "y": 39.9
@@ -12032,14 +12036,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -12058,6 +12056,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.3,
     "y": 73.2
@@ -12141,9 +12140,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12161,6 +12160,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.5,
     "y": 83.9
@@ -12244,9 +12244,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12264,7 +12264,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.8,
     "y": 70
@@ -12348,14 +12348,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -12374,6 +12368,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 32.5,
     "y": 26.8
@@ -12466,9 +12461,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12486,9 +12481,9 @@
    ],
    "mapId": "1433",
    "mapFile": "img/art/maps/1433.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 34.9,
+    "x": 29.8,
     "y": 8.3
    },
    "world": null,
@@ -12516,14 +12511,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -12542,7 +12531,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 86.4,
     "y": 47.6
@@ -12572,14 +12561,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -12598,7 +12581,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56,
     "y": 62.8
@@ -12682,14 +12665,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -12708,6 +12685,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 35.2,
     "y": 15
@@ -12791,9 +12769,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12811,6 +12789,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 55.6,
     "y": 50.5
@@ -12894,9 +12873,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -12914,7 +12893,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 65.7,
     "y": 60.1
@@ -12998,14 +12977,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -13024,6 +12997,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 29.6,
     "y": 69.4
@@ -13107,9 +13081,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13127,7 +13101,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 70.7,
     "y": 78
@@ -13211,14 +13185,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -13237,6 +13205,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 28.1,
     "y": 12.2
@@ -13320,9 +13289,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13340,6 +13309,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.4,
     "y": 46.1
@@ -13369,9 +13339,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13389,6 +13359,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.3,
     "y": 44.4
@@ -13472,9 +13443,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13492,6 +13463,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 25.6,
     "y": 11.5
@@ -13575,9 +13547,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13595,7 +13567,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 29.1,
     "y": 73.6
@@ -13679,14 +13651,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -13705,6 +13671,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 12.6,
     "y": 67.5
@@ -13788,9 +13755,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13808,6 +13775,7 @@
    ],
    "mapId": "1442",
    "mapFile": "img/art/maps/1442.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.4,
     "y": 68.1
@@ -13891,9 +13859,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -13911,6 +13879,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.7,
     "y": 37.5
@@ -13994,9 +13963,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14014,7 +13983,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 21.1,
     "y": 27.2
@@ -14035,14 +14004,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14061,6 +14024,7 @@
    ],
    "mapId": "1437",
    "mapFile": "img/art/maps/1437.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 69.9,
     "y": 29.2
@@ -14090,9 +14054,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14110,7 +14074,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 83.4,
     "y": 48.5
@@ -14194,14 +14158,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14220,7 +14178,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 18,
     "y": 37.9
@@ -14250,14 +14208,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14276,6 +14228,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 37.3,
     "y": 19.8
@@ -14359,9 +14312,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14379,7 +14332,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 61.7,
     "y": 36.9
@@ -14409,14 +14362,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14435,6 +14382,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 16.8,
     "y": 41.5
@@ -14518,9 +14466,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14538,7 +14486,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 81.6,
     "y": 48.5
@@ -14622,14 +14570,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14648,7 +14590,7 @@
    ],
    "mapId": "1440",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.8,
     "y": 39.6
@@ -14678,14 +14620,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14704,7 +14640,7 @@
    ],
    "mapId": "1424",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 64.5,
     "y": 79.7
@@ -14788,14 +14724,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -14814,6 +14744,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 78.9,
     "y": 21.2
@@ -14897,9 +14828,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -14917,6 +14848,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 61.3,
     "y": 28.9
@@ -15000,9 +14932,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15020,7 +14952,7 @@
    ],
    "mapId": "1431",
    "mapFile": "img/art/maps/1431.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.5,
     "y": 83.7
@@ -15050,14 +14982,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -15076,6 +15002,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 32.3,
     "y": 31
@@ -15105,9 +15032,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15125,6 +15052,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.2,
     "y": 72.1
@@ -15208,9 +15136,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15228,6 +15156,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 70.5,
     "y": 72.9
@@ -15311,9 +15240,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15331,6 +15260,7 @@
    ],
    "mapId": "1413",
    "mapFile": "img/art/maps/1413.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.7,
     "y": 90.7
@@ -15414,9 +15344,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15434,6 +15364,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.2,
     "y": 41.9
@@ -15517,9 +15448,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15537,6 +15468,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.4,
     "y": 43.8
@@ -15557,9 +15489,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15577,6 +15509,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 68.4,
     "y": 82.3
@@ -15597,9 +15530,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15617,6 +15550,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 31.4,
     "y": 51.5
@@ -15646,9 +15580,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15666,6 +15600,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.4,
     "y": 19.5
@@ -15749,9 +15684,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15769,6 +15704,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59.7,
     "y": 29.4
@@ -15861,9 +15797,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15881,6 +15817,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 39.5,
     "y": 18.9
@@ -15964,9 +15901,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -15984,6 +15921,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.9,
     "y": 22.7
@@ -16067,9 +16005,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16087,6 +16025,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.9,
     "y": 50.1
@@ -16170,9 +16109,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16190,6 +16129,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 87.2,
     "y": 78.4
@@ -16210,9 +16150,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16230,6 +16170,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 65.2,
     "y": 22.8
@@ -16313,9 +16254,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16333,6 +16274,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 64.6,
     "y": 73.2
@@ -16362,9 +16304,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16382,6 +16324,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 64.7,
     "y": 44.8
@@ -16465,9 +16408,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16485,6 +16428,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.2,
     "y": 19
@@ -16568,9 +16512,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16588,6 +16532,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59,
     "y": 9.4
@@ -16671,9 +16616,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16691,6 +16636,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.1,
     "y": 16
@@ -16774,9 +16720,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16794,6 +16740,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.6,
     "y": 23.1
@@ -16832,9 +16779,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16852,6 +16799,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 37.4,
     "y": 31.2
@@ -16935,9 +16883,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -16955,6 +16903,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 26.5,
     "y": 60.7
@@ -17038,9 +16987,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17058,6 +17007,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.1,
     "y": 46.9
@@ -17096,9 +17046,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17116,6 +17066,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62,
     "y": 21.2
@@ -17199,9 +17150,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17219,6 +17170,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 54.6,
     "y": 79.7
@@ -17302,9 +17254,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17322,6 +17274,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62.5,
     "y": 0.1
@@ -17405,9 +17358,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17425,6 +17378,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 18.1,
     "y": 68.8
@@ -17508,9 +17462,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17528,6 +17482,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 31.1,
     "y": 20.4
@@ -17611,9 +17566,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17631,6 +17586,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 82.8,
     "y": 32.2
@@ -17641,9 +17597,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17661,6 +17617,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 51.1,
     "y": 86.1
@@ -17744,9 +17701,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17764,6 +17721,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.5,
     "y": 29.8
@@ -17847,9 +17805,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17867,6 +17825,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 19.9,
     "y": 56.6
@@ -17950,9 +17909,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -17970,6 +17929,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 64.8,
     "y": 73.5
@@ -18053,9 +18013,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18073,6 +18033,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 55.1,
     "y": 83.6
@@ -18156,9 +18117,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18176,6 +18137,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52,
     "y": 62.9
@@ -18259,9 +18221,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18279,6 +18241,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 19.4,
     "y": 90.2
@@ -18299,9 +18262,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18319,6 +18282,7 @@
    ],
    "mapId": "1417",
    "mapFile": "img/art/maps/1417.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 20.4,
     "y": 66.9
@@ -18402,9 +18366,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18422,6 +18386,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.1,
     "y": 61.1
@@ -18505,9 +18470,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18525,6 +18490,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.5,
     "y": 38.8
@@ -18608,9 +18574,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18628,6 +18594,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 11.9,
     "y": 53.7
@@ -18711,9 +18678,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18731,6 +18698,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36,
     "y": 63.1
@@ -18814,9 +18782,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18834,6 +18802,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 80.2,
     "y": 39.6
@@ -18917,9 +18886,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -18937,6 +18906,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.5,
     "y": 57.1
@@ -19020,9 +18990,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19040,6 +19010,7 @@
    ],
    "mapId": "1443",
    "mapFile": "img/art/maps/1443.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.4,
     "y": 60.2
@@ -19123,9 +19094,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19143,6 +19114,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 61.4,
     "y": 83.7
@@ -19226,9 +19198,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19246,6 +19218,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 95.9,
     "y": 64.4
@@ -19329,9 +19302,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19349,6 +19322,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.3,
     "y": 33.3
@@ -19359,9 +19333,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19379,6 +19353,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 59.5,
     "y": 59.4
@@ -19462,9 +19437,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19482,6 +19457,7 @@
    ],
    "mapId": "1441",
    "mapFile": "img/art/maps/1441.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 75.5,
     "y": 2.6
@@ -19492,9 +19468,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19512,6 +19488,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 32.4,
     "y": 56.9
@@ -19595,9 +19572,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19615,6 +19592,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 69.2,
     "y": 57.3
@@ -19625,9 +19603,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19645,6 +19623,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 57.8,
     "y": 61.6
@@ -19655,9 +19634,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19675,6 +19654,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.8,
     "y": 30.9
@@ -19695,9 +19675,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19715,6 +19695,7 @@
    ],
    "mapId": "1416",
    "mapFile": "img/art/maps/1416.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 73.7,
     "y": 65.3
@@ -19725,9 +19706,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19745,6 +19726,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 37.1,
     "y": 45.3
@@ -19755,9 +19737,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19775,6 +19757,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 29.2,
     "y": 84.9
@@ -19785,9 +19768,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19805,6 +19788,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 23.7,
     "y": 74.2
@@ -19815,9 +19799,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19835,6 +19819,7 @@
    ],
    "mapId": "1445",
    "mapFile": "img/art/maps/1445.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.1,
     "y": 75.9
@@ -19845,9 +19830,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19865,6 +19850,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.6,
     "y": 51.4
@@ -19875,9 +19861,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19895,6 +19881,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 28.3,
     "y": 62.6
@@ -19924,9 +19911,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19944,6 +19931,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 14.7,
     "y": 89.3
@@ -19954,9 +19942,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -19974,6 +19962,7 @@
    ],
    "mapId": "1434",
    "mapFile": "img/art/maps/1434.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.4,
     "y": 45.7
@@ -20003,9 +19992,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20023,6 +20012,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 33.1,
     "y": 70.3
@@ -20033,9 +20023,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20053,6 +20043,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.9,
     "y": 67.8
@@ -20063,9 +20054,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20083,6 +20074,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49.4,
     "y": 36
@@ -20093,9 +20085,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20113,6 +20105,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 36.6,
     "y": 24.6
@@ -20123,9 +20116,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20143,6 +20136,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 28.2,
     "y": 67.6
@@ -20153,9 +20147,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20173,6 +20167,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 70,
     "y": 53.2
@@ -20183,9 +20178,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20203,6 +20198,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 73.2,
     "y": 48.7
@@ -20213,9 +20209,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20233,6 +20229,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 76.7,
     "y": 66.2
@@ -20243,9 +20240,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20263,6 +20260,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.6,
     "y": 56.5
@@ -20273,9 +20271,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20293,6 +20291,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 55.6,
     "y": 74.2
@@ -20303,9 +20302,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20323,6 +20322,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52,
     "y": 60.9
@@ -20333,9 +20333,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20353,6 +20353,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.3,
     "y": 54.7
@@ -20363,9 +20364,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20383,6 +20384,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.2,
     "y": 16
@@ -20393,9 +20395,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20413,6 +20415,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 61.9,
     "y": 73.2
@@ -20423,9 +20426,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20443,6 +20446,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 50.5,
     "y": 64.1
@@ -20453,9 +20457,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20473,6 +20477,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 17.9,
     "y": 65.6
@@ -20483,9 +20488,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20503,6 +20508,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 13.2,
     "y": 74.2
@@ -20513,9 +20519,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20533,6 +20539,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 78.8,
     "y": 43.8
@@ -20543,9 +20550,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20563,6 +20570,7 @@
    ],
    "mapId": "1435",
    "mapFile": "img/art/maps/1435.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 77.5,
     "y": 39.4
@@ -20573,9 +20581,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20593,6 +20601,7 @@
    ],
    "mapId": "1444",
    "mapFile": "img/art/maps/1444.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44.8,
     "y": 25
@@ -20603,9 +20612,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20623,7 +20632,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 50,
     "y": 77.1
@@ -20634,14 +20643,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -20660,6 +20663,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 50.2,
     "y": 20.7
@@ -20670,9 +20674,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20691,6 +20695,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.3,
     "y": 32.1
@@ -20701,9 +20706,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20721,6 +20726,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 30.2,
     "y": 48
@@ -20731,9 +20737,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20751,6 +20757,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 51.1,
     "y": 46.8
@@ -20761,9 +20768,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20781,6 +20788,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.9,
     "y": 43.1
@@ -20791,9 +20799,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20811,6 +20819,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 16.6,
     "y": 54.1
@@ -20821,9 +20830,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20841,6 +20850,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 70.2,
     "y": 55.4
@@ -20851,9 +20861,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20871,6 +20881,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.1,
     "y": 31.1
@@ -20881,9 +20892,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20901,6 +20912,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 53.3,
     "y": 73.8
@@ -20911,9 +20923,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -20931,7 +20943,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47,
     "y": 84
@@ -20942,14 +20954,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -20968,6 +20974,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38.7,
     "y": 55.6
@@ -20988,9 +20995,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21008,7 +21015,7 @@
    ],
    "mapId": "1449",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62.4,
     "y": 66
@@ -21019,14 +21026,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21045,10 +21046,10 @@
    ],
    "mapId": "1453",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 66.5,
-    "y": 31.4
+    "x": 71.2,
+    "y": 48.8
    },
    "world": null,
    "mapSlug": null,
@@ -21056,14 +21057,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21082,6 +21077,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.4,
     "y": 23.1
@@ -21092,9 +21088,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21112,6 +21108,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 29.5,
     "y": 62.4
@@ -21122,9 +21119,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21142,6 +21139,7 @@
    ],
    "mapId": "1446",
    "mapFile": "img/art/maps/1446.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 34.1,
     "y": 44.7
@@ -21152,9 +21150,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21172,6 +21170,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 25.6,
     "y": 87.7
@@ -21192,9 +21191,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21212,6 +21211,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.3,
     "y": 54
@@ -21232,9 +21232,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21252,6 +21252,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 14.5,
     "y": 37.2
@@ -21262,9 +21263,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21282,6 +21283,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 81.5,
     "y": 49.2
@@ -21292,9 +21294,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21312,6 +21314,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 35.4,
     "y": 55.7
@@ -21322,9 +21325,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21343,6 +21346,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.5,
     "y": 30.9
@@ -21426,9 +21430,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21447,6 +21451,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 66.3,
     "y": 16.7
@@ -21530,9 +21535,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21550,7 +21555,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.7,
     "y": 93.1
@@ -21561,14 +21566,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21587,6 +21586,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.6,
     "y": 35.6
@@ -21597,9 +21597,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21617,7 +21617,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.2,
     "y": 49.9
@@ -21701,14 +21701,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21727,7 +21721,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 46.3,
     "y": 52.4
@@ -21811,14 +21805,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21837,6 +21825,7 @@
    ],
    "mapId": "1425",
    "mapFile": "img/art/maps/1425.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.9,
     "y": 77.6
@@ -21857,9 +21846,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -21877,7 +21866,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 50.2,
     "y": 32.8
@@ -21961,14 +21950,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -21987,6 +21970,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 52.6,
     "y": 47.4
@@ -22070,9 +22054,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22090,6 +22074,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58.8,
     "y": 42.6
@@ -22173,9 +22158,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22194,7 +22179,7 @@
    ],
    "mapId": "1449",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 68.5,
     "y": 12.7
@@ -22278,14 +22263,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -22304,6 +22283,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.3,
     "y": 38.7
@@ -22387,9 +22367,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22407,6 +22387,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 87.4,
     "y": 50.5
@@ -22490,9 +22471,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22510,6 +22491,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 51.3,
     "y": 53.1
@@ -22593,9 +22575,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22613,7 +22595,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 40.2,
     "y": 85.2
@@ -22697,14 +22679,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -22723,7 +22699,7 @@
    ],
    "mapId": "1449",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48.7,
     "y": 85.3
@@ -22807,14 +22783,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -22833,6 +22803,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 80.5,
     "y": 41.5
@@ -22916,9 +22887,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -22936,6 +22907,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 80.5,
     "y": 48
@@ -23019,9 +22991,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23039,6 +23011,7 @@
    ],
    "mapId": "1447",
    "mapFile": "img/art/maps/1447.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 76.2,
     "y": 25.4
@@ -23122,9 +23095,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23142,9 +23115,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 39.3,
-    "y": 70.5
+    "x": 33.7,
+    "y": 59.7
    },
    "world": null,
    "mapSlug": null,
@@ -23225,9 +23199,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23245,7 +23219,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45,
     "y": 37.4
@@ -23329,14 +23303,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -23355,6 +23323,7 @@
    ],
    "mapId": "1427",
    "mapFile": "img/art/maps/1427.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.3,
     "y": 99.2
@@ -23365,9 +23334,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23385,6 +23354,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.9,
     "y": 46.5
@@ -23468,9 +23438,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23488,6 +23458,7 @@
    ],
    "mapId": "1418",
    "mapFile": "img/art/maps/1418.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.1,
     "y": 61.7
@@ -23571,9 +23542,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23591,9 +23562,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 85.7,
-    "y": 45.3
+    "x": 75.4,
+    "y": 37
    },
    "world": null,
    "mapSlug": null,
@@ -23674,9 +23646,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -23694,7 +23666,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 57.8,
     "y": 22.3
@@ -23778,14 +23750,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -23805,7 +23771,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 55.3,
     "y": 49.8
@@ -23889,14 +23855,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -23915,9 +23875,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 74.3,
-    "y": 53
+    "x": 65.2,
+    "y": 43.9
    },
    "world": null,
    "mapSlug": null,
@@ -23998,9 +23959,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24018,7 +23979,7 @@
    ],
    "mapId": "1448",
    "mapFile": "img/art/maps/1448.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 43.1,
     "y": 41.4
@@ -24102,14 +24063,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -24128,7 +24083,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.2,
     "y": 16.7
@@ -24212,14 +24167,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -24238,7 +24187,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 54.2,
     "y": 80.4
@@ -24322,14 +24271,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -24348,6 +24291,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 47.2,
     "y": 47.1
@@ -24431,9 +24375,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24451,6 +24395,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 79.2,
     "y": 29.7
@@ -24534,9 +24479,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24554,6 +24499,7 @@
    ],
    "mapId": "1419",
    "mapFile": "img/art/maps/1419.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 41.3,
     "y": 38.7
@@ -24637,9 +24583,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24657,7 +24603,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 39.3,
     "y": 55.4
@@ -24741,14 +24687,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -24767,7 +24707,7 @@
    ],
    "mapId": "1449",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 38,
     "y": 75.5
@@ -24851,14 +24791,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -24877,9 +24811,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 55.4,
-    "y": 24.9
+    "x": 48.2,
+    "y": 18.7
    },
    "world": null,
    "mapSlug": null,
@@ -24960,9 +24895,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -24980,9 +24915,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 26.2,
-    "y": 32.8
+    "x": 22,
+    "y": 25.8
    },
    "world": null,
    "mapSlug": null,
@@ -25000,9 +24936,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25020,7 +24956,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 51.1,
     "y": 10.8
@@ -25104,14 +25040,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25130,7 +25060,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.8,
     "y": 28.1
@@ -25214,14 +25144,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25240,6 +25164,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 54.2,
     "y": 39.1
@@ -25323,9 +25248,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25343,7 +25268,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 49,
     "y": 32.7
@@ -25427,14 +25352,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25453,7 +25372,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44.4,
     "y": 80.8
@@ -25537,14 +25456,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25563,7 +25476,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 21.6,
     "y": 24.1
@@ -25647,14 +25560,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25673,7 +25580,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 48,
     "y": 67.4
@@ -25757,14 +25664,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -25783,6 +25684,7 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.5,
     "y": 98.1
@@ -25866,9 +25768,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25886,9 +25788,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 72.2,
-    "y": 14
+    "x": 63.3,
+    "y": 8.8
    },
    "world": null,
    "mapSlug": null,
@@ -25969,9 +25872,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -25989,7 +25892,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 66.7,
     "y": 53.8
@@ -26073,14 +25976,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -26099,7 +25996,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 66.9,
     "y": 35.6
@@ -26183,14 +26080,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -26209,6 +26100,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.1,
     "y": 54.8
@@ -26292,9 +26184,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26312,9 +26204,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 88.5,
-    "y": 86.5
+    "x": 78,
+    "y": 74.1
    },
    "world": null,
    "mapSlug": null,
@@ -26395,9 +26288,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26415,7 +26308,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 44.4,
     "y": 13.5
@@ -26499,14 +26392,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -26525,7 +26412,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 21,
     "y": 61.3
@@ -26609,14 +26496,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -26635,9 +26516,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 72.2,
-    "y": 16.9
+    "x": 63.3,
+    "y": 11.4
    },
    "world": null,
    "mapSlug": null,
@@ -26718,9 +26600,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26738,6 +26620,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.4,
     "y": 60
@@ -26821,9 +26704,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -26841,7 +26724,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 63.4,
     "y": 70.2
@@ -26925,14 +26808,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -26951,7 +26828,7 @@
    ],
    "mapId": "1449",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 35.3,
     "y": 36
@@ -27035,14 +26912,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -27061,7 +26932,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 58,
     "y": 79.4
@@ -27145,14 +27016,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -27171,6 +27036,7 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.5,
     "y": 98.1
@@ -27254,9 +27120,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27274,9 +27140,10 @@
    ],
    "mapId": "1423",
    "mapFile": "img/art/maps/1423.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
-    "x": 52.2,
-    "y": 18.5
+    "x": 45.3,
+    "y": 12.9
    },
    "world": null,
    "mapSlug": null,
@@ -27357,9 +27224,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27377,7 +27244,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.7,
     "y": 18.8
@@ -27461,14 +27328,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -27487,7 +27348,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 42.2,
     "y": 18.5
@@ -27571,14 +27432,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -27597,6 +27452,7 @@
    ],
    "mapId": "1412",
    "mapFile": "img/art/maps/1412.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 22.4,
     "y": 98
@@ -27680,9 +27536,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27700,7 +27556,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 18.3,
     "y": 85.8
@@ -27784,14 +27640,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -27810,6 +27660,7 @@
    ],
    "mapId": "1428",
    "mapFile": "img/art/maps/1428.webp",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 74.3,
     "y": 37.8
@@ -27893,9 +27744,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -27913,7 +27764,7 @@
    ],
    "mapId": "1452",
    "mapFile": "img/art/maps/1452.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 65,
     "y": 80.3
@@ -27997,14 +27848,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28023,7 +27868,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.1,
     "y": 15.3
@@ -28107,14 +27952,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28133,7 +27972,7 @@
    ],
    "mapId": "1451",
    "mapFile": null,
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 29.6,
     "y": 86.6
@@ -28217,14 +28056,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28243,7 +28076,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 45.6,
     "y": 9.2
@@ -28327,14 +28160,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28353,7 +28180,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 62.1,
     "y": 36.3
@@ -28437,14 +28264,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28463,7 +28284,7 @@
    ],
    "mapId": "1422",
    "mapFile": "img/art/maps/1422.webp",
-   "mapIdFrom": "xr-zonemap",
+   "mapIdFrom": "gi-ui",
    "mark": {
     "x": 56.9,
     "y": 34.8
@@ -28547,14 +28368,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua（rares 表）",
+     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-16"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-     "note": "地图号来自这份区域→地图号对照（坐标仍是上面那份；这一条只补\"挂在哪张图上\"）",
      "checkedAt": "2026-10-19"
     }
    ]
@@ -28564,7 +28379,8 @@
   "matched": 12,
   "added": 326,
   "unmapped": 0,
-  "mapIdFromXr": 73,
+  "mapIdFromXr": 0,
+  "mapIdFromGiUi": 326,
   "source": 338
  },
  "rareSets": [

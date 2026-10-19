@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-16",
+  "generatedAt": "2026-10-19",
   "kind": "achievements",
   "method": "tools/merge-achievements.py 合两份 upstream：gi-achievements.json（目录，211 条）+ wclbox-achievements.json（能逐字回查的那 46 条，来自 /_shuju/<发布号>/chengjiu.json）。两边 id 对上且中文名逐字相同才升 L0；成就描述整句两份都不落。没有中文名且带开发标记的那 13 条标 devOnly，条目照留，页面与搜索不列。",
   "pageNote": "成就目录按无限测试版客户端读出；其中区域探索这一类（46 条）另有一处客户端解包转述逐字对过，其余 165 条目前只有一份资料说到，名字先按客户端读出的写法放着，等第二处能对上再升档。成就的具体完成条件文本一律不搬，要回游戏看。",
@@ -71,9 +71,9 @@
   "sources": [
    {
     "key": "gi",
-    "name": "GearInsight 无限版 0.4.29",
+    "name": "GearInsight 无限版 0.4.32",
     "kind": "beta 客户端解包转述",
-    "date": "2026-10-16"
+    "date": "2026-10-19"
    },
    {
     "key": "wclbox",
@@ -101,8 +101,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -121,8 +121,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -141,8 +141,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -161,8 +161,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -181,8 +181,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -201,8 +201,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -221,8 +221,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -241,8 +241,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -261,8 +261,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -281,8 +281,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -301,8 +301,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -321,8 +321,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -341,8 +341,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -361,8 +361,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -381,8 +381,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -401,8 +401,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -421,8 +421,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -441,8 +441,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -461,8 +461,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -481,8 +481,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -501,8 +501,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -521,8 +521,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -541,8 +541,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -561,8 +561,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -581,8 +581,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -601,8 +601,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -621,8 +621,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -641,8 +641,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -661,8 +661,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -681,8 +681,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -701,8 +701,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -721,8 +721,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -741,8 +741,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -761,8 +761,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -781,8 +781,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -801,8 +801,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -821,8 +821,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -841,8 +841,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -861,8 +861,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -881,8 +881,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -901,8 +901,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -921,8 +921,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -941,8 +941,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -961,8 +961,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -981,8 +981,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1001,8 +1001,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1021,8 +1021,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1041,8 +1041,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1061,8 +1061,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1081,8 +1081,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1101,8 +1101,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1121,8 +1121,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1141,8 +1141,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1161,8 +1161,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1181,8 +1181,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1201,8 +1201,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1221,8 +1221,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1241,8 +1241,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1261,8 +1261,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1281,8 +1281,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1301,8 +1301,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1321,8 +1321,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1341,8 +1341,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1361,8 +1361,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1381,8 +1381,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1401,8 +1401,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1421,8 +1421,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1441,8 +1441,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1461,8 +1461,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1481,8 +1481,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1501,8 +1501,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1521,8 +1521,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1541,8 +1541,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1561,8 +1561,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1588,8 +1588,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1615,8 +1615,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1642,8 +1642,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1669,8 +1669,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1696,8 +1696,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1723,8 +1723,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1750,8 +1750,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1777,8 +1777,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1804,8 +1804,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1831,8 +1831,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1858,8 +1858,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1885,8 +1885,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1912,8 +1912,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1939,8 +1939,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1966,8 +1966,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -1993,8 +1993,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2020,8 +2020,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2047,8 +2047,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2074,8 +2074,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2101,8 +2101,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2128,8 +2128,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2155,8 +2155,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2182,8 +2182,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2209,8 +2209,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2236,8 +2236,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2263,8 +2263,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2290,8 +2290,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2317,8 +2317,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2344,8 +2344,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2371,8 +2371,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2398,8 +2398,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2425,8 +2425,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2452,8 +2452,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2479,8 +2479,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2506,8 +2506,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2533,8 +2533,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2560,8 +2560,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2587,8 +2587,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2614,8 +2614,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2641,8 +2641,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2672,8 +2672,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2692,8 +2692,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2744,8 +2744,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2771,8 +2771,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2820,8 +2820,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2847,8 +2847,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2867,8 +2867,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2894,8 +2894,8 @@
     },
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2914,8 +2914,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2934,8 +2934,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2955,8 +2955,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2976,8 +2976,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -2997,8 +2997,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3018,8 +3018,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3039,8 +3039,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3060,8 +3060,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3081,8 +3081,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3102,8 +3102,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3123,8 +3123,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3144,8 +3144,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3164,8 +3164,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3184,8 +3184,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3204,8 +3204,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3224,8 +3224,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3244,8 +3244,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3264,8 +3264,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3284,8 +3284,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3304,8 +3304,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3324,8 +3324,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3344,8 +3344,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3364,8 +3364,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3384,8 +3384,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3404,8 +3404,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3424,8 +3424,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3444,8 +3444,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3464,8 +3464,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3484,8 +3484,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3504,8 +3504,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3524,8 +3524,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3545,8 +3545,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3566,8 +3566,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3587,8 +3587,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3607,8 +3607,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3627,8 +3627,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3647,8 +3647,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3667,8 +3667,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3687,8 +3687,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3707,8 +3707,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3727,8 +3727,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3747,8 +3747,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3767,8 +3767,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3787,8 +3787,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3807,8 +3807,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3827,8 +3827,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3847,8 +3847,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3867,8 +3867,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3887,8 +3887,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3907,8 +3907,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3927,8 +3927,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3947,8 +3947,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3967,8 +3967,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -3987,8 +3987,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4007,8 +4007,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4027,8 +4027,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4047,8 +4047,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4067,8 +4067,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4087,8 +4087,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4107,8 +4107,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4127,8 +4127,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4147,8 +4147,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4167,8 +4167,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4187,8 +4187,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4207,8 +4207,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4227,8 +4227,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4247,8 +4247,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4267,8 +4267,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4287,8 +4287,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4307,8 +4307,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4327,8 +4327,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4347,8 +4347,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4367,8 +4367,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4387,8 +4387,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4407,8 +4407,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4427,8 +4427,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4447,8 +4447,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4467,8 +4467,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4487,8 +4487,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4507,8 +4507,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4527,8 +4527,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4547,8 +4547,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4567,8 +4567,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4587,8 +4587,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4607,8 +4607,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4627,8 +4627,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4647,8 +4647,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4667,8 +4667,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   },
@@ -4687,8 +4687,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.29 Data.lua",
-     "checkedAt": "2026-10-16"
+     "url": "GearInsight_Forever 0.4.32 Data.lua",
+     "checkedAt": "2026-10-19"
     }
    ]
   }

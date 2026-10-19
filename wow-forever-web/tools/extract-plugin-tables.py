@@ -162,9 +162,26 @@ def gi_rares(src):
                      'zone': f.get('z'), 'zoneEn': f.get('zEn'),
                      'x': float(f['x']) if f.get('x') else None,
                      'y': float(f['y']) if f.get('y') else None,
+                     # 0.4.32 起每行自带 ui=<地图号>：坐标与"这组坐标挂在哪张图上"出自同一行，
+                     # 比拿区域名去查表更硬，所以合并层把它当第一顺位（区域名对照表退成兜底）
+                     'uiMapId': int(f['ui']) if str(f.get('ui', '')).isdigit() else None,
                      'spawnPoints': pts_count(e),
                      'respawnRaw': f.get('rs'), 'items': items})
     return rows
+
+
+def toc_version(addon_dir, addon_name):
+    """版本号从插件自己的 .toc 读，别再抄在我们代码里。
+    0.4.29 那次是我们手写的，插件升到 0.4.32 之后快照里还写着旧号——等于给每条记录盖了个过期的出处。"""
+    p = os.path.join(addon_dir, addon_name + '.toc')
+    if not os.path.exists(p):
+        return '版本未记'
+    with open(p, encoding='utf-8', errors='ignore') as f:
+        for line in f:
+            m = re.match(r'\s*##\s*Version:\s*(\S+)', line)
+            if m:
+                return m.group(1)
+    return '版本未记'
 
 
 def xr_skills(src):
@@ -207,6 +224,10 @@ def main():
     gi = open(gi_p, encoding='utf-8').read()
     xr = open(xr_p, encoding='utf-8').read()
     today = date.today().isoformat()
+    gv = toc_version(os.path.dirname(gi_p), 'GearInsight_Forever')
+    xv = toc_version(os.path.dirname(xr_p), 'XR_DungeonGuide')
+    gi_src = 'GearInsight_Forever %s Data.lua' % gv
+    xr_src = 'XR_DungeonGuide %s Data_Skills.lua' % xv
 
     sp_per, sp_total = gi_spells(gi)
     ac = gi_achievements(gi)
@@ -215,7 +236,7 @@ def main():
 
     dump(os.path.join(out_dir, 'gi-spells.json'), {
         'meta': {
-            'source': 'GearInsight_Forever 0.4.29 Data.lua 的 spells 表（源：Forever beta client 1.60.1.69876，2026-10-03）',
+            'source': gi_src + ' 的 spells 表（源：Forever beta 客户端解包）', 'addonVersion': gv,
             'originFile': gi_p, 'fetched': today,
             'counts': {'total': sp_total, 'byClass': {k: len(v) for k, v in sp_per.items()}},
             'droppedFields': ['d（tooltip 描述正文，红线）'],
@@ -223,21 +244,25 @@ def main():
         'classes': sp_per})
     dump(os.path.join(out_dir, 'gi-achievements.json'), {
         'meta': {
-            'source': 'GearInsight_Forever 0.4.29 Data.lua 的 achievements 表',
+            'source': gi_src + ' 的 achievements 表', 'addonVersion': gv,
             'originFile': gi_p, 'fetched': today, 'counts': {'total': len(ac)},
             'droppedFields': ['d（成就描述句子，红线）', 'dEn（英文描述）'],
             'note': 'lg 字段取值只有 0/1/16、含义未确认，留在快照里不进成品。'},
         'achievements': ac})
     dump(os.path.join(out_dir, 'gi-rares.json'), {
         'meta': {
-            'source': 'GearInsight_Forever 0.4.29 Data.lua 的 rares 表',
+            'source': gi_src + ' 的 rares 表', 'addonVersion': gv,
             'originFile': gi_p, 'fetched': today,
             'counts': {'total': len(ra), 'withItems': sum(1 for x in ra if x['items']),
-                       'withCoords': sum(1 for x in ra if x['x'] is not None)}},
+                       'withCoords': sum(1 for x in ra if x['x'] is not None),
+                       'withUiMap': sum(1 for x in ra if x.get('uiMapId'))}},
+            'note': 'ui=<地图号> 与坐标出自同一行，合并层按它定"标在哪张图上"；'
+                    'respawnRaw（刷新间隔秒数）与 pts（多个刷新点）留在快照里不进成品——'
+                    '刷新计时目前只有这一家说，按红线要等第二处才上页面',
         'rares': ra})
     dump(os.path.join(out_dir, 'xr-skills.json'), {
         'meta': {
-            'source': 'XR_DungeonGuide 0.37.1 Data_Skills.lua（源：权威资料库/zh-cn/spellbook 页内嵌 JSON，2026-10-02 抓）',
+            'source': xr_src + '（源：权威资料库/zh-cn/spellbook 页内嵌 JSON）', 'addonVersion': xv,
             'originFile': xr_p, 'fetched': today,
             'counts': {'total': xk_total, 'byClass': {k: len(v) for k, v in xk_per.items()}},
             'droppedFields': ['dz（作者自述部分为模板词典翻译，红线禁机翻）', 'lz（同段 tooltip 文案）'],

@@ -1,8 +1,9 @@
 {
  "meta": {
-  "source": "GearInsight_Forever 0.4.29 Data.lua 的 achievements 表",
+  "source": "GearInsight_Forever 0.4.32 Data.lua 的 achievements 表",
+  "addonVersion": "0.4.32",
   "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/GearInsight_Forever/Data.lua",
-  "fetched": "2026-10-16",
+  "fetched": "2026-10-19",
   "counts": {
    "total": 211
   },
