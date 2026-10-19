@@ -217,6 +217,7 @@ const geoBossNames = {};
 [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || [])
   .forEach((d) => { geoBossNames[d.id] = new Set((d.bosses || []).map((b) => b.nameCn)); });
 let geoEntry = 0, geoBossRows = 0, geoBossPts = 0, geoNoMap = 0, geoMapped = 0;
+let geoMapGame = 0, geoMapDrawn = 0;
 Object.keys(geo.dungeons || {}).forEach((did) => {
   if (!ids.includes(did)) errs.push(`dungeon-geo：${did} 在 dungeons.json 里没有这座本`);
   const e = geo.dungeons[did] || {};
@@ -237,7 +238,13 @@ Object.keys(geo.dungeons || {}).forEach((did) => {
   if (e.bossMap && !fs.existsSync(path.join(ROOT, '..', e.bossMap))) {
     errs.push(`dungeon-geo ${did}：bossMap 指向的文件不存在（${e.bossMap}）——整目录可删这条要能成立`);
   }
-  if (e.bossMap) geoMapped += 1;
+  if (e.bossMap) {
+    geoMapped += 1;
+    // 底图分两类记（游戏里那张图的截图 / 插件作者自绘），不分类就等于把官方的图说成别人画的
+    if (e.bossMapKind === 'game-capture') geoMapGame += 1;
+    else if (e.bossMapKind === 'addon-drawn') geoMapDrawn += 1;
+    else errs.push(`dungeon-geo ${did}：bossMap 没标是游戏截图还是作者自绘（bossMapKind=「${e.bossMapKind}」）`);
+  }
   Object.keys(e.bossPos || {}).forEach((bn) => {
     if (!(geoBossNames[did] || new Set()).has(bn)) {
       errs.push(`dungeon-geo ${did}：首领「${bn}」不在这座本的名单里，不许凭空多一个名字`);
@@ -261,11 +268,55 @@ if (/%/.test(JSON.stringify(geo.dungeons || {}))) errs.push('dungeon-geo：坐�
 if ((geo.meta || {}).counts && geo.meta.counts.bossRows !== geoBossRows) {
   errs.push(`dungeon-geo：meta.counts.bossRows=${geo.meta.counts.bossRows} 与实际 ${geoBossRows} 条不一致`);
 }
+// 两类底图必须自洽：分起来的座数要等于能画点的座数，也要等于 meta.counts 里写的那两个数
+if (geoMapGame + geoMapDrawn !== geoMapped) {
+  errs.push(`dungeon-geo：底图分类加起来 ${geoMapGame}+${geoMapDrawn} 不等于能画点的 ${geoMapped} 座`);
+}
+if ((geo.meta || {}).counts && (geo.meta.counts.bossMapGame !== geoMapGame
+  || geo.meta.counts.bossMapDrawn !== geoMapDrawn)) {
+  errs.push(`dungeon-geo：meta.counts 写的底图分类 ${geo.meta.counts.bossMapGame}/${geo.meta.counts.bossMapDrawn} `
+    + `与实际 ${geoMapGame}/${geoMapDrawn} 不一致`);
+}
+// 底图是第三方插件带的加工品，每张必须能在 manifest 里查到"哪家插件、哪个版本、哪天取的、哪一类"
+if (geoMapped > 0) {
+  const dmapManifestPath = path.join(ROOT, '..', 'img', 'art', 'dungeonmaps', 'manifest.json');
+  if (!fs.existsSync(dmapManifestPath)) {
+    errs.push(`dungeon-geo：${geoMapped} 座在画点，但底图目录没有 manifest.json——第三方素材不留来源是红线`);
+  } else {
+    const dmRaw = JSON.parse(fs.readFileSync(dmapManifestPath, 'utf8'));
+    const dmf = dmRaw.files || {};
+    Object.keys(geo.dungeons || {}).forEach((did) => {
+      const e = geo.dungeons[did] || {};
+      if (!e.bossMap) return;
+      const rec = dmf[did] || {};
+      ['addon', 'addonVersion', 'fetched', 'origin'].forEach((k) => {
+        if (!rec[k]) errs.push(`dungeon-geo ${did}：底图在 manifest 里的记录缺 ${k}`);
+      });
+      if (rec.file && rec.file !== e.bossMap) {
+        errs.push(`dungeon-geo ${did}：成品写的底图 ${e.bossMap} 与 manifest 的 ${rec.file} 不是同一张`);
+      }
+      // 页面预留位置靠的比例必须等于真实像素——游戏截图是 512² 方的，自绘那几张是 640×427 横的，
+      // 统一写死 512/512 会把加载完那一下抖动留在最该看清的图上
+      const px = rec.pixels || [];
+      if (px.length === 2 && px[0] && px[1]) {
+        if (!e.bossMapRatio) {
+          errs.push(`dungeon-geo ${did}：底图是 ${px[0]}×${px[1]}，成品却没带 bossMapRatio，页面只能猜比例`);
+        } else if (e.bossMapRatio !== `${px[0]}/${px[1]}`) {
+          errs.push(`dungeon-geo ${did}：bossMapRatio=${e.bossMapRatio} 与 manifest 记的 ${px[0]}×${px[1]} 不符`);
+        }
+      }
+    });
+    if (!(dmRaw.policy || '').includes('删')) {
+      errs.push('dungeon-geo：底图 manifest 没写"整目录删掉即回退"这条退路');
+    }
+  }
+}
 var GEO_ENTRY = geoEntry;
 var GEO_BOSS_ROWS = geoBossRows;
 var GEO_BOSS_PTS = geoBossPts;
 warns.push(`副本坐标：入口 ${geoEntry} 座（本地缺那张区域图的 ${geoNoMap} 座）· `
-  + `首领位置 ${geoBossRows} 条首领 / ${geoBossPts} 个点，其中 ${geoMapped} 座有内部底图可画点（快照里名字对不上、没进成品的另计）`);
+  + `首领位置 ${geoBossRows} 条首领 / ${geoBossPts} 个点，其中 ${geoMapped} 座有内部底图可画点`
+  + `（游戏内地图的截图 ${geoMapGame} 座、插件作者自绘 ${geoMapDrawn} 座）（快照里名字对不上、没进成品的另计）`);
 
 // 客户端队伍查找器条目：单独一份文件（打进小程序会把座数带歪），界面在副本页并列显示
 const qu = read('queue.json');

@@ -68,6 +68,16 @@ MAP = {
 
 PREFIX = {'XR': 'XR_DungeonGuide/Media/DungeonMaps', 'DF': 'DungeonsForever/Media/Maps'}
 
+# 这两批图不是一类东西，必须分开记（2026-10-19 逐目录看过作者自己的注释才确认的）：
+#   XR 的 Media/DungeonMaps —— XR_DungeonGuide/Data_DungeonMaps.lua 文件头第一行写着
+#     "粉丝整理 31 张实截图；512²/192色 TGA-RLE"，也就是**游戏里那张副本地图的截图**，
+#     内容是官方的，文件是作者加工出来的（还写过一次修 BGR 反色的教训）。
+#   DF 的 Media/Maps —— 领主大厅 / 洛丹伦废墟 / 挖掘场 / 达拉然 / 哀嚎洞穴 五张，
+#     这几座无限新增本游戏内没有底图，是**插件作者自己画的示意图**
+#     （同样的文件 XR 也带了一份，放在 Media/CustomMaps，谁先画的判不出来）。
+ORIGIN = {'XR': ('game-capture', '游戏内副本地图的截图（内容是官方的那张图，文件由插件作者整理）'),
+          'DF': ('addon-drawn', '插件作者自绘的示意图（这几座本游戏内没有底图）')}
+
 
 def toc_version(addon_dir, name):
     p = os.path.join(addon_dir, name + '.toc')
@@ -107,7 +117,8 @@ def main():
         out = stem.lower() + '.webp'
         files[slug] = {'file': 'img/art/dungeonmaps/' + out, 'from': stem + '.tga',
                        'addon': ('XR_DungeonGuide' if tag == 'XR' else 'DungeonsForever'),
-                       'addonVersion': ver[tag], 'sourcePath': src, 'fetched': today}
+                       'addonVersion': ver[tag], 'sourcePath': src, 'fetched': today,
+                       'origin': ORIGIN[tag][0], 'originNote': ORIGIN[tag][1]}
     print('要画首领坐标的 %d 座里，插件底图能对上 %d 座；对不上 %d：%s'
           % (len(need), len(files), len(miss), miss or '无'))
     if a.dry or not files:
@@ -127,11 +138,22 @@ def main():
         done += 1
     for slug, v in files.items():
         v.pop('sourcePath', None)
+    originCounts = {}
+    for v in files.values():
+        originCounts[v['origin']] = originCounts.get(v['origin'], 0) + 1
     manifest = {
         'kind': 'dungeonmaps',
         'generatedAt': today,
         'policy': '整目录删除即回退——副本详情页的首领位置退回只显示数字坐标，不画点。'
-                  '这批图是插件作者画的底图，不是暴雪官方发布的素材，也不接任何 CDN',
+                  '这批文件都是第三方插件带的加工品、不是暴雪直接发布的素材文件，也不接任何 CDN；'
+                  '其中 game-capture 那一类画的就是游戏内那张官方副本地图，'
+                  'addon-drawn 那一类是插件作者自己画的示意图',
+        'originCounts': originCounts,
+        'originKinds': {ORIGIN['XR'][0]: ORIGIN['XR'][1], ORIGIN['DF'][0]: ORIGIN['DF'][1]},
+        'authorNote': {
+            'file': 'XR_DungeonGuide/Data_DungeonMaps.lua 第一行',
+            'text': '-- v0.16.5 副本地图（血染 2026-09-29：粉丝整理 31 张实截图；512²/192色 TGA-RLE）',
+            'readAs': '这批 dmap_*.tga 是作者从游戏里截下来的副本地图再编码的，不是从暴雪拿的原始素材文件'},
         'license': '来源插件的许可：DungeonsForever LICENSE 为「Copyright © 2026 圆圆 · 保留所有权利」，'
                    'XR_DungeonGuide 同属作者作品。2026-10-19 站主拍板"从插件里用"，'
                    '与站内已有的客户端原画同一套处理（本地留存、记来源与抓取日、可整体下线）；'
@@ -142,7 +164,8 @@ def main():
     with open(os.path.join(OUT_DIR, 'manifest.json'), 'w', encoding='utf-8') as f:
         json.dump(manifest, f, ensure_ascii=False, indent=1)
         f.write('\n')
-    print('转存 %d 张 → src/img/art/dungeonmaps/（含 manifest.json 记来源与许可）' % done)
+    print('转存 %d 座本用的底图（去重后 %d 个文件，斯坦索姆两座共用一张）→ src/img/art/dungeonmaps/'
+          '（含 manifest.json 记来源与许可）' % (done, len(set(v['file'] for v in files.values()))))
 
 
 main()

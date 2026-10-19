@@ -122,7 +122,7 @@
          一个刷新点一颗点，同一只首领有多个点就出多颗；层号写在浮层与列表行里。 -->
     <div v-if="bossMapItems.length" class="card dboss">
       <h2>首领在哪个位置</h2>
-      <PinMap :alt="nm + '的首领位置图'" :items="bossMapItems" ratio="512/512" />
+      <PinMap :alt="nm + '的首领位置图'" :items="bossMapItems" :ratio="geo.bossMapRatio || '512/512'" />
       <p class="dim">点一下钉住、再点收掉；手机上直接点右边那一行。同一只首领有多个刷新点就出多颗。</p>
     </div>
 

@@ -951,7 +951,9 @@ def test_dungeon_geo(browser, base):
             bdots: bd.length, brows: document.querySelectorAll('.dboss .zrow').length,
             bkind: [...new Set(bd.map(x => x.dataset.kind))],
             bpos: bd.map(x => [x.style.left, x.style.top]),
-            bimg: bi ? { w: bi.naturalWidth, ok: bi.complete && bi.naturalWidth > 0 } : null,
+            bimg: bi ? { w: bi.naturalWidth, h: bi.naturalHeight,
+                         ok: bi.complete && bi.naturalWidth > 0,
+                         attr: bi.getAttribute('width') + 'x' + bi.getAttribute('height') } : null,
             img: img ? { w: img.naturalWidth, ok: img.complete && img.naturalWidth > 0 } : null,
             line: c ? c.querySelector('.dgeo-line').innerText.replace(/\\s+/g, ' ').trim() : '',
             pos2: [...document.querySelectorAll('.brow .bt .mono')].map(e => e.innerText.trim()),
@@ -1004,6 +1006,18 @@ def test_dungeon_geo(browser, base):
     check("首领那颗点用的是自己的颜色（不跟稀有那颗撞色）",
           r4["bkind"] == ["boss"], "类型 %s" % (r4["bkind"] or "无"))
     check("这一节也不横向溢出", r4["over"] == 0, "溢出 %d" % r4["over"])
+    # 预留框的宽高必须等于那张图的真实像素：游戏截图那批是 512² 方的、作者自绘那批是 640×427 横的，
+    # 页面写死一个比例就会在图加载完时把整块往下推（2026-10-19 实测到的，不是假设）
+    drawn = sorted(k for k, v in mapped.items() if v.get("bossMapKind") == "addon-drawn")
+    d0 = drawn[0] if drawn else sorted(mapped)[0]
+    r5 = shot(d0)
+    bi = r5["bimg"] or {}
+    check("首领底图预留的宽高就是那张图的真实像素（横图方图不写死同一个比例）",
+          bi.get("attr") == "%dx%d" % (bi.get("w", 0), bi.get("h", 0))
+          and geo[d0].get("bossMapRatio") == str(bi.get("attr", "")).replace("x", "/"),
+          "%s（%s）：预留 %s · 真实 %sx%s · 数据写 %s"
+          % (d0, geo[d0].get("bossMapKind"), bi.get("attr"), bi.get("w"), bi.get("h"),
+             geo[d0].get("bossMapRatio")))
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
     page.wait_for_timeout(1500)
     # 取"哪一段讲了这一层"要按整段取，别按句子切——三个数分在两句里，按句切就会把数切没了
@@ -1014,16 +1028,20 @@ def test_dungeon_geo(browser, base):
           "DungeonsForever" in pv and str(gm["counts"]["entryDungeons"]) in pv
           and str(gm["counts"]["bossRows"]) in pv and str(gm["counts"]["droppedRows"]) in pv,
           pv[:120] or "溯源页没有这一段")
-    # 底图这一层是 2026-10-19 站主拍板才拿进来的，和坐标不是同一家插件，必须另起一段写明来源与张数；
-    # 上一轮那句"自绘地图都没拿"到今天已经不成立，留着就是一句和页面现状矛盾的声明。
+    # 底图这一层是 2026-10-19 站主拍板才拿进来的，和坐标不是同一家插件，必须另起一段写明来源。
+    # 两类要分开交代：一类是插件作者从游戏里截下来的官方副本地图，一类是作者自绘的示意图——
+    # 混着写成"插件作者画的图"是把官方的图说成别人画的，也是把别人的画说成没版权。
     pm = page.evaluate("""() => [...document.querySelectorAll('#main .card p.dim')]
         .map(e => e.innerText.replace(/\\s+/g, ' ').trim())
         .filter(x => x.indexOf('底图') >= 0).join(' | ')""")
-    zhang = sum(int(n) for n in re.findall(r"(\d+) 张", pm))
-    check("溯源页另起一段交代底图是谁画的，张数加起来等于能画点的座数",
-          "插件作者" in pm and "不是官方" in pm and zhang > 0
-          and zhang == gm["counts"]["bossMapped"],
-          "%s 张 / bossMapped %d ｜ %s" % (zhang, gm["counts"]["bossMapped"], pm[:70]))
+    mc = gm["counts"]
+    check("溯源页另起一段把两类底图分开交代，两类座数加起来等于能画点的座数",
+          "游戏里那张副本地图" in pm and "插件作者自绘" in pm
+          and ("%d 座用的是游戏里" % mc["bossMapGame"]) in pm
+          and ("%d 座（" % mc["bossMapDrawn"]) in pm
+          and mc["bossMapGame"] + mc["bossMapDrawn"] == mc["bossMapped"],
+          "游戏截图 %s + 作者自绘 %s / 能画点 %s ｜ %s"
+          % (mc["bossMapGame"], mc["bossMapDrawn"], mc["bossMapped"], pm[:60]))
     check("溯源页不许留着「没拿图」这种与现状矛盾的话",
           "都没拿" not in pm and "没拿图" not in pm,
           "干净" if "都没拿" not in pm else pm[:80])
