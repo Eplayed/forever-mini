@@ -455,23 +455,28 @@ nav.main a.nl:has(.nb) { padding-right:10px }
   .zdot-n { margin:8px auto }
 }
 
-/* ---- 区域卡里那张图也走同一套点位（2026-10-19 站主选"一张区域图标上该区域的全部点位"）----
-   紧凑版只去掉了右边的编号列表——小格子里放不下，浮层自己就把信息说完了 */
-/* 紧凑版必须收成一列：.zband 默认是"图 + 330px 列表"两列，
-   而区域卡只有 258px 宽，两列模板会把图那一列挤成 0（第一版就是这样图整个不见了） */
-.zband.compact { margin-bottom:0; grid-template-columns:minmax(0, 1fr) }
-.zband.compact .zpop { width:min(280px, 78vw) }
+/* ---- 区域面板改成一行一张图（2026-10-19 站主："一行 2 个，地图太小了。
+   也是左右布局，左边是地图，右边是点位列表"）---- */
+/* .zgrid 那条两列网格写在共享的 app.css 里，旧站世界页也在用它；旧站已冻结，
+   所以只在**只由新站加载**的 board.css 里收成单列，旧站一张图都不会跟着变 */
+.zgrid { grid-template-columns: minmax(0, 1fr) }
+/* 卡里这一套就是标准的"左图右列表"，不要再带面板之间那段外边距（行距交给网格的 gap）；
+   内边距跟上面那行标题对齐，图不贴着卡片边框 */
+.zcard .zband { margin:0; padding:0 var(--s3) var(--s3) }
 /* app.css 的 .zcard 是 overflow:hidden（原来只为裁图），现在浮层要能探出卡片外，必须放开；
    卡片本身没有圆角（--r-card:0），放开了也不会有视觉差 */
 .zcard { position:relative; overflow:visible }
 .zcard:hover, .zcard:focus-within { z-index:6 }
-/* 信息区从"整卡是个按钮"改成"下半截是按钮"：点位自己是按钮，按钮套按钮是无效 HTML。
-   这里把 button 的默认长相全部抹平，视觉上与原来那个 div 一致 */
-.zbody { display:block; width:100%; background:none; border:0; color:inherit; font:inherit;
-  text-align:left; padding:var(--s2) var(--s3) var(--s3); cursor:pointer }
-.zbody:disabled { cursor:default }
-@media (max-width:899px) { .zbody { min-height:44px } }   /* 手机上它是唯一的可点入口 */
-.zbody:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
+/* 区域信息从"整卡是个按钮"改成"上面那一行是按钮"：点位自己是按钮，按钮套按钮是无效 HTML。
+   这里把 button 的默认长相抹平，做成一行小标题 + 几段补充信息，点它仍跳到该区域的稀有列表 */
+.zhead { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; width:100%;
+  background:none; border:0; border-bottom:1px solid var(--line); color:inherit; font:inherit;
+  text-align:left; padding:var(--s2) var(--s3); margin:0 0 var(--s3); cursor:pointer }
+.zhead b { font-size:15px }
+.zhead .zcnt { margin-left:auto }        /* 那几个数排在行尾，与名字同一行 */
+.zhead:disabled { cursor:default }
+@media (max-width:899px) { .zhead { min-height:44px; align-items:center } }
+.zhead:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
 /* 三类点位混在一张图上，颜色得有地方解释——浮层与列表行的左边条跟着点位色走 */
 .zrow { --pc:var(--pin-rare) }
 .zrow.k-book { --pc:var(--pin-book) } .zrow.k-camp { --pc:var(--pin-camp) }

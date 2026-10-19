@@ -1,8 +1,8 @@
 <template>
-  <!-- 一张地图 + N 个点位 + 悬停浮层（+ 可选的编号列表）。
+  <!-- 一张地图 + N 个点位 + 悬停浮层 + 右边的编号列表。
        2026-10-19 从稀有精英那一版抽出来：区域 / 稀有 / 书籍 / 营地四个面板共用一套。
        点位平时是虚的，指上去才实体；列表与点位共用同一套序号，双向高亮。 -->
-  <div class="zband" :class="{ compact: compact }" @keydown.esc="closeAll">
+  <div class="zband" @keydown.esc="closeAll">
     <div class="zbig" :class="{ noimg: !hasMap }">
       <!-- 这一层只装地图与点位，浮层是它的兄弟节点：点位按这一层的高度摆百分比，
            而这一层永远等于图高——浮层再怎么撑也不会把点位挪走（2026-10-19 实测到才会这么分） -->
@@ -53,8 +53,9 @@
     </div>
 
     <!-- 列表：手机上没有悬停，这张表就是主入口；一个区域最多 33 个点位，
-         密的时候列表是那条兜底。compact（区域格里的小图）不带列表 -->
-    <ol v-if="!compact" class="zlist">
+         密的时候列表是那条兜底。区域卡也用这一份（2026-10-19 站主：一行一张图，
+         左边图右边列表，原先"小图不带列表"那个紧凑版整个撤掉） -->
+    <ol class="zlist">
       <li v-for="p in listed" :key="p.it.key">
         <button type="button" class="zrow" :class="['k-' + p.it.kind, { on: active === p.it.key, nopin: !p.it.pin }]"
                 data-row :data-r="p.it.key"
@@ -89,8 +90,7 @@ const props = defineProps({
   // 这一组一条都标不出来时（区域自己就没切图，或它的记录全没 mapFile），
   // 仍然要把这张图该是谁、地图编号是多少说出来——所以留两个兜底值
   fallbackMapFile: { type: String, default: '' },
-  fallbackMapId: { type: [String, Number], default: '' },
-  compact: { type: Boolean, default: false }
+  fallbackMapId: { type: [String, Number], default: '' }
 });
 
 const uid = 'zpop-' + String(props.alt || '').replace(/[^A-Za-z0-9_-]/g, '');

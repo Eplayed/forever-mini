@@ -1,14 +1,13 @@
 <template>
   <div class="zcard" :class="{ lk: clickable }" :data-zone="z.nameCn">
-    <!-- 2026-10-19：卡里的地图换成 PinMap 紧凑版——这一张图上标出该区域能找到的
-         稀有 / 书 / 营地，指上去弹同一套浮层。根节点从 <button> 改成 <div>：
-         点位自己是按钮，按钮里套按钮是无效 HTML，浏览器会把内层挪出去，布局就散了。
-         下半截信息区改成按钮，点它仍然跳到该区域的稀有列表（与原来整卡可点等效）。
+    <!-- 2026-10-19 改过两次：先是换成卡里嵌一张小图（一行两张），站主说图太小，
+         现在改成**一行一张**：上面一行区域信息（点它仍跳到该区域的稀有列表），
+         下面一整套点位图（左图右列表，与稀有精英那一屏同一版式）。
+         根节点是 div 不是 button：点位自己是按钮，按钮里套按钮是无效 HTML，
+         浏览器会把内层挪出去，布局就散了。
          注释必须写在根节点里面：写在 <template> 与根元素之间会多出第二个根节点，
          组件单测里 wrapper.classes() 直接变空数组（本轮踩过）。 -->
-    <PinMap :alt="z.nameCn + '的区域地图'" :items="items" compact
-            :fallback-map-file="z.mapFile || ''" :fallback-map-id="z.mapId || ''" />
-    <button type="button" class="zbody" :disabled="!clickable" :data-open="z.nameCn" @click="click">
+    <button type="button" class="zhead" :disabled="!clickable" :data-open="z.nameCn" @click="click">
       <b>{{ z.nameCn }}</b>
       <span v-if="seal" class="tag new">{{ seal }}</span>
       <span class="dim mono">{{ lv }}</span>
@@ -20,6 +19,8 @@
         <template v-if="z.bookCount">{{ z.bookCount }} 本书</template>
       </span>
     </button>
+    <PinMap :alt="z.nameCn + '的区域地图'" :items="items"
+            :fallback-map-file="z.mapFile || ''" :fallback-map-id="z.mapId || ''" />
   </div>
 </template>
 

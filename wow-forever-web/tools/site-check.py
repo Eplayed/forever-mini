@@ -707,13 +707,14 @@ def test_css_tokens(browser, base):
           if missing else "干净")
 
 def test_world_pins(browser, base):
-    """世界页四个面板共用一套点位图（2026-10-19 站主：把稀有那版铺到其余三个面板）。
+    """世界页四个面板共用一套点位图（2026-10-19 站主：把稀有那版铺到其余三个面板；
+       同日再改：区域面板**一行一张**，左边图右边点位列表，原来一行两张太小）。
        盯六件事：① 每个面板的带数/点位数/列表行数都等于 world.json 现算的数；
-       ② 区域卡上一张图混标三类，颜色分得开、总数等于该区域的 rareCount+bookCount+营地数；
-       ③ 区域卡的点位与"跳到该区域稀有列表"的按钮不互相嵌套（按钮套按钮是无效 HTML）；
+       ② 区域卡一行一张、卡上混标三类，点数=能标的、行数=全部条数；
+       ③ 区域卡的点位与"跳到该区域稀有列表"那一行按钮不互相嵌套（按钮套按钮是无效 HTML）；
        ④ 红框里那两处文字确实没了（首屏五格读数、"先挑区域"标题）；
        ⑤ 只换查询参数也要切面板（/world?t=zones → ?t=books 不换组件实例）；
-       ⑥ 桌面与 375 都不横溢。"""
+       ⑥ 桌面与 375 都不横溢，窄屏地图仍占满一整块。"""
     print("\n[6e] 世界页四面板共用点位图")
     import json
     W = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
@@ -724,6 +725,8 @@ def test_world_pins(browser, base):
     pin = lambda x: bool(x.get("mapFile") and x.get("mark"))
     znames = {z["nameCn"] for z in zones}
     want_zone_pins = len([x for x in rares + books + camps if pin(x) and x.get("zone") in znames])
+    # 列表那一列比图上多：没 mapFile 的 73 条稀有不上图但要能查到，所以行数按全部条数算
+    want_zone_rows = len([x for x in rares + books + camps if x.get("zone") in znames])
     book_zones = {b.get("zone") for b in books if b.get("zone")}
     camp_zones = {c.get("zone") for c in camps if c.get("zone")}
 
@@ -735,24 +738,35 @@ def test_world_pins(browser, base):
     page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
     page.wait_for_timeout(2400)
     z = page.evaluate("""() => { const cards = [...document.querySelectorAll('.zcard')];
-      return { cards: cards.length, compact: document.querySelectorAll('.zband.compact').length,
+      const grid = document.querySelector('.zgrid');
+      const big = document.querySelector('.zcard .zbig');
+      return { cards: cards.length,
+        cols: grid ? (getComputedStyle(grid).gridTemplateColumns || '').trim().split(/\\s+/).length : 0,
+        mapW: big ? Math.round(big.getBoundingClientRect().width) : 0,
+        lists: document.querySelectorAll('.zcard .zband > .zlist').length,
+        rows: document.querySelectorAll('.zcard .zband > .zlist .zrow').length,
         dots: document.querySelectorAll('.zcard .zdot').length,
         kinds: [...new Set([...document.querySelectorAll('.zcard .zdot')].map(d => d.dataset.kind))],
         nested: cards.filter(c => c.matches('button') || c.querySelector('button button')).length,
-        bodyBtn: document.querySelectorAll('.zcard button.zbody').length,
+        bodyBtn: document.querySelectorAll('.zcard button.zhead').length,
         noimg: [...document.querySelectorAll('.zcard .zbig-id')].map(e => e.innerText.trim()),
-        listInCompact: document.querySelectorAll('.zband.compact .zlist').length,
         heroStats: (document.querySelector('.cdhead.big').closest('.card').querySelectorAll('.stats') || []).length,
         over: document.documentElement.scrollWidth - window.innerWidth}; }""")
-    check("区域卡每张都带一张点位图，三类点混标在同一张上",
-          z["cards"] == len(zones) == 44 and z["compact"] == 44
-          and z["dots"] == want_zone_pins and sorted(z["kinds"]) == ["book", "camp", "rare"]
-          and z["listInCompact"] == 0,
-          "%d 张卡 / %d 个点（数据能标在区域卡上的 %d）/ 类型 %s"
-          % (z["cards"], z["dots"], want_zone_pins, z["kinds"]))
-    check("区域卡不是按钮套按钮（点位自己是按钮，整卡改成外层 div + 下半截按钮）",
+    check("区域面板一行一张图（站主：原来一行两个、图太小），左图右列表同一版式",
+          z["cards"] == len(zones) == 44 and z["cols"] == 1 and z["lists"] == len(zones)
+          and z["mapW"] >= 520,
+          "%d 张卡 / 网格 %d 列 / 右侧列表 %d 份 / 图宽 %dpx"
+          % (z["cards"], z["cols"], z["lists"], z["mapW"]))
+    check("区域卡每张都带该区域的全部点位，三类点混标在同一张上",
+          z["dots"] == want_zone_pins and sorted(z["kinds"]) == ["book", "camp", "rare"]
+          and z["cards"] == len(zones),
+          "%d 个点（数据能标在区域卡上的 %d）/ 类型 %s" % (z["dots"], want_zone_pins, z["kinds"]))
+    check("区域卡不是按钮套按钮（点位自己是按钮，整卡是外层 div + 上面一行信息是按钮）",
           z["nested"] == 0 and z["bodyBtn"] == len(zones),
-          "嵌套 %d 处 / 信息区按钮 %d 个" % (z["nested"], z["bodyBtn"]))
+          "嵌套 %d 处 / 区域信息按钮 %d 个" % (z["nested"], z["bodyBtn"]))
+    check("右侧列表那一列一条不少：行数 = 该区域的稀有 + 书 + 营地（含标不出点位的）",
+          z["rows"] == want_zone_rows,
+          "列表 %d 行，数据 %d 条" % (z["rows"], want_zone_rows))
     check("整张图都标不出点的区域，仍然写明这是哪张地图的编号，不留空盒",
           len(z["noimg"]) == len([x for x in zones if not x.get("mapFile")])
           and all("地图编号" in t for t in z["noimg"]),
@@ -855,13 +869,17 @@ def test_world_pins(browser, base):
         mp.goto(APP_BASE + "/#/world?t=" + t, wait_until="networkidle")
         mp.wait_for_timeout(2000)
         mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
+          mapW: (document.querySelector('.zbig') || { offsetWidth: 0 }).offsetWidth,
           cut: [...document.querySelectorAll('.zdot')].some(d => { const r = d.getBoundingClientRect();
             return r.width && (r.right > window.innerWidth + 1 || r.left < -1); }),
-          small: [...document.querySelectorAll('.zbody')].filter(e => {
+          small: [...document.querySelectorAll('.zhead')].filter(e => {
             const r = e.getBoundingClientRect(); return r.width && r.height < 44; }).length})""")
-        check("世界页 %s 面板 375：整页不横溢、点位没被切到屏外、区域信息区够 44px 点击区" % t,
+        check("世界页 %s 面板 375：整页不横溢、点位没被切到屏外、区域信息行够 44px 点击区" % t,
               mm["over"] == 0 and not mm["cut"] and mm["small"] == 0,
               json.dumps(mm, ensure_ascii=False))
+        # 站主这条改的就是"图太小"，所以窄屏也钉一层：地图至少铺满屏宽的七成
+        check("世界页 %s 面板 375：地图占满一整块（不是半张小图）" % t,
+              mm["mapW"] >= 0.7 * 375, "图宽 %dpx（屏宽 375）" % mm["mapW"])
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-world-zones-m.png"))
     mctx.close()
     check("世界页四个面板走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
