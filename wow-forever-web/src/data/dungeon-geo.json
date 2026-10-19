@@ -4,20 +4,29 @@
   "generatedAt": "2026-10-19",
   "method": "tools/extract-df-geo.py 抽快照 → tools/merge-dungeon-geo.py 出这份成品",
   "note": "副本入口（在区域图上的百分比坐标）与各首领在副本内部图上的位置。只有副本详情页读这一份，列表页不背它。",
-  "coordinateNote": "入口坐标的参照物是那一行的「地图编号」所指的区域图；首领坐标的参照物是这座本自己的内部图，本站目前没有那批内部图，所以先落数据、不在图上画点",
+  "coordinateNote": "入口坐标的参照物是那一行的「地图编号」所指的区域图；首领坐标的参照物是这座本自己的内部图（bossMap 那张）。没有 bossMap 的本，首领位置仍只给数字、不画点",
+  "mapNote": "首领画点用的底图是插件作者绘制的副本内部图（DungeonsForever 1.8.20 3 张、XR_DungeonGuide 65 25 张），2026-10-19 站主决定采用；只拿图，作者写的说明一条没取。这批图是本地留存的第三方素材，不是官方发布的图，整目录删掉就退回只显示数字坐标。",
   "sources": [
    {
     "key": "df",
     "name": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
     "kind": "第三方插件从客户端读出的位置",
     "date": "2026-10-19",
-    "license": "插件 LICENSE：保留所有权利——本站只取坐标与地图号，不取任何文字与图"
+    "license": "插件 LICENSE：保留所有权利——这一层只取坐标与地图号，作者写的文字说明一条没取"
+   },
+   {
+    "key": "map",
+    "name": "DungeonsForever 1.8.20 3 张、XR_DungeonGuide 65 25 张",
+    "kind": "第三方插件作者绘制的副本内部底图",
+    "date": "2026-10-19",
+    "license": "来源插件的许可：DungeonsForever LICENSE 为「Copyright © 2026 圆圆 · 保留所有权利」，XR_DungeonGuide 同属作者作品。2026-10-19 站主拍板\"从插件里用\"，与站内已有的客户端原画同一套处理（本地留存、记来源与抓取日、可整体下线）；作者写的任何文字说明与攻略内容一律没取"
    }
   ],
   "counts": {
    "entryDungeons": 28,
    "bossDungeons": 28,
    "bossRows": 181,
+   "bossMapped": 28,
    "droppedRows": 25
   }
  },
@@ -97,6 +106,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_blackfathom.webp",
    "provenance": [
     {
      "type": "addon",
@@ -198,6 +208,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_deadmines.webp",
    "provenance": [
     {
      "type": "addon",
@@ -253,6 +264,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_dm_east.webp",
    "provenance": [
     {
      "type": "addon",
@@ -322,6 +334,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_dm_north.webp",
    "provenance": [
     {
      "type": "addon",
@@ -384,6 +397,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_dm_west.webp",
    "provenance": [
     {
      "type": "addon",
@@ -446,6 +460,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_gnomeregan.webp",
    "provenance": [
     {
      "type": "addon",
@@ -480,6 +495,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/hallofthanes.webp",
    "provenance": [
     {
      "type": "addon",
@@ -563,6 +579,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_maraudon.webp",
    "provenance": [
     {
      "type": "addon",
@@ -629,6 +646,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_ragefire.webp",
    "provenance": [
     {
      "type": "addon",
@@ -677,6 +695,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_rfndowns.webp",
    "provenance": [
     {
      "type": "addon",
@@ -753,6 +772,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_rfnkraul.webp",
    "provenance": [
     {
      "type": "addon",
@@ -808,6 +828,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/ruinsoflordaeron.webp",
    "provenance": [
     {
      "type": "addon",
@@ -835,6 +856,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_sm_arm.webp",
    "provenance": [
     {
      "type": "addon",
@@ -876,6 +898,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_sm_cath.webp",
    "provenance": [
     {
      "type": "addon",
@@ -976,6 +999,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_sm_gy.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1010,6 +1034,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_sm_lib.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1107,6 +1132,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_scholomance.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1190,6 +1216,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_shadowfangkeep.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1272,6 +1299,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_strat.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1334,6 +1362,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_strat.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1389,6 +1418,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_sunken_temple.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1484,6 +1514,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_stockade.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1570,6 +1601,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_uldaman.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1668,6 +1700,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_wailingcaverns.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1702,6 +1735,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/excavationsite.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1805,6 +1839,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_zulfarrak.webp",
    "provenance": [
     {
      "type": "addon",
@@ -1927,6 +1962,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_brd.webp",
    "provenance": [
     {
      "type": "addon",
@@ -2040,6 +2076,7 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dmap_lbrs.webp",
    "provenance": [
     {
      "type": "addon",

@@ -102,8 +102,10 @@
       <!-- 副本坐标这一层的边界也在这页说：从哪家插件取的、只取了什么、没凑上的有多少 -->
       <p v-if="GEO.counts" class="dim">{{ GEO.sources[0].name }}：入口 {{ GEO.counts.entryDungeons }} 座、
         本内首领位置 {{ GEO.counts.bossDungeons }} 座 {{ GEO.counts.bossRows }} 条。
-        只取坐标与地图号，作者写的说明与自绘地图都没拿；两边首领名字对不上的 {{ GEO.counts.droppedRows }} 条没有硬凑，
+        只取坐标与地图编号，作者写的说明没拿；两边首领名字对不上的 {{ GEO.counts.droppedRows }} 条没有硬凑，
         留在没采用的名单里。这些数本站没进游戏核过。</p>
+      <!-- 底图是这一轮新拿进来的一层素材，和坐标不是同一家插件，必须分开说一句（数字来自 manifest 现算） -->
+      <p v-if="GEO.mapNote" class="dim">{{ GEO.mapNote }}</p>
     </div>
 
     <div class="card">

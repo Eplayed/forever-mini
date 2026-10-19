@@ -35,11 +35,27 @@ def main():
         out.setdefault(did, {})['entry'] = {
             'mapId': mid, 'x': v['x'], 'y': v['y'], 'zone': v['zone'],
             'mapFile': art.get(mid), 'noMap': mid not in art}
+    # 首领坐标的画布：副本内部底图。这批图不在 art.json 里（那是 fetch-art.py 从 CDN 建的索引），
+    # 它由 tools/extract-plugin-maps.py 转存并自带 manifest，所以这里直接读那份 manifest。
+    dmaps, dm = {}, {}
+    mpath = os.path.join(ROOT, 'src', 'img', 'art', 'dungeonmaps', 'manifest.json')
+    if os.path.exists(mpath):
+        dm = json.load(open(mpath, encoding='utf-8'))
+        dmaps = {k: v.get('file') for k, v in (dm.get('files') or {}).items() if v.get('file')}
+    # 底图来自哪几家插件、各几张——从 manifest 现算，不手写数字（手写过的版本号已经错过两轮）
+    mapFrom = {}
+    for v in (dm.get('files') or {}).values():
+        k = '%s %s' % (v.get('addon'), v.get('addonVersion'))
+        mapFrom[k] = mapFrom.get(k, 0) + 1
+    mapSrcName = '、'.join('%s %d 张' % (k, n) for k, n in sorted(mapFrom.items()))
     for did, bs in sorted((snap.get('bosses') or {}).items()):
         # 首领名必须是这座本真有的那一条；对不上的一律不进成品（快照的 unmapped 里留着原因）
         keep = {n: pts for n, pts in bs.items() if n in bosses_of.get(did, set())}
         if keep:
-            out.setdefault(did, {})['bossPos'] = keep
+            e = out.setdefault(did, {})
+            e['bossPos'] = keep
+            if dmaps.get(did):
+                e['bossMap'] = dmaps[did]
             n_boss += len(keep)
     for did in out:
         out[did]['provenance'] = [dict(prov)]
@@ -51,13 +67,28 @@ def main():
             'method': 'tools/extract-df-geo.py 抽快照 → tools/merge-dungeon-geo.py 出这份成品',
             'note': '副本入口（在区域图上的百分比坐标）与各首领在副本内部图上的位置。'
                     '只有副本详情页读这一份，列表页不背它。',
-            'coordinateNote': '入口坐标的参照物是那一行的「地图编号」所指的区域图；首领坐标的参照物是这座本自己的'
-                              '内部图，本站目前没有那批内部图，所以先落数据、不在图上画点',
+            'coordinateNote': '入口坐标的参照物是那一行的「地图编号」所指的区域图；'
+                              '首领坐标的参照物是这座本自己的内部图（bossMap 那张）。'
+                              '没有 bossMap 的本，首领位置仍只给数字、不画点',
+            # 这句是给溯源页直接念的：底图这件事必须写清"是作者画的、不是官方素材、哪家、几张"，
+            # 数字从 manifest 现算，不手写（手写过的版本号已经错过两轮）。
+            'mapNote': ('首领画点用的底图是插件作者绘制的副本内部图'
+                        + ('（' + mapSrcName + '）' if mapSrcName else '')
+                        + '，2026-10-19 站主决定采用；只拿图，作者写的说明一条没取。'
+                        + '这批图是本地留存的第三方素材，不是官方发布的图，'
+                          '整目录删掉就退回只显示数字坐标。'),
             'sources': [{'key': 'df', 'name': snap['meta']['source'], 'kind': '第三方插件从客户端读出的位置',
                          'date': snap['meta']['fetched'],
-                         'license': '插件 LICENSE：保留所有权利——本站只取坐标与地图号，不取任何文字与图'}],
+                         'license': '插件 LICENSE：保留所有权利——这一层只取坐标与地图号，'
+                                    '作者写的文字说明一条没取'},
+                        # 底图这一层单独记一条：它不是坐标那一层的同一家插件，许可也不同
+                        {'key': 'map', 'name': mapSrcName or '本站自绘占位（没有可画点的底图）',
+                         'kind': '第三方插件作者绘制的副本内部底图',
+                         'date': (dm.get('generatedAt') or ''),
+                         'license': dm.get('license', '')}],
             'counts': {'entryDungeons': len(snap.get('entry') or {}),
                        'bossDungeons': len(snap.get('bosses') or {}), 'bossRows': n_boss,
+                       'bossMapped': len([1 for v in out.values() if v.get('bossMap')]),
                        'droppedRows': (snap['meta'].get('counts') or {}).get('bossSkipped')}
         },
         'dungeons': out

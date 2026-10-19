@@ -383,6 +383,7 @@ nav.main a.nl:has(.nb) { padding-right:10px }
     transform var(--dur-1) var(--ease-out) }
 .zdot.k-book { --pc:var(--pin-book) } .zdot.k-camp { --pc:var(--pin-camp) }
 .zdot.k-entry { --pc:var(--pin-entry) }
+.zdot.k-boss { --pc:var(--pin-boss) }
 .zdot-n { display:block; width:18px; height:18px; border:1px solid var(--pc);
   border-radius:50%; background:rgba(19,26,40,.82); color:var(--pc);
   font:700 10.5px/17px var(--font-mono); text-align:center }
@@ -482,6 +483,7 @@ nav.main a.nl:has(.nb) { padding-right:10px }
 .zrow { --pc:var(--pin-rare) }
 .zrow.k-book { --pc:var(--pin-book) } .zrow.k-camp { --pc:var(--pin-camp) }
 .zrow.k-entry { --pc:var(--pin-entry) }
+.zrow.k-boss { --pc:var(--pin-boss) }
 /* 副本详情页那一块只有一颗入口点，列表那一列空着不好看也不带信息：收成图占满、
    入口那一行写在图下面（见 .dgeo-line） */
 .dgeo .zband { grid-template-columns:minmax(0, 1fr) }

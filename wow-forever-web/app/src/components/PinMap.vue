@@ -7,8 +7,10 @@
       <!-- 这一层只装地图与点位，浮层是它的兄弟节点：点位按这一层的高度摆百分比，
            而这一层永远等于图高——浮层再怎么撑也不会把点位挪走（2026-10-19 实测到才会这么分） -->
       <div class="zcanvas">
+        <!-- 占位尺寸按 ratio 给：区域底图是 3:2、副本内部底图是 1:1，
+             写死 560×373 的话方图加载完会从 3:2 的预留框跳到 1:1，整块往下抖一下 -->
         <img v-if="hasMap" :src="mapSrc" :alt="alt" loading="lazy" decoding="async"
-             width="560" height="373" @error="imgBad = true">
+             :width="ar[0]" :height="ar[1]" @error="imgBad = true">
         <b v-if="!hasMap && mapId" class="zbig-id mono">地图编号 {{ mapId }}</b>
         <template v-if="hasMap">
           <button v-for="p in plotted" :key="p.it.key" type="button" class="zdot"
@@ -90,12 +92,19 @@ const props = defineProps({
   // 这一组一条都标不出来时（区域自己就没切图，或它的记录全没 mapFile），
   // 仍然要把这张图该是谁、地图编号是多少说出来——所以留两个兜底值
   fallbackMapFile: { type: String, default: '' },
-  fallbackMapId: { type: [String, Number], default: '' }
+  fallbackMapId: { type: [String, Number], default: '' },
+  // 底图的宽高比，只用来给浏览器预留位置（避免加载完抖一下）：区域图 560/373、副本内部图 512/512
+  ratio: { type: String, default: '560/373' }
 });
 
 const uid = 'zpop-' + String(props.alt || '').replace(/[^A-Za-z0-9_-]/g, '');
 const popId = computed(() => uid);
 const imgBad = ref(false);
+const ar = computed(() => {
+  const p = String(props.ratio || '560/373').split('/');
+  const w = parseInt(p[0], 10), h = parseInt(p[1], 10);
+  return (w > 0 && h > 0) ? [w, h] : [560, 373];
+});
 const hovered = ref('');
 const pinned = ref('');
 

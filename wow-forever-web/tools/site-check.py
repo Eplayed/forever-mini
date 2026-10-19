@@ -936,12 +936,22 @@ def test_dungeon_geo(browser, base):
     def shot(did):
         page.goto(APP_BASE + "/#/dungeon?d=" + did, wait_until="networkidle")
         page.wait_for_timeout(1800)
+        # 两张图都是 loading="lazy"：不先滚进视口，naturalWidth 就是 0，断言会打在"没加载"上
+        page.evaluate("() => { const x = document.querySelector('.dboss');"
+                      "if (x && x.scrollIntoView) x.scrollIntoView({ block: 'center' }); }")
+        page.wait_for_timeout(900)
         return page.evaluate("""() => { const c = document.querySelector('.dgeo');
           const dots = [...document.querySelectorAll('.dgeo .zdot')];
           const img = document.querySelector('.dgeo .zcanvas img');
+          const bd = [...document.querySelectorAll('.dboss .zdot')];
+          const bi = document.querySelector('.dboss .zcanvas img');
           return { has: !!c, dots: dots.length,
             pos: dots.map(x => [x.style.left, x.style.top]),
             kind: dots.map(x => x.dataset.kind),
+            bdots: bd.length, brows: document.querySelectorAll('.dboss .zrow').length,
+            bkind: [...new Set(bd.map(x => x.dataset.kind))],
+            bpos: bd.map(x => [x.style.left, x.style.top]),
+            bimg: bi ? { w: bi.naturalWidth, ok: bi.complete && bi.naturalWidth > 0 } : null,
             img: img ? { w: img.naturalWidth, ok: img.complete && img.naturalWidth > 0 } : null,
             line: c ? c.querySelector('.dgeo-line').innerText.replace(/\\s+/g, ' ').trim() : '',
             pos2: [...document.querySelectorAll('.brow .bt .mono')].map(e => e.innerText.trim()),
@@ -975,9 +985,25 @@ def test_dungeon_geo(browser, base):
     got = len([x for x in r3["pos2"] if x.startswith("本内")])
     check("首领那一行的「本内 x，y」条数等于这座本数据里的条数，一条不多一条不少",
           got == want, "%s：页面 %d 条 / 数据 %d 条" % (b0, got, want))
-    check("首领位置只给数字，不谎称画在图上（这一层还没有副本内部图）",
-          "副本内部图" not in r3["line"] and all("本内" in x for x in r3["pos2"][:want]),
-          "例：%s" % (r3["pos2"][0] if r3["pos2"] else "无"))
+    # 原来这条是"没有内部底图所以只给数字"，底图接进来以后它变成永远为真的空话，删掉。
+    # 该判的事由下面两条管：有 bossMap 的本才许画点、点数等于刷新点数。
+    # 2026-10-19 晚：副本内部底图接进来之后（站主拍板"从插件里用"），首领位置从数字变成点。
+    # 一个刷新点一颗点，所以点数 = 这座本所有 bossPos 的点数之和；没有 bossMap 的本一颗都不许多画
+    mapped = {k: v for k, v in geo.items() if v.get("bossMap") and v.get("bossPos")}
+    want_pts = sum(len(p) for v in mapped.values() for p in v["bossPos"].values())
+    check("数据侧：有内部底图可画点的本 %d 座，点数合计 %d" % (len(mapped), want_pts),
+          len(mapped) == (gm.get("counts") or {}).get("bossMapped"),
+          "数据 %d 座 / meta.counts.bossMapped %s"
+          % (len(mapped), (gm.get("counts") or {}).get("bossMapped")))
+    b1 = sorted(mapped)[0]
+    r4 = shot(b1)
+    want_b = sum(len(x) for x in geo[b1]["bossPos"].values())
+    check("副本详情页「首领在哪个位置」一颗点=一个刷新点，且底图真加载出来了",
+          r4["bdots"] == want_b and r4["brows"] == want_b and r4["bimg"] and r4["bimg"]["ok"],
+          "%s：点 %d / 行 %d / 数据 %d 个点" % (b1, r4["bdots"], r4["brows"], want_b))
+    check("首领那颗点用的是自己的颜色（不跟稀有那颗撞色）",
+          r4["bkind"] == ["boss"], "类型 %s" % (r4["bkind"] or "无"))
+    check("这一节也不横向溢出", r4["over"] == 0, "溢出 %d" % r4["over"])
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
     page.wait_for_timeout(1500)
     # 取"哪一段讲了这一层"要按整段取，别按句子切——三个数分在两句里，按句切就会把数切没了
@@ -988,6 +1014,19 @@ def test_dungeon_geo(browser, base):
           "DungeonsForever" in pv and str(gm["counts"]["entryDungeons"]) in pv
           and str(gm["counts"]["bossRows"]) in pv and str(gm["counts"]["droppedRows"]) in pv,
           pv[:120] or "溯源页没有这一段")
+    # 底图这一层是 2026-10-19 站主拍板才拿进来的，和坐标不是同一家插件，必须另起一段写明来源与张数；
+    # 上一轮那句"自绘地图都没拿"到今天已经不成立，留着就是一句和页面现状矛盾的声明。
+    pm = page.evaluate("""() => [...document.querySelectorAll('#main .card p.dim')]
+        .map(e => e.innerText.replace(/\\s+/g, ' ').trim())
+        .filter(x => x.indexOf('底图') >= 0).join(' | ')""")
+    zhang = sum(int(n) for n in re.findall(r"(\d+) 张", pm))
+    check("溯源页另起一段交代底图是谁画的，张数加起来等于能画点的座数",
+          "插件作者" in pm and "不是官方" in pm and zhang > 0
+          and zhang == gm["counts"]["bossMapped"],
+          "%s 张 / bossMapped %d ｜ %s" % (zhang, gm["counts"]["bossMapped"], pm[:70]))
+    check("溯源页不许留着「没拿图」这种与现状矛盾的话",
+          "都没拿" not in pm and "没拿图" not in pm,
+          "干净" if "都没拿" not in pm else pm[:80])
     # 红线：这一层整份不许出现概率措辞（数据侧 build-data 也卡了一道，这里看渲染出来的）
     check("渲染出来的入口行与首领坐标行里都不许出现百分号（防掉率混进这一层）",
           "%" not in r3["line"] + " ".join(r3["pos2"]),

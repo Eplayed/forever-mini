@@ -1,0 +1,317 @@
+{
+ "kind": "dungeonmaps",
+ "generatedAt": "2026-10-19",
+ "policy": "整目录删除即回退——副本详情页的首领位置退回只显示数字坐标，不画点。这批图是插件作者画的底图，不是暴雪官方发布的素材，也不接任何 CDN",
+ "license": "来源插件的许可：DungeonsForever LICENSE 为「Copyright © 2026 圆圆 · 保留所有权利」，XR_DungeonGuide 同属作者作品。2026-10-19 站主拍板\"从插件里用\"，与站内已有的客户端原画同一套处理（本地留存、记来源与抓取日、可整体下线）；作者写的任何文字说明与攻略内容一律没取",
+ "note": "副本内部底图，用作首领坐标的画布；斯坦索姆两座本共用一张（dmap_strat）",
+ "files": {
+  "blackfathom-deeps": {
+   "file": "img/art/dungeonmaps/dmap_blackfathom.webp",
+   "from": "dmap_blackfathom.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "blackrock-depths": {
+   "file": "img/art/dungeonmaps/dmap_brd.webp",
+   "from": "dmap_brd.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "deathmine": {
+   "file": "img/art/dungeonmaps/dmap_deadmines.webp",
+   "from": "dmap_deadmines.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "dire-maul-east": {
+   "file": "img/art/dungeonmaps/dmap_dm_east.webp",
+   "from": "dmap_dm_east.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "dire-maul-north": {
+   "file": "img/art/dungeonmaps/dmap_dm_north.webp",
+   "from": "dmap_dm_north.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "dire-maul-west": {
+   "file": "img/art/dungeonmaps/dmap_dm_west.webp",
+   "from": "dmap_dm_west.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "gnomeregan": {
+   "file": "img/art/dungeonmaps/dmap_gnomeregan.webp",
+   "from": "dmap_gnomeregan.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "hall-of-thanes": {
+   "file": "img/art/dungeonmaps/hallofthanes.webp",
+   "from": "HallOfThanes.tga",
+   "addon": "DungeonsForever",
+   "addonVersion": "1.8.20",
+   "fetched": "2026-10-19",
+   "pixels": [
+    640,
+    427
+   ]
+  },
+  "lower-blackrock-spire": {
+   "file": "img/art/dungeonmaps/dmap_lbrs.webp",
+   "from": "dmap_lbrs.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "maraudon": {
+   "file": "img/art/dungeonmaps/dmap_maraudon.webp",
+   "from": "dmap_maraudon.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "ragefire-chasm": {
+   "file": "img/art/dungeonmaps/dmap_ragefire.webp",
+   "from": "dmap_ragefire.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "razor-krendor": {
+   "file": "img/art/dungeonmaps/dmap_rfndowns.webp",
+   "from": "dmap_rfndowns.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "razorfen-kraul": {
+   "file": "img/art/dungeonmaps/dmap_rfnkraul.webp",
+   "from": "dmap_rfnkraul.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "ruins-of-lordaeron": {
+   "file": "img/art/dungeonmaps/ruinsoflordaeron.webp",
+   "from": "RuinsOfLordaeron.tga",
+   "addon": "DungeonsForever",
+   "addonVersion": "1.8.20",
+   "fetched": "2026-10-19",
+   "pixels": [
+    640,
+    427
+   ]
+  },
+  "scarlet-monastery-armory": {
+   "file": "img/art/dungeonmaps/dmap_sm_arm.webp",
+   "from": "dmap_sm_arm.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "scarlet-monastery-cathedral": {
+   "file": "img/art/dungeonmaps/dmap_sm_cath.webp",
+   "from": "dmap_sm_cath.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "scarlet-monastery-graveyard": {
+   "file": "img/art/dungeonmaps/dmap_sm_gy.webp",
+   "from": "dmap_sm_gy.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "scarlet-monastery-library": {
+   "file": "img/art/dungeonmaps/dmap_sm_lib.webp",
+   "from": "dmap_sm_lib.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "scholomance": {
+   "file": "img/art/dungeonmaps/dmap_scholomance.webp",
+   "from": "dmap_scholomance.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "shadowfang-keep": {
+   "file": "img/art/dungeonmaps/dmap_shadowfangkeep.webp",
+   "from": "dmap_shadowfangkeep.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "stratholme-main-gate": {
+   "file": "img/art/dungeonmaps/dmap_strat.webp",
+   "from": "dmap_strat.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "stratholme-service-gate": {
+   "file": "img/art/dungeonmaps/dmap_strat.webp",
+   "from": "dmap_strat.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "sunken-temple": {
+   "file": "img/art/dungeonmaps/dmap_sunken_temple.webp",
+   "from": "dmap_sunken_temple.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "the-stocks": {
+   "file": "img/art/dungeonmaps/dmap_stockade.webp",
+   "from": "dmap_stockade.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "uldaman": {
+   "file": "img/art/dungeonmaps/dmap_uldaman.webp",
+   "from": "dmap_uldaman.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "wailing-caverns": {
+   "file": "img/art/dungeonmaps/dmap_wailingcaverns.webp",
+   "from": "dmap_wailingcaverns.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  },
+  "whelgars-excavation": {
+   "file": "img/art/dungeonmaps/excavationsite.webp",
+   "from": "ExcavationSite.tga",
+   "addon": "DungeonsForever",
+   "addonVersion": "1.8.20",
+   "fetched": "2026-10-19",
+   "pixels": [
+    640,
+    427
+   ]
+  },
+  "zulfarrak": {
+   "file": "img/art/dungeonmaps/dmap_zulfarrak.webp",
+   "from": "dmap_zulfarrak.tga",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "65",
+   "fetched": "2026-10-19",
+   "pixels": [
+    512,
+    512
+   ]
+  }
+ }
+}

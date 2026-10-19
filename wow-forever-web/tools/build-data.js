@@ -216,7 +216,7 @@ const geoArtMaps = new Set(Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT
 const geoBossNames = {};
 [].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || [])
   .forEach((d) => { geoBossNames[d.id] = new Set((d.bosses || []).map((b) => b.nameCn)); });
-let geoEntry = 0, geoBossRows = 0, geoBossPts = 0, geoNoMap = 0;
+let geoEntry = 0, geoBossRows = 0, geoBossPts = 0, geoNoMap = 0, geoMapped = 0;
 Object.keys(geo.dungeons || {}).forEach((did) => {
   if (!ids.includes(did)) errs.push(`dungeon-geo：${did} 在 dungeons.json 里没有这座本`);
   const e = geo.dungeons[did] || {};
@@ -234,6 +234,10 @@ Object.keys(geo.dungeons || {}).forEach((did) => {
     if (en.mapFile && en.noMap) errs.push(`dungeon-geo ${did}：既有 mapFile 又标 noMap`);
     if (en.noMap) geoNoMap += 1;
   }
+  if (e.bossMap && !fs.existsSync(path.join(ROOT, '..', e.bossMap))) {
+    errs.push(`dungeon-geo ${did}：bossMap 指向的文件不存在（${e.bossMap}）——整目录可删这条要能成立`);
+  }
+  if (e.bossMap) geoMapped += 1;
   Object.keys(e.bossPos || {}).forEach((bn) => {
     if (!(geoBossNames[did] || new Set()).has(bn)) {
       errs.push(`dungeon-geo ${did}：首领「${bn}」不在这座本的名单里，不许凭空多一个名字`);
@@ -261,7 +265,7 @@ var GEO_ENTRY = geoEntry;
 var GEO_BOSS_ROWS = geoBossRows;
 var GEO_BOSS_PTS = geoBossPts;
 warns.push(`副本坐标：入口 ${geoEntry} 座（本地缺那张区域图的 ${geoNoMap} 座）· `
-  + `首领位置 ${geoBossRows} 条首领 / ${geoBossPts} 个点（快照里名字对不上、没进成品的另计）`);
+  + `首领位置 ${geoBossRows} 条首领 / ${geoBossPts} 个点，其中 ${geoMapped} 座有内部底图可画点（快照里名字对不上、没进成品的另计）`);
 
 // 客户端队伍查找器条目：单独一份文件（打进小程序会把座数带歪），界面在副本页并列显示
 const qu = read('queue.json');

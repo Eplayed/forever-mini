@@ -118,6 +118,14 @@
       </router-link>
     </div>
 
+    <!-- 首领在哪个位置（2026-10-19：副本内部底图接进来之后，坐标从数字变成点）。
+         一个刷新点一颗点，同一只首领有多个点就出多颗；层号写在浮层与列表行里。 -->
+    <div v-if="bossMapItems.length" class="card dboss">
+      <h2>首领在哪个位置</h2>
+      <PinMap :alt="nm + '的首领位置图'" :items="bossMapItems" ratio="512/512" />
+      <p class="dim">点一下钉住、再点收掉；手机上直接点右边那一行。同一只首领有多个刷新点就出多颗。</p>
+    </div>
+
     <!-- 本里的任务（2026-10-13 口径：讲资料出处的句子一律不上页面；唯一保留的是
          「用物品开启」与经验两说那句，缺的格子留空不写"待补"） -->
     <div class="card" id="dquests">
@@ -351,6 +359,26 @@ const entryItems = computed(() => {
   }];
 });
 
+/* 首领位置画成点：一个刷新点一颗。没有 bossMap（那张内部底图）的本，
+   一颗都不画，只在首领行给数字——不拿别的图猜位置。 */
+const bossMapItems = computed(() => {
+  const file = geo.value.bossMap || '';
+  const bs = geo.value.bossPos || {};
+  const out = [];
+  Object.keys(bs).forEach((name) => {
+    (bs[name] || []).forEach((p, i) => {
+      out.push({
+        key: 'b-' + name + '-' + i, kind: 'boss', pin: !!file,
+        x: p.x, y: p.y, mapFile: file, mapId: '',
+        name: name, en: '', tag: '首领', isNew: false, level: '',
+        coord: p.x + '，' + p.y,
+        rows: p.floor ? [['在第几层', String(p.floor)]] : [],
+        drops: [], hint: p.floor ? '第 ' + p.floor + ' 层' : ''
+      });
+    });
+  });
+  return out;
+});
 /* 首领块：带掉落归属与头像参数 */
 const bossRows = computed(() => bosses.value.map((b) => {
   const pts = (geo.value.bossPos || {})[b.nameCn] || [];
