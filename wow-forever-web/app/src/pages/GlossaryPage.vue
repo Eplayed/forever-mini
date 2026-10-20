@@ -36,7 +36,8 @@
                   <text x="20" y="26" text-anchor="middle" font-size="16" font-weight="600" :fill="g.st.text"
                         font-family="PingFang SC,Microsoft YaHei,sans-serif">{{ g.st.letter }}</text>
                 </svg>
-                <img v-if="g.iconKey" :src="iconUrl(g.iconKey)" alt="" loading="lazy" @error="tileImgBad">
+                <img v-if="g.iconKey || g.artIcon" :src="g.iconKey ? iconUrl(g.iconKey) : assetUrl(g.artIcon)"
+                     alt="" loading="lazy" @error="tileImgBad">
               </span>
               <b>{{ g.name }}</b>
               <span v-if="g.sub" class="dim mono">{{ g.sub }}</span>
@@ -64,7 +65,7 @@
    旧站这些是字符串拼接，这里全部等价复刻在组件内，DOM 类名逐字一致。 */
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { load } from '../lib/data.js';
+import { assetUrl, load } from '../lib/data.js';
 import { raceStyle, iconUrl } from '../lib/glyph.js';
 import IconCell from '../components/IconCell.vue';
 import ClassTile from '../components/ClassTile.vue';
@@ -84,13 +85,13 @@ q.value = routeQ;
 function boot() {
   err.value = '';
   Promise.all([load('data/glossary.json'), load('data/races.json'),
-    load('data/classes.json'), load('data/icons.json')])
+    load('data/classes.json'), load('data/icons.json'), load('data/art.json').catch(() => ({}))])
     .then((r) => {
       d.value = {
         items: r[0].items || [],
         RACE: raceLookup(r[1].races),
         classes: r[2].classes || [],
-        ICONS: (r[3] || {}).map || {}
+        ICONS: (r[3] || {}).map || {}, RI: (r[4] || {}).raceIcons || {}
       };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
@@ -137,6 +138,10 @@ function groupEntries(list, classes, RACE) {
     const rc = RACE[rid] || { cn: '未归属种族', fac: '' };
     out.push({
       kind: 'race', id: rid, name: rc.cn, sub: '种族特长', iconKey: rc.iconKey,
+      /* 官方 CDN 没有这一族的小图标时（天裔两边都没有），落 raceIcons 那张插件转存图
+         ——站主 2026-10-20 特批，只当种族小图标用，来源记在 art/manifest.json，不称官方已核。
+         两边都没有就仍然只露自绘首字块，不放假图。 */
+      artIcon: ((d.value && d.value.RI) || {})[rid] || '',
       st: raceStyle(rid, rc.fac, rc.cn), rows: byRace[rid]
     });
   });

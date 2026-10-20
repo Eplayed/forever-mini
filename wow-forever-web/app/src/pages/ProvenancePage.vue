@@ -106,6 +106,24 @@
         留在没采用的名单里。这些数本站没进游戏核过。</p>
       <!-- 底图是这一轮新拿进来的一层素材，和坐标不是同一家插件，必须分开说一句（数字来自 manifest 现算） -->
       <p v-if="GEO.mapNote" class="dim">{{ GEO.mapNote }}</p>
+      <!-- 素材的红线是"图标只从暴雪官方 CDN 取"，下面这些是站主逐张特批、从插件目录转存的例外，
+           必须一张一张点名说清是谁给的、批到哪一步、怎么撤——文案直接读 manifest 里那条授权记录，
+           不在页面里另抄一遍（抄了就和 manifest 漂移，将来加一张图还得改代码）。 -->
+      <template v-if="addonArt.length">
+        <h3 style="margin-top:var(--s4)">从插件目录转存的素材（特批，不走官方 CDN）</h3>
+        <p class="dim">站点的图标一贯只从暴雪官方 CDN 取。下面这几张官方 CDN 没有，
+          是站主逐张批准从本机插件目录转存的，<b>不算官方已核素材</b>，页面上也不当官方图用：</p>
+        <ul class="list">
+          <li v-for="(x, i) in addonArt" :key="i">
+            {{ ART_KIND[x.kind] || x.kind }}「{{ x.name }}」：取自插件 {{ x.addon }}
+            <span class="mono">v{{ x.addonVersion }}</span> 的 <span class="mono">{{ x.sourceDisplay }}</span>，
+            {{ x.importedAt }} 转存为 <span class="mono">{{ x.file }}</span>，
+            文件校验和 <span class="mono">{{ (x.sha256 || '').slice(0, 12) }}</span>。
+            {{ x.authorizedBy }}
+            <br>要撤回：{{ x.rollback }}
+          </li>
+        </ul>
+      </template>
     </div>
 
     <div class="card">
@@ -126,6 +144,12 @@ import { PILL_NAME } from '../lib/fmt.js';
 
 const NAMES = PILL_NAME;                       // L0-L3 的中文读数，与 lib/fmt.js 同一份
 const COV_KEYS = ['L0', 'L1', 'L2', 'L3'];
+// manifest 里 kind 的中文读法（只对可能来自插件目录的那几类，其余原样显示英文键）
+const ART_KIND = {
+  'race-icon': '种族小图标', 'race-portrait': '种族原画', 'zone-map': '区域底图',
+  'boss-portrait': '首领头像', 'class-bg': '职业背景原画', 'spec-bg': '专精背景图',
+  'dungeon-loading': '副本载入图'
+};
 const REFS = [
   ['wow.blizzard.cn/news/', '国服官方公告与职业深度解析', '可入自动化'],
   ['wow.blizzard.cn/24266320/', '国服在线修正', '可入自动化（需整页比对）'],
@@ -155,10 +179,12 @@ function boot() {
   Promise.all([load('data/meta.json'), load('data/method.json'), load('data/scale.json'),
     load('data/dungeons.json').catch(() => ({})),
     load('data/dungeon-quests.json').catch(() => ({})),
-    load('data/dungeon-geo.json').catch(() => ({}))])
+    load('data/dungeon-geo.json').catch(() => ({})),
+    load('data/art.json').catch(() => ({}))])
     .then((r) => {
       d.value = { meta: r[0] || {}, method: r[1] || {}, scale: (r[2] || {}).scale || {},
-        RS: (r[3] || {}).meta || {}, QS: (r[4] || {}).meta || {}, GEO: (r[5] || {}).meta || {} };
+        RS: (r[3] || {}).meta || {}, QS: (r[4] || {}).meta || {}, GEO: (r[5] || {}).meta || {},
+        ART: (r[6] || {}).meta || {} };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
@@ -170,6 +196,8 @@ const m = computed(() => d.value.method || {});
 const RS = computed(() => d.value.RS);
 const QS = computed(() => d.value.QS);
 const GEO = computed(() => d.value.GEO);
+// 插件目录转存的素材名单（art.json.meta.addonFiles，由 fetch-art.py 从 manifest 现算）
+const addonArt = computed(() => ((d.value || {}).ART || {}).addonFiles || []);
 const openQuestions = computed(() => d.value.meta.openQuestions || []);
 const rules = computed(() => d.value.meta.rules || []);
 

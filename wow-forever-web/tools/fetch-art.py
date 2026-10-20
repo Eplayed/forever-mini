@@ -545,7 +545,7 @@ def write_art_index(man):
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
     idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {},
            "factionCities": {}, "bosses": {}, "specs": {}, "classBanners": {},
-           "panels": {}, "scenes": {}, "texture": {}, "meta": {}}
+           "panels": {}, "scenes": {}, "texture": {}, "raceIcons": {}, "meta": {}}
     for x in man["items"]:
         rel = x["file"] if x["file"].startswith("art/") else "art/" + x["file"]
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -555,6 +555,11 @@ def write_art_index(man):
             idx["maps"][name] = "img/" + rel
         elif x["kind"] == "race-portrait":
             idx["races"][name] = "img/" + rel
+        elif x["kind"] == "race-icon":
+            # 种族**小图标**（插件目录转存的加工图，站主 2026-10-20 特批）单独一个键，
+            # 不与 races 那张大图原画混：传承页拿 races/skyborne 当页头大图，
+            # 64px 的小图塞进去就是全站放大糊。
+            idx["raceIcons"][name] = "img/" + rel
         elif x["kind"] == "faction-emblem":
             idx["factions"][name] = "img/" + rel
         elif x["kind"] == "faction-city":
@@ -576,6 +581,29 @@ def write_art_index(man):
             idx["dungeons"][name] = "img/" + rel
     idx["meta"] = {"fetchedAt": man.get("fetchedAt"), "note": man.get("note"),
                    "count": len(man["items"])}
+    # 插件目录转存的那几张（origin 以 addon 开头：加工图、自绘底图）单独列出来给溯源页读。
+    # 为什么不在页面里写死：授权语与回退方案都记在 manifest，抄一份到 Vue 里就是将来漂移的源头，
+    # 而且以后再来一张同源的图，页面不用改就能自己把话说全。
+    addon = []
+    for x in man["items"]:
+        if not str(x.get("origin", "")).startswith("addon"):
+            continue
+        # manifest 里存的是本机完整路径（我们自己回查要用），页面上只露插件内那一段：
+        # 把 ~/Documents/.../.scratch 这种本机目录结构印到公开页面上没有意义，也只是给外人看我们的机器。
+        src = str(x.get("source") or "")
+        name = x.get("addon") or ""
+        disp = src.split(name + "/", 1)[1] if name and name + "/" in src else os.path.basename(src)
+        addon.append({
+            "name": os.path.splitext(os.path.basename(x["file"]))[0],
+            "file": "img/" + (x["file"] if x["file"].startswith("art/") else "art/" + x["file"]),
+            "kind": x.get("kind"), "origin": x.get("origin"),
+            "addon": x.get("addon"), "addonVersion": x.get("addonVersion"),
+            "sourceDisplay": disp,
+            "authorizedBy": x.get("authorizedBy"),
+            "rollback": x.get("rollback"), "importedAt": x.get("importedAt"),
+            "sha256": x.get("sha256"),
+        })
+    idx["meta"]["addonFiles"] = addon
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
     print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "

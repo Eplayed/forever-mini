@@ -185,6 +185,11 @@ const classes = computed(() => (d.value && d.value.classes) || []);
 const gloss = computed(() => (d.value && d.value.gloss) || []);
 const ART = computed(() => (d.value && d.value.ART) || {});
 const POR = computed(() => ART.value.races || {});
+/* 种族**小图标**：官方 CDN 有 race_* 的那些件照旧走 iconKey；
+   天裔两边都没有官方图（AGENTS 素材那一条记过），2026-10-20 站主特批先用插件目录那张
+   RaceIcon_Skyborne.tga 转的 webp。它单独一个索引键 raceIcons，
+   不与 races 那张大图原画混——传承页拿 races/skyborne 当页头，64px 塞进去就是放大糊。 */
+const RACE_ICON = computed(() => ART.value.raceIcons || {});
 const EMB = computed(() => ART.value.factions || {});
 const CITY = computed(() => ART.value.factionCities || {});
 const CNAME = computed(() => { const m = {}; classes.value.forEach((c) => { m[c.id] = c.cn; }); return m; });
@@ -228,13 +233,18 @@ function RaceFace(props) {
   const x = props.x;
   const art = isSky(x) ? (POR.value.skyborne || '') : (POR.value[x.id] || '');
   const st = raceStyle(x.id, x.faction, x.nameCn);
+  /* 小图标这一层：官方 CDN 有 race_* 的照旧用 iconKey；天裔两边都没有官方图，
+     落 raceIcons（插件目录转存、站主 2026-10-20 特批，不称官方已核）。
+     两边都拿不到就只是不盖这一层——底下那张自绘首字块就是回退，不放假图。 */
+  const small = x.iconKey ? iconUrl(x.iconKey)
+    : (isSky(x) && RACE_ICON.value.skyborne ? assetUrl(RACE_ICON.value.skyborne) : '');
   const kids = [h('span', { class: 'liw t' }, [
     h('svg', { viewBox: '0 0 40 40', 'aria-hidden': 'true' }, [
       h('rect', { width: '40', height: '40', rx: '6', fill: st.fill, stroke: st.stroke, 'stroke-opacity': '.7' }),
       h('text', { x: '20', y: '26', 'text-anchor': 'middle', 'font-size': '16', 'font-weight': '600',
         fill: st.text, 'font-family': 'PingFang SC,Microsoft YaHei,sans-serif' }, st.letter)
     ]),
-    x.iconKey ? h('img', { src: iconUrl(x.iconKey), alt: '', loading: 'lazy',
+    small ? h('img', { src: small, alt: '', loading: 'lazy',
       onError: (e) => { e.target.className = 'bad'; } }) : null
   ])];
   if (art) {

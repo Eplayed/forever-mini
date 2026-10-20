@@ -3100,6 +3100,106 @@ def test_updates_rank(browser, base):
     m.close()
 
 
+
+def test_race_icon(browser):
+    """天裔种族小图标（2026-10-20 I02，站主特批用插件目录那张转存的图）。
+       钉四件事：① 种族页那天裔的小图标真的解码出来了；② 传承页页头那张**大图**
+       没有被 64px 的小图顶掉；③ 法术书与术语页的种族格也吃到这张图；
+       ④ 这几页不许出现破图。小图标走 art.json 的 raceIcons，
+       与 races（大图）是两个键——混用一个键迟早有一页被拿错尺寸。"""
+    print("\n[6g] 天裔小图标与大图分开")
+    import json
+    if not app_up(browser):
+        return
+    art = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
+    small = (art.get("raceIcons") or {}).get("skyborne") or ""
+    big = (art.get("races") or {}).get("skyborne") or ""
+    small_dir = small.rsplit("/", 1)[0] + "/"    # 按目录认小图标：两张图都叫 skyborne.webp
+    check("art.json 里小图标与大图是两个不同的键（64px 不许当页头原画）",
+          bool(small) and bool(big) and small != big
+          and "raceicons" in small and small.endswith(".webp") and not small.endswith(".webp?"),
+          "小 %s / 大 %s" % (small, big))
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.on("console", lambda m: errs.append(m.text[:120]) if m.type == "error" else None)
+
+    def probe(url, sel=None):
+        page.goto(APP_BASE + url, wait_until="networkidle")
+        page.wait_for_timeout(2200)
+        page.evaluate("() => { const h = document.body.scrollHeight;"
+                      "for (let y = 0; y <= h; y += 500) { window.scrollTo(0, y); } window.scrollTo(0, 0); }")
+        page.wait_for_timeout(700)
+        return page.evaluate("""(want) => {
+          const src = (i) => i.currentSrc || i.src || '';
+          const imgs = [...document.querySelectorAll('img')];
+          // 按**目录**分，不按文件名：小图标与大图原画都叫 skyborne.webp，
+          // 上一版按文件名匹配，传承页那条把大图也算成了"小图误用"——是断言的错不是页面的错。
+          const mine = imgs.filter(i => src(i).indexOf(want) >= 0);
+          return { small: mine.length,
+                   smallOk: mine.filter(i => i.complete && i.naturalWidth >= 32).length,
+                   smallW: mine.map(i => i.naturalWidth)[0] || 0,
+                   big: imgs.filter(i => src(i).indexOf('art/races/skyborne') >= 0).length,
+                   broken: imgs.filter(i => i.complete && !i.naturalWidth)
+                     .map(i => src(i).split('/').slice(-2).join('/')).slice(0, 4) }; }""",
+            small_dir)
+
+    r = probe("/#/races")
+    check("种族页天裔那几处小图标真解码出来了（不是自绘块也不是破图）",
+          r["small"] >= 2 and r["smallOk"] == r["small"] and r["smallW"] >= 32 and not r["broken"],
+          "%d 处，解码 %d 处，原图宽 %dpx，破图 %s" % (r["small"], r["smallOk"], r["smallW"], r["broken"] or "无"))
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-raceicon-skyborne.png"))
+    lg = probe("/#/legacy")
+    check("传承页页头仍然用那张大图原画，没被 64px 小图顶掉",
+          lg["big"] >= 1 and lg["small"] == 0 and not lg["broken"],
+          "页头大图 %d 张 / 小图误用 %d 张 / 破图 %s" % (lg["big"], lg["small"], lg["broken"] or "无"))
+    for url, label in (("/#/skills", "法术书"), ("/#/glossary", "术语速查")):
+        g = probe(url)
+        check("%s 的种族格也吃到这张小图标，且整页无破图" % label,
+              g["small"] >= 1 and g["smallOk"] == g["small"] and not g["broken"],
+              "%d 处解码 %d 处 / 破图 %s" % (g["small"], g["smallOk"], g["broken"] or "无"))
+    p = probe("/#/provenance")
+    prov = page.evaluate("""(want) => {
+      const t = document.body.innerText || '';
+      return { hasPlugin: t.indexOf('XR_DungeonGuide') >= 0,
+               hasFile: t.indexOf(want) >= 0,
+               notOfficial: t.indexOf('不算官方已核素材') >= 0,
+               hasHash: /[0-9a-f]{12}/.test(t),
+               hasRollback: t.indexOf('要撤回') >= 0,
+               kinds: (t.match(/种族小图标/g) || []).length }; }""", small)
+    check("溯源页点名了这张插件图：插件名 + 文件路径 + 校验和 + '不算官方已核素材' + 撤回方案",
+          prov["hasPlugin"] and prov["hasFile"] and prov["notOfficial"]
+          and prov["hasHash"] and prov["hasRollback"] and prov["kinds"] >= 1,
+          "插件名 %s / 路径 %s / 非官方声明 %s / 校验和 %s / 撤回 %s / 读到 %d 条" % (
+              prov["hasPlugin"], prov["hasFile"], prov["notOfficial"],
+              prov["hasHash"], prov["hasRollback"], prov["kinds"]))
+    check("这几页没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    mctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = mctx.new_page()
+    mp.goto(APP_BASE + "/#/races", wait_until="networkidle")
+    mp.wait_for_timeout(2200)
+    # 手机那一屏更长，不滚到底 lazy 图压根不加载——上一版报"10 处只解码 4 处"就是这个原因，
+    # 那是没验到，不是解码失败。滚完再量，并把"还没加载完"单独报出来。
+    mp.evaluate("""async () => { const h = document.body.scrollHeight;
+      for (let y = 0; y <= h; y += 400) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 150)); }
+      window.scrollTo(0, 0); }""")
+    mp.wait_for_timeout(1200)
+    m = mp.evaluate("""(want) => { const src = (i) => i.currentSrc || i.src || '';
+      const imgs = [...document.querySelectorAll('img')];
+      const mine = imgs.filter(i => src(i).indexOf(want) >= 0);
+      return { n: mine.length, ok: mine.filter(i => i.complete && i.naturalWidth >= 32).length,
+               pend: mine.filter(i => !i.complete).length,
+               over: document.documentElement.scrollWidth - innerWidth }; }""",
+      small_dir)
+    check("375 上天裔小图标同样解码成功且不撑出横向溢出",
+          m["n"] >= 2 and m["ok"] == m["n"] and m["pend"] == 0 and m["over"] <= 1,
+          "%d 处解码 %d 处（还有 %d 处没加载完）/ 溢出 %spx" % (m["n"], m["ok"], m["pend"], m["over"]))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-raceicon-skyborne-m.png"))
+    mctx.close()
+    ctx.close()
+
+
 def test_app(browser, base):
     """新站（Vue 3 + Vite）冒烟：只跑已迁的页，断言口径与旧站第 1 节一致。
 
@@ -4885,6 +4985,7 @@ SECTIONS = [
     ("abilities", test_abilities),
     ("spellbook", test_spellbook),
     ("bis", test_bis),
+    ("race_icon", lambda b, base: test_race_icon(b)),
     ("css_tokens", test_css_tokens),
     ("world_pins", test_world_pins),
     ("dungeon_geo", test_dungeon_geo),

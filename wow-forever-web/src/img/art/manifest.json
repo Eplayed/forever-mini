@@ -2684,8 +2684,32 @@
    "kind": "texture",
    "fetchedAt": "2026-10-13",
    "what": "石板纹理"
+  },
+  {
+   "file": "art/raceicons/skyborne.webp",
+   "bytes": 1898,
+   "sha1": "f8be605e15",
+   "sha256": "9df418ce227d3548486d445fb3280f34fca56bbeb7bf15dc2608563cda20bce0",
+   "source": "Documents/project/.scratch/wow/XR_DungeonGuide/Media/Race/RaceIcon_Skyborne.tga",
+   "kind": "race-icon",
+   "origin": "addon-file",
+   "addon": "XR_DungeonGuide",
+   "addonVersion": "66",
+   "sourceBytes": 16428,
+   "sourceSha256": "2e0ef0699b2592fb2d08b3a6c280c5aabe70ec7021ab9a199c99d5329f5445a1",
+   "sourceSize": [
+    64,
+    64
+   ],
+   "sourceMode": "RGBA",
+   "alphaUsed": false,
+   "convertedTo": "webp q90 method6",
+   "importedAt": "2026-10-20",
+   "authorizedBy": "站主 2026-10-20 决定：网页天裔种族小图标先用这张插件图，不再等官方 CDN；不称为官方已核素材，仅用于种族小图标，不替换传承页那张大图原画。",
+   "rollback": "删除 src/img/art/raceicons/ 整个目录并重跑 fetch-art.py --index-only，即回退到天裔显示自绘首字块。",
+   "note": "第三方插件目录里转存的加工图（客户端种族图标位），与 img/icons/ 那批官方 CDN 图标分开记：这一张不进 icons/manifest.json，不冒充官方来源。"
   }
  ],
- "fetchedAt": "2026-10-13",
- "total": 286
+ "fetchedAt": "2026-10-20",
+ "total": 287
 }

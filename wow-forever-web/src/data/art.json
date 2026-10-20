@@ -309,9 +309,27 @@
  "texture": {
   "stone": "img/art/texture/stone.webp"
  },
+ "raceIcons": {
+  "skyborne": "img/art/raceicons/skyborne.webp"
+ },
  "meta": {
-  "fetchedAt": "2026-10-13",
+  "fetchedAt": "2026-10-20",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
-  "count": 286
+  "count": 287,
+  "addonFiles": [
+   {
+    "name": "skyborne",
+    "file": "img/art/raceicons/skyborne.webp",
+    "kind": "race-icon",
+    "origin": "addon-file",
+    "addon": "XR_DungeonGuide",
+    "addonVersion": "66",
+    "sourceDisplay": "Media/Race/RaceIcon_Skyborne.tga",
+    "authorizedBy": "站主 2026-10-20 决定：网页天裔种族小图标先用这张插件图，不再等官方 CDN；不称为官方已核素材，仅用于种族小图标，不替换传承页那张大图原画。",
+    "rollback": "删除 src/img/art/raceicons/ 整个目录并重跑 fetch-art.py --index-only，即回退到天裔显示自绘首字块。",
+    "importedAt": "2026-10-20",
+    "sha256": "9df418ce227d3548486d445fb3280f34fca56bbeb7bf15dc2608563cda20bce0"
+   }
+  ]
  }
 }
