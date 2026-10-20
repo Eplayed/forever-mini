@@ -1,30 +1,30 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261020-203811-43890a16-dirty",
- "gitHead": "43890a16",
+ "package": "wow-forever-web-20261020-230219-e290c64d-dirty",
+ "gitHead": "e290c64d",
  "worktreeDirty": true,
- "builtAt": "2026-10-20 20:38:17",
- "files": 3692,
- "bytes": 29608752,
+ "builtAt": "2026-10-20 23:02:21",
+ "files": 3688,
+ "bytes": 29501458,
  "byExt": {
   ".html": 21,
   ".png": 3,
   ".woff2": 2,
   ".css": 1,
   ".js": 1,
-  ".json": 53,
+  ".json": 49,
   ".ico": 1,
   ".webp": 315,
   ".svg": 1,
   ".jpg": 3294
  },
- "fileManifestSha256": "d428b4a7faee919d1a709dc0f30ffdbadafacfbd7c0cfbfc66f1a63a56d17568",
+ "fileManifestSha256": "6860abe74b4922a3c229fffd9c55660558969f854e74a39b5770ac0b175cad34",
  "keyFiles": {
   "assets/hanken-grotesk-var-KjBMhMia.woff2": "1f21c6eaa0000f3329cfcfac966b43d5bebf5aa610303e33294ac31bc6f4bb59",
   "assets/index-BfFmYDXr.css": "644c9ad0312ef24d93c9a5ce9d3e1695c77682b02a80d34945f758621c5504e1",
-  "assets/index-DZEyyTyi.js": "3193cafd381861dbafa8078f872d07dd2e1d023b74ed60147b647e242ce954b5",
+  "assets/index-DjeE_YlQ.js": "af7fdd45d22f594a1966613a9fe59aaf523ce7cab0e3f0341f76a5d2ae4dedb1",
   "assets/open-sans-var-BEhAMRCF.woff2": "441af0def989ebfdbd6ad85ffaed85e967ab21a05f1dd342f16259464a206dd0",
-  "index.html": "8556abc2c209b10f6d2a55f8f255c75a351ee3b5de65e12bae980304ea76ed52"
+  "index.html": "3d915600f4175d88c69edc84226815916a2ac8a2234e783071be08b7592004b2"
  },
  "dataFiles": {
   "data/abilities.json": "7de1ed7c1c4b6df5195424a07387aad11ac576e62ed2d7a292482f8340f89810",
@@ -52,7 +52,7 @@
   "data/releases.json": "7b35ced9e2b801ac893b3dc76e7b4f0be81fe923e32d1be4cd54985de02578ec",
   "data/scale.json": "335290a6c1bfeae12f6b04df0be1a299ef33c95ad3f8d8141558d2b527bcb0b2",
   "data/search.json": "cd46733423e662e37a725916225ffe600d9b7c105d1807a78ccbc776a3fa27ed",
-  "data/spells.json": "59205c1ba1dec106d9e2d30fa2465d058725c992c0ca61d1bbea50cf4e40f23e",
+  "data/spells.json": "6a855081430b42f450dc75fdd07366d5e8c1f85ee6da2f4889b4c2406ec86062",
   "data/systems.json": "fec92989285f321d783cb9bfe763ffa1901b1d3c67ce3451b233d6c01ad33758",
   "data/talent-preview.json": "e1005da7e2c7dc72b3fa391072775cd3bed5162aa422b904a5d005516c298bfa",
   "data/talent-text/druid.json": "6ba18b25abe6ba090cb9a6440f4a590286f2a091989e6640ffb927f568e8ddad",
@@ -100,12 +100,12 @@
   "world.html"
  ],
  "hashedAssets": 4,
- "unhashedFiles": 3688,
+ "unhashedFiles": 3684,
  "cachePolicy": {
   "assets/*": "public, max-age=31536000, immutable（文件名带内容哈希，换版即换名）",
   "index.html 与 *.html 桩": "no-cache（must-revalidate）——它是指向新哈希资源的唯一入口",
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "2c7753df2b2648d75732d4831d84b04e976e07a56cf459340951c0a381efe962"
+ "packageSha256": "1fab537619ba2fc33da7374cd8ca9989429a20808c1880a58f67947ee3550602"
 }
