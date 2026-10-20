@@ -1200,7 +1200,12 @@ if (fs.existsSync(itdPath)) {
     if (r.st !== undefined && (!Array.isArray(r.st) || r.st.some((s) => typeof s !== 'string'))) badSt++;
     // 教益句是一段一句的纯文本，且必须是去过引号的原文（带引号就是风味句漏进来了）
     if (r.use !== undefined && (typeof r.use !== 'string' || /^[“"]|[”"]$/.test(r.use.trim()))) badUse++;
-    if (r.useFrom !== undefined && ['gi', 'xr'].indexOf(r.useFrom) < 0) badUse++;
+    // 2026-10-20 A02：这一层的来源从两个变成三个。教学句以前只有 GI/XR 两份带，
+    // 白名单就写了 gi/xr；XR 66 起合并层按"内容"而不是"有没有引号"分这一档，
+    // wclbox 那份 st 里的「使用：教你学会施放X」也归到了 use 段——它本来就是这三个来源之一
+    // （stFrom 的白名单一直含 wclbox）。**实质判据没放宽**：仍然要求 use 是不带引号的一句话，
+    // 仍然要求来源是这三个真源之一，凭空冒出来的 key 一样过不了。
+    if (r.useFrom !== undefined && ST_FROM.indexOf(r.useFrom) < 0) badUse++;
     if (r.sell !== undefined && (typeof r.sell !== 'string' || /%/.test(r.sell))) badSell++;
     if (r.src !== undefined && SRC_WHITELIST.indexOf(r.src) < 0) badSrc++;
     if (/掉率|掉落概率/.test(JSON.stringify(r))) rateHit++;
@@ -1215,7 +1220,7 @@ if (fs.existsSync(itdPath)) {
     if (r.stFrom === 'wclbox' && baseStatus[Number(id)] === 'missing') missingAsForever += 1;
   }
   if (badSt) errs.push(`items-detail：${badSt} 条 st 不是字符串数组`);
-  if (badUse) errs.push(`items-detail：${badUse} 条 use/useFrom 不对（use 要是不带引号的一句话，useFrom 只允许 gi/xr）`);
+  if (badUse) errs.push(`items-detail：${badUse} 条 use/useFrom 不对（use 要是不带引号的一句话，useFrom 只能是 wclbox/gi/xr 之一）`);
   if (badSell) errs.push(`items-detail：${badSell} 条 sell 不是字符串或含百分号`);
   if (badSrc) errs.push(`items-detail：${badSrc} 条 src 越界（只允许 dungeon/quest）`);
   if (badStFrom) errs.push(`items-detail：${badStFrom} 条 stFrom 越界（只允许 wclbox/gi/xr）`);

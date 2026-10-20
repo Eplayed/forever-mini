@@ -8,6 +8,7 @@
 # 产物：src/data/upstream/gi-items-detail.json、src/data/upstream/xr-items-detail.json
 # 幂等：同输入字节一致（键按数字序、缩进固定）。
 import argparse
+import io
 import json
 import os
 import re
@@ -15,6 +16,30 @@ import sys
 from datetime import date
 
 UP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'data', 'upstream')
+
+
+def toc_version(lua_path, addon_name):
+    """版本号从插件自己的 .toc 读。以前这里手写 0.4.29 / 0.37.1，
+       插件升到 GI 0.5.1、XR 66 之后快照还在盖旧号的出处——等于每条记录都写了句过期假话。
+       （2026-10-19 那条"版本号不再手抄"的规矩同样适用于这份提取器。）"""
+    p = os.path.join(os.path.dirname(os.path.abspath(lua_path)), addon_name + '.toc')
+    if not os.path.exists(p):
+        return 'unknown'
+    for line in io.open(p, encoding='utf-8', errors='replace'):
+        m = re.match(r'\s*##\s*Version:\s*(\S+)', line)
+        if m:
+            return m.group(1)
+    return 'unknown'
+
+
+def src_stamp(lua_path):
+    """源文件自己的指纹：字节数 + SHA256 + 文件日期。
+       fetched（插件数据的自述/落盘日）与 extractedAt（本次跑提取的日）分开记，不混。"""
+    b = open(lua_path, 'rb').read()
+    import hashlib
+    from datetime import datetime
+    return {'bytes': len(b), 'sha256': hashlib.sha256(b).hexdigest(),
+            'fileDate': datetime.fromtimestamp(os.path.getmtime(lua_path)).strftime('%Y-%m-%d')}
 
 
 def brace_match(seg, start):
@@ -156,7 +181,13 @@ def main():
         st_items, src_items = extract_gi(args.gi)
         dump(os.path.join(UP, 'gi-items-detail.json'), {
             'meta': {
-                'source': 'GearInsight_Forever 0.4.29 Data.lua：st 抽自 loot 表（foreverchanges.pro Beta 实测掉落，build 1.60.1.69913），src/srcName 抽自 gear 表（beta 客户端 1.60.1.69876 解包，2026-10-03）',
+                'addon': 'GearInsight_Forever',
+                'addonVersion': toc_version(args.gi, 'GearInsight_Forever'),
+                'sourceFile': os.path.relpath(args.gi),
+                'sourceStamp': src_stamp(args.gi),
+                # 表内自述的采集口径（作者标注的 build / 日期），与本次提取日分开记
+                'selfReported': 'st 抽自 loot 表（作者标 Beta 实测掉落，build 1.60.1.69913）；'
+                                'src/srcName 抽自 gear 表（作者标 beta 客户端 1.60.1.69876 解包，2026-10-03）',
                 'fetched': '2026-10-03',
                 'extractedAt': date.today().isoformat(),
                 'counts': {'st': len(st_items), 'src': len(src_items)},
@@ -168,7 +199,11 @@ def main():
         items, st_n, sell_n = extract_xr(args.xr)
         dump(os.path.join(UP, 'xr-items-detail.json'), {
             'meta': {
-                'source': 'XR_DungeonGuide 0.37.1 Data.lua（站点 research/dg-loot 社区整理稿，2026-09-20 取回）',
+                'addon': 'XR_DungeonGuide',
+                'addonVersion': toc_version(args.xr, 'XR_DungeonGuide'),
+                'sourceFile': os.path.relpath(args.xr),
+                'sourceStamp': src_stamp(args.xr),
+                'selfReported': '站点 research/dg-loot 社区整理稿（作者自述实测，不自动升本站 L0）',
                 'fetched': '2026-09-20',
                 'extractedAt': date.today().isoformat(),
                 'counts': {'total': len(items), 'st': st_n, 'sell': sell_n},

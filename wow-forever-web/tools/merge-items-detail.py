@@ -39,6 +39,11 @@ def load(name):
 
 
 USE_RE = re.compile(r'教你|学会|可启动')
+# 使用条件行（形如 需要附魔 (200)）。2026-10-20 A02 定的口径：
+# 「未提供要求」不等于「无等级要求」，所以这一类行不许被高优先级源静默清掉。
+REQ_RE = re.compile(r'^\s*需要')
+# 使用效果行（使用：…）。和需要行同理：高优先级源没写这句，不代表这件没有这个功能。
+USE_EFF_RE = re.compile(r'^\s*使用[：:]')
 
 
 def is_quoted(t):
@@ -46,22 +51,30 @@ def is_quoted(t):
 
 
 def split_st(lines):
-    """整行被引号包住的行分两类处理，返回（留下的属性行, 教益句, 丢掉的风味句数）。
+    """把一份 st 分成（属性行, 教益句, 丢掉的风味句数）。
 
     为什么不能整行引号一刀切掉：客户端把**教益句**（"教你学会制作鬼纹腰带。"）也放在同一个斜体框里，
     参考站照类名把它标成风味句丢掉，插件源则原样带着引号抄回来。一刀切的结果是
     1,197 件图样/秘典/公式/设计图只剩"需要工程学 (125)"这种行——那一件唯一有用的话没了，
     比 2026-10-14 那版还差。所以：教益句剥掉引号单独立进 use，纯风味句（"相信我，她会明白的。"）才丢。
-    句中才出现引号的（使用：为角色解锁“炼金师”头衔）不动，那是功能文本本身。"""
+    句中才出现引号的（使用：为角色解锁“炼金师”头衔）不动，那是功能文本本身。
+
+    2026-10-20 A02 改一条：**判教学句看内容，不看源有没有给引号。**
+    XR 升到 66 之后，254 件的教学句是不带引号写进 st 的（"教你学会制作优质皮靴。"），
+    旧规则只认整行引号，于是这些句子被当成属性行，把解包侧的"需要制皮 (65)"整条顶掉——
+    247 件就这么丢了使用条件。插件没写要求不等于没有要求（站方 2026-10-20 定的合并口径），
+    这种"上游换了写法"必须在这里认出来，不能算成授权删除。"""
     keep, use, dropped = [], None, 0
     for s in lines or []:
         t = s.strip()
-        if is_quoted(t):
-            inner = t[1:-1].strip()
-            if USE_RE.search(inner):
-                use = use or inner
-            else:
-                dropped += 1
+        q = is_quoted(t)
+        inner = t[1:-1].strip() if q else t
+        if USE_RE.search(inner):
+            # 教学句：带不带引号都不是属性行，单独进 use
+            use = use or inner
+            continue
+        if q:
+            dropped += 1
             continue
         keep.append(s)
     return keep, use, dropped
@@ -96,7 +109,51 @@ def same_text(a, b):
     return norm(a) == norm(b)
 
 
+def selftest():
+    """split_st 的夹具回归（2026-10-20 A02）。钉的是：
+       教学句不管带不带引号都不许当属性行；整条只有教学句时属性行必须为空，
+       这样合并端才会落回兜底源、而不是把「需要制皮 (65)」整条顶掉。"""
+    cases = [
+        ('带引号的教学句进 use，属性行留下',
+         ['需要工程学 (125)', '“教你学会制作火焰偏斜器。”'],
+         (['需要工程学 (125)'], '教你学会制作火焰偏斜器。', 0)),
+        ('不带引号的教学句同样进 use（XR 66 的新写法）',
+         ['教你学会制作优质皮靴。'], ([], '教你学会制作优质皮靴。', 0)),
+        ('纯风味句仍然丢掉，条件行不动',
+         ['需要制皮 (40)', '“相信我，她会明白的。”'],
+         (['需要制皮 (40)'], None, 1)),
+        ('句中引号不算引号行（那是功能文本）',
+         ['使用：为角色解锁“炼金师”头衔'], (['使用：为角色解锁“炼金师”头衔'], None, 0)),
+        ('普通属性行原样保留',
+         ['148点护甲', '+12 耐力'], (['148点护甲', '+12 耐力'], None, 0)),
+    ]
+    bad = 0
+    print('\n=== merge-items-detail.py split_st 夹具回归 ===')
+    for name, inp, want in cases:
+        got = split_st(inp)
+        ok = got == want
+        bad += 0 if ok else 1
+        print('  %s  %-52s %s' % ('PASS' if ok else 'FAIL', name,
+                                  '' if ok else '得到 %s 期望 %s' % (got, want)))
+    # 条件行与使用效果行都不许被高优先级源清掉（合并规则的单元版）
+    for label, keep, extra, pat in (
+            ('高优先级源没写条件时，兜底源的「需要附魔 (200)」必须留下',
+             ['使用： 制造次级巫师之油。'], ['需要附魔 (200)'], REQ_RE),
+            ('高优先级源没写使用效果时，兜底源那句「使用：使目标昏迷」必须留下',
+             ['装备唯一', '装备：每5秒恢复2法力值。'],
+             ['使用： 使目标狼人昏迷4秒。 (5分钟冷却时间)'], USE_EFF_RE)):
+        got = keep + [x for x in extra if pat.search(x)]
+        ok = got[-1] == extra[0] and got[:len(keep)] == keep
+        bad += 0 if ok else 1
+        print('  %s  %-52s %s' % ('PASS' if ok else 'FAIL', label, ''))
+    print('用例 %d 条，失败 %d 条' % (len(cases) + 1, bad))
+    return 1 if bad else 0
+
+
 def main():
+    import sys
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     with open(os.path.join(ROOT, 'items.json'), encoding='utf-8') as f:
         items = json.load(f)
     gi = load('gi-items-detail.json')
@@ -117,7 +174,7 @@ def main():
     real_conflicts = []
     sell_conflicts = []
     n = {'st': 0, 'stWb': 0, 'stGi': 0, 'stXr': 0, 'sell': 0, 'sellWb': 0, 'sellXr': 0,
-         'src': 0, 'sameText': 0, 'formatOnly': 0, 'wbMissingKept': 0, 'droppedFlavor': 0, 'use': 0}
+         'src': 0, 'sameText': 0, 'formatOnly': 0, 'wbMissingKept': 0, 'droppedFlavor': 0, 'use': 0, 'stExtra': 0}
     for kid in sorted(valid_ids, key=int):
         rec = {}
         w = wb_items.get(kid) or {}
@@ -166,6 +223,25 @@ def main():
             rec['use'] = u
             rec['useFrom'] = 'gi' if g_use else ('xr' if x_use else 'wclbox')
             n['use'] += 1
+        # 2026-10-20 A02：高优先级源整条没写使用条件时，把兜底源那条「需要X (N)」留下，
+        # 并单独记它是谁给的（stExtraFrom）。上游换写法（XR 66 把教学句不加引号塞进 st）
+        # 不能算成「官方说这件没有要求」——那是解析口径，不是数据授权。
+        extra_from = []
+        for kind_re in (REQ_RE, USE_EFF_RE):
+            if any(kind_re.search(x) for x in rec.get('st') or []):
+                continue        # 这一类行高优先级源自己给了，不动
+            for other_name, other in (('gi', g_st), ('xr', x_st), ('wclbox', w_st if w_ok else None)):
+                if other_name == rec.get('stFrom') or not other:
+                    continue
+                picked = [x for x in other if kind_re.search(x)]
+                if picked:
+                    rec['st'] = (rec.get('st') or []) + picked
+                    if other_name not in extra_from:
+                        extra_from.append(other_name)
+                    break
+        if extra_from:
+            rec['stExtraFrom'] = extra_from
+            n['stExtra'] += 1
         w_sell = w.get('sell')
         x_sell = (xr_items.get(kid) or {}).get('sell')
         if x_sell:
@@ -209,10 +285,19 @@ def main():
             'sources': [
                 {'key': 'wclbox', 'name': '无限数据库 · 物品详情页', 'kind': '当前 beta 客户端解包转述',
                  'builds': wb_build, 'date': wb.get('meta', {}).get('fetched')},
-                {'key': 'gi', 'name': 'GearInsight 无限版 0.4.29', 'kind': 'beta 解包 + 实测掉落转述',
-                 'date': '2026-10-03'},
-                {'key': 'xr', 'name': 'XR 全能助手 0.37.1', 'kind': '社区整理稿转述',
-                 'date': '2026-09-20'},
+                # 版本与日期从快照 meta 读，不在这里手抄：
+                # 以前写死 0.4.29 / 0.37.1，插件升到 GI 0.5.1、XR 66 之后
+                # 成品 meta 还在给每条记录盖旧号的出处（2026-10-19 那条"版本号不手抄"的规矩补上这一处）
+                {'key': 'gi', 'name': 'GearInsight 无限版 ' + str(gi.get('meta', {}).get('addonVersion', '?')),
+                 'kind': 'beta 解包 + 实测掉落转述',
+                 'date': gi.get('meta', {}).get('fetched'),
+                 'extractedAt': gi.get('meta', {}).get('extractedAt'),
+                 'sourceSha256': (gi.get('meta', {}).get('sourceStamp') or {}).get('sha256')},
+                {'key': 'xr', 'name': 'XR 全能助手 ' + str(xr.get('meta', {}).get('addonVersion', '?')),
+                 'kind': '社区整理稿转述',
+                 'date': xr.get('meta', {}).get('fetched'),
+                 'extractedAt': xr.get('meta', {}).get('extractedAt'),
+                 'sourceSha256': (xr.get('meta', {}).get('sourceStamp') or {}).get('sha256')},
             ],
             'counts': dict(total=len(out), **n,
                            conflicts=len(real_conflicts),
