@@ -132,6 +132,9 @@ def main():
     if os.path.exists(MANIFEST):
         man = json.load(io.open(MANIFEST, encoding="utf-8"))
     total = len([f for f in os.listdir(ICON_DIR) if f.endswith(".jpg")])
+    # 改名之后不留旧键：missing/ok 这两份说法并存，读的人不知道信哪个
+    for legacy in ("missing", "ok"):
+        man.pop(legacy, None)
     batches = man.get("batches") or []
     batches.append({"at": today, "added": len(ok), "unavailable": missing,
                     "note": u"见本次改动的数据文件 iconKey 字段"})
@@ -140,8 +143,12 @@ def main():
         "format": "56x56 jpg",
         "fetchedAt": today,
         "total": total,
-        "ok": total,
-        "missing": missing,
+        # 2026-10-20 W01：原来这里写 "missing"/"ok"，看着像全库盘点，其实装的是"最近这一批"的结果——
+        # 补一张图就把整份 missing 清成空，读的人以为全站不缺图了。改名 + 指向真正的登记。
+        "batchAdded": len(ok),
+        "batchUnavailable": missing,
+        "gapsRegistry": "src/data/icon-gaps.json（全站「数据里引用但本地没有」的键，"
+                        "由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）",
         "batches": batches[-8:],
         "note": u"图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。"
                 u"属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。"

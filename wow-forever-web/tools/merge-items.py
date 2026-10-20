@@ -81,7 +81,7 @@ def main():
     for r in items:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
         cat, slot, mat, main_t = classify(r["type"])
-        r.update(iconKey=r["icon"].rsplit(".", 1)[0], typeMain=main_t, cat=cat, slot=slot, mat=mat)
+        r.update(iconKey=r["icon"].rsplit(".", 1)[0].rstrip("."), typeMain=main_t, cat=cat, slot=slot, mat=mat)
         cats[cat] = cats.get(cat, 0) + 1
         types[main_t] = types.get(main_t, 0) + 1
         quals[r["quality"]] = quals.get(r["quality"], 0) + 1

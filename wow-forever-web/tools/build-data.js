@@ -747,9 +747,24 @@ if (fs.existsSync(profPath)) {
 const gapPath = path.join(ROOT, 'icon-gaps.json');
 if (fs.existsSync(gapPath)) {
   const gp = JSON.parse(fs.readFileSync(gapPath, 'utf8'));
-  const local = new Set(fs.readdirSync(path.join(ROOT, '..', 'img', 'icons')).filter((f) => f.endsWith('.jpg')).map((f) => f.slice(0, -4)));
-  const stale = (gp.keys || []).filter((k) => local.has(k));
-  if (stale.length) errs.push(`icon-gaps：登记说缺 ${stale.length} 个，其实本地已有（${stale.slice(0, 3).join('、')}），重跑 build-icon-map.py`);
+  /* 2026-10-20 W01：原来这里只查一个方向（登记说缺、其实本地有），
+     所以 10-16 之后新引用的 spell_warlock_demonsoul 没登记也照样构建通过，
+     页面上悄悄退成字母块。现在两个方向一起查——"引用且本地没有"必须正好等于登记集合，
+     漏登记、过期登记、没人引用的死条目都算失败。判定逻辑只在 build-icon-map.py 里一份，
+     这里调它，不再抄第二套扫描规则（抄一份就会和它漂）。 */
+  try {
+    const cp = require('child_process');
+    cp.execSync('python3 "' + path.join(__dirname, 'build-icon-map.py') + '" --check',
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    const out = String((e && (e.stdout || e.stderr)) || e.message || e).trim();
+    if (/No such file|not found|Permission denied/i.test(out)) {
+      warns.push('icon-gaps：拿不到 python3 / build-icon-map.py，这一轮没做双向比对');
+    } else {
+      out.split('\n').filter((l) => l.trim())
+        .forEach((line) => errs.push(/^icon-gaps：/.test(line) ? line : 'icon-gaps：' + line));
+    }
+  }
   warns.push('缺图登记 ' + (gp.keys || []).length + ' 个图标键（官方 CDN 没有这些文件，界面退回自绘块），' +
     '按文件：' + Object.keys(gp.byFile || {}).map((f) => f + ' ' + gp.byFile[f]).join(' / '));
 } else {

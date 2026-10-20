@@ -16,6 +16,7 @@
 """
 import argparse
 import datetime
+import importlib.util
 import io
 import json
 import os
@@ -35,9 +36,18 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 # 先把主路径问清楚，只有主路径拿不到才去试别的区域，最后再试一次 0 尺寸——
 # 全组合轮询一遍要十几分钟，没必要。
 CAND = [("us", "56"), ("eu", "56"), ("kr", "56"), ("tw", "56"), ("us", "0")]
-KEY_RE = re.compile(r"^[a-z0-9_]{3,64}$")
-DATA_FILES = ["dungeons.json", "professions.json", "races.json", "world.json", "changes.json",
-              "glossary.json", "abilities.json", "classes.json", "chooser.json", "systems.json"]
+KEY_RE = re.compile(r"^[A-Za-z0-9_\-]{3,80}$")
+
+
+def _icon_map_module():
+    """图标键的扫描规则只留一份：tools/build-icon-map.py 里那份（全量成品 JSON + talents，
+       含 .jpg 后缀归一与合法键判定）。以前这个脚本自己写死一份 DATA_FILES，
+       加新模块就漏登记——2026-10-20 审查实测它只能报 82 个缺键，实况是 165 个。"""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "build-icon-map.py")
+    spec = importlib.util.spec_from_file_location("build_icon_map", p)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
 
 
 def load(p):
@@ -47,31 +57,8 @@ def load(p):
 
 
 def collect_keys():
-    """iconKey → 引用它的文件集合。天赋树单独走目录，键在 nodes[].iconKey。"""
-    out = {}
-
-    def walk(node, src):
-        if isinstance(node, dict):
-            for k, v in node.items():
-                if k == "iconKey" and isinstance(v, str) and v:
-                    out.setdefault(v, set()).add(src)
-                else:
-                    walk(v, src)
-        elif isinstance(node, list):
-            for x in node:
-                walk(x, src)
-
-    for fn in DATA_FILES:
-        d = load(os.path.join(DATA, fn))
-        if d is not None:
-            walk(d, fn)
-    tdir = os.path.join(DATA, "talents")
-    if os.path.isdir(tdir):
-        for fn in sorted(os.listdir(tdir)):
-            if fn.startswith("_") or not fn.endswith(".json"):
-                continue
-            walk(load(os.path.join(tdir, fn)), "talents/" + fn)
-    return out
+    """图标键收集：直接走 build-icon-map.py 那一份规则，返回 (键→引用文件, 非法键值清单)。"""
+    return _icon_map_module().collect_all_keys()
 
 
 def http_head(url):
@@ -115,12 +102,18 @@ def audit_maps(doc):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--fetch", action="store_true", help="把其它区域能取到的图标拉回本地")
+    ap.add_argument("--refresh", action="store_true",
+                    help="忽略探测缓存，当天重新逐个问官方 CDN（报告里会分开写"
+                         "「当天实测」与「沿用缓存」各多少个）")
     a = ap.parse_args()
 
+    today = datetime.date.today().isoformat()
     have = set(f[:-4] for f in os.listdir(ICONS) if f.endswith(".jpg"))
-    keys = collect_keys()
+    keys, bad = collect_keys()
     missing = sorted(k for k in keys if k not in have)
     print("引用图标键 %d 个，本地 %d 张，缺 %d 个" % (len(keys), len(have), len(missing)))
+    if bad:
+        print("  非法图标键值 %d 处（没进收集，先回数据里查）：%s" % (len(bad), "、".join(bad[:5])))
 
     probe = {}
     if os.path.exists(CACHE):
@@ -128,7 +121,11 @@ def main():
             probe = json.load(io.open(CACHE, encoding="utf-8"))
         except ValueError:
             probe = {}
+    if a.refresh:
+        probe = {}
     found, still = [], []
+    probed_today = 0
+    from_cache = 0
     for k in missing:
         if not KEY_RE.match(k):
             still.append((k, sorted(keys[k]), "bad-key"))
@@ -136,6 +133,7 @@ def main():
         hit, codes = None, []
         if k in probe:
             hit, codes = probe[k].get("hit"), probe[k].get("codes", [])
+            from_cache += 1
         else:
             for area, size in CAND:
                 code, _sz = http_head("https://render.worldofwarcraft.com/%s/icons/%s/%s.jpg" % (area, size, k))
@@ -143,7 +141,8 @@ def main():
                 if code == 200:
                     hit = [area, size]
                     break
-            probe[k] = {"hit": hit, "codes": codes}
+            probe[k] = {"hit": hit, "codes": codes, "at": today}
+            probed_today += 1
             if not os.path.isdir(os.path.dirname(CACHE)):
                 os.makedirs(os.path.dirname(CACHE))
             io.open(CACHE, "w", encoding="utf-8").write(json.dumps(probe, ensure_ascii=False))
@@ -200,13 +199,18 @@ def main():
 
     today = datetime.date.today().isoformat()
     lines = [u"# 素材缺口审计 · %s（wow-data + wow-dev）" % today, u"",
-             u"脚本：`python3 tools/audit-assets.py`（加 `--fetch` 会把其它区域能取到的拉回本地）。"
-             u"图标一律只认暴雪官方 CDN，第三方站只给文件名。", u"",
+             u"脚本：`python3 tools/audit-assets.py`（加 `--fetch` 会把其它区域能取到的拉回本地；"
+             u"加 `--refresh` 忽略缓存、当天逐个重问官方 CDN）。图标一律只认暴雪官方 CDN，第三方站只给文件名。",
+             u"本轮跑法：**%s**；探测结果缓存 `%s`（缓存只记结果不记当天，所以这一栏必须写清）。"
+             % (u"忽略缓存、当天重测" if a.refresh else u"沿用缓存里已有的探测结果，只补问新的",
+                os.path.relpath(CACHE, ROOT)), u"",
              u"## 结论", u"",
              u"| 项 | 数 |", u"| --- | --- |",
-             u"| 数据里引用的图标键 | %d |" % len(keys),
+             u"| 数据里引用的图标键（全量成品 JSON + talents，含 iconKey 与 icon 两种字段） | %d |" % len(keys),
              u"| 本地已有 | %d |" % len(have),
              u"| 缺 | %d |" % len(missing),
+             u"| 其中当天重新问过官方 CDN | %d |" % probed_today,
+             u"| 其中沿用探测缓存（不是当天重测） | %d |" % from_cache,
              u"| 换区域/尺寸能补上 | %d |" % len(found),
              u"| 官方 CDN 五个候选路径都取不到（实测 403/404，不是我们没试） | %d |" % len([x for x in still if x[2] == "cdn-missing"]),
              u"| 键名不合法（脚本不试，回数据里查） | %d |" % len([x for x in still if x[2] == "bad-key"]),
