@@ -106,7 +106,8 @@
     <div v-if="entry" class="card dgeo">
       <h2>入口在哪</h2>
       <PinMap v-if="entryItems.length" :alt="nm + '的入口位置'" :items="entryItems"
-              :fallback-map-file="entry.mapFile || ''" :fallback-map-id="entry.mapId || ''" />
+              :fallback-map-file="entry.mapFile || ''" :fallback-map-id="entry.mapId || ''"
+              :no-map-line="false" />
       <p class="dgeo-line">
         <b>{{ entry.zone }}</b>
         <span class="dim mono">{{ entry.x }}，{{ entry.y }}</span>

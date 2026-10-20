@@ -370,7 +370,11 @@ nav.main a.nl:has(.nb) { padding-right:10px }
    这一层的高度永远等于图高，浮层再怎么撑也不会把点位挪走 */
 .zcanvas { position:relative }
 .zcanvas img { display:block; width:100%; height:auto }
-.zbig.noimg .zcanvas { min-height:120px; display:flex; align-items:center; justify-content:center }
+/* 无图态（2026-10-20 W01）：原来这里是一条 .zbig.noimg .zcanvas{min-height:120px}——
+   一个空图框占着整块左栏，右边列表还被挤到 330px。现在没有图就根本不渲染 .zbig，
+   只留一行数据值（地图编号），列表拿满整宽。 */
+.znomap { margin:0 0 var(--s2); font:12px/1.4 var(--font-mono); color:var(--txt-muted) }
+.zband.nomap { grid-template-columns:minmax(0, 1fr) }
 .zbig-id { font:12px var(--font-mono); color:var(--txt-muted) }
 
 /* 点位：默认是"虚"的——半透明 + 0.6px 模糊，像还没定下来的点；

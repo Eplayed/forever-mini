@@ -753,6 +753,8 @@ def test_world_pins(browser, base):
         nested: cards.filter(c => c.matches('button') || c.querySelector('button button')).length,
         bodyBtn: document.querySelectorAll('.zcard button.zhead').length,
         noimg: [...document.querySelectorAll('.zcard .zbig-id')].map(e => e.innerText.trim()),
+        bigCards: [...document.querySelectorAll('.zcard')].filter(c => c.querySelector('.zbig')).length,
+        nomap: document.querySelectorAll('.zcard .zband.nomap').length,
         heroStats: (document.querySelector('.cdhead.big').closest('.card').querySelectorAll('.stats') || []).length,
         over: document.documentElement.scrollWidth - window.innerWidth}; }""")
     check("区域面板一行一张图（站主：原来一行两个、图太小），左图右列表同一版式",
@@ -774,6 +776,14 @@ def test_world_pins(browser, base):
           len(z["noimg"]) == len([x for x in zones if not x.get("mapFile")])
           and all("地图编号" in t for t in z["noimg"]),
           "%d 张没图的：%s" % (len(z["noimg"]), z["noimg"]))
+    # 上面那条只证明"编号还在"，证明不了那个 120px 的空图框没了（2026-10-20 W01 改的就是这个）。
+    # 这一条钉两件事：有底图的才有 .zbig；没底图的那几张整块换成单列紧凑布局（.zband.nomap）。
+    check("没有底图的区域不再留空图框：图框只给有图的区域，无图那几张换成整宽紧凑布局",
+          z["bigCards"] == len([x for x in zones if x.get("mapFile")])
+          and z["nomap"] == len([x for x in zones if not x.get("mapFile")]),
+          "图框 %d（数据有图 %d）/ 紧凑态 %d（数据缺图 %d）"
+          % (z["bigCards"], len([x for x in zones if x.get("mapFile")]),
+             z["nomap"], len([x for x in zones if not x.get("mapFile")])))
     check("首屏那排五格读数按站主要求撤掉了", z["heroStats"] == 0, "还剩 %d 组" % z["heroStats"])
     check("区域面板不横向溢出", z["over"] == 0, "溢出 %d" % z["over"])
     # 某一张卡上的点数必须等于该区域 rareCount + bookCount + 营地数（数据是本轮重算过的）
