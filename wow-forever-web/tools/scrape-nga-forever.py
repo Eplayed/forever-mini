@@ -327,19 +327,33 @@ def cmd_board(args: argparse.Namespace) -> int:
             print(f"  tid={r['tid']} 正文 {len(d['body'])} 字 | {d['subject'][:34]}")
             time.sleep(SLEEP_MIN + 0.4)
 
+    out = os.path.join(OUT_DIR, f"board-{today()}.json")
+    # 同一天多次跑要**并**进当天文件，不能覆盖：一天跑两次是为了覆盖早晚两个发帖高峰，
+    # 直接覆盖就只剩最后那一次，早上那批列表行就丢了（正文虽在 threads/ 里没丢，但对不上账）。
+    day_rows = {}
+    if os.path.exists(out):
+        try:
+            for t in json.load(open(out, encoding="utf-8")).get("threads", []):
+                day_rows[t["tid"]] = t
+        except Exception:
+            print("! 当天旧快照读坏了，本次以新数据重建", file=sys.stderr)
+    for t in collected:
+        day_rows.setdefault(t["tid"], t)
+    merged = sorted(day_rows.values(), key=lambda r: r.get("postdate") or 0, reverse=True)
     payload = {
         "meta": {"mode": "board", "url": f"{BASE}/thread.php?fid={FID}&order_by={order}",
                  "forum": {"fid": FID, "name": FORUM_NAME}, "fetchedAt": now_iso(),
-                 "pagesFetched": page or min(args.pages, len(collected) // 40 + 1),
-                 "count": len(collected), "newCount": len(new), "bodySaved": bodied,
+                 "pagesFetched": page,
+                 "count": len(merged), "countThisRun": len(collected),
+                 "newCount": len(new), "bodySaved": bodied,
                  "boardTotalPages": total_pages,
                  "usage": "仅供本站选题与热度参考；玩家原创讨论，不复制正文上页面",
                  "levelNote": "fan_forum 性质，绝不标 L0；引用需带 URL 与抓取时间"},
-        "threads": collected}
-    out = os.path.join(OUT_DIR, f"board-{today()}.json")
+        "threads": merged}
     write_json(out, payload)
     write_json(INDEX_FILE, idx)
-    print(f"board：列表 {len(collected)} 条（新 {len(new)}、抓正文 {bodied}）→ {out}")
+    print(f"board：本次列表 {len(collected)} 条（新 {len(new)}、抓正文 {bodied}），"
+          f"当天累计 {len(merged)} 条 → {out}")
     return 0
 
 
