@@ -50,6 +50,34 @@ def is_quoted(t):
     return (t.startswith('“') and t.endswith('”')) or (t.startswith('"') and t.endswith('"'))
 
 
+def carry_missing(rec, sources):
+    """高优先级源整条没写「需要X (N)」或「使用：…」时，从别的源把那一条带回来。
+
+    2026-10-20 A02 的口径：上游换写法（XR 66 把教学句不加引号塞进 st）不能算成
+    「官方说这件没有要求」——那是解析口径，不是数据授权。所以补回来的同时单独记
+    它是谁给的（stExtraFrom），一段一个来源，界面上才说得清这句是谁给的。
+    sources 按优先级给 [(名字, 行列表), …]，与 rec['stFrom'] 同源的那份跳过。
+    返回补进来的源名列表（可能为空）。
+
+    为什么从合并主流程里抽出来单独成函数：抽之前那两条夹具回归是在自测代码里
+    把同样的表达式现写一遍再判自己，生产逻辑怎么改它都照样绿——那是假绿。
+    现在自测调的就是这里，改坏了会红。"""
+    extra_from = []
+    for kind_re in (REQ_RE, USE_EFF_RE):
+        if any(kind_re.search(x) for x in rec.get('st') or []):
+            continue        # 这一类行高优先级源自己给了，不动
+        for other_name, other in sources:
+            if other_name == rec.get('stFrom') or not other:
+                continue
+            picked = [x for x in other if kind_re.search(x)]
+            if picked:
+                rec['st'] = (rec.get('st') or []) + picked
+                if other_name not in extra_from:
+                    extra_from.append(other_name)
+                break
+    return extra_from
+
+
 def split_st(lines):
     """把一份 st 分成（属性行, 教益句, 丢掉的风味句数）。
 
@@ -135,18 +163,40 @@ def selftest():
         bad += 0 if ok else 1
         print('  %s  %-52s %s' % ('PASS' if ok else 'FAIL', name,
                                   '' if ok else '得到 %s 期望 %s' % (got, want)))
-    # 条件行与使用效果行都不许被高优先级源清掉（合并规则的单元版）
-    for label, keep, extra, pat in (
-            ('高优先级源没写条件时，兜底源的「需要附魔 (200)」必须留下',
-             ['使用： 制造次级巫师之油。'], ['需要附魔 (200)'], REQ_RE),
-            ('高优先级源没写使用效果时，兜底源那句「使用：使目标昏迷」必须留下',
-             ['装备唯一', '装备：每5秒恢复2法力值。'],
-             ['使用： 使目标狼人昏迷4秒。 (5分钟冷却时间)'], USE_EFF_RE)):
-        got = keep + [x for x in extra if pat.search(x)]
-        ok = got[-1] == extra[0] and got[:len(keep)] == keep
+    # 条件行与使用效果行都不许被高优先级源静默清掉——**调真的 carry_missing**。
+    # 这一段以前是在自测里把同样的表达式现写一遍再判自己：生产逻辑怎么改它都照样绿，
+    # 那是假绿（2026-10-20 自己查出来的，和这一天拆掉的另外几处同一个毛病）。
+    carry = [
+        ('高优先级源没写条件时，兜底源的「需要附魔 (200)」必须留下并记来源',
+         {'st': ['使用： 制造次级巫师之油。'], 'stFrom': 'gi'},
+         (('gi', ['使用： 制造次级巫师之油。']), ('xr', None), ('wclbox', ['需要附魔 (200)'])),
+         ['需要附魔 (200)'], ['wclbox']),
+        ('高优先级源没写使用效果时，兜底源那句「使用：使目标昏迷」必须留下',
+         {'st': ['装备唯一', '装备：每5秒恢复2法力值。'], 'stFrom': 'xr'},
+         (('gi', None), ('xr', ['装备唯一', '装备：每5秒恢复2法力值。']),
+          ('wclbox', ['使用： 使目标狼人昏迷4秒。 (5分钟冷却时间)'])),
+         ['使用： 使目标狼人昏迷4秒。 (5分钟冷却时间)'], ['wclbox']),
+        ('这一类行高优先级源自己给了就不许再补第二份（会重复显示）',
+         {'st': ['需要附魔 (1)', '装备唯一'], 'stFrom': 'gi'},
+         (('gi', ['需要附魔 (1)']), ('xr', None), ('wclbox', ['需要附魔 (200)'])),
+         None, []),
+        ('缺这一行的就是当前取值那一家（它真没写）时，不拿自己补自己',
+         {'st': ['装备唯一'], 'stFrom': 'wclbox'},
+         (('gi', None), ('xr', None), ('wclbox', ['需要附魔 (200)'])),
+         None, []),
+    ]
+    for label, rec0, srcs, want_line, want_from in carry:
+        rec = dict(rec0)
+        rec['st'] = list(rec0['st'])
+        got_from = carry_missing(rec, srcs)
+        ok = got_from == want_from and (
+            want_line is None or want_line[0] in ''.join(rec['st']))
         bad += 0 if ok else 1
-        print('  %s  %-52s %s' % ('PASS' if ok else 'FAIL', label, ''))
-    print('用例 %d 条，失败 %d 条' % (len(cases) + 1, bad))
+        print('  %s  %-52s %s' % ('PASS' if ok else 'FAIL', label,
+                                  '' if ok else '补进 %s / 记来源 %s（期望 %s）'
+                                  % (rec['st'], got_from, want_from)))
+    total = len(cases) + len(carry)
+    print('用例 %d 条，失败 %d 条' % (total, bad))
     return 1 if bad else 0
 
 
@@ -226,19 +276,8 @@ def main():
         # 2026-10-20 A02：高优先级源整条没写使用条件时，把兜底源那条「需要X (N)」留下，
         # 并单独记它是谁给的（stExtraFrom）。上游换写法（XR 66 把教学句不加引号塞进 st）
         # 不能算成「官方说这件没有要求」——那是解析口径，不是数据授权。
-        extra_from = []
-        for kind_re in (REQ_RE, USE_EFF_RE):
-            if any(kind_re.search(x) for x in rec.get('st') or []):
-                continue        # 这一类行高优先级源自己给了，不动
-            for other_name, other in (('gi', g_st), ('xr', x_st), ('wclbox', w_st if w_ok else None)):
-                if other_name == rec.get('stFrom') or not other:
-                    continue
-                picked = [x for x in other if kind_re.search(x)]
-                if picked:
-                    rec['st'] = (rec.get('st') or []) + picked
-                    if other_name not in extra_from:
-                        extra_from.append(other_name)
-                    break
+        extra_from = carry_missing(rec, (('gi', g_st), ('xr', x_st),
+                                         ('wclbox', w_st if w_ok else None)))
         if extra_from:
             rec['stExtraFrom'] = extra_from
             n['stExtra'] += 1

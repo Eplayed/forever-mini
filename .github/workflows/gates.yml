@@ -49,3 +49,20 @@ jobs:
       - name: 新站单测
         working-directory: wow-forever-web/app
         run: npx vitest run
+
+      # 下面三步都是 2026-10-20 这一天从真实漏检里长出来的，全部不启动浏览器：
+      # ① 物品详情合并的"教学句不许顶掉使用条件"（A02 抓到 247 件），
+      # ② public 里的孤儿副本（增量同步只加不删，撤下来的素材会继续被服务，Q05 抓到 54 份原料），
+      # ③ 上线包禁含清单（第三方原料、日志、插件原包混进产物就是把自己加工过程发出去）。
+      - name: 物品详情合并规则自测（夹具回归）
+        working-directory: wow-forever-web
+        run: python3 tools/merge-items-detail.py --selftest
+
+      - name: 产物副本与 src 一致（不许有孤儿素材）
+        working-directory: wow-forever-web
+        run: python3 tools/app-assets.py --check
+
+      - name: 上线包卡口（禁含清单 + 扩展名白名单 + 引用完整性，只验不写包）
+        working-directory: wow-forever-web
+        run: python3 tools/release-package.py --skip-build --check-only
+

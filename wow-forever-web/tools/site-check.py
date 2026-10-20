@@ -3950,9 +3950,15 @@ def test_app(browser, base):
           return s ? { v: (s.querySelector('.idv') || {}).innerText,
                        badge: (s.querySelector('.idbadge') || {}).innerText } : null; }""")
         exp_u = use_rows[str(pick_u["id"])]
-        check("「%s」的教益句按数据原样显示，并写明出自哪一份" % pick_u["name"],
-              bool(u) and u["v"] == exp_u["use"] and u["badge"] in (FROMN["gi"], FROMN["xr"]),
-              json.dumps(u, ensure_ascii=False)[:170])
+        # 徽标必须等于**这一件自己记的那个来源**（useFrom），不是"gi 或 xr 里随便一个都对"。
+        # 原来这条写死了两个标签，A02 之后第一个被挑中的件（石板：不屈意志）那句是解包侧给的，
+        # 页面显示得没错、断言却红了——那是期望过期，不是产品错。判据按数据取，只严不松：
+        # useFrom 不在已知三家名单里同样算失败，防的是"来源写错也照样绿"。
+        uf = exp_u.get("useFrom")
+        check("「%s」的教益句按数据原样显示，且徽标等于这一件自己记的来源" % pick_u["name"],
+              bool(u) and u["v"] == exp_u["use"] and uf in FROMN and u["badge"] == FROMN[uf],
+              "%s / 数据记的来源 %s（%s）" % (json.dumps(u, ensure_ascii=False)[:120], uf,
+                                              FROMN.get(uf, "不在名单里")))
         page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-use.png"))
         page.keyboard.press("Escape")
         page.wait_for_timeout(250)
