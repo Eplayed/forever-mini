@@ -205,6 +205,89 @@ def summary_lines(route_exec, route_fail, shots_wanted, shot_exec, shot_fail, ch
     return out
 
 
+class _FakePage:
+    """假页面：只带自己那块视口的宽度，够编排回归用。"""
+
+    def __init__(self, width):
+        self.width = width
+
+    def evaluate(self, js, arg=None):
+        return {"ok": True}
+
+
+class _FakeCtx:
+    def __init__(self, width):
+        self.pg = _FakePage(width)
+
+    def new_page(self):
+        return self.pg
+
+    def close(self):
+        pass
+
+
+class _FakeBrowser:
+    def __init__(self, widths, crash_open=None):
+        self.widths = widths
+        self.crash_open = crash_open or []
+
+    def new_context(self, viewport=None):
+        w = (viewport or {}).get("width")
+        self.widths.append(w)
+        if w in self.crash_open:
+            raise RuntimeError("开视口就崩")
+        return _FakeCtx(w)
+
+    def close(self):
+        pass
+
+
+def orchestration_selftest():
+    """真实编排链的反例回归：不启动浏览器、不动真实资料，
+       但走的是 capture_one 本体——R1 那版只测 decide()，测不出"375 根本没跑断言"。"""
+    out = []
+
+    def run_case(name, fail_at=(), crash_shot_at=(), crash_open_at=(), want_ok=None,
+                 want_shot_err=None):
+        widths, shots = [], []
+
+        def launch():
+            return _FakeBrowser(widths)
+
+        def fake_shoot(pg, day, nm, url, scroll_sel, click_sel, tag):
+            if tag in crash_shot_at:
+                raise RuntimeError("SIGSEGV 模拟")
+            shots.append(pg.width)
+            return "check-2026-10-20/%s-%s.png" % (nm, tag)
+
+        def check(pg):
+            return (pg.width not in fail_at), "宽度 %s" % pg.width
+
+        rec = capture_one(launch, "/tmp", "http://x", name, "/world", None, check, None,
+                          shoot=fake_shoot)
+        rows = [rec]
+        rc = decide(0, 0, True, len(rows),
+                    len([r for r in rows if r["shot_err"]]),
+                    len([r for r in rows if not r["check_ok"]]))
+        ok_calls = sorted(v["width"] for v in rec["views"] if v["check_ok"] is not None)
+        good = True
+        if want_ok is not None:
+            good = good and (rec["check_ok"] == want_ok)
+        if want_shot_err is not None:
+            good = good and (bool(rec["shot_err"]) == want_shot_err)
+        good = good and ok_calls == [375, 1440]        # 两块视口都必须跑断言
+        out.append((good, name, "check_ok=%s / 退出码 %s / 跑了断言的视口 %s / %s" % (
+            rec["check_ok"], rc, ok_calls, rec["check_msg"][:96])))
+
+    run_case("两端都过", want_ok=True, want_shot_err=False)
+    run_case("桌面过、手机不过（R1 的漏洞就在这）", fail_at=(375,), want_ok=False)
+    run_case("桌面不过、手机过", fail_at=(1440,), want_ok=False)
+    run_case("两端都不过", fail_at=(1440, 375), want_ok=False)
+    run_case("手机截图崩（拍不成=断言没有依据，不许被桌面顶过来）",
+             crash_shot_at=("m",), want_ok=False, want_shot_err=True)
+    return out
+
+
 def selftest():
     """失败注入回归：三类场景都喂给 decide()，看退出码对不对。不启动浏览器。"""
     cases = [
@@ -228,7 +311,13 @@ def selftest():
     ok = "未执行" in line[0]
     bad += 0 if ok else 1
     print("  %s  %-46s %s" % ("PASS" if ok else "FAIL", "只拍图时摘要不许说跑了 26 条", line[0]))
-    print("用例 %d 条，失败 %d 条" % (len(cases) + 1, bad))
+    n = len(cases) + 1
+    print("\n--- 真实编排链（capture_one）反例 ---")
+    for good, name, detail in orchestration_selftest():
+        bad += 0 if good else 1
+        n += 1
+        print("  %s  %-52s %s" % ("PASS" if good else "FAIL", name, detail))
+    print("用例 %d 条，失败 %d 条" % (n, bad))
     return 1 if bad else 0
 
 
@@ -285,65 +374,110 @@ def run(base, shots, shots_only=False):
     return decide(route_exec, len(fails), bool(shots), len(shot_rows), shot_fail, check_fail)
 
 
-def take_shots(pw, base, gaps):
-    """W01 要看的那几处，逐张拍桌面 + 375，两块视口分别记账。
+def _first(e):
+    return str(e).split(chr(10))[0][:110]
 
-    每一处单独兜一次：这台机器（Intel 核显）刚跑完 14 分钟整站门禁再开抽屉，
-    Chromium 会在拉 3.8MB 的 items-detail 时 SIGSEGV——一处崩了不能把剩下几处带走。
-    但**兜住不等于放过**：崩了要记进 shot_err，最后由 decide() 把退出码打成非 0
-    （上一版只往输出里塞一行"没拍成"，rc 仍然是 0，这就是独立验收点名的第二处漏洞）。"""
+
+def shoot_page(pg, day, name, url, scroll_sel, click_sel, tag):
+    """在一块视口里走到那一屏、（要的话）点开、截图，返回落库的相对路径。"""
+    pg.goto(url, wait_until="networkidle")
+    pg.wait_for_timeout(1800)
+    if scroll_sel:
+        pg.locator(scroll_sel).first.scroll_into_view_if_needed()
+        pg.wait_for_timeout(400)
+    if click_sel:
+        pg.locator(click_sel).first.click()
+        pg.wait_for_timeout(1200)
+    path = os.path.join(day, name + ("-m.png" if tag == "m" else ".png"))
+    pg.screenshot(path=path)
+    return os.path.relpath(path, SHOTS)
+
+
+VIEWS = (("d", "桌面", 1440, 1000), ("m", "375", 375, 812))
+
+
+def capture_one(launch, day, base, name, url, scroll_sel=None, check=None, click_sel=None,
+                shoot=None):
+    """一处截图的编排：两块视口各自「拍 + 断言」，任何一块失败整处就算失败。
+
+    W01-R1 的漏洞就钉在这里——原来只有 tag=='d' 才调 check，375 只要拍到就算过：
+    手机上黑暗启发仍是占位、无图布局错了、抽屉没出来，全都报得出去。
+    R2 起每块视口都跑自己的断言，结果分开存进 rec["views"]，
+    **后一块通过不许覆盖前一块失败**；某一屏没拍成，那一屏的断言就记为没有依据。
+
+    launch / shoot 可注入：夹具回归用假浏览器走这条真实编排链，
+    不用真的把 Chromium 弄崩，也不在真实资料里制造缺图（验收要求的就是这个）。"""
+    shoot = shoot or shoot_page
+    rec = {"name": name, "views": [], "files": [], "shot_err": []}
+    br = launch()
+    try:
+        for tag, label, w, h in VIEWS:
+            v = {"tag": tag, "label": label, "width": w, "file": "", "shot_err": "",
+                 "check_ok": None, "check_msg": ""}
+            ctx = None
+            try:
+                ctx = br.new_context(viewport={"width": w, "height": h})
+                pg = ctx.new_page()
+            except Exception as e:
+                v["shot_err"] = "开视口失败：" + _first(e)
+                rec["views"].append(v)
+                rec["shot_err"].append("%s：%s" % (label, v["shot_err"]))
+                continue
+            try:
+                v["file"] = shoot(pg, day, name, hashurl(base, url), scroll_sel, click_sel, tag)
+                rec["files"].append(v["file"])
+            except Exception as e:
+                v["shot_err"] = _first(e)
+                rec["shot_err"].append("%s 没拍成：%s" % (label, v["shot_err"]))
+            if check:
+                try:
+                    ok, msg = check(pg)
+                    v["check_ok"] = bool(ok)
+                    v["check_msg"] = msg
+                except Exception as e:
+                    v["check_ok"] = False
+                    v["check_msg"] = "断言本身跑挂：" + _first(e)
+            if v["shot_err"]:
+                # 这一屏没拍到，断言就没有依据——不许被另一屏的成功顶过来
+                v["check_ok"] = False
+                v["check_msg"] = ("这一屏没拍成，断言没有依据" if not v["check_msg"]
+                                  else "这一屏没拍成（断言写的：%s）" % v["check_msg"])
+            try:
+                if ctx is not None:
+                    ctx.close()
+            except Exception:
+                pass
+            rec["views"].append(v)
+    except Exception as e:
+        rec["shot_err"].append("整套浏览器：" + _first(e))
+    finally:
+        try:
+            br.close()
+        except Exception:
+            pass
+    rec["check_ok"] = bool(rec["views"]) and all(v.get("check_ok") is True for v in rec["views"])
+    rec["check_msg"] = " ｜ ".join(
+        "%s%s %s" % (v["label"], "过" if v.get("check_ok") is True else "不过",
+                     v.get("check_msg") or "") for v in rec["views"])
+    rec["line"] = "%s ｜ %s ｜ %s" % (
+        " / ".join(rec["files"]) or "一张都没拍到",
+        "；".join(rec["shot_err"]) or "两块视口都拍到了",
+        rec["check_msg"])
+    return rec
+
+
+def take_shots(pw, base, gaps):
+    """W01 要看的那几处。每一处一套独立浏览器：这台机器连拍五处会 SIGSEGV
+       （2026-10-20 实测到第二次），共用一个 browser 时一处崩会把后面几处一起带走。
+       分开起浏览器只是限制影响，不是根因结论；崩了照样记 shot_err、照样 rc≠0。"""
     rows = []
     day = os.path.join(SHOTS, "check-2026-10-20")
     if not os.path.isdir(day):
         os.makedirs(day)
     expect = load_expectations()
 
-    def shoot(pg, name, url, scroll_sel, click_sel, tag):
-        pg.goto(hashurl(base, url), wait_until="networkidle")
-        pg.wait_for_timeout(1800)
-        if scroll_sel:
-            pg.locator(scroll_sel).first.scroll_into_view_if_needed()
-            pg.wait_for_timeout(400)
-        if click_sel:
-            pg.locator(click_sel).first.click()
-            pg.wait_for_timeout(1200)
-        path = os.path.join(day, name + ("-m.png" if tag == "m" else ".png"))
-        pg.screenshot(path=path)
-        return os.path.relpath(path, SHOTS)
-
-    def one(name, url, scroll_sel=None, check=None, click_sel=None):
-        """每一处一套独立的浏览器：这台机器（Intel 核显、内存紧）连拍五处会 SIGSEGV，
-           共用一个 browser 时一处崩会把后面几处一起带走（2026-10-20 实测到第二次）。
-           分开起浏览器只为不让"拍不成"伪装成"没做错"——崩了照样记 shot_err、照样 rc≠0。"""
-        rec = {"name": name, "shot_err": [], "check_ok": True, "check_msg": "", "files": []}
-        br = pw.chromium.launch()
-        try:
-            for tag, w, h in (("d", 1440, 1000), ("m", 375, 812)):
-                c = br.new_context(viewport={"width": w, "height": h})
-                pg = c.new_page()
-                try:
-                    rec["files"].append(shoot(pg, name, url, scroll_sel, click_sel, tag))
-                    if tag == "d" and check:
-                        ok, msg = check(pg)
-                        rec["check_ok"] = bool(ok)
-                        rec["check_msg"] = msg
-                except Exception as e:
-                    rec["shot_err"].append("%s:%s" % ("桌面" if tag == "d" else "375",
-                                                      str(e).split(chr(10))[0][:110]))
-                finally:
-                    c.close()
-        except Exception as e:
-            rec["shot_err"].append("整套浏览器：%s" % str(e).split(chr(10))[0][:110])
-        finally:
-            br.close()
-        if check and rec["shot_err"] and rec["check_ok"]:
-            rec["check_ok"] = False
-            rec["check_msg"] = rec["check_msg"] or "这一处没拍成，断言没有依据"
-        rec["line"] = "%s ｜ %s ｜ 断言%s %s" % (
-            " / ".join(rec["files"]) or "没拍成",
-            "；".join(rec["shot_err"]) or "两块视口都拍到了",
-            "过" if rec["check_ok"] else "不过", rec["check_msg"])
-        rows.append(rec)
+    def launch():
+        return pw.chromium.launch()
 
     def chk_world(pg):
         z = expect["zones"]
@@ -372,8 +506,8 @@ def take_shots(pw, base, gaps):
 
     def chk_barrow(pg):
         """巴罗夫地穴：这座缺的是**载入图**，不是入口坐标。
-           它根本不在 dungeon-geo 那 30 座里，所以「入口在哪」这一节本来就不该出现——
-           第一版断言写成了"必须渲染出 .dgeo"，那是我把两节搞混了，不是页面的问题。"""
+           它不在 dungeon-geo 那 30 座里，所以「入口在哪」这一节本来就不该出现——
+           R1 第一版断言写成"必须渲染出 .dgeo"，那是我把两节搞混了，不是页面的问题。"""
         got = pg.evaluate("""() => { const h = document.querySelector('.dhero');
           if (!h) return { why: '页头那一块没渲染出来' };
           const im = [...h.querySelectorAll('img')];
@@ -403,11 +537,16 @@ def take_shots(pw, base, gaps):
             return False, "点开那一行之后详情抽屉没出来"
         return got["broken"] == 0, "抽屉里 %d 张图，破图 %d" % (got["imgs"], got["broken"])
 
-    one("w1-world-zones-nomap", "/world?t=zones", ".zcard", chk_world)
-    one("w1-updates-dark-inspiration", "/updates?q=" + quote(expect["q"]), "text=黑暗启发", chk_updates)
-    one("w1-dungeon-barrow-deeps", "/dungeon?d=barrow-deeps", None, chk_barrow)
-    one("w1-dungeon-lordaeron-nofaces", "/dungeon?d=ruins-of-lordaeron", ".brow", chk_nofaces)
-    one("w1-items-drawer", "/items?q=" + quote(expect["item"]), "tr.row", chk_drawer, click_sel="tr.row")
+    rows.append(capture_one(launch, day, base, "w1-world-zones-nomap", "/world?t=zones",
+                            ".zcard", chk_world))
+    rows.append(capture_one(launch, day, base, "w1-updates-dark-inspiration",
+                            "/updates?q=" + quote(expect["q"]), "text=黑暗启发", chk_updates))
+    rows.append(capture_one(launch, day, base, "w1-dungeon-barrow-deeps",
+                            "/dungeon?d=barrow-deeps", None, chk_barrow))
+    rows.append(capture_one(launch, day, base, "w1-dungeon-lordaeron-nofaces",
+                            "/dungeon?d=ruins-of-lordaeron", ".brow", chk_nofaces))
+    rows.append(capture_one(launch, day, base, "w1-items-drawer", "/items?q=" + quote(expect["item"]),
+                            "tr.row", chk_drawer, click_sel="tr.row"))
     return rows
 
 

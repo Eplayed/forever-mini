@@ -48,28 +48,36 @@ KEY_RE = re.compile(r"^[A-Za-z0-9_\-]{3,80}$")
 
 
 def key_from_iconkey(v):
-    """返回 (规范键 or None, 坏的原因 or None)。"""
+    """返回 (规范键 or None, 坏的原因 or None)。
+
+    用 fullmatch 不用 match：Python 的 $ 允许匹配在末尾换行之前，
+    "valid_icon\n" 会被 match 判成合法（W01-R1 独立验收点名的第二条）。
+    首尾带空白的键渲染器会原样编码进地址，也是非法。"""
     s = str(v)
     if not s.strip():
-        return None, "空值"
+        return None, "只有空白字符：这是非空字符串，前端照样会去请求图片"
+    if s != s.strip():
+        return None, "首尾带空白：会被原样编码进图片地址"
     if s.lower().endswith(".jpg"):
         return None, "带 .jpg 后缀：渲染器还要再拼一次，等于请求 %s.jpg" % s
     if s.endswith("."):
         return None, "带尾点：本地文件名没有这个点，请求必然 404"
-    if not KEY_RE.match(s):
+    if not KEY_RE.fullmatch(s):
         return None, "不是合法图标键（只允许字母、数字、下划线、连字符，3–80 位）"
     return s, None
 
 
 def key_from_iconfile(v):
     """返回 (规范键 or None, 坏的原因 or None)。文件名按生成器规则归一。"""
-    s = str(v).strip()
-    if not s:
-        return None, "空值"
+    s = str(v)
+    if not s.strip():
+        return None, "只有空白字符：这是非空字符串，前端照样会去请求图片"
+    if s != s.strip():
+        return None, "首尾带空白"
     if not s.lower().endswith(".jpg"):
         return None, "icon 字段应是文件名（形如 x.jpg）"
     n = s[:-4].rstrip(".")
-    if not KEY_RE.match(n):
+    if not KEY_RE.fullmatch(n):
         return None, "剥掉 .jpg 与残留尾点后仍不是合法图标键"
     return n, None
 
@@ -98,7 +106,9 @@ def collect_all_keys(data_dir=None):
 
     def take(node, src, field, fn):
         v = node.get(field)
-        if not isinstance(v, str) or not v.strip():
+        # 只有"字段没给"或"给了空串"才算未提供；纯空白是非空字符串，
+        # 前端照样会拿它去拼图片地址（W01-R1 独立验收点名的边界）
+        if not isinstance(v, str) or v == "":
             return None
         k, why = fn(v)
         if why:
@@ -327,6 +337,15 @@ def selftest():
     # ⑪ 生成模式遇到非法键：失败且不产出登记
     run("非法键时生成模式不留半套登记", [{"id": "k", "iconKey": "bad.key!"}], None, 1,
         also_check_files_absent=True)
+    # ⑫⑬ W01-R1 独立验收点名的两条格式边界：纯空白不是"未提供"，$ 不许放过末尾换行
+    run("iconKey 只有空白字符（非空字符串，前端照样请求）", [{"id": "l", "iconKey": "   "}], [], 1)
+    run("iconKey 末尾带换行 valid_icon\\n", [{"id": "m", "iconKey": "valid_icon\n"}], [], 1)
+    # ⑭ 语法约束不许靠"把它加进登记"绕过
+    run("非法键就算被加进缺图登记也必须失败",
+        [{"id": "n", "iconKey": "bad key"}], ["bad key"], 1)
+    # ⑮ 字段真的没给 / 给空串 = 未提供，不算非法
+    run("iconKey 未提供或空串（合法的没有图标）",
+        [{"id": "o"}, {"id": "p", "iconKey": ""}], [], 0)
 
     shutil.rmtree(root, ignore_errors=True)
     set_paths(ROOT)

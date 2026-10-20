@@ -26,6 +26,17 @@ jobs:
         working-directory: wow-forever-web
         run: node tools/build-data.js
 
+      # 两个脚本内自测：不启动浏览器、不联网、不动真实资料，纯临时目录/假对象。
+      # 挂在这里而不是嵌进 build-data.js：生产数据生成不该依赖测试代码，
+      # 也不重复挂进 site-check（那条要起服务 + 无头 Chrome，仍按老规矩本地跑）。
+      - name: 图标登记校验器自测（夹具回归）
+        working-directory: wow-forever-web
+        run: python3 tools/build-icon-map.py --selftest
+
+      - name: 路由冒烟退出码与编排自测（不启动浏览器）
+        working-directory: wow-forever-web
+        run: python3 tools/route-smoke.py --selftest
+
       - name: 新站安装依赖
         working-directory: wow-forever-web/app
         run: npm ci
