@@ -144,7 +144,10 @@
             </tr></thead>
             <tbody>
               <tr v-for="(y, i) in quests" :key="y.nameCn + '-' + i">
-                <td><span class="nm">{{ y.nameCn }}</span><span v-if="y.preQuest" class="sub">前置：{{ y.preQuest }}</span><span v-if="y.xpAlt" class="conf">经验值有两个说法：{{ y.xp }} / {{ y.xpAlt }}，还没实测</span></td>
+                <!-- 经验值两说不在这页摆（2026-10-20 站主决定）：主字段按既有取值顺序
+                     （参考站 wclbox 优先、缺则 wowhead，两份都不是插件），
+                     另一说留在 y.xpAlt 没删，条数与处置写在溯源页那句任务说明里。 -->
+                <td><span class="nm">{{ y.nameCn }}</span><span v-if="y.preQuest" class="sub">前置：{{ y.preQuest }}</span></td>
                 <td class="c-num2 num">{{ num(y.reqLevel) }}</td>
                 <td class="c-num2 num">{{ num(y.questLevel) }}</td>
                 <td class="c-num num"><b v-if="y.xp !== null && y.xp !== undefined">{{ y.xp }}</b></td>

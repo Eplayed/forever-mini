@@ -74,7 +74,9 @@
             <span class="chips"><span v-for="n in r.list" :key="n" class="tag">{{ n }}</span></span>
             <a :href="racesHref">矩阵 →</a>
           </div>
-          <p v-if="skyCfl" class="conf">天裔能选几个职业，两份说法还没对上（同页两张矩阵表与导语不一致），<a :href="racesHref">种族页两个都留着</a></p>
+          <!-- 2026-10-20 站主决定：内容页只给一个数，不再摆"两份说法还没对上"那句。
+               天裔可选职业按官方页自己的矩阵表显示（部落 5 / 联盟 5），
+               导语那句仍在种族页原样引用，分歧记录留在 races.json 与溯源页。 -->
         </template>
       </section>
 
@@ -241,9 +243,8 @@ const raceRows = computed(() => {
   });
   return out;
 });
-const hasSky = computed(() => (RC.value.races || []).some((r) =>
-  (r.classes || []).indexOf(cid.value) >= 0 && String(r.id).indexOf('skyborne') === 0));
-const skyCfl = computed(() => hasSky.value && (RC.value.conflicts || []).length > 0);
+// 天裔那处分歧不再在这页摆红字（2026-10-20 站主决定，见模板里那条注释）：
+// 数据与处置留在 races.json.conflicts，公开展示挪到溯源页。
 const racesHref = hrefOf('races.html');
 const bookHref = hrefOf('skills.html');
 const calcLink = computed(() => {

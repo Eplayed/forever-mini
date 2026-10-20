@@ -1,8 +1,8 @@
 {
  "meta": {
-  "generatedAt": "2026-10-19",
+  "generatedAt": "2026-10-20",
   "kind": "spellbook",
-  "method": "tools/merge-spells.py 合三份 upstream：wclbox-spells.json（定名与状态，客户端解包转述）+ gi-spells.json（spellId / 自动或天赋自带）+ xr-skills.json（每级学习等级）。两份插件的描述字段在抽取阶段就没落盘；等级数与起学等级两边不一致的两个都留（ranksAlt / learnAlt）。",
+  "method": "tools/merge-spells.py 合三份 upstream：wclbox-spells.json（定名与状态，客户端解包转述）+ gi-spells.json（spellId / 自动或天赋自带）+ xr-skills.json（每级学习等级）。两份插件的描述字段在抽取阶段就没落盘；等级数与起学等级两边不一致时主字段取插件（GI 先行、其次 XR），参考站那一说留在 ranksAlt / learnAlt + *AltFrom 不删。",
   "pageNote": "法术书按无限测试版客户端读出，与经典旧世逐条对照状态；等级数与起学等级另按两份职业技能表交叉核对过，两边说法不一样的两条都留着。",
   "counts": {
    "total": 498,
@@ -452,7 +452,7 @@
    "tab": "武器",
    "name": "战术掌握",
    "iconKey": "spell_nature_enchantarmor",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 14,
    "state": null,
    "stateTag": null,
@@ -461,6 +461,7 @@
    "learnLevels": [
     14
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -540,7 +541,7 @@
    "tab": "武器",
    "name": "反击风暴",
    "iconKey": "ability_warrior_challange",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -552,6 +553,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -580,7 +582,7 @@
    "tab": "武器",
    "name": "乘胜追击",
    "iconKey": "ability_warrior_devastate",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "new",
    "stateTag": "new",
@@ -592,6 +594,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -620,7 +623,7 @@
    "tab": "武器",
    "name": "致死打击",
    "iconKey": "ability_warrior_savageblow",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -640,7 +643,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -673,7 +678,7 @@
    "tab": "武器",
    "name": "穿刺打击",
    "iconKey": "inv_spear_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": null,
    "stateTag": null,
@@ -685,6 +690,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -986,7 +992,7 @@
    "tab": "狂怒",
    "name": "破胆怒吼",
    "iconKey": "ability_golemthunderclap",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "changed",
    "stateTag": "changed",
@@ -998,6 +1004,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -1086,7 +1093,7 @@
    "tab": "狂怒",
    "name": "挑战怒吼",
    "iconKey": "ability_bullrush",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "changed",
    "stateTag": "changed",
@@ -1098,6 +1105,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -1126,7 +1134,7 @@
    "tab": "狂怒",
    "name": "狂暴之怒",
    "iconKey": "spell_nature_ancestralguardian",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -1138,6 +1146,7 @@
      "learnLevel": 32
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -1166,7 +1175,7 @@
    "tab": "狂怒",
    "name": "狂暴姿态",
    "iconKey": "ability_racial_avatar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "changed",
    "stateTag": "changed",
@@ -1178,6 +1187,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -1256,7 +1266,7 @@
    "tab": "狂怒",
    "name": "旋风斩",
    "iconKey": "ability_whirlwind",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 36,
    "state": "changed",
    "stateTag": "changed",
@@ -1268,6 +1278,7 @@
      "learnLevel": 36
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     36
@@ -1341,7 +1352,7 @@
    "tab": "狂怒",
    "name": "嗜血",
    "iconKey": "spell_nature_bloodlust",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -1361,7 +1372,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -1394,7 +1407,7 @@
    "tab": "狂怒",
    "name": "鲁莽",
    "iconKey": "ability_criticalstrike",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "changed",
    "stateTag": "changed",
@@ -1406,6 +1419,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -1484,7 +1498,7 @@
    "tab": "防护",
    "name": "血性狂暴",
    "iconKey": "ability_racial_bloodrage",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "changed",
    "stateTag": "changed",
@@ -1496,6 +1510,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -1524,7 +1539,7 @@
    "tab": "防护",
    "name": "防御姿态",
    "iconKey": "ability_warrior_defensivestance",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "changed",
    "stateTag": "changed",
@@ -1536,6 +1551,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -1624,7 +1640,7 @@
    "tab": "防护",
    "name": "嘲讽",
    "iconKey": "spell_nature_reincarnation",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "changed",
    "stateTag": "changed",
@@ -1636,6 +1652,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -1779,7 +1796,7 @@
    "tab": "防护",
    "name": "盾牌格挡",
    "iconKey": "ability_defend",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 16,
    "state": "changed",
    "stateTag": "changed",
@@ -1791,6 +1808,7 @@
      "learnLevel": 16
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     16
@@ -1819,7 +1837,7 @@
    "tab": "防护",
    "name": "缴械",
    "iconKey": "ability_warrior_disarm",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "same",
    "stateTag": "same",
@@ -1831,6 +1849,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -1859,7 +1878,7 @@
    "tab": "防护",
    "name": "盾墙",
    "iconKey": "ability_warrior_shieldwall",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 28,
    "state": "changed",
    "stateTag": "changed",
@@ -1871,6 +1890,7 @@
      "learnLevel": 28
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     28
@@ -1899,7 +1919,7 @@
    "tab": "防护",
    "name": "盾牌猛击",
    "iconKey": "inv_shield_05",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -1919,7 +1939,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -2076,7 +2098,7 @@
    "tab": "神圣",
    "name": "纯净术",
    "iconKey": "spell_holy_purify",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 8,
    "state": "same",
    "stateTag": "same",
@@ -2088,6 +2110,7 @@
      "learnLevel": 8
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     8
@@ -2291,7 +2314,7 @@
    "tab": "神圣",
    "name": "奉献",
    "iconKey": "spell_holy_innerfire",
-   "ranks": 5,
+   "ranks": 4,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -2315,7 +2338,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 4,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20,
@@ -2583,7 +2608,7 @@
    "tab": "神圣",
    "name": "神圣震击",
    "iconKey": "spell_holy_searinglight",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -2603,7 +2628,9 @@
      "learnLevel": 56
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -2787,7 +2814,7 @@
    "tab": "神圣",
    "name": "清洁术",
    "iconKey": "spell_holy_renew",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 42,
    "state": "same",
    "stateTag": "same",
@@ -2799,6 +2826,7 @@
      "learnLevel": 42
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     42
@@ -2967,7 +2995,7 @@
    "tab": "神圣",
    "name": "强效光明祝福",
    "iconKey": "spell_holy_greaterblessingoflight",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "changed",
    "stateTag": "changed",
@@ -2979,6 +3007,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -3007,7 +3036,7 @@
    "tab": "神圣",
    "name": "真理之音",
    "iconKey": "inv_misc_horn_03",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -3019,6 +3048,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -3360,7 +3390,7 @@
    "tab": "防护",
    "name": "正义之怒",
    "iconKey": "spell_holy_sealoffury",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 16,
    "state": "changed",
    "stateTag": "changed",
@@ -3372,6 +3402,7 @@
      "learnLevel": 16
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     16
@@ -3400,7 +3431,7 @@
    "tab": "防护",
    "name": "自由祝福",
    "iconKey": "spell_holy_sealofvalor",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "same",
    "stateTag": "same",
@@ -3412,6 +3443,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -3440,7 +3472,7 @@
    "tab": "防护",
    "name": "王者祝福",
    "iconKey": "spell_magic_magearmor",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -3449,6 +3481,7 @@
    "learnLevels": [
     20
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -3468,7 +3501,7 @@
    "tab": "防护",
    "name": "专注光环",
    "iconKey": "spell_holy_mindsooth",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "same",
    "stateTag": "same",
@@ -3480,6 +3513,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -3508,7 +3542,7 @@
    "tab": "防护",
    "name": "公正圣印",
    "iconKey": "spell_holy_sealofwrath",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "same",
    "stateTag": "same",
@@ -3520,6 +3554,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -3548,7 +3583,7 @@
    "tab": "防护",
    "name": "撤销",
    "iconKey": "spell_holy_prayerofmendingtga",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "new",
    "stateTag": "new",
@@ -3557,6 +3592,7 @@
    "learnLevels": [
     26
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -3576,7 +3612,7 @@
    "tab": "防护",
    "name": "拯救",
    "iconKey": "spell_holy_sealofsalvation",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "renamed",
    "stateTag": "renamed",
@@ -3585,6 +3621,7 @@
    "learnLevels": [
     26
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -3654,7 +3691,7 @@
    "tab": "防护",
    "name": "神圣干涉",
    "iconKey": "spell_nature_timestop",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -3666,6 +3703,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -3839,7 +3877,7 @@
    "tab": "防护",
    "name": "正义之锤",
    "iconKey": "ability_paladin_hammeroftherighteous",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "new",
    "stateTag": "new",
@@ -3851,6 +3889,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -3879,7 +3918,7 @@
    "tab": "防护",
    "name": "神圣之盾",
    "iconKey": "spell_holy_blessingofprotection",
-   "ranks": 3,
+   "ranks": 2,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -3895,7 +3934,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 2,
+   "ranksAlt": 3,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -3972,7 +4013,7 @@
    "tab": "防护",
    "name": "强效王者祝福",
    "iconKey": "spell_magic_greaterblessingofkings",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "changed",
    "stateTag": "changed",
@@ -3984,6 +4025,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -4012,7 +4054,7 @@
    "tab": "防护",
    "name": "群体拯救",
    "iconKey": "spell_holy_greaterblessingofsalvation",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "renamed",
    "stateTag": "renamed",
@@ -4021,6 +4063,7 @@
    "learnLevels": [
     60
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -4040,7 +4083,7 @@
    "tab": "防护",
    "name": "迅捷审判",
    "iconKey": "ability_paladin_judgementred",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": null,
    "stateTag": null,
@@ -4052,6 +4095,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -4078,7 +4122,7 @@
    "tab": "防护",
    "name": "圣殿骑士壁垒",
    "iconKey": "ability_paladin_shieldofthetemplar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -4090,6 +4134,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -4186,7 +4231,7 @@
    "tab": "惩戒",
    "name": "审判",
    "iconKey": "spell_holy_righteousfury",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 4,
    "state": "changed",
    "stateTag": "changed",
@@ -4198,6 +4243,7 @@
      "learnLevel": 4
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     4
@@ -4426,7 +4472,7 @@
    "tab": "惩戒",
    "name": "命令圣印",
    "iconKey": "ability_warrior_innerrage",
-   "ranks": 5,
+   "ranks": 4,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -4450,7 +4496,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 4,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -4554,7 +4602,7 @@
    "tab": "坐骑",
    "name": "召唤军马",
    "iconKey": "spell_nature_swiftness",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "changed",
    "stateTag": "changed",
@@ -4566,6 +4614,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -4594,7 +4643,7 @@
    "tab": "坐骑",
    "name": "召唤战马",
    "iconKey": "ability_mount_charger",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "changed",
    "stateTag": "changed",
@@ -4606,6 +4655,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -4724,7 +4774,7 @@
    "tab": "野兽控制",
    "name": "召唤宠物",
    "iconKey": "ability_hunter_beastcall",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -4736,6 +4786,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -4764,7 +4815,7 @@
    "tab": "野兽控制",
    "name": "解散野兽",
    "iconKey": "spell_nature_spiritwolf",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -4776,6 +4827,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -4804,7 +4856,7 @@
    "tab": "野兽控制",
    "name": "喂养宠物",
    "iconKey": "ability_hunter_beasttraining",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -4816,6 +4868,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -4844,7 +4897,7 @@
    "tab": "野兽控制",
    "name": "复活宠物",
    "iconKey": "ability_hunter_beastsoothe",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -4856,6 +4909,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -4884,7 +4938,7 @@
    "tab": "野兽控制",
    "name": "驯服野兽",
    "iconKey": "ability_hunter_beasttaming",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -4896,6 +4950,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10,
@@ -4995,7 +5050,7 @@
    "tab": "野兽控制",
    "name": "鹰眼术",
    "iconKey": "ability_hunter_eagleeye",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 14,
    "state": "same",
    "stateTag": "same",
@@ -5007,6 +5062,7 @@
      "learnLevel": 14
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     14
@@ -5035,7 +5091,7 @@
    "tab": "野兽控制",
    "name": "野兽之眼",
    "iconKey": "ability_eyeoftheowl",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 14,
    "state": "changed",
    "stateTag": "changed",
@@ -5047,6 +5103,7 @@
      "learnLevel": 14
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     14
@@ -5125,7 +5182,7 @@
    "tab": "野兽控制",
    "name": "猎豹守护",
    "iconKey": "ability_mount_jungletiger",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -5137,6 +5194,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -5165,7 +5223,7 @@
    "tab": "野兽控制",
    "name": "野兽知识",
    "iconKey": "ability_physical_taunt",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "same",
    "stateTag": "same",
@@ -5177,6 +5235,7 @@
      "learnLevel": 24
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     24
@@ -5316,7 +5375,7 @@
    "tab": "野兽控制",
    "name": "豹群守护",
    "iconKey": "ability_mount_whitetiger",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -5328,6 +5387,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -5401,7 +5461,7 @@
    "tab": "野兽控制",
    "name": "宁神射击",
    "iconKey": "spell_nature_drowsy",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "same",
    "stateTag": "same",
@@ -5413,6 +5473,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -5491,7 +5552,7 @@
    "tab": "射击",
    "name": "自动射击",
    "iconKey": "ability_whirlwind",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": "same",
    "stateTag": "same",
@@ -5503,6 +5564,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": true,
    "learnLevels": [
     1
@@ -5741,7 +5803,7 @@
    "tab": "射击",
    "name": "震荡射击",
    "iconKey": "spell_frost_stun",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 8,
    "state": "same",
    "stateTag": "same",
@@ -5753,6 +5815,7 @@
      "learnLevel": 8
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     8
@@ -5846,7 +5909,7 @@
    "tab": "射击",
    "name": "多重射击",
    "iconKey": "ability_upgrademoonglaive",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "changed",
    "stateTag": "changed",
@@ -5858,6 +5921,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -5886,7 +5950,7 @@
    "tab": "射击",
    "name": "瞄准射击",
    "iconKey": "inv_spear_07",
-   "ranks": 6,
+   "ranks": 5,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -5914,7 +5978,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 6,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20,
@@ -5948,7 +6014,7 @@
    "tab": "射击",
    "name": "毒蝎钉刺",
    "iconKey": "ability_hunter_criticalshot",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "changed",
    "stateTag": "changed",
@@ -5960,6 +6026,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -5988,7 +6055,7 @@
    "tab": "射击",
    "name": "强击光环",
    "iconKey": "ability_trueshot",
-   "ranks": 5,
+   "ranks": 4,
    "learnLevel": 25,
    "state": null,
    "stateTag": null,
@@ -6012,7 +6079,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 4,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -6046,7 +6115,7 @@
    "tab": "射击",
    "name": "急速射击",
    "iconKey": "ability_hunter_runningshot",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "changed",
    "stateTag": "changed",
@@ -6058,6 +6127,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -6086,7 +6156,7 @@
    "tab": "射击",
    "name": "照明弹",
    "iconKey": "spell_fire_flare",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 32,
    "state": "same",
    "stateTag": "same",
@@ -6098,6 +6168,7 @@
      "learnLevel": 32
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     32
@@ -6420,7 +6491,7 @@
    "tab": "生存",
    "name": "追踪野兽",
    "iconKey": "ability_tracking",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": "same",
    "stateTag": "same",
@@ -6432,6 +6503,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     1
@@ -6460,7 +6532,7 @@
    "tab": "生存",
    "name": "追踪人型生物",
    "iconKey": "spell_holy_prayerofhealing",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -6472,6 +6544,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -6665,7 +6738,7 @@
    "tab": "生存",
    "name": "追踪亡灵",
    "iconKey": "spell_shadow_darksummoning",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "same",
    "stateTag": "same",
@@ -6677,6 +6750,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -6805,7 +6879,7 @@
    "tab": "生存",
    "name": "追踪隐藏生物",
    "iconKey": "ability_stealth",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "same",
    "stateTag": "same",
@@ -6817,6 +6891,7 @@
      "learnLevel": 24
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     24
@@ -6845,8 +6920,8 @@
    "tab": "生存",
    "name": "反击",
    "iconKey": "ability_warrior_challange",
-   "ranks": 4,
-   "learnLevel": 30,
+   "ranks": 3,
+   "learnLevel": 25,
    "state": null,
    "stateTag": null,
    "relation": "talent",
@@ -6865,7 +6940,9 @@
      "learnLevel": 54
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -6874,7 +6951,9 @@
     42,
     54
    ],
-   "learnAlt": 25,
+   "learnAlt": 30,
+   "learnAltFrom": "wclbox",
+   "learnFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -6899,7 +6978,7 @@
    "tab": "生存",
    "name": "追踪元素生物",
    "iconKey": "spell_frost_summonwaterelemental",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "same",
    "stateTag": "same",
@@ -6911,6 +6990,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -6939,7 +7019,7 @@
    "tab": "生存",
    "name": "冰霜陷阱",
    "iconKey": "spell_frost_freezingbreath",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 28,
    "state": "changed",
    "stateTag": "changed",
@@ -6951,6 +7031,7 @@
      "learnLevel": 28
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     28
@@ -6979,7 +7060,7 @@
    "tab": "生存",
    "name": "假死",
    "iconKey": "ability_rogue_feigndeath",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "changed",
    "stateTag": "changed",
@@ -6991,6 +7072,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -7074,7 +7156,7 @@
    "tab": "生存",
    "name": "追踪恶魔",
    "iconKey": "spell_shadow_summonfelhunter",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 32,
    "state": "same",
    "stateTag": "same",
@@ -7086,6 +7168,7 @@
      "learnLevel": 32
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     32
@@ -7164,7 +7247,7 @@
    "tab": "生存",
    "name": "追踪巨人",
    "iconKey": "ability_racial_avatar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -7176,6 +7259,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -7204,7 +7288,7 @@
    "tab": "生存",
    "name": "追踪龙类",
    "iconKey": "inv_misc_head_dragon_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "same",
    "stateTag": "same",
@@ -7216,6 +7300,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -7619,7 +7704,7 @@
    "tab": "奇袭",
    "name": "偷袭",
    "iconKey": "ability_cheapshot",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "same",
    "stateTag": "same",
@@ -7631,6 +7716,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -7785,7 +7871,7 @@
    "tab": "奇袭",
    "name": "毒针",
    "iconKey": "inv_sword_31",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -7797,6 +7883,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -8037,7 +8124,7 @@
    "tab": "战斗",
    "name": "闪避",
    "iconKey": "spell_shadow_shadowward",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 8,
    "state": "same",
    "stateTag": "same",
@@ -8049,6 +8136,7 @@
      "learnLevel": 8
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     8
@@ -8372,7 +8460,7 @@
    "tab": "敏锐",
    "name": "搜索",
    "iconKey": "inv_misc_bag_11",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 4,
    "state": "same",
    "stateTag": "same",
@@ -8384,6 +8472,7 @@
      "learnLevel": 4
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     4
@@ -8462,7 +8551,7 @@
    "tab": "敏锐",
    "name": "扰乱",
    "iconKey": "ability_rogue_distract",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "changed",
    "stateTag": "changed",
@@ -8474,6 +8563,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -8547,7 +8637,7 @@
    "tab": "敏锐",
    "name": "侦测陷阱",
    "iconKey": "ability_spy",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "same",
    "stateTag": "same",
@@ -8556,6 +8646,7 @@
    "learnLevels": [
     24
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8575,7 +8666,7 @@
    "tab": "敏锐",
    "name": "解除陷阱",
    "iconKey": "spell_shadow_grimward",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -8587,6 +8678,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -8615,7 +8707,7 @@
    "tab": "敏锐",
    "name": "致盲",
    "iconKey": "spell_shadow_mindsteal",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 34,
    "state": "same",
    "stateTag": "same",
@@ -8627,6 +8719,7 @@
      "learnLevel": 34
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     34
@@ -8655,7 +8748,7 @@
    "tab": "敏锐",
    "name": "安全降落",
    "iconKey": "inv_feather_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -8664,6 +8757,7 @@
    "learnLevels": [
     40
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8808,7 +8902,7 @@
    "tab": "毒药",
    "name": "致残毒药",
    "iconKey": "ability_poisonsting",
-   "ranks": null,
+   "ranks": 2,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -8818,6 +8912,7 @@
     20,
     50
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8837,7 +8932,7 @@
    "tab": "毒药",
    "name": "速效毒药",
    "iconKey": "ability_poisons",
-   "ranks": null,
+   "ranks": 6,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -8851,6 +8946,7 @@
     52,
     60
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8870,7 +8966,7 @@
    "tab": "毒药",
    "name": "毒药",
    "iconKey": "trade_brewpoison",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -8882,6 +8978,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "provenance": [
     {
@@ -8907,7 +9004,7 @@
    "tab": "毒药",
    "name": "麻痹毒药",
    "iconKey": "spell_nature_nullifydisease",
-   "ranks": null,
+   "ranks": 3,
    "learnLevel": 24,
    "state": "changed",
    "stateTag": "changed",
@@ -8918,6 +9015,7 @@
     38,
     52
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8957,7 +9055,7 @@
    "tab": "毒药",
    "name": "致命毒药",
    "iconKey": "ability_rogue_dualweild",
-   "ranks": null,
+   "ranks": 5,
    "learnLevel": 30,
    "state": "changed",
    "stateTag": "changed",
@@ -8970,6 +9068,7 @@
     54,
     60
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -8989,7 +9088,7 @@
    "tab": "毒药",
    "name": "致伤毒药",
    "iconKey": "inv_misc_herb_16",
-   "ranks": null,
+   "ranks": 4,
    "learnLevel": 32,
    "state": "changed",
    "stateTag": "changed",
@@ -9001,6 +9100,7 @@
     48,
     56
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -9020,7 +9120,7 @@
    "tab": "毒药",
    "name": "致盲粉",
    "iconKey": "inv_misc_ammo_gunpowder_02",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 34,
    "state": "same",
    "stateTag": "same",
@@ -9029,6 +9129,7 @@
    "learnLevels": [
     34
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -9413,7 +9514,7 @@
    "tab": "戒律",
    "name": "迷惑闪光",
    "iconKey": "ability_paladin_blindinglight2",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "new",
    "stateTag": "new",
@@ -9425,6 +9526,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -9693,7 +9795,7 @@
    "tab": "戒律",
    "name": "艾露恩的赐福",
    "iconKey": "spell_holy_elunesgrace",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -9705,6 +9807,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -9903,7 +10006,7 @@
    "tab": "戒律",
    "name": "神圣之灵",
    "iconKey": "spell_holy_divinespirit",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -9923,7 +10026,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30,
@@ -10011,7 +10116,7 @@
    "tab": "戒律",
    "name": "漂浮术",
    "iconKey": "spell_holy_layonhands",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 34,
    "state": "changed",
    "stateTag": "changed",
@@ -10023,6 +10128,7 @@
      "learnLevel": 34
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     34
@@ -10096,7 +10202,7 @@
    "tab": "戒律",
    "name": "精神祷言",
    "iconKey": "spell_holy_prayerofspirit",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "changed",
    "stateTag": "changed",
@@ -10108,6 +10214,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -10594,7 +10701,7 @@
    "tab": "神圣",
    "name": "祛病术",
    "iconKey": "spell_holy_nullifydisease",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 14,
    "state": "same",
    "stateTag": "same",
@@ -10606,6 +10713,7 @@
      "learnLevel": 14
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     14
@@ -10689,8 +10797,8 @@
    "tab": "神圣",
    "name": "惩击",
    "iconKey": "spell_holy_chastise",
-   "ranks": 5,
-   "learnLevel": 20,
+   "ranks": 8,
+   "learnLevel": 1,
    "state": "new",
    "stateTag": "new",
    "relation": null,
@@ -10729,7 +10837,9 @@
      "learnLevel": 54
     }
    ],
-   "ranksAlt": 8,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "learnLevels": [
     1,
     6,
@@ -10740,7 +10850,9 @@
     46,
     54
    ],
-   "learnAlt": 1,
+   "learnAlt": 20,
+   "learnAltFrom": "wclbox",
+   "learnFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -10765,7 +10877,7 @@
    "tab": "神圣",
    "name": "防护恐惧结界",
    "iconKey": "spell_holy_excorcism",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -10777,6 +10889,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -11142,7 +11255,7 @@
    "tab": "神圣",
    "name": "驱除疾病",
    "iconKey": "spell_nature_nullifydisease",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 32,
    "state": "same",
    "stateTag": "same",
@@ -11154,6 +11267,7 @@
      "learnLevel": 32
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     32
@@ -11242,7 +11356,7 @@
    "tab": "神圣",
    "name": "光明之泉",
    "iconKey": "spell_holy_summonlightwell",
-   "ranks": 3,
+   "ranks": 2,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -11258,7 +11372,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 2,
+   "ranksAlt": 3,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40,
@@ -11289,7 +11405,7 @@
    "tab": "神圣",
    "name": "光明之泉回复",
    "iconKey": "spell_holy_summonlightwell",
-   "ranks": null,
+   "ranks": 3,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -11309,6 +11425,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40,
@@ -12035,7 +12152,7 @@
    "tab": "暗影魔法",
    "name": "精神鞭笞",
    "iconKey": "spell_shadow_siphonmana",
-   "ranks": 6,
+   "ranks": 5,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -12063,7 +12180,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 6,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -12298,7 +12417,7 @@
    "tab": "暗影魔法",
    "name": "暗影防护祷言",
    "iconKey": "spell_holy_prayerofshadowprotection",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 56,
    "state": "changed",
    "stateTag": "changed",
@@ -12310,6 +12429,7 @@
      "learnLevel": 56
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     56
@@ -12483,7 +12603,7 @@
    "tab": "元素战斗",
    "name": "地缚图腾",
    "iconKey": "spell_nature_strengthofearthtotem02",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 6,
    "state": "same",
    "stateTag": "same",
@@ -12495,6 +12615,7 @@
      "learnLevel": 6
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     6
@@ -12823,7 +12944,7 @@
    "tab": "元素战斗",
    "name": "元素的召唤",
    "iconKey": "spell_shaman_dropall_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "new",
    "stateTag": "new",
@@ -12835,6 +12956,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -12918,7 +13040,7 @@
    "tab": "元素战斗",
    "name": "收回图腾",
    "iconKey": "spell_shaman_totemrecall",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "new",
    "stateTag": "new",
@@ -12930,6 +13052,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -13013,7 +13136,7 @@
    "tab": "元素战斗",
    "name": "先祖的召唤",
    "iconKey": "spell_shaman_dropall_02",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "new",
    "stateTag": "new",
@@ -13025,6 +13148,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -13053,7 +13177,7 @@
    "tab": "元素战斗",
    "name": "熔岩爆裂",
    "iconKey": "spell_shaman_lavaburst",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -13073,7 +13197,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -13161,7 +13287,7 @@
    "tab": "元素战斗",
    "name": "灵魂的召唤",
    "iconKey": "spell_shaman_dropall_03",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "new",
    "stateTag": "new",
@@ -13173,6 +13299,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -13616,7 +13743,7 @@
    "tab": "增强",
    "name": "幽魂之狼",
    "iconKey": "spell_nature_spiritwolf",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -13628,6 +13755,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -13656,7 +13784,7 @@
    "tab": "增强",
    "name": "图腾投射",
    "iconKey": "ability_shaman_totemrelocation",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "new",
    "stateTag": "new",
@@ -13668,6 +13796,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -13696,7 +13825,7 @@
    "tab": "增强",
    "name": "水下呼吸",
    "iconKey": "spell_shadow_demonbreath",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "same",
    "stateTag": "same",
@@ -13708,6 +13837,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -13786,7 +13916,7 @@
    "tab": "增强",
    "name": "视界术",
    "iconKey": "spell_nature_farsight",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "same",
    "stateTag": "same",
@@ -13798,6 +13928,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -13931,7 +14062,7 @@
    "tab": "增强",
    "name": "水上行走",
    "iconKey": "spell_frost_windwalkon",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 28,
    "state": "changed",
    "stateTag": "changed",
@@ -13943,6 +14074,7 @@
      "learnLevel": 28
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     28
@@ -13971,7 +14103,7 @@
    "tab": "增强",
    "name": "星界传送",
    "iconKey": "spell_nature_astralrecal",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -13983,6 +14115,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -14011,7 +14144,7 @@
    "tab": "增强",
    "name": "根基图腾",
    "iconKey": "spell_nature_groundingtotem",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -14023,6 +14156,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -14206,7 +14340,7 @@
    "tab": "增强",
    "name": "岗哨图腾",
    "iconKey": "spell_nature_removecurse",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 34,
    "state": "changed",
    "stateTag": "changed",
@@ -14218,6 +14352,7 @@
      "learnLevel": 34
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     34
@@ -14371,7 +14506,7 @@
    "tab": "增强",
    "name": "先知之怒",
    "iconKey": "spell_nature_bloodlust",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": null,
    "stateTag": null,
@@ -14383,6 +14518,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -14553,7 +14689,7 @@
    "tab": "恢复",
    "name": "消毒术",
    "iconKey": "spell_nature_nullifypoison",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 16,
    "state": "same",
    "stateTag": "same",
@@ -14565,6 +14701,7 @@
      "learnLevel": 16
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     16
@@ -14593,7 +14730,7 @@
    "tab": "恢复",
    "name": "战栗图腾",
    "iconKey": "spell_nature_tremortotem",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "changed",
    "stateTag": "changed",
@@ -14605,6 +14742,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -14758,7 +14896,7 @@
    "tab": "恢复",
    "name": "祛病术",
    "iconKey": "spell_nature_removedisease",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "same",
    "stateTag": "same",
@@ -14770,6 +14908,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -14798,7 +14937,7 @@
    "tab": "恢复",
    "name": "清毒图腾",
    "iconKey": "spell_nature_poisoncleansingtotem",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "changed",
    "stateTag": "changed",
@@ -14810,6 +14949,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -14838,8 +14978,8 @@
    "tab": "恢复",
    "name": "法力之潮图腾",
    "iconKey": "spell_frost_summonwaterelemental",
-   "ranks": 4,
-   "learnLevel": 1,
+   "ranks": 2,
+   "learnLevel": 25,
    "state": null,
    "stateTag": null,
    "relation": "talent",
@@ -14854,7 +14994,9 @@
      "learnLevel": 58
     }
    ],
-   "ranksAlt": 2,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -14863,7 +15005,9 @@
     48,
     58
    ],
-   "learnAlt": 25,
+   "learnAlt": 1,
+   "learnAltFrom": "wclbox",
+   "learnFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -14943,7 +15087,7 @@
    "tab": "恢复",
    "name": "复生",
    "iconKey": "spell_nature_reincarnation",
-   "ranks": null,
+   "ranks": 2,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -14953,6 +15097,7 @@
     30,
     30
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -14972,7 +15117,7 @@
    "tab": "恢复",
    "name": "祛病图腾",
    "iconKey": "spell_nature_diseasecleansingtotem",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 38,
    "state": "changed",
    "stateTag": "changed",
@@ -14984,6 +15129,7 @@
      "learnLevel": 38
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     38
@@ -15163,7 +15309,7 @@
    "tab": "奥术",
    "name": "造水术",
    "iconKey": "inv_drink_06",
-   "ranks": 7,
+   "ranks": 8,
    "learnLevel": 4,
    "state": "same",
    "stateTag": "same",
@@ -15203,7 +15349,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 8,
+   "ranksAlt": 7,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     4,
@@ -15383,7 +15531,7 @@
    "tab": "奥术",
    "name": "变形术",
    "iconKey": "spell_nature_polymorph",
-   "ranks": 4,
+   "ranks": 5,
    "learnLevel": 8,
    "state": "same",
    "stateTag": "same",
@@ -15411,7 +15559,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     8,
@@ -15503,7 +15653,7 @@
    "tab": "奥术",
    "name": "缓落术",
    "iconKey": "spell_magic_featherfall",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 12,
    "state": "same",
    "stateTag": "same",
@@ -15515,6 +15665,7 @@
      "learnLevel": 12
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     12
@@ -15663,7 +15814,7 @@
    "tab": "奥术",
    "name": "解除次级诅咒",
    "iconKey": "spell_nature_removecurse",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 18,
    "state": "changed",
    "stateTag": "changed",
@@ -15675,6 +15826,7 @@
      "learnLevel": 18
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     18
@@ -15703,7 +15855,7 @@
    "tab": "奥术",
    "name": "闪现术",
    "iconKey": "spell_arcane_blink",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -15715,6 +15867,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -15743,7 +15896,7 @@
    "tab": "奥术",
    "name": "唤醒",
    "iconKey": "spell_nature_purge",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -15755,6 +15908,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -15848,7 +16002,7 @@
    "tab": "奥术",
    "name": "传送：铁炉堡",
    "iconKey": "spell_arcane_teleportironforge",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -15860,6 +16014,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -15888,7 +16043,7 @@
    "tab": "奥术",
    "name": "传送：奥格瑞玛",
    "iconKey": "spell_arcane_teleportorgrimmar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -15900,6 +16055,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -15928,7 +16084,7 @@
    "tab": "奥术",
    "name": "传送：暴风城",
    "iconKey": "spell_arcane_teleportstormwind",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -15940,6 +16096,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -15968,7 +16125,7 @@
    "tab": "奥术",
    "name": "传送：幽暗城",
    "iconKey": "spell_arcane_teleportundercity",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -15980,6 +16137,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -16069,7 +16227,7 @@
    "tab": "奥术",
    "name": "法术反制",
    "iconKey": "spell_frost_iceshock",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "same",
    "stateTag": "same",
@@ -16081,6 +16239,7 @@
      "learnLevel": 24
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     24
@@ -16140,7 +16299,7 @@
    "tab": "奥术",
    "name": "制造魔法玛瑙",
    "iconKey": "inv_misc_gem_emerald_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 28,
    "state": "same",
    "stateTag": "same",
@@ -16152,6 +16311,7 @@
      "learnLevel": 28
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     28
@@ -16180,7 +16340,7 @@
    "tab": "奥术",
    "name": "传送：达纳苏斯",
    "iconKey": "spell_arcane_teleportdarnassus",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -16192,6 +16352,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -16220,7 +16381,7 @@
    "tab": "奥术",
    "name": "传送：雷霆崖",
    "iconKey": "spell_arcane_teleportthunderbluff",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -16232,6 +16393,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -16310,7 +16472,7 @@
    "tab": "奥术",
    "name": "制造魔法翡翠",
    "iconKey": "inv_misc_gem_emerald_02",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 38,
    "state": "same",
    "stateTag": "same",
@@ -16322,6 +16484,7 @@
      "learnLevel": 38
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     38
@@ -16350,7 +16513,7 @@
    "tab": "奥术",
    "name": "传送门：铁炉堡",
    "iconKey": "spell_arcane_portalironforge",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -16362,6 +16525,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -16390,7 +16554,7 @@
    "tab": "奥术",
    "name": "传送门：奥格瑞玛",
    "iconKey": "spell_arcane_portalorgrimmar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -16402,6 +16566,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -16430,7 +16595,7 @@
    "tab": "奥术",
    "name": "传送门：暴风城",
    "iconKey": "spell_arcane_portalstormwind",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -16442,6 +16607,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -16470,7 +16636,7 @@
    "tab": "奥术",
    "name": "传送门：幽暗城",
    "iconKey": "spell_arcane_portalundercity",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -16482,6 +16648,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -16510,7 +16677,7 @@
    "tab": "奥术",
    "name": "制造魔法黄水晶",
    "iconKey": "inv_misc_gem_opal_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 48,
    "state": "same",
    "stateTag": "same",
@@ -16522,6 +16689,7 @@
      "learnLevel": 48
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     48
@@ -16550,7 +16718,7 @@
    "tab": "奥术",
    "name": "传送门：达纳苏斯",
    "iconKey": "spell_arcane_portaldarnassus",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "same",
    "stateTag": "same",
@@ -16562,6 +16730,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -16590,7 +16759,7 @@
    "tab": "奥术",
    "name": "传送门：雷霆崖",
    "iconKey": "spell_arcane_portalthunderbluff",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "same",
    "stateTag": "same",
@@ -16602,6 +16771,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -16630,7 +16800,7 @@
    "tab": "奥术",
    "name": "传送：达拉然",
    "iconKey": "spell_arcane_teleporthalloftheguardian",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "new",
    "stateTag": "new",
@@ -16642,6 +16812,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -16670,7 +16841,7 @@
    "tab": "奥术",
    "name": "奥术光辉",
    "iconKey": "spell_holy_arcaneintellect",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 56,
    "state": "changed",
    "stateTag": "changed",
@@ -16682,6 +16853,7 @@
      "learnLevel": 56
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     56
@@ -16710,7 +16882,7 @@
    "tab": "奥术",
    "name": "制造魔法红宝石",
    "iconKey": "inv_misc_gem_ruby_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 58,
    "state": "same",
    "stateTag": "same",
@@ -16722,6 +16894,7 @@
      "learnLevel": 58
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     58
@@ -16750,7 +16923,7 @@
    "tab": "奥术",
    "name": "变形术：奶牛",
    "iconKey": "spell_nature_polymorph_cow",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "same",
    "stateTag": "same",
@@ -16762,6 +16935,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -17129,7 +17303,7 @@
    "tab": "火焰",
    "name": "炎爆术",
    "iconKey": "spell_fire_fireball02",
-   "ranks": 8,
+   "ranks": 7,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -17165,7 +17339,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 7,
+   "ranksAlt": 8,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -17272,7 +17448,7 @@
    "tab": "火焰",
    "name": "冲击波",
    "iconKey": "spell_holy_excorcism_02",
-   "ranks": 5,
+   "ranks": 4,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -17296,7 +17472,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 4,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -17380,7 +17558,7 @@
    "tab": "火焰",
    "name": "魔火",
    "iconKey": "spell_fire_fireball",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "same",
    "stateTag": "same",
@@ -17392,6 +17570,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -17975,7 +18154,7 @@
    "tab": "冰霜",
    "name": "寒冰护体",
    "iconKey": "spell_ice_lament",
-   "ranks": 4,
+   "ranks": 3,
    "learnLevel": 40,
    "state": null,
    "stateTag": null,
@@ -17995,7 +18174,9 @@
      "learnLevel": 58
     }
    ],
-   "ranksAlt": 3,
+   "ranksAlt": 4,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -18103,7 +18284,7 @@
    "tab": "理解",
    "name": "学习",
    "iconKey": "inv_misc_book_08",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 6,
    "state": "new",
    "stateTag": "new",
@@ -18112,6 +18293,7 @@
    "learnLevels": [
     6
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -18832,7 +19014,7 @@
    "tab": "痛苦",
    "name": "末日灾祸",
    "iconKey": "spell_shadow_auraofdarkness",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "renamed",
    "stateTag": "renamed",
@@ -18844,6 +19026,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -18991,7 +19174,7 @@
    "tab": "恶魔学识",
    "name": "召唤小鬼",
    "iconKey": "spell_shadow_summonimp",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": "same",
    "stateTag": "same",
@@ -19003,6 +19186,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     1
@@ -19091,7 +19275,7 @@
    "tab": "恶魔学识",
    "name": "召唤虚空行者",
    "iconKey": "spell_shadow_summonvoidwalker",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -19103,6 +19287,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -19201,7 +19386,7 @@
    "tab": "恶魔学识",
    "name": "魔息术",
    "iconKey": "spell_shadow_demonbreath",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 16,
    "state": "same",
    "stateTag": "same",
@@ -19213,6 +19398,7 @@
      "learnLevel": 16
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     16
@@ -19361,7 +19547,7 @@
    "tab": "恶魔学识",
    "name": "召唤仪式",
    "iconKey": "spell_shadow_twilight",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -19373,6 +19559,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -19401,7 +19588,7 @@
    "tab": "恶魔学识",
    "name": "召唤夜魔",
    "iconKey": "ability_warlock_incubus",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -19413,6 +19600,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -19441,7 +19629,7 @@
    "tab": "恶魔学识",
    "name": "召唤魅魔",
    "iconKey": "spell_shadow_summonsuccubus",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "same",
    "stateTag": "same",
@@ -19453,6 +19641,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -19481,7 +19670,7 @@
    "tab": "恶魔学识",
    "name": "基尔罗格之眼",
    "iconKey": "spell_shadow_evileye",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 22,
    "state": "same",
    "stateTag": "same",
@@ -19493,6 +19682,7 @@
      "learnLevel": 22
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     22
@@ -19521,7 +19711,7 @@
    "tab": "恶魔学识",
    "name": "感知恶魔",
    "iconKey": "spell_shadow_metamorphosis",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "same",
    "stateTag": "same",
@@ -19533,6 +19723,7 @@
      "learnLevel": 24
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     24
@@ -19761,7 +19952,7 @@
    "tab": "恶魔学识",
    "name": "召唤地狱猎犬",
    "iconKey": "spell_shadow_summonfelhunter",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "same",
    "stateTag": "same",
@@ -19773,6 +19964,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -19906,7 +20098,7 @@
    "tab": "恶魔学识",
    "name": "地狱火",
    "iconKey": "spell_shadow_summoninfernal",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 50,
    "state": "same",
    "stateTag": "same",
@@ -19918,6 +20110,7 @@
      "learnLevel": 50
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     50
@@ -19946,7 +20139,7 @@
    "tab": "恶魔学识",
    "name": "召唤传送门",
    "iconKey": "inv_misc_rune_10",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "new",
    "stateTag": "new",
@@ -19958,6 +20151,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -19986,7 +20180,7 @@
    "tab": "恶魔学识",
    "name": "末日仪式",
    "iconKey": "spell_shadow_antimagicshell",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "same",
    "stateTag": "same",
@@ -19998,6 +20192,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -20380,7 +20575,7 @@
    "tab": "毁灭",
    "name": "暗影灼烧",
    "iconKey": "spell_shadow_scourgebuild",
-   "ranks": 6,
+   "ranks": 5,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -20408,7 +20603,9 @@
      "learnLevel": 56
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 6,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -20443,7 +20640,7 @@
    "tab": "毁灭",
    "name": "燃烧",
    "iconKey": "spell_fire_fireball",
-   "ranks": 6,
+   "ranks": 5,
    "learnLevel": 25,
    "state": null,
    "stateTag": null,
@@ -20471,7 +20668,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 6,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -20652,7 +20851,7 @@
    "tab": "毁灭",
    "name": "浩劫灾祸",
    "iconKey": "ability_warlock_baneofhavoc",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 1,
    "state": null,
    "stateTag": null,
@@ -20664,6 +20863,7 @@
      "learnLevel": 1
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -20690,7 +20890,7 @@
    "tab": "坐骑",
    "name": "召唤地狱战马",
    "iconKey": "spell_nature_swiftness",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "changed",
    "stateTag": "changed",
@@ -20699,6 +20899,7 @@
    "learnLevels": [
     40
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -20718,7 +20919,7 @@
    "tab": "坐骑",
    "name": "召唤恐惧战马",
    "iconKey": "ability_mount_dreadsteed",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 60,
    "state": "changed",
    "stateTag": "changed",
@@ -20730,6 +20931,7 @@
      "learnLevel": 60
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     60
@@ -20973,7 +21175,7 @@
    "tab": "平衡",
    "name": "自然之握",
    "iconKey": "spell_nature_natureswrath",
-   "ranks": 6,
+   "ranks": 5,
    "learnLevel": 10,
    "state": null,
    "stateTag": null,
@@ -21001,7 +21203,9 @@
      "learnLevel": 58
     }
    ],
-   "ranksAlt": 5,
+   "ranksAlt": 6,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10,
@@ -21035,7 +21239,7 @@
    "tab": "平衡",
    "name": "传送：月光林地",
    "iconKey": "spell_arcane_teleportmoonglade",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "same",
    "stateTag": "same",
@@ -21047,6 +21251,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -21180,7 +21385,7 @@
    "tab": "平衡",
    "name": "清晰预兆",
    "iconKey": "spell_nature_crystalball",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -21189,6 +21394,7 @@
    "learnLevels": [
     20
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -21328,8 +21534,8 @@
    "tab": "平衡",
    "name": "虫群",
    "iconKey": "spell_nature_insectswarm",
-   "ranks": 5,
-   "learnLevel": 20,
+   "ranks": 4,
+   "learnLevel": 25,
    "state": null,
    "stateTag": null,
    "relation": "talent",
@@ -21352,7 +21558,9 @@
      "learnLevel": 60
     }
    ],
-   "ranksAlt": 4,
+   "ranksAlt": 5,
+   "ranksAltFrom": "wclbox",
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "learnLevels": [
@@ -21362,7 +21570,9 @@
     50,
     60
    ],
-   "learnAlt": 25,
+   "learnAlt": 20,
+   "learnAltFrom": "wclbox",
+   "learnFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -21437,7 +21647,7 @@
    "tab": "平衡",
    "name": "树皮术",
    "iconKey": "spell_nature_stoneclawtotem",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 44,
    "state": "changed",
    "stateTag": "changed",
@@ -21449,6 +21659,7 @@
      "learnLevel": 44
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     44
@@ -21502,7 +21713,7 @@
    "tab": "野性战斗",
    "name": "熊形态",
    "iconKey": "ability_racial_bearform",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "changed",
    "stateTag": "changed",
@@ -21514,6 +21725,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -21602,7 +21814,7 @@
    "tab": "野性战斗",
    "name": "低吼",
    "iconKey": "ability_physical_taunt",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 10,
    "state": "changed",
    "stateTag": "changed",
@@ -21614,6 +21826,7 @@
      "learnLevel": 10
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     10
@@ -21712,7 +21925,7 @@
    "tab": "野性战斗",
    "name": "狂怒",
    "iconKey": "ability_druid_enrage",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 12,
    "state": "changed",
    "stateTag": "changed",
@@ -21724,6 +21937,7 @@
      "learnLevel": 12
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     12
@@ -21802,7 +22016,7 @@
    "tab": "野性战斗",
    "name": "水栖形态",
    "iconKey": "ability_druid_aquaticform",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 16,
    "state": "same",
    "stateTag": "same",
@@ -21814,6 +22028,7 @@
      "learnLevel": 16
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     16
@@ -21902,7 +22117,7 @@
    "tab": "野性战斗",
    "name": "猎豹形态",
    "iconKey": "ability_druid_catform",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": "changed",
    "stateTag": "changed",
@@ -21914,6 +22129,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     20
@@ -22308,7 +22524,7 @@
    "tab": "野性战斗",
    "name": "挑战咆哮",
    "iconKey": "ability_druid_challangingroar",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 28,
    "state": "same",
    "stateTag": "same",
@@ -22320,6 +22536,7 @@
      "learnLevel": 28
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     28
@@ -22398,7 +22615,7 @@
    "tab": "野性战斗",
    "name": "旅行形态",
    "iconKey": "ability_druid_travelform",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 30,
    "state": "changed",
    "stateTag": "changed",
@@ -22410,6 +22627,7 @@
      "learnLevel": 30
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     30
@@ -22553,7 +22771,7 @@
    "tab": "野性战斗",
    "name": "追踪人型生物",
    "iconKey": "ability_tracking",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 32,
    "state": "same",
    "stateTag": "same",
@@ -22565,6 +22783,7 @@
      "learnLevel": 32
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     32
@@ -22593,7 +22812,7 @@
    "tab": "野性战斗",
    "name": "狂暴回复",
    "iconKey": "ability_bullrush",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 36,
    "state": "changed",
    "stateTag": "changed",
@@ -22605,6 +22824,7 @@
      "learnLevel": 36
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     36
@@ -22683,7 +22903,7 @@
    "tab": "野性战斗",
    "name": "巨熊形态",
    "iconKey": "ability_racial_bearform",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "changed",
    "stateTag": "changed",
@@ -22695,6 +22915,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40
@@ -22723,7 +22944,7 @@
    "tab": "野性战斗",
    "name": "豹之优雅",
    "iconKey": "inv_feather_01",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -22732,6 +22953,7 @@
    "learnLevels": [
     40
    ],
+   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
@@ -22801,7 +23023,7 @@
    "tab": "野性战斗",
    "name": "野性冲锋",
    "iconKey": "ability_hunter_pet_bear",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 20,
    "state": null,
    "stateTag": null,
@@ -22813,6 +23035,7 @@
      "learnLevel": 20
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "talentGated": true,
    "provenance": [
@@ -23273,7 +23496,7 @@
    "tab": "恢复",
    "name": "消毒术",
    "iconKey": "spell_nature_nullifypoison",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 14,
    "state": "same",
    "stateTag": "same",
@@ -23285,6 +23508,7 @@
      "learnLevel": 14
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     14
@@ -23373,7 +23597,7 @@
    "tab": "恢复",
    "name": "解除诅咒",
    "iconKey": "spell_holy_removecurse",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 24,
    "state": "changed",
    "stateTag": "changed",
@@ -23385,6 +23609,7 @@
      "learnLevel": 24
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     24
@@ -23413,7 +23638,7 @@
    "tab": "恢复",
    "name": "驱毒术",
    "iconKey": "spell_nature_nullifypoison_02",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 26,
    "state": "same",
    "stateTag": "same",
@@ -23425,6 +23650,7 @@
      "learnLevel": 26
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     26
@@ -23508,7 +23734,7 @@
    "tab": "恢复",
    "name": "激活",
    "iconKey": "spell_nature_lightning",
-   "ranks": null,
+   "ranks": 1,
    "learnLevel": 40,
    "state": "same",
    "stateTag": "same",
@@ -23520,6 +23746,7 @@
      "learnLevel": 40
     }
    ],
+   "ranksFrom": "gi",
    "auto": false,
    "learnLevels": [
     40

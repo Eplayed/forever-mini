@@ -8,9 +8,12 @@
 #   **都不给名字定档**，只用来回填 spellId 与每级学习等级这类数值。
 #   插件描述字段（d/dz）在抽取阶段就没落盘，这里也拿不到。
 #
-# 两源分歧怎么办：等级数（ranks）与起学等级（learnLevel）如果参考站与插件对不上，
-# 主字段照参考站（定名与状态的口径来源），另一说留在 ranksAlt / learnAlt + altFrom，
-# 两个都不丢——红线的原话是"两源分歧两个都留"。
+# 两源分歧怎么办（2026-10-20 站主改口）：等级数（ranks）与起学等级（learnLevel）
+# 参考站与插件对不上时，**主字段取插件**（GI 行数为先，其次 XR 的每级学习列表），
+# 参考站那一说挪进 ranksAlt / learnAlt + *AltFrom 留档不删。
+# 改这条的代价要认：数值侧从"参考站自报"变成"插件自报"，两边都不是我们进游戏测的，
+# 所以这两类字段仍是 L0 名称 + 待实测数值，界面上不再摆"两个说法没对上"那句
+# （站主 2026-10-20 决定：玩家看的页面只给一个数，分歧记录留在数据与溯源页）。
 # 同名不同职业是常态（联盟/部落各有同名法术），所以**按 (职业, 名字) 而不是名字做键**。
 #
 # 幂等：排序固定、缩进固定，重跑字节一致。
@@ -85,9 +88,18 @@ def main():
                             for r in g), key=lambda x: (x['learnLevel'] is None, x['learnLevel']))
             rec['spellRanks'] = ranks
             counts['withId'] += 1
-            if rec['ranks'] and len(ranks) != rec['ranks']:
-                rec['ranksAlt'] = len(ranks)
+            # 2026-10-20 站主改口：数值以插件为准。所以 GI 的行数**顶掉**参考站那个数，
+            # 参考站那一说不删、挪进 ranksAlt 留档（build-data.js 仍卡"两说相同"这种假分歧）。
+            gi_ranks = len(ranks)
+            if gi_ranks and rec['ranks'] and rec['ranks'] != gi_ranks:
+                rec['ranksAlt'] = rec['ranks']
+                rec['ranksAltFrom'] = 'wclbox'
+                rec['ranks'] = gi_ranks
+                rec['ranksFrom'] = 'gi'
                 counts['ranksAlt'] += 1
+            elif gi_ranks and not rec['ranks']:
+                rec['ranks'] = gi_ranks
+                rec['ranksFrom'] = 'gi'
             flags = {('auto', str(r.get('auto')) == 'true') for r in g if r.get('auto') is not None}
             if len(flags) == 1:
                 rec['auto'] = list(flags)[0][1]
@@ -99,15 +111,30 @@ def main():
             if lv:
                 rec['learnLevels'] = lv
                 counts['withLevels'] += 1
-                # 分歧留档：参考站的"共N级 / X级起可学"对 XR 的每级学习列表
-                if rec['ranks'] and len(lv) != rec['ranks'] and 'ranksAlt' not in rec:
-                    rec['ranksAlt'] = len(lv)
-                    rec['ranksAltFrom'] = 'xr'
-                    counts['ranksAlt'] += 1
+                # 同上：XR 的每级学习列表顶掉参考站的"共 N 级 / X 级起可学"，旧值挪进 *Alt 留档。
+                # GI 已经定过 ranks 就不再动（取值顺序 GI > XR，与物品详情那条一致）。
+                xr_ranks = len(lv)
+                if xr_ranks and 'ranksFrom' not in rec:
+                    if rec['ranks'] and rec['ranks'] != xr_ranks:
+                        rec['ranksAlt'] = rec['ranks']
+                        rec['ranksAltFrom'] = 'wclbox'
+                        rec['ranks'] = xr_ranks
+                        rec['ranksFrom'] = 'xr'
+                        counts['ranksAlt'] += 1
+                    elif not rec['ranks']:
+                        rec['ranks'] = xr_ranks
+                        rec['ranksFrom'] = 'xr'
                 lo = min(lv)
-                if rec['learnLevel'] and lo != rec['learnLevel']:
-                    rec['learnAlt'] = lo
-                    counts['learnAlt'] += 1
+                if lo and 'learnFrom' not in rec:
+                    if rec['learnLevel'] and rec['learnLevel'] != lo:
+                        rec['learnAlt'] = rec['learnLevel']
+                        rec['learnAltFrom'] = 'wclbox'
+                        rec['learnLevel'] = lo
+                        rec['learnFrom'] = 'xr'
+                        counts['learnAlt'] += 1
+                    elif not rec['learnLevel']:
+                        rec['learnLevel'] = lo
+                        rec['learnFrom'] = 'xr'
         if not g and not x:
             counts['noPluginMatch'] += 1
         # 每条挂自己那一页的真地址（抓取时已写进 upstream 的 url）。
@@ -131,7 +158,8 @@ def main():
             'kind': 'spellbook',
             'method': 'tools/merge-spells.py 合三份 upstream：wclbox-spells.json（定名与状态，客户端解包转述）'
                       '+ gi-spells.json（spellId / 自动或天赋自带）+ xr-skills.json（每级学习等级）。'
-                      '两份插件的描述字段在抽取阶段就没落盘；等级数与起学等级两边不一致的两个都留（ranksAlt / learnAlt）。',
+                      '两份插件的描述字段在抽取阶段就没落盘；等级数与起学等级两边不一致时主字段取插件'
+                      '（GI 先行、其次 XR），参考站那一说留在 ranksAlt / learnAlt + *AltFrom 不删。',
             'pageNote': '法术书按无限测试版客户端读出，与经典旧世逐条对照状态；'
                         '等级数与起学等级另按两份职业技能表交叉核对过，两边说法不一样的两条都留着。',
             'counts': {'total': len(spells), 'byClass': by_class,

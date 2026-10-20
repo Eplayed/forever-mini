@@ -15,7 +15,10 @@
           <span class="hicon"><img :src="HEAD_ART" alt="" loading="lazy"></span>
           <h1 class="pt">副本手册</h1>
         </div>
-        <p class="dim">共 {{ all.length }} 座：{{ newN }} 座无限新增、{{ clN }} 座经典本、{{ raids.length }} 座团本，按十级一档分。一次几人取自客户端的队伍查找器（{{ nParty }} 座有数）。另有 {{ nTwo }} 座的一次几人或英文原名有两种说法，两个数都留着，不做取舍。等级区间一座只给一个数，其中 {{ nSettled }} 座按参考站的副本卡片定过稿。掉落只回答"谁掉了什么"，不写概率。</p>
+        <!-- 2026-10-20 站主决定：内容页只给一个数。原来那句"另有 N 座有两种说法，两个数都留着"撤掉；
+             一次几人取自客户端队伍查找器那一条（就是显示的这个），另一说留在 partySizeAlt，
+             英文原名同理留在 nameEnClient——两条都在数据里没删，要看到溯源页。 -->
+        <p class="dim">共 {{ all.length }} 座：{{ newN }} 座无限新增、{{ clN }} 座经典本、{{ raids.length }} 座团本，按十级一档分。一次几人取自客户端的队伍查找器（{{ nParty }} 座有数）。等级区间一座只给一个数，其中 {{ nSettled }} 座按参考站的副本卡片定过稿。掉落只回答"谁掉了什么"，不写概率。</p>
         <div class="four dunstat">
           <div><s>地下城</s><b>{{ newN + clN }}</b><s>座</s></div>
           <div><s>无限新增</s><b>{{ newN }}</b><s>座</s></div>
@@ -355,7 +358,7 @@ const raidCards = computed(() => raids.value.map((x) => decorated.value[x.id]).f
 const nb = computed(() => all.value.reduce((s, x) => s + (x.bosses || []).length, 0));
 const nd = computed(() => all.value.reduce((s, x) => s + (x.drops || []).length, 0));
 const nParty = computed(() => all.value.filter((x) => x.partySize).length);
-const nTwo = computed(() => all.value.filter((x) => x.partySizeAlt || x.nameEnClient).length);
+// nTwo 撤下：这两类的条数改由溯源页现算（altCounts），内容页不再摆那一句"两种说法都留着"
 const nSettled = computed(() => all.value.filter((x) => x.levelRangeOfficial).length);
 const newN = computed(() => ((D.value || {}).newDungeons || []).length);
 const clN = computed(() => ((D.value || {}).classicDungeons || []).length);

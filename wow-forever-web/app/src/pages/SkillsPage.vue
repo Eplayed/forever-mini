@@ -55,10 +55,11 @@
               <td class="c-ico"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.name" /></td>
               <td><span class="nm"><HlText :text="x.name" :q="q" /></span>
                 <span v-if="x.relation" class="sub">{{ SP_REL[x.relation] || x.relation }}</span></td>
-              <td class="c-num num">{{ x.ranks ? x.ranks + ' 级' : '' }}
-                <span v-if="x.ranksAlt" class="conf">级数有两个说法：{{ x.ranks }} / {{ x.ranksAlt }}，还没实测</span></td>
-              <td class="c-num2 num">{{ x.learnLevel ? x.learnLevel + ' 级起' : '' }}
-                <span v-if="x.learnAlt" class="conf">起学等级有两个说法：{{ x.learnLevel }} / {{ x.learnAlt }}，还没实测</span></td>
+              <!-- 2026-10-20 站主决定：这一页只给一个数。等级数与起学等级分歧时主字段已改取插件值
+                   （merge-spells.py：GI 行数先行、其次 XR 的每级学习列表），
+                   参考站那一说留在 ranksAlt / learnAlt 里没删，分歧记录在溯源页看。 -->
+              <td class="c-num num">{{ x.ranks ? x.ranks + ' 级' : '' }}</td>
+              <td class="c-num2 num">{{ x.learnLevel ? x.learnLevel + ' 级起' : '' }}</td>
               <td class="w-tail"><span v-if="x.state" class="chip-st" :class="x.state">{{ SP_STATE[x.state] || x.state }}</span></td>
             </tr>
           </tbody>

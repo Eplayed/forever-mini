@@ -126,6 +126,22 @@
       </template>
     </div>
 
+    <!-- 2026-10-20 站主决定：玩家看的页面只给一个数，"两份说法还没对上"那类红字从内容页撤走。
+         撤走不等于丢掉——分歧还得有人看得见，所以集中到这一页。
+         条数全部从成品数据现算（ranksAlt / learnAlt / partySizeAlt / nameEnClient / xpAlt 都留在原处没删），
+         这里一个数都不手抄，免得数据变了这一页还在说旧话。 -->
+    <div class="card">
+      <h2>两份说法怎么处置的</h2>
+      <p class="dim">同一件事两份资料给两个值时，内容页只显示一个：数值类按最新插件的数（属性 GI 先行、其次 XR），
+        任务经验值按参考站优先、缺则另一份客户端资料。另一说留在数据里没删，条数如下。</p>
+      <ul class="list"><li v-for="x in altCounts" :key="x.k">{{ x.label }}：{{ x.n }} 条</li></ul>
+      <template v-for="cf in raceConf" :key="cf.id">
+        <h3 style="margin-top:var(--s4)">{{ cf.topic }}（{{ cf.level }}）</h3>
+        <p class="dim">说法一：{{ cf.a.saying }}<br>说法二：{{ cf.b.saying }}</p>
+        <p class="dim">{{ cf.handling }}</p>
+      </template>
+    </div>
+
     <div class="card">
       <h2>发布前的检查规则</h2>
       <ul><li v-for="(x, i) in rules" :key="i">{{ x }}</li></ul>
@@ -180,11 +196,14 @@ function boot() {
     load('data/dungeons.json').catch(() => ({})),
     load('data/dungeon-quests.json').catch(() => ({})),
     load('data/dungeon-geo.json').catch(() => ({})),
-    load('data/art.json').catch(() => ({}))])
+    load('data/art.json').catch(() => ({})),
+    load('data/races.json').catch(() => ({})),
+    load('data/spells.json').catch(() => ({}))])
     .then((r) => {
       d.value = { meta: r[0] || {}, method: r[1] || {}, scale: (r[2] || {}).scale || {},
         RS: (r[3] || {}).meta || {}, QS: (r[4] || {}).meta || {}, GEO: (r[5] || {}).meta || {},
-        ART: (r[6] || {}).meta || {} };
+        ART: (r[6] || {}).meta || {}, DUN: r[3] || {}, RC: r[7] || {},
+        SP: (r[8] || {}).spells || [] };
     })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
@@ -198,6 +217,22 @@ const QS = computed(() => d.value.QS);
 const GEO = computed(() => d.value.GEO);
 // 插件目录转存的素材名单（art.json.meta.addonFiles，由 fetch-art.py 从 manifest 现算）
 const addonArt = computed(() => ((d.value || {}).ART || {}).addonFiles || []);
+/* 分歧条数一律现算，不手抄：数据变了这一页跟着变，抄死的数字迟早说旧话。
+   副本那三张表（新增 / 经典 / 团本）要合起来数，只数一张会漏。 */
+const altCounts = computed(() => {
+  const dd = d.value || {};
+  const dun = [].concat(dd.DUN.newDungeons || [], dd.DUN.classicDungeons || [], dd.DUN.raids || []);
+  const sp = dd.SP || [];
+  const out = [
+    { k: 'ranks', label: '技能等级数有两说', n: sp.filter((x) => x.ranksAlt).length },
+    { k: 'learn', label: '起学等级有两说', n: sp.filter((x) => x.learnAlt).length },
+    { k: 'party', label: '一次几人有两说', n: dun.filter((x) => x.partySizeAlt).length },
+    { k: 'nameEn', label: '英文原名有两说', n: dun.filter((x) => x.nameEnClient).length },
+    { k: 'xp', label: '任务经验值有两说', n: ((dd.QS || {}).counts || {}).xpConflict || 0 }
+  ];
+  return out.filter((x) => x.n > 0);
+});
+const raceConf = computed(() => ((d.value || {}).RC || {}).conflicts || []);
 const openQuestions = computed(() => d.value.meta.openQuestions || []);
 const rules = computed(() => d.value.meta.rules || []);
 

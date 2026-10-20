@@ -29,11 +29,17 @@ PUB = os.path.join(ROOT, "app", "public")
 # 顶层要搬的目录与文件（favicon 类是 index.html 直接引用的）
 DIRS = ["data", "img"]
 FILES = ["favicon.ico", "apple-touch-icon.png", "img/favicon.svg"]
-# 明确不搬的子目录（相对 src/）。src/data/upstream/ 是第三方站与插件的原料快照，
-# 只在本机参与合并，不发公网——2026-10-20 Q05 第一次跑打包卡口才抓到：
-# 这 54 份一直跟着 data/ 整目录被复制进 public/ 再进 dist/，等于把加工原料一起上线。
+# 明确不搬的子目录与文件（相对 src/）。
+# ① src/data/upstream/ 是第三方站与插件的原料快照，只在本机参与合并，不发公网——
+#    2026-10-20 Q05 第一次跑打包卡口才抓到：这 54 份一直跟着 data/ 整目录被复制进
+#    public/ 再进 dist/，等于把加工原料一起上线。
+# ② 三份 img/**/manifest.json 是我们的**加工台账**（每张图的抓取地址、哈希、日期，
+#    还有天裔那张的插件目录路径），不是页面运行时要读的东西——运行读的是 data/art.json 与
+#    data/icons.json。台账留在 src/（进 git，出问题能回查），不上公网：
+#    把 394 条抓取源清单原样发出去，等于把自己的加工过程交给同行。
 # 列在这里之后它们会被 --check 判成孤儿、--prune 删掉，构建链不会再带上它们。
-EXCLUDE = ["data/upstream"]
+EXCLUDE = ["data/upstream", "img/art/manifest.json", "img/gen/manifest.json",
+           "img/icons/manifest.json", "img/art/dungeonmaps/manifest.json"]
 
 
 def excluded(rel):
@@ -75,6 +81,8 @@ def main():
             for fn in files:
                 if fn.endswith(".pyc") or fn.startswith("."):
                     continue
+                if excluded(os.path.join(rel, fn)):
+                    continue           # 单个文件级排除（img/**/manifest.json 这类台账）
                 sp = os.path.join(dirpath, fn)
                 dp = os.path.join(dst_dir, fn)
                 if need_copy(sp, dp):
@@ -114,6 +122,8 @@ def main():
             for fn in files:
                 if fn.endswith(".pyc") or fn.startswith("."):
                     continue
+                if excluded(os.path.join(rel, fn)):
+                    continue           # 排除掉的不算"应该有"，于是它们在 public 里的副本会被判成孤儿
                 want.add(os.path.join("public", os.path.relpath(os.path.join(dirpath, fn), SRC)))
     for rel in FILES:
         if os.path.exists(os.path.join(SRC, rel)):

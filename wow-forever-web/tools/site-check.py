@@ -493,14 +493,31 @@ def test_spellbook(browser, base):
               "%d 组 / 期望 %d" % (page.evaluate(GRPS % ("#sptbl", "#sptbl")), sp_groups))
         check("%s 读数写着条数" % label,
               str(S["spells"]) in page.evaluate("() => document.getElementById('spcnt').textContent"))
-        check("%s 两说的行两个数都摆着" % label,
-              page.evaluate("() => document.querySelectorAll('#sptbl .conf').length") == n_alt,
-              "%d 处 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .conf').length"), n_alt))
-        cell = page.evaluate(r"""() => {
-          const td = [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h) td')];
-          return td.filter(x => x.innerText.includes('有两个说法') && !/\d+\s*\/\s*\d+/.test(x.innerText)).length;
-        }""")
-        check("%s 两说那一行确实摆着两个数" % label, cell == 0, "%d 处只有一个数" % cell)
+        if label == u"新站":
+            # 2026-10-20 站主决定：新站内容页只给一个数（数值类以插件为准），
+            # "两个说法都摆着"那类红字撤到溯源页。旧站已冻结、行为照旧，所以这条只对新站成立。
+            nconf = page.evaluate("() => document.querySelectorAll('#sptbl .conf').length")
+            check("新站 法术书不摆两说红字（数据里 %d 条分歧留在字段与溯源页）" % n_alt, nconf == 0,
+                  "%d 处（应 0）" % nconf)
+            # 判据按数据来，不是"每行都得有级数"——数据里就有 13 条本来没给级数，
+            # 上一版我写成"每行都要匹配 N 级"，那是断言在描述我的想象。
+            n_rank = len([x for x in sp if x.get("ranks")])
+            shown = page.evaluate(r"""() => {
+              const td = [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h) td')];
+              return { rank: td.filter(x => /^\s*\d+ 级\s*$/.test(x.innerText)).length,
+                       both: td.filter(x => /\d+\s*\/\s*\d+/.test(x.innerText)).length }; }""")
+            check("新站 级数那一格显示几个数由数据定（%d 条有级数），且全页没有 N / M 双数写法" % n_rank,
+                  shown["rank"] == n_rank and shown["both"] == 0,
+                  "%d 格有级数 / %d 格双数" % (shown["rank"], shown["both"]))
+        else:
+            check("%s 两说的行两个数都摆着" % label,
+                  page.evaluate("() => document.querySelectorAll('#sptbl .conf').length") == n_alt,
+                  "%d 处 / 数据 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl .conf').length"), n_alt))
+            cell = page.evaluate(r"""() => {
+              const td = [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h) td')];
+              return td.filter(x => x.innerText.includes('有两个说法') && !/\d+\s*\/\s*\d+/.test(x.innerText)).length;
+            }""")
+            check("%s 两说那一行确实摆着两个数" % label, cell == 0, "%d 处只有一个数" % cell)
         long_txt = page.evaluate(r"""() => [...document.querySelectorAll('#sptbl tbody tr:not(.grp2h)')].map(tr =>
           [...tr.children].reduce((a, td) => Math.max(a, td.innerText.replace(/\n/g, ' ').length), 0))""")
         check("%s 法术书每格都是短取值，没有描述正文" % label,

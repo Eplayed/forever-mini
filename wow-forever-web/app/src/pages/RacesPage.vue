@@ -113,10 +113,10 @@
           </tbody>
         </table>
       </div>
-      <!-- 这一行不是"备注文案"，是红线要求的两源分歧标注：矩阵给一套数、官方导语给另一套说法，
-           两个都留着并写清本站怎么处置。缺了它，页面就等于替玩家挑了一个说法。
-           跟在后面的分级徽标与来源按钮按 2026-10-12 站主决定已撤，出处集中在溯源页。 -->
-      <p v-for="cf in confs" :key="cf.id" class="conf">{{ cf.topic }}——{{ cf.a.saying }}{{ cf.b.saying }}{{ cf.handling }}</p>
+      <!-- 2026-10-20 站主决定：这一页只给一套数（矩阵表：天裔部落 5 / 联盟 5），
+           原来跟在这段位置的"两份说法还没对上"红字撤掉。
+           上面那句官方导语是 L0 原文引用、不是分歧标注，留着；
+           分歧本身与"两个都留"的处置挪到溯源页（races.json.conflicts 没删）。 -->
     </div>
 
     <div class="card">
@@ -195,7 +195,6 @@ const CITY = computed(() => ART.value.factionCities || {});
 const CNAME = computed(() => { const m = {}; classes.value.forEach((c) => { m[c.id] = c.cn; }); return m; });
 const CTILE = computed(() => { const m = {}; classes.value.forEach((c) => { m[c.id] = c.iconKey || null; }); return m; });
 const cols = computed(() => ((R.value && R.value.classOrder) || []).filter((id) => CNAME.value[id]));
-const confs = computed(() => (R.value && R.value.conflicts) || []);
 
 // 深链 #race=horde-orc：阵营 + 种族 id
 function keyOf(x) { return x.faction + '-' + x.id; }

@@ -32,7 +32,14 @@ export const NAV = [
     { file: 'rank.html', t: '排行', d: '本站资料完整度排序，不是强度（仅网页）' }] }
 ];
 
-const LEGACY = (import.meta.env.VITE_LEGACY_BASE || '/');
+/* 旧站那一层的地址基准。
+   原来默认是 '/'（主机根），那是"新旧站同源、旧站在根目录"这一种部署法。
+   2026-10-20 真发到 GitHub Pages 才发现第二种：项目站挂在 /<仓库名>/ 下，
+   '/' 会把人甩到主机根（eplayed.github.io/index.html），服务器直接回 GitHub 的
+   "Site not found" —— 也就是点了个错地址就离开本站。
+   所以默认改成跟构建产物同一个基准（BASE_URL，vite base 现在是 './'），
+   挂根目录与挂子目录都成立；开发期仍用 .env.development 指到 :8817 那个旧站。 */
+const LEGACY = (import.meta.env.VITE_LEGACY_BASE || import.meta.env.BASE_URL || './');
 
 export function legacyUrl(file) {
   const clean = String(file || '').replace(/^\/+/, '');

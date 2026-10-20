@@ -7,16 +7,22 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { NAV, legacyUrl } from '../lib/nav.js';
+import { useRoute, useRouter } from 'vue-router';
+import { MIGRATED } from '../router.js';
 
-/* 还没迁到新站的地址不摆"迁移中"的告示牌——那是在跟用户解释我们的工程进度，不是他要看的东西。
-   认得出的页直接送到有内容的那一份；认不出的回首页。 */
-const FILES = NAV.reduce((a, g) => a.concat(g.file ? [g.file] : (g.items || []).map((it) => it.file)), []);
-
+/* 认得出的旧文件名（races.html 这种）直接送到它在新站的那一页，认不出的回首页。
+   两条都走 router.replace，**留在站内**：以前这里是 window.location.replace(legacyUrl(...))，
+   在"旧站同源挂根目录"那种部署法下没问题，2026-10-20 发到 GitHub Pages 的 /<仓库名>/ 之后
+   它把人甩到了主机根，服务器回一页 GitHub 的 "Site not found"——点了错地址等于离开本站。
+   这一页存在的意义是"别给玩家看空白页"，不是"把玩家送去旧站"。 */
 const route = useRoute();
-const want = String(route.params.all || '') + '.html';
-const target = computed(() => legacyUrl(FILES.indexOf(want) >= 0 ? want : 'index.html'));
+const router = useRouter();
+// catch-all 抓到的就是整段路径：#/races.html 时 params.all 已经是 "races.html"，
+// 再拼一次 .html 就永远查不到（老代码正是这么写的，所以这条分支从来没生效过）。
+const raw = String(route.params.all || '');
+const want = /\.html$/i.test(raw) ? raw : raw + '.html';
+const to = MIGRATED[want] || '/';
+const target = computed(() => '#' + to);
 
-onMounted(() => { window.location.replace(target.value); });
+onMounted(() => { router.replace(to); });
 </script>

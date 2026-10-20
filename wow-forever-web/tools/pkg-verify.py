@@ -54,19 +54,34 @@ def serve(dirpath):
     return "http://127.0.0.1:%d" % httpd.server_address[1], httpd
 
 
-def head(url):
-    import urllib.request
-    try:
-        with urllib.request.urlopen(url) as r:
-            return r.status, r.headers.get("Content-Type", "")
-    except Exception as e:                      # noqa: BLE001
-        code = getattr(e, "code", None)
-        return (code or 0), getattr(e, "reason", str(e))[:40]
+def head(url, tries=2):
+    """状态码 + Content-Type。
+    打远端（HTTPS）时 python 自带的 urllib 在这台机器上过不了证书校验（本机实测，
+    与 2026-10 那次抓 DD373 同一现象），所以一律走 curl——它用系统信任库。
+    远端的 404 也慢：GitHub Pages 要渲染它自己的 404 页，实测一条不存在的 .jpg 用了 26 秒，
+    所以超时给到 60 秒并允许重试一次；不然"缺文件必须 404"这条会因为超时假红。"""
+    import subprocess
+    last = (0, "")
+    for _ in range(tries):
+        r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code} %{content_type}",
+                            "--max-time", "60", url], stdout=subprocess.PIPE)
+        if r.returncode != 0:
+            last = (0, "curl rc=%d" % r.returncode)
+            continue
+        parts = (r.stdout or b"").decode("utf-8", "replace").split(" ", 1)
+        try:
+            return int(parts[0]), (parts[1] if len(parts) > 1 else "").strip()
+        except ValueError:
+            last = (0, parts[0])
+    return last
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", default=None, help="要验收的目录（默认取 release/latest.json 指的那一版）")
+    ap.add_argument("--live", default=None,
+                    help="线上地址（如 https://x.github.io/repo/）：给了它就不起本机服务，"
+                         "所有判据打真远端；子路径那几条跳过（远端挂哪由托管方定）")
     a = ap.parse_args()
     if not a.site:
         latest = os.path.join(ROOT, "release", "latest.json")
@@ -80,24 +95,34 @@ def main():
     print("验收产物：%s" % site)
     os.makedirs(SHOT_DIR, exist_ok=True)
 
-    # 挂两种：根目录、子路径 /wow/（用软链，不复制 28 MB）
+    # 本机跑：挂两种（根目录 + 子路径 /wow/，软链不复制 28 MB）。
+    # --live：不起服务，判据全打远端；子路径那几条跳过（挂在哪儿由托管方定，不是我们能在这台机器上验的）。
     import tempfile
-    parent = tempfile.mkdtemp(prefix="pkgverify-")
-    os.symlink(site, os.path.join(parent, "wow"))
-    base_root, s1 = serve(site)
-    base_sub, s2 = serve(parent)
-    print("根目录挂载 %s / 子路径挂载 %s/wow/" % (base_root, base_sub))
+    parent = None
+    s1 = s2 = None
+    if a.live:
+        base_root = a.live.rstrip("/")
+        base_sub = None
+        print("线上验收：%s（本机服务不起，子路径用例跳过）" % base_root)
+    else:
+        parent = tempfile.mkdtemp(prefix="pkgverify-")
+        os.symlink(site, os.path.join(parent, "wow"))
+        base_root, s1 = serve(site)
+        base_sub, s2 = serve(parent)
+        print("根目录挂载 %s / 子路径挂载 %s/wow/" % (base_root, base_sub))
 
     print("\n[A] 资源类型与缺文件（无兜底的静态服务器）")
     st, ct = head(base_root + "/")
-    check("根目录 / 与 /wow/ 都回 200 text/html", st == 200 and "html" in ct, "%s %s" % (st, ct))
-    st2, ct2 = head(base_sub + "/wow/")
-    check("子路径 /wow/ 同样 200 text/html", st2 == 200 and "html" in ct2, "%s %s" % (st2, ct2))
+    check("首页 / 回 200 text/html", st == 200 and "html" in ct, "%s %s" % (st, ct))
+    if base_sub:
+        st2, ct2 = head(base_sub + "/wow/")
+        check("子路径 /wow/ 同样 200 text/html", st2 == 200 and "html" in ct2, "%s %s" % (st2, ct2))
     html = open(os.path.join(site, "index.html"), encoding="utf-8").read()
     refs = [r for r in re.findall(r'(?:src|href)="([^"]+)"', html) if not r.startswith(("http", "data:"))]
-    TYPES = {".js": "javascript", ".css": "text/css", ".svg": "image/svg", ".png": "image/png",
-             ".ico": "x-icon", ".woff2": "font", ".webp": "image/webp", ".jpg": "image/jpeg",
-             ".html": "text/html"}
+    TYPES = {".js": ("javascript",), ".css": ("text/css",), ".svg": ("image/svg",),
+             ".png": ("image/png",), ".ico": ("x-icon", "image/vnd.microsoft.icon"),
+             ".woff2": ("font",), ".webp": ("image/webp",), ".jpg": ("image/jpeg",),
+             ".html": ("text/html",)}
     bad = []
     for r in refs:
         rel = r.lstrip("./")
@@ -105,8 +130,8 @@ def main():
             continue
         s, c = head(base_root + "/" + rel)
         ext = os.path.splitext(rel)[1].lower()
-        want = TYPES.get(ext)
-        if s != 200 or (want and want not in c):
+        wants = TYPES.get(ext)
+        if s != 200 or (wants and not any(w in c for w in wants)):
             bad.append("%s → %s %s" % (rel, s, c))
     check("index.html 引用的每个本地资源都在、类型正确（不是 200 HTML 兜底）", not bad,
           "; ".join(bad[:3]) or "%d 个" % len(refs))
@@ -115,8 +140,9 @@ def main():
     s, c = head(base_root + "/img/icons/inv_misc_questionmark.jpg")
     check("存在的图标是 image/jpeg", s == 200 and "jpeg" in c, "%s %s" % (s, c))
     s, c = head(base_root + "/img/icons/definitely_not_a_real_icon.jpg")
-    check("缺的 .jpg 必须 404，不许被 200 HTML 冒充（preview 会假绿）", s == 404 and "html" not in c,
-          "%s %s" % (s, c))
+    # 判据是"状态码必须是 404"，不是"404 的正文不能是 HTML"——托管方的 404 页本来就是 HTML
+    # （GitHub Pages 实测回 404 + text/html）。要防的是另一种：缺文件被兜底成 **200** HTML。
+    check("缺的 .jpg 必须 404，不许被 200 HTML 冒充（preview 会假绿）", s == 404, "%s %s" % (s, c))
     s, c = head(base_root + "/data/upstream/anything.json")
     check("upstream 原料不在包里（请求它得 404）", s == 404, "%s" % s)
 
@@ -149,6 +175,16 @@ def main():
             pg.on("pageerror", lambda e: errs.append(str(e)[:100]))
             pg.goto(base + url_hash, wait_until="networkidle")
             pg.wait_for_timeout(2500)
+            if a.live:
+                # 真远端首屏慢（实测 GitHub Pages 冷路径一条请求 6–10 秒），固定等 2.5 秒
+                # 会把"还没渲染完"误判成"渲染不出来"。等到 #main 有字为止，最多 25 秒。
+                try:
+                    pg.wait_for_function(
+                        "() => { const m = document.querySelector('#main');"
+                        "return m && (m.innerText || '').length > 200; }", timeout=25000)
+                except Exception:               # noqa: BLE001
+                    pass                        # 等不到也让下面的断言去判，并如实报字数
+                pg.wait_for_timeout(800)
             pg.on("close", lambda _p, c=ctx: c.close())
             return pg, fails, errs
 
@@ -172,14 +208,15 @@ def main():
         check("刷新后仍是同一页且内容不丢（hash 路由不依赖托管方 rewrite）", n2 == n and n2 >= 2,
               "%d → %d" % (n, n2))
         pg.close()
-        # 3) 子路径挂载：同一份包挂到 /wow/ 下也要能开（base 相对路径的验收点）
-        pg, fails, errs = open_url(base_sub, "/wow/#/world")
-        n3 = pg.evaluate("() => document.querySelectorAll('#main .zonecard, #main .card').length")
-        check("挂到子路径 /wow/ 下 #/world 同样渲染（数据与图标都按相对路径取到）",
-              n3 == n and not errs, "%d 个卡片 / 报错 %s" % (n3, errs[:1]))
-        check("子路径挂载没有失败请求", not fails, "; ".join(fails[:3]) or "干净")
-        pg.screenshot(path=os.path.join(SHOT_DIR, "q05-subpath-world.png"))
-        pg.close()
+        # 3) 子路径挂载：同一份包挂到 /wow/ 下也要能开（base 相对路径的验收点）。--live 时跳过。
+        if base_sub:
+            pg, fails, errs = open_url(base_sub, "/wow/#/world")
+            n3 = pg.evaluate("() => document.querySelectorAll('#main .zonecard, #main .card').length")
+            check("挂到子路径 /wow/ 下 #/world 同样渲染（数据与图标都按相对路径取到）",
+                  n3 == n and not errs, "%d 个卡片 / 报错 %s" % (n3, errs[:1]))
+            check("子路径挂载没有失败请求", not fails, "; ".join(fails[:3]) or "干净")
+            pg.screenshot(path=os.path.join(SHOT_DIR, "q05-subpath-world.png"))
+            pg.close()
         # 4) 分享链接：新上下文、直接给完整地址（别人在群里点开的样子）
         pg, fails, errs = open_url(base_root, "/#/dungeon?d=scholomance")
         t4 = pg.evaluate("() => (document.querySelector('#main') || {}).innerText || ''")
@@ -202,7 +239,10 @@ def main():
             ("/talent.html#//evil.example.com/x", "#/talent", "天赋计算器",
              "hash 不是站内已知路由：回落本桩映射，绝不跳外站"),
         ]
-        for mount_name, base, prefix in (("根目录", base_root, ""), ("子路径 /wow/", base_sub, "/wow")):
+        MOUNTS = [("根目录", base_root, "")]
+        if base_sub:
+            MOUNTS.append(("子路径 /wow/", base_sub, "/wow"))
+        for mount_name, base, prefix in MOUNTS:
             for suf, want_hash, want_title, why in STUB_CASES:
                 if mount_name != "根目录" and suf in (STUB_CASES[2][0], STUB_CASES[3][0]):
                     continue        # query/编码那两条与挂载点无关，只在根目录跑一次
@@ -210,15 +250,31 @@ def main():
                 pg.wait_for_timeout(1500)
                 got = pg.evaluate("""() => ({ h: location.hash, t: document.title,
                           host: location.hostname })""")
+                # 主机名必须还是我们这一站：这条判的是"桩没把玩家带去别的站"。
+                # 原来写死 127.0.0.1，打到真域名上会假红，所以按当前 base 的 host 比。
+                want_host = re.sub(r"^https?://", "", base).split("/")[0].split(":")[0]
                 ok = (got["h"] == want_hash and got["t"].startswith(want_title)
-                      and got["host"] == "127.0.0.1" and not errs)
+                      and got["host"] == want_host and not errs)
                 check("%s｜%s" % (mount_name, why), ok,
                       "落到 %s（%s）/ 期望 %s（%s…）" % (got["h"], got["t"][:22], want_hash, want_title))
                 pg.close()
-        # 6) 站内未知 hash 路由：给"还没迁过来"，不给空白
+        # 6) 站内未知 hash 路由：必须**留在本站**并落到有内容的一页
+        #    （以前只判"不是空白"，2026-10-20 发 Pages 才发现它会跳到主机根的旧站地址，
+        #     拿到的其实是 GitHub 的 404 页——那也是"有字"，光看字数抓不住）
         pg, fails, errs = open_url(base_root, "/#/no-such-page")
-        t6 = pg.evaluate("() => (document.querySelector('#main') || {}).innerText || ''")
-        check("未知 hash 路由落到兜底页而不是空白", len(t6) > 20 and not errs, "%d 字" % len(t6))
+        z = pg.evaluate("""() => ({ t: (document.querySelector('#main') || {}).innerText || '',
+                 host: location.hostname, path: location.pathname, title: document.title })""")
+        want_host = re.sub(r"^https?://", "", base_root).split("/")[0].split(":")[0]
+        check("未知 hash 路由留在本站并回首页（不甩到主机根、不给空白）",
+              len(z["t"]) > 500 and z["host"] == want_host and not errs
+              and "GitHub Pages" not in z["title"],
+              "%d 字 / host %s / path %s / 标题 %s" % (len(z["t"]), z["host"], z["path"], z["title"][:26]))
+        pg.close()
+        # 6b) 认得出的旧文件名走 catch-all 时也应送到它那一页，不是首页
+        pg, fails, errs = open_url(base_root, "/#/races.html")
+        z2 = pg.evaluate("""() => ({ h: location.hash, t: document.title })""")
+        check("#/races.html 这种旧文件名地址送到种族页而不是首页",
+              z2["h"] == "#/races" and z2["t"].startswith("种族"), "%s / %s" % (z2["h"], z2["t"][:24]))
         pg.close()
         # 7) 带搜索与筛选的直达（动态页那条链）
         pg, fails, errs = open_url(base_root, "/#/updates?c=hunter&w=spell&q=%E7%8C%8E")
@@ -228,17 +284,23 @@ def main():
         pg.close()
         br.close()
 
-    s1.shutdown()
-    s2.shutdown()
-    import shutil as _sh
-    _sh.rmtree(parent, ignore_errors=True)
+    if s1:
+        s1.shutdown()
+    if s2:
+        s2.shutdown()
+    if parent:
+        import shutil as _sh
+        _sh.rmtree(parent, ignore_errors=True)
 
     print("\n===== 结果 =====")
     print("通过 %d / %d" % (len(RESULTS) - len(FAILED), len(RESULTS)))
     if FAILED:
         print("失败：" + "、".join(FAILED))
         sys.exit(1)
-    print("全部通过（外网托管仍未验收：这一份是本机静态服务器）")
+    if a.live:
+        print("全部通过（这一份打在 %s 上，是真远端）" % a.live)
+    else:
+        print("全部通过（外网托管仍未验收：这一份是本机静态服务器）")
 
 
 if __name__ == "__main__":
