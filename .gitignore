@@ -46,3 +46,7 @@ wow-forever-web/tools/_tmp_*
 wow-forever-web/docs/nga-hot/
 # 登录 cookie 与 jar 在 ~/.nga/ 下（仓库外），这里只是防一手误放进来
 .nga/
+
+# 上线包（tools/release-package.py）。不入库的理由：一份 60 MB，且每版内容都由 git 里的产物与数据可复现；
+# 进仓库要留的是摘要 docs/data-base/release-*/package-summary.json（含整包与逐文件哈希），回滚位 release/latest.json 是本机状态。
+wow-forever-web/release/
