@@ -1,9 +1,9 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261020-202616-ded6659f-dirty",
- "gitHead": "ded6659f",
+ "package": "wow-forever-web-20261020-203811-43890a16-dirty",
+ "gitHead": "43890a16",
  "worktreeDirty": true,
- "builtAt": "2026-10-20 20:26:19",
+ "builtAt": "2026-10-20 20:38:17",
  "files": 3692,
  "bytes": 29608752,
  "byExt": {
@@ -107,5 +107,5 @@
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "92002a49c08d2fdc3997c370d169ba091c70d48de81c8aafc30d8fc7bf6178dc"
+ "packageSha256": "2c7753df2b2648d75732d4831d84b04e976e07a56cf459340951c0a381efe962"
 }
