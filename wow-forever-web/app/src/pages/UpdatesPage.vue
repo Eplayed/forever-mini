@@ -46,7 +46,7 @@
           <button v-for="x in CH_KINDS" :key="x[0]" type="button" class="kchip" :class="{ on: kind === x[0] }" :data-k="x[0]" :aria-pressed="kind === x[0] ? 'true' : 'false'" @click="kind = x[0]">{{ x[1] }} <b class="mono">{{ kindCount(x[0]) }}</b></button>
         </div>
         <div class="picks">
-          <button type="button" class="pick" :class="{ on: !cls }" data-c="" @click="cls = ''"><b>全职业</b><span class="dim mono">{{ chItems.length }}</span></button>
+          <button type="button" class="pick" :class="{ on: !cls }" data-c="" @click="cls = ''"><b>全职业</b><span class="dim mono">{{ clsAllCount }}</span></button>
           <button v-for="c in classes" :key="c.id" type="button" class="pick" :class="{ on: cls === c.id }" :data-c="c.id" @click="cls = c.id"><b>{{ c.cn }}</b><span class="dim mono">{{ clsCount(c.id) }}</span></button>
         </div>
         <div class="field">
@@ -103,8 +103,7 @@ import { byDate } from '../lib/fmt.js';
 import HlText from '../components/HlText.vue';
 import IconCell from '../components/IconCell.vue';
 
-const CH_KINDS = [['all', '全部类别'], ['added', '新增'], ['modified', '改动'], ['moved', '换层或换系'],
-  ['removed', '移除'], ['renamed', '改名'], ['unchanged', '未变']];
+const CH_KIND_ORDER = ['added', 'modified', 'moved', 'removed', 'renamed', 'unchanged'];
 const K = ['官方时间点', '客户端改动', '本站更新'];
 
 const route = useRoute();
@@ -164,6 +163,24 @@ function jump(id) {
 }
 
 const chItems = computed(() => (d.value && d.value.ch.items) || []);
+/* 类别格子按数据里真出现过的 changeKind 生成（2026-10-20 W02）。
+   以前这张名单写死六项，而数据里有九种：基线 8 条、学得更早 4 条、种族技 3 条
+   压根没有格子——「全部类别 967」和六格之和 952 差 15 条，玩家把每格都点一遍也筛不到它们。
+   标签直接取条目自带的 changeCn（就是表里"改动"那一列显示的字），格子和表用同一套词，
+   不会再各写一份漂掉。已知六类仍按老顺序排前面，新冒出来的类别按条数排在后面。 */
+const CH_KINDS = computed(() => {
+  const label = new Map();
+  const count = new Map();
+  chItems.value.forEach((x) => {
+    const k = x.changeKind || 'unchanged';
+    if (!label.has(k)) label.set(k, x.changeCn || k);
+    count.set(k, (count.get(k) || 0) + 1);
+  });
+  const known = CH_KIND_ORDER.filter((k) => label.has(k));
+  const rest = [...count.keys()].filter((k) => CH_KIND_ORDER.indexOf(k) < 0)
+    .sort((a, b) => count.get(b) - count.get(a));
+  return [['all', '全部类别']].concat(known.concat(rest).map((k) => [k, label.get(k)]));
+});
 const tl = computed(() => (d.value && d.value.tl) || []);
 const cl = computed(() => (d.value && d.value.cl) || []);
 const classes = computed(() => (d.value && d.value.classes) || []);
@@ -205,24 +222,28 @@ const tlRows = computed(() => {
   });
 });
 
-/* kchip 上的计数照旧站逐字：数的是 it.kind（talent/spell），与筛选项用的 changeKind 不是同一字段，
-   结果只有「全部类别」非零——口径改了与旧站对不上，原样保留 */
-function kindCount(k) {
-  return k === 'all' ? chItems.value.length : chItems.value.filter((it) => it.kind === k).length;
-}
-function clsCount(id) { return chItems.value.filter((x) => x.classId === id).length; }
-
-const rows = computed(() => {
+/* 计数与筛选必须同一把尺子（2026-10-20 W02 修）。
+   旧站 src/js/app.js updates() 里格子的数数的是 it.kind（talent/spell），
+   而点下去筛的是 changeKind（added/modified/…）——两个字段不是一回事，
+   结果除「全部类别」外四格恒为 0，可一点却能筛出上百条：数字在骗人。
+   新站不跟着错。现在每个格子上的数都是"按其余条件筛完、只把这个维度放开"的条数，
+   所以点上去 #ccnt 报的数一定等于格子上那个数（site-check 逐格点一遍验这条）。 */
+function pass(x, skip) {
   const kw = q.value.trim().toLowerCase();
-  return chItems.value.filter((x) => {
-    if (cls.value && x.classId !== cls.value) return false;
-    if (what.value !== 'all' && x.kind !== what.value) return false;
-    if (kind.value !== 'all' && x.changeKind !== kind.value) return false;
-    if (kw && String(x.nameCn || '').toLowerCase().indexOf(kw) < 0 &&
-      String(x.tree || '').toLowerCase().indexOf(kw) < 0) return false;
-    return true;
-  });
-});
+  if (skip !== 'cls' && cls.value && x.classId !== cls.value) return false;
+  if (skip !== 'what' && what.value !== 'all' && x.kind !== what.value) return false;
+  if (skip !== 'kind' && kind.value !== 'all' && x.changeKind !== kind.value) return false;
+  if (skip !== 'q' && kw && String(x.nameCn || '').toLowerCase().indexOf(kw) < 0 &&
+    String(x.tree || '').toLowerCase().indexOf(kw) < 0) return false;
+  return true;
+}
+function kindCount(k) {
+  return chItems.value.filter((x) => (k === 'all' || x.changeKind === k) && pass(x, 'kind')).length;
+}
+function clsCount(id) { return chItems.value.filter((x) => x.classId === id && pass(x, 'cls')).length; }
+const clsAllCount = computed(() => chItems.value.filter((x) => pass(x, 'cls')).length);
+
+const rows = computed(() => chItems.value.filter((x) => pass(x, '')));
 /* 一次只列 400 条 */
 const pageRows = computed(() => rows.value.slice(0, 400));
 </script>

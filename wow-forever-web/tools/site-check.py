@@ -3200,6 +3200,150 @@ def test_race_icon(browser):
     ctx.close()
 
 
+def test_updates_filter(browser):
+    """最新动态页：格子上写的数，必须就是点下去筛出来的数（2026-10-20 W02）。
+
+    上一版这里数的是 it.kind（talent/spell），点下去筛的是 changeKind
+    （added/modified/removed/…），两个字段不是一回事 → 除「全部类别」外五格恒为 0，
+    可点了却能筛出上百条。旧站同样错，新站跟着错了一版。
+    期望值全部在 python 里按 changeKind 现算，不抄页面、也不抄 scale.json
+    （scale 那四格只数天赋，和这里的"该类别全部条目"不是同一个数，混用会假红）。"""
+    print("\n[6h] 动态页类别计数与筛选结果一致")
+    import json
+    if not app_up(browser):
+        return
+    items = json.load(open(os.path.join(SRC, "data", "changes.json"), encoding="utf-8"))["items"]
+    # 类别名单也从数据里现取，不写死：写死六项正是上一版漏掉 15 条的原因
+    # （基线 / 学得更早 / 种族技 三种没有格子，格子之和永远小于「全部类别」）。
+    kinds = ["all"] + sorted({str(x.get("changeKind") or "unchanged") for x in items})
+
+    def exp(cls=None, what="all", k="all", kw=""):
+        n = 0
+        for x in items:
+            if cls and x.get("classId") != cls:
+                continue
+            if what != "all" and x.get("kind") != what:
+                continue
+            if k != "all" and x.get("changeKind") != k:
+                continue
+            if kw and kw.lower() not in str(x.get("nameCn") or "").lower() \
+                    and kw.lower() not in str(x.get("tree") or "").lower():
+                continue
+            n += 1
+        return n
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    page.goto(APP_BASE + "/#/updates", wait_until="networkidle")
+    page.wait_for_timeout(2500)
+    page.evaluate("() => { const n = document.getElementById('k1');"
+                  "if (n) n.scrollIntoView({block: 'start'}); }")
+    page.wait_for_timeout(400)
+
+    def read_chips():
+        # 点与读必须分两次调用：Vue 的更新是异步的，同一个 evaluate 里点完立刻读会拿到旧数
+        return {c["k"]: c["n"] for c in page.evaluate(
+            """() => [...document.querySelectorAll('.kchip')].map(b =>
+                 ({ k: b.getAttribute('data-k'), n: parseInt(b.querySelector('b').textContent, 10) }))""")}
+
+    def read_cnt():
+        return int(re.sub(r"[^0-9]", "", page.inner_text("#ccnt")) or "0")
+
+    got = read_chips()
+    want = {k: exp(k=k) for k in kinds}
+    check("格子的类别数与数据里真出现过的 changeKind 一一对上（不许有类别没有格子）",
+          sorted(got.keys()) == sorted(kinds),
+          "页面 %d 格 / 数据 %d 种：%s" % (len(got), len(kinds), sorted(got.keys())))
+    check("各类别格子与按 changeKind 现算的期望逐格相等", got == want,
+          "页面 %s / 期望 %s" % (got, want))
+    check("各类别格子加起来 = 全部类别（每格都点一遍能覆盖整张表）",
+          sum(v for k, v in got.items() if k != "all") == got.get("all"),
+          "各类之和 %d / 全部 %s" % (sum(v for k, v in got.items() if k != "all"), got.get("all")))
+    check("除真没有的类别外不许恒为 0（上一版五格全 0 就是这个 bug 的样子）",
+          sum(1 for k in kinds if k != "all" and got.get(k, 0) > 0) >= 4,
+          "非零 %d 格" % sum(1 for k in kinds if k != "all" and got.get(k, 0) > 0))
+    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-chips.png"))
+
+    def click_chip(k):
+        page.click(".kchip[data-k='%s']" % k)
+        page.wait_for_timeout(500)
+
+    bad = []
+    for k in kinds:
+        click_chip(k)
+        if read_cnt() != got[k]:
+            bad.append("%s 格写 %d、点出 %d" % (k, got[k], read_cnt()))
+    check("逐格点一遍：表头报的条数等于格子上写的数", not bad, "; ".join(bad) or "各类别全对")
+
+    # 收紧到猎人再看一遍：格子必须跟着其余条件走，不是永远显示全量
+    page.click(".kchip[data-k='all']")
+    page.wait_for_timeout(400)
+    page.click(".pick[data-c='hunter']")
+    page.wait_for_timeout(600)
+    got_h = read_chips()
+    want_h = {k: exp(cls="hunter", k=k) for k in kinds}
+    check("选猎人后各类别格子跟着变（不是恒等于全量）", got_h == want_h, "页面 %s / 期望 %s" % (got_h, want_h))
+    bad = []
+    for k in kinds:
+        click_chip(k)
+        if read_cnt() != got_h[k]:
+            bad.append("%s 格写 %d、点出 %d" % (k, got_h[k], read_cnt()))
+    check("猎人 + 各类别组合：点下去的条数仍等于格子数", not bad, "; ".join(bad) or "各类别全对")
+    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-hunter-added.png"))
+
+    # 再叠一层"只看法术"，三条件同时开：格子、表头、期望三方对齐
+    page.select_option("#cw", "spell")
+    page.wait_for_timeout(600)
+    got_hs = read_chips()
+    want_hs = {k: exp(cls="hunter", what="spell", k=k) for k in kinds}
+    check("猎人 + 只看法术 + 类别三层叠加仍逐格相等", got_hs == want_hs,
+          "页面 %s / 期望 %s" % (got_hs, want_hs))
+    click_chip("all")
+    check("三层叠加下表头条数等于「全部类别」格子", read_cnt() == got_hs["all"],
+          "表头 %d / 格子 %d" % (read_cnt(), got_hs["all"]))
+
+    # 空结果：搜一个不存在的词，格子全归零 + 空态文案在，不许留一张空表
+    page.fill("#cq", "根本没有这条名字")
+    page.wait_for_timeout(700)
+    z = page.evaluate("""() => ({ chips: [...document.querySelectorAll('.kchip')]
+             .map(b => parseInt(b.querySelector('b').textContent, 10)),
+             cnt: (document.querySelector('#ccnt') || {}).textContent || '',
+             empty: !!document.querySelector('.empty'),
+             rows: document.querySelectorAll('#chbody tbody tr').length })""")
+    check("搜不到时：格子全 0、表头 0 条、空态文案顶上（不留空表）",
+          all(v == 0 for v in z["chips"]) and "0" in z["cnt"] and z["empty"] and z["rows"] == 0,
+          json.dumps(z, ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-empty.png"))
+
+    # 375 同一件事：格子换行排、点了同样对得上（以前只在桌面验，手机上溢出没人管）
+    mctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    mp = mctx.new_page()
+    mp.goto(APP_BASE + "/#/updates", wait_until="networkidle")
+    mp.wait_for_timeout(2500)
+    mp.evaluate("() => { const n = document.getElementById('k1');"
+                "if (n) n.scrollIntoView({block: 'start'}); }")
+    mp.wait_for_timeout(400)
+    mh = mp.evaluate("""() => ({ over: document.documentElement.scrollWidth - innerWidth,
+             chips: [...document.querySelectorAll('.kchip')].map(b =>
+               ({ k: b.getAttribute('data-k'), n: parseInt(b.querySelector('b').textContent, 10),
+                  vis: b.getBoundingClientRect().width > 0 })) })""")
+    check("375 上各类别格子都排得出来且不撑出横向溢出",
+          mh["over"] <= 1 and len(mh["chips"]) == len(kinds) and all(c["vis"] for c in mh["chips"]),
+          "溢出 %spx / %d 格" % (mh["over"], len(mh["chips"])))
+    mp.click(".kchip[data-k='modified']")
+    mp.wait_for_timeout(600)
+    mcnt = int(re.sub(r"[^0-9]", "", mp.inner_text("#ccnt")) or "0")
+    chk = [c["n"] for c in mh["chips"] if c["k"] == "modified"][0]
+    check("375 点「改动」后条数也等于格子数", mcnt == chk == exp(k="modified"),
+          "表头 %d / 格子 %d / 期望 %d" % (mcnt, chk, exp(k="modified")))
+    mp.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-chips-m.png"))
+    check("这一页没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    mctx.close()
+    ctx.close()
+
+
 def test_app(browser, base):
     """新站（Vue 3 + Vite）冒烟：只跑已迁的页，断言口径与旧站第 1 节一致。
 
@@ -4986,6 +5130,7 @@ SECTIONS = [
     ("spellbook", test_spellbook),
     ("bis", test_bis),
     ("race_icon", lambda b, base: test_race_icon(b)),
+    ("updates_filter", lambda b, base: test_updates_filter(b)),
     ("css_tokens", test_css_tokens),
     ("world_pins", test_world_pins),
     ("dungeon_geo", test_dungeon_geo),
