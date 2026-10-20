@@ -1,11 +1,11 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261020-182210-f24e427a-dirty",
- "gitHead": "f24e427a",
+ "package": "wow-forever-web-20261020-190449-dc5882b9-dirty",
+ "gitHead": "dc5882b9",
  "worktreeDirty": true,
- "builtAt": "2026-10-20 18:22:13",
+ "builtAt": "2026-10-20 19:04:51",
  "files": 3692,
- "bytes": 29596491,
+ "bytes": 29597572,
  "byExt": {
   ".html": 21,
   ".png": 3,
@@ -18,7 +18,7 @@
   ".svg": 1,
   ".jpg": 3294
  },
- "fileManifestSha256": "7be2827243b648ef05b7db364bfe7e89f2f208634fc99cba5bb7d866d15148e4",
+ "fileManifestSha256": "03ccb8e44ae2955c810b24b9d73dcf536de28126b19cd9c59afa2d8a0c5a0ce4",
  "keyFiles": {
   "assets/hanken-grotesk-var-KjBMhMia.woff2": "1f21c6eaa0000f3329cfcfac966b43d5bebf5aa610303e33294ac31bc6f4bb59",
   "assets/index-BfFmYDXr.css": "644c9ad0312ef24d93c9a5ce9d3e1695c77682b02a80d34945f758621c5504e1",
@@ -49,8 +49,8 @@
   "data/professions.json": "ea98cd0385f0981f836bcde2b19f8508c17b06872556967a00268893dad95629",
   "data/queue.json": "397533e98039910503728c28419dd1aec9c47555fb61d51d091dacf6063f6353",
   "data/races.json": "88826d20e046159842b861a6e946c2629affeb170342088493ea2986ad990176",
-  "data/releases.json": "559d54a302f5fee6e35d60932a43fa69c74d43c6e1b203fb9d8a829d164dd20b",
-  "data/scale.json": "96b6ed020280c1bc873790296851d823ade1b8eb180a6ed1ef0e1b93e6f46c52",
+  "data/releases.json": "7b35ced9e2b801ac893b3dc76e7b4f0be81fe923e32d1be4cd54985de02578ec",
+  "data/scale.json": "335290a6c1bfeae12f6b04df0be1a299ef33c95ad3f8d8141558d2b527bcb0b2",
   "data/search.json": "cd46733423e662e37a725916225ffe600d9b7c105d1807a78ccbc776a3fa27ed",
   "data/spells.json": "59205c1ba1dec106d9e2d30fa2465d058725c992c0ca61d1bbea50cf4e40f23e",
   "data/systems.json": "fec92989285f321d783cb9bfe763ffa1901b1d3c67ce3451b233d6c01ad33758",
@@ -107,5 +107,5 @@
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "9e3aa9e0d202bd5d27e99b05ac5d3432da178b29387799fd9d378f0ec957c719"
+ "packageSha256": "7fd30daa45733ebe9c2426efda31ced157e6be2aab454affc7f17d881ba3ef64"
 }
