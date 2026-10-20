@@ -1,11 +1,11 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261020-190449-dc5882b9-dirty",
- "gitHead": "dc5882b9",
+ "package": "wow-forever-web-20261020-202616-ded6659f-dirty",
+ "gitHead": "ded6659f",
  "worktreeDirty": true,
- "builtAt": "2026-10-20 19:04:51",
+ "builtAt": "2026-10-20 20:26:19",
  "files": 3692,
- "bytes": 29597572,
+ "bytes": 29608752,
  "byExt": {
   ".html": 21,
   ".png": 3,
@@ -18,7 +18,7 @@
   ".svg": 1,
   ".jpg": 3294
  },
- "fileManifestSha256": "03ccb8e44ae2955c810b24b9d73dcf536de28126b19cd9c59afa2d8a0c5a0ce4",
+ "fileManifestSha256": "d428b4a7faee919d1a709dc0f30ffdbadafacfbd7c0cfbfc66f1a63a56d17568",
  "keyFiles": {
   "assets/hanken-grotesk-var-KjBMhMia.woff2": "1f21c6eaa0000f3329cfcfac966b43d5bebf5aa610303e33294ac31bc6f4bb59",
   "assets/index-BfFmYDXr.css": "644c9ad0312ef24d93c9a5ce9d3e1695c77682b02a80d34945f758621c5504e1",
@@ -107,5 +107,5 @@
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "7fd30daa45733ebe9c2426efda31ced157e6be2aab454affc7f17d881ba3ef64"
+ "packageSha256": "92002a49c08d2fdc3997c370d169ba091c70d48de81c8aafc30d8fc7bf6178dc"
 }

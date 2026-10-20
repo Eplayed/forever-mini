@@ -127,8 +127,10 @@ def main():
     check("/talent.html 回的是桩自己（200 text/html），不是被兜底换成首页", s == 200 and "html" in c,
           "%s %s" % (s, c))
     body = open(os.path.join(site, "talent.html"), encoding="utf-8").read()
-    check("桩用相对路径跳 ./#/talent（挂根目录与子路径都成立）",
-          "./#/talent" in body and "http://" not in body and "https://" not in body, body[:0] or "无绝对地址")
+    check("桩用相对路径跳 ./#/talent，且内置站内路由白名单（不做外站跳转）",
+          "./#/talent" in body and "http://" not in body and "https://" not in body
+          and '"/world":true' in body and "hasOwnProperty" in body,
+          "相对跳转 %s / 白名单 %s" % ("./#/talent" in body, '"/world":true' in body))
 
     from playwright.sync_api import sync_playwright
     print("\n[C] 浏览器里真开一遍（直达 / 刷新 / 分享 / 子路径）")
@@ -184,19 +186,35 @@ def main():
         check("分享副本详情直达链接能开到那一座（站名带该副本）",
               "通灵学院" in t4 and not errs, "%d 字 / 报错 %s" % (len(t4), errs[:1]))
         pg.close()
-        # 5) 旧页地址在浏览器里真跳到位，且查询串跟着过去
-        pg, fails, errs = open_url(base_root, "/talent.html?c=hunter")
-        pg.wait_for_timeout(1500)
-        u = pg.evaluate("() => location.hash")
-        n5 = pg.evaluate("() => document.querySelectorAll('.tnode, .node, #main button').length")
-        check("浏览器点 talent.html?c=hunter 落到 #/talent?c=hunter 且渲染出内容",
-              u == "#/talent?c=hunter" and n5 > 10, "落到 %s / %d 个可点节点" % (u, n5))
-        pg.close()
-        pg, fails, errs = open_url(base_sub, "/wow/talent.html?c=mage")
-        pg.wait_for_timeout(1500)
-        u = pg.evaluate("() => location.hash")
-        check("子路径下旧页桩同样跳到位（不是跳到根目录）", u == "#/talent?c=mage", "落到 %s" % u)
-        pg.close()
+        # 5) 旧页地址（跳转桩）。2026-10-20 独立验收点出上一版的漏：桩只看 location.search，
+        #    把 talent.html?c=shaman#/world 这种"来访者已经写好新站路由"的链接覆盖成天赋页。
+        #    所以这里按五种真实形态逐个在浏览器里跑，判的是**落地的 hash + 页面标题**
+        #    （标题由 router.afterEach 按路由 meta 设，能证明真到了那一页，不是只看字符串）。
+        STUB_CASES = [
+            ("/talent.html?c=hunter", "#/talent?c=hunter", "天赋计算器",
+             "旧地址没有 hash：按映射跳并带上原 query"),
+            ("/talent.html?c=shaman#/world", "#/world", "世界",
+             "旧地址带合法 hash：那个路由优先，不许被 html 映射覆盖"),
+            ("/updates.html?to=k1#/world?to=k2", "#/world?to=k2", "世界",
+             "hash 自己带 query：原样保留，不把外层 query 再拼一遍"),
+            ("/glossary.html#/glossary?q=%E7%8C%8E", "#/glossary?q=%E7%8C%8E", "中英术语速查",
+             "编码不动：百分号转义原样带过去"),
+            ("/talent.html#//evil.example.com/x", "#/talent", "天赋计算器",
+             "hash 不是站内已知路由：回落本桩映射，绝不跳外站"),
+        ]
+        for mount_name, base, prefix in (("根目录", base_root, ""), ("子路径 /wow/", base_sub, "/wow")):
+            for suf, want_hash, want_title, why in STUB_CASES:
+                if mount_name != "根目录" and suf in (STUB_CASES[2][0], STUB_CASES[3][0]):
+                    continue        # query/编码那两条与挂载点无关，只在根目录跑一次
+                pg, fails, errs = open_url(base, prefix + suf)
+                pg.wait_for_timeout(1500)
+                got = pg.evaluate("""() => ({ h: location.hash, t: document.title,
+                          host: location.hostname })""")
+                ok = (got["h"] == want_hash and got["t"].startswith(want_title)
+                      and got["host"] == "127.0.0.1" and not errs)
+                check("%s｜%s" % (mount_name, why), ok,
+                      "落到 %s（%s）/ 期望 %s（%s…）" % (got["h"], got["t"][:22], want_hash, want_title))
+                pg.close()
         # 6) 站内未知 hash 路由：给"还没迁过来"，不给空白
         pg, fails, errs = open_url(base_root, "/#/no-such-page")
         t6 = pg.evaluate("() => (document.querySelector('#main') || {}).innerText || ''")

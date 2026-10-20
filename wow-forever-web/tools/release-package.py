@@ -106,8 +106,40 @@ def migrated_map():
     return out
 
 
+def stub_body(default_path, routes):
+    """生成一个旧页跳转桩。
+
+    三种进来都要跳对（2026-10-20 独立验收点出的那一条：上一版只看 location.search，
+    把用户最初那条 talent.html?c=shaman#/world 送到了天赋页，等于把人家已经写好的
+    新站路由覆盖掉）：
+      ① 旧地址带**合法**新站 hash 路由 → 原样保留那个 hash（含它自己的 query）；
+         外层那份 ?query 只在**没有**合法 hash 时才补——来访者手写的路由比旧页参数更具体，
+         两遍都拼会造出 #/world?c=shaman 这种没人写过的地址（第一版就栽在这里）。
+      ② 旧地址没有 hash → 按 html→路由映射跳，并带上原来的 query；
+      ③ hash 不是站内已知路由（含 //外站 这种）→ 一律回落到本桩的映射目标，
+         绝不拿来访 URL 里的任意字符串当目标，桩不做外站跳转。
+    编码不动：全程用 location.hash / location.search 原串，不 decode 不 encode。
+    """
+    rjs = json.dumps(routes, separators=(",", ":"))
+    return (u"<!doctype html>\n<html lang=\"zh-CN\">\n<meta charset=\"utf-8\">\n"
+            u"<title>这一页搬家了</title>\n"
+            u"<script>(function(){\n"
+            u"  var R=%s, D=\"%s\";\n"
+            u"  var h=String(location.hash||\"\").replace(/^#/,\"\"), p=h.split(\"?\")[0];\n"
+            u"  var q=location.search||\"\";\n"
+            u"  var ok=h!==\"\" && p.charAt(0)===\"/\" && Object.prototype.hasOwnProperty.call(R,p);\n"
+            u"  location.replace(\"./#\" + (ok ? h : D + q));\n"
+            u"})();</script>\n"
+            u"<noscript><meta http-equiv=\"refresh\" content=\"1; url=./#%s\"></noscript>\n"
+            u"<p>这一页已经并入新版，正在跳转。没动的话请点"
+            u"<a href=\"./#%s\">这里</a>。</p>\n"
+            % (rjs, default_path, default_path, default_path))
+
+
 def write_stubs(site_dir, mig):
-    """给每个旧页生成一个跳转桩（index.html 除外，那是真页面）。"""
+    """给每个旧页生成一个跳转桩（index.html 除外，那是真页面）。
+    合法路由白名单直接取 MIGRATED 的值那一套，不另写一份——写两份就会漂。"""
+    routes = {v: True for v in mig.values()}
     made = []
     for fn, path in sorted(mig.items()):
         if not fn.endswith(".html") or fn == "index.html":
@@ -115,13 +147,8 @@ def write_stubs(site_dir, mig):
         if os.path.exists(os.path.join(site_dir, fn)):
             sys.exit("桩要写的位置已经有真文件了：%s（谁放的？）" % fn)
         # 目标一律相对当前文档算：挂在根目录与挂在 /wow/ 下都能跳对，不写死域名也不写死层级
-        body = (u"<!doctype html>\n<html lang=\"zh-CN\">\n<meta charset=\"utf-8\">\n"
-                u"<title>这一页搬家了</title>\n"
-                u"<meta http-equiv=\"refresh\" content=\"0; url=./#%s\">\n"
-                u"<script>var s=location.search||'';location.replace('./#%s'+s);</script>\n"
-                u"<p>这一页已经并入新版，正在跳转。没动的话请点"
-                u"<a href=\"./#%s\">这里</a>。</p>\n" % (path, path, path))
-        io.open(os.path.join(site_dir, fn), "w", encoding="utf-8").write(body)
+        io.open(os.path.join(site_dir, fn), "w", encoding="utf-8").write(
+            stub_body(path, routes))
         made.append(fn)
     return made
 
