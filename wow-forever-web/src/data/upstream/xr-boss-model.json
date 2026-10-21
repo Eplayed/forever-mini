@@ -1,0 +1,1056 @@
+{
+ "meta": {
+  "source": "XR_DungeonGuide/Data_BossModel.lua（作者自述：照 DungeonsForever 掉落集合交集 + 中文名复核生成）",
+  "addon": "XR_DungeonGuide",
+  "addonVersion": "75",
+  "sourceFile": ".scratch/wow-client-2026-10-21/XR_DungeonGuide/Data_BossModel.lua",
+  "sourceStamp": {
+   "bytes": 11691,
+   "sha256": "5da43e7b89a9e1011a9984c3b31b85c4f72af3c998d2bb716347cbc4f2242d35",
+   "fileDate": "2026-10-21"
+  },
+  "extractedAt": "2026-10-21",
+  "takes": "只有 displayId(CreatureDisplayInfo) 与 npcId 两个标识符；作者写的说明与注释一条不取",
+  "use": "给\"82 只没头像的首领\"指出该去客户端取哪张模型贴图，避免按中文名猜脸",
+  "counts": {
+   "dungeons": 29,
+   "bosses": 208,
+   "xrSlugs": 31,
+   "alias": 4,
+   "unmatched": 60
+  },
+  "slugAlias": [
+   {
+    "xr": "excavation-site",
+    "ours": "whelgars-excavation",
+    "xrBosses": 4,
+    "ourBosses": 4,
+    "nameMatch": 2,
+    "matchRatio": 0.5,
+    "confidence": "mid"
+   },
+   {
+    "xr": "razorfen-downs",
+    "ours": "razor-krendor",
+    "xrBosses": 7,
+    "ourBosses": 6,
+    "nameMatch": 6,
+    "matchRatio": 0.86,
+    "confidence": "high"
+   },
+   {
+    "xr": "the-deadmines",
+    "ours": "deathmine",
+    "xrBosses": 9,
+    "ourBosses": 9,
+    "nameMatch": 9,
+    "matchRatio": 1.0,
+    "confidence": "high"
+   },
+   {
+    "xr": "the-stockade",
+    "ours": "the-stocks",
+    "xrBosses": 7,
+    "ourBosses": 6,
+    "nameMatch": 5,
+    "matchRatio": 0.71,
+    "confidence": "mid"
+   }
+  ],
+  "note": "XR 用另一套英文 slug，四条别名是按首领中文名交集判的（重合数见 slugAlias），不是按名字猜。"
+ },
+ "bosses": {
+  "blackfathom-deeps": {
+   "加摩拉": {
+    "displayId": 5027,
+    "npcId": 4887
+   },
+   "暮光领主克尔里斯": {
+    "displayId": 4939,
+    "npcId": 4832
+   },
+   "格里哈斯特": {
+    "displayId": 1773,
+    "npcId": 6243
+   },
+   "洛古斯·杰特": {
+    "displayId": 12822,
+    "npcId": 12902
+   },
+   "瑟拉吉斯": {
+    "displayId": 1816,
+    "npcId": 4830
+   },
+   "萨利维丝": {
+    "displayId": 4979,
+    "npcId": 4831
+   },
+   "阿奎尼斯男爵": {
+    "displayId": 110,
+    "npcId": 12876
+   },
+   "阿库麦尔": {
+    "displayId": 2837,
+    "npcId": 4829
+   }
+  },
+  "blackrock-depths": {
+   "伊森迪奥斯": {
+    "displayId": 1204,
+    "npcId": 1204
+   },
+   "傀儡统帅阿格曼奇": {
+    "displayId": 8759,
+    "npcId": 8759
+   },
+   "典狱官斯迪尔基斯": {
+    "displayId": 9089,
+    "npcId": 9089
+   },
+   "安格弗将军": {
+    "displayId": 8756,
+    "npcId": 8756
+   },
+   "审讯官格斯塔恩": {
+    "displayId": 8761,
+    "npcId": 8761
+   },
+   "弗莱拉斯大使": {
+    "displayId": 8329,
+    "npcId": 8329
+   },
+   "弗诺斯·达克维尔": {
+    "displayId": 8704,
+    "npcId": 8704
+   },
+   "控火师罗格雷恩": {
+    "displayId": 8762,
+    "npcId": 8762
+   },
+   "法拉克斯": {
+    "displayId": 8177,
+    "npcId": 8177
+   },
+   "洛考尔": {
+    "displayId": 5781,
+    "npcId": 5781
+   },
+   "玛格姆斯": {
+    "displayId": 12162,
+    "npcId": 12162
+   },
+   "贝尔加": {
+    "displayId": 12162,
+    "npcId": 12162
+   },
+   "达格兰·索瑞森大帝": {
+    "displayId": 8807,
+    "npcId": 8807
+   },
+   "铁炉堡公主茉艾拉·铜须": {
+    "displayId": 8705,
+    "npcId": 8705
+   },
+   "驯犬者格雷布玛尔": {
+    "displayId": 9212,
+    "npcId": 9212
+   }
+  },
+  "deathmine": {
+   "基尔尼格": {
+    "displayId": 7124,
+    "npcId": 1763
+   },
+   "拉克佐": {
+    "displayId": 14403,
+    "npcId": 644
+   },
+   "斯尼德": {
+    "displayId": 7125,
+    "npcId": 643
+   },
+   "斯尼德的伐木机": {
+    "displayId": 1269,
+    "npcId": 642
+   },
+   "曲奇": {
+    "displayId": 1305,
+    "npcId": 645
+   },
+   "矿工约翰森": {
+    "displayId": 556,
+    "npcId": 3586
+   },
+   "绿皮船长": {
+    "displayId": 7113,
+    "npcId": 7113
+   },
+   "艾德温·范克里夫": {
+    "displayId": 2029,
+    "npcId": 639
+   },
+   "重拳先生": {
+    "displayId": 2026,
+    "npcId": 646
+   }
+  },
+  "dire-maul-east": {
+   "奥兹恩": {
+    "displayId": 14416,
+    "npcId": 14416
+   },
+   "普希林": {
+    "displayId": 7552,
+    "npcId": 7552
+   },
+   "海多斯博恩": {
+    "displayId": 5489,
+    "npcId": 5489
+   },
+   "瑟雷姆·刺蹄": {
+    "displayId": 11335,
+    "npcId": 11335
+   },
+   "蕾瑟塔蒂丝": {
+    "displayId": 14378,
+    "npcId": 14378
+   }
+  },
+  "dire-maul-north": {
+   "克罗卡斯": {
+    "displayId": 11564,
+    "npcId": 11564
+   },
+   "卫兵摩尔达": {
+    "displayId": 11561,
+    "npcId": 11561
+   },
+   "卫兵斯里基克": {
+    "displayId": 11561,
+    "npcId": 11561
+   },
+   "卫兵芬古斯": {
+    "displayId": 11561,
+    "npcId": 11561
+   },
+   "戈多克大王": {
+    "displayId": 11583,
+    "npcId": 11583
+   },
+   "观察者克鲁什": {
+    "displayId": 11537,
+    "npcId": 11537
+   },
+   "践踏者克雷格": {
+    "displayId": 11545,
+    "npcId": 11545
+   }
+  },
+  "dire-maul-west": {
+   "伊琳娜·暗木": {
+    "displayId": 11270,
+    "npcId": 11270
+   },
+   "伊莫塔尔": {
+    "displayId": 14173,
+    "npcId": 14173
+   },
+   "卡雷迪斯镇长": {
+    "displayId": 14384,
+    "npcId": 14384
+   },
+   "托塞德林王子": {
+    "displayId": 11256,
+    "npcId": 11256
+   },
+   "特迪斯·扭木": {
+    "displayId": 14383,
+    "npcId": 14383
+   },
+   "苏斯": {
+    "displayId": 11250,
+    "npcId": 11250
+   },
+   "赫尔努拉斯": {
+    "displayId": 14556,
+    "npcId": 14556
+   }
+  },
+  "gnomeregan": {
+   "机械师瑟玛普拉格": {
+    "displayId": 6980,
+    "npcId": 6980
+   },
+   "格鲁比斯": {
+    "displayId": 144378,
+    "npcId": 6533
+   },
+   "电刑器6000型": {
+    "displayId": 6915,
+    "npcId": 6915
+   },
+   "粘性辐射尘": {
+    "displayId": 5497,
+    "npcId": 5497
+   },
+   "群体打击者9-60": {
+    "displayId": 6774,
+    "npcId": 6774
+   }
+  },
+  "hall-of-thanes": {
+   "劫掠者": {
+    "displayId": 142840,
+    "npcId": 261311
+   },
+   "杜根·挽锤": {
+    "displayId": 142837,
+    "npcId": 261319
+   },
+   "法德林·安威玛尔": {
+    "displayId": 142826,
+    "npcId": 261306
+   },
+   "茵弗努斯": {
+    "displayId": 1070,
+    "npcId": null
+   }
+  },
+  "lower-blackrock-spire": {
+   "乌洛克": {
+    "displayId": 11583,
+    "npcId": 10601
+   },
+   "军需官兹格雷斯": {
+    "displayId": 9738,
+    "npcId": 9738
+   },
+   "哈雷肯": {
+    "displayId": 9567,
+    "npcId": 9567
+   },
+   "奴役者基兹鲁尔": {
+    "displayId": 9564,
+    "npcId": 9564
+   },
+   "尖石屠夫": {
+    "displayId": 11574,
+    "npcId": 11574
+   },
+   "指挥官沃恩": {
+    "displayId": 9733,
+    "npcId": 9733
+   },
+   "暗影猎手沃什加斯": {
+    "displayId": 9732,
+    "npcId": 9732
+   },
+   "欧莫克大王": {
+    "displayId": 11565,
+    "npcId": 11565
+   },
+   "水晶之牙": {
+    "displayId": 9755,
+    "npcId": 9755
+   },
+   "烟网蛛后": {
+    "displayId": 9929,
+    "npcId": 9929
+   },
+   "燃烧地狱卫士": {
+    "displayId": 5047,
+    "npcId": 5047
+   },
+   "班诺克·巨斧": {
+    "displayId": 9668,
+    "npcId": 9668
+   },
+   "维姆萨拉克": {
+    "displayId": 8711,
+    "npcId": 8711
+   },
+   "霍克·巴什古德": {
+    "displayId": 11809,
+    "npcId": 11809
+   }
+  },
+  "maraudon": {
+   "兰斯利德": {
+    "displayId": 12293,
+    "npcId": 12293
+   },
+   "工匠吉兹洛克": {
+    "displayId": 7125,
+    "npcId": 7125
+   },
+   "洛特格里普": {
+    "displayId": 13589,
+    "npcId": 13589
+   },
+   "瑟莱德丝公主": {
+    "displayId": 12292,
+    "npcId": 12292
+   },
+   "维利塔恩": {
+    "displayId": 12334,
+    "npcId": 12334
+   },
+   "被诅咒的塞雷布拉斯": {
+    "displayId": 12350,
+    "npcId": 12350
+   },
+   "诺克赛恩": {
+    "displayId": 11172,
+    "npcId": 11172
+   },
+   "锐刺鞭笞者": {
+    "displayId": 12389,
+    "npcId": 12389
+   }
+  },
+  "ragefire-chasm": {
+   "奥格弗林特": {
+    "displayId": 11611,
+    "npcId": 11517
+   },
+   "巴扎兰": {
+    "displayId": 2007,
+    "npcId": 2007
+   },
+   "祈求者耶戈什": {
+    "displayId": 11429,
+    "npcId": 11429
+   },
+   "饥饿者塔拉加曼": {
+    "displayId": 7970,
+    "npcId": 7970
+   }
+  },
+  "razor-krendor": {
+   "图特卡什": {
+    "displayId": 7845,
+    "npcId": 7355
+   },
+   "寒冰之王亚门纳尔": {
+    "displayId": 7971,
+    "npcId": 7358
+   },
+   "拉戈斯诺特": {
+    "displayId": 11382,
+    "npcId": 7354
+   },
+   "暴食者": {
+    "displayId": 7864,
+    "npcId": 8567
+   },
+   "火眼莫德雷斯": {
+    "displayId": 8055,
+    "npcId": 7357
+   },
+   "腐烂的普雷莫尔": {
+    "displayId": 6124,
+    "npcId": 7356
+   }
+  },
+  "razorfen-kraul": {
+   "主宰拉姆塔斯": {
+    "displayId": 4652,
+    "npcId": 4420
+   },
+   "亡语者贾格巴": {
+    "displayId": 4644,
+    "npcId": 4428
+   },
+   "卡尔加·刺肋": {
+    "displayId": 4642,
+    "npcId": 4421
+   },
+   "唤地者哈穆加": {
+    "displayId": 6102,
+    "npcId": 4842
+   },
+   "暴怒的阿迦赛罗斯": {
+    "displayId": 2450,
+    "npcId": 4422
+   },
+   "盲眼猎手": {
+    "displayId": 4735,
+    "npcId": 4425
+   },
+   "阿格姆": {
+    "displayId": 6097,
+    "npcId": 4424
+   },
+   "鲁古格": {
+    "displayId": 6110,
+    "npcId": 6168
+   }
+  },
+  "ruins-of-lordaeron": {
+   "拉斯玛尔": {
+    "displayId": 144175,
+    "npcId": 250657
+   },
+   "枯牙": {
+    "displayId": 144189,
+    "npcId": 250625
+   },
+   "比约克": {
+    "displayId": 144170,
+    "npcId": 256097
+   },
+   "洛丹伦上尉": {
+    "displayId": 139050,
+    "npcId": 139050
+   },
+   "被遗弃者": {
+    "displayId": 138667,
+    "npcId": 250631
+   },
+   "邪恶的维克多": {
+    "displayId": 139455,
+    "npcId": 256035
+   }
+  },
+  "scarlet-monastery-armory": {
+   "赫洛德": {
+    "displayId": 2041,
+    "npcId": 3975
+   }
+  },
+  "scarlet-monastery-cathedral": {
+   "大检察官怀特迈恩": {
+    "displayId": 2043,
+    "npcId": 2043
+   },
+   "大检察官法尔班克斯": {
+    "displayId": 2605,
+    "npcId": 4542
+   },
+   "血色十字军指挥官莫格莱尼": {
+    "displayId": 2042,
+    "npcId": 3976
+   }
+  },
+  "scarlet-monastery-graveyard": {
+   "审讯员韦沙斯": {
+    "displayId": 2044,
+    "npcId": 3983
+   },
+   "死灵勇士": {
+    "displayId": 5230,
+    "npcId": 5230
+   },
+   "血法师萨尔诺斯": {
+    "displayId": 11396,
+    "npcId": 4543
+   },
+   "铁脊死灵": {
+    "displayId": 5231,
+    "npcId": 5231
+   }
+  },
+  "scarlet-monastery-library": {
+   "奥法师杜安": {
+    "displayId": 5266,
+    "npcId": 6487
+   },
+   "驯犬者洛克希": {
+    "displayId": 2040,
+    "npcId": 3974
+   }
+  },
+  "scholomance": {
+   "伊露希亚·巴罗夫": {
+    "displayId": 11835,
+    "npcId": 10502
+   },
+   "博学者普克尔特": {
+    "displayId": 11492,
+    "npcId": 10901
+   },
+   "拉文尼亚": {
+    "displayId": 10433,
+    "npcId": 10507
+   },
+   "瑟尔林·卡斯迪诺夫教授": {
+    "displayId": 10901,
+    "npcId": 11261
+   },
+   "维克图斯": {
+    "displayId": 2606,
+    "npcId": 10432
+   },
+   "莱斯·霜语": {
+    "displayId": 7919,
+    "npcId": 10508
+   },
+   "血骨傀儡": {
+    "displayId": 12073,
+    "npcId": 11622
+   },
+   "詹迪斯·巴罗夫": {
+    "displayId": 11073,
+    "npcId": 10503
+   },
+   "讲师玛丽希亚": {
+    "displayId": 11069,
+    "npcId": 10505
+   },
+   "阿雷克斯·巴罗夫": {
+    "displayId": 11072,
+    "npcId": 10504
+   },
+   "马杜克·布莱克波尔": {
+    "displayId": 10248,
+    "npcId": 10433
+   },
+   "黑暗院长加丁": {
+    "displayId": 11070,
+    "npcId": 1853
+   }
+  },
+  "shadowfang-keep": {
+   "吞噬者芬鲁斯": {
+    "displayId": 2352,
+    "npcId": 4274
+   },
+   "大法师阿鲁高": {
+    "displayId": 2353,
+    "npcId": 4275
+   },
+   "屠夫拉佐克劳": {
+    "displayId": 524,
+    "npcId": 3886
+   },
+   "席瓦莱恩男爵": {
+    "displayId": 3222,
+    "npcId": 3887
+   },
+   "指挥官斯普林瓦尔": {
+    "displayId": 3223,
+    "npcId": 4278
+   },
+   "狼王南杜斯": {
+    "displayId": 11179,
+    "npcId": 3927
+   },
+   "盲眼守卫奥杜": {
+    "displayId": 522,
+    "npcId": 4279
+   },
+   "雷希戈尔": {
+    "displayId": 524,
+    "npcId": 3914
+   }
+  },
+  "stratholme-main-gate": {
+   "不可宽恕者": {
+    "displayId": 10771,
+    "npcId": 10771
+   },
+   "巴纳扎尔": {
+    "displayId": 10691,
+    "npcId": 10545
+   },
+   "弗雷斯特恩": {
+    "displayId": 10482,
+    "npcId": 10482
+   },
+   "斯库尔": {
+    "displayId": 2606,
+    "npcId": 2606
+   },
+   "档案管理员加尔福特": {
+    "displayId": 10544,
+    "npcId": 10544
+   },
+   "残忍的提米": {
+    "displayId": 571,
+    "npcId": 571
+   },
+   "炮手威利": {
+    "displayId": 10674,
+    "npcId": 10674
+   },
+   "狂热的玛洛尔": {
+    "displayId": 10458,
+    "npcId": 10458
+   },
+   "红衣铸锤师": {
+    "displayId": 10637,
+    "npcId": 10637
+   },
+   "邮差马龙": {
+    "displayId": 10669,
+    "npcId": 10669
+   }
+  },
+  "stratholme-service-gate": {
+   "吞咽者拉姆斯登": {
+    "displayId": 12818,
+    "npcId": 12818
+   },
+   "奈鲁布恩坎": {
+    "displayId": 9793,
+    "npcId": 9793
+   },
+   "安娜丝塔丽男爵夫人": {
+    "displayId": 10698,
+    "npcId": 10698
+   },
+   "巴瑟拉斯镇长": {
+    "displayId": 10433,
+    "npcId": 10433
+   },
+   "瑞文戴尔男爵": {
+    "displayId": 10729,
+    "npcId": 10440
+   },
+   "石脊": {
+    "displayId": 7856,
+    "npcId": 7856
+   },
+   "苍白的玛勒基": {
+    "displayId": 10546,
+    "npcId": 10546
+   },
+   "黑衣守卫铸剑师": {
+    "displayId": 775,
+    "npcId": 775
+   }
+  },
+  "sunken-temple": {
+   "伊兰尼库斯的阴影": {
+    "displayId": 7806,
+    "npcId": 7806
+   },
+   "可悲的奥戈姆": {
+    "displayId": 6709,
+    "npcId": 6709
+   },
+   "哈卡的化身": {
+    "displayId": 8053,
+    "npcId": 8053
+   },
+   "哈扎斯": {
+    "displayId": 9584,
+    "npcId": 9584
+   },
+   "德姆塞卡尔": {
+    "displayId": 7553,
+    "npcId": 7553
+   },
+   "德拉维沃尔": {
+    "displayId": 6375,
+    "npcId": 6375
+   },
+   "摩弗拉斯": {
+    "displayId": 7975,
+    "npcId": 7975
+   },
+   "阿塔拉利恩": {
+    "displayId": 7873,
+    "npcId": 8580
+   },
+   "预言者迦玛兰": {
+    "displayId": 6708,
+    "npcId": 6708
+   }
+  },
+  "the-stocks": {
+   "卡姆·深怒": {
+    "displayId": 825,
+    "npcId": 1666
+   },
+   "可怕的塔格尔": {
+    "displayId": 517,
+    "npcId": 1696
+   },
+   "哈姆霍克": {
+    "displayId": 3250,
+    "npcId": 1717
+   },
+   "布鲁高·铁拳": {
+    "displayId": 2142,
+    "npcId": 1720
+   },
+   "迪克斯特·瓦德": {
+    "displayId": 2149,
+    "npcId": 1663
+   }
+  },
+  "uldaman": {
+   "加加恩·火锤": {
+    "displayId": 6059,
+    "npcId": 7291
+   },
+   "古代的石头看守者": {
+    "displayId": 10798,
+    "npcId": 7206
+   },
+   "奥拉夫": {
+    "displayId": 5709,
+    "npcId": 6908
+   },
+   "巴尔洛戈": {
+    "displayId": 5710,
+    "npcId": 6906
+   },
+   "格瑞姆洛克": {
+    "displayId": 11165,
+    "npcId": 4854
+   },
+   "艾隆纳亚": {
+    "displayId": 6089,
+    "npcId": 7228
+   },
+   "阿扎达斯": {
+    "displayId": 5988,
+    "npcId": 2748
+   },
+   "鲁维罗什": {
+    "displayId": 5945,
+    "npcId": 6910
+   },
+   "黑曜石哨兵": {
+    "displayId": 5285,
+    "npcId": 7023
+   }
+  },
+  "upper-blackrock-spire": {
+   "古拉鲁克": {
+    "displayId": 10222,
+    "npcId": 10899
+   },
+   "大酋长雷德·黑手": {
+    "displayId": 9778,
+    "npcId": 9778
+   },
+   "杰德": {
+    "displayId": 9686,
+    "npcId": 9686
+   },
+   "比斯巨兽": {
+    "displayId": 10193,
+    "npcId": 10193
+   },
+   "烈焰卫士艾博希尔": {
+    "displayId": 143803,
+    "npcId": 2172
+   },
+   "盖斯": {
+    "displayId": 9806,
+    "npcId": 10339
+   },
+   "索拉卡·火冠": {
+    "displayId": 9581,
+    "npcId": 10264
+   },
+   "达基萨斯将军": {
+    "displayId": 10115,
+    "npcId": 10115
+   }
+  },
+  "wailing-caverns": {
+   "克雷什": {
+    "displayId": 5126,
+    "npcId": 3653
+   },
+   "变异精灵龙": {
+    "displayId": 1267,
+    "npcId": 5912
+   },
+   "吞噬者穆坦努斯": {
+    "displayId": 4088,
+    "npcId": 3654
+   },
+   "安娜科德拉": {
+    "displayId": 4313,
+    "npcId": 3671
+   },
+   "斯卡姆": {
+    "displayId": 4203,
+    "npcId": 3674
+   },
+   "永生者沃尔丹": {
+    "displayId": 4256,
+    "npcId": 5775
+   },
+   "瑟芬迪斯": {
+    "displayId": 4215,
+    "npcId": 3673
+   },
+   "皮萨斯": {
+    "displayId": 4214,
+    "npcId": 3670
+   },
+   "考布莱恩": {
+    "displayId": 4213,
+    "npcId": 3669
+   }
+  },
+  "whelgars-excavation": {
+   "暗齿": {
+    "displayId": 144210,
+    "npcId": 260325
+   },
+   "盐脊": {
+    "displayId": 144209,
+    "npcId": 260322
+   }
+  },
+  "zulfarrak": {
+   "乌克兹·沙顶": {
+    "displayId": 6439,
+    "npcId": 6439
+   },
+   "加兹瑞拉": {
+    "displayId": 7271,
+    "npcId": 7271
+   },
+   "安图苏尔": {
+    "displayId": 7353,
+    "npcId": 8156
+   },
+   "巫医祖穆拉恩": {
+    "displayId": 6434,
+    "npcId": 6434
+   },
+   "布莱中士": {
+    "displayId": 6433,
+    "npcId": 7604
+   },
+   "暗影祭司塞瑟斯": {
+    "displayId": 6441,
+    "npcId": 6441
+   },
+   "杉达尔·沙掠者": {
+    "displayId": 9291,
+    "npcId": 9291
+   },
+   "殉教者塞卡": {
+    "displayId": 6696,
+    "npcId": 6696
+   },
+   "水占师维蕾萨": {
+    "displayId": 6685,
+    "npcId": 6685
+   },
+   "泽雷利斯": {
+    "displayId": 9293,
+    "npcId": 9293
+   },
+   "灰尘怨灵": {
+    "displayId": 9292,
+    "npcId": 9292
+   },
+   "耐克鲁姆": {
+    "displayId": 6690,
+    "npcId": 6690
+   }
+  }
+ },
+ "unmatched": {
+  "blackrock-depths·首领名": [
+   "‘修行者’高罗什",
+   "‘爬行者’赫杜姆",
+   "‘破坏者’奥科索尔",
+   "七贤之箱",
+   "剜眼者",
+   "卫兵杜格瑞普",
+   "无敌的潘佐尔",
+   "暴食者",
+   "格里兹尔",
+   "维雷克",
+   "阿努希尔",
+   "黑暗宝箱"
+  ],
+  "city-of-dalaran·首领名": [
+   "不稳定的哨兵",
+   "墓穴骑士阿特雷克斯",
+   "大法师之影",
+   "奥术畸体",
+   "奥术谜影",
+   "法力吞噬者",
+   "被无视的琳恩",
+   "邪能古树"
+  ],
+  "dire-maul-west·首领名": [
+   "辛德拉圣职者"
+  ],
+  "excavation-site·首领名": [
+   "遗物守护者",
+   "高地惊魂"
+  ],
+  "gnomeregan·首领名": [
+   "尖端机器人",
+   "科技机器人",
+   "黑铁大使"
+  ],
+  "hall-of-thanes·首领名": [
+   "普兰德",
+   "玛格玛图斯"
+  ],
+  "lower-blackrock-spire·首领名": [
+   "尖石战斗统帅",
+   "尖石首席魔导师",
+   "燃烧恶魔守卫"
+  ],
+  "maraudon·首领名": [
+   "‘收割者’麦什洛克",
+   "吉尔克",
+   "无名预言者",
+   "温格",
+   "玛拉多斯",
+   "玛格拉",
+   "考尔克"
+  ],
+  "onyxias-lair·首领名": [
+   "奥妮克希亚"
+  ],
+  "razorfen-downs·首领名": [
+   "亨利·斯特恩"
+  ],
+  "razorfen-kraul·首领名": [
+   "剃刀沼泽刺鬃守卫"
+  ],
+  "ruins-of-lordaeron·首领名": [
+   "男爵",
+   "邪恶的维克托"
+  ],
+  "scarlet-monastery-graveyard·首领名": [
+   "不眠的艾希尔",
+   "亡灵勇士",
+   "瑟克恩"
+  ],
+  "scholomance·首领名": [
+   "传令官基尔图诺斯",
+   "基尔图诺斯的卫士",
+   "死亡骑士达克雷尔"
+  ],
+  "shadowfang-keep·首领名": [
+   "塞沃尔",
+   "死亡誓言者队长",
+   "魔化战马"
+  ],
+  "stratholme-main-gate·首领名": [
+   "斯坦索姆信使",
+   "斯坦索姆信差"
+  ],
+  "sunken-temple·首领名": [
+   "二层小首领",
+   "哈卡的后代"
+  ],
+  "the-stockade·首领名": [
+   "巴基尔·斯瑞德",
+   "布鲁戈·艾尔克纳寇"
+  ],
+  "uldaman·首领名": [
+   "‘迅捷’艾利克"
+  ],
+  "zulfarrak·首领名": [
+   "沙怒刽子手"
+  ]
+ }
+}

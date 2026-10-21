@@ -1167,9 +1167,26 @@ if (fs.existsSync(itPath)) {
   if (stBad) errs.push(`items：status 越界 ${stBad} 条（只允许 new/changed/same/missing）`);
   const noIcon = its.filter((x) => !x.iconKey).length;
   if (noIcon) warns.push(`items：${noIcon} 件没有图标文件名（缺图要走 icon-gaps 自绘占位，不猜图）`);
+  // srv = 第二来源（测试服逐件探针，2026-10-21 A03）：只许 absent/present/没有这个字段。
+  // 它不覆盖 status，两条腿并排存；对不上的条数如实数出来上溯源页，不静默取舍。
+  const srvBad = its.filter((x) => x.srv !== undefined && ['absent', 'present'].indexOf(x.srv) < 0);
+  if (srvBad.length) errs.push(`items：srv 越界 ${srvBad.length} 条（只允许 absent/present，如 ${String(srvBad[0].srv)}）`);
+  const srvAbsent = its.filter((x) => x.srv === 'absent').length;
+  const srvPresent = its.filter((x) => x.srv === 'present').length;
+  const srvConflict = its.filter((x) => x.srv && ((x.srv === 'absent') !== (x.status === 'missing'))).length;
+  const metaSrv = (it.meta || {}).srv || {};
+  if (metaSrv.absent !== srvAbsent || metaSrv.present !== srvPresent || metaSrv.conflict !== srvConflict) {
+    errs.push(`items：meta.srv 与实数不一致（meta ${JSON.stringify(metaSrv)} / 实算 ` +
+      `${JSON.stringify({ absent: srvAbsent, present: srvPresent, conflict: srvConflict })}）——` +
+      '这条是防 merge-items 改了口径却忘了同步 meta，或者反过来');
+  }
   scale.items = its.length;
+  scale.itemsSrvAbsent = srvAbsent;
+  scale.itemsSrvPresent = srvPresent;
+  scale.itemsSrvConflict = srvConflict;
   scale.itemsNew = (it.meta.counts || {}).new || 0;
-  console.log('物品名录：' + its.length + ' 件（无限新增 ' + scale.itemsNew + '）·抓取日 ' + (it.meta.fetched || '缺失'));
+  console.log('物品名录：' + its.length + ' 件（无限新增 ' + scale.itemsNew + '）·抓取日 ' + (it.meta.fetched || '缺失') +
+    '·测试服探针：查不到 ' + srvAbsent + ' / 确认有 ' + srvPresent + '（与名录状态相反 ' + srvConflict + ' 件）');
 } else {
   warns.push('items.json 缺失：物品库页将空态（跑 tools/scrape-wclbox-items.py + tools/merge-items.py 生成）');
 }

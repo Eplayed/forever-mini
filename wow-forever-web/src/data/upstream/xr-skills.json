@@ -1,9 +1,9 @@
 {
  "meta": {
-  "source": "XR_DungeonGuide 65 Data_Skills.lua（源：权威资料库/zh-cn/spellbook 页内嵌 JSON）",
-  "addonVersion": "65",
-  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/XR_DungeonGuide/Data_Skills.lua",
-  "fetched": "2026-10-19",
+  "source": "XR_DungeonGuide 75 Data_Skills.lua（源：权威资料库/zh-cn/spellbook 页内嵌 JSON）",
+  "addonVersion": "75",
+  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow-client-2026-10-21/XR_DungeonGuide/Data_Skills.lua",
+  "fetched": "2026-10-21",
   "counts": {
    "total": 583,
    "byClass": {

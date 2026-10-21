@@ -1,16 +1,16 @@
 {
  "meta": {
   "addon": "XR_DungeonGuide",
-  "addonVersion": "66",
-  "sourceFile": "../../.scratch/wow/XR_DungeonGuide/Data.lua",
+  "addonVersion": "75",
+  "sourceFile": "../../.scratch/wow-client-2026-10-21/XR_DungeonGuide/Data.lua",
   "sourceStamp": {
-   "bytes": 4155082,
-   "sha256": "cc4e767c62419debf8ee2d26cdc3dc66db31742a6f2049409454733856f389a9",
-   "fileDate": "2026-10-20"
+   "bytes": 4156109,
+   "sha256": "224976c9a8a39dbaaa638797aea092ed3008dedb1669e3fe1a1a9207c01602cd",
+   "fileDate": "2026-10-21"
   },
   "selfReported": "站点 research/dg-loot 社区整理稿（作者自述实测，不自动升本站 L0）",
   "fetched": "2026-09-20",
-  "extractedAt": "2026-10-20",
+  "extractedAt": "2026-10-21",
   "counts": {
    "total": 14591,
    "st": 14197,

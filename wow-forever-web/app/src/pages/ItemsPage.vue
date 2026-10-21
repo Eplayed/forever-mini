@@ -85,7 +85,7 @@
             <td data-k="类型">{{ typeText(x) }}</td>
             <td class="num" data-k="物品等级">{{ x.ilvl == null ? '—' : x.ilvl }}</td>
             <td class="num" data-k="需要等级">{{ x.rlvl == null ? '—' : x.rlvl }}</td>
-            <td data-k="状态"><span class="ist" :class="'ist-' + x.status">{{ STN[x.status] || x.status }}</span></td>
+            <td data-k="状态"><span class="ist" :class="'ist-' + statusKey(x)">{{ STN[statusKey(x)] || statusKey(x) }}</span></td>
             <td class="num" data-k="编号"><span class="iid">#{{ x.id }}</span></td>
           </tr>
         </tbody>
@@ -115,7 +115,7 @@
           <div class="ids">#{{ sel.id }} · {{ typeText(sel) }}</div>
           <div class="ids">物品等级 {{ sel.ilvl == null ? '—' : sel.ilvl }} · 需要等级 {{ sel.rlvl == null ? '—' : sel.rlvl }}</div>
         </div>
-        <span class="ist" :class="'ist-' + sel.status">{{ STN[sel.status] || sel.status }}</span>
+        <span class="ist" :class="'ist-' + statusKey(sel)">{{ STN[statusKey(sel)] || statusKey(sel) }}</span>
         <button type="button" class="idclose" aria-label="关闭详情" @click="close">×</button>
       </div>
       <div v-if="dErr" class="idempty">详情数据没加载出来，刷新一下再试。</div>
@@ -158,8 +158,17 @@ import { load } from '../lib/data.js';
 import IconCell from '../components/IconCell.vue';
 import HlText from '../components/HlText.vue';
 
-const STN = { new: '新增', changed: '改动', rebuilt: '重建', same: '不变', missing: '无限中没有' };
-const ST_ORDER = ['new', 'changed', 'rebuilt', 'same', 'missing'];
+const STN = { new: '新增', changed: '改动', rebuilt: '重建', same: '不变', missing: '无限中没有', srvHas: '测试服有' };
+const ST_ORDER = ['new', 'changed', 'rebuilt', 'same', 'srvHas', 'missing'];
+/* 2026-10-21 A03：状态这一列改按"以插件为准"显示（站主 2026-10-20 定的口径）。
+   名录侧那条 status 是参考站自报，探针那条 srv 是玩家 10-19 在测试服逐件实测；
+   两边正向不冲突（探针说没有的 793 件参考站也说没有），反向有 82 件——
+   参考站标"无限中没有"、探针却确认服务器有。这 82 件显示成"测试服有"，
+   原来那条留在数据里没删（status 字段照旧），对不上的条数写在溯源页。
+   列、筛选条、计数三处都走同一个 statusKey，不然又会出现"格子的数和点出来的不一样"。 */
+function statusKey(x) {
+  return x.status === 'missing' && x.srv === 'present' ? 'srvHas' : x.status;
+}
 const PER = 50;
 const srcUrl = 'https://wowforever.wclbox.com/wupin';
 const SRCN = { dungeon: '地下城', quest: '任务' };
@@ -243,7 +252,7 @@ const items = computed(() => (d.value && d.value.items) || []);
 const C = computed(() => ((d.value || {}).meta || {}).counts || {});
 const stChips = computed(() => {
   const n = {};
-  items.value.forEach((x) => { n[x.status] = (n[x.status] || 0) + 1; });
+  items.value.forEach((x) => { const k = statusKey(x); n[k] = (n[k] || 0) + 1; });
   return [['', '全部', items.value.length],
     ...ST_ORDER.filter((k) => n[k]).map((k) => [k, STN[k], n[k]])];
 });
@@ -277,7 +286,7 @@ const rows = computed(() => {
   const lo = Number.isFinite(ilMin.value) ? ilMin.value : null;
   const hi = Number.isFinite(ilMax.value) ? ilMax.value : null;
   const xs = items.value.filter((x) =>
-    (!st.value || x.status === st.value) &&
+    (!st.value || statusKey(x) === st.value) &&
     (!cat.value || x.cat === cat.value) &&
     (!mat.value || x.mat === mat.value) &&
     (!slot.value || x.slot === slot.value) &&
@@ -337,6 +346,9 @@ function typeText(x) {
 .ist-rebuilt{color:#c993e8;border:1px solid rgba(163,53,238,.55)}
 .ist-same{color:var(--lead);border:1px solid var(--line)}
 .ist-missing{color:#ff9b8f;border:1px solid rgba(199,92,92,.5)}
+/* 「测试服有」是探针确认过存在的那 82 件（名录侧原本标"无限中没有"）。
+   用与"改动"同一系的中性蓝，不用金色——金色在我们这儿是"无限新增"的专有色。 */
+.ist-srvHas{color:var(--azure);border:1px solid rgba(73,174,233,.35);background:rgba(73,174,233,.08)}
 /* 清单表 */
 .itt{width:100%;border-collapse:collapse;font-size:13.5px}
 .itt th{font-size:11.5px;color:var(--lead);font-weight:600;text-align:left;letter-spacing:1px;

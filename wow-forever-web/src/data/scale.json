@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-20",
+  "generatedAt": "2026-10-21",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -113,6 +113,9 @@
    "total": 81
   },
   "items": 21077,
+  "itemsSrvAbsent": 793,
+  "itemsSrvPresent": 961,
+  "itemsSrvConflict": 82,
   "itemsNew": 5346,
   "spells": 498,
   "achievements": 211,

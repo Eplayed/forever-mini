@@ -228,7 +228,10 @@ const altCounts = computed(() => {
     { k: 'learn', label: '起学等级有两说', n: sp.filter((x) => x.learnAlt).length },
     { k: 'party', label: '一次几人有两说', n: dun.filter((x) => x.partySizeAlt).length },
     { k: 'nameEn', label: '英文原名有两说', n: dun.filter((x) => x.nameEnClient).length },
-    { k: 'xp', label: '任务经验值有两说', n: ((dd.QS || {}).counts || {}).xpConflict || 0 }
+    { k: 'xp', label: '任务经验值有两说', n: ((dd.QS || {}).counts || {}).xpConflict || 0 },
+    // 物品"测试服上有没有"这两条腿：名录自报与 2026-10-19 的逐件探针，反向对不上的条数
+    { k: 'srv', label: '物品在测试服有没有，两源说法不同（页面按探针那条显示）',
+      n: ((dd.scale || {}).itemsSrvConflict) || 0 }
   ];
   return out.filter((x) => x.n > 0);
 });

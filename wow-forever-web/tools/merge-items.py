@@ -78,6 +78,31 @@ def main():
         print(f"  · 无图标 {len(no_icon)} 件（自绘占位走 icon-gaps 同一路数），如 {no_icon[0]['name']}")
 
     counts, types, quals, cats = {}, {}, {}, {}
+    # 2026-10-21 A03：并上"这件在无限测试服上有没有"这一层（GI 作者 10-19 逐件探针实测）。
+    # 它和上游的 status 是**两条独立的腿**，所以不覆盖 status，只并排存 srv：
+    #   absent=探针查不到 / present=确认掉过或服务器有 / 没有这个字段=作者没表态。
+    # 界面上按站主 2026-10-20 定的"以插件为准"读 srv，status 留在数据里；
+    # 两边说法相反的那 82 件（上游说没有、探针说有）由 build-data.js 数出来写进溯源页。
+    EX_PATH = os.path.join(ROOT, "src", "data", "upstream", "gi-item-existence.json")
+    absent, present = set(), set()
+    if os.path.exists(EX_PATH):
+        ex = json.load(open(EX_PATH, encoding="utf-8"))
+        absent, present = set(ex["missing"]), set(ex["present"])
+        both = absent & present
+        if both:
+            print(f"!! 存在性快照自相矛盾：{len(both)} 个 id 同时在 missing 与 present 里，如 {sorted(both)[:3]}")
+            sys.exit(1)
+    srv_n = {"absent": 0, "present": 0, "conflict": 0}
+    for r in items:
+        i = int(r["id"])
+        if i in absent:
+            r["srv"] = "absent"
+            srv_n["absent"] += 1
+        elif i in present:
+            r["srv"] = "present"
+            srv_n["present"] += 1
+        if "srv" in r and ((r["srv"] == "absent") != (r["status"] == "missing")):
+            srv_n["conflict"] += 1
     for r in items:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
         cat, slot, mat, main_t = classify(r["type"])
@@ -97,12 +122,14 @@ def main():
             "url": meta["url"],
             "fetched": meta["fetched"],
             "counts": {"total": len(items), **counts},
+            "srv": srv_n,
             "cats": sorted(cats.items(), key=lambda kv: -kv[1]),
             "types": sorted(types.items(), key=lambda kv: -kv[1]),
             "qualities": {str(k): v for k, v in sorted(quals.items())},
             "note": "清单级：名称/品质/类型/等级/状态/图标文件名；描述文案不采（红线）。"
                     "cat 一期只分武器/护甲/任务/其它（按 slot+材质推导，规则见本脚本 classify）；"
-                    "rebuilt=上游标「重建」的 7 件（其首页统计把它并进新增，我们单独留值）。",
+                    "rebuilt=上游标「重建」的 7 件（其首页统计把它并进新增，我们单独留值）。"
+                    "srv=2026-10-21 并上的第二来源（测试服逐件探针）：absent 查不到 / present 确认有 / 没这个字段是没测过。",
         },
         "items": items,
     }

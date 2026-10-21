@@ -3834,6 +3834,34 @@ def test_app(browser, base):
           st["rows"] == 50 and st["chips"] >= 9 and st["reads"] == 4, json.dumps(st))
     check("新站物品库：行图标按本地库存如实渲染、无坏图", st["lico"] == expect_lico and st["broken"] == 0,
           "图标 %d/%d（%d 行本就取不到官方图走占位）" % (st["lico"], expect_lico, 50 - expect_lico))
+    # 2026-10-21 A03：物品"测试服有没有"这一列改按探针那条显示（以插件为准）。
+    # 判据全部从 items.json 现算，不写死 82：数据变了这里跟着变，写死的数迟早说旧话。
+    srv_has = [x for x in it if x.get("status") == "missing" and x.get("srv") == "present"]
+    srv_absent = [x for x in it if x.get("srv") == "absent"]
+    chip = page.evaluate("""() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]
+             .find(x => (x.innerText || '').indexOf('测试服有') >= 0);
+             return b ? b.innerText.replace(/\\s+/g, ' ').trim() : null; }""")
+    check("物品库状态条里有「测试服有」这一格，且格子上写的数等于数据里反向分歧的条数",
+          chip is not None and str(len(srv_has)) in (chip or ""), "%s / 数据 %d 件" % (chip, len(srv_has)))
+    page.evaluate("""() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]
+             .find(x => (x.innerText || '').indexOf('测试服有') >= 0); if (b) b.click(); }""")
+    page.wait_for_timeout(900)
+    got = page.evaluate("""() => ({ n: document.querySelectorAll('.itt tbody tr').length,
+             total: (document.querySelector('.pinfo') || {}).innerText || '',
+             labels: [...document.querySelectorAll('.itt tbody .ist')].map(x => x.innerText.trim()) })""")
+    # 一页只有 50 行，所以判"筛出来多少条"要读页脚那个总数，不能数行——
+    # 上一版我按行数比 82，红的是我自己的断言不是页面。
+    check("点「测试服有」筛出来的总数等于数据条数，且这一页列里显示的都是同一种",
+          str(len(srv_has)) in got["total"].replace(",", "") and set(got["labels"]) == {"测试服有"},
+          "页脚「%s」/ 数据 %d / 标签 %s" % (got["total"].strip(), len(srv_has), sorted(set(got["labels"]))[:3]))
+    page.screenshot(path=os.path.join(SHOT_DIR, "a03-items-srvhas.png"))
+    page.evaluate("() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]"
+                  ".find(x => (x.innerText || '').indexOf('全部') >= 0); if (b) b.click(); }")
+    page.wait_for_timeout(700)
+    check("探针说「测试服查不到」的条数与名录侧自报 missing 是两条独立的腿（不互相覆盖）",
+          len(srv_absent) > 0 and len(srv_absent) <= len([x for x in it if x.get("status") == "missing"]),
+          "探针 absent %d / 名录 missing %d" % (
+              len(srv_absent), len([x for x in it if x.get("status") == "missing"])))
     page.fill(".qsearch", "护腕")
     page.wait_for_timeout(900)
     hit = page.evaluate("""() => { const n = document.querySelector('.itt tbody tr .nm');

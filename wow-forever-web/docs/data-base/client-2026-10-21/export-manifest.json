@@ -1,11 +1,14 @@
 {
  "generatedAt": "2026-10-21",
+ "rev": 2,
  "clientPathOnWindows": "C:\\GAME\\World of Warcraft\\_forever_",
- "whyNotJustCopy": "客户端的美术与数据表在 CASC 归档（_forever_\\data\\）里，不是散文件；Interface\\AddOns 只有插件自带图。要拿图标/区域图/头像/载入图必须先在 Windows 上做只读导出。",
+ "cascRootOnWindows": "C:\\GAME\\World of Warcraft\\Data",
+ "readThisRound": "XR_DungeonGuide 75 / GearInsight_Forever 0.5.1 / DungeonsForever 1.8.20（客户端与 .scratch 快照逐层比过：已消费的层内容完全相同，见 docs/DATA-客户端原料-2026-10-21.md）",
  "groups": {
   "regionMaps": {
    "count": 9,
-   "note": "区域底图，导出后放 src/img/art/maps/<mapId>.webp",
+   "where": "Textures/Maps/ 下按地图号找",
+   "out": "src/img/art/maps/<mapId>.webp",
    "items": {
     "1424": "希尔斯布莱德丘陵",
     "1430": "逆风小径",
@@ -20,210 +23,624 @@
   },
   "bossPortraits": {
    "count": 82,
-   "note": "首领头像，导出后放 src/img/art/bosses/<slug>.webp 并把路径写进 dungeons.json 的 bosses[].portrait",
+   "withModelId": 64,
+   "withoutModelId": 18,
+   "where": "按 displayId 去 CreatureDisplayInfo.db2 → model → Interface/CharacterScreen 或 Textures 里找贴图；不要按中文名猜",
+   "out": "src/img/art/bosses/<首领英文或拼音slug>.webp，同时把路径回填 dungeons.json 的 bosses[].portrait",
    "byDungeon": {
     "hall-of-thanes": {
      "dungeonCn": "领主大厅",
      "bosses": [
-      "法德林·安威玛尔",
-      "茵弗努斯",
-      "劫掠者",
-      "杜根·挽锤"
+      {
+       "nameCn": "法德林·安威玛尔",
+       "displayId": 142826,
+       "npcId": 261306,
+       "note": null
+      },
+      {
+       "nameCn": "茵弗努斯",
+       "displayId": 1070,
+       "npcId": null,
+       "note": null
+      },
+      {
+       "nameCn": "劫掠者",
+       "displayId": 142840,
+       "npcId": 261311,
+       "note": null
+      },
+      {
+       "nameCn": "杜根·挽锤",
+       "displayId": 142837,
+       "npcId": 261319,
+       "note": null
+      }
      ]
     },
     "ruins-of-lordaeron": {
      "dungeonCn": "洛丹伦废墟",
      "bosses": [
-      "枯牙",
-      "被遗弃者",
-      "屠夫",
-      "拉斯玛尔",
-      "洛丹伦上尉",
-      "邪恶的维克多",
-      "比约克"
+      {
+       "nameCn": "枯牙",
+       "displayId": 144189,
+       "npcId": 250625,
+       "note": null
+      },
+      {
+       "nameCn": "被遗弃者",
+       "displayId": 138667,
+       "npcId": 250631,
+       "note": null
+      },
+      {
+       "nameCn": "屠夫",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "拉斯玛尔",
+       "displayId": 144175,
+       "npcId": 250657,
+       "note": null
+      },
+      {
+       "nameCn": "洛丹伦上尉",
+       "displayId": 139050,
+       "npcId": 139050,
+       "note": null
+      },
+      {
+       "nameCn": "邪恶的维克多",
+       "displayId": 139455,
+       "npcId": 256035,
+       "note": null
+      },
+      {
+       "nameCn": "比约克",
+       "displayId": 144170,
+       "npcId": 256097,
+       "note": null
+      }
      ]
     },
     "whelgars-excavation": {
      "dungeonCn": "挖掘场：湿地",
      "bosses": [
-      "盐脊",
-      "暗齿",
-      "高地恐魔",
-      "遗迹守卫者"
+      {
+       "nameCn": "盐脊",
+       "displayId": 144209,
+       "npcId": 260322,
+       "note": null
+      },
+      {
+       "nameCn": "暗齿",
+       "displayId": 144210,
+       "npcId": 260325,
+       "note": null
+      },
+      {
+       "nameCn": "高地恐魔",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "遗迹守卫者",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      }
      ]
     },
     "wailing-caverns": {
      "dungeonCn": "哀嚎洞穴",
      "bosses": [
-      "变异精灵龙"
+      {
+       "nameCn": "变异精灵龙",
+       "displayId": 1267,
+       "npcId": 5912,
+       "note": null
+      }
      ]
     },
     "deathmine": {
      "dungeonCn": "死亡矿井",
      "bosses": [
-      "斯尼德的伐木机",
-      "矿工约翰森"
+      {
+       "nameCn": "斯尼德的伐木机",
+       "displayId": 1269,
+       "npcId": 642,
+       "note": null
+      },
+      {
+       "nameCn": "矿工约翰森",
+       "displayId": 556,
+       "npcId": 3586,
+       "note": null
+      }
      ]
     },
     "shadowfang-keep": {
      "dungeonCn": "影牙城堡",
      "bosses": [
-      "雷希戈尔",
-      "屠夫拉佐克劳",
-      "盲眼守卫奥杜",
-      "吞噬者芬鲁斯",
-      "狼王南杜斯",
-      "大法师阿鲁高",
-      "死亡之誓"
+      {
+       "nameCn": "雷希戈尔",
+       "displayId": 524,
+       "npcId": 3914,
+       "note": null
+      },
+      {
+       "nameCn": "屠夫拉佐克劳",
+       "displayId": 524,
+       "npcId": 3886,
+       "note": null
+      },
+      {
+       "nameCn": "盲眼守卫奥杜",
+       "displayId": 522,
+       "npcId": 4279,
+       "note": null
+      },
+      {
+       "nameCn": "吞噬者芬鲁斯",
+       "displayId": 2352,
+       "npcId": 4274,
+       "note": null
+      },
+      {
+       "nameCn": "狼王南杜斯",
+       "displayId": 11179,
+       "npcId": 3927,
+       "note": null
+      },
+      {
+       "nameCn": "大法师阿鲁高",
+       "displayId": 2353,
+       "npcId": 4275,
+       "note": null
+      },
+      {
+       "nameCn": "死亡之誓",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      }
      ]
     },
     "blackfathom-deeps": {
      "dungeonCn": "黑暗深渊",
      "bosses": [
-      "瑟拉吉斯",
-      "暮光领主克尔里斯",
-      "阿库麦尔"
+      {
+       "nameCn": "瑟拉吉斯",
+       "displayId": 1816,
+       "npcId": 4830,
+       "note": null
+      },
+      {
+       "nameCn": "暮光领主克尔里斯",
+       "displayId": 4939,
+       "npcId": 4832,
+       "note": null
+      },
+      {
+       "nameCn": "阿库麦尔",
+       "displayId": 2837,
+       "npcId": 4829,
+       "note": null
+      }
      ]
     },
     "the-stocks": {
      "dungeonCn": "监狱",
      "bosses": [
-      "可怕的塔格尔",
-      "卡姆·深怒",
-      "哈姆霍克",
-      "迪克斯特·瓦德",
-      "巴吉尔·特雷德",
-      "布鲁高·铁拳"
+      {
+       "nameCn": "可怕的塔格尔",
+       "displayId": 517,
+       "npcId": 1696,
+       "note": null
+      },
+      {
+       "nameCn": "卡姆·深怒",
+       "displayId": 825,
+       "npcId": 1666,
+       "note": null
+      },
+      {
+       "nameCn": "哈姆霍克",
+       "displayId": 3250,
+       "npcId": 1717,
+       "note": null
+      },
+      {
+       "nameCn": "迪克斯特·瓦德",
+       "displayId": 2149,
+       "npcId": 1663,
+       "note": null
+      },
+      {
+       "nameCn": "巴吉尔·特雷德",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "布鲁高·铁拳",
+       "displayId": 2142,
+       "npcId": 1720,
+       "note": null
+      }
      ]
     },
     "gnomeregan": {
      "dungeonCn": "诺莫瑞根",
      "bosses": [
-      "黑铁大师",
-      "格鲁比斯"
+      {
+       "nameCn": "黑铁大师",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "格鲁比斯",
+       "displayId": 144378,
+       "npcId": 6533,
+       "note": null
+      }
      ]
     },
     "razorfen-kraul": {
      "dungeonCn": "剃刀沼泽",
      "bosses": [
-      "盲眼猎手",
-      "唤地者哈穆加"
+      {
+       "nameCn": "盲眼猎手",
+       "displayId": 4735,
+       "npcId": 4425,
+       "note": null
+      },
+      {
+       "nameCn": "唤地者哈穆加",
+       "displayId": 6102,
+       "npcId": 4842,
+       "note": null
+      }
      ]
     },
     "scarlet-monastery-graveyard": {
      "dungeonCn": "血色修道院墓地",
      "bosses": [
-      "铁脊死灵",
-      "永醒的艾希尔",
-      "死灵勇士"
+      {
+       "nameCn": "铁脊死灵",
+       "displayId": 5231,
+       "npcId": 5231,
+       "note": null
+      },
+      {
+       "nameCn": "永醒的艾希尔",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "死灵勇士",
+       "displayId": 5230,
+       "npcId": 5230,
+       "note": null
+      }
      ]
     },
     "razor-krendor": {
      "dungeonCn": "剃刀高地",
      "bosses": [
-      "腐烂的普雷莫尔",
-      "拉戈斯诺特"
+      {
+       "nameCn": "腐烂的普雷莫尔",
+       "displayId": 6124,
+       "npcId": 7356,
+       "note": null
+      },
+      {
+       "nameCn": "拉戈斯诺特",
+       "displayId": 11382,
+       "npcId": 7354,
+       "note": null
+      }
      ]
     },
     "zulfarrak": {
      "dungeonCn": "祖尔法拉克",
      "bosses": [
-      "布莱中士",
-      "暗影祭司塞瑟斯",
-      "泽雷利斯",
-      "杉达尔·沙掠者",
-      "灰尘怨灵"
+      {
+       "nameCn": "布莱中士",
+       "displayId": 6433,
+       "npcId": 7604,
+       "note": null
+      },
+      {
+       "nameCn": "暗影祭司塞瑟斯",
+       "displayId": 6441,
+       "npcId": 6441,
+       "note": null
+      },
+      {
+       "nameCn": "泽雷利斯",
+       "displayId": 9293,
+       "npcId": 9293,
+       "note": null
+      },
+      {
+       "nameCn": "杉达尔·沙掠者",
+       "displayId": 9291,
+       "npcId": 9291,
+       "note": null
+      },
+      {
+       "nameCn": "灰尘怨灵",
+       "displayId": 9292,
+       "npcId": 9292,
+       "note": null
+      }
      ]
     },
     "maraudon": {
      "dungeonCn": "玛拉顿",
      "bosses": [
-      "收割者麦什洛克"
+      {
+       "nameCn": "收割者麦什洛克",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      }
      ]
     },
     "sunken-temple": {
      "dungeonCn": "沉没的神庙",
      "bosses": [
-      "阿塔拉利恩",
-      "哈扎斯",
-      "摩弗拉斯",
-      "德拉维沃尔",
-      "可悲的奥戈姆"
+      {
+       "nameCn": "阿塔拉利恩",
+       "displayId": 7873,
+       "npcId": 8580,
+       "note": null
+      },
+      {
+       "nameCn": "哈扎斯",
+       "displayId": 9584,
+       "npcId": 9584,
+       "note": null
+      },
+      {
+       "nameCn": "摩弗拉斯",
+       "displayId": 7975,
+       "npcId": 7975,
+       "note": null
+      },
+      {
+       "nameCn": "德拉维沃尔",
+       "displayId": 6375,
+       "npcId": 6375,
+       "note": null
+      },
+      {
+       "nameCn": "可悲的奥戈姆",
+       "displayId": 6709,
+       "npcId": 6709,
+       "note": null
+      }
      ]
     },
     "blackrock-depths": {
      "dungeonCn": "黑石深渊",
      "bosses": [
-      "秩序竞技场",
-      "霍尔雷·黑须",
-      "雷布里·斯库比格特",
-      "普拉格",
-      "黑铁七贤",
-      "达格兰·索瑞森大帝"
+      {
+       "nameCn": "秩序竞技场",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "霍尔雷·黑须",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "雷布里·斯库比格特",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "普拉格",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "黑铁七贤",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "达格兰·索瑞森大帝",
+       "displayId": 8807,
+       "npcId": 8807,
+       "note": null
+      }
      ]
     },
     "dire-maul-east": {
      "dungeonCn": "厄运之槌东区",
      "bosses": [
-      "普希林"
+      {
+       "nameCn": "普希林",
+       "displayId": 7552,
+       "npcId": 7552,
+       "note": null
+      }
      ]
     },
     "lower-blackrock-spire": {
      "dungeonCn": "黑石塔下层",
      "bosses": [
-      "尖石屠夫",
-      "尖石统帅",
-      "尖石首席法师",
-      "班诺克·巨斧",
-      "霍克·巴什古德",
-      "水晶之牙",
-      "燃烧地狱卫士"
+      {
+       "nameCn": "尖石屠夫",
+       "displayId": 11574,
+       "npcId": 11574,
+       "note": null
+      },
+      {
+       "nameCn": "尖石统帅",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "尖石首席法师",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "班诺克·巨斧",
+       "displayId": 9668,
+       "npcId": 9668,
+       "note": null
+      },
+      {
+       "nameCn": "霍克·巴什古德",
+       "displayId": 11809,
+       "npcId": 11809,
+       "note": null
+      },
+      {
+       "nameCn": "水晶之牙",
+       "displayId": 9755,
+       "npcId": 9755,
+       "note": null
+      },
+      {
+       "nameCn": "燃烧地狱卫士",
+       "displayId": 5047,
+       "npcId": 5047,
+       "note": null
+      }
      ]
     },
     "dire-maul-west": {
      "dungeonCn": "厄运之槌西区",
      "bosses": [
-      "赫尔努拉斯",
-      "苏斯"
+      {
+       "nameCn": "赫尔努拉斯",
+       "displayId": 14556,
+       "npcId": 14556,
+       "note": null
+      },
+      {
+       "nameCn": "苏斯",
+       "displayId": 11250,
+       "npcId": 11250,
+       "note": null
+      }
      ]
     },
     "scholomance": {
      "dungeonCn": "通灵学院",
      "bosses": [
-      "库尔莫克"
+      {
+       "nameCn": "库尔莫克",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      }
      ]
     },
     "stratholme-main-gate": {
      "dungeonCn": "斯坦索姆正门",
      "bosses": [
-      "狂热的玛洛尔",
-      "档案管理员加尔福特",
-      "红衣铸锤师",
-      "艾兹拉·格里姆",
-      "斯库尔"
+      {
+       "nameCn": "狂热的玛洛尔",
+       "displayId": 10458,
+       "npcId": 10458,
+       "note": null
+      },
+      {
+       "nameCn": "档案管理员加尔福特",
+       "displayId": 10544,
+       "npcId": 10544,
+       "note": null
+      },
+      {
+       "nameCn": "红衣铸锤师",
+       "displayId": 10637,
+       "npcId": 10637,
+       "note": null
+      },
+      {
+       "nameCn": "艾兹拉·格里姆",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "斯库尔",
+       "displayId": 2606,
+       "npcId": 2606,
+       "note": null
+      }
      ]
     },
     "stratholme-service-gate": {
      "dungeonCn": "斯坦索姆侧门",
      "bosses": [
-      "黑衣守卫铸剑师",
-      "石脊"
+      {
+       "nameCn": "黑衣守卫铸剑师",
+       "displayId": 775,
+       "npcId": 775,
+       "note": null
+      },
+      {
+       "nameCn": "石脊",
+       "displayId": 7856,
+       "npcId": 7856,
+       "note": null
+      }
      ]
     },
     "upper-blackrock-spire": {
      "dungeonCn": "黑石塔上层",
      "bosses": [
-      "索拉卡·火冠",
-      "古拉鲁克",
-      "瓦塔拉克公爵",
-      "杰德"
+      {
+       "nameCn": "索拉卡·火冠",
+       "displayId": 9581,
+       "npcId": 10264,
+       "note": null
+      },
+      {
+       "nameCn": "古拉鲁克",
+       "displayId": 10222,
+       "npcId": 10899,
+       "note": null
+      },
+      {
+       "nameCn": "瓦塔拉克公爵",
+       "displayId": null,
+       "npcId": null,
+       "note": "XR 也没给模型号，只能按名字找或先空着"
+      },
+      {
+       "nameCn": "杰德",
+       "displayId": 9686,
+       "npcId": 9686,
+       "note": null
+      }
      ]
     }
    }
   },
   "loadingScreens": {
    "count": 2,
-   "note": "团本载入图，放 src/img/art/dungeons/",
+   "where": "Interface/GLues/Loadings/",
+   "out": "src/img/art/dungeons/<slug>.webp",
    "items": [
     "barrow-deeps(巴罗夫地穴)",
     "hyjal-summit(海加尔山)"
@@ -240,7 +657,8 @@
     "spells.json": 1,
     "world.json": 9
    },
-   "note": "物品/专业图标，导出后放 src/img/icons/<key>.jpg 并从 icon-gaps.json 移除对应键",
+   "where": "Interface/Icons/<key>.blp",
+   "out": "src/img/icons/<key>.jpg，并从 src/data/icon-gaps.json 移除对应键",
    "keys": [
     "8119728",
     "ability_warlock_incubus",
@@ -406,24 +824,26 @@
    ]
   }
  },
- "db2Tables": {
-  "note": "这几张表能直接把 待实测 结算成客户端一手值，优先级最高、体积最小",
-  "want": [
-   "ItemSparse",
-   "Item",
-   "ItemIcon",
-   "Spell",
-   "SpellRankEntry?（按版本名）",
-   "MapArea",
-   "MapDiff",
-   "AreaTable",
-   "CreatureDisplayInfo",
-   "CameraDefinition",
-   "PlayerClass",
-   "PlayerRace",
-   "CharBaseInfo",
-   "Faction",
-   "QuestInfo"
-  ]
- }
+ "db2Tables": [
+  "ItemSparse",
+  "Item",
+  "ItemIcon",
+  "Spell",
+  "MapArea",
+  "MapDiff",
+  "AreaTable",
+  "CreatureDisplayInfo",
+  "Creature",
+  "CameraDefinition",
+  "PlayerClass",
+  "PlayerRace",
+  "Faction",
+  "QuestInfo",
+  "QuestReward"
+ ],
+ "doNotExport": [
+  "Data_DungeonRates（掉落概率，红线不取）",
+  "任何插件本体与作者说明文字"
+ ],
+ "provenanceRule": "每张图都要记：来源=客户端导出 + 客户端 build 号 + 导出日期 + 文件哈希；进对应 manifest.json"
 }

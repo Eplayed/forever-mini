@@ -1,8 +1,8 @@
 {
  "meta": {
   "source": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/XR_DungeonGuide/Data_ZoneMap.lua",
-  "fetched": "2026-10-19",
+  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow-client-2026-10-21/XR_DungeonGuide/Data_ZoneMap.lua",
+  "fetched": "2026-10-21",
   "what": "中文区域名 → 地图号（uiMapID）对照",
   "how": "插件作者用它自己那份 npcloc（NPC→地图号+坐标）与副本入口反推生成，文件头声明\"零猜测、勿手改\"；本站只取这一层映射",
   "coverage": "任务坐标 213/213（100.0%），其中副本名 19 个",
