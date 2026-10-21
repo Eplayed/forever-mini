@@ -1,5 +1,11 @@
 # 无限数据库（wowforever.wclbox.com）接入评估与落地顺序（wow-planner + wow-data · 2026-10-08）
 
+> **2026-10-21 现状校正（只加导航，不改下面的评估与决策原文）：** 上面那句"P2/P3/P4 待做"已经过期——
+> 专业与任务、世界地图、首页动态与排行**都已落地**：路由 `/professions`、`/world`、`/updates`、`/rank`
+> 见 `app/src/router.js`，抓取与合并步骤在 `tools/refresh.sh` 里（`scrape-wclbox-{prof,shuju,dom}.py`、
+> `merge-prof-sources.py`、`extract-xr-zonemap.py`）。本文留作"当初为什么接这个源、拍了哪三件事"的溯源，
+> **不要再照它派活**。
+
 状态：**三件事已拍板（2026-10-09）**，见文末"决策结果"。P1 地下城已落地；P2 专业 / 任务、P3 世界地图、P4 首页动态与排行待做。
 
 ## 一、这个站是什么（2026-10-08 实测）

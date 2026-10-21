@@ -1,5 +1,10 @@
 # 选职业问答 · 口径与权重说明（wow-planner）
 
+> **2026-10-21 现状校正（只加导航，正文的问答口径与权重不动）：** 下面写的页面 `src/chooser.html`
+> 是**已冻结的旧站**那一版。当前产品页是新站 `app/src/pages/ChooserPage.vue`，路由 `/#/chooser`
+> （见 `app/src/router.js:61`，旧路径跳转桩在 `:36`）。数据基底仍是同一份 `src/data/chooser.json`——
+> **改问答口径改数据文件，别去改旧站那页。**
+
 版本：v1 ｜日期：2026-10-08 ｜状态：**已定（含两处机制纠错，见 §5）**
 数据文件：`src/data/chooser.json` ｜页面：`src/chooser.html`
 上游依据：`docs/reference-gap.md` 第四节建议第 1 项
