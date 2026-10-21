@@ -1,0 +1,429 @@
+{
+ "generatedAt": "2026-10-21",
+ "clientPathOnWindows": "C:\\GAME\\World of Warcraft\\_forever_",
+ "whyNotJustCopy": "客户端的美术与数据表在 CASC 归档（_forever_\\data\\）里，不是散文件；Interface\\AddOns 只有插件自带图。要拿图标/区域图/头像/载入图必须先在 Windows 上做只读导出。",
+ "groups": {
+  "regionMaps": {
+   "count": 9,
+   "note": "区域底图，导出后放 src/img/art/maps/<mapId>.webp",
+   "items": {
+    "1424": "希尔斯布莱德丘陵",
+    "1430": "逆风小径",
+    "1440": "灰谷",
+    "1449": "安戈洛环形山",
+    "1451": "希利苏斯",
+    "1453": "暴风城",
+    "1457": "达纳苏斯",
+    "2548": "河林",
+    "2652": "辛德拉"
+   }
+  },
+  "bossPortraits": {
+   "count": 82,
+   "note": "首领头像，导出后放 src/img/art/bosses/<slug>.webp 并把路径写进 dungeons.json 的 bosses[].portrait",
+   "byDungeon": {
+    "hall-of-thanes": {
+     "dungeonCn": "领主大厅",
+     "bosses": [
+      "法德林·安威玛尔",
+      "茵弗努斯",
+      "劫掠者",
+      "杜根·挽锤"
+     ]
+    },
+    "ruins-of-lordaeron": {
+     "dungeonCn": "洛丹伦废墟",
+     "bosses": [
+      "枯牙",
+      "被遗弃者",
+      "屠夫",
+      "拉斯玛尔",
+      "洛丹伦上尉",
+      "邪恶的维克多",
+      "比约克"
+     ]
+    },
+    "whelgars-excavation": {
+     "dungeonCn": "挖掘场：湿地",
+     "bosses": [
+      "盐脊",
+      "暗齿",
+      "高地恐魔",
+      "遗迹守卫者"
+     ]
+    },
+    "wailing-caverns": {
+     "dungeonCn": "哀嚎洞穴",
+     "bosses": [
+      "变异精灵龙"
+     ]
+    },
+    "deathmine": {
+     "dungeonCn": "死亡矿井",
+     "bosses": [
+      "斯尼德的伐木机",
+      "矿工约翰森"
+     ]
+    },
+    "shadowfang-keep": {
+     "dungeonCn": "影牙城堡",
+     "bosses": [
+      "雷希戈尔",
+      "屠夫拉佐克劳",
+      "盲眼守卫奥杜",
+      "吞噬者芬鲁斯",
+      "狼王南杜斯",
+      "大法师阿鲁高",
+      "死亡之誓"
+     ]
+    },
+    "blackfathom-deeps": {
+     "dungeonCn": "黑暗深渊",
+     "bosses": [
+      "瑟拉吉斯",
+      "暮光领主克尔里斯",
+      "阿库麦尔"
+     ]
+    },
+    "the-stocks": {
+     "dungeonCn": "监狱",
+     "bosses": [
+      "可怕的塔格尔",
+      "卡姆·深怒",
+      "哈姆霍克",
+      "迪克斯特·瓦德",
+      "巴吉尔·特雷德",
+      "布鲁高·铁拳"
+     ]
+    },
+    "gnomeregan": {
+     "dungeonCn": "诺莫瑞根",
+     "bosses": [
+      "黑铁大师",
+      "格鲁比斯"
+     ]
+    },
+    "razorfen-kraul": {
+     "dungeonCn": "剃刀沼泽",
+     "bosses": [
+      "盲眼猎手",
+      "唤地者哈穆加"
+     ]
+    },
+    "scarlet-monastery-graveyard": {
+     "dungeonCn": "血色修道院墓地",
+     "bosses": [
+      "铁脊死灵",
+      "永醒的艾希尔",
+      "死灵勇士"
+     ]
+    },
+    "razor-krendor": {
+     "dungeonCn": "剃刀高地",
+     "bosses": [
+      "腐烂的普雷莫尔",
+      "拉戈斯诺特"
+     ]
+    },
+    "zulfarrak": {
+     "dungeonCn": "祖尔法拉克",
+     "bosses": [
+      "布莱中士",
+      "暗影祭司塞瑟斯",
+      "泽雷利斯",
+      "杉达尔·沙掠者",
+      "灰尘怨灵"
+     ]
+    },
+    "maraudon": {
+     "dungeonCn": "玛拉顿",
+     "bosses": [
+      "收割者麦什洛克"
+     ]
+    },
+    "sunken-temple": {
+     "dungeonCn": "沉没的神庙",
+     "bosses": [
+      "阿塔拉利恩",
+      "哈扎斯",
+      "摩弗拉斯",
+      "德拉维沃尔",
+      "可悲的奥戈姆"
+     ]
+    },
+    "blackrock-depths": {
+     "dungeonCn": "黑石深渊",
+     "bosses": [
+      "秩序竞技场",
+      "霍尔雷·黑须",
+      "雷布里·斯库比格特",
+      "普拉格",
+      "黑铁七贤",
+      "达格兰·索瑞森大帝"
+     ]
+    },
+    "dire-maul-east": {
+     "dungeonCn": "厄运之槌东区",
+     "bosses": [
+      "普希林"
+     ]
+    },
+    "lower-blackrock-spire": {
+     "dungeonCn": "黑石塔下层",
+     "bosses": [
+      "尖石屠夫",
+      "尖石统帅",
+      "尖石首席法师",
+      "班诺克·巨斧",
+      "霍克·巴什古德",
+      "水晶之牙",
+      "燃烧地狱卫士"
+     ]
+    },
+    "dire-maul-west": {
+     "dungeonCn": "厄运之槌西区",
+     "bosses": [
+      "赫尔努拉斯",
+      "苏斯"
+     ]
+    },
+    "scholomance": {
+     "dungeonCn": "通灵学院",
+     "bosses": [
+      "库尔莫克"
+     ]
+    },
+    "stratholme-main-gate": {
+     "dungeonCn": "斯坦索姆正门",
+     "bosses": [
+      "狂热的玛洛尔",
+      "档案管理员加尔福特",
+      "红衣铸锤师",
+      "艾兹拉·格里姆",
+      "斯库尔"
+     ]
+    },
+    "stratholme-service-gate": {
+     "dungeonCn": "斯坦索姆侧门",
+     "bosses": [
+      "黑衣守卫铸剑师",
+      "石脊"
+     ]
+    },
+    "upper-blackrock-spire": {
+     "dungeonCn": "黑石塔上层",
+     "bosses": [
+      "索拉卡·火冠",
+      "古拉鲁克",
+      "瓦塔拉克公爵",
+      "杰德"
+     ]
+    }
+   }
+  },
+  "loadingScreens": {
+   "count": 2,
+   "note": "团本载入图，放 src/img/art/dungeons/",
+   "items": [
+    "barrow-deeps(巴罗夫地穴)",
+    "hyjal-summit(海加尔山)"
+   ]
+  },
+  "icons": {
+   "count": 161,
+   "byFile": {
+    "changes.json": 1,
+    "dungeons.json": 1,
+    "items.json": 159,
+    "legacy.json": 2,
+    "professions.json": 77,
+    "spells.json": 1,
+    "world.json": 9
+   },
+   "note": "物品/专业图标，导出后放 src/img/icons/<key>.jpg 并从 icon-gaps.json 移除对应键",
+   "keys": [
+    "8119728",
+    "ability_warlock_incubus",
+    "achievement_zone_mount-hyjal",
+    "inv_10_alchemy2_quenchingfluid_color2",
+    "inv_10_alchemy2_quenchingfluid_color3",
+    "inv_10_alchemy2_quenchingfluid_color4",
+    "inv_10_alchemy_bottle_shape4_violet",
+    "inv_10_specialization_professionbook_alchemy_color2",
+    "inv_ability_poison_missile",
+    "inv_ability_poison_orb",
+    "inv_axe_2h_raidhyjalc60_d_01",
+    "inv_belt_armor_dwarfc60_d_02",
+    "inv_belt_armor_skybornec60_d_01",
+    "inv_belt_cloth_skybornec60_b_01",
+    "inv_belt_leather_raiddruidhyjalc60_d_01",
+    "inv_belt_leather_skybornec60_b_01",
+    "inv_belt_leather_skybornec60_b_02",
+    "inv_belt_mail_skybornec60_b_01",
+    "inv_boot_armor_dwarfc60_d_02",
+    "inv_boot_armor_skybornec60_d_01",
+    "inv_boot_cloth_raidmagehyjalc60_d_01",
+    "inv_boot_cloth_raidpriesthyjalc60_d_01",
+    "inv_boot_cloth_raidwarlockhyjalc60_d_01",
+    "inv_boot_cloth_skybornec60_b_01",
+    "inv_boot_leather_raiddruidhyjalc60_d_01",
+    "inv_boot_leather_raidroguehyjalc60_d_01",
+    "inv_boot_leather_skybornec60_b_01",
+    "inv_boot_leather_skybornec60_b_02",
+    "inv_boot_mail_raidhunterhyjalc60_d_01",
+    "inv_boot_mail_raidshamanhyjalc60_d_01",
+    "inv_boot_mail_skybornec60_b_01",
+    "inv_boot_plate_raidpaladinhyjalc60_d_01",
+    "inv_boot_plate_raidwarriorhyjalc60_d_01",
+    "inv_bow_1h_skybornec60_b_01",
+    "inv_bow_2h_skybornec60_b_01",
+    "inv_bracer_armor_dwarfc60_d_02",
+    "inv_bracer_cloth_skybornec60_b_01",
+    "inv_bracer_leather_skybornec60_b_01",
+    "inv_bracer_leather_skybornec60_b_02",
+    "inv_bracer_mail_skybornec60_b_01",
+    "inv_camelot_camping_welcomingcampfire",
+    "inv_cape_armor_dwarfc60_d_02",
+    "inv_cape_armor_skybornec60_d_01",
+    "inv_cape_leather_skybornec60_b_01",
+    "inv_cape_special_camping_d_01_green",
+    "inv_catskybornemount_c60_blue",
+    "inv_chest-_cloth_skybornec60_b_01",
+    "inv_chest_armor_dwarfc60_d_02",
+    "inv_chest_armor_skybornec60_a_01",
+    "inv_chest_armor_skybornec60_a_02",
+    "inv_chest_armor_skybornec60_d_01",
+    "inv_chest_leather_skybornec60_b_01",
+    "inv_chest_leather_skybornec60_b_02",
+    "inv_chest_mail_skybornec60_b_01",
+    "inv_craneskyborne_c60_green",
+    "inv_craneskybornemount_c60_blue",
+    "inv_craneskybornemount_c60_gray",
+    "inv_craneskybornemount_c60_white",
+    "inv_craneskyborneswiftmount_c60_blue",
+    "inv_craneskyborneswiftmount_c60_gray",
+    "inv_craneskyborneswiftmount_c60_white",
+    "inv_diablofunsized_c60_red",
+    "inv_dragonhawk2_cyan",
+    "inv_drink_31_embalmingfluid_color03",
+    "inv_dwarfbearmount_c60",
+    "inv_enchanting_modifiedcraftingreagent_indigo",
+    "inv_first_aid_70_-jar",
+    "inv_glove_armor_dwarfc60_d_02",
+    "inv_glove_armor_skybornec60_d_01",
+    "inv_glove_cloth_raidmagehyjalc60_d_01",
+    "inv_glove_cloth_raidpriesthyjalc60_d_01",
+    "inv_glove_cloth_raidwarlockhyjalc60_d_01",
+    "inv_glove_cloth_skybornec60_b_01",
+    "inv_glove_leather_raiddruidhyjalc60_d_01",
+    "inv_glove_leather_raidroguehyjalc60_d_01",
+    "inv_glove_leather_skybornec60_b_01",
+    "inv_glove_leather_skybornec60_b_02",
+    "inv_glove_mail_raidhunterhyjalc60_d_01",
+    "inv_glove_mail_raidshamanhyjalc60_d_01",
+    "inv_glove_mail_skybornec60_b_01",
+    "inv_glove_plate_raidpaladinhyjalc60_d_01",
+    "inv_glove_plate_raidwarriorhyjalc60_d_01",
+    "inv_heart_of_the_thunder-king_icon",
+    "inv_helm_armor_buckledhat_b_01_blue",
+    "inv_helm_armor_buckledhat_b_01_brown",
+    "inv_helm_armor_dwarfc60_d_02",
+    "inv_helm_armor_skybornec60_d_01",
+    "inv_helm_cloth_skybornec60_b_01",
+    "inv_helm_leather_skybornec60_b_01",
+    "inv_helm_leather_skybornec60_b_02",
+    "inv_helm_mail_skybornec60_b_01",
+    "inv_inscription_modified_craftingreagent07",
+    "inv_jewelcrafting_cut-standart-gem-hybrid_color5_1",
+    "inv_knife_1h_skybornec60_b_01",
+    "inv_mace_1h_raidhyjalc60_d_01",
+    "inv_mace_1h_skybornec60_b_01",
+    "inv_mace_2h_skybornec60_b_01",
+    "inv_magicalowlbearbaby_black",
+    "inv_misc_food_93_skethylberries-",
+    "inv_misc_food_meat_raw_01_color03",
+    "inv_misc_kobysstools_knifetrap_color3",
+    "inv_misc_spineleaf-_01",
+    "inv_ore_ironclaw_corrupted",
+    "inv_pachimarapet",
+    "inv_pandacub_c60_black",
+    "inv_pant_armor_dwarfc60_d_02",
+    "inv_pant_armor_skybornec60_d_01",
+    "inv_pant_cloth_raidmagehyjalc60_d_01",
+    "inv_pant_cloth_raidpriesthyjalc60_d_01",
+    "inv_pant_cloth_raidwarlockhyjalc60_d_01",
+    "inv_pant_cloth_skybornec60_b_01",
+    "inv_pant_leather_raiddruidhyjalc60_d_01",
+    "inv_pant_leather_raidroguehyjalc60_d_01",
+    "inv_pant_leather_skybornec60_b_01",
+    "inv_pant_leather_skybornec60_b_02",
+    "inv_pant_mail_raidhunterhyjalc60_d_01",
+    "inv_pant_mail_raidshamanhyjalc60_d_01",
+    "inv_pant_mail_skybornec60_b_01",
+    "inv_pant_plate_raidpaladinhyjalc60_d_01",
+    "inv_pant_plate_raidwarriorhyjalc60_d_01",
+    "inv_robe_armor_skybornec60_d_01",
+    "inv_shield_1h_raidhyjalc60_d_01",
+    "inv_shield_1h_skybornec60_b_01",
+    "inv_shoulder_armor_dwarfc60_d_02",
+    "inv_shoulder_armor_skybornec60_d_01",
+    "inv_shoulder_cloth_raidmagehyjalc60_d_01",
+    "inv_shoulder_cloth_raidwarlockhyjalc60_d_01",
+    "inv_shoulder_cloth_skybornec60_b_01",
+    "inv_shoulder_l_mail_raidhunterhyjalc60_d_01",
+    "inv_shoulder_leather_raiddruidhyjalc60_d_01",
+    "inv_shoulder_leather_raidroguehyjalc60_d_01",
+    "inv_shoulder_leather_skybornec60_b_01",
+    "inv_shoulder_leather_skybornec60_b_02",
+    "inv_shoulder_mail_raidshamanhyjalc60_d_01",
+    "inv_shoulder_mail_skybornec60_b_01",
+    "inv_shoulder_plate_raidpaladinhyjalc60_d_01",
+    "inv_shoulder_plate_raidwarriorhyjalc60_d_01",
+    "inv_shoulder_r_cloth_raidpriesthyjalc60_d_01",
+    "inv_skinning_sunlesscarapace2",
+    "inv_staff_2h_skybornec60_b_01",
+    "inv_sword_1h_skybornec60_b_01",
+    "inv_sword_2h_skybornec60_b_01_white",
+    "inv_tabard_darkspearc60",
+    "inv_tabard_legacyc60_b_01",
+    "inv_tabard_lordaeronc60_b_01",
+    "inv_tabard_merchantalliancec60",
+    "inv_tabard_merchanthordec60",
+    "inv_tabard_rivergladesc60_b_01",
+    "inv_tabard_theramorec60",
+    "inv_ventureco_ring02_color4",
+    "inv_wand_1h_skybornec60_b_01",
+    "inv_zerglingpet_c60",
+    "jewelcrafting_cut-standart-gem_color1",
+    "jewelcrafting_uncut-epic-gem_color1",
+    "spell_frost_ring-of-frost",
+    "trade_archaeology_bones-of-transformation",
+    "trade_archaeology_carved-wildhammer-gryphon-figurine",
+    "trade_archaeology_insect-in-amber",
+    "trade_archaeology_pendant-of-the-aqir",
+    "trade_archaeology_silverdoorknocker-of-female-dwarf",
+    "ui-hud-actionbar-keyring"
+   ]
+  }
+ },
+ "db2Tables": {
+  "note": "这几张表能直接把 待实测 结算成客户端一手值，优先级最高、体积最小",
+  "want": [
+   "ItemSparse",
+   "Item",
+   "ItemIcon",
+   "Spell",
+   "SpellRankEntry?（按版本名）",
+   "MapArea",
+   "MapDiff",
+   "AreaTable",
+   "CreatureDisplayInfo",
+   "CameraDefinition",
+   "PlayerClass",
+   "PlayerRace",
+   "CharBaseInfo",
+   "Faction",
+   "QuestInfo"
+  ]
+ }
+}
