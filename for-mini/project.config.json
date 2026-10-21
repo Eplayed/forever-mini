@@ -39,6 +39,14 @@
       {
         "type": "folder",
         "value": "oss-preview"
+      },
+      {
+        "type": "folder",
+        "value": "oss-build"
+      },
+      {
+        "type": "file",
+        "value": ".oss-env"
       }
     ],
     "include": []
