@@ -193,6 +193,47 @@ def gate_files(site_dir, files):
     return problems
 
 
+def dist_is_current():
+    """打包前必查：app/dist 里的数据与素材是不是 src/ 的现在这一份。
+
+    为什么单独设这道卡：--skip-build 跳过的是构建，但 public/ 只在 vite build 那一刻
+    从 src/ 复制一次——**改了 src/data 却带着 --skip-build 打包，会得到一份"仓库里是新的、
+    包里是旧的"的产物，而且全程零报错**。这一条我自己踩过（2026-10-21 那次发出去
+    的 releases.json 少一条，靠线上核对才发现），所以判据放在打包这一步，不指望人记得。
+    """
+    bad = []
+    # 不搬清单从 app-assets.py 那一份读，不在这儿再抄一遍：抄了就会漂，
+    # 漂的结果是把"故意不发布的内部台账"当成漏文件报出来（这次就差点这么红一次）。
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location(
+        "appassets", os.path.join(ROOT, "tools", "app-assets.py"))
+    _aa = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_aa)
+    skip = _aa.EXCLUDE
+
+    def skipped(rel):
+        r = rel.replace(os.sep, "/")
+        return any(r == e or r.startswith(e + "/") for e in skip)
+    for d in ('data', 'img'):
+        s_dir = os.path.join(ROOT, "src", d)
+        for dirpath, names, fns in os.walk(s_dir):
+            # 与 app-assets.py 同一套相对法：rel 是相对 src/ 的，EXCLUDE 也是相对 src/ 写的
+            rel_dir = os.path.relpath(dirpath, os.path.join(ROOT, "src")).replace(os.sep, "/")
+            if skipped(rel_dir):
+                names[:] = []
+                continue
+            for fn in fns:
+                if fn.startswith('.') or fn.endswith('.pyc') or skipped(os.path.join(rel_dir, fn)):
+                    continue
+                sp = os.path.join(dirpath, fn)
+                dp = os.path.join(APP, "dist", rel_dir, fn)
+                if not os.path.exists(dp):
+                    bad.append("dist 里没有：%s" % os.path.join(rel_dir, fn))
+                elif sha256_file(sp) != sha256_file(dp):
+                    bad.append("内容不一致：%s" % os.path.join(rel_dir, fn))
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--skip-build", action="store_true", help="用现有 app/dist，不重跑构建链")
@@ -204,6 +245,13 @@ def main():
         build_chain()
     if not os.path.isdir(DIST):
         sys.exit("没有 app/dist，先跑构建")
+    stale = dist_is_current()
+    if stale:
+        for s in stale[:10]:
+            print("  ✗ " + s)
+        sys.exit("app/dist 不是 src/ 的现在这一份（%d 处）。带 --skip-build 打包会发出旧数据——"
+                 "去掉 --skip-build 重跑构建链，或先跑 tools/app-assets.py + npm run build" % len(stale))
+    print("app/dist 与 src/ 逐文件对过，是现在这一份")
 
     print("[2/5] 暂存产物")
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
