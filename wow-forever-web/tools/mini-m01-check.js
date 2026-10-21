@@ -142,7 +142,8 @@ async function main() {
       kinds: d.kinds || [], levels: d.levels || [], recent: (d.recent || []).length, routeMissing: d.routeMissing,
       dataFrom: d.dataFrom, needOnline: d.needOnline, notFound: d.notFound, title: d.title, nameMissing: d.nameMissing,
       bosses: d.bosses || [], drops: d.drops || [], prov: d.prov || [], rows: d.rows || [], bossEmpty: d.bossEmpty,
-      detailSource: d.detailSource, conflict: d.conflict, id: d.id, cacheHint: d.source, cacheHit: d.cacheHit
+      detailSource: d.detailSource, conflict: d.conflict, id: d.id, cacheHint: d.source, cacheHit: d.cacheHit,
+      counts: d.counts, cov: (d.covList || []).length, wip: (d.wip || []).length, meta: d.meta ? { counts: d.meta.counts } : null
     };
   }), 4);
   const shot = (name) => call('截图 ' + name, () => mp.screenshot({ path: path.join(SHOT_DIR, name + '.png') }), 2);
@@ -347,6 +348,121 @@ async function main() {
   log('模拟器视口内不横向溢出', ov && ov.sw <= ov.cw + 1, JSON.stringify(ov));
 
   await stopServer();
+  /* ---------- G. H01 首页流式卡片与三 tab ---------- */
+  process.stdout.write('\nG. 首页重做（流式卡片入口）与三 tab 结构\n');
+  await setOrigin(await startServer('normal'));
+  await clearStore();
+  await nav('/pages/home/index');
+  s = (await snap()) || {};
+  log('首页两个入口卡都在，数字从基底现读', s.counts && s.counts.dungeons === 38 && s.counts.terms > 0 && s.cov === 4,
+    JSON.stringify({ d: s.counts && s.counts.dungeons, t: s.counts && s.counts.terms, cov: s.cov }));
+  log('首页不再有"点了没反应"的假入口（wip 只是说明 chip）', s.wip === 3, JSON.stringify({ wip: s.wip }));
+  /* 版式（两张卡并排、chip 排成一行）不在这里断言：本机的 evaluate 落在 app 服务上下文，
+     拿不到 querySelector；这类"看起来对不对"由截图 + 站主眼睛判，脚本只保证数据与导航。 */
+  await shot('g1-home-cards');
+  const tabCheck = await call('点副本卡', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.goDungeons();
+    let n = 0;
+    const t = setInterval(() => {
+      const r = getCurrentPages().pop();
+      n += 1;
+      if ((r && r.route === 'pages/dungeons/index') || n > 16) { clearInterval(t); res({ route: r && r.route, depth: getCurrentPages().length }); }
+    }, 300);
+  })), 3);
+  log('首页点「副本随手查」真的切到了副本 tab', tabCheck && tabCheck.route === 'pages/dungeons/index' && tabCheck.depth === 1, JSON.stringify(tabCheck));
+  await nav('/pages/dungeon/index?id=ragefire-chasm');
+  const backCheck = await call('详情页返回列表', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onBack();
+    let n = 0;
+    const t = setInterval(() => {
+      const r = getCurrentPages().pop();
+      n += 1;
+      if ((r && r.route === 'pages/dungeons/index') || n > 16) { clearInterval(t); res({ route: r && r.route, depth: getCurrentPages().length }); }
+    }, 300);
+  })), 3);
+  log('详情页「回到副本列表」用 switchTab 打得开 tab 页（redirectTo 会静默失败）',
+    backCheck && backCheck.route === 'pages/dungeons/index' && backCheck.depth === 1, JSON.stringify(backCheck));
+  await call('回首页', () => mp.evaluate(() => new Promise((res) => {
+    wx.switchTab({ url: '/pages/home/index' });
+    let n = 0;
+    const t = setInterval(() => {
+      const r = getCurrentPages().pop();
+      n += 1;
+      if ((r && r.route === 'pages/home/index') || n > 16) { clearInterval(t); res(1); }
+    }, 300);
+  })), 3);
+  s = (await snap()) || {};
+  log('看过一座本之后，首页「继续」里有它（读页面 data，不读 DOM）', s.route === 'pages/home/index' && s.recent >= 1, JSON.stringify({ r: s.recent }));
+  await shot('g2-home-recent-rail');
+
+  /* 签名动作用像素量，不靠眼睛：切角铭牌真渲染出来时，
+     卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。 */
+  const PY_CORNER = [
+    'import sys',
+    'from PIL import Image',
+    'im = Image.open(sys.argv[1]).convert("RGB")',
+    'W, H = im.size',
+    'px = im.load()',
+    't = (27, 35, 53)',
+    'def cl(c): return all(abs(a - b) <= 10 for a, b in zip(c, t))',
+    'rows = {}',
+    'for y in range(H):',
+    '    xs = [x for x in range(W) if cl(px[x, y])]',
+    '    if len(xs) > 120: rows[y] = xs',
+    'ys = sorted(rows)',
+    'if not ys: print("none 0 0"); raise SystemExit',
+    'top = ys[0]',
+    'edge = [max(rows[y]) for y in range(top, min(top + 12, H)) if y in rows]',
+    'print("%d %d %d" % (top, edge[0], edge[-1]))'
+  ].join('\n');
+  const corner = await call('量切角', () => new Promise((resolve) => {
+    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1-home-cards.png')], { encoding: 'utf8' }, (err, out) => {
+      const t = String(out || '').trim();
+      if (err || !/\d+ \d+ \d+$/.test(t)) { resolve(null); return; }
+      const [top, first, last] = t.split(' ').map(Number);
+      resolve({ top, firstEdge: first, belowEdge: last, cut: last - first });
+    });
+  }), 2);
+  log('切角铭牌真的渲染出来了（右上角是斜边，直角版不会有这段位移）',
+    !!corner && corner.cut >= 6 && corner.cut <= 26, JSON.stringify(corner));
+
+  /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
+  const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';
+  const rawColor = [];
+  ['pages/home/index.wxss', 'pages/dungeons/index.wxss', 'pages/dungeon/index.wxss', 'pages/glossary/index.wxss'].forEach((f) => {
+    const t = fs.readFileSync(MINI + f, 'utf8');
+    (t.match(/#[0-9a-fA-F]{3,8}\b|rgba?\(/g) || []).forEach((c) => rawColor.push(f + ' ' + c));
+  });
+  log('四个页面的 wxss 里没有裸色值（颜色只在 app.wxss）', rawColor.length === 0, rawColor.slice(0, 4).join(' | '));
+  const appjson = JSON.parse(fs.readFileSync(MINI + 'app.json', 'utf8'));
+  log('tabBar 三个一级入口：首页 / 副本 / 速查',
+    appjson.tabBar.list.length === 3 && appjson.tabBar.list.map((x) => x.pagePath).join(',') === 'pages/home/index,pages/dungeons/index,pages/glossary/index',
+    JSON.stringify(appjson.tabBar.list.map((x) => x.pagePath)));
+  const pcfg = JSON.parse(fs.readFileSync(MINI + 'project.config.json', 'utf8'));
+  log('appid 已换成正式号（不再是 touristappid）', pcfg.appid === 'wxfd9a2b985a6cedc3', pcfg.appid);
+  const ignored = (pcfg.packOptions && pcfg.packOptions.ignore || []).map((x) => x.value);
+  log('内部文档与产物不进代码包（AGENTS.md / README.md / docs / oss-preview / oss-build / .oss-env 全排除）',
+    ['AGENTS.md', 'README.md', 'docs', 'oss-preview', 'oss-build', '.oss-env'].every((v) => ignored.indexOf(v) >= 0),
+    JSON.stringify(ignored));
+  /* 代码包体积：按 packOptions 规则自算（本机 CLI 没有 code-analyze 命令，
+     面板上的实测数要你在开发者工具「详情 → 基本信息」里看一眼核对） */
+  const skipDirs = { docs: 1, 'oss-preview': 1, 'oss-build': 1, node_modules: 1, dist: 1, miniprogram_npm: 1 };
+  const skipFiles = {};
+  ignored.concat(['project.config.json', 'project.private.config.json', '.gitignore']).forEach((v) => { skipFiles[v] = 1; });
+  let pkgBytes = 0;
+  (function walk(dir) {
+    fs.readdirSync(dir, { withFileTypes: true }).forEach((e) => {
+      if (e.name.startsWith('.')) return;
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) { if (!skipDirs[e.name]) walk(p); return; }
+      if (!skipFiles[e.name]) pkgBytes += fs.statSync(p).size;
+    });
+  })(MINI);
+  process.stdout.write('  · 自算代码包 ' + (pkgBytes / 1024).toFixed(1) + ' KB（主包上限 2 MB）\n');
+  log('代码包体积在预算内（< 512 KB）', pkgBytes < 512 * 1024, (pkgBytes / 1024).toFixed(1) + ' KB');
+
   await setOrigin('');
   await clearStore();
   fs.mkdirSync(SHOT_TARGET, { recursive: true });

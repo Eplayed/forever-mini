@@ -1,5 +1,5 @@
 {
-  "appid": "touristappid",
+  "appid": "wxfd9a2b985a6cedc3",
   "compileType": "miniprogram",
   "miniprogramRoot": "./",
   "projectname": "forever-mini",
@@ -47,6 +47,14 @@
       {
         "type": "file",
         "value": ".oss-env"
+      },
+      {
+        "type": "file",
+        "value": "AGENTS.md"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
       }
     ],
     "include": []

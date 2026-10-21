@@ -66,20 +66,12 @@
   flex-wrap: wrap;
 }
 
-.btn {
-  padding: 10rpx 24rpx;
-  border: 1rpx solid var(--gold);
-  border-radius: 10rpx;
-  color: var(--gold);
-  font-size: 24rpx;
+.actions .btn {
   margin-right: 14rpx;
   background: transparent;
-  line-height: 1.6;
 }
 
-.btn-on {
-  background: rgba(224, 169, 109, 0.16);
-}
+
 
 .btn-share {
   margin-right: 0;
@@ -209,11 +201,6 @@
   font-size: 22rpx;
 }
 
-.notice-bad {
-  background: rgba(201, 86, 74, 0.14);
-  border-color: var(--bad);
-  color: var(--bad);
-}
 
 .bold {
   color: var(--txt);

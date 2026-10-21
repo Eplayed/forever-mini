@@ -7,15 +7,15 @@
   ],
   "window": {
     "navigationBarTitleText": "无限资料",
-    "navigationBarBackgroundColor": "#0e1013",
+    "navigationBarBackgroundColor": "#0b0f16",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#0e1013",
+    "backgroundColor": "#0b0f16",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
-    "color": "#98a1af",
-    "selectedColor": "#e0a96d",
-    "backgroundColor": "#171a1f",
+    "color": "#8a93a5",
+    "selectedColor": "#f8b700",
+    "backgroundColor": "#2a1c1c",
     "borderStyle": "black",
     "list": [
       {
@@ -23,8 +23,12 @@
         "text": "首页"
       },
       {
+        "pagePath": "pages/dungeons/index",
+        "text": "副本"
+      },
+      {
         "pagePath": "pages/glossary/index",
-        "text": "中英速查"
+        "text": "速查"
       }
     ]
   },

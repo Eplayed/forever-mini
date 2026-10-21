@@ -12,7 +12,7 @@
   </view>
 
   <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
-    <view class="chip {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">
+    <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">
       {{item.name}} {{item.count}}
     </view>
   </scroll-view>

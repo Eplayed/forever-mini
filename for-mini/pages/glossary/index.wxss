@@ -33,21 +33,7 @@
   margin-bottom: 20rpx;
 }
 
-.chip {
-  display: inline-block;
-  margin-right: 12rpx;
-  padding: 8rpx 20rpx;
-  border: 1rpx solid var(--line);
-  border-radius: 999rpx;
-  font-size: 24rpx;
-  color: var(--txt-dim);
-}
 
-.chip-on {
-  color: var(--bg);
-  background: var(--gold);
-  border-color: var(--gold);
-}
 
 .term {
   background: var(--panel);
@@ -152,8 +138,3 @@
   padding: 10rpx 0 20rpx;
 }
 
-.notice-bad {
-  background: rgba(201, 86, 74, 0.14);
-  border-color: var(--bad);
-  color: var(--bad);
-}

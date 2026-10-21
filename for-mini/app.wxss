@@ -1,22 +1,66 @@
-/* 设计令牌与资料站 src/css/app.css 同源，取自 docs/UI.md。小程序侧只用 rpx 适配。 */
+/* 设计令牌：与网页端 wow-forever-web/src/css/tokens.css 同一套值（2026-10-12 换轨后的现行版），
+   不是 docs/UI.md §2.0 那段历史。设计依据与官网实测值见
+   wow-forever-web/docs/UI-小程序首页与令牌对齐-2026-10-21.md。
+   规则：页面 wxss 里不许再写裸色值，要新色先加到这里。小程序主包不放中文字体，
+   标题层级靠字号与字重拉开（官网那套方正兰亭黑是商用授权，不抄）。 */
 page {
-  --bg: #0e1013;
-  --panel: #171a1f;
-  --panel-2: #1e222a;
-  --line: #2b3038;
-  --txt: #e7e9ee;
-  --txt-dim: #98a1af;
-  --gold: #e0a96d;
-  --gold-deep: #b8813f;
-  --blue: #6fa8ff;
-  --ok: #4caf72;
-  --warn: #d9a13b;
-  --lead: #7f8ea8;
-  --bad: #c9564a;
+  --bg: #0b0f16;
+  --panel: #1b2335;
+  --panel-2: #131a28;
+  --elev: #2a364c;
+  --leather: #2a1c1c;
+  --foot: #080b11;
+
+  --line: #2c3850;
+  --line-2: #3a465e;
+  --gold: #c8a35c;
+  --gold-hi: #e6c886;
+  --gold-hot: #f8b700;
+  --gold-deep: #a8863f;
+  --accent: var(--gold);
+  --accent-ink: #1a1408;
+  --gold-line: rgba(200, 163, 92, 0.30);
+  --gold-line-soft: rgba(200, 163, 92, 0.15);
+  --gold-glow: rgba(200, 163, 92, 0.12);
+
+  --azure: #49aee9;
+  --azure-deep: #1d8dcd;
+  --blue: var(--azure);
+
+  --txt: #e9e2d2;
+  --txt-title: #f2ead8;
+  --txt-dim: #aeb6c4;
+  --txt-muted: #8a93a5;
+  --txt-hint: #7e8696;
+
+  /* 分级四态：有序量，用明度阶梯 + 徽标形状 + 文字三通道，不靠色相 */
+  --lv0: #e2ecf5;
+  --lv1: #b6c2cd;
+  --lv2: #a0a7b0;
+  --lv3: #8c939c;
+
+  --ok: #67c267;
+  --warn: #dd9f44;
+  --bad: #c75c5c;
+  --txt-alert: #ff9b8f;
+  --txt-caution: #f0c67e;
+  /* 提示条底色：只在这里定义一次，页面里不许再写 rgba */
+  --warn-bg: rgba(221, 159, 68, 0.12);
+  --bad-bg: rgba(199, 92, 92, 0.16);
+  --lead: #8a93a5;
+
+  --sunk: #0d121c;
+  --field: #101725;
+  --hatch: #46506a;
+
+  /* 切角铭牌：与网页同一组数值（CTA 10px、铭牌 14px） */
+  --cut-cta: 10px;
+  --cut-plate: 14px;
+  --r-ctl: 3px;
 
   background: var(--bg);
   color: var(--txt);
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   font-size: 28rpx;
   line-height: 1.6;
 }
@@ -34,11 +78,18 @@ button::after {
 }
 
 .card {
-  background: var(--panel);
-  border: 1rpx solid var(--line);
-  border-radius: 16rpx;
+  background: var(--panel-2);
+  border: 1rpx solid var(--gold-line);
+  border-radius: var(--r-ctl);
   padding: 24rpx;
   margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+  margin-bottom: 12rpx;
 }
 
 .muted {
@@ -59,49 +110,126 @@ button::after {
   flex: 1;
 }
 
-/* 完整度徽标：全站统一样式，不许各页自创 */
+/* 顶部那道金色发丝线：签名动作之一，只给页面第一块用 */
+.hairline {
+  height: 2rpx;
+  background: linear-gradient(90deg, rgba(200, 163, 92, 0) 0%, var(--gold) 42%, var(--gold) 58%, rgba(200, 163, 92, 0) 100%);
+  margin-bottom: 22rpx;
+}
+
+/* 切角铭牌：右上角切一刀。老基库不支持 clip-path 时退化成直角 + 铜金描边，不塌版 */
+.plate {
+  clip-path: polygon(0 0, calc(100% - var(--cut-cta)) 0, 100% var(--cut-cta), 100% 100%, 0 100%);
+}
+
+/* 完整度徽标：全站统一，颜色走明度阶梯（有序），形状与文字是第二、第三通道 */
 .badge {
   display: inline-block;
   padding: 2rpx 12rpx;
-  border-radius: 8rpx;
-  border: 1rpx solid var(--line);
+  border-radius: 2rpx;
+  border: 1rpx solid var(--line-2);
   font-size: 20rpx;
   line-height: 1.8;
 }
 
 .badge-L0 {
-  color: var(--ok);
-  border-color: var(--ok);
+  color: var(--accent-ink);
+  background: var(--lv0);
+  border-color: var(--lv0);
+  font-weight: 600;
 }
 
 .badge-L1 {
-  color: var(--blue);
-  border-color: var(--blue);
+  color: var(--sunk);
+  background: var(--lv1);
+  border-color: var(--lv1);
 }
 
 .badge-L2 {
-  color: var(--warn);
-  border-color: var(--warn);
-}
-
-.badge-L3 {
-  color: var(--lead);
+  color: var(--txt);
+  background: transparent;
+  border-color: var(--lv2);
   border-style: dashed;
 }
 
+.badge-L3 {
+  color: var(--lv3);
+  background: transparent;
+  border-color: var(--lv3);
+  border-style: dotted;
+}
+
 .notice {
-  background: rgba(217, 161, 59, 0.12);
+  background: var(--warn-bg);
   border: 1rpx solid var(--warn);
-  color: var(--warn);
-  border-radius: 12rpx;
+  border-left-width: 6rpx;
+  color: var(--txt-caution);
+  border-radius: var(--r-ctl);
   padding: 14rpx 20rpx;
   font-size: 24rpx;
   margin-bottom: 20rpx;
 }
 
-.foot {
+.notice-bad {
+  background: var(--bad-bg);
+  border-color: var(--bad);
+  color: var(--txt-alert);
+}
+
+/* 控件：主行动用铜金实心，次行动用描边，选中态才上高饱和金 */
+.btn {
+  padding: 10rpx 24rpx;
+  border: 1rpx solid var(--gold);
+  border-radius: var(--r-ctl);
+  color: var(--gold-hi);
+  font-size: 24rpx;
+  background: transparent;
+  line-height: 1.6;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.btn-on {
+  background: var(--gold-glow);
+  border-color: var(--gold-hot);
+  color: var(--gold-hot);
+}
+
+.chip {
+  display: inline-block;
+  margin: 0 12rpx 12rpx 0;
+  padding: 8rpx 20rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: 2rpx;
+  font-size: 24rpx;
   color: var(--txt-dim);
+}
+
+.chip-on {
+  color: var(--accent-ink);
+  background: var(--gold-hot);
+  border-color: var(--gold-hot);
+  font-weight: 600;
+}
+
+/* 「全部」是这一维度的默认值，选中它不代表玩家做了筛选：
+   高饱和金只留给真正生效的筛选项，两排同时亮金会看不出"现在筛了哪一条" */
+.chip-all.chip-on {
+  color: var(--gold-hi);
+  background: var(--gold-glow);
+  border-color: var(--gold);
+  font-weight: 400;
+}
+
+.foot {
+  color: var(--txt-muted);
   font-size: 22rpx;
   text-align: center;
   padding: 32rpx 0 8rpx;
+  border-top: 1rpx solid var(--gold-line-soft);
+  margin-top: 8rpx;
 }

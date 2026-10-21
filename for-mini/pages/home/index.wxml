@@ -1,68 +1,85 @@
 <view class="wrap">
+  <view class="hairline"></view>
+
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
     这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    当前显示的是{{sourceText}}，可能不是最新核对结果。正式数据需联网从资料站基底同步。
+    当前显示的是{{sourceText}}，可能不是最新核对结果。正式数据要联网从资料站基底同步。
   </view>
 
   <view class="hero">
     <view class="hero-title">无限资料</view>
-    <view class="muted">中英对照速查 · 副本随手查 · 每条数据可溯源</view>
-  </view>
-
-  <view class="card" wx:if="{{loaded}}">
-    <view class="row">
-      <view class="card-title">数据完整度</view>
-      <view class="spacer"></view>
-      <view class="muted">{{sourceText}}</view>
-    </view>
-    <view class="cov-row" wx:for="{{covList}}" wx:key="level">
-      <view class="cov-label">{{item.name}}</view>
-      <view class="cov-bar"><view class="cov-fill cov-{{item.level}}" style="width:{{item.pct}}%"></view></view>
-      <view class="cov-num">{{item.count}}</view>
-    </view>
-    <view class="muted cov-note">
-      共 {{meta.counts.terms}} 条成品词条、{{meta.counts.dungeons}} 座副本、{{meta.counts.talentNodes}} 个天赋节点。
-      天赋节点里 {{meta.counts.talentNameVerified}} 个中文名与官网一致，其余标「待实测」。
+    <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
+    <view class="hero-state">
+      <text class="dot {{offline ? 'dot-warn' : 'dot-ok'}}"></text>
+      <text>{{sourceText || '正在取数据…'}}</text>
+      <text wx:if="{{loaded}}" class="hero-date">核对至 {{factDate || '未记录'}}</text>
     </view>
   </view>
 
-  <view class="card">
-    <view class="card-title">模块</view>
-    <view class="module {{item.ready ? '' : 'module-off'}}" wx:for="{{modules}}" wx:key="id" data-index="{{index}}" bindtap="onModuleTap">
-      <view class="module-main">
-        <view class="module-name">{{item.name}}</view>
-        <view class="muted">{{item.desc}}</view>
+  <view class="sec-title">查</view>
+  <view class="grid">
+    <view class="entry plate" bindtap="goDungeons">
+      <view class="entry-name">副本随手查</view>
+      <view class="entry-num">{{counts.dungeons}}<text class="entry-unit">座</text></view>
+      <view class="entry-desc">中英名、等级、首领与掉落。名单已打进主包，断网也能查。</view>
+      <view class="entry-go">去查 →</view>
+    </view>
+    <view class="entry plate" bindtap="goGlossary">
+      <view class="entry-name">中英速查</view>
+      <view class="entry-num">{{counts.terms}}<text class="entry-unit">条</text></view>
+      <view class="entry-desc">按中文名搜官方译名，看英文原名与待补，一键复制。</view>
+      <view class="entry-go">去查 →</view>
+    </view>
+  </view>
+
+  <block wx:if="{{recent.length}}">
+    <view class="sec-title">继续</view>
+    <scroll-view class="rail" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="mini plate" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onRecentTap">
+        <view class="mini-name">{{item.title}}</view>
+        <view class="mini-meta">
+          <text class="badge badge-{{item.level}}">{{item.level}}</text>
+          <text class="mini-range">{{item.range}}</text>
+        </view>
       </view>
-      <view class="module-state {{item.ready ? 'state-ok' : 'state-warn'}}">{{item.ready ? '可用' : '待补'}}</view>
+    </scroll-view>
+  </block>
+
+  <view class="sec-title">这站现在什么样</view>
+  <view class="panel">
+    <view class="levels" bindtap="onLevels">
+      <view class="lv" wx:for="{{covList}}" wx:key="level">
+        <view class="lv-num lv-{{item.level}}">{{item.count}}</view>
+        <view class="lv-key">{{item.level}}</view>
+      </view>
+      <view class="levels-side">
+        <view class="muted">基准 {{baseline || '未记录'}}</view>
+        <view class="levels-go">这些数什么意思 ›</view>
+      </view>
+    </view>
+    <view class="lv-legend">
+      <text class="badge badge-L0">L0 已官方核实</text>
+      <text class="badge badge-L1">L1 仅官方英文</text>
+      <text class="badge badge-L2">L2 待实测</text>
+      <text class="badge badge-L3">L3 缺数据</text>
     </view>
   </view>
 
-  <view class="card" wx:if="{{recent.length}}">
-    <view class="row">
-      <view class="card-title">最近查过的副本</view>
-      <view class="spacer"></view>
-      <view class="muted" bindtap="onModuleTapGo">全部副本 →</view>
+  <view wx:if="{{meta.openQuestions.length}}" class="sec-title sec-title-2">还没确认的</view>
+  <view wx:if="{{meta.openQuestions.length}}" class="panel gaps">
+    <view class="gap" wx:for="{{meta.openQuestions}}" wx:key="*this">
+      <text class="gap-mark">·</text><text>{{item}}</text>
     </view>
-    <view class="rec" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onRecentTap">
-      <text class="rec-name">{{item.title}}</text>
-      <text class="badge badge-{{item.level}}">{{item.level}}</text>
-      <text class="muted rec-sub">{{item.range}}</text>
-    </view>
+    <view class="muted gap-note">缺口按官方稿与实测逐条回填；缺数据显示「待实测」，不机翻、不编造。</view>
   </view>
 
-  <view class="card" wx:if="{{loaded}}">
-    <view class="card-title">还没确认的</view>
-    <view class="open-item" wx:for="{{meta.openQuestions}}" wx:key="*this">{{item}}</view>
-    <view class="muted open-more">以上缺口按官方稿与实测逐条回填，缺数据显示「待实测」，不机翻、不编造。</view>
+  <view class="sec-title sec-title-2">还在整理</view>
+  <view class="wip">
+    <view class="chip chip-wip" wx:for="{{wip}}" wx:key="name" data-i="{{index}}" bindtap="onWip">{{item.name}}</view>
   </view>
+  <view class="muted wip-note">点一项会说清缺什么。这些不是入口——核到位了才会挪到上面「查」里。</view>
 
-  <view class="card" wx:if="{{loaded}}">
-    <view class="card-title">上线与基准</view>
-    <view class="muted">数据基准：{{meta.dataBaseline.build}}</view>
-    <view class="muted">核对日期：{{meta.checkedAt}} · 预计上线：{{meta.launch}}</view>
-  </view>
-
-  <view class="foot" bindtap="onDisclaimer">{{meta.disclaimer}}（点击查看声明）</view>
+  <view class="foot" bindtap="onDisclaimer">非官方粉丝资料站，与暴雪娱乐及网易无关（点击查看声明）</view>
 </view>

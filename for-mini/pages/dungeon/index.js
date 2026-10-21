@@ -142,8 +142,10 @@ Page({
     })
   },
 
+  /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
+     （＝玩家点"回到副本列表"没反应），必须 switchTab */
   onBack() {
-    wx.redirectTo({ url: '/pages/dungeons/index' })
+    wx.switchTab({ url: '/pages/dungeons/index' })
   },
 
   onFav() {
