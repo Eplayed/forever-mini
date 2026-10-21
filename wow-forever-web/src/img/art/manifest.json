@@ -2708,8 +2708,19 @@
    "authorizedBy": "站主 2026-10-20 决定：网页天裔种族小图标先用这张插件图，不再等官方 CDN；不称为官方已核素材，仅用于种族小图标，不替换传承页那张大图原画。",
    "rollback": "删除 src/img/art/raceicons/ 整个目录并重跑 fetch-art.py --index-only，即回退到天裔显示自绘首字块。",
    "note": "第三方插件目录里转存的加工图（客户端种族图标位），与 img/icons/ 那批官方 CDN 图标分开记：这一张不进 icons/manifest.json，不冒充官方来源。"
+  },
+  {
+   "file": "art/dungeons/hyjal-summit.webp",
+   "bytes": 45382,
+   "sha1": "076e0b65e5",
+   "source": "客户端导出（build 70245 (WOW-70245patch1.60.1_Retail, flavor=wowf, schema=wowstatic_camelot_1_60_1)）",
+   "kind": "dungeon-loading",
+   "origin": "client-export",
+   "fetchedAt": "2026-10-21",
+   "note": "暴雪游戏美术，由站主从本机客户端导出，不经第三方站"
   }
  ],
  "fetchedAt": "2026-10-20",
- "total": 287
+ "total": 288,
+ "clientExportAt": "2026-10-21"
 }

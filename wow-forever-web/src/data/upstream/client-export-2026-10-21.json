@@ -1,0 +1,863 @@
+{
+ "meta": {
+  "kind": "client-export-2026-10-21",
+  "fetched": "2026-10-21",
+  "source": "站主本机《无限》客户端导出（包在仓库外 .scratch/wow/ziliao-export/，不进 git）",
+  "tool": "{\"name\": \"CascLib master (3f8be47817) + 自写导出器 wowfexport.dll (.NET 8) + wdc5.py WDC5 解析器\", \"version\": \"wowfexport 1.0 / CascLib 3f8be47817\"}",
+  "build": "70245 (WOW-70245patch1.60.1_Retail, flavor=wowf, schema=wowstatic_camelot_1_60_1)",
+  "packageCounts": {
+   "icons": {
+    "ok": 160,
+    "notFound": 1
+   },
+   "maps": {
+    "ok": 0,
+    "notFound": 9
+   },
+   "bosses": {
+    "ok": 0,
+    "notFound": 13,
+    "noTexture": 51
+   },
+   "loadings": {
+    "ok": 1,
+    "notFound": 1
+   },
+   "db2": {
+    "ok": 10,
+    "missing": 8
+   }
+  },
+  "method": "tools/import-client-export.py --apply",
+  "note": "这一份是原料留档：图标转成 56×56 jpg 落 src/img/icons/，载入图落 src/img/art/dungeons/ 并挂进 art.json.dungeons。重跑 fetch-art.py 会覆盖 art.json，之后要再跑一次本脚本把客户端那一层放回去。"
+ },
+ "icons": {
+  "ability_warlock_incubus": {
+   "file": "icons/ability_warlock_incubus.png",
+   "sha256": "e4cdfe15b22d1c8702f73ba5a047b4f746598092a38860e81bd42f376982489d",
+   "bytes": 4644
+  },
+  "achievement_zone_mount-hyjal": {
+   "file": "icons/achievement_zone_mount-hyjal.png",
+   "sha256": "78eed815a8a04ddf948d9a70d09ce49425f38f003a3adaef623f6b3578a4a8df",
+   "bytes": 2757
+  },
+  "inv_10_alchemy2_quenchingfluid_color2": {
+   "file": "icons/inv_10_alchemy2_quenchingfluid_color2.png",
+   "sha256": "374192f25713720eaf126f6ca5cd65b4d91c7f4596840f85b22aac2e65ce315c",
+   "bytes": 5075
+  },
+  "inv_10_alchemy2_quenchingfluid_color3": {
+   "file": "icons/inv_10_alchemy2_quenchingfluid_color3.png",
+   "sha256": "35cda51c30089f582b7e9b8ce115249426de969187beec39b26af4d4b5e5a4a1",
+   "bytes": 4932
+  },
+  "inv_10_alchemy2_quenchingfluid_color4": {
+   "file": "icons/inv_10_alchemy2_quenchingfluid_color4.png",
+   "sha256": "9550e7f3b988fecb57d75b0026376654716ea0a590aa30e1b63c24b6b2bfefd4",
+   "bytes": 5042
+  },
+  "inv_10_alchemy_bottle_shape4_violet": {
+   "file": "icons/inv_10_alchemy_bottle_shape4_violet.png",
+   "sha256": "aa8cc3aa45abb92e00b2b9cd8fe9436d7ed9ed12c2e5193dfb772118037a7a72",
+   "bytes": 3194
+  },
+  "inv_10_specialization_professionbook_alchemy_color2": {
+   "file": "icons/inv_10_specialization_professionbook_alchemy_color2.png",
+   "sha256": "520a82ab00c7bbc6dc03c3bb903616b75039e40bbc92714c79c81decc161b14f",
+   "bytes": 4387
+  },
+  "inv_ability_poison_missile": {
+   "file": "icons/inv_ability_poison_missile.png",
+   "sha256": "0f146262156a2a2e4a5ba73b6d383e33a03f28d82a1e9bcca82b5eab7a91f560",
+   "bytes": 2742
+  },
+  "inv_ability_poison_orb": {
+   "file": "icons/inv_ability_poison_orb.png",
+   "sha256": "4927194ce91088b3b7e821f0f36d735d9792d22160c41d301f5a7584c2938674",
+   "bytes": 2386
+  },
+  "inv_axe_2h_raidhyjalc60_d_01": {
+   "file": "icons/inv_axe_2h_raidhyjalc60_d_01.png",
+   "sha256": "9f9b3309e62f88dfef9ae41996b792eada095de3e4a2d31880691bd6f6351c75",
+   "bytes": 3794
+  },
+  "inv_belt_armor_dwarfc60_d_02": {
+   "file": "icons/inv_belt_armor_dwarfc60_d_02.png",
+   "sha256": "ab96d8bcabe22748e1b5a8f31c5fcd0f5ec95555f5680b9774848515c17b5db3",
+   "bytes": 4199
+  },
+  "inv_belt_armor_skybornec60_d_01": {
+   "file": "icons/inv_belt_armor_skybornec60_d_01.png",
+   "sha256": "12be7cbc8674177dd71d275da226d376bfbd71140e057de41a167f9a7b805d0f",
+   "bytes": 4376
+  },
+  "inv_belt_cloth_skybornec60_b_01": {
+   "file": "icons/inv_belt_cloth_skybornec60_b_01.png",
+   "sha256": "c94b526b987ecb58f360294385abaa5fbfacc9124be0ff96250cb270c176deed",
+   "bytes": 3889
+  },
+  "inv_belt_leather_raiddruidhyjalc60_d_01": {
+   "file": "icons/inv_belt_leather_raiddruidhyjalc60_d_01.png",
+   "sha256": "9d8b456ca6417a20d4071b0785ad79feb96d066dd36e0850cc227bfbdaf99a23",
+   "bytes": 3794
+  },
+  "inv_belt_leather_skybornec60_b_01": {
+   "file": "icons/inv_belt_leather_skybornec60_b_01.png",
+   "sha256": "e1f3cbcb26089b04774ed94d7063298d46c54820e3cd3605e6236ec94addcc67",
+   "bytes": 3539
+  },
+  "inv_belt_leather_skybornec60_b_02": {
+   "file": "icons/inv_belt_leather_skybornec60_b_02.png",
+   "sha256": "24846800bb0e69d24a7bf00fcc99ba72972b93766eb8ef73de010bbfaf6a27d9",
+   "bytes": 3897
+  },
+  "inv_belt_mail_skybornec60_b_01": {
+   "file": "icons/inv_belt_mail_skybornec60_b_01.png",
+   "sha256": "122a57d4d52c80fbab90044ca06cab5b83c8977743ddf53a4700d50a9ab2f3b9",
+   "bytes": 3701
+  },
+  "inv_boot_armor_dwarfc60_d_02": {
+   "file": "icons/inv_boot_armor_dwarfc60_d_02.png",
+   "sha256": "e952b35c870dbf815807c7292f65d1d4317f1508e0308d0cd46aab8370fc0c4a",
+   "bytes": 4478
+  },
+  "inv_boot_armor_skybornec60_d_01": {
+   "file": "icons/inv_boot_armor_skybornec60_d_01.png",
+   "sha256": "1615a4165d3b8a0c2ccc733bcc5a4c1171f2c3fff8477e16f3a515afac796483",
+   "bytes": 4685
+  },
+  "inv_boot_cloth_raidmagehyjalc60_d_01": {
+   "file": "icons/inv_boot_cloth_raidmagehyjalc60_d_01.png",
+   "sha256": "e1ae7551acdeb0935ed15f809bed43e356208bb5ce986a3d9c93b9179d9c9ce6",
+   "bytes": 2871
+  },
+  "inv_boot_cloth_raidpriesthyjalc60_d_01": {
+   "file": "icons/inv_boot_cloth_raidpriesthyjalc60_d_01.png",
+   "sha256": "c938e44dfd63f42f0aefedd0537f674fc2c1d0dc13ae817c94507563d664a5d3",
+   "bytes": 2774
+  },
+  "inv_boot_cloth_raidwarlockhyjalc60_d_01": {
+   "file": "icons/inv_boot_cloth_raidwarlockhyjalc60_d_01.png",
+   "sha256": "01d13e5fa8bbd79bba0d50ee2076abf3050fef9182d97c308818ec4ec0538603",
+   "bytes": 2644
+  },
+  "inv_boot_cloth_skybornec60_b_01": {
+   "file": "icons/inv_boot_cloth_skybornec60_b_01.png",
+   "sha256": "c3db7ced955fd4234e898286bdbb4275da82748ed1b6b52d9449b8a5412b5f56",
+   "bytes": 2170
+  },
+  "inv_boot_leather_raiddruidhyjalc60_d_01": {
+   "file": "icons/inv_boot_leather_raiddruidhyjalc60_d_01.png",
+   "sha256": "1e32534b6d6d0a29aa26bc38eb9934a6f2a4467daec1c75c3c027141e3c5c4e3",
+   "bytes": 3215
+  },
+  "inv_boot_leather_raidroguehyjalc60_d_01": {
+   "file": "icons/inv_boot_leather_raidroguehyjalc60_d_01.png",
+   "sha256": "ebc9d18eebbd18349803c4a2b1aa86cc5b57d1a625b13d31f7ca8f1f40f4222a",
+   "bytes": 3216
+  },
+  "inv_boot_leather_skybornec60_b_01": {
+   "file": "icons/inv_boot_leather_skybornec60_b_01.png",
+   "sha256": "8a1300262f13418df33579f4a8d6d41cc3c50c446d88ac0b849204fa812922a7",
+   "bytes": 2782
+  },
+  "inv_boot_leather_skybornec60_b_02": {
+   "file": "icons/inv_boot_leather_skybornec60_b_02.png",
+   "sha256": "0d9685be0214296d2cc76b7b533823faa7edf5e4d64d77fc6588f0c972153a27",
+   "bytes": 2609
+  },
+  "inv_boot_mail_raidhunterhyjalc60_d_01": {
+   "file": "icons/inv_boot_mail_raidhunterhyjalc60_d_01.png",
+   "sha256": "33c1ea5902fa9b1fa2394c780ea40490bb88b04849f721dd41ea1ee7b6c754f9",
+   "bytes": 2765
+  },
+  "inv_boot_mail_raidshamanhyjalc60_d_01": {
+   "file": "icons/inv_boot_mail_raidshamanhyjalc60_d_01.png",
+   "sha256": "5d7c8788a11d2979232cbbacb387e1999af9db5f2c196e41a360b3446451fc58",
+   "bytes": 2295
+  },
+  "inv_boot_mail_skybornec60_b_01": {
+   "file": "icons/inv_boot_mail_skybornec60_b_01.png",
+   "sha256": "fae7589b4eba96b705f9f169c027dd863cbf9c1611dd09679780117a5cd33637",
+   "bytes": 2507
+  },
+  "inv_boot_plate_raidpaladinhyjalc60_d_01": {
+   "file": "icons/inv_boot_plate_raidpaladinhyjalc60_d_01.png",
+   "sha256": "743f713b8ce44b1bb5ba50704846553f1b84605934590926575a63e8e1413901",
+   "bytes": 2821
+  },
+  "inv_boot_plate_raidwarriorhyjalc60_d_01": {
+   "file": "icons/inv_boot_plate_raidwarriorhyjalc60_d_01.png",
+   "sha256": "9a00b0191215fff123bc4b0bad4cf85d11ecff519b680618c29ce599616ba70b",
+   "bytes": 3213
+  },
+  "inv_bow_1h_skybornec60_b_01": {
+   "file": "icons/inv_bow_1h_skybornec60_b_01.png",
+   "sha256": "55170790ea162cb74b8abd483ef48d7158b804ebf5d9853ecc86c4d4e42ed30c",
+   "bytes": 1403
+  },
+  "inv_bow_2h_skybornec60_b_01": {
+   "file": "icons/inv_bow_2h_skybornec60_b_01.png",
+   "sha256": "1fda3d1033bf04b712c91984fcf8b2679be3b7441cbf4718ebdd1e2d5b66a0f6",
+   "bytes": 2679
+  },
+  "inv_bracer_armor_dwarfc60_d_02": {
+   "file": "icons/inv_bracer_armor_dwarfc60_d_02.png",
+   "sha256": "554bcec723967b9af570ee6caa4ac25ba58c728b52a5262226315fef5d292d01",
+   "bytes": 4106
+  },
+  "inv_bracer_cloth_skybornec60_b_01": {
+   "file": "icons/inv_bracer_cloth_skybornec60_b_01.png",
+   "sha256": "982967f1138db45a74b5886b3d6846af52a7a50cb55b91ecbff0b7b8f47bffec",
+   "bytes": 1855
+  },
+  "inv_bracer_leather_skybornec60_b_01": {
+   "file": "icons/inv_bracer_leather_skybornec60_b_01.png",
+   "sha256": "8a68fd825716d423b30e387a011190c8792773a3232cfee2ab62bf7fdceb5cce",
+   "bytes": 2434
+  },
+  "inv_bracer_leather_skybornec60_b_02": {
+   "file": "icons/inv_bracer_leather_skybornec60_b_02.png",
+   "sha256": "560fdd46e036acbf94d1704a0ef4a4f81a98a742247993a01baad2d80b443b9d",
+   "bytes": 1854
+  },
+  "inv_bracer_mail_skybornec60_b_01": {
+   "file": "icons/inv_bracer_mail_skybornec60_b_01.png",
+   "sha256": "2d02009d6eb33e081909026ecaccfa5d33b3c4e77529ae0520ad6bb04f00ed49",
+   "bytes": 2510
+  },
+  "inv_camelot_camping_welcomingcampfire": {
+   "file": "icons/inv_camelot_camping_welcomingcampfire.png",
+   "sha256": "ff4ad169020aac6f2a1ceabef92f1d5163f5d0843b66b7bea43302cd3bace2bd",
+   "bytes": 2622
+  },
+  "inv_cape_armor_dwarfc60_d_02": {
+   "file": "icons/inv_cape_armor_dwarfc60_d_02.png",
+   "sha256": "c54839e0792293b8b4db43aecc7dc74953d376e6a4cc046d9d88b314caef7839",
+   "bytes": 4067
+  },
+  "inv_cape_armor_skybornec60_d_01": {
+   "file": "icons/inv_cape_armor_skybornec60_d_01.png",
+   "sha256": "79315b74dfef6c09d995b7e7da457e1e1fea3469a4b38c2b0ece43f31bfa9b25",
+   "bytes": 4738
+  },
+  "inv_cape_leather_skybornec60_b_01": {
+   "file": "icons/inv_cape_leather_skybornec60_b_01.png",
+   "sha256": "a3100b8f56593b4546760085614916dccc4101ecf96cc2a1fbeaad86cb7582b6",
+   "bytes": 2877
+  },
+  "inv_cape_special_camping_d_01_green": {
+   "file": "icons/inv_cape_special_camping_d_01_green.png",
+   "sha256": "baa9fe48f84b1eabd85931e07418da3b835e5978ff8f4c18e8c8585781177d88",
+   "bytes": 4964
+  },
+  "inv_catskybornemount_c60_blue": {
+   "file": "icons/inv_catskybornemount_c60_blue.png",
+   "sha256": "feddf8b7b5c90c606c2ac6fe701eea8b3bc641be6c64d8b5f9d8c0bdd28341e4",
+   "bytes": 4939
+  },
+  "inv_chest-_cloth_skybornec60_b_01": {
+   "file": "icons/inv_chest-_cloth_skybornec60_b_01.png",
+   "sha256": "c4a26d28235f0663c4c0a54c1562e8b14de7c591f290b8ddd612fc1bf5050e4b",
+   "bytes": 3911
+  },
+  "inv_chest_armor_dwarfc60_d_02": {
+   "file": "icons/inv_chest_armor_dwarfc60_d_02.png",
+   "sha256": "9627d3fb067343f55fb01041d8f5ad5cc8aa086b9cfe338d410fac5e34bfe6c1",
+   "bytes": 4828
+  },
+  "inv_chest_armor_skybornec60_a_01": {
+   "file": "icons/inv_chest_armor_skybornec60_a_01.png",
+   "sha256": "8c1df4f94a331750de4538e82d2a75ba5f31eb5102d2d5a6b128ef76b77f35c7",
+   "bytes": 3379
+  },
+  "inv_chest_armor_skybornec60_a_02": {
+   "file": "icons/inv_chest_armor_skybornec60_a_02.png",
+   "sha256": "4cc32fa91a38bb2d9e410a78e469738c348b5dff52549066bb99564a16a65358",
+   "bytes": 3307
+  },
+  "inv_chest_armor_skybornec60_d_01": {
+   "file": "icons/inv_chest_armor_skybornec60_d_01.png",
+   "sha256": "bfbd229106bc96fa807461094c784a7941e6b2b93911d70fb1e968841e063d85",
+   "bytes": 5129
+  },
+  "inv_chest_leather_skybornec60_b_01": {
+   "file": "icons/inv_chest_leather_skybornec60_b_01.png",
+   "sha256": "3098cbf6103e7a22f6897ff18772c4d1e6cd3532cf967eb5046657e82e86b08f",
+   "bytes": 4003
+  },
+  "inv_chest_leather_skybornec60_b_02": {
+   "file": "icons/inv_chest_leather_skybornec60_b_02.png",
+   "sha256": "800eee597311b1b398b263102e6aa173a0938baf960dae86eaac1ccf2bfefd47",
+   "bytes": 3115
+  },
+  "inv_chest_mail_skybornec60_b_01": {
+   "file": "icons/inv_chest_mail_skybornec60_b_01.png",
+   "sha256": "892a5cfcfa57b23535559bfb79338c9cbe3357276f353e12234934003145e5b6",
+   "bytes": 3692
+  },
+  "inv_craneskyborne_c60_green": {
+   "file": "icons/inv_craneskyborne_c60_green.png",
+   "sha256": "4ace9bc7482506a9c8b91dfa83d353cd8e625106f251118c0c7cda4cb34c61aa",
+   "bytes": 4339
+  },
+  "inv_craneskybornemount_c60_blue": {
+   "file": "icons/inv_craneskybornemount_c60_blue.png",
+   "sha256": "63e96a543380eeb6ad41cbfe2cac2646e613aae03a05f4f78186dcc39fe0f166",
+   "bytes": 4386
+  },
+  "inv_craneskybornemount_c60_gray": {
+   "file": "icons/inv_craneskybornemount_c60_gray.png",
+   "sha256": "f74f6bb2c2692d3bfdffb03e2cbbc063f41b66a28b47c5bd177c298233eebbab",
+   "bytes": 4109
+  },
+  "inv_craneskybornemount_c60_white": {
+   "file": "icons/inv_craneskybornemount_c60_white.png",
+   "sha256": "2d25edfc8d9131752e54191d48d080bfbf7be806fa1ec4f69099aab5d50d522f",
+   "bytes": 4241
+  },
+  "inv_craneskyborneswiftmount_c60_blue": {
+   "file": "icons/inv_craneskyborneswiftmount_c60_blue.png",
+   "sha256": "d9b917622875ca6d3bf8b238a04b3a744c55a4377d379831fb628b1d8294613b",
+   "bytes": 4568
+  },
+  "inv_craneskyborneswiftmount_c60_gray": {
+   "file": "icons/inv_craneskyborneswiftmount_c60_gray.png",
+   "sha256": "74b1497d4a023fa9c787726ebf1b10a0d3c223b858c4c84dabac70cee3dd8081",
+   "bytes": 4526
+  },
+  "inv_craneskyborneswiftmount_c60_white": {
+   "file": "icons/inv_craneskyborneswiftmount_c60_white.png",
+   "sha256": "31186cded7e01c77b456fb872dc0ab7dc674fac4207d923619fc77c2ba2fa939",
+   "bytes": 4564
+  },
+  "inv_diablofunsized_c60_red": {
+   "file": "icons/inv_diablofunsized_c60_red.png",
+   "sha256": "2a7c9844c6e9fde2cfa3df0ca5304f182dfc754ac8e398c437b36e8dd119cd17",
+   "bytes": 4750
+  },
+  "inv_dragonhawk2_cyan": {
+   "file": "icons/inv_dragonhawk2_cyan.png",
+   "sha256": "ecf1b4560ce9ca4ed7b2fa452caf9bc0736e2be64eba01ffa4d8f8c8b4f0aff5",
+   "bytes": 4833
+  },
+  "inv_drink_31_embalmingfluid_color03": {
+   "file": "icons/inv_drink_31_embalmingfluid_color03.png",
+   "sha256": "870223fdf7ead313eafd7b8387122fbcf2397334498b012c8ae498b31611480d",
+   "bytes": 2202
+  },
+  "inv_dwarfbearmount_c60": {
+   "file": "icons/inv_dwarfbearmount_c60.png",
+   "sha256": "8029ea6dd285e820ebbbd5e41f0a51dfad6bd19010cac9271d13b0eaa65cc37b",
+   "bytes": 5304
+  },
+  "inv_enchanting_modifiedcraftingreagent_indigo": {
+   "file": "icons/inv_enchanting_modifiedcraftingreagent_indigo.png",
+   "sha256": "6a859ac9b1a68f26f111f88c0f24c04065a992d431a0e30f571bd5eb62b0025e",
+   "bytes": 3450
+  },
+  "inv_first_aid_70_-jar": {
+   "file": "icons/inv_first_aid_70_-jar.png",
+   "sha256": "4c53bd7e7212e7c7976e7285eec16d697a5ad0ec24a991909a3d7db34a9b018c",
+   "bytes": 2655
+  },
+  "inv_glove_armor_dwarfc60_d_02": {
+   "file": "icons/inv_glove_armor_dwarfc60_d_02.png",
+   "sha256": "857bf57f82eaa4b0b41568a41025b43b9fee5041295126d180fa4c1cef5adffd",
+   "bytes": 4618
+  },
+  "inv_glove_armor_skybornec60_d_01": {
+   "file": "icons/inv_glove_armor_skybornec60_d_01.png",
+   "sha256": "5128b437eaaf90692cda353ae3d2a96f8e3daedfd71746bf56c4e149ca60f4b2",
+   "bytes": 4817
+  },
+  "inv_glove_cloth_raidmagehyjalc60_d_01": {
+   "file": "icons/inv_glove_cloth_raidmagehyjalc60_d_01.png",
+   "sha256": "ed446475a760bd15aaecd0a29470f0ab913d6715ba2adf0eecfe63358c7c9278",
+   "bytes": 2729
+  },
+  "inv_glove_cloth_raidpriesthyjalc60_d_01": {
+   "file": "icons/inv_glove_cloth_raidpriesthyjalc60_d_01.png",
+   "sha256": "cf26a9b6bb442c064471bd4ef7191bd75c44a734dfcd04c38b88fc0fed7db5e4",
+   "bytes": 2377
+  },
+  "inv_glove_cloth_raidwarlockhyjalc60_d_01": {
+   "file": "icons/inv_glove_cloth_raidwarlockhyjalc60_d_01.png",
+   "sha256": "9fb90122f3a4b78103d43a18cfcfcacb05e3e1b685c47cdedf507c4326309025",
+   "bytes": 2837
+  },
+  "inv_glove_cloth_skybornec60_b_01": {
+   "file": "icons/inv_glove_cloth_skybornec60_b_01.png",
+   "sha256": "748f86f57294dff229f46070f4c546dbf3418020c1eefdcfb20e31822979307b",
+   "bytes": 2361
+  },
+  "inv_glove_leather_raiddruidhyjalc60_d_01": {
+   "file": "icons/inv_glove_leather_raiddruidhyjalc60_d_01.png",
+   "sha256": "79877bbad8e1e9bff270c8b56cc8de822d8adec40a319473fe7d32a78105df4d",
+   "bytes": 2470
+  },
+  "inv_glove_leather_raidroguehyjalc60_d_01": {
+   "file": "icons/inv_glove_leather_raidroguehyjalc60_d_01.png",
+   "sha256": "677157bec09657fce65cb847f93bf4d78ea26228bf242db019b07ae5c236d214",
+   "bytes": 2722
+  },
+  "inv_glove_leather_skybornec60_b_01": {
+   "file": "icons/inv_glove_leather_skybornec60_b_01.png",
+   "sha256": "ba8582df918f636fe856710630b41834c2deb59d795c004c71dea9fd69008c4a",
+   "bytes": 2165
+  },
+  "inv_glove_leather_skybornec60_b_02": {
+   "file": "icons/inv_glove_leather_skybornec60_b_02.png",
+   "sha256": "02791ad8b274d31157cf1cd6b40c6295cf5eb35bc9209e8e614fd12c007718a1",
+   "bytes": 2394
+  },
+  "inv_glove_mail_raidhunterhyjalc60_d_01": {
+   "file": "icons/inv_glove_mail_raidhunterhyjalc60_d_01.png",
+   "sha256": "b8f59e9970d1c5cefe847362a878749e3b4cd2d5c6c4ca3b3b06d30f10db76f5",
+   "bytes": 2307
+  },
+  "inv_glove_mail_raidshamanhyjalc60_d_01": {
+   "file": "icons/inv_glove_mail_raidshamanhyjalc60_d_01.png",
+   "sha256": "772634b3834fbebf20ad376eb39c5ee629226ee9b447074ca1d7cc03925b0835",
+   "bytes": 2077
+  },
+  "inv_glove_mail_skybornec60_b_01": {
+   "file": "icons/inv_glove_mail_skybornec60_b_01.png",
+   "sha256": "63f27e61079b43995ea37c52d1a6b7f237c92fc2222e3354dcde58547bee0fec",
+   "bytes": 1981
+  },
+  "inv_glove_plate_raidpaladinhyjalc60_d_01": {
+   "file": "icons/inv_glove_plate_raidpaladinhyjalc60_d_01.png",
+   "sha256": "07bbd64fc1dd313593454eaeb50ca98fc19544832742ef4bae6f813f2803601a",
+   "bytes": 2414
+  },
+  "inv_glove_plate_raidwarriorhyjalc60_d_01": {
+   "file": "icons/inv_glove_plate_raidwarriorhyjalc60_d_01.png",
+   "sha256": "9c6ddf427f51327f85d2a6fe139d7d953a4882292641aa25c31fba58b4bda1e8",
+   "bytes": 2378
+  },
+  "inv_heart_of_the_thunder-king_icon": {
+   "file": "icons/inv_heart_of_the_thunder-king_icon.png",
+   "sha256": "abe5b8b47aae5a6028f7aab3983943dfc2438c76f1e44f90dcfc56513ae796b6",
+   "bytes": 2796
+  },
+  "inv_helm_armor_buckledhat_b_01_blue": {
+   "file": "icons/inv_helm_armor_buckledhat_b_01_blue.png",
+   "sha256": "aa2e5f71af86605f32272b48301a08c95baad8d306feae176265f3c7ab6f3981",
+   "bytes": 1950
+  },
+  "inv_helm_armor_buckledhat_b_01_brown": {
+   "file": "icons/inv_helm_armor_buckledhat_b_01_brown.png",
+   "sha256": "87273e79d85ff811cb2f1d2ada56ec80b8e1221eed772080d3ce7653e65a1134",
+   "bytes": 1972
+  },
+  "inv_helm_armor_dwarfc60_d_02": {
+   "file": "icons/inv_helm_armor_dwarfc60_d_02.png",
+   "sha256": "45b8ae784cff55083608f760be3abb85f404a3e0735105d87614360a65a319d7",
+   "bytes": 4294
+  },
+  "inv_helm_armor_skybornec60_d_01": {
+   "file": "icons/inv_helm_armor_skybornec60_d_01.png",
+   "sha256": "65e07baa58a93f4a8a200c97bef742a5c25814bc02ca5557a9bcfab8cd788eaf",
+   "bytes": 4997
+  },
+  "inv_helm_cloth_skybornec60_b_01": {
+   "file": "icons/inv_helm_cloth_skybornec60_b_01.png",
+   "sha256": "a367182d03db53b4adeaa3a87cbcba508b5a9cd277d1832c0e2f8ce15c309ce2",
+   "bytes": 2456
+  },
+  "inv_helm_leather_skybornec60_b_01": {
+   "file": "icons/inv_helm_leather_skybornec60_b_01.png",
+   "sha256": "5c829a7ae553067b06f900ee4b8ce14ef41c8cb37c8f45c443af38ea3523aa2e",
+   "bytes": 2141
+  },
+  "inv_helm_leather_skybornec60_b_02": {
+   "file": "icons/inv_helm_leather_skybornec60_b_02.png",
+   "sha256": "750be0a06f4dcc34d3c6572beac4d17fc8ff7d3db79bf37cbe2a4ccc4d160c10",
+   "bytes": 2795
+  },
+  "inv_helm_mail_skybornec60_b_01": {
+   "file": "icons/inv_helm_mail_skybornec60_b_01.png",
+   "sha256": "76877ddfb404975db7a9361940e9eb7156bcde1a0d83d4739417ba44cd3b9263",
+   "bytes": 3749
+  },
+  "inv_inscription_modified_craftingreagent07": {
+   "file": "icons/inv_inscription_modified_craftingreagent07.png",
+   "sha256": "a81c62ea7b25a7bbf9a81d058ee9d55887439b03a0b9eab5c30ab10c26a509ba",
+   "bytes": 3131
+  },
+  "inv_jewelcrafting_cut-standart-gem-hybrid_color5_1": {
+   "file": "icons/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.png",
+   "sha256": "7b32adcaa2c3d154c3e8ac151b2f7a308dd0fa547a40ed4fb6312bade4afc3a7",
+   "bytes": 2843
+  },
+  "inv_knife_1h_skybornec60_b_01": {
+   "file": "icons/inv_knife_1h_skybornec60_b_01.png",
+   "sha256": "5108e3a125dfdedb571718377a34dacea2cc337984055eb02964b841e4f4e636",
+   "bytes": 2380
+  },
+  "inv_mace_1h_raidhyjalc60_d_01": {
+   "file": "icons/inv_mace_1h_raidhyjalc60_d_01.png",
+   "sha256": "38474ba4611fe928e5aabcd541a94e28f581487f1ab1b1259a3ed8212a206a08",
+   "bytes": 3277
+  },
+  "inv_mace_1h_skybornec60_b_01": {
+   "file": "icons/inv_mace_1h_skybornec60_b_01.png",
+   "sha256": "74dc75d11f5e520cbd26e6a290f07f9f6754bd6bca29ae212ea22a712862104d",
+   "bytes": 2095
+  },
+  "inv_mace_2h_skybornec60_b_01": {
+   "file": "icons/inv_mace_2h_skybornec60_b_01.png",
+   "sha256": "795ab02299f4d3fba24b57625f9701bac4dd4545363741df5dd0ce5826b25371",
+   "bytes": 2265
+  },
+  "inv_magicalowlbearbaby_black": {
+   "file": "icons/inv_magicalowlbearbaby_black.png",
+   "sha256": "6deb80ed9fb2af70597885473107c2d4b9b78207653367cc052544421b4e7cef",
+   "bytes": 3003
+  },
+  "inv_misc_food_93_skethylberries-": {
+   "file": "icons/inv_misc_food_93_skethylberries-.png",
+   "sha256": "9a3f2d33d523195815163c82964f9dbb938f466f95afae0451ff717a4b4a64c0",
+   "bytes": 3080
+  },
+  "inv_misc_food_meat_raw_01_color03": {
+   "file": "icons/inv_misc_food_meat_raw_01_color03.png",
+   "sha256": "e8595e5784f926b78f3f3926919ccd1adf1f454f0dba35343b115ad1375870fa",
+   "bytes": 2258
+  },
+  "inv_misc_kobysstools_knifetrap_color3": {
+   "file": "icons/inv_misc_kobysstools_knifetrap_color3.png",
+   "sha256": "ab11fe73969c9f4d14ecbee748958a0a9c43cbeed69c4d31502529a2c5b8592d",
+   "bytes": 2924
+  },
+  "inv_misc_spineleaf-_01": {
+   "file": "icons/inv_misc_spineleaf-_01.png",
+   "sha256": "91c131b1f8ce6fa405a5de5ebe35838d67d286a9f69264772f64c297a42eb3df",
+   "bytes": 3986
+  },
+  "inv_ore_ironclaw_corrupted": {
+   "file": "icons/inv_ore_ironclaw_corrupted.png",
+   "sha256": "fdeb3d6d62571aa1f389f8ed268964bd817000a482b8dbdf7631c78aa624f5ee",
+   "bytes": 4063
+  },
+  "inv_pachimarapet": {
+   "file": "icons/inv_pachimarapet.png",
+   "sha256": "bdaf7c938e2fb7acd5363c968942883fe3344f0026f85877be3d18a980391268",
+   "bytes": 4911
+  },
+  "inv_pandacub_c60_black": {
+   "file": "icons/inv_pandacub_c60_black.png",
+   "sha256": "a0512040d4ead7233694644d102f500c4a153346386dddb170479bfab3e78782",
+   "bytes": 4789
+  },
+  "inv_pant_armor_dwarfc60_d_02": {
+   "file": "icons/inv_pant_armor_dwarfc60_d_02.png",
+   "sha256": "163b870d3f8b28cbe65b213d72d49c29638d94e710eceb9d90c028a1a768ef39",
+   "bytes": 4577
+  },
+  "inv_pant_armor_skybornec60_d_01": {
+   "file": "icons/inv_pant_armor_skybornec60_d_01.png",
+   "sha256": "a701695f1313f09ea98f01b766b67c2112345d0066eb1162bb463c3313e9440e",
+   "bytes": 4605
+  },
+  "inv_pant_cloth_raidmagehyjalc60_d_01": {
+   "file": "icons/inv_pant_cloth_raidmagehyjalc60_d_01.png",
+   "sha256": "5bffeb4e4cab6fde926ef05ed307ea15a4661bbf430c40e1114814ca10aa14b8",
+   "bytes": 3055
+  },
+  "inv_pant_cloth_raidpriesthyjalc60_d_01": {
+   "file": "icons/inv_pant_cloth_raidpriesthyjalc60_d_01.png",
+   "sha256": "4a76105062393eb48630a6c8790ed6f76156bc5600e5b5dc21d3e1f3a815e4cf",
+   "bytes": 3254
+  },
+  "inv_pant_cloth_raidwarlockhyjalc60_d_01": {
+   "file": "icons/inv_pant_cloth_raidwarlockhyjalc60_d_01.png",
+   "sha256": "598cf5ef2b37a5ffbe34a583f8d87eac455e9ed0a588daeb3c21abf9685e6265",
+   "bytes": 3608
+  },
+  "inv_pant_cloth_skybornec60_b_01": {
+   "file": "icons/inv_pant_cloth_skybornec60_b_01.png",
+   "sha256": "9cd980f9dc29801a70e62406cecea16a8a15ed112c8fd6637a177b6244d8efe8",
+   "bytes": 3060
+  },
+  "inv_pant_leather_raiddruidhyjalc60_d_01": {
+   "file": "icons/inv_pant_leather_raiddruidhyjalc60_d_01.png",
+   "sha256": "00ced155de293e50ebbea7df3df97a3ecb490b639a9f2ea2d8ecacfe65fb0112",
+   "bytes": 3042
+  },
+  "inv_pant_leather_raidroguehyjalc60_d_01": {
+   "file": "icons/inv_pant_leather_raidroguehyjalc60_d_01.png",
+   "sha256": "0a3347e8d4999a5a0907883b6cd5aee32af83d2a6f72aea51423a46b589b2035",
+   "bytes": 3925
+  },
+  "inv_pant_leather_skybornec60_b_01": {
+   "file": "icons/inv_pant_leather_skybornec60_b_01.png",
+   "sha256": "2c1cb404a314dbdfeef59c0f791bdce61d3c89e3c05681ed7a9daffa489a99eb",
+   "bytes": 2976
+  },
+  "inv_pant_leather_skybornec60_b_02": {
+   "file": "icons/inv_pant_leather_skybornec60_b_02.png",
+   "sha256": "ae581fbe88eff1561b9b7e2dd66fb85c0d40d893523214689c595075c0cc866e",
+   "bytes": 2681
+  },
+  "inv_pant_mail_raidhunterhyjalc60_d_01": {
+   "file": "icons/inv_pant_mail_raidhunterhyjalc60_d_01.png",
+   "sha256": "6cd4de7af1d15e48d357d50bfc0ae707bb11dc51d01396ccc090d13c9d3ab7a0",
+   "bytes": 3065
+  },
+  "inv_pant_mail_raidshamanhyjalc60_d_01": {
+   "file": "icons/inv_pant_mail_raidshamanhyjalc60_d_01.png",
+   "sha256": "fef1404e2bc5616a31fffcea9b8f88e81dfca021bf1d50322b4c50f066f70fe3",
+   "bytes": 2640
+  },
+  "inv_pant_mail_skybornec60_b_01": {
+   "file": "icons/inv_pant_mail_skybornec60_b_01.png",
+   "sha256": "05f3e48bf369f7ac49161f5ba2593e8215d2f2bd0aed7f5eb94c7f1ab33466c9",
+   "bytes": 3301
+  },
+  "inv_pant_plate_raidpaladinhyjalc60_d_01": {
+   "file": "icons/inv_pant_plate_raidpaladinhyjalc60_d_01.png",
+   "sha256": "a0138d73dac15500cff1f251e8b68b6e1499eeb5624b8e9ab90274e57ed77efc",
+   "bytes": 3323
+  },
+  "inv_pant_plate_raidwarriorhyjalc60_d_01": {
+   "file": "icons/inv_pant_plate_raidwarriorhyjalc60_d_01.png",
+   "sha256": "a1dbbe7b0ccd498d8456e26514a311cca8c2cb3933ec5b4a2ec628f4bcdea3d6",
+   "bytes": 3096
+  },
+  "inv_robe_armor_skybornec60_d_01": {
+   "file": "icons/inv_robe_armor_skybornec60_d_01.png",
+   "sha256": "bfbd229106bc96fa807461094c784a7941e6b2b93911d70fb1e968841e063d85",
+   "bytes": 5129
+  },
+  "inv_shield_1h_raidhyjalc60_d_01": {
+   "file": "icons/inv_shield_1h_raidhyjalc60_d_01.png",
+   "sha256": "a81b6c9eb5dcc0e6dea97d9bdc1e4db0afd255dee5a41f36f87e0d1a17732bc2",
+   "bytes": 3892
+  },
+  "inv_shield_1h_skybornec60_b_01": {
+   "file": "icons/inv_shield_1h_skybornec60_b_01.png",
+   "sha256": "9fb55d885097a2fbef754149a494c47a9607f5dd28ee163a7dd7628b34ee5f58",
+   "bytes": 2899
+  },
+  "inv_shoulder_armor_dwarfc60_d_02": {
+   "file": "icons/inv_shoulder_armor_dwarfc60_d_02.png",
+   "sha256": "5b1cc65c6633dfd3f720ce1b7bcee5546483e383dfb00a3464741f9df53fd630",
+   "bytes": 4539
+  },
+  "inv_shoulder_armor_skybornec60_d_01": {
+   "file": "icons/inv_shoulder_armor_skybornec60_d_01.png",
+   "sha256": "5e455d03b031bea6fd89aa1033f0803801c91cfc8a4c99dd3a892bf917f68bb6",
+   "bytes": 4783
+  },
+  "inv_shoulder_cloth_raidmagehyjalc60_d_01": {
+   "file": "icons/inv_shoulder_cloth_raidmagehyjalc60_d_01.png",
+   "sha256": "9558060204ee67ca7632120985d259ad256c84ba5165fbcb49267343608751b3",
+   "bytes": 2962
+  },
+  "inv_shoulder_cloth_raidwarlockhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_cloth_raidwarlockhyjalc60_d_01.png",
+   "sha256": "54eaf460f2aefcfd54630e1e7b2d5c2e17d9e5cec31069b1a7efb272981bbaff",
+   "bytes": 4154
+  },
+  "inv_shoulder_cloth_skybornec60_b_01": {
+   "file": "icons/inv_shoulder_cloth_skybornec60_b_01.png",
+   "sha256": "deefc9114f3c37c34c431582c78d5870546111e29b3d4273e43a0436293fa808",
+   "bytes": 2586
+  },
+  "inv_shoulder_l_mail_raidhunterhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_l_mail_raidhunterhyjalc60_d_01.png",
+   "sha256": "90a148280e8c39f023464fc939a52729ec62bbc5396d394a41d634b31f7730a9",
+   "bytes": 3537
+  },
+  "inv_shoulder_leather_raiddruidhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_leather_raiddruidhyjalc60_d_01.png",
+   "sha256": "632a60c984ca6c9b347e23895b1da82dea204a200f53d6dd129391e04b533be3",
+   "bytes": 3385
+  },
+  "inv_shoulder_leather_raidroguehyjalc60_d_01": {
+   "file": "icons/inv_shoulder_leather_raidroguehyjalc60_d_01.png",
+   "sha256": "3a0e287218c158d239ef8ee4f7265bdec841f2056e05155aa7fd1de701a0d3d5",
+   "bytes": 3356
+  },
+  "inv_shoulder_leather_skybornec60_b_01": {
+   "file": "icons/inv_shoulder_leather_skybornec60_b_01.png",
+   "sha256": "04efe819bbf44a6275daa3fed2b18e41f253fb8540ff4e769308d60d9f26a95b",
+   "bytes": 2759
+  },
+  "inv_shoulder_leather_skybornec60_b_02": {
+   "file": "icons/inv_shoulder_leather_skybornec60_b_02.png",
+   "sha256": "ce24978eae4f9f6af12aa8065d1251bf2b49bc5a35c5c4abd7035f1833672249",
+   "bytes": 3061
+  },
+  "inv_shoulder_mail_raidshamanhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_mail_raidshamanhyjalc60_d_01.png",
+   "sha256": "5abcad9eb7600986b86711caa389e69e50566536d47491e837127632996a7483",
+   "bytes": 3664
+  },
+  "inv_shoulder_mail_skybornec60_b_01": {
+   "file": "icons/inv_shoulder_mail_skybornec60_b_01.png",
+   "sha256": "2ed7de3e459f07c6b98d16716cb5e2abf4943237c9f2f095515148372218bfa8",
+   "bytes": 2749
+  },
+  "inv_shoulder_plate_raidpaladinhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_plate_raidpaladinhyjalc60_d_01.png",
+   "sha256": "1a53e12c840e726379ab94cae3bb9f785aa49fa48811cbc475ef719b94d9428d",
+   "bytes": 3224
+  },
+  "inv_shoulder_plate_raidwarriorhyjalc60_d_01": {
+   "file": "icons/inv_shoulder_plate_raidwarriorhyjalc60_d_01.png",
+   "sha256": "3d5b3d268d9d3579c8070d64421d131dbaf75b5e515aa11b374a7a886f13dc90",
+   "bytes": 3030
+  },
+  "inv_shoulder_r_cloth_raidpriesthyjalc60_d_01": {
+   "file": "icons/inv_shoulder_r_cloth_raidpriesthyjalc60_d_01.png",
+   "sha256": "916c3ac612ee111995acfb4858089567282b143a6f9c62a42f0b422022001d10",
+   "bytes": 4074
+  },
+  "inv_skinning_sunlesscarapace2": {
+   "file": "icons/inv_skinning_sunlesscarapace2.png",
+   "sha256": "4b5a17c3f331b61097bfd85962c556fdfc88b0ccc29e5415c329730df5b4016a",
+   "bytes": 2623
+  },
+  "inv_staff_2h_skybornec60_b_01": {
+   "file": "icons/inv_staff_2h_skybornec60_b_01.png",
+   "sha256": "91612ad37a574a5016cefe44fef6c01f924caa69556fbac25486ab00b445c3f3",
+   "bytes": 3512
+  },
+  "inv_sword_1h_skybornec60_b_01": {
+   "file": "icons/inv_sword_1h_skybornec60_b_01.png",
+   "sha256": "160fdecf3682043206a9e98108dd44ceea2c37756ebd4e3be0ab13cf9cac0dd9",
+   "bytes": 1882
+  },
+  "inv_sword_2h_skybornec60_b_01_white": {
+   "file": "icons/inv_sword_2h_skybornec60_b_01_white.png",
+   "sha256": "83f88a682c95d91c67bf450e726f40908ba7b3d6863dcbaba9894b436d00db3f",
+   "bytes": 1981
+  },
+  "inv_tabard_darkspearc60": {
+   "file": "icons/inv_tabard_darkspearc60.png",
+   "sha256": "35bf74e4577406467a1de84143b17c7ed6848cc31511fd3a1255b2e52703b2a8",
+   "bytes": 3624
+  },
+  "inv_tabard_legacyc60_b_01": {
+   "file": "icons/inv_tabard_legacyc60_b_01.png",
+   "sha256": "4e9c3b1a92f1fb3dad5135af8d5e151e7b612d30e72a73cc2f39ac665691b789",
+   "bytes": 4849
+  },
+  "inv_tabard_lordaeronc60_b_01": {
+   "file": "icons/inv_tabard_lordaeronc60_b_01.png",
+   "sha256": "b412f20e08568a948ebe9584ba65799768bb943f00da4001d831d5260223e048",
+   "bytes": 4749
+  },
+  "inv_tabard_merchantalliancec60": {
+   "file": "icons/inv_tabard_merchantalliancec60.png",
+   "sha256": "2208e42ac00692fa8c29ef5e1e95bd35f1019b5b39835afea73f1330e3f9e0ec",
+   "bytes": 3319
+  },
+  "inv_tabard_merchanthordec60": {
+   "file": "icons/inv_tabard_merchanthordec60.png",
+   "sha256": "f8c3e7b758097fcb3d62623b924e8dd681f175c56ecfb17a6cb0badc89fbbe33",
+   "bytes": 3205
+  },
+  "inv_tabard_rivergladesc60_b_01": {
+   "file": "icons/inv_tabard_rivergladesc60_b_01.png",
+   "sha256": "e70d32a2adf0c83a8b92d6091c26f863d3c764fa9d192b775e6d06a0bc9205db",
+   "bytes": 3390
+  },
+  "inv_tabard_theramorec60": {
+   "file": "icons/inv_tabard_theramorec60.png",
+   "sha256": "30b5b3569c7eac84d9c64f3169538acf932b91b4a1ba4645e45c7e148b258dc1",
+   "bytes": 3181
+  },
+  "inv_ventureco_ring02_color4": {
+   "file": "icons/inv_ventureco_ring02_color4.png",
+   "sha256": "a5b2fbd8035e4affa30199416d9ae147c5ce0459aa23d0f8ba35d721dc4a3ff8",
+   "bytes": 2716
+  },
+  "inv_wand_1h_skybornec60_b_01": {
+   "file": "icons/inv_wand_1h_skybornec60_b_01.png",
+   "sha256": "041efb3ab281f8bf9c8da6e7cd9b3e06ac774cd2f937fe7f737200e6394f0fe9",
+   "bytes": 3743
+  },
+  "inv_zerglingpet_c60": {
+   "file": "icons/inv_zerglingpet_c60.png",
+   "sha256": "9e258de595e3ff367158533993817a2e9e0f18638c4c1ca5ab3f9c49308e3c1b",
+   "bytes": 4970
+  },
+  "jewelcrafting_cut-standart-gem_color1": {
+   "file": "icons/jewelcrafting_cut-standart-gem_color1.png",
+   "sha256": "bef23a07fad86316796ef0fb65e28675b17ec76026a7dda4a9b425aba76375aa",
+   "bytes": 2439
+  },
+  "jewelcrafting_uncut-epic-gem_color1": {
+   "file": "icons/jewelcrafting_uncut-epic-gem_color1.png",
+   "sha256": "17e4929f0162d929c67e3819ebb316f843608c72063039d2b9a7e80dc2a1dfbb",
+   "bytes": 2550
+  },
+  "spell_frost_ring-of-frost": {
+   "file": "icons/spell_frost_ring-of-frost.png",
+   "sha256": "be482985de945dbef5502d2bc3ce5ca01b78feef5a29709d09977ea92148ac15",
+   "bytes": 4873
+  },
+  "trade_archaeology_bones-of-transformation": {
+   "file": "icons/trade_archaeology_bones-of-transformation.png",
+   "sha256": "5b8eb72d2733cf78a157e1f0175faaf15aa383715cba4792e3aa9b18a213d078",
+   "bytes": 2128
+  },
+  "trade_archaeology_carved-wildhammer-gryphon-figurine": {
+   "file": "icons/trade_archaeology_carved-wildhammer-gryphon-figurine.png",
+   "sha256": "d042722d3776c437c46f8d83e2b12291ab7deeac8c9fedf6b935dd9ab3af2734",
+   "bytes": 2968
+  },
+  "trade_archaeology_insect-in-amber": {
+   "file": "icons/trade_archaeology_insect-in-amber.png",
+   "sha256": "d834df840c0b7a0e9fa1a0efccbe65162380ec7701bd97112f3164c2956981d2",
+   "bytes": 3123
+  },
+  "trade_archaeology_pendant-of-the-aqir": {
+   "file": "icons/trade_archaeology_pendant-of-the-aqir.png",
+   "sha256": "bb9dadf068d0250820e1613827c248cebaae56bf0f18c7b052d1fdc043a1291c",
+   "bytes": 3580
+  },
+  "trade_archaeology_silverdoorknocker-of-female-dwarf": {
+   "file": "icons/trade_archaeology_silverdoorknocker-of-female-dwarf.png",
+   "sha256": "d1ad47d6ab1ba0d02f70481e12a8ec8ea1f0d93d10aed2b596ee5e15e7d3a074",
+   "bytes": 3688
+  },
+  "ui-hud-actionbar-keyring": {
+   "file": "icons/ui-hud-actionbar-keyring.png",
+   "sha256": "1ba4eae500f2faed6545c1ec7b71c90a88df74a974830aafa5f5c24c7f87d8f8",
+   "bytes": 29680
+  }
+ },
+ "loadings": {
+  "hyjal-summit": {
+   "file": "loadings/hyjal-summit.png",
+   "sha256": "0d73a0506479c515d71825d27865c6083b9208a113f2b32a2baa21f5ca07952c",
+   "bytes": 289905
+  }
+ },
+ "notFound": {
+  "icons": [
+   "8119728"
+  ],
+  "loadings": [
+   "notFound"
+  ],
+  "notes": [
+   "icons: 161 键中 160 个按 listfile 名映射（连字符在零售 listfile 中归一化为空格，15 键按空格变体精确命中）导出 PNG；1 键 notFound: 8119728（纯数字键，listfile 无此文件名，未用相似图代替）",
+   "maps: 9 张区域底图全部 notFound——私服归档无 MapArea/MapDiff/TextureData 三张 DB2（清单表名与 WorldMapArea 零售 fdid 1374382 均不存在），uiMapID→fileDataID 链路无法建立；world-maps listfile 亦无区域图集纹理文件",
+   "bosses: 64 个 displayId 中 51 个在 CDI 命中（链路至 modelID/CMD 成立），13 个 CDI notFound（私服新增模型未入表）；全部 64 条 noTexture/notFound 无导出——经典 Boss 头像为 3D 模型运行时渲染，CDI/CMD 无肖像贴图字段，f27 变体贴图抽样 5 张验证为法线/数据贴图，M2 为私服包装格式未能解析贴图名",
+   "loadings: hyjal-summit 导出成功（LoadScreenHyjal=131847 解码为 512x512 燃烧的远征载入画面）；barrow-deeps notFound（listfile 无 LoadScreenBarrow* 任何变体，私服自定义载入图未具名）",
+   "db2: 导出 10 张（Item/ItemSparse/Spell/AreaTable/CreatureDisplayInfo/CreatureModelData/Creature/Faction/QuestInfo + ManifestInterfaceItemIcon 作为 ItemIcon 候选，私服 ItemIcon 无独立表）；8 张 missing（MapArea/MapDiff/TextureData/CameraDefinition/PlayerClass/PlayerRace/QuestReward/DungeonMap——私服归档与 listfile 中均无这些表；DungeonMap=1347271 NOTFOUND 已确认）",
+   "db2 CSV 列名说明: WDC5 格式不含列名，CSV 用 id+f0..fN 索引列，每表附 .schema.json（含 offbits/sizebits/stype/addsize 位布局）；已确认关键列: CDI f1=CreatureModelID、f27=贴图变体数组；CMD f2=模型 m2 的 FileDataID（私服 CMD 无贴图字段，f25/f33 为浮点字段）",
+   "私服 BLP2 变体: offsets[0] 即全尺寸 mip（DXT1 按名义宽高直接解压），compression 2=半尺寸链标记；PNG 用大端 chunk 头 + ZLibStream 写入",
+   "写客户端目录情况: 未修改/写入任何客户端文件（含 Data\\、_forever_\\、插件目录），所有输出仅写入 ziliao-export\\；未安装任何 bot/injector/modifier；未上传任何文件到公网",
+   "doNotExport 遵守: 未导出 Data_DungeonRates（掉落概率）与任何插件本体/作者说明文字",
+   "self-check: 随机抽查 3 张 PNG（inv_axe_2h_raidhyjalc60_d_01.png / trade_archaeology_carved-wildhammer-gryphon-figurine.png / inv_craneskybornemount_c60_blue.png）均为真实内容，非空白/纯色/花屏；counts 满足 icons.ok<=161, maps.ok<=9, bosses.ok<=64；maps/bosses resolve.csv 无 ok 行，实际路径列为空（无凑数文件）"
+  ]
+ }
+}
