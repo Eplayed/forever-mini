@@ -29,7 +29,7 @@
    }
   },
   "method": "tools/import-client-export.py --apply",
-  "note": "这一份是原料留档：图标转成 56×56 jpg 落 src/img/icons/，载入图落 src/img/art/dungeons/ 并挂进 art.json.dungeons。重跑 fetch-art.py 会覆盖 art.json，之后要再跑一次本脚本把客户端那一层放回去。"
+  "note": "这一份是原料留档：图标转成 56×56 jpg 落 src/img/icons/，载入图落 src/img/art/dungeons/ 并挂进 art.json.dungeons。art.json 由 fetch-art.py 按 src/img/art/manifest.json 的 items 重算，所以这张图能活下来是因为它在 manifest 里有一条 origin=client-export 的记录。"
  },
  "icons": {
   "ability_warlock_incubus": {

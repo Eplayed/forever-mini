@@ -4,9 +4,9 @@
 `docs/DATA-CLIENT-EXPORT-2026-10-19.md`。这份文件记三件事：**他报的数和我们登记的数对不对得上**、
 **哪几条结论已经可以定案**、**文件到手之后按什么顺序并进来**。
 
-状态：**待文件回传**。这一台 Mac 看不到那台机器的 `C:\GAME`
-（`/Volumes/BOOTCAMP` 挂的是本机 Boot Camp 分区，里面没有 `GAME` 目录），
-所以本文件只写核对与计划，不动任何成品数据。
+状态：**已并入（2026-10-21 深夜）**。站主把包复制到仓库外 `.scratch/wow/ziliao-export/`，
+图标与载入图两层已经进仓库（代码提交 `9b336e0`），结果见下面第六节。
+DB2 那 10 张表**这一轮没动**，另开一单。
 
 ## 一、先更正我自己写错的三处
 
@@ -82,3 +82,39 @@
 - 没并任何数据、没改界面、没动成品——文件还没到手，硬做就是拿假数据填。
 - 没复核他那份 RESULT.json（拿不到文件）。
 - 没验证"游戏内截图能不能当区域底图"这条新路（要他那边开游戏配合）。
+
+## 六、并进来的结果（2026-10-21 深夜）
+
+1. **先验再写**：按包里的 `RESULT.json` 逐条重算 sha256 与字节数，**194/194 全对**，
+   一条都没缺、一条都没变。这一步是脚本 `tools/import-client-export.py` 做的，哈希不过它一个文件都不写。
+2. **图标：缺图登记 161 → 1。** 本地图标 3294 → 3454 张（转成 56×56 `.jpg`，与 CDN 那一档对齐）。
+   唯一剩下的 `8119728` 是纯数字键，导出方按 listfile 找不到同名文件——
+   **但它很可能根本不是文件名，而是一个 FileDataID**：包里 `Item.db2` + `ManifestInterfaceItemIcon.db2`
+   正好能建"物品 → 图标 FileDataID"这条映射，下一轮从这两张表查一下就能定它到底存不存在。
+3. **这 160 张在数据里被引用 548 处**：`items.json` 393 · `professions` 配方 142 ·
+   `world` 稀有掉落 9 · `legacy` 2 · `spells` 1 · `changes` 1。
+   不是"文件进来了就算完"——真页面抽查过：物品库搜「乌萨娜的头颅」那一行，
+   图标从占位块变成真图（`naturalWidth>0`）；专业页制皮配方 2437 张图 **0 坏图**。
+4. **海加尔山载入图进来了**，`art.json.dungeons` 36 → 37，副本详情页那条横幅有图。
+   它是 512×512 方图，站内其它 `dungeon-loading` 是 560×315 横图；
+   横幅本来就写 `object-fit:cover` 居中裁，所以不拉伸、不需要为它改样式。
+   巴罗夫地穴那座仍是 notFound（导出方报"无任何 `LoadScreenBarrow*` 变体"）。
+5. **顺手改了一句过期文案**：物品库页头原来写"图标取自暴雪官方 CDN 本地转存"，
+   这 160 张是客户端导出的，那句话不再完整，改成"官方没有的那一部分从测试版客户端导出补上"。
+6. **顺手验了一条素材层的规矩**（记进 `docs/DATA-MAINTENANCE.md`）：`fetch-art.py` 生成 `art.json`
+   时**完全按 `src/img/art/manifest.json` 的 items 重算**，所以新图必须先进 manifest，
+   只拷文件不进 manifest 的会在下一次重算时静默消失。
+   这条是**把 manifest 按同一段映射逻辑重算一遍验的**：`dungeons` 37 = 37、两边逐条无差，
+   `hyjal-summit` 能被重算出来。我一开始写的是"重跑 fetch-art 会把这行冲掉"——**方向反了**，
+   manifest 里有这条就冲不掉。
+
+## 七、下一轮（DB2 那 10 张表，别和这一轮混着做）
+
+包里 `db2/` 有 `Item` / `ItemSparse` / `Spell` / `AreaTable` / `Creature` / `CreatureDisplayInfo` /
+`CreatureModelData` / `Faction` / `QuestInfo` / `ManifestInterfaceItemIcon`，每张带 CSV 与 `.schema.json`。
+**WDC5 格式不含列名**，CSV 是 `id + f0..fN` 的索引列，含义要逐张确认——导出方已经确认了
+CDI 的 `f1=CreatureModelID`、`f27=贴图变体数组`、CMD 的 `f2=模型 FileDataID`，其余列没核。
+所以这一层不能直接当数据源用：**先按一张表把列含义核清楚，再谈并进哪几个字段**，
+不然就是把没核过的列当成事实抄进成品。要开的单至少三件：
+① `8119728` 到底是不是 FileDataID；② `ItemSparse` 能不能补我们缺的物品中文名（多半只有 enUS，
+按红线不能机翻，只能拿来对英文名与 ID）；③ `AreaTable` 能不能替掉那条走不通的区域底图链路。

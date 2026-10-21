@@ -146,3 +146,22 @@ cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的�
 
 **记这条的判断口径**：改过 `src/data/**` 之后，只要要看页面或跑 `site-check --app`，
 ②③ 两步都得跑；`tools/serve.sh` 起的服务也一样，它不会替你做构建。
+
+## 素材层加一张图，规矩是「先写 manifest，再谈 art.json」（2026-10-21 记）
+
+站主从本机客户端导出了一张海加尔山的载入画面（`src/img/art/dungeons/hyjal-summit.webp`），
+`tools/import-client-export.py` 同时把它写进了 `src/img/art/manifest.json` 的 `items`
+（`kind: dungeon-loading`、`origin: client-export`、带 sha256 与来源说明）。
+
+**为什么必须进 manifest**：`tools/fetch-art.py` 生成 `src/data/art.json` 时
+**完全按 manifest 的 items 重算**（第 546 行起 `idx = {...}` 建空表，逐条按 `kind` 归桶，
+`dungeon-loading` 落到 `else` 分支进 `dungeons`）。
+所以只把文件拷进目录、不写 manifest，`fetch-art.py` 一跑这行就从索引里消失，而且不报错。
+
+这一条是**实测过的**，不是读代码读出来的推断：把 manifest 按同一段映射逻辑重算一遍，
+得到的 `dungeons` 与现在的 `art.json` **37 = 37、两边逐条无差**，`hyjal-summit` 能被重算出来。
+（我先写下过一句"重跑 fetch-art 会把它冲掉"，验完发现方向反了——
+只要 manifest 里有这条，它就冲不掉；冲得掉的是没进 manifest 的文件。）
+
+图标那一层不受这条影响：`fetch-art.py` 不碰 `src/img/icons/`，
+但补图之后要重跑 `python3 tools/build-icon-map.py`，让派生的 `icon-gaps.json` 跟上，别手改。
