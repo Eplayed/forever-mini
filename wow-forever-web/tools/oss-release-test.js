@@ -50,13 +50,17 @@ async function step(name, condFn, extra) {
    upstream 不参与导出所以不链），preview 由真 export-mini.js 现生成。
    这样"改源"与"只改 preview"是两件事，能分别测：前者换 buildId，后者必须被对拍拦下。 */
 function regen(dir) {
-  cp.execFileSync('node', [path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js')], { encoding: 'utf8' });
+  cp.execFileSync('node', [path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js')], {
+    encoding: 'utf8',
+    env: Object.assign({}, process.env, { WOW_SNAPSHOT_CROSSCHECK: 'off' })   /* 坏数据夹具要能构造出来；对拍本身另测 */
+  });
 }
 function freshFixture(label) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ossfix-' + label + '-'));
   const web = path.join(dir, 'wow-forever-web');
   fs.mkdirSync(path.join(web, 'tools'), { recursive: true });
   fs.copyFileSync(EXPORT_TOOL, path.join(web, 'tools', 'export-mini.js'));
+  fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/oss-release.js', path.join(web, 'tools', 'oss-release.js'));
   fs.mkdirSync(path.join(web, 'src', 'data'), { recursive: true });
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
@@ -322,6 +326,42 @@ const oss = require(MINI_SERVICE);
       return r.rc !== 0 && /不配套|重导出/.test(r.out);
     }, () => '没有拦下漂移');
   }
+
+  /* ================= 3·5. 主包快照 ↔ 分发层索引 ================= */
+  process.stdout.write('\n双向卡口：主包副本索引快照必须与分发层的索引逐字段一致\n');
+  const runExport = (dir, check) => cp.spawnSync('node', [path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js')], {
+    encoding: 'utf8',
+    env: Object.assign({}, process.env, { WOW_SNAPSHOT_CROSSCHECK: check ? 'on' : 'off' })
+  });
+  await step('正路：开着对拍跑导出，快照生成且两份产物逐字段一致', () => {
+    const dir = freshFixture('xchk');
+    const r = runExport(dir, true);
+    return r.status === 0 && fs.existsSync(path.join(dir, 'for-mini', 'data', 'forever-dungeon-snapshot.js'))
+      && fs.readFileSync(path.join(dir, 'for-mini', 'data', 'forever-dungeon-snapshot.js'), 'utf8').indexOf('hall-of-thanes') >= 0;
+  }, '导出被拒或快照没生成');
+  await step('反例：分发层的索引字段改一个名，导出层必须拒绝出快照', () => {
+    const dir = freshFixture('xneg');
+    const rp = path.join(dir, 'wow-forever-web', 'tools', 'oss-release.js');
+    const t = fs.readFileSync(rp, 'utf8').replace('    partySize: d.partySize || null,', '    partySizeX: d.partySize || null,');
+    if (t === fs.readFileSync(rp, 'utf8')) return false;
+    fs.writeFileSync(rp, t);
+    const r = runExport(dir, true);
+    return r.status !== 0 && ((r.stdout || '') + (r.stderr || '')).indexOf('逐字段不一致') >= 0;
+  }, '两边字段漂了却没人拦');
+  await step('反例：索引快照与分发层条数对不上也要拒', () => {
+    const dir = freshFixture('xcnt');
+    const ep = path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js');
+    const t = fs.readFileSync(ep, 'utf8').replace('items: dungeonList.map(dungeonIndexEntry)', 'items: dungeonList.slice(0, 30).map(dungeonIndexEntry)');
+    fs.writeFileSync(ep, t);
+    const r = runExport(dir, true);
+    return r.status !== 0 && ((r.stdout || '') + (r.stderr || '')).indexOf('逐字段不一致') >= 0;
+  }, '少 8 本没人发现');
+  await step('正路：仓库里三份主包快照合计不超 60 KB 预算', () => {
+    const files = ['forever-glossary-snapshot.js', 'forever-meta-snapshot.js', 'forever-dungeon-snapshot.js'];
+    const total = files.reduce((s, f) => s + fs.statSync(path.join(MINI_ROOT, 'data', f)).size, 0);
+    process.stdout.write('  · 主包快照 ' + (total / 1024).toFixed(1) + ' KB（预算 60 KB）\n');
+    return total <= 60 * 1024;
+  }, '超预算');
 
   /* ================= 4. 写授权统一闸 ================= */
   process.stdout.write('\n写授权：每条写命令都要显式 WOW_ALLOW_CROSS_CREDS=1，与凭证来源无关\n');

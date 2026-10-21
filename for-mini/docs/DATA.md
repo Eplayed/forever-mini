@@ -25,18 +25,21 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 | 缓存 key | `wow_forever_v1_{用途}@{buildId}`（**批次号必须在 key 里**，否则旧批会冒充新批） |
 | 指针缓存 key | `wow_forever_v1_pointer@{env}` |
 | 收藏 key | `wow_fav_terms_v1`（本机行为数据，不上传） |
-| 打包快照 | `data/forever-glossary-snapshot.js`、`data/forever-meta-snapshot.js`；副本索引快照待 M01 |
+| 打包快照 | `data/forever-glossary-snapshot.js`（60 条）、`data/forever-meta-snapshot.js`、`data/forever-dungeon-snapshot.js`（**M01 起：38 本索引全放**）；三份合计 45.3 KB / 预算 60 KB |
 
 `wow/release/v1/` 目前**从没传过任何文件**（2026-10-21 匿名 GET 实测 404），所以线上小程序现在读到的都是打包快照。
 
-## 二、两套取数口子（过渡期，别混用）
+## 二、只有一个取数口子（M01 起）
 
-| 口子 | 谁在用 | 读什么 |
+| 层 | 文件 | 管什么 |
 | --- | --- | --- |
-| `services/forever-data.js` | 已有首页 + 中英速查（旧平铺地址 `{env}/v1/{file}.json`） | 只有 `meta` / `glossary`，`live/cache/snapshot` 三态 |
-| `services/oss-manifest.js` | 新页面一律用它 | 指针 → 索引 → 详情/掉落，四态 `live/cache/snapshot/none` |
+| 页面 | `pages/home`、`pages/glossary`、`pages/dungeons`、`pages/dungeon` | 只调 `services/forever-data.js`，不自己拼 URL、不自己发请求 |
+| 服务 | `services/forever-data.js` | 打包快照兜底、收藏（词条 + 副本）、最近看过、L0–L3 与类型文案 |
+| 分发 | `services/oss-manifest.js` | 指针 → 索引 → 分片、五项校验、缓存与四态语义 |
 
-M01 把页面接到 `oss-manifest.js` 之后，`forever-data.js` 里那套平铺地址就该收掉，只留收藏与译名文案函数。
+`forever-data.js` 里那套平铺地址（`wow/release/v1/{文件}.json`）**已经删掉了**：它没有批次身份、没有校验，
+拿不到就静默回退缓存，正是 PoE 那条线踩过的坑。现在它只做 `loadMeta()` / `loadGlossary()` / `loadDungeonIndex()`
+三个转调，返回值多带 `sourceText`（界面直接显示的那句话）与 `cacheHit`。
 
 ## 三、批次里每份文件长什么样
 
@@ -174,3 +177,34 @@ node tools/oss-release-test.js                 # 9. 动了产物结构就要跑�
 4. 素材（原画、头像、图标）要单独一批：路径带来源分类与 manifest，示意图要就地标"不是游戏里的地图"，
    并且不打进主包 —— 口径见仓库根 `AGENTS.md`，本轮没发。
 5. 数据里缺字段一律显示「待实测」或「未记录」；`level=L0` 必须带官方或客户端解包来源，否则构建失败。
+
+## 七、主包快照与预算（M01 起多了一份索引快照）
+
+`export-mini.js` 生成三份主包快照，合计必须 ≤ 60 KB，超了直接 rc=1：
+
+| 文件 | 内容 | 实测 |
+| --- | --- | --- |
+| `data/forever-glossary-snapshot.js` | 60 条词条（按 L0 优先、按类型/职业分散挑） | 23.8 KB |
+| `data/forever-meta-snapshot.js` | meta（覆盖率、缺口、规则） | 1.8 KB |
+| `data/forever-dungeon-snapshot.js` | **38 本副本索引全量**（断网首用也要有内容可搜） | 19.7 KB |
+
+副本索引快照与分发层的索引条目**逐字段一致**：`export-mini.js` 会 `require` 分发层的 `buildBatch()`，
+把两边的 `items` 摘掉批次相关字段后逐字节比一遍，对不上就拒绝出快照（`oss-release-test.js` 的 3·5 节拿两条反例守着：
+改分发层字段名、少 8 本，都必须红）。详情与掉落**不进主包**——38×2 份分片装不下，
+所以断网点进详情时界面写"首领名单与掉落要联网才能取"，不拿索引字段冒充完整详情。
+
+## 八、开发者工具里验 live 路径（本地假 OSS）
+
+线上批次没发之前，live 分支怎么验？两步：
+
+```bash
+node wow-forever-web/tools/oss-release.js build --env beta            # 先出批次
+FAKE_OSS_MODE=normal node wow-forever-web/tools/oss-fake-server.js    # 按真 HTTP 语义发出去（含 ETag / Cache-Control）
+```
+
+然后在开发者工具的小程序里把 storage 键 `wow_forever_v1_dev_origin` 设成 `http://127.0.0.1:8899`，
+`oss-manifest.js` 的 `origin()` 就会改打本地。这个键只可能由开发者手动写进 storage：
+真机上它不存在，而且微信线上域名白名单只放备案过的 https 域，`http://127.0.0.1` 在真机上根本发不出去。
+`tools/mini-m01-check.js` 就是照这条路把 A–F 六组场景跑一遍的脚本（含篡改、新版本、断网）。
+换场景时**记得换端口**：批次文件的 `Cache-Control` 是 `immutable`，模拟器会照头缓存，
+同一 URL 换内容它看不到——那是缓存生效，不是校验失效。

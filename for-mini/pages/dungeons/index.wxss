@@ -1,0 +1,183 @@
+/* 与中英速查页同一套控件（.search / .chips / .chip / .fav-btn / .fav），
+   小程序的页面样式是各自隔离的，所以这里重复一份定义而不是跨页 @import；
+   改视觉时两页要一起改，别只改一边。徽标继续用 app.wxss 的 .badge-L0…L3。 */
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.search-input {
+  flex: 1;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  color: var(--txt);
+  font-size: 26rpx;
+}
+
+.fav-btn {
+  margin-left: 14rpx;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.fav-btn-on {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.chips {
+  white-space: nowrap;
+  margin-bottom: 14rpx;
+}
+
+.chip {
+  display: inline-block;
+  margin-right: 12rpx;
+  padding: 8rpx 20rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.chip-on {
+  color: var(--bg);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.chip-src {
+  border-style: dashed;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.mini-row {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.mini-row:last-child {
+  border-bottom: 0;
+}
+
+.mini-name {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+}
+
+.mini-sub {
+  margin-left: 16rpx;
+}
+
+.drow {
+  display: flex;
+  align-items: flex-start;
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 14rpx;
+  padding: 20rpx 22rpx;
+  margin-bottom: 14rpx;
+}
+
+.drow-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.drow-side {
+  width: 150rpx;
+  text-align: right;
+  margin-left: 12rpx;
+}
+
+.drow-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.drow-en {
+  font-size: 24rpx;
+  margin-top: 2rpx;
+}
+
+.drow-nameen {
+  color: var(--blue);
+}
+
+.conflict {
+  display: block;
+  color: var(--warn);
+  font-size: 22rpx;
+}
+
+.drow-meta {
+  margin-top: 10rpx;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 10rpx 8rpx 0;
+  padding: 2rpx 12rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+.tag-zone {
+  max-width: 380rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.drow-sub {
+  margin-top: 4rpx;
+}
+
+.todo {
+  color: var(--lead);
+  font-size: 22rpx;
+  margin-left: 10rpx;
+  border: 1rpx dashed var(--lead);
+  border-radius: 8rpx;
+  padding: 0 10rpx;
+}
+
+.fav {
+  width: 56rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: var(--txt-dim);
+  margin-top: 8rpx;
+  margin-left: auto;
+}
+
+.fav-active {
+  color: var(--gold);
+}
+
+.notice-bad {
+  background: rgba(201, 86, 74, 0.14);
+  border-color: var(--bad);
+  color: var(--bad);
+}
+
+.empty {
+  text-align: center;
+}

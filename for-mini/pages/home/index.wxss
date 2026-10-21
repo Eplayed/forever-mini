@@ -103,3 +103,29 @@
 .open-more {
   margin-top: 8rpx;
 }
+
+.rec {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.rec:last-child {
+  border-bottom: 0;
+}
+
+.rec-name {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+}
+
+.rec-sub {
+  margin-left: 16rpx;
+}
+
+.notice-bad {
+  background: rgba(201, 86, 74, 0.14);
+  border-color: var(--bad);
+  color: var(--bad);
+}

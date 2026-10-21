@@ -170,10 +170,19 @@ function reExportCompare() {
     const web = path.join(tmp, 'wow-forever-web');
     fs.mkdirSync(path.join(web, 'tools'), { recursive: true });
     fs.copyFileSync(EXPORT_TOOL, path.join(web, 'tools', 'export-mini.js'));
+    /* 导出层自己也有一道对拍（索引快照 ↔ 分发层索引），要把这份工具一起拷过去，
+       否则临时目录里的 export-mini.js 会因为找不到参照而直接拒绝跑。 */
+    fs.copyFileSync(path.join(__dirname, 'oss-release.js'), path.join(web, 'tools', 'oss-release.js'));
     fs.symlinkSync(siteSrc(), path.join(web, 'src'));
     let exportErr = '';
     try {
-      cp.execFileSync('node', [path.join(web, 'tools', 'export-mini.js')], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+      cp.execFileSync('node', [path.join(web, 'tools', 'export-mini.js')], {
+        encoding: 'utf8', maxBuffer: 8 * 1024 * 1024,
+        /* 这道对拍只管"字节：源 → 导出产物"，快照↔索引那层一致性由 export-mini 自己在正式导出时查
+           （oss-release-test.js 的 3·5 节直接测它）。这里关掉是为了让坏数据的红字
+           由分发层自己的卡口报出来，而不是被上游那层的错误信息盖掉——归因比多跑一遍重要。 */
+        env: Object.assign({}, process.env, { WOW_SNAPSHOT_CROSSCHECK: 'off' })
+      });
     } catch (e) {
       const t = String(e.stderr || e.stdout || e.message || '');
       exportErr = t.split('\n').filter((x) => x.trim().indexOf('✗') === 0 || x.indexOf('失败') >= 0).slice(0, 3).join(' / ');

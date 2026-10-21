@@ -1,5 +1,8 @@
 <view class="wrap">
-  <view wx:if="{{offline}}" class="notice">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，词条可能显示不全。请更新小程序后再查。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
     当前显示的是{{sourceText}}（基准 {{baseline}}），可能不是最新核对结果。
   </view>
 

@@ -1,11 +1,5 @@
 const service = require('../../services/forever-data')
 
-const SOURCE_TEXT = {
-  live: '实时数据',
-  cache: '离线缓存',
-  snapshot: '打包快照'
-}
-
 const CLASS_CN = {
   warrior: '战士',
   paladin: '圣骑士',
@@ -34,6 +28,7 @@ Page({
     loaded: false,
     offline: false,
     sourceText: '',
+    requiresUpdate: false,
     baseline: ''
   },
 
@@ -60,7 +55,8 @@ Page({
         all,
         kinds,
         loaded: true,
-        sourceText: SOURCE_TEXT[result.source] || '',
+        sourceText: result.sourceText,
+        requiresUpdate: result.requiresUpdate,
         offline: result.source !== 'live',
         baseline: meta.generatedAt || '',
         favIds: service.getFavorites()

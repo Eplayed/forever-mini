@@ -46,8 +46,21 @@ const SOURCE_TEXT = {
 const BUILD_ID_RE = /^[a-f0-9]{12}$/
 const ETAG_RE = /^[0-9A-F]{32}$/
 
+/* 开发者工具用的取数地址覆盖：storage 里写 wow_forever_v1_dev_origin = http://127.0.0.1:8899
+   就改打本地假 OSS（tools/oss-fake-server.js 起的那一个），用来验 live 路径与 ETag 校验。
+   为什么放 storage 而不是编译期常量：线上真机这个 key 不存在，走的是原来的 OSS_ORIGIN；
+   而且微信线上域名白名单只放 https 的备案域，http://127.0.0.1 在真机上根本发不出去。 */
+const DEV_ORIGIN_KEY = CACHE_PREFIX + 'dev_origin'
+function origin() {
+  try {
+    const o = wx.getStorageSync(DEV_ORIGIN_KEY)
+    if (o && /^(https?:)?\/\//.test(String(o))) return String(o).replace(/\/+$/, '')
+  } catch (error) {}
+  return OSS_ORIGIN
+}
+
 function pointerUrl(env) {
-  return OSS_ORIGIN + '/' + NAMESPACES[env] + '/manifest.json'
+  return origin() + '/' + NAMESPACES[env] + '/manifest.json'
 }
 
 function requestRaw(url) {
@@ -168,7 +181,7 @@ function loadPointer(env) {
 }
 
 function resolveUrl(manifest, relPath) {
-  return OSS_ORIGIN + '/' + NAMESPACES[manifest.env] + '/' + relPath
+  return origin() + '/' + NAMESPACES[manifest.env] + '/' + relPath
 }
 
 /* 索引条目里的 detailPath/lootPath 是相对批次目录的，指针里的 fetch/bundle 是相对命名空间根的。

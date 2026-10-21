@@ -1,11 +1,14 @@
 <view class="wrap">
-  <view wx:if="{{offline}}" class="notice">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
     当前显示的是{{sourceText}}，可能不是最新核对结果。正式数据需联网从资料站基底同步。
   </view>
 
   <view class="hero">
     <view class="hero-title">无限资料</view>
-    <view class="muted">全职业天赋与技能中英对照 · 每条数据可溯源</view>
+    <view class="muted">中英对照速查 · 副本随手查 · 每条数据可溯源</view>
   </view>
 
   <view class="card" wx:if="{{loaded}}">
@@ -33,6 +36,19 @@
         <view class="muted">{{item.desc}}</view>
       </view>
       <view class="module-state {{item.ready ? 'state-ok' : 'state-warn'}}">{{item.ready ? '可用' : '待补'}}</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{recent.length}}">
+    <view class="row">
+      <view class="card-title">最近查过的副本</view>
+      <view class="spacer"></view>
+      <view class="muted" bindtap="onModuleTapGo">全部副本 →</view>
+    </view>
+    <view class="rec" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onRecentTap">
+      <text class="rec-name">{{item.title}}</text>
+      <text class="badge badge-{{item.level}}">{{item.level}}</text>
+      <text class="muted rec-sub">{{item.range}}</text>
     </view>
   </view>
 

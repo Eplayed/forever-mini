@@ -151,3 +151,9 @@
   text-align: center;
   padding: 10rpx 0 20rpx;
 }
+
+.notice-bad {
+  background: rgba(201, 86, 74, 0.14);
+  border-color: var(--bad);
+  color: var(--bad);
+}

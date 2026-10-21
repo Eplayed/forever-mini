@@ -1,0 +1,239 @@
+/* 控件样式与副本列表页同源（小程序页面样式互相隔离，这里重复一份定义）；
+   徽标继续用 app.wxss 的 .badge-L0…L3，不另创。 */
+
+.hero {
+  padding: 8rpx 4rpx 20rpx;
+}
+
+.hero-title {
+  font-size: 38rpx;
+  font-weight: 600;
+}
+
+.hero-en {
+  font-size: 24rpx;
+  margin-top: 4rpx;
+}
+
+.nameen {
+  color: var(--blue);
+}
+
+.conflict {
+  display: block;
+  color: var(--warn);
+  font-size: 22rpx;
+  margin-top: 4rpx;
+}
+
+.hero-meta {
+  margin-top: 14rpx;
+}
+
+.hero-build {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 10rpx;
+  padding: 2rpx 12rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+.todo {
+  color: var(--lead);
+  font-size: 20rpx;
+  margin-left: 8rpx;
+  border: 1rpx dashed var(--lead);
+  border-radius: 8rpx;
+  padding: 0 8rpx;
+  vertical-align: middle;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.actions {
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10rpx 24rpx;
+  border: 1rpx solid var(--gold);
+  border-radius: 10rpx;
+  color: var(--gold);
+  font-size: 24rpx;
+  margin-right: 14rpx;
+  background: transparent;
+  line-height: 1.6;
+}
+
+.btn-on {
+  background: rgba(224, 169, 109, 0.16);
+}
+
+.btn-share {
+  margin-right: 0;
+  border-style: dashed;
+}
+
+.frow {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.frow:last-child {
+  border-bottom: 0;
+}
+
+.fkey {
+  width: 168rpx;
+  color: var(--txt-dim);
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.fval {
+  flex: 1;
+  font-size: 26rpx;
+}
+
+.fnote {
+  margin-top: 2rpx;
+}
+
+.route-note {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx dashed var(--line);
+}
+
+.boss {
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.boss:last-child {
+  border-bottom: 0;
+}
+
+.boss-main {
+  display: flex;
+  align-items: center;
+}
+
+.boss-name {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.boss-badge {
+  margin-left: auto;
+}
+
+.boss-note {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+}
+
+.drop {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.drop:last-child {
+  border-bottom: 0;
+}
+
+.drop-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.drop-name {
+  font-size: 26rpx;
+  display: block;
+}
+
+.drop-boss {
+  font-size: 22rpx;
+}
+
+.drop-side {
+  text-align: right;
+  margin-left: 12rpx;
+}
+
+.drop-side .badge {
+  display: block;
+  margin-top: 4rpx;
+}
+
+.loot-note {
+  margin-top: 14rpx;
+  font-size: 22rpx;
+}
+
+.prov {
+  background: var(--panel-2);
+  border-radius: 10rpx;
+  padding: 14rpx 16rpx;
+  margin-bottom: 10rpx;
+}
+
+.prov-type {
+  font-size: 22rpx;
+  color: var(--ok);
+}
+
+.prov-note {
+  font-size: 24rpx;
+  margin: 4rpx 0;
+}
+
+.prov-url {
+  word-break: break-all;
+  font-size: 22rpx;
+}
+
+.notice-bad {
+  background: rgba(201, 86, 74, 0.14);
+  border-color: var(--bad);
+  color: var(--bad);
+}
+
+.bold {
+  color: var(--txt);
+}
+
+.mono {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 22rpx;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.empty {
+  text-align: center;
+  padding: 40rpx 24rpx;
+}
+
+.empty .btn {
+  display: inline-block;
+  margin: 20rpx 0 0;
+}
