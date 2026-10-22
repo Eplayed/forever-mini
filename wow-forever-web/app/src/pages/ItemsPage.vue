@@ -8,7 +8,7 @@
   <template v-else-if="d">
     <!-- 新站独有页（旧站已冻结，无对拍基准）。交互口径照站主拍板的原型
          docs/prototypes/items-page-prototype.html：状态/分类/细分/等级区间/搜索/排序/分页。
-         数据全部来自 src/data/items.json（21,077 件全量名录），单源 L0：客户端解包经参考站转述。 -->
+         数据全部来自 src/data/items.json（全量名录，件数以 src/data/scale.json 为准），单源 L0：客户端解包经参考站转述。 -->
     <div class="card">
       <div class="cdhead noart big"><h1 class="pt">物品库</h1></div>
       <p class="dim">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。
@@ -149,7 +149,7 @@
 
 <script setup>
 /* 物品库：全量名录的筛与查。一次载入 items.json（约 5MB，gzip 后小得多），
-   筛选/排序/分页全在本页内存里做——21,077 条线性扫一遍在毫秒级，不需要后端。
+   筛选/排序/分页全在本页内存里做——两万多条线性扫一遍在毫秒级，不需要后端。
    物品不进全站搜索索引（会把 search.json 撑大一倍），本页自带页内搜索；
    ?q= 与 ?st= 仍接住：将来任何入口（更新说明、副本掉落反链）带着词跳进来都能落地。 */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';

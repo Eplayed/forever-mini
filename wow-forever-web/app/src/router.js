@@ -73,7 +73,7 @@ const routes = [
   { path: '/updates', name: 'updates', component: UpdatesPage, meta: { title: '最新动态' } },
   { path: '/rank', name: 'rank', component: RankPage, meta: { title: '职业资料完整度排行' } },
   { path: '/provenance', name: 'provenance', component: ProvenancePage, meta: { title: '溯源与覆盖率' } },
-  // 新站独有页：数据来自 src/data/items.json（21,077 件全量名录）
+  // 新站独有页：数据来自 src/data/items.json（全量名录，件数以 src/data/scale.json 为准）
   { path: '/items', name: 'items', component: ItemsPage, meta: { title: '物品库' } },
   // 新站独有页：配装名单（2026-10-16 站主拍板，数据 src/data/bis.json）
   { path: '/bis', name: 'bis', component: BisPage, meta: { title: '配装名单' } },
