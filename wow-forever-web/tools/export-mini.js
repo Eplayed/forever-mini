@@ -203,6 +203,10 @@ function dungeonIndexEntry(d) {
     bossCount: (d.bosses || []).length,
     dropCount: (d.drops || []).length,
     hasRoute: (d.route || []).length > 0,
+    /* 与 tools/oss-release.js 的 indexEntry() 同一条改写规则、同一个键位置：
+       站内 img/ 开头的路径换成相对 assets/ 的路径，非 img/ 一律 null。
+       两边漂了下面的逐字段对拍会红，不会静默发到手机上。 */
+    art: (typeof d.art === 'string' && d.art.indexOf('img/') === 0) ? d.art.slice(4) : null,
     detailPath: 'dungeons/detail/' + d.id + '.json',
     lootPath: 'dungeons/loot/' + d.id + '.json'
   };

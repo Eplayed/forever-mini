@@ -37,6 +37,9 @@
   <view wx:if="{{!loaded}}" class="card muted">正在取这一批副本名单…</view>
 
   <view class="drow" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen">
+    <view wx:if="{{item.artUrl}}" class="drow-art">
+      <icon-cell src="{{item.artUrl}}" size="wide" label="{{item.title}}" />
+    </view>
     <view class="drow-main">
       <view class="drow-title">
         <text>{{item.title}}</text>

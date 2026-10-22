@@ -79,6 +79,11 @@
   margin-bottom: 14rpx;
 }
 
+.drow-art {
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
 .drow-main {
   flex: 1;
   min-width: 0;

@@ -22,6 +22,12 @@
   height: 88rpx;
 }
 
+/* 列表行里的横条缩略图：宽扁形，跟 md 的正方形不是一回事 */
+.ic-wide {
+  width: 132rpx;
+  height: 84rpx;
+}
+
 .ic-hero {
   width: 100%;
   height: 220rpx;

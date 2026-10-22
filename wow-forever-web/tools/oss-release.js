@@ -95,6 +95,10 @@ function assetRelFromSite(rel) {
 }
 
 const IMUTABLE_CACHE = 'public, max-age=31536000, immutable';
+/* 素材必须按"就地显示"发：OSS 默认域名会给对象挂 Content-Disposition: attachment
+   与 x-oss-force-download: true，模拟器里的 <image> 照渲染，真机不一定。
+   显式写 inline 是在测"对象元数据能不能盖过默认域名的策略"——盖不过就得绑自定义域名。 */
+const ASSET_DISP = 'inline';
 const POINTER_CACHE = 'public, max-age=60, must-revalidate';
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
@@ -134,7 +138,7 @@ function collectFactDates(records) {
 
 /* 索引条目里就带详情/掉落的 ETag 与字节：客户端取分片时不必先下载 files.json
    才能校验（一次校验多一个 25 KB 请求不值得）。 */
-function indexEntry(d) {
+function indexEntry(d, useAsset) {
   return {
     id: d.id,
     kind: d.kind,
@@ -152,6 +156,11 @@ function indexEntry(d) {
     bossCount: (d.bosses || []).length,
     dropCount: (d.drops || []).length,
     hasRoute: (d.route || []).length > 0,
+    /* 列表页也要出图：38 座里 37 座有客户端原画，可索引里以前只放文字字段，
+       于是列表一片空白。art 是相对 assets/ 的路径（约 30 字节），
+       放进索引后断网时列表也知道"这座本该有图"，只是取不到文件时回落。
+       字段顺序与 export-mini.js 的 dungeonIndexEntry() 必须完全一致（那边逐字节对拍）。 */
+    art: d.art ? useAsset(d.art, d.id + '.index') : null,
     detailPath: 'dungeons/detail/' + d.id + '.json',
     lootPath: 'dungeons/loot/' + d.id + '.json'
   };
@@ -350,7 +359,7 @@ function buildBatch(env, opts) {
     note: dungeons.meta ? dungeons.meta.note : '',
     lootDisclaimer: dungeons.meta ? dungeons.meta.lootDisclaimer : '',
     notCollected: { route: list.length - list.filter((d) => (d.route || []).length).length },
-    items: list.map(indexEntry)
+    items: list.map((d) => indexEntry(d, useAsset))
   };
   pushObj('dungeonIndex', 'dungeons/index.json', indexObj, {
     records: list.length, budget: 'dungeons/index', facts: collectFactDates(list)
@@ -774,6 +783,15 @@ function contentTypeFor(rel) {
   return MIME[ext] || 'application/octet-stream';
 }
 
+/* 素材对象的元数据头集中在这里：Content-Type 按扩展名，Content-Disposition 显式 inline。
+   注意 OSS V1 签名的 StringToSign 只含 Content-MD5 / Content-Type / Date / x-oss-* / 资源路径，
+   Content-Disposition 是普通头，不进签名串。 */
+function assetHeaders(creds, t, cache) {
+  const h = { 'Cache-Control': cache, 'Content-Type': t.type };
+  if (t.disp) h['Content-Disposition'] = t.disp;
+  return h;
+}
+
 function signPut(creds, key, body, extraHeaders) {
   const date = new Date().toUTCString();
   const type = extraHeaders['Content-Type'] || 'application/json; charset=utf-8';
@@ -786,7 +804,7 @@ function signPut(creds, key, body, extraHeaders) {
     .join('');
   const sts = ['PUT', md5, type, date, ossHeaders + '/' + creds.bucket + '/' + key].join('\n');
   const sig = crypto.createHmac('sha1', creds.accessKeySecret).update(sts).digest('base64');
-  return {
+  const out = {
     'Content-Type': type,
     'Content-MD5': md5,
     Date: date,
@@ -794,6 +812,11 @@ function signPut(creds, key, body, extraHeaders) {
     Authorization: 'OSS ' + creds.accessKeyId + ':' + sig,
     'Content-Length': body.length
   };
+  /* Content-Disposition 不进 OSS V1 的 StringToSign（那里只有 verb、Content-MD5、Content-Type、
+     Date、以 x-oss- 开头的头、资源路径），但它必须真的发出去，否则对象元数据里就没有 inline
+     ——之前这里只回传固定几个头，新加的普通头会被静默丢掉。 */
+  if (extraHeaders['Content-Disposition']) out['Content-Disposition'] = extraHeaders['Content-Disposition'];
+  return out;
 }
 
 function signGet(creds, pathWithQuery, resource) {
@@ -821,6 +844,8 @@ function remoteHead(creds, key) {
       lastModified: r.statusCode === 200 ? r.headers['last-modified'] : '',
       contentType: r.statusCode === 200 ? String(r.headers['content-type'] || '') : '',
       cacheControl: r.statusCode === 200 ? String(r.headers['cache-control'] || '') : '',
+      contentDisposition: r.statusCode === 200 ? String(r.headers['content-disposition'] || '') : '',
+      forceDownload: r.statusCode === 200 ? String(r.headers['x-oss-force-download'] || '') : '',
       statusCode: r.statusCode
     }));
 }
@@ -951,7 +976,8 @@ async function cmdAssets(env, opts) {
     key: NAMESPACES[env] + '/' + ASSET_DIR + '/' + rel,
     buf: fs.readFileSync(path.join(WEB, 'src', 'img', rel)),
     label: rel,
-    type: contentTypeFor(rel)
+    type: contentTypeFor(rel),
+    disp: ASSET_DISP
   }));
   /* 台账本身是"这一批引用了哪些素材"的可重导清单，每批都会变；
      只有图片对象才是不可变的。把 index.json 也按 immutable 拦，
@@ -961,7 +987,7 @@ async function cmdAssets(env, opts) {
     label: 'assets/index.json（素材台账）', type: MIME['.json'], mutable: true
   });
 
-  let uploaded = 0; let unchanged = 0; let fixed = 0; let bytes = 0;
+  let uploaded = 0; let unchanged = 0; let fixed = 0; let bytes = 0; let forcedCount = 0;
   const failed = []; const violations = [];
   for (const t of targets) {
     const cache = t.mutable ? POINTER_CACHE : IMUTABLE_CACHE;
@@ -972,10 +998,17 @@ async function cmdAssets(env, opts) {
          不摘就会每次都对不上、每次重发一遍（2026-10-22 自测里暴露出来）。 */
       const wantBase = t.type ? t.type.split(';')[0] : '';
       const gotBase = head.contentType ? head.contentType.split(';')[0] : '';
-      if ((wantBase && gotBase && wantBase !== gotBase) || (t.mutable && head.cacheControl !== cache)) {
+      /* Content-Disposition 只在"远端没被默认域名强制改掉"时才拿来判漂移。
+         2026-10-22 实测：往对象元数据里写 inline，OSS 默认域名回读仍是 attachment
+         + x-oss-force-download: true（1,117 张全这样），照字面比就会每次重传整层素材。 */
+      const forced = head.forceDownload === 'true';
+      if (forced) forcedCount += 1;
+      const dispDrift = !!t.disp && !forced && (head.contentDisposition || '') !== t.disp;
+      if ((wantBase && gotBase && wantBase !== gotBase) || (t.mutable && head.cacheControl !== cache)
+        || dispDrift) {
         try {
           const r2 = await raw('PUT', creds.bucket, creds.region, '/' + encKey(t.key), t.buf,
-            signPut(creds, t.key, t.buf, { 'Cache-Control': cache, 'Content-Type': t.type }));
+            signPut(creds, t.key, t.buf, assetHeaders(creds, t, cache)));
           if (r2.statusCode >= 200 && r2.statusCode < 300) { fixed += 1; continue; }
           failed.push(t.label + ' → 补正 Content-Type 失败 HTTP ' + r2.statusCode);
         } catch (e2) { failed.push(t.label + ' → 补正失败 ' + e2.message); }
@@ -986,7 +1019,7 @@ async function cmdAssets(env, opts) {
     if (opts.dryRun) { uploaded += 1; continue; }
     try {
       const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(t.key), t.buf,
-        signPut(creds, t.key, t.buf, { 'Cache-Control': cache, 'Content-Type': t.type }));
+        signPut(creds, t.key, t.buf, assetHeaders(creds, t, cache)));
       if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 160));
       const back = await remoteHead(creds, t.key);
       if (back.etag !== md5Hex(t.buf)) throw new Error('回读 ETag 不匹配');
@@ -995,8 +1028,15 @@ async function cmdAssets(env, opts) {
   }
   if (violations.length) violations.slice(0, 8).forEach((v) => logLine('  ✗ ' + v));
   if (failed.length) failed.slice(0, 8).forEach((f) => logLine('  ✗ ' + f));
-  logLine('素材：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 补正 Content-Type ' + fixed
+  logLine('素材：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 补正元数据（Content-Type / Content-Disposition / 缓存头）' + fixed
     + ' · 失败 ' + failed.length + ' · 冲突 ' + violations.length + ' / 共 ' + targets.length);
+  if (forcedCount) {
+    logLine('  · 其中 ' + forcedCount + ' 个对象的 Content-Disposition 被 OSS 默认域名强制成 attachment'
+      + '（响应带 x-oss-force-download: true）。我们写的是 inline，**对象元数据改不动它**——'
+      + '这是阿里云对默认域名的策略，要按 inline 出图只能绑自定义域名（需备案）。');
+    logLine('  · <image> 组件不是导航请求，一般不看 Content-Disposition；模拟器里 1,117 张全部渲染出来了。'
+      + '真机到底认不认，只有真机能回答，见 for-mini/docs/DATA.md §九。');
+  }
   if (opts.dryRun) { logLine('试运行结束，一个字节都没写。'); return 0; }
   writeBuf(path.join(buildRoot(), env, 'last-assets.json'), dump({
     at: new Date().toISOString(), env, uploaded, unchanged, failed: failed.length, conflicts: violations.length,

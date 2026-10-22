@@ -84,6 +84,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
               "nameCnConflict": "诸王大厅", "levelRange": "13-20", "levelRangeOfficial": "13-18",
               "faction": "联盟", "zoneCn": "…", "partySize": 5, "level": "L0",
               "bossCount": 4, "dropCount": 1, "hasRoute": false,
+              "art": "art/dungeons/hall-of-thanes.webp",   // M02 起索引也带原画，列表页要出图；缺的那座是 null
               "detailPath": "dungeons/detail/hall-of-thanes.json", "lootPath": "dungeons/loot/hall-of-thanes.json",
               "detailEtag": "6F1CB781…", "detailBytes": 3413, "lootEtag": "A071A464…", "lootBytes": 674 }] }
 ```
@@ -255,3 +256,37 @@ FAKE_OSS_MODE=normal node wow-forever-web/tools/oss-fake-server.js    # 按真 H
 用本地假 OSS 测等于没测；它顺带对每个图标 URL 发一次真实 HEAD，看的是 200 + `image/*`，不是"页面没报错"。
 换场景时**记得换端口**：批次文件的 `Cache-Control` 是 `immutable`，模拟器会照头缓存，
 同一 URL 换内容它看不到——那是缓存生效，不是校验失效。
+
+## 九、图片到底走不走域名白名单，以及 OSS 默认域名的强制下载（2026-10-22 实测）
+
+站主问"图片是不是因为域名没配所以不显示"，把三件事分开量：
+
+**1. `<image>` 不查白名单。** 微信只有 `request / uploadFile / downloadFile / socket / udp` 五类
+API 受"服务器域名"限制；组件直接访问媒体资源（`<image src>`、`<video src>`）不需要配。
+需要配 `downloadFile合法域名` 的是 `wx.downloadFile`、`wx.getImageInfo`、保存相册那类调用——
+本站小程序**一个都没用**（素材只交给 `<image>` 渲染，来源网址走"复制到剪贴板"，不开 web-view）。
+站主后台截图里 `request合法域名` 已含 `https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com`，
+这条覆盖的是取 JSON 清单与分片，也就是 `oss-manifest.js` 里那个 `wx.request`。
+所以"图片不显示"不是白名单问题；`urlCheck` 在开发者工具里是关着的，这一点也不构成"模拟器能显示就算过了"的证据。
+
+**2. OSS 默认域名会强制下载，对象元数据改不动它。** 每个素材对象的响应都带：
+
+```
+Content-Disposition: attachment
+x-oss-force-download: true
+```
+
+PUT 时显式写 `Content-Disposition: inline` 也照样被覆盖（1,117 张全部实测如此，2026-10-22）。
+这是阿里云对 `bucket.oss-region.aliyuncs.com` 这类默认域名的策略，
+**要真正按 inline 出图只有一条路：绑自定义域名**——而自定义域名要备案，接的是 wow-ops 那条线
+（见 `wow-forever-web/docs/OPS-deploy-domain-*`）。
+`<image>` 不是导航请求，一般不看 `Content-Disposition`，所以模拟器里全渲染；真机认不认只有真机能回答。
+
+这条实测还顺手挡掉一个坑：`cmdAssets` 原本会把"远端是 attachment、我要的是 inline"当成元数据漂移，
+于是**每次发素材都全量重传 1,117 个对象**。现在识别 `x-oss-force-download: true` 后不再判漂移，
+并把这件事在命令输出里说一次，而不是静默重传或静默忽略。
+
+**3. 列表页以前真的没图，是界面没用数据，不是素材没发。** 38 座里 37 座有客户端原画，
+`art` 字段以前只进详情分片，索引里没有，所以副本列表整页一片空白。
+现在 `dungeons/index.json` 每条带 `art`（相对 `assets/` 的路径，缺的那座是 `null` 不是空串），
+主包快照同步带上——断网时列表也知道"这座本该有图"。两边逐字段对拍由 `export-mini.js` 守着。

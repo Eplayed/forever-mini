@@ -33,6 +33,7 @@ module.exports = {
    "bossCount": 4,
    "dropCount": 1,
    "hasRoute": false,
+   "art": "art/dungeons/hall-of-thanes.webp",
    "detailPath": "dungeons/detail/hall-of-thanes.json",
    "lootPath": "dungeons/loot/hall-of-thanes.json"
   },
@@ -53,6 +54,7 @@ module.exports = {
    "bossCount": 7,
    "dropCount": 2,
    "hasRoute": false,
+   "art": "art/dungeons/ruins-of-lordaeron.webp",
    "detailPath": "dungeons/detail/ruins-of-lordaeron.json",
    "lootPath": "dungeons/loot/ruins-of-lordaeron.json"
   },
@@ -73,6 +75,7 @@ module.exports = {
    "bossCount": 4,
    "dropCount": 3,
    "hasRoute": false,
+   "art": "art/dungeons/whelgars-excavation.webp",
    "detailPath": "dungeons/detail/whelgars-excavation.json",
    "lootPath": "dungeons/loot/whelgars-excavation.json"
   },
@@ -93,6 +96,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/city-of-dalaran.webp",
    "detailPath": "dungeons/detail/city-of-dalaran.json",
    "lootPath": "dungeons/loot/city-of-dalaran.json"
   },
@@ -113,6 +117,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/the-drowned-city.webp",
    "detailPath": "dungeons/detail/the-drowned-city.json",
    "lootPath": "dungeons/loot/the-drowned-city.json"
   },
@@ -133,6 +138,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/kroldok-stronghold.webp",
    "detailPath": "dungeons/detail/kroldok-stronghold.json",
    "lootPath": "dungeons/loot/kroldok-stronghold.json"
   },
@@ -153,6 +159,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/alcaz-prison.webp",
    "detailPath": "dungeons/detail/alcaz-prison.json",
    "lootPath": "dungeons/loot/alcaz-prison.json"
   },
@@ -173,6 +180,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/blackmaw-hold.webp",
    "detailPath": "dungeons/detail/blackmaw-hold.json",
    "lootPath": "dungeons/loot/blackmaw-hold.json"
   },
@@ -193,6 +201,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/shapers-terrace.webp",
    "detailPath": "dungeons/detail/shapers-terrace.json",
    "lootPath": "dungeons/loot/shapers-terrace.json"
   },
@@ -213,6 +222,7 @@ module.exports = {
    "bossCount": 4,
    "dropCount": 8,
    "hasRoute": false,
+   "art": "art/dungeons/ragefire-chasm.webp",
    "detailPath": "dungeons/detail/ragefire-chasm.json",
    "lootPath": "dungeons/loot/ragefire-chasm.json"
   },
@@ -233,6 +243,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 51,
    "hasRoute": false,
+   "art": "art/dungeons/wailing-caverns.webp",
    "detailPath": "dungeons/detail/wailing-caverns.json",
    "lootPath": "dungeons/loot/wailing-caverns.json"
   },
@@ -253,6 +264,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 34,
    "hasRoute": false,
+   "art": "art/dungeons/deathmine.webp",
    "detailPath": "dungeons/detail/deathmine.json",
    "lootPath": "dungeons/loot/deathmine.json"
   },
@@ -273,6 +285,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 45,
    "hasRoute": false,
+   "art": "art/dungeons/shadowfang-keep.webp",
    "detailPath": "dungeons/detail/shadowfang-keep.json",
    "lootPath": "dungeons/loot/shadowfang-keep.json"
   },
@@ -293,6 +306,7 @@ module.exports = {
    "bossCount": 8,
    "dropCount": 16,
    "hasRoute": false,
+   "art": "art/dungeons/blackfathom-deeps.webp",
    "detailPath": "dungeons/detail/blackfathom-deeps.json",
    "lootPath": "dungeons/loot/blackfathom-deeps.json"
   },
@@ -313,6 +327,7 @@ module.exports = {
    "bossCount": 6,
    "dropCount": 12,
    "hasRoute": false,
+   "art": "art/dungeons/the-stocks.webp",
    "detailPath": "dungeons/detail/the-stocks.json",
    "lootPath": "dungeons/loot/the-stocks.json"
   },
@@ -333,6 +348,7 @@ module.exports = {
    "bossCount": 6,
    "dropCount": 35,
    "hasRoute": false,
+   "art": "art/dungeons/gnomeregan.webp",
    "detailPath": "dungeons/detail/gnomeregan.json",
    "lootPath": "dungeons/loot/gnomeregan.json"
   },
@@ -353,6 +369,7 @@ module.exports = {
    "bossCount": 8,
    "dropCount": 20,
    "hasRoute": false,
+   "art": "art/dungeons/razorfen-kraul.webp",
    "detailPath": "dungeons/detail/razorfen-kraul.json",
    "lootPath": "dungeons/loot/razorfen-kraul.json"
   },
@@ -373,6 +390,7 @@ module.exports = {
    "bossCount": 5,
    "dropCount": 13,
    "hasRoute": false,
+   "art": "art/dungeons/scarlet-monastery-graveyard.webp",
    "detailPath": "dungeons/detail/scarlet-monastery-graveyard.json",
    "lootPath": "dungeons/loot/scarlet-monastery-graveyard.json"
   },
@@ -393,6 +411,7 @@ module.exports = {
    "bossCount": 2,
    "dropCount": 7,
    "hasRoute": false,
+   "art": "art/dungeons/scarlet-monastery-library.webp",
    "detailPath": "dungeons/detail/scarlet-monastery-library.json",
    "lootPath": "dungeons/loot/scarlet-monastery-library.json"
   },
@@ -413,6 +432,7 @@ module.exports = {
    "bossCount": 1,
    "dropCount": 3,
    "hasRoute": false,
+   "art": "art/dungeons/scarlet-monastery-armory.webp",
    "detailPath": "dungeons/detail/scarlet-monastery-armory.json",
    "lootPath": "dungeons/loot/scarlet-monastery-armory.json"
   },
@@ -433,6 +453,7 @@ module.exports = {
    "bossCount": 6,
    "dropCount": 23,
    "hasRoute": false,
+   "art": "art/dungeons/razor-krendor.webp",
    "detailPath": "dungeons/detail/razor-krendor.json",
    "lootPath": "dungeons/loot/razor-krendor.json"
   },
@@ -453,6 +474,7 @@ module.exports = {
    "bossCount": 3,
    "dropCount": 12,
    "hasRoute": false,
+   "art": "art/dungeons/scarlet-monastery-cathedral.webp",
    "detailPath": "dungeons/detail/scarlet-monastery-cathedral.json",
    "lootPath": "dungeons/loot/scarlet-monastery-cathedral.json"
   },
@@ -473,6 +495,7 @@ module.exports = {
    "bossCount": 10,
    "dropCount": 33,
    "hasRoute": false,
+   "art": "art/dungeons/uldaman.webp",
    "detailPath": "dungeons/detail/uldaman.json",
    "lootPath": "dungeons/loot/uldaman.json"
   },
@@ -493,6 +516,7 @@ module.exports = {
    "bossCount": 12,
    "dropCount": 54,
    "hasRoute": false,
+   "art": "art/dungeons/zulfarrak.webp",
    "detailPath": "dungeons/detail/zulfarrak.json",
    "lootPath": "dungeons/loot/zulfarrak.json"
   },
@@ -513,6 +537,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 38,
    "hasRoute": false,
+   "art": "art/dungeons/maraudon.webp",
    "detailPath": "dungeons/detail/maraudon.json",
    "lootPath": "dungeons/loot/maraudon.json"
   },
@@ -533,6 +558,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 16,
    "hasRoute": false,
+   "art": "art/dungeons/sunken-temple.webp",
    "detailPath": "dungeons/detail/sunken-temple.json",
    "lootPath": "dungeons/loot/sunken-temple.json"
   },
@@ -553,6 +579,7 @@ module.exports = {
    "bossCount": 20,
    "dropCount": 133,
    "hasRoute": false,
+   "art": "art/dungeons/blackrock-depths.webp",
    "detailPath": "dungeons/detail/blackrock-depths.json",
    "lootPath": "dungeons/loot/blackrock-depths.json"
   },
@@ -573,6 +600,7 @@ module.exports = {
    "bossCount": 5,
    "dropCount": 31,
    "hasRoute": false,
+   "art": "art/dungeons/dire-maul-east.webp",
    "detailPath": "dungeons/detail/dire-maul-east.json",
    "lootPath": "dungeons/loot/dire-maul-east.json"
   },
@@ -593,6 +621,7 @@ module.exports = {
    "bossCount": 16,
    "dropCount": 72,
    "hasRoute": false,
+   "art": "art/dungeons/lower-blackrock-spire.webp",
    "detailPath": "dungeons/detail/lower-blackrock-spire.json",
    "lootPath": "dungeons/loot/lower-blackrock-spire.json"
   },
@@ -613,6 +642,7 @@ module.exports = {
    "bossCount": 7,
    "dropCount": 30,
    "hasRoute": false,
+   "art": "art/dungeons/dire-maul-north.webp",
    "detailPath": "dungeons/detail/dire-maul-north.json",
    "lootPath": "dungeons/loot/dire-maul-north.json"
   },
@@ -633,6 +663,7 @@ module.exports = {
    "bossCount": 7,
    "dropCount": 45,
    "hasRoute": false,
+   "art": "art/dungeons/dire-maul-west.webp",
    "detailPath": "dungeons/detail/dire-maul-west.json",
    "lootPath": "dungeons/loot/dire-maul-west.json"
   },
@@ -653,6 +684,7 @@ module.exports = {
    "bossCount": 14,
    "dropCount": 85,
    "hasRoute": false,
+   "art": "art/dungeons/scholomance.webp",
    "detailPath": "dungeons/detail/scholomance.json",
    "lootPath": "dungeons/loot/scholomance.json"
   },
@@ -673,6 +705,7 @@ module.exports = {
    "bossCount": 11,
    "dropCount": 61,
    "hasRoute": false,
+   "art": "art/dungeons/stratholme-main-gate.webp",
    "detailPath": "dungeons/detail/stratholme-main-gate.json",
    "lootPath": "dungeons/loot/stratholme-main-gate.json"
   },
@@ -693,6 +726,7 @@ module.exports = {
    "bossCount": 8,
    "dropCount": 78,
    "hasRoute": false,
+   "art": "art/dungeons/stratholme-service-gate.webp",
    "detailPath": "dungeons/detail/stratholme-service-gate.json",
    "lootPath": "dungeons/loot/stratholme-service-gate.json"
   },
@@ -713,6 +747,7 @@ module.exports = {
    "bossCount": 9,
    "dropCount": 89,
    "hasRoute": false,
+   "art": "art/dungeons/upper-blackrock-spire.webp",
    "detailPath": "dungeons/detail/upper-blackrock-spire.json",
    "lootPath": "dungeons/loot/upper-blackrock-spire.json"
   },
@@ -733,6 +768,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": null,
    "detailPath": "dungeons/detail/barrow-deeps.json",
    "lootPath": "dungeons/loot/barrow-deeps.json"
   },
@@ -753,6 +789,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/hyjal-summit.webp",
    "detailPath": "dungeons/detail/hyjal-summit.json",
    "lootPath": "dungeons/loot/hyjal-summit.json"
   },
@@ -773,6 +810,7 @@ module.exports = {
    "bossCount": 0,
    "dropCount": 0,
    "hasRoute": false,
+   "art": "art/dungeons/onyxias-lair.webp",
    "detailPath": "dungeons/detail/onyxias-lair.json",
    "lootPath": "dungeons/loot/onyxias-lair.json"
   }

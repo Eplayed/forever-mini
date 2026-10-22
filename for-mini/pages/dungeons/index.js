@@ -1,4 +1,5 @@
 const service = require('../../services/forever-data')
+const oss = require('../../services/oss-manifest')
 
 /* 副本随手查（M01 首单）
    ------------------------------------------------------------------
@@ -52,7 +53,7 @@ Page({
   refresh() {
     return service.loadDungeonIndex().then((r) => {
       const payload = r.data || {}
-      const all = (payload.items || []).map(decorate)
+      const all = (payload.items || []).map((it) => decorate(it, r.batch))
       this.setData({
         all,
         loaded: true,
@@ -183,7 +184,7 @@ Page({
   }
 })
 
-function decorate(item) {
+function decorate(item, batch) {
   const range = item.levelRange || ''
   const official = item.levelRangeOfficial || ''
   return {
@@ -205,6 +206,9 @@ function decorate(item) {
     bossText: item.bossCount > 0 ? item.bossCount + ' 个首领' : '首领没有记录',
     dropText: item.dropCount > 0 ? '掉落 ' + item.dropCount + ' 条' : '掉落没有记录',
     routeText: item.hasRoute ? '' : '路线未实测',
+    /* 列表行缩略图：art 是相对 assets/ 的路径，地址由 oss-manifest 拼（页面不自己拼 URL）。
+       没这张图的座（art 为 null）界面直接不摆格子，不摆一个空框冒充有图。 */
+    artUrl: item.art ? oss.assetUrl(batch, item.art) : '',
     fav: false
   }
 }

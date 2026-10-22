@@ -136,9 +136,9 @@ function fakeOss() {
   const st = { objs: new Map(), counts: { PUT: 0, DELETE: 0, GET: 0, HEAD: 0 }, failPutAt: 0, failListAfter: 0, clock: 0 };
   st.writes = () => st.counts.PUT + st.counts.DELETE;
   st.get = (key) => (st.objs.has(key) ? st.objs.get(key).buf : null);
-  st.set = (key, buf, cacheControl, contentType) => st.objs.set(key, {
+  st.set = (key, buf, cacheControl, contentType, disposition) => st.objs.set(key, {
     buf, cacheControl: cacheControl || 'public, max-age=60, must-revalidate',
-    contentType: contentType || '',
+    contentType: contentType || '', contentDisposition: disposition || '',
     lastModified: new Date(st.clock += 1000).toUTCString()
   });
   const res = (statusCode, headers, body) => ({ statusCode, headers: headers || {}, body: body || Buffer.alloc(0) });
@@ -158,7 +158,8 @@ function fakeOss() {
     if (method === 'PUT') {
       st.counts.PUT += 1;
       if (st.failPutAt && st.counts.PUT === st.failPutAt) return Promise.resolve(res(500, {}, Buffer.from('<Code>InjectedPutFailure</Code>')));
-      st.set(key, body, headers && headers['Cache-Control'], headers && headers['Content-Type']);
+      st.set(key, body, headers && headers['Cache-Control'], headers && headers['Content-Type'],
+        headers && headers['Content-Disposition']);
       return Promise.resolve(res(200, { etag: '"' + md5u(body) + '"' }));
     }
     if (method === 'DELETE') {
@@ -169,7 +170,8 @@ function fakeOss() {
     }
     const o = st.objs.get(key);
     if (!o) return Promise.resolve(res(404, {}, Buffer.from('<Code>NoSuchKey</Code>')));
-    const h = { etag: '"' + md5u(o.buf) + '"', 'content-length': o.buf.length, 'cache-control': o.cacheControl, 'content-type': o.contentType || '', 'last-modified': o.lastModified };
+    const h = { etag: '"' + md5u(o.buf) + '"', 'content-length': o.buf.length, 'cache-control': o.cacheControl,
+      'content-type': o.contentType || '', 'content-disposition': o.contentDisposition || '', 'last-modified': o.lastModified };
     if (method === 'HEAD') { st.counts.HEAD += 1; return Promise.resolve(res(200, h)); }
     st.counts.GET += 1;
     return Promise.resolve(res(200, h, o.buf));
@@ -231,11 +233,26 @@ const oss = require(MINI_SERVICE);
   const batchDir = path.join(good.envDir, 'oss-build', 'beta', 'builds', man.buildId);
   const idx = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons', 'index.json'), 'utf8'));
   const bundle = JSON.parse(fs.readFileSync(path.join(batchDir, 'files.json'), 'utf8'));
+  const builtAssets = {};
+  /* 素材登记表（assets/index.json）是 `assets` 命令生成的，构建段里没有；
+     这里以"仓库素材目录下这个文件在不在"为准——分发层登记的就是它。 */
+  idx.items.filter((it) => it.art).forEach((it) => {
+    builtAssets[it.art] = fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', it.art));
+  });
   ok('索引 38 条 = 9 新本 + 26 经典 + 3 团本', idx.items.length === 38
     && idx.counts.newDungeons === 9 && idx.counts.classicDungeons === 26 && idx.counts.raids === 3,
     JSON.stringify(idx.counts));
   ok('每条索引都能落到实际存在的详情与掉落文件', idx.items.every((it) =>
     fs.existsSync(path.join(batchDir, it.detailPath)) && fs.existsSync(path.join(batchDir, it.lootPath))));
+  /* 列表页缩略图（M02 补）：art 进索引，值是相对 assets/ 的路径，缺的那座是 null 而不是空串 */
+  const withArt = idx.items.filter((it) => it.art);
+  ok('索引带 art 且是 assets 相对路径（37/38 有，缺的那座是 null 不是空串）',
+    withArt.length === 37 && withArt.every((it) => /^art\/dungeons\/[a-z0-9-]+\.webp$/.test(it.art))
+      && idx.items.filter((it) => !it.art).every((it) => it.art === null),
+    withArt.length + ' / 38');
+  ok('索引里的 art 都在素材层登记过（列表页要的图也发得出去）',
+    withArt.every((it) => Object.prototype.hasOwnProperty.call(builtAssets, it.art)),
+    '缺 ' + withArt.filter((it) => !Object.prototype.hasOwnProperty.call(builtAssets, it.art)).slice(0, 2).join(','));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
      等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
   /* 2 入口清单（meta+glossary）+ 副本索引 + 副本×2 + 职业名单 + 职业片 + 掉落反查表 */
@@ -799,8 +816,13 @@ const oss = require(MINI_SERVICE);
         const badCache = imgs.filter((k) => st.objs.get(k).cacheControl.indexOf('immutable') < 0);
         if (badCache.length) return { ok: false, why: '图片没带 immutable：' + badCache[0] };
         if (st.objs.get(ledKey()).cacheControl.indexOf('max-age=60') < 0) return { ok: false, why: '台账的缓存头不是短缓存' };
+        /* 素材要按"就地显示"发：默认域名会给对象挂 Content-Disposition: attachment，
+           模拟器里的 <image> 照渲染、真机不一定，所以 inline 必须真的写进对象元数据 */
+        const noDisp = imgs.filter((k) => st.objs.get(k).contentDisposition !== 'inline');
+        if (noDisp.length) return { ok: false, why: noDisp.length + ' 张图没带 Content-Disposition: inline，例：' + noDisp[0] };
         st.counts.PUT = 0;
         return ossTool.cmdAssets('beta', { dryRun: false }).then((rc2) => {
+          /* PUT 必须是 0：元数据比对只要写错（比如两边格式不同），每次发素材就会全量重传一遍 */
           if (rc2 !== 0 || st.counts.PUT !== 0) return { ok: false, why: '重发不幂等 rc=' + rc2 + ' PUT=' + st.counts.PUT };
           /* 素材集变小（这座本不再引用原画）：图片一张没动，只有台账要重写。
              这一条就是 2026-10-22 加技能图标时踩的坑——台账被当成不可变对象拦下，rc=1。 */
