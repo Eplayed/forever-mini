@@ -170,12 +170,14 @@ async function main() {
   const home = await ev(() => {
     const p = getCurrentPages().pop();
     const d = p.data;
-    return { counts: d.counts, hasSpells: typeof p.goSpells === 'function', hasLoots: typeof p.goLoots === 'function',
-      tab: (wx.getStorageSync('__noop') || '') };
+    return { counts: d.counts, cov: d.covList, wip: d.wip, fact: d.factDate, build: d.buildId,
+      hasSpells: typeof p.goSpells === 'function', hasLoots: typeof p.goLoots === 'function' };
   });
-  log('首页四个入口的数字都来自 meta.counts（不是写死）',
-    home.counts.dungeons === 38 && home.counts.spells === 498 && home.counts.lootRows === 1050 && home.counts.terms > 0, JSON.stringify(home.counts));
   log('技能与掉落两个入口的处理器在（页面不是 tab 页，必须 navigateTo）', home.hasSpells && home.hasLoots);
+  /* 玩家面规矩（2026-10-22 站主定）：首页不出现计数、覆盖率、缺口、核对日期、批次号 */
+  log('首页不出现计数/覆盖率/缺口/核对日期/批次号',
+    home.counts === undefined && (home.cov || []).length === 0 && (home.wip || []).length === 0
+      && home.fact === undefined && home.build === undefined, JSON.stringify(home));
   const navOk = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.goLoots();

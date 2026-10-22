@@ -3,38 +3,33 @@
     这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    当前显示的是{{sourceText}}，可能不是最新核对结果。点「数据从哪来」看口径与缺口。
+    现在没连上线，显示的是上次存下的名单。进详情看首领与掉落要联网。
   </view>
 
   <view class="search">
     <input class="search-input" placeholder="搜中文名或英文名，例如「怒焰裂谷」" value="{{kw}}" bindinput="onKw" confirm-type="search" />
-    <view class="fav-btn {{onlyFav ? 'fav-btn-on' : ''}}" bindtap="onFavOnly">只看收藏 {{favCount}}</view>
+    <view class="fav-btn {{onlyFav ? 'fav-btn-on' : ''}}" bindtap="onFavOnly">只看收藏</view>
   </view>
 
   <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
-    <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">{{item.label}} {{item.count}}</view>
-  </scroll-view>
-  <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
-    <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeLevel === item.key ? 'chip-on' : ''}}" wx:for="{{levels}}" wx:key="key" data-level="{{item.key}}" bindtap="onLevel">{{item.label}} {{item.count}}</view>
+    <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">{{item.label}}</view>
     <view class="chip chip-src" bindtap="onLoots">掉落反查 ›</view>
-    <view class="chip chip-src" bindtap="onNote">数据从哪来</view>
   </scroll-view>
 
-  <view wx:if="{{recent.length && !kw && activeKind === 'all' && activeLevel === 'all' && !onlyFav}}" class="card">
+  <view wx:if="{{recent.length && !kw && activeKind === 'all' && !onlyFav}}" class="card">
     <view class="card-title">最近看过</view>
     <view class="mini-row" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen">
       <text class="mini-name">{{item.title}}</text>
-      <text class="badge badge-{{item.level}}">{{item.level}}</text>
-      <text class="muted mini-sub">{{item.rangeText}} · {{item.bossText}}</text>
+      <text class="muted mini-sub">{{item.rangeText}}</text>
     </view>
   </view>
 
   <view wx:if="{{empty}}" class="card empty">
     <view>没有符合条件的副本。</view>
-    <view class="muted">换个关键词，或把筛选切回「全部」。本站收录 {{totals.total}} 座；查不到不等于这座本不存在，缺数据的字段显示「待实测」，不机翻、不编造。</view>
+    <view class="muted">换个关键词，或把筛选切回「全部」。查不到不等于这座本不存在；缺的字段会写「待实测」，不机翻、不编造。</view>
   </view>
 
-  <view wx:if="{{!loaded}}" class="card muted">正在取这一批副本名单…</view>
+  <view wx:if="{{!loaded}}" class="card muted">正在取副本名单…</view>
 
   <view class="drow" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen">
     <view wx:if="{{item.artUrl}}" class="drow-art">
@@ -56,12 +51,8 @@
         <text wx:if="{{item.faction}}" class="tag">{{item.faction}}</text>
         <text wx:if="{{item.zoneCn}}" class="tag tag-zone">{{item.zoneCn}}</text>
       </view>
-      <view class="muted drow-sub">
-        {{item.bossText}} · {{item.dropText}}<text wx:if="{{item.routeText}}"> · {{item.routeText}}</text><text wx:if="{{item.officialNote}}"> · {{item.officialNote}}</text>
-      </view>
     </view>
     <view class="drow-side">
-      <view class="badge badge-{{item.level}}">{{item.levelName}}</view>
       <view class="fav {{item.fav ? 'fav-active' : ''}}" data-id="{{item.id}}" catchtap="onFav">{{item.fav ? '★' : '☆'}}</view>
     </view>
   </view>

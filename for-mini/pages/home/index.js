@@ -1,44 +1,20 @@
 const service = require('../../services/forever-data')
 const DUNGEON_INDEX = require('../../data/forever-dungeon-snapshot')
 
-/* 首页（H01 重做）
+/* 首页（2026-10-22 玩家面清理）
    这一屏只回答玩家一件事："我现在要查什么，从哪儿进"。
-   · 能用的入口才做成卡；没做完的模块降级成「还在整理」的说明 chip，
-     不再摆四个点了只弹 toast 的假入口（玩家会以为产品坏了）。
-   · 数据完整度从首屏大条收成一行读数——那是我们的台账，不是玩家的任务。
-   · 数字一律从当轮基底现读（meta.counts / 索引快照条数），不抄成常量。 */
-
-const WIP = [
-  {
-    name: '天赋计算器',
-    gap: '天赋树结构已入库，但每层需要多少点的门槛没有官方或客户端证据。'
-      + '猜一个数就会误导玩家加点，所以门槛核到之前这一格不做。'
-  },
-  {
-    name: '技能书',
-    gap: '官方中文稿只覆盖 4 个职业，其余职业的技能中文名叫法还没采到，缺的一律不机翻补上。'
-  },
-  {
-    name: '溯源与方法',
-    gap: '网页端已有溯源页；小程序侧要把「每条数据的来源与核对日期」做成独立一页，等副本与速查两条线跑稳再开。'
-  }
-]
+   站主定的规矩：玩家不需要看到"数据有多少、缺多少、核到哪天、第几批"——
+   那些是我们的台账，不是玩家的任务，所以覆盖率读数、缺口清单、WIP chip、
+   入口卡上的条数、核对日期与批次号全部下线（口径见
+   wow-forever-web/docs/PLAN-小程序玩家面-2026-10-22.md）。
+   留下的只有：入口、最近看过、断网提示、页脚声明。 */
 
 Page({
   data: {
     loaded: false,
-    meta: null,
-    source: '',
-    sourceText: '',
     offline: false,
     requiresUpdate: false,
-    factDate: '',
-    baseline: '',
-    buildId: '',
-    covList: [],
-    counts: { terms: 0, dungeons: 0, spells: 0, lootRows: 0, talentNodes: 0 },
-    recent: [],
-    wip: WIP
+    recent: []
   },
 
   onLoad() {
@@ -54,36 +30,18 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 仍然取一次 meta：它是"连没连上线"的最便宜判据，断网提示要靠它。
+     取回来的覆盖率/计数不再上界面。 */
   refresh() {
     return service.loadMeta().then((result) => {
       const meta = result.data || {}
-      const cov = meta.coverage || {}
-      const total = Math.max(cov.total || 0, 1)
-      const counts = meta.counts || {}
+      this.disclaimer = meta.disclaimer || ''
       this.setData({
         loaded: true,
-        meta,
-        source: result.source,
-        sourceText: result.sourceText,
         offline: result.source !== 'live',
-        requiresUpdate: result.requiresUpdate,
-        factDate: (result.factDates && result.factDates.latest) || meta.checkedAt || '',
-        baseline: (meta.dataBaseline && (meta.dataBaseline.checkedAt || meta.dataBaseline.build)) || meta.checkedAt || '',
-        buildId: result.buildId || '',
-        counts: {
-          terms: counts.terms || 0,
-          dungeons: counts.dungeons || (DUNGEON_INDEX.items || []).length,
-          spells: counts.spells || 0,
-          lootRows: counts.lootRows || 0,
-          talentNodes: counts.talentNodes || 0
-        },
-        covList: ['L0', 'L1', 'L2', 'L3'].map((level) => ({
-          level,
-          name: service.levelName(level),
-          count: cov[level] || 0,
-          pct: Math.round((cov[level] || 0) / total * 100)
-        }))
+        requiresUpdate: !!result.requiresUpdate
       })
+      return null
     })
   },
 
@@ -91,10 +49,10 @@ Page({
   syncRecent() {
     const map = {}
     ;(DUNGEON_INDEX.items || []).forEach((it) => {
-      map[it.id] = { id: it.id, title: it.nameCn || it.nameEn || it.id, level: it.level || 'L3', range: it.levelRange || '等级待实测' }
+      map[it.id] = { id: it.id, title: it.nameCn || it.nameEn || it.id, range: it.levelRange || '等级待实测' }
     })
     const ids = service.getRecentDungeons()
-    const recent = ids.map((id) => map[id] || { id: id, title: id, level: 'L3', range: '' }).slice(0, 4)
+    const recent = ids.map((id) => map[id] || { id: id, title: id, range: '' }).slice(0, 4)
     /* 存储里记了但快照里没有的 id（比如改了副本 id）要主动丢掉，否则首页会一直显示一排原始编号 */
     if (ids.some((id) => !map[id])) {
       try { wx.setStorageSync(service.RECENT_DUNGEON_KEY, ids.filter((id) => map[id])) } catch (e) {}
@@ -125,34 +83,10 @@ Page({
     wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(e.currentTarget.dataset.id) })
   },
 
-  onLevels() {
-    const d = this.data
-    const cov = d.covList.map((x) => x.level + ' ' + x.name + '：' + x.count + ' 条（' + x.pct + '%）').join('\n')
-    wx.showModal({
-      title: '这些数是什么意思',
-      content: cov
-        + '\n\nL0 已官方核实 / L1 只有官方英文 / L2 待实测 / L3 缺数据。'
-        + '分级看的是「这条信息我们核到什么程度」，不是内容好坏。'
-        + '\n\n数据基准 ' + (d.baseline || '未记录')
-        + '\n最近核对 ' + (d.factDate || '未记录')
-        + '\n线上批次 ' + (d.buildId || '没取到，用的是主包快照'),
-      showCancel: false
-    })
-  },
-
-  onWip(e) {
-    const item = this.data.wip[e.currentTarget.dataset.i]
-    wx.showModal({ title: item.name + '·还缺什么', content: item.gap, showCancel: false })
-  },
-
   onDisclaimer() {
-    const meta = this.data.meta || {}
     wx.showModal({
-      title: '数据来源与声明',
-      content: (meta.disclaimer || '非官方粉丝资料站，与暴雪娱乐及网易无关。')
-        + '\n\n数据基准：' + (this.data.baseline || '未记录')
-        + '\n核对日期：' + (this.data.factDate || '未记录')
-        + '\n当前数据来源：' + this.data.sourceText,
+      title: '声明',
+      content: this.disclaimer || '非官方粉丝资料站，与暴雪娱乐及网易无关。',
       showCancel: false
     })
   }

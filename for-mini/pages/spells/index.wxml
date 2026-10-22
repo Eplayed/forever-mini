@@ -30,8 +30,7 @@
           </view>
         </view>
         <view class="crow crow2">
-          <text class="csub">{{item.count}} 条 · {{item.tabCount}} 系</text>
-          <view class="badge badge-{{item.level}}">{{item.levelName || item.level}}</view>
+          <text class="csub">{{item.tabNames}}</text>
         </view>
       </view>
     </view>
@@ -41,7 +40,7 @@
   <block wx:else>
     <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
       <view class="chip chip-all" bindtap="onBackToClasses">换职业</view>
-      <view class="chip {{item.classId === classId ? 'chip-on' : ''}}" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPick">{{item.nameCn}} {{item.count}}</view>
+      <view class="chip {{item.classId === classId ? 'chip-on' : ''}}" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPick">{{item.nameCn}}</view>
     </scroll-view>
 
     <view class="search">
@@ -49,7 +48,7 @@
       <view class="fav-btn" bindtap="onBackToClasses">全部职业</view>
     </view>
 
-    <view class="muted colnote">{{className}} {{total}} 条 · {{fieldNote}}</view>
+    <view class="muted colnote">{{fieldNote}}</view>
 
     <view wx:if="{{!loaded}}" class="card muted">正在取{{className}}的法术…</view>
     <view wx:if="{{loaded && !list.length}}" class="card empty">
@@ -68,7 +67,6 @@
           </view>
           <view class="sp-side">
             <view wx:if="{{x.stateText}}" class="chip-st st-{{x.stateKey}}">{{x.stateText}}</view>
-            <view class="muted sp-src">{{x.prov.length}} 条来源</view>
           </view>
         </view>
 
@@ -76,7 +74,6 @@
           <view class="row detail-actions">
             <view class="btn" data-id="{{x.id}}" catchtap="onCopy">复制这条</view>
             <view class="spacer"></view>
-            <view class="badge badge-{{x.level}}">{{x.levelName}}</view>
           </view>
           <view wx:if="{{x.altText}}" class="altline">{{x.altText}}</view>
           <view wx:if="{{x.ranks.length}}" class="lvlbox">
@@ -99,6 +96,5 @@
   </block>
 
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
-  <view wx:if="{{buildId}}" class="muted build">批次 {{buildId}}</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

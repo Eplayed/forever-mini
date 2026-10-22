@@ -11,7 +11,7 @@
 
   <view class="lead plate">
     <view class="lead-t">掉落反查</view>
-    <view class="lead-s">输入装备或物品的中文名，或物品编号，查它是哪座本、哪个首领掉的。本站收录 {{total}} 条掉落记录 · {{itemCount}} 件物品。{{qualityNote}}</view>
+    <view class="lead-s">输入装备或物品的中文名，或物品编号，查它是哪座本、哪个首领掉的。{{qualityNote}}</view>
   </view>
 
   <view class="search">
@@ -42,8 +42,7 @@
         </view>
       </view>
       <view class="it-side">
-        <view class="badge badge-{{item.level}}">{{item.levelName}}</view>
-        <view class="muted it-n">{{item.sources.length}} 座本</view>
+        <view class="muted it-n">{{item.sources.length > 1 ? item.sources.length + ' 座本都掉' : ''}}</view>
       </view>
     </view>
 
@@ -56,7 +55,6 @@
       <view class="row it-actions">
         <view class="btn" data-id="{{item.id}}" catchtap="onCopy">复制这条掉落</view>
         <view class="spacer"></view>
-        <view class="muted">{{item.sources.length}} 处掉落</view>
       </view>
     </view>
   </view>
@@ -64,6 +62,5 @@
   <view wx:if="{{truncated}}" class="muted truncated">匹配太多，只列前 {{list.length}} 条（共 {{truncated}} 条），请把词输长一点。</view>
   <view wx:if="{{disclaimer}}" class="muted disc">{{disclaimer}}</view>
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
-  <view wx:if="{{buildId}}" class="muted build">批次 {{buildId}}</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

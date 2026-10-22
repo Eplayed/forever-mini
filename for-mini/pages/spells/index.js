@@ -52,8 +52,7 @@ Page({
       const data = r.data || {}
       const classes = (data.classes || []).map((c) => Object.assign({}, c, {
         iconUrl: oss.iconUrl(this.batch, c.iconKey),
-        levelName: service.levelName(c.level),
-        tabCount: (c.tabs || []).length
+        tabNames: (c.tabs || []).map((t) => t.name).join(' · ')
       }))
       this.classes = classes
       this.setData({
@@ -64,7 +63,6 @@ Page({
         requiresUpdate: !!r.requiresUpdate,
         offline: r.source !== 'live',
         sourceText: r.sourceText,
-        buildId: r.buildId || '',
         errorText: r.error ? String(r.error.message || r.error).slice(0, 120) : ''
       })
       if (pickClassId) return this.selectClass(pickClassId)
@@ -120,8 +118,6 @@ Page({
       stateText: s.state ? (SP_STATE[s.state] || s.state) : '',
       stateKey: s.state || '',
       relText: s.relation ? (SP_REL[s.relation] || s.relation) : '',
-      level: s.level || 'L3',
-      levelName: service.levelName(s.level),
       altText: alt.join('；'),
       ranks: (s.spellRanks || []).map((x) => ({ spellId: x.spellId, learnLevel: x.learnLevel })),
       prov: (s.provenance || []).map((p) => ({

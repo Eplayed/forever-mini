@@ -29,19 +29,14 @@ Page({
     enMissing: false,
     conflict: '',
     kindLabel: '',
-    level: 'L3',
-    levelName: '',
     rows: [],
     bosses: [],
     bossEmpty: '',
     artUrl: '',
     artNote: ART_NOTE,
     drops: [],
-    dropNote: '',
-    routeNote: '',
     prov: [],
-    factLatest: '',
-    buildId: '',
+    provOpen: false,
     fav: false,
     disclaimer: ''
   },
@@ -69,6 +64,7 @@ Page({
         offline: r.source !== 'live',
         sourceText: r.sourceText,
         requiresUpdate: r.requiresUpdate,
+        /* 同列表页：批次号与核对日期不上界面，但留给门禁与排障读 */
         factLatest: (r.factDates && r.factDates.latest) || '',
         buildId: r.buildId || '',
         kindLabel: KIND_LABEL[item.kind] || item.kind || '副本',
@@ -78,8 +74,6 @@ Page({
         nameMissing: !item.nameCn,
         enMissing: !item.nameEn,
         conflict: item.nameCnConflict || '',
-        level: item.level || 'L3',
-        levelName: service.levelName(item.level),
         fav: service.isFavoriteDungeon(item.id)
       })
       this.batch = r.batch || null
@@ -90,11 +84,11 @@ Page({
         { k: '可进入等级', v: item.levelRange || '待实测', note: item.levelRange && item.levelRangeOfficial && item.levelRangeOfficial !== item.levelRange ? '官方英文页另写 ' + item.levelRangeOfficial : '' },
         { k: '阵营', v: item.faction || '未记录', note: '' },
         { k: '位置', v: item.zoneCn || '待补充', note: '' },
-        { k: '队伍人数', v: item.partySize ? item.partySize + ' 人' : '未记录', note: item.partySizeAlt ? '另一说法：' + item.partySizeAlt + ' 人' : (item.sizeClaim || '') },
-        { k: '首领', v: item.bossCount > 0 ? item.bossCount + ' 个' : '没有记录', note: '' },
-        { k: '掉落条目', v: item.dropCount > 0 ? item.dropCount + ' 条' : '没有记录', note: '本站不写掉落几率' }
+        { k: '队伍人数', v: item.partySize ? item.partySize + ' 人' : '未记录', note: item.partySizeAlt ? '另一说法：' + item.partySizeAlt + ' 人' : (item.sizeClaim || '') }
       ]
-      this.setData({ rows: baseRows, routeNote: item.hasRoute ? '' : '路线未实测，本站不画路线。' })
+      /* 2026-10-22 站主定的：玩家不看"几个首领几条掉落"这类计数，
+         下面两节本来就把名单和掉落一条条列出来了，行里再报一遍数只是台账。 */
+      this.setData({ rows: baseRows })
       if (!r.batch) {
         this.setData({ needOnline: true, detailSource: 'snapshot' })
         return null
@@ -112,7 +106,8 @@ Page({
           if (alt && alt !== g.levelRange) {
             merged[0].note = '客户端/资料另记 ' + alt + (g.levelRangeOfficial && g.levelRangeOfficial !== g.levelRange ? '；官方英文页 ' + g.levelRangeOfficial : '')
           }
-          if (g.lootNote) merged.push({ k: '掉落口径', v: g.lootNote, note: '' })
+          /* lootNote 是方法论长段（谁取的、怎么推的），玩家面不上；
+             掉落那一节的标题已经写了"按经典旧世公开数据库推的，本站不写几率"。 */
           this.setData({ artUrl: oss.assetUrl(this.batch, g.art) })
         }
         this.setData({
@@ -120,9 +115,6 @@ Page({
           bosses: d.data && d.data.dungeon ? (d.data.dungeon.bosses || []).map((b) => ({
             name: b.nameCn || b.id,
             missing: !b.nameCn,
-            level: b.level || 'L3',
-            levelName: service.levelName(b.level),
-            note: b.note || '',
             portraitUrl: oss.assetUrl(this.batch, b.portrait),
             hasPortrait: !!b.portrait
           })) : [],
@@ -138,11 +130,8 @@ Page({
             name: x.nameCn || x.itemId,
             boss: x.bossCn || '',
             quality: QUALITY[x.quality] || '未说明',
-            level: x.level || 'L3',
-            levelName: service.levelName(x.level),
             iconUrl: oss.iconUrl(this.batch, x.iconKey)
           })) : [],
-          dropNote: l.data && l.data.lootNote ? l.data.lootNote : '',
           detailSource: d.source,
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',
@@ -155,6 +144,10 @@ Page({
 
   /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
      （＝玩家点"回到副本列表"没反应），必须 switchTab */
+  onProvToggle() {
+    this.setData({ provOpen: !this.data.provOpen })
+  },
+
   onBack() {
     wx.switchTab({ url: '/pages/dungeons/index' })
   },

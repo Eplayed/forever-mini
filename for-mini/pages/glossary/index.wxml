@@ -13,7 +13,7 @@
 
   <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
     <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">
-      {{item.name}} {{item.count}}
+      {{item.name}}
     </view>
     <view class="chip chip-src" bindtap="onSpells">职业技能速查 ›</view>
   </scroll-view>
@@ -40,7 +40,6 @@
       <view class="row detail-actions">
         <view class="btn" data-id="{{item.id}}" catchtap="onCopy">复制词条</view>
         <view class="spacer"></view>
-        <view class="muted">{{item.prov.length}} 条来源记录</view>
       </view>
       <view class="prov" wx:for="{{item.prov}}" wx:for-item="src" wx:key="url" data-url="{{src.url}}" catchtap="onOpenSource">
         <view class="prov-type">{{src.type}}</view>

@@ -264,3 +264,16 @@
 .drop-face {
   margin-right: 14rpx;
 }
+
+/* 来源折叠（2026-10-22 玩家面清理）：来源是红线要求能点开的，
+   但它不是玩家第一屏要看的东西，所以收进一个开关里。 */
+.prov-head {
+  display: flex;
+  align-items: center;
+}
+
+.prov-toggle {
+  margin-left: auto;
+  font-size: 22rpx;
+  font-weight: 400;
+}

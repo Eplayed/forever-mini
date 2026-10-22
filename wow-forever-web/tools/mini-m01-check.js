@@ -171,14 +171,19 @@ async function main() {
   await clearStore();
   await nav('/pages/home/index');
   let s = (await snap()) || {};
-  log('首页 meta：线上取不到 → 打包快照，界面标出来', /快照/.test(String(s && s.sourceText)) && s && s.offline === true, JSON.stringify(s && { src: s.sourceText }));
+  /* 首页现在只用一条顶条说"没连上"（玩家面不再印 sourceText/核对日期），
+     所以这里断言 offline 标记为真——顶条由 wx:if 渲染，截图里看得见。 */
+  log('首页：线上取不到 → offline 标记为真（顶条提示由界面渲染）', s && s.offline === true, JSON.stringify({ off: s && s.offline }));
   await shot('a1-home-snapshot');
 
   await nav('/pages/dungeons/index');
   s = (await snap()) || {};
   log('列表页：38 座全在主包快照里，且不冒充实时', /快照/.test(String(s && s.sourceText)) && s.all === 38 && s.list === 38 && !s.buildId, JSON.stringify({ src: s.sourceText, all: s.all, b: s.buildId }));
-  log('列表页：38 座 route 全缺如实登记', s.routeMissing === 38, String(s.routeMissing));
-  log('列表页：分组计数与总数同一口径', s.kinds[0].count === 38 && s.kinds.slice(1).reduce((a, k) => a + k.count, 0) === 38, JSON.stringify(s.kinds));
+  /* 2026-10-22 站主定的玩家面规矩：聚合数、缺口自述、可信度筛选一律不上界面。
+     门禁反过来守这条——页面上再长出 count / routeMissing / levels 就是回归。 */
+  log('列表页不再挂聚合数与可信度筛选（玩家面规矩）',
+    s.kinds.every((k) => k.count === undefined) && (s.levels || []).length === 0 && s.routeMissing === undefined,
+    JSON.stringify({ kinds: s.kinds, levels: s.levels, rm: s.routeMissing }));
   await shot('a2-dungeons-snapshot');
 
   await nav('/pages/dungeon/index?id=ragefire-chasm');
@@ -211,7 +216,13 @@ async function main() {
   log('详情页：首领/掉落里没有站内图片路径', !/(img|src)\//.test(JSON.stringify(s.bosses) + JSON.stringify(s.drops)), '');
   log('详情页：掉落不出现百分比', !/\d+(\.\d+)?\s*%/.test(JSON.stringify(s.drops)), '');
   log('详情页：每条来源带核对日期，缺的写"未记录"', (s.prov || []).length > 0 && (s.prov || []).every((x) => !!x.checkedAt), JSON.stringify((s.prov || [])[0]));
-  log('详情页：关键信息行含等级与首领数', (s.rows || []).length >= 6, JSON.stringify((s.rows || []).slice(0, 3)));
+  /* 玩家面规矩：关键信息只留"这座本是什么"的四行事实，
+     首领/掉落的计数行与方法论行（掉落口径）已下线——下面两节本来就把内容列出来了。 */
+  log('详情页：关键信息只有等级/阵营/位置/人数四行，不带计数与方法论',
+    (s.rows || []).length === 4
+      && ['可进入等级', '阵营', '位置', '队伍人数'].every((k) => (s.rows || []).some((r) => r.k === k))
+      && !(s.rows || []).some((r) => /首领|掉落|口径/.test(r.k)),
+    JSON.stringify((s.rows || []).map((r) => r.k)));
   await shot('b2-detail-live');
 
   await nav('/pages/dungeon/index?id=barrow-deeps');
@@ -267,10 +278,10 @@ async function main() {
     const p = getCurrentPages().pop();
     p.onKw({ detail: { value: '怒焰' } });
     return new Promise((res) => setTimeout(() => res({
-      n: p.data.list.length, ids: p.data.list.map((x) => x.id), all: p.data.kinds[0].count, kw: p.data.kw
+      n: p.data.list.length, ids: p.data.list.map((x) => x.id), kw: p.data.kw
     }), 500));
   }), 4);
-  log('搜「怒焰」：只剩怒焰裂谷，「全部」计数同步为 1', searchRes && searchRes.n === 1 && searchRes.ids[0] === 'ragefire-chasm' && searchRes.all === 1, JSON.stringify(searchRes));
+  log('搜「怒焰」：只剩怒焰裂谷', searchRes && searchRes.n === 1 && searchRes.ids[0] === 'ragefire-chasm', JSON.stringify(searchRes));
   await shot('e1-search');
 
   const raidRes = await call('筛团本', () => mp.evaluate(() => {
@@ -283,27 +294,13 @@ async function main() {
   }), 4);
   /* 分面计数的正确口径：同一维度里每个按钮＝"选它会得到几座"（不受本维度当前选择影响），
      受其它维度约束；所以选中的那个必须等于结果数，非选中的几个之和必须等于「全部」。 */
-  log('筛「团本」：选中项计数 == 结果数，三类之和 == 「全部」', raidRes && raidRes.n === 3 && raidRes.active === 'raid'
-    && raidRes.kinds.filter((k) => k.key === 'raid')[0].count === raidRes.n
-    && raidRes.kinds.slice(1).reduce((a, k) => a + k.count, 0) === raidRes.kinds[0].count, JSON.stringify(raidRes));
+  log('筛「团本」：只剩三座团本，chip 上不挂条数', raidRes && raidRes.n === 3 && raidRes.active === 'raid'
+    && raidRes.kinds.every((k) => k.count === undefined), JSON.stringify(raidRes.kinds));
   await shot('e2-filter-raid');
-
-  const lvlRes = await call('筛 L0', () => mp.evaluate(() => {
-    const p = getCurrentPages().pop();
-    p.onKind({ currentTarget: { dataset: { kind: 'all' } } });
-    p.onLevel({ currentTarget: { dataset: { level: 'L0' } } });
-    return new Promise((res) => setTimeout(() => res({
-      n: p.data.list.length, pure: p.data.list.every((x) => x.level === 'L0'),
-      sel: p.data.levels.filter((l) => l.key === 'L0')[0].count,
-      sum: p.data.levels.slice(1).reduce((a, l) => a + l.count, 0), allCount: p.data.levels[0].count
-    }), 500));
-  }), 4);
-  log('筛 L0：结果全是 L0、选中项计数 == 结果数、各可信度之和 == 全部', lvlRes && lvlRes.n > 0 && lvlRes.pure
-    && lvlRes.sel === lvlRes.n && lvlRes.sum === lvlRes.allCount, JSON.stringify(lvlRes));
 
   const favRes = await call('收藏', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    p.onLevel({ currentTarget: { dataset: { level: 'all' } } });
+    p.onKind({ currentTarget: { dataset: { kind: 'all' } } });
     p.onFav({ currentTarget: { dataset: { id: 'ragefire-chasm' } } });
     return new Promise((res) => setTimeout(() => {
       p.onFavOnly();
@@ -324,7 +321,7 @@ async function main() {
     setTimeout(() => {
       const q = getCurrentPages().pop();
       res({ route: q.route, id: q.data.id, bosses: (q.data.bosses || []).length, depth: getCurrentPages().length,
-        recent: wx.getStorageSync('wow_forever_v1_recent_dungeons'), ptr: q.data.buildId });
+        recent: wx.getStorageSync('wow_forever_v1_recent_dungeons') });
     }, 3200);
   })), 4);
   log('列表点进详情：带 id 跳转并渲染 4 个首领', openRes && /pages\/dungeon\/index/.test(String(openRes.route)) && openRes.bosses === 4 && openRes.depth === 2, JSON.stringify(openRes));
@@ -360,9 +357,16 @@ async function main() {
   await clearStore();
   await nav('/pages/home/index');
   s = (await snap()) || {};
-  log('首页两个入口卡都在，数字从基底现读', s.counts && s.counts.dungeons === 38 && s.counts.terms > 0 && s.cov === 4,
-    JSON.stringify({ d: s.counts && s.counts.dungeons, t: s.counts && s.counts.terms, cov: s.cov }));
-  log('首页不再有"点了没反应"的假入口（wip 只是说明 chip）', s.wip === 3, JSON.stringify({ wip: s.wip }));
+  const homeCards = await call('首页入口', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    return { go: ['goDungeons', 'goGlossary', 'goSpells', 'goLoots'].filter((f) => typeof p[f] === 'function').length,
+      counts: p.data.counts, cov: p.data.covList, wip: p.data.wip, fact: p.data.factDate, build: p.data.buildId };
+  }), 3);
+  log('首页四个入口都在（副本/速查/技能/掉落）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
+  log('首页不出现计数、覆盖率、缺口清单、核对日期与批次号（玩家面规矩）',
+    homeCards && homeCards.counts === undefined && (homeCards.cov || []).length === 0
+      && (homeCards.wip || []).length === 0 && homeCards.fact === undefined && homeCards.build === undefined,
+    JSON.stringify(homeCards));
   /* 版式（两张卡并排、chip 排成一行）不在这里断言：本机的 evaluate 落在 app 服务上下文，
      拿不到 querySelector；这类"看起来对不对"由截图 + 站主眼睛判，脚本只保证数据与导航。 */
   await shot('g1-home-cards');

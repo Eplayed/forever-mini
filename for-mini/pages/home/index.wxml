@@ -5,42 +5,33 @@
     这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    当前显示的是{{sourceText}}，可能不是最新核对结果。正式数据要联网从资料站基底同步。
+    现在没连上线，显示的是上次存下的内容。要联网取的部分会明说。
   </view>
 
   <view class="hero">
     <view class="hero-title">无限资料</view>
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
-    <view class="hero-state">
-      <text class="dot {{offline ? 'dot-warn' : 'dot-ok'}}"></text>
-      <text>{{sourceText || '正在取数据…'}}</text>
-      <text wx:if="{{loaded}}" class="hero-date">核对至 {{factDate || '未记录'}}</text>
-    </view>
   </view>
 
   <view class="sec-title">查</view>
   <view class="grid">
     <view class="entry plate" bindtap="goDungeons">
       <view class="entry-name">副本随手查</view>
-      <view class="entry-num">{{counts.dungeons}}<text class="entry-unit">座</text></view>
       <view class="entry-desc">中英名、等级、首领与掉落。名单已打进主包，断网也能查。</view>
       <view class="entry-go">去查 →</view>
     </view>
     <view class="entry plate" bindtap="goGlossary">
       <view class="entry-name">中英速查</view>
-      <view class="entry-num">{{counts.terms}}<text class="entry-unit">条</text></view>
-      <view class="entry-desc">按中文名搜官方译名，看英文原名与待补，一键复制。</view>
+      <view class="entry-desc">按中文名搜官方译名，看英文原名，一键复制。</view>
       <view class="entry-go">去查 →</view>
     </view>
     <view class="entry plate" bindtap="goSpells">
       <view class="entry-name">职业技能速查</view>
-      <view class="entry-num">{{counts.spells}}<text class="entry-unit">条</text></view>
       <view class="entry-desc">按职业查法术书：级数、几级学会、和经典旧世比是新增还是改动。这一页要联网取。</view>
       <view class="entry-go">去查 →</view>
     </view>
     <view class="entry plate" bindtap="goLoots">
       <view class="entry-name">掉落反查</view>
-      <view class="entry-num">{{counts.lootRows}}<text class="entry-unit">条</text></view>
       <view class="entry-desc">输入装备名或物品编号，查它是哪座本、哪个首领掉的。这一页要联网取。</view>
       <view class="entry-go">去查 →</view>
     </view>
@@ -52,46 +43,11 @@
       <view class="mini plate" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onRecentTap">
         <view class="mini-name">{{item.title}}</view>
         <view class="mini-meta">
-          <text class="badge badge-{{item.level}}">{{item.level}}</text>
           <text class="mini-range">{{item.range}}</text>
         </view>
       </view>
     </scroll-view>
   </block>
-
-  <view class="sec-title">这站现在什么样</view>
-  <view class="panel">
-    <view class="levels" bindtap="onLevels">
-      <view class="lv" wx:for="{{covList}}" wx:key="level">
-        <view class="lv-num lv-{{item.level}}">{{item.count}}</view>
-        <view class="lv-key">{{item.level}}</view>
-      </view>
-      <view class="levels-side">
-        <view class="muted">基准 {{baseline || '未记录'}}</view>
-        <view class="levels-go">这些数什么意思 ›</view>
-      </view>
-    </view>
-    <view class="lv-legend">
-      <text class="badge badge-L0">L0 已官方核实</text>
-      <text class="badge badge-L1">L1 仅官方英文</text>
-      <text class="badge badge-L2">L2 待实测</text>
-      <text class="badge badge-L3">L3 缺数据</text>
-    </view>
-  </view>
-
-  <view wx:if="{{meta.openQuestions.length}}" class="sec-title sec-title-2">还没确认的</view>
-  <view wx:if="{{meta.openQuestions.length}}" class="panel gaps">
-    <view class="gap" wx:for="{{meta.openQuestions}}" wx:key="*this">
-      <text class="gap-mark">·</text><text>{{item}}</text>
-    </view>
-    <view class="muted gap-note">缺口按官方稿与实测逐条回填；缺数据显示「待实测」，不机翻、不编造。</view>
-  </view>
-
-  <view class="sec-title sec-title-2">还在整理</view>
-  <view class="wip">
-    <view class="chip chip-wip" wx:for="{{wip}}" wx:key="name" data-i="{{index}}" bindtap="onWip">{{item.name}}</view>
-  </view>
-  <view class="muted wip-note">点一项会说清缺什么。这些不是入口——核到位了才会挪到上面「查」里。</view>
 
   <view class="foot" bindtap="onDisclaimer">非官方粉丝资料站，与暴雪娱乐及网易无关（点击查看声明）</view>
 </view>

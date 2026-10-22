@@ -63,8 +63,6 @@ Page({
               missing: !row[iName],
               quality: row[iQ],
               qualityText: QUALITY[row[iQ]] || '未说明',
-              level: row[iLv] || 'L3',
-              levelName: service.levelName(row[iLv]),
               iconUrl: oss.iconUrl(r.batch, row[iIcon]),
               sources: []
             }
@@ -93,7 +91,6 @@ Page({
         needOnline: r.source !== 'live' && r.source !== 'cache',
         offline: r.source !== 'live',
         sourceText: r.sourceText,
-        buildId: r.buildId || '',
         errorText: mismatch
           ? '这张表的行数与条数对不上（清单写 ' + ((d.counts || {}).rows) + ' 行，拼出 ' + rowCount + ' 行），本站会记下来核对。'
           : (r.error ? String(r.error.message || r.error).slice(0, 120) : '')
