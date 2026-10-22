@@ -224,3 +224,43 @@
   display: inline-block;
   margin: 20rpx 0 0;
 }
+
+/* 素材位：图取不到时由 icon-cell 自己回落成自绘块，页面这边只管留位置与说明 */
+.hero-art {
+  margin-bottom: 16rpx;
+}
+
+.art-note {
+  font-size: 20rpx;
+  color: var(--txt-hint);
+  margin-top: 8rpx;
+}
+
+.boss {
+  display: flex;
+  align-items: flex-start;
+}
+
+.boss-face {
+  width: 88rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.face-none {
+  width: 88rpx;
+  height: 88rpx;
+  border: 1rpx dashed var(--line-2);
+  border-radius: 2rpx;
+  color: var(--txt-hint);
+  font-size: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.drop-face {
+  margin-right: 14rpx;
+}

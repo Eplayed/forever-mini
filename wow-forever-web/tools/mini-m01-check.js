@@ -39,6 +39,7 @@ const PORT_BASE = 9300 + (process.pid % 40) * 3;
 const MODE_PORT = { normal: PORT_BASE, tamper: PORT_BASE + 1, tamperindex: PORT_BASE + 2, min99: PORT_BASE + 3 };
 let PORT = PORT_BASE;
 const man = JSON.parse(fs.readFileSync(path.join(BUILD, 'manifest.json'), 'utf8'));
+const OSS_ORIGIN = 'https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com';
 const B = man.buildId;
 
 const results = [];
@@ -161,9 +162,12 @@ async function main() {
     return wx.getStorageSync('wow_forever_v1_dev_origin') || '线上';
   }, curOrigin));
 
-  /* ---------- A. 真线上状态：beta 命名空间里没有批次 ---------- */
-  process.stdout.write('\nA. 不打本地假 OSS，直连真 bucket（那里 beta 是空的）\n');
-  await setOrigin('');
+  /* ---------- A. 断网等价场景：指针取不到 → 主包快照 ----------
+     以前这一段是"直连真 bucket，赌 beta 是空的"。beta 一旦有批次（M02 已发），
+     这四条就全变成假红——门禁的前提不该是"线上还没东西"。
+     改成把取数地址指到一个必然 404 的前缀：拿不到指针这件事与 beta 有没有数据无关。 */
+  process.stdout.write('\nA. 指针取不到（地址指到一个空前缀）→ 主包快照兜底\n');
+  await setOrigin(OSS_ORIGIN + '/m01-no-such-namespace');
   await clearStore();
   await nav('/pages/home/index');
   let s = (await snap()) || {};
@@ -195,7 +199,9 @@ async function main() {
   s = (await snap()) || {};
   log('列表页：指针 + 索引在线取到 → 实时数据', s && s.sourceText === '实时数据' && s.offline === false, JSON.stringify({ src: s.sourceText }));
   log('列表页：批次号来自指针、形制合法', new RegExp('^[a-f0-9]{12}$').test(String(s.buildId)), String(s.buildId));
-  log('列表页：核对日期用 factDates 不是构建时间', s.factLatest === '2026-10-11', String(s.factLatest));
+  /* 不抄日期字面量：这一批的核对日期由数据决定，本地清单说什么就是什么 */
+  log('列表页：核对日期用 factDates 不是构建时间', s.factLatest === man.factDates.latest,
+    '页面 ' + s.factLatest + ' / 清单 ' + man.factDates.latest);
   await shot('b1-dungeons-live');
 
   await nav('/pages/dungeon/index?id=ragefire-chasm');

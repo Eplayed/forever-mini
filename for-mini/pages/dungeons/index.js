@@ -157,6 +157,11 @@ Page({
     wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(id) })
   },
 
+  /* 虚线边那一格是跳页，不是本页筛选；掉落反查不是 tab 页，用 navigateTo */
+  onLoots() {
+    wx.navigateTo({ url: '/pages/loots/index' })
+  },
+
   onNote() {
     const d = this.data
     wx.showModal({

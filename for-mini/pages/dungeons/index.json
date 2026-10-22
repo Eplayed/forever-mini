@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "副本随手查",
   "enablePullDownRefresh": true,
-  "backgroundColor": "#0e1013"
+  "backgroundColor": "#0b0f16",
+  "navigationBarBackgroundColor": "#0b0f16"
 }

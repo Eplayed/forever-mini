@@ -1,0 +1,6 @@
+<view wx:if="{{src && !bad}}" class="ic ic-{{size}}">
+  <image class="ic-img" src="{{src}}" mode="aspectFill" lazy-load binderror="onErr" />
+</view>
+<view wx:else class="ic ic-{{size}} ic-fb" style="background:{{fbBg}}">
+  <text class="ic-txt">{{fallbackText || initial}}</text>
+</view>

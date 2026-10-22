@@ -184,6 +184,29 @@ function resolveUrl(manifest, relPath) {
   return origin() + '/' + NAMESPACES[manifest.env] + '/' + relPath
 }
 
+/* —— 素材地址（M02）——
+   图片走 <image> 组件，不在 wx.request 白名单范围内，所以不做 ETag 校验：
+   能校验的是"路径不许越出 assets/"。拼出来的地址只允许
+   {origin}/{namespace}/assets/... 这一种形状，出现 img/ 、绝对地址或 ../ 一律不给拼。 */
+const ASSET_KEY_RE = /^[A-Za-z0-9][A-Za-z0-9._/-]*$/
+function assetBase(batch) {
+  const dir = (batch && batch.assets && batch.assets.dir) || 'assets/'
+  return origin() + '/' + NAMESPACES[batch.env] + '/' + dir
+}
+function assetUrl(batch, rel) {
+  const r = String(rel || '')
+  /* 站内相对路径（img/ 开头）绝不能拼进来：那是网页端的地址，小程序里必然 404 */
+  if (!batch || !batch.env || !ASSET_KEY_RE.test(r) || r.indexOf('..') >= 0
+    || r.indexOf('img/') === 0 || r.indexOf('/img/') >= 0) return ''
+  return assetBase(batch) + r
+}
+function iconUrl(batch, key) {
+  const k = String(key || '')
+  const ext = (batch && batch.assets && batch.assets.iconExt) || '.jpg'
+  if (!k || !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(k)) return ''
+  return assetUrl(batch, 'icons/' + k + ext)
+}
+
 /* 索引条目里的 detailPath/lootPath 是相对批次目录的，指针里的 fetch/bundle 是相对命名空间根的。
    批次目录 = builds/{buildId}/，所以取分片一律先过这一层，别自己拼。 */
 function batchPath(batch, relInBatch) {
@@ -205,18 +228,25 @@ function makeBatch(manifest, pointerSource, stale) {
     minClientSchemaVersion: manifest.minClientSchemaVersion || 1,
     pointerSource: pointerSource || 'live',
     stale: !!stale,
-    integrity: manifest.integrity || null
+    integrity: manifest.integrity || null,
+    assets: manifest.assets || null
   }
 }
 
 /* 五项校验：清单值（etag/bytes）+ 内容自证（buildId/kind/id）。
    任何一项不符就 throw，由上层按缓存/快照降级，绝不把对不上的内容当 live 端给界面。 */
+/* 优先 Content-MD5（base64）：真 bucket 上 wx.request 收到 gzip 变体时 ETag 会被按 HTTP 规则剥掉，
+   而 Content-MD5 是对象存储的原始字节 MD5，不受传输编码影响。两个都没有才算验不了。 */
+function normB64(v) { return String(v || '').replace(/\s+/g, '') }
 function checkIntegrity(res, expect, spec, batch) {
   const reasons = []
+  const md5 = normB64(headerGet(res.header, 'content-md5'))
   const etag = normEtag(res.header)
-  if (!expect || !expect.etag || !ETAG_RE.test(String(expect.etag).toUpperCase())) reasons.push('清单里没有这一份的校验值')
-  else if (!etag) reasons.push('响应没有 ETag，无法确认字节')
-  else if (etag !== String(expect.etag).toUpperCase()) reasons.push('ETag 与清单不符（线上 ' + etag + ' ≠ 清单 ' + expect.etag + '）')
+  if (!expect || (!expect.md5 && !expect.etag)) reasons.push('清单里没有这一份的校验值')
+  else if (expect.md5 && !md5 && !etag) reasons.push('响应既没有 Content-MD5 也没有 ETag，无法确认字节')
+  else if (expect.md5 && md5 && md5 !== normB64(expect.md5)) reasons.push('Content-MD5 与清单不符（线上 ' + md5 + ' ≠ 清单 ' + expect.md5 + '）')
+  else if (expect.md5 && !md5 && etag && etag !== String(expect.etag).toUpperCase()) reasons.push('ETag 与清单不符（线上 ' + etag + ' ≠ 清单 ' + expect.etag + '）')
+  else if (!expect.md5 && (!etag || etag !== String(expect.etag).toUpperCase())) reasons.push('ETag 与清单不符（线上 ' + etag + ' ≠ 清单 ' + expect.etag + '）')
   const len = Number(headerGet(res.header, 'content-length') || 0)
   if (expect.bytes > 0 && len > 0 && len !== expect.bytes) reasons.push('字节数与清单不符（' + len + ' ≠ ' + expect.bytes + '）')
   const data = res.data
@@ -264,12 +294,12 @@ function loadShard(batch, relPath, cacheKind, expect, spec, fallback, p) {
       if (fallback) return Object.assign({}, base, { data: fallback, source: 'snapshot', cacheHit: false, integrityError: true, error: err })
       return Object.assign({}, base, { data: null, source: 'none', cacheHit: false, integrityError: true, error: err })
     }
-    writeStore(key, { data: res.data, at: Date.now(), buildId: batch.buildId, etag: normEtag(res.header) })
+    writeStore(key, { data: res.data, at: Date.now(), buildId: batch.buildId, etag: normEtag(res.header), md5: normB64(headerGet(res.header, 'content-md5')) })
     /* 字节是刚从线上取的，但批次身份来自哪一级指针决定它算不算"实时"：
        指针都取不到时，即便这一份下载成功，也只是"上一份已知批次"的内容 → cache */
     return Object.assign({}, base, {
       data: res.data, source: liveSource, cacheHit: false,
-      bytes: Number(headerGet(res.header, 'content-length') || expect.bytes || 0), etag: normEtag(res.header)
+      bytes: Number(headerGet(res.header, 'content-length') || expect.bytes || 0), etag: normEtag(res.header), md5: normB64(headerGet(res.header, 'content-md5'))
     })
   }).catch((error) => {
     if (hitUsable) return Object.assign({}, base, { data: hit.data, source: liveSource, cacheHit: true, error })
@@ -285,6 +315,18 @@ const SHARD_SPECS = {
     name: 'dungeon-index',
     kind: 'dungeon-index',
     shape: (d) => Array.isArray(d.items) && !!d.counts && d.counts.total === d.items.length
+  },
+  spellClasses: {
+    name: 'spell-class-index',
+    kind: 'spell-class-index',
+    shape: (d) => Array.isArray(d.classes) && !!d.counts && d.counts.classes === d.classes.length
+  },
+  lootIndex: {
+    name: 'loot-index',
+    kind: 'loot-index',
+    /* 行数与列数都要对上：列名是位置数组的解释，少一列界面就会把首领序号当品质显示 */
+    shape: (d) => Array.isArray(d.dungeons) && Array.isArray(d.cols) && d.cols.length === 6
+      && !!d.counts && d.counts.rows === d.dungeons.reduce((s, x) => s + (x.rows || []).length, 0)
   }
 }
 
@@ -341,7 +383,11 @@ function shardRef(item, which) {
   return {
     rel,
     cacheKind: 'dungeon-' + which + ':' + item.id,
-    expect: { etag: which === 'detail' ? item.detailEtag : item.lootEtag, bytes: which === 'detail' ? item.detailBytes : item.lootBytes },
+    expect: {
+      etag: which === 'detail' ? item.detailEtag : item.lootEtag,
+      md5: which === 'detail' ? item.detailMd5 : item.lootMd5,
+      bytes: which === 'detail' ? item.detailBytes : item.lootBytes
+    },
     spec: {
       name: 'dungeon-' + which,
       kind: 'dungeon-' + which,
@@ -351,7 +397,7 @@ function shardRef(item, which) {
   }
 }
 
-function loadByRef(item, which, batch, fallback) {
+function loadRef(ref, batch, fallback) {
   const p = contextOf(batch)
   if (!batch || !batch.buildId || !BUILD_ID_RE.test(String(batch.buildId))) {
     return Promise.resolve({
@@ -360,7 +406,6 @@ function loadByRef(item, which, batch, fallback) {
       error: new Error('没有可用的批次上下文')
     })
   }
-  const ref = shardRef(item, which)
   if (ref.error) {
     return Promise.resolve({
       data: fallback || null, source: fallback ? 'snapshot' : 'none', buildId: batch.buildId, factDates: batch.factDates,
@@ -369,6 +414,10 @@ function loadByRef(item, which, batch, fallback) {
     })
   }
   return loadShard(batch, batchPath(batch, ref.rel), ref.cacheKind, ref.expect, ref.spec, fallback || null, p)
+}
+
+function loadByRef(item, which, batch, fallback) {
+  return loadRef(shardRef(item, which), batch, fallback)
 }
 
 function contextOf(batch) {
@@ -382,6 +431,33 @@ function loadDungeonDetail(item, batch, fallback) {
 
 function loadDungeonLoot(item, batch, fallback) {
   return loadByRef(item, 'loot', batch, fallback)
+}
+
+/* 职业法术片：和副本分片同一套规矩——路径由 classId 现推，与名单条目里的 shardPath 比对，
+   校验值取条目自带的 shardEtag/shardMd5/shardBytes。条目被改成 ../ 也走不出本批目录。 */
+function spellClassRef(item) {
+  const id = String((item && item.classId) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('职业编号不能当文件名：' + id) }
+  const rel = 'spells/class/' + id + '.json'
+  if (String(item.shardPath) !== rel) {
+    return { error: new Error('职业 ' + id + ' 的分片路径不是由 classId 推出来的：' + item.shardPath) }
+  }
+  return {
+    rel,
+    cacheKind: 'spell-class:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'spell-class',
+      kind: 'spell-class',
+      id,
+      readId: (d) => d.classId,
+      shape: (d) => Array.isArray(d.spells) && d.spells.length === item.count
+    }
+  }
+}
+
+function loadSpellClass(item, batch, fallback) {
+  return loadRef(spellClassRef(item), batch, fallback)
 }
 
 /* 逐文件哈希表：正常取数不需要它（校验值已随指针与索引下发），
@@ -415,9 +491,14 @@ module.exports = {
   loadDungeonLoot,
   loadKey,
   loadPointer,
+  loadSpellClass,
+  spellClassRef,
   pointerUrl,
   requiresUpdate,
   resolveUrl,
   sourceLabel,
+  assetBase,
+  assetUrl,
+  iconUrl,
   validatePointer
 }

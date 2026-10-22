@@ -79,6 +79,23 @@ function loadDungeonLoot(item, batch) {
   return oss.loadDungeonLoot(item, batch).then(shape)
 }
 
+/* 技能速查（M02-2）：职业名单 + 按职业分片，全部走线上，主包里没有快照。
+   498 条 340 KB，打进主包会挤掉副本索引那份 60 KB 预算；断网点进这一页
+   必须看到"技能表要联网"，不许拿职业名单里的条数冒充内容。 */
+function loadSpellClasses() {
+  return oss.loadKey('spellClasses').then(shape)
+}
+
+function loadSpellClass(item, batch) {
+  return oss.loadSpellClass(item, batch).then(shape)
+}
+
+/* 掉落反查（M02-3）：一整个 118 KB 的表换"任何一件装备都能查"，
+   同样不打进主包，断网必须说"这张表要联网"。 */
+function loadLootIndex() {
+  return oss.loadKey('lootIndex').then(shape)
+}
+
 function readList(key) {
   try {
     return wx.getStorageSync(key) || []
@@ -164,7 +181,10 @@ module.exports = {
   loadDungeonIndex,
   loadDungeonLoot,
   loadGlossary,
+  loadLootIndex,
   loadMeta,
+  loadSpellClass,
+  loadSpellClasses,
   noteRecentDungeon,
   toggleFavorite,
   toggleFavoriteDungeon

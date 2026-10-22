@@ -15,6 +15,7 @@
     <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeKind === item.key ? 'chip-on' : ''}}" wx:for="{{kinds}}" wx:key="key" data-kind="{{item.key}}" bindtap="onKind">
       {{item.name}} {{item.count}}
     </view>
+    <view class="chip chip-src" bindtap="onSpells">职业技能速查 ›</view>
   </scroll-view>
 
   <view wx:if="{{loaded && list.length === 0}}" class="card empty">

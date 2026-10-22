@@ -1,0 +1,48 @@
+.ic {
+  overflow: hidden;
+  border-radius: 2rpx;
+  border: 1rpx solid var(--line-2);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.ic-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ic-sm {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.ic-md {
+  width: 88rpx;
+  height: 88rpx;
+}
+
+.ic-hero {
+  width: 100%;
+  height: 220rpx;
+  border-radius: var(--r-ctl);
+}
+
+.ic-fb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic-txt {
+  font-size: 24rpx;
+  color: var(--txt-dim);
+  padding: 0 12rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ic-hero .ic-txt {
+  font-size: 24rpx;
+}

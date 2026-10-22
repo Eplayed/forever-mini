@@ -1,4 +1,8 @@
 const service = require('../../services/forever-data')
+const oss = require('../../services/oss-manifest')
+
+/* 素材来源一句话，挂在原画下面：客户端画面经第三方站转存，不是本站画的 */
+const ART_NOTE = '副本原画取自游戏客户端画面，经第三方资料站转存，不是本站绘制。'
 
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
 const QUALITY = { 0: '未说明', 1: '常见', 2: '优良', 3: '稀有', 4: '史诗', 5: '传说' }
@@ -30,6 +34,8 @@ Page({
     rows: [],
     bosses: [],
     bossEmpty: '',
+    artUrl: '',
+    artNote: ART_NOTE,
     drops: [],
     dropNote: '',
     routeNote: '',
@@ -76,6 +82,7 @@ Page({
         levelName: service.levelName(item.level),
         fav: service.isFavoriteDungeon(item.id)
       })
+      this.batch = r.batch || null
       /* 进过一次就算"最近看过"，不要求详情分片也取到（断网首用同样要有痕迹） */
       service.noteRecentDungeon(item.id)
       /* 索引就能确定的几行先落屏：断网时这一屏仍有可读内容 */
@@ -106,6 +113,7 @@ Page({
             merged[0].note = '客户端/资料另记 ' + alt + (g.levelRangeOfficial && g.levelRangeOfficial !== g.levelRange ? '；官方英文页 ' + g.levelRangeOfficial : '')
           }
           if (g.lootNote) merged.push({ k: '掉落口径', v: g.lootNote, note: '' })
+          this.setData({ artUrl: oss.assetUrl(this.batch, g.art) })
         }
         this.setData({
           rows: merged,
@@ -114,7 +122,9 @@ Page({
             missing: !b.nameCn,
             level: b.level || 'L3',
             levelName: service.levelName(b.level),
-            note: b.note || ''
+            note: b.note || '',
+            portraitUrl: oss.assetUrl(this.batch, b.portrait),
+            hasPortrait: !!b.portrait
           })) : [],
           bossEmpty: d.data && d.data.dungeon && !(d.data.dungeon.bosses || []).length
             ? '这座的首领名单还没有记录，不猜。' : '',
@@ -129,7 +139,8 @@ Page({
             boss: x.bossCn || '',
             quality: QUALITY[x.quality] || '未说明',
             level: x.level || 'L3',
-            levelName: service.levelName(x.level)
+            levelName: service.levelName(x.level),
+            iconUrl: oss.iconUrl(this.batch, x.iconKey)
           })) : [],
           dropNote: l.data && l.data.lootNote ? l.data.lootNote : '',
           detailSource: d.source,

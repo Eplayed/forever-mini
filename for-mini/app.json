@@ -3,7 +3,9 @@
     "pages/home/index",
     "pages/glossary/index",
     "pages/dungeons/index",
-    "pages/dungeon/index"
+    "pages/dungeon/index",
+    "pages/spells/index",
+    "pages/loots/index"
   ],
   "window": {
     "navigationBarTitleText": "无限资料",

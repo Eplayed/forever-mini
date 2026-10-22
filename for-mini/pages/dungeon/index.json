@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "副本详情",
   "enablePullDownRefresh": true,
-  "backgroundColor": "#0e1013"
+  "backgroundColor": "#0b0f16",
+  "navigationBarBackgroundColor": "#0b0f16",
+  "usingComponents": {
+    "icon-cell": "/components/icon-cell/index"
+  }
 }

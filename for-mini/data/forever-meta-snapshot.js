@@ -19,6 +19,9 @@ module.exports = {
  "counts": {
   "terms": 215,
   "dungeons": 38,
+  "spells": 498,
+  "lootRows": 1050,
+  "lootItems": 1018,
   "talentNodes": 466,
   "talentNameVerified": 462
  },

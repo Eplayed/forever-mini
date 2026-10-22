@@ -71,16 +71,28 @@ const BUDGET_KB = {
   meta: 8,
   glossary: 200,
   detail: 32,
-  loot: 64
+  loot: 64,
+  'spells/classes': 12,
+  spellClass: 64,
+  'loots/index': 192
 };
 
-/* 批次里暂时不往下发的字段：素材没上 OSS，界面拿到站内路径只会 404，
-   所以这一层主动摘掉并在 manifest.droppedFields 里交代，不装作数据没有这项。 */
-const DROPPED_DETAIL_FIELDS = [
-  { field: 'art', reason: '客户端原画素材本轮没有传到 OSS，站内相对路径在小程序里打不开' },
-  { field: 'bosses[].portrait', reason: '首领头像是站内 img/art/ 下的相对路径，素材批次没发，先摘掉' }
-];
-const ASSET_NOTE = 'drops[].iconKey 只是图标键，图标文件没有传到 OSS；界面要用图标得先发素材批次，拿不到就自绘，不许热链站内路径。';
+/* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
+   相对 `wow/{env}/v1/assets/` 的路径（`art/dungeons/x.webp`），客户端用
+   oss-manifest 的 assetUrl()/iconUrl() 拼绝对地址。
+   本地文件不存在的（图标/原画缺一张）不阻断构建：那个字段置 null 并记进
+   assets/missing.json，界面按"没有这张图"回落自绘——碎图比空图更糟。 */
+const ASSET_DIR = 'assets';
+const ICON_EXT = '.jpg';
+const DROPPED_DETAIL_FIELDS = [];
+const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
+  + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
+
+/* 站内相对路径 → 素材相对路径；不是 img/ 开头的返回 null（调用方按缺失处理） */
+function assetRelFromSite(rel) {
+  const s = String(rel || '');
+  return s.indexOf('img/') === 0 ? s.slice(4) : null;
+}
 
 const IMUTABLE_CACHE = 'public, max-age=31536000, immutable';
 const POINTER_CACHE = 'public, max-age=60, must-revalidate';
@@ -88,6 +100,10 @@ const POINTER_CACHE = 'public, max-age=60, must-revalidate';
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 const md5Hex = (buf) => crypto.createHash('md5').update(buf).digest('hex').toUpperCase();
 const md5B64 = (buf) => crypto.createHash('md5').update(buf).digest('base64');
+/* 同一份 MD5 给两种写法：etag(hex) 给工具比 HEAD，md5(base64) 给客户端比 Content-MD5。
+   为什么两种都要：真 bucket 上 wx.request 收到的是 gzip 变体，按 HTTP 规则 ETag 会被剥掉，
+   只剩 Content-MD5（2026-10-21 实测）——只写 etag 的话，客户端在线上会全部判失败。 */
+const md5Of = (buf) => ({ etag: md5Hex(buf), md5: md5B64(buf) });
 const kb = (b) => (b / 1024).toFixed(1);
 const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const writeBuf = (p, buf) => {
@@ -141,17 +157,18 @@ function indexEntry(d) {
   };
 }
 
-function detailRecord(d) {
+function detailRecord(d, useAsset) {
   const out = {};
   Object.keys(d).forEach((k) => {
     if (k === 'drops') return;
     if (DROPPED_DETAIL_FIELDS.some((x) => x.field === k)) return;
     out[k] = d[k];
   });
+  if (out.art) out.art = useAsset(out.art, d.id + '.art');
   if (Array.isArray(out.bosses)) {
     out.bosses = out.bosses.map((b) => {
-      const o = {};
-      Object.keys(b).forEach((k) => { if (k !== 'portrait') o[k] = b[k]; });
+      const o = Object.assign({}, b);
+      if (o.portrait) o.portrait = useAsset(o.portrait, b.id + '.portrait');
       return o;
     });
   }
@@ -164,7 +181,7 @@ function detailRecord(d) {
    不这么办的话，指针溯源写的是 A（src/data 的哈希），发出去的却是 B（有人手改过的
    oss-preview），两边一致只证明一致，不证明它来自基底。 */
 function reExportCompare() {
-  const rels = ['meta.json', 'glossary.json', 'dungeons.json'];
+  const rels = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json'];
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ossxchk-'));
   try {
     const web = path.join(tmp, 'wow-forever-web');
@@ -173,6 +190,9 @@ function reExportCompare() {
     /* 导出层自己也有一道对拍（索引快照 ↔ 分发层索引），要把这份工具一起拷过去，
        否则临时目录里的 export-mini.js 会因为找不到参照而直接拒绝跑。 */
     fs.copyFileSync(path.join(__dirname, 'oss-release.js'), path.join(web, 'tools', 'oss-release.js'));
+    /* 导出层自己还要读禁词表（它给玩家看的说明文字也过同一把尺子），
+       沙箱里少拷一个文件，重导出就会 ENOENT、对拍变成"没产出 oss-preview"这种误导性的红。 */
+    fs.copyFileSync(path.join(__dirname, 'copy-banned.json'), path.join(web, 'tools', 'copy-banned.json'));
     fs.symlinkSync(siteSrc(), path.join(web, 'src'));
     let exportErr = '';
     try {
@@ -214,7 +234,8 @@ function buildBatch(env, opts) {
   const glossarySrc = path.join(prev, 'glossary.json');
   const metaSrc = path.join(prev, 'meta.json');
   const dungeonsSrc = path.join(prev, 'dungeons.json');
-  [glossarySrc, metaSrc, dungeonsSrc].forEach((p) => {
+  const spellsSrc = path.join(prev, 'spells.json');
+  [glossarySrc, metaSrc, dungeonsSrc, spellsSrc].forEach((p) => {
     if (!fs.existsSync(p)) errors.push('缺少导出产物 ' + path.relative(REPO, p) + '，先跑 node tools/export-mini.js');
   });
   if (errors.length) return { errors };
@@ -222,6 +243,32 @@ function buildBatch(env, opts) {
   const glossary = readJson(glossarySrc);
   const miniMeta = readJson(metaSrc);
   const dungeons = readJson(dungeonsSrc);
+  const spells = readJson(spellsSrc);
+  const spellList = spells.spells || [];
+
+  /* 素材登记表：这一批真引用到、且本地确实在的文件 */
+  const assetUse = {};
+  const assetMissing = [];
+  const statAsset = (rel) => {
+    const abs = path.join(WEB, 'src', 'img', rel);
+    if (!fs.existsSync(abs)) return null;
+    const buf = fs.readFileSync(abs);
+    return { rel, srcRel: 'src/img/' + rel, bytes: buf.length, sha256: sha256(buf), etag: md5Hex(buf) };
+  };
+  const useAsset = (siteRel, why) => {
+    const rel = assetRelFromSite(siteRel);
+    if (!rel) { assetMissing.push({ ref: siteRel, reason: '不是 img/ 开头的站内路径', by: why }); return null; }
+    const st = statAsset(rel);
+    if (!st) { assetMissing.push({ ref: siteRel, reason: '本地没有这个文件', by: why }); return null; }
+    assetUse[rel] = st;
+    return rel;
+  };
+  const useIcon = (key, why) => {
+    if (!key) return null;
+    const rel = 'icons/' + key + ICON_EXT;
+    if (!statAsset(rel)) { assetMissing.push({ ref: rel, reason: '图标文件不在 src/img/icons/', by: why }); return; }
+    assetUse[rel] = statAsset(rel);
+  };
   const list = [].concat(dungeons.newDungeons || [], dungeons.classicDungeons || [], dungeons.raids || []);
 
   /* —— 卡口（与根 AGENTS.md 第五条同一口径，导出这层再拦一次） —— */
@@ -239,8 +286,20 @@ function buildBatch(env, opts) {
   (glossary.items || []).forEach((x) => {
     if (x.level === 'L0' && !isOfficial(x.provenance)) errors.push('词条 ' + x.id + '：标 L0 但没有官方/解包来源');
   });
+  /* 法术书：分片按职业切，所以"每个职业都得有内容"是硬条件；
+     classId 会直接拼进文件路径，这里再拦一次（导出层也拦，两道都要在） */
+  if (!spellList.length) errors.push('法术书 0 条：spells.json 没导出成功，先跑 export-mini.js');
+  (spells.classes || []).forEach((c) => {
+    if (!/^[a-z][a-z0-9_-]*$/.test(String(c.classId))) errors.push('职业 ' + c.classId + '：id 不能当分片文件名');
+    const n = spellList.filter((s) => s.classId === c.classId).length;
+    if (!n) errors.push('职业 ' + c.classId + '：名单里有它但一条法术都没有，这个分片会是空的');
+    if (n !== c.count) errors.push('职业 ' + c.classId + '：头部写 ' + c.count + ' 条，实际 ' + n + ' 条');
+  });
+  spellList.forEach((s) => {
+    if (!(spells.classes || []).some((c) => c.classId === s.classId)) errors.push('法术 ' + s.id + '：所属职业不在职业名单里，这条永远不会被读到');
+  });
 
-  const srcFiles = ['glossary.json', 'meta.json', 'dungeons.json'].map((f) => {
+  const srcFiles = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json'].map((f) => {
     const abs = path.join(siteData(), f);
     if (!fs.existsSync(abs)) { errors.push('找不到基底文件 src/data/' + f); return null; }
     const buf = fs.readFileSync(abs);
@@ -255,7 +314,9 @@ function buildBatch(env, opts) {
       chk.diffs.forEach((d) => errors.push('导出产物与基底不配套，构建拒绝：' + d + '；先跑 node tools/export-mini.js 再 build'));
       return { errors };
     }
-    exportCheck = { tool: chk.tool, reproduced: true, note: '构建时在临时目录用同一份 src/data 重跑了一遍 export-mini.js，三份导出产物逐字节相同。', outputs: chk.outputs };
+    exportCheck = { tool: chk.tool, reproduced: true,
+      note: '构建时在临时目录用同一份 src/data 重跑了一遍 export-mini.js，' + chk.outputs.length + ' 份导出产物逐字节相同。',
+      outputs: chk.outputs };
   }
 
   let commit = null;
@@ -296,7 +357,8 @@ function buildBatch(env, opts) {
   });
 
   list.forEach((d) => {
-    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/src/data/dungeons.json', dungeon: detailRecord(d) };
+    (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
+    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/src/data/dungeons.json', dungeon: detailRecord(d, useAsset) };
     pushObj('dungeonDetail:' + d.id, 'dungeons/detail/' + d.id + '.json', det, {
       records: 1, budget: 'detail', facts: collectFactDates([d])
     });
@@ -309,14 +371,131 @@ function buildBatch(env, opts) {
     });
   });
 
+  /* —— 法术书（M02-2）：一个职业一片，客户端先取职业名单、点开哪个职业才取那一片。
+     不打进主包：498 条 340 KB，主包 60 KB 预算已给副本索引；断网时界面必须说"技能表要联网"。 —— */
+  const spellGroups = (spells.classes || []).map((c) => {
+    const rows = spellList.filter((s) => s.classId === c.classId);
+    useIcon(c.iconKey, 'spells/classes');
+    rows.forEach((s) => useIcon(s.iconKey, 'spells/class/' + c.classId));
+    return { c, rows };
+  });
+  spellGroups.forEach((g) => {
+    const obj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'spell-class',
+      classId: g.c.classId, nameCn: g.c.nameCn || null, nameEn: g.c.nameEn || null,
+      iconKey: g.c.iconKey || null,
+      source: 'wow-forever-web/src/data/spells.json',
+      fieldNote: spells.meta ? spells.meta.fieldNote : '',
+      levelPolicy: spells.meta ? spells.meta.levelPolicy : '',
+      spells: g.rows.map((s) => Object.assign({}, s))
+    };
+    pushObj('spellClass:' + g.c.classId, 'spells/class/' + g.c.classId + '.json', obj, {
+      records: g.rows.length, budget: 'spellClass', facts: collectFactDates(g.rows)
+    });
+  });
+  const spellIndexObj = {
+    schemaVersion: SCHEMA_VERSION,
+    product: PRODUCT,
+    kind: 'spell-class-index',
+    source: 'wow-forever-web/src/data/spells.json',
+    counts: { total: spellList.length, classes: spellGroups.length },
+    fieldNote: spells.meta ? spells.meta.fieldNote : '',
+    pageNote: spells.meta ? spells.meta.pageNote : '',
+    classes: spellGroups.map((g) => ({
+      classId: g.c.classId,
+      nameCn: g.c.nameCn || null,
+      nameEn: g.c.nameEn || null,
+      iconKey: g.c.iconKey || null,
+      level: g.c.level || 'L3',
+      count: g.rows.length,
+      tabs: g.c.tabs || [],
+      states: g.c.states || {},
+      shardPath: 'spells/class/' + g.c.classId + '.json'
+    }))
+  };
+  pushObj('spellClasses', 'spells/classes.json', spellIndexObj, {
+    records: spellGroups.length, budget: 'spells/classes', facts: collectFactDates(spellList)
+  });
+
+  /* —— 掉落反查（M02-3）：整座站的掉落摊成一张"这件装备哪座本掉"的表 ——
+     一行一个物品，按座分片存不下（一件装备可能出现在两座），所以做成一张总表。
+     为了不把手机流量打爆，这里用位置数组而不是对象键：列名写在 cols 里，
+     副本名与首领名不重复存（一次 GET 里同一座本只出现一次），
+     副本的中文名客户端从主包索引快照就能对上，不必再抄一遍。 */
+  const LOOT_COLS = ['itemId', 'name', 'quality', 'iconKey', 'boss', 'level'];
+  const lootCols = LOOT_COLS;
+  const lootDungeons = list.map((d) => {
+    const bosses = (d.drops || []).reduce((acc, x) => {
+      const b = x.bossCn || x.bossId || '未记首领';
+      if (acc.indexOf(b) < 0) acc.push(b);
+      return acc;
+    }, []);
+    return {
+      id: d.id,
+      nameCn: d.nameCn || null,
+      kind: d.kind || null,
+      level: d.level || 'L3',
+      bosses,
+      rows: (d.drops || []).map((x) => [
+        x.itemId || null,
+        x.nameCn || null,
+        x.quality === undefined ? null : x.quality,
+        x.iconKey || null,
+        bosses.indexOf(x.bossCn || x.bossId || '未记首领'),
+        x.level || 'L3'
+      ])
+    };
+  });
+  const lootObj = {
+    schemaVersion: SCHEMA_VERSION,
+    product: PRODUCT,
+    kind: 'loot-index',
+    source: 'wow-forever-web/src/data/dungeons.json',
+    cols: lootCols,
+    note: '一张表列全本站收录副本的掉落：每行按 cols 的顺序排，boss 是这座本 bosses 数组里的序号。'
+      + '同一件装备出现在两座本时是两行，反查时按 itemId 归到一起。',
+    qualityNote: '品质 1＝普通，2＝良好，3＝稀有，4＝史诗；这是本站现用的四档叫法，不是官方分级。',
+    lootDisclaimer: dungeons.meta ? dungeons.meta.lootDisclaimer : '',
+    counts: {
+      dungeons: lootDungeons.length,
+      rows: lootDungeons.reduce((s, d) => s + d.rows.length, 0),
+      /* 去重键与 export-mini.js 里 meta.counts.lootItems 同一条式子：
+         两边漂了的话首页的数字与点进去的表就对不上（导出层有这道对拍） */
+      items: new Set([].concat.apply([], list.map((d) => (d.drops || []).map((x) => String(x.itemId || x.nameCn || ''))))).size
+    },
+    dungeons: lootDungeons
+  };
+  pushObj('lootIndex', 'loots/index.json', lootObj, {
+    records: lootObj.counts.rows, facts: collectFactDates(list), budget: 'loots/index'
+  });
+  /* 反查表自己的卡口：不许有百分比（红线）、不许有悬空的首领序号、
+     itemId 是玩家复制粘贴要用的，缺了这条就只有一半信息 */
+  lootDungeons.forEach((d) => {
+    d.rows.forEach((r, i) => {
+      const s = JSON.stringify(r);
+      /* 客户端是按位置取值的（列名写在 cols 里），行长度与列数对不上就会把
+         首领序号当品质显示——这一条必须在构建端拦住，不能指望客户端兜 */
+      if (r.length !== lootCols.length) errors.push('掉落反查：' + d.id + ' 第 ' + (i + 1) + ' 行有 ' + r.length + ' 个值，列名却写了 ' + lootCols.length + ' 列');
+      if (/\d+(\.\d+)?\s*%/.test(s)) errors.push('掉落反查：' + d.id + ' 第 ' + (i + 1) + ' 行出现百分比');
+      if (r[4] < 0 || r[4] >= d.bosses.length) errors.push('掉落反查：' + d.id + ' 第 ' + (i + 1) + ' 行的首领序号 ' + r[4] + ' 在该座的 bosses 里不存在');
+      if (!r[0]) errors.push('掉落反查：' + d.id + ' 第 ' + (i + 1) + ' 行缺 itemId，玩家复制过去查不到');
+      if (!r[1]) errors.push('掉落反查：' + d.id + ' 第 ' + (i + 1) + ' 行没有中文名（itemId ' + r[0] + '），界面要显示"中文名待核"而不是空着');
+    });
+  });
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
     e.preBuf = e.buf || dump(e.obj);
     e.contentSha = sha256(e.preBuf);
   });
+  /* buildId 必须把"生成器自己"也算进指纹。
+     2026-10-21 踩过：只按注入前内容算指纹时，给产物新增一个校验字段（内容没变、字节变了）
+     会得到同一个 buildId 配不同字节，正好是"不可变批次"最坏的破法——上传时被拦截才发现。
+     现在生成器一改，指纹就变，同 buildId 必然同字节。 */
+  const builderSha = sha256(fs.readFileSync(__filename)).slice(0, 12);
   const digest = entries.slice().sort((a, b) => (a.path < b.path ? -1 : 1)).map((e) => e.path + ':' + e.contentSha).join('\n');
-  const buildId = sha256(Buffer.from(PRODUCT + '|' + SCHEMA_VERSION + '|' + digest, 'utf8')).slice(0, 12);
+  const buildId = sha256(Buffer.from([PRODUCT, SCHEMA_VERSION, 'gen=' + builderSha, digest].join('|'), 'utf8')).slice(0, 12);
 
   /* 先给所有生成的分片注入 buildId，再算详情/掉落的最终字节给索引当校验值，
      最后统一出 buf/bytes/sha256/etag——这一步没有随机因素，重跑必得同样字节。 */
@@ -324,10 +503,38 @@ function buildBatch(env, opts) {
   indexObj.items.forEach((it) => {
     const dBuf = dump(byKey['dungeonDetail:' + it.id].obj);
     const lBuf = dump(byKey['dungeonLoot:' + it.id].obj);
-    it.detailEtag = md5Hex(dBuf);
-    it.detailBytes = dBuf.length;
-    it.lootEtag = md5Hex(lBuf);
-    it.lootBytes = lBuf.length;
+    const dm = md5Of(dBuf); const lm = md5Of(lBuf);
+    it.detailEtag = dm.etag; it.detailMd5 = dm.md5; it.detailBytes = dBuf.length;
+    it.lootEtag = lm.etag; it.lootMd5 = lm.md5; it.lootBytes = lBuf.length;
+  });
+  /* 职业分片同理：校验值随职业名单一起下发，客户端点开哪个职业才取哪一片，
+     不必先下 files.json 才能校验 */
+  spellIndexObj.classes.forEach((it) => {
+    const sBuf = dump(byKey['spellClass:' + it.classId].obj);
+    const sm = md5Of(sBuf);
+    it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
+  });
+
+  /* 素材层的反向卡口：凡是界面会拼出来的地址（iconKey / art / portrait），
+     这一批必须登记过。漏登记不会让谁报错，只会让玩家永远看到自绘占位块——
+     2026-10-22 职业图标就是这么漏的：素材层报"缺登记 0 条"，线上却 404。 */
+  const refAssets = {};
+  const walkAssets = (node, where) => {
+    if (Array.isArray(node)) { node.forEach((x) => walkAssets(x, where)); return; }
+    if (!node || typeof node !== 'object') return;
+    Object.keys(node).forEach((k) => {
+      const v = node[k];
+      if ((k === 'iconKey' && typeof v === 'string' && v) || ((k === 'art' || k === 'portrait') && typeof v === 'string' && v)) {
+        const rel = k === 'iconKey' ? 'icons/' + v + ICON_EXT : v;
+        if (!refAssets[rel]) refAssets[rel] = where;
+      } else {
+        walkAssets(v, where);
+      }
+    });
+  };
+  entries.forEach((e) => { if (e.obj) walkAssets(e.obj, e.path); });
+  Object.keys(refAssets).forEach((rel) => {
+    if (!assetUse[rel]) errors.push('界面会去要 ' + rel + '（出自 ' + refAssets[rel] + '），但素材层没登记 —— 玩家只会看到自绘占位块');
   });
 
   entries.forEach((e) => {
@@ -335,6 +542,7 @@ function buildBatch(env, opts) {
     e.bytes = e.buf.length;
     e.sha256 = sha256(e.buf);
     e.etag = md5Hex(e.buf);
+    e.md5 = md5B64(e.buf);
     e.cacheControl = IMUTABLE_CACHE;
     if (/"(img|src|static)\//.test(e.buf.toString('utf8'))) {
       errors.push('文件 ' + e.path + ' 里还留着站内相对路径（img/ 或 src/ 开头），小程序打不开，必须先摘掉');
@@ -357,13 +565,13 @@ function buildBatch(env, opts) {
     files: {}
   };
   entries.forEach((e) => {
-    bundle.files[e.key] = { path: e.path, sha256: e.sha256, etag: e.etag, bytes: e.bytes, records: e.records, facts: e.facts };
+    bundle.files[e.key] = { path: e.path, sha256: e.sha256, etag: e.etag, md5: e.md5, bytes: e.bytes, records: e.records, facts: e.facts };
   });
   const bundleBuf = dump(bundle);
   const bundlePath = 'builds/' + buildId + '/files.json';
 
   const pickFile = (key) => entries.filter((e) => e.key === key)[0];
-  const shared = (e) => ({ path: 'builds/' + buildId + '/' + e.path, sha256: e.sha256, etag: e.etag, bytes: e.bytes, records: e.records });
+  const shared = (e) => ({ path: 'builds/' + buildId + '/' + e.path, sha256: e.sha256, etag: e.etag, md5: e.md5, bytes: e.bytes, records: e.records });
   const mins = [];
   const maxs = [];
   entries.forEach((e) => { if (e.facts.min) mins.push(e.facts.min); if (e.facts.max) maxs.push(e.facts.max); });
@@ -386,11 +594,17 @@ function buildBatch(env, opts) {
       commit,
       inputs: srcFiles,
       inputsNote: '这里哈希的是站点基底 src/data 的原件；批次文件由 export-mini.js 从这些原件派生，构建时已在临时目录重导一遍并逐字节对拍（见 exportCheck）。',
+      generator: { tool: 'wow-forever-web/tools/oss-release.js', sha256: builderSha,
+        note: 'buildId 的指纹里含生成器自身的哈希：生成逻辑变了就换批次号，同 buildId 不可能出现不同字节。' },
       exportCheck
     },
     counts: {
       dungeons: list.length,
       terms: (glossary.items || []).length,
+      spells: spellList.length,
+      spellClasses: spellGroups.length,
+      lootRows: lootObj.counts.rows,
+      lootItems: lootObj.counts.items,
       files: entries.length + 2,
       bytes: entries.reduce((s, e) => s + e.bytes, 0) + bundleBuf.length
     },
@@ -402,13 +616,26 @@ function buildBatch(env, opts) {
     },
     droppedFields: DROPPED_DETAIL_FIELDS,
     assetNote: ASSET_NOTE,
+    assets: {
+      dir: ASSET_DIR + '/',
+      iconExt: ICON_EXT,
+      index: ASSET_DIR + '/index.json',
+      count: Object.keys(assetUse).length,
+      bytes: Object.keys(assetUse).reduce((t, k) => t + assetUse[k].bytes, 0),
+      missing: assetMissing.length,
+      rule: 'art 与 bosses[].portrait 的值是相对 assets/ 的路径；图标只用 key 拼 assets/icons/{key}' + ICON_EXT + '。'
+        + '客户端拼出来的地址必须落在 assets/ 下，出现 img/ 或 .. 就是数据被改过。'
+    },
     integrity: {
       method: 'etag',
       clientChecks: [
-        '指针里 fetch.* 与 bundle 都带 ETag + bytes：入口三文件（meta / glossary / dungeons/index）按指针给的值校验',
+        '指针里 fetch.* 与 bundle 都带 Content-MD5(base64) + ETag(hex) + bytes：入口文件（meta / glossary / dungeons/index / spells/classes）按指针给的值校验',
+        '客户端优先比响应的 Content-MD5，退化才比 ETag——真 bucket 上 wx.request 收到 gzip 变体时 ETag 会被剥掉，只剩 Content-MD5（2026-10-21 实测）',
         '索引每条自带 detailEtag / detailBytes / lootEtag / lootBytes：进详情、看掉落时按索引给的值校验，不必先取 files.json',
-        '这一批的每个文件都带 buildId / product / schemaVersion / kind（副本类分片还带所属副本 id），客户端五项齐验：etag、bytes、buildId、kind、id',
-        '分片路径由条目里的 id 现推并与 detailPath/lootPath 比对，对不上就不发请求——写坏一条路径也走不出 builds/{buildId}/',
+        '职业分片的校验值随 spells/classes.json 的每个职业条目下发（shardEtag / shardMd5 / shardBytes），点开哪个职业才取哪一片',
+        '掉落反查表 loots/index.json 是一个整块：一次 GET 换"任何一件装备都能查"，行用位置数组存，列名写在 cols 里',
+        '这一批的每个文件都带 buildId / product / schemaVersion / kind（副本类分片还带所属副本 id，职业分片带 classId），客户端五项齐验：etag、bytes、buildId、kind、id',
+        '分片路径由条目里的 id 现推并与 detailPath/lootPath/shardPath 比对，对不上就不发请求——写坏一条路径也走不出 builds/{buildId}/',
         '任一项不符就整条当失败，走缓存或打包快照并在界面标出来，不许拿对不上内容的数据当实时'
       ],
       whatItIsNot: '这是"取回的字节是不是清单里那一份"的传输/存储完整性校验（比对服务器自己算的 MD5 ETag），不是抗伪造的内容签名，也不保证上游没写错事实——事实靠 provenance 与红线卡口。',
@@ -416,8 +643,14 @@ function buildBatch(env, opts) {
       trustRoot: '指针 manifest.json 自己不做哈希自证：它是信任根，靠 HTTPS + bucket 权限 + max-age=60 的新鲜度。'
     },
     pointer: { key: ns + '/manifest.json', cacheControl: POINTER_CACHE },
-    fetch: { meta: shared(pickFile('meta')), glossary: shared(pickFile('glossary')), dungeonIndex: shared(pickFile('dungeonIndex')) },
-    bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), bytes: bundleBuf.length }
+    fetch: {
+      meta: shared(pickFile('meta')),
+      glossary: shared(pickFile('glossary')),
+      dungeonIndex: shared(pickFile('dungeonIndex')),
+      spellClasses: shared(pickFile('spellClasses')),
+      lootIndex: shared(pickFile('lootIndex'))
+    },
+    bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
 
   if (manifest.counts.bytes && Buffer.byteLength(JSON.stringify(manifest, null, 1)) > BUDGET_KB.manifest * 1024) {
@@ -425,7 +658,7 @@ function buildBatch(env, opts) {
   }
   if (bundleBuf.length > BUDGET_KB.bundle * 1024) errors.push('files.json 超过 ' + BUDGET_KB.bundle + ' KB');
   if (errors.length) return { errors };
-  return { errors: [], buildId, ns, entries, manifest, bundleBuf, bundlePath };
+  return { errors: [], buildId, ns, entries, manifest, bundleBuf, bundlePath, assetUse, assetMissing };
 }
 
 function writeBatch(env, built) {
@@ -533,9 +766,17 @@ function ossRaw(method, bucket, region, keyOrQuery, body, headers) {
 const raw = (...args) => (transport ? transport(...args) : ossRaw(...args));
 const setTransportForTest = (fn) => { transport = fn || null; };
 
+/* 素材是图片，不能一律按 JSON 发：Content-Type 错了小程序的 <image> 可能不认。
+   2026-10-21 第一次传 730 个素材就踩了这个（全发成 application/json）。 */
+const MIME = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.json': 'application/json; charset=utf-8' };
+function contentTypeFor(rel) {
+  const ext = String(rel).slice(String(rel).lastIndexOf('.')).toLowerCase();
+  return MIME[ext] || 'application/octet-stream';
+}
+
 function signPut(creds, key, body, extraHeaders) {
   const date = new Date().toUTCString();
-  const type = 'application/json; charset=utf-8';
+  const type = extraHeaders['Content-Type'] || 'application/json; charset=utf-8';
   const md5 = md5B64(body);
   const canon = Object.assign({ 'cache-control': extraHeaders['Cache-Control'] }, extraHeaders);
   const ossHeaders = Object.keys(canon)
@@ -578,6 +819,8 @@ function remoteHead(creds, key) {
       etag: r.statusCode === 200 ? String(r.headers.etag || '').replace(/"/g, '').toUpperCase() : '',
       bytes: r.statusCode === 200 ? Number(r.headers['content-length'] || 0) : 0,
       lastModified: r.statusCode === 200 ? r.headers['last-modified'] : '',
+      contentType: r.statusCode === 200 ? String(r.headers['content-type'] || '') : '',
+      cacheControl: r.statusCode === 200 ? String(r.headers['cache-control'] || '') : '',
       statusCode: r.statusCode
     }));
 }
@@ -618,6 +861,19 @@ function listBuilds(creds, env) {
   });
 }
 
+/* 素材台账：不是给客户端读的（图片走 <image>，不做 ETag 校验），
+   是给"这批到底发了哪些文件、每个多大、哈希多少"留的一份可对账清单。 */
+function assetIndexBuf(built) {
+  return dump({
+    schemaVersion: SCHEMA_VERSION,
+    product: PRODUCT,
+    kind: 'asset-index',
+    note: '这批数据真引用到、且本地确实在的素材文件。缺的记在 missing 里，界面必须回落自绘。',
+    files: built.assetUse,
+    missing: built.assetMissing
+  });
+}
+
 /* ---------- 3. 子命令 ---------- */
 
 function logLine(s) { process.stdout.write(s + '\n'); }
@@ -638,19 +894,25 @@ function cmdBuild(env, opts) {
   }
   const out = writeBatch(env, built);
   const idx = built.entries.filter((e) => e.key === 'dungeonIndex')[0];
+  const entryKeys = Object.keys(built.manifest.fetch);
   const cold = out.manifestBuf.length + idx.bytes + built.manifest.fetch.meta.bytes;
   const flat = fs.statSync(path.join(previewDir(), 'dungeons.json')).size;
   const maxOf = (p) => kb(Math.max.apply(null, built.entries.filter((e) => e.key.indexOf(p) === 0).map((e) => e.bytes)));
   logLine('批次 ' + built.buildId + ' → ' + path.relative(REPO, out.dir));
   logLine('  数据文件 ' + built.entries.length + ' + files.json + manifest = ' + built.manifest.counts.files
     + ' 个 · 合计 ' + kb(built.manifest.counts.bytes) + ' KB · 指针 ' + pointerKey(env));
-  logLine('  导出对拍：' + (built.manifest.source.exportCheck ? '三份产物与 src/data 重导出逐字节一致（' + built.manifest.source.exportCheck.tool + '）' : '已跳过（--skip-export-check）'));
-  logLine('  冷启动三取：manifest ' + kb(out.manifestBuf.length) + ' + 索引 ' + kb(idx.bytes)
+  logLine('  导出对拍：' + (built.manifest.source.exportCheck
+    ? built.manifest.source.exportCheck.outputs.length + ' 份产物与 src/data 重导出逐字节一致（' + built.manifest.source.exportCheck.tool + '）'
+    : '已跳过（--skip-export-check）'));
+  logLine('  冷启动按副本看是 manifest ' + kb(out.manifestBuf.length) + ' + 副本索引 ' + kb(idx.bytes)
     + ' + meta ' + kb(built.manifest.fetch.meta.bytes) + ' = ' + kb(cold)
-    + ' KB（' + (cold / 1024).toFixed(1) + ' KB / 3 次 GET；整份 dungeons.json 是 ' + kb(flat) + ' KB，省下 ' + Math.round((1 - cold / flat) * 100) + '%）');
+    + ' KB（3 次 GET；整份 dungeons.json 是 ' + kb(flat) + ' KB，省下 ' + Math.round((1 - cold / flat) * 100) + '%。'
+    + '入口文件现在共 ' + entryKeys.length + ' 个：' + entryKeys.join(' / ') + '，取哪个只多那一个的分片）');
   logLine('  单本详情上限 ' + maxOf('dungeonDetail:') + ' KB · 掉落上限 ' + maxOf('dungeonLoot:')
-    + ' KB · files.json ' + kb(built.manifest.bundle.bytes) + ' KB');
-  logLine('  校验值分布：入口三文件在指针里（ETag+bytes），详情/掉落随索引下发；files.json 只在构建端与 verify 用');
+    + ' KB · 职业法术片上限 ' + maxOf('spellClass:') + ' KB · files.json ' + kb(built.manifest.bundle.bytes) + ' KB');
+  logLine('  校验值分布：' + entryKeys.length + ' 个入口文件在指针里（ETag+MD5+bytes），详情/掉落/职业片随各自索引下发；files.json 只在构建端与 verify 用');
+  logLine('  素材引用：' + built.manifest.assets.count + ' 个文件 / ' + kb(built.manifest.assets.bytes)
+    + ' KB 在 ' + built.ns + '/assets/ 下（用 `assets --env ' + env + '` 发），缺登记 ' + built.manifest.assets.missing + ' 条');
   logLine('  事实核对日期：最新 ' + (built.manifest.factDates.latest || '未记录') + '（清单内无生成时间字段，发布时刻看服务端 Last-Modified）');
   if (opts.checkIdentity) {
     const again = buildBatch(env);
@@ -666,6 +928,82 @@ function cmdBuild(env, opts) {
       return 1;
     }
   }
+  return 0;
+}
+
+async function cmdAssets(env, opts) {
+  if (!opts.dryRun) {
+    const gate = requireWriteGate('assets', env, opts);
+    if (gate) { gate.forEach(logLine); return 1; }
+  }
+  const built = buildBatch(env);
+  if (built.errors.length) { built.errors.slice(0, 25).forEach((e) => logLine('✗ ' + e)); return 1; }
+  const keys = Object.keys(built.assetUse).sort();
+  const total = keys.reduce((t, k) => t + built.assetUse[k].bytes, 0);
+  const creds = loadCreds();
+  logLine('环境 ' + env + ' · bucket ' + creds.bucket + ' · 前缀 ' + NAMESPACES[env] + '/' + ASSET_DIR + '/'
+    + ' · 素材 ' + keys.length + ' 个 / ' + kb(total) + ' KB · 缺登记 ' + built.assetMissing.length + ' 条'
+    + (opts.dryRun ? '（--dry-run 只读远端，不写）' : '（凭证来源 ' + creds.from + '）'));
+  if (!opts.dryRun && !creds.ok) { logLine(credsHint(creds)); return 1; }
+
+  const indexBuf = assetIndexBuf(built);
+  const targets = keys.map((rel) => ({
+    key: NAMESPACES[env] + '/' + ASSET_DIR + '/' + rel,
+    buf: fs.readFileSync(path.join(WEB, 'src', 'img', rel)),
+    label: rel,
+    type: contentTypeFor(rel)
+  }));
+  /* 台账本身是"这一批引用了哪些素材"的可重导清单，每批都会变；
+     只有图片对象才是不可变的。把 index.json 也按 immutable 拦，
+     第二次发素材就会得到一条假冲突（2026-10-22 加技能图标时踩到）。 */
+  targets.push({
+    key: NAMESPACES[env] + '/' + ASSET_DIR + '/index.json', buf: indexBuf,
+    label: 'assets/index.json（素材台账）', type: MIME['.json'], mutable: true
+  });
+
+  let uploaded = 0; let unchanged = 0; let fixed = 0; let bytes = 0;
+  const failed = []; const violations = [];
+  for (const t of targets) {
+    const cache = t.mutable ? POINTER_CACHE : IMUTABLE_CACHE;
+    const head = creds.ok ? await remoteHead(creds, t.key) : { exists: false };
+    if (head.exists && head.etag && head.etag === md5Hex(t.buf)) {
+      /* 字节一样但 Content-Type 或缓存头不对：补正元数据，内容没动，不算覆写。
+         比对两边都先摘掉 `; charset=` 后缀——JSON 的 MIME 带字符集，
+         不摘就会每次都对不上、每次重发一遍（2026-10-22 自测里暴露出来）。 */
+      const wantBase = t.type ? t.type.split(';')[0] : '';
+      const gotBase = head.contentType ? head.contentType.split(';')[0] : '';
+      if ((wantBase && gotBase && wantBase !== gotBase) || (t.mutable && head.cacheControl !== cache)) {
+        try {
+          const r2 = await raw('PUT', creds.bucket, creds.region, '/' + encKey(t.key), t.buf,
+            signPut(creds, t.key, t.buf, { 'Cache-Control': cache, 'Content-Type': t.type }));
+          if (r2.statusCode >= 200 && r2.statusCode < 300) { fixed += 1; continue; }
+          failed.push(t.label + ' → 补正 Content-Type 失败 HTTP ' + r2.statusCode);
+        } catch (e2) { failed.push(t.label + ' → 补正失败 ' + e2.message); }
+      }
+      unchanged += 1; continue;
+    }
+    if (head.exists && !t.mutable) { violations.push(t.label + '：远端已存在但字节不同（素材文件名本该唯一，先查清是谁改的）'); continue; }
+    if (opts.dryRun) { uploaded += 1; continue; }
+    try {
+      const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(t.key), t.buf,
+        signPut(creds, t.key, t.buf, { 'Cache-Control': cache, 'Content-Type': t.type }));
+      if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 160));
+      const back = await remoteHead(creds, t.key);
+      if (back.etag !== md5Hex(t.buf)) throw new Error('回读 ETag 不匹配');
+      uploaded += 1; bytes += t.buf.length;
+    } catch (err) { failed.push(t.label + ' → ' + err.message); }
+  }
+  if (violations.length) violations.slice(0, 8).forEach((v) => logLine('  ✗ ' + v));
+  if (failed.length) failed.slice(0, 8).forEach((f) => logLine('  ✗ ' + f));
+  logLine('素材：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 补正 Content-Type ' + fixed
+    + ' · 失败 ' + failed.length + ' · 冲突 ' + violations.length + ' / 共 ' + targets.length);
+  if (opts.dryRun) { logLine('试运行结束，一个字节都没写。'); return 0; }
+  writeBuf(path.join(buildRoot(), env, 'last-assets.json'), dump({
+    at: new Date().toISOString(), env, uploaded, unchanged, failed: failed.length, conflicts: violations.length,
+    count: keys.length, bytes: total, missing: built.assetMissing.length
+  }));
+  if (violations.length || failed.length) { logLine('✗ 素材没发齐，界面会有一部分图取不到（会回落自绘，不会碎图）。'); return 1; }
+  logLine('素材齐了：' + keys.length + ' 个 / ' + kb(total) + ' KB 在 ' + NAMESPACES[env] + '/' + ASSET_DIR + '/ 下（immutable 一年）');
   return 0;
 }
 
@@ -702,7 +1040,18 @@ async function cmdUpload(env, opts) {
   for (const t of targets) {
     let head = { exists: false };
     if (creds.ok) head = await remoteHead(creds, t.key);
-    if (head.exists && head.etag && head.etag === md5Hex(t.buf)) { unchanged += 1; continue; }
+    if (head.exists && head.etag && head.etag === md5Hex(t.buf)) {
+      /* 字节一样但 Content-Type 不对（上一批素材踩过）：补正元数据，内容没动，不算覆写 */
+      if (t.type && head.contentType && head.contentType.split(';')[0] !== t.type) {
+        try {
+          const r2 = await raw('PUT', creds.bucket, creds.region, '/' + encKey(t.key), t.buf,
+            signPut(creds, t.key, t.buf, { 'Cache-Control': IMUTABLE_CACHE, 'Content-Type': t.type }));
+          if (r2.statusCode >= 200 && r2.statusCode < 300) { fixed += 1; continue; }
+          failed.push(t.label + ' → 补正 Content-Type 失败 HTTP ' + r2.statusCode);
+        } catch (e2) { failed.push(t.label + ' → 补正失败 ' + e2.message); }
+      }
+      unchanged += 1; continue;
+    }
     if (head.exists) {
       violations.push(t.label + '：远端已存在但字节不同（远端 ETag ' + (head.etag || '?') + ' ≠ 本批 ' + md5Hex(t.buf) + '）');
       continue;
@@ -959,7 +1308,7 @@ function parseArgs(argv) {
 function main() {
   const argv = process.argv.slice(2);
   if (!argv.length) {
-    logLine('用法：node tools/oss-release.js <build|upload|verify|list|rollback|clean> --env beta|release'
+    logLine('用法：node tools/oss-release.js <build|upload|assets|verify|list|rollback|clean> --env beta|release'
       + ' [--dry-run] [--check-identity] [--yes-release] [--to <buildId>] [--yes-clean]');
     logLine('写命令（upload/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
     process.exit(2);
@@ -971,6 +1320,7 @@ function main() {
       if (cmd === 'upload') return cmdUpload(env, opts);
       if (cmd === 'verify') return cmdVerify(env);
       if (cmd === 'list') return cmdList(env);
+      if (cmd === 'assets') return cmdAssets(env, opts);
       if (cmd === 'rollback') return cmdRollback(env, opts);
       if (cmd === 'clean') return cmdClean(env, opts);
       logLine('✗ 没有子命令 ' + cmd);
@@ -1000,6 +1350,12 @@ module.exports = {
   loadCreds,
   requireWriteGate,
   reExportCompare,
+  assetRelFromSite,
+  contentTypeFor,
+  assetIndexBuf,
+  ASSET_DIR,
+  ICON_EXT,
+  cmdAssets,
   listKeys,
   pointerKey,
   buildPrefix,

@@ -108,6 +108,11 @@ Page({
     this.setData({ activeKind: e.currentTarget.dataset.kind }, () => this.applyFilter())
   },
 
+  /* 技能页不是 tabBar 页，navigateTo 才对（switchTab 打不开它） */
+  onSpells() {
+    wx.navigateTo({ url: '/pages/spells/index' })
+  },
+
   onToggleFavOnly() {
     this.setData({ onlyFav: !this.data.onlyFav }, () => this.applyFilter())
   },

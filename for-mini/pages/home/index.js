@@ -36,7 +36,7 @@ Page({
     baseline: '',
     buildId: '',
     covList: [],
-    counts: { terms: 0, dungeons: 0, talentNodes: 0 },
+    counts: { terms: 0, dungeons: 0, spells: 0, lootRows: 0, talentNodes: 0 },
     recent: [],
     wip: WIP
   },
@@ -73,6 +73,8 @@ Page({
         counts: {
           terms: counts.terms || 0,
           dungeons: counts.dungeons || (DUNGEON_INDEX.items || []).length,
+          spells: counts.spells || 0,
+          lootRows: counts.lootRows || 0,
           talentNodes: counts.talentNodes || 0
         },
         covList: ['L0', 'L1', 'L2', 'L3'].map((level) => ({
@@ -107,6 +109,16 @@ Page({
 
   goGlossary() {
     wx.switchTab({ url: '/pages/glossary/index' })
+  },
+
+  /* 技能与掉落反查都不在 tabBar 里（三个位置已给 首页/副本/速查），
+     用 navigateTo 保留返回栈；switchTab 打不开它们＝点了没反应 */
+  goSpells() {
+    wx.navigateTo({ url: '/pages/spells/index' })
+  },
+
+  goLoots() {
+    wx.navigateTo({ url: '/pages/loots/index' })
   },
 
   onRecentTap(e) {

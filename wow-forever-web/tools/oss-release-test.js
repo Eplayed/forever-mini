@@ -61,7 +61,12 @@ function freshFixture(label) {
   fs.mkdirSync(path.join(web, 'tools'), { recursive: true });
   fs.copyFileSync(EXPORT_TOOL, path.join(web, 'tools', 'export-mini.js'));
   fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/oss-release.js', path.join(web, 'tools', 'oss-release.js'));
+  /* 导出层要读禁词表；夹具里少拷这一个文件，regen 会以 ENOENT 的形式红，看不出真正的原因 */
+  fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/copy-banned.json', path.join(web, 'tools', 'copy-banned.json'));
   fs.mkdirSync(path.join(web, 'src', 'data'), { recursive: true });
+  /* 素材层从 <仓库>/src/img 读图。夹具不链这一个目录的话，用夹具里的工具构建
+     会得到"1117 张全缺"，反例就会因为错误的原因变红——链上它才是同一份素材。 */
+  fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'src', 'img'), path.join(web, 'src', 'img'));
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
     fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'src', 'data', f));
@@ -96,8 +101,10 @@ function fixtureEnv(dir) {
   };
 }
 
-function runBuild(envDir, extraArgs) {
-  const res = cp.spawnSync('node', [TOOL, 'build', '--env', 'beta'].concat(extraArgs || []), {
+/* 默认跑仓库里那份工具；传 tool 参数可以跑夹具里自己那份拷贝
+   （测"改生成器必须换 buildId"时必须要用夹具的拷贝，否则改的是没被执行的文件） */
+function runBuild(envDir, extraArgs, tool) {
+  const res = cp.spawnSync('node', [tool || TOOL, 'build', '--env', 'beta'].concat(extraArgs || []), {
     encoding: 'utf8',
     env: Object.assign({}, process.env, fixtureEnv(envDir))
   });
@@ -129,8 +136,9 @@ function fakeOss() {
   const st = { objs: new Map(), counts: { PUT: 0, DELETE: 0, GET: 0, HEAD: 0 }, failPutAt: 0, failListAfter: 0, clock: 0 };
   st.writes = () => st.counts.PUT + st.counts.DELETE;
   st.get = (key) => (st.objs.has(key) ? st.objs.get(key).buf : null);
-  st.set = (key, buf, cacheControl) => st.objs.set(key, {
+  st.set = (key, buf, cacheControl, contentType) => st.objs.set(key, {
     buf, cacheControl: cacheControl || 'public, max-age=60, must-revalidate',
+    contentType: contentType || '',
     lastModified: new Date(st.clock += 1000).toUTCString()
   });
   const res = (statusCode, headers, body) => ({ statusCode, headers: headers || {}, body: body || Buffer.alloc(0) });
@@ -150,7 +158,7 @@ function fakeOss() {
     if (method === 'PUT') {
       st.counts.PUT += 1;
       if (st.failPutAt && st.counts.PUT === st.failPutAt) return Promise.resolve(res(500, {}, Buffer.from('<Code>InjectedPutFailure</Code>')));
-      st.set(key, body, headers && headers['Cache-Control']);
+      st.set(key, body, headers && headers['Cache-Control'], headers && headers['Content-Type']);
       return Promise.resolve(res(200, { etag: '"' + md5u(body) + '"' }));
     }
     if (method === 'DELETE') {
@@ -161,7 +169,7 @@ function fakeOss() {
     }
     const o = st.objs.get(key);
     if (!o) return Promise.resolve(res(404, {}, Buffer.from('<Code>NoSuchKey</Code>')));
-    const h = { etag: '"' + md5u(o.buf) + '"', 'content-length': o.buf.length, 'cache-control': o.cacheControl, 'last-modified': o.lastModified };
+    const h = { etag: '"' + md5u(o.buf) + '"', 'content-length': o.buf.length, 'cache-control': o.cacheControl, 'content-type': o.contentType || '', 'last-modified': o.lastModified };
     if (method === 'HEAD') { st.counts.HEAD += 1; return Promise.resolve(res(200, h)); }
     st.counts.GET += 1;
     return Promise.resolve(res(200, h, o.buf));
@@ -228,17 +236,36 @@ const oss = require(MINI_SERVICE);
     JSON.stringify(idx.counts));
   ok('每条索引都能落到实际存在的详情与掉落文件', idx.items.every((it) =>
     fs.existsSync(path.join(batchDir, it.detailPath)) && fs.existsSync(path.join(batchDir, it.lootPath))));
-  ok('bundle 收了 79 个数据文件（38×2 + 索引 + meta + glossary）', Object.keys(bundle.files).length === 79,
-    String(Object.keys(bundle.files).length));
+  /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
+     等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
+  /* 2 入口清单（meta+glossary）+ 副本索引 + 副本×2 + 职业名单 + 职业片 + 掉落反查表 */
+  const expectFiles = 2 + idx.items.length * 2 + man.counts.spellClasses + 3;
+  ok('bundle 收了每个数据文件一条（meta+glossary+副本索引+副本 ' + idx.items.length + '×2+职业名单+职业片 ' + man.counts.spellClasses + '+掉落表）',
+    Object.keys(bundle.files).length === expectFiles,
+    Object.keys(bundle.files).length + ' ≠ ' + expectFiles);
   const ptrPath = path.join(good.envDir, 'oss-build', 'beta', 'manifest.json');
   ok('指针清单 ≤ 8 KB（冷启动代价）', man.counts.bytes > 0 && fs.statSync(ptrPath).size <= 8 * 1024,
     String(fs.statSync(ptrPath).size));
   ok('批次里没有站内相对路径（img/ src/ 一律不许下发）',
     !/"(img|src|static)\//.test(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', 'ragefire-chasm.json'), 'utf8')));
-  ok('首领名单里不再带着站内头像路径',
-    JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', 'ragefire-chasm.json'), 'utf8')).dungeon.bosses.every((b) => b.portrait === undefined));
-  ok('事实核对日期写进指针（2026-10-11）', man.factDates.latest === '2026-10-11',
-    JSON.stringify(man.factDates));
+  /* M02 起头像是"素材相对路径"，不再是摘掉——断言跟着换成更严的一条：
+     值必须落在 assets/ 的相对路径里，站内 img/ 一个都不许出现。 */
+  const detArt = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', 'ragefire-chasm.json'), 'utf8')).dungeon;
+  ok('首领头像改成了 assets 相对路径（不是站内 img/，也不再是 undefined）',
+    detArt.bosses.every((b) => !b.portrait || /^art\/boss\w*\/[a-z0-9-]+\.webp$/.test(b.portrait))
+      && detArt.bosses.some((b) => b.portrait), JSON.stringify(detArt.bosses.slice(0, 1)));
+  ok('副本原画同样改成 assets 相对路径', /^art\/dungeons\/[a-z0-9-]+\.webp$/.test(String(detArt.art)), String(detArt.art));
+  ok('整批数据文件里搜不到站内 img/ 路径',
+    !fs.readdirSync(path.join(batchDir, 'dungeons', 'detail')).some((f) => /"(img|src)\//.test(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', f), 'utf8'))));
+  /* 核对日期不抄字面量：指针里的 latest 必须等于这一批所有文件 facts.max 的最大值，
+     且法术书那条线（2026-10-19 插件核对）要真的被算进来，不能被副本那批的旧日期盖住。 */
+  const factsMax = Object.keys(bundle.files)
+    .map((k) => (bundle.files[k].facts || {}).max).filter(Boolean).sort();
+  const latestFacts = factsMax[factsMax.length - 1];
+  ok('事实核对日期写进指针，且等于逐文件 facts 的最大值（含法术书那条线）',
+    /^\d{4}-\d{2}-\d{2}$/.test(String(man.factDates.latest)) && man.factDates.latest === latestFacts
+      && man.factDates.latest >= man.factDates.dungeonDetail.max,
+    JSON.stringify({ latest: man.factDates.latest, latestFacts, dungeonDetail: man.factDates.dungeonDetail.max }));
   ok('route 缺口如实登记（38 本全没路线）', idx.notCollected.route === 38, JSON.stringify(idx.notCollected));
   ok('重跑同源：buildId 一致、逐文件 0 差异、manifest 无变化字段',
     good.out.indexOf('buildId 一致') >= 0 && good.out.indexOf('逐文件字节差异 0') >= 0 && good.out.indexOf('manifest 变化字段 []') >= 0,
@@ -261,14 +288,17 @@ const oss = require(MINI_SERVICE);
   ok('索引每条自带详情/掉落的 etag（客户端不必为校验多取 files.json）',
     idx.items.every((it) => /^[0-9A-F]{32}$/.test(String(it.detailEtag || '')) && /^[0-9A-F]{32}$/.test(String(it.lootEtag || ''))
       && it.detailBytes > 0 && it.lootBytes > 0), JSON.stringify(idx.items[0]));
-  ok('溯源写明了导出对拍（re-export 与 oss-preview 一致）',
+  ok('溯源写明了导出对拍（每份基底都有一条逐字节一致的产物）',
     man.source && man.source.exportCheck && man.source.exportCheck.reproduced === true
-      && man.source.exportCheck.outputs.length === 3, JSON.stringify(man.source && man.source.exportCheck));
+      && man.source.exportCheck.outputs.length === man.source.inputs.length
+      && man.source.exportCheck.outputs.every((o) => /^oss-preview\/(meta|glossary|dungeons|spells)\.json$/.test(o.rel) && o.sha256 && o.bytes > 0),
+    JSON.stringify(man.source && man.source.exportCheck));
+  process.stdout.write('  · 副本首屏实际字节：meta ' + man.fetch.meta.bytes + 'B + 索引 '
+    + man.fetch.dungeonIndex.bytes + 'B + 指针 ' + fs.statSync(ptrPath).size + 'B = '
+    + ((fs.statSync(ptrPath).size + man.fetch.dungeonIndex.bytes + man.fetch.meta.bytes) / 1024).toFixed(1)
+    + ' KB，GET 3 次；整份 dungeons.json 326.7 KB。技能与词条各算各的入口，取一页才多一次 GET\n');
   const coldBytes = fs.statSync(ptrPath).size + man.fetch.dungeonIndex.bytes + man.fetch.meta.bytes;
-  process.stdout.write('  · 冷启动三取实际字节：指针 ' + man.fetch.meta.bytes + 'B meta + 索引 '
-    + man.fetch.dungeonIndex.bytes + 'B + 指针 ' + fs.statSync(ptrPath).size + 'B = ' + (coldBytes / 1024).toFixed(1)
-    + ' KB，GET 3 次；整份 dungeons.json 326.7 KB\n');
-  ok('冷启动代价仍 ≤ 40 KB', coldBytes <= 40 * 1024, String(coldBytes));
+  ok('副本首屏代价仍 ≤ 40 KB（指针变大就等于冷启动变慢）', coldBytes <= 40 * 1024, String(coldBytes));
 
   const CHANGE = runBuild(freshFixture('change'));
   patchSource(good.envDir, 'dungeons.json', (j) => { j.newDungeons[0].nameCn = '改了个名字'; });
@@ -327,6 +357,20 @@ const oss = require(MINI_SERVICE);
     }, () => '没有拦下漂移');
   }
 
+  await step('反例：只改生成器（内容一个没动）→ buildId 必须变（同 id 不同字节就是假不可变）', () => {
+    const a = runBuild(freshFixture('gen-a'));
+    const dirB = freshFixture('gen-b');
+    const tp = path.join(dirB, 'wow-forever-web', 'tools', 'oss-release.js');
+    const src = fs.readFileSync(tp, 'utf8');
+    const patched = src.replace("    pointer: { key: ns + '/manifest.json', cacheControl: POINTER_CACHE },",
+      "    probeField: 1,\n    pointer: { key: ns + '/manifest.json', cacheControl: POINTER_CACHE },");
+    if (patched === src) return false;
+    fs.writeFileSync(tp, patched);
+    const b = runBuild(dirB, null, path.join(dirB, 'wow-forever-web', 'tools', 'oss-release.js'));
+    const same = a.rc === 0 && b.rc === 0 && readManifest(a.envDir).buildId === readManifest(b.envDir).buildId;
+    return a.rc === 0 && b.rc === 0 && !same;
+  }, '生成器变了 buildId 却没变');
+
   /* ================= 3·5. 主包快照 ↔ 分发层索引 ================= */
   process.stdout.write('\n双向卡口：主包副本索引快照必须与分发层的索引逐字段一致\n');
   const runExport = (dir, check) => cp.spawnSync('node', [path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js')], {
@@ -362,6 +406,118 @@ const oss = require(MINI_SERVICE);
     process.stdout.write('  · 主包快照 ' + (total / 1024).toFixed(1) + ' KB（预算 60 KB）\n');
     return total <= 60 * 1024;
   }, '超预算');
+
+  /* ================= 3·6. M02-2 技能分片 ================= */
+  process.stdout.write('\nM02-2 技能分片：职业名单与九片法术必须自洽、可校验、不带描述类内容\n');
+  const spIdx = JSON.parse(fs.readFileSync(path.join(batchDir, 'spells', 'classes.json'), 'utf8'));
+  ok('职业名单 9 条，counts.total 等于各职业条数之和',
+    spIdx.classes.length === 9 && spIdx.counts.classes === spIdx.classes.length
+      && spIdx.counts.total === spIdx.classes.reduce((s, c) => s + c.count, 0), JSON.stringify(spIdx.counts));
+  ok('每个职业的分片路径都由 classId 推出来，且文件真的在批次里',
+    spIdx.classes.every((c) => c.shardPath === 'spells/class/' + c.classId + '.json'
+      && fs.existsSync(path.join(batchDir, c.shardPath))), JSON.stringify(spIdx.classes.slice(0, 1)));
+  ok('每个职业条目带齐三种校验值（etag 32 位十六进制 / md5 24 位 base64 / bytes）',
+    spIdx.classes.every((c) => /^[0-9A-F]{32}$/.test(String(c.shardEtag))
+      && /^[A-Za-z0-9+/]{22}==$/.test(String(c.shardMd5)) && c.shardBytes > 0),
+    JSON.stringify(spIdx.classes[0]).slice(0, 160));
+  const spShards = spIdx.classes.map((c) => {
+    const buf = fs.readFileSync(path.join(batchDir, c.shardPath));
+    return { c, buf, obj: JSON.parse(buf.toString('utf8')) };
+  });
+  ok('校验值对得上真实字节（名单说要 40 KB 就不能给 41 KB）',
+    spShards.every((s) => s.buf.length === s.c.shardBytes && md5u(s.buf) === s.c.shardEtag));
+  ok('片里条数与名单一致，且没有串职业',
+    spShards.every((s) => s.obj.spells.length === s.c.count && s.obj.spells.every((x) => x.classId === s.c.classId)
+      && s.obj.classId === s.c.classId));
+  ok('每片都带批次身份五项（buildId/product/schemaVersion/kind/classId）',
+    spShards.every((s) => s.obj.buildId === man.buildId && s.obj.product === 'wow-forever-mini'
+      && s.obj.schemaVersion === 1 && s.obj.kind === 'spell-class'));
+  ok('单片不超 64 KB 预算（手机上一次 GET 的代价）',
+    spShards.every((s) => s.buf.length <= 64 * 1024), Math.max.apply(null, spShards.map((s) => s.buf.length)) + ' B');
+  /* 图标查的是真仓库的 src/img（runBuild 跑的是仓库里的工具，素材层也从那里读），
+     夹具目录里没有 img，别往 good.envDir 下找。 */
+  ok('技能图标全登记进素材层，缺图 0 条',
+    man.assets.missing === 0 && spShards.every((s) => s.obj.spells.filter((x) => x.iconKey)
+      .every((x) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', 'icons', x.iconKey + '.jpg')))),
+    'missing ' + man.assets.missing);
+  ok('分片里没有站内相对路径', !spShards.some((s) => /"(img|src|static)\//.test(s.buf.toString('utf8'))));
+  ok('红线：分片里没有技能描述与循环建议类内容',
+    !spShards.some((s) => /"(description|desc|tooltip|rotation|rankText|rankDescription)"\s*:/.test(s.buf.toString('utf8'))));
+  ok('指针里 spellClasses 是第四个入口，带 bytes 与 md5',
+    !!man.fetch.spellClasses && man.fetch.spellClasses.path.indexOf('builds/' + man.buildId + '/') === 0
+      && man.fetch.spellClasses.bytes > 0 && !!man.fetch.spellClasses.md5, JSON.stringify(man.fetch.spellClasses || null));
+  /* 反例改的是导出产物本身，并显式关掉对拍——不然先红的是"preview 与基底不配套"，
+     测不到这一层自己的那条计数判据。 */
+  const badPreview = (label, mutate) => {
+    const dir = freshFixture(label);
+    const p = path.join(dir, 'for-mini', 'oss-preview', 'spells.json');
+    const j = JSON.parse(fs.readFileSync(p, 'utf8'));
+    mutate(j);
+    fs.writeFileSync(p, JSON.stringify(j, null, 1));
+    return runBuild(dir, ['--skip-export-check']);
+  };
+  /* step() 的说明文字在判定之前就算好了，所以先把构建跑完再交给 step */
+  const spcntRun = badPreview('spcnt', (j) => { j.classes[0].count += 1; });
+  await step('反例：某职业实际条数与名单不符 → 构建拒绝',
+    () => spcntRun.rc !== 0 && spcntRun.out.indexOf('头部写') >= 0,
+    'rc=' + spcntRun.rc + ' ' + spcntRun.out.slice(-200));
+  const sppathRun = badPreview('sppath', (j) => { j.classes[3].classId = '../evil'; });
+  await step('反例：classId 拼成路径穿越 → 构建拒绝，不生成 ../ 路径',
+    () => sppathRun.rc !== 0 && sppathRun.out.indexOf('不能当分片文件名') >= 0,
+    'rc=' + sppathRun.rc + ' ' + sppathRun.out.slice(-200));
+
+  /* ================= 3·7. M02-3 掉落反查表 ================= */
+  process.stdout.write('\nM02-3 掉落反查：一张总表必须与副本索引逐条对得上，行不能错位\n');
+  const lootTab = JSON.parse(fs.readFileSync(path.join(batchDir, 'loots', 'index.json'), 'utf8'));
+  ok('列名固定六列（客户端按位置取值，少一列就会把首领序号当品质）',
+    JSON.stringify(lootTab.cols) === JSON.stringify(['itemId', 'name', 'quality', 'iconKey', 'boss', 'level']),
+    JSON.stringify(lootTab.cols));
+  ok('表的行数与去重物品数等于副本索引里逐座相加的掉落条数',
+    lootTab.counts.rows === idx.items.reduce((s, it) => s + it.dropCount, 0)
+      && lootTab.counts.dungeons === idx.items.length, JSON.stringify(lootTab.counts));
+  ok('每座本都能对回副本索引的同一条（id 与 dropCount 一致，不多不少）',
+    lootTab.dungeons.every((d) => {
+      const it = idx.items.filter((x) => x.id === d.id)[0];
+      return !!it && it.dropCount === d.rows.length;
+    }));
+  ok('每行长度等于列数，且没有悬空的首领序号',
+    lootTab.dungeons.every((d) => d.rows.every((r) => r.length === lootTab.cols.length
+      && r[4] >= 0 && r[4] < d.bosses.length)));
+  ok('每行都有 itemId（玩家复制过去要能查到）',
+    lootTab.dungeons.every((d) => d.rows.every((r) => r[0] !== null && r[0] !== undefined && r[0] !== '')));
+  ok('红线：整张表里没有掉落百分比', !/%\s|\d+(\.\d+)?\s*%/.test(JSON.stringify(lootTab.dungeons)));
+  ok('整表 ≤ 192 KB（一次 GET 换"任何一件都能查"，再大就该切了）',
+    fs.statSync(path.join(batchDir, 'loots', 'index.json')).size <= 192 * 1024,
+    String(fs.statSync(path.join(batchDir, 'loots', 'index.json')).size));
+  ok('表里出现的图标都在素材层（缺图 0 且反向卡口已过）', man.assets.missing === 0);
+  ok('指针里 lootIndex 是第五个入口，带 md5 与 bytes',
+    !!man.fetch.lootIndex && man.fetch.lootIndex.path === 'builds/' + man.buildId + '/loots/index.json'
+      && man.fetch.lootIndex.bytes > 0 && !!man.fetch.lootIndex.md5, JSON.stringify(man.fetch.lootIndex || null));
+  ok('首页数字与这张表同源（meta.counts 与 manifest.counts 两个数都相等）',
+    man.counts.lootRows === lootTab.counts.rows && man.counts.lootItems === lootTab.counts.items,
+    JSON.stringify({ m: man.counts, t: lootTab.counts }));
+  const lootToolBad = (label, from, to, needle) => {
+    const dir = freshFixture(label);
+    const rp = path.join(dir, 'wow-forever-web', 'tools', 'oss-release.js');
+    const src = fs.readFileSync(rp, 'utf8');
+    if (src.indexOf(from) < 0) return { rc: -1, out: '夹具里找不到要改的那一行：' + from };
+    fs.writeFileSync(rp, src.replace(from, to));
+    /* 必须跑夹具里那份工具：runBuild 默认起的是仓库里的原件，改夹具副本不生效 */
+    return runBuild(dir, ['--skip-export-check'], rp);
+  };
+  const badBoss = lootToolBad('lootboss',
+    "        bosses.indexOf(x.bossCn || x.bossId || '未记首领'),",
+    "        bosses.indexOf(x.bossCn || x.bossId || '未记首领') + 5,");
+  await step('反例：首领序号越界 → 构建拒绝', () => badBoss.rc !== 0 && badBoss.out.indexOf('首领序号') >= 0,
+    'rc=' + badBoss.rc + ' ' + badBoss.out.slice(-160));
+  const badId = lootToolBad('lootid', '        x.itemId || null,', '        null,');
+  await step('反例：行里缺 itemId → 构建拒绝', () => badId.rc !== 0 && badId.out.indexOf('缺 itemId') >= 0,
+    'rc=' + badId.rc + ' ' + badId.out.slice(-160));
+  const badCols = lootToolBad('lootcols', "  const LOOT_COLS = ['itemId', 'name', 'quality', 'iconKey', 'boss', 'level'];",
+    "  const LOOT_COLS = ['itemId', 'name', 'quality', 'iconKey', 'boss'];");
+  await step('反例：列名与行内容对不上 → 构建拒绝（客户端按位置取值，绝不能少列）',
+    () => badCols.rc !== 0 && badCols.out.indexOf('列名却写了') >= 0,
+    'rc=' + badCols.rc + ' ' + badCols.out.slice(-160));
 
   /* ================= 4. 写授权统一闸 ================= */
   process.stdout.write('\n写授权：每条写命令都要显式 WOW_ALLOW_CROSS_CREDS=1，与凭证来源无关\n');
@@ -619,6 +775,72 @@ const oss = require(MINI_SERVICE);
     });
   }, () => '第二次上传重写了批次');
 
+  /* ================= 7·5 素材通道（M02）================= */
+  process.stdout.write('\n素材通道：图片不可变，但素材台账必须能重导\n');
+  const asEnv = (dir) => Object.assign({}, NO_MARK, fixtureEnv(dir), {
+    WOW_ALLOW_CROSS_CREDS: '1', WOW_OSS_ENV: F, WOW_MINI_BUILD: path.join(dir, 'oss-build-as')
+  });
+  const assetKeys = (st) => Array.from(st.objs.keys()).filter((k) => k.indexOf('/assets/') >= 0);
+  const assetLifecycle = await (async () => {
+    const dir = freshFixture('assets');
+    const st = fakeOss();
+    const ledKey = () => assetKeys(st).filter((k) => /\/assets\/index\.json$/.test(k))[0];
+    return withEnv(asEnv(dir), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdAssets('beta', { dryRun: false }).then((rc1) => {
+        if (rc1 !== 0) return { ok: false, why: '第一次发素材就 rc=' + rc1 };
+        const keys = assetKeys(st);
+        const imgs = keys.filter((k) => !/\/index\.json$/.test(k));
+        const badType = imgs.filter((k) => {
+          const want = /\.webp$/.test(k) ? 'image/webp' : /\.png$/.test(k) ? 'image/png' : 'image/jpeg';
+          return st.objs.get(k).contentType !== want;
+        });
+        if (badType.length) return { ok: false, why: 'Content-Type 不对：' + badType[0] + ' → ' + st.objs.get(badType[0]).contentType };
+        const badCache = imgs.filter((k) => st.objs.get(k).cacheControl.indexOf('immutable') < 0);
+        if (badCache.length) return { ok: false, why: '图片没带 immutable：' + badCache[0] };
+        if (st.objs.get(ledKey()).cacheControl.indexOf('max-age=60') < 0) return { ok: false, why: '台账的缓存头不是短缓存' };
+        st.counts.PUT = 0;
+        return ossTool.cmdAssets('beta', { dryRun: false }).then((rc2) => {
+          if (rc2 !== 0 || st.counts.PUT !== 0) return { ok: false, why: '重发不幂等 rc=' + rc2 + ' PUT=' + st.counts.PUT };
+          /* 素材集变小（这座本不再引用原画）：图片一张没动，只有台账要重写。
+             这一条就是 2026-10-22 加技能图标时踩的坑——台账被当成不可变对象拦下，rc=1。 */
+          patchSource(dir, 'dungeons.json', (j) => { j.newDungeons[0].art = null; });
+          st.counts.PUT = 0;
+          const before = Buffer.from(st.objs.get(ledKey()).buf);
+          return ossTool.cmdAssets('beta', { dryRun: false }).then((rc3) => {
+            const after = st.objs.get(ledKey()).buf;
+            return {
+              ok: rc3 === 0 && st.counts.PUT === 1 && Buffer.compare(before, after) !== 0,
+              why: '台账重导：rc=' + rc3 + ' PUT=' + st.counts.PUT + ' 字节变了=' + (Buffer.compare(before, after) !== 0)
+            };
+          });
+        });
+      });
+    }).finally(() => ossTool.setTransportForTest(null));
+  })();
+  ok('正路：按扩展名带 Content-Type、图片 immutable 一年、重发幂等、素材集变了台账能重导', assetLifecycle.ok, assetLifecycle.why);
+
+  const assetImm = await (async () => {
+    const dir = freshFixture('asimm');
+    const st = fakeOss();
+    return withEnv(asEnv(dir), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdAssets('beta', { dryRun: false }).then(() => {
+        const victim = assetKeys(st).filter((k) => /\/icons\/.*\.jpg$/.test(k))[0];
+        const before = Buffer.from(st.objs.get(victim).buf);
+        st.set(victim, Buffer.from('有人换过这张图'), 'public, max-age=31536000, immutable', 'image/jpeg');
+        const tampered = Buffer.from(st.objs.get(victim).buf);
+        st.counts.PUT = 0;
+        return ossTool.cmdAssets('beta', { dryRun: false }).then((rc) => ({
+          ok: rc === 1 && st.counts.PUT === 0 && Buffer.compare(tampered, st.objs.get(victim).buf) === 0
+            && Buffer.compare(tampered, before) !== 0,
+          why: 'rc=' + rc + ' PUT=' + st.counts.PUT
+        }));
+      });
+    }).finally(() => ossTool.setTransportForTest(null));
+  })();
+  ok('反例：同名图片远端字节不同 → 判冲突、一个字节都不覆写', assetImm.ok, assetImm.why);
+
   /* ================= 7. 回滚核实目标批次 ================= */
   process.stdout.write('\n回滚：先核目标批次完整，再动指针\n');
   async function twoBatches() {
@@ -691,7 +913,7 @@ const oss = require(MINI_SERVICE);
 
   /* ================= 8. verify 收紧到字节 ================= */
   process.stdout.write('\n校验：指针必须是批次自带清单的逐字节副本\n');
-  await step('verify 正路 rc0 且逐文件回读 79 个', () => twoBatches().then(async (ctx) => {
+  await step('verify 正路 rc0 且逐文件回读整批', () => twoBatches().then(async (ctx) => {
     const rc = await withEnv(upEnv(ctx.dir), () => {
       ossTool.setTransportForTest(ctx.st.transport);
       return ossTool.cmdVerify('beta').then((v) => { ossTool.setTransportForTest(null); return v; });
@@ -725,6 +947,10 @@ const oss = require(MINI_SERVICE);
       rawPut(base, 'builds/' + m.buildId + '/' + it.detailPath, readBuf('builds/' + m.buildId + '/' + it.detailPath));
       rawPut(base, 'builds/' + m.buildId + '/' + it.lootPath, readBuf('builds/' + m.buildId + '/' + it.lootPath));
     });
+    /* 职业法术片也要能被"取到"，否则契约测试只能测副本那两条路 */
+    JSON.parse(readBuf('builds/' + m.buildId + '/spells/classes.json').toString('utf8')).classes.forEach((it) => {
+      rawPut(base, 'builds/' + m.buildId + '/' + it.shardPath, readBuf('builds/' + m.buildId + '/' + it.shardPath));
+    });
     return base;
   }
   const servedIndex = serve(envRoot, man);
@@ -732,7 +958,8 @@ const oss = require(MINI_SERVICE);
   await step('指针取到就是 live 且带 buildId', () => oss.loadPointer().then((p) => p.source === 'live' && p.manifest.buildId === man.buildId));
   const r1 = await oss.loadKey('dungeonIndex');
   ok('索引 live 且 data.buildId 与指针同批', r1.source === 'live' && r1.data.buildId === man.buildId, r1.source);
-  ok('界面拿得到核对日期', r1.factDates && r1.factDates.latest === '2026-10-11');
+  ok('界面拿得到核对日期（与指针同一个值，不是写死的）',
+    !!(r1.factDates && r1.factDates.latest === man.factDates.latest), JSON.stringify(r1.factDates));
   const r1b = await oss.loadKey('dungeonIndex');
   await step('同批第二次读：批次是当前批 → 仍算 live 并标 cacheHit，不再谎报"离线缓存"', () =>
     r1b.source === 'live' && r1b.cacheHit === true, JSON.stringify({ s: r1b.source, c: r1b.cacheHit }));
@@ -749,12 +976,89 @@ const oss = require(MINI_SERVICE);
     return loot.source === 'live' && loot.data.drops.length > 0;
   }, () => (loot ? loot.source : '抛出'));
   ok('掉落没有百分比', !!loot && loot.data.drops.every((d) => !/\d+(\.\d+)?\s*%/.test(JSON.stringify(d))));
+
+  /* —— M02-2 客户端契约：职业名单 → 单片，路径与校验值都从名单条目现推 —— */
+  const spNeedle = '/' + man.fetch.spellClasses.path;
+  const rsp = await oss.loadKey('spellClasses');
+  ok('职业名单走指针就是 live', rsp.source === 'live' && rsp.data.buildId === man.buildId
+    && rsp.data.classes.length === 9, rsp.source + ' / ' + (rsp.error && rsp.error.message));
+  const spc = rsp.data.classes.filter((c) => c.classId === 'priest')[0];
+  let spRes = null;
+  await step('点一个职业才取那一片，取到的条数与名单说的一致', async () => {
+    spRes = await oss.loadSpellClass(spc, rsp.batch);
+    return spRes.source === 'live' && spRes.data.classId === 'priest' && spRes.data.spells.length === spc.count;
+  }, () => (spRes ? spRes.source + ' ' + (spRes.error && spRes.error.message) : '抛出'));
+  ok('只取了选中的那个职业，其余八片没下', hitsTo('/spells/class/') === 1, '取了 ' + hitsTo('/spells/class/') + ' 片');
+  await step('同批第二次读同一职业 → cacheHit 且不重复下载', async () => {
+    const again = await oss.loadSpellClass(spc, rsp.batch);
+    return again.source === 'live' && again.cacheHit === true && hitsTo('/spells/class/') === 1;
+  }, () => '又下了一遍');
+  await step('反例：名单里的 shardPath 被改成路径穿越 → 不发请求', async () => {
+    clearStore();
+    const bad = Object.assign({}, spc, { shardPath: '../../../etc/passwd' });
+    const r = await oss.loadSpellClass(bad, rsp.batch);
+    const before = hitsTo('/spells/class/');
+    return r.source === 'none' && !!r.integrityError && hitsTo('/spells/class/') === before;
+  }, '坏路径照样发了请求');
+  await step('反例：片里 classId 与请求的不是同一个（串包）→ 判失败', async () => {
+    clearStore();
+    const key = servedIndex + 'builds/' + man.buildId + '/spells/class/paladin.json';
+    const orig = net.map[key];
+    net.map[key] = { data: Object.assign({}, orig.data, { classId: 'priest' }), header: orig.header };
+    const r = await oss.loadSpellClass(Object.assign({}, spc, {
+      classId: 'paladin', shardPath: 'spells/class/paladin.json'
+    }), rsp.batch);
+    net.map[key] = orig;
+    clearStore();
+    return r.source === 'none' && !!r.integrityError && /ID 是 priest/.test(String(r.error && r.error.message));
+  }, '串了职业还当正常数据返回');
+  ok('职业名单本身只取了一次（换职业不重复下名单）', hitsTo(spNeedle) === 1, '取了 ' + hitsTo(spNeedle) + ' 次');
+  const lr = await oss.loadKey('lootIndex');
+  await step('掉落反查表走指针就是 live，行数是自洽的', () => lr.source === 'live'
+    && lr.data.counts.rows === lr.data.dungeons.reduce((s, d) => s + d.rows.length, 0),
+    () => (lr.error ? lr.error.message : lr.source));
+  await step('反例：表被改成少一列（列名与行内容对不上）→ 客户端不当 live 端给界面', async () => {
+    clearStore();
+    const key = servedIndex + man.fetch.lootIndex.path;
+    const orig = net.map[key];
+    const cut = JSON.parse(JSON.stringify(orig.data));
+    cut.cols = cut.cols.slice(0, 5);
+    net.map[key] = { data: cut, header: orig.header };
+    const r = await oss.loadKey('lootIndex');
+    net.map[key] = orig;
+    clearStore();
+    return !!r.integrityError && r.source !== 'live';
+  }, '结构不对仍报实时数据');
+  await step('反例：线上字节被换（Content-MD5 与清单不符）→ 不当 live', async () => {
+    clearStore();
+    const key = servedIndex + man.fetch.spellClasses.path;
+    const orig = net.map[key];
+    net.map[key] = { data: orig.data, header: { 'Content-MD5': 'ZmFrZWZhYWtlZmFrZWZhYWtlZmE9PQ==', 'Content-Length': String(orig.data.length) } };
+    const r = await oss.loadKey('spellClasses');
+    net.map[key] = orig;
+    clearStore();
+    return !!r.integrityError && r.source !== 'live';
+  }, 'MD5 对不上仍报 live');
+  clearStore();
   await step('逐文件哈希表能取回且同批（构建端 verify 与人工排障用这份）', async () => {
     const p1 = await oss.loadPointer();
     const bd = await oss.loadBundle(p1.manifest);
-    return bd.source === 'live' && bd.data.buildId === man.buildId && Object.keys(bd.data.files).length === 79;
-  }, () => '取不回 or 不是 79 个');
+    return bd.source === 'live' && bd.data.buildId === man.buildId
+      && Object.keys(bd.data.files).length === man.counts.files - 2;
+  }, () => '取不回或条数不等于本批数据文件数（counts.files 减 files.json 与 manifest）');
   ok('批次内路径只有一种拼法', oss.batchPath(man, 'dungeons/x.json') === 'builds/' + man.buildId + '/dungeons/x.json');
+  const asb = { env: man.env, buildId: man.buildId, assets: man.assets };
+  ok('素材地址只能落在 assets/ 下（art 与图标各一种拼法）',
+    oss.assetUrl(asb, 'art/dungeons/ragefire-chasm.webp') === oss.OSS_ORIGIN + '/' + oss.NAMESPACES[man.env] + '/assets/art/dungeons/ragefire-chasm.webp'
+      && oss.iconUrl(asb, 'inv_misc_head_dwarf_01').indexOf('/assets/icons/inv_misc_head_dwarf_01.jpg') > 0,
+    oss.assetUrl(asb, 'art/dungeons/ragefire-chasm.webp'));
+  ok('反例：素材路径带 ../ → 不拼', oss.assetUrl(asb, '../etc/passwd') === '');
+  ok('反例：素材路径还是站内 img/ → 不拼（那是网页端地址，小程序必 404）',
+    oss.assetUrl(asb, 'img/art/x.webp') === '' && oss.assetUrl(asb, 'http://evil/x.jpg') === '');
+  ok('反例：图标键带路径分隔符 → 不拼', oss.iconUrl(asb, 'a/b') === '' && oss.iconUrl(asb, '') === '');
+  ok('指针里的 assets 段说清了素材数量与缺失数（不是"没图"而是"这批引了 N 张、缺 M 张"）',
+    man.assets && man.assets.count > 700 && man.assets.bytes > 0 && typeof man.assets.missing === 'number',
+    JSON.stringify(man.assets && { c: man.assets.count, b: man.assets.bytes, m: man.assets.missing }));
   await step('loadKey 把批次上下文一起交给页面（详情不必另取 manifest）', () =>
     r1.batch && r1.batch.buildId === man.buildId && r1.batch.env === man.env && typeof r1.batch.factDates === 'object');
   await step('详情固定用索引那一批：中途换指针也不混版', () => {

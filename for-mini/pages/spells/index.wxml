@@ -1,0 +1,104 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，技能可能显示不全。请更新「无限资料」后再看。
+  </view>
+  <view wx:elif="{{needOnline}}" class="notice notice-bad">
+    技能表要联网才能取。现在没连上，这一页不给离线内容——免得拿半个职业当全部。
+  </view>
+  <view wx:elif="{{offline && classId}}" class="notice">
+    当前显示的是{{sourceText}}，可能不是最新核对结果。
+  </view>
+
+  <!-- 第一层：选职业。九个职业一眼看得全，不必先下一个大文件 -->
+  <block wx:if="{{!classId}}">
+    <view class="lead plate">
+      <view class="lead-t">职业技能速查</view>
+      <view class="lead-s">按无限测试版客户端读出的法术书，{{fieldNote}}</view>
+    </view>
+    <view wx:if="{{!loaded}}" class="card muted">正在取职业名单…</view>
+    <view wx:if="{{loaded && !classes.length}}" class="card empty">
+      <view>还没有拿到职业名单。</view>
+      <view class="muted">连一次网就有了。本站不放技能描述与循环建议，只查名称、级数与学习等级。</view>
+    </view>
+    <view class="cgrid">
+      <view class="ccard" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPick">
+        <view class="crow">
+          <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
+          <view class="cmain">
+            <view class="cname">{{item.nameCn || '中文名待核'}}</view>
+            <view class="cen">{{item.nameEn || '英文名待补'}}</view>
+          </view>
+        </view>
+        <view class="crow crow2">
+          <text class="csub">{{item.count}} 条 · {{item.tabCount}} 系</text>
+          <view class="badge badge-{{item.level}}">{{item.levelName || item.level}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 第二层：这个职业的法术，按系分组 -->
+  <block wx:else>
+    <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="chip chip-all" bindtap="onBackToClasses">换职业</view>
+      <view class="chip {{item.classId === classId ? 'chip-on' : ''}}" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPick">{{item.nameCn}} {{item.count}}</view>
+    </scroll-view>
+
+    <view class="search">
+      <input class="search-input" placeholder="在这个职业里搜，例如「英勇打击」" value="{{kw}}" bindinput="onKw" confirm-type="search" />
+      <view class="fav-btn" bindtap="onBackToClasses">全部职业</view>
+    </view>
+
+    <view class="muted colnote">{{className}} {{total}} 条 · {{fieldNote}}</view>
+
+    <view wx:if="{{!loaded}}" class="card muted">正在取{{className}}的法术…</view>
+    <view wx:if="{{loaded && !list.length}}" class="card empty">
+      <view>这个职业里没有匹配的法术。</view>
+      <view class="muted">换个词，或清空搜索框看全部 {{total}} 条。</view>
+    </view>
+
+    <view class="grp" wx:for="{{groups}}" wx:key="tab">
+      <view class="grp-h plate-soft">{{item.tab}}<text class="grp-n">{{item.rows.length}} 条</text></view>
+      <view class="sp {{expandedId === x.id ? 'sp-open' : ''}}" wx:for="{{item.rows}}" wx:for-item="x" wx:key="id">
+        <view class="sp-head" data-id="{{x.id}}" bindtap="onToggle">
+          <icon-cell src="{{x.iconUrl}}" size="sm" label="{{x.name}}" />
+          <view class="sp-main">
+            <view class="sp-name">{{x.name}}<text wx:if="{{x.relText}}" class="sp-rel">{{x.relText}}</text></view>
+            <view class="muted sp-meta">{{x.rankText}} · {{x.learnText}}</view>
+          </view>
+          <view class="sp-side">
+            <view wx:if="{{x.stateText}}" class="chip-st st-{{x.stateKey}}">{{x.stateText}}</view>
+            <view class="muted sp-src">{{x.prov.length}} 条来源</view>
+          </view>
+        </view>
+
+        <view wx:if="{{expandedId === x.id}}" class="sp-detail">
+          <view class="row detail-actions">
+            <view class="btn" data-id="{{x.id}}" catchtap="onCopy">复制这条</view>
+            <view class="spacer"></view>
+            <view class="badge badge-{{x.level}}">{{x.levelName}}</view>
+          </view>
+          <view wx:if="{{x.altText}}" class="altline">{{x.altText}}</view>
+          <view wx:if="{{x.ranks.length}}" class="lvlbox">
+            <view class="lvl-h">逐级学习等级</view>
+            <view class="lvl" wx:for="{{x.ranks}}" wx:key="spellId">
+              <text class="lvl-i">第 {{index + 1}} 级</text>
+              <text class="lvl-v">{{item.learnLevel}} 级可学</text>
+              <text class="muted lvl-id">编号 {{item.spellId}}</text>
+            </view>
+          </view>
+          <view wx:else class="muted">这一条还没有逐级记录，只显示上面那个数。</view>
+          <view class="prov" wx:for="{{x.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onOpenSource">
+            <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
+            <view class="muted prov-url">{{item.url}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{truncated}}" class="muted truncated">结果过多，仅显示前 {{list.length}} 条（共 {{truncated}} 条），请缩小关键词范围。</view>
+  </block>
+
+  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{buildId}}" class="muted build">批次 {{buildId}}</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

@@ -16,6 +16,7 @@
   </scroll-view>
   <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
     <view class="chip {{item.key === 'all' ? 'chip-all' : ''}} {{activeLevel === item.key ? 'chip-on' : ''}}" wx:for="{{levels}}" wx:key="key" data-level="{{item.key}}" bindtap="onLevel">{{item.label}} {{item.count}}</view>
+    <view class="chip chip-src" bindtap="onLoots">掉落反查 ›</view>
     <view class="chip chip-src" bindtap="onNote">数据从哪来</view>
   </scroll-view>
 

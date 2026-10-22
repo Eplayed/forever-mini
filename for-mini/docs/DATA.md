@@ -43,7 +43,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 
 ## 三、批次里每份文件长什么样
 
-指针 `manifest.json`（5,055 B，冷启动必取；示例取自 2026-10-21 R1 后的批次 `e38e5ae790d4`，
+指针 `manifest.json`（M02 后 7.0 KB，冷启动必取；示例取自 2026-10-22 的批次 `a6162e5f5e45`，
 里面的数会变，别抄成常量）：
 
 ```jsonc
@@ -56,16 +56,20 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
   "source": { "commit": "bedaa241", "inputs": [{ "rel": "src/data/dungeons.json", "bytes": 334535, "sha256": "…" }],
               "exportCheck": { "tool": "wow-forever-web/tools/export-mini.js", "reproduced": true,
                                "outputs": [{ "rel": "oss-preview/meta.json", "bytes": 1724, "sha256": "…" }] } },
-  "counts": { "dungeons": 38, "terms": 215, "files": 81, "bytes": 464300 },
+  "counts": { "dungeons": 38, "terms": 215, "spells": 498, "spellClasses": 9,
+              "lootRows": 1050, "lootItems": 1018, "files": 92, "bytes": 1050000 },
   "factDates": { "min": "2026-10-07", "latest": "2026-10-11",
                  "dungeonDetail": { "min": "2026-10-07", "max": "2026-10-11", "distinct": 4, "recordsWithoutDate": 1 } },
-  "droppedFields": [{ "field": "art", "reason": "…" }, { "field": "bosses[].portrait", "reason": "…" }],
-  "assetNote": "iconKey 只是图标键，图标文件没传 OSS",
+  "droppedFields": [],
+  "assets": { "dir": "assets/", "iconExt": ".jpg", "index": "assets/index.json",
+              "count": 1117, "bytes": 3531000, "missing": 0, "rule": "界面拼出来的地址只许落在 assets/ 下" },
   "integrity": { "method": "etag", "clientChecks": ["…五项校验的完整口径见下…"],
                  "whatItIsNot": "是传输/存储完整性校验，不是抗伪造的内容签名" },
   "pointer": { "key": "wow/beta/v1/manifest.json", "cacheControl": "public, max-age=60, must-revalidate" },
-  "fetch": { "meta": { "path": "builds/…/meta.json", "sha256": "…", "etag": "17952BBC…", "bytes": 1829, "records": 1 },
-             "glossary": { "…": "84,208 B / 215 条" }, "dungeonIndex": { "…": "25,809 B / 38 条" } },
+  "fetch": { "meta": { "path": "builds/…/meta.json", "sha256": "…", "etag": "17952BBC…", "md5": "…", "bytes": 1829, "records": 1 },
+             "glossary": { "…": "84,208 B / 215 条" }, "dungeonIndex": { "…": "29,077 B / 38 条" },
+             "spellClasses": { "…": "spells/classes.json，9 个职业" },
+             "lootIndex": { "…": "loots/index.json，1,050 行 / 118 KB" } },   // 五个入口，取哪个才多那一次 GET
   "bundle": { "path": "builds/e38e5ae790d4/files.json", "sha256": "0397629b…", "etag": "EAD6C901…", "bytes": 29516 }
 }
 ```
@@ -90,6 +94,34 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 掉落 `dungeons/loot/{id}.json`（均值 5.7 KB，最大 26.3 KB）＝ `{ …, kind: "dungeon-loot", dungeonId, level, lootNote, drops[] }`，
 `drops` 里只有物品事实字段，**没有百分比**。
 `meta.json` / `glossary.json` 现在也带 `schemaVersion / product / kind / buildId` 四个身份字段（业务字段一个没动）。
+
+### M02 新增的三份
+
+职业名单 `spells/classes.json`（约 4 KB / 9 条）＝ `{ …, kind: "spell-class-index", counts, fieldNote, classes[] }`，
+每个职业一条：`classId / nameCn / nameEn / iconKey / level / count / tabs[] / states / shardPath`
+加三个校验值 `shardEtag / shardMd5 / shardBytes`。客户端点开哪个职业才取那一片，校验值随名单下发。
+
+职业法术片 `spells/class/{classId}.json`（37–55 KB，九片）＝ `{ …, kind: "spell-class", classId, spells[] }`，
+`spells` 是该职业全部法术（名称、级数、起学等级、与经典旧世的对照状态、逐级 spellId、来源）。
+**没有技能描述，也没有循环建议**——导出层与分发层各拦一道（`oss-release-test.js` 有对应的红线断言）。
+
+掉落反查表 `loots/index.json`（118 KB / 1,050 行）＝ `{ …, kind: "loot-index", cols, dungeons[] }`。
+一行一个物品，用**位置数组**存：`cols` 写死六列 `["itemId","name","quality","iconKey","boss","level"]`，
+`boss` 是该座 `bosses[]` 里的序号，副本名与首领名一座只存一份。客户端按位置取值，
+所以"行长度等于列数"是构建端的硬卡口（少一列就会把首领序号当品质显示）。
+同一件装备出现在几座本就是几行，界面按 `itemId` 归并成"这件装备 → 哪几座本、哪个首领"。
+
+### 素材层（M02 起，图片不再"没传"）
+
+`wow/{env}/v1/assets/` 下三类：`icons/{iconKey}.jpg`、`art/dungeons/*.webp`、`art/bosses/*.webp`，
+外加一份 `assets/index.json` 台账（记每个对象的 sha256/etag/bytes/来源）。
+数据里的 `art` 与 `bosses[].portrait` 存的是**相对 assets/ 的路径**（`art/dungeons/x.webp`），
+图标只存 `iconKey`；绝对地址由客户端 `assetUrl()` / `iconUrl()` 拼，拼出来带 `img/`、`../` 或非 `assets/` 一律不给拼。
+发素材是独立一条命令：`WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js assets --env beta`。
+图片对象 immutable 一年、同名不许覆写；**台账是这批里唯一可重导的对象**（素材集一变它就得变，
+把它也按不可变拦会得到一条假冲突，2026-10-22 踩过）。
+反向卡口：批次里任何界面会拼出来的 `iconKey` / `art` / `portrait`，素材层没登记就直接构建失败——
+"缺登记 0 条"却线上 404 这种自欺（职业图标漏登记那次）不再可能。
 
 ## 三·五、客户端实际做的是哪五项校验（R1 改的就是这一层）
 
@@ -136,19 +168,25 @@ ETag 是"取回的字节是不是清单里那一份"的传输/存储完整性校
 ```bash
 cd wow-forever-web
 node tools/build-data.js                       # 1. 改 src/data 后必跑，非 0 就停
-node tools/export-mini.js                      # 2. src/data → for-mini/oss-preview/ 三份成品
+node tools/export-mini.js                      # 2. src/data → for-mini/oss-preview/ 四份成品（M02 起多了 spells.json）
 node tools/oss-release.js build --env beta --check-identity   # 3. 切批次 + 与真源逐字节对拍 + 复现性核对
+node tools/oss-release.js assets --env beta --dry-run         # 4. 先看素材层要传哪些（只读，不需要标记）
+WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js assets --env beta    # 4b. 发素材：图片不可变，台账可重导
 node tools/oss-release.js upload --env beta --dry-run         # 4. 先看会传哪些（只读，不需要标记）
 WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js upload --env beta        # 5. 传批次 → 逐文件校验 → 最后换指针
 node tools/oss-release.js verify --env beta                   # 6. 匿名回读比对哈希/ETag/字节/缓存头
 WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js upload --env release --yes-release  # 7. 内测过了才发线上
 node tools/oss-release.js list --env release                  # 8. 记下上一批 buildId（回滚位）
 WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js rollback --env release --to <buildId>  # 出事就指回去
-node tools/oss-release-test.js                 # 9. 动了产物结构就要跑，101 条断言全绿（本地夹具，不碰真 bucket）
+node tools/oss-release-test.js                 # 9. 动了产物结构就要跑，151 条断言全绿（本地夹具，不碰真 bucket）
+node tools/mini-m01-check.js                   # 10. 小程序端回归（A 快照 / B live / C 篡改 / D 契约 / E 交互 / F 断网 / G 首页）
+node tools/mini-m02-check.js                   # 11. M02 三个新面：技能速查、掉落反查、入口与包体（直连真 beta）
 ```
 
 第 3 步现在多了一道**源与产物对拍**：构建时在临时目录用同一份 `src/data` 重跑一遍 `export-mini.js`，
-三份 `oss-preview` 逐字节比一遍，不一致直接 rc=1（指针溯源写 A、实际发 B 这条路被堵死）。
+四份 `oss-preview` 逐字节比一遍，不一致直接 rc=1（指针溯源写 A、实际发 B 这条路被堵死）。
+对拍跑在临时目录里，`export-mini.js` 与 `oss-release.js` 会一起拷进去，**它俩读的文件也要一起拷**
+（2026-10-22 导出层新读了一份 `tools/copy-banned.json`，沙箱里少拷这一个文件，报错长成"没产出 oss-preview"，很误导）。
 第 5 步多了一道**不可变批次保护**：`builds/{buildId}/` 下已有同名对象而字节与本批不同时，报警停发、绝不覆盖，指针不动。
 第 9 步的反例覆盖：无标记的写命令 PUT/DELETE=0、上传第 N 个 PUT 失败后旧指针逐字节不变、
 回滚前目标批次缺件/哈希不符/清单 ID 不等于 `--to`/跨环境清单一律拒绝、`clean --env release` 缺 `--yes-release` 拒绝。
@@ -174,8 +212,10 @@ node tools/oss-release-test.js                 # 9. 动了产物结构就要跑�
    大字段（掉落、清单、图片）另开一级，别把整块塞进索引。分片粒度改了要顺手改 `BUDGET_KB`。
 2. 客户端只在 `oss-manifest.js` 里加一个 `loadXxx()`，不新写请求与缓存逻辑，页面不许自己拼 URL。
 3. `for-mini/oss-build/` 不进 git；`services/forever-data.js` 里那套平铺地址是过渡期的，新页面别再依赖它。
-4. 素材（原画、头像、图标）要单独一批：路径带来源分类与 manifest，示意图要就地标"不是游戏里的地图"，
-   并且不打进主包 —— 口径见仓库根 `AGENTS.md`，本轮没发。
+4. 素材（原画、头像、图标）走 `assets` 那条独立通道（M02 已发，见 §三）：路径带来源分类与 manifest，
+   示意图要就地标"不是游戏里的地图"，并且不打进主包 —— 口径见仓库根 `AGENTS.md`。
+   新界面要用一张图，就得在 `buildBatch()` 里 `useIcon()` / `useAsset()` 登记一次，
+   不登记会被反向卡口直接拦下（这是对的：漏登记的表现是玩家永远看到自绘占位块，不是报错）。
 5. 数据里缺字段一律显示「待实测」或「未记录」；`level=L0` 必须带官方或客户端解包来源，否则构建失败。
 
 ## 七、主包快照与预算（M01 起多了一份索引快照）
@@ -187,6 +227,11 @@ node tools/oss-release-test.js                 # 9. 动了产物结构就要跑�
 | `data/forever-glossary-snapshot.js` | 60 条词条（按 L0 优先、按类型/职业分散挑） | 23.8 KB |
 | `data/forever-meta-snapshot.js` | meta（覆盖率、缺口、规则） | 1.8 KB |
 | `data/forever-dungeon-snapshot.js` | **38 本副本索引全量**（断网首用也要有内容可搜） | 19.7 KB |
+
+M02 的技能（498 条 / 437 KB）与掉落反查（1,050 行 / 118 KB）**刻意不进主包**：
+60 KB 预算是给"断网也得有东西可查"的副本索引的，把这两块塞进来就会把索引挤掉，
+而且技能与掉落是更新最频繁的两块，打进包里等于每次改数都要发版。
+所以这两页断网时明说"要联网才能取"，不给半个职业冒充全部。
 
 副本索引快照与分发层的索引条目**逐字段一致**：`export-mini.js` 会 `require` 分发层的 `buildBatch()`，
 把两边的 `items` 摘掉批次相关字段后逐字节比一遍，对不上就拒绝出快照（`oss-release-test.js` 的 3·5 节拿两条反例守着：
@@ -205,6 +250,8 @@ FAKE_OSS_MODE=normal node wow-forever-web/tools/oss-fake-server.js    # 按真 H
 然后在开发者工具的小程序里把 storage 键 `wow_forever_v1_dev_origin` 设成 `http://127.0.0.1:8899`，
 `oss-manifest.js` 的 `origin()` 就会改打本地。这个键只可能由开发者手动写进 storage：
 真机上它不存在，而且微信线上域名白名单只放备案过的 https 域，`http://127.0.0.1` 在真机上根本发不出去。
-`tools/mini-m01-check.js` 就是照这条路把 A–F 六组场景跑一遍的脚本（含篡改、新版本、断网）。
+`tools/mini-m01-check.js` 就是照这条路把 A–G 七组场景跑一遍的脚本（含篡改、新版本、断网）。
+`tools/mini-m02-check.js` 走的是**真 beta**：M02 要验的就是素材与新分片在真环境里能不能被界面用上，
+用本地假 OSS 测等于没测；它顺带对每个图标 URL 发一次真实 HEAD，看的是 200 + `image/*`，不是"页面没报错"。
 换场景时**记得换端口**：批次文件的 `Cache-Control` 是 `immutable`，模拟器会照头缓存，
 同一 URL 换内容它看不到——那是缓存生效，不是校验失效。

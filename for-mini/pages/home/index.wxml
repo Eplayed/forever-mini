@@ -32,6 +32,18 @@
       <view class="entry-desc">按中文名搜官方译名，看英文原名与待补，一键复制。</view>
       <view class="entry-go">去查 →</view>
     </view>
+    <view class="entry plate" bindtap="goSpells">
+      <view class="entry-name">职业技能速查</view>
+      <view class="entry-num">{{counts.spells}}<text class="entry-unit">条</text></view>
+      <view class="entry-desc">按职业查法术书：级数、几级学会、和经典旧世比是新增还是改动。这一页要联网取。</view>
+      <view class="entry-go">去查 →</view>
+    </view>
+    <view class="entry plate" bindtap="goLoots">
+      <view class="entry-name">掉落反查</view>
+      <view class="entry-num">{{counts.lootRows}}<text class="entry-unit">条</text></view>
+      <view class="entry-desc">输入装备名或物品编号，查它是哪座本、哪个首领掉的。这一页要联网取。</view>
+      <view class="entry-go">去查 →</view>
+    </view>
   </view>
 
   <block wx:if="{{recent.length}}">

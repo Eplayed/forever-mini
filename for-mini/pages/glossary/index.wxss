@@ -33,6 +33,11 @@
   margin-bottom: 20rpx;
 }
 
+/* 虚线边＝这一格跳去别的页面，不是本页的筛选（与副本列表页同一约定） */
+.chip-src {
+  border-style: dashed;
+}
+
 
 
 .term {

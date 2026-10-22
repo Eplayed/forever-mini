@@ -1,0 +1,190 @@
+/* 控件与副本/速查/技能三页同一套（小程序页面样式各自隔离，只能各写一份定义）；
+   颜色一律走 app.wxss 的令牌，品质色用 --q0…--q5，与网页端同一组值。 */
+
+.lead {
+  padding: 22rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+
+.lead-t {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.lead-s {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--txt-muted);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.search-input {
+  flex: 1;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  color: var(--txt);
+  font-size: 26rpx;
+}
+
+.fav-btn {
+  margin-left: 14rpx;
+  padding: 12rpx 18rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.it {
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+}
+
+.it-open {
+  border-color: var(--gold-line);
+}
+
+.it-head {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 16rpx;
+}
+
+.it-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 14rpx;
+}
+
+.it-name {
+  font-size: 27rpx;
+  color: var(--txt);
+}
+
+.it-meta {
+  margin-top: 4rpx;
+  font-size: 21rpx;
+  display: flex;
+  align-items: center;
+}
+
+.q {
+  margin-right: 12rpx;
+  padding-left: 12rpx;
+  border-left: 4rpx solid var(--line-2);
+  line-height: 1.3;
+}
+
+.q-1 {
+  border-color: var(--q1);
+  color: var(--q1);
+}
+
+.q-2 {
+  border-color: var(--q2);
+  color: var(--q2);
+}
+
+.q-3 {
+  border-color: var(--q3);
+  color: var(--q3);
+}
+
+.q-4 {
+  border-color: var(--q4);
+  color: var(--q4);
+}
+
+.q-5 {
+  border-color: var(--q5);
+  color: var(--q5);
+}
+
+.it-id {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 20rpx;
+}
+
+.it-side {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 10rpx;
+}
+
+.it-n {
+  margin-top: 4rpx;
+  font-size: 19rpx;
+}
+
+.it-detail {
+  padding: 12rpx 16rpx 14rpx;
+  border-top: 1rpx solid var(--line);
+  background: var(--panel-2);
+}
+
+.src {
+  position: relative;
+  padding: 12rpx 14rpx;
+  margin-bottom: 8rpx;
+  background: var(--sunk);
+  border-radius: 10rpx;
+}
+
+.src-d {
+  font-size: 25rpx;
+  color: var(--txt-title);
+}
+
+.src-b {
+  margin-top: 2rpx;
+  font-size: 21rpx;
+}
+
+.src-go {
+  position: absolute;
+  right: 14rpx;
+  top: 20rpx;
+  font-size: 21rpx;
+  color: var(--gold);
+}
+
+.it-actions {
+  margin-top: 10rpx;
+}
+
+.it-actions .btn {
+  background: transparent;
+}
+
+.todo {
+  margin-left: 8rpx;
+  padding: 1rpx 8rpx;
+  border: 1rpx dashed var(--warn);
+  border-radius: 4rpx;
+  font-size: 18rpx;
+  color: var(--txt-caution);
+}
+
+.disc {
+  margin: 16rpx 0 8rpx;
+  font-size: 21rpx;
+  line-height: 1.6;
+}
+
+.truncated,
+.build {
+  margin: 12rpx 0;
+  font-size: 21rpx;
+}

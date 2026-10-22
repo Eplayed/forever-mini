@@ -17,6 +17,10 @@
     </view>
 
     <view class="hero">
+      <view class="hero-art">
+        <icon-cell src="{{artUrl}}" size="hero" fallback-text="这座还没有原画" />
+        <view wx:if="{{artUrl}}" class="art-note">{{artNote}}</view>
+      </view>
       <view class="hero-title">
         {{title}}
         <text wx:if="{{nameMissing}}" class="todo">中文名待核</text>
@@ -60,6 +64,10 @@
       <view wx:elif="{{needOnline}}" class="muted">首领名单要联网才能取（现在只有列表里就有的字段）。</view>
       <view wx:elif="{{bosses.length === 0}}" class="muted">这座还没有首领记录，不猜。</view>
       <view class="boss" wx:for="{{bosses}}" wx:key="index">
+        <view class="boss-face">
+          <icon-cell wx:if="{{item.hasPortrait}}" src="{{item.portraitUrl}}" size="md" label="{{item.name}}" fallback-text="没有这张头像" />
+          <view wx:else class="face-none">没有这张头像</view>
+        </view>
         <view class="boss-main">
           <text class="boss-name">{{item.name}}</text>
           <text wx:if="{{item.missing}}" class="todo">待核</text>
@@ -75,7 +83,10 @@
       <view wx:elif="{{drops.length === 0}}" class="muted">这座还没有掉落记录，不猜。</view>
       <view wx:else>
         <view class="drop" wx:for="{{drops}}" wx:key="index">
-          <view class="drop-main">
+          <view class="drop-face">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name}}" />
+        </view>
+        <view class="drop-main">
             <text class="drop-name">{{item.name}}</text>
             <text class="muted drop-boss">{{item.boss ? '出自 ' + item.boss : '首领未标注'}}</text>
           </view>
