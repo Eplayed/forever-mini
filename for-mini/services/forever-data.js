@@ -90,6 +90,20 @@ function loadSpellClass(item, batch) {
   return oss.loadSpellClass(item, batch).then(shape)
 }
 
+/* 职业卡（M03）：种族+职业+矩阵一份索引；天赋按职业分片，点开哪个职业取哪份。
+   天赋树只读：门槛没核到之前界面只摆位，不做解锁判定（根 AGENTS.md 第五条）。 */
+function loadClassIndex() {
+  return oss.loadKey('classIndex').then(shape)
+}
+
+function loadTalentClass(item, batch) {
+  return oss.loadTalentClass(item, batch).then(shape)
+}
+
+function loadGuide() {
+  return oss.loadKey('guide').then(shape)
+}
+
 /* 掉落反查（M02-3）：一整个 118 KB 的表换"任何一件装备都能查"，
    同样不打进主包，断网必须说"这张表要联网"。 */
 function loadLootIndex() {
@@ -180,11 +194,14 @@ module.exports = {
   loadDungeonDetail,
   loadDungeonIndex,
   loadDungeonLoot,
+  loadClassIndex,
   loadGlossary,
+  loadGuide,
   loadLootIndex,
   loadMeta,
   loadSpellClass,
   loadSpellClasses,
+  loadTalentClass,
   noteRecentDungeon,
   toggleFavorite,
   toggleFavoriteDungeon

@@ -34,6 +34,10 @@ Page({
     bossEmpty: '',
     artUrl: '',
     artNote: ART_NOTE,
+    mapUrl: '',
+    mapZone: '',
+    mapEntry: '',
+    mapDrawn: false,
     drops: [],
     prov: [],
     provOpen: false,
@@ -42,6 +46,7 @@ Page({
   },
 
   onLoad(query) {
+    this.dropQuery = String((query && query.drop) || '')
     this.setData({ id: pickId(query) })
     this.start()
   },
@@ -108,7 +113,15 @@ Page({
           }
           /* lootNote 是方法论长段（谁取的、怎么推的），玩家面不上；
              掉落那一节的标题已经写了"按经典旧世公开数据库推的，本站不写几率"。 */
-          this.setData({ artUrl: oss.assetUrl(this.batch, g.art) })
+          const geo = g.geo || null
+          this.setData({
+            artUrl: oss.assetUrl(this.batch, g.art),
+            mapUrl: geo && geo.map ? oss.assetUrl(this.batch, geo.map) : '',
+            mapZone: geo ? (geo.zone || '') : '',
+            mapEntry: geo && geo.entryX !== null && geo.entryX !== undefined
+              ? '入口约在 ' + geo.zone + ' ' + geo.entryX + ', ' + geo.entryY : '',
+            mapDrawn: geo && geo.mapKind === 'addon-drawn'
+          })
         }
         this.setData({
           rows: merged,
@@ -127,11 +140,15 @@ Page({
             checkedAt: p.checkedAt || '未记录'
           })) : [],
           drops: l.data ? (l.data.drops || []).map((x) => ({
+            itemId: String(x.itemId || ''),
             name: x.nameCn || x.itemId,
             boss: x.bossCn || '',
             quality: QUALITY[x.quality] || '未说明',
             iconUrl: oss.iconUrl(this.batch, x.iconKey)
           })) : [],
+          dropGroups: this.groupDrops(l.data ? (l.data.drops || []) : []),
+          highlightDrop: this.dropQuery || '',
+          dropNotice: this.dropQuery ? '你从掉落反查过来：下面高亮的是你查的那件。' : '',
           detailSource: d.source,
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',
@@ -144,6 +161,25 @@ Page({
 
   /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
      （＝玩家点"回到副本列表"没反应），必须 switchTab */
+  /* 掉落按首领分组：玩家问的是"这个 boss 掉什么"，不是一条平铺的长单子。
+     没标首领的归到"没标首领"一组，不偷偷塞进第一组。 */
+  groupDrops(drops) {
+    const order = []
+    const byBoss = {}
+    drops.forEach((x) => {
+      const b = x.bossCn || '没标首领'
+      if (!byBoss[b]) { byBoss[b] = []; order.push(b) }
+      byBoss[b].push({
+        itemId: String(x.itemId || ''),
+        name: x.nameCn || x.itemId || '（中文名待核）',
+        missing: !x.nameCn,
+        quality: QUALITY[x.quality] || '未说明',
+        iconUrl: oss.iconUrl(this.batch, x.iconKey)
+      })
+    })
+    return order.map((b) => ({ boss: b, rows: byBoss[b] }))
+  },
+
   onProvToggle() {
     this.setData({ provOpen: !this.data.provOpen })
   },

@@ -47,7 +47,7 @@
     </view>
 
     <view wx:if="{{expandedId === item.id}}" class="it-detail">
-      <view class="src" wx:for="{{item.sources}}" wx:for-item="s" wx:key="dungeonId" data-id="{{s.dungeonId}}" catchtap="onOpenDungeon">
+      <view class="src" wx:for="{{item.sources}}" wx:for-item="s" wx:key="dungeonId" data-id="{{s.dungeonId}}" data-item="{{item.id}}" catchtap="onOpenDungeon">
         <view class="src-d">{{s.dungeon}}<text wx:if="{{s.dungeonMissing}}" class="todo">本名待核</text></view>
         <view class="muted src-b">出自 {{s.boss}}</view>
         <view class="muted src-go">看这座本 ›</view>

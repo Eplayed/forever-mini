@@ -65,7 +65,9 @@ const WRITE_MARK = 'WOW_ALLOW_CROSS_CREDS';
 
 /* 单文件体积上限：超了就是分片粒度错了，宁可构建失败也别把大文件推给手机 */
 const BUDGET_KB = {
-  manifest: 8,
+  /* 指针从 3 个入口长到 7 个（M02 加技能/掉落，M03 加职业/指南），
+     8 KB 是三个入口时代定的；冷启动真正要守的是"指针+副本索引+meta ≤ 40 KB"那条。 */
+  manifest: 12,
   bundle: 64,
   'dungeons/index': 40,
   meta: 8,
@@ -74,7 +76,10 @@ const BUDGET_KB = {
   loot: 64,
   'spells/classes': 12,
   spellClass: 64,
-  'loots/index': 192
+  'loots/index': 192,
+  'classes/index': 64,
+  talentClass: 64,
+  guide: 32
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -166,7 +171,7 @@ function indexEntry(d, useAsset) {
   };
 }
 
-function detailRecord(d, useAsset) {
+function detailRecord(d, useAsset, geo) {
   const out = {};
   Object.keys(d).forEach((k) => {
     if (k === 'drops') return;
@@ -183,6 +188,18 @@ function detailRecord(d, useAsset) {
   }
   out.dropCount = (d.drops || []).length;
   out.lootPath = 'dungeons/loot/' + d.id + '.json';
+  /* 副本地图（M03）：入口在哪个区、坐标多少，内部底图走素材层。
+     底图分两种来源，addon-drawn 的那几座界面必须就地标"示意图"（根 AGENTS.md）。 */
+  const g = geo ? geo[d.id] : null;
+  if (g) {
+    out.geo = {
+      zone: (g.entry && g.entry.zone) || null,
+      entryX: g.entry && g.entry.x !== undefined && g.entry.x !== null ? g.entry.x : null,
+      entryY: g.entry && g.entry.y !== undefined && g.entry.y !== null ? g.entry.y : null,
+      mapKind: g.bossMapKind || null,
+      map: g.bossMap ? useAsset(g.bossMap, d.id + '.map') : null
+    };
+  }
   return out;
 }
 
@@ -190,7 +207,7 @@ function detailRecord(d, useAsset) {
    不这么办的话，指针溯源写的是 A（src/data 的哈希），发出去的却是 B（有人手改过的
    oss-preview），两边一致只证明一致，不证明它来自基底。 */
 function reExportCompare() {
-  const rels = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json'];
+  const rels = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ossxchk-'));
   try {
     const web = path.join(tmp, 'wow-forever-web');
@@ -244,7 +261,10 @@ function buildBatch(env, opts) {
   const metaSrc = path.join(prev, 'meta.json');
   const dungeonsSrc = path.join(prev, 'dungeons.json');
   const spellsSrc = path.join(prev, 'spells.json');
-  [glossarySrc, metaSrc, dungeonsSrc, spellsSrc].forEach((p) => {
+  const classesSrc = path.join(prev, 'classes.json');
+  const talentsSrc = path.join(prev, 'talents.json');
+  const guideSrc = path.join(prev, 'guide.json');
+  [glossarySrc, metaSrc, dungeonsSrc, spellsSrc, classesSrc, talentsSrc, guideSrc].forEach((p) => {
     if (!fs.existsSync(p)) errors.push('缺少导出产物 ' + path.relative(REPO, p) + '，先跑 node tools/export-mini.js');
   });
   if (errors.length) return { errors };
@@ -254,6 +274,9 @@ function buildBatch(env, opts) {
   const dungeons = readJson(dungeonsSrc);
   const spells = readJson(spellsSrc);
   const spellList = spells.spells || [];
+  const classPack = readJson(classesSrc);
+  const talentPack = readJson(talentsSrc);
+  const guidePack = readJson(guideSrc);
 
   /* 素材登记表：这一批真引用到、且本地确实在的文件 */
   const assetUse = {};
@@ -279,6 +302,9 @@ function buildBatch(env, opts) {
     assetUse[rel] = statAsset(rel);
   };
   const list = [].concat(dungeons.newDungeons || [], dungeons.classicDungeons || [], dungeons.raids || []);
+  const geoPath = path.join(siteData(), 'dungeon-geo.json');
+  const geoPack = fs.existsSync(geoPath) ? readJson(geoPath) : null;
+  const geoById = (geoPack && geoPack.dungeons) || {};
 
   /* —— 卡口（与根 AGENTS.md 第五条同一口径，导出这层再拦一次） —— */
   if (!list.length) errors.push('副本 0 条');
@@ -308,7 +334,7 @@ function buildBatch(env, opts) {
     if (!(spells.classes || []).some((c) => c.classId === s.classId)) errors.push('法术 ' + s.id + '：所属职业不在职业名单里，这条永远不会被读到');
   });
 
-  const srcFiles = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json'].map((f) => {
+  const srcFiles = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json'].map((f) => {
     const abs = path.join(siteData(), f);
     if (!fs.existsSync(abs)) { errors.push('找不到基底文件 src/data/' + f); return null; }
     const buf = fs.readFileSync(abs);
@@ -367,7 +393,7 @@ function buildBatch(env, opts) {
 
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
-    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/src/data/dungeons.json', dungeon: detailRecord(d, useAsset) };
+    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/src/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
     pushObj('dungeonDetail:' + d.id, 'dungeons/detail/' + d.id + '.json', det, {
       records: 1, budget: 'detail', facts: collectFactDates([d])
     });
@@ -424,6 +450,93 @@ function buildBatch(env, opts) {
   };
   pushObj('spellClasses', 'spells/classes.json', spellIndexObj, {
     records: spellGroups.length, budget: 'spells/classes', facts: collectFactDates(spellList)
+  });
+
+  /* —— 职业卡（M03）：种族+职业+可选矩阵一份索引，天赋按职业切片 ——
+     天赋树只读：节点带 tier/column 坐标就够摆位了，rules.tierUnlockCost **不下发**——
+     门槛没核到之前界面不许做解锁判定（根 AGENTS.md 第五条），把数发下去等于递刀子。 */
+  const raceList = classPack.races || [];
+  const classList = classPack.classes || [];
+  const talentByClass = {};
+  (talentPack.classes || []).forEach((t) => { talentByClass[t.classId] = t; });
+  raceList.forEach((r) => {
+    /* 种族身上挂图标的地方不止一处：种族图标、特质、子群（同盟/天裔）自己的特质。
+       漏一个就是 2026-10-22 那次"缺登记 0 条却线上 404"的同一种错，所以整棵递归登记。 */
+    const walkIcons = (node) => {
+      if (Array.isArray(node)) { node.forEach(walkIcons); return; }
+      if (!node || typeof node !== 'object') return;
+      Object.keys(node).forEach((k) => {
+        if (k === 'iconKey' && typeof node[k] === 'string' && node[k]) useIcon(node[k], 'classes/index');
+        else walkIcons(node[k]);
+      });
+    };
+    walkIcons(r);
+  });
+  const talentGroups = classList.map((c) => {
+    const t = talentByClass[c.classId] || null;
+    if (t) {
+      (t.trees || []).forEach((tr) => (tr.nodes || []).forEach((n) => useIcon(n.iconKey, 'talents/class/' + c.classId)));
+    }
+    return { c, t };
+  });
+  talentGroups.forEach((g) => {
+    if (!g.t) return;
+    const obj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'talent-class',
+      classId: g.c.classId, nameCn: g.t.classNameCn || g.c.nameCn || null,
+      grid: g.t.grid || null,
+      structureStatus: g.t.structureStatus || null,
+      structureSources: g.t.structureSources || [],
+      note: g.t.note || (talentPack.meta || {}).note || '',
+      trees: (g.t.trees || []).map((tr) => ({
+        id: tr.id, nameCn: tr.nameCn || null, nameEn: tr.nameEn || null,
+        nameConflict: tr.nameConflict || false, nameAlt: tr.nameAlt || null,
+        nodes: (tr.nodes || []).map((n) => ({
+          id: n.id, tier: n.tier, column: n.column, maxRanks: n.maxRanks,
+          nameCn: n.nameCn || null, nameConflict: n.nameConflict || false,
+          iconKey: n.iconKey || null, requires: n.requires || [], level: n.level || 'L3'
+        }))
+      }))
+    };
+    pushObj('talentClass:' + g.c.classId, 'talents/class/' + g.c.classId + '.json', obj, {
+      records: obj.trees.reduce((s2, tr) => s2 + tr.nodes.length, 0), budget: 'talentClass', facts: collectFactDates([])
+    });
+  });
+  const classIndexObj = {
+    schemaVersion: SCHEMA_VERSION,
+    product: PRODUCT,
+    kind: 'class-index',
+    source: 'wow-forever-web/src/data/races.json + classes.json + talents/',
+    comboNote: classPack.meta ? classPack.meta.comboNote : '',
+    counts: {
+      races: raceList.length,
+      classes: classList.length,
+      combos: (classPack.combos || []).length,
+      talentNodes: talentGroups.reduce((s2, g) => s2 + (g.t ? g.t.trees.reduce((a2, tr) => a2 + (tr.nodes || []).length, 0) : 0), 0)
+    },
+    factions: classPack.factions || [],
+    races: raceList.map((r) => ({
+      id: r.id, nameCn: r.nameCn || null, nameEn: r.nameEn || null, faction: r.faction || null,
+      iconKey: r.iconKey || null, level: r.level || 'L3', subgroup: r.subgroup || null,
+      classes: r.classes || [],
+      traits: (r.traits || []).map((t) => ({ name: t.name, passive: !!t.passive, effect: t.effect || '', iconKey: t.iconKey || null }))
+    })),
+    classes: classList.map((c) => ({
+      classId: c.classId, nameCn: c.nameCn || null, nameEn: c.nameEn || null, iconKey: c.iconKey || null,
+      level: c.level || 'L3',
+      spellCount: (spellGroups.filter((g) => g.c.classId === c.classId)[0] || { rows: [] }).rows.length,
+      hasTalents: !!talentByClass[c.classId],
+      shardPath: talentByClass[c.classId] ? 'talents/class/' + c.classId + '.json' : null
+    })),
+    combos: classPack.combos || [],
+    conflicts: classPack.conflicts || []
+  };
+  pushObj('classIndex', 'classes/index.json', classIndexObj, {
+    records: classIndexObj.counts.races + classIndexObj.counts.classes, budget: 'classes/index', facts: collectFactDates(raceList)
+  });
+  const guideObj = Object.assign({ schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'guide' }, guidePack);
+  pushObj('guide', 'guide.json', guideObj, {
+    records: (guidePack.macros || []).length + (guidePack.addons || []).length, budget: 'guide', facts: collectFactDates([])
   });
 
   /* —— 掉落反查（M02-3）：整座站的掉落摊成一张"这件装备哪座本掉"的表 ——
@@ -523,6 +636,12 @@ function buildBatch(env, opts) {
     const sm = md5Of(sBuf);
     it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
   });
+  classIndexObj.classes.forEach((it) => {
+    if (!it.shardPath) return;
+    const tBuf = dump(byKey['talentClass:' + it.classId].obj);
+    const tm = md5Of(tBuf);
+    it.shardEtag = tm.etag; it.shardMd5 = tm.md5; it.shardBytes = tBuf.length;
+  });
 
   /* 素材层的反向卡口：凡是界面会拼出来的地址（iconKey / art / portrait），
      这一批必须登记过。漏登记不会让谁报错，只会让玩家永远看到自绘占位块——
@@ -614,6 +733,10 @@ function buildBatch(env, opts) {
       spellClasses: spellGroups.length,
       lootRows: lootObj.counts.rows,
       lootItems: lootObj.counts.items,
+      races: classIndexObj.counts.races,
+      classes: classIndexObj.counts.classes,
+      macros: (guidePack.macros || []).length,
+      addons: (guidePack.addons || []).length,
       files: entries.length + 2,
       bytes: entries.reduce((s, e) => s + e.bytes, 0) + bundleBuf.length
     },
@@ -657,7 +780,9 @@ function buildBatch(env, opts) {
       glossary: shared(pickFile('glossary')),
       dungeonIndex: shared(pickFile('dungeonIndex')),
       spellClasses: shared(pickFile('spellClasses')),
-      lootIndex: shared(pickFile('lootIndex'))
+      lootIndex: shared(pickFile('lootIndex')),
+      classIndex: shared(pickFile('classIndex')),
+      guide: shared(pickFile('guide'))
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };

@@ -1,0 +1,67 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，天赋可能显示不全。请更新「无限资料」后再看。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
+    现在没连上线，天赋树要联网取。
+  </view>
+
+  <view class="head plate">
+    <icon-cell src="{{iconUrl}}" size="md" label="{{nameCn}}" />
+    <view class="head-main">
+      <view class="head-name">{{nameCn}}</view>
+      <view class="muted head-en">{{nameEn}}</view>
+    </view>
+    <button class="btn btn-share" open-type="share">分享</button>
+  </view>
+
+  <view wx:if="{{!loaded}}" class="card muted">正在取这个职业…</view>
+
+  <block wx:if="{{loaded}}">
+    <view class="sec">
+      <view class="sec-t">可以练这个职业的种族</view>
+      <view wx:if="{{!races.length}}" class="card empty">
+        <view>名单里没有种族能练这个职业。</view>
+        <view class="muted">这可能是新增组合还没核到，不猜。</view>
+      </view>
+      <view class="race-row" wx:for="{{races}}" wx:key="id">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.nameCn}}" />
+        <view class="race-name">{{item.nameCn}}<text wx:if="{{item.subgroup}}" class="race-sub">{{item.subgroup}}</text></view>
+        <view class="muted race-fac">{{item.factionText}}</view>
+      </view>
+    </view>
+
+    <view class="sec">
+      <view class="sec-t">技能书</view>
+      <view class="btn gold" bindtap="onSpells">看{{nameCn}}的法术书 →</view>
+    </view>
+
+    <view class="sec">
+      <view class="sec-t">天赋树</view>
+      <view wx:if="{{!talentLoaded}}" class="card muted">正在取天赋树…</view>
+      <view wx:elif="{{!trees.length}}" class="card empty">
+        <view>这个职业的天赋树还没有整理好。</view>
+        <view class="muted">核到位之前这里不摆猜出来的树。</view>
+      </view>
+      <block wx:else>
+        <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+          <view class="chip {{treeTab === index ? 'chip-on' : ''}}" wx:for="{{trees}}" wx:key="name" data-i="{{index}}" bindtap="onTreeTab">{{item.name}}</view>
+        </scroll-view>
+        <view class="tree">
+          <view class="trow" wx:for="{{trees[treeTab].rows}}" wx:key="tier">
+            <view class="tcell {{cell.missing ? 'tcell-miss' : ''}}" wx:for="{{item.cells}}" wx:for-item="cell" wx:key="id" data-id="{{cell.id}}" bindtap="onNode">
+              <icon-cell src="{{cell.iconUrl}}" size="sm" label="{{cell.name}}" />
+              <view class="tname">{{cell.name}}</view>
+              <view class="muted trank">{{cell.ranks}} 级</view>
+            </view>
+            <view class="tcell tcell-empty" wx:for="{{4 - item.cells.length}}" wx:key="*this"></view>
+          </view>
+        </view>
+        <view class="muted tree-note">一格＝一个天赋，点它看级数上限与前置。只摆位置和名字，加点门槛核到之前不做解锁判定。{{note}}</view>
+      </block>
+    </view>
+  </block>
+
+  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

@@ -1,0 +1,60 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，指南可能显示不全。请更新「无限资料」后再看。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
+    现在没连上线，指南要联网取。
+  </view>
+
+  <view class="lead plate">
+    <view class="lead-t">指南</view>
+    <view class="lead-s">{{boundaries}}</view>
+  </view>
+
+  <view wx:if="{{!loaded}}" class="card muted">正在取指南…</view>
+
+  <block wx:if="{{loaded}}">
+    <view wx:if="{{!macros.length && !addons.length}}" class="card empty">
+      <view>这一节还在整理。</view>
+      <view class="muted">宏与插件名单要逐条标作者和原帖才会上来，指不出谁写的按待核不发布。练级攻略还没开始写。</view>
+    </view>
+
+    <view wx:if="{{macros.length}}" class="sec">
+      <view class="sec-t">宏命令</view>
+      <view class="gcard" wx:for="{{macros}}" wx:key="id">
+        <view class="gname">{{item.name}}</view>
+        <view wx:if="{{item.use}}" class="muted guse">{{item.use}}</view>
+        <view class="gtext">{{item.text}}</view>
+        <view class="row gactions">
+          <view class="btn" data-id="{{item.id}}" catchtap="onCopyMacro">复制宏文本</view>
+          <view class="spacer"></view>
+          <view class="muted gauthor">{{item.author}}</view>
+        </view>
+        <view class="prov" wx:for="{{item.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onCopyUrl">
+          <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
+          <view class="muted prov-url">{{item.url}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{addons.length}}" class="sec">
+      <view class="sec-t">插件名单</view>
+      <view class="gcard" wx:for="{{addons}}" wx:key="id">
+        <view class="gname">{{item.name}}<text class="muted gauthor">　{{item.author}}</text></view>
+        <view wx:if="{{item.use}}" class="muted guse">{{item.use}}</view>
+        <view class="row gactions">
+          <view class="btn" data-url="{{item.url}}" catchtap="onCopyUrl">复制原帖地址</view>
+          <view class="spacer"></view>
+        </view>
+        <view class="prov" wx:for="{{item.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onCopyUrl">
+          <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
+          <view class="muted prov-url">{{item.url}}</view>
+        </view>
+      </view>
+      <view class="muted addon-note">插件为第三方作者作品，与本站无关，安装与使用风险自负。本站不分发插件本体。</view>
+    </view>
+  </block>
+
+  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

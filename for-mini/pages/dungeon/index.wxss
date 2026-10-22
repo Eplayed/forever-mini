@@ -277,3 +277,42 @@
   font-size: 22rpx;
   font-weight: 400;
 }
+
+/* 掉落按首领分组 + 反查高亮（M03） */
+.dgrp {
+  margin-bottom: 16rpx;
+}
+
+.dgrp-h {
+  padding: 8rpx 14rpx;
+  margin-bottom: 6rpx;
+  background: var(--panel-2);
+  border-left: 4rpx solid var(--gold);
+  font-size: 24rpx;
+  color: var(--gold-hi);
+}
+
+.drop-notice {
+  margin-bottom: 12rpx;
+}
+
+.drop-hit {
+  border: 1rpx solid var(--gold);
+  background: var(--gold-glow);
+  border-radius: 10rpx;
+}
+
+/* 副本地图（M03） */
+.map-box {
+  margin-bottom: 10rpx;
+}
+
+.map-note {
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.map-entry {
+  font-size: 22rpx;
+}

@@ -1,0 +1,70 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，职业与天赋可能显示不全。请更新「无限资料」后再看。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
+    现在没连上线，这一页要联网取种族与天赋，先显示上次存下的内容（如果有）。
+  </view>
+
+  <view class="lead plate">
+    <view class="lead-t">职业</view>
+    <view class="lead-s">九个职业的技能书与天赋树，以及每个种族能练什么。天赋树只摆位置和级数上限，加点门槛核到之前不做解锁判定。</view>
+  </view>
+
+  <view wx:if="{{!loaded}}" class="card muted">正在取职业与种族名单…</view>
+
+  <view class="cgrid">
+    <view class="ccard" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPickClass">
+      <view class="crow">
+        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
+        <view class="cmain">
+          <view class="cname">{{item.nameCn}}</view>
+          <view class="cen">{{item.nameEn}}</view>
+        </view>
+      </view>
+      <view class="crow crow2">
+        <text class="csub">{{item.hasTalents ? '技能书 · 天赋树' : '技能书'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{combos.length}}" class="sec">
+    <view class="sec-t">无限新增的组合</view>
+    <view class="combo" wx:for="{{combos}}" wx:key="label" data-id="{{item.classId}}" bindtap="onPickClass">
+      <text>{{item.label}}</text>
+      <text class="muted combo-go">看这个职业 ›</text>
+    </view>
+  </view>
+
+  <view class="sec">
+    <view class="sec-t">种族</view>
+    <view class="race {{expandedRace === item.id ? 'race-open' : ''}}" wx:for="{{races}}" wx:key="id">
+      <view class="race-head" data-id="{{item.id}}" bindtap="onRaceToggle">
+        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
+        <view class="race-main">
+          <view class="race-name">{{item.nameCn}}<text wx:if="{{item.subgroup}}" class="race-sub">{{item.subgroup}}</text></view>
+          <view class="muted race-meta">{{item.factionText}}</view>
+        </view>
+        <view class="muted race-go">{{expandedRace === item.id ? '收起 ‹' : '能练什么 ›'}}</view>
+      </view>
+      <view wx:if="{{expandedRace === item.id}}" class="race-body">
+        <view class="pick">
+          <view class="pick-t">可选职业</view>
+          <view class="pick-row">
+            <view class="chip" wx:for="{{item.classList}}" wx:for-item="cc" wx:key="classId" data-id="{{cc.classId}}" catchtap="onPickClass">{{cc.nameCn}}</view>
+          </view>
+        </view>
+        <view wx:if="{{item.traits.length}}" class="pick">
+          <view class="pick-t">种族特长</view>
+          <view class="trait" wx:for="{{item.traits}}" wx:key="name">
+            <view class="trait-name">{{item.name}}<text wx:if="{{item.passive}}" class="muted trait-passive">被动</text></view>
+            <view class="muted trait-eff">{{item.effect}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

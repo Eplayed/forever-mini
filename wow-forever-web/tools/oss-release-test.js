@@ -255,13 +255,14 @@ const oss = require(MINI_SERVICE);
     '缺 ' + withArt.filter((it) => !Object.prototype.hasOwnProperty.call(builtAssets, it.art)).slice(0, 2).join(','));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
      等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
-  /* 2 入口清单（meta+glossary）+ 副本索引 + 副本×2 + 职业名单 + 职业片 + 掉落反查表 */
-  const expectFiles = 2 + idx.items.length * 2 + man.counts.spellClasses + 3;
-  ok('bundle 收了每个数据文件一条（meta+glossary+副本索引+副本 ' + idx.items.length + '×2+职业名单+职业片 ' + man.counts.spellClasses + '+掉落表）',
+  /* 7 个入口（meta/glossary/副本索引/职业名单/掉落表/职业索引/指南）+ 副本×2 + 法术片 + 天赋片 */
+  const expectFiles = 7 + idx.items.length * 2 + man.counts.spellClasses + man.counts.classes;
+  ok('bundle 收了每个数据文件一条（7 入口 + 副本 ' + idx.items.length + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes + '）',
     Object.keys(bundle.files).length === expectFiles,
     Object.keys(bundle.files).length + ' ≠ ' + expectFiles);
   const ptrPath = path.join(good.envDir, 'oss-build', 'beta', 'manifest.json');
-  ok('指针清单 ≤ 8 KB（冷启动代价）', man.counts.bytes > 0 && fs.statSync(ptrPath).size <= 8 * 1024,
+  ok('指针清单不超 manifest 预算（入口从 3 个长到 7 个后预算 12 KB）',
+    man.counts.bytes > 0 && fs.statSync(ptrPath).size <= ossTool.BUDGET_KB.manifest * 1024,
     String(fs.statSync(ptrPath).size));
   ok('批次里没有站内相对路径（img/ src/ 一律不许下发）',
     !/"(img|src|static)\//.test(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', 'ragefire-chasm.json'), 'utf8')));
@@ -308,14 +309,16 @@ const oss = require(MINI_SERVICE);
   ok('溯源写明了导出对拍（每份基底都有一条逐字节一致的产物）',
     man.source && man.source.exportCheck && man.source.exportCheck.reproduced === true
       && man.source.exportCheck.outputs.length === man.source.inputs.length
-      && man.source.exportCheck.outputs.every((o) => /^oss-preview\/(meta|glossary|dungeons|spells)\.json$/.test(o.rel) && o.sha256 && o.bytes > 0),
+      && man.source.exportCheck.outputs.every((o) => /^oss-preview\/(meta|glossary|dungeons|spells|classes|talents|guide)\.json$/.test(o.rel) && o.sha256 && o.bytes > 0),
     JSON.stringify(man.source && man.source.exportCheck));
   process.stdout.write('  · 副本首屏实际字节：meta ' + man.fetch.meta.bytes + 'B + 索引 '
     + man.fetch.dungeonIndex.bytes + 'B + 指针 ' + fs.statSync(ptrPath).size + 'B = '
     + ((fs.statSync(ptrPath).size + man.fetch.dungeonIndex.bytes + man.fetch.meta.bytes) / 1024).toFixed(1)
     + ' KB，GET 3 次；整份 dungeons.json 326.7 KB。技能与词条各算各的入口，取一页才多一次 GET\n');
   const coldBytes = fs.statSync(ptrPath).size + man.fetch.dungeonIndex.bytes + man.fetch.meta.bytes;
-  ok('副本首屏代价仍 ≤ 40 KB（指针变大就等于冷启动变慢）', coldBytes <= 40 * 1024, String(coldBytes));
+  /* 指针从 3 个入口长到 7 个（M02 技能/掉落、M03 职业/指南），每个入口约 0.4 KB，
+     换来的是"取哪一页才校验哪一页"。44 KB 是 7 入口时代的冷启动上限，再涨就要把入口挪出指针。 */
+  ok('副本首屏代价仍 ≤ 44 KB（指针变大就等于冷启动变慢）', coldBytes <= 44 * 1024, String(coldBytes));
 
   const CHANGE = runBuild(freshFixture('change'));
   patchSource(good.envDir, 'dungeons.json', (j) => { j.newDungeons[0].nameCn = '改了个名字'; });
@@ -535,6 +538,41 @@ const oss = require(MINI_SERVICE);
   await step('反例：列名与行内容对不上 → 构建拒绝（客户端按位置取值，绝不能少列）',
     () => badCols.rc !== 0 && badCols.out.indexOf('列名却写了') >= 0,
     'rc=' + badCols.rc + ' ' + badCols.out.slice(-160));
+
+  /* ================= 3·8. M03 职业/天赋/指南分片 ================= */
+  process.stdout.write('\nM03 职业卡：种族矩阵、天赋分片、指南壳都要自洽\n');
+  const clsIdx = JSON.parse(fs.readFileSync(path.join(batchDir, 'classes', 'index.json'), 'utf8'));
+  ok('职业索引带 10 种族 9 职业，且与源文件条数一致',
+    clsIdx.counts.races === 10 && clsIdx.counts.classes === 9
+      && clsIdx.races.length === 10 && clsIdx.classes.length === 9, JSON.stringify(clsIdx.counts));
+  ok('每个种族都带可选职业矩阵（职业卡第一屏靠它）',
+    clsIdx.races.every((r) => Array.isArray(r.classes) && r.classes.length > 0
+      && r.classes.every((cid) => clsIdx.classes.some((c) => c.classId === cid))));
+  const talentShards = clsIdx.classes.filter((c) => c.shardPath);
+  ok('九个职业都有天赋分片，路径由 classId 推出且文件在批次里',
+    talentShards.length === 9 && talentShards.every((c) => c.shardPath === 'talents/class/' + c.classId + '.json'
+      && fs.existsSync(path.join(batchDir, c.shardPath))), String(talentShards.length));
+  ok('天赋分片不带层级点数门槛（门槛没核到，发下去等于递刀子让界面做解锁判定）',
+    talentShards.every((c) => {
+      const t = JSON.parse(fs.readFileSync(path.join(batchDir, c.shardPath), 'utf8'));
+      return JSON.stringify(t).indexOf('tierUnlockCost') < 0;
+    }));
+  ok('天赋分片节点都带坐标与级数（界面按 tier/column 摆位）',
+    talentShards.every((c) => {
+      const t = JSON.parse(fs.readFileSync(path.join(batchDir, c.shardPath), 'utf8'));
+      return t.trees.every((tr) => tr.nodes.every((n) => Number.isInteger(n.tier) && Number.isInteger(n.column) && n.maxRanks > 0));
+    }));
+  ok('天赋分片校验值对得上真实字节',
+    talentShards.every((c) => {
+      const buf = fs.readFileSync(path.join(batchDir, c.shardPath));
+      return buf.length === c.shardBytes && md5u(buf) === c.shardEtag;
+    }));
+  const guideShard = JSON.parse(fs.readFileSync(path.join(batchDir, 'guide.json'), 'utf8'));
+  ok('指南壳带红线边界那句话，且宏/插件是数组（空也合法：界面按有没有内容决定入口）',
+    guideShard.kind === 'guide' && Array.isArray(guideShard.macros) && Array.isArray(guideShard.addons)
+      && /免费/.test(String(guideShard.meta && guideShard.meta.boundaries)), JSON.stringify(Object.keys(guideShard)));
+  ok('指针里 classIndex 与 guide 是第六、七个入口',
+    !!man.fetch.classIndex && !!man.fetch.guide && man.fetch.classIndex.bytes > 0 && man.fetch.guide.bytes > 0);
 
   /* ================= 4. 写授权统一闸 ================= */
   process.stdout.write('\n写授权：每条写命令都要显式 WOW_ALLOW_CROSS_CREDS=1，与凭证来源无关\n');
@@ -969,10 +1007,14 @@ const oss = require(MINI_SERVICE);
       rawPut(base, 'builds/' + m.buildId + '/' + it.detailPath, readBuf('builds/' + m.buildId + '/' + it.detailPath));
       rawPut(base, 'builds/' + m.buildId + '/' + it.lootPath, readBuf('builds/' + m.buildId + '/' + it.lootPath));
     });
-    /* 职业法术片也要能被"取到"，否则契约测试只能测副本那两条路 */
+    /* 职业法术片与天赋片也要能被"取到"，否则契约测试只能测副本那两条路 */
     JSON.parse(readBuf('builds/' + m.buildId + '/spells/classes.json').toString('utf8')).classes.forEach((it) => {
       rawPut(base, 'builds/' + m.buildId + '/' + it.shardPath, readBuf('builds/' + m.buildId + '/' + it.shardPath));
     });
+    JSON.parse(readBuf('builds/' + m.buildId + '/classes/index.json').toString('utf8')).classes
+      .filter((it) => it.shardPath).forEach((it) => {
+        rawPut(base, 'builds/' + m.buildId + '/' + it.shardPath, readBuf('builds/' + m.buildId + '/' + it.shardPath));
+      });
     return base;
   }
   const servedIndex = serve(envRoot, man);
@@ -1035,6 +1077,28 @@ const oss = require(MINI_SERVICE);
     return r.source === 'none' && !!r.integrityError && /ID 是 priest/.test(String(r.error && r.error.message));
   }, '串了职业还当正常数据返回');
   ok('职业名单本身只取了一次（换职业不重复下名单）', hitsTo(spNeedle) === 1, '取了 ' + hitsTo(spNeedle) + ' 次');
+  const cr = await oss.loadKey('classIndex');
+  await step('职业索引走指针就是 live，种族与职业条数自洽', () => cr.source === 'live'
+    && cr.data.counts.races === cr.data.races.length && cr.data.counts.classes === cr.data.classes.length,
+    () => (cr.error ? cr.error.message : cr.source));
+  const wEntry = cr.data.classes.filter((c) => c.classId === 'warrior')[0];
+  let tr = null;
+  await step('点一个职业才取那份天赋树，节点坐标齐全', async () => {
+    tr = await oss.loadTalentClass(wEntry, cr.batch);
+    return tr.source === 'live' && tr.data.classId === 'warrior' && tr.data.trees.length === 3
+      && tr.data.trees.every((t) => t.nodes.every((n) => Number.isInteger(n.tier)));
+  }, () => (tr ? tr.source + ' ' + (tr.error && tr.error.message) : '抛出'));
+  ok('只取了选中的那个职业的天赋，其余八份没下', hitsTo('/talents/class/') === 1, '取了 ' + hitsTo('/talents/class/') + ' 份');
+  await step('反例：名单里天赋路径被改成路径穿越 → 不发请求', async () => {
+    clearStore();
+    const before = hitsTo('/talents/class/');
+    const r = await oss.loadTalentClass(Object.assign({}, wEntry, { shardPath: '../../../etc/x' }), cr.batch);
+    return r.source === 'none' && !!r.integrityError && hitsTo('/talents/class/') === before;
+  }, '坏路径照样发了请求');
+  const gr = await oss.loadKey('guide');
+  await step('指南壳走指针就是 live，空内容也合法', () => gr.source === 'live'
+    && Array.isArray(gr.data.macros) && Array.isArray(gr.data.addons),
+    () => (gr.error ? gr.error.message : gr.source));
   const lr = await oss.loadKey('lootIndex');
   await step('掉落反查表走指针就是 live，行数是自洽的', () => lr.source === 'live'
     && lr.data.counts.rows === lr.data.dungeons.reduce((s, d) => s + d.rows.length, 0),

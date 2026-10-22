@@ -1,11 +1,14 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/glossary/index",
     "pages/dungeons/index",
+    "pages/classes/index",
     "pages/dungeon/index",
+    "pages/class/index",
     "pages/spells/index",
-    "pages/loots/index"
+    "pages/loots/index",
+    "pages/glossary/index",
+    "pages/guide/index"
   ],
   "window": {
     "navigationBarTitleText": "无限资料",
@@ -29,8 +32,8 @@
         "text": "副本"
       },
       {
-        "pagePath": "pages/glossary/index",
-        "text": "速查"
+        "pagePath": "pages/classes/index",
+        "text": "职业"
       }
     ]
   },

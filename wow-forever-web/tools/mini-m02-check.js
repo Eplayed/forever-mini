@@ -190,6 +190,77 @@ async function main() {
   log('返回回到首页（返回栈没被 switchTab 打散）', back === 'pages/home/index', String(back));
   await shot('c1-home');
 
+  process.stdout.write('\nE. M03 职业 tab / 天赋树 / 指南壳 / 反查跳转（真 beta 批次）\n');
+  await goto('/pages/classes/index', 9000);
+  const cls = await ev(() => {
+    const d = getCurrentPages().pop().data;
+    return { races: (d.races || []).length, classes: (d.classes || []).length, combos: (d.combos || []).length,
+      loaded: d.loaded, src: d.sourceText, err: d.errorText,
+      orc: (d.races || []).filter((r) => r.id === 'orc')[0] || null };
+  });
+  log('职业 tab：10 种族 9 职业，无限新增组合单列', cls.loaded && cls.races === 10 && cls.classes === 9 && cls.combos > 0,
+    JSON.stringify({ r: cls.races, c: cls.classes, cb: cls.combos, err: cls.err }));
+  log('种族带可选职业矩阵与特长（兽人能练六个职业）',
+    !!cls.orc && (cls.orc.classList || []).length === 6 && (cls.orc.traits || []).length > 0,
+    JSON.stringify(cls.orc && { n: cls.orc.classList && cls.orc.classList.length, t: cls.orc.traits && cls.orc.traits.length }));
+  await shot('e1-classes');
+  const tree = await ev(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onPickClass({ currentTarget: { dataset: { id: 'priest' } } });
+    setTimeout(() => {
+      const q = getCurrentPages().pop();
+      const d = q.data;
+      res({ route: q.route, trees: (d.trees || []).length, rows: d.trees && d.trees[0] ? d.trees[0].rows.length : 0,
+        cells: d.trees && d.trees[0] && d.trees[0].rows[0] ? d.trees[0].rows[0].cells.length : 0,
+        races: (d.races || []).length, name: d.nameCn, share: typeof q.onShareAppMessage === 'function' });
+    }, 9000);
+  }));
+  log('职业详情：天赋树三系按 tier 行摆位，可选种族反查得到', tree.route === 'pages/class/index'
+    && tree.trees === 3 && tree.rows === 7 && tree.cells > 0 && tree.races > 0 && tree.share,
+    JSON.stringify(tree));
+  await shot('e2-class-tree');
+  await goto('/pages/guide/index', 8000);
+  const guide = await ev(() => {
+    const p = getCurrentPages().pop();
+    const d = p.data || {};
+    return { route: p.route, macros: (d.macros || []).length, addons: (d.addons || []).length,
+      boundaries: String(d.boundaries || '').slice(0, 20), loaded: d.loaded };
+  });
+  log('指南页：内容空时只说一句实话，边界文案在', guide.route === 'pages/guide/index' && guide.loaded
+    && guide.macros === 0 && guide.addons === 0 && /免费/.test(guide.boundaries), JSON.stringify(guide));
+  await shot('e3-guide-empty');
+  /* 一条长 evaluate 里塞三次导航 + 18 秒等待，本机 automator 会丢回包（实测稳定超时）。
+     拆成"导航 → 短 evaluate → Node 侧等"，每步都短。 */
+  await goto('/pages/loots/index', 9000);
+  const picked = await ev(() => {
+    const p = getCurrentPages().pop();
+    p.onKw({ detail: { value: '红玫瑰' } });
+    const x = (p.data.list || [])[0];
+    return x ? { id: x.id, dungeon: x.sources[0].dungeonId } : null;
+  });
+  await new Promise((r) => setTimeout(r, 900));
+  const picked2 = await ev(() => {
+    const p = getCurrentPages().pop();
+    p.onKw({ detail: { value: '红玫瑰' } });
+    const x = (p.data.list || [])[0];
+    if (x) p.onOpenDungeon({ currentTarget: { dataset: { id: x.sources[0].dungeonId, item: x.id } } });
+    return x ? { id: x.id, dungeon: x.sources[0].dungeonId } : null;
+  });
+  await new Promise((r) => setTimeout(r, 9000));
+  const jump = await ev(() => {
+    const q = getCurrentPages().pop();
+    const d = q.data;
+    return { route: q.route, hl: d.highlightDrop, notice: String(d.dropNotice || '').slice(0, 12),
+      groups: (d.dropGroups || []).length,
+      hit: (d.dropGroups || []).some((g) => g.rows.some((r) => r.itemId === d.highlightDrop)) };
+  });
+  log('掉落反查点一座本：跳详情并把查的那件高亮', /pages\/dungeon\/index/.test(String(jump.route))
+    && !!jump.hl && jump.hit && jump.groups > 0, JSON.stringify(jump));
+  await shot('e4-jump-highlight');
+  const mapShot = await ev(() => { const d = getCurrentPages().pop().data; return { map: !!d.mapUrl, drawn: d.mapDrawn, entry: d.mapEntry }; });
+  log('副本详情带地图（底图或入口坐标至少一样，自绘会标示意图）', mapShot.map || !!mapShot.entry, JSON.stringify(mapShot));
+  await shot('e5-detail-map');
+
   process.stdout.write('\nD. 规范与包体\n');
   const files = ['pages/spells/index.wxss', 'pages/loots/index.wxss'];
   const raw = [];

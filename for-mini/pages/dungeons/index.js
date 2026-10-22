@@ -10,15 +10,17 @@ const oss = require('../../services/oss-manifest')
    · 站主定的：玩家不看聚合数——chip 上不挂条数、行里不写"几个首领几条掉落"、
      可信度筛选整排下线（那是维护用的档，不是玩家的任务）。 */
 
-const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
-const KIND_ORDER = ['new', 'classic', 'raid']
+/* 2026-10-22 站主给的新 IA：副本卡默认就是五人本列表，团本与全部各留一格。
+   不再按"新本/经典本"分——那是我们的收录口径，不是玩家找本的口径。 */
+const KIND_LABEL = { five: '五人本', raid: '团本', all: '全部' }
+const KIND_ORDER = ['five', 'raid']
 
 Page({
   data: {
     all: [],
     list: [],
     kinds: [],
-    activeKind: 'all',
+    activeKind: 'five',
     kw: '',
     onlyFav: false,
     recent: [],
@@ -79,7 +81,8 @@ Page({
   },
 
   matches(item, facets, favSet, kw) {
-    if (facets.kind !== 'all' && item.kind !== facets.kind) return false
+    if (facets.kind === 'five' && !item.five) return false
+    if (facets.kind === 'raid' && item.kind !== 'raid') return false
     if (facets.fav && !favSet[item.id]) return false
     if (!kw) return true
     return [item.nameCn, item.nameEn, item.nameCnConflict, item.zoneCn, item.id]
@@ -93,9 +96,9 @@ Page({
     const all = this.data.all
     const facets = { kind: this.data.activeKind, fav: this.data.onlyFav }
     const matched = all.filter((it) => this.matches(it, facets, favSet, kw))
-    const kinds = [{ key: 'all', label: '全部' }]
-      .concat(KIND_ORDER.filter((k) => all.some((it) => it.kind === k))
-        .map((k) => ({ key: k, label: KIND_LABEL[k] })))
+    const kinds = KIND_ORDER.filter((k) => all.some((it) => (k === 'five' ? it.five : it.kind === k)))
+      .map((k) => ({ key: k, label: KIND_LABEL[k] }))
+      .concat([{ key: 'all', label: KIND_LABEL.all }])
     this.setData({
       list: matched.map((it) => Object.assign({}, it, { fav: !!favSet[it.id] })),
       kinds,
@@ -145,7 +148,8 @@ function decorate(item, batch) {
   return {
     id: item.id,
     kind: item.kind,
-    kindLabel: KIND_LABEL[item.kind] || item.kind || '副本',
+    kindLabel: item.partySize === 5 ? '五人本' : (item.kind === 'raid' ? '团本' : '副本'),
+    five: item.partySize === 5,
     nameCn: item.nameCn || '',
     nameEn: item.nameEn || '',
     nameCnConflict: item.nameCnConflict || '',

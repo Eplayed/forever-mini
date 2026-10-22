@@ -124,10 +124,12 @@ Page({
     this.setData({ expandedId: this.data.expandedId === id ? '' : id })
   },
 
+  /* 站主要的路径：搜到物品 → 跳进那座本 → 把查的这件高亮出来 */
   onOpenDungeon(e) {
     const id = String(e.currentTarget.dataset.id || '')
+    const item = String(e.currentTarget.dataset.item || '')
     if (!id) return
-    wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(id) })
+    wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(id) + (item ? '&drop=' + encodeURIComponent(item) : '') })
   },
 
   onCopy(e) {

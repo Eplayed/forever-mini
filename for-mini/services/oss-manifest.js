@@ -321,6 +321,17 @@ const SHARD_SPECS = {
     kind: 'spell-class-index',
     shape: (d) => Array.isArray(d.classes) && !!d.counts && d.counts.classes === d.classes.length
   },
+  classIndex: {
+    name: 'class-index',
+    kind: 'class-index',
+    shape: (d) => Array.isArray(d.races) && Array.isArray(d.classes) && !!d.counts
+      && d.counts.races === d.races.length && d.counts.classes === d.classes.length
+  },
+  guide: {
+    name: 'guide',
+    kind: 'guide',
+    shape: (d) => Array.isArray(d.macros) && Array.isArray(d.addons)
+  },
   lootIndex: {
     name: 'loot-index',
     kind: 'loot-index',
@@ -460,6 +471,35 @@ function loadSpellClass(item, batch, fallback) {
   return loadRef(spellClassRef(item), batch, fallback)
 }
 
+/* 天赋片：与职业法术片同一套规矩——路径由 classId 现推、与名单里的 shardPath 比对、
+   校验值取条目自带的三个字段。名单里 shardPath 为 null 的职业（没有天赋树）直接判失败，不发请求。 */
+function talentClassRef(item) {
+  const id = String((item && item.classId) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('职业编号不能当文件名：' + id) }
+  const rel = 'talents/class/' + id + '.json'
+  if (!item.shardPath) return { error: new Error('职业 ' + id + ' 在名单里没有天赋分片') }
+  if (String(item.shardPath) !== rel) {
+    return { error: new Error('职业 ' + id + ' 的天赋分片路径不是由 classId 推出来的：' + item.shardPath) }
+  }
+  return {
+    rel,
+    cacheKind: 'talent-class:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'talent-class',
+      kind: 'talent-class',
+      id,
+      readId: (d) => d.classId,
+      shape: (d) => Array.isArray(d.trees) && d.trees.length > 0
+        && d.trees.every((t) => Array.isArray(t.nodes))
+    }
+  }
+}
+
+function loadTalentClass(item, batch, fallback) {
+  return loadRef(talentClassRef(item), batch, fallback)
+}
+
 /* 逐文件哈希表：正常取数不需要它（校验值已随指针与索引下发），
    留给排障与"把整批核一遍"的场景。 */
 function loadBundle(manifest) {
@@ -492,7 +532,9 @@ module.exports = {
   loadKey,
   loadPointer,
   loadSpellClass,
+  loadTalentClass,
   spellClassRef,
+  talentClassRef,
   pointerUrl,
   requiresUpdate,
   resolveUrl,

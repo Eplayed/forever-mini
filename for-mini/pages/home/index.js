@@ -14,6 +14,7 @@ Page({
     loaded: false,
     offline: false,
     requiresUpdate: false,
+    hasGuide: false,
     recent: []
   },
 
@@ -36,10 +37,13 @@ Page({
     return service.loadMeta().then((result) => {
       const meta = result.data || {}
       this.disclaimer = meta.disclaimer || ''
+      const counts = meta.counts || {}
       this.setData({
         loaded: true,
         offline: result.source !== 'live',
-        requiresUpdate: !!result.requiresUpdate
+        requiresUpdate: !!result.requiresUpdate,
+        /* 指南卡按有没有内容决定显不显示：宏/插件一条都还没整理时不摆空卡 */
+        hasGuide: (counts.macros || 0) + (counts.addons || 0) > 0
       })
       return null
     })
@@ -65,8 +69,17 @@ Page({
     wx.switchTab({ url: '/pages/dungeons/index' })
   },
 
+  /* 中英速查不再是 tab（tab 三格给了 首页/副本/职业），用 navigateTo */
   goGlossary() {
-    wx.switchTab({ url: '/pages/glossary/index' })
+    wx.navigateTo({ url: '/pages/glossary/index' })
+  },
+
+  goClasses() {
+    wx.switchTab({ url: '/pages/classes/index' })
+  },
+
+  goGuide() {
+    wx.navigateTo({ url: '/pages/guide/index' })
   },
 
   /* 技能与掉落反查都不在 tabBar 里（三个位置已给 首页/副本/速查），

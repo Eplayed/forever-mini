@@ -44,6 +44,16 @@
       </view>
     </view>
 
+    <view wx:if="{{mapUrl || mapEntry}}" class="card">
+      <view class="card-title">副本地图</view>
+      <view wx:if="{{mapUrl}}" class="map-box">
+        <icon-cell src="{{mapUrl}}" size="hero" label="{{title}}" fallback-text="这座还没有内部底图" />
+        <view wx:if="{{mapDrawn}}" class="map-note">这张是示意图，不是游戏里的地图。</view>
+        <view wx:else class="map-note">底图取自游戏内画面，经第三方插件转存，不是本站绘制。</view>
+      </view>
+      <view wx:if="{{mapEntry}}" class="muted map-entry">{{mapEntry}}</view>
+    </view>
+
     <view class="card">
       <view class="card-title">这座本的关键信息</view>
       <view class="frow" wx:for="{{rows}}" wx:key="k">
@@ -74,22 +84,25 @@
 
     <view class="card">
       <view class="card-title">掉落（按经典旧世公开数据库推的，本站不写几率）</view>
+      <view wx:if="{{dropNotice}}" class="notice drop-notice">{{dropNotice}}</view>
       <view wx:if="{{needOnline}}" class="muted">掉落分片还没取到，联网后再看。</view>
-      <view wx:elif="{{drops.length === 0}}" class="muted">这座还没有掉落记录，不猜。</view>
-      <view wx:else>
-        <view class="drop" wx:for="{{drops}}" wx:key="index">
-          <view class="drop-face">
-          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name}}" />
-        </view>
-        <view class="drop-main">
-            <text class="drop-name">{{item.name}}</text>
-            <text class="muted drop-boss">{{item.boss ? '出自 ' + item.boss : '首领未标注'}}</text>
+      <view wx:elif="{{!dropGroups.length}}" class="muted">这座还没有掉落记录，不猜。</view>
+      <block wx:else>
+        <view class="dgrp" wx:for="{{dropGroups}}" wx:key="boss">
+          <view class="dgrp-h">{{item.boss}}</view>
+          <view class="drop {{highlightDrop && row.itemId === highlightDrop ? 'drop-hit' : ''}}" wx:for="{{item.rows}}" wx:for-item="row" wx:key="itemId">
+            <view class="drop-face">
+              <icon-cell src="{{row.iconUrl}}" size="sm" label="{{row.name}}" />
+            </view>
+            <view class="drop-main">
+              <text class="drop-name">{{row.name}}<text wx:if="{{row.missing}}" class="todo">中文名待核</text></text>
+            </view>
+            <view class="drop-side">
+              <text class="muted">{{row.quality}}</text>
+            </view>
           </view>
-          <view class="drop-side">
-            <text class="muted">{{item.quality}}</text>
-          </view>
         </view>
-      </view>
+      </block>
     </view>
 
     <view class="card">

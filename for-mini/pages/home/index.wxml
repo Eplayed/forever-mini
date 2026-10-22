@@ -16,23 +16,28 @@
   <view class="sec-title">查</view>
   <view class="grid">
     <view class="entry plate" bindtap="goDungeons">
-      <view class="entry-name">副本随手查</view>
-      <view class="entry-desc">中英名、等级、首领与掉落。名单已打进主包，断网也能查。</view>
+      <view class="entry-name">副本</view>
+      <view class="entry-desc">五人本名单：等级、阵营、地图、首领和掉落。名单已打进主包，断网也能查。</view>
       <view class="entry-go">去查 →</view>
+    </view>
+    <view class="entry plate" bindtap="goClasses">
+      <view class="entry-name">职业</view>
+      <view class="entry-desc">种族与可选职业、每个职业的技能书和天赋树。天赋树可以分享给好友。</view>
+      <view class="entry-go">去看 →</view>
+    </view>
+    <view class="entry plate" bindtap="goLoots">
+      <view class="entry-name">掉落查询</view>
+      <view class="entry-desc">搜副本或物品名，直接跳到那座本里看这件东西谁掉。</view>
+      <view class="entry-go">去查 →</view>
+    </view>
+    <view wx:if="{{hasGuide}}" class="entry plate" bindtap="goGuide">
+      <view class="entry-name">指南</view>
+      <view class="entry-desc">宏命令与插件名单，全部免费、标来源；不推荐循环提示类插件。</view>
+      <view class="entry-go">去看 →</view>
     </view>
     <view class="entry plate" bindtap="goGlossary">
       <view class="entry-name">中英速查</view>
       <view class="entry-desc">按中文名搜官方译名，看英文原名，一键复制。</view>
-      <view class="entry-go">去查 →</view>
-    </view>
-    <view class="entry plate" bindtap="goSpells">
-      <view class="entry-name">职业技能速查</view>
-      <view class="entry-desc">按职业查法术书：级数、几级学会、和经典旧世比是新增还是改动。这一页要联网取。</view>
-      <view class="entry-go">去查 →</view>
-    </view>
-    <view class="entry plate" bindtap="goLoots">
-      <view class="entry-name">掉落反查</view>
-      <view class="entry-desc">输入装备名或物品编号，查它是哪座本、哪个首领掉的。这一页要联网取。</view>
       <view class="entry-go">去查 →</view>
     </view>
   </view>

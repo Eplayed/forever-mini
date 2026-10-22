@@ -1,0 +1,103 @@
+/* 指南（M03）。颜色走 app.wxss 令牌。 */
+
+.lead {
+  padding: 22rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+
+.lead-t {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.lead-s {
+  margin-top: 8rpx;
+  font-size: 21rpx;
+  line-height: 1.6;
+  color: var(--txt-muted);
+}
+
+.sec {
+  margin-bottom: 26rpx;
+}
+
+.sec-t {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--gold-hi);
+  margin-bottom: 12rpx;
+}
+
+.gcard {
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.gname {
+  font-size: 27rpx;
+  color: var(--txt-title);
+}
+
+.guse {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.gtext {
+  margin-top: 10rpx;
+  padding: 12rpx 14rpx;
+  background: var(--sunk);
+  border-radius: 8rpx;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: var(--txt-dim);
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.gactions {
+  margin-top: 12rpx;
+}
+
+.gactions .btn {
+  background: transparent;
+}
+
+.gauthor {
+  font-size: 20rpx;
+}
+
+.prov {
+  margin-top: 10rpx;
+  background: var(--sunk);
+  border-radius: 10rpx;
+  padding: 12rpx 14rpx;
+}
+
+.prov-type {
+  font-size: 21rpx;
+  color: var(--ok);
+}
+
+.prov-at {
+  margin-left: 12rpx;
+  font-size: 19rpx;
+}
+
+.prov-url {
+  word-break: break-all;
+  font-size: 20rpx;
+  margin-top: 2rpx;
+}
+
+.addon-note {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  line-height: 1.55;
+}

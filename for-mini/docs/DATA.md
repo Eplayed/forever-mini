@@ -112,6 +112,25 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 所以"行长度等于列数"是构建端的硬卡口（少一列就会把首领序号当品质显示）。
 同一件装备出现在几座本就是几行，界面按 `itemId` 归并成"这件装备 → 哪几座本、哪个首领"。
 
+### M03 新增的三份（职业卡与指南）
+
+职业索引 `classes/index.json`（约 39 KB）＝ `{ kind: "class-index", counts, factions, races[], classes[], combos[], conflicts[] }`。
+`races[]` 每条带 `classes`（可选职业矩阵）与 `traits`（特长名 + 效果），`classes[]` 每条带 `shardPath / shardEtag / shardMd5 / shardBytes`
+与 `hasTalents`；`combos[]` 是无限新增的种族职业组合（官方中文来源）。
+**注意键名**：基底 `classes.json` 用 `id/cn/en`，导出层换成 `classId/nameCn/nameEn`——分发层与界面只认后者。
+
+天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, trees[] }`，
+节点只有 `tier / column / maxRanks / nameCn / iconKey / requires / level`。
+**`rules.tierUnlockCost` 刻意不下发**：门槛没核到之前把数发下去，界面就会去做解锁判定（根 AGENTS.md 第五条）。
+
+指南 `guide.json`（入口文件）＝ `{ kind: "guide", meta.boundaries, macros[], addons[] }`。
+现在两条都是空数组——空是合法状态，首页的指南卡按 `meta.counts.macros + addons` 决定显不显示。
+导出层卡口跟着红线写：宏必须有文本与来源+抓取日期，插件必须有名字/作者/用途一句话与来源，
+用途描述像"循环提示"的直接拒绝出包。
+
+指针入口从 5 个变 7 个（`meta / glossary / dungeonIndex / spellClasses / lootIndex / classIndex / guide`），
+`BUDGET_KB.manifest` 相应从 8 KB 提到 12 KB，冷启动上限 40 → 44 KB。
+
 ### 素材层（M02 起，图片不再"没传"）
 
 `wow/{env}/v1/assets/` 下三类：`icons/{iconKey}.jpg`、`art/dungeons/*.webp`、`art/bosses/*.webp`，

@@ -1,0 +1,197 @@
+/* 职业 tab（M03）。颜色一律走 app.wxss 令牌，页面里不写裸色值。 */
+
+.lead {
+  padding: 22rpx 24rpx;
+  margin-bottom: 18rpx;
+}
+
+.lead-t {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.lead-s {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--txt-muted);
+}
+
+.cgrid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ccard {
+  width: 48.5%;
+  box-sizing: border-box;
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.ccard:nth-child(odd) {
+  margin-right: 3%;
+}
+
+.crow {
+  display: flex;
+  align-items: center;
+}
+
+.crow2 {
+  margin-top: 12rpx;
+}
+
+.cmain {
+  flex: 1;
+  min-width: 0;
+  margin-left: 12rpx;
+}
+
+.cname {
+  font-size: 28rpx;
+  color: var(--txt-title);
+}
+
+.cen {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.csub {
+  font-size: 21rpx;
+  color: var(--txt-muted);
+}
+
+.sec {
+  margin-top: 26rpx;
+}
+
+.sec-t {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--gold-hi);
+  margin-bottom: 12rpx;
+}
+
+.combo {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 16rpx;
+  margin-bottom: 8rpx;
+  background: var(--panel-2);
+  border-radius: 10rpx;
+  font-size: 25rpx;
+  color: var(--txt);
+}
+
+.combo-go {
+  margin-left: auto;
+  font-size: 21rpx;
+  color: var(--gold);
+}
+
+.race {
+  background: var(--panel);
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+}
+
+.race-open {
+  border-color: var(--gold-line);
+}
+
+.race-head {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 16rpx;
+}
+
+.race-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 14rpx;
+}
+
+.race-name {
+  font-size: 27rpx;
+  color: var(--txt);
+}
+
+.race-sub {
+  margin-left: 10rpx;
+  padding: 1rpx 8rpx;
+  border: 1rpx dashed var(--line-2);
+  border-radius: 4rpx;
+  font-size: 19rpx;
+  color: var(--txt-hint);
+}
+
+.race-meta {
+  margin-top: 2rpx;
+  font-size: 21rpx;
+}
+
+.race-go {
+  flex-shrink: 0;
+  margin-left: 10rpx;
+  font-size: 21rpx;
+  color: var(--gold);
+}
+
+.race-body {
+  padding: 4rpx 16rpx 16rpx;
+  border-top: 1rpx solid var(--line);
+  background: var(--panel-2);
+}
+
+.pick {
+  margin-top: 12rpx;
+}
+
+.pick-t {
+  font-size: 21rpx;
+  color: var(--txt-dim);
+  margin-bottom: 8rpx;
+}
+
+.pick-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pick-row .chip {
+  margin: 0 10rpx 10rpx 0;
+}
+
+.trait {
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.trait:last-child {
+  border-bottom: 0;
+}
+
+.trait-name {
+  font-size: 24rpx;
+  color: var(--txt);
+}
+
+.trait-passive {
+  margin-left: 10rpx;
+  font-size: 19rpx;
+}
+
+.trait-eff {
+  margin-top: 2rpx;
+  font-size: 21rpx;
+  line-height: 1.5;
+}

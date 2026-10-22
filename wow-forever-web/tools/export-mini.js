@@ -56,6 +56,8 @@ const dungeons = read('dungeons.json');
 const systems = read('systems.json');
 const classes = read('classes.json');
 const spells = read('spells.json');
+const races = read('races.json');
+const guide = read('guide.json');
 
 const dungeonList = (dungeons.newDungeons || []).concat(dungeons.classicDungeons || [], dungeons.raids || []);
 const spellList = spells.spells || [];
@@ -86,6 +88,19 @@ talentNodes.forEach((n) => {
 dungeonList.forEach((d) => {
   if (/\d+(\.\d+)?\s*%/.test(JSON.stringify(d.drops || d))) errs.push(`副本 ${d.id}：出现百分比数值`);
 });
+
+/* 指南（M03）：宏与插件名单进小程序是 2026-10-22 改红线放开的，卡口跟着红线写——
+   每条必须有来源与抓取日期，插件不许带"循环提示"类用途，宏不许缺文本。 */
+(guide.macros || []).forEach((m) => {
+  if (!m.name || !m.text) errs.push(`宏 ${m.name || '(无名)'}：缺名字或宏文本`);
+  if (!(m.provenance || []).some((pp) => pp.url && pp.checkedAt)) errs.push(`宏 ${m.name}：缺来源或抓取日期（红线：指不出谁写的按待核不发布）`);
+});
+(guide.addons || []).forEach((a2) => {
+  if (!a2.name || !a2.author || !a2.use) errs.push(`插件 ${a2.name || '(无名)'}：缺名字/作者/用途一句话`);
+  if (!(a2.provenance || []).some((pp) => pp.url && pp.checkedAt)) errs.push(`插件 ${a2.name}：缺来源或抓取日期`);
+  if (/循环|自动打/i.test(String(a2.use))) errs.push(`插件 ${a2.name}：用途描述像循环提示类，红线不推荐`);
+});
+if (guide.meta && guide.meta.boundaries) checkCopy('guide.meta.boundaries', guide.meta.boundaries);
 
 /* —— 法术书（M02-2）：这一层只放行"名称 / 级数 / 起学等级 / 与经典对照状态"四类事实，
    描述正文与循环建议本来就不在基底里，这里再拦一次防止上游把它们抄进来 —— */
@@ -135,6 +150,8 @@ const miniMeta = {
     spells: spellList.length,
     lootRows: dungeonList.reduce((s, d) => s + (d.drops || []).length, 0),
     lootItems: new Set(dungeonList.reduce((a, d) => a.concat((d.drops || []).map((x) => String(x.itemId || x.nameCn || ''))), [])).size,
+    macros: (guide.macros || []).length,
+    addons: (guide.addons || []).length,
     talentNodes: talentNodes.length,
     talentNameVerified: nameHit
   },
@@ -257,6 +274,38 @@ function spellClassHead() {
   }).filter((c) => c.count > 0);
 }
 
+/* 职业卡（M03）：种族 + 职业 + 可选职业矩阵合成一份索引原料；
+   天赋九份合成一份，分发层按职业切成 talents/class/{id}.json。
+   这里只做搬运与卡口，不改任何业务字段。 */
+const talentFileList = fs.readdirSync(path.join(DATA, 'talents'))
+  .filter((f) => f !== '_demo.json' && f.endsWith('.json')).sort();
+const miniTalents = {
+  meta: {
+    source: 'wow-forever-web/src/data/talents/',
+    note: '天赋树按两家第三方资料站的坐标对齐；层级点数门槛没核到之前界面只摆位、不做解锁判定。',
+    files: talentFileList.length
+  },
+  classes: talentFileList.map((f) => Object.assign({ file: f }, JSON.parse(fs.readFileSync(path.join(DATA, 'talents', f), 'utf8'))))
+};
+
+const miniClasses = {
+  meta: {
+    source: 'wow-forever-web/src/data/races.json + classes.json',
+    comboNote: (races.newCombos || []).length
+      ? '无限新增的种族职业组合单列，来源是国服官方中文公告。' : ''
+  },
+  races: races.races || [],
+  factions: races.factions || [],
+  /* 键名与 spells.json 的职业头部同一套（classId/nameCn/nameEn/iconKey/level），
+     分发层与界面只认这一套；classes.json 原件用的是 id/cn/en，在这里换过来。 */
+  classes: classIndex.map((c) => ({
+    classId: c.id, nameCn: c.cn || null, nameEn: c.en || null,
+    iconKey: c.iconKey || null, level: c.nameLevel || 'L3'
+  })),
+  combos: races.newCombos || [],
+  conflicts: races.conflicts || []
+};
+
 const miniSpells = {
   meta: {
     generatedAt: (spells.meta || {}).generatedAt || null,
@@ -284,6 +333,9 @@ fs.writeFileSync(path.join(OSS_DIR, 'glossary.json'), JSON.stringify(glossary, n
 fs.writeFileSync(path.join(OSS_DIR, 'dungeons.json'), JSON.stringify(dungeons, null, 1));
 fs.writeFileSync(path.join(OSS_DIR, 'meta.json'), JSON.stringify(miniMeta, null, 1));
 fs.writeFileSync(path.join(OSS_DIR, 'spells.json'), JSON.stringify(miniSpells, null, 1));
+fs.writeFileSync(path.join(OSS_DIR, 'classes.json'), JSON.stringify(miniClasses, null, 1));
+fs.writeFileSync(path.join(OSS_DIR, 'talents.json'), JSON.stringify(miniTalents, null, 1));
+fs.writeFileSync(path.join(OSS_DIR, 'guide.json'), JSON.stringify(guide, null, 1));
 
 /* 双向卡口：直接读 oss-release.js 的 indexEntry() 与刚生成的 oss-preview/dungeons.json 比一遍。
    两边一致只证明一致，所以这里比的是"快照能不能喂给线上那套取数逻辑"，
@@ -375,6 +427,9 @@ console.log(`  oss-preview/glossary.json  ${kb(fs.statSync(path.join(OSS_DIR, 'g
 console.log(`  oss-preview/dungeons.json  ${kb(fs.statSync(path.join(OSS_DIR, 'dungeons.json')).size)}（${dungeonList.length} 本）`);
 console.log(`  oss-preview/meta.json      ${kb(fs.statSync(path.join(OSS_DIR, 'meta.json')).size)}`);
 console.log(`  oss-preview/spells.json    ${kb(fs.statSync(path.join(OSS_DIR, 'spells.json')).size)}（${spellList.length} 条 / ${miniSpells.classes.length} 职业，只走线上分片，不进主包）`);
+console.log(`  oss-preview/classes.json   ${kb(fs.statSync(path.join(OSS_DIR, 'classes.json')).size)}（${miniClasses.races.length} 种族 / ${miniClasses.classes.length} 职业）`);
+console.log(`  oss-preview/talents.json   ${kb(fs.statSync(path.join(OSS_DIR, 'talents.json')).size)}（${miniTalents.classes.length} 份天赋树，只走线上分片）`);
+console.log(`  oss-preview/guide.json     ${kb(fs.statSync(path.join(OSS_DIR, 'guide.json')).size)}（宏 ${(guide.macros || []).length} 条 / 插件 ${(guide.addons || []).length} 条）`);
 console.log(`  快照词条 ${snapshotItems.length} 条 ${kb(gBytes)} · meta ${kb(mBytes)} · 副本索引 ${snapshotDungeonIndex.items.length} 本 ${kb(dBytes)}`);
 console.log(`  主包快照合计 ${kb(snapBytes)}（预算 ${SNAPSHOT_BUDGET_KB} KB，用了 ${Math.round(snapBytes / (SNAPSHOT_BUDGET_KB * 1024) * 100)}%）`);
 console.log(`  覆盖率 L0 ${coverage.L0} / L1 ${coverage.L1} / L2 ${coverage.L2} / L3 ${coverage.L3}（共 ${coverage.total}）`);

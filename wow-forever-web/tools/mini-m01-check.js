@@ -40,6 +40,9 @@ const MODE_PORT = { normal: PORT_BASE, tamper: PORT_BASE + 1, tamperindex: PORT_
 let PORT = PORT_BASE;
 const man = JSON.parse(fs.readFileSync(path.join(BUILD, 'manifest.json'), 'utf8'));
 const OSS_ORIGIN = 'https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com';
+/* 五人本座数从本批索引现读：列表页默认筛五人本，断言要拿它当期望值 */
+const IDX0 = JSON.parse(fs.readFileSync(path.join(BUILD, 'builds', man.buildId, 'dungeons', 'index.json'), 'utf8'));
+const FIVE_N = IDX0.items.filter((i) => i.partySize === 5).length;
 const B = man.buildId;
 
 const results = [];
@@ -178,7 +181,9 @@ async function main() {
 
   await nav('/pages/dungeons/index');
   s = (await snap()) || {};
-  log('列表页：38 座全在主包快照里，且不冒充实时', /快照/.test(String(s && s.sourceText)) && s.all === 38 && s.list === 38 && !s.buildId, JSON.stringify({ src: s.sourceText, all: s.all, b: s.buildId }));
+  /* 新 IA 默认落在五人本，全量 38 座在快照里、切「全部」才列全 */
+  log('列表页：38 座全在主包快照里，默认五人本、切全部才列全', /快照/.test(String(s && s.sourceText)) && s.all === 38 && s.list === FIVE_N && !s.buildId,
+    JSON.stringify({ src: s.sourceText, all: s.all, list: s.list, five: FIVE_N, b: s.buildId }));
   /* 2026-10-22 站主定的玩家面规矩：聚合数、缺口自述、可信度筛选一律不上界面。
      门禁反过来守这条——页面上再长出 count / routeMissing / levels 就是回归。 */
   log('列表页不再挂聚合数与可信度筛选（玩家面规矩）',
@@ -344,7 +349,7 @@ async function main() {
   await stopServer();
   await nav('/pages/dungeons/index');
   s = (await snap()) || {};
-  log('断网有缓存：标离线缓存且列表仍有 38 座', s && /离线缓存/.test(String(s.sourceText)) && s.list === 38 && s.offline === true, JSON.stringify({ src: s.sourceText, n: s.list }));
+  log('断网有缓存：标离线缓存且默认五人本仍在', s && /离线缓存/.test(String(s.sourceText)) && s.list === FIVE_N && s.offline === true, JSON.stringify({ src: s.sourceText, n: s.list, five: FIVE_N }));
   await shot('f1-offline-cache');
 
   const ov = await call('量溢出', () => mp.evaluate(() => ({ sw: document.body.scrollWidth, cw: document.body.clientWidth })), 3);
@@ -441,14 +446,16 @@ async function main() {
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
   const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';
   const rawColor = [];
-  ['pages/home/index.wxss', 'pages/dungeons/index.wxss', 'pages/dungeon/index.wxss', 'pages/glossary/index.wxss'].forEach((f) => {
+  ['pages/home/index.wxss', 'pages/dungeons/index.wxss', 'pages/dungeon/index.wxss', 'pages/glossary/index.wxss',
+    'pages/classes/index.wxss', 'pages/class/index.wxss', 'pages/guide/index.wxss'].forEach((f) => {
     const t = fs.readFileSync(MINI + f, 'utf8');
     (t.match(/#[0-9a-fA-F]{3,8}\b|rgba?\(/g) || []).forEach((c) => rawColor.push(f + ' ' + c));
   });
   log('四个页面的 wxss 里没有裸色值（颜色只在 app.wxss）', rawColor.length === 0, rawColor.slice(0, 4).join(' | '));
   const appjson = JSON.parse(fs.readFileSync(MINI + 'app.json', 'utf8'));
-  log('tabBar 三个一级入口：首页 / 副本 / 速查',
-    appjson.tabBar.list.length === 3 && appjson.tabBar.list.map((x) => x.pagePath).join(',') === 'pages/home/index,pages/dungeons/index,pages/glossary/index',
+  /* 2026-10-22 站主重排：tab 三格给 首页/副本/职业；中英速查降成首页卡（navigateTo） */
+  log('tabBar 三个一级入口：首页 / 副本 / 职业',
+    appjson.tabBar.list.length === 3 && appjson.tabBar.list.map((x) => x.pagePath).join(',') === 'pages/home/index,pages/dungeons/index,pages/classes/index',
     JSON.stringify(appjson.tabBar.list.map((x) => x.pagePath)));
   const pcfg = JSON.parse(fs.readFileSync(MINI + 'project.config.json', 'utf8'));
   log('appid 已换成正式号（不再是 touristappid）', pcfg.appid === 'wxfd9a2b985a6cedc3', pcfg.appid);
