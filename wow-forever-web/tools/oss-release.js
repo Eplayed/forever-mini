@@ -94,7 +94,7 @@ const ICON_EXT = '.jpg';
    注意两边是**一对多**：races.json + classes.json 合成 oss-preview/classes.json，
    dungeon-geo.json 并进 dungeons.json 的 geo 字段，所以"条数相等"从来不是正确判据。 */
 const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
-const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json'];
+const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -207,6 +207,42 @@ function detailRecord(d, useAsset, geo) {
     };
   }
   return out;
+}
+
+/* 种族条目（2026-10-22 补天裔）。两处"数据在库里、界面读不到"的坑都收在这一个函数里：
+   ① 天裔两条的特长挂在 `subgroup.traits`（各 4 条，L0 官方中文原句），顶层 `traits` 是空数组——
+      小程序只读顶层，于是玩家看到"这个种族的特长还没核到，不猜"，而那 4 条一直都在。
+      这里合成一份给界面，并用 `traitVia` 说清是哪一层来的；基底 races.json 不动
+      （网页那侧本来就读 subgroup.traits，改基底会牵动它）。
+   ② 天裔没有官方 CDN 种族图标（iconKey 为 null），但站主 2026-10-20 授权用插件里那张
+      种族小图标（记在 art.json 的 raceIcons，只许当小图标、不许换传承页那张大图），
+      小程序此前没接这条线。这里按种族 id 对上，落成 `portrait`（assets 相对路径）。
+   暗夜精灵是另一种情况：iconKey 为 null 且本地确实没有这张图 → 仍然 null，界面走自绘回落。 */
+function raceIconBase(id) {
+  return String(id || '').replace(/-(horde|alliance)$/, '');
+}
+function raceTraitRow(t) {
+  return { name: t.name, passive: !!t.passive, effect: t.effect || '', iconKey: t.iconKey || null };
+}
+function raceEntry(r, artIndex, useAsset) {
+  const top = (r.traits || []).map(raceTraitRow);
+  const fromSub = top.length === 0;
+  const traits = fromSub ? (((r.subgroup || {}).traits) || []).map(raceTraitRow) : top;
+  const iconRel = ((artIndex || {}).raceIcons || {})[raceIconBase(r.id)] || null;
+  let portrait = null;
+  if (iconRel) {
+    const got = typeof useAsset === 'function' ? useAsset(iconRel, r.id + '.raceIcon') : String(iconRel);
+    portrait = got ? String(got).replace(/^img\//, '') : null;
+  }
+  return {
+    id: r.id, nameCn: r.nameCn || null, nameEn: r.nameEn || null, faction: r.faction || null,
+    iconKey: r.iconKey || null, level: r.level || 'L3',
+    subgroup: r.subgroup ? { nameCn: r.subgroup.nameCn || null } : null,
+    classes: r.classes || [],
+    traits: traits,
+    traitVia: traits.length ? (fromSub ? 'subgroup' : 'race') : '',
+    portrait: portrait
+  };
 }
 
 /* 导出产物 ↔ 基底对拍：在临时目录里把真源重导一遍，逐字节比 oss-preview。
@@ -459,9 +495,13 @@ function buildBatch(env, opts) {
   });
 
   /* —— 职业卡（M03）：种族+职业+可选矩阵一份索引，天赋按职业切片 ——
-     天赋树只读：节点带 tier/column 坐标就够摆位了，rules.tierUnlockCost **不下发**——
-     门槛没核到之前界面不许做解锁判定（根 AGENTS.md 第五条），把数发下去等于递刀子。 */
+     2026-10-22 改口径：`rules`（totalPoints + tierUnlockCost）随片下发，天赋页要做加点判定，
+     界面上固定写"按经典旧世推、无限服还没实测"。见 wow-forever-web/AGENTS.md 硬规矩第 5 条。 */
   const raceList = classPack.races || [];
+  /* art.json 是"哪个种族有哪张图"的那一处真源（网页也读它），这里只取 raceIcons 那一层——
+     即站主 2026-10-20 授权的天裔**种族小图标**；传承页那张大图（races 那一层）不下发、不替换。 */
+  const artPath = path.join(siteData(), 'art.json');
+  const artIndex = fs.existsSync(artPath) ? readJson(artPath) : {};
   const classList = classPack.classes || [];
   const talentByClass = {};
   (talentPack.classes || []).forEach((t) => { talentByClass[t.classId] = t; });
@@ -543,12 +583,7 @@ function buildBatch(env, opts) {
       talentNodes: talentGroups.reduce((s2, g) => s2 + (g.t ? g.t.trees.reduce((a2, tr) => a2 + (tr.nodes || []).length, 0) : 0), 0)
     },
     factions: classPack.factions || [],
-    races: raceList.map((r) => ({
-      id: r.id, nameCn: r.nameCn || null, nameEn: r.nameEn || null, faction: r.faction || null,
-      iconKey: r.iconKey || null, level: r.level || 'L3', subgroup: r.subgroup || null,
-      classes: r.classes || [],
-      traits: (r.traits || []).map((t) => ({ name: t.name, passive: !!t.passive, effect: t.effect || '', iconKey: t.iconKey || null }))
-    })),
+    races: raceList.map((r) => raceEntry(r, artIndex, useAsset)),
     classes: classList.map((c) => ({
       classId: c.classId, nameCn: c.nameCn || null, nameEn: c.nameEn || null, iconKey: c.iconKey || null,
       level: c.level || 'L3',
@@ -1538,6 +1573,7 @@ module.exports = {
   BUDGET_KB,
   EXPORT_RELS,
   BASE_INPUTS,
+  raceEntry,
   DROPPED_DETAIL_FIELDS,
   WRITE_MARK,
   buildBatch,

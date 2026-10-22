@@ -25,7 +25,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 | 缓存 key | `wow_forever_v1_{用途}@{buildId}`（**批次号必须在 key 里**，否则旧批会冒充新批） |
 | 指针缓存 key | `wow_forever_v1_pointer@{env}` |
 | 收藏 key | `wow_fav_terms_v1`（本机行为数据，不上传） |
-| 打包快照 | `data/forever-glossary-snapshot.js`（60 条）、`data/forever-meta-snapshot.js`、`data/forever-dungeon-snapshot.js`（**M01 起：38 本索引全放**）、`data/forever-class-snapshot.js`（**2026-10-22 首页改版起：9 职业 + 10 种族与特长，只留界面要用的字段**）；四份合计 55.4 KB / 预算 60 KB |
+| 打包快照 | `data/forever-glossary-snapshot.js`（48 条）、`data/forever-meta-snapshot.js`、`data/forever-dungeon-snapshot.js`（**M01 起：38 本索引全放**）、`data/forever-class-snapshot.js`（**2026-10-22 首页改版起：9 职业 + 10 种族与特长，只留界面要用的字段**）；四份合计 53.6 KB / 预算 60 KB |
 
 `wow/release/v1/` 目前**从没传过任何文件**（2026-10-21 匿名 GET 实测 404），所以线上小程序现在读到的都是打包快照。
 
@@ -118,6 +118,16 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 `races[]` 每条带 `classes`（可选职业矩阵）与 `traits`（特长名 + 效果），`classes[]` 每条带 `shardPath / shardEtag / shardMd5 / shardBytes`
 与 `hasTalents`；`combos[]` 是无限新增的种族职业组合（官方中文来源）。
 **注意键名**：基底 `classes.json` 用 `id/cn/en`，导出层换成 `classId/nameCn/nameEn`——分发层与界面只认后者。
+
+**种族条目由 `oss-release.js` 的 `raceEntry()` 归一化一份**（2026-10-22 补天裔）：
+天裔两条的特长在基底里挂在 `subgroup.traits`（各 4 条，L0 官方中文），顶层 `traits` 是空数组，
+而界面只读顶层——于是玩家看到"还没核到"、数却一直都在。现在导出这一层合成一份并带 `traitVia` 说明来路，
+`subgroup` 只留 `nameCn`（原来连 lore 带 traits 整个下发，等于同一份数发两遍），
+`portrait` 按种族 id 去 `art.json` 的 `raceIcons` 对上（天裔那张官方 CDN 没有、站主 2026-10-20 授权的插件小图标）。
+**基底 `races.json` 一个字没改**（网页那侧本来就读 `subgroup.traits`）；
+主包快照**直接 require 这个函数**，不另抄一份字段规则——这次漂移就是"两边各写一套"写出来的。
+界面取图统一走 `oss.raceIconUrl(batch, race)`：先 `portrait` 再 `iconKey`，都没有就自绘首字块（暗夜精灵就是这种真缺）。
+导出层还加了一条硬卡：**归一化后仍然一条特长都没有、却标着 L0/L1 的种族 → 拒绝出包**。
 
 天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, rules, trees[] }`，
 节点只有 `tier / column / maxRanks / nameCn / iconKey / requires / level`。
@@ -270,14 +280,14 @@ node tools/mini-m02-check.js                   # 11. M02 三个新面：技能�
 
 ## 七、主包快照与预算（M01 起多了一份索引快照）
 
-`export-mini.js` 生成四份主包快照，合计必须 ≤ 60 KB，超了直接 rc=1（2026-10-22 实测 55.4 KB，用了 92%）：
+`export-mini.js` 生成四份主包快照，合计必须 ≤ 60 KB，超了直接 rc=1（2026-10-22 实测 53.6 KB，用了 89%）：
 
 | 文件 | 内容 | 实测 |
 | --- | --- | --- |
-| `data/forever-glossary-snapshot.js` | 60 条词条（按 L0 优先、按类型/职业分散挑） | 23.8 KB |
+| `data/forever-glossary-snapshot.js` | 48 条词条（按 L0 优先、按类型/职业分散挑；2026-10-22 从 60 降下来给种族特长让位，理由写在 `export-mini.js` 那段注释里） | 19.2 KB |
 | `data/forever-meta-snapshot.js` | meta（覆盖率、缺口、规则、**开服日期 launch**） | 1.9 KB |
 | `data/forever-dungeon-snapshot.js` | **38 本副本索引全量**（断网首用也要有内容可搜） | 21.5 KB |
-| `data/forever-class-snapshot.js` | 9 个职业格 + 10 个种族（含可选职业矩阵与种族特长文字），**首页第一眼要用** | 8.3 KB |
+| `data/forever-class-snapshot.js` | 9 个职业格 + 10 个种族（含可选职业矩阵与种族特长文字），**首页第一眼要用** | 10.8 KB |
 
 职业快照是 2026-10-22 首页改版加的：首页下面那两段（选职业 → 可选种族与种族特长）是玩家打开小程序
 第一眼的内容，断网也得有，所以 `loadClassIndex()` 现在带兜底。它**只留界面渲染的字段**——

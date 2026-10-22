@@ -51,8 +51,11 @@ module.exports = {
   {
    "id": "orc",
    "nameCn": "兽人",
+   "nameEn": null,
    "faction": "horde",
    "iconKey": "race_orc_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "hunter",
     "mage",
@@ -86,13 +89,18 @@ module.exports = {
      "effect": "昏迷持续时间缩短20%。",
      "iconKey": "inv_helmet_23"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "undead",
    "nameCn": "亡灵",
+   "nameEn": null,
    "faction": "horde",
    "iconKey": "race_undead_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "mage",
     "paladin",
@@ -126,13 +134,18 @@ module.exports = {
      "effect": "你的攻击有时会吸取生命值。",
      "iconKey": "spell_shadow_fingerofdeath"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "tauren",
    "nameCn": "牛头人",
+   "nameEn": null,
    "faction": "horde",
    "iconKey": "race_tauren_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "druid",
     "hunter",
@@ -164,13 +177,18 @@ module.exports = {
      "effect": "总生命值提高5%，命中几率提高1%。",
      "iconKey": "spell_nature_unyeildingstamina"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "troll",
    "nameCn": "巨魔",
+   "nameEn": null,
    "faction": "horde",
    "iconKey": "race_troll_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "hunter",
     "mage",
@@ -205,13 +223,20 @@ module.exports = {
      "effect": "在战斗中保持10%的生命值恢复。",
      "iconKey": "spell_nature_regenerate"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "skyborne-horde",
    "nameCn": "天裔",
+   "nameEn": null,
    "faction": "horde",
    "iconKey": null,
+   "level": "L0",
+   "subgroup": {
+    "nameCn": "塑风者天裔"
+   },
    "classes": [
     "druid",
     "hunter",
@@ -219,13 +244,43 @@ module.exports = {
     "shaman",
     "warrior"
    ],
-   "traits": []
+   "traits": [
+    {
+     "name": "踏空而行",
+     "passive": false,
+     "effect": "在空中向下滑行10秒。",
+     "iconKey": "inv_elemental_primal_air"
+    },
+    {
+     "name": "天穹视界",
+     "passive": false,
+     "effect": "获得元素祝福，移动速度提高10%。",
+     "iconKey": "ability_skyreach_lens_flare"
+    },
+    {
+     "name": "风灵护佑",
+     "passive": true,
+     "effect": "近战、远程与法术急速提高1%。",
+     "iconKey": "inv_misc_volatileair"
+    },
+    {
+     "name": "元素洞察",
+     "passive": true,
+     "effect": "对元素生物造成的伤害提高5%。",
+     "iconKey": "achievement_raidprimalist_windelemental"
+    }
+   ],
+   "traitVia": "subgroup",
+   "portrait": "art/raceicons/skyborne.webp"
   },
   {
    "id": "human",
    "nameCn": "人类",
+   "nameEn": null,
    "faction": "alliance",
    "iconKey": "race_human_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "hunter",
     "mage",
@@ -260,13 +315,18 @@ module.exports = {
      "effect": "精神提高5%。",
      "iconKey": "inv_enchant_shardbrilliantsmall"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "dwarf",
    "nameCn": "矮人",
+   "nameEn": null,
    "faction": "alliance",
    "iconKey": "race_dwarf_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "hunter",
     "paladin",
@@ -300,13 +360,18 @@ module.exports = {
      "effect": "对野兽造成的伤害提高5%。",
      "iconKey": "inv_weapon_rifle_05"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "night-elf",
    "nameCn": "暗夜精灵",
+   "nameEn": null,
    "faction": "alliance",
    "iconKey": null,
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "druid",
     "hunter",
@@ -339,13 +404,18 @@ module.exports = {
      "effect": "死亡时的移动速度提高75%。",
      "iconKey": "spell_nature_wispsplode"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "gnome",
    "nameCn": "侏儒",
+   "nameEn": null,
    "faction": "alliance",
    "iconKey": "race_gnome_male",
+   "level": "L0",
+   "subgroup": null,
    "classes": [
     "mage",
     "priest",
@@ -378,13 +448,20 @@ module.exports = {
      "effect": "工程学装置更加可靠。",
      "iconKey": "inv_misc_gear_01"
     }
-   ]
+   ],
+   "traitVia": "race",
+   "portrait": null
   },
   {
    "id": "skyborne-alliance",
    "nameCn": "天裔",
+   "nameEn": null,
    "faction": "alliance",
    "iconKey": null,
+   "level": "L0",
+   "subgroup": {
+    "nameCn": "高阶会天裔"
+   },
    "classes": [
     "druid",
     "hunter",
@@ -392,7 +469,34 @@ module.exports = {
     "rogue",
     "warrior"
    ],
-   "traits": []
+   "traits": [
+    {
+     "name": "踏空而行",
+     "passive": false,
+     "effect": "在空中向下滑行10秒。",
+     "iconKey": "inv_elemental_primal_air"
+    },
+    {
+     "name": "阅读魔网",
+     "passive": false,
+     "effect": "激活一条魔网，生命与法力恢复速度提高100%。",
+     "iconKey": "ability_mage_incantersabsorbtion"
+    },
+    {
+     "name": "风灵护佑",
+     "passive": true,
+     "effect": "近战、远程与法术急速提高1%。",
+     "iconKey": "inv_misc_volatileair"
+    },
+    {
+     "name": "元素洞察",
+     "passive": true,
+     "effect": "对元素生物造成的伤害提高5%。",
+     "iconKey": "achievement_raidprimalist_windelemental"
+    }
+   ],
+   "traitVia": "subgroup",
+   "portrait": "art/raceicons/skyborne.webp"
   }
  ],
  "counts": {

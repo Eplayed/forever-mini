@@ -569,6 +569,24 @@ const oss = require(MINI_SERVICE);
   ok('每个种族都带可选职业矩阵（职业卡第一屏靠它）',
     clsIdx.races.every((r) => Array.isArray(r.classes) && r.classes.length > 0
       && r.classes.every((cid) => clsIdx.classes.some((c) => c.classId === cid))));
+  /* 2026-10-22 站主报"小程序里缺天裔的数据和图标"——真因不是没数据：天裔的 4 条特长
+     一直在库里，只是挂在 subgroup.traits 上，而界面读顶层 traits。
+     这两条把"归一化 + 图标接上"钉住，以后谁把 subgroup 那层改回只读顶层，当场红。 */
+  const sky = clsIdx.races.filter((r) => String(r.id).indexOf('skyborne') === 0);
+  ok('天裔两条都带 4 条特长（数从 subgroup 合成上来，traitVia 说清来路）',
+    sky.length === 2 && sky.every((r) => r.traits.length === 4 && r.traitVia === 'subgroup'
+      && r.traits.every((t) => t.name && t.effect) && !!r.subgroup && !!r.subgroup.nameCn),
+    JSON.stringify(sky.map((r) => ({ id: r.id, n: r.traits.length, via: r.traitVia, sub: r.subgroup && r.subgroup.nameCn }))));
+  ok('天裔两个子族的特长确实不同（共 3 条相同、各自留 1 条专属），不是复制粘贴',
+    sky.length === 2 && JSON.stringify(sky[0].traits.map((t) => t.name)) !== JSON.stringify(sky[1].traits.map((t) => t.name)),
+    JSON.stringify(sky.map((r) => r.traits.map((t) => t.name).join('/'))));
+  ok('天裔种族小图标接上了、且登记进素材台账（官方 CDN 没这张，走站主授权的插件图）',
+    sky.every((r) => r.portrait === 'art/raceicons/skyborne.webp'
+      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r.portrait))),
+    JSON.stringify(sky.map((r) => r.portrait)));
+  ok('没有哪个种族的特长是空数组（空＝要么丢数据要么该降级，界面那句"还没核到"不许成为常态）',
+    clsIdx.races.every((r) => r.traits.length > 0 || r.level === 'L2' || r.level === 'L3'),
+    JSON.stringify(clsIdx.races.filter((r) => !r.traits.length).map((r) => r.id + ':' + r.level)));
   const talentShards = clsIdx.classes.filter((c) => c.shardPath);
   ok('九个职业都有天赋分片，路径由 classId 推出且文件在批次里',
     talentShards.length === 9 && talentShards.every((c) => c.shardPath === 'talents/class/' + c.classId + '.json'

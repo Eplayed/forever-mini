@@ -416,9 +416,11 @@ async function main() {
 
   /* 签名动作用像素量，不靠眼睛：切角铭牌真渲染出来时，
      卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。
-     判据按"位移 ÷ 卡宽"算，不按像素数算——2026-10-22 这轮实拍的截图缩放从 570 宽变成 285 宽，
-     同一张 10px 的切角在图上从 11px 位移掉到 4px，写死像素数的门禁会假红。
-     切角是 CSS 定值 10px、卡宽约 334px，所以比值恒定在 0.015~0.021，直角版是 0。 */
+     判据按"位移 ÷ 卡宽"算，不按像素数算——截图缩放每次可能不一样（同一天拍出过 285 / 570 / 664 三种宽），
+     写死像素数的门禁会假红。切角是 CSS 定值 10px、卡宽约 334px，比值恒定 0.015~0.021，直角版是 0。
+     只认"两边都留了边距"的行：整幅铺开的色带（页面背景、导航条那一横条）不是铭牌——
+     2026-10-22 给首页加了背景图之后，画面里正好有一条颜色落在 --panel 附近，把探针带偏过一次
+     （它量到 cut = -37，一个负数，说明"第一块宽的 panel 色"根本不是那张卡）。 */
   const PY_CORNER = [
     'import sys',
     'from PIL import Image',
@@ -430,7 +432,7 @@ async function main() {
     'rows = {}',
     'for y in range(H):',
     '    xs = [x for x in range(W) if cl(px[x, y])]',
-    '    if len(xs) > 120: rows[y] = xs',
+    '    if len(xs) > 120 and min(xs) > 6 and max(xs) < W - 6: rows[y] = xs',
     'ys = sorted(rows)',
     'if not ys: print("none 0 0 0"); raise SystemExit',
     'top = ys[0]',

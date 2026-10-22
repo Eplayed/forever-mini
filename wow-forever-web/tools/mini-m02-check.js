@@ -323,6 +323,25 @@ async function main() {
     artGot.every((g) => /^200 image\//.test(g)),
     artUrls.map((u, i) => (String(u).split('/v1/')[1] || '（空）') + '→' + artGot[i]).join(' | '));
   await shot('f1-home-art');
+  /* 天裔（2026-10-22 站主报"小程序缺天裔的数据和图标"）：选德鲁伊，下面那一段里两条天裔
+     必须各带 4 条特长、带子族名、图标走素材层那张插件图。这条查的是"界面真读到了"，
+     不是库里有没有——数一直在，只是过去挂在 subgroup 那层没被读。 */
+  const sky = await ev(() => {
+    const p = getCurrentPages().pop();
+    p.onPickClass({ currentTarget: { dataset: { id: 'druid' } } });
+    return (p.data.races || []).filter((r) => String(r.id).indexOf('skyborne') === 0)
+      .map((r) => ({ id: r.id, name: r.nameCn, sub: r.subCn, n: (r.traits || []).length,
+        first: ((r.traits || [])[0] || {}).name, eff: ((r.traits || [])[0] || {}).effect, icon: r.iconUrl }));
+  });
+  log('首页选德鲁伊：两条天裔各有 4 条特长、带子族名与效果文字',
+    sky.length === 2 && sky.every((r) => r.n === 4 && r.sub && r.first && r.eff), JSON.stringify(sky));
+  const skyIconUrl = String((sky[0] || {}).icon || '');
+  const skyIcon = /^https?:\/\//.test(skyIconUrl) ? await head(skyIconUrl) : { code: 0, type: '空地址' };
+  log('天裔种族图标在 bucket 上真取得到（官方 CDN 没这张，用的是授权转存的那张小的）',
+    /raceicons\/skyborne\.webp$/.test(skyIconUrl) && skyIcon.code === 200
+      && String(skyIcon.type).indexOf('image/') === 0, 'HTTP ' + skyIcon.code + ' ' + (skyIcon.type || skyIcon.err || ''));
+  await ev(() => { const p = getCurrentPages().pop(); p.onPickClass({ currentTarget: { dataset: { id: 'warrior' } } }); return 1 });
+
 
   await ev(() => { try { wx.removeStorageSync('wow_forever_v1_tbuild@warrior'); } catch (e) {} return 1 });
   await goto('/pages/class/index?classId=warrior', 9000);

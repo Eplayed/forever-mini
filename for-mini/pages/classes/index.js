@@ -46,7 +46,8 @@ Page({
         nameCn: x.nameCn || '中文名待核',
         nameEn: x.nameEn || '',
         factionText: FACTION[x.faction] || x.faction || '',
-        iconUrl: oss.iconUrl(this.batch, x.iconKey),
+        /* 种族小图优先走素材层那张（天裔官方 CDN 没有，站主授权用插件里小的） */
+        iconUrl: oss.raceIconUrl(this.batch, x),
         subgroup: x.subgroup ? (x.subgroup.nameCn || '') : '',
         traits: (x.traits || []).map((t) => ({
           name: t.name, passive: t.passive, effect: t.effect || '',

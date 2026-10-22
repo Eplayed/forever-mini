@@ -207,6 +207,16 @@ function iconUrl(batch, key) {
   return assetUrl(batch, 'icons/' + k + ext)
 }
 
+/* 种族那张小图（2026-10-22 补天裔）：优先用素材层里的种族图（art/raceicons/…），
+   再退回按 iconKey 拼官方 CDN 转存的那张。
+   为什么要有第一条：官方 CDN 根本没有天裔的种族图标（iconKey 是 null），
+   站主 2026-10-20 授权用插件里那张小的（只当小图标，不换传承页大图），它走的是 art 那条线。
+   两个都没有（比如暗夜精灵）就返回空串，界面照旧回落自绘块，不留碎图。 */
+function raceIconUrl(batch, race) {
+  const r = race || {}
+  return assetUrl(batch, r.portrait) || iconUrl(batch, r.iconKey)
+}
+
 /* 索引条目里的 detailPath/lootPath 是相对批次目录的，指针里的 fetch/bundle 是相对命名空间根的。
    批次目录 = builds/{buildId}/，所以取分片一律先过这一层，别自己拼。 */
 function batchPath(batch, relInBatch) {
@@ -542,5 +552,6 @@ module.exports = {
   assetBase,
   assetUrl,
   iconUrl,
+  raceIconUrl,
   validatePointer
 }

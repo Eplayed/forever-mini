@@ -84,7 +84,7 @@ Page({
           id: x.id,
           nameCn: x.nameCn || '中文名待核',
           factionText: FACTION[x.faction] || x.faction || '',
-          iconUrl: oss.iconUrl(this.batch, x.iconKey),
+          iconUrl: oss.raceIconUrl(this.batch, x),
           subgroup: x.subgroup ? (x.subgroup.nameCn || '') : ''
         }))
       this.talentEntry = entry

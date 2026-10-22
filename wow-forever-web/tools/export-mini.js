@@ -12,7 +12,12 @@ const MINI = path.resolve(WEB, '..', 'for-mini');
 const OSS_DIR = path.join(MINI, 'oss-preview');
 const SNAP_DIR = path.join(MINI, 'data');
 
-const SNAPSHOT_TERMS = Number(process.argv[2] || 60);
+/* 词条快照挑多少条（2026-10-22 从 60 降到 48）：主包 60 KB 这一格是硬的，
+   里面现在装了三样东西——词条样本、38 本副本索引、10 个种族的完整特长。
+   副本索引和种族特长是"要么全有要么没有"的完整数据，词条样本本来就是 215 条里挑的一部分
+   （离线时少 12 条样本，页面照样能搜、搜到的是这 48 条），所以让路的只能是它。
+   要恢复 60 条就得先把别处减下来，别把预算改成 72 KB 了事——那条数字是给主包体积兜底的。 */
+const SNAPSHOT_TERMS = Number(process.argv[2] || 48);
 const SNAPSHOT_BUDGET_KB = 60;
 
 const read = (p) => JSON.parse(fs.readFileSync(path.join(DATA, p), 'utf8'));
@@ -332,19 +337,27 @@ const miniClasses = {
 /* 主包职业快照（2026-10-22 首页改版）：首页那一排职业格 + "可选种族与种族特长"
    是玩家打开小程序第一眼要用的东西，断网也得有内容，所以这一份打进主包。
    完整 classes.json 34.6 KB（带 lore 全文与逐条溯源）不进主包——60 KB 预算的大头留给副本索引，
-   这里只留界面真正渲染的字段；字段名与线上分片一致，页面代码不必分两套取法。 */
+   这里只留界面真正渲染的字段；字段名与线上分片一致，页面代码不必分两套取法。
+   条目**直接借用分发层的 raceEntry()**（2026-10-22 补天裔之后更是必须）：天裔的特长挂在
+   subgroup.traits 上、种族图标记在 art.json 的 raceIcons 里，两边各写一套归一化迟早会漂——
+   副本索引那边是"抄一份再逐字节对拍"，这里没道理再造一份。 */
+const releaseRacePath = path.join(WEB, 'tools', 'oss-release.js');
+if (!fs.existsSync(releaseRacePath)) {
+  errs.push('找不到 tools/oss-release.js：职业快照借用不了分发层的种族条目，两边字段一漂界面就读到空值');
+}
+const releaseForRace = fs.existsSync(releaseRacePath) ? require(releaseRacePath) : null;
+const artIndex = fs.existsSync(path.join(DATA, 'art.json')) ? read('art.json') : {};
+const raceRow = (r) => releaseForRace.raceEntry(r, artIndex, (rel, why) => {
+  /* rel 已经是站内路径（img/ 开头），基准是 wow-forever-web/src/，别再把 img/ 摘掉一次 */
+  if (!fs.existsSync(path.join(WEB, 'src', String(rel)))) {
+    errs.push(`种族 ${r.id} 的小图标 ${rel} 本地没有文件（${why}）——素材台账会缺这一条，界面只能回落自绘`);
+    return null;
+  }
+  return rel;
+});
 const miniClassSnapshot = {
   classes: miniClasses.classes.map((c) => ({ classId: c.classId, nameCn: c.nameCn, iconKey: c.iconKey })),
-  races: (miniClasses.races || []).map((r) => ({
-    id: r.id,
-    nameCn: r.nameCn,
-    faction: r.faction,
-    iconKey: r.iconKey,
-    classes: r.classes || [],
-    traits: (r.traits || []).map((t) => ({
-      name: t.name, passive: !!t.passive, effect: t.effect || '', iconKey: t.iconKey || null
-    }))
-  })),
+  races: (miniClasses.races || []).map(raceRow),
   /* 快照不带 combos：首页不渲染"无限新增组合"那一块，职业 tab 要联网才列它。
      主包 60 KB 预算已经吃到 90% 以上，能少一格是一格。 */
   counts: { classes: miniClasses.classes.length, races: (miniClasses.races || []).length }
@@ -356,6 +369,12 @@ if (miniClassSnapshot.classes.length !== miniClasses.classes.length
 }
 miniClassSnapshot.races.forEach((r) => {
   if (!Array.isArray(r.classes) || !r.classes.length) errs.push(`快照种族 ${r.id} 没有可选职业，首页这一格会永远空着`);
+  /* 2026-10-22 天裔那次是"数在库里、界面读不到"：特长挂在 subgroup.traits，顶层 traits 是空数组。
+     归一化之后还空就是真没核到——L0/L1 的种族不该出现这种空（那是丢数据），
+     L2/L3 允许，界面会写"这个种族的特长还没核到，不猜"。 */
+  if (!r.traits.length && (r.level === 'L0' || r.level === 'L1')) {
+    errs.push(`种族 ${r.id} 标 ${r.level} 却一条特长都没有（顶层与 subgroup 都空）——要么数据丢了要么该降级，不许就这么上界面`);
+  }
 });
 
 const miniSpells = {

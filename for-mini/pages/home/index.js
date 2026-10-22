@@ -153,8 +153,10 @@ Page({
         key: r.id + '|' + (r.faction || ''),
         nameCn: r.nameCn || '',
         nameMissing: !r.nameCn,
+        /* 天裔两条都叫"天裔"，靠子族名才分得开（塑风者 / 高阶会） */
+        subCn: r.subgroup ? (r.subgroup.nameCn || '') : '',
         factionText: FACTION[r.faction] || r.faction || '',
-        iconUrl: oss.iconUrl(this.batch, r.iconKey),
+        iconUrl: oss.raceIconUrl(this.batch, r),
         traits: (r.traits || []).map((t) => ({
           key: t.name,
           name: t.name,

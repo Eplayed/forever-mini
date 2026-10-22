@@ -90,13 +90,15 @@
     <view wx:if="{{raceNote}}" class="muted race-none">{{raceNote}}</view>
     <view class="race plate" wx:for="{{races}}" wx:key="key">
       <view class="race-top">
-        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" fallback-text="没有这张图标" />
+        <!-- 缺图就让它显示首字块：88rpx 的格子里塞"没有这张图标"六个字会被裁成"没有这"，
+             既难看又读不完（暗夜精灵那条实拍里就是这样） -->
+        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
         <view class="race-id">
           <view class="race-name">
             {{item.nameCn}}
             <text wx:if="{{item.nameMissing}}" class="todo">中文名待核</text>
           </view>
-          <view class="race-fac">{{item.factionText}}</view>
+          <view class="race-fac">{{item.factionText}}<text wx:if="{{item.subCn}}" class="race-sub">{{item.subCn}}</text></view>
         </view>
       </view>
       <view wx:if="{{item.traits.length}}" class="traits">
