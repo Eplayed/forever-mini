@@ -1516,7 +1516,7 @@ def test_bis(browser, base):
                document.querySelectorAll('.pzcol')[1].querySelectorAll('.pzcell').length,
                document.querySelectorAll('.pzrow .pzcell').length],
         art: getComputedStyle(document.querySelector('.pzart')).backgroundImage.indexOf('url(') >= 0,
-        sum: [...document.querySelectorAll('.pzsum-i span')].map(x => x.innerText.replace(/\\s+/g,' ').trim()) }; }""")
+        sum: [...document.querySelectorAll('.pzsum-i span')].filter(x => x.offsetParent !== null).map(x => x.innerText.replace(/\\s+/g,' ').trim()) }; }""")
     check("职业条九格齐全且每格都画出职业图标",
           len(ic["rail"]) == bis["meta"]["counts"]["classes"] and all(x["img"] for x in ic["rail"]),
           "%d 格，缺图 %s" % (len(ic["rail"]), [x["t"] for x in ic["rail"] if not x["img"]] or "无"))
@@ -1543,6 +1543,8 @@ def test_bis(browser, base):
           not offlist, "计入基础护甲 %d 行 / 加成与效果句 %d 行 / 没认出来：%s"
                        % (base_rows, other_rows, offlist[:5] or "无"))
     want_sum = sum_expect(tot)
+    # 2026-10-22 改：这一排芯片页面用的是 v-show，值为 0 的一格只是 CSS 隐藏、**节点还在 DOM 里**，
+    # 直接 innerText 全读会多出一个空的「精神」。玩家看不见它，所以页面是对的、判据要按可见性过滤。
     check("属性合计那排等于门禁独立解析的结果（纯加法，不含基础值与附魔）",
           ic["sum"] == want_sum, "界面 %s ／ 数据 %s" % (ic["sum"], want_sum))
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis.png"))
@@ -1558,6 +1560,7 @@ def test_bis(browser, base):
     page.wait_for_timeout(1500)
     hdoll = [s for s in sets if s["id"] == "hunter"][0]["doll"]["alliance"]
     hsum = page.evaluate("() => [...document.querySelectorAll('.pzsum-i span')]"
+                         ".filter(x => x.offsetParent !== null)"
                          ".map(x => x.innerText.replace(/\\s+/g,' ').trim())")
     htot, hoff, hbase, hother = stat_totals(det, hdoll)
     check("猎人 PvE 联盟每条带护甲的行都落进了已知写法（「90 护甲」这一种以前被漏掉）",
@@ -3848,12 +3851,23 @@ def test_app(browser, base):
     page.wait_for_timeout(900)
     got = page.evaluate("""() => ({ n: document.querySelectorAll('.itt tbody tr').length,
              total: (document.querySelector('.pinfo') || {}).innerText || '',
+             pager: !!document.querySelector('.pinfo'),
              labels: [...document.querySelectorAll('.itt tbody .ist')].map(x => x.innerText.trim()) })""")
     # 一页只有 50 行，所以判"筛出来多少条"要读页脚那个总数，不能数行——
     # 上一版我按行数比 82，红的是我自己的断言不是页面。
+    # 2026-10-22 再补一层：页脚那句「共 N 件」在 .pager 里面，而 .pager 是 v-if="pages > 1"，
+    # **结果不足一页时它整条不渲染**，读 innerText 只会拿到空串。名录重算后
+    # 「测试服有」从 82 条掉到 3 条，红的就是这条判据本身，不是页面坏了。所以分两种判：
+    # 不足一页 → 行数就是总数、且必须没有分页条；超过一页 → 才去读页脚那个数。
+    if len(srv_has) <= 50:
+        total_ok = (not got["pager"]) and got["n"] == len(srv_has)
+    else:
+        total_ok = str(len(srv_has)) in got["total"].replace(",", "")
     check("点「测试服有」筛出来的总数等于数据条数，且这一页列里显示的都是同一种",
-          str(len(srv_has)) in got["total"].replace(",", "") and set(got["labels"]) == {"测试服有"},
-          "页脚「%s」/ 数据 %d / 标签 %s" % (got["total"].strip(), len(srv_has), sorted(set(got["labels"]))[:3]))
+          total_ok and set(got["labels"]) == {"测试服有"},
+          "页脚「%s」/ 分页条 %s / 行数 %d / 数据 %d / 标签 %s" % (
+              got["total"].strip() or "（不足一页，分页条不渲染）", got["pager"],
+              got["n"], len(srv_has), sorted(set(got["labels"]))[:3]))
     page.screenshot(path=os.path.join(SHOT_DIR, "a03-items-srvhas.png"))
     page.evaluate("() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]"
                   ".find(x => (x.innerText || '').indexOf('全部') >= 0); if (b) b.click(); }")
