@@ -139,3 +139,66 @@ python3 -u tools/site-check.py --app             # 通过 920 / 920 —— 全�
 证据三张（`docs/screenshots/check-2026-10-21/`）：
 `items-client-icon.png`（物品库搜「乌萨娜的头颅」，图标 56×56 真图）、
 `dungeon-hyjal-banner.png` 与 `-m.png`（海加尔山页首横幅，桌面 + 375）。
+
+---
+
+# 第二轮复查（2026-10-22，客户端 build 70532）
+
+站主那台 Windows 的 IP 换成 `192.168.0.104`，共享 `World of Warcraft` → `C:\GAME\World of Warcraft`，
+用 `share` 账号挂载拉到本地（**只读用，没往客户端目录写一个字节**；口令不落任何文件）。
+新包落在仓库外 `.scratch/wow/ziliao-export-2026-10-22/`（312 MB / 204 文件，
+其中 `db2/*.csv` 就占 302 MB），上一份 10-21 的原样留着对比。
+
+## 一、先比版本：插件根本没跟着客户端更新
+
+| 插件 | 客户端里现在 | `.scratch/wow` | `.scratch/wow-client-2026-10-21` |
+| --- | --- | --- | --- |
+| GearInsight_Forever | 0.5.1 | 0.5.1 | 0.5.1 |
+| XR_DungeonGuide | **75** | 66（旧） | **75** |
+| DungeonsForever | 1.8.20 | 1.8.20 | 1.8.20 |
+
+版本对上还不够，又**按我们抽取器真正读的那 9 个文件逐个比 md5**：
+GI `Data.lua` / `DungeonQuestData.lua`、XR `Data_Skills` / `Data_ZoneMap` / `Data` / `Data_Prof` / `Data_BossModel`、
+DF `Data_DungeonEntry` / `Data_BossPos` —— **九个全部一致**。
+所以这一轮**插件层一条都不用重抽**（`.scratch/wow` 那份 XR 66 是旧的，但它对我们已消费的数据没有影响，
+因为同一批文件在 `-2026-10-21` 那份里已经是 75 且内容一致）。
+
+## 二、包本身变了什么（逐条 sha256 比出来的，不是看说明）
+
+`RESULT.json` 194 → **201 条**：新增 7、删除 0、内容变化 30、未变 164。
+**变化的 30 个里图标 0 个**，全是 `db2/*`（28 个）与两份 `resolve.csv`。
+也就是说：**客户端从 70245 升到 70532，图标一张都没变**——昨晚并进去的 160 张仍然是当前客户端的样子，
+这一层不用重做。载入图也没变（还是 hyjal 一张）。
+
+新增的两张表是**证据表**，导出方拿它们来支撑上一轮那两个"拿不到"：
+`Map.db2`（81 行）证明区域底图那条链在客户端里确实没有纹理记录，
+`LoadingScreens.db2`（62 行）证明巴罗夫地穴在载入图表里没有条目。
+`counts` 里还多了一项 `bosses.noModelId: 18`，与我上一轮自己数出来的"82 只里 18 只连模型号都没有"**对上了**。
+
+## 三、开放项 43 的第 ① 问有答案了：`8119728` 不是这台客户端里的号
+
+它在我们数据里的出处查清了：`upstream/wclbox-items-index.json` 给物品 **281631「典藏版战袍」**
+写的 `icon` 是 `"8119728.jpg"`——**wclbox 用 FileDataID 当图标文件名**，我们照抄成了 iconKey。
+这一轮拿这个数字去 12 张表里逐张查独立字段：
+`Item` / `ItemSparse` / `Spell` / `AreaTable` / `Creature` / `CreatureDisplayInfo` / `CreatureModelData` /
+`Faction` / `QuestInfo` / `Map` / `LoadingScreens` / `ManifestInterfaceItemIcon` —— **全部 0 命中**，
+导出方按 listfile 找文件名也是 0 命中。
+所以结论是：**这个号在 build 70532 的归档与表里都不存在**，它要么是热更（hotfix）层的号、
+要么是 wclbox 那边按别的 build 生成的。界面上这件仍然显示占位块，**不猜图**；
+`icon-gaps.json` 就留这一个键，是对的。
+
+## 四、DB2 这一层能不能吃：仍然不能，而且更清楚了
+
+CSV 表头实测就是 `id,f0,f1,…,f67`，**没有任何列名**；值还是原始 packed 整数
+（`ItemSparse` 里出现 213598…这种 128 位标志）。`ManifestInterfaceItemIcon.csv` 只有两列
+（`id,f0`，25078 行里只有 50 行两列相等）。
+所以之前那条判断成立并且更硬：**不逐列核对位布局与官方列序，就把 `f3` 当成"名称"抄进成品，是我们自己编数据**。
+要吃这一层，得先有一张"列号 → 含义 → 依据"的核对表（对着 `.schema.json` 的位布局 + 官方 1.60.1 列序，
+再用已知样本反查），这张表是 wow-data 的活，不是并数据的前置脚本。
+
+## 五、顺带查出来一条真的过期了：排队条目
+
+`src/data/queue.json` 的 `meta.build` 是 **`1.60.1.70338`**（2026-10-11 从 wago 取的），
+客户端现在已经 **70532**——中间隔了两个 build。这一份管的是"客户端队伍查找器里能排到哪些本"，
+副本页与团本页拿它跟我们的名单做"两源并列"，所以它过期会让页面继续按旧名单判断"客户端还没这条"。
+这条与 DB2 无关，走原来的 wago 路子就能重取，已单开**开放项 44**。
