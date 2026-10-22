@@ -94,7 +94,7 @@ const ICON_EXT = '.jpg';
    注意两边是**一对多**：races.json + classes.json 合成 oss-preview/classes.json，
    dungeon-geo.json 并进 dungeons.json 的 geo 字段，所以"条数相等"从来不是正确判据。 */
 const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
-const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json'];
+const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -478,6 +478,23 @@ function buildBatch(env, opts) {
     };
     walkIcons(r);
   });
+  /* 界面底图（2026-10-22 站主：首页卡片要配图、页面背景用《无限》那张氛围图）。
+     这几张不挂在任何数据条目上，是界面自己引用的，所以单独登记一次——
+     不登记就会撞上下面那条反向卡口（界面要、素材层没有＝玩家看到的是一片纯色而不是报错）。 */
+  const uiArtSrc = path.join(siteData(), 'ui-art.json');
+  if (!fs.existsSync(uiArtSrc)) {
+    errors.push('找不到基底文件 src/data/ui-art.json：首页底图没有真源，界面不许自己抄路径');
+  } else {
+    const uiPack = readJson(uiArtSrc);
+    const walkUi = (node, where) => {
+      if (!node || typeof node !== 'object') return;
+      Object.keys(node).forEach((k) => {
+        if (k === 'path' && typeof node[k] === 'string' && node[k]) useAsset(node[k], where);
+        else if (node[k] && typeof node[k] === 'object') walkUi(node[k], where + '.' + k);
+      });
+    };
+    walkUi((uiPack.home || {}), 'ui-art.home');
+  }
   const talentGroups = classList.map((c) => {
     const t = talentByClass[c.classId] || null;
     if (t) {
@@ -491,6 +508,11 @@ function buildBatch(env, opts) {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'talent-class',
       classId: g.c.classId, nameCn: g.t.classNameCn || g.c.nameCn || null,
       grid: g.t.grid || null,
+      /* 2026-10-22 站主要小程序天赋树做成"能模拟点配置"，与网页版 TalentPage 用同一套数：
+         totalPoints 与 tierUnlockCost 都要下发，否则小程序做不了加点判定。
+         （M03 那版刻意不下发 tierUnlockCost，因为当时界面只摆位、不判定——口径变了。）
+         "层级点数门槛仍未核实"这句留在界面上，来源与网页同一条：grid.note 与 structureSources。 */
+      rules: g.t.rules || null,
       structureStatus: g.t.structureStatus || null,
       structureSources: g.t.structureSources || [],
       note: g.t.note || (talentPack.meta || {}).note || '',

@@ -66,7 +66,13 @@ Page({
           iconUrl: oss.iconUrl(this.batch, c.iconKey),
           hasTalents: !!c.hasTalents
         })),
-        combos: (d.combos || []).map((x) => ({ label: x.label || (x.raceCn + x.classCn), classId: x.classId })),
+        /* 组合卡：图标在上、"兽人法师"这样的整名在下（2026-10-22 站主要 3 列上下结构）。
+           用职业图标——点它进的是这个职业的天赋页，种族名已经在文字里了 */
+        combos: (d.combos || []).map((x) => ({
+          label: x.label || (x.raceCn + x.classCn),
+          classId: x.classId,
+          iconUrl: oss.iconUrl(this.batch, (classMap[x.classId] || {}).iconKey)
+        })),
         loaded: true,
         offline: r.source !== 'live',
         requiresUpdate: !!r.requiresUpdate,

@@ -253,6 +253,18 @@ const oss = require(MINI_SERVICE);
   ok('索引里的 art 都在素材层登记过（列表页要的图也发得出去）',
     withArt.every((it) => Object.prototype.hasOwnProperty.call(builtAssets, it.art)),
     '缺 ' + withArt.filter((it) => !Object.prototype.hasOwnProperty.call(builtAssets, it.art)).slice(0, 2).join(','));
+  /* 界面底图（2026-10-22 首页配图）不挂在任何数据条目上，是界面自己引用的——
+     这类"清单里的图"也必须进素材台账，否则线上就是卡上一片纯色，而构建一声不响。
+     文件不在 → useAsset 会把它记进 assetMissing，下面那条"缺登记 0 条"当场红。 */
+  const uiArtPack = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web', 'src', 'data', 'ui-art.json'), 'utf8'));
+  const uiRels = [];
+  (function walkUi(node) {
+    if (!node || typeof node !== 'object') return;
+    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(String(node[k]).replace(/^img\//, '')); else walkUi(node[k]); });
+  })(uiArtPack.home);
+  ok('界面底图清单 5 张都在 src/img（缺一张就是台账少登记一张）',
+    uiRels.length === 5 && uiRels.every((r) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r))),
+    uiRels.join(','));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
      等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
   /* 7 个入口（meta/glossary/副本索引/职业名单/掉落表/职业索引/指南）+ 副本×2 + 法术片 + 天赋片 */
@@ -561,11 +573,16 @@ const oss = require(MINI_SERVICE);
   ok('九个职业都有天赋分片，路径由 classId 推出且文件在批次里',
     talentShards.length === 9 && talentShards.every((c) => c.shardPath === 'talents/class/' + c.classId + '.json'
       && fs.existsSync(path.join(batchDir, c.shardPath))), String(talentShards.length));
-  ok('天赋分片不带层级点数门槛（门槛没核到，发下去等于递刀子让界面做解锁判定）',
+  /* 口径翻转（2026-10-22 站主："天赋树是模拟器的样子，可以模拟点击配置，和网页版那样的功能"）：
+     M03 那条"刻意不下发 tierUnlockCost"随这条作废——网页端引擎本来就用这份数做加点判定，
+     小程序要做同一个功能就必须拿到它。放松的只是"下发"，不是"怎么说"：
+     界面上那句"按经典旧世推、无限服还没实测"仍然钉在 mini-m02-check 的 F 段里。 */
+  ok('天赋分片带 rules（总点数与层级门槛），小程序模拟器与网页用同一份数',
     talentShards.every((c) => {
       const t = JSON.parse(fs.readFileSync(path.join(batchDir, c.shardPath), 'utf8'));
-      return JSON.stringify(t).indexOf('tierUnlockCost') < 0;
-    }));
+      return !!t.rules && t.rules.totalPoints > 0 && Array.isArray(t.rules.tierUnlockCost)
+        && t.rules.tierUnlockCost.length === 7 && t.rules.tierUnlockCost[0] === 0;
+    }), JSON.stringify((talentShards[0] || {}).classId));
   ok('天赋分片节点都带坐标与级数（界面按 tier/column 摆位）',
     talentShards.every((c) => {
       const t = JSON.parse(fs.readFileSync(path.join(batchDir, c.shardPath), 'utf8'));

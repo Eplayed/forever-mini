@@ -1,4 +1,11 @@
 <view class="wrap">
+  <!-- 页面背景：《无限》那张氛围底图（本站自生成，与网页首页 hero 同一张），压暗后文字才读得清。
+       取不到图（断网、没发素材）就不渲染这一层，版式回落到 app.wxss 的纯色底。 -->
+  <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="aspectFill" binderror="onArtError" data-k="bg" />
+  <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
+
+  <!-- 内容层：背景那两层是 position:fixed，这一层靠 relative + z-index 浮到它们上面 -->
+  <view class="fg">
   <view class="hairline"></view>
 
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
@@ -29,28 +36,37 @@
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
   </view>
 
-  <!-- 2）四个入口：副本 / 职业 / 掉落查询 / 指南（中英速查按 2026-10-22 站主指令撤出首页） -->
-  <view class="sec-title">查</view>
+  <!-- 2）四个入口：副本 / 职业 / 掉落查询 / 指南。
+       2026-10-22 站主指令：撤掉中英速查卡；「查」「去查」这类字眼不要了——整张卡就是入口，点它就行。
+       每张卡配一张底图（清单在 src/data/ui-art.json），图取不到时回落纯色版式。 -->
   <view class="grid">
     <view class="entry plate" bindtap="goDungeons">
+      <image wx:if="{{cardBg.dungeons}}" class="entry-art" src="{{cardBg.dungeons}}" mode="aspectFill"
+             binderror="onArtError" data-k="dungeons" />
+      <view class="entry-scrim"></view>
       <view class="entry-name">副本</view>
-      <view class="entry-desc">五人本名单：等级、阵营、地图、首领和掉落。名单已打进主包，断网也能查。</view>
-      <view class="entry-go">去查 →</view>
+      <view class="entry-desc">五人本名单：等级、阵营、地图、首领与掉落。</view>
     </view>
     <view class="entry plate" bindtap="goClasses">
+      <image wx:if="{{cardBg.classes}}" class="entry-art" src="{{cardBg.classes}}" mode="aspectFill"
+             binderror="onArtError" data-k="classes" />
+      <view class="entry-scrim"></view>
       <view class="entry-name">职业</view>
-      <view class="entry-desc">种族与可选职业、每个职业的技能书和天赋树。天赋树可以分享给好友。</view>
-      <view class="entry-go">去看 →</view>
+      <view class="entry-desc">种族与可选职业、技能书和天赋树，天赋可以分享。</view>
     </view>
     <view class="entry plate" bindtap="goLoots">
+      <image wx:if="{{cardBg.loots}}" class="entry-art" src="{{cardBg.loots}}" mode="aspectFill"
+             binderror="onArtError" data-k="loots" />
+      <view class="entry-scrim"></view>
       <view class="entry-name">掉落查询</view>
-      <view class="entry-desc">搜副本或物品名，直接跳到那座本里看这件东西谁掉。</view>
-      <view class="entry-go">去查 →</view>
+      <view class="entry-desc">搜副本或物品名，直接跳到那座本看这件谁掉。</view>
     </view>
     <view class="entry plate" bindtap="goGuide">
+      <image wx:if="{{cardBg.guide}}" class="entry-art" src="{{cardBg.guide}}" mode="aspectFill"
+             binderror="onArtError" data-k="guide" />
+      <view class="entry-scrim"></view>
       <view class="entry-name">指南</view>
-      <view class="entry-desc">宏命令与插件名单，全部免费、标来源；不推荐循环提示类插件。</view>
-      <view class="entry-go">去看 →</view>
+      <view class="entry-desc">宏命令与插件名单，全部免费、逐条标来源。</view>
     </view>
   </view>
 
@@ -63,7 +79,7 @@
       <view class="cls-name">{{item.nameCn || '待核'}}</view>
     </view>
   </view>
-  <view wx:else class="muted">{{classEmpty}}</view>
+  <view wx:else class="muted cls-empty">{{classEmpty}}</view>
 
   <!-- 4）选中职业的可选种族与种族特长：图标 + 文字都要有 -->
   <block wx:if="{{activeName}}">
@@ -113,4 +129,5 @@
   </block>
 
   <view class="foot" bindtap="onDisclaimer">非官方粉丝资料站，与暴雪娱乐及网易无关（点击查看声明）</view>
+  </view>
 </view>

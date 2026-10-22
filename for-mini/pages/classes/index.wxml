@@ -8,31 +8,27 @@
 
   <view class="lead plate">
     <view class="lead-t">职业</view>
-    <view class="lead-s">九个职业的技能书与天赋树，以及每个种族能练什么。天赋树只摆位置和级数上限，加点门槛核到之前不做解锁判定。</view>
+    <view class="lead-s">九个职业的技能书与天赋树，以及每个种族能练什么。天赋树可以在这里模拟点配置，点一下加一点、长按看详情。</view>
   </view>
 
   <view wx:if="{{!loaded}}" class="card muted">正在取职业与种族名单…</view>
 
-  <view class="cgrid">
-    <view class="ccard" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPickClass">
-      <view class="crow">
-        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
-        <view class="cmain">
-          <view class="cname">{{item.nameCn}}</view>
-          <view class="cen">{{item.nameEn}}</view>
-        </view>
-      </view>
-      <view class="crow crow2">
-        <text class="csub">{{item.hasTalents ? '技能书 · 天赋树' : '技能书'}}</text>
-      </view>
+  <!-- 职业格：与首页同一份版式（一排五个、超出往下排、不做横向滚动），点一格进这个职业 -->
+  <view class="cls9">
+    <view class="cls" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPickClass">
+      <icon-cell src="{{item.iconUrl}}" size="cls" label="{{item.nameCn}}" />
+      <view class="cls-name">{{item.nameCn || '待核'}}</view>
     </view>
   </view>
 
+  <!-- 无限新增的组合：一排三个，图标在上、整名在下（2026-10-22 站主指令，"看这个职业"那句撤掉） -->
   <view wx:if="{{combos.length}}" class="sec">
     <view class="sec-t">无限新增的组合</view>
-    <view class="combo" wx:for="{{combos}}" wx:key="label" data-id="{{item.classId}}" bindtap="onPickClass">
-      <text>{{item.label}}</text>
-      <text class="muted combo-go">看这个职业 ›</text>
+    <view class="combo3">
+      <view class="cmb" wx:for="{{combos}}" wx:key="label" data-id="{{item.classId}}" bindtap="onPickClass">
+        <icon-cell src="{{item.iconUrl}}" size="cls" label="{{item.label}}" />
+        <view class="cmb-t">{{item.label}}</view>
+      </view>
     </view>
   </view>
 

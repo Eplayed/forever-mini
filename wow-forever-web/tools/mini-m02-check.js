@@ -301,6 +301,86 @@ async function main() {
   log('副本详情带地图（底图或入口坐标至少一样，自绘会标示意图）', mapShot.map || !!mapShot.entry, JSON.stringify(mapShot));
   await shot('e5-detail-map');
 
+  process.stdout.write('\nF. 首页配图与天赋模拟器（2026-10-22 站主指令）\n');
+  await goto('/pages/home/index', 7000);
+  const art = await ev(() => { const d = getCurrentPages().pop().data; return { bg: d.bgUrl, cards: d.cardBg }; });
+  const CARD_KEYS = ['dungeons', 'classes', 'loots', 'guide'];
+  log('首页背景与四张卡都拼出了 assets 地址（路径由 meta.uiArt 下发，页面不各自抄）',
+    /^https?:\/\//.test(String(art.bg)) && CARD_KEYS.every((k) => /^https?:\/\//.test(String(art.cards[k] || ''))),
+    JSON.stringify(art.cards));
+  const artUrls = [art.bg].concat(CARD_KEYS.map((k) => art.cards[k]));
+  const artGot = [];
+  for (let i = 0; i < artUrls.length; i += 1) {
+    const u = String(artUrls[i] || '');
+    /* 地址为空＝线上那批 meta 里还没有 uiArt（新批次没发），这要报红而不是把空串塞给 https.get */
+    if (!/^https?:\/\//.test(u)) { artGot.push('空地址（线上批次没有 uiArt）'); continue; }
+    const r = await head(u);
+    artGot.push(r.code + ' ' + (r.type || r.err || ''));
+  }
+  /* 这条在发素材之前就该红：底图不在 bucket 上，玩家看到的是一片纯色而不是报错，
+     而"数据拼得出地址"骗不过眼睛——所以查真地址，不查界面猜。 */
+  log('五张底图在 bucket 上真取得到（200 + image/*）',
+    artGot.every((g) => /^200 image\//.test(g)),
+    artUrls.map((u, i) => (String(u).split('/v1/')[1] || '（空）') + '→' + artGot[i]).join(' | '));
+  await shot('f1-home-art');
+
+  await ev(() => { try { wx.removeStorageSync('wow_forever_v1_tbuild@warrior'); } catch (e) {} return 1 });
+  await goto('/pages/class/index?classId=warrior', 9000);
+  const sim0 = await ev(() => {
+    const d = getCurrentPages().pop().data;
+    const c = d.trees[0].rows[0].cells[0];
+    const late = d.trees[0].rows[d.trees[0].rows.length - 1].cells[0];
+    return { total: d.totalPoints, left: d.remaining, gate: d.gateNote, rows: d.trees[0].rows.length,
+      treeName: d.trees[0].name,
+      first: { id: c.id, name: c.name, ranks: c.ranks, max: c.max, can: c.can },
+      late: { tier: late.tier, can: late.can, why: late.why } };
+  });
+  log('天赋页带 rules：总点数从分片读、门槛那句话写在屏幕上、开局 0 点',
+    sim0.total > 0 && sim0.left === sim0.total && sim0.rows > 0 && sim0.first.ranks === 0
+      && /门槛|未实测|未核实/.test(sim0.gate), JSON.stringify(sim0));
+  log('深层格子开局点不动，且说得出为什么（层级门槛判定真的在跑）',
+    sim0.late.can === false && /投满|要先点/.test(sim0.late.why), JSON.stringify(sim0.late));
+  const add1 = await ev(() => {
+    const p = getCurrentPages().pop();
+    const c = p.data.trees[0].rows[0].cells[0];
+    p.onTapNode({ currentTarget: { dataset: { id: c.id } } });
+    const d = p.data;
+    const n = d.trees[0].rows[0].cells[0];
+    return { left: d.remaining, ranks: n.ranks, spent: d.spentText, code: d.buildCode };
+  });
+  log('点一下加一点：剩余点数减一、格上读数变 1/上限、那系计数跟着走',
+    add1.left === sim0.total - 1 && add1.ranks === 1
+      && add1.spent.indexOf(sim0.treeName + ' 1') === 0, JSON.stringify(add1));
+  const pop = await ev(() => {
+    const p = getCurrentPages().pop();
+    const c = p.data.trees[0].rows[0].cells[0];
+    p.onLongNode({ currentTarget: { dataset: { id: c.id } } });
+    const q = p.data.pop;
+    return q ? { name: q.name, ranks: q.ranks, max: q.max, tier: q.tier } : null;
+  });
+  log('长按开详情：名字、已点/上限、第几层都在', !!pop && pop.name === sim0.first.name
+    && pop.ranks === 1 && String(pop.max) === String(sim0.first.max) && pop.tier === 0, JSON.stringify(pop));
+  const back1 = await ev(() => {
+    const p = getCurrentPages().pop();
+    p.popRemove();
+    const d = p.data;
+    return { left: d.remaining, ranks: d.trees[0].rows[0].cells[0].ranks, pop: d.pop && d.pop.ranks };
+  });
+  log('详情里减一点：树上那一格与弹窗读数一起回到 0',
+    back1.left === sim0.total && back1.ranks === 0 && back1.pop === 0, JSON.stringify(back1));
+  const shared = await ev(() => {
+    const p = getCurrentPages().pop();
+    const c = p.data.trees[0].rows[0].cells[0];
+    p.onTapNode({ currentTarget: { dataset: { id: c.id } } });
+    p.onTapNode({ currentTarget: { dataset: { id: c.id } } });
+    const s = p.onShareAppMessage();
+    return { path: s.path, title: s.title, code: p.data.buildCode };
+  });
+  log('分享带这套配置的短码（与网页 encode 同格式：三系、每节点一位）',
+    /classId=warrior&b=/.test(shared.path) && /^[0-9a-z]+-[0-9a-z]+-[0-9a-z]+$/.test(shared.code)
+      && shared.code.charAt(0) === '2' && /2/.test(shared.title), JSON.stringify(shared));
+  await shot('f2-talent-sim');
+
   process.stdout.write('\nD. 规范与包体\n');
   const files = ['pages/spells/index.wxss', 'pages/loots/index.wxss'];
   const raw = [];
@@ -365,6 +445,81 @@ async function main() {
   });
   log('每个用 icon-cell 的页面都在自己的 json 里注册了它', unregistered.length === 0, unregistered.join(','));
   const homeWxss = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxss'), 'utf8');
+  const clsWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/classes/index.wxml'), 'utf8');
+  /* —— 天赋引擎单测（纯函数，不连设备）：与网页端 TalentPage 同一套判定的回归面。
+        用例是照网页那份引擎的行为写死的，任何一条变了就是两端会给不同的"能不能点"。 —— */
+  const TE = require(path.join(REPO, 'for-mini/services/talent-engine.js'));
+  const TT = [{ id: 'w0', nameCn: '武器', nodes: [
+    { id: 'a', tier: 0, column: 0, maxRanks: 3, nameCn: '甲' },
+    { id: 'b', tier: 1, column: 0, maxRanks: 1, nameCn: '乙', requires: ['a'] },
+    { id: 'c', tier: 2, column: 0, maxRanks: 2, nameCn: '丙', requires: ['b'] },
+    { id: 'd', tier: 0, column: 1, maxRanks: null, nameCn: '丁' }] }];
+  const TR = TE.normalizeRules({ totalPoints: 4, tierUnlockCost: [0, 2, 5] });
+  const nmOf = (id) => ({ a: '甲', b: '乙', c: '丙', d: '丁' }[id] || '');
+  const t1 = TE.canAdd(TT[0], {}, TT[0].nodes[1], TR, TT, nmOf);
+  const t2 = TE.canAdd(TT[0], { a: 2 }, TT[0].nodes[1], TR, TT, nmOf);
+  const t3 = TE.canAdd(TT[0], { a: 1 }, TT[0].nodes[3], TR, TT, nmOf);
+  const t4 = TE.canAdd(TT[0], { a: 1, b: 1, c: 2 }, TT[0].nodes[0], TR, TT, nmOf);
+  const t5 = TE.remove(TT, { a: 1, b: 1 }, TT[0].nodes[0]);
+  const code5 = TE.encode(TT, { a: 3, b: 1 });
+  const dec5 = TE.decode(code5, TT);
+  const over = TE.decode('9999', TT);
+  log('引擎：层级门槛（第 2 层要本系 2 点）与总点数用尽都按网页同一套判',
+    t1.ok === false && /投满 2 点/.test(t1.why) && t2.ok === true
+      && t4.ok === false && /用完（共 4 点）/.test(t4.why), JSON.stringify([t1.why, t2.ok, t4.why]));
+  log('引擎：maxRanks 没核实的节点不猜上限，直接说"还没核实"',
+    t3.ok === false && /上限还没核实/.test(t3.why), String(t3.why));
+  log('引擎：前置那句给天赋中文名，不把 warrior-0-重伤 这种编号印给玩家',
+    /要先点：甲/.test(TE.canAdd(TT[0], {}, TT[0].nodes[1], TE.normalizeRules({ totalPoints: 4 }), TT, nmOf).why));
+  log('引擎：减一点会级联清空靠它活着的天赋', /跟着清空：乙/.test(String(t5.msg)), String(t5.msg));
+  log('引擎：编码↔解码回同一套，超上限的码被夹住并计数',
+    code5 === '3100' && JSON.stringify(dec5.state) === JSON.stringify({ a: 3, b: 1 }) && dec5.bad === 0
+      && over.state.a === 3 && over.state.d === undefined && over.bad > 0,
+    JSON.stringify({ code5, dec: dec5.state, over: over.state, bad: over.bad }));
+
+  /* —— tabBar 图标：微信要本地文件，缺一张就是 tab 上少个图标且不报错 —— */
+  const tabErr = [];
+  (appJson.tabBar.list || []).forEach((it) => {
+    ['iconPath', 'selectedIconPath'].forEach((k) => {
+      const rel = it[k];
+      if (!rel) { tabErr.push(it.text + ' 缺 ' + k); return; }
+      const abs = path.join(REPO, 'for-mini', rel);
+      if (!fs.existsSync(abs)) { tabErr.push(it.text + ' 的 ' + rel + ' 文件不在包里'); return; }
+      const b = fs.statSync(abs).size;
+      if (b > 40 * 1024) tabErr.push(it.text + ' ' + rel + ' ' + b + 'B 超微信单张 40KB');
+      if (b < 200) tabErr.push(it.text + ' ' + rel + ' 小得不像一张图');
+    });
+  });
+  log('tabBar 三个入口都有本地图标与普通/选中两态（文件在包内且 ≤40KB）', tabErr.length === 0, tabErr.join(','));
+  const genTool = fs.readFileSync(path.join(REPO, 'wow-forever-web/tools/gen-tabbar-icons.py'), 'utf8');
+  log('tabBar 图标是脚本按令牌自绘的（生成器在仓库里，颜色读 app.wxss，不抄第三方素材）',
+    /token\("txt-muted"\)/.test(genTool) && /token\("gold-hot"\)/.test(genTool) && !/魔兽|WoW|暴雪/.test(genTool));
+
+  /* —— 首页底图：清单只有一处真源，页面与导出层都不许各写一份 —— */
+  const uiPack = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/data/ui-art.json'), 'utf8'));
+  const uiRels = [];
+  (function walkUi(node) {
+    if (!node || typeof node !== 'object') return;
+    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(node[k]); else walkUi(node[k]); });
+  })(uiPack.home);
+  const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', p)));
+  const metaOut = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
+  const shipped = [((metaOut.uiArt || {}).bg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));
+  log('界面底图清单齐全：本地都有文件，且原样进了 meta 分片（img/ 换成 assets 相对路径）',
+    uiRels.length === 5 && uiMiss.length === 0 && shipped.length === 5
+      && shipped.every((s) => s && s.indexOf('img/') !== 0), JSON.stringify({ uiRels, shipped, uiMiss }));
+  /* 界面文字要先把 WXML 注释剥掉再比：注释里写"『查』『去查』这类字眼不要了"是给人看的说明，
+     不是玩家看得见的字——上一版没剥注释，被自己写的注释判红了。 */
+  const homeText = homeWxml.replace(/<!--[\s\S]*?-->/g, ' ');
+  const clsText = clsWxml.replace(/<!--[\s\S]*?-->/g, ' ');
+  log('首页不再出现「查」「去查」「去看」这类字样',
+    !/>查</.test(homeText) && !/去查|去看/.test(homeText) && homeWxss.indexOf('.entry-go') < 0,
+    '整张卡就是入口');
+  log('职业页：职业用五列格（与首页同一份版式），组合改三列上下结构且没有"看这个职业"',
+    /class="cls9"/.test(clsWxml) && /class="combo3"/.test(clsWxml) && !/看这个职业/.test(clsText)
+      && fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8').indexOf('.cls9') >= 0,
+    '版式在 app.wxss 共用一份，两页不各写一套');
+
   /* 秒表撤了就要撤干净：模板里不再渲染，样式里也不留一段没人用的 .cd-clock */
   log('秒表撤干净了（模板不渲染 cd.clock，样式里也没有 .cd-clock 残留）',
     homeWxml.indexOf('cd.clock') < 0 && homeWxml.indexOf('cd-clock') < 0 && homeWxss.indexOf('.cd-clock') < 0,

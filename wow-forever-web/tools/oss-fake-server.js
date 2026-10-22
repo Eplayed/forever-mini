@@ -1,24 +1,42 @@
 /* 本地假 OSS：把 tools/oss-release.js 构建出来的批次按真 HTTP 语义发出去
    （ETag = 实际字节的 MD5、Content-Length、Cache-Control、404），
    用来在微信开发者工具里验 live 路径与 ETag 校验。只监听 127.0.0.1，不写任何东西。
-   模式：FAKE_OSS_MODE=normal|tamper|min99|dropdetail */
+   模式：FAKE_OSS_MODE=normal|tamper|min99|dropdetail
+   2026-10-22 加素材通道：/{ns}/assets/<rel> 直接发 src/img/<rel>（真 bucket 上素材就在这一层），
+   这样"首页配图、卡片底图"这类改动可以在本地先验真出图，不必为了一张图去写线上。 */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
 const ROOT = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/oss-build/beta';
+const IMG_ROOT = '/Users/zhangyajun/Documents/project/wow-forever/wow-forever-web/src/img';
 const MODE = process.env.FAKE_OSS_MODE || 'normal';
 const BIDX = JSON.parse(fs.readFileSync(require('path').join(ROOT, 'manifest.json'), 'utf8')).buildId;
 const PORT = Number(process.env.FAKE_OSS_PORT || 8899);
 const md5u = (b) => crypto.createHash('md5').update(b).digest('hex').toUpperCase();
+const MIME = { '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png' };
 
 const server = http.createServer((req, res) => {
   const rel = decodeURIComponent(req.url.replace(/^\/+/, '').replace(/^wow\/beta\/v1\//, ''));
-  const file = path.join(ROOT, rel);
-  if (!file.startsWith(ROOT) || !fs.existsSync(file)) {
+  /* 素材走 src/img，批次与指针走 oss-build/beta，两条路径互不串门 */
+  const isAsset = rel.indexOf('assets/') === 0;
+  const base = isAsset ? IMG_ROOT : ROOT;
+  const file = path.join(base, isAsset ? rel.slice('assets/'.length) : rel);
+  if (!file.startsWith(base) || !fs.existsSync(file)) {
     res.writeHead(404, { 'Content-Type': 'application/xml' });
     res.end('<Error><Code>NoSuchKey</Code></Error>');
+    return;
+  }
+  if (isAsset) {
+    const buf = fs.readFileSync(file);
+    res.writeHead(200, {
+      'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream',
+      'Content-Length': buf.length,
+      ETag: '"' + md5u(buf) + '"',
+      'Cache-Control': 'public, max-age=31536000, immutable'
+    });
+    res.end(buf);
     return;
   }
   let buf = fs.readFileSync(file);

@@ -22,6 +22,9 @@ Page({
     offline: false,
     requiresUpdate: false,
     cd: null,
+    /* 页面背景与四张卡的底图：地址由 meta.uiArt + 批次拼出来，取不到就是空串（版式回落纯色） */
+    bgUrl: '',
+    cardBg: { dungeons: '', classes: '', loots: '', guide: '' },
     classes: [],
     activeClass: '',
     activeName: '',
@@ -99,6 +102,19 @@ Page({
       }
       this.batch = cls.batch || this.batch
       this.raceSource = (cls.data || {}).races || []
+      /* 底图走 meta 下发的那份清单（真源在 src/data/ui-art.json），页面不各自抄路径；
+         批次取 meta 的（拿不到再退到职业索引的），断网没有批次时 assetUrl 返回空 → 版式回落纯色 */
+      const mBatch = meta.batch || cls.batch
+      const ui = m.uiArt || {}
+      this.setData({
+        bgUrl: oss.assetUrl(mBatch, ui.bg),
+        cardBg: {
+          dungeons: oss.assetUrl(mBatch, (ui.cards || {}).dungeons),
+          classes: oss.assetUrl(mBatch, (ui.cards || {}).classes),
+          loots: oss.assetUrl(mBatch, (ui.cards || {}).loots),
+          guide: oss.assetUrl(mBatch, (ui.cards || {}).guide)
+        }
+      })
       const classes = ((cls.data || {}).classes || []).map((c) => ({
         classId: c.classId,
         nameCn: c.nameCn || '',
@@ -195,6 +211,21 @@ Page({
       try { wx.setStorageSync(service.RECENT_DUNGEON_KEY, ids.filter((id) => map[id])) } catch (e) {}
     }
     this.setData({ recent })
+  },
+
+  /* 底图取不到（素材还没发、这张被撤、路径换了）就把那一层撤掉，卡片回到纯色版式。
+     红线是不许出现碎图：加载失败必须接住，而不是留一个黑框在页面上。 */
+  onArtError(e) {
+    const k = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.k) || '')
+    if (k === 'bg') {
+      this.setData({ bgUrl: '' })
+      return
+    }
+    if (k && this.data.cardBg[k]) {
+      const cardBg = Object.assign({}, this.data.cardBg)
+      cardBg[k] = ''
+      this.setData({ cardBg })
+    }
   },
 
   onRecentTap(e) {

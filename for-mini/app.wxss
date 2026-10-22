@@ -56,6 +56,13 @@ page {
   /* 提示条底色：只在这里定义一次，页面里不许再写 rgba */
   --warn-bg: rgba(221, 159, 68, 0.12);
   --bad-bg: rgba(199, 92, 92, 0.16);
+
+  /* 底图压暗层（2026-10-22 首页配图）：页面背景与卡片背景都要盖一层暗底，
+     不然原画的亮部会把文字吃掉。同样只在这里写 rgba，页面里引用令牌。 */
+  --scrim-page: rgba(11, 15, 22, 0.88);
+  --scrim-card: rgba(11, 15, 22, 0.58);
+  --scrim-card-b: rgba(11, 15, 22, 0.86);
+  --scrim-pop: rgba(8, 11, 17, 0.78);
   --lead: #8a93a5;
 
   --sunk: #0d121c;
@@ -232,6 +239,43 @@ button::after {
   background: var(--gold-glow);
   border-color: var(--gold);
   font-weight: 400;
+}
+
+/* 职业格（2026-10-22 站主：首页与职业页都用"一排圆形职业图标、超出往下排、不要横向滚动条"）。
+   一行五格：750rpx 屏宽下每格 138rpx，装得下 96rpx 圆图标 + 三字名；第九个自己换行。
+   用 flex 不用 display:grid，是为了不在老内核上赌层叠支持。两个页面共用这一份，别各写一套。 */
+.cls9 {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4rpx 10rpx;
+}
+
+.cls {
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 14rpx;
+  padding: 14rpx 4rpx 10rpx;
+  border: 1rpx solid transparent;
+  border-radius: var(--r-ctl);
+}
+
+/* 选中态三通道：金色描边 + 底色抬起 + 名字变金，不只靠颜色（暗光与色盲也分得出） */
+.cls-on {
+  background: var(--panel);
+  border-color: var(--gold);
+}
+
+.cls-name {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  margin-top: 8rpx;
+}
+
+.cls-on .cls-name {
+  color: var(--gold-hi);
 }
 
 .foot {

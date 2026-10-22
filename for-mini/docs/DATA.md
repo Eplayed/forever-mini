@@ -119,9 +119,14 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 与 `hasTalents`；`combos[]` 是无限新增的种族职业组合（官方中文来源）。
 **注意键名**：基底 `classes.json` 用 `id/cn/en`，导出层换成 `classId/nameCn/nameEn`——分发层与界面只认后者。
 
-天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, trees[] }`，
+天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, rules, trees[] }`，
 节点只有 `tier / column / maxRanks / nameCn / iconKey / requires / level`。
-**`rules.tierUnlockCost` 刻意不下发**：门槛没核到之前把数发下去，界面就会去做解锁判定（根 AGENTS.md 第五条）。
+**`rules` 从 2026-10-22 起随片下发**（`totalPoints` + `tierUnlockCost`）：站主要小程序的天赋树做成
+"能模拟点配置、和网页版那样"，网页引擎本来就用这份数做加点判定，小程序不做判定才是不一致。
+M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一起翻了）。
+放松的只是"下发"，不是"怎么说"：界面上固定留一句
+"层级门槛按经典旧世推（第 2 层起 5 / 10 / 15 / 20 / 25 / 30 点），无限服还没实测"，
+拿不到 `rules` 时退成"不做分层限制"并照实说——降级路径在 `f2-talent-sim.png` 里拍到了。
 
 指南 `guide.json`（入口文件）＝ `{ kind: "guide", meta.boundaries, macros[], addons[] }`。
 现在两条都是空数组——空是合法状态。**首页的指南卡固定占一格**（2026-10-22 站主指令：
@@ -139,7 +144,9 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 
 ### 素材层（M02 起，图片不再"没传"）
 
-`wow/{env}/v1/assets/` 下三类：`icons/{iconKey}.jpg`、`art/dungeons/*.webp`、`art/bosses/*.webp`，
+`wow/{env}/v1/assets/` 下按目录分：`icons/{iconKey}.jpg`、`art/dungeons/*.webp`、`art/bosses/*.webp`、
+`art/dungeonmaps/*.webp`（副本内部底图），2026-10-22 起再加界面底图四类
+`gen/*.webp`（本站自生成氛围图）、`art/classbanners/*.webp`、`art/scenes/*.webp`、复用的 `art/dungeons/*.webp`，
 外加一份 `assets/index.json` 台账（记每个对象的 sha256/etag/bytes/来源）。
 数据里的 `art` 与 `bosses[].portrait` 存的是**相对 assets/ 的路径**（`art/dungeons/x.webp`），
 图标只存 `iconKey`；绝对地址由客户端 `assetUrl()` / `iconUrl()` 拼，拼出来带 `img/`、`../` 或非 `assets/` 一律不给拼。
@@ -148,6 +155,19 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 把它也按不可变拦会得到一条假冲突，2026-10-22 踩过）。
 反向卡口：批次里任何界面会拼出来的 `iconKey` / `art` / `portrait`，素材层没登记就直接构建失败——
 "缺登记 0 条"却线上 404 这种自欺（职业图标漏登记那次）不再可能。
+
+### 界面底图（2026-10-22 起，路径只有一处真源）
+
+清单在 **`wow-forever-web/src/data/ui-art.json`**：首页背景 + 四张入口卡各一张底图，共 5 条。
+导出层把它换成 `assets/` 相对路径塞进 **`meta.uiArt`**（`{ bg, cards: { dungeons, classes, loots, guide } }`）下发，
+页面只认这一份，**不许在 wxml/js 里各写一遍路径**（`mini-m02-check` 有两条查这个：
+meta 里五条都到位、且都不带 `img/` 前缀）。
+分发层把这五张登记进素材台账（`build` 输出里素材从 1299 → 1303 个），缺文件会进 `assets.missing` 让构建红。
+两类来路各自有 manifest：`gen/` 是本站自生成（AI），`art/` 是客户端原画经第三方站转存；
+**都不打进主包**，所以断网或没发素材时卡片回落纯色版式（`<image>` 的 `binderror` 接住，不留碎图）。
+
+顺手登记一个素材层的重复：`art/panels/library.webp` 与 `art/panels/map.webp` **md5 相同**
+（41,692 B，都是那张东部王国地图）——两条清单键指向同一张图，本轮两张都没用，等 wow-data 定改哪条。
 
 ## 三·五、客户端实际做的是哪五项校验（R1 改的就是这一层）
 

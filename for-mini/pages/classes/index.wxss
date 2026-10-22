@@ -18,56 +18,6 @@
   color: var(--txt-muted);
 }
 
-.cgrid {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.ccard {
-  width: 48.5%;
-  box-sizing: border-box;
-  background: var(--panel);
-  border: 1rpx solid var(--line);
-  border-radius: 12rpx;
-  padding: 16rpx;
-  margin-bottom: 16rpx;
-}
-
-.ccard:nth-child(odd) {
-  margin-right: 3%;
-}
-
-.crow {
-  display: flex;
-  align-items: center;
-}
-
-.crow2 {
-  margin-top: 12rpx;
-}
-
-.cmain {
-  flex: 1;
-  min-width: 0;
-  margin-left: 12rpx;
-}
-
-.cname {
-  font-size: 28rpx;
-  color: var(--txt-title);
-}
-
-.cen {
-  margin-top: 2rpx;
-  font-size: 20rpx;
-  color: var(--txt-hint);
-}
-
-.csub {
-  font-size: 21rpx;
-  color: var(--txt-muted);
-}
-
 .sec {
   margin-top: 26rpx;
 }
@@ -79,21 +29,29 @@
   margin-bottom: 12rpx;
 }
 
-.combo {
+/* 组合卡：一排三个，图标在上、整名在下（2026-10-22 站主指令）。
+   与首页职业格同一套思路——flex 换行，不做横向滚动 */
+.combo3 {
   display: flex;
-  align-items: center;
-  padding: 12rpx 16rpx;
-  margin-bottom: 8rpx;
-  background: var(--panel-2);
-  border-radius: 10rpx;
-  font-size: 25rpx;
-  color: var(--txt);
+  flex-wrap: wrap;
+  margin: 0 -6rpx;
 }
 
-.combo-go {
-  margin-left: auto;
-  font-size: 21rpx;
-  color: var(--gold);
+.cmb {
+  flex: 0 0 33.333%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14rpx 6rpx;
+  margin-bottom: 12rpx;
+}
+
+.cmb-t {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  text-align: center;
 }
 
 .race {

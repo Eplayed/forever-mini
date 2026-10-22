@@ -40,5 +40,14 @@ module.exports = {
   "掉落数据一律不写百分比",
   "图标只允许本地文件，出现外链即失败",
   "缺数据显示「待实测」，禁止编造"
- ]
+ ],
+ "uiArt": {
+  "bg": "gen/hero-ruins.webp",
+  "cards": {
+   "dungeons": "art/dungeons/city-of-dalaran.webp",
+   "classes": "art/classbanners/warrior.webp",
+   "loots": "gen/cavern-hall.webp",
+   "guide": "art/scenes/guangshu.webp"
+  }
+ }
 };

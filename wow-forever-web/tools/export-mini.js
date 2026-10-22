@@ -58,6 +58,7 @@ const classes = read('classes.json');
 const spells = read('spells.json');
 const races = read('races.json');
 const guide = read('guide.json');
+const uiArt = read('ui-art.json');
 
 const dungeonList = (dungeons.newDungeons || []).concat(dungeons.classicDungeons || [], dungeons.raids || []);
 const spellList = spells.spells || [];
@@ -136,6 +137,26 @@ const coverage = tally(
 
 const nameHit = talentNodes.filter((n) => n.nameVerified || (n.provenance || []).some((p) => (p.type || '') === 'official_cn')).length;
 
+/* 界面底图清单（2026-10-22 站主：首页卡片没图，要找对应的图当背景）。
+   真源只有一处：src/data/ui-art.json。这里把站内 img/ 路径换成 assets/ 相对路径下发，
+   小程序只认后者（红线：素材不许热链站内路径）。本地文件不在就拒绝出包——
+   图没转存就别让界面去要一张不存在的图，那种表现是"卡上一片黑"，不是报错。 */
+function uiArtRel(entry, where) {
+  const p = String((entry || {}).path || '');
+  if (p.indexOf('img/') !== 0) {
+    errs.push(`界面底图 ${where}：路径必须以 img/ 开头（现在是「${p || '空'}」），素材一律本地留存，不许热链`);
+    return '';
+  }
+  const rel = p.slice(4);
+  /* rel 是相对 src/img/ 的路径（与分发层 statAsset 同一个基准），别拼成 src/ 直下 */
+  if (!fs.existsSync(path.join(WEB, 'src', 'img', rel))) errs.push(`界面底图 ${where}：本地没有这个文件 src/img/${rel}`);
+  return rel;
+}
+const miniUiArt = { bg: uiArtRel((uiArt.home || {}).bg, '首页背景'), cards: {} };
+Object.keys(((uiArt.home || {}).cards) || {}).forEach((k) => {
+  miniUiArt.cards[k] = uiArtRel(uiArt.home.cards[k], `首页「${k}」卡`);
+});
+
 const miniMeta = {
   site: meta.site,
   disclaimer: meta.disclaimer,
@@ -156,7 +177,9 @@ const miniMeta = {
     talentNameVerified: nameHit
   },
   openQuestions: (meta.openQuestions || []).slice(0, 6),
-  rules: meta.rules
+  rules: meta.rules,
+  /* 首页底图（assets/ 相对路径）：界面只认这一份，路径不在页面里各写一遍 */
+  uiArt: miniUiArt
 };
 
 /* —— 快照挑选：优先 L0，按 kind / classId 分散，保证离线也有可搜内容 —— */

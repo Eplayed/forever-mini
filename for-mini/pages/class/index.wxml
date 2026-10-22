@@ -12,7 +12,7 @@
       <view class="head-name">{{nameCn}}</view>
       <view class="muted head-en">{{nameEn}}</view>
     </view>
-    <button class="btn btn-share" open-type="share">分享</button>
+    <button class="btn btn-share" open-type="share">分享这套</button>
   </view>
 
   <view wx:if="{{!loaded}}" class="card muted">正在取这个职业…</view>
@@ -37,30 +37,80 @@
     </view>
 
     <view class="sec">
-      <view class="sec-t">天赋树</view>
+      <view class="sec-t">天赋模拟器</view>
       <view wx:if="{{!talentLoaded}}" class="card muted">正在取天赋树…</view>
       <view wx:elif="{{!trees.length}}" class="card empty">
         <view>这个职业的天赋树还没有整理好。</view>
         <view class="muted">核到位之前这里不摆猜出来的树。</view>
       </view>
       <block wx:else>
-        <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
-          <view class="chip {{treeTab === index ? 'chip-on' : ''}}" wx:for="{{trees}}" wx:key="name" data-i="{{index}}" bindtap="onTreeTab">{{item.name}}</view>
-        </scroll-view>
+        <!-- 读数条：剩余点数 + 三系各投了多少 + 两个动作。点数是模拟器自己要用的，不是数据自述 -->
+        <view class="tbar plate">
+          <view class="tbar-left">
+            <text class="tnum">{{remaining}}</text><text class="tunit">/ {{totalPoints}} 点可用</text>
+          </view>
+          <view class="tbar-right">
+            <view class="btn" bindtap="onCopyBuild">复制这套</view>
+            <view class="btn" bindtap="onReset">清空</view>
+          </view>
+        </view>
+        <view class="muted tsum">{{spentText || '还没加点'}}</view>
+
+        <view class="tabs">
+          <view class="tab {{treeTab === index ? 'tab-on' : ''}}" wx:for="{{trees}}" wx:key="name"
+                data-i="{{index}}" bindtap="onTreeTab">
+            {{item.name}}<text class="tab-n">{{item.spent}}</text>
+          </view>
+        </view>
+
         <view class="tree">
           <view class="trow" wx:for="{{trees[treeTab].rows}}" wx:key="tier">
-            <view class="tcell {{cell.missing ? 'tcell-miss' : ''}}" wx:for="{{item.cells}}" wx:for-item="cell" wx:key="id" data-id="{{cell.id}}" bindtap="onNode">
-              <icon-cell src="{{cell.iconUrl}}" size="sm" label="{{cell.name}}" />
-              <view class="tname">{{cell.name}}</view>
-              <view class="muted trank">{{cell.ranks}} 级</view>
+            <view class="tcell {{cell.ranks ? 'tcell-on' : ''}} {{cell.full ? 'tcell-full' : ''}} {{cell.can ? '' : 'tcell-off'}} {{cell.missing ? 'tcell-miss' : ''}}"
+                  wx:for="{{item.cells}}" wx:for-item="cell" wx:key="id" data-id="{{cell.id}}"
+                  bindtap="onTapNode" bindlongpress="onLongNode">
+              <view class="tkick">
+                <icon-cell src="{{cell.iconUrl}}" size="md" label="{{cell.name}}" />
+                <text class="trank">{{cell.ranks}}{{cell.max ? '/' + cell.max : ''}}</text>
+              </view>
+              <view class="tname">{{cell.name || '名字待核'}}</view>
             </view>
             <view class="tcell tcell-empty" wx:for="{{4 - item.cells.length}}" wx:key="*this"></view>
           </view>
         </view>
-        <view class="muted tree-note">一格＝一个天赋，点它看级数上限与前置。只摆位置和名字，加点门槛核到之前不做解锁判定。{{note}}</view>
+        <view class="muted tree-note">点一下加一点，长按看详情与减点。{{gateNote}}。名字与坐标来自第三方资料站转述，缺的写待核，不机翻。</view>
       </block>
     </view>
   </block>
+
+  <!-- 天赋详情：本站自己的面板（系统对话框吃不到主题色），样式与页面同一套令牌 -->
+  <view wx:if="{{pop}}" class="mask" bindtap="popClose"></view>
+  <view wx:if="{{pop}}" class="pop plate">
+    <view class="pop-head">
+      <icon-cell src="{{pop.iconUrl}}" size="md" label="{{pop.name}}" />
+      <view class="pop-title">
+        <view class="pop-name">{{pop.name || '名字待核'}}</view>
+        <view class="muted pop-sub">{{treeName}} · 第 {{pop.tier + 1}} 层</view>
+      </view>
+      <view class="pop-x" bindtap="popClose">关闭</view>
+    </view>
+    <view class="pop-row">
+      <text class="pop-k">已点</text>
+      <text class="pop-v">{{pop.ranks}}{{pop.max ? ' / ' + pop.max : ' / 上限未核实'}}</text>
+    </view>
+    <view class="pop-row" wx:if="{{pop.requires}}">
+      <text class="pop-k">要先点</text>
+      <text class="pop-v">{{pop.requires}}</text>
+    </view>
+    <view class="pop-row" wx:if="{{pop.why}}">
+      <text class="pop-k">现在不能点</text>
+      <text class="pop-v pop-why">{{pop.why}}</text>
+    </view>
+    <view class="pop-btns">
+      <view class="btn {{pop.can ? '' : 'btn-dim'}}" bindtap="popAdd">加一点</view>
+      <view class="btn {{pop.ranks ? '' : 'btn-dim'}}" bindtap="popRemove">减一点</view>
+    </view>
+    <view class="muted pop-note">这套是本站页面内的模拟配置，不进游戏、不代表官方加点方案。</view>
+  </view>
 
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>

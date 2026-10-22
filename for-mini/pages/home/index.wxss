@@ -3,6 +3,33 @@
    2026-10-22 站主重排后新增：开服倒计时 .cd 开头、职业格 .cls9 与 .cls、
    种族与特长 .race 与 .trait 开头。上一版留给覆盖率读数与缺口清单的样式已随界面一起删掉。 */
 
+/* —— 底图两层（2026-10-22 站主：卡片配图、页面背景用《无限》那张氛围图）——
+   .pagebg 是图，.pagebg-scrim 是压在图上的暗底（不压暗，原画的亮部会把文字吃掉），
+   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，页面就是原来的纯色版式。 */
+.pagebg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.pagebg-scrim {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: var(--scrim-page);
+}
+
+.fg {
+  position: relative;
+  z-index: 1;
+}
+
 .hero {
   padding: 8rpx 4rpx 28rpx;
 }
@@ -111,8 +138,11 @@
 }
 
 .entry {
+  position: relative;
+  overflow: hidden;
   flex: 1 1 300rpx;
   min-width: 300rpx;
+  min-height: 200rpx;
   margin: 0 8rpx 16rpx;
   background: var(--panel);
   border: 1rpx solid var(--gold-line);
@@ -121,64 +151,49 @@
   box-sizing: border-box;
 }
 
+/* 卡的底图铺满整格，上面再压一层由下往上的暗渐变：
+   上半留原画、下半保证名称与那行说明读得清 */
+.entry-art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.entry-scrim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(180deg, var(--scrim-card) 0%, var(--scrim-card-b) 78%);
+}
+
 .entry-name {
-  font-size: 26rpx;
-  color: var(--txt-dim);
+  position: relative;
+  z-index: 1;
+  font-size: 30rpx;
+  color: var(--txt-title);
 }
 
 .entry-desc {
+  position: relative;
+  z-index: 1;
   font-size: 22rpx;
-  color: var(--txt-muted);
+  color: var(--txt-dim);
   margin-top: 10rpx;
   min-height: 66rpx;
 }
 
-.entry-go {
-  margin-top: 12rpx;
-  padding-top: 12rpx;
-  border-top: 1rpx solid var(--gold-line-soft);
-  font-size: 24rpx;
-  color: var(--gold);
-}
-
 /* —— 职业格 ——
-   站主要"按红框那样一排圆形图标铺开，多出来不要横向滚动条"：
-   这里用 5 列 grid + 自动换行（9 个职业 → 5 + 4），
-   绝不用 scroll-view 包它——横滚在小程序里看不见"还有多少个"，也不符合"不要滚动条"那句。 */
-.cls9 {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -4rpx 10rpx;
-}
-
-/* 一行五格（750rpx 屏宽下每格 138rpx，装得下 96rpx 圆图标 + 三字名），
-   第九个自己换到第二行——不用 display:grid 是为了不在老内核上赌层叠支持 */
-.cls {
-  flex: 0 0 20%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 14rpx;
-  padding: 14rpx 4rpx 10rpx;
-  border: 1rpx solid transparent;
-  border-radius: var(--r-ctl);
-}
-
-/* 选中态三通道：金色描边 + 底色抬起 + 名字变金，不只靠颜色（暗光与色盲也分得出） */
-.cls-on {
-  background: var(--panel);
-  border-color: var(--gold);
-}
-
-.cls-name {
-  font-size: 22rpx;
-  color: var(--txt-dim);
-  margin-top: 8rpx;
-}
-
-.cls-on .cls-name {
-  color: var(--gold-hi);
+   格子的版式（一行五格、超出换行、选中态）在 app.wxss 里与职业页共用一份，
+   这里只留首页特有的两句：不许出现横向滚动条（站主 2026-10-22 明确要求），
+   所以这一排不用 scroll-view 包——全页只有"最近看过"那条轨用横滚。 */
+.cls-empty {
+  margin-bottom: 10rpx;
 }
 
 /* —— 选中职业的种族与特长 —— */

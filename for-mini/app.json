@@ -25,15 +25,21 @@
     "list": [
       {
         "pagePath": "pages/home/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "img/tabbar/home-idle.png",
+        "selectedIconPath": "img/tabbar/home-on.png"
       },
       {
         "pagePath": "pages/dungeons/index",
-        "text": "副本"
+        "text": "副本",
+        "iconPath": "img/tabbar/dungeons-idle.png",
+        "selectedIconPath": "img/tabbar/dungeons-on.png"
       },
       {
         "pagePath": "pages/classes/index",
-        "text": "职业"
+        "text": "职业",
+        "iconPath": "img/tabbar/classes-idle.png",
+        "selectedIconPath": "img/tabbar/classes-on.png"
       }
     ]
   },

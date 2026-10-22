@@ -1,0 +1,37 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-22",
+  "note": "小程序界面要用的底图清单，唯一真源在这里，页面与导出层都不各自抄路径。网页端不读这份文件。",
+  "why": "2026-10-22 站主指令：首页卡片没有图片，要找对应的图当卡片背景；页面背景用《无限》那张氛围底图。",
+  "provenance": "gen/ 是本站自生成的氛围图（AI，见 src/img/gen/manifest.json，不是游戏原画也不是第三方站图片）；art/ 是客户端原画经第三方站转存（见 src/img/art/manifest.json，整目录删除即回退到纯色版式）。两类都不进小程序主包，一律走 OSS 素材通道。"
+ },
+ "home": {
+  "bg": {
+   "path": "img/gen/hero-ruins.webp",
+   "kind": "generated-atmosphere",
+   "what": "远山废墟 + 铜金落日，左半留暗部放标题（与网页首页 hero 同一张）"
+  },
+  "cards": {
+   "dungeons": {
+    "path": "img/art/dungeons/city-of-dalaran.webp",
+    "kind": "dungeon-loading",
+    "what": "达拉然城载入图，给「副本」卡"
+   },
+   "classes": {
+    "path": "img/art/classbanners/warrior.webp",
+    "kind": "class-banner",
+    "what": "职业横幅原画，给「职业」卡"
+   },
+   "loots": {
+    "path": "img/gen/cavern-hall.webp",
+    "kind": "generated-atmosphere",
+    "what": "石柱大厅 + 地缝金光，给「掉落查询」卡"
+   },
+   "guide": {
+    "path": "img/art/scenes/guangshu.webp",
+    "kind": "scene",
+    "what": "光树场景原画，给「指南」卡"
+   }
+  }
+ }
+}
