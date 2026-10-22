@@ -505,6 +505,15 @@ async function main() {
   const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', p)));
   const metaOut = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
   const shipped = [((metaOut.uiArt || {}).bg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));
+  /* 官方宣传画是市场图，不是客户端原画——红线要求避开商标词，所以"画面里没有字和 logo"
+     这件事必须落在 manifest 里，而不是靠下一个改图的人自己记得去看。 */
+  const keyManifest = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/img/keyart/manifest.json'), 'utf8'));
+  const keyItem = (keyManifest.items || []).filter((i) => i.kept !== false)[0] || {};
+  log('首页背景那张官方宣传画登记齐全：来源是官方页、做过商标词自查、也记了"国服那张带字标所以不用"',
+    /^https?:\/\//.test(String(keyItem.source || '')) && /blizzard|akamaihd/.test(String(keyItem.sourcePage || ''))
+      && /无「魔兽|无字|不含/.test(String(keyItem.trademarkCheck || ''))
+      && /字标|logo/.test(JSON.stringify(keyItem.rejected || {})) && !!keyItem.sha256,
+    JSON.stringify({ source: keyItem.source, sha: String(keyItem.sha256 || '').slice(0, 8) }));
   log('界面底图清单齐全：本地都有文件，且原样进了 meta 分片（img/ 换成 assets 相对路径）',
     uiRels.length === 5 && uiMiss.length === 0 && shipped.length === 5
       && shipped.every((s) => s && s.indexOf('img/') !== 0), JSON.stringify({ uiRels, shipped, uiMiss }));

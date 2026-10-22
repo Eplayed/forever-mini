@@ -146,7 +146,8 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 
 `wow/{env}/v1/assets/` 下按目录分：`icons/{iconKey}.jpg`、`art/dungeons/*.webp`、`art/bosses/*.webp`、
 `art/dungeonmaps/*.webp`（副本内部底图），2026-10-22 起再加界面底图四类
-`gen/*.webp`（本站自生成氛围图）、`art/classbanners/*.webp`、`art/scenes/*.webp`、复用的 `art/dungeons/*.webp`，
+`keyart/*.webp`（官方宣传画）、`gen/*.webp`（本站自生成氛围图）、`art/classbanners/*.webp`、
+`art/scenes/*.webp`、复用的 `art/dungeons/*.webp`，
 外加一份 `assets/index.json` 台账（记每个对象的 sha256/etag/bytes/来源）。
 数据里的 `art` 与 `bosses[].portrait` 存的是**相对 assets/ 的路径**（`art/dungeons/x.webp`），
 图标只存 `iconKey`；绝对地址由客户端 `assetUrl()` / `iconUrl()` 拼，拼出来带 `img/`、`../` 或非 `assets/` 一律不给拼。
@@ -163,7 +164,10 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 页面只认这一份，**不许在 wxml/js 里各写一遍路径**（`mini-m02-check` 有两条查这个：
 meta 里五条都到位、且都不带 `img/` 前缀）。
 分发层把这五张登记进素材台账（`build` 输出里素材从 1299 → 1303 个），缺文件会进 `assets.missing` 让构建红。
-两类来路各自有 manifest：`gen/` 是本站自生成（AI），`art/` 是客户端原画经第三方站转存；
+三类来路各自有清单可查：**`keyart/` 是官方宣传画**（取自官方新闻页自己的 `og:image`，
+`src/img/keyart/manifest.json` 记来源、抓取日期、sha，并做了"画面里没有商标词与 logo"的自查——
+**国服那张公告横幅因为烘死「魔兽世界 无限」字标而被否**，理由也记在同一份清单里，别因为
+"国服就该用国服图"换回来）；`gen/` 是本站自生成的氛围图（AI）；`art/` 是客户端原画经第三方站转存。
 **都不打进主包**，所以断网或没发素材时卡片回落纯色版式（`<image>` 的 `binderror` 接住，不留碎图）。
 
 顺手登记一个素材层的重复：`art/panels/library.webp` 与 `art/panels/map.webp` **md5 相同**
