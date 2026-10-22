@@ -278,7 +278,13 @@ function buildQueue(data) {
     d.nameEnClient = null;
     if (!main) { st.noQueue += 1; return; }
     d.provenance = d.provenance || [];
-    if (!d.provenance.some((p) => p.type === prov.type && p.url === prov.url)) d.provenance.push(prov);
+    // 同一张表的出处只留最新一次：url 里带 build 号，按整条 url 去重等于每重取一次就多挂一行
+    // （10-10 与 10-11 两次重取已经让每座本同时挂着 70334 与 70338 两行同表出处，就是这个坑）。
+    // 红线说的"两源分歧两个都留"指的是**不同来源**，不是同一张表的旧版本。
+    const tableKey = (u) => String(u || '').replace(/[?&]build=[^&]*/, '');
+    d.provenance = d.provenance.filter((p) =>
+      !(p.type === prov.type && tableKey(p.url) === tableKey(prov.url)));
+    d.provenance.push(prov);
     if (!own) { d.nameEn = main.nameEn || null; if (d.nameEn) st.nameEn += 1; }
     else if (norm(own) !== norm(main.nameEn)) { d.nameEnClient = main.nameEn; st.nameDiff += 1; }
     const cli = main.minLevel + '-' + main.maxLevel;
