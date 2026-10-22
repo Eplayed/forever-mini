@@ -171,13 +171,49 @@ async function main() {
     const p = getCurrentPages().pop();
     const d = p.data;
     return { counts: d.counts, cov: d.covList, wip: d.wip, fact: d.factDate, build: d.buildId,
-      hasSpells: typeof p.goSpells === 'function', hasLoots: typeof p.goLoots === 'function' };
+      hasLoots: typeof p.goLoots === 'function', hasGuide: typeof p.goGuide === 'function',
+      /* 2026-10-22 首页改版要读的四段：倒计时 / 职业格 / 选中职业 / 可选种族与特长 */
+      cd: d.cd, nClasses: (d.classes || []).length, activeClass: d.activeClass, activeName: d.activeName,
+      raceIds: (d.races || []).map((r) => r.id),
+      raceNoName: (d.races || []).filter((r) => !r.nameCn).length,
+      traitAll: (d.races || []).reduce((s, r) => s + (r.traits || []).length, 0),
+      traitNoName: (d.races || []).reduce((s, r) => s + (r.traits || []).filter((t) => !t.name).length, 0),
+      traitWithEffect: (d.races || []).reduce((s, r) => s + (r.traits || []).filter((t) => t.effect).length, 0) };
   });
-  log('技能与掉落两个入口的处理器在（页面不是 tab 页，必须 navigateTo）', home.hasSpells && home.hasLoots);
+  log('掉落与指南两个入口的处理器在（两页都不是 tab，必须 navigateTo）', home.hasLoots && home.hasGuide);
   /* 玩家面规矩（2026-10-22 站主定）：首页不出现计数、覆盖率、缺口、核对日期、批次号 */
   log('首页不出现计数/覆盖率/缺口/核对日期/批次号',
     home.counts === undefined && (home.cov || []).length === 0 && (home.wip || []).length === 0
       && home.fact === undefined && home.build === undefined, JSON.stringify(home));
+  /* —— 首页改版（2026-10-22 站主指令）：开服倒计时 → 四卡 → 职业格 → 可选种族与种族特长。
+     期望值一律从主包职业快照现算，脚本里不抄"9 格 / 7 个种族"这种会变的数字。 */
+  const CLASS_SNAP = require(path.join(REPO, 'for-mini/data/forever-class-snapshot.js'));
+  const META_SNAP = require(path.join(REPO, 'for-mini/data/forever-meta-snapshot.js'));
+  const expectRaces = (classId) => CLASS_SNAP.races.filter((r) => (r.classes || []).indexOf(classId) >= 0).map((r) => r.id);
+  log('开服倒计时这块在，日期取主包 meta 的 launch（界面不写死日期）',
+    !!home.cd && home.cd.on === true && home.cd.to === META_SNAP.launch
+      && /^\d{2}:\d{2}:\d{2}$/.test(String(home.cd.clock)) && home.cd.d > 0, JSON.stringify(home.cd));
+  log('职业格数量与主包职业快照一致',
+    home.nClasses === CLASS_SNAP.classes.length && home.nClasses > 0, home.nClasses + ' vs ' + CLASS_SNAP.classes.length);
+  log('默认选中的是战士', home.activeClass === 'warrior' && home.activeName === '战士', JSON.stringify({ c: home.activeClass, n: home.activeName }));
+  log('战士的可选种族＝按矩阵算出来的那几个（界面不自己凑）',
+    home.raceIds.join(',') === expectRaces('warrior').join(','), home.raceIds.join(','));
+  log('种族特长带文字：每条有名、至少一条有效果说明',
+    home.traitAll > 0 && home.traitNoName === 0 && home.traitWithEffect > 0,
+    JSON.stringify({ n: home.traitAll, noName: home.traitNoName, eff: home.traitWithEffect }));
+  log('缺图标的种族仍然成格（名字在，图交给组件自绘回落，不悄悄丢掉）',
+    home.raceNoName === 0 && home.raceIds.length > 0, JSON.stringify({ noName: home.raceNoName, ids: home.raceIds }));
+  const homePick = await ev(() => {
+    const p = getCurrentPages().pop();
+    p.onPickClass({ currentTarget: { dataset: { id: 'druid' } } });
+    const d = p.data;
+    return { route: getCurrentPages().pop().route, activeClass: d.activeClass,
+      raceIds: (d.races || []).map((r) => r.id), depth: getCurrentPages().length };
+  });
+  log('点别的职业只换下面那段：不跳页、可选种族跟着换',
+    homePick.route === 'pages/home/index' && homePick.depth === 1 && homePick.activeClass === 'druid'
+      && homePick.raceIds.join(',') === expectRaces('druid').join(','), JSON.stringify(homePick));
+  await shot('c0-home-countdown-class');
   const navOk = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.goLoots();
@@ -274,18 +310,66 @@ async function main() {
   log('tabBar 仍是三项，新页走二级页面不挤占 tab', appJson.tabBar.list.length === 3
     && appJson.pages.indexOf('pages/spells/index') >= 0 && appJson.pages.indexOf('pages/loots/index') >= 0,
     JSON.stringify(appJson.pages));
-  const snapBytes = ['forever-glossary-snapshot.js', 'forever-meta-snapshot.js', 'forever-dungeon-snapshot.js']
+  const snapBytes = ['forever-glossary-snapshot.js', 'forever-meta-snapshot.js', 'forever-dungeon-snapshot.js', 'forever-class-snapshot.js']
     .reduce((s, f) => s + fs.statSync(path.join(REPO, 'for-mini/data', f)).size, 0);
-  log('主包快照仍 ≤ 60 KB（技能与掉落没往主包塞）', snapBytes <= 60 * 1024, (snapBytes / 1024).toFixed(1) + ' KB');
+  log('主包快照仍 ≤ 60 KB（技能与掉落没往主包塞，职业只塞首页要用的字段）', snapBytes <= 60 * 1024, (snapBytes / 1024).toFixed(1) + ' KB');
+
+  /* —— 首页改版四段的静态卡口（不靠设备，纯文件与纯函数）—— */
+  const cd = require(path.join(REPO, 'for-mini/services/countdown.js'));
+  const LAUNCH = '2026-11-05';
+  const before = cd.state(cd.launchInstant(LAUNCH) - (3 * 86400000 + 4 * 3600000 + 5 * 60000 + 6000), LAUNCH);
+  const after = cd.state(cd.launchInstant(LAUNCH) + 1000, LAUNCH);
+  log('倒计时：开服前给天数与秒表，过点立刻 on=false（首页那块整块移除）',
+    before.on === true && before.d === 3 && before.clock === '04:05:06'
+      && after.on === false && after.reason === 'launched', JSON.stringify({ before, after }));
+  log('倒计时：日期没核到时不硬造一个读数',
+    cd.state(Date.now(), '').on === false && cd.state(Date.now(), undefined).reason === 'no-date');
+  log('倒计时：目标时刻按北京时间 0 点算，与网页端 fmt.js 的 LAUNCH_AT 同一个瞬间',
+    cd.launchInstant(LAUNCH) === Date.parse('2026-11-05T00:00:00+08:00'), String(cd.launchInstant(LAUNCH)));
+  const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
+  const homeJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.js'), 'utf8');
+  const cdJs = fs.readFileSync(path.join(REPO, 'for-mini/services/countdown.js'), 'utf8');
+  /* 站主原话："多出来不要使用横向滚动条"——整页只许"最近看过"那一处用 scroll-x */
+  log('职业格不用横向滚动（全页只有一处 scroll-x，是"最近看过"那条轨）',
+    (homeWxml.match(/scroll-x/g) || []).length === 1 && /class="cls9"/.test(homeWxml) && homeWxml.indexOf('cls9') < homeWxml.indexOf('rail'),
+    String((homeWxml.match(/scroll-x/g) || []).length));
+  log('首页四张入口卡：有指南卡，且没有中英速查卡',
+    /goGuide/.test(homeWxml) && /entry-name">指南</.test(homeWxml)
+      && !/中英速查/.test(homeWxml.replace(/<!--[\s\S]*?-->/g, ' ')) && !/goGlossary/.test(homeJs),
+    '注释里提到"撤出首页"不算界面文字，所以这条先把注释剥掉再比');
+  /* 日期只许来自 data/meta.json → 主包快照这一条链，界面与算法里都不许抄死值 */
+  log('界面与倒计时模块里没有写死的开服日期（只认 meta 的 launch）',
+    !/2026-11-\d\d/.test(homeJs) && !/2026-11-\d\d/.test(homeWxml) && !/2026-\d\d-\d\d/.test(cdJs.replace(/^\/\*[\s\S]*?\*\//, '')),
+    'home.js / home.wxml / countdown.js 正文');
+  log('种族特长与可选种族都要图标加文字（模板里两处都渲染 icon-cell 与名字）',
+    /size="cls"/.test(homeWxml) && /size="md"/.test(homeWxml) && /size="sm"/.test(homeWxml)
+      && /t\.effect/.test(homeWxml) && /还没核到，不猜/.test(homeWxml));
+  /* 用了自定义组件却没在页面 json 里注册＝标签整个不渲染，而且不报错。
+     2026-10-22 首页改版实拍就撞上这一次：职业格与种族格的数据都对，图标一格都没出来。
+     所以这条按"页面 WXML 用了 icon-cell"逐个查 json 有没有注册，全站一起扫。 */
+  const unregistered = fs.readdirSync(path.join(REPO, 'for-mini/pages')).filter((d) => {
+    const wxml = path.join(REPO, 'for-mini/pages', d, 'index.wxml');
+    const json = path.join(REPO, 'for-mini/pages', d, 'index.json');
+    if (!fs.existsSync(wxml)) return false;
+    if (fs.readFileSync(wxml, 'utf8').indexOf('<icon-cell') < 0) return false;
+    if (!fs.existsSync(json)) return true;
+    const j = JSON.parse(fs.readFileSync(json, 'utf8'));
+    return !(j.usingComponents && j.usingComponents['icon-cell']);
+  });
+  log('每个用 icon-cell 的页面都在自己的 json 里注册了它', unregistered.length === 0, unregistered.join(','));
+  const homeWxss = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxss'), 'utf8');
+  log('首页样式没有裸色值（改版新增的 .cd/.cls/.race/.trait 都吃令牌）',
+    !/(#[0-9a-fA-F]{3,8}\b|rgba?\()/.test(homeWxss), (homeWxss.match(/#[0-9a-fA-F]{3,8}\b|rgba?\(/g) || []).slice(0, 3).join(','));
+
   const ban = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/tools/copy-banned.json'), 'utf8'));
   const hits = [];
-  ['pages/spells/index.wxml', 'pages/loots/index.wxml'].forEach((f) => {
+  ['pages/spells/index.wxml', 'pages/loots/index.wxml', 'pages/home/index.wxml'].forEach((f) => {
     /* 只扫玩家看得见的文字：先把标签与属性整段去掉，
        不然 class="todo" 这种样式名会被禁词表当成页面上的词命中 */
     const t = fs.readFileSync(path.join(REPO, 'for-mini', f), 'utf8').replace(/<[^>]*>/g, ' ');
     ban.patterns.forEach((p) => { if (new RegExp(p.re, 'i').test(t)) hits.push(f + ' 命中 ' + p.re) });
   });
-  log('两个新页的界面文字没有内部词（禁词表同一把尺子）', hits.length === 0, hits.slice(0, 3).join(','));
+  log('技能/掉落/首页三页的界面文字没有内部词（禁词表同一把尺子）', hits.length === 0, hits.slice(0, 3).join(','));
 
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length

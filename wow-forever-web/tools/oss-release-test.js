@@ -306,11 +306,20 @@ const oss = require(MINI_SERVICE);
   ok('索引每条自带详情/掉落的 etag（客户端不必为校验多取 files.json）',
     idx.items.every((it) => /^[0-9A-F]{32}$/.test(String(it.detailEtag || '')) && /^[0-9A-F]{32}$/.test(String(it.lootEtag || ''))
       && it.detailBytes > 0 && it.lootBytes > 0), JSON.stringify(idx.items[0]));
-  ok('溯源写明了导出对拍（每份基底都有一条逐字节一致的产物）',
+  /* 对拍本身：outputs 是"临时目录重跑 export-mini 后逐字节比过的那几份产物"，
+     inputs 是它们各自的基底原件——**是一对多**（races.json + classes.json 合成 classes.json，
+     dungeon-geo.json 并进 dungeons.json 的 geo 字段），所以比的是"两张名单各自齐全且带哈希"，
+     不是条数相等。名单读 oss-release.js 导出的常量：加一份基底不用再回来改门禁。 */
+  const REL = require(TOOL);
+  const relSet = (arr, pre) => arr.map((x) => x.rel).filter((r) => r.indexOf(pre) === 0).sort().join(',');
+  ok('溯源写明了导出对拍（' + REL.EXPORT_RELS.length + ' 份产物逐字节重导一致，'
+      + REL.BASE_INPUTS.length + ' 份基底原件都带哈希）',
     man.source && man.source.exportCheck && man.source.exportCheck.reproduced === true
-      && man.source.exportCheck.outputs.length === man.source.inputs.length
-      && man.source.exportCheck.outputs.every((o) => /^oss-preview\/(meta|glossary|dungeons|spells|classes|talents|guide)\.json$/.test(o.rel) && o.sha256 && o.bytes > 0),
-    JSON.stringify(man.source && man.source.exportCheck));
+      && relSet(man.source.exportCheck.outputs, 'oss-preview/') === REL.EXPORT_RELS.map((f) => 'oss-preview/' + f).sort().join(',')
+      && man.source.exportCheck.outputs.every((o) => o.sha256 && o.bytes > 0)
+      && relSet(man.source.inputs, 'src/data/') === REL.BASE_INPUTS.map((f) => 'src/data/' + f).sort().join(',')
+      && man.source.inputs.every((i) => i.sha256 && i.bytes > 0),
+    JSON.stringify({ inputs: man.source.inputs.map((i) => i.rel), outputs: man.source.exportCheck.outputs.map((o) => o.rel) }));
   process.stdout.write('  · 副本首屏实际字节：meta ' + man.fetch.meta.bytes + 'B + 索引 '
     + man.fetch.dungeonIndex.bytes + 'B + 指针 ' + fs.statSync(ptrPath).size + 'B = '
     + ((fs.statSync(ptrPath).size + man.fetch.dungeonIndex.bytes + man.fetch.meta.bytes) / 1024).toFixed(1)

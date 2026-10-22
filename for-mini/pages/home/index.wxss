@@ -1,5 +1,7 @@
 /* 首页样式。颜色一律吃 app.wxss 的令牌，这里不写裸色值；
-   切角铭牌 .plate、徽标 .badge-L* 都在全局定义，页面只补布局。 */
+   切角铭牌 .plate、.foot、.muted 都在全局定义，页面只补布局。
+   2026-10-22 站主重排后新增：开服倒计时 .cd 开头、职业格 .cls9 与 .cls、
+   种族与特长 .race 与 .trait 开头。上一版留给覆盖率读数与缺口清单的样式已随界面一起删掉。 */
 
 .hero {
   padding: 8rpx 4rpx 28rpx;
@@ -18,33 +20,75 @@
   margin-top: 6rpx;
 }
 
-.hero-state {
+/* —— 开服倒计时：站主要它占顶部约 1/4 屏（iPhone 6 上一屏 1334rpx，取 330rpx）——
+   这块不写"数据核对到哪天"之类的话，只回答"还有几天开服"；过了那天页面直接不渲染。 */
+.cd {
   display: flex;
-  align-items: center;
-  margin-top: 16rpx;
-  font-size: 22rpx;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 330rpx;
+  margin-bottom: 30rpx;
+  padding: 26rpx 24rpx 24rpx;
+  background: var(--panel);
+  border: 1rpx solid var(--gold-line);
+  border-radius: var(--r-ctl);
+  box-sizing: border-box;
+}
+
+.cd-brand {
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+  color: var(--txt-dim);
+}
+
+.cd-sub {
+  font-size: 20rpx;
+  letter-spacing: 0;
   color: var(--txt-muted);
+  margin-left: 14rpx;
 }
 
-.dot {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 50%;
-  margin-right: 10rpx;
+.cd-kicker {
+  font-size: 22rpx;
+  letter-spacing: 4rpx;
+  color: var(--gold);
+  margin-top: 22rpx;
 }
 
-.dot-ok {
-  background: var(--gold-hot);
+.cd-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 6rpx;
 }
 
-.dot-warn {
-  background: var(--warn);
+/* 天数是这块的主读数：字号拉开一档，数字用等宽避免每秒跳动时宽度抖 */
+.cd-num {
+  font-size: 92rpx;
+  line-height: 1.05;
+  font-weight: 600;
+  color: var(--gold-hi);
+  font-family: Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
 }
 
-.hero-date {
-  margin-left: 16rpx;
-  padding-left: 16rpx;
-  border-left: 1rpx solid var(--line);
+.cd-unit {
+  font-size: 26rpx;
+  color: var(--txt-dim);
+  margin: 0 18rpx 0 8rpx;
+}
+
+.cd-clock {
+  font-size: 40rpx;
+  color: var(--txt-title);
+  font-family: Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.cd-note {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  margin-top: 10rpx;
+  line-height: 1.5;
 }
 
 .sec-title {
@@ -81,21 +125,6 @@
   color: var(--txt-dim);
 }
 
-.entry-num {
-  font-size: 56rpx;
-  line-height: 1.1;
-  font-weight: 600;
-  color: var(--gold-hi);
-  margin-top: 4rpx;
-}
-
-.entry-unit {
-  font-size: 24rpx;
-  font-weight: 400;
-  color: var(--txt-dim);
-  margin-left: 6rpx;
-}
-
 .entry-desc {
   font-size: 22rpx;
   color: var(--txt-muted);
@@ -109,6 +138,143 @@
   border-top: 1rpx solid var(--gold-line-soft);
   font-size: 24rpx;
   color: var(--gold);
+}
+
+/* —— 职业格 ——
+   站主要"按红框那样一排圆形图标铺开，多出来不要横向滚动条"：
+   这里用 5 列 grid + 自动换行（9 个职业 → 5 + 4），
+   绝不用 scroll-view 包它——横滚在小程序里看不见"还有多少个"，也不符合"不要滚动条"那句。 */
+.cls9 {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4rpx 10rpx;
+}
+
+/* 一行五格（750rpx 屏宽下每格 138rpx，装得下 96rpx 圆图标 + 三字名），
+   第九个自己换到第二行——不用 display:grid 是为了不在老内核上赌层叠支持 */
+.cls {
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 14rpx;
+  padding: 14rpx 4rpx 10rpx;
+  border: 1rpx solid transparent;
+  border-radius: var(--r-ctl);
+}
+
+/* 选中态三通道：金色描边 + 底色抬起 + 名字变金，不只靠颜色（暗光与色盲也分得出） */
+.cls-on {
+  background: var(--panel);
+  border-color: var(--gold);
+}
+
+.cls-name {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  margin-top: 8rpx;
+}
+
+.cls-on .cls-name {
+  color: var(--gold-hi);
+}
+
+/* —— 选中职业的种族与特长 —— */
+.race-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 26rpx 0 12rpx;
+}
+
+.race-title {
+  margin: 0;
+}
+
+.race-go {
+  font-size: 22rpx;
+  color: var(--gold);
+}
+
+.race-none {
+  margin-bottom: 16rpx;
+}
+
+.race {
+  background: var(--panel-2);
+  border: 1rpx solid var(--gold-line-soft);
+  border-radius: var(--r-ctl);
+  padding: 20rpx 20rpx 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.race-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+
+.race-id {
+  margin-left: 18rpx;
+}
+
+.race-name {
+  font-size: 28rpx;
+  color: var(--txt-title);
+}
+
+.race-fac {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  margin-top: 2rpx;
+}
+
+.trait {
+  display: flex;
+  align-items: flex-start;
+  padding: 12rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.trait-main {
+  flex: 1;
+  margin-left: 16rpx;
+}
+
+.trait-name {
+  font-size: 24rpx;
+  color: var(--txt);
+}
+
+.trait-pass {
+  font-size: 18rpx;
+  color: var(--txt-muted);
+  border: 1rpx solid var(--line-2);
+  border-radius: 8rpx;
+  padding: 0 8rpx;
+  margin-left: 8rpx;
+}
+
+.trait-eff {
+  font-size: 22rpx;
+  color: var(--txt-muted);
+  line-height: 1.55;
+  margin-top: 2rpx;
+}
+
+.trait-none {
+  padding: 2rpx 0 14rpx;
+}
+
+/* 缺数据标记：与副本页同款虚线小框（页面级样式，全局不掺） */
+.todo {
+  color: var(--lead);
+  font-size: 20rpx;
+  margin-left: 8rpx;
+  border: 1rpx dashed var(--lead);
+  border-radius: 8rpx;
+  padding: 0 8rpx;
 }
 
 .rail {
@@ -146,98 +312,4 @@
   font-size: 20rpx;
   color: var(--txt-muted);
   margin-left: 10rpx;
-}
-
-.panel {
-  background: var(--panel-2);
-  border: 1rpx solid var(--gold-line-soft);
-  border-radius: var(--r-ctl);
-  padding: 20rpx 22rpx;
-}
-
-.levels {
-  display: flex;
-  align-items: flex-start;
-}
-
-.lv {
-  width: 96rpx;
-}
-
-.lv-num {
-  font-size: 34rpx;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.lv-key {
-  font-size: 20rpx;
-  color: var(--txt-muted);
-}
-
-/* 分级是有序量：颜色只走明度阶梯，不用色相（色盲与暗光下也分得出高低） */
-.lv-L0 {
-  color: var(--lv0);
-}
-
-.lv-L1 {
-  color: var(--lv1);
-}
-
-.lv-L2 {
-  color: var(--lv2);
-}
-
-.lv-L3 {
-  color: var(--lv3);
-}
-
-.levels-side {
-  flex: 1;
-  text-align: right;
-}
-
-.levels-go {
-  font-size: 22rpx;
-  color: var(--gold);
-  margin-top: 6rpx;
-}
-
-.lv-legend {
-  margin-top: 16rpx;
-  padding-top: 14rpx;
-  border-top: 1rpx solid var(--line);
-}
-
-.lv-legend .badge {
-  margin-right: 10rpx;
-}
-
-.gap {
-  display: flex;
-  font-size: 24rpx;
-  color: var(--txt);
-  padding: 12rpx 0;
-  border-bottom: 1rpx solid var(--line);
-}
-
-.gap-mark {
-  color: var(--gold);
-  margin-right: 10rpx;
-}
-
-.gap-note {
-  padding: 12rpx 0 4rpx;
-}
-
-.wip .chip {
-  border-style: dashed;
-}
-
-.chip-wip {
-  color: var(--txt-muted);
-}
-
-.wip-note {
-  margin-top: 4rpx;
 }

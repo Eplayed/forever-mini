@@ -2,5 +2,8 @@
   "navigationBarTitleText": "无限资料",
   "enablePullDownRefresh": true,
   "backgroundColor": "#0b0f16",
-  "navigationBarBackgroundColor": "#0b0f16"
+  "navigationBarBackgroundColor": "#0b0f16",
+  "usingComponents": {
+    "icon-cell": "/components/icon-cell/index"
+  }
 }

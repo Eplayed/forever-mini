@@ -364,10 +364,12 @@ async function main() {
   s = (await snap()) || {};
   const homeCards = await call('首页入口', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    return { go: ['goDungeons', 'goGlossary', 'goSpells', 'goLoots'].filter((f) => typeof p[f] === 'function').length,
-      counts: p.data.counts, cov: p.data.covList, wip: p.data.wip, fact: p.data.factDate, build: p.data.buildId };
+    return { go: ['goDungeons', 'goClasses', 'goLoots', 'goGuide'].filter((f) => typeof p[f] === 'function').length,
+      glossary: typeof p.goGlossary, counts: p.data.counts, cov: p.data.covList, wip: p.data.wip, fact: p.data.factDate, build: p.data.buildId };
   }), 3);
-  log('首页四个入口都在（副本/速查/技能/掉落）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
+  /* 2026-10-22 站主重排：入口卡固定四张 副本/职业/掉落查询/指南，中英速查按指令撤出首页 */
+  log('首页四个入口卡处理器都在（副本/职业/掉落查询/指南）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
+  log('首页不再有中英速查入口', homeCards && homeCards.glossary === 'undefined', String(homeCards && homeCards.glossary));
   log('首页不出现计数、覆盖率、缺口清单、核对日期与批次号（玩家面规矩）',
     homeCards && homeCards.counts === undefined && (homeCards.cov || []).length === 0
       && (homeCards.wip || []).length === 0 && homeCards.fact === undefined && homeCards.build === undefined,
@@ -413,7 +415,10 @@ async function main() {
   await shot('g2-home-recent-rail');
 
   /* 签名动作用像素量，不靠眼睛：切角铭牌真渲染出来时，
-     卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。 */
+     卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。
+     判据按"位移 ÷ 卡宽"算，不按像素数算——2026-10-22 这轮实拍的截图缩放从 570 宽变成 285 宽，
+     同一张 10px 的切角在图上从 11px 位移掉到 4px，写死像素数的门禁会假红。
+     切角是 CSS 定值 10px、卡宽约 334px，所以比值恒定在 0.015~0.021，直角版是 0。 */
   const PY_CORNER = [
     'import sys',
     'from PIL import Image',
@@ -427,21 +432,22 @@ async function main() {
     '    xs = [x for x in range(W) if cl(px[x, y])]',
     '    if len(xs) > 120: rows[y] = xs',
     'ys = sorted(rows)',
-    'if not ys: print("none 0 0"); raise SystemExit',
+    'if not ys: print("none 0 0 0"); raise SystemExit',
     'top = ys[0]',
-    'edge = [max(rows[y]) for y in range(top, min(top + 12, H)) if y in rows]',
-    'print("%d %d %d" % (top, edge[0], edge[-1]))'
+    'base = top + 14',
+    'while base not in rows and base < H - 1: base += 1',
+    'print("%d %d %d %d" % (top, max(rows[base]) - max(rows[top]), max(rows[base]) - min(rows[base]), W))'
   ].join('\n');
   const corner = await call('量切角', () => new Promise((resolve) => {
     cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1-home-cards.png')], { encoding: 'utf8' }, (err, out) => {
       const t = String(out || '').trim();
-      if (err || !/\d+ \d+ \d+$/.test(t)) { resolve(null); return; }
-      const [top, first, last] = t.split(' ').map(Number);
-      resolve({ top, firstEdge: first, belowEdge: last, cut: last - first });
+      if (err || !/\d+ \d+ \d+ \d+$/.test(t)) { resolve(null); return; }
+      const [top, cut, width, w] = t.split(' ').map(Number);
+      resolve({ top, cut, cardWidth: width, shotWidth: w, ratio: width ? cut / width : 0 });
     });
   }), 2);
-  log('切角铭牌真的渲染出来了（右上角是斜边，直角版不会有这段位移）',
-    !!corner && corner.cut >= 6 && corner.cut <= 26, JSON.stringify(corner));
+  log('切角铭牌真的渲染出来了（右上角斜边让最右像素往外移，直角版比值为 0）',
+    !!corner && corner.ratio >= 0.01 && corner.ratio <= 0.045, JSON.stringify(corner));
 
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
   const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';

@@ -89,6 +89,12 @@ const BUDGET_KB = {
    assets/missing.json，界面按"没有这张图"回落自绘——碎图比空图更糟。 */
 const ASSET_DIR = 'assets';
 const ICON_EXT = '.jpg';
+/* 2026-10-22 首页改版：把"哪 7 份是导出产物、哪 8 份是基底原件"这两张名单写成常量并导出——
+   门禁脚本以前自己抄了条数（加一份基底就得改门禁），现在两边读同一处，加文件只改这里。
+   注意两边是**一对多**：races.json + classes.json 合成 oss-preview/classes.json，
+   dungeon-geo.json 并进 dungeons.json 的 geo 字段，所以"条数相等"从来不是正确判据。 */
+const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
+const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -207,7 +213,7 @@ function detailRecord(d, useAsset, geo) {
    不这么办的话，指针溯源写的是 A（src/data 的哈希），发出去的却是 B（有人手改过的
    oss-preview），两边一致只证明一致，不证明它来自基底。 */
 function reExportCompare() {
-  const rels = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
+  const rels = EXPORT_RELS;
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ossxchk-'));
   try {
     const web = path.join(tmp, 'wow-forever-web');
@@ -334,7 +340,7 @@ function buildBatch(env, opts) {
     if (!(spells.classes || []).some((c) => c.classId === s.classId)) errors.push('法术 ' + s.id + '：所属职业不在职业名单里，这条永远不会被读到');
   });
 
-  const srcFiles = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json'].map((f) => {
+  const srcFiles = BASE_INPUTS.map((f) => {
     const abs = path.join(siteData(), f);
     if (!fs.existsSync(abs)) { errors.push('找不到基底文件 src/data/' + f); return null; }
     const buf = fs.readFileSync(abs);
@@ -1508,6 +1514,8 @@ module.exports = {
   SCHEMA_VERSION,
   NAMESPACES,
   BUDGET_KB,
+  EXPORT_RELS,
+  BASE_INPUTS,
   DROPPED_DETAIL_FIELDS,
   WRITE_MARK,
   buildBatch,

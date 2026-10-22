@@ -1,6 +1,7 @@
 const GLOSSARY_SNAPSHOT = require('../data/forever-glossary-snapshot')
 const META_SNAPSHOT = require('../data/forever-meta-snapshot')
 const DUNGEON_SNAPSHOT = require('../data/forever-dungeon-snapshot')
+const CLASS_SNAPSHOT = require('../data/forever-class-snapshot')
 const oss = require('./oss-manifest')
 
 /* 2026-10-21 M01：这个文件不再自己发请求。
@@ -91,9 +92,12 @@ function loadSpellClass(item, batch) {
 }
 
 /* 职业卡（M03）：种族+职业+矩阵一份索引；天赋按职业分片，点开哪个职业取哪份。
-   天赋树只读：门槛没核到之前界面只摆位，不做解锁判定（根 AGENTS.md 第五条）。 */
+   天赋树只读：门槛没核到之前界面只摆位，不做解锁判定（根 AGENTS.md 第五条）。
+   2026-10-22 首页改版：首页第一眼就是"选一个职业看可选种族与种族特长"，
+   所以这一份带主包快照兜底（只精简字段，键名与线上一致）；
+   天赋树分片仍然没有快照——那才是真需要联网的部分。 */
 function loadClassIndex() {
-  return oss.loadKey('classIndex').then(shape)
+  return oss.loadKey('classIndex', { fallback: CLASS_SNAPSHOT }).then(shape)
 }
 
 function loadTalentClass(item, batch) {

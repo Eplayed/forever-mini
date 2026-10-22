@@ -22,6 +22,15 @@
   height: 88rpx;
 }
 
+/* 首页职业格（2026-10-22 站主改版：一排圆形职业图标，默认选中战士）。
+   圆形是这一格专用的，别拿 md 去凑——md 是 88rpx 直角，职业格要 96rpx 圆。 */
+.ic-cls {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border-color: var(--line-2);
+}
+
 /* 列表行里的横条缩略图：宽扁形，跟 md 的正方形不是一回事 */
 .ic-wide {
   width: 132rpx;

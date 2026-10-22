@@ -306,6 +306,35 @@ const miniClasses = {
   conflicts: races.conflicts || []
 };
 
+/* 主包职业快照（2026-10-22 首页改版）：首页那一排职业格 + "可选种族与种族特长"
+   是玩家打开小程序第一眼要用的东西，断网也得有内容，所以这一份打进主包。
+   完整 classes.json 34.6 KB（带 lore 全文与逐条溯源）不进主包——60 KB 预算的大头留给副本索引，
+   这里只留界面真正渲染的字段；字段名与线上分片一致，页面代码不必分两套取法。 */
+const miniClassSnapshot = {
+  classes: miniClasses.classes.map((c) => ({ classId: c.classId, nameCn: c.nameCn, iconKey: c.iconKey })),
+  races: (miniClasses.races || []).map((r) => ({
+    id: r.id,
+    nameCn: r.nameCn,
+    faction: r.faction,
+    iconKey: r.iconKey,
+    classes: r.classes || [],
+    traits: (r.traits || []).map((t) => ({
+      name: t.name, passive: !!t.passive, effect: t.effect || '', iconKey: t.iconKey || null
+    }))
+  })),
+  /* 快照不带 combos：首页不渲染"无限新增组合"那一块，职业 tab 要联网才列它。
+     主包 60 KB 预算已经吃到 90% 以上，能少一格是一格。 */
+  counts: { classes: miniClasses.classes.length, races: (miniClasses.races || []).length }
+};
+/* 快照与线上必须同一批种族/职业：漏一个，首页的职业格就会比职业 tab 少一格 */
+if (miniClassSnapshot.classes.length !== miniClasses.classes.length
+  || miniClassSnapshot.races.length !== miniClasses.races.length) {
+  errs.push('主包职业快照与线上 classes 数量不一致（职业/种族被精简掉了）');
+}
+miniClassSnapshot.races.forEach((r) => {
+  if (!Array.isArray(r.classes) || !r.classes.length) errs.push(`快照种族 ${r.id} 没有可选职业，首页这一格会永远空着`);
+});
+
 const miniSpells = {
   meta: {
     generatedAt: (spells.meta || {}).generatedAt || null,
@@ -414,11 +443,12 @@ const writeSnapshot = (name, obj) => {
 const gBytes = writeSnapshot('forever-glossary-snapshot.js', miniGlossary);
 const mBytes = writeSnapshot('forever-meta-snapshot.js', miniMeta);
 const dBytes = writeSnapshot('forever-dungeon-snapshot.js', snapshotDungeonIndex);
-const snapBytes = gBytes + mBytes + dBytes;
+const cBytes = writeSnapshot('forever-class-snapshot.js', miniClassSnapshot);
+const snapBytes = gBytes + mBytes + dBytes + cBytes;
 const kb = (b) => (b / 1024).toFixed(1) + ' KB';
 
 if (snapBytes > SNAPSHOT_BUDGET_KB * 1024) {
-  console.error(`✗ 快照体积 ${kb(snapBytes)}（词条 ${kb(gBytes)} + meta ${kb(mBytes)} + 副本索引 ${kb(dBytes)}）超过主包预算 ${SNAPSHOT_BUDGET_KB} KB，减少 SNAPSHOT_TERMS 或精简字段`);
+  console.error(`✗ 快照体积 ${kb(snapBytes)}（词条 ${kb(gBytes)} + meta ${kb(mBytes)} + 副本索引 ${kb(dBytes)} + 职业 ${kb(cBytes)}）超过主包预算 ${SNAPSHOT_BUDGET_KB} KB，减少 SNAPSHOT_TERMS 或精简字段`);
   process.exit(1);
 }
 
@@ -430,6 +460,6 @@ console.log(`  oss-preview/spells.json    ${kb(fs.statSync(path.join(OSS_DIR, 's
 console.log(`  oss-preview/classes.json   ${kb(fs.statSync(path.join(OSS_DIR, 'classes.json')).size)}（${miniClasses.races.length} 种族 / ${miniClasses.classes.length} 职业）`);
 console.log(`  oss-preview/talents.json   ${kb(fs.statSync(path.join(OSS_DIR, 'talents.json')).size)}（${miniTalents.classes.length} 份天赋树，只走线上分片）`);
 console.log(`  oss-preview/guide.json     ${kb(fs.statSync(path.join(OSS_DIR, 'guide.json')).size)}（宏 ${(guide.macros || []).length} 条 / 插件 ${(guide.addons || []).length} 条）`);
-console.log(`  快照词条 ${snapshotItems.length} 条 ${kb(gBytes)} · meta ${kb(mBytes)} · 副本索引 ${snapshotDungeonIndex.items.length} 本 ${kb(dBytes)}`);
+console.log(`  快照词条 ${snapshotItems.length} 条 ${kb(gBytes)} · meta ${kb(mBytes)} · 副本索引 ${snapshotDungeonIndex.items.length} 本 ${kb(dBytes)} · 职业 ${miniClassSnapshot.classes.length} 格 / ${miniClassSnapshot.races.length} 种族 ${kb(cBytes)}`);
 console.log(`  主包快照合计 ${kb(snapBytes)}（预算 ${SNAPSHOT_BUDGET_KB} KB，用了 ${Math.round(snapBytes / (SNAPSHOT_BUDGET_KB * 1024) * 100)}%）`);
 console.log(`  覆盖率 L0 ${coverage.L0} / L1 ${coverage.L1} / L2 ${coverage.L2} / L3 ${coverage.L3}（共 ${coverage.total}）`);

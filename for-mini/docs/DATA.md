@@ -25,7 +25,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 | 缓存 key | `wow_forever_v1_{用途}@{buildId}`（**批次号必须在 key 里**，否则旧批会冒充新批） |
 | 指针缓存 key | `wow_forever_v1_pointer@{env}` |
 | 收藏 key | `wow_fav_terms_v1`（本机行为数据，不上传） |
-| 打包快照 | `data/forever-glossary-snapshot.js`（60 条）、`data/forever-meta-snapshot.js`、`data/forever-dungeon-snapshot.js`（**M01 起：38 本索引全放**）；三份合计 45.3 KB / 预算 60 KB |
+| 打包快照 | `data/forever-glossary-snapshot.js`（60 条）、`data/forever-meta-snapshot.js`、`data/forever-dungeon-snapshot.js`（**M01 起：38 本索引全放**）、`data/forever-class-snapshot.js`（**2026-10-22 首页改版起：9 职业 + 10 种族与特长，只留界面要用的字段**）；四份合计 55.4 KB / 预算 60 KB |
 
 `wow/release/v1/` 目前**从没传过任何文件**（2026-10-21 匿名 GET 实测 404），所以线上小程序现在读到的都是打包快照。
 
@@ -124,9 +124,15 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 **`rules.tierUnlockCost` 刻意不下发**：门槛没核到之前把数发下去，界面就会去做解锁判定（根 AGENTS.md 第五条）。
 
 指南 `guide.json`（入口文件）＝ `{ kind: "guide", meta.boundaries, macros[], addons[] }`。
-现在两条都是空数组——空是合法状态，首页的指南卡按 `meta.counts.macros + addons` 决定显不显示。
+现在两条都是空数组——空是合法状态。**首页的指南卡固定占一格**（2026-10-22 站主指令：
+"中英速查不要，我要的是指南卡片"），不再按条数决定显不显示，点进去是诚实的空状态"还没整理"。
 导出层卡口跟着红线写：宏必须有文本与来源+抓取日期，插件必须有名字/作者/用途一句话与来源，
 用途描述像"循环提示"的直接拒绝出包。
+
+职业索引是**四份分片里唯一带主包快照兜底的**（`loadClassIndex()` → `data/forever-class-snapshot.js`）：
+首页下面那两段（选职业 → 可选种族与种族特长）是玩家第一眼的内容，断网也要有。
+快照只留界面渲染的字段（不含 `lore` / `provenance` / `combos` / `conflicts`），
+所以断网时职业 tab 的"无限新增组合"那一块是空的——那是真需要联网的部分。
 
 指针入口从 5 个变 7 个（`meta / glossary / dungeonIndex / spellClasses / lootIndex / classIndex / guide`），
 `BUDGET_KB.manifest` 相应从 8 KB 提到 12 KB，冷启动上限 40 → 44 KB。
@@ -240,13 +246,19 @@ node tools/mini-m02-check.js                   # 11. M02 三个新面：技能�
 
 ## 七、主包快照与预算（M01 起多了一份索引快照）
 
-`export-mini.js` 生成三份主包快照，合计必须 ≤ 60 KB，超了直接 rc=1：
+`export-mini.js` 生成四份主包快照，合计必须 ≤ 60 KB，超了直接 rc=1（2026-10-22 实测 55.4 KB，用了 92%）：
 
 | 文件 | 内容 | 实测 |
 | --- | --- | --- |
 | `data/forever-glossary-snapshot.js` | 60 条词条（按 L0 优先、按类型/职业分散挑） | 23.8 KB |
-| `data/forever-meta-snapshot.js` | meta（覆盖率、缺口、规则） | 1.8 KB |
-| `data/forever-dungeon-snapshot.js` | **38 本副本索引全量**（断网首用也要有内容可搜） | 19.7 KB |
+| `data/forever-meta-snapshot.js` | meta（覆盖率、缺口、规则、**开服日期 launch**） | 1.9 KB |
+| `data/forever-dungeon-snapshot.js` | **38 本副本索引全量**（断网首用也要有内容可搜） | 21.5 KB |
+| `data/forever-class-snapshot.js` | 9 个职业格 + 10 个种族（含可选职业矩阵与种族特长文字），**首页第一眼要用** | 8.3 KB |
+
+职业快照是 2026-10-22 首页改版加的：首页下面那两段（选职业 → 可选种族与种族特长）是玩家打开小程序
+第一眼的内容，断网也得有，所以 `loadClassIndex()` 现在带兜底。它**只留界面渲染的字段**——
+完整 `classes.json` 34.6 KB（带 lore 全文与逐条溯源）不进主包，`combos`（无限新增组合）也不进，
+那一块仍然要联网才列。字段名与线上分片一致，页面代码不分两套取法。
 
 M02 的技能（498 条 / 437 KB）与掉落反查（1,050 行 / 118 KB）**刻意不进主包**：
 60 KB 预算是给"断网也得有东西可查"的副本索引的，把这两块塞进来就会把索引挤掉，

@@ -8,11 +8,23 @@
     现在没连上线，显示的是上次存下的内容。要联网取的部分会明说。
   </view>
 
-  <view class="hero">
+  <!-- 1）开服倒计时：占顶部约 1/4 屏，正式服上线后这一整块由页面移除 -->
+  <view wx:if="{{cd}}" class="cd plate">
+    <view class="cd-brand">无限资料<text class="cd-sub">《无限》中文资料</text></view>
+    <view class="cd-kicker">距正式服上线</view>
+    <view class="cd-row">
+      <text class="cd-num">{{cd.d}}</text>
+      <text class="cd-unit">天</text>
+      <text class="cd-clock">{{cd.clock}}</text>
+    </view>
+    <view class="cd-note">{{cd.dayText}} 0 点（北京时间）· 官方公告只公布到日，具体开服时刻以游戏内为准</view>
+  </view>
+  <view wx:else class="hero">
     <view class="hero-title">无限资料</view>
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
   </view>
 
+  <!-- 2）四个入口：副本 / 职业 / 掉落查询 / 指南（中英速查按 2026-10-22 站主指令撤出首页） -->
   <view class="sec-title">查</view>
   <view class="grid">
     <view class="entry plate" bindtap="goDungeons">
@@ -30,20 +42,61 @@
       <view class="entry-desc">搜副本或物品名，直接跳到那座本里看这件东西谁掉。</view>
       <view class="entry-go">去查 →</view>
     </view>
-    <view wx:if="{{hasGuide}}" class="entry plate" bindtap="goGuide">
+    <view class="entry plate" bindtap="goGuide">
       <view class="entry-name">指南</view>
       <view class="entry-desc">宏命令与插件名单，全部免费、标来源；不推荐循环提示类插件。</view>
       <view class="entry-go">去看 →</view>
     </view>
-    <view class="entry plate" bindtap="goGlossary">
-      <view class="entry-name">中英速查</view>
-      <view class="entry-desc">按中文名搜官方译名，看英文原名，一键复制。</view>
-      <view class="entry-go">去查 →</view>
-    </view>
   </view>
 
+  <!-- 3）职业格：九个一排铺开、超出换行，不做出横向滚动（站主 2026-10-22 明确要求） -->
+  <view class="sec-title">选一个职业</view>
+  <view wx:if="{{classes.length}}" class="cls9">
+    <view class="cls {{activeClass === item.classId ? 'cls-on' : ''}}" wx:for="{{classes}}" wx:key="classId"
+          data-id="{{item.classId}}" bindtap="onPickClass">
+      <icon-cell src="{{item.iconUrl}}" size="cls" label="{{item.nameCn}}" />
+      <view class="cls-name">{{item.nameCn || '待核'}}</view>
+    </view>
+  </view>
+  <view wx:else class="muted">{{classEmpty}}</view>
+
+  <!-- 4）选中职业的可选种族与种族特长：图标 + 文字都要有 -->
+  <block wx:if="{{activeName}}">
+    <view class="race-bar">
+      <view class="sec-title race-title">{{activeName}} · 可选种族</view>
+      <view class="race-go" bindtap="goClass">看技能书与天赋树 →</view>
+    </view>
+    <view wx:if="{{raceNote}}" class="muted race-none">{{raceNote}}</view>
+    <view class="race plate" wx:for="{{races}}" wx:key="key">
+      <view class="race-top">
+        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" fallback-text="没有这张图标" />
+        <view class="race-id">
+          <view class="race-name">
+            {{item.nameCn}}
+            <text wx:if="{{item.nameMissing}}" class="todo">中文名待核</text>
+          </view>
+          <view class="race-fac">{{item.factionText}}</view>
+        </view>
+      </view>
+      <view wx:if="{{item.traits.length}}" class="traits">
+        <view class="trait" wx:for="{{item.traits}}" wx:for-item="t" wx:key="key">
+          <icon-cell src="{{t.iconUrl}}" size="sm" label="{{t.name}}" />
+          <view class="trait-main">
+            <view class="trait-name">
+              {{t.name}}
+              <text wx:if="{{t.passive}}" class="trait-pass">被动</text>
+            </view>
+            <view wx:if="{{t.effect}}" class="trait-eff">{{t.effect}}</view>
+            <view wx:else class="muted trait-eff">这条效果还没核到，不抄。</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="muted trait-none">这个种族的特长还没核到，不猜。</view>
+    </view>
+  </block>
+
   <block wx:if="{{recent.length}}">
-    <view class="sec-title">继续</view>
+    <view class="sec-title sec-title-2">继续</view>
     <scroll-view class="rail" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
       <view class="mini plate" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onRecentTap">
         <view class="mini-name">{{item.title}}</view>
