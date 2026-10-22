@@ -8,16 +8,21 @@
     现在没连上线，显示的是上次存下的内容。要联网取的部分会明说。
   </view>
 
-  <!-- 1）开服倒计时：占顶部约 1/4 屏，正式服上线后这一整块由页面移除 -->
+  <!-- 1）开服倒计时：占顶部约 1/4 屏，正式服上线后这一整块由页面移除。
+        站主 2026-10-22 二次指令：只到天，不做秒表 → 这里没有时:分:秒，也不每秒刷 -->
   <view wx:if="{{cd}}" class="cd plate">
     <view class="cd-brand">无限资料<text class="cd-sub">《无限》中文资料</text></view>
     <view class="cd-kicker">距正式服上线</view>
     <view class="cd-row">
-      <text class="cd-num">{{cd.d}}</text>
-      <text class="cd-unit">天</text>
-      <text class="cd-clock">{{cd.clock}}</text>
+      <block wx:if="{{cd.today}}">
+        <text class="cd-today">就在今天</text>
+      </block>
+      <block wx:else>
+        <text class="cd-num">{{cd.d}}</text>
+        <text class="cd-unit">天</text>
+      </block>
     </view>
-    <view class="cd-note">{{cd.dayText}} 0 点（北京时间）· 官方公告只公布到日，具体开服时刻以游戏内为准</view>
+    <view class="cd-note">{{cd.dayText}} 上线（北京时间）· 官方公告只公布到日，具体开服时刻以游戏内为准</view>
   </view>
   <view wx:else class="hero">
     <view class="hero-title">无限资料</view>

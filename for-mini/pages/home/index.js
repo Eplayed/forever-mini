@@ -61,9 +61,11 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 只到天，不跳秒：这张表存在的唯一理由是把"过了一天"这件事跟上，
+     所以 60 秒看一次，而且天数没变就不 setData（首页不是秒表，不该有每秒的渲染负担）。 */
   startTimer() {
     if (this.timer || !this.data.cd) return
-    this.timer = setInterval(() => this.tick(), 1000)
+    this.timer = setInterval(() => this.tick(), 60000)
   },
 
   clearTimer() {
@@ -80,6 +82,8 @@ Page({
       if (this.data.cd) this.setData({ cd: null })
       return
     }
+    /* 只到天：天数没变就不重绘（60 秒一次的心跳不该变成另一个秒表） */
+    if (this.data.cd && this.data.cd.d === s.d) return
     this.setData({ cd: s })
   },
 

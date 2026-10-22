@@ -74,14 +74,15 @@
 .cd-unit {
   font-size: 26rpx;
   color: var(--txt-dim);
-  margin: 0 18rpx 0 8rpx;
+  margin-left: 8rpx;
 }
 
-.cd-clock {
-  font-size: 40rpx;
-  color: var(--txt-title);
-  font-family: Menlo, Consolas, monospace;
-  font-variant-numeric: tabular-nums;
+/* 只剩半天时不写"0 天"，换成这一句（字号收一档，它是一句话不是一个数） */
+.cd-today {
+  font-size: 64rpx;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--gold-hi);
 }
 
 .cd-note {

@@ -191,8 +191,12 @@ async function main() {
   const META_SNAP = require(path.join(REPO, 'for-mini/data/forever-meta-snapshot.js'));
   const expectRaces = (classId) => CLASS_SNAP.races.filter((r) => (r.classes || []).indexOf(classId) >= 0).map((r) => r.id);
   log('开服倒计时这块在，日期取主包 meta 的 launch（界面不写死日期）',
-    !!home.cd && home.cd.on === true && home.cd.to === META_SNAP.launch
-      && /^\d{2}:\d{2}:\d{2}$/.test(String(home.cd.clock)) && home.cd.d > 0, JSON.stringify(home.cd));
+    !!home.cd && home.cd.on === true && home.cd.to === META_SNAP.launch && home.cd.d > 0,
+    JSON.stringify(home.cd));
+  /* 站主二次指令："只到天，不再做具体的秒表逻辑" → 读数里不许再出现时:分:秒 */
+  log('倒计时只到天：读数里没有秒表字段，界面也没有',
+    home.cd && home.cd.clock === undefined && !/clock/.test(JSON.stringify(home.cd)),
+    JSON.stringify(home.cd));
   log('职业格数量与主包职业快照一致',
     home.nClasses === CLASS_SNAP.classes.length && home.nClasses > 0, home.nClasses + ' vs ' + CLASS_SNAP.classes.length);
   log('默认选中的是战士', home.activeClass === 'warrior' && home.activeName === '战士', JSON.stringify({ c: home.activeClass, n: home.activeName }));
@@ -317,11 +321,14 @@ async function main() {
   /* —— 首页改版四段的静态卡口（不靠设备，纯文件与纯函数）—— */
   const cd = require(path.join(REPO, 'for-mini/services/countdown.js'));
   const LAUNCH = '2026-11-05';
-  const before = cd.state(cd.launchInstant(LAUNCH) - (3 * 86400000 + 4 * 3600000 + 5 * 60000 + 6000), LAUNCH);
+  const before = cd.state(cd.launchInstant(LAUNCH) - (3 * 86400000 + 4 * 3600000), LAUNCH);
+  const today = cd.state(cd.launchInstant(LAUNCH) - 3600000, LAUNCH);
   const after = cd.state(cd.launchInstant(LAUNCH) + 1000, LAUNCH);
-  log('倒计时：开服前给天数与秒表，过点立刻 on=false（首页那块整块移除）',
-    before.on === true && before.d === 3 && before.clock === '04:05:06'
+  log('倒计时：只给整天数（3 天 4 小时算 3 天），过点立刻 on=false（首页那块整块移除）',
+    before.on === true && before.d === 3 && before.today === false && before.clock === undefined
       && after.on === false && after.reason === 'launched', JSON.stringify({ before, after }));
+  log('倒计时：剩不到一个整天写"就在今天"，不写 0 天',
+    today.on === true && today.d === 0 && today.today === true, JSON.stringify(today));
   log('倒计时：日期没核到时不硬造一个读数',
     cd.state(Date.now(), '').on === false && cd.state(Date.now(), undefined).reason === 'no-date');
   log('倒计时：目标时刻按北京时间 0 点算，与网页端 fmt.js 的 LAUNCH_AT 同一个瞬间',
@@ -358,6 +365,10 @@ async function main() {
   });
   log('每个用 icon-cell 的页面都在自己的 json 里注册了它', unregistered.length === 0, unregistered.join(','));
   const homeWxss = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxss'), 'utf8');
+  /* 秒表撤了就要撤干净：模板里不再渲染，样式里也不留一段没人用的 .cd-clock */
+  log('秒表撤干净了（模板不渲染 cd.clock，样式里也没有 .cd-clock 残留）',
+    homeWxml.indexOf('cd.clock') < 0 && homeWxml.indexOf('cd-clock') < 0 && homeWxss.indexOf('.cd-clock') < 0,
+    '只留天数与"就在今天"两种读数');
   log('首页样式没有裸色值（改版新增的 .cd/.cls/.race/.trait 都吃令牌）',
     !/(#[0-9a-fA-F]{3,8}\b|rgba?\()/.test(homeWxss), (homeWxss.match(/#[0-9a-fA-F]{3,8}\b|rgba?\(/g) || []).slice(0, 3).join(','));
 
