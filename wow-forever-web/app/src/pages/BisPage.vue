@@ -106,6 +106,48 @@
       </div>
     </div>
 
+    <div class="card" v-if="cur && cmpRows.length">
+      <div class="bhead">
+        <h2 class="bt">两家怎么说</h2>
+        <span class="bn">{{ cmpStat.same }} 格一致 · {{ cmpStat.diff }} 格分歧 ·
+          {{ cmpStat.none }} 格另一家没单列</span>
+      </div>
+      <div class="boardwrap">
+        <table class="board" id="pzcmp">
+          <colgroup><col style="width:11%"><col><col><col style="width:12%"></colgroup>
+          <thead><tr><th>部位</th><th>本站这一套用的</th><th>另一家列的第一件</th><th class="c-num">两家</th></tr></thead>
+          <tbody>
+            <tr v-for="x in cmpRows" :key="x.slot + '-' + x.cell">
+              <td>{{ x.slot }}<span v-if="x.cell > 1" class="mono"> · {{ x.cell }}</span></td>
+              <td data-l="本站用的"><span class="qbox" :class="'bq' + (x.quality || 0)"><IconCell :icon-key="x.iconKey" :seed="x.item" :cn="x.name" small /></span>
+                <span class="nm" :class="'q' + (x.quality || 0)">{{ x.name }}</span>
+                <span class="mono dim" v-if="x.ilvl !== ''"> {{ x.ilvl }}</span></td>
+              <td data-l="另一家">
+                <template v-if="x.theirs == null"><span class="dim">这一格另一家没单列</span></template>
+                <template v-else-if="!x.known"><span class="dim mono">#{{ x.theirs }}</span>
+                  <span class="dim">· 本站名录里没有这一件</span></template>
+                <template v-else>
+                  <span class="qbox" :class="'bq' + (x.tQuality || 0)"><IconCell :icon-key="x.tIcon" :seed="x.theirs" :cn="x.tName" small /></span>
+                  <span class="nm" :class="'q' + (x.tQuality || 0)">{{ x.tName }}</span>
+                  <span class="mono dim" v-if="x.tIlvl !== ''"> {{ x.tIlvl }}</span>
+                  <span class="sub" v-if="x.moreNames.length">这一格还列了：{{ x.moreNames.join('、') }}</span>
+                </template>
+              </td>
+              <td class="c-num"><span class="tag" :class="'cmp-' + x.state">{{ CMP_CN[x.state] }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">第二份是插件 XR_DungeonGuide 里的配装数据（作者 血染，文件里声明抓自
+        foreverchanges.pro/zh-cn/bis，本站 {{ meta.alt.fetched }} 从插件文件里提出来的）。
+        两张名单只是并列摆出来，本站不裁决哪件更好，页面用的那一件和顺序仍以主源为准。
+        两边件数差得多（一致 {{ meta.alt.counts.same }} / 分歧 {{ meta.alt.counts.diff }}，
+        共 {{ meta.alt.counts.slots }} 格），但专精清单 38 对 38 一一对上、连冷门组合同进同出，
+        我们证明不了它们没有共同上游——所以配装线仍是 L1，不因"有两家"升档。
+        装备名与装等一律回本站物品库查，对面写法不同的地方（{{ meta.alt.counts.nameDiffRows }} 处）
+        不在这张表里另列。</p>
+    </div>
+
     <div class="card" v-if="cur">
       <h2>这一套还列了附魔与消耗品</h2>
       <div class="pz-two">
@@ -278,6 +320,31 @@ const pickerHead = computed(() => {
   return c.clsCn + ' · ' + c.mode + ' · ' + (fac.value === 'horde' ? '部落' : '联盟')
     + ' · ' + c.level + ' 级';
 });
+/* 「两家怎么说」：第二份名单按 部位+序号 对到纸娃娃的每一格。
+   必须带上 cell 序号——两枚戒指、两个饰品中文名相同，只按部位会串格。
+   判定只有三种：一致 / 分歧 / 另一家没单列这一格（本站不裁决，也不替对面编名字）。 */
+const CMP_CN = { same: '一致', diff: '分歧', none: '没列' };
+const cmpRows = computed(() => {
+  const list = (((cur.value || {}).alt || {})[fac.value] || []);
+  return cells.value.map((c) => {
+    const a = list.filter((x) => x.slot === c.slot && x.cell === c.cell)[0] || null;
+    const t = a ? a.item : null;
+    const known = t != null && !!(P.value || {}).byId[t];
+    const more = (a ? a.top : []).filter((i) => i !== t && (P.value || {}).byId[i]);
+    return {
+      slot: c.slot, cell: c.cell, item: c.item, name: c.name, iconKey: c.iconKey,
+      quality: c.quality, ilvl: c.ilvl,
+      theirs: t, known: known, state: !a ? 'none' : (a.same ? 'same' : 'diff'),
+      tName: t == null ? '' : nm(t), tIcon: ic(t), tQuality: qo(t), tIlvl: il(t),
+      moreNames: more.slice(0, 3).map(nm)
+    };
+  });
+});
+const cmpStat = computed(() => {
+  const n = { same: 0, diff: 0, none: 0 };
+  cmpRows.value.forEach((r) => { n[r.state] += 1; });
+  return n;
+});
 const enchRows = computed(() => (((cur.value || {}).enchants || {})[fac.value] || []));
 const consRows = computed(() => (((cur.value || {}).consumables || {})[fac.value] || []));
 const artStyle = computed(() => {
@@ -386,6 +453,30 @@ function srcOf(id) {
   text-align: left; cursor: pointer }
 .pzlink:hover { color: var(--gold) }
 .pz-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start }
+/* 「两家怎么说」：图标与名字挤在同一格，图标要压着基线走（一览表里图标独占一格，不需要这条）。
+   判定角标：一致绿、分歧琥珀、没列灰——分歧不是错误，不许用红，也不许把某一家的名字加粗。 */
+#pzcmp td .qbox { vertical-align: -7px; margin-right: 6px }
+#pzcmp .tag.cmp-same { color: var(--ok); border-color: rgba(103, 194, 103, .45) }
+#pzcmp .tag.cmp-diff { color: var(--warn); border-color: rgba(221, 159, 68, .45);
+  background: rgba(221, 159, 68, .1) }
+#pzcmp .tag.cmp-none { color: var(--txt-muted); border-color: var(--line-2); background: none }
+#pzcmp td .tag { margin-left: 0 }
+/* 375 下这张表必须竖起来：横滚的话「本站用的」和「另一家」永远看不到同一屏，
+   而"两家并排"就是这张表唯一的作用（其余表横滚是列多、少看几列还能读，这张不行）。
+   做法是整表 display:block、表头隐藏、列名靠 data-l 补在每行前面、判定角标钉在行首右侧。 */
+@media (max-width: 899px) {
+  #pzcmp { min-width: 0 }
+  #pzcmp thead { display: none }
+  #pzcmp, #pzcmp tbody, #pzcmp tr, #pzcmp td { display: block; width: auto }
+  #pzcmp tr { position: relative; padding: 9px 0; border-bottom: 1px solid var(--line-2) }
+  #pzcmp td { padding: 0; border: 0 }
+  #pzcmp td:first-child { font-weight: 600; color: var(--txt-title); padding-right: 58px }
+  #pzcmp td:nth-child(2), #pzcmp td:nth-child(3) { margin-top: 4px }
+  #pzcmp td[data-l]::before { content: attr(data-l); font-size: 11.5px; color: var(--txt-muted);
+    margin-right: 6px }
+  #pzcmp td:nth-child(4) { position: absolute; right: 0; top: 9px }
+}
+#pzcmp .nm { white-space: normal }
 /* grid 子项的 min-width 默认是 auto，会被里面那张 min-width:640px 的 .board 顶开——
    实测 375 下附魔与消耗品那两张 .boardwrap 变成 640 宽，连带把布局视口撑到 674
    （Chrome 移动端于是整体缩放，innerWidth 报 674、"整页不横溢"那条断言反而还是 0）。

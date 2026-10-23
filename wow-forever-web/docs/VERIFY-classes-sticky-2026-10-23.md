@@ -53,12 +53,27 @@
 （组带在上、表头紧贴其下、下面第一行完整可见）。
 `site-check.py --app --only classes` **25/25 通过**。
 
-## 一条没做完的，记在这里别丢
+## 防它再错位的断言：补上了（同日第二轮）
 
-**这次没加上"防它再错位"的门禁断言。** 我写了那段判据，但它在门禁里跑不起来：
-`test_classes` 跑到这里时页面已经被前面几条断言切到 `classes.html?c=not_a_class` 那一发，
-换 hash 不重读文档、`reload()` 又会被跳转桩打回首页，几种导航方式都量不到 `.chgs`。
-判据本身是对的（就是上面那三个数），**是测试脚手架的页面状态没接好**。
-当时为了不把门禁留成红的，我把那段撤了——**撤的是断言，不是修复**。
-要补的人注意：得先让 `test_classes` 在这一发上拿到一个干净的应用文档（比如先 `about:blank`
-再走 `APP_BASE + "/#/classes?c=shaman"`，或给这一段单开一个 page），别复用被前面点脏的那个。
+上一节记的那条欠账已经还。当时量不到 `.chgs` 的原因是**复用了被前面断言点脏的那个 page**——
+`test_classes` 跑到那里时文档已经在 `classes.html?c=not_a_class` 那一发上，换 hash 不重读文档、
+`reload()` 又被跳转桩打回首页。
+
+补法是**不塞进 `test_classes`，单开一节**：`site-check.py` 的 `classes_sticky`（打印 `[6i]`），
+每发自己 `browser.new_context()` + 新 page + `goto(APP_BASE + "/#/classes")`，
+先 `box.scrollTop = 220` 再量（不滚进视口量到的是没吸住时的位置）。桌面四条：
+
+| 判据 | 实测 |
+| --- | --- |
+| `.chgs` 是自己滚的框，且真的滚动了 | `scrollable true / scrollTop 220 / 95 行` |
+| 组带 `position:sticky` 且贴框顶 | 距框顶 **0px** |
+| 表头偏移 = 组带高，且 <60px（钉住"不许再抄 110"） | 表头距框顶 **28px** / 组带高 28px / `top:28px` |
+| 遮挡用命中测试判：表头下沿 +2px 打到数据行、表头中点打到的还是表头 | `{underRow:true, overTh:true}` |
+
+375 另两条是钉**相反**的行为：窄屏下 `.boardwrap` 成了横向滚动容器，sticky 参照物又换一次，
+所以那一边表头与组带**故意都是 `position:static`**（board.css 与 app.css 各有一条把它关掉，
+留着声明会在表顶画一条空带）。谁要重新打开，这两条会先红——这是有意的。
+
+`python3 tools/site-check.py --app --only classes_sticky` **7/7 通过**；
+实拍 `app-classes-chgs-sticky.png` 与 `app-classes-chgs-sticky-m.png`（同一目录）。
+

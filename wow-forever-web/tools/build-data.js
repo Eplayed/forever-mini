@@ -1477,13 +1477,50 @@ if (fs.existsSync(bisPath)) {
   if ((bis.meta || {}).level_grading !== 'L1') bErr.push('配装线分级必须是 L1（只有一家列过），现在是 ' + (bis.meta || {}).level_grading);
   const c = (bis.meta || {}).counts || {};
   if (c.sets !== bisSets.length) bErr.push(`bis：套数 ${bisSets.length} 与 meta.counts.sets ${c.sets} 对不上`);
+  // ---- 第二份名单（meta.alt）----
+  // 只查结构与自报数对不对，**不查里面每件装备在不在我们名录里**：对面提了而我们没有的那件
+  // （实测 1 件 #9395）本来就该留着，界面上标"本站名录里没有"，不能在这里被当成脏数据抹掉。
+  const alt = (bis.meta || {}).alt;
+  if (alt) {
+    const ac = alt.counts || {};
+    let aCells = 0, aRows = 0, aSame = 0, aDiff = 0, aNone = 0;
+    bisSets.forEach((s) => {
+      ['alliance', 'horde'].forEach((f) => {
+        const doll = (s.doll || {})[f] || [];
+        aCells += doll.length;
+        const seen = new Set();
+        ((s.alt || {})[f] || []).forEach((r) => {
+          aRows += 1;
+          if (r.same) aSame += 1; else aDiff += 1;
+          if (!(r.item > 0) || !Array.isArray(r.top)) bErr.push((s.id || '?') + ' 第二份名单有一格缺 item 或 top');
+          if (seen.has(r.slot + '-' + r.cell)) bErr.push((s.id || '?') + ' 第二份名单同一格出现两次：' + r.slot + ' ' + r.cell);
+          seen.add(r.slot + '-' + r.cell);
+          if (!doll.some((x) => x.slot === r.slot && x.cell === r.cell))
+            bErr.push((s.id || '?') + ' 第二份名单有一格在纸娃娃上找不到：' + r.slot + ' ' + r.cell);
+        });
+        doll.forEach((x) => { if (!seen.has(x.slot + '-' + x.cell)) aNone += 1; });
+      });
+    });
+    if (aRows !== ac.slots || aSame !== ac.same || aDiff !== ac.diff || aNone !== ac.notListed)
+      bErr.push(`第二份名单的数与逐格重算不符：重算 比 ${aRows} / 一致 ${aSame} / 分歧 ${aDiff} / 没列 ${aNone}`
+        + `，meta.alt.counts 记的是 ${ac.slots} / ${ac.same} / ${ac.diff} / ${ac.notListed}`);
+    if (aCells !== ac.dollCells) bErr.push(`第二份名单：纸娃娃总格数重算 ${aCells}，记的 ${ac.dollCells}`);
+    if (aRows + aNone !== aCells) bErr.push(`第二份名单：比了 ${aRows} + 没列 ${aNone} ≠ 总格数 ${aCells}`);
+    if (alt.grade !== 'L1') bErr.push('第二份名单必须按 L1 留档（有两家不等于可以升档），现在是 ' + alt.grade);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(alt.fetched || ''))) bErr.push('第二份名单没写抓取日期');
+    if (String(alt.srcSha256 || '').length !== 64) bErr.push('第二份名单没记源文件 sha256（回不去原件就没法复核）');
+    scale.bisAltRows = aRows;
+    console.log('第二份名单：' + aRows + ' 格做了对照 / 一致 ' + aSame + ' / 分歧 ' + aDiff
+      + ' / 另一家没列 ' + aNone + '（L1，两份并列、不裁决）');
+  }
   if (bErr.length) errs.push('配装名单：' + bErr.slice(0, 6).join(' ｜ ') + (bErr.length > 6 ? ` …共 ${bErr.length} 条` : ''));
   scale.bisSets = bisSets.length;
   scale.bisClasses = Object.keys(clsOf).length;
   scale.bisItems = (c.items || 0);
   console.log('配装名单：' + bisSets.length + ' 套 / ' + scale.bisClasses + ' 职业 / 等级段 '
     + ((bis.meta || {}).level || '?') + ' 级 / 用到 ' + scale.bisItems + ' 件装备'
-    + '（L1 单源，名字与部位已与本站名录逐条对平：分歧 ' + (c.nameConflicts || 0) + ' / ' + (c.slotMismatch || 0) + ' 处）');
+    + '（L1，与本站名录逐条对平：分歧 ' + (c.nameConflicts || 0) + ' / ' + (c.slotMismatch || 0)
+    + ' 处；另有第二份名单并列展示，见「第二份名单」那行）');
 } else {
   warns.push('bis.json 缺失：配装页会空着（跑 tools/scrape-wclbox-bis.py + tools/merge-bis.py 生成）');
 }

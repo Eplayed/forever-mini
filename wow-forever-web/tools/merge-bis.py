@@ -200,7 +200,9 @@ def main():
             for s in c['specs']:
                 xidx[(c['slug'], s['id'])] = s
         CN2K = {v: k for k, v in SLOT_CN.items()}
-        a_match = a_slots = a_same = a_diff = a_namediff = 0
+        # 本站 items.json 的部位词与第二份的节名不同：我们的 '副手物品' 在对面叫 held
+        OWN_ALIAS = {'副手物品': 'held'}
+        a_match = a_slots = a_same = a_diff = a_namediff = a_cells = 0
         a_unmatched = []
         a_miss = set()          # 第二份提了、但我们名录里没有的装备（不能拿它当"我们也有"显示）
         for st in sets:
@@ -210,14 +212,30 @@ def main():
                 a_unmatched.append(st['id'])
                 continue
             a_match += 1
-            byside = {'alliance': {}, 'horde': {}}
+            byside = {'alliance': [], 'horde': []}
             for side in ('alliance', 'horde'):
                 for cell in (st['doll'].get(side) or []):
+                    a_cells += 1
                     key = CN2K.get(cell['slot'])
                     if not key:
                         continue
                     slots = spec['slots'] or {}
-                    rows = (spec['rows'] or {}).get(key) or []
+                    # 我们纸娃娃只有「主手/副手」两格，第二份把双手武器、盾牌、手持物品
+                    # 分开列节（实测 22 格主手拿的是双手锤、39 格副手是盾或手持）。
+                    # 不做这层归并，这 61 格会被画成「另一家没列这一格」——那是假缺口。
+                    # 定位用这件装备在本站名录里的 slot（双手/盾牌/手持物品），不是猜的。
+                    cands = [key]
+                    own = (base.get(cell['item']) or {}).get('slot')
+                    ok = CN2K.get(OWN_ALIAS.get(own, own))
+                    if ok and ok != key:
+                        cands.insert(0, ok)
+                    key, rows = cands[0], (spec['rows'] or {}).get(cands[0]) or []
+                    for k2 in cands:
+                        if [p for p in slots.get(k2) or [] if p['side'] == side] or (
+                                spec['rows'] or {}).get(k2):
+                            key = k2
+                            rows = (spec['rows'] or {}).get(key) or []
+                            break
                     if cell.get('cell') == 2 and (key + '2') in slots:
                         key = key + '2'
                         rows = (spec['rows'] or {}).get(key) or rows
@@ -241,11 +259,15 @@ def main():
                     for i2 in tops:
                         if i2 not in base:
                             a_miss.add(i2)
-                    byside[side][cell['slot']] = {
+                    # 存成数组而不是 {部位: 值}：两枚戒指、两个饰品同名，按中文名做键
+                    # 会把第二枚覆盖掉（实测 1237 次比对只剩 1085 格）。
+                    byside[side].append({
+                        'slot': cell['slot'],
+                        'cell': cell.get('cell') or 1,
                         'item': first,
                         'same': first == cell['item'],
                         'top': tops,
-                    }
+                    })
             st['alt'] = byside
         doc['meta']['alt'] = OrderedDict([
             ('kind', 'second-list'),
@@ -258,16 +280,19 @@ def main():
                               '冷门组合同进同出，更像同一个上游的两份转述 → 不升档。'),
             ('display', '两份并列、分歧不裁决；页面用哪一件与顺序仍以主源为准，本站一格都不改。'),
             ('counts', OrderedDict([('setsMatched', a_match), ('setsUnmatched', len(a_unmatched)),
-                                    ('slots', a_slots), ('same', a_same), ('diff', a_diff),
+                                    ('dollCells', a_cells), ('slots', a_slots),
+                                    ('notListed', a_cells - a_slots),
+                                    ('same', a_same), ('diff', a_diff),
                                     ('nameDiffRows', a_namediff),
                                     ('notInOurIndex', len(a_miss))])),
             ('notInOurIndexSample', sorted(a_miss)[:12]),
         ])
         if a_unmatched:
             doc['meta']['alt']['unmatchedSets'] = a_unmatched
-        print('第二份名单：对上 %d/%d 套、比 %d 个部位、一致 %d、分歧 %d；'
-              '另一家给的名字与本站名录不同 %d 处'
-              % (a_match, len(sets), a_slots, a_same, a_diff, a_namediff))
+        print('第二份名单：对上 %d/%d 套、%d 格纸娃娃里比了 %d 格（另一家没列 %d 格）、'
+              '一致 %d、分歧 %d；另一家给的名字与本站名录不同 %d 处'
+              % (a_match, len(sets), a_cells, a_slots, a_cells - a_slots,
+                 a_same, a_diff, a_namediff))
         if a_miss:
             print('   第二份提了、但我们名录里没有的装备 %d 件（如 %s）——'
                   '界面上这些只标"本站名录里没有"，不替它编名字'

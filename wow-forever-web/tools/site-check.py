@@ -1451,6 +1451,71 @@ def test_bis(browser, base):
     check("一览表按数据里的部位逐行列出",
           page.evaluate("() => document.querySelectorAll('#pzover tbody tr').length") == len(w["doll"]["alliance"]),
           "%d 行" % page.evaluate("() => document.querySelectorAll('#pzover tbody tr').length"))
+    # ---- 「两家怎么说」对照表（2026-10-23 第二份名单接进来）----
+    # 这张表最容易悄悄坏掉的三件事：① 两枚戒指/两个饰品同名，按部位做键会串格（数据侧
+    # 已经踩过一次：1237 次比对只剩 1085 格）；② 判定与数据算出来的不一致（对错了格）；
+    # ③ 把另一家那件的名字写成插件里的写法，而不是回本站名录查。三条都钉住。
+    CMP_CN = {True: u"一致", False: u"分歧"}
+    amap = {(x["slot"], x["cell"]): x for x in w["alt"]["alliance"]}
+    # 名字读 .nm 那一节，不读整格 innerText：图标格子（IconCell）在图加载成功时也会把
+    # 名字首字留在 DOM 里当兜底，整格读出来是"野 野人铁盔"，比名字就多一个字（2026-10-23 实拍）。
+    cmp_rows = page.evaluate("""() => [...document.querySelectorAll('#pzcmp tbody tr')].map(r => ({
+      slot: (r.children[0].innerText || '').replace(/\\s+/g, ' ').trim(),
+      ours: ((r.children[1].querySelector('.nm') || {}).textContent || '').trim(),
+      theirs: ((r.children[2].querySelector('.nm') || {}).textContent || '').trim(),
+      theirsText: (r.children[2].innerText || '').replace(/\\s+/g, ' ').trim(),
+      tag: (r.children[3].innerText || '').trim() }))""")
+    base_labels = set(x["slot"].split(" · ")[0] for x in cmp_rows)
+    check("对照表每一格纸娃娃都有一行（两枚戒指与两个饰品各占一行，不按部位合并）",
+          len(cmp_rows) == len(w["doll"]["alliance"])
+          and len(base_labels) < len(cmp_rows),
+          "%d 行 / %d 个部位名" % (len(cmp_rows), len(base_labels)))
+    cbad = []
+    for c, x in zip(w["doll"]["alliance"], cmp_rows):
+        a = amap.get((c["slot"], c["cell"]))
+        label = c["slot"] + ("" if c["cell"] < 2 else " · %d" % c["cell"])
+        if x["slot"] != label:
+            cbad.append([label, x["slot"]]); continue
+        if x["ours"] != by_id[c["item"]]["name"]:
+            cbad.append([label, u"本站列不是名录里的写法", x["ours"]])
+        want_tag = u"没列" if a is None else CMP_CN[a["same"]]
+        if x["tag"] != want_tag:
+            cbad.append([label, x["tag"], want_tag])
+        elif a is not None and a["same"]:
+            if x["theirs"] != by_id[c["item"]]["name"]:
+                cbad.append([label, u"一致却没显示同一件", x["theirs"]])
+        elif a is not None:
+            tn = by_id.get(a["item"], {}).get("name")
+            if tn and x["theirs"] != tn:
+                cbad.append([label, x["theirs"], tn])
+            if not tn and (u"#%d" % a["item"]) not in x["theirsText"]:
+                cbad.append([label, u"名录里没有却没标编号", x["theirsText"]])
+    check("对照表逐行等于按数据算出来的结果（部位、两栏名字、判定）",
+          not cbad, "对不上：%s" % cbad[:3] if cbad
+          else "%d 行全对（一致 %d / 分歧 %d / 没列 %d）" % (
+              len(cmp_rows),
+              sum(1 for x in cmp_rows if x["tag"] == u"一致"),
+              sum(1 for x in cmp_rows if x["tag"] == u"分歧"),
+              sum(1 for x in cmp_rows if x["tag"] == u"没列")))
+    cmp_note = page.evaluate("""() => { const c = document.querySelector('#pzcmp').closest('.card');
+      const n = c.querySelector('.note'); return (n ? n.innerText : '').replace(/\\s+/g, ' '); }""")
+    check("对照表下面写清了来源、抓取日期与不裁决的口径（红线：两源分歧两个都留）",
+          u"XR_DungeonGuide" in cmp_note and u"2026-10-23" in cmp_note
+          and u"不裁决" in cmp_note and u"仍以主源为准" in cmp_note
+          and u"L1" in cmp_note and u"升档" in cmp_note,
+          cmp_note[:60])
+    cmp_stat = page.evaluate("""() => (document.querySelector('#pzcmp').closest('.card')
+      .querySelector('.bhead .bn') || {}).innerText || ''""")
+    dl_a = w["doll"]["alliance"]
+    want_stat = [sum(1 for c in dl_a if amap.get((c["slot"], c["cell"])) and amap[(c["slot"], c["cell"])]["same"]),
+                 sum(1 for c in dl_a if amap.get((c["slot"], c["cell"])) and not amap[(c["slot"], c["cell"])]["same"]),
+                 sum(1 for c in dl_a if (c["slot"], c["cell"]) not in amap)]
+    got_stat = [int(x) for x in re.findall(r"\d+", cmp_stat)]
+    check("表头那三个数是这一套真算出来的（一致 / 分歧 / 没列）",
+          got_stat[:3] == want_stat, "界面 %s ／ 数据 %s" % (got_stat[:3], want_stat))
+    page.locator("#pzcmp").scroll_into_view_if_needed()
+    page.wait_for_timeout(300)
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare.png"))
     # 站主 2026-10-17 改口径：点装备用 popover 看备选（不是 modal，不挡页面）
     head_rows = w["alts"]["alliance"]["head"]
     page.click(".pzcol:first-child .pzcell")
@@ -1573,6 +1638,26 @@ def test_bis(browser, base):
     page.wait_for_timeout(300)
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor.png"))
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-full.png"), full_page=True)
+    # 另一家提了、本站名录里没有的那一件（全库就 1 件：#9395，在德鲁伊「恢复」的手部）：
+    # 界面上必须给编号 + 一句"名录里没有"，不许拿插件的写法冒充我们的名字。
+    di = page.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
+      .findIndex(b => b.innerText.indexOf('德鲁伊') >= 0)""")
+    page.click(".pzrail .pztab >> nth=%d" % di)
+    page.wait_for_timeout(1200)
+    mi = page.evaluate("""() => [...document.querySelectorAll('.pz-mode .pick')]
+      .findIndex(b => b.innerText.replace(/\\s+/g,'').indexOf('恢复') >= 0)""")
+    page.click(".pz-mode .pick >> nth=%d" % mi)
+    page.wait_for_timeout(1200)
+    miss_row = page.evaluate("""() => [...document.querySelectorAll('#pzcmp tbody tr')]
+      .map(r => (r.innerText || '').replace(/\\s+/g, ' ')).filter(x => x.indexOf('9395') >= 0)""")
+    drest = [s for s in sets if s["id"] == "druid-restoration"][0]
+    hand = [x for x in drest["alt"]["alliance"] if x["slot"] == u"手"][0]
+    check("另一家提了、本站名录里没有的那件：显示编号并写明没有，不替它编名字",
+          len(miss_row) == 1 and hand["item"] == 9395
+          and u"#9395" in miss_row[0] and u"本站名录里没有" in miss_row[0]
+          and u"猛虎" not in miss_row[0],
+          miss_row[0][:70] if miss_row else "没找到这一行")
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare-missing.png"))
     ctx.close()
 
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
@@ -1584,6 +1669,27 @@ def test_bis(browser, base):
         .filter(b => b.getBoundingClientRect().height < 44).length })""")
     check("配装页 375 不横向溢出", mm["over"] <= 1, json.dumps(mm))
     check("配装页 375 点击目标不低于 44px", mm["small"] == 0, "%d 个偏小" % mm["small"])
+    # 对照表在 375 上必须竖起来：其余表横滚是"列多、少看几列还能读"，这张不行——
+    # 本站用的与另一家的分在两栏，横滚就永远看不到同一屏，表也就白做。
+    cmpm = mp.evaluate("""() => { const t = document.querySelector('#pzcmp');
+      if (!t) return { missing: true };
+      const wrap = t.closest('.boardwrap'), rows = [...t.querySelectorAll('tbody tr')];
+      return { scroll: wrap.scrollWidth - wrap.clientWidth,
+               page: document.documentElement.scrollWidth - innerWidth,
+               n: rows.length,
+               both: rows.filter(r => (r.children[1].innerText || '').trim()
+                 && (r.children[2].innerText || '').trim()
+                 && r.children[1].offsetParent && r.children[2].offsetParent).length,
+               lbl: getComputedStyle(rows[0].children[1], '::before').content }; }""")
+    check("配装页 375 上对照表不横滚、每行两栏都在同一屏",
+          not cmpm.get("missing") and cmpm["scroll"] == 0 and cmpm["page"] <= 1
+          and cmpm["both"] == cmpm["n"] and cmpm["n"] > 0,
+          json.dumps(cmpm, ensure_ascii=False))
+    check("375 上对照表把列名补在每行前面（表头隐藏了，不写清就不知道哪栏是谁）",
+          u"本站用的" in (cmpm.get("lbl") or ""), cmpm.get("lbl"))
+    mp.locator("#pzcmp").scroll_into_view_if_needed()
+    mp.wait_for_timeout(300)
+    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare-m.png"))
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-m.png"))
     # 375 上补一张猎人那套的合计行（这次修的就是这一排）
     hmi = mp.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
@@ -1594,6 +1700,77 @@ def test_bis(browser, base):
     mp.wait_for_timeout(300)
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-m.png"))
     ctx.close()
+
+
+def test_classes_sticky(browser, base):
+    """职业页「技能变化」那个滚动框里的吸附关系（2026-10-23 站主实拍：表头浮在框中间、把行推走）。
+       根因是参照物：position:sticky 认的是**最近的滚动祖先**（这里是 .chgs，max-height:72vh、
+       自己滚动），不是视口。原来表头照抄全站顶栏高度 var(--hd-h)（实测 110px），
+       于是它在滚动框里往下掉 110px——分组条吸在框顶、表头悬在下面一米处。
+       钉三件事：① 分组条吸在滚动框上沿；② 表头紧贴分组条下沿（偏移等于分组条高，不是 --hd-h）；
+       ③ 表头下沿往下 2px 那点命中测试打到的是数据行——遮挡只能靠命中测试判，
+         而且要先滚进视口，不然量到的是没吸住时的位置。
+       375 是另一套口径：窄屏下 .boardwrap 变成横向滚动容器，sticky 的参照物会跟着换，
+       所以那一边**故意不吸**（board.css 与 app.css 各有一条把它关掉，留着会画出一条空带）。
+       这里把"移动端不吸"也钉住，谁要重新打开得先说清这条教训。"""
+    print("\n[6i] 职业页技能变化表头吸附")
+    import json
+    if not app_up(browser):
+        return
+    JS = """() => { const box = document.querySelector('.chgs');
+      if (!box) return { missing: true };
+      box.scrollTop = 220;
+      const bb = box.getBoundingClientRect();
+      const grp = box.querySelector('.lgrp');
+      const th = box.querySelector('thead th');
+      const gb = grp.getBoundingClientRect(), tb = th.getBoundingClientRect();
+      const under = document.elementFromPoint(Math.round(tb.left + 20), Math.round(tb.bottom + 2));
+      const over = document.elementFromPoint(Math.round(tb.left + 20), Math.round(tb.top + tb.height / 2));
+      return { scrollTop: box.scrollTop,
+               scrollable: box.scrollHeight > box.clientHeight + 40,
+               pageOver: document.documentElement.scrollWidth - innerWidth,
+               boxOver: box.scrollWidth - box.clientWidth,
+               grpDy: Math.round(gb.top - bb.top), grpH: Math.round(gb.height),
+               grpPos: getComputedStyle(grp).position,
+               thDy: Math.round(tb.top - bb.top), thPos: getComputedStyle(th).position,
+               thTopCss: getComputedStyle(th).top, hdH: getComputedStyle(box).getPropertyValue('--hd-h').trim(),
+               underRow: !!(under && under.closest('tbody tr') && !under.closest('thead')),
+               overTh: !!(over && over.closest('thead')),
+               rows: box.querySelectorAll('tbody tr').length }; }"""
+    for tag, vp, mob in (("桌面", {"width": 1440, "height": 1000}, False),
+                         ("375", {"width": 375, "height": 812}, True)):
+        ctx = browser.new_context(viewport=vp, is_mobile=mob, has_touch=mob)
+        page = ctx.new_page()
+        page.goto(APP_BASE + "/#/classes", wait_until="networkidle")
+        page.wait_for_timeout(2200)
+        r = page.evaluate(JS)
+        check("%s 技能变化是一个自己滚的框（吸附才有意义）" % tag,
+              not r.get("missing") and r["scrollable"] and r["scrollTop"] >= 200,
+              json.dumps({k: r.get(k) for k in ("scrollable", "scrollTop", "rows")}, ensure_ascii=False))
+        if mob:
+            check("375 分组条与表头都故意不吸（那一屏 .boardwrap 是横滚容器，吸了会画空带）",
+                  r["grpPos"] == "static" and r["thPos"] == "static",
+                  "分组条 %s / 表头 %s" % (r["grpPos"], r["thPos"]))
+            check("375 整页不横溢（框内横滚是允许的，页面不能）",
+                  r["pageOver"] <= 1 and r["boxOver"] >= 0,
+                  json.dumps({k: r[k] for k in ("pageOver", "boxOver")}))
+        else:
+            check("%s 分组条吸在滚动框上沿（不是吸在视口上）" % tag,
+                  r["grpPos"] == "sticky" and abs(r["grpDy"]) <= 2,
+                  "position %s / 距框顶 %spx" % (r["grpPos"], r["grpDy"]))
+            check("%s 表头紧贴分组条下面（偏移等于分组条高，不是顶栏那个高 %s）"
+                  % (tag, r["hdH"] or "?"),
+                  r["thPos"] == "sticky" and abs(r["thDy"] - r["grpH"]) <= 2
+                  and r["thDy"] < 60,
+                  "表头距框顶 %spx / 分组条高 %spx / top:%s" % (r["thDy"], r["grpH"], r["thTopCss"]))
+            check("%s 表头没有盖住数据行：下沿那点打到的是行，表头那一点打到的还是表头" % tag,
+                  r["underRow"] and r["overTh"],
+                  json.dumps({k: r[k] for k in ("underRow", "overTh")}))
+        page.locator(".chgs").scroll_into_view_if_needed()
+        page.wait_for_timeout(300)
+        page.screenshot(path=os.path.join(SHOT_DIR, "app-classes-chgs-sticky%s.png"
+                                          % ("-m" if mob else "")))
+        ctx.close()
 
 
 def test_design_baseline(browser, base):
@@ -5194,6 +5371,7 @@ SECTIONS = [
     ("abilities", test_abilities),
     ("spellbook", test_spellbook),
     ("bis", test_bis),
+    ("classes_sticky", test_classes_sticky),
     ("race_icon", lambda b, base: test_race_icon(b)),
     ("updates_filter", lambda b, base: test_updates_filter(b)),
     ("css_tokens", test_css_tokens),
