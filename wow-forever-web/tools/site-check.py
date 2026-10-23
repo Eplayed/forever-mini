@@ -1160,23 +1160,35 @@ def test_legacy_app(browser, base):
             none: cells.filter(e => e.classList.contains('none')).length,
             names: cells.filter(e => e.tagName === 'BUTTON').map(e => (e.querySelector('.nm')||{}).innerText.trim()),
             tags: cells.filter(e => e.querySelector('.lge-tag')).length,
+            gates: cells.filter(e => e.querySelector('.lge-gate')).length,
+            gateTxt: [...document.querySelectorAll('#ltree .lge-gate')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
+            lines: document.querySelectorAll('.lge-links line').length,
             h2: (document.querySelector('#ltree h2')||{}).innerText.replace(/\\s+/g,' ').trim()}; }""")
 
     g = grid_state()
     t0 = trees[0]
-    # 注意"未公开"的格子也带 perk 号（形如 unknown-113508，不在这 21 个专长里），
-    # 所以挑真专长必须同时排掉 empty 与 unknown——只判 perk 存在会把它们算进来（第一版就崩在这）。
+
+    # 客户端 1.60.1.70532 起三棵树是 5×5，第 4 排与第 4 列整条空着。
+    # 页面把全空的排/列收掉显示，但排号仍用客户端真实值——判据按同一条规则现算，
+    # 不是把 4 或 5 抄进断言（2026-10-23 那条"仍按四列摆"就是把旧事实当过常量的例子）。
+    def vis(t):
+        used = [s for s in t["slots"] if not s.get("empty")]
+        rows = [r for r in range(t["rows"]) if any(s["row"] == r for s in used)]
+        cols = [c for c in range(t["cols"]) if any(s["col"] == c for s in used)]
+        return rows, cols
+
+    v0r, v0c = vis(t0)
     named = lambda t: [s for s in t["slots"] if s.get("perk") and not s.get("empty") and not s.get("unknown")]
     want_names = [perks[s["perk"]]["nameCn"] for s in
                   sorted(named(t0), key=lambda s: (s["row"], s["col"]))]
-    check("格子按客户端坐标铺满 rows × cols，排号一行一个",
-          g["rows"] == t0["rows"] and g["cells"] == t0["rows"] * t0["cols"]
-          and g["cols"] == t0["cols"] and g["rails"] == ["第%d排" % (i + 1) for i in range(t0["rows"])],
-          "%d 排 × %d 列 = %d 格（数据 %d × %d），排号 %s" % (g["rows"], g["cols"], g["cells"],
-                                                        t0["rows"], t0["cols"], g["rails"]))
+    check("格子按客户端坐标铺，全空的排与列收掉；排号仍是客户端真实排号",
+          g["rows"] == len(v0r) and g["cells"] == len(v0r) * len(v0c)
+          and g["cols"] == len(v0c) and g["rails"] == ["第%d排" % (r + 1) for r in v0r],
+          "%d 排 × %d 列 = %d 格（数据 %d 排 %d 列，收掉后 %d × %d），排号 %s"
+          % (g["rows"], g["cols"], g["cells"], t0["rows"], t0["cols"], len(v0r), len(v0c), g["rails"]))
     check("三种格子各是各的数：专长 / 未公开 / 这一排没这个位置",
           g["perk"] == known(t0) and g["unk"] == unk(t0)
-          and g["perk"] + g["unk"] + g["none"] == t0["rows"] * t0["cols"],
+          and g["perk"] + g["unk"] + g["none"] == len(v0r) * len(v0c),
           "专长 %d / 未公开 %d / 空 %d（数据 %d / %d）" % (g["perk"], g["unk"], g["none"],
                                                       known(t0), unk(t0)))
     check("格子里的专长名与顺序等于这份数据按坐标排出来的",
@@ -1184,9 +1196,21 @@ def test_legacy_app(browser, base):
     pre_n = len([p for p in perks.values() if p["treeId"] == t0["id"] and p.get("prerequisiteCn")])
     check("有前置的格子都挂了角标，数量与数据一致", g["tags"] == pre_n,
           "画 %d 个，数据里这一棵有前置的 %d 个" % (g["tags"], pre_n))
+    gate_n = len([p for p in perks.values()
+                  if p["treeId"] == t0["id"] and (p.get("treePointsRequired") or 0) > 0])
+    check("要本树点数的格子都标了门槛，数字直接来自数据（不是写死的 5/10）",
+          g["gates"] == gate_n and all("要 " in x for x in g["gateTxt"]),
+          "画 %d 个（数据 %d 个）：%s" % (g["gates"], gate_n, g["gateTxt"]))
+    check("前置连线画得出来，条数等于数据里这一棵的连线数",
+          g["lines"] == len(t0["links"]), "%d 条（数据 %d 条）" % (g["lines"], len(t0["links"])))
+    fixed = page.evaluate("""() => { const t = document.querySelector('#main').innerText.replace(/\\s+/g,' ');
+      return {assume: t.indexOf('每层 1 点') >= 0 && t.indexOf('还没核实') >= 0,
+              noAcct: t.indexOf('不读取游戏账号') >= 0, local: t.indexOf('只存在你这台设备的浏览器里') >= 0}; }""")
+    check("规划假设与隐私边界这两句固定显示（方案要求的硬口径）",
+          fixed["assume"] and fixed["noAcct"] and fixed["local"], json.dumps(fixed, ensure_ascii=False))
 
     # ---- ② 详情栏：没选时不空，选了说这个专长 ----
-    det0 = page.evaluate("""() => ({legend: document.querySelectorAll('.lge-legend li').length,
+    det0 = page.evaluate("""() => ({legend: [...document.querySelectorAll('.lge-legend li')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
       read: [...document.querySelectorAll('#ldet .lge-read > span')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
       perk: !!document.querySelector('.lge-perk')})""")
     t0perks = [p for p in perks.values() if p["treeId"] == t0["id"]]
@@ -1196,9 +1220,13 @@ def test_legacy_app(browser, base):
                  "%d层最多可点" % sum(p.get("maxRank") or 0 for p in t0perks),
                  "%d个要先点前置" % len([p for p in t0perks if p.get("prerequisiteCn")])]
     squash = lambda xs: [re.sub(r"\s+", "", x) for x in xs]
-    check("没选专长时详情栏仍有内容（图例三条 + 这一棵的三行读数）",
-          det0["legend"] == 3 and not det0["perk"] and squash(det0["read"]) == squash(want_read),
-          "读数 %s ／ 数据 %s" % (det0["read"], want_read))
+    # 图例从"三条"变"四条"是这一轮有意加的（门槛与连线上了界面，不解释就没人才看懂那些角标）；
+    # 判据按"四种标记各有一条说明"来查，不再数条数——数条数就是又一个抄死的常量。
+    ltxt = " ".join(det0["legend"])
+    check("没选专长时详情栏仍有三行读数，图例把四种标记都说清了",
+          not det0["perk"] and squash(det0["read"]) == squash(want_read)
+          and all(k in ltxt for k in ("专长", "投满", "线", "没公开")),
+          "读数 %s ／ 数据 %s ／ 图例 %d 条" % (det0["read"], want_read, len(det0["legend"])))
     withpre = [p for p in t0perks if p.get("prerequisiteCn")]
     pid = withpre[0]["id"]
     page.evaluate("() => document.querySelector('[data-perk=\"%s\"]').click()" % pid)
@@ -1231,51 +1259,191 @@ def test_legacy_app(browser, base):
           and d2["tree"] == hit[0]["treeCn"],
           "点的是「%s」→ %s" % (pre_name, json.dumps(d2, ensure_ascii=False)))
 
-    # ---- ③ 换树清选中，别把上一棵的选中态留在空栏里 ----
+    # ---- ③ 换树清选中这一发挪到 ③c：先把加点规划器在当前这棵上跑完，
+    #          不然树一切走，③b 那些格子全在另一棵里，点了等于没点（第一版就栽在这）----
     t1 = trees[1]
-    page.evaluate("() => document.querySelector('[data-t=\"%s\"]').click()" % t1["id"])
-    page.wait_for_timeout(700)
+    # ---- ③b 加点规划器：全部用真点击走一遍，判据对着数据里的门槛/前置/上限算 ----
+    def pick(pid):
+        # pid 传的是数据里的完整 id（legacy-perk-xxx），不再拼前缀——拼两次会选不到格子
+        page.evaluate("id => { const e = document.querySelector('[data-perk=\"' + id + '\"]');"
+                      " if (e) e.click(); }", pid)
+        page.wait_for_timeout(260)
+
+    def plan_state():
+        # 每个字段都做空值兜底：详情栏在"没选格子"时整块不存在，直接 .innerText.trim() 会炸在门禁里
+        return page.evaluate("""() => { const A = document.querySelector('.lge-act [data-act="add"]');
+          const S = document.querySelector('.lge-act [data-act="sub"]');
+          const txt = (e) => e ? (e.innerText || '').replace(/\\s+/g, ' ').trim() : '';
+          const mons = document.querySelectorAll('.lge-ranks .mono');
+          return { bar: txt(document.querySelector('.lge-planbar .bn')),
+            det: txt(document.querySelector('.lge-perk h2')),
+            addDis: A ? !!A.disabled : null, subDis: S ? !!S.disabled : null,
+            why: txt(document.querySelector('.ldetail .note')),
+            filled: [...document.querySelectorAll('#ltree .lslot.filled .nm')].map(e => (e.innerText||'').trim()),
+            now: txt(mons[1]), det2: !!document.querySelector('.lge-perk'),
+            toast: txt(document.querySelector('.lge-toast')),
+            lit: document.querySelectorAll('.lge-links line.on').length }; }""")
+
+    def tap(act_, n=1):
+        for _ in range(n):
+            page.evaluate("m => { const e = document.querySelector('.lge-act [data-act=\"' + m + '\"]');"
+                          " if (e && !e.disabled) e.click(); }", act_)
+            page.wait_for_timeout(70)
+
+    cap_n = (L["meta"]["rules"].get("launchSpendingCap") or 0)
+
+    def legal_plan(t, want):
+        """按数据里的门槛/前置/上限贪心凑一组合法点法（凑到 want 点）。
+        门禁自己算一遍，不是把某个方案抄成常量——数据换了它跟着换。"""
+        ps = [p for p in perks.values() if p["treeId"] == t["id"]]
+        st, spent, order = {}, 0, []
+        while spent < want:
+            moved = False
+            for p in sorted(ps, key=lambda x: (x.get("treePointsRequired") or 0)):
+                cur = st.get(p["id"], 0)
+                if cur >= (p.get("maxRank") or 0):
+                    continue
+                if spent < (p.get("treePointsRequired") or 0):
+                    continue
+                if p.get("prerequisite") and not st.get(p["prerequisite"]):
+                    continue
+                st[p["id"]] = cur + 1
+                if p["id"] not in order:
+                    order.append(p["id"])
+                spent += 1
+                moved = True
+                if spent >= want:
+                    break
+            if not moved:
+                break
+        return [(i.replace("legacy-perk-", ""), st[i]) for i in order]
+
+    gate5 = [p for p in perks.values() if p["treeId"] == t0["id"] and p.get("treePointsRequired") == 5][0]
+    pick(gate5["id"])
+    s0 = plan_state()
+    check("门槛没够的格子：加号置灰，原因把要几点写清楚（不是只灰着不给理由）",
+          s0["det2"] and s0["addDis"] is True and ("投满 %d 点" % gate5["treePointsRequired"]) in s0["why"],
+          "%s → %s" % (gate5["nameCn"], json.dumps(s0, ensure_ascii=False)[:160]))
+    entry = [p for p in perks.values()
+             if p["treeId"] == t0["id"] and not p.get("treePointsRequired") and not p.get("prerequisite")][0]
+    pick(entry["id"]); tap("add", entry["maxRank"])
+    s1 = plan_state()
+    check("点满一个入口格：已投点数与格子上那个数一起动（每层按 1 点，界面上标着是估算）",
+          ("%s 点" % entry["maxRank"]) in s1["bar"] and entry["nameCn"] in s1["filled"]
+          and s1["now"] == "已点 %d 点" % entry["maxRank"],
+          "%s ／ %s" % (s1["bar"], s1["now"]))
+    pick(gate5["id"]); tap("add", 1)
+    s2 = plan_state()
+    check("投够本树点数之后，原来锁着的格子真的能点了（不是只做样子）",
+          s2["addDis"] is False or "点满" in s2["why"],
+          "%s → %s" % (gate5["nameCn"], s2["why"] or "可继续加"))
+    # 花满上限：按数据现算一组合法点法，逐格点到 cap 点，再验两件事——
+    #   ① 还有余量的格子加号也置灰并说"已经花满"；② 退掉带后续依赖的那一格会被拦住
+    page.evaluate("() => { const b=[...document.querySelectorAll('.lge-planact button')]"
+                  ".find(x=>x.innerText.indexOf('全部清空')>=0); if (b) b.click(); }")
+    page.wait_for_timeout(400)
+    plan = legal_plan(t0, cap_n)
+    got = {}
+    for pid, n in plan:
+        pick("legacy-perk-" + pid); tap("add", n)
+        got["legacy-perk-" + pid] = n
+    spare = [p for p in perks.values() if p["treeId"] == t0["id"]
+             and (p.get("maxRank") or 0) > got.get(p["id"], 0)]
+    if spare:
+        pick(spare[0]["id"])
+    s4 = plan_state()
+    check("花满每个角色的上限后，还有余量的格子加号也置灰并说明要先退点",
+          ("还能花 0 点" in s4["bar"]) and ("已经花满 %d 点" % cap_n) in s4["why"],
+          "%s ／ %s" % (s4["bar"], s4["why"]))
+    check("连线两端都点了点之后，那条线变成高亮（前置关系看得出走通了）",
+          s4["lit"] >= 1, "高亮 %d 条" % s4["lit"])
+    # 退点保护：从这一组合法点法里找"前置与后续都真点了点"的一对，把前置的最后一点退掉
+    chain = None
+    for full, n in got.items():
+        kid = perks.get(full) or {}
+        pre_id = kid.get("prerequisite")
+        if kid and pre_id and got.get(pre_id):
+            chain = (kid, pre_id)
+            break
+    if chain:
+        kid, pre_id = chain
+        pick(pre_id)
+        tap("sub", got[pre_id])            # 一直退到会被拦为止
+        s3 = plan_state()
+        # 拦住的话走的是轻提示（toast），详情栏下面那句只说"为什么加不了"
+        msg3 = (s3["toast"] or s3["why"])
+        check("退掉前置那一格会被拦住，且说清是哪一格还点着（绝不静默清掉别的点）",
+              "不能退" in msg3 and kid["nameCn"] in msg3,
+              "%s → %s" % (perks[pre_id]["nameCn"], msg3[:120]))
+    else:
+        check("退掉前置那一格会被拦住，且说清是哪一格还点着（绝不静默清掉别的点）",
+              False, "这一组点法里找不到「前置与后续都点了」的一对，判据没跑到")
+    page.evaluate("() => { const b=[...document.querySelectorAll('.lge-planact button')]"
+                  ".find(x=>x.innerText.indexOf('全部清空')>=0); if (b) b.click(); }")
+    page.wait_for_timeout(500)
+    s5 = plan_state()
+    check("全部清空能回到 0 点（清空是显式按钮，不是刷新页面）",
+          "已投 0 点" in s5["bar"] and not s5["filled"], "%s" % s5["bar"])
+
+    # ---- ③c 换一棵树：格子与名字跟着换，上一棵的选中态清掉 ----
+    pick(entry["id"])
+    page.evaluate("id => document.querySelector('[data-t=\"' + id + '\"]').click()", t1["id"])
+    page.wait_for_timeout(800)
+    v1r, v1c = vis(t1)
     sw = page.evaluate("""() => ({on: document.querySelectorAll('#ltree .lslot.on').length,
       perk: !!document.querySelector('.lge-perk'),
       names: [...document.querySelectorAll('#ltree BUTTON.lslot .nm')].map(e => e.innerText.trim()),
-      cells: document.querySelectorAll('#ltree .lslot').length})""")
+      cells: document.querySelectorAll('#ltree .lslot').length,
+      rails: [...document.querySelectorAll('.lge-rail')].map(e => e.innerText.trim())})""")
     want1 = [perks[s["perk"]]["nameCn"] for s in
              sorted(named(t1), key=lambda s: (s["row"], s["col"]))]
     check("换一棵树：格子与名字跟着换，上一棵的选中态清掉、详情回到概览",
           sw["on"] == 0 and not sw["perk"] and sw["names"] == want1
-          and sw["cells"] == t1["rows"] * t1["cols"],
+          and sw["cells"] == len(v1r) * len(v1c)
+          and sw["rails"] == ["第%d排" % (r + 1) for r in v1r],
           "%d 格 / 选中 %d / %s" % (sw["cells"], sw["on"], sw["names"][:3]))
+    page.evaluate("id => document.querySelector('[data-t=\"' + id + '\"]').click()", t0["id"])
+    page.wait_for_timeout(700)
 
     # ---- ④ 六组挑战：默认只开第一组，搜索自动展开，内容一条不少 ----
+    reg_groups = [dict(g, items=[x for x in (g.get("items") or []) if not x.get("special")])
+                  for g in groups]
+    reg_items = [x for g in reg_groups for x in g["items"]]
+    sp_items = [x for g in groups for x in (g.get("items") or []) if x.get("special")]
     ch = page.evaluate("""() => ({blocks: document.querySelectorAll('#lch .lchgrp').length,
       open: [...document.querySelectorAll('#lch [aria-expanded]')].filter(e => e.getAttribute('aria-expanded') === 'true').length,
       vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length,
       all: document.querySelectorAll('#lch tbody tr').length,
+      chk: document.querySelectorAll('#lch input[type=checkbox]').length,
       heads: [...document.querySelectorAll('.lchhead > b')].map(e => e.innerText.trim()),
       sums: [...document.querySelectorAll('.lchhead > .mono')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
+      spRows: [...document.querySelectorAll('.lge-special tbody tr')].map(e => e.innerText.replace(/\\s+/g,' ').trim()),
       counter: (document.querySelector('.field .mono')||{}).innerText.trim()})""")
-    g0 = groups[0]
-    want_sums = ["%d 项 · 合计 %d 点" % (len(g["items"]), sum(x.get("points") or 0 for x in g["items"]))
-                 for g in groups]
-    check("六组挑战的组头写着项数与合计点数，数全部来自明细",
-          ch["blocks"] == len(groups) == 6 and ch["heads"] == [g["nameCn"] for g in groups]
+    g0 = reg_groups[0]
+    want_sums = ["%d 项 · 已勾 0 · 合计 %d 点"
+                 % (len(g["items"]), sum(x.get("points") or 0 for x in g["items"])) for g in reg_groups]
+    check("六组挑战的组头写着项数、已勾数与合计点数，数全部来自明细",
+          ch["blocks"] == len(reg_groups) == 6 and ch["heads"] == [g["nameCn"] for g in reg_groups]
           and ch["sums"] == want_sums, "；".join(ch["sums"]) + " ／ 数据 " + "；".join(want_sums))
-    check("默认只展开第一组，但 66 行内容一条不少（折叠是藏起来不是删掉）",
-          ch["open"] == 1 and ch["vis"] == len(g0["items"]) and ch["all"] == len(all_items)
-          and ch["counter"] == "%d / %d 项" % (len(all_items), len(all_items)),
-          "展开 %d 组，可见 %d 行 / DOM %d 行（数据 %d 项）" % (ch["open"], ch["vis"], ch["all"], len(all_items)))
+    check("常规挑战一行一条不少；那条测试参与记录单列在六组之外，不混进常规分母",
+          ch["all"] == len(reg_items) and ch["chk"] == len(reg_items)
+          and ch["counter"] == "%d / %d 项 · 已勾 0 项" % (len(reg_items), len(reg_items))
+          and len(ch["spRows"]) == len(sp_items)
+          and all(str(x["id"]) in ch["spRows"][0] for x in sp_items),
+          "六组 %d 行 / 勾选框 %d 个 / 单列 %d 条（数据常规 %d、特殊 %d）"
+          % (ch["all"], ch["chk"], len(ch["spRows"]), len(reg_items), len(sp_items)))
     page.evaluate("() => document.querySelectorAll('.lchhead')[1].click()")
     page.wait_for_timeout(500)
     ch2 = page.evaluate("""() => ({open: [...document.querySelectorAll('#lch [aria-expanded]')]
         .filter(e => e.getAttribute('aria-expanded') === 'true').length,
       vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length})""")
     check("点第二组的组头能展开，可见行数跟着加上去",
-          ch2["open"] == 2 and ch2["vis"] == len(g0["items"]) + len(groups[1]["items"]),
+          ch2["open"] == 2 and ch2["vis"] == len(g0["items"]) + len(reg_groups[1]["items"]),
           "展开 %d 组 / 可见 %d 行（前两组 %d + %d）"
-          % (ch2["open"], ch2["vis"], len(g0["items"]), len(groups[1]["items"])))
+          % (ch2["open"], ch2["vis"], len(g0["items"]), len(reg_groups[1]["items"])))
     k = "25级"
-    hits = [x for x in all_items if k in ((x.get("nameCn") or "") + " " + (x.get("requirement") or "")
-            + " " + (x.get("sub") or "") + " " + (x.get("group") or ""))]
+    hits = [x for x in reg_items if k in ((x.get("nameCn") or "") + " " + (x.get("requirement") or "")
+            + " " + (x["sub"] or "") + " " + (x["group"] or ""))]
     page.fill(".field input[type=search]", k)
     page.wait_for_timeout(900)
     cs = page.evaluate("""() => ({blocks: document.querySelectorAll('#lch .lchgrp').length,
@@ -1285,7 +1453,7 @@ def test_legacy_app(browser, base):
       hl: document.querySelectorAll('#lch mark, #lch .hl').length})""")
     check("搜索时命中的组自动展开（折叠不会把搜索结果藏起来），计数按命中走",
           cs["blocks"] >= 1 and cs["open"] == cs["blocks"] and cs["vis"] == len(hits)
-          and cs["counter"] == "%d / %d 项" % (len(hits), len(all_items)),
+          and cs["counter"] == "%d / %d 项 · 已勾 0 项" % (len(hits), len(reg_items)),
           "命中 %d 组 / 展开 %d / 可见 %d 行（数据 %d 条含「%s」）" % (cs["blocks"], cs["open"], cs["vis"], len(hits), k))
     page.fill(".field input[type=search]", "")
     page.wait_for_timeout(700)
@@ -1296,8 +1464,37 @@ def test_legacy_app(browser, base):
                          ".filter(e => e.getAttribute('aria-expanded') === 'true').length,"
                          " blocks: document.querySelectorAll('#lch .lchgrp').length})")
     check("清空搜索回到用户自己的展开状态，不是停在全部展开；六组都回来了",
-          back == {"open": 2, "blocks": len(groups)},
-          "%s（应 %d 组展开 / %d 组都在）" % (back, 2, len(groups)))
+          back == {"open": 2, "blocks": len(reg_groups)},
+          "%s（应 %d 组展开 / %d 组都在）" % (back, 2, len(reg_groups)))
+
+    # ---- ④b 勾选 → 奖励轨：这条轨只按常规点数走，特殊那条不并进分母 ----
+    first_at = min(r["at"] for r in L["rewards"])
+    tr0 = page.evaluate("""() => { const txt = (e) => e ? (e.innerText || '').trim() : '';
+      return [...document.querySelectorAll('.lgr-i')].map(e => ({
+      nm: txt(e.querySelector('.lgr-nm')), st: txt(e.querySelector('.lgr-st')),
+      got: e.classList.contains('got') })); }""")
+    check("一条没勾时四档都写着还差几点（差的就是它自己那一档的点数）",
+          all(not x["got"] for x in tr0) and tr0[0]["st"] == "还差 %d 点" % first_at,
+          json.dumps(tr0[:2], ensure_ascii=False))
+    page.evaluate("n => document.querySelectorAll('#lch input[type=checkbox]').forEach((c,i)=>{ if(i<n) c.click(); })",
+                  first_at)
+    page.wait_for_timeout(900)
+    tr1 = page.evaluate("""() => { const txt = (e) => e ? (e.innerText || '').replace(/\\s+/g, ' ').trim() : '';
+      return {track: [...document.querySelectorAll('.lgr-i')].map(e => ({
+          st: txt(e.querySelector('.lgr-st')), got: e.classList.contains('got') })),
+        done: txt(document.querySelector('.field .mono')),
+        heads: [...document.querySelectorAll('.lchhead > .mono')].map(e => txt(e)),
+        stored: localStorage.getItem('wfs.legacy.checks') }; }""")
+    check("勾满第一档要的点数：那一档转成已够，后面各档改成还差几点",
+          tr1["track"][0]["got"] and tr1["track"][0]["st"] == "已够"
+          and not tr1["track"][1]["got"] and "还差" in tr1["track"][1]["st"],
+          json.dumps(tr1["track"], ensure_ascii=False))
+    check("已勾数同时出现在计数与六个组头里，且写进了本机存储",
+          ("已勾 %d 项" % first_at) in tr1["done"]
+          and all("已勾" in h for h in tr1["heads"]) and bool(tr1["stored"]),
+          "%s ／ %s" % (tr1["done"], tr1["heads"][0]))
+    page.evaluate("() => document.querySelectorAll('#lch input[type=checkbox]').forEach(c=>{ if(c.checked) c.click(); })")
+    page.wait_for_timeout(700)
 
     # ---- ⑤ 锚点走站内路由（首页那批死链就是栽在裸 #id 上），点一下真的滚 ----
     anch = page.evaluate("""() => [...document.querySelectorAll('.lge-anchor a')].map(a => ({
@@ -1308,38 +1505,124 @@ def test_legacy_app(browser, base):
           json.dumps(anch, ensure_ascii=False))
     page.evaluate("() => window.scrollTo(0, 0)")
     page.wait_for_timeout(300)
-    page.evaluate("() => document.querySelectorAll('.lge-anchor a')[2].click()")
-    page.wait_for_timeout(1200)
-    check("点锚点真的滚到那一段",
-          page.evaluate("() => { const r = document.getElementById('lgr').getBoundingClientRect();"
-                        "return window.scrollY > 400 && r.top < window.innerHeight; }"))
+    anc = page.evaluate("""() => { const before = window.scrollY;
+      document.querySelectorAll('.lge-anchor a')[2].click();
+      return new Promise((res) => setTimeout(() => {
+        const r = document.getElementById('lgr').getBoundingClientRect();
+        res({ before: before, after: window.scrollY, top: Math.round(r.top), inView: r.top < innerHeight && r.bottom > 0 });
+      }, 1200)); }""")
+    check("点锚点真的滚到那一段（从页顶滚到奖励轨，目标进了视口）",
+          anc["before"] <= 2 and anc["after"] > anc["before"] and anc["inView"],
+          json.dumps(anc, ensure_ascii=False))
 
     # ---- ⑥ 两档视口的几何与红线 ----
     body = page.evaluate("() => document.querySelector('#main').innerText")
     check("这一页不出现百分比与掉率措辞（红线）",
           not re.search(r"\d+\s*%|掉率", body), "干净")
+    # ---- ⑤b 本机方案、分享链接只带方案、坏链接可恢复、存储坏了不白屏 ----
+    pick(entry["id"]); tap("add", 2)
+    page.evaluate("() => { const i = document.querySelector('.lge-planact input[type=text]');"
+                  " i.value = '门禁测的方案'; i.dispatchEvent(new Event('input', {bubbles: true})); }")
+    page.evaluate("() => [...document.querySelectorAll('.lge-planact button')]"
+                  ".find(b => b.innerText.indexOf('存为本方案') >= 0).click()")
+    page.wait_for_timeout(600)
+    saved = page.evaluate("() => localStorage.getItem('wfs.legacy.plans')")
+    page.evaluate("() => [...document.querySelectorAll('.lge-planact button')]"
+                  ".find(b => b.innerText.indexOf('复制方案链接') >= 0).click()")
+    page.wait_for_timeout(800)
+    href = page.evaluate("() => location.href")
+    code = ""
+    try:
+        saved_arr = json.loads(saved or "[]")
+        code = saved_arr[0]["code"]
+    except Exception:
+        saved_arr = []
+    check("方案存进本机（浏览器本地，不上传、不要登录），链接里只带方案码",
+          bool(code) and saved_arr[0]["name"] == "门禁测的方案"
+          and "plan=" in href and code.split(",")[0].split(":")[1].split(".")[0] in href
+          and not any(str(x["id"]) in href for x in all_items),
+          "本机 %s ／ 地址 %s" % ((saved or "")[:60], href[-70:]))
+    mctx2 = browser.new_context(viewport={"width": 1440, "height": 1000})
+    sp = mctx2.new_page(); perr = []
+    sp.on("pageerror", lambda e: perr.append(str(e)[:120]))
+    sp.goto(APP_BASE + "/#/legacy?t=%s&plan=%s" % (t0["id"], urllib.parse.quote(code)),
+            wait_until="networkidle")
+    sp.wait_for_timeout(2200)
+    got = sp.evaluate("""() => ({bar: (document.querySelector('.lge-planbar .bn')||{}).innerText.replace(/\\s+/g,' ').trim(),
+      filled: [...document.querySelectorAll('#ltree .lslot.filled .nm')].map(e => e.innerText.trim()),
+      warn: !!document.querySelector('.lge-warn'), plans: document.querySelectorAll('.lge-planlist .plan').length})""")
+    check("换一台干净浏览器打开这条链接：加点方案原样还原，且不带来任何本机方案与勾选",
+          not perr and ("%d 点" % 2) in got["bar"] and got["filled"] == [entry["nameCn"]]
+          and not got["warn"] and got["plans"] == 0,
+          json.dumps(got, ensure_ascii=False) + " 报错 %s" % (perr[:1],))
+    bad_code = "v1:%s.%d,nope.2" % (entry["id"].replace("legacy-perk-", ""), (entry.get("maxRank") or 3) + 4)
+    sp.goto("about:blank")
+    sp.goto(APP_BASE + "/#/legacy?t=%s&plan=%s" % (t0["id"], urllib.parse.quote(bad_code)),
+            wait_until="networkidle")
+    sp.wait_for_timeout(2200)
+    bad = sp.evaluate("""() => { const w = document.querySelector('.lge-warn');
+      return {txt: w ? w.innerText.replace(/\\s+/g,' ').trim() : '',
+        hasBtn: !!(w && [...w.querySelectorAll('button')].some(b => b.innerText.indexOf('清掉') >= 0))}; }""")
+    check("链接里的方案对不上时：说清哪几条对不上、按能认的还原、并给一个能清掉的出口",
+          "对不上" in bad["txt"] and ("按 %d 层收" % (entry.get("maxRank") or 0)) in bad["txt"]
+          and "这一版没有的格子" in bad["txt"]
+          and bad["hasBtn"], bad["txt"][:120])
+    sp.evaluate("() => [...document.querySelectorAll('.lge-warn button')].find(b => b.innerText.indexOf('清掉') >= 0).click()")
+    sp.wait_for_timeout(900)
+    cleared = sp.evaluate("""() => ({warn: !!document.querySelector('.lge-warn'),
+      bar: (document.querySelector('.lge-planbar .bn')||{}).innerText.replace(/\\s+/g,' ').trim()})""")
+    check("点「清掉这份」回到空白方案（不是停在半份看不懂的点法上）",
+          not cleared["warn"] and "已投 0 点" in cleared["bar"], json.dumps(cleared, ensure_ascii=False))
+    sp.add_init_script("localStorage.setItem('wfs.legacy.plans','{坏掉的');"
+                       "localStorage.setItem('wfs.legacy.checks','[\"99999999\",\"%s\"');" % all_items[0]["id"])
+    sp.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    sp.wait_for_timeout(2200)
+    broke = sp.evaluate("""() => ({bar: (document.querySelector('.lge-planbar .bn')||{}).innerText.replace(/\\s+/g,' ').trim(),
+      h2: (document.querySelector('#main h1')||{}).innerText.trim(),
+      done: (document.querySelector('.field .mono')||{}).innerText.trim()})""")
+    check("本机存储被写坏（不是合法 JSON）时页面照常打开、回到 0 点，不白屏也不报错",
+          perr == [] and broke["h2"].startswith("传承") and "已投 0 点" in broke["bar"],
+          json.dumps(broke, ensure_ascii=False) + " 报错 %s" % (perr[:2],))
+    mctx2.close()
+    page.evaluate("() => { const b=[...document.querySelectorAll('.lge-planact button')]"
+                  ".find(x=>x.innerText.indexOf('全部清空')>=0); if (b) b.click(); }")
+    page.wait_for_timeout(400)
+
     page.screenshot(path=os.path.join(SHOT_DIR, "app-legacy.png"), full_page=True)
     ctx.close()
     mctx = browser.new_context(viewport={"width": 375, "height": 812})
     mp = mctx.new_page()
     mp.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
     mp.wait_for_timeout(2200)
+    # 加减按钮只在选中某个格子之后才出现在详情栏里（没选时那栏是这一棵树的读数），
+    # 所以 375 上先真点一个格子，再量这两个按钮在不在、够不够大
+    mp.evaluate("() => { const b = document.querySelector('#ltree BUTTON.lslot'); if (b) b.click(); }")
+    mp.wait_for_timeout(700)
     mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
+      innerW: window.innerWidth,
       cells: getComputedStyle(document.querySelector('.lge-cells')).gridTemplateColumns.split(' ').length,
       wrap: getComputedStyle(document.querySelector('.ltreewrap')).gridTemplateColumns.split(' ').length,
-      small: [...document.querySelectorAll('.lge-tab, .lchhead, #ltree .lslot BUTTON, .lge-jump')]
+      act: document.querySelectorAll('.lge-act button').length,
+      plans: document.querySelectorAll('.lge-planact button').length,
+      sp: document.querySelectorAll('.lge-special tbody tr').length,
+      small: [...document.querySelectorAll('.lge-tab, .lchhead, #ltree .lslot, .lge-jump, .lchk, .lge-act button, .lge-planact button')]
         .filter(e => { const r = e.getBoundingClientRect();
-          return r.width > 0 && Math.min(r.width, r.height) < 44; }).length,
+          return r.width > 0 && Math.min(r.width, r.height) < 44; })
+        .map(e => (e.className || e.tagName) + ':' + Math.round(e.getBoundingClientRect().width) + 'x' + Math.round(e.getBoundingClientRect().height)),
       cut: [...document.querySelectorAll('#ltree .lslot')].some(e => e.getBoundingClientRect().right > window.innerWidth + 1)})""")
     # 列数从数据里读，不写死：页面本来就是 repeat(var(--cols))，2026-10-23 客户端把
-    # 传承树从 4×4 排成 5×5（5 列、第 4 行空着），写死 4 的那一版把旧事实当成了设计常量。
-    want_cols = max(t["cols"] for t in L["trees"])
-    check("传承页 375：整页不横溢、树按数据里的列数摆（现 %d 列）、详情叠到下面、没有格子被切掉"
-          % want_cols,
-          mm["over"] == 0 and mm["cells"] == want_cols and mm["wrap"] == 1 and not mm["cut"],
-          json.dumps(mm, ensure_ascii=False))
-    check("传承页 375：胶囊、组头、专长格、前置链接都够 44px 点击区",
-          mm["small"] == 0, "%d 个不够 44px" % mm["small"])
+    # 传承树排成 5×5（第 4 排与第 4 列整条空着），页面收掉空行空列、写死 4 的那一版把旧事实当成了设计常量。
+    want_cols = max(len(vis(t)[1]) for t in L["trees"])
+    check("传承页 375：布局视口没被顶宽（innerWidth 仍是 375）、整页不横溢、格子不被切"
+          "——树按数据算出的列数摆（现 %d 列）、详情叠到下面" % want_cols,
+          mm["over"] == 0 and mm["innerW"] == 375 and mm["cells"] == want_cols
+          and mm["wrap"] == 1 and not mm["cut"],
+          json.dumps({k: mm[k] for k in ("over", "innerW", "cells", "wrap", "cut")}, ensure_ascii=False))
+    check("传承页 375：胶囊、组头、专长格、勾选框、加减按钮、方案条按钮都够 44px 点击区",
+          not mm["small"], "%d 个不够 44px：%s" % (len(mm["small"]), mm["small"][:6]))
+    check("375 上规划器的两个按钮与那条单列记录都在（窄屏不是把功能藏掉）",
+          mm["act"] == 2 and mm["plans"] >= 3 and mm["sp"] >= 1,
+          "加减 %d 个 / 方案条 %d 个 / 单列 %d 条" % (mm["act"], mm["plans"], mm["sp"]))
     mp.screenshot(path=os.path.join(SHOT_DIR, "app-legacy-m.png"), full_page=True)
     mctx.close()
 
