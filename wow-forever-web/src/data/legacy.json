@@ -1,17 +1,36 @@
 {
  "meta": {
   "kind": "legacy",
-  "generatedAt": "2026-10-11",
+  "generatedAt": "2026-10-23",
   "method": "tools/scrape-wclbox-legacy.py 抓 → tools/merge-legacy.js 整形；数据真相在 upstream/",
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
-  "build": "r-1791702948979",
-  "clientBuild": "1.60.1.70338",
-  "upstreamUpdatedAt": "2026-10-10",
-  "fetchedAt": "2026-10-11",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
+  "build": "r-1792720578447",
+  "clientBuild": "1.60.1.70532",
+  "upstreamUpdatedAt": "2026-10-22",
+  "fetchedAt": "2026-10-23",
+  "versionHistory": [
+   {
+    "clientBuild": "1.60.1.70338",
+    "build": "r-1791702948979",
+    "fetchedAt": "2026-10-11"
+   },
+   {
+    "clientBuild": "1.60.1.70532",
+    "build": "r-1792720578447",
+    "fetchedAt": "2026-10-23"
+   }
+  ],
+  "officialSource": {
+   "url": "https://worldofwarcraft.blizzard.com/zh-tw/news/24307383",
+   "urlEn": "https://worldofwarcraft.blizzard.com/en-us/news/24307383",
+   "checkedAt": "2026-10-23",
+   "what": "挑战总数 65 项、每项 1 点、单角色最多 16 点、开放条件的三条途径、六个类别各自点数"
+  },
   "textPolicy": "只留名称与数值结构。每个专长的每层效果说明、常见问题与领取说明都是别人转述的文本，本站不存也不显示；要看逐字效果请去来源页。",
   "rules": {
    "pointPerChallenge": 1,
+   "pointPerChallengeSource": "官方《无限》传承系统说明：每完成一项挑战获得一点传承点数",
    "pointVariants": [
     {
      "points": 16,
@@ -22,38 +41,93 @@
     }
    ],
    "clientRulePointPerChallenge": 16,
-   "rulesConflict": "每项挑战给多少点有两个说法：客户端的规则栏写 16 点，而挑战明细里 65 项各写 1 点、1 项写 16 点。明细的点数合计 81 与客户端给的合计能对上。没进游戏逐项打过之前，界面按每条自己的点数摆，不拿规则栏那个说法覆盖明细。",
+   "rulesConflict": "每项挑战给多少点有过两个说法：客户端给的字段写 16 点，明细里 65 条各写 1 点、1 条写 16 点。官方那篇说清楚了：每完成一项挑战获得一点传承点数，而 16 是每个角色最多能花的点数——客户端那个字段名叫每项点数，值其实是上限。两个来源的原始值都留着，界面按每条自己的点数摆。",
    "launchSpendingCap": 16,
+   "launchSpendingCapSource": "官方那篇同一条：游戏推出时每个角色最多使用 16 点",
    "launchEarnableTotal": 81,
-   "unlock": "账号里第一个角色升到 25 级后开放。"
+   "launchEarnableTotalNote": "客户端给的这个数是66 条条目的点数合计（含那条 16 点的测试参与记录），不是\"人人可得 81 点\"，也不是挑战条数。常规 65 条各 1 点，合计 65 点。",
+   "unlock": "首次拿到任意一点传承点数就开放；多数人是第一个角色到 25 级，也可以用非采集类主专业练到 150、或把整张世界地图探完来拿到第一点。",
+   "unlockLevel": "L0",
+   "unlockSource": "https://worldofwarcraft.blizzard.com/zh-tw/news/24307383",
+   "unlockCheckedAt": "2026-10-23",
+   "unlockUpstream": "账号里第一个角色升到 25 级后开放。",
+   "unlockUpstreamNote": "转述页给的那句与官方那篇不一致（它只写 25 级这一条途径），原话留着不覆盖。",
+   "treePointGates": {
+    "values": [
+     0,
+     5,
+     10
+    ],
+    "perTree": {
+     "专业": [
+      "0 点门槛 2 格",
+      "5 点门槛 4 格",
+      "10 点门槛 1 格"
+     ],
+     "冒险": [
+      "0 点门槛 2 格",
+      "5 点门槛 4 格",
+      "10 点门槛 1 格"
+     ],
+     "资源": [
+      "0 点门槛 3 格",
+      "5 点门槛 3 格",
+      "10 点门槛 1 格"
+     ]
+    },
+    "meaning": "这一格要本树先投满 N 点才点得开；0 就是入口格。取值只有 0/5/10 三种，每棵树 0 门槛那几格的上限加起来正好 10 点，够点开唯一那格 10 门槛的。",
+    "evidenceStatus": "client_data",
+    "level": "L2",
+    "note": "门槛数字出自客户端解包，还没进游戏逐格点过，所以整条按 L2 留档。"
+   }
   },
   "counts": {
    "perks": 21,
    "slots": 27,
    "unknownSlots": 6,
    "challenges": 66,
+   "challengesRegular": 65,
+   "challengesSpecial": 1,
+   "specialIds": [
+    "64283"
+   ],
+   "challengePointsRegular": 65,
    "challengePointSum": 81,
    "upstreamChallengeTotal": 81,
+   "officialChallengeTotal": 65,
    "rewards": 4
   },
   "notCollected": [
    "每个专长各层的具体效果数值：那是客户端说明文本由别人转述的内容，本站红线不复制，等官方中文稿或游戏内实测",
    "未公开的 6 个专长槽位里是什么：客户端的树里只有位置，名字与效果都还没放出",
    "传承点数的分配建议与\"先点什么最划算\"：属攻略性质，不做",
-   "挑战的完成进度与账号级状态：要登录与个人数据，类目不允许"
+   "挑战的完成进度与账号级状态：要登录与个人数据，类目不允许",
+   "那条 16 点的测试参与记录正式服还给不给、谁能领：官方那篇没提它，资格待核"
   ],
   "provenance": [
    {
     "type": "datamine_cn",
     "url": "https://wowforever.wclbox.com/chuancheng",
     "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-    "checkedAt": "2026-10-11"
+    "checkedAt": "2026-10-23"
    },
    {
     "type": "datamine_cn",
-    "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+    "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
     "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-    "checkedAt": "2026-10-11"
+    "checkedAt": "2026-10-23"
+   },
+   {
+    "type": "official_cn",
+    "url": "https://worldofwarcraft.blizzard.com/zh-tw/news/24307383",
+    "note": "官方繁中《无限》传承系统说明：挑战总数 65 项、每项 1 点、单角色最多 16 点、开放条件",
+    "checkedAt": "2026-10-23"
+   },
+   {
+    "type": "official_en",
+    "url": "https://worldofwarcraft.blizzard.com/en-us/news/24307383",
+    "note": "同一篇的英文原页，用来对繁中的数字与条件",
+    "checkedAt": "2026-10-23"
    }
   ]
  },
@@ -62,8 +136,8 @@
    "id": "crafting",
    "nameCn": "专业",
    "nameUpstream": "专业",
-   "rows": 4,
-   "cols": 4,
+   "rows": 5,
+   "cols": 5,
    "slots": [
     {
      "row": 0,
@@ -74,19 +148,26 @@
     {
      "row": 0,
      "col": 1,
+     "perk": "legacy-perk-master-chef",
+     "empty": false,
+     "unknown": false,
+     "gate": 5
+    },
+    {
+     "row": 0,
+     "col": 2,
      "perk": null,
      "empty": true
     },
     {
      "row": 0,
-     "col": 2,
-     "perk": "legacy-perk-master-chef",
-     "empty": false,
-     "unknown": false
+     "col": 3,
+     "perk": null,
+     "empty": true
     },
     {
      "row": 0,
-     "col": 3,
+     "col": 4,
      "perk": null,
      "empty": true
     },
@@ -95,25 +176,34 @@
      "col": 0,
      "perk": "legacy-perk-working-overtime",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 1,
      "col": 1,
      "perk": "legacy-perk-bartering",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 1,
      "col": 2,
      "perk": "legacy-perk-dedicated-study",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 10
     },
     {
      "row": 1,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 1,
+     "col": 4,
      "perk": null,
      "empty": true
     },
@@ -122,28 +212,38 @@
      "col": 0,
      "perk": "legacy-perk-bountiful-harvest",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 2,
      "col": 1,
      "perk": "legacy-perk-performance-bonus",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 2,
      "col": 2,
      "perk": "unknown-113508",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 2,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 2,
+     "col": 4,
      "perk": "unknown-113506",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 3,
@@ -160,13 +260,50 @@
     {
      "row": 3,
      "col": 2,
-     "perk": "legacy-perk-luremaster",
-     "empty": false,
-     "unknown": false
+     "perk": null,
+     "empty": true
     },
     {
      "row": 3,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 3,
+     "col": 4,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 0,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 1,
+     "perk": "legacy-perk-luremaster",
+     "empty": false,
+     "unknown": false,
+     "gate": 5
+    },
+    {
+     "row": 4,
+     "col": 2,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 4,
      "perk": null,
      "empty": true
     }
@@ -191,12 +328,26 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "rows",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
+     "checkedAt": "2026-10-11"
+    },
+    {
+     "field": "cols",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -205,8 +356,8 @@
    "id": "adventure",
    "nameCn": "冒险",
    "nameUpstream": "冒险",
-   "rows": 4,
-   "cols": 4,
+   "rows": 5,
+   "cols": 5,
    "slots": [
     {
      "row": 0,
@@ -219,7 +370,8 @@
      "col": 1,
      "perk": "legacy-perk-high-alert",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 0,
@@ -230,6 +382,12 @@
     {
      "row": 0,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 0,
+     "col": 4,
      "perk": null,
      "empty": true
     },
@@ -238,53 +396,72 @@
      "col": 0,
      "perk": "legacy-perk-well-rested",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 1,
      "col": 1,
      "perk": "legacy-perk-talented",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 1,
      "col": 2,
      "perk": "unknown-113511",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 1,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 1,
+     "col": 4,
      "perk": "unknown-113510",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 2,
      "col": 0,
      "perk": "legacy-perk-thrill-of-adventure",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 2,
      "col": 1,
      "perk": "legacy-perk-field-guide",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 2,
      "col": 2,
      "perk": "legacy-perk-frequent-flier",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 10
     },
     {
      "row": 2,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 2,
+     "col": 4,
      "perk": null,
      "empty": true
     },
@@ -297,9 +474,8 @@
     {
      "row": 3,
      "col": 1,
-     "perk": "legacy-perk-field-medicine",
-     "empty": false,
-     "unknown": false
+     "perk": null,
+     "empty": true
     },
     {
      "row": 3,
@@ -310,6 +486,44 @@
     {
      "row": 3,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 3,
+     "col": 4,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 0,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 1,
+     "perk": "legacy-perk-field-medicine",
+     "empty": false,
+     "unknown": false,
+     "gate": 5
+    },
+    {
+     "row": 4,
+     "col": 2,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 4,
      "perk": null,
      "empty": true
     }
@@ -334,12 +548,26 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "rows",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
+     "checkedAt": "2026-10-11"
+    },
+    {
+     "field": "cols",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -348,8 +576,8 @@
    "id": "resource",
    "nameCn": "资源",
    "nameUpstream": "资源",
-   "rows": 4,
-   "cols": 4,
+   "rows": 5,
+   "cols": 5,
    "slots": [
     {
      "row": 0,
@@ -362,7 +590,8 @@
      "col": 1,
      "perk": "legacy-perk-for-great-honor",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 0,
@@ -373,6 +602,12 @@
     {
      "row": 0,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 0,
+     "col": 4,
      "perk": null,
      "empty": true
     },
@@ -381,35 +616,46 @@
      "col": 0,
      "perk": "legacy-perk-gourmand",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 1,
      "col": 1,
      "perk": "legacy-perk-permanence",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 5
     },
     {
      "row": 1,
      "col": 2,
      "perk": "unknown-113513",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 1,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 1,
+     "col": 4,
      "perk": "unknown-113512",
      "empty": false,
-     "unknown": true
+     "unknown": true,
+     "gate": null
     },
     {
      "row": 2,
      "col": 0,
      "perk": "legacy-perk-the-quick-and-the-dead",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 0
     },
     {
      "row": 2,
@@ -422,7 +668,8 @@
      "col": 2,
      "perk": "legacy-perk-reagent-economy",
      "empty": false,
-     "unknown": false
+     "unknown": false,
+     "gate": 10
     },
     {
      "row": 2,
@@ -431,18 +678,22 @@
      "empty": true
     },
     {
+     "row": 2,
+     "col": 4,
+     "perk": null,
+     "empty": true
+    },
+    {
      "row": 3,
      "col": 0,
-     "perk": "legacy-perk-reinforce",
-     "empty": false,
-     "unknown": false
+     "perk": null,
+     "empty": true
     },
     {
      "row": 3,
      "col": 1,
-     "perk": "legacy-perk-diplomat",
-     "empty": false,
-     "unknown": false
+     "perk": null,
+     "empty": true
     },
     {
      "row": 3,
@@ -453,6 +704,46 @@
     {
      "row": 3,
      "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 3,
+     "col": 4,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 0,
+     "perk": "legacy-perk-reinforce",
+     "empty": false,
+     "unknown": false,
+     "gate": 0
+    },
+    {
+     "row": 4,
+     "col": 1,
+     "perk": "legacy-perk-diplomat",
+     "empty": false,
+     "unknown": false,
+     "gate": 5
+    },
+    {
+     "row": 4,
+     "col": 2,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 3,
+     "perk": null,
+     "empty": true
+    },
+    {
+     "row": 4,
+     "col": 4,
      "perk": null,
      "empty": true
     }
@@ -477,12 +768,35 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "nameAlt": [
+    {
+     "nameCn": "精明",
+     "from": "official_zh_tw",
+     "url": "https://worldofwarcraft.blizzard.com/zh-tw/news/24307383",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "nameAltNote": "这一棵树客户端里叫「资源」，官方繁中那篇写作「精明」——不是繁简字形差，是另一个词。页面用哪个还没定，两个都先留着。",
+   "history": [
+    {
+     "field": "rows",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
+     "checkedAt": "2026-10-11"
+    },
+    {
+     "field": "cols",
+     "from": 4,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -495,11 +809,12 @@
    "treeId": "crafting",
    "treeCn": "专业",
    "row": 0,
-   "col": 2,
+   "col": 1,
    "maxRank": 5,
    "iconKey": "achievement_profession_chefhat",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -508,12 +823,20 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "col",
+     "from": 2,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -529,6 +852,7 @@
    "iconKey": "inv_misc_pocketwatch_03",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -537,13 +861,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -558,6 +882,7 @@
    "iconKey": "inv_misc_coin_06",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -566,13 +891,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -587,6 +912,7 @@
    "iconKey": "inv_misc_book_08",
    "prerequisite": "legacy-perk-bartering",
    "prerequisiteCn": "以物易物",
+   "treePointsRequired": 10,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -595,13 +921,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -616,6 +942,7 @@
    "iconKey": "inv_misc_bag_18",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -624,13 +951,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -645,6 +972,7 @@
    "iconKey": "racial_dwarf_findtreasure",
    "prerequisite": "legacy-perk-bountiful-harvest",
    "prerequisiteCn": "大丰收",
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -653,13 +981,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -668,12 +996,13 @@
    "nameCn": "诱饵大师",
    "treeId": "crafting",
    "treeCn": "专业",
-   "row": 3,
-   "col": 2,
+   "row": 4,
+   "col": 1,
    "maxRank": 2,
    "iconKey": "inv_misc_basket_04",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -682,12 +1011,26 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "row",
+     "from": 3,
+     "atClientBuild": "1.60.1.70338",
+     "checkedAt": "2026-10-11"
+    },
+    {
+     "field": "col",
+     "from": 2,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -703,6 +1046,7 @@
    "iconKey": "spell_shadow_detectlesserinvisibility",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -711,13 +1055,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -732,6 +1076,7 @@
    "iconKey": "spell_nature_sleep",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -740,13 +1085,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -761,6 +1106,7 @@
    "iconKey": "ability_marksmanship",
    "prerequisite": "legacy-perk-well-rested",
    "prerequisiteCn": "精神抖擞",
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -769,13 +1115,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -790,6 +1136,7 @@
    "iconKey": "ability_hunter_huntervswild",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -798,13 +1145,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -819,6 +1166,7 @@
    "iconKey": "inv_fishingchair",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -827,13 +1175,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -848,6 +1196,7 @@
    "iconKey": "achievement_guild_ridelikethewind",
    "prerequisite": "legacy-perk-field-guide",
    "prerequisiteCn": "野外指南",
+   "treePointsRequired": 10,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -856,13 +1205,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -871,12 +1220,13 @@
    "nameCn": "战地急救",
    "treeId": "adventure",
    "treeCn": "冒险",
-   "row": 3,
+   "row": 4,
    "col": 1,
    "maxRank": 2,
    "iconKey": "inv_misc_bandage_05",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -885,12 +1235,20 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "row",
+     "from": 3,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -906,6 +1264,7 @@
    "iconKey": "achievement_bg_winwsg",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -914,13 +1273,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -935,6 +1294,7 @@
    "iconKey": "inv_misc_food_64",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -943,13 +1303,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -964,6 +1324,7 @@
    "iconKey": "spell_misc_emotionhappy",
    "prerequisite": "legacy-perk-gourmand",
    "prerequisiteCn": "食神",
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -972,13 +1333,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -993,6 +1354,7 @@
    "iconKey": "spell_shadow_deadofnight",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -1001,13 +1363,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -1022,6 +1384,7 @@
    "iconKey": "inv_misc_candle_02",
    "prerequisite": "legacy-perk-the-quick-and-the-dead",
    "prerequisiteCn": "生者与死者",
+   "treePointsRequired": 10,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -1030,13 +1393,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -1045,12 +1408,13 @@
    "nameCn": "强固",
    "treeId": "resource",
    "treeCn": "资源",
-   "row": 3,
+   "row": 4,
    "col": 0,
    "maxRank": 5,
    "iconKey": "inv_misc_armorkit_17",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 0,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -1059,12 +1423,20 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "row",
+     "from": 3,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -1074,12 +1446,13 @@
    "nameCn": "外交家",
    "treeId": "resource",
    "treeCn": "资源",
-   "row": 3,
+   "row": 4,
    "col": 1,
    "maxRank": 5,
    "iconKey": "inv_scroll_03",
    "prerequisite": null,
    "prerequisiteCn": null,
+   "treePointsRequired": 5,
    "discoveredAt": "2026-09-29",
    "evidenceStatus": "client_data",
    "level": "L0",
@@ -1088,12 +1461,20 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+     "checkedAt": "2026-10-23"
+    }
+   ],
+   "history": [
+    {
+     "field": "row",
+     "from": 3,
+     "atClientBuild": "1.60.1.70338",
      "checkedAt": "2026-10-11"
     }
    ]
@@ -1111,7 +1492,7 @@
    "treeId": "crafting",
    "treeCn": "专业",
    "row": 2,
-   "col": 3,
+   "col": 4,
    "id": "unknown-113506"
   },
   {
@@ -1125,7 +1506,7 @@
    "treeId": "adventure",
    "treeCn": "冒险",
    "row": 1,
-   "col": 3,
+   "col": 4,
    "id": "unknown-113510"
   },
   {
@@ -1139,7 +1520,7 @@
    "treeId": "resource",
    "treeCn": "资源",
    "row": 1,
-   "col": 3,
+   "col": 4,
    "id": "unknown-113512"
   }
  ],
@@ -1158,28 +1539,31 @@
     "术士",
     "战士"
    ],
+   "officialPoints": 27,
    "items": [
     {
      "id": 61502,
      "nameCn": "新手德鲁伊",
      "requirement": "首次将德鲁伊升到25级",
+     "requirementNote": null,
      "sub": "德鲁伊",
      "group": "德鲁伊",
      "iconKey": "classicon_druid",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1187,23 +1571,25 @@
      "id": 61503,
      "nameCn": "熟练德鲁伊",
      "requirement": "首次将德鲁伊升到45级",
+     "requirementNote": null,
      "sub": "德鲁伊",
      "group": "德鲁伊",
      "iconKey": "classicon_druid",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1211,23 +1597,25 @@
      "id": 61504,
      "nameCn": "高阶德鲁伊",
      "requirement": "首次将德鲁伊升到60级",
+     "requirementNote": null,
      "sub": "德鲁伊",
      "group": "德鲁伊",
      "iconKey": "classicon_druid",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1235,23 +1623,25 @@
      "id": 61989,
      "nameCn": "新手猎人",
      "requirement": "首次将猎人升到25级",
+     "requirementNote": null,
      "sub": "猎人",
      "group": "猎人",
      "iconKey": "classicon_hunter",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1259,23 +1649,25 @@
      "id": 61992,
      "nameCn": "熟练猎人",
      "requirement": "首次将猎人升到45级",
+     "requirementNote": null,
      "sub": "猎人",
      "group": "猎人",
      "iconKey": "classicon_hunter",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1283,23 +1675,25 @@
      "id": 61993,
      "nameCn": "高阶猎人",
      "requirement": "首次将猎人升到60级",
+     "requirementNote": null,
      "sub": "猎人",
      "group": "猎人",
      "iconKey": "classicon_hunter",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1307,23 +1701,25 @@
      "id": 61994,
      "nameCn": "新手法师",
      "requirement": "首次将法师升到25级",
+     "requirementNote": null,
      "sub": "法师",
      "group": "法师",
      "iconKey": "classicon_mage",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1331,23 +1727,25 @@
      "id": 61995,
      "nameCn": "熟练法师",
      "requirement": "首次将法师升到45级",
+     "requirementNote": null,
      "sub": "法师",
      "group": "法师",
      "iconKey": "classicon_mage",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1355,23 +1753,25 @@
      "id": 61996,
      "nameCn": "高阶法师",
      "requirement": "首次将法师升到60级",
+     "requirementNote": null,
      "sub": "法师",
      "group": "法师",
      "iconKey": "classicon_mage",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1379,23 +1779,25 @@
      "id": 61997,
      "nameCn": "新手圣骑士",
      "requirement": "首次将圣骑士升到25级",
+     "requirementNote": null,
      "sub": "圣骑士",
      "group": "圣骑士",
      "iconKey": "classicon_paladin",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1403,23 +1805,25 @@
      "id": 61998,
      "nameCn": "熟练圣骑士",
      "requirement": "首次将圣骑士升到45级",
+     "requirementNote": null,
      "sub": "圣骑士",
      "group": "圣骑士",
      "iconKey": "classicon_paladin",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1427,23 +1831,25 @@
      "id": 61999,
      "nameCn": "高阶圣骑士",
      "requirement": "首次将圣骑士升到60级",
+     "requirementNote": null,
      "sub": "圣骑士",
      "group": "圣骑士",
      "iconKey": "classicon_paladin",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1451,23 +1857,25 @@
      "id": 62000,
      "nameCn": "新手牧师",
      "requirement": "首次将牧师升到25级",
+     "requirementNote": null,
      "sub": "牧师",
      "group": "牧师",
      "iconKey": "classicon_priest",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1475,23 +1883,25 @@
      "id": 62001,
      "nameCn": "熟练牧师",
      "requirement": "首次将牧师升到45级",
+     "requirementNote": null,
      "sub": "牧师",
      "group": "牧师",
      "iconKey": "classicon_priest",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1499,23 +1909,25 @@
      "id": 62002,
      "nameCn": "高阶牧师",
      "requirement": "首次将牧师升到60级",
+     "requirementNote": null,
      "sub": "牧师",
      "group": "牧师",
      "iconKey": "classicon_priest",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1523,23 +1935,25 @@
      "id": 62003,
      "nameCn": "新手潜行者",
      "requirement": "首次将潜行者升到25级",
+     "requirementNote": null,
      "sub": "潜行者",
      "group": "潜行者",
      "iconKey": "classicon_rogue",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1547,23 +1961,25 @@
      "id": 62004,
      "nameCn": "熟练潜行者",
      "requirement": "首次将潜行者升到45级",
+     "requirementNote": null,
      "sub": "潜行者",
      "group": "潜行者",
      "iconKey": "classicon_rogue",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1571,23 +1987,25 @@
      "id": 62005,
      "nameCn": "高阶潜行者",
      "requirement": "首次将潜行者升到60级",
+     "requirementNote": null,
      "sub": "潜行者",
      "group": "潜行者",
      "iconKey": "classicon_rogue",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1595,23 +2013,25 @@
      "id": 62006,
      "nameCn": "新手萨满祭司",
      "requirement": "首次将萨满祭司升到25级",
+     "requirementNote": null,
      "sub": "萨满祭司",
      "group": "萨满祭司",
      "iconKey": "classicon_shaman",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1619,23 +2039,25 @@
      "id": 62007,
      "nameCn": "熟练萨满祭司",
      "requirement": "首次将萨满祭司升到45级",
+     "requirementNote": null,
      "sub": "萨满祭司",
      "group": "萨满祭司",
      "iconKey": "classicon_shaman",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1643,23 +2065,25 @@
      "id": 62008,
      "nameCn": "高阶萨满祭司",
      "requirement": "首次将萨满祭司升到60级",
+     "requirementNote": null,
      "sub": "萨满祭司",
      "group": "萨满祭司",
      "iconKey": "classicon_shaman",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1667,23 +2091,25 @@
      "id": 62009,
      "nameCn": "新手术士",
      "requirement": "首次将术士升到25级",
+     "requirementNote": null,
      "sub": "术士",
      "group": "术士",
      "iconKey": "classicon_warlock",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1691,23 +2117,25 @@
      "id": 62010,
      "nameCn": "熟练术士",
      "requirement": "首次将术士升到45级",
+     "requirementNote": null,
      "sub": "术士",
      "group": "术士",
      "iconKey": "classicon_warlock",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1715,23 +2143,25 @@
      "id": 62011,
      "nameCn": "高阶术士",
      "requirement": "首次将术士升到60级",
+     "requirementNote": null,
      "sub": "术士",
      "group": "术士",
      "iconKey": "classicon_warlock",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1739,23 +2169,25 @@
      "id": 61499,
      "nameCn": "新手战士",
      "requirement": "首次将战士升到25级",
+     "requirementNote": null,
      "sub": "战士",
      "group": "战士",
      "iconKey": "classicon_warrior",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1763,23 +2195,25 @@
      "id": 61500,
      "nameCn": "熟练战士",
      "requirement": "首次将战士升到45级",
+     "requirementNote": null,
      "sub": "战士",
      "group": "战士",
      "iconKey": "classicon_warrior",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1787,23 +2221,25 @@
      "id": 61501,
      "nameCn": "高阶战士",
      "requirement": "首次将战士升到60级",
+     "requirementNote": null,
      "sub": "战士",
      "group": "战士",
      "iconKey": "classicon_warrior",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -1820,28 +2256,31 @@
     "制皮",
     "裁缝"
    ],
+   "officialPoints": 18,
    "items": [
     {
      "id": 62012,
      "nameCn": "中级炼金术",
      "requirement": "首次达到150点炼金术技能",
+     "requirementNote": null,
      "sub": "炼金术",
      "group": "炼金术",
      "iconKey": "trade_alchemy",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1849,23 +2288,25 @@
      "id": 62013,
      "nameCn": "高级炼金术",
      "requirement": "首次达到225点炼金术技能",
+     "requirementNote": null,
      "sub": "炼金术",
      "group": "炼金术",
      "iconKey": "trade_alchemy",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1873,23 +2314,25 @@
      "id": 62014,
      "nameCn": "专家级炼金术",
      "requirement": "首次达到300点炼金术技能",
+     "requirementNote": null,
      "sub": "炼金术",
      "group": "炼金术",
      "iconKey": "trade_alchemy",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1897,23 +2340,25 @@
      "id": 62015,
      "nameCn": "中级锻造",
      "requirement": "首次达到150点锻造技能",
+     "requirementNote": null,
      "sub": "锻造",
      "group": "锻造",
      "iconKey": "trade_blacksmithing",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1921,23 +2366,25 @@
      "id": 62016,
      "nameCn": "高级锻造",
      "requirement": "首次达到225点锻造技能",
+     "requirementNote": null,
      "sub": "锻造",
      "group": "锻造",
      "iconKey": "trade_blacksmithing",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1945,23 +2392,25 @@
      "id": 62017,
      "nameCn": "专家级锻造",
      "requirement": "首次达到300点锻造技能",
+     "requirementNote": null,
      "sub": "锻造",
      "group": "锻造",
      "iconKey": "trade_blacksmithing",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1969,23 +2418,25 @@
      "id": 62018,
      "nameCn": "中级附魔",
      "requirement": "首次达到150点附魔技能",
+     "requirementNote": null,
      "sub": "附魔",
      "group": "附魔",
      "iconKey": "trade_engraving",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -1993,23 +2444,25 @@
      "id": 62019,
      "nameCn": "高级附魔",
      "requirement": "首次达到225点附魔技能",
+     "requirementNote": null,
      "sub": "附魔",
      "group": "附魔",
      "iconKey": "trade_engraving",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2017,23 +2470,25 @@
      "id": 62020,
      "nameCn": "专家级附魔",
      "requirement": "首次达到300点附魔技能",
+     "requirementNote": null,
      "sub": "附魔",
      "group": "附魔",
      "iconKey": "trade_engraving",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2041,23 +2496,25 @@
      "id": 62021,
      "nameCn": "中级工程学",
      "requirement": "首次达到150点工程学技能",
+     "requirementNote": null,
      "sub": "工程学",
      "group": "工程学",
      "iconKey": "trade_engineering",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2065,23 +2522,25 @@
      "id": 62022,
      "nameCn": "高级工程学",
      "requirement": "首次达到225点工程学技能",
+     "requirementNote": null,
      "sub": "工程学",
      "group": "工程学",
      "iconKey": "trade_engineering",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2089,23 +2548,25 @@
      "id": 62023,
      "nameCn": "专家级工程学",
      "requirement": "首次达到300点工程学技能",
+     "requirementNote": null,
      "sub": "工程学",
      "group": "工程学",
      "iconKey": "trade_engineering",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2113,23 +2574,25 @@
      "id": 62024,
      "nameCn": "中级制皮",
      "requirement": "首次达到150点制皮技能",
+     "requirementNote": null,
      "sub": "制皮",
      "group": "制皮",
      "iconKey": "trade_leatherworking",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2137,23 +2600,25 @@
      "id": 62025,
      "nameCn": "高级制皮",
      "requirement": "首次达到225点制皮技能",
+     "requirementNote": null,
      "sub": "制皮",
      "group": "制皮",
      "iconKey": "trade_leatherworking",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2161,23 +2626,25 @@
      "id": 62026,
      "nameCn": "专家级制皮",
      "requirement": "首次达到300点制皮技能",
+     "requirementNote": null,
      "sub": "制皮",
      "group": "制皮",
      "iconKey": "trade_leatherworking",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2185,23 +2652,25 @@
      "id": 62028,
      "nameCn": "中级裁缝",
      "requirement": "首次达到150点裁缝技能",
+     "requirementNote": null,
      "sub": "裁缝",
      "group": "裁缝",
      "iconKey": "trade_tailoring",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2209,23 +2678,25 @@
      "id": 62029,
      "nameCn": "高级裁缝",
      "requirement": "首次达到225点裁缝技能",
+     "requirementNote": null,
      "sub": "裁缝",
      "group": "裁缝",
      "iconKey": "trade_tailoring",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2233,23 +2704,25 @@
      "id": 62030,
      "nameCn": "专家级裁缝",
      "requirement": "首次达到300点裁缝技能",
+     "requirementNote": null,
      "sub": "裁缝",
      "group": "裁缝",
      "iconKey": "trade_tailoring",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -2259,28 +2732,31 @@
    "id": "地下城",
    "nameCn": "地下城",
    "subcategories": [],
+   "officialPoints": 3,
    "items": [
     {
      "id": 62031,
      "nameCn": "新手探地者",
      "requirement": "完成以下地下城",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "inv_shield_1h_lordaeron_d_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2288,23 +2764,25 @@
      "id": 62032,
      "nameCn": "熟练探地者",
      "requirement": "完成以下地下城",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_reputation_ogre",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2312,23 +2790,25 @@
      "id": 62033,
      "nameCn": "高阶探地者",
      "requirement": "完成以下地下城",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_reputation_timbermaw",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -2338,51 +2818,64 @@
    "id": "团队副本",
    "nameCn": "团队副本",
    "subcategories": [],
+   "officialPoints": 3,
    "items": [
     {
      "id": 62034,
      "nameCn": "荒野征服者",
      "requirement": "在海加尔峰击败下列首领",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_zone_mount-hyjal",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
     {
      "id": 62035,
-     "nameCn": "深渊征服者",
+     "nameCn": "深穴征服者",
      "requirement": "在深穴击败下列首领",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_dungeon_vaultofthewardens",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+       "checkedAt": "2026-10-23"
+      }
+     ],
+     "history": [
+      {
+       "field": "nameCn",
+       "from": "深渊征服者",
+       "atClientBuild": "1.60.1.70338",
        "checkedAt": "2026-10-11"
       }
      ]
@@ -2391,23 +2884,25 @@
      "id": 684,
      "nameCn": "巢穴征服者",
      "requirement": "击败60级版本的奥妮克希亚",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_boss_onyxia",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -2421,28 +2916,31 @@
     "声望",
     "赛季旅程"
    ],
+   "officialPoints": 12,
    "items": [
     {
      "id": 62041,
      "nameCn": "等级 3",
      "requirement": "在PvP荣誉系统中达到中士军衔",
+     "requirementNote": null,
      "sub": "军衔",
      "group": "军衔",
      "iconKey": "achievement_pvp_g_03",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2450,23 +2948,25 @@
      "id": 62042,
      "nameCn": "等级 7",
      "requirement": "在PvP荣誉系统中达到骑士中尉或血卫士军衔",
+     "requirementNote": null,
      "sub": "军衔",
      "group": "军衔",
      "iconKey": "achievement_pvp_g_07",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2474,23 +2974,25 @@
      "id": 62043,
      "nameCn": "等级 10",
      "requirement": "在PvP荣誉系统中达到少校或勇士军衔",
+     "requirementNote": null,
      "sub": "军衔",
      "group": "军衔",
      "iconKey": "achievement_pvp_g_10",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2498,23 +3000,25 @@
      "id": 62044,
      "nameCn": "等级 13",
      "requirement": "在PvP荣誉系统中达到元帅或督军军衔",
+     "requirementNote": null,
      "sub": "军衔",
      "group": "军衔",
      "iconKey": "achievement_pvp_g_13",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2522,23 +3026,25 @@
      "id": 62045,
      "nameCn": "等级 14",
      "requirement": "在PvP荣誉系统中达到大元帅或高阶督军军衔",
+     "requirementNote": null,
      "sub": "军衔",
      "group": "军衔",
      "iconKey": "achievement_pvp_g_14",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2546,23 +3052,25 @@
      "id": 62046,
      "nameCn": "奥特兰克山谷主宰",
      "requirement": "在霜狼氏族或雷矛卫队中达到崇拜声望",
+     "requirementNote": null,
      "sub": "声望",
      "group": "声望",
      "iconKey": "achievement_zone_alteracmountains_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2570,23 +3078,25 @@
      "id": 62047,
      "nameCn": "阿拉希盆地主宰",
      "requirement": "在污染者或阿拉索联军中达到崇拜声望",
+     "requirementNote": null,
      "sub": "声望",
      "group": "声望",
      "iconKey": "achievement_zone_arathihighlands_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2594,23 +3104,25 @@
      "id": 62048,
      "nameCn": "战歌峡谷主宰",
      "requirement": "在战歌氏族或银翼要塞中达到崇拜声望",
+     "requirementNote": null,
      "sub": "声望",
      "group": "声望",
      "iconKey": "achievement_bg_winwsg",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2618,23 +3130,25 @@
      "id": 62049,
      "nameCn": "暗矛群岛主宰",
      "requirement": "在暗矛突袭者或塞拉摩远征军中达到崇拜声望",
+     "requirementNote": null,
      "sub": "声望",
      "group": "声望",
      "iconKey": "trade_archaeology_troll_tablet",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2642,23 +3156,25 @@
      "id": 63340,
      "nameCn": "荣誉之地：第4周",
      "requirement": "完成荣誉之地：第4周",
+     "requirementNote": null,
      "sub": "赛季旅程",
      "group": "赛季旅程",
      "iconKey": "achievement_rankedpvp_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2666,23 +3182,25 @@
      "id": 63341,
      "nameCn": "荣誉之地：第7周",
      "requirement": "完成荣誉之地：第7周",
+     "requirementNote": null,
      "sub": "赛季旅程",
      "group": "赛季旅程",
      "iconKey": "achievement_rankedpvp_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2690,23 +3208,25 @@
      "id": 63342,
      "nameCn": "荣誉之地：第10周",
      "requirement": "完成荣誉之地：第10周",
+     "requirementNote": null,
      "sub": "赛季旅程",
      "group": "赛季旅程",
      "iconKey": "achievement_rankedpvp_01",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -2716,27 +3236,44 @@
    "id": "冒险",
    "nameCn": "冒险",
    "subcategories": [],
+   "officialPoints": 2,
    "items": [
     {
      "id": 64283,
-     "nameCn": "参与过《魔兽世界：无限》测试",
-     "requirement": "参与《魔兽世界：无限》测试",
+     "nameCn": "参与过《魔兽世界》：“无限”Beta测试",
+     "requirement": "参与《魔兽世界》：“无限”Beta测试",
+     "requirementNote": "这一条来源把完成条件与领取提示连写成了整句，本站只留条件那半截，整句不存也不显示。",
      "sub": null,
      "group": null,
      "iconKey": "inv_misc_gift_01",
      "points": 16,
+     "special": true,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
+       "checkedAt": "2026-10-23"
+      }
+     ],
+     "history": [
+      {
+       "field": "nameCn",
+       "from": "参与过《魔兽世界：无限》测试",
+       "atClientBuild": "1.60.1.70338",
+       "checkedAt": "2026-10-11"
+      },
+      {
+       "field": "requirement",
+       "from": "参与《魔兽世界：无限》测试",
+       "atClientBuild": "1.60.1.70338",
        "checkedAt": "2026-10-11"
       }
      ]
@@ -2745,23 +3282,25 @@
      "id": 62054,
      "nameCn": "让瓦塔拉克公爵安息",
      "requirement": "完成以“热心的建议”开始，以“最后的奖赏”结束的任务线",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "achievement_dungeon_upperblackrockspire",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     },
@@ -2769,23 +3308,25 @@
      "id": 62382,
      "nameCn": "探索者",
      "requirement": "拥有一个获得“探索艾泽拉斯”成就的角色",
+     "requirementNote": null,
      "sub": null,
      "group": null,
      "iconKey": "inv_misc_map08",
      "points": 1,
+     "special": false,
      "level": "L2",
      "provenance": [
       {
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-10-11"
+       "checkedAt": "2026-10-23"
       }
      ]
     }
@@ -2804,13 +3345,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -2825,13 +3366,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -2846,13 +3387,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   },
@@ -2867,13 +3408,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-23"
     }
    ]
   }

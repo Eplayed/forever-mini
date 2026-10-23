@@ -1331,8 +1331,12 @@ def test_legacy_app(browser, base):
         .filter(e => { const r = e.getBoundingClientRect();
           return r.width > 0 && Math.min(r.width, r.height) < 44; }).length,
       cut: [...document.querySelectorAll('#ltree .lslot')].some(e => e.getBoundingClientRect().right > window.innerWidth + 1)})""")
-    check("传承页 375：整页不横溢、树仍按四列摆、详情叠到下面、没有格子被切掉",
-          mm["over"] == 0 and mm["cells"] == 4 and mm["wrap"] == 1 and not mm["cut"],
+    # 列数从数据里读，不写死：页面本来就是 repeat(var(--cols))，2026-10-23 客户端把
+    # 传承树从 4×4 排成 5×5（5 列、第 4 行空着），写死 4 的那一版把旧事实当成了设计常量。
+    want_cols = max(t["cols"] for t in L["trees"])
+    check("传承页 375：整页不横溢、树按数据里的列数摆（现 %d 列）、详情叠到下面、没有格子被切掉"
+          % want_cols,
+          mm["over"] == 0 and mm["cells"] == want_cols and mm["wrap"] == 1 and not mm["cut"],
           json.dumps(mm, ensure_ascii=False))
     check("传承页 375：胶囊、组头、专长格、前置链接都够 44px 点击区",
           mm["small"] == 0, "%d 个不够 44px" % mm["small"])

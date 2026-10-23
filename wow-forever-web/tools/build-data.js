@@ -1125,6 +1125,79 @@ if (fs.existsSync(lgPath)) {
   if ((LM.counts.slots || 0) !== (lg.perks || []).length + (lg.unknownSlots || []).length) {
     errs.push('legacy：槽位数 ≠ 专长数 + 未公开数，树与明细脱节了');
   }
+  // ---- 2026-10-23：常规挑战与测试参与记录分账 / 树节点门槛 / 旧值留档 ----
+  const lchAll = (lg.challenges || []).reduce((a, c) => a.concat(c.items || []), []);
+  const lreg = lchAll.filter((x) => !x.special), lspec = lchAll.filter((x) => x.special);
+  if (LM.counts.challengesRegular + LM.counts.challengesSpecial !== LM.counts.challenges) {
+    errs.push(`legacy：常规 ${LM.counts.challengesRegular} + 特殊 ${LM.counts.challengesSpecial} ≠ 条目总数 ${LM.counts.challenges}`);
+  }
+  if (lreg.length !== LM.counts.challengesRegular || lspec.length !== LM.counts.challengesSpecial) {
+    errs.push(`legacy：分账与明细数出的一致不上（明细里常规 ${lreg.length}、特殊 ${lspec.length}）`);
+  }
+  if (lreg.some((x) => x.points !== rules.pointPerChallenge)) {
+    errs.push('legacy：标成常规的挑战里有点数不是「每项基准值」的——分账依据就这一条，不能漂');
+  }
+  if (lspec.some((x) => x.points === rules.pointPerChallenge)) {
+    errs.push('legacy：标成特殊的记录点数却和常规一样，那条不该算特殊');
+  }
+  if ((LM.counts.specialIds || []).slice().sort().join() !== lspec.map((x) => String(x.id)).sort().join()) {
+    errs.push('legacy：meta.counts.specialIds 与明细里标了 special 的对不上');
+  }
+  const regSum = lreg.reduce((a, x) => a + (Number(x.points) || 0), 0);
+  if (regSum !== LM.counts.challengePointsRegular) {
+    errs.push(`legacy：常规点数合计数出 ${regSum}，meta 写 ${LM.counts.challengePointsRegular}`);
+  }
+  if (LM.counts.officialChallengeTotal !== regSum) {
+    errs.push(`legacy：常规挑战 ${regSum} 点与官方六类合计 ${LM.counts.officialChallengeTotal} 点不等——分账漂了`);
+  }
+  (lg.challenges || []).forEach((c) => {
+    if (c.officialPoints == null) { errs.push(`legacy：分组「${c.nameCn}」没记官方给的类别点数`); return; }
+    const n2 = (c.items || []).filter((x) => !x.special).length;
+    if (n2 !== c.officialPoints) {
+      errs.push(`legacy：分组「${c.nameCn}」常规 ${n2} 条，官方页那一类写 ${c.officialPoints} 点`);
+    }
+  });
+  // 门槛：只认 0/5/10；没有名字的槽位不许带门槛；0 门槛那几格要真能攒够点开最高门槛的那格
+  const GATE_OK = [0, 5, 10];
+  (lg.perks || []).forEach((p) => {
+    if (GATE_OK.indexOf(p.treePointsRequired) < 0) {
+      errs.push(`legacy perk ${p.id}：本树门槛是 ${p.treePointsRequired}，不在 0/5/10 里`);
+    }
+  });
+  (lg.trees || []).forEach((t) => {
+    const real = (t.slots || []).filter((s) => !s.empty);
+    const byId = {};
+    (lg.perks || []).forEach((p) => { byId[p.id] = p; });
+    real.filter((s) => /^unknown-/.test(String(s.perk))).forEach((s) => {
+      if (s.gate != null) errs.push(`legacy tree ${t.id}：未公开槽位带了门槛 ${s.gate}，没名字就不该有门槛`);
+    });
+    const gates = real.map((s) => s.gate).filter((g) => g != null);
+    const top = Math.max.apply(null, gates.concat([0]));
+    const atZero = real.filter((s) => s.gate === 0)
+      .reduce((a, s) => a + ((byId[s.perk] || {}).maxRank || 0), 0);
+    if (atZero < top) {
+      errs.push(`legacy tree ${t.id}：0 门槛那几格一共只能投 ${atZero} 点，点不开门槛 ${top} 的那格——门槛语义或数据漂了`);
+    }
+  });
+  // 旧值留档：每条 history 必须带它出自哪个客户端版本与哪天核对的，不然"保留旧值"是空话
+  [].concat(lg.perks || [], lchAll, lg.trees || []).forEach((x) => {
+    (x.history || []).forEach((h) => {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(String(h.checkedAt || '')) || !h.atClientBuild) {
+        errs.push(`legacy ${x.id}：history 里 ${h.field} 没记出处版本或核对日`);
+      }
+      if (h.from === undefined) errs.push(`legacy ${x.id}：history 记了变化却没留旧值`);
+    });
+  });
+  if (!(vh => vh && vh.length >= 1)((LM.versionHistory || [])) ||
+    LM.versionHistory.slice(-1)[0].clientBuild !== LM.clientBuild) {
+    errs.push('legacy：版本轨迹缺失或最后一条不是当前客户端版本');
+  }
+  if (!rules.unlock || !rules.unlockUpstream) {
+    errs.push('legacy：开放条件只剩一种说法（官方那句与转述那句要都留着）');
+  }
+  if (!rules.unlockSource || !/^\d{4}-\d{2}-\d{2}$/.test(String(rules.unlockCheckedAt || ''))) {
+    errs.push('legacy：开放条件没记官方地址与核对日');
+  }
   let lastAt = 0;
   (lg.rewards || []).forEach((r, i) => {
     if (!(r.at > lastAt)) errs.push(`legacy reward ${i}：门槛 ${r.at} 没有比上一档高`);

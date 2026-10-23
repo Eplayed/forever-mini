@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1791702948979/legacy.json",
-  "build": "r-1791702948979",
-  "clientBuild": "1.60.1.70338",
-  "upstreamUpdatedAt": "2026-10-10",
-  "fetchedAt": "2026-10-11",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
+  "build": "r-1792720578447",
+  "clientBuild": "1.60.1.70532",
+  "upstreamUpdatedAt": "2026-10-22",
+  "fetchedAt": "2026-10-23",
   "method": "tools/scrape-wclbox-legacy.py 取 _shuju/<发布号>/legacy.json，发布号现读",
   "textPolicy": "落盘前删掉的字段见 droppedFields；效果说明与整句文本一律不存仓库",
   "droppedFields": {
@@ -43,8 +43,8 @@
    {
     "id": "client_legacy",
     "type": "client_data",
-    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70338",
-    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70338"
+    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70532",
+    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70532"
    }
   ]
  },
@@ -55,7 +55,7 @@
  },
  "challengeMeta": {
   "total": 81,
-  "build": "1.60.1.70338",
+  "build": "1.60.1.70532",
   "unlock": "账号里第一个角色升到 25 级后开放。"
  },
  "trees": [
@@ -66,7 +66,7 @@
     {
      "perk": "legacy-perk-master-chef",
      "row": 0,
-     "col": 2,
+     "col": 1,
      "spent": 5
     },
     {
@@ -107,12 +107,12 @@
     {
      "id": "unknown-113506",
      "row": 2,
-     "col": 3
+     "col": 4
     },
     {
      "perk": "legacy-perk-luremaster",
-     "row": 3,
-     "col": 2,
+     "row": 4,
+     "col": 1,
      "spent": 5
     }
    ],
@@ -161,7 +161,7 @@
     {
      "id": "unknown-113510",
      "row": 1,
-     "col": 3
+     "col": 4
     },
     {
      "perk": "legacy-perk-thrill-of-adventure",
@@ -183,7 +183,7 @@
     },
     {
      "perk": "legacy-perk-field-medicine",
-     "row": 3,
+     "row": 4,
      "col": 1,
      "spent": 5
     }
@@ -233,7 +233,7 @@
     {
      "id": "unknown-113512",
      "row": 1,
-     "col": 3
+     "col": 4
     },
     {
      "perk": "legacy-perk-the-quick-and-the-dead",
@@ -249,13 +249,13 @@
     },
     {
      "perk": "legacy-perk-reinforce",
-     "row": 3,
+     "row": 4,
      "col": 0,
      "spent": 0
     },
     {
      "perk": "legacy-perk-diplomat",
-     "row": 3,
+     "row": 4,
      "col": 1,
      "spent": 5
     }
@@ -286,7 +286,7 @@
    "max_rank": 5,
    "structure": {
     "tier": 0,
-    "col": 2,
+    "col": 1,
     "prerequisite": null,
     "prerequisite_status": "client_data",
     "position_status": "client_data",
@@ -387,8 +387,8 @@
    "evidence_status": "client_data",
    "max_rank": 2,
    "structure": {
-    "tier": 3,
-    "col": 2,
+    "tier": 4,
+    "col": 1,
     "prerequisite": null,
     "prerequisite_status": "client_data",
     "position_status": "client_data",
@@ -506,7 +506,7 @@
    "evidence_status": "client_data",
    "max_rank": 2,
    "structure": {
-    "tier": 3,
+    "tier": 4,
     "col": 1,
     "prerequisite": null,
     "prerequisite_status": "client_data",
@@ -608,7 +608,7 @@
    "evidence_status": "client_data",
    "max_rank": 5,
    "structure": {
-    "tier": 3,
+    "tier": 4,
     "col": 0,
     "prerequisite": null,
     "prerequisite_status": "client_data",
@@ -625,7 +625,7 @@
    "evidence_status": "client_data",
    "max_rank": 5,
    "structure": {
-    "tier": 3,
+    "tier": 4,
     "col": 1,
     "prerequisite": null,
     "prerequisite_status": "client_data",
@@ -1118,7 +1118,7 @@
     },
     {
      "id": 62035,
-     "name": "深渊征服者",
+     "name": "深穴征服者",
      "requirement": "在深穴击败下列首领",
      "sub": null,
      "icon": "achievement_dungeon_vaultofthewardens",
@@ -1260,8 +1260,8 @@
    "items": [
     {
      "id": 64283,
-     "name": "参与过《魔兽世界：无限》测试",
-     "requirement": "参与《魔兽世界：无限》测试",
+     "name": "参与过《魔兽世界》：“无限”Beta测试",
+     "requirement": "参与《魔兽世界》：“无限”Beta测试即可获得此奖励。感谢你参与测试！",
      "sub": null,
      "icon": "inv_misc_gift_01",
      "points": 16,
