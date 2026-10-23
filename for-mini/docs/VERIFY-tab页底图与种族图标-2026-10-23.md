@@ -23,6 +23,8 @@
 | `node tools/oss-release-test.js` | **171 / 171** |
 | `node tools/mini-m01-check.js` | **49 / 49** |
 | `node tools/mini-m02-check.js` | **99 / 99**（本轮新增 10 条：底图真源、层叠两道、职业页双框、组合卡种族图标、暗夜精灵图标等） |
+| `python3 tools/site-check.py --app`（新站界面门槛） | **跑到 `[6d] 新站传承页` 那一段崩在页面脚本里，不是本轮改的**：本轮没动 `app/` 一行；崩点读的 `.lge-act [data-act="add"]` 属于另一会话正在改的 `app/src/pages/LegacyPage.vue`（工作区未提交，旁边还躺着 `lib/legacy-plan.js` 与它的测试两个未跟踪文件）。它前面的段（含天裔小图标与大图分开、动态页计数、设计令牌、世界页点位图、副本坐标）都跑过了，没有 ✗。 |
+| 附带一件要交底的事：为了让 `:8821` 那个从 10-16 起没重建过的 `app/dist` 别把 site-check 带偏，我跑了 `app-assets.py`（写入 0 个文件）+ `npm run build`。**这一步编译的是别人那半套 WIP**，`dist` 不进仓库，但本地预览现在是这一版。 |
 
 跑的过程中门禁自己红过三处，都是"断言把旧事实抄死了"，改的是断言不是产品：
 
