@@ -276,8 +276,8 @@ def main():
             ('fetched', xa['meta']['fetched']),
             ('srcSha256', xa['meta']['srcSha256']),
             ('grade', 'L1'),
-            ('whyNotUpgrade', '与主源"没有共同上游"证明不了：专精清单 38 对 38 一一对上、'
-                              '冷门组合同进同出，更像同一个上游的两份转述 → 不升档。'),
+            ('whyNotUpgrade', '没法确认这两份不是从同一个地方抄来的两份转述：专精清单 38 对 38 一一对上、'
+                              '冷门组合同进同出 → 不升档。'),
             ('display', '两份并列、分歧不裁决；页面用哪一件与顺序仍以主源为准，本站一格都不改。'),
             ('counts', OrderedDict([('setsMatched', a_match), ('setsUnmatched', len(a_unmatched)),
                                     ('dollCells', a_cells), ('slots', a_slots),
