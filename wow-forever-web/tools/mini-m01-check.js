@@ -146,6 +146,8 @@ async function main() {
       kinds: d.kinds || [], levels: d.levels || [], recent: (d.recent || []).length, routeMissing: d.routeMissing,
       dataFrom: d.dataFrom, needOnline: d.needOnline, notFound: d.notFound, title: d.title, nameMissing: d.nameMissing,
       bosses: d.bosses || [], drops: d.drops || [], prov: d.prov || [], rows: d.rows || [], bossEmpty: d.bossEmpty,
+      dropGroups: (d.dropGroups || []).map((g) => ({ boss: g.boss, rows: (g.rows || []).map((r) => ({ itemId: r.itemId, q: r.q, quality: r.quality, name: r.name })) })),
+      highlightDrop: d.highlightDrop,
       detailSource: d.detailSource, conflict: d.conflict, id: d.id, cacheHint: d.source, cacheHit: d.cacheHit,
       counts: d.counts, cov: (d.covList || []).length, wip: (d.wip || []).length, meta: d.meta ? { counts: d.meta.counts } : null
     };
@@ -220,7 +222,16 @@ async function main() {
     JSON.stringify({ bosses: s && (s.bosses || []).length, drops: (s.drops || []).length, src: s && s.detailSource }));
   log('详情页：首领/掉落里没有站内图片路径', !/(img|src)\//.test(JSON.stringify(s.bosses) + JSON.stringify(s.drops)), '');
   log('详情页：掉落不出现百分比', !/\d+(\.\d+)?\s*%/.test(JSON.stringify(s.drops)), '');
-  log('详情页：每条来源带核对日期，缺的写"未记录"', (s.prov || []).length > 0 && (s.prov || []).every((x) => !!x.checkedAt), JSON.stringify((s.prov || [])[0]));
+  /* 来源这一节 2026-10-23 从玩家页撤了（站主指令：详情页不要"来源"这块）。
+     撤的是界面，不是记录——逐条来源必须仍在分片里，网页端与审计都靠它，
+     所以这条断言改成读批次文件，而不是读页面 data。 */
+  log('详情页：不再摆"来源"这一节', (s.prov || []).length === 0 && !/来源/.test(String(s.rows.map((r) => r.k).join())), '');
+  const detShard = JSON.parse(fs.readFileSync(path.join(BUILD, 'builds/' + B + '/dungeons/detail/ragefire-chasm.json'), 'utf8'));
+  const provRows = (detShard.dungeon.provenance || []);
+  log('分片里：每条来源仍能追回去（类型 + 地址），没核对日期的照实是空',
+    provRows.length > 0 && provRows.every((x) => !!x.type && !!x.url),
+    JSON.stringify(provRows.map((x) => x.type + '/' + (x.checkedAt || 'null'))));
+
   /* 玩家面规矩：关键信息只留"这座本是什么"的四行事实，
      首领/掉落的计数行与方法论行（掉落口径）已下线——下面两节本来就把内容列出来了。 */
   log('详情页：关键信息只有等级/阵营/位置/人数四行，不带计数与方法论',
@@ -240,6 +251,56 @@ async function main() {
   s = (await snap()) || {};
   log('详情页：分歧名两个都留（领主大厅 / 另一说法诸王大厅）', /诸王大厅/.test(String(s.conflict)) && /领主大厅/.test(String(s.title)), JSON.stringify({ t: s.title, c: s.conflict }));
   await shot('b4-detail-conflict-name');
+  /* 三座无限新增本的首领一张脸都没有（源站自己标 data-unknown，2026-10-23 重探仍 0/15）。
+     界面不许摆一个写"没有这张头像"的虚线空框——那看着像坏了；交给 icon-cell 回落自绘块。 */
+  log('详情页：新本首领没有头像时走自绘回落，页面不再摆"没有这张头像"那句',
+    (s.bosses || []).length === 4 && (s.bosses || []).every((b) => b.portraitUrl === ''),
+    JSON.stringify((s.bosses || []).map((b) => b.portraitUrl)));
+  const faceWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
+  log('详情页：首领一律一个 icon-cell，缺图由组件回落（不留碎图也不留空框）',
+    /boss-face/.test(faceWxml) && !/没有这张头像/.test(faceWxml) && !/face-none/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
+
+  /* —— 掉落排序与装备详情（2026-10-23 站主指令）—— */
+  await nav('/pages/dungeon/index?id=ragefire-chasm');
+  s = (await snap()) || {};
+  const RANK = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 };
+  const unsorted = (s.dropGroups || []).filter((g) => {
+    const v = g.rows.map((r) => (r.q === '' || r.q === undefined ? -1 : RANK[r.q]));
+    for (let i = 1; i < v.length; i += 1) if (v[i] > v[i - 1]) return true;
+    return false;
+  });
+  log('详情页：每个首领组内按稀有度从高往下排', (s.dropGroups || []).length > 0 && unsorted.length === 0,
+    JSON.stringify((s.dropGroups || []).map((g) => g.rows.map((r) => r.q))));
+  log('详情页：品质档名与颜色同源（每行带档名与档数，颜色由 .q-<档> 上）',
+    (s.dropGroups || []).every((g) => g.rows.every((r) => /普通|优秀|精良|史诗|传说/.test(r.quality))),
+    JSON.stringify((((s.dropGroups || [])[0] || {}).rows || []).map((r) => r.quality)));
+  await shot('b5-drops-sorted');
+
+  const itemPage = await (async () => {
+    await ev(() => {
+      const p = getCurrentPages().pop();
+      const g = (p.data.dropGroups || [])[0];
+      const row = g.rows.filter((r) => !!r.itemId)[0];
+      p.onOpenItem({ currentTarget: { dataset: { item: row.itemId, dungeon: p.data.id } } });
+      return row.itemId;
+    });
+    await new Promise((r) => setTimeout(r, 9000));
+    return ev(() => {
+      const p = getCurrentPages().pop();
+      const d = p.data || {};
+      return { route: p.route, id: d.itemId, name: d.name, q: d.q, qt: d.qualityText, st: (d.st || []).length, s0: String(((d.st || [])[0] || {}).t || '').slice(0, 12), ilvl: d.ilvl, type: d.type, sell: d.sell, boss: d.boss, dg: d.dungeon, need: d.needOnline, off: d.offline };
+    });
+  })();
+  log('点一件装备：真的换到一个独立页面（不是就地展开）', /pages\/item\/index/.test(String(itemPage.route)) && !!itemPage.id, JSON.stringify(itemPage));
+  log('装备详情：名单里的名字/品质/首领与数值侧的属性行/装等/类型都在',
+    !!itemPage.name && !!itemPage.boss && itemPage.st > 0 && !!itemPage.type && itemPage.need === false,
+    JSON.stringify(itemPage));
+  log('装备详情：品质档名与列表那一行是同一套叫法（两屏不许各写一份）',
+    /普通|优秀|精良|史诗|传说/.test(String(itemPage.qt)), String(itemPage.qt));
+  await shot('b6-item-detail');
+  const backFromItem = await ev(() => { wx.navigateBack(); return 1 });
+  await new Promise((r) => setTimeout(r, 2500));
+  log('装备详情返回副本详情：返回栈在（不是只能重开）', backFromItem === 1, '');
 
   await nav('/pages/dungeons/index');
   s = (await snap()) || {};

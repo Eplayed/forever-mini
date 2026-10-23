@@ -1,7 +1,7 @@
 App({
   globalData: {
-    // 站名待运营角色确认（D1），此处不得出现商标词
-    appName: '无限资料',
+    // 2026-10-23 站主定名「跑本助手」；此前一直是占位，不得出现商标词
+    appName: '跑本助手',
     dataNamespace: 'wow/release/v1'
   }
 })

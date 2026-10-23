@@ -1,11 +1,11 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
+const quality = require('../../services/quality')
 
 /* 素材来源一句话，挂在原画下面：客户端画面经第三方站转存，不是本站画的 */
 const ART_NOTE = '副本原画取自游戏客户端画面，经第三方资料站转存，不是本站绘制。'
 
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
-const QUALITY = { 0: '未说明', 1: '常见', 2: '优良', 3: '稀有', 4: '史诗', 5: '传说' }
 
 /* 副本详情（M01）
    取数三段：索引（列表页给的同一批）→ 详情分片 → 掉落分片。
@@ -39,8 +39,6 @@ Page({
     mapEntry: '',
     mapDrawn: false,
     drops: [],
-    prov: [],
-    provOpen: false,
     fav: false,
     disclaimer: ''
   },
@@ -125,25 +123,23 @@ Page({
         }
         this.setData({
           rows: merged,
+          /* 首领一律走 icon-cell：有头像就出图，没有的由组件回落成自绘块（名字首字垫色块）。
+             2026-10-23 站主说"头像图标都没有"——先分清是哪一种：经典本 146 个首领的头像
+             线上有文件、界面也拼得出地址；三座无限新本的 15 个首领是**源站就没有这张脸**
+             （2026-10-13 抓的时候 0/15，今天重探仍 0/15），不是我们漏接。
+             所以这里不再摆一个写"没有这张头像"的虚线空框——那看着像坏了。 */
           bosses: d.data && d.data.dungeon ? (d.data.dungeon.bosses || []).map((b) => ({
             name: b.nameCn || b.id,
             missing: !b.nameCn,
-            portraitUrl: oss.assetUrl(this.batch, b.portrait),
-            hasPortrait: !!b.portrait
+            portraitUrl: oss.assetUrl(this.batch, b.portrait)
           })) : [],
           bossEmpty: d.data && d.data.dungeon && !(d.data.dungeon.bosses || []).length
             ? '这座的首领名单还没有记录，不猜。' : '',
-          prov: d.data && d.data.dungeon ? (d.data.dungeon.provenance || []).map((p) => ({
-            type: p.type || '未标注',
-            note: p.note || '',
-            url: p.url || '',
-            checkedAt: p.checkedAt || '未记录'
-          })) : [],
           drops: l.data ? (l.data.drops || []).map((x) => ({
             itemId: String(x.itemId || ''),
             name: x.nameCn || x.itemId,
             boss: x.bossCn || '',
-            quality: QUALITY[x.quality] || '未说明',
+            quality: quality.qualityName(x.quality),
             iconUrl: oss.iconUrl(this.batch, x.iconKey)
           })) : [],
           dropGroups: this.groupDrops(l.data ? (l.data.drops || []) : []),
@@ -159,10 +155,10 @@ Page({
     })
   },
 
-  /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
-     （＝玩家点"回到副本列表"没反应），必须 switchTab */
   /* 掉落按首领分组：玩家问的是"这个 boss 掉什么"，不是一条平铺的长单子。
-     没标首领的归到"没标首领"一组，不偷偷塞进第一组。 */
+     没标首领的归到"没标首领"一组，不偷偷塞进第一组。
+     组内按稀有度从高往下排（2026-10-23 站主指令），同档按名字排，
+     这样紫的绿的一眼分得开，不用逐条读品质文字。 */
   groupDrops(drops) {
     const order = []
     const byBoss = {}
@@ -173,17 +169,32 @@ Page({
         itemId: String(x.itemId || ''),
         name: x.nameCn || x.itemId || '（中文名待核）',
         missing: !x.nameCn,
-        quality: QUALITY[x.quality] || '未说明',
+        q: x.quality === undefined || x.quality === null ? '' : x.quality,
+        quality: quality.qualityName(x.quality),
         iconUrl: oss.iconUrl(this.batch, x.iconKey)
       })
     })
-    return order.map((b) => ({ boss: b, rows: byBoss[b] }))
+    return order.map((b) => ({
+      boss: b,
+      rows: byBoss[b].sort((a, c) => quality.qualityRank(c.q) - quality.qualityRank(a.q)
+        || String(a.name).localeCompare(String(c.name)))
+    }))
   },
 
-  onProvToggle() {
-    this.setData({ provOpen: !this.data.provOpen })
+  /* 点一件装备 → 它自己的详情页。掉落片里已经带着每件的详情行了（属性/装等/卖价），
+     详情页按这座本取同一片，不再发第二次网络请求。 */
+  onOpenItem(e) {
+    const id = e.currentTarget.dataset.item
+    const d = e.currentTarget.dataset.dungeon
+    if (!id) {
+      wx.showToast({ title: '这件还没有物品编号', icon: 'none' })
+      return
+    }
+    wx.navigateTo({ url: '/pages/item/index?d=' + encodeURIComponent(d) + '&i=' + encodeURIComponent(id) })
   },
 
+  /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
+     （＝玩家点"回到副本列表"没反应），必须 switchTab */
   onBack() {
     wx.switchTab({ url: '/pages/dungeons/index' })
   },
@@ -192,27 +203,6 @@ Page({
     const added = service.toggleFavoriteDungeon(this.data.id)
     this.setData({ fav: added })
     wx.showToast({ title: added ? '已收藏' : '已取消收藏', icon: 'none' })
-  },
-
-  onCopy() {
-    const d = this.data
-    const lines = [d.title + (d.nameEn ? ' / ' + d.nameEn : '')]
-    d.rows.forEach((r) => { lines.push(r.k + '：' + r.v + (r.note ? '（' + r.note + '）' : '')) })
-    if (d.bosses.length) lines.push('首领：' + d.bosses.map((b) => b.name).join('、'))
-    lines.push('来自「无限资料」小程序 · 非官方粉丝资料站')
-    wx.setClipboardData({ data: lines.join('\n'), success() { wx.showToast({ title: '已复制', icon: 'none' }) } })
-  },
-
-  onOpenSource(e) {
-    const url = e.currentTarget.dataset.url
-    if (!url) {
-      wx.showToast({ title: '这条来源没有链接', icon: 'none' })
-      return
-    }
-    wx.setClipboardData({
-      data: url,
-      success() { wx.showToast({ title: '来源链接已复制，请到浏览器打开', icon: 'none', duration: 2500 }) }
-    })
   },
 
   onShareAppMessage() {

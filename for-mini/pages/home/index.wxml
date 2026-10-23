@@ -9,7 +9,7 @@
   <view class="hairline"></view>
 
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
+    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
     现在没连上线，显示的是上次存下的内容。要联网取的部分会明说。
@@ -18,7 +18,7 @@
   <!-- 1）开服倒计时：占顶部约 1/4 屏，正式服上线后这一整块由页面移除。
         站主 2026-10-22 二次指令：只到天，不做秒表 → 这里没有时:分:秒，也不每秒刷 -->
   <view wx:if="{{cd}}" class="cd plate">
-    <view class="cd-brand">无限资料<text class="cd-sub">《无限》中文资料</text></view>
+    <view class="cd-brand">跑本助手<text class="cd-sub">《无限》中文资料</text></view>
     <view class="cd-kicker">距正式服上线</view>
     <view class="cd-row">
       <block wx:if="{{cd.today}}">
@@ -32,7 +32,7 @@
     <view class="cd-note">{{cd.dayText}} 上线（北京时间）· 官方公告只公布到日，具体开服时刻以游戏内为准</view>
   </view>
   <view wx:else class="hero">
-    <view class="hero-title">无限资料</view>
+    <view class="hero-title">跑本助手</view>
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
   </view>
 

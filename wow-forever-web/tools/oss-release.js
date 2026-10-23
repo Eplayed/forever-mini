@@ -73,6 +73,9 @@ const BUDGET_KB = {
   meta: 8,
   glossary: 200,
   detail: 32,
+  /* 2026-10-23 这一片开始还要带每件装备的详情行（属性行/装等/卖价/状态，位置数组存）。
+     预算没动：最大的一座黑石深渊 133 件、整片 53.3 KB，离 64 KB 还有 17%。
+     哪天属性行涨到顶破这条，说明该把详情拆成单独一片了——由构建来提醒，不等手机上出问题。 */
   loot: 64,
   'spells/classes': 12,
   spellClass: 64,
@@ -94,7 +97,9 @@ const ICON_EXT = '.jpg';
    注意两边是**一对多**：races.json + classes.json 合成 oss-preview/classes.json，
    dungeon-geo.json 并进 dungeons.json 的 geo 字段，所以"条数相等"从来不是正确判据。 */
 const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
-const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json'];
+/* items.json + items-detail.json 只喂分发层（装备详情卡），不进导出产物：
+   所以它们出现在基底名单里、却不在导出名单里，这是有意的一对多。 */
+const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -245,6 +250,34 @@ function raceEntry(r, artIndex, useAsset) {
   };
 }
 
+/* 装备详情行（2026-10-23 站主要"点一件装备能单独看详情"）。
+   行是位置数组、列名写在同片的 cardCols 里——与 loots/index.json 同一套省字节的做法。
+   itemId 是客户端的归并键：装备名/品质/图标/首领那份已经在同片的 drops 里了，
+   这里只补"点进详情才用得上"的那几列，不重复存第二份。
+   状态键与网页端 ItemsPage.vue 的 stLabel() 同一条式子：参考站自报 missing、
+   但玩家 10-19 实测确认服务器有的那 82 件，两边都必须显示"测试服有"，不能一边一个样。 */
+const CARD_COLS = ['itemId', 'type', 'ilvl', 'st', 'sell', 'stKey'];
+const ITEM_ST_LABEL = { new: '新增', changed: '改动', rebuilt: '重建', same: '不变', missing: '无限中没有', srvHas: '测试服有' };
+function itemStKey(it) {
+  return it.status === 'missing' && it.srv === 'present' ? 'srvHas' : it.status;
+}
+function itemCardRow(drop, itemIndex, detailIndex, miss) {
+  const id = String(drop.itemId || '');
+  const it = itemIndex[id];
+  if (!it) { miss.noBase += 1; return null; }
+  const d = detailIndex[id] || {};
+  if (!d.st) miss.noDetail += 1;
+  const key = itemStKey(it);
+  return [
+    id,
+    it.type || null,
+    it.ilvl === undefined ? null : it.ilvl,
+    d.st || [],
+    d.sell || null,
+    key === 'same' ? null : (ITEM_ST_LABEL[key] ? key : null)
+  ];
+}
+
 /* 系底图：art.json 的 specs[{classId}-{系序号}]，与网页 lib/art.js 的 specArt() 同一条键规则。
    顺手登记进素材台账——不登记的话界面拼得出地址、bucket 上却没有这张（2026-10-22 那次
    "缺登记 0 条却线上 404" 就是这条链）。本地缺文件则记进 assetMissing，构建当场拦。 */
@@ -329,6 +362,20 @@ function buildBatch(env, opts) {
   const classPack = readJson(classesSrc);
   const talentPack = readJson(talentsSrc);
   const guidePack = readJson(guideSrc);
+  /* 装备详情卡的两个来源（只读，不进导出产物，见 BASE_INPUTS 那条注释） */
+  const itemsSrc = path.join(siteData(), 'items.json');
+  const itemDetailSrc = path.join(siteData(), 'items-detail.json');
+  if (!fs.existsSync(itemsSrc) || !fs.existsSync(itemDetailSrc)) {
+    errors.push('缺少装备基底 src/data/items.json 或 items-detail.json，装备详情卡没有数据来源');
+  }
+  const itemsIndex = {};
+  const itemDetailIndex = {};
+  const itemCardMiss = { noBase: 0, noDetail: 0 };
+  if (fs.existsSync(itemsSrc) && fs.existsSync(itemDetailSrc)) {
+    (readJson(itemsSrc).items || []).forEach((x) => { itemsIndex[String(x.id)] = x; });
+    const det = readJson(itemDetailSrc).items || {};
+    Object.keys(det).forEach((k) => { itemDetailIndex[String(k)] = det[k]; });
+  }
 
   /* 素材登记表：这一批真引用到、且本地确实在的文件 */
   const assetUse = {};
@@ -449,9 +496,22 @@ function buildBatch(env, opts) {
     pushObj('dungeonDetail:' + d.id, 'dungeons/detail/' + d.id + '.json', det, {
       records: 1, budget: 'detail', facts: collectFactDates([d])
     });
+    /* 装备详情（2026-10-23 站主："点击装备可以单独展示装备详情"）就并进这一片，
+       不单开 dungeons/cards/{id}.json，也不开 1018 个单件文件，两个理由：
+       ① 玩家点的那一件一定在他刚打开的这座本的掉落表里——这一片已经在手机上了，
+          再发一次请求只是把同一屏拆成两次网络；
+       ② 校验值要么占索引每条 110 字节（38 座 = 冷启动多 4 KB，所有人都付），
+          要么随单件文件走（1018 个对象，verify 要逐个回读）。并进本片这两条都不发生。
+       代价写在 BUDGET_KB.loot 那条注释里。属性行按位置数组存（列名在 cardCols），
+       133 件的黑石深渊按对象存多 12 KB。 */
     const loot = {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-loot', dungeonId: d.id,
-      level: d.level || 'L3', lootNote: d.lootNote || null, drops: d.drops || []
+      level: d.level || 'L3', lootNote: d.lootNote || null, drops: d.drops || [],
+      cardCols: CARD_COLS,
+      cardNote: 'cardCols 是 cards 每行的列名：itemId、类型、装等、属性行数组（顺序就是游戏里的读法）、'
+        + '商人卖价、相对经典旧世的状态；装备名/品质/图标/首领在同片 drops 里按 itemId 对。'
+        + '状态里「无限中没有」是参考站自报，不是官方结论；属性行与卖价取自插件名录或第三方解包站，本站未做游戏内实测。',
+      cards: (d.drops || []).map((x) => itemCardRow(x, itemsIndex, itemDetailIndex, itemCardMiss)).filter((x) => x)
     };
     pushObj('dungeonLoot:' + d.id, 'dungeons/loot/' + d.id + '.json', loot, {
       records: (d.drops || []).length, budget: 'loot', facts: collectFactDates([d])
@@ -659,7 +719,7 @@ function buildBatch(env, opts) {
     cols: lootCols,
     note: '一张表列全本站收录副本的掉落：每行按 cols 的顺序排，boss 是这座本 bosses 数组里的序号。'
       + '同一件装备出现在两座本时是两行，反查时按 itemId 归到一起。',
-    qualityNote: '品质 1＝普通，2＝良好，3＝稀有，4＝史诗；这是本站现用的四档叫法，不是官方分级。',
+    qualityNote: '品质档名用游戏内自己那一套：1＝普通、2＝优秀、3＝精良、4＝史诗（本站掉落只出现这四档）。',
     lootDisclaimer: dungeons.meta ? dungeons.meta.lootDisclaimer : '',
     counts: {
       dungeons: lootDungeons.length,
@@ -748,6 +808,32 @@ function buildBatch(env, opts) {
     if (!assetUse[rel]) errors.push('界面会去要 ' + rel + '（出自 ' + refAssets[rel] + '），但素材层没登记 —— 玩家只会看到自绘占位块');
   });
 
+  /* 装备详情卡口：掉落行有 itemId 却没配上详情行，玩家点进去就是一屏空白。
+     件数逐座要对上；行是位置数组，所以长度对 cardCols、第一格对 itemId——
+     列名漂了客户端就会把装等当卖价。 */
+  let cardRows = 0;
+  entries.forEach((e) => {
+    if (!e.obj || e.obj.kind !== 'dungeon-loot') return;
+    const withId = (e.obj.drops || []).filter((x) => x.itemId);
+    const cards = e.obj.cards || [];
+    if (withId.length !== cards.length) {
+      errors.push('装备详情：' + e.obj.dungeonId + ' 掉落有 ' + withId.length + ' 件带 itemId，详情只有 ' + cards.length + ' 行');
+    }
+    if ((e.obj.cardCols || []).join(',') !== CARD_COLS.join(',')) {
+      errors.push('装备详情：' + e.obj.dungeonId + ' 的列名与生成器里的 CARD_COLS 不一致');
+    }
+    const dropIds = {};
+    (e.obj.drops || []).forEach((x) => { if (x.itemId) dropIds[String(x.itemId)] = 1; });
+    cards.forEach((r, i) => {
+      const at = '装备详情：' + e.obj.dungeonId + ' 第 ' + (i + 1) + ' 行';
+      if (r.length !== CARD_COLS.length) errors.push(at + '有 ' + r.length + ' 个值，列名却写了 ' + CARD_COLS.length + ' 列');
+      if (!r[0]) errors.push(at + '缺 itemId');
+      if (!dropIds[String(r[0])]) errors.push(at + '（' + r[0] + '）在这座的掉落里找不到，客户端归不上行');
+      if (/\d+(\.\d+)?\s*%/.test(String(r[4] || ''))) errors.push(at + '的卖价里出现百分比（红线：不写几率）');
+      cardRows += 1;
+    });
+  });
+
   entries.forEach((e) => {
     if (!e.buf) e.buf = dump(e.obj);
     e.bytes = e.buf.length;
@@ -816,6 +902,9 @@ function buildBatch(env, opts) {
       spellClasses: spellGroups.length,
       lootRows: lootObj.counts.rows,
       lootItems: lootObj.counts.items,
+      /* 掉落行里带上了装备详情卡的条数（构建时逐行数出来的，不是抄 lootRows） */
+      itemCards: cardRows,
+      itemCardNoDetail: itemCardMiss.noDetail,
       races: classIndexObj.counts.races,
       classes: classIndexObj.counts.classes,
       macros: (guidePack.macros || []).length,
@@ -849,6 +938,7 @@ function buildBatch(env, opts) {
         '索引每条自带 detailEtag / detailBytes / lootEtag / lootBytes：进详情、看掉落时按索引给的值校验，不必先取 files.json',
         '职业分片的校验值随 spells/classes.json 的每个职业条目下发（shardEtag / shardMd5 / shardBytes），点开哪个职业才取哪一片',
         '掉落反查表 loots/index.json 是一个整块：一次 GET 换"任何一件装备都能查"，行用位置数组存，列名写在 cols 里',
+        '每件装备的详情行（属性行/装等/卖价/状态）与掉落名单同在 dungeons/loot/{id}.json：点的那件一定在刚打开的这座本里，不再发第二次请求',
         '这一批的每个文件都带 buildId / product / schemaVersion / kind（副本类分片还带所属副本 id，职业分片带 classId），客户端五项齐验：etag、bytes、buildId、kind、id',
         '分片路径由条目里的 id 现推并与 detailPath/lootPath/shardPath 比对，对不上就不发请求——写坏一条路径也走不出 builds/{buildId}/',
         '任一项不符就整条当失败，走缓存或打包快照并在界面标出来，不许拿对不上内容的数据当实时'
@@ -1594,6 +1684,10 @@ module.exports = {
   EXPORT_RELS,
   BASE_INPUTS,
   raceEntry,
+  itemCardRow,
+  itemStKey,
+  CARD_COLS,
+  ITEM_ST_LABEL,
   DROPPED_DETAIL_FIELDS,
   WRITE_MARK,
   buildBatch,

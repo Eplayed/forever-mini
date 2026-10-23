@@ -143,8 +143,10 @@ async function main() {
       setTimeout(() => res(x ? { name: x.name, q: x.qualityText, srcs: x.sources.map((s) => s.dungeon + '/' + s.boss), icon: x.iconUrl } : null), 500);
     }, 900);
   }));
+  /* 这一件是 quality 2：旧表叫「良好」、新表叫「优秀」——换的是叫法不是档，
+     所以这条同时是"两页抄表漂了"的回归面（旧断言写的就是旧表那一格的字）。 */
   log('按名字反查：一束红玫瑰归并出四座本与各自首领',
-    !!rose && rose.srcs.length === 4 && rose.q === '良好', JSON.stringify(rose && rose.srcs));
+    !!rose && rose.srcs.length === 4 && rose.q === '优秀', JSON.stringify(rose && [rose.q, rose.srcs]));
   if (rose) {
     const rr = await head(rose.icon);
     log('掉落物品图标在 bucket 上真取得到', rr.code === 200 && rr.type.indexOf('image/') === 0, String(rr.code));
@@ -303,6 +305,26 @@ async function main() {
   const mapShot = await ev(() => { const d = getCurrentPages().pop().data; return { map: !!d.mapUrl, drawn: d.mapDrawn, entry: d.mapEntry }; });
   log('副本详情带地图（底图或入口坐标至少一样，自绘会标示意图）', mapShot.map || !!mapShot.entry, JSON.stringify(mapShot));
   await shot('e5-detail-map');
+  /* 真 beta 批次再走一遍装备详情：M01 那条测的是本地夹具批次，这一条测的是线上那一份的字节 */
+  const liveItem = await (async () => {
+    await ev(() => {
+      const p = getCurrentPages().pop();
+      const g = (p.data.dropGroups || []).filter((x) => x.rows.length)[0];
+      const row = g.rows[0];
+      p.onOpenItem({ currentTarget: { dataset: { item: row.itemId, dungeon: p.data.id } } });
+      return 1;
+    });
+    await new Promise((r) => setTimeout(r, 9000));
+    return ev(() => {
+      const p = getCurrentPages().pop();
+      const d = p.data || {};
+      return { route: p.route, name: d.name, st: (d.st || []).length, s0: String(((d.st || [])[0] || {}).t || '').slice(0, 12), type: d.type, sell: d.sell, boss: d.boss, need: d.needOnline };
+    });
+  })();
+  log('真 beta 批次：点掉落行进的装备详情页有属性行与卖价',
+    /pages\/item\/index/.test(String(liveItem.route)) && liveItem.st > 0 && liveItem.need === false,
+    JSON.stringify(liveItem));
+  await shot('e6-item-detail-live');
 
   process.stdout.write('\nF. 首页配图与天赋模拟器（2026-10-22 站主指令）\n');
   await goto('/pages/home/index', 7000);
@@ -461,7 +483,8 @@ async function main() {
 
   process.stdout.write('\nD. 规范与包体\n');
   const files = ['pages/spells/index.wxss', 'pages/loots/index.wxss',
-    'pages/class/index.wxss', 'pages/classes/index.wxss', 'pages/home/index.wxss'];
+    'pages/class/index.wxss', 'pages/classes/index.wxss', 'pages/home/index.wxss',
+    'pages/dungeon/index.wxss', 'pages/item/index.wxss'];
   const raw = [];
   files.forEach((f) => {
     const t = fs.readFileSync(path.join(REPO, 'for-mini', f), 'utf8');
@@ -477,6 +500,60 @@ async function main() {
   const snapBytes = ['forever-glossary-snapshot.js', 'forever-meta-snapshot.js', 'forever-dungeon-snapshot.js', 'forever-class-snapshot.js']
     .reduce((s, f) => s + fs.statSync(path.join(REPO, 'for-mini/data', f)).size, 0);
   log('主包快照仍 ≤ 60 KB（技能与掉落没往主包塞，职业只塞首页要用的字段）', snapBytes <= 60 * 1024, (snapBytes / 1024).toFixed(1) + ' KB');
+
+  /* —— 2026-10-23 站主一批指令的静态卡口：装备详情、稀有度、去来源、改名 —— */
+  const dgWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
+  const dgJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.js'), 'utf8');
+  log('副本详情：撤掉"复制这座的资料"这颗，工具条只剩收藏与分享两颗',
+    !/复制这座的资料/.test(dgWxml) && !/onCopy/.test(dgJs)
+      && (dgWxml.match(/class="btn act/g) || []).length === 2, JSON.stringify((dgWxml.match(/class="btn act[^"]*"/g) || [])));
+  log('副本详情：两颗按钮各占一半（错位那处的根因是第三颗加 spacer 挤不下换行）',
+    /\.act\s*\{[^}]*flex:\s*1/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
+  log('副本详情：底部"来源"这一节整块撤了（记录仍在分片里，由 M01 那条查）',
+    !/来源/.test(dgWxml.replace(/<!--[\s\S]*?-->/g, ' ')) && !/onProvToggle/.test(dgJs) && !/onOpenSource/.test(dgJs), '');
+  log('掉落行可点：一行带 data-item 与 bindtap，指向装备详情页',
+    /data-item="\{\{row\.itemId\}\}"/.test(dgWxml) && /bindtap="onOpenItem"/.test(dgWxml)
+      && /pages\/item\/index/.test(dgJs) && appJson.pages.indexOf('pages/item/index') >= 0, '');
+  const itemJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/item/index.js'), 'utf8');
+  const itemWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/item/index.wxml'), 'utf8');
+  log('装备详情页按列名读 cards（不写死下标，生成器加一列不会读歪）',
+    /cardCols/.test(itemJs) && /cols\.indexOf\(/.test(itemJs), '');
+  log('装备详情页把库里有的事实都给出去，缺的照实说（不拿空行充数）',
+    /属性行|掉落于|商人卖价|物品编号/.test(itemWxml) && /还没入库/.test(itemJs), '');
+  /* 品质档名以前两页各抄一份、四档叫法互不相同；现在只许有 services/quality.js 这一份 */
+  const qJs = fs.readFileSync(path.join(REPO, 'for-mini/services/quality.js'), 'utf8');
+  const qCopies = ['pages/dungeon/index.js', 'pages/loots/index.js', 'pages/item/index.js']
+    .filter((f) => /QUALITY\s*=/.test(fs.readFileSync(path.join(REPO, 'for-mini', f), 'utf8')));
+  log('品质档名全站只有 services/quality.js 一份（页面里不许再各抄一张表）',
+    qCopies.length === 0 && /精良/.test(qJs) && /require\('.*\/quality'\)/.test(dgJs)
+      && /require\('.*\/quality'\)/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/loots/index.js'), 'utf8')),
+    qCopies.join(','));
+  /* 改名：站主 2026-10-23 定「跑本助手」，界面里一处不许再留旧名（文档与注释不算界面） */
+  const oldName = [];
+  fs.readdirSync(path.join(REPO, 'for-mini/pages')).forEach((d) => {
+    ['index.wxml', 'index.js', 'index.json'].forEach((f) => {
+      const p2 = path.join(REPO, 'for-mini/pages', d, f);
+      if (fs.existsSync(p2) && /无限资料/.test(fs.readFileSync(p2, 'utf8'))) oldName.push(d + '/' + f);
+    });
+  });
+  log('小程序名全线换成「跑本助手」（旧名在界面与页面配置里清零）',
+    appJson.window.navigationBarTitleText === '跑本助手'
+      && /跑本助手/.test(fs.readFileSync(path.join(REPO, 'for-mini/app.js'), 'utf8'))
+      && /跑本助手/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8'))
+      && oldName.length === 0, oldName.join(','));
+  /* 装备详情随掉落片下发：片的行数要等于该片带 itemId 的掉落数（整批一起数，不抽一座） */
+  const bMan = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-build/beta/manifest.json'), 'utf8'));
+  const bDir = path.join(REPO, 'for-mini/oss-build/beta/builds/' + bMan.buildId);
+  let rowsWithId = 0; let cardTotal = 0; let cardBad = [];
+  JSON.parse(fs.readFileSync(path.join(bDir, 'dungeons/index.json'), 'utf8')).items.forEach((it) => {
+    const l = JSON.parse(fs.readFileSync(path.join(bDir, 'dungeons/loot/' + it.id + '.json'), 'utf8'));
+    rowsWithId += (l.drops || []).filter((x) => x.itemId).length;
+    cardTotal += (l.cards || []).length;
+    if ((l.cards || []).some((r) => r.length !== (l.cardCols || []).length)) cardBad.push(it.id);
+  });
+  log('批次里每件带编号的掉落都配到一行详情，且列数对得上列名',
+    rowsWithId === cardTotal && cardBad.length === 0 && rowsWithId > 1000
+      && bMan.counts.itemCards === cardTotal, JSON.stringify({ rowsWithId, cardTotal, bad: cardBad.slice(0, 3), n: bMan.counts.itemCards }));
 
   /* —— 首页改版四段的静态卡口（不靠设备，纯文件与纯函数）—— */
   const cd = require(path.join(REPO, 'for-mini/services/countdown.js'));

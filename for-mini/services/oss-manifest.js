@@ -396,24 +396,27 @@ function loadKey(kind, opts) {
 
 /* 索引条目自带 detailPath/lootPath 与两份分片的校验值。
    路径一律由 id 重新推导并与条目比对：条目被改成 ../.. 也走不出去。 */
+const SHARD_KINDS = {
+  detail: { dir: 'detail/', pathKey: 'detailPath', etag: 'detailEtag', md5: 'detailMd5', bytes: 'detailBytes', readId: (d) => (d.dungeon ? d.dungeon.id : null) },
+  loot: { dir: 'loot/', pathKey: 'lootPath', etag: 'lootEtag', md5: 'lootMd5', bytes: 'lootBytes', readId: (d) => d.dungeonId }
+}
+
 function shardRef(item, which) {
-  const rel = 'dungeons/' + (which === 'detail' ? 'detail/' : 'loot/') + item.id + '.json'
-  if (String(which === 'detail' ? item.detailPath : item.lootPath) !== rel) {
-    return { error: new Error('索引条目 ' + item.id + ' 的 ' + which + ' 路径不是由 id 推出来的：' + (which === 'detail' ? item.detailPath : item.lootPath)) }
+  const k = SHARD_KINDS[which]
+  if (!k) return { error: new Error('不认识的分片类型 ' + which) }
+  const rel = 'dungeons/' + k.dir + item.id + '.json'
+  if (String(item[k.pathKey]) !== rel) {
+    return { error: new Error('索引条目 ' + item.id + ' 的 ' + which + ' 路径不是由 id 推出来的：' + item[k.pathKey]) }
   }
   return {
     rel,
     cacheKind: 'dungeon-' + which + ':' + item.id,
-    expect: {
-      etag: which === 'detail' ? item.detailEtag : item.lootEtag,
-      md5: which === 'detail' ? item.detailMd5 : item.lootMd5,
-      bytes: which === 'detail' ? item.detailBytes : item.lootBytes
-    },
+    expect: { etag: item[k.etag], md5: item[k.md5], bytes: item[k.bytes] },
     spec: {
       name: 'dungeon-' + which,
       kind: 'dungeon-' + which,
       id: item.id,
-      readId: which === 'detail' ? (d) => (d.dungeon ? d.dungeon.id : null) : (d) => d.dungeonId
+      readId: k.readId
     }
   }
 }

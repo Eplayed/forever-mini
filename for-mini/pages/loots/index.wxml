@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，掉落可能显示不全。请更新「无限资料」后再查。
+    这批数据的结构比当前小程序新，掉落可能显示不全。请更新「跑本助手」后再查。
   </view>
   <view wx:elif="{{needOnline}}" class="notice notice-bad">
     掉落反查表要联网才能取（整张表一次取回，之后本机就存着）。现在没连上，这一页不给离线内容。

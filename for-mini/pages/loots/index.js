@@ -1,8 +1,6 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
-
-/* 品质四档是本站现用的叫法，与网页端 ItemsPage 的 QUALITY 同一份，别在页面里另写 */
-const QUALITY = { 1: '普通', 2: '良好', 3: '稀有', 4: '史诗' }
+const quality = require('../../services/quality')
 const RENDER_LIMIT = 100
 
 Page({
@@ -62,7 +60,7 @@ Page({
               name: row[iName] || '（中文名待核）',
               missing: !row[iName],
               quality: row[iQ],
-              qualityText: QUALITY[row[iQ]] || '未说明',
+              qualityText: quality.qualityName(row[iQ]),
               iconUrl: oss.iconUrl(r.batch, row[iIcon]),
               sources: []
             }

@@ -37,10 +37,8 @@
 
     <view class="card">
       <view class="row actions">
-        <view class="btn {{fav ? 'btn-on' : ''}}" bindtap="onFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
-        <view class="btn" bindtap="onCopy">复制这座的资料</view>
-        <view class="spacer"></view>
-        <button class="btn btn-share" open-type="share">分享给微信好友</button>
+        <view class="btn act {{fav ? 'btn-on' : ''}}" bindtap="onFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
+        <button class="btn act btn-share" open-type="share">分享给微信好友</button>
       </view>
     </view>
 
@@ -72,8 +70,7 @@
       <view wx:elif="{{bosses.length === 0}}" class="muted">这座还没有首领记录，不猜。</view>
       <view class="boss" wx:for="{{bosses}}" wx:key="index">
         <view class="boss-face">
-          <icon-cell wx:if="{{item.hasPortrait}}" src="{{item.portraitUrl}}" size="md" label="{{item.name}}" fallback-text="没有这张头像" />
-          <view wx:else class="face-none">没有这张头像</view>
+          <icon-cell src="{{item.portraitUrl}}" size="md" label="{{item.name}}" />
         </view>
         <view class="boss-main">
           <text class="boss-name">{{item.name}}</text>
@@ -90,38 +87,18 @@
       <block wx:else>
         <view class="dgrp" wx:for="{{dropGroups}}" wx:key="boss">
           <view class="dgrp-h">{{item.boss}}</view>
-          <view class="drop {{highlightDrop && row.itemId === highlightDrop ? 'drop-hit' : ''}}" wx:for="{{item.rows}}" wx:for-item="row" wx:key="itemId">
+          <view class="drop {{highlightDrop && row.itemId === highlightDrop ? 'drop-hit' : ''}}"
+                wx:for="{{item.rows}}" wx:for-item="row" wx:key="itemId"
+                data-item="{{row.itemId}}" data-dungeon="{{id}}" bindtap="onOpenItem">
             <view class="drop-face">
               <icon-cell src="{{row.iconUrl}}" size="sm" label="{{row.name}}" />
             </view>
             <view class="drop-main">
-              <text class="drop-name">{{row.name}}<text wx:if="{{row.missing}}" class="todo">中文名待核</text></text>
+              <text class="drop-name q-{{row.q}}">{{row.name}}<text wx:if="{{row.missing}}" class="todo">中文名待核</text></text>
             </view>
-            <view class="drop-side">
-              <text class="muted">{{row.quality}}</text>
-            </view>
+            <view class="drop-side"><text class="chev">›</text></view>
           </view>
         </view>
-      </block>
-    </view>
-
-    <view class="card">
-      <view class="card-title prov-head" bindtap="onProvToggle">
-        来源<text class="muted prov-toggle">{{provOpen ? '收起 ‹' : '展开 ›'}}</text>
-      </view>
-      <block wx:if="{{provOpen}}">
-      <view wx:if="{{prov.length === 0}}" class="muted">这座还没有逐条来源记录。</view>
-      <view class="prov" wx:for="{{prov}}" wx:key="url" data-url="{{item.url}}" bindtap="onOpenSource">
-        <view class="row">
-          <text class="prov-type">{{item.type}}</text>
-          <view class="spacer"></view>
-          <text class="muted">核对 {{item.checkedAt}}</text>
-        </view>
-        <view wx:if="{{item.note}}" class="prov-note">{{item.note}}</view>
-        <view wx:if="{{item.url}}" class="muted prov-url">{{item.url}}</view>
-        <view wx:else class="muted">这条没留链接</view>
-      </view>
-      <view class="muted">点一条来源可复制它的链接，到浏览器里打开原页核对。缺数据的字段显示「待实测」，不机翻、不编造。</view>
       </block>
     </view>
 

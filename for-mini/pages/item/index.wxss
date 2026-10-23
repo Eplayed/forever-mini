@@ -1,0 +1,131 @@
+/* 装备详情：控件样式与副本详情页同源（小程序页面样式互相隔离，这里重复一份定义）；
+   品质色用 app.wxss 的 --q1…--q5 令牌，档名来自 services/quality.js。 */
+
+.head {
+  padding-top: 20rpx;
+}
+
+.head-face {
+  width: 96rpx;
+  margin-right: 18rpx;
+  flex-shrink: 0;
+}
+
+.head-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.head-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.head-meta {
+  margin-top: 6rpx;
+  font-size: 23rpx;
+}
+
+.st-badge {
+  margin-top: 16rpx;
+  padding: 8rpx 14rpx;
+  border: 1rpx dashed var(--lead);
+  border-radius: 8rpx;
+  color: var(--lead);
+  font-size: 22rpx;
+}
+
+.st-line {
+  padding: 6rpx 0;
+  font-size: 26rpx;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+/* 装备效果与套装那几句话压一档颜色，数值行留在正文字色上 */
+.st-said {
+  color: var(--lead);
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.frow {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.frow:last-child {
+  border-bottom: 0;
+}
+
+.fkey {
+  width: 168rpx;
+  color: var(--txt-dim);
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.fval {
+  flex: 1;
+  font-size: 26rpx;
+}
+
+.fnote {
+  margin-top: 2rpx;
+  font-size: 22rpx;
+}
+
+.row-btn {
+  display: block;
+  text-align: center;
+  margin: 4rpx 0 18rpx;
+}
+
+.grade {
+  font-size: 21rpx;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+}
+
+.todo {
+  color: var(--lead);
+  font-size: 20rpx;
+  margin-left: 8rpx;
+  border: 1rpx dashed var(--lead);
+  border-radius: 8rpx;
+  padding: 0 8rpx;
+  vertical-align: middle;
+}
+
+.mono {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 24rpx;
+  color: var(--blue);
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.bold {
+  color: var(--txt);
+}
+
+.empty {
+  text-align: center;
+  padding: 40rpx 24rpx;
+}
+
+.empty .btn {
+  display: inline-block;
+  margin: 20rpx 0 0;
+}
+
+.q-1 { color: var(--q1); }
+.q-2 { color: var(--q2); }
+.q-3 { color: var(--q3); }
+.q-4 { color: var(--q4); }
+.q-5 { color: var(--q5); }

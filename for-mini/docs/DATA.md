@@ -89,11 +89,16 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
               "detailEtag": "6F1CB781…", "detailBytes": 3413, "lootEtag": "A071A464…", "lootBytes": 674 }] }
 ```
 
-详情 `dungeons/detail/{id}.json`（均值 2.6 KB，最大 4.2 KB）＝ `{ schemaVersion, product, kind: "dungeon-detail", buildId, source, dungeon }`，
+详情 `dungeons/detail/{id}.json`（均值 2.6 KB，最大 4.9 KB）＝ `{ schemaVersion, product, kind: "dungeon-detail", buildId, source, dungeon }`，
 `dungeon` 是该条完整记录（去掉 `drops`、`art`、`bosses[].portrait`，加 `dropCount` / `lootPath`），
-`provenance[]` 原样带下来，界面上的"来源与核对日期"就取这里的 `checkedAt`。
-掉落 `dungeons/loot/{id}.json`（均值 5.7 KB，最大 26.3 KB）＝ `{ …, kind: "dungeon-loot", dungeonId, level, lootNote, drops[] }`，
+`provenance[]` 原样带下来。**2026-10-23 起小程序副本页不再摆"来源"这一节**（站主指令），
+但这份记录照旧下发：网页端那一节、`build-data.js` 的逐字回查与 M01 那条断言都读这里。
+掉落 `dungeons/loot/{id}.json`（均值 12.1 KB，最大 53.3 KB）＝ `{ …, kind: "dungeon-loot", dungeonId, level, lootNote, drops[], cardCols, cards[] }`，
 `drops` 里只有物品事实字段，**没有百分比**。
+`cards` 是 2026-10-23 加的装备详情：位置数组，列名写在同片 `cardCols`
+（`itemId / type / ilvl / st / sell / stKey`），客户端按列名取值不写死下标。
+为什么不另开一片或每件一个文件、`BUDGET_KB.loot` 为什么仍是 64 KB 没放宽，
+理由与量出来的数都在 `docs/VERIFY-副本详情与装备详情-2026-10-23.md` 第四节。
 `meta.json` / `glossary.json` 现在也带 `schemaVersion / product / kind / buildId` 四个身份字段（业务字段一个没动）。
 
 ### M02 新增的三份

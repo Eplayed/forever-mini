@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，技能可能显示不全。请更新「无限资料」后再看。
+    这批数据的结构比当前小程序新，技能可能显示不全。请更新「跑本助手」后再看。
   </view>
   <view wx:elif="{{needOnline}}" class="notice notice-bad">
     技能表要联网才能取。现在没连上，这一页不给离线内容——免得拿半个职业当全部。

@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，天赋可能显示不全。请更新「无限资料」后再看。
+    这批数据的结构比当前小程序新，天赋可能显示不全。请更新「跑本助手」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
     现在没连上线，天赋树要联网取。

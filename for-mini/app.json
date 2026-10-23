@@ -4,6 +4,7 @@
     "pages/dungeons/index",
     "pages/classes/index",
     "pages/dungeon/index",
+    "pages/item/index",
     "pages/class/index",
     "pages/spells/index",
     "pages/loots/index",
@@ -11,7 +12,7 @@
     "pages/guide/index"
   ],
   "window": {
-    "navigationBarTitleText": "无限资料",
+    "navigationBarTitleText": "跑本助手",
     "navigationBarBackgroundColor": "#0b0f16",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#0b0f16",

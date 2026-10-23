@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「无限资料」后再看。
+    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
   </view>
   <view wx:elif="{{offline}}" class="notice">
     现在没连上线，显示的是上次存下的名单。进详情看首领与掉落要联网。

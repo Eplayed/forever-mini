@@ -67,15 +67,32 @@
 }
 
 .actions .btn {
-  margin-right: 14rpx;
+  margin-right: 0;
   background: transparent;
 }
 
+/* 两个按钮各占一半：站主 2026-10-23 指的那处"排版错位"是三个按钮加一根 spacer
+   在一屏宽度里放不下、分享那颗被挤到第二行右边。撤掉复制那颗后仍按两等分排，
+   换行与左右不齐这两个问题就都没有立足的地方。 */
+.act {
+  flex: 1;
+  text-align: center;
+}
 
-
+/* 工具条里那颗是 <button open-type="share">——button 自带内边距与行高，
+   不重置就会和旁边的 view 按钮高低不齐（微信里"分享"必须是 button，view 触发不了） */
 .btn-share {
-  margin-right: 0;
-  border-style: dashed;
+  height: auto;
+  padding: 10rpx 24rpx;
+  line-height: 1.4;
+  font-size: 24rpx;
+  border: 1rpx solid var(--gold);
+  border-radius: var(--r-ctl);
+  color: var(--gold-hi);
+}
+
+.btn-share::after {
+  border: 0;
 }
 
 .frow {
@@ -179,28 +196,6 @@
   font-size: 22rpx;
 }
 
-.prov {
-  background: var(--panel-2);
-  border-radius: 10rpx;
-  padding: 14rpx 16rpx;
-  margin-bottom: 10rpx;
-}
-
-.prov-type {
-  font-size: 22rpx;
-  color: var(--ok);
-}
-
-.prov-note {
-  font-size: 24rpx;
-  margin: 4rpx 0;
-}
-
-.prov-url {
-  word-break: break-all;
-  font-size: 22rpx;
-}
-
 
 .bold {
   color: var(--txt);
@@ -247,22 +242,21 @@
   flex-shrink: 0;
 }
 
-.face-none {
-  width: 88rpx;
-  height: 88rpx;
-  border: 1rpx dashed var(--line-2);
-  border-radius: 2rpx;
-  color: var(--txt-hint);
-  font-size: 18rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  box-sizing: border-box;
-}
-
 .drop-face {
   margin-right: 14rpx;
+}
+
+/* 品质档名与颜色：档名收在 services/quality.js（与网页端同源），
+   颜色用 app.wxss 的 --q1…--q5 令牌。没有品质数的那一档（q 为空）走默认字色，不猜。 */
+.q-1 { color: var(--q1); }
+.q-2 { color: var(--q2); }
+.q-3 { color: var(--q3); }
+.q-4 { color: var(--q4); }
+.q-5 { color: var(--q5); }
+
+.chev {
+  color: var(--txt-hint);
+  font-size: 30rpx;
 }
 
 /* 来源折叠（2026-10-22 玩家面清理）：来源是红线要求能点开的，
