@@ -130,7 +130,13 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 导出层还加了一条硬卡：**归一化后仍然一条特长都没有、却标着 L0/L1 的种族 → 拒绝出包**。
 
 天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, rules, trees[] }`，
-节点只有 `tier / column / maxRanks / nameCn / iconKey / requires / level`。
+节点字段 `tier / column / maxRanks / nameCn / nameAlt / iconKey / requires / level / changeState`；
+每棵树另带 `specArt`（系底图，真源 `art.json` 的 `specs[{classId}-{系序号}]`，与网页 `lib/art.js` 同一个键规则，
+2026-10-22 起登记进素材台账：27 张 / 228 KB，台账从 1304 → 1331 个）。
+`nameAlt`（两家资料站叫法不同）与 `changeState`（相对经典旧世：新增/改动/换层/未变）以前没下发，
+2026-10-22 补上——前者是红线"两源分歧两个都留"，后者是长按详情里那句"与经典旧世比"。
+**天赋的具体效果说明库里没有**（两家上游只采了名称/坐标/上限/前置），界面照实写"还没入库"，
+要补必须先在 A 采第三方 tooltip（要开红线例外）/ B 官方中文页 / C 游戏内实测 三条里挑一条。
 **`rules` 从 2026-10-22 起随片下发**（`totalPoints` + `tierUnlockCost`）：站主要小程序的天赋树做成
 "能模拟点配置、和网页版那样"，网页引擎本来就用这份数做加点判定，小程序不做判定才是不一致。
 M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一起翻了）。

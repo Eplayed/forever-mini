@@ -245,6 +245,16 @@ function raceEntry(r, artIndex, useAsset) {
   };
 }
 
+/* 系底图：art.json 的 specs[{classId}-{系序号}]，与网页 lib/art.js 的 specArt() 同一条键规则。
+   顺手登记进素材台账——不登记的话界面拼得出地址、bucket 上却没有这张（2026-10-22 那次
+   "缺登记 0 条却线上 404" 就是这条链）。本地缺文件则记进 assetMissing，构建当场拦。 */
+function specArtFor(artIndex, classId, ti, useAsset) {
+  const siteRel = ((artIndex || {}).specs || {})[classId + '-' + ti] || null;
+  if (!siteRel) return null;
+  const got = typeof useAsset === 'function' ? useAsset(siteRel, classId + '.spec' + ti) : siteRel;
+  return got ? String(got).replace(/^img\//, '') : null;
+}
+
 /* 导出产物 ↔ 基底对拍：在临时目录里把真源重导一遍，逐字节比 oss-preview。
    不这么办的话，指针溯源写的是 A（src/data 的哈希），发出去的却是 B（有人手改过的
    oss-preview），两边一致只证明一致，不证明它来自基底。 */
@@ -556,13 +566,23 @@ function buildBatch(env, opts) {
       structureStatus: g.t.structureStatus || null,
       structureSources: g.t.structureSources || [],
       note: g.t.note || (talentPack.meta || {}).note || '',
-      trees: (g.t.trees || []).map((tr) => ({
+      trees: (g.t.trees || []).map((tr, ti) => ({
         id: tr.id, nameCn: tr.nameCn || null, nameEn: tr.nameEn || null,
         nameConflict: tr.nameConflict || false, nameAlt: tr.nameAlt || null,
+        /* 系底图（2026-10-22 站主：小程序的天赋系也要有底图，和网页保持一致）。
+           真源还是 art.json 的 specs[{classId}-{系序号}]，与网页 lib/art.js 的 specArt() 同一条键规则，
+           不在界面里另写一份"哪个系用哪张图"。 */
+        specArt: specArtFor(artIndex, g.c.classId, ti, useAsset),
         nodes: (tr.nodes || []).map((n) => ({
           id: n.id, tier: n.tier, column: n.column, maxRanks: n.maxRanks,
           nameCn: n.nameCn || null, nameConflict: n.nameConflict || false,
-          iconKey: n.iconKey || null, requires: n.requires || [], level: n.level || 'L3'
+          /* 两个叫法的节点必须两个都发（根 AGENTS.md：两源分歧不取舍掩盖），
+             长按详情里并列显示，而不是只挑一个当真的 */
+          nameAlt: n.nameAlt || null,
+          iconKey: n.iconKey || null, requires: n.requires || [], level: n.level || 'L3',
+          /* 相对经典旧世这条变了没有（added/modified/moved/unchanged）——
+             库里有的事实，长按详情要给它；没有就是 null，界面不猜 */
+          changeState: n.changeState || null
         }))
       }))
     };

@@ -24,11 +24,23 @@
   font-size: 21rpx;
 }
 
+/* 工具条里那个是 <button open-type="share">——button 有自己的默认内边距与行高，
+   不重置就会和旁边的 view 按钮高低不齐（微信里"分享"必须是 button，view 触发不了） */
 .btn-share {
   flex-shrink: 0;
-  margin-left: 10rpx;
-  border-style: dashed;
+  height: auto;
+  margin: 0 12rpx 0 0;
+  padding: 10rpx 24rpx;
+  line-height: 1.4;
+  font-size: 24rpx;
+  border: 1rpx solid var(--gold);
+  border-radius: var(--r-ctl);
+  color: var(--gold-hi);
   background: transparent;
+}
+
+.btn-share::after {
+  border: 0;
 }
 
 .sec {
@@ -42,35 +54,55 @@
   margin-bottom: 12rpx;
 }
 
-.race-row {
+/* —— 可选种族：联盟 / 部落左右两框（2026-10-22 站主指令）——
+   框体背景与描边吃阵营色令牌，框内一格＝图标在上、名字在下，一行三个、多的往下排。
+   框里不写"联盟/部落"：颜色与左右位置就是那件事。 */
+.fac2 {
   display: flex;
+  align-items: stretch;
+}
+
+.fac {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12rpx 6rpx 2rpx;
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
+}
+
+.fac-alliance {
+  margin-right: 12rpx;
+  background: var(--fac-alliance-bg);
+  border-color: var(--fac-alliance-line);
+}
+
+.fac-horde {
+  background: var(--fac-horde-bg);
+  border-color: var(--fac-horde-line);
+}
+
+.fcell {
+  flex: 0 0 33.333%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 10rpx 4rpx;
-  border-bottom: 1rpx solid var(--line);
+  padding: 8rpx 2rpx 12rpx;
 }
 
-.race-row:last-child {
-  border-bottom: 0;
-}
-
-.race-name {
-  margin-left: 12rpx;
-  font-size: 25rpx;
+.fname {
+  margin-top: 6rpx;
+  font-size: 19rpx;
+  line-height: 1.3;
+  text-align: center;
   color: var(--txt);
 }
 
-.race-sub {
-  margin-left: 10rpx;
-  padding: 1rpx 8rpx;
-  border: 1rpx dashed var(--line-2);
-  border-radius: 4rpx;
-  font-size: 18rpx;
-  color: var(--txt-hint);
-}
-
-.race-fac {
-  margin-left: auto;
-  font-size: 21rpx;
+/* 补到 3 的倍数用的空位：占位不显示，但保证最后一行不半格错位 */
+.fcell-empty {
+  visibility: hidden;
 }
 
 .btn.gold {
@@ -162,11 +194,39 @@
 /* —— 天赋格 ——
    四列一行（与客户端那张树同宽），状态四通道区分：
    已点=金边抬起、点满=金实心、现在不能点=压暗、名字没核到=警示色。不只看颜色也看边框 */
+/* 系底图（与网页同一张 specs/{职业}-{系序号}）：图 + 由上往下的暗渐变，
+   压暗是为了格子上的名字读得清；取不到图就是原来的纯色面板。 */
 .tree {
+  position: relative;
   background: var(--panel);
   border: 1rpx solid var(--line);
   border-radius: var(--r-ctl);
   padding: 14rpx 10rpx;
+}
+
+.tree-art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.tree-scrim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(180deg, var(--scrim-card) 0%, var(--scrim-card-b) 100%);
+}
+
+.trow,
+.tcell {
+  position: relative;
+  z-index: 1;
 }
 
 .trow {
@@ -316,6 +376,28 @@
 
 .pop-why {
   color: var(--txt-caution);
+}
+
+.pop-alt-note {
+  font-size: 19rpx;
+}
+
+/* 库里没有的那句照实说：这一段用警示色左边条标出来，别让它长得像一条已核到的说明 */
+.pop-desc {
+  display: flex;
+  padding: 12rpx 0 12rpx 14rpx;
+  border-left: 4rpx solid var(--warn);
+  border-bottom: 1rpx solid var(--line);
+  font-size: 21rpx;
+}
+
+.pop-desc .pop-k {
+  color: var(--txt-caution);
+}
+
+.pop-desc-v {
+  flex: 1;
+  line-height: 1.55;
 }
 
 .pop-btns {

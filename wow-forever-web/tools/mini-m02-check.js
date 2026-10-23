@@ -252,7 +252,10 @@ async function main() {
       const d = q.data;
       res({ route: q.route, trees: (d.trees || []).length, rows: d.trees && d.trees[0] ? d.trees[0].rows.length : 0,
         cells: d.trees && d.trees[0] && d.trees[0].rows[0] ? d.trees[0].rows[0].cells.length : 0,
-        races: (d.races || []).length, name: d.nameCn, share: typeof q.onShareAppMessage === 'function' });
+        /* 2026-10-22：种族改成联盟/部落两框，d.races 这个字段没了——
+           判据跟着换成"两框加起来"，别让它退回读一个不存在的字段（那会永远 0 而静默） */
+        races: (d.allianceRaces || []).length + (d.hordeRaces || []).length,
+        name: d.nameCn, share: typeof q.onShareAppMessage === 'function' });
     }, 9000);
   }));
   log('职业详情：天赋树三系按 tier 行摆位，可选种族反查得到', tree.route === 'pages/class/index'
@@ -400,15 +403,73 @@ async function main() {
       && shared.code.charAt(0) === '2' && /2/.test(shared.title), JSON.stringify(shared));
   await shot('f2-talent-sim');
 
+  /* —— 2026-10-22 站主第二轮：种族分两框、分享链路、系底图、详情给事实 —— */
+  const fac = await ev(() => {
+    const d = getCurrentPages().pop().data;
+    const all = d.allianceRaces || [];
+    const horde = d.hordeRaces || [];
+    const one = all[0] || horde[0] || null;
+    return { a: all.length, h: horde.length, padA: d.padAlliance, padH: d.padHorde,
+      keys: one ? Object.keys(one).sort().join(',') : '',
+      names: all.map((r) => r.nameCn).concat(horde.map((r) => r.nameCn)),
+      treeArt: (d.trees[0] || {}).art || '', tabArt: (d.trees[d.treeTab] || {}).art || '' };
+  });
+  const snapRaces = CLASS_SNAP.races.filter((r) => (r.classes || []).indexOf('warrior') >= 0);
+  log('可选种族按阵营分成两框，两框加起来＝矩阵里能练这个职业的全部种族',
+    fac.a + fac.h === snapRaces.length && fac.a > 0 && fac.h > 0,
+    JSON.stringify({ a: fac.a, h: fac.h, 期望: snapRaces.length }));
+  log('框里不再出现"联盟/部落"字样（一格只有图标与名字两个字段）',
+    fac.keys === 'iconUrl,id,nameCn' && !/联盟|部落/.test(JSON.stringify(fac.names)), fac.keys);
+  log('每框补到 3 的倍数（一行三个、多的往下排，最后一行不半格错位）',
+    (fac.a + fac.padA) % 3 === 0 && (fac.h + fac.padH) % 3 === 0, JSON.stringify({ a: fac.a, padA: fac.padA, h: fac.h, padH: fac.padH }));
+  log('天赋系带底图地址（与网页同一张 specs/{职业}-{系序号}）',
+    /art\/specs\/warrior-[0-2]\.webp$/.test(fac.treeArt) && fac.tabArt === fac.treeArt, fac.treeArt);
+  const specGot = await head(fac.treeArt);
+  log('系底图在 bucket 上真取得到（200 + image/*）',
+    specGot.code === 200 && String(specGot.type).indexOf('image/') === 0, 'HTTP ' + specGot.code + ' ' + (specGot.type || specGot.err || ''));
+  const popFacts = await ev(() => {
+    const p = getCurrentPages().pop();
+    const c = p.data.trees[0].rows[0].cells[0];
+    p.onLongNode({ currentTarget: { dataset: { id: c.id } } });
+    const q = p.data.pop || {};
+    return { keys: Object.keys(q).sort().join(','), treeName: q.treeName, change: q.changeText,
+      why: q.why, can: q.can, max: q.max, ranks: q.ranks };
+  });
+  log('详情面板给全库里有的事实：系名、层、已点/上限、与经典旧世的改动状态',
+    /treeName/.test(popFacts.keys) && /changeText/.test(popFacts.keys) && /alt/.test(popFacts.keys)
+      && popFacts.treeName === '武器' && !!popFacts.change && popFacts.max === 3, JSON.stringify(popFacts));
+  log('点不动的那格，详情会写清为什么（能点的那格不该有这句）',
+    popFacts.can === true && popFacts.why === '' && !!sim0.late.why, JSON.stringify({ can: popFacts.can, late: sim0.late.why }));
+  await ev(() => { getCurrentPages().pop().popClose(); return 1 });
+  await shot('f3-talent-pop');
+  /* 分享链路：别人点开带 ?b= 的地址，必须直接看见那一套点法（不是空树）。
+     直接用上面 onShareAppMessage 生成的那条 path——那就是别人会点到的东西。 */
+  const sharePath = String(shared.path || '');
+  await ev((u) => { wx.reLaunch({ url: u, fail: () => {} }); return 1 }, sharePath);
+  await new Promise((r) => setTimeout(r, 9000));
+  const openedShare = await ev(() => {
+    const p2 = getCurrentPages().pop();
+    const d = p2.data;
+    return { route: p2.route, fromShare: d.fromShare, left: d.remaining, total: d.totalPoints,
+      spent: d.spentText,
+      firstRanks: (((d.trees[0] || {}).rows || [])[0] || { cells: [] }).cells[0].ranks };
+  });
+  log('别人打开分享链接：直接是那一套点法（2 点），并写明是别人分享的',
+    /pages\/class\/index/.test(openedShare.route) && openedShare.fromShare === true
+      && openedShare.firstRanks === 2 && openedShare.left === openedShare.total - 2
+      && /武器 2/.test(openedShare.spent), JSON.stringify(openedShare));
+
   process.stdout.write('\nD. 规范与包体\n');
-  const files = ['pages/spells/index.wxss', 'pages/loots/index.wxss'];
+  const files = ['pages/spells/index.wxss', 'pages/loots/index.wxss',
+    'pages/class/index.wxss', 'pages/classes/index.wxss', 'pages/home/index.wxss'];
   const raw = [];
   files.forEach((f) => {
     const t = fs.readFileSync(path.join(REPO, 'for-mini', f), 'utf8');
     (t.match(/#[0-9a-fA-F]{3,8}\b/g) || []).forEach((c) => raw.push(f + ' ' + c));
     (t.match(/rgba?\(/g) || []).forEach(() => raw.push(f + ' rgba()'));
   });
-  log('两个新页的样式里没有裸色值（颜色一律走 app.wxss 令牌）', raw.length === 0, raw.slice(0, 4).join(','));
+  log('这几页的样式里没有裸色值（颜色一律走 app.wxss 令牌，阵营色也一样先加令牌）',
+    raw.length === 0, raw.slice(0, 4).join(','));
   const appJson = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/app.json'), 'utf8'));
   log('tabBar 仍是三项，新页走二级页面不挤占 tab', appJson.tabBar.list.length === 3
     && appJson.pages.indexOf('pages/spells/index') >= 0 && appJson.pages.indexOf('pages/loots/index') >= 0,
@@ -538,6 +599,16 @@ async function main() {
       && shipped.every((s) => s && s.indexOf('img/') !== 0), JSON.stringify({ uiRels, shipped, uiMiss }));
   /* 界面文字要先把 WXML 注释剥掉再比：注释里写"『查』『去查』这类字眼不要了"是给人看的说明，
      不是玩家看得见的字——上一版没剥注释，被自己写的注释判红了。 */
+  /* 阵营两色必须和网页同一组色相（联盟 212 / 部落 8），令牌注释里写了出处；
+     这里查的是"页面没绕过令牌自己写颜色"，色相一致性由 wow-ui 走查 */
+  /* 注意是 pages/class（职业详情）不是 pages/classes（职业 tab）——两个文件名差一个 s，
+     上一版这里读错了文件，查的是没改过的那一页 */
+  const detailWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/class/index.wxml'), 'utf8');
+  const detailText = detailWxml.replace(/<!--[\s\S]*?-->/g, ' ');
+  log('职业详情不再有"复制这套"，分享按钮在工具条里、清空左边',
+    !/复制这套/.test(detailText) && /open-type="share"/.test(detailWxml)
+      && detailWxml.indexOf('open-type="share"') < detailWxml.indexOf('onReset'),
+    '分享出去的就是当前这套');
   const homeText = homeWxml.replace(/<!--[\s\S]*?-->/g, ' ');
   const clsText = clsWxml.replace(/<!--[\s\S]*?-->/g, ' ');
   log('首页不再出现「查」「去查」「去看」这类字样',

@@ -27,6 +27,18 @@ page {
   --azure-deep: #1d8dcd;
   --blue: var(--azure);
 
+  /* 阵营两色（2026-10-22 职业详情按联盟/部落分框）。
+     色相与网页端 app/src/lib/glyph.js 的 FACTION_HUE 同一组（联盟 212 / 部落 8），
+     两端不是各挑一次颜色；底色与描边是同一色相的低不透明度版本。
+     注意：这两个框只靠颜色与左右位置分辨阵营（站主明确不要框内再写"联盟/部落"），
+     对分不出蓝红的玩家这一处是破例——记在 UI 走查清单里。 */
+  --fac-alliance: #49aee9;
+  --fac-alliance-line: rgba(73, 174, 233, 0.45);
+  --fac-alliance-bg: rgba(73, 174, 233, 0.10);
+  --fac-horde: #c1504a;
+  --fac-horde-line: rgba(193, 80, 74, 0.48);
+  --fac-horde-bg: rgba(193, 80, 74, 0.11);
+
   /* 物品品质六档：与网页端 src/css/tokens.css 同一组值（游戏内通用色），
      掉落反查与副本掉落两页都从这里取，页面里不许再写裸色 */
   --q0: #9d9d9d;
