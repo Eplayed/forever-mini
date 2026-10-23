@@ -37,14 +37,22 @@ FILES = ["favicon.ico", "apple-touch-icon.png", "img/favicon.svg"]
 #    还有天裔那张的插件目录路径），不是页面运行时要读的东西——运行读的是 data/art.json 与
 #    data/icons.json。台账留在 src/（进 git，出问题能回查），不上公网：
 #    把 394 条抓取源清单原样发出去，等于把自己的加工过程交给同行。
-# 列在这里之后它们会被 --check 判成孤儿、--prune 删掉，构建链不会再带上它们。
-EXCLUDE = ["data/upstream", "img/art/manifest.json", "img/gen/manifest.json",
-           "img/icons/manifest.json", "img/art/dungeonmaps/manifest.json"]
+# 被排除的文件会被 --check 判成孤儿、--prune 删掉，构建链不会再带上它们。
+#
+# 2026-10-23 改成按规则排，不再一个目录一个目录手写死：那天新加了 img/keyart/，
+# 台账跟着进来但没人补这条名单，deploy-gh-pages 的禁含闸在 3,883 个文件里精准抓到它
+# （"img/keyart/manifest.json 命中 manifest\.json$"）并拒绝部署。
+# 写死名单的毛病就是**每加一个素材目录都要记得回来补一次**，忘了就把加工台账发上公网。
+# 规则：img/ 下任何一层目录里的 manifest.json 都不进产物（页面运行读的是
+# data/art.json 与 data/icons.json，要用的字段由 fetch-art.py 从台账现算）。
+EXCLUDE = ["data/upstream"]
 
 
 def excluded(rel):
     r = rel.replace(os.sep, "/")
-    return any(r == e or r.startswith(e + "/") for e in EXCLUDE)
+    if any(r == e or r.startswith(e + "/") for e in EXCLUDE):
+        return True
+    return r.startswith("img/") and r.endswith("/manifest.json")
 
 
 def need_copy(s, d):

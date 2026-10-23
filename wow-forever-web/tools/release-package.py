@@ -209,11 +209,10 @@ def dist_is_current():
         "appassets", os.path.join(ROOT, "tools", "app-assets.py"))
     _aa = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_aa)
-    skip = _aa.EXCLUDE
-
-    def skipped(rel):
-        r = rel.replace(os.sep, "/")
-        return any(r == e or r.startswith(e + "/") for e in skip)
+    # 排除规则只认 app-assets.py 那一份，这里不再抄一遍实现：
+    # 2026-10-23 就是因为这里把 EXCLUDE 抄成"逐条前缀匹配"，app-assets 改成
+    # "img/ 下任何 manifest.json 都不进产物"之后两边对不上，打包直接判 dist 少 5 个文件。
+    skipped = _aa.excluded
     for d in ('data', 'img'):
         s_dir = os.path.join(ROOT, "src", d)
         for dirpath, names, fns in os.walk(s_dir):
