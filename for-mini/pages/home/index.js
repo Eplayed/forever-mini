@@ -107,7 +107,7 @@ Page({
       const mBatch = meta.batch || cls.batch
       const ui = m.uiArt || {}
       this.setData({
-        bgUrl: oss.assetUrl(mBatch, ui.bg),
+        bgUrl: oss.assetUrl(mBatch, ui.tabBg),
         cardBg: {
           dungeons: oss.assetUrl(mBatch, (ui.cards || {}).dungeons),
           classes: oss.assetUrl(mBatch, (ui.cards || {}).classes),

@@ -167,3 +167,39 @@
 .empty {
   text-align: center;
 }
+
+/* —— 页面底图两层（2026-10-23 站主：三个 tab 页共用官方天裔那张，top 居中）——
+   图锚在页面顶部、按屏宽铺满高度按比例走（widthFix），跟着页面一起滚——
+   钉在屏幕中间会把中段内容压在亮的云图上读不清（2026-10-23 实拍发现的），
+   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，就是原来的纯色版式。 */
+.pagebg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
+.pagebg-scrim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: var(--scrim-page);
+}
+
+/* 内容层必须自己抬一层：非定位元素会被 z-index:0 的定位层（图与暗底）盖住——
+   只给 .wrap 加 z-index 没用，那抬的是整页相对页面根，不是相对它自己的两个孩子。
+   2026-10-23 实拍就是这么发现的：名单全被暗底糊住了。 */
+/* 底图两层是 absolute，锚在这一层顶上 */
+.wrap {
+  position: relative;
+}
+
+.fg {
+  position: relative;
+  z-index: 1;
+}

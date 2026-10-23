@@ -406,7 +406,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/night-elf.webp"
   },
   {
    "id": "gnome",

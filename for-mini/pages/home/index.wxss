@@ -3,20 +3,24 @@
    2026-10-22 站主重排后新增：开服倒计时 .cd 开头、职业格 .cls9 与 .cls、
    种族与特长 .race 与 .trait 开头。上一版留给覆盖率读数与缺口清单的样式已随界面一起删掉。 */
 
-/* —— 底图两层（2026-10-22 站主：卡片配图、页面背景用《无限》那张氛围图）——
+/* —— 底图两层（2026-10-22 站主要配图；2026-10-23 二次指令：三个 tab 页统一用官方天裔那张，
+   位置 top 居中）——
    .pagebg 是图，.pagebg-scrim 是压在图上的暗底（不压暗，原画的亮部会把文字吃掉），
-   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，页面就是原来的纯色版式。 */
+   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，页面就是原来的纯色版式。
+   为什么从 aspectFill 改成 widthFix + 高度自适应：aspectFill 会把图裁满整屏并居中裁切，
+   天裔那张是 1280x1200 近方图，裁完只剩中间一条；站主要的是"图片 top 居中"，
+   所以按屏宽铺满、高度按原图比例走，锚在页面顶部、跟着页面滚。 */
 .pagebg {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   z-index: 0;
 }
 
 .pagebg-scrim {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -338,4 +342,9 @@
   font-size: 20rpx;
   color: var(--txt-muted);
   margin-left: 10rpx;
+}
+
+/* 底图两层是 absolute，锚在这一层顶上（跟着页面滚，不会钉在屏幕中间） */
+.wrap {
+  position: relative;
 }

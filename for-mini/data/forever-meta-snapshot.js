@@ -42,7 +42,7 @@ module.exports = {
   "缺数据显示「待实测」，禁止编造"
  ],
  "uiArt": {
-  "bg": "keyart/forever-hero.webp",
+  "tabBg": "keyart/skyborne-bg.webp",
   "cards": {
    "dungeons": "art/dungeons/city-of-dalaran.webp",
    "classes": "art/classbanners/warrior.webp",

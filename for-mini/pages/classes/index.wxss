@@ -54,22 +54,79 @@
   text-align: center;
 }
 
-.race {
-  background: var(--panel);
+/* 阵营两框（2026-10-23 站主："种族按照职业详情中做的那样，分 2 框体显示"）。
+   版式与 pages/class/index.wxss 那份一致——小程序页面样式互相隔离，只能各留一份，
+   改一边要记得改两边。框里不再写"联盟/部落"，阵营由框体颜色与位置说。 */
+.fac2 {
+  display: flex;
+  align-items: stretch;
+}
+
+.fac {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12rpx 6rpx 2rpx;
   border: 1rpx solid var(--line);
-  border-radius: 12rpx;
-  margin-bottom: 10rpx;
-  overflow: hidden;
+  border-radius: var(--r-ctl);
 }
 
-.race-open {
-  border-color: var(--gold-line);
+.fac-alliance {
+  margin-right: 12rpx;
+  background: var(--fac-alliance-bg);
+  border-color: var(--fac-alliance-line);
 }
 
-.race-head {
+.fac-horde {
+  background: var(--fac-horde-bg);
+  border-color: var(--fac-horde-line);
+}
+
+.fcell {
+  flex: 0 0 33.333%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rpx 2rpx 12rpx;
+}
+
+.fname {
+  margin-top: 6rpx;
+  font-size: 19rpx;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--txt);
+}
+
+/* 补到 3 的倍数用的空位：占位不显示，但保证最后一行不半格错位 */
+.fcell-empty {
+  visibility: hidden;
+}
+
+.race-hint {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+}
+
+/* 选中那一族的详情：铺在两框下面整宽显示（一框只有约 170rpx，特长那种整句压不住） */
+.race-body {
+  margin-top: 14rpx;
+}
+
+.rb-head {
   display: flex;
   align-items: center;
-  padding: 14rpx 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.rb-close {
+  flex-shrink: 0;
+  margin-left: 10rpx;
+  font-size: 21rpx;
+  color: var(--gold);
 }
 
 .race-main {
@@ -95,19 +152,6 @@
 .race-meta {
   margin-top: 2rpx;
   font-size: 21rpx;
-}
-
-.race-go {
-  flex-shrink: 0;
-  margin-left: 10rpx;
-  font-size: 21rpx;
-  color: var(--gold);
-}
-
-.race-body {
-  padding: 4rpx 16rpx 16rpx;
-  border-top: 1rpx solid var(--line);
-  background: var(--panel-2);
 }
 
 .pick {
@@ -152,4 +196,40 @@
   margin-top: 2rpx;
   font-size: 21rpx;
   line-height: 1.5;
+}
+
+/* —— 页面底图两层（2026-10-23 站主：三个 tab 页共用官方天裔那张，top 居中）——
+   图锚在页面顶部、按屏宽铺满高度按原图比例走（widthFix），跟着页面一起滚——
+   钉在屏幕中间会把中段内容压在亮的云图上读不清（2026-10-23 实拍发现的），
+   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，就是原来的纯色版式。 */
+.pagebg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
+.pagebg-scrim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: var(--scrim-page);
+}
+
+/* 内容层必须自己抬一层：非定位元素会被 z-index:0 的定位层（图与暗底）盖住——
+   只给 .wrap 加 z-index 没用，那抬的是整页相对页面根，不是相对它自己的两个孩子。
+   2026-10-23 实拍就是这么发现的：名单全被暗底糊住了。 */
+/* 底图两层是 absolute，锚在这一层顶上 */
+.wrap {
+  position: relative;
+}
+
+.fg {
+  position: relative;
+  z-index: 1;
 }

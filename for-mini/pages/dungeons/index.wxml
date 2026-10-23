@@ -1,4 +1,9 @@
 <view class="wrap">
+  <!-- 页面底图：三个 tab 页共用那张官方天裔图，top 居中；图取不到（断网、素材没发）
+       就整两层不渲染，版式回落到 app.wxss 的纯色底。内容抬一层见本页 .wrap -->
+  <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="widthFix" binderror="onBgError" />
+  <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
+  <view class="fg">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
     这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
   </view>
@@ -58,4 +63,6 @@
   </view>
 
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+  </view>
 </view>
+

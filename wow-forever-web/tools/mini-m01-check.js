@@ -501,8 +501,19 @@ async function main() {
     'while base not in rows and base < H - 1: base += 1',
     'print("%d %d %d %d" % (top, max(rows[base]) - max(rows[top]), max(rows[base]) - min(rows[base]), W))'
   ].join('\n');
+  /* 2026-10-23：探针改在"关掉页面底图"的那一帧上量。
+     三页共用的那张官方天裔图压暗后，整屏背景的颜色正好落在 --panel (27,35,53) 附近
+     （实测 x=2 处是 27,36,45），按颜色找铭牌就再也分不出卡与底——
+     上一轮那条"只认两边留边距的行"的补丁当时就把 cut = -37 拦下过，这次是同一类干扰换了个来源。
+     铭牌的切角与背景图无关，所以在纯色底那一帧量，量的还是真像素。 */
+  await call('关掉底图再量切角', () => mp.evaluate(() => {
+    getCurrentPages().pop().setData({ bgUrl: '' });
+    return 1;
+  }), 2);
+  await new Promise((r) => setTimeout(r, 2200));
+  await shot('g1b-home-cards-flatbg');
   const corner = await call('量切角', () => new Promise((resolve) => {
-    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1-home-cards.png')], { encoding: 'utf8' }, (err, out) => {
+    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png')], { encoding: 'utf8' }, (err, out) => {
       const t = String(out || '').trim();
       if (err || !/\d+ \d+ \d+ \d+$/.test(t)) { resolve(null); return; }
       const [top, cut, width, w] = t.split(' ').map(Number);

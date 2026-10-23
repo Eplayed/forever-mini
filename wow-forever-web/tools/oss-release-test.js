@@ -260,11 +260,21 @@ const oss = require(MINI_SERVICE);
   const uiRels = [];
   (function walkUi(node) {
     if (!node || typeof node !== 'object') return;
-    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(String(node[k]).replace(/^img\//, '')); else walkUi(node[k]); });
-  })(uiArtPack.home);
-  ok('界面底图清单 5 张都在 src/img（缺一张就是台账少登记一张）',
-    uiRels.length === 5 && uiRels.every((r) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r))),
-    uiRels.join(','));
+    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(String(node[k]).replace(/^img\//, '')); else if (k !== 'meta') walkUi(node[k]); });
+  })(uiArtPack);
+  /* 2026-10-23：bg 从 home 那组挪到 tabs（三个 tab 页共用一张），条数由清单自己算，别再写死 */
+  /* 条数从清单自己算（tabs.bg + 四张入口卡 = 5）：写死 5 的话，
+     下次加一张卡就得先改门禁，那是把"会变的数"抄进不会变的地方。
+     真正要拦的是"少了一张"——所以拿清单的 path 条数与导出层收到的条数对拍。 */
+  const uiPaths = [];
+  (function countPaths(node) {
+    if (!node || typeof node !== 'object') return;
+    Object.keys(node).forEach((k) => { if (k === 'path') uiPaths.push(1); else if (k !== 'meta') countPaths(node[k]); });
+  })(uiArtPack);
+  const uiMissing = uiRels.filter((r) => !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r)));
+  ok('界面底图清单逐张都在 src/img（' + uiPaths.length + ' 张），导出层一条没漏',
+    uiPaths.length === 5 && uiRels.length === uiPaths.length && uiMissing.length === 0,
+    JSON.stringify({ listed: uiRels.length, missing: uiMissing }));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
      等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
   /* 7 个入口（meta/glossary/副本索引/职业名单/掉落表/职业索引/指南）+ 副本×2 + 法术片 + 天赋片 */

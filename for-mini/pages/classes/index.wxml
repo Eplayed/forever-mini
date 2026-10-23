@@ -1,4 +1,10 @@
 <view class="wrap">
+  <!-- 页面底图：三个 tab 页共用那张官方天裔图，top 居中；图取不到就整两层不渲染，
+       版式回落到 app.wxss 的纯色底。内容抬一层见本页 .wrap -->
+  <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="widthFix" binderror="onBgError" />
+  <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
+  <view class="fg">
+
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
     这批数据的结构比当前小程序新，职业与天赋可能显示不全。请更新「跑本助手」后再看。
   </view>
@@ -21,41 +27,61 @@
     </view>
   </view>
 
-  <!-- 无限新增的组合：一排三个，图标在上、整名在下（2026-10-22 站主指令，"看这个职业"那句撤掉） -->
+  <!-- 无限新增的组合：一排三个，图标在上、整名在下（2026-10-22 站主指令）。
+       2026-10-23 二次指令：格子里放的是**种族**图标（这一格新在哪个种族一眼看得出来），
+       点进去仍是那个职业的天赋页。 -->
   <view wx:if="{{combos.length}}" class="sec">
     <view class="sec-t">无限新增的组合</view>
     <view class="combo3">
-      <view class="cmb" wx:for="{{combos}}" wx:key="label" data-id="{{item.classId}}" bindtap="onPickClass">
+      <view class="cmb" wx:for="{{combos}}" wx:key="label" data-id="{{item.classId}}" data-race="{{item.raceId}}" bindtap="onPickCombo">
         <icon-cell src="{{item.iconUrl}}" size="cls" label="{{item.label}}" />
         <view class="cmb-t">{{item.label}}</view>
       </view>
     </view>
   </view>
 
+  <!-- 种族：按阵营分两框（与职业详情同一套版式），框内一格＝图标在上、名字在下，一行三个往下排；
+       框里不写"联盟/部落"那两个字，阵营由框体颜色说。点一格把这一族的详情铺在两框下面整宽显示。 -->
   <view class="sec">
     <view class="sec-t">种族</view>
-    <view class="race {{expandedRace === item.id ? 'race-open' : ''}}" wx:for="{{races}}" wx:key="id">
-      <view class="race-head" data-id="{{item.id}}" bindtap="onRaceToggle">
-        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
-        <view class="race-main">
-          <view class="race-name">{{item.nameCn}}<text wx:if="{{item.subgroup}}" class="race-sub">{{item.subgroup}}</text></view>
-          <view class="muted race-meta">{{item.factionText}}</view>
+    <view class="fac2">
+      <view class="fac fac-alliance">
+        <view class="fcell" wx:for="{{allianceRaces}}" wx:key="id" data-id="{{item.id}}" bindtap="onRaceToggle">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.nameCn}}" />
+          <view class="fname">{{item.nameCn}}</view>
         </view>
-        <view class="muted race-go">{{expandedRace === item.id ? '收起 ‹' : '能练什么 ›'}}</view>
+        <view class="fcell fcell-empty" wx:for="{{padAlliance}}" wx:key="*this"></view>
       </view>
-      <view wx:if="{{expandedRace === item.id}}" class="race-body">
-        <view class="pick">
-          <view class="pick-t">可选职业</view>
-          <view class="pick-row">
-            <view class="chip" wx:for="{{item.classList}}" wx:for-item="cc" wx:key="classId" data-id="{{cc.classId}}" catchtap="onPickClass">{{cc.nameCn}}</view>
-          </view>
+      <view class="fac fac-horde">
+        <view class="fcell" wx:for="{{hordeRaces}}" wx:key="id" data-id="{{item.id}}" bindtap="onRaceToggle">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.nameCn}}" />
+          <view class="fname">{{item.nameCn}}</view>
         </view>
-        <view wx:if="{{item.traits.length}}" class="pick">
-          <view class="pick-t">种族特长</view>
-          <view class="trait" wx:for="{{item.traits}}" wx:key="name">
-            <view class="trait-name">{{item.name}}<text wx:if="{{item.passive}}" class="muted trait-passive">被动</text></view>
-            <view class="muted trait-eff">{{item.effect}}</view>
-          </view>
+        <view class="fcell fcell-empty" wx:for="{{padHorde}}" wx:key="*this"></view>
+      </view>
+    </view>
+    <view wx:if="{{!picked}}" class="muted race-hint">点一个种族，看它能练哪些职业与它的种族特长。</view>
+
+    <view wx:if="{{picked}}" class="card race-body">
+      <view class="rb-head">
+        <icon-cell src="{{picked.iconUrl}}" size="md" label="{{picked.nameCn}}" />
+        <view class="race-main">
+          <view class="race-name">{{picked.nameCn}}<text wx:if="{{picked.subgroup}}" class="race-sub">{{picked.subgroup}}</text></view>
+          <view class="muted race-meta">{{picked.factionText}}</view>
+        </view>
+        <view class="muted rb-close" bindtap="onRaceToggle" data-id="{{picked.id}}">收起</view>
+      </view>
+      <view class="pick">
+        <view class="pick-t">可选职业</view>
+        <view class="pick-row">
+          <view class="chip" wx:for="{{picked.classList}}" wx:for-item="cc" wx:key="classId" data-id="{{cc.classId}}" catchtap="onPickClass">{{cc.nameCn}}</view>
+        </view>
+      </view>
+      <view wx:if="{{picked.traits.length}}" class="pick">
+        <view class="pick-t">种族特长</view>
+        <view class="trait" wx:for="{{picked.traits}}" wx:key="name">
+          <view class="trait-name">{{item.name}}<text wx:if="{{item.passive}}" class="muted trait-passive">被动</text></view>
+          <view class="muted trait-eff">{{item.effect}}</view>
         </view>
       </view>
     </view>
@@ -63,4 +89,6 @@
 
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+  </view>
 </view>
+

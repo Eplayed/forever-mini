@@ -128,10 +128,17 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 天裔两条的特长在基底里挂在 `subgroup.traits`（各 4 条，L0 官方中文），顶层 `traits` 是空数组，
 而界面只读顶层——于是玩家看到"还没核到"、数却一直都在。现在导出这一层合成一份并带 `traitVia` 说明来路，
 `subgroup` 只留 `nameCn`（原来连 lore 带 traits 整个下发，等于同一份数发两遍），
-`portrait` 按种族 id 去 `art.json` 的 `raceIcons` 对上（天裔那张官方 CDN 没有、站主 2026-10-20 授权的插件小图标）。
+`portrait` 按种族 id 去 `art.json` 对上，取图顺序三层（2026-10-23 定死，写在 `raceEntry()`）：
+① 官方 CDN 的 `iconKey`（有就用它，红线口径）→ ② `art.json.raceIcons`（天裔那张，站主 2026-10-20 单独授权的插件小图）
+→ ③ `art.json.races`（本站 2026-10-12 就在库的那批 128 客户端种族头像）。
+**暗夜精灵落在第三层**：官方 CDN 今天实测 `race_nightelf_male` 等四个候选全回 403（对照组 `race_human_male` 200），
+`races.json` 里那条 `iconKey: null` 是对的、不是漏填；库里那张头像本来就在、manifest 也早记过，**没为它新开任何授权**。
+顺序不能反：反了会把另外 8 个种族的官方 CDN 图标全换成第三方转存。
 **基底 `races.json` 一个字没改**（网页那侧本来就读 `subgroup.traits`）；
 主包快照**直接 require 这个函数**，不另抄一份字段规则——这次漂移就是"两边各写一套"写出来的。
-界面取图统一走 `oss.raceIconUrl(batch, race)`：先 `portrait` 再 `iconKey`，都没有就自绘首字块（暗夜精灵就是这种真缺）。
+界面取图统一走 `oss.raceIconUrl(batch, race)`：先 `portrait` 再 `iconKey`，都没有就自绘首字块。
+职业页那排「无限新增的组合」也走同一个口子——分发层按 `raceCn` 给每条 combo 补了
+`raceId / racePortrait / raceIconKey`（2026-10-23 站主：那一格该放**种族**图标，不是职业图标）。
 导出层还加了一条硬卡：**归一化后仍然一条特长都没有、却标着 L0/L1 的种族 → 拒绝出包**。
 
 天赋片 `talents/class/{classId}.json`（约 34 KB / 九片）＝ `{ kind: "talent-class", classId, grid, rules, trees[] }`，
@@ -180,8 +187,13 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 
 ### 界面底图（2026-10-22 起，路径只有一处真源）
 
-清单在 **`wow-forever-web/src/data/ui-art.json`**：首页背景 + 四张入口卡各一张底图，共 5 条。
-导出层把它换成 `assets/` 相对路径塞进 **`meta.uiArt`**（`{ bg, cards: { dungeons, classes, loots, guide } }`）下发，
+清单在 **`wow-forever-web/src/data/ui-art.json`**：三个 tab 页共用的页面底图（`tabs.bg`）+ 首页四张入口卡（`home.cards`），共 5 条。
+（2026-10-23 站主换图并把它从「首页专属」提成 `tabs` 一组，`home.bg` 这个键随之撤掉。）
+导出层把它换成 `assets/` 相对路径塞进 **`meta.uiArt`**（`{ tabBg, cards: { dungeons, classes, loots, guide } }`）下发，
+三个 tab 页各读一次 `service.loadMeta()` 拿这张地址（走 `services/ui-art.js` 一个口子，不在页面里各抄路径），**铺法与一个真 bug**：底图两层是 `position: absolute`，而 CSS 绘制顺序里**非定位元素会被 `z-index:0` 的定位层盖住**——
+只给 `.wrap` 加 `z-index` 抬的是整页相对页面根，不是内容相对它自己的两个孩子，
+结果名单整片被暗底糊住，DOM 量着一切正常。三页统一把内容包进 `.fg { position: relative; z-index: 1 }`；
+`mini-m02-check` 两道看着它：静态查"有 `.pagebg` 的页面必须有 `.fg`"，再逐页做一次"有底图 / 无底图"亮字像素比对（差 >6% 即红）。
 页面只认这一份，**不许在 wxml/js 里各写一遍路径**（`mini-m02-check` 有两条查这个：
 meta 里五条都到位、且都不带 `img/` 前缀）。
 分发层把这五张登记进素材台账（`build` 输出里素材从 1299 → 1303 个），缺文件会进 `assets.missing` 让构建红。

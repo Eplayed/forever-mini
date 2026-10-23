@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const cp = require('child_process');
 const MPmod = require('miniprogram-automator/out/MiniProgram');
 const MiniProgram = MPmod.default || MPmod;
 MiniProgram.prototype.checkVersion = async () => true;
@@ -657,20 +658,29 @@ async function main() {
   const uiRels = [];
   (function walkUi(node) {
     if (!node || typeof node !== 'object') return;
-    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(node[k]); else walkUi(node[k]); });
-  })(uiPack.home);
+    Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(node[k]); else if (k !== 'meta') walkUi(node[k]); });
+  })(uiPack);
   const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', p)));
   const metaOut = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
-  const shipped = [((metaOut.uiArt || {}).bg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));
+  const shipped = [((metaOut.uiArt || {}).tabBg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));
   /* 官方宣传画是市场图，不是客户端原画——红线要求避开商标词，所以"画面里没有字和 logo"
      这件事必须落在 manifest 里，而不是靠下一个改图的人自己记得去看。 */
   const keyManifest = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/img/keyart/manifest.json'), 'utf8'));
-  const keyItem = (keyManifest.items || []).filter((i) => i.kept !== false)[0] || {};
-  log('首页背景那张官方宣传画登记齐全：来源是官方页、做过商标词自查、也记了"国服那张带字标所以不用"',
-    /^https?:\/\//.test(String(keyItem.source || '')) && /blizzard|akamaihd/.test(String(keyItem.sourcePage || ''))
-      && /无「魔兽|无字|不含/.test(String(keyItem.trademarkCheck || ''))
-      && /字标|logo/.test(JSON.stringify(keyItem.rejected || {})) && !!keyItem.sha256,
-    JSON.stringify({ source: keyItem.source, sha: String(keyItem.sha256 || '').slice(0, 8) }));
+  const keptKeys = (keyManifest.items || []).filter((i) => i.kept !== false);
+  /* 2026-10-23 站主换了一张：三个 tab 页共用官方天裔那张底图（blz-contentstack-images 是暴雪自己的
+     素材库域名，比"第三方转存"更硬）。登记要求逐张查，不看第一张就算数。 */
+  const tabKey = keptKeys.filter((i) => String(i.file || '').indexOf('skyborne-bg') >= 0)[0] || {};
+  log('tab 页那张官方底图登记齐全：来源是暴雪素材库、记了抓取来路与 sha、做过商标词自查',
+    /^https:\/\/blz-contentstack-images/.test(String(tabKey.source || ''))
+      && /无「魔兽|无字|不含/.test(String(tabKey.trademarkCheck || ''))
+      && !!tabKey.sha256 && /^img\/keyart\/skyborne-bg\.webp$/
+        .test(String((((uiPack.tabs || {}).bg || {}).path) || '')),
+    JSON.stringify({ source: String(tabKey.source || '').slice(0, 46), sha: String(tabKey.sha256 || '').slice(0, 8) }));
+  log('第一张官方宣传画（首页那张）的登记没被换图换掉：来源、商标词自查、国服那张带字标所以不用',
+    keptKeys.every((i) => /^https?:\/\//.test(String(i.source || '')) && !!i.sha256
+      && /无「魔兽|无字|不含/.test(String(i.trademarkCheck || '')))
+      && /字标|logo/.test(JSON.stringify((keptKeys.filter((i) => /forever-hero/.test(i.file))[0] || {}).rejected || {})),
+    JSON.stringify(keptKeys.map((i) => i.file.split('/').pop())));
   log('界面底图清单齐全：本地都有文件，且原样进了 meta 分片（img/ 换成 assets 相对路径）',
     uiRels.length === 5 && uiMiss.length === 0 && shipped.length === 5
       && shipped.every((s) => s && s.indexOf('img/') !== 0), JSON.stringify({ uiRels, shipped, uiMiss }));
@@ -712,6 +722,101 @@ async function main() {
     ban.patterns.forEach((p) => { if (new RegExp(p.re, 'i').test(t)) hits.push(f + ' 命中 ' + p.re) });
   });
   log('技能/掉落/首页三页的界面文字没有内部词（禁词表同一把尺子）', hits.length === 0, hits.slice(0, 3).join(','));
+
+  /* —— 2026-10-23：三个 tab 页共用官方天裔底图、职业页种族双框与组合卡换种族图标 —— */
+  process.stdout.write('\nG. tab 页底图与职业页版式（2026-10-23 站主四条）\n');
+  const uiArtSrc = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/data/ui-art.json'), 'utf8'));
+  const tabRel = ((uiArtSrc.tabs || {}).bg || {}).path || '';
+  log('底图真源在 ui-art.json 的 tabs.bg（页面不许各自抄路径），文件本地确实有',
+    tabRel.indexOf('img/') === 0 && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', tabRel.slice(4))), tabRel);
+  const previewMeta = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
+  log('导出层把它换成 tabBg 下发（首页背景那条旧键已撤，不留两份）',
+    !!previewMeta.uiArt.tabBg && previewMeta.uiArt.bg === undefined,
+    JSON.stringify({ tabBg: previewMeta.uiArt.tabBg, oldBg: previewMeta.uiArt.bg }));
+  /* 层叠这一条是本轮实拍抓出来的真 bug 的回归面：非定位元素会被 z-index:0 的定位层盖住，
+     只给 .wrap 加 z-index 抬的是整页，不是它自己的两个孩子——
+     结果就是名单全被暗底糊住，DOM 量着一切正常，像素上什么都没有。 */
+  const noFg = ['home', 'dungeons', 'classes'].filter((d) => {
+    const w = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxml'), 'utf8');
+    const s = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxss'), 'utf8');
+    return /\.pagebg\s*\{/.test(s) && (!/class="fg"/.test(w) || !/\.fg\s*\{[^}]*z-index/.test(s));
+  });
+  log('每个铺了底图的页面都有自己的 .fg 内容层（图与暗底不许糊住名单）', noFg.length === 0, noFg.join(','));
+
+  const PY_BANDS = [
+    'import sys',
+    'from PIL import Image',
+    'import numpy as np',
+    'a = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
+    'prof = (a[:, 55:250] > 140).sum(axis=1)',
+    'bands = []; y = 0',
+    'while y < len(prof):',
+    '    if prof[y] > 18:',
+    '        s = y',
+    '        while y < len(prof) and prof[y] > 10: y += 1',
+    '        bands.append((s, y - 1))',
+    '    else: y += 1',
+    'print("%d %d" % (len(bands), int((a[:, 55:250] > 140).sum())))',
+    '# 只量名单区（x 55..250）：职业页那一排种族脸图标本身就亮，会把总量带偏'
+  ].join('\n');
+  const bandsOf = (file) => new Promise((resolve) => {
+    cp.execFile('python3', ['-c', PY_BANDS, file], { encoding: 'utf8' }, (err, out) => {
+      resolve(err ? null : String(out || '').trim());
+    });
+  });
+  /* 同一页"有底图 / 撤掉底图"两张截图的文字带必须一模一样：
+     对不上就说明底图那两层把内容挪走了或盖住了——DOM 量不出来，只有像素知道。 */
+  const tabPages = [['/pages/home/index', 'tab-home'], ['/pages/dungeons/index', 'tab-dungeons'],
+    ['/pages/classes/index', 'tab-classes']];
+  for (const [url, tag] of tabPages) {
+    await goto(url, 9000);
+    const has = await ev(() => !!getCurrentPages().pop().data.bgUrl);
+    await shot(tag);
+    const withBg = await bandsOf(path.join(SHOT, tag + '.png'));
+    await ev(() => { getCurrentPages().pop().setData({ bgUrl: '' }); return 1 });
+    await new Promise((r) => setTimeout(r, 2500));
+    await shot(tag + '-nobg');
+    const noBg = await bandsOf(path.join(SHOT, tag + '-nobg.png'));
+    /* 比的是"亮字像素总数"而不是逐条文字带：底图一压，某条带可能并成一段或裂成两段
+       （实测 classes 页就差这一条），但总量差超过 6% 就是有内容被盖住了。 */
+    const num = (s) => (s ? s.split(' ').map(Number) : [0, 0]);
+    const [bcA, lumA] = num(withBg);
+    const [bcB, lumB] = num(noBg);
+    log(tag.replace('tab-', '') + ' 页：底图拼得出地址，且铺上后名单文字一格不少',
+      has === true && bcA > 6 && lumB > 0 && Math.abs(lumA - lumB) / lumB <= 0.06,
+      JSON.stringify({ has, withBg: [bcA, lumA], noBg: [bcB, lumB] }));
+  }
+
+  await goto('/pages/classes/index', 9000);
+  const clsLayout = await ev(() => {
+    const d = getCurrentPages().pop().data;
+    const rowsOf = (a) => (a.length % 3 === 0 ? a.length / 3 : Math.floor(a.length / 3) + 1);
+    return {
+      all: (d.allianceRaces || []).length, horde: (d.hordeRaces || []).length,
+      padA: (d.padAlliance || []).length, padH: (d.padHorde || []).length,
+      rowsA: rowsOf(d.allianceRaces || []), rowsB: rowsOf(d.hordeRaces || []),
+      ne: (d.allianceRaces || []).map((x) => x.nameCn + '|' + (/art\/races\//.test(x.iconUrl) ? 'races' : /icons\//.test(x.iconUrl) ? 'cdn' : 'none')).filter((s) => /暗夜/.test(s))[0] || '',
+      combos: (d.combos || []).map((x) => x.label + '→' + String(x.iconUrl || '').split('/').pop())
+    };
+  });
+  log('种族区分成联盟/部落两框，两框加起来是全部 10 个种族、各自补到一行三个',
+    clsLayout.all === 5 && clsLayout.horde === 5 && clsLayout.padA === 1 && clsLayout.padH === 1
+      && clsLayout.rowsA === 2 && clsLayout.rowsB === 2, JSON.stringify(clsLayout));
+  log('暗夜精灵有图标了（官方 CDN 实测没有这张，用的是库里已有的那张客户端种族头像）',
+    /暗夜精灵\|races/.test(clsLayout.ne), clsLayout.ne);
+  /* 每格地址的文件名必须是一张种族图：官方 CDN 那批叫 race_兽人_male，
+     暗夜精灵与天裔走素材层，分别叫 night-elf.webp / skyborne.webp */
+  const comboOk = (clsLayout.combos || []).filter((s) => /^.+→(race_[a-z_]+\.jpg|night-elf\.webp|skyborne\.webp)/.test(s)).length;
+  log('组合卡放的是种族图标，不是职业图标（七格逐格看地址）',
+    comboOk === (clsLayout.combos || []).length && (clsLayout.combos || []).length === 7,
+    JSON.stringify(clsLayout.combos));
+  const facWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/classes/index.wxml'), 'utf8');
+  log('框体吃阵营令牌色、框内一格只有图标与名字（不写"联盟/部落"那两个字）',
+    /fac-alliance/.test(facWxml) && /fac-horde/.test(facWxml)
+      && !/fac-t\b/.test(facWxml) && /fcell/.test(facWxml), '');
+  await goto('/pages/classes/index', 8000);
+  await ev(() => new Promise((r) => { wx.pageScrollTo({ scrollTop: 900, complete: () => setTimeout(() => r(1), 600) }) }));
+  await shot('tab-classes-races');
 
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length

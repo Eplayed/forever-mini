@@ -157,7 +157,9 @@ function uiArtRel(entry, where) {
   if (!fs.existsSync(path.join(WEB, 'src', 'img', rel))) errs.push(`界面底图 ${where}：本地没有这个文件 src/img/${rel}`);
   return rel;
 }
-const miniUiArt = { bg: uiArtRel((uiArt.home || {}).bg, '首页背景'), cards: {} };
+/* tabBg 是三个 tab 页（首页 / 副本 / 职业）共用的那张页面底图，2026-10-23 站主指定；
+   cards 只有首页四张入口卡用。真源都在 src/data/ui-art.json，页面不许各自抄路径。 */
+const miniUiArt = { tabBg: uiArtRel((uiArt.tabs || {}).bg, '三个 tab 页底图'), cards: {} };
 Object.keys(((uiArt.home || {}).cards) || {}).forEach((k) => {
   miniUiArt.cards[k] = uiArtRel(uiArt.home.cards[k], `首页「${k}」卡`);
 });

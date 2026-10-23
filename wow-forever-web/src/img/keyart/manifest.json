@@ -1,30 +1,43 @@
 {
-  "note": "官方《无限》宣传画（市场图，不是客户端原画）。整目录删除并把 ui-art.json 的 home.bg 换回 gen/hero-ruins.webp，即回退到本站自生成那张。",
-  "kind": "official-key-art",
-  "fetchedAt": "2026-10-22",
-  "why": "2026-10-22 站主拍板：小程序页面背景要用「魔兽无限」的背景图，不用本站自生成的替代图。",
-  "items": [
-    {
-      "file": "keyart/forever-hero.png",
-      "kept": false,
-      "reason": "原始下载件（889 KB PNG）不入库，只留压缩后的 webp；要重取按 source 那条 URL 再抓一次。"
-    },
-    {
-      "file": "keyart/forever-hero.webp",
-      "bytes": 98468,
-      "sha256": "5598f26b8f2375f72e2618ec132254d8cec1d244f377c3d66714a24a743ff26f",
-      "size": "1280x720",
-      "kind": "official-key-art",
-      "what": "《无限》官方宣传画：四位角色在山坡上望向远处城市与飞艇，画面内没有任何文字与标志",
-      "source": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/7u/7UA1PXMMBZV61789247586051.png",
-      "sourcePage": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
-      "sourceNote": "取的是官方新闻页自己的 og:image / twitter:image（暴雪 CMS 域名 bnetcmsus-a.akamaihd.net），不是第三方站转存——这条比客户端原画那类来源更硬。",
-      "processed": "1920x1080 PNG → 缩到 1280x720 转 webp（quality 78），889 KB → 98 KB。小程序走 OSS 素材通道，不打进主包。",
-      "trademarkCheck": "画面内无「魔兽 / 魔兽世界 / WoW / 暴雪 / 艾泽拉斯」任何字样与标志，符合根 AGENTS.md 第五条避开商标词那条。",
-      "rejected": {
-        "file": "国服那张《无限》公告横幅（nie.res.netease.com/r/pic/20260929/24fc6dd7-807d-4de4-a398-da3a2b3c09a0.jpg，2400x1350）",
-        "reason": "图里烘死了官方字标「魔兽世界 无限」——那是商标词 + 官方 logo，按红线不能当我们界面的底图。所以用无字版的英文宣传画。以后别因为『国服的就该用国服图』把它换回来。"
-      }
-    }
-  ]
+ "note": "官方《无限》相关的市场图（不是客户端原画）。整目录删除并把 ui-art.json 的 tabs.bg / home.cards 换回 gen/ 那批，即回退到本站自生成那张。",
+ "kind": "official-key-art",
+ "fetchedAt": "2026-10-22",
+ "why": "2026-10-22 站主拍板：小程序页面背景要用「魔兽无限」的背景图，不用本站自生成的替代图。",
+ "items": [
+  {
+   "file": "keyart/forever-hero.png",
+   "kept": false,
+   "reason": "原始下载件（889 KB PNG）不入库，只留压缩后的 webp；要重取按 source 那条 URL 再抓一次。"
+  },
+  {
+   "file": "keyart/forever-hero.webp",
+   "bytes": 98468,
+   "sha256": "5598f26b8f2375f72e2618ec132254d8cec1d244f377c3d66714a24a743ff26f",
+   "size": "1280x720",
+   "kind": "official-key-art",
+   "what": "《无限》官方宣传画：四位角色在山坡上望向远处城市与飞艇，画面内没有任何文字与标志",
+   "source": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/7u/7UA1PXMMBZV61789247586051.png",
+   "sourcePage": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
+   "sourceNote": "取的是官方新闻页自己的 og:image / twitter:image（暴雪 CMS 域名 bnetcmsus-a.akamaihd.net），不是第三方站转存——这条比客户端原画那类来源更硬。",
+   "processed": "1920x1080 PNG → 缩到 1280x720 转 webp（quality 78），889 KB → 98 KB。小程序走 OSS 素材通道，不打进主包。",
+   "trademarkCheck": "画面内无「魔兽 / 魔兽世界 / WoW / 暴雪 / 艾泽拉斯」任何字样与标志，符合根 AGENTS.md 第五条避开商标词那条。",
+   "rejected": {
+    "file": "国服那张《无限》公告横幅（nie.res.netease.com/r/pic/20260929/24fc6dd7-807d-4de4-a398-da3a2b3c09a0.jpg，2400x1350）",
+    "reason": "图里烘死了官方字标「魔兽世界 无限」——那是商标词 + 官方 logo，按红线不能当我们界面的底图。所以用无字版的英文宣传画。以后别因为『国服的就该用国服图』把它换回来。"
+   }
+  },
+  {
+   "file": "keyart/skyborne-bg.webp",
+   "bytes": 95774,
+   "sha256": "9a8ba6c2422dd62ed0d67ba849b501b1fde8ad5d53536b254ceda49e0fb49075",
+   "size": "1280x1200",
+   "kind": "official-key-art",
+   "what": "天裔种族页那张官方底图：一位天裔角色站在云海与浮空城前面，画面内没有任何文字与标志",
+   "source": "https://blz-contentstack-images.akamaized.net/v3/assets/blt9c12f249ac15c7ec/bltf8b2b1b23755de4e/6aa1d6e5f8f124ea95bcba3e/Skyborne-bg-md.jpg",
+   "sourceNote": "站主 2026-10-23 直接给的地址，域名 blz-contentstack-images.akamaized.net 是暴雪自己的 Contentstack 素材库（官方一手来源，不是第三方转存）。原始件 1600x1500 JPEG 240,903 字节，sha256 7eff3f4cff17d9bab42d5195d8cf7d237f61e4f1bed2f34a991378da120cd3bf，不入库。",
+   "processed": "1600x1500 JPEG → 缩到 1280x1200 转 webp（quality 78 method 6），240 KB → 95 KB。三个 tab 页共用这一张，走 OSS 素材通道，不打进主包。",
+   "usedBy": "ui-art.json 的 tabs.bg → 小程序首页 / 副本列表 / 职业列表三页的页面底图（top 居中）",
+   "trademarkCheck": "逐字看过：画面内无「魔兽 / 魔兽世界 / WoW / 暴雪 / 艾泽拉斯」任何字样与标志，符合根 AGENTS.md 第五条避开商标词那条。与 forever-hero.webp 同一条判定口径。"
+  }
+ ]
 }

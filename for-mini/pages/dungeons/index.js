@@ -1,5 +1,6 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
+const uiArt = require('../../services/ui-art')
 
 /* 副本随手查（2026-10-22 玩家面清理）
    ------------------------------------------------------------------
@@ -33,10 +34,12 @@ Page({
     buildId: '',
     dataFrom: '',
     cacheHit: false,
+    bgUrl: '',
     disclaimer: ''
   },
 
   onLoad() {
+    uiArt.tabBg().then((b) => this.setData({ bgUrl: b.url }))
     this.refresh()
   },
 
@@ -47,6 +50,12 @@ Page({
 
   onPullDownRefresh() {
     this.refresh().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 底图加载失败（素材没发、域名没在白名单）就把这两层撤掉，页面回到纯色版式——
+     不许留一块灰框在顶上，碎图比没图更糟 */
+  onBgError() {
+    this.setData({ bgUrl: '' })
   },
 
   refresh() {
