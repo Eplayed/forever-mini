@@ -187,6 +187,97 @@ def main():
     if mism:
         for x in mism[:6]:
             print('   部位分歧：%s 列在「%s」，本站记的是「%s」（%s）' % (x['name'], x['slot'], x['ourSlot'], x['set']))
+    # ---------- 第二份名单（另一来源的同一套 38 专精）----------
+    # 只做"并列"、不合并也不改主源任何一格，两个理由：
+    # ① 红线要求两源分歧两个都留、不许裁决；② 这份与主源"没有共同上游"我们证明不了
+    #   （专精清单 38 对 38 一一对上、连"震击骑 PvP / 出血 PvP / 恢复 PvP"这种冷门组合
+    #   都同进同出），所以它只当第二份名单看，**不据此升档**，配装线仍是 L1。
+    alt_path = os.path.join(ROOT, 'src', 'data', 'upstream', 'xr-bis.json')
+    if os.path.isfile(alt_path):
+        xa = load(alt_path)
+        xidx = {}
+        for c in xa['classes']:
+            for s in c['specs']:
+                xidx[(c['slug'], s['id'])] = s
+        CN2K = {v: k for k, v in SLOT_CN.items()}
+        a_match = a_slots = a_same = a_diff = a_namediff = 0
+        a_unmatched = []
+        a_miss = set()          # 第二份提了、但我们名录里没有的装备（不能拿它当"我们也有"显示）
+        for st in sets:
+            slug, _, sp = st['id'].partition('-')
+            spec = xidx.get((slug, sp or 'pve'))
+            if spec is None:
+                a_unmatched.append(st['id'])
+                continue
+            a_match += 1
+            byside = {'alliance': {}, 'horde': {}}
+            for side in ('alliance', 'horde'):
+                for cell in (st['doll'].get(side) or []):
+                    key = CN2K.get(cell['slot'])
+                    if not key:
+                        continue
+                    slots = spec['slots'] or {}
+                    rows = (spec['rows'] or {}).get(key) or []
+                    if cell.get('cell') == 2 and (key + '2') in slots:
+                        key = key + '2'
+                        rows = (spec['rows'] or {}).get(key) or rows
+                    picks = [p for p in slots.get(key) or [] if p['side'] == side]
+                    first = picks[0]['item'] if picks else (
+                        rows[0]['item'] if rows else None)
+                    if first is None:
+                        continue
+                    a_slots += 1
+                    if first == cell['item']:
+                        a_same += 1
+                    else:
+                        a_diff += 1
+                    for r in rows[:3]:
+                        mine = base.get(r['item'])
+                        if mine and r.get('name') and mine.get('name') != r['name']:
+                            a_namediff += 1
+                    tops = [r['item'] for r in rows[:3]]
+                    if first not in base:
+                        a_miss.add(first)
+                    for i2 in tops:
+                        if i2 not in base:
+                            a_miss.add(i2)
+                    byside[side][cell['slot']] = {
+                        'item': first,
+                        'same': first == cell['item'],
+                        'top': tops,
+                    }
+            st['alt'] = byside
+        doc['meta']['alt'] = OrderedDict([
+            ('kind', 'second-list'),
+            ('source', xa['meta']['source']),
+            ('declaredOrigin', xa['meta']['declaredOrigin']),
+            ('fetched', xa['meta']['fetched']),
+            ('srcSha256', xa['meta']['srcSha256']),
+            ('grade', 'L1'),
+            ('whyNotUpgrade', '与主源"没有共同上游"证明不了：专精清单 38 对 38 一一对上、'
+                              '冷门组合同进同出，更像同一个上游的两份转述 → 不升档。'),
+            ('display', '两份并列、分歧不裁决；页面用哪一件与顺序仍以主源为准，本站一格都不改。'),
+            ('counts', OrderedDict([('setsMatched', a_match), ('setsUnmatched', len(a_unmatched)),
+                                    ('slots', a_slots), ('same', a_same), ('diff', a_diff),
+                                    ('nameDiffRows', a_namediff),
+                                    ('notInOurIndex', len(a_miss))])),
+            ('notInOurIndexSample', sorted(a_miss)[:12]),
+        ])
+        if a_unmatched:
+            doc['meta']['alt']['unmatchedSets'] = a_unmatched
+        print('第二份名单：对上 %d/%d 套、比 %d 个部位、一致 %d、分歧 %d；'
+              '另一家给的名字与本站名录不同 %d 处'
+              % (a_match, len(sets), a_slots, a_same, a_diff, a_namediff))
+        if a_miss:
+            print('   第二份提了、但我们名录里没有的装备 %d 件（如 %s）——'
+                  '界面上这些只标"本站名录里没有"，不替它编名字'
+                  % (len(a_miss), '、'.join(str(x) for x in sorted(a_miss)[:5])))
+        if a_unmatched:
+            print('   没对上的套：%s —— 第二份没有这一套，页面上这些套不画对照'
+                  % '、'.join(a_unmatched))
+    else:
+        print('没有 upstream/xr-bis.json（先跑 tools/extract-addon-bis.py），这一版不带第二份名单')
+
     blob = json.dumps(doc, ensure_ascii=False, indent=1)
     if args.dry:
         print('（--dry：没写文件）')
