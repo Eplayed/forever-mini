@@ -52,7 +52,10 @@
 }
 
 /* —— 开服倒计时：站主要它占顶部约 1/4 屏（iPhone 6 上一屏 1334rpx，取 330rpx）——
-   这块不写"数据核对到哪天"之类的话，只回答"还有几天开服"；过了那天页面直接不渲染。 */
+   这块不写"数据核对到哪天"之类的话，只回答"还有几天开服"；过了那天页面直接不渲染。
+   2026-10-24 玻璃底三层（站主：卡片加玻璃效果，让页面背景更容易看到）：
+   --glass-sheen 是斜向高光，--panel-glass 是面色的玻璃，backdrop-filter 把身后的底图虚化。
+   这张卡正好压在底图最亮的那一段上，是"透不透"最看得出的一处。 */
 .cd {
   display: flex;
   flex-direction: column;
@@ -60,7 +63,8 @@
   min-height: 330rpx;
   margin-bottom: 30rpx;
   padding: 26rpx 24rpx 24rpx;
-  background: var(--panel-glass);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--gold-line);
   border-radius: var(--r-ctl);
   box-sizing: border-box;
@@ -148,7 +152,8 @@
   min-width: 300rpx;
   min-height: 200rpx;
   margin: 0 8rpx 16rpx;
-  background: var(--panel-glass);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--gold-line);
   border-radius: var(--r-ctl);
   padding: 24rpx 22rpx 20rpx;
@@ -222,7 +227,8 @@
 }
 
 .race {
-  background: var(--panel-glass);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--gold-line-soft);
   border-radius: var(--r-ctl);
   padding: 20rpx 20rpx 8rpx;
@@ -317,7 +323,8 @@
   width: 260rpx;
   margin-right: 14rpx;
   padding: 18rpx;
-  background: var(--panel-glass);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--line-2);
   border-radius: var(--r-ctl);
   box-sizing: border-box;

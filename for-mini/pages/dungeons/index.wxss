@@ -8,6 +8,8 @@
   margin-bottom: 16rpx;
 }
 
+/* 搜索框是原生 <input>：真机上它由原生层绘制，backdrop-filter 与渐变层都不会作用在它身上，
+   所以这里只给一层面色玻璃（跟上一版一样），不冒充"玻璃效果已加"。 */
 .search-input {
   flex: 1;
   background: var(--panel-glass);
@@ -69,11 +71,15 @@
   margin-left: 16rpx;
 }
 
+/* 一座本一行，这一页的主力卡片（2026-10-24 站主：副本页卡片加玻璃效果，让背景更容易看到）。
+   三层：顶部一道反光沿 + 面色玻璃 + 把身后底图虚化的 backdrop-filter，边框换成更亮的玻璃沿。
+   注意原生 <input> 拿不到这个效果，所以搜索框不跟着改。 */
 .drow {
   display: flex;
   align-items: flex-start;
-  background: var(--panel-glass);
-  border: 1rpx solid var(--line);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1rpx solid var(--glass-line);
   border-radius: 14rpx;
   padding: 20rpx 22rpx;
   margin-bottom: 14rpx;
@@ -204,9 +210,10 @@
   z-index: 1;
 }
 
-/* 卡片改成"玻璃底"（2026-10-23 站主：三页的卡片都加一些透明度）：
-   全局 .card 是纯色，这里只在这几页覆盖成 --panel-glass，让顶上的底图透出来一点；
-   详情页/装备页没铺底图，仍用纯色那一份，不受影响。 */
+/* 卡片改成"玻璃底"（2026-10-23 站主：三页的卡片都加一些透明度；2026-10-24 二次指令：
+   要更像玻璃，让页面背景更容易看到）：全局 .card 是纯色，这里只在这几页覆盖成
+   高光 + --panel-glass + 虚化身后画面；详情页/装备页没铺底图，仍用纯色那一份，不受影响。 */
 .card {
-  background: var(--panel-glass);
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
 }

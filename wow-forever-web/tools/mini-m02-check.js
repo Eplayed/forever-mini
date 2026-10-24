@@ -654,18 +654,23 @@ async function main() {
     /token\("txt-muted"\)/.test(genTool) && /token\("gold-hot"\)/.test(genTool) && !/魔兽|WoW|暴雪/.test(genTool));
 
   /* —— 首页底图：清单只有一处真源，页面与导出层都不许各写一份 —— */
-  const uiPack = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/data/ui-art.json'), 'utf8'));
+  const uiPack = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/app/data/ui-art.json'), 'utf8'));
   const uiRels = [];
   (function walkUi(node) {
     if (!node || typeof node !== 'object') return;
     Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(node[k]); else if (k !== 'meta') walkUi(node[k]); });
   })(uiPack);
-  const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', p)));
+  /* 素材根有两个候选：`wow-forever-web/src/img/`（历史位置）与 `wow-forever-web/app/img/`
+     （2026-10-24 另一条线把整棵 src/ 改名成 app/，还在未提交的暂存区里）。
+     这条断言要核的是"这张图本地真的有文件"，不是它躺在哪个根下，所以两个都认——
+     否则那边一提交这边就整片假红。 */
+  const artFile = (rel) => ['src', 'app'].some((root) => fs.existsSync(path.join(REPO, 'wow-forever-web', root, rel)));
+  const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !artFile(p));
   const metaOut = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
   const shipped = [((metaOut.uiArt || {}).tabBg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));
   /* 官方宣传画是市场图，不是客户端原画——红线要求避开商标词，所以"画面里没有字和 logo"
      这件事必须落在 manifest 里，而不是靠下一个改图的人自己记得去看。 */
-  const keyManifest = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/img/keyart/manifest.json'), 'utf8'));
+  const keyManifest = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/app/img/keyart/manifest.json'), 'utf8'));
   const keptKeys = (keyManifest.items || []).filter((i) => i.kept !== false);
   /* 2026-10-23 站主换了一张：三个 tab 页共用官方天裔那张底图（blz-contentstack-images 是暴雪自己的
      素材库域名，比"第三方转存"更硬）。登记要求逐张查，不看第一张就算数。 */
@@ -725,10 +730,10 @@ async function main() {
 
   /* —— 2026-10-23：三个 tab 页共用官方天裔底图、职业页种族双框与组合卡换种族图标 —— */
   process.stdout.write('\nG. tab 页底图与职业页版式（2026-10-23 站主四条）\n');
-  const uiArtSrc = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/src/data/ui-art.json'), 'utf8'));
+  const uiArtSrc = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web/app/data/ui-art.json'), 'utf8'));
   const tabRel = ((uiArtSrc.tabs || {}).bg || {}).path || '';
   log('底图真源在 ui-art.json 的 tabs.bg（页面不许各自抄路径），文件本地确实有',
-    tabRel.indexOf('img/') === 0 && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', tabRel.slice(4))), tabRel);
+    tabRel.indexOf('img/') === 0 && artFile(path.join('img', tabRel.slice(4))), tabRel);
   const previewMeta = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
   log('导出层把它换成 tabBg 下发（首页背景那条旧键已撤，不留两份）',
     !!previewMeta.uiArt.tabBg && previewMeta.uiArt.bg === undefined,
@@ -764,6 +769,48 @@ async function main() {
       resolve(err ? null : String(out || '').trim());
     });
   });
+  /* 玻璃底到底透不透——量像素，不靠眼睛。
+     同一块卡片内部，"铺了底图"与"撤掉底图"两帧的主色必须差出一截：
+     2026-10-23 那版（alpha 0.72 + 压暗 0.88）实测只差 6~7 级，等于没透，站主当场说看不清背景。
+     判据取下限 10、上限 60：低于 10 是又糊成纯色，高于 60 是底图亮到会把字吃掉。
+     截图缩放与视口原点每次可能不一样，所以两个都不写死：
+     缩放按 .pagebg 的实际 CSS 宽去除以图片像素宽算，原点按两帧的差找第一处"整行都不同"的行。 */
+  const PY_GLASS = [
+    'import sys',
+    'from PIL import Image',
+    'import numpy as np',
+    'A = np.asarray(Image.open(sys.argv[1]).convert("RGB")).astype(float)',
+    'B = np.asarray(Image.open(sys.argv[2]).convert("RGB")).astype(float)',
+    'sc = A.shape[1] / float(sys.argv[3])',
+    'd = np.abs(A - B).mean(axis=2)',
+    'wide = (d > 8).sum(axis=1)',
+    'off = next((y for y in range(60, 400) if wide[y] > A.shape[1] * 0.9), 0)',
+    'l, t, r, b = [float(x) for x in sys.argv[4:8]]',
+    'x0, x1 = int(round(l * sc)) + 10, int(round(r * sc)) - 10',
+    'y0 = off + int(round(t * sc)) + 10',
+    'y1 = min(off + int(round(b * sc)) - 10, A.shape[0] - 1)',
+    'a = A[y0:y1, x0:x1].reshape(-1, 3)',
+    'e = B[y0:y1, x0:x1].reshape(-1, 3)',
+    'diff = a - e',
+    '# 两帧同一块卡片：文字与图标在两帧里是同一份像素（差≈0），只有玻璃面会把底图的颜色带进来，',
+    '# 所以取"蓝色通道差的中位数"当透出的量，卡片里那块副本缩略图不会把读数带偏。',
+    'print("%d %d %d" % (round(np.median(a[:, 2])), round(np.median(e[:, 2])), round(np.median(diff[:, 2]))))'
+  ].join('\n');
+  const glassOf = (tag, geo) => new Promise((resolve) => {
+    cp.execFile('python3', ['-c', PY_GLASS,
+      path.join(SHOT, tag + '.png'), path.join(SHOT, tag + '-nobg.png'),
+      String(geo.bg.width), String(geo.card.left), String(geo.card.top),
+      String(geo.card.left + geo.card.width), String(geo.card.top + geo.card.height)
+    ], { encoding: 'utf8' }, (err, out) => {
+      const t = String(out || '').trim();
+      if (err || !/^-?\d+ -?\d+ -?\d+$/.test(t)) { resolve(null); return; }
+      const [withBg, noBg, dB] = t.split(' ').map(Number);
+      resolve({ withBg, noBg, dB });
+    });
+  });
+  /* 只有首页那张倒计时卡与副本页第一行落在底图那一段里（图只铺顶部约 703rpx），
+     职业页默认没有卡片渲染出来（它的 .card 是"选中种族"那一块），所以这两处才量得到。 */
+  const GLASS_CARD = { 'tab-home': '.cd', 'tab-dungeons': '.drow' };
   /* 同一页"有底图 / 撤掉底图"两张截图的文字带必须一模一样：
      对不上就说明底图那两层把内容挪走了或盖住了——DOM 量不出来，只有像素知道。 */
   const tabPages = [['/pages/home/index', 'tab-home'], ['/pages/dungeons/index', 'tab-dungeons'],
@@ -773,6 +820,12 @@ async function main() {
     const has = await ev(() => !!getCurrentPages().pop().data.bgUrl);
     await shot(tag);
     const withBg = await bandsOf(path.join(SHOT, tag + '.png'));
+    const geo = GLASS_CARD[tag] ? await ev((s) => new Promise((res) => {
+      const q = wx.createSelectorQuery();
+      q.select(s).boundingClientRect();
+      q.select('.pagebg').boundingClientRect();
+      q.exec((r) => res({ card: r[0], bg: r[1] }));
+    }), GLASS_CARD[tag]) : null;
     await ev(() => { getCurrentPages().pop().setData({ bgUrl: '' }); return 1 });
     await new Promise((r) => setTimeout(r, 2500));
     await shot(tag + '-nobg');
@@ -785,6 +838,11 @@ async function main() {
     log(tag.replace('tab-', '') + ' 页：底图拼得出地址，且铺上后名单文字一格不少',
       has === true && bcA > 6 && lumB > 0 && Math.abs(lumA - lumB) / lumB <= 0.06,
       JSON.stringify({ has, withBg: [bcA, lumA], noBg: [bcB, lumB] }));
+    if (geo && geo.card && geo.bg) {
+      const g = await glassOf(tag, geo);
+      log(tag.replace('tab-', '') + ' 页卡片真的透底（同一块卡内两帧主色差 10~60 级，量像素）',
+        !!g && g.dB >= 10 && g.dB <= 60, g ? JSON.stringify(g) : '量不出来');
+    }
   }
 
   await goto('/pages/classes/index', 9000);
@@ -834,6 +892,32 @@ async function main() {
     (s.match(/rgba?\(/g) || []).forEach(() => glassBad.push(d + ' 写了裸 rgba'));
   });
   log('三页没绕过令牌自己写 rgba（颜色一律回 app.wxss）', glassBad.length === 0, glassBad.slice(0, 3).join(','));
+
+  /* 2026-10-24 站主二次指令："首页和副本页卡片添加玻璃效果，让页面的背景更容易看到"。
+     玻璃是三件东西：面色玻璃（alpha）+ 顶部一条反光 + 把身后画面虚化。只降 alpha 是"变淡"，不是玻璃。 */
+  const sheenTok = (appWxss.match(/--glass-sheen:\s*linear-gradient\([^;]*\)/) || [null])[0];
+  const blurTok = (appWxss.match(/--glass-blur:\s*blur\([^;]*\)/) || [null])[0];
+  log('反光与虚化各是一个令牌（--glass-sheen / --glass-blur），页面里不手写',
+    !!sheenTok && !!blurTok, JSON.stringify({ sheen: !!sheenTok, blur: !!blurTok }));
+  const recipeMiss = ['home', 'dungeons'].filter((d) => {
+    const s = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxss'), 'utf8');
+    return !/background:\s*var\(--glass-sheen\),\s*var\(--panel-glass\)/.test(s)
+      || !/backdrop-filter:\s*var\(--glass-blur\)/.test(s);
+  });
+  log('首页与副本页的玻璃卡三层齐全（反光 + 面色 + 虚化），少一层就是只改了个数字',
+    recipeMiss.length === 0, recipeMiss.join(','));
+  /* 原生 <input> 由原生层绘制，backdrop-filter 与渐变层作用不到它身上——
+     在它身上写这两条等于报了一个假效果，所以这里卡住。 */
+  const searchRule = (fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeons/index.wxss'), 'utf8')
+    .match(/\.search-input\s*\{[^}]*\}/) || [''])[0];
+  log('搜索框只拿面色玻璃（原生 input 拿不到虚化，不许冒充"已加玻璃"）',
+    !!searchRule && !/backdrop-filter/.test(searchRule) && !/linear-gradient/.test(searchRule),
+    searchRule.replace(/\s+/g, ' ').slice(0, 90));
+  /* alpha 有下限：m01 的切角探针靠"卡片色与 --bg 至少一个通道差 >6"认卡，
+     蓝色通道的差正好是 18×alpha，低于约 0.35 那条门禁会假红。 */
+  const glassAlpha = glassTok ? Number((glassTok.match(/,\s*([\d.]+)\s*\)/) || [0, 0])[1]) : 0;
+  log('玻璃面色 alpha 有下限（≥0.45，再低切角探针就认不出卡片了）',
+    glassAlpha >= 0.45 && glassAlpha < 1, String(glassAlpha));
 
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length
