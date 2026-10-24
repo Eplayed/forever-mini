@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const errs = [];
 const warns = [];
 const datamineOnly = [];
@@ -1781,18 +1781,20 @@ if (legacyOut) {
 }
 
 sFinish();
-// 首页搜索的分组顺序表在 src/js/app.js 里手写。漏一个板块，那一类条目就"在索引里但搜不出来"——
-// 这种错界面上看不出来，只能在这里拦。
-const appJs = fs.readFileSync(path.join(ROOT, '..', 'js', 'app.js'), 'utf8');
-const orderM = appJs.match(/SKIND_ORDER\s*=\s*\[([^\]]*)\]/);
+// 搜索的板块顺序表只有新站那一份（app/src/lib/search.js 的 KIND_ORDER）。
+// 漏一个板块不是"顺序不同"，是那一类条目在索引里但搜不出来——分组按这张表列，不在表里的静默丢掉。
+const searchJsPath = path.resolve(__dirname, '..', 'app', 'src', 'lib', 'search.js');
+const orderM = fs.existsSync(searchJsPath)
+  ? fs.readFileSync(searchJsPath, 'utf8').match(/KIND_ORDER\s*=\s*\[([\s\S]*?)\]/)
+  : null;
 if (!orderM) {
-  errs.push('app.js：找不到搜索的板块顺序表 SKIND_ORDER，首页搜索的分组无从排起');
+  errs.push('app/src/lib/search.js：找不到搜索的板块顺序表 KIND_ORDER，搜索的分组无从排起');
 } else {
-  const listed = (orderM[1].match(/'[^']+'/g) || []).map((s) => s.replace(/'/g, ''));
+  const listed = (orderM[1].match(/'[a-z]+'/g) || []).map((s) => s.replace(/'/g, ''));
   const missing = Object.keys(SK).filter((k) => listed.indexOf(k) < 0);
-  if (missing.length) errs.push('app.js 的搜索分组表缺板块：' + missing.join('、') + '（这些板块的条目在索引里但首页搜不出来）');
+  if (missing.length) errs.push('KIND_ORDER 缺板块：' + missing.join('、') + '（这些板块的条目在索引里但搜不出来）');
   const stale = listed.filter((k) => !(k in SK));
-  if (stale.length) warns.push('app.js 的搜索分组表里有索引中不存在的板块：' + stale.join('、'));
+  if (stale.length) warns.push('KIND_ORDER 里有索引中不存在的板块：' + stale.join('、'));
 }
 // 条目自带的跳转参数不许和板块声明的重复，否则拼出来的链接有两个 q=，目标页只认第一个
 SIDX.forEach((it) => {
@@ -1802,6 +1804,12 @@ SIDX.forEach((it) => {
   }
 });
 // 索引自身的卡口：名字里混进句子、页面不存在、类型没登记，都是数据出问题的信号
+// "页面在不在"问的是新站路由表（MIGRATED），不是磁盘上有没有那个 html——旧站已经删了，
+// 按文件名找页面会永远找不到，而真正会漏的是"路由加了、这张表没加"。
+const routerSrc = fs.readFileSync(path.resolve(__dirname, '..', 'app', 'src', 'router.js'), 'utf8');
+const migM = routerSrc.match(/export const MIGRATED = \{([\s\S]*?)\n\};/);
+if (!migM) errs.push('app/src/router.js：找不到 MIGRATED 表，搜索索引的跳转目标无从核对');
+const PAGES = new Set(migM ? [...migM[1].matchAll(/'([^']+)'\s*:\s*'([^']+)'/g)].map((m) => m[1]) : []);
 const seenSid = new Set();
 SIDX.forEach((it) => {
   const k = it[0], n = it[1], s = it[2];
@@ -1824,8 +1832,8 @@ SIDX.forEach((it) => {
   }
 });
 Object.keys(SK).forEach((k) => {
-  if (!fs.existsSync(path.join(ROOT, '..', SK[k][1]))) {
-    errs.push(`search：${k} 指向的页面 ${SK[k][1]} 不存在`);
+  if (PAGES.size && !PAGES.has(SK[k][1])) {
+    errs.push(`search：${k} 指向的页面 ${SK[k][1]} 不在新站路由表里`);
   }
   if (!SIDX.some((it) => it[0] === k)) warns.push(`search：类型 ${k} 一条都没有，页面或数据可能没接上`);
 });
@@ -1841,7 +1849,7 @@ fs.writeFileSync(sidPath, JSON.stringify({
   items: SIDX
 }));
 scale.search = SIDX.length;
-console.log('全站搜索索引 ' + SIDX.length + ' 条 / ' + Object.keys(SK).length + ' 类 → src/data/search.json（' +
+console.log('全站搜索索引 ' + SIDX.length + ' 条 / ' + Object.keys(SK).length + ' 类 → app/data/search.json（' +
   Math.round(fs.statSync(sidPath).size / 1024) + ' KB）');
 
 // ---------- 首页只读天赋树预览的轻量数据 ----------
@@ -1869,7 +1877,7 @@ const pvPath = path.join(ROOT, 'talent-preview.json');
 fs.writeFileSync(pvPath, JSON.stringify({
   meta: {
     generatedAt: new Date().toISOString().slice(0, 10),
-    method: 'tools/build-data.js 从 src/data/talents/*.json 派生，别手抄也别手改',
+    method: 'tools/build-data.js 从 app/data/talents/*.json 派生，别手抄也别手改',
     fields: ['行', '列', '名称', '图标键', '上限层数', '与经典旧世相比的改动状态'],
     note: '首页那棵只读预览树用的轻量数据；加点与前置判定仍在天赋计算器里，那里读完整文件。'
   },
@@ -1889,19 +1897,14 @@ Object.keys(pvClasses).forEach((cid) => {
   ts.forEach((tr) => { if (!tr.n) errs.push('talent-preview ' + cid + '：有一棵树没有系名'); });
 });
 console.log('天赋预览数据 ' + pvNodes + ' 个节点 / ' + Object.keys(pvClasses).length +
-  ' 个职业 → src/data/talent-preview.json（' + Math.round(fs.statSync(pvPath).size / 1024) + ' KB）');
+  ' 个职业 → app/data/talent-preview.json（' + Math.round(fs.statSync(pvPath).size / 1024) + ' KB）');
 
-// 上线日期只许有 meta.json 一处真相：前端那个 LAUNCH 常量对不上就会两处打脸
+// 上线日期只许有 meta.json 一处真相：前端那个 LAUNCH_AT 对不上就会两处打脸
 const metaJson = read('meta.json');
-const appJsPath = path.join(ROOT, '..', 'js', 'app.js');
-const mLaunch = /var LAUNCH = '([^']+)'/.exec(fs.readFileSync(appJsPath, 'utf8'));
-if (!mLaunch) errs.push('app.js：找不到 LAUNCH 常量，倒计时没处取日期');
-else if (mLaunch[1].slice(0, 10) !== metaJson.launch) {
-  errs.push(`上线日期两处不一致：meta.json 写 ${metaJson.launch}，app.js 的 LAUNCH 是 ${mLaunch[1].slice(0, 10)}（改一处要改两处）`);
-}
-// 新站那个 LAUNCH_AT 也算第三处，一起卡住
-const fmtPath = path.join(ROOT, '..', '..', 'app', 'src', 'lib', 'fmt.js');
-if (fs.existsSync(fmtPath)) {
+const fmtPath = path.resolve(__dirname, '..', 'app', 'src', 'lib', 'fmt.js');
+if (!fs.existsSync(fmtPath)) {
+  errs.push('找不到 app/src/lib/fmt.js：新站倒计时没处取上线日期');
+} else {
   const mFmt = /LAUNCH_AT = Date\.parse\('([^']+)'\)/.exec(fs.readFileSync(fmtPath, 'utf8'));
   if (!mFmt) errs.push('app/src/lib/fmt.js：找不到 LAUNCH_AT，新站倒计时没处取日期');
   else if (mFmt[1].slice(0, 10) !== metaJson.launch) {
@@ -2035,7 +2038,7 @@ fs.writeFileSync(scalePath, JSON.stringify({
   },
   scale: scale
 }, null, 1) + '\n');
-console.log('规模快照 → src/data/scale.json（' + Object.keys(scale).length + ' 项）');
+console.log('规模快照 → app/data/scale.json（' + Object.keys(scale).length + ' 项）');
 warns.forEach((w) => console.log('  提示 ' + w));
 if (errs.length) {
   console.error('\n校验失败 ' + errs.length + ' 项：');

@@ -1,5 +1,5 @@
 /* 首页只读天赋树预览的纯逻辑：把派生数据排成 7×4 网格、数改动状态、生成跳计算器的链接。
-   数据本身是 tools/build-data.js 从 src/data/talents/*.json 派生的 talent-preview.json。 */
+   数据本身是 tools/build-data.js 从 app/data/talents/*.json 派生的 talent-preview.json。 */
 
 export const CHG_LABEL = {
   added: '新增', modified: '改动', moved: '换层或换系', unchanged: '未变', removed: '已移除'

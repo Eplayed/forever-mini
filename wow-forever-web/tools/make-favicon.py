@@ -2,18 +2,17 @@
 # -*- coding: utf-8 -*-
 """生成站点头标（自绘几何图形，不含任何外部素材与商标元素）。
 
-产出三个文件：
-  src/img/favicon.svg            矢量头标（现代浏览器）
-  src/favicon.ico                兜底 ico（放在站点根，浏览器默认去根目录要它）
-  src/apple-touch-icon.png       iOS 主屏图标
+产出三个文件（都在 app/img/，由 tools/app-assets.py 同步进 app/public/ 根）：
+  app/img/favicon.svg            矢量头标（现代浏览器）
+  app/img/favicon.ico            兜底 ico（浏览器默认去根目录要它）
+  app/img/apple-touch-icon.png   iOS 主屏图标
 改图形只改本文件，重跑即可复现：python3 tools/make-favicon.py
 """
 import os
 from PIL import Image, ImageDraw
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "src")
-IMG = os.path.join(SRC, "img")
+IMG = os.path.join(ROOT, "app", "img")
 
 BG = "#0e1013"
 PANEL = "#171a1f"
@@ -73,9 +72,9 @@ def main():
     with open(os.path.join(IMG, "favicon.svg"), "w", encoding="utf-8") as f:
         f.write(svg_text())
     base = draw(Image.new("RGBA", (S, S), (0, 0, 0, 0)))
-    base.save(os.path.join(SRC, "apple-touch-icon.png"))
-    base.save(os.path.join(SRC, "favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)])
-    for path in (os.path.join(IMG, "favicon.svg"), os.path.join(SRC, "apple-touch-icon.png"), os.path.join(SRC, "favicon.ico")):
+    base.save(os.path.join(IMG, "apple-touch-icon.png"))
+    base.save(os.path.join(IMG, "favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)])
+    for path in (os.path.join(IMG, "favicon.svg"), os.path.join(IMG, "apple-touch-icon.png"), os.path.join(IMG, "favicon.ico")):
         print("  %-28s %d B" % (os.path.relpath(path, ROOT), os.path.getsize(path)))
 
 

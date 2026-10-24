@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-legacy.json 整形成 src/data/legacy.json —— 传承（Legacy）模块的数据基底。
+/* 把 upstream/wclbox-legacy.json 整形成 app/data/legacy.json —— 传承（Legacy）模块的数据基底。
 
    口径（2026-10-10 定，和改动清单同一把尺子）：
    - 只留名称、坐标、前置、点数、上限、图标文件名与规则数值；
@@ -21,7 +21,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const UP = path.join(ROOT, 'upstream', 'wclbox-legacy.json');
 const OUT = path.join(ROOT, 'legacy.json');
 const TREE_ID = { professions: 'crafting', adventure: 'adventure', resourcefulness: 'resource' };
@@ -344,7 +344,7 @@ const out = {
 
 const n = out.meta.counts;
 fs.writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');
-console.log('传承 → src/data/legacy.json：专长 ' + n.perks + ' / 槽位 ' + n.slots +
+console.log('传承 → app/data/legacy.json：专长 ' + n.perks + ' / 槽位 ' + n.slots +
   '（未公开 ' + n.unknownSlots + '）/ 条目 ' + n.challenges + ' 条 = 常规 ' + n.challengesRegular +
   ' + 特殊 ' + n.challengesSpecial + '（' + n.specialIds.join('、') + '）' +
   '｜常规点数 ' + n.challengePointsRegular + ' 与官方六类合计 ' + n.officialChallengeTotal + ' 对上' +

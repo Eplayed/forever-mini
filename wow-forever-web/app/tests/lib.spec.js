@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { fnv, tileStyle, classStyle, raceStyle, iconUrl, CLASS_COLOR, firstChar } from '../src/lib/glyph.js';
-import { linkFor, linkForQ, legacyUrl, isMigrated, NAV } from '../src/lib/nav.js';
+import { linkFor, hrefOf, NAV } from '../src/lib/nav.js';
 import { load, loadedKeys, forget, assetUrl } from '../src/lib/data.js';
 
 describe('自绘占位图形', () => {
@@ -33,34 +33,37 @@ describe('自绘占位图形', () => {
 });
 
 describe('导航链接归属', () => {
-  it('2026-10-13 全量迁移：18 页全部走路由', () => {
+  // 2026-10-24 旧站删除：这一站只有一个落点，linkFor 永远产出站内路由，
+  // 不再有任何一条分支拼得出 .html 文件式地址（那种地址在托管方要么 404、
+  // 要么被 SPA 兜底成"点了没反应"，2026-10-18 就是栽在这里）。
+  it('认得的页一律走站内路由', () => {
     expect(linkFor('index.html')).toEqual({ to: '/' });
     expect(linkFor('dungeons.html')).toEqual({ to: '/dungeons' });
-    expect(isMigrated('professions.html')).toBe(true);
-    expect(isMigrated('talent.html')).toBe(true);
-  });
-  it('带查询串的入口用 linkForQ 保住参数（linkFor 只认文件名）', () => {
-    expect(linkForQ('talent.html?c=warrior&tree=2&q=%E7%9B%BE%E7%89%8C')).toEqual({
+    expect(linkFor('talent.html?c=warrior&tree=2&q=%E7%9B%BE%E7%89%8C')).toEqual({
       to: { path: '/talent', query: { c: 'warrior', tree: '2', q: '盾牌' } }
     });
-    expect(linkForQ('dungeons.html')).toEqual({ to: { path: '/dungeons', query: {} } });
+    // 没参数就给纯路径，不硬造一个空 query 对象（router-link 两种都吃，少一层更好读）
+    expect(linkFor('dungeons.html')).toEqual({ to: '/dungeons' });
   });
-  it('带锚点的入口一律回旧站（新站是 hash 路由，锚点会打架）', () => {
-    expect(linkFor('races.html#traits').href).toContain('races.html#traits');
-    expect(linkFor('world.html#todo').href).toBeDefined();
+  it('锚点折成 ?to=，由目标页自己滚', () => {
+    expect(linkFor('races.html#traits')).toEqual({ to: { path: '/races', query: { to: 'traits' } } });
   });
-  it('导航结构里每个叶子都有标题与说明，且没有空 href', () => {
+  it('认不出的文件名交给 catch-all，绝不静默变成 .html 死链', () => {
+    const l = linkFor('nope.html');
+    expect(typeof l.to).toBe('string');
+    expect(l.to).toBe('/nope.html');
+    expect(hrefOf('nope.html')).toBe('#/nope.html');
+  });
+  it('导航结构里每个叶子都有标题与说明，且都落在站内路由上', () => {
     const leaves = NAV.reduce((a, g) => a.concat(g.file ? [g] : g.items), []);
     expect(leaves.length).toBeGreaterThanOrEqual(11);
     leaves.forEach((l) => {
       expect(l.t).toBeTruthy();
       const link = linkFor(l.file);
-      expect(link.to || link.href).toBeTruthy();
+      expect(link.to).toBeTruthy();
+      expect(JSON.stringify(link)).not.toMatch(/\.html/);
+      expect(hrefOf(l.file)).toMatch(/^#\//);
     });
-  });
-  it('旧站基址可配置（开发期跨端口）', () => {
-    expect(legacyUrl('dungeons.html')).toMatch(/dungeons\.html$/);
-    expect(legacyUrl('/dungeons.html')).toBe(legacyUrl('dungeons.html'));
   });
 });
 

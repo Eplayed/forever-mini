@@ -6,13 +6,12 @@
   1) 发布包必须能回答"这一版到底是哪些字节"——每个文件一个 sha256，整包一个 sha256，
      上一版留着，出事才能说清"退回哪一版"。
   2) 这个仓库里有一堆**绝不能出现在公网**的东西：插件原包与 Data.lua（在仓库外的
-     .scratch，但转存的 .tga 有过先例）、src/data/upstream/ 的第三方原料、
+     .scratch，但转存的 .tga 有过先例）、app/data/upstream/ 的第三方原料、
      docs/logs 与 *.log、AGENTS/ROLES 这类内部台账。构建产物一旦混进其中一样，
      就是把自己的加工过程发出去。这里逐条卡死，不靠人眼过。
-  3) 旧站那 19 个 .html 的链接策略要落地：新站只有 index.html，直接发 dist 的话
-     旧链接（别人书签里、别的站里链过来的 talent.html）要么 404、要么被托管方的
-     SPA 兜底吞成首页——玩家点了没反应还零报错（这条栽过）。所以打包时按
-     app/src/router.js 的 MIGRATED 生成跳转桩，名单只有一份，不会漂。
+  3) 只发新站这一份产物。旧站已于 2026-10-24 删除，旧 .html 地址不再做跳转桩
+     （站主拍板"一起撤掉"）——书签里的 talent.html 会 404，这是有意接受的结果。
+     要恢复老地址的承接，得先在 app/src/router.js 之外重新写一份映射与桩。
 
 用法：
     python3 tools/release-package.py                 # 走完整构建链再打包
@@ -80,77 +79,14 @@ def run(cmd, cwd):
 
 def build_chain():
     """同步素材 → 数据卡口 → 单测 → 构建。任何一步红都不打包。"""
-    print("[1/5] 构建链")
+    print("[1/4] 构建链")
     run([sys.executable, os.path.join(ROOT, "tools", "app-assets.py")], ROOT)
     r = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "app-assets.py"), "--check"], cwd=ROOT)
     if r.returncode != 0:
-        sys.exit("app-assets --check 非 0：public 与 src 不一致或有孤儿副本，先修再打包")
+        sys.exit("app-assets --check 非 0：public 与 app/ 源目录不一致或有孤儿副本，先修再打包")
     run(["node", os.path.join(ROOT, "tools", "build-data.js")], ROOT)
     run(["npx", "vitest", "run"], APP)
     run(["npm", "run", "build"], APP)
-
-
-def migrated_map():
-    """从 app/src/router.js 解析 MIGRATED（旧 html 文件名 → 新路由）。
-    只读不写：名单的唯一一份在路由文件里，这里抄一遍是抄"当前真在用的那份"，
-    不会再出现第二份需要人同步的表。"""
-    s = io.open(os.path.join(APP, "src", "router.js"), encoding="utf-8").read()
-    m = re.search(r"export const MIGRATED = \{(.*?)\n\};", s, re.S)
-    if not m:
-        sys.exit("router.js 里找不到 MIGRATED 表，跳转桩没法生成")
-    out = {}
-    for k, v in re.findall(r"'([^']+)':\s*'([^']+)'", m.group(1)):
-        out[k] = v
-    if len(out) < 10:
-        sys.exit("MIGRATED 只解析出 %d 条，不像全量，拒打包" % len(out))
-    return out
-
-
-def stub_body(default_path, routes):
-    """生成一个旧页跳转桩。
-
-    三种进来都要跳对（2026-10-20 独立验收点出的那一条：上一版只看 location.search，
-    把用户最初那条 talent.html?c=shaman#/world 送到了天赋页，等于把人家已经写好的
-    新站路由覆盖掉）：
-      ① 旧地址带**合法**新站 hash 路由 → 原样保留那个 hash（含它自己的 query）；
-         外层那份 ?query 只在**没有**合法 hash 时才补——来访者手写的路由比旧页参数更具体，
-         两遍都拼会造出 #/world?c=shaman 这种没人写过的地址（第一版就栽在这里）。
-      ② 旧地址没有 hash → 按 html→路由映射跳，并带上原来的 query；
-      ③ hash 不是站内已知路由（含 //外站 这种）→ 一律回落到本桩的映射目标，
-         绝不拿来访 URL 里的任意字符串当目标，桩不做外站跳转。
-    编码不动：全程用 location.hash / location.search 原串，不 decode 不 encode。
-    """
-    rjs = json.dumps(routes, separators=(",", ":"))
-    return (u"<!doctype html>\n<html lang=\"zh-CN\">\n<meta charset=\"utf-8\">\n"
-            u"<title>这一页搬家了</title>\n"
-            u"<script>(function(){\n"
-            u"  var R=%s, D=\"%s\";\n"
-            u"  var h=String(location.hash||\"\").replace(/^#/,\"\"), p=h.split(\"?\")[0];\n"
-            u"  var q=location.search||\"\";\n"
-            u"  var ok=h!==\"\" && p.charAt(0)===\"/\" && Object.prototype.hasOwnProperty.call(R,p);\n"
-            u"  location.replace(\"./#\" + (ok ? h : D + q));\n"
-            u"})();</script>\n"
-            u"<noscript><meta http-equiv=\"refresh\" content=\"1; url=./#%s\"></noscript>\n"
-            u"<p>这一页已经并入新版，正在跳转。没动的话请点"
-            u"<a href=\"./#%s\">这里</a>。</p>\n"
-            % (rjs, default_path, default_path, default_path))
-
-
-def write_stubs(site_dir, mig):
-    """给每个旧页生成一个跳转桩（index.html 除外，那是真页面）。
-    合法路由白名单直接取 MIGRATED 的值那一套，不另写一份——写两份就会漂。"""
-    routes = {v: True for v in mig.values()}
-    made = []
-    for fn, path in sorted(mig.items()):
-        if not fn.endswith(".html") or fn == "index.html":
-            continue
-        if os.path.exists(os.path.join(site_dir, fn)):
-            sys.exit("桩要写的位置已经有真文件了：%s（谁放的？）" % fn)
-        # 目标一律相对当前文档算：挂在根目录与挂在 /wow/ 下都能跳对，不写死域名也不写死层级
-        io.open(os.path.join(site_dir, fn), "w", encoding="utf-8").write(
-            stub_body(path, routes))
-        made.append(fn)
-    return made
 
 
 def scan(site_dir):
@@ -194,10 +130,10 @@ def gate_files(site_dir, files):
 
 
 def dist_is_current():
-    """打包前必查：app/dist 里的数据与素材是不是 src/ 的现在这一份。
+    """打包前必查：app/dist 里的数据与素材是不是 app/data、app/img 的现在这一份。
 
     为什么单独设这道卡：--skip-build 跳过的是构建，但 public/ 只在 vite build 那一刻
-    从 src/ 复制一次——**改了 src/data 却带着 --skip-build 打包，会得到一份"仓库里是新的、
+    从源目录复制一次——**改了 app/data 却带着 --skip-build 打包，会得到一份"仓库里是新的、
     包里是旧的"的产物，而且全程零报错**。这一条我自己踩过（2026-10-21 那次发出去
     的 releases.json 少一条，靠线上核对才发现），所以判据放在打包这一步，不指望人记得。
     """
@@ -214,10 +150,10 @@ def dist_is_current():
     # "img/ 下任何 manifest.json 都不进产物"之后两边对不上，打包直接判 dist 少 5 个文件。
     skipped = _aa.excluded
     for d in ('data', 'img'):
-        s_dir = os.path.join(ROOT, "src", d)
+        s_dir = os.path.join(ROOT, "app", d)
         for dirpath, names, fns in os.walk(s_dir):
-            # 与 app-assets.py 同一套相对法：rel 是相对 src/ 的，EXCLUDE 也是相对 src/ 写的
-            rel_dir = os.path.relpath(dirpath, os.path.join(ROOT, "src")).replace(os.sep, "/")
+            # 与 app-assets.py 同一套相对法：rel 是相对 app/ 的，EXCLUDE 也是相对 app/ 写的
+            rel_dir = os.path.relpath(dirpath, os.path.join(ROOT, "app")).replace(os.sep, "/")
             if skipped(rel_dir):
                 names[:] = []
                 continue
@@ -248,11 +184,11 @@ def main():
     if stale:
         for s in stale[:10]:
             print("  ✗ " + s)
-        sys.exit("app/dist 不是 src/ 的现在这一份（%d 处）。带 --skip-build 打包会发出旧数据——"
+        sys.exit("app/dist 不是 app/data、app/img 的现在这一份（%d 处）。带 --skip-build 打包会发出旧数据——"
                  "去掉 --skip-build 重跑构建链，或先跑 tools/app-assets.py + npm run build" % len(stale))
-    print("app/dist 与 src/ 逐文件对过，是现在这一份")
+    print("app/dist 与 app/data、app/img 逐文件对过，是现在这一份")
 
-    print("[2/5] 暂存产物")
+    print("[2/4] 暂存产物")
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     head = subprocess.run(["git", "-C", ROOT, "rev-parse", "--short", "HEAD"],
                           stdout=subprocess.PIPE).stdout.decode().strip() or "nogit"
@@ -264,14 +200,10 @@ def main():
         shutil.rmtree(os.path.join(REL, name))
     os.makedirs(os.path.dirname(stage))
     shutil.copytree(DIST, stage)
-
-    print("[3/5] 旧页跳转桩")
-    stubs = write_stubs(stage, migrated_map())
-    print("  生成 %d 个桩（%s…）" % (len(stubs), ", ".join(stubs[:4])))
     if dirty:
         print("  提醒：工作区有未提交改动，这一版标了 -dirty，不能当发布口径")
 
-    print("[4/5] 卡口")
+    print("[3/4] 卡口")
     files, problems = scan(stage)
     problems += gate_files(stage, files)
     n_data = len([f for f in files if f["path"].startswith("data/")])
@@ -292,7 +224,10 @@ def main():
     # assets/* 是 vite 打过哈希的，改一行代码就换名，可以放心 immutable 一年；
     # index.html、data/*.json、img/** 没有哈希，托管方若给一个统一的长 max-age，
     # 玩家第二天看到的还是旧数据——本站的数据每天都在改，这一条比省流量重要。
-    HASHED_RE = re.compile(r"^assets/.+-[A-Za-z0-9_-]{8}\.(js|css|woff2|woff)$")
+    # 2026-10-24 旧站删除后多了一个 .svg：index.html 里那颗头标现在指的是 app/img/favicon.svg，
+    # 文件真的在 app/ 下了，vite 就当资源打包并加哈希（以前那个路径在 app/ 里不存在，
+    # 引用只是从 public/ 原样过一遍）。扩展名写死在这里就会漏认，判据是"文件名带不带内容哈希"。
+    HASHED_RE = re.compile(r"^assets/.+-[A-Za-z0-9_-]{8}\.(js|css|woff2|woff|svg)$")
     hashed = [f["path"] for f in files if HASHED_RE.match(f["path"])]
     unhashed = [f["path"] for f in files if f["path"].startswith("assets/")]
     problems_assets = ["assets/ 下这个文件名没有内容哈希，不能按 immutable 缓存：%s" % p
@@ -303,7 +238,7 @@ def main():
         sys.exit("卡口没过（assets 命名），不打包")
     cache_policy = {
         "assets/*": "public, max-age=31536000, immutable（文件名带内容哈希，换版即换名）",
-        "index.html 与 *.html 桩": "no-cache（must-revalidate）——它是指向新哈希资源的唯一入口",
+        "index.html": "no-cache（must-revalidate）——它是指向新哈希资源的唯一入口",
         "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
         "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批",
     }
@@ -320,19 +255,18 @@ def main():
         "keyFiles": {f["path"]: f["sha256"] for f in files
                      if f["path"] == "index.html" or f["path"].startswith("assets/")},
         "dataFiles": {f["path"]: f["sha256"] for f in files if f["path"].startswith("data/")},
-        "legacyStubs": stubs,
     }
     summary.update(summary_extra)
 
     if a.check_only:
-        print("[5/5] --check-only：不写包。清单摘要：")
+        print("[4/4] --check-only：不写包。清单摘要：")
         print(json.dumps({k: summary[k] for k in
                           ("package", "files", "bytes", "fileManifestSha256")}, ensure_ascii=False, indent=1))
         # 只验不写的话别把 28 MB 暂存留在盘上（这台机器长期 89%）
         shutil.rmtree(os.path.join(REL, name))
         return
 
-    print("[5/5] 写包与回滚位")
+    print("[4/4] 写包与回滚位")
     io.open(os.path.join(stage, "PACKAGE-MANIFEST.json"), "w", encoding="utf-8").write(
         json.dumps({"package": name, "builtAt": summary["builtAt"],
                     "fileManifestSha256": manifest_sha, "files": files},

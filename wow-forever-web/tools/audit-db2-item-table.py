@@ -27,7 +27,7 @@ import sys
 HOME = os.path.expanduser('~')
 DEF_PKG = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow', 'ziliao-export-2026-10-22')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(WEB, 'src', 'data')
+DATA = os.path.join(WEB, "app", "data")
 WORD = re.compile(r'[A-Za-z][A-Za-z\'-]{4,}')
 TEXTISH = re.compile(rb'[ -~]{6,}')
 # 导出方自己确认过的列（见包内 RESULT.json 的 notes），这里只是复述，不当成本脚本的结论

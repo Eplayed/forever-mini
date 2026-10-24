@@ -19,7 +19,7 @@
 ## 跑起来
 
 1. 微信开发者工具「导入项目」选本目录，appid 用测试号（`project.config.json` 里已是 `touristappid`）。
-2. 改数据不在这里改：编辑 `wow-forever-web/src/data/*.json`，然后
+2. 改数据不在这里改：编辑 `wow-forever-web/app/data/*.json`，然后
 
 ```bash
 cd wow-forever-web

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-world.json 整形成 src/data/world.json（世界线：区域 / 稀有精英 / 书籍 / 睡袋）。
+/* 把 upstream/wclbox-world.json 整形成 app/data/world.json（世界线：区域 / 稀有精英 / 书籍 / 睡袋）。
  *
  * 这一步只做形状与口径，不做加工：
  *  - 只留事实性标识符：中文名、英文 key、等级区间、阵营、areaId/mapId、坐标、图标文件名、物品 ID；
@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const up = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'wclbox-world.json'), 'utf8'));
 const art = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8'));
 const MAP_IMG = art.maps || {};

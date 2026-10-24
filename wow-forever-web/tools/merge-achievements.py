@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 成就合并：GI 的 211 条目录 + 参考站端点能回查的那 46 条 → src/data/achievements.json（M1-B）。
+# 成就合并：GI 的 211 条目录 + 参考站端点能回查的那 46 条 → app/data/achievements.json（M1-B）。
 #
 # 分级规则（这条线唯一需要判断的地方）：
 #   L0 = id 对得上参考站端点**且中文名逐字相同**（两源互证，可自动回查）；实测 46/46 全一致；

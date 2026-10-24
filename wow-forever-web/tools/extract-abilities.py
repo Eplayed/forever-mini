@@ -9,7 +9,7 @@
 
 用法：
     python3 tools/extract-abilities.py            # 只打印，不写盘
-    python3 tools/extract-abilities.py --write    # 生成 src/data/abilities.json
+    python3 tools/extract-abilities.py --write    # 生成 app/data/abilities.json
 
 "未变"这一态官方不会写，脚本一律留空；页面显示"未统计"，不许把"没提到"当成"没变"。
 """
@@ -22,7 +22,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 
 _spec = importlib.util.spec_from_file_location("at", os.path.join(ROOT, "tools", "audit-translations.py"))
 at = importlib.util.module_from_spec(_spec)
@@ -200,7 +200,7 @@ def main():
         print(u"   %-8s %-12s %-10s %-8s %s ← %s" % (r["classId"], r["spec"] or "-", r["name"], r["state"],
                                                 r["kind"], r["officialTag"]))
     if not args.write:
-        print(u"（未写盘，加 --write 生成 src/data/abilities.json）")
+        print(u"（未写盘，加 --write 生成 app/data/abilities.json）")
         return
 
     payload = {

@@ -29,7 +29,7 @@ def arg(name, default):
 
 def main():
     src = arg('--src', DEF_SRC)
-    out_dir = arg('--out-dir', os.path.join(WEB, 'src', 'data', 'upstream'))
+    out_dir = arg('--out-dir', os.path.join(WEB, "app", "data", 'upstream'))
     path = os.path.join(src, 'XR_DungeonGuide', 'Data_ZoneMap.lua')
     if not os.path.exists(path):
         sys.exit('找不到 %s——这一份要的是插件目录里的 Data_ZoneMap.lua，'

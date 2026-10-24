@@ -102,7 +102,7 @@ Page({
       }
       this.batch = cls.batch || this.batch
       this.raceSource = (cls.data || {}).races || []
-      /* 底图走 meta 下发的那份清单（真源在 src/data/ui-art.json），页面不各自抄路径；
+      /* 底图走 meta 下发的那份清单（真源在 wow-forever-web/app/data/ui-art.json），页面不各自抄路径；
          批次取 meta 的（拿不到再退到职业索引的），断网没有批次时 assetUrl 返回空 → 版式回落纯色 */
       const mBatch = meta.batch || cls.batch
       const ui = m.uiArt || {}

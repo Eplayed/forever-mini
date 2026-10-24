@@ -15,7 +15,7 @@
 #   所以这里只把链接拆成 {kind, id}，文字全部丢掉；"这件从哪拿"由合并阶段回我们自己的
 #   items-detail.json 查（那是本站已有的掉落归属口径），不抄它的句子。
 # 礼貌：38 页、单线程、页间 0.6s、点一次阵营按钮算一次交互，不加并发。
-# 用法：python3 tools/scrape-wclbox-bis.py [--out-dir src/data/upstream] [--only warrior]
+# 用法：python3 tools/scrape-wclbox-bis.py [--out-dir app/data/upstream] [--only warrior]
 import argparse
 import json
 import os
@@ -138,7 +138,7 @@ def scrape(only):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--out-dir', default=os.path.join(ROOT, 'src', 'data', 'upstream'))
+    ap.add_argument('--out-dir', default=os.path.join(ROOT, "app", "data", 'upstream'))
     ap.add_argument('--only', action='append', help='只抓这些职业（调试用）')
     a = ap.parse_args()
     sets = scrape(a.only)

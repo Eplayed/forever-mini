@@ -9,7 +9,7 @@
 
 用法：
     python3 tools/extract-races.py            # 只打印，不写盘
-    python3 tools/extract-races.py --write    # 生成 src/data/races.json
+    python3 tools/extract-races.py --write    # 生成 app/data/races.json
 """
 import argparse
 import datetime
@@ -20,7 +20,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 
 _spec = importlib.util.spec_from_file_location("at", os.path.join(ROOT, "tools", "audit-translations.py"))
 at = importlib.util.module_from_spec(_spec)
@@ -321,7 +321,7 @@ def main():
         print(u"  特长 %-8s lore=%s traits=%d" % (t["raceCn"], bool(t["lore"]), len(t["traits"])))
 
     if not (args.write or args.link_glossary):
-        print(u"\n（未写盘，加 --write 生成 src/data/races.json，加 --link-glossary 回填词条归属）")
+        print(u"\n（未写盘，加 --write 生成 app/data/races.json，加 --link-glossary 回填词条归属）")
         return
 
     # 组装：天裔在两张表里各一行（部落/联盟），特长段里是两个子族

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-dungeons.json 并进 src/data/dungeons.json。
+/* 把 upstream/wclbox-dungeons.json 并进 app/data/dungeons.json。
  *
  * 规则：
  *  - 名单 / 等级区间 / BOSS / 掉落归属来自解包站（客户端数据转述），来源记 datamine_cn + 抓取日期。
@@ -9,14 +9,14 @@
  *  - 客户端队伍查找器表（upstream/db2-group-finder.json，由 tools/fetch-db2-groupfinder.py 取回）
  *    在这里做第三方的对账：补英文原名、写进入人数上限、并列客户端的等级区间。
  *    对账一律**每次从这份表全量重算**，字段一致时写 null——不然改一次数据就永久留一层旧结论（重跑必须幂等）。
- *  - 对账结果另外落一份 src/data/queue.json：客户端里现在能排到、本站还没有名单的条目。
+ *  - 对账结果另外落一份 app/data/queue.json：客户端里现在能排到、本站还没有名单的条目。
  *    它单独成文件，因为 tools/export-mini.js 会把整份 dungeons 原样打进小程序，
  *    混进去会让首页把座数虚报。
  */
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const dg = read('dungeons.json');
 const up = read('upstream/wclbox-dungeons.json');
@@ -179,7 +179,7 @@ try {
   });
   dg.meta.bossPortraits = { total: tot, withPortrait: n,
     note: '客户端遭遇战手册头像，经第三方站转存在本地 img/art/bosses/；源站自己标"没有这张脸"的首领留空',
-    manifest: 'src/img/art/manifest.json' };
+    manifest: 'app/img/art/manifest.json' };
   console.log('首领头像：%d / %d 挂上本地转存的脸，其余 %d 个源站也没有（界面留自绘占位）',
     n, tot, tot - n);
 } catch (e) {

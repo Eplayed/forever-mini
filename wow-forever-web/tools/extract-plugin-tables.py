@@ -214,7 +214,7 @@ def dump(path, doc):
 
 def main():
     src_dir = arg('--src', DEF_SRC)
-    out_dir = arg('--out-dir', os.path.join(WEB, 'src', 'data', 'upstream'))
+    out_dir = arg('--out-dir', os.path.join(WEB, "app", "data", 'upstream'))
     os.makedirs(out_dir, exist_ok=True)
     gi_p = os.path.join(src_dir, 'GearInsight_Forever', 'Data.lua')
     xr_p = os.path.join(src_dir, 'XR_DungeonGuide', 'Data_Skills.lua')

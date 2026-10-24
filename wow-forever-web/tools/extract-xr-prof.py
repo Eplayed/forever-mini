@@ -148,7 +148,7 @@ def parse_source(seg):
 
 def main():
     src = arg('--src', DEF_SRC)
-    out_dir = arg('--out-dir', os.path.join(WEB, 'src', 'data', 'upstream'))
+    out_dir = arg('--out-dir', os.path.join(WEB, "app", "data", 'upstream'))
     path = os.path.join(src, 'XR_DungeonGuide', 'Data_Prof.lua')
     if not os.path.exists(path):
         sys.exit('找不到 %s（插件原件在仓库外，先按 Q2 拷到 .scratch/wow）' % path)

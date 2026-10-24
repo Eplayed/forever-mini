@@ -3,17 +3,21 @@
 """视觉回归基线（docs/PLAN-open-items.md 第 10 条欠账）。
 
 site-check.py 查的是结构与文案，改完之后"页面还是不是那个页面"没有任何机器能判——
-这一份补的就是像素那一层：验收通过时把当时的 16 页冻成基线，之后再改版就跑一次比对，
+这一份补的就是像素那一层：验收通过时把当时那一版冻成基线，之后再改版就跑一次比对，
 超过阈值必须逐条解释或重冻基线。
 
-    python3 tools/visual-check.py --make            # 冻结/刷新基线（默认取当前 HEAD 的干净检出）
+2026-10-24 旧站删除：这一份从"拍 src/ 那 16 个静态页"改成"拍 app/dist 的那 21 条路由"。
+副作用是**没法再用 git archive 取历史版本**——dist 是构建产物，不在 git 里，
+所以 --rev 只剩 WORKTREE；比历史版本要先把仓库切回那一版、构建、再 --make。
+
+    cd app && npm run build                         # 先构建：这一份拍的就是 dist
+    python3 tools/visual-check.py --make            # 冻结/刷新基线
     python3 tools/visual-check.py --check           # 与基线比对，非 0 即回归
-    python3 tools/visual-check.py --check --rev WORKTREE   # 就拿现在的工作区比（含没提交的改动）
     python3 tools/visual-check.py --make --only index,dungeons   # 只跑两页，调试用
 
 三个不显然但决定成败的做法，都写在下面函数里：
-1. **取图从 git 版本取，不从工作区取**。改版那阵子工作区可能正被另一轮改到一半，
-   冻进基线就把半成品当标准了。默认 `--rev HEAD`，用 `git worktree` 拉一份只读检出。
+1. **拍之前必须构建**。dist 落后于源码时，基线冻的是旧产物（2026-10-21 那次发出去的
+   releases.json 少一条就是这么来的）；所以没 dist 直接退出，不拿半成品当标准。
 2. **拍之前把会变的字按掉**：倒计时每秒一跳（`#lchip` / `#cdD` / `#cdT`）、卡片入场动画
    进度不定、懒加载图取不到就留占位块。这三处不归一，同一份代码两次截图都能对不上，
    工具就成了噪音机。清掉所有定时器后写死成等宽占位，宽度不变所以不会引起重排。
@@ -50,8 +54,27 @@ except ImportError:
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.join(ROOT, "docs", "screenshots", "baseline")
-PAGES = ["index", "talent", "chooser", "timeline", "skills", "dungeons", "raids", "systems", "races",
-         "professions", "world", "legacy", "updates", "rank", "glossary", "provenance"]
+DIST = os.path.join(ROOT, "app", "dist")
+
+
+def routes_from_router():
+    """要拍的页 = app/src/router.js 里的路由，不是磁盘上的 html。
+       2026-10-24 旧站删除：这一份以前拍的是 src/ 那 16 个静态页，
+       写死名单的结果是"新站加了一页，视觉回归却不知道它存在"。"""
+    src = open(os.path.join(ROOT, "app", "src", "router.js"), encoding="utf-8").read()
+    block = re.search(r"const routes = \[(.*?)\n\];", src, re.S).group(1)
+    out = []
+    for path in re.findall(r"\{\s*path:\s*'([^']+)'", block):
+        if ":all" in path:
+            continue
+        out.append((path.strip("/").replace("/", "-") or "index", path))
+    return out
+
+
+ROUTES = routes_from_router()
+PAGES = [n for n, _ in ROUTES]
+ROUTE_OF = dict(ROUTES)
+
 VIEWS = {"desktop": (1440, 1000), "mobile": (375, 812)}
 # 会变的地方：清掉定时器后写死成等宽占位文字，宽度不变就不引起重排
 FREEZE = """() => {
@@ -130,6 +153,14 @@ def start_server(src):
     return httpd, "http://127.0.0.1:%d" % port
 
 
+def start_server(src):
+    httpd = ThreadingServer(("127.0.0.1", 0),
+                            functools.partial(QuietHandler, directory=src))
+    port = httpd.server_address[1]
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return httpd, "http://127.0.0.1:%d" % port
+
+
 def clean_checkout(rev):
     """把某个提交里的 src 单独取到 /tmp，避开正在被改的工作区。
        用 git archive 而不是 worktree：仓库根是 monorepo 上一层，worktree 会把整个树
@@ -183,7 +214,7 @@ def capture(src, out_dir, names, views, scale, pixels=True):
                 bad = []
                 pg.on("requestfailed", lambda r: bad.append(r.url))
                 for name in names:
-                    pg.goto("%s/%s.html" % (base, name), wait_until="networkidle")
+                    pg.goto("%s/#%s" % (base, ROUTE_OF[name]), wait_until="networkidle")
                     settle(pg)
                     key = "%s-%s" % (view, name)
                     fps[key] = pg.evaluate(FP, FP_TOKENS)
@@ -373,9 +404,10 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--make", action="store_true", help="冻结当前版本为基线")
     g.add_argument("--check", action="store_true", help="与基线比对")
-    ap.add_argument("--rev", default="HEAD",
-                    help="取哪个版本的 src 截图；WORKTREE 表示直接用当前工作区")
-    ap.add_argument("--src", help="直接指定 src 目录（跳过 git 取图，测试用）")
+    ap.add_argument("--rev", default="WORKTREE",
+                    help="只能 WORKTREE（当前工作区构建出的 app/dist）；旧站删了以后"
+                         "这一份拍的是构建产物，git archive 取不到 dist，要比历史版本请先切回去再 --make")
+    ap.add_argument("--src", help="直接指定要服务的目录（跳过构建检查，测试用）")
     ap.add_argument("--only", default="", help="逗号分隔的页名，默认 16 页全跑")
     ap.add_argument("--views", nargs="+", default=list(VIEWS), choices=list(VIEWS))
     ap.add_argument("--scale", type=float, default=0.5, help="存图降采样比例（默认 0.5）")
@@ -397,12 +429,13 @@ def main():
         sys.exit("页名不在 PAGES 里：%s" % unknown)
     if args.src:
         src = os.path.abspath(args.src)
-    elif args.rev == "WORKTREE":
-        src = os.path.join(ROOT, "src")
+    elif args.rev != "WORKTREE":
+        sys.exit("--rev 现在只认 WORKTREE：被测的是 app/dist（构建产物），"
+                 "git 里没有这一份。要比历史版本，先 git checkout 过去、npm run build、再 --make 冻基线。")
     else:
-        src = clean_checkout(args.rev)
+        src = DIST
     if not os.path.isdir(src):
-        sys.exit("取到的 src 目录不存在：%s" % src)
+        sys.exit("没有 %s：先 cd app && npm run build（视觉回归拍的是构建产物）" % src)
     sys.exit(cmd_make(args, src) if args.make else cmd_check(args, src))
 
 

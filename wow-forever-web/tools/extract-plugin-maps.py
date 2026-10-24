@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 把插件里的副本内部底图转存成站内素材（src/img/art/dungeonmaps/），给首领坐标当画布的底图。
+# 把插件里的副本内部底图转存成站内素材（app/img/art/dungeonmaps/），给首领坐标当画布的底图。
 #
 # 为什么走这一条：站内已有 28 座本的首领百分比坐标（upstream/df-dungeon-geo.json → dungeon-geo.json），
 # 但**没有那批副本内部图**，所以坐标只能以数字显示、画不成点。区域底图那 9 张插件里一张都没有，
@@ -28,7 +28,7 @@ except ImportError:
 HOME = os.path.expanduser('~')
 DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT_DIR = os.path.join(WEB, 'src', 'img', 'art', 'dungeonmaps')
+OUT_DIR = os.path.join(WEB, "app", "img", 'art', 'dungeonmaps')
 
 # 站内副本 id → 插件里那张底图。别名对不上的一律留空，不猜。
 # 两处容易搞错的：站内 razor-krendor 写的是「剃刀高地」＝Razorfen Downs → dmap_rfndowns；
@@ -97,7 +97,7 @@ def main():
     ap.add_argument('--dry', action='store_true', help='只报对得上多少张，不写文件')
     a = ap.parse_args()
 
-    geo = json.load(open(os.path.join(WEB, 'src', 'data', 'dungeon-geo.json'), encoding='utf-8'))
+    geo = json.load(open(os.path.join(WEB, "app", "data", 'dungeon-geo.json'), encoding='utf-8'))
     need = sorted(k for k, v in (geo.get('dungeons') or {}).items() if v.get('bossPos'))
     ver = {'XR': toc_version(os.path.join(a.src, 'XR_DungeonGuide'), 'XR_DungeonGuide'),
            'DF': toc_version(os.path.join(a.src, 'DungeonsForever'), 'DungeonsForever')}
@@ -164,7 +164,7 @@ def main():
     with open(os.path.join(OUT_DIR, 'manifest.json'), 'w', encoding='utf-8') as f:
         json.dump(manifest, f, ensure_ascii=False, indent=1)
         f.write('\n')
-    print('转存 %d 座本用的底图（去重后 %d 个文件，斯坦索姆两座共用一张）→ src/img/art/dungeonmaps/'
+    print('转存 %d 座本用的底图（去重后 %d 个文件，斯坦索姆两座共用一张）→ app/img/art/dungeonmaps/'
           '（含 manifest.json 记来源与许可）' % (done, len(set(v['file'] for v in files.values()))))
 
 

@@ -660,11 +660,10 @@ async function main() {
     if (!node || typeof node !== 'object') return;
     Object.keys(node).forEach((k) => { if (k === 'path') uiRels.push(node[k]); else if (k !== 'meta') walkUi(node[k]); });
   })(uiPack);
-  /* 素材根有两个候选：`wow-forever-web/src/img/`（历史位置）与 `wow-forever-web/app/img/`
-     （2026-10-24 另一条线把整棵 src/ 改名成 app/，还在未提交的暂存区里）。
-     这条断言要核的是"这张图本地真的有文件"，不是它躺在哪个根下，所以两个都认——
-     否则那边一提交这边就整片假红。 */
-  const artFile = (rel) => ['src', 'app'].some((root) => fs.existsSync(path.join(REPO, 'wow-forever-web', root, rel)));
+  /* 素材根只有 `wow-forever-web/app/img/`：2026-10-24 旧站删除时整棵 src/ 搬进了 app/，
+     那阵子为了不让两边各自假红而写的"src 与 app 都认"已经撤掉——留着的话，
+     一张图躺在 src/ 里也算"在库"，而那正是没人会再读的地方。 */
+  const artFile = (rel) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', rel));
   const uiMiss = uiRels.filter((p) => p.indexOf('img/') !== 0 || !artFile(p));
   const metaOut = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/meta.json'), 'utf8'));
   const shipped = [((metaOut.uiArt || {}).tabBg || '')].concat(Object.keys(((metaOut.uiArt || {}).cards) || {}).map((k) => metaOut.uiArt.cards[k]));

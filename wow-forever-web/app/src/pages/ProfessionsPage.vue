@@ -130,7 +130,7 @@
 
 <script setup>
 /* 专业与配方 · 与旧站 src/js/app.js 的 professions() 逐块对齐。
-   数据全部从 src/data/professions.json 现取，一个字段都不写死；
+   数据全部从 app/data/professions.json 现取，一个字段都不写死；
    掉落/产出只写数据里有的名称，没有百分比（全站红线）。
    2026-10-12 站主决定：讲"技能四档怎么读、材料条怎么比长短"与逐条来源的段落已删，
    出处集中在溯源页（provenance.html），这里只留配方表与采集点表。 */

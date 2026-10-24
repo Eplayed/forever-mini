@@ -1,5 +1,5 @@
 /* 传承规划器引擎（2026-10-23）——纯函数，不依赖 Vue，单测在 app/tests/legacy-plan.spec.js。
-   事实全部从 src/data/legacy.json 现读，这里一个数都不写死：
+   事实全部从 app/data/legacy.json 现读，这里一个数都不写死：
    上限取 meta.rules.launchSpendingCap、门槛取 perks[].treePointsRequired、
    层数取 perks[].maxRank、连线取 trees[].links、奖励档取 rewards[].at。
    红线：每级按 1 点只是**规划假设**（游戏内消耗没核实），界面必须把这句带上；

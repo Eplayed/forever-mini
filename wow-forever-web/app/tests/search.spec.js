@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { scoreName, searchRun, searchGroups, itemLink, groupLink, queryString, KIND_ORDER, GROUP_SHOWN } from '../src/lib/search.js';
 
-// 假索引按 src/data/search.json 的字段顺序：[类型, 名称, 归属, 附加参数, 分级]
+// 假索引按 app/data/search.json 的字段顺序：[类型, 名称, 归属, 附加参数, 分级]
 const KINDS = {
   cls: ['职业', 'talent.html', ''],
   tal: ['天赋', 'talent.html', 'q'],
@@ -74,7 +74,9 @@ describe('跳转目标', () => {
     expect(itemLink(KINDS, ['tal', '预知', '战士 · 防护', 'c=warrior', 'L1']).to.path).toBe('/talent');
   });
   it('组头那条"进去看全部"同样按板块生成，不认识的类型不会炸', () => {
-    expect(groupLink(KINDS, { page: 'talent.html', param: 'q' }, '潜行')).toEqual({ to: '/talent' });
-    expect(itemLink({}, ['???', 'x', '', '', 'L3']).href).toContain('index.html');
+    expect(groupLink(KINDS, { page: 'talent.html', param: 'q' }, '潜行')).toEqual({
+      to: { path: '/talent', query: { q: '潜行' } }
+    });
+    expect(itemLink({}, ['???', 'x', '', '', 'L3'])).toEqual({ to: '/' });
   });
 });

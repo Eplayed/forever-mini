@@ -160,7 +160,7 @@ footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;bor
   <header>
     <div class="kicker">WoW Forever · Internal Console</div>
     <h1>数据管线<b>控制台</b></h1>
-    <div class="sub">upstream → src/data → 构建副本 ｜ 面板是眼睛，不是手：改数据仍走 upstream / merge-*.js + refresh.sh</div>
+    <div class="sub">upstream → app/data → 构建副本 ｜ 面板是眼睛，不是手：改数据仍走 upstream / merge-*.js + refresh.sh</div>
     <div class="stamp">内部 · 非玩家页面</div>
     <div class="readouts" id="readouts">
       <div><s>基底生成</s><b id="r-gen">—</b></div>
@@ -183,14 +183,14 @@ footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;bor
     <h2><i>01</i>基底与上游 <small>成品文件在左（唯一真相），原始转述在右（页面永不读）</small></h2>
     <div class="duo">
       <div class="card"><div class="pad">
-        <h3>成品基底 <b>src/data/*.json</b></h3>
+        <h3>成品基底 <b>app/data/*.json</b></h3>
         <div class="scrollx"><table id="t-files">
           <thead><tr><th>文件</th><th class="num">条目</th><th class="num">大小</th><th>更新</th></tr></thead>
           <tbody></tbody>
         </table></div>
       </div></div>
       <div class="card"><div class="pad">
-        <h3>上游快照 <b>src/data/upstream/</b> <span class="faint" id="stale-hint"></span></h3>
+        <h3>上游快照 <b>app/data/upstream/</b> <span class="faint" id="stale-hint"></span></h3>
         <div class="scrollx"><table id="t-up">
           <thead><tr><th>快照</th><th class="num">天数</th><th>更新</th></tr></thead>
           <tbody></tbody>
@@ -318,7 +318,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") drawerClose(
 const GATES = [
   { id: "status", label: "上游新鲜度", cmd: "python tools/data-status.py", hint: "秒级" },
   { id: "build-data", label: "数据校验", cmd: "node tools/build-data.js", hint: "秒级" },
-  { id: "site-dun", label: "副本详情回归", cmd: "python tools/site-check.py --only dungeon_detail", hint: "约一分钟" },
+  { id: "site-dun", label: "副本详情回归", cmd: "python tools/site-check.py --only dungeon_geo", hint: "约一分钟" },
 ];
 let running = false;
 function drawGates() {

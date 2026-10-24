@@ -24,7 +24,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")

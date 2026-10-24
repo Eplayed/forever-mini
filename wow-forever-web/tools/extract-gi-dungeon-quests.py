@@ -4,7 +4,7 @@
 # 转手）+ vmangos 中文名；只取事实性字段（名/等级/经验/接取人/区域/开启物品/前置），
 # 任务目标原文（o=）与坐标不取（坐标站点没有承载字段，记在 provenance 里说明）。
 # 用法：python3 tools/extract-gi-dungeon-quests.py <DungeonQuestData.lua>
-# 产物：src/data/upstream/gi-dungeon-quests.json（键保留 GI 自己的 k，merge 侧再映射站点 slug）
+# 产物：app/data/upstream/gi-dungeon-quests.json（键保留 GI 自己的 k，merge 侧再映射站点 slug）
 # 幂等：同输入字节一致。
 import json
 import os
@@ -13,7 +13,7 @@ import sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, 'src', 'data', 'upstream')
+UP = os.path.join(ROOT, "app", "data", 'upstream')
 
 
 def brace_match(seg, start):

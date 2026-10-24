@@ -33,7 +33,7 @@ import unicodedata
 from collections import Counter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 DOCS = os.path.join(ROOT, "docs")
 CLASSES = ["warrior", "paladin", "hunter", "rogue", "priest", "shaman", "mage", "warlock", "druid"]
 PAGE = "https://www.wowhead.com/forever/spells/talents/"

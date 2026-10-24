@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""从 src/data/talents/*.json 与 src/data/races.json 派生「归属|中文名 → 本地图标键」映射，写 src/data/icons.json。
+"""从 app/data/talents/*.json 与 app/data/races.json 派生「归属|中文名 → 本地图标键」映射，写 app/data/icons.json。
 
 为什么要派生而不是手抄：图标键本来就在天赋与种族数据里，手抄第二份必然和上游漂移。
 界面（技能书、术语速查）按 classId|名称 查这张表，种族特长用 raceId|名称——同一个名字在不同
@@ -16,9 +16,9 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 TALENTS = os.path.join(DATA, "talents")
-ICONS = os.path.join(ROOT, "src", "img", "icons")
+ICONS = os.path.join(ROOT, "app", "img", "icons")
 GAPS = os.path.join(DATA, "icon-gaps.json")
 
 
@@ -26,9 +26,9 @@ def set_paths(root):
     """把 DATA / TALENTS / ICONS / GAPS 指到另一棵树上。
        --selftest 与 --root 用它跑临时夹具：不碰真实资料与图片。"""
     global DATA, TALENTS, ICONS, GAPS
-    DATA = os.path.join(root, "src", "data")
+    DATA = os.path.join(root, "app", "data")
     TALENTS = os.path.join(DATA, "talents")
-    ICONS = os.path.join(root, "src", "img", "icons")
+    ICONS = os.path.join(root, "app", "img", "icons")
     GAPS = os.path.join(DATA, "icon-gaps.json")
 # 合法图标键：字母数字下划线与连字符，3–80 位。
 # 连字符必须收：items.json 里 flightstone-blue、inv_chest-_cloth_skybornec60_b_01 这类
@@ -188,7 +188,7 @@ def write_all():
     payload = {
         "meta": {
             "generatedAt": datetime.date.today().isoformat(),
-            "method": "tools/build-icon-map.py 从 src/data/talents/*.json 派生，键是 classId|中文名",
+            "method": "tools/build-icon-map.py 从 app/data/talents/*.json 派生，键是 classId|中文名",
             "note": "只有天赋节点有本地转存图标。基础技能与种族特长没有可信图标来源，界面用自绘占位块，不拿别的图凑数。",
             "count": len(mapping),
             "localFiles": len(files),
@@ -200,7 +200,7 @@ def write_all():
     out = os.path.join(DATA, "icons.json")
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(json.dumps(payload, ensure_ascii=False, indent=1) + "\n")
-    print("映射 %d 条（本地图标文件 %d 张，缺文件 %d）→ src/data/icons.json" % (len(mapping), len(files), len(missing)))
+    print("映射 %d 条（本地图标文件 %d 张，缺文件 %d）→ app/data/icons.json" % (len(mapping), len(files), len(missing)))
     if dup:
         print("  同名不同图标键 %d 处：%s" % (len(dup), "、".join(dup[:5])))
     if missing:
@@ -217,7 +217,7 @@ def write_all():
         "meta": {
             "generatedAt": datetime.date.today().isoformat(),
             "method": "tools/build-icon-map.py 扫全部成品数据文件的 iconKey / icon（归一掉 .jpg 后缀），"
-                      "比对 src/img/icons/ 本地文件。范围排除 upstream/ 原料与 icons.json、icon-gaps.json 两份登记自身",
+                      "比对 app/img/icons/ 本地文件。范围排除 upstream/ 原料与 icons.json、icon-gaps.json 两份登记自身",
             "note": "这些图标键在数据里被引用，但官方 CDN 没有对应文件（多是无限服新装备）。"
                     "界面退回自绘块；回归脚本只放行这份清单里的 404。"
                     "这份清单是派生物，改数据或补图之后要重跑本脚本，不要手填。",
@@ -230,7 +230,7 @@ def write_all():
     }
     with open(GAPS, "w", encoding="utf-8") as fh:
         fh.write(json.dumps(gap_payload, ensure_ascii=False, indent=1) + "\n")
-    print("缺图登记 %d 个键 → src/data/icon-gaps.json" % len(gaps))
+    print("缺图登记 %d 个键 → app/data/icon-gaps.json" % len(gaps))
     if gaps:
         print("  %s" % "、".join(gaps[:8]))
     return 0
@@ -285,8 +285,8 @@ def selftest():
     import shutil
     import tempfile
     root = tempfile.mkdtemp(prefix="icon-gaps-selftest-")
-    data = os.path.join(root, "src", "data")
-    icons = os.path.join(root, "src", "img", "icons")
+    data = os.path.join(root, "app", "data")
+    icons = os.path.join(root, "app", "img", "icons")
     os.makedirs(data)
     os.makedirs(icons)
     open(os.path.join(icons, "valid_icon.jpg"), "wb").write(b"\xff\xd8\xff fake")

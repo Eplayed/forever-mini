@@ -375,7 +375,7 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 - **取**：名称、物品 ID、图标文件名、等级区间、新本标记、首领名单、掉落归属（谁掉什么）。
 - **不取**：它的描述文案、背景故事、BiS 结论、排行、攻略正文、任何百分比。
 - **图标**：只拿文件名，字节一律走 `tools/fetch-icons.py` 从暴雪官方 CDN 取（527 张里 526 张命中，`inv_ventureco_ring02_color4` 取不到 → 界面自绘）。
-- **原画**：官方 CDN 不提供，只能转存第三方副本 → 走 `tools/fetch-art.py`，落 `src/img/art/` + `manifest.json`，保留整目录删除即回退的下线方案。
+- **原画**：官方 CDN 不提供，只能转存第三方副本 → 走 `tools/fetch-art.py`，落 `app/img/art/` + `manifest.json`，保留整目录删除即回退的下线方案。
 - **掉落分级**：它自己也写明"谁掉落什么取自经典旧世的开放数据库，暴雪说过无限服重做过掉落"——所以**掉落一律 L2 待实测，不随名单升 L0**。
 
 ### 8.3 专业页（P2，2026-10-09 已接）
@@ -435,7 +435,7 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 | 限制 | 只留最近几个构建号，旧构建会 400/404（脚本报错并说明，不静默用旧的）；表里的 `Description_lang` 一类说明文本按红线不落盘 |
 | 我们用它做什么 | 副本的**英文原名**（客户端里游戏内就叫这个）、**等级区间**、**一次几人**（`MaxPlayers`）。取回日期与 URL 逐条挂进数据，卡口要求 `datamine_en` 必须有链接与日期 |
 | 定级 | 英文名属"官方英文原文、经第三方转述" → **L1**，不像 `datamine_cn` 那样支撑 L0（`build-data.js` 的 `isOfficial()` 里刻意没有它） |
-| 脚本 | `tools/fetch-db2-groupfinder.py` → `src/data/upstream/db2-group-finder.json`；构建号从 `_shuju/<发布号>/meta.json` 的 `foreverBuild` 现读 |
+| 脚本 | `tools/fetch-db2-groupfinder.py` → `app/data/upstream/db2-group-finder.json`；构建号从 `_shuju/<发布号>/meta.json` 的 `foreverBuild` 现读 |
 
 同一轮把 `_shuju/<发布号>/dungeons.json` 也接进来了（`tools/scrape-wclbox-shuju.py --group dungeons`）。
 它的 `enter` 列**没有采**：逐列与上面这张客户端表比对过，对不上任何一列（怒焰裂谷写 8，客户端 `MinLevel` 是 13），
@@ -482,11 +482,11 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
 
 ### 9.3 两份天赋工具站的快照已经落后，抓取器却没现读
 
-`src/data/upstream/fengshen-*.json` / `nieyi-*.json` 是 2026-10-07 的快照，**文件里没有采集日期字段**（历史欠账）。
+`app/data/upstream/fengshen-*.json` / `nieyi-*.json` 是 2026-10-07 的快照，**文件里没有采集日期字段**（历史欠账）。
 2026-10-11 现读这九页对比存档：**110 处不同**（战士 15 处改名 + 7 处点数上限变化 + 系名 狂暴→狂怒，
 另八个职业多为纯译名改动，如 元素专注→元素集中、奥术专注→奥术集中 互换）。
 `tools/merge-upstream.js` 的逻辑是"本地快照存在就不重抓"（`if (!fs.existsSync(fFile))`），
-所以直接跑它会**用 10-07 的旧译名去对齐 70338 的客户端格位**，把混合版本当成事实写进 `src/data/talents/`。
+所以直接跑它会**用 10-07 的旧译名去对齐 70338 的客户端格位**，把混合版本当成事实写进 `app/data/talents/`。
 另外它把 `collectedAt: '2026-09-13（上游自述）'`、`nameConflict: 89`、`nameVerified: 114` 写死在代码里，
 跑一次就把这些旧数盖回 `meta.json`。本轮因此**停在 merge 之前**（详见 DATA-REFRESH 报告第四节）。
 
@@ -525,14 +525,14 @@ NGA（`fid=401` 返回"账号权限不足"，`read.php?tid=` 未登录空壳，W
    补不了数值——数值仍要走 wclbox（它 35 座都带任务那一节）。
 
 对照记录：本站现有副本数据来源见 `docs/DATA-WOWHEAD-DUNGEONS-2026-10-13.md`（wowhead 盘点）与
-`src/data/upstream/wowhead-dungeon-quests.json`（2026-10-13 实采快照）。
+`app/data/upstream/wowhead-dungeon-quests.json`（2026-10-13 实采快照）。
 
 ## 十一、wclbox 的副本任务三节已采下来（2026-10-13，接第十节的判断）
 
 站主让"如果网易DD不行就去采 wclbox 详情页的任务那一节"。网易DD 确实不行（第十节），已采。
 
 - 工具：`tools/scrape-wclbox-quests.py`（渲染后 DOM 抓，逐座点「任务 / 任务物品 / 任务起始地点」三节）。
-- 产出：`src/data/upstream/wclbox-dungeon-quests.json` —— **35 座全抓到，28 座有任务，
+- 产出：`app/data/upstream/wclbox-dungeon-quests.json` —— **35 座全抓到，28 座有任务，
   任务 407 条、任务物品 377 条、起始地点 316 条**；字段齐率：任务等级 407/407、
   最低接取等级 406/407、经验值 366/407、接取 NPC+地点 397/407。
 - **刻意没抓**：任务目标描述整句（那是文案，红线只让取事实性标识符）、掉落概率（本站不写概率）。
@@ -739,7 +739,7 @@ www.wx-wow.com 同源"**、"不采集任何个人用户数据，永久免费"—
 - **成本模型（决定以后怎么重抓）**：`/_shuju/<发布号>/` 目录实测只有 `meta.json` / `changes.json` /
   `dungeons.json` 三个端点，**物品详情没有批量接口**——只能逐页 21,077 次请求。
   单线程 + 逐件 0.5s、`Accept-Encoding: gzip`（单页 76 KB → 15 KB）实测 **216.6 分钟、0 失败、无封禁迹象**。
-  产物 `src/data/upstream/wclbox-items-detail.json` 7.7 MB。可续跑（逐件 flush），中断重跑不重复请求。
+  产物 `app/data/upstream/wclbox-items-detail.json` 7.7 MB。可续跑（逐件 flush），中断重跑不重复请求。
 - **取的都是事实字段**：品质 / 部位 / 类型 / 装等 / 需要等级 / 绑定 / 属性行 / 售价 /
   来源 NPC 与区域 / 双方 build 号 / 页面自报状态。**没取**：描述正文、攻略、BiS、掉率（红线不变）。
 - **tooltip 里的两类句子要分清**（这一条是本轮踩出来的，直接影响数据质量）：
@@ -821,7 +821,7 @@ M1-D 三条板块里唯一"结构没认出来"的那条，今天用 `curl --http
 所以这个"零分歧"证明的是**我们没抄错**，不能证明"它推荐的强度对不对"——
 后者没有任何一处可以核对，因此整条线按 **L1** 留档，页面上固定写"本站整理、不是官方结论、没做模拟计算"。
 
-产物：`src/data/upstream/wclbox-bis.json`（快照 1.4 MB）→ `tools/merge-bis.py` → `src/data/bis.json`（986 KB，只存顺序与结构化指向）。
+产物：`app/data/upstream/wclbox-bis.json`（快照 1.4 MB）→ `tools/merge-bis.py` → `app/data/bis.json`（986 KB，只存顺序与结构化指向）。
 卡口在 `build-data.js` 的"配装名单"一段：ID 必须在名录、每套必须有 url + 抓取日、
 整份文件不许出现百分比与掉率措辞、分级必须 L1（升 L0 直接构建失败）。
 
@@ -833,13 +833,13 @@ M1-D 三条板块里唯一"结构没认出来"的那条，今天用 `curl --http
 **存放位置**：插件产物在 `~/Documents/project/.scratch/wow/`（55 MB，**仓库外、不进 git**），
 两个插件 `GearInsight_Forever`（49 个文件）与 `XR_DungeonGuide`（33 个文件）；
 `tools/extract-plugin-tables.py` 的默认 `--src` 就指这里。
-进仓库的只有抽出来的快照：`src/data/upstream/`（`gi-*.json` / `xr-*.json`，20 MB），
-再由 merge 层合成 `src/data/*.json`。
+进仓库的只有抽出来的快照：`app/data/upstream/`（`gi-*.json` / `xr-*.json`，20 MB），
+再由 merge 层合成 `app/data/*.json`。
 
 **取到的一样新东西**：`XR_DungeonGuide/Data_ZoneMap.lua` 的 `XR_DGDB.zonemap`——
 **80 条中文区域名 → 地图号（uiMapID）**，作者自述是用它自己那份 `npcloc`（NPC→地图号+坐标）
 与副本入口反推生成的，文件头写"零猜测、勿手改"。抽取：`tools/extract-xr-zonemap.py`
-→ `src/data/upstream/xr-zonemap.json`（带来源、抓取日与"只取映射"的边界声明）。
+→ `app/data/upstream/xr-zonemap.json`（带来源、抓取日与"只取映射"的边界声明）。
 
 **它补上了什么**：站内 73 条稀有带着百分比坐标却没有地图号（上游那份就没给这一列），
 按"不猜位置"只能进列表。这份表把 73 条**全部**补到地图号，其中 **40 条本地贴图已有 → 立刻能标上图**，
@@ -947,7 +947,7 @@ DF 的 `Data_AreaMap.lua`（54 条 areaId→地图号）与站内 43 个带 area
 
 | 控制项 | 怎么做 |
 | --- | --- |
-| 独立目录 | `src/img/art/dungeonmaps/`（27 个 `.webp` 文件覆盖 28 座本，斯坦索姆上下共用一张；744 KB），不与 CDN 素材混放 |
+| 独立目录 | `app/img/art/dungeonmaps/`（27 个 `.webp` 文件覆盖 28 座本，斯坦索姆上下共用一张；744 KB），不与 CDN 素材混放 |
 | 来源与日期 | 目录内 `manifest.json` 逐张记：来自哪个插件、哪个版本（XR 65 / DF 1.8.20）、原文件名、抓取日 |
 | **分两类记** | 每张带 `origin`：`game-capture` 是插件作者从游戏里截下来的官方副本地图，`addon-drawn` 是作者自绘的示意图（见下面那段更正） |
 | 许可原文 | manifest 里写死「DungeonsForever LICENSE：Copyright © 2026 圆圆 · 保留所有权利」，并注明这是站主拍板 |
@@ -978,7 +978,7 @@ DF 的 `Data_AreaMap.lua`（54 条 areaId→地图号）与站内 43 个带 area
 
 **这一条已经进规则了**：2026-10-19 深夜站主拍板"两件都可以"，仓库根 `AGENTS.md` 素材那一条下面
 多了一个子条，写明"同一类还包含本地插件目录里转存的加工图"、两类来源怎么记、
-自绘那种必须就地标一句，以及退路（删 `src/img/art/dungeonmaps/` 整目录）。
+自绘那种必须就地标一句，以及退路（删 `app/img/art/dungeonmaps/` 整目录）。
 
 
 ## 2026-10-20 更新插件盘点补充（未导入成品）
@@ -1003,7 +1003,7 @@ Windows 上，用 CascLib + 自写导出器直接从客户端归档里取**，�
 | 完整性 | 包自带 `RESULT.json`（194 条 path/bytes/sha256）；并入前逐条重算，**194/194 全对**才动盘 |
 | 拿到了什么 | 物品/技能/成就图标 **160 张**（64×64 PNG → 站内统一 56×56 jpg）、载入画面 **1 张**（海加尔山 512²）、DB2 **10 张**（含 CSV 与位布局，尚未消费） |
 | 没拿到（原样记，不猜） | 区域底图 9 张全 notFound（私服归档无 `MapArea`/`MapDiff`/`TextureData`，链路缺环节）；首领头像 64 只全空（51 noTexture + 13 notFound，经典 boss 头像是运行时渲的）；`8119728` 一个图标键 listfile 无同名文件；巴罗夫地穴载入图无变体；DB2 缺 8 张表 |
-| 留档 | `src/data/upstream/client-export-2026-10-21.json`：build、工具、逐文件 sha256、以及导出方自己写的那串"哪些没拿到、为什么"（**原样存，不改写不摘要**） |
+| 留档 | `app/data/upstream/client-export-2026-10-21.json`：build、工具、逐文件 sha256、以及导出方自己写的那串"哪些没拿到、为什么"（**原样存，不改写不摘要**） |
 | 边界 | 只取图标与载入画面这类**素材文件本身**；DB2 里的文本列在没有逐列核对前一律不取（WDC5 的 CSV 是 `f0..fN` 索引列，猜列名=编数据）；`ItemSparse` 若只有 enUS 名，按红线不机翻 |
 | 分级 | 这批图**不因此升 L0**——它证明的是"客户端里长这样"，不是"官方中文页这么写"。名称类记录仍按各自原有出处与分级 |
 
@@ -1013,7 +1013,7 @@ DB2 拿到了但列含义没核（判成下一单）。三种"拿不到"性质�
 
 ### 2026-10-22：排队表按客户端 build 70532 重取——内容一条没变，但挖出一个出处重复的缺陷
 
-`src/data/queue.json` 的构建戳停在 `1.60.1.70338`（2026-10-11 取），而站主的客户端已经到 **70532**。
+`app/data/queue.json` 的构建戳停在 `1.60.1.70338`（2026-10-11 取），而站主的客户端已经到 **70532**。
 按 `tools/fetch-db2-groupfinder.py --build 1.60.1.70532` 重取后逐字节比了三份：
 **70338 / 70450 / 70532 的 `GroupFinderActivity`（109 条）与 `GroupFinderCategory`（5 条）完全相同**
 ——同一张表 9265 字节、0 个字段变化。所以过期的是那个戳，不是数据；

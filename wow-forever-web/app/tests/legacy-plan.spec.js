@@ -7,10 +7,10 @@ import {
   visibleGrid, linkSegments, SCHEMA
 } from '../src/lib/legacy-plan.js';
 
-/* 全部用真数据（src/data/legacy.json）跑，不造替身：这一页最容易出事的就是
+/* 全部用真数据（app/data/legacy.json）跑，不造替身：这一页最容易出事的就是
    "引擎按想象写、数据其实是另一个形状"。2026-10-23 客户端把树从 4×4 排成 5×5、
    并且给每条挑战标了 special，这两件事都是拿真数据才看得出来的。 */
-const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../../src/data/legacy.json'), 'utf8'));
+const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../../app/data/legacy.json'), 'utf8'));
 const ctx = buildCtx(DATA);
 const P = (n) => 'legacy-perk-' + n;
 /* 三棵树里各挑一组真实存在的格子（名字来自数据，测试只认 id） */

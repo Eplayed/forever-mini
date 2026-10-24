@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""抓 wowforever.wclbox.com 的世界线结构化数据（_shuju 数据包），写进 src/data/upstream/。
+"""抓 wowforever.wclbox.com 的世界线结构化数据（_shuju 数据包），写进 app/data/upstream/。
 
 为什么不用浏览器：这一站的世界页正文虽然是客户端渲染的，但它把渲染要用的数据
 放在 /_shuju/<发布号>/ 下的静态 JSON 里（maps / map-zones / map-reach / xiyou / shuji / shuidai），
@@ -25,7 +25,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")

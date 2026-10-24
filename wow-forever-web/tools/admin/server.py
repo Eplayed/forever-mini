@@ -9,8 +9,8 @@
 只绑本机回环，不进发布口径（页面也不链回玩家站）。
 
 数据架构三层（口径见 docs/DATA-MAINTENANCE.md）：
-    src/data/upstream/  原始转述层（页面永不读）
-    src/data/*.json     成品基底（唯一真相，两站+小程序都读）
+    app/data/upstream/  原始转述层（页面永不读）
+    app/data/*.json     成品基底（唯一真相，两站+小程序都读）
     app/public/ 等       构建副本（永不手改）
 本面板只读这三层 + 跑检查，不改任何数据文件。改数据的正规路径仍是
 改 upstream 或 merge-*.js 后重跑合并——面板是眼睛，不是手。
@@ -25,7 +25,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEB_ROOT = os.path.dirname(os.path.dirname(HERE))     # wow-forever-web/
-DATA = os.path.join(WEB_ROOT, "src", "data")
+DATA = os.path.join(WEB_ROOT, "app", "data")   # 2026-10-24 起站点基底在 app/ 下
 UPSTREAM = os.path.join(DATA, "upstream")
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8830
 STALE_DAYS = 14                                        # 上游快照超过这个天数算不新鲜
@@ -38,7 +38,7 @@ OUT_MAX = 64 * 1024                                    # 命令输出截断
 GATES = {
     "status": {"label": "上游新鲜度", "cmd": ["python", "tools/data-status.py"], "timeout": 120},
     "build-data": {"label": "数据校验", "cmd": ["node", "tools/build-data.js"], "timeout": 180},
-    "site-dun": {"label": "副本详情回归", "cmd": ["python", "tools/site-check.py", "--only", "dungeon_detail"], "timeout": 300},
+    "site-dun": {"label": "副本详情回归", "cmd": ["python", "tools/site-check.py", "--only", "dungeon_geo"], "timeout": 300},
 }
 
 

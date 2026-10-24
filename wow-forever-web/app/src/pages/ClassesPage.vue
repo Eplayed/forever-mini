@@ -117,7 +117,7 @@
 
 <script setup>
 /* 职业页（每职业一页）· 与旧站 src/classes.html + app.js 的 classPage() 逐块对齐。
-   任务书 docs/PLAN-classes-and-nav-2026-10-12.md：内容一条都不写死，全部从 src/data 现取；
+   任务书 docs/PLAN-classes-and-nav-2026-10-12.md：内容一条都不写死，全部从 app/data 现取；
    稿子「职业概览」那六行里我们没有可核对来源的五行（战斗定位 / 核心资源 / 护甲类型 /
    可用武器 / 团队职责）不显示。
    2026-10-12 用户实拍后：页尾那张「本页还没确认的」卡与技能变化表的最后两列都撤掉了，

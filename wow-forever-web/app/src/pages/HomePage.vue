@@ -8,7 +8,7 @@
   <template v-else-if="S">
     <section class="card hero dh mhero">
       <!-- 整幅底图带：本站自生成的氛围图。2026-10-12 站主决定内容页不挂素材出处角标，
-           图的来路记在 src/img/art/manifest.json 与溯源页，页面上不再写。 -->
+           图的来路记在 app/img/art/manifest.json 与溯源页，页面上不再写。 -->
       <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
       <div class="herot">
         <span class="bbadge"><i></i>测试服进行中 · 客户端 {{ buildTail }}</span>

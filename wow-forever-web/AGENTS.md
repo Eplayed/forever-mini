@@ -5,91 +5,86 @@
 ## 目录
 
 ```
-src/            17 个页面（index / talent / classes / chooser / timeline / skills / dungeons / raids / systems /
-                races / professions / world / legacy / updates / rank / glossary / provenance）
-                ——零构建，当前可发布版本（页数以 ls src/*.html 为准）
-  css/app.css   设计令牌与组件样式（令牌表见 docs/UI.md）
-  js/           data.js 加载与溯源、talent.js 天赋引擎、glyph.js 本地占位图、app.js 页面渲染
-  data/         站点数据：classes / glossary / dungeons / systems / meta / timeline / abilities /
-                chooser / method / talents/*.json / upstream/
+app/            Vue 3 + Vite，这一站唯一的产品（21 条路由；实际路由以 app/src/router.js 为准）
+  data/         **全线唯一数据基底**：classes / glossary / dungeons / systems / meta / timeline / abilities /
+                chooser / method / legacy / bis / items / spells / achievements / releases / scale /
+                talents/*.json / upstream/
                 （chooser 与 method 是本站观点类内容必须标 kind；timeline 与 abilities 每条必须带官方来源，
                  official_cn 条目还必须带原文引用 quote）
-  img/icons/    从官方 CDN 转存的天赋图标 + manifest.json（可整体下线）
+  img/          本地素材：icons/（官方 CDN 转存 + manifest.json，可整体下线）、art/（客户端原画与副本底图）、
+                gen/、keyart/、favicon.ico、apple-touch-icon.png；每张图的来路记在各层 manifest.json
+  src/styles/   tokens.css（设计令牌单一事实源，令牌表见 docs/UI.md）、app.css（组件基线）、
+                board.css（只有这一站加载）、fonts.css + fonts/（自托管可变字体）
+  src/lib/      data.js 带缓存的数据层、fmt.js 纯函数、glyph.js 自绘图参数、nav.js 导航、
+                legacy-plan.js 传承加点引擎（纯函数，单测直接打真数据）
+  src/components/ IconCell / ClassTile / LevelPill / SourceList / CovBar / ZoneMap / ZoneCard / HlText
+  src/pages/    各路由页面；不要按 2026-10-09 的迁移名单判断现状
+  public/       由 tools/app-assets.py 从 app/data 与 app/img 同步出来的副本（不入库）
+  dist/         vite build 的产物，也是 site-check 与视觉回归的被测对象
 tools/          build-data.js 校验卡口、merge-upstream.js 双源对齐、fetch-icons.js 图标、
-                export-mini.js 导出小程序产物、site-check.py 界面回归自检、audit-translations.py 译名体检、
-                extract-abilities.py 抽技能四态、make-favicon.py 头标、mindmap.js 生成导图
-app/            Vue 3 + Vite 新站（2026-10-09 起按页迁移，目前迁了首页、世界页与职业页）
-                  src/lib/     data.js 带缓存的数据层、fmt.js 纯函数、glyph.js 自绘图参数、nav.js 导航与新旧归属
-                  src/components/  IconCell / ClassTile / LevelPill / SourceList / CovBar / ZoneMap / ZoneCard / HlText
-                  src/pages/     HomePage / WorldPage / ClassesPage / Unmigrated（未迁路径明确提示回旧站）
-                  public/      由 tools/app-assets.py 从 src/data 与 src/img 同步出来的副本（不入库）
-                  tests/       Vitest 单测（纯函数 + 组件行为）
-docs/           PRD / UI / reference-gap / wow-infinite-*（方案、流程、源盘点）/ data-base 采编工作台
+                export-mini.js 导出小程序产物、site-check.py 界面回归门槛、audit-translations.py 译名体检、
+                extract-abilities.py 抽技能四态、make-favicon.py 头标、release-package.py 发布包
+docs/           当前入口见 README.md；带日期的 PRD / VERIFY / DATA-* 是当时快照
                 screenshots/ 渲染证据 / reference/ 参考站实拍
-                ASSET-GAPS-*.md 素材缺口逐键审计 / APP-PARITY-*.md 新旧站逐页对拍
+                ASSET-GAPS-*.md 素材缺口逐键审计
 ```
+
+**这里没有 `src/` 那一层旧静态站了**：2026-10-24 站主拍板删除，数据与素材搬到 `app/` 下，
+两栈对拍脚本 `tools/app-parity.py` 一起删。看到任何 `src/data`、`src/img`、`src/css`、`src/js`
+的写法就当它是错路径（历史 VERIFY 文档里那些是当时的样子，不改）。
 
 ## 命令
 
 ```bash
 tools/refresh.sh <world|changes|prof|dungeons|talents|official|icons|check|publish>
-                              # 一条链跑完：抓取 → 合并 → 四道门禁；顺序错了会把半成品当成品发出去
+                              # 一条链跑完：抓取 → 合并 → 门禁；顺序错了会把半成品当成品发出去
                               # 详见 docs/DATA-MAINTENANCE.md（数据从哪来、多久动一次、动完怎么确认没坏）
 node tools/build-data.js        # 改数据必跑：校验 + 覆盖率 + 禁词体检，非 0 退出即未完成
-node tools/merge-upstream.js    # 双源对齐（会改写 src/data/talents，谨慎）
-node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 src/img/icons
+node tools/merge-upstream.js    # 双源对齐（会改写 app/data/talents，谨慎）
+node tools/fetch-icons.js       # 补图标：从官方 CDN 拉取到 app/img/icons
 node tools/export-mini.js       # 导出 for-mini 用的 OSS 产物与打包快照
-python3 tools/site-check.py       # 界面回归自检：17 页渲染 + 天赋交互 + 分组导航 + 地下城 + 专业 + 世界线 +
-                                  # 首页 + 动态/排行 + 设计基线 + 375px，非 0 即不通过
-python3 tools/site-check.py --app # 加跑新站（Vue）冒烟：要先 cd app && npm run build && npx vite preview --port 8821
-python3 tools/app-assets.py       # 把 src/data 与 src/img 增量同步进 app/public（新站构建前必跑）
-python3 tools/app-parity.py --strict   # 新旧两站逐页对拍（结构计数 / 类名 / 正文文本 / 链接 / 图片）
-python3 tools/visual-check.py --check  # 视觉回归：像素 + 生效值指纹两层（改版后跑；基线见 docs/UI-VISUAL-REGRESSION-2026-10-11.md）
-cd app && npm run build && npx vitest run   # 新站构建 + 组件级单测
+node tools/oss-release.js build --env beta --check-identity
+                                # 小程序分发层：把 oss-preview 切成不可变批次 + 指针清单
+                                # 同一文件还有 upload/verify/list/rollback/clean；指针永远最后换，见
+                                # docs/OPS-oss-分发层-poe方案落地-2026-10-21.md
+node tools/oss-release-test.js  # 分发层自测（正向+坏数据反例+客户端契约）；动过产物结构必跑
+python3 tools/app-assets.py     # 把 app/data 与 app/img 增量同步进 app/public（构建前必跑，--check 查孤儿）
+cd app && npm run build && npx vitest run   # 新站构建 + 组件级单测（build 自己会先跑 app-assets.py）
+python3 tools/site-check.py     # **唯一的界面门槛**：自己起静态服务打 app/dist，
+                                # 逐路由查渲染/红线/可访问性 + 天赋交互 + 世界点位 + 副本坐标 + 传承 + 配装 + 禁词。
+                                # 跑之前必须已 npm run build，否则断言全打在旧 dist 上。
+                                # --only talent,site_wide 用来快速探针；正式门禁不带 --only。
+python3 tools/visual-check.py --make|--check
+                                # 视觉回归：像素 + 生效值指纹两层，拍的也是 app/dist（改版后跑）
 python3 tools/audit-translations.py  # 译名体检
-python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 src/data/releases.json）
-：把每条 L0 拿回它声明的官方页逐字核对，写 docs/DATA-AUDIT-<日期>.md
+python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 app/data/releases.json）
 python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
-bash tools/serve.sh            # 本地预览：旧站 :8817 + 新站 :8821（file:// 打不开本地 JSON）
-                               # 端口跟 tools/app-parity.py 的默认值对齐；stop 子命令关掉
+python3 tools/release-package.py     # 打发布包（只发 app/dist，旧 html 的跳转桩已撤）
+python3 tools/pkg-verify.py          # 发布包验收：起严格静态服务，缺文件必须 404（vite preview 的兜底会假绿）
+bash tools/serve.sh            # 本地预览：新站 :8821（file:// 打不开本地 JSON）；stop 子命令关掉
 ```
 
 ## 站点硬规矩
 
-1. **表现层允许 Vue 3 + Vite**（2026-10-09 用户决策，按页迁移中）。仍然不许破的：无图标库、素材一律本地文件、不热链第三方域名、不引 UI 组件库、先不上 TypeScript。
-   - **字体例外（2026-10-11 用户决策）**：允许**自托管**的 OFL 字体文件（`src/fonts/` 两个可变 woff2，共 77 KB），**仍然禁止任何字体 CDN**（fonts.googleapis.com / gstatic 一律不许出现）。中文继续走系统字体；授权与来源写在 `src/fonts/FONTS-LICENSE.txt`，删掉 `src/css/fonts.css` 里两段 @font-face 即整体回落到系统字体。
-   - **2026-10-16 站主决定：旧站冻结，新站是唯一在做的产品。** `src/` 那 19 个静态页**不再加功能、不再改视觉**，
-     只作为数据与规则的参照继续存在；**所有新页面、新板块、新视觉一律只做进 `app/`（Vue 3 + Vite）**。
-     两件事随之改变：
-     ① 以前每轮"两栈同步"的规矩作废——新页不必再补一份旧站实现；
-     ② `tools/app-parity.py` 从**发布门槛降级为参考报告**（它比的是"新站像不像旧站"，
-        而新站现在要的是比旧站更好看、更好用，对拍红不等于做错）。
-     仍然有效的：`build-data.js`（数据卡口）、`site-check.py --app`（新站界面回归，这才是界面门槛）、
-     `audit-translations.py`（译名逐字回查）。**要恢复两栈同步，先改这条。**
-   - **`src/data/*.json` 仍是唯一的数据基底**，新站一律运行时读同一份数据，不得自带第二份、不得在组件里写死内容数字。
-   - 旧 `src/js/` 继续守无框架约束（不用 `?.` 与 `??`、不引依赖）；`app/` 里可以用现代语法。
-   - 旧页与新页并存期间，**旧站的 19 页仍是 `site-check.py` 默认遍历的回归对象**（防它坏），
-     但新视觉/新交互的验收看 `app/` 的实拍与 `--app` 断言，不再要求两站逐字一致。
-2. **数据与代码分离**：改内容只动 `src/data/`，不碰渲染逻辑。
+1. **只有 `app/`（Vue 3 + Vite）这一个站**。仍然不许破的：无图标库、素材一律本地文件、不热链第三方域名、不引 UI 组件库、先不上 TypeScript。
+   - **字体例外（2026-10-11 用户决策）**：允许**自托管**的 OFL 字体文件（`app/src/styles/fonts/` 两个可变 woff2，共 77 KB），
+     **仍然禁止任何字体 CDN**（fonts.googleapis.com / gstatic 一律不许出现）。中文继续走系统字体；
+     授权与来源写在 `app/src/styles/fonts/FONTS-LICENSE.txt`，删掉 `app/src/styles/fonts.css` 里两段 @font-face 即整体回落到系统字体。
+   - **2026-10-24 站主决定：删除旧站。** 那份零构建静态站（19 页 + `src/js/` 那套无框架实现）已整目录删除，
+     `tools/app-parity.py`（两栈对拍）随它一起删；"两栈同步"这个概念从此不存在。
+     当时降级为参考报告的三条，现在的最终态是：
+     ① 界面门槛只剩 `python3 tools/site-check.py`（它自己起静态服务打 `app/dist`，跑前必须 `npm run build`）；
+     ② 老地址（`talent.html` 那一类）不再做跳转桩，发布包里除了 `index.html` 不许有第二个 `.html`，
+        `pkg-verify.py` 钉的就是"访问它必须 404"——要恢复承接老书签，得重写一份映射与桩，先改这条；
+     ③ 仍然有效的：`build-data.js`（数据卡口）、`audit-translations.py`（译名逐字回查）。
+   - **`app/data/*.json` 是唯一的数据基底**，页面一律运行时读同一份数据，不得自带第二份、不得在组件里写死内容数字。
+2. **数据与代码分离**：改内容只动 `app/data/`，不碰渲染逻辑。
 3. **数据层**每条对外展示的条目必须带 `provenance`（来源类型 + URL + 核对日期）与 `level`（L0–L3），由 `build-data.js` 卡口：L0 无官方来源、iconKey 指向不存在的本地文件、掉落出现百分比、节点 id 重复、前置指向不存在的 id —— 任一命中直接构建失败。这条**没有放松**。
-   3a. **但内容页面上不显示这些标记**（2026-10-12 用户决定，面对游戏玩家）：分级徽标、逐条「来源」按钮、来源轨、覆盖率条、素材出处角标（示意图 / 本地转存）一律不上内容页，
-       出处与分级**集中在 `provenance.html`（溯源页）说**。落地方式：`src/js/data.js` 里 `pill / sources / covBar` 按 `data-page` 开关，只在溯源页输出；
-       新站对应 `LevelPill / SourceList / CovBar` 组件同样只在溯源路由渲染。
-       **加新页面时不要又把手写徽标或「来源」按钮画回内容页**，`site-check.py` 有反向断言会红。要在内容页恢复出处，先改这条。
-       **别一并撤掉这四类句子**（撤了就是违红线或骗人）：① 两源分歧那一行红字（`.conf`，见第 4 条）；② 排行 / 问答处"这是本站整理的排序，不是强度排行"那句；③ 缺数据时写在格子里的取值本身（`待实测` / `待补` / `奖励待补` / `没有这张载入图`）与空态的原因（取自数据字段，不手写）；④ 同一张卡里两个数对不上时的对照行。细则与清单见 `docs/UI.md` 3.35。
-       **①有两条已拍板的例外**（2026-10-13 站主决定，都在副本线）：
-       - **等级区间**不再摆两个数——按参考站 `wowforever.wclbox.com/fuben` 卡片显示的那个数定稿，官方公告那个数留在每条记录的 `levelRangeOfficial` 里没删，决定与出处写在溯源页（`dungeons.json` 的 `meta.levelRangeSettled` 驱动，界面读它）。
-       - **译名**一律按官方来——页面上只写官方那个名字，转载/另一站的写法留在 `nameCnConflict` 里（数据与卡口照旧），不再摆"译名冲突…待定稿"那行。副本、团本、区域与稀有全查过：只有领主大厅（官方「领主大厅」/ 17173「诸王大厅」）一处有冲突，世界线 44 区域 / 36 稀有 / 36 书 / 48 图**根本没有别名字段**。
-       **人数与英文原名这两类分歧照旧一条不许撤。** 要恢复上面两条先改这条。
-       **另有一条新口径**（同日）：**玩家看得见的地方不许出现"讲资料出处与缺口"的话**——
-       `只有单一来源` / `这一条只有另一份资料有` / `接取地点待补` / `未标` / `同一任务 N 个版本` 这类
-       是给维护者看的，一律不上页面（数据字段 `source` / `xpFrom` / `variants` 照旧留着，卡口照查）。
-       缺的格子**留空**，不写"待补"。例外两种要留：① 玩法信息（`用物品开启：X`）；
-       ② 两源数不一样时**两个数都得摆**（红线），但换成玩家读得懂的写法
-       （`经验值有两个说法：850 / 1050，还没实测`，不是"本站取…另一份资料写…"）。
-4. 两源译名分歧的节点必须同时保留 `nameCn` 与 `nameAlt`，页面红框标注，不做取舍掩盖。
-4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`src/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
-5. **天赋层级点数门槛（2026-10-22 站主改口径，推翻本条原写法）**：`src/data/talents/*.json` 的 `rules`
+   3a. **内容页展示选定值，来源和历史分歧集中在溯源页**（2026-10-20 站主决定）。分级徽标、逐条来源轨和维护者术语不回流内容页；`LevelPill / SourceList / CovBar` 只在溯源页使用。插件有明确事实字段时按根规则的最新插件优先级选主值，旧值与冲突仍在数据和溯源页留档；插件缺字段才用注明来源的旧兜底，不把解析失败当成明确删除。缺字段显示“待实测”等真实状态，不编值。
+       排行仍标“本站整理，非官方结论”；`addon-drawn` 地图必须就地标“这张是示意图，不是游戏里的地图”。这些说明不能被“内容页不展示出处”的旧决定吞掉。具体来源优先级和天裔小图标例外见根 `AGENTS.md` 2026-10-20 追加决定；历史决策与已撤口径见 `docs/VERIFY-pages-and-index-2026-10-21.md`。
+4. 两源译名和数值分歧在数据里完整保留并注明来源；内容页使用选定值，分歧到溯源页查，不再要求内容页画旧 `.conf` 红框。
+4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`app/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
+5. **天赋层级点数门槛（2026-10-22 站主改口径，推翻本条原写法）**：`app/data/talents/*.json` 的 `rules`
    （`totalPoints` + `tierUnlockCost`）**随分片下发**，网页与小程序的天赋页都用它做加点判定——站主要的是
    "天赋树是模拟器的样子，可以模拟点击配置，和网页版那样的功能"。但这组数仍是**按经典旧世层级推的**，
    `grid.note` 自己写着"仍未核实"，所以两条硬约束跟着来：① 界面上必须固定一句
@@ -99,8 +94,8 @@ bash tools/serve.sh            # 本地预览：旧站 :8817 + 新站 :8821（fi
 6. **缺口要交代，但不再占内容页**（2026-10-12 用户实拍后改口径，推翻同日早上"每页自动挂一张清单"那条）：
    内容页不再挂「本页还没确认的」「这一页没有的」「同一页里两种说法并存」「按词找特长」这类卡片。
    缺口仍由数据字段（`notCollected` / `unconfirmed` / `conflicts`）带着来源集中到**溯源页**说，
-   页面上只留会影响玩家判断的那一句（层级门槛没实测、两个叫法并存），写成一行 `.note` / `.conf`，不单独开卡。
+   页面上只留会影响玩家操作判断的真实状态（如层级门槛待实测），不把旧 `.conf` 分歧提示加回内容页。
    文案面向玩家，不出现内部术语。**别把删掉的卡又加回来**——要恢复先改这条。
-   - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 第 18 节扫全部页面与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
-   - 网页上的「本站更新」读 **手写的 `src/data/releases.json`**（一条对应一个真实提交，`build-data.js` 会回仓库核对提交号）；git 自动生成的开发日志在 `docs/CHANGELOG-DEV.md`，**不进页面**。改了玩家能看到的东西就要补一条。
+   - **禁词表 `tools/copy-banned.json` 是硬闸**：`build-data.js` 扫数据文件的字符串值，`site-check.py` 的 copy 小节逐路由扫渲染文字与来源展开后的渲染文字。「上游 / 口径 / mapId / 本轮 / 结构化 / 卡口 / 构建 / 文件名 / 脚本名」这类话不许上页面；加词前先想替代说法，别把正常中文（如物品名「大口径秘银步枪」）禁掉。
+   - 网页上的「本站更新」读 **手写的 `app/data/releases.json`**（一条对应一个真实提交，`build-data.js` 会回仓库核对提交号）；git 自动生成的开发日志在 `docs/CHANGELOG-DEV.md`，**不进页面**。改了玩家能看到的东西就要补一条。
 7. 界面改动必须有 `docs/screenshots/` 截图（桌面 + 375px 移动端），构建通过不算完成。**留存口径（2026-10-13 起）**：`docs/screenshots/` 只留当前有效的一套——按日整站重拍进 `check-YYYY-MM-DD/`，新批次落库时把上一批 tar 进 `docs/screenshots-archive/`（已 gitignore，不入库）再删原目录；根目录散图同页重拍直接覆盖，不无限新增。翻旧图去 `screenshots-archive/*.tar.gz`（清单见其 `MANIFEST.txt`）；旧 VERIFY 记录里引用的归档路径已失效，以 tar 内文件为准。仓库新克隆体积要等 git 历史重写才会真正变小（`wow-forever-web/docs/ARCH-REVIEW-2026-10-13.md` P0-2）。

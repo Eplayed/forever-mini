@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""转存客户端原画（职业天赋背景图、副本载入图）到 src/img/art/，本地留存、不热链。
+"""转存客户端原画（职业天赋背景图、副本载入图）到 app/img/art/，本地留存、不热链。
 
 红线口径：这些是暴雪游戏美术，目前只有第三方站托管的副本（官方 CDN 不提供）。
 2026-10-08 用户决策：网页与小程序都用。执行要求是全部落到独立目录 +
@@ -24,8 +24,8 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ART = os.path.join(ROOT, "src", "img", "art")
-DATA = os.path.join(ROOT, "src", "data")
+ART = os.path.join(ROOT, "app", "img", "art")
+DATA = os.path.join(ROOT, "app", "data")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 WCF = "https://wowclassicforever.info"
@@ -348,7 +348,7 @@ def bosses(man, probe_only=False):
 # ---------------------------------------------------------------------------
 # 27 棵天赋树的英文键名是从参考站天赋页 DOM 现挖的（文件名规律 tianfu-beijing/<Class><Tree>-<角>.webp，
 # 每系四张角图：TopLeft / TopRight / BottomLeft / BottomRight）。括号里是我们
-# src/data/talents/<职业>.json 里那一系的 nameCn——下载前逐条回对，对不上就停，不靠位置猜。
+# app/data/talents/<职业>.json 里那一系的 nameCn——下载前逐条回对，对不上就停，不靠位置猜。
 # 为什么必须回对：无限服改过系名，术士三系的键是 Curses / Summoning / Destruction，
 # 萨满第一系叫 ElementalCombat，都不按经典旧世的规矩来。
 SPEC_TREES = {
@@ -541,7 +541,7 @@ def panels(man):
 
 
 def write_art_index(man):
-    """把 manifest 收成界面能直接用的索引：src/data/art.json。
+    """把 manifest 收成界面能直接用的索引：app/data/art.json。
     页面据此决定"有原画就用原画、没有就自绘"，不靠试错加载。"""
     idx = {"classes": {}, "dungeons": {}, "maps": {}, "races": {}, "factions": {},
            "factionCities": {}, "bosses": {}, "specs": {}, "classBanners": {},
@@ -606,7 +606,7 @@ def write_art_index(man):
     idx["meta"]["addonFiles"] = addon
     io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
-    print(u"界面索引 → src/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
+    print(u"界面索引 → app/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
           u"阵营徽标 %d / 阵营城市 %d / 首领头像 %d / 专精背景 %d / 职业横幅 %d / "
           u"板块图 %d / 场景图 %d / 纹理 %d）" % (
               len(idx["classes"]), len(idx["dungeons"]), len(idx["maps"]), len(idx["races"]),
@@ -623,14 +623,14 @@ def main():
     ap.add_argument("--force", action="store_true",
                     help="专精背景图已存在的也重抓（源站换了角图时用）")
     ap.add_argument("--index-only", action="store_true",
-                    help="不下载，只按现有 manifest 重算 src/data/art.json")
+                    help="不下载，只按现有 manifest 重算 app/data/art.json")
     ap.add_argument("--probe", action="store_true",
                     help="只问源站有没有这张图，不落盘（首领头像用它先量缺口）")
     args = ap.parse_args()
     man = load_manifest()
     if args.index_only:
         write_art_index(man)
-        print(u"manifest 共 %d 条 → src/img/art/manifest.json" % len(man["items"]))
+        print(u"manifest 共 %d 条 → app/img/art/manifest.json" % len(man["items"]))
         return
     if args.what == "bosses" and args.probe:
         bosses(man, probe_only=True)
@@ -655,7 +655,7 @@ def main():
     man["total"] = len(man["items"])
     save_manifest(man)
     write_art_index(man)
-    print(u"manifest 共 %d 条 → src/img/art/manifest.json" % man["total"])
+    print(u"manifest 共 %d 条 → app/img/art/manifest.json" % man["total"])
 
 
 if __name__ == "__main__":

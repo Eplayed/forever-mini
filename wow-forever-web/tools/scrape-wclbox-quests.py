@@ -9,7 +9,7 @@ wclbox 的 35 座都带着，是目前覆盖面最全的一条路（wowhead 只�
   1. 任务目标描述整句（"在奥格瑞玛找到怒焰裂谷，杀掉 8 个……然后向……复命"）——
      那是文案，红线要求第三方站只取事实性标识符（名称 / 等级 / 数量 / 归属）。
   2. 掉落概率（"(<0.1%)" "(40%)"）——本站掉落一律不写概率。
-产出只写 src/data/upstream/，不直接改成品数据文件；要上页面得再过 merge 与 build-data。
+产出只写 app/data/upstream/，不直接改成品数据文件；要上页面得再过 merge 与 build-data。
 
 用法：
     python3 tools/scrape-wclbox-quests.py                 # 全部 35 座
@@ -24,7 +24,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
 OUT = os.path.join(UP, "wclbox-dungeon-quests.json")
 
@@ -156,7 +156,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default="", help="逗号分隔的 slug，默认跑名单里全部")
     args = ap.parse_args()
-    dg = json.load(io.open(os.path.join(ROOT, "src", "data", "dungeons.json"), encoding="utf-8"))
+    dg = json.load(io.open(os.path.join(ROOT, "app", "data", "dungeons.json"), encoding="utf-8"))
     rows = (dg.get("newDungeons") or []) + (dg.get("classicDungeons") or [])
     pairs = [(r.get("upstreamSlug") or r["id"], r["id"], r.get("nameCn") or r.get("nameEn")) for r in rows]
     if args.only:

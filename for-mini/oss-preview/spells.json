@@ -1,7 +1,7 @@
 {
  "meta": {
   "generatedAt": "2026-10-20",
-  "source": "wow-forever-web/src/data/spells.json",
+  "source": "wow-forever-web/app/data/spells.json",
   "pageNote": "法术书按无限测试版客户端读出，与经典旧世逐条对照状态；等级数与起学等级另按两份职业技能表交叉核对过，两边说法不一样的两条都留着。",
   "levelPolicy": "名字与状态来自客户端解包转述，按 2026-10-08 站主定的档算 L0；插件来源（作者译名 / Wowhead 转译）不参与定名。",
   "counts": {

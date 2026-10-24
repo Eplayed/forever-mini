@@ -8,7 +8,7 @@ module.exports = {
  },
  "launch": "2026-11-05",
  "checkedAt": "2026-10-07",
- "source": "wow-forever-web/src/data",
+ "source": "wow-forever-web/app/data",
  "coverage": {
   "L0": 250,
   "L1": 111,

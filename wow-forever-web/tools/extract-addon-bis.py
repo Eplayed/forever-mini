@@ -40,7 +40,7 @@ REPO = os.path.dirname(ROOT)
 # 插件装在仓库外（不进 git）：…/project/.scratch/wow/，比仓库根再往上一层
 SCRATCH = os.path.join(os.path.dirname(REPO), ".scratch", "wow")
 SRC = os.path.join(SCRATCH, "XR_DungeonGuide", "Data_Bis.lua")
-OUT = os.path.join(ROOT, "src", "data", "upstream", "xr-bis.json")
+OUT = os.path.join(ROOT, "app", "data", "upstream", "xr-bis.json")
 
 # 2026-10-22 与 ai_data 包内核对：本地 XR 66 这一份与包内那份字节相同（sha256 前 16 位一致），
 # 所以 BiS 这一件不受"本地 66 / 包出自 75"那个版本问题影响。钉住它，换了就要重新核过再改。

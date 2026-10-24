@@ -2,11 +2,11 @@
 
 > **2026-10-21 现状校正（只加导航，正文的问答口径与权重不动）：** 下面写的页面 `src/chooser.html`
 > 是**已冻结的旧站**那一版。当前产品页是新站 `app/src/pages/ChooserPage.vue`，路由 `/#/chooser`
-> （见 `app/src/router.js:61`，旧路径跳转桩在 `:36`）。数据基底仍是同一份 `src/data/chooser.json`——
+> （见 `app/src/router.js:61`，旧路径跳转桩在 `:36`）。数据基底仍是同一份 `app/data/chooser.json`——
 > **改问答口径改数据文件，别去改旧站那页。**
 
 版本：v1 ｜日期：2026-10-08 ｜状态：**已定（含两处机制纠错，见 §5）**
-数据文件：`src/data/chooser.json` ｜页面：`src/chooser.html`
+数据文件：`app/data/chooser.json` ｜页面：`src/chooser.html`
 上游依据：`docs/reference-gap.md` 第四节建议第 1 项
 
 ## 1. 这个问答要解决什么
@@ -59,7 +59,7 @@
 
 ## 6. 改动流程（谁都能照做）
 
-1. 只改 `src/data/chooser.json`，**不改 `app.js`**（题干、选项、权重都是数据）。
+1. 只改 `app/data/chooser.json`，**不改 `app.js`**（题干、选项、权重都是数据）。
 2. `node tools/build-data.js`：会拦题目或选项 id 重复、选项无权重、权重指向不存在的职业、题目少于 5 道、`kind` 没标 `site-opinion`。
 3. `python3 tools/site-check.py`：会跑完整问答流程并检查强度话术。
 4. 在 `ROLES.md` 记一行，说明改了哪条、依据是 A/B 哪一层。

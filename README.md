@@ -8,7 +8,7 @@
 
 | 目录 | 是什么 | 状态 |
 | --- | --- | --- |
-| `wow-forever-web/` | 资料站：纯静态 17 页（`src/`，页数以 `ls src/*.html` 为准）+ Vue 新站（`app/`，按页迁移中）、站点数据（`src/data/`）、构建与导出脚本（`tools/`）、全部角色产出（`docs/`） | 已跑通，`node tools/build-data.js` 通过 |
+| `wow-forever-web/` | 资料站：`app/` 是唯一的产品（Vue 3 + Vite，21 条路由），数据基底在 `app/data/`、素材在 `app/img/`、全站样式在 `app/src/styles/`；工程脚本在 `tools/`，角色产出在 `docs/` | 旧零构建静态站已于 2026-10-24 删除 |
 | `for-mini/` | 无限服小程序：原生微信小程序，与站点共用同一份数据基底 | 底子：数据层 + 中英速查 + 首页完整度已可用，四个模块待实现 |
 | `backend/`（将来） | 数据生产与上传服务 | 未建 |
 
@@ -21,10 +21,16 @@ cd wow-forever-web && node tools/build-data.js
 # 导出小程序产物：oss-preview/ 全量 JSON + data/*-snapshot.js 打包快照
 node tools/export-mini.js
 
-# 本地预览：旧站 :8817 + Vue 新站 :8821（和 app-parity.py 默认连的两个口对齐）
+# 构建 + 组件单测（界面回归打的就是这份 dist，所以构建必须在前）
+cd app && npm run build && npx vitest run && cd ..
+
+# 界面门槛（自己起静态服务打 app/dist，不用先起 serve.sh）
+python3 tools/site-check.py
+
+# 本地人看：新站 :8821
 bash tools/serve.sh            # 起；bash tools/serve.sh stop 关
 
-# 上游天赋数据对齐（会改写 src/data/talents，谨慎）
+# 上游天赋数据对齐（会改写 app/data/talents，谨慎）
 node tools/merge-upstream.js
 ```
 
@@ -32,10 +38,10 @@ node tools/merge-upstream.js
 
 ## 协作规则
 
-角色机制、红线与验收基线见仓库根 **`AGENTS.md`**，交接台账见 **`ROLES.md`**；资料站工程约定见 `wow-forever-web/AGENTS.md`，小程序侧约定见 `for-mini/AGENTS.md`。要点：
+角色机制、红线与验收基线见仓库根 **`AGENTS.md`**，交接台账见 **`ROLES.md`**；资料站工程约定见 `wow-forever-web/AGENTS.md`，小程序侧约定见 `for-mini/AGENTS.md`。当前文档入口见 `wow-forever-web/docs/README.md`，历史报告不是当前规则。要点：
 
 - 英文官方名是 **Forever**，不是 Infinite。
-- 个人主体：类目只有 `工具-信息查询`，零 UGC，不做付费。
+- 小程序个人主体：类目只有 `工具-信息查询`，零 UGC，不开虚拟支付或付费会员；网页具体边界看根 `AGENTS.md`。
 - 站名与素材避开商标词，页脚固定「非官方粉丝资料站，与暴雪娱乐及网易无关」。
 - 数据分级 L0–L3，缺数据显示「待实测」，禁止机翻与编造，掉落不写百分比。
 - 关键路径是小程序备案 1–20 工作日，任何排期先排它。

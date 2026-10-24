@@ -14,7 +14,7 @@
 #   <span class="tfk-tag k-unchanged|k-modified|k-added|k-new"> + <small>页签 · 共N级 · M级起可学</small>
 #   （1 级的法术没有"共N级"那一段。）
 # 礼貌：9 个页面、单线程、页间 0.5s，gzip；页面静态可取，不用浏览器。
-# 用法：python3 tools/scrape-wclbox-spells.py [--out-dir src/data/upstream]
+# 用法：python3 tools/scrape-wclbox-spells.py [--out-dir app/data/upstream]
 import json
 import os
 import re
@@ -122,7 +122,7 @@ def parse_page(html, class_id, class_cn):
 
 def main():
     out_dir = sys.argv[sys.argv.index('--out-dir') + 1] if '--out-dir' in sys.argv \
-        else os.path.join(ROOT, 'src', 'data', 'upstream')
+        else os.path.join(ROOT, "app", "data", 'upstream')
     os.makedirs(out_dir, exist_ok=True)
     spells, per_class, pages = [], {}, {}
     page_build, page_release = None, None

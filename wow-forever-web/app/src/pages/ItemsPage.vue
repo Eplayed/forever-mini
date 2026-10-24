@@ -8,7 +8,7 @@
   <template v-else-if="d">
     <!-- 新站独有页（旧站已冻结，无对拍基准）。交互口径照站主拍板的原型
          docs/prototypes/items-page-prototype.html：状态/分类/细分/等级区间/搜索/排序/分页。
-         数据全部来自 src/data/items.json（全量名录，件数以 src/data/scale.json 为准），单源 L0：客户端解包经参考站转述。 -->
+         数据全部来自 app/data/items.json（全量名录，件数以 app/data/scale.json 为准），单源 L0：客户端解包经参考站转述。 -->
     <div class="card">
       <div class="cdhead noart big"><h1 class="pt">物品库</h1></div>
       <p class="dim">测试版客户端里的每件物品，与经典旧世逐条对照：新增、改动、不变，还是无限里已经没有。
@@ -377,6 +377,10 @@ function typeText(x) {
   .itt td::before{content:attr(data-k);color:var(--lead);font-size:11.5px;flex:none;align-self:center}
   .itt td:first-child{padding-top:12px}
   .itt td:last-child{padding-bottom:12px}
+  /* 手指没有"指针精确"这一说：翻页那颗 34×32 的格子在桌面上够用，在 375 上是戳不中的小点。
+     同一批控件（重置筛选）一起抬到 44，别只改分页器留下第二种尺寸。 */
+  .pager button{min-width:44px;height:44px}
+  .reset{min-height:44px;padding:0 16px}
 }
 /* 详情抽屉：右侧滑出，移动端整宽；令牌取 tokens.css 不新开颜色 */
 .row{cursor:pointer}

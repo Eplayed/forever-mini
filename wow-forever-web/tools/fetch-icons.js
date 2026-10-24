@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-/* 从暴雪官方图标 CDN 下载天赋图标到本地 src/img/icons/，并生成清单。
+/* 从暴雪官方图标 CDN 下载天赋图标到本地 app/img/icons/，并生成清单。
    图标文件名只是客户端资源标识符；图片由官方 CDN 提供，本地留存供站点引用。 */
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA = path.join(ROOT, 'src', 'data');
-const IMG = path.join(ROOT, 'src', 'img', 'icons');
+const DATA = path.join(ROOT, "app", "data");
+const IMG = path.join(ROOT, "app", "img", 'icons');
 const CDN = 'https://render.worldofwarcraft.com/us/icons/56/';
 const CLS = ['hunter', 'druid', 'priest', 'warrior', 'paladin', 'shaman', 'mage', 'warlock', 'rogue'];
 

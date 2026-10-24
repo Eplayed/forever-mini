@@ -24,7 +24,7 @@ import urllib.error
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 CACHE = os.path.join(ROOT, ".audit-cache")
 DOCS = os.path.join(ROOT, "docs")
 
@@ -387,7 +387,7 @@ def main():
     if judged:
         lines.append("## 已人工判定并留痕")
         lines.append("")
-        lines.append("这些条目没能逐字命中，但已回原文人工判定并把依据写进 `src/data/audit-exceptions.json`。")
+        lines.append("这些条目没能逐字命中，但已回原文人工判定并把依据写进 `app/data/audit-exceptions.json`。")
         lines.append("")
         lines.append("| 词条 | 结论 | 官方原句 | 判定日期 |")
         lines.append("| --- | --- | --- | --- |")

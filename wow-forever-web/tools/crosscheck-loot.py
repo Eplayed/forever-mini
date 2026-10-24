@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # 掉落实测↔解包交叉比对（W2，站主 2026-10-14 拍板）。
 # 实测侧：GearInsight_Forever Data.lua 的 loot 表（foreverchanges.pro Beta 实测掉落，build 69913）
-# 解包侧：站内 src/data/dungeons.json（wclbox 解包转述，build 70338）
+# 解包侧：站内 app/data/dungeons.json（wclbox 解包转述，build 70338）
 # 只比"哪些物品在"的事实集合，不比概率（两边都没有概率）。页面不动，差异清单落 docs。
 # 用法：python3 tools/crosscheck-loot.py --dungeons hall-of-thanes ragefire-chasm
 import argparse
@@ -12,7 +12,7 @@ import sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-D = os.path.join(ROOT, 'src', 'data')
+D = os.path.join(ROOT, "app", "data")
 GI_LUA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'gi-forever', 'Data.lua')
 
 # GI loot 表的副本名（nEn）→ 站点 slug；未列出的本跳过

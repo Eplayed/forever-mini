@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-talent-<class>.json 并进 src/data/talents/<class>.json。
+/* 把 upstream/wclbox-talent-<class>.json 并进 app/data/talents/<class>.json。
  *
  * 按"第几棵树 + 第几行 + 第几列"对齐，不按名字对齐：名字两边可能差一个字，
  * 位置才是天赋树的事实。对不上的两边都记下来，不静默丢。
@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const CLASSES = ['warrior', 'paladin', 'hunter', 'rogue', 'priest', 'shaman', 'mage', 'warlock', 'druid'];
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const write = (p, o) => fs.writeFileSync(path.join(ROOT, p), JSON.stringify(o, null, 1) + '\n');

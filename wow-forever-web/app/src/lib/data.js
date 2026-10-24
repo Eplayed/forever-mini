@@ -1,6 +1,6 @@
-/* 数据层：运行时读 src/data/*.json 同步到 app/public/data 的副本。
+/* 数据层：运行时读 app/data/*.json 同步到 app/public/data 的副本。
    与旧站 data.js 行为一致——同一份 JSON 只请求一次（含并发去重），失败时抛错让页面显示失败态。
-   数据真相仍然只有 ../src/data 那一处，本文件不做任何加工。 */
+   数据真相仍然只有 ../app/data 那一处，本文件不做任何加工。 */
 const cache = new Map();
 
 export function assetUrl(rel) {

@@ -2,12 +2,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router.js';
 
-/* 迁移期共用旧站这一份样式文件：设计令牌、组件状态、断点只有一处定义，
-   新旧两站的对拍才有意义。等全部页面迁完，再按组件拆成 scoped style。 */
-import '../../src/css/tokens.css';   // 设计令牌单一事实源（含自托管字体 @font-face）
-import '../../src/css/app.css';
-/* 新站专用视觉层：旧站不加载这个文件（2026-10-16 旧站冻结，两栈共用 app.css，
-   新规则不隔离就会把旧站一起改了）。方案见 docs/DESIGN-app-upgrade-2026-10-16.md */
-import '../../src/css/board.css';
+/* 全站样式三层，都只在这一个文件里引入：令牌 → 组件基线 → 新站视觉层。
+   令牌是单一事实源（docs/UI.md 的令牌表对着它写），改色值/断点只改这里引的那几个文件。 */
+import './styles/tokens.css';   // 设计令牌单一事实源（含自托管字体 @font-face）
+import './styles/app.css';
+/* 新站专用视觉层：只有这一站加载。 */
+import './styles/board.css';
 
 createApp(App).use(router).mount('#app');

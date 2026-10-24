@@ -32,32 +32,16 @@ export const NAV = [
     { file: 'rank.html', t: '排行', d: '本站资料完整度排序，不是强度（仅网页）' }] }
 ];
 
-/* 旧站那一层的地址基准。
-   原来默认是 '/'（主机根），那是"新旧站同源、旧站在根目录"这一种部署法。
-   2026-10-20 真发到 GitHub Pages 才发现第二种：项目站挂在 /<仓库名>/ 下，
-   '/' 会把人甩到主机根（eplayed.github.io/index.html），服务器直接回 GitHub 的
-   "Site not found" —— 也就是点了个错地址就离开本站。
-   所以默认改成跟构建产物同一个基准（BASE_URL，vite base 现在是 './'），
-   挂根目录与挂子目录都成立；开发期仍用 .env.development 指到 :8817 那个旧站。 */
-const LEGACY = (import.meta.env.VITE_LEGACY_BASE || import.meta.env.BASE_URL || './');
-
-export function legacyUrl(file) {
-  const clean = String(file || '').replace(/^\/+/, '');
-  return LEGACY.replace(/\/$/, '/') + clean;
-}
-
-/* 给 <a href> 用的站内地址（2026-10-18 修首页失效链接）。
-   为什么不能继续写 legacyUrl()：新站由 vite preview 服务，它带 SPA 兜底——
-   /talent.html 这类地址返回的是 200 + index.html，于是 hash 路由拿不到路由，
-   点完只是"重新回到首页"，看起来就是**点了没反应**。实测首页 12 处里
-   职业条九格、12 张板块卡、hero 两个按钮全是这个毛病。
-   已迁的页一律出 #/路由；带查询的照带；旧站那种 #锚点 改成 ?to=，由目标页自己滚。
-   没迁的页仍然回旧站（那是 legacyUrl 该干的事）。 */
-export function hrefOf(file) {
-  const s = String(file || '');
+/* 站内地址只有这一种产出方式（2026-10-24 旧站删除后，`legacyUrl()` 与它的地址基准一起撤掉）。
+   为什么绝不让 `<a href>` 出现文件式地址：这一站由托管方按静态目录发，`talent.html`
+   那种地址要么 404、要么被 SPA 兜底成 200 + index.html——hash 路由拿不到路由，
+   点完只是"重新回到首页"，看起来就是**点了没反应**（2026-10-18 首页 12 处全是这个毛病）。
+   所以一律出 #/路由；带查询的照带；旧站那种 #锚点 改成 ?to=，由目标页自己滚。
+   认不出的文件名交给路由表的 catch-all，由 Unmigrated 送去有内容的一页，不静默变死链。 */
+function internal(s) {
   const base = s.split('?')[0].split('#')[0];
   const to = MIGRATED[base];
-  if (!to) return legacyUrl(s);
+  if (!to) return '/' + s.replace(/^\/+/, '');
   const qi = s.indexOf('?');
   const hi = s.indexOf('#');
   const q = qi >= 0 ? s.slice(qi + 1).split('#')[0] : '';
@@ -65,37 +49,26 @@ export function hrefOf(file) {
   const qs = [];
   if (q) qs.push(q);
   if (frag) qs.push('to=' + encodeURIComponent(frag));
-  return '#' + to + (qs.length ? '?' + qs.join('&') : '');
+  return to + (qs.length ? '?' + qs.join('&') : '');
 }
 
-/* 返回 { to } 走 router-link，或 { href } 走旧站。锚点（races.html#traits）一律回旧站。
-   带查询串的入口（world.html?t=rares&q=…）按文件名查表，query 交给调用方传。 */
+/* 给 <a href> 用（前面加 # 才是 hash 路由的完整地址）。 */
+export function hrefOf(file) {
+  return '#' + internal(String(file || ''));
+}
+
+/* 给 router-link 用：v-bind 上去的必须是 { to } 对象——平铺成 { to, query }
+   再 v-bind 的话 query 会掉进 fallthrough 属性里静默丢失（2026-10-13 发现）。 */
 export function linkFor(file) {
-  const base = String(file || '').split(/[?#]/)[0];
-  if (/#/.test(file)) return { href: legacyUrl(file) };
-  return MIGRATED[base] ? { to: MIGRATED[base] } : { href: legacyUrl(file) };
-}
-
-export function isMigrated(file) {
-  return !!MIGRATED[String(file || '').split(/[?#]/)[0]];
-}
-
-/* 带查询串的旧站文件链接 → 站内 { to: { path, query } }。linkFor 只按文件名查表（query 会丢），
-   首页天赋预览的格子（talent.html?c=..&tree=..&q=..）这类要保参数的入口走这里。
-   to 用 router-link 原生的对象形式——平铺成 { to, query } 再 v-bind 的话 query 会掉进
-   fallthrough 属性里静默丢失（2026-10-13 全量迁移时发现并修正）。
-   未迁的页原样返回 { href }（含 query），与 linkFor 一致。 */
-export function linkForQ(file) {
-  const l = linkFor(file);
-  if (!l.to) return l;
+  const s = String(file || '');
+  const loc = internal(s);
+  const qi = loc.indexOf('?');
+  if (qi < 0) return { to: loc };
   const query = {};
-  (String(file || '').split('?')[1] || '').split('&').forEach((p) => {
+  loc.slice(qi + 1).split('&').forEach((p) => {
     if (!p) return;
     const i = p.indexOf('=');
     query[i < 0 ? p : p.slice(0, i)] = i < 0 ? '' : decodeURIComponent(p.slice(i + 1));
   });
-  return { to: { path: l.to, query } };
+  return { to: { path: loc.slice(0, qi), query } };
 }
-
-/* 迁完一页要做两件事：路由表加一条，这里标记一下已迁（导航才会走内部链接） */
-export const MIGRATION_NOTE = '2026-10-13 全量迁移：18 个旧页已全部迁入 Vue 新站。';

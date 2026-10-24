@@ -26,23 +26,18 @@ cd "$(dirname "$0")/.."
 
 run() { printf '\n\033[1m▶ %s\033[0m\n' "$*"; "$@"; }
 
-# 只出报告、不拦人的那一步（2026-10-16 起 app-parity 属于这类：旧站已冻结，
-# "新站与旧站不一样"不再是错误）。失败会打一行提醒但继续走。
-soft() {
-  printf '\n\033[1m▶ %s\033[0m（报告模式，不拦人）\n' "$*"
-  "$@" || printf '\033[1;33m  ↑ 这一步报了差异：旧站已冻结，红不代表做错，看一眼理由即可。\033[0m\n'
-  return 0
-}
-
-# 所有场景收尾都跑同一套门禁：数据校验 → 图标映射 → 译名逐字回查 → 界面回归（含新站）
+# 所有场景收尾都跑同一套门禁：数据校验 → 图标映射 → 译名逐字回查 → 新站构建 → 界面回归
+# 2026-10-24 旧站删除后，两栈对拍（tools/app-parity.py）一起删掉了：没有第二个站可对。
 gate() {
   run node tools/build-data.js
   run python3 tools/build-icon-map.py
   run node tools/build-data.js
   run python3 tools/audit-translations.py --strict
-  # --app：新站（Vue）那组断言是硬门槛，端口不通直接失败——2026-10-16 起新站是唯一在做的产品
-  run python3 tools/site-check.py --app
-  soft python3 tools/app-parity.py --strict
+  # site-check 自己起静态服务打 app/dist，所以这一步之前必须先构建：
+  # 磁盘上是新的、dist 是旧的，断言就会全打在旧产物上（2026-10-21 栽过一次）。
+  run npm --prefix app run build
+  run npx --prefix app vitest run
+  run python3 tools/site-check.py
 }
 
 case "${1:-}" in
@@ -92,7 +87,7 @@ case "${1:-}" in
     run python3 tools/scrape-wclbox-legacy.py
     run node tools/merge-legacy.js
     run python3 tools/build-icon-map.py
-    run python3 tools/fetch-icons.py --from-json src/data/legacy.json --field iconKey
+    run python3 tools/fetch-icons.py --from-json app/data/legacy.json --field iconKey
     gate
     ;;
   talents)
@@ -100,7 +95,7 @@ case "${1:-}" in
     run node tools/merge-upstream.js
     run node tools/merge-talents.js
     run python3 tools/build-icon-map.py
-    run python3 tools/fetch-icons.py --from-json src/data/talents/hunter.json --field iconKey
+    run python3 tools/fetch-icons.py --from-json app/data/talents/hunter.json --field iconKey
     gate
     ;;
   official)

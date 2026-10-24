@@ -1,6 +1,6 @@
 # 数据契约与分发流程（小程序侧）
 
-来源：`wow-forever-web/src/data/`（站点基底）。小程序**不自己维护数据**，只消费导出与分片产物，保证与网页端同源。
+来源：`wow-forever-web/app/data/`（站点基底）。小程序**不自己维护数据**，只消费导出与分片产物，保证与网页端同源。
 分发层的完整设计与取舍在 `wow-forever-web/docs/OPS-oss-分发层-poe方案落地-2026-10-21.md`，本轮实测记录在 `docs/VERIFY-OSS-01-分发层-2026-10-21.md`。
 
 ## 一、路径与命名空间
@@ -53,7 +53,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
   // 没有 builtAt：同一 buildId 的清单必须逐字节恒定，否则"不可变批次"每次重建都会被自己的时间戳改写。
   // 发布时刻看对象的服务端 Last-Modified 与本地 oss-build/{env}/last-upload.json。
   "timeNote": "…", "minClientSchemaVersion": 1,
-  "source": { "commit": "bedaa241", "inputs": [{ "rel": "src/data/dungeons.json", "bytes": 334535, "sha256": "…" }],
+  "source": { "commit": "bedaa241", "inputs": [{ "rel": "app/data/dungeons.json", "bytes": 334535, "sha256": "…" }],
               "exportCheck": { "tool": "wow-forever-web/tools/export-mini.js", "reproduced": true,
                                "outputs": [{ "rel": "oss-preview/meta.json", "bytes": 1724, "sha256": "…" }] } },
   "counts": { "dungeons": 38, "terms": 215, "spells": 498, "spellClasses": 9,
@@ -129,7 +129,7 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 而界面只读顶层——于是玩家看到"还没核到"、数却一直都在。现在导出这一层合成一份并带 `traitVia` 说明来路，
 `subgroup` 只留 `nameCn`（原来连 lore 带 traits 整个下发，等于同一份数发两遍），
 `portrait` 按种族 id 去 `art.json` 对上。**2026-10-23 站主两次改口后的最终口径（写在 `raceEntry()` 里）**：
-10 个种族**统一取 `art.json.races` 那批 128 客户端种族头像**（`src/img/art/races/*.webp`，2026-10-12 就在库、逐张带 manifest），
+10 个种族**统一取 `art.json.races` 那批 128 客户端种族头像**（`app/img/art/races/*.webp`，2026-10-12 就在库、逐张带 manifest），
 `raceIcons`（10-20 单独授权那张 64 插件天裔小图）退成兜底，只在某族大图缺了时才用。
 为什么换：暗夜精灵补上之后同一排里是 9 张官方 CDN 的 56 图标 + 1 张 128 头像，清晰度一眼看出两样，
 站主看完实拍说「10 个统一都换成大图」。
@@ -228,7 +228,7 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 
 ### 界面底图（2026-10-22 起，路径只有一处真源）
 
-清单在 **`wow-forever-web/src/data/ui-art.json`**：三个 tab 页共用的页面底图（`tabs.bg`）+ 首页四张入口卡（`home.cards`），共 5 条。
+清单在 **`wow-forever-web/app/data/ui-art.json`**：三个 tab 页共用的页面底图（`tabs.bg`）+ 首页四张入口卡（`home.cards`），共 5 条。
 （2026-10-23 站主换图并把它从「首页专属」提成 `tabs` 一组，`home.bg` 这个键随之撤掉。）
 导出层把它换成 `assets/` 相对路径塞进 **`meta.uiArt`**（`{ tabBg, cards: { dungeons, classes, loots, guide } }`）下发，
 三个 tab 页各读一次 `service.loadMeta()` 拿这张地址（走 `services/ui-art.js` 一个口子，不在页面里各抄路径），**铺法与一个真 bug**：底图两层是 `position: absolute`，而 CSS 绘制顺序里**非定位元素会被 `z-index:0` 的定位层盖住**——
@@ -239,7 +239,7 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 meta 里五条都到位、且都不带 `img/` 前缀）。
 分发层把这五张登记进素材台账（`build` 输出里素材从 1299 → 1303 个），缺文件会进 `assets.missing` 让构建红。
 三类来路各自有清单可查：**`keyart/` 是官方宣传画**（取自官方新闻页自己的 `og:image`，
-`src/img/keyart/manifest.json` 记来源、抓取日期、sha，并做了"画面里没有商标词与 logo"的自查——
+`app/img/keyart/manifest.json` 记来源、抓取日期、sha，并做了"画面里没有商标词与 logo"的自查——
 **国服那张公告横幅因为烘死「魔兽世界 无限」字标而被否**，理由也记在同一份清单里，别因为
 "国服就该用国服图"换回来）；`gen/` 是本站自生成的氛围图（AI）；`art/` 是客户端原画经第三方站转存。
 **都不打进主包**，所以断网或没发素材时卡片回落纯色版式（`<image>` 的 `binderror` 接住，不留碎图）。
@@ -291,8 +291,8 @@ ETag 是"取回的字节是不是清单里那一份"的传输/存储完整性校
 
 ```bash
 cd wow-forever-web
-node tools/build-data.js                       # 1. 改 src/data 后必跑，非 0 就停
-node tools/export-mini.js                      # 2. src/data → for-mini/oss-preview/ 四份成品（M02 起多了 spells.json）
+node tools/build-data.js                       # 1. 改 app/data 后必跑，非 0 就停
+node tools/export-mini.js                      # 2. app/data → for-mini/oss-preview/ 四份成品（M02 起多了 spells.json）
 node tools/oss-release.js build --env beta --check-identity   # 3. 切批次 + 与真源逐字节对拍 + 复现性核对
 node tools/oss-release.js assets --env beta --dry-run         # 4. 先看素材层要传哪些（只读，不需要标记）
 WOW_ALLOW_CROSS_CREDS=1 node tools/oss-release.js assets --env beta    # 4b. 发素材：图片不可变，台账可重导
@@ -307,7 +307,7 @@ node tools/mini-m01-check.js                   # 10. 小程序端回归（A 快�
 node tools/mini-m02-check.js                   # 11. M02 三个新面：技能速查、掉落反查、入口与包体（直连真 beta）
 ```
 
-第 3 步现在多了一道**源与产物对拍**：构建时在临时目录用同一份 `src/data` 重跑一遍 `export-mini.js`，
+第 3 步现在多了一道**源与产物对拍**：构建时在临时目录用同一份 `app/data` 重跑一遍 `export-mini.js`，
 四份 `oss-preview` 逐字节比一遍，不一致直接 rc=1（指针溯源写 A、实际发 B 这条路被堵死）。
 对拍跑在临时目录里，`export-mini.js` 与 `oss-release.js` 会一起拷进去，**它俩读的文件也要一起拷**
 （2026-10-22 导出层新读了一份 `tools/copy-banned.json`，沙箱里少拷这一个文件，报错长成"没产出 oss-preview"，很误导）。

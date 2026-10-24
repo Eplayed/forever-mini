@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const WEB = path.resolve(__dirname, '..');
-const DATA = path.join(WEB, 'src', 'data');
+const DATA = path.join(WEB, "app", "data");
 const MINI = path.resolve(WEB, '..', 'for-mini');
 const OSS_DIR = path.join(MINI, 'oss-preview');
 const SNAP_DIR = path.join(MINI, 'data');
@@ -143,7 +143,7 @@ const coverage = tally(
 const nameHit = talentNodes.filter((n) => n.nameVerified || (n.provenance || []).some((p) => (p.type || '') === 'official_cn')).length;
 
 /* 界面底图清单（2026-10-22 站主：首页卡片没图，要找对应的图当背景）。
-   真源只有一处：src/data/ui-art.json。这里把站内 img/ 路径换成 assets/ 相对路径下发，
+   真源只有一处：app/data/ui-art.json。这里把站内 img/ 路径换成 assets/ 相对路径下发，
    小程序只认后者（红线：素材不许热链站内路径）。本地文件不在就拒绝出包——
    图没转存就别让界面去要一张不存在的图，那种表现是"卡上一片黑"，不是报错。 */
 function uiArtRel(entry, where) {
@@ -153,12 +153,12 @@ function uiArtRel(entry, where) {
     return '';
   }
   const rel = p.slice(4);
-  /* rel 是相对 src/img/ 的路径（与分发层 statAsset 同一个基准），别拼成 src/ 直下 */
-  if (!fs.existsSync(path.join(WEB, 'src', 'img', rel))) errs.push(`界面底图 ${where}：本地没有这个文件 src/img/${rel}`);
+  /* rel 是相对 app/img/ 的路径（与分发层 statAsset 同一个基准） */
+  if (!fs.existsSync(path.join(WEB, "app", "img", rel))) errs.push(`界面底图 ${where}：本地没有这个文件 app/img/${rel}`);
   return rel;
 }
 /* tabBg 是三个 tab 页（首页 / 副本 / 职业）共用的那张页面底图，2026-10-23 站主指定；
-   cards 只有首页四张入口卡用。真源都在 src/data/ui-art.json，页面不许各自抄路径。 */
+   cards 只有首页四张入口卡用。真源都在 app/data/ui-art.json，页面不许各自抄路径。 */
 const miniUiArt = { tabBg: uiArtRel((uiArt.tabs || {}).bg, '三个 tab 页底图'), cards: {} };
 Object.keys(((uiArt.home || {}).cards) || {}).forEach((k) => {
   miniUiArt.cards[k] = uiArtRel(uiArt.home.cards[k], `首页「${k}」卡`);
@@ -170,7 +170,7 @@ const miniMeta = {
   dataBaseline: meta.dataBaseline,
   launch: meta.launch,
   checkedAt: meta.checkedAt,
-  source: 'wow-forever-web/src/data',
+  source: 'wow-forever-web/app/data',
   coverage: coverage,
   counts: {
     terms: glossary.items.length,
@@ -279,7 +279,7 @@ const snapshotDungeonIndex = {
 /* —— 法术书导出（M02-2）——
    oss-preview/spells.json 是给分发层切的原料，不进主包（主包 60 KB 预算已经给副本索引占了，
    498 条法术放不进去）。这里补一份"职业名单 + 每职业条数与系别"的头部，
-   是为了让 oss-release 只读导出产物就能分片，不用绕过导出层去碰 src/data 原件。 */
+   是为了让 oss-release 只读导出产物就能分片，不用绕过导出层去碰 app/data 原件。 */
 function spellClassHead() {
   const byClass = {};
   spellList.forEach((s) => {
@@ -311,7 +311,7 @@ const talentFileList = fs.readdirSync(path.join(DATA, 'talents'))
   .filter((f) => f !== '_demo.json' && f.endsWith('.json')).sort();
 const miniTalents = {
   meta: {
-    source: 'wow-forever-web/src/data/talents/',
+    source: 'wow-forever-web/app/data/talents/',
     note: '天赋树按两家第三方资料站的坐标对齐；层级点数门槛没核到之前界面只摆位、不做解锁判定。',
     files: talentFileList.length
   },
@@ -320,7 +320,7 @@ const miniTalents = {
 
 const miniClasses = {
   meta: {
-    source: 'wow-forever-web/src/data/races.json + classes.json',
+    source: 'wow-forever-web/app/data/races.json + classes.json',
     comboNote: (races.newCombos || []).length
       ? '无限新增的种族职业组合单列，来源是国服官方中文公告。' : ''
   },
@@ -350,8 +350,8 @@ if (!fs.existsSync(releaseRacePath)) {
 const releaseForRace = fs.existsSync(releaseRacePath) ? require(releaseRacePath) : null;
 const artIndex = fs.existsSync(path.join(DATA, 'art.json')) ? read('art.json') : {};
 const raceRow = (r) => releaseForRace.raceEntry(r, artIndex, (rel, why) => {
-  /* rel 已经是站内路径（img/ 开头），基准是 wow-forever-web/src/，别再把 img/ 摘掉一次 */
-  if (!fs.existsSync(path.join(WEB, 'src', String(rel)))) {
+  /* rel 已经是站内路径（img/ 开头），基准是 wow-forever-web/app/，别再把 img/ 摘掉一次 */
+  if (!fs.existsSync(path.join(WEB, 'app', String(rel)))) {
     errs.push(`种族 ${r.id} 的小图标 ${rel} 本地没有文件（${why}）——素材台账会缺这一条，界面只能回落自绘`);
     return null;
   }
@@ -382,7 +382,7 @@ miniClassSnapshot.races.forEach((r) => {
 const miniSpells = {
   meta: {
     generatedAt: (spells.meta || {}).generatedAt || null,
-    source: 'wow-forever-web/src/data/spells.json',
+    source: 'wow-forever-web/app/data/spells.json',
     pageNote: (spells.meta || {}).pageNote || '',
     levelPolicy: (spells.meta || {}).levelPolicy || '',
     counts: Object.assign({}, (spells.meta || {}).counts, { exported: spellList.length }),

@@ -9,7 +9,7 @@
 # 不落什么（红线）：`text`（成就描述整句）与 `criteria[].text`（子条件说明句）——
 # 落盘前就删，照 changes.json 的先例，别指望"界面上不显示"。
 # 发布号从 /chengjiu 页面现读，不写死（它随上游发版变）。
-# 用法：python3 tools/scrape-wclbox-achievements.py [--out-dir src/data/upstream]
+# 用法：python3 tools/scrape-wclbox-achievements.py [--out-dir app/data/upstream]
 import json
 import os
 import re
@@ -43,7 +43,7 @@ def get(url):
 
 def main():
     out_dir = sys.argv[sys.argv.index('--out-dir') + 1] if '--out-dir' in sys.argv \
-        else os.path.join(ROOT, 'src', 'data', 'upstream')
+        else os.path.join(ROOT, "app", "data", 'upstream')
     os.makedirs(out_dir, exist_ok=True)
     page = get(BASE + '/chengjiu')
     m = BUILD_RE.search(page)

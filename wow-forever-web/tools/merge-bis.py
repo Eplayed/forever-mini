@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 把参考站采回来的 BiS 名单合并成站点成品 src/data/bis.json。
+# 把参考站采回来的 BiS 名单合并成站点成品 app/data/bis.json。
 #
 # 这份合并的原则：**名单只存"哪件装备在哪个部位、按什么顺序"，不存任何数值与句子。**
 # 物品名、品质、装等、需要等级、属性行、图标、与经典旧世的对照状态——全部在运行时回
@@ -20,9 +20,9 @@ import sys
 from collections import OrderedDict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, 'src', 'data', 'upstream', 'wclbox-bis.json')
-OUT = os.path.join(ROOT, 'src', 'data', 'bis.json')
-ITEMS = os.path.join(ROOT, 'src', 'data', 'items.json')
+UP = os.path.join(ROOT, "app", "data", 'upstream', 'wclbox-bis.json')
+OUT = os.path.join(ROOT, "app", "data", 'bis.json')
+ITEMS = os.path.join(ROOT, "app", "data", 'items.json')
 
 # 参考站的部位键 → 本站中文部位（2026-10-16 从 38 页实测枚举出来的 21 种）
 SLOT_CN = OrderedDict([
@@ -192,7 +192,7 @@ def main():
     # ① 红线要求两源分歧两个都留、不许裁决；② 这份与主源"没有共同上游"我们证明不了
     #   （专精清单 38 对 38 一一对上、连"震击骑 PvP / 出血 PvP / 恢复 PvP"这种冷门组合
     #   都同进同出），所以它只当第二份名单看，**不据此升档**，配装线仍是 L1。
-    alt_path = os.path.join(ROOT, 'src', 'data', 'upstream', 'xr-bis.json')
+    alt_path = os.path.join(ROOT, "app", "data", 'upstream', 'xr-bis.json')
     if os.path.isfile(alt_path):
         xa = load(alt_path)
         xidx = {}

@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils';
 import SiteSearch from '../src/components/SiteSearch.vue';
 import { forget } from '../src/lib/data.js';
 
-// 假索引就是 src/data/search.json 的字段顺序，只放几条真出现过的名字
+// 假索引就是 app/data/search.json 的字段顺序，只放几条真出现过的名字
 const FAKE = {
   meta: {
     kinds: {

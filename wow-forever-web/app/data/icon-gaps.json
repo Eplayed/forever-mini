@@ -1,0 +1,17 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-24",
+  "method": "tools/build-icon-map.py 扫全部成品数据文件的 iconKey / icon（归一掉 .jpg 后缀），比对 app/img/icons/ 本地文件。范围排除 upstream/ 原料与 icons.json、icon-gaps.json 两份登记自身",
+  "note": "这些图标键在数据里被引用，但官方 CDN 没有对应文件（多是无限服新装备）。界面退回自绘块；回归脚本只放行这份清单里的 404。这份清单是派生物，改数据或补图之后要重跑本脚本，不要手填。",
+  "count": 2,
+  "localFiles": 3484,
+  "referenced": 3482
+ },
+ "keys": [
+  "8119728",
+  "inv_inscription_modified_craftingreagent06"
+ ],
+ "byFile": {
+  "items.json": 2
+ }
+}

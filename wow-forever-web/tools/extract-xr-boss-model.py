@@ -15,7 +15,7 @@ excavation-site），我们不猜——**按首领中文名集合的交集判同
 照样收，但标上低置信，导清单时只当"候选"用。
 
 用法：python3 tools/extract-xr-boss-model.py [--src <插件根目录>]
-产物：src/data/upstream/xr-boss-model.json
+产物：app/data/upstream/xr-boss-model.json
 幂等：同输入字节一致（键排序、缩进固定）。
 """
 import io
@@ -28,7 +28,7 @@ from datetime import date
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 插件在仓库外（红线：插件本体不进 git）：Documents/project/.scratch/<这一批>
 DEF_SRC = os.path.join(os.path.dirname(os.path.dirname(WEB)), '.scratch', 'wow-client-2026-10-21')
-UP = os.path.join(WEB, 'src', 'data', 'upstream')
+UP = os.path.join(WEB, "app", "data", 'upstream')
 
 # XR 的 slug → 本站 slug。判据是首领中文名集合的交集（下面 alias 段会把重合数写出来），
 # 不是"名字看着像"。改这张表必须同时改下面的判定，否则快照里会留下对不上的旧证据。
@@ -68,7 +68,7 @@ def main():
     if not os.path.exists(p):
         sys.exit('找不到 %s' % p)
     raw = parse(p)
-    ours = json.load(io.open(os.path.join(WEB, 'src', 'data', 'dungeons.json'), encoding='utf-8'))
+    ours = json.load(io.open(os.path.join(WEB, "app", "data", 'dungeons.json'), encoding='utf-8'))
     our_bosses = {x['id']: [b['nameCn'] for b in (x.get('bosses') or [])]
                   for x in (ours['newDungeons'] + ours['classicDungeons'] + ours['raids'])}
 

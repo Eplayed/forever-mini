@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 把 XR 那份「配方去哪儿学」的快照并进 src/data/professions.json（阶段 PRD P0 第 9 条）。
+# 把 XR 那份「配方去哪儿学」的快照并进 app/data/professions.json（阶段 PRD P0 第 9 条）。
 #
 # 只并两样：source.vendors（卖这张图纸的商人与区域）与 source.drops（图纸从谁身上掉、在哪个区域）。
 # 站内原有的 `source`（"训练师" / null）不动——那是参考站给的来源类别，与"具体哪个商人"是两件事，
@@ -12,7 +12,7 @@ import os
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, 'src', 'data')
+DATA = os.path.join(ROOT, "app", "data")
 MAX_V = 6      # 一条配方最多列 6 个商人，多的记进 vMore
 MAX_D = 4      # 图纸掉落 NPC 同理
 

@@ -215,7 +215,7 @@
 
 <script setup>
 /* 副本手册列表页 · 与旧站 src/js/app.js 的 dungeons()（含 dunCard/dunListHtml/queueBand）逐块对齐。
-   数据全部 src/data 现取；art.json / queue.json 加载失败按旧站 catch 空对象兜底。
+   数据全部 app/data 现取；art.json / queue.json 加载失败按旧站 catch 空对象兜底。
    Glyph.dungeonBanner 在本组件内等价复刻（同 FNV 哈希、同 DUNGEON_HUE、同类名），不引图标库。 */
 import { computed, nextTick, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';

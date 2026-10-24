@@ -7,7 +7,7 @@
 上线前还需要一条粗网——**缺图不会报错，只会悄悄退成字母块**，2026-10-20 那次
 spell_warlock_demonsoul 没登记也照样构建通过、页面照常上线，就是缺这一层。
 
-放行依据只有一份：src/data/icon-gaps.json（tools/build-icon-map.py 派生，
+放行依据只有一份：app/data/icon-gaps.json（tools/build-icon-map.py 派生，
 build-data.js 会双向比对：漏登记、过期登记、死条目都让构建失败）。
 不在那份登记里的失败请求一律算不通过——**不许靠扩大白名单把 404 说成正常**。
 
@@ -29,7 +29,7 @@ import sys
 from urllib.parse import quote, unquote, urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # wow-forever-web
-GAPS = os.path.join(ROOT, "src", "data", "icon-gaps.json")
+GAPS = os.path.join(ROOT, "app", "data", "icon-gaps.json")
 SHOTS = os.path.join(ROOT, "docs", "screenshots")
 
 # 21 条真实路由（router.js 里数出来的，含详情路由带有效参数）
@@ -62,7 +62,7 @@ ROUTES = [
     ("/bis?c=hunter&s=hunter&f=alliance", "配装名单"),
 ]
 
-# 图片类资源：src/img/… 与字体；数据 JSON 的失败另算（会让页面显示失败态）
+# 图片类资源：app/img/… 与字体；数据 JSON 的失败另算（会让页面显示失败态）
 ASSET_RE = re.compile(r"/img/|\.woff2?\b|\.css\b", re.I)
 
 
@@ -75,7 +75,7 @@ def hashurl(base, path):
 
 def load_gaps():
     if not os.path.exists(GAPS):
-        sys.exit("拿不到 src/data/icon-gaps.json（缺图登记）——先跑 python3 tools/build-icon-map.py")
+        sys.exit("拿不到 app/data/icon-gaps.json（缺图登记）——先跑 python3 tools/build-icon-map.py")
     g = json.load(io.open(GAPS, encoding="utf-8"))
     return set(g.get("keys") or [])
 
@@ -552,10 +552,10 @@ def take_shots(pw, base, gaps):
 
 def load_expectations():
     """断言的期望值从数据现读，不写死在脚本里（数据一升级，写死的数就变成假话）。"""
-    world = json.load(io.open(os.path.join(ROOT, "src", "data", "world.json"), encoding="utf-8"))
+    world = json.load(io.open(os.path.join(ROOT, "app", "data", "world.json"), encoding="utf-8"))
     zones = world.get("zones") or []
-    geo = json.load(io.open(os.path.join(ROOT, "src", "data", "dungeon-geo.json"), encoding="utf-8"))
-    dgs = json.load(io.open(os.path.join(ROOT, "src", "data", "dungeons.json"), encoding="utf-8"))
+    geo = json.load(io.open(os.path.join(ROOT, "app", "data", "dungeon-geo.json"), encoding="utf-8"))
+    dgs = json.load(io.open(os.path.join(ROOT, "app", "data", "dungeons.json"), encoding="utf-8"))
     rows = []
     for k in ("newDungeons", "classicDungeons", "raids"):
         rows += dgs.get(k) or []

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把上游任务数据合成成品文件 src/data/dungeon-quests.json。
+"""把上游任务数据合成成品文件 app/data/dungeon-quests.json。
 
 站主 2026-10-13 定的优先级：**wclbox 为准，wclbox 没有的按 wowhead 来。**
 落成三条规则（都在这个脚本里，页面不参与判断）：
@@ -32,7 +32,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-D = os.path.join(ROOT, "src", "data")
+D = os.path.join(ROOT, "app", "data")
 WCL = os.path.join(D, "upstream", "wclbox-dungeon-quests.json")
 WH = os.path.join(D, "upstream", "wowhead-dungeon-quests.json")
 GIQ = os.path.join(D, "upstream", "gi-dungeon-quests.json")

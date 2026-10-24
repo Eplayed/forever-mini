@@ -51,7 +51,7 @@ describe('加成的护甲、百分比与效果句不许算进基础护甲', () =
 });
 
 describe('猎人 PvE 联盟那一套：逐件手算的合计', () => {
-  /* 原样抄自 src/data/items-detail.json（2026-10-19，bis.json 的 hunter / alliance 16 格）。
+  /* 原样抄自 app/data/items-detail.json（2026-10-19，bis.json 的 hunter / alliance 16 格）。
      手算期望：护甲 84+78+25+102+43+56+63+90+74=615
                敏捷 10+8+11+8+14+6+8+9+14+8+7+5+10=118
                耐力 13+5+7+2+6+6+8+7+5+6+3=68
@@ -90,15 +90,15 @@ describe('全库落档：任何带"护甲"的行都必须有一个已知的身�
   /* 这条盯的是"写法漂移"。2026-10-19 的漏算是静默少加，没人报错；
      以后库里出现第四种基础护甲写法，这里会红并把原句列出来，而不是悄悄不计。 */
   const KNOWN = ['base', 'bonus', 'effect', 'collect'];
-  /* 基底文件在 wow-forever-web/src/data/（全线唯一那份）。
+  /* 基底文件在 wow-forever-web/app/data/（全线唯一那份）。
      vitest 在 jsdom 环境下 import.meta.url 不是 file:，所以按 cwd 往上找，
      从 app/ 或 wow-forever-web/ 起跑都能命中同一个文件。 */
   const cands = [];
   for (let d = process.cwd(), i = 0; i < 5; i++, d = path.dirname(d)) {
-    cands.push(path.join(d, 'src', 'data', 'items-detail.json'));
+    cands.push(path.join(d, 'app', 'data', 'items-detail.json'));
   }
   const file = cands.filter((p) => fs.existsSync(p))[0];
-  if (!file) throw new Error('找不到 src/data/items-detail.json，试过：' + cands.join(' / '));
+  if (!file) throw new Error('找不到 app/data/items-detail.json，试过：' + cands.join(' / '));
   const det = JSON.parse(fs.readFileSync(file, 'utf8')).items;
   const shapes = {};
   Object.keys(det).forEach((id) => {

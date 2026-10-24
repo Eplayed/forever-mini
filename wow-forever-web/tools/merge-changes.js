@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-changes.json 整形成 src/data/changes.json（客户端改动清单）。
+/* 把 upstream/wclbox-changes.json 整形成 app/data/changes.json（客户端改动清单）。
  *
  * 口径（2026-10-09 用户拍板）：最新动态只放名称与改动类型，不放句子。
  * 抓取阶段已经把 rank_texts / summary / forever_note 等文本字段全删了，这里只做形状与计数，
@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const up = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'wclbox-changes.json'), 'utf8'));
 const U = up.meta.upstreamCounts || {};
 

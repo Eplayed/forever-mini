@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-/* 把 upstream/wclbox-professions.json 整形成 src/data/professions.json。
+/* 把 upstream/wclbox-professions.json 整形成 app/data/professions.json。
  * 专业这块我们没有自己的攒数据，所以这一步只做形状与口径：
  * 加来源、加"没采到的"清单、把每条配方/采集点的分级写明。
  */
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..', 'src', 'data');
+const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const up = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'wclbox-professions.json'), 'utf8'));
 
 const EN = { alchemy: 'Alchemy', blacksmithing: 'Blacksmithing', enchanting: 'Enchanting',

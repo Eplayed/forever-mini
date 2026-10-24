@@ -22,7 +22,7 @@ process.env.WOW_OSS_OFFLINE = '1';
 const REPO = path.resolve(__dirname, '..', '..');
 const TOOL = path.join(REPO, 'wow-forever-web', 'tools', 'oss-release.js');
 const EXPORT_TOOL = path.join(REPO, 'wow-forever-web', 'tools', 'export-mini.js');
-const REAL_SRC_DATA = path.join(REPO, 'wow-forever-web', 'src', 'data');
+const REAL_SRC_DATA = path.join(REPO, "wow-forever-web", "app", "data");
 const MINI_SERVICE = path.join(REPO, 'for-mini', 'services', 'oss-manifest.js');
 const MINI_ROOT = path.join(REPO, 'for-mini');
 
@@ -46,7 +46,7 @@ async function step(name, condFn, extra) {
   }
 }
 
-/* 夹具 = 一个迷你仓库：src/data 逐文件符号链接到真源（talents 等目录整体链，
+/* 夹具 = 一个迷你仓库：app/data 逐文件符号链接到真源（talents 等目录整体链，
    upstream 不参与导出所以不链），preview 由真 export-mini.js 现生成。
    这样"改源"与"只改 preview"是两件事，能分别测：前者换 buildId，后者必须被对拍拦下。 */
 function regen(dir) {
@@ -63,21 +63,21 @@ function freshFixture(label) {
   fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/oss-release.js', path.join(web, 'tools', 'oss-release.js'));
   /* 导出层要读禁词表；夹具里少拷这一个文件，regen 会以 ENOENT 的形式红，看不出真正的原因 */
   fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/copy-banned.json', path.join(web, 'tools', 'copy-banned.json'));
-  fs.mkdirSync(path.join(web, 'src', 'data'), { recursive: true });
-  /* 素材层从 <仓库>/src/img 读图。夹具不链这一个目录的话，用夹具里的工具构建
+  fs.mkdirSync(path.join(web, 'app', 'data'), { recursive: true });
+  /* 素材层从 <仓库>/app/img 读图。夹具不链这一个目录的话，用夹具里的工具构建
      会得到"1117 张全缺"，反例就会因为错误的原因变红——链上它才是同一份素材。 */
-  fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'src', 'img'), path.join(web, 'src', 'img'));
+  fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'app', 'img'), path.join(web, 'app', 'img'));
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
-    fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'src', 'data', f));
+    fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'app', 'data', f));
   });
   regen(dir);
   return dir;
 }
 const previewOf = (dir) => path.join(dir, 'for-mini', 'oss-preview');
-const srcOf = (dir) => path.join(dir, 'wow-forever-web', 'src');
+const srcOf = (dir) => path.join(dir, 'wow-forever-web', 'app');
 function patchSource(dir, file, fn, noRegen) {
-  const target = path.join(dir, 'wow-forever-web', 'src', 'data', file);
+  const target = path.join(dir, 'wow-forever-web', 'app', 'data', file);
   const j = JSON.parse(fs.readFileSync(fs.realpathSync(target), 'utf8'));
   fn(j);
   try { fs.unlinkSync(target); } catch (e) { /* 已经是真文件 */ }
@@ -237,7 +237,7 @@ const oss = require(MINI_SERVICE);
   /* 素材登记表（assets/index.json）是 `assets` 命令生成的，构建段里没有；
      这里以"仓库素材目录下这个文件在不在"为准——分发层登记的就是它。 */
   idx.items.filter((it) => it.art).forEach((it) => {
-    builtAssets[it.art] = fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', it.art));
+    builtAssets[it.art] = fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', it.art));
   });
   ok('索引 38 条 = 9 新本 + 26 经典 + 3 团本', idx.items.length === 38
     && idx.counts.newDungeons === 9 && idx.counts.classicDungeons === 26 && idx.counts.raids === 3,
@@ -256,7 +256,7 @@ const oss = require(MINI_SERVICE);
   /* 界面底图（2026-10-22 首页配图）不挂在任何数据条目上，是界面自己引用的——
      这类"清单里的图"也必须进素材台账，否则线上就是卡上一片纯色，而构建一声不响。
      文件不在 → useAsset 会把它记进 assetMissing，下面那条"缺登记 0 条"当场红。 */
-  const uiArtPack = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web', 'src', 'data', 'ui-art.json'), 'utf8'));
+  const uiArtPack = JSON.parse(fs.readFileSync(path.join(REPO, "wow-forever-web", "app", "data", 'ui-art.json'), 'utf8'));
   const uiRels = [];
   (function walkUi(node) {
     if (!node || typeof node !== 'object') return;
@@ -271,8 +271,8 @@ const oss = require(MINI_SERVICE);
     if (!node || typeof node !== 'object') return;
     Object.keys(node).forEach((k) => { if (k === 'path') uiPaths.push(1); else if (k !== 'meta') countPaths(node[k]); });
   })(uiArtPack);
-  const uiMissing = uiRels.filter((r) => !fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r)));
-  ok('界面底图清单逐张都在 src/img（' + uiPaths.length + ' 张），导出层一条没漏',
+  const uiMissing = uiRels.filter((r) => !fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', r)));
+  ok('界面底图清单逐张都在 app/img（' + uiPaths.length + ' 张），导出层一条没漏',
     uiPaths.length === 5 && uiRels.length === uiPaths.length && uiMissing.length === 0,
     JSON.stringify({ listed: uiRels.length, missing: uiMissing }));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
@@ -339,7 +339,7 @@ const oss = require(MINI_SERVICE);
     man.source && man.source.exportCheck && man.source.exportCheck.reproduced === true
       && relSet(man.source.exportCheck.outputs, 'oss-preview/') === REL.EXPORT_RELS.map((f) => 'oss-preview/' + f).sort().join(',')
       && man.source.exportCheck.outputs.every((o) => o.sha256 && o.bytes > 0)
-      && relSet(man.source.inputs, 'src/data/') === REL.BASE_INPUTS.map((f) => 'src/data/' + f).sort().join(',')
+      && relSet(man.source.inputs, 'app/data/') === REL.BASE_INPUTS.map((f) => 'app/data/' + f).sort().join(',')
       && man.source.inputs.every((i) => i.sha256 && i.bytes > 0),
     JSON.stringify({ inputs: man.source.inputs.map((i) => i.rel), outputs: man.source.exportCheck.outputs.map((o) => o.rel) }));
   process.stdout.write('  · 副本首屏实际字节：meta ' + man.fetch.meta.bytes + 'B + 索引 '
@@ -387,7 +387,7 @@ const oss = require(MINI_SERVICE);
   }
 
   /* ================= 3. 反例：导出产物与基底不配套 ================= */
-  process.stdout.write('\n反向：oss-preview 与 src/data 必须逐字节对得上\n');
+  process.stdout.write('\n反向：oss-preview 与 app/data 必须逐字节对得上\n');
   const drift = [
     { name: '只改 oss-preview 里第一本的名字（真源没改）', patch: (j) => { j.newDungeons[0].nameCn = '偷改的副本名'; } },
     { name: '只改 oss-preview 里某个副本的英文名', patch: (j) => { j.classicDungeons[0].nameEn = '被偷改的英文名'; } },
@@ -485,11 +485,11 @@ const oss = require(MINI_SERVICE);
       && s.obj.schemaVersion === 1 && s.obj.kind === 'spell-class'));
   ok('单片不超 64 KB 预算（手机上一次 GET 的代价）',
     spShards.every((s) => s.buf.length <= 64 * 1024), Math.max.apply(null, spShards.map((s) => s.buf.length)) + ' B');
-  /* 图标查的是真仓库的 src/img（runBuild 跑的是仓库里的工具，素材层也从那里读），
+  /* 图标查的是真仓库的 app/img（runBuild 跑的是仓库里的工具，素材层也从那里读），
      夹具目录里没有 img，别往 good.envDir 下找。 */
   ok('技能图标全登记进素材层，缺图 0 条',
     man.assets.missing === 0 && spShards.every((s) => s.obj.spells.filter((x) => x.iconKey)
-      .every((x) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', 'icons', x.iconKey + '.jpg')))),
+      .every((x) => fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', 'icons', x.iconKey + '.jpg')))),
     'missing ' + man.assets.missing);
   ok('分片里没有站内相对路径', !spShards.some((s) => /"(img|src|static)\//.test(s.buf.toString('utf8'))));
   ok('红线：分片里没有技能描述与循环建议类内容',
@@ -592,14 +592,14 @@ const oss = require(MINI_SERVICE);
     JSON.stringify(sky.map((r) => r.traits.map((t) => t.name).join('/'))));
   ok('天裔种族图接上了、且登记进素材台账（2026-10-23 起统一用 art/races 那批 128 客户端头像）',
     sky.every((r) => r.portrait === 'art/races/skyborne.webp'
-      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r.portrait))),
+      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', r.portrait))),
     JSON.stringify(sky.map((r) => r.portrait)));
   /* 统一口径这条是站主 2026-10-23 看完实拍拍的板："10 个统一都换成大图"。
      以前是 9 张官方 CDN 的 56 图标 + 1 张 128 头像混在一排，清晰度一眼看得出两样。
      断言写成"逐条都落在 art/races/ 下"，谁再往回退成 iconKey 优先，这里当场红。 */
   ok('10 个种族的图标位统一是 art/races/ 那批大图（不许再混官方 CDN 的 56 小图标）',
     clsIdx.races.length === 10 && clsIdx.races.every((r) => /^art\/races\/[a-z-]+\.webp$/.test(String(r.portrait || ''))
-      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r.portrait))),
+      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', r.portrait))),
     JSON.stringify(clsIdx.races.map((r) => r.id + ':' + r.portrait)));
   ok('没有哪个种族的特长是空数组（空＝要么丢数据要么该降级，界面那句"还没核到"不许成为常态）',
     clsIdx.races.every((r) => r.traits.length > 0 || r.level === 'L2' || r.level === 'L3'),

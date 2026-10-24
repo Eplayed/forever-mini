@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""抓暴雪客户端 DB2 表「队伍查找器活动」的转储，写进 src/data/upstream/。
+"""抓暴雪客户端 DB2 表「队伍查找器活动」的转储，写进 app/data/upstream/。
 
 为什么要它：这张表是**客户端里的排队数据**，一个副本的等级区间、进入人数上限、
 地图 ID 都在这一行里。以前这些数只能从第三方资料站的网页 DOM 里读，
@@ -33,7 +33,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 SITE = "https://wowforever.wclbox.com"
 WAGO = "https://wago.tools/db2"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "

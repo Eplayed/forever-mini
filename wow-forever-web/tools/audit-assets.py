@@ -25,9 +25,9 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
-ICONS = os.path.join(ROOT, "src", "img", "icons")
-ART = os.path.join(ROOT, "src", "img", "art")
+DATA = os.path.join(ROOT, "app", "data")
+ICONS = os.path.join(ROOT, "app", "img", "icons")
+ART = os.path.join(ROOT, "app", "img", "art")
 DOCS = os.path.join(ROOT, "docs")
 CACHE = os.path.join(ROOT, ".audit-cache", "asset-probe.json")   # 探测结果缓存，避免每轮重问 CDN 四百次
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "

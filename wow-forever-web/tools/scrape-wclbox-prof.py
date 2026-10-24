@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""抓无限数据库的专业页（配方与采集点），写 src/data/upstream/wclbox-professions.json。
+"""抓无限数据库的专业页（配方与采集点），写 app/data/upstream/wclbox-professions.json。
 
 这些页是服务端渲染的，curl 就够，不用起浏览器。
 只取事实性标识符：配方制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、
@@ -22,7 +22,7 @@ import time
 
 BASE = "https://wowforever.wclbox.com"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 

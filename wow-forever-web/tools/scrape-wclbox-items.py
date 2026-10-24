@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""抓 wowforever.wclbox.com 的全量物品名录（/wupin/liebiao/N 名称索引），写进 src/data/upstream/。
+"""抓 wowforever.wclbox.com 的全量物品名录（/wupin/liebiao/N 名称索引），写进 app/data/upstream/。
 
 为什么走名称索引而不是详情页：wclbox 的 _shuju 数据包里没有物品文件（2026-10-13 逐名试探，
 只翻出 chengjiu.json），物品库是 SSR 表格分页——每页 200 件、共 106 页，行字段恰好是
@@ -27,7 +27,7 @@ import sys
 import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")

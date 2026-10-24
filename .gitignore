@@ -23,8 +23,9 @@ __pycache__/
 # 像素视觉基线（tools/visual-check.py）。不进仓库的两个理由：
 # 1) 只有"同一台机 + 同一个 Chrome + 同一套本地字体"取出来的图才可比，换机器必须重冻，
 #    存进仓库等于存一份在别人机器上必然全红的假标准；
-# 2) 16 页 × 两视口降采样后仍要 18 MB，PNG 在 git 里压不动，每轮重冻就永久多留一份。
-# 基线对应的提交号写在 baseline.json 里，要复现：python3 tools/visual-check.py --make --rev <提交号>
+# 2) 21 条路由 × 两视口降采样后仍要十几 MB，PNG 在 git 里压不动，每轮重冻就永久多留一份。
+# 基线对应的提交号写在 baseline.json 里；2026-10-24 起这一份拍的是 app/dist，
+# 要重冻：cd app && npm run build && python3 tools/visual-check.py --make
 wow-forever-web/docs/screenshots/baseline/
 wow-forever-web/docs/screenshots/visual-diff-*/
 
@@ -32,7 +33,7 @@ wow-forever-web/docs/screenshots/visual-diff-*/
 # 仓库历史里仍带着归档前的原图，新克隆体积要等历史重写才会真正变小。
 wow-forever-web/docs/screenshots-archive/
 
-# AI 出图的原图（PNG，几十 MB）；入库的是 src/img/gen/ 里裁过并转 webp 的那三份
+# AI 出图的原图（PNG，几十 MB）；入库的是 app/img/gen/ 里裁过并转 webp 的那三份
 vibe_images/
 
 # Trae 本地分享包产物（非项目源码）

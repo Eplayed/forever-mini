@@ -1,4 +1,4 @@
-/* 设计令牌：与网页端 wow-forever-web/src/css/tokens.css 同一套值（2026-10-12 换轨后的现行版），
+/* 设计令牌：与网页端 wow-forever-web/app/src/styles/tokens.css 同一套值（2026-10-12 换轨后的现行版），
    不是 docs/UI.md §2.0 那段历史。设计依据与官网实测值见
    wow-forever-web/docs/UI-小程序首页与令牌对齐-2026-10-21.md。
    规则：页面 wxss 里不许再写裸色值，要新色先加到这里。小程序主包不放中文字体，
@@ -57,7 +57,7 @@ page {
   --fac-horde-line: rgba(193, 80, 74, 0.48);
   --fac-horde-bg: rgba(193, 80, 74, 0.11);
 
-  /* 物品品质六档：与网页端 src/css/tokens.css 同一组值（游戏内通用色），
+  /* 物品品质六档：与网页端 app/src/styles/tokens.css 同一组值（游戏内通用色），
      掉落反查与副本掉落两页都从这里取，页面里不许再写裸色 */
   --q0: #9d9d9d;
   --q1: #ffffff;

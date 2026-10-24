@@ -114,7 +114,7 @@ def parse_boss_pos(text):
 
 def main():
     src = arg('--src', DEF_SRC)
-    out_dir = arg('--out-dir', os.path.join(WEB, 'src', 'data', 'upstream'))
+    out_dir = arg('--out-dir', os.path.join(WEB, "app", "data", 'upstream'))
     data_dir = os.path.join(src, 'DungeonsForever', 'Core', 'Data')
     need = ['Data_DungeonEntry.lua', 'Data_BossPos.lua', 'Data_DungeonLoot.lua']
     for f in need:
@@ -127,7 +127,7 @@ def main():
     pos = parse_boss_pos(read(os.path.join(data_dir, 'Data_BossPos.lua')))
 
     # 站内 id 认得过来才收；认不得的留在 unmapped 里，不猜
-    dz = json.load(open(os.path.join(WEB, 'src', 'data', 'dungeons.json'), encoding='utf-8'))
+    dz = json.load(open(os.path.join(WEB, "app", "data", 'dungeons.json'), encoding='utf-8'))
     known = {}
     for key in ('newDungeons', 'classicDungeons', 'raids'):
         for x in dz.get(key) or []:

@@ -1,5 +1,5 @@
 {
- "note": "面向维护者的词不许出现在玩家看的正文与数据里。tools/build-data.js 用它扫 src/data/*.json 的字符串值，tools/site-check.py 用它扫 14 页渲染后的文字。加词前先想清楚替代说法，别把合理的中文词禁掉。",
+ "note": "面向维护者的词不许出现在玩家看的正文与数据里。tools/build-data.js 用它扫 app/data/*.json 的字符串值，tools/site-check.py 用它扫 14 页渲染后的文字。加词前先想清楚替代说法，别把合理的中文词禁掉。",
  "strip": [
   "大口径",
   "小口径"

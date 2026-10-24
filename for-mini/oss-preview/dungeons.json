@@ -13,7 +13,7 @@
    "total": 228,
    "withPortrait": 146,
    "note": "客户端遭遇战手册头像，经第三方站转存在本地 img/art/bosses/；源站自己标\"没有这张脸\"的首领留空",
-   "manifest": "src/img/art/manifest.json"
+   "manifest": "app/img/art/manifest.json"
   },
   "levelRangeSettled": {
    "at": "2026-10-13",

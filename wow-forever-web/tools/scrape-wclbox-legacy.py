@@ -25,7 +25,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
 PAGE = "/chuancheng"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -140,7 +140,7 @@ def main():
         os.makedirs(UP)
     p = os.path.join(UP, "wclbox-legacy.json")
     io.open(p, "w", encoding="utf-8").write(json.dumps(out, ensure_ascii=False, indent=1) + "\n")
-    print("→ src/data/upstream/wclbox-legacy.json（%d KB）" % (os.path.getsize(p) // 1024))
+    print("→ app/data/upstream/wclbox-legacy.json（%d KB）" % (os.path.getsize(p) // 1024))
 
 
 if __name__ == "__main__":

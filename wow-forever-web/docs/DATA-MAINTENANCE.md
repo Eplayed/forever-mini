@@ -1,4 +1,6 @@
-# 数据维护与更新（2026-10-09 定）
+# 数据维护与更新
+
+当前执行口径按根 `AGENTS.md` 和本文件的刷新命令；下文带日期的数量是当时快照，不作为今日库存。2026-10-20 起网页发布物是 `app/` 构建的新站，旧静态页只供回归参照。发布与部署细节以 `tools/release-package.py`、`tools/deploy-gh-pages.py` 和最近一份 `VERIFY-prelaunch-final-2026-10-20.md` 为准。
 
 这份文件回答三个问题：**数据从哪来、多久动一次、动完怎么确认没坏**。
 配套的可执行入口是 `tools/refresh.sh`（把下面每条链路写死成脚本，顺序不会错）。
@@ -6,8 +8,8 @@
 ## 一、一条链，三层存放
 
 ```
-官方中文页 ─┐                                    ┌─→ src/      旧站（当前发布口径）
-            ├─→ 抓取 → src/data/upstream/ → 合并 → src/data/  ─┼─→ app/public/ → dist/  新站（Vue，迁移中）
+官方中文页 ─┐                                    ┌─→ app/public/ → dist/  页面读的这一份
+            ├─→ 抓取 → app/data/upstream/ → 合并 → app/data/  ─┤
 解包资料站 ─┘        （原始转述，不进页面）    （唯一成品基底）└─→ for-mini/            小程序快照
 ```
 
@@ -15,8 +17,8 @@
 
 | 层 | 目录 | 规则 |
 | --- | --- | --- |
-| 原始转述 | `src/data/upstream/` | 抓取脚本的落点。**页面永远不读它**，改数据先改这里再合并，方便复跑与对比 |
-| 成品基底 | `src/data/*.json` | **全线唯一真相**：网页两栈 + 小程序都读它，不存在第二份手抄表 |
+| 原始转述 | `app/data/upstream/` | 抓取脚本的落点。**页面永远不读它**，改数据先改这里再合并，方便复跑与对比 |
+| 成品基底 | `app/data/*.json` | **全线唯一真相**：网页与小程序都读它，不存在第二份手抄表 |
 | 构建副本 | `app/public/`、`for-mini/oss-preview/` | 由脚本从基底复制，git 忽略或可复现；**永远不手改** |
 
 派生文件同理：`scale.json`（所有规模数字）、`search.json`（全站搜索索引）、`icons.json`（图标映射）、
@@ -33,7 +35,7 @@
 | 客户端改动清单 | 解包站 `_shuju/…/changes.json` | `tools/refresh.sh changes` | **入库前就删掉前后对照句子**，只留名称与类别 |
 | 传承（专长树 / 挑战 / 奖励） | 解包站 `_shuju/…/legacy.json` | `tools/refresh.sh legacy` | 同样**落盘前删句子**：每层效果说明、常见问题、领取说明一律不进仓库；未公开的槽位留空标"未公开" |
 | 官方中文（技能四态 / 种族） | 国服官方公告页（现有 4 篇职业深度解析：猎人+德鲁伊、牧师+战士、法师+萨满祭司、潜行者+术士） | `tools/refresh.sh official` | 整句照录，名称不在句里就丢弃，不机翻。**2026-10-12 采到第 4 篇后，466 个天赋名里 462 个（99.1%）能与官网对上**；只剩圣骑士没发稿，它的三个系名保持现状不猜 |
-| 图标 | 暴雪官方 CDN（只允许这个域名） | `tools/refresh.sh icons` | 403 = 没有这张图，退回自绘块 |
+| 图标 | 暴雪官方 CDN 为常规来源，天裔小图标有根规则特例 | `tools/refresh.sh icons` | 403 只表示这次候选请求未取到文件，记录地址和状态后再判断；不能据此断言素材不存在 |
 | 原画（职业背景 / 载入图 / 小地图 / 首领头像） | 第三方站转存 | `python3 tools/fetch-art.py --what all` | 独立目录 + `manifest.json`，整目录删掉即回退。**首领头像不许拼 URL**：源站文件名是它自己那套首领键（`rhahkzor`），与我们存的 id（`rhahk-zor`）不同名，必须先 `scrape-wclbox-dom.py --what bossfaces` 把真实路径读回来 |
 | 副本排队元数据 | 解包站 `_shuju/<发布号>/dungeons.json`（35 条，**没有首领与掉落**） | `python3 tools/scrape-wclbox-shuju.py --group dungeons` | 已接进 `refresh.sh dungeons`：补阵营与所在区域；它的 `enter` 列对不上客户端表，**不采** |
 | 客户端排队表 | `wago.tools/db2/GroupFinderActivity/csv?build=<客户端版本>` | `python3 tools/fetch-db2-groupfinder.py` | 英文原名、等级区间、一次几人。非暴雪域名 → 英文名只算 L1；构建号从 `_shuju/…/meta.json` 现读 |
@@ -57,9 +59,8 @@
 | 门禁 | 命令 | 拦的事故 |
 | --- | --- | --- |
 | 数据校验 | `node tools/build-data.js` | 标了已核实却没有官方来源、掉落出现百分比、图标指向外链、id 重复、来源类型与域名不匹配、**正文里出现维护者措辞**（词表 `tools/copy-banned.json`）、页面数字与 `scale.json` 漂移、上线日期三处不一致 |
-| 译名逐字回查 | `python3 tools/audit-translations.py --strict` | 我们抄错了官方原句：**声称 L0/L1 的条目**拿回它自己声明的那个 URL 里逐字找不到 → 退出码非 0。L2/L3 的未命中与"去掉排版空格才命中"只出警告（后者是官方页用强调标签把词从中间拆开的转换产物，squeeze 只删汉字之间的空白，不可能把错词拼成对词）；但并写形式指代的词（官方写「冰霜与火焰陷阱」）必须逐条走 `src/data/audit-exceptions.json` 留人工判定，不能靠降级蒙过去 |
-| 界面回归 | `python3 tools/site-check.py`（加 `--app` 跑新站） | 页面渲染坏、点不动、375px 点击目标偏小、**渲染后的文字里出现维护者措辞**、搜索跳过去没筛好 |
-| 两栈对拍 | `python3 tools/app-parity.py --strict` | 迁一页时新旧两版内容悄悄不一样（结构 / 类名 / 正文 / 链接 / 图片） |
+| 译名逐字回查 | `python3 tools/audit-translations.py --strict` | 我们抄错了官方原句：**声称 L0/L1 的条目**拿回它自己声明的那个 URL 里逐字找不到 → 退出码非 0。L2/L3 的未命中与"去掉排版空格才命中"只出警告（后者是官方页用强调标签把词从中间拆开的转换产物，squeeze 只删汉字之间的空白，不可能把错词拼成对词）；但并写形式指代的词（官方写「冰霜与火焰陷阱」）必须逐条走 `app/data/audit-exceptions.json` 留人工判定，不能靠降级蒙过去 |
+| 界面回归 | `python3 tools/site-check.py`（先 `cd app && npm run build`，它打的是 `app/dist`） | 页面渲染坏、点不动、375px 点击目标偏小、**渲染后的文字里出现维护者措辞**、搜索跳过去没筛好 |
 | 视觉回归 | `python3 tools/visual-check.py --check` | 改完"像不像"以前没有任何机器能判（历史上三次走样都是人眼在截图里发现的）。两层：像素层查整页尺寸 + 变化占比 + 平均色差，生效值指纹层查每页 121 个**实际生效**的样式值——把卡片圆角从 3px 改回 8px 这种像素看不出来的漂移，只有指纹层点得名。取图默认从 git 版本取（`--rev`），不受正在改的工作区影响；像素基线 18 MB 是本机资产不进仓库，130 KB 的指纹进仓库。**没挂进 `refresh.sh`**：合法改版必须人工看过差异图才允许 `--make` 重冻 |
 
 **对账（不是门禁，不拦提交）**：`python3 tools/audit-wowhead.py --write` → `docs/DATA-WOWHEAD-<日期>.md`。
@@ -67,7 +68,7 @@
 它对不了任何中文名（Forever 区只有英文），也不产生"谁对"的结论，只给"另一家怎么说"这一层。
 要真浏览器（curl 403），所以不进门禁；季度或大改天赋线之后跑一次即可。
 
-小程序导出 `node tools/export-mini.js` 额外拦一条：产物必须可复现（重跑后 `git status` 干净）且不超主包预算。
+小程序导出 `node tools/export-mini.js` 额外拦一条：产物必须可复现（比较导出前后的目标产物差异，不要求已有并行改动的整个 `git status` 为空）且不超主包预算。
 
 > **2026-10-10 修掉一个让整条产线跑不完的门禁**：`audit-translations.py --strict` 原来把
 > "排版空格才命中"（45 条）和"L2/L3 未命中"（2 条）也算失败，而这两类按定义就不是抄错——
@@ -88,18 +89,18 @@
 ## 五、加一个新板块的固定七步
 
 1. **采编**：确认能取哪些字段（只取事实性标识符），写进 `wow-infinite-sources.md`；取不到就写"等"。
-2. 抓取脚本 → 落 `src/data/upstream/`，**入库前先删描述文案**。
-3. 合并脚本 → 出 `src/data/<板块>.json`，每条带 `provenance[{type,url,note,checkedAt,quote}]`。
+2. 抓取脚本 → 落 `app/data/upstream/`，**入库前先删描述文案**。
+3. 合并脚本 → 出 `app/data/<板块>.json`，每条带 `provenance[{type,url,note,checkedAt,quote}]`。
 4. `build-data.js` 加这一块的校验（缺名称、id 重复、坐标对不上、禁词、百分比）。
 5. 页面渲染 + 进 `search.json` 索引（在 `build-data.js` 的 `SK` 里加一类）+ 深链预填。
 6. `site-check.py` 加断言、拍 1440 与 375 截图；`docs/UI.md` 加一节规格。
-7. 人工写一条 `src/data/releases.json`（玩家向的更新说明）。**提交号必须指向已经存在的提交**，所以顺序是：先提功能提交 → 再补一条 releases 指向它的哈希（第二次提交很小）。`build-data.js` 会回仓库核对哈希存不存在，写个假哈希直接构建失败。
+7. 人工写一条 `app/data/releases.json`（玩家向的更新说明）。**提交号必须指向已经存在的提交**，所以顺序是：先提功能提交 → 再补一条 releases 指向它的哈希（第二次提交很小）。`build-data.js` 会回仓库核对哈希存不存在，写个假哈希直接构建失败。
 
 ## 六、发布动作（必须人工确认，脚本不代做）
 
 `tools/refresh.sh publish` 只负责把该跑的全跑一遍并报"全绿"。**真正的发布要人再做三件事**：
 
-1. 网页：把 `src/`（当前发布口径）同步到托管处；新站 `app/dist/` 在迁移期不接管入口。
+1. 网页：构建 `app/`，用 `release-package.py` 生成并验证部署包；要更新 GitHub Pages 时再按 `deploy-gh-pages.py` 的目标仓库与产物白名单复核。`src/` 旧页只作参照，不把整个 `src/` 当当前产品上传。
 2. 小程序：先跑 `export-mini.js`，再在开发者工具里上传体验版手测点击类动作（本机 automator 点不动，见根 `AGENTS.md` 第 4 条）。
 3. 提交与推送：只提自己改的文件，`git fetch` 后再推。
 
@@ -108,9 +109,9 @@
 `tools/refresh.sh status` 就是按这三档把缺口列出来的（能补 / 要人工核 / 等外部），
 每条带数量与下一步命令——想知道"这次该动哪一块"，先跑它，别靠记忆。
 
-- **等外部**：官方没发中文稿、CDN 没有那个文件、上游没切图 → 界面上写明"待实测 / 未公布"，登记在 `icon-gaps.json` 与 `docs/ASSET-GAPS-*.md`。
+- **等外部**：官方没发中文稿、经核对的候选图源未取到文件、上游没切图 → 界面上写明"待实测 / 未公布"，登记在 `icon-gaps.json` 与 `docs/ASSET-GAPS-*.md`。
 - **退回自绘**：图标与原图取不到 → 自绘块，绝不热链别人的图。
-- **决定不做**：攻略、百分比、强度排行、UGC、新闻流 → 写进 `docs/PLAN-open-items.md` 第三节，页面上"刻意不做的"那一栏也摆着。
+- **决定不做**：掉率百分比、本站自算强度评分、UGC 与循环提示等依根规则维持禁区。网页动态与主观排行已获站主放开，小程序仍不做；旧 `PLAN-open-items.md` 是历史盘点，不作当前红线。
 
 **没有"先随便填个数占位"这一档。**
 
@@ -120,10 +121,9 @@
 | --- | --- | --- |
 | 抓取脚本报"拿不到发布号" | 解包站改版 | 打开站点页面看 `_shuju/<发布号>/` 还在不在，改 `scrape-wclbox-shuju.py` 的 `BUILD_RE` |
 | 校验说"icon-gaps 过期" | 数据改了没重跑图标映射 | `python3 tools/build-icon-map.py` 后再跑一次 `build-data.js` |
-| 图标全是自绘块 | CDN 返回 403（= 没这张图，不是网络问题） | 换区域换尺寸也没用，登记进缺口清单 |
-| 对拍报差异 | 只改了一栈 | 两栈同一处一起改，或把有意差异登记进 `app-parity.py` 的 `INTENTIONAL` |
+| 图标全是自绘块 | 当前候选 CDN 地址未取得文件，也可能是地址或网络问题 | 记录实际请求、状态码与候选路径；不能仅凭 403 断言素材不存在，再按根规则决定自绘或特例来源 |
 | 页面上冒出"上游 / mapId / 本轮" | 新写的句子没过禁词表 | 按 `tools/copy-banned.json` 的 `why` 改成人话，别往表里加豁免 |
-| 搜索结果跳过去没筛好 | 那一页没接 `?q=` | 每加一个板块入口，就要在目标页接住词（`site-check.py` 第 17 节会红） |
+| 搜索结果跳过去没筛好 | 那一页没接 `?q=` | 每加一个板块入口，就要在目标页接住词（`site-check.py` 的 site_wide 与 search 那组会红） |
 | `refresh.sh` 报 `set: pipefail\r: invalid option name` | 本机三条凑齐：`bash` 只有 WSL 入口（无 Git Bash）+ 仓库 `.sh` 是 CRLF 行尾 + 脚本里写 `python3` | 不修脚本不装 Git Bash：查该场景背后**等价的 python/node 单命令**直接跑（面板 8830 的门禁就是拆好的单命令）；完整链路要跑时走 WSL 侧或先统一行尾（2026-10-13 站主拍板：本机日常就用单命令口径） |
 
 **Windows 本机口径（2026-10-13 站主确认）**：数据操作在本机一律拆成 refresh.sh 背后的那条 python/node 单命令跑，`refresh.sh` 的多步链路（world/dungeons/check/publish 等）本机不跑；它的价值在把顺序写死，跑之前先照脚本把命令按顺序手打一遍。数据管线控制台（`python tools/admin/server.py`，127.0.0.1:8830，内部工具非玩家页面）就是按这个口径做的壳：只读 + 白名单单命令。
@@ -131,7 +131,7 @@
 ## 改完数据要让 :8821 跟上，是两步不是一步（2026-10-19 踩过）
 
 ```bash
-node tools/build-data.js          # ① 重算 src/data/*.json
+node tools/build-data.js          # ① 重算 app/data/*.json
 python3 tools/app-assets.py       # ② 同步到 app/public/
 cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的是这一份
 ```
@@ -144,16 +144,16 @@ cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的�
 磁盘上 `navNew` 已经是 `['副本','世界']`、服务里还是 `['世界']`，门禁红了一条
 （红是对的红，但原因不在断言也不在组件）。补跑 ③ 之后 94/94。
 
-**记这条的判断口径**：改过 `src/data/**` 之后，只要要看页面或跑 `site-check --app`，
+**记这条的判断口径**：改过 `app/data/**` 之后，只要要看页面或跑 `site-check`，
 ②③ 两步都得跑；`tools/serve.sh` 起的服务也一样，它不会替你做构建。
 
 ## 素材层加一张图，规矩是「先写 manifest，再谈 art.json」（2026-10-21 记）
 
-站主从本机客户端导出了一张海加尔山的载入画面（`src/img/art/dungeons/hyjal-summit.webp`），
-`tools/import-client-export.py` 同时把它写进了 `src/img/art/manifest.json` 的 `items`
+站主从本机客户端导出了一张海加尔山的载入画面（`app/img/art/dungeons/hyjal-summit.webp`），
+`tools/import-client-export.py` 同时把它写进了 `app/img/art/manifest.json` 的 `items`
 （`kind: dungeon-loading`、`origin: client-export`、带 sha256 与来源说明）。
 
-**为什么必须进 manifest**：`tools/fetch-art.py` 生成 `src/data/art.json` 时
+**为什么必须进 manifest**：`tools/fetch-art.py` 生成 `app/data/art.json` 时
 **完全按 manifest 的 items 重算**（第 546 行起 `idx = {...}` 建空表，逐条按 `kind` 归桶，
 `dungeon-loading` 落到 `else` 分支进 `dungeons`）。
 所以只把文件拷进目录、不写 manifest，`fetch-art.py` 一跑这行就从索引里消失，而且不报错。
@@ -163,5 +163,5 @@ cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的�
 （我先写下过一句"重跑 fetch-art 会把它冲掉"，验完发现方向反了——
 只要 manifest 里有这条，它就冲不掉；冲得掉的是没进 manifest 的文件。）
 
-图标那一层不受这条影响：`fetch-art.py` 不碰 `src/img/icons/`，
+图标那一层不受这条影响：`fetch-art.py` 不碰 `app/img/icons/`，
 但补图之后要重跑 `python3 tools/build-icon-map.py`，让派生的 `icon-gaps.json` 跟上，别手改。

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""抓无限数据库 wowforever.wclbox.com 的结构化事实，落到 src/data/upstream/。
+"""抓无限数据库 wowforever.wclbox.com 的结构化事实，落到 app/data/upstream/。
 
 只取事实性标识符：名单、等级区间、新本标记、BOSS 名、掉落归属、物品 ID、图标文件名。
 它的描述文案、背景故事、BiS 结论、排行一律不取（红线）。
@@ -24,7 +24,7 @@ import time
 
 BASE = "https://wowforever.wclbox.com"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream")
+UP = os.path.join(ROOT, "app", "data", "upstream")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 

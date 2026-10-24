@@ -51,7 +51,9 @@ const EXPORT_TOOL = path.join(__dirname, 'export-mini.js');
 /* 路径每次调用现读，测试才能在同一进程里换夹具目录 */
 const previewDir = () => process.env.WOW_MINI_PREVIEW || path.join(MINI, 'oss-preview');
 const buildRoot = () => process.env.WOW_MINI_BUILD || path.join(MINI, 'oss-build');
-const siteSrc = () => process.env.WOW_SITE_SRC || path.join(WEB, 'src');
+/* 站点基底这一层现在是 app/（2026-10-24 旧站删掉、src/ 整目录清掉，数据与素材搬进 app/）。
+   变量名 siteSrc 与那个已不存在的目录同义，留着比改成 siteBase 更容易让人以为还有一份旧站。 */
+const siteSrc = () => process.env.WOW_SITE_SRC || path.join(WEB, 'app');
 const siteData = () => path.join(siteSrc(), 'data');
 const localCredPath = () => process.env.WOW_OSS_LOCAL_ENV || path.join(REPO, '.oss-env');
 const crossCredPath = () => process.env.WOW_OSS_CROSS_ENV || path.join(REPO, '..', 'p2-database', 'auto_browser', '.env');
@@ -298,7 +300,7 @@ function specArtFor(artIndex, classId, ti, useAsset) {
 }
 
 /* 导出产物 ↔ 基底对拍：在临时目录里把真源重导一遍，逐字节比 oss-preview。
-   不这么办的话，指针溯源写的是 A（src/data 的哈希），发出去的却是 B（有人手改过的
+   不这么办的话，指针溯源写的是 A（app/data 的哈希），发出去的却是 B（有人手改过的
    oss-preview），两边一致只证明一致，不证明它来自基底。 */
 function reExportCompare() {
   const rels = EXPORT_RELS;
@@ -313,7 +315,7 @@ function reExportCompare() {
     /* 导出层自己还要读禁词表（它给玩家看的说明文字也过同一把尺子），
        沙箱里少拷一个文件，重导出就会 ENOENT、对拍变成"没产出 oss-preview"这种误导性的红。 */
     fs.copyFileSync(path.join(__dirname, 'copy-banned.json'), path.join(web, 'tools', 'copy-banned.json'));
-    fs.symlinkSync(siteSrc(), path.join(web, 'src'));
+    fs.symlinkSync(siteSrc(), path.join(web, 'app'));
     let exportErr = '';
     try {
       cp.execFileSync('node', [path.join(web, 'tools', 'export-mini.js')], {
@@ -375,7 +377,7 @@ function buildBatch(env, opts) {
   const itemsSrc = path.join(siteData(), 'items.json');
   const itemDetailSrc = path.join(siteData(), 'items-detail.json');
   if (!fs.existsSync(itemsSrc) || !fs.existsSync(itemDetailSrc)) {
-    errors.push('缺少装备基底 src/data/items.json 或 items-detail.json，装备详情卡没有数据来源');
+    errors.push('缺少装备基底 app/data/items.json 或 items-detail.json，装备详情卡没有数据来源');
   }
   const itemsIndex = {};
   const itemDetailIndex = {};
@@ -390,10 +392,10 @@ function buildBatch(env, opts) {
   const assetUse = {};
   const assetMissing = [];
   const statAsset = (rel) => {
-    const abs = path.join(WEB, 'src', 'img', rel);
+    const abs = path.join(WEB, "app", "img", rel);
     if (!fs.existsSync(abs)) return null;
     const buf = fs.readFileSync(abs);
-    return { rel, srcRel: 'src/img/' + rel, bytes: buf.length, sha256: sha256(buf), etag: md5Hex(buf) };
+    return { rel, srcRel: 'app/img/' + rel, bytes: buf.length, sha256: sha256(buf), etag: md5Hex(buf) };
   };
   const useAsset = (siteRel, why) => {
     const rel = assetRelFromSite(siteRel);
@@ -406,7 +408,7 @@ function buildBatch(env, opts) {
   const useIcon = (key, why) => {
     if (!key) return null;
     const rel = 'icons/' + key + ICON_EXT;
-    if (!statAsset(rel)) { assetMissing.push({ ref: rel, reason: '图标文件不在 src/img/icons/', by: why }); return; }
+    if (!statAsset(rel)) { assetMissing.push({ ref: rel, reason: '图标文件不在 app/img/icons/', by: why }); return; }
     assetUse[rel] = statAsset(rel);
   };
   const list = [].concat(dungeons.newDungeons || [], dungeons.classicDungeons || [], dungeons.raids || []);
@@ -444,12 +446,12 @@ function buildBatch(env, opts) {
 
   const srcFiles = BASE_INPUTS.map((f) => {
     const abs = path.join(siteData(), f);
-    if (!fs.existsSync(abs)) { errors.push('找不到基底文件 src/data/' + f); return null; }
+    if (!fs.existsSync(abs)) { errors.push('找不到基底文件 app/data/' + f); return null; }
     const buf = fs.readFileSync(abs);
-    return { rel: 'src/data/' + f, bytes: buf.length, sha256: sha256(buf) };
+    return { rel: 'app/data/' + f, bytes: buf.length, sha256: sha256(buf) };
   }).filter(Boolean);
 
-  /* —— 与真源对拍：这一批必须能由 src/data 重导出得到 —— */
+  /* —— 与真源对拍：这一批必须能由 app/data 重导出得到 —— */
   let exportCheck = null;
   if (!(opts && opts.skipExportCheck)) {
     const chk = reExportCompare();
@@ -458,7 +460,7 @@ function buildBatch(env, opts) {
       return { errors };
     }
     exportCheck = { tool: chk.tool, reproduced: true,
-      note: '构建时在临时目录用同一份 src/data 重跑了一遍 export-mini.js，' + chk.outputs.length + ' 份导出产物逐字节相同。',
+      note: '构建时在临时目录用同一份 app/data 重跑了一遍 export-mini.js，' + chk.outputs.length + ' 份导出产物逐字节相同。',
       outputs: chk.outputs };
   }
 
@@ -501,7 +503,7 @@ function buildBatch(env, opts) {
 
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
-    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/src/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
+    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
     pushObj('dungeonDetail:' + d.id, 'dungeons/detail/' + d.id + '.json', det, {
       records: 1, budget: 'detail', facts: collectFactDates([d])
     });
@@ -540,7 +542,7 @@ function buildBatch(env, opts) {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'spell-class',
       classId: g.c.classId, nameCn: g.c.nameCn || null, nameEn: g.c.nameEn || null,
       iconKey: g.c.iconKey || null,
-      source: 'wow-forever-web/src/data/spells.json',
+      source: 'wow-forever-web/app/data/spells.json',
       fieldNote: spells.meta ? spells.meta.fieldNote : '',
       levelPolicy: spells.meta ? spells.meta.levelPolicy : '',
       spells: g.rows.map((s) => Object.assign({}, s))
@@ -553,7 +555,7 @@ function buildBatch(env, opts) {
     schemaVersion: SCHEMA_VERSION,
     product: PRODUCT,
     kind: 'spell-class-index',
-    source: 'wow-forever-web/src/data/spells.json',
+    source: 'wow-forever-web/app/data/spells.json',
     counts: { total: spellList.length, classes: spellGroups.length },
     fieldNote: spells.meta ? spells.meta.fieldNote : '',
     pageNote: spells.meta ? spells.meta.pageNote : '',
@@ -602,7 +604,7 @@ function buildBatch(env, opts) {
      不登记就会撞上下面那条反向卡口（界面要、素材层没有＝玩家看到的是一片纯色而不是报错）。 */
   const uiArtSrc = path.join(siteData(), 'ui-art.json');
   if (!fs.existsSync(uiArtSrc)) {
-    errors.push('找不到基底文件 src/data/ui-art.json：首页底图没有真源，界面不许自己抄路径');
+    errors.push('找不到基底文件 app/data/ui-art.json：首页底图没有真源，界面不许自己抄路径');
   } else {
     const uiPack = readJson(uiArtSrc);
     const walkUi = (node, where) => {
@@ -674,7 +676,7 @@ function buildBatch(env, opts) {
     schemaVersion: SCHEMA_VERSION,
     product: PRODUCT,
     kind: 'class-index',
-    source: 'wow-forever-web/src/data/races.json + classes.json + talents/',
+    source: 'wow-forever-web/app/data/races.json + classes.json + talents/',
     comboNote: classPack.meta ? classPack.meta.comboNote : '',
     counts: {
       races: raceList.length,
@@ -746,7 +748,7 @@ function buildBatch(env, opts) {
     schemaVersion: SCHEMA_VERSION,
     product: PRODUCT,
     kind: 'loot-index',
-    source: 'wow-forever-web/src/data/dungeons.json',
+    source: 'wow-forever-web/app/data/dungeons.json',
     cols: lootCols,
     note: '一张表列全本站收录副本的掉落：每行按 cols 的顺序排，boss 是这座本 bosses 数组里的序号。'
       + '同一件装备出现在两座本时是两行，反查时按 itemId 归到一起。',
@@ -921,7 +923,7 @@ function buildBatch(env, opts) {
     source: {
       commit,
       inputs: srcFiles,
-      inputsNote: '这里哈希的是站点基底 src/data 的原件；批次文件由 export-mini.js 从这些原件派生，构建时已在临时目录重导一遍并逐字节对拍（见 exportCheck）。',
+      inputsNote: '这里哈希的是站点基底 app/data 的原件；批次文件由 export-mini.js 从这些原件派生，构建时已在临时目录重导一遍并逐字节对拍（见 exportCheck）。',
       generator: { tool: 'wow-forever-web/tools/oss-release.js', sha256: builderSha,
         note: 'buildId 的指纹里含生成器自身的哈希：生成逻辑变了就换批次号，同 buildId 不可能出现不同字节。' },
       exportCheck
@@ -1256,7 +1258,7 @@ function cmdBuild(env, opts) {
   logLine('  数据文件 ' + built.entries.length + ' + files.json + manifest = ' + built.manifest.counts.files
     + ' 个 · 合计 ' + kb(built.manifest.counts.bytes) + ' KB · 指针 ' + pointerKey(env));
   logLine('  导出对拍：' + (built.manifest.source.exportCheck
-    ? built.manifest.source.exportCheck.outputs.length + ' 份产物与 src/data 重导出逐字节一致（' + built.manifest.source.exportCheck.tool + '）'
+    ? built.manifest.source.exportCheck.outputs.length + ' 份产物与 app/data 重导出逐字节一致（' + built.manifest.source.exportCheck.tool + '）'
     : '已跳过（--skip-export-check）'));
   logLine('  冷启动按副本看是 manifest ' + kb(out.manifestBuf.length) + ' + 副本索引 ' + kb(idx.bytes)
     + ' + meta ' + kb(built.manifest.fetch.meta.bytes) + ' = ' + kb(cold)
@@ -1303,7 +1305,7 @@ async function cmdAssets(env, opts) {
   const indexBuf = assetIndexBuf(built);
   const targets = keys.map((rel) => ({
     key: NAMESPACES[env] + '/' + ASSET_DIR + '/' + rel,
-    buf: fs.readFileSync(path.join(WEB, 'src', 'img', rel)),
+    buf: fs.readFileSync(path.join(WEB, "app", "img", rel)),
     label: rel,
     type: contentTypeFor(rel),
     disp: ASSET_DISP

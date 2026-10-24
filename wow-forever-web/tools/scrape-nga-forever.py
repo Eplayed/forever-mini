@@ -405,7 +405,7 @@ a{{color:#1a6fb8;text-decoration:none}} a:hover{{text-decoration:underline}}
 </style>
 <h1>NGA「{FORUM_NAME}」板块采集快照</h1>
 <p class=note><b>这是内部选题参考，不是本站成品。</b>下面 {len(items)} 条帖子里的文字都是玩家原创，
-按仓库红线：不转载、不摘要上页面、不进小程序，也不进 <code>src/data</code> 的数据基底。
+按仓库红线：不转载、不摘要上页面、不进小程序，也不进 <code>app/data</code> 的数据基底。
 生成于 {now_iso()}。</p>
 <p>正文已抓 {len(bodies)} 条（点开条目展开）；未抓的只有列表元数据。</p>
 {''.join(tr)}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 合并三份 upstream 快照 → src/data/items-detail.json（物品线二批：W2-3 全量抓取后重排层级）。
+# 合并三份 upstream 快照 → app/data/items-detail.json（物品线二批：W2-3 全量抓取后重排层级）。
 #
 # 优先级（**站主 2026-10-16 拍板「取值也以插件为准」，层级反转**；
 #   10-15 那次定的"wclbox 当前 build 优先"同日作废，两条决定都记在 ROLES.md 与 PRD §四）：

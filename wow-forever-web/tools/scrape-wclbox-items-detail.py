@@ -23,7 +23,7 @@
 # 用法：python3 tools/scrape-wclbox-items-detail.py            # 全量（默认）
 #       python3 tools/scrape-wclbox-items-detail.py --limit 50  # 小批试跑
 #       python3 tools/scrape-wclbox-items-detail.py --sample 200  # 等步长抽样（只当校准，别覆盖历史试采样本）
-# 产物：src/data/upstream/wclbox-items-detail.json
+# 产物：app/data/upstream/wclbox-items-detail.json
 
 import json
 import os
@@ -37,7 +37,7 @@ import gzip
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, 'src', 'data')
+DATA = os.path.join(ROOT, "app", "data")
 
 try:
     import certifi

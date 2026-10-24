@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把 upstream/wclbox-items-index.json（全量物品名录快照）合并成成品基底 src/data/items.json。
+"""把 upstream/wclbox-items-index.json（全量物品名录快照）合并成成品基底 app/data/items.json。
 
 为什么不算"二源分歧"：物品名录是单源（wclbox 转述客户端解包），按 2026-10-08 的
 datamine_cn 口径直接算 L0——代价是带 url + 抓取日期（meta 里），物品名在界面上
@@ -19,8 +19,8 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UP = os.path.join(ROOT, "src", "data", "upstream", "wclbox-items-index.json")
-OUT = os.path.join(ROOT, "src", "data", "items.json")
+UP = os.path.join(ROOT, "app", "data", "upstream", "wclbox-items-index.json")
+OUT = os.path.join(ROOT, "app", "data", "items.json")
 
 VALID_STATUS = ("new", "changed", "same", "missing", "rebuilt")
 # 上游首页把 7 件 ic-rebuilt（重建）并进"新增 5,353"统计；我们保留为独立状态值，
@@ -83,7 +83,7 @@ def main():
     #   absent=探针查不到 / present=确认掉过或服务器有 / 没有这个字段=作者没表态。
     # 界面上按站主 2026-10-20 定的"以插件为准"读 srv，status 留在数据里；
     # 两边说法相反的那 82 件（上游说没有、探针说有）由 build-data.js 数出来写进溯源页。
-    EX_PATH = os.path.join(ROOT, "src", "data", "upstream", "gi-item-existence.json")
+    EX_PATH = os.path.join(ROOT, "app", "data", "upstream", "gi-item-existence.json")
     absent, present = set(), set()
     if os.path.exists(EX_PATH):
         ex = json.load(open(EX_PATH, encoding="utf-8"))

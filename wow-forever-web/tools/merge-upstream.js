@@ -8,7 +8,7 @@ const cp = require('child_process');
 const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA = path.join(ROOT, 'src', 'data');
+const DATA = path.join(ROOT, "app", "data");
 const UP = path.join(DATA, 'upstream');
 const CLS = ['hunter', 'druid', 'priest', 'warrior', 'paladin', 'shaman', 'mage', 'warlock', 'rogue'];
 const CN = { hunter: '猎人', druid: '德鲁伊', priest: '牧师', warrior: '战士', paladin: '圣骑士', shaman: '萨满祭司', mage: '法师', warlock: '术士', rogue: '潜行者' };

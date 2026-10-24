@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""按图标文件名从暴雪官方 CDN 取图，本地留存到 src/img/icons/。
+"""按图标文件名从暴雪官方 CDN 取图，本地留存到 app/img/icons/。
 
 红线：第三方站只给"文件名"这类事实性标识符，图片字节一律从官方 CDN 取，页面里不热链任何第三方域名。
 本脚本只允许 --base 指向 render.worldofwarcraft.com，别的域名直接拒绝，防止手滑把别人的图床当素材源。
 
 用法：
     python3 tools/fetch-icons.py race_human_male class_warrior        # 取指定键
-    python3 tools/fetch-icons.py --from-json src/data/world.json --field iconKey   # 递归收集该字段再补抓
+    python3 tools/fetch-icons.py --from-json app/data/world.json --field iconKey   # 递归收集该字段再补抓
     python3 tools/fetch-icons.py --list                              # 只报缺哪些，不下载
 """
 import argparse
@@ -23,7 +23,7 @@ import sys
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ICON_DIR = os.path.join(ROOT, "src", "img", "icons")
+ICON_DIR = os.path.join(ROOT, "app", "img", "icons")
 MANIFEST = os.path.join(ICON_DIR, "manifest.json")
 ALLOWED_HOST = "render.worldofwarcraft.com"
 BASE = "https://render.worldofwarcraft.com/us/icons/56/"
@@ -147,7 +147,7 @@ def main():
         # 补一张图就把整份 missing 清成空，读的人以为全站不缺图了。改名 + 指向真正的登记。
         "batchAdded": len(ok),
         "batchUnavailable": missing,
-        "gapsRegistry": "src/data/icon-gaps.json（全站「数据里引用但本地没有」的键，"
+        "gapsRegistry": "app/data/icon-gaps.json（全站「数据里引用但本地没有」的键，"
                         "由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）",
         "batches": batches[-8:],
         "note": u"图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。"

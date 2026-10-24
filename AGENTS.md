@@ -8,10 +8,15 @@
 
 | 目录 | 是什么 | 状态 |
 | --- | --- | --- |
-| `wow-forever-web/` | 资料站：**`app/` Vue 3 + Vite 站（2026-10-16 起是唯一在做的产品，21 条路由）**、`src/` 零构建静态站 19 页（**已冻结**，不再加功能与改视觉，只留数据基底与回归参照）、`src/data/` 全线唯一数据基底、`tools/` 脚本、`docs/` 文档与站点截图 | 新站为准；旧站只读 |
+| `wow-forever-web/` | 资料站：**`app/` Vue 3 + Vite 站（唯一产品，21 条路由）**、`app/data/` 全线唯一数据基底、`app/img/` 本地素材、`app/src/styles/` 全站样式、`tools/` 脚本、`docs/` 文档与站点截图 | 2026-10-24 旧静态站已删除 |
 | `for-mini/` | 无限服小程序：原生微信小程序，与站点共用数据基底，`docs/` 放小程序侧截图与验证记录 | 底子：数据层 + 中英速查 + 首页完整度可用，四模块待实现 |
 | `ROLES.md`（仓库根） | 角色交接台账：状态快照、待确认项、交接记录 | 每轮更新 |
 | `backend/`（将来） | 数据生产与上传服务 | 未建 |
+
+**2026-10-24 站主拍板「不要旧站，只更新新站，删除旧站代码」，落地口径**：那份零构建静态站（`wow-forever-web/src/` 19 页 + `src/js/`）已整目录删掉，
+数据基底与素材搬到 `app/data/`、`app/img/`，三份全站样式搬到 `app/src/styles/`；发布包不再给旧 `*.html` 地址生成跳转桩（旧书签会 404，这是有意接受的）；
+两栈对拍脚本 `tools/app-parity.py` 一并删除。**仓库里从此没有 `src/` 这一层**，凡是写 `src/data`、`src/img`、`src/css`、`src/js` 的地方都是错路径。
+要恢复旧站只能从 git 历史里取回。
 
 **仓库根没有 `src/` 与 `docs/`**：所有代码与文档都在上面两个子目录里，写产出路径时必须带目录前缀。
 
@@ -24,13 +29,13 @@
 | 产品经理 | `wow-pm` | 需求、范围裁剪、验收标准 | `wow-forever-web/docs/PRD*.md` |
 | 策划 | `wow-planner` | 信息架构、内容组织、工具逻辑、分享卡 | `wow-forever-web/docs/PLAN-*.md` |
 | UI | `wow-ui` | 视觉规格、组件状态、渲染证据 | 令牌与规范 `wow-forever-web/docs/UI.md`；站点截图 `wow-forever-web/docs/screenshots/`；小程序截图 `for-mini/docs/screenshots/` |
-| 开发 | `wow-dev` | 实现、构建卡口、验证 | 代码 `wow-forever-web/src/`、`wow-forever-web/tools/`、`for-mini/`；验证记录 `for-mini/docs/VERIFY-*.md` 或 `wow-forever-web/docs/VERIFY-*.md` |
-| 数据采编 | `wow-data` | 来源、溯源、覆盖率、译名分歧 | `wow-forever-web/src/data/**`、`wow-forever-web/docs/wow-infinite-sources.md` |
+| 开发 | `wow-dev` | 实现、构建卡口、验证 | 代码 `wow-forever-web/app/`、`wow-forever-web/tools/`、`for-mini/`；验证记录 `for-mini/docs/VERIFY-*.md` 或 `wow-forever-web/docs/VERIFY-*.md` |
+| 数据采编 | `wow-data` | 来源、溯源、覆盖率、译名分歧 | `wow-forever-web/app/data/**`、`wow-forever-web/docs/wow-infinite-sources.md` |
 | 运营 | `wow-ops` | 平台合规、备案、上线节奏、增长 | `wow-forever-web/docs/OPS-*.md` |
 
 **六个角色 skill 的项目内唯一真源**是仓库根 `.agents/skills/wow-<角色>/SKILL.md`。Codex 从这个目录发现项目级 skill；Trae 的 `.trae/skills/` 与 Qoder 的 `.qoder/skills/` 是由真源生成的完整镜像，供各自项目级发现机制加载。任何 agent 换机或换工作目录，先从本文件找到真源，按本轮主角色读取对应 `SKILL.md`；不依赖某个人的 `~/.codex`、`~/.qoder` 等用户目录。**只编辑 `.agents/skills/`**，改完运行 `python3 wow-forever-web/tools/sync-role-skills.py --write`，再用 `--check` 核对镜像，勿分别手改三套正文。若运行时没自动列出 skill，仍按本文件显式读取真源；运行时是否成功发现需要在相应 agent 新会话中核实。
 
-小程序侧改数据**不另建第二份基底**：一律改 `wow-forever-web/src/data/`，再跑 `tools/export-mini.js` 导出。
+小程序侧改数据**不另建第二份基底**：一律改 `wow-forever-web/app/data/`，再跑 `tools/export-mini.js` 导出。
 
 ## 三、调用规则
 
@@ -93,8 +98,8 @@
      不推荐循环提示类插件、不做"哪个插件更好"的排序或评分**。名单整体按 L1 留档（与本站整理口径相同），
      界面上固定一句"插件为第三方作者作品，与本站无关，安装与使用风险自负"。
 - 素材一律本地留存、禁止热链。图标走"第三方站只给文件名 + 图片取自暴雪官方 CDN"（`tools/fetch-icons.py` 只允许官方 CDN 域名）。2026-10-08 实测：新技能图标 CDN 有，**新物品图标 CDN 没有**，天裔种族图标两边都没有 → 取不到的一律自绘，不猜图。
-- **客户端原画**（职业背景图、副本载入图、世界地图底图）官方 CDN 不提供，只能转存第三方站的副本。2026-10-08 用户决策：**网页与小程序都用**。执行要求：一律落到独立目录（`src/img/art/`）+ 目录内 `manifest.json` 记来源与抓取日期 + 保留"整目录删除即回退到自绘占位"的下线方案；小程序侧走 OSS 命名空间 `wow/{env}/v1/`，**不把这些图打进主包**。
-  - **同一类还包含本地插件目录里转存的加工图**（2026-10-19 站主拍板："从 DungeonsForever 里面用吧，没事的"，首批是 `src/img/art/dungeonmaps/` 那 27 张副本内部底图）。这类图**分两种来源，必须分开记、分开说**：① `game-capture`——插件作者从游戏里截下来的官方画面（`XR_DungeonGuide/Media/DungeonMaps`，作者自己在清单里写"粉丝整理 31 张实截图"），按上面那条客户端原画处理；② `addon-drawn`——**插件作者自绘的示意图**（游戏内根本没有这张图的无限新增本），除同样带 manifest 与"整目录删除即回退"之外，**页面上要就地标一句"这张是示意图，不是游戏里的地图"**，不许让玩家拿它当游戏原图找路。两种来源都写进每张图的 `manifest.json`（`origin` 字段）与成品数据（`bossMapKind`），`build-data.js` 卡"分类座数加起来等于能画点的座数"。**要撤回这一条**：删掉 `src/img/art/dungeonmaps/` 整个目录即可回到"首领位置只显示数字"。
+- **客户端原画**（职业背景图、副本载入图、世界地图底图）官方 CDN 不提供，只能转存第三方站的副本。2026-10-08 用户决策：**网页与小程序都用**。执行要求：一律落到独立目录（`app/img/art/`）+ 目录内 `manifest.json` 记来源与抓取日期 + 保留"整目录删除即回退到自绘占位"的下线方案；小程序侧走 OSS 命名空间 `wow/{env}/v1/`，**不把这些图打进主包**。
+  - **同一类还包含本地插件目录里转存的加工图**（2026-10-19 站主拍板："从 DungeonsForever 里面用吧，没事的"，首批是 `app/img/art/dungeonmaps/` 那 27 张副本内部底图）。这类图**分两种来源，必须分开记、分开说**：① `game-capture`——插件作者从游戏里截下来的官方画面（`XR_DungeonGuide/Media/DungeonMaps`，作者自己在清单里写"粉丝整理 31 张实截图"），按上面那条客户端原画处理；② `addon-drawn`——**插件作者自绘的示意图**（游戏内根本没有这张图的无限新增本），除同样带 manifest 与"整目录删除即回退"之外，**页面上要就地标一句"这张是示意图，不是游戏里的地图"**，不许让玩家拿它当游戏原图找路。两种来源都写进每张图的 `manifest.json`（`origin` 字段）与成品数据（`bossMapKind`），`build-data.js` 卡"分类座数加起来等于能画点的座数"。**要撤回这一条**：删掉 `app/img/art/dungeonmaps/` 整个目录即可回到"首领位置只显示数字"。
 - 小程序与资料站**不共用 appid、不共用 OSS 命名空间**：无限服用 `wow/{env}/v1/`，缓存 key 前缀 `wow_forever_v1_`。
 - 关键路径是**小程序备案 1–20 工作日**，任何排期先排它。
 
@@ -103,11 +108,11 @@
 1. 改动数据后必跑：`cd wow-forever-web && node tools/build-data.js`（非 0 退出即未完成）。
 2. 改小程序产物后加跑：`node wow-forever-web/tools/export-mini.js`（超主包预算即失败；重跑后 `git status` 应为空，产物必须可复现）。
 3. 界面改动必须有渲染证据，构建通过不算完成：
-   - 站点：**以新站为准**。`cd wow-forever-web && bash tools/serve.sh`（新站 :8821、旧站 :8817 只读参照）
+   - 站点：只有 `app/` 这一个站。人看用 `cd wow-forever-web && bash tools/serve.sh`（新站 :8821），
      + 无头 Chrome 截图，存 `wow-forever-web/docs/screenshots/`（桌面 + 375px 移动端）；
-     界面回归用 `python3 tools/site-check.py --app`（**这条才是新站的门槛**）。
-     `tools/app-parity.py` 自 2026-10-16 起降级为参考报告——它比的是"新站像不像旧站"，
-     旧站已冻结，红不代表做错，只用来确认没把已迁页的公共结构改散。
+     界面回归用 `python3 tools/site-check.py`（**这条是唯一的界面门槛**：它自己起静态服务打 `app/dist`，
+     所以跑之前必须 `cd app && npm run build`，否则断言全打在旧产物上）。
+     2026-10-24 旧站删除后 `--app` 旗标只是兼容旧命令；`tools/app-parity.py`（两栈对拍）随旧站一起删除。
    - 小程序：微信开发者工具（`cli auto --project for-mini --auto-port 9421` + automator）截图，存 `for-mini/docs/screenshots/`。
 4. 点击类动作在本机 automator 上会稳定超时（`element.tap()`、带 setData 回调的 `callMethod()`），拿不到证据时**必须在验证记录里单列"没验到的"并要人工手测**，不许用 `page.setData` 造出来的示意截图冒充逻辑通过。
 5. 每轮结束在仓库根 `ROLES.md` 的交接记录表加一行，带 `已定 / 待用户确认 / 阻塞（原因）` 状态。
@@ -123,7 +128,7 @@
 ## 2026-10-23 站主追加决定（优先于此前冲突口径）
 
 - **小程序种族图标统一用大图**：站主看完实拍拍板「10 个统一都换成大图」——小程序种族格与「无限新增的组合」
-  那一排的图标位，一律取 `art.json.races` 那批 **128 客户端种族头像**（`src/img/art/races/*.webp`，
+  那一排的图标位，一律取 `art.json.races` 那批 **128 客户端种族头像**（`app/img/art/races/*.webp`，
   2026-10-12 起就在库里、逐张带 manifest），不再按「谁有官方 CDN 图标谁用小图标」混排
   （混排的表现是同一排里 9 张 56、1 张 128，清晰度一眼看出两样）。
   口径边界三条：① 这批属于「客户端原画经第三方站转存」那一类，红线本来就允许，但**不许写成官方已核**；
@@ -155,5 +160,5 @@
 
 - 每轮先读根/目标子项目规则，再运行 `python3 wow-forever-web/tools/project-index.py --topic <主题>`；主题有rules/launch/spells/items/maps/updates/business/tests。该命令自动更新路径索引，不读业务正文。
 - 人读入口 `wow-forever-web/docs/PROJECT-INDEX.md`；路径快照JSON不必整份加载。用 `--find 关键词` 限定路径。索引只是导航，遇到冲突以原件和当前用户指令为准。
-- ROLES按末尾相关交接读取；先看git diff --stat再读目标diff。大JSON按ID提取，日志看失败及末尾；默认不全读src/data、upstream、历史VERIFY、截图/产物清单。
+- ROLES按末尾相关交接读取；先看git diff --stat再读目标diff。大JSON按ID提取，日志看失败及末尾；默认不全读app/data、upstream、历史VERIFY、截图/产物清单。
 - 收尾运行索引刷新。若直接使用旧索引先 `--check`，过期则刷新；索引不代替事实验证，也不要求为了“省token”跳过必要证据。

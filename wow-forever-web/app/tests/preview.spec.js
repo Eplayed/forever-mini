@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import { gridCells, countStates, nodeLabel, nodeFile, calcFile, treeOf } from '../src/lib/preview.js';
 import TalentPreview from '../src/components/TalentPreview.vue';
 
-// 假预览数据按 src/data/talent-preview.json 的字段顺序：[行, 列, 名称, 图标键, 上限, 改动状态]
+// 假预览数据按 app/data/talent-preview.json 的字段顺序：[行, 列, 名称, 图标键, 上限, 改动状态]
 const PV = {
   classes: {
     warrior: {

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """从 GearInsight_Forever/ItemMissingData.lua 抽「这件物品在无限测试服上有没有」这一层。
 
-为什么值得单独一层：本站物品名录（件数以 src/data/scale.json 为准）是从参考站的全量索引来的，里面混着
+为什么值得单独一层：本站物品名录（件数以 app/data/scale.json 为准）是从参考站的全量索引来的，里面混着
 "经典旧世有、无限服根本没做"的东西。玩家问的其实就一句——**这件我能不能搞到**。
 以前我们只有参考站自报的 status（missing 1,944 件）一条腿。
 
@@ -18,7 +18,7 @@
 
 只取 ID 集合这一层事实，作者写的注释与推荐逻辑不取。
 用法：python3 tools/extract-gi-item-existence.py [--src <插件根目录>]
-产物：src/data/upstream/gi-item-existence.json
+产物：app/data/upstream/gi-item-existence.json
 幂等：同输入字节一致。
 """
 import hashlib
@@ -31,7 +31,7 @@ from datetime import date
 
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEF_SRC = os.path.join(os.path.dirname(os.path.dirname(WEB)), '.scratch', 'wow-client-2026-10-21')
-UP = os.path.join(WEB, 'src', 'data', 'upstream')
+UP = os.path.join(WEB, "app", "data", 'upstream')
 
 
 def toc_version(addon_dir):
@@ -65,7 +65,7 @@ def main():
         sys.exit('找不到 %s' % p)
     blob = open(p, 'rb').read()
     got = parse(p)
-    items = json.load(io.open(os.path.join(WEB, 'src', 'data', 'items.json'), encoding='utf-8'))['items']
+    items = json.load(io.open(os.path.join(WEB, "app", "data", 'items.json'), encoding='utf-8'))['items']
     by = {int(x['id']): x.get('status') for x in items}
     miss, rec = set(got['ItemMissingIds']), set(got['ItemRecommendIds'])
     audit = {

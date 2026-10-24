@@ -25,7 +25,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "src", "data")
+DATA = os.path.join(ROOT, "app", "data")
 # 多久没重抓就要提醒。解包站跟着测试服发版，两周是个折中值
 STALE_DAYS = 14
 DAY = datetime.timedelta(days=1)
@@ -215,17 +215,20 @@ def build_rows():
     rows.append(("派生", "比基底数据旧的派生文件", len(lag), "A",
                  "node tools/build-data.js（图标映射先 python3 tools/build-icon-map.py）" if lag else "—"))
 
-    # ---- 两栈迁移进度 ----
+    # ---- 这一站有多少页 ----
+    # 2026-10-24 旧站删除：这里原来报的是"还在旧站、没迁过去的页数"（拿 src/*.html
+    # 的个数减 MIGRATED 的条数）。旧站没了、MIGRATED 成了历史表，两个数都说明不了事，
+    # 改成直接报路由数——它才是"这一站有多少页要维护"。
     routerp = os.path.join(ROOT, "app", "src", "router.js")
-    migrated = 0
+    routes = 0
     if os.path.exists(routerp):
         txt = io.open(routerp, encoding="utf-8").read()
-        m = re.search(r"MIGRATED\s*=\s*\{(.*?)\}", txt, re.S)
-        if m:
-            migrated = len(re.findall(r"'([^']+\.html)'", m.group(1)))
-    pages = len(glob.glob(os.path.join(ROOT, "src", "*.html")))
-    rows.append(("新站", "还在旧站、没迁过去的页面", max(pages - migrated, 0), "A",
-                 "一页一轮：改 app/ → app-parity.py --strict → site-check.py --app"))
+        block = re.search(r"const routes = \[(.*?)\n\];", txt, re.S)
+        if block:
+            routes = len([x for x in re.findall(r"\{\s*path:\s*'([^']+)'", block.group(1))
+                          if ":all" not in x])
+    rows.append(("新站", "路由有几页（site-check 逐路由跑的就是这一批）", routes, "A",
+                 "一页一轮：改 app/ → npm run build → python3 tools/site-check.py"))
 
     return rows, scale, stales, lag, now
 

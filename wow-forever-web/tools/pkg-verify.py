@@ -11,7 +11,8 @@
 钉的几件事（对应派工单 Q05 那一段）：
   1. base 用相对路径之后，挂根目录与挂子路径 /wow/ 两种都真能开（不能只改成 ./ 就当完事）；
   2. hash 路由的直达 / 刷新 / 换设备分享（新上下文、无历史无 referer）都能渲染出内容；
-  3. 旧页地址 talent.html 这一类：包里必须有桩，且带着查询串跳到位（不是被兜底吞成首页）；
+  3. 旧页地址 talent.html 这一类：2026-10-24 起跳转桩已随旧站撤掉，所以钉的是反向事实——
+     包里除 index.html 不许有第二个 .html，且访问它必须真 404（不是被兜底成 200 首页）；
   4. JSON / JS / CSS / 图片的 Content-Type 正确，缺的 .jpg 必须是 404 而不是 200 HTML；
   5. 站内的未知 hash 路由走"这页还没迁过来"，不给空白页。
 
@@ -146,17 +147,13 @@ def main():
     s, c = head(base_root + "/data/upstream/anything.json")
     check("upstream 原料不在包里（请求它得 404）", s == 404, "%s" % s)
 
-    print("\n[B] 旧页地址（talent.html 这一类）")
-    stubs = [f for f in os.listdir(site) if f.endswith(".html") and f != "index.html"]
-    check("每个旧页都有一个跳转桩（%d 个）" % len(stubs), len(stubs) >= 18, "、".join(stubs[:5]))
+    print("\n[B] 旧页地址（talent.html 这一类，2026-10-24 站主拍板撤掉跳转桩）")
+    extra = [f for f in os.listdir(site) if f.endswith(".html") and f != "index.html"]
+    check("包里没有旧页地址的跳转桩（除 index.html 外不许有 .html）", not extra,
+          "、".join(extra[:5]) or "只有 index.html")
     s, c = head(base_root + "/talent.html")
-    check("/talent.html 回的是桩自己（200 text/html），不是被兜底换成首页", s == 200 and "html" in c,
-          "%s %s" % (s, c))
-    body = open(os.path.join(site, "talent.html"), encoding="utf-8").read()
-    check("桩用相对路径跳 ./#/talent，且内置站内路由白名单（不做外站跳转）",
-          "./#/talent" in body and "http://" not in body and "https://" not in body
-          and '"/world":true' in body and "hasOwnProperty" in body,
-          "相对跳转 %s / 白名单 %s" % ("./#/talent" in body, '"/world":true' in body))
+    check("/talent.html 是 404，不是被兜底成 200 首页（撤桩后要的是明确失败，不是点了没反应）",
+          s == 404, "%s %s" % (s, c))
 
     from playwright.sync_api import sync_playwright
     print("\n[C] 浏览器里真开一遍（直达 / 刷新 / 分享 / 子路径）")
@@ -223,41 +220,8 @@ def main():
         check("分享副本详情直达链接能开到那一座（站名带该副本）",
               "通灵学院" in t4 and not errs, "%d 字 / 报错 %s" % (len(t4), errs[:1]))
         pg.close()
-        # 5) 旧页地址（跳转桩）。2026-10-20 独立验收点出上一版的漏：桩只看 location.search，
-        #    把 talent.html?c=shaman#/world 这种"来访者已经写好新站路由"的链接覆盖成天赋页。
-        #    所以这里按五种真实形态逐个在浏览器里跑，判的是**落地的 hash + 页面标题**
-        #    （标题由 router.afterEach 按路由 meta 设，能证明真到了那一页，不是只看字符串）。
-        STUB_CASES = [
-            ("/talent.html?c=hunter", "#/talent?c=hunter", "天赋计算器",
-             "旧地址没有 hash：按映射跳并带上原 query"),
-            ("/talent.html?c=shaman#/world", "#/world", "世界",
-             "旧地址带合法 hash：那个路由优先，不许被 html 映射覆盖"),
-            ("/updates.html?to=k1#/world?to=k2", "#/world?to=k2", "世界",
-             "hash 自己带 query：原样保留，不把外层 query 再拼一遍"),
-            ("/glossary.html#/glossary?q=%E7%8C%8E", "#/glossary?q=%E7%8C%8E", "中英术语速查",
-             "编码不动：百分号转义原样带过去"),
-            ("/talent.html#//evil.example.com/x", "#/talent", "天赋计算器",
-             "hash 不是站内已知路由：回落本桩映射，绝不跳外站"),
-        ]
-        MOUNTS = [("根目录", base_root, "")]
-        if base_sub:
-            MOUNTS.append(("子路径 /wow/", base_sub, "/wow"))
-        for mount_name, base, prefix in MOUNTS:
-            for suf, want_hash, want_title, why in STUB_CASES:
-                if mount_name != "根目录" and suf in (STUB_CASES[2][0], STUB_CASES[3][0]):
-                    continue        # query/编码那两条与挂载点无关，只在根目录跑一次
-                pg, fails, errs = open_url(base, prefix + suf)
-                pg.wait_for_timeout(1500)
-                got = pg.evaluate("""() => ({ h: location.hash, t: document.title,
-                          host: location.hostname })""")
-                # 主机名必须还是我们这一站：这条判的是"桩没把玩家带去别的站"。
-                # 原来写死 127.0.0.1，打到真域名上会假红，所以按当前 base 的 host 比。
-                want_host = re.sub(r"^https?://", "", base).split("/")[0].split(":")[0]
-                ok = (got["h"] == want_hash and got["t"].startswith(want_title)
-                      and got["host"] == want_host and not errs)
-                check("%s｜%s" % (mount_name, why), ok,
-                      "落到 %s（%s）/ 期望 %s（%s…）" % (got["h"], got["t"][:22], want_hash, want_title))
-                pg.close()
+        # 5) 旧页地址（talent.html 这一类）已经不再承接：跳转桩于 2026-10-24 随旧站一起撤掉，
+        #    静态托管方会直接回 404。上面 [B] 那条判的就是这个 404，浏览器里不必再跑五种形态。
         # 6) 站内未知 hash 路由：必须**留在本站**并落到有内容的一页
         #    （以前只判"不是空白"，2026-10-20 发 Pages 才发现它会跳到主机根的旧站地址，
         #     拿到的其实是 GitHub 的 404 页——那也是"有字"，光看字数抓不住）

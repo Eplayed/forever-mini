@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# upstream/df-dungeon-geo.json → src/data/dungeon-geo.json（副本入口与本内首领坐标，成品层）。
+# upstream/df-dungeon-geo.json → app/data/dungeon-geo.json（副本入口与本内首领坐标，成品层）。
 #
 # 为什么要单独一层成品，而不是把快照直接给页面读：
 #   ① 快照的 meta 里写着许可与"哪些字段一律不取"，那是给我们看的，不能上页面（红线：玩家看得见
@@ -14,7 +14,7 @@ import os
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, 'src', 'data')
+DATA = os.path.join(ROOT, "app", "data")
 
 
 def main():
@@ -41,7 +41,7 @@ def main():
     # 它由 tools/extract-plugin-maps.py 转存并自带 manifest，所以这里直接读那份 manifest。
     dmaps, dm = {}, {}
     mapPixels = {}
-    mpath = os.path.join(ROOT, 'src', 'img', 'art', 'dungeonmaps', 'manifest.json')
+    mpath = os.path.join(ROOT, "app", "img", 'art', 'dungeonmaps', 'manifest.json')
     if os.path.exists(mpath):
         dm = json.load(open(mpath, encoding='utf-8'))
         dmaps = {k: v.get('file') for k, v in (dm.get('files') or {}).items() if v.get('file')}
@@ -129,7 +129,7 @@ def main():
         json.dump(payload, f, ensure_ascii=False, indent=1)
         f.write('\n')
     c = payload['meta']['counts']
-    print('副本坐标 → src/data/dungeon-geo.json：入口 %d 座 · 首领位置 %d 座 %d 条（快照里对不上首领先丢 %s 条）'
+    print('副本坐标 → app/data/dungeon-geo.json：入口 %d 座 · 首领位置 %d 座 %d 条（快照里对不上首领先丢 %s 条）'
           % (c['entryDungeons'], c['bossDungeons'], c['bossRows'], c['droppedRows']))
 
 

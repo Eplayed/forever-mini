@@ -5,7 +5,7 @@
 #   XR（XR_DungeonGuide 全能助手，社区整理稿）：st、sell（卖价）
 # nEn 按站主 2026-10-14 拍板不取；两份数据都不含描述正文与掉率（XR loot 无概率字段）。
 # 用法：python3 tools/extract-addon-items-detail.py --gi <GearInsight_Forever/Data.lua> --xr <XR_DungeonGuide/Data.lua>
-# 产物：src/data/upstream/gi-items-detail.json、src/data/upstream/xr-items-detail.json
+# 产物：app/data/upstream/gi-items-detail.json、app/data/upstream/xr-items-detail.json
 # 幂等：同输入字节一致（键按数字序、缩进固定）。
 import argparse
 import io

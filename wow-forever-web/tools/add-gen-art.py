@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把自生成的氛围底图裁掉右下角的 AI 水印、转 webp、落进 src/img/gen/ 并写 manifest。
+"""把自生成的氛围底图裁掉右下角的 AI 水印、转 webp、落进 app/img/gen/ 并写 manifest。
 
 为什么自己生成而不抄稿子：设计稿 brief 第八节写着"AI 生图均为无字底图"，
 但实际那三张 assets/changjing/*.webp 是**游戏内截图**（能看见角色模型与引擎贴图的边缘），
@@ -15,7 +15,7 @@ import os
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC_IMG = os.path.join(ROOT, "src", "img")
+SRC_IMG = os.path.join(ROOT, "app", "img")
 OUT = os.path.join(SRC_IMG, "gen")
 VIBE = os.path.join(os.path.dirname(ROOT), "vibe_images")
 
@@ -74,7 +74,7 @@ def write_art_index(man):
     为什么要进 art.json：build-data.js 会逐个检查这份索引指向的文件真的在仓库里，
     界面里的 SEC_ART / RAID_ART 常量表也被断言要求能在清单里找到——不进这里就是野素材。
     """
-    ap = os.path.join(ROOT, "src", "data", "art.json")
+    ap = os.path.join(ROOT, "app", "data", "art.json")
     art = json.load(io.open(ap, encoding="utf-8")) if os.path.exists(ap) else {}
     idx = {}
     for x in man["items"]:

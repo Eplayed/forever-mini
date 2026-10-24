@@ -1,7 +1,7 @@
 /* 全站搜索的纯逻辑：索引条目 → 排序 → 分组 → 跳转目标。
-   索引本身由 tools/build-data.js 从各数据文件派生（src/data/search.json），
+   索引本身由 tools/build-data.js 从各数据文件派生（app/data/search.json），
    这里只负责"怎么搜、怎么排、跳到哪"，方便在 tests/ 里直接断言。 */
-import { linkFor, legacyUrl } from './nav.js';
+import { linkFor } from './nav.js';
 
 // 一条 = [类型, 名称, 归属副标题, 跳转附加参数, 分级]
 // 必须与旧站 src/js/app.js 的 SKIND_ORDER 同一份表（build-data.js 只核对旧站那份）。
@@ -59,24 +59,20 @@ export function queryString(extra, param, name) {
   return qs.length ? '?' + qs.join('&') : '';
 }
 
-/* 全站已迁：目标页一律走站内路由，query 塞进 to 对象（平铺 { to, query } 经 v-bind
-   会把 query 掉进 fallthrough 属性静默丢失——2026-10-13 修正，与 ClassesPage calcLink 同形）。 */
+/* 目标页一律走站内路由，query 塞进 to 对象（平铺 { to, query } 经 v-bind
+   会把 query 掉进 fallthrough 属性静默丢失——2026-10-13 修正，与 ClassesPage calcLink 同形）。
+   板块类型在索引里认不出来时回首页，不是拼一个没人认领的 .html 地址：
+   那种地址要么 404 要么被托管方兜底成首页，玩家看到的是"点了没反应"。 */
 export function itemLink(kinds, it) {
   const kd = kinds && kinds[it[0]];
-  if (!kd) return { href: legacyUrl('index.html') };
-  const file = kd[1] + queryString(it[3], kd[2], it[1]);
-  const lk = linkFor(file);
-  if (lk.to) {
-    const query = {};
-    String(it[3] || '').split('&').forEach((p) => {
-      if (!p) return;
-      const i = p.indexOf('=');
-      query[i < 0 ? p : p.slice(0, i)] = i < 0 ? '' : decodeURIComponent(p.slice(i + 1));
-    });
-    if (kd[2]) query[kd[2]] = it[1];
-    return { to: { path: lk.to, query } };
-  }
-  return { href: legacyUrl(file) };
+  if (!kd) return { to: '/' };
+  // 参数由 queryString() 一次拼好，linkFor 再把它折进路由对象——这里不再解第二遍，
+  // 两处各解一次迟早会漂（同一份参数两种写法，页面只认第一个）。
+  const lk = linkFor(kd[1] + queryString(it[3], kd[2], it[1]));
+  const to = lk.to;
+  return typeof to === 'string'
+    ? { to: { path: to.split('?')[0], query: {} } }
+    : { to: { path: to.path, query: to.query } };
 }
 
 export function groupLink(kinds, g, query) {

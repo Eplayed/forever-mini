@@ -1,6 +1,6 @@
 {
  "meta": {
-  "source": "wow-forever-web/src/data/races.json + classes.json",
+  "source": "wow-forever-web/app/data/races.json + classes.json",
   "comboNote": "无限新增的种族职业组合单列，来源是国服官方中文公告。"
  },
  "races": [

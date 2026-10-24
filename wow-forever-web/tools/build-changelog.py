@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """由 git 历史生成 docs/CHANGELOG-DEV.md —— 面向维护者的开发日志（不进网页）。
 
-为什么要单独一份：网页上那条「本站更新」是写给玩家看的（src/data/releases.json，人工随改动一起写，
+为什么要单独一份：网页上那条「本站更新」是写给玩家看的（app/data/releases.json，人工随改动一起写，
 一条对应一个真实提交）。提交标题里全是脚本名、文件名和 fix/feat 这类话，不能原样进页面，
 所以 git 自动生成的这份只给维护者看，放在 docs/ 里，构建卡口也不检查它。
 
-要改网页上的更新说明，改 src/data/releases.json；这份文件不用管。
+要改网页上的更新说明，改 app/data/releases.json；这份文件不用管。
 
 用法：
     python3 tools/build-changelog.py            # 重新生成
@@ -26,15 +26,15 @@ OUT = os.path.join(ROOT, "docs", "CHANGELOG-DEV.md")
 
 # 路径前缀 → 界面显示的板块名（顺序即优先级，命中第一个就用）
 SCOPE = [
-    ("src/data/talents", "天赋数据"), ("src/data/talent-text", "天赋文本"),
-    ("src/data/world.json", "世界数据"), ("src/data/professions.json", "专业数据"),
-    ("src/data/dungeons.json", "副本数据"), ("src/data/races.json", "种族数据"),
-    ("src/data/glossary.json", "术语词条"), ("src/data/abilities.json", "技能四态"),
-    ("src/data/changes.json", "改动清单"), ("src/data/timeline.json", "上线时间表"),
-    ("src/data/releases.json", "本站更新"), ("src/data/scale.json", "规模快照"),
-    ("src/data/meta.json", "口径与未决项"), ("src/data/upstream", "上游快照"),
-    ("src/img/icons", "图标"), ("src/img/art", "客户端原画"),
-    ("src/js", "界面逻辑"), ("src/css", "样式"), ("src/", "页面"),
+    ("app/data/talents", "天赋数据"), ("app/data/talent-text", "天赋文本"),
+    ("app/data/world.json", "世界数据"), ("app/data/professions.json", "专业数据"),
+    ("app/data/dungeons.json", "副本数据"), ("app/data/races.json", "种族数据"),
+    ("app/data/glossary.json", "术语词条"), ("app/data/abilities.json", "技能四态"),
+    ("app/data/changes.json", "改动清单"), ("app/data/timeline.json", "上线时间表"),
+    ("app/data/releases.json", "本站更新"), ("app/data/scale.json", "规模快照"),
+    ("app/data/meta.json", "口径与未决项"), ("app/data/upstream", "上游快照"),
+    ("app/img/icons", "图标"), ("app/img/art", "客户端原画"),
+    ("src/js", "界面逻辑"), ("app/src/styles", "样式"), ("src/", "页面"),
     ("tools/", "卡口与脚本"), ("docs/screenshots", "截图证据"), ("docs/", "文档"),
     ("for-mini", "小程序"), ("ROLES.md", "交接台账"), ("AGENTS.md", "协作规则"),
 ]
@@ -48,7 +48,7 @@ GLOSS = [
     (r"professions\.json", "专业数据"), (r"icons?\.json", "图标映射"),
     (r"dungeons\.json", "副本数据"), (r"races\.json", "种族数据"), (r"glossary\.json", "术语词条"),
     (r"abilities\.json", "技能四态"), (r"timeline\.json", "上线时间表"), (r"meta\.json", "口径文件"),
-    (r"talent-text/?\*", "天赋文本"), (r"talents/\*", "天赋数据"), (r"src/data/upstream", "上游快照"),
+    (r"talent-text/?\*", "天赋文本"), (r"talents/\*", "天赋数据"), (r"app/data/upstream", "上游快照"),
     (r"build-data\.js", "校验脚本"), (r"site-check\.py", "回归脚本"), (r"export-mini\.js", "导出脚本"),
     (r"audit-translations\.py", "体检脚本"), (r"build-icon-map\.py", "图标派生脚本"),
     (r"fetch-icons\.py", "图标抓取脚本"), (r"fetch-art\.py", "原画转存脚本"),
@@ -123,7 +123,7 @@ def main():
 
     lines = [u"# 开发日志（自动生成，不进网页）", u"",
              u"由 `tools/build-changelog.py` 读 git 历史生成。玩家看的那份是 "
-             u"`src/data/releases.json`（人工写、卡口把关），不是这份。", u"",
+             u"`app/data/releases.json`（人工写、卡口把关），不是这份。", u"",
              u"生成时间：%s ｜ 起于 %s ｜ 共 %d 条" % (datetime.date.today().isoformat(), a.since, len(entries)),
              u"", u"| 日期 | 提交 | 标题 | 动到的板块 | 文件数 |", u"| --- | --- | --- | --- | --- |"]
     for e in entries:
@@ -132,7 +132,7 @@ def main():
     io.open(OUT, "w", encoding="utf-8").write(u"\n".join(lines) + u"\n")
     print(u"开发日志 %d 条 → docs/CHANGELOG-DEV.md（最早 %s，最新 %s）" % (
         len(entries), entries[-1]["date"] if entries else u"—", entries[0]["date"] if entries else u"—"))
-    print(u"提醒：网页上的「本站更新」读的是 src/data/releases.json，需要人工同步一条。")
+    print(u"提醒：网页上的「本站更新」读的是 app/data/releases.json，需要人工同步一条。")
 
 
 if __name__ == "__main__":

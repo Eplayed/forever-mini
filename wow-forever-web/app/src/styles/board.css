@@ -1,0 +1,535 @@
+/* =============================================================================
+   新站专用视觉层（2026-10-16 起，方案见 docs/DESIGN-app-upgrade-2026-10-16.md）
+
+   为什么单独一个文件、而不是往 app/src/styles/app.css 里加：两栈共用 app.css，
+   而旧站 19 页 2026-10-16 已冻结——任何新规则都可能把旧站一起改了。
+   这个文件只由 app/src/main.js 引入，旧站根本不加载它；类名也全部是新的
+   （.board / .chip-st / .bhead），旧站 DOM 里不存在，物理上不会串味。
+
+   只解决四类毛病：列宽失控、状态没有视觉重量、长表没有分组导航、移动端整表横滚没提示。
+   颜色一律用 tokens.css 里已有的语义色（--ok 绿 / --warn 金 / --azure 蓝 / --bad 红），
+   不新造配色。
+   ========================================================================== */
+
+/* ---- 板块头：标题 + 一句读数 + 筛选控件，同一张卡里一行摆不下再换行 ---- */
+.bhead { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s2) var(--s4) }
+.bhead .bt { font-size:16px; font-weight:600; color:var(--gold); margin:0 }
+.bhead .bn { font:12.5px/1.6 var(--font-mono); color:var(--txt-dim); letter-spacing:.02em }
+.bhead .bf { flex:1 1 320px; display:flex; flex-wrap:wrap; gap:var(--s2); min-width:0 }
+.bhead .bf input[type=search] { flex:1 1 200px; min-width:0 }
+
+/* ---- 板块表 ---- */
+.boardwrap { overflow-x:auto; -webkit-overflow-scrolling:touch }
+/* 桌面不横滚，表头的纵向吸附才成立（.scrollx 里 sticky 是假吸顶，app.css 里已有那条教训） */
+@media (min-width:900px) { .boardwrap { overflow:visible } }
+
+.board { width:100%; border-collapse:separate; border-spacing:0; table-layout:fixed; font-size:13.5px }
+.board > thead > tr > th { text-align:left; font-weight:600; color:var(--gold);
+  font-size:11.5px; letter-spacing:.06em; padding:8px 10px; background:var(--panel);
+  border-bottom:1px solid var(--line); position:sticky; top:var(--hd-h); z-index:3 }
+.board td { padding:9px 10px; border-bottom:1px solid var(--line-2); vertical-align:top }
+.board tbody tr:hover { background:rgba(255,255,255,.028); box-shadow:inset 2px 0 0 var(--gold-deep) }
+.board .nm { font-weight:600; color:var(--txt-title) }
+.board .sub { display:block; font-size:12px; color:var(--txt-dim); margin-top:2px }
+.board .en { font:12px/1.5 var(--font-mono); color:var(--txt-muted); word-break:break-word }
+.board .id { font:11.5px/1.5 var(--font-mono); color:var(--txt-muted) }
+.board .num { font-family:var(--font-mono); font-size:12.5px; white-space:nowrap }
+.board .conf { display:block; margin-top:3px; font-size:11.5px; line-height:1.5; color:var(--txt-alert) }
+
+/* 列宽：名字列吃剩余，数值/状态/编号固定窄宽。
+   原来 table-layout 是 auto，浏览器把富余宽度全塞在名字列后面，
+   中间一大片空白，眼睛得从名字跨半屏去找数值（技能书、成就、专业三页实拍为证）。 */
+.board .c-ico { width:46px }
+.board .c-num { width:92px }
+.board .c-num2 { width:96px }
+.board .c-st { width:126px }
+.board .c-id { width:92px }
+/* 日期一类的短列：等宽字 10 字符 + 左右内边距 ≈ 101px，宽度给小了会断成
+   "2026-09-" / "29" 两行（动态页实拍为证）。列宽交给 colgroup，这里只保证不折行。 */
+.board td.dt { white-space:nowrap }
+/* 名字后面跟的等宽小注（职业英文名、#ID）：排行榜那张原来没有间距，
+   渲染成"猎人hunter"粘在一起（1280 实拍为证）。统一留 6px。 */
+.board td .dim.mono { margin-left:6px }
+.board .c-name { width:auto }
+/* 名字列给固定百分比、最后一列吃剩余：剩余空间落到行尾而不是卡在名字与数值之间
+   （法术书那一页原来就是"名字 → 跨半屏空白 → 数值"，眼睛得找列） */
+.board .w-name { width:30% }
+.board .w-tail { width:auto }
+/* 配方表那两页要更宽的正文列（材料与来源都是多条短词，挤成竖排就没法读） */
+.board .c-item { width:27% }
+.board .c-src { width:29% }
+.board .c-mat { width:auto }
+/* .chtab 在 app.css（两栈共用）里带着旧站布局下的 min-width:620px。
+   新站职业页那张卡只有 530 宽，于是整表顶出 90px 横向溢出（1280 桌面实拍量出来）。
+   旧站已经冻结不能动，所以只在这个新站才加载的文件里把它放开。 */
+.board.chtab { min-width:0 }
+
+/* 分组头：滚动时吸附在表头下面，长表里"我在哪"不用再翻 */
+.board tbody.grp > tr.grp2h > th { position:sticky; top:calc(var(--hd-h) + 33px); z-index:2;
+  text-align:left; font-weight:600; font-size:12.5px; color:var(--txt-title);
+  padding:7px 10px; background:var(--panel-2);
+  box-shadow:inset 0 0 0 1px var(--line), inset 3px 0 0 var(--gold-deep) }
+.board tbody.grp > tr.grp2h > th .gcount { font:11.5px var(--font-mono); color:var(--txt-dim); margin-left:6px }
+.board tbody.grp > tr.grp2h > th .gtag { font-size:11.5px; color:var(--txt-muted); margin-left:6px }
+.board tbody.grp > tr.grp2h > th img { width:20px; height:20px; border-radius:4px;
+  vertical-align:-4px; margin-right:7px }
+
+/* ---- 状态 chip：这一列是全站信息量最大的一列，不该只是一行字 ---- */
+.chip-st { display:inline-block; font-size:11.5px; line-height:1.7; padding:0 8px;
+  border-radius:999px; border:1px solid var(--line); color:var(--txt-dim); white-space:nowrap }
+.chip-st.same { color:var(--txt-muted) }
+.chip-st.changed { color:var(--txt-caution); border-color:rgba(221,159,68,.5); background:rgba(221,159,68,.1) }
+.chip-st.new { color:var(--ok); border-color:rgba(103,194,103,.5); background:rgba(103,194,103,.1) }
+.chip-st.renamed { color:var(--azure); border-color:rgba(73,174,233,.45); background:rgba(73,174,233,.1) }
+.chip-st.removed { color:var(--txt-alert); border-color:rgba(199,92,92,.5); background:rgba(199,92,92,.1) }
+/* 无限新增这一类东西（本版本新加的条目）在别处也叫"新"，颜色与 chip.new 对齐 */
+.board .tag { font-size:11px; padding:0 6px; border-radius:3px; margin-left:6px;
+  color:var(--ok); border:1px solid rgba(103,194,103,.5); background:rgba(103,194,103,.1) }
+
+/* ---- 首页那颗搜索框（实拍 1440 发现的两个毛病）----
+   1) 放大镜压在斜切角上：clip-path 把左边 12px 切掉，图标正好落在切口里，看着像被裁了；
+   2) 示例词那一排（.gsex）和输入框、按钮挤在同一个 flex 行里，把输入框压到只能显示六个字，
+      占位文案"搜天赋、法术、成就…"根本读不完。改成让示例词换到自己的那一行。 */
+.gsearch.hs { flex-wrap:wrap; height:auto; min-height:58px; padding:9px 8px 9px 24px }
+.gsearch.hs svg { flex:0 0 auto; margin-right:8px }
+.gsearch.hs .gsex { flex:1 0 100%; margin:6px 0 2px }
+
+/* ---- 移动端：整表横滚时给一条"右边还有内容"的渐隐，别让人以为表格到头了 ---- */
+@media (max-width:899px) {
+  .boardwrap { position:relative }
+  .boardwrap::after { content:""; position:absolute; top:0; right:0; width:26px; height:100%;
+    pointer-events:none; background:linear-gradient(90deg, transparent, rgba(11,15,22,.85)) }
+  .board { min-width:640px }
+  /* 窄屏下 .boardwrap 是横向滚动容器，sticky 的参照物就变成这个容器本身，
+     表头与分组头不再吸附视口——留着声明只会在表格顶部画出一条空带（375 实拍发现）。
+     与旧站 app.css 里那条 ".scrollx thead th{position:static}" 是同一个教训，这里显式关掉。 */
+  .board > thead > tr > th, .board tbody.grp > tr.grp2h > th { position:static }
+}
+
+/* =============================================================================
+   2026-10-23 站主实拍职业页：技能变化滚起来时，「名称/类别/哪一系」那一行浮在半空，
+   它上面本该压着的「新增 11 条」组带整条不见了，表头还压住一行内容。
+   根因是**参照物搞错**，不是 sticky 写错：app.css 把 .chgs 做成一个 72vh 的独立滚动框
+   （max-height:72vh;overflow-y:auto），组带那条也写了 .chgs .lgrp{top:0}——
+   也就是说这一列里 sticky 的参照物是 .chgs 自己，不是视口。
+   可表头那条 .board thead th{top:var(--hd-h)} 用的是导航高度 110px，
+   放进 .chgs 里就成了"离滚动框顶 110px 处吸住"——正好落在列表中间，看着像错位还压行。
+   这里把表头的偏移改成组带高度，两者才真正叠在一起。
+   变量必须定义在 .chgs 上：表头是 .lgrp 的兄弟子树，CSS 变量只往下继承，
+   写在 .lgrp 上表头取不到，calc 整条失效、两个都不吸（第一版就这么弄错的）。
+   放在 board.css（旧站不加载），不动共享的 app.css —— 旧站已冻结。
+   ============================================================================= */
+.chgs { --lgrp-h: 28px }
+.chgs .lgrp { min-height: var(--lgrp-h) }
+.chgs .board > thead > tr > th { top: var(--lgrp-h) }
+
+/* =============================================================================
+   10-18 站主：导航带"太简单，很丑"、首页那两排要重排且不许有横向滚动条。
+   全部写在这个只由新站加载的文件里覆盖 app.css——旧站那 19 页已冻结，
+   同一个类名（.ngrp / .hrail / .cls9）两栈都在用，改 app.css 会一起改掉已发布版式。
+   动效只用 transition 与"播一次"的 animation：这是查资料的站，不是发布会。
+   ============================================================================= */
+
+/* ---- 导航带：胶囊分组（2026-10-18 站主选 B 方案，替换上一版"渐变带 + 组底指示条 + 金色下划线"）----
+   每组一颗药丸：丸的左半边是本组色的圆点 + 组名，右半边是它的入口。
+   竖分隔、组底指示条、项下划线全部撤掉——"你在哪一组"由这颗丸的描边说，
+   "你在哪一页"由丸内那颗实心小药丸说。带底用比页面还暗一档的 --sunk、丸用 --panel-2，
+   靠明度差让丸浮起来，不靠阴影（阴影在这种深蓝底上会糊成一片脏边）。 */
+nav.main { border-top:1px solid var(--line); background:var(--sunk) }
+nav.main .in { align-items:center; padding-top:8px; padding-bottom:8px }
+/* 丸的横向尺寸是算过的：容器内宽 1148（1180 减去 .in 左右各 16），
+   八颗丸本体 1094 + 间距必须塞进去。第一版 margin 4px / 入口内边距 10px 时总宽 1158，
+   1440 下就折成两排（带高从 50 涨到 94）。这里收到 3px + 9px，留 30px 余量。 */
+.ngrp { flex-direction:row; align-items:center; gap:4px; margin:0 3px; padding:3px 4px 3px 12px;
+  border:1px solid var(--line); border-radius:999px; background:var(--panel-2);
+  --gc-soft:rgba(174,182,196,.14);
+  transition:border-color var(--dur-1) var(--ease-out) }
+/* 上一版靠这两条画分隔与指示条，胶囊方案里都是噪声 */
+.ngrp::before, .ngrp::after { display:none }
+.ngrp.solo { padding-left:5px; --gc:var(--gold); --gc-soft:rgba(200,163,92,.2) }
+.ngrp.g1 { --gc-soft:rgba(73,174,233,.17) }  .ngrp.g2 { --gc-soft:rgba(111,199,189,.17) }
+.ngrp.g3 { --gc-soft:rgba(123,196,127,.17) } .ngrp.g4 { --gc-soft:rgba(216,178,106,.19) }
+.ngrp.g5 { --gc-soft:rgba(171,155,214,.18) } .ngrp.g6 { --gc-soft:rgba(217,139,122,.18) }
+/* 第七组「工具」在 app.css 里根本没有颜色（只写到 g6），一直是灰的。
+   上一版看不出来是因为组色只用在 2px 的短横上；改成丸描边后就露馅了，补一个钢灰蓝。 */
+.ngrp.g7 { --gc:var(--nav-7); --gc-soft:rgba(143,155,179,.18) }
+.ngrp:hover, .ngrp.hit { border-color:var(--gc) }
+
+.ngrp .ngt { opacity:.85; padding:0 2px; line-height:1;
+  transition:opacity var(--dur-1) var(--ease-out) }
+.ngrp:hover .ngt, .ngrp.hit .ngt { opacity:1 }
+/* 组名前那根标记撤掉。2026-10-18 站主看过胶囊版明确说"不接受胶囊前面有圆点"——
+   先是从 8×2 短横改成 6px 圆点，现在连圆点也不要。组色仍然留给组名字与丸描边，
+   两条通道够用。**别把点或短横画回来**，site-check [16] 有一条反向断言钉着。 */
+.ngt::before { display:none }
+.ngrp .ngi { gap:1px; padding-bottom:0 }
+
+/* 入口：丸内的一颗小药丸。常态灰字，悬停起一层白底，当前项填本组色 + 本组色字。
+   app.css:1181 给每个入口留了 border-radius:0 与 2px 底边，这两条在丸里都是错的形状，一起撤。 */
+nav.main a.nl { position:relative; min-height:30px; padding:0 9px; border-radius:999px;
+  color:var(--txt-dim); font-weight:500; letter-spacing:.01em; border-bottom:0;
+  transition:background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out) }
+nav.main a.nl:hover { background:rgba(255,255,255,.06); color:var(--txt) }
+nav.main a.nl.on { background:var(--gc-soft); color:var(--gc); box-shadow:none; font-weight:700 }
+nav.main a.nl:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
+/* 「新」角标改成随文字走，不再绝对定位。
+   app.css 那套是"绝对定位 + 给链接留 17px 右内边距"，在 30px 高的丸里会压到最后一个字
+   （1440 实拍：首页那颗丸的「新」直接盖在"页"上）。改成行内小标，丸自己会长够宽。 */
+nav.main .nb { position:static; transform:none; margin-left:5px; border-radius:999px;
+  padding:1px 4px; font-size:9px }
+nav.main a.nl:has(.nb) { padding-right:10px }
+
+/* ---- 首页：职业条与板块轨都改成会换行的网格，横向滚动条从根上去掉 ---- */
+/* 原来 .hrail 是 overflow-x:auto 的一条横滑轨：9 格 × 132px 在 1440 以下必然溢出，
+   站主截图底部那条滚动条就是它。改成网格后任何宽度都不再需要横滑。 */
+.hrail { display:grid; grid-template-columns:repeat(9, minmax(0, 1fr));
+  gap:12px 10px; overflow:visible; padding:2px 0 16px; margin-top:24px; scroll-snap-type:none }
+.hrt { width:auto; min-width:0 }
+.hrt-b { height:78px; transition:border-color var(--dur-1) var(--ease-out),
+  box-shadow var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out) }
+.hrt:hover .hrt-b, .hrt:focus-visible .hrt-b { transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,.34) }
+.hrt:hover .hrt-b img { transform:scale(1.05) }
+.hrt-l { white-space:normal; overflow-wrap:anywhere; line-height:1.3 }
+
+.cls9 { grid-template-columns:repeat(9, minmax(0, 1fr)); gap:10px }
+.cls9 a { padding:13px 8px 11px;
+  transition:border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-1) var(--ease-out) }
+.cls9 a:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.3) }
+.cls9 img { width:46px; height:46px; margin-bottom:6px }
+.cls9 b { font-size:13.5px }
+/* 每格补一行天赋节点数：这一节的语义是"选一个职业开始加点"，
+   光有头像和名字，九个圆看起来是一排装饰，不像九个入口 */
+.cls9 small { display:block; margin-top:3px; font:11px/1.3 var(--font-mono); color:var(--txt-muted) }
+.cls9 a:hover small { color:var(--txt-dim) }
+
+/* 入场：整排一次性的淡入上移，28ms 递进，播完就静止（不循环、不抢读内容的戏） */
+@keyframes pzRowIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
+.cls9 > a, .hrail > a { animation:pzRowIn .26s var(--ease-out) both }
+.cls9 > a:nth-child(2), .hrail > a:nth-child(2) { animation-delay:28ms }
+.cls9 > a:nth-child(3), .hrail > a:nth-child(3) { animation-delay:56ms }
+.cls9 > a:nth-child(4), .hrail > a:nth-child(4) { animation-delay:84ms }
+.cls9 > a:nth-child(5), .hrail > a:nth-child(5) { animation-delay:112ms }
+.cls9 > a:nth-child(6), .hrail > a:nth-child(6) { animation-delay:140ms }
+.cls9 > a:nth-child(7), .hrail > a:nth-child(7) { animation-delay:168ms }
+.cls9 > a:nth-child(8), .hrail > a:nth-child(8) { animation-delay:196ms }
+.cls9 > a:nth-child(n+9), .hrail > a:nth-child(n+9) { animation-delay:224ms }
+/* 导航那八颗丸同样播一次，22ms 递进；导航是每次换页都重挂的，
+   所以时长压到 .2s、位移 4px——比内容区那两排更短，免得读内容前先看它晃 */
+.ngrp { animation:pzRowIn .2s var(--ease-out) both }
+.ngrp:nth-child(2) { animation-delay:22ms } .ngrp:nth-child(3) { animation-delay:44ms }
+.ngrp:nth-child(4) { animation-delay:66ms } .ngrp:nth-child(5) { animation-delay:88ms }
+.ngrp:nth-child(6) { animation-delay:110ms } .ngrp:nth-child(7) { animation-delay:132ms }
+.ngrp:nth-child(n+8) { animation-delay:154ms }
+
+@media (prefers-reduced-motion: reduce) {
+  .cls9 > a, .hrail > a, .ngrp { animation:none }
+  .ngrp, nav.main a.nl, .ngrp .ngt { transition:none }
+  .hrt:hover .hrt-b, .cls9 a:hover { transform:none }
+}
+
+@media (max-width:899px) {
+  /* 窄屏这一条本来就是横向滑动的（那条是设计要的）。丸要跟着变高一点才够 44px 命中区，
+     选中态仍然靠丸内那颗实心小药丸——上一版"手机上改回 2px 底边"的兜底不再需要了。 */
+  nav.main .in { padding-top:6px; padding-bottom:6px }
+  .ngrp { margin:0 3px; padding-left:9px }
+  nav.main a.nl { min-height:44px; padding:0 12px }
+  .hrt-b { height:62px }
+}
+
+/* 两轨都是 9 格，列数按 9 / 5 / 3 写死，不用 auto-fit。
+   auto-fit 在 1000px 会算出 8 列，第 9 格单独掉到第二行最左边、右边留一大片空，
+   看着像漏了一格（2026-10-18 实测 1000px 时第二行右侧空 821px）。
+   9 → 一整行；5 → 5+4，只最后一行少一格；3 → 三行齐。minmax(0,1fr) 保证窄列不撑破容器。 */
+@media (max-width:999px) {
+  .hrail, .cls9 { grid-template-columns:repeat(5, minmax(0, 1fr)) }
+}
+@media (max-width:699px) {
+  .hrail, .cls9 { grid-template-columns:repeat(3, minmax(0, 1fr)) }
+  .cls9 img { width:40px; height:40px }
+}
+
+/* =============================================================================
+   10-18 传承页视觉与交互重做（站主定：只用我们自己采到的那份数据，不再开红线）
+   新类一律 .lge-* / .lchhead 这种前缀，覆盖 app.css 里两栈共用的老类名只写在
+   这个"只由新站加载"的文件里——旧站那 19 页已冻结，不能跟着变。
+   ============================================================================= */
+
+/* 主卡那排读数：原来四颗小方框（.stats/.stat）读起来像四个按钮，改成一行"数 + 单位"的读数带 */
+.lge-read { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:var(--s3); font-size:12px;
+  color:var(--txt-dim) }
+.lge-read > span { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap }
+.lge-read b { font:700 19px/1 var(--font-mono); color:var(--gold-hi) }
+
+/* 三棵树：与导航带同一套语言（1px 描边 + 999px 圆角 + 选中填本角色） */
+.lge-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-top:var(--s4) }
+.lge-tab { display:inline-flex; align-items:center; gap:7px; min-height:36px; padding:0 14px;
+  background:var(--panel-2); border:1px solid var(--line); border-radius:999px;
+  color:var(--txt-dim); cursor:pointer;
+  transition:border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out) }
+.lge-tab b { font-size:13.5px; font-weight:600; color:var(--txt) }
+.lge-tab .mono { font-size:11.5px; color:var(--gold) }
+.lge-tab .dim { color:var(--txt-muted); font-size:11px }
+.lge-tab:hover { border-color:var(--gold-deep) }
+.lge-tab.on { background:var(--gold-line-soft); border-color:var(--gold); color:var(--gold-hi) }
+.lge-tab.on b { color:var(--gold-hi) }
+.lge-tab:focus-visible { outline:2px solid var(--azure); outline-offset:2px }
+
+/* 页内三段锚点：href 走 hrefOf 出合法路由，点击只做平滑滚动（见 LegacyPage 的注释） */
+.lge-anchor { display:flex; gap:16px; margin-top:var(--s3); padding-top:var(--s3);
+  border-top:1px solid var(--line); font-size:12.5px }
+.lge-anchor a { color:var(--txt-muted); text-decoration:none; position:relative;
+  transition:color var(--dur-1) var(--ease-out) }
+.lge-anchor a:hover { color:var(--gold-hi); text-decoration:none }
+
+/* 树格：每排左边挂排号，"行"从此有意义；格子仍按客户端坐标摆，不重排 */
+/* --cols 由模板按那一棵树的列数写进内联 style（:style="{ '--cols': curTree.cols }"）。
+   这里给一个默认值兜底：内联 style 优先级更高，正常永远被覆盖，
+   只有 JS 没跑起来时才会退回四列——总比网格塌成一列好。 */
+.lge-grid { display:flex; flex-direction:column; gap:var(--s2); margin-top:var(--s2); --cols:4 }
+.lge-rowwrap { display:flex; align-items:stretch; gap:10px }
+.lge-rail { flex:0 0 46px; display:flex; align-items:center; justify-content:flex-end;
+  font-size:10.5px; color:var(--txt-muted); letter-spacing:.02em; white-space:nowrap }
+.lge-cells { flex:1 1 auto; min-width:0; display:grid; gap:var(--s2);
+  grid-template-columns:repeat(var(--cols, 4), minmax(0, 1fr)) }
+/* 空格与"未公开"从此不是一回事：空格子只剩一点轮廓，虚线框整页只有未公开在用 */
+.lslot.none { background:none; border:1px solid rgba(255,255,255,.045); opacity:1 }
+.lslot.unk { border-color:var(--line-2) }
+/* 有前置的格子在图标角上挂一个极小的标，别等到点开才知道 */
+.lge-tag { position:absolute; left:-2px; top:-6px; font:600 9px/1 var(--font-mono);
+  font-style:normal; color:var(--txt-muted); background:var(--panel-2);
+  border:1px solid var(--line); border-radius:999px; padding:2px 5px }
+.lslot .lcell { position:relative }
+
+/* 详情栏默认态：三行读数 + 图例，不再是一个空盒子等人点 */
+.lge-legend { list-style:none; margin:var(--s4) 0 0; padding:0; display:flex;
+  flex-direction:column; gap:9px; font-size:12.5px; color:var(--txt-dim) }
+.lge-legend li { display:flex; align-items:center; gap:9px }
+.lg { flex:0 0 auto; width:18px; height:18px; border-radius:4px }
+.lg-perk { background:var(--elev); border:1px solid var(--gold-deep) }
+.lg-unk { background:none; border:1px dashed var(--line-2) }
+.lg-none { background:none; border:1px solid rgba(255,255,255,.06) }
+
+/* 详情栏选中态：大图标 + 名字 + 层数点条 + 三行元信息 */
+.lge-prow { display:flex; align-items:center; gap:var(--s3) }
+.lge-pico { position:relative; display:block; width:52px; height:52px; flex:0 0 auto }
+.lge-pico svg { width:100%; height:100% }
+.lge-pico .ico { position:absolute; left:0; top:0; width:100%; height:100%;
+  object-fit:cover; border-radius:6px }
+.lge-ptitle h2 { margin:0 0 6px }
+.lge-ranks { display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--txt-dim) }
+.lge-ranks .rd { width:8px; height:8px; border-radius:50%; background:var(--gold-deep) }
+.lge-ranks .mono { margin-left:4px; color:var(--gold) }
+.ldetail .lmeta { margin-top:var(--s4) }
+/* 前置可点：点了直接选中那个专长（跨树会先切树，见 selectPerk） */
+.lge-jump { background:none; border:0; border-bottom:1px dashed var(--gold-deep);
+  padding:0; color:var(--gold-hi); font:inherit; font-weight:600; cursor:pointer }
+.lge-jump:hover { border-bottom-style:solid }
+.lge-jump:focus-visible { outline:2px solid var(--azure); outline-offset:2px }
+
+/* 六组挑战改成可折叠：整页原来 4900 多像素，六张表连着铺没人滚得完 */
+.lchhead { display:flex; align-items:center; gap:var(--s3); width:100%; text-align:left;
+  background:none; border:0; padding:0; margin:0 0 var(--s2); cursor:pointer;
+  min-height:44px; color:var(--txt-title); font-family:var(--font-display); font-size:19px; font-weight:700 }
+.lchhead > .mono { margin-left:auto; font-family:var(--font-mono); font-size:12px;
+  color:var(--txt-dim); font-weight:400 }
+.lchcaret { flex:0 0 auto; width:9px; height:9px; margin-left:2px;
+  border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+  transform:rotate(45deg) translate(-2px, -2px);
+  transition:transform var(--dur-1) var(--ease-out) }
+.lchgrp.closed .lchcaret { transform:rotate(-45deg) translate(-1px, -1px) }
+.lchhead:focus-visible { outline:2px solid var(--azure); outline-offset:3px }
+.lchgrp { transition:border-color var(--dur-1) var(--ease-out) }
+.lchgrp.closed { border-color:var(--line) }
+.lchgrp:hover { border-color:var(--gold-deep) }
+
+/* 入场只在树切换与折叠展开时给一次轻反馈，不做循环 */
+@keyframes lgeFade { from { opacity:0; transform:translateY(4px) } to { opacity:1; transform:none } }
+.lge-cells { animation:lgeFade .2s var(--ease-out) both }
+.lchbody { animation:lgeFade .18s var(--ease-out) both }
+@media (prefers-reduced-motion: reduce) {
+  .lge-cells, .lchbody { animation:none }
+  .lge-tab, .lchcaret, .lge-anchor a, .lchgrp { transition:none }
+}
+
+@media (max-width:899px) {
+  .ltreewrap { grid-template-columns:minmax(0, 1fr) }
+  .lge-rail { flex:0 0 30px; font-size:9.5px }
+  .lge-tab { min-height:44px; padding:0 13px }
+  .lge-anchor { gap:14px }
+  .lge-read b { font-size:17px }
+  .lchhead { font-size:17px }
+  .lchhead > .mono { font-size:11px }
+}
+
+/* ---- 种族页：阵营条的组头把头像盖住一半（2026-10-18 站主实拍发现）----
+   app.css:1145 给 .fhead 写了 position:sticky; top:44px; z-index:2; background:var(--panel)，
+   本意是"滚动时吸在站头下面"。但它外面那层 .facband 是 overflow:hidden（阵营城市原画要裁进圆角里），
+   sticky 的参照物于是变成这条带自己——而这条带永远不产生纵向滚动，
+   所以 top:44px 不是吸顶，是把组头从常规流里往下推了 44px。
+   sticky 不额外占位，下面的 .racegrid 留在原位，被这条不透明、z-index 更高的组头
+   压住顶部 32px：第一排种族头像就是在那里被切掉的。
+   实测两栈一样（旧站 :8817 也重叠 32px），是共享样式的老问题，不是这轮改出来的。
+   带内本来就不会滚，sticky 在这里毫无作用——直接改回 static。 */
+.fhead { position:static }
+
+/* =============================================================================
+   10-18 站主：世界页「稀有精英」改成一区域一张图——点位平时虚着，指上去实体并弹信息。
+   原来每条稀有各带一张同样的区域图（一个区域八条就是八张重复图），
+   掉落清单还藏在每张卡下面的小抽屉里。
+   ============================================================================= */
+.zband { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 330px);
+  gap:var(--s4); align-items:start; margin:0 0 var(--s5) }
+/* 图不能裁：overflow:hidden 会把贴在边缘的浮层切掉，所以这里放开（卡片本来就没有圆角，--r-card:0） */
+.zbig { position:relative; background:var(--sunk); border:1px solid var(--line); overflow:visible }
+/* 画布层只装地图与点位，浮层是它的兄弟：点位按这一层的高度摆百分比，
+   这一层的高度永远等于图高，浮层再怎么撑也不会把点位挪走 */
+.zcanvas { position:relative }
+.zcanvas img { display:block; width:100%; height:auto }
+/* 无图态（2026-10-20 W01）：原来这里是一条 .zbig.noimg .zcanvas{min-height:120px}——
+   一个空图框占着整块左栏，右边列表还被挤到 330px。现在没有图就根本不渲染 .zbig，
+   只留一行数据值（地图编号），列表拿满整宽。 */
+.znomap { margin:0 0 var(--s2); font:12px/1.4 var(--font-mono); color:var(--txt-muted) }
+.zband.nomap { grid-template-columns:minmax(0, 1fr) }
+.zbig-id { font:12px var(--font-mono); color:var(--txt-muted) }
+
+/* 点位：默认是"虚"的——半透明 + 0.6px 模糊，像还没定下来的点；
+   指上去 / 键盘聚焦 / 点住不放时才实体（去模糊、放大、填成这一类的颜色）。
+   20px 是点击区，里面那颗 18px 的圆才是视觉尺寸。
+   2026-10-19 四类面板共用之后加了 --pc：金=稀有、绿=书、紫=营地（区域卡上三类混在一张图上）。 */
+.zdot { --pc:var(--pin-rare); position:absolute; width:20px; height:20px; margin:-10px 0 0 -10px; padding:0;
+  border:0; background:none; cursor:pointer; opacity:.55; filter:blur(.6px);
+  transition:opacity var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out) }
+.zdot.k-book { --pc:var(--pin-book) } .zdot.k-camp { --pc:var(--pin-camp) }
+.zdot.k-entry { --pc:var(--pin-entry) }
+.zdot.k-boss { --pc:var(--pin-boss) }
+.zdot-n { display:block; width:18px; height:18px; border:1px solid var(--pc);
+  border-radius:50%; background:rgba(19,26,40,.82); color:var(--pc);
+  font:700 10.5px/17px var(--font-mono); text-align:center }
+.zdot:hover { opacity:.85; filter:blur(.2px) }
+.zdot.on { opacity:1; filter:none; transform:scale(1.3); z-index:3 }
+.zdot.on .zdot-n { background:var(--pc); border-color:var(--pc); color:var(--ink-on-bright) }
+.zdot:focus-visible { outline:2px solid var(--azure); outline-offset:1px; opacity:1; filter:none }
+
+/* 浮层：位置与朝向由组件按点位百分比算（见 popStyle），这里只管长相。
+   pointer-events:none 是故意的——浮层会盖住它自己那颗点位，
+   能接收指针的话鼠标一移上去就触发 leave、浮层闪断。代价是里面的字不能选、不能滚，
+   所以掉落清单同时摆在右边的列表行上。 */
+.zpop { --pc:var(--pin-rare); position:absolute; z-index:4; width:min(320px, 62vw);
+  pointer-events:none; background:var(--panel); border:1px solid var(--pc); padding:10px 11px;
+  box-shadow:0 8px 22px rgba(0, 0, 0, .5) }
+.zpop.k-book { --pc:var(--pin-book) } .zpop.k-camp { --pc:var(--pin-camp) }
+/* 书与营地没有"掉落清单"，它们靠这一排"字段：值"把原来表格里的信息带出来 */
+.zpop-x { display:flex; flex-direction:column; gap:4px; padding-top:8px;
+  border-top:1px solid var(--line); font-size:12px }
+.zpop-x > div { display:flex; gap:8px }
+.zpop-x b { color:var(--txt); font-weight:600 }
+.zpop-h { display:flex; flex-direction:column; gap:2px }
+.zpop-h b { font:700 15px/1.25 var(--font-display); color:var(--txt-title) }
+.zpop-t { display:flex; flex-wrap:wrap; align-items:center; gap:5px 8px; margin:7px 0 8px;
+  font-size:11.5px }
+.zpop-d { display:flex; flex-direction:column; gap:5px; padding-top:8px;
+  border-top:1px solid var(--line) }
+.zpop-i { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--txt-dim) }
+.zpop-i .nm2 { color:var(--txt); font-weight:600; flex:1 1 auto; min-width:78px }
+/* 数字那几列不许拆开：375 上"iLvl 10 需 5"原来会被断到两行，两行之间对不齐 */
+.zpop-i .mono { font-size:10.5px; white-space:nowrap }
+.zpop-i.q2 .nm2 { color:var(--q2) } .zpop-i.q3 .nm2 { color:var(--q3) }
+.zpop-i.q4 .nm2 { color:var(--q4) } .zpop-i.q5 .nm2 { color:var(--q5) }
+
+/* 右边的编号列表：与点位共用同一个序号，两边互相高亮。
+   手机上没有悬停，这张列表就是主入口，不能只活在浮层里 */
+.zlist { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;
+  max-height:520px; overflow:auto }
+.zrow { display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; width:100%;
+  min-height:34px; padding:5px 8px; text-align:left; cursor:pointer;
+  background:var(--panel-2); border:1px solid var(--line); border-left-width:2px;
+  color:var(--txt-dim); font-size:12px;
+  transition:border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out) }
+.zrow .zn { flex:0 0 18px; height:18px; border:1px solid var(--gold-deep); border-radius:50%;
+  font:700 10.5px/17px var(--font-mono); text-align:center; color:var(--gold-hi) }
+.zrow .znm { color:var(--txt); font-weight:600 }
+.zrow:hover, .zrow.on { border-left-color:var(--gold); background:var(--gold-line-soft) }
+.zrow.on .zn { background:var(--gold); border-color:var(--gold-hi); color:var(--ink-on-bright) }
+.zrow:focus-visible { outline:2px solid var(--azure); outline-offset:1px }
+/* 没有地图文件的那几条不标点（坐标是不是同一张图的空间没法确认，不猜位置），
+   序号列画一条横杠，列表里照样能看到、能查 */
+.zrow.nopin .zn { border-color:var(--line-2); color:var(--txt-muted) }
+
+@media (prefers-reduced-motion: reduce) {
+  .zdot, .zrow, .zpop { transition:none }
+  .zdot.on { transform:none }
+}
+
+@media (max-width:899px) {
+  .zband { grid-template-columns:minmax(0, 1fr) }
+  .zlist { max-height:none; overflow:visible }
+  .zrow { min-height:44px }
+  /* 窄屏浮层不跟着点位跑，也不盖在图上（盖住就把别的点位一起藏了）：
+     改成 position:static 挂在画布正下方，撑高的是 .zbig 不是 .zcanvas，点位不动。
+     transform 是组件里内联算给桌面的，static 元素上 transform 仍然生效，必须 !important 才盖得掉 */
+  .zpop { position:static; width:auto; max-width:none; margin:8px -1px -1px;
+    border-left:0; border-right:0; border-bottom:0; box-shadow:none; transform:none !important }
+  /* 点位命中区放大到 34px（视觉那颗仍是 18px）。地图针做不到 44px——
+     贫瘠之地一张图 33 个针，44px 的命中区会互相压住；手机上真正的主入口是下面那张列表 */
+  .zdot { width:34px; height:34px; margin:-17px 0 0 -17px }
+  .zdot-n { margin:8px auto }
+}
+
+/* ---- 区域面板改成一行一张图（2026-10-19 站主："一行 2 个，地图太小了。
+   也是左右布局，左边是地图，右边是点位列表"）---- */
+/* .zgrid 那条两列网格写在共享的 app.css 里，旧站世界页也在用它；旧站已冻结，
+   所以只在**只由新站加载**的 board.css 里收成单列，旧站一张图都不会跟着变 */
+.zgrid { grid-template-columns: minmax(0, 1fr) }
+/* 卡里这一套就是标准的"左图右列表"，不要再带面板之间那段外边距（行距交给网格的 gap）；
+   内边距跟上面那行标题对齐，图不贴着卡片边框 */
+.zcard .zband { margin:0; padding:0 var(--s3) var(--s3) }
+/* app.css 的 .zcard 是 overflow:hidden（原来只为裁图），现在浮层要能探出卡片外，必须放开；
+   卡片本身没有圆角（--r-card:0），放开了也不会有视觉差 */
+.zcard { position:relative; overflow:visible }
+.zcard:hover, .zcard:focus-within { z-index:6 }
+/* 区域信息从"整卡是个按钮"改成"上面那一行是按钮"：点位自己是按钮，按钮套按钮是无效 HTML。
+   这里把 button 的默认长相抹平，做成一行小标题 + 几段补充信息，点它仍跳到该区域的稀有列表 */
+.zhead { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; width:100%;
+  background:none; border:0; border-bottom:1px solid var(--line); color:inherit; font:inherit;
+  text-align:left; padding:var(--s2) var(--s3); margin:0 0 var(--s3); cursor:pointer }
+.zhead b { font-size:15px }
+.zhead .zcnt { margin-left:auto }        /* 那几个数排在行尾，与名字同一行 */
+.zhead:disabled { cursor:default }
+@media (max-width:899px) { .zhead { min-height:44px; align-items:center } }
+.zhead:focus-visible { outline:2px solid var(--azure); outline-offset:-2px }
+/* 三类点位混在一张图上，颜色得有地方解释——浮层与列表行的左边条跟着点位色走 */
+.zrow { --pc:var(--pin-rare) }
+.zrow.k-book { --pc:var(--pin-book) } .zrow.k-camp { --pc:var(--pin-camp) }
+.zrow.k-entry { --pc:var(--pin-entry) }
+.zrow.k-boss { --pc:var(--pin-boss) }
+/* 副本详情页那一块只有一颗入口点，列表那一列空着不好看也不带信息：收成图占满、
+   入口那一行写在图下面（见 .dgeo-line） */
+.dgeo .zband { grid-template-columns:minmax(0, 1fr) }
+.dgeo .zlist { display:none }
+.dgeo-line { display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline;
+  margin:calc(-1 * var(--s3)) 0 var(--s3); font-size:12.5px }
+@media (max-width:899px) { .dgeo .zband { padding-bottom:0 } }
+/* 自绘底图就地提醒（AGENTS.md 素材那一条：这类图不是游戏里的地图，别拿它找路）。
+   只在 bossMapKind==='addon-drawn' 的那三座出现。它和被全站撤掉的"素材出处角标"不是一回事：
+   角标说的是"这张图从哪来"（归溯源页），这一条说的是"这张图能不能照着走"——
+   所以用虚线框 + 警示色，不用实心徽标，也不给颜色底。 */
+.dmap-tag { display:inline-block; margin-left:10px; padding:1px 8px; vertical-align:2px;
+  border:1px dashed var(--line-2); border-radius:999px;
+  font-size:11.5px; font-weight:400; line-height:1.7; color:var(--txt-caution) }
+@media (max-width:639px) { .dmap-tag { display:block; margin:4px 0 0 } }
+.zrow .zn { border-color:var(--pc); color:var(--pc) }
+.zrow:hover, .zrow.on { border-left-color:var(--pc) }
+.zrow.on .zn { background:var(--pc); border-color:var(--pc); color:var(--ink-on-bright) }
+/* 手机上的"小链接"统一抬高（2026-10-24 全站逐路由量出来的两类真问题）：
+   团本表里那座本的名字、传承页顶部那三段跳转，都是跟在说明文字后面的行内链接，
+   桌面 16px 行高够用，手指没有"指针精确"这一说。写在 board.css 一处，
+   不逐页补——逐页补的结果就是下一张表格又忘。 */
+@media (max-width:899px) {
+  #main .boardwrap td a, #main .lge-anchor a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; min-width: 44px; padding: 0 10px }
+  #main .lge-anchor { gap: 14px }
+}

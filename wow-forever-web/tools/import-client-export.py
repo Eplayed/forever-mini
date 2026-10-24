@@ -34,10 +34,10 @@ except ImportError:
 HOME = os.path.expanduser('~')
 DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow', 'ziliao-export')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(WEB, 'src', 'data')
-ICONS = os.path.join(WEB, 'src', 'img', 'icons')
-ART_DUNGEONS = os.path.join(WEB, 'src', 'img', 'art', 'dungeons')
-ART_MANIFEST = os.path.join(WEB, 'src', 'img', 'art', 'manifest.json')
+DATA = os.path.join(WEB, "app", "data")
+ICONS = os.path.join(WEB, "app", "img", 'icons')
+ART_DUNGEONS = os.path.join(WEB, "app", "img", 'art', 'dungeons')
+ART_MANIFEST = os.path.join(WEB, "app", "img", 'art', 'manifest.json')
 # 图标轨统一按这一档出图（CDN 那批就是 56×56）
 ICON_PX = 56
 ICON_Q = 90
@@ -190,9 +190,9 @@ def main():
             'build': build,
             'packageCounts': counts,
             'method': 'tools/import-client-export.py --apply',
-            'note': '这一份是原料留档：图标转成 56×56 jpg 落 src/img/icons/，'
-                    '载入图落 src/img/art/dungeons/ 并挂进 art.json.dungeons。'
-                    'art.json 由 fetch-art.py 按 src/img/art/manifest.json 的 items 重算，'
+            'note': '这一份是原料留档：图标转成 56×56 jpg 落 app/img/icons/，'
+                    '载入图落 app/img/art/dungeons/ 并挂进 art.json.dungeons。'
+                    'art.json 由 fetch-art.py 按 app/img/art/manifest.json 的 items 重算，'
                     '所以这张图能活下来是因为它在 manifest 里有一条 origin=client-export 的记录。',
         },
         'icons': {k: {'file': 'icons/%s.png' % k, 'sha256': idx['icons/%s.png' % k]['sha256'],

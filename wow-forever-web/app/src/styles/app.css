@@ -1,0 +1,1657 @@
+/* 设计令牌不在这里：全站色值、字体、圆角、尺度一律读 css/tokens.css（单一事实源）。
+   2026-10-11 改版把中性黑 + 无限蓝 + 计算器橙那套收进 tokens.css，
+   组件里再出现裸 hex 会被 tools/site-check.py 的裸色预算断言拦下。 */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);background-image:radial-gradient(1100px 520px at 50% -12%,rgba(29,141,205,.14),transparent 70%);
+  background-repeat:no-repeat;color:var(--txt);font:14px/1.65 var(--font-body);-webkit-text-size-adjust:100%}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:0;line-height:var(--lh-tight)}
+h1{font-size:20px} h2{font-size:var(--fs-h2);font-weight:650} h3{font-size:14px}
+.mono{font-family:var(--font-mono);font-size:13px}
+.dim{color:var(--txt-dim)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--s4) var(--s6)}
+
+/* 顶栏 */
+/* 顶栏两行：第一行品牌 + 全站搜索 + 上线读数，第二行导航。
+   导航是**上下两级**（2026-10-11 用户反馈"平铺看不清"）：每个分组是一块，
+   组名在上、这一组的入口在下，组与组之间靠一条竖分隔 + 各自的组色区分；
+   以前组名和二级项挤在同一行、只差 1.5px 字号与两档灰，读起来就是 17 个并列链接。 */
+.top{position:sticky;top:0;z-index:20;background:var(--top-bg);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1180px;margin:0 auto;padding:8px var(--s4);display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
+.brand{font-size:16px;font-weight:600;color:var(--gold);white-space:nowrap;text-decoration:none}
+.brand span{color:var(--txt)}
+.brand:hover{text-decoration:none;color:var(--gold)}
+.chip{margin-left:auto;font:12px var(--font-mono);color:var(--gold);border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;background:var(--panel);white-space:nowrap}
+nav.main{border-top:1px solid var(--line);background:var(--panel-2)}
+/* 导航整条要排在 1180 这一行里（与 .wrap 同宽，不许比正文宽）。
+   改成上下两级后每块变窄（组名不再和项抢横向空间），实测 17 项合计比原来省 ~40px；
+   再加项就动分组，别压字号——字号已经 12.5px。 */
+nav.main .in{max-width:1180px;margin:0 auto;padding:0 var(--s4);display:flex;align-items:flex-end;
+  gap:0;flex-wrap:wrap}
+nav.main a.nl{display:inline-flex;align-items:center;min-height:34px;padding:0 8px;border-radius:var(--r-ctl);
+  color:var(--txt-dim);font-size:12.5px;text-decoration:none}
+nav.main a.nl:hover{background:var(--panel-2);color:var(--txt);text-decoration:none}
+nav.main a.nl.on{background:var(--panel-2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--line)}
+/* 组块左右各 7px：改成上下两级后组名不再与项抢横向空间，但 6 个组的内边距
+   实测把整条导航撑到超出 1180 容器约 50px（断言"桌面导航排在一行内"报的就是这个），
+   所以从 10px 收到 7px，加上角标回到绝对定位，回到一行内。再加项就要动分组，别压字号。 */
+.ngrp{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:0 7px;
+  --gc:var(--txt-muted)}
+.ngrp::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:1px;background:var(--line)}
+.ngrp.solo{padding-left:0}
+.ngrp.solo::before{display:none}
+/* 「首页」没有组名，容易被读成下一组的成员，所以在它右边补一条分隔（其余组是左边一条） */
+.ngrp.solo::after{content:"";position:absolute;right:0;top:9px;bottom:9px;width:1px;background:var(--line-2)}
+.ngrp .ngi{display:flex;align-items:center;gap:2px}
+.ngt{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--gc);opacity:.62;
+  white-space:nowrap;padding:2px 0 0 2px;line-height:1.2}
+.ngt::before{content:"";display:inline-block;width:8px;height:2px;background:var(--gc);
+  vertical-align:3px;margin-right:4px}
+.ngrp.hit .ngt{opacity:1}
+/* 分组色：只表归属哪一组，不承载数据含义；组名本身是文字，色是第二通道 */
+.ngrp.g1{--gc:var(--nav-1)} .ngrp.g2{--gc:var(--nav-2)} .ngrp.g3{--gc:var(--nav-3)}
+.ngrp.g4{--gc:var(--nav-4)} .ngrp.g5{--gc:var(--nav-5)} .ngrp.g6{--gc:var(--nav-6)}
+
+/* 横幅 */
+.banner{border:1px solid var(--warn);background:rgba(217,161,59,.1);color:var(--txt-caution);
+  border-radius:var(--r-card);padding:8px 12px;font-size:12.5px;margin:var(--s4) 0}
+.banner.gray{border-color:var(--line);background:var(--panel);color:var(--txt-dim)}
+
+/* 卡片 */
+.card{background:var(--panel);border:1px solid var(--card-line);border-radius:var(--r-card);padding:var(--s4);margin-bottom:var(--s4)}
+/* 锚点让位：站内跳 #id 与 scrollIntoView 都要给吸顶头部留出高度，
+   否则跳过去目标正好被头部压住（2026-10-11 用户反馈"点击跳转的锚点位置不对，顶部被遮挡"）。
+   --hd-h 由 app.js 量真实头部高度写回，不是拍脑袋的常数。 */
+#main [id]{scroll-margin-top:calc(var(--hd-h) + 14px)}
+.card h2{margin-bottom:var(--s3);color:var(--gold)}
+.grid{display:grid;gap:var(--s3)}
+.g9{grid-template-columns:repeat(auto-fill,minmax(112px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+
+/* 徽标 */
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1.5;
+  border:1px solid var(--line);border-radius:4px;padding:0 6px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;flex:none;border:1px solid currentColor;background:none}
+/* 分级徽标（2026-10-10）：形状本身就是级别——实心方块 / 半填 / 空心圆 / 斜纹，
+   颜色只走明度阶梯不再抢色相。灰度打印、色觉障碍、或只看小圆点不看文字，都还读得出是哪一级。 */
+.L0{color:var(--lv0)} .pill.L0::before{background:currentColor}
+.L1{color:var(--lv1)} .pill.L1::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.L2{color:var(--lv2)} .pill.L2::before{border-radius:50%}
+.L3{color:var(--lv3);background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(139,147,161,.10) 4px,rgba(139,147,161,.10) 8px)}
+.pill.L3::before{background:repeating-linear-gradient(45deg,currentColor,currentColor 1.5px,transparent 1.5px,transparent 3px)}
+
+/* 控件 */
+input,select,button,textarea{font:inherit;color:var(--txt);background:var(--panel-2);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:6px 9px}
+input:focus,select:focus,button:focus{outline:none;border-color:var(--gold)}
+/* 焦点环：鼠标点按不给环（避免常驻视觉噪声），键盘 Tab 必须给，且用金 + 外偏移 */
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible,
+[tabindex]:focus-visible,.node:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button{cursor:pointer}
+button:hover{border-color:var(--gold);color:#fff}
+button.ghost{background:transparent}
+button.ghost.mini{font-size:11px;padding:1px 6px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.field{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center;margin-bottom:var(--s3)}
+input[type=search]{flex:1;min-width:180px}
+
+/* 覆盖率条 */
+.cov{display:flex;height:10px;border-radius:5px;overflow:hidden;border:1px solid var(--line);background:var(--panel-2)}
+.cov i{display:block;height:100%}
+.cov .L0{background:var(--lv0)} .cov .L1{background:var(--lv1)}
+.cov .L2{background:var(--lv2)} .cov .L3{background:var(--hatch)}
+.stats{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:5px 11px;font-size:12px;color:var(--txt-dim)}
+.stat b{color:var(--txt);font-size:15px;margin-right:3px;font-family:var(--font-mono)}
+
+/* 职业条 */
+.classbar{display:flex;gap:var(--s2);overflow-x:auto;padding-bottom:var(--s2);margin-bottom:var(--s3)}
+.cls{flex:0 0 auto;min-width:86px;text-align:center;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:9px 8px;cursor:pointer}
+.cls:hover{border-color:var(--gold-deep)}
+.cls.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.cls .ic{width:34px;height:34px;margin:0 auto 5px;border-radius:5px;background:var(--panel-2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:600}
+.cls .n{font-size:13px} .cls .e{font:11px var(--font-mono);color:var(--txt-dim)}
+
+/* 天赋面板 */
+.tpanel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+/* 职业天赋背景图（客户端原画，本地转存；取不到就不占位） */
+.tbg{position:relative;height:132px;background:var(--panel-2)}
+.tbg img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.tbg img.bad{display:none}
+.thead{display:flex;align-items:center;gap:var(--s3);padding:10px var(--s4);
+  background:linear-gradient(180deg,var(--elev),var(--panel));border-bottom:1px solid var(--line);flex-wrap:wrap}
+.thead .title{font-size:15px;font-weight:600;color:var(--gold)}
+.pts{font:13px var(--font-mono);border:1px solid var(--line);border-radius:5px;padding:2px 9px;background:var(--sunk)}
+.pts b{color:var(--gold);font-size:15px}
+.trees{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.tree{background:var(--panel-2);padding:var(--s3);min-height:340px}
+.tree.t0{background:var(--panel-2)}
+.tree.t1{background:var(--panel-2)}
+.tree.t2{background:var(--panel-2)}
+.tree h3{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.tree .hint{font:11px var(--font-mono);color:var(--txt-dim);margin-bottom:var(--s3)}
+.row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:6px 0;position:relative}
+.row+.row{border-top:1px dashed rgba(255,255,255,.06)}
+.node{position:relative;aspect-ratio:1;border-radius:5px;background:var(--panel-2);
+  border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;cursor:pointer;font-size:11px;color:var(--txt-dim);padding:3px;text-align:center;
+  transition:transform .12s ease-out,border-color .12s ease-out;user-select:none;overflow:hidden}
+.node .ico-wrap{position:relative;width:26px;height:26px;flex:0 0 auto}
+.node .ico{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.node .ico.bad{opacity:0}
+.node .nm{font-size:10px;line-height:1.15;max-height:23px;overflow:hidden;word-break:break-all;padding:0 1px}
+.node:hover{border-color:var(--gold)}
+.node:active{transform:translateY(1px)}
+.node.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-deep) inset;color:var(--txt)}
+.node.lock{opacity:.42;cursor:not-allowed;filter:saturate(.3)}
+.node.demo{opacity:.55;cursor:not-allowed}
+.node .rank{position:absolute;right:1px;bottom:0;font:11px var(--font-mono);color:var(--gold);
+  text-shadow:0 1px 2px #000;padding:0 2px}
+/* 层级未核实时的列表模式 */
+.flow{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.node.wide{aspect-ratio:auto;height:74px;flex-direction:column;justify-content:center;gap:3px;padding:6px 4px}
+.node.wide .nm{font-size:11px;line-height:1.2;max-height:26px}
+.node.wide .rank{position:static;text-shadow:none;font-size:10.5px;color:var(--txt-dim)}
+.node.wide.on .rank{color:var(--gold)}
+.node.conf{border-color:rgba(201,86,74,.65)}
+.node .cfl{position:absolute;right:2px;top:2px;width:0;height:0;
+  border-left:6px solid transparent;border-top:6px solid var(--bad)}
+/* 副本横幅：图形铺满、文字用 HTML 排版，避免 SVG 非等比缩放把字拉变形 */
+.dbn2{position:relative;height:96px;margin:calc(-1 * var(--s4)) calc(-1 * var(--s4)) var(--s3);
+  border-radius:var(--r-card) var(--r-card) 0 0;overflow:hidden;background:var(--panel-2)}
+.dbn-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+img.dbn-art{object-fit:cover}
+img.dbn-art.bad{opacity:0}
+.dbn2-shade{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,16,19,0) 30%,rgba(14,16,19,.85) 100%)}
+.dbn2-txt{position:absolute;left:var(--s4);right:var(--s4);bottom:var(--s3);
+  display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap}
+.dbn2-n{font-size:19px;font-weight:700;letter-spacing:.5px;color:var(--txt);
+  text-shadow:0 1px 4px rgba(0,0,0,.75)}
+.dbn2-e{font:12px var(--font-mono);color:var(--txt-dim)}
+.dbn2-mark{position:absolute;top:var(--s2);right:var(--s3);padding:2px 8px;border-radius:999px;
+  font:10.5px var(--font-mono);color:var(--txt-dim);border:1px solid var(--line);
+  background:rgba(14,16,19,.45)}
+.dcardx{padding-top:0}
+.dcardx .dbn2+.dcard{padding-top:var(--s3)}
+/* 副本卡：按十级一档分组的网格 */
+.band{display:flex;align-items:baseline;gap:var(--s3);margin:var(--s6) 0 var(--s3);
+  border-bottom:1px solid var(--line);padding-bottom:5px}
+.band b{font:15px var(--font-mono);color:var(--gold);letter-spacing:.5px}
+.band span:last-child{margin-left:auto}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:var(--s3)}
+.dcard2{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:0 var(--s3) var(--s3);display:flex;flex-direction:column}
+.dcard2 .dbn2{margin:calc(-1 * var(--s3)) calc(-1 * var(--s3) - 1px) var(--s3);height:104px}
+.dcard2 .dbn2-txt{flex-direction:column;align-items:flex-start;gap:2px}
+.dbn2-r{font:11.5px var(--font-mono);color:var(--gold)}
+.dbn2-seal{position:absolute;top:var(--s2);left:var(--s3);padding:1px 7px;border-radius:999px;
+  font-size:11px;color:var(--bg);background:var(--gold);font-weight:700}
+.dmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin-bottom:var(--s2)}
+.dmeta span{color:var(--txt-dim)}
+.dmeta .pill{margin-right:2px}
+button.wide{width:100%;margin-top:auto}
+.dcard2 .drawer{margin-top:var(--s2)}
+@media (max-width:600px){
+  .dcard2 .dbn2{height:92px}
+}
+@media (max-width:600px){
+  .dbn2{height:82px}
+  .dbn2-n{font-size:17px}
+}
+.dcardx .card,.dcardx>div{margin-bottom:0}
+.dcardx .nm{display:flex;align-items:center;gap:6px;min-height:22px}
+.node .flag{position:absolute;left:2px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+/* 与经典旧世的差异：左下角菱形（左上/右上已被"待实测"与"名称已核"占用）。
+   颜色之外另有图例文字与 title 说明，不单靠颜色承载信息。 */
+.tree{position:relative}
+.tlines{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.tlines line{stroke:var(--line);stroke-width:2;stroke-dasharray:4 3}
+.node.chg-added::after,.node.chg-modified::after,.node.chg-moved::after,.node.chg-unchanged::after{
+  content:'';position:absolute;left:2px;bottom:2px;width:7px;height:7px;transform:rotate(45deg);border-radius:2px}
+.node.chg-added::after{background:var(--ok)}
+.node.chg-modified::after{background:var(--txt-caution)}
+.node.chg-moved::after{background:var(--blue)}
+.node.chg-unchanged::after{background:var(--lead)}
+.tlegend{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;padding:0 var(--s4) var(--s3);
+  font-size:12px;color:var(--txt-dim)}
+.tlegend span{display:inline-flex;align-items:center;gap:5px}
+.tlegend i.lg{width:8px;height:8px;transform:rotate(45deg);border-radius:2px;display:inline-block}
+.tlegend .added{background:var(--ok)} .tlegend .modified{background:var(--txt-caution)}
+.tlegend .moved{background:var(--blue)} .tlegend .unchanged{background:var(--lead)}
+.cmpbox{margin:var(--s3) var(--s4) var(--s4);border-top:1px solid var(--line);padding-top:var(--s3)}
+.cmprow{border-bottom:1px dashed var(--line);padding:6px 0;font-size:12.5px}
+.cmprow b{margin-right:6px}
+.cmp-ranks{margin-top:4px;font-size:12px;color:var(--txt-dim)}
+b.ok{color:var(--ok)} b.caution{color:var(--txt-caution)}
+.node .vok{position:absolute;right:3px;top:2px;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+.node .nm{font-size:10.5px;line-height:1.25;word-break:break-all}
+.tfoot{display:flex;align-items:center;gap:var(--s3);padding:10px var(--s4);
+  border-top:1px solid var(--line);background:var(--sunk);flex-wrap:wrap;font-size:12.5px}
+.tfoot .sp{margin-left:auto;font-family:var(--font-mono);color:var(--txt-dim)}
+input[type=range]{width:150px;padding:0;background:transparent;border:none;accent-color:var(--gold)}
+.src{font:11.5px var(--font-mono);color:var(--txt-dim);padding:8px var(--s4);border-top:1px solid var(--line);background:var(--sunk-2)}
+
+/* 名称池 */
+.pool{display:flex;flex-wrap:wrap;gap:6px}
+.term{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:12.5px;cursor:pointer}
+.term:hover{border-color:var(--gold)}
+.term.hit{border-color:var(--warn);color:var(--txt-caution)}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+/* 表头吸顶要让开吸顶头部：原来写 top:0，表头停在视口顶 = 正好被头部压住
+   （2026-10-11 实测：副本页那张裸表格表头顶 0px，头部高 104px）。 */
+th{color:var(--txt-dim);font-weight:500;font-size:12px;background:var(--sunk);position:sticky;top:var(--hd-h)}
+tr:hover td{background:rgba(255,255,255,.02)}
+td.en{font:12px var(--font-mono);color:var(--txt-dim)}
+mark{background:rgba(217,161,59,.35);color:var(--mark-ink);border-radius:2px;padding:0 1px}
+
+/* 宽表在窄屏横向滚，不撑破版心 */
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* 分组表在窄屏靠横向滚，别把中文名列挤成一字一行 */
+.scrollx > table{min-width:540px}
+/* 横向滚的容器里**纵向吸顶不成立**：overflow-x:auto 会把 .scrollx 变成滚动容器，
+   而它的高度等于内容高，永远不产生纵向滚动，于是 thead 的 sticky 只是摆设
+   （实测专业/传承/世界/团本页 12 张表表头都跟着表格一起滚走）。
+   这里明确写 static，不留"看起来有吸顶其实没有"的假象；
+   首列 .rh 的左吸顶是真的生效（横向滚），保留。欠账与两个可选方案记在 docs/UI.md 7.3。 */
+.scrollx thead th{position:static}
+/* 首列表头（.rh）的**左**吸顶在横滚里是真生效的，保留；上面那条只是取消纵向吸顶 */
+.scrollx thead th.rh{position:sticky;left:0}
+.tblbox{padding:0;overflow-y:auto;max-height:72vh}
+
+/* 种族 × 职业矩阵 */
+table.mtx{min-width:680px}
+table.mtx th.rh{position:sticky;left:0;z-index:2;min-width:112px;white-space:nowrap}
+table.mtx th.rh > svg{vertical-align:middle}
+/* 原来这里是一条 `table.mtx th.rh span{margin-left:6px}`，头像外壳（.rface 和它里面的 .liw 都是 span）
+   跟着吃了 6px，两层叠加后头像从格子里挪出去压住种族名，看起来就是"头像没显示全"（用户实拍图4）。
+   现在拆成 :772 那组只给文字格的规则，这条删掉。 */
+table.mtx th.rh em{display:block;font-style:normal;font-size:11px;color:var(--txt-dim)}
+table.mtx td.y{color:var(--ok);font-weight:600;text-align:center}
+table.mtx td.n{color:var(--lead);text-align:center}
+table.mtx tr.off{opacity:.34}
+table.mtx button.ch{border:1px solid transparent;background:none;color:var(--txt-dim);cursor:pointer;
+  font:12px var(--font-cn);font-family:var(--font-cn);padding:2px 6px;border-radius:var(--r-ctl);white-space:nowrap}
+table.mtx button.ch:hover{background:var(--panel-2);color:var(--txt)}
+table.mtx button.ch.on{color:var(--gold);border-color:var(--line);background:var(--panel-2)}
+
+/* 专业与配方页 */
+.picks{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s3)}
+.pick{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:var(--r-ctl);padding:6px 10px;cursor:pointer;color:var(--txt);font:inherit;font-family:var(--font-cn)}
+.pick b{font-size:13px;font-weight:600}
+.pick:hover{border-color:var(--gold-deep)}
+.pick.on{border-color:var(--gold);color:var(--gold);box-shadow:0 0 0 1px var(--gold-deep) inset}
+.sk{display:inline-flex;gap:4px;flex-wrap:wrap}
+.sk-t{font:11px var(--font-mono);border:1px solid var(--line);border-radius:3px;padding:0 4px;
+  color:var(--txt-dim);display:inline-flex;gap:3px;align-items:center}
+.sk-t b{font-weight:600;color:var(--txt)}
+.sk-orange{border-color:rgba(224,169,109,.5)} .sk-orange b{color:var(--gold)}
+.sk-green b{color:var(--ok)} .sk-grey b{color:var(--lead)}
+.mats{display:flex;flex-wrap:wrap;gap:8px}
+.mat{display:inline-flex;align-items:center;gap:4px;font-size:12px}
+.mat b{color:var(--txt-dim);font-size:11px}
+td .liw.t{width:26px;height:26px}
+/* 物品品质色：1 普通 / 2 优秀 / 3 精良 / 4 史诗 / 5 传说。
+   颜色只作辅助，名字旁边始终带物品 ID，不靠颜色单独承载信息。 */
+.q1{color:var(--txt-dim)} .q2{color:var(--ok)} .q3{color:var(--blue)} .q4{color:var(--violet)} .q5{color:var(--gold)}
+input.lv{max-width:150px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-dim)}
+
+/* 种族卡 */
+.rcard{border:1px solid var(--line);border-radius:var(--r-card);padding:10px var(--s3);margin-top:var(--s3);background:var(--panel)}
+.rcard .rh{display:flex;align-items:center;gap:var(--s2)}
+.rcard .rh b{font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:var(--s2)}
+.chipc{font:11.5px var(--font-cn);border:1px solid var(--line);border-radius:999px;padding:1px 8px;color:var(--txt)}
+.chipc.off{color:var(--lead);opacity:.45}
+
+/* 副本卡 */
+.dcard{display:flex;gap:var(--s3);align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.dcard .nm{font-size:15px;font-weight:600}
+.dcard .sub{font:12px var(--font-mono);color:var(--txt-dim);margin-top:2px}
+/* 副本抽屉：首领与掉落 */
+.bosslist{list-style:none;margin:0;padding:0}
+.bosslist>li{border-top:1px dashed var(--line);padding:6px 0}
+.bosslist>li:first-child{border-top:none}
+.bosslist .bh{display:flex;gap:8px;align-items:center}
+.bosslist .bh b{font-size:13px}
+.loot{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.loot-i{display:inline-flex;align-items:center;gap:5px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:4px;padding:2px 7px;font-size:12px}
+.loot-i .mono{font-size:10.5px}
+/* 译名分歧是小字：#c9564a 在砚面上只有 4.08:1，不到 AA 4.5:1，所以文字走文本态红 */
+.conf{color:var(--txt-alert);font-size:12px;margin-top:4px}
+.grp{font-size:12px;color:var(--txt-dim);letter-spacing:.5px;margin:var(--s5) 0 var(--s2);
+  border-bottom:1px solid var(--line);padding-bottom:4px}
+
+/* 列表分组标题：技能书、术语速查、种族特长表共用 */
+.lgrp{display:flex;align-items:center;gap:var(--s2);margin:var(--s5) 0 var(--s2);
+  border-bottom:1px solid var(--line);padding-bottom:4px}
+.lgrp b{font-size:14px;font-weight:600}
+.lgrp svg,.lgrp img{flex:0 0 auto;border-radius:4px}
+.lgrp .dim{font-size:12px}
+.lgrp .dim.mono{margin-left:0}
+
+/* 列表里的图标格：自绘占位块垫底，本地转存的官方图标盖在上面，图缺了自动露出占位 */
+.liw{position:relative;display:inline-block;width:26px;height:26px;vertical-align:middle;flex:0 0 auto}
+.liw.sm{width:18px;height:18px;margin-right:6px}
+/* 职业 / 种族方块：默认 34，lg 给结果卡，sm 给紧凑列表 */
+.liw.t{width:34px;height:34px}
+.liw.t.lg{width:52px;height:52px}
+.liw.t.sm{width:22px;height:22px}
+.liw > svg,.liw > img{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:4px}
+.liw > img{object-fit:cover}
+.liw > img.bad{opacity:0}
+td.ich{width:34px}
+/* 名称列不许一字一行：宁可整表横向滚 */
+.abtab td:first-child,.entab td:nth-child(2){white-space:nowrap}
+.note{font-size:12.5px;color:var(--txt-dim);margin:6px 0 0}
+.tblbox{padding:0;overflow:auto;max-height:72vh}
+
+/* 抽屉 */
+.drawer{border-left:3px solid var(--gold);padding-left:var(--s3);margin-top:var(--s2)}
+ol.q{padding-left:20px;margin:6px 0}
+ol.q li{margin-bottom:6px;font-size:13px}
+ul.src{list-style:none;margin:6px 0 0;padding:0}
+ul.src li{font-size:12px;padding:3px 0;border-top:1px dashed var(--line);display:flex;gap:8px;flex-wrap:wrap}
+ul.src li:first-child{border-top:none}
+.st{font:10.5px var(--font-mono);border:1px solid var(--line);border-radius:3px;padding:0 5px;color:var(--txt-dim);white-space:nowrap}
+.st.official_cn,.st.official_en{color:var(--ok);border-color:rgba(76,175,114,.5)}
+.st.fan_db,.st.media_cn{color:var(--warn);border-color:rgba(217,161,59,.5)}
+.st.video{color:var(--blue);border-color:rgba(111,168,255,.5)}
+.st.datamine_cn,.st.datamine_en{color:var(--blue);border-color:rgba(111,168,255,.5)}
+
+/* 底栏 & toast */
+footer{border-top:1px solid var(--line);background:rgba(14,16,19,.9);padding:var(--s4);margin-top:var(--s6)}
+footer .in{max-width:1180px;margin:0 auto;font-size:12px;color:var(--txt-dim);display:flex;gap:var(--s4);flex-wrap:wrap}
+#toast{position:fixed;top:60px;right:16px;z-index:40;background:var(--panel-2);border:1px solid var(--gold);
+  border-radius:6px;padding:8px 13px;font-size:12.5px;opacity:0;transform:translateY(-6px);transition:.25s;max-width:70vw}
+#toast.on{opacity:1;transform:none}
+.empty{color:var(--txt-dim);text-align:center;padding:var(--s6)}
+
+@media (max-width:860px){
+  .trees{grid-template-columns:1fr}
+  .tree{min-height:0}
+  .tree.hide{display:none}
+  .ttabs{display:flex!important}
+  .chip{display:none}
+  .node .nm{font-size:9px;line-height:1.15}
+  .node{border-radius:4px}
+}
+.ttabs{display:none;gap:var(--s2);margin-bottom:var(--s3)}
+.ttabs button{flex:1;font-size:12.5px;padding:6px 4px}
+.ttabs button.on{border-color:var(--gold);color:var(--gold)}
+
+/* ---------- 选职业问答 ---------- */
+.crow{display:flex;align-items:center;gap:var(--s2)}
+.crow .sp{flex:1}
+.qopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--s2);margin-top:var(--s3)}
+.qopt{text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-ctl);
+  background:var(--panel-2);color:var(--txt);font:inherit;cursor:pointer}
+.qopt:hover{border-color:var(--gold-deep)}
+.qopt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.qopt.on{border-color:var(--gold);color:var(--gold)}
+.mcard .ic.lg{width:52px;height:52px;flex:none;margin-right:var(--s3);border-radius:var(--r-card);
+  background:var(--panel-2);display:flex;align-items:center;justify-content:center}
+.mbar{height:6px;border-radius:4px;background:var(--panel-2);overflow:hidden;margin:6px 0}
+.mbar i{display:block;height:100%;background:var(--gold)}
+a.btn{display:inline-block;margin-top:var(--s2);padding:6px 12px;border:1px solid var(--gold);
+  border-radius:var(--r-ctl);color:var(--gold);text-decoration:none;font-size:12.5px}
+ul.list{margin:var(--s2) 0 0 18px;color:var(--txt-dim);font-size:12.5px}
+.step{border-left:2px solid var(--line);padding-left:var(--s3)}
+.step h3{margin:0 0 4px;font-size:13.5px;color:var(--gold)}
+.step p{margin:0;font-size:12.5px}
+
+/* ---------- 语义强调文本（替代散落在 JS 里的硬编码色值） ---------- */
+.alert{color:var(--txt-alert)}
+.caution{color:var(--txt-caution);font-size:12.5px}
+
+
+/* ---------- 设计量化基线（吸收自通用走查规则，见 docs/UI.md 第七节） ---------- */
+.card h1.pt{margin-bottom:var(--s2);color:var(--gold);font-size:var(--fs-h1);
+  font-weight:700;line-height:var(--lh-tight);letter-spacing:0}
+.thead h1.title{font-size:var(--fs-h1);font-weight:700;letter-spacing:0;line-height:var(--lh-tight)}
+.mono,.stat b,.rank,.cov-num{font-variant-numeric:tabular-nums}
+
+/* 触屏点击目标：手机上"能点到"比"省地方"优先 */
+@media (max-width:600px){
+  .term{display:inline-flex;align-items:center;min-height:44px;padding:12px 14px;font-size:14px;line-height:1.2}
+  button.info{min-height:44px;min-width:44px;margin-left:8px;font-size:12px}
+  button.ghost, button.ghost.mini{min-height:44px;min-width:44px;padding:10px 14px;font-size:13px}
+  /* 手机上二级项排成一条可横滑的导航带：不折叠、不点开菜单，滑一下全看得到；
+     整条带渐隐提示右边还有内容，当前页加载后自动滚到中间。 */
+  .top .in{padding:2px var(--s3)}
+  .brand{display:inline-flex;align-items:center;min-height:44px}
+  nav.main{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
+  nav.main .in{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;padding:0 var(--s3);gap:2px var(--s2);scrollbar-width:none}
+  nav.main .in::-webkit-scrollbar{display:none}
+  nav.main a.nl{min-height:44px;font-size:13.5px;padding:0 12px;flex:0 0 auto;scroll-snap-align:center}
+  /* 手机上不做上下两级：组名回到项前面同一行。二级项 44px 命中区 + 组名另占一行
+     会把顶栏顶到 104px，超过"移动端顶栏不超过 100px"这条自己的判据；
+     横向滑动带本来就是靠组名当"段落开头"来读的，颜色区分保留。 */
+  .ngrp{flex-direction:row;align-items:center;padding-left:10px;flex:0 0 auto}
+  .ngrp.solo{padding-left:0}
+  .ngrp .ngi{gap:2px}
+  .ngt{font-size:12px;padding:0 6px 0 0}
+  .ngt::before{display:none}
+  .src a{min-height:44px;display:flex;align-items:center;flex-wrap:wrap}
+  .field input[type=search], .thead input[type=search]{min-height:44px}
+  .field select, .field input{min-height:44px}
+  .pick{min-height:44px;padding:10px 14px}
+  .chk input{width:20px;height:20px}
+  table.mtx button.ch{min-height:44px;min-width:44px}
+  .qopt{min-height:48px}
+  .ttabs button{min-height:44px}
+  .zcard,.rarecard{min-height:44px}
+  .zmap{aspect-ratio:560/340}
+  .tfoot input[type=range]{min-height:44px}
+  .card > a{display:inline-flex;align-items:center;min-height:44px}
+  a.cta{display:inline-flex;align-items:center;min-height:44px;padding-right:6px}
+}
+
+/* ---------- 逐条来源展示 ---------- */
+button.info{margin-left:6px;font-size:11px;padding:2px 7px;border:1px solid var(--line);
+  border-radius:4px;background:transparent;color:var(--txt-dim);cursor:pointer}
+button.info:hover{border-color:var(--gold);color:var(--gold)}
+.srow>td{background:var(--panel-2);border-top:0}
+.srcbox{margin-top:var(--s3);padding:var(--s3);border:1px solid var(--line);
+  border-radius:var(--r-card);background:var(--panel-2)}
+.srcbox h3{margin:0 0 var(--s2);font-size:13px;color:var(--gold)}
+.srcline{font-size:12.5px;color:var(--txt-dim);padding:6px 0;border-top:1px dashed var(--line)}
+.srcline a{color:var(--blue);word-break:break-all}
+.act{white-space:nowrap}
+
+
+/* ---------- 上线时间表 ---------- */
+.tl{position:relative}
+.tlrow{display:grid;grid-template-columns:110px 1fr;gap:var(--s3);padding:var(--s3) 0;border-top:1px solid var(--line)}
+.tlrow:first-child{border-top:0}
+.tl-date b{display:block;font-size:14px;color:var(--txt)}
+.tl-date .dim{font-size:11.5px}
+.tl-h{font-size:15px;font-weight:600;margin-bottom:2px}
+.tl-past .tl-date b{color:var(--txt-dim)}
+.tl-future .tl-date b{color:var(--gold)}
+.tag{font-size:11px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--txt-dim)}
+.tl-future .tag{color:var(--gold);border-color:var(--gold-deep)}
+.quote{display:block;margin:4px 0;padding:6px 10px;border-left:2px solid var(--gold-deep);
+  background:var(--panel-2);color:var(--txt-dim);font-size:12.5px;border-radius:0 4px 4px 0}
+@media (max-width:600px){
+  .tlrow{grid-template-columns:1fr;gap:4px}
+}
+
+/* ---------- 技能四态表 ---------- */
+.abtab th:nth-child(1){width:150px}
+.abtab th:nth-child(2){width:110px}
+.abtab th:nth-child(3){width:150px}
+.abtab td.quote{color:var(--txt-dim);font-size:12.5px;line-height:1.55}
+.abtab h3,#abtbl h3{margin:var(--s4) 0 var(--s2);font-size:13.5px;color:var(--gold)}
+
+/* ---------- 世界页：区域卡、稀有卡、小地图与标记 ---------- */
+.zgrid,.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:var(--s3)}
+.zcard{display:block;text-align:left;padding:0;overflow:hidden;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-card);color:inherit}
+.zcard.lk{cursor:pointer}
+.zcard.lk:hover{border-color:var(--gold-deep)}
+.zbody{padding:var(--s2) var(--s3) var(--s3);display:flex;flex-direction:column;gap:3px}
+.zbody>b{font-size:14px}
+.zbody .tag,.rbody .tag{align-self:flex-start}
+.zcnt{font-size:11.5px;color:var(--gold)}
+.zmap{position:relative;overflow:hidden;background:var(--panel-2);border-bottom:1px solid var(--line);
+  aspect-ratio:560/373}
+.zmap>img{width:100%;height:100%;object-fit:cover;display:block}
+.zmap>img.bad{display:none}
+.zmap.none{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-height:86px;font-size:12px;aspect-ratio:auto}
+.zmark{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
+  border:2px solid var(--gold);background:rgba(224,169,109,.35);box-shadow:0 0 0 2px rgba(14,16,19,.7)}
+.rarecard{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-card);overflow:hidden}
+.rbody{padding:var(--s2) var(--s3) var(--s3);display:flex;flex-direction:column;gap:4px}
+.rbody>b{font-size:14px}
+.rtags{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.tag.new{color:var(--gold);border-color:var(--gold-deep)}
+.wdr{display:none;border-left:3px solid var(--gold);padding-left:var(--s3);margin-top:var(--s2)}
+.wdr.open{display:block}
+.loot-i.q1,.loot-i.q2,.loot-i.q3,.loot-i.q4,.loot-i.q5{color:var(--txt)}
+.loot-i>b{font-weight:600}
+.zthumb{max-width:258px;margin-bottom:var(--s3);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.lrow{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:baseline;padding:var(--s2) 0;
+  border-top:1px solid var(--line)}
+.lrow>b{font-size:13.5px}
+.itemrow{display:flex;gap:var(--s3);align-items:center;margin-bottom:var(--s3)}
+.itemrow>div{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+
+/* ---------- 首页 ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:var(--s5);align-items:start}
+/* 2026-10-11 改版：标题回到白字（稿子实测 Wowhead 的标题是白的，蓝只给链接与当前项），
+   琥珀金换成蓝之后如果标题也染色，整页会像一排链接。 */
+.card h1.pt,.card h2{color:var(--txt)}
+.card h2{border-left:2px solid var(--accent-deep);padding-left:9px}
+.hero .pt{color:var(--txt);font-size:var(--fs-h1);letter-spacing:0;line-height:var(--lh-tight)}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--accent);
+  font:800 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.herot>p{margin:var(--s2) 0 var(--s4);max-width:64ch}
+.covnum{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:baseline;margin-top:var(--s3)}
+.covnum .pill b{margin-left:4px;font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.covnum>span:last-child{margin-left:auto}
+.heros{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start}
+.cd{display:flex;flex-direction:column;width:100%;background:var(--panel-2);
+  border:1px solid var(--gold-deep);border-radius:var(--r-card);padding:var(--s3) var(--s4)}
+.cdrow{display:flex;align-items:baseline;gap:6px}
+.cd b{font-size:34px;line-height:1.05;color:var(--gold);font-variant-numeric:tabular-nums}
+.cd span{font-size:12px;color:var(--txt-dim)}
+.cd i{font-style:normal;font-size:17px;color:var(--txt);font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.cd p{margin:var(--s1) 0 0;font-size:11.5px}
+
+/* 首页全站搜索：输入框 + 分组结果下拉（索引见 app/data/search.json） */
+.gsearch{position:relative;margin:var(--s3) 0 0}
+.gsearch input{width:100%;min-height:44px;padding:10px 12px;font-size:14px}
+.gsex{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center;margin:var(--s2) 0 0}
+.gsex span{flex:1 1 160px}
+.gsx{min-height:32px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;
+  background:var(--panel-2);color:var(--txt-dim);font:12px var(--font-cn);cursor:pointer}
+.gsx:hover{border-color:var(--gold-deep);color:var(--txt)}
+.gres{position:absolute;z-index:12;top:100%;left:0;right:0;margin-top:4px;max-height:340px;overflow:auto;
+  background:var(--panel);border:1px solid var(--gold-deep);border-radius:var(--r-card);
+  box-shadow:0 12px 28px rgba(0,0,0,.5);padding:var(--s2) 0}
+.gsh{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);
+  padding:var(--s1) var(--s4);border-top:1px solid var(--line);font-size:11.5px;
+  color:var(--gold);letter-spacing:.5px}
+.gsh:first-child{border-top:0}
+.gsh a{color:var(--txt-dim);white-space:nowrap;min-width:44px;text-align:right;padding:4px 2px}
+.gsh a:hover{color:var(--gold)}
+.gsr{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:var(--s3);align-items:baseline;
+  padding:7px var(--s4);color:var(--txt)}
+.gsr:hover,.gsr:focus-visible{background:var(--panel-2);text-decoration:none;outline-offset:-2px}
+.gsr>b{font-weight:600;overflow-wrap:anywhere}
+.gsr>span{font-size:11.5px;white-space:nowrap}
+.gsr .lv{font:11px var(--font-mono);font-style:normal;
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:1px 6px}
+.gsl{margin:0;padding:var(--s2) var(--s4);font-size:12px}
+.tqs{max-width:180px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--s2);margin-top:var(--s3)}
+.stripc{display:flex;flex-direction:column;align-items:center;gap:5px;padding:var(--s2) 4px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-card);
+  color:var(--txt-dim);text-decoration:none}
+.stripc:hover{border-color:var(--gold-deep);color:var(--txt)}
+.stripc b{color:var(--txt);font-size:13px;font-weight:600}
+.chipsrow{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:center;margin:var(--s4) 0 var(--s2)}
+.chipsrow a{font-size:12.5px}
+.modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s3);margin-top:var(--s3)}
+.mod{display:flex;flex-direction:column;gap:var(--s2);background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:var(--s4);color:var(--txt);text-decoration:none}
+.mod:hover{border-color:var(--gold-deep)}
+.mod h2{font-size:15px;color:var(--gold)}
+.mod p{margin:0;font-size:12.5px}
+.modn{display:flex;flex-wrap:wrap;gap:var(--s4);margin-top:auto;padding-top:var(--s3)}
+.modn span{font-size:11.5px;color:var(--txt-dim)}
+.modn b{display:block;font-size:19px;color:var(--txt);font-variant-numeric:tabular-nums}
+.modf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-top:1px solid var(--line);
+  padding-top:var(--s2);font-size:11.5px;color:var(--txt-dim)}
+.flowrow{display:grid;grid-template-columns:86px 1fr;gap:var(--s3);padding:var(--s2) 0;
+  border-top:1px solid var(--line);align-items:baseline}
+.flowrow>div{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.flowrow p{margin:2px 0 0;font-size:12.5px;flex:1 1 100%}
+
+/* 首页只读天赋树预览：格子 = 客户端里的天赋本身，点格子进计算器 */
+.treewrap{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:var(--s6);
+  align-items:start;margin-top:var(--s3)}
+.pvpicks{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+.pv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);max-width:330px}
+.pnode{display:flex;align-items:center;justify-content:center;aspect-ratio:1;position:relative;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:5px}
+.pnode:hover{border-color:var(--gold);text-decoration:none}
+.pnode:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pnode .ico-wrap{position:relative;width:46px;height:46px}
+.pnode .ico-wrap svg{width:100%;height:100%}
+.pnode .ico{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.pnode .ico.bad{opacity:0}
+.pnode.chg-added::after,.pnode.chg-modified::after,.pnode.chg-moved::after,.pnode.chg-unchanged::after{
+  content:"";position:absolute;right:2px;top:2px;width:7px;height:7px;border-radius:50%}
+.pnode.chg-added::after{background:var(--ok)}
+.pnode.chg-modified::after{background:var(--txt-caution)}
+.pnode.chg-moved::after{background:var(--blue)}
+.pnode.chg-unchanged::after{background:var(--lead)}
+.pempty{aspect-ratio:1}
+.pvmeta{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);margin:var(--s3) 0 0;
+  font-size:11.5px;color:var(--txt-dim)}
+.pvmeta b{font-family:var(--font-mono);font-weight:500;color:var(--txt);font-variant-numeric:tabular-nums}
+.pvmeta .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lead);
+  margin-right:5px;vertical-align:1px}
+.pvmeta .dot.chg-added{background:var(--ok)}
+.pvmeta .dot.chg-modified{background:var(--txt-caution)}
+.pvmeta .dot.chg-moved{background:var(--blue)}
+.tright{display:flex;flex-direction:column;gap:var(--s3)}
+button.stripc{font:inherit;font-size:13px;cursor:pointer;text-align:center}
+.stripc.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-deep);color:var(--txt)}
+.stripc.on b{color:var(--gold)}
+
+/* 种族页阵营带：城市原画压暗当氛围底，取不到就退回纯色带 */
+.facband{position:relative;overflow:hidden}
+.fembg{position:absolute;left:0;top:0;right:0;bottom:0;z-index:0;pointer-events:none}
+.fembg img{width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:.34;
+  filter:saturate(.75) contrast(1.05)}
+.fembg::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;
+  background:linear-gradient(180deg,rgba(14,16,19,.18) 0%,rgba(14,16,19,.72) 55%,rgba(14,16,19,.94) 100%)}
+.fembg.bad{display:none}
+.facband>*{position:relative;z-index:1}
+.facband>.fembg{position:absolute;z-index:0}
+.facband .artmark{position:absolute;right:var(--s3);top:var(--s3);z-index:2;
+  font:10px var(--font-mono);color:var(--txt-dim);background:rgba(14,16,19,.6);
+  border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+
+/* 传承页：三棵专长树 + 挑战清单 */
+/* 树卡与详情并排：格子只有 520px 宽，详情放下面会在右侧留一大片空，
+   并排之后"点左边、右边出结果"，空态也有地方摆 */
+.ltreewrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:var(--s4);align-items:start}
+.ltreewrap > .card{margin-bottom:0}
+.ltreecard h2, .lchgrp h2{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3)}
+.lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);
+  max-width:520px;margin-top:var(--s3)}
+.lslot{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:6px 4px 5px;min-height:78px;color:var(--txt-dim);font:inherit;cursor:pointer;text-align:center}
+.lslot:hover{border-color:var(--gold);text-decoration:none}
+.lslot:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.lslot.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-deep)}
+.lslot.none{background:none;border-style:dashed;border-color:var(--line);opacity:.45;cursor:default}
+.lslot.unk{border-style:dashed;cursor:default;justify-content:center;gap:0}
+.lslot.unk b{font-size:22px;line-height:1;color:var(--lead);font-weight:500}
+.lslot.unk .dim{font-size:10.5px}
+.lslot .lcell{position:relative;width:40px;height:40px}
+.lslot .ico-wrap{position:relative;display:block;width:40px;height:40px}
+.lslot .ico-wrap svg{width:100%;height:100%}
+.lslot .ico{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.lslot .ico.bad{opacity:0}
+.lslot .rk{position:absolute;right:-3px;bottom:-4px;font-size:10px;color:var(--gold);
+  background:rgba(14,16,19,.82);border-radius:3px;padding:0 3px;font-variant-numeric:tabular-nums}
+.lslot .nm{font-size:11px;line-height:1.2;color:var(--txt);word-break:break-all}
+.ldetail .lmeta{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);font-size:12.5px;
+  color:var(--txt-dim);margin:var(--s2) 0 var(--s3)}
+.ldetail .lmeta b{color:var(--txt);font-weight:600}
+.ltab td .dim.mono{margin-left:6px;font-size:11.5px}
+.ltab .pill{margin-left:8px}
+.lchgrp .chipc b{margin-left:5px;font-variant-numeric:tabular-nums}
+
+/* 后写的组件规则会盖过上面那个媒体查询里的同名属性，所以新增块的移动端规则统一放在最后 */
+@media (max-width:600px){
+  .zmap{aspect-ratio:560/340}
+  .hero{grid-template-columns:1fr;gap:var(--s4)}
+  .hero .pt{font-size:21px}
+  .heros{flex-direction:row;flex-wrap:wrap;align-items:stretch}
+  .cd{flex:1 1 150px}
+  .chipsrow a{display:inline-flex;align-items:center;min-height:44px}
+  .stripc{min-height:64px}
+  .mod{min-height:44px}
+  .modgrid{grid-template-columns:1fr}
+  .covnum>span:last-child{margin-left:0;flex:1 1 100%}
+  .flowrow{grid-template-columns:1fr;gap:2px}
+}
+
+/* ---------- 资料完整度排行 ---------- */
+.ranktab td .rankno{display:inline-block;min-width:20px;font-size:15px;color:var(--gold);
+  font-variant-numeric:tabular-nums}
+.ranktab td:nth-child(2){white-space:nowrap}
+.cov.mini{display:inline-flex;height:8px;width:130px;border-radius:4px;vertical-align:middle}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;margin-top:var(--s2);
+  font-size:12px;color:var(--txt-dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .sw{width:12px;height:8px;border-radius:2px;display:inline-block}
+.legend .sw.L0{background:var(--ok)} .legend .sw.L2{background:var(--warn)}
+.chips.inline{display:inline-flex;margin-left:var(--s2)}
+.chgl{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);margin:var(--s2) 0}
+.chgl span{font-size:12px;color:var(--txt-dim)}
+.chgl b{color:var(--txt);font-size:15px;margin-right:4px;font-variant-numeric:tabular-nums}
+
+/* ---------- 种族页：双阵营带、头像卡与种族详情 ---------- */
+.facwrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-bottom:var(--s4)}
+.facband{background:var(--panel);border:1px solid var(--line);border-left-width:3px;
+  border-radius:var(--r-card);padding:var(--s3)}
+.facband.alliance{border-left-color:var(--blue)}
+.facband.horde{border-left-color:var(--bad)}
+.fhead{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:baseline;margin-bottom:var(--s3)}
+.fhead>b{font-size:15px}
+.facband.alliance .fhead>b{color:var(--blue)}
+.facband.horde .fhead>b{color:var(--txt-alert)}
+.fhead .dim.mono{flex:1 1 100%;font-size:11.5px}
+.femb{width:20px;height:24px;object-fit:contain;align-self:center}
+.femb.bad{display:none}
+/* 种族卡：客户端给的种族像本来就是"头肩特写"，56px 方框里读起来像被裁了
+   （用户实拍反馈"头像没显示全"）。格子放到 72px、列宽跟着放宽，整张脸才看得清。 */
+.racegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--s2)}
+.racecard .rface{width:72px;height:72px}
+.racecard{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s2) 4px;cursor:pointer;
+  color:var(--txt-dim);text-align:center}
+.racecard:hover{border-color:var(--gold-deep)}
+.racecard.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-deep) inset}
+.racecard .rcn{font-size:12.5px;color:var(--txt);font-weight:600}
+.racecard .rcnote{font-size:10.5px;line-height:1.35}
+.racecard .dim.mono{white-space:nowrap;font-size:11px}
+.srcbox:empty{display:none}
+.rface{position:relative;display:inline-block;width:56px;height:56px;flex:0 0 auto;
+  overflow:hidden;border-radius:8px;background:var(--panel-2)}
+.rface>.liw,.rface>.liw.t{position:absolute;inset:0;width:100%;height:100%}
+/* 客户端种族像是按头肩裁的竖构图：塞进方框时按 50%/18% 定位，
+   优先保住头顶与脸，别把头发裁掉（用户实拍反馈"头像没显示全"） */
+.rface-art{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 18%;border-radius:8px}
+.rface-art.bad{display:none}
+.rface.lg{width:104px;height:104px}
+.rface.sm{width:30px;height:30px}
+.rdhead{display:flex;gap:var(--s4);align-items:flex-start;flex-wrap:wrap}
+.rdt{flex:1 1 240px;min-width:0}
+.rdt h2{font-size:19px}
+.rdacts{display:flex;gap:var(--s2);align-items:center;flex-wrap:wrap;margin-top:var(--s2)}
+.lore{margin:var(--s3) 0 0;padding:var(--s2) var(--s3);border-left:2px solid var(--gold-deep);
+  background:var(--panel-2);color:var(--txt-dim);font-size:12.5px;border-radius:0 4px 4px 0}
+.rdh{margin:var(--s4) 0 var(--s2);font-size:13px;color:var(--gold)}
+.rdcls{display:flex;flex-wrap:wrap;gap:6px}
+.rdcl{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:3px 9px 3px 3px;
+  border:1px solid var(--line);border-radius:999px;background:var(--panel-2)}
+.rdcl i{font-style:normal;color:var(--txt)}
+.rdcl.off{opacity:.4}
+.rdtr{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s2)}
+.rdtr>li{display:flex;gap:var(--s2);align-items:flex-start;padding:var(--s2) 0;border-top:1px solid var(--line)}
+.rdtr>li:first-child{border-top:0}
+.rdtr-b{flex:1;min-width:0}
+.rdtr-b .quote{margin-top:3px}
+.combos{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.combo{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:4px 10px 4px 4px;
+  border:1px solid var(--line);border-radius:999px;background:var(--panel-2)}
+.combo b{font-weight:600}
+table.mtx th.rh .rface{width:26px;height:26px;border-radius:5px;vertical-align:middle}
+/* 这一条原来写成 `th.rh span`，把头像外壳（.rface 与它里面的 .liw 都是 span）也一起加了 6px 左边距，
+   两层叠加后头像从格子里挪出去压住种族名，看起来就是"头像被裁了一半"（用户实拍图4）。
+   左边距只给文字那一格。 */
+table.mtx th.rh > span{display:inline-block;vertical-align:middle;color:var(--txt);font-size:12.5px}
+table.mtx th.rh > span:not(.rface){margin-left:6px}
+
+@media (max-width:600px){
+  .facwrap{grid-template-columns:1fr}
+  .rface.lg{width:84px;height:84px}
+  .racecard{min-height:96px}
+  .rdtr>li{flex-wrap:wrap}
+  .rdacts button.ghost, .lgrp button.ghost{min-height:44px}
+  .gsx{min-height:44px;padding:10px 14px}
+  .gsh a{display:inline-flex;align-items:center;min-height:44px}
+  .gsh{padding:var(--s2) var(--s4)}
+
+  .gsr{min-height:44px;grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+  .gres{max-height:280px}
+  .cd i{font-size:15px}
+  .cd b{font-size:28px}
+  .treewrap{grid-template-columns:1fr;gap:var(--s4)}
+  .pv{max-width:none;gap:6px}
+  .pnode{min-height:44px}
+  .pnode .ico-wrap{width:40px;height:40px}
+  .fembg img{object-position:center 20%}
+  /* 窄屏放不下右上角的绝对定位标注，会和阵营标题重叠：改成跟在标题下面的一行小字 */
+  .facband .artmark{position:static;display:block;margin:2px 0 0 var(--s3)}
+  .lgrid{max-width:none}
+  .lslot{min-height:78px}
+  /* 窄屏放不下并排：详情回到树卡下面，顺序仍是"树 → 详情 → 挑战" */
+  .ltreewrap{grid-template-columns:1fr;gap:var(--s4)}
+}
+
+
+/* ============================================================
+   设计系统层（2026-10-10 全站改版）
+   判据与实测见 docs/DESIGN-REFRESH-2026-10-10.md
+   ============================================================ */
+
+/* 元数据行：等宽小字 + 拉开字距，专门装"级别 · 条数 · 核对日期"。
+   中文不做 uppercase（无效），拉丁与数字走大写，让这行和正文一眼分得开。 */
+.mline{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s1) var(--s3);
+  font-family:var(--font-mono);font-size:var(--fs-meta);line-height:1.6;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--txt-dim);margin:0 0 var(--s3)}
+.mline b{color:var(--txt);font-weight:600;font-variant-numeric:tabular-nums}
+.mline i{font-style:normal;color:var(--line)}
+.mline .pill{letter-spacing:.02em}
+
+/* 签名元素：来源轨。卡片左缘一条竖轨，轨的"填充程度"就是这张卡最弱那条数据的分级——
+   实心 → 半填 → 空心 → 斜纹。它不是装饰：扫一眼轨就知道这页有多少东西是核过的。 */
+.rail{position:relative;padding-left:calc(var(--s4) + 9px)}
+.rail::before{content:"";position:absolute;left:0;top:var(--s3);bottom:var(--s3);width:3px;
+  border-radius:2px;background:var(--line)}
+.rail[data-lv="L0"]::before{background:var(--lv0)}
+.rail[data-lv="L1"]::before{background:linear-gradient(180deg,var(--lv1) 50%,var(--line) 50%)}
+.rail[data-lv="L2"]::before{background:none;border:1px solid var(--lv2);border-radius:2px}
+/* L3 用低对比斜纹：它说的是"这一页里还有没数据的部分"，不该比正文更抢眼 */
+.rail[data-lv="L3"]::before{background:repeating-linear-gradient(45deg,var(--line),var(--line) 2px,transparent 2px,transparent 5px)}
+
+/* 动效只有三处：卡片进入、来源轨填充、交互反馈。全部只动 transform/opacity，不动布局属性。 */
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes railin{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.rail::before{transform-origin:top;animation:railin var(--dur-2) var(--ease-out) both}
+.card,.mod{animation:rise var(--dur-3) var(--ease-out) both}
+.card:nth-child(2),.mod:nth-child(2){animation-delay:40ms}
+.card:nth-child(3),.mod:nth-child(3){animation-delay:80ms}
+.card:nth-child(4),.mod:nth-child(4){animation-delay:120ms}
+.card:nth-child(5),.mod:nth-child(5){animation-delay:160ms}
+.card:nth-child(n+6){animation:fadein var(--dur-3) var(--ease-out) both}
+button,a.nl,.mod,.racecard{transition:border-color var(--dur-1) linear,
+  color var(--dur-1) linear,transform var(--dur-1) var(--ease-out)}
+button:hover{transform:translateY(-1px)}
+
+/* 改动四态与分级从此分属两条通道：改动看形状（三角/菱形/方点），分级看填充程度与文字。
+   原来四态用四个色相，和分级、阵营、物品品质抢同一批颜色。 */
+.tlegend .added{clip-path:polygon(50% 0,100% 100%,0 100%)}
+.tlegend .modified{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.tlegend .moved{clip-path:circle(50%)}
+.tlegend .unchanged{clip-path:polygon(25% 25%,75% 25%,75% 75%,25% 75%)}
+
+/* 无障碍底线：系统要求减少动效时，三处全部归零，但保留最终态（不许拿"看不见"当省实现）。 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .card,.mod{animation:none}
+  .rail::before{animation:none;transform:none}
+  button:hover{transform:none}
+}
+
+/* 窄屏：标题降一档、来源轨收窄，元数据行改成两列可读而不是长串换行 */
+@media (max-width:600px){
+  :root{--fs-h1:26px;--fs-h2:17px}
+  .rail{padding-left:calc(var(--s3) + 8px)}
+  .rail::before{top:var(--s2);bottom:var(--s2)}
+  .mline{gap:2px var(--s2);letter-spacing:.06em}
+}
+
+/* ============================================================
+   首页模块卡（2026-10-10 第五批：整合两家参考站的首页布局）
+   背景图只用 app/img/art 里已转存的本地原画；没有对应素材的卡不加背景层。
+   ============================================================ */
+.hasart{position:relative;overflow:hidden}
+.hasart>.bgart{position:absolute;inset:0;z-index:0;background:center/cover no-repeat;opacity:.17;
+  transform:scale(1.02);transition:transform var(--dur-3) var(--ease-out),opacity var(--dur-3) linear}
+/* 压暗渐变：图在上半部露出来，正文那半压到接近实色，保证对比度不被素材吃掉 */
+.hasart::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(14,16,19,.30),rgba(23,26,31,.93) 62%,var(--panel) 100%)}
+.hasart>*:not(.bgart){position:relative;z-index:1}
+.rail::before{z-index:2}
+/* 边框与动效：hover 只抬 2px、图放大 5%、边框转金；不动任何布局属性 */
+.mod,.two>.card{transition:transform var(--dur-1) var(--ease-out),border-color var(--dur-1) linear,
+  box-shadow var(--dur-1) linear}
+.mod:hover,.mod:focus-visible,.two>.card:hover{transform:translateY(-2px);
+  border-color:var(--gold-deep);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.mod:hover>.bgart,.mod:focus-visible>.bgart{transform:scale(1.05);opacity:.24}
+/* ============================================================
+   首页入口卡（2026-10-13 用户实拍：卡片背景要的是图，不是把 128 的图标拉开放大）
+   入口卡的图要"看得见"：把不透明度从 .17 提到 .5，同时把压暗渐变从上下改成左右——
+   文字在左侧实色区，画在右侧露出来。对比度靠这层遮罩保，不靠把图调暗。
+   ============================================================ */
+.mod.hasart>.bgart{opacity:.5;background-position:78% 22%}
+/* 两张主推卡是内容卡（树格子 / 副本名单压在图上），图提到 .30 就够看出是原画，不再高 */
+.two>.card.hasart>.bgart{opacity:.3}
+.mod.hasart::after{background:linear-gradient(100deg,rgba(11,15,22,.96) 0%,rgba(11,15,22,.9) 38%,
+  rgba(11,15,22,.34) 100%)}
+.modgrid .mod.hasart{min-height:176px}
+.mod.big{display:block;position:relative;margin-top:var(--s3);min-height:210px;padding:var(--s4)}
+.mod.big h2{font-family:var(--font-display);font-size:26px;letter-spacing:.01em;margin:var(--s2) 0}
+.mod.big .modn{margin-top:var(--s3)}
+.mod.big .modn b{font-size:22px}
+/* 整卡当入口的两张主推卡：光标与焦点态要像链接，键盘也能进 */
+.go{cursor:pointer}
+.two>.card.go:focus-visible{outline:2px solid var(--gold);outline-offset:2px;
+  border-color:var(--gold-deep)}
+@media (max-width:600px){
+  /* 窄屏文字压在图上面，遮罩改回自上而下，右侧留白不够 */
+  .mod.hasart::after{background:linear-gradient(180deg,rgba(11,15,22,.42) 0%,rgba(11,15,22,.94) 58%,
+    var(--panel) 100%)}
+  .mod.hasart>.bgart{background-position:50% 18%}
+  .modgrid .mod.hasart{min-height:150px}
+  .mod.big{min-height:170px}
+}
+/* ============================================================
+   专精原画当背景（2026-10-13 用户实拍：天赋图每个职业每一系都是一张背景图）
+   图垫在渐变色底与格子之间：.tbg 是 z-index 0 的图层，格子那一排抬到 1，
+   依赖连线仍在 0 但 DOM 在后，所以顺序是 图 → 线 → 格子。
+   底部用 inset 阴影压暗，标题与"已投 N 点"那行不吃素材的亮度。
+   ============================================================ */
+.tbg,.sbg{position:absolute;inset:0;z-index:0;background:center/cover no-repeat;opacity:.32;
+  pointer-events:none;box-shadow:inset 0 -70px 70px -24px var(--panel-2)}
+.tree>h3,.tree>.hint,.tree>.row,.tree>.flow{position:relative;z-index:1}
+.spec{position:relative;overflow:hidden}
+.spec>*:not(.sbg){position:relative;z-index:1}
+.spec>.sbg{opacity:.30;background-position:72% 22%}
+.spec.on>.sbg{opacity:.4}
+/* 职业入口条：hero 里只做"进那一职业页"的入口，切树仍在预览卡里，两处不重复职责 */
+.clsrow{display:flex;flex-wrap:wrap;gap:var(--s3);margin:var(--s3) 0 0}
+.clsrow a{width:60px;text-align:center;color:var(--txt-dim);font-size:11.5px;line-height:1.4;
+  padding:var(--s1) 2px;border:1px solid transparent;border-radius:var(--r-ctl);min-height:44px}
+.clsrow a i{display:block;width:44px;height:44px;margin:0 auto 5px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--line);background:var(--panel-2) center/cover no-repeat;font-style:normal}
+.clsrow a:hover{color:var(--gold);border-color:var(--gold-deep)}
+.clsrow a:hover i{border-color:var(--gold)}
+/* 分组眉标：让"角色线 / 世界线 / 工具线"读起来是分组，不是又一批卡片 */
+.grphead{display:flex;align-items:baseline;gap:var(--s3);margin:var(--s6) 0 var(--s3)}
+.grphead h2{font-size:15px;letter-spacing:.02em}
+.grphead span{font:500 11px/1.5 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--txt-dim)}
+/* 卡内的键值行与进度条 */
+.kv{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);
+  font-size:12.5px;padding:5px 0;border-top:1px dashed var(--line)}
+.kv:first-of-type{border-top:0}
+.kv b{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+/* kv 行里的链接是行内元素，实测只有 15–43px 高、有的宽也只有 40px，
+   手机上两个方向都不够点：命中区同时兜住宽和高 */
+.kv a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:2px 6px}
+/* .cta 没有基础样式（只在移动端补过命中区），两个 CTA 挨着会挤成一行：给个间隔 */
+a.cta + a.cta{margin-left:var(--s4)}
+.bar{height:8px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);
+  overflow:hidden;margin:var(--s2) 0 var(--s3)}
+.bar i{display:block;height:100%;background:var(--lv0)}
+.sect{margin:var(--s6) 0 var(--s3)}
+.sect h2{font-size:15px}
+/* 主推两卡与改动四格 */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4);align-items:start}
+/* 卡变窄后，九职业切换条从"竖着排九张"改成 3×3 方块：
+   否则左边的树很短、右边一条九格的长列把卡片撑到一倍高 */
+.two .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+/* 树仍按 360px 摆的话，右栏只剩 176px，三列每格 56px，「战士 54 天赋」会断成
+   「战士 / 54 天 / 赋」三行（1440px 实拍发现的，断言只查点击尺寸查不出来）。
+   树收到 280px：格子仍有 62px，右栏拿到 240px，名称与计数各占一行。 */
+.two .treewrap{grid-template-columns:minmax(0,280px) minmax(0,1fr)}
+.two .pv{max-width:280px}
+.two .stripc{padding:6px 4px}
+.two .stripc b{font-size:12px}
+.two .stripc .mono,.two .stripc span{font-size:10.5px}
+.two .tright{display:flex;flex-direction:column;gap:var(--s2)}
+.dunrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto;align-items:center;gap:var(--s2);
+  padding:5px 0;border-top:1px dashed var(--line);font-size:13px}
+.dunrow i{width:44px;height:30px;border-radius:4px;border:1px solid var(--line);
+  background:var(--panel-2) center/cover no-repeat}
+.dunrow b{font-weight:600}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3);margin:var(--s3) 0}
+.four>div{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:var(--s3);text-align:center}
+.four b{display:block;font:700 24px/1.15 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--txt)}
+.four s{text-decoration:none;font-size:11.5px;color:var(--txt-dim)}
+/* 导航角标：除颜色外必须带文字，且只在 releases.json 真写过那一页时出现 */
+/* 角标不占导航宽度：整条导航 1180px 实测余量只有十几像素，
+   内联一个「新」字就会把最后一项挤到第二行（39px → 79px）。所以钉在链接右上角。 */
+nav.main a.nl{position:relative}
+/* 角标：绝对定位在项内右上角，**不占导航宽度**（断言"角标不占导航宽度"就靠这条），
+   同时收在项框内——原来 top:-4px 会飘出导航带压到第一行条上（截图里"新"字浮在外面）。
+   带角标的项右侧多留 9px，免得文字钻到角标底下。 */
+.nb{position:absolute;right:1px;top:1px;display:inline-flex;align-items:center;
+  font:600 9px/1 var(--font-mono);border-radius:var(--r-ctl);padding:2px 3px;
+  border:1px solid var(--line);color:var(--txt-dim);white-space:nowrap;pointer-events:none}
+nav.main a.nl:has(.nb){padding-right:17px}
+.nb.new{border-color:rgba(207,232,221,.42);color:var(--lv0)}
+@media (prefers-reduced-motion:reduce){
+  .mod:hover,.mod:focus-visible,.two>.card:hover{transform:none}
+  .hasart>.bgart{transform:none}
+}
+@media (max-width:600px){
+  .two{grid-template-columns:minmax(0,1fr)}
+  /* 单列时卡就是整屏宽，树不必再收，右栏恢复成整块往下排 */
+  .two .treewrap{grid-template-columns:1fr}
+  .two .pv{max-width:none}
+  .four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hasart::after{background:linear-gradient(180deg,rgba(14,16,19,.42),rgba(23,26,31,.95) 52%,var(--panel) 100%)}
+  .hasart>.bgart{opacity:.14}
+  .clsrow a{width:56px}
+}
+
+/* ---------- 玩法问答 chooser（2026-10-10 逐页重做第一页） ----------
+   签名动作：九个职业常驻右栏，答一题就有人掉出候选（变暗）、有人领先（转金）。
+   这一页的内容本来就是"7 题筛 9 个职业"，所以版式自己就是那件事。 */
+.chead{border-left:3px solid var(--gold-deep)}
+.csplit{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--s4);align-items:start}
+.cstep .cov{margin-top:var(--s2)}
+.cq h2{font-size:clamp(20px,2.6vw,27px);line-height:1.35;margin:var(--s2) 0 0;letter-spacing:.01em}
+.qopt{display:flex;align-items:center;gap:10px;min-height:52px;transition:border-color var(--dur-1) linear,
+  background var(--dur-1) linear}
+.qi{flex:none;width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--line);
+  border-radius:4px;font-size:11px;color:var(--txt-dim)}
+.qopt.on .qi{border-color:var(--gold);color:var(--gold)}
+.cboard{position:sticky;top:96px;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:var(--s3)}
+.ctiles{display:grid;gap:5px;margin-top:var(--s2)}
+.ctile{display:grid;grid-template-columns:26px minmax(0,1fr) auto;
+  grid-template-areas:"i n s" "i e e" "b b b";gap:2px 8px;align-items:center;padding:5px 6px;
+  border-radius:6px;border:1px solid transparent;
+  transition:opacity var(--dur-2) var(--ease-out),border-color var(--dur-2) linear}
+.ctile .ci{grid-area:i;width:26px;height:26px;overflow:hidden;border-radius:4px}
+.ctile b{grid-area:n;font-size:13px;font-weight:600}
+.ctile em{grid-area:s;font-size:11px;font-style:normal;color:var(--txt-dim)}
+.ctile .en{grid-area:e;font-size:10.5px;letter-spacing:.04em}
+.cs{grid-area:b;height:3px;background:var(--panel-2);border-radius:2px;overflow:hidden}
+.cs s{display:block;height:100%;background:var(--lv0);text-decoration:none}
+.ctile.off{opacity:.34}
+.ctile.lead{border-color:var(--gold-deep);background:var(--panel-2)}
+.ctile.lead .cs s{background:var(--gold)}
+.cqhint{display:none}
+@media (max-width:900px){
+  .cqhint{display:inline}
+  .csplit{grid-template-columns:1fr}
+  .cboard{position:static}
+  .ctiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .ctiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ctile{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ctile,.qopt{transition:none}
+}
+
+/* ---------- 专业与配方：按技能档位分箱 + 材料条（2026-10-10 逐页重做第二页） ---------- */
+.rband{font:500 11px/1.5 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;
+  color:var(--txt-dim);margin:var(--s3) 0 var(--s2)}
+.rbandh{display:flex;align-items:baseline;gap:var(--s2);margin:var(--s5) 0 var(--s2);
+  font-size:14px;font-weight:600;border-top:1px solid var(--line);padding-top:var(--s3)}
+.rbandh:first-of-type{margin-top:var(--s3)}
+.rbandh b{font-size:13px;color:var(--lv0)}
+.mats{position:relative}
+.mbar{display:block;height:3px;width:88px;background:var(--panel-2);border-radius:2px;
+  overflow:hidden;margin-bottom:5px}
+.mbar s{display:block;height:100%;background:var(--lv1);text-decoration:none}
+@media (max-width:600px){
+  .rbandh{margin-top:var(--s4)}
+  .mbar{width:64px}
+}
+
+/* ---------- 质感层（2026-10-10 全站） ----------
+   近黑底原来是一块纯平的黑，卡片像贴上去的纸片。这一层只做"材质"，不改信息：
+   底面给两层极淡的光 + 一层 1px 细网格，卡片给上缘内高光与更深的落影，
+   表头吸顶加双线，控件给 inset 阴影让它有"按下去"的手感。
+   全部用 background-image 与 box-shadow，不动 background-color 令牌，
+   所以对比度断言量到的底色不变；也不引任何字体/图标/远程素材。 */
+body{background-image:
+  radial-gradient(1100px 520px at 12% -6%, rgba(224,169,109,.055), transparent 62%),
+  radial-gradient(900px 480px at 96% 4%, rgba(120,150,190,.045), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 4px),
+  repeating-linear-gradient(90deg, rgba(255,255,255,.010) 0 1px, transparent 1px 4px)}
+.card{box-shadow:inset 0 1px 0 rgba(255,255,255,.045), 0 10px 26px -14px rgba(0,0,0,.72);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0) 34%)}
+.card h1.pt,.card h2{letter-spacing:.012em}
+table.entab thead th{position:sticky;top:var(--hd-h);z-index:2;background:var(--panel);
+  box-shadow:inset 0 -2px 0 var(--line), inset 0 -1px 0 rgba(255,255,255,.05)}
+/* 这条必须排在上面那条之后：.scrollx 里的 entab（团本页两张表、副本页排队表）
+   纵向吸顶不成立，写 sticky 就是假吸顶——见 254 行那条注释 */
+.scrollx table.entab thead th{position:static}
+table.entab tbody tr{transition:background var(--dur-1) linear, box-shadow var(--dur-1) linear}
+table.entab tbody tr:hover{background:rgba(255,255,255,.028);
+  box-shadow:inset 2px 0 0 var(--gold-deep)}
+input,select,button{box-shadow:inset 0 1px 0 rgba(255,255,255,.04), inset 0 -1px 0 rgba(0,0,0,.35)}
+button:active,input:active{box-shadow:inset 0 2px 5px rgba(0,0,0,.5)}
+button:focus-visible,input:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.mline{letter-spacing:.11em}
+.mono b,b.mono{letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){
+  table.entab tbody tr{transition:none}
+}
+@media (max-width:600px){
+  table.entab thead th{position:static}
+}
+
+/* ---------- 逐页结构重做第三批（2026-10-10）：时间轴 / 类别芯片 / 条形卡 / 其余四页的结构 ---------- */
+/* 时间表：一条竖轴，"今天"钉在已过与待来之间 */
+.tl{position:relative}
+.tl::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:var(--line)}
+.tlrow{position:relative;padding-left:24px}
+.tldot{position:absolute;left:0;top:16px;width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--line);background:var(--panel)}
+.tl-已过 .tldot{background:var(--lv0);border-color:var(--lv0)}
+.tl-待来 .tldot{border-color:var(--gold)}
+.tlrow.tl-now{padding-top:var(--s3);padding-bottom:var(--s3)}
+.tlrow.tl-now .tldot{background:var(--gold);border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(224,169,109,.16)}
+.tlrow.tl-now .tl-body b{color:var(--gold)}
+/* 动态页：类别芯片是主筛选入口，下拉框退成兜底 */
+.kchips{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0 0 var(--s3)}
+.kchip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 12px;
+  border:1px solid var(--line);border-radius:999px;background:var(--panel-2);
+  color:var(--txt-dim);font-size:12.5px;cursor:pointer;
+  transition:border-color var(--dur-1) linear,color var(--dur-1) linear}
+.kchip b{color:var(--txt)}
+.kchip.on{border-color:var(--gold);color:var(--gold)}
+.kchip.on b{color:var(--gold)}
+.kchip:hover{border-color:var(--gold-deep)}
+/* 排行页：表格之前先比长短 */
+.rankbars{display:grid;gap:6px;margin:var(--s3) 0}
+.rb{display:grid;grid-template-columns:56px minmax(0,1fr) 74px;gap:10px;align-items:center}
+.rb b{font-size:12.5px;font-weight:600}
+.rb i{position:relative;height:12px;background:var(--panel-2);border-radius:3px;overflow:hidden}
+.rb s{position:absolute;left:0;top:1px;height:5px;background:var(--lv0);text-decoration:none;border-radius:2px}
+.rb u{position:absolute;left:0;bottom:1px;height:5px;background:var(--lv2);text-decoration:none;border-radius:2px}
+.rb em{font-style:normal;font-size:11px;color:var(--txt-dim);text-align:right}
+/* 传承页：树格放大成主视觉，挑战行给只读勾选位 */
+.lgrid{gap:10px}
+.lcell{min-height:58px;transition:transform var(--dur-1) var(--ease-out),border-color var(--dur-1) linear}
+.lcell:hover{transform:translateY(-2px);border-color:var(--gold-deep)}
+/* 速查页：分组标签吸顶，滚长表时知道在哪一组 */
+.lgrp{position:sticky;top:44px;z-index:2;background:var(--panel);
+  box-shadow:0 6px 12px -8px rgba(0,0,0,.8)}
+/* 系统页：每条规则成卡，组头吸顶 */
+.grp{border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s3);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0) 40%)}
+.fhead{position:sticky;top:44px;z-index:2;background:var(--panel)}
+/* 溯源页：方法论段落变成带序号的步骤卡 */
+.grid.g2{counter-reset:st}
+.step{position:relative;padding-left:38px}
+.step::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:2px;
+  width:24px;height:24px;display:grid;place-items:center;border-radius:50%;
+  border:1px solid var(--gold-deep);color:var(--gold);font:600 12px/1 var(--font-mono)}
+/* 技能书：行左一道状态轨，扫表时眼睛有扶手 */
+.srow{border-left:3px solid var(--line);padding-left:8px}
+.srow:hover{border-left-color:var(--gold)}
+/* ============================================================
+   2026-10-11 改版层：两行条外壳 + 展示字体 + 硬边组件
+   来源 docs/UI-WOWHEAD-STYLE-2026-10-11.md；色值一律走 tokens.css，这里不写裸色。
+   两处刻意偏离稿子：① 不做「WOW / RETAIL / CLASSIC」版本页签（商标词红线）；
+   ② 导航字号与字距不放大——17 项要在 1180 里排一行，实测加 letter-spacing 就换行。
+   ============================================================ */
+.top{background:rgba(16,16,16,.95)}
+.hd{background:var(--panel)}
+.hd-top{background:var(--panel);border-bottom:1px solid var(--bg)}
+.hd-top .in{max-width:1180px;margin:0 auto;padding:0 var(--s4);display:flex;align-items:center;
+  gap:var(--s4);min-height:52px;flex-wrap:wrap}
+.hd-top .in > .brand{padding:0}
+.brand{font-family:var(--font-display);font-size:21px;font-weight:800;letter-spacing:-.01em;
+  color:var(--txt);white-space:nowrap}
+.brand span{color:var(--accent)}
+.top-search{flex:1;display:flex;align-items:center;min-width:170px;max-width:520px;height:34px;
+  background:var(--field);border:1px solid var(--field-line);border-radius:var(--r-ctl);overflow:hidden}
+.top-search svg{fill:var(--txt-muted);flex:none;margin:0 6px 0 9px}
+.top-search input{flex:1;min-width:0;background:transparent;border:0;outline:none;color:var(--txt);
+  font:13px/1.4 var(--font-body)}
+.top-search input::placeholder{color:var(--txt-muted)}
+.top-search .gsgo{background:var(--accent-deep);border:0;color:var(--txt);height:34px;padding:0 15px;
+  font:700 12px var(--font-body);cursor:pointer}
+.top-search .gsgo:hover{background:var(--accent)}
+.top .chip{margin-left:0}
+nav.main{background:var(--panel-2);border-top:0;border-bottom:1px solid var(--line)}
+nav.main a.nl{border-radius:0;border-bottom:2px solid transparent}
+nav.main a.nl:hover{background:rgba(255,255,255,.045);color:var(--txt)}
+nav.main a.nl.on{background:transparent;color:var(--txt);border-bottom-color:var(--accent);box-shadow:none}
+h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.005em}
+.card{background:var(--panel-2)}
+/* 大写拉字距标签：稿子里的招牌排印。中文没有大小写变化，所以真正的效果是
+   "英文与数字变成标签"，中文靠字重与字距补偿，不把中文强行撑成假英文。 */
+.cap{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--txt-muted)}
+/* 板块入口图标轨：诊断里说的"美术填充层"就是这一条。每格一张本地原画 + 一个入口，
+   取不到图的格子退回字母块（不热链第三方图）。 */
+.hrail{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 14px;scroll-snap-type:x proximity}
+.hrt{flex:0 0 auto;width:132px;text-align:center;scroll-snap-align:start;text-decoration:none}
+.hrt-b{position:relative;display:block;height:72px;border:1px solid var(--line-2);border-radius:var(--r-ctl);
+  overflow:hidden;background:var(--panel-2)}
+.hrt-b img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-1) var(--ease-out)}
+.hrt:hover .hrt-b{border-color:var(--accent)}
+.hrt:hover .hrt-b img{transform:scale(1.06)}
+.hrt-x{display:flex;align-items:center;justify-content:center;height:100%;
+  font:800 22px var(--font-display);color:var(--txt-dim)}
+.hrt-n{position:absolute;top:0;left:0;background:var(--q2);color:var(--ink-on-bright);font:800 9px/1.3 var(--font-body);
+  letter-spacing:.05em;padding:1px 6px;border-bottom-right-radius:3px}
+.hrt-l{display:block;margin-top:6px;font-size:12px;font-weight:600;color:var(--txt-dim);white-space:nowrap}
+.hrt:hover .hrt-l{color:var(--txt);text-decoration:none}
+/* ---- 天赋计算器：专精环与点数用计算器橙，蓝只留给链接；三棵树各一层色调纹理（纯渐变，零新素材） ---- */
+.thead .title{color:var(--txt);font-family:var(--font-display);font-weight:800;font-size:17px}
+.pts b{color:var(--orange);font-family:var(--font-display);font-size:16px}
+.ttabs button{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-ctl);
+  color:var(--txt-dim);font:700 13px var(--font-body)}
+.ttabs button.on{border-color:var(--orange-ring);background:var(--elev);color:var(--txt)}
+.trees{gap:10px;background:transparent}
+.tree{border:1px solid var(--line);border-radius:var(--r-ctl);padding:var(--s4) var(--s3)}
+.tree.t0{background:radial-gradient(ellipse 90% 42% at 50% -6%,rgba(190,110,40,.20),transparent 62%),var(--panel-2)}
+.tree.t1{background:radial-gradient(ellipse 90% 42% at 50% -6%,rgba(135,80,160,.20),transparent 62%),var(--panel-2)}
+.tree.t2{background:radial-gradient(ellipse 90% 42% at 50% -6%,rgba(45,125,180,.20),transparent 62%),var(--panel-2)}
+.node.on{border-color:var(--orange-ring);box-shadow:0 0 0 1px var(--orange),0 0 10px rgba(255,153,0,.4)}
+.node .rank{color:var(--orange)}
+.node:hover{border-color:var(--orange-ring)}
+
+/* ---- 卡片头 .cdhead（2026-10-11 改版第二批）：圆图标 + 标题 + 右侧读数 ----
+   图标只有两种合法来源：这张卡讲的那个具体实体自己的本地图（种族头像 / 职业图 / 副本载入图），
+   或与首页图标轨同一板块的那张图（页级主卡，同一板块在站内始终是同一张脸）。
+   方法、缺口、来源这类卡不放图——配一张不相干的原画是美术噪声，比留白更糟。
+   类名先 grep 过：.card-head/.hicon 空闲，稿子里的 .act 已被表格单元占用，所以这里叫 .cdact。 */
+.cdhead{display:flex;align-items:center;gap:9px;margin:0 0 var(--s3);
+  padding-bottom:8px;border-bottom:1px solid var(--line)}
+.cdhead h2{margin:0;font-size:15px;line-height:1.35;min-width:0}
+.hicon{flex:none;width:26px;height:26px;border-radius:50%;overflow:hidden;
+  background:var(--elev);border:1px solid var(--line-2);display:grid;place-items:center}
+.hicon img{width:100%;height:100%;object-fit:cover;display:block}
+.cdact{margin-left:auto;flex:none;color:var(--txt-muted);font-size:12px;
+  font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cdact a{color:var(--txt-dim)}
+.cdact a:hover{color:var(--txt)}
+/* 有图标的卡头用圆圈本身标层级，不再加蓝线；没图标的保留那道蓝线。
+   分隔线只在有图标的那一档出现——这样一页里"已套卡片头"和"还没套"的标题长得一样，
+   改版可以一页一页推，不会出现半页有下边框半页没有。 */
+.cdhead h2{border-left:0;padding-left:0}
+.cdhead.noart{border-bottom:0;padding-bottom:0;margin-bottom:var(--s3)}
+.cdhead.noart h2{border-left:2px solid var(--accent-deep);padding-left:9px}
+/* 页标题那一档（H1）：图标放大、不带下边框——标题下面通常紧跟一句说明，画一条线会把它切断 */
+.cdhead.big{border-bottom:0;padding-bottom:0;margin-bottom:var(--s2)}
+.cdhead.big .hicon{width:34px;height:34px}
+.cdhead.big h1.pt{font-size:var(--fs-h1);margin-bottom:0}
+
+/* ---- 动态模块（2026-10-11 用户"页面动态好像也不太满意"）----
+   实测三处毛病：① 顶部 5 个读数与下面 3 个跳转器长得一模一样（都是带边框的小块），
+   数字看着像按钮；② 时间轴 11 行同一重量，看不出哪件还没发生；
+   ③ 首页那张卡把三个小标题塞进一张卡，其中一段只有一句解释没有内容。 */
+.stats.readout{gap:0;border:1px solid var(--card-line);border-radius:var(--r-card);
+  background:var(--sunk);margin-bottom:var(--s3)}
+.stats.readout .stat{border:0;border-right:1px solid var(--line);border-radius:0;background:transparent;
+  padding:8px 14px;display:flex;align-items:baseline;gap:5px}
+.stats.readout .stat:last-child{border-right:0}
+.stats.readout .stat b{font-size:19px;line-height:1}
+/* 跳转器：明确"这是跳过去的"，不是筛选器也不是数字 */
+.picks.utabs{margin-top:0}
+.picks.utabs .pick{background:transparent;border:1px solid var(--line);border-radius:var(--r-ctl);
+  font-size:12.5px;color:var(--txt-dim);padding:5px 10px}
+.picks.utabs .pick:hover{border-color:var(--accent-deep);color:var(--txt);text-decoration:none}
+.picks.utabs .pick .dim{font-size:10.5px;letter-spacing:.04em}
+/* 时间轴：下一件事提亮 + 左侧一道蓝，已过去的整行降一档 */
+.flowrow.near{background:linear-gradient(90deg,rgba(29,141,205,.13),transparent 62%);
+  box-shadow:inset 2px 0 0 var(--accent-deep);padding-left:10px;margin-left:-10px}
+.flowrow.near>div>b{color:var(--txt)}
+.flowrow.past{opacity:.62}
+.when{font-size:11px;color:var(--txt-muted);letter-spacing:.02em;white-space:nowrap}
+.flowrow.near .when{color:var(--accent)}
+/* 首页摘要卡里的小节：标题与出口一行两端对齐，比正文小一档但比正文重 */
+.nsec h3{display:flex;align-items:baseline;gap:10px;margin:var(--s4) 0 var(--s2);
+  font:700 12.5px/1.4 var(--font-display);letter-spacing:.05em;color:var(--txt-dim);
+  border-bottom:1px solid var(--line);padding-bottom:5px}
+.nsec h3 .nact{margin-left:auto;font-weight:400;letter-spacing:0}
+.nsec h3 .nact a{font-size:11.5px;color:var(--accent);text-decoration:none;white-space:nowrap}
+.nsec h3 .nact a:hover{text-decoration:underline}
+/* 摘要收两行：整段提交说明在首页不铺开，全文在动态页 */
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+@media (max-width:600px){
+  /* 外壳在 375px：品牌与搜索各占一行，搜索框与按钮都到 44px 命中区 */
+  /* 手机上顶栏只许占一行 + 导航一行（断言卡 100px）：搜索框与品牌并排，
+     提交走键盘的搜索键（表单只有一个字段，回车即隐式提交），按钮只在桌面出现 */
+  .hd-top .in{min-height:44px;padding:0 var(--s3);gap:var(--s2);flex-wrap:nowrap}
+  .brand{font-size:16px;flex:0 0 auto}
+  .top-search{flex:1 1 auto;min-width:0;max-width:none;height:44px}
+  .top-search input{min-height:44px;font-size:14px}
+  .top-search .gsgo{display:none}
+  .hrt{width:106px}
+  .hrt-b{height:60px}
+  .kchip{min-height:44px}
+  .lgrp,.fhead{position:static}
+  .rb{grid-template-columns:48px minmax(0,1fr) 64px}
+  /* 正文与表格里的行内链接也是点击目标：团本页一半的出口是表格里的链接，
+     副本页分档标题那句"完整名单在团本那一页"也是 */
+  .card p a,.list li a,.entab a,.empty a,.band a,.cdact a,.nsec .nact a{display:inline-flex;align-items:center;min-height:44px}
+  /* 团本页两张表五列，375px 不撑开的话链接会被挤成一竖条；外层 .scrollx 负责横滚 */
+  .rtab{min-width:660px}
+  /* 动态页的读数带在手机上两列排（一行五个会把"个官方时间点"挤成一字一行） */
+  .stats.readout{flex-wrap:wrap}
+  .stats.readout .stat{flex:1 1 40%;border-bottom:1px solid var(--line);padding:7px 10px}
+  .flowrow.near{padding-left:8px;margin-left:-8px}
+  /* 卡片头在 375px：读数允许换行，标题拿到剩余宽度（不换行的话"配方 · 118 条"会把标题挤没） */
+  .cdhead{gap:8px}
+  .cdhead h2{font-size:14.5px}
+  .cdact{white-space:normal;text-align:right;max-width:44%}
+}
+@media (prefers-reduced-motion:reduce){
+  .kchip,.lcell{transition:none}
+  .hrt .hrt-b img{transition:none}
+}
+
+/* ============================================================
+   设计稿版式件（2026-10-12 按豆包稿换轨）
+   规格来源：docs/DESIGN-DOUBAO-2026-10-12.md（8 页逐块实测值）。
+   这一节只放稿子里有、我们还没有的版式件；旧组件继续吃令牌层，不重写。
+   切角只用 --cut-* 三档，圆角全站为 0（铭牌/牌签/读数格全是直角）。
+   ============================================================ */
+
+/* 切角铭牌：全站主容器。左上 / 右下各切一刀，值随尺寸放大 */
+.plate{background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:1px solid var(--gold-line);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+.plate.big{clip-path:polygon(28px 0,100% 0,100% calc(100% - 28px),calc(100% - 28px) 100%,0 100%,0 28px)}
+.plate.plain{clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+
+/* 章节 kicker：小字距英文 + 中文大标题，右侧可选"查看全部" */
+.kicker{font-size:13px;letter-spacing:4px;color:var(--gold);font-family:var(--font-mono)}
+.krow{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin:0 0 var(--s5)}
+.krow h2{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--txt);margin:6px 0 0;letter-spacing:1px}
+.krow .kall{font-size:13px;color:var(--gold);text-decoration:none;white-space:nowrap}
+.krow .kall:hover{color:var(--gold-hi)}
+
+/* 页首 hero 带：图 + 两层压暗（横向压左边给文字，纵向收底接页面色） */
+.dhero{position:relative;overflow:hidden;border:1px solid var(--gold-line-soft);border-top:none}
+.dhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dhero .dx{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(11,15,22,.96),rgba(11,15,22,.55) 50%,rgba(11,15,22,.3)),
+             linear-gradient(0deg,var(--bg) 0%,rgba(11,15,22,0) 35%)}
+.dhero .db{position:relative;padding:var(--s6) 40px}
+.dhero .dmark{position:absolute;right:14px;top:14px;font-size:11px;color:var(--txt-muted);
+  background:rgba(11,15,22,.7);padding:3px 8px;border:1px solid var(--line)}
+.dhero .dstate{position:absolute;right:20px;top:26px;display:flex;align-items:center;gap:12px;
+  padding:14px 24px;border:1px solid var(--warn);background:rgba(19,26,40,.85)}
+.dhero .dstate i{width:10px;height:10px;border-radius:50%;background:var(--warn);display:inline-block}
+.dhero .dstate b{font-size:16px;color:var(--gold-hi)}
+
+/* 人数金牌：左上直角的实心渐变牌，字用 ink 色压在亮金上 */
+.goldtag{font-family:var(--font-display);font-size:14px;color:var(--ink-on-bright);
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold));padding:5px 13px;font-weight:700}
+/* 状态 chip：橙描边小签，"未开放 / 待实测"这类状态用 */
+.chip-open{font-size:12px;color:var(--warn);border:1px solid var(--warn);padding:4px 11px;
+  background:rgba(11,15,22,.7)}
+/* 虚线空态框：没有名单就说没有，不摆假表格 */
+.dashedbox{padding:14px 16px;background:rgba(11,15,22,.5);border:1px dashed var(--hatch);
+  font-size:13px;color:var(--txt-muted);text-align:center}
+/* 切角 CTA：平行四边形两端 */
+.cta-cut{display:block;text-align:center;padding:11px;border:1px solid var(--gold);color:var(--gold-hi);
+  font-size:14px;text-decoration:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.cta-cut:hover{background:var(--gold-glow)}
+
+/* 团本卡：图占上部 230px，名字压在图下沿，正文在下半 */
+.raidgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.raidcard{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--amber-line)}
+.raidcard .art{position:relative;height:230px;overflow:hidden}
+.raidcard .art img{width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
+.raidcard .art .sh{position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(13,18,28,.9),rgba(13,18,28,.2) 60%)}
+.raidcard .art .goldtag{position:absolute;left:14px;top:14px}
+.raidcard .art .chip-open{position:absolute;right:14px;top:14px}
+.raidcard .art h3{position:absolute;left:18px;bottom:14px;right:18px;margin:0;
+  font-family:var(--font-display);font-size:25px;color:var(--txt-title);font-weight:700;line-height:1.25}
+.raidcard .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.raidcard .facts{font-size:14px;line-height:1.7;color:var(--txt-dim)}
+.raidcard .facts b{color:var(--gold-hi);font-family:var(--font-mono)}
+
+/* 三步时间轴带：读数格之间用一条金线连过去 */
+.tl3{display:flex;align-items:center;background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:1px solid var(--line);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  padding:26px 30px}
+.tl3 .node{flex:1;display:flex;align-items:center;gap:14px}
+.tl3 .node i{width:14px;height:14px;border-radius:50%;flex:0 0 auto;
+  box-shadow:0 0 0 4px var(--gold-glow)}
+.tl3 .node b{display:block;font-size:16px;color:var(--txt-title)}
+.tl3 .node span{display:block;font-size:13px;margin-top:3px;font-family:var(--font-mono)}
+.tl3 .link{flex:0 0 90px;height:1px;background:var(--gold-line);margin:0 10px}
+
+/* 六大工具卡：图标框 + 标题 + 一句说明 + 底部读数与"进入" */
+.tools6{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tool{padding:22px 24px 16px;display:flex;flex-direction:column;gap:12px;text-decoration:none}
+.tool .tico{width:44px;height:44px;border:1px solid var(--gold-line);display:flex;align-items:center;
+  justify-content:center;background:rgba(11,15,22,.35)}
+.tool .tico svg{stroke:var(--gold)}
+.tool h3{font-family:var(--font-display);font-size:20px;color:var(--txt-title);margin:0;font-weight:700}
+.tool p{font-size:14px;line-height:1.7;color:var(--txt-dim);margin:0;min-height:48px}
+.tool .foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+  border-top:1px solid var(--gold-line-soft);padding-top:10px;margin-top:2px}
+.tool .foot em{font-style:normal;font-size:13px;color:var(--gold);font-family:var(--font-mono)}
+.tool .foot i{font-style:normal;font-size:13px;color:var(--gold);transition:transform var(--dur-1) var(--ease-out)}
+.tool:hover{border-color:var(--gold-line-2)}
+.tool:hover .foot i{transform:translateX(4px)}
+
+/* 九职业入口：暗底方块 + 圆形职业图标 + 名字 */
+.cls9{display:grid;grid-template-columns:repeat(9,1fr);gap:14px}
+.cls9 a{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+  padding:16px 8px 12px;text-align:center;text-decoration:none;display:block}
+.cls9 a:hover{border-color:var(--gold-line-2);background:linear-gradient(180deg,var(--elev),var(--panel))}
+.cls9 img{width:52px;height:52px;border-radius:50%;display:block;margin:0 auto 8px;object-fit:cover}
+.cls9 b{font-size:14px;color:var(--txt-dim);font-weight:400;display:block}
+.cls9 a:hover b{color:var(--gold-hi)}
+
+/* 职业页（2026-10-12 补，docs/PLAN-classes-and-nav-2026-10-12.md）：
+   页首职业带沿用 .dhero 那套压暗与描边，只补两列布局与立绘框；三系专精卡是新件。
+   几何按稿子 3.2 节：带高 300px、右侧立绘框 158px、英文原名吃职业色。
+   --cl 是这一职业的职业色，由渲染时从 glyph.js 那份职业色表写进内联样式——
+   色不在令牌层是有意的：职业色是游戏语义（九个各一个），不是本站的品牌或分级色。 */
+.clhero{height:300px}
+.clhero .db{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s6);height:100%}
+.clhero .clt{max-width:760px}
+.clhero h1.pt{font-family:var(--font-display);font-size:clamp(32px,4.4vw,52px);font-weight:700;
+  color:var(--txt-title);letter-spacing:1px;line-height:1.12;margin:12px 0 8px}
+.clhero .clen{font-family:var(--font-mono);font-size:24px;font-weight:400;letter-spacing:.06em;
+  color:var(--cl);margin-left:14px}
+.clhero .clline{font-size:14px;color:var(--txt-banner);line-height:1.8}
+.clhero .clline b{color:var(--gold-hi);font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.clhero .clnote{font-size:13px;color:var(--txt-muted);line-height:1.7;margin:10px 0 0;max-width:60ch}
+.chart{position:relative;width:158px;height:158px;flex:0 0 auto;
+  border:1px solid var(--cl,var(--gold-line-2));box-shadow:0 0 0 4px rgba(11,15,22,.55)}
+.chart .liw,.chart .liw.t.lg{width:100%;height:100%}
+.chart img{object-position:center 22%}
+.chart img.bad{display:none}
+
+/* 三系专精卡：选中那张吃金边与提亮底（.plate + --elev），卡片上是系名与节点数。
+   点一下把右边的技能变化收到这一系，再点一次回到三系都列——只做筛选，不做强度判断。 */
+.spec3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin:var(--s4) 0}
+.spec{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
+  padding:18px 20px;min-height:96px;cursor:pointer;color:var(--txt-dim)}
+.spec b{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:.5px;
+  color:var(--txt-title)}
+.spec>span{font:12.5px var(--font-mono);color:var(--txt-dim)}
+.spec .spnote{font-family:var(--font-body);color:var(--txt-muted)}
+.spec:hover{border-color:var(--gold-line-2)}
+.spec.on{border-color:var(--gold);color:var(--txt);
+  background:linear-gradient(180deg,var(--elev),var(--panel))}
+/* 可选种族那一组：阵营名 + 官方中文种族名，两个来源不一致的天裔单独用 .conf 说明 */
+.racerow{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--s2) var(--s3);margin-top:var(--s2)}
+.racerow b{font:12.5px var(--font-mono);color:var(--gold)}
+.racerow .chips{flex:1 1 200px;margin-top:0}
+.racerow a{font-size:12.5px}
+/* 技能变化那张表：名称列吃掉一半宽，类别与那一系两列不许竖排
+   （1440 实测「哪一系」被挤成三行，表头读起来像坏了） */
+.chtab{min-width:620px}
+.chtab th,.chtab td:nth-child(2),.chtab td:nth-child(3){white-space:nowrap}
+.chtab td:nth-child(1){width:52%}
+/* 那一长列封顶滚动：95 条不封顶会把两栏拉成一长一短（1440 实拍右栏 ~2500px、左栏 ~600px，
+   左栏下面一整块空）。封顶口径与全站长表一致（.tblbox 的 72vh），
+   收窄的出口就是上面那三张系卡，不必靠翻页。 */
+.chgs{max-height:72vh;overflow-y:auto;padding-right:2px}
+.chgs .lgrp{top:0}
+
+@media (max-width:980px){
+  .tools6{grid-template-columns:repeat(2,1fr)}
+  .raidgrid{grid-template-columns:1fr}
+  .cls9{grid-template-columns:repeat(5,1fr)}
+  .spec3{grid-template-columns:repeat(3,1fr)}
+  .tl3{flex-direction:column;align-items:stretch;gap:var(--s4)}
+  .tl3 .link{display:none}
+}
+@media (max-width:600px){
+  .tools6{grid-template-columns:1fr}
+  .cls9{grid-template-columns:repeat(3,1fr)}
+  .krow{flex-direction:column;align-items:flex-start;gap:var(--s2)}
+  .dhero .db{padding:var(--s5) var(--s4)}
+  /* 职业带在手机上不硬撑 300px：立绘框收到 118px，正文与图上下排，带高由内容长出来 */
+  .clhero{height:auto}
+  .clhero .db{flex-direction:column;align-items:flex-start;gap:var(--s4)}
+  .clhero .clt{max-width:none}
+  .chart{width:118px;height:118px}
+  .clhero .clen{display:block;margin:6px 0 0}
+  .spec3{grid-template-columns:1fr}
+  /* 阵营那一行的「矩阵 →」是行内链接，13px 行高量出来只有 21px，手机上摸不到 */
+  .racerow a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:2px 6px}
+  .dhero .dstate{position:static;margin-top:var(--s4);display:inline-flex}
+  /* 手机上文字块会延伸到角标那一行，绝对定位的"示意图"会压在日期上：改成跟在正文后面排 */
+  .dhero .dmark,.hero.dh .dmark{position:static;display:inline-block;margin-top:var(--s3)}
+  .plate,.plate.big{clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+}
+
+/* 首页主卡套上稿子的整幅底图带：图压最底，两层压暗（横向给文字、纵向收底），正文抬到上层。
+   只加背景层，不动 hero 里的 DOM——搜索框 / 倒计时 / 覆盖率那些断言继续吃原结构。 */
+.hero.dh{position:relative;overflow:hidden}
+.hero .dhbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero .dhx{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(90deg,rgba(11,15,22,.97),rgba(11,15,22,.86) 46%,rgba(11,15,22,.55)),
+             linear-gradient(0deg,var(--bg) 0%,rgba(11,15,22,0) 40%)}
+.hero.dh .herot,.hero.dh .heros{position:relative;z-index:1}
+/* 角标必须绝对定位：hero 是两列栅格，它要是待在流里就会占掉第一格，把标题整块挤到右列去 */
+.hero.dh .dmark{position:absolute;right:14px;top:14px;z-index:2;font-size:11px;color:var(--txt-muted);
+  background:rgba(11,15,22,.7);padding:3px 8px;border:1px solid var(--line)}
+/* 页首 banner 上"示意图"角标与状态牌会撞在同一个右上角：角标改到底边，状态牌留在顶上 */
+.dhero .dmark{left:14px;right:auto;top:auto;bottom:12px}
+
+/* 页脚三栏（稿子 2.13）：底比页面更深一档、顶上一道金线，栏目标题金色，链接走中性色 */
+#foot{background:var(--foot-bg);border-top:1px solid var(--gold-line)}
+#foot .fwrap{max-width:var(--wrap);margin:0 auto;padding:36px 20px 0}
+#foot .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
+#foot .fbrand b{font-family:var(--font-display);font-size:17px;color:var(--gold-hi);letter-spacing:2px}
+#foot .fstar{display:inline-flex;vertical-align:-8px;margin-right:8px;color:var(--gold)}
+#foot .fstar svg{width:28px;height:28px}
+#foot .fbrand p{font-size:13px;line-height:1.8;color:var(--txt-muted);max-width:420px;margin:12px 0 0}
+#foot .fh{font-size:14px;color:var(--gold);margin-bottom:14px}
+#foot .fcol{display:flex;flex-direction:column;gap:10px;font-size:13px}
+#foot .fcol a{color:var(--txt-dim);text-decoration:none}
+#foot .fcol a:hover{color:var(--gold-hi)}
+#foot .fbar{margin-top:28px;padding:18px 0;border-top:1px solid var(--gold-line-soft);
+  display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-size:12px;color:var(--txt-muted)}
+@media (max-width:860px){ #foot .fgrid{grid-template-columns:1fr 1fr} #foot .fbrand{grid-column:1/-1} }
+@media (max-width:600px){ #foot .fgrid{grid-template-columns:1fr;gap:var(--s5)}
+  /* 页脚链接在手机上必须是点击目标：13px 行高的裸链接量出来只有 16px 高，摸不到 */
+  #foot .fcol a{display:flex;align-items:center;min-height:44px} }
+
+/* 稿子第二批的通用细节（只调既组件的字体与描边，不动结构）：
+   表头金色小字距、行分隔走金 10%、分档标题的等级区间用等宽金字、副本卡名走衬线 */
+th{color:var(--gold);letter-spacing:1px;font-weight:600}
+tbody td{border-bottom:1px solid var(--gold-line-soft)}
+tbody tr:last-child td{border-bottom:none}
+.band b{font-family:var(--font-display);letter-spacing:.5px}
+.band .mono,.dbn2-r{font-family:var(--font-mono);color:var(--gold-hi)}
+.dbn2-n{font-family:var(--font-display);letter-spacing:.5px}
+.grp{color:var(--gold);border-bottom-color:var(--gold-line-soft)}
+/* 天赋已学格：稿子用金色双层（外描边 + 内发光），未学格压暗一档 */
+.tnode.on img,.tnode.on{box-shadow:0 0 10px var(--gold-glow),inset 0 0 6px var(--gold-glow)}
+
+/* 首页按稿重排后的专属件：更高的 hero、BETA 徽章、两行衬线大标题、大搜索框与实心按钮、
+   两个出口按钮、区块容器、四条读数带 */
+.hero.mhero{padding:0}
+.hero.mhero .herot{padding:56px 40px 40px}
+.hero.mhero h1.pt{font-family:var(--font-display);font-size:clamp(34px,4.6vw,58px);line-height:1.18;
+  margin:22px 0 0;color:var(--txt-title);letter-spacing:1px}
+.hero.mhero h1.pt em{font-style:normal;color:var(--gold-hi)}
+.hero.mhero .lead{font-size:16px;line-height:1.8;color:var(--txt-banner);margin:20px 0 28px;max-width:520px}
+.bbadge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;font-size:13px;letter-spacing:4px;
+  color:var(--gold);border:1px solid var(--gold-line-2);background:rgba(16,23,37,.5)}
+.bbadge i{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.gsearch.hs{position:relative;display:flex;align-items:center;width:100%;max-width:540px;height:58px;
+  padding:0 8px 0 20px;background:rgba(16,23,37,.92);border:1px solid var(--gold);color:var(--gold);
+  clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%)}
+.gsearch.hs input{flex:1;min-width:0;border:none;background:none;color:var(--txt);font:15px var(--font-body);outline:none}
+.gsearch.hs input::placeholder{color:var(--txt-hint)}
+.cta-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--ink-on-bright);
+  font-weight:700;font-size:15px;border:none;cursor:pointer;height:42px;padding:0 26px;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.cta-line,.cta-mute{display:inline-block;text-align:center;text-decoration:none;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);padding:12px 24px;font-size:15px}
+.cta-line{border:1px solid var(--gold);color:var(--gold-hi)}
+.cta-mute{border:1px solid var(--gold-line);color:var(--txt-banner)}
+.herobtns{display:flex;flex-wrap:wrap;gap:16px;margin-top:26px}
+.hsec{max-width:var(--wrap);margin:0 auto;padding:52px 20px 0}
+.stats4{display:grid;grid-template-columns:repeat(4,1fr);margin-top:36px}
+.stats4 .scell{padding:26px;text-align:center;border-right:1px solid var(--gold-line-soft)}
+.stats4 .scell:last-child{border-right:none}
+.stats4 b{display:block;font-family:var(--font-display);font-size:40px;color:var(--gold-hi);line-height:1}
+.stats4 span{display:block;font-size:14px;color:var(--txt-dim);margin-top:6px}
+@media (max-width:860px){ .stats4{grid-template-columns:repeat(2,1fr)}
+  .stats4 .scell:nth-child(2){border-right:none}
+  .hero.mhero .herot{padding:36px 20px 28px} }
+@media (max-width:600px){ .gsearch.hs{height:auto;flex-wrap:wrap;padding:12px 16px;clip-path:none}
+  .gsearch.hs .cta-gold{margin-top:10px;width:100%}
+  .herobtns .cta-line,.herobtns .cta-mute{display:flex;align-items:center;justify-content:center;min-height:44px;flex:1 1 100%}
+  .cta-gold{min-height:44px;height:auto}
+  .krow .kall{display:inline-flex;align-items:center;min-height:44px} }
+
+/* ---------- 副本线（2026-10-13 改版：列表页挑一座 + 每座本一页） ----------
+   列表页卡面只留"挑一座"要看的四件事，两源分歧与"还不能排队"收进速览抽屉，
+   所以卡面上多了一层整卡链接（.dstretch）：抽屉与按钮必须压在它上面才点得动。 */
+.dunhero .herot>.kicker{margin-bottom:8px;letter-spacing:.06em}
+/* 375px 实测整页横向溢出 45px：网格子项的默认最小宽度是内容的 min-content，
+   下拉框里"提瑞斯法林地，洛丹伦废墟（15-22 级）"这种长选项名会把整栏顶宽。
+   两栏都放开到 0，长文本自己折行。 */
+.dunhero>*{min-width:0}
+.dunhero .dunsel{max-width:100%}
+.dunstat{grid-template-columns:repeat(auto-fit,minmax(96px,1fr));max-width:560px;text-align:left}
+.dunstat>div{text-align:left;padding:var(--s2) var(--s3)}
+.dunstat b{font-size:26px;color:var(--gold-hi)}
+.dunhero .cdttl{font-size:17px;color:var(--txt);line-height:1.4}
+.dunsel{display:block;width:100%;min-height:44px;margin:var(--s2) 0;background:var(--panel);
+  color:var(--txt);border:1px solid var(--gold-deep);border-radius:var(--r-ctl);padding:8px 10px;font:13px var(--font-cn)}
+.dirl{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s2) 0 var(--s3)}
+.dirl a{display:inline-flex;align-items:baseline;gap:6px;min-height:44px;padding:6px 10px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-ctl);
+  color:var(--txt);font-size:13px;text-decoration:none}
+.dirl a:hover{border-color:var(--gold-deep)}
+.dunbar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:center}
+.dunbar input[type=number]{width:104px;min-height:44px;background:var(--panel-2);color:var(--txt);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:8px 10px;font:14px var(--font-mono)}
+.dunbar .ghost{min-height:44px}
+.fchips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-left:auto}
+.fchip{min-height:34px;padding:5px 13px;background:var(--panel-2);color:var(--txt-dim);
+  border:1px solid var(--line);border-radius:999px;font:12.5px var(--font-cn);cursor:pointer}
+.fchip:hover{border-color:var(--gold-deep);color:var(--txt)}
+.fchip.on{background:rgba(224,169,109,.14);border-color:var(--gold);color:var(--gold-hi);font-weight:600}
+.dcard2{position:relative}
+.dcard2:hover{border-color:var(--gold-deep)}
+/* 卡面上的原画加高到 118px，并把压暗罩做厚：浅色那张（洛丹伦废墟、哀嚎洞穴）在原来
+   只有底部 85% 一档渐变下，白色本名几乎糊进图里。文字靠左，所以左侧也压一道。 */
+.dcard2 .dbn2{height:118px}
+.dcard2 .dbn2-shade{background:linear-gradient(180deg,rgba(11,15,22,.2) 0%,rgba(11,15,22,.66) 46%,
+  rgba(11,15,22,.95) 100%),linear-gradient(90deg,rgba(11,15,22,.55),rgba(11,15,22,0) 62%)}
+.dcard2 .dbn2-e{color:var(--txt-banner)}
+.dstretch{position:absolute;inset:0;z-index:1;border-radius:var(--r-card)}
+.dstretch:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+.dcard2>button,.dcard2>.drawer{position:relative;z-index:2}
+/* 详情页：页首那条本的载入图压在暗罩下面，标题走设计稿的展示字 */
+.dunh{margin-top:var(--s4)}
+.dunh.noart{background:linear-gradient(160deg,var(--panel-2),var(--bg))}
+.dunh .db{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  min-height:322px;gap:var(--s2)}
+.dunh .kicker{letter-spacing:.06em}
+.dunh h1.pt{font-family:var(--font-display);font-size:clamp(30px,4.2vw,48px);font-weight:700;
+  color:var(--txt-title);letter-spacing:1px;line-height:1.12;margin:0}
+.crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:12.5px;color:var(--txt-dim)}
+.crumb i{font-style:normal;color:var(--txt-muted)}
+.crumb b{color:var(--txt);font-weight:600}
+.dhen{font:13px var(--font-mono);color:var(--txt-banner);letter-spacing:.05em}
+.dhline{font-size:13.5px;color:var(--txt-dim)}
+.dhline b{color:var(--gold-hi);font-family:var(--font-mono)}
+.dunh .cta-line{min-height:44px;display:inline-flex;align-items:center;margin-top:var(--s2)}
+.dhfact{max-width:820px}
+.dhfact b.t{font:600 15px/1.5 var(--font-cn)}
+/* 上一座 / 下一座：整条是一行三格，中间那个读数吃剩余宽度 */
+.dnear{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;justify-content:space-between}
+.dnear-l{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-height:44px;
+  padding:6px 10px;border:1px solid var(--line);border-radius:var(--r-ctl);background:var(--panel-2);
+  color:var(--txt-dim);font-size:12.5px;text-decoration:none}
+.dnear-l:hover{border-color:var(--gold-deep);color:var(--txt)}
+.dnear-l b{font-size:14.5px;color:var(--txt);font-weight:600}
+.dnear>span{margin:0 auto}
+.dunord{margin:var(--s2) 0 0;padding-left:22px;font-size:13.5px}
+.dunord li{padding:3px 0}
+.brow{border-top:1px solid var(--line);padding:var(--s3) 0}
+.brow:first-of-type{border-top:none}
+.brow>.bh{display:flex;gap:var(--s3);align-items:center}
+.brow .bt{display:flex;flex-wrap:wrap;gap:4px var(--s3);align-items:baseline}
+.brow .bt b{font-size:15.5px}
+.items{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s2)}
+.itemc{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:var(--r-ctl);padding:5px 10px 5px 6px;font-size:12.5px}
+.itemc b{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.itemc .mono{font-size:10.5px}
+.dunbar,.dunhero{margin-bottom:var(--s4)}
+@media (max-width:600px){
+  .fchips{margin-left:0;width:100%}
+  .fchip{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+  .dunh .db{min-height:0;padding:var(--s5) var(--s4)}
+  .dnear{flex-direction:column;align-items:stretch}
+  .dnear-l{justify-content:center}
+  .dnear>span{order:-1}
+  .dunord a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:2px 8px}
+  .crumb a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:2px 8px}
+}
