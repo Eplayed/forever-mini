@@ -128,12 +128,16 @@ https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com/
 天裔两条的特长在基底里挂在 `subgroup.traits`（各 4 条，L0 官方中文），顶层 `traits` 是空数组，
 而界面只读顶层——于是玩家看到"还没核到"、数却一直都在。现在导出这一层合成一份并带 `traitVia` 说明来路，
 `subgroup` 只留 `nameCn`（原来连 lore 带 traits 整个下发，等于同一份数发两遍），
-`portrait` 按种族 id 去 `art.json` 对上，取图顺序三层（2026-10-23 定死，写在 `raceEntry()`）：
-① 官方 CDN 的 `iconKey`（有就用它，红线口径）→ ② `art.json.raceIcons`（天裔那张，站主 2026-10-20 单独授权的插件小图）
-→ ③ `art.json.races`（本站 2026-10-12 就在库的那批 128 客户端种族头像）。
-**暗夜精灵落在第三层**：官方 CDN 今天实测 `race_nightelf_male` 等四个候选全回 403（对照组 `race_human_male` 200），
-`races.json` 里那条 `iconKey: null` 是对的、不是漏填；库里那张头像本来就在、manifest 也早记过，**没为它新开任何授权**。
-顺序不能反：反了会把另外 8 个种族的官方 CDN 图标全换成第三方转存。
+`portrait` 按种族 id 去 `art.json` 对上。**2026-10-23 站主两次改口后的最终口径（写在 `raceEntry()` 里）**：
+10 个种族**统一取 `art.json.races` 那批 128 客户端种族头像**（`src/img/art/races/*.webp`，2026-10-12 就在库、逐张带 manifest），
+`raceIcons`（10-20 单独授权那张 64 插件天裔小图）退成兜底，只在某族大图缺了时才用。
+为什么换：暗夜精灵补上之后同一排里是 9 张官方 CDN 的 56 图标 + 1 张 128 头像，清晰度一眼看出两样，
+站主看完实拍说「10 个统一都换成大图」。
+两条边界：官方 CDN 的 `iconKey` **仍随分片下发**（网页端一处不变，它读的还是 56 那张）；
+10-20 那条插件小图授权不撤。要退回「官方 CDN 优先」，改 `raceEntry()` 的顺序，
+并同步 `oss-release-test` 那条「10 个种族的图标位统一是 art/races/ 那批大图」。
+暗夜精灵那条实测照旧成立：官方 CDN 的 `race_nightelf_male` 等四个候选全回 403（对照组 `race_human_male` 200），
+`races.json` 里 `iconKey: null` 是对的、不是漏填。
 **基底 `races.json` 一个字没改**（网页那侧本来就读 `subgroup.traits`）；
 主包快照**直接 require 这个函数**，不另抄一份字段规则——这次漂移就是"两边各写一套"写出来的。
 界面取图统一走 `oss.raceIconUrl(batch, race)`：先 `portrait` 再 `iconKey`，都没有就自绘首字块。
@@ -184,6 +188,17 @@ M03 那条"刻意不下发"随之作废（`oss-release-test` 里那条断言一�
 把它也按不可变拦会得到一条假冲突，2026-10-22 踩过）。
 反向卡口：批次里任何界面会拼出来的 `iconKey` / `art` / `portrait`，素材层没登记就直接构建失败——
 "缺登记 0 条"却线上 404 这种自欺（职业图标漏登记那次）不再可能。
+
+### 三页卡片的玻璃底（2026-10-23）
+
+站主指令：三个 tab 页的卡片都加一点透明度。落法是 `app.wxss` 加一个令牌
+**`--panel-glass: rgba(19, 26, 40, 0.72)`**（基色就是 `--panel-2`，只降不透明度），
+然后**只在铺了页面底图的三页**覆盖：首页 `.cd` / `.entry` / `.race` / `.mini`、
+副本列表 `.card` / `.drow` / `.search-input`、职业列表 `.card`。
+没铺底图的页面（副本详情、职业详情、装备详情、技能、掉落反查、指南）仍吃纯色那两份令牌。
+
+页面 wxss 里**不许直接写 `rgba()`**——颜色一律回 `app.wxss`，
+`mini-m02-check` 三条看着这件事：令牌存在、三页都真的用上了、三页没有裸 rgba。
 
 ### 界面底图（2026-10-22 起，路径只有一处真源）
 

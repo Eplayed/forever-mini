@@ -233,3 +233,10 @@
   position: relative;
   z-index: 1;
 }
+
+/* 卡片改成"玻璃底"（2026-10-23 站主：三页的卡片都加一些透明度）：
+   全局 .card 是纯色，这里只在这几页覆盖成 --panel-glass，让顶上的底图透出来一点；
+   详情页/装备页没铺底图，仍用纯色那一份，不受影响。 */
+.card {
+  background: var(--panel-glass);
+}

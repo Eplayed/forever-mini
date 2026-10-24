@@ -363,8 +363,8 @@ async function main() {
     sky.length === 2 && sky.every((r) => r.n === 4 && r.sub && r.first && r.eff), JSON.stringify(sky));
   const skyIconUrl = String((sky[0] || {}).icon || '');
   const skyIcon = /^https?:\/\//.test(skyIconUrl) ? await head(skyIconUrl) : { code: 0, type: '空地址' };
-  log('天裔种族图标在 bucket 上真取得到（官方 CDN 没这张，用的是授权转存的那张小的）',
-    /raceicons\/skyborne\.webp$/.test(skyIconUrl) && skyIcon.code === 200
+  log('天裔种族图标在 bucket 上真取得到（2026-10-23 起与另外 9 个同一批：art/races 那套 128 头像）',
+    /art\/races\/skyborne\.webp$/.test(skyIconUrl) && skyIcon.code === 200
       && String(skyIcon.type).indexOf('image/') === 0, 'HTTP ' + skyIcon.code + ' ' + (skyIcon.type || skyIcon.err || ''));
   await ev(() => { const p = getCurrentPages().pop(); p.onPickClass({ currentTarget: { dataset: { id: 'warrior' } } }); return 1 });
 
@@ -796,7 +796,7 @@ async function main() {
       padA: (d.padAlliance || []).length, padH: (d.padHorde || []).length,
       rowsA: rowsOf(d.allianceRaces || []), rowsB: rowsOf(d.hordeRaces || []),
       ne: (d.allianceRaces || []).map((x) => x.nameCn + '|' + (/art\/races\//.test(x.iconUrl) ? 'races' : /icons\//.test(x.iconUrl) ? 'cdn' : 'none')).filter((s) => /暗夜/.test(s))[0] || '',
-      combos: (d.combos || []).map((x) => x.label + '→' + String(x.iconUrl || '').split('/').pop())
+      combos: (d.combos || []).map((x) => x.label + '→' + String(x.iconUrl || '').replace(/^.*\/assets\//, ''))
     };
   });
   log('种族区分成联盟/部落两框，两框加起来是全部 10 个种族、各自补到一行三个',
@@ -804,9 +804,8 @@ async function main() {
       && clsLayout.rowsA === 2 && clsLayout.rowsB === 2, JSON.stringify(clsLayout));
   log('暗夜精灵有图标了（官方 CDN 实测没有这张，用的是库里已有的那张客户端种族头像）',
     /暗夜精灵\|races/.test(clsLayout.ne), clsLayout.ne);
-  /* 每格地址的文件名必须是一张种族图：官方 CDN 那批叫 race_兽人_male，
-     暗夜精灵与天裔走素材层，分别叫 night-elf.webp / skyborne.webp */
-  const comboOk = (clsLayout.combos || []).filter((s) => /^.+→(race_[a-z_]+\.jpg|night-elf\.webp|skyborne\.webp)/.test(s)).length;
+  /* 每格地址必须落在 art/races/ 那批种族头像上——不是职业图、也不再混官方 CDN 的 56 小图标 */
+  const comboOk = (clsLayout.combos || []).filter((s) => /^.+→art\/races\/[a-z-]+\.webp$/.test(s)).length;
   log('组合卡放的是种族图标，不是职业图标（七格逐格看地址）',
     comboOk === (clsLayout.combos || []).length && (clsLayout.combos || []).length === 7,
     JSON.stringify(clsLayout.combos));
@@ -817,6 +816,24 @@ async function main() {
   await goto('/pages/classes/index', 8000);
   await ev(() => new Promise((r) => { wx.pageScrollTo({ scrollTop: 900, complete: () => setTimeout(() => r(1), 600) }) }));
   await shot('tab-classes-races');
+
+  /* 2026-10-23 站主："三页的卡片都添加一些透明度"——只许吃令牌，不许各页写 rgba */
+  const appWxss = fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8');
+  const glassTok = (appWxss.match(/--panel-glass:\s*rgba\([^)]*\)/) || [null])[0];
+  log('卡片玻璃底是一个令牌（--panel-glass），不是各页手写的 rgba',
+    !!glassTok, String(glassTok || 'app.wxss 里没有这个令牌'));
+  const glassMiss = ['home', 'dungeons', 'classes'].filter((d) => {
+    const s = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxss'), 'utf8');
+    return s.indexOf('var(--panel-glass)') < 0;
+  });
+  log('三个 tab 页的卡片都真的吃到了这个令牌（漏一页就是那页还是纯色）',
+    glassMiss.length === 0, glassMiss.join(','));
+  const glassBad = [];
+  ['home', 'dungeons', 'classes'].forEach((d) => {
+    const s = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxss'), 'utf8');
+    (s.match(/rgba?\(/g) || []).forEach(() => glassBad.push(d + ' 写了裸 rgba'));
+  });
+  log('三页没绕过令牌自己写 rgba（颜色一律回 app.wxss）', glassBad.length === 0, glassBad.slice(0, 3).join(','));
 
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length

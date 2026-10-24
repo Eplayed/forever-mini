@@ -488,8 +488,8 @@ async function main() {
     'im = Image.open(sys.argv[1]).convert("RGB")',
     'W, H = im.size',
     'px = im.load()',
-    't = (27, 35, 53)',
-    'def cl(c): return all(abs(a - b) <= 10 for a, b in zip(c, t))',
+    't = (int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))',
+    'def cl(c): return all(abs(a - b) <= 6 for a, b in zip(c, t))',
     'rows = {}',
     'for y in range(H):',
     '    xs = [x for x in range(W) if cl(px[x, y])]',
@@ -506,6 +506,22 @@ async function main() {
      （实测 x=2 处是 27,36,45），按颜色找铭牌就再也分不出卡与底——
      上一轮那条"只认两边留边距的行"的补丁当时就把 cut = -37 拦下过，这次是同一类干扰换了个来源。
      铭牌的切角与背景图无关，所以在纯色底那一帧量，量的还是真像素。 */
+  /* 目标色不再抄死：2026-10-23 卡片改成玻璃底之后，铭牌的实际颜色是
+     `--panel-glass` 叠在 `--bg` 上的混合值（旧版写死 (27,35,53) 那版纯色，换令牌当场就假红）。
+     所以这里从 app.wxss 现读两个令牌、按 alpha 合成，Python 只负责比像素。 */
+  const appCss = fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8');
+  const gM = appCss.match(/--panel-glass:\s*rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)/);
+  const bM = appCss.match(/--bg:\s*#([0-9a-fA-F]{6})/);
+  if (!gM || !bM) {
+    log('切角探针拿不到令牌（--panel-glass / --bg 至少要有一个），拒绝用旧的字面量继续量', false,
+      JSON.stringify({ glass: !!gM, bg: !!bM }));
+  }
+  const bgHex = bM ? parseInt(bM[1], 16) : 0;
+  const cardRgb = gM ? [
+    Math.round(Number(gM[1]) * Number(gM[4]) + ((bgHex >> 16) & 255) * (1 - Number(gM[4]))),
+    Math.round(Number(gM[2]) * Number(gM[4]) + ((bgHex >> 8) & 255) * (1 - Number(gM[4]))),
+    Math.round(Number(gM[3]) * Number(gM[4]) + (bgHex & 255) * (1 - Number(gM[4])))
+  ] : [0, 0, 0];
   await call('关掉底图再量切角', () => mp.evaluate(() => {
     getCurrentPages().pop().setData({ bgUrl: '' });
     return 1;
@@ -513,7 +529,8 @@ async function main() {
   await new Promise((r) => setTimeout(r, 2200));
   await shot('g1b-home-cards-flatbg');
   const corner = await call('量切角', () => new Promise((resolve) => {
-    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png')], { encoding: 'utf8' }, (err, out) => {
+    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png')]
+      .concat(cardRgb.map(String)), { encoding: 'utf8' }, (err, out) => {
       const t = String(out || '').trim();
       if (err || !/\d+ \d+ \d+ \d+$/.test(t)) { resolve(null); return; }
       const [top, cut, width, w] = t.split(' ').map(Number);

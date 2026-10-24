@@ -91,7 +91,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/orc.webp"
   },
   {
    "id": "undead",
@@ -136,7 +136,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/undead.webp"
   },
   {
    "id": "tauren",
@@ -179,7 +179,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/tauren.webp"
   },
   {
    "id": "troll",
@@ -225,7 +225,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/troll.webp"
   },
   {
    "id": "skyborne-horde",
@@ -271,7 +271,7 @@ module.exports = {
     }
    ],
    "traitVia": "subgroup",
-   "portrait": "art/raceicons/skyborne.webp"
+   "portrait": "art/races/skyborne.webp"
   },
   {
    "id": "human",
@@ -317,7 +317,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/human.webp"
   },
   {
    "id": "dwarf",
@@ -362,7 +362,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/dwarf.webp"
   },
   {
    "id": "night-elf",
@@ -450,7 +450,7 @@ module.exports = {
     }
    ],
    "traitVia": "race",
-   "portrait": null
+   "portrait": "art/races/gnome.webp"
   },
   {
    "id": "skyborne-alliance",
@@ -496,7 +496,7 @@ module.exports = {
     }
    ],
    "traitVia": "subgroup",
-   "portrait": "art/raceicons/skyborne.webp"
+   "portrait": "art/races/skyborne.webp"
   }
  ],
  "counts": {

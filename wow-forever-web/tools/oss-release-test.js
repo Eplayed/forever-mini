@@ -590,10 +590,17 @@ const oss = require(MINI_SERVICE);
   ok('天裔两个子族的特长确实不同（共 3 条相同、各自留 1 条专属），不是复制粘贴',
     sky.length === 2 && JSON.stringify(sky[0].traits.map((t) => t.name)) !== JSON.stringify(sky[1].traits.map((t) => t.name)),
     JSON.stringify(sky.map((r) => r.traits.map((t) => t.name).join('/'))));
-  ok('天裔种族小图标接上了、且登记进素材台账（官方 CDN 没这张，走站主授权的插件图）',
-    sky.every((r) => r.portrait === 'art/raceicons/skyborne.webp'
+  ok('天裔种族图接上了、且登记进素材台账（2026-10-23 起统一用 art/races 那批 128 客户端头像）',
+    sky.every((r) => r.portrait === 'art/races/skyborne.webp'
       && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r.portrait))),
     JSON.stringify(sky.map((r) => r.portrait)));
+  /* 统一口径这条是站主 2026-10-23 看完实拍拍的板："10 个统一都换成大图"。
+     以前是 9 张官方 CDN 的 56 图标 + 1 张 128 头像混在一排，清晰度一眼看得出两样。
+     断言写成"逐条都落在 art/races/ 下"，谁再往回退成 iconKey 优先，这里当场红。 */
+  ok('10 个种族的图标位统一是 art/races/ 那批大图（不许再混官方 CDN 的 56 小图标）',
+    clsIdx.races.length === 10 && clsIdx.races.every((r) => /^art\/races\/[a-z-]+\.webp$/.test(String(r.portrait || ''))
+      && fs.existsSync(path.join(REPO, 'wow-forever-web', 'src', 'img', r.portrait))),
+    JSON.stringify(clsIdx.races.map((r) => r.id + ':' + r.portrait)));
   ok('没有哪个种族的特长是空数组（空＝要么丢数据要么该降级，界面那句"还没核到"不许成为常态）',
     clsIdx.races.every((r) => r.traits.length > 0 || r.level === 'L2' || r.level === 'L3'),
     JSON.stringify(clsIdx.races.filter((r) => !r.traits.length).map((r) => r.id + ':' + r.level)));

@@ -222,11 +222,12 @@ function detailRecord(d, useAsset, geo) {
    ② 天裔没有官方 CDN 种族图标（iconKey 为 null），但站主 2026-10-20 授权用插件里那张
       种族小图标（记在 art.json 的 raceIcons，只许当小图标、不许换传承页那张大图原画），
       小程序此前没接这条线。这里按种族 id 对上，落成 `portrait`（assets 相对路径）。
-   图标位的取图顺序（2026-10-23 补暗夜精灵时定，三层）：官方 CDN 的 iconKey →
-   raceIcons（站主授权转存的插件小图）→ races（本站已在库的那张 128 客户端种族头像）。
-   暗夜精灵走的是第三层：官方 CDN 实测没有这张（race_nightelf_male 等四个候选全回 403），
-   而 art/races/night-elf.webp 本来就在库里、manifest 也早就记过——不用新开任何授权。
-   剩下三层都对不上的仍然 null，界面自绘回落。 */
+   图标位取图顺序（2026-10-23 站主两次改口后的最终版）：**10 个种族统一用 `art.json.races`
+   那批 128 客户端种族头像**，不再按"谁有官方 CDN 图标"各走各的——
+   上一版暗夜精灵补上之后，同一排里 9 张是官方 CDN 的 56 图标、1 张是 128 头像，站主看了说"10 个统一都换成大图"。
+   `raceIcons`（10-20 单独授权那张 64 插件天裔小图）退成兜底：只有大图缺了才用它；
+   官方 CDN 的 `iconKey` 仍随分片下发（网页端与别处还在用），但界面这条线不再优先取它。
+   三层都对不上的仍然 null，界面自绘回落。 */
 function raceIconBase(id) {
   return String(id || '').replace(/-(horde|alliance)$/, '');
 }
@@ -238,18 +239,13 @@ function raceEntry(r, artIndex, useAsset) {
   const fromSub = top.length === 0;
   const traits = fromSub ? (((r.subgroup || {}).traits) || []).map(raceTraitRow) : top;
   const base = raceIconBase(r.id);
-  const iconRel = ((artIndex || {}).raceIcons || {})[base] || null;
   const bigRel = ((artIndex || {}).races || {})[base] || null;
+  const iconRel = ((artIndex || {}).raceIcons || {})[base] || null;
   let portrait = null;
-  if (iconRel) {
-    const got = typeof useAsset === 'function' ? useAsset(iconRel, r.id + '.raceIcon') : String(iconRel);
-    portrait = got ? String(got).replace(/^img\//, '') : null;
-  } else if (!r.iconKey && bigRel) {
-    /* 官方 CDN 没有这张种族图标、插件 raceIcons 里也没有 → 退到本站已在库的那张 128 客户端种族头像。
-       为什么排最后：图标位优先用官方 CDN 那份（红线口径），有就不另发一份；
-       暗夜精灵正是这条兜底救回来的——race_nightelf_male 等四个候选实测全 403，
-       而 art/races/night-elf.webp 本来就在库里、manifest 也早记过，不用新开任何授权。 */
-    const got = typeof useAsset === 'function' ? useAsset(bigRel, r.id + '.racePortrait') : String(bigRel);
+  /* 统一大图在前，插件小图兜底（站主 2026-10-23 口径，理由写在上面那段注释里） */
+  const rel = bigRel || iconRel;
+  if (rel) {
+    const got = typeof useAsset === 'function' ? useAsset(rel, r.id + '.raceIcon') : String(rel);
     portrait = got ? String(got).replace(/^img\//, '') : null;
   }
   return {

@@ -120,6 +120,26 @@
 - 具体执行与上线前检查见 `wow-forever-web/docs/DATA-prelaunch-dispatch-2026-10-20.md`。
 
 
+## 2026-10-23 站主追加决定（优先于此前冲突口径）
+
+- **小程序种族图标统一用大图**：站主看完实拍拍板「10 个统一都换成大图」——小程序种族格与「无限新增的组合」
+  那一排的图标位，一律取 `art.json.races` 那批 **128 客户端种族头像**（`src/img/art/races/*.webp`，
+  2026-10-12 起就在库里、逐张带 manifest），不再按「谁有官方 CDN 图标谁用小图标」混排
+  （混排的表现是同一排里 9 张 56、1 张 128，清晰度一眼看出两样）。
+  口径边界三条：① 这批属于「客户端原画经第三方站转存」那一类，红线本来就允许，但**不许写成官方已核**；
+  ② 官方 CDN 的 `iconKey` 仍随分片下发，**网页端一处不变**；
+  ③ 2026-10-20 那条天裔插件小图授权**不撤**，`art.json.raceIcons` 退成兜底（大图缺了才用），网页端仍在用那张。
+  要回到「官方 CDN 优先」：改 `wow-forever-web/tools/oss-release.js` 的 `raceEntry()` 取图顺序，
+  并同步门禁 `oss-release-test` 那条「10 个种族的图标位统一是 art/races/ 那批大图」。
+- **三个 tab 页的卡片用玻璃底**：站主指令「三页的卡片都添加一些透明度」，落法是 `for-mini/app.wxss`
+  加一个 `--panel-glass` 令牌（基色就是 `--panel-2`，只降不透明度），**只在铺了页面底图的首页 / 副本列表 /
+  职业列表三页覆盖 `.card`、`.cd`、`.entry`、`.race`、`.mini`、`.drow`、`.search-input`**；
+  没铺底图的页面（副本详情、职业详情、装备详情、技能、掉落反查、指南）仍是纯色。
+  页面 wxss 里不许直接写 `rgba()`，颜色一律回 `app.wxss`（`mini-m02-check` 有两条看着这件事）。
+- 页面底图这一层与内容层的层叠是硬要求：底图与压暗层是 `position: absolute`，
+  **内容必须自己包一层 `.fg { position: relative; z-index: 1 }`**——只给父级加 `z-index` 不管用
+  （非定位元素会被 `z-index:0` 的定位层盖住，2026-10-23 实拍时名单整片看不见而 DOM 量着一切正常）。
+
 ## 按需读取约定（2026-10-21）
 
 - 每轮先读根/目标子项目规则，再运行 `python3 wow-forever-web/tools/project-index.py --topic <主题>`；主题有rules/launch/spells/items/maps/updates/business/tests。该命令自动更新路径索引，不读业务正文。

@@ -207,11 +207,12 @@ function iconUrl(batch, key) {
   return assetUrl(batch, 'icons/' + k + ext)
 }
 
-/* 种族那张小图（2026-10-22 补天裔）：优先用素材层里的种族图（art/raceicons/…），
-   再退回按 iconKey 拼官方 CDN 转存的那张。
-   为什么要有第一条：官方 CDN 根本没有天裔的种族图标（iconKey 是 null），
-   站主 2026-10-20 授权用插件里那张小的（只当小图标，不换传承页大图），它走的是 art 那条线。
-   两个都没有（比如暗夜精灵）就返回空串，界面照旧回落自绘块，不留碎图。 */
+/* 种族那一格的图（2026-10-23 站主定稿）：一律用素材层里 `art/races/` 那批 128 客户端种族头像，
+   由分发层的 raceEntry() 放进 `portrait`；官方 CDN 的 `iconKey` 只作兜底
+   （某族连大图都没有时才用它拼一张）。
+   为什么不再优先官方 CDN 那张 56：同一排里 9 张 56 + 1 张 128 会明显两样，
+   站主看完实拍说「10 个统一都换成大图」——口径记在根 AGENTS.md 2026-10-23 那一节。
+   两个都没有就返回空串，界面回落自绘首字块，不留碎图。 */
 function raceIconUrl(batch, race) {
   const r = race || {}
   return assetUrl(batch, r.portrait) || iconUrl(batch, r.iconKey)

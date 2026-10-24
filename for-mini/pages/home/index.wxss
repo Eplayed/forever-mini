@@ -60,7 +60,7 @@
   min-height: 330rpx;
   margin-bottom: 30rpx;
   padding: 26rpx 24rpx 24rpx;
-  background: var(--panel);
+  background: var(--panel-glass);
   border: 1rpx solid var(--gold-line);
   border-radius: var(--r-ctl);
   box-sizing: border-box;
@@ -148,7 +148,7 @@
   min-width: 300rpx;
   min-height: 200rpx;
   margin: 0 8rpx 16rpx;
-  background: var(--panel);
+  background: var(--panel-glass);
   border: 1rpx solid var(--gold-line);
   border-radius: var(--r-ctl);
   padding: 24rpx 22rpx 20rpx;
@@ -222,7 +222,7 @@
 }
 
 .race {
-  background: var(--panel-2);
+  background: var(--panel-glass);
   border: 1rpx solid var(--gold-line-soft);
   border-radius: var(--r-ctl);
   padding: 20rpx 20rpx 8rpx;
@@ -317,7 +317,7 @@
   width: 260rpx;
   margin-right: 14rpx;
   padding: 18rpx;
-  background: var(--panel-2);
+  background: var(--panel-glass);
   border: 1rpx solid var(--line-2);
   border-radius: var(--r-ctl);
   box-sizing: border-box;
