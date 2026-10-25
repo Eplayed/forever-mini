@@ -26,7 +26,13 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  background: var(--scrim-page);
+  background: var(--scrim-home);
+}
+
+/* 顶部这条空档是故意留的：那一截不放任何文字，让原图以 78% 的亮度露出来，
+   金色发丝线落在它的下沿当分隔。高度与 --scrim-home 的第一段停点是一对，改要一起改。 */
+.hero-space {
+  height: 260rpx;
 }
 
 .fg {

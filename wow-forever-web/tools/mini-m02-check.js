@@ -751,8 +751,14 @@ async function main() {
     'import sys',
     'from PIL import Image',
     'import numpy as np',
-    'a = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
-    'prof = (a[:, 55:250] > 140).sum(axis=1)',
+    'A = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
+    'B = np.asarray(Image.open(sys.argv[2]).convert("L")).astype(int)',
+    '# 两帧差得厉害的行是"故意露出来的背景"（2026-10-26 首页顶部那条原图带、卡片透出的画面），',
+    '# 不是文字。这条断言要核的是"名单文字没被底图那几层盖住"，所以把这些行排除掉，',
+    '# 否则原图带一亮，两帧的亮像素总量差出几倍，判的是背景不是文字。',
+    'diff = np.abs(A[:, 55:250] - B[:, 55:250]).mean(axis=1)',
+    'keep = diff < 40',
+    'prof = np.where(keep, (A[:, 55:250] > 140).sum(axis=1), 0)',
     'bands = []; y = 0',
     'while y < len(prof):',
     '    if prof[y] > 18:',
@@ -760,11 +766,11 @@ async function main() {
     '        while y < len(prof) and prof[y] > 10: y += 1',
     '        bands.append((s, y - 1))',
     '    else: y += 1',
-    'print("%d %d" % (len(bands), int((a[:, 55:250] > 140).sum())))',
+    'print("%d %d" % (len(bands), int(prof.sum())))',
     '# 只量名单区（x 55..250）：职业页那一排种族脸图标本身就亮，会把总量带偏'
   ].join('\n');
-  const bandsOf = (file) => new Promise((resolve) => {
-    cp.execFile('python3', ['-c', PY_BANDS, file], { encoding: 'utf8' }, (err, out) => {
+  const bandsOf = (file, other) => new Promise((resolve) => {
+    cp.execFile('python3', ['-c', PY_BANDS, file, other], { encoding: 'utf8' }, (err, out) => {
       resolve(err ? null : String(out || '').trim());
     });
   });
@@ -818,7 +824,6 @@ async function main() {
     await goto(url, 9000);
     const has = await ev(() => !!getCurrentPages().pop().data.bgUrl);
     await shot(tag);
-    const withBg = await bandsOf(path.join(SHOT, tag + '.png'));
     const geo = GLASS_CARD[tag] ? await ev((s) => new Promise((res) => {
       const q = wx.createSelectorQuery();
       q.select(s).boundingClientRect();
@@ -828,7 +833,10 @@ async function main() {
     await ev(() => { getCurrentPages().pop().setData({ bgUrl: '' }); return 1 });
     await new Promise((r) => setTimeout(r, 2500));
     await shot(tag + '-nobg');
-    const noBg = await bandsOf(path.join(SHOT, tag + '-nobg.png'));
+    const shotA = path.join(SHOT, tag + '.png');
+    const shotB = path.join(SHOT, tag + '-nobg.png');
+    const withBg = await bandsOf(shotA, shotB);
+    const noBg = await bandsOf(shotB, shotA);
     /* 比的是"亮字像素总数"而不是逐条文字带：底图一压，某条带可能并成一段或裂成两段
        （实测 classes 页就差这一条），但总量差超过 6% 就是有内容被盖住了。 */
     const num = (s) => (s ? s.split(' ').map(Number) : [0, 0]);
@@ -841,6 +849,28 @@ async function main() {
       const g = await glassOf(tag, geo);
       log(tag.replace('tab-', '') + ' 页卡片真的透底（同一块卡内两帧主色差 10~60 级，量像素）',
         !!g && g.dB >= 10 && g.dB <= 60, g ? JSON.stringify(g) : '量不出来');
+    }
+    /* 2026-10-26 站主：首页还是看不清背景图。首页顶部因此留了一条不放文字的原图带，
+       这条判言量它真的亮——哪天有人把压暗层改回整幅统一，这条带就没了，首页又糊成一块暗底。 */
+    if (tag === 'tab-home' && geo && geo.bg) {
+      const band = await call('量首页原图带亮度', () => new Promise((resolve) => {
+        cp.execFile('python3', ['-c', [
+          'import sys',
+          'from PIL import Image',
+          'import numpy as np',
+          'A = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
+          'B = np.asarray(Image.open(sys.argv[2]).convert("L")).astype(int)',
+          'W = A.shape[1]',
+          'sc = W / float(sys.argv[3])',
+          'd = np.abs(A[:, 55:250] - B[:, 55:250]).mean(axis=1)',
+          'off = next((y for y in range(60, 400) if d[y] > 8), 0)',
+          'print(int(np.median(A[off + 2:off + int(120 * sc), 55:250])))'
+        ].join('\n'), shotA, shotB, String(geo.bg.width)], { encoding: 'utf8' }, (err, out) => {
+          resolve(err ? null : Number(String(out || '').trim()));
+        });
+      }), 2);
+      log('首页顶部那条原图带真的亮（中位亮度 ≥ 90/255，别又压回暗底里）',
+        band !== null && band >= 90, String(band));
     }
   }
 

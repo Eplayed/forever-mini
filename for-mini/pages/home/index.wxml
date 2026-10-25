@@ -7,6 +7,7 @@
 
   <!-- 内容层：背景那两层是页面顶上的 absolute，这一层靠 relative + z-index 浮到它们上面 -->
   <view class="fg">
+  <view class="hero-space"></view>
   <view class="hairline"></view>
 
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
