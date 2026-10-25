@@ -293,3 +293,45 @@ export function linkSegments(tree, grid) {
 export function slotAt(tree, perkId) {
   return ((tree || {}).slots || []).filter((s) => s.perk === perkId)[0] || null;
 }
+
+/* 挑战矩阵（2026-10-25）：把"每行一个子分类、每列一档"的组摆成网格——
+   职业那组是 9 个职业 × 新手/熟练/高阶，商业技能是 6 个专业 × 中级/高级/专家级。
+   两条硬规矩：
+   ① **列头不写死**。"新手/熟练/高阶"是从条目名里剥掉子分类名得到的（新手德鲁伊 − 德鲁伊），
+      剥不出来、剥完是空、或者各行的档位序列不一致，一律返回 null 让页面回落成表格。
+      写死列名的话，客户端哪天把"高阶"改成"大师"，页面就会拿旧词盖住新数据。
+   ② 只有"每个子分类条数相同且 ≥2"才摆矩阵。玩家对战那组三个子类条数不齐（军衔按等级排），
+      地下城/冒险没有子分类，都自动回落。
+   搜索态由调用方决定不摆：搜索要的是命中行连着完成条件一起看，网格会把条件藏起来。 */
+export function challengeMatrix(items) {
+  const list = (items || []).filter((x) => x && x.sub && x.nameCn);
+  if (list.length !== (items || []).length) return null;
+  const order = [];
+  const by = {};
+  list.forEach((x) => {
+    if (!by[x.sub]) { by[x.sub] = []; order.push(x.sub); }
+    by[x.sub].push(x);
+  });
+  if (order.length < 2) return null;
+  const n = by[order[0]].length;
+  if (n < 2) return null;
+  const cols = [];
+  const rows = order.map((sub) => {
+    const its = by[sub];
+    if (its.length !== n) return null;
+    const cells = its.map((x) => {
+      const at = x.nameCn.indexOf(sub);
+      if (at < 0) return null;
+      const label = (x.nameCn.slice(0, at) + x.nameCn.slice(at + sub.length)).trim();
+      return label ? { item: x, label: label } : null;
+    });
+    if (cells.some((c) => !c)) return null;
+    const labels = cells.map((c) => c.label);
+    if (new Set(labels).size !== labels.length) return null;
+    if (!cols.length) labels.forEach((l) => cols.push(l));
+    else if (labels.join('|') !== cols.join('|')) return null;
+    return { sub: sub, cells: cells };
+  });
+  if (rows.some((r) => !r)) return null;
+  return { cols: cols, rows: rows };
+}

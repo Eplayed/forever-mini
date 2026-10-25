@@ -11,7 +11,10 @@
            图的来路记在 app/img/art/manifest.json 与溯源页，页面上不再写。 -->
       <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
       <div class="herot">
-        <span class="bbadge"><i></i>测试服进行中 · 客户端 {{ buildTail }}</span>
+        <!-- 2026-10-25：不再报"全站一个客户端号"。各板块核到的版本不一样（传承 70532、
+             改动清单 70425、世界 70338），报一个号就是假数；这里只报最新核到的那个，
+             并写明是哪一块，值从规模快照现取。 -->
+        <span class="bbadge"><i></i>测试服进行中 · 最新核到客户端 {{ newestTail }}<template v-if="newestSection">（{{ newestSection }}）</template></span>
         <h1 class="pt">回到最初的世界<br><em>探索无限的可能</em></h1>
         <p class="lead">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语。</p>
         <SiteSearch :total="S.search || 0" :initial="String($route.query.q || '')" />
@@ -198,9 +201,9 @@ function boot() {
 onMounted(boot);
 
 const recent = computed(() => tl.value.slice().sort(byDate).slice(0, 3));
-// 客户端号那一串里只报尾号：括号那段是我们自己的核对备注，不上页面（与旧站 buildTail 同一条规则）
-const buildTail = computed(() => String(((meta.value || {}).dataBaseline || {}).build || '')
-  .split('（')[0].split('.').pop());
+// 客户端号只报尾号（70532 这种），前面那串 1.60.1 是对方自己的编号习惯，玩家不认
+const newestTail = computed(() => String((S.value || {}).newestBuild || '').split('.').pop());
+const newestSection = computed(() => (S.value || {}).newestSection || '');
 // 倒计时那一行只写日期本体（YYYY-MM-DD），与旧站 LAUNCH.slice(0, 10) 同一个取法
 const launchDay = computed(() => String(((meta.value || {}).launch) || '').slice(0, 10));
 function clsArt(id) {

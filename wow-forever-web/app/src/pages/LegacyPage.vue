@@ -223,14 +223,43 @@
                 <span v-if="chipCount(blk.c, s)" class="chipc">{{ s }}<b class="mono">{{ chipCount(blk.c, s) }}</b></span>
               </template>
             </div>
-            <div class="boardwrap">
+            <!-- 摆得成矩阵的组（职业 9×3、商业技能 6×3）用网格：一屏看完这一组勾了哪些。
+                 列头是数据里剥出来的档位，格子里只放勾，完成条件走 title 与下面那行读数。 -->
+            <div v-if="blk.matrix" class="lmtxwrap">
+              <table class="lmtx">
+                <thead>
+                  <tr><th class="lmtxsub"><span class="sr">归属</span></th>
+                    <th v-for="col in blk.matrix.cols" :key="col" scope="col">{{ col }}</th></tr>
+                </thead>
+                <tbody>
+                  <tr v-for="r in blk.matrix.rows" :key="r.sub">
+                    <th scope="row" class="lmtxsub">{{ r.sub }}</th>
+                    <td v-for="(cell, ci) in r.cells" :key="ci"
+                        :class="{ done: checks[cell.item.id] }">
+                      <label class="lchk lmtxcell"
+                             :title="cell.item.nameCn + '：' + (cell.item.requirement || '完成条件未记录')">
+                        <input type="checkbox" :checked="!!checks[cell.item.id]" data-chk
+                               :id="'chk' + cell.item.id" @change="toggleCheck(cell.item.id); picked = cell.item"
+                               :aria-label="'标记完成：' + cell.item.nameCn">
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="dim lmtxread">
+                <template v-if="picked">刚动的这条：<b>{{ picked.nameCn }}</b>
+                  —— {{ picked.requirement || '完成条件未记录' }}<span class="mono">（{{ picked.points == null ? '—' : picked.points }} 点）</span></template>
+                <template v-else>格子里一格一条，停在上面能看完成条件；勾一下这里会写出那条是什么。</template>
+              </p>
+            </div>
+            <div v-else class="boardwrap">
               <table class="board ltab">
                 <colgroup><col class="c-chk"><col class="c-ico"><col style="width:26%"><col><col style="width:14%"><col class="c-num"></colgroup>
                 <thead><tr><th class="c-chk"><span class="sr">完成</span></th><th class="c-ico">图标</th><th>挑战</th><th>完成条件</th><th>归属</th><th class="c-num">点数</th></tr></thead>
                 <tbody>
                   <tr v-for="(x, i) in blk.rows" :key="x.id !== undefined ? x.id : i" :class="{ done: checks[x.id] }">
                     <td class="c-chk"><label class="lchk"><input type="checkbox" :checked="!!checks[x.id]" data-chk
-                                             :id="'chk' + x.id" @change="toggleCheck(x.id)"
+                                             :id="'chk' + x.id" @change="toggleCheck(x.id); picked = x"
                                              :aria-label="'标记完成：' + x.nameCn"></label></td>
                     <td class="ich"><IconCell :icon-key="x.iconKey || ''" :seed="x.id" :cn="x.nameCn" /></td>
                     <td><label :for="'chk' + x.id"><HlText :text="x.nameCn" :q="q" /></label><span class="dim mono">#{{ x.id }}</span></td>
@@ -273,6 +302,30 @@
         所以它<b>不并进上面那条奖励轨</b>，也不默认替你勾上。</p>
     </div>
 
+    <!-- ⑥ 常被问到的四件事（2026-10-25）。只写玩家真要判断的，句子本站自己写，
+         数一律从 legacy.json 现取；开放条件那句直接引数据里官方那篇的说法，不改写。
+         不做的事：洗点花费、先点什么最划算这类没核实的，一律不编（数据里 notCollected 记着）。 -->
+    <div class="card lge-faq" id="lfaq">
+      <h2>常被问到的四件事</h2>
+      <dl class="lge-qa">
+        <dt>传承点数从哪来？</dt>
+        <dd>{{ rules.unlock }}常规挑战每完成一项给 <b class="mono">{{ perPoint }}</b> 点，一共
+          <b class="mono">{{ nRegular }}</b> 项。</dd>
+        <dt>点数是账号共用的，还是每个角色自己的？</dt>
+        <dd>点数是<b>账号通用</b>的，但<b>每个角色各自分配</b>：换一个角色要从头点。
+          一个角色最多能花 <b class="mono">{{ cap }}</b> 点。</dd>
+        <dt>{{ nRegular }} 项全做完能拿多少点？客户端里那个 {{ cnt.challengePointSum }} 是什么？</dt>
+        <dd>常规挑战全做完是 <b class="mono">{{ cnt.challengePointsRegular }}</b> 点。
+          <span class="mono">{{ cnt.challengePointSum }}</span> 是 {{ cnt.challenges }} 条条目的点数合计
+          （含下面那条测试参与记录），<b>不是人人可得</b>，也不是挑战条数。</dd>
+        <dt v-if="specialItems.length">那条 {{ specialPointsOf }} 点的记录算不算？</dt>
+        <dd v-if="specialItems.length">它是<b>{{ specialItems[0].nameCn }}</b>，官方那篇说的
+          {{ nRegular }} 项常规挑战里没有它；正式服还给不给、谁能领，本站没核实，
+          所以不并进上面那条奖励轨。</dd>
+      </dl>
+      <p class="dim">每个专长各层的具体效果，本站没有可靠文本，一律写「具体效果待实测」——不生成、不搬别人转述的说明。</p>
+    </div>
+
     <transition name="lge-toast"><div v-if="toastMsg" class="lge-toast" role="status">{{ toastMsg }}</div></transition>
   </template>
 </template>
@@ -292,13 +345,13 @@ import { tileStyle, iconUrl } from '../lib/glyph.js';
 import { hrefOf } from '../lib/nav.js';
 import {
   buildCtx, encode, decode, add, remove, canAdd, clearTree,
-  totalSpent, spentByTree, applyChecks, challengeIndex, rewardTrack, visibleGrid
+  totalSpent, spentByTree, applyChecks, challengeIndex, rewardTrack, visibleGrid, challengeMatrix
 } from '../lib/legacy-plan.js';
 import IconCell from '../components/IconCell.vue';
 import HlText from '../components/HlText.vue';
 
 const HEAD_ART = 'img/art/races/skyborne.webp';
-const ANCHORS = [['ltree', '传承树'], ['lch', '传承挑战'], ['lgr', '进度奖励']];
+const ANCHORS = [['ltree', '传承树'], ['lch', '传承挑战'], ['lgr', '进度奖励'], ['lfaq', '常见问答']];
 /* 本机存储的键：与天赋计算器同一款前缀（wfs. = 本站），三件事各存一份，
    方案与个人勾选分开——分享链接只带方案，绝不带勾选记录。 */
 const LS_PLANS = 'wfs.legacy.plans';
@@ -658,9 +711,14 @@ const challengeBlocks = computed(() => groups.value.map((c) => {
   return {
     c: c, rows: rows,
     sum: rows.reduce((a, x) => a + (x.points || 0), 0),
-    done: rows.filter((x) => checks.value[x.id]).length
+    done: rows.filter((x) => checks.value[x.id]).length,
+    /* 搜索态一律回表格：搜索要的是命中行连着完成条件一起看，网格会把条件藏起来。
+       摆不摆得成矩阵由数据决定（档数齐不齐、列头剥不剥得出来），不在这里写死哪几组。 */
+    matrix: kw.value ? null : challengeMatrix(c.items)
   };
 }).filter((b) => b.rows.length));
+/* 勾一格就把那一格是什么写出来：矩阵里只放得下一个勾，完成条件得有个地方落地。 */
+const picked = ref(null);
 const shownChallenges = computed(() => challengeBlocks.value.reduce((a, b) => a + b.rows.length, 0));
 function chipCount(c, s) { return (c.items || []).filter((x) => x.sub === s || x.group === s).length; }
 function isOn(id) { return kw.value ? true : expanded.value.indexOf(id) >= 0; }
@@ -743,6 +801,34 @@ function goAnchor(id) { scrollTo(id); }
 .lchk { display: flex; align-items: center; justify-content: center;
   min-width: 44px; min-height: 44px; cursor: pointer }
 .board .c-chk { width: 44px }
+/* 挑战矩阵：一格一条，勾在中间。表格那套 .board 的窄屏 min-width 不带进来，
+   四列本来就窄，横滚反而会把"这一组一眼看完"这件事毁掉。 */
+.lmtxwrap { overflow-x: auto }
+/* 全站那条 `th{position:sticky;top:var(--hd-h)}`（app.css:253）在横滚容器里会把
+   头几行的表头格**往下推**到 top 值（容器不产生纵向滚动，sticky 的参照物变成它自己，
+   2026-10-26 实拍：列头新手/熟练/高阶跑到第三行、头两行的归属名叠成一格）。
+   照 app.css:267 那套：横滚容器里纵向吸顶写 static，首列改左吸顶；
+   首列左吸顶那条必须同时写 top:auto——只写 left 的话全局那条 top 还在，照样往下推。 */
+.lmtx thead th { position: static }
+.lmtx th.lmtxsub { position: sticky; left: 0; top: auto; z-index: 2 }
+.lmtx thead th.lmtxsub { z-index: 3 }
+.lmtx { border-collapse: collapse; width: 100%; max-width: 620px }
+.lmtx th, .lmtx td { border: 1px solid var(--line); text-align: center; padding: 0 }
+.lmtx thead th { background: var(--sunk); color: var(--lead);
+  font: 600 12.5px var(--font-mono); padding: 7px 10px; white-space: nowrap }
+.lmtxsub { text-align: left !important; padding: 0 12px !important; white-space: nowrap;
+  font-weight: 600; color: var(--txt-title); background: var(--sunk) }
+.lmtxcell { width: 100%; height: 44px }
+/* 格子里只留原生勾选框一个视觉：上一版在框旁边又画了个 14px 的装饰方块，
+   实拍里一格两个框，看不出哪个才是能点的（2026-10-26）。勾选态靠 accent-color + 整格底色。 */
+.lmtxcell input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--gold) }
+.lmtx td.done { background: color-mix(in srgb, var(--gold) 12%, transparent) }
+.lmtxread { margin: 10px 0 0; min-height: 20px }
+/* 常见问答：dt 问、dd 答，不引第三方那句现成 FAQ（红线：别人的说明文本不搬） */
+.lge-qa { margin: 6px 0 0 }
+.lge-qa dt { font-weight: 700; color: var(--txt-title); margin-top: 14px }
+.lge-qa dt:first-child { margin-top: 4px }
+.lge-qa dd { margin: 4px 0 0; color: var(--txt); line-height: 1.75 }
 .lge-special { border-color: var(--line-2) }
 /* 这一张只有一行、五列，不需要 .board 在窄屏那条 min-width:640px——
    留着它会把 375 的布局视口顶到 674（Chrome 于是整体缩放，"整页不横溢"那条断言反而还是 0） */

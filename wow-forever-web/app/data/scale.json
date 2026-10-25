@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-24",
+  "generatedAt": "2026-10-25",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -169,6 +169,52 @@
    "L2": 1,
    "L3": 2
   },
-  "pubTotal": 695
+  "pubTotal": 695,
+  "dataVersions": [
+   {
+    "file": "legacy.json",
+    "section": "传承",
+    "build": "1.60.1.70532",
+    "checkedAt": "2026-10-23",
+    "classic": null
+   },
+   {
+    "file": "queue.json",
+    "section": "副本排队表",
+    "build": "1.60.1.70532",
+    "checkedAt": "2026-10-22",
+    "classic": null
+   },
+   {
+    "file": "changes.json",
+    "section": "客户端改动",
+    "build": "1.60.1.70425",
+    "checkedAt": "2026-10-16",
+    "classic": "1.15.9.70003"
+   },
+   {
+    "file": "world.json",
+    "section": "世界（区域与稀有）",
+    "build": "1.60.1.70338",
+    "checkedAt": "2026-10-11",
+    "classic": null
+   },
+   {
+    "file": "items.json",
+    "section": "物品名录",
+    "build": null,
+    "checkedAt": "2026-10-22",
+    "classic": null
+   },
+   {
+    "file": "art.json",
+    "section": "素材台账（客户端原画）",
+    "build": null,
+    "checkedAt": "2026-10-20",
+    "classic": null
+   }
+  ],
+  "newestBuild": "1.60.1.70532",
+  "newestSection": "传承"
  }
 }

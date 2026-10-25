@@ -29,6 +29,29 @@
       <p class="dim">判定标准：一条数据只有挂着官方来源且人工核过，才算已核实；粉丝站与转载最高只算待实测。</p>
     </div>
 
+    <!-- 各板块分别核到哪个版本（2026-10-25）。页脚不再挂一句全站版本号：
+         传承核到 70532、客户端改动是 70425、世界还是 70338，一句话概括全站必然是假数。
+         这张表的值由规模快照现算（谁自带版本就报谁），页面一个数都不写死。 -->
+    <div class="card" v-if="dataVersions.length">
+      <h2>各板块数据核到哪个版本</h2>
+      <p class="note">同一天的客户端不会同时被全部板块核过，所以这里逐块报：版本号是那一份数据自己对着的客户端，
+        日期是本站核对的那天。没写日期的，是那一块只留了版本、没留核对日。</p>
+      <div class="boardwrap">
+        <table class="board vtab" id="lver">
+          <thead><tr><th>板块</th><th>对着的客户端</th><th>本站核对日</th><th>同时留的经典旧世版本</th></tr></thead>
+          <tbody>
+            <tr v-for="v in dataVersions" :key="v.file">
+              <td>{{ v.section }}</td>
+              <td class="mono">{{ v.build ? tail(v.build) : '—' }}</td>
+              <td class="mono">{{ v.checkedAt || '未记录' }}</td>
+              <td class="mono dim">{{ v.classic ? tail(v.classic) : '—' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="dim">客户端号只报尾号（{{ newest }} 这种），前面那串是对方自己的编号习惯。</p>
+    </div>
+
     <div v-if="ti" class="card">
       <h2>天赋数据来源与风险</h2>
       <div class="grid g2">
@@ -210,6 +233,10 @@ function boot() {
 boot();
 
 const sc = computed(() => d.value.scale);
+// 逐板块的数据版本：一律读规模快照里现算的那一份，页面不挑也不写死任何一个号
+const dataVersions = computed(() => (sc.value || {}).dataVersions || []);
+const newest = computed(() => tail((sc.value || {}).newestBuild || ''));
+function tail(v) { return String(v || '').split('.').pop(); }
 const ti = computed(() => d.value.meta.talentImport);
 const m = computed(() => d.value.method || {});
 const RS = computed(() => d.value.RS);

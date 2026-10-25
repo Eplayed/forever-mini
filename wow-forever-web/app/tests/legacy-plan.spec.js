@@ -4,7 +4,7 @@ import path from 'node:path';
 import {
   buildCtx, encode, decode, validate, add, remove, canAdd, clearTree, cascadeBlockers,
   totalSpent, treeSpent, spentByTree, applyChecks, challengeIndex, rewardTrack,
-  visibleGrid, linkSegments, SCHEMA
+  visibleGrid, linkSegments, challengeMatrix, SCHEMA
 } from '../src/lib/legacy-plan.js';
 
 /* 全部用真数据（app/data/legacy.json）跑，不造替身：这一页最容易出事的就是
@@ -240,5 +240,63 @@ describe('5×5 的排布：全空的排与列收掉，编号仍用客户端真�
       expect(gg.rows.length).toBeGreaterThan(0);
       expect(linkSegments(x, gg).length).toBe(x.links.length);
     });
+  });
+});
+
+/* 挑战矩阵：只有"每行一个子分类、每列一档、档数齐"的组才摆得成网格。
+   列头必须是从条目名里剥出来的，不能是页面写死的"新手/熟练/高阶"——
+   客户端改一个字，写死的那份就会拿旧词盖住新数据。 */
+describe('挑战矩阵', () => {
+  const groups = DATA.challenges;
+  const byName = (n) => groups.filter((g) => g.nameCn === n)[0];
+  it('职业那组摆成 9 行 × 3 列，列头是数据里剥出来的档位', () => {
+    const g = byName('职业');
+    const m = challengeMatrix(g.items);
+    expect(m).toBeTruthy();
+    expect(m.rows.length).toBe(9);
+    expect(m.cols.length).toBe(3);
+    expect(new Set(m.rows.map((r) => r.cells.length)).size).toBe(1);
+    // 列头不许是空串、也不许把子分类名一起带上（"新手德鲁伊"要剥成"新手"）
+    m.cols.forEach((c) => {
+      expect(c.length).toBeGreaterThan(0);
+      expect(m.rows.every((r) => r.sub.indexOf(c) < 0)).toBe(true);
+    });
+    // 每格都指回真实条目，且行名确实出现在条目名里
+    m.rows.forEach((r) => r.cells.forEach((c) => {
+      expect(g.items.indexOf(c.item)).toBeGreaterThanOrEqual(0);
+      expect(c.item.nameCn.indexOf(r.sub)).toBeGreaterThanOrEqual(0);
+    }));
+    // 格子里的条目总数等于这一组的全部条目，一条不丢
+    expect(m.rows.reduce((a, r) => a + r.cells.length, 0)).toBe(g.items.length);
+  });
+  it('商业技能那组同样摆得成（6 行），列头是它自己的档位', () => {
+    const m = challengeMatrix(byName('商业技能').items);
+    expect(m).toBeTruthy();
+    expect(m.rows.length).toBe(6);
+    expect(m.cols.length).toBe(3);
+  });
+  it('条数不齐或没有子分类的组返回 null，页面回落成表格', () => {
+    expect(challengeMatrix(byName('玩家对战').items)).toBe(null);
+    expect(challengeMatrix(byName('地下城').items)).toBe(null);
+    expect(challengeMatrix(byName('冒险').items)).toBe(null);
+    expect(challengeMatrix([])).toBe(null);
+  });
+  it('档位序列不一致就不摆（防止把不同含义的列并到一起）', () => {
+    const fake = [
+      { id: 1, sub: '甲', nameCn: '新手甲', points: 1 },
+      { id: 2, sub: '甲', nameCn: '熟练甲', points: 1 },
+      { id: 3, sub: '乙', nameCn: '入门乙', points: 1 },
+      { id: 4, sub: '乙', nameCn: '熟练乙', points: 1 }
+    ];
+    expect(challengeMatrix(fake)).toBe(null);
+  });
+  it('条目名里不含子分类名就不摆（剥不出列头，宁可回落）', () => {
+    const fake = [
+      { id: 1, sub: '甲', nameCn: '第一次', points: 1 },
+      { id: 2, sub: '甲', nameCn: '第二次', points: 1 },
+      { id: 3, sub: '乙', nameCn: '第一次', points: 1 },
+      { id: 4, sub: '乙', nameCn: '第二次', points: 1 }
+    ];
+    expect(challengeMatrix(fake)).toBe(null);
   });
 });

@@ -271,7 +271,10 @@ mark{background:rgba(217,161,59,.35);color:var(--mark-ink);border-radius:2px;pad
 
 /* 种族 × 职业矩阵 */
 table.mtx{min-width:680px}
-table.mtx th.rh{position:sticky;left:0;z-index:2;min-width:112px;white-space:nowrap}
+/* top:auto 是必须的：全站 `th{top:var(--hd-h)}` 在 .scrollx 这个横滚容器里会把
+   头两行的首列**往下推**到 110px（2026-10-26 实测：兽人/亡灵两格叠到牛头人那一行）。
+   左吸顶要留，纵向吸顶在这种容器里不成立——同 267 行那条。 */
+table.mtx th.rh{position:sticky;left:0;top:auto;z-index:2;min-width:112px;white-space:nowrap}
 table.mtx th.rh > svg{vertical-align:middle}
 /* 原来这里是一条 `table.mtx th.rh span{margin-left:6px}`，头像外壳（.rface 和它里面的 .liw 都是 span）
    跟着吃了 6px，两层叠加后头像从格子里挪出去压住种族名，看起来就是"头像没显示全"（用户实拍图4）。

@@ -2030,6 +2030,58 @@ Object.assign(scale, {
   pubCoverage: pub, pubTotal: pubLevels.length
 });
 const scalePath = path.join(ROOT, 'scale.json');
+/* 各板块的数据分别核到哪个版本（2026-10-25）。
+   以前页脚挂一句全站"客户端 1.60.1.70338、核对于 2026-10-11"，而实际是传承 70532（10-23 核）、
+   改动清单 70425、副本排队表 70532、世界 70338、物品名录抓取日 10-22——一句话写死就是发给玩家的假数，
+   而且每核一个板块都得记得回来改它（传承那轮就漏了）。这里一律现读：谁自带版本字段就报谁。
+   板块中文名只此一张表，**漏登记直接构建失败**（同 app-assets 那份 EXCLUDE 的教训：
+   写死名单的毛病是每加一个板块都要记得回来补，忘了就静默少一行）。 */
+const SECTION_CN = {
+  'legacy.json': '传承',
+  'changes.json': '客户端改动',
+  'queue.json': '副本排队表',
+  'world.json': '世界（区域与稀有）',
+  'items.json': '物品名录',
+  'art.json': '素材台账（客户端原画）'
+};
+// 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
+// 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。
+const VER_KEYS = ['clientBuild', 'foreverBuild', 'build', 'fetchedAt', 'fetched', 'checkedAt'];
+const dataVersions = [];
+fs.readdirSync(ROOT).filter((f) => f.endsWith('.json')).forEach((f) => {
+  let meta = null;
+  try { meta = (JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')) || {}).meta; } catch (e) { return; }
+  if (!meta || typeof meta !== 'object') return;
+  const hit = VER_KEYS.filter((k) => typeof meta[k] === 'string' && meta[k]);
+  if (!hit.length) return;
+  if (!SECTION_CN[f]) {
+    errs.push(`数据版本表：${f} 自带版本字段（${hit.join('/')}）却没登记板块中文名，页脚与溯源页报不出人话`);
+    return;
+  }
+  // 优先取"客户端版本号"那三个；legacy.json 的 build 是对方发布号（r-179…），不给玩家看
+  const build = ['clientBuild', 'foreverBuild', 'build'].map((k) => meta[k]).filter((v) => typeof v === 'string' && !/^r-\d+$/.test(v))[0] || null;
+  // 日期取"这一份成品最后一次对着来源重算"的那天：抓取日优先，没有就用生成日
+  const at = ['fetchedAt', 'fetched', 'checkedAt', 'generatedAt']
+    .map((k) => (typeof meta[k] === 'string' ? meta[k].slice(0, 10) : null)).filter(Boolean)[0] || null;
+  dataVersions.push({
+    file: f, section: SECTION_CN[f], build: build, checkedAt: at,
+    classic: typeof meta.classicBuild === 'string' ? meta.classicBuild : null
+  });
+});
+Object.keys(SECTION_CN).forEach((f) => {
+  if (!dataVersions.some((x) => x.file === f)) {
+    warns.push(`数据版本表：${SECTION_CN[f]}（${f}）这一轮没读到版本字段，溯源页那一行会缺`);
+  }
+});
+if (!dataVersions.length) errs.push('数据版本表一条都没派生出来：页脚与首页那颗徽标会没有数可显示');
+// 有客户端版本号的排前面、新的在上；只留了日期的（物品名录、素材台账）排在后面
+dataVersions.sort((a, b) => (b.build ? 1 : 0) - (a.build ? 1 : 0)
+  || String(b.build || '').localeCompare(String(a.build || ''))
+  || String(a.section).localeCompare(String(b.section)));
+scale.dataVersions = dataVersions;
+// 首页那颗徽标报"最新核到哪个客户端"，这个"最新"也现算，不在组件里挑
+scale.newestBuild = dataVersions.map((x) => x.build).filter(Boolean).sort().slice(-1)[0] || null;
+scale.newestSection = (dataVersions.filter((x) => x.build === scale.newestBuild)[0] || {}).section || null;
 fs.writeFileSync(scalePath, JSON.stringify({
   meta: {
     generatedAt: new Date().toISOString().slice(0, 10),

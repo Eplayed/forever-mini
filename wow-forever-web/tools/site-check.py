@@ -118,12 +118,28 @@ results = []
 
 
 APP_BASE = os.environ.get("APP_BASE", "http://127.0.0.1:8821")
-APP_REQUIRED = False          # --app 时端口不通算失败，默认只跳过并说明
+APP_REQUIRED = False          # 显式给了 --app-base 就连不上算失败，默认用自己起的那台
+
+# 网页的手机版（375）暂时不作为门槛——站主 2026-10-25 定的，**只管网页，小程序那条线不受影响**。
+# 落法不是把断言删掉：那批 375 的断言照跑、照打印，只是不过不算红（NOTE）。
+# 这样"手机上有问题"这件事还看得见，但不会拦住桌面那批改动。
+# 要恢复成硬门槛，把这个开关改回 False；逐页那批 375 断言（传承/配装/世界点位/职业表头/物品库）
+# 没有走这个开关，各自钉着一条真出过的 bug，保持拦红——理由见 docs/VERIFY-删旧站-2026-10-24.md。
+MOBILE_SOFT = True
 
 
-def check(name, ok, detail=""):
-    results.append((name, bool(ok), detail))
-    print(("  PASS  " if ok else "  FAIL  ") + name + (("  — " + detail) if detail else ""))
+notes = []
+
+
+def check(name, ok, detail="", soft=False):
+    """soft=True 的那条不过也只记 NOTE，不进失败清单——但仍然打印、仍然计数，
+       免得"降成提示"变成"没人再看"。"""
+    bad = not ok and not soft
+    results.append((name, not bad, detail))
+    if soft and not ok:
+        notes.append(name)
+    tag = "  PASS  " if ok else ("  NOTE  " if soft else "  FAIL  ")
+    print(tag + name + (("  — " + detail) if detail else ""))
 
 
 # 正文里出现脚本路径、原始文件名或未替换占位符，就是开发残留漏进了玩家视野。
@@ -1304,22 +1320,125 @@ def test_legacy_app(browser, base):
     check("六组挑战的组头写着项数、已勾数与合计点数，数全部来自明细",
           ch["blocks"] == len(reg_groups) == 6 and ch["heads"] == [g["nameCn"] for g in reg_groups]
           and ch["sums"] == want_sums, "；".join(ch["sums"]) + " ／ 数据 " + "；".join(want_sums))
-    check("常规挑战一行一条不少；那条测试参与记录单列在六组之外，不混进常规分母",
-          ch["all"] == len(reg_items) and ch["chk"] == len(reg_items)
-          and ch["counter"] == "%d / %d 项 · 已勾 0 项" % (len(reg_items), len(reg_items))
-          and len(ch["spRows"]) == len(sp_items)
-          and all(str(x["id"]) in ch["spRows"][0] for x in sp_items),
-          "六组 %d 行 / 勾选框 %d 个 / 单列 %d 条（数据常规 %d、特殊 %d）"
-          % (ch["all"], ch["chk"], len(ch["spRows"]), len(reg_items), len(sp_items)))
+    # 矩阵与表格是同一批条目的两种摆法（2026-10-25）：勾选框一律一条一个，
+    # "行数"不再是判据——摆成矩阵的那两组，行是子分类不是条目。
+    # 下面这份 matrixable 与 app/src/lib/legacy-plan.js 的 challengeMatrix 各写各的、互不引用：
+    # 页面那份改了，门禁这份还能把它兜回来（同 item-stats 那套做法）。
+    def matrixable(items):
+        subs = []
+        by = {}
+        for x in items:
+            if not x.get("sub") or not x.get("nameCn"):
+                return None
+            if x["sub"] not in by:
+                by[x["sub"]] = []
+                subs.append(x["sub"])
+            by[x["sub"]].append(x)
+        if len(subs) < 2:
+            return None
+        n = len(by[subs[0]])
+        if n < 2 or any(len(by[s]) != n for s in subs):
+            return None
+        cols = None
+        for s in subs:
+            labels = []
+            for x in by[s]:
+                at = x["nameCn"].find(s)
+                if at < 0:
+                    return None
+                lab = (x["nameCn"][:at] + x["nameCn"][at + len(s):]).strip()
+                if not lab:
+                    return None
+                labels.append(lab)
+            if len(set(labels)) != len(labels):
+                return None
+            if cols is None:
+                cols = labels
+            elif cols != labels:
+                return None
+        return {"subs": subs, "cols": cols}
+
+    want_mtx = {g["nameCn"]: matrixable(g["items"]) for g in reg_groups}
+    got = page.evaluate("""() => [...document.querySelectorAll('#lch .lchgrp')].map(g => ({
+      name: (g.querySelector('.lchhead > b') || {}).innerText,
+      matrix: !!g.querySelector('.lmtx'),
+      cols: [...g.querySelectorAll('.lmtx thead th:not(.lmtxsub)')].map(t => t.innerText.trim()),
+      rows: [...g.querySelectorAll('.lmtx tbody tr')].map(tr => (tr.querySelector('.lmtxsub') || {}).innerText.trim()),
+      cells: g.querySelectorAll('.lmtx td').length,
+      chks: g.querySelectorAll('input[data-chk]').length,
+      tableRows: g.querySelectorAll('.ltab tbody tr').length }))""")
+    bad = []
+    for g, want in zip(got, [want_mtx[x["name"]] for x in got]):
+        items = [gg for gg in reg_groups if gg["nameCn"] == g["name"]][0]["items"]
+        if g["chks"] != len(items):
+            bad.append("%s：勾选框 %d 个 / 数据 %d 条" % (g["name"], g["chks"], len(items)))
+        if want and not g["matrix"]:
+            bad.append("%s：数据摆得成矩阵（%d×%d）却仍是表格" % (g["name"], len(want["subs"]), len(want["cols"])))
+        if not want and g["matrix"]:
+            bad.append("%s：档数不齐却摆成了矩阵" % g["name"])
+        if g["matrix"]:
+            if g["cols"] != want["cols"] or g["rows"] != want["subs"]:
+                bad.append("%s：列头/行名与数据不符 %s vs %s" % (g["name"], g["cols"], want["cols"]))
+            if g["cells"] != len(want["subs"]) * len(want["cols"]):
+                bad.append("%s：格数 %d ≠ %d" % (g["name"], g["cells"], len(want["subs"]) * len(want["cols"])))
+        elif g["tableRows"] != len(items):
+            bad.append("%s：表格 %d 行 / 数据 %d 条" % (g["name"], g["tableRows"], len(items)))
+    n_mtx = len([k for k, v in want_mtx.items() if v])
+    check("档数齐的组摆成矩阵（%d 组）、不齐的回落表格，两种摆法的勾选框都一条一个" % n_mtx,
+          not bad and ch["chk"] == len(reg_items) and n_mtx >= 1,
+          "；".join(bad[:3]) or "矩阵 %d 组 / 表格 %d 组 / 勾选框 %d 个"
+          % (n_mtx, len(reg_groups) - n_mtx, ch["chk"]))
+    check("矩阵的列头是从条目名里剥出来的档位，不是子分类名本身（写死列名会被客户端改字打脸）",
+          all(not any(c == s for s in (want_mtx[k]["subs"] if want_mtx[k] else []))
+              for k in want_mtx if want_mtx[k] for c in want_mtx[k]["cols"]),
+          json.dumps({k: v["cols"] for k, v in want_mtx.items() if v}, ensure_ascii=False))
+    # 几何判据：横滚容器里那条全站 `th{sticky;top:110px}` 会把头几行的表头格往下推
+    # （2026-10-26 实拍抓到：列头跑到第三行、两个归属名叠一格），文本断言全绿也看不出来。
+    geo = page.evaluate("""() => [...document.querySelectorAll('.lmtx')].map(t => {
+        const rows = [...t.tBodies[0].rows];
+        const off = rows.map(r => Math.round(r.cells[0].getBoundingClientRect().top
+                                               - r.getBoundingClientRect().top));
+        const hd = t.tHead.getBoundingClientRect();
+        return {off: off.filter(v => v !== 0).length,
+                gap: Math.round(rows[0].getBoundingClientRect().top - hd.bottom)};
+      })""")
+    check("矩阵每一行的归属格都跟它那一行齐平，列头紧贴第一行（sticky 参照物搞错会把表头推下去）",
+          all(g["off"] == 0 and abs(g["gap"]) <= 1 for g in geo),
+          json.dumps(geo, ensure_ascii=False))
+    check("那条测试参与记录单列在六组之外，不混进常规分母",
+          len(ch["spRows"]) == len(sp_items)
+          and all(str(x["id"]) in ch["spRows"][0] for x in sp_items)
+          and ch["counter"] == "%d / %d 项 · 已勾 0 项" % (len(reg_items), len(reg_items)),
+          "单列 %d 条（数据特殊 %d）／计数 %s" % (len(ch["spRows"]), len(sp_items), ch["counter"]))
     page.evaluate("() => document.querySelectorAll('.lchhead')[1].click()")
     page.wait_for_timeout(500)
     ch2 = page.evaluate("""() => ({open: [...document.querySelectorAll('#lch [aria-expanded]')]
         .filter(e => e.getAttribute('aria-expanded') === 'true').length,
-      vis: [...document.querySelectorAll('#lch tbody tr')].filter(r => r.offsetParent).length})""")
-    check("点第二组的组头能展开，可见行数跟着加上去",
-          ch2["open"] == 2 and ch2["vis"] == len(g0["items"]) + len(reg_groups[1]["items"]),
-          "展开 %d 组 / 可见 %d 行（前两组 %d + %d）"
-          % (ch2["open"], ch2["vis"], len(g0["items"]), len(reg_groups[1]["items"])))
+      chk: [...document.querySelectorAll('#lch .lchgrp')].slice(0, 2)
+        .reduce((a, g) => a + [...g.querySelectorAll('input[data-chk]')].filter(e => e.offsetParent).length, 0)})""")
+    check("点第二组的组头能展开，可见的勾选框跟着加上去",
+          ch2["open"] == 2 and ch2["chk"] == len(g0["items"]) + len(reg_groups[1]["items"]),
+          "展开 %d 组 / 可见勾选框 %d 个（前两组 %d + %d）"
+          % (ch2["open"], ch2["chk"], len(g0["items"]), len(reg_groups[1]["items"])))
+    # 勾一格：矩阵里只放得下一个勾，完成条件靠下面那行读数落地，所以这三处必须一起动
+    page.evaluate("""() => { const g = document.querySelector('#lch .lchgrp');
+      const c = g.querySelector('.lmtx input[data-chk]') || g.querySelector('input[data-chk]');
+      c.click(); }""")
+    page.wait_for_timeout(600)
+    after = page.evaluate("""() => ({head: (document.querySelector('#lch .lchhead > .mono') || {}).innerText.replace(/\\s+/g, ' ').trim(),
+      read: (document.querySelector('.lmtxread') || {}).innerText || '',
+      counter: (document.querySelector('.field .mono') || {}).innerText.trim(),
+      track: (document.querySelector('.lge-track') || {}).innerText.replace(/\\n/g, ' ')})""")
+    first_item = reg_groups[0]["items"][0]
+    check("勾一格：组头计数、上方总计数、奖励轨点数一起跟着动，并写出这一条是什么",
+          "已勾 1" in after["head"] and "已勾 1 项" in after["counter"]
+          and first_item["nameCn"] in after["read"]
+          and (first_item.get("requirement") or "") in after["read"]
+          and str(first_item.get("points") or 0) in after["track"],
+          "组头 %s ／ 计数 %s ／ 读数 %s" % (after["head"], after["counter"], after["read"][:60]))
+    page.evaluate("() => document.querySelector('#lch input[data-chk]').click()")
+    page.wait_for_timeout(400)
+
     k = "25级"
     hits = [x for x in reg_items if k in ((x.get("nameCn") or "") + " " + (x.get("requirement") or "")
             + " " + (x["sub"] or "") + " " + (x["group"] or ""))]
@@ -1377,11 +1496,14 @@ def test_legacy_app(browser, base):
 
     # ---- ⑤ 锚点走站内路由（首页那批死链就是栽在裸 #id 上），点一下真的滚 ----
     anch = page.evaluate("""() => [...document.querySelectorAll('.lge-anchor a')].map(a => ({
-      t: a.innerText.trim(), h: a.getAttribute('href')}))""")
-    check("页内三个锚点走站内路由地址，不写裸 #id",
-          [a["t"] for a in anch] == ["传承树", "传承挑战", "进度奖励"]
-          and all(a["h"].startswith("#/legacy?to=") for a in anch),
-          json.dumps(anch, ensure_ascii=False))
+      t: a.innerText.trim(), h: a.getAttribute('href'),
+      // 锚点在哈希路由里只能靠 ?to= 传，目标那段必须真的在页面上，否则点了什么也不会发生
+      id: a.getAttribute('href').split('to=')[1],
+      has: !!document.getElementById(a.getAttribute('href').split('to=')[1]) }))""")
+    check("页内四个锚点走站内路由地址、不写裸 #id，且目标那段真的在页面上",
+          [a["t"] for a in anch] == ["传承树", "传承挑战", "进度奖励", "常见问答"]
+          and all(a["h"].startswith("#/legacy?to=") and a["has"] for a in anch),
+          json.dumps([{k: a[k] for k in ("t", "id", "has")} for a in anch], ensure_ascii=False))
     page.evaluate("() => window.scrollTo(0, 0)")
     page.wait_for_timeout(300)
     anc = page.evaluate("""() => { const before = window.scrollY;
@@ -1393,6 +1515,31 @@ def test_legacy_app(browser, base):
     check("点锚点真的滚到那一段（从页顶滚到奖励轨，目标进了视口）",
           anc["before"] <= 2 and anc["after"] > anc["before"] and anc["inView"],
           json.dumps(anc, ensure_ascii=False))
+
+    # ---- ⑤b 常见问答那四条：数必须来自数据，开放条件那句必须逐字来自数据 ----
+    faq = page.evaluate("""() => { const c = document.querySelector('.lge-faq');
+      if (!c) return null;
+      return { dts: [...c.querySelectorAll('dt')].map(e => e.innerText.trim()),
+        text: c.innerText.replace(/\\s+/g, ' '),
+        h2: (c.querySelector('h2') || {}).innerText }; }""")
+    R = L["meta"].get("rules") or {}
+    C = L["meta"].get("counts") or {}
+    check("常见问答那一段在，且正好是四条（多了就是往里塞没核实的话）",
+          faq and len(faq["dts"]) == 4, json.dumps((faq or {}).get("dts"), ensure_ascii=False))
+    need = [str(R.get("pointPerChallenge")), str(C.get("challengesRegular")),
+            str(R.get("launchSpendingCap")), str(C.get("challengePointsRegular")),
+            str(C.get("challengePointSum")), str(C.get("challenges"))]
+    check("问答里每个数都等于数据里的那一个（每项点数/常规项数/角色上限/常规点数合计/条目点数合计/条目数）",
+          faq and all(n in faq["text"] for n in need),
+          "缺 %s" % [n for n in need if not (faq and n in faq["text"])])
+    unlock = re.sub(r"\s+", " ", str(R.get("unlock") or "")).strip()
+    check("开放条件那句是数据里官方那篇的说法，页面没另写一份",
+          bool(unlock) and faq and unlock in faq["text"],
+          "数据：%s…" % unlock[:40])
+    ban = [w for w in ("洗点", "最划算", "推荐先点", "最强", "毕业") if w in (faq or {}).get("text", "")]
+    check("问答里不出现没核实的结论（洗点花费、先点什么最划算这类）", not ban, "命中 %s" % ban)
+    check("问答末尾仍写着'每层效果待实测'那一类交代，不装作知道效果",
+          "待实测" in (faq or {}).get("text", ""))
 
     # ---- ⑥ 两档视口的几何与红线 ----
     body = page.evaluate("() => document.querySelector('#main').innerText")
@@ -1949,17 +2096,18 @@ def test_mobile(browser, base):
     page.on("console", lambda m, e=errors: e.append(m.text[:100]) if m.type == "error" else None)
     open_talent(page, base)
     visible = page.evaluate("() => [...document.querySelectorAll('.tree')].filter(t => !t.classList.contains('hide')).length")
-    check("移动端只展开当前一系", visible == 1, "可见树 %d" % visible)
+    check("移动端只展开当前一系", visible == 1, "可见树 %d" % visible, soft=MOBILE_SOFT)
     click(page, DEMO_A00)
     page.wait_for_timeout(200)
     click(page, DEMO_A00)
     page.wait_for_timeout(250)
-    check("移动端加点可用", ranks(page, DEMO_A00)["ranks"] == 2, "a-0-0=%s" % ranks(page, DEMO_A00)["ranks"])
+    check("移动端加点可用", ranks(page, DEMO_A00)["ranks"] == 2,
+          "a-0-0=%s" % ranks(page, DEMO_A00)["ranks"], soft=MOBILE_SOFT)
     page.evaluate("() => document.getElementById('mode').click()")
     click(page, DEMO_A00)
     page.wait_for_timeout(250)
     check("移动端用减点按钮可减点（没有右键也能完成）", ranks(page, DEMO_A00)["ranks"] == 1,
-          "a-0-0=%s" % ranks(page, DEMO_A00)["ranks"])
+          "a-0-0=%s" % ranks(page, DEMO_A00)["ranks"], soft=MOBILE_SOFT)
     page.screenshot(path=os.path.join(SHOT_DIR, "talent-mobile-375.png"))
     check("移动端无控制台报错", not errors, "; ".join(errors[:2]))
     ctx.close()
@@ -2032,6 +2180,15 @@ def test_race_icon(browser):
     check("种族页天裔那几处小图标真解码出来了（不是自绘块也不是破图）",
           r["small"] >= 2 and r["smallOk"] == r["small"] and r["smallW"] >= 32 and not r["broken"],
           "%d 处，解码 %d 处，原图宽 %dpx，破图 %s" % (r["small"], r["smallOk"], r["smallW"], r["broken"] or "无"))
+    # 种族×职业矩阵的首列也在 .scrollx 里：全站 `th{sticky;top:110px}` 曾把头两行
+    # （兽人/亡灵）往下推到牛头人那一行（2026-10-26 实测），文本断言看不出，只能量。
+    mgeo = page.evaluate("""() => { const t = document.querySelector('table.mtx');
+        if (!t) return null;
+        return [...t.tBodies[0].rows].map(rw => Math.round(
+          rw.cells[0].getBoundingClientRect().top - rw.getBoundingClientRect().top))
+          .filter(v => v !== 0).length; }""")
+    check("种族×职业矩阵每一行的首列都跟它那一行齐平（横滚容器里纵向 sticky 会把头几行推下去）",
+          mgeo == 0, "错位行数 %s" % mgeo)
     page.screenshot(path=os.path.join(SHOT_DIR, "app-raceicon-skyborne.png"))
     lg = probe("/#/legacy")
     check("传承页页头仍然用那张大图原画，没被 64px 小图顶掉",
@@ -3137,13 +3294,64 @@ def test_site_wide(browser, base):
                 page.screenshot(path=os.path.join(SHOT_DIR, "wide-%s.png" % (name or "x")),
                                 full_page=False)
             else:
+                # 375 这一遍走 soft：站主 2026-10-25 定的"网页手机版暂时不作要求"，
+                # 断言照跑照打印，不过只记 NOTE（要恢复硬门槛改 MOBILE_SOFT 一个开关）
                 t = page.evaluate(TOUCH_PROBE)
                 check("移动端 375 %s：点击目标都够 44px" % path, not t["small"],
-                      "%d 个偏小 %s" % (len(t["small"]), sorted(set(t["small"]))[:3]))
+                      "%d 个偏小 %s" % (len(t["small"]), sorted(set(t["small"]))[:3]), soft=MOBILE_SOFT)
                 check("移动端 375 %s：整页不横溢、没有格子被切掉（视口 %d）" % (path, t["vw"]),
-                      t["over"] == 0 and t["cut"] == 0, json.dumps(t, ensure_ascii=False)[:140])
+                      t["over"] == 0 and t["cut"] == 0, json.dumps(t, ensure_ascii=False)[:140],
+                      soft=MOBILE_SOFT)
             page.close()
         ctx.close()
+
+
+def test_data_versions(browser, base):
+    """全站那句"数据来源版本"撤了以后，版本这件事落到三个地方：页脚一句话、首页一颗徽标、
+       溯源页一张逐板块表。三处的值都必须来自规模快照现算的那一份——写死一个号，
+       下一次只核了传承就会变成发给玩家的假数（2026-10-23 传承核到 70532 而页脚还写 70338 就是这么来的）。"""
+    print("\n[22] 各板块数据版本（页脚 / 首页徽标 / 溯源页表）")
+    sc = json.load(open(os.path.join(DATA, "scale.json"), encoding="utf-8"))["scale"]
+    vers = sc.get("dataVersions") or []
+    meta = json.load(open(os.path.join(DATA, "meta.json"), encoding="utf-8"))
+    note = ((meta.get("dataBaseline") or {}).get("note") or "")
+    check("规模快照里有逐板块版本表", len(vers) >= 5, "%d 行" % len(vers))
+    check("每一行都至少有一个版本号或一个日期", all(v.get("build") or v.get("checkedAt") for v in vers),
+          json.dumps([v["section"] for v in vers if not (v.get("build") or v.get("checkedAt"))], ensure_ascii=False))
+    tail = lambda x: str(x or "").split(".")[-1]
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    errs = []
+    page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+    page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    foot = page.evaluate("() => (document.querySelector('#foot .in') || {}).innerText || ''")
+    check("页脚写的是那句'分别核对'，不再挂全站一个版本号", note and note in foot,
+          foot.replace("\n", " ／ ")[:120])
+    check("页脚不再出现客户端号那一串（1.60.1.x 或'核对于'）",
+          not re.search(r"1\.60\.1\.\d|核对于", foot), foot.replace("\n", " ")[:100])
+    badge = page.evaluate("() => (document.querySelector('.bbadge') || {}).innerText || ''")
+    want = "%s（%s）" % (tail(sc.get("newestBuild")), sc.get("newestSection") or "")
+    check("首页徽标报的是快照里最新那个号与那一块（%s）" % want, want in badge.replace(" ", ""),
+          badge)
+    page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
+    page.wait_for_timeout(1600)
+    rows = page.evaluate("""() => [...document.querySelectorAll('#lver tbody tr')]
+        .map(tr => [...tr.children].map(td => td.innerText.trim()))""")
+    check("溯源页那张表的行数等于快照里的板块数", len(rows) == len(vers),
+          "表 %d 行 / 快照 %d 行" % (len(rows), len(vers)))
+    bad = []
+    for r, v in zip(rows, vers):
+        if r[0] != v["section"] or r[1] != (tail(v.get("build")) or "—"):
+            bad.append("%s：页面 %s / 快照 %s" % (v["section"], r[:2], [v["section"], tail(v.get("build"))]))
+    check("逐行的板块名与客户端号都跟快照一致（不是页面自己写死的）", not bad, "；".join(bad[:2]))
+    dates = [r[2] for r in rows]
+    check("日期那列要么是快照里的日期、要么明写未记录，不留空",
+          all(d and (d == "未记录" or re.match(r"^\d{4}-\d{2}-\d{2}$", d)) for d in dates),
+          json.dumps(dates, ensure_ascii=False))
+    check("这一页无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-provenance-versions.png"))
+    ctx.close()
 
 
 # 全跑一次 13 分钟，改一条新断言时等不起。SECTIONS 把顺序固定下来，--only 按名字挑着跑，
@@ -3163,6 +3371,7 @@ SECTIONS = [
     ("race_icon", lambda b, base: test_race_icon(b)),
     ("updates_filter", lambda b, base: test_updates_filter(b)),
     ("copy", test_copy),
+    ("data_versions", test_data_versions),
 ]
 
 
@@ -3207,6 +3416,10 @@ def main():
     print("\n===== 结果 =====")
     print("截图目录：%s" % SHOT_DIR)
     print("通过 %d / %d" % (len(results) - len(failed), len(results)))
+    if notes:
+        print("其中 %d 条是提示（375 那一档，站主 2026-10-25 定的暂不作门槛；改 MOBILE_SOFT 可恢复拦红）："
+              % len(notes))
+        print("  - " + "\n  - ".join(notes[:8]))
     if failed:
         print("失败项：\n  - " + "\n  - ".join(failed))
         sys.exit(1)
