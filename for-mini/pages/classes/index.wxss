@@ -37,6 +37,8 @@
   margin: 0 -6rpx;
 }
 
+/* 组合卡那一排同理：格子上原来什么都没有，现在给一层薄玻璃（不铺反光沿，
+   它只有 12rpx 的上下边距，铺上就成一条亮块） */
 .cmb {
   flex: 0 0 33.333%;
   box-sizing: border-box;
@@ -45,6 +47,9 @@
   align-items: center;
   padding: 14rpx 6rpx;
   margin-bottom: 12rpx;
+  background: var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--r-ctl);
 }
 
 .cmb-t {
@@ -72,14 +77,19 @@
   border-radius: var(--r-ctl);
 }
 
+/* 两个阵营框也是这一页的卡片（2026-10-24 站主：三页卡片毛玻璃还不够）。
+   阵营色仍是顶层那一片（--fac-*-bg 只有 0.10 上下，是"染"不是"填"），下面垫玻璃与虚化，
+   所以联盟蓝 / 部落红那层识别没被换掉，只是不再是贴在纯色页底上。 */
 .fac-alliance {
   margin-right: 12rpx;
-  background: var(--fac-alliance-bg);
+  background: var(--fac-alliance-bg), var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border-color: var(--fac-alliance-line);
 }
 
 .fac-horde {
-  background: var(--fac-horde-bg);
+  background: var(--fac-horde-bg), var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
   border-color: var(--fac-horde-line);
 }
 

@@ -912,11 +912,30 @@ async function main() {
   log('搜索框只拿面色玻璃（原生 input 拿不到虚化，不许冒充"已加玻璃"）',
     !!searchRule && !/backdrop-filter/.test(searchRule) && !/linear-gradient/.test(searchRule),
     searchRule.replace(/\s+/g, ' ').slice(0, 90));
-  /* alpha 有下限：m01 的切角探针靠"卡片色与 --bg 至少一个通道差 >6"认卡，
-     蓝色通道的差正好是 18×alpha，低于约 0.35 那条门禁会假红。 */
-  const glassAlpha = glassTok ? Number((glassTok.match(/,\s*([\d.]+)\s*\)/) || [0, 0])[1]) : 0;
-  log('玻璃面色 alpha 有下限（≥0.45，再低切角探针就认不出卡片了）',
-    glassAlpha >= 0.45 && glassAlpha < 1, String(glassAlpha));
+  /* 面色必须仍是半透明、且比页底亮一档：前者是"玻璃"的定义，后者是磨砂那层乳白感的来源。
+     （2026-10-24 换过判据：原来这条卡的是"alpha ≥0.45，否则 m01 切角探针按颜色认不出卡片"，
+     而那一版探针已经被"按颜色找"带偏过三次，现在改成量几何，不再依赖面色——
+     留着那条就是拿一个已经不存在的原因当门槛。） */
+  const glassA = glassTok ? Number((glassTok.match(/,\s*([\d.]+)\s*\)/) || [0, 0])[1]) : 0;
+  const glassRgb = glassTok ? (glassTok.match(/\d+/g) || []).slice(0, 3).map(Number) : [0, 0, 0];
+  log('玻璃面色是半透明、且比页底亮一档（全不透明就没有玻璃，同亮度就看不出磨砂）',
+    glassA > 0 && glassA < 1 && glassRgb[2] > 40, JSON.stringify({ rgb: glassRgb, a: glassA }));
+  /* 2026-10-24 站主三次指令：三页毛玻璃还不够。查下来根因不在配方，在"没有东西可透"——
+     那张页面底图是 widthFix 锚在顶部的，只有上面约 703rpx 有图，往下卡片背后就是纯色页底。
+     所以补了一层整页环境底图（同一张图 fixed + 自己先糊掉）。这一层缺了，配方再强也是空玻璃。 */
+  const ambientMiss = ['home', 'dungeons', 'classes'].filter((d) => {
+    const w = fs.readFileSync(path.join(REPO, 'for-mini/pages', d, 'index.wxml'), 'utf8');
+    return !/class="pagebg-ambient"/.test(w);
+  });
+  log('三页都铺了整页环境底图（没有可透的东西，毛玻璃就是空话）',
+    ambientMiss.length === 0 && /\.pagebg-ambient\s*\{[^}]*position:\s*fixed/.test(appWxss)
+      && /\.pagebg-ambient\s*\{[^}]*filter:\s*blur/.test(appWxss), ambientMiss.join(','));
+  /* 阵营框垫了玻璃，但联盟蓝 / 部落红必须还是最上面那一片（识别不能丢） */
+  const facCss = fs.readFileSync(path.join(REPO, 'for-mini/pages/classes/index.wxss'), 'utf8');
+  log('阵营框是"玻璃上染一层阵营色"（阵营色在最前，玻璃在后）',
+    /background:\s*var\(--fac-alliance-bg\),\s*var\(--glass-sheen\),\s*var\(--panel-glass\)/.test(facCss)
+      && /background:\s*var\(--fac-horde-bg\),\s*var\(--glass-sheen\),\s*var\(--panel-glass\)/.test(facCss),
+    '');
 
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length

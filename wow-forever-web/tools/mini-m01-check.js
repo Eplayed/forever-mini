@@ -479,49 +479,57 @@ async function main() {
      卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。
      判据按"位移 ÷ 卡宽"算，不按像素数算——截图缩放每次可能不一样（同一天拍出过 285 / 570 / 664 三种宽），
      写死像素数的门禁会假红。切角是 CSS 定值 10px、卡宽约 334px，比值恒定 0.015~0.021，直角版是 0。
-     只认"两边都留了边距"的行：整幅铺开的色带（页面背景、导航条那一横条）不是铭牌——
-     2026-10-22 给首页加了背景图之后，画面里正好有一条颜色落在 --panel 附近，把探针带偏过一次
-     （它量到 cut = -37，一个负数，说明"第一块宽的 panel 色"根本不是那张卡）。 */
+     2026-10-24 改成量几何，不再按颜色认卡片。这张卡是"按颜色找"第三次被带偏的地方：
+     第一次是背景图压暗后整屏接近 --panel（量到 cut=-37），第二次是卡片上玻璃面色，
+     第三次是玻璃顶部那条乳白反光——它把卡片上沿十几像素染亮，探针就从切角之前错位，比值 0.0149→0。
+     现在分工是：卡片在哪由 DOM 说（`.cd` 的 rect），角有没有被切由像素说。 */
   const PY_CORNER = [
     'import sys',
     'from PIL import Image',
-    'im = Image.open(sys.argv[1]).convert("RGB")',
-    'W, H = im.size',
-    'px = im.load()',
-    't = (int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))',
-    'def cl(c): return all(abs(a - b) <= 6 for a, b in zip(c, t))',
+    'import numpy as np',
+    'A = np.asarray(Image.open(sys.argv[1]).convert("RGB")).astype(float)',
+    'B = np.asarray(Image.open(sys.argv[2]).convert("RGB")).astype(float)',
+    'W = int(A.shape[1])',
+    'sc = W / float(sys.argv[3])',
+    '# 截图含状态栏与导航条，rect 的 y 是视口坐标：两帧只在底图那一段不一样，',
+    '# 第一处"整行都有差"的行就是视口第 0 行',
+    'd = np.abs(A - B).mean(axis=2)',
+    'wide = (d > 8).sum(axis=1)',
+    'off = next((y for y in range(60, 400) if wide[y] > W * 0.9), 0)',
+    'bg = np.array([int(x) for x in sys.argv[4:7]], float)',
+    'y0 = off + int(round(float(sys.argv[7]) * sc)) - 4',
+    'nb = (np.abs(B[:, :, :] - bg).max(axis=2) > 6)',
     'rows = {}',
-    'for y in range(H):',
-    '    xs = [x for x in range(W) if cl(px[x, y])]',
-    '    if len(xs) > 120 and min(xs) > 6 and max(xs) < W - 6: rows[y] = xs',
+    '# 只在 DOM 报的那一行往下 60 像素的窗口里找；每行取"不是页底色"的最长一段连续像素',
+    'for y in range(max(0, y0), min(B.shape[0], y0 + 60)):',
+    '    idx = np.flatnonzero(nb[y])',
+    '    if idx.size < 120: continue',
+    '    brk = np.flatnonzero(np.diff(idx) > 1)',
+    '    segs = np.split(idx, brk + 1)',
+    '    seg = max(segs, key=len)',
+    '    if len(seg) > 120 and seg[0] > 6 and seg[-1] < W - 6: rows[y] = (int(seg[0]), int(seg[-1]))',
     'ys = sorted(rows)',
     'if not ys: print("none 0 0 0"); raise SystemExit',
     'top = ys[0]',
     'base = top + 14',
-    'while base not in rows and base < H - 1: base += 1',
-    'print("%d %d %d %d" % (top, max(rows[base]) - max(rows[top]), max(rows[base]) - min(rows[base]), W))'
+    'while base not in rows and base < ys[-1]: base += 1',
+    'print("%d %d %d %d" % (top, rows[base][1] - rows[top][1], rows[base][1] - rows[base][0], W))'
   ].join('\n');
-  /* 2026-10-23：探针改在"关掉页面底图"的那一帧上量。
-     三页共用的那张官方天裔图压暗后，整屏背景的颜色正好落在 --panel (27,35,53) 附近
-     （实测 x=2 处是 27,36,45），按颜色找铭牌就再也分不出卡与底——
-     上一轮那条"只认两边留边距的行"的补丁当时就把 cut = -37 拦下过，这次是同一类干扰换了个来源。
-     铭牌的切角与背景图无关，所以在纯色底那一帧量，量的还是真像素。 */
-  /* 目标色不再抄死：2026-10-23 卡片改成玻璃底之后，铭牌的实际颜色是
-     `--panel-glass` 叠在 `--bg` 上的混合值（旧版写死 (27,35,53) 那版纯色，换令牌当场就假红）。
-     所以这里从 app.wxss 现读两个令牌、按 alpha 合成，Python 只负责比像素。 */
+  /* 页底色仍然从 app.wxss 现读，不写字面量（写死过一次，换令牌当场假红） */
   const appCss = fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8');
-  const gM = appCss.match(/--panel-glass:\s*rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)/);
   const bM = appCss.match(/--bg:\s*#([0-9a-fA-F]{6})/);
-  if (!gM || !bM) {
-    log('切角探针拿不到令牌（--panel-glass / --bg 至少要有一个），拒绝用旧的字面量继续量', false,
-      JSON.stringify({ glass: !!gM, bg: !!bM }));
+  if (!bM) {
+    log('切角探针拿不到 --bg 令牌，拒绝用旧的字面量继续量', false, 'app.wxss 里没有这个令牌');
   }
   const bgHex = bM ? parseInt(bM[1], 16) : 0;
-  const cardRgb = gM ? [
-    Math.round(Number(gM[1]) * Number(gM[4]) + ((bgHex >> 16) & 255) * (1 - Number(gM[4]))),
-    Math.round(Number(gM[2]) * Number(gM[4]) + ((bgHex >> 8) & 255) * (1 - Number(gM[4]))),
-    Math.round(Number(gM[3]) * Number(gM[4]) + (bgHex & 255) * (1 - Number(gM[4])))
-  ] : [0, 0, 0];
+  const bgRgb = [(bgHex >> 16) & 255, (bgHex >> 8) & 255, bgHex & 255];
+  /* 卡片位置与视口标定要在"底图还开着"的时候量（.pagebg 是 wx:if 出来的） */
+  const plate = await call('量卡片位置', () => mp.evaluate(() => new Promise((res) => {
+    const q = wx.createSelectorQuery();
+    q.select('.cd').boundingClientRect();
+    q.select('.pagebg').boundingClientRect();
+    q.exec((r) => res({ card: r[0], bg: r[1] }));
+  })), 2);
   await call('关掉底图再量切角', () => mp.evaluate(() => {
     getCurrentPages().pop().setData({ bgUrl: '' });
     return 1;
@@ -529,8 +537,11 @@ async function main() {
   await new Promise((r) => setTimeout(r, 2200));
   await shot('g1b-home-cards-flatbg');
   const corner = await call('量切角', () => new Promise((resolve) => {
-    cp.execFile('python3', ['-c', PY_CORNER, path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png')]
-      .concat(cardRgb.map(String)), { encoding: 'utf8' }, (err, out) => {
+    if (!plate || !plate.card || !plate.bg) { resolve(null); return; }
+    cp.execFile('python3', ['-c', PY_CORNER,
+      path.join(SHOT_DIR, 'g2-home-recent-rail.png'), path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png'),
+      String(plate.bg.width)].concat(bgRgb.map(String)).concat([String(plate.card.top)]),
+      { encoding: 'utf8' }, (err, out) => {
       const t = String(out || '').trim();
       if (err || !/\d+ \d+ \d+ \d+$/.test(t)) { resolve(null); return; }
       const [top, cut, width, w] = t.split(' ').map(Number);

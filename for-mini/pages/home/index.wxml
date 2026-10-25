@@ -1,6 +1,7 @@
 <view class="wrap">
   <!-- 页面背景：《无限》那张氛围底图（本站自生成，与网页首页 hero 同一张），压暗后文字才读得清。
        取不到图（断网、没发素材）就不渲染这一层，版式回落到 app.wxss 的纯色底。 -->
+  <image wx:if="{{bgUrl}}" class="pagebg-ambient" src="{{bgUrl}}" mode="aspectFill" />
   <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="widthFix" binderror="onArtError" data-k="bg" />
   <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
 
