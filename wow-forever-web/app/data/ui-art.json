@@ -26,6 +26,11 @@
     "path": "img/art/scenes/guangshu.webp",
     "kind": "scene",
     "what": "光树场景原画，给「指南」卡"
+   },
+   "bis": {
+    "path": "img/gen/banner-cloudsea.webp",
+    "kind": "generated-atmosphere",
+    "what": "云海与远处塔尖剪影（本站自生成），给首页「配装名单」入口卡"
    }
   }
  },

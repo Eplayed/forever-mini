@@ -84,7 +84,15 @@ const BUDGET_KB = {
   'loots/index': 192,
   'classes/index': 64,
   talentClass: 64,
-  guide: 32
+  guide: 32,
+  /* 配装线（2026-10-26）：索引 38 套约 5 KB；共享物品表 829 件（位置数组存）；
+     单套一片最大 16.6 KB（alts 那 175 个 ID 占大头）。 */
+  /* bisItems 是"进这一页要下一次"的共享表：830 件 × (名字/品质/装等/图标键/最多 4 条属性行)。
+     2026-10-26 实测 118 KB。哪天它顶破这条，说明属性行该拆成单独一片（按部位或按职业），
+     由构建来提醒，不等手机上出问题。 */
+  'bis/index': 24,
+  bisItems: 128,
+  bisSet: 28
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -101,7 +109,9 @@ const ICON_EXT = '.jpg';
 const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json', 'classes.json', 'talents.json', 'guide.json'];
 /* items.json + items-detail.json 只喂分发层（装备详情卡），不进导出产物：
    所以它们出现在基底名单里、却不在导出名单里，这是有意的一对多。 */
-const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json'];
+/* bis.json + professions.json 也只喂分发层（配装线在构建时把名字/装等/来源现算进产物），
+   不进 oss-preview 导出产物，理由同 items 那两条。 */
+const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -292,6 +302,40 @@ function itemCardRow(drop, itemIndex, detailIndex, miss) {
 /* 系底图：art.json 的 specs[{classId}-{系序号}]，与网页 lib/art.js 的 specArt() 同一条键规则。
    顺手登记进素材台账——不登记的话界面拼得出地址、bucket 上却没有这张（2026-10-22 那次
    "缺登记 0 条却线上 404" 就是这条链）。本地缺文件则记进 assetMissing，构建当场拦。 */
+/* —— 配装（BiS）线的列名与部位桥表 ——
+   参考站的部位键（head/neck…）与纸娃娃上的中文标签（项链/戒指…）不是一套词，
+   而且"主手"这一格在名单里可能对应 main-hand 或 two-hand 两节。
+   这两张表原来只写在网页 BisPage.vue 里；小程序要读同一份数据，就把桥随索引下发，
+   两端读同一处，不各抄一份（抄两份必然飘）。 */
+const BIS_ITEM_COLS = ['id', 'name', 'quality', 'ilvl', 'iconKey', 'st'];
+const BIS_SLOT_KEYS = { head: '头部', neck: '项链', shoulder: '肩部', back: '背部', chest: '胸部',
+  wrist: '手腕', hands: '手', waist: '腰部', legs: '腿部', feet: '脚', finger: '戒指',
+  trinket: '饰品', 'main-hand': '主手', 'off-hand': '副手', 'two-hand': '双手武器',
+  shield: '副手：盾牌', held: '副手：手持物品', ranged: '远程', relic: '圣物' };
+const BIS_SLOT_SIBS = { '主手': ['main-hand', 'two-hand'], '副手': ['off-hand', 'shield', 'held'] };
+const BIS_NOTE = 'bisItems 的列名：id、中文名、品质、装等、图标键（null＝本地没这张图，界面画自绘块）、属性行（只留数值行，最多 4 条；使用/装备：那类效果文案不在其中）。'
+  + '装备名/品质/装等/属性行全部回本站物品库现查，这份名单只存"哪件在哪个部位、按什么顺序"。';
+const BIS_DISCLAIMER = '这份名单由本站整理自第三方资料，不是官方结论，也没做模拟计算。';
+
+/* 「这套装备给的属性」这一排合计，规则全在网页那份 lib/item-stats.js 里
+   （基础护甲的三种写法、哪四类句子不许算——2026-10-19 逐档数过，还有单测盯着）。
+   小程序要是自己再抄一份解析器，两份规则迟早飘，同一套装备两端报两个数。
+   所以合计在构建时算好、随分片下发，客户端只负责显示。
+   这份文件没有 import，去掉 export 关键字就能在构建进程里求值；
+   哪天它引入了依赖，这里必须改成显式失败而不是凑合算。 */
+function loadStatParser() {
+  const f = path.join(WEB, 'app', 'src', 'lib', 'item-stats.js');
+  if (!fs.existsSync(f)) return { error: '找不到 app/src/lib/item-stats.js，属性合计没有依据' };
+  const src = fs.readFileSync(f, 'utf8');
+  if (/^\s*import\s/m.test(src)) return { error: 'item-stats.js 现在带 import，构建端这份求值器要一起改' };
+  try {
+    const mod = new Function(src.replace(/^export\s+/gm, '')
+      + '\nreturn { sumStatLines: sumStatLines };')();
+    if (typeof mod.sumStatLines !== 'function') return { error: 'item-stats.js 里没有 sumStatLines' };
+    return mod;
+  } catch (e) { return { error: '读 item-stats.js 失败：' + e.message }; }
+}
+
 function specArtFor(artIndex, classId, ti, useAsset) {
   const siteRel = ((artIndex || {}).specs || {})[classId + '-' + ti] || null;
   if (!siteRel) return null;
@@ -781,6 +825,211 @@ function buildBatch(env, opts) {
     });
   });
 
+  /* —— 配装（BiS）线（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面"）——
+     数据只有一件事是新的：哪件装备在哪个部位、按什么顺序、这一套还列了哪些附魔与消耗品。
+     名字 / 品质 / 装等 / 属性行 / 图标在构建时回本站 items.json 与 items-detail.json 现查，
+     烘成一张共享物品表（所有套引用的物品去重，一次下发），38 个分片里只放 ID——
+     同一件装备的数在两处各存一份必然会飘，这是本站一直守的那条。
+     "从哪儿拿"也在这里现算成中文串（副本名、专业名），客户端不用为显示一行来源再下三份表。
+     红线（根 AGENTS.md 2026-10-16 那条例外）：取的是"哪件在哪个部位"这一层，
+     成段说明、属性优先级、循环建议、任何"这件比那件好 N%"都没取；构建时再逐片扫一遍。 */
+  const bisSrc = path.join(siteData(), 'bis.json');
+  const statParser = loadStatParser();
+  if (statParser.error) errors.push('配装：' + statParser.error);
+  const profSrc = path.join(siteData(), 'professions.json');
+  let bisIndexObj = null;
+  let bisItemsObj = null;
+  let bisAltRows = 0;
+  if (fs.existsSync(bisSrc)) {
+    const bis = readJson(bisSrc);
+    const bsets = bis.sets || [];
+    if (!bsets.length) errors.push('配装：app/data/bis.json 里一套都没有，那这一页是空的');
+    const profNames = {};
+    if (fs.existsSync(profSrc)) {
+      (readJson(profSrc).professions || []).forEach((x) => { profNames[x.id] = x.nameCn || x.id; });
+    } else {
+      errors.push('配装：缺 app/data/professions.json，来源那一列的"专业名"没法还原（不许编一个）');
+    }
+    const dunNames = {};
+    list.forEach((d) => { dunNames[d.id] = d.nameCn; });
+    const bisIcon = (key, why) => {
+      if (!key) return null;
+      const rel = 'icons/' + key + ICON_EXT;
+      const st = statAsset(rel);
+      if (!st) { assetMissing.push({ ref: rel, reason: '图标文件不在 app/img/icons/', by: why }); return null; }
+      assetUse[rel] = st;
+      return key;
+    };
+    const itemMiss = { noBase: 0 };
+    const rows = {};
+    const needItem = (id, why) => {
+      const k = String(id);
+      if (rows[k]) return rows[k];
+      const base = itemsIndex[k];
+      const det = itemDetailIndex[k] || {};
+      /* 属性行只留"数值行"：使用/装备：/套装那几句是效果文案，既不进合计也不进这一页的简版显示，
+         留着会让这张共享表从 ~95 KB 涨到 150 KB，而它是每个玩家进这一页都要下一次的。 */
+      const stKeep = (det.st || []).filter((x) => x && String(x).indexOf('使用') < 0
+        && String(x).indexOf('装备：') < 0).slice(0, 4);
+      if (!base) {
+        itemMiss.noBase += 1;
+        rows[k] = [Number(id) || id, null, 0, null, null, []];
+        return rows[k];
+      }
+      rows[k] = [base.id, base.name || null, base.quality == null ? 0 : base.quality,
+        base.ilvl == null ? null : base.ilvl, bisIcon(base.iconKey, why), stKeep];
+      return rows[k];
+    };
+    /* 来源串：与网页 BisPage.vue 的 srcOf 同一条式子，两边各写一份迟早会飘，
+       所以这里算成最终字符串，网页那边将来也可以改成读这一份。 */
+    const srcStr = (r) => {
+      if (!r) return null;
+      const out = [];
+      (r.refs || []).forEach((x) => {
+        if (x.kind === 'recipe') out.push(profNames[x.prof] || x.prof);
+        else if (x.kind === 'dungeon') out.push('副本：' + (dunNames[x.id] || x.id));
+        else if (x.kind === 'quest') out.push('任务奖励');
+        else if (x.kind === 'vendor') out.push('商人出售');
+        else if (x.kind === 'item') out.push('需要：' + ((itemsIndex[String(x.id)] || {}).name || ('#' + x.id)));
+        else out.push('未说明（' + x.kind + '）');
+      });
+      if (r.skill != null && out.length) out[0] = out[0] + '（技能 ' + r.skill + '）';
+      const seen = {};
+      return out.filter((x) => { if (seen[x]) return false; seen[x] = 1; return true; }).join('，') || null;
+    };
+    const setOuts = [];
+    bsets.forEach((st) => {
+      const one = { alliance: {}, horde: {} };
+      const src = { alliance: {}, horde: {} };
+      const altOut = { alliance: [], horde: [] };
+      const refs = st.refs || {};
+      ['alliance', 'horde'].forEach((f) => {
+        one[f] = {
+          doll: ((st.doll || {})[f] || []).map((c) => { needItem(c.item, 'bis/set/' + st.id); return [c.slot, c.cell || 1, c.item]; }),
+          alts: (function (m) {
+            /* 备选表里的每个 ID 都必须进共享物品表——漏一个，玩家点开那个部位就是一格空白 */
+            const out = {};
+            Object.keys(m || {}).forEach((k) => {
+              out[k] = (m[k] || []).map((x) => { needItem(x, 'bis/set/' + st.id + ' 备选'); return x; });
+            });
+            return out;
+          })((st.alts || {})[f]),
+          enchants: ((st.enchants || {})[f] || []).map((e) => { needItem(e.item, 'bis/set/' + st.id); return [e.item, (e.slots || []).join('、'), e.skill == null ? null : e.skill]; }),
+          consumables: ((st.consumables || {})[f] || []).map((x) => { needItem(x, 'bis/set/' + st.id); return x; })
+        };
+        const rf = refs[f] || {};
+        Object.keys(rf).forEach((k) => { needItem(k, 'bis/set/' + st.id); const v = srcStr(rf[k]); if (v) src[f][k] = v; });
+        altOut[f] = (((st.alt || {})[f]) || []).map((a) => {
+          if (a.item != null) needItem(a.item, 'bis/set/' + st.id);
+          (a.top || []).forEach((x) => needItem(x, 'bis/set/' + st.id));
+          bisAltRows += 1;
+          return [a.slot, a.cell || 1, a.item == null ? null : a.item, a.same ? 'same' : 'diff', a.top || []];
+        });
+      });
+      /* 属性合计：只加这一套 doll 里那些件的属性行（与网页同一份规则、同一次实现） */
+      const sum = {};
+      ['alliance', 'horde'].forEach((f) => {
+        sum[f] = statParser.sumStatLines(one[f].doll.map((r) => ((itemDetailIndex[String(r[2])] || {}).st) || []));
+      });
+      const obj = {
+        schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-set', setId: st.id,
+        cls: st.cls, clsCn: st.clsCn, mode: st.mode, spec: st.spec || null, level: st.level,
+        fetched: st.fetched, url: st.url,
+        cols: { doll: ['slot', 'cell', 'item'], enchants: ['item', 'slots', 'skill'],
+          alt: ['slot', 'cell', 'item', 'state', 'top'] },
+        note: 'alts 的键是参考站那套部位键（head/neck…），与纸娃娃上的中文标签靠索引里的 slotKeys 对；'
+          + 'alt 是第二家名单逐格并列的结果：两家只是并列摆出来，本站不做裁决，页面用的那件与顺序仍以主源为准。',
+        byFac: one, src, alt: altOut, sum,
+        /* 中间那一栏的底：职业原画（与网页配装页同一张，走素材层，不热链） */
+        art: ((artIndex.classes || {})[st.cls]
+          ? useAsset(artIndex.classes[st.cls], 'bis/set/' + st.id + ' 职业原画') : null),
+        sumNote: '只把上面这些装备的属性行相加：不含职业与种族的基础值，也不含附魔和套装效果。'
+      };
+      setOuts.push(obj);
+      pushObj('bisSet:' + st.id, 'bis/set/' + st.id + '.json', obj, {
+        records: obj.byFac.alliance.doll.length, budget: 'bisSet',
+        facts: { min: st.fetched || null, max: st.fetched || null, distinct: st.fetched ? 1 : 0, recordsWithoutDate: st.fetched ? 0 : 1 }
+      });
+    });
+    const itemRows = Object.keys(rows).sort((a, b) => Number(a) - Number(b)).map((k) => rows[k]);
+    bisItemsObj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-items',
+      source: 'wow-forever-web/app/data/items.json + items-detail.json（本站物品库）',
+      cols: BIS_ITEM_COLS, colNote: BIS_NOTE, count: itemRows.length, items: itemRows
+    };
+    pushObj('bisItems', 'bis/items.json', bisItemsObj, {
+      records: itemRows.length, budget: 'bisItems',
+      facts: { min: (bis.meta || {}).scrapedAt || null, max: (bis.meta || {}).scrapedAt || null, distinct: 1, recordsWithoutDate: 0 }
+    });
+    const classes = [];
+    setOuts.forEach((s) => {
+      let c = classes.filter((x) => x.cls === s.cls)[0];
+      /* 职业图标键随索引下发（9 个字符串，200 字节）：
+         不然客户端为了画那一排图标还得先下 64 KB 的职业索引，不值 */
+      if (!c) {
+        const row = (classPack.classes || []).filter((x) => (x.classId || x.id) === s.cls)[0] || {};
+        if (row.iconKey) useIcon(row.iconKey, 'bis/index 职业条');
+        c = { cls: s.cls, clsCn: s.clsCn, iconKey: row.iconKey || null, sets: [] };
+        classes.push(c);
+      }
+      c.sets.push(s.setId);
+    });
+    bisIndexObj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-index',
+      source: 'wow-forever-web/app/data/bis.json',
+      meta: {
+        title: (bis.meta || {}).title, level: (bis.meta || {}).level,
+        source: (bis.meta || {}).source, scrapedAt: (bis.meta || {}).scrapedAt,
+        levelGrading: (bis.meta || {}).level_grading, gradingNote: (bis.meta || {}).gradingNote,
+        basis: (bis.meta || {}).basis, counts: (bis.meta || {}).counts,
+        alt: { source: ((bis.meta || {}).alt || {}).source, fetched: ((bis.meta || {}).alt || {}).fetched,
+          declaredOrigin: ((bis.meta || {}).alt || {}).declaredOrigin },
+        /* 红线要求的那一句原样下发，界面固定显示；措辞由分发层管，页面不许各自改写 */
+        disclaimer: BIS_DISCLAIMER
+      },
+      slotCn: (bis.meta || {}).slotCn || {},
+      slotKeys: BIS_SLOT_KEYS, slotSiblings: BIS_SLOT_SIBS,
+      classes,
+      sets: setOuts.map((s) => ({
+        id: s.setId, cls: s.cls, clsCn: s.clsCn, mode: s.mode, level: s.level,
+        fetched: s.fetched, url: s.url, path: 'bis/set/' + s.setId + '.json'
+      }))
+    };
+    pushObj('bisIndex', 'bis/index.json', bisIndexObj, {
+      records: setOuts.length, budget: 'bis/index',
+      facts: { min: (bis.meta || {}).scrapedAt, max: (bis.meta || {}).scrapedAt,
+        distinct: 1, recordsWithoutDate: (bis.meta || {}).scrapedAt ? 0 : setOuts.length }
+    });
+    /* 配装线的红线扫描：这些产物是给玩家看的，出现几率、秒伤、"更好 N%"这类话就是撞线。
+       名字里带百分号的游戏物品不在其列，所以只扫"数字 + %"与那几个词。 */
+    /* 扫的是本站自己写的字：说明句、来源串、部位名、模式名。
+       bis/items.json 那一层是游戏物品的属性行原文（套装效果里就有"5% 几率"这种话），
+       拿这条去扫它等于把游戏原文当违规——掉落线那次已经犯过一回，别再犯。 */
+    entries.forEach((e) => {
+      if (!e.obj || (e.key !== 'bisIndex' && String(e.key).indexOf('bisSet:') !== 0)) return;
+      const t = JSON.stringify(e.obj);
+      if (/\d+(\.\d+)?\s*%/.test(t)) errors.push('配装：' + e.path + ' 出现百分比（红线：掉落/推荐不写几率）');
+      if (/秒伤|DPS|权重|更好|优于/.test(t)) errors.push('配装：' + e.path + ' 出现强度评价类词（红线：本站不自建强度评分、不做循环提示）');
+    });
+    /* 悬空引用：分片里每个 ID 都必须在共享物品表里有行，否则玩家点开的是一格空白 */
+    entries.forEach((e) => {
+      if (!e.obj || e.obj.kind !== 'bis-set') return;
+      const ids = [];
+      ['alliance', 'horde'].forEach((f) => {
+        const b = e.obj.byFac[f];
+        (b.doll || []).forEach((r) => ids.push(r[2]));
+        (b.enchants || []).forEach((r) => ids.push(r[0]));
+        (b.consumables || []).forEach((x) => ids.push(x));
+        Object.keys(b.alts || {}).forEach((k) => (b.alts[k] || []).forEach((x) => ids.push(x)));
+        (e.obj.alt[f] || []).forEach((r) => { if (r[2] != null) ids.push(r[2]); (r[4] || []).forEach((x) => ids.push(x)); });
+      });
+      const lost = ids.filter((x) => !rows[String(x)]);
+      if (lost.length) errors.push('配装：' + e.path + ' 有 ' + lost.length + ' 个物品 ID 在共享物品表里没有行（本站名录缺件）：' + lost.slice(0, 3).join(','));
+    });
+  } else {
+    errors.push('缺少配装基底 app/data/bis.json，配装线没有数据来源');
+  }
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
@@ -818,6 +1067,16 @@ function buildBatch(env, opts) {
     const tm = md5Of(tBuf);
     it.shardEtag = tm.etag; it.shardMd5 = tm.md5; it.shardBytes = tBuf.length;
   });
+  /* 配装：每套的校验值随索引下发，客户端点开哪套取哪片——与副本详情/掉落同一套契约 */
+  if (bisIndexObj) {
+    bisIndexObj.sets.forEach((it) => {
+      const e = byKey['bisSet:' + it.id];
+      if (!e) { errors.push('配装索引里 ' + it.id + ' 没有对应的分片'); return; }
+      const sBuf = dump(e.obj);
+      const sm = md5Of(sBuf);
+      it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
+    });
+  }
 
   /* 素材层的反向卡口：凡是界面会拼出来的地址（iconKey / art / portrait），
      这一批必须登记过。漏登记不会让谁报错，只会让玩家永远看到自绘占位块——
@@ -904,7 +1163,7 @@ function buildBatch(env, opts) {
   const shared = (e) => ({ path: 'builds/' + buildId + '/' + e.path, sha256: e.sha256, etag: e.etag, md5: e.md5, bytes: e.bytes, records: e.records });
   const mins = [];
   const maxs = [];
-  entries.forEach((e) => { if (e.facts.min) mins.push(e.facts.min); if (e.facts.max) maxs.push(e.facts.max); });
+  entries.forEach((e) => { const f = e.facts || {}; if (f.min) mins.push(f.min); if (f.max) maxs.push(f.max); });
   mins.sort();
   maxs.sort();
   const detailFacts = collectFactDates(list);
@@ -938,6 +1197,11 @@ function buildBatch(env, opts) {
       /* 掉落行里带上了装备详情卡的条数（构建时逐行数出来的，不是抄 lootRows） */
       itemCards: cardRows,
       itemCardNoDetail: itemCardMiss.noDetail,
+      /* 配装线：套数 / 共享表件数 / 第二家逐格并列的行数（都是构建时数出来的，不是抄 meta.counts） */
+      bisSets: bisIndexObj ? bisIndexObj.sets.length : 0,
+      bisItems: bisItemsObj ? bisItemsObj.count : 0,
+      bisAltRows,
+      bisItemNoBase: (typeof itemMiss !== 'undefined' && itemMiss) ? itemMiss.noBase : 0,
       races: classIndexObj.counts.races,
       classes: classIndexObj.counts.classes,
       macros: (guidePack.macros || []).length,
@@ -988,7 +1252,9 @@ function buildBatch(env, opts) {
       spellClasses: shared(pickFile('spellClasses')),
       lootIndex: shared(pickFile('lootIndex')),
       classIndex: shared(pickFile('classIndex')),
-      guide: shared(pickFile('guide'))
+      guide: shared(pickFile('guide')),
+      bisIndex: bisIndexObj ? shared(pickFile('bisIndex')) : undefined,
+      bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
@@ -1716,6 +1982,10 @@ module.exports = {
   BUDGET_KB,
   EXPORT_RELS,
   BASE_INPUTS,
+  BIS_ITEM_COLS,
+  BIS_SLOT_KEYS,
+  BIS_SLOT_SIBS,
+  BIS_DISCLAIMER,
   raceEntry,
   itemCardRow,
   itemStKey,

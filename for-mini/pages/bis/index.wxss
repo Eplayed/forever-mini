@@ -1,0 +1,424 @@
+/* 配装页。颜色一律吃 app.wxss 的令牌，这里不写裸色值（与首页/副本页同一条规矩）。
+   品质色与「两家」角标都回令牌：q-1…q-5 用 --q1…--q5，一致绿 / 分歧琥珀 / 没列灰。 */
+
+.h1 {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+  letter-spacing: 1rpx;
+}
+
+.note {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  line-height: 1.6;
+  margin-top: 10rpx;
+}
+
+.note2 {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  line-height: 1.6;
+  margin-top: 10rpx;
+}
+
+.src {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12rpx;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.src-op {
+  color: var(--gold);
+  border: 1rpx solid var(--gold-line);
+  border-radius: 8rpx;
+  padding: 0 12rpx;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+/* —— 职业条 —— */
+.rail {
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.rtab {
+  display: inline-block;
+  width: 132rpx;
+  margin-right: 12rpx;
+  padding: 14rpx 6rpx 12rpx;
+  text-align: center;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
+  white-space: normal;
+  vertical-align: top;
+}
+
+.rtab-on,
+.rtab.on {
+  border-color: var(--gold);
+  background: var(--panel);
+}
+
+.rtab-n {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  margin-top: 6rpx;
+}
+
+.rtab-c {
+  font-size: 18rpx;
+  color: var(--txt-muted);
+}
+
+.bhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 12rpx;
+}
+
+.bt {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.bn {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+}
+
+.picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx 24rpx;
+  align-items: center;
+  margin: 12rpx 0 18rpx;
+}
+
+.pickrow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pickrow .chip {
+  margin-bottom: 6rpx;
+}
+
+/* —— 中间那一栏：默认职业原画，点开是本站拼的占位人台 —— */
+.stage {
+  position: relative;
+  height: 420rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: 6rpx;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.stage-art {
+  width: 100%;
+  height: 100%;
+}
+
+.stage-tag {
+  position: absolute;
+  left: 12rpx;
+  bottom: 10rpx;
+  font-size: 20rpx;
+  color: var(--txt-dim);
+  background: var(--scrim-pop);
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+}
+
+.stage-btn {
+  position: absolute;
+  right: 12rpx;
+  top: 12rpx;
+  min-height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 20rpx;
+  font-size: 22rpx;
+  color: var(--gold-hi);
+  background: var(--scrim-pop);
+  border: 1rpx solid var(--gold-line);
+  border-radius: 999rpx;
+}
+
+.doll {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--sunk);
+}
+
+.db {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18rpx;
+  color: var(--txt-title);
+  background: var(--q0);
+  border: 1rpx solid var(--line-2);
+  border-radius: 4rpx;
+}
+
+.db-round {
+  border-radius: 50%;
+}
+
+.db-q1 { background: var(--q1); color: var(--sunk); }
+.db-q2 { background: var(--q2); color: var(--sunk); }
+.db-q3 { background: var(--q3); }
+.db-q4 { background: var(--q4); }
+.db-q5 { background: var(--q5); }
+
+.doll-note {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: var(--txt-dim);
+  background: var(--sunk);
+  border: 1rpx solid var(--line);
+  border-radius: 4rpx;
+  padding: 10rpx 12rpx;
+}
+
+/* —— 属性合计 —— */
+.sum {
+  margin-top: 18rpx;
+  border-top: 1rpx solid var(--line-2);
+  padding-top: 14rpx;
+}
+
+.sum-h {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rpx 16rpx;
+  align-items: baseline;
+  margin-bottom: 10rpx;
+  font-size: 22rpx;
+}
+
+.sum-h .b {
+  font-size: 24rpx;
+  color: var(--txt-title);
+  font-weight: 600;
+}
+
+.sum-i {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx 26rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+.sum-v {
+  color: var(--ok);
+  font-size: 26rpx;
+  font-weight: 600;
+  margin-right: 6rpx;
+}
+
+/* —— 部位一览 —— */
+.srow {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.srow:first-of-type {
+  border-top: 0;
+}
+
+.s-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+}
+
+.s-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.s-slot {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  border: 1rpx solid var(--line-2);
+  border-radius: 8rpx;
+  padding: 0 10rpx;
+  margin-right: 12rpx;
+}
+
+.s-name {
+  font-size: 26rpx;
+  color: var(--txt);
+}
+
+.s-unknown {
+  font-size: 22rpx;
+  color: var(--txt-muted);
+}
+
+.q-1 { color: var(--q1); }
+.q-2 { color: var(--q2); }
+.q-3 { color: var(--q3); }
+.q-4 { color: var(--q4); }
+.q-5 { color: var(--q5); }
+.q-0 { color: var(--q0); }
+
+.s-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rpx 18rpx;
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  margin-top: 6rpx;
+}
+
+.s-src {
+  font-size: 20rpx;
+  color: var(--txt-hint);
+  margin-top: 6rpx;
+  line-height: 1.5;
+}
+
+.s-go {
+  font-size: 30rpx;
+  color: var(--txt-muted);
+  margin-left: 10rpx;
+  align-self: center;
+}
+
+/* 两家角标：分歧不是错误，不许用红 */
+.cmp {
+  font-size: 18rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: 8rpx;
+  padding: 0 8rpx;
+  color: var(--txt-muted);
+}
+
+.cmp-same {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.cmp-diff {
+  color: var(--txt-caution);
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.sub-t {
+  font-size: 22rpx;
+  color: var(--gold);
+  margin: 16rpx 0 6rpx;
+}
+
+.erow {
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.e-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 14rpx;
+}
+
+/* —— 备选弹层 —— */
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--scrim-pop);
+  z-index: 20;
+}
+
+.pop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 21;
+  max-height: 70vh;
+  background: var(--panel);
+  border-top: 1rpx solid var(--gold-line);
+  border-radius: 16rpx 16rpx 0 0;
+  padding: 20rpx 24rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.pop-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.pop-t {
+  font-size: 26rpx;
+  color: var(--txt-title);
+  font-weight: 600;
+}
+
+.pop-c {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  margin-top: 4rpx;
+}
+
+.pop-x {
+  font-size: 40rpx;
+  line-height: 1;
+  color: var(--txt-muted);
+  padding: 0 16rpx;
+}
+
+.pop-theirs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10rpx;
+  font-size: 22rpx;
+  margin: 12rpx 0;
+  padding: 10rpx 12rpx;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: 6rpx;
+}
+
+.pop-list {
+  max-height: 46vh;
+}
+
+.prow {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.p-st {
+  font-size: 20rpx;
+  color: var(--txt-dim);
+  line-height: 1.5;
+}

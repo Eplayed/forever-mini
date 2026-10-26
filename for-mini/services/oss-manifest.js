@@ -343,6 +343,23 @@ const SHARD_SPECS = {
     kind: 'guide',
     shape: (d) => Array.isArray(d.macros) && Array.isArray(d.addons)
   },
+  /* 配装索引：套数与 classes 里各套数加起来必须等于 sets；口径那一句必须在
+     （它是红线要求界面固定显示的，谁把它从索引里漏掉，页面就只能自己编一句） */
+  bisIndex: {
+    name: 'bis-index',
+    kind: 'bis-index',
+    shape: (d) => Array.isArray(d.sets) && Array.isArray(d.classes) && !!d.meta
+      && !!d.meta.disclaimer && d.meta.disclaimer.indexOf('不是官方结论') >= 0
+      && d.classes.reduce((n, c) => n + (c.sets || []).length, 0) === d.sets.length
+      && !!d.slotKeys
+  },
+  /* 共享物品表：列名 6 列、count 与行数一致（位置数组，列名漂了界面就会把装等当品质） */
+  bisItems: {
+    name: 'bis-items',
+    kind: 'bis-items',
+    shape: (d) => Array.isArray(d.items) && Array.isArray(d.cols) && d.cols.length === 6
+      && d.count === d.items.length
+  },
   lootIndex: {
     name: 'loot-index',
     kind: 'loot-index',
@@ -458,6 +475,37 @@ function loadDungeonLoot(item, batch, fallback) {
   return loadByRef(item, 'loot', batch, fallback)
 }
 
+/* 配装：38 套各一片，点开哪套取哪片；共享物品表随索引一次下发（进这一页才要）。
+   与副本分片同一套规矩——路径由 setId 现推并与索引条目的 path 比对，
+   校验值取条目自带的 shardEtag/shardMd5/shardBytes，条目被改成 ../ 也走不出本批目录。 */
+function bisSetRef(item) {
+  const id = String((item && item.id) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('配装套编号不能当文件名：' + id) }
+  const rel = 'bis/set/' + id + '.json'
+  if (String(item.path) !== rel) {
+    return { error: new Error('配装 ' + id + ' 的分片路径不是由编号推出来的：' + item.path) }
+  }
+  return {
+    rel,
+    cacheKind: 'bis-set:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'bis-set',
+      kind: 'bis-set',
+      id,
+      readId: (d) => d.setId,
+      /* 两个阵营都得有 doll，且每行是 [部位, 序号, 物品 ID] 三格 */
+      shape: (d) => !!d.byFac && !!d.byFac.alliance && !!d.byFac.horde
+        && Array.isArray(d.byFac.alliance.doll) && Array.isArray(d.byFac.horde.doll)
+        && d.byFac.alliance.doll.every((r) => r.length === 3)
+    }
+  }
+}
+
+function loadBisSet(item, batch, fallback) {
+  return loadRef(bisSetRef(item), batch, fallback)
+}
+
 /* 职业法术片：和副本分片同一套规矩——路径由 classId 现推，与名单条目里的 shardPath 比对，
    校验值取条目自带的 shardEtag/shardMd5/shardBytes。条目被改成 ../ 也走不出本批目录。 */
 function spellClassRef(item) {
@@ -541,6 +589,8 @@ module.exports = {
   batchPath,
   cacheKey,
   loadBundle,
+  bisSetRef,
+  loadBisSet,
   loadDungeonDetail,
   loadDungeonLoot,
   loadKey,

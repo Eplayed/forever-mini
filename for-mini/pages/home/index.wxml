@@ -38,9 +38,23 @@
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
   </view>
 
-  <!-- 2）四个入口：副本 / 职业 / 掉落查询 / 指南。
+  <!-- 2）配装名单：站主 2026-10-26 定它是核心功能，"必须醒目"——
+       所以不塞进下面那排两列小卡，单独占一条整宽、带图带一句话，紧跟在倒计时下面。
+       底图清单在 app/data/ui-art.json 的 home.cards.bis，图取不到时回落面色玻璃。 -->
+  <view class="bis-card plate" bindtap="goBis">
+    <image wx:if="{{cardBg.bis}}" class="entry-art" src="{{cardBg.bis}}" mode="aspectFill"
+           binderror="onArtError" data-k="bis" />
+    <view class="entry-scrim"></view>
+    <view class="bis-row">
+      <view class="bis-name">配装名单</view>
+      <view class="bis-go">›</view>
+    </view>
+    <view class="bis-desc">30 级这一档，按职业和阵营列：这一身穿什么、这个部位还能换什么。</view>
+  </view>
+
+  <!-- 3）四个入口：副本 / 职业 / 掉落查询 / 指南。
        2026-10-22 站主指令：撤掉中英速查卡；「查」「去查」这类字眼不要了——整张卡就是入口，点它就行。
-       每张卡配一张底图（清单在 src/data/ui-art.json），图取不到时回落纯色版式。 -->
+       每张卡配一张底图（清单在 app/data/ui-art.json），图取不到时回落纯色版式。 -->
   <view class="grid">
     <view class="entry plate" bindtap="goDungeons">
       <image wx:if="{{cardBg.dungeons}}" class="entry-art" src="{{cardBg.dungeons}}" mode="aspectFill"

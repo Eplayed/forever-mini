@@ -67,6 +67,10 @@ function freshFixture(label) {
   /* 素材层从 <仓库>/app/img 读图。夹具不链这一个目录的话，用夹具里的工具构建
      会得到"1117 张全缺"，反例就会因为错误的原因变红——链上它才是同一份素材。 */
   fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'app', 'img'), path.join(web, 'app', 'img'));
+  /* 构建期依赖：配装的属性行解析器读 app/src/lib/item-stats.js（与网页同一份规则）。
+     夹具里少这一层，反例会以"sumStatLines is not a function"的形式红，看不出真正的原因。 */
+  fs.mkdirSync(path.join(web, 'app', 'src'), { recursive: true });
+  fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'app', 'src', 'lib'), path.join(web, 'app', 'src', 'lib'));
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
     fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'app', 'data', f));
@@ -273,13 +277,17 @@ const oss = require(MINI_SERVICE);
   })(uiArtPack);
   const uiMissing = uiRels.filter((r) => !fs.existsSync(path.join(REPO, 'wow-forever-web', 'app', 'img', r)));
   ok('界面底图清单逐张都在 app/img（' + uiPaths.length + ' 张），导出层一条没漏',
-    uiPaths.length === 5 && uiRels.length === uiPaths.length && uiMissing.length === 0,
+    uiRels.length === uiPaths.length && uiMissing.length === 0 && uiPaths.length > 0,
     JSON.stringify({ listed: uiRels.length, missing: uiMissing }));
   /* 条数按批次构成现算，不抄字面量：加一类分片（M02 的职业片）就把这里改成一个新数字，
      等于把"会变的数"抄进不会变的地方——下次再加一类就又是一条假红。 */
-  /* 7 个入口（meta/glossary/副本索引/职业名单/掉落表/职业索引/指南）+ 副本×2 + 法术片 + 天赋片 */
-  const expectFiles = 7 + idx.items.length * 2 + man.counts.spellClasses + man.counts.classes;
-  ok('bundle 收了每个数据文件一条（7 入口 + 副本 ' + idx.items.length + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes + '）',
+  /* 条数全部现算：入口数读指针的 fetch，分片数读各自的 counts。
+     （以前这里写死"7 入口"，加一类分片就假红一次——同一个毛病别再犯） */
+  const expectFiles = Object.keys(man.fetch).length + idx.items.length * 2
+    + man.counts.spellClasses + man.counts.classes + (man.counts.bisSets || 0);
+  ok('bundle 收了每个数据文件一条（' + Object.keys(man.fetch).length + ' 入口 + 副本 ' + idx.items.length
+    + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes
+    + ' + 配装片 ' + (man.counts.bisSets || 0) + '）',
     Object.keys(bundle.files).length === expectFiles,
     Object.keys(bundle.files).length + ' ≠ ' + expectFiles);
   const ptrPath = path.join(good.envDir, 'oss-build', 'beta', 'manifest.json');
@@ -371,6 +379,8 @@ const oss = require(MINI_SERVICE);
     { name: '副本 id 带不能当文件名的字符', patch: (j) => { j.classicDungeons[0].id = '怒焰 裂谷'; }, expect: '含不能作为文件名的字符' },
     { name: '中英文名都为空', patch: (j) => { j.raids[0].nameCn = null; j.raids[0].nameEn = null; }, expect: '中英文名都为空' },
     { name: '站内路径漏进批次（首领备注里写 img/）', patch: (j) => { j.classicDungeons[0].bosses[0].note = 'img/art/bosses/x.webp'; }, expect: '站内相对路径' },
+    { name: '配装名单里混进强度评价词（红线：本站不自建强度评分）', bis: true,
+      patch: (j) => { j.sets[0].mode = 'PvE 秒伤第一'; }, expect: '强度评价类词' },
     { name: '单文件超体积预算（掉落塞到 70 KB）', patch: (j) => {
         const big = [];
         for (let i = 0; i < 900; i += 1) big.push({ itemId: String(100000 + i), nameCn: '凑长度的物品名凑长度的物品名', iconKey: 'inv_x', quality: 4, bossId: 'b', bossCn: '首领', level: 'L2' });
@@ -380,7 +390,7 @@ const oss = require(MINI_SERVICE);
   for (const t of negatives) {
     await step('反例：' + t.name, () => {
       const dir = freshFixture('neg');
-      patchSource(dir, 'dungeons.json', t.patch, !!t.byExporter);
+      patchSource(dir, t.bis ? 'bis.json' : 'dungeons.json', t.patch, !!t.byExporter);
       const r = runBuild(dir);
       return r.rc !== 0 && r.out.indexOf(t.expect) >= 0 && (t.byExporter || r.out.indexOf('不配套') < 0);
     }, () => 'rc 与输出不符');
@@ -634,6 +644,72 @@ const oss = require(MINI_SERVICE);
       && /免费/.test(String(guideShard.meta && guideShard.meta.boundaries)), JSON.stringify(Object.keys(guideShard)));
   ok('指针里 classIndex 与 guide 是第六、七个入口',
     !!man.fetch.classIndex && !!man.fetch.guide && man.fetch.classIndex.bytes > 0 && man.fetch.guide.bytes > 0);
+
+  /* ================= 3·9. 配装（BiS）线 ================= */
+  process.stdout.write('\n配装线：索引 + 共享物品表 + 38 片必须自洽，红线词一个不许有\n');
+  const biIdx = JSON.parse(fs.readFileSync(path.join(batchDir, 'bis', 'index.json'), 'utf8'));
+  ok('索引：38 套、9 个职业，classes 里各套数加起来等于 sets 条数',
+    biIdx.sets.length === 38 && biIdx.classes.length === 9
+      && biIdx.classes.reduce((n, c) => n + c.sets.length, 0) === biIdx.sets.length,
+    JSON.stringify({ sets: biIdx.sets.length, cls: biIdx.classes.length }));
+  ok('索引：口径那一句随数据下发（界面不许自己改写），来源与核对日都在',
+    /不是官方结论/.test(String(biIdx.meta.disclaimer || ''))
+      && /^https:\/\//.test(String(biIdx.meta.source || ''))
+      && /^\d{4}-\d{2}-\d{2}$/.test(String(biIdx.meta.scrapedAt || '')), String(biIdx.meta.disclaimer).slice(0, 24));
+  ok('索引：每套的路径由编号推出来、三种校验值齐、文件真在批次里',
+    biIdx.sets.every((x) => x.path === 'bis/set/' + x.id + '.json'
+      && /^[0-9A-F]{32}$/.test(String(x.shardEtag)) && /^[A-Za-z0-9+/]{22}==$/.test(String(x.shardMd5))
+      && x.shardBytes > 0 && fs.existsSync(path.join(batchDir, x.path))));
+  const biShards = biIdx.sets.map((x) => {
+    const buf = fs.readFileSync(path.join(batchDir, x.path));
+    return { x, buf, obj: JSON.parse(buf.toString('utf8')) };
+  });
+  ok('校验值对得上真实字节（索引说要多少字节就是多少）',
+    biShards.every((x) => x.buf.length === x.x.shardBytes && md5u(x.buf) === x.x.shardEtag));
+  ok('每片都带批次身份五项，且阵营两套结构都在',
+    biShards.every((x) => x.obj.buildId === man.buildId && x.obj.product === 'wow-forever-mini'
+      && x.obj.schemaVersion === 1 && x.obj.kind === 'bis-set' && x.obj.setId === x.x.id
+      && Array.isArray(x.obj.byFac.alliance.doll) && Array.isArray(x.obj.byFac.horde.doll)));
+  const biItems = JSON.parse(fs.readFileSync(path.join(batchDir, 'bis', 'items.json'), 'utf8'));
+  ok('共享物品表：列名 6 列、count 与行数一致、每行都是 6 格',
+    biItems.cols.length === 6 && biItems.count === biItems.items.length
+      && biItems.items.every((r) => r.length === 6), JSON.stringify({ cols: biItems.cols.length, n: biItems.count }));
+  const biIds = {};
+  biItems.items.forEach((r) => { biIds[String(r[0])] = r; });
+  ok('每套引用的每个物品 ID 在共享表里都有行（点了不给空白格）',
+    biShards.every((x) => {
+      const ids = [];
+      ['alliance', 'horde'].forEach((f) => {
+        const b = x.obj.byFac[f];
+        (b.doll || []).forEach((r) => ids.push(r[2]));
+        (b.enchants || []).forEach((r) => ids.push(r[0]));
+        (b.consumables || []).forEach((v) => ids.push(v));
+        Object.keys(b.alts || {}).forEach((k) => (b.alts[k] || []).forEach((v) => ids.push(v)));
+        (x.obj.alt[f] || []).forEach((r) => { if (r[2] != null) ids.push(r[2]); (r[4] || []).forEach((v) => ids.push(v)); });
+      });
+      return ids.every((v) => !!biIds[String(v)]);
+    }));
+  ok('品质值都在 0..5、装等不是负数（颜色与排序都靠它）',
+    biItems.items.every((r) => r[2] >= 0 && r[2] <= 5 && (r[3] == null || r[3] >= 0)));
+  ok('部位桥表随索引下发，且每套 doll 上的中文标签都能在桥里找到（两端不各抄一份）',
+    Object.keys(biIdx.slotKeys).length >= 19 && biShards.every((x) => {
+      const inv = {};
+      Object.keys(biIdx.slotKeys).forEach((k) => { inv[biIdx.slotKeys[k]] = 1; });
+      Object.keys(biIdx.slotSiblings || {}).forEach((k) => { inv[k] = 1; });
+      return x.obj.byFac.alliance.doll.every((r) => inv[r[0]] === 1);
+    }));
+  ok('红线扫描：索引与 38 片里没有百分比、没有强度评价词（第二家只并列，不裁决）',
+    biShards.concat([{ obj: biIdx }]).every((x) => {
+      const t = JSON.stringify(x.obj);
+      return !/\d+(\.\d+)?\s*%/.test(t) && !/秒伤|DPS|权重|更好|优于/.test(t);
+    }));
+  ok('属性合计随分片下发两个阵营各一组，且带那句"不含职业与种族基础值"',
+    biShards.every((x) => x.obj.sum && x.obj.sum.alliance && x.obj.sum.horde
+      && /不含职业与种族/.test(String(x.obj.sumNote || ''))),
+    JSON.stringify(biShards[0].obj.sum.alliance));
+  ok('职业图标键随索引下发（那一排不用为了图标再下 64 KB 职业索引）',
+    biIdx.classes.filter((c) => !!c.iconKey).length === biIdx.classes.length,
+    JSON.stringify(biIdx.classes.slice(0, 2)));
 
   /* ================= 4. 写授权统一闸 ================= */
   process.stdout.write('\n写授权：每条写命令都要显式 WOW_ALLOW_CROSS_CREDS=1，与凭证来源无关\n');

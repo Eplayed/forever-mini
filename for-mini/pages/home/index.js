@@ -112,7 +112,8 @@ Page({
           dungeons: oss.assetUrl(mBatch, (ui.cards || {}).dungeons),
           classes: oss.assetUrl(mBatch, (ui.cards || {}).classes),
           loots: oss.assetUrl(mBatch, (ui.cards || {}).loots),
-          guide: oss.assetUrl(mBatch, (ui.cards || {}).guide)
+          guide: oss.assetUrl(mBatch, (ui.cards || {}).guide),
+          bis: oss.assetUrl(mBatch, (ui.cards || {}).bis)
         }
       })
       const classes = ((cls.data || {}).classes || []).map((c) => ({
@@ -188,6 +189,10 @@ Page({
 
   goClasses() {
     wx.switchTab({ url: '/pages/classes/index' })
+  },
+
+  goBis() {
+    wx.navigateTo({ url: '/pages/bis/index' })
   },
 
   goLoots() {

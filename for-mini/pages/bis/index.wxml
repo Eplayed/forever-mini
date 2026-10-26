@@ -1,0 +1,159 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+  </view>
+  <view wx:elif="{{unavailable}}" class="notice">
+    这一版还没有配装名单。{{errText ? '（' + errText + '）' : ''}}
+  </view>
+  <view wx:elif="{{needOnline}}" class="notice">
+    现在没连上线，配装名单要联网才取到；下面显示的是上次存下的内容。
+  </view>
+
+  <block wx:if="{{meta}}">
+    <!-- 页头：口径那一句由分发层下发，页面不自己改写（红线） -->
+    <view class="card">
+      <view class="h1">{{meta.title}}</view>
+      <view class="note">{{meta.disclaimer}}</view>
+      <view class="src" bindtap="copyUrl">
+        <text>这份名单 {{fetched}} 对着来源核过 · 来源 {{sourceHost}}</text>
+        <text class="src-op">复制地址</text>
+      </view>
+      <view class="note2" wx:if="{{meta.gradingNote}}">{{meta.gradingNote}}</view>
+    </view>
+
+    <!-- 职业条：一格一个职业，图标 + 名字 + 这个职业几套 -->
+    <scroll-view class="rail" scroll-x enable-flex>
+      <view wx:for="{{classes}}" wx:key="cls" class="rtab {{cls === item.cls ? 'on' : ''}}"
+            data-cls="{{item.cls}}" bindtap="pickClass">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.clsCn}}" />
+        <view class="rtab-n">{{item.clsCn}}</view>
+        <view class="rtab-c">{{item.n}} 套</view>
+      </view>
+    </scroll-view>
+
+    <view class="card" wx:if="{{set}}">
+      <view class="bhead">
+        <view class="bt">{{set.clsCn}} · {{set.mode}}</view>
+        <view class="bn">{{rows.length}} 个部位 · 点一行看这个部位还能换什么</view>
+      </view>
+      <view class="picks">
+        <view class="pickrow">
+          <view wx:for="{{setList}}" wx:key="id" class="chip {{setId === item.id ? 'chip-on' : ''}}"
+                data-id="{{item.id}}" bindtap="pickSet">{{item.label}}</view>
+        </view>
+        <view class="pickrow">
+          <view class="chip {{fac === 'alliance' ? 'chip-on' : ''}}" data-fac="alliance" bindtap="pickFac">联盟</view>
+          <view class="chip {{fac === 'horde' ? 'chip-on' : ''}}" data-fac="horde" bindtap="pickFac">部落</view>
+        </view>
+      </view>
+
+      <!-- 中间那一栏：默认职业原画；点开是本站自己拼的占位人台（一件一块、颜色跟品质走） -->
+      <view class="stage">
+        <image wx:if="{{stageUrl && !live3d}}" class="stage-art" src="{{stageUrl}}" mode="aspectFill"
+               binderror="onStageError" />
+        <view wx:if="{{live3d}}" class="doll">
+          <view wx:for="{{nodes}}" wx:key="key" class="db db-q{{item.q}} {{item.round ? 'db-round' : ''}}"
+                style="left:{{item.l}}%;top:{{item.t}}%;width:{{item.w}}%;height:{{item.h}}%"
+                data-slot="{{item.slot}}" data-cell="{{item.cell}}" bindtap="openSlot">{{item.label}}</view>
+        </view>
+        <view class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
+        <view class="stage-btn" bindtap="toggle3d">{{live3d ? '返回原画' : '看占位模型'}}</view>
+      </view>
+      <view class="doll-note" wx:if="{{live3d}}">
+        这一版是本站自己拼的<text class="b">占位模型</text>，不是游戏里的样子：一件一块，颜色跟品质走，
+        这一套没穿的部位就不画。真模型要等客户端那一层能取到文件。
+      </view>
+      <view class="doll-note" wx:if="{{live3d && unmapped.length}}">
+        这几个部位占位模型里没有格子：{{unmappedText}}（不硬塞到别的块上冒充）。
+      </view>
+
+      <view class="sum" wx:if="{{sum.length}}">
+        <view class="sum-h"><text class="b">这套装备给的属性</text><text class="dim">{{sumNote}}</text></view>
+        <view class="sum-i">
+          <view wx:for="{{sum}}" wx:key="k" class="sum-c"><text class="sum-v">{{item.v}}</text>{{item.k}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 部位一览：一行一个部位，点开通这个部位的备选 -->
+    <view class="card" wx:if="{{set}}">
+      <view class="bhead"><view class="bt">这一套一览</view>
+        <view class="bn">名字颜色按品质走 · 「可换」是这一格还列了几件</view></view>
+      <view wx:for="{{rows}}" wx:key="slotLabel" class="srow" data-slot="{{item.slot}}" data-cell="{{item.cell}}"
+            bindtap="openSlot">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.slot}}" />
+        <view class="s-main">
+          <view class="s-top">
+            <text class="s-slot">{{item.slotLabel}}</text>
+            <text class="s-name {{'q-' + item.q}}" wx:if="{{!item.missing}}">{{item.name}}</text>
+            <text class="s-name s-unknown" wx:else>本站名录里没有这一件（#{{item.item}}）</text>
+          </view>
+          <view class="s-meta">
+            <text wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text>
+            <text>{{item.qText}}</text>
+            <text wx:if="{{item.n}}">可换 {{item.n}} 件</text>
+            <text class="cmp cmp-{{item.cmp}}">{{item.cmp === 'same' ? '两家一致' : item.cmp === 'diff' ? '两家分歧' : '另一家没列'}}</text>
+          </view>
+          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+        </view>
+        <view class="s-go">›</view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{set && (enchants.length || consumables.length)}}">
+      <view class="bt">这一套还列了附魔与消耗品</view>
+      <view class="sub-t" wx:if="{{enchants.length}}">附魔 · {{enchants.length}} 条</view>
+      <view wx:for="{{enchants}}" wx:key="item" class="erow">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name}}" />
+        <view class="e-main">
+          <view class="s-top"><text class="s-slot">{{item.tail || '附魔'}}</text>
+            <text class="s-name {{'q-' + item.q}}">{{item.name}}</text></view>
+        </view>
+      </view>
+      <view class="sub-t" wx:if="{{consumables.length}}">消耗品 · {{consumables.length}} 件</view>
+      <view wx:for="{{consumables}}" wx:key="item" class="erow">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name}}" />
+        <view class="e-main">
+          <view class="s-top"><text class="s-name {{'q-' + item.q}}">{{item.name}}</text>
+            <text class="dim" wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text></view>
+          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+        </view>
+      </view>
+      <view class="note2">附魔与消耗品是这一套列的清单，本站没有第二处可以核对，也没实测过。</view>
+    </view>
+  </block>
+
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关</view>
+
+  <!-- 备选弹层：贴着底部开，内容与网页那一格同一份数据 -->
+  <view class="mask" wx:if="{{slot}}" bindtap="closeSlot" catchtouchmove="noop"></view>
+  <view class="pop" wx:if="{{slot}}">
+    <view class="pop-h">
+      <view>
+        <view class="pop-t">{{slotHead}}</view>
+        <view class="pop-c">{{slotRows.length}} 件可换 · 顺序就是名单里列的顺序，本站不排强弱</view>
+      </view>
+      <view class="pop-x" bindtap="closeSlot">×</view>
+    </view>
+    <view class="pop-theirs" wx:if="{{slotTheirs}}">
+      <text class="cmp cmp-{{slotTheirs.state}}">{{slotTheirs.cn}}</text>
+      <block wx:if="{{slotTheirs.state === 'diff' || slotTheirs.state === 'same'}}">
+        <text class="s-name {{'q-' + slotTheirs.q}}" wx:if="{{!slotTheirs.unknown}}">{{slotTheirs.name}}</text>
+        <text class="s-unknown" wx:else>本站名录里没有这一件</text>
+        <text class="dim" wx:if="{{slotTheirs.ilvl !== ''}}">装等 {{slotTheirs.ilvl}}</text>
+      </block>
+      <text class="dim" wx:else>这一格第二家没单列出来</text>
+    </view>
+    <scroll-view class="pop-list" scroll-y>
+      <view wx:for="{{slotRows}}" wx:key="item" class="prow">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.item}}" />
+        <view class="e-main">
+          <view class="s-top"><text class="s-name {{'q-' + item.q}}">{{item.name}}</text>
+            <text class="dim" wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text></view>
+          <view class="p-st" wx:for="{{item.st}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

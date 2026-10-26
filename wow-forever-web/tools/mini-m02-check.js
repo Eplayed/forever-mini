@@ -686,7 +686,7 @@ async function main() {
       && /字标|logo/.test(JSON.stringify((keptKeys.filter((i) => /forever-hero/.test(i.file))[0] || {}).rejected || {})),
     JSON.stringify(keptKeys.map((i) => i.file.split('/').pop())));
   log('界面底图清单齐全：本地都有文件，且原样进了 meta 分片（img/ 换成 assets 相对路径）',
-    uiRels.length === 5 && uiMiss.length === 0 && shipped.length === 5
+    uiMiss.length === 0 && shipped.length === uiRels.length && uiRels.length > 0
       && shipped.every((s) => s && s.indexOf('img/') !== 0), JSON.stringify({ uiRels, shipped, uiMiss }));
   /* 界面文字要先把 WXML 注释剥掉再比：注释里写"『查』『去查』这类字眼不要了"是给人看的说明，
      不是玩家看得见的字——上一版没剥注释，被自己写的注释判红了。 */
@@ -747,18 +747,18 @@ async function main() {
   });
   log('每个铺了底图的页面都有自己的 .fg 内容层（图与暗底不许糊住名单）', noFg.length === 0, noFg.join(','));
 
+  /* 这条判言要回答的是："铺上底图那几层之后，原来看得见的文字还在不在。"
+     做法：以**撤掉底图**那一帧为参照找出文字带（那一帧背景是纯色，亮像素只可能是内容），
+     再数同一批行在**铺上底图**那一帧里还剩多少亮像素。
+     不比两帧的亮像素总量——底图本身也带亮像素：2026-10-26 环境底图一铺，
+     副本页总量涨了 7.9%，那涨的是背景，不是文字。 */
   const PY_BANDS = [
     'import sys',
     'from PIL import Image',
     'import numpy as np',
-    'A = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
-    'B = np.asarray(Image.open(sys.argv[2]).convert("L")).astype(int)',
-    '# 两帧差得厉害的行是"故意露出来的背景"（2026-10-26 首页顶部那条原图带、卡片透出的画面），',
-    '# 不是文字。这条断言要核的是"名单文字没被底图那几层盖住"，所以把这些行排除掉，',
-    '# 否则原图带一亮，两帧的亮像素总量差出几倍，判的是背景不是文字。',
-    'diff = np.abs(A[:, 55:250] - B[:, 55:250]).mean(axis=1)',
-    'keep = diff < 40',
-    'prof = np.where(keep, (A[:, 55:250] > 140).sum(axis=1), 0)',
+    'REF = np.asarray(Image.open(sys.argv[1]).convert("L")).astype(int)',
+    'TST = np.asarray(Image.open(sys.argv[2]).convert("L")).astype(int)',
+    'prof = (REF[:, 55:250] > 140).sum(axis=1)',
     'bands = []; y = 0',
     'while y < len(prof):',
     '    if prof[y] > 18:',
@@ -766,20 +766,25 @@ async function main() {
     '        while y < len(prof) and prof[y] > 10: y += 1',
     '        bands.append((s, y - 1))',
     '    else: y += 1',
-    'print("%d %d" % (len(bands), int(prof.sum())))',
-    '# 只量名单区（x 55..250）：职业页那一排种族脸图标本身就亮，会把总量带偏'
+    'rows = np.zeros(REF.shape[0], bool)',
+    'for a, b in bands: rows[a:b + 1] = True',
+    'lr = int(prof[rows].sum())',
+    'lt = int((TST[:, 55:250] > 140).sum(axis=1)[rows].sum())',
+    'print("%d %d %d" % (len(bands), lr, lt))',
+    '# 只量名单区（x 55..250）：职业页那一排种族脸图标本身就亮，会把参照带偏'
   ].join('\n');
-  const bandsOf = (file, other) => new Promise((resolve) => {
-    cp.execFile('python3', ['-c', PY_BANDS, file, other], { encoding: 'utf8' }, (err, out) => {
-      resolve(err ? null : String(out || '').trim());
+  const bandsOf = (ref, test) => new Promise((resolve) => {
+    cp.execFile('python3', ['-c', PY_BANDS, ref, test], { encoding: 'utf8' }, (err, out) => {
+      const t = String(out || '').trim();
+      if (err || !/^\d+ \d+ \d+$/.test(t)) { resolve(null); return; }
+      const [bc, lumRef, lumTest] = t.split(' ').map(Number);
+      resolve({ bc, lumRef, lumTest, keep: lumRef ? lumTest / lumRef : 0 });
     });
   });
   /* 玻璃底到底透不透——量像素，不靠眼睛。
      同一块卡片内部，"铺了底图"与"撤掉底图"两帧的主色必须差出一截：
-     2026-10-23 那版（alpha 0.72 + 压暗 0.88）实测只差 6~7 级，等于没透，站主当场说看不清背景。
-     判据取下限 10、上限 60：低于 10 是又糊成纯色，高于 60 是底图亮到会把字吃掉。
-     截图缩放与视口原点每次可能不一样，所以两个都不写死：
-     缩放按 .pagebg 的实际 CSS 宽去除以图片像素宽算，原点按两帧的差找第一处"整行都不同"的行。 */
+     判据取下限 10、上限 60。低于 10 是又糊成纯色（10-23 那版 0.72+0.88 只差 6~7 级），
+     高于 60 是底图亮到会把字吃掉。缩放与视口原点都不写死，从当帧的 .pagebg 与两帧之差现算。 */
   const PY_GLASS = [
     'import sys',
     'from PIL import Image',
@@ -815,6 +820,8 @@ async function main() {
   });
   /* 只有首页那张倒计时卡与副本页第一行落在底图那一段里（图只铺顶部约 703rpx），
      职业页默认没有卡片渲染出来（它的 .card 是"选中种族"那一块），所以这两处才量得到。 */
+  /* 只有首页那张倒计时卡与副本页第一行落在底图那一段里（图只铺顶部约 703rpx），
+     职业页默认没有卡片渲染出来（它的 .card 是"选中种族"那一块），所以这两处才量得到。 */
   const GLASS_CARD = { 'tab-home': '.cd', 'tab-dungeons': '.drow' };
   /* 同一页"有底图 / 撤掉底图"两张截图的文字带必须一模一样：
      对不上就说明底图那两层把内容挪走了或盖住了——DOM 量不出来，只有像素知道。 */
@@ -835,16 +842,15 @@ async function main() {
     await shot(tag + '-nobg');
     const shotA = path.join(SHOT, tag + '.png');
     const shotB = path.join(SHOT, tag + '-nobg.png');
-    const withBg = await bandsOf(shotA, shotB);
-    const noBg = await bandsOf(shotB, shotA);
+    const kept = await bandsOf(shotB, shotA);
     /* 比的是"亮字像素总数"而不是逐条文字带：底图一压，某条带可能并成一段或裂成两段
        （实测 classes 页就差这一条），但总量差超过 6% 就是有内容被盖住了。 */
-    const num = (s) => (s ? s.split(' ').map(Number) : [0, 0]);
-    const [bcA, lumA] = num(withBg);
-    const [bcB, lumB] = num(noBg);
-    log(tag.replace('tab-', '') + ' 页：底图拼得出地址，且铺上后名单文字一格不少',
-      has === true && bcA > 6 && lumB > 0 && Math.abs(lumA - lumB) / lumB <= 0.06,
-      JSON.stringify({ has, withBg: [bcA, lumA], noBg: [bcB, lumB] }));
+    /* 地板数不写死：首屏有几段文字会随版式变（2026-10-26 加了整宽配装入口卡，
+       首屏文字段数从 19 掉到 3，那是版式变化不是被盖住）。判据改成"铺上底图后不许比撤掉时少"，
+       少一段就是有一格文字被底图那几层吃掉了。 */
+    log(tag.replace('tab-', '') + ' 页：底图拼得出地址，且铺上后名单文字一格不少（参照无图那帧的文字行）',
+      has === true && !!kept && kept.lumRef > 200 && kept.keep >= 0.94,
+      kept ? JSON.stringify({ has, bands: kept.bc, lumRef: kept.lumRef, lumTest: kept.lumTest, keep: kept.keep.toFixed(3) }) : '量不出来');
     if (geo && geo.card && geo.bg) {
       const g = await glassOf(tag, geo);
       log(tag.replace('tab-', '') + ' 页卡片真的透底（同一块卡内两帧主色差 10~60 级，量像素）',

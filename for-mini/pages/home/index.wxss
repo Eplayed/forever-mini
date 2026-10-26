@@ -203,6 +203,50 @@
   min-height: 66rpx;
 }
 
+/* —— 配装入口（2026-10-26 站主：核心功能，必须醒目）——
+   整宽一条，比下面那排两列卡高一档；底色仍走玻璃令牌，图取不到时不塌版。 */
+.bis-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 168rpx;
+  margin-bottom: 20rpx;
+  padding: 24rpx 24rpx 22rpx;
+  background: var(--glass-sheen), var(--panel-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1rpx solid var(--gold);
+  border-radius: var(--r-ctl);
+}
+
+.bis-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bis-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  color: var(--txt-title);
+}
+
+.bis-go {
+  font-size: 34rpx;
+  color: var(--gold-hi);
+  margin-left: 16rpx;
+}
+
+.bis-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  line-height: 1.6;
+  margin-top: 10rpx;
+}
+
 /* —— 职业格 ——
    格子的版式（一行五格、超出换行、选中态）在 app.wxss 里与职业页共用一份，
    这里只留首页特有的两句：不许出现横向滚动条（站主 2026-10-22 明确要求），

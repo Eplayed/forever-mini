@@ -551,6 +551,86 @@ async function main() {
   log('切角铭牌真的渲染出来了（右上角斜边让最右像素往外移，直角版比值为 0）',
     !!corner && corner.ratio >= 0.01 && corner.ratio <= 0.045, JSON.stringify(corner));
 
+  /* ---------- H. 配装页（2026-10-26 站主：把网页那条 BiS 线做进小程序） ---------- */
+  process.stdout.write('\nH. 配装页：名单能取到、阵营与套能真切、备选与"两家"并列在\n');
+  await nav('/pages/bis/index');
+  const bis = await call('读配装页', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop(); const d = p.data || {};
+    const txt = []
+      .concat(d.rows || [], d.enchants || [], d.consumables || [], d.slotRows || [])
+      .map((x) => [x.name, x.src, (x.st || []).join('|')].join(' '));
+    return {
+      route: p.route, cls: d.cls, setId: d.setId, fac: d.fac,
+      classes: (d.classes || []).length, sets: (d.setList || []).length,
+      sumSig: (d.sum || []).map((x) => x.k + x.v).join('+'),
+      rows: (d.rows || []).length, head: ((d.rows || [])[0] || {}).name || '',
+      sum: (d.sum || []).length, nodes: (d.nodes || []).length,
+      disclaimer: (d.meta || {}).disclaimer || '', fetched: d.fetched || '',
+      host: d.sourceHost || '', unavailable: !!d.unavailable, needOnline: !!d.needOnline,
+      noName: (d.rows || []).filter((r) => r.missing).length,
+      srcSample: ((d.rows || []).filter((r) => r.src)[0] || {}).src || '',
+      cmp: (d.rows || []).map((r) => r.cmp).join(','),
+      text: txt.join(' ')
+    };
+  }), 3);
+  log('配装页打得开：9 个职业、这一套 16 个部位以上、属性合计有数',
+    bis && bis.route === 'pages/bis/index' && bis.classes === 9 && bis.rows >= 16 && bis.sum >= 1,
+    JSON.stringify(bis && { cls: bis.cls, classes: bis.classes, rows: bis.rows, sum: bis.sum }));
+  log('口径那一句与核对日、来源域名都在页面上（红线：不冒充官方结论）',
+    !!bis && /不是官方结论/.test(bis.disclaimer) && /^\d{4}-\d{2}-\d{2}$/.test(bis.fetched)
+      && /wclbox/.test(bis.host), JSON.stringify(bis && { f: bis.fetched, h: bis.host }));
+  log('装备名回本站物品库查出来了（不是 #编号），来源那一列也还原成了中文',
+    !!bis && bis.head.length > 1 && !/^#/.test(bis.head) && /副本|技能|需要|制造|商人|任务/.test(bis.srcSample),
+    JSON.stringify(bis && { head: bis.head, src: bis.srcSample.slice(0, 40) }));
+  log('这一页没有打包快照：取数走线上，取不到时页面自己说"还没有/要联网"，不半截显示',
+    !!bis && (!bis.unavailable || !bis.rows), JSON.stringify(bis && { un: bis.unavailable, on: bis.needOnline }));
+  log('"两家怎么说"逐格带角标（一致/分歧/没列），本站不裁决',
+    !!bis && /^[a-z,]+$/.test(bis.cmp) && bis.cmp.indexOf('none') < 0 || /same|diff/.test(bis.cmp || ''),
+    String(bis && bis.cmp).slice(0, 60));
+  const bisHorde = await call('换部落', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.pickFac({ currentTarget: { dataset: { fac: 'horde' } } });
+    const d = p.data;
+    return { fac: d.fac, facCn: d.facCn, head: ((d.rows || [])[0] || {}).name || '',
+      sum: (d.sum || []).length, sumSig: (d.sum || []).map((x) => x.k + x.v).join('+') };
+  }), 3);
+  /* 有些套两个阵营本来就列同一件装备（战士 PvE 的头部就是同一顶），所以判据是
+     "头部那件或属性合计至少有一处跟着变"——两个都没变才是只换了标题没换内容。 */
+  log('切阵营真的换了内容（头部那件或属性合计跟着变，不是只改标题）',
+    !!bisHorde && bisHorde.fac === 'horde' && bisHorde.facCn === '部落'
+      && (bisHorde.head !== bis.head || bisHorde.sumSig !== bis.sumSig),
+    JSON.stringify({ all: [bis.head, bis.sumSig], horde: [bisHorde && bisHorde.head, bisHorde && bisHorde.sumSig] }));
+  const bisPop = await call('开备选', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.openSlot({ currentTarget: { dataset: { slot: '头部', cell: 1 } } });
+    const d = p.data;
+    return { slot: d.slot, n: (d.slotRows || []).length, head: d.slotHead,
+      theirs: d.slotTheirs && d.slotTheirs.cn, st: ((d.slotRows || [])[0] || {}).st || [] };
+  }), 3);
+  log('点一个部位弹出这个部位的备选（含属性行与"另一家列的第一件"）',
+    !!bisPop && bisPop.n >= 1 && /头部/.test(bisPop.head) && (bisPop.st || []).length > 0
+      && /一致|分歧|没列/.test(String(bisPop.theirs)), JSON.stringify(bisPop));
+  const bis3d = await call('开占位模型', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.toggle3d();
+    const d = p.data;
+    return { live: d.live3d, nodes: (d.nodes || []).length, unmapped: d.unmappedText || '' };
+  }), 3);
+  log('占位人台一件一块，没格子的部位照实列出不硬塞',
+    !!bis3d && bis3d.live === true && bis3d.nodes >= 10, JSON.stringify(bis3d));
+  await shot('h1-bis-page');
+  await call('回到占位开着的画面', () => mp.evaluate(() => 1), 1);
+  log('配装页渲染文字里没有百分比与强度评价词（红线）',
+    !!bis && !/\d+(\.\d+)?\s*%/.test(bis.text) && !/秒伤|DPS|权重/.test(bis.text),
+    String(bis && bis.text).slice(0, 80));
+  const bisWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
+  log('占位模型那句"不是游戏里的样子"钉在界面上，3D 换成真模型前不许撤',
+    /占位模型/.test(bisWxml) && /不是游戏里的样子/.test(bisWxml), '');
+  const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
+  log('首页有整宽的配装入口卡（站主：核心功能，必须醒目），且排在四张小卡前面',
+    /class="bis-card/.test(homeWxml) && /bindtap="goBis"/.test(homeWxml)
+      && homeWxml.indexOf('bis-card') < homeWxml.indexOf('class="grid"'), '');
+
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
   const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';
   const rawColor = [];
