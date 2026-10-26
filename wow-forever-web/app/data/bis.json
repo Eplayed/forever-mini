@@ -4,7 +4,7 @@
   "title": "30 级配装名单",
   "level": 30,
   "source": "https://wowforever.wclbox.com/peizhuang",
-  "scrapedAt": "2026-10-22",
+  "scrapedAt": "2026-10-26",
   "method": "tools/scrape-wclbox-bis.py（真浏览器：联盟读 SSR 后的纸娃娃，点 .pz-faction 的「部落」再读一遍）",
   "notTaken": "该页的成段中文说明、属性优先级、循环建议、.pz-stats-note 那句计算口径一律没取（红线）",
   "basis": "数值与名称一律回 items.json / items-detail.json 查，这份只存\"哪件装备在哪个部位、按什么顺序\"",
@@ -75,7 +75,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -2196,7 +2196,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior/pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -4115,7 +4115,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior/tank",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -6220,7 +6220,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/hunter",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -8527,7 +8527,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/hunter/pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -10636,7 +10636,7 @@
    "mode": "冰霜 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -12932,7 +12932,7 @@
    "mode": "冰霜 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -14999,7 +14999,7 @@
    "mode": "火焰 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/fire",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -17259,7 +17259,7 @@
    "mode": "火焰 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/fire-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -19297,7 +19297,7 @@
    "mode": "奥术 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/arcane",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -21563,7 +21563,7 @@
    "mode": "战斗 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -23761,7 +23761,7 @@
    "mode": "刺杀 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/assassination",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -25921,7 +25921,7 @@
    "mode": "敏锐 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -27982,7 +27982,7 @@
    "mode": "出血 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/pvp-hemo",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -30043,7 +30043,7 @@
    "mode": "暗影 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -32297,7 +32297,7 @@
    "mode": "暗影 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/shadow-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -34323,7 +34323,7 @@
    "mode": "神圣 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/holy",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -36512,7 +36512,7 @@
    "mode": "戒律 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/discipline-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -38606,7 +38606,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warlock",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -40876,7 +40876,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warlock/pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -42910,7 +42910,7 @@
    "mode": "惩戒 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -44740,7 +44740,7 @@
    "mode": "惩戒 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/retribution-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -46637,7 +46637,7 @@
    "mode": "神圣 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/holy",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -48903,7 +48903,7 @@
    "mode": "神圣 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/holy-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -51054,7 +51054,7 @@
    "mode": "震击骑 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/shockadin",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -53089,7 +53089,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/tank",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -55071,7 +55071,7 @@
    "mode": "野性战斗 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -57139,7 +57139,7 @@
    "mode": "野性战斗 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/feral-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -59229,7 +59229,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/tank",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -61070,7 +61070,7 @@
    "mode": "平衡 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/balance",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -63204,7 +63204,7 @@
    "mode": "平衡 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/balance-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -65155,7 +65155,7 @@
    "mode": "恢复",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/restoration",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -67388,7 +67388,7 @@
    "mode": "恢复 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/restoration-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -69565,7 +69565,7 @@
    "mode": "元素 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -71728,7 +71728,7 @@
    "mode": "元素 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/elemental-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -73664,7 +73664,7 @@
    "mode": "增强 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/enhancement",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -75811,7 +75811,7 @@
    "mode": "增强 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/enhancement-pvp",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
@@ -77777,7 +77777,7 @@
    "mode": "恢复",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/restoration",
-   "fetched": "2026-10-22",
+   "fetched": "2026-10-26",
    "doll": {
     "alliance": [
      {
