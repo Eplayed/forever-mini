@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generatedAt": "2026-10-11",
+  "generatedAt": "2026-10-26",
   "kind": "client-datamine",
   "method": "tools/scrape-wclbox-shuju.py 抓 _shuju 数据包 → tools/merge-world.js 整形",
-  "release": "r-1791702948979",
-  "foreverBuild": "1.60.1.70338",
+  "release": "r-1792976599011",
+  "foreverBuild": "1.60.1.70532",
   "dropsAsOf": "2026-10-06",
   "sources": [
    {
@@ -43,11 +43,11 @@
   "mapIdMismatch": [],
   "zoneMapFill": {
    "source": "XR_DungeonGuide 0.8.0 Data_ZoneMap.lua 的 XR_DGDB.zonemap",
-   "fetched": "2026-10-19",
+   "fetched": "2026-10-21",
    "entries": 80,
-   "agreeWithSite": 31,
+   "agreeWithSite": 30,
    "conflicts": [],
-   "zonesOnlyHere": 49
+   "zonesOnlyHere": 50
   },
   "mapsWithoutImage": [
    "希尔斯布莱德丘陵",
@@ -102,7 +102,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -139,7 +139,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -176,7 +176,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -213,7 +213,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -250,7 +250,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -287,7 +287,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -324,7 +324,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -361,7 +361,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -398,7 +398,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -435,7 +435,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -472,7 +472,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -509,7 +509,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -546,7 +546,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -583,7 +583,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -620,7 +620,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -657,7 +657,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -694,7 +694,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -731,7 +731,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -768,7 +768,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -805,7 +805,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -842,7 +842,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -879,7 +879,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -916,7 +916,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -953,7 +953,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -990,7 +990,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1027,7 +1027,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1064,7 +1064,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1101,7 +1101,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1138,7 +1138,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1175,7 +1175,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1212,7 +1212,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1249,7 +1249,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1286,7 +1286,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1323,7 +1323,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1331,7 +1331,7 @@
     50
    ],
    "levelStatus": "ok",
-   "rareCountSource": 1,
+   "rareCountSource": 2,
    "bookCountSource": 1,
    "rareTotal": 9,
    "bookTotal": 1
@@ -1360,7 +1360,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1397,7 +1397,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1434,7 +1434,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1471,7 +1471,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1508,7 +1508,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1545,7 +1545,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1582,7 +1582,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1619,7 +1619,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1656,7 +1656,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "区域等级区间与阵营来自无限客户端地图数据（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -1693,7 +1693,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/ditu",
      "note": "新增区域的存在、阵营归属与等级档（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "levelRange": [
@@ -2631,7 +2631,7 @@
    ],
    "side": "a",
    "faction": "联盟",
-   "mapId": "1426"
+   "mapId": null
   },
   {
    "zone": "冬泉谷",
@@ -2711,6 +2711,49 @@
  ],
  "rares": [
   {
+   "id": "Shal'ma",
+   "level": "L0",
+   "nameCn": "沙尔玛",
+   "nameEn": "Shal'ma",
+   "zone": "杜隆塔尔",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    9
+   ],
+   "mapId": "1411",
+   "mapFile": "img/art/maps/1411.webp",
+   "mark": {
+    "x": 60.7,
+    "y": 90
+   },
+   "world": {
+    "x": 21349,
+    "y": 17694,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 286746,
+     "nameCn": "沙玛的披肩",
+     "quality": 2,
+     "iconKey": "inv_helmet_48",
+     "itemLevel": 11,
+     "bind": "装备后绑定",
+     "reqLevel": 6
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-26"
+    }
+   ]
+  },
+  {
    "id": "Snarlsnout",
    "level": "L0",
    "nameCn": "咆鼻",
@@ -2739,9 +2782,9 @@
      "nameCn": "糟鼻的火枪",
      "quality": 2,
      "iconKey": "inv_weapon_rifle_05",
-     "itemLevel": 10,
+     "itemLevel": 12,
      "bind": "装备后绑定",
-     "reqLevel": 5
+     "reqLevel": 7
     }
    ],
    "provenance": [
@@ -2749,7 +2792,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -2782,9 +2825,9 @@
      "nameCn": "慧眼魔杖",
      "quality": 2,
      "iconKey": "inv_wand_01",
-     "itemLevel": 10,
+     "itemLevel": 12,
      "bind": "装备后绑定",
-     "reqLevel": 5
+     "reqLevel": 7
     }
    ],
    "provenance": [
@@ -2792,7 +2835,50 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
+    }
+   ]
+  },
+  {
+   "id": "Ghostfang",
+   "level": "L0",
+   "nameCn": "幽魂之牙",
+   "nameEn": "Ghostfang",
+   "zone": "丹莫罗",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    10
+   ],
+   "mapId": "1426",
+   "mapFile": "img/art/maps/1426.webp",
+   "mark": {
+    "x": 80.4,
+    "y": 45.2
+   },
+   "world": {
+    "x": 6679,
+    "y": 11291,
+    "z": 5
+   },
+   "mapSlug": "eastern-kingdoms",
+   "drops": [
+    {
+     "itemId": 286751,
+     "nameCn": "幽魂之牙的软鞋",
+     "quality": 2,
+     "iconKey": "inv_boots_05",
+     "itemLevel": 12,
+     "bind": "装备后绑定",
+     "reqLevel": 7
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -2822,7 +2908,7 @@
    "drops": [
     {
      "itemId": 283460,
-     "nameCn": "腐纹腰带",
+     "nameCn": "腐朽血肉腰带",
      "quality": 2,
      "iconKey": "inv_belt_03",
      "itemLevel": 12,
@@ -2835,7 +2921,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -2887,7 +2973,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -2930,7 +3016,50 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
+    }
+   ]
+  },
+  {
+   "id": "Stormherald Ukta",
+   "level": "L0",
+   "nameCn": "风暴使者乌克塔",
+   "nameEn": "Stormherald Ukta",
+   "zone": "莫高雷",
+   "kind": "rare",
+   "isNew": true,
+   "levelRange": [
+    12
+   ],
+   "mapId": "1412",
+   "mapFile": "img/art/maps/1412.webp",
+   "mark": {
+    "x": 59.8,
+    "y": 58.4
+   },
+   "world": {
+    "x": 17537,
+    "y": 18428,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 286754,
+     "nameCn": "乌克塔的导能杖",
+     "quality": 2,
+     "iconKey": "inv_staff_07",
+     "itemLevel": 14,
+     "bind": "装备后绑定",
+     "reqLevel": 9
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -2973,7 +3102,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3016,7 +3145,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3077,7 +3206,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3120,7 +3249,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3164,7 +3293,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3208,7 +3337,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3252,7 +3381,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3296,7 +3425,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3340,7 +3469,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3384,7 +3513,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3428,7 +3557,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3472,7 +3601,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3516,7 +3645,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3560,7 +3689,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3604,7 +3733,51 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
+    }
+   ],
+   "alsoFrom": "gi"
+  },
+  {
+   "id": "Greater Firebird",
+   "level": "L0",
+   "nameCn": "巨型火鸟",
+   "nameEn": "Greater Firebird",
+   "zone": "塔纳利斯",
+   "kind": "rare",
+   "isNew": false,
+   "levelRange": [
+    46
+   ],
+   "mapId": "1446",
+   "mapFile": "img/art/maps/1446.webp",
+   "mark": {
+    "x": 49.4,
+    "y": 36
+   },
+   "world": {
+    "x": 19866,
+    "y": 23614,
+    "z": 5
+   },
+   "mapSlug": "kalimdor",
+   "drops": [
+    {
+     "itemId": 282558,
+     "nameCn": "火鸟兜帽",
+     "quality": 3,
+     "iconKey": "inv_helmet_28",
+     "itemLevel": 58,
+     "bind": "拾取后绑定",
+     "reqLevel": 53
+    }
+   ],
+   "provenance": [
+    {
+     "type": "datamine_cn",
+     "url": "https://wowforever.wclbox.com/xiyou",
+     "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
+     "checkedAt": "2026-10-26"
     }
    ],
    "alsoFrom": "gi"
@@ -3655,7 +3828,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3682,6 +3855,15 @@
    "mapSlug": "zephras-isle",
    "drops": [
     {
+     "itemId": 288927,
+     "nameCn": "迅击戒指",
+     "quality": 4,
+     "iconKey": "inv_jewelry_ring_07",
+     "itemLevel": 30,
+     "bind": "装备后绑定",
+     "reqLevel": null
+    },
+    {
      "itemId": 285264,
      "nameCn": "天语者的便鞋",
      "quality": 2,
@@ -3705,7 +3887,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称、等级、刷新点坐标与掉落归属（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3739,7 +3921,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3770,41 +3952,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
-    }
-   ]
-  },
-  {
-   "id": "Ghostfang",
-   "level": "L0",
-   "nameCn": "幽魂之牙",
-   "nameEn": "Ghostfang",
-   "zone": "丹莫罗",
-   "kind": "rare",
-   "isNew": false,
-   "levelRange": [
-    4,
-    12
-   ],
-   "mapId": "1426",
-   "mapFile": "img/art/maps/1426.webp",
-   "mark": {
-    "x": 80.4,
-    "y": 45.2
-   },
-   "world": {
-    "x": 6679,
-    "y": 11291,
-    "z": 5
-   },
-   "mapSlug": "eastern-kingdoms",
-   "drops": [],
-   "provenance": [
-    {
-     "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/xiyou",
-     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3838,7 +3986,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3872,7 +4020,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3906,7 +4054,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3940,7 +4088,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -3974,41 +4122,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
-    }
-   ]
-  },
-  {
-   "id": "Stormherald Ukta",
-   "level": "L0",
-   "nameCn": "风暴使者乌克塔",
-   "nameEn": "Stormherald Ukta",
-   "zone": "莫高雷",
-   "kind": "rare",
-   "isNew": false,
-   "levelRange": [
-    5,
-    10
-   ],
-   "mapId": "1412",
-   "mapFile": "img/art/maps/1412.webp",
-   "mark": {
-    "x": 59.8,
-    "y": 58.4
-   },
-   "world": {
-    "x": 17537,
-    "y": 18428,
-    "z": 5
-   },
-   "mapSlug": "kalimdor",
-   "drops": [],
-   "provenance": [
-    {
-     "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/xiyou",
-     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -4042,7 +4156,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -4076,7 +4190,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -4110,41 +4224,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
-    }
-   ]
-  },
-  {
-   "id": "Shal'ma",
-   "level": "L0",
-   "nameCn": "沙尔玛",
-   "nameEn": "Shal'ma",
-   "zone": "杜隆塔尔",
-   "kind": "rare",
-   "isNew": false,
-   "levelRange": [
-    5,
-    10
-   ],
-   "mapId": "1411",
-   "mapFile": "img/art/maps/1411.webp",
-   "mark": {
-    "x": 60.7,
-    "y": 90
-   },
-   "world": {
-    "x": 21349,
-    "y": 17694,
-    "z": 5
-   },
-   "mapSlug": "kalimdor",
-   "drops": [],
-   "provenance": [
-    {
-     "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/xiyou",
-     "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -4178,7 +4258,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/xiyou",
      "note": "稀有名称与刷新点坐标（客户端解包，经新手盒子转述）；掉落未采到",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -4208,9 +4288,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4239,9 +4319,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4270,9 +4350,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4301,9 +4381,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4332,9 +4412,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4364,9 +4444,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4405,9 +4485,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4436,9 +4516,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4477,9 +4557,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4518,9 +4598,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4549,9 +4629,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4580,9 +4660,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4611,9 +4691,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4652,9 +4732,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4693,9 +4773,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4734,9 +4814,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4765,9 +4845,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4796,9 +4876,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4837,9 +4917,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4868,9 +4948,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4899,9 +4979,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4930,9 +5010,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4961,9 +5041,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -4992,9 +5072,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5042,9 +5122,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5083,9 +5163,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5124,9 +5204,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5155,9 +5235,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5186,9 +5266,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5217,9 +5297,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5248,9 +5328,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5289,9 +5369,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5330,9 +5410,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5371,9 +5451,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5402,9 +5482,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5433,9 +5513,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5474,9 +5554,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5505,9 +5585,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5609,9 +5689,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5713,9 +5793,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5826,9 +5906,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5857,9 +5937,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -5961,9 +6041,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6065,9 +6145,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6115,9 +6195,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6165,9 +6245,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6269,9 +6349,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6383,9 +6463,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6424,9 +6504,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6474,9 +6554,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6524,9 +6604,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6628,9 +6708,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6732,9 +6812,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6836,9 +6916,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -6940,9 +7020,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7044,9 +7124,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7157,9 +7237,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7261,9 +7341,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7365,9 +7445,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7415,9 +7495,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7465,9 +7545,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7515,9 +7595,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7619,9 +7699,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7669,9 +7749,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7773,9 +7853,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7886,9 +7966,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -7990,9 +8070,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8094,9 +8174,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8144,9 +8224,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8248,9 +8328,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8352,9 +8432,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8456,9 +8536,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8506,9 +8586,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8556,9 +8636,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8597,9 +8677,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8647,9 +8727,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8751,9 +8831,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8801,9 +8881,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8851,9 +8931,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -8955,9 +9035,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9068,9 +9148,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9118,9 +9198,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9222,9 +9302,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9272,9 +9352,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9322,9 +9402,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9426,9 +9506,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9476,9 +9556,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9526,9 +9606,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9630,9 +9710,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9734,9 +9814,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9847,9 +9927,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -9951,9 +10031,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10001,9 +10081,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10051,9 +10131,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10155,9 +10235,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10259,9 +10339,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10363,9 +10443,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10467,9 +10547,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10571,9 +10651,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10675,9 +10755,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10706,9 +10786,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10810,9 +10890,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10860,9 +10940,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10891,9 +10971,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -10932,9 +11012,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11045,9 +11125,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11158,9 +11238,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11262,9 +11342,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11366,9 +11446,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11470,9 +11550,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11574,9 +11654,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11624,9 +11704,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11728,9 +11808,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11832,9 +11912,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11882,9 +11962,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -11932,9 +12012,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12036,9 +12116,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12140,9 +12220,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12244,9 +12324,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12348,9 +12428,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12461,9 +12541,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12511,9 +12591,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12561,9 +12641,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12665,9 +12745,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12769,9 +12849,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12873,9 +12953,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -12977,9 +13057,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13081,9 +13161,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13185,9 +13265,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13289,9 +13369,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13339,9 +13419,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13443,9 +13523,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13547,9 +13627,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13651,9 +13731,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13755,9 +13835,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13859,9 +13939,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -13963,9 +14043,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14004,9 +14084,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14054,9 +14134,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14158,9 +14238,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14208,9 +14288,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14312,9 +14392,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14362,9 +14442,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14466,9 +14546,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14570,9 +14650,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14603,7 +14683,7 @@
      "nameCn": "褶皱花冠",
      "quality": 2,
      "iconKey": "inv_helmet_04",
-     "itemLevel": 31,
+     "itemLevel": 34,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -14612,7 +14692,7 @@
      "nameCn": "狼群奖章",
      "quality": 2,
      "iconKey": "inv_jewelry_amulet_03",
-     "itemLevel": 31,
+     "itemLevel": 34,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -14620,9 +14700,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14724,9 +14804,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14828,9 +14908,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14932,9 +15012,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -14974,7 +15054,7 @@
      "nameCn": "驭兽长袍",
      "quality": 2,
      "iconKey": "inv_chest_cloth_39",
-     "itemLevel": 34,
+     "itemLevel": 36,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -14982,9 +15062,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15024,7 +15104,7 @@
      "nameCn": "和谐项链",
      "quality": 2,
      "iconKey": "inv_jewelry_amulet_04",
-     "itemLevel": 34,
+     "itemLevel": 36,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -15032,9 +15112,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15136,9 +15216,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15240,9 +15320,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15344,9 +15424,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15448,9 +15528,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15489,9 +15569,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15522,7 +15602,7 @@
      "nameCn": "异种蝎切割者",
      "quality": 2,
      "iconKey": "inv_weapon_shortblade_26",
-     "itemLevel": 36,
+     "itemLevel": 38,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -15530,9 +15610,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15572,7 +15652,7 @@
      "nameCn": "哀嚎之刃",
      "quality": 3,
      "iconKey": "inv_weapon_shortblade_15",
-     "itemLevel": 36,
+     "itemLevel": 38,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -15580,9 +15660,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15684,9 +15764,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15797,9 +15877,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -15901,9 +15981,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16005,9 +16085,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16109,9 +16189,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16142,7 +16222,7 @@
      "nameCn": "石化蜥蜴之刃",
      "quality": 3,
      "iconKey": "inv_sword_43",
-     "itemLevel": 37,
+     "itemLevel": 39,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -16150,9 +16230,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16254,9 +16334,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16296,7 +16376,7 @@
      "nameCn": "黑边斗篷",
      "quality": 3,
      "iconKey": "inv_misc_cape_04",
-     "itemLevel": 37,
+     "itemLevel": 39,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -16304,9 +16384,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16408,9 +16488,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16512,9 +16592,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16616,9 +16696,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16720,9 +16800,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16753,7 +16833,7 @@
      "nameCn": "矿工践踏靴",
      "quality": 2,
      "iconKey": "inv_boots_08",
-     "itemLevel": 38,
+     "itemLevel": 40,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -16762,7 +16842,7 @@
      "nameCn": "舒尔弗拉格的矿工斧",
      "quality": 3,
      "iconKey": "inv_pick_02",
-     "itemLevel": 38,
+     "itemLevel": 40,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -16779,9 +16859,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16883,9 +16963,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -16987,9 +17067,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17020,7 +17100,7 @@
      "nameCn": "石板护肩",
      "quality": 2,
      "iconKey": "inv_shoulder_08",
-     "itemLevel": 37,
+     "itemLevel": 41,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -17029,7 +17109,7 @@
      "nameCn": "抚慰者",
      "quality": 3,
      "iconKey": "inv_mace_09",
-     "itemLevel": 37,
+     "itemLevel": 41,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -17038,7 +17118,7 @@
      "nameCn": "黑色食人魔之靴",
      "quality": 3,
      "iconKey": "inv_boots_01",
-     "itemLevel": 37,
+     "itemLevel": 41,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -17046,9 +17126,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17150,9 +17230,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17254,9 +17334,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17358,9 +17438,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17462,9 +17542,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17566,9 +17646,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17597,9 +17677,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17701,9 +17781,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17805,9 +17885,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -17909,9 +17989,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18013,9 +18093,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18117,9 +18197,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18221,9 +18301,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18262,9 +18342,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18366,9 +18446,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18470,9 +18550,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18503,7 +18583,7 @@
      "nameCn": "生命兜帽",
      "quality": 2,
      "iconKey": "inv_helmet_04",
-     "itemLevel": 40,
+     "itemLevel": 44,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -18574,9 +18654,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18678,9 +18758,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18782,9 +18862,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18886,9 +18966,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -18990,9 +19070,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19094,9 +19174,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19198,9 +19278,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19302,9 +19382,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19333,9 +19413,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19437,9 +19517,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19468,9 +19548,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19572,9 +19652,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19603,9 +19683,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19634,9 +19714,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19675,9 +19755,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19706,9 +19786,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19737,9 +19817,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19768,9 +19848,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19799,9 +19879,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19830,9 +19910,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19861,9 +19941,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19911,9 +19991,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19942,9 +20022,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -19975,7 +20055,7 @@
      "nameCn": "彩鳞护腿",
      "quality": 2,
      "iconKey": "inv_pants_03",
-     "itemLevel": 45,
+     "itemLevel": 47,
      "bind": null,
      "dropsLevel": "L2"
     },
@@ -19992,9 +20072,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20023,9 +20103,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20054,40 +20134,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
-    }
-   ]
-  },
-  {
-   "id": "gi-8207",
-   "level": "L1",
-   "nameCn": "巨型火鸟",
-   "nameEn": "Greater Firebird",
-   "zone": "塔纳利斯",
-   "kind": null,
-   "kindRaw": "4",
-   "isNew": null,
-   "levelRange": [
-    46
-   ],
-   "mapId": "1446",
-   "mapFile": "img/art/maps/1446.webp",
-   "mapIdFrom": "gi-ui",
-   "mark": {
-    "x": 49.4,
-    "y": 36
-   },
-   "world": null,
-   "mapSlug": null,
-   "drops": [],
-   "provenance": [
-    {
-     "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
-     "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20116,9 +20165,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20147,9 +20196,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20178,9 +20227,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20209,9 +20258,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20240,9 +20289,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20271,9 +20320,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20302,9 +20351,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20333,9 +20382,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20364,9 +20413,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20395,9 +20444,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20426,9 +20475,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20457,9 +20506,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20488,9 +20537,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20519,9 +20568,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20550,9 +20599,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20581,9 +20630,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20612,9 +20661,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20643,9 +20692,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20674,9 +20723,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20706,9 +20755,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20737,9 +20786,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20768,9 +20817,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20799,9 +20848,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20830,9 +20879,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20861,9 +20910,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20892,9 +20941,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20923,9 +20972,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20954,9 +21003,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -20987,7 +21036,7 @@
      "nameCn": "卡古克之锤",
      "quality": 3,
      "iconKey": "inv_hammer_17",
-     "itemLevel": 50,
+     "itemLevel": 52,
      "bind": null,
      "dropsLevel": "L2"
     }
@@ -20995,9 +21044,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21026,9 +21075,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21057,9 +21106,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21088,9 +21137,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21119,9 +21168,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21150,9 +21199,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21191,9 +21240,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21232,9 +21281,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21263,9 +21312,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21294,9 +21343,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21325,9 +21374,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21430,9 +21479,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21535,9 +21584,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21566,9 +21615,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21597,9 +21646,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21701,9 +21750,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21805,9 +21854,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21846,9 +21895,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -21950,9 +21999,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22054,9 +22103,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22158,9 +22207,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22263,9 +22312,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22367,9 +22416,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22471,9 +22520,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22575,9 +22624,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22679,9 +22728,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22783,9 +22832,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22887,9 +22936,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -22991,9 +23040,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23095,9 +23144,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23199,9 +23248,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23303,9 +23352,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23334,9 +23383,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23438,9 +23487,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23542,9 +23591,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23646,9 +23695,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23750,9 +23799,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23855,9 +23904,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -23959,9 +24008,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24063,9 +24112,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24167,9 +24216,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24271,9 +24320,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24375,9 +24424,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24479,9 +24528,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24583,9 +24632,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24687,9 +24736,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24791,9 +24840,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24895,9 +24944,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -24936,9 +24985,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25040,9 +25089,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25144,9 +25193,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25248,9 +25297,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25352,9 +25401,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25456,9 +25505,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25560,9 +25609,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25664,9 +25713,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25768,9 +25817,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25872,9 +25921,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -25976,9 +26025,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26080,9 +26129,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26184,9 +26233,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26288,9 +26337,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26392,9 +26441,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26496,9 +26545,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26600,9 +26649,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26704,9 +26753,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26808,9 +26857,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -26912,9 +26961,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27016,9 +27065,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27120,9 +27169,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27224,9 +27273,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27328,9 +27377,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27432,9 +27481,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27536,9 +27585,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27640,9 +27689,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27744,9 +27793,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27848,9 +27897,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -27952,9 +28001,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -28056,9 +28105,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -28160,9 +28209,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -28264,9 +28313,9 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   },
@@ -28368,19 +28417,19 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "GearInsight_Forever 0.4.32 Data.lua 的 rares 表",
+     "url": "GearInsight_Forever 0.5.1 Data.lua 的 rares 表",
      "note": "稀有名称、等级、刷新点百分比坐标与掉落归属（beta 客户端解包转述，未经第二处逐字回查）",
-     "checkedAt": "2026-10-19"
+     "checkedAt": "2026-10-21"
     }
    ]
   }
  ],
  "rareRegionsFromAddon": {
-  "matched": 12,
-  "added": 326,
+  "matched": 13,
+  "added": 325,
   "unmapped": 0,
   "mapIdFromXr": 0,
-  "mapIdFromGiUi": 326,
+  "mapIdFromGiUi": 325,
   "source": 338
  },
  "rareSets": [
@@ -28523,7 +28572,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28557,7 +28606,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28591,7 +28640,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28625,7 +28674,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28659,7 +28708,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28693,7 +28742,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28727,7 +28776,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28761,7 +28810,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28795,7 +28844,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28829,7 +28878,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28863,7 +28912,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28897,7 +28946,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28931,7 +28980,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28965,7 +29014,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -28999,7 +29048,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29033,7 +29082,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29067,7 +29116,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29101,7 +29150,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29135,7 +29184,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29169,7 +29218,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29203,7 +29252,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29237,7 +29286,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29271,7 +29320,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29305,7 +29354,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29339,7 +29388,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29373,7 +29422,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29407,7 +29456,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29441,7 +29490,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29475,7 +29524,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "书名、所在容器与坐标（客户端解包，经新手盒子转述）；书本正文不搬",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29506,7 +29555,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29537,7 +29586,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29568,7 +29617,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29599,7 +29648,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29630,7 +29679,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29661,7 +29710,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29692,7 +29741,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "满级后新增书籍的名称、容器与坐标（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   }
@@ -29709,7 +29758,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "客户端记录里只有书名与物品 ID，没有坐标",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29724,7 +29773,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "客户端记录里只有书名与物品 ID，没有坐标",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   }
@@ -29762,7 +29811,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29798,7 +29847,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29815,7 +29864,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "上交数量门槛、称号与奖励物品 ID（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   }
@@ -29836,7 +29885,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   },
@@ -29855,7 +29904,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/shuji",
      "note": "管理员名字与所在城市（客户端解包，经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-10-26"
     }
    ]
   }
@@ -29906,7 +29955,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-11"
+        "checkedAt": "2026-10-26"
        }
       ]
      },
@@ -29931,7 +29980,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-11"
+        "checkedAt": "2026-10-26"
        }
       ]
      }
@@ -29961,7 +30010,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-11"
+        "checkedAt": "2026-10-26"
        }
       ]
      }
@@ -29991,7 +30040,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-11"
+        "checkedAt": "2026-10-26"
        }
       ]
      }
@@ -30021,7 +30070,7 @@
         "type": "datamine_cn",
         "url": "https://wowforever.wclbox.com/shuidai",
         "note": "营地点所在区域与坐标（客户端解包，经新手盒子转述）",
-        "checkedAt": "2026-10-11"
+        "checkedAt": "2026-10-26"
        }
       ]
      }
@@ -30034,7 +30083,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/ditu",
    "note": "世界线整块数据取自无限客户端解包（经新手盒子转述），本页只做整理与核对",
-   "checkedAt": "2026-10-11"
+   "checkedAt": "2026-10-26"
   }
  ]
 }

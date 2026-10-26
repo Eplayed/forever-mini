@@ -38,18 +38,23 @@
         日期是本站核对的那天。没写日期的，是那一块只留了版本、没留核对日。</p>
       <div class="boardwrap">
         <table class="board vtab" id="lver">
-          <thead><tr><th>板块</th><th>对着的客户端</th><th>本站核对日</th><th>同时留的经典旧世版本</th></tr></thead>
+          <thead><tr><th>板块</th><th>对着的客户端</th><th>本站核对日</th><th>多久没核了</th><th>同时留的经典旧世版本</th></tr></thead>
           <tbody>
             <tr v-for="v in dataVersions" :key="v.file">
               <td>{{ v.section }}</td>
               <td class="mono">{{ v.build ? tail(v.build) : '—' }}</td>
               <td class="mono">{{ v.checkedAt || '未记录' }}</td>
+              <td class="mono" :class="'stale-' + (v.stale || 'ok')">
+                {{ v.checkedAt ? v.daysSince + ' 天' : '—' }}
+                <template v-if="v.stale"> · {{ v.stale === 'red' ? '已过期' : '快过期' }}</template></td>
               <td class="mono dim">{{ v.classic ? tail(v.classic) : '—' }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="dim">客户端号只报尾号（{{ newest }} 这种），前面那串是对方自己的编号习惯。</p>
+      <p class="dim">客户端号只报尾号（{{ newest }} 这种），前面那串是对方自己的编号习惯。
+        <template v-if="stalePolicy">超过 {{ stalePolicy.soft }} 天标"快过期"，
+          超过 {{ stalePolicy.hard }} 天那一块会被挡住不放行——得重抓一遍，别把日期抄新一点糊过去。</template></p>
     </div>
 
     <div v-if="ti" class="card">
@@ -235,6 +240,8 @@ boot();
 const sc = computed(() => d.value.scale);
 // 逐板块的数据版本：一律读规模快照里现算的那一份，页面不挑也不写死任何一个号
 const dataVersions = computed(() => (sc.value || {}).dataVersions || []);
+// 过期天数与阈值都由 build-data 现算下发，这一页只负责标出来（不抄第二份天数）
+const stalePolicy = computed(() => (sc.value || {}).stalePolicy || null);
 const newest = computed(() => tail((sc.value || {}).newestBuild || ''));
 function tail(v) { return String(v || '').split('.').pop(); }
 const ti = computed(() => d.value.meta.talentImport);

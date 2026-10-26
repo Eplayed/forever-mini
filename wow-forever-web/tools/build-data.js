@@ -2042,11 +2042,13 @@ const SECTION_CN = {
   'queue.json': '副本排队表',
   'world.json': '世界（区域与稀有）',
   'items.json': '物品名录',
-  'art.json': '素材台账（客户端原画）'
+  'art.json': '素材台账（客户端原画）',
+  'bis.json': '配装名单'
 };
 // 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
 // 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。
-const VER_KEYS = ['clientBuild', 'foreverBuild', 'build', 'fetchedAt', 'fetched', 'checkedAt'];
+// scrapedAt 是配装线记的"对着来源重抓那天"，与 fetched 同层，2026-10-26 补进来。
+const VER_KEYS = ['clientBuild', 'foreverBuild', 'build', 'fetchedAt', 'fetched', 'checkedAt', 'scrapedAt'];
 const dataVersions = [];
 fs.readdirSync(ROOT).filter((f) => f.endsWith('.json')).forEach((f) => {
   let meta = null;
@@ -2061,7 +2063,7 @@ fs.readdirSync(ROOT).filter((f) => f.endsWith('.json')).forEach((f) => {
   // 优先取"客户端版本号"那三个；legacy.json 的 build 是对方发布号（r-179…），不给玩家看
   const build = ['clientBuild', 'foreverBuild', 'build'].map((k) => meta[k]).filter((v) => typeof v === 'string' && !/^r-\d+$/.test(v))[0] || null;
   // 日期取"这一份成品最后一次对着来源重算"的那天：抓取日优先，没有就用生成日
-  const at = ['fetchedAt', 'fetched', 'checkedAt', 'generatedAt']
+  const at = ['fetchedAt', 'fetched', 'checkedAt', 'scrapedAt', 'generatedAt']
     .map((k) => (typeof meta[k] === 'string' ? meta[k].slice(0, 10) : null)).filter(Boolean)[0] || null;
   dataVersions.push({
     file: f, section: SECTION_CN[f], build: build, checkedAt: at,
@@ -2074,11 +2076,32 @@ Object.keys(SECTION_CN).forEach((f) => {
   }
 });
 if (!dataVersions.length) errs.push('数据版本表一条都没派生出来：页脚与首页那颗徽标会没有数可显示');
+// ---- 数据过期闸（站主 2026-10-26 定的天数：超 7 天提示、超 14 天拦红）----
+// 这条**故意**随"今天"变：同一份数据放着不动才会红，重抓当天就绿——要的就是这个效果。
+// 之前是四个洞：没人比较核对日与今天、页面只显第二份（插件）的日期、
+// 门禁把日期抄成字面量、配装根本没进这张表（见 docs/EVAL-bis更新与3D模型-2026-10-26.md）。
+const STALE_SOFT_DAYS = 7;
+const STALE_HARD_DAYS = 14;
+const now0 = Date.now();
+dataVersions.forEach((x) => {
+  if (!x.checkedAt) return;
+  const days = Math.floor((now0 - new Date(x.checkedAt + 'T00:00:00').getTime()) / 86400000);
+  x.daysSince = days;
+  x.stale = days > STALE_HARD_DAYS ? 'red' : (days > STALE_SOFT_DAYS ? 'warn' : null);
+  if (x.stale === 'red') {
+    errs.push(`数据过期：${x.section} 这份是 ${x.checkedAt} 对着来源核的，距今 ${days} 天（硬线 ${STALE_HARD_DAYS} 天）。`
+      + `重抓那一块（tools/refresh.sh 里有对应分支），或按流程改这条天数——别把日期手抄新一点糊过去。`);
+  } else if (x.stale === 'warn') {
+    warns.push(`数据快过期：${x.section}（${x.checkedAt} 核对，距今 ${days} 天；到 ${STALE_HARD_DAYS} 天会拦红）`);
+  }
+});
 // 有客户端版本号的排前面、新的在上；只留了日期的（物品名录、素材台账）排在后面
 dataVersions.sort((a, b) => (b.build ? 1 : 0) - (a.build ? 1 : 0)
   || String(b.build || '').localeCompare(String(a.build || ''))
   || String(a.section).localeCompare(String(b.section)));
 scale.dataVersions = dataVersions;
+// 界面（溯源页那张表）按这两个数决定标不标"已过期"，不在组件里另抄一份天数
+scale.stalePolicy = { soft: STALE_SOFT_DAYS, hard: STALE_HARD_DAYS };
 // 首页那颗徽标报"最新核到哪个客户端"，这个"最新"也现算，不在组件里挑
 scale.newestBuild = dataVersions.map((x) => x.build).filter(Boolean).sort().slice(-1)[0] || null;
 scale.newestSection = (dataVersions.filter((x) => x.build === scale.newestBuild)[0] || {}).section || null;

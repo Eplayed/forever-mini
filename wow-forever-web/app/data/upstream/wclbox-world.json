@@ -7,45 +7,45 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1791702948979",
-  "foreverBuild": "1.60.1.70338",
+  "release": "r-1792976599011",
+  "foreverBuild": "1.60.1.70532",
   "classicBuild": "1.15.9.70003",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-10-11",
+  "scrapedAt": "2026-10-26",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1791702948979/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1791702948979/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1791702948979/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1791702948979/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1791702948979/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1791702948979/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1791702948979/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1792976599011/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1792976599011/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1792976599011/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1792976599011/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1792976599011/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1792976599011/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1792976599011/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70338",
+   "foreverBuild": "1.60.1.70532",
    "classicBuild": "1.15.9.70003",
-   "navBuild": "1.60.1.70338",
+   "navBuild": "1.60.1.70532",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70338",
+    "build": "1.60.1.70532",
     "month": 10,
-    "day": 10
+    "day": 22
    },
    "counts": {
-    "all": 965,
-    "changed": 753,
-    "newTalents": 113,
-    "changedTalents": 304,
-    "removedTalents": 79,
-    "spells": 420,
-    "spellsChanged": 257
+    "all": 967,
+    "changed": 760,
+    "newTalents": 114,
+    "changedTalents": 305,
+    "removedTalents": 80,
+    "spells": 421,
+    "spellsChanged": 261
    }
   },
   "maps": [
@@ -2851,7 +2851,7 @@
      ]
     },
     {
-     "anchor": "rare-9",
+     "anchor": "rare-12",
      "count": 7,
      "zone": "贫瘠之地",
      "side": "h",
@@ -2911,13 +2911,23 @@
      ]
     },
     {
-     "anchor": "rare-14",
+     "anchor": "rare-17",
      "count": 2,
      "zone": "石爪山脉",
      "side": "c",
      "level": [
       15,
       25
+     ]
+    },
+    {
+     "anchor": "rare-22",
+     "count": 2,
+     "zone": "塔纳利斯",
+     "side": "c",
+     "level": [
+      40,
+      50
      ]
     },
     {
@@ -2928,7 +2938,7 @@
      "level": null
     },
     {
-     "anchor": "zone-1426",
+     "anchor": "rare-4",
      "count": 1,
      "zone": "丹莫罗",
      "side": "a",
@@ -2938,7 +2948,7 @@
      ]
     },
     {
-     "anchor": "rare-11",
+     "anchor": "rare-14",
      "count": 1,
      "zone": "洛克莫丹",
      "side": "a",
@@ -2948,23 +2958,13 @@
      ]
     },
     {
-     "anchor": "rare-20",
+     "anchor": "rare-23",
      "count": 1,
      "zone": "悲伤沼泽",
      "side": "c",
      "level": [
       36,
       43
-     ]
-    },
-    {
-     "anchor": "rare-19",
-     "count": 1,
-     "zone": "塔纳利斯",
-     "side": "c",
-     "level": [
-      40,
-      50
      ]
     },
     {
@@ -2979,6 +2979,65 @@
     }
    ],
    "hunts": [
+    {
+     "key": "Shal'ma",
+     "name": "沙尔玛",
+     "npc": null,
+     "zone": "杜隆塔尔",
+     "level": [
+      9,
+      9
+     ],
+     "kind": "rare",
+     "new": true,
+     "map": {
+      "href": "/ditu/kalimdor#x=21349&y=17694&z=5&with=rare",
+      "img": "/ditu-xiao/1411.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1411
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 286746,
+        "n": "沙玛的披肩",
+        "q": 2,
+        "k": "inv_helmet_48",
+        "l": 11,
+        "x": [
+         "装备后绑定",
+         "背部\t布甲",
+         "护甲值 10",
+         "+1 精神",
+         "需要等级 6"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 60.7,
+       "y": 90.0,
+       "map": "/ditu/kalimdor#x=21349&y=17694&z=5&with=rare"
+      },
+      {
+       "x": 69.2,
+       "y": 71.5,
+       "map": "/ditu/kalimdor#x=21781&y=17068&z=5&with=rare"
+      },
+      {
+       "x": 63.1,
+       "y": 96.2,
+       "map": "/ditu/kalimdor#x=21471&y=17903&z=5&with=rare"
+      }
+     ],
+     "tame": {
+      "id": "cat",
+      "name": "豹"
+     },
+     "id": "rare-1"
+    },
     {
      "key": "Snarlsnout",
      "name": "咆鼻",
@@ -3004,14 +3063,14 @@
         "n": "糟鼻的火枪",
         "q": 2,
         "k": "inv_weapon_rifle_05",
-        "l": 10,
+        "l": 12,
         "x": [
          "装备后绑定",
          "远程\t枪械",
-         "8 - 16 点伤害\t速度 2.80",
-         "(每秒伤害 4.3)",
+         "8 - 17 点伤害\t速度 2.50",
+         "(每秒伤害 5.0)",
          "+1 力量",
-         "需要等级 5"
+         "需要等级 7"
         ]
        }
       }
@@ -3023,7 +3082,7 @@
        "map": "/ditu/kalimdor#x=15936&y=18668&z=5&with=rare"
       }
      ],
-     "id": "rare-1"
+     "id": "rare-2"
     },
     {
      "key": "Nightscreech",
@@ -3050,14 +3109,14 @@
         "n": "慧眼魔杖",
         "q": 2,
         "k": "inv_wand_01",
-        "l": 10,
+        "l": 12,
         "x": [
          "装备后绑定",
          "远程\t魔杖",
-         "8 - 16 点奥术伤害\t速度 1.70",
-         "(每秒伤害 7.1)",
+         "10 - 20 点奥术伤害\t速度 1.70",
+         "(每秒伤害 8.8)",
          "+1 智力",
-         "需要等级 5"
+         "需要等级 7"
         ]
        }
       }
@@ -3083,7 +3142,66 @@
       "id": "bird-of-prey",
       "name": "猛禽"
      },
-     "id": "rare-2"
+     "id": "rare-3"
+    },
+    {
+     "key": "Ghostfang",
+     "name": "幽魂之牙",
+     "npc": null,
+     "zone": "丹莫罗",
+     "level": [
+      10,
+      10
+     ],
+     "kind": "rare",
+     "new": true,
+     "map": {
+      "href": "/ditu/eastern-kingdoms#x=6679&y=11291&z=5&with=rare",
+      "img": "/ditu-xiao/1426.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1426
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 286751,
+        "n": "幽魂之牙的软鞋",
+        "q": 2,
+        "k": "inv_boots_05",
+        "l": 12,
+        "x": [
+         "装备后绑定",
+         "脚\t布甲",
+         "护甲值 16",
+         "+2 精神",
+         "需要等级 7"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 80.4,
+       "y": 45.2,
+       "map": "/ditu/eastern-kingdoms#x=6679&y=11291&z=5&with=rare"
+      },
+      {
+       "x": 74.7,
+       "y": 62.7,
+       "map": "/ditu/eastern-kingdoms#x=6410&y=11842&z=5&with=rare"
+      },
+      {
+       "x": 81.7,
+       "y": 55.5,
+       "map": "/ditu/eastern-kingdoms#x=6741&y=11615&z=5&with=rare"
+      }
+     ],
+     "tame": {
+      "id": "cat",
+      "name": "豹"
+     },
+     "id": "rare-4"
     },
     {
      "key": "Blightsculler",
@@ -3107,7 +3225,7 @@
       {
        "item": {
         "id": 283460,
-        "n": "腐纹腰带",
+        "n": "腐朽血肉腰带",
         "q": 2,
         "k": "inv_belt_03",
         "l": 12,
@@ -3135,7 +3253,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-3"
+     "id": "rare-5"
     },
     {
      "key": "Fernfeather",
@@ -3207,7 +3325,7 @@
       "id": "tallstrider",
       "name": "陆行鸟"
      },
-     "id": "rare-4"
+     "id": "rare-6"
     },
     {
      "key": "Galemender Delanea",
@@ -3253,7 +3371,53 @@
        "map": "/ditu/zephras-isle#x=2892&y=2580&z=3&with=rare"
       }
      ],
-     "id": "rare-5"
+     "id": "rare-7"
+    },
+    {
+     "key": "Stormherald Ukta",
+     "name": "风暴使者乌克塔",
+     "npc": null,
+     "zone": "莫高雷",
+     "level": [
+      12,
+      12
+     ],
+     "kind": "rare",
+     "new": true,
+     "map": {
+      "href": "/ditu/kalimdor#x=17537&y=18428&z=5&with=rare",
+      "img": "/ditu-xiao/1412.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1412
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 286754,
+        "n": "乌克塔的导能杖",
+        "q": 2,
+        "k": "inv_staff_07",
+        "l": 14,
+        "x": [
+         "装备后绑定",
+         "双手\t法杖",
+         "22 - 41 点伤害\t速度 3.30",
+         "(每秒伤害 9.5)",
+         "+3 耐力",
+         "需要等级 9"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 59.8,
+       "y": 58.4,
+       "map": "/ditu/kalimdor#x=17537&y=18428&z=5&with=rare"
+      }
+     ],
+     "id": "rare-8"
     },
     {
      "key": "Den'dralass",
@@ -3302,7 +3466,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-6"
+     "id": "rare-9"
     },
     {
      "key": "Mystmane",
@@ -3353,7 +3517,7 @@
       "id": "bear",
       "name": "熊"
      },
-     "id": "rare-7"
+     "id": "rare-10"
     },
     {
      "key": "Tel'daeor the Stormspeaker",
@@ -3433,7 +3597,7 @@
        "map": "/ditu/zephras-isle#x=3046&y=2263&z=3&with=rare"
       }
      ],
-     "id": "rare-8"
+     "id": "rare-11"
     },
     {
      "key": "Rocklance",
@@ -3480,7 +3644,7 @@
        "map": "/ditu/kalimdor#x=19362&y=17534&z=5&with=rare"
       }
      ],
-     "id": "rare-9"
+     "id": "rare-12"
     },
     {
      "key": "Takk the Leaper",
@@ -3516,6 +3680,7 @@
          "+3 精神",
          "需要等级 16",
          "卡利姆多的祝福 (0/3)",
+         "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。",
          "售价：42银38铜"
         ]
        }
@@ -3532,7 +3697,7 @@
       "id": "raptor",
       "name": "迅猛龙"
      },
-     "id": "rare-10"
+     "id": "rare-13"
     },
     {
      "key": "Emogg the Crusher",
@@ -3581,7 +3746,7 @@
        "map": "/ditu/eastern-kingdoms#x=8458&y=10929&z=5&with=rare"
       }
      ],
-     "id": "rare-11"
+     "id": "rare-14"
     },
     {
      "key": "Sister Rathtalon",
@@ -3628,7 +3793,7 @@
        "map": "/ditu/kalimdor#x=17670&y=15828&z=5&with=rare"
       }
      ],
-     "id": "rare-12"
+     "id": "rare-15"
     },
     {
      "key": "Swiftmane",
@@ -3662,7 +3827,8 @@
          "+6 敏捷",
          "+2 精神",
          "需要等级 18",
-         "卡利姆多的祝福 (0/3)"
+         "卡利姆多的祝福 (0/3)",
+         "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。"
         ]
        }
       }
@@ -3675,7 +3841,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-13"
+     "id": "rare-16"
     },
     {
      "key": "Taskmaster Whipfang",
@@ -3722,7 +3888,7 @@
        "map": "/ditu/kalimdor#x=16292&y=15278&z=5&with=rare"
       }
      ],
-     "id": "rare-14"
+     "id": "rare-17"
     },
     {
      "key": "Thora Feathermoon",
@@ -3770,7 +3936,7 @@
        "map": "/ditu/kalimdor#x=18584&y=20005&z=5&with=rare"
       }
      ],
-     "id": "rare-15"
+     "id": "rare-18"
     },
     {
      "key": "Hagg Taurenbane",
@@ -3822,7 +3988,7 @@
        "map": "/ditu/kalimdor#x=17903&y=19947&z=5&with=rare"
       }
      ],
-     "id": "rare-16"
+     "id": "rare-19"
     },
     {
      "key": "Aean Swiftriver",
@@ -3870,7 +4036,7 @@
        "map": "/ditu/kalimdor#x=18584&y=20005&z=5&with=rare"
       }
      ],
-     "id": "rare-17"
+     "id": "rare-20"
     },
     {
      "key": "Sorrow Wing",
@@ -3920,7 +4086,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-18"
+     "id": "rare-21"
     },
     {
      "key": "Warleader Krazzilak",
@@ -3966,7 +4132,7 @@
        "map": "/ditu/kalimdor#x=19164&y=22982&z=5&with=rare"
       }
      ],
-     "id": "rare-19"
+     "id": "rare-22"
     },
     {
      "key": "Lord Captain Wyrmak",
@@ -4014,7 +4180,59 @@
        "map": "/ditu/eastern-kingdoms#x=8259&y=15951&z=5&with=rare"
       }
      ],
-     "id": "rare-20"
+     "id": "rare-23"
+    },
+    {
+     "key": "Greater Firebird",
+     "name": "巨型火鸟",
+     "npc": null,
+     "zone": "塔纳利斯",
+     "level": [
+      46,
+      46
+     ],
+     "kind": "rare",
+     "new": false,
+     "map": {
+      "href": "/ditu/kalimdor#x=19866&y=23614&z=5&with=rare",
+      "img": "/ditu-xiao/1446.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1446
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 282558,
+        "n": "火鸟兜帽",
+        "q": 3,
+        "k": "inv_helmet_28",
+        "l": 58,
+        "x": [
+         "拾取后绑定",
+         "头部\t布甲",
+         "护甲值 67",
+         "+24 耐力",
+         "+7 智力",
+         "需要等级 53",
+         "装备：每5秒回复6点法力值。",
+         "售价：31银49铜"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 49.4,
+       "y": 36.0,
+       "map": "/ditu/kalimdor#x=19866&y=23614&z=5&with=rare"
+      }
+     ],
+     "tame": {
+      "id": "carrion-bird",
+      "name": "食腐鸟"
+     },
+     "id": "rare-24"
     },
     {
      "key": "Slydris",
@@ -4077,7 +4295,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-21"
+     "id": "rare-25"
     },
     {
      "key": "Snapbeak the Quick",
@@ -4095,6 +4313,25 @@
       "mapId": 2521
      },
      "drops": [
+      {
+       "item": {
+        "id": 288927,
+        "n": "迅击戒指",
+        "q": 4,
+        "k": "inv_jewelry_ring_07",
+        "l": 30,
+        "x": [
+         "装备后绑定",
+         "唯一",
+         "手指",
+         "+4 耐力",
+         "+2 力量",
+         "装备：使你造成爆击的几率提高0.5%。",
+         "装备：+14 攻击强度。",
+         "售价：6金40银30铜"
+        ]
+       }
+      },
       {
        "item": {
         "id": 285264,
@@ -4138,7 +4375,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-22"
+     "id": "rare-26"
     }
    ],
    "sets": [
@@ -4147,7 +4384,7 @@
      "known": true,
      "pieces": [
       {
-       "rare": "rare-10",
+       "rare": "rare-13",
        "npc": null,
        "name": "“跳跃者”塔克",
        "item": {
@@ -4164,12 +4401,13 @@
          "+3 精神",
          "需要等级 16",
          "卡利姆多的祝福 (0/3)",
+         "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。",
          "售价：42银38铜"
         ]
        }
       },
       {
-       "rare": "rare-13",
+       "rare": "rare-16",
        "npc": null,
        "name": "迅鬃斑马",
        "item": {
@@ -4184,7 +4422,8 @@
          "+6 敏捷",
          "+2 精神",
          "需要等级 18",
-         "卡利姆多的祝福 (0/3)"
+         "卡利姆多的祝福 (0/3)",
+         "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。"
         ]
        }
       },
@@ -4205,12 +4444,15 @@
          "+5 智力",
          "需要等级 20",
          "卡利姆多的祝福 (0/3)",
+         "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。",
          "售价：49银96铜"
         ]
        }
       }
      ],
-     "bonus": []
+     "bonus": [
+      "(2) 套装：在贫瘠之地或石爪山脉区域时，移动速度提高5%。"
+     ]
     }
    ],
    "zones": [
@@ -4293,58 +4535,6 @@
      ]
     },
     {
-     "id": 1426,
-     "name": "丹莫罗",
-     "level": [
-      4,
-      12
-     ],
-     "side": "a",
-     "map": "/ditu/eastern-kingdoms/dun-morogh#with=rare",
-     "img": "/ditu-xiao/1426.webp",
-     "mapId": 1426,
-     "pins": [
-      {
-       "x": 80.4,
-       "y": 45.2,
-       "nums": [
-        3
-       ]
-      }
-     ],
-     "cards": [
-      {
-       "num": 3,
-       "key": "Ghostfang",
-       "name": "幽魂之牙",
-       "npc": null,
-       "kind": "rare",
-       "new": false,
-       "coords": [
-        {
-         "x": 80.4,
-         "y": 45.2,
-         "map": "/ditu/eastern-kingdoms#x=6679&y=11291&z=5&with=rare"
-        },
-        {
-         "x": 74.7,
-         "y": 62.7,
-         "map": "/ditu/eastern-kingdoms#x=6410&y=11842&z=5&with=rare"
-        },
-        {
-         "x": 81.7,
-         "y": 55.5,
-         "map": "/ditu/eastern-kingdoms#x=6741&y=11615&z=5&with=rare"
-        }
-       ],
-       "tame": {
-        "id": "cat",
-        "name": "豹"
-       }
-      }
-     ]
-    },
-    {
      "id": 1420,
      "name": "提瑞斯法林地",
      "level": [
@@ -4360,27 +4550,27 @@
        "x": 66.0,
        "y": 44.0,
        "nums": [
-        4
+        3
        ]
       },
       {
        "x": 19.6,
        "y": 64.7,
        "nums": [
-        5
+        4
        ]
       },
       {
        "x": 53.1,
        "y": 56.7,
        "nums": [
-        6
+        5
        ]
       }
      ],
      "cards": [
       {
-       "num": 4,
+       "num": 3,
        "key": "The Condemned One",
        "name": "受诅者",
        "npc": null,
@@ -4410,7 +4600,7 @@
        ]
       },
       {
-       "num": 5,
+       "num": 4,
        "key": "Coldrasp",
        "name": "寒嘶",
        "npc": null,
@@ -4429,7 +4619,7 @@
        }
       },
       {
-       "num": 6,
+       "num": 5,
        "key": "Decrepit Harvester",
        "name": "破旧的收割机",
        "npc": null,
@@ -4461,13 +4651,13 @@
        "x": 54.7,
        "y": 68.8,
        "nums": [
-        7
+        6
        ]
       }
      ],
      "cards": [
       {
-       "num": 7,
+       "num": 6,
        "key": "Wrathvine",
        "name": "怒藤",
        "npc": null,
@@ -4504,20 +4694,13 @@
        "x": 59.2,
        "y": 30.9,
        "nums": [
-        8
-       ]
-      },
-      {
-       "x": 59.8,
-       "y": 58.4,
-       "nums": [
-        9
+        7
        ]
       }
      ],
      "cards": [
       {
-       "num": 8,
+       "num": 7,
        "key": "Thornstarter Igleg",
        "name": "引棘者伊格莱格",
        "npc": null,
@@ -4528,21 +4711,6 @@
          "x": 59.2,
          "y": 30.9,
          "map": "/ditu/kalimdor#x=17502&y=17345&z=5&with=rare"
-        }
-       ]
-      },
-      {
-       "num": 9,
-       "key": "Stormherald Ukta",
-       "name": "风暴使者乌克塔",
-       "npc": null,
-       "kind": "rare",
-       "new": false,
-       "coords": [
-        {
-         "x": 59.8,
-         "y": 58.4,
-         "map": "/ditu/kalimdor#x=17537&y=18428&z=5&with=rare"
         }
        ]
       }
@@ -4564,20 +4732,20 @@
        "x": 79.2,
        "y": 55.1,
        "nums": [
-        10
+        8
        ]
       },
       {
        "x": 65.1,
        "y": 76.9,
        "nums": [
-        11
+        9
        ]
       }
      ],
      "cards": [
       {
-       "num": 10,
+       "num": 8,
        "key": "Elder Finseer",
        "name": "先知长老芬希尔",
        "npc": null,
@@ -4597,7 +4765,7 @@
        ]
       },
       {
-       "num": 11,
+       "num": 9,
        "key": "Matriarch Bristlefur",
        "name": "鬃毛女族长",
        "npc": null,
@@ -4643,20 +4811,13 @@
        "x": 51.5,
        "y": 21.2,
        "nums": [
-        12
-       ]
-      },
-      {
-       "x": 60.7,
-       "y": 90.0,
-       "nums": [
-        13
+        10
        ]
       }
      ],
      "cards": [
       {
-       "num": 12,
+       "num": 10,
        "key": "Dustwind Eggtender",
        "name": "尘风护卵者",
        "npc": null,
@@ -4669,35 +4830,6 @@
          "map": "/ditu/kalimdor#x=20882&y=15365&z=5&with=rare"
         }
        ]
-      },
-      {
-       "num": 13,
-       "key": "Shal'ma",
-       "name": "沙尔玛",
-       "npc": null,
-       "kind": "rare",
-       "new": false,
-       "coords": [
-        {
-         "x": 60.7,
-         "y": 90.0,
-         "map": "/ditu/kalimdor#x=21349&y=17694&z=5&with=rare"
-        },
-        {
-         "x": 69.2,
-         "y": 71.5,
-         "map": "/ditu/kalimdor#x=21781&y=17068&z=5&with=rare"
-        },
-        {
-         "x": 63.1,
-         "y": 96.2,
-         "map": "/ditu/kalimdor#x=21471&y=17903&z=5&with=rare"
-        }
-       ],
-       "tame": {
-        "id": "cat",
-        "name": "豹"
-       }
       }
      ]
     },
@@ -4717,13 +4849,13 @@
        "x": 67.6,
        "y": 83.2,
        "nums": [
-        14
+        11
        ]
       }
      ],
      "cards": [
       {
-       "num": 14,
+       "num": 11,
        "key": "Scarlet Captain",
        "name": "血色上尉",
        "npc": null,
@@ -4765,7 +4897,7 @@
     "斯卡达隆",
     "老锈嚎"
    ],
-   "count": 36
+   "count": 37
   },
   "shuji": {
    "rewards": [
@@ -5913,13 +6045,15 @@
     "3334": {
      "id": 3334,
      "n": "农夫的铁锨",
-     "q": 1,
+     "q": 2,
      "k": "inv_misc_shovel_01",
      "l": 10,
      "x": [
+      "装备后绑定",
       "双手\t锤",
-      "17 - 26 点伤害\t速度 3.70",
-      "(每秒伤害 5.8)",
+      "21 - 32 点伤害\t速度 3.70",
+      "(每秒伤害 7.2)",
+      "+1 力量",
       "需要等级 5",
       "售价：68铜"
      ]
@@ -5942,14 +6076,14 @@
      "n": "银星",
      "q": 2,
      "k": "ability_upgrademoonglaive",
-     "l": 37,
+     "l": 35,
      "x": [
       "拾取后绑定",
       "投掷\t投掷武器",
-      "28 - 53 点伤害\t速度 2.30",
-      "(每秒伤害 17.6)",
-      "+5 敏捷",
-      "售价：9铜"
+      "26 - 49 点伤害\t速度 2.30",
+      "(每秒伤害 16.3)",
+      "+4 敏捷",
+      "售价：54银26铜"
      ]
     },
     "3464": {

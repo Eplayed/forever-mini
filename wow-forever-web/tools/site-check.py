@@ -1812,11 +1812,19 @@ def test_bis(browser, base):
               sum(1 for x in cmp_rows if x["tag"] == u"没列")))
     cmp_note = page.evaluate("""() => { const c = document.querySelector('#pzcmp').closest('.card');
       const n = c.querySelector('.note'); return (n ? n.innerText : '').replace(/\\s+/g, ' '); }""")
+    # 日期从 bis.json 现读再比，不抄字面量：上一版这里写死 "2026-10-23"，
+    # 换一次抓取日期就会红一次，而红的原因是"断言抄死了旧事实"，不是页面错。
+    bis_meta = json.load(open(os.path.join(SRC, "data", "bis.json"), encoding="utf-8"))["meta"]
+    alt_at = (bis_meta.get("alt") or {}).get("fetched") or ""
+    main_at = bis_meta.get("scrapedAt") or ""
     check("对照表下面写清了来源、抓取日期与不裁决的口径（红线：两源分歧两个都留）",
-          u"XR_DungeonGuide" in cmp_note and u"2026-10-23" in cmp_note
+          u"XR_DungeonGuide" in cmp_note and bool(alt_at) and alt_at in cmp_note
           and u"不裁决" in cmp_note and u"仍以主源为准" in cmp_note
           and u"L1" in cmp_note and u"升档" in cmp_note,
-          cmp_note[:60])
+          "插件那份 %s ／ %s" % (alt_at, cmp_note[:52]))
+    check("配装页把主源的核对日也摆在玩家看得见的地方（上一版只显插件那份，主源哪天抓的没人知道）",
+          bool(main_at) and page.evaluate("(a) => (document.body.innerText || '').indexOf(a) >= 0", main_at),
+          "主源核对日 %s" % main_at)
     cmp_stat = page.evaluate("""() => (document.querySelector('#pzcmp').closest('.card')
       .querySelector('.bhead .bn') || {}).innerText || ''""")
     dl_a = w["doll"]["alliance"]
@@ -1973,12 +1981,119 @@ def test_bis(browser, base):
     page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare-missing.png"))
     ctx.close()
 
+    # ---- 3D 那一层（2026-10-26 站主"先给我看 3D 效果"）----
+    # 判据全部落在像素上：canvas 存在、分包到位、按钮 aria-pressed 翻了，
+    # 都不等于"画出来了"——第一版就是模型被整个藏掉，DOM 一切正常、屏幕上只有原画。
+    art_bm = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8")).get("bisModels") or {}
+    models = art_bm.get("items") or []
+    has_model = bool(models) and art_bm.get("origin") == "self-generated"
+    dctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    dp = dctx.new_page()
+    dreq = []
+    dp.on("request", lambda r: dreq.append(r.url))
+    derr = []
+    dp.on("pageerror", lambda e: derr.append(str(e)[:120]))
+    dp.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    dp.wait_for_timeout(2200)
+    dbtn = dp.query_selector("button.pz-3dbtn")
+    check("台账里有自产模型才出现这个按钮；没有模型就不该给玩家点（不猜路径）",
+          (dbtn is not None) == has_model,
+          "台账 %d 个（origin=%s）／按钮 %s" % (len(models), art_bm.get("origin"), bool(dbtn)))
+    pre = [u for u in dreq if "three" in u or "GLTFLoader" in u or u.endswith(".glb")]
+    check("不点按钮时 three.js 与模型一个字节都不下载（首屏不为 3D 买单）", not pre,
+          "点之前 3D 相关请求 %d 条" % len(pre))
+    if has_model and dbtn:
+        dbtn.click()
+        dp.wait_for_timeout(5000)
+        post = [u.split("/")[-1] for u in dreq if "three" in u or "GLTFLoader" in u or u.endswith(".glb")]
+        check("点下去才加载渲染器与模型文件", any("three" in x for x in post)
+              and any(x.endswith(".glb") for x in post), ", ".join(sorted(set(post))[:4]))
+        gl = dp.evaluate("""() => { const c = document.querySelector('canvas.pzc-gl');
+          const note = [...document.querySelectorAll('.pz-3dnote')].map(e => e.innerText).join(' ');
+          return { eng: c ? (c.getAttribute('data-engine') || '') : '',
+                   w: c ? c.width : 0, h: c ? c.height : 0,
+                   pressed: (document.querySelector('button.pz-3dbtn') || {}).getAttribute
+                     ? document.querySelector('button.pz-3dbtn').getAttribute('aria-pressed') : '',
+                   honest: note.indexOf('占位模型') >= 0 && note.indexOf('不是游戏里的样子') >= 0 }; }""")
+        check("画布真的建起来了（three.js 会把自己标在 canvas 上）",
+              bool(gl["eng"]) and gl["w"] > 200 and gl["pressed"] == "true",
+              "%s ／ %sx%s" % (gl["eng"], gl["w"], gl["h"]))
+        check("界面上写死这句：这是本站自拼的占位模型、不是游戏里的样子（红线：不冒充）",
+              gl["honest"], "见 .pz-3dnote")
+        # A/B 两帧：开 3D 与退回图片，同一块区域必须明显不同
+        box = dp.query_selector(".pzart")
+        shot_on = box.screenshot()
+        dp.query_selector("button.pz-3dbtn").click()
+        dp.wait_for_timeout(700)
+        shot_off = box.screenshot()
+        dp.query_selector("button.pz-3dbtn").click()
+        dp.wait_for_timeout(1200)
+        try:
+            from PIL import Image
+            import io
+
+            def crop_diff(a, bb):
+                ia = Image.open(io.BytesIO(a)).convert("RGB")
+                ib = Image.open(io.BytesIO(bb)).convert("RGB")
+                w, h = ia.size
+                # 只比中间那块：右上角是按钮、上面那条是说明文字，两帧本来就会变
+                x0, x1 = int(w * 0.10), int(w * 0.95)
+                y0, y1 = int(h * 0.42), int(h * 0.92)
+                ca = ia.crop((x0, y0, x1, y1))
+                cb = ib.crop((x0, y0, x1, y1))
+                pa, pb = ca.getdata(), cb.getdata()
+                n = 0
+                for (r1, g1, b1), (r2, g2, b2) in zip(pa, pb):
+                    if abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2) > 40:
+                        n += 1
+                return n, ca.size[0] * ca.size[1]
+
+            diff, tot = crop_diff(shot_on, shot_off)
+            ratio = 100.0 * diff / tot
+            check("开 3D 与退回图片两帧对比：中间那块真的换了内容（模型没画出来时这条会接近 0）",
+                  ratio >= 8.0, "差异 %.1f%%（判据 ≥8%%，比的是 %d 个像素）" % (ratio, tot))
+        except ImportError:
+            check("两帧对比跑不了：这台机器没有 PIL", False, "装上 Pillow 再跑这条门禁")
+
+        # 模型要跟着数据走：换阵营 → 这一套的件不一样 → 染出来的样子也不一样
+        shot_all = box.screenshot()
+        dp.evaluate("() => [...document.querySelectorAll('.pz-fac .pick')]"
+                    ".find(b => /部落/.test(b.innerText)).click()")
+        dp.wait_for_timeout(1200)
+        shot_horde = box.screenshot()
+        try:
+            from PIL import Image
+            import io
+
+            def diff_ratio(a, bb):
+                ia = Image.open(io.BytesIO(a)).convert("RGB")
+                ib = Image.open(io.BytesIO(bb)).convert("RGB")
+                w, h = ia.size
+                ca = ia.crop((int(w * .10), int(h * .42), int(w * .95), int(h * .92)))
+                cb = ib.crop((int(w * .10), int(h * .42), int(w * .95), int(h * .92)))
+                n = sum(1 for (r1, g1, b1), (r2, g2, b2) in zip(ca.getdata(), cb.getdata())
+                        if abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2) > 40)
+                return 100.0 * n / (ca.size[0] * ca.size[1])
+
+            r2 = diff_ratio(shot_all, shot_horde)
+            check("换阵营之后 3D 那一层跟着变（模型吃的是这一套的数据，不是一张死图）",
+                  r2 >= 2.0, "联盟/部落两帧差异 %.1f%%（判据 ≥2%%）" % r2)
+        except ImportError:
+            pass
+        dp.wait_for_timeout(600)
+        dp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-3d.png"),
+                      clip=dict((lambda b: ({"x": b["x"] - 20, "y": b["y"] - 20,
+                                             "width": b["width"] + 40, "height": b["height"] + 40}))(
+                          dp.query_selector(".pzmid").bounding_box())))
+        check("开 3D 之后这一页没有脚本报错", not derr, "; ".join(derr[:2]) or "干净")
+    dctx.close()
+
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     mp = ctx.new_page()
     mp.goto(APP_BASE + "/#/bis", wait_until="networkidle")
     mp.wait_for_timeout(2000)
     mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - innerWidth,
-      small: [...document.querySelectorAll('.pzcell, .pz-mode .pick, .pz-cls .pick')]
+      small: [...document.querySelectorAll('.pzcell, .pz-mode .pick, .pz-cls .pick, .pz-3dbtn')]
         .filter(b => b.getBoundingClientRect().height < 44).length })""")
     check("配装页 375 不横向溢出", mm["over"] <= 1, json.dumps(mm))
     check("配装页 375 点击目标不低于 44px", mm["small"] == 0, "%d 个偏小" % mm["small"])
@@ -3349,6 +3464,17 @@ def test_data_versions(browser, base):
     check("日期那列要么是快照里的日期、要么明写未记录，不留空",
           all(d and (d == "未记录" or re.match(r"^\d{4}-\d{2}-\d{2}$", d)) for d in dates),
           json.dumps(dates, ensure_ascii=False))
+    ages = [r[3] for r in rows]
+    pol = sc.get("stalePolicy") or {}
+    check("「多久没核了」那一列每行都有天数，且与快照现算的天数逐行一致",
+          bool(ages) and all(re.match(r"^\d+ 天", a or "") for a in ages)
+          and [int(a.split(" ")[0]) for a in ages] == [v.get("daysSince") for v in vers],
+          json.dumps(ages, ensure_ascii=False))
+    body = page.evaluate("() => document.body.innerText")
+    check("过期阈值那句话的天数来自规模快照，不是页面自己抄的第二份数",
+          bool(pol.get("soft")) and bool(pol.get("hard"))
+          and (u"超过 %d 天" % pol["soft"]) in body and (u"超过 %d 天" % pol["hard"]) in body,
+          "提示 %s 天 / 拦红 %s 天" % (pol.get("soft"), pol.get("hard")))
     check("这一页无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     page.screenshot(path=os.path.join(SHOT_DIR, "app-provenance-versions.png"))
     ctx.close()
@@ -3403,7 +3529,11 @@ def main():
     print("被测：%s（%s）" % (APP_BASE, "--app-base 指定" if given else "本脚本起的静态服务，根目录 " + SRC))
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(channel="chrome", headless=True)
+            # 开软件 GL：配装页那层 3D 要在无 GPU 的 headless 里也真渲染出来，
+            # 不然那条"两帧对比"永远只能验到降级路径（2026-10-26 第一次跑就是没 WebGL，
+            # 组件正常退回静态图，看着像功能坏了）。
+            browser = p.chromium.launch(channel="chrome", headless=True, args=[
+                "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"])
             for name, fn in todo:
                 # 传进去的 base 就是 APP_BASE：这一份只有新站一个被测对象，
                 # 留两个名字迟早会有某一节打错台（--app-base 时尤其明显）。

@@ -27,7 +27,7 @@
   "changesSpells": 421,
   "changesNew": 114,
   "changesModified": 305,
-  "changesSpellsChanged": 260,
+  "changesSpellsChanged": 261,
   "changesRemoved": 80,
   "classRank": [
    {
@@ -158,64 +158,89 @@
   "timeline": 11,
   "abilities": 86,
   "coverage": {
-   "L0": 366,
-   "L1": 437,
+   "L0": 367,
+   "L1": 436,
    "L2": 356,
    "L3": 2
   },
   "coverageTotal": 1161,
   "pubCoverage": {
-   "L0": 366,
-   "L1": 326,
+   "L0": 367,
+   "L1": 325,
    "L2": 1,
    "L3": 2
   },
   "pubTotal": 695,
   "dataVersions": [
    {
+    "file": "world.json",
+    "section": "世界（区域与稀有）",
+    "build": "1.60.1.70532",
+    "checkedAt": "2026-10-26",
+    "classic": null,
+    "daysSince": 0,
+    "stale": null
+   },
+   {
     "file": "legacy.json",
     "section": "传承",
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-23",
-    "classic": null
+    "classic": null,
+    "daysSince": 3,
+    "stale": null
    },
    {
     "file": "queue.json",
     "section": "副本排队表",
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-22",
-    "classic": null
+    "classic": null,
+    "daysSince": 4,
+    "stale": null
    },
    {
     "file": "changes.json",
     "section": "客户端改动",
-    "build": "1.60.1.70425",
-    "checkedAt": "2026-10-16",
-    "classic": "1.15.9.70003"
-   },
-   {
-    "file": "world.json",
-    "section": "世界（区域与稀有）",
-    "build": "1.60.1.70338",
-    "checkedAt": "2026-10-11",
-    "classic": null
+    "build": "1.60.1.70532",
+    "checkedAt": "2026-10-26",
+    "classic": "1.15.9.70003",
+    "daysSince": 0,
+    "stale": null
    },
    {
     "file": "items.json",
     "section": "物品名录",
     "build": null,
     "checkedAt": "2026-10-22",
-    "classic": null
+    "classic": null,
+    "daysSince": 4,
+    "stale": null
    },
    {
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
     "checkedAt": "2026-10-20",
-    "classic": null
+    "classic": null,
+    "daysSince": 6,
+    "stale": null
+   },
+   {
+    "file": "bis.json",
+    "section": "配装名单",
+    "build": null,
+    "checkedAt": "2026-10-26",
+    "classic": null,
+    "daysSince": 0,
+    "stale": null
    }
   ],
+  "stalePolicy": {
+   "soft": 7,
+   "hard": 14
+  },
   "newestBuild": "1.60.1.70532",
-  "newestSection": "传承"
+  "newestSection": "世界（区域与稀有）"
  }
 }

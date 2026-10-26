@@ -533,3 +533,8 @@ nav.main a.nl:has(.nb) { padding-right:10px }
     min-height: 44px; min-width: 44px; padding: 0 10px }
   #main .lge-anchor { gap: 14px }
 }
+
+/* 溯源页那张逐板块版本表：「多久没核了」那一列的颜色。
+   阈值由 build-data 现算下发（scale.stalePolicy），页面不抄第二份天数。 */
+.vtab .stale-warn { color: var(--warn) }
+.vtab .stale-red { color: var(--bad); font-weight: 600 }

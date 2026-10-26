@@ -13,6 +13,8 @@ app/            Vue 3 + Vite，这一站唯一的产品（21 条路由；实际�
                  official_cn 条目还必须带原文引用 quote）
   img/          本地素材：icons/（官方 CDN 转存 + manifest.json，可整体下线）、art/（客户端原画与副本底图）、
                 gen/、keyart/、favicon.ico、apple-touch-icon.png；每张图的来路记在各层 manifest.json
+                models/（配装 3D 预览用的**自产占位模型** + manifest.json）：只登记 `origin: self-generated`，
+                游戏客户端烘出来的模型要先改根 AGENTS.md 的素材红线才能进这一层；删掉整个目录即退回 2D 纸娃娃
   src/styles/   tokens.css（设计令牌单一事实源，令牌表见 docs/UI.md）、app.css（组件基线）、
                 board.css（只有这一站加载）、fonts.css + fonts/（自托管可变字体）
   src/lib/      data.js 带缓存的数据层、fmt.js 纯函数、glyph.js 自绘图参数、nav.js 导航、
@@ -57,6 +59,9 @@ python3 tools/site-check.py     # **唯一的界面门槛**：自己起静态服
 python3 tools/visual-check.py --make|--check
                                 # 视觉回归：像素 + 生效值指纹两层，拍的也是 app/dist（改版后跑）
 python3 tools/audit-translations.py  # 译名体检
+python3 tools/build-bis-placeholder-model.py  # 重烘配装 3D 的**占位**模型（纯几何体，不含游戏资产）
+python3 tools/register-bis-models.py          # 把 img/models/ 登记进 art.json.bisModels（页面据此决定那个按钮在不在）
+                                              # 非 self-generated 的模型它直接拒收——那是红线，不是配置
 python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 app/data/releases.json）
 python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
 python3 tools/release-package.py     # 打发布包（只发 app/dist，旧 html 的跳转桩已撤）
@@ -84,6 +89,11 @@ bash tools/serve.sh            # 本地预览：新站 :8821（file:// 打不开
        排行仍标“本站整理，非官方结论”；`addon-drawn` 地图必须就地标“这张是示意图，不是游戏里的地图”。这些说明不能被“内容页不展示出处”的旧决定吞掉。具体来源优先级和天裔小图标例外见根 `AGENTS.md` 2026-10-20 追加决定；历史决策与已撤口径见 `docs/VERIFY-pages-and-index-2026-10-21.md`。
 4. 两源译名和数值分歧在数据里完整保留并注明来源；内容页使用选定值，分歧到溯源页查，不再要求内容页画旧 `.conf` 红框。
 4b. **标 L0 的中文名必须能在它自己声明的官方页里逐字找到**（`tools/audit-translations.py` 负责核对）。找不到的要么改指向真正那篇、要么降 L2，只有写了官方原句与判定理由的例外（`app/data/audit-exceptions.json`）才允许保留，且缺 quote/reason/decidedAt 会让构建失败。
+4c. **数据不许悄悄过期**（2026-10-26 站主定的天数）：`build-data.js` 拿逐板块版本表的"本站核对日"与当天比，
+   超 `STALE_SOFT_DAYS`（7）提示、超 `STALE_HARD_DAYS`（14）**拦红**；阈值随 `scale.stalePolicy` 下发，
+   溯源页那张表多一列「多久没核了」。**红了就去重抓那一块，不许把日期手抄新一点糊过去**——
+   这条故意随"今天"变化，同一份数据放着不动才会红，重抓当天就绿。配装页还须把主源核对日显示给玩家
+   （`site-check.py` 钉着，日期一律从 `bis.json.meta` 现读，门禁里再抄一个字面量就是第二次犯同一个错）。
 5. **天赋层级点数门槛（2026-10-22 站主改口径，推翻本条原写法）**：`app/data/talents/*.json` 的 `rules`
    （`totalPoints` + `tierUnlockCost`）**随分片下发**，网页与小程序的天赋页都用它做加点判定——站主要的是
    "天赋树是模拟器的样子，可以模拟点击配置，和网页版那样的功能"。但这组数仍是**按经典旧世层级推的**，

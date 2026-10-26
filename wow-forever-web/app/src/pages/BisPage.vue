@@ -32,7 +32,8 @@
     <div class="card" v-if="cur">
       <div class="bhead">
         <h2 class="bt">{{ cur.clsCn }} · {{ cur.mode }}</h2>
-        <span class="bn">{{ doll.length }} 个部位 · 点任意一个看这个部位还能换什么</span>
+        <span class="bn">{{ doll.length }} 个部位 · 点任意一个看这个部位还能换什么
+          · 这份名单 <span class="mono">{{ cur.fetched }}</span> 对着来源核过</span>
       </div>
       <div class="pz-picks">
         <div class="picks pz-mode">
@@ -49,8 +50,9 @@
       </div>
 
       <!-- 纸娃娃：左列 / 中间职业原画 / 右列，武器与远程压在中间那一列下面。
-           布局照参考站那页的三栏（实测它是 471 / 360 / 471）。中间放的是职业原画，
-           不是人物模型——本站没有 3D 素材，也不拿别的图冒充"穿上身的样子"。 -->
+           布局照参考站那页的三栏（实测它是 471 / 360 / 471）。中间默认是职业原画；
+           2026-10-26 起可以点开换成 3D——那一层现在是本站自己拼的**占位模型**，
+           不是游戏里的样子（游戏模型要等客户端那一层能取到文件，见 docs/EVAL-bis更新与3D模型-2026-10-26.md）。 -->
       <div class="pz-three">
         <div class="pzcol">
           <BisCell v-for="c in colLeft" :key="c.slot + '-' + c.cell" :cell="c"
@@ -58,8 +60,19 @@
         </div>
         <div class="pzmid">
           <div class="pzart" :style="artStyle">
+            <ModelViewer v-if="modelFile && live3d" :src="assetUrl(modelFile)" :gear="gearQ"
+                         :height="300" @fail="glWhy = $event" />
             <span class="pzart-tag mono">{{ cur.clsCn }} · {{ cur.level }} 级</span>
+            <button v-if="modelFile" type="button" class="pz-3dbtn"
+                    :aria-pressed="live3d ? 'true' : 'false'" @click="toggle3d">{{ live3d ? '返回图片' : '旋转 3D 模型' }}</button>
           </div>
+          <!-- 说明压在图下面而不是浮在图上：浮着会把模型本身盖掉一半，
+               而"看效果"要看的正是模型。这两句一句都不许省（红线：不冒充）。 -->
+          <p v-if="live3d && !glWhy" class="pz-3dnote">这一版是本站自己拼的<b>占位模型</b>，不是游戏里的样子：
+            一件一块，颜色跟品质走，这一套没穿的部位就不画。真模型要等客户端那一层能取到文件。</p>
+          <p v-if="glWhy" class="pz-3dnote">{{ glWhy }}，这一栏退回静态原画。</p>
+          <p v-if="live3d && unmappedSlots.length" class="pz-3dnote">这几个部位占位模型里没有格子：
+            {{ unmappedSlots.join('、') }}（不硬塞到别的块上冒充）。</p>
           <div class="pzrow">
             <BisCell v-for="c in colBottom" :key="c.slot + '-' + c.cell" :cell="c"
                      :on="sel === c.slot" @pick="open" />
@@ -213,6 +226,8 @@ import { sumStatLines } from '../lib/item-stats.js';
 import IconCell from '../components/IconCell.vue';
 import BisCell from '../components/BisCell.vue';
 import BisPop from '../components/BisPop.vue';
+import ModelViewer from '../components/ModelViewer.vue';
+import { gearNodes } from '../lib/bis-model.js';
 
 const FACS = [['alliance', '联盟'], ['horde', '部落']];
 /* 纸娃娃三栏的部位归属（16 种标签实测枚举，见 docs/VERIFY-bis-2026-10-16.md） */
@@ -351,6 +366,29 @@ const artStyle = computed(() => {
   const u = artOf((P.value || {}).art, 'classes', (cur.value || {}).cls || '');
   return u ? { backgroundImage: 'url(' + assetUrl(u) + ')' } : {};
 });
+/* ---- 3D：模型台账里没有文件就整个按钮不出现（不猜路径、不拿别的图冒充）---- */
+const live3d = ref(false);
+const glWhy = ref('');
+function toggle3d() {
+  live3d.value = !live3d.value;
+  if (live3d.value) glWhy.value = '';
+}
+const modelFile = computed(() => {
+  const M = ((P.value || {}).art || {}).bisModels || {};
+  const f = ((M.items || [])[0] || {}).file || '';
+  return M.origin === 'self-generated' && f ? f : '';
+});
+/* 节点名 → 品质：染色走 tokens.css 的 --q*，这一层只负责"哪件穿了、什么品质" */
+const gearQ = computed(() => {
+  const g = gearNodes(doll.value);
+  const out = {};
+  Object.keys(g).forEach((node) => {
+    if (node === 'unmapped') return;
+    out[node] = { slot: g[node].slot, item: g[node].item, quality: qo(g[node].item) };
+  });
+  return out;
+});
+const unmappedSlots = computed(() => (gearNodes(doll.value).unmapped || []));
 /* 属性合计：把这套装备的属性行相加。解析在 lib/item-stats.js（可单测），
    基础护甲的三种写法都收，"+N 护甲" 与 "+N 护甲加成" 是加成不是基础护甲、不计，
    效果句与收藏计数行也不计——2026-10-19 那次就是漏了 "90 护甲" 这一种写法。 */
@@ -431,6 +469,18 @@ function srcOf(id) {
   position: relative; overflow: hidden }
 .pzart-tag { position: absolute; left: 8px; bottom: 7px; font-size: 11.5px;
   background: rgba(8, 10, 14, .72); color: var(--txt-dim); padding: 2px 7px; border-radius: 3px }
+/* 3D 那一层盖在原画上面：原画留着当降级面（加载失败或没有 WebGL 时它就露出来）。
+   占位模型这件事必须写在界面上，不许让玩家拿它当"穿上身的样子"。 */
+.pzart :deep(.pzc-glbox) { position: absolute; inset: 0; z-index: 2 }
+.pz-3dbtn { position: absolute; right: 8px; top: 8px; z-index: 3; min-height: 34px;
+  font: 600 12px var(--font-body); padding: 7px 12px; border-radius: 999px;
+  background: rgba(8, 10, 14, .78); color: var(--txt); border: 1px solid var(--line-2); cursor: pointer }
+.pz-3dbtn[aria-pressed="true"] { border-color: var(--gold); color: var(--gold) }
+.pz-3dnote { margin: 0; font-size: 11.5px; line-height: 1.55; color: var(--txt-dim);
+  background: var(--sunk); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px }
+@media (max-width: 720px) {
+  .pz-3dbtn { min-height: 44px; min-width: 44px }
+}
 .pzrow { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px }
 /* 图标按品质描边（备选表里也用这套；纸娃娃那一套在 BisCell.vue 里） */
 .qbox { display: inline-flex; border: 1px solid var(--line-2); border-radius: 4px; padding: 1px }
