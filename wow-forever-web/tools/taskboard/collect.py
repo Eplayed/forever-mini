@@ -153,7 +153,9 @@ def evidence_row(entry, rows):
     """按声明收证据：上次活动时间、来源、退出码、日志里的关键词命中。"""
     row = {"id": entry["id"], "name": entry["name"], "kind": entry["kind"],
            "owner": entry.get("owner", ""), "status": UNKNOWN, "why": "",
-           "last_run": "", "last_src": "", "exit": "", "note": entry.get("hint", "")}
+           "last_run": "", "last_src": "", "exit": "", "note": entry.get("hint", ""),
+           "run": entry.get("run") or {"kind": "none", "why": "登记表里没声明可执行动作，页面不给按钮"},
+           "groups": []}
     ev = entry.get("evidence") or {}
     txt, mtime = tail_text(ev.get("log", ""))
     if mtime:
@@ -260,6 +262,11 @@ def collect():
                 src = os.path.basename(p(e["state"])) + "（每组的上次执行）"
                 row["exit"] = ",".join(sorted({str(t.get("last_status")) for t in st["tasks"]}))
                 row["schedule"] = "；".join(lst)
+                if e.get("groups"):
+                    for t in st["tasks"]:
+                        row["groups"].append({"name": t.get("name"), "sched": "每%s天@%s" % (
+                            t.get("interval_days"), t.get("run_at")), "last": (t.get("last_run") or "—")[:16],
+                            "status": t.get("last_status") or "?"})
             elif isinstance(st, dict):
                 row["schedule"] = "%s（开关 %s）" % (st.get("run_at", "?"), "开" if st.get("enabled") else "关")
                 src = os.path.basename(p(e["state"]))
@@ -295,7 +302,8 @@ def collect():
                         names.append("%s｜%s｜上次 %s｜%s" % (
                             t.get("name"), sc.get("expression") or sc.get("kind"),
                             dt.strftime("%m-%d %H:%M") if dt else "?", t.get("lastRunStatus") or "?"))
-                    row["schedule"] = "；".join(names) or "快照里没有任务"
+                    joined = "；".join(names)
+                    row["schedule"] = (joined[:110] + "…（共 %d 条）" % len(ts)) if len(joined) > 120 else (joined or "快照里没有任务")
                     row["last_src"] = "agent 同步于 " + str(d.get("syncedAt", "?"))
                     if stamps:
                         row["last_run"] = iso(max(stamps))

@@ -1,5 +1,5 @@
 {
-  "note": "机器上自动执行任务的登记表。判据写在这里，不写进 collect.py 的代码里——代码只按声明去探。",
+  "note": "机器上自动执行任务的登记表。判据与可执行动作都写在这里，不写进代码——collect.py 只按声明探，server.py 只按 run 白名单执行。",
   "updated": "2026-10-27",
   "tasks": [
     {
@@ -8,6 +8,7 @@
       "kind": "launchd",
       "label": "com.wowforever.nga-daily",
       "expect_within_hours": 13,
+      "run": { "kind": "kickstart", "warn": "会拿号主的登录 cookie 打 bbs.nga.cn 一次（列表 2 页 + 最多 60 条正文），属花账号信用的动作" },
       "evidence": { "log": "~/.nga/daily.log", "ok_markers": ["退出码 0"], "fail_markers": ["Operation not permitted"] },
       "owner": "wow-forever"
     },
@@ -17,6 +18,7 @@
       "kind": "launchd",
       "label": "com.zhangyajun.haosailei.asr",
       "expect_within_hours": 26,
+      "run": { "kind": "kickstart", "warn": "这条现在每晚都失败（launchd 读不到 Documents），手动 kickstart 大概率同样 126；修法是执行体搬家目录" },
       "evidence": { "log": "~/Documents/project/video2text/logs/launchd_asr.err", "fail_markers": ["Operation not permitted"] },
       "owner": "video2text",
       "hint": "launchd 起的进程读不到 ~/Documents（TCC），退出码 126 是这个原因"
@@ -27,8 +29,20 @@
       "kind": "launchd",
       "label": "com.zhangyajun.aihub-scan",
       "expect_within_hours": 48,
+      "run": { "kind": "kickstart" },
       "evidence": {},
       "owner": "其它"
+    },
+    {
+      "id": "taskboard-collect",
+      "name": "任务台自采（每 30 分钟）",
+      "kind": "launchd",
+      "label": "com.zhangyajun.taskboard-collect",
+      "expect_within_hours": 1,
+      "run": { "kind": "kickstart", "safe": true, "why_safe": "只读探测，不碰任何任务、不联网写" },
+      "evidence": { "log": "~/.taskboard/collect.out.log" },
+      "owner": "wow-forever",
+      "hint": "任务台管到自己头上：这一条挂了，页面数字就会停在最后一次采集"
     },
     {
       "id": "p2-auto-daily",
@@ -36,6 +50,7 @@
       "kind": "cron",
       "cron_hint": "auto_daily.sh",
       "expect_within_hours": 26,
+      "run": { "kind": "cmd", "argv": ["/bin/bash", "~/Documents/project/p2-database/scripts/auto_daily.sh"], "warn": "这条会真发布数据并刷新工作台，不是只读动作" },
       "evidence": {
         "log": "~/Documents/project/p2-database/dashboard/runtime/logs/auto_daily_cron.log",
         "ok_markers": ["auto_daily 结束"],
@@ -49,6 +64,7 @@
       "kind": "cron",
       "cron_hint": "dify_auto_publish.py",
       "expect_within_hours": 76,
+      "run": { "kind": "none", "why": "这条被两个开关停着（crontab 行里的 TOUTIAO_AUTOGEN_OFF=1 与 PLAN_AUTOGEN_DISABLED 文件）。任务台不代跑停用的任务——要恢复请你自己删开关，别从这儿绕过去" },
       "evidence": {
         "log": "~/Documents/自媒体/_content_factory/dify/scheduler/cron.log",
         "off_markers": ["已停用", "TOUTIAO_AUTOGEN_OFF"],
@@ -60,11 +76,13 @@
     },
     {
       "id": "v2t-sync",
-      "name": "video2text 订阅同步（4 组）",
+      "name": "video2text 订阅同步",
       "kind": "app",
+      "groups": true,
       "base_url": "http://127.0.0.1:15801",
       "state": "~/Documents/project/video2text/config/sync_tasks.json",
       "expect_within_hours": 26,
+      "run": { "kind": "none", "why": "这组的触发口在工作台自己的采集中心页（要带它的会话状态），任务台不代跑；这里只做健康显示" },
       "owner": "video2text",
       "hint": "定时器在 Flask 进程里：工作台没开的那一天整组不会跑"
     },
@@ -77,6 +95,7 @@
       "db": "~/Documents/project/video2text/output/video2text.db",
       "run_table": "plan_match_runs",
       "expect_within_hours": 26,
+      "run": { "kind": "none", "why": "手动匹配会重写候选表，属改数据的动作，留在工作台里做" },
       "owner": "video2text"
     },
     {
@@ -85,8 +104,9 @@
       "kind": "qoder",
       "snapshot": "~/.taskboard/qoder_cron.json",
       "expect_within_hours": 26,
+      "run": { "kind": "none", "why": "本地没有稳定接口，启停与立即执行都在 Qoder 的 Automations 里；这一格只能显示 agent 同步过来的快照" },
       "owner": "Qoder",
-      "hint": "本地没有可读的稳定存储（qoder-data.v1.json 里查不到 automation 字段），只能由 agent 用 qoder_cron list 同步一份快照过来；这一格只读，改要去 Qoder 的 Automations"
+      "hint": "快照不会自己更新，页面上写的「agent 同步于」就是它的时效"
     }
   ]
 }
