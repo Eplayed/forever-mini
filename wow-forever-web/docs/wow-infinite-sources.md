@@ -1076,3 +1076,23 @@ DB2 拿到了但列含义没核（判成下一单）。三种"拿不到"性质�
 `app/src/router.js`、`ItemsPage.vue` 两处注释、`scrape-wclbox-items.py` 与
 `extract-gi-item-existence.py` 的 docstring 里都写着"21,077 件"，**全部改成指向 `scale.json`**。
 这个数每跟一次名录就会变，抄在代码注释里必然过期（同类问题已经犯过四次）。
+
+## 二十三、2026-10-27 插件目录再盘点：四个版本号 + OpenMap（新源）登记
+
+逐表计数、许可边界与"能补哪几格地图"的判定见 [DATA-插件盘点-2026-10-27.md](DATA-插件盘点-2026-10-27.md)。
+本轮只读挂载 `//192.168.0.105/World of Warcraft`（`-o ro`，挂载点 `/tmp/wow-ro`），没往客户端写东西，收尾已卸载。
+
+| 源 | 版本 | 抓取/核对日 | 这一格登记什么 |
+| --- | --- | --- | --- |
+| GearInsight 无限版 | **0.5.6**（成品侧快照仍是 0.5.1 与 0.4.32，**落后**） | 2026-10-27 | 0.5.4（10-22）是**数据重做**：天赋与默认加点按最新天赋重做、专业/营地/宠物/成就更新 → 那四块要重采差分。新增一块 `PetData.lua`：40 家族 / 11 标新增，自报来源客户端 DB2 build **1.60.1.70532**（wago.tools） |
+| XR_DungeonGuide | `.toc` **Version: 87** | 2026-10-27 | 新增 `Data_BossModel.lua`（副本slug×首领中文名 → CreatureDisplayInfo 显示号 + npcid 兜底，自述"照 DF 1.8.0 对齐生成"，**不是独立源**）；`Data_QuestDB.lua` 4.9 MB 全地图任务仍未取（范围未定） |
+| DungeonsForever | **1.9.10** | 2026-10-27 | 数据表 71 张。`Data_MapPins.lua` 每条点位第 4 个元素是**层号**，`Core/MapUI.lua:574 ExtraPinsFor(id, floor)` 按层过滤渲染 —— 这一条是本站"首领点位参照物"判定的直接证据 |
+| **OpenMap**（新登记） | **0.7.5-CN**（上游 v0.7.5-beta，2026-10-23） | 2026-10-27 | 简体中文汉化分支，上游作者 `jiforever`。**代码与数据表 MIT**；`Media/Textures/` 是暴雪地图美术的裁剪件，**NOTICE 明写不受 MIT 覆盖**；`MapDungeonDrawn/` 与 `MapChart/` 是画师 Santiago Reyes 的自绘作品，授权只给 OpenMap → **本站只取文件号清单，不取它的图**。发布页 <https://www.curseforge.com/wow/addons/openmap>（原作者 GitHub 仓库已 404，无上游代码可回查） |
+
+OpenMap 那 756 个副本层图文件号，已逐号回读 `listfile/client-fdid-name.csv`：**756/756 命中且 `name_kind=verified`**（非抽样）。
+它补的正是 2026-10-22 我们判死的那一格——无限服客户端没有 `MapArea`/`MapDiff`/`TextureData` 三张表，
+而它是从**正式服 5.5.4.70268 的 UiMap 表 + 12.1.5.70391 日志**拿的层与分区名。
+
+不取的三样按红线记死：`Data_DungeonRates`（掉落概率，掉落不写百分比）、
+BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩类玩家数据排除"）、
+`163UI_Info`（网易DD 分发元数据，不是游戏数据）。
