@@ -71,6 +71,10 @@ function freshFixture(label) {
      夹具里少这一层，反例会以"sumStatLines is not a function"的形式红，看不出真正的原因。 */
   fs.mkdirSync(path.join(web, 'app', 'src'), { recursive: true });
   fs.symlinkSync(path.join(REPO, 'wow-forever-web', 'app', 'src', 'lib'), path.join(web, 'app', 'src', 'lib'));
+  /* 功能开关要核"这一页在不在小程序的 pages 里"，读的是 <仓库>/for-mini/app.json。
+     夹具里少这一层，反例会以"读不到 app.json"的形式红，看不出真正的原因。 */
+  fs.mkdirSync(path.join(dir, 'for-mini'), { recursive: true });
+  fs.symlinkSync(path.join(REPO, 'for-mini', 'app.json'), path.join(dir, 'for-mini', 'app.json'));
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
     fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'app', 'data', f));
@@ -138,6 +142,9 @@ function withEnv(extra, fn) {
 /* ---------- 内存假 OSS ---------- */
 function fakeOss() {
   const st = { objs: new Map(), counts: { PUT: 0, DELETE: 0, GET: 0, HEAD: 0 }, failPutAt: 0, failListAfter: 0, clock: 0 };
+  /* 记一把 PUT 打了哪些 key：幂等那条要看的是"数据文件一个都没重写"，
+     光比次数（<= 1）答不出多出来的那一次是谁——指针与开关本来就是每次覆盖发的两个可变对象。 */
+  st.putKeys = [];
   st.writes = () => st.counts.PUT + st.counts.DELETE;
   st.get = (key) => (st.objs.has(key) ? st.objs.get(key).buf : null);
   st.set = (key, buf, cacheControl, contentType, disposition) => st.objs.set(key, {
@@ -161,6 +168,7 @@ function fakeOss() {
     const key = decodeURIComponent(pq.slice(1));
     if (method === 'PUT') {
       st.counts.PUT += 1;
+      st.putKeys.push(key);
       if (st.failPutAt && st.counts.PUT === st.failPutAt) return Promise.resolve(res(500, {}, Buffer.from('<Code>InjectedPutFailure</Code>')));
       st.set(key, body, headers && headers['Cache-Control'], headers && headers['Content-Type'],
         headers && headers['Content-Disposition']);
@@ -284,7 +292,8 @@ const oss = require(MINI_SERVICE);
   /* 条数全部现算：入口数读指针的 fetch，分片数读各自的 counts。
      （以前这里写死"7 入口"，加一类分片就假红一次——同一个毛病别再犯） */
   const expectFiles = Object.keys(man.fetch).length + idx.items.length * 2
-    + man.counts.spellClasses + man.counts.classes + (man.counts.bisSets || 0);
+    + man.counts.spellClasses + man.counts.classes + (man.counts.bisSets || 0)
+    + (man.counts.professions || 0);
   ok('bundle 收了每个数据文件一条（' + Object.keys(man.fetch).length + ' 入口 + 副本 ' + idx.items.length
     + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes
     + ' + 配装片 ' + (man.counts.bisSets || 0) + '）',
@@ -711,6 +720,283 @@ const oss = require(MINI_SERVICE);
     biIdx.classes.filter((c) => !!c.iconKey).length === biIdx.classes.length,
     JSON.stringify(biIdx.classes.slice(0, 2)));
 
+
+  /* ================= 3·10. 功能开关（2026-10-27）================= */
+  process.stdout.write('\n功能开关：与批次分开发、逐条兜底、说要开的页必须有数据\n');
+  const flagsOf = (dir) => JSON.parse(fs.readFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json'), 'utf8'));
+  const flagBase = JSON.parse(fs.readFileSync(path.join(REAL_SRC_DATA, 'flags.json'), 'utf8'));
+  const flagOut = flagsOf(good.envDir);
+  ok('开关对象身份三件齐，字节里没有任何生成时间（什么时候拧的看服务端 Last-Modified）',
+    flagOut.product === ossTool.FLAGS_PRODUCT && flagOut.env === 'beta'
+      && flagOut.namespace === 'wow/beta/v1' && flagOut.schemaVersion === 1
+      && !/"(generatedAt|updatedAt|builtAt|uploadedAt)"/.test(JSON.stringify(flagOut)),
+    JSON.stringify(Object.keys(flagOut)));
+  ok('开关只下发客户端用得上的三个字段（needs 那层留在仓库里给构建端校验）',
+    Object.keys(flagOut.features).every((n) => Object.keys(flagOut.features[n]).join(',') === 'on,name,note'),
+    JSON.stringify(flagOut.features));
+  ok('每条开关都写了 name 与 note（关着的页要念出名字，为什么开/关只有人写得出来）',
+    Object.keys(flagBase.features).every((n) => !!flagBase.features[n].name
+      && !!flagBase.features[n].note && typeof flagBase.features[n].on === 'boolean'));
+  ok('兜底口径随对象下发：取不到时退回打包默认表，不许关掉已公开的页',
+    (flagOut.policy || []).join(' ').indexOf('不许把已经公开的页关掉') >= 0
+      && (flagOut.policy || []).join(' ').indexOf('还没开放') >= 0);
+  ok('开关没被抄进气密批次：指针清单里一个 features 字段都没有',
+    JSON.stringify(man).indexOf('"features"') < 0 && man.counts.files > 0);
+  ok('flags.json 不在构建输入哈希名单里（改开关换 buildId 等于拧一下要重发整批）',
+    ossTool.BASE_INPUTS.indexOf('flags.json') < 0 && ossTool.BASE_INPUTS.indexOf('professions.json') >= 0);
+  ok('开关名集合与打包默认表相等（写歪一个字母就是静默兜底，界面看不出差别）',
+    (() => {
+      const local = require(path.join(MINI_ROOT, 'data', 'flags-local.js'));
+      const a = Object.keys(flagBase.features).sort().join(',');
+      const b = Object.keys(local.features).sort().join(',');
+      return !!a && a === b;
+    })(), JSON.stringify({ base: Object.keys(flagBase.features) }));
+  ok('开着的页要的入口文件都真在这批里（正向自证，与下面那条反例配一对）',
+    Object.keys(flagBase.features).filter((n) => flagBase.features[n].on === true)
+      .every((n) => (flagBase.features[n].needs || []).every((k) => !!man.fetch[k])));
+  ok('开关指向的页面都在小程序 pages 里注册了（页面没进代码包，开关拧 true 也打不开）',
+    (() => {
+      const pages = JSON.parse(fs.readFileSync(path.join(MINI_ROOT, 'app.json'), 'utf8')).pages || [];
+      return Object.keys(flagBase.features).every((n) => pages.indexOf(flagBase.features[n].page) >= 0);
+    })());
+
+  /* buildFlags 只读 app/data/flags.json 与 for-mini/app.json，喂坏它不必重跑整批构建——
+     薄夹具让每条反例 0.1 秒级，红的时候看得出是为什么红 */
+  function flagsFixture(mutate) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ossflags-'));
+    const dd = path.join(dir, 'wow-forever-web', 'app', 'data');
+    fs.mkdirSync(dd, { recursive: true });
+    const j = JSON.parse(fs.readFileSync(path.join(REAL_SRC_DATA, 'flags.json'), 'utf8'));
+    mutate(j);
+    fs.writeFileSync(path.join(dd, 'flags.json'), JSON.stringify(j, null, 1));
+    return dir;
+  }
+  const tryFlags = (mutate) => {
+    const dir = flagsFixture(mutate);
+    return withEnv({ WOW_SITE_SRC: path.join(dir, 'wow-forever-web', 'app') },
+      () => ossTool.buildFlags('beta', { manifest: man, manifestFrom: '测试批次 ' + man.buildId }));
+  };
+  await step('反例：开着的页要的入口文件不在这批 → 构建红（不把门打开对着空房间）', () =>
+    tryFlags((j) => { j.features.bis.needs = ['noSuchEntry'] }).then((r) =>
+      r.errors.length > 0 && /数据入口.*不在/.test(r.errors.join(' ')), () => '没拦下'));
+  await step('反例：开关指向没注册的页面 → 构建红', () =>
+    tryFlags((j) => { j.features.professions.page = 'pages/nope/index' }).then((r) =>
+      r.errors.some((e) => /不在 for-mini\/app\.json/.test(e)), () => '没拦下'));
+  await step('反例：on 写成字符串 "true" → 构建红（字符串是真值，静默就当开了）', () =>
+    tryFlags((j) => { j.features.bis.on = 'true' }).then((r) =>
+      r.errors.some((e) => /必须是 true\/false/.test(e)), () => '没拦下'));
+  await step('反例：关着的页缺数据 → 也红（拧 true 之前就该知道，不要到时候才发现）', () =>
+    tryFlags((j) => { j.features.professions.on = false; j.features.professions.needs = ['noSuchEntry'] })
+      .then((r) => r.errors.some((e) => /拧 true 之前先发数据批次/.test(e)), () => '没拦下'));
+  await step('反例：开关名带大写或横线 → 构建红（拼进 key 与文件名的东西不给混写法）', () =>
+    tryFlags((j) => { j.features['Prof-essions'] = { on: false, name: 'x', note: 'y' } }).then((r) =>
+      r.errors.some((e) => /开关名/.test(e)), () => '没拦下'));
+  await step('反例：开关对象超预算 → 构建红（每次冷启动都要多下这一份）', () =>
+    tryFlags((j) => { Object.keys(j.features).forEach((n) => { j.features[n].note = '长'.repeat(3000) }) })
+      .then((r) => r.errors.some((e) => /超过/.test(e)), () => '没拦下'));
+  await step('反例：拿不到批次时不许把开着的页当"没数据"放过 → 构建红', () => {
+    const dir = flagsFixture(() => {});
+    return withEnv({ WOW_SITE_SRC: path.join(dir, 'wow-forever-web', 'app') },
+      () => ossTool.buildFlags('beta', {})).then((r) => r.errors.some((e) => /没法核实/.test(e)));
+  }, () => '没批次却当没事');
+
+  await step('端到端：只改开关 → buildId 与整批数据字节都不许变（只有 flags.json 换字节）', () => {
+    const dir = freshFixture('flag-flow');
+    const a = runBuild(dir);
+    if (a.rc !== 0) return false;
+    const idA = readManifest(dir).buildId;
+    const flagsA = fs.readFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json'));
+    const bundlePath = path.join(dir, 'oss-build', 'beta', 'builds', idA, 'files.json');
+    const bundleA = fs.readFileSync(bundlePath);
+    const fp = path.join(dir, 'wow-forever-web', 'app', 'data', 'flags.json');
+    const j = JSON.parse(fs.readFileSync(fs.realpathSync(fp), 'utf8'));
+    j.features.professions.on = true;
+    fs.unlinkSync(fp);
+    fs.writeFileSync(fp, JSON.stringify(j, null, 1));
+    const b = runBuild(dir);
+    return b.rc === 0 && readManifest(dir).buildId === idA
+      && Buffer.compare(fs.readFileSync(bundlePath), bundleA) === 0
+      && Buffer.compare(fs.readFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json')), flagsA) !== 0
+      && flagsOf(dir).features.professions.on === true;
+  }, () => '改开关把批次号或数据字节带跑了');
+
+  /* upload / flags 子命令 / verify 三处联动，全跑在内存假 OSS 上 */
+  const flEnv = (dir) => Object.assign({}, NO_MARK, fixtureEnv(dir), {
+    WOW_ALLOW_CROSS_CREDS: '1', WOW_OSS_ENV: F
+  });
+  await step('upload 顺手把开关一起发（远端 flags.json 与本地字节一致）', () => {
+    const dir = freshFixture('flag-up');
+    const st = fakeOss();
+    return withEnv(flEnv(dir), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdUpload('beta', { dryRun: false, yesRelease: false }).then((rc) => {
+        ossTool.setTransportForTest(null);
+        const remote = st.get('wow/beta/v1/flags.json');
+        return rc === 0 && !!remote && Buffer.compare(remote,
+          fs.readFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json'))) === 0;
+      });
+    });
+  }, () => '开关没跟着发或字节不同');
+  await step('flags --dry-run：一个字节都不写（本地与远端都不动）', () => {
+    const dir = freshFixture('flag-dry');
+    const st = fakeOss();
+    runBuild(dir);
+    return withEnv(flEnv(dir), () => {
+      ossTool.setTransportForTest(st.transport);
+      /* build 本来就会把开关写到本地（假 OSS 要读它），dry-run 要证的是：
+         不 PUT 任何东西、本地那份字节一个字母都没动 */
+      const local = path.join(dir, 'oss-build', 'beta', 'flags.json');
+      const before = fs.existsSync(local) ? fs.readFileSync(local) : null;
+      return ossTool.cmdFlags('beta', { dryRun: true }).then((rc) => {
+        ossTool.setTransportForTest(null);
+        const after = fs.existsSync(local) ? fs.readFileSync(local) : null;
+        return rc === 0 && st.counts.PUT === 0 && !!before && Buffer.compare(before, after) === 0;
+      });
+    });
+  }, () => '试运行写了东西');
+  await step('flags 子命令：只 PUT 开关那一份、回读 ETag 一致、写命令闸照样拦', () => {
+    const dir = freshFixture('flag-cmd');
+    const st = fakeOss();
+    runBuild(dir);
+    return withEnv(Object.assign({}, NO_MARK, fixtureEnv(dir), { WOW_OSS_ENV: F }),
+      () => ossTool.cmdFlags('beta', {})).then((rcGate) => {
+      if (rcGate !== 1 || st.counts.PUT !== 0) return false;
+      return withEnv(flEnv(dir), () => {
+        ossTool.setTransportForTest(st.transport);
+        return ossTool.cmdFlags('beta', {}).then((rc) => {
+          ossTool.setTransportForTest(null);
+          const o = st.objs.get('wow/beta/v1/flags.json');
+          return rc === 0 && st.counts.PUT === 1 && !!o
+            && o.cacheControl === 'public, max-age=60, must-revalidate';
+        });
+      });
+    });
+  }, () => '开关单独发这条路不对');
+  await step('反例：本地改了开关没发 → verify 非 0（"改过没发"这一步要红）', () => {
+    const dir = freshFixture('flag-verify');
+    const st = fakeOss();
+    return withEnv(flEnv(dir), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdUpload('beta', { dryRun: false, yesRelease: false }).then((rc1) =>
+        ossTool.cmdVerify('beta').then((rcOk) => {
+          fs.writeFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json'),
+            fs.readFileSync(path.join(dir, 'oss-build', 'beta', 'flags.json')).toString('utf8')
+              .replace('"on": true', '"on": false'));
+          return ossTool.cmdVerify('beta').then((rcBad) => {
+            ossTool.setTransportForTest(null);
+            return rc1 === 0 && rcOk === 0 && rcBad !== 0;
+          });
+        }));
+    });
+  }, () => '改了没发却报绿');
+
+  /* ================= 3·11. 专业与配方线（2026-10-27）================= */
+  process.stdout.write('\n专业线：索引 + 13 片必须自洽，列名只有一份，红线词一个不许有\n');
+  const pfIdx = JSON.parse(fs.readFileSync(path.join(batchDir, 'professions', 'index.json'), 'utf8'));
+  const pfSrc = JSON.parse(fs.readFileSync(path.join(REAL_SRC_DATA, 'professions.json'), 'utf8'));
+  const pfShards = pfIdx.professions.map((x) => {
+    const buf = fs.readFileSync(path.join(batchDir, x.path));
+    return { x, buf, obj: JSON.parse(buf.toString('utf8')) };
+  });
+  ok('索引：专业数与逐条数一致，配方总数等于基底自报之和',
+    pfIdx.counts.professions === pfIdx.professions.length && pfIdx.professions.length === pfSrc.professions.length
+      && pfIdx.counts.recipes === pfSrc.professions.reduce((s, p) => s + (p.counts.recipes || 0), 0),
+    JSON.stringify(pfIdx.counts));
+  ok('索引：无限新增与采集点数是构建时逐行数出来的（与基底 counts 同值才算对）',
+    pfIdx.counts.newRecipes === pfSrc.professions.reduce((s, p) => s + (p.counts.newRecipes || 0), 0)
+      && pfIdx.counts.nodes === pfSrc.professions.reduce((s, p) => s + (p.counts.nodes || 0), 0)
+      && pfIdx.counts.newRecipes === pfShards.reduce((s, y) => s + y.obj.recipes.filter((r) => r[4] === 1).length, 0));
+  ok('每个专业一片：路径由编号推出、三种校验值齐、文件真在批次里且字节与校验值一致',
+    pfShards.every((y) => y.x.path === 'professions/set/' + y.x.id + '.json'
+      && /^[0-9A-F]{32}$/.test(String(y.x.shardEtag)) && /^[A-Za-z0-9+/]{22}==$/.test(String(y.x.shardMd5))
+      && y.x.shardBytes > 0 && y.buf.length === y.x.shardBytes && md5u(y.buf) === y.x.shardEtag));
+  ok('每片都带批次身份五项与自己的专业编号（拿错片就会红）',
+    pfShards.every((y) => y.obj.buildId === man.buildId && y.obj.product === 'wow-forever-mini'
+      && y.obj.schemaVersion === 1 && y.obj.kind === 'professions-set' && y.obj.profId === y.x.id));
+  ok('片内行数与基底逐专业对上（一条都不许静默丢）',
+    pfShards.every((y) => y.obj.counts.recipes === (y.x.counts.recipes || 0)
+      && y.obj.counts.nodes === (y.x.counts.nodes || 0)));
+  ok('列名与那份列说明只在索引里写一份（13 片各抄一遍等于把同一句话复制 13 次）',
+    Array.isArray(pfIdx.cols.recipe) && Array.isArray(pfIdx.cols.node) && Array.isArray(pfIdx.cols.sk)
+      && !!pfIdx.colNote && pfShards.every((y) => y.obj.cols === undefined && y.obj.colNote === undefined));
+  const pfRc = pfIdx.cols.recipe;
+  ok('行的列数与列名一致，材料是 [序号,数量] 平铺（奇数长就是分发层与本页对不上）',
+    pfShards.every((y) => y.obj.recipes.every((r) => r.length === pfRc.length
+      && r[pfRc.indexOf('mats')].length % 2 === 0)));
+  ok('图标只带序号：指向本片 icons 表内，-1 表示这条数据本来没图（界面画自绘块，不许猜）',
+    pfShards.every((y) => {
+      const n = y.obj.icons.length;
+      const okIx = (i) => i === -1 || (typeof i === 'number' && i >= 0 && i < n);
+      return y.obj.recipes.every((r) => okIx(r[pfRc.indexOf('icon')])
+          && r[pfRc.indexOf('mats')].filter((v, i) => i % 2 === 0).every((mi) => {
+            const m = y.obj.mats[mi];
+            return !!m && okIx(m[1]);
+          }))
+        && y.obj.nodes.every((r) => okIx(r[pfIdx.cols.node.indexOf('icon')]));
+    }));
+  ok('商人 / 图纸掉落表就地带，行里只存序号（同一家商人不必在 500 行里重复 500 次）',
+    pfShards.every((y) => y.obj.recipes.every((r) => r[pfRc.indexOf('vend')].every((i) => i < y.obj.vendors.length)
+      && r[pfRc.indexOf('drops')].every((i) => i < y.obj.drops.length))));
+  ok('分箱连续盖住 1–300（漏一档就等于把那一段配方静默吞掉）',
+    (() => {
+      let cur = 1;
+      pfIdx.bands.forEach((b) => { if (b[0] !== cur) cur = NaN; cur = b[1] + 1 });
+      return cur === 301 && pfIdx.bands.length === 4 && !!pfIdx.bandNote;
+    })(), JSON.stringify(pfIdx.bands));
+  await step('分箱与技能四档不许两端各抄一份：网页那份 ProfessionsPage.vue 的字面量必须还等于这里', () => {
+    const vue = fs.readFileSync(path.join(REPO, 'wow-forever-web', 'app', 'src', 'pages', 'ProfessionsPage.vue'), 'utf8');
+    const grab = (name) => {
+      const m = vue.match(new RegExp('const ' + name + ' = (\\[[^\\n]*(?:\\n[^\\n]*?\\])?);'));
+      /* 网页那份用单引号，JSON 出来是双引号：比之前先把引号统一，
+         不然这条永远红（红得看不出"到底飘没飘"的断言等于没有断言） */
+      return m ? m[1].replace(/\s+/g, '').replace(/'/g, '"') : '';
+    };
+    const flat = (v) => JSON.stringify(v).replace(/\s+/g, '');
+    return grab('BANDS') === flat(ossTool.PROF_BANDS) && grab('SK_KEYS') === flat(ossTool.PROF_SK_KEYS);
+  }, () => '两端分箱/档位表已经飘了（改数据要一起改界面）');
+  ok('技能四档随索引下发（橙黄绿灰哪档有值才画哪档，源里没给的不猜）',
+    pfIdx.skillKeys.map((k) => k.k).join(',') === 'orange,yellow,green,grey'
+      && pfIdx.skillKeys.every((k) => !!k.cn));
+  ok('采集表表头那几个专业用自己的叫法（草药点 / 水域），其余叫采集点',
+    pfIdx.nodeHeadLabels.herbalism === '草药点' && pfIdx.nodeHeadLabels.fishing === '水域');
+  ok('口径那一句与出处随索引下发（界面不许自己改写），页头板块图走素材层',
+    /不给掉率/.test(String(pfIdx.meta.disclaimer || '')) && !!pfIdx.headIcon
+      && (pfIdx.meta.sources || []).length > 0 && !!pfIdx.meta.title);
+  await step('本站的取数工序（脚本名）不下发给玩家：索引里没有 method，页面模板也不引用它', () => {
+    const wxml = fs.readFileSync(path.join(REPO, 'for-mini', 'pages', 'professions', 'index.wxml'), 'utf8')
+    return !pfIdx.meta.method && !/meta\.method/.test(wxml)
+      && !/tools\/|\.py|\.js/.test(JSON.stringify(pfIdx.meta))
+  }, () => '内部脚本名又回到玩家界面了')
+  ok('红线扫描：索引与 13 片里没有百分比、没有强度与攻略建议类词',
+    pfShards.concat([{ obj: pfIdx }]).every((y) => {
+      const t = JSON.stringify(y.obj);
+      return !/\d+(\.\d+)?\s*%/.test(t) && !/秒伤|DPS|权重|更好|优于|推荐顺序|性价比/.test(t);
+    }));
+  ok('指针 counts 里的专业数与索引一致（首页与界面念的是同一份数）',
+    man.counts.professions === pfIdx.counts.professions && man.counts.profRecipes === pfIdx.counts.recipes
+      && man.counts.profNewRecipes === pfIdx.counts.newRecipes && man.counts.profNodes === pfIdx.counts.nodes
+      && man.counts.profShards === pfIdx.counts.shards, JSON.stringify(man.counts));
+  ok('专业线不进主包快照（1.5 MB 的基底只走线上分片，导出名单里没有它）',
+    ossTool.EXPORT_RELS.indexOf('professions.json') < 0
+      && ossTool.BASE_INPUTS.indexOf('professions.json') >= 0
+      && !fs.existsSync(path.join(previewOf(good.envDir), 'professions.json')));
+  await step('反例：基底自报的配方数与实际拆出来的对不上 → 构建红（不静默少条目）', () => {
+    const dir = freshFixture('prof-count');
+    patchSource(dir, 'professions.json', (j) => { j.professions[0].counts.recipes += 3 });
+    const r = runBuild(dir);
+    return r.rc !== 0 && /实际拆出/.test(r.out);
+  }, () => '没拦下');
+  await step('反例：给配方行塞一条没有名字的 → 构建红；塞一条带掉率的 → 也红', () => {
+    const dir = freshFixture('prof-bad');
+    patchSource(dir, 'professions.json', (j) => { j.professions[0].recipes[0].nameCn = '' });
+    const r1 = runBuild(dir);
+    patchSource(dir, 'professions.json', (j) => {
+      j.professions[0].recipes[1].nameCn = '次级治疗药水（10% 额外效果）';
+    });
+    const r2 = runBuild(dir);
+    return r1.rc !== 0 && /没有物品 ID 或名字/.test(r1.out)
+      && r2.rc !== 0 && /出现百分比/.test(r2.out);
+  }, () => '没拦下');
   /* ================= 4. 写授权统一闸 ================= */
   process.stdout.write('\n写授权：每条写命令都要显式 WOW_ALLOW_CROSS_CREDS=1，与凭证来源无关\n');
   ok('oss-release.js 暴露了测试注入点与子命令函数',
@@ -951,7 +1237,7 @@ const oss = require(MINI_SERVICE);
       });
     });
   }, () => '把别人的字节盖掉了');
-  await step('同 id 批次重复上传不重写任何文件（幂等）', () => {
+  await step('同 id 批次重复上传不重写任何数据文件（幂等）', () => {
     const dir = freshFixture('idemp');
     const st = fakeOss();
     return withEnv(upEnv(dir), () => {
@@ -959,9 +1245,13 @@ const oss = require(MINI_SERVICE);
       return ossTool.cmdUpload('beta', { dryRun: false, yesRelease: false }).then((rc1) => {
         if (rc1 !== 0) return false;
         st.counts.PUT = 0;
+        st.putKeys = [];
         return ossTool.cmdUpload('beta', { dryRun: false, yesRelease: false }).then((rc2) => {
           ossTool.setTransportForTest(null);
-          return rc2 === 0 && st.counts.PUT <= 1;
+          const wrote = st.putKeys.slice().sort().join(' ')
+          /* 只许重写这两个可变对象：指针（换批）与开关（与指针同一档 max-age=60）。
+             批次目录里的 155 个数据文件一个都不许重发——那是"不可变批次"的全部意义。 */
+          return rc2 === 0 && wrote === 'wow/beta/v1/flags.json wow/beta/v1/manifest.json'
         });
       });
     });

@@ -41,6 +41,25 @@
   `const self = this` 会被它盖住，报 `TypeError: {} is not a function`（2026-10-26 撞过，排查花了很久）。
   异步链里要引用页面实例，就用箭头函数里的 `this`。
 
+## 功能开关与专业页（2026-10-27 补）
+
+- **页面级开关读 `services/features.js`，不许在页面里写死**。取的是 `wow/{env}/v1/flags.json`
+  那一份可变对象（与指针同一档 `max-age=60`），逐条三层兜底 `live > cache > data/flags-local.js`。
+  被门控的页在 `onLoad` 里 `features.load(true)` → `isOn(name)` 为假就只渲染"这一页还没开放"，
+  **一个数据请求都不发**；入口卡 `wx:if` 整块收掉，不留空白格。
+- **`features.load()` 只收一个参数 `force`**（2026-10-27 踩过）：第一版签名是 `load(env, force)`，
+  页面按直觉传了 `load(true)`，env 就成了 `true` → 命名空间拼出 `undefined` → 请求必失败 →
+  永远走打包默认表，而界面看不出任何不对（表现是"开关怎么拧都没反应"）。
+- 开关的缓存 key **不许带 `@`**（`wow_forever_v1_flags_beta`）：带 `@` 的键会被 `noteBuild`
+  当旧批缓存清掉，开关不是按批存的东西。
+- **专业页 `pages/professions/index` 与配装页一样没有主包快照**（一片最大 65.8 KB），
+  并且**默认关着**：`app/data/flags.json` 里 `professions.on=false`，站主决定何时公开。
+  一屏只画 60 行（`setData` 有 1 MB 上限，511 行的制皮一次塞进去会炸），"再显示 60 条"往下放；
+  分箱、技能四档、列名一律读索引下发的那份，页面不自己抄。
+- **回归脚本不许往 `for-mini/` 里写文件**：开发者工具开着 `compileHotReLoad`，写进去会把小程序
+  打回首页，制造一片"路由没到位"的假红（截图是这条老规矩，2026-10-27 写 flags 又踩一次）。
+  要演"线上拧开关"，写 `/tmp/m01-flags-live.json`，假 OSS 用 `FAKE_OSS_FLAGS_FILE` 覆写那一份。
+
 ## 阻塞项（截至 2026-10-08）
 
 | 项 | 状态 | 说明 |

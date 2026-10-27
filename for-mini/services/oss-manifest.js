@@ -63,6 +63,12 @@ function pointerUrl(env) {
   return origin() + '/' + NAMESPACES[env] + '/manifest.json'
 }
 
+/* 功能开关对象（2026-10-27）：与指针同一档缓存语义，但它不在气密批次里——
+   拧开关不换 buildId、不重发数据，也不发小程序版本。取数与校验归 services/features.js。 */
+function flagsUrl(env) {
+  return origin() + '/' + NAMESPACES[env] + '/flags.json'
+}
+
 function requestRaw(url) {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -360,10 +366,22 @@ const SHARD_SPECS = {
     shape: (d) => Array.isArray(d.items) && Array.isArray(d.cols) && d.cols.length === 6
       && d.count === d.items.length
   },
+  /* 专业索引：专业数、配方数都要与逐条数对上；列名与分箱在这里带一份（分片不再各抄一遍）；
+     口径那一句必须在——红线要求界面固定显示，谁把它漏掉，页面就只能自己编一句 */
+  professionsIndex: {
+    name: 'professions-index',
+    kind: 'professions-index',
+    shape: (d) => Array.isArray(d.professions) && !!d.counts && !!d.meta
+      && d.counts.professions === d.professions.length
+      && d.counts.recipes === d.professions.reduce((s, p) => s + ((p.counts || {}).recipes || 0), 0)
+      && Array.isArray(d.bands) && Array.isArray(d.skillKeys)
+      && !!d.cols && Array.isArray(d.cols.recipe) && Array.isArray(d.cols.node)
+      && Array.isArray(d.cols.sk) && !!d.meta.title
+      && !!d.meta.disclaimer && d.meta.disclaimer.indexOf('不给掉率') >= 0
+  },
   lootIndex: {
     name: 'loot-index',
-    kind: 'loot-index',
-    /* 行数与列数都要对上：列名是位置数组的解释，少一列界面就会把首领序号当品质显示 */
+    kind: 'loot-index',    /* 行数与列数都要对上：列名是位置数组的解释，少一列界面就会把首领序号当品质显示 */
     shape: (d) => Array.isArray(d.dungeons) && Array.isArray(d.cols) && d.cols.length === 6
       && !!d.counts && d.counts.rows === d.dungeons.reduce((s, x) => s + (x.rows || []).length, 0)
   }
@@ -506,6 +524,42 @@ function loadBisSet(item, batch, fallback) {
   return loadRef(bisSetRef(item), batch, fallback)
 }
 
+/* 专业分片：与配装那一片同一套规矩——路径由专业 id 现推、与索引条目里的 path 比对，
+   校验值取条目自带的 shardEtag/shardMd5/shardBytes。
+   这里的 shape 只查"行是不是齐长的位置数组"；行到底几列、哪列是什么，
+   由索引的 cols 解释，页面在解码前把列数与行长对一遍（列名漂了会把品质当材料序号）。 */
+function profSetRef(item) {
+  const id = String((item && item.id) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('专业编号不能当文件名：' + id) }
+  const rel = 'professions/set/' + id + '.json'
+  if (String(item.path) !== rel) {
+    return { error: new Error('专业 ' + id + ' 的分片路径不是由编号推出来的：' + item.path) }
+  }
+  const sameLen = (rows) => Array.isArray(rows) && (rows.length === 0
+    || rows.every((r) => Array.isArray(r) && r.length === rows[0].length))
+  return {
+    rel,
+    cacheKind: 'prof-set:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'professions-set',
+      kind: 'professions-set',
+      id,
+      readId: (d) => d.profId,
+      /* 这里只查"行是齐长的位置数组"；一行有几列、哪列是材料，由索引的 cols 解释，
+         页面解码时按列名再核一遍（序号在这里写死等于把列名抄第二份，抄两份必然飘） */
+      shape: (d) => sameLen(d.recipes) && sameLen(d.nodes) && Array.isArray(d.icons) && Array.isArray(d.mats)
+        && Array.isArray(d.vendors) && Array.isArray(d.drops) && Array.isArray(d.sources)
+        && !!d.counts && d.counts.recipes === (d.recipes || []).length
+        && d.counts.nodes === (d.nodes || []).length
+    }
+  }
+}
+
+function loadProfSet(item, batch, fallback) {
+  return loadRef(profSetRef(item), batch, fallback)
+}
+
 /* 职业法术片：和副本分片同一套规矩——路径由 classId 现推，与名单条目里的 shardPath 比对，
    校验值取条目自带的 shardEtag/shardMd5/shardBytes。条目被改成 ../ 也走不出本批目录。 */
 function spellClassRef(item) {
@@ -591,6 +645,10 @@ module.exports = {
   loadBundle,
   bisSetRef,
   loadBisSet,
+  profSetRef,
+  loadProfSet,
+  flagsUrl,
+  requestRaw,
   loadDungeonDetail,
   loadDungeonLoot,
   loadKey,

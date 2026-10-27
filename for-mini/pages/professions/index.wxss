@@ -1,0 +1,386 @@
+/* 专业与配方页。颜色一律吃 app.wxss 的令牌，这一页不写裸色值（与首页/副本页/配装页同一条规矩）。
+   品质色 q-0…q-5 用 --q0…--q5；技能四档：橙=--gold、黄=--gold-hot、绿=--ok、灰=--lead，
+   与网页 app.css 的 .sk-orange/.sk-green/.sk-grey 同一组映射，两端同一档一个色。 */
+
+.h1 {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+  letter-spacing: 1rpx;
+}
+
+.h2 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.b {
+  font-weight: 600;
+  color: var(--gold-hi);
+}
+
+.dim {
+  color: var(--txt-hint);
+  font-size: 22rpx;
+}
+
+.note {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  line-height: 1.6;
+  margin-top: 12rpx;
+}
+
+.note2 {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  line-height: 1.5;
+  margin-top: 6rpx;
+}
+
+.src {
+  margin-top: 14rpx;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+}
+
+.head-t {
+  flex: 1;
+  margin-left: 18rpx;
+  min-width: 0;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16rpx;
+}
+
+.stat {
+  width: 50%;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  padding: 6rpx 0;
+}
+
+.stat .b {
+  font-size: 30rpx;
+  margin-right: 6rpx;
+}
+
+/* —— 专业选择 —— */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chips .chip {
+  margin: 0 12rpx 12rpx 0;
+}
+
+.chip-n {
+  color: var(--txt-hint);
+  font-size: 20rpx;
+  margin-left: 8rpx;
+}
+
+.chip-on .chip-n {
+  color: var(--accent-ink);
+}
+
+/* —— 筛选 —— */
+.sel {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 14rpx;
+}
+
+.sel .dim {
+  margin-left: 12rpx;
+}
+
+.inp {
+  height: 68rpx;
+  padding: 0 18rpx;
+  background: var(--panel);
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-ctl);
+  color: var(--txt);
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+.frow {
+  display: flex;
+  align-items: center;
+  margin-top: 14rpx;
+}
+
+.inp-lv {
+  width: 250rpx;
+  flex-shrink: 0;
+}
+
+.frow .chip {
+  margin-left: 14rpx;
+  flex-shrink: 0;
+}
+
+.fcount {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* —— 区块头 —— */
+.bhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+
+.bt {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.bn {
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.band-note {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  line-height: 1.5;
+  margin-bottom: 10rpx;
+}
+
+.empty {
+  padding: 30rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--txt-muted);
+}
+
+/* —— 采集点 —— */
+.nrow {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+
+.n-main {
+  flex: 1;
+  margin: 0 14rpx;
+  min-width: 0;
+}
+
+.n-name {
+  font-size: 26rpx;
+  color: var(--txt);
+}
+
+.n-yield {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  margin-top: 4rpx;
+  line-height: 1.5;
+}
+
+.n-zone {
+  margin-top: 4rpx;
+}
+
+.n-sk {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 190rpx;
+}
+
+/* —— 技能四档 —— */
+.sk {
+  font-size: 18rpx;
+  padding: 2rpx 8rpx;
+  margin: 0 0 4rpx 6rpx;
+  border: 1rpx solid var(--line-2);
+  border-radius: 6rpx;
+  color: var(--txt-dim);
+}
+
+.sk-orange {
+  border-color: var(--gold-line);
+  color: var(--gold);
+}
+
+.sk-yellow {
+  border-color: var(--gold-line);
+  color: var(--gold-hot);
+}
+
+.sk-green {
+  border-color: var(--line-2);
+  color: var(--ok);
+}
+
+.sk-grey {
+  border-color: var(--line);
+  color: var(--lead);
+}
+
+/* —— 配方分箱 —— */
+.grp {
+  margin-bottom: 8rpx;
+}
+
+.grp-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12rpx 0 8rpx;
+  border-bottom: 1rpx solid var(--gold-line-soft);
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.r {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.r-top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.r-name {
+  flex: 1;
+  margin-left: 14rpx;
+  min-width: 0;
+}
+
+.nm {
+  font-size: 26rpx;
+}
+
+.tag {
+  display: inline-block;
+  margin-left: 8rpx;
+  padding: 0 8rpx;
+  font-size: 18rpx;
+  color: var(--accent-ink);
+  background: var(--gold-hot);
+  border-radius: 6rpx;
+}
+
+.r-id {
+  margin-left: 8rpx;
+  font-size: 18rpx;
+}
+
+.r-sk {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 190rpx;
+}
+
+/* 材料条：长度按"这批里总量最大的一条"归一，要 20 个草和只要 1 个矿得一眼看出不一样 */
+.r-mats {
+  margin-top: 10rpx;
+  padding-left: 70rpx;
+}
+
+.mbar {
+  height: 6rpx;
+  margin-bottom: 10rpx;
+  background: var(--panel);
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.mbar-f {
+  height: 100%;
+  background: var(--gold);
+}
+
+.m {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 16rpx 8rpx 0;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+.m .m-n {
+  margin-left: 6rpx;
+}
+
+.m .m-c {
+  margin-left: 4rpx;
+  font-size: 22rpx;
+}
+
+.r-src {
+  margin-top: 8rpx;
+  padding-left: 70rpx;
+}
+
+.src-l {
+  display: block;
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  line-height: 1.6;
+}
+
+.ghidden {
+  padding: 10rpx 0;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16rpx;
+}
+
+.foot {
+  padding: 8rpx 0 24rpx;
+  text-align: center;
+}
+
+/* 品质色（与网页同一组令牌） */
+.q-0 {
+  color: var(--q0);
+}
+
+.q-1 {
+  color: var(--q1);
+}
+
+.q-2 {
+  color: var(--q2);
+}
+
+.q-3 {
+  color: var(--q3);
+}
+
+.q-4 {
+  color: var(--q4);
+}
+
+.q-5 {
+  color: var(--q5);
+}

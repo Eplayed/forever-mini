@@ -366,5 +366,11 @@
   "origin": "self-generated",
   "note": "占位模型，不是素材：纯几何体自己拼的，不含任何游戏客户端资产，也不含第三方站的模型文件。它只用来验前端那条链（懒加载、部位对数据、无 WebGL 退回图片）。整目录删掉 app/img/models/ 即回到 2D 纸娃娃。",
   "generatedAt": "2026-10-26"
+ },
+ "gen": {
+  "hero-ruins": "img/gen/hero-ruins.webp",
+  "banner-cloudsea": "img/gen/banner-cloudsea.webp",
+  "cavern-hall": "img/gen/cavern-hall.webp",
+  "prof-table": "img/gen/prof-table.webp"
  }
 }

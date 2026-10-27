@@ -1,0 +1,142 @@
+<view class="wrap">
+  <!-- 远程开关关着：一句话给到，不发数据请求、不留空白格（services/features.js 的界面义务） -->
+  <view wx:if="{{locked}}" class="card">
+    <view class="h1">{{lockName}} · 这一页还没开放</view>
+    <view class="note">开放的时候不用更新小程序，这一页会自己出现在首页上。</view>
+    <view class="btn" bindtap="goHome">回首页</view>
+  </view>
+
+  <view wx:elif="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+  </view>
+  <view wx:elif="{{unavailable}}" class="notice">
+    这一版还没有专业与配方的数据。{{errText ? '（' + errText + '）' : ''}}
+  </view>
+  <view wx:elif="{{needOnline}}" class="notice">
+    现在没连上线，专业与配方要联网才取到；这一页没带在小程序里，所以离线看不到。
+  </view>
+
+  <block wx:elif="{{loaded && meta}}">
+    <!-- 页头：板块图与网页专业页同一张（站内同一板块同一张脸），口径那句由分发层下发、页面不改写 -->
+    <view class="card">
+      <view class="head">
+        <icon-cell src="{{headUrl}}" size="md" label="专" />
+        <view class="head-t">
+          <view class="h1">{{meta.title}}</view>
+          <view class="note2">{{meta.took}}</view>
+        </view>
+      </view>
+      <view class="stats">
+        <view class="stat"><text class="b">{{stats.professions}}</text> 个专业</view>
+        <view class="stat"><text class="b">{{stats.recipes}}</text> 条配方</view>
+        <view class="stat"><text class="b">{{stats.newRecipes}}</text> 条无限新增</view>
+        <view class="stat"><text class="b">{{stats.nodes}}</text> 个采集点</view>
+      </view>
+      <view class="note">{{meta.disclaimer}}</view>
+      <view class="src"><text>这一页的数据 {{provText || '未记录'}} 对着来源核过 · 来源 {{srcHost}}</text></view>
+    </view>
+
+    <!-- 专业选择：13 个一次铺开，超出的换行，不做横向滚动（站主对首页那一排同样的要求） -->
+    <view class="card">
+      <view class="chips">
+        <view wx:for="{{chips}}" wx:key="id" class="chip {{selId === item.id ? 'chip-on' : ''}}"
+              data-id="{{item.id}}" bindtap="pickProf">
+          <text>{{item.nameCn}}</text>
+          <text class="chip-n">{{item.n}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 筛选：三个都能真改结果（搜名称也搜材料名、技能档位按橙点、只看无限新增） -->
+    <view class="card" wx:if="{{sel}}">
+      <view class="sel">
+        <text class="h2">{{sel.nameCn}}</text>
+        <text class="dim" wx:if="{{sel.nameEn}}">{{sel.nameEn}}</text>
+        <text class="dim">{{sel.kindCn}}</text>
+      </view>
+      <input class="inp" type="text" placeholder="搜制成品或材料名" value="{{q}}" bindinput="onSearch" />
+      <view class="frow">
+        <input class="inp inp-lv" type="number" placeholder="我的技能 1–300" value="{{lv}}" bindinput="onLevel" />
+        <view class="chip {{onlyNew ? 'chip-on' : ''}}" bindtap="toggleNew">只看无限新增</view>
+        <view class="dim fcount">配方 {{totalRecipes}} 条</view>
+      </view>
+    </view>
+
+    <!-- 拆不出条目的那一档：那句话取自数据里的 note，不在代码里另编一遍 -->
+    <view class="card" wx:if="{{sel.unparsed}}">
+      <view class="empty">{{sel.note || '这一版还没拆出可列的条目。'}}</view>
+    </view>
+
+    <view class="card" wx:if="{{nodeRows.length}}">
+      <view class="bhead">
+        <view class="bt">{{nodeHead}}</view>
+        <view class="bn">{{nodeRows.length}} 个</view>
+      </view>
+      <view class="nrow" wx:for="{{nodeRows}}" wx:key="index">
+        <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name}}" />
+        <view class="n-main">
+          <view class="n-name">{{item.name}}</view>
+          <view class="n-yield">{{item.yields}}</view>
+          <view class="dim n-zone">{{item.zone || '区域未记录'}}</view>
+        </view>
+        <view class="n-sk">
+          <text class="sk sk-{{s.k}}" wx:for="{{item.skList}}" wx:for-item="s" wx:key="k">{{s.cn}}{{s.v}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{totalRecipes}}">
+      <view class="bhead">
+        <view class="bt">配方</view>
+        <view class="bn">{{totalRecipes}} 条 · 按技能橙点分箱</view>
+      </view>
+      <view class="band-note" wx:if="{{bandNote}}">{{bandNote}}</view>
+
+      <view class="grp" wx:for="{{bands}}" wx:for-item="g" wx:key="label">
+        <view class="grp-h" wx:if="{{g.count}}">
+          <text class="b">{{g.label}}</text>
+          <text class="dim">{{g.count}} 条</text>
+        </view>
+        <view class="r" wx:for="{{g.rows}}" wx:for-item="x" wx:key="itemId">
+          <view class="r-top">
+            <icon-cell src="{{x.iconUrl}}" size="sm" label="{{x.name}}" />
+            <view class="r-name">
+              <text class="nm q-{{x.q}}">{{x.name}}</text>
+              <text class="tag" wx:if="{{x.isNew}}">新</text>
+              <text class="dim r-id">#{{x.itemId}}</text>
+            </view>
+            <view class="r-sk">
+              <text class="sk sk-{{s.k}}" wx:for="{{x.skList}}" wx:for-item="s" wx:key="k">{{s.cn}}{{s.v}}</text>
+            </view>
+          </view>
+          <view class="r-mats" wx:if="{{x.hasMats}}">
+            <view class="mbar"><view class="mbar-f" style="width:{{x.matPct}}%"></view></view>
+            <view class="m" wx:for="{{x.mats}}" wx:for-item="m" wx:key="key">
+              <icon-cell src="{{m.iconUrl}}" size="xs" label="{{m.name}}" />
+              <text class="m-n">{{m.name}}</text>
+              <text class="b m-c">×{{m.count}}</text>
+            </view>
+          </view>
+          <view class="r-mats dim" wx:else>无需材料</view>
+          <view class="r-src" wx:if="{{x.srcLines.length}}">
+            <text class="src-l" wx:for="{{x.srcLines}}" wx:for-item="l" wx:key="*this">{{l}}</text>
+          </view>
+        </view>
+        <view class="ghidden" wx:if="{{g.hidden}}">这一箱还有 {{g.hidden}} 条没画出来</view>
+      </view>
+
+      <view class="more" wx:if="{{rest > 0}}">
+        <view class="dim">已显示 {{shown}} / {{totalRecipes}} 条</view>
+        <view class="btn" bindtap="loadMore">再显示 60 条</view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{!totalRecipes && !nodeRows.length && !sel.unparsed}}">
+      <view class="empty">没有匹配条目，试试放宽搜索或技能等级。</view>
+    </view>
+
+    <view class="foot">
+      <view class="dim">{{sourceText}}</view>
+    </view>
+  </block>
+</view>

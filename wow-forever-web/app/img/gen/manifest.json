@@ -12,7 +12,7 @@
    "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
    "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
    "processed": "裁掉底部 128px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
-   "fetchedAt": "2026-10-12"
+   "fetchedAt": "2026-10-27"
   },
   {
    "file": "gen/banner-cloudsea.webp",
@@ -24,7 +24,7 @@
    "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
    "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
    "processed": "裁掉底部 130px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
-   "fetchedAt": "2026-10-12"
+   "fetchedAt": "2026-10-27"
   },
   {
    "file": "gen/cavern-hall.webp",
@@ -36,7 +36,19 @@
    "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
    "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
    "processed": "裁掉底部 128px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
-   "fetchedAt": "2026-10-12"
+   "fetchedAt": "2026-10-27"
+  },
+  {
+   "file": "gen/prof-table.webp",
+   "bytes": 121286,
+   "sha1": "bc7bbdb73e",
+   "size": "1792x896",
+   "kind": "atmosphere",
+   "what": "专业与配方入口卡：右侧药剂与锻造工具台面，左半留暗部放标题",
+   "generatedBy": "Qoder ImageGen（本站自生成，提示词见 brief 第八节）",
+   "source": "prompt: 按设计稿 brief 第八节的规格自生成（史诗奇幻 × 暗黑金属，暗蓝炭黑底 + 铜金边光，无字、无 UI、无角色，一侧留大面积低纹理暗部承载文字）",
+   "processed": "裁掉底部 128px：出图右下角带「Qoder AI 生成」角标，不裁会糊在页面上",
+   "fetchedAt": "2026-10-27"
   }
  ]
 }

@@ -12,6 +12,11 @@ const crypto = require('crypto');
 const ROOT = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/oss-build/beta';
 const IMG_ROOT = '/Users/zhangyajun/Documents/project/wow-forever/wow-forever-web/app/img';
 const MODE = process.env.FAKE_OSS_MODE || 'normal';
+/* FAKE_OSS_FLAGS_FILE=<路径>：把这一份文件当 {ns}/flags.json 发（其余照旧）。
+   为什么要有这个口子：回归脚本要演"线上拧了一下开关"，但不能往 for-mini/ 里写——
+   开发者工具开着 compileHotReLoad，往项目里写文件会把小程序打回首页，制造一片假红
+   （2026-10-27 做功能开关那条两阶段验证时踩的）。每次请求现读，改了立刻可见。 */
+const FLAGS_FILE = process.env.FAKE_OSS_FLAGS_FILE || '';
 const BIDX = JSON.parse(fs.readFileSync(require('path').join(ROOT, 'manifest.json'), 'utf8')).buildId;
 const PORT = Number(process.env.FAKE_OSS_PORT || 8899);
 const md5u = (b) => crypto.createHash('md5').update(b).digest('hex').toUpperCase();
@@ -39,7 +44,8 @@ const server = http.createServer((req, res) => {
     res.end(buf);
     return;
   }
-  let buf = fs.readFileSync(file);
+  let buf = rel === 'flags.json' && FLAGS_FILE && fs.existsSync(FLAGS_FILE)
+    ? fs.readFileSync(FLAGS_FILE) : fs.readFileSync(file);
   if (MODE === 'tamperindex' && rel === 'builds/' + BIDX + '/dungeons/index.json') {
     const j = JSON.parse(buf.toString('utf8'));
     j.items[0].nameCn = '被改过的副本名';

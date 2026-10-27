@@ -32,6 +32,9 @@ const BUILD = path.join(REPO, 'for-mini/oss-build/beta');
 const SHOT_DIR = '/tmp/m01-shots';
 const SHOT_TARGET = path.join(REPO, 'for-mini/docs/screenshots/m01-2026-10-21');
 const SERVER = path.join(REPO, 'wow-forever-web/tools/oss-fake-server.js');
+/* 开关的"线上那一份"放在项目外：回归要演"拧一下开关"，但往 for-mini/ 里写会触发
+   compileHotReLoad，把小程序打回首页（2026-10-27 踩过）。假 OSS 支持 FAKE_OSS_FLAGS_FILE 覆写。 */
+const LIVE_FLAGS = '/tmp/m01-flags-live.json';
 /* 每种模式换一个新端口＝一个新 URL 空间。
    模拟器会照 Cache-Control 把批次文件缓存住（真线上也该这样），
    同一 URL 换内容它是看不到的；不换端口做"篡改/新版本"场景就会读到上一轮缓存，测的是缓存不是校验。 */
@@ -96,7 +99,8 @@ async function stopServer() {
 }
 async function startServer(mode) {
   await stopServer();
-  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1' }) });
+  fs.copyFileSync(path.join(BUILD, 'flags.json'), LIVE_FLAGS);
+  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1', FAKE_OSS_FLAGS_FILE: LIVE_FLAGS }) });
   p.stderr.on('data', (d) => process.stdout.write('[fake-oss!] ' + String(d).slice(0, 200)));
   live = p;
   for (let i = 0; i < 25; i += 1) {
@@ -635,15 +639,253 @@ async function main() {
     /class="bis-card/.test(homeWxml) && /bindtap="goBis"/.test(homeWxml)
       && homeWxml.indexOf('bis-card') < homeWxml.indexOf('class="grid"'), '');
 
+
+  /* ---------- I. 远程功能开关（2026-10-27 站主："暂时先不公开，想公开了不用发版就能公开"） ----------
+     两阶段：① 线上（本地假 OSS 那份 flags.json）关着 → 首页没入口、直接进页只说"还没开放"且不取数；
+     ② 只改 flags.json 这一个文件（代码一行不动）→ 重进就出现。
+     阶段之间对页面代码文件求哈希，证明"放开这一页没改过代码"。 */
+  process.stdout.write('\nI. 远程开关：关着看不见，只改 flags.json 就出现（代码一行没动）\n');
+  const crypto01 = require('crypto');
+  const sha01 = (p) => crypto01.createHash('sha256').update(fs.readFileSync(p)).digest('hex').slice(0, 12);
+  /* 改的就是假 OSS 供出去的那一份（项目外），代码与批次数据一个字节都不动 */
+  const FLAGS_FILE = LIVE_FLAGS;
+  const CODE_FILES = ['pages/professions/index.js', 'pages/professions/index.wxml', 'pages/home/index.js',
+    'pages/home/index.wxml', 'services/features.js', 'data/flags-local.js', 'app.json'];
+  const codeBefore = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
+  const flags0 = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
+  log('这一批带开关对象（与指针同一档，改它不发版）',
+    flags0.product === 'wow-forever-mini-flags' && flags0.env === 'beta'
+      && flags0.features.professions.on === false && flags0.features.bis.on === true
+      && (flags0.policy || []).length >= 3, JSON.stringify(flags0.counts));
+
+  await clearStore();
+  await nav('/pages/professions/index');
+  const off = await call('读关着的页', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop(); const d = p.data || {};
+    return { route: p.route, locked: !!d.locked, lockName: d.lockName || '', loaded: !!d.loaded,
+      chips: (d.chips || []).length, hasSel: !!d.sel, meta: !!d.meta, sourceText: d.sourceText || '' };
+  }), 3);
+  log('开关关着时直接进这一页：只说"还没开放"，一个数据请求都不发（没取到数据＝真的没去取）',
+    !!off && off.route === 'pages/professions/index' && off.locked === true && off.loaded === false
+      && off.chips === 0 && off.hasSel === false && off.meta === false,
+    JSON.stringify(off));
+  log('关着的页念得出这一页叫什么（不是"出错了"那种含糊话）',
+    !!off && off.lockName === '专业与配方', JSON.stringify(off && off.lockName));
+  await nav('/pages/home/index');
+  const homeOff = await call('读首页（关）', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data || {};
+    return { open: !!d.openProfessions, art: (d.cardBg || {}).professions === undefined ? null : !!d.cardBg.professions };
+  }), 3);
+  log('首页此时没有「专业与配方」入口卡（关着整块不渲染，不留空白格）',
+    !!homeOff && homeOff.open === false, JSON.stringify(homeOff));
+
+  /* 只动"线上"那一份开关（项目外那个文件）：等价于跑一次 flags --env beta */
+  const flipped = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
+  flipped.features.professions.on = true;
+  fs.writeFileSync(FLAGS_FILE, JSON.stringify(flipped, null, 1) + '\n');
+  process.stdout.write('    → 把本地那份 flags.json 的 professions 拧成 true（模拟线上改开关，代码一行没动）\n');
+  await nav('/pages/home/index');
+  const homeOn = await call('读首页（开）', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data || {};
+    return { open: !!d.openProfessions };
+  }), 3);
+  const codeAfter = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
+  log('拧开之后首页入口卡自己出现了，而且代码一个字节都没变（这就是"不用发版"）',
+    !!homeOn && homeOn.open === true && codeBefore === codeAfter,
+    codeBefore === codeAfter ? '代码哈希一致' : '代码哈希变了：' + codeBefore + ' vs ' + codeAfter);
+
+  /* ---------- J. 专业与配方页（对齐网页 ProfessionsPage.vue） ---------- */
+  process.stdout.write('\nJ. 专业页：13 个专业能切、三个筛选项真生效、分箱与材料条在\n');
+  await nav('/pages/professions/index');
+  const pf = await call('读专业页', () => mp.evaluate(() => new Promise((res) => {
+    setTimeout(() => {
+      const p = getCurrentPages().pop(); const d = p.data || {};
+      res({ route: p.route, locked: !!d.locked, chips: (d.chips || []).length, selId: d.selId || '',
+        selName: (d.sel || {}).nameCn || '', stats: d.stats || {}, total: d.totalRecipes,
+        shown: d.shown, rest: d.rest, bands: (d.bands || []).map((b) => b.label + ':' + b.count + '/' + b.rows.length).join(' '),
+        nodeHead: d.nodeHead, nodes: (d.nodeRows || []).length, sourceText: d.sourceText || '',
+        bandNote: d.bandNote || '', headUrl: d.headUrl || '',
+        row0: ((d.bands || [])[0] || {}).rows ? ((((d.bands || [])[0] || {}).rows || [])[0] || {}) : {},
+        text: []
+          .concat(...((d.bands || []).map((b) => b.rows || [])), d.nodeRows || [])
+          .map((x) => [x.name, (x.mats || []).map((m) => m.name + m.count).join(' '), (x.srcLines || []).join(' ')]
+            .concat(x.yields ? [x.yields] : []).join(' ')).join(' | ') });
+    }, 1200);
+  })), 3);
+  log('开关开了就直接进得来：13 个专业、页头读数与板块图都在',
+    !!pf && pf.route === 'pages/professions/index' && pf.locked === false && pf.chips === 13
+      && pf.stats.professions === 13 && pf.stats.recipes > 1900 && /^http/.test(pf.headUrl),
+    JSON.stringify(pf && { chips: pf.chips, stats: pf.stats }));
+  log('取数状态说真话（线上取到了就不许写"没取到数据"）',
+    !!pf && /实时|缓存/.test(String(pf.sourceText)), JSON.stringify(pf && pf.sourceText));
+  log('默认这个专业有配方、按橙点分了箱，且一屏只画 60 行（其余点按钮往下走）',
+    !!pf && pf.total > 60 && pf.shown === 60 && pf.rest === pf.total - 60
+      && /学徒 · 1–75/.test(pf.bands) && /大师 · 226–300/.test(pf.bands),
+    JSON.stringify(pf && { total: pf.total, shown: pf.shown, bands: pf.bands }));
+  log('分箱那句解释随数据下发（页面不自己写一份），并交代了兜底那一箱',
+    !!pf && /橙色起点/.test(pf.bandNote) && /不静默吞条目/.test(pf.bandNote), String(pf && pf.bandNote).slice(0, 60));
+  const pf0 = (pf && pf.row0) || {};
+  log('一行配方给全：名字、品质色档、材料带数量、技能四档、来源',
+    !!pf0.name && typeof pf0.q === 'number' && (pf0.skList || []).length >= 1
+      && (pf0.mats || []).length >= 1 && pf0.matPct >= 6 && pf0.matPct <= 100,
+    JSON.stringify({ name: pf0.name, q: pf0.q, mats: (pf0.mats || []).length, sk: (pf0.skList || []).length, pct: pf0.matPct }));
+  const pfMore = await call('再显示 60 条', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.loadMore();
+    setTimeout(() => { const d = p.data || {}; res({ shown: d.shown, rest: d.rest, total: d.totalRecipes }); }, 500);
+  })), 3);
+  log('「再显示 60 条」真的往下放（不是个摆设按钮）',
+    !!pfMore && pfMore.shown === 120 && pfMore.rest === pfMore.total - 120, JSON.stringify(pfMore));
+  const pfLv = await call('填我的技能等级', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    const before = p.data.totalRecipes;
+    p.onLevel({ detail: { value: '10' } });
+    setTimeout(() => res({ before, after: p.data.totalRecipes, lv: p.data.lv }), 500);
+  })), 3);
+  log('「我的技能 1–300」真在筛（按橙点档收，结果数跟着变小）',
+    !!pfLv && pfLv.lv === '10' && pfLv.after < pfLv.before, JSON.stringify(pfLv));
+  const pfQ = await call('搜一个材料名', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onLevel({ detail: { value: '' } });
+    p.onSearch({ detail: { value: '宁神花' } });
+    setTimeout(() => {
+      const d = p.data || {};
+      res({ total: d.totalRecipes, hit: (d.bands || []).every((b) => (b.rows || []).every((r) =>
+        /宁神花/.test(r.name + ' ' + (r.mats || []).map((m) => m.name).join(' ')))) });
+    }, 500);
+  })), 3);
+  log('搜索框同时命中制成品名与材料名（不是只搜标题）',
+    !!pfQ && pfQ.total > 0 && pfQ.total < pfMore.total && pfQ.hit === true, JSON.stringify(pfQ));
+  const pfMat = await call('只搜材料名', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onSearch({ detail: { value: '空瓶' } });
+    setTimeout(() => {
+      const d = p.data || {};
+      const rows = []
+      ;(d.bands || []).forEach((b) => (b.rows || []).forEach((r) => rows.push(r)))
+      res({ total: d.totalRecipes,
+        noneNamed: rows.filter((r) => /空瓶/.test(r.name)).length,
+        allHave: rows.every((r) => (r.mats || []).some((m) => /空瓶/.test(m.name))) });
+    }, 500);
+  })), 3);
+  log('搜"空瓶"命中的全是材料里有它的配方（这些配方名字里没这个词）',
+    !!pfMat && pfMat.total > 0 && pfMat.noneNamed === 0 && pfMat.allHave === true, JSON.stringify(pfMat));
+  const pfNone = await call('搜一个不存在的词', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onSearch({ detail: { value: '这个词一定搜不到zzz' } });
+    setTimeout(() => { const d = p.data || {}; res({ total: d.totalRecipes, nodes: (d.nodeRows || []).length }); }, 500);
+  })), 3);
+  const pfWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/professions/index.wxml'), 'utf8');
+  log('筛到 0 条时走空态那一卡（条件就是"配方 0 且采集点 0 且不是拆不出条目那一档"）',
+    !!pfNone && pfNone.total === 0
+      && /没有匹配条目[\s\S]{0,40}!totalRecipes && !nodeRows.length && !sel.unparsed/.test(
+        pfWxml.replace(/\s+/g, ' ').replace('<view class="card" wx:if="{{', '{{'))
+      || /没有匹配条目/.test(pfWxml) && /!totalRecipes && !nodeRows.length && !sel.unparsed/.test(pfWxml),
+    JSON.stringify(pfNone));
+  const pfNew = await call('只看无限新增', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onSearch({ detail: { value: '' } });
+    setTimeout(() => {
+      const all = p.data.totalRecipes;
+      p.toggleNew();
+      setTimeout(() => {
+        const d = p.data || {};
+        res({ all, after: d.totalRecipes, on: !!d.onlyNew,
+          allNew: (d.bands || []).every((b) => b.rows.every((r) => r.isNew)) });
+      }, 500);
+    }, 400);
+  })), 3);
+  log('「只看无限新增」真在筛，且筛出来的每一条都带"新"角标',
+    !!pfNew && pfNew.on === true && pfNew.after > 0 && pfNew.after < pfNew.all && pfNew.allNew === true,
+    JSON.stringify(pfNew));
+  const pfGather = await call('切到草药学', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    if (p.data.onlyNew) p.toggleNew();
+    p.pickProf({ currentTarget: { dataset: { id: 'herbalism' } } });
+    setTimeout(() => {
+      const d = p.data || {};
+      res({ selId: d.selId, selName: (d.sel || {}).nameCn, nodeHead: d.nodeHead, nodes: (d.nodeRows || []).length,
+        total: d.totalRecipes, first: ((d.nodeRows || [])[0] || {}).name || '', yields: ((d.nodeRows || [])[0] || {}).yields || '' });
+    }, 1500);
+  })), 3);
+  log('采集类专业：表头叫「草药点」、列的是采集点，配方 0 条也不硬凑',
+    !!pfGather && pfGather.selId === 'herbalism' && pfGather.nodeHead === '草药点'
+      && pfGather.nodes === 30 && pfGather.total === 0 && pfGather.first.length > 1,
+    JSON.stringify(pfGather && { head: pfGather.nodeHead, nodes: pfGather.nodes, first: pfGather.first }));
+  /* 草药点那 30 行"可得的就只有它自己"，那一行现在不显示（2026-10-27 实拍里每行都在重复名字）。
+     判据反过来：采完就重复的那格必须是空，切到采矿（一种矿出好几种料）才该有这一行。 */
+  log('「可得」只在与采集点同名时省掉，采矿那种一矿多料照旧列全',
+    !!pfGather && pfGather.yields === '',
+    JSON.stringify(pfGather && { yields: pfGather.yields }));
+  const pfMine = await call('切到采矿看可得列', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.pickProf({ currentTarget: { dataset: { id: 'mining' } } });
+    setTimeout(() => {
+      const d = p.data || {};
+      const first = (d.nodeRows || [])[0] || {};
+      res({ nodes: (d.nodeRows || []).length, total: d.totalRecipes, first: first.name, yields: first.yields });
+    }, 1500);
+  })), 3);
+  log('采矿：13 个矿点 + 15 条配方都在，"可得"列出一矿多料',
+    !!pfMine && pfMine.nodes === 13 && pfMine.total === 15 && /、/.test(pfMine.yields || ''),
+    JSON.stringify(pfMine));
+  const pfCamp = await call('切到野营（拆不出条目那一档）', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.pickProf({ currentTarget: { dataset: { id: 'camping' } } });
+    setTimeout(() => {
+      const d = p.data || {};
+      res({ selId: d.selId, unparsed: !!(d.sel || {}).unparsed, note: (d.sel || {}).note || '',
+        total: d.totalRecipes, nodes: (d.nodeRows || []).length });
+    }, 1500);
+  })), 3);
+  log('野营那一档照实说"还没拆出条目"，那句话取自数据里的 note（不在代码里另编）',
+    !!pfCamp && pfCamp.unparsed === true && /没.*拆|还没/.test(pfCamp.note) && pfCamp.total === 0,
+    JSON.stringify(pfCamp));
+  const pfAlch = await call('切回炼金看来源行', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.pickProf({ currentTarget: { dataset: { id: 'alchemy' } } });
+    setTimeout(() => {
+      const d = p.data || {};
+      const rows = []
+      ;(d.bands || []).forEach((b) => (b.rows || []).forEach((r) => rows.push(r)))
+      res({ selId: d.selId, total: d.totalRecipes, shown: d.shown,
+        srcs: rows.map((r) => (r.srcLines || []).join(' ')).filter(Boolean),
+        text: rows.map((r) => [r.name, (r.mats || []).map((m) => m.name).join(' '),
+          (r.srcLines || []).join(' ')].join(' ')).join(' | ') });
+    }, 1500);
+  })), 3);
+  log('来源那一格还原成中文（训练师 / 商人：名字（区域） / 图纸掉落：…），掉率一个字都不写',
+    !!pfAlch && pfAlch.srcs.length > 0
+      && pfAlch.srcs.join(' ').indexOf('训练师') >= 0, JSON.stringify((pfAlch && pfAlch.srcs.slice(0, 2)) || []));
+  log('专业页渲染出来的文字里没有百分比与强度评价词（红线）',
+    !!pfAlch && !/\d+(\.\d+)?\s*%/.test(pfAlch.text) && !/秒伤|DPS|权重|更好|优于|性价比/.test(pfAlch.text),
+    String(pfAlch && pfAlch.text).slice(0, 80));
+  await shot('p1-professions');
+  await nav('/pages/home/index');
+  await shot('p2-home-with-professions-entry');
+  /* mp.screenshot 的返回值不是路径（别拿它当证据），要看文件真落盘了没有 */
+  const pfShots = ['p1-professions.png', 'p2-home-with-professions-entry.png']
+    .filter((f) => fs.existsSync(path.join(SHOT_DIR, f)));
+  log('两张实拍落盘（专业页 + 首页带入口）', pfShots.length === 2, JSON.stringify(pfShots));
+
+  /* 收尾：把本地那份开关恢复成"关着"——站主 2026-10-27 的口径是先不公开，
+     测试借道拧开一次，跑完必须还原，否则下一次回归看到的线上状态就是被测试改过的 */
+  fs.writeFileSync(FLAGS_FILE, JSON.stringify(flags0, null, 1) + '\n');
+  log('测后把 flags.json 还原成基线（professions 关着），代码文件哈希与测前一致',
+    JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8')).features.professions.on === false
+      && CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ') === codeBefore, '');
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
   const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';
   const rawColor = [];
   ['pages/home/index.wxss', 'pages/dungeons/index.wxss', 'pages/dungeon/index.wxss', 'pages/glossary/index.wxss',
-    'pages/classes/index.wxss', 'pages/class/index.wxss', 'pages/guide/index.wxss'].forEach((f) => {
+    'pages/classes/index.wxss', 'pages/class/index.wxss', 'pages/guide/index.wxss',
+    /* 新页一律进这份名单：以前只列了老页，配装页那种"页面自己写裸色值"就漏过去了 */
+    'pages/bis/index.wxss', 'pages/professions/index.wxss', 'pages/item/index.wxss',
+    'pages/spells/index.wxss', 'pages/loots/index.wxss'].forEach((f) => {
     const t = fs.readFileSync(MINI + f, 'utf8');
     (t.match(/#[0-9a-fA-F]{3,8}\b|rgba?\(/g) || []).forEach((c) => rawColor.push(f + ' ' + c));
   });
-  log('四个页面的 wxss 里没有裸色值（颜色只在 app.wxss）', rawColor.length === 0, rawColor.slice(0, 4).join(' | '));
+  log('全部页面级 wxss 里没有裸色值（颜色只在 app.wxss）', rawColor.length === 0, rawColor.slice(0, 4).join(' | '));
   const appjson = JSON.parse(fs.readFileSync(MINI + 'app.json', 'utf8'));
   /* 2026-10-22 站主重排：tab 三格给 首页/副本/职业；中英速查降成首页卡（navigateTo） */
   log('tabBar 三个一级入口：首页 / 副本 / 职业',

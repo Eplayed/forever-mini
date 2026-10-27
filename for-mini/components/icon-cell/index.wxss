@@ -17,6 +17,13 @@
   height: 56rpx;
 }
 
+/* xs 是材料行那种"一行里塞三四个"的位：56rpx 在那种行里比文字还高，
+   40rpx 刚好跟 22rpx 的字并肩。只有专业页在用，别页仍用 sm。 */
+.ic-xs {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .ic-md {
   width: 88rpx;
   height: 88rpx;

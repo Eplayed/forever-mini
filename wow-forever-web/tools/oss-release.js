@@ -92,7 +92,15 @@ const BUDGET_KB = {
      由构建来提醒，不等手机上出问题。 */
   'bis/index': 24,
   bisItems: 128,
-  bisSet: 28
+  bisSet: 28,
+  /* 专业线（2026-10-27）：索引 13 个专业约 6 KB；分片自成一格（图标/材料/商人/图纸字典都就地带），
+     点开哪个专业才下那一片。最大的是制皮 511 条配方。哪天顶破这条，说明该把分片再按分箱拆了，
+     由构建来提醒，不等手机上出问题。 */
+  'professions/index': 24,
+  /* 2026-10-27 实测最大的一片：制皮 511 条配方 = 65.6 KB（紧凑写法）。
+     80 KB 是给"再抓一批配方"留的余量；哪天顶破这条，下一步是按分箱把一片拆成四片，
+     不是把预算再抬——手机端点开一个专业付一次这个数，得有人守着。 */
+  profSet: 80
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -111,6 +119,8 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    所以它们出现在基底名单里、却不在导出名单里，这是有意的一对多。 */
 /* bis.json + professions.json 也只喂分发层（配装线在构建时把名字/装等/来源现算进产物），
    不进 oss-preview 导出产物，理由同 items 那两条。 */
+/* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
+   "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
 const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
@@ -129,6 +139,15 @@ const IMUTABLE_CACHE = 'public, max-age=31536000, immutable';
 const ASSET_DISP = 'inline';
 const POINTER_CACHE = 'public, max-age=60, must-revalidate';
 
+/* —— 功能开关（2026-10-27）——
+   一个和批次并列的可变对象，路径 wow/{env}/v1/flags.json，缓存语义与指针同一档。
+   为什么不并进 manifest：见 app/data/flags.json 的 whyOutsideBatch。一句话——
+   builds/{buildId}/manifest.json 同时是回滚位，必须同 buildId 字节恒定；开关是要随时拧的。
+   product 与批次分开（客户端按 product 认对象，混在一起等于让开关冒充数据清单）。 */
+const FLAGS_PRODUCT = 'wow-forever-mini-flags';
+const FLAGS_FILE = 'flags.json';
+const FLAG_NAME_RE = /^[a-z][a-z0-9]*$/;
+
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 const md5Hex = (buf) => crypto.createHash('md5').update(buf).digest('hex').toUpperCase();
 const md5B64 = (buf) => crypto.createHash('md5').update(buf).digest('base64');
@@ -143,6 +162,10 @@ const writeBuf = (p, buf) => {
   fs.writeFileSync(p, buf);
 };
 const dump = (obj) => Buffer.from(JSON.stringify(obj, null, 1) + '\n', 'utf8');
+/* 位置数组存的分片（专业那种几万行纯数字）按缩进来写会胖一倍以上：
+   一份给人看的索引值排，一份机器读的行列不值这个流量。标了 flat 的条目按紧凑写，
+   校验值/字节数一律走 bufOf()，两处必须是同一份字节。 */
+const dumpFlat = (obj) => Buffer.from(JSON.stringify(obj), 'utf8');
 const isOfficial = (list) => (list || []).some((s) => String(s.type || '').indexOf('official') === 0 || String(s.type || '') === 'datamine_cn');
 
 /* ---------- 1. 把 oss-preview 的三份成品切成一个批次 ---------- */
@@ -316,6 +339,29 @@ const BIS_SLOT_SIBS = { '主手': ['main-hand', 'two-hand'], '副手': ['off-han
 const BIS_NOTE = 'bisItems 的列名：id、中文名、品质、装等、图标键（null＝本地没这张图，界面画自绘块）、属性行（只留数值行，最多 4 条；使用/装备：那类效果文案不在其中）。'
   + '装备名/品质/装等/属性行全部回本站物品库现查，这份名单只存"哪件在哪个部位、按什么顺序"。';
 const BIS_DISCLAIMER = '这份名单由本站整理自第三方资料，不是官方结论，也没做模拟计算。';
+
+/* —— 专业与配方（2026-10-27）的表与列名 ——
+   分箱（技能橙点 1–75 / 76–150 / 151–225 / 226–300）与技能四档那两张表，
+   网页那份 ProfessionsPage.vue 里各写了一份字面量。配装那次的做法是"桥随索引下发、两端读同一处"，
+   这里照做：小程序从分片渲染，不再自己抄第三份。漂移由 oss-release-test 那条去 grep 网页源文件的对拍抓
+   （它红的是测试，不会把发布卡在一个文件格式上）。 */
+const PROF_BANDS = [[1, 75, '学徒 · 1–75'], [76, 150, '熟练 · 76–150'],
+  [151, 225, '专家 · 151–225'], [226, 300, '大师 · 226–300']];
+const PROF_BAND_NOTE = '按技能的橙色起点分四箱；四箱盖不住的另进"技能档位没标出来"，不静默吞条目。';
+const PROF_SK_KEYS = [['orange', '橙'], ['yellow', '黄'], ['green', '绿'], ['grey', '灰']];
+const PROF_SK_COLS = ['orange', 'yellow', 'green', 'grey'];
+/* 页首那张板块图：与网页专业页、首页图标轨「专业」那一格同一张（站内同一板块同一张脸） */
+const PROF_HEAD_ICON = '10prof_table_tailoring01';
+const PROF_TITLE = '专业与配方';
+const PROF_DISCLAIMER = '配方、材料与采集点取自无限客户端（经第三方资料站转述）：只列名称与数量，不给掉率、不做冲级建议。';
+const PROF_REC_COLS = ['itemId', 'name', 'icon', 'q', 'new', 'mats', 'sk', 'src', 'vend', 'drops', 'xr', 'vMore', 'dMore'];
+const PROF_NODE_COLS = ['name', 'icon', 'yields', 'zone', 'sk'];
+const PROF_MAT_COLS = ['name', 'icon'];
+const PROF_COL_NOTE = '行的列名见 cols（位置数组存）。mats 是 [材料序号, 数量, 材料序号, 数量…] 平铺；'
+  + 'sk 按 [' + PROF_SK_COLS.join(', ') + '] 排，null 表示这一档源里没给；'
+  + 'icon 是 icons 里的序号，-1 就是这条数据本来没有图标（界面画自绘块，不许猜一张）；'
+  + 'src 是 sources 的序号，-1 没标；vend/drops 是 vendors/drops 的序号；xr=1 表示首领头像那批来自 XR 表、名字是英文原名；'
+  + 'vMore/dMore 是源里被截断后剩下的处数，界面写"等 N 处"时要把截掉的加起来。';
 
 /* 「这套装备给的属性」这一排合计，规则全在网页那份 lib/item-stats.js 里
    （基础护甲的三种写法、哪四类句子不许算——2026-10-19 逐档数过，还有单测盯着）。
@@ -1030,10 +1076,152 @@ function buildBatch(env, opts) {
     errors.push('缺少配装基底 app/data/bis.json，配装线没有数据来源');
   }
 
+  /* —— 专业与配方（2026-10-27）：与网页 app/src/pages/ProfessionsPage.vue 同一份口径 ——
+     基底 1.5 MB / 1990 条配方不能整份塞进手机：索引一片（13 个专业 + 分箱 + 列名 + 出处），
+     每个专业自成一格（图标 / 材料 / 商人 / 图纸字典就地带，点开哪个下哪个），
+     行用位置数组存——与掉落反查、配装那两条同一个写法。 */
+  const profPack = fs.existsSync(profSrc) ? readJson(profSrc) : null;
+  let profIndexObj = null;
+  const profStat = { recipes: 0, newRecipes: 0, nodes: 0, noBand: 0, noIcon: 0 };
+  if (profPack) {
+    const pList = profPack.professions || [];
+    const pm = profPack.meta || {};
+    if (!pList.length) errors.push('专业：基底里一个专业都没有');
+    /* 分箱必须连续盖住 1–300：漏一档就等于把那一段配方静默吞进兜底箱 */
+    let cursor = 1;
+    PROF_BANDS.forEach((b) => {
+      if (b[0] !== cursor) errors.push('专业分箱不连续：上一箱收到 ' + (cursor - 1) + '，这一箱从 ' + b[0] + ' 起（' + b[2] + '）');
+      cursor = b[1] + 1;
+    });
+    if (cursor !== 301) errors.push('专业分箱没盖到 300（收到 ' + (cursor - 1) + '）');
+
+    const setsOut = [];
+    pList.forEach((p) => {
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(String(p.id || ''))) { errors.push('专业 id ' + p.id + ' 含不能作为文件名的字符'); return; }
+      const icons = []; const iconIx = {};
+      const mats = []; const matIx = {};
+      const vends = []; const vndIx = {};
+      const drops = []; const dropIx = {};
+      const srcs = []; const srcIx = {};
+      const put = (arr, map, key, val) => {
+        if (!Object.prototype.hasOwnProperty.call(map, key)) { map[key] = arr.length; arr.push(val); }
+        return map[key];
+      };
+      /* 图标键是空串 = 这条数据本来就没有图：编成 -1，界面画自绘块，不许猜一张 */
+      const iconOf = (k) => { const s = String(k || ''); if (!s) { profStat.noIcon += 1; return -1; } return put(icons, iconIx, s, s); };
+      const matOf = (m) => put(mats, matIx, JSON.stringify([String(m.nameCn || ''), String(m.iconKey || '')]),
+        [String(m.nameCn || ''), iconOf(m.iconKey)]);
+      const vndOf = (v) => put(vends, vndIx, JSON.stringify([String(v.name || ''), String(v.zone || '')]),
+        [String(v.name || ''), String(v.zone || '')]);
+      const dropOf = (x) => put(drops, dropIx, JSON.stringify([String(x.npc || ''), String(x.zone || '')]),
+        [String(x.npc || ''), String(x.zone || '')]);
+      const recipes = (p.recipes || []).map((r) => {
+        const sk = r.skill || {};
+        const matFlat = [];
+        (r.mats || []).forEach((m) => { matFlat.push(matOf(m), m.count == null ? 1 : m.count); });
+        const orange = typeof sk.orange === 'number' ? sk.orange : null;
+        if (orange === null || !PROF_BANDS.some((b) => orange >= b[0] && orange <= b[1])) profStat.noBand += 1;
+        if (r.isNew) profStat.newRecipes += 1;
+        return [String(r.itemId), String(r.nameCn || ''), iconOf(r.iconKey), r.quality || 0, r.isNew ? 1 : 0,
+          matFlat, PROF_SK_COLS.map((k) => (typeof sk[k] === 'number' ? sk[k] : null)),
+          r.source == null ? -1 : put(srcs, srcIx, String(r.source), String(r.source)),
+          (r.vendors || []).map((v) => vndOf(v)), (r.formulaDrops || []).map((x) => dropOf(x)),
+          r.srcFrom === 'xr' ? 1 : 0, r.vMore || 0, r.dMore || 0];
+      });
+      const nodes = (p.nodes || []).map((n) => {
+        const sk = n.skill || null;
+        return [String(n.nameCn || ''), iconOf(n.iconKey), (n.yields || []).map((y) => String(y)),
+          String(n.zone || ''), sk ? PROF_SK_COLS.map((k) => (typeof sk[k] === 'number' ? sk[k] : null)) : null];
+      });
+      /* 基底自己报的数与实际拆出来的数对不上 = 这一版拆漏了，宁可红也不静默少条目 */
+      const c = p.counts || {};
+      if (c.recipes !== recipes.length) errors.push('专业 ' + p.id + '：基底自报 ' + c.recipes + ' 条配方，实际拆出 ' + recipes.length + ' 条');
+      if (c.nodes !== nodes.length) errors.push('专业 ' + p.id + '：基底自报 ' + c.nodes + ' 个采集点，实际拆出 ' + nodes.length + ' 个');
+      profStat.recipes += recipes.length;
+      profStat.nodes += nodes.length;
+
+      const obj = {
+        /* 列名与那份列说明只在索引里写一份：13 片各抄一遍等于把同一句话复制 13 次，
+           改一处漏十二处。客户端是先读索引、再点分片的，取得到。 */
+        schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'professions-set', profId: p.id,
+        icons, mats, vendors: vends, drops, sources: srcs,
+        recipes, nodes,
+        counts: { recipes: recipes.length, nodes: nodes.length }
+      };
+      icons.forEach((k) => useIcon(k, 'professions/set/' + p.id));
+      setsOut.push(obj);
+      pushObj('profSet:' + p.id, 'professions/set/' + p.id + '.json', obj, {
+        records: recipes.length + nodes.length, budget: 'profSet', facts: collectFactDates([p]), flat: true
+      });
+    });
+
+    profIndexObj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'professions-index',
+      source: 'wow-forever-web/app/data/professions.json',
+      meta: {
+        generatedAt: pm.generatedAt || null, kind: pm.kind || null,
+        title: PROF_TITLE,
+        /* 这里刻意不下发 pm.method（"tools/scrape-wclbox-prof.py → tools/merge-professions.js"）：
+           那是本站的取数工序，玩家界面看了只会莫名其妙，出处集中在网页的溯源页。
+           2026-10-27 实拍里它被当副标题渲染出来了，才补的这条。 */
+        took: pm.took || null, sources: pm.sources || [],
+        /* 红线要的那句与分级在分发层写一次，页面不许各自改写措辞 */
+        disclaimer: PROF_DISCLAIMER, levelNote: pm.levelNote || null
+      },
+      bands: PROF_BANDS, bandNote: PROF_BAND_NOTE,
+      cols: { recipe: PROF_REC_COLS, node: PROF_NODE_COLS, mat: PROF_MAT_COLS, sk: PROF_SK_COLS },
+      colNote: PROF_COL_NOTE,
+      skillKeys: PROF_SK_KEYS.map((x) => ({ k: x[0], cn: x[1] })),
+      /* 采集表表头那几个专业用的是自己的叫法（草药点 / 水域），与网页同一份 */
+      nodeHeadLabels: { herbalism: '草药点', fishing: '水域' },
+      headIcon: PROF_HEAD_ICON,
+      /* 这一页的条目全是客户端解包出来的游戏内中文名（经第三方转述）→ L0；
+         分级由基底逐条带（level），构建时数一遍：出现非 L0 就报出来，别整页冒充已核 */
+      levels: pList.reduce((m, p) => { const k = String(p.level || '未标'); m[k] = (m[k] || 0) + 1; return m }, {}),
+      professions: pList.map((p) => ({
+        id: p.id, nameCn: p.nameCn, nameEn: p.nameEn || null, kind: p.kind || null,
+        unparsed: !!p.unparsed, note: p.note || null, level: p.level || '未标',
+        levelNote: p.levelNote || null, counts: p.counts || {},
+        prov: p.provenance || [], path: 'professions/set/' + p.id + '.json'
+      })),
+      counts: {
+        professions: pList.length,
+        craft: pList.filter((p) => (p.kind || '') !== 'gather').length,
+        gather: pList.filter((p) => (p.kind || '') === 'gather').length,
+        recipes: profStat.recipes, newRecipes: profStat.newRecipes, nodes: profStat.nodes,
+        rowsWithoutBand: profStat.noBand, rowsWithoutIcon: profStat.noIcon,
+        shards: setsOut.length
+      }
+    };
+    useIcon(PROF_HEAD_ICON, 'professions/index 板块图');
+    pushObj('professionsIndex', 'professions/index.json', profIndexObj, {
+      records: pList.length, budget: 'professions/index', facts: collectFactDates(pList)
+    });
+    /* 专业线的红线扫描：这些产物是给玩家看的，出现百分比、秒伤、"更好 N%"这类话就是撞线。
+       与配装那条不同的是：这一页没有游戏原文那层（属性行不下发），所以整片都能扫。 */
+    entries.forEach((e) => {
+      if (!e.obj || (e.key !== 'professionsIndex' && String(e.key).indexOf('profSet:') !== 0)) return;
+      const t = JSON.stringify(e.obj);
+      if (/\d+(\.\d+)?\s*%/.test(t)) errors.push('专业：' + e.path + ' 出现百分比（红线：不给掉率、不做性价比建议）');
+      if (/秒伤|DPS|权重|更好|优于|推荐顺序|性价比/.test(t)) errors.push('专业：' + e.path + ' 出现强度/攻略类词（红线：不做强度评分与冲级建议）');
+    });
+    /* 名字不许在索引和分片里各写一遍：分片只带数据，页头那几个字段一律从索引读 */
+    setsOut.forEach((s) => {
+      const bad = s.recipes.filter((r) => !r[0] || !r[1]).length;
+      if (bad) errors.push('专业 ' + s.profId + '：' + bad + ' 条配方没有物品 ID 或名字（宁可少一条，不许拼一行空的）');
+      const lostMat = s.recipes.filter((r) => r[5].length % 2 !== 0).length;
+      if (lostMat) errors.push('专业 ' + s.profId + '：' + lostMat + ' 条配方的材料平铺数组是奇数（序号/数量配不上对）');
+      const oob = s.recipes.filter((r) => r[2] >= s.icons.length || r[2] < -1).length;
+      if (oob) errors.push('专业 ' + s.profId + '：' + oob + ' 条配方指向不存在的图标序号');
+    });
+  } else {
+    errors.push('缺少专业基底 app/data/professions.json，专业线没有数据来源');
+  }
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
-    e.preBuf = e.buf || dump(e.obj);
+    e.preBuf = e.buf || (e.flat ? dumpFlat(e.obj) : dump(e.obj));
     e.contentSha = sha256(e.preBuf);
   });
   /* buildId 必须把"生成器自己"也算进指纹。
@@ -1073,6 +1261,16 @@ function buildBatch(env, opts) {
       const e = byKey['bisSet:' + it.id];
       if (!e) { errors.push('配装索引里 ' + it.id + ' 没有对应的分片'); return; }
       const sBuf = dump(e.obj);
+      const sm = md5Of(sBuf);
+      it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
+    });
+  }
+  /* 专业：校验值随索引下发，点开哪个专业取哪一片（同一套契约） */
+  if (profIndexObj) {
+    profIndexObj.professions.forEach((it) => {
+      const e = byKey['profSet:' + it.id];
+      if (!e) { errors.push('专业索引里 ' + it.id + ' 没有对应的分片'); return; }
+      const sBuf = dumpFlat(e.obj);
       const sm = md5Of(sBuf);
       it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
     });
@@ -1127,7 +1325,7 @@ function buildBatch(env, opts) {
   });
 
   entries.forEach((e) => {
-    if (!e.buf) e.buf = dump(e.obj);
+    if (!e.buf) e.buf = e.flat ? dumpFlat(e.obj) : dump(e.obj);
     e.bytes = e.buf.length;
     e.sha256 = sha256(e.buf);
     e.etag = md5Hex(e.buf);
@@ -1202,6 +1400,12 @@ function buildBatch(env, opts) {
       bisItems: bisItemsObj ? bisItemsObj.count : 0,
       bisAltRows,
       bisItemNoBase: (typeof itemMiss !== 'undefined' && itemMiss) ? itemMiss.noBase : 0,
+      /* 专业线：专业数 / 配方数 / 无限新增 / 采集点 / 分片数（全部构建时数出来，不抄基底 counts） */
+      professions: profIndexObj ? profIndexObj.counts.professions : 0,
+      profRecipes: profIndexObj ? profIndexObj.counts.recipes : 0,
+      profNewRecipes: profIndexObj ? profIndexObj.counts.newRecipes : 0,
+      profNodes: profIndexObj ? profIndexObj.counts.nodes : 0,
+      profShards: profIndexObj ? profIndexObj.counts.shards : 0,
       races: classIndexObj.counts.races,
       classes: classIndexObj.counts.classes,
       macros: (guidePack.macros || []).length,
@@ -1254,7 +1458,8 @@ function buildBatch(env, opts) {
       classIndex: shared(pickFile('classIndex')),
       guide: shared(pickFile('guide')),
       bisIndex: bisIndexObj ? shared(pickFile('bisIndex')) : undefined,
-      bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined
+      bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined,
+      professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
@@ -1267,7 +1472,7 @@ function buildBatch(env, opts) {
   return { errors: [], buildId, ns, entries, manifest, bundleBuf, bundlePath, assetUse, assetMissing };
 }
 
-function writeBatch(env, built) {
+function writeBatch(env, built, flags) {
   const dir = path.join(buildRoot(), env, 'builds', built.buildId);
   built.entries.forEach((e) => writeBuf(path.join(dir, e.path), e.buf));
   writeBuf(path.join(dir, 'files.json'), built.bundleBuf);
@@ -1275,6 +1480,9 @@ function writeBatch(env, built) {
   writeBuf(path.join(dir, 'manifest.json'), manifestBuf);
   const pointer = path.join(buildRoot(), env, 'manifest.json');
   writeBuf(pointer, manifestBuf);
+  /* 开关与指针同一档：本地假 OSS（tools/oss-fake-server.js）直接按文件发，
+     所以门禁脚本改这个本地文件就能演"线上拧开关"，不必碰真 bucket。 */
+  if (flags) writeBuf(path.join(buildRoot(), env, FLAGS_FILE), flags.buf);
   return { dir, pointer, manifestBuf };
 }
 
@@ -1498,6 +1706,168 @@ function assetIndexBuf(built) {
 
 /* ---------- 3. 子命令 ---------- */
 
+/* ---------- 1b. 功能开关：与数据批次并列的一个可变对象 ----------
+
+   真源是 app/data/flags.json（人写的），这里只做三件事：
+   ① 校验（名字形制、on 必须是布尔、页面必须在小程序的 pages 里注册、
+      说要开的页必须在这一批里有它要的数据）；
+   ② 只把客户端用得上的字段（on / name / note）抄进下发对象，needs 那层留在仓库；
+   ③ 按指针同一档缓存语义发出去。
+
+   字节里没有生成时间：这个对象"什么时候拧的"看服务端 Last-Modified 与本地 last-flags.json。
+   开关内容没改时重跑得到同一份字节（inputSha 只跟 flags.json 走、不跟 commit 走；
+   source.generator 那个哈希跟着本脚本变，所以改了生成逻辑也会换字节——那是有意的留痕）。 */
+const FLAGS_BUDGET_KB = 4;
+const FLAGS_POLICY = [
+  '这个对象不在气密批次里：改它不换 buildId、不重发数据、不发小程序版本，玩家侧约一分钟内生效（与指针同一档 max-age=60）。',
+  '取不到这个对象（断网、还没发过、结构不对）时，客户端必须退回代码包里的默认表：不许把已经公开的页关掉，也不许因为"远端没说关"就把没公开的页放出来。',
+  '开关只管"这一页给不给看"，不管数据对不对。页面自己的取数校验与红线一条都不省，关掉只是收入口 + 页面自己拒绝取数。',
+  '界面要把关掉的页说成"这一页还没开放"，不许编一个"数据维护中"的理由，也不许在关着的页面上留下空白格。'
+];
+
+function buildFlags(env, opts) {
+  const o = opts || {};
+  const errors = [];
+  const srcPath = path.join(siteData(), FLAGS_FILE);
+  if (!fs.existsSync(srcPath)) {
+    return { errors: ['缺 app/data/' + FLAGS_FILE + '：开关真源不在，客户端只能按打包默认值走'], env };
+  }
+  const base = readJson(srcPath);
+  const feats = base.features || {};
+  const names = Object.keys(feats);
+  if (!names.length) errors.push('flags.json 的 features 是空的：一个开关都没有，客户端拿默认表也无处可覆盖');
+
+  let pages = null;
+  const appJsonPath = path.join(MINI, 'app.json');
+  if (fs.existsSync(appJsonPath)) {
+    pages = readJson(appJsonPath).pages || [];
+  } else {
+    errors.push('读不到 for-mini/app.json，没法核实开关指向的页面在不在代码包里');
+  }
+
+  const out = {};
+  names.forEach((n) => {
+    if (!FLAG_NAME_RE.test(n)) { errors.push('开关名 ' + n + ' 只能用从小写字母开头的 [a-z0-9]'); return; }
+    const f = feats[n] || {};
+    if (typeof f.on !== 'boolean') errors.push('开关 ' + n + ' 的 on 必须是 true/false，不能是 ' + JSON.stringify(f.on));
+    if (!f.name) errors.push('开关 ' + n + ' 缺 name（关掉页面时界面要念出这一页叫什么）');
+    if (!f.note) errors.push('开关 ' + n + ' 缺 note（为什么开/为什么关，只有人写得出来）');
+    if (f.page && pages && pages.indexOf(f.page) < 0) {
+      errors.push('开关 ' + n + ' 指向 ' + f.page + '，但它不在 for-mini/app.json 的 pages 里 —— 页面没进代码包，开关拧成 true 玩家也打不开');
+    }
+    out[n] = { on: f.on === true, name: f.name || n, note: f.note || '' };
+
+    /* 说要开的一页，这一批里必须有它要的数据。没有就是"把门打开对着一个空房间"，
+       宁可在构建端红，也不要让玩家点进去看一个白屏。 */
+    const needList = f.needs || [];
+    if (f.on === true && o.manifest) {
+      const have = o.manifest.fetch || {};
+      const miss = needList.filter((k) => !have[k]);
+      if (miss.length) {
+        errors.push('开关 ' + n + ' 是开的，但它要的数据入口 [' + miss.join(', ') + '] 不在'
+          + (o.manifestFrom || '这一批') + '里 —— 先发带这批数据的批次，再开这个开关');
+      }
+    }
+    if (f.on === true && !o.manifest && needList.length) {
+      errors.push('开关 ' + n + ' 是开的，但这次没法核实它要的数据在不在批次里（拿不到指针）——'
+        + '先跑 build，或让线上指针可读');
+    }
+    if (f.on !== true && o.manifest && o.manifest.fetch && needList.some((k) => !o.manifest.fetch[k])) {
+      /* 关着的页不拦缺数据，但要在本地留痕：哪天拧 true 就会在上面那条红 */
+      errors.push('开关 ' + n + ' 现在关着，但它要的数据入口 [' + needList.filter((k) => !o.manifest.fetch[k]).join(', ')
+        + '] 不在' + (o.manifestFrom || '这一批') + '里 —— 拧 true 之前先发数据批次');
+    }
+  });
+
+  const obj = {
+    schemaVersion: SCHEMA_VERSION,
+    product: FLAGS_PRODUCT,
+    env,
+    namespace: NAMESPACES[env],
+    minClientSchemaVersion: 1,
+    timeNote: '本对象没有生成时间字段：开关内容与生成它的脚本都没改时，重跑得到同一份字节。什么时候拧的，看这个对象的服务端 Last-Modified 与构建端 last-flags.json。',
+    source: {
+      input: 'wow-forever-web/app/data/' + FLAGS_FILE,
+      inputSha256: sha256(fs.readFileSync(srcPath)),
+      generator: { tool: 'wow-forever-web/tools/oss-release.js', sha256: sha256(fs.readFileSync(__filename)).slice(0, 12) },
+      note: 'needs（这一页要哪些数据入口）只给构建端校验用，不下发；下发的是客户端渲染与守卫用得上的 on/name/note。'
+    },
+    features: out,
+    policy: FLAGS_POLICY,
+    cacheControl: POINTER_CACHE,
+    counts: { features: names.length, on: names.filter((n) => out[n] && out[n].on === true).length }
+  };
+  const buf = dump(obj);
+  if (buf.length > FLAGS_BUDGET_KB * 1024) {
+    errors.push('flags.json 下发对象 ' + kb(buf.length) + ' KB 超过 ' + FLAGS_BUDGET_KB + ' KB：每次冷启动都要多下这一份，收着点');
+  }
+  return { errors, obj, buf, key: NAMESPACES[env] + '/' + FLAGS_FILE, env, srcPath };
+}
+
+function localManifestForFlags(env) {
+  const p = path.join(buildRoot(), env, 'manifest.json');
+  if (!fs.existsSync(p)) return null;
+  try {
+    return readJson(p);
+  } catch (e) {
+    return null;
+  }
+}
+
+async function cmdFlags(env, opts) {
+  if (!opts.dryRun) {
+    const gate = requireWriteGate('flags', env, opts);
+    if (gate) { gate.forEach(logLine); return 1; }
+  }
+  const creds = loadCreds();
+  let manifest = null;
+  let manifestFrom = '';
+  const remote = creds.ok ? await remotePointer(creds, env) : null;
+  if (remote && remote.json) {
+    manifest = remote.json;
+    manifestFrom = '线上指针指的批次 ' + remote.json.buildId;
+  } else {
+    manifest = localManifestForFlags(env);
+    if (manifest) manifestFrom = '本地最近构建的批次 ' + manifest.buildId + '（线上指针' + (creds.ok ? '读不到' : '没凭证读') + '，按本地算）';
+  }
+  const built = buildFlags(env, { manifest, manifestFrom });
+  if (built.errors.length) {
+    built.errors.slice(0, 25).forEach((e) => logLine('✗ ' + e));
+    logLine('开关构建失败：' + built.errors.length + ' 项不合规');
+    return 1;
+  }
+  const names = Object.keys(built.obj.features);
+  logLine('开关 ' + built.key + ' · ' + kb(built.buf.length) + ' KB · 数据核实依据：' + (manifestFrom || '拿不到批次'));
+  names.forEach((n) => logLine('  ' + (built.obj.features[n].on ? '开' : '关') + '  ' + n + '（' + built.obj.features[n].name + '）'));
+  if (opts.dryRun) {
+    logLine('试运行：没写本地、没传对象。');
+    return 0;
+  }
+  writeBuf(path.join(buildRoot(), env, FLAGS_FILE), built.buf);
+  logLine('本地 → ' + path.relative(REPO, path.join(buildRoot(), env, FLAGS_FILE)));
+  if (!creds.ok) {
+    logLine(credsHint(creds));
+    return 1;
+  }
+  const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(built.key), built.buf,
+    signPut(creds, built.key, built.buf, { 'Cache-Control': POINTER_CACHE }));
+  if (r.statusCode < 200 || r.statusCode >= 300) {
+    logLine('✗ 发开关失败：HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 300));
+    return 1;
+  }
+  const back = await remoteHead(creds, built.key);
+  const same = back.exists && back.etag === md5Hex(built.buf) && back.bytes === built.buf.length;
+  logLine((same ? '回读 ETag/字节一致' : '✗ 回读不一致（远端 ETag ' + (back.etag || '没有') + ' · 本份 ' + md5Hex(built.buf)
+    + ' · ' + back.bytes + '/' + built.buf.length + ' 字节）') + ' · ' + built.key + '（开关本身是可覆盖对象，这次 PUT 就是覆盖）');
+  writeBuf(path.join(buildRoot(), env, 'last-flags.json'), dump({
+    at: new Date().toISOString(), env, key: built.key, bytes: built.buf.length,
+    sha256: sha256(built.buf), readBackEtag: back.etag || null, features: built.obj.features,
+    note: '这个时间戳是"本次发开关动作"的本地记录，不进下发对象——下发对象要能在开关没改时字节恒定。'
+  }));
+  logLine('玩家侧生效：等 max-age=60 过完（约 1 分钟），不必发小程序版本。');
+  return same ? 0 : 1;
+}
+
 function logLine(s) { process.stdout.write(s + '\n'); }
 
 function credsHint(creds) {
@@ -1514,7 +1884,14 @@ function cmdBuild(env, opts) {
     logLine('构建失败：' + built.errors.length + ' 项不合规');
     return 1;
   }
-  const out = writeBatch(env, built);
+  /* 开关跟着一起校：这一批要给哪些页供数据，构建端是唯一能说这话的地方 */
+  const flags = buildFlags(env, { manifest: built.manifest, manifestFrom: '本批 ' + built.buildId });
+  if (flags.errors.length) {
+    flags.errors.slice(0, 25).forEach((e) => logLine('✗ 开关：' + e));
+    logLine('构建失败：开关 ' + flags.errors.length + ' 项不合规');
+    return 1;
+  }
+  const out = writeBatch(env, built, flags);
   const idx = built.entries.filter((e) => e.key === 'dungeonIndex')[0];
   const entryKeys = Object.keys(built.manifest.fetch);
   const cold = out.manifestBuf.length + idx.bytes + built.manifest.fetch.meta.bytes;
@@ -1536,6 +1913,9 @@ function cmdBuild(env, opts) {
   logLine('  素材引用：' + built.manifest.assets.count + ' 个文件 / ' + kb(built.manifest.assets.bytes)
     + ' KB 在 ' + built.ns + '/assets/ 下（用 `assets --env ' + env + '` 发），缺登记 ' + built.manifest.assets.missing + ' 条');
   logLine('  事实核对日期：最新 ' + (built.manifest.factDates.latest || '未记录') + '（清单内无生成时间字段，发布时刻看服务端 Last-Modified）');
+  logLine('  功能开关：' + kb(flags.buf.length) + ' KB · ' + Object.keys(flags.obj.features).length
+    + ' 个（开 ' + flags.obj.counts.on + '）→ ' + path.relative(REPO, path.join(buildRoot(), env, FLAGS_FILE))
+    + '（发它用 `flags --env ' + env + '`，与这批数据互不牵扯）');
   if (opts.checkIdentity) {
     const again = buildBatch(env);
     if (again.errors.length) { logLine('✗ 复算失败'); return 1; }
@@ -1545,10 +1925,16 @@ function cmdBuild(env, opts) {
     const bytesSame = dump(again.manifest).equals(out.manifestBuf);
     logLine('  重跑同源：buildId ' + (stableSame ? '一致' : '不一致 ✗') + ' · 逐文件字节差异 ' + perFile.length
       + ' · manifest 变化字段 [' + volatileOnly.join(',') + '] · 指针清单字节' + (bytesSame ? '完全相同' : '不同 ✗'));
+    const againFlags = buildFlags(env, { manifest: again.manifest, manifestFrom: '复算批次' });
+    const flagsSame = !againFlags.errors.length && Buffer.compare(againFlags.buf, flags.buf) === 0;
+    logLine('  开关对象：' + kb(flags.buf.length) + ' KB · ' + Object.keys(flags.obj.features).length + ' 个开关（开 '
+      + flags.obj.counts.on + ' 个）· 重跑字节' + (flagsSame ? '相同' : '不同 ✗') + ' · 路径 ' + flags.key);
     if (!stableSame || !bytesSame || perFile.length || volatileOnly.length) {
       logLine('✗ 产物不可复现（同一 buildId 的清单必须逐字节恒定）');
       return 1;
     }
+    if (!flagsSame) { logLine('✗ 开关对象不可复现'); return 1; }
+    return 0;
   }
   return 0;
 }
@@ -1654,7 +2040,13 @@ async function cmdUpload(env, opts) {
     built.errors.slice(0, 25).forEach((e) => logLine('✗ ' + e));
     return 1;
   }
-  const out = writeBatch(env, built);
+  /* 开关先校再发：这一批正是"这些数据在不在"的那一份，红在这里比红在玩家手机上便宜 */
+  const flags = buildFlags(env, { manifest: built.manifest, manifestFrom: '本批 ' + built.buildId });
+  if (flags.errors.length) {
+    flags.errors.slice(0, 25).forEach((e) => logLine('✗ 开关：' + e));
+    return 1;
+  }
+  const out = writeBatch(env, built, flags);
   const creds = loadCreds();
   logLine('环境 ' + env + ' · bucket ' + creds.bucket + ' · 前缀 ' + NAMESPACES[env] + '/'
     + ' · 凭证来源 ' + creds.from + (opts.dryRun ? '（--dry-run 只读远端，不写）' : '（已带 ' + WRITE_MARK + '=1）'));
@@ -1706,6 +2098,7 @@ async function cmdUpload(env, opts) {
   }
   logLine('批次文件：传 ' + uploaded + ' · 内容未变跳过 ' + unchanged + ' · 失败 ' + failed.length + ' · 不可变冲突 ' + violations.length + ' / 共 ' + targets.length);
   if (opts.dryRun) {
+    logLine('  开关对象 ' + kb(flags.buf.length) + ' KB 会 PUT 到 ' + flags.key + '（可覆盖，不参与不可变闸）');
     logLine('试运行结束，指针没动、没写任何文件。');
     return 0;
   }
@@ -1737,7 +2130,22 @@ async function cmdUpload(env, opts) {
     at: new Date().toISOString(), env, buildId: built.buildId, uploaded, unchanged, failed: failed.length, previousBuildId: remoteBuildId,
     note: '这个时间戳是"本次上传动作"的本地记录，不进批次清单——批次清单必须对同一 buildId 逐字节恒定。'
   }));
-  return switched ? 0 : 1;
+  /* 开关对象跟着指针一起发：它是可覆盖的（不参与上面那条"同路径不同字节绝不覆盖"），
+     带它的理由不是"必须一起动"，而是别让线上留下"批次是新的、开关还是上一份"这种两边各自合法的错位。 */
+  let flagsOk = false;
+  if (switched) {
+    const fr = await raw('PUT', creds.bucket, creds.region, '/' + encKey(flags.key), flags.buf,
+      signPut(creds, flags.key, flags.buf, { 'Cache-Control': POINTER_CACHE }));
+    if (fr.statusCode < 200 || fr.statusCode >= 300) {
+      logLine('✗ 开关对象没发出去：HTTP ' + fr.statusCode + ' ' + fr.body.toString('utf8').slice(0, 200));
+    } else {
+      const fh = await remoteHead(creds, flags.key);
+      flagsOk = fh.exists && fh.etag === md5Hex(flags.buf) && fh.bytes === flags.buf.length;
+      logLine('开关 → ' + flags.key + ' · ' + kb(flags.buf.length) + ' KB · ' + (flagsOk ? '回读 ETag 一致' : '回读不一致 ✗'));
+      if (!flagsOk) logLine('  数据已经在新批次上了，开关这一份没对上：客户端退回打包默认值（已公开的页不会被关掉），补跑 flags --env ' + env + ' 即可。');
+    }
+  }
+  return switched && flagsOk ? 0 : 1;
 }
 
 async function cmdVerify(env) {
@@ -1783,6 +2191,24 @@ async function cmdVerify(env) {
     const f = (ptr.fetch || {})[k];
     if (!f || !f.etag || !f.bytes) bad.push('指针的 fetch.' + k + ' 缺 etag/bytes，客户端无法校验');
   });
+  /* 开关对象也在 verify 的范围里：它是可覆盖的，所以这里比的不是"字节没被人改过"，
+     而是"本地这份计划发出去的开关，线上到底是不是这一份"——改完 flags.json 忘了发，就是在这里红。 */
+  const fkey = NAMESPACES[env] + '/' + FLAGS_FILE;
+  const fres = await raw('GET', creds.bucket, creds.region, '/' + encKey(fkey), null, {});
+  const localFlagsPath = path.join(buildRoot(), env, FLAGS_FILE);
+  const plan = buildFlags(env, { manifest: ptr, manifestFrom: '线上批次 ' + ptr.buildId });
+  if (fres.statusCode !== 200) {
+    bad.push('线上没有 ' + fkey + '（HTTP ' + fres.statusCode + '）：客户端只能按打包默认值走，页面开没开不由线上说了算');
+  } else if (plan.errors.length) {
+    plan.errors.slice(0, 8).forEach((e) => bad.push('线上开关与这一批对不上：' + e));
+  } else if (fs.existsSync(localFlagsPath) && sha256(fres.body) !== sha256(fs.readFileSync(localFlagsPath))) {
+    bad.push('线上开关与本地 ' + FLAGS_FILE + ' 不是同一份字节（改过没发？跑 flags --env ' + env + '）');
+  } else {
+    const fj = JSON.parse(fres.body.toString('utf8'));
+    const onNames = Object.keys(fj.features || {}).filter((n) => fj.features[n].on === true);
+    logLine('开关 ' + fkey + ' · ' + kb(fres.body.length) + ' KB · 开着的页 [' + onNames.join(' / ') + '] · 服务端上传时间 '
+      + (fres.headers['last-modified'] || '未知'));
+  }
   logLine('逐文件回读 ' + keys.length + ' 个 · 整批下行 ' + kb(bytes) + ' KB · 问题 ' + bad.length);
   bad.slice(0, 20).forEach((b) => logLine('  ✗ ' + b));
   if (!bad.length) logLine('指针 = 批次自带清单（字节一致，回滚位可用）· 且与本批清单逐字节相同');
@@ -1876,6 +2302,18 @@ async function cmdRollback(env, opts) {
     return 1;
   }
 
+  /* 回滚会把玩家能读到的数据整体换一批，开关不动 —— 所以开关有可能指着一批没有这些数据的老值。
+     这一页如果正好是开着的，点进去就是个空壳，宁可在这里红一次。 */
+  const rollbackFlags = buildFlags(env, { manifest, manifestFrom: '目标批次 ' + opts.to });
+  if (rollbackFlags.errors.length) {
+    rollbackFlags.errors.slice(0, 25).forEach((e) => logLine('✗ 开关对不上目标批次：' + e));
+    if (!opts.yesFlagsMismatch) {
+      logLine('✗ 指针不动（线上仍是原来的批次）。要强行回滚：先把用不上的开关关掉再发一次 flags，或加 --yes-flags-mismatch。');
+      return 1;
+    }
+    logLine('  已带 --yes-flags-mismatch，继续回滚（上面这些开着的页在新批次里没数据）。');
+  }
+
   const ptr = pointerKey(env);
   const put = await raw('PUT', creds.bucket, creds.region, '/' + encKey(ptr), r.body, signPut(creds, ptr, r.body, { 'Cache-Control': POINTER_CACHE }));
   if (put.statusCode < 200 || put.statusCode >= 300) { logLine('✗ 回滚写指针失败 HTTP ' + put.statusCode); return 1; }
@@ -1925,7 +2363,7 @@ async function cmdClean(env, opts) {
 
 function parseArgs(argv) {
   const cmd = argv[0];
-  const opts = { dryRun: false, yesRelease: false, yesClean: false, checkIdentity: false, skipExportCheck: false };
+  const opts = { dryRun: false, yesRelease: false, yesClean: false, checkIdentity: false, skipExportCheck: false, yesFlagsMismatch: false };
   let env = 'beta';
   for (let i = 1; i < argv.length; i += 1) {
     const a = argv[i];
@@ -1934,6 +2372,7 @@ function parseArgs(argv) {
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a === '--yes-release') opts.yesRelease = true;
     else if (a === '--yes-clean') opts.yesClean = true;
+    else if (a === '--yes-flags-mismatch') opts.yesFlagsMismatch = true;
     else if (a === '--check-identity') opts.checkIdentity = true;
     else if (a === '--skip-export-check') opts.skipExportCheck = true;
     else { logLine('✗ 不认识的参数 ' + a); process.exit(2); }
@@ -1945,9 +2384,10 @@ function parseArgs(argv) {
 function main() {
   const argv = process.argv.slice(2);
   if (!argv.length) {
-    logLine('用法：node tools/oss-release.js <build|upload|assets|verify|list|rollback|clean> --env beta|release'
+    logLine('用法：node tools/oss-release.js <build|upload|flags|assets|verify|list|rollback|clean> --env beta|release'
       + ' [--dry-run] [--check-identity] [--yes-release] [--to <buildId>] [--yes-clean]');
-    logLine('写命令（upload/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
+    logLine('写命令（upload/flags/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
+    logLine('只拧开关、不动数据：node tools/oss-release.js flags --env beta（改 app/data/flags.json 后跑这一条，约一分钟生效，不用发版）。');
     process.exit(2);
   }
   const { cmd, env, opts } = parseArgs(argv);
@@ -1955,6 +2395,7 @@ function main() {
     .then(() => {
       if (cmd === 'build') return cmdBuild(env, opts);
       if (cmd === 'upload') return cmdUpload(env, opts);
+      if (cmd === 'flags') return cmdFlags(env, opts);
       if (cmd === 'verify') return cmdVerify(env);
       if (cmd === 'list') return cmdList(env);
       if (cmd === 'assets') return cmdAssets(env, opts);
@@ -1986,6 +2427,20 @@ module.exports = {
   BIS_SLOT_KEYS,
   BIS_SLOT_SIBS,
   BIS_DISCLAIMER,
+  buildFlags,
+  FLAGS_PRODUCT,
+  FLAGS_FILE,
+  FLAGS_BUDGET_KB,
+  FLAGS_POLICY,
+  FLAG_NAME_RE,
+  PROF_BANDS,
+  PROF_SK_KEYS,
+  PROF_SK_COLS,
+  PROF_REC_COLS,
+  PROF_NODE_COLS,
+  PROF_DISCLAIMER,
+  PROF_TITLE,
+  cmdFlags,
   raceEntry,
   itemCardRow,
   itemStKey,

@@ -31,6 +31,11 @@
     "path": "img/gen/banner-cloudsea.webp",
     "kind": "generated-atmosphere",
     "what": "云海与远处塔尖剪影（本站自生成），给首页「配装名单」入口卡"
+   },
+   "professions": {
+    "path": "img/gen/prof-table.webp",
+    "kind": "generated-atmosphere",
+    "what": "药剂与锻造工具台面（本站自生成），给首页「专业与配方」入口卡（这张卡要远程开关 professions 打开才出现）"
    }
   }
  },

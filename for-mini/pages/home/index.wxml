@@ -84,6 +84,15 @@
       <view class="entry-name">指南</view>
       <view class="entry-desc">宏命令与插件名单，全部免费、逐条标来源。</view>
     </view>
+    <!-- 专业与配方：这一张由远程开关 professions 控制（app/data/flags.json）。
+         关着的时候整块不渲染——不占位、不留空白格；线上拧开不用发小程序版本。 -->
+    <view wx:if="{{openProfessions}}" class="entry plate" bindtap="goProfessions">
+      <image wx:if="{{cardBg.professions}}" class="entry-art" src="{{cardBg.professions}}" mode="aspectFill"
+             binderror="onArtError" data-k="professions" />
+      <view class="entry-scrim"></view>
+      <view class="entry-name">专业与配方</view>
+      <view class="entry-desc">按技能档位分箱：这点技能能做什么、下一步要什么材料。</view>
+    </view>
   </view>
 
   <!-- 3）职业格：九个一排铺开、超出换行，不做出横向滚动（站主 2026-10-22 明确要求） -->

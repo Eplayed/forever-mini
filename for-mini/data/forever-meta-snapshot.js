@@ -47,7 +47,8 @@ module.exports = {
    "classes": "art/classbanners/warrior.webp",
    "loots": "gen/cavern-hall.webp",
    "guide": "art/scenes/guangshu.webp",
-   "bis": "gen/banner-cloudsea.webp"
+   "bis": "gen/banner-cloudsea.webp",
+   "professions": "gen/prof-table.webp"
   }
  }
 };

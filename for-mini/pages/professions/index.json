@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "专业与配方",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#0b0f16",
+  "navigationBarBackgroundColor": "#0b0f16",
+  "usingComponents": {
+    "icon-cell": "/components/icon-cell/index"
+  }
+}

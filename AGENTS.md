@@ -200,6 +200,29 @@
   溯源页一张逐板块表。**板块中文名那张表漏登记就构建失败**（写死名单的老毛病，宁可红）。
   要回到"全站一句版本"，先改这条。
 
+## 2026-10-27 站主追加决定（优先于此前冲突口径）
+
+- **页面级远程功能开关已上线到分发层**（站主原话「我想做远程功能开关，比如这个专业页面，
+  我暂时先不公开，等下次想公开了，不需要小程序发布就可以公开页面」）。口径三条：
+  ① 真源是 `wow-forever-web/app/data/flags.json`，由 `oss-release.js` 派生成
+    **与指针并列的可变对象** `wow/{env}/v1/flags.json`（同一档 `max-age=60`，约一分钟生效）；
+    **不许写进 `builds/{buildId}/manifest.json`**——那份同时是回滚位，必须同 buildId 字节恒定，
+    而且回滚一批数据会顺手把开关退回旧值。`flags.json` 也**不进 `BASE_INPUTS`**（改开关不许换批次号）。
+  ② 只拧开关时跑 `node wow-forever-web/tools/oss-release.js flags --env beta`
+    （写命令，照旧要 `WOW_ALLOW_CROSS_CREDS=1`，release 还要 `--yes-release`），
+    **不重跑数据批次、不发小程序版本**。`upload` 会顺手把它对齐，`verify` 会核"改了没发"，
+    `rollback` 会核"回滚过去的那一批供得起现在开着的页"。
+  ③ 客户端 `for-mini/services/features.js` 逐条三层兜底：`live > cache > 打包默认表`
+    （`for-mini/data/flags-local.js`）。两个方向都不许错：**不许把已公开的页关掉，
+    也不许因为"远端没说关"把没公开的页放出来**。界面义务写在下发对象的 `policy` 里：
+    关着的页只说"这一页还没开放"这一句事实，入口卡整块不渲染、不留空白格。
+  要撤掉这套机制：删 `flags.json` 与 `services/features.js`，把入口判断改回常量——先改这条。
+- **小程序专业与配方页已做好但按站主决定先不公开**（`professions: false`）。数据通道
+  （索引 12.8 KB + 13 片、最大一片制皮 65.8 KB，不进主包）与页面都在，门禁覆盖到；
+  公开前有一条数据缺陷必须先修：**钓鱼那档 6 行的 `nameCn` 存的是技能数（25/75/150）、
+  `yields` 存的是"开始咬钩"**，网页同一份基底同样错——要公开先由 wow-data 重排列映射。
+  详见 `for-mini/docs/VERIFY-小程序专业页与远程开关-2026-10-27.md` 第 7 节。
+
 ## 按需读取约定（2026-10-21）
 
 - 每轮先读根/目标子项目规则，再运行 `python3 wow-forever-web/tools/project-index.py --topic <主题>`；主题有rules/launch/spells/items/maps/updates/business/tests。该命令自动更新路径索引，不读业务正文。
