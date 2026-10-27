@@ -560,7 +560,7 @@ async function main() {
       .concat(d.rows || [], d.enchants || [], d.consumables || [], d.slotRows || [])
       .map((x) => [x.name, x.src, (x.st || []).join('|')].join(' '));
     return {
-      route: p.route, cls: d.cls, setId: d.setId, fac: d.fac,
+      route: p.route, cls: d.cls, setId: d.setId, fac: d.fac, sourceText: d.sourceText,
       classes: (d.classes || []).length, sets: (d.setList || []).length,
       sumSig: (d.sum || []).map((x) => x.k + x.v).join('+'),
       rows: (d.rows || []).length, head: ((d.rows || [])[0] || {}).name || '',
@@ -579,6 +579,10 @@ async function main() {
   log('口径那一句与核对日、来源域名都在页面上（红线：不冒充官方结论）',
     !!bis && /不是官方结论/.test(bis.disclaimer) && /^\d{4}-\d{2}-\d{2}$/.test(bis.fetched)
       && /wclbox/.test(bis.host), JSON.stringify(bis && { f: bis.fetched, h: bis.host }));
+  /* 取数状态要说真话：sourceLabel 收的是整个结果对象而不是 source 字符串，
+     传错参数不会报错，只会永远显示"没取到数据"——2026-10-27 发完 beta 走真页才发现这条。 */
+  log('配装页的取数状态说真话（线上取到了就不许写"没取到数据"）',
+    !!bis && /实时|缓存/.test(String(bis.sourceText)), JSON.stringify({ src: bis && bis.sourceText }));
   log('装备名回本站物品库查出来了（不是 #编号），来源那一列也还原成了中文',
     !!bis && bis.head.length > 1 && !/^#/.test(bis.head) && /副本|技能|需要|制造|商人|任务/.test(bis.srcSample),
     JSON.stringify(bis && { head: bis.head, src: bis.srcSample.slice(0, 40) }));

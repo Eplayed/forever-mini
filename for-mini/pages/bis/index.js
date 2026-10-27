@@ -83,7 +83,7 @@ Page({
     return service.loadMeta().then((r) => {
       this.batch = r.batch
       this.setData({
-        sourceText: oss.sourceLabel(r.source),
+        sourceText: oss.sourceLabel(r),
         offline: r.source !== 'live',
         requiresUpdate: !!r.requiresUpdate
       })
