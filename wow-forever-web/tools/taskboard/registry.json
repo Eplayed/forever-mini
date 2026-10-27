@@ -1,0 +1,92 @@
+{
+  "note": "机器上自动执行任务的登记表。判据写在这里，不写进 collect.py 的代码里——代码只按声明去探。",
+  "updated": "2026-10-27",
+  "tasks": [
+    {
+      "id": "nga-daily",
+      "name": "NGA 无限板块采集",
+      "kind": "launchd",
+      "label": "com.wowforever.nga-daily",
+      "expect_within_hours": 13,
+      "evidence": { "log": "~/.nga/daily.log", "ok_markers": ["退出码 0"], "fail_markers": ["Operation not permitted"] },
+      "owner": "wow-forever"
+    },
+    {
+      "id": "haosailei-asr",
+      "name": "好赛雷视频 ASR 全量",
+      "kind": "launchd",
+      "label": "com.zhangyajun.haosailei.asr",
+      "expect_within_hours": 26,
+      "evidence": { "log": "~/Documents/project/video2text/logs/launchd_asr.err", "fail_markers": ["Operation not permitted"] },
+      "owner": "video2text",
+      "hint": "launchd 起的进程读不到 ~/Documents（TCC），退出码 126 是这个原因"
+    },
+    {
+      "id": "aihub-scan",
+      "name": "AI hub 扫描",
+      "kind": "launchd",
+      "label": "com.zhangyajun.aihub-scan",
+      "expect_within_hours": 48,
+      "evidence": {},
+      "owner": "其它"
+    },
+    {
+      "id": "p2-auto-daily",
+      "name": "p2 数据管线每日发布",
+      "kind": "cron",
+      "cron_hint": "auto_daily.sh",
+      "expect_within_hours": 26,
+      "evidence": {
+        "log": "~/Documents/project/p2-database/dashboard/runtime/logs/auto_daily_cron.log",
+        "ok_markers": ["auto_daily 结束"],
+        "fail_markers": ["Traceback", "Permission denied"]
+      },
+      "owner": "p2-database"
+    },
+    {
+      "id": "toutiao-autogen",
+      "name": "头条自动写稿",
+      "kind": "cron",
+      "cron_hint": "dify_auto_publish.py",
+      "expect_within_hours": 76,
+      "evidence": {
+        "log": "~/Documents/自媒体/_content_factory/dify/scheduler/cron.log",
+        "off_markers": ["已停用", "TOUTIAO_AUTOGEN_OFF"],
+        "off_files": ["~/Documents/自媒体/_content_factory/dify/scheduler/PLAN_AUTOGEN_DISABLED"],
+        "off_env": "TOUTIAO_AUTOGEN_OFF"
+      },
+      "owner": "自媒体",
+      "hint": "每天确实被触发，但进去就打一句『已停用』退出——这是空转，不是成功也不是失败"
+    },
+    {
+      "id": "v2t-sync",
+      "name": "video2text 订阅同步（4 组）",
+      "kind": "app",
+      "base_url": "http://127.0.0.1:15801",
+      "state": "~/Documents/project/video2text/config/sync_tasks.json",
+      "expect_within_hours": 26,
+      "owner": "video2text",
+      "hint": "定时器在 Flask 进程里：工作台没开的那一天整组不会跑"
+    },
+    {
+      "id": "v2t-nightmatch",
+      "name": "video2text 夜间排产匹配",
+      "kind": "app",
+      "base_url": "http://127.0.0.1:15801",
+      "state": "~/Documents/project/video2text/config/plan_match.json",
+      "db": "~/Documents/project/video2text/output/video2text.db",
+      "run_table": "plan_match_runs",
+      "expect_within_hours": 26,
+      "owner": "video2text"
+    },
+    {
+      "id": "qoder-daily-brief",
+      "name": "Qoder 定时任务（排产日报 08:30 等）",
+      "kind": "qoder",
+      "snapshot": "~/.taskboard/qoder_cron.json",
+      "expect_within_hours": 26,
+      "owner": "Qoder",
+      "hint": "本地没有可读的稳定存储（qoder-data.v1.json 里查不到 automation 字段），只能由 agent 用 qoder_cron list 同步一份快照过来；这一格只读，改要去 Qoder 的 Automations"
+    }
+  ]
+}
