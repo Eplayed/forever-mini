@@ -11,8 +11,10 @@ P1 起多了「立即执行」。三条边界，都是刻意的：
     结果写进 ~/.taskboard/audit.log，页面上给"已触发＋去哪看"。
 """
 import json
+import manage
 import os
 import secrets
+import shutil
 import subprocess
 import sys
 import threading
@@ -39,7 +41,7 @@ h1{font-size:19px;margin:0 0 4px}sub{color:var(--dim);font-size:12px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;align-items:center}
 .chip{background:var(--panel);border:1px solid var(--line);padding:6px 10px;font-variant-numeric:tabular-nums}
 table{border-collapse:collapse;width:100%;background:var(--panel);table-layout:fixed}
-col.c-st{width:96px}col.c-op{width:112px}col.c-name{width:15%}col.c-sch{width:17%}col.c-last{width:12%}
+col.c-st{width:96px}col.c-op{width:190px}col.c-name{width:15%}col.c-sch{width:17%}col.c-last{width:12%}
 .wrap{overflow-x:auto}
 th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
 td,th{word-break:break-word;overflow-wrap:anywhere}
@@ -52,6 +54,7 @@ margin-right:6px;border-radius:2px;background:currentColor}
 .dim{color:var(--dim);font-size:12px}.why{font-size:12.5px}
 .grp{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
 .grp b{color:var(--txt);font-weight:600}
+form{display:inline-block;margin:2px 0}
 button{background:transparent;border:1px solid var(--gold);color:var(--gold);
 padding:9px 12px;min-height:44px;cursor:pointer;font:inherit;white-space:nowrap}
 button:hover:not(:disabled){background:rgba(224,169,109,.12)}
@@ -63,7 +66,7 @@ footer{margin-top:16px;color:var(--dim);font-size:12px}
 th{display:none}td{border:0;padding:2px 10px}td[data-l]::before{content:attr(data-l);color:var(--gold);
 font-size:11px;display:block}}
 """
-CLS = {"空转（已停用）": "空转"}
+CLS = {"空转（配置里停用）": "空转"}
 
 
 def load():
@@ -119,6 +122,89 @@ def trigger(row):
     return False, "未知的 run.kind：%s" % kind
 
 
+def do_toggle(row, want_on):
+    """启停。只按 registry 的 manage.toggle 走，且每一步都备份＋回读。"""
+    reg = registry().get(row["id"]) or {}
+    mg = reg.get("manage") or {}
+    kind = mg.get("toggle")
+    if kind in (None, "none"):
+        return False, mg.get("why", "这条没声明可启停")
+    if kind == "launchd":
+        label = reg.get("label", "")
+        plist = os.path.expanduser("~/Library/LaunchAgents/%s.plist" % label)
+        if not os.path.exists(plist):
+            return False, "找不到 plist：%s" % plist
+        bdir = manage.backup([plist])
+        ok, msg = manage.launchd_set(label, plist, want_on)
+        return ok, "%s（plist 备份在 %s）" % (msg, bdir.replace(os.path.expanduser("~"), "~"))
+    if kind == "cron":
+        bdir = manage.backup([])
+        manage.snapshot_cron(bdir)
+        lines = manage.read_cron().splitlines()
+        out, err = manage.cron_set_enabled(lines, reg.get("cron_hint", ""), want_on)
+        if err:
+            return False, err
+        ok, msg = manage.apply_cron(out, row["id"])
+        if not ok:
+            manage.restore_cron(bdir)
+            msg += "；已自动恢复备份 " + bdir.replace(os.path.expanduser("~"), "~")
+        return ok, "crontab 整表覆盖过一次，回读校验%s（备份 %s）" % (
+            "通过" if ok else "没过", bdir.replace(os.path.expanduser("~"), "~"))
+    if kind == "json":
+        path = manage.expand(mg.get("json", ""))
+        if not os.path.exists(path):
+            return False, "找不到配置文件 %s" % path
+        bdir = manage.backup([path])
+        ok, msg = manage.json_patch_text(path, "enabled", want_on)
+        return ok, "%s（备份 %s）" % (msg, bdir.replace(os.path.expanduser("~"), "~"))
+    return False, "未知的 toggle 类型 %s" % kind
+
+
+def do_schedule(row, hm):
+    """改时刻。launchd 改 plist、cron 只改分与时、json 改 run_at。都不动别的字段。"""
+    reg = registry().get(row["id"]) or {}
+    mg = reg.get("manage") or {}
+    kind = mg.get("reschedule")
+    if kind in (None, "none"):
+        return False, mg.get("why", "这条没声明可改周期")
+    if not manage.TIME_RE.match(hm or ""):
+        return False, "时间要 HH:MM 这种格式"
+    if kind == "launchd":
+        label = reg.get("label", "")
+        plist = os.path.expanduser("~/Library/LaunchAgents/%s.plist" % label)
+        bdir = manage.backup([plist])
+        h, m = hm.split(":")
+        old = manage.plist_read(plist).get("StartCalendarInterval") or []
+        n = len(old) if isinstance(old, list) else 1
+        ok, msg = manage.plist_set_times(plist, [(int(h), int(m))] * n)
+        if not ok:
+            manage.backup([plist]) and shutil.copy2(os.path.join(bdir, os.path.basename(plist)), plist)
+            return False, "回读不符，已恢复原 plist"
+        loaded = manage.launchctl_loaded(label)
+        if loaded:
+            subprocess.run(["launchctl", "bootout", "gui/%d/%s" % (os.getuid(), label)], capture_output=True)
+            subprocess.run(["launchctl", "bootstrap", "gui/%d" % os.getuid(), plist], capture_output=True)
+        return True, "%s；%s（备份 %s）" % (msg, "已按新时刻重新加载" if loaded else "没加载着，只改了文件",
+                                    bdir.replace(os.path.expanduser("~"), "~"))
+    if kind == "cron":
+        bdir = manage.backup([])
+        manage.snapshot_cron(bdir)
+        lines = manage.read_cron().splitlines()
+        out, err = manage.cron_set_time(lines, reg.get("cron_hint", ""), hm)
+        if err:
+            return False, err
+        ok, msg = manage.apply_cron(out, row["id"])
+        if not ok:
+            manage.restore_cron(bdir)
+        return ok, msg + "（备份 %s）" % bdir.replace(os.path.expanduser("~"), "~")
+    if kind == "json":
+        path = manage.expand(mg.get("json", ""))
+        bdir = manage.backup([path])
+        ok, msg = manage.json_patch_text(path, "run_at", hm)
+        return ok, "%s（备份 %s）" % (msg, bdir.replace(os.path.expanduser("~"), "~"))
+    return False, "未知的 reschedule 类型 %s" % kind
+
+
 def render(banner=None):
     d = load()
     rows = d.get("rows") or []
@@ -138,6 +224,29 @@ def render(banner=None):
                    '<button%s>立即执行</button></form>') % (
                 r["name"].replace("'", ""), warn.replace("'", ""), r["id"], TOKEN,
                 ' style="border-color:var(--fail);color:var(--fail)"' if warn else "")
+        mg = r.get("manage") or {}
+        on = (r.get("loaded") if r["kind"] == "launchd" else
+              (not r.get("cron_off")) if r["kind"] == "cron" else r.get("enabled_flag"))
+        tk = mg.get("toggle")
+        if tk in (None, "none") or on is None:
+            tog = '<button disabled>不可启停</button>'
+        else:
+            act_word = "停用" if on else "开回来"
+            tog = ('<form method=post action=/api/toggle onsubmit="return confirm(\'真的%s「%s」？\')">'
+                   '<input type=hidden name=id value="%s"><input type=hidden name=want value="%s">'
+                   '<input type=hidden name=t value="%s"><button%s>%s</button></form>') % (
+                act_word, r["name"].replace("'", ""), r["id"], "off" if on else "on", TOKEN,
+                ' style="border-color:var(--fail);color:var(--fail)"' if on else "", act_word)
+        if mg.get("reschedule") not in (None, "none"):
+            sch = ('<form method=post action=/api/schedule onsubmit="return confirm(\'改这条的触发时刻？\')">'
+                   '<input type=time name=hm value="%s" required style="background:var(--panel);'
+                   'color:var(--txt);border:1px solid var(--line);min-height:44px;padding:6px">'
+                   '<input type=hidden name=id value="%s"><input type=hidden name=t value="%s">'
+                   '<button>改时刻</button></form>') % (
+                (r.get("last_run") or "")[11:16] if False else "", r["id"], TOKEN)
+        else:
+            sch = '<div class="dim">时刻不在这里改：%s</div>' % (mg.get("why") or "没声明")
+        act = act + tog + sch
         grp = "".join('<div class="grp">%s <b>%s</b> ｜ %s ｜ %s</div>' % (
             g["name"], g["sched"], g["last"], g["status"]) for g in (r.get("groups") or []))
         tr += ('<tr><td class="st s-%s">%s</td>'
@@ -159,7 +268,7 @@ def render(banner=None):
             "「立即执行」只能跑登记表里声明过的动作</sub>%s%s"
             '<div class="chips">%s<form method=post action=/refresh><button>重新采集</button></form></div>'
             "<div class=wrap><table><colgroup><col class=c-st><col class=c-name><col class=c-sch><col class=c-last><col><col class=c-op></colgroup><thead><tr><th>状态</th><th>任务</th><th>调度</th><th>上次动作</th>"
-            "<th>依据</th><th>操作</th></tr></thead><tbody>%s</tbody></table></div>"
+            "<th>依据</th><th>操作（执行 / 启停 / 时刻）</th></tr></thead><tbody>%s</tbody></table></div>"
             "<footer>状态词分开用：<b>失败</b>＝跑过但非 0 退出；<b>空转</b>＝触发了但进去就退（配置里被停用）；"
             "<b>应用没开</b>＝这类定时器活在应用进程里，没开就不跑；<b>超期未跑</b>＝距上次超过预期窗口；"
             "<b>未知</b>＝没有可用证据。除颜色外都带文字。执行记录在 <b>~/.taskboard/audit.log</b>。"
@@ -203,6 +312,30 @@ class H(BaseHTTPRequestHandler):
             except Exception as e:
                 bn = (False, "采集器没跑起来：%s" % str(e)[:160])
             return self._send(200, render(bn))
+        if self.path in ("/api/toggle", "/api/schedule"):
+            f = self._form()
+            if f.get("t") != TOKEN:
+                return self._send(403, render((False, "令牌不对或页面是旧的，没改任何东西")))
+            rows = {r["id"]: r for r in load().get("rows", [])}
+            row = rows.get(f.get("id"))
+            if not row:
+                return self._send(400, render((False, "登记表里没有这个 id，没改")))
+            if self.path == "/api/toggle":
+                want_on = f.get("want") == "on"
+                ok, msg = do_toggle(row, want_on)
+                audit({"action": "toggle", "id": row["id"], "name": row["name"],
+                       "want": "on" if want_on else "off", "ok": ok, "detail": msg})
+                head = ("已停用" if not want_on else "已开回来") if ok else "没改"
+            else:
+                ok, msg = do_schedule(row, f.get("hm", ""))
+                audit({"action": "schedule", "id": row["id"], "name": row["name"],
+                       "hm": f.get("hm"), "ok": ok, "detail": msg})
+                head = "已改时刻" if ok else "没改"
+            try:
+                subprocess.run([sys.executable, COLLECT], capture_output=True, timeout=120)
+            except Exception:
+                pass
+            return self._send(200, render((ok, "%s：%s ｜ %s ｜ 记录在 audit.log" % (head, row["name"], msg))))
         if self.path == "/api/run":
             f = self._form()
             if f.get("t") != TOKEN:

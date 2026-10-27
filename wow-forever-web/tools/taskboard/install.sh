@@ -11,7 +11,7 @@ PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 case "${1:-}" in
   --sync)
     mkdir -p "$HOME_DIR"
-    for f in collect.py server.py registry.json; do
+    for f in collect.py server.py registry.json manage.py; do
       [ -r "$REPO_DIR/$f" ] || { echo "! 源缺 $f"; exit 1; }
       [ -f "$HOME_DIR/$f" ] && cp "$HOME_DIR/$f" "$HOME_DIR/$f.bak-$(date +%Y%m%d-%H%M%S)"
       cp "$REPO_DIR/$f" "$HOME_DIR/$f"
@@ -20,7 +20,7 @@ case "${1:-}" in
     ;;
   --check)
     rc=0
-    for f in collect.py server.py registry.json; do
+    for f in collect.py server.py registry.json manage.py; do
       if diff -q "$REPO_DIR/$f" "$HOME_DIR/$f" >/dev/null 2>&1; then echo "一致  $f"
       else echo "漂移  $f（跑 install.sh --sync）"; rc=1; fi
     done

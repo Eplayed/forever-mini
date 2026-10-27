@@ -19,6 +19,8 @@ import re
 import sqlite3
 import subprocess
 import urllib.request
+
+import manage  # 只用它的 CRON_OFF 常量与 probe，不在此处写任何东西
 from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -29,11 +31,12 @@ CST = timezone(timedelta(hours=8))
 
 OK = "正常"
 FAIL = "失败"
-IDLE = "空转（已停用）"
+IDLE = "空转（配置里停用）"
 APP_DOWN = "应用没开"
+NOT_LOADED = "未加载"
 LATE = "超期未跑"
 UNKNOWN = "未知"
-ORDER = [FAIL, IDLE, APP_DOWN, LATE, UNKNOWN, OK]
+ORDER = [FAIL, IDLE, APP_DOWN, NOT_LOADED, LATE, UNKNOWN, OK]
 
 
 def p(path):
@@ -155,7 +158,10 @@ def evidence_row(entry, rows):
            "owner": entry.get("owner", ""), "status": UNKNOWN, "why": "",
            "last_run": "", "last_src": "", "exit": "", "note": entry.get("hint", ""),
            "run": entry.get("run") or {"kind": "none", "why": "登记表里没声明可执行动作，页面不给按钮"},
-           "groups": []}
+           "groups": [],
+           "manage": entry.get("manage") or {"toggle": "none", "reschedule": "none",
+                                            "why": "登记表里没声明可管理动作"},
+           "loaded": None, "enabled_flag": None, "cron_off": False}
     ev = entry.get("evidence") or {}
     txt, mtime = tail_text(ev.get("log", ""))
     if mtime:
@@ -164,7 +170,7 @@ def evidence_row(entry, rows):
     return row, txt
 
 
-def classify(row, entry, txt=None, extra_fail=None, exit_code=None, last_dt=None):
+def classify(row, entry, txt=None, extra_fail=None, exit_code=None, last_dt=None, loaded=None):
     ev = entry.get("evidence") or {}
     expect = float(entry.get("expect_within_hours") or 0)
     low = (txt or "").lower()
@@ -182,6 +188,10 @@ def classify(row, entry, txt=None, extra_fail=None, exit_code=None, last_dt=None
             if m.lower() in low:
                 row["why"] += "，日志里有「%s」" % m
                 break
+        return row
+    if row["kind"] == "launchd" and loaded is False:
+        row["status"] = NOT_LOADED
+        row["why"] = "plist 在 ~/Library/LaunchAgents 里，但 launchctl 没加载它（被 bootout 或没在登录里）"
         return row
     if row["kind"] == "app":
         alive = probe_local_port(entry.get("base_url"))
@@ -219,6 +229,7 @@ def collect():
         row, txt = evidence_row(e, rows)
         if k == "launchd":
             info = lc.get(e["label"]) or {}
+            row["loaded"] = e["label"] in lc
             d = plist_of(e["label"])
             row["schedule"] = sched_text(d) if d else "（没装 plist）"
             row["last_src"] = row["last_src"] or (os.path.basename(p(d.get("StandardErrorPath", ""))) if d else "")
@@ -230,12 +241,13 @@ def collect():
                         row["last_src"] = os.path.basename(p(d[key]))
                         txt = (_t if _t else txt)
                         break
-            row = classify(row, e, txt=txt, exit_code=info.get("exit"),
+            row = classify(row, e, txt=txt, exit_code=info.get("exit"), loaded=(e["label"] in lc),
                            last_dt=datetime.strptime(row["last_run"], "%Y-%m-%d %H:%M") if row["last_run"] else None)
             if info:
                 row["exit"] = info.get("exit", "") + ("（PID %s 在跑）" % info["pid"] if info.get("pid", "-") != "-" else "")
         elif k == "cron":
             line = next((l for l in crons if e["cron_hint"] in l), "")
+            row["cron_off"] = bool(line and "taskboard:off" in line.split("&")[0][:60])
             f5 = cron_five_fields(line)
             row["schedule"] = " ".join(f5) if f5 else "（crontab 里找不到这条）"
             off_env = e.get("evidence", {}).get("off_env")
@@ -244,7 +256,11 @@ def collect():
             _t, m = tail_text(e.get("evidence", {}).get("log", ""))
             if m:
                 dt = m
-            row = classify(row, e, txt=txt or _t, extra_fail=extra, last_dt=dt)
+            if row["cron_off"]:
+                row["status"] = NOT_LOADED
+                row["why"] = "crontab 里这一行被注释掉了（前缀 taskboard:off 或人工注释），调度器不会再触发它"
+            else:
+                row = classify(row, e, txt=txt or _t, extra_fail=extra, last_dt=dt)
             if extra:
                 row["note"] = (row["note"] + "；命令行带 %s=1" % off_env).strip("；")
         elif k == "app":
@@ -279,6 +295,12 @@ def collect():
                     else:
                         row["why"] = why
             row["last_src"] = src
+            mg = e.get("manage") or {}
+            if mg.get("json"):
+                try:
+                    row["enabled_flag"] = json.load(open(p(mg["json"]), encoding="utf-8")).get("enabled")
+                except Exception:
+                    row["enabled_flag"] = None
             dt = None
             if row["last_run"]:
                 try:

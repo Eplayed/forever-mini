@@ -66,3 +66,9 @@ jobs:
         working-directory: wow-forever-web
         run: python3 tools/release-package.py --skip-build --check-only
 
+      # 任务台（本机自动任务管理页）的判据自测：六档状态、执行白名单反例、
+      # cron/plist/JSON 改写纯函数，以及"登记表里的关键词不许抄进代码"这条反自证检查。
+      # 全部不启动浏览器、不碰 launchctl 与 crontab（只跑纯函数与临时文件）。
+      - name: 任务台判据与改写自测
+        working-directory: wow-forever-web
+        run: python3 tools/taskboard/selftest.py
