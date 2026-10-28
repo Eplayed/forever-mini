@@ -126,7 +126,7 @@ instanceMapId,instanceEn,floor,floorEn,wingEn,tile,fdid,clientPath,srcBytes,stat
 
 1. 表里数出来应当是 **25 座本 / 63 层 / 756 片**，且**每层正好 12 片**。
    对不上就把你实际数到的写进 `RESULT.notes` 并**停下来问**，不要自己删条目凑数。
-2. `tiles/` 下 PNG 文件数 = `exported` + 0 或 1 张都不缺；`floors/` 下 63 张。
+2. `tiles/` 里的 PNG 张数 = `RESULT.exported`，且 **`exported + notfound = 756`**；`floors/` 里 63 张。
 3. 每张 PNG 尺寸必须是 **256×256**，每张整层图必须是 **1024×768**。
 4. 抽 3 层（建议 33 座里取第 1、第 4、最后一层）打开看一眼，确认拼出来的房间形状连贯、
    没有哪一片转了 90° 或放错格。**这条是防上面那个排序坑的最后一道**。
