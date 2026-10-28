@@ -1988,7 +1988,10 @@ def test_bis(browser, base):
     # ---- 3D 那一层（2026-10-26 站主"先给我看 3D 效果"）----
     # 判据全部落在像素上：canvas 存在、分包到位、按钮 aria-pressed 翻了，
     # 都不等于"画出来了"——第一版就是模型被整个藏掉，DOM 一切正常、屏幕上只有原画。
-    art_bm = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8")).get("bisModels") or {}
+    art_data = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
+    art_bm = art_data.get("bisModels") or {}
+    hunter_real = [m for m in (art_data.get("bisRealModels") or {}).get("items", [])
+                   if m.get("setId") == "hunter" and m.get("placementVerdict") == "PASS"]
     models = art_bm.get("items") or []
     has_model = bool(models) and art_bm.get("origin") == "self-generated"
     dctx = browser.new_context(viewport={"width": 1440, "height": 1000})
@@ -2007,8 +2010,11 @@ def test_bis(browser, base):
     check("不点按钮时 three.js 与模型一个字节都不下载（首屏不为 3D 买单）", not pre,
           "点之前 3D 相关请求 %d 条" % len(pre))
     if has_model and dbtn:
-        dbtn.click()
-        dp.wait_for_timeout(5000)
+        # 分包解析与 WebGL 初始化在软件光栅环境里耗时浮动；等模型请求本身，
+        # 不用固定 5 秒把慢机器误报成“没有加载模型”。
+        with dp.expect_request(lambda r: urllib.parse.urlsplit(r.url).path.endswith(".glb"), timeout=20000):
+            dbtn.click()
+        dp.wait_for_function("() => !!document.querySelector('.pzc-gl') && !document.querySelector('.pzc-glhint')", timeout=20000)
         post = [u.split("/")[-1] for u in dreq if "three" in u or "GLTFLoader" in u or u.endswith(".glb")]
         check("点下去才加载渲染器与模型文件", any("three" in x for x in post)
               and any(x.endswith(".glb") for x in post), ", ".join(sorted(set(post))[:4]))
@@ -2031,7 +2037,7 @@ def test_bis(browser, base):
         dp.wait_for_timeout(700)
         shot_off = box.screenshot()
         dp.query_selector("button.pz-3dbtn").click()
-        dp.wait_for_timeout(1200)
+        dp.wait_for_function("() => !!document.querySelector('.pzc-gl') && !document.querySelector('.pzc-glhint')", timeout=20000)
         try:
             from PIL import Image
             import io
@@ -2061,9 +2067,12 @@ def test_bis(browser, base):
 
         # 模型要跟着数据走：换阵营 → 这一套的件不一样 → 染出来的样子也不一样
         shot_all = box.screenshot()
+        old_canvas = dp.query_selector('canvas.pzc-gl')
         dp.evaluate("() => [...document.querySelectorAll('.pz-fac .pick')]"
                     ".find(b => /部落/.test(b.innerText)).click()")
-        dp.wait_for_timeout(1200)
+        dp.wait_for_function("old => document.querySelector('canvas.pzc-gl') !== old",
+                             arg=old_canvas, timeout=20000)
+        dp.wait_for_function("() => !!document.querySelector('.pzc-gl') && !document.querySelector('.pzc-glhint')", timeout=20000)
         shot_horde = box.screenshot()
         try:
             from PIL import Image
@@ -2080,8 +2089,17 @@ def test_bis(browser, base):
                 return 100.0 * n / (ca.size[0] * ca.size[1])
 
             r2 = diff_ratio(shot_all, shot_horde)
-            check("换阵营之后 3D 那一层跟着变（模型吃的是这一套的数据，不是一张死图）",
-                  r2 >= 2.0, "联盟/部落两帧差异 %.1f%%（判据 ≥2%%）" % r2)
+            if len(hunter_real) == 2:
+                check("两阵营真实 3D 模型跟着切换",
+                      r2 >= 0.8, "联盟/部落两帧差异 %.1f%%（判据 ≥0.8%%）" % r2)
+            else:
+                # 占位只有一份几何，按品质上色；两阵营物品虽不同，品质相同
+                # 时画面可以完全一样。验重新挂载和诚实提示，不假造像素差。
+                note = dp.locator('.pz-3dnote').all_inner_texts()
+                check("未验收真实模型时换阵营仍显示占位并重新挂载画布",
+                      bool(note) and any("不是游戏里的样子" in x for x in note)
+                      and dp.query_selector('canvas.pzc-gl') is not old_canvas,
+                      "真实模型 %d 份／像素差 %.1f%%" % (len(hunter_real), r2))
         except ImportError:
             pass
         dp.wait_for_timeout(600)

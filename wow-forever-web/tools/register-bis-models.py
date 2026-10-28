@@ -6,8 +6,8 @@
 在界面上长得一模一样），也不许在组件里抄一份文件名。所以由这里扫目录生成台账，
 页面读 `art.json.bisModels`：**目录空 → 那个按钮根本不出现**，有文件才给点。
 
-来源边界（红线）：只登记本站自己生成的模型。`manifest.json` 里 `origin` 不是
-`self-generated` 的一律拒绝入库——想放第三方站烘的 GLB 请先改根 AGENTS.md 那条素材红线。
+来源边界：这里只登记本站自己生成的占位。`manifest.json` 里 `origin` 不是
+`self-generated` 的一律拒绝；根规则允许的猎人真实模型由 `prepare-hunter-models.py` 独立登记。
 
 用法：python3 tools/register-bis-models.py
 """

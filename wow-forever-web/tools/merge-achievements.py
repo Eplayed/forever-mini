@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 成就合并：GI 的 211 条目录 + 参考站端点能回查的那 46 条 → app/data/achievements.json（M1-B）。
+# 成就合并：新版 GI 目录 + 旧版独有行兜底 + 参考站端点 → app/data/achievements.json。
 #
 # 分级规则（这条线唯一需要判断的地方）：
 #   L0 = id 对得上参考站端点**且中文名逐字相同**（两源互证，可自动回查）；实测 46/46 全一致；
@@ -13,7 +13,7 @@ import os
 import re
 from datetime import date
 
-ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'data')
+ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app', 'data')
 
 # 大类 → 稳定短号。界面筛选与搜索跳转都读这个短号（?g=adv），不拿中文大类名当参数：
 # 中文名进 query 要各处做编码对照，改一个字就静默筛不到东西。
@@ -52,22 +52,36 @@ def load(name):
 def main():
     wb = load(os.path.join('upstream', 'wclbox-achievements.json'))
     gi = load(os.path.join('upstream', 'gi-achievements.json'))
+    gi_old = load(os.path.join('upstream', 'gi-achievements-0.5.1.json'))
     w = {x['achId']: x for x in wb['achievements']}
     prov_w = {'type': 'datamine_cn', 'url': wb['meta']['source'], 'checkedAt': wb['meta']['fetched']}
     # 版本号从快照 meta 读，别写死（0.4.29 → 0.4.32 这类升级会把出处变成假话）
-    prov_g = {'type': 'addon', 'url': gi['meta']['source'].split(' 的')[0],
-              'checkedAt': gi['meta']['fetched']}
+    def provenance(snapshot):
+        return {'type': 'addon', 'url': snapshot['meta']['source'].split(' 的')[0],
+                'checkedAt': snapshot['meta']['fetched']}
+    prov_g = provenance(gi)
+    prov_old = provenance(gi_old)
     cats_w = {c['id']: c['name'] for c in wb['meta'].get('categories') or []}
 
     rows, n = [], {'total': 0, 'l0': 0, 'l1': 0, 'nameDiff': 0, 'onlyWb': 0, 'noIcon': 0,
-                   'devOnly': 0, 'badIcon': 0}
-    for g in sorted(gi['achievements'], key=lambda x: (x.get('top') or '', x['achId'])):
+                   'devOnly': 0, 'badIcon': 0, 'fallbackOld': 0}
+    current = {x['achId']: x for x in gi['achievements']}
+    previous = {x['achId']: x for x in gi_old['achievements']}
+    selected = [(g, gi) for g in gi['achievements']]
+    selected += [(g, gi_old) for key, g in previous.items() if key not in current]
+    n['fallbackOld'] = len(selected) - len(current)
+    for g, source in sorted(selected, key=lambda pair: (pair[0].get('top') or '', pair[0]['achId'])):
         wrow = w.get(g['achId'])
         rec = {'id': 'ach-%d' % g['achId'], 'achId': g['achId'], 'name': g['name'],
                'nameEn': g.get('nameEn'), 'top': g.get('top'), 'gid': gid_of(g.get('top')),
                'cat': g.get('cat'),
                'iconKey': g.get('iconKey'), 'forever': bool(wrow.get('forever')) if wrow else None}
-        prov = [prov_g]
+        prov = [provenance(source)]
+        prior = previous.get(g['achId']) if source is gi else None
+        if prior:
+            prov.append(prov_old)
+            if prior['name'] != g['name']:
+                rec['nameHistory'] = [{'value': prior['name'], 'source': prov_old['url']}]
         if wrow:
             if wrow['name'] != g['name']:
                 rec['nameAlt'] = wrow['name']
@@ -81,7 +95,7 @@ def main():
             rec['criteriaCount'] = wrow.get('criteriaCount')
             if wrow.get('criteriaAchievements'):
                 rec['subAchievements'] = wrow['criteriaAchievements']
-            prov = [prov_w, prov_g]
+            prov = [prov_w] + prov
         else:
             rec['level'] = 'L1'
             rec['categoryCn'] = rec['top']
@@ -100,7 +114,7 @@ def main():
         rec['provenance'] = prov
         rows.append(rec)
     for k in w:
-        if k not in {x['achId'] for x in gi['achievements']}:
+        if k not in {x['achId'] for x, _ in selected}:
             n['onlyWb'] += 1
 
     by_top = {}
@@ -119,21 +133,23 @@ def main():
     doc = {
         'meta': {
             'generatedAt': date.today().isoformat(), 'kind': 'achievements',
-            'method': 'tools/merge-achievements.py 合两份 upstream：gi-achievements.json（目录，211 条）'
-                      '+ wclbox-achievements.json（能逐字回查的那 46 条，来自 /_shuju/<发布号>/chengjiu.json）。'
+            'method': 'tools/merge-achievements.py 合新版 gi-achievements.json（%d 条）、旧版独有兜底（%d 条）'
+                      '+ wclbox-achievements.json（能逐字回查的条目）。'
                       '两边 id 对上且中文名逐字相同才升 L0；成就描述整句两份都不落。'
                       '没有中文名且带开发标记的那 %d 条标 devOnly，条目照留，页面与搜索不列。'
-                      % n['devOnly'],
-            'pageNote': '成就目录按无限测试版客户端读出；其中区域探索这一类（46 条）另有一处客户端解包转述'
-                        '逐字对过，其余 165 条目前只有一份资料说到，名字先按客户端读出的写法放着，'
-                        '等第二处能对上再升档。成就的具体完成条件文本一律不搬，要回游戏看。',
+                      % (len(current), n['fallbackOld'], n['devOnly']),
+            'pageNote': '成就目录按无限测试版插件资料整理；能与另一处逐字对上的标为已核，'
+                        '其余仍按单源留档。成就的具体完成条件文本一律不搬，要回游戏看。',
             'counts': {'total': len(rows), 'byTop': by_top, 'groups': groups,
                        'devOnly': n['devOnly'], 'shown': len(rows) - n['devOnly'],
                        'badIcon': n['badIcon'],
                        'l0': n['l0'], 'l1': n['l1'], 'nameDiff': n['nameDiff'],
-                       'onlyInReference': n['onlyWb'], 'noIcon': n['noIcon']},
+                       'onlyInReference': n['onlyWb'], 'fallbackOld': n['fallbackOld'],
+                       'noIcon': n['noIcon']},
             'sources': [{'key': 'gi', 'name': 'GearInsight 无限版 ' + (gi['meta'].get('addonVersion') or '版本未记'), 'kind': 'beta 客户端解包转述',
                          'date': gi['meta']['fetched']},
+                        {'key': 'gi-old', 'name': 'GearInsight 无限版 ' + (gi_old['meta'].get('addonVersion') or '版本未记') + '（仅缺行兜底）',
+                         'kind': '历史插件快照', 'date': gi_old['meta']['fetched']},
                         {'key': 'wclbox', 'name': '无限数据库 · 成就端点', 'kind': '当前 beta 客户端解包转述',
                          'url': prov_w['url'], 'build': wb['meta'].get('upstreamBuild'),
                          'date': prov_w['checkedAt']}],

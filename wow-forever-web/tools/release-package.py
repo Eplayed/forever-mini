@@ -60,8 +60,8 @@ FORBIDDEN = [
 # 允许进包的扩展名（白名单，比黑名单稳：新出现一种文件就得先想清楚该不该发）
 # .glb 是 2026-10-28 补的：配装页那一栏的占位模型（10-26 上线的那条）从那天起就进不了包，
 # 白名单里没有这个扩展名，打包卡口直接拦红——也就是那一版根本发不出去。
-# 放开的是扩展名，不是来源：下面 self_generated_models() 只允许 manifest 里
-# 标 origin == "self-generated" 的那几个文件进包，客户端烘出来的或第三方站的模型照样拦。
+# 放开的是扩展名，不是来源：下面只允许自产占位与已登记、逐哈希校验的
+# 本机客户端整人模型；第三方站模型仍拦。
 ALLOW_EXT = {".html", ".js", ".css", ".json", ".webp", ".png", ".jpg", ".jpeg",
              ".svg", ".ico", ".woff2", ".woff", ".txt", ".glb"}
 
@@ -83,6 +83,45 @@ def self_generated_models():
 
 
 SELF_GEN_MODELS = self_generated_models()
+
+
+def approved_real_models():
+    """网页真实模型白名单；清单与站点登记必须逐项一致。"""
+    try:
+        man = json.load(io.open(os.path.join(ROOT, "app", "img", "models", "real", "manifest.json"), encoding="utf-8"))
+        art = json.load(io.open(os.path.join(ROOT, "app", "data", "art.json"), encoding="utf-8"))
+    except Exception:
+        return {}
+    real = art.get("bisRealModels") or {}
+    if man.get("origin") != "client-derived" or real.get("origin") != "client-derived":
+        return {}
+    if man.get("clientProduct") != "wowf" or not man.get("clientBuild"):
+        return {}
+    registered = {it.get("file"): it for it in real.get("items") or []}
+    listed = man.get("items") or []
+    if len(registered) != len(listed):
+        return {}
+    ok = {}
+    for it in listed:
+        rel = it.get("file") or ""
+        match = registered.get(rel)
+        if not re.fullmatch(r"img/models/real/[a-z0-9-]+\.glb", rel) or not match:
+            return {}
+        if it.get("placementVerdict") != "PASS" or match.get("placementVerdict") != "PASS":
+            return {}
+        if any(match.get(k) != it.get(k) for k in
+               ("setId", "faction", "raceId", "bodyType", "file", "bytes", "sha256",
+                "visibleItems", "dollSnapshot", "displayWeaponItems")):
+            return {}
+        if not isinstance(it.get("bytes"), int) or it["bytes"] <= 0:
+            return {}
+        if not re.fullmatch(r"[0-9a-f]{64}", it.get("sha256") or ""):
+            return {}
+        ok[rel] = (it["bytes"], it["sha256"])
+    return ok if len(ok) == len(listed) else {}
+
+
+REAL_MODELS = approved_real_models()
 
 # 一进来就先记"工作树脏不脏"。构建链自己会重写 scale.json / search.json 这类派生件，
 # 等跑完构建再查 git 状态，每一次都会被判成 -dirty（2026-10-28 打包时撞见），
@@ -131,9 +170,14 @@ def scan(site_dir):
             ext = os.path.splitext(fn)[1].lower()
             if ext not in ALLOW_EXT:
                 problems.append("扩展名不在白名单：%s" % rel)
-            if ext == ".glb" and rel not in SELF_GEN_MODELS:
-                problems.append("%s 不是本站自产模型（manifest 没标 self-generated），不发" % rel)
-            files.append({"path": rel, "bytes": os.path.getsize(p), "sha256": sha256_file(p)})
+            size, digest = os.path.getsize(p), sha256_file(p)
+            if ext == ".glb":
+                if rel in REAL_MODELS:
+                    if (size, digest) != REAL_MODELS[rel]:
+                        problems.append("%s 与客户端真实模型清单哈希或字节数不一致" % rel)
+                elif rel not in SELF_GEN_MODELS:
+                    problems.append("%s 未列入已核模型清单，不发" % rel)
+            files.append({"path": rel, "bytes": size, "sha256": digest})
     return files, problems
 
 

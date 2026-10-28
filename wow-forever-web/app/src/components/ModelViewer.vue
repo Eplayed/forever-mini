@@ -4,13 +4,13 @@
    ① three.js 与模型**都懒加载**——不点这个按钮，页面一个 3D 字节都不下载；
    ② 没有 WebGL / 加载失败 → 退回静态图并说一句原因，不白屏、不假装有模型；
    ③ 染色与显隐全部由父级传进来的 gear（节点名 → 品质）决定，本站不在这抄颜色值。
-   现在挂的是**占位模型**（本站自己拼的几何体），不是游戏里的样子——这句话由父级
-   在界面上写死，不许藏。 */
+   占位模型按 gear 控制显隐与染色；客户端整人模型保留原材质、显示完整网格。 */
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { qualityColor } from '../lib/bis-model.js';
 
 const props = defineProps({
   src: { type: String, required: true },
+  kind: { type: String, default: 'placeholder' },
   gear: { type: Object, default: () => ({}) },
   height: { type: Number, default: 340 }
 });
@@ -78,6 +78,8 @@ function onUp() { dragging = false; }
 function fail(msg) {
   busy.value = false;
   why.value = msg;
+  const canvas = box.value && box.value.querySelector('canvas.pzc-gl');
+  if (canvas) canvas.remove();
   emit('fail', msg);
 }
 
@@ -93,6 +95,7 @@ onMounted(async () => {
     canvas.className = 'pzc-gl';
     box.value.appendChild(canvas);
     scene = new THREE.Scene();
+    if (props.kind === 'real') scene.background = new THREE.Color(0x111b29);
     camera = new THREE.PerspectiveCamera(34, 1, 0.1, 30);
     camera.position.set(0, 1.02, 3.05);
     scene.add(new THREE.AmbientLight(0xffffff, 1.15));
@@ -111,7 +114,21 @@ onMounted(async () => {
     new GLTFLoader().load(props.src, (gltf) => {
       root = new THREE.Group();
       root.add(gltf.scene);
-      gltf.scene.traverse((n) => { if (n.name) paint(n); });
+      if (props.kind === 'real') {
+        const bounds = new THREE.Box3().setFromObject(gltf.scene);
+        const size = bounds.getSize(new THREE.Vector3());
+        const center = bounds.getCenter(new THREE.Vector3());
+        gltf.scene.position.sub(center);
+        const halfFov = camera.fov * Math.PI / 360;
+        const distance = Math.max(size.y / 2, size.x / (2 * camera.aspect)) * 1.25 / Math.tan(halfFov);
+        camera.position.set(0, 0, distance);
+        camera.lookAt(0, 0, 0);
+        yaw = 0;
+        pitch = 0;
+        spin = 0;
+      } else {
+        gltf.scene.traverse((n) => { if (n.name) paint(n); });
+      }
       scene.add(root);
       apply();
       busy.value = false;

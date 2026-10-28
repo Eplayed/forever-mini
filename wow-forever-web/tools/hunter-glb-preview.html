@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>猎人整人模型 · 本机预览</title>
+  <style>
+    * { box-sizing: border-box }
+    body { margin: 0; background: #101823; color: #e8eff8; font: 15px/1.5 system-ui, sans-serif }
+    main { max-width: 1280px; margin: auto; padding: 24px }
+    h1 { font-size: 24px; margin: 0 0 4px }
+    .muted { color: #9aacc0 }
+    .bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 }
+    button { background: #23354b; border: 1px solid #536a82; border-radius: 8px; color: inherit;
+      font: inherit; padding: 9px 14px; cursor: pointer }
+    button[aria-pressed="true"] { background: #b7904b; border-color: #e7c786; color: #101823; font-weight: 700 }
+    button:focus-visible { outline: 2px solid white; outline-offset: 2px }
+    .stage { position: relative; height: min(72vh, 760px); min-height: 400px; border: 1px solid #34475f;
+      border-radius: 12px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #2d3d50, #121d2b 70%) }
+    canvas { display: block; width: 100%; height: 100%; cursor: grab }
+    canvas:active { cursor: grabbing }
+    #status { position: absolute; left: 14px; top: 12px; padding: 5px 9px; border-radius: 5px;
+      background: #0b1525d9; color: #e8eff8 }
+    #facts { margin-top: 12px; color: #bbcad9 }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"/vendor/three.module.js","three/addons/":"/vendor/"}}
+  </script>
+</head>
+<body>
+<main>
+  <h1>猎人整人模型 · 本机预览</h1>
+  <div class="muted">从 Windows 只读共享直接读取。拖动旋转，滚轮缩放；四版各只显示一把武器。</div>
+  <div class="bar" id="variants">
+    <button data-model="alliance-ranged" aria-pressed="true">联盟 · 远程</button>
+    <button data-model="alliance-melee" aria-pressed="false">联盟 · 近战</button>
+    <button data-model="horde-ranged" aria-pressed="false">部落 · 远程</button>
+    <button data-model="horde-melee" aria-pressed="false">部落 · 近战</button>
+    <button id="front">正面</button><button id="back">背面</button>
+  </div>
+  <div class="stage"><div id="status" role="status">正在加载…</div></div>
+  <div id="facts" aria-live="polite"></div>
+</main>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
+
+const stage = document.querySelector('.stage');
+const status = document.querySelector('#status');
+const facts = document.querySelector('#facts');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xdfe9ff, 0x30373d, 1.3));
+const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(2.5, 4, 3); scene.add(key);
+const fill = new THREE.DirectionalLight(0xbfd3e6, 0.8); fill.position.set(-3, 1.5, -2); scene.add(fill);
+const camera = new THREE.PerspectiveCamera(35, 1, 0.05, 100);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.minDistance = 1;
+controls.maxDistance = 20;
+const loader = new GLTFLoader();
+let model = null, current = '', center = new THREE.Vector3(), distance = 4, seq = 0;
+const params = new URLSearchParams(location.search);
+const fixAxes = params.get('axes') === '1';
+
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+resize();
+
+function view(back = false) {
+  if (fixAxes) camera.position.set(center.x, center.y + 0.1, back ? -distance : distance);
+  else camera.position.set(back ? -distance : distance, center.y + 0.1, center.z);
+  controls.target.copy(center);
+  controls.update();
+}
+document.querySelector('#front').onclick = () => view(false);
+document.querySelector('#back').onclick = () => view(true);
+
+function disposeModel(root) {
+  root.traverse(node => {
+    if (!node.isMesh) return;
+    node.geometry?.dispose();
+    for (const mat of Array.isArray(node.material) ? node.material : [node.material]) {
+      if (!mat) continue;
+      for (const value of Object.values(mat)) if (value?.isTexture) value.dispose();
+      mat.dispose();
+    }
+  });
+}
+
+async function select(name) {
+  const ticket = ++seq;
+  current = name;
+  status.textContent = `正在加载 ${name}…`;
+  status.dataset.state = 'loading';
+  facts.textContent = '';
+  document.querySelectorAll('[data-model]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.model === name)));
+  try {
+    const gltf = await loader.loadAsync(`/models/${name}.glb`);
+    if (ticket !== seq) { disposeModel(gltf.scene); return; }
+    if (model) { scene.remove(model); disposeModel(model); }
+    model = gltf.scene;
+    if (fixAxes) model.traverse(n => { if (n.isMesh && /^(humanmale_hd_|orcmale_hd_)/.test(n.name)) n.rotation.y = -Math.PI / 2; });
+    scene.add(model);
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    box.getCenter(center);
+    distance = Math.max(size.y / 2, size.x / camera.aspect) * 1.35 / Math.tan(camera.fov * Math.PI / 360);
+    view(false);
+    let meshes = 0, materials = 0;
+    model.traverse(n => { if (n.isMesh) { meshes++; materials += Array.isArray(n.material) ? n.material.length : 1; } });
+    facts.textContent = `${name} · ${meshes} 网格 · ${materials} 材质引用 · 身高 ${size.y.toFixed(2)} 模型单位`;
+    // Mark ready only after the browser has drawn the selected model twice.
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    if (ticket === seq) {
+      renderer.render(scene, camera);
+      status.textContent = `${name} · 已绘制`;
+      status.dataset.state = 'ready';
+      document.body.dataset.readyModel = name;
+    }
+  } catch (error) {
+    if (ticket !== seq) return;
+    status.textContent = `加载失败：${error.message}`;
+    status.dataset.state = 'error';
+  }
+}
+
+document.querySelectorAll('[data-model]').forEach(b => b.onclick = () => select(b.dataset.model));
+function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
+animate();
+select(params.get('model') || 'alliance-ranged');
+</script>
+</body>
+</html>

@@ -651,6 +651,58 @@ if (fs.existsSync(artPath)) {
       }
     });
   });
+  // 真实整人模型必须精确匹配套装、阵营、种族与导出时的物品快照。
+  const real = art.bisRealModels || {};
+  if (real.items && real.items.length) {
+    if (real.origin !== 'client-derived') errs.push('bisRealModels：来源类型不对');
+    const sets = JSON.parse(fs.readFileSync(path.join(ROOT, 'bis.json'), 'utf8')).sets || [];
+    const seen = new Set();
+    (real.items || []).forEach((m) => {
+      const key = `${m.setId}/${m.faction}`;
+      if (m.placementVerdict !== 'PASS') errs.push(`bisRealModels：${key} 附件位置未验收通过`);
+      if (seen.has(key)) errs.push(`bisRealModels：重复 ${key}`);
+      seen.add(key);
+      const set = sets.find((s) => s.id === m.setId);
+      if (!set || !['alliance', 'horde'].includes(m.faction)) errs.push(`bisRealModels：未知套装或阵营 ${key}`);
+      if (set && ['alliance', 'horde'].includes(m.faction)) {
+        const race = (rc.races || []).find((x) => x.id === m.raceId);
+        if (!race || race.faction !== m.faction || !(race.classes || []).includes(set.cls) || m.bodyType !== 'male') {
+          errs.push(`bisRealModels：${key} 种族/职业/体型不匹配`);
+        }
+        const canon = (rows) => (rows || []).map((x) => [x.slot, x.cell || 1, x.item]);
+        if (JSON.stringify(canon(m.dollSnapshot)) !== JSON.stringify(canon(set.doll[m.faction]))) {
+          errs.push(`bisRealModels：${key} 全套物品与导出时快照不一致`);
+        }
+        const expected = m.visibleItems || {};
+        const actual = Object.fromEntries((set.doll[m.faction] || [])
+          .filter((x) => Object.prototype.hasOwnProperty.call(expected, x.slot))
+          .map((x) => [x.slot, x.item]));
+        const sorted = (o) => JSON.stringify(Object.entries(o).sort((a, b) => a[0].localeCompare(b[0])));
+        if (Object.keys(expected).length < 9 || sorted(actual) !== sorted(expected)) {
+          errs.push(`bisRealModels：${key} 可见装备与导出时的配装名单不一致`);
+        }
+        const weapons = m.displayWeaponItems || [];
+        if (!weapons.length || weapons.some((x) => !['主手', '副手', '远程'].includes(x.slot)
+          || !(set.doll[m.faction] || []).some((d) => d.slot === x.slot && d.item === x.item))) {
+          errs.push(`bisRealModels：${key} 展示武器与配装名单不一致`);
+        }
+        if (m.visibleWeaponItemId && !weapons.some((x) => x.item === m.visibleWeaponItemId)) {
+          errs.push(`bisRealModels：${key} 旧展示武器字段与新清单不一致`);
+        }
+      }
+      if (!/^img\/models\/real\/[a-z0-9-]+\.glb$/.test(m.file || '')) {
+        errs.push(`bisRealModels：${key} 文件路径不在独立真实模型目录`); return;
+      }
+      const file = path.join(ROOT, '..', m.file);
+      if (!fs.existsSync(file)) { errs.push(`bisRealModels：${key} 文件不存在`); return; }
+      const raw = fs.readFileSync(file);
+      if (raw.length !== m.bytes || raw.subarray(0, 4).toString() !== 'glTF') {
+        errs.push(`bisRealModels：${key} GLB 长度或格式不符`);
+      }
+      const hash = require('crypto').createHash('sha256').update(raw).digest('hex');
+      if (hash !== m.sha256) errs.push(`bisRealModels：${key} SHA-256 不符`);
+    });
+  }
   console.log('客户端原画：职业背景 ' + Object.keys(art.classes || {}).length +
     ' 张 / 副本 ' + Object.keys(art.dungeons || {}).length + ' 张 / 区域小地图 ' +
     Object.keys(art.maps || {}).length + ' 张 / 种族头像 ' + Object.keys(art.races || {}).length +

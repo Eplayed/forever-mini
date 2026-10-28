@@ -372,5 +372,9 @@
   "banner-cloudsea": "img/gen/banner-cloudsea.webp",
   "cavern-hall": "img/gen/cavern-hall.webp",
   "prof-table": "img/gen/prof-table.webp"
+ },
+ "bisRealModels": {
+  "origin": "client-derived",
+  "items": []
  }
 }

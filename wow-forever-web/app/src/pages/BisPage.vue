@@ -49,10 +49,7 @@
         </div>
       </div>
 
-      <!-- 纸娃娃：左列 / 中间职业原画 / 右列，武器与远程压在中间那一列下面。
-           布局照参考站那页的三栏（实测它是 471 / 360 / 471）。中间默认是职业原画；
-           2026-10-26 起可以点开换成 3D——那一层现在是本站自己拼的**占位模型**，
-           不是游戏里的样子（游戏模型要等客户端那一层能取到文件，见 docs/EVAL-bis更新与3D模型-2026-10-26.md）。 -->
+      <!-- 中间默认是职业原画；有已核整人模型的套装显示真实 3D，其余保留自产占位。 -->
       <div class="pz-three">
         <div class="pzcol">
           <BisCell v-for="c in colLeft" :key="c.slot + '-' + c.cell" :cell="c"
@@ -60,18 +57,18 @@
         </div>
         <div class="pzmid">
           <div class="pzart" :style="artStyle">
-            <ModelViewer v-if="modelFile && live3d" :src="assetUrl(modelFile)" :gear="gearQ"
+            <ModelViewer v-if="modelFile && live3d" :key="modelFile + ':' + setId + ':' + fac"
+                         :src="assetUrl(modelFile)" :kind="modelKind" :gear="gearQ"
                          :height="300" @fail="glWhy = $event" />
             <span class="pzart-tag mono">{{ cur.clsCn }} · {{ cur.level }} 级</span>
             <button v-if="modelFile" type="button" class="pz-3dbtn"
                     :aria-pressed="live3d ? 'true' : 'false'" @click="toggle3d">{{ live3d ? '返回图片' : '旋转 3D 模型' }}</button>
           </div>
-          <!-- 说明压在图下面而不是浮在图上：浮着会把模型本身盖掉一半，
-               而"看效果"要看的正是模型。这两句一句都不许省（红线：不冒充）。 -->
-          <p v-if="live3d && !glWhy" class="pz-3dnote">这一版是本站自己拼的<b>占位模型</b>，不是游戏里的样子：
-            一件一块，颜色跟品质走，这一套没穿的部位就不画。真模型要等客户端那一层能取到文件。</p>
+          <p v-if="live3d && !glWhy && modelKind === 'real'" class="pz-3dnote">游戏角色与装备的静态预览；拖动可旋转。模型显示导出时手持的武器，装备表保留完整清单。</p>
+          <p v-if="live3d && !glWhy && modelKind !== 'real'" class="pz-3dnote">这一版是本站自己拼的<b>占位模型</b>，不是游戏里的样子：
+            一件一块，颜色跟品质走，这一套没穿的部位就不画。</p>
           <p v-if="glWhy" class="pz-3dnote">{{ glWhy }}，这一栏退回静态原画。</p>
-          <p v-if="live3d && unmappedSlots.length" class="pz-3dnote">这几个部位占位模型里没有格子：
+          <p v-if="live3d && modelKind !== 'real' && unmappedSlots.length" class="pz-3dnote">这几个部位占位模型里没有格子：
             {{ unmappedSlots.join('、') }}（不硬塞到别的块上冒充）。</p>
           <div class="pzrow">
             <BisCell v-for="c in colBottom" :key="c.slot + '-' + c.cell" :cell="c"
@@ -218,7 +215,7 @@
    在抓取阶段就没落盘，这里也就无从渲染（红线：不复制描述文案、掉落不写百分比）。
    10-17 站主实拍后补的：职业条要带职业图标、阵营要带徽记、纸娃娃要照参考站那样
    左右两列夹着中间一块，而不是我们原来那个三列小方格。 */
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { loadAll, assetUrl } from '../lib/data.js';
 import { artOf } from '../lib/art.js';
@@ -366,18 +363,25 @@ const artStyle = computed(() => {
   const u = artOf((P.value || {}).art, 'classes', (cur.value || {}).cls || '');
   return u ? { backgroundImage: 'url(' + assetUrl(u) + ')' } : {};
 });
-/* ---- 3D：模型台账里没有文件就整个按钮不出现（不猜路径、不拿别的图冒充）---- */
+/* ---- 3D：仅精确套装/阵营匹配真实整人模型；其他套装仍用自产占位 ---- */
 const live3d = ref(false);
 const glWhy = ref('');
 function toggle3d() {
   live3d.value = !live3d.value;
   if (live3d.value) glWhy.value = '';
 }
-const modelFile = computed(() => {
-  const M = ((P.value || {}).art || {}).bisModels || {};
-  const f = ((M.items || [])[0] || {}).file || '';
-  return M.origin === 'self-generated' && f ? f : '';
+const modelInfo = computed(() => {
+  const art = ((P.value || {}).art || {});
+  const real = art.bisRealModels || {};
+  const exact = (real.items || []).find((m) => m.setId === (cur.value || {}).id && m.faction === fac.value);
+  if (real.origin === 'client-derived' && exact?.placementVerdict === 'PASS' && exact.file) return { file: exact.file, kind: 'real' };
+  const placeholder = art.bisModels || {};
+  const file = ((placeholder.items || [])[0] || {}).file || '';
+  return { file: placeholder.origin === 'self-generated' ? file : '', kind: 'placeholder' };
 });
+const modelFile = computed(() => modelInfo.value.file);
+const modelKind = computed(() => modelInfo.value.kind);
+watch(modelFile, () => { glWhy.value = ''; });
 /* 节点名 → 品质：染色走 tokens.css 的 --q*，这一层只负责"哪件穿了、什么品质" */
 const gearQ = computed(() => {
   const g = gearNodes(doll.value);
