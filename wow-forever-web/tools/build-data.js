@@ -1505,6 +1505,73 @@ if (fs.existsSync(achPath)) {
   warns.push('achievements.json 缺失：成就会空着（跑 tools/scrape-wclbox-achievements.py + tools/merge-achievements.py 生成）');
 }
 
+// ---------- 猎人宠物（2026-10-28 站主拍板开这一页，源是 GI 0.5.6 的 PetData.lua） ----------
+// 这份只有两层：家族 ↔ 宠物技能。它**不是**逐只宠物的名录（哪只在哪个区域、几级、要不要特殊条件，
+// 源里就没有），所以卡口盯的是"别让它看起来像名录"：家族数、技能数、两边连线数都要和自报的对得上。
+// 三条硬线：① 只许 L1（一家插件转述，没逐行回客户端表、没进游戏验）；② 不许夹成句描述
+// （插件里 dcn/den 那种技能说明文字在抽取阶段就该丢，这里再钉一道）；③ iconKey 有值就必须本地有图。
+const petsPath = path.join(ROOT, 'pets.json');
+let petsOut = null;
+if (fs.existsSync(petsPath)) {
+  const pets = JSON.parse(fs.readFileSync(petsPath, 'utf8'));
+  petsOut = pets;
+  const pf = pets.families || [], ps = pets.skills || [], pc = (pets.meta || {}).counts || {};
+  const pErr = [];
+  if (pc.families !== pf.length) pErr.push(`记 ${pc.families} · 实数 ${pf.length}`);
+  if (pc.skills !== ps.length) pErr.push(`技能记 ${pc.skills} · 实数 ${ps.length}`);
+  const linkSum = pf.reduce((n, r) => n + ((r.skills || []).length), 0);
+  if (pc.links !== linkSum) pErr.push(`家族↔技能连线记 ${pc.links} · 实数 ${linkSum}`);
+  const pNewF = pf.filter((r) => r.isNew).length, pNewS = ps.filter((r) => r.isNew).length;
+  if (pc.familiesNew !== pNewF) pErr.push(`新增家族记 ${pc.familiesNew} · 实数 ${pNewF}`);
+  if (pc.skillsNew !== pNewS) pErr.push(`新增技能记 ${pc.skillsNew} · 实数 ${pNewS}`);
+  const famSeen = new Set(), skSeen = new Set();
+  const noIcon = [];
+  (pf.concat(ps)).forEach((r) => {
+    const isFam = !!r.famId;
+    if (!r.id || (isFam ? famSeen : skSeen).has(r.id)) {
+      pErr.push(`${r.id || '(缺 id)'} 这一条 id 重复或缺`);
+      (isFam ? famSeen : skSeen).add(r.id);
+    }
+    (isFam ? famSeen : skSeen).add(r.id);
+    if (!r.name || !r.nameEn) pErr.push(`${r.id}：名字缺一边`);
+    if (r.level !== 'L1') pErr.push(`${r.id}：分级是 ${r.level}，这份只许 L1（一家插件转述，未回查）`);
+    const pv = r.provenance || [];
+    if (!pv.length || !pv[0].url || !pv[0].checkedAt) pErr.push(`${r.id}：来源不可回查或缺核对日`);
+    if (isFam) {
+      if (typeof r.dmgMod !== 'number' || typeof r.armorMod !== 'number' || typeof r.hpMod !== 'number') {
+        pErr.push(`${r.id}：三项修正是空的话要写 0，不能缺字段（缺和"不偏"是两回事）`);
+      }
+      (r.skills || []).forEach((s) => {
+        if (!ps.some((x) => x.spellId === s.id)) pErr.push(`${r.name} 写了技能 ${s.nameEn}，但技能表里没有这条`);
+      });
+    } else {
+      if (!Array.isArray(r.families)) pErr.push(`${r.id}：families 缺失，这条挂不到任何族上`);
+      if ((r.families || []).length === 0 && (r.familyMissingIds || []).length === 0) {
+        pErr.push(`${r.name}：哪个族都不会用，又没说家族号对不上——两头都没交代`);
+      }
+    }
+    if (r.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', r.iconKey + '.jpg'))) {
+      noIcon.push(r.iconKey);
+    }
+    // 成句文案（插件里的 dcn/den）不许混进来。判据用句号/分号/逗号和"造成…点伤害"这类措辞，
+    // **不用感叹号与问号**：宠物技能里真有一条叫「归我了！」（英文原文也是 "Mine!"），
+    // 拿 ！ 当句子会把正经名字拦下来——这条是加了判据时踩到才发现的。
+    const text = [r.name, r.nameEn].filter(Boolean).join(' ');
+    if (/[。；;]/.test(text) || /造成.*点(伤害|治疗)/.test(text)) pErr.push(`${r.id}：名字里夹了句子（红线）`);
+  });
+  if (noIcon.length) pErr.push(`${noIcon.length} 条 iconKey 本地没图（如 ${noIcon.slice(0, 3).join('、')}）`);
+  if (pc.familiesIconless !== pf.filter((r) => r.iconMissing).length) {
+    pErr.push(`缺图家族记 ${pc.familiesIconless} · 实数 ${pf.filter((r) => r.iconMissing).length}`);
+  }
+  if (pErr.length) errs.push('pets：' + pErr.slice(0, 6).join('；') + (pErr.length > 6 ? ` 等 ${pErr.length} 条` : ''));
+  scale.pets = pf.length;
+  scale.petSkills = ps.length;
+  console.log('宠物：家族 ' + pf.length + ' 个（无限新增 ' + pNewF + '）· 技能 ' + ps.length
+    + ' 条（新增 ' + pNewS + '）· 两边连线 ' + linkSum + ' 条 · 全部 L1（一家插件转述，未回查）');
+} else {
+  warns.push('pets.json 缺失：宠物这一格空着（跑 tools/extract-gi-pets.py + tools/merge-pets.py 生成）');
+}
+
 // ---------- 配装名单（2026-10-16 站主拍板走 C 方案，红线例外条款见仓库根 AGENTS.md 第五节） ----------
 // 这份数据只存"哪件装备在哪个部位、按什么顺序"，数值与名称一律回 items.json 查。
 // 卡口因此盯四件事：① 名单里的物品 ID 必须都在我们名录里（否则页面上就是空白格）；
@@ -1611,6 +1678,9 @@ const SK = {
   // （法术带 c=职业、成就带 g=大类），这样同名条目（两个职业都有「反击」）不会并成一条。
   spl: ['法术书', 'skills.html', 'q'],
   ach: ['成就', 'achievements.html', 'q'],
+  // 2026-10-28 猎人宠物那一页：家族与技能分两类，搜「狼」与搜「突进」落到同一页的不同筛选上
+  pfam: ['宠物家族', 'pets.html', 'q'],
+  psk: ['宠物技能', 'pets.html', 'q'],
   // 2026-10-13 副本线加了"每座本一页"（dungeon.html?d=<本>）：搜到一座本或一个首领，
   // 直接落到那一座的整页，不再落到列表页等人在一堆卡里自己找。
   // 跳转参数仍由条目自己带（见下面 sPush），这里只换落在哪一页。
@@ -1780,6 +1850,19 @@ if (legacyOut) {
   }));
 }
 
+if (petsOut) {
+  (petsOut.families || []).forEach((x) => {
+    sPush('pfam', x.name, '宠物家族 · ' + x.nameEn + ' · 会 ' + (x.skills || []).length + ' 条',
+      '', x.level);
+  });
+  (petsOut.skills || []).forEach((x) => {
+    const f = x.families || [];
+    sPush('psk', x.name, '宠物技能 · ' + (f.length
+      ? (f.length > 2 ? f.slice(0, 2).join('、') + ' 等 ' + f.length + ' 族' : f.join('、'))
+      : '能用它的族还没对上') + ' · ' + (x.ranks || '?') + ' 级', '', x.level);
+  });
+}
+
 sFinish();
 // 搜索的板块顺序表只有新站那一份（app/src/lib/search.js 的 KIND_ORDER）。
 // 漏一个板块不是"顺序不同"，是那一类条目在索引里但搜不出来——分组按这张表列，不在表里的静默丢掉。
@@ -1823,7 +1906,9 @@ SIDX.forEach((it) => {
 // 「数据里有 N 条、索引里一条都没派生出来」是 M1 那批最容易犯的错：数据落地了、门禁读了它，
 // 页面与搜索忘了接。这里按「名称 + 跳转参数」去重后逐类对数，差一条就失败。
 [['spl', spellList, (r) => 'c=' + r.classId],
- ['ach', achList.filter((r) => !r.devOnly), (r) => 'g=' + (r.gid || 'other')]].forEach(([k, src, extraOf]) => {
+ ['ach', achList.filter((r) => !r.devOnly), (r) => 'g=' + (r.gid || 'other')],
+ ['pfam', (petsOut && petsOut.families) || [], () => ''],
+ ['psk', (petsOut && petsOut.skills) || [], () => '']].forEach(([k, src, extraOf]) => {
   if (!src.length) return;
   const exp = new Set(src.map((r) => k + '|' + r.name + '|' + extraOf(r))).size;
   const got = SIDX.filter((it) => it[0] === k).length;
@@ -2043,7 +2128,8 @@ const SECTION_CN = {
   'world.json': '世界（区域与稀有）',
   'items.json': '物品名录',
   'art.json': '素材台账（客户端原画）',
-  'bis.json': '配装名单'
+  'bis.json': '配装名单',
+  'pets.json': '猎人宠物'
 };
 // 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
 // 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。

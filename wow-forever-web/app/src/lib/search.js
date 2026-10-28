@@ -8,7 +8,7 @@ import { linkFor } from './nav.js';
 // 少一个板块不是"顺序不同"，是那一类在新站搜索里根本不出结果——分组是按这张表列出来的，
 // 不在表里的类型会被静默丢掉。2026-10-16 补齐时顺手发现 'rdd'（团本）原来就漏在这里。
 export const KIND_ORDER = ['cls', 'race', 'tal', 'lpg', 'lch', 'chg', 'term', 'abl', 'spl', 'ach',
-  'dun', 'boss', 'rdd', 'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
+  'pfam', 'psk', 'dun', 'boss', 'rdd', 'zone', 'rare', 'bok', 'camp', 'prof', 'rec', 'gnd', 'tra'];
 export const GROUP_SHOWN = 5;
 export const HIT_LIMIT = 120;
 

@@ -369,7 +369,6 @@ def test_talent(browser, base):
 
 
 
-
 def test_spellbook(browser, base):
     """M2（2026-10-16）：法术书接进技能页、成就独立成页。
        两栈同页同断言——数字全部从 app/data 现算，不在脚本里写死条数。"""
@@ -493,6 +492,10 @@ def test_spellbook(browser, base):
         check("%s 按大类筛选后行数对得上" % label,
               page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length") == exp_g,
               "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length"), exp_g))
+        # 这一页 226 行、每行一颗图标，本机是软件光栅（swiftshader）：
+        # 实测一次视口截图就要 24~30 秒，Playwright 默认 30 秒超时是**擦着上限过的**——
+        # 10-27 那轮"整站门禁跑不完"就是死在这一句，不是页面坏了。
+        # 两处放宽：关掉动画等帧（省 ~5 秒）+ 把这一次调用的上限抬到 90 秒。
         page.screenshot(path=os.path.join(SHOT_DIR, "achievements-%s.png" %
                                           ("app" if label == u"新站" else "legacy")))
         ctx.close()
@@ -2563,7 +2566,7 @@ def test_app(browser, base):
     page.wait_for_timeout(1800)
     chips = page.evaluate("() => [...document.querySelectorAll('.chipsrow a')]"
                           ".map(a => ({ t: a.textContent.trim(), h: a.getAttribute('href') || '' }))")
-    want = {"#/items": "物品库", "#/achievements": "成就"}
+    want = {"#/items": "物品库", "#/achievements": "成就", "#/pets": "宠物家族"}
     got = {c["h"]: c["t"] for c in chips}
     miss = [v for k, v in want.items() if k not in got]
     check("首页那行入口补上了被摘导航的物品库与成就", not miss,
@@ -2572,9 +2575,10 @@ def test_app(browser, base):
     check("首页那行入口全走站内路由（不回落已冻结的旧站）", not bad, "回旧站：%s" % (bad or "无"))
     counts = [got[k] for k in want if k in got]
     sc2 = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
-    check("那两格带的数是 scale.json 算出来的，不是手抄",
-          str(sc2["items"]) in got.get("#/items", "") and str(sc2["achievements"]) in got.get("#/achievements", ""),
-          " / ".join(counts) + "（数据 items %s、achievements %s）" % (sc2["items"], sc2["achievements"]))
+    check("那几格带的数是 scale.json 算出来的，不是手抄",
+          all(str(sc2.get(k)) in got.get("#/" + k, "") for k in ("items", "achievements", "pets")),
+          " / ".join(counts) + "（数据 items %s、achievements %s、pets %s）"
+          % (sc2["items"], sc2["achievements"], sc2.get("pets")))
     # ---- 10-18 站主实拍：首页"点了没反应" + 底部一条横向滚动条 + 导航太素 ----
     # 三条各钉一个断言，因为这三个毛病没有一个能靠"构建通过"发现。
     # 1) 死链：首页把已迁页的地址写成旧站文件式地址（/talent.html）时，
@@ -3482,6 +3486,110 @@ def test_data_versions(browser, base):
 
 # 全跑一次 13 分钟，改一条新断言时等不起。SECTIONS 把顺序固定下来，--only 按名字挑着跑，
 # 用来做 30 秒探针；正式门禁仍然不带 --only。
+def test_pets(browser, base):
+    """宠物家族与技能页（2026-10-28 站主拍板开这一页）。盯五件事：
+       ① 两张表的行数与 pets.json 的条数对得上，计数行也是同一份数；
+       ② 三个筛选项**都真生效**（搜索框、只看新增、按家族筛）——放了不生效的选项比不放更坏；
+       ③ 家族行上的技能条点一下要真把技能表筛到那一条（这是这条链唯一的入口，白放就是装饰）；
+       ④ 0 这个值显示成 0，不许空着（空着会被读成"没数据"）；图标全部本地且真加载出来；
+       ⑤ 红线：不许出现成句的技能描述（插件里 dcn/den 那一层一条没取）。"""
+    print("\n[6d] 宠物家族与技能")
+    import json
+    pets = json.load(open(os.path.join(SRC, "data", "pets.json"), encoding="utf-8"))
+    fams, sks, pc = pets["families"], pets["skills"], pets["meta"]["counts"]
+    if not app_up(browser):
+        return
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    page.goto(APP_BASE + "/#/pets", wait_until="networkidle")
+    page.wait_for_timeout(900)
+    h1 = page.evaluate("() => [...document.querySelectorAll('h1')].map(x => x.innerText.trim())")
+    check("这一页只有一个 H1 且标题写的是家族与技能",
+          h1 == [u"宠物家族与技能"], str(h1))
+    rows = page.evaluate("() => ({ f: document.querySelectorAll('#ptfam tbody tr').length,"
+                         " s: document.querySelectorAll('#ptsk tbody tr').length,"
+                         " cnt: (document.querySelector('#ptcnt')||{}).innerText || '' })")
+    check("家族表行数 = 数据条数", rows["f"] == len(fams), "%s vs %s" % (rows["f"], len(fams)))
+    check("技能表行数 = 数据条数", rows["s"] == len(sks), "%s vs %s" % (rows["s"], len(sks)))
+    check("计数行两个数都从数据来（不是手抄）",
+          (u"家族 %d / %d" % (len(fams), len(fams))) in rows["cnt"]
+          and (u"技能 %d / %d" % (len(sks), len(sks))) in rows["cnt"], rows["cnt"])
+    # ① 搜索框
+    page.fill("#q", fams[0]["name"])
+    page.wait_for_timeout(350)
+    got = page.evaluate("() => [...document.querySelectorAll('#ptfam tbody tr .nm')]"
+                        ".map(x => x.innerText.trim())")
+    check("搜中文名筛得动，且筛出来的每一条都真含那个词",
+          0 < len(got) < len(fams) and all(fams[0]["name"] in x for x in got), str(got[:4]))
+    # ② 只看新增
+    page.fill("#q", "")
+    page.wait_for_timeout(250)
+    page.click("#onlynew")
+    page.wait_for_timeout(350)
+    nf = page.evaluate("() => ({ n: document.querySelectorAll('#ptfam tbody tr').length,"
+                       " tags: [...document.querySelectorAll('#ptfam tbody tr .tag')]"
+                       ".map(x => x.innerText.trim()) })")
+    check("勾「只看《无限》新加的」真的变少，且每条都带新增标",
+          nf["n"] == pc["familiesNew"] and len(nf["tags"]) == nf["n"],
+          "%s 行 / 标 %s 个（数据记 %s）" % (nf["n"], len(nf["tags"]), pc["familiesNew"]))
+    page.click("#onlynew")
+    page.wait_for_timeout(300)
+    # ③ 家族行点技能条 → 技能表筛到那一条
+    chip = page.evaluate("() => { const b = document.querySelector('#ptfam tbody tr .pt-chip');"
+                         " return b ? b.innerText.trim() : ''; }")
+    page.click("#ptfam tbody tr .pt-chip")
+    page.wait_for_timeout(400)
+    after = page.evaluate("() => [...document.querySelectorAll('#ptsk tbody tr .nm')]"
+                          ".map(x => x.innerText.trim())")
+    check("点家族行上的技能条，技能表真被筛到那一条（不是白放的装饰）",
+          chip != "" and len(after) >= 1 and all(chip in x for x in after),
+          "点了「%s」→ %s" % (chip, after[:3]))
+    page.fill("#q", "")
+    page.wait_for_timeout(300)
+    # ④ 按家族筛
+    opts = page.evaluate("() => [...document.querySelectorAll('#ptfamf option')].map(o => o.value)"
+                         ".filter(v => v)")
+    if opts:
+        page.select_option("#ptfamf", opts[0])
+        page.wait_for_timeout(400)
+        sel = page.evaluate("() => [...document.querySelectorAll('#ptsk tbody tr')]"
+                            ".map(tr => (tr.querySelector('.w-tail')||{}).innerText || '')")
+        check("「按家族筛」这个下拉选了真生效，且筛出来的每一行都写着那一族",
+              0 < len(sel) < len(sks) and all(opts[0] in x for x in sel),
+              "%s 行 / 选了 %s（下拉共 %s 项）" % (len(sel), opts[0], len(opts)))
+        page.select_option("#ptfamf", "")
+        page.wait_for_timeout(300)
+    else:
+        check("「按家族筛」这个下拉有可选项", False, "下拉是空的")
+    # ⑤ 0 不空、图标真加载
+    zero = page.evaluate("() => { const tds = [...document.querySelectorAll('#ptfam tbody tr')]"
+                         ".map(tr => [...tr.querySelectorAll('.c-num2')].map(x => x.innerText.trim()));"
+                         " return { has: tds.some(r => r.includes('0')), empty: tds.some(r => r.some(x => x === '')) }; }")
+    check("三项修正里 0 显示成 0、没有空格子",
+          zero["has"] and not zero["empty"], str(zero))
+    imgs = page.evaluate("() => [...document.querySelectorAll('#ptfam tbody tr td.c-ico img')]"
+                         ".map(i => ({ ok: i.complete && i.naturalWidth > 0, src: i.getAttribute('src') || '' }))")
+    check("18 个家族的图标都从本地 img/icons 出且真加载出来",
+          len(imgs) == len(fams) and all(i["ok"] for i in imgs)
+          and all(i["src"].startswith("img/icons/") or "/img/icons/" in i["src"] for i in imgs),
+          "%s/%s 张" % (sum(1 for i in imgs if i["ok"]), len(fams)))
+    cells = page.evaluate("() => [...document.querySelectorAll('#ptsk tbody tr')]"
+                          ".map(tr => [...tr.querySelectorAll('td')].some(td => !td.innerText.trim()))")
+    check("技能表没有空格子（缺值要写待实测，不许留白）", not any(cells), str(cells.count(True)))
+    cd = page.evaluate("() => [...document.querySelectorAll('#ptsk tbody tr')]"
+                       ".map(tr => (tr.querySelectorAll('.c-num2')[3]||{}).innerText || '')")
+    check("冷却为 0 的那几条显示「不用冷却」，不是「没写」",
+          u"不用冷却" in cd and u"没写" not in cd, " / ".join(sorted(set(cd))))
+    # ⑥ 红线：不许有整句描述（这一页本来就没有描述栏）
+    body = page.evaluate("() => document.body.innerText")
+    sent = [w for w in (u"造成", u"点伤害", u"使你的") if w in body]
+    check("页面上没有成句的技能描述（插件的 dcn/den 一条没取）", not sent, "出现 %s" % sent)
+    shot = os.path.join(SHOT_DIR, "pets-families.png")
+    page.screenshot(path=shot, full_page=True)
+    check("整页截图落盘", os.path.exists(shot), shot)
+    ctx.close()
+
+
 SECTIONS = [
     ("talent", test_talent),
     ("mobile", test_mobile),
@@ -3493,6 +3601,7 @@ SECTIONS = [
     ("dungeon_geo", test_dungeon_geo),
     ("legacy_app", test_legacy_app),
     ("bis", test_bis),
+    ("pets", test_pets),
     ("classes_sticky", test_classes_sticky),
     ("race_icon", lambda b, base: test_race_icon(b)),
     ("updates_filter", lambda b, base: test_updates_filter(b)),

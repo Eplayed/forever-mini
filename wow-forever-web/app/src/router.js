@@ -15,6 +15,7 @@ import GlossaryPage from './pages/GlossaryPage.vue';
 import TimelinePage from './pages/TimelinePage.vue';
 import SkillsPage from './pages/SkillsPage.vue';
 import AchievementsPage from './pages/AchievementsPage.vue';
+import PetsPage from './pages/PetsPage.vue';
 import UpdatesPage from './pages/UpdatesPage.vue';
 import RankPage from './pages/RankPage.vue';
 import ProvenancePage from './pages/ProvenancePage.vue';
@@ -45,6 +46,7 @@ export const MIGRATED = {
   'timeline.html': '/timeline',
   'skills.html': '/skills',
   'achievements.html': '/achievements',
+  'pets.html': '/pets',
   'updates.html': '/updates',
   'rank.html': '/rank',
   'provenance.html': '/provenance',
@@ -70,6 +72,7 @@ const routes = [
   { path: '/timeline', name: 'timeline', component: TimelinePage, meta: { title: '上线与 Beta 时间表' } },
   { path: '/skills', name: 'skills', component: SkillsPage, meta: { title: '技能书' } },
   { path: '/achievements', name: 'achievements', component: AchievementsPage, meta: { title: '成就目录' } },
+  { path: '/pets', name: 'pets', component: PetsPage, meta: { title: '宠物家族与技能' } },
   { path: '/updates', name: 'updates', component: UpdatesPage, meta: { title: '最新动态' } },
   { path: '/rank', name: 'rank', component: RankPage, meta: { title: '职业资料完整度排行' } },
   { path: '/provenance', name: 'provenance', component: ProvenancePage, meta: { title: '溯源与覆盖率' } },

@@ -1,0 +1,757 @@
+instanceMapId,instanceEn,floor,floorEn,wingEn,tile,fdid,clientPath,bytes
+33,Shadowfang Keep,1,The Courtyard,,1,448226,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_1.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,2,448230,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_2.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,3,448231,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_3.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,4,448232,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_4.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,5,448233,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_5.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,6,448234,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_6.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,7,448235,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_7.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,8,448236,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_8.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,9,448237,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_9.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,10,448227,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_10.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,11,448228,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_11.blp,44876
+33,Shadowfang Keep,1,The Courtyard,,12,448229,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep1_12.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,1,448238,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_1.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,2,448242,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_2.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,3,448243,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_3.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,4,448244,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_4.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,5,448245,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_5.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,6,448246,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_6.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,7,448247,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_7.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,8,448248,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_8.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,9,448249,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_9.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,10,448239,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_10.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,11,448240,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_11.blp,44876
+33,Shadowfang Keep,2,Dining Hall,,12,448241,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep2_12.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,1,448250,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_1.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,2,448254,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_2.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,3,448255,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_3.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,4,448256,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_4.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,5,448257,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_5.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,6,448258,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_6.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,7,448259,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_7.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,8,448260,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_8.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,9,448261,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_9.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,10,448251,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_10.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,11,448252,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_11.blp,44876
+33,Shadowfang Keep,3,The Vacant Den,,12,448253,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep3_12.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,1,448262,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_1.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,2,448266,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_2.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,3,448267,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_3.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,4,448268,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_4.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,5,448269,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_5.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,6,448270,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_6.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,7,448271,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_7.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,8,448272,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_8.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,9,448273,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_9.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,10,448263,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_10.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,11,448264,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_11.blp,44876
+33,Shadowfang Keep,4,Lower Observatory,,12,448265,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep4_12.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,1,448274,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_1.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,2,448278,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_2.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,3,448279,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_3.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,4,448280,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_4.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,5,448281,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_5.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,6,448282,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_6.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,7,448283,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_7.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,8,448284,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_8.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,9,448285,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_9.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,10,448275,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_10.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,11,448276,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_11.blp,44876
+33,Shadowfang Keep,5,Upper Observatory,,12,448277,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep5_12.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,1,448286,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_1.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,2,448290,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_2.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,3,448291,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_3.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,4,448292,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_4.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,5,448293,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_5.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,6,448294,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_6.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,7,448295,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_7.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,8,448296,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_8.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,9,448297,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_9.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,10,448287,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_10.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,11,448288,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_11.blp,44876
+33,Shadowfang Keep,6,Lord Godfrey's Chamber,,12,448289,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep6_12.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,1,448298,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_1.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,2,448302,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_2.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,3,448303,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_3.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,4,448304,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_4.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,5,448305,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_5.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,6,448306,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_6.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,7,448307,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_7.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,8,448308,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_8.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,9,448309,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_9.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,10,448299,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_10.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,11,448300,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_11.blp,44876
+33,Shadowfang Keep,7,The Wall Walk,,12,448301,Interface/WorldMap/ShadowfangKeep/ShadowfangKeep7_12.blp,44876
+34,Stormwind Stockade,1,,,1,455959,Interface/WorldMap/TheStockade/TheStockade1_1.blp,44876
+34,Stormwind Stockade,1,,,2,455963,Interface/WorldMap/TheStockade/TheStockade1_2.blp,44876
+34,Stormwind Stockade,1,,,3,455964,Interface/WorldMap/TheStockade/TheStockade1_3.blp,44876
+34,Stormwind Stockade,1,,,4,455965,Interface/WorldMap/TheStockade/TheStockade1_4.blp,44876
+34,Stormwind Stockade,1,,,5,455966,Interface/WorldMap/TheStockade/TheStockade1_5.blp,44876
+34,Stormwind Stockade,1,,,6,455967,Interface/WorldMap/TheStockade/TheStockade1_6.blp,44876
+34,Stormwind Stockade,1,,,7,455968,Interface/WorldMap/TheStockade/TheStockade1_7.blp,44876
+34,Stormwind Stockade,1,,,8,455969,Interface/WorldMap/TheStockade/TheStockade1_8.blp,44876
+34,Stormwind Stockade,1,,,9,455970,Interface/WorldMap/TheStockade/TheStockade1_9.blp,44876
+34,Stormwind Stockade,1,,,10,455960,Interface/WorldMap/TheStockade/TheStockade1_10.blp,44876
+34,Stormwind Stockade,1,,,11,455961,Interface/WorldMap/TheStockade/TheStockade1_11.blp,44876
+34,Stormwind Stockade,1,,,12,455962,Interface/WorldMap/TheStockade/TheStockade1_12.blp,44876
+36,Deadmines,1,The Deadmines,,1,449591,Interface/WorldMap/TheDeadmines/TheDeadmines1_1.blp,44876
+36,Deadmines,1,The Deadmines,,2,449595,Interface/WorldMap/TheDeadmines/TheDeadmines1_2.blp,44876
+36,Deadmines,1,The Deadmines,,3,449596,Interface/WorldMap/TheDeadmines/TheDeadmines1_3.blp,44876
+36,Deadmines,1,The Deadmines,,4,449597,Interface/WorldMap/TheDeadmines/TheDeadmines1_4.blp,44876
+36,Deadmines,1,The Deadmines,,5,449598,Interface/WorldMap/TheDeadmines/TheDeadmines1_5.blp,44876
+36,Deadmines,1,The Deadmines,,6,449599,Interface/WorldMap/TheDeadmines/TheDeadmines1_6.blp,44876
+36,Deadmines,1,The Deadmines,,7,449600,Interface/WorldMap/TheDeadmines/TheDeadmines1_7.blp,44876
+36,Deadmines,1,The Deadmines,,8,449601,Interface/WorldMap/TheDeadmines/TheDeadmines1_8.blp,44876
+36,Deadmines,1,The Deadmines,,9,449602,Interface/WorldMap/TheDeadmines/TheDeadmines1_9.blp,44876
+36,Deadmines,1,The Deadmines,,10,449592,Interface/WorldMap/TheDeadmines/TheDeadmines1_10.blp,44876
+36,Deadmines,1,The Deadmines,,11,449593,Interface/WorldMap/TheDeadmines/TheDeadmines1_11.blp,44876
+36,Deadmines,1,The Deadmines,,12,449594,Interface/WorldMap/TheDeadmines/TheDeadmines1_12.blp,44876
+36,Deadmines,2,Ironclad Cove,,1,449603,Interface/WorldMap/TheDeadmines/TheDeadmines2_1.blp,44876
+36,Deadmines,2,Ironclad Cove,,2,449607,Interface/WorldMap/TheDeadmines/TheDeadmines2_2.blp,44876
+36,Deadmines,2,Ironclad Cove,,3,449608,Interface/WorldMap/TheDeadmines/TheDeadmines2_3.blp,44876
+36,Deadmines,2,Ironclad Cove,,4,449609,Interface/WorldMap/TheDeadmines/TheDeadmines2_4.blp,44876
+36,Deadmines,2,Ironclad Cove,,5,449610,Interface/WorldMap/TheDeadmines/TheDeadmines2_5.blp,44876
+36,Deadmines,2,Ironclad Cove,,6,449611,Interface/WorldMap/TheDeadmines/TheDeadmines2_6.blp,44876
+36,Deadmines,2,Ironclad Cove,,7,449612,Interface/WorldMap/TheDeadmines/TheDeadmines2_7.blp,44876
+36,Deadmines,2,Ironclad Cove,,8,449613,Interface/WorldMap/TheDeadmines/TheDeadmines2_8.blp,44876
+36,Deadmines,2,Ironclad Cove,,9,449614,Interface/WorldMap/TheDeadmines/TheDeadmines2_9.blp,44876
+36,Deadmines,2,Ironclad Cove,,10,449604,Interface/WorldMap/TheDeadmines/TheDeadmines2_10.blp,44876
+36,Deadmines,2,Ironclad Cove,,11,449605,Interface/WorldMap/TheDeadmines/TheDeadmines2_11.blp,44876
+36,Deadmines,2,Ironclad Cove,,12,449606,Interface/WorldMap/TheDeadmines/TheDeadmines2_12.blp,44876
+43,Wailing Caverns,1,,,1,448454,Interface/WorldMap/WailingCaverns/WailingCaverns1_1.blp,44876
+43,Wailing Caverns,1,,,2,448458,Interface/WorldMap/WailingCaverns/WailingCaverns1_2.blp,44876
+43,Wailing Caverns,1,,,3,448459,Interface/WorldMap/WailingCaverns/WailingCaverns1_3.blp,44876
+43,Wailing Caverns,1,,,4,448460,Interface/WorldMap/WailingCaverns/WailingCaverns1_4.blp,44876
+43,Wailing Caverns,1,,,5,448461,Interface/WorldMap/WailingCaverns/WailingCaverns1_5.blp,44876
+43,Wailing Caverns,1,,,6,448462,Interface/WorldMap/WailingCaverns/WailingCaverns1_6.blp,44876
+43,Wailing Caverns,1,,,7,448463,Interface/WorldMap/WailingCaverns/WailingCaverns1_7.blp,44876
+43,Wailing Caverns,1,,,8,448464,Interface/WorldMap/WailingCaverns/WailingCaverns1_8.blp,44876
+43,Wailing Caverns,1,,,9,448465,Interface/WorldMap/WailingCaverns/WailingCaverns1_9.blp,44876
+43,Wailing Caverns,1,,,10,448455,Interface/WorldMap/WailingCaverns/WailingCaverns1_10.blp,44876
+43,Wailing Caverns,1,,,11,448456,Interface/WorldMap/WailingCaverns/WailingCaverns1_11.blp,44876
+43,Wailing Caverns,1,,,12,448457,Interface/WorldMap/WailingCaverns/WailingCaverns1_12.blp,44876
+47,Razorfen Kraul,1,,,1,448106,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_1.blp,44876
+47,Razorfen Kraul,1,,,2,448110,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_2.blp,44876
+47,Razorfen Kraul,1,,,3,448111,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_3.blp,44876
+47,Razorfen Kraul,1,,,4,448112,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_4.blp,44876
+47,Razorfen Kraul,1,,,5,448113,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_5.blp,44876
+47,Razorfen Kraul,1,,,6,448114,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_6.blp,44876
+47,Razorfen Kraul,1,,,7,448115,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_7.blp,44876
+47,Razorfen Kraul,1,,,8,448116,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_8.blp,44876
+47,Razorfen Kraul,1,,,9,448117,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_9.blp,44876
+47,Razorfen Kraul,1,,,10,448107,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_10.blp,44876
+47,Razorfen Kraul,1,,,11,448108,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_11.blp,44876
+47,Razorfen Kraul,1,,,12,448109,Interface/WorldMap/RazorfenKraul/RazorfenKraul1_12.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,1,447578,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_1.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,2,447582,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_2.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,3,447583,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_3.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,4,447584,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_4.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,5,447585,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_5.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,6,447586,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_6.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,7,447587,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_7.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,8,447588,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_8.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,9,447589,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_9.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,10,447579,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_10.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,11,447580,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_11.blp,44876
+48,Blackfathom Deeps,1,The Pool of Ask'Ar,,12,447581,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps1_12.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,1,447590,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_1.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,2,447594,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_2.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,3,447595,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_3.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,4,447596,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_4.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,5,447597,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_5.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,6,447598,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_6.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,7,447599,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_7.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,8,447600,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_8.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,9,447601,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_9.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,10,447591,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_10.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,11,447592,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_11.blp,44876
+48,Blackfathom Deeps,2,Moonshrine Sanctum,,12,447593,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps2_12.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,1,447602,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_1.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,2,447606,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_2.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,3,447607,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_3.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,4,447608,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_4.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,5,447609,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_5.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,6,447610,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_6.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,7,447611,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_7.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,8,447612,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_8.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,9,447613,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_9.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,10,447603,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_10.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,11,447604,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_11.blp,44876
+48,Blackfathom Deeps,3,The Forgotten Pool,,12,447605,Interface/WorldMap/BlackFathomDeeps/BlackFathomDeeps3_12.blp,44876
+70,Uldaman,1,Hall of the Keepers,,1,448430,Interface/WorldMap/Uldaman/Uldaman1_1.blp,44876
+70,Uldaman,1,Hall of the Keepers,,2,448434,Interface/WorldMap/Uldaman/Uldaman1_2.blp,44876
+70,Uldaman,1,Hall of the Keepers,,3,448435,Interface/WorldMap/Uldaman/Uldaman1_3.blp,44876
+70,Uldaman,1,Hall of the Keepers,,4,448436,Interface/WorldMap/Uldaman/Uldaman1_4.blp,44876
+70,Uldaman,1,Hall of the Keepers,,5,448437,Interface/WorldMap/Uldaman/Uldaman1_5.blp,44876
+70,Uldaman,1,Hall of the Keepers,,6,448438,Interface/WorldMap/Uldaman/Uldaman1_6.blp,44876
+70,Uldaman,1,Hall of the Keepers,,7,448439,Interface/WorldMap/Uldaman/Uldaman1_7.blp,44876
+70,Uldaman,1,Hall of the Keepers,,8,448440,Interface/WorldMap/Uldaman/Uldaman1_8.blp,44876
+70,Uldaman,1,Hall of the Keepers,,9,448441,Interface/WorldMap/Uldaman/Uldaman1_9.blp,44876
+70,Uldaman,1,Hall of the Keepers,,10,448431,Interface/WorldMap/Uldaman/Uldaman1_10.blp,44876
+70,Uldaman,1,Hall of the Keepers,,11,448432,Interface/WorldMap/Uldaman/Uldaman1_11.blp,44876
+70,Uldaman,1,Hall of the Keepers,,12,448433,Interface/WorldMap/Uldaman/Uldaman1_12.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,1,448442,Interface/WorldMap/Uldaman/Uldaman2_1.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,2,448446,Interface/WorldMap/Uldaman/Uldaman2_2.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,3,448447,Interface/WorldMap/Uldaman/Uldaman2_3.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,4,448448,Interface/WorldMap/Uldaman/Uldaman2_4.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,5,448449,Interface/WorldMap/Uldaman/Uldaman2_5.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,6,448450,Interface/WorldMap/Uldaman/Uldaman2_6.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,7,448451,Interface/WorldMap/Uldaman/Uldaman2_7.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,8,448452,Interface/WorldMap/Uldaman/Uldaman2_8.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,9,448453,Interface/WorldMap/Uldaman/Uldaman2_9.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,10,448443,Interface/WorldMap/Uldaman/Uldaman2_10.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,11,448444,Interface/WorldMap/Uldaman/Uldaman2_11.blp,44876
+70,Uldaman,2,Khaz'Goroth's Seat,,12,448445,Interface/WorldMap/Uldaman/Uldaman2_12.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,1,449580,Interface/WorldMap/Gnomeregan/Gnomeregan1_1.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,2,449584,Interface/WorldMap/Gnomeregan/Gnomeregan1_2.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,3,449585,Interface/WorldMap/Gnomeregan/Gnomeregan1_3.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,4,449586,Interface/WorldMap/Gnomeregan/Gnomeregan1_4.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,5,449587,Interface/WorldMap/Gnomeregan/Gnomeregan1_5.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,6,449588,Interface/WorldMap/Gnomeregan/Gnomeregan1_6.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,7,449589,Interface/WorldMap/Gnomeregan/Gnomeregan1_7.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,8,449590,Interface/WorldMap/Gnomeregan/Gnomeregan1_8.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,9,449627,Interface/WorldMap/Gnomeregan/Gnomeregan1_9.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,10,449581,Interface/WorldMap/Gnomeregan/Gnomeregan1_10.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,11,449582,Interface/WorldMap/Gnomeregan/Gnomeregan1_11.blp,44876
+90,Gnomeregan,1,The Hall of Gears,,12,449583,Interface/WorldMap/Gnomeregan/Gnomeregan1_12.blp,44876
+90,Gnomeregan,2,The Dormitory,,1,449628,Interface/WorldMap/Gnomeregan/Gnomeregan2_1.blp,44876
+90,Gnomeregan,2,The Dormitory,,2,449632,Interface/WorldMap/Gnomeregan/Gnomeregan2_2.blp,44876
+90,Gnomeregan,2,The Dormitory,,3,449633,Interface/WorldMap/Gnomeregan/Gnomeregan2_3.blp,44876
+90,Gnomeregan,2,The Dormitory,,4,449634,Interface/WorldMap/Gnomeregan/Gnomeregan2_4.blp,44876
+90,Gnomeregan,2,The Dormitory,,5,449635,Interface/WorldMap/Gnomeregan/Gnomeregan2_5.blp,44876
+90,Gnomeregan,2,The Dormitory,,6,449636,Interface/WorldMap/Gnomeregan/Gnomeregan2_6.blp,44876
+90,Gnomeregan,2,The Dormitory,,7,449637,Interface/WorldMap/Gnomeregan/Gnomeregan2_7.blp,44876
+90,Gnomeregan,2,The Dormitory,,8,449638,Interface/WorldMap/Gnomeregan/Gnomeregan2_8.blp,44876
+90,Gnomeregan,2,The Dormitory,,9,449639,Interface/WorldMap/Gnomeregan/Gnomeregan2_9.blp,44876
+90,Gnomeregan,2,The Dormitory,,10,449629,Interface/WorldMap/Gnomeregan/Gnomeregan2_10.blp,44876
+90,Gnomeregan,2,The Dormitory,,11,449630,Interface/WorldMap/Gnomeregan/Gnomeregan2_11.blp,44876
+90,Gnomeregan,2,The Dormitory,,12,449631,Interface/WorldMap/Gnomeregan/Gnomeregan2_12.blp,44876
+90,Gnomeregan,3,Launch Bay,,1,449640,Interface/WorldMap/Gnomeregan/Gnomeregan3_1.blp,44876
+90,Gnomeregan,3,Launch Bay,,2,449644,Interface/WorldMap/Gnomeregan/Gnomeregan3_2.blp,44876
+90,Gnomeregan,3,Launch Bay,,3,449645,Interface/WorldMap/Gnomeregan/Gnomeregan3_3.blp,44876
+90,Gnomeregan,3,Launch Bay,,4,449646,Interface/WorldMap/Gnomeregan/Gnomeregan3_4.blp,44876
+90,Gnomeregan,3,Launch Bay,,5,449647,Interface/WorldMap/Gnomeregan/Gnomeregan3_5.blp,44876
+90,Gnomeregan,3,Launch Bay,,6,449648,Interface/WorldMap/Gnomeregan/Gnomeregan3_6.blp,44876
+90,Gnomeregan,3,Launch Bay,,7,449649,Interface/WorldMap/Gnomeregan/Gnomeregan3_7.blp,44876
+90,Gnomeregan,3,Launch Bay,,8,449650,Interface/WorldMap/Gnomeregan/Gnomeregan3_8.blp,44876
+90,Gnomeregan,3,Launch Bay,,9,449651,Interface/WorldMap/Gnomeregan/Gnomeregan3_9.blp,44876
+90,Gnomeregan,3,Launch Bay,,10,449641,Interface/WorldMap/Gnomeregan/Gnomeregan3_10.blp,44876
+90,Gnomeregan,3,Launch Bay,,11,449642,Interface/WorldMap/Gnomeregan/Gnomeregan3_11.blp,44876
+90,Gnomeregan,3,Launch Bay,,12,449643,Interface/WorldMap/Gnomeregan/Gnomeregan3_12.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,1,449652,Interface/WorldMap/Gnomeregan/Gnomeregan4_1.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,2,449656,Interface/WorldMap/Gnomeregan/Gnomeregan4_2.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,3,449657,Interface/WorldMap/Gnomeregan/Gnomeregan4_3.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,4,449658,Interface/WorldMap/Gnomeregan/Gnomeregan4_4.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,5,449659,Interface/WorldMap/Gnomeregan/Gnomeregan4_5.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,6,449660,Interface/WorldMap/Gnomeregan/Gnomeregan4_6.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,7,449661,Interface/WorldMap/Gnomeregan/Gnomeregan4_7.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,8,449662,Interface/WorldMap/Gnomeregan/Gnomeregan4_8.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,9,449663,Interface/WorldMap/Gnomeregan/Gnomeregan4_9.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,10,449653,Interface/WorldMap/Gnomeregan/Gnomeregan4_10.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,11,449654,Interface/WorldMap/Gnomeregan/Gnomeregan4_11.blp,44876
+90,Gnomeregan,4,Tinkers' Court,,12,449655,Interface/WorldMap/Gnomeregan/Gnomeregan4_12.blp,44876
+109,Sunken Temple,1,,,1,452514,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_1.blp,44876
+109,Sunken Temple,1,,,2,452518,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_2.blp,44876
+109,Sunken Temple,1,,,3,452519,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_3.blp,44876
+109,Sunken Temple,1,,,4,452520,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_4.blp,44876
+109,Sunken Temple,1,,,5,452521,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_5.blp,44876
+109,Sunken Temple,1,,,6,452522,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_6.blp,44876
+109,Sunken Temple,1,,,7,452523,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_7.blp,44876
+109,Sunken Temple,1,,,8,452524,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_8.blp,44876
+109,Sunken Temple,1,,,9,452525,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_9.blp,44876
+109,Sunken Temple,1,,,10,452515,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_10.blp,44876
+109,Sunken Temple,1,,,11,452516,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_11.blp,44876
+109,Sunken Temple,1,,,12,452517,Interface/WorldMap/TheTempleofAtalhakkar/TheTempleofAtalhakkar1_12.blp,44876
+129,Razorfen Downs,1,,,1,448094,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_1.blp,44876
+129,Razorfen Downs,1,,,2,448098,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_2.blp,44876
+129,Razorfen Downs,1,,,3,448099,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_3.blp,44876
+129,Razorfen Downs,1,,,4,448100,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_4.blp,44876
+129,Razorfen Downs,1,,,5,448101,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_5.blp,44876
+129,Razorfen Downs,1,,,6,448102,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_6.blp,44876
+129,Razorfen Downs,1,,,7,448103,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_7.blp,44876
+129,Razorfen Downs,1,,,8,448104,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_8.blp,44876
+129,Razorfen Downs,1,,,9,448105,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_9.blp,44876
+129,Razorfen Downs,1,,,10,448095,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_10.blp,44876
+129,Razorfen Downs,1,,,11,448096,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_11.blp,44876
+129,Razorfen Downs,1,,,12,448097,Interface/WorldMap/RazorfenDowns/RazorfenDowns1_12.blp,44876
+189,Scarlet Monastery,1,Graveyard,,1,449760,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_1.blp,44876
+189,Scarlet Monastery,1,Graveyard,,2,449764,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_2.blp,44876
+189,Scarlet Monastery,1,Graveyard,,3,449765,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_3.blp,44876
+189,Scarlet Monastery,1,Graveyard,,4,449766,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_4.blp,44876
+189,Scarlet Monastery,1,Graveyard,,5,449767,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_5.blp,44876
+189,Scarlet Monastery,1,Graveyard,,6,449768,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_6.blp,44876
+189,Scarlet Monastery,1,Graveyard,,7,449769,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_7.blp,44876
+189,Scarlet Monastery,1,Graveyard,,8,449770,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_8.blp,44876
+189,Scarlet Monastery,1,Graveyard,,9,449771,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_9.blp,44876
+189,Scarlet Monastery,1,Graveyard,,10,449761,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_10.blp,44876
+189,Scarlet Monastery,1,Graveyard,,11,449762,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_11.blp,44876
+189,Scarlet Monastery,1,Graveyard,,12,449763,Interface/WorldMap/ScarletMonastery/ScarletMonastery1_12.blp,44876
+189,Scarlet Monastery,2,Library,,1,449772,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_1.blp,44876
+189,Scarlet Monastery,2,Library,,2,449776,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_2.blp,44876
+189,Scarlet Monastery,2,Library,,3,449777,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_3.blp,44876
+189,Scarlet Monastery,2,Library,,4,449778,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_4.blp,44876
+189,Scarlet Monastery,2,Library,,5,449779,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_5.blp,44876
+189,Scarlet Monastery,2,Library,,6,449780,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_6.blp,44876
+189,Scarlet Monastery,2,Library,,7,449781,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_7.blp,44876
+189,Scarlet Monastery,2,Library,,8,449782,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_8.blp,44876
+189,Scarlet Monastery,2,Library,,9,449783,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_9.blp,44876
+189,Scarlet Monastery,2,Library,,10,449773,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_10.blp,44876
+189,Scarlet Monastery,2,Library,,11,449774,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_11.blp,44876
+189,Scarlet Monastery,2,Library,,12,449775,Interface/WorldMap/ScarletMonastery/ScarletMonastery2_12.blp,44876
+189,Scarlet Monastery,3,Armory,,1,449784,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_1.blp,44876
+189,Scarlet Monastery,3,Armory,,2,449788,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_2.blp,44876
+189,Scarlet Monastery,3,Armory,,3,449789,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_3.blp,44876
+189,Scarlet Monastery,3,Armory,,4,449790,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_4.blp,44876
+189,Scarlet Monastery,3,Armory,,5,449791,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_5.blp,44876
+189,Scarlet Monastery,3,Armory,,6,449792,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_6.blp,44876
+189,Scarlet Monastery,3,Armory,,7,449793,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_7.blp,44876
+189,Scarlet Monastery,3,Armory,,8,449794,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_8.blp,44876
+189,Scarlet Monastery,3,Armory,,9,449795,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_9.blp,44876
+189,Scarlet Monastery,3,Armory,,10,449785,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_10.blp,44876
+189,Scarlet Monastery,3,Armory,,11,449786,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_11.blp,44876
+189,Scarlet Monastery,3,Armory,,12,449787,Interface/WorldMap/ScarletMonastery/ScarletMonastery3_12.blp,44876
+189,Scarlet Monastery,4,Cathedral,,1,449796,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_1.blp,44876
+189,Scarlet Monastery,4,Cathedral,,2,449800,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_2.blp,44876
+189,Scarlet Monastery,4,Cathedral,,3,449801,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_3.blp,44876
+189,Scarlet Monastery,4,Cathedral,,4,449802,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_4.blp,44876
+189,Scarlet Monastery,4,Cathedral,,5,449803,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_5.blp,44876
+189,Scarlet Monastery,4,Cathedral,,6,449804,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_6.blp,44876
+189,Scarlet Monastery,4,Cathedral,,7,449805,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_7.blp,44876
+189,Scarlet Monastery,4,Cathedral,,8,449806,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_8.blp,44876
+189,Scarlet Monastery,4,Cathedral,,9,449807,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_9.blp,44876
+189,Scarlet Monastery,4,Cathedral,,10,449797,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_10.blp,44876
+189,Scarlet Monastery,4,Cathedral,,11,449798,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_11.blp,44876
+189,Scarlet Monastery,4,Cathedral,,12,449799,Interface/WorldMap/ScarletMonastery/ScarletMonastery4_12.blp,44876
+209,Zul'Farrak,1,,,1,449820,Interface/WorldMap/ZulFarrak/ZulFarrak1.blp,44876
+209,Zul'Farrak,1,,,2,449824,Interface/WorldMap/ZulFarrak/ZulFarrak2.blp,44876
+209,Zul'Farrak,1,,,3,449825,Interface/WorldMap/ZulFarrak/ZulFarrak3.blp,44876
+209,Zul'Farrak,1,,,4,449826,Interface/WorldMap/ZulFarrak/ZulFarrak4.blp,44876
+209,Zul'Farrak,1,,,5,449827,Interface/WorldMap/ZulFarrak/ZulFarrak5.blp,44876
+209,Zul'Farrak,1,,,6,449828,Interface/WorldMap/ZulFarrak/ZulFarrak6.blp,44876
+209,Zul'Farrak,1,,,7,449829,Interface/WorldMap/ZulFarrak/ZulFarrak7.blp,44876
+209,Zul'Farrak,1,,,8,449830,Interface/WorldMap/ZulFarrak/ZulFarrak8.blp,44876
+209,Zul'Farrak,1,,,9,449831,Interface/WorldMap/ZulFarrak/ZulFarrak9.blp,44876
+209,Zul'Farrak,1,,,10,449821,Interface/WorldMap/ZulFarrak/ZulFarrak10.blp,44876
+209,Zul'Farrak,1,,,11,449822,Interface/WorldMap/ZulFarrak/ZulFarrak11.blp,44876
+209,Zul'Farrak,1,,,12,449823,Interface/WorldMap/ZulFarrak/ZulFarrak12.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,1,447662,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_1.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,2,447666,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_2.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,3,447667,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_3.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,4,447668,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_4.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,5,447669,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_5.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,6,447670,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_6.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,7,447671,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_7.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,8,447672,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_8.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,9,447673,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_9.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,10,447663,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_10.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,11,447664,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_11.blp,44876
+229,Blackrock Spire,1,Tazz'Alor,Lower Blackrock Spire,12,447665,Interface/WorldMap/BlackrockSpire/BlackrockSpire1_12.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,1,447674,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_1.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,2,447678,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_2.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,3,447679,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_3.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,4,447680,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_4.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,5,447681,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_5.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,6,447682,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_6.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,7,447683,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_7.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,8,447684,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_8.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,9,447685,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_9.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,10,447675,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_10.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,11,447676,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_11.blp,44876
+229,Blackrock Spire,2,Skitterweb Tunnels,Lower Blackrock Spire,12,447677,Interface/WorldMap/BlackrockSpire/BlackrockSpire2_12.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,1,447686,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_1.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,2,447690,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_2.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,3,447691,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_3.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,4,447692,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_4.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,5,447693,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_5.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,6,447694,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_6.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,7,447695,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_7.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,8,447696,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_8.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,9,447697,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_9.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,10,447687,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_10.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,11,447688,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_11.blp,44876
+229,Blackrock Spire,3,Hordemar City,Lower Blackrock Spire,12,447689,Interface/WorldMap/BlackrockSpire/BlackrockSpire3_12.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,1,447698,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_1.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,2,447702,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_2.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,3,447703,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_3.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,4,447704,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_4.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,5,447705,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_5.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,6,447706,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_6.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,7,447707,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_7.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,8,447708,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_8.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,9,447709,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_9.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,10,447699,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_10.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,11,447700,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_11.blp,44876
+229,Blackrock Spire,4,Hall of Blackhand,Lower Blackrock Spire,12,447701,Interface/WorldMap/BlackrockSpire/BlackrockSpire4_12.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,1,447710,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_1.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,2,447714,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_2.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,3,447715,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_3.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,4,447716,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_4.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,5,447717,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_5.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,6,447718,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_6.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,7,447719,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_7.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,8,447720,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_8.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,9,447721,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_9.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,10,447711,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_10.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,11,447712,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_11.blp,44876
+229,Blackrock Spire,5,Halycon's Lair,Lower Blackrock Spire,12,447713,Interface/WorldMap/BlackrockSpire/BlackrockSpire5_12.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,1,447722,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_1.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,2,447726,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_2.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,3,447727,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_3.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,4,447728,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_4.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,5,447729,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_5.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,6,447730,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_6.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,7,447731,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_7.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,8,447732,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_8.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,9,447733,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_9.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,10,447723,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_10.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,11,447724,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_11.blp,44876
+229,Blackrock Spire,6,Chamber of Battle,Lower Blackrock Spire,12,447725,Interface/WorldMap/BlackrockSpire/BlackrockSpire6_12.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,1,447734,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_1.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,2,447738,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_2.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,3,447739,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_3.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,4,447740,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_4.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,5,447741,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_5.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,6,447742,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_6.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,7,447743,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_7.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,8,447744,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_8.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,9,447745,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_9.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,10,447735,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_10.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,11,447736,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_11.blp,44876
+229,Blackrock Spire,7,,Upper Blackrock Spire,12,447737,Interface/WorldMap/BlackrockSpire/BlackrockSpire7_12.blp,44876
+230,Blackrock Depths,1,Detention Block,,1,447638,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_1.blp,44876
+230,Blackrock Depths,1,Detention Block,,2,447642,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_2.blp,44876
+230,Blackrock Depths,1,Detention Block,,3,447643,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_3.blp,44876
+230,Blackrock Depths,1,Detention Block,,4,447644,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_4.blp,44876
+230,Blackrock Depths,1,Detention Block,,5,447645,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_5.blp,44876
+230,Blackrock Depths,1,Detention Block,,6,447646,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_6.blp,44876
+230,Blackrock Depths,1,Detention Block,,7,447647,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_7.blp,44876
+230,Blackrock Depths,1,Detention Block,,8,447648,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_8.blp,44876
+230,Blackrock Depths,1,Detention Block,,9,447649,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_9.blp,44876
+230,Blackrock Depths,1,Detention Block,,10,447639,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_10.blp,44876
+230,Blackrock Depths,1,Detention Block,,11,447640,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_11.blp,44876
+230,Blackrock Depths,1,Detention Block,,12,447641,Interface/WorldMap/BlackrockDepths/BlackrockDepths1_12.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,1,447650,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_1.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,2,447654,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_2.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,3,447655,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_3.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,4,447656,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_4.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,5,447657,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_5.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,6,447658,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_6.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,7,447659,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_7.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,8,447660,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_8.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,9,447661,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_9.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,10,447651,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_10.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,11,447652,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_11.blp,44876
+230,Blackrock Depths,2,Shadowforge City,,12,447653,Interface/WorldMap/BlackrockDepths/BlackrockDepths2_12.blp,44876
+249,Onyxia's Lair,1,,,1,448070,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_1.blp,44876
+249,Onyxia's Lair,1,,,2,448074,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_2.blp,44876
+249,Onyxia's Lair,1,,,3,448075,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_3.blp,44876
+249,Onyxia's Lair,1,,,4,448076,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_4.blp,44876
+249,Onyxia's Lair,1,,,5,448077,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_5.blp,44876
+249,Onyxia's Lair,1,,,6,448078,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_6.blp,44876
+249,Onyxia's Lair,1,,,7,448079,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_7.blp,44876
+249,Onyxia's Lair,1,,,8,448080,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_8.blp,44876
+249,Onyxia's Lair,1,,,9,448081,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_9.blp,44876
+249,Onyxia's Lair,1,,,10,448071,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_10.blp,44876
+249,Onyxia's Lair,1,,,11,448072,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_11.blp,44876
+249,Onyxia's Lair,1,,,12,448073,Interface/WorldMap/OnyxiasLair/OnyxiasLair1_12.blp,44876
+289,Scholomance,1,The Reliquary,,1,448178,Interface/WorldMap/Scholomance/Scholomance1_1.blp,44876
+289,Scholomance,1,The Reliquary,,2,448182,Interface/WorldMap/Scholomance/Scholomance1_2.blp,44876
+289,Scholomance,1,The Reliquary,,3,448183,Interface/WorldMap/Scholomance/Scholomance1_3.blp,44876
+289,Scholomance,1,The Reliquary,,4,448184,Interface/WorldMap/Scholomance/Scholomance1_4.blp,44876
+289,Scholomance,1,The Reliquary,,5,448185,Interface/WorldMap/Scholomance/Scholomance1_5.blp,44876
+289,Scholomance,1,The Reliquary,,6,448186,Interface/WorldMap/Scholomance/Scholomance1_6.blp,44876
+289,Scholomance,1,The Reliquary,,7,448187,Interface/WorldMap/Scholomance/Scholomance1_7.blp,44876
+289,Scholomance,1,The Reliquary,,8,448188,Interface/WorldMap/Scholomance/Scholomance1_8.blp,44876
+289,Scholomance,1,The Reliquary,,9,448189,Interface/WorldMap/Scholomance/Scholomance1_9.blp,44876
+289,Scholomance,1,The Reliquary,,10,448179,Interface/WorldMap/Scholomance/Scholomance1_10.blp,44876
+289,Scholomance,1,The Reliquary,,11,448180,Interface/WorldMap/Scholomance/Scholomance1_11.blp,44876
+289,Scholomance,1,The Reliquary,,12,448181,Interface/WorldMap/Scholomance/Scholomance1_12.blp,44876
+289,Scholomance,2,Chamber of Summoning,,1,448190,Interface/WorldMap/Scholomance/Scholomance2_1.blp,44876
+289,Scholomance,2,Chamber of Summoning,,2,448194,Interface/WorldMap/Scholomance/Scholomance2_2.blp,44876
+289,Scholomance,2,Chamber of Summoning,,3,448195,Interface/WorldMap/Scholomance/Scholomance2_3.blp,44876
+289,Scholomance,2,Chamber of Summoning,,4,448196,Interface/WorldMap/Scholomance/Scholomance2_4.blp,44876
+289,Scholomance,2,Chamber of Summoning,,5,448197,Interface/WorldMap/Scholomance/Scholomance2_5.blp,44876
+289,Scholomance,2,Chamber of Summoning,,6,448198,Interface/WorldMap/Scholomance/Scholomance2_6.blp,44876
+289,Scholomance,2,Chamber of Summoning,,7,448199,Interface/WorldMap/Scholomance/Scholomance2_7.blp,44876
+289,Scholomance,2,Chamber of Summoning,,8,448200,Interface/WorldMap/Scholomance/Scholomance2_8.blp,44876
+289,Scholomance,2,Chamber of Summoning,,9,448201,Interface/WorldMap/Scholomance/Scholomance2_9.blp,44876
+289,Scholomance,2,Chamber of Summoning,,10,448191,Interface/WorldMap/Scholomance/Scholomance2_10.blp,44876
+289,Scholomance,2,Chamber of Summoning,,11,448192,Interface/WorldMap/Scholomance/Scholomance2_11.blp,44876
+289,Scholomance,2,Chamber of Summoning,,12,448193,Interface/WorldMap/Scholomance/Scholomance2_12.blp,44876
+289,Scholomance,3,The Upper Study,,1,448202,Interface/WorldMap/Scholomance/Scholomance3_1.blp,44876
+289,Scholomance,3,The Upper Study,,2,448206,Interface/WorldMap/Scholomance/Scholomance3_2.blp,44876
+289,Scholomance,3,The Upper Study,,3,448207,Interface/WorldMap/Scholomance/Scholomance3_3.blp,44876
+289,Scholomance,3,The Upper Study,,4,448208,Interface/WorldMap/Scholomance/Scholomance3_4.blp,44876
+289,Scholomance,3,The Upper Study,,5,448209,Interface/WorldMap/Scholomance/Scholomance3_5.blp,44876
+289,Scholomance,3,The Upper Study,,6,448210,Interface/WorldMap/Scholomance/Scholomance3_6.blp,44876
+289,Scholomance,3,The Upper Study,,7,448211,Interface/WorldMap/Scholomance/Scholomance3_7.blp,44876
+289,Scholomance,3,The Upper Study,,8,448212,Interface/WorldMap/Scholomance/Scholomance3_8.blp,44876
+289,Scholomance,3,The Upper Study,,9,448213,Interface/WorldMap/Scholomance/Scholomance3_9.blp,44876
+289,Scholomance,3,The Upper Study,,10,448203,Interface/WorldMap/Scholomance/Scholomance3_10.blp,44876
+289,Scholomance,3,The Upper Study,,11,448204,Interface/WorldMap/Scholomance/Scholomance3_11.blp,44876
+289,Scholomance,3,The Upper Study,,12,448205,Interface/WorldMap/Scholomance/Scholomance3_12.blp,44876
+289,Scholomance,4,Headmaster's Study,,1,448214,Interface/WorldMap/Scholomance/Scholomance4_1.blp,44876
+289,Scholomance,4,Headmaster's Study,,2,448218,Interface/WorldMap/Scholomance/Scholomance4_2.blp,44876
+289,Scholomance,4,Headmaster's Study,,3,448219,Interface/WorldMap/Scholomance/Scholomance4_3.blp,44876
+289,Scholomance,4,Headmaster's Study,,4,448220,Interface/WorldMap/Scholomance/Scholomance4_4.blp,44876
+289,Scholomance,4,Headmaster's Study,,5,448221,Interface/WorldMap/Scholomance/Scholomance4_5.blp,44876
+289,Scholomance,4,Headmaster's Study,,6,448222,Interface/WorldMap/Scholomance/Scholomance4_6.blp,44876
+289,Scholomance,4,Headmaster's Study,,7,448223,Interface/WorldMap/Scholomance/Scholomance4_7.blp,44876
+289,Scholomance,4,Headmaster's Study,,8,448224,Interface/WorldMap/Scholomance/Scholomance4_8.blp,44876
+289,Scholomance,4,Headmaster's Study,,9,448225,Interface/WorldMap/Scholomance/Scholomance4_9.blp,44876
+289,Scholomance,4,Headmaster's Study,,10,448215,Interface/WorldMap/Scholomance/Scholomance4_10.blp,44876
+289,Scholomance,4,Headmaster's Study,,11,448216,Interface/WorldMap/Scholomance/Scholomance4_11.blp,44876
+289,Scholomance,4,Headmaster's Study,,12,448217,Interface/WorldMap/Scholomance/Scholomance4_12.blp,44876
+309,Zul'Gurub,1,,,1,515607,Interface/WorldMap/ZulGurub/ZulGurub1.blp,44876
+309,Zul'Gurub,1,,,2,515611,Interface/WorldMap/ZulGurub/ZulGurub2.blp,44876
+309,Zul'Gurub,1,,,3,515612,Interface/WorldMap/ZulGurub/ZulGurub3.blp,44876
+309,Zul'Gurub,1,,,4,515613,Interface/WorldMap/ZulGurub/ZulGurub4.blp,44876
+309,Zul'Gurub,1,,,5,515614,Interface/WorldMap/ZulGurub/ZulGurub5.blp,44876
+309,Zul'Gurub,1,,,6,515615,Interface/WorldMap/ZulGurub/ZulGurub6.blp,44876
+309,Zul'Gurub,1,,,7,515616,Interface/WorldMap/ZulGurub/ZulGurub7.blp,44876
+309,Zul'Gurub,1,,,8,515617,Interface/WorldMap/ZulGurub/ZulGurub8.blp,44876
+309,Zul'Gurub,1,,,9,515618,Interface/WorldMap/ZulGurub/ZulGurub9.blp,44876
+309,Zul'Gurub,1,,,10,515608,Interface/WorldMap/ZulGurub/ZulGurub10.blp,44876
+309,Zul'Gurub,1,,,11,515609,Interface/WorldMap/ZulGurub/ZulGurub11.blp,44876
+309,Zul'Gurub,1,,,12,515610,Interface/WorldMap/ZulGurub/ZulGurub12.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,1,448322,Interface/WorldMap/Stratholme/Stratholme1_1.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,2,448326,Interface/WorldMap/Stratholme/Stratholme1_2.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,3,448327,Interface/WorldMap/Stratholme/Stratholme1_3.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,4,448328,Interface/WorldMap/Stratholme/Stratholme1_4.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,5,448329,Interface/WorldMap/Stratholme/Stratholme1_5.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,6,448330,Interface/WorldMap/Stratholme/Stratholme1_6.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,7,448331,Interface/WorldMap/Stratholme/Stratholme1_7.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,8,448332,Interface/WorldMap/Stratholme/Stratholme1_8.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,9,448333,Interface/WorldMap/Stratholme/Stratholme1_9.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,10,448323,Interface/WorldMap/Stratholme/Stratholme1_10.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,11,448324,Interface/WorldMap/Stratholme/Stratholme1_11.blp,44876
+329,Stratholme,1,Crusader's Square,Stratholme - Main Gate,12,448325,Interface/WorldMap/Stratholme/Stratholme1_12.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,1,448334,Interface/WorldMap/Stratholme/Stratholme2_1.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,2,448338,Interface/WorldMap/Stratholme/Stratholme2_2.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,3,448339,Interface/WorldMap/Stratholme/Stratholme2_3.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,4,448340,Interface/WorldMap/Stratholme/Stratholme2_4.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,5,448341,Interface/WorldMap/Stratholme/Stratholme2_5.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,6,448342,Interface/WorldMap/Stratholme/Stratholme2_6.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,7,448343,Interface/WorldMap/Stratholme/Stratholme2_7.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,8,448344,Interface/WorldMap/Stratholme/Stratholme2_8.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,9,448345,Interface/WorldMap/Stratholme/Stratholme2_9.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,10,448335,Interface/WorldMap/Stratholme/Stratholme2_10.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,11,448336,Interface/WorldMap/Stratholme/Stratholme2_11.blp,44876
+329,Stratholme,2,The Gauntlet,Stratholme - Service Entrance,12,448337,Interface/WorldMap/Stratholme/Stratholme2_12.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,1,449676,Interface/WorldMap/Maraudon/Maraudon1_1.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,2,449680,Interface/WorldMap/Maraudon/Maraudon1_2.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,3,449681,Interface/WorldMap/Maraudon/Maraudon1_3.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,4,449682,Interface/WorldMap/Maraudon/Maraudon1_4.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,5,449683,Interface/WorldMap/Maraudon/Maraudon1_5.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,6,449684,Interface/WorldMap/Maraudon/Maraudon1_6.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,7,449685,Interface/WorldMap/Maraudon/Maraudon1_7.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,8,449686,Interface/WorldMap/Maraudon/Maraudon1_8.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,9,449687,Interface/WorldMap/Maraudon/Maraudon1_9.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,10,449677,Interface/WorldMap/Maraudon/Maraudon1_10.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,11,449678,Interface/WorldMap/Maraudon/Maraudon1_11.blp,44876
+349,Maraudon,1,Caverns of Maraudon,,12,449679,Interface/WorldMap/Maraudon/Maraudon1_12.blp,44876
+349,Maraudon,2,Zaetar's Grave,,1,449688,Interface/WorldMap/Maraudon/Maraudon2_1.blp,44876
+349,Maraudon,2,Zaetar's Grave,,2,449692,Interface/WorldMap/Maraudon/Maraudon2_2.blp,44876
+349,Maraudon,2,Zaetar's Grave,,3,449693,Interface/WorldMap/Maraudon/Maraudon2_3.blp,44876
+349,Maraudon,2,Zaetar's Grave,,4,449694,Interface/WorldMap/Maraudon/Maraudon2_4.blp,44876
+349,Maraudon,2,Zaetar's Grave,,5,449695,Interface/WorldMap/Maraudon/Maraudon2_5.blp,44876
+349,Maraudon,2,Zaetar's Grave,,6,449696,Interface/WorldMap/Maraudon/Maraudon2_6.blp,44876
+349,Maraudon,2,Zaetar's Grave,,7,449697,Interface/WorldMap/Maraudon/Maraudon2_7.blp,44876
+349,Maraudon,2,Zaetar's Grave,,8,449698,Interface/WorldMap/Maraudon/Maraudon2_8.blp,44876
+349,Maraudon,2,Zaetar's Grave,,9,449699,Interface/WorldMap/Maraudon/Maraudon2_9.blp,44876
+349,Maraudon,2,Zaetar's Grave,,10,449689,Interface/WorldMap/Maraudon/Maraudon2_10.blp,44876
+349,Maraudon,2,Zaetar's Grave,,11,449690,Interface/WorldMap/Maraudon/Maraudon2_11.blp,44876
+349,Maraudon,2,Zaetar's Grave,,12,449691,Interface/WorldMap/Maraudon/Maraudon2_12.blp,44876
+389,Ragefire Chasm,1,,,1,449736,Interface/WorldMap/Ragefire/Ragefire1_1.blp,44876
+389,Ragefire Chasm,1,,,2,449740,Interface/WorldMap/Ragefire/Ragefire1_2.blp,44876
+389,Ragefire Chasm,1,,,3,449741,Interface/WorldMap/Ragefire/Ragefire1_3.blp,44876
+389,Ragefire Chasm,1,,,4,449742,Interface/WorldMap/Ragefire/Ragefire1_4.blp,44876
+389,Ragefire Chasm,1,,,5,449743,Interface/WorldMap/Ragefire/Ragefire1_5.blp,44876
+389,Ragefire Chasm,1,,,6,449744,Interface/WorldMap/Ragefire/Ragefire1_6.blp,44876
+389,Ragefire Chasm,1,,,7,449745,Interface/WorldMap/Ragefire/Ragefire1_7.blp,44876
+389,Ragefire Chasm,1,,,8,449746,Interface/WorldMap/Ragefire/Ragefire1_8.blp,44876
+389,Ragefire Chasm,1,,,9,449747,Interface/WorldMap/Ragefire/Ragefire1_9.blp,44876
+389,Ragefire Chasm,1,,,10,449737,Interface/WorldMap/Ragefire/Ragefire1_10.blp,44876
+389,Ragefire Chasm,1,,,11,449738,Interface/WorldMap/Ragefire/Ragefire1_11.blp,44876
+389,Ragefire Chasm,1,,,12,449739,Interface/WorldMap/Ragefire/Ragefire1_12.blp,44876
+409,Molten Core,1,,,1,448058,Interface/WorldMap/MoltenCore/MoltenCore1_1.blp,44876
+409,Molten Core,1,,,2,448062,Interface/WorldMap/MoltenCore/MoltenCore1_2.blp,44876
+409,Molten Core,1,,,3,448063,Interface/WorldMap/MoltenCore/MoltenCore1_3.blp,44876
+409,Molten Core,1,,,4,448064,Interface/WorldMap/MoltenCore/MoltenCore1_4.blp,44876
+409,Molten Core,1,,,5,448065,Interface/WorldMap/MoltenCore/MoltenCore1_5.blp,44876
+409,Molten Core,1,,,6,448066,Interface/WorldMap/MoltenCore/MoltenCore1_6.blp,44876
+409,Molten Core,1,,,7,448067,Interface/WorldMap/MoltenCore/MoltenCore1_7.blp,44876
+409,Molten Core,1,,,8,448068,Interface/WorldMap/MoltenCore/MoltenCore1_8.blp,44876
+409,Molten Core,1,,,9,448069,Interface/WorldMap/MoltenCore/MoltenCore1_9.blp,44876
+409,Molten Core,1,,,10,448059,Interface/WorldMap/MoltenCore/MoltenCore1_10.blp,44876
+409,Molten Core,1,,,11,448060,Interface/WorldMap/MoltenCore/MoltenCore1_11.blp,44876
+409,Molten Core,1,,,12,448061,Interface/WorldMap/MoltenCore/MoltenCore1_12.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,1,449508,Interface/WorldMap/DireMaul/DireMaul1_1.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,2,449512,Interface/WorldMap/DireMaul/DireMaul1_2.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,3,449513,Interface/WorldMap/DireMaul/DireMaul1_3.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,4,449514,Interface/WorldMap/DireMaul/DireMaul1_4.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,5,449515,Interface/WorldMap/DireMaul/DireMaul1_5.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,6,449516,Interface/WorldMap/DireMaul/DireMaul1_6.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,7,449517,Interface/WorldMap/DireMaul/DireMaul1_7.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,8,449518,Interface/WorldMap/DireMaul/DireMaul1_8.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,9,449519,Interface/WorldMap/DireMaul/DireMaul1_9.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,10,449509,Interface/WorldMap/DireMaul/DireMaul1_10.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,11,449510,Interface/WorldMap/DireMaul/DireMaul1_11.blp,44876
+429,Dire Maul,1,Gordok Commons,Dire Maul - North,12,449511,Interface/WorldMap/DireMaul/DireMaul1_12.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,1,449520,Interface/WorldMap/DireMaul/DireMaul2_1.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,2,449524,Interface/WorldMap/DireMaul/DireMaul2_2.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,3,449525,Interface/WorldMap/DireMaul/DireMaul2_3.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,4,449526,Interface/WorldMap/DireMaul/DireMaul2_4.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,5,449527,Interface/WorldMap/DireMaul/DireMaul2_5.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,6,449528,Interface/WorldMap/DireMaul/DireMaul2_6.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,7,449529,Interface/WorldMap/DireMaul/DireMaul2_7.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,8,449530,Interface/WorldMap/DireMaul/DireMaul2_8.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,9,449531,Interface/WorldMap/DireMaul/DireMaul2_9.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,10,449521,Interface/WorldMap/DireMaul/DireMaul2_10.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,11,449522,Interface/WorldMap/DireMaul/DireMaul2_11.blp,44876
+429,Dire Maul,2,Capital Gardens,Dire Maul - West,12,449523,Interface/WorldMap/DireMaul/DireMaul2_12.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,1,449532,Interface/WorldMap/DireMaul/DireMaul3_1.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,2,449536,Interface/WorldMap/DireMaul/DireMaul3_2.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,3,449537,Interface/WorldMap/DireMaul/DireMaul3_3.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,4,449538,Interface/WorldMap/DireMaul/DireMaul3_4.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,5,449539,Interface/WorldMap/DireMaul/DireMaul3_5.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,6,449540,Interface/WorldMap/DireMaul/DireMaul3_6.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,7,449541,Interface/WorldMap/DireMaul/DireMaul3_7.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,8,449542,Interface/WorldMap/DireMaul/DireMaul3_8.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,9,449543,Interface/WorldMap/DireMaul/DireMaul3_9.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,10,449533,Interface/WorldMap/DireMaul/DireMaul3_10.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,11,449534,Interface/WorldMap/DireMaul/DireMaul3_11.blp,44876
+429,Dire Maul,3,Court of the Highborne,Dire Maul - West,12,449535,Interface/WorldMap/DireMaul/DireMaul3_12.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,1,449544,Interface/WorldMap/DireMaul/DireMaul4_1.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,2,449548,Interface/WorldMap/DireMaul/DireMaul4_2.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,3,449549,Interface/WorldMap/DireMaul/DireMaul4_3.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,4,449550,Interface/WorldMap/DireMaul/DireMaul4_4.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,5,449551,Interface/WorldMap/DireMaul/DireMaul4_5.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,6,449552,Interface/WorldMap/DireMaul/DireMaul4_6.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,7,449553,Interface/WorldMap/DireMaul/DireMaul4_7.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,8,449554,Interface/WorldMap/DireMaul/DireMaul4_8.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,9,449555,Interface/WorldMap/DireMaul/DireMaul4_9.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,10,449545,Interface/WorldMap/DireMaul/DireMaul4_10.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,11,449546,Interface/WorldMap/DireMaul/DireMaul4_11.blp,44876
+429,Dire Maul,4,Prison of Immol'Thar,Dire Maul - West,12,449547,Interface/WorldMap/DireMaul/DireMaul4_12.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,1,449556,Interface/WorldMap/DireMaul/DireMaul5_1.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,2,449560,Interface/WorldMap/DireMaul/DireMaul5_2.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,3,449561,Interface/WorldMap/DireMaul/DireMaul5_3.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,4,449562,Interface/WorldMap/DireMaul/DireMaul5_4.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,5,449563,Interface/WorldMap/DireMaul/DireMaul5_5.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,6,449564,Interface/WorldMap/DireMaul/DireMaul5_6.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,7,449565,Interface/WorldMap/DireMaul/DireMaul5_7.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,8,449566,Interface/WorldMap/DireMaul/DireMaul5_8.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,9,449567,Interface/WorldMap/DireMaul/DireMaul5_9.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,10,449557,Interface/WorldMap/DireMaul/DireMaul5_10.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,11,449558,Interface/WorldMap/DireMaul/DireMaul5_11.blp,44876
+429,Dire Maul,5,Warpwood Quarter,Dire Maul - East,12,449559,Interface/WorldMap/DireMaul/DireMaul5_12.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,1,449568,Interface/WorldMap/DireMaul/DireMaul6_1.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,2,449572,Interface/WorldMap/DireMaul/DireMaul6_2.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,3,449573,Interface/WorldMap/DireMaul/DireMaul6_3.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,4,449574,Interface/WorldMap/DireMaul/DireMaul6_4.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,5,449575,Interface/WorldMap/DireMaul/DireMaul6_5.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,6,449576,Interface/WorldMap/DireMaul/DireMaul6_6.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,7,449577,Interface/WorldMap/DireMaul/DireMaul6_7.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,8,449578,Interface/WorldMap/DireMaul/DireMaul6_8.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,9,449579,Interface/WorldMap/DireMaul/DireMaul6_9.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,10,449569,Interface/WorldMap/DireMaul/DireMaul6_10.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,11,449570,Interface/WorldMap/DireMaul/DireMaul6_11.blp,44876
+429,Dire Maul,6,The Shrine of Eldretharr,Dire Maul - East,12,449571,Interface/WorldMap/DireMaul/DireMaul6_12.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,1,447770,Interface/WorldMap/BlackwingLair/BlackwingLair1_1.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,2,447774,Interface/WorldMap/BlackwingLair/BlackwingLair1_2.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,3,447775,Interface/WorldMap/BlackwingLair/BlackwingLair1_3.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,4,447776,Interface/WorldMap/BlackwingLair/BlackwingLair1_4.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,5,447777,Interface/WorldMap/BlackwingLair/BlackwingLair1_5.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,6,447778,Interface/WorldMap/BlackwingLair/BlackwingLair1_6.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,7,447779,Interface/WorldMap/BlackwingLair/BlackwingLair1_7.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,8,447780,Interface/WorldMap/BlackwingLair/BlackwingLair1_8.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,9,447781,Interface/WorldMap/BlackwingLair/BlackwingLair1_9.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,10,447771,Interface/WorldMap/BlackwingLair/BlackwingLair1_10.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,11,447772,Interface/WorldMap/BlackwingLair/BlackwingLair1_11.blp,44876
+469,Blackwing Lair,1,Dragonmaw Garrison,,12,447773,Interface/WorldMap/BlackwingLair/BlackwingLair1_12.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,1,447782,Interface/WorldMap/BlackwingLair/BlackwingLair2_1.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,2,447786,Interface/WorldMap/BlackwingLair/BlackwingLair2_2.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,3,447787,Interface/WorldMap/BlackwingLair/BlackwingLair2_3.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,4,447788,Interface/WorldMap/BlackwingLair/BlackwingLair2_4.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,5,447789,Interface/WorldMap/BlackwingLair/BlackwingLair2_5.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,6,447790,Interface/WorldMap/BlackwingLair/BlackwingLair2_6.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,7,447791,Interface/WorldMap/BlackwingLair/BlackwingLair2_7.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,8,447792,Interface/WorldMap/BlackwingLair/BlackwingLair2_8.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,9,447793,Interface/WorldMap/BlackwingLair/BlackwingLair2_9.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,10,447783,Interface/WorldMap/BlackwingLair/BlackwingLair2_10.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,11,447784,Interface/WorldMap/BlackwingLair/BlackwingLair2_11.blp,44876
+469,Blackwing Lair,2,Halls of Strife,,12,447785,Interface/WorldMap/BlackwingLair/BlackwingLair2_12.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,1,447794,Interface/WorldMap/BlackwingLair/BlackwingLair3_1.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,2,447798,Interface/WorldMap/BlackwingLair/BlackwingLair3_2.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,3,447799,Interface/WorldMap/BlackwingLair/BlackwingLair3_3.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,4,447800,Interface/WorldMap/BlackwingLair/BlackwingLair3_4.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,5,447801,Interface/WorldMap/BlackwingLair/BlackwingLair3_5.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,6,447802,Interface/WorldMap/BlackwingLair/BlackwingLair3_6.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,7,447803,Interface/WorldMap/BlackwingLair/BlackwingLair3_7.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,8,447804,Interface/WorldMap/BlackwingLair/BlackwingLair3_8.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,9,447805,Interface/WorldMap/BlackwingLair/BlackwingLair3_9.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,10,447795,Interface/WorldMap/BlackwingLair/BlackwingLair3_10.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,11,447796,Interface/WorldMap/BlackwingLair/BlackwingLair3_11.blp,44876
+469,Blackwing Lair,3,Crimson Laboratories,,12,447797,Interface/WorldMap/BlackwingLair/BlackwingLair3_12.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,1,447806,Interface/WorldMap/BlackwingLair/BlackwingLair4_1.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,2,447810,Interface/WorldMap/BlackwingLair/BlackwingLair4_2.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,3,447811,Interface/WorldMap/BlackwingLair/BlackwingLair4_3.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,4,447812,Interface/WorldMap/BlackwingLair/BlackwingLair4_4.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,5,447813,Interface/WorldMap/BlackwingLair/BlackwingLair4_5.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,6,447814,Interface/WorldMap/BlackwingLair/BlackwingLair4_6.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,7,447815,Interface/WorldMap/BlackwingLair/BlackwingLair4_7.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,8,447816,Interface/WorldMap/BlackwingLair/BlackwingLair4_8.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,9,447817,Interface/WorldMap/BlackwingLair/BlackwingLair4_9.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,10,447807,Interface/WorldMap/BlackwingLair/BlackwingLair4_10.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,11,447808,Interface/WorldMap/BlackwingLair/BlackwingLair4_11.blp,44876
+469,Blackwing Lair,4,Nefarian's Lair,,12,447809,Interface/WorldMap/BlackwingLair/BlackwingLair4_12.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,1,449748,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj1.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,2,449752,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj2.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,3,449753,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj3.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,4,449754,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj4.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,5,449755,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj5.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,6,449756,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj6.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,7,449757,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj7.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,8,449758,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj8.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,9,449759,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj9.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,10,449749,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj10.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,11,449750,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj11.blp,44876
+509,Ruins of Ahn'Qiraj,1,,,12,449751,Interface/WorldMap/RuinsofAhnQiraj/RuinsofAhnQiraj12.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,1,450110,Interface/WorldMap/AhnQiraj/AhnQiraj1_1.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,2,450114,Interface/WorldMap/AhnQiraj/AhnQiraj1_2.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,3,450115,Interface/WorldMap/AhnQiraj/AhnQiraj1_3.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,4,450116,Interface/WorldMap/AhnQiraj/AhnQiraj1_4.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,5,450117,Interface/WorldMap/AhnQiraj/AhnQiraj1_5.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,6,450118,Interface/WorldMap/AhnQiraj/AhnQiraj1_6.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,7,450119,Interface/WorldMap/AhnQiraj/AhnQiraj1_7.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,8,450120,Interface/WorldMap/AhnQiraj/AhnQiraj1_8.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,9,450121,Interface/WorldMap/AhnQiraj/AhnQiraj1_9.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,10,450111,Interface/WorldMap/AhnQiraj/AhnQiraj1_10.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,11,450112,Interface/WorldMap/AhnQiraj/AhnQiraj1_11.blp,44876
+531,Ahn'Qiraj Temple,1,The Hive Undergrounds,,12,450113,Interface/WorldMap/AhnQiraj/AhnQiraj1_12.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,1,450122,Interface/WorldMap/AhnQiraj/AhnQiraj2_1.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,2,450126,Interface/WorldMap/AhnQiraj/AhnQiraj2_2.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,3,450127,Interface/WorldMap/AhnQiraj/AhnQiraj2_3.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,4,450128,Interface/WorldMap/AhnQiraj/AhnQiraj2_4.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,5,450129,Interface/WorldMap/AhnQiraj/AhnQiraj2_5.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,6,450130,Interface/WorldMap/AhnQiraj/AhnQiraj2_6.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,7,450131,Interface/WorldMap/AhnQiraj/AhnQiraj2_7.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,8,450132,Interface/WorldMap/AhnQiraj/AhnQiraj2_8.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,9,450133,Interface/WorldMap/AhnQiraj/AhnQiraj2_9.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,10,450123,Interface/WorldMap/AhnQiraj/AhnQiraj2_10.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,11,450124,Interface/WorldMap/AhnQiraj/AhnQiraj2_11.blp,44876
+531,Ahn'Qiraj Temple,2,The Temple Gates,,12,450125,Interface/WorldMap/AhnQiraj/AhnQiraj2_12.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,1,450134,Interface/WorldMap/AhnQiraj/AhnQiraj3_1.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,2,450138,Interface/WorldMap/AhnQiraj/AhnQiraj3_2.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,3,450139,Interface/WorldMap/AhnQiraj/AhnQiraj3_3.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,4,450140,Interface/WorldMap/AhnQiraj/AhnQiraj3_4.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,5,450141,Interface/WorldMap/AhnQiraj/AhnQiraj3_5.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,6,450142,Interface/WorldMap/AhnQiraj/AhnQiraj3_6.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,7,450143,Interface/WorldMap/AhnQiraj/AhnQiraj3_7.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,8,450144,Interface/WorldMap/AhnQiraj/AhnQiraj3_8.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,9,450145,Interface/WorldMap/AhnQiraj/AhnQiraj3_9.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,10,450135,Interface/WorldMap/AhnQiraj/AhnQiraj3_10.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,11,450136,Interface/WorldMap/AhnQiraj/AhnQiraj3_11.blp,44876
+531,Ahn'Qiraj Temple,3,Vault of C'Thun,,12,450137,Interface/WorldMap/AhnQiraj/AhnQiraj3_12.blp,44876

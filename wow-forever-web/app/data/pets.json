@@ -1,0 +1,1361 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-28",
+  "checkedAt": "2026-10-28",
+  "kind": "pets",
+  "method": "tools/extract-gi-pets.py 抽 upstream/gi-pets.json → 本脚本整形；成句的技能描述（插件里的 dcn/den）一条没取",
+  "pageNote": "宠物家族与它们的技能按无限测试版插件资料整理；哪一只在哪个区域能抓到、要不要特殊条件，这份数据里没有，本站也没进游戏实测。",
+  "sources": [
+   {
+    "key": "gi",
+    "name": "GearInsight 无限版 0.5.6",
+    "kind": "beta 客户端解包转述（插件自述取自客户端 DB2 1.60.1.70532，本站未逐行回查）",
+    "url": "GearInsight_Forever/PetData.lua",
+    "date": "2026-10-28"
+   }
+  ],
+  "counts": {
+   "families": 18,
+   "familiesNew": 1,
+   "familiesIconless": 0,
+   "skills": 22,
+   "skillsNew": 10,
+   "links": 58,
+   "devNames": 0
+  }
+ },
+ "families": [
+  {
+   "id": "petfam-319",
+   "famId": 319,
+   "name": "狐狸",
+   "nameEn": "Fox",
+   "iconKey": "ability_hunter_aspectofthefox",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": true,
+   "skills": [
+    {
+     "id": 1310612,
+     "nameCn": "欺诈者之舞",
+     "nameEn": "Trickster's Dance",
+     "isNew": true
+    },
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-25",
+   "famId": 25,
+   "name": "土狼",
+   "nameEn": "Hyena",
+   "iconKey": "ability_hunter_pet_hyena",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    },
+    {
+     "id": 1265042,
+     "nameCn": "裂筋",
+     "nameEn": "Tendon Rip",
+     "isNew": true
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-21",
+   "famId": 21,
+   "name": "海龟",
+   "nameEn": "Turtle",
+   "iconKey": "ability_hunter_pet_turtle",
+   "iconMissing": false,
+   "dmgMod": -10,
+   "armorMod": 13,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 26064,
+     "nameCn": "甲壳护盾",
+     "nameEn": "Shell Shield",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-4",
+   "famId": 4,
+   "name": "熊",
+   "nameEn": "Bear",
+   "iconKey": "ability_hunter_pet_bear",
+   "iconMissing": false,
+   "dmgMod": -9,
+   "armorMod": 5,
+   "hpMod": 8,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 1264502,
+     "nameCn": "横扫",
+     "nameEn": "Swipe",
+     "isNew": true
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-1",
+   "famId": 1,
+   "name": "狼",
+   "nameEn": "Wolf",
+   "iconKey": "ability_hunter_pet_wolf",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    },
+    {
+     "id": 24597,
+     "nameCn": "狂怒之嚎",
+     "nameEn": "Furious Howl",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-26",
+   "famId": 26,
+   "name": "猛禽",
+   "nameEn": "Bird of Prey",
+   "iconKey": "ability_hunter_pet_owl",
+   "iconMissing": false,
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 23148,
+     "nameCn": "俯冲",
+     "nameEn": "Dive",
+     "isNew": false
+    },
+    {
+     "id": 1265058,
+     "nameCn": "归我了！",
+     "nameEn": "Mine!",
+     "isNew": true
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-9",
+   "famId": 9,
+   "name": "猩猩",
+   "nameEn": "Gorilla",
+   "iconKey": "ability_hunter_pet_gorilla",
+   "iconMissing": false,
+   "dmgMod": 2,
+   "armorMod": 0,
+   "hpMod": 4,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 1264455,
+     "nameCn": "雷霆践踏",
+     "nameEn": "Thunderstomp",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-3",
+   "famId": 3,
+   "name": "蜘蛛",
+   "nameEn": "Spider",
+   "iconKey": "ability_hunter_pet_spider",
+   "iconMissing": false,
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 1265883,
+     "nameCn": "蛛网",
+     "nameEn": "Web",
+     "isNew": true
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-20",
+   "famId": 20,
+   "name": "蝎子",
+   "nameEn": "Scorpid",
+   "iconKey": "ability_hunter_pet_scorpid",
+   "iconMissing": false,
+   "dmgMod": -6,
+   "armorMod": 10,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 24587,
+     "nameCn": "蝎毒",
+     "nameEn": "Scorpid Poison",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-24",
+   "famId": 24,
+   "name": "蝙蝠",
+   "nameEn": "Bat",
+   "iconKey": "ability_hunter_pet_bat",
+   "iconMissing": false,
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23148,
+     "nameCn": "俯冲",
+     "nameEn": "Dive",
+     "isNew": false
+    },
+    {
+     "id": 1264482,
+     "nameCn": "音爆",
+     "nameEn": "Sonic Blast",
+     "isNew": true
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-8",
+   "famId": 8,
+   "name": "螃蟹",
+   "nameEn": "Crab",
+   "iconKey": "ability_hunter_pet_crab",
+   "iconMissing": false,
+   "dmgMod": -5,
+   "armorMod": 13,
+   "hpMod": -4,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 1264742,
+     "nameCn": "钳夹",
+     "nameEn": "Pinch",
+     "isNew": true
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-2",
+   "famId": 2,
+   "name": "豹",
+   "nameEn": "Cat",
+   "iconKey": "ability_hunter_pet_cat",
+   "iconMissing": false,
+   "dmgMod": 10,
+   "armorMod": 0,
+   "hpMod": -2,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    },
+    {
+     "id": 24453,
+     "nameCn": "潜伏",
+     "nameEn": "Prowl",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-11",
+   "famId": 11,
+   "name": "迅猛龙",
+   "nameEn": "Raptor",
+   "iconKey": "ability_hunter_pet_raptor",
+   "iconMissing": false,
+   "dmgMod": 10,
+   "armorMod": 3,
+   "hpMod": -5,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 1265069,
+     "nameCn": "野蛮撕扯",
+     "nameEn": "Savage Rend",
+     "isNew": true
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-5",
+   "famId": 5,
+   "name": "野猪",
+   "nameEn": "Boar",
+   "iconKey": "ability_hunter_pet_boar",
+   "iconMissing": false,
+   "dmgMod": -10,
+   "armorMod": 9,
+   "hpMod": 4,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    },
+    {
+     "id": 27685,
+     "nameCn": "冲锋",
+     "nameEn": "Charge",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-12",
+   "famId": 12,
+   "name": "陆行鸟",
+   "nameEn": "Tallstrider",
+   "iconKey": "ability_hunter_pet_tallstrider",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 0,
+   "hpMod": 5,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    },
+    {
+     "id": 1265904,
+     "nameCn": "尘雾之云",
+     "nameEn": "Dust Cloud",
+     "isNew": true
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-27",
+   "famId": 27,
+   "name": "风蛇",
+   "nameEn": "Wind Serpent",
+   "iconKey": "ability_hunter_pet_windserpent",
+   "iconMissing": false,
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 23148,
+     "nameCn": "俯冲",
+     "nameEn": "Dive",
+     "isNew": false
+    },
+    {
+     "id": 25012,
+     "nameCn": "闪电吐息",
+     "nameEn": "Lightning Breath",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-7",
+   "famId": 7,
+   "name": "食腐鸟",
+   "nameEn": "Carrion Bird",
+   "iconKey": "ability_hunter_pet_vulture",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 3009,
+     "nameCn": "爪击",
+     "nameEn": "Claw",
+     "isNew": false
+    },
+    {
+     "id": 23148,
+     "nameCn": "俯冲",
+     "nameEn": "Dive",
+     "isNew": false
+    },
+    {
+     "id": 24579,
+     "nameCn": "挫志尖啸",
+     "nameEn": "Demoralizing Screech",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petfam-6",
+   "famId": 6,
+   "name": "鳄鱼",
+   "nameEn": "Crocolisk",
+   "iconKey": "ability_hunter_pet_crocolisk",
+   "iconMissing": false,
+   "dmgMod": 0,
+   "armorMod": 10,
+   "hpMod": -5,
+   "isNew": false,
+   "skills": [
+    {
+     "id": 17261,
+     "nameCn": "撕咬",
+     "nameEn": "Bite",
+     "isNew": false
+    },
+    {
+     "id": 1264933,
+     "nameCn": "裂噬",
+     "nameEn": "Dismember",
+     "isNew": true
+    },
+    {
+     "id": 23110,
+     "nameCn": "突进",
+     "nameEn": "Dash",
+     "isNew": false
+    }
+   ],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  }
+ ],
+ "skills": [
+  {
+   "id": "petsk-1265904",
+   "spellId": 1265904,
+   "name": "尘雾之云",
+   "nameEn": "Dust Cloud",
+   "ranks": 5,
+   "cooldownSec": 0,
+   "cost": 10,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "陆行鸟"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1265058",
+   "spellId": 1265058,
+   "name": "归我了！",
+   "nameEn": "Mine!",
+   "ranks": 5,
+   "cooldownSec": 90,
+   "cost": 20,
+   "learnLevel": 10,
+   "maxLevel": 50,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "猛禽"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1264502",
+   "spellId": 1264502,
+   "name": "横扫",
+   "nameEn": "Swipe",
+   "ranks": 5,
+   "cooldownSec": 5,
+   "cost": 20,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "熊"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1310612",
+   "spellId": 1310612,
+   "name": "欺诈者之舞",
+   "nameEn": "Trickster's Dance",
+   "ranks": 1,
+   "cooldownSec": 180,
+   "cost": 10,
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "狐狸"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1265883",
+   "spellId": 1265883,
+   "name": "蛛网",
+   "nameEn": "Web",
+   "ranks": 5,
+   "cooldownSec": 40,
+   "cost": 20,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "蜘蛛"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1264933",
+   "spellId": 1264933,
+   "name": "裂噬",
+   "nameEn": "Dismember",
+   "ranks": 5,
+   "cooldownSec": 15,
+   "cost": 35,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "鳄鱼"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1265042",
+   "spellId": 1265042,
+   "name": "裂筋",
+   "nameEn": "Tendon Rip",
+   "ranks": 5,
+   "cooldownSec": 30,
+   "cost": 25,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "土狼"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1265069",
+   "spellId": 1265069,
+   "name": "野蛮撕扯",
+   "nameEn": "Savage Rend",
+   "ranks": 5,
+   "cooldownSec": 60,
+   "cost": 50,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "迅猛龙"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1264742",
+   "spellId": 1264742,
+   "name": "钳夹",
+   "nameEn": "Pinch",
+   "ranks": 5,
+   "cooldownSec": 30,
+   "cost": 50,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "螃蟹"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1264482",
+   "spellId": 1264482,
+   "name": "音爆",
+   "nameEn": "Sonic Blast",
+   "ranks": 5,
+   "cooldownSec": 60,
+   "cost": 80,
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "isNew": true,
+   "renamed": false,
+   "families": [
+    "蝙蝠"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-23148",
+   "spellId": 23148,
+   "name": "俯冲",
+   "nameEn": "Dive",
+   "ranks": 3,
+   "cooldownSec": 30,
+   "cost": 20,
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "食腐鸟",
+    "蝙蝠",
+    "猛禽",
+    "风蛇"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-27685",
+   "spellId": 27685,
+   "name": "冲锋",
+   "nameEn": "Charge",
+   "ranks": 6,
+   "cooldownSec": 25,
+   "cost": 35,
+   "learnLevel": 1,
+   "maxLevel": 60,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "野猪"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-24579",
+   "spellId": 24579,
+   "name": "挫志尖啸",
+   "nameEn": "Demoralizing Screech",
+   "ranks": 4,
+   "cooldownSec": 10,
+   "cost": 20,
+   "learnLevel": 8,
+   "maxLevel": 56,
+   "isNew": false,
+   "renamed": true,
+   "families": [
+    "食腐鸟"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-17261",
+   "spellId": 17261,
+   "name": "撕咬",
+   "nameEn": "Bite",
+   "ranks": 8,
+   "cooldownSec": 10,
+   "cost": 35,
+   "learnLevel": 1,
+   "maxLevel": 56,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "狼",
+    "豹",
+    "蜘蛛",
+    "熊",
+    "野猪",
+    "鳄鱼",
+    "食腐鸟",
+    "猩猩",
+    "迅猛龙",
+    "陆行鸟",
+    "海龟",
+    "蝙蝠",
+    "土狼",
+    "风蛇",
+    "狐狸"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-24453",
+   "spellId": 24453,
+   "name": "潜伏",
+   "nameEn": "Prowl",
+   "ranks": 3,
+   "cooldownSec": 10,
+   "cost": 40,
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "豹"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-3009",
+   "spellId": 3009,
+   "name": "爪击",
+   "nameEn": "Claw",
+   "ranks": 8,
+   "cooldownSec": 0,
+   "cost": 25,
+   "learnLevel": 1,
+   "maxLevel": 56,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "豹",
+    "熊",
+    "食腐鸟",
+    "螃蟹",
+    "迅猛龙",
+    "蝎子",
+    "猛禽"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-24597",
+   "spellId": 24597,
+   "name": "狂怒之嚎",
+   "nameEn": "Furious Howl",
+   "ranks": 4,
+   "cooldownSec": 30,
+   "cost": 60,
+   "learnLevel": 10,
+   "maxLevel": 56,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "狼"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-26064",
+   "spellId": 26064,
+   "name": "甲壳护盾",
+   "nameEn": "Shell Shield",
+   "ranks": 1,
+   "cooldownSec": 180,
+   "cost": 10,
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "海龟"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-23110",
+   "spellId": 23110,
+   "name": "突进",
+   "nameEn": "Dash",
+   "ranks": 3,
+   "cooldownSec": 30,
+   "cost": 20,
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "狼",
+    "豹",
+    "蜘蛛",
+    "熊",
+    "野猪",
+    "鳄鱼",
+    "螃蟹",
+    "猩猩",
+    "迅猛龙",
+    "陆行鸟",
+    "蝎子",
+    "海龟",
+    "土狼",
+    "狐狸"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-24587",
+   "spellId": 24587,
+   "name": "蝎毒",
+   "nameEn": "Scorpid Poison",
+   "ranks": 4,
+   "cooldownSec": 4,
+   "cost": 30,
+   "learnLevel": 8,
+   "maxLevel": 56,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "蝎子"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-25012",
+   "spellId": 25012,
+   "name": "闪电吐息",
+   "nameEn": "Lightning Breath",
+   "ranks": 6,
+   "cooldownSec": 0,
+   "cost": 50,
+   "learnLevel": 1,
+   "maxLevel": 60,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "风蛇"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  },
+  {
+   "id": "petsk-1264455",
+   "spellId": 1264455,
+   "name": "雷霆践踏",
+   "nameEn": "Thunderstomp",
+   "ranks": 4,
+   "cooldownSec": 60,
+   "cost": 60,
+   "learnLevel": 30,
+   "maxLevel": 60,
+   "isNew": false,
+   "renamed": false,
+   "families": [
+    "猩猩"
+   ],
+   "familyMissingIds": [],
+   "level": "L1",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "GearInsight 无限版 0.5.6 PetData.lua",
+     "checkedAt": "2026-10-28"
+    }
+   ]
+  }
+ ]
+}

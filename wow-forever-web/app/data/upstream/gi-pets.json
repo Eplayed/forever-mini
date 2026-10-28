@@ -1,0 +1,729 @@
+{
+ "meta": {
+  "kind": "gi-pets",
+  "fetchedAt": "2026-10-28",
+  "source": "GearInsight 无限版 0.5.6",
+  "file": "GearInsight_Forever/PetData.lua",
+  "selfReportedBuild": "1.60.1.70532",
+  "selfReportedBase": "1.15.9.70003",
+  "selfReportedNote": "插件文件自述：数据取自《无限》客户端 DB2（wago.tools），「新增」= 经典旧世那一版宠物技能线里没有。本站未逐行回客户端表核对。",
+  "droppedFields": [
+   "dcn",
+   "den"
+  ],
+  "droppedWhy": "成句的技能描述是插件写的文案，红线不复制第三方说明文字",
+  "iconKeyFrom": "客户端 listfile 逐号回读（Interface/ICONS/<键>.blp），翻不到留 null",
+  "counts": {
+   "families": 18,
+   "familiesNew": 1,
+   "skills": 22,
+   "skillsNew": 10,
+   "skillIconless": 22,
+   "familyIdsReferencedButMissing": 0
+  },
+  "provenance": {
+   "type": "addon",
+   "url": "GearInsight_Forever/PetData.lua",
+   "checkedAt": "2026-10-28"
+  }
+ },
+ "families": [
+  {
+   "id": 1,
+   "nameEn": "Wolf",
+   "nameCn": "狼",
+   "iconKey": "ability_hunter_pet_wolf",
+   "iconFdids": [
+    "132203"
+   ],
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dash",
+    "Furious Howl"
+   ]
+  },
+  {
+   "id": 2,
+   "nameEn": "Cat",
+   "nameCn": "豹",
+   "iconKey": "ability_hunter_pet_cat",
+   "iconFdids": [
+    "132185"
+   ],
+   "dmgMod": 10,
+   "armorMod": 0,
+   "hpMod": -2,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Claw",
+    "Dash",
+    "Prowl"
+   ]
+  },
+  {
+   "id": 3,
+   "nameEn": "Spider",
+   "nameCn": "蜘蛛",
+   "iconKey": "ability_hunter_pet_spider",
+   "iconFdids": [
+    "132196"
+   ],
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Web",
+    "Dash"
+   ]
+  },
+  {
+   "id": 4,
+   "nameEn": "Bear",
+   "nameCn": "熊",
+   "iconKey": "ability_hunter_pet_bear",
+   "iconFdids": [
+    "132183"
+   ],
+   "dmgMod": -9,
+   "armorMod": 5,
+   "hpMod": 8,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Claw",
+    "Swipe",
+    "Dash"
+   ]
+  },
+  {
+   "id": 5,
+   "nameEn": "Boar",
+   "nameCn": "野猪",
+   "iconKey": "ability_hunter_pet_boar",
+   "iconFdids": [
+    "132184"
+   ],
+   "dmgMod": -10,
+   "armorMod": 9,
+   "hpMod": 4,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dash",
+    "Charge"
+   ]
+  },
+  {
+   "id": 6,
+   "nameEn": "Crocolisk",
+   "nameCn": "鳄鱼",
+   "iconKey": "ability_hunter_pet_crocolisk",
+   "iconFdids": [
+    "132187"
+   ],
+   "dmgMod": 0,
+   "armorMod": 10,
+   "hpMod": -5,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dismember",
+    "Dash"
+   ]
+  },
+  {
+   "id": 7,
+   "nameEn": "Carrion Bird",
+   "nameCn": "食腐鸟",
+   "iconKey": "ability_hunter_pet_vulture",
+   "iconFdids": [
+    "132200"
+   ],
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Claw",
+    "Dive",
+    "Demoralizing Screech"
+   ]
+  },
+  {
+   "id": 8,
+   "nameEn": "Crab",
+   "nameCn": "螃蟹",
+   "iconKey": "ability_hunter_pet_crab",
+   "iconFdids": [
+    "132186"
+   ],
+   "dmgMod": -5,
+   "armorMod": 13,
+   "hpMod": -4,
+   "isNew": false,
+   "skillNamesEn": [
+    "Claw",
+    "Pinch",
+    "Dash"
+   ]
+  },
+  {
+   "id": 9,
+   "nameEn": "Gorilla",
+   "nameCn": "猩猩",
+   "iconKey": "ability_hunter_pet_gorilla",
+   "iconFdids": [
+    "132189"
+   ],
+   "dmgMod": 2,
+   "armorMod": 0,
+   "hpMod": 4,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Thunderstomp",
+    "Dash"
+   ]
+  },
+  {
+   "id": 11,
+   "nameEn": "Raptor",
+   "nameCn": "迅猛龙",
+   "iconKey": "ability_hunter_pet_raptor",
+   "iconFdids": [
+    "132193"
+   ],
+   "dmgMod": 10,
+   "armorMod": 3,
+   "hpMod": -5,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Claw",
+    "Savage Rend",
+    "Dash"
+   ]
+  },
+  {
+   "id": 12,
+   "nameEn": "Tallstrider",
+   "nameCn": "陆行鸟",
+   "iconKey": "ability_hunter_pet_tallstrider",
+   "iconFdids": [
+    "132198"
+   ],
+   "dmgMod": 0,
+   "armorMod": 0,
+   "hpMod": 5,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dash",
+    "Dust Cloud"
+   ]
+  },
+  {
+   "id": 20,
+   "nameEn": "Scorpid",
+   "nameCn": "蝎子",
+   "iconKey": "ability_hunter_pet_scorpid",
+   "iconFdids": [
+    "132195"
+   ],
+   "dmgMod": -6,
+   "armorMod": 10,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Claw",
+    "Scorpid Poison",
+    "Dash"
+   ]
+  },
+  {
+   "id": 21,
+   "nameEn": "Turtle",
+   "nameCn": "海龟",
+   "iconKey": "ability_hunter_pet_turtle",
+   "iconFdids": [
+    "132199"
+   ],
+   "dmgMod": -10,
+   "armorMod": 13,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Shell Shield",
+    "Dash"
+   ]
+  },
+  {
+   "id": 24,
+   "nameEn": "Bat",
+   "nameCn": "蝙蝠",
+   "iconKey": "ability_hunter_pet_bat",
+   "iconFdids": [
+    "132182"
+   ],
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dive",
+    "Sonic Blast"
+   ]
+  },
+  {
+   "id": 25,
+   "nameEn": "Hyena",
+   "nameCn": "土狼",
+   "iconKey": "ability_hunter_pet_hyena",
+   "iconFdids": [
+    "132190"
+   ],
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dash",
+    "Tendon Rip"
+   ]
+  },
+  {
+   "id": 26,
+   "nameEn": "Bird of Prey",
+   "nameCn": "猛禽",
+   "iconKey": "ability_hunter_pet_owl",
+   "iconFdids": [
+    "132192"
+   ],
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Claw",
+    "Dive",
+    "Mine!"
+   ]
+  },
+  {
+   "id": 27,
+   "nameEn": "Wind Serpent",
+   "nameCn": "风蛇",
+   "iconKey": "ability_hunter_pet_windserpent",
+   "iconFdids": [
+    "132202"
+   ],
+   "dmgMod": 7,
+   "armorMod": 0,
+   "hpMod": 0,
+   "isNew": false,
+   "skillNamesEn": [
+    "Bite",
+    "Dive",
+    "Lightning Breath"
+   ]
+  },
+  {
+   "id": 319,
+   "nameEn": "Fox",
+   "nameCn": "狐狸",
+   "iconKey": "ability_hunter_aspectofthefox",
+   "iconFdids": [
+    "458223"
+   ],
+   "dmgMod": 0,
+   "armorMod": 5,
+   "hpMod": 0,
+   "isNew": true,
+   "skillNamesEn": [
+    "Trickster's Dance",
+    "Bite",
+    "Dash"
+   ]
+  }
+ ],
+ "skills": [
+  {
+   "id": 17261,
+   "nameEn": "Bite",
+   "nameCn": "撕咬",
+   "learnLevel": 1,
+   "maxLevel": 56,
+   "ranks": 8,
+   "cooldownSec": 10,
+   "cost": 35,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    11,
+    12,
+    21,
+    24,
+    25,
+    27,
+    319
+   ]
+  },
+  {
+   "id": 23110,
+   "nameEn": "Dash",
+   "nameCn": "突进",
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "ranks": 3,
+   "cooldownSec": 30,
+   "cost": 20,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    11,
+    12,
+    20,
+    21,
+    25,
+    319
+   ]
+  },
+  {
+   "id": 3009,
+   "nameEn": "Claw",
+   "nameCn": "爪击",
+   "learnLevel": 1,
+   "maxLevel": 56,
+   "ranks": 8,
+   "cooldownSec": 0,
+   "cost": 25,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    2,
+    4,
+    7,
+    8,
+    11,
+    20,
+    26
+   ]
+  },
+  {
+   "id": 23148,
+   "nameEn": "Dive",
+   "nameCn": "俯冲",
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "ranks": 3,
+   "cooldownSec": 30,
+   "cost": 20,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    7,
+    24,
+    26,
+    27
+   ]
+  },
+  {
+   "id": 24453,
+   "nameEn": "Prowl",
+   "nameCn": "潜伏",
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "ranks": 3,
+   "cooldownSec": 10,
+   "cost": 40,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    2
+   ]
+  },
+  {
+   "id": 26064,
+   "nameEn": "Shell Shield",
+   "nameCn": "甲壳护盾",
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "ranks": 1,
+   "cooldownSec": 180,
+   "cost": 10,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    21
+   ]
+  },
+  {
+   "id": 1310612,
+   "nameEn": "Trickster's Dance",
+   "nameCn": "欺诈者之舞",
+   "learnLevel": 0,
+   "maxLevel": 0,
+   "ranks": 1,
+   "cooldownSec": 180,
+   "cost": 10,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    319
+   ]
+  },
+  {
+   "id": 27685,
+   "nameEn": "Charge",
+   "nameCn": "冲锋",
+   "learnLevel": 1,
+   "maxLevel": 60,
+   "ranks": 6,
+   "cooldownSec": 25,
+   "cost": 35,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    5
+   ]
+  },
+  {
+   "id": 25012,
+   "nameEn": "Lightning Breath",
+   "nameCn": "闪电吐息",
+   "learnLevel": 1,
+   "maxLevel": 60,
+   "ranks": 6,
+   "cooldownSec": 0,
+   "cost": 50,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    27
+   ]
+  },
+  {
+   "id": 24579,
+   "nameEn": "Demoralizing Screech",
+   "nameCn": "挫志尖啸",
+   "learnLevel": 8,
+   "maxLevel": 56,
+   "ranks": 4,
+   "cooldownSec": 10,
+   "cost": 20,
+   "isNew": false,
+   "renamed": true,
+   "familyIds": [
+    7
+   ]
+  },
+  {
+   "id": 24587,
+   "nameEn": "Scorpid Poison",
+   "nameCn": "蝎毒",
+   "learnLevel": 8,
+   "maxLevel": 56,
+   "ranks": 4,
+   "cooldownSec": 4,
+   "cost": 30,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    20
+   ]
+  },
+  {
+   "id": 24597,
+   "nameEn": "Furious Howl",
+   "nameCn": "狂怒之嚎",
+   "learnLevel": 10,
+   "maxLevel": 56,
+   "ranks": 4,
+   "cooldownSec": 30,
+   "cost": 60,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    1
+   ]
+  },
+  {
+   "id": 1265058,
+   "nameEn": "Mine!",
+   "nameCn": "归我了！",
+   "learnLevel": 10,
+   "maxLevel": 50,
+   "ranks": 5,
+   "cooldownSec": 90,
+   "cost": 20,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    26
+   ]
+  },
+  {
+   "id": 1264933,
+   "nameEn": "Dismember",
+   "nameCn": "裂噬",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 15,
+   "cost": 35,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    6
+   ]
+  },
+  {
+   "id": 1265904,
+   "nameEn": "Dust Cloud",
+   "nameCn": "尘雾之云",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 0,
+   "cost": 10,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    12
+   ]
+  },
+  {
+   "id": 1264742,
+   "nameEn": "Pinch",
+   "nameCn": "钳夹",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 30,
+   "cost": 50,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    8
+   ]
+  },
+  {
+   "id": 1265069,
+   "nameEn": "Savage Rend",
+   "nameCn": "野蛮撕扯",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 60,
+   "cost": 50,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    11
+   ]
+  },
+  {
+   "id": 1264482,
+   "nameEn": "Sonic Blast",
+   "nameCn": "音爆",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 60,
+   "cost": 80,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    24
+   ]
+  },
+  {
+   "id": 1264502,
+   "nameEn": "Swipe",
+   "nameCn": "横扫",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 5,
+   "cost": 20,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    4
+   ]
+  },
+  {
+   "id": 1265042,
+   "nameEn": "Tendon Rip",
+   "nameCn": "裂筋",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 30,
+   "cost": 25,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    25
+   ]
+  },
+  {
+   "id": 1265883,
+   "nameEn": "Web",
+   "nameCn": "蛛网",
+   "learnLevel": 12,
+   "maxLevel": 60,
+   "ranks": 5,
+   "cooldownSec": 40,
+   "cost": 20,
+   "isNew": true,
+   "renamed": false,
+   "familyIds": [
+    3
+   ]
+  },
+  {
+   "id": 1264455,
+   "nameEn": "Thunderstomp",
+   "nameCn": "雷霆践踏",
+   "learnLevel": 30,
+   "maxLevel": 60,
+   "ranks": 4,
+   "cooldownSec": 60,
+   "cost": 60,
+   "isNew": false,
+   "renamed": false,
+   "familyIds": [
+    9
+   ]
+  }
+ ],
+ "missingFamilyIds": []
+}

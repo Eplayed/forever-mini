@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-27",
+  "generatedAt": "2026-10-28",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -119,11 +119,13 @@
   "itemsNew": 5565,
   "spells": 498,
   "achievements": 211,
+  "pets": 18,
+  "petSkills": 22,
   "bisAltRows": 1237,
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5307,
+  "search": 5348,
   "talentPreview": 466,
   "releases": 76,
   "navNew": [
@@ -179,7 +181,7 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-26",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
@@ -188,7 +190,7 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-23",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -197,7 +199,7 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-22",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 6,
     "stale": null
    },
    {
@@ -206,7 +208,7 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-26",
     "classic": "1.15.9.70003",
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
@@ -215,7 +217,16 @@
     "build": null,
     "checkedAt": "2026-10-22",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 6,
+    "stale": null
+   },
+   {
+    "file": "pets.json",
+    "section": "猎人宠物",
+    "build": null,
+    "checkedAt": "2026-10-28",
+    "classic": null,
+    "daysSince": 0,
     "stale": null
    },
    {
@@ -224,16 +235,16 @@
     "build": null,
     "checkedAt": "2026-10-20",
     "classic": null,
-    "daysSince": 7,
-    "stale": null
+    "daysSince": 8,
+    "stale": "warn"
    },
    {
     "file": "bis.json",
     "section": "配装名单",
     "build": null,
-    "checkedAt": "2026-10-26",
+    "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 0,
     "stale": null
    }
   ],

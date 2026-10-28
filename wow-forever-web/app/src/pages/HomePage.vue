@@ -164,7 +164,8 @@ const HERO_ART = 'img/gen/hero-ruins.webp';
    "物品库 21077" 会渲染成"物品库21077"（探针实测）。 */
 const MINILINKS = [['rank.html', '资料完整度排行'], ['provenance.html', '溯源与覆盖率'],
   ['systems.html', '系统与新区域'], ['updates.html', '这一版改了什么'],
-  ['items.html', '物品库', 'items', '件'], ['achievements.html', '成就目录', 'achievements', '条']];
+  ['items.html', '物品库', 'items', '件'], ['achievements.html', '成就目录', 'achievements', '条'],
+  ['pets.html', '宠物家族', 'pets', '个']];
 
 function miniText(x) {
   if (!x[2] || !S.value) return x[1];
