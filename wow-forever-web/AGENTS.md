@@ -13,8 +13,8 @@ app/            Vue 3 + Vite，这一站唯一的产品（21 条路由；实际�
                  official_cn 条目还必须带原文引用 quote）
   img/          本地素材：icons/（官方 CDN 转存 + manifest.json，可整体下线）、art/（客户端原画与副本底图）、
                 gen/、keyart/、favicon.ico、apple-touch-icon.png；每张图的来路记在各层 manifest.json
-                models/（配装 3D 预览用的**自产占位模型** + manifest.json）：只登记 `origin: self-generated`，
-                游戏客户端烘出来的模型要先改根 AGENTS.md 的素材红线才能进这一层；删掉整个目录即退回 2D 纸娃娃
+                models/（配装 3D：根目录自产占位 + `real/` 中逐套核过的客户端整人模型；各有 manifest）：
+                真实模型只在精确套装与阵营命中时展示；未导出的套装继续占位；删 `real/` 及 `art.json.bisRealModels` 即回自产占位
   src/styles/   tokens.css（设计令牌单一事实源，令牌表见 docs/UI.md）、app.css（组件基线）、
                 board.css（只有这一站加载）、fonts.css + fonts/（自托管可变字体）
   src/lib/      data.js 带缓存的数据层、fmt.js 纯函数、glyph.js 自绘图参数、nav.js 导航、
@@ -60,8 +60,9 @@ python3 tools/visual-check.py --make|--check
                                 # 视觉回归：像素 + 生效值指纹两层，拍的也是 app/dist（改版后跑）
 python3 tools/audit-translations.py  # 译名体检
 python3 tools/build-bis-placeholder-model.py  # 重烘配装 3D 的**占位**模型（纯几何体，不含游戏资产）
-python3 tools/register-bis-models.py          # 把 img/models/ 登记进 art.json.bisModels（页面据此决定那个按钮在不在）
-                                              # 非 self-generated 的模型它直接拒收——那是红线，不是配置
+python3 tools/register-bis-models.py          # 只登记自产占位进 art.json.bisModels
+python3 tools/prepare-hunter-models.py        # 第七包猎人 GLB 坐标校正并留作诊断；第八轮位置未通过，不登记入站
+python3 tools/build-bis-3d-jobs.py --check    # 其余套装的 Windows 导出任务清单与当前 bis.json 对拍
 python3 tools/extract-gi-pets.py                 # GI 的 PetData.lua → upstream/gi-pets.json（dcn/den 成句描述一条不取，图标号先拿客户端 listfile 翻成键名）
 python3 tools/merge-pets.py                      # → app/data/pets.json（18 家族 / 22 技能；全部 L1，未回客户端表核）
 python3 tools/openmap-tile-manifest.py           # OpenMap 的层图表 → docs/DATA-openmap-副本层图-*.csv（756 号逐条回读 listfile，任一不 verified 就非 0 退出，不出半成品表）

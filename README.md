@@ -34,11 +34,11 @@ bash tools/serve.sh            # 起；bash tools/serve.sh stop 关
 node tools/merge-upstream.js
 ```
 
-小程序：微信开发者工具「导入项目」选 `for-mini/`，appid 用测试号（`project.config.json` 里已是 `touristappid`，独立 appid 待注册）。
+小程序：微信开发者工具「导入项目」选 `for-mini/`；appid 以当前 `for-mini/project.config.json` 与微信后台实际状态为准，不沿用历史快照中的测试号。
 
 ## 协作规则
 
-角色机制、红线与验收基线见仓库根 **`AGENTS.md`**，交接台账见 **`ROLES.md`**；资料站工程约定见 `wow-forever-web/AGENTS.md`，小程序侧约定见 `for-mini/AGENTS.md`。当前文档入口见 `wow-forever-web/docs/README.md`，历史报告不是当前规则。要点：
+角色机制、红线与验收基线见仓库根 **`AGENTS.md`**，当前接手入口见 **`NOW.md`**，按日期保留的站主决定见 **`PROJECT_DECISIONS.md`**，交接历史见 **`ROLES.md`**；资料站工程约定见 `wow-forever-web/AGENTS.md`，小程序侧约定见 `for-mini/AGENTS.md`。当前文档入口见 `wow-forever-web/docs/README.md`，历史报告不是当前规则。要点：
 
 - 英文官方名是 **Forever**，不是 Infinite。
 - 小程序个人主体：类目只有 `工具-信息查询`，零 UGC，不开虚拟支付或付费会员；网页具体边界看根 `AGENTS.md`。

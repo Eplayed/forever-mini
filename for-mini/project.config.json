@@ -4,10 +4,10 @@
   "miniprogramRoot": "./",
   "projectname": "forever-mini",
   "setting": {
-    "es6": true,
+    "es6": false,
     "postcss": true,
     "minified": true,
-    "enhance": true,
+    "enhance": false,
     "useCompilerPlugins": false,
     "minifyWXML": true,
     "ignoreUploadUnusedFiles": true,
