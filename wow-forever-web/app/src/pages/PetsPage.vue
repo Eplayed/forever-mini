@@ -149,7 +149,7 @@ function pickFam(name) { fam.value = name; }
 .pt-chip:hover { border-color: var(--gold); }
 @media (max-width: 720px) {
   /* 技能条与家族条都是真按钮（点了会筛表），手机上得够 44px 才不算误触 */
-  .pt-chip { min-height: 44px; padding: 8px 12px; }
+  .pt-chip { min-height: 44px; min-width: 44px; padding: 8px 12px; }
   .pt-new { min-height: 44px; }
 }
 </style>
