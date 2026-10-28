@@ -2540,7 +2540,7 @@ def test_app(browser, base):
                              "const c = a.cloneNode(true);"
                              "c.querySelectorAll('.nb').forEach(n => n.remove());"
                              "return c.textContent.trim(); })")
-    APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "总览",
+    APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "宠物", "总览",
                "区域与稀有", "副本", "团本", "配方", "配装", "排行"]
     check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
           "%d 项：%s" % (len(app_subs), app_subs))
@@ -2567,7 +2567,7 @@ def test_app(browser, base):
     page.wait_for_timeout(1800)
     chips = page.evaluate("() => [...document.querySelectorAll('.chipsrow a')]"
                           ".map(a => ({ t: a.textContent.trim(), h: a.getAttribute('href') || '' }))")
-    want = {"#/items": "物品库", "#/achievements": "成就", "#/pets": "宠物家族"}
+    want = {"#/items": "物品库", "#/achievements": "成就"}
     got = {c["h"]: c["t"] for c in chips}
     miss = [v for k, v in want.items() if k not in got]
     check("首页那行入口补上了被摘导航的物品库与成就", not miss,
@@ -2577,9 +2577,26 @@ def test_app(browser, base):
     counts = [got[k] for k in want if k in got]
     sc2 = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
     check("那几格带的数是 scale.json 算出来的，不是手抄",
-          all(str(sc2.get(k)) in got.get("#/" + k, "") for k in ("items", "achievements", "pets")),
-          " / ".join(counts) + "（数据 items %s、achievements %s、pets %s）"
-          % (sc2["items"], sc2["achievements"], sc2.get("pets")))
+          all(str(sc2.get(k)) in got.get("#/" + k, "") for k in ("items", "achievements")),
+          " / ".join(counts) + "（数据 items %s、achievements %s）"
+          % (sc2["items"], sc2["achievements"]))
+    # ---- 2026-10-28 站主实拍：宠物页上线那天他在首页与线上都没找到它 ----
+    # 根因不是页面坏了（直达 #/pets 一直是好的），是它只有底部那行小文字链、导航没格子。
+    # 这两条钉的是"入口在不在该在的地方"，构建通过发现不了这一类毛病。
+    nav_pets = page.evaluate("() => [...document.querySelectorAll('nav.main a.nl')]"
+                             ".some(a => (a.getAttribute('href') || '') === '#/pets')")
+    card_pets = page.evaluate("() => [...document.querySelectorAll('#main a.mod')]"
+                              ".some(a => (a.getAttribute('href') || '') === '#/pets')")
+    check("宠物页在顶部导航与首页板块卡各有一个入口", nav_pets and card_pets,
+          "导航 %s ／ 首页卡 %s" % (nav_pets, card_pets))
+    # 最新动态那一块同理：它一直在页面上，只是被板块卡墙埋到第 2910px（手机 6100px），
+    # 玩家不滚到底就等于删了。钉住它落在 hero 之后第一屏内，别再"顺手"挪回底部。
+    y_upd = page.evaluate("""() => { const h = [...document.querySelectorAll('#main h2')]
+        .find(e => e.textContent.trim() === '最新动态');
+        if (!h) return -1; let n = h, y = 0;
+        while (n) { y += n.offsetTop; n = n.offsetParent; } return y; }""")
+    check("首页「最新动态」在第一屏内（1440×1000 视口）", 0 <= y_upd < 1000,
+          "h2 距页首 %dpx（挪回板块卡下面会是 2900 上下）" % y_upd)
     # ---- 10-18 站主实拍：首页"点了没反应" + 底部一条横向滚动条 + 导航太素 ----
     # 三条各钉一个断言，因为这三个毛病没有一个能靠"构建通过"发现。
     # 1) 死链：首页把已迁页的地址写成旧站文件式地址（/talent.html）时，
@@ -2776,7 +2793,16 @@ def test_app(browser, base):
             strip = page.evaluate("() => document.querySelectorAll('.stripc').length")
             check("新站首页九职业条齐全", strip == S["classes"], "%d 格" % strip)
             mods = page.evaluate("() => document.querySelectorAll('.mod').length")
-            check("新站首页入口卡与旧站一样多（12 张分组卡 + 1 张大卡）", mods == 13, "%d 张" % mods)
+            # 这条原来写死 13（"12 张分组卡 + 1 张大卡"）。2026-10-28 站主要求首页加一张宠物卡，
+            # 那个字面量当场就红了——它抄的是"那天有几张卡"，不是"卡该不该都渲染出来"。
+            # 改成从 HomePage.vue 的 MOD_GROUPS 现数：加卡/撤卡不用再动门禁，少渲染一张才会红。
+            src = open(os.path.join(ROOT, "app", "src", "pages", "HomePage.vue"),
+                       encoding="utf-8").read()
+            grp = src.split("const MOD_GROUPS")[1] if "const MOD_GROUPS" in src else ""
+            grp = grp.split("\n});")[0]
+            want_mods = grp.count("{ href: '") + 1   # +1 是 hero 下面那张整宽入口大卡
+            check("新站首页入口卡全渲染出来了（张数按 HomePage.vue 的分组卡表现算）",
+                  mods == want_mods, "%d 张 / 表里 %d 张" % (mods, want_mods))
             gs = page.evaluate("() => !!document.querySelector('#gs')")
             check("新站首页也接了全站搜索框", gs)
             page.fill("#gs", "咆鼻")

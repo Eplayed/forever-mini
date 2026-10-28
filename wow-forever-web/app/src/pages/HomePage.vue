@@ -34,6 +34,30 @@
       </aside>
     </section>
 
+    <!-- 2026-10-28 站主：「首页的最新动态那一块没了」。它没被删，是排在所有板块卡下面，
+         实测桌面第 2910px、手机第 6100px——首屏滚不到就等于没有。整块提到 hero 正下方。
+         要放回底部：把下面这个 <div class="card"> 整块移回 chipsrow 后面即可。 -->
+    <div class="card">
+      <h2>最新动态</h2>
+      <p class="note">三件事分开说：官方公告里的时间点、客户端里的职业改动、本站自己改了什么。</p>
+      <!-- 每节一个小标题 + 一个回动态页的出口，长句收两行，全文去动态页读 -->
+      <div class="nsec">
+        <h3>官方公告里的时间点<span class="nact"><a :href="hrefOf('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
+        <div v-for="x in recent.slice(0, 3)" :key="x.id" class="flowrow">
+          <b class="mono">{{ x.date }}</b>
+          <div><b class="clamp2">{{ x.title }}</b><p class="dim clamp2">{{ x.what }}</p></div>
+        </div>
+      </div>
+      <div v-if="cl.length" class="nsec">
+        <h3>本站最近改了什么<span class="nact"><a :href="hrefOf('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
+        <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
+          <b class="mono">{{ e.date }}</b><div><b class="clamp2">{{ e.title }}</b></div>
+        </div>
+      </div>
+      <a class="cta" :href="hrefOf('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
+      <a class="cta" :href="hrefOf('rank.html')">资料完整度排行全表 →</a>
+    </div>
+
     <!-- 下面几块是稿子首页的骨架：选择你的职业 → 六个入口 → 板块图标轨 → 常用两卡。
          数字全部从 scale.json 现取，稿子里写死的 753 / 5353 / 6 开放 一个都不抄。 -->
     <!-- 这九格点进去是"那一职业的天赋计算器"，不是职业页——2026-10-12 用户实拍后确认这样是对的，
@@ -118,27 +142,6 @@
                  v-bind="linkFor(x[0])">{{ miniText(x) }} →</component>
     </div>
 
-    <div class="card">
-      <h2>最新动态</h2>
-      <p class="note">三件事分开说：官方公告里的时间点、客户端里的职业改动、本站自己改了什么。</p>
-      <!-- 与旧站 home() 同一套摘要结构：每节一个小标题 + 一个回动态页的出口，
-           长句收两行，全文去动态页读（改版第三批，对拍要求两栈一致） -->
-      <div class="nsec">
-        <h3>官方公告里的时间点<span class="nact"><a :href="hrefOf('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
-        <div v-for="x in recent.slice(0, 3)" :key="x.id" class="flowrow">
-          <b class="mono">{{ x.date }}</b>
-          <div><b class="clamp2">{{ x.title }}</b><p class="dim clamp2">{{ x.what }}</p></div>
-        </div>
-      </div>
-      <div v-if="cl.length" class="nsec">
-        <h3>本站最近改了什么<span class="nact"><a :href="hrefOf('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
-        <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
-          <b class="mono">{{ e.date }}</b><div><b class="clamp2">{{ e.title }}</b></div>
-        </div>
-      </div>
-      <a class="cta" :href="hrefOf('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
-      <a class="cta" :href="hrefOf('rank.html')">资料完整度排行全表 →</a>
-    </div>
   </template>
 </template>
 
@@ -164,8 +167,7 @@ const HERO_ART = 'img/gen/hero-ruins.webp';
    "物品库 21077" 会渲染成"物品库21077"（探针实测）。 */
 const MINILINKS = [['rank.html', '资料完整度排行'], ['provenance.html', '溯源与覆盖率'],
   ['systems.html', '系统与新区域'], ['updates.html', '这一版改了什么'],
-  ['items.html', '物品库', 'items', '件'], ['achievements.html', '成就目录', 'achievements', '条'],
-  ['pets.html', '宠物家族', 'pets', '个']];
+  ['items.html', '物品库', 'items', '件'], ['achievements.html', '成就目录', 'achievements', '条']];
 
 function miniText(x) {
   if (!x[2] || !S.value) return x[1];
@@ -264,6 +266,12 @@ const MOD_GROUPS = computed(() => {
       { href: 'skills.html', t: '技能书', kicker: '角色 · 技能',
         art: artOf(A, 'panels', 'spellbook'),
         n: [[s.spells, '条法术'], [s.abilities, '条官方整句四态']] },
+      // 2026-10-28 站主：这一页上线后他在两个地址都没找到入口——当时只有首页最底部那行小文字链。
+      // 配图用猎人那张职业原画（首页其余卡各占一张，没有第二张宠物题材的真原画；
+      // 拿 128 的宠物图标放大当卡图是这条注释上面那条规矩明令禁止的）。
+      { href: 'pets.html', t: '宠物家族与技能', kicker: '角色 · 猎人宠物',
+        art: artOf(A, 'classBanners', 'hunter'),
+        n: [[s.pets, '个家族'], [s.petSkills, '条技能']] },
       { href: 'legacy.html', t: '传承专长与挑战', kicker: '角色 · 本版新增',
         art: artOf(A, 'scenes', 'guangshu'),
         n: [[(s.legacy || {}).perks, '个专长有明细'], [(s.legacy || {}).unknown, '格未公开']] },
