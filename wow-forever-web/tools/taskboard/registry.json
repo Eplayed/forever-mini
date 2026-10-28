@@ -1,5 +1,5 @@
 {
-  "note": "机器上自动执行任务的登记表。判据与可执行动作都写在这里，不写进代码——collect.py 只按声明探，server.py 只按 run 白名单执行。",
+  "note": "机器上自动执行任务的登记表。判据与可执行动作都写在这里，不写进代码——collect.py 只按声明探，server.py 只按 run 白名单执行。（2026-10-28：头条自动写稿与 AI hub 扫描两条按站主要求移出看板——**只是不在任务台显示，crontab 行与 launchd plist 本身没动，要真删机器上的任务请另说**）",
   "updated": "2026-10-27",
   "tasks": [
     {
@@ -48,23 +48,6 @@
       "manage": {
         "toggle": "launchd",
         "reschedule": "launchd"
-      }
-    },
-    {
-      "id": "aihub-scan",
-      "name": "AI hub 扫描",
-      "kind": "launchd",
-      "label": "com.zhangyajun.aihub-scan",
-      "expect_within_hours": 48,
-      "run": {
-        "kind": "kickstart"
-      },
-      "evidence": {},
-      "owner": "其它",
-      "manage": {
-        "toggle": "launchd",
-        "reschedule": "none",
-        "why": "没读过它的 plist 字段，先只给启停"
       }
     },
     {
@@ -117,35 +100,6 @@
       "manage": {
         "toggle": "cron",
         "reschedule": "cron"
-      }
-    },
-    {
-      "id": "toutiao-autogen",
-      "name": "头条自动写稿",
-      "kind": "cron",
-      "cron_hint": "dify_auto_publish.py",
-      "expect_within_hours": 76,
-      "run": {
-        "kind": "none",
-        "why": "这条被两个开关停着（crontab 行里的 TOUTIAO_AUTOGEN_OFF=1 与 PLAN_AUTOGEN_DISABLED 文件）。任务台不代跑停用的任务——要恢复请你自己删开关，别从这儿绕过去"
-      },
-      "evidence": {
-        "log": "~/Documents/自媒体/_content_factory/dify/scheduler/cron.log",
-        "off_markers": [
-          "已停用",
-          "TOUTIAO_AUTOGEN_OFF"
-        ],
-        "off_files": [
-          "~/Documents/自媒体/_content_factory/dify/scheduler/PLAN_AUTOGEN_DISABLED"
-        ],
-        "off_env": "TOUTIAO_AUTOGEN_OFF"
-      },
-      "owner": "自媒体",
-      "hint": "每天确实被触发，但进去就打一句『已停用』退出——这是空转，不是成功也不是失败",
-      "manage": {
-        "toggle": "none",
-        "reschedule": "none",
-        "why": "它被两个开关停着（crontab 前缀＋停用文件），从这儿开只会半开；要恢复请自己删开关"
       }
     },
     {
