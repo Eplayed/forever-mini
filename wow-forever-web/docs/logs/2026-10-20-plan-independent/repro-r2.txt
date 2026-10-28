@@ -1,0 +1,3 @@
+FAIL 生成与记录的证据一致 {"task": [12], "summary": [112]}
+FAIL 已开工版本清空采用得到空新版 {"ids": [12], "version": 2}
+FAIL 另一个请求完成后过期请求不能重复生成 {"A": "started", "B": "started", "model_calls": 2}

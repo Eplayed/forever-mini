@@ -1,0 +1,6 @@
+OLD_VERSION_MUTATED {"original_video_ids": [12], "now_video_ids": [112], "same_summary": true}
+UI_SELECTION {"api_versions": [2, 1], "ui_selected_version": 1}
+RUNNING_EVIDENCE_EDIT {"saved_ids": [112], "status": "running"}
+RUNNING_FINAL {"task_ids": [112], "summary_source_ids": "[12]"}
+ORPHAN {"mode": "running", "db_status": "running", "job_running": false}
+ALL_ISOLATED_NO_REAL_MODEL

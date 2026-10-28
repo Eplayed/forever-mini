@@ -1,0 +1,2592 @@
+[
+  {
+    "path": "DungeonsForever/Core/AuctionatorBridge.lua",
+    "bytes": 3833,
+    "sha256": "ba95898035ad14db312723bd11f6bfa896594d34a53951cc86260576da39f05f"
+  },
+  {
+    "path": "DungeonsForever/Core/BisUI.lua",
+    "bytes": 132832,
+    "sha256": "35d9c08aed683cb32b1692b1bc04c00e5316b0e8efb6ac75b2a35fe52aba3da8"
+  },
+  {
+    "path": "DungeonsForever/Core/Bridge.lua",
+    "bytes": 678,
+    "sha256": "c97adb14bf5c6d1ed348dcac9a7473f414582eab99a33f926dfae6efbfb8ee8c"
+  },
+  {
+    "path": "DungeonsForever/Core/ClassCombatUI.lua",
+    "bytes": 25103,
+    "sha256": "d336f1fde0ea09ae85f29e49ab4c588e6a22c63fcb0c3b8416fb83945e7d4cbc"
+  },
+  {
+    "path": "DungeonsForever/Core/CollectionUI.lua",
+    "bytes": 46410,
+    "sha256": "4e681367d7410b0ed5664be80f2cb2d8927fa0a4c2a9a0730678f94a406597d9"
+  },
+  {
+    "path": "DungeonsForever/Core/Core.lua",
+    "bytes": 32905,
+    "sha256": "9c213f38d236fe1c0c65bf89e00b3a2c1e10aa2231c5d7c0df22412dd47efa70"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_AreaMap.lua",
+    "bytes": 1007,
+    "sha256": "69b7a0d7b838b6c8fe995e38fd5e95eb1bbd672475a64b3a0a15e7a09b2243db"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_BIS.lua",
+    "bytes": 744374,
+    "sha256": "938318cec9de87a01b1b4efe04f387e0042c22406d076969068858810cb62056"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_BossModel.lua",
+    "bytes": 10145,
+    "sha256": "135f95e294993c8da9ef9e6eae2982878bf91604017143536103dc6c4ae821d1"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_BossPos.lua",
+    "bytes": 12068,
+    "sha256": "2bb215850ac906c1be53a2e3de188b93e7d2ecb49a7e7d41505c51543f3be151"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_BossSkills.lua",
+    "bytes": 44165,
+    "sha256": "6fef92c97fe27885c1ad2c4a6799a3603d320e43fb3e15bc6f13f15d9962790c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ClassCombat.lua",
+    "bytes": 114569,
+    "sha256": "2543920585700d706bd0e5340552dac205ac07c74a7b3857a91284c68bc936f0"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ClassGuide.lua",
+    "bytes": 291932,
+    "sha256": "3e4e056ccf0e06473f40003751ed317fc39b8dce4acc5bda8867315e909359b6"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ClassTier.lua",
+    "bytes": 13758,
+    "sha256": "fa16001866a241aa4a79afae8c7dbff70d3313522ab5d3e6d8292b992263b30c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_CollectionMounts.lua",
+    "bytes": 25122,
+    "sha256": "b4d1fed4e1619266fed2a920fb056941945fbdfed8b22c0ef342b5e2d86b311d"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_CollectionPets.lua",
+    "bytes": 12577,
+    "sha256": "707a42481cdddb5fc3f71e49547ff9891bd9aeaf0b7152b5575008b50352c7dd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Crates.lua",
+    "bytes": 16699,
+    "sha256": "7b3101eaf959b2c0934b4f87abdb4a81e90a78bb48ad04a3fb7759fa0d53122d"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_DungeonEntry.lua",
+    "bytes": 2027,
+    "sha256": "8e006af52b15c6f9c8f4b6ee1bb8791f5d20c216c1c724c92081d9ac79a31798"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_DungeonGuide.lua",
+    "bytes": 162602,
+    "sha256": "b1521453c4e6225d1846d7a4b8325a1177df4a143de6cd040009f8f0a3e3ff10"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
+    "bytes": 95246,
+    "sha256": "3b906d741e683675985939b56c442655728e33f3c82ea952bfaf13a910eb118f"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_DungeonQuests.lua",
+    "bytes": 295274,
+    "sha256": "7ed3ee22caa543a73a2bc36d58fb11abd388f6ae98a5a6b52fd5c9dcb211c2cd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Dungeons.lua",
+    "bytes": 9383,
+    "sha256": "480d79657f4349e438831efa157b00cfa0c9b89e017e6a7a6c024e6a86c94b49"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Explore.lua",
+    "bytes": 9909,
+    "sha256": "afad400110ec748b6f4da0e4e32d14a95e606734a0be18097c650fc0b4eb439a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ExploreBanner.lua",
+    "bytes": 3463,
+    "sha256": "612ebd4c7698400e15fe96fdba31ff0deb5a70d39b3d010c053a0ce2c50e81e6"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ExplorePets.lua",
+    "bytes": 3309,
+    "sha256": "e4097045df67bb08f2f0f6cfe1121eb784f7f9a967d58795741cb71ef96a7e73"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ExploreToys.lua",
+    "bytes": 1263,
+    "sha256": "1345ea2620435983f6d49a569b6fe8cd79117404b4cf6a71eab37df75ea1e712"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_FactionQM.lua",
+    "bytes": 792,
+    "sha256": "4ebf80961d575ad764fd8c8a5efdf92976f71041f0e05a42ff56460f7a6ef3a7"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Factions.lua",
+    "bytes": 19390,
+    "sha256": "5da234523290ba2b199c413f4006035fc66aa3e7d8a65cd9f7de54a2c87fac96"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Gear.lua",
+    "bytes": 1144805,
+    "sha256": "41fd8f07ce046e7c07cc8ce265f939c65392a4d72d2cac5c456789d0886cb2f8"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_GearRareSpawns.lua",
+    "bytes": 2744,
+    "sha256": "99b78afc139b60e8ffa6e79d9d93519a691eb0a3a84e70791868d3944dd41c53"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_GearVendors.lua",
+    "bytes": 303515,
+    "sha256": "0baed4e1ea8b42bc6dfe5c4d3fda2e395c4c06a18e65f1c3a9074eb24705ed38"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_LootFilter.lua",
+    "bytes": 24422,
+    "sha256": "16999eaf510a606c88da0a7297395164ccdbbff66f167e32b9bbe924f0405977"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_MapPins.lua",
+    "bytes": 839,
+    "sha256": "ca27c95400be211eb895cf269ff3d6b234aef7504d9951125882a7eeff3f47b3"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_NPCLoc.lua",
+    "bytes": 18370,
+    "sha256": "d80e707e3e896f49c69b5dff469550f40cdc00e3a9b8a7e97902d61d3a6be4ee"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_NameOverrides.lua",
+    "bytes": 445,
+    "sha256": "754291eb8312c4141e2162b778a8dd391917c609843cc657ea430d45c40af1cb"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Plunder.lua",
+    "bytes": 7928,
+    "sha256": "769b43a5be2d126b08f109123580117c46ef626a6ddee94aee491edc74be4667"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ProfGathering.lua",
+    "bytes": 6025,
+    "sha256": "ab761400ee187b0a33ad18781c8d985ab6e61d44ee1411403536511cd72e0baa"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ProfLeveling.lua",
+    "bytes": 32972,
+    "sha256": "bf9decac5f45e5585b63ec9ce2d783a7e0f82059b748d4f15529a435c5f0cabf"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ProfRecipes.lua",
+    "bytes": 664015,
+    "sha256": "4fa0ba135a09c9ea66d7139b144470e7f5238308e164be4d9e10a7e8b78f67d5"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ProfTrainers.lua",
+    "bytes": 162986,
+    "sha256": "3b3a43dc2d7501e5024701825137d7f6b893b2c567a1c510af03b2ee1234d51c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_ProfVendors.lua",
+    "bytes": 9445,
+    "sha256": "d432d2f2b1f17af37f8df64c1403920dac3b185bc5f618e7033054d636d13803"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_Professions.lua",
+    "bytes": 43994,
+    "sha256": "39f746491271cc9936683a58eaffa65077a0646f73b5b807919a15f15ba7a1c0"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_PvPHonor.lua",
+    "bytes": 1181,
+    "sha256": "ac3da2edd347aa69f6f780d61c241ad975e8658ad45312b760655a8290f48f08"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_PvPRanks.lua",
+    "bytes": 2758,
+    "sha256": "00e6b593574d4c61bacf33beb23ae1115a6dc1d9d735422b735c3f264d8887a6"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_PvPSets.lua",
+    "bytes": 8282,
+    "sha256": "dba058508bd3a10bc24152bc4fbc256739a6d950a737b1b72e79fde72fe284bf"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_QuestStartNpc.lua",
+    "bytes": 876,
+    "sha256": "6ba624dbabb0bb7c9e74d6c69d9383f78583237cef2d7cb2ba6a9de8e64ba6a1"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_RaidSets.lua",
+    "bytes": 15502,
+    "sha256": "55b007f874757a502f5ab2e7745e6d73cb0e254f4329c67f1ebce36945ab1840"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/Data_VendorPrices.lua",
+    "bytes": 13104,
+    "sha256": "08b158fb68b9dc5205420f7483040a0fba41333dafcf4bb04ab401b3375a2450"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_AreaMap.lua",
+    "bytes": 1102,
+    "sha256": "d7eb070eaa63ebb0249466a668d0d59f1d2d4b7223036c09a826f3dddf30b8d7"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_BIS.lua",
+    "bytes": 750779,
+    "sha256": "562aa1cda6739ba203e3a631454e8c7424f62650059c820c1daa77760704e2e0"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_BossPos.lua",
+    "bytes": 12163,
+    "sha256": "829a32b8e7ec6d721220818a2081885dfe09099e42d419205ae824761e3a9857"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_BossSkills.lua",
+    "bytes": 44260,
+    "sha256": "8bcfa4c13b66ecee6d36aaebc98045f6b324b23868c3db7c8357835528eed7c3"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ClassCombat.lua",
+    "bytes": 115586,
+    "sha256": "37b19b21916e6ec32a491dc630dc0939239e53a1973de4b69b57585527071f4b"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ClassGuide.lua",
+    "bytes": 311729,
+    "sha256": "2dd9f7ebc7808551ea3100026b6b20448e400d67cd1ffc109f32817afd6b3c8a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ClassTier.lua",
+    "bytes": 16525,
+    "sha256": "aed500885527c69e37d3cfc0edb6c6160f674f7b09300b1c476bd471bcd872bd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_CollectionMounts.lua",
+    "bytes": 25217,
+    "sha256": "ee3d0bb77253ae48acc7a4b005a97d341b5b144a344d50178a43ab618c7a2de6"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_CollectionPets.lua",
+    "bytes": 12665,
+    "sha256": "8c36ecd08fc928dd33bf5a65fcbd53ddaf607baa318c1732b114fa4c761ba606"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_DungeonEntry.lua",
+    "bytes": 2072,
+    "sha256": "b8f72b8f7a4771926bc5d04d9f4662b20eb919c9599b2e9277bd9b02d7e8d918"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_DungeonGuide.lua",
+    "bytes": 184726,
+    "sha256": "729d4e0fb95f16eabcab2320a0e14ab99e4f68d7545dae3081e59bb0b887d2b1"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_DungeonLoot.lua",
+    "bytes": 94609,
+    "sha256": "031228bb96fe2f52efe15885929e3ec458d92e67a7ceae34d6cac767bb1da699"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_DungeonQuests.lua",
+    "bytes": 303631,
+    "sha256": "b0ab66ce31aa5daea07f9057b76893acdd4a0ed3deb5c35a6ac3e4bbc9aab24e"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_Dungeons.lua",
+    "bytes": 9540,
+    "sha256": "9f7b7cd835c540a93e1f3e58c2f28c014ebc5383c8e8676d84caa8e4696e5954"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_Explore.lua",
+    "bytes": 10147,
+    "sha256": "4ec26333ed8f81147337dc4396256dacb441ad5116f06600d90a155925216be5"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ExploreBanner.lua",
+    "bytes": 3989,
+    "sha256": "37871b29db86b89205dbe039557e801d5118405c2939e2e443dfca2c4c0684d5"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ExplorePets.lua",
+    "bytes": 3352,
+    "sha256": "46adf85e286cf49fef26ba21d7a58c77edb4e9bb2f0a5632f7316c0c7faf5439"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ExploreToys.lua",
+    "bytes": 1489,
+    "sha256": "99b00d5ca550727549754c158784300c5ce98cde133cd51da7cc745019ee2468"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_Factions.lua",
+    "bytes": 20089,
+    "sha256": "1f6a551d95ca8775f96cdc581101a084372b1ee151deea582b9c5ca0d5adaf1a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_Gear.lua",
+    "bytes": 1158103,
+    "sha256": "3ca9ed3be6c2365ac73d1f52b259c221d20bead3c59b2b6e34a451d69207f44d"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_GearRareSpawns.lua",
+    "bytes": 2839,
+    "sha256": "4ff6ae2dc54676bf854c4077f9b6a641f41ecf2780fb1e507688b39c37a8578a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_GearVendors.lua",
+    "bytes": 303610,
+    "sha256": "a8f21339bdc66c4255931dd028ac7a4c547d226ad3d19f8c1636cc94e3685bfd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_LootFilter.lua",
+    "bytes": 95,
+    "sha256": "316de9a941c0edde01b474379e23ddab191a558d8514f4b0361733a4693f2558"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_MapPins.lua",
+    "bytes": 934,
+    "sha256": "5568c7ef1bac95cafc26811eb4d9e59a2c71780d9574b63358cc5951a1b50e89"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_NPCLoc.lua",
+    "bytes": 18487,
+    "sha256": "877176c1f6f3697e567e78880f153d5464e76d72e8a6242e6ece9325d53ded64"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_NameOverrides.lua",
+    "bytes": 540,
+    "sha256": "8cd6f8de3cd88cd8d061603c04fb6abaae0d58aea56412e5613d1f0aebe13381"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ProfGathering.lua",
+    "bytes": 6120,
+    "sha256": "f5af9aa04c156de55351a092890704b27a05b9ca99e5ee04bcac07cda6d98a4d"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ProfLeveling.lua",
+    "bytes": 33291,
+    "sha256": "ae759ddb30c20d0d5df0a447f4ec776755dedd9fd274a2a3b8796a14de2a2dfa"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ProfRecipes.lua",
+    "bytes": 665082,
+    "sha256": "eff93946aa99257790b1ca4584a6df9fdd7bf14d9cbea6623a0fcb999a329535"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ProfTrainers.lua",
+    "bytes": 163299,
+    "sha256": "7bba3deeb4a63793f59c694885b34a7f027b22bb0c3288ed189bcbec436ad7f2"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_ProfVendors.lua",
+    "bytes": 9301,
+    "sha256": "293fa4919582fbd43863cb92da4cfc45e115780aab4a6853bac95dcf4badfdb7"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_Professions.lua",
+    "bytes": 45716,
+    "sha256": "392eb9e5d9e976b0b9122b580c2e545618ad4581674970fef7be2ee7274c0369"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_PvPHonor.lua",
+    "bytes": 1276,
+    "sha256": "7ce0c20682b74e9fc72d3bb8bcc5e2da8d0a247bf39c93c856e78bd97b29f011"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_PvPRanks.lua",
+    "bytes": 2853,
+    "sha256": "c490014c50da5d113c9e7eba4a0b0b699e333784dba09da0dd4c3c8c3c0171cd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_PvPSets.lua",
+    "bytes": 8377,
+    "sha256": "e2c8f7d17642e99370ce4d1f9ec19e3b89c1bd7c1ee6613ac245c98e53cb698a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_RaidSets.lua",
+    "bytes": 15629,
+    "sha256": "c15ed43d8a2c1d9c73eace21e9dd61e45cde6934b6f3cb09085c1fce85781c56"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/enUS/Data_VendorPrices.lua",
+    "bytes": 13199,
+    "sha256": "84587ad32c41c525f2710a2c53d8170de255a926ae00469dfacc0cf68094b25d"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_AreaMap.lua",
+    "bytes": 1109,
+    "sha256": "15274bdaef37710498a3147c03c8e9bf2667c1e2b615b70275e82046464bd674"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_BIS.lua",
+    "bytes": 744476,
+    "sha256": "4bc1b684d1828225c7d0fb2836606086168b3ac5de268f31c40203052c24f402"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_BossPos.lua",
+    "bytes": 12170,
+    "sha256": "2d9d76bd95687a24abe8668905ebff6649f4dec598172034dd45de9257ff1c57"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_BossSkills.lua",
+    "bytes": 44267,
+    "sha256": "3c11016c51a86d396255318380b58a4a48aec63a13947d21912946a01f4f9854"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ClassCombat.lua",
+    "bytes": 114671,
+    "sha256": "0a4180a39a0b9c507edbf40d613af90eb60460d527d0d5fae34bf0cf500814e7"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ClassGuide.lua",
+    "bytes": 292034,
+    "sha256": "df0da45ab68c450bc4dbc13a60f0ce8d61ce6de134fb7ce1af39dd0897f020cc"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ClassTier.lua",
+    "bytes": 13860,
+    "sha256": "8ac4c12564ac21ba4820ae641846193fbe1aca3dc2a5fa8e43544ccc2ddff3a2"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_CollectionMounts.lua",
+    "bytes": 25224,
+    "sha256": "5194b12c4b7749617b7c356bd1b77012d2f09563f9862eeb2f97b9677d8c58a5"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_CollectionPets.lua",
+    "bytes": 12679,
+    "sha256": "8ef62b3852048b6711f45d16d7e9829081922e7e2b8b211fc57533ebc3b6432e"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_DungeonEntry.lua",
+    "bytes": 2132,
+    "sha256": "757870d327800827ee31d696a24b67195905bc7f228ef911b36d896c7d90f31c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_DungeonGuide.lua",
+    "bytes": 162707,
+    "sha256": "c31b67b5929a3443b36bf51896490cd881e06bf016722e08fbc08bdd981771d9"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_DungeonLoot.lua",
+    "bytes": 95348,
+    "sha256": "e52f217eba870ff7abd8652cda6d02ffb99afe4cf6c9e5c91c24e4667e461286"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_DungeonQuests.lua",
+    "bytes": 292694,
+    "sha256": "2cb81763df22033d82e0d09d1c4a997f14cb1fe3a4292d06c38f0bb9c1b3ceaf"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_Dungeons.lua",
+    "bytes": 9488,
+    "sha256": "1b859a830aace3a416729403e875621a0c4fb9b84df124d7a2db467c0ef73ba9"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_Explore.lua",
+    "bytes": 10011,
+    "sha256": "e4aca5fd4e7c9f9007bb4aa325e988b072f2e3c2499104a89596b6833686c48c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ExploreBanner.lua",
+    "bytes": 3565,
+    "sha256": "13a94d527646d89b8120dbc62b34d41aee6a892e54da99fd28f0600896cab8d2"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ExplorePets.lua",
+    "bytes": 3414,
+    "sha256": "bd01558df13aacdfa95ebdf62abc6c4bb72bd8aef2b53ebdab78cb0c4d13f9d8"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ExploreToys.lua",
+    "bytes": 1365,
+    "sha256": "078f23d4f5074ce7c86447c0285a8f31299b1c0cfd4524825fb9fbb0be5b17a4"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_Factions.lua",
+    "bytes": 19492,
+    "sha256": "7017bf91c81d4ae6645bf558a1742ccdacea44d3b57ccf1f273d680a505590bb"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_Gear.lua",
+    "bytes": 1144907,
+    "sha256": "34dfd82e0c25da150cabd0fee953ff38144d2426f80f959da151b80dc2228981"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_GearRareSpawns.lua",
+    "bytes": 2846,
+    "sha256": "d369f83727541b22b965e441d4e35dee9178daca7309bc33df18f35c260fc43b"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_GearVendors.lua",
+    "bytes": 303617,
+    "sha256": "69e3e39ca0c314096c7e94dc85f93e692ea2a800d560c7a722fa35530721571b"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_LootFilter.lua",
+    "bytes": 24524,
+    "sha256": "fd26202e3aab162ac02bb0e8c8d05c29f1d373371a65d9e17cb1db57b1f9e0fc"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_MapPins.lua",
+    "bytes": 941,
+    "sha256": "afbe3a7e875084903531a0e5d3317975b760dc87e1368bf15de3106ddb73b6bd"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_NPCLoc.lua",
+    "bytes": 18291,
+    "sha256": "2fcb6f5d4a22312bb2bdd3accb4056b05a1033db884365b226d096dc75c73fd5"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_NameOverrides.lua",
+    "bytes": 547,
+    "sha256": "7e71c1ecb354e1b35f68f896313aeee315a0dbbdd618e3b94c828a3c6b551214"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ProfGathering.lua",
+    "bytes": 6127,
+    "sha256": "a7295b89750ec69930ad0dce51fe3e6b6c527be011b2b9b39c147177fd4ddf2c"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ProfLeveling.lua",
+    "bytes": 33074,
+    "sha256": "619315a133deca71217d6a065ba350092e2c0554cb36602bcb3f9234a5ef744a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ProfRecipes.lua",
+    "bytes": 664117,
+    "sha256": "d02925964902a7da3ee84cee067f49dbfdd97da1b18cb5c86797fa2788d4ae78"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ProfTrainers.lua",
+    "bytes": 163088,
+    "sha256": "84fec2fe34b7fcd4bd724566422c11513ea0fcc16e4c72fad0bab095c7d2c40a"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_ProfVendors.lua",
+    "bytes": 9550,
+    "sha256": "1d4aaf8fea5220c3dfb8a481e2b240b4fd58093d8426163da3a25280863e9f43"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_Professions.lua",
+    "bytes": 44099,
+    "sha256": "bca79533d9c66b06c47d0991ff3e6556aa9854bde46aa9b6dcab356cffb23c65"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_PvPHonor.lua",
+    "bytes": 1283,
+    "sha256": "06d53422a238fb450b3fbd9dd8039b3ae7eb6fd0e89ab2efdaf8ef9973b7c9a9"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_PvPRanks.lua",
+    "bytes": 2860,
+    "sha256": "47ffb1dfa9d15d46f343544c9588366e928eead94d17ebf46ad52bc0ea3115a4"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_PvPSets.lua",
+    "bytes": 8384,
+    "sha256": "a3881011191be529ef62da448c8eea7645785978f2a4a870e07f6c410d070ff2"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_RaidSets.lua",
+    "bytes": 15604,
+    "sha256": "c7395cc953a45ab3fac28c6d38847bf93fdf2f02f8339d5be4fef3ce89749cfa"
+  },
+  {
+    "path": "DungeonsForever/Core/Data/zhTW/Data_VendorPrices.lua",
+    "bytes": 13206,
+    "sha256": "04156441c4eeeafb30d39434d3e025b7c00defc18da40a27fd77c295538fa71f"
+  },
+  {
+    "path": "DungeonsForever/Core/DungeonUI.lua",
+    "bytes": 288477,
+    "sha256": "8adb0c8e3c51b8b9c093499630609eadb12b3bfe633aeca862339476c1da329f"
+  },
+  {
+    "path": "DungeonsForever/Core/ExploreMap.lua",
+    "bytes": 46196,
+    "sha256": "213fef35c235ccedb06b6af43e915a22a56b6d5d9f401327fe70b8f2493b97bd"
+  },
+  {
+    "path": "DungeonsForever/Core/ExploreUI.lua",
+    "bytes": 154798,
+    "sha256": "168470d576651d34961c176c7850baae6abcc4bd1972f156318ae65593b9ecd6"
+  },
+  {
+    "path": "DungeonsForever/Core/FactionUI.lua",
+    "bytes": 42604,
+    "sha256": "b56bf621a77a26791df27c96c1f01a2b7c48c0ca1caec8db18bd0cf5a7b159a9"
+  },
+  {
+    "path": "DungeonsForever/Core/GearUI.lua",
+    "bytes": 118275,
+    "sha256": "5090f3030e4cd18425a743dec15670c846e5a24152e76de3f0e6b974e35101f2"
+  },
+  {
+    "path": "DungeonsForever/Core/Hui.lua",
+    "bytes": 100740,
+    "sha256": "b37aa0d9e2400821eddbbf6eebab9fe77f2dc14f4af574a0c9ff7f498783a410"
+  },
+  {
+    "path": "DungeonsForever/Core/LootFilter.lua",
+    "bytes": 16248,
+    "sha256": "adc94cfe91550adbf009f377e1d5eb5335123bd85316619db564a2348f83201a"
+  },
+  {
+    "path": "DungeonsForever/Core/LootFilterUI.lua",
+    "bytes": 29102,
+    "sha256": "6d3f91c19bd7953d6c479ddc5ec00bbc1b62732609a1ef8a329bca478c77aefb"
+  },
+  {
+    "path": "DungeonsForever/Core/MainFrame.lua",
+    "bytes": 25125,
+    "sha256": "b1c6b1c69ceeed3929df9e5a5515c3fcb797bea891941ea17e59b7889a6a677a"
+  },
+  {
+    "path": "DungeonsForever/Core/MapUI.lua",
+    "bytes": 83727,
+    "sha256": "c59e2dd46584b88a36983e3de0d2acc94162327471431a6f8b40f2ec6e8a419a"
+  },
+  {
+    "path": "DungeonsForever/Core/ProfFollow.lua",
+    "bytes": 48230,
+    "sha256": "bbc67db8de694ed89ba9349e32f0254642ee26e3e96cbf8cb9445f19ce768056"
+  },
+  {
+    "path": "DungeonsForever/Core/ProfRouteAuto.lua",
+    "bytes": 30113,
+    "sha256": "9c2e31744648732565a04ec96a268ac4d11996f061ed4b62f34055219af76a0b"
+  },
+  {
+    "path": "DungeonsForever/Core/ProfessionUI.lua",
+    "bytes": 292880,
+    "sha256": "8c037f23704ff548fc6295af2a362ca7e0d76d4fc97f841888bcd10ecfb8a6a8"
+  },
+  {
+    "path": "DungeonsForever/Core/PvPUI.lua",
+    "bytes": 68137,
+    "sha256": "82ac49698aa7dca176ab23b2c83525e4970345ea70f4ed5cc756d13f943d7e26"
+  },
+  {
+    "path": "DungeonsForever/Core/QuickBar.lua",
+    "bytes": 26393,
+    "sha256": "9be07ca99d5f073d7859bf72a8bcb880506d7cb65099c0080d724937b67ce93a"
+  },
+  {
+    "path": "DungeonsForever/Core/RaidUI.lua",
+    "bytes": 39599,
+    "sha256": "4dbe7bb542e7f3e23dd4c75933e39f3cd795db0957cbe26c9ce258c2a72d7fd8"
+  },
+  {
+    "path": "DungeonsForever/Core/TierUI.lua",
+    "bytes": 63897,
+    "sha256": "a3ec250b6b1725e8f63c1080a998770bf50f0f44dc0e5089882c5bbef58e5a84"
+  },
+  {
+    "path": "DungeonsForever/Core/VendorPriceDB.lua",
+    "bytes": 2139,
+    "sha256": "e02b699eb1d83bce24fbbac33d9df505dc9d895bd0b5986a6d8f3e43f8cd5878"
+  },
+  {
+    "path": "DungeonsForever/DungeonsForever.toc",
+    "bytes": 7186,
+    "sha256": "4470b4d905baaba495b23b00ca2f937f43d7b9803e9adb21e4fe3fbf4063c014"
+  },
+  {
+    "path": "DungeonsForever/LICENSE",
+    "bytes": 11047,
+    "sha256": "ccbc6f1b863e47eb9d0cf5b8ee00299158d4749386baac53ca812b96183c31e1"
+  },
+  {
+    "path": "DungeonsForever/Libs/CallbackHandler-1.0/CallbackHandler-1.0.lua",
+    "bytes": 7961,
+    "sha256": "d8a175f5823a999d8a188ee5e8e1133c393fd8c25b71931ab929d4691eff750b"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibDBIcon-1.0/LibDBIcon-1.0.lua",
+    "bytes": 21187,
+    "sha256": "bd9249c720b511f1ca23f45ac1117c079b054060d764550efe04875d8d9e26bc"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibDBIcon-1.0/lib.xml",
+    "bytes": 222,
+    "sha256": "3c959d5954f2680f063baa3a7903cd347e8f4f9755cd9be639fa45a50238f85a"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibDataBroker-1.1/LibDataBroker-1.1.lua",
+    "bytes": 3229,
+    "sha256": "d79b3eada649684543bbbc3c511c2515e16d644f198fa991a201ee64d045b0f2"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUI.xml",
+    "bytes": 286,
+    "sha256": "c81d3de6e53db91faf7bbc838876b0b769f60a1c29062b40d3a3366523202b7e"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUIConfig.lua",
+    "bytes": 4798,
+    "sha256": "a8722fb2b51707f5af23d66b66d48e19e39b143c82f6c490f489d7a0d4333200"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUILocales.lua",
+    "bytes": 595,
+    "sha256": "c592b97aecc8746f209838f676472456d037158de14b475eeb67a86cb6d6b0e4"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUISettingsUI.lua",
+    "bytes": 77592,
+    "sha256": "b1aab54e08adab293679009f54e559b771c2bc648a82bb779d7e607a00b3c813"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUITheme.lua",
+    "bytes": 3924,
+    "sha256": "6405f563d540a8f3aeb320b010a79770d8976ac57ca076b97e7fad6f21c1e0af"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUIWidgets.lua",
+    "bytes": 73434,
+    "sha256": "646b4224a7aa168dd09da8c02e87547669595a26b2d9672aad764404a6dd72f8"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibHUI/LibHUIWidgetsScrollingEdit.lua",
+    "bytes": 4528,
+    "sha256": "f25c445ffe6a8742bf99fea028cb445bd8acbf5953706c8f1933506980226552"
+  },
+  {
+    "path": "DungeonsForever/Libs/LibStub/LibStub.lua",
+    "bytes": 2251,
+    "sha256": "d34235c85f869505fdd9ef321d2420f69db7d2eb873d2b3bbf57584a314060fa"
+  },
+  {
+    "path": "DungeonsForever/Libs/UTF8/utf8.lua",
+    "bytes": 8596,
+    "sha256": "8b73480c380f00eb481eca4088cf49432c2461d857fb41a6f823cf0f6b49c538"
+  },
+  {
+    "path": "DungeonsForever/Libs/UTF8/utf8data.lua",
+    "bytes": 33482,
+    "sha256": "506b01aff67bcf28cad560449c1c47eb9fdce8b17cf9e743d9782d213b249b07"
+  },
+  {
+    "path": "DungeonsForever/Libs/embeds.xml",
+    "bytes": 745,
+    "sha256": "a351c8835e041e332a0eec92170cd990a094c31988c130d19eb42b4023d0a0f0"
+  },
+  {
+    "path": "DungeonsForever/Locales/enUS.lua",
+    "bytes": 75146,
+    "sha256": "07d19f60cd4847541fb1b3930fa65c7b7bc1ec69f815183859f9a443ef3e8015"
+  },
+  {
+    "path": "DungeonsForever/Locales/zhCN.lua",
+    "bytes": 3371,
+    "sha256": "3b4e5115e7db79b6f5a04e1f55b37e3e6006820f5431e9411cb013881859eeef"
+  },
+  {
+    "path": "DungeonsForever/Locales/zhTW.lua",
+    "bytes": 67041,
+    "sha256": "a7190fc32616ff08a5cb6b0d77efb685ba5c9630b0141366443b2c7e9e87be52"
+  },
+  {
+    "path": "DungeonsForever/Media/BossSkull.tga",
+    "bytes": 262188,
+    "sha256": "412e2e9ffeae9d147307f35919683607ba4485eab470d4a777dfb882ee1938ab"
+  },
+  {
+    "path": "DungeonsForever/Media/CheckDisc.tga",
+    "bytes": 16402,
+    "sha256": "ee0dc287abb0946bf96d43ee01e376331b9d9dd1ab974c11d4a7fe8f7813e521"
+  },
+  {
+    "path": "DungeonsForever/Media/CheckMark.tga",
+    "bytes": 16402,
+    "sha256": "8a272b8a46aefd5c595304f08b606ee499d7faa6123839408198e2a89dc0d324"
+  },
+  {
+    "path": "DungeonsForever/Media/CheckRing.tga",
+    "bytes": 16402,
+    "sha256": "e7f17da4c67beb69895ce4400ae27b2182ea47fa663333f072ae856bd3c6b543"
+  },
+  {
+    "path": "DungeonsForever/Media/CheckTicks2.tga",
+    "bytes": 16402,
+    "sha256": "67533c311caeeb7b0267064ee1850e1463366fda14e9732521fb10fc43bb58d0"
+  },
+  {
+    "path": "DungeonsForever/Media/DFLineArc.tga",
+    "bytes": 16402,
+    "sha256": "8fe4deb8136ce70d2e38b9c60a1ac8b7ff6ccebacf0902d94dad230119d09a69"
+  },
+  {
+    "path": "DungeonsForever/Media/DFLineFil.tga",
+    "bytes": 16402,
+    "sha256": "1c22234852ddb7bc42f2a2ca22eb07780140ffc0045f0577f3233b52396aa562"
+  },
+  {
+    "path": "DungeonsForever/Media/DungeonsForever.blp",
+    "bytes": 88580,
+    "sha256": "605542af9c4af97b9d5efea1ca88b505be5f89eff12c3e6be2a0a6f0bca455a2"
+  },
+  {
+    "path": "DungeonsForever/Media/EntryPin.tga",
+    "bytes": 16402,
+    "sha256": "3e0bd723f384fb10bc27dfbec5990e5001a5c64055bcee5019b0bd766067944a"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUICircle.tga",
+    "bytes": 1042,
+    "sha256": "a232ceececf50a0931cdb6bb804ea7234db72b5b9efdd42c16ce0ed51e1307fb"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassFill10.tga",
+    "bytes": 16402,
+    "sha256": "3bd59c8418e4f66d4af92968f551778cfe1beaebffb5ddd970be6c4e28abfd43"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassFill12.tga",
+    "bytes": 16402,
+    "sha256": "361da4a005b87af7d8ae604432adc49f65d06c556a06476c917399c9d4d14b3f"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassFill4.tga",
+    "bytes": 16402,
+    "sha256": "c64b4ed4e6dfee25e4ea57294e1fd2270101fac201912b305e7910e4ad1bae1c"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassFill6.tga",
+    "bytes": 16402,
+    "sha256": "00d93792cc4e277a0e3a66725a9ff90d9b5d7b532c7f0b878e8bcdb78adc3185"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassFill8.tga",
+    "bytes": 16402,
+    "sha256": "aec75d6febb4e4541cab475de2ab531343785d6e881b601b1ee0dcb2c80472a8"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassGlow.tga",
+    "bytes": 16402,
+    "sha256": "db1a0a76d47b0c1b7528f40c885ddc6a8ec962d05beb2e396a333dc2d74c5ef0"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassRing10.tga",
+    "bytes": 16402,
+    "sha256": "f203eaa15389c146210253155353e28189d841b38a7fc7ebc0fd48dcf6b7c52d"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassRing12.tga",
+    "bytes": 16402,
+    "sha256": "169ca9a26f6ba2c45d4ecbdd85d3b6de17f61a249c9d97fc3928f6f4af6dc04f"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassRing4.tga",
+    "bytes": 16402,
+    "sha256": "722efe6095a229ea2cb3daa24ee93fa8e708ff2bed07f997d050cbe34148ebb0"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassRing6.tga",
+    "bytes": 16402,
+    "sha256": "eedf7615e356add6d6150cef07ce00ca8b78f3d2929277d1389679ad5b5c2a8c"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassRing8.tga",
+    "bytes": 16402,
+    "sha256": "47439d76f5d6321ca42fb0e8f618bd2809ef0b2ef225ff5b5dd158e0fdf2be80"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIGlassShadow.tga",
+    "bytes": 65554,
+    "sha256": "8b746b30d96a675e70716d73e1aa1b5a837bce6d71134581e0531c0318a2e48e"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIPillL.tga",
+    "bytes": 15506,
+    "sha256": "4eddcedb450e651a023bfe2c2a6ad3b4eb9f84cca00721fad4ebe5bb6bbf84d2"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIPillR.tga",
+    "bytes": 15506,
+    "sha256": "d021196666e5201d3867ad49cea9fa47ef66a01fd6974424551e232f167fcc66"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundCorner.tga",
+    "bytes": 4114,
+    "sha256": "9ecef830cb1a0d092104a0642659cb831498d0afa09d3c5e1223c5fe3eed2cf9"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundCornerFill.tga",
+    "bytes": 4114,
+    "sha256": "e33f70d0c1ed5689d2a0809b134bf19b5d3425db195108898e4a060fb10a0538"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundCornerFillBL.tga",
+    "bytes": 4114,
+    "sha256": "1d38918a1aaed813682b7ae9bd5362cc6cb380a4700ae4181832c46293ab3e56"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundCornerFillBR.tga",
+    "bytes": 4114,
+    "sha256": "ba737409d3195ce774a984a5ac81bf1b3cc3101e635e0aec1db2e045a9c393ac"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundCornerFillTR.tga",
+    "bytes": 4114,
+    "sha256": "151da9029703784afe731c13be178ea05d48fe94fcf343fb60e2d1b0f92efb6d"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundImageMask.tga",
+    "bytes": 1048594,
+    "sha256": "ec35b8b4a52cb6a1b7d87a603bb46eafc4fcf31e858481afa3d833ef1309259f"
+  },
+  {
+    "path": "DungeonsForever/Media/LibHUI/HUIRoundRectMask.tga",
+    "bytes": 16402,
+    "sha256": "8cb872a6222c53c2c0ed356618508e6c847589d80110d47ca8644232b6a5c755"
+  },
+  {
+    "path": "DungeonsForever/Media/Loadings/OnyxiasLairHero.tga",
+    "bytes": 353948,
+    "sha256": "a055bbd0b859b2028ce65c83ac04725413ae3af4992de5f55bb06710c7da220b"
+  },
+  {
+    "path": "DungeonsForever/Media/Loadings/OnyxiasLairWide.tga",
+    "bytes": 704947,
+    "sha256": "be5dd976e01eff3081c28a88aa15e5eca179f0dfc0f7c5d7fe5b9b5081900313"
+  },
+  {
+    "path": "DungeonsForever/Media/MapDoor.blp",
+    "bytes": 2564,
+    "sha256": "49556bf52b36477eb7d2b368d51bc9c62e89fe4b2554846be996642a4fa2405a"
+  },
+  {
+    "path": "DungeonsForever/Media/Maps/Dalaran.tga",
+    "bytes": 880276,
+    "sha256": "7b3737bc8a0dd28e5c23f8c5b647f92406dff62b9da0125d35ee2dd19c449a73"
+  },
+  {
+    "path": "DungeonsForever/Media/Maps/ExcavationSite.tga",
+    "bytes": 878471,
+    "sha256": "8808275ac64c268729550834a7683313aaa3ec01365bdc315de73fa44b080293"
+  },
+  {
+    "path": "DungeonsForever/Media/Maps/HallOfThanes.tga",
+    "bytes": 880949,
+    "sha256": "15018f35ee19a3154aa5ff415c6bc439175bae9b5bd100bcf40be228827d80b6"
+  },
+  {
+    "path": "DungeonsForever/Media/Maps/RuinsOfLordaeron.tga",
+    "bytes": 880767,
+    "sha256": "4f01cb4ae119d3ef06a79eb7f7c3b8bd5114c730ba0dd4541b80aae2ad2f00ca"
+  },
+  {
+    "path": "DungeonsForever/Media/Maps/WailingCaverns.tga",
+    "bytes": 876911,
+    "sha256": "d9b4e24fb32cadb3ef04b6fc0b5dbc77538bb50f938434d664f2c12ea1847d25"
+  },
+  {
+    "path": "DungeonsForever/Media/PvPRankArrow.tga",
+    "bytes": 16402,
+    "sha256": "2815851318c3668a992f8b478d11402ac9fcb3a0613bfeaf92615928334d11e5"
+  },
+  {
+    "path": "DungeonsForever/Media/QMarkAsk.tga",
+    "bytes": 16402,
+    "sha256": "ca134b23224c30e4c66178f154a99e8003f82180ac180644cfedcc383b191709"
+  },
+  {
+    "path": "DungeonsForever/Media/QMarkExcl.tga",
+    "bytes": 16402,
+    "sha256": "ac4930477b6939d05162a8b2c07d960dce51bc988b99ea5390eea7918a04e9f4"
+  },
+  {
+    "path": "DungeonsForever/Media/QuestPinLocked.tga",
+    "bytes": 16402,
+    "sha256": "7fae9c9691bbf1d8b5beabc10f4937370cf0c5acf734177a8f9fee6a8a3ac11a"
+  },
+  {
+    "path": "DungeonsForever/Media/QuestPinPre.tga",
+    "bytes": 16402,
+    "sha256": "9084dc72c2a4c00dcf85c8b820efc17273011915afd8287a43f1054444f32db6"
+  },
+  {
+    "path": "DungeonsForever/Media/QuestPinReady.tga",
+    "bytes": 16402,
+    "sha256": "87cd660e77549a25755ac4457dcff9484138b4f775a871c89f7b03ab43350d96"
+  },
+  {
+    "path": "DungeonsForever/Media/VGradient.tga",
+    "bytes": 4114,
+    "sha256": "bbc2f3a81ff1213a60fe1370c3f8ad1860b86d64d9695dafce2b7d6ec6e3d6a4"
+  },
+  {
+    "path": "DungeonsForever/Media/WarnTri.tga",
+    "bytes": 16402,
+    "sha256": "fababef6248507c3f5f9cf2de9e5e25d802e3867734d387f577ca86812997f6e"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Druid.blp",
+    "bytes": 6676,
+    "sha256": "71c2f519357cbf05d41c019ec6fa976850e78875998c8b86be158525ab9230d3"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Hunter.blp",
+    "bytes": 6676,
+    "sha256": "f32ddafcd5c76e8e7dee6bdcc7877e000a5b69e4003cff8fdd39a64c65b37e33"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Mage.blp",
+    "bytes": 6676,
+    "sha256": "2c2d97a60d71899aebc274546edfa83a4755ce82b59f73c8a65cb4ea703a2d8b"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Paladin.blp",
+    "bytes": 6676,
+    "sha256": "e8fdcd4ae38098ec30b8da3d297516c0622d797b89e191b80f8c88e368698f2b"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Priest.blp",
+    "bytes": 6676,
+    "sha256": "945d0ac49ce50416bca3b1e5ddeefa2974040473c33ae74ff35880b47d325ab5"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Rogue.blp",
+    "bytes": 6676,
+    "sha256": "1ac82b80cbd920352198a3b5451b409f4e68eb8fb5cd05c2e7d9fa3f52098c93"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Shaman.blp",
+    "bytes": 6676,
+    "sha256": "3b78c88ce486f8d84467f55f35c42e2e33a34fc5d0493f48a2d93151ccd0ac7d"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Warlock.blp",
+    "bytes": 6676,
+    "sha256": "bcb35e0c8e86c5e1767af8ebc2e138ad354a812bed68c97885073ffa2dee964b"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/CLASS/ClassIcon_Warrior.blp",
+    "bytes": 6676,
+    "sha256": "6ea42083c28fc9b868bc3f3353c2c7a469c837761dc28270e7d915f45232e44b"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/FACTION/FactionIcon_Alliance.tga",
+    "bytes": 16402,
+    "sha256": "28c5e6a87408cc23aefd0f88c0d3753ab9905a10e3ffe05ba9d85c8a4cc5ff0c"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/FACTION/FactionIcon_Horde.tga",
+    "bytes": 16402,
+    "sha256": "4993bd7e0b1d3ef6fa130247b757cc3e50bd504c9cfe6e5bcaf88b7727f357d1"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/NAV/CrateNav.tga",
+    "bytes": 16402,
+    "sha256": "109dfd804eebbf23b0b178d358c15ad7d4216cbf02871a0547b221076333f566"
+  },
+  {
+    "path": "DungeonsForever/Media/icon/NAV/SortIcon.tga",
+    "bytes": 4114,
+    "sha256": "3ffb15f96601045802636cd83b8372a8e862578a384a74109f6dd6a6e4a65b8e"
+  },
+  {
+    "path": "DungeonsForever/Media/textures/DF_Settings.tga",
+    "bytes": 16428,
+    "sha256": "15122eb45fabb8ad054ee87201067416f2e50d163cf81c717634983171cb1e10"
+  },
+  {
+    "path": "DungeonsForever/Media/textures/YY_close.tga",
+    "bytes": 4140,
+    "sha256": "28c9d88f967875983ff3a907f0329111c4ae400513a63344e8230b7e200993a1"
+  },
+  {
+    "path": "DungeonsForever/Media/textures/arrow.tga",
+    "bytes": 4140,
+    "sha256": "337d2e1162154dd54d839d742a8d0c7d7ed00f288ee70753b86eaa393b71dff5"
+  },
+  {
+    "path": "DungeonsForever/Media/textures/route_arrow.tga",
+    "bytes": 65554,
+    "sha256": "d93452dc676e47177c2a7101cffd1a4c90c3e61c3dba24c6374b9febf312aa0d"
+  },
+  {
+    "path": "DungeonsForever/Media/textures/route_dial.tga",
+    "bytes": 65554,
+    "sha256": "a28a13218d12a7f6505e3ec351bd595a7dbc0a93452e0224c9078270f7786692"
+  },
+  {
+    "path": "DungeonsForever/dd_author.toc",
+    "bytes": 47,
+    "sha256": "c48d6c35aedf52765f38cdd969e49293487f15dd3312d50d285fb364111ba37a"
+  },
+  {
+    "path": "GearInsight_Forever/Card.lua",
+    "bytes": 10002,
+    "sha256": "eda79d8b57f354d5fd35954c26474956251dae0f5c7fd12128d6da4ecb450109"
+  },
+  {
+    "path": "GearInsight_Forever/Core.lua",
+    "bytes": 19097,
+    "sha256": "78946c2781b878e269e6d08694722e907970e9326c3e5be11dcf3f5f5de0b866"
+  },
+  {
+    "path": "GearInsight_Forever/Data.lua",
+    "bytes": 3702026,
+    "sha256": "f5e768d380fe6f515033d632e7ca003186652100e355b69ebf42fece11d4e27f"
+  },
+  {
+    "path": "GearInsight_Forever/DataPack.lua",
+    "bytes": 583,
+    "sha256": "3a6527a335df9bc496d41d54b409c5e45795f795df3985ee192f36bb594d19c5"
+  },
+  {
+    "path": "GearInsight_Forever/DefaultBuilds.lua",
+    "bytes": 5795,
+    "sha256": "8d213a7d02971b7c40723d9046de0d0fb85d299ca55586987cc02091c3cf5393"
+  },
+  {
+    "path": "GearInsight_Forever/DefaultBuildsData.lua",
+    "bytes": 65172,
+    "sha256": "e0c3f0387b2ba66dade61ff782e558919db0b372da6ac3bfc9717cb991fc49b9"
+  },
+  {
+    "path": "GearInsight_Forever/DungeonQuestData.lua",
+    "bytes": 494112,
+    "sha256": "5c6d3bba69b428dbd5911f2d982031d8b8d62db5bf3fc7d6c73fb416875e09fa"
+  },
+  {
+    "path": "GearInsight_Forever/DungeonQuests.lua",
+    "bytes": 22071,
+    "sha256": "004e23febaafa5351eb8a3e77aee3bdb7ed1daa17b0778237b2a4d9eb41f5d2c"
+  },
+  {
+    "path": "GearInsight_Forever/GIWidgets.lua",
+    "bytes": 57669,
+    "sha256": "0f57130695aa522519aefda3195e8533f898a2078e532dbdca5935d13e722d14"
+  },
+  {
+    "path": "GearInsight_Forever/GearInsight_Forever.toc",
+    "bytes": 1546,
+    "sha256": "5d2e8da3fd2495be3525cfcd37db9520a670e4b8a55d4ac9a907f4dd74e99011"
+  },
+  {
+    "path": "GearInsight_Forever/GuildChatLevel.lua",
+    "bytes": 5261,
+    "sha256": "f8af4d703078762b0547a1e714fe9f602bdfc81c2f8ab87f67d1d09e91205e97"
+  },
+  {
+    "path": "GearInsight_Forever/ItemMissingData.lua",
+    "bytes": 25471,
+    "sha256": "a387a99efcdfae1c4783b093cb1ff6cef00cc503bfc48a67cd5b0a194b4b8f6a"
+  },
+  {
+    "path": "GearInsight_Forever/Keys.lua",
+    "bytes": 51562,
+    "sha256": "402d4a7d791ea5a23c3c0642f7a78a0a6b2ff37e75141cd710eb56a2333ec9cc"
+  },
+  {
+    "path": "GearInsight_Forever/KeysCast.lua",
+    "bytes": 3930,
+    "sha256": "de215e7be0e748fa7bdefcd3f4ba1843fb28d8a568468ab93a6b4e33aff463f0"
+  },
+  {
+    "path": "GearInsight_Forever/KeysCdm.lua",
+    "bytes": 8349,
+    "sha256": "d698ada501a0b8afe7e0f26e8fce1f1798c306b5b041aa1d78762d46f9393e40"
+  },
+  {
+    "path": "GearInsight_Forever/KeysFormData.lua",
+    "bytes": 4719,
+    "sha256": "8a534864e706c15b62ae6c95ed32f170442df31797b61f68e09ac78b3d3da1d8"
+  },
+  {
+    "path": "GearInsight_Forever/KeysHud.lua",
+    "bytes": 9379,
+    "sha256": "a910604a2101eb6cea206f4b8ab95eaff40825cfe97c20cd2a64e290cad7b39a"
+  },
+  {
+    "path": "GearInsight_Forever/KeysKb.lua",
+    "bytes": 34107,
+    "sha256": "93dc6572954e6132f799342cdc5fa6d1bc33da9f73e94edae7c688f3528a51fd"
+  },
+  {
+    "path": "GearInsight_Forever/KeysProbe.lua",
+    "bytes": 11685,
+    "sha256": "629703598aa838a1c0e9568211c103dc50042614ed2a7646b10e9aa96ead1061"
+  },
+  {
+    "path": "GearInsight_Forever/KeysRot.lua",
+    "bytes": 16396,
+    "sha256": "7696ea26cf16409bae70d73fca05a598403357fd8a03b6861ed281e5a68f47f0"
+  },
+  {
+    "path": "GearInsight_Forever/KeysRotData.lua",
+    "bytes": 11878,
+    "sha256": "1678f7b7cf18cf06572b5970706e4f58fb74960ff3b48581d576671b4eb4957b"
+  },
+  {
+    "path": "GearInsight_Forever/LevelShare.lua",
+    "bytes": 20828,
+    "sha256": "9b7eee596597be55b12e03d4015d58f73ca6f0373d133e3d046635f9a06565cb"
+  },
+  {
+    "path": "GearInsight_Forever/Leveling.lua",
+    "bytes": 5475,
+    "sha256": "4f9db2ccad2a867f4937b6c4b239ba5ef9f4a3ece224874cf3514a0295f7b389"
+  },
+  {
+    "path": "GearInsight_Forever/Loot.lua",
+    "bytes": 6646,
+    "sha256": "034a5b9b192ffe79a11879aa29b282a7a9262b541c749c00c8c6e9ace2b23b8a"
+  },
+  {
+    "path": "GearInsight_Forever/MacroData.lua",
+    "bytes": 127987,
+    "sha256": "f00458f83614c62b2596dcae538c1d94f12cd10a7fa5583a6eecbcef110d6fc0"
+  },
+  {
+    "path": "GearInsight_Forever/NewsData.lua",
+    "bytes": 7268,
+    "sha256": "2bb0516d87d3194a721717802a2830fbed9f854b24ef37c7d44d485da919a893"
+  },
+  {
+    "path": "GearInsight_Forever/Offsite.lua",
+    "bytes": 14694,
+    "sha256": "42a7c9c82a17a6ab246f3e23c7d941e1b3145e83126432407f5858fa7ef3190e"
+  },
+  {
+    "path": "GearInsight_Forever/Pack.lua",
+    "bytes": 3462,
+    "sha256": "b333e4f46251c855c61bda3504ebbaabe13f43100d7ee56284d87d9c0072c46a"
+  },
+  {
+    "path": "GearInsight_Forever/PageAch.lua",
+    "bytes": 7311,
+    "sha256": "8da33296118c3db37c8e60cb4b671eeadc55cb2501a590f570d305205c2311ad"
+  },
+  {
+    "path": "GearInsight_Forever/PageAdvanced.lua",
+    "bytes": 10753,
+    "sha256": "06e339425096d0ec1d7c9f25f9650abe311a5deba954ff156d1d452453e3c9c3"
+  },
+  {
+    "path": "GearInsight_Forever/PageData.lua",
+    "bytes": 12078,
+    "sha256": "25b1b3c5c69ea287cfe75af36486db95c7b8bf8f879deda7d5bd0b5c895ec274"
+  },
+  {
+    "path": "GearInsight_Forever/PageKeys.lua",
+    "bytes": 42178,
+    "sha256": "b2a36e6ee4a26a188b21455363265b4819a17f9e4d9fc64655533c6cf2229e04"
+  },
+  {
+    "path": "GearInsight_Forever/PageLoot.lua",
+    "bytes": 43734,
+    "sha256": "b3d5c1158c52cd3f3f180af37608d13ad7f3a97a8835483d3ac306252ee4730a"
+  },
+  {
+    "path": "GearInsight_Forever/PageMacro.lua",
+    "bytes": 30119,
+    "sha256": "aea849bc8885fedf460b7f7e003f5833b48feef8539ccaeaeee8c08f314de4bb"
+  },
+  {
+    "path": "GearInsight_Forever/PageNews.lua",
+    "bytes": 9948,
+    "sha256": "ad2fb74ee13f487e5dc2e05aacec1d495690d6f0d0195a90c84b3f50901c2339"
+  },
+  {
+    "path": "GearInsight_Forever/PagePet.lua",
+    "bytes": 15776,
+    "sha256": "d475773b93f3a8e6b6b838c8aa9d10558fab5061a5bc9a172b914c3256628e10"
+  },
+  {
+    "path": "GearInsight_Forever/PagePlan.lua",
+    "bytes": 109343,
+    "sha256": "a5c077787502d75a5d1f635df795ef3dcd379bfb7f4f8488ca9791a3ae72d052"
+  },
+  {
+    "path": "GearInsight_Forever/PageProf.lua",
+    "bytes": 35207,
+    "sha256": "a90a9153ee25b08b894d263033648d138e5e3fbb3acf1b3fbb384106949469f7"
+  },
+  {
+    "path": "GearInsight_Forever/PageRot.lua",
+    "bytes": 26097,
+    "sha256": "b4ab44201e0516a63070cf8462e5891e9672a3cad4a8165f0ac7874c22be820f"
+  },
+  {
+    "path": "GearInsight_Forever/PageTalent.lua",
+    "bytes": 21533,
+    "sha256": "ec8e95e94b371e3c583d699fe84fef62029812236d9df23d2b8d6562fc3bd4bf"
+  },
+  {
+    "path": "GearInsight_Forever/PageTier.lua",
+    "bytes": 3903,
+    "sha256": "a8e40e63a10994bb2adec5b859f15530c907e66cc0036af86d160e70293a7862"
+  },
+  {
+    "path": "GearInsight_Forever/Perf.lua",
+    "bytes": 40004,
+    "sha256": "0576d1407fed5aa208f5deeb9bae8d163f2df5faf8cc11d8d6366c367add7f0a"
+  },
+  {
+    "path": "GearInsight_Forever/PetData.lua",
+    "bytes": 9819,
+    "sha256": "d289b7198bc011fa4eed890b7d18131080248b74c95afb19b938f64e27bfa7d4"
+  },
+  {
+    "path": "GearInsight_Forever/Prof.lua",
+    "bytes": 40790,
+    "sha256": "13f213fbeb7c45181894211a06000b68917b1305f7e130ceb680a71b49c6966a"
+  },
+  {
+    "path": "GearInsight_Forever/ProfData.lua",
+    "bytes": 124073,
+    "sha256": "0995d31408d61959f447cd13f1c0334773340f320b23f8e8cc9d65ff90e220b6"
+  },
+  {
+    "path": "GearInsight_Forever/ProfPlan.lua",
+    "bytes": 19590,
+    "sha256": "635ef22bd8663f23f395dcdce9066ba575f9c366c7347998aeb830ecdafb64dd"
+  },
+  {
+    "path": "GearInsight_Forever/ProfRecipes.lua",
+    "bytes": 378778,
+    "sha256": "f577f5110e6b9c8ba8e8f2573aba3488b68e3ba36b773f2e16a96803d846920a"
+  },
+  {
+    "path": "GearInsight_Forever/QR.lua",
+    "bytes": 15938,
+    "sha256": "9719372dfa490cf625ad25741b47694563b28eb672a5c2126513c0e9f1f081a4"
+  },
+  {
+    "path": "GearInsight_Forever/Report.lua",
+    "bytes": 17636,
+    "sha256": "91f195a4a105e382692b26432f8d7c1a77e6961f04446e465c322820a12ac704"
+  },
+  {
+    "path": "GearInsight_Forever/Route.lua",
+    "bytes": 22743,
+    "sha256": "2d84921f3dbdb7275369b71fa73b03321797e485269aa44c6df03f5b72fa814c"
+  },
+  {
+    "path": "GearInsight_Forever/RouteData.lua",
+    "bytes": 15516,
+    "sha256": "0c0bd855226c4f0f373f0b2fa1dfb1682a01c795ee21fbdde0d6b90b7339d1a5"
+  },
+  {
+    "path": "GearInsight_Forever/SideChains.lua",
+    "bytes": 10405,
+    "sha256": "b099cfea2fde54900e3b1741f6445bf146c76623820a840bc3f865ca60ecb740"
+  },
+  {
+    "path": "GearInsight_Forever/SideChainsData.lua",
+    "bytes": 9208,
+    "sha256": "0f0910daff7549a14d959441050f0cd89491f9ca36b2fda4e4339adee0576aea"
+  },
+  {
+    "path": "GearInsight_Forever/SpecGear.lua",
+    "bytes": 6793,
+    "sha256": "6e3dcd0dc45c51bdf7c1bf37f0d52521a82ffd0cb6ecd8f158bf0d21a1941ecc"
+  },
+  {
+    "path": "GearInsight_Forever/SpecGearData.lua",
+    "bytes": 71957,
+    "sha256": "48e392d8d9d60b559c8988d113dcc486d32ffadc8c71ef1e96d63385279fd8cd"
+  },
+  {
+    "path": "GearInsight_Forever/Stats.lua",
+    "bytes": 14421,
+    "sha256": "1d8e25c12570c13cb3b091badaa1ed4146da5dea942ca6f9de494c0d10fee801"
+  },
+  {
+    "path": "GearInsight_Forever/Supporters.lua",
+    "bytes": 2695,
+    "sha256": "8ff11ce25c388b69cfb2341dd18dfcf4d13cfeaab177b140b5484212d7106905"
+  },
+  {
+    "path": "GearInsight_Forever/Talents.lua",
+    "bytes": 34196,
+    "sha256": "8083586822f4fd1cbb6f70a2390377529567e7b1ea2e8f58f4da391f70c35806"
+  },
+  {
+    "path": "GearInsight_Forever/Tooltip.lua",
+    "bytes": 6214,
+    "sha256": "d3ecdee21a9218eeb11a468d1e7db36f5191fab98b5c70810c8302d7dc216151"
+  },
+  {
+    "path": "GearInsight_Forever/TooltipZh.lua",
+    "bytes": 64816,
+    "sha256": "3bdf9ea520f38f71ff852b4399cff8e62e887d5f905cac65f4ff63565ab09a45"
+  },
+  {
+    "path": "GearInsight_Forever/TrainerData.lua",
+    "bytes": 17730,
+    "sha256": "7e1859307b5d5ec017d6ca3657e288f53f0b6bedf9fad80a1bee6a4fc4ecb83b"
+  },
+  {
+    "path": "GearInsight_Forever/Trainers.lua",
+    "bytes": 5978,
+    "sha256": "649affb53169d908989aaa95b7c01538dc63b928a7973b6e64b6121b497bd64f"
+  },
+  {
+    "path": "GearInsight_Forever/UI.lua",
+    "bytes": 50880,
+    "sha256": "5dd7e3a7a48a94b4d5e434db0b39799e917cc7c2c96408ea33173353fc69aa96"
+  },
+  {
+    "path": "GearInsight_Forever/dd_author.toc",
+    "bytes": 47,
+    "sha256": "a9e4b55e1a8131a88f749881eeac9b432b066d65d434c88d7355a9dce1da1f68"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_bili.tga",
+    "bytes": 4140,
+    "sha256": "12e0cb2b5adac4b38f12606883cc410eada8068c7d9178fd5891365721c075c5"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_douyin.tga",
+    "bytes": 4140,
+    "sha256": "2c6edab8c975cd85d49073aebffb7dbf4cf285a79e9d513007430de222be059a"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_mp.tga",
+    "bytes": 4140,
+    "sha256": "36d46797be84b74b978c2305a70f5cc367609df6c4cf5b74f3207fe22dd5fa2e"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_qq.tga",
+    "bytes": 4140,
+    "sha256": "da696215fb1aa9ea4beb75ba84934875b7f329265acf8eb0bdf95ddc02f48c16"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_tg.tga",
+    "bytes": 4140,
+    "sha256": "bc03745105cc27d77da9bd0066dcf7a6d21eeed8c45cbfd014befe62e6b7386d"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_wechat.tga",
+    "bytes": 4140,
+    "sha256": "f039c5afc3f80a108aff46ccea231b2e5fa0a443f489deddef3f48c38ceccbb8"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_x.tga",
+    "bytes": 4140,
+    "sha256": "c1b38aab03c88bdd3e4a455a7b6c31b2bbcde5736f302353c3fe94e78596fa57"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_xhs.tga",
+    "bytes": 4140,
+    "sha256": "c74abbe41c29133ab04bfc1076f95c88d65bd10b0ba0ab303e4f8dc27f2063d0"
+  },
+  {
+    "path": "GearInsight_Forever/media/ch_youtube.tga",
+    "bytes": 4140,
+    "sha256": "01d8e8014edea1cc75656853288b542dc022450dadf16e4d4f5e36ce2948c240"
+  },
+  {
+    "path": "GearInsight_Forever/media/logo.tga",
+    "bytes": 262188,
+    "sha256": "71013eadbf2db87712268427f8721969b744e92bbd5adc8cb20f804e4ba5eaa0"
+  },
+  {
+    "path": "GearInsight_Forever_Group/GearInsight_Forever_Group.toc",
+    "bytes": 643,
+    "sha256": "e0b314065253cc96fa7caed8490f8362e59379d61dc810e740d3b174afdbd33e"
+  },
+  {
+    "path": "GearInsight_Forever_Group/QuestMates.lua",
+    "bytes": 142997,
+    "sha256": "ba5e8dbf869947a4fbc1b09c52bc54274b433506cc340fe802c003d43c598a39"
+  },
+  {
+    "path": "GearInsight_Forever_Group/dd_author.toc",
+    "bytes": 47,
+    "sha256": "a9e4b55e1a8131a88f749881eeac9b432b066d65d434c88d7355a9dce1da1f68"
+  },
+  {
+    "path": "GearInsight_Forever_Guild/GearInsight_Forever_Guild.toc",
+    "bytes": 846,
+    "sha256": "c759db3bd51410148be3b6c8c3be74395de1cbdf1f80f9df6ae01b6ed17b567e"
+  },
+  {
+    "path": "GearInsight_Forever_Guild/GuildHome.lua",
+    "bytes": 31268,
+    "sha256": "034405487ddb3f286d04e24ccf2161c00d15bbfe7f91dbeefa12163bd7ebef3b"
+  },
+  {
+    "path": "GearInsight_Forever_Guild/GuildRecruit.lua",
+    "bytes": 5652,
+    "sha256": "743d22f9d0202c1bb7590dc752d2ef5978b90bf8412718324cd9f5574a75af5b"
+  },
+  {
+    "path": "GearInsight_Forever_Guild/GuildTab.lua",
+    "bytes": 47331,
+    "sha256": "51ebd650a3067d4e0ac639e690555cc6e21d27f8be6347c4d94359c964cd9f7c"
+  },
+  {
+    "path": "GearInsight_Forever_Guild/dd_author.toc",
+    "bytes": 47,
+    "sha256": "a9e4b55e1a8131a88f749881eeac9b432b066d65d434c88d7355a9dce1da1f68"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/CHANGELOG.md",
+    "bytes": 368,
+    "sha256": "f2e3f3f4ad1013f182454bcc51f3dfa7b8b5219af83d3841d40f6b39ebbdca6b"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-Cata.toc",
+    "bytes": 373,
+    "sha256": "a51d92654584604a716dad28894b01cca7fc0d334139bf4882ed1fea0a403253"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-Mists.toc",
+    "bytes": 375,
+    "sha256": "05530235eb092b00a13d2cb65d6765b0405d04c6fe8142a0f2d3d4041fa95d75"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-TBC.toc",
+    "bytes": 339,
+    "sha256": "0aec01c195ad237aa3242755adeb86d55d989cc8a344fa0d173d3c13eb0b8a4f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-Vanilla.toc",
+    "bytes": 356,
+    "sha256": "a5aa94091177030df66b0a3a130d94e15f44caeb092e9d75a68cfbda8b9fdded"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-Wrath.toc",
+    "bytes": 377,
+    "sha256": "4550de8b6e97a2d69c03d1836875f37352a1194b925054b756ab2dc7fcadc117"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic)-camelot.toc",
+    "bytes": 363,
+    "sha256": "84b473a887a8fb3875dc7401aebec0bb339fa71433d8e0122486f4387b4d65c2"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/HandyNotes_DungeonLocations (Classic).toc",
+    "bytes": 357,
+    "sha256": "d9c11b825268d531006e420f77cd3591ec70d36fe59b01be6243f4e50811204f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/bcc.lua",
+    "bytes": 26987,
+    "sha256": "09074ce59037e12ff500af98db469586aceaafbbfcd3c3b855e47341c55f9c1a"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/cata.lua",
+    "bytes": 37249,
+    "sha256": "05c003e690d3d0b4d8a73787f4e978c3edf13c241765d8e300315fc86629ed04"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/classic.lua",
+    "bytes": 20478,
+    "sha256": "87a2a93186774e237e87e85ef5d3b7e1feabce7f41bb84c95836b024c287ebec"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/dungeon.tga",
+    "bytes": 4114,
+    "sha256": "53491c8052491508570c49e7e1c21c8f4a3bb3c02cd1b8faf3038a47f6949c11"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/forever.lua",
+    "bytes": 20742,
+    "sha256": "b2da900896a5a3b2ff28f88873672c0b757fa9204c77e72d67b87f60a8ed90a1"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/gray.tga",
+    "bytes": 4140,
+    "sha256": "c34a4a6e9d4cd4c35d6704279c4ec612b4d83b4bd4493480de3e7e05b14f0849"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/LICENSE.txt",
+    "bytes": 1736,
+    "sha256": "1449996b52a28f90080a255cd12c396bb51645a61150ca90c3d02d28246df9a4"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/LibQTip-1.0.lua",
+    "bytes": 49926,
+    "sha256": "9cd45ddae696a419665120c7f0c3d08374fe123d181d25c1b80b2448781bfc2e"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/LibQTip-1.0.toc",
+    "bytes": 461,
+    "sha256": "b92aa36f77cdb9945b96e0ac0f8c8467adef6626508fdc866b37f6148f198eeb"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/LibStub/LibStub.lua",
+    "bytes": 2251,
+    "sha256": "d34235c85f869505fdd9ef321d2420f69db7d2eb873d2b3bbf57584a314060fa"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/README.md",
+    "bytes": 1520,
+    "sha256": "bcf87bdad0b77f0cd9af4e93ea18e3126c9d6f60937e0412996c6a05c3914e51"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/libs/LibQTip-1.0/lib.xml",
+    "bytes": 213,
+    "sha256": "290e49184ed78a9085c1324bcef85306001afab95d5673e7b8009fa776109d3c"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/deDE.lua",
+    "bytes": 5226,
+    "sha256": "9fc89c13d9528d697984737059b2dad19eeaaa62609870a70dbadc58c5861355"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/enUS.lua",
+    "bytes": 3251,
+    "sha256": "88f0796c481ea61dc51343c4a0c008d1fff65b1b89ee4ab06846c80834110eab"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/esES.lua",
+    "bytes": 5977,
+    "sha256": "ee1fddba0188b80566dc6482dd9fae8e2e165d4cfb6e93636435b17d6b8e5b3c"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/esMX.lua",
+    "bytes": 5964,
+    "sha256": "303a27eb045cc1d2c5e0b7ad229c47d5577a0d51db3319cef2476f04ee03be59"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/frFR.lua",
+    "bytes": 5412,
+    "sha256": "f7fa9a93ac9c3691fb2effcec51e2dd17eeb26f7b00c867c065cebe4daa09427"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/itIT.lua",
+    "bytes": 5988,
+    "sha256": "de4fc9580f3f4ae2dc1a930653a906402fa7e6a60f639cb644f3a39bea7f4466"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/koKR.lua",
+    "bytes": 5237,
+    "sha256": "81551bd0ae9b9a082ebba586defdbb2aef336e256397039068b7f0782e4ee2c3"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/ptBR.lua",
+    "bytes": 5190,
+    "sha256": "f33efd91db6d0b93fd2a286dab350fa2c5e92ab212107709d0d2261a10a835f2"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/ruRU.lua",
+    "bytes": 7108,
+    "sha256": "dcdba4e94ebaa1bdbc8c6d25bde93afb0c2eef5ce880354094c0df7b78bc0ca0"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/zhCN.lua",
+    "bytes": 5000,
+    "sha256": "020965304ed8dbd28b821e59c2f368c1c80f6c0a15f86917513ae5248eadc490"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/bcc/zhTW.lua",
+    "bytes": 4971,
+    "sha256": "676740d530d63931006eed797302f543a2db693d9b82611a360906fde43f0ef4"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/deDE.lua",
+    "bytes": 7057,
+    "sha256": "2dc6fffaac859e9a97534856dfbcd88984e9594c7a5e908bf7d77f4bacfb00c6"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/enUS.lua",
+    "bytes": 4472,
+    "sha256": "3e23fe4db6cd280301cbcf86af75c60b183bca46d391ca60cbbe01d41cdeb4a3"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/esES.lua",
+    "bytes": 7880,
+    "sha256": "934f88df50cc994d19ba770efeeaa0235555354aa67f10a661f164877aa93e36"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/esMX.lua",
+    "bytes": 7880,
+    "sha256": "a3ac418bf6c4111aa30339b0566cb99e09e43d919fc32edacdd5bb1e3732d403"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/frFR.lua",
+    "bytes": 7340,
+    "sha256": "cacdb48c905f8a8b2d6cf6facaae915d8f712fa1a198da2322ba6aa6416a9751"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/itIT.lua",
+    "bytes": 7848,
+    "sha256": "a2dec28e0948942b6c1c85ed5a3645f25d8c47dd9d8ec1a31053c3f76994c44b"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/koKR.lua",
+    "bytes": 7096,
+    "sha256": "daf5ec97155c9d420b53a838a82762adcb6b44c977cc16af991a04e601bd7d21"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/ptBR.lua",
+    "bytes": 7033,
+    "sha256": "880c44e379ceadfc8178742f13dacd6e3b82ff778dd5d87efb5e1692d57fc22e"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/ruRU.lua",
+    "bytes": 9475,
+    "sha256": "c34650cfc4a4f942ecceb6b16a39908f0cbee7cd61f35389199797c6994f9555"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/zhCN.lua",
+    "bytes": 6732,
+    "sha256": "32bba001ac95d992224af168028493a7109bd2b80fc9e7a0e42175bc359b9a6d"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/cata/zhTW.lua",
+    "bytes": 6693,
+    "sha256": "f4c24ceaf057ac475621227db5caa9c886dbde8db7bfdeb82dab9aede2edc9c5"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/deDE.lua",
+    "bytes": 4155,
+    "sha256": "7b59fe9344a4b8d8e76a13fb82b1ed30cfcdaf6b66b3eb0ed0013aeb59e50241"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/enUS.lua",
+    "bytes": 2518,
+    "sha256": "737966bd91532e3a42344434e2ac64d368e6c6d562409d75106a895c85502822"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/esES.lua",
+    "bytes": 4878,
+    "sha256": "eccc24baebe9109f05f45271aad2c1b22f4b12702b62844165135e01c47650e8"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/esMX.lua",
+    "bytes": 4878,
+    "sha256": "2de015f6bfdb730fe0f7752197591b2f730f393c530032633b9ffda446dc4732"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/frFR.lua",
+    "bytes": 4272,
+    "sha256": "69ee5b0282fba0c31fc114820f6ab4d8e0a1b99c1968ef10c1c793805f2a5ec0"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/itIT.lua",
+    "bytes": 4898,
+    "sha256": "375386a319fcf920a0c2532926f58b46112a896d6cd7bb024daffbcb4e825ad6"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/koKR.lua",
+    "bytes": 4151,
+    "sha256": "951354333f417bc93b9909acc9ca2dde060d9448a50497cd54a9a0b6fc3890de"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/ptBR.lua",
+    "bytes": 4096,
+    "sha256": "3513b04d59b166df901e630387c5478bc355da2f9df60f540c251b8d4e6f71dd"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/ruRU.lua",
+    "bytes": 5745,
+    "sha256": "e88b86f21980a021713ca160bae882d6f75ca5d4e043aec57663d7d6cc5899e1"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/zhCN.lua",
+    "bytes": 3954,
+    "sha256": "989a3b175c05aa452c475b3096993393937abc434c89b66f59e1aefd0106159a"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/classic/zhTW.lua",
+    "bytes": 3921,
+    "sha256": "bd73396792e773ee29c99cde78a6d129b49c4e53c46053201bdbf141214bf28c"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/deDE.lua",
+    "bytes": 4155,
+    "sha256": "7b59fe9344a4b8d8e76a13fb82b1ed30cfcdaf6b66b3eb0ed0013aeb59e50241"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/enUS.lua",
+    "bytes": 2550,
+    "sha256": "6dcc40f9b20579fd550cd0e146c084c1de9f57bf403557b7223e89fc8f60b5cc"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/esES.lua",
+    "bytes": 4878,
+    "sha256": "eccc24baebe9109f05f45271aad2c1b22f4b12702b62844165135e01c47650e8"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/esMX.lua",
+    "bytes": 4878,
+    "sha256": "2de015f6bfdb730fe0f7752197591b2f730f393c530032633b9ffda446dc4732"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/frFR.lua",
+    "bytes": 4272,
+    "sha256": "69ee5b0282fba0c31fc114820f6ab4d8e0a1b99c1968ef10c1c793805f2a5ec0"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/itIT.lua",
+    "bytes": 4898,
+    "sha256": "375386a319fcf920a0c2532926f58b46112a896d6cd7bb024daffbcb4e825ad6"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/koKR.lua",
+    "bytes": 4151,
+    "sha256": "951354333f417bc93b9909acc9ca2dde060d9448a50497cd54a9a0b6fc3890de"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/ptBR.lua",
+    "bytes": 4096,
+    "sha256": "3513b04d59b166df901e630387c5478bc355da2f9df60f540c251b8d4e6f71dd"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/ruRU.lua",
+    "bytes": 5745,
+    "sha256": "e88b86f21980a021713ca160bae882d6f75ca5d4e043aec57663d7d6cc5899e1"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/zhCN.lua",
+    "bytes": 3954,
+    "sha256": "989a3b175c05aa452c475b3096993393937abc434c89b66f59e1aefd0106159a"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/forever/zhTW.lua",
+    "bytes": 3921,
+    "sha256": "bd73396792e773ee29c99cde78a6d129b49c4e53c46053201bdbf141214bf28c"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/deDE.lua",
+    "bytes": 7798,
+    "sha256": "f1eb48418e6f5ab9695c3ce7bcb2897af3240292c8bd8b10452ed9c705672d3b"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/enUS.lua",
+    "bytes": 4971,
+    "sha256": "f7082bfeaf362000056a6595988ce4d1f49837c8372b9077817e8f282c1efc8f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/esES.lua",
+    "bytes": 8479,
+    "sha256": "00b964778d3c8b3904bb618cf238cb18db9d464baf85b1fe3a8f22f4d3b8370f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/esMX.lua",
+    "bytes": 8479,
+    "sha256": "dd86e06037b0a552d08913c52f8c9e9524db4b00e8215997876b09b276c9abbc"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/frFR.lua",
+    "bytes": 8074,
+    "sha256": "39d9212d6cd610c81fb6ab524af08378b268560c82a436cd4b3048f8b96abb81"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/itIT.lua",
+    "bytes": 8448,
+    "sha256": "80376442826ea6d757bbb3f805d51e07d311162530d5fe535f5fe3ff50361ce3"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/koKR.lua",
+    "bytes": 7823,
+    "sha256": "23ca0857e858db76b7628f21428a72b5ee67a3484fc18357f19af4bf9159d493"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/ptBR.lua",
+    "bytes": 7757,
+    "sha256": "41b9e5154ea383f026f2f2da4bfd300f7c4525c468918c46ab44675a910e6901"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/ruRU.lua",
+    "bytes": 10381,
+    "sha256": "ddf5ed10aaa50dc8c2e77f9d0f37cbb8353e484899a8483def80c6f6a867b99f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/zhCN.lua",
+    "bytes": 7378,
+    "sha256": "220a32680a13aadc9b053e9cd152a464274f237c51af7e187a00e57c6233415c"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/mists/zhTW.lua",
+    "bytes": 7330,
+    "sha256": "37c7f08301d9e56f3da2f17539dc7d55ea20a0a769f47035d956465a9d1308d1"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/Locales.xml",
+    "bytes": 518,
+    "sha256": "fef328837f8af0657a5506246251e562f0537355d7092aaf5f2960875067ea23"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/deDE.lua",
+    "bytes": 6252,
+    "sha256": "5f1912136287715188fa2df9edc180ea5c8dfab810b67a050e9c2fc7b33018f1"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/enUS.lua",
+    "bytes": 3974,
+    "sha256": "922d54a2abb6b189b1b60b13b631d741bf7f5729274fdf3bab2bc0d62f90c025"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/esES.lua",
+    "bytes": 7040,
+    "sha256": "dd95bf304c46a9e763844513643d52d58e188aa39ad371d4acaca8b210ae1cd0"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/esMX.lua",
+    "bytes": 7040,
+    "sha256": "30142e3b872fd5f4314975097658bfa2c5a2b4012bf29edb9386b33511d08010"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/frFR.lua",
+    "bytes": 6508,
+    "sha256": "8567289cb6210aee37e084a1c599a1c306dbec42751ef074020ed1ec26c8f139"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/itIT.lua",
+    "bytes": 7033,
+    "sha256": "dc8e939a9b80481a05d8277dd0653465c7ec2216930b0e0d13b8d4d51f79f109"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/koKR.lua",
+    "bytes": 6306,
+    "sha256": "7d8f7692e0aebabf1958bde625a1a69f62b4ff23c087ec1ad04bd757880d231f"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/ptBR.lua",
+    "bytes": 6228,
+    "sha256": "7f0f4c26ffb677726c493bb56cb7b62529900eaae1308625e43f6f8910831271"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/ruRU.lua",
+    "bytes": 8456,
+    "sha256": "b567fcb0e9629cba14c918e73414779082ecf815cfeaaffa7ef88ef08a8dc3e3"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/zhCN.lua",
+    "bytes": 6015,
+    "sha256": "31a0a3f2515b0219f773fb36f72c13fdac7f8d48ace041d884bb8c1ce6e42163"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/locales/wrath/zhTW.lua",
+    "bytes": 5973,
+    "sha256": "eb5292ce28942729ebfbe267ad7382e6cc080bd97032fcce0d3463f0655d8245"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/merged.tga",
+    "bytes": 4140,
+    "sha256": "fbd5a1b742a5079b05a899836695d724ce55090e201e0ac5f07def4be881772e"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/mists.lua",
+    "bytes": 41473,
+    "sha256": "e89f3d594682b97ac0a8c025302539d3def03863ace95d89b2341b511c8f0fda"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/raid.tga",
+    "bytes": 4114,
+    "sha256": "3ad558c726c50eb58b8ddbba715e74682f23ea6a0fc0e15815821487ba5e2133"
+  },
+  {
+    "path": "HandyNotes_DungeonLocations (Classic)/wrath.lua",
+    "bytes": 33398,
+    "sha256": "bdfdc94aa2f88b39682293bcd86654ef2054b2ec40be9a785e9854245ac635e1"
+  },
+  {
+    "path": "XR_DungeonGuide/Core.lua",
+    "bytes": 34512,
+    "sha256": "2a7240878691cd85ae5cba9d7a0953d747400531d13ff420769df59d7f97151c"
+  },
+  {
+    "path": "XR_DungeonGuide/Data.lua",
+    "bytes": 4155082,
+    "sha256": "cc4e767c62419debf8ee2d26cdc3dc66db31742a6f2049409454733856f389a9"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Bis.lua",
+    "bytes": 1037113,
+    "sha256": "2c6c296fea1d8cab6b4bb4c78f984348611e6f255cb483d2029321b8f35002a6"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_BossModel.lua",
+    "bytes": 11691,
+    "sha256": "5da43e7b89a9e1011a9984c3b31b85c4f72af3c998d2bb716347cbc4f2242d35"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Camp.lua",
+    "bytes": 5468,
+    "sha256": "1cc0f0616722ef7bb014323bba0f039250cd7ea5278620129e140728b4c2c510"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_ClassQuests.lua",
+    "bytes": 206062,
+    "sha256": "0a02b2c786d0c3671a5b761a9de1f0786a863d351a746f39ac4c3fcee06776a0"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Codex.lua",
+    "bytes": 91445,
+    "sha256": "5cc52c459b782a68ef75faea373e8a36c0020c1fab30f8ab219f4ec6119da0fa"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Crates.lua",
+    "bytes": 17548,
+    "sha256": "ce173b4c962c28cc1ac5414d1cc633c0f1ec71f3c42ce102aa64ff509581626c"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_DungeonGuides.lua",
+    "bytes": 94369,
+    "sha256": "b8a2ada49b9900a65561cb12b86c8f880153ab27b86b1040e0b4f2a4aac2c79e"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_DungeonMaps.lua",
+    "bytes": 2325,
+    "sha256": "6b0655ed6c28fc1437297e3ddc7e576c4a21151ed3893f80aa275583f1f57236"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_DungeonRates.lua",
+    "bytes": 35643,
+    "sha256": "89fef9008ba344eab5af7ff9775617e1c8fc63661587dbbb17955e6ed0050b20"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_DungeonTiles.lua",
+    "bytes": 12070,
+    "sha256": "346db099afe0cea098399eb8e7fed4a99c0c164572a34dfbb5564c322d160098"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Explore.lua",
+    "bytes": 13743,
+    "sha256": "19bea388354099fa21d799d6b9fe1fe46a680615de26f63b7b6258489070800a"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Factions.lua",
+    "bytes": 18022,
+    "sha256": "1093d576f6313da59aab355b90dba425513031bb98de80d8eadc153e66d98df3"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Legacy.lua",
+    "bytes": 18673,
+    "sha256": "c09aa01bab00b1ffc40b1a42aabbc4faa9f293f348f5b353d12d2a3e4971e116"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Macros.lua",
+    "bytes": 58608,
+    "sha256": "7b9ba9b5166ab570ebd060dba3651b94421fd0c2368b0a757e6954074e52abd6"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_MapLoc.lua",
+    "bytes": 23064,
+    "sha256": "987002e0776a5b201dea9e0c2e38482e4a4a41c406ee1b0cc2d2d90629700aa7"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Prof.lua",
+    "bytes": 515985,
+    "sha256": "1bff69f5094f80725535b905933ec70450ac3e882a0dc3341221c89467709038"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_ProfCraft.lua",
+    "bytes": 168090,
+    "sha256": "7dc6bb5e593f12226bb5b360a3aaedd7e58aad07e6689bb13b0cac90c1dac73e"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_ProfLeveling.lua",
+    "bytes": 7940,
+    "sha256": "8cc2da607c049834a03e1c3eee711eb2d84f7413a211d6cd2c347f0ec18f9efa"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_ProfTrainers.lua",
+    "bytes": 12573,
+    "sha256": "98d17f5932abfa86d3f7b4d530753af85cc0032f35358d3f4030e0b2c37ec2dc"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_PvP.lua",
+    "bytes": 57109,
+    "sha256": "c2618dceab294cb8c8146fbb20d112109a83f8c140fa7ff65945e2e9f2a7d7b5"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_QuestDB.lua",
+    "bytes": 4973243,
+    "sha256": "751f96033e79e3cf4d440e0369322653fac8c2f9c8a5c924af0ae861a8ce2573"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_QuestNames.lua",
+    "bytes": 6069,
+    "sha256": "08e0da5b8876484db2be492f4012df97b6a159c73358bf8487abc6a8e3401dee"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Racials.lua",
+    "bytes": 12405,
+    "sha256": "bfc32267a1e224c0023c3bc96c9c68d995ba92292b9f5cc32f619b64072a4e5e"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Rares2.lua",
+    "bytes": 214485,
+    "sha256": "279caa97ecf0230864a58e5d08e4274c5555405851fbbf2ce1311761ec602cee"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Route.lua",
+    "bytes": 24121,
+    "sha256": "9d25714d03097444266e3f2b76aa87f1ef5facd5a387dc09a69b1a79bfbaa965"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Skills.lua",
+    "bytes": 160399,
+    "sha256": "32126d0380b1bf30b183bc3679df6b7c4bb01f1b821c706f8c0d5155e871fc25"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Talents.lua",
+    "bytes": 207166,
+    "sha256": "8a3149681b31e34d06e7d7a63ca69442b5582074c962cd2e70bc2497b6c8ebef"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Weapons.lua",
+    "bytes": 2940,
+    "sha256": "e138dc72d5a3db47e4ea46e7c4bd0c9a583d91bf2c1507a02e531f9c910550ec"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_Zh.lua",
+    "bytes": 12946,
+    "sha256": "7ecc78a5f30a21b40b30d3f00ce45f6ebe5253443075d785dd7e111094377986"
+  },
+  {
+    "path": "XR_DungeonGuide/Data_ZoneMap.lua",
+    "bytes": 2899,
+    "sha256": "4bf0e00650a7e6c64a369a31fcda00dc909c051e2a9f32b93220930860f9444d"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Druid.blp",
+    "bytes": 6676,
+    "sha256": "71c2f519357cbf05d41c019ec6fa976850e78875998c8b86be158525ab9230d3"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Hunter.blp",
+    "bytes": 6676,
+    "sha256": "f32ddafcd5c76e8e7dee6bdcc7877e000a5b69e4003cff8fdd39a64c65b37e33"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Mage.blp",
+    "bytes": 6676,
+    "sha256": "2c2d97a60d71899aebc274546edfa83a4755ce82b59f73c8a65cb4ea703a2d8b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Paladin.blp",
+    "bytes": 6676,
+    "sha256": "e8fdcd4ae38098ec30b8da3d297516c0622d797b89e191b80f8c88e368698f2b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Priest.blp",
+    "bytes": 6676,
+    "sha256": "945d0ac49ce50416bca3b1e5ddeefa2974040473c33ae74ff35880b47d325ab5"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Rogue.blp",
+    "bytes": 6676,
+    "sha256": "1ac82b80cbd920352198a3b5451b409f4e68eb8fb5cd05c2e7d9fa3f52098c93"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Shaman.blp",
+    "bytes": 6676,
+    "sha256": "3b78c88ce486f8d84467f55f35c42e2e33a34fc5d0493f48a2d93151ccd0ac7d"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Warlock.blp",
+    "bytes": 6676,
+    "sha256": "bcb35e0c8e86c5e1767af8ebc2e138ad354a812bed68c97885073ffa2dee964b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Class/ClassIcon_Warrior.blp",
+    "bytes": 6676,
+    "sha256": "6ea42083c28fc9b868bc3f3353c2c7a469c837761dc28270e7d915f45232e44b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/CustomMaps/ExcavationSite.tga",
+    "bytes": 2117995,
+    "sha256": "e0a06ba730d6d0a9245929229aed2e4bb019f0c41fc523af9c19c9cab6105fc9"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/CustomMaps/HallOfThanes.tga",
+    "bytes": 2105413,
+    "sha256": "606bcbad86dc64c39fb4ad8dfcbde753011b63265a511acb0361607e64c6ffb5"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/CustomMaps/RuinsOfLordaeron.tga",
+    "bytes": 2110727,
+    "sha256": "3dac7b897ac5f4d17ffb91b1611370aa0360aa58197bbe2342d9dd13da12f55b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_blackfathom.tga",
+    "bytes": 367827,
+    "sha256": "d8ce3ff40c329a7c1d747dab46ca50517a1cd8c7e92e60a4a83d987909afe9d9"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_blackfathom_e.tga",
+    "bytes": 395895,
+    "sha256": "c7a64d085b5d637bcd9151015b4083afc1f400ab783bb40e37e438199da05899"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_brd.tga",
+    "bytes": 394149,
+    "sha256": "55bd33469ed86073624ffbc7c88da2174e69c93df438869e2ed8983858779abe"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_deadmines.tga",
+    "bytes": 272421,
+    "sha256": "a934d1cc8f03f25ffb86e8eea8919719071baf5699ec58a2b66d8d49a003f5bf"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_dm_east.tga",
+    "bytes": 361599,
+    "sha256": "d8d5658395a8f561008be306565bdafba0b9a469b79dc171facd661a38474553"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_dm_entry.tga",
+    "bytes": 591373,
+    "sha256": "e118d47af5f33ccef7fb9d2c9c17ad659e97d25108b94bbec3136b1d64559d4a"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_dm_north.tga",
+    "bytes": 433499,
+    "sha256": "d660544c1ca7f50b6261531c60b9da3652c78734d8969812143a867851018467"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_dm_west.tga",
+    "bytes": 487352,
+    "sha256": "6f62409f28242b9025a94bb6fe735561ab60d7302424c4b715030d13e52ca4ff"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_gnomeregan.tga",
+    "bytes": 467115,
+    "sha256": "eab3a9695f4c1ca8778f605b2cb86688e7aba78dd9ff58cb410ed5d96bd67219"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_gnomeregan_e.tga",
+    "bytes": 430878,
+    "sha256": "3df69cb0f1384749bf2e33f3dbdf50efd9efcbf692e8c25289b20fbb260e49bb"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_lbrs.tga",
+    "bytes": 407132,
+    "sha256": "4af9caa551a909e46bd1f91bdff969bf2c8ced04024798b3419520cf962e7694"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_maraudon.tga",
+    "bytes": 324367,
+    "sha256": "735ab7b104d5b599e12b383bc0f71e26ad2c9d3ba5ad0bbb92750b1d8e98d88c"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_maraudon_e.tga",
+    "bytes": 511462,
+    "sha256": "c724c0f8b94413597aa7fb17d3b11836c479e6455e65f2b5c6cf3eb92cec38a8"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_ragefire.tga",
+    "bytes": 411715,
+    "sha256": "b7ada09b26cdc22763c1911def50c05c6dd2742188cbf05de8cc15a751fa1904"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_rfndowns.tga",
+    "bytes": 451918,
+    "sha256": "1e7eab5e157e92cb04af2c4af7ad861ed81c6a98f2159e388608b9e756ba38d8"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_rfnkraul.tga",
+    "bytes": 471988,
+    "sha256": "62c015ddda292b4ce307624e2e54a4757b476f384a3731404517cf8d2441e408"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_scholomance.tga",
+    "bytes": 463598,
+    "sha256": "9a5f7640a71d97b2aa6f0820513beb0015e06f6460b9f3228c6c2a20917cfdf9"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_shadowfangkeep.tga",
+    "bytes": 493661,
+    "sha256": "17ff147693f43d35b84825eb418e8de8b8de9af19b57af5d0d9fb4bf6826a465"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sm_arm.tga",
+    "bytes": 314256,
+    "sha256": "31f9df00068df3f75ced3767a893eca002e7de0aa94ba51920fceb17087d40f3"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sm_cath.tga",
+    "bytes": 392966,
+    "sha256": "0d7097dd8377a82d83ab13a08e2596f609f53606b137c5ffef490facdc6d1d6e"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sm_gy.tga",
+    "bytes": 343372,
+    "sha256": "bf4bc4f1b09ca9d9b3ba8ae578dcf13f58d2e6ebb63a518d3a1352e0303bb00b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sm_lib.tga",
+    "bytes": 401695,
+    "sha256": "00fca8b73ccaa8da2079481f3cf5209ba3228b9f384d7ee51eac93ca1f08dfa2"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_stockade.tga",
+    "bytes": 311362,
+    "sha256": "003e748cbc6b495a1e381ecd2b885881863ca81c5f7c9385471ce277720fbb57"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_strat.tga",
+    "bytes": 349480,
+    "sha256": "cc62e85bebad8a714934ae8dd343dae80ea9a396a3df471b70d9438440f2df48"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sunken_temple.tga",
+    "bytes": 361019,
+    "sha256": "55cd425fc6fc2f285a7a9b3c0a74558b8d277d4f5659b7eba498a6e0faf8e5ed"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_sunken_temple_e.tga",
+    "bytes": 576841,
+    "sha256": "9c49fe76833be089f5518e6ac3ce866c6879014243bf53ec9408a8fc8394ebfd"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_ubrs.tga",
+    "bytes": 397869,
+    "sha256": "84da863adca06ca09079aa6b7c6e425e1b86c4e547baf53db1557dad4a626acd"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_uldaman.tga",
+    "bytes": 464463,
+    "sha256": "bf8a7d67abd038652fc2638c1baa0960e67b19b50f786a4190a815407e9640c0"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_uldaman_e.tga",
+    "bytes": 511497,
+    "sha256": "71880f760d8927a7219f55f6b536e37e4cc8834fc7790667ff06a41dd49debfa"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_wailingcaverns.tga",
+    "bytes": 419706,
+    "sha256": "580f0ad88c2150f47c70b0e8f17bdff2a4044efcda83521af8885894ebaecc0c"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/DungeonMaps/dmap_zulfarrak.tga",
+    "bytes": 555897,
+    "sha256": "0022fe464e29d5e5fdfcb5550a33eafdf1803a3c2af423a69e9d059c9b8b1fdd"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/bs_duel.tga",
+    "bytes": 760933,
+    "sha256": "d908dee065fe594a42a3cec934a33b1442ecb3bf1f7f467ad92a16029a0a72db"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/bs_hero.tga",
+    "bytes": 901332,
+    "sha256": "e9ade1f593b0a3b3b29ccf8e27d2684a3b0ea76eab8958c924ff42ea8cd23938"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/bs_pier.tga",
+    "bytes": 960396,
+    "sha256": "3a66bdead25c85135c6de521002918577cb9955c91d74bdeb152723b50cf933e"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/bs_ship.tga",
+    "bytes": 632880,
+    "sha256": "14ba4b4f81f0c90adff5c562f1326182997e849e489b0eb3c744054dc8c73bd7"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/bs_whaazz.tga",
+    "bytes": 800577,
+    "sha256": "fb940ec9c95a9a49e0b0268db512e7c27472b62ffbd7070338c428700b54f544"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/dr_spellbook.tga",
+    "bytes": 943121,
+    "sha256": "8e8d8667cff0025802c972499d02153424df73e68253e91e96d8aab97b18df5e"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_arathi.tga",
+    "bytes": 1114908,
+    "sha256": "802132a6e78e4a4d44f2e71bbd0406fd53cf04291a515975d3de2a05e25a1964"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_banner_appears.tga",
+    "bytes": 686279,
+    "sha256": "e6aad079d01bf3fe2ef5ce6ba3ab4f52a868e831f074b9383c66aaf01aff6322"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_banner_camp.tga",
+    "bytes": 1194167,
+    "sha256": "6a175c78b216b078d8b15defdf0db871e5c5ce249f655ee68202acf3dd59f134"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_banner_front.tga",
+    "bytes": 1174553,
+    "sha256": "3197481690c4cc966aa3f7f5304f4899948c78f86225f3d56e51d02fcabc17c4"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_bust.tga",
+    "bytes": 676229,
+    "sha256": "875439accf1938a189ba71730ec3b2d571a6c05e6fa00e03fa3f0db6b29a75a0"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_bust_mage.tga",
+    "bytes": 155596,
+    "sha256": "999f7d5333d01b1201a904641ed3aa87ab8b7fd75a77d9dca7dc6d055cb62dd6"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_bust_paladin.tga",
+    "bytes": 162899,
+    "sha256": "db8b0a5f59215fa486b5f3908741939f380abd03aa3f227b113c44643da538cb"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_bust_priest.tga",
+    "bytes": 172149,
+    "sha256": "0a53ea0f05d600054207fd3efd3d1f949eadd69dab6dd656da0252eb3fa6e1cf"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_bust_warrior.tga",
+    "bytes": 152142,
+    "sha256": "1f16f7fb963ac1f6f83835b400e53af3fad1afb8d4be90af33977e22fd3e9d8f"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_dustwallow.tga",
+    "bytes": 930782,
+    "sha256": "06727fdb5f186da6fb3021c885b0d0915e8670c7281831c530e8f7035991ef92"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_graveyard.tga",
+    "bytes": 1146767,
+    "sha256": "01d7b22147511594f60e42a91df7b8d0b25d8f8c42d80e0862661541fc128286"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_hallway.tga",
+    "bytes": 870718,
+    "sha256": "566b85a97e44134418757a4bcf764c57bc47f847b801723b04c69e53c211ec0f"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_ingame.tga",
+    "bytes": 1274212,
+    "sha256": "dc47a821b3c5aa00e44b15376054a3085d5fd4041e5e7d628db6291ff75acf4a"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_map_arathi.tga",
+    "bytes": 387933,
+    "sha256": "db4aa94e9d9974636fbea19de836923e35471d04197b699bceaf6952c06e2e5e"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_map_dustwallow.tga",
+    "bytes": 373576,
+    "sha256": "da47a2e332aebc59ffe350cc87bebb0058bdf5e2fe99541630e2e146c8f8154b"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_map_swamp.tga",
+    "bytes": 437513,
+    "sha256": "4a821a82d724af0cac306f5daed2a2b6a21ad41eaf5a865424ca252853ad8a43"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/sb_swamp.tga",
+    "bytes": 1293956,
+    "sha256": "b843a4ef59fa51ee2d1b8308ee1484107a93a3897795e5063eaa790c6ee3fa96"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/wx_pet_1.tga",
+    "bytes": 1847632,
+    "sha256": "3307a766d4191ce9974afb806d6b4222087da86c1b5c0c992eea9d510c0d6e74"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Guide/wx_pet_2.tga",
+    "bytes": 833045,
+    "sha256": "107977b1e49f59ce00812d43ec193ab7c03d3bd3fbcc40c8a71c59f607156645"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Dwarf.tga",
+    "bytes": 16428,
+    "sha256": "4f3fe90d6e1980dcd8163372c9f24e9c374d3a411d1639785bf7aa7c05036012"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Gnome.tga",
+    "bytes": 16428,
+    "sha256": "6a2c7923c7689bfe340bd451a1cca9b4ed1d1de13456b46505da6abb6d45941f"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Human.tga",
+    "bytes": 16428,
+    "sha256": "ce42480f16ead6b5bf8dd300e3630d70fcfb0779e6d97a7c62976ab55b560395"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Nightelf.tga",
+    "bytes": 16428,
+    "sha256": "0b8976a899e3c8ca43262a25c2774faf2b6f71863b3c426c270833a3c5f615a1"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Orc.tga",
+    "bytes": 16428,
+    "sha256": "8a5738f852e8d0866433ec7a1e185d068ab32851c04d3ee579ec3d6d54d511d5"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Skyborne.tga",
+    "bytes": 16428,
+    "sha256": "2e0ef0699b2592fb2d08b3a6c280c5aabe70ec7021ab9a199c99d5329f5445a1"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Tauren.tga",
+    "bytes": 16428,
+    "sha256": "6832b4a194e062ef48ae6643a7d180cb702a8b51640ea553f154bd7a5a6388f1"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Troll.tga",
+    "bytes": 16428,
+    "sha256": "8d9695f2c7023d5e58153ce3e8cf14820bca39fafab8f4719c1aa220acc17af1"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/Race/RaceIcon_Undead.tga",
+    "bytes": 16428,
+    "sha256": "369f9f7cce06f6dbca289ab4ba05c6c36cc1e3069d1f3a6c2615d82858660ce5"
+  },
+  {
+    "path": "XR_DungeonGuide/Media/xr_icon.tga",
+    "bytes": 65580,
+    "sha256": "a53bcaa56f3aebae7dd1b1309d5aead21d8ebfb9fdce0991d3790f689ad6dccb"
+  },
+  {
+    "path": "XR_DungeonGuide/UI.lua",
+    "bytes": 645938,
+    "sha256": "d710d680f76256417d274ddde9caa560bbf9f0cf22a4eb57401c73a88b9eb90d"
+  },
+  {
+    "path": "XR_DungeonGuide/UpdateCheck.lua",
+    "bytes": 3341,
+    "sha256": "8d24afec92fb1d8dfd5d3403e2674e430ec3d1f306282a52ba9e95034d2d0c9f"
+  },
+  {
+    "path": "XR_DungeonGuide/XR_DungeonGuide.toc",
+    "bytes": 1092,
+    "sha256": "e265f9328ff69604207e701637f72ec8a5564aca7d5ed084d47c76e76a08c095"
+  },
+  {
+    "path": "XR_DungeonGuide/dd_author.toc",
+    "bytes": 47,
+    "sha256": "5d4e656f124407fe2dba84bff68ea909cb7b54802a119992f1806b2ff6c4bc6b"
+  }
+]

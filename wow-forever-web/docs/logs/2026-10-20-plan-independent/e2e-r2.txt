@@ -1,0 +1,92 @@
+== A 精确关联：id 12 不许命中 112 的合集稿，600 条也不许漏 ==
+  [PASS] by-video/12 不含 [112,113] 那条合集稿 — 命中 []
+  [PASS] by-video/112 含那条合集稿（精确匹配不是漏匹配） — 1 条
+  [PASS] 第 600 条灌量稿仍查得到（没有前 500 篇那刀） — 1 条
+  [PASS] 查询本身出错 → 500 + error，不返回空列表冒充「没有旧稿」 — HTTP 500
+== B 渠道与内容形式：channel 不等于 summary_type ==
+  [PASS] 公众号·攻略教程 → wechat_material（不再硬塞 game_guide） — wechat_material
+  [PASS] 头条·资讯整合 → toutiao_mix
+  [PASS] 认不出的形式 → 400 并给可选值，不许悄悄落默认档 — 400
+  [PASS] 本单没开的渠道（小红书）→ 400 明确拒绝 — 400
+== C 任务、版本与默认继续 ==
+  [PASS] 首次生成 → started — started
+  [PASS] 这一路只调了一次生成桩 — [('game_guide', [12])]
+  [PASS] 跑完 status=done 且记了 summary_id — done / 697
+  [PASS] 再点一次（没勾重新生成）→ continue，一次模型都不调 — continue / 1 次
+  [PASS] continue 回的就是那篇已有稿 — 697 vs 697
+  [PASS] 显式重新生成 → 新任务 id、version 2 — 12 → 13
+  [PASS] 新版本 version=2 且指向另一篇稿 — v2 / 698
+  [PASS] 前稿那一行还在（重生成不覆盖旧版） — 查到 2 行
+== D 一题两条素材 → 一份合并稿，两条都回查得到 ==
+  [PASS] 两条素材走合并档 — started
+  [PASS] 合并档只调一次、一次带两条素材 — [('game_guide', [112, 113])]
+  [PASS] 合并稿两条来源都能回查 — 112 查到 2 条 / 113 查到 2 条
+== E 防重复起任务（双击、并发）==
+  [PASS] running 中重复点 → 409 running（不是再起一个） — 409 / running
+  [PASS] 这一路只起了一次生成 — [('game_guide', [12])]
+  [PASS] 并发投同一题 → 只有一个 200，另一个 409（撞 UNIQUE 也算对方先起，不许 500） — [200, 409]
+  [PASS] 并发这一路真只发了一次生成 — [('game_guide', [12])]
+== F 缺正文、失效来源给具体恢复入口 ==
+  [PASS] 没正文的素材 → 422，不起任务，带 action=transcribe — [{"action": "transcribe", "action_label": "去素材库开这条补转写", "code": "no_transcript", "msg": "这
+  [PASS] 422 的文案说清了缺什么
+  [PASS] 库里没有的 id → action=reselect（来源失效那条路） — [{"action": "reselect", "action_label": "回排产表重选素材", "code": "missing", "msg": "素材库里已经没有这条（
+  [PASS] 一条能用一条不能用 → 能用那条照常起，问题单独列给用户 — 0
+== G 采用清单：存服务端、可清空、刷候选不动它 ==
+  [PASS] 确认采用 → 任务落库并带证据快照 — [{"author": "测试号", "date": "2026-10-18", "db_id": 12, "has_transcript": true, "row": 9001,
+  [PASS] 证据快照里钉了当时的标题与日期（以后素材行被改也认得回来）
+  [PASS] 显式清空采用清单存得下来（点「取消采用」到最后一条）
+  [PASS] 没带 video_ids 字段 → 400，不当成清空 — 400
+== H 同题双渠道互不覆盖 ==
+  [PASS] 同一题两条渠道各一条任务 — [('toutiao', 'guide'), ('wechat', 'guide')]
+  [PASS] 两条各指各的稿，没有互相顶掉 — [703, 704]
+  [PASS] 两渠道各调一次生成（类型不同） — [('game_guide', [12]), ('wechat_material', [112])]
+== I 生成失败要落成 failed，并且失败后还能重试 ==
+  [PASS] 生成抛异常 → 任务落 failed 且写了原因 — failed / RuntimeError: stub: 模型超时
+  [PASS] failed 的那版没有 summary_id（不假装出稿了） — None
+  [PASS] failed 之后能直接重试（不会被 running 卡死） — started
+  [PASS] 重试这一版跑成了 done — done / 705
+== J 选题包文件名带渠道（同日同主题不许互相覆盖）==
+  [PASS] 选题包 toutiao 生成成功 — 2026-10-20-toutiao-E2E双渠道.md
+  [PASS] 选题包 wechat 生成成功 — 2026-10-20-wechat-E2E双渠道.md
+  [PASS] 两份包文件名不同（渠道进了文件名） — ['2026-10-20-toutiao-E2E双渠道.md', '2026-10-20-wechat-E2E双渠道.md']
+== K R1：已开工版本的证据不可被覆盖 ==
+  [PASS] running 中保存新清单 → 开新版本（action=versioned） — versioned
+  [PASS] v1 采用的素材没被改（还是 12） — [12]
+  [PASS] v1 跑完仍是 done 且 summary_id 指向素材 12 的稿 — done
+  [PASS] v1 那篇稿回查得到素材 12、回查不到 112/113（证据与产物对得上） — 12 命中 10 / 112 命中 3
+  [PASS] v2 草稿跑成 done，用的是保存时那份清单（112+113） — [2, 'done', [112, 113]]
+  [PASS] done 版上换素材直接生成 → 409 stale（要求先保存或显式重生成） — 409 / stale
+  [PASS] 409 里把库里实际存着的清单回给人看 — [112, 113]
+  [PASS] 显式重新生成 + 换素材 → 新版带新清单 — [3, [12]]
+  [PASS] v1 依旧指着素材 12 的稿（历史版本文针不动）
+== L R2：多版本并存时服务端标出当前版 ==
+  [PASS] toutiao 三版本都在（1/2/3） — [3, 2, 1]
+  [PASS] 每组只有一条 is_current 且是 version 最大的 — [(3, True), (2, False), (1, False)]
+  [PASS] 混合渠道：同题两档各有一条当前版，互不顶掉 — [('toutiao', 1, True), ('wechat', 1, True)]
+== M R3：选题要求真进了模型请求（在 openai 客户端边界截获）==
+  [PASS] 两次生成各发了一次真实请求构造 — 2
+  [PASS] 两个 hook 产出的提示词不一样（角度真参与生成）
+  [PASS] 提示词里能读到本次的 hook 原文
+  [PASS] 提示词写明这份要求只用于取舍与角度、不是事实来源
+  [PASS] 旧路由不带 brief 时提示词里没有选题要求段（兼容） — 你是内容整理助手。请只基于输入材料，不要编造事实，把短视频口播整理成结构化内容。
+== N R5：进程中断后不永久卡 running ==
+[plan_tasks] 中断核对：1 个 running 任务标成 aborted
+  [PASS] 重启核对把残留 running 标成 aborted
+  [PASS] aborted 的文案让人先核查产物再决定重试（不自动重付费）
+  [PASS] aborted 之后允许人工显式重试 — started
+== O 旧 /api/content/generate 的兼容回归（抽取共用函数之后）==
+  [PASS] 单条：老请求形状照旧接受 — {'combine': False, 'status': 'started', 'summary_type': 'game_guide', 'total': 1}
+  [PASS] 单条：跑完 done 且 running 复位 — ✅ 已生成 1 条整理稿
+  [PASS] 单条：落了一篇稿 — [713]
+  [PASS] 批量（不合并）：两条出两篇 — [714, 715]
+  [PASS] 合并：一条稿带两条来源（老行为不变） — [12, 112]
+  [PASS] 异常：老路由把 traceback 记进 error 且 running 一定复位 — Traceback (most recent call last):
+  File "/Users/
+  [PASS] 非法 summary_type 仍 400（白名单没被抽取弄松） — 400
+== P 并发与快速完成后的重复请求 ==
+  [PASS] 三个并发重生成：只有一个起任务，其余 409，**没有 500** — [200, 409, 409]
+  [PASS] 并发重生成只调了一次生成 — [('game_guide', [12])]
+  [PASS] new_version 撞 UNIQUE 不会重复建版（版本号不跳号） — [1, 2, 3, 4]
+  [PASS] 快速跑完后立刻再点 → continue 且没有多调一次 — continue / 1→1
+
+ALL_OK

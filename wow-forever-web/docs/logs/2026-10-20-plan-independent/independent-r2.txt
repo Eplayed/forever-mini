@@ -1,0 +1,4 @@
+PENDING_MISMATCH {"task": [12], "summary": "[112]"}
+CLEAR_DONE {"action": "versioned", "ids": [12], "version": 2}
+FAST_RACE {"A": "started", "B": "started", "same_task": true, "model_calls": 2}
+ISOLATED_NO_REAL_MODEL
