@@ -58,8 +58,31 @@ FORBIDDEN = [
     (r"(^|/)\.env", "环境变量不发"),
 ]
 # 允许进包的扩展名（白名单，比黑名单稳：新出现一种文件就得先想清楚该不该发）
+# .glb 是 2026-10-28 补的：配装页那一栏的占位模型（10-26 上线的那条）从那天起就进不了包，
+# 白名单里没有这个扩展名，打包卡口直接拦红——也就是那一版根本发不出去。
+# 放开的是扩展名，不是来源：下面 self_generated_models() 只允许 manifest 里
+# 标 origin == "self-generated" 的那几个文件进包，客户端烘出来的或第三方站的模型照样拦。
 ALLOW_EXT = {".html", ".js", ".css", ".json", ".webp", ".png", ".jpg", ".jpeg",
-             ".svg", ".ico", ".woff2", ".woff", ".txt"}
+             ".svg", ".ico", ".woff2", ".woff", ".txt", ".glb"}
+
+
+def self_generated_models():
+    """本站自产模型的白名单（相对 img/ 的路径）。清单读不到就一个都不许进包。"""
+    p = os.path.join(ROOT, "app", "img", "models", "manifest.json")
+    ok = set()
+    try:
+        man = json.load(io.open(p, encoding="utf-8"))
+    except Exception:
+        return ok
+    if man.get("origin") != "self-generated":
+        return ok
+    for it in man.get("items") or []:
+        if it.get("origin") == "self-generated" and it.get("file"):
+            ok.add("img/models/" + it["file"])
+    return ok
+
+
+SELF_GEN_MODELS = self_generated_models()
 
 
 def sha256_file(p, buf=1024 * 1024):
@@ -102,6 +125,8 @@ def scan(site_dir):
             ext = os.path.splitext(fn)[1].lower()
             if ext not in ALLOW_EXT:
                 problems.append("扩展名不在白名单：%s" % rel)
+            if ext == ".glb" and rel not in SELF_GEN_MODELS:
+                problems.append("%s 不是本站自产模型（manifest 没标 self-generated），不发" % rel)
             files.append({"path": rel, "bytes": os.path.getsize(p), "sha256": sha256_file(p)})
     return files, problems
 
