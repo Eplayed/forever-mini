@@ -36,10 +36,32 @@ const professions = (up.professions || []).map((p) => {
       isNew: !!x.isNew, mats: x.mats || [], skill: x.skill || null, source: x.source || null,
       level: 'L0'
     })),
-    nodes: nodes.map((x) => ({
-      nameCn: x.nameCn, iconKey: x.iconKey || null, yields: x.yields || [],
-      zone: x.zone || null, skill: x.skill || null, columns: x.columns || null, level: 'L0'
-    })),
+    /* 钓鱼那一张不是"采集点"，是**技能分段表**：源页的列是「稳定上钩 / 开始咬钩 / 区域」。
+       抓取层当初按采集点的列序硬套，结果成品里 6 行的 nameCn 变成了 25/75/150 这种纯数字、
+       "开始咬钩"落进了"可得"栏（2026-10-27 来源复核记的已知错，公开页上就是错的）。
+       这里按列名重认一次：认得出那两个列头就整行改成 tier 形状，认不出仍走采集点老路，
+       不靠"专业 id 是 fishing"这种硬编码——哪天源页改了列头，这里会退回原样而不是继续错。*/
+    nodes: nodes.map((x) => {
+      const c = x.columns || null;
+      const isTier = !!(c && c['稳定上钩'] !== undefined && c['开始咬钩'] !== undefined);
+      if (!isTier) {
+        return {
+          nameCn: x.nameCn, iconKey: x.iconKey || null, yields: x.yields || [],
+          zone: x.zone || null, skill: x.skill || null, columns: c, level: 'L0'
+        };
+      }
+      const reliable = Number(c['稳定上钩']);
+      return {
+        kind: 'tier',
+        nameCn: '稳定上钩 ' + c['稳定上钩'] + ' 级',
+        reliableAt: Number.isFinite(reliable) ? reliable : null,
+        biteFrom: String(c['开始咬钩']),
+        iconKey: null, yields: [],
+        zone: x.zone || c['区域'] || null,
+        skill: Number.isFinite(reliable) ? reliable : null,
+        columns: c, level: 'L0'
+      };
+    }),
     provenance: p.provenance || []
   };
 });

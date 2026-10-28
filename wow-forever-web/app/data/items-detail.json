@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-22",
+  "generatedAt": "2026-10-28",
   "method": "tools/merge-items-detail.py 合三份 upstream 快照：wclbox-items-detail.json（tools/scrape-wclbox-items-detail.py 逐件全量抓物品详情页）、gi-items-detail.json 与 xr-items-detail.json（tools/extract-addon-items-detail.py 从两份无限服插件 Data.lua 抽取）。属性与卖价按 GI（Beta 实测转述）> XR（社区稿）> wclbox（当前 beta 解包，兜底）取值（站主 2026-10-16 定：取值以插件为准）；教益句单独一段按 GI > XR 补，纯风味句丢掉；数值签名不一致的进 conflicts，只有写法不同的计 formatOnly；出处只有 GI 有；英文名按站主拍板不取。",
   "pageNote": "属性与卖价先按两份插件资料：Beta 实测掉落记录（GearInsight 无限版转述）与社区整理稿（XR 全能助手转述）；这两份都没有的那些件（含无限新增的大部分），改按无限测试版客户端（经新手盒子转述）补。标题右边的小标写明这一条出自哪一份。同一件在几份资料里数值不同的，都留了档，等实测逐件定。出处（哪座本、哪个首领掉落）只有实测掉落记录有。几份资料都没有的那一件，详情里就不显示那一段。",
   "sources": [
@@ -15,19 +15,19 @@
    },
    {
     "key": "gi",
-    "name": "GearInsight 无限版 0.5.1",
+    "name": "GearInsight 无限版 0.5.6",
     "kind": "beta 解包 + 实测掉落转述",
     "date": "2026-10-03",
-    "extractedAt": "2026-10-20",
-    "sourceSha256": "f5e768d380fe6f515033d632e7ca003186652100e355b69ebf42fece11d4e27f"
+    "extractedAt": "2026-10-28",
+    "sourceSha256": "adc9390ca174d50daf7d7eb88e31d67fc351c0b650cdc99ad2998f2463b155d1"
    },
    {
     "key": "xr",
-    "name": "XR 全能助手 75",
+    "name": "XR 全能助手 87",
     "kind": "社区整理稿转述",
     "date": "2026-09-20",
-    "extractedAt": "2026-10-21",
-    "sourceSha256": "224976c9a8a39dbaaa638797aea092ed3008dedb1669e3fe1a1a9207c01602cd"
+    "extractedAt": "2026-10-28",
+    "sourceSha256": "9b80a2948578b0cb3adbcc87d649f9d6e42c79c0bb044935a73a384da7ccd88e"
    }
   ],
   "counts": {
@@ -169525,7 +169525,7 @@
    "sell": "5银 15铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "270228": {
    "st": [
@@ -169539,7 +169539,7 @@
    "sell": "16银 17铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "270229": {
    "st": [
@@ -169551,7 +169551,7 @@
    "sell": "5银 86铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "270230": {
    "st": [
@@ -169562,7 +169562,7 @@
    "sell": "3银 90铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "270231": {
    "st": [
@@ -169574,7 +169574,7 @@
    "sell": "3银 38铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "270256": {
    "st": [
@@ -169587,7 +169587,7 @@
    "sell": "12银 36铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "270257": {
    "st": [
@@ -169605,7 +169605,7 @@
    "sell": "6银 27铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "270261": {
    "st": [
@@ -169617,7 +169617,7 @@
    "sell": "5银 3铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "270270": {
    "st": [
@@ -169895,7 +169895,7 @@
    "sell": "13银 8铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "271096": {
    "st": [
@@ -169907,7 +169907,7 @@
    "sell": "2银 62铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "271097": {
    "st": [
@@ -169919,7 +169919,7 @@
    "sell": "4银 74铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "271098": {
    "st": [
@@ -169931,7 +169931,7 @@
    "sell": "7银 93铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "271100": {
    "st": [
@@ -177690,7 +177690,7 @@
    "sell": "28银 51铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273023": {
    "st": [
@@ -177702,7 +177702,7 @@
    "sell": "17银 17铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273024": {
    "st": [
@@ -177715,7 +177715,7 @@
    "sell": "17银 23铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273025": {
    "st": [
@@ -177728,7 +177728,7 @@
    "sell": "26银 6铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273026": {
    "st": [
@@ -177741,7 +177741,7 @@
    "sell": "28银 94铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273027": {
    "st": [
@@ -177753,7 +177753,7 @@
    "sell": "23银 24铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273028": {
    "st": [
@@ -177765,7 +177765,7 @@
    "sell": "32银 76铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273029": {
    "st": [
@@ -177778,7 +177778,7 @@
    "sell": "54银 56铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273030": {
    "st": [
@@ -177790,7 +177790,7 @@
    "sell": "29银 20铜",
    "sellFrom": "xr",
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273031": {
    "st": [

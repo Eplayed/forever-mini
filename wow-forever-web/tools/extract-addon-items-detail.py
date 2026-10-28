@@ -15,7 +15,9 @@ import re
 import sys
 from datetime import date
 
-UP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'data', 'upstream')
+UP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app', 'data', 'upstream')
+# 2026-10-24 删旧站时这一层就没了，路径一直留在 'src/data' 上没跟着改：
+# 结果这个脚本写不出快照（物品线的刷新等于断在 10-21 那一版）。改指 app/data/upstream。
 
 
 def toc_version(lua_path, addon_name):

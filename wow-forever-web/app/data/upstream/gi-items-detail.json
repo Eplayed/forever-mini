@@ -1,16 +1,16 @@
 {
  "meta": {
   "addon": "GearInsight_Forever",
-  "addonVersion": "0.5.1",
+  "addonVersion": "0.5.6",
   "sourceFile": "../../.scratch/wow/GearInsight_Forever/Data.lua",
   "sourceStamp": {
-   "bytes": 3702026,
-   "sha256": "f5e768d380fe6f515033d632e7ca003186652100e355b69ebf42fece11d4e27f",
-   "fileDate": "2026-10-20"
+   "bytes": 3709975,
+   "sha256": "adc9390ca174d50daf7d7eb88e31d67fc351c0b650cdc99ad2998f2463b155d1",
+   "fileDate": "2026-10-27"
   },
   "selfReported": "st 抽自 loot 表（作者标 Beta 实测掉落，build 1.60.1.69913）；src/srcName 抽自 gear 表（作者标 beta 客户端 1.60.1.69876 解包，2026-10-03）",
   "fetched": "2026-10-03",
-  "extractedAt": "2026-10-20",
+  "extractedAt": "2026-10-28",
   "counts": {
    "st": 1453,
    "src": 1587
@@ -17893,51 +17893,51 @@
   },
   "270227": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "270228": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "270229": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "270230": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "270231": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "270256": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "270260": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "270261": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 杜尔根·挽歌锤"
+   "srcName": "领主大厅 · 杜尔根·挽歌锤"
   },
   "271095": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 玛格玛图斯"
+   "srcName": "领主大厅 · 玛格玛图斯"
   },
   "271096": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "271097": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 法尔德林·安威玛尔"
+   "srcName": "领主大厅 · 法尔德林·安威玛尔"
   },
   "271098": {
    "src": "dungeon",
-   "srcName": "塔恩之厅 · 劫掠者"
+   "srcName": "领主大厅 · 劫掠者"
   },
   "271201": {
    "src": "dungeon",
@@ -18037,39 +18037,39 @@
   },
   "273022": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273023": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273024": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 盐脊"
+   "srcName": "挖掘场 · 盐脊"
   },
   "273025": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273026": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273027": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 影牙"
+   "srcName": "挖掘场 · 影牙"
   },
   "273028": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273029": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273030": {
    "src": "dungeon",
-   "srcName": "湿地挖掘场 · 遗物守护者"
+   "srcName": "挖掘场 · 遗物守护者"
   },
   "273031": {
    "src": "dungeon",

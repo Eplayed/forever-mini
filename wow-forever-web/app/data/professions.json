@@ -26,7 +26,7 @@
    "vTrimmed": 12,
    "dTrimmed": 14,
    "xrOnly": 16,
-   "fetched": "2026-10-16",
+   "fetched": "2026-10-21",
    "total": 1902,
    "rateDropped": 782
   }
@@ -78653,13 +78653,14 @@
    "recipes": [],
    "nodes": [
     {
-     "nameCn": "25",
+     "kind": "tier",
+     "nameCn": "稳定上钩 25 级",
+     "reliableAt": 25,
+     "biteFrom": "一开始",
      "iconKey": null,
-     "yields": [
-      "一开始"
-     ],
+     "yields": [],
      "zone": "丹莫罗、艾尔文森林、杜隆塔尔、提瑞斯法林地、泰达希尔、莫高雷",
-     "skill": null,
+     "skill": 25,
      "columns": {
       "稳定上钩": "25",
       "开始咬钩": "一开始",
@@ -78668,13 +78669,14 @@
      "level": "L0"
     },
     {
-     "nameCn": "75",
+     "kind": "tier",
+     "nameCn": "稳定上钩 75 级",
+     "reliableAt": 75,
+     "biteFrom": "一开始",
      "iconKey": null,
-     "yields": [
-      "一开始"
-     ],
+     "yields": [],
      "zone": "贫瘠之地、洛克莫丹、西部荒野、银松森林、黑海岸、哀嚎洞穴、黑暗深渊、幽暗城、暴风城、铁炉堡、死亡矿井、奥格瑞玛、雷霆崖、达纳苏斯",
-     "skill": null,
+     "skill": 75,
      "columns": {
       "稳定上钩": "75",
       "开始咬钩": "一开始",
@@ -78683,13 +78685,14 @@
      "level": "L0"
     },
     {
-     "nameCn": "150",
+     "kind": "tier",
+     "nameCn": "稳定上钩 150 级",
+     "reliableAt": 150,
+     "biteFrom": "51 起",
      "iconKey": null,
-     "yields": [
-      "51 起"
-     ],
+     "yields": [],
      "zone": "暮色森林、湿地、赤脊山、希尔斯布莱德丘陵、灰谷、石爪山脉",
-     "skill": null,
+     "skill": 150,
      "columns": {
       "稳定上钩": "150",
       "开始咬钩": "51 起",
@@ -78698,13 +78701,14 @@
      "level": "L0"
     },
     {
-     "nameCn": "225",
+     "kind": "tier",
+     "nameCn": "稳定上钩 225 级",
+     "reliableAt": 225,
+     "biteFrom": "126 起",
      "iconKey": null,
-     "yields": [
-      "126 起"
-     ],
+     "yields": [],
      "zone": "悲伤沼泽、尘泥沼泽、荆棘谷、奥特兰克山脉、阿拉希高地、千针石林、凄凉之地、血色修道院",
-     "skill": null,
+     "skill": 225,
      "columns": {
       "稳定上钩": "225",
       "开始咬钩": "126 起",
@@ -78713,13 +78717,14 @@
      "level": "L0"
     },
     {
-     "nameCn": "300",
+     "kind": "tier",
+     "nameCn": "稳定上钩 300 级",
+     "reliableAt": 300,
+     "biteFrom": "201 起",
      "iconKey": null,
-     "yields": [
-      "201 起"
-     ],
+     "yields": [],
      "zone": "艾萨拉、西瘟疫之地、辛特兰、哈圭罗岛、菲拉斯、费伍德森林、塔纳利斯、安戈洛环形山、月光林地、沉没的神庙、玛拉顿",
-     "skill": null,
+     "skill": 300,
      "columns": {
       "稳定上钩": "300",
       "开始咬钩": "201 起",
@@ -78728,13 +78733,14 @@
      "level": "L0"
     },
     {
-     "nameCn": "425",
+     "kind": "tier",
+     "nameCn": "稳定上钩 425 级",
+     "reliableAt": 425,
+     "biteFrom": "326 起",
      "iconKey": null,
-     "yields": [
-      "326 起"
-     ],
+     "yields": [],
      "zone": "逆风小径、燃烧平原、东瘟疫之地、冬泉谷、加德米尔湖、赫塔拉的巢穴、风暴海湾、希利苏斯、祖尔格拉布、斯坦索姆、通灵学院、鳞须海龟洞穴",
-     "skill": null,
+     "skill": 425,
      "columns": {
       "稳定上钩": "425",
       "开始咬钩": "326 起",

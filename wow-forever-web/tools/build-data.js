@@ -692,6 +692,22 @@ if (fs.existsSync(profPath)) {
     if (!p.unparsed && !(p.recipes || []).length && !(p.nodes || []).length) {
       errs.push(`professions ${p.id}：既没配方也没采集点，又没标未解析——那是抓漏了`);
     }
+    /* 采集点这一层的列映射钉一道（2026-10-27 来源复核记的已知错）：
+       钓鱼的源表是「稳定上钩 / 开始咬钩 / 区域」三段，抓取层当年按采集点列序硬套，
+       成品里 6 行的名字就成了 25、75 这种光数字、"开始咬钩"落到"可得"栏。
+       现在合并层按列头重认成 tier；这条断言钉的是**别再退回那个形状**——
+       名字是纯数字、或 tier 少了两个字段，都直接拦红。 */
+    (p.nodes || []).forEach((x, i) => {
+      const nm = String(x.nameCn || '');
+      if (x.kind === 'tier') {
+        if (x.reliableAt === null || x.reliableAt === undefined || !x.biteFrom) {
+          errs.push(`professions ${p.id} 第 ${i} 段：tier 少了稳定上钩或开始咬钩，页面会空一格`);
+        }
+      } else if (/^\d+(\.\d+)?$/.test(nm)) {
+        errs.push(`professions ${p.id} 第 ${i} 个采集点的名字是纯数字「${nm}」——列映射又错位了`);
+      }
+      if (!nm) errs.push(`professions ${p.id} 第 ${i} 个采集点没有名字`);
+    });
     (p.recipes || []).forEach((x, i) => {
       if (!x.itemId || !/^\d+$/.test(String(x.itemId))) errs.push(`professions ${p.id} 第 ${i} 条配方缺物品 ID`);
       if (!x.nameCn) errs.push(`professions ${p.id} 第 ${i} 条配方缺名称`);

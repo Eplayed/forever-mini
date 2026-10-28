@@ -52,16 +52,21 @@
 
       <div v-if="shownNodes.length" class="card">
         <div class="bhead">
-          <h2 class="bt">采集点</h2>
-          <span class="bn">{{ shownNodes.length }} 个</span>
+          <h2 class="bt">{{ tierNodes ? '水域按技能分段' : '采集点' }}</h2>
+          <span class="bn">{{ shownNodes.length }} {{ tierNodes ? '段' : '个' }}</span>
         </div>
         <div class="boardwrap">
           <table class="board">
-            <thead><tr>
+            <thead v-if="tierNodes"><tr>
+              <th class="c-name">技能段</th><th class="c-num2">几点开始咬钩</th>
+              <th class="c-num2">稳定上钩</th><th class="w-tail">这些水域</th>
+            </tr></thead>
+            <thead v-else><tr>
               <th class="c-ico">图标</th><th class="c-name">{{ nodeHeadLabel }}</th>
               <th class="c-mat">可得</th><th class="c-num2">最多区域</th><th class="c-num">技能</th>
             </tr></thead>
             <tbody>
+              <template v-if="!tierNodes">
               <tr v-for="(n, i) in shownNodes" :key="n.nameCn + '-' + i">
                 <td class="c-ico"><IconCell :icon-key="n.iconKey || ''" :seed="n.nameCn" :cn="n.nameCn" /></td>
                 <td><span class="nm"><HlText :text="n.nameCn" :q="q" /></span></td>
@@ -71,6 +76,18 @@
                   v-for="s in skList(n.skill)" :key="s.k" class="sk-t" :class="'sk-' + s.k"
                   :title="s.cn + '色起点'">{{ s.cn }}<b>{{ n.skill[s.k] }}</b></i></span></td>
               </tr>
+              </template>
+              <!-- 钓鱼那一张是技能分段表，列和采集点不是一回事：源页给的是
+                   "几点开始咬钩 / 稳定上钩 / 哪些水域"，硬塞进采集点那五列就会把
+                   名字栏显示成 25、75 这种光数字（2026-10-27 来源复核记的已知错）。 -->
+              <template v-else>
+              <tr v-for="(n, i) in shownNodes" :key="n.nameCn + '-' + i">
+                <td><span class="nm"><HlText :text="n.nameCn" :q="q" /></span></td>
+                <td class="c-num2 dim">{{ n.biteFrom }}</td>
+                <td class="c-num2 num">{{ n.reliableAt }}</td>
+                <td class="w-tail dim">{{ n.zone || '—' }}</td>
+              </tr>
+              </template>
             </tbody>
           </table>
         </div>
@@ -175,7 +192,14 @@ const ps = computed(() => (doc.value && doc.value.professions) || []);
 const sel = computed(() => ps.value.filter((p) => p.id === selId.value)[0] || ps.value[0] || null);
 const sumRecipes = computed(() => ps.value.reduce((s, p) => s + p.counts.recipes, 0));
 const sumNew = computed(() => ps.value.reduce((s, p) => s + p.counts.newRecipes, 0));
-const sumNodes = computed(() => ps.value.reduce((s, p) => s + p.counts.nodes, 0));
+/* 钓鱼那 6 行是技能分段、不是采集点，别混进"个采集点"那个数里 */
+const sumNodes = computed(() => ps.value.reduce((s, p) =>
+  s + (p.nodes || []).filter((x) => x.kind !== 'tier').length, 0));
+/* 这一屏的"节点"是不是技能分段表——看数据本身，不看专业 id */
+const tierNodes = computed(() => {
+  const ns = (sel.value || {}).nodes || [];
+  return ns.length > 0 && ns.every((x) => x.kind === 'tier');
+});
 const nodeHeadLabel = computed(() =>
   sel.value && sel.value.id === 'herbalism' ? '草药点' : sel.value && sel.value.id === 'fishing' ? '水域' : '采集点');
 

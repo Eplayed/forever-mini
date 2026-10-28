@@ -1,21 +1,21 @@
 {
  "meta": {
-  "source": "GearInsight_Forever 0.5.1 Data.lua 的 spells 表（源：Forever beta 客户端解包）",
-  "addonVersion": "0.5.1",
-  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow-client-2026-10-21/GearInsight_Forever/Data.lua",
-  "fetched": "2026-10-21",
+  "source": "GearInsight_Forever 0.5.6 Data.lua 的 spells 表（源：Forever beta 客户端解包）",
+  "addonVersion": "0.5.6",
+  "originFile": "/Users/zhangyajun/Documents/project/.scratch/wow/GearInsight_Forever/Data.lua",
+  "fetched": "2026-10-28",
   "counts": {
-   "total": 1480,
+   "total": 1490,
    "byClass": {
     "Warrior": 111,
     "Paladin": 162,
-    "Hunter": 152,
+    "Hunter": 148,
     "Rogue": 92,
     "Priest": 233,
-    "Shaman": 177,
-    "Mage": 191,
-    "Warlock": 165,
-    "Druid": 197
+    "Shaman": 179,
+    "Mage": 198,
+    "Warlock": 167,
+    "Druid": 200
    }
   },
   "droppedFields": [
@@ -449,6 +449,15 @@
     "talentGated": null
    },
    {
+    "spellId": 18499,
+    "learnLevel": 30,
+    "name": "狂暴之怒",
+    "nameEn": null,
+    "iconKey": "spell_nature_ancestralguardian",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 2458,
     "learnLevel": 30,
     "name": "狂暴姿态",
@@ -499,15 +508,6 @@
     "name": "断筋",
     "nameEn": null,
     "iconKey": "ability_shockwave",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
-    "spellId": 18499,
-    "learnLevel": 32,
-    "name": "狂暴之怒",
-    "nameEn": null,
-    "iconKey": "spell_nature_ancestralguardian",
     "auto": "false",
     "talentGated": null
    },
@@ -1297,15 +1297,6 @@
     "talentGated": null
    },
    {
-    "spellId": 5502,
-    "learnLevel": 20,
-    "name": "感知亡灵",
-    "nameEn": null,
-    "iconKey": "spell_holy_senseundead",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 1310897,
     "learnLevel": 20,
     "name": "真理之音",
@@ -1432,15 +1423,6 @@
     "talentGated": null
    },
    {
-    "spellId": 20163,
-    "learnLevel": 25,
-    "name": "愤怒圣印",
-    "nameEn": null,
-    "iconKey": "spell_holy_retributionaura",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 19939,
     "learnLevel": 26,
     "name": "圣光闪现",
@@ -1459,11 +1441,29 @@
     "talentGated": null
    },
    {
+    "spellId": 20163,
+    "learnLevel": 26,
+    "name": "愤怒圣印",
+    "nameEn": null,
+    "iconKey": "spell_holy_retributionaura",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 1038,
     "learnLevel": 26,
-    "name": "拯救祝福",
+    "name": "拯救",
     "nameEn": null,
     "iconKey": "spell_holy_sealofsalvation",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
+    "spellId": 1325499,
+    "learnLevel": 26,
+    "name": "撤销",
+    "nameEn": null,
+    "iconKey": "spell_holy_prayerofmendingtga",
     "auto": "false",
     "talentGated": null
    },
@@ -2377,15 +2377,6 @@
     "talentGated": null
    },
    {
-    "spellId": 25895,
-    "learnLevel": 60,
-    "name": "强效拯救祝福",
-    "nameEn": null,
-    "iconKey": "spell_holy_greaterblessingofsalvation",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 25918,
     "learnLevel": 60,
     "name": "强效智慧祝福",
@@ -2463,6 +2454,15 @@
     "name": "神圣打击",
     "nameEn": null,
     "iconKey": "classicon_paladin",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
+    "spellId": 25895,
+    "learnLevel": 60,
+    "name": "群体拯救",
+    "nameEn": null,
+    "iconKey": "spell_holy_greaterblessingofsalvation",
     "auto": "false",
     "talentGated": null
    },
@@ -2757,15 +2757,6 @@
     "talentGated": null
    },
    {
-    "spellId": 13797,
-    "learnLevel": 16,
-    "name": "献祭陷阱效果",
-    "nameEn": null,
-    "iconKey": "spell_fire_flameshock",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 2643,
     "learnLevel": 18,
     "name": "多重射击",
@@ -2946,15 +2937,6 @@
     "talentGated": null
    },
    {
-    "spellId": 14298,
-    "learnLevel": 26,
-    "name": "献祭陷阱效果",
-    "nameEn": null,
-    "iconKey": "spell_fire_flameshock",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 19880,
     "learnLevel": 26,
     "name": "追踪元素生物",
@@ -3072,6 +3054,15 @@
     "talentGated": null
    },
    {
+    "spellId": 1317257,
+    "learnLevel": 30,
+    "name": "陆行鸟踢击",
+    "nameEn": null,
+    "iconKey": "ability_hunter_pet_tallstrider",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 1299348,
     "learnLevel": 32,
     "name": "强击光环",
@@ -3183,15 +3174,6 @@
     "spellId": 14303,
     "learnLevel": 36,
     "name": "献祭陷阱",
-    "nameEn": null,
-    "iconKey": "spell_fire_flameshock",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
-    "spellId": 14299,
-    "learnLevel": 36,
-    "name": "献祭陷阱效果",
     "nameEn": null,
     "iconKey": "spell_fire_flameshock",
     "auto": "false",
@@ -3414,15 +3396,6 @@
     "talentGated": null
    },
    {
-    "spellId": 14300,
-    "learnLevel": 46,
-    "name": "献祭陷阱效果",
-    "nameEn": null,
-    "iconKey": "spell_fire_flameshock",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 14279,
     "learnLevel": 46,
     "name": "蝰蛇钉刺",
@@ -3624,15 +3597,6 @@
     "spellId": 14305,
     "learnLevel": 56,
     "name": "献祭陷阱",
-    "nameEn": null,
-    "iconKey": "spell_fire_flameshock",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
-    "spellId": 14301,
-    "learnLevel": 56,
-    "name": "献祭陷阱效果",
     "nameEn": null,
     "iconKey": "spell_fire_flameshock",
     "auto": "false",
@@ -5790,7 +5754,7 @@
     "name": "愈合祷言",
     "nameEn": null,
     "iconKey": "spell_holy_prayerofmendingtga",
-    "auto": "true",
+    "auto": "false",
     "talentGated": "true"
    },
    {
@@ -6195,7 +6159,7 @@
     "name": "愈合祷言",
     "nameEn": null,
     "iconKey": "spell_holy_prayerofmendingtga",
-    "auto": "true",
+    "auto": "false",
     "talentGated": "true"
    },
    {
@@ -6636,7 +6600,7 @@
     "name": "愈合祷言",
     "nameEn": null,
     "iconKey": "spell_holy_prayerofmendingtga",
-    "auto": "true",
+    "auto": "false",
     "talentGated": "true"
    },
    {
@@ -7425,6 +7389,15 @@
     "talentGated": null
    },
    {
+    "spellId": 408490,
+    "learnLevel": 30,
+    "name": "熔岩爆裂",
+    "nameEn": null,
+    "iconKey": "spell_shaman_lavaburst",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 10595,
     "learnLevel": 30,
     "name": "自然抗性图腾",
@@ -7641,6 +7614,15 @@
     "talentGated": null
    },
    {
+    "spellId": 17354,
+    "learnLevel": 38,
+    "name": "法力之潮图腾",
+    "nameEn": null,
+    "iconKey": "spell_frost_summonwaterelemental",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 8249,
     "learnLevel": 38,
     "name": "火舌图腾",
@@ -7740,7 +7722,7 @@
     "talentGated": null
    },
    {
-    "spellId": 408490,
+    "spellId": 1238299,
     "learnLevel": 40,
     "name": "熔岩爆裂",
     "nameEn": null,
@@ -7947,7 +7929,7 @@
     "talentGated": null
    },
    {
-    "spellId": 17354,
+    "spellId": 17359,
     "learnLevel": 48,
     "name": "法力之潮图腾",
     "nameEn": null,
@@ -8019,7 +8001,7 @@
     "talentGated": null
    },
    {
-    "spellId": 1238299,
+    "spellId": 1238300,
     "learnLevel": 50,
     "name": "熔岩爆裂",
     "nameEn": null,
@@ -8235,7 +8217,7 @@
     "talentGated": null
    },
    {
-    "spellId": 17359,
+    "spellId": 1325256,
     "learnLevel": 58,
     "name": "法力之潮图腾",
     "nameEn": null,
@@ -8343,7 +8325,7 @@
     "talentGated": null
    },
    {
-    "spellId": 1238300,
+    "spellId": 1326047,
     "learnLevel": 60,
     "name": "熔岩爆裂",
     "nameEn": null,
@@ -8849,6 +8831,15 @@
     "talentGated": null
    },
    {
+    "spellId": 1326053,
+    "learnLevel": 24,
+    "name": "冰霜冲击",
+    "nameEn": null,
+    "iconKey": "spell_frost_frostbolt",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 5145,
     "learnLevel": 24,
     "name": "奥术飞弹",
@@ -8901,6 +8892,15 @@
     "iconKey": "spell_nature_abolishmagic",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 1326079,
+    "learnLevel": 25,
+    "name": "奥术愤怒",
+    "nameEn": null,
+    "iconKey": "ability_mage_netherwindpresence",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 120,
@@ -9164,11 +9164,29 @@
     "talentGated": null
    },
    {
+    "spellId": 1326054,
+    "learnLevel": 36,
+    "name": "冰霜冲击",
+    "nameEn": null,
+    "iconKey": "spell_frost_frostbolt",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 13018,
     "learnLevel": 36,
     "name": "冲击波",
     "nameEn": null,
     "iconKey": "spell_holy_excorcism_02",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
+    "spellId": 1326080,
+    "learnLevel": 36,
+    "name": "奥术愤怒",
+    "nameEn": null,
+    "iconKey": "ability_mage_netherwindpresence",
     "auto": "false",
     "talentGated": "true"
    },
@@ -9542,6 +9560,15 @@
     "talentGated": "true"
    },
    {
+    "spellId": 1326055,
+    "learnLevel": 48,
+    "name": "冰霜冲击",
+    "nameEn": null,
+    "iconKey": "spell_frost_frostbolt",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 10053,
     "learnLevel": 48,
     "name": "制造魔法黄水晶",
@@ -9549,6 +9576,15 @@
     "iconKey": "inv_misc_gem_opal_01",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 1326081,
+    "learnLevel": 48,
+    "name": "奥术愤怒",
+    "nameEn": null,
+    "iconKey": "ability_mage_netherwindpresence",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 10211,
@@ -9974,6 +10010,15 @@
     "talentGated": "true"
    },
    {
+    "spellId": 1326082,
+    "learnLevel": 60,
+    "name": "奥术愤怒",
+    "nameEn": null,
+    "iconKey": "ability_mage_netherwindpresence",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 25304,
     "learnLevel": 60,
     "name": "寒冰箭",
@@ -10108,24 +10153,6 @@
     "nameEn": null,
     "iconKey": "spell_shadow_summonimp",
     "auto": "false",
-    "talentGated": null
-   },
-   {
-    "spellId": 412783,
-    "learnLevel": 1,
-    "name": "恶魔变形：恶魔冲锋",
-    "nameEn": null,
-    "iconKey": "inv_misc_rune_06",
-    "auto": "true",
-    "talentGated": null
-   },
-   {
-    "spellId": 412784,
-    "learnLevel": 1,
-    "name": "恶魔变形：恶魔嚎叫",
-    "nameEn": null,
-    "iconKey": "inv_misc_rune_06",
-    "auto": "true",
     "talentGated": null
    },
    {
@@ -10547,7 +10574,7 @@
     "learnLevel": 26,
     "name": "侦测隐形",
     "nameEn": null,
-    "iconKey": "spell_shadow_detectlesserinvisibility",
+    "iconKey": "spell_shadow_detectinvisibility",
     "auto": "false",
     "talentGated": null
    },
@@ -10876,6 +10903,15 @@
     "talentGated": null
    },
    {
+    "spellId": 18879,
+    "learnLevel": 38,
+    "name": "生命虹吸",
+    "nameEn": null,
+    "iconKey": "spell_shadow_requiem",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 11711,
     "learnLevel": 38,
     "name": "痛苦灾祸",
@@ -10910,6 +10946,15 @@
     "iconKey": "spell_shadow_deathscream",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 1316697,
+    "learnLevel": 40,
+    "name": "折磨",
+    "nameEn": null,
+    "iconKey": "ability_deathknight_hemorrhagicfever",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 18869,
@@ -11133,6 +11178,15 @@
     "name": "燃烧",
     "nameEn": null,
     "iconKey": "spell_fire_fireball",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
+    "spellId": 18880,
+    "learnLevel": 48,
+    "name": "生命虹吸",
+    "nameEn": null,
+    "iconKey": "spell_shadow_requiem",
     "auto": "false",
     "talentGated": "true"
    },
@@ -11432,6 +11486,15 @@
     "iconKey": "spell_fire_soulburn",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 18881,
+    "learnLevel": 58,
+    "name": "生命虹吸",
+    "nameEn": null,
+    "iconKey": "spell_shadow_requiem",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 11713,
@@ -11931,6 +11994,15 @@
     "talentGated": null
    },
    {
+    "spellId": 5221,
+    "learnLevel": 20,
+    "name": "撕碎",
+    "nameEn": null,
+    "iconKey": "spell_shadow_vampiricaura",
+    "auto": "false",
+    "talentGated": null
+   },
+   {
     "spellId": 2912,
     "learnLevel": 20,
     "name": "星火术",
@@ -12021,15 +12093,6 @@
     "talentGated": null
    },
    {
-    "spellId": 5221,
-    "learnLevel": 22,
-    "name": "撕碎",
-    "nameEn": null,
-    "iconKey": "spell_shadow_vampiricaura",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 8926,
     "learnLevel": 22,
     "name": "月火术",
@@ -12066,15 +12129,6 @@
     "talentGated": null
    },
    {
-    "spellId": 5217,
-    "learnLevel": 24,
-    "name": "猛虎之怒",
-    "nameEn": null,
-    "iconKey": "ability_mount_jungletiger",
-    "auto": "false",
-    "talentGated": null
-   },
-   {
     "spellId": 1075,
     "learnLevel": 24,
     "name": "荆棘术",
@@ -12100,6 +12154,15 @@
     "iconKey": "ability_druid_lunarguidance",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 407995,
+    "learnLevel": 25,
+    "name": "原始撕咬",
+    "nameEn": null,
+    "iconKey": "ability_racial_cannibalize",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 1850,
@@ -12415,6 +12478,15 @@
     "iconKey": "spell_nature_thorns",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 1238069,
+    "learnLevel": 36,
+    "name": "原始撕咬",
+    "nameEn": null,
+    "iconKey": "ability_racial_cannibalize",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 8941,
@@ -12840,6 +12912,15 @@
     "talentGated": null
    },
    {
+    "spellId": 1238070,
+    "learnLevel": 48,
+    "name": "原始撕咬",
+    "nameEn": null,
+    "iconKey": "ability_racial_cannibalize",
+    "auto": "false",
+    "talentGated": "true"
+   },
+   {
     "spellId": 9856,
     "learnLevel": 48,
     "name": "愈合",
@@ -13234,6 +13315,15 @@
     "iconKey": "ability_druid_ferociousbite",
     "auto": "false",
     "talentGated": null
+   },
+   {
+    "spellId": 1238073,
+    "learnLevel": 60,
+    "name": "原始撕咬",
+    "nameEn": null,
+    "iconKey": "ability_racial_cannibalize",
+    "auto": "false",
+    "talentGated": "true"
    },
    {
     "spellId": 25299,

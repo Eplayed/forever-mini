@@ -26,7 +26,8 @@ import os
 import re
 from datetime import date
 
-ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'data')
+# 2026-10-24 删旧站后数据基底在 app/data；这一行当时没跟着改，于是这条链从那天起就跑不动（报 FileNotFoundError 而不是静默写错地方，算运气好）。
+ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app', 'data')
 CONFLICT_CAP = 300
 
 

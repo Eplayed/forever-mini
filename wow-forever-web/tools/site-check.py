@@ -547,6 +547,7 @@ def test_spellbook(browser, base):
         page.screenshot(path=os.path.join(SHOT_DIR, "app-board-prof-m.png"))
         ctx.close()
 
+
         # ---- 第二批：板块表骨架铺满剩余页面（2026-10-16 用户"就这么做"）----
         # 每页只钉三件事：确有 .board 且是 fixed；桌面整页不横溢；375 整页不横溢
         # （表在 .boardwrap 里自己滚）。列宽的具体数值随数据变，钉死会变成又一处
@@ -3486,6 +3487,56 @@ def test_data_versions(browser, base):
 
 # 全跑一次 13 分钟，改一条新断言时等不起。SECTIONS 把顺序固定下来，--only 按名字挑着跑，
 # 用来做 30 秒探针；正式门禁仍然不带 --only。
+def test_prof_tiers(browser, base):
+    """钓鱼那张表按技能分段出列（2026-10-28 修的那处列映射错位）。
+       单独成一节而不是塞在 [6a] 里：那一节现在在这台机器上跑不到底，
+       断言埋在跑不到的地方等于没有。"""
+    print("\n[6e] 专业页·钓鱼技能分段" if False else "\n[6e] 专业页 钓鱼技能分段")
+    # 钓鱼那张表的列映射（2026-10-27 来源复核记的已知错）：源页给的是
+    # 「稳定上钩 / 开始咬钩 / 区域」三段，当年抓取按采集点列序硬套，
+    # 页面上就把名字画成了 25、75 这种光数字。钉三件事：
+    # 表头换成技能分段、第一格不是纯数字、"开始咬钩"那一列真有值。
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    page = ctx.new_page()
+    page.goto(APP_BASE + "/#/professions", wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    page.evaluate("() => { const b=[...document.querySelectorAll('.pick')]"
+                  "  .find(x => x.innerText.indexOf('钓鱼') >= 0); if (b) b.click(); }")
+    page.wait_for_timeout(700)
+    fh = page.evaluate("""() => {
+      const card = [...document.querySelectorAll('.card')].find(c =>
+        (c.querySelector('.bt') || {}).innerText && c.querySelector('.bt').innerText.indexOf('技能分段') >= 0);
+      if (!card) return { head: null };
+      const ths = [...card.querySelectorAll('thead th')].map(x => x.innerText.trim());
+      const first = [...card.querySelectorAll('tbody tr')].slice(0, 2)
+        .map(tr => [...tr.querySelectorAll('td')].map(td => td.innerText.trim()));
+      return { head: ths, rows: first, n: card.querySelectorAll('tbody tr').length };
+    }""")
+    check("钓鱼那张表按技能分段出表头，不再借采集点那五列",
+          fh.get("head") == [u"技能段", u"几点开始咬钩", u"稳定上钩", u"这些水域"], json.dumps(fh, ensure_ascii=False)[:150])
+    check("分段第一格是「稳定上钩 N 级」这种读得通的名字，不是光一个数字",
+          bool(fh.get("rows")) and bool(re.match(r'^稳定上钩 \d+ 级$', fh["rows"][0][0] or "")),
+          json.dumps(fh.get("rows", [])[:1], ensure_ascii=False))
+    check("「几点开始咬钩」那一列真有值（一开始 / 51 起 这类）",
+          all(len(r) > 1 and r[1] for r in fh.get("rows") or []),
+          json.dumps([r[1:2] for r in fh.get("rows") or []], ensure_ascii=False))
+    # 反面样本：换一个真有采集点的专业，那五列必须还在——
+    # 否则"按数据判断是不是分段表"这个开关就是把别的页也一起改了。
+    page.evaluate("() => { const b=[...document.querySelectorAll('.pick')]"
+                  "  .find(x => x.innerText.indexOf('草药学') >= 0); if (b) b.click(); }")
+    page.wait_for_timeout(700)
+    hb = page.evaluate("""() => {
+      const card = [...document.querySelectorAll('.card')].find(c => c.querySelector('table.board'));
+      return { ths: [...card.querySelectorAll('thead th')].map(x => x.innerText.trim()),
+               first: ((card.querySelector('tbody tr .nm') || {}).innerText || '').trim() };
+    }""")
+    check("草药学仍走采集点那五列（分段开关没有误伤别的页）",
+          hb["ths"] == [u"图标", u"草药点", u"可得", u"最多区域", u"技能"] and hb["first"] != "",
+          json.dumps(hb, ensure_ascii=False)[:140])
+    page.screenshot(path=os.path.join(SHOT_DIR, "app-prof-fishing-tiers.png"))
+    ctx.close()
+
+
 def test_pets(browser, base):
     """宠物家族与技能页（2026-10-28 站主拍板开这一页）。盯五件事：
        ① 两张表的行数与 pets.json 的条数对得上，计数行也是同一份数；
@@ -3601,6 +3652,7 @@ SECTIONS = [
     ("dungeon_geo", test_dungeon_geo),
     ("legacy_app", test_legacy_app),
     ("bis", test_bis),
+    ("prof_tiers", test_prof_tiers),
     ("pets", test_pets),
     ("classes_sticky", test_classes_sticky),
     ("race_icon", lambda b, base: test_race_icon(b)),
