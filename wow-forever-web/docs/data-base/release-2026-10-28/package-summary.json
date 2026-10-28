@@ -1,11 +1,11 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261028-153918-476218a8",
- "gitHead": "476218a8",
+ "package": "wow-forever-web-20261028-174730-4e216292",
+ "gitHead": "4e216292",
  "worktreeDirty": false,
- "builtAt": "2026-10-28 15:39:21",
+ "builtAt": "2026-10-28 17:47:33",
  "files": 3880,
- "bytes": 31490919,
+ "bytes": 31491357,
  "byExt": {
   ".png": 4,
   ".js": 3,
@@ -19,16 +19,16 @@
   ".glb": 1,
   ".html": 1
  },
- "fileManifestSha256": "1c470bb2cf2c20897d35f427b925284bbfe35b319dd15b451fe7fbb3f2b8a614",
+ "fileManifestSha256": "89f3ccbbe3781bcbd545a70be00e0b719ead40087f326c353d1cb2c1d1bdafae",
  "keyFiles": {
   "assets/GLTFLoader-BFidmEIY.js": "b2caccb4283fc25d8efb4b9dcdd4d49893ef5a45f07b75e1587f04aa8e6a73f1",
   "assets/favicon-VZ22-4DB.svg": "0df0428682b9260be82d85ed60fb2d28d4bb71bd39000b74ce162da0b8e571ac",
   "assets/hanken-grotesk-var-KjBMhMia.woff2": "1f21c6eaa0000f3329cfcfac966b43d5bebf5aa610303e33294ac31bc6f4bb59",
-  "assets/index-Cp2UG136.js": "34749c6ea7242a07785a1deb0c6c6ea2bd3ed696ad587246f74eee7990b092e5",
   "assets/index-d3H75YVg.css": "334335de0b0f7e24ac8e86eb5f1c2c83a4c5e9dc543c82dfb40057ee14c3230f",
+  "assets/index-la7FBFQg.js": "0db79680f4bd1abed7ddbce474098ff357d8bfd5eb52fb20c9b7415fed072f21",
   "assets/open-sans-var-BEhAMRCF.woff2": "441af0def989ebfdbd6ad85ffaed85e967ab21a05f1dd342f16259464a206dd0",
   "assets/three.module-BdMZo7zQ.js": "ebbbbb1131c57964d2309068e4bdbdaad800b55766c601baf2d52b0ca894dfff",
-  "index.html": "3f4d1adf8eda9218f8822782c37ba0a1354dc791e31d6511fb5b3728ae905c9b"
+  "index.html": "8e369f3cbf05ae113fa5d5eddd5086db391d0acb7e638a6dd8744a60ff7e4711"
  },
  "dataFiles": {
   "data/abilities.json": "7de1ed7c1c4b6df5195424a07387aad11ac576e62ed2d7a292482f8340f89810",
@@ -56,8 +56,8 @@
   "data/professions.json": "0006d1a2f916ce51a4db3d3e0f67224de536c4600a8677af0c9f2facf636be76",
   "data/queue.json": "274b1617627fe960f8d1176d8dac5ef9da45035bf6ffbeaeaae3feb590e31a7b",
   "data/races.json": "88826d20e046159842b861a6e946c2629affeb170342088493ea2986ad990176",
-  "data/releases.json": "0eb03425d8a39d495114c605c1aed22e97667171d8620a28d4c6ce9fb941c53a",
-  "data/scale.json": "1b1bf7f0e6c1886b8edeb4a3cd01e26f7bfcb7a1a9b9d6d792ad1d8609a23e9e",
+  "data/releases.json": "ae0e4826179c33c39d9268ced19e209409e0d5f6e0bff5fe2740e5f395c693c3",
+  "data/scale.json": "f7160391d1a4b1107c685b22b0ad35ccffb82f976d74fc5fc213679b6f0051a1",
   "data/search.json": "f3ffda774e0c8cc5d8dd3619674b7d612bed986cde986ffab503f563c208aa94",
   "data/spells.json": "8a457e4ede796eec037228fbc0c703a21cb0d2d1fa516db0b1e3f9bebefc9d9b",
   "data/systems.json": "fec92989285f321d783cb9bfe763ffa1901b1d3c67ce3451b233d6c01ad33758",
@@ -93,5 +93,5 @@
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "41f62c6c4513a2e04c90c62c30ae9d89078de07fa11df729bef5053cd1dcadae"
+ "packageSha256": "d8fb1a4faeaa6891105e9b9272ec568252c04a850431004efda6793ac80b4b6c"
 }
