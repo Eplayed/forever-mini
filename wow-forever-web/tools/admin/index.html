@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>数据管线控制台 · 无限服资料线</title>
+<title>数据管理 · 无限服资料线</title>
 <style>
 /* ===== 内部工具 · 暗色工程控制台。与玩家站同血统（暗蓝炭黑 + 暖金），但这是军需台账不是展厅：
         等宽字体主导、密度优先、缺口一律显形。零外部请求（红线：禁字体 CDN）。 ===== */
@@ -107,6 +107,19 @@ tr.band td span{color:var(--faint);letter-spacing:.05em;margin-left:10px}
 .noart{color:var(--err);font-size:10.5px;border:1px solid var(--err);padding:0 4px;letter-spacing:.15em}
 .yesart{color:var(--faint)}
 .stale{color:var(--warn)} .fresh{color:var(--ok)}
+.badge{display:inline-block;border:1px solid var(--line2);padding:1px 7px;color:var(--dim);font-size:11px}
+.badge.ready{color:var(--ok);border-color:var(--ok)}
+.badge.candidate{color:var(--warn);border-color:var(--warn)}
+.topic-name{font-weight:700;color:var(--ink)}
+.source-note{font-size:11px;color:var(--dim);white-space:normal;min-width:170px}
+.actions{display:flex;gap:6px}
+.actions button{letter-spacing:0;padding:3px 8px;white-space:nowrap}
+.actions button.secondary{color:var(--info);border-color:var(--info)}
+.actions button:hover{color:#10151f}
+.info-box{padding:12px 16px;margin-bottom:12px;border:1px solid var(--line2);background:var(--panel2);color:var(--dim);font-size:12px}
+.gap-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.gap-row span{padding:4px 9px;border:1px solid var(--line2);background:var(--panel2);font-size:11px}
+#job-result{white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:230px;overflow:auto;color:var(--dim)}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:var(--faint)}
 .dot.fresh{background:var(--ok)} .dot.stale{background:var(--warn)}
 tr.click{cursor:pointer}
@@ -126,6 +139,10 @@ button{
 }
 button:hover{background:var(--gold);color:#141005}
 button:disabled{opacity:.4;cursor:wait}
+.searchbar{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.searchbar input{background:var(--panel2);color:var(--ink);border:1px solid var(--line2);padding:7px 10px;min-width:260px;max-width:100%;font:12px var(--mono)}
+.searchbar select{background:var(--panel2);color:var(--ink);border:1px solid var(--line2);padding:7px 10px;font:12px var(--mono)}
+.searchbar input:focus{outline:1px solid var(--gold)}
 .gate .last{font-size:11px;color:var(--faint);margin-left:auto}
 .gate .last.ok{color:var(--ok)} .gate .last.err{color:var(--err)}
 .gate.running .last{color:var(--gold);animation:pulse 1s infinite}
@@ -142,9 +159,9 @@ button:disabled{opacity:.4;cursor:wait}
 #drawer{
   position:fixed;left:0;right:0;bottom:0;background:var(--panel2);border-top:2px solid var(--gold);
   transform:translateY(100%);transition:transform .25s;max-height:62vh;overflow:auto;z-index:9;
-  box-shadow:0 -18px 50px rgba(0,0,0,.5);
+  box-shadow:0 -18px 50px rgba(0,0,0,.5);visibility:hidden;pointer-events:none;
 }
-#drawer.open{transform:none}
+#drawer.open{transform:none;visibility:visible;pointer-events:auto}
 #drawer .inner{max-width:1180px;margin:0 auto;padding:16px 20px 26px}
 #drawer h5{font:400 16px var(--serif);letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:12px}
 #drawer h5 button{margin-left:auto;letter-spacing:.1em;padding:3px 10px}
@@ -152,35 +169,91 @@ button:disabled{opacity:.4;cursor:wait}
 
 footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;border-top:1px solid var(--line);padding-top:12px}
 .errbanner{border:1px solid var(--err);color:var(--err);padding:10px 14px;margin-bottom:16px;display:none}
+/* 首页只放决策信息；原始台账在折叠区按需展开。 */
+.wrap{max-width:980px}
+header{padding:20px 24px}
+header .stamp,nav{display:none}
+header h1{font:600 28px/1.2 var(--sans);letter-spacing:0}
+header .sub{letter-spacing:0;font-size:13px;color:var(--dim)}
+.readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;border:0;margin-top:18px}
+.readouts div{border:1px solid var(--line2);background:var(--panel2);border-radius:8px;margin:0;padding:10px 12px}
+.readouts b{display:block;font:600 27px/1.2 var(--sans);color:var(--gold);margin-top:3px}
+.readouts small{display:block;color:var(--faint);font-size:10px;margin-top:2px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.toolbar button{font-size:11px;padding:5px 10px;letter-spacing:0}
+#s0 h2{margin-bottom:12px}
+.topic-list{border:1px solid var(--line);background:var(--panel);border-radius:8px;overflow:hidden}
+.topic-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.topic-row:last-child{border-bottom:0}
+.topic-row h3{margin:0 0 2px;font:600 14px var(--sans);letter-spacing:0;color:var(--ink)}
+.topic-meta{display:flex;flex-wrap:wrap;gap:3px 12px;color:var(--dim);font-size:11px}
+.topic-side{display:flex;align-items:center;gap:10px}
+.topic-side button{min-width:92px;letter-spacing:0;padding:6px 10px;border-radius:5px}
+.topic-side .secondary{color:var(--info);border-color:var(--info)}
+.topic-side .secondary:hover{color:var(--bg);background:var(--info)}
+.topic-side .badge{white-space:nowrap}
+.more{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.more>summary{cursor:pointer;color:var(--ink);font-size:13px}
+.more>p{margin:8px 0;color:var(--dim);font-size:11px}
+#job-result{max-height:180px}
+#job-result.compact{max-height:none;color:var(--dim)}
+#advanced{margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+#advanced>summary{cursor:pointer;color:var(--dim);font-size:13px}
+#advanced section{margin-top:22px}
+@media(max-width:680px){
+  .wrap{padding:0 12px 60px}
+  header{margin-top:14px;padding:18px 14px}
+  header h1{font-size:24px}
+  .readouts{gap:5px}
+  .readouts div{padding:8px 6px}
+  .readouts b{font-size:21px}
+  .topic-row{grid-template-columns:1fr;gap:7px;padding:12px}
+  .topic-side{justify-content:space-between}
+  .toolbar{align-items:flex-start}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <div class="kicker">WoW Forever · Internal Console</div>
-    <h1>数据管线<b>控制台</b></h1>
-    <div class="sub">upstream → app/data → 构建副本 ｜ 面板是眼睛，不是手：改数据仍走 upstream / merge-*.js + refresh.sh</div>
+    <div class="kicker">FOREVER · LOCAL DATA</div>
+    <h1>数据管理</h1>
+    <div class="sub">看缺口、核来源、更新本地资料。玩家站仍在 8821。</div>
     <div class="stamp">内部 · 非玩家页面</div>
     <div class="readouts" id="readouts">
-      <div><s>基底生成</s><b id="r-gen">—</b></div>
-      <div><s>上游抓取</s><b id="r-scrape">—</b></div>
-      <div><s>首领头像</s><b id="r-faces">—</b></div>
-      <div><s>基底文件</s><b id="r-files">—</b></div>
-      <div><s>不新鲜快照</s><b id="r-stale">—</b></div>
+      <div><s>物品新增待审</s><b id="r-review">—</b><small id="r-review-date">尚未检查更新</small></div>
+      <div><s>物品详情缺口</s><b id="r-detail">—</b><small>名录内无详情</small></div>
+      <div><s>过期核心板块</s><b id="r-stale">—</b><small>超过 14 天未核</small></div>
     </div>
   </header>
 
-  <nav>
-    <a href="#s1"><i>01</i>基底与上游</a>
-    <a href="#s2"><i>02</i>副本缺口台账</a>
-    <a href="#s3"><i>03</i>门禁</a>
-  </nav>
-
   <div class="errbanner" id="errbanner"></div>
 
+  <section id="s0">
+    <div class="toolbar"><h2>核心数据</h2><button id="reload" type="button">刷新状态</button></div>
+    <div id="core-list" class="topic-list"><div class="topic-row">正在读取…</div></div>
+    <p class="notice">“检查更新”只拉取物品待审快照；“更新数据”会修改本地文件并运行校验，不会自动发布。</p>
+    <div class="card pad" style="margin-top:12px">
+      <h3>本次操作 <b id="job-state">尚未运行</b></h3>
+      <div id="job-result" class="compact">点击上方按钮后，这里会显示进度和结果。</div>
+      <details id="job-raw-wrap" hidden><summary class="dim">查看详细结果</summary><pre id="job-raw"></pre></details>
+    </div>
+    <details class="more"><summary>其他数据与更新</summary><p>低频板块和暂未建立自动更新流程的资料。</p><div id="other-list" class="topic-list"></div></details>
+  </section>
+
+  <details id="advanced"><summary>高级查看：条目、原始文件与检查工具</summary>
+  <section id="s-records">
+    <h2><i>02</i>条目检索 <small>从成品基底按 ID 或名称找条目，原始字段只读展示</small></h2>
+    <div class="card pad">
+      <div class="searchbar"><select id="record-select" aria-label="选择数据板块"></select><input id="record-query" placeholder="输入 ID 或中文/英文名" aria-label="条目检索"><button id="record-search">检索</button><span id="record-total" class="dim"></span></div>
+      <div class="scrollx"><table id="t-records"><thead><tr><th>ID</th><th>名称</th><th>分级</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+      <div class="searchbar" style="margin-top:12px"><button id="record-prev">上一页</button><button id="record-next">下一页</button><span id="record-page" class="dim"></span></div>
+    </div>
+  </section>
+
   <section id="s1">
-    <h2><i>01</i>基底与上游 <small>成品文件在左（唯一真相），原始转述在右（页面永不读）</small></h2>
+    <h2><i>03</i>基底与上游 <small>成品文件在左（唯一真相），原始转述在右（页面永不读）</small></h2>
     <div class="duo">
       <div class="card"><div class="pad">
         <h3>成品基底 <b>app/data/*.json</b></h3>
@@ -200,7 +273,7 @@ footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;bor
   </section>
 
   <section id="s2">
-    <h2><i>02</i>副本缺口台账 <small>38 座 · 缺的字段亮黄，两源分歧标红，缺原画盖「缺」章 · 点任意一行看字段 JSON</small></h2>
+    <h2><i>04</i>副本缺口台账 <small>缺的字段亮黄，两源分歧标红，缺原画盖「缺」章 · 点任意一行看字段 JSON</small></h2>
     <div class="card"><div class="pad">
       <div class="scrollx"><table id="t-dun">
         <thead><tr>
@@ -213,12 +286,13 @@ footer{margin-top:40px;color:var(--faint);font-size:11px;letter-spacing:.1em;bor
   </section>
 
   <section id="s3">
-    <h2><i>03</i>门禁 <small>白名单命令 · 在仓库根执行 · 输出截断 64KB</small></h2>
+    <h2><i>05</i>门禁 <small>白名单命令 · 在仓库根执行 · 输出截断 64KB</small></h2>
     <div class="gates" id="gates"></div>
     <div id="term"><span class="faint">▸ 门禁输出会打在这里。status／build-data 秒级，site-dun 约一分钟。</span></div>
   </section>
+  </details>
 
-  <footer>无限服资料线 · 数据管理面板 ｜ 只绑 127.0.0.1 ｜ 与资料站（8817／8821）互不相干 ｜ 口径：docs/DATA-MAINTENANCE.md</footer>
+  <footer>本机管理台 127.0.0.1:8830 · 成品数据在 app/data/ · 来源与刷新规则见各行</footer>
 </div>
 
 <div id="drawer"><div class="inner">
@@ -245,19 +319,119 @@ async function jget(url) {
   return r.json();
 }
 
+/* ===== 01 数据板块与来源 ===== */
+const CORE = ["items", "world", "dungeons", "changes", "professions", "legacy", "bis"];
+function drawCatalog(data) {
+  const gap = data.gaps.find(g => g.topic === "item-detail");
+  $("#r-detail").textContent = gap && gap.value != null ? gap.value : "—";
+  $("#r-stale").textContent = data.topics.filter(t => CORE.includes(t.id) && t.age != null && t.age > 14).length;
+  const row = t => {
+    const state = t.state === "candidate" ? "待采编" : t.state === "error" ? "文件错误" : t.age != null && t.age > 14 ? "超过 14 天" : "已建库";
+    const cls = t.state === "candidate" || t.state === "error" || t.age > 14 ? "candidate" : "ready";
+    const date = esc((t.dateKind ? t.dateKind + " " : "") + (t.date || "日期未记录"));
+    const source = t.url ? '<a href="' + esc(t.url) + '" title="' + esc(t.source) + '" target="_blank" rel="noopener noreferrer">数据来源 ↗</a>' : esc(t.source);
+    const action = t.id === "items" ? '<button class="secondary" data-action="scan-items" data-topic="items">检查更新</button>' :
+      t.workflow ? '<button data-action="refresh" data-topic="' + esc(t.id) + '">更新数据</button>' : '<span class="no-action">尚无自动更新</span>';
+    return '<div class="topic-row"><div><h3>' + esc(t.label) + '</h3><div class="topic-meta"><span>' +
+      (t.count == null ? '尚无数据' : esc(t.count) + ' 条') + '</span><span>' + date + '</span><span>' + source +
+      '</span></div></div><div class="topic-side"><span class="badge ' + cls + '">' + state + '</span>' + action + '</div></div>';
+  };
+  $("#core-list").innerHTML = CORE.map(id => data.topics.find(t => t.id === id)).filter(Boolean).map(row).join("");
+  $("#other-list").innerHTML = data.topics.filter(t => !CORE.includes(t.id)).map(row).join("");
+  $("#record-select").innerHTML = data.topics.filter(t => t.product).map(t => '<option value="' + esc(t.id) + '">' + esc(t.label) + '</option>').join("");
+  if (!browseTopic) browseTopic = $("#record-select").value;
+  else $("#record-select").value = browseTopic;
+  setButtons();
+}
+let jobBusy = false;
+function setButtons() { document.querySelectorAll("button[data-action]").forEach(button => { button.disabled = jobBusy; }); }
+function jobMessage(title, summary, bad, raw) {
+  $("#job-state").textContent = title;
+  $("#job-result").textContent = summary;
+  $("#job-result").style.color = bad ? "var(--err)" : "var(--dim)";
+  $("#job-raw-wrap").hidden = !raw;
+  $("#job-raw").textContent = raw || "";
+}
+async function pollJob(id) {
+  for (;;) {
+    const d = await jget('/api/jobs/' + encodeURIComponent(id));
+    if (d.state === 'running') jobMessage('运行中', d.progress, false, '');
+    if (d.state !== 'running') {
+      if (d.state === 'error') jobMessage('未完成', (d.error || '未知错误').split('\n')[0], true, d.error);
+      else if (d.action === 'scan-items') {
+        const r = d.result || {};
+        jobMessage('已拉取待审', '上游 ' + r.remote + ' 条；新增 ' + r.added + '、移除 ' + r.removed + '、字段变动 ' + r.changed + '。尚未合入成品。', false, JSON.stringify(r, null, 2));
+        jget('/api/review/items').then(drawReview).catch(e => fail(e.message));
+      } else jobMessage('本地更新完成', (d.result && d.result.message) || '刷新链已通过；请审阅改动文件，尚未发布。', false, JSON.stringify(d.result || {}, null, 2));
+      jobBusy = false;
+      localStorage.removeItem('adminJobId');
+      setButtons();
+      jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
+      return;
+    }
+    await new Promise(resolve => setTimeout(resolve, 1500));
+  }
+}
+async function postJob(action, topic, force) {
+  const r = await fetch('/api/jobs', {method:'POST', headers:{'Content-Type':'application/json'},
+                                      body:JSON.stringify({action, topic, force: !!force})});
+  const d = await r.json();
+  return {ok: r.ok, status: r.status, d};
+}
+$('#s0').addEventListener('click', async e => {
+  const button = e.target.closest('button[data-action]');
+  if (!button || jobBusy) return;
+  const action = button.dataset.action, topic = button.dataset.topic;
+  jobBusy = true;
+  setButtons();
+  jobMessage('启动中', action === 'scan-items' ? '正在连接公开物品 API…' : '正在检查本地工作树…', false, '');
+  try {
+    let {ok, status, d} = await postJob(action, topic, false);
+    if (!ok && d.code === 'dirty-worktree') {
+      const files = (d.files || []).slice(0, 12).join('\n');
+      const more = (d.files || []).length > 12 ? '\n…共 ' + d.files.length + ' 个' : '';
+      // 不静默替人决定：把会被覆盖的文件摆出来，确认了才带着 force 再发一次
+      if (!confirm('工作树里有未提交改动，这条刷新链会覆盖或混写这些文件：\n\n' + files + more +
+                   '\n\n确认没有别的会话正在写它们，照样跑？')) {
+        jobMessage('已停在检查这一步', '没启动。这些改动还没提交——先收口工作树，或确认没人正在写同一批文件。', true, files + more);
+        jobBusy = false; setButtons(); return;
+      }
+      jobMessage('启动中', '正在检查本地工作树…', false, '');
+      ({ok, status, d} = await postJob(action, topic, true));
+    }
+    if (!ok) throw new Error(d.error || 'HTTP ' + status);
+    localStorage.setItem('adminJobId', d.jobId);
+    pollJob(d.jobId).catch(err => { jobBusy = false; setButtons(); jobMessage('无法读取任务结果', err.message, true, ''); });
+  } catch (err) { jobBusy = false; setButtons(); jobMessage('无法启动', err.message, true, ''); }
+});
+let browseTopic = null, browseOffset = 0, browseData = null;
+$('#record-select').addEventListener('change', e => { browseTopic = e.target.value; browseOffset = 0; browse().catch(err => fail(err.message)); });
+async function browse() {
+  if (!browseTopic) return;
+  const q = $('#record-query').value.trim();
+  const d = await jget('/api/records?topic=' + encodeURIComponent(browseTopic) + '&q=' + encodeURIComponent(q) + '&offset=' + browseOffset);
+  browseData = d;
+  $('#record-total').textContent = d.total + ' 条命中';
+  $('#record-page').textContent = d.total ? (d.offset + 1) + '–' + (d.offset + d.rows.length) + ' / ' + d.total : '0 条';
+  $('#record-prev').disabled = browseOffset === 0;
+  $('#record-next').disabled = browseOffset + 20 >= d.total;
+  $('#t-records tbody').innerHTML = d.rows.map((r, i) => '<tr><td>' + esc(r.id) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.level || '—') + '</td><td><button data-index="' + i + '">看原始字段</button></td></tr>').join('');
+}
+$('#record-search').addEventListener('click', () => { browseOffset = 0; browse().catch(e => fail(e.message)); });
+$('#record-query').addEventListener('keydown', e => { if (e.key === 'Enter') { browseOffset = 0; browse().catch(err => fail(err.message)); } });
+$('#record-prev').addEventListener('click', () => { browseOffset -= 20; browse().catch(e => fail(e.message)); });
+$('#record-next').addEventListener('click', () => { browseOffset += 20; browse().catch(e => fail(e.message)); });
+$('#t-records').addEventListener('click', e => {
+  const button = e.target.closest('button[data-index]');
+  if (!button || !browseData) return;
+  const r = browseData.rows[Number(button.dataset.index)];
+  $('#d-title').textContent = r.name + ' ｜ ' + r.id;
+  $('#d-pre').textContent = JSON.stringify(r.raw, null, 2);
+  $('#drawer').classList.add('open');
+});
+
 /* ===== 01 基底与上游 ===== */
 function drawOverview(d) {
-  const m = d.meta || {};
-  $("#r-gen").innerHTML = esc(m.generatedAt || "—");
-  $("#r-scrape").innerHTML = esc(m.scrapedAt || "—");
-  const bp = m.bossPortraits || {};
-  if (bp.total) {
-    const pct = Math.round((bp.withPortrait / bp.total) * 100);
-    $("#r-faces").innerHTML = '<em>' + bp.withPortrait + "</em> / " + bp.total + "（" + pct + "%）";
-  } else $("#r-faces").textContent = "—";
-  $("#r-files").innerHTML = "<em>" + d.files.length + "</em> 个";
-  const stale = d.upstream.filter(u => u.stale).length;
-  $("#r-stale").innerHTML = stale ? '<em style="color:var(--warn)">' + stale + "</em> / " + d.upstream.length : "<em>" + 0 + "</em> / " + d.upstream.length;
   $("#stale-hint").textContent = "（超过 " + d.staleDays + " 天亮黄）";
 
   $("#t-files tbody").innerHTML = d.files.map(f =>
@@ -268,6 +442,11 @@ function drawOverview(d) {
     "<tr><td><i class='dot " + (u.stale ? "stale" : "fresh") + "'></i>" + esc(u.name.replace("upstream/", "")) + "</td>" +
     "<td class='num " + (u.stale ? "stale" : "fresh") + "'>" + u.age + "</td><td class='dim'>" + esc(u.mtimeTxt) + "</td></tr>"
   ).join("");
+}
+
+function drawReview(d) {
+  $("#r-review").textContent = d.added;
+  $("#r-review-date").textContent = (d.fetchedAt || "").slice(0, 10) + " 拉取 · " + d.changed + " 条变动";
 }
 
 /* ===== 02 副本台账 ===== */
@@ -363,8 +542,17 @@ async function runGate(id) {
 
 /* ===== 装载 ===== */
 drawGates();
+jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
 jget("/api/overview").then(drawOverview).catch(e => fail(e.message));
 jget("/api/dungeons").then(drawDungeons).catch(e => fail(e.message));
+$('#reload').addEventListener('click', () => {
+  jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
+  jget('/api/overview').then(drawOverview).catch(e => fail(e.message));
+  jget('/api/review/items').then(drawReview).catch(() => {});
+});
+const previousJob = localStorage.getItem('adminJobId');
+if (previousJob) { jobBusy = true; setButtons(); pollJob(previousJob).catch(e => { jobBusy = false; setButtons(); fail(e.message); }); }
+jget('/api/review/items').then(drawReview).catch(() => {});
 </script>
 </body>
 </html>

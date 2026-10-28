@@ -4,16 +4,16 @@
     python tools/admin/server.py            # 默认 127.0.0.1:8830
     python tools/admin/server.py 8831       # 换端口
 
-定位：站主自己的数据管理面板——看成品基底与上游新鲜度、看 38 座副本的字段
-缺口、一键跑白名单内的检查命令。只读 + 白名单命令，不接受任意命令；
+定位：站主自己的数据管理面板——看成品基底、来源与缺口，拉取待审快照，
+执行已登记的白名单刷新链和检查命令。不接受任意命令或 URL；
 只绑本机回环，不进发布口径（页面也不链回玩家站）。
 
 数据架构三层（口径见 docs/DATA-MAINTENANCE.md）：
     app/data/upstream/  原始转述层（页面永不读）
     app/data/*.json     成品基底（唯一真相，两站+小程序都读）
     app/public/ 等       构建副本（永不手改）
-本面板只读这三层 + 跑检查，不改任何数据文件。改数据的正规路径仍是
-改 upstream 或 merge-*.js 后重跑合并——面板是眼睛，不是手。
+公开物品 API 只落待审快照；已登记刷新链会改数据文件并跑门禁，
+但绝不自动提交、发布或上传 OSS。
 """
 import json
 import os
@@ -22,6 +22,10 @@ import sys
 import time
 from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit, parse_qs
+
+from catalog import catalog, gaps, records
+import jobs
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEB_ROOT = os.path.dirname(os.path.dirname(HERE))     # wow-forever-web/
@@ -36,9 +40,9 @@ OUT_MAX = 64 * 1024                                    # 命令输出截断
 # python3 tools/data-status.py 一行，而本机只有 WSL bash（System32）+ 仓库 .sh 是 CRLF 行尾
 # + 脚本里写的是 python3——三条凑齐必炸（2026-10-13 面板实测退出码 2）。直接跑同一行命令，语义等价。
 GATES = {
-    "status": {"label": "上游新鲜度", "cmd": ["python", "tools/data-status.py"], "timeout": 120},
+    "status": {"label": "上游新鲜度", "cmd": [sys.executable, "tools/data-status.py"], "timeout": 120},
     "build-data": {"label": "数据校验", "cmd": ["node", "tools/build-data.js"], "timeout": 180},
-    "site-dun": {"label": "副本详情回归", "cmd": ["python", "tools/site-check.py", "--only", "dungeon_geo"], "timeout": 300},
+    "site-dun": {"label": "副本详情回归", "cmd": [sys.executable, "tools/site-check.py", "--only", "dungeon_geo"], "timeout": 300},
 }
 
 
@@ -111,6 +115,10 @@ def api_run(body):
     gid = (body or {}).get("id")
     if gid not in GATES:
         return 400, {"error": "不在白名单里（允许: %s）" % ", ".join(GATES)}
+    with jobs.lock:
+        if jobs.active is not None:
+            return 409, {"error": "已有拉取、刷新或门禁任务运行"}
+        jobs.active = "gate:" + gid
     g = GATES[gid]
     t0 = time.time()
     try:
@@ -119,6 +127,11 @@ def api_run(body):
         code, out = r.returncode, (r.stdout or "") + (r.stderr or "")
     except subprocess.TimeoutExpired:
         code, out = 124, "超时（%ds）" % g["timeout"]
+    except OSError as exc:
+        code, out = 127, str(exc)
+    finally:
+        with jobs.lock:
+            jobs.active = None
     if len(out.encode("utf-8", "replace")) > OUT_MAX:
         out = out[:OUT_MAX // 4] + "\n…（输出过长，已截断）\n" + out[-OUT_MAX // 4:]
     return 200, {"id": gid, "label": g["label"], "code": code,
@@ -137,24 +150,71 @@ class H(SimpleHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(b)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()
         self.wfile.write(b)
 
+    def _same_host(self):
+        return self.headers.get("Host") in ("127.0.0.1:%d" % PORT, "localhost:%d" % PORT)
+
+    def _same_origin(self):
+        host = self.headers.get("Host")
+        return self.headers.get("Origin") == "http://" + host
+
     def do_GET(self):
+        if not self._same_host():
+            return self._json(403, {"error": "仅限本机主机名"})
         if self.path == "/api/overview":
             return self._json(200, api_overview())
         if self.path == "/api/dungeons":
             return self._json(200, api_dungeons())
+        if self.path == "/api/catalog":
+            return self._json(200, {"topics": catalog(), "gaps": gaps()})
+        if self.path == "/api/review/items":
+            result = jobs.review_items()
+            return self._json(200, result) if result else self._json(404, {"error": "尚无待审快照"})
+        if urlsplit(self.path).path == "/api/records":
+            params = parse_qs(urlsplit(self.path).query)
+            try:
+                result = records((params.get("topic") or [""])[0], (params.get("q") or [""])[0],
+                                 int((params.get("offset") or ["0"])[0]))
+                return self._json(200, result)
+            except (ValueError, OSError, TypeError) as exc:
+                return self._json(400, {"error": str(exc)})
+        if self.path.startswith("/api/jobs/"):
+            jid = self.path.rsplit("/", 1)[-1]
+            job = jobs.get(jid)
+            return self._json(200, job) if job else self._json(404, {"error": "任务不存在"})
+        if urlsplit(self.path).path not in ("/", "/index.html"):
+            return self._json(404, {"error": "no such page"})
         return super().do_GET()
 
+    def do_HEAD(self):
+        if not self._same_host() or urlsplit(self.path).path not in ("/", "/index.html"):
+            self.send_response(404)
+            self.end_headers()
+            return
+        return super().do_HEAD()
+
     def do_POST(self):
-        if self.path != "/api/run":
+        if not self._same_host() or not self._same_origin():
+            return self._json(403, {"error": "仅接受本机同源写请求"})
+        if self.path not in ("/api/run", "/api/jobs"):
             return self._json(404, {"error": "no such api"})
         try:
             n = int(self.headers.get("Content-Length") or 0)
+            if n < 1 or n > 4096:
+                return self._json(413, {"error": "请求体大小错误"})
             body = json.loads(self.rfile.read(n) or b"{}")
+            if not isinstance(body, dict):
+                return self._json(400, {"error": "JSON 须为对象"})
         except Exception:
             return self._json(400, {"error": "bad json"})
+        if self.path == "/api/jobs":
+            code, obj = jobs.start(body.get("action"), body.get("topic"), bool(body.get("force")))
+            return self._json(code, obj)
         code, obj = api_run(body)
         return self._json(code, obj)
 

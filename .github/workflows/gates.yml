@@ -72,3 +72,10 @@ jobs:
       - name: 任务台判据与改写自测
         working-directory: wow-forever-web
         run: python3 tools/taskboard/selftest.py
+
+      # 数据管理台（本机 8830）的自测：物品待审快照的差分与"不碰成品"、动作白名单、
+      # 以及刷新前的工作树闸（脏→回清单让人确认；确认后才带 force 跑）。
+      # 全部是 mock 与临时目录，不发网络请求、不跑 refresh.sh。
+      - name: 数据管理台自测
+        working-directory: wow-forever-web
+        run: python3 -m unittest discover -s tools/admin
