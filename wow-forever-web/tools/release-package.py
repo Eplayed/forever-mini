@@ -77,12 +77,18 @@ def self_generated_models():
     if man.get("origin") != "self-generated":
         return ok
     for it in man.get("items") or []:
-        if it.get("origin") == "self-generated" and it.get("file"):
+        if it.get("file"):
             ok.add("img/models/" + it["file"])
     return ok
 
 
 SELF_GEN_MODELS = self_generated_models()
+
+# 一进来就先记"工作树脏不脏"。构建链自己会重写 scale.json / search.json 这类派生件，
+# 等跑完构建再查 git 状态，每一次都会被判成 -dirty（2026-10-28 打包时撞见），
+# 那个标记报的就不是"这份源码没提交"而是"我刚跑完构建"——等于永远为真。
+DIRTY_AT_START = subprocess.run(["git", "-C", ROOT, "status", "--porcelain"],
+                                stdout=subprocess.PIPE).stdout.decode().strip()
 
 
 def sha256_file(p, buf=1024 * 1024):
@@ -217,8 +223,7 @@ def main():
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     head = subprocess.run(["git", "-C", ROOT, "rev-parse", "--short", "HEAD"],
                           stdout=subprocess.PIPE).stdout.decode().strip() or "nogit"
-    dirty = subprocess.run(["git", "-C", ROOT, "status", "--porcelain"],
-                           stdout=subprocess.PIPE).stdout.decode().strip()
+    dirty = DIRTY_AT_START
     name = "wow-forever-web-%s-%s%s" % (stamp, head, "-dirty" if dirty else "")
     stage = os.path.join(REL, name, "site")
     if os.path.isdir(os.path.join(REL, name)):
