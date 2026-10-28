@@ -334,12 +334,24 @@ def collect():
             else:
                 row["schedule"] = "（没有快照文件）"
                 row["why"] = "Qoder 定时任务本地没有稳定可读的存储，需 agent 用 qoder_cron list 写一份到 " + snap
-            dt2 = None
-            if row["last_run"]:
-                dt2 = datetime.strptime(row["last_run"], "%Y-%m-%d %H:%M").replace(tzinfo=CST)
-            row = classify(row, e, last_dt=dt2)
-            if dt2:
-                row["why"] += "（快照只读）"
+            snap_age_h = None
+            try:
+                st_ts = json.load(open(snap, encoding="utf-8")).get("syncedAtTs") if snap else None
+                if st_ts:
+                    snap_age_h = (now() - datetime.fromtimestamp(float(st_ts), CST)).total_seconds() / 3600.0
+            except Exception:
+                snap_age_h = None
+            if snap_age_h is not None and snap_age_h > float(e.get("expect_within_hours") or 26):
+                row["status"] = UNKNOWN
+                row["why"] = ("快照已 %.0f 小时没更新，分不清是任务没跑还是没同步——"
+                              "这一格要 agent 跑一次 qoder_cron list 才准" % snap_age_h)
+            else:
+                dt2 = None
+                if row["last_run"]:
+                    dt2 = datetime.strptime(row["last_run"], "%Y-%m-%d %H:%M").replace(tzinfo=CST)
+                row = classify(row, e, last_dt=dt2)
+                if dt2:
+                    row["why"] += "（快照只读，agent 同步于 %s）" % str(json.load(open(snap, encoding="utf-8")).get("syncedAt", "?"))
         rows.append(row)
     rows.sort(key=lambda r: (ORDER.index(r["status"]), r["name"]))
     out = {"generatedAt": now().strftime("%Y-%m-%d %H:%M:%S"), "tz": "Asia/Shanghai(+08)",
