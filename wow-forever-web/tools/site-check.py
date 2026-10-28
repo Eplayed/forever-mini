@@ -2627,6 +2627,10 @@ def test_app(browser, base):
     #    好不好看只有看图能判，但"是不是八颗丸、丸有没有描边、当前项是不是丸内一颗填充小药丸、
     #    上一版的指示条与下划线撤干净没有"全都可以量。
     #    读当前项文本一律先剔「新」角标：上一轮刚在姊妹断言上栽过，这条别再犯一遍。
+    # 已知偶发：这一条在同一份产物上会自己红（实测 site-check 上下文 3/13 红，
+    # 单独照 /#/world → /#/ 这条路重跑 8 次红 2 次、再重跑 6 次全绿），
+    # 红出来的值是"当前项底色透明、字色是默认灰"——`.on` 这个类明明在元素上。
+    # 试过"等连续两次读数一致再量"，没治好，已撤回。它不是这一轮引入的，要单开一修。
     nav1440 = page.evaluate("""() => { const n = document.querySelector('nav.main');
       const pills = [...n.querySelectorAll('.ngrp')];
       const on = n.querySelector('a.nl.on');
