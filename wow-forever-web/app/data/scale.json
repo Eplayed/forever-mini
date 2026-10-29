@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-28",
+  "generatedAt": "2026-10-29",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -146,7 +146,7 @@
   "dungeons": 38,
   "dungeonsNew": 9,
   "bosses": 228,
-  "drops": 1050,
+  "drops": 1053,
   "dungeonNameEn": 38,
   "dungeonParty": 31,
   "dungeonRangeTwoSay": 0,
@@ -180,12 +180,21 @@
   "pubTotal": 695,
   "dataVersions": [
    {
+    "file": "queue.json",
+    "section": "副本排队表",
+    "build": "1.60.1.70658",
+    "checkedAt": "2026-10-28",
+    "classic": null,
+    "daysSince": 1,
+    "stale": null
+   },
+   {
     "file": "world.json",
     "section": "世界（区域与稀有）",
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-26",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 3,
     "stale": null
    },
    {
@@ -193,15 +202,6 @@
     "section": "传承",
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-23",
-    "classic": null,
-    "daysSince": 5,
-    "stale": null
-   },
-   {
-    "file": "queue.json",
-    "section": "副本排队表",
-    "build": "1.60.1.70532",
-    "checkedAt": "2026-10-22",
     "classic": null,
     "daysSince": 6,
     "stale": null
@@ -212,7 +212,7 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-26",
     "classic": "1.15.9.70003",
-    "daysSince": 2,
+    "daysSince": 3,
     "stale": null
    },
    {
@@ -221,7 +221,7 @@
     "build": null,
     "checkedAt": "2026-10-22",
     "classic": null,
-    "daysSince": 6,
+    "daysSince": 7,
     "stale": null
    },
    {
@@ -230,17 +230,17 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 0,
+    "daysSince": 1,
     "stale": null
    },
    {
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
-    "checkedAt": "2026-10-20",
+    "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 8,
-    "stale": "warn"
+    "daysSince": 1,
+    "stale": null
    },
    {
     "file": "bis.json",
@@ -248,7 +248,7 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 0,
+    "daysSince": 1,
     "stale": null
    }
   ],
@@ -256,7 +256,7 @@
    "soft": 7,
    "hard": 14
   },
-  "newestBuild": "1.60.1.70532",
-  "newestSection": "世界（区域与稀有）"
+  "newestBuild": "1.60.1.70658",
+  "newestSection": "副本排队表"
  }
 }

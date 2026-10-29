@@ -7,7 +7,7 @@
   "upstream": {
    "site": "新手盒子 · 魔兽世界无限数据库",
    "source": "https://wowforever.wclbox.com/fuben",
-   "scrapedAt": "2026-10-11"
+   "scrapedAt": "2026-10-28"
   },
   "bossPortraits": {
    "total": 228,
@@ -66,7 +66,7 @@
    "drops": [
     {
      "itemId": "274286",
-     "nameCn": "杜根·挽锤的头颅",
+     "nameCn": "杜根·挽锤的徽记",
      "iconKey": "inv_misc_head_dwarf_01",
      "quality": 1,
      "bossId": "durgen-dirgehammer",
@@ -109,9 +109,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "officialBacked": true,
@@ -205,7 +205,7 @@
     {
      "itemId": "251961",
      "nameCn": "奥术微粒",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": null,
      "quality": 1,
      "bossId": "rath-mael",
      "bossCn": "拉斯玛尔",
@@ -247,9 +247,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "officialBacked": true,
@@ -373,9 +373,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "officialBacked": true,
@@ -436,9 +436,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "officialBacked": true,
@@ -851,9 +851,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/ragefire-chasm.webp",
@@ -1424,9 +1424,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/wailing-caverns.webp",
@@ -1856,9 +1856,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/deathmine.webp",
@@ -2375,9 +2375,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/shadowfang-keep.webp",
@@ -2626,9 +2626,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/blackfathom-deeps.webp",
@@ -2835,9 +2835,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/the-stocks.webp",
@@ -2965,19 +2965,19 @@
      "level": "L2"
     },
     {
-     "itemId": "9446",
-     "nameCn": "电刑器的腿",
-     "iconKey": "inv_sword_30",
+     "itemId": "9448",
+     "nameCn": "蜘蛛坦克油布",
+     "iconKey": "inv_misc_bandage_09",
      "quality": 3,
      "bossId": "electrocutioner-6000",
      "bossCn": "电刑器6000型",
      "level": "L2"
     },
     {
-     "itemId": "9448",
-     "nameCn": "蜘蛛坦克油布",
-     "iconKey": "inv_misc_bandage_09",
-     "quality": 2,
+     "itemId": "9446",
+     "nameCn": "电刑器的腿",
+     "iconKey": "inv_sword_30",
+     "quality": 3,
      "bossId": "electrocutioner-6000",
      "bossCn": "电刑器6000型",
      "level": "L2"
@@ -3243,9 +3243,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/gnomeregan.webp",
@@ -3390,19 +3390,19 @@
      "level": "L2"
     },
     {
-     "itemId": "6691",
-     "nameCn": "猪牙匕首",
-     "iconKey": "inv_misc_bone_06",
+     "itemId": "6690",
+     "nameCn": "野兽护腿",
+     "iconKey": "inv_pants_14",
      "quality": 3,
      "bossId": "agathelos-the-raging",
      "bossCn": "暴怒的阿迦赛罗斯",
      "level": "L2"
     },
     {
-     "itemId": "6690",
-     "nameCn": "野兽护腿",
-     "iconKey": "inv_pants_14",
-     "quality": 2,
+     "itemId": "6691",
+     "nameCn": "猪牙匕首",
+     "iconKey": "inv_misc_bone_06",
+     "quality": 3,
      "bossId": "agathelos-the-raging",
      "bossCn": "暴怒的阿迦赛罗斯",
      "level": "L2"
@@ -3527,9 +3527,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/razorfen-kraul.webp",
@@ -3615,19 +3615,19 @@
      "level": "L2"
     },
     {
-     "itemId": "7685",
-     "nameCn": "遗忘先知宝珠",
-     "iconKey": "inv_misc_orb_02",
+     "itemId": "7684",
+     "nameCn": "血法师衬肩",
+     "iconKey": "inv_shoulder_05",
      "quality": 3,
      "bossId": "bloodmage-thalnos",
      "bossCn": "血法师萨尔诺斯",
      "level": "L2"
     },
     {
-     "itemId": "7684",
-     "nameCn": "血法师衬肩",
-     "iconKey": "inv_shoulder_05",
-     "quality": 2,
+     "itemId": "7685",
+     "nameCn": "遗忘先知宝珠",
+     "iconKey": "inv_misc_orb_02",
+     "quality": 3,
      "bossId": "bloodmage-thalnos",
      "bossCn": "血法师萨尔诺斯",
      "level": "L2"
@@ -3725,9 +3725,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/scarlet-monastery-graveyard.webp",
@@ -3774,19 +3774,10 @@
    "route": [],
    "drops": [
     {
-     "itemId": "7710",
-     "nameCn": "洛克希的教鞭",
-     "iconKey": "inv_staff_18",
-     "quality": 3,
-     "bossId": "houndmaster-loksey",
-     "bossCn": "驯犬者洛克希",
-     "level": "L2"
-    },
-    {
      "itemId": "7756",
      "nameCn": "驯犬手套",
      "iconKey": "inv_gauntlets_07",
-     "quality": 2,
+     "quality": 3,
      "bossId": "houndmaster-loksey",
      "bossCn": "驯犬者洛克希",
      "level": "L2"
@@ -3795,7 +3786,16 @@
      "itemId": "3456",
      "nameCn": "狗哨",
      "iconKey": "ability_hunter_beastcall",
-     "quality": 2,
+     "quality": 3,
+     "bossId": "houndmaster-loksey",
+     "bossCn": "驯犬者洛克希",
+     "level": "L2"
+    },
+    {
+     "itemId": "7710",
+     "nameCn": "洛克希的教鞭",
+     "iconKey": "inv_staff_18",
+     "quality": 3,
      "bossId": "houndmaster-loksey",
      "bossCn": "驯犬者洛克希",
      "level": "L2"
@@ -3848,9 +3848,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/scarlet-monastery-library.webp",
@@ -3928,9 +3928,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/scarlet-monastery-armory.webp",
@@ -4103,19 +4103,19 @@
      "level": "L2"
     },
     {
-     "itemId": "10774",
-     "nameCn": "血皮护肩",
-     "iconKey": "inv_shoulder_28",
+     "itemId": "10772",
+     "nameCn": "暴食者之斧",
+     "iconKey": "inv_axe_23",
      "quality": 3,
      "bossId": "glutton",
      "bossCn": "暴食者",
      "level": "L2"
     },
     {
-     "itemId": "10772",
-     "nameCn": "暴食者之斧",
-     "iconKey": "inv_axe_23",
-     "quality": 2,
+     "itemId": "10774",
+     "nameCn": "血皮护肩",
+     "iconKey": "inv_shoulder_28",
+     "quality": 3,
      "bossId": "glutton",
      "bossCn": "暴食者",
      "level": "L2"
@@ -4160,7 +4160,7 @@
      "itemId": "10765",
      "nameCn": "白骨手指",
      "iconKey": "inv_gauntlets_09",
-     "quality": 2,
+     "quality": 3,
      "bossId": "amnennar-the-coldbringer",
      "bossCn": "寒冰之王亚门纳尔",
      "level": "L2"
@@ -4228,9 +4228,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/razor-krendor.webp",
@@ -4287,7 +4287,7 @@
      "itemId": "19507",
      "nameCn": "审讯者披肩",
      "iconKey": "inv_shoulder_27",
-     "quality": 2,
+     "quality": 3,
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
      "level": "L2"
@@ -4296,7 +4296,7 @@
      "itemId": "19508",
      "nameCn": "烙印皮护腕",
      "iconKey": "inv_bracer_11",
-     "quality": 2,
+     "quality": 3,
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
      "level": "L2"
@@ -4305,7 +4305,7 @@
      "itemId": "19509",
      "nameCn": "生锈的锁甲战靴",
      "iconKey": "inv_boots_chain_02",
-     "quality": 2,
+     "quality": 3,
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
      "level": "L2"
@@ -4403,9 +4403,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/scarlet-monastery-cathedral.webp",
@@ -4510,7 +4510,7 @@
      "itemId": "9387",
      "nameCn": "鲁恩乌的长靴",
      "iconKey": "inv_boots_plate_06",
-     "quality": 2,
+     "quality": 3,
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
      "level": "L2"
@@ -4519,7 +4519,7 @@
      "itemId": "9388",
      "nameCn": "鲁恩乌的臂甲",
      "iconKey": "inv_bracer_16",
-     "quality": 2,
+     "quality": 3,
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
      "level": "L2"
@@ -4528,7 +4528,7 @@
      "itemId": "9389",
      "nameCn": "鲁恩乌的肩甲",
      "iconKey": "inv_shoulder_25",
-     "quality": 2,
+     "quality": 3,
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
      "level": "L2"
@@ -4537,7 +4537,7 @@
      "itemId": "9390",
      "nameCn": "鲁恩乌的手套",
      "iconKey": "inv_gauntlets_17",
-     "quality": 2,
+     "quality": 3,
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
      "level": "L2"
@@ -4549,6 +4549,15 @@
      "quality": 1,
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
+     "level": "L2"
+    },
+    {
+     "itemId": "9400",
+     "nameCn": "巴尔洛戈的短弓",
+     "iconKey": "inv_weapon_bow_11",
+     "quality": 3,
+     "bossId": "baelog",
+     "bossCn": "巴尔洛戈",
      "level": "L2"
     },
     {
@@ -4567,6 +4576,15 @@
      "quality": 2,
      "bossId": "baelog",
      "bossCn": "巴尔洛戈",
+     "level": "L2"
+    },
+    {
+     "itemId": "9403",
+     "nameCn": "破碎的海盗之盾",
+     "iconKey": "inv_shield_07",
+     "quality": 3,
+     "bossId": "olaf",
+     "bossCn": "奥拉夫",
      "level": "L2"
     },
     {
@@ -4591,7 +4609,7 @@
      "itemId": "9398",
      "nameCn": "穿旧的跑鞋",
      "iconKey": "inv_boots_02",
-     "quality": 2,
+     "quality": 3,
      "bossId": "eric-the-swift",
      "bossCn": "埃瑞克",
      "level": "L2"
@@ -4672,15 +4690,33 @@
      "itemId": "9411",
      "nameCn": "石片肩铠",
      "iconKey": "inv_shoulder_02",
-     "quality": 2,
+     "quality": 3,
      "bossId": "ancient-stone-keeper",
      "bossCn": "古代的石头看守者",
+     "level": "L2"
+    },
+    {
+     "itemId": "11311",
+     "nameCn": "灰烬之鳞",
+     "iconKey": "inv_misc_cape_08",
+     "quality": 3,
+     "bossId": "galgann-firehammer",
+     "bossCn": "加加恩·火锤",
      "level": "L2"
     },
     {
      "itemId": "9412",
      "nameCn": "加加恩的火枪",
      "iconKey": "inv_weapon_rifle_07",
+     "quality": 3,
+     "bossId": "galgann-firehammer",
+     "bossCn": "加加恩·火锤",
+     "level": "L2"
+    },
+    {
+     "itemId": "9419",
+     "nameCn": "加加恩的火锤",
+     "iconKey": "inv_hammer_17",
      "quality": 3,
      "bossId": "galgann-firehammer",
      "bossCn": "加加恩·火锤",
@@ -4696,30 +4732,21 @@
      "level": "L2"
     },
     {
-     "itemId": "11311",
-     "nameCn": "灰烬之鳞",
-     "iconKey": "inv_misc_cape_08",
-     "quality": 2,
-     "bossId": "galgann-firehammer",
-     "bossCn": "加加恩·火锤",
-     "level": "L2"
-    },
-    {
-     "itemId": "9419",
-     "nameCn": "加加恩的火锤",
-     "iconKey": "inv_hammer_17",
-     "quality": 2,
-     "bossId": "galgann-firehammer",
-     "bossCn": "加加恩·火锤",
-     "level": "L2"
-    },
-    {
      "itemId": "4062",
      "nameCn": "帝王皮短裤",
      "iconKey": "inv_pants_07",
      "quality": 2,
      "bossId": "galgann-firehammer",
      "bossCn": "加加恩·火锤",
+     "level": "L2"
+    },
+    {
+     "itemId": "9414",
+     "nameCn": "油腻的护腿",
+     "iconKey": "inv_pants_06",
+     "quality": 3,
+     "bossId": "grimlok",
+     "bossCn": "格瑞姆洛克",
      "level": "L2"
     },
     {
@@ -4736,15 +4763,6 @@
      "nameCn": "格瑞姆洛克之矛",
      "iconKey": "inv_spear_08",
      "quality": 3,
-     "bossId": "grimlok",
-     "bossCn": "格瑞姆洛克",
-     "level": "L2"
-    },
-    {
-     "itemId": "9414",
-     "nameCn": "油腻的护腿",
-     "iconKey": "inv_pants_06",
-     "quality": 2,
      "bossId": "grimlok",
      "bossCn": "格瑞姆洛克",
      "level": "L2"
@@ -4827,16 +4845,16 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/uldaman.webp",
    "zoneCn": "荒芜之地",
    "cardCounts": {
     "bosses": "10 个首领",
-    "drops": "33 件掉落"
+    "drops": "35 件掉落"
    },
    "faction": null,
    "nameEnFrom": null,
@@ -5226,7 +5244,7 @@
     },
     {
      "itemId": "277112",
-     "nameCn": "祖穆拉恩的头颅",
+     "nameCn": "祖穆拉恩的徽记",
      "iconKey": "inv_misc_head_troll_01",
      "quality": 1,
      "bossId": "witch-doctor-zum-rah",
@@ -5443,9 +5461,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/zulfarrak.webp",
@@ -5894,9 +5912,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/maraudon.webp",
@@ -6147,9 +6165,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/sunken-temple.webp",
@@ -7532,9 +7550,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/blackrock-depths.webp",
@@ -7892,9 +7910,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/dire-maul-east.webp",
@@ -8698,9 +8716,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/lower-blackrock-spire.webp",
@@ -9063,9 +9081,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/dire-maul-north.webp",
@@ -9563,9 +9581,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/dire-maul-west.webp",
@@ -10076,7 +10094,7 @@
     {
      "itemId": "285960",
      "nameCn": "永冻样本",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": null,
      "quality": 1,
      "bossId": "ras-frostwhisperer",
      "bossCn": "莱斯·霜语",
@@ -10472,9 +10490,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/scholomance.webp",
@@ -10971,6 +10989,15 @@
      "level": "L2"
     },
     {
+     "itemId": "272025",
+     "nameCn": "达索汉的信件",
+     "iconKey": "inv_misc_book_09",
+     "quality": 3,
+     "bossId": "balnazzar",
+     "bossCn": "巴纳扎尔",
+     "level": "L2"
+    },
+    {
      "itemId": "13250",
      "nameCn": "巴纳扎尔的头颅",
      "iconKey": "spell_shadow_possession",
@@ -11144,16 +11171,16 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/stratholme-main-gate.webp",
    "zoneCn": "东瘟疫之地",
    "cardCounts": {
     "bosses": "11 个首领",
-    "drops": "61 件掉落"
+    "drops": "62 件掉落"
    },
    "faction": null,
    "nameEnFrom": "db2",
@@ -11948,9 +11975,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/stratholme-service-gate.webp",
@@ -12858,9 +12885,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "art": "img/art/dungeons/upper-blackrock-spire.webp",
@@ -12967,9 +12994,9 @@
     },
     {
      "type": "datamine_en",
-     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70532",
-     "note": "客户端版本 1.60.1.70532 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
-     "checkedAt": "2026-10-22"
+     "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
+     "note": "客户端版本 1.60.1.70658 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
+     "checkedAt": "2026-10-28"
     }
    ],
    "nameEnFrom": null,

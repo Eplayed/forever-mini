@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-10-11",
+  "scrapedAt": "2026-10-28",
   "method": "tools/scrape-wclbox.py --what dungeons --write",
   "took": "名单/等级区间/新本标记/BOSS 名/掉落归属/物品 ID/图标文件名；不取描述文案与攻略"
  },
@@ -38,7 +38,7 @@
     {
      "itemId": "274286",
      "iconKey": "inv_misc_head_dwarf_01",
-     "nameCn": "杜根·挽锤的头颅",
+     "nameCn": "杜根·挽锤的徽记",
      "bossId": "durgen-dirgehammer",
      "bossCn": "杜根·挽锤",
      "quality": 1
@@ -194,7 +194,7 @@
     },
     {
      "itemId": "251961",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": null,
      "nameCn": "奥术微粒",
      "bossId": "rath-mael",
      "bossCn": "拉斯玛尔",
@@ -1882,20 +1882,20 @@
      "quality": 3
     },
     {
+     "itemId": "9448",
+     "iconKey": "inv_misc_bandage_09",
+     "nameCn": "蜘蛛坦克油布",
+     "bossId": "electrocutioner-6000",
+     "bossCn": "电刑器6000型",
+     "quality": 3
+    },
+    {
      "itemId": "9446",
      "iconKey": "inv_sword_30",
      "nameCn": "电刑器的腿",
      "bossId": "electrocutioner-6000",
      "bossCn": "电刑器6000型",
      "quality": 3
-    },
-    {
-     "itemId": "9448",
-     "iconKey": "inv_misc_bandage_09",
-     "nameCn": "蜘蛛坦克油布",
-     "bossId": "electrocutioner-6000",
-     "bossCn": "电刑器6000型",
-     "quality": 2
     },
     {
      "itemId": "4073",
@@ -2213,20 +2213,20 @@
      "quality": 3
     },
     {
+     "itemId": "6690",
+     "iconKey": "inv_pants_14",
+     "nameCn": "野兽护腿",
+     "bossId": "agathelos-the-raging",
+     "bossCn": "暴怒的阿迦赛罗斯",
+     "quality": 3
+    },
+    {
      "itemId": "6691",
      "iconKey": "inv_misc_bone_06",
      "nameCn": "猪牙匕首",
      "bossId": "agathelos-the-raging",
      "bossCn": "暴怒的阿迦赛罗斯",
      "quality": 3
-    },
-    {
-     "itemId": "6690",
-     "iconKey": "inv_pants_14",
-     "nameCn": "野兽护腿",
-     "bossId": "agathelos-the-raging",
-     "bossCn": "暴怒的阿迦赛罗斯",
-     "quality": 2
     },
     {
      "itemId": "6693",
@@ -2377,20 +2377,20 @@
      "quality": 3
     },
     {
+     "itemId": "7684",
+     "iconKey": "inv_shoulder_05",
+     "nameCn": "血法师衬肩",
+     "bossId": "bloodmage-thalnos",
+     "bossCn": "血法师萨尔诺斯",
+     "quality": 3
+    },
+    {
      "itemId": "7685",
      "iconKey": "inv_misc_orb_02",
      "nameCn": "遗忘先知宝珠",
      "bossId": "bloodmage-thalnos",
      "bossCn": "血法师萨尔诺斯",
      "quality": 3
-    },
-    {
-     "itemId": "7684",
-     "iconKey": "inv_shoulder_05",
-     "nameCn": "血法师衬肩",
-     "bossId": "bloodmage-thalnos",
-     "bossCn": "血法师萨尔诺斯",
-     "quality": 2
     },
     {
      "itemId": "7686",
@@ -2486,20 +2486,12 @@
    ],
    "drops": [
     {
-     "itemId": "7710",
-     "iconKey": "inv_staff_18",
-     "nameCn": "洛克希的教鞭",
-     "bossId": "houndmaster-loksey",
-     "bossCn": "驯犬者洛克希",
-     "quality": 3
-    },
-    {
      "itemId": "7756",
      "iconKey": "inv_gauntlets_07",
      "nameCn": "驯犬手套",
      "bossId": "houndmaster-loksey",
      "bossCn": "驯犬者洛克希",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "3456",
@@ -2507,7 +2499,15 @@
      "nameCn": "狗哨",
      "bossId": "houndmaster-loksey",
      "bossCn": "驯犬者洛克希",
-     "quality": 2
+     "quality": 3
+    },
+    {
+     "itemId": "7710",
+     "iconKey": "inv_staff_18",
+     "nameCn": "洛克希的教鞭",
+     "bossId": "houndmaster-loksey",
+     "bossCn": "驯犬者洛克希",
+     "quality": 3
     },
     {
      "itemId": "7713",
@@ -2724,20 +2724,20 @@
      "quality": 3
     },
     {
+     "itemId": "10772",
+     "iconKey": "inv_axe_23",
+     "nameCn": "暴食者之斧",
+     "bossId": "glutton",
+     "bossCn": "暴食者",
+     "quality": 3
+    },
+    {
      "itemId": "10774",
      "iconKey": "inv_shoulder_28",
      "nameCn": "血皮护肩",
      "bossId": "glutton",
      "bossCn": "暴食者",
      "quality": 3
-    },
-    {
-     "itemId": "10772",
-     "iconKey": "inv_axe_23",
-     "nameCn": "暴食者之斧",
-     "bossId": "glutton",
-     "bossCn": "暴食者",
-     "quality": 2
     },
     {
      "itemId": "10761",
@@ -2777,7 +2777,7 @@
      "nameCn": "白骨手指",
      "bossId": "amnennar-the-coldbringer",
      "bossCn": "寒冰之王亚门纳尔",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "10420",
@@ -2851,7 +2851,7 @@
      "nameCn": "审讯者披肩",
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "19508",
@@ -2859,7 +2859,7 @@
      "nameCn": "烙印皮护腕",
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "19509",
@@ -2867,7 +2867,7 @@
      "nameCn": "生锈的锁甲战靴",
      "bossId": "high-inquisitor-fairbanks",
      "bossCn": "大检察官法尔班克斯",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "7726",
@@ -3017,7 +3017,7 @@
      "nameCn": "鲁恩乌的长靴",
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "9388",
@@ -3025,7 +3025,7 @@
      "nameCn": "鲁恩乌的臂甲",
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "9389",
@@ -3033,7 +3033,7 @@
      "nameCn": "鲁恩乌的肩甲",
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "9390",
@@ -3041,7 +3041,7 @@
      "nameCn": "鲁恩乌的手套",
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "7741",
@@ -3050,6 +3050,14 @@
      "bossId": "revelosh",
      "bossCn": "鲁维罗什",
      "quality": 1
+    },
+    {
+     "itemId": "9400",
+     "iconKey": "inv_weapon_bow_11",
+     "nameCn": "巴尔洛戈的短弓",
+     "bossId": "baelog",
+     "bossCn": "巴尔洛戈",
+     "quality": 3
     },
     {
      "itemId": "9401",
@@ -3066,6 +3074,14 @@
      "bossId": "baelog",
      "bossCn": "巴尔洛戈",
      "quality": 2
+    },
+    {
+     "itemId": "9403",
+     "iconKey": "inv_shield_07",
+     "nameCn": "破碎的海盗之盾",
+     "bossId": "olaf",
+     "bossCn": "奥拉夫",
+     "quality": 3
     },
     {
      "itemId": "9404",
@@ -3089,7 +3105,7 @@
      "nameCn": "穿旧的跑鞋",
      "bossId": "eric-the-swift",
      "bossCn": "埃瑞克",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "9407",
@@ -3161,12 +3177,28 @@
      "nameCn": "石片肩铠",
      "bossId": "ancient-stone-keeper",
      "bossCn": "古代的石头看守者",
-     "quality": 2
+     "quality": 3
+    },
+    {
+     "itemId": "11311",
+     "iconKey": "inv_misc_cape_08",
+     "nameCn": "灰烬之鳞",
+     "bossId": "galgann-firehammer",
+     "bossCn": "加加恩·火锤",
+     "quality": 3
     },
     {
      "itemId": "9412",
      "iconKey": "inv_weapon_rifle_07",
      "nameCn": "加加恩的火枪",
+     "bossId": "galgann-firehammer",
+     "bossCn": "加加恩·火锤",
+     "quality": 3
+    },
+    {
+     "itemId": "9419",
+     "iconKey": "inv_hammer_17",
+     "nameCn": "加加恩的火锤",
      "bossId": "galgann-firehammer",
      "bossCn": "加加恩·火锤",
      "quality": 3
@@ -3180,28 +3212,20 @@
      "quality": 3
     },
     {
-     "itemId": "11311",
-     "iconKey": "inv_misc_cape_08",
-     "nameCn": "灰烬之鳞",
-     "bossId": "galgann-firehammer",
-     "bossCn": "加加恩·火锤",
-     "quality": 2
-    },
-    {
-     "itemId": "9419",
-     "iconKey": "inv_hammer_17",
-     "nameCn": "加加恩的火锤",
-     "bossId": "galgann-firehammer",
-     "bossCn": "加加恩·火锤",
-     "quality": 2
-    },
-    {
      "itemId": "4062",
      "iconKey": "inv_pants_07",
      "nameCn": "帝王皮短裤",
      "bossId": "galgann-firehammer",
      "bossCn": "加加恩·火锤",
      "quality": 2
+    },
+    {
+     "itemId": "9414",
+     "iconKey": "inv_pants_06",
+     "nameCn": "油腻的护腿",
+     "bossId": "grimlok",
+     "bossCn": "格瑞姆洛克",
+     "quality": 3
     },
     {
      "itemId": "9415",
@@ -3218,14 +3242,6 @@
      "bossId": "grimlok",
      "bossCn": "格瑞姆洛克",
      "quality": 3
-    },
-    {
-     "itemId": "9414",
-     "iconKey": "inv_pants_06",
-     "nameCn": "油腻的护腿",
-     "bossId": "grimlok",
-     "bossCn": "格瑞姆洛克",
-     "quality": 2
     },
     {
      "itemId": "8144",
@@ -3597,7 +3613,7 @@
     {
      "itemId": "277112",
      "iconKey": "inv_misc_head_troll_01",
-     "nameCn": "祖穆拉恩的头颅",
+     "nameCn": "祖穆拉恩的徽记",
      "bossId": "witch-doctor-zum-rah",
      "bossCn": "巫医祖穆拉恩",
      "quality": 1
@@ -7587,7 +7603,7 @@
     },
     {
      "itemId": "285960",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": null,
      "nameCn": "永冻样本",
      "bossId": "ras-frostwhisperer",
      "bossCn": "莱斯·霜语",
@@ -8347,6 +8363,14 @@
      "bossId": "balnazzar",
      "bossCn": "巴纳扎尔",
      "quality": 2
+    },
+    {
+     "itemId": "272025",
+     "iconKey": "inv_misc_book_09",
+     "nameCn": "达索汉的信件",
+     "bossId": "balnazzar",
+     "bossCn": "巴纳扎尔",
+     "quality": 3
     },
     {
      "itemId": "13250",

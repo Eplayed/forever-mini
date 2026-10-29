@@ -1,8 +1,8 @@
 {
  "meta": {
-  "source": "https://wowforever.wclbox.com/_shuju/r-1791702948979/dungeons.json",
-  "release": "r-1791702948979",
-  "scrapedAt": "2026-10-11",
+  "source": "https://wowforever.wclbox.com/_shuju/r-1793184328187/dungeons.json",
+  "release": "r-1793184328187",
+  "scrapedAt": "2026-10-28",
   "took": "等级区间、阵营与所在区域、载入图键、人数上限、是否无限新增",
   "skipped": "上游写的介绍句子（summary）、它对不上客户端表的 enter 列、上游自定的中文简称（abbr/short）、含义不明的标记位（demo/top）",
   "note": "这一份里一条首领与掉落数据都没有，替代不了详情页名单，接它只为拿卡片元数据这一层。"
@@ -20,7 +20,7 @@
    "faction": "部落",
    "art": "ragefirechasm",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -35,7 +35,7 @@
    "faction": "联盟",
    "art": "hall-of-thanes",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -50,7 +50,7 @@
    "faction": "部落",
    "art": "ruins-of-lordaeron",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -65,7 +65,7 @@
    "faction": null,
    "art": "wailingcaverns",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -80,7 +80,7 @@
    "faction": null,
    "art": "deadmines",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -95,7 +95,7 @@
    "faction": null,
    "art": "shadowfangkeep",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -110,7 +110,7 @@
    "faction": null,
    "art": "blackfathomdeeps",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -125,7 +125,7 @@
    "faction": "联盟",
    "art": "stockade",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -140,7 +140,7 @@
    "faction": null,
    "art": "excavation-site",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -155,7 +155,7 @@
    "faction": null,
    "art": "city-of-dalaran",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -170,7 +170,7 @@
    "faction": null,
    "art": "gnomeregan",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -185,7 +185,7 @@
    "faction": null,
    "art": "razorfenkraul",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -200,7 +200,7 @@
    "faction": null,
    "art": "scarletmonastery",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -215,7 +215,7 @@
    "faction": null,
    "art": "scarlethalls",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -245,7 +245,7 @@
    "faction": null,
    "art": "scarlethalls",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -260,7 +260,7 @@
    "faction": null,
    "art": "razorfendowns",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -275,7 +275,7 @@
    "faction": null,
    "art": "scarletmonastery",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -305,7 +305,7 @@
    "faction": null,
    "art": "uldaman",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -320,7 +320,7 @@
    "faction": null,
    "art": "zulfarrak",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -335,7 +335,7 @@
    "faction": null,
    "art": "maraudon",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -365,7 +365,7 @@
    "faction": null,
    "art": "sunkentemple",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -380,7 +380,7 @@
    "faction": null,
    "art": "blackrockdepths",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -395,7 +395,7 @@
    "faction": null,
    "art": "diremaul",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -425,7 +425,7 @@
    "faction": null,
    "art": "blackrockspire",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -440,7 +440,7 @@
    "faction": null,
    "art": "diremaul",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -455,7 +455,7 @@
    "faction": null,
    "art": "diremaul",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -470,7 +470,7 @@
    "faction": null,
    "art": "scholomance",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -500,7 +500,7 @@
    "faction": null,
    "art": "stratholme",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -515,7 +515,7 @@
    "faction": null,
    "art": "stratholme",
    "players": null,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   },
   {
@@ -530,7 +530,7 @@
    "faction": null,
    "art": "blackrockspire",
    "players": 10,
-   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70338",
+   "sourceUrl": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70658",
    "sourceType": "client_data"
   }
  ]

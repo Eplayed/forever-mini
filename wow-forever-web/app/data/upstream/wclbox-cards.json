@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
-  "scrapedAt": "2026-10-13",
+  "scrapedAt": "2026-10-28",
   "note": "渲染后 DOM 抓取：卡片含载入图路径、所在区域与阵营、首领与掉落计数"
  },
  "cards": [
@@ -222,7 +222,7 @@
    "zone": "荒芜之地",
    "art": "/jiemian/dungeons/xiao/art-uldaman.webp",
    "bosses": "10 个首领",
-   "drops": "33 件掉落",
+   "drops": "35 件掉落",
    "href": "/fuben/uldaman"
   },
   {
@@ -365,7 +365,7 @@
    "zone": "东瘟疫之地",
    "art": "/jiemian/dungeons/xiao/art-stratholme.webp",
    "bosses": "11 个首领",
-   "drops": "61 件掉落",
+   "drops": "62 件掉落",
    "href": "/fuben/stratholme-main-gate"
   },
   {

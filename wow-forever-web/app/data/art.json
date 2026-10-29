@@ -314,7 +314,7 @@
   "skyborne": "img/art/raceicons/skyborne.webp"
  },
  "meta": {
-  "fetchedAt": "2026-10-20",
+  "fetchedAt": "2026-10-28",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
   "count": 288,
   "addonFiles": [
@@ -332,49 +332,5 @@
     "sha256": "9df418ce227d3548486d445fb3280f34fca56bbeb7bf15dc2608563cda20bce0"
    }
   ]
- },
- "bisModels": {
-  "items": [
-   {
-    "file": "img/models/placeholder.glb",
-    "bytes": 9588,
-    "sha1": "a969d3939b2d91c67fb8afc57049cd5e24dbc84e",
-    "kind": "placeholder",
-    "generatedAt": "2026-10-26",
-    "gearNodes": [
-     "head",
-     "neck",
-     "shoulder",
-     "back",
-     "chest",
-     "wrist",
-     "hands",
-     "waist",
-     "legs",
-     "feet",
-     "ring1",
-     "ring2",
-     "trinket1",
-     "trinket2",
-     "mainhand",
-     "ranged",
-     "offhand",
-     "relic"
-    ]
-   }
-  ],
-  "origin": "self-generated",
-  "note": "占位模型，不是素材：纯几何体自己拼的，不含任何游戏客户端资产，也不含第三方站的模型文件。它只用来验前端那条链（懒加载、部位对数据、无 WebGL 退回图片）。整目录删掉 app/img/models/ 即回到 2D 纸娃娃。",
-  "generatedAt": "2026-10-26"
- },
- "gen": {
-  "hero-ruins": "img/gen/hero-ruins.webp",
-  "banner-cloudsea": "img/gen/banner-cloudsea.webp",
-  "cavern-hall": "img/gen/cavern-hall.webp",
-  "prof-table": "img/gen/prof-table.webp"
- },
- "bisRealModels": {
-  "origin": "client-derived",
-  "items": []
  }
 }
