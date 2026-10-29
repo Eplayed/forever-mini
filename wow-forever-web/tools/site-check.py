@@ -142,20 +142,51 @@ def check(name, ok, detail="", soft=False):
     print(tag + name + (("  — " + detail) if detail else ""))
 
 
+def snap(pg, **kw):
+    """带 path 的截图统一走这里（2026-10-29 加动效那一轮之后必须）。两个默认值各治一件真发生过的红：
+       ① timeout 90 秒——这台机器是软件光栅（swiftshader），整页截图实测 24~30 秒一张，
+          默认 30 秒是擦着上限过的，负载一高就抛 TimeoutError 把整场门禁打断（今天两次）；
+       ② animations="disabled"——让 Playwright 把在跑的过渡一次性拨到终态再拍。
+          换页与展开现在有过渡了，不关掉就会拍在淡入的中间（半透明、面板还没挂回来），
+          既慢又会产出"看着像坏了"的证据图。
+       注意：只包带 path 的调用。配装页那两帧 A/B 用的是 element.screenshot() 取字节，不走这里。"""
+    kw.setdefault("animations", "disabled")
+    kw.setdefault("timeout", 90000)
+    return pg.screenshot(**kw)
+
+
+# 页面上还有没有"在跑的过渡"——按过渡类名判，不按时间猜
+MOTION_BUSY = ("() => [...document.querySelectorAll('#main *')].some(e => "
+               "/\\b(page|swap|unfold|pop|idr|idf)-(enter|leave)/.test("
+               "typeof e.className === 'string' ? e.className : ''))")
+
+
 def settle_motion(page, timeout=12000):
     """等 2026-10-29 那轮交互动效（app/src/styles/motion.css）把画面送进终态再取数。
-       为什么需要：面板切换用的是 mode="out-in"（旧面板先摘掉、新面板再挂），而这台 headless
-       Chrome 的动画时钟是饿着的——实测一条 220ms 的过渡要走 1.5–1.9 秒才结束。
-       于是原来那些"点完固定等 900ms 再量"的判据会量在"整块内容还没挂回来"的那一帧上，
-       报成"数量对不上 / 悬停没生效"。判据一条没改，改的是取数时机。"""
-    try:
-        page.wait_for_function(
-            "() => ![...document.querySelectorAll('#main *')].some(e => "
-            "/\\b(page|swap|unfold|pop|idr|idf)-(enter|leave)/.test(typeof e.className === 'string' ? e.className : ''))",
-            timeout=timeout)
-        return True
-    except Exception:
-        return False
+       为什么要等：面板切换用的是 mode="out-in"（旧面板先摘掉、新面板再挂），量早了会量在
+       "整块内容还没挂回来"的那一帧上，报成"数量对不上 / 读到上一页 / 悬停没生效"。
+       为什么要**顺手逼一帧**：门禁这台 headless Chrome（swiftshader、没有可视表面）不主动产帧，
+       实测点了之后类永远停在 unfold-enter-from、高度停在 0，光等多少超时都没用；
+       拍一张 8×8 的截图（本机约 3 秒）就会把过渡推到结束。真浏览器一直在产帧，
+       这一下是测试环境专用的，不是给页面打补丁。"""
+    import time as _t
+    import tempfile as _tf
+    pump = os.path.join(_tf.gettempdir(), "site-check-frame-pump.png")
+    deadline = _t.time() + timeout / 1000.0
+    while True:
+        try:
+            busy = page.evaluate(MOTION_BUSY)
+        except Exception:
+            return False
+        if not busy:
+            return True
+        if _t.time() > deadline:
+            return False
+        try:
+            page.screenshot(path=pump, clip={"x": 0, "y": 0, "width": 8, "height": 8},
+                            timeout=90000)
+        except Exception:
+            return False
 
 
 # 正文里出现脚本路径、原始文件名或未替换占位符，就是开发残留漏进了玩家视野。
@@ -240,8 +271,10 @@ def open_talent(page, base, extra=""):
        走 #/talent?c=_demo 直接载入。先清 localStorage 再整页重载：
        hash 路由只换 query 不会重新 boot 组件，上一轮存的方案会残留到这一条断言里。"""
     page.goto(base + "/#/talent", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.evaluate("() => localStorage.clear()")
     page.goto(base + "/#/talent?c=_demo" + extra)
+    settle_motion(page)   # 换页/换 hash 走的是路由过渡，等它结束再读
     page.reload(wait_until="networkidle")
     page.wait_for_timeout(1400)
 
@@ -287,7 +320,7 @@ def test_talent(browser, base):
     click(page, DEMO_A11)
     page.wait_for_timeout(200)
     check("解锁后可加点", ranks(page, DEMO_A11)["ranks"] == 1, "a-1-1=%s" % ranks(page, DEMO_A11)["ranks"])
-    page.screenshot(path=os.path.join(SHOT_DIR, "talent-added.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "talent-added.png"))
 
     # 键盘可达性
     page.evaluate("""() => document.querySelector('[data-n="%s"]').focus()""" % DEMO_A01)
@@ -343,7 +376,7 @@ def test_talent(browser, base):
     r = ranks(page, DEMO_A11)
     check("抽掉前置后级联清空", ranks(page, DEMO_A00)["ranks"] == 0 and r["ranks"] == 0,
           "a-0-0=%s → a-1-1=%s" % (ranks(page, DEMO_A00)["ranks"], r["ranks"]))
-    page.screenshot(path=os.path.join(SHOT_DIR, "talent-cascade.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "talent-cascade.png"))
 
     # 分享编码 + 无痕还原
     for _ in range(2):
@@ -362,6 +395,7 @@ def test_talent(browser, base):
     # 新开一个无痕上下文、直接给分享出来的那条地址：这才是"别人在群里点开"的样子。
     # 不再走 open_talent()——那个函数要先落 #/talent 再换 query，会把整条 hash 拼两遍。
     p2.goto(base + "/" + hash_, wait_until="networkidle")
+    settle_motion(p2)   # 这一条的 URL 是拼出来的（base + "/" + hash_），批量补等待时按字面找 "#/" 漏了它
     p2.wait_for_timeout(1600)
     back = (ranks(p2, DEMO_A00)["ranks"], ranks(p2, DEMO_A01)["ranks"])
     check("无痕窗口按 hash 还原方案", back == origin, "原 %s → 还原 %s（地址 %s）" % (origin, back, hash_[:60]))
@@ -452,7 +486,7 @@ def test_spellbook(browser, base):
         check("%s 按职业筛选后行数对得上" % label,
               page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length") == exp_one,
               "%d 行 / 期望 %d" % (page.evaluate("() => document.querySelectorAll('#sptbl tbody tr:not(.grp2h)').length"), exp_one))
-        page.screenshot(path=os.path.join(SHOT_DIR, "spellbook-%s.png" % ("app" if label == u"新站" else "legacy")))
+        snap(page, path=os.path.join(SHOT_DIR, "spellbook-%s.png" % ("app" if label == u"新站" else "legacy")))
         check("%s 法术书页无报错与失败请求" % label, not errs and not failed,
               "; ".join((errs + failed)[:2]) or "干净")
         ctx.close()
@@ -512,13 +546,14 @@ def test_spellbook(browser, base):
         # 实测一次视口截图就要 24~30 秒，Playwright 默认 30 秒超时是**擦着上限过的**——
         # 10-27 那轮"整站门禁跑不完"就是死在这一句，不是页面坏了。
         # 两处放宽：关掉动画等帧（省 ~5 秒）+ 把这一次调用的上限抬到 90 秒。
-        page.screenshot(path=os.path.join(SHOT_DIR, "achievements-%s.png" %
+        snap(page, path=os.path.join(SHOT_DIR, "achievements-%s.png" %
                                           ("app" if label == u"新站" else "legacy")))
         ctx.close()
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     page.goto(APP_BASE + "/#/achievements?q=" + urllib.parse.quote(show[0]["name"]), wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1200)
     check("搜索词跳进成就页就已是筛好的",
           page.evaluate("() => document.querySelectorAll('#tbl tbody tr:not(.grp2h)').length") > 0
@@ -531,6 +566,7 @@ def test_spellbook(browser, base):
         ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
         page = ctx.new_page()
         page.goto(APP_BASE + "/#/skills", wait_until="networkidle")
+        settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
         page.wait_for_timeout(1800)
         exp_state = len([x for x in sp if x.get("state")])
         chips = page.evaluate("() => document.querySelectorAll('#sptbl .chip-st').length")
@@ -547,12 +583,13 @@ def test_spellbook(browser, base):
           return th ? getComputedStyle(th).position : null; }""")
         check("新站表头在桌面是吸附的（窄屏由 board.css 显式关掉，见那条注释）",
               sticky == "sticky", sticky)
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-board-skills.png"))
+        snap(page, path=os.path.join(SHOT_DIR, "app-board-skills.png"))
         ctx.close()
 
         ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
         page = ctx.new_page()
         page.goto(APP_BASE + "/#/professions", wait_until="networkidle")
+        settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
         page.wait_for_timeout(1800)
         m = page.evaluate("""() => ({ over: document.documentElement.scrollWidth - innerWidth,
           fade: [...document.querySelectorAll('.boardwrap')].length,
@@ -560,7 +597,7 @@ def test_spellbook(browser, base):
         check("新站专业页 375 下整页不横向溢出（表在容器里滚）", m["over"] <= 1, json.dumps(m))
         check("新站专业页来源那一格仍写着商人（视觉改版没把 M2-G 的层弄丢）", m["src"] > 0,
               "%d 行" % m["src"])
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-board-prof-m.png"))
+        snap(page, path=os.path.join(SHOT_DIR, "app-board-prof-m.png"))
         ctx.close()
 
 
@@ -671,6 +708,7 @@ def test_world_pins(browser, base):
     page.on("pageerror", lambda e: errs.append(str(e)[:140]))
 
     page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2400)
     z = page.evaluate("""() => { const cards = [...document.querySelectorAll('.zcard')];
       const grid = document.querySelector('.zgrid');
@@ -768,6 +806,7 @@ def test_world_pins(browser, base):
              len([r for r in rares if r.get("mapId") and r.get("mark") and not r.get("mapFile")])))
 
     page.goto(APP_BASE + "/#/world?t=books", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2200)
     bk = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
       dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
@@ -798,9 +837,10 @@ def test_world_pins(browser, base):
     check("书点位浮层把原来表格里那三列带回来了（容器 / 位置 / 物品编号）",
           pop and "k-book" in pop["kind"] and pop["rows"] == want0,
           json.dumps({"pop": pop, "want": want0}, ensure_ascii=False))
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-world-books.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-world-books.png"))
 
     page.goto(APP_BASE + "/#/world?t=bag", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2200)
     bg = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
       dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
@@ -817,9 +857,11 @@ def test_world_pins(browser, base):
     # 只在建立时读一次 route.query 的话点了不会动（2026-10-19 实测到，搜索跳这一页就撞这条）
     # 先归位到"区域"再只换查询参数——不先归位的话上一段停在营地面板，比的是残留状态
     page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1800)
     first_tab = page.evaluate("() => (document.querySelector('.pick.on b') || {}).innerText")
     page.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1800)
     now = page.evaluate("""() => ({tab: (document.querySelector('.pick.on b') || {}).innerText,
       bands: document.querySelectorAll('.zband').length,
@@ -840,6 +882,7 @@ def test_world_pins(browser, base):
     # aria-pressed 不动、图上一颗不少——构建和上面所有旧断言全绿，只有真点一下才暴露。
     # 所以这里必须"点一次、再量一次"，且 click 与读结果分开两次调用（Vue 更新是异步的）。
     page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2000)
     lg = page.evaluate("""() => {
       const bs = [...document.querySelectorAll('.zband')];
@@ -910,6 +953,7 @@ def test_world_pins(browser, base):
     mp = mctx.new_page()
     for t in ("zones", "books", "bag"):
         mp.goto(APP_BASE + "/#/world?t=" + t, wait_until="networkidle")
+        settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
         mp.wait_for_timeout(2000)
         mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
           mapW: (document.querySelector('.zbig') || { offsetWidth: 0 }).offsetWidth,
@@ -923,7 +967,7 @@ def test_world_pins(browser, base):
         # 站主这条改的就是"图太小"，所以窄屏也钉一层：地图至少铺满屏宽的七成
         check("世界页 %s 面板 375：地图占满一整块（不是半张小图）" % t,
               mm["mapW"] >= 0.7 * 375, "图宽 %dpx（屏宽 375）" % mm["mapW"])
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-world-zones-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-world-zones-m.png"))
     mctx.close()
     check("世界页四个面板走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     ctx.close()
@@ -948,6 +992,7 @@ def test_dungeon_geo(browser, base):
 
     def shot(did):
         page.goto(APP_BASE + "/#/dungeon?d=" + did, wait_until="networkidle")
+        settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
         page.wait_for_timeout(1800)
         # 两张图都是 loading="lazy"：不先滚进视口，naturalWidth 就是 0，断言会打在"没加载"上
         page.evaluate("() => { const x = document.querySelector('.dboss');"
@@ -1041,6 +1086,7 @@ def test_dungeon_geo(browser, base):
           geo[b1].get("bossMapKind") == "game-capture" and not r4["btag"],
           "%s（%s）：%s" % (b1, geo[b1].get("bossMapKind"), r4["btag"] or "没标，对的"))
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1500)
     # 取"哪一段讲了这一层"要按整段取，别按句子切——三个数分在两句里，按句切就会把数切没了
     pv = page.evaluate("""() => [...document.querySelectorAll('#main .card p.dim')]
@@ -1074,6 +1120,7 @@ def test_dungeon_geo(browser, base):
     mctx = browser.new_context(viewport={"width": 375, "height": 812})
     mp = mctx.new_page()
     mp.goto(APP_BASE + "/#/dungeon?d=" + w0, wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(1800)
     mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
       mapW: (document.querySelector('.dgeo .zbig') || { offsetWidth: 0 }).offsetWidth,
@@ -1082,7 +1129,7 @@ def test_dungeon_geo(browser, base):
     check("375 上入口那张图占满一整块、点够大、整页不横溢",
           mm["over"] == 0 and mm["mapW"] >= 0.7 * 375 and mm["dot"] is not False,
           json.dumps(mm, ensure_ascii=False))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-dungeon-geo-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-dungeon-geo-m.png"))
     mctx.close()
     check("副本坐标这一层走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     ctx.close()
@@ -1106,6 +1153,7 @@ def test_legacy_app(browser, base):
     errs = []
     page.on("pageerror", lambda e: errs.append(str(e)[:140]))
     page.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2400)
     check("新站传承页可加载且无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
 
@@ -1700,6 +1748,7 @@ def test_legacy_app(browser, base):
     sp.add_init_script("localStorage.setItem('wfs.legacy.plans','{坏掉的');"
                        "localStorage.setItem('wfs.legacy.checks','[\"99999999\",\"%s\"');" % all_items[0]["id"])
     sp.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    settle_motion(sp)   # 换 hash 走的是路由过渡，等它结束再读
     sp.wait_for_timeout(2200)
     broke = sp.evaluate("""() => ({bar: (document.querySelector('.lge-planbar .bn')||{}).innerText.replace(/\\s+/g,' ').trim(),
       h2: (document.querySelector('#main h1')||{}).innerText.trim(),
@@ -1712,11 +1761,12 @@ def test_legacy_app(browser, base):
                   ".find(x=>x.innerText.indexOf('全部清空')>=0); if (b) b.click(); }")
     page.wait_for_timeout(400)
 
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-legacy.png"), full_page=True)
+    snap(page, path=os.path.join(SHOT_DIR, "app-legacy.png"), full_page=True)
     ctx.close()
     mctx = browser.new_context(viewport={"width": 375, "height": 812})
     mp = mctx.new_page()
     mp.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(2200)
     # 加减按钮只在选中某个格子之后才出现在详情栏里（没选时那栏是这一棵树的读数），
     # 所以 375 上先真点一个格子，再量这两个按钮在不在、够不够大
@@ -1747,7 +1797,7 @@ def test_legacy_app(browser, base):
     check("375 上规划器的两个按钮与那条单列记录都在（窄屏不是把功能藏掉）",
           mm["act"] == 2 and mm["plans"] >= 3 and mm["sp"] >= 1,
           "加减 %d 个 / 方案条 %d 个 / 单列 %d 条" % (mm["act"], mm["plans"], mm["sp"]))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-legacy-m.png"), full_page=True)
+    snap(mp, path=os.path.join(SHOT_DIR, "app-legacy-m.png"), full_page=True)
     mctx.close()
 
 
@@ -1833,6 +1883,7 @@ def test_bis(browser, base):
     page.on("pageerror", lambda e: errs.append(str(e)[:120]))
     page.on("console", lambda m: errs.append(m.text[:120]) if m.type == "error" else None)
     page.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2200)
     r = page.evaluate("""() => ({
       h1: (document.querySelector('#main h1')||{}).innerText || '',
@@ -1934,7 +1985,7 @@ def test_bis(browser, base):
           got_stat[:3] == want_stat, "界面 %s ／ 数据 %s" % (got_stat[:3], want_stat))
     page.locator("#pzcmp").scroll_into_view_if_needed()
     page.wait_for_timeout(300)
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-bis-compare.png"))
     # 站主 2026-10-17 改口径：点装备用 popover 看备选（不是 modal，不挡页面）
     head_rows = w["alts"]["alliance"]["head"]
     page.click(".pzcol:first-child .pzcell")
@@ -2031,7 +2082,7 @@ def test_bis(browser, base):
     # 直接 innerText 全读会多出一个空的「精神」。玩家看不见它，所以页面是对的、判据要按可见性过滤。
     check("属性合计那排等于门禁独立解析的结果（纯加法，不含基础值与附魔）",
           ic["sum"] == want_sum, "界面 %s ／ 数据 %s" % (ic["sum"], want_sum))
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-bis.png"))
     # 上面比的是页面默认落在的战士那一套——偏偏那一套全是 "N点护甲"，
     # 一条漏算的写法都碰不到，所以它单独证明不了这次修的东西。
     # 这一条走玩家真点的路径换到猎人 PvE 联盟（#9509 浸油护腿的 "90 护甲" 就在这套里），
@@ -2055,8 +2106,8 @@ def test_bis(browser, base):
     # 证据两张：一张把「这套装备给的属性」那一排行滚进视口拍清楚，一张整页留全貌
     page.locator(".pzsum").scroll_into_view_if_needed()
     page.wait_for_timeout(300)
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor.png"))
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-full.png"), full_page=True)
+    snap(page, path=os.path.join(SHOT_DIR, "app-bis-hunter-armor.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-full.png"), full_page=True)
     # 另一家提了、本站名录里没有的那一件（全库就 1 件：#9395，在德鲁伊「恢复」的手部）：
     # 界面上必须给编号 + 一句"名录里没有"，不许拿插件的写法冒充我们的名字。
     di = page.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
@@ -2076,7 +2127,7 @@ def test_bis(browser, base):
           and u"#9395" in miss_row[0] and u"本站名录里没有" in miss_row[0]
           and u"猛虎" not in miss_row[0],
           miss_row[0][:70] if miss_row else "没找到这一行")
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare-missing.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-bis-compare-missing.png"))
     ctx.close()
 
     # ---- 3D 那一层（2026-10-26 站主"先给我看 3D 效果"）----
@@ -2095,6 +2146,7 @@ def test_bis(browser, base):
     derr = []
     dp.on("pageerror", lambda e: derr.append(str(e)[:120]))
     dp.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    settle_motion(dp)   # 换 hash 走的是路由过渡，等它结束再读
     dp.wait_for_timeout(2200)
     dbtn = dp.query_selector("button.pz-3dbtn")
     check("台账里有自产模型才出现这个按钮；没有模型就不该给玩家点（不猜路径）",
@@ -2197,7 +2249,7 @@ def test_bis(browser, base):
         except ImportError:
             pass
         dp.wait_for_timeout(600)
-        dp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-3d.png"),
+        snap(dp, path=os.path.join(SHOT_DIR, "app-bis-3d.png"),
                       clip=dict((lambda b: ({"x": b["x"] - 20, "y": b["y"] - 20,
                                              "width": b["width"] + 40, "height": b["height"] + 40}))(
                           dp.query_selector(".pzmid").bounding_box())))
@@ -2207,6 +2259,7 @@ def test_bis(browser, base):
     ctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     mp = ctx.new_page()
     mp.goto(APP_BASE + "/#/bis", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(2000)
     mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - innerWidth,
       small: [...document.querySelectorAll('.pzcell, .pz-mode .pick, .pz-cls .pick, .pz-3dbtn')]
@@ -2233,8 +2286,8 @@ def test_bis(browser, base):
           u"本站用的" in (cmpm.get("lbl") or ""), cmpm.get("lbl"))
     mp.locator("#pzcmp").scroll_into_view_if_needed()
     mp.wait_for_timeout(300)
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-compare-m.png"))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-bis-compare-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-bis-m.png"))
     # 375 上补一张猎人那套的合计行（这次修的就是这一排）
     hmi = mp.evaluate("""() => [...document.querySelectorAll('.pzrail .pztab')]
       .findIndex(b => b.innerText.indexOf('猎人') >= 0)""")
@@ -2242,7 +2295,7 @@ def test_bis(browser, base):
     mp.wait_for_timeout(1500)
     mp.locator(".pzsum").scroll_into_view_if_needed()
     mp.wait_for_timeout(300)
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-bis-hunter-armor-m.png"))
     ctx.close()
 
 
@@ -2286,6 +2339,7 @@ def test_classes_sticky(browser, base):
         ctx = browser.new_context(viewport=vp, is_mobile=mob, has_touch=mob)
         page = ctx.new_page()
         page.goto(APP_BASE + "/#/classes", wait_until="networkidle")
+        settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
         page.wait_for_timeout(2200)
         r = page.evaluate(JS)
         check("%s 技能变化是一个自己滚的框（吸附才有意义）" % tag,
@@ -2312,7 +2366,7 @@ def test_classes_sticky(browser, base):
                   json.dumps({k: r[k] for k in ("underRow", "overTh")}))
         page.locator(".chgs").scroll_into_view_if_needed()
         page.wait_for_timeout(300)
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-classes-chgs-sticky%s.png"
+        snap(page, path=os.path.join(SHOT_DIR, "app-classes-chgs-sticky%s.png"
                                           % ("-m" if mob else "")))
         ctx.close()
 
@@ -2339,7 +2393,7 @@ def test_mobile(browser, base):
     page.wait_for_timeout(250)
     check("移动端用减点按钮可减点（没有右键也能完成）", ranks(page, DEMO_A00)["ranks"] == 1,
           "a-0-0=%s" % ranks(page, DEMO_A00)["ranks"], soft=MOBILE_SOFT)
-    page.screenshot(path=os.path.join(SHOT_DIR, "talent-mobile-375.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "talent-mobile-375.png"))
     check("移动端无控制台报错", not errors, "; ".join(errors[:2]))
     ctx.close()
 
@@ -2389,6 +2443,9 @@ def test_race_icon(browser):
 
     def probe(url, sel=None):
         page.goto(APP_BASE + url, wait_until="networkidle")
+        # url 是变量传进来的，批量补等待那一轮按字面 "#/" 找没找到这一处：
+        # 不等过渡结束就读正文，读到的是上一页，溯源页那一段就被报成"没有"。
+        settle_motion(page)
         page.wait_for_timeout(2200)
         page.evaluate("() => { const h = document.body.scrollHeight;"
                       "for (let y = 0; y <= h; y += 500) { window.scrollTo(0, y); } window.scrollTo(0, 0); }")
@@ -2420,7 +2477,7 @@ def test_race_icon(browser):
           .filter(v => v !== 0).length; }""")
     check("种族×职业矩阵每一行的首列都跟它那一行齐平（横滚容器里纵向 sticky 会把头几行推下去）",
           mgeo == 0, "错位行数 %s" % mgeo)
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-raceicon-skyborne.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-raceicon-skyborne.png"))
     lg = probe("/#/legacy")
     check("传承页页头仍然用那张大图原画，没被 64px 小图顶掉",
           lg["big"] >= 1 and lg["small"] == 0 and not lg["broken"],
@@ -2449,6 +2506,7 @@ def test_race_icon(browser):
     mctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     mp = mctx.new_page()
     mp.goto(APP_BASE + "/#/races", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(2200)
     # 手机那一屏更长，不滚到底 lazy 图压根不加载——上一版报"10 处只解码 4 处"就是这个原因，
     # 那是没验到，不是解码失败。滚完再量，并把"还没加载完"单独报出来。
@@ -2466,7 +2524,7 @@ def test_race_icon(browser):
     check("375 上天裔小图标同样解码成功且不撑出横向溢出",
           m["n"] >= 2 and m["ok"] == m["n"] and m["pend"] == 0 and m["over"] <= 1,
           "%d 处解码 %d 处（还有 %d 处没加载完）/ 溢出 %spx" % (m["n"], m["ok"], m["pend"], m["over"]))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-raceicon-skyborne-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-raceicon-skyborne-m.png"))
     mctx.close()
     ctx.close()
 
@@ -2508,6 +2566,7 @@ def test_updates_filter(browser):
     errs = []
     page.on("pageerror", lambda e: errs.append(str(e)[:120]))
     page.goto(APP_BASE + "/#/updates", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2500)
     page.evaluate("() => { const n = document.getElementById('k1');"
                   "if (n) n.scrollIntoView({block: 'start'}); }")
@@ -2535,7 +2594,7 @@ def test_updates_filter(browser):
     check("除真没有的类别外不许恒为 0（上一版五格全 0 就是这个 bug 的样子）",
           sum(1 for k in kinds if k != "all" and got.get(k, 0) > 0) >= 4,
           "非零 %d 格" % sum(1 for k in kinds if k != "all" and got.get(k, 0) > 0))
-    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-chips.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "w2-updates-chips.png"))
 
     def click_chip(k):
         page.click(".kchip[data-k='%s']" % k)
@@ -2562,7 +2621,7 @@ def test_updates_filter(browser):
         if read_cnt() != got_h[k]:
             bad.append("%s 格写 %d、点出 %d" % (k, got_h[k], read_cnt()))
     check("猎人 + 各类别组合：点下去的条数仍等于格子数", not bad, "; ".join(bad) or "各类别全对")
-    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-hunter-added.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "w2-updates-hunter-added.png"))
 
     # 再叠一层"只看法术"，三条件同时开：格子、表头、期望三方对齐
     page.select_option("#cw", "spell")
@@ -2586,12 +2645,13 @@ def test_updates_filter(browser):
     check("搜不到时：格子全 0、表头 0 条、空态文案顶上（不留空表）",
           all(v == 0 for v in z["chips"]) and "0" in z["cnt"] and z["empty"] and z["rows"] == 0,
           json.dumps(z, ensure_ascii=False))
-    page.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-empty.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "w2-updates-empty.png"))
 
     # 375 同一件事：格子换行排、点了同样对得上（以前只在桌面验，手机上溢出没人管）
     mctx = browser.new_context(viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
     mp = mctx.new_page()
     mp.goto(APP_BASE + "/#/updates", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(2500)
     mp.evaluate("() => { const n = document.getElementById('k1');"
                 "if (n) n.scrollIntoView({block: 'start'}); }")
@@ -2609,7 +2669,7 @@ def test_updates_filter(browser):
     chk = [c["n"] for c in mh["chips"] if c["k"] == "modified"][0]
     check("375 点「改动」后条数也等于格子数", mcnt == chk == exp(k="modified"),
           "表头 %d / 格子 %d / 期望 %d" % (mcnt, chk, exp(k="modified")))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "w2-updates-chips-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "w2-updates-chips-m.png"))
     check("这一页没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     mctx.close()
     ctx.close()
@@ -2644,6 +2704,7 @@ def test_app(browser, base):
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     page.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1600)
     # 读标签要先把「新」角标剔掉：角标是 <i class="nb"> 塞在 <a> 里的文字，
     # 不剔的话本站更新一打上"配装"标签，这条就会拿"配装新"去比"配装"而红
@@ -2676,6 +2737,7 @@ def test_app(browser, base):
     # 被摘掉导航的页不许成孤页：物品库与成就靠首页那行"更多入口"进（旧站没有物品库这一页，
     # 所以这一行必须走站内路由而不是写死旧站地址——写死就是 404）。
     page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1800)
     chips = page.evaluate("() => [...document.querySelectorAll('.chipsrow a')]"
                           ".map(a => ({ t: a.textContent.trim(), h: a.getAttribute('href') || '' }))")
@@ -2796,6 +2858,7 @@ def test_app(browser, base):
     ctx375 = browser.new_context(viewport={"width": 375, "height": 812})
     p375 = ctx375.new_page()
     p375.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(p375)   # 换 hash 走的是路由过渡，等它结束再读
     p375.wait_for_timeout(2000)
     m = p375.evaluate("""() => { const g = document.querySelector('.cls9');
       const h = document.querySelector('.hrail');
@@ -2815,9 +2878,9 @@ def test_app(browser, base):
     check("首页 375 的选中项仍靠丸内填充标出，2px 底边已彻底撤掉",
           m["chip"].split("|")[0] not in ("", "rgba(0, 0, 0, 0)", "transparent")
           and m["chip"].split("|")[1] == "0px", m["chip"])
-    p375.screenshot(path=os.path.join(SHOT_DIR, "app-home-375.png"))
+    snap(p375, path=os.path.join(SHOT_DIR, "app-home-375.png"))
     ctx375.close()
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-home-1440.png"), clip=None, full_page=False)
+    snap(page, path=os.path.join(SHOT_DIR, "app-home-1440.png"), clip=None, full_page=False)
 
     # ---- 10-18 站主实拍：种族页第一排头像被阵营条的组头盖掉一半 ----
     # 成因不在这一页：app.css 给 .fhead 写了 position:sticky;top:44px，而它外面那层 .facband
@@ -2831,6 +2894,7 @@ def test_app(browser, base):
         c2 = browser.new_context(viewport={"width": vp, "height": 812})
         p2 = c2.new_page()
         p2.goto(APP_BASE + "/#/races", wait_until="networkidle")
+        settle_motion(p2)   # 换 hash 走的是路由过渡，等它结束再读
         p2.wait_for_timeout(2200)
         geo = p2.evaluate("""() => [...document.querySelectorAll('.facband')].map(b => {
           const h = b.querySelector('.fhead'), g = b.querySelector('.racegrid');
@@ -2854,7 +2918,7 @@ def test_app(browser, base):
               return {race: (f.closest('.racecard').querySelector('.rcn') || {}).innerText, hits: hits}; }""", i)
             if r["hits"]:
                 bad.append("%s→%s" % (r["race"], r["hits"]))
-        p2.screenshot(path=os.path.join(SHOT_DIR, "app-races-heads-%s.png" % vp))
+        snap(p2, path=os.path.join(SHOT_DIR, "app-races-heads-%s.png" % vp))
         c2.close()
         return geo, bad
 
@@ -2868,8 +2932,9 @@ def test_app(browser, base):
     geo_m, bad_m = face_hits(375)
     check("种族页 375：头像同样没有一个被盖住", not bad_m, "；".join(bad_m) or "10 个全部露出")
     page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1200)
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-nav-narrow.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-nav-narrow.png"))
     ctx.close()
     for label, path, key in pages:
         ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
@@ -2897,7 +2962,7 @@ def test_app(browser, base):
         check("新站 %s：图片都有 alt 且无坏图" % label, st["noalt"] == 0 and st["broken"] == 0,
               "缺 alt %d / 坏图 %d" % (st["noalt"], st["broken"]))
         check("新站 %s：按钮都有可读名" % label, st["noname"] == 0, "%d 个缺名" % st["noname"])
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-%s.png" % key))
+        snap(page, path=os.path.join(SHOT_DIR, "app-%s.png" % key))
         if key == "index":
             # 2026-10-12 站主决定：新站首页与旧站一样不再挂覆盖率读数，
             # 这条从"四个数与 scale.json 一致"改成"这三样都不许出现"。
@@ -3061,6 +3126,7 @@ def test_app(browser, base):
             jc = browser.new_context(viewport={"width": 375, "height": 812})
             jp = jc.new_page()
             jp.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
+            settle_motion(jp)   # 换 hash 走的是路由过渡，等它结束再读
             jp.wait_for_timeout(2200)
             jp.evaluate("() => document.querySelector('.zband').scrollIntoView({block:'center'})")
             jp.wait_for_timeout(400)
@@ -3094,11 +3160,11 @@ def test_app(browser, base):
                   "横向溢出 %d ／ 整宽 %s ／ 贴在图下方 %s"
                   % (jump["over"], jump["full"], jump["below"]))
             # 这张图存的是"浮层展开态"：上面那一步刚点开了第一个点位，正好拍到手感
-            jp.screenshot(path=os.path.join(SHOT_DIR, "app-rares-m.png"))
+            snap(jp, path=os.path.join(SHOT_DIR, "app-rares-m.png"))
             jc.close()
             body = page.evaluate("() => document.querySelector('#main').innerText")
             check("新站世界页正文没有面向开发的词", not dev_word_hits(body), "干净")
-            page.screenshot(path=os.path.join(SHOT_DIR, "app-world-rares.png"))
+            snap(page, path=os.path.join(SHOT_DIR, "app-world-rares.png"))
         ctx.close()
 
     # 物品库（新站独有页，2026-10-14 站主拍板原型后实现）。断言照拍板口径：
@@ -3115,6 +3181,7 @@ def test_app(browser, base):
     page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
             if r.status >= 400 and not tolerated(r.url) else None)
     page.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2000)
     st = page.evaluate("""() => ({
       rows: document.querySelectorAll('.itt tbody tr').length,
@@ -3158,7 +3225,7 @@ def test_app(browser, base):
           "页脚「%s」/ 分页条 %s / 行数 %d / 数据 %d / 标签 %s" % (
               got["total"].strip() or "（不足一页，分页条不渲染）", got["pager"],
               got["n"], len(srv_has), sorted(set(got["labels"]))[:3]))
-    page.screenshot(path=os.path.join(SHOT_DIR, "a03-items-srvhas.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "a03-items-srvhas.png"))
     page.evaluate("() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]"
                   ".find(x => (x.innerText || '').indexOf('全部') >= 0); if (b) b.click(); }")
     page.wait_for_timeout(700)
@@ -3202,7 +3269,7 @@ def test_app(browser, base):
     drtext = page.evaluate("() => (document.querySelector('.idrawer') || {}).innerText || ''")
     check("新站物品详情抽屉：没有掉率字样（红线）",
           "掉率" not in drtext and "掉落概率" not in drtext and "掉落几率" not in drtext, "干净")
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-items-detail.png"))
     page.click(".idmask")
     page.wait_for_timeout(300)
     check("新站物品详情抽屉：点遮罩能关",
@@ -3255,7 +3322,7 @@ def test_app(browser, base):
                   (dr2 or {}).get("note", "").strip() == (itd_all["meta"].get("pageNote") or "").strip()
                   and len((dr2 or {}).get("note", "")) > 30,
                   json.dumps((dr2 or {}).get("note", ""), ensure_ascii=False)[:150])
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-%s.png" % key))
+        snap(page, path=os.path.join(SHOT_DIR, "app-items-detail-%s.png" % key))
         page.keyboard.press("Escape")
         page.wait_for_timeout(250)
         page.fill(".qsearch", "")
@@ -3308,7 +3375,7 @@ def test_app(browser, base):
               bool(u) and u["v"] == exp_u["use"] and uf in FROMN and u["badge"] == FROMN[uf],
               "%s / 数据记的来源 %s（%s）" % (json.dumps(u, ensure_ascii=False)[:120], uf,
                                               FROMN.get(uf, "不在名单里")))
-        page.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-use.png"))
+        snap(page, path=os.path.join(SHOT_DIR, "app-items-detail-use.png"))
         page.keyboard.press("Escape")
         page.wait_for_timeout(250)
     # 整行引号的文案一条都不该出现在成品里（风味句），教益句则必须是去过引号的
@@ -3331,30 +3398,32 @@ def test_app(browser, base):
           % (len(quoted_whole), len(quoted_inner)))
     page.fill(".qsearch", "")
     page.wait_for_timeout(700)
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-items.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-items.png"))
     ctx.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780})
     mp = m.new_page()
     mp.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(1600)
     mob = mp.evaluate("""() => { const vw = document.documentElement.clientWidth;
       const small = [...document.querySelectorAll('#main a, #main button, #top nav a, #top nav button')]
         .filter(b => { const r = b.getBoundingClientRect(); return r.width && r.height && r.height < 44; }).length;
       return { overflow: document.documentElement.scrollWidth > vw + 1, small: small }; }""")
     check("新站移动端首页不溢出、点击目标 ≥44px", not mob["overflow"] and mob["small"] == 0, json.dumps(mob))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-index-mobile.png"), full_page=True)
+    snap(mp, path=os.path.join(SHOT_DIR, "app-index-mobile.png"), full_page=True)
     m.close()
 
     m = browser.new_context(viewport={"width": 375, "height": 780})
     mp = m.new_page()
     mp.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
     mp.wait_for_timeout(1800)
     mit = mp.evaluate("""() => { const tr = document.querySelector('.itt tbody tr');
       return { overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
                card: tr ? getComputedStyle(tr).display === 'block' : false }; }""")
     check("新站物品库移动端：行卡片化、375 不横滚", not mit["overflow"] and mit["card"], json.dumps(mit))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-mobile.png"), full_page=True)
+    snap(mp, path=os.path.join(SHOT_DIR, "app-items-mobile.png"), full_page=True)
     # 移动端抽屉：整宽、能开能关（物品线二批）
     mp.fill(".qsearch", pick["name"])
     mp.wait_for_timeout(900)
@@ -3367,7 +3436,7 @@ def test_app(browser, base):
                overflow: document.documentElement.scrollWidth > vw + 1 }; }""")
     check("新站物品详情抽屉移动端：整宽、不横滚",
           mid.get("open") and abs(mid["w"] - mid["vw"]) <= 1 and not mid["overflow"], json.dumps(mid))
-    mp.screenshot(path=os.path.join(SHOT_DIR, "app-items-detail-m.png"))
+    snap(mp, path=os.path.join(SHOT_DIR, "app-items-detail-m.png"))
     m.close()
 
 
@@ -3406,6 +3475,7 @@ def test_copy(browser, base):
     for name, path in app_routes():
         page = ctx.new_page()
         page.goto("%s/#%s%s" % (APP_BASE, path, route_q(path)), wait_until="networkidle")
+        settle_motion(page)   # 换页/换 hash 走的是路由过渡，等它结束再读
         page.wait_for_timeout(1400)
         text = page.evaluate("""() => [document.querySelector('#top'), document.querySelector('#main'),
             document.querySelector('#foot')].filter(Boolean).map(e => e.innerText).join('\\n')""")
@@ -3417,11 +3487,13 @@ def test_copy(browser, base):
     ctx2 = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx2.new_page()
     page.goto("%s/#/dungeons" % APP_BASE, wait_until="networkidle")
+    settle_motion(page)   # 换页/换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1400)
     page.evaluate("() => document.querySelectorAll('[data-d]').forEach(b => b.click())")
     page.wait_for_timeout(600)
     scan("副本页来源展开后", page.evaluate("() => document.querySelector('#main').innerText"))
     page.goto("%s/#/talent?c=hunter" % APP_BASE, wait_until="networkidle")
+    settle_motion(page)   # 换页/换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1500)
     page.evaluate("() => { const b = document.getElementById('tsrcbtn'); if (b) b.click(); }")
     page.wait_for_timeout(500)
@@ -3561,7 +3633,7 @@ def test_site_wide(browser, base):
                 bad = page.evaluate(CONTRAST_PROBE)
                 check("%s 页文字对比度达 AA" % path, not bad,
                       json.dumps(bad, ensure_ascii=False)[:150])
-                page.screenshot(path=os.path.join(SHOT_DIR, "wide-%s.png" % (name or "x")),
+                snap(page, path=os.path.join(SHOT_DIR, "wide-%s.png" % (name or "x")),
                                 full_page=False)
             else:
                 # 375 这一遍走 soft：站主 2026-10-25 定的"网页手机版暂时不作要求"，
@@ -3594,6 +3666,7 @@ def test_data_versions(browser, base):
     errs = []
     page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
     page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1600)
     foot = page.evaluate("() => (document.querySelector('#foot .in') || {}).innerText || ''")
     check("页脚写的是那句'分别核对'，不再挂全站一个版本号", note and note in foot,
@@ -3605,6 +3678,7 @@ def test_data_versions(browser, base):
     check("首页徽标报的是快照里最新那个号与那一块（%s）" % want, want in badge.replace(" ", ""),
           badge)
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1600)
     rows = page.evaluate("""() => [...document.querySelectorAll('#lver tbody tr')]
         .map(tr => [...tr.children].map(td => td.innerText.trim()))""")
@@ -3631,7 +3705,7 @@ def test_data_versions(browser, base):
           and (u"超过 %d 天" % pol["soft"]) in body and (u"超过 %d 天" % pol["hard"]) in body,
           "提示 %s 天 / 拦红 %s 天" % (pol.get("soft"), pol.get("hard")))
     check("这一页无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-provenance-versions.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-provenance-versions.png"))
     ctx.close()
 
 
@@ -3681,11 +3755,16 @@ def test_motion(browser, base):
     check("动效层进了构建产物（main.js 那行 import 没漏、也没只停在工作区）",
           all(k in dist_css for k in need), "缺 " + ",".join(k for k in need if k not in dist_css) or "四类齐")
 
-    WATCH = """(sel) => { window.__m = { classes: [], ops: [] }; const st = window.__m;
+    WATCH = """(sel) => { window.__m = { classes: [], ops: [], anims: [] }; const st = window.__m;
       const grab = () => { const el = document.querySelector(sel); if (!el) return;
         const cn = typeof el.className === 'string' ? el.className : '';
         if (st.classes.indexOf(cn) < 0) st.classes.push(cn);
-        st.ops.push(+getComputedStyle(el).opacity); };
+        st.ops.push(+getComputedStyle(el).opacity);   // 先读一次计算值把样式刷出来：
+        // 不刷就 getAnimations()，过渡还没建立，永远抓不到条目（实测就是这个顺序）
+        el.getAnimations().forEach(a => { const d = (a.effect && a.effect.getTiming
+            ? a.effect.getTiming().duration : 0) || 0;
+          const k = (a.transitionProperty || a.animationName || '') + '@' + Math.round(d);
+          if (st.anims.indexOf(k) < 0) st.anims.push(k); }); };
       st.mo = new MutationObserver(grab);
       st.mo.observe(document.querySelector('#main') || document.body,
                     { attributes: true, attributeFilter: ['class'], subtree: true, childList: true });
@@ -3693,14 +3772,6 @@ def test_motion(browser, base):
     STOP = """() => { clearInterval(window.__m.tick); window.__m.mo.disconnect();
       const o = window.__m; window.__m = null;
       o.views = document.querySelectorAll('#main > .view').length; return o; }"""
-    # 过渡建立后轮询 getAnimations()：拿到就跑完，最多等 1.2 秒
-    ANIM = """(sel) => new Promise(res => { let n = 0;
-      const t = setInterval(() => { const el = document.querySelector(sel);
-        const a = el ? el.getAnimations().map(x => [x.transitionProperty || x.animationName || '',
-                                                   x.playState || '',
-                                                   Math.round((x.effect && x.effect.getTiming
-                                                     ? x.effect.getTiming().duration : 0) || 0)]) : [];
-        if (a.length || ++n > 150) { clearInterval(t); res({ tries: n, anim: a }); } }, 8); })"""
     # 问 CSSOM：这套过渡类在这台机器上算出来是几毫秒
     DUR = """(cls) => { const d = document.createElement('div'); d.className = cls;
       (document.querySelector('#main') || document.body).appendChild(d);
@@ -3722,6 +3793,7 @@ def test_motion(browser, base):
 
     # —— ① 换页 ——
     page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_selector("#main > .view", timeout=15000)
     page.wait_for_timeout(600)
     durs = [page.evaluate(DUR, c.lstrip(".")) for c in TRN]
@@ -3729,19 +3801,17 @@ def test_motion(browser, base):
           all(ms(d) >= 1 for d in durs), " / ".join(durs))
     watch(page, "#main > .view")
     page.evaluate("() => { location.hash = '#/world' }")
-    a = page.evaluate(ANIM, "#main > .view")
-    page.wait_for_timeout(900)
+    settle_motion(page)
     r = stop(page)
     check("换页时旧页淡出类与新页淡入类都出现过",
           any("page-leave-active" in c for c in r["classes"])
           and any("page-enter-active" in c for c in r["classes"]), str(r["classes"][:4]))
-    check("换页这一路确实有一条 opacity 过渡在跑（getAnimations 里有它）",
-          any("opacity" in x[0] for x in a["anim"]), json.dumps(a["anim"]))
+    check("换页这一路确实建立了 opacity 过渡（类刚变那一刻抓到的）",
+          any(x.startswith("opacity@") and x.split("@")[1] != "0" for x in r["anims"]),
+          json.dumps(r["anims"][:4]))
     check("out-in 生效：#main 下始终只有一个 .view（新旧页不重叠）",
           r["views"] == 1, "同屏 %s 个" % r["views"])
-    page.wait_for_function("""() => { const v = document.querySelector('#main > .view');
-      return v && !/page-(enter|leave)/.test(v.className)
-        && +getComputedStyle(v).opacity === 1; }""", timeout=9000)
+    settle_motion(page)
     rest = page.evaluate("""() => { const v = document.querySelector('#main > .view');
       return { cls: v.className, op: +getComputedStyle(v).opacity }; }""")
     check("过渡结束后 .view 恢复干净状态且看得见（不会停在半透明）",
@@ -3749,12 +3819,12 @@ def test_motion(browser, base):
 
     # —— ② 副本抽屉 ——
     page.goto(APP_BASE + "/#/dungeons", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_selector("[data-d]", timeout=20000)
     page.wait_for_timeout(400)
     watch(page, ".drawer-clip")
     page.click("[data-d]")
-    a = page.evaluate(ANIM, ".drawer-clip")
-    page.wait_for_timeout(700)
+    settle_motion(page)
     r = stop(page)
     check("抽屉挂着 unfold 过渡类展开", any("unfold-enter-active" in c for c in r["classes"]),
           str(r["classes"][:2]))
@@ -3764,23 +3834,26 @@ def test_motion(browser, base):
     # 同一份产物在普通 --headless=new 下实测会走 8px → 361px → 456px → 466px。
     # "逐帧真的在长"交给 8821 人眼验收 + 中间帧截图，机器只钉"挂的是 grid-template-rows 且时长非零"。
     check("抽屉展开建立的是 grid-template-rows 这条过渡，且时长非零",
-          any("grid-template-rows" in x[0] and x[2] >= 1 for x in a["anim"]), json.dumps(a["anim"][:2]))
+          any(x.startswith("grid-template-rows@") and x.split("@")[1] != "0" for x in r["anims"]),
+          json.dumps(r["anims"][:4]))
+    settle_motion(page)   # 再逼一帧：这台环境不产帧，高度会停在 0
     fin = page.evaluate("() => Math.round(document.querySelector('.drawer-clip')"
                         ".getBoundingClientRect().height)")
     check("展开到底之后是内容的自然高度（不会停在 0fr 那一档）", fin > 120, "终值 %s" % fin)
-    page.screenshot(path=os.path.join(SHOT_DIR, "motion-副本抽屉展开.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "motion-副本抽屉展开.png"))
 
     # —— ③ 传承页折叠 ——
     page.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_selector("[data-blk]", timeout=20000)
     page.wait_for_timeout(600)
     watch(page, ".lchbody")
     page.click("[data-blk]")
-    page.wait_for_timeout(600)
+    settle_motion(page)
     rl = stop(page)
     watch(page, ".lchbody")
     page.click("[data-blk]")
-    page.wait_for_timeout(900)
+    settle_motion(page)
     re_ = stop(page)
     check("传承页收起来那一下有退场过渡（旧版 animation 挂在 v-show 上，这里一条都采不到）",
           any("unfold-leave-active" in c for c in rl["classes"]), str(rl["classes"][:2]))
@@ -3789,6 +3862,7 @@ def test_motion(browser, base):
 
     # —— ④ 世界页换面板 ——
     page.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_selector('[data-t="rares"]', timeout=20000)
     page.wait_for_timeout(900)
     before = page.evaluate("() => document.querySelectorAll('#main .zcard').length")
@@ -3798,7 +3872,7 @@ def test_motion(browser, base):
     for _ in range(12):
         rows.append(page.evaluate("() => !!document.querySelector('.wswap.swap-enter-active,"
                                   " .wswap.swap-leave-active')"))
-        page.wait_for_timeout(30)
+        settle_motion(page, timeout=2500)
     # out-in 之后新面板要重挂整块（世界页那一面板 25000 像素），等它换完再判画面
     page.wait_for_function("""() => { const on = [...document.querySelectorAll('[data-t]')]
         .find(x => x.classList.contains('on')); return on && on.getAttribute('data-t') === 'rares'
@@ -3815,10 +3889,11 @@ def test_motion(browser, base):
     check("切到「稀有」之后画面上确实换成那一块（区域卡没了、稀有那一排的分组条出来了）",
           before > 0 and after["z"] == 0 and after["on"] == "rares" and after["band"] > 0,
           json.dumps({"切换前区域卡": before, "切换后": after}, ensure_ascii=False))
-    page.screenshot(path=os.path.join(SHOT_DIR, "motion-世界页换面板.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "motion-世界页换面板.png"))
 
     # —— ⑤ 物品抽屉退场 ——
     page.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_selector(".itt tbody tr", timeout=20000)
     page.wait_for_timeout(500)
     page.click(".itt tbody tr:first-child")
@@ -3828,7 +3903,7 @@ def test_motion(browser, base):
                         " return !!d && Math.round(d.getBoundingClientRect().width) >= 300 }"), "开")
     watch(page, ".idmask")
     page.click(".idmask")
-    page.wait_for_timeout(500)
+    settle_motion(page)
     r = stop(page)
     check("关抽屉时遮罩走退场过渡（不是当场消失）",
           any("idf-leave-active" in c for c in r["classes"]), str(r["classes"][:2]))
@@ -3843,6 +3918,7 @@ def test_motion(browser, base):
     rp = ctx2.new_page()
     rp.on("pageerror", lambda e: errs.append(str(e)[:120]))
     rp.goto(APP_BASE + "/#/", wait_until="networkidle")
+    settle_motion(rp)   # 换 hash 走的是路由过渡，等它结束再读
     rp.wait_for_selector("#main > .view", timeout=15000)
     rp.wait_for_timeout(500)
     rdurs = [rp.evaluate(DUR, c.lstrip(".")) for c in TRN]
@@ -3850,23 +3926,23 @@ def test_motion(browser, base):
           all(ms(d) <= 1 for d in rdurs), " / ".join(rdurs))
     watch(rp, "#main > .view")
     rp.evaluate("() => { location.hash = '#/world' }")
-    ra = rp.evaluate(ANIM, "#main > .view")
     rp.wait_for_timeout(700)
     r = stop(rp)
     # 反向钉：ANIM 会一路轮满 1.2 秒，正常模式下这里至少抓到一条；
     # 减弱动态效果下必须一条都没有——这才叫"关了"，而不是"关了但还在滑"。
-    check("减弱动态效果下：换页没有建立任何过渡（轮满 1.2 秒一条都没抓到）",
-          not ra["anim"], json.dumps({"抓到": ra["anim"], "轮询次数": ra["tries"]}))
+    check("减弱动态效果下：换页没有建立任何过渡（类变那一刻也没有条目）",
+          not r["anims"], json.dumps(r["anims"][:4]))
     check("减弱动态效果下：换页这一路没有任何一帧是不可见的",
           r["ops"] and all(o == 1 for o in r["ops"]), "采样 %s" % r["ops"][:8])
+    settle_motion(rp)
     check("减弱动态效果下：换到的还是同一块内容（世界页区域卡照常出来）",
           rp.evaluate("() => document.querySelectorAll('#main .zcard').length") > 0, "有卡")
     rp.goto(APP_BASE + "/#/dungeons", wait_until="networkidle")
+    settle_motion(rp)   # 换 hash 走的是路由过渡，等它结束再读
     rp.wait_for_selector("[data-d]", timeout=20000)
     rp.wait_for_timeout(400)
     watch(rp, ".drawer-clip")
     rp.click("[data-d]")
-    rad = rp.evaluate(ANIM, ".drawer-clip")
     first = rp.evaluate("() => Math.round(document.querySelector('.drawer-clip')"
                         ".getBoundingClientRect().height)")
     rp.wait_for_timeout(400)
@@ -3875,9 +3951,9 @@ def test_motion(browser, base):
     natural = rp.evaluate("() => Math.round(document.querySelector('.drawer-clip > .wf-in')"
                           ".getBoundingClientRect().height)")
     check("减弱动态效果下：抽屉一点就开到底（没建立过渡、也没有半截高度），内容照常看得见",
-          not rad["anim"] and natural > 0 and first >= natural - 3,
-          json.dumps({"过渡": rad["anim"], "首帧高度": first, "内容自然高度": natural}))
-    rp.screenshot(path=os.path.join(SHOT_DIR, "motion-reduced-副本抽屉.png"))
+          not r["anims"] and natural > 0 and first >= natural - 3,
+          json.dumps({"过渡": r["anims"], "首帧高度": first, "内容自然高度": natural}))
+    snap(rp, path=os.path.join(SHOT_DIR, "motion-reduced-副本抽屉.png"))
     check("这一节没引出脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     ctx2.close()
 
@@ -3894,6 +3970,7 @@ def test_prof_tiers(browser, base):
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     page.goto(APP_BASE + "/#/professions", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1500)
     page.evaluate("() => { const b=[...document.querySelectorAll('.pick')]"
                   "  .find(x => x.innerText.indexOf('钓鱼') >= 0); if (b) b.click(); }")
@@ -3928,7 +4005,7 @@ def test_prof_tiers(browser, base):
     check("草药学仍走采集点那五列（分段开关没有误伤别的页）",
           hb["ths"] == [u"图标", u"草药点", u"可得", u"最多区域", u"技能"] and hb["first"] != "",
           json.dumps(hb, ensure_ascii=False)[:140])
-    page.screenshot(path=os.path.join(SHOT_DIR, "app-prof-fishing-tiers.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "app-prof-fishing-tiers.png"))
     ctx.close()
 
 
@@ -3948,6 +4025,7 @@ def test_pets(browser, base):
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     page.goto(APP_BASE + "/#/pets", wait_until="networkidle")
+    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(900)
     h1 = page.evaluate("() => [...document.querySelectorAll('h1')].map(x => x.innerText.trim())")
     check("这一页只有一个 H1 且标题写的是家族与技能",
@@ -4031,7 +4109,7 @@ def test_pets(browser, base):
     sent = [w for w in (u"造成", u"点伤害", u"使你的") if w in body]
     check("页面上没有成句的技能描述（插件的 dcn/den 一条没取）", not sent, "出现 %s" % sent)
     shot = os.path.join(SHOT_DIR, "pets-families.png")
-    page.screenshot(path=shot, full_page=True)
+    snap(page, path=shot, full_page=True)
     check("整页截图落盘", os.path.exists(shot), shot)
     ctx.close()
 
