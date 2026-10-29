@@ -1,6 +1,6 @@
 {
- "head": "8662b67666eb02705d48739328cefa35e30d81a7",
- "fingerprint": "e8d0c1ec09f4825ab025403fad1ae45b3b9b9e5bedd302aaeb04b313e99d7af0",
+ "head": "d4920cea5e98f9d19e0aa22e6c0fb72fd5b88a69",
+ "fingerprint": "7ebf9aa7c79c6955481a74db2d2c39430ff18c26b89572591d70c4533be8d0c7",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 5408,
-   "mtimeNs": 1793254250373672787
+   "bytes": 5462,
+   "mtimeNs": 1793256524885984245
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 608968,
-   "mtimeNs": 1793253876946718779
+   "bytes": 609847,
+   "mtimeNs": 1793256541390838552
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -1599,6 +1599,11 @@
    "mtimeNs": 1793110398573370579
   },
   {
+   "path": "wow-forever-web/docs/QODER-全职业3D图集状态复核-2026-10-29.md",
+   "bytes": 2071,
+   "mtimeNs": 1793256510669689339
+  },
+  {
    "path": "wow-forever-web/docs/QODER-全职业3D导出任务书-2026-10-28.md",
    "bytes": 9121,
    "mtimeNs": 1793200272962429464
@@ -1877,6 +1882,11 @@
    "path": "wow-forever-web/docs/VERIFY-全职业3D接入准备-2026-10-28.md",
    "bytes": 4459,
    "mtimeNs": 1793189687396964694
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-全职业3D重导包初审-2026-10-29.md",
+   "bytes": 2790,
+   "mtimeNs": 1793256477564084346
   },
   {
    "path": "wow-forever-web/docs/VERIFY-公众号成稿发布边界-2026-10-27.md",
