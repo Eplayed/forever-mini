@@ -819,6 +819,77 @@ def test_world_pins(browser, base):
     check("「先挑区域」那行标题按站主要求撤掉了", not now["head"],
           "页面上还有" if now["head"] else "已无")
 
+    # ---- S3（2026-10-29）：图例即筛选 + 点位分级 ----
+    # 这一节存在的直接原因：第一版我把 @click 只挂在「全部」那颗上，类别芯片点了
+    # aria-pressed 不动、图上一颗不少——构建和上面所有旧断言全绿，只有真点一下才暴露。
+    # 所以这里必须"点一次、再量一次"，且 click 与读结果分开两次调用（Vue 更新是异步的）。
+    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
+    page.wait_for_timeout(2000)
+    lg = page.evaluate("""() => {
+      const bs = [...document.querySelectorAll('.zband')];
+      const i = bs.findIndex(b => b.querySelectorAll('.zlg').length > 1);
+      if (i < 0) return { none: true };
+      const b0 = bs[i];
+      const chip = b0.querySelector('[data-lg="rare"]');
+      const kinds = (el) => [...new Set([...el.querySelectorAll('.zdot')].map(d => d.dataset.kind))].sort();
+      const num = (el) => parseInt((el.textContent || '').replace(/\\D/g, ''), 10) || 0;
+      return { idx: i, dots: b0.querySelectorAll('.zdot').length,
+               rows: b0.querySelectorAll('.zrow').length,
+               chips: b0.querySelectorAll('.zlg').length,
+               kinds: kinds(b0), wantRare: chip ? num(chip) : -1,
+               pressed: chip ? chip.getAttribute('aria-pressed') : null,
+               src: (b0.querySelector('.zcanvas img') || {}).getAttribute
+                 ? b0.querySelector('.zcanvas img').getAttribute('src') : '',
+               t1: [...b0.querySelectorAll('.zdot.t1 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
+               t2: [...b0.querySelectorAll('.zdot.t2 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
+               t3: [...b0.querySelectorAll('.zdot.t3 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
+               hit: (b0.querySelector('.zdot.t3') || {}).getBoundingClientRect
+                 ? Math.round(b0.querySelector('.zdot.t3').getBoundingClientRect().height) : 0,
+               over: document.documentElement.scrollWidth - window.innerWidth };
+    }""")
+    check("S3 区域卡上混标多类时出图例（芯片数 = 类别数 + 全部）",
+          not lg.get("none") and lg["chips"] == len(lg["kinds"]) + 1,
+          "%d 颗芯片 / %d 类 %s" % (lg.get("chips", 0), len(lg.get("kinds", [])), lg.get("kinds")))
+    check("S3 桌面 1440 加了图例这一行也不横溢", lg.get("over", 99) <= 1, "%s" % lg.get("over"))
+    # 只比"这一屏真出现的档"：世界页区域卡只有书与稀有（t3 与 t2），拿一个不存在的档
+    # 当 0 去比会造出一条永远为假的断言——第一版就是这么红的，是判据错不是功能坏。
+    _sz = lambda a: (min(a) if a else None)
+    _tiers = [x for x in (_sz(lg.get("t1")), _sz(lg.get("t2")), _sz(lg.get("t3"))) if x is not None]
+    check("S3 分级只改视觉不改点击区（小那颗仍有 20px 命中框）",
+          len(_tiers) == len(set(_tiers)) and lg.get("hit", 0) >= 20,
+          "这一屏出现的档从大到小 %s / 最小那颗的点击区 %spx" % (_tiers, lg.get("hit")))
+    band = page.locator(".zband").nth(lg["idx"])
+    band.locator('[data-lg="rare"]').click()
+    page.wait_for_timeout(700)
+    f = page.evaluate("""(i) => {
+      const b0 = [...document.querySelectorAll('.zband')][i];
+      const chip = b0.querySelector('[data-lg="rare"]');
+      return { dots: b0.querySelectorAll('.zdot').length,
+               rows: b0.querySelectorAll('.zrow').length,
+               kinds: [...new Set([...b0.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
+               pressed: [...b0.querySelectorAll('.zlg')].map(c => c.getAttribute('aria-pressed')),
+               src: (b0.querySelector('.zcanvas img') || {}).getAttribute
+                 ? b0.querySelector('.zcanvas img').getAttribute('src') : '' };
+    }""", lg["idx"])
+    check("S3 点「稀有」真的只剩稀有（颗数 = 芯片上写的数）",
+          f["kinds"] == ["rare"] and f["dots"] == lg["wantRare"],
+          "图上 %d 颗 %s / 芯片写 %d（点前 %d 颗 %s）" % (f["dots"], f["kinds"], lg["wantRare"], lg["dots"], lg["kinds"]))
+    check("S3 筛选只筛图上的点，右边列表一条不藏（选了看不见的红线）",
+          f["rows"] == lg["rows"], "筛选后列表 %d 行 / 筛选前 %d 行" % (f["rows"], lg["rows"]))
+    check("S3 选中态跟着走：稀有那颗 pressed=true、全部 pressed=false",
+          f["pressed"][0] == "false" and "true" in f["pressed"][1:], "%s" % f["pressed"])
+    check("S3 筛选不许把底图换掉（底图按全量点选，参照物不能一动就跳）",
+          f["src"] == lg["src"] and bool(f["src"]), "%s -> %s" % (lg["src"][-28:], f["src"][-28:]))
+    band.locator('[data-lg="rare"]').click()
+    page.wait_for_timeout(700)
+    back = page.evaluate("""(i) => { const b0 = [...document.querySelectorAll('.zband')][i];
+      return { dots: b0.querySelectorAll('.zdot').length,
+               kinds: [...new Set([...b0.querySelectorAll('.zdot')].map(d => d.dataset.kind))].length }; }""",
+                         lg["idx"])
+    check("S3 再点同一颗回到「全部」（不是一次性开关）",
+          back["dots"] == lg["dots"] and back["kinds"] == len(lg["kinds"]),
+          "回到 %d 颗 / %d 类（原本 %d 颗 / %d 类）" % (back["dots"], back["kinds"], lg["dots"], len(lg["kinds"])))
+
     mctx = browser.new_context(viewport={"width": 375, "height": 812})
     mp = mctx.new_page()
     for t in ("zones", "books", "bag"):

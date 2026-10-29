@@ -413,6 +413,32 @@ nav.main a.nl:has(.nb) { padding-right:10px }
 .zdot.on .zdot-n { background:var(--pc); border-color:var(--pc); color:var(--ink-on-bright) }
 .zdot:focus-visible { outline:2px solid var(--azure); outline-offset:1px; opacity:1; filter:none }
 
+/* S3 分级（2026-10-29）：一屏里"谁是主角"要看得出来。只调视觉权重，
+   **20px 那颗的点击区一条都不许缩**——手机上点不中比主次不分更糟。
+   t1 首领/入口：更实、更大一圈、盖在别的点之上；t3 书/营地：更小更淡，退到背景层。 */
+.zdot.t1 { opacity:.95; z-index:2 }
+.zdot.t1 .zdot-n { width:20px; height:20px; line-height:18px; font-size:11px; border-width:1.5px }
+.zdot.t2 { opacity:.6 }
+.zdot.t3 { opacity:.38 }
+.zdot.t3 .zdot-n { width:14px; height:14px; line-height:12px; font-size:9px }
+.zdot.t3:hover, .zdot.t3.on { opacity:1 }
+
+/* 图例即筛选（S3）：一颗芯片筛一类，再点回"全部"。颜色沿用点位那一套 --pc，
+   玩家不用另记一份图例色；宽度靠 flex-wrap 换行，不许把窄屏撑出横向滚动。 */
+.zlegend { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 var(--s2) }
+.zlg { display:inline-flex; align-items:center; gap:5px; min-height:28px; padding:3px 10px;
+  border:1px solid var(--line); border-radius:999px; background:var(--panel-2);
+  color:var(--txt-muted); font-size:12px; font-weight:600; cursor:pointer }
+.zlg i { width:8px; height:8px; border-radius:50%; background:var(--pc, var(--txt-muted)); flex:none }
+.zlg b { font-weight:700; color:var(--txt-dim) }
+.zlg:hover { border-color:var(--line-2); color:var(--txt) }
+.zlg.on { border-color:var(--pc, var(--gold)); color:var(--txt); background:rgba(200,163,92,.1) }
+.zlg.k-book { --pc:var(--pin-book) } .zlg.k-camp { --pc:var(--pin-camp) }
+.zlg.k-entry { --pc:var(--pin-entry) } .zlg.k-boss { --pc:var(--pin-boss) }
+.zlg.k-rare { --pc:var(--pin-rare) }
+.zlg:focus-visible { outline:2px solid var(--azure); outline-offset:1px }
+@media (max-width:720px) { .zlg { min-height:44px; padding:8px 14px } }
+
 /* 浮层：位置与朝向由组件按点位百分比算（见 popStyle），这里只管长相。
    pointer-events:none 是故意的——浮层会盖住它自己那颗点位，
    能接收指针的话鼠标一移上去就触发 leave、浮层闪断。代价是里面的字不能选、不能滚，
