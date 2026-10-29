@@ -13,7 +13,11 @@
       <button v-for="x in SAMPLES" :key="x[0]" type="button" class="gsx"
               :title="x[1]" @click="pick(x[0])">{{ x[0] }}</button>
     </p>
-    <div id="gres" ref="list" class="gres" :hidden="!open">
+    <!-- 结果层从 :hidden 改成 v-show + <Transition name="pop">：hidden 属性是硬开硬关，
+         过渡挂不上去。这一层是 position:absolute + 内部滚动，不能套展开收起那套 grid，
+         所以只淡入并轻抬 4px（规格见 docs/PLAN-网页交互动效-2026-10-29.md）。 -->
+    <Transition name="pop">
+    <div v-show="open" ref="list" class="gres" id="gres">
       <p v-if="busy" class="gsl">正在读索引…</p>
       <p v-else-if="empty" class="gsl">
         索引里没有叫「{{ q.trim() }}」的条目。本站按官方中文原名收录，别名与英文请进对应页面搜；也不搜攻略说法。
@@ -35,6 +39,7 @@
         <p v-if="groups.length" class="gsl dim mono">命中 {{ hitTotal }} 条，这里先列 {{ shownCount }} 条</p>
       </template>
     </div>
+    </Transition>
   </div>
 </template>
 

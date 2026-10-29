@@ -106,8 +106,8 @@
          属性与卖价按"Beta 实测掉落 → 社区整理稿 → 无限测试版客户端解包（兜底）"取值，
          徽标写明这一条出自哪一份；出处（哪座本、哪个首领）只有实测掉落记录有；
          几份都没有的就不显示那一段，不摆占位。 -->
-    <div v-if="sel" class="idmask" @click="close"></div>
-    <aside v-if="sel" class="idrawer" role="dialog" aria-modal="true" :aria-label="sel.name + ' 详情'">
+    <Transition name="idf"><div v-if="sel" class="idmask" @click="close"></div></Transition>
+    <Transition name="idr"><aside v-if="sel" class="idrawer" role="dialog" aria-modal="true" :aria-label="sel.name + ' 详情'">
       <div class="idh">
         <IconCell :icon-key="sel.iconKey || ''" :seed="sel.id" :cn="sel.name" />
         <div class="idt">
@@ -143,7 +143,7 @@
       </template>
       <!-- 这段说明由合并脚本写在数据里（meta.pageNote），页面不另抄一份，避免改了源忘了改文案 -->
       <p v-if="itd && itd.meta" class="dim idnote">{{ itd.meta.pageNote }}</p>
-    </aside>
+    </aside></Transition>
   </template>
 </template>
 
@@ -155,6 +155,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
+import { scrollToEl } from '../lib/motion.js';
 import IconCell from '../components/IconCell.vue';
 import HlText from '../components/HlText.vue';
 
@@ -314,7 +315,7 @@ watch(pages, (n) => { if (page.value > n) page.value = n; });
 function go(p) {
   page.value = Math.min(Math.max(1, p), pages.value);
   const el = tableCard.value;
-  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start' });
+  scrollToEl(el);   /* 翻页后把表头送回眼前：玩家点的，滑过去 */
 }
 function reset() {
   st.value = ''; cat.value = ''; mat.value = ''; slot.value = '';
@@ -386,10 +387,11 @@ function typeText(x) {
 .row{cursor:pointer}
 .row:focus-visible{outline:1px solid var(--gold);outline-offset:-1px}
 .idmask{position:fixed;inset:0;background:rgba(4,7,12,.62);z-index:70}
+/* 进/退场改走 motion.css 的 <Transition>（idr / idf）：原来这里只有 @keyframes 管进场，
+   关的时候是"消失"不是"退回去"。位移也收到 16px——原来 24px 超了本站"位移 ≤20px"那条线。 */
 .idrawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);z-index:71;
   background:var(--sunk);border-left:1px solid var(--gold-line,rgba(200,163,92,.3));
-  overflow-y:auto;padding:18px 18px 24px;animation:idr .22s ease both}
-@keyframes idr{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+  overflow-y:auto;padding:18px 18px 24px}
 .idh{display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .idt{flex:1;min-width:0}
 .idt .nm{font-weight:700;font-size:15.5px}

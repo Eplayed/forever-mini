@@ -28,6 +28,11 @@
       </div>
     </div>
 
+    <!-- 面板切换动效（2026-10-29）：四个面板整块换，所以给它们一个按 tab 取 key 的壳，
+         切标签时旧面板淡掉、新面板淡入并抬 4px（motion.css 的 swap）。
+         壳按 tab 重挂不会重挂数据——这一页的数在 setup 里算好，换的只是这一段 DOM。 -->
+    <Transition name="swap" mode="out-in">
+    <div class="wswap" :key="tab">
     <!-- 面板一：区域 -->
     <template v-if="tab === 'zones'">
       <template v-if="newZoneRows.length">
@@ -209,6 +214,8 @@
         </template>
       </template>
     </template>
+    </div>
+    </Transition>
   </template>
 </template>
 

@@ -103,7 +103,10 @@
             </svg>
             <div v-for="r in gridRows" :key="r.row" class="lge-rowwrap">
               <span class="lge-rail mono">第{{ r.row + 1 }}排</span>
-              <div class="lge-cells">
+              <!-- :key="tree" 让换树时这一排格子重挂一次，好把已有的 lgeFade 入场重放一遍。
+                   原来这个动画只认"元素进 DOM"，而换树走的是同一批格子就地更新，
+                   所以点了标签画面其实不动——这一句才是把切换动效接上，不是新增长动画。 -->
+              <div class="lge-cells" :key="tree">
                 <template v-for="cell in r.cells" :key="cell.k">
                   <div v-if="cell.s.empty" class="lslot none" aria-hidden="true"></div>
                   <div v-else-if="cell.s.unknown" class="lslot unk" :data-node="cell.s.perk">
@@ -217,7 +220,11 @@
             <span class="dim mono">{{ blk.rows.length }}<template v-if="blk.rows.length !== blk.c.items.length"> / {{ blk.c.items.length }}</template> 项 · 已勾 {{ blk.done }} · 合计 {{ blk.sum }} 点</span>
             <i class="lchcaret" aria-hidden="true"></i>
           </button>
-          <div v-show="isOn(blk.c.id)" class="lchbody">
+          <!-- 折叠：外层在展开这一刻变成"只有一行、行高从 0 长满"的容器（motion.css 的 unfold），
+               所以子内容要有一个单独的包裹层。原来这里挂的是 animation，但元素是 v-show，
+               只有页面加载那一次会播——折叠与展开其实一动不动，这轮才是真的接上。 -->
+          <Transition name="unfold">
+            <div v-show="isOn(blk.c.id)" class="lchbody"><div class="wf-in">
             <div v-if="(blk.c.subcategories || []).length" class="chips">
               <template v-for="s in blk.c.subcategories" :key="s">
                 <span v-if="chipCount(blk.c, s)" class="chipc">{{ s }}<b class="mono">{{ chipCount(blk.c, s) }}</b></span>
@@ -270,7 +277,8 @@
                 </tbody>
               </table>
             </div>
-          </div>
+            </div></div>
+          </Transition>
         </div>
       </template>
       <div v-if="!shownChallenges" class="card">

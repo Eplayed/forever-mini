@@ -100,6 +100,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { load } from '../lib/data.js';
 import { byDate } from '../lib/fmt.js';
+import { scrollToEl } from '../lib/motion.js';
 import HlText from '../components/HlText.vue';
 import IconCell from '../components/IconCell.vue';
 
@@ -158,8 +159,8 @@ function scrollTok1() {
   if (k1 && k1.scrollIntoView) k1.scrollIntoView({ block: 'start' });
 }
 function jump(id) {
-  const n = document.getElementById(id);
-  if (n && n.scrollIntoView) n.scrollIntoView({ block: 'start' });
+  // 「跳 ↓」是玩家主动点的，滑过去比硬切好认；系统开了"减弱动态效果"就当场到位（lib/motion.js）
+  scrollToEl(document.getElementById(id));
 }
 
 const chItems = computed(() => (d.value && d.value.ch.items) || []);

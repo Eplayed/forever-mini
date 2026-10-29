@@ -216,6 +216,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
 import { fnv } from '../lib/glyph.js';
+import { scrollToEl } from '../lib/motion.js';
 import IconCell from '../components/IconCell.vue';
 import PinMap from '../components/PinMap.vue';
 
@@ -402,6 +403,6 @@ const bossRows = computed(() => bosses.value.map((b) => {
 
 function jump(id) {
   const node = document.getElementById(id);
-  if (node && node.scrollIntoView) node.scrollIntoView();
+  scrollToEl(node);
 }
 </script>

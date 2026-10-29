@@ -107,7 +107,10 @@
       </div>
       <div v-else class="empty">这个职业还没有天赋条目。</div>
 
-      <div v-show="cmpOpen" class="cmpbox" id="cmpbox">
+      <!-- 展开收起动效（motion.css 的 unfold）：外层只做"行长不开"，所以它不能带
+           border/padding——否则关掉以后会留下一条 1px 的金线当尾巴。长相都还在 .cmpbox 上。 -->
+      <Transition name="unfold">
+        <div v-show="cmpOpen" class="cmp-clip"><div class="cmpbox wf-in" id="cmpbox">
         <p v-if="cmpLoading" class="dim">对照在载入…</p>
         <template v-else-if="cmpRows.length">
           <h3>与经典旧世逐条对照 · {{ cmpRows.length }} 条</h3>
@@ -121,7 +124,8 @@
             </div>
           </div>
         </template>
-      </div>
+        </div></div>
+      </Transition>
 
       <div class="tfoot">
         <label class="dim">等级 <span class="mono" id="lvv">{{ lv }}</span></label>

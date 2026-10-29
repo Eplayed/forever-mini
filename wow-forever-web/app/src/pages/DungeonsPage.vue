@@ -88,7 +88,8 @@
             </div>
             <router-link class="dstretch" :to="{ path: '/dungeon', query: { d: c.x.id } }" :aria-label="'看「' + (c.x.nameCn || c.x.nameEn || '这座本') + '」这一座的整页'"></router-link>
             <button class="ghost wide" type="button" :data-d="c.x.id" @click="toggleDrawer(c.x.id)">{{ drawerOf(c.x.id) ? '收起' : '速览首领与掉落' }}</button>
-            <div v-show="drawerOf(c.x.id)" class="drawer" :id="'d-' + c.x.id">
+            <Transition name="unfold">
+              <div v-show="drawerOf(c.x.id)" class="drawer-clip" :id="'d-' + c.x.id"><div class="drawer wf-in">
               <div v-for="(t, ti) in c.conf" :key="ti" class="conf">{{ t }}</div>
               <div v-if="c.noQueue" class="note">客户端的队伍查找器里还没有这座本，所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>
               <h3>首领与掉落</h3>
@@ -112,7 +113,8 @@
               </ul>
               <p v-else class="dim">这座本还没有首领名单。</p>
               <router-link class="cta-cut" :to="{ path: '/dungeon', query: { d: c.x.id } }">看这一座的整页 →</router-link>
-            </div>
+              </div></div>
+            </Transition>
           </div>
         </div>
       </template>
@@ -153,7 +155,8 @@
           </div>
           <router-link class="dstretch" :to="{ path: '/dungeon', query: { d: c.x.id } }" :aria-label="'看「' + (c.x.nameCn || c.x.nameEn || '这座本') + '」这一座的整页'"></router-link>
           <button class="ghost wide" type="button" :data-d="c.x.id" @click="toggleDrawer(c.x.id)">{{ drawerOf(c.x.id) ? '收起' : '速览首领与掉落' }}</button>
-          <div v-show="drawerOf(c.x.id)" class="drawer" :id="'d-' + c.x.id">
+          <Transition name="unfold">
+            <div v-show="drawerOf(c.x.id)" class="drawer-clip" :id="'d-' + c.x.id"><div class="drawer wf-in">
             <div v-for="(t, ti) in c.conf" :key="ti" class="conf">{{ t }}</div>
             <div v-if="c.noQueue" class="note">客户端的队伍查找器里还没有这座本，所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>
             <h3>首领与掉落</h3>
@@ -177,7 +180,8 @@
             </ul>
             <p v-else class="dim">这座本还没有首领名单。</p>
             <router-link class="cta-cut" :to="{ path: '/dungeon', query: { d: c.x.id } }">看这一座的整页 →</router-link>
-          </div>
+            </div></div>
+          </Transition>
         </div>
       </div>
     </template>

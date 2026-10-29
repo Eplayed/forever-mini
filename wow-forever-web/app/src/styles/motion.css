@@ -1,0 +1,93 @@
+/* motion.css — 交互动效层（2026-10-29 站主要求：页面跳转、展开收起、卡片切换加动效）。
+   样式第四层，只管"状态之间怎么过渡"，不管长相；规格、取舍与验收清单见
+   docs/PLAN-网页交互动效-2026-10-29.md。整轮要撤回：删这个文件与 main.js 里那一行 import，
+   模板里的 <Transition> 外壳留着也不动画面。
+   三条口径：只动 opacity / transform / grid-template-rows；单次播放（页面静止时没东西在自己动）；
+   reduced-motion 一律归零且内容照旧可见。位移 ≤20px、时长 ≤240ms。 */
+
+/* —— A. 路由切换（22 条路由，App.vue 一处）——
+   旧页只淡掉、不做位移：离场拖东西没人看，长页面整层 transform 还要重绘。
+   mode="out-in" 保证新旧页不重叠，重页（天赋、配装挂 3D）不会同时挂两份。 */
+.page-enter-active {
+  transition: opacity var(--dur-panel) var(--ease-out), transform var(--dur-panel) var(--ease-out);
+}
+.page-leave-active { transition: opacity var(--dur-press) linear }
+.page-enter-from { opacity: 0; transform: translateY(6px) }
+.page-leave-to { opacity: 0 }
+
+/* —— C. 面板/卡片切换（世界页四面板、传承页三棵树）——
+   幅度比路由再小一档：这些切换一屏内看得见周围的静止内容，动多了像整页在晃。 */
+.swap-enter-active { transition: opacity var(--dur-panel) var(--ease-out), transform var(--dur-panel) var(--ease-out) }
+.swap-leave-active { transition: opacity var(--dur-press) linear }
+.swap-enter-from { opacity: 0; transform: translateY(4px) }
+.swap-leave-to { opacity: 0 }
+
+/* —— B. 展开收起 ——
+   外层在这一瞬间变成"只有一行、行高可以从 0 长满"的容器：浏览器能插值 fr，
+   不能插值 auto，所以不用 JS 量高度、也没有 max-height 那种猜出来的数。
+   被包的元素自己不需要常驻 grid——过渡类一撤，它还是原来的块级盒子，高度都是内容高，接得上。
+   内层那一个包裹元素（.wf-in）必须有 min-height:0，否则 0fr 那行会被内容顶住长不到 0。 */
+.unfold-enter-active, .unfold-leave-active {
+  display: grid; grid-template-rows: 1fr; overflow: hidden;
+  transition: grid-template-rows var(--dur-2) var(--ease-out), opacity var(--dur-1) linear;
+}
+.unfold-enter-from, .unfold-leave-to { grid-template-rows: 0fr; opacity: 0 }
+.unfold-enter-active > .wf-in, .unfold-leave-active > .wf-in { min-height: 0 }
+
+/* 搜索结果是 position:absolute + 内部滚动的浮层，套 grid 会和它的 max-height 打架，
+   所以这一处只淡入并轻抬 4px，不做高度动画。 */
+.pop-enter-active { transition: opacity var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out) }
+.pop-leave-active { transition: opacity var(--dur-press) linear }
+.pop-enter-from { opacity: 0; transform: translateY(-4px) }
+.pop-leave-to { opacity: 0 }
+
+/* 物品详情抽屉：原来是 @keyframes 只写进场、退场直接消失。
+   现在进 200ms 滑进来、退 140ms 滑回去；位移收到 16px（原来 24px 超了本站 20px 那条线）。
+   宽度不动，所以门禁量"移动端整宽"那条读到的还是同一个值。 */
+.idr-enter-active { transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out) }
+.idr-leave-active { transition: transform var(--dur-1) var(--ease-out), opacity var(--dur-1) linear }
+.idr-enter-from, .idr-leave-to { transform: translateX(16px); opacity: 0 }
+.idf-enter-active, .idf-leave-active { transition: opacity var(--dur-1) linear }
+.idf-enter-from, .idf-leave-to { opacity: 0 }
+/* 退场那 140ms 里遮罩还盖着全屏：不给它指针事件，否则连点两下抽屉时第一下关掉、
+   第二下落在还在退场的遮罩上，等于什么都没发生 */
+.idf-leave-active, .idr-leave-active { pointer-events: none }
+
+/* —— C之二. 长在中间那一排的"换内容" ——
+   职业页三系卡那种位置不适合 out-in 整块换：那会先把它摘掉再挂回来，下面那张表跟着跳两次。
+   改成"重挂时播一次入场"（模板里配 :key="职业 id"），和传承页格子那排同一个做法。 */
+@keyframes mIn { from { opacity: 0; transform: translateY(4px) } to { opacity: 1; transform: none } }
+.spec3 { animation: mIn var(--dur-panel) var(--ease-out) both }
+
+/* —— D. 按下去的手感 ——
+   全站按钮本来就有 `button:hover{transform:translateY(-1px)}` 与 transform 过渡，
+   这里只补按住那一帧：悬停 -1px、按下 +1px，一来一回 2px 的行程。
+   :active 必须写在 :hover 那批之后（同权重，后写的赢）——这个坑在 S3 分级点位上刚踩过：
+   .zdot.t2{opacity} 把 .zdot:hover{opacity} 盖掉，悬停不实体了。 */
+.pick:active, .kchip:active, .lge-tab:active, .pztab:active, .zlg:active,
+.ghost:active, .cta:active, .lchhead:active, .gsx:active, .ttabs button:active {
+  transform: translateY(1px)
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 归零但不是"关掉就看不见"：离场/入场都当场到位，展开后内容照旧是展开的。 */
+  .page-enter-active, .page-leave-active,
+  .swap-enter-active, .swap-leave-active,
+  .unfold-enter-active, .unfold-leave-active,
+  .pop-enter-active, .pop-leave-active,
+  .idr-enter-active, .idr-leave-active, .idf-enter-active, .idf-leave-active {
+    transition: none
+  }
+  /* 归零的口径是"没有任何一帧内容是不可见的"：入场与退场的中间值一起改成终态，
+     不是把动画关了顺手把东西也关了。 */
+  .page-enter-from, .page-leave-to,
+  .swap-enter-from, .swap-leave-to,
+  .pop-enter-from, .pop-leave-to,
+  .idr-enter-from, .idr-leave-to,
+  .idf-enter-from, .idf-leave-to { opacity: 1; transform: none }
+  .unfold-enter-from, .unfold-leave-to { grid-template-rows: 1fr; opacity: 1 }
+  .pick:active, .kchip:active, .lge-tab:active, .pztab:active, .zlg:active,
+  .ghost:active, .cta:active, .lchhead:active, .gsx:active, .ttabs button:active { transform: none }
+  /* 一次性入场也关掉，但内容照旧是终态（both 会把 opacity 停在 0，所以这里显式写回 1） */
+  .spec3 { animation: none; opacity: 1; transform: none }
+}

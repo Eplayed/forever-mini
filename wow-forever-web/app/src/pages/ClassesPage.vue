@@ -39,8 +39,12 @@
     </div>
 
     <!-- 三系卡：点一下把右边的技能变化收到那一系，再点一次回到三系都列。
-         系名用官方定名，另一来源的叫法走红框悬停（与天赋页同一套符号）。 -->
-    <section v-if="trees.length" class="spec3" aria-label="这一职业的三系专精">
+         系名用官方定名，另一来源的叫法走红框悬停（与天赋页同一套符号）。
+         2026-10-29：这一排是"换一个职业"之后最先被读的东西，但它跟着 query 就地更新、
+         画面一动不动。这里给按职业 id 取 key + 一次性入场（motion.css 的 mIn），
+         而**不是**套 <Transition mode="out-in">：这一排在页面中间，out-in 会先把它摘掉
+         再挂回来，下面那张技能表跟着跳两次——比原来更难看。 -->
+    <section v-if="trees.length" class="spec3" :key="c.id" aria-label="这一职业的三系专精">
       <button v-for="(t, ti) in trees" :key="t.id" type="button" class="spec plate" :class="{ on: sel === t.nameCn }"
               :data-s="t.nameCn" :aria-pressed="sel === t.nameCn ? 'true' : 'false'" :title="altTip(t)"
               @click="pickSpec(t.nameCn)">

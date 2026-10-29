@@ -1609,7 +1609,9 @@ tbody tr:last-child td{border-bottom:none}
 .dcard2 .dbn2-e{color:var(--txt-banner)}
 .dstretch{position:absolute;inset:0;z-index:1;border-radius:var(--r-card)}
 .dstretch:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
-.dcard2>button,.dcard2>.drawer{position:relative;z-index:2}
+/* 抽屉那层现在是 .drawer-clip > .drawer 两行（clip 负责展开收起时"长高"，见 motion.css），
+   所以压住 .dstretch  stretched 链接的 z-index 要跟着给到 clip */
+.dcard2>button,.dcard2>.drawer,.dcard2>.drawer-clip{position:relative;z-index:2}
 /* 详情页：页首那条本的载入图压在暗罩下面，标题走设计稿的展示字 */
 .dunh{margin-top:var(--s4)}
 .dunh.noart{background:linear-gradient(160deg,var(--panel-2),var(--bg))}

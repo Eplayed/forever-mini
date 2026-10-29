@@ -144,6 +144,7 @@ import { computed, h, nextTick, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { assetUrl, load } from '../lib/data.js';
 import { iconUrl, raceStyle } from '../lib/glyph.js';
+import { scrollToEl } from '../lib/motion.js';
 import IconCell from '../components/IconCell.vue';
 import ClassTile from '../components/ClassTile.vue';
 
@@ -261,7 +262,7 @@ function pickRace(key) {
   router.replace({ path: '/races', query: { r: key } });
   nextTick(() => {
     const t = rdetEl.value;
-    if (t && t.scrollIntoView) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToEl(t);
   });
 }
 function pickCls(id) { fc.value = fc.value === id ? '' : id; }

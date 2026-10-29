@@ -53,7 +53,10 @@ describe('SiteSearch 全站搜索框', () => {
 
   it('没输入前结果区是隐藏的，不占屏', () => {
     const w = mount(SiteSearch, { props: { total: 4202 }, ...ROUTER });
-    expect(w.find('#gres').attributes('hidden')).toBeDefined();
+    // 判据跟着实现改过一次（2026-10-29）：结果层原来是 hidden 属性，为了挂上淡入过渡
+    // 换成 v-show（display:none）。"没输入前看不见、不占屏"这条要求没变，变的只是机制。
+    expect(w.find('#gres').attributes('style')).toContain('display: none');
+    expect(w.find('input').attributes('aria-expanded')).toBe('false');
     expect(w.find('input').attributes('aria-label')).toContain('全站搜索');
     expect(w.find('input').attributes('placeholder')).toContain('4202');
     w.unmount();

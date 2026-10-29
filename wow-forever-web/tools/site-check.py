@@ -142,6 +142,22 @@ def check(name, ok, detail="", soft=False):
     print(tag + name + (("  — " + detail) if detail else ""))
 
 
+def settle_motion(page, timeout=12000):
+    """等 2026-10-29 那轮交互动效（app/src/styles/motion.css）把画面送进终态再取数。
+       为什么需要：面板切换用的是 mode="out-in"（旧面板先摘掉、新面板再挂），而这台 headless
+       Chrome 的动画时钟是饿着的——实测一条 220ms 的过渡要走 1.5–1.9 秒才结束。
+       于是原来那些"点完固定等 900ms 再量"的判据会量在"整块内容还没挂回来"的那一帧上，
+       报成"数量对不上 / 悬停没生效"。判据一条没改，改的是取数时机。"""
+    try:
+        page.wait_for_function(
+            "() => ![...document.querySelectorAll('#main *')].some(e => "
+            "/\\b(page|swap|unfold|pop|idr|idf)-(enter|leave)/.test(typeof e.className === 'string' ? e.className : ''))",
+            timeout=timeout)
+        return True
+    except Exception:
+        return False
+
+
 # 正文里出现脚本路径、原始文件名或未替换占位符，就是开发残留漏进了玩家视野。
 # 注意只拦**我们自己的**脚本路径：第三方域名里的 tools/（wago.tools/db2/…）是来源链接，
 # 红线要求客户端数据能点开看到是哪个站转述的，把它一起禁掉等于逼着页面藏来源。
@@ -1568,6 +1584,8 @@ def test_legacy_app(browser, base):
           "%s ／ %s" % (tr1["done"], tr1["heads"][0]))
     page.evaluate("() => document.querySelectorAll('#lch input[type=checkbox]').forEach(c=>{ if(c.checked) c.click(); })")
     page.wait_for_timeout(700)
+    settle_motion(page)   # 取消勾选会把挑战组整块收起，那是一段过渡；没等它结束就点锚点，
+                          # 平滑滚动的目标还在动，落点就成了 0（这台 headless 帧饿着，1.5 秒都嫌短）
 
     # ---- ⑤ 锚点走站内路由（首页那批死链就是栽在裸 #id 上），点一下真的滚 ----
     anch = page.evaluate("""() => [...document.querySelectorAll('.lge-anchor a')].map(a => ({
@@ -1583,10 +1601,15 @@ def test_legacy_app(browser, base):
     page.wait_for_timeout(300)
     anc = page.evaluate("""() => { const before = window.scrollY;
       document.querySelectorAll('.lge-anchor a')[2].click();
-      return new Promise((res) => setTimeout(() => {
-        const r = document.getElementById('lgr').getBoundingClientRect();
-        res({ before: before, after: window.scrollY, top: Math.round(r.top), inView: r.top < innerHeight && r.bottom > 0 });
-      }, 1200)); }""")
+      // 平滑滚动是"点下去之后自己走"的，量早了就是 scrollY 还没动（这台 headless 帧被冻住，
+      // 实测要 1.5 秒以上才到位）。改成等它落位，最长 6 秒——判据本身一个字没改。
+      return new Promise((res) => { const t0 = performance.now();
+        const t = setInterval(() => {
+          const r = document.getElementById('lgr').getBoundingClientRect();
+          if (window.scrollY > before || performance.now() - t0 > 6000) {
+            clearInterval(t);
+            res({ before: before, after: window.scrollY, top: Math.round(r.top),
+                  inView: r.top < innerHeight && r.bottom > 0 }); } }, 60); }); }""")
     check("点锚点真的滚到那一段（从页顶滚到奖励轨，目标进了视口）",
           anc["before"] <= 2 and anc["after"] > anc["before"] and anc["inView"],
           json.dumps(anc, ensure_ascii=False))
@@ -2923,10 +2946,12 @@ def test_app(browser, base):
             for t in ["books", "bag", "zones"]:      # 切一圈再回到区域，验证面板切换不残留
                 page.click('[data-t="%s"]' % t)
                 page.wait_for_timeout(900)
+                settle_motion(page)
             zc = page.evaluate("() => document.querySelectorAll('.zcard').length")
             check("新站区域卡数量与数据一致", zc == S["zones"], "%d 张（数据 %d）" % (zc, S["zones"]))
             page.click('[data-t="rares"]')
             page.wait_for_timeout(1400)
+            settle_motion(page)   # 上面那一圈刚把面板换掉，量点位前必须等它挂回来
             # ---- 10-18 站主：一区域一张图，稀有直接标在图上 ----
             # 原来这里只数 `.zmark` 的个数（每条稀有卡上一个点），换结构之后那个类已经没有了。
             # 新的判据要能抓住三件真会出错的事：点位与坐标对不上、没图的稀有被"猜"上图、
@@ -2989,6 +3014,12 @@ def test_app(browser, base):
             first = page.evaluate("() => document.querySelector('.zdot').dataset.r")
             page.hover(".zdot")
             page.wait_for_timeout(500)
+            settle_motion(page)
+            try:   # opacity 是从 .6 过渡到 1 的：量早了就是"悬停没生效"的假红
+                page.wait_for_function("() => { const d = document.querySelector('.zdot.on');"
+                                       "  return d && +getComputedStyle(d).opacity > 0.99; }", timeout=6000)
+            except Exception:
+                pass
             hov = page.evaluate("""() => { const d = document.querySelector('.zdot.on');
               const c = getComputedStyle(d); const p = document.querySelector('.zpop');
               const r = p && p.getBoundingClientRect();
@@ -3606,6 +3637,251 @@ def test_data_versions(browser, base):
 
 # 全跑一次 13 分钟，改一条新断言时等不起。SECTIONS 把顺序固定下来，--only 按名字挑着跑，
 # 用来做 30 秒探针；正式门禁仍然不带 --only。
+
+
+def test_motion(browser, base):
+    """交互动效（2026-10-29 站主："页面跳转或者是展开收起，卡片切换等动作加入动效"）。
+       这节盯的不是"有没有写 CSS"，而是"点下去到底动没动"：白放的选项比不放的选项更坏
+       （10-23 那轮抓过五处），动效同理——过渡类挂不上、或者挂了但算出来的时长是 0，
+       玩家看到的就是原来那一下硬切。
+       判据用 getAnimations()，不用"中间帧的高度"：首屏之后主线程还被图片与懒加载占着，
+       过渡的时间轴会被冻住（实测点下去 500ms 内高度一直停在 0fr），量高度会把
+       "真在动"误判成"没动"。getAnimations() 在过渡建立的那一刻就有条目，跟帧率无关。
+       ① 换页：淡出类与淡入类都出现过，out-in 保证同屏只有一个 .view；
+       ② 抽屉：过渡类 + 真有一条 grid-template-rows 过渡在跑 + 终态高度是内容的自然高度；
+       ③ 折叠：传承页那六组以前挂的是 animation，但元素是 v-show，只有页面加载那次会播——
+          "折叠/展开这两下有过渡"是本轮才有的事，反向钉得住；
+       ④ 面板切换：切完画面真的换成那一块（不是挂了个类就算）；
+       ⑤ 物品抽屉能退场（原来只有 @keyframes 管进场，关的时候是直接消失）；
+       ⑥ 减弱动态效果：同一批过渡类算出来的时长 <1ms，且 getAnimations() 里没有条目，
+          换页全程 opacity=1（关了动效不等于闪空白，也不等于还在滑）；
+       ⑦ 场景红线扫 motion.css 源码：不许 infinite、位移 ≤20px、时长 ≤240ms。
+       采样一律真 page.click()、观察器先挂再点：Vue 更新是异步的，点击与读结果挤在同一个
+       同步 evaluate 里只会量到点击前那一帧（10-15 踩过）。"""
+    print("\n[6f] 交互动效")
+    if not app_up(browser):
+        return
+    import re as _re
+
+    # —— ⑦ 源码红线：不起浏览器 ——
+    mcss = open(os.path.join(ROOT, "app", "src", "styles", "motion.css"), encoding="utf-8").read()
+    body = _re.sub(r"/\*.*?\*/", "", mcss, flags=_re.S)      # 注释里那句"不许 infinite"不算违规
+    check("motion.css 里没有循环动效（infinite）", "infinite" not in body,
+          "命中 %d 处" % body.count("infinite") if "infinite" in body else "零处")
+    shift = [abs(int(x)) for x in _re.findall(r"translate[XY]\((-?\d+)px\)", body)]
+    check("位移全部 ≤20px，且没有超过 1.05 的缩放",
+          (max(shift) if shift else 0) <= 20 and not _re.search(r"scale\(\s*1\.(0[6-9]|[1-9]\d)", body),
+          "最大位移 %spx" % (max(shift) if shift else 0))
+    check("motion.css 里没有写死超过 240ms 的时长",
+          all(int(d) <= 240 for d in _re.findall(r"(\d+)ms", body)),
+          "ms 值 %s" % sorted(set(int(x) for x in _re.findall(r"(\d+)ms", body))))
+    dist_css = "".join(open(os.path.join(SRC, "assets", f), encoding="utf-8", errors="ignore").read()
+                       for f in os.listdir(os.path.join(SRC, "assets")) if f.endswith(".css"))
+    need = (".page-enter-active", ".unfold-enter-active", ".swap-enter-active", ".idr-leave-active")
+    check("动效层进了构建产物（main.js 那行 import 没漏、也没只停在工作区）",
+          all(k in dist_css for k in need), "缺 " + ",".join(k for k in need if k not in dist_css) or "四类齐")
+
+    WATCH = """(sel) => { window.__m = { classes: [], ops: [] }; const st = window.__m;
+      const grab = () => { const el = document.querySelector(sel); if (!el) return;
+        const cn = typeof el.className === 'string' ? el.className : '';
+        if (st.classes.indexOf(cn) < 0) st.classes.push(cn);
+        st.ops.push(+getComputedStyle(el).opacity); };
+      st.mo = new MutationObserver(grab);
+      st.mo.observe(document.querySelector('#main') || document.body,
+                    { attributes: true, attributeFilter: ['class'], subtree: true, childList: true });
+      st.tick = setInterval(grab, 16); grab(); }"""
+    STOP = """() => { clearInterval(window.__m.tick); window.__m.mo.disconnect();
+      const o = window.__m; window.__m = null;
+      o.views = document.querySelectorAll('#main > .view').length; return o; }"""
+    # 过渡建立后轮询 getAnimations()：拿到就跑完，最多等 1.2 秒
+    ANIM = """(sel) => new Promise(res => { let n = 0;
+      const t = setInterval(() => { const el = document.querySelector(sel);
+        const a = el ? el.getAnimations().map(x => [x.transitionProperty || x.animationName || '',
+                                                   x.playState || '',
+                                                   Math.round((x.effect && x.effect.getTiming
+                                                     ? x.effect.getTiming().duration : 0) || 0)]) : [];
+        if (a.length || ++n > 150) { clearInterval(t); res({ tries: n, anim: a }); } }, 8); })"""
+    # 问 CSSOM：这套过渡类在这台机器上算出来是几毫秒
+    DUR = """(cls) => { const d = document.createElement('div'); d.className = cls;
+      (document.querySelector('#main') || document.body).appendChild(d);
+      const v = getComputedStyle(d).transitionDuration; d.remove(); return v; }"""
+    TRN = [".page-enter-active", ".swap-enter-active", ".unfold-enter-active",
+           ".pop-enter-active", ".idr-enter-active", ".idf-leave-active"]
+    ms = lambda v: max(float(x.rstrip("s")) * 1000 for x in v.split(",") if x.strip()) if v else 0.0
+
+    def watch(page, sel):
+        page.evaluate(WATCH, sel)
+
+    def stop(page):
+        return page.evaluate(STOP)
+
+    ctx = browser.new_context(viewport={"width": 1440, "height": 950})
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:120]))
+
+    # —— ① 换页 ——
+    page.goto(APP_BASE + "/#/", wait_until="networkidle")
+    page.wait_for_selector("#main > .view", timeout=15000)
+    page.wait_for_timeout(600)
+    durs = [page.evaluate(DUR, c.lstrip(".")) for c in TRN]
+    check("正常模式下这六类过渡算出来的时长都 ≥1ms（动效是真挂上去的）",
+          all(ms(d) >= 1 for d in durs), " / ".join(durs))
+    watch(page, "#main > .view")
+    page.evaluate("() => { location.hash = '#/world' }")
+    a = page.evaluate(ANIM, "#main > .view")
+    page.wait_for_timeout(900)
+    r = stop(page)
+    check("换页时旧页淡出类与新页淡入类都出现过",
+          any("page-leave-active" in c for c in r["classes"])
+          and any("page-enter-active" in c for c in r["classes"]), str(r["classes"][:4]))
+    check("换页这一路确实有一条 opacity 过渡在跑（getAnimations 里有它）",
+          any("opacity" in x[0] for x in a["anim"]), json.dumps(a["anim"]))
+    check("out-in 生效：#main 下始终只有一个 .view（新旧页不重叠）",
+          r["views"] == 1, "同屏 %s 个" % r["views"])
+    page.wait_for_function("""() => { const v = document.querySelector('#main > .view');
+      return v && !/page-(enter|leave)/.test(v.className)
+        && +getComputedStyle(v).opacity === 1; }""", timeout=9000)
+    rest = page.evaluate("""() => { const v = document.querySelector('#main > .view');
+      return { cls: v.className, op: +getComputedStyle(v).opacity }; }""")
+    check("过渡结束后 .view 恢复干净状态且看得见（不会停在半透明）",
+          "page-" not in rest["cls"] and rest["op"] == 1, json.dumps(rest))
+
+    # —— ② 副本抽屉 ——
+    page.goto(APP_BASE + "/#/dungeons", wait_until="networkidle")
+    page.wait_for_selector("[data-d]", timeout=20000)
+    page.wait_for_timeout(400)
+    watch(page, ".drawer-clip")
+    page.click("[data-d]")
+    a = page.evaluate(ANIM, ".drawer-clip")
+    page.wait_for_timeout(700)
+    r = stop(page)
+    check("抽屉挂着 unfold 过渡类展开", any("unfold-enter-active" in c for c in r["classes"]),
+          str(r["classes"][:2]))
+    # 这里钉的是"建立的是哪一条过渡"，不是"逐帧高度"。原因写清楚免得下轮又去量高度：
+    # 门禁这台 headless Chrome（--use-angle=swiftshader）的动画时钟不走——getAnimations() 里
+    # playState 是 running 但 currentTime 恒 0，中间帧在这台环境里根本采不到；
+    # 同一份产物在普通 --headless=new 下实测会走 8px → 361px → 456px → 466px。
+    # "逐帧真的在长"交给 8821 人眼验收 + 中间帧截图，机器只钉"挂的是 grid-template-rows 且时长非零"。
+    check("抽屉展开建立的是 grid-template-rows 这条过渡，且时长非零",
+          any("grid-template-rows" in x[0] and x[2] >= 1 for x in a["anim"]), json.dumps(a["anim"][:2]))
+    fin = page.evaluate("() => Math.round(document.querySelector('.drawer-clip')"
+                        ".getBoundingClientRect().height)")
+    check("展开到底之后是内容的自然高度（不会停在 0fr 那一档）", fin > 120, "终值 %s" % fin)
+    page.screenshot(path=os.path.join(SHOT_DIR, "motion-副本抽屉展开.png"))
+
+    # —— ③ 传承页折叠 ——
+    page.goto(APP_BASE + "/#/legacy", wait_until="networkidle")
+    page.wait_for_selector("[data-blk]", timeout=20000)
+    page.wait_for_timeout(600)
+    watch(page, ".lchbody")
+    page.click("[data-blk]")
+    page.wait_for_timeout(600)
+    rl = stop(page)
+    watch(page, ".lchbody")
+    page.click("[data-blk]")
+    page.wait_for_timeout(900)
+    re_ = stop(page)
+    check("传承页收起来那一下有退场过渡（旧版 animation 挂在 v-show 上，这里一条都采不到）",
+          any("unfold-leave-active" in c for c in rl["classes"]), str(rl["classes"][:2]))
+    check("再点一次是反向展开（进场类也在）",
+          any("unfold-enter-active" in c for c in re_["classes"]), str(re_["classes"][:2]))
+
+    # —— ④ 世界页换面板 ——
+    page.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    page.wait_for_selector('[data-t="rares"]', timeout=20000)
+    page.wait_for_timeout(900)
+    before = page.evaluate("() => document.querySelectorAll('#main .zcard').length")
+    watch(page, ".wswap")
+    page.click('[data-t="rares"]')
+    rows = []
+    for _ in range(12):
+        rows.append(page.evaluate("() => !!document.querySelector('.wswap.swap-enter-active,"
+                                  " .wswap.swap-leave-active')"))
+        page.wait_for_timeout(30)
+    # out-in 之后新面板要重挂整块（世界页那一面板 25000 像素），等它换完再判画面
+    page.wait_for_function("""() => { const on = [...document.querySelectorAll('[data-t]')]
+        .find(x => x.classList.contains('on')); return on && on.getAttribute('data-t') === 'rares'
+        && !document.querySelector('.wswap.swap-leave-active'); }""", timeout=8000)
+    r = stop(page)
+    check("世界页换面板有 swap 过渡类（淡出再淡入）",
+          any("swap-leave-active" in c for c in r["classes"])
+          and any("swap-enter-active" in c for c in r["classes"]), str(r["classes"][:4]))
+    check("这一路过渡类真的挂上过（不是只换了块内容）", any(rows), str(rows[:6]))
+    after = page.evaluate("""() => ({ z: document.querySelectorAll('#main .zcard').length,
+      band: document.querySelectorAll('#main .band').length,
+      on: (([...document.querySelectorAll('[data-t]')].find(x => x.classList.contains('on')) || {})
+           ).getAttribute('data-t') || '' })""")
+    check("切到「稀有」之后画面上确实换成那一块（区域卡没了、稀有那一排的分组条出来了）",
+          before > 0 and after["z"] == 0 and after["on"] == "rares" and after["band"] > 0,
+          json.dumps({"切换前区域卡": before, "切换后": after}, ensure_ascii=False))
+    page.screenshot(path=os.path.join(SHOT_DIR, "motion-世界页换面板.png"))
+
+    # —— ⑤ 物品抽屉退场 ——
+    page.goto(APP_BASE + "/#/items", wait_until="networkidle")
+    page.wait_for_selector(".itt tbody tr", timeout=20000)
+    page.wait_for_timeout(500)
+    page.click(".itt tbody tr:first-child")
+    page.wait_for_timeout(900)
+    check("点一行能开抽屉，宽度还是那一条（横向位移不改宽度）",
+          page.evaluate("() => { const d=document.querySelector('.idrawer');"
+                        " return !!d && Math.round(d.getBoundingClientRect().width) >= 300 }"), "开")
+    watch(page, ".idmask")
+    page.click(".idmask")
+    page.wait_for_timeout(500)
+    r = stop(page)
+    check("关抽屉时遮罩走退场过渡（不是当场消失）",
+          any("idf-leave-active" in c for c in r["classes"]), str(r["classes"][:2]))
+    page.wait_for_timeout(400)
+    check("退场结束后抽屉与遮罩都不在 DOM 里（离场元素没留下来挡点击）",
+          page.evaluate("() => !document.querySelector('.idrawer') && !document.querySelector('.idmask')"),
+          "已清")
+    ctx.close()
+
+    # —— ⑥ 减弱动态效果 ——
+    ctx2 = browser.new_context(viewport={"width": 1440, "height": 950}, reduced_motion="reduce")
+    rp = ctx2.new_page()
+    rp.on("pageerror", lambda e: errs.append(str(e)[:120]))
+    rp.goto(APP_BASE + "/#/", wait_until="networkidle")
+    rp.wait_for_selector("#main > .view", timeout=15000)
+    rp.wait_for_timeout(500)
+    rdurs = [rp.evaluate(DUR, c.lstrip(".")) for c in TRN]
+    check("减弱动态效果下：同一批过渡类算出来 ≤1ms（真的没在动）",
+          all(ms(d) <= 1 for d in rdurs), " / ".join(rdurs))
+    watch(rp, "#main > .view")
+    rp.evaluate("() => { location.hash = '#/world' }")
+    ra = rp.evaluate(ANIM, "#main > .view")
+    rp.wait_for_timeout(700)
+    r = stop(rp)
+    # 反向钉：ANIM 会一路轮满 1.2 秒，正常模式下这里至少抓到一条；
+    # 减弱动态效果下必须一条都没有——这才叫"关了"，而不是"关了但还在滑"。
+    check("减弱动态效果下：换页没有建立任何过渡（轮满 1.2 秒一条都没抓到）",
+          not ra["anim"], json.dumps({"抓到": ra["anim"], "轮询次数": ra["tries"]}))
+    check("减弱动态效果下：换页这一路没有任何一帧是不可见的",
+          r["ops"] and all(o == 1 for o in r["ops"]), "采样 %s" % r["ops"][:8])
+    check("减弱动态效果下：换到的还是同一块内容（世界页区域卡照常出来）",
+          rp.evaluate("() => document.querySelectorAll('#main .zcard').length") > 0, "有卡")
+    rp.goto(APP_BASE + "/#/dungeons", wait_until="networkidle")
+    rp.wait_for_selector("[data-d]", timeout=20000)
+    rp.wait_for_timeout(400)
+    watch(rp, ".drawer-clip")
+    rp.click("[data-d]")
+    rad = rp.evaluate(ANIM, ".drawer-clip")
+    first = rp.evaluate("() => Math.round(document.querySelector('.drawer-clip')"
+                        ".getBoundingClientRect().height)")
+    rp.wait_for_timeout(400)
+    r = stop(rp)
+    # 不写"466"这种量出来的数：拿这一行自己的计算值和内层自然高度比。
+    natural = rp.evaluate("() => Math.round(document.querySelector('.drawer-clip > .wf-in')"
+                          ".getBoundingClientRect().height)")
+    check("减弱动态效果下：抽屉一点就开到底（没建立过渡、也没有半截高度），内容照常看得见",
+          not rad["anim"] and natural > 0 and first >= natural - 3,
+          json.dumps({"过渡": rad["anim"], "首帧高度": first, "内容自然高度": natural}))
+    rp.screenshot(path=os.path.join(SHOT_DIR, "motion-reduced-副本抽屉.png"))
+    check("这一节没引出脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    ctx2.close()
+
+
 def test_prof_tiers(browser, base):
     """钓鱼那张表按技能分段出列（2026-10-28 修的那处列映射错位）。
        单独成一节而不是塞在 [6a] 里：那一节现在在这台机器上跑不到底，
@@ -3773,6 +4049,7 @@ SECTIONS = [
     ("bis", test_bis),
     ("prof_tiers", test_prof_tiers),
     ("pets", test_pets),
+    ("motion", test_motion),
     ("classes_sticky", test_classes_sticky),
     ("race_icon", lambda b, base: test_race_icon(b)),
     ("updates_filter", lambda b, base: test_updates_filter(b)),
