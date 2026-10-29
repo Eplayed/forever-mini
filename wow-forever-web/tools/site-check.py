@@ -3275,6 +3275,7 @@ def test_app(browser, base):
           "掉率" not in drtext and "掉落概率" not in drtext and "掉落几率" not in drtext, "干净")
     snap(page, path=os.path.join(SHOT_DIR, "app-items-detail.png"))
     page.click(".idmask")
+    settle_motion(page)   # 抽屉现在有退场过渡，而这台环境不产帧：不逼一帧的话离场元素一直挂在 DOM 里
     page.wait_for_timeout(300)
     check("新站物品详情抽屉：点遮罩能关",
           page.evaluate("() => !document.querySelector('.idrawer')"), "已关")
