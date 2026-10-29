@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>配装批量 GLB · 本机只读预览</title>
+  <style>
+    body { margin: 0; background: #101823; color: #e8eff8; font: 14px system-ui }
+    #stage { width: 800px; height: 900px; margin: auto; position: relative }
+    canvas { display: block }
+    #status { position: absolute; top: 10px; left: 10px; padding: 5px 8px; background: #101823dd }
+  </style>
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/":"/vendor/"}}</script>
+</head>
+<body>
+<div id="stage"><span id="status">加载中</span></div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
+const name = new URLSearchParams(location.search).get('model');
+const status = document.querySelector('#status');
+if (!/^[a-z0-9-]+-(alliance|horde)$/.test(name || '')) throw new Error('invalid model name');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(800, 900);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.querySelector('#stage').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x101823);
+scene.add(new THREE.HemisphereLight(0xe4efff, 0x414b58, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(3, 4, 3); scene.add(key);
+const camera = new THREE.PerspectiveCamera(35, 800/900, 0.05, 100);
+try {
+  const gltf = await new GLTFLoader().loadAsync(`/models/${name}.glb`);
+  scene.add(gltf.scene);
+  const box = new THREE.Box3().setFromObject(gltf.scene);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const distance = Math.max(size.y / 2, size.z / camera.aspect) * 1.4 / Math.tan(camera.fov * Math.PI / 360);
+  const yaw = Number(new URLSearchParams(location.search).get('yaw') || 0) * Math.PI / 180;
+  camera.position.set(center.x + Math.cos(yaw) * distance, center.y + 0.08, center.z + Math.sin(yaw) * distance);
+  camera.lookAt(center);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.copy(center);
+  controls.enablePan = false;
+  controls.update();
+  controls.addEventListener('change', () => renderer.render(scene, camera));
+  renderer.render(scene, camera);
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  renderer.render(scene, camera);
+  status.textContent = `${name} · 拖动旋转、滚轮缩放`;
+  document.body.dataset.ready = name;
+} catch (error) {
+  status.textContent = `失败：${error.message}`;
+  document.body.dataset.error = error.message;
+}
+</script>
+</body>
+</html>

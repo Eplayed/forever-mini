@@ -1,6 +1,6 @@
 {
- "head": "beca3344583833eb99a4a51d9774a793ffade64a",
- "fingerprint": "dd91a6b90cdd720753f1b40ef6b87653207805947ebe21c182dbdf1418560d3b",
+ "head": "9ff706be61374573ed9eaeef46ce9cf938d3bffb",
+ "fingerprint": "7bece4520d0e0cad51ae9607301317ae6e8c47d428543d87395b1b22e2e81f5b",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -35,8 +35,8 @@
   },
   {
    "path": ".github/workflows/gates.yml",
-   "bytes": 3422,
-   "mtimeNs": 1793105647259699883
+   "bytes": 3863,
+   "mtimeNs": 1793196007104128959
   },
   {
    "path": ".qoder/skills/wow-data/SKILL.md",
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 5118,
-   "mtimeNs": 1793189280157430722
+   "bytes": 5166,
+   "mtimeNs": 1793251890797154272
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 580196,
-   "mtimeNs": 1793191375275586550
+   "bytes": 606574,
+   "mtimeNs": 1793251908028646835
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -536,12 +536,12 @@
   {
    "path": "wow-forever-web/app/src/components/ModelViewer.vue",
    "bytes": 6933,
-   "mtimeNs": 1793173959155467885
+   "mtimeNs": 1793232147297864760
   },
   {
    "path": "wow-forever-web/app/src/components/PinMap.vue",
-   "bytes": 9439,
-   "mtimeNs": 1792459876549492606
+   "bytes": 12631,
+   "mtimeNs": 1793250191397507899
   },
   {
    "path": "wow-forever-web/app/src/components/SiteSearch.vue",
@@ -884,6 +884,11 @@
    "mtimeNs": 1792088009450003587
   },
   {
+   "path": "wow-forever-web/docs/ARCH-数据存放与发布-2026-10-29.md",
+   "bytes": 5391,
+   "mtimeNs": 1793249368637049043
+  },
+  {
    "path": "wow-forever-web/docs/ART-COVERAGE-2026-10-12.md",
    "bytes": 6619,
    "mtimeNs": 1791779714167188387
@@ -969,6 +974,16 @@
    "mtimeNs": 1792850872039137523
   },
   {
+   "path": "wow-forever-web/docs/DATA-AUDIT-2026-10-28.md",
+   "bytes": 194040,
+   "mtimeNs": 1793200434850799382
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-AUDIT-2026-10-29.md",
+   "bytes": 34393,
+   "mtimeNs": 1793247519056814914
+  },
+  {
    "path": "wow-forever-web/docs/DATA-BiS-准确性与更新机制-2026-10-28.md",
    "bytes": 12167,
    "mtimeNs": 1793150559236749654
@@ -1005,8 +1020,8 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-MAINTENANCE.md",
-   "bytes": 17389,
-   "mtimeNs": 1792850521836007807
+   "bytes": 23124,
+   "mtimeNs": 1793247556234090365
   },
   {
    "path": "wow-forever-web/docs/DATA-MAP-EXPORT-2026-10-19.md",
@@ -1149,6 +1164,11 @@
    "mtimeNs": 1793022784577624472
   },
   {
+   "path": "wow-forever-web/docs/DATA-译名未命中归因-2026-10-28.md",
+   "bytes": 8672,
+   "mtimeNs": 1793247583958623960
+  },
+  {
    "path": "wow-forever-web/docs/DESIGN-DOUBAO-2026-10-12.md",
    "bytes": 8476,
    "mtimeNs": 1791784343713911992
@@ -1230,8 +1250,8 @@
   },
   {
    "path": "wow-forever-web/docs/OPS-icp-filing-2026-10-22.md",
-   "bytes": 22518,
-   "mtimeNs": 1793187025595410787
+   "bytes": 23985,
+   "mtimeNs": 1793249922227123363
   },
   {
    "path": "wow-forever-web/docs/OPS-oss-分发层-poe方案落地-2026-10-21.md",
@@ -1544,14 +1564,24 @@
    "mtimeNs": 1792545811867789958
   },
   {
+   "path": "wow-forever-web/docs/PUBLISH-LOG.md",
+   "bytes": 373,
+   "mtimeNs": 1793249305002218676
+  },
+  {
+   "path": "wow-forever-web/docs/QODER-E10复核反馈-2026-10-28.md",
+   "bytes": 1767,
+   "mtimeNs": 1793197498746210837
+  },
+  {
    "path": "wow-forever-web/docs/QODER-Windows-3D第七轮-2026-10-28.md",
    "bytes": 2329,
    "mtimeNs": 1793163204958439002
   },
   {
    "path": "wow-forever-web/docs/QODER-Windows-副本逐层图756片-2026-10-28.md",
-   "bytes": 8735,
-   "mtimeNs": 1793191227401990931
+   "bytes": 8757,
+   "mtimeNs": 1793191403699079731
   },
   {
    "path": "wow-forever-web/docs/QODER-Windows-插件与整人3D取数-2026-10-27.md",
@@ -1565,13 +1595,23 @@
   },
   {
    "path": "wow-forever-web/docs/QODER-全职业3D导出任务书-2026-10-28.md",
-   "bytes": 8298,
-   "mtimeNs": 1793191342585270266
+   "bytes": 9121,
+   "mtimeNs": 1793200272962429464
   },
   {
    "path": "wow-forever-web/docs/QODER-全职业3D导出清单-2026-10-28.json",
    "bytes": 233423,
    "mtimeNs": 1793189187688875632
+  },
+  {
+   "path": "wow-forever-web/docs/QODER-全职业3D批量包修复-2026-10-29.md",
+   "bytes": 3148,
+   "mtimeNs": 1793232282120519960
+  },
+  {
+   "path": "wow-forever-web/docs/QODER-全职业3D批量开跑-2026-10-28.md",
+   "bytes": 3475,
+   "mtimeNs": 1793200260031794322
   },
   {
    "path": "wow-forever-web/docs/README.md",
@@ -1605,8 +1645,8 @@
   },
   {
    "path": "wow-forever-web/docs/UI.md",
-   "bytes": 221120,
-   "mtimeNs": 1793186284563898941
+   "bytes": 223606,
+   "mtimeNs": 1793250916925078142
   },
   {
    "path": "wow-forever-web/docs/VERIFY-2026-10-08-site.md",
@@ -1622,6 +1662,11 @@
    "path": "wow-forever-web/docs/VERIFY-Bis更新闸与3D预览-2026-10-26.md",
    "bytes": 8757,
    "mtimeNs": 1792989939098568702
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-E10诊断样本复核-2026-10-28.md",
+   "bytes": 4112,
+   "mtimeNs": 1793200272963985149
   },
   {
    "path": "wow-forever-web/docs/VERIFY-GI返工第一批-2026-10-28.md",
@@ -1819,6 +1864,11 @@
    "mtimeNs": 1792946330496636079
   },
   {
+   "path": "wow-forever-web/docs/VERIFY-全职业3D批量包复核-2026-10-29.md",
+   "bytes": 4542,
+   "mtimeNs": 1793232255847930202
+  },
+  {
    "path": "wow-forever-web/docs/VERIFY-全职业3D接入准备-2026-10-28.md",
    "bytes": 4459,
    "mtimeNs": 1793189687396964694
@@ -1837,6 +1887,11 @@
    "path": "wow-forever-web/docs/VERIFY-删旧站-2026-10-24.md",
    "bytes": 15569,
    "mtimeNs": 1792851181646412252
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-副本逐层图756片回件复核-2026-10-29.md",
+   "bytes": 11796,
+   "mtimeNs": 1793242550623334844
   },
   {
    "path": "wow-forever-web/docs/VERIFY-双系列排产独立验收-2026-10-22.md",
@@ -1870,8 +1925,8 @@
   },
   {
    "path": "wow-forever-web/docs/VERIFY-数据管理台精简-2026-10-27.md",
-   "bytes": 3201,
-   "mtimeNs": 1793061527134531107
+   "bytes": 6003,
+   "mtimeNs": 1793195467941245056
   },
   {
    "path": "wow-forever-web/docs/VERIFY-猎人四版GLB本机预览-2026-10-28.md",
@@ -1887,6 +1942,16 @@
    "path": "wow-forever-web/docs/VERIFY-现阶段后端与数据库判断-2026-10-26.md",
    "bytes": 4880,
    "mtimeNs": 1792978203911911540
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-第九轮修复诊断复核-2026-10-29.md",
+   "bytes": 3242,
+   "mtimeNs": 1793251881254949350
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-第九轮批量开跑决定-2026-10-28.md",
+   "bytes": 1674,
+   "mtimeNs": 1793200260037728087
   },
   {
    "path": "wow-forever-web/docs/VERIFY-第九轮输入与附件验收修订-2026-10-28.md",
@@ -1940,18 +2005,18 @@
   },
   {
    "path": "wow-forever-web/tools/admin/jobs.py",
-   "bytes": 7035,
-   "mtimeNs": 1793023830354717908
+   "bytes": 9571,
+   "mtimeNs": 1793246440348163876
   },
   {
    "path": "wow-forever-web/tools/admin/server.py",
    "bytes": 9967,
-   "mtimeNs": 1793024099770138431
+   "mtimeNs": 1793246447421087306
   },
   {
    "path": "wow-forever-web/tools/admin/test_admin.py",
-   "bytes": 3614,
-   "mtimeNs": 1793023734966479742
+   "bytes": 7533,
+   "mtimeNs": 1793246500865230376
   },
   {
    "path": "wow-forever-web/tools/app-assets.py",
@@ -1964,14 +2029,19 @@
    "mtimeNs": 1792847640962006216
   },
   {
+   "path": "wow-forever-web/tools/audit-attribution.py",
+   "bytes": 8697,
+   "mtimeNs": 1793196863545676290
+  },
+  {
    "path": "wow-forever-web/tools/audit-db2-item-table.py",
    "bytes": 6707,
    "mtimeNs": 1792847640963793722
   },
   {
    "path": "wow-forever-web/tools/audit-translations.py",
-   "bytes": 27770,
-   "mtimeNs": 1792847885305495478
+   "bytes": 32216,
+   "mtimeNs": 1793246208443934438
   },
   {
    "path": "wow-forever-web/tools/audit-wowhead.py",
@@ -2274,6 +2344,11 @@
    "mtimeNs": 1793189698196849884
   },
   {
+   "path": "wow-forever-web/tools/preview-bis-batch.py",
+   "bytes": 3525,
+   "mtimeNs": 1793251762151450036
+  },
+  {
    "path": "wow-forever-web/tools/preview-hunter-glb.py",
    "bytes": 3328,
    "mtimeNs": 1793171725419746927
@@ -2284,14 +2359,24 @@
    "mtimeNs": 1792847885330345711
   },
   {
+   "path": "wow-forever-web/tools/publish.py",
+   "bytes": 11571,
+   "mtimeNs": 1793249710946895701
+  },
+  {
    "path": "wow-forever-web/tools/refresh.sh",
-   "bytes": 6235,
-   "mtimeNs": 1792848432873267795
+   "bytes": 6506,
+   "mtimeNs": 1793247264894662291
   },
   {
    "path": "wow-forever-web/tools/register-bis-models.py",
    "bytes": 3210,
    "mtimeNs": 1793172970145556376
+  },
+  {
+   "path": "wow-forever-web/tools/rehang-shuju-source.py",
+   "bytes": 7625,
+   "mtimeNs": 1793247471357950400
   },
   {
    "path": "wow-forever-web/tools/release-package.py",
@@ -2380,8 +2465,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 249760,
-   "mtimeNs": 1793189502180259696
+   "bytes": 255182,
+   "mtimeNs": 1793250422065344315
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
