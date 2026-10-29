@@ -398,8 +398,8 @@ nav.main a.nl:has(.nb) { padding-right:10px }
    指上去 / 键盘聚焦 / 点住不放时才实体（去模糊、放大、填成这一类的颜色）。
    20px 是点击区，里面那颗 18px 的圆才是视觉尺寸。
    2026-10-19 四类面板共用之后加了 --pc：金=稀有、绿=书、紫=营地（区域卡上三类混在一张图上）。 */
-.zdot { --pc:var(--pin-rare); position:absolute; width:20px; height:20px; margin:-10px 0 0 -10px; padding:0;
-  border:0; background:none; cursor:pointer; opacity:.55; filter:blur(.6px);
+.zdot { --pc:var(--pin-rare); --op:.55; position:absolute; width:20px; height:20px; margin:-10px 0 0 -10px; padding:0;
+  border:0; background:none; cursor:pointer; opacity:var(--op); filter:blur(.6px);
   transition:opacity var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out),
     transform var(--dur-1) var(--ease-out) }
 .zdot.k-book { --pc:var(--pin-book) } .zdot.k-camp { --pc:var(--pin-camp) }
@@ -415,13 +415,14 @@ nav.main a.nl:has(.nb) { padding-right:10px }
 
 /* S3 分级（2026-10-29）：一屏里"谁是主角"要看得出来。只调视觉权重，
    **20px 那颗的点击区一条都不许缩**——手机上点不中比主次不分更糟。
-   t1 首领/入口：更实、更大一圈、盖在别的点之上；t3 书/营地：更小更淡，退到背景层。 */
-.zdot.t1 { opacity:.95; z-index:2 }
+   档位只改 `--op` 这个变量、不直接写 opacity：`.zdot.t2{opacity:.6}` 与
+   `.zdot:hover{opacity:.85}` 权重相同而写在后面，会把"指上去才实体"那条盖掉
+   （第一版就是这么被门禁抓到的：默认 .60、悬停还是 .60）。 */
+.zdot.t1 { --op:.95; z-index:2 }
 .zdot.t1 .zdot-n { width:20px; height:20px; line-height:18px; font-size:11px; border-width:1.5px }
-.zdot.t2 { opacity:.6 }
-.zdot.t3 { opacity:.38 }
+.zdot.t2 { --op:.6 }
+.zdot.t3 { --op:.38 }
 .zdot.t3 .zdot-n { width:14px; height:14px; line-height:12px; font-size:9px }
-.zdot.t3:hover, .zdot.t3.on { opacity:1 }
 
 /* 图例即筛选（S3）：一颗芯片筛一类，再点回"全部"。颜色沿用点位那一套 --pc，
    玩家不用另记一份图例色；宽度靠 flex-wrap 换行，不许把窄屏撑出横向滚动。 */
