@@ -2763,14 +2763,18 @@ def test_app(browser, base):
                               ".some(a => (a.getAttribute('href') || '') === '#/pets')")
     check("宠物页在顶部导航与首页板块卡各有一个入口", nav_pets and card_pets,
           "导航 %s ／ 首页卡 %s" % (nav_pets, card_pets))
-    # 最新动态那一块同理：它一直在页面上，只是被板块卡墙埋到第 2910px（手机 6100px），
-    # 玩家不滚到底就等于删了。钉住它落在 hero 之后第一屏内，别再"顺手"挪回底部。
-    y_upd = page.evaluate("""() => { const h = [...document.querySelectorAll('#main h2')]
-        .find(e => e.textContent.trim() === '最新动态');
-        if (!h) return -1; let n = h, y = 0;
-        while (n) { y += n.offsetTop; n = n.offsetParent; } return y; }""")
-    check("首页「最新动态」在第一屏内（1440×1000 视口）", 0 <= y_upd < 1000,
-          "h2 距页首 %dpx（挪回板块卡下面会是 2900 上下）" % y_upd)
+    # 2026-10-29 站主：「首页的最新动态 怎么又加回来了，不要最新动态这个卡片」→ 这张卡撤掉。
+    # 这条判据跟着反向钉：首页不许再出现这张卡，但动态页的入口必须还在
+    # （hero 那颗「看这一版改了什么」+ 板块轨那张「自经典旧世以来改了什么」）——
+    # 撤一张卡不能顺手把那一页变成孤儿。
+    upd_card = page.evaluate("""() => [...document.querySelectorAll('#main h2')]
+        .some(e => e.textContent.trim() === '最新动态')""")
+    upd_entry = page.evaluate("""() => [...document.querySelectorAll('#main a[href]')]
+        .filter(a => (a.getAttribute('href') || '').indexOf('/updates') >= 0).length""")
+    check(u"首页没有「最新动态」这张卡（站主 2026-10-29 撤掉，别再顺手加回来）",
+          not upd_card, "页面上还有那张卡" if upd_card else "已撤")
+    check("撤卡之后动态页在首页仍有入口（不是把那一页藏起来）", upd_entry >= 2,
+          "指向 #/updates 的入口 %d 处" % upd_entry)
     # ---- 10-18 站主实拍：首页"点了没反应" + 底部一条横向滚动条 + 导航太素 ----
     # 三条各钉一个断言，因为这三个毛病没有一个能靠"构建通过"发现。
     # 1) 死链：首页把已迁页的地址写成旧站文件式地址（/talent.html）时，

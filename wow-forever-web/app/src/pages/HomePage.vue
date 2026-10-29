@@ -34,29 +34,12 @@
       </aside>
     </section>
 
-    <!-- 2026-10-28 站主：「首页的最新动态那一块没了」。它没被删，是排在所有板块卡下面，
-         实测桌面第 2910px、手机第 6100px——首屏滚不到就等于没有。整块提到 hero 正下方。
-         要放回底部：把下面这个 <div class="card"> 整块移回 chipsrow 后面即可。 -->
-    <div class="card">
-      <h2>最新动态</h2>
-      <p class="note">三件事分开说：官方公告里的时间点、客户端里的职业改动、本站自己改了什么。</p>
-      <!-- 每节一个小标题 + 一个回动态页的出口，长句收两行，全文去动态页读 -->
-      <div class="nsec">
-        <h3>官方公告里的时间点<span class="nact"><a :href="hrefOf('updates.html#k0')">全部 {{ recent.length }} 个 →</a></span></h3>
-        <div v-for="x in recent.slice(0, 3)" :key="x.id" class="flowrow">
-          <b class="mono">{{ x.date }}</b>
-          <div><b class="clamp2">{{ x.title }}</b><p class="dim clamp2">{{ x.what }}</p></div>
-        </div>
-      </div>
-      <div v-if="cl.length" class="nsec">
-        <h3>本站最近改了什么<span class="nact"><a :href="hrefOf('updates.html#k2')">全部 {{ cl.length }} 条 →</a></span></h3>
-        <div v-for="(e, i) in cl.slice(0, 3)" :key="i" class="flowrow">
-          <b class="mono">{{ e.date }}</b><div><b class="clamp2">{{ e.title }}</b></div>
-        </div>
-      </div>
-      <a class="cta" :href="hrefOf('updates.html')">全部动态（{{ S.timeline }} 个时间点 · {{ S.changes }} 条改动 · {{ cl.length }} 条本站更新）→</a>
-      <a class="cta" :href="hrefOf('rank.html')">资料完整度排行全表 →</a>
-    </div>
+    <!-- 2026-10-29 站主：「首页的最新动态 怎么又加回来了，不要最新动态这个卡片」→ 这张卡撤掉。
+         前后经过记清楚，免得下一轮又被"它怎么不见了"顶回来：
+         10-28 那条「首页的最新动态那一块也去除了」我读成了"它不见了"（它当时排在所有板块卡下面，
+         实测桌面第 2910px），于是把整块提到 hero 正下方；站主这句是"把它去掉"。
+         动态页本身（#/updates）还在，首页入口是 hero 那颗「看这一版改了什么」与板块轨里那张
+         「自经典旧世以来改了什么」入口卡。要恢复这张卡：从 git 里把这段 <div class="card"> 取回来。 -->
 
     <!-- 下面几块是稿子首页的骨架：选择你的职业 → 六个入口 → 板块图标轨 → 常用两卡。
          数字全部从 scale.json 现取，稿子里写死的 753 / 5353 / 6 开放 一个都不抄。 -->
@@ -148,7 +131,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { loadAll } from '../lib/data.js';
-import { byDate, clockText, tlCounts } from '../lib/fmt.js';
+import { clockText, tlCounts } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
 import { linkFor, hrefOf } from '../lib/nav.js';
 import { artOf } from '../lib/art.js';
@@ -203,7 +186,6 @@ function boot() {
 }
 onMounted(boot);
 
-const recent = computed(() => tl.value.slice().sort(byDate).slice(0, 3));
 // 客户端号只报尾号（70532 这种），前面那串 1.60.1 是对方自己的编号习惯，玩家不认
 const newestTail = computed(() => String((S.value || {}).newestBuild || '').split('.').pop());
 const newestSection = computed(() => (S.value || {}).newestSection || '');
