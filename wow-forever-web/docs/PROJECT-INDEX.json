@@ -1,6 +1,6 @@
 {
- "head": "9ff706be61374573ed9eaeef46ce9cf938d3bffb",
- "fingerprint": "7bece4520d0e0cad51ae9607301317ae6e8c47d428543d87395b1b22e2e81f5b",
+ "head": "8662b67666eb02705d48739328cefa35e30d81a7",
+ "fingerprint": "e8d0c1ec09f4825ab025403fad1ae45b3b9b9e5bedd302aaeb04b313e99d7af0",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 5166,
-   "mtimeNs": 1793251890797154272
+   "bytes": 5408,
+   "mtimeNs": 1793254250373672787
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 606574,
-   "mtimeNs": 1793251908028646835
+   "bytes": 608968,
+   "mtimeNs": 1793253876946718779
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -1207,6 +1207,11 @@
    "path": "wow-forever-web/docs/GAP-VS-WCLBOX-2026-10-26.md",
    "bytes": 8301,
    "mtimeNs": 1792944626300389721
+  },
+  {
+   "path": "wow-forever-web/docs/HANDOVER-2026-10-29-去Windows继续.md",
+   "bytes": 12027,
+   "mtimeNs": 1793253721979027224
   },
   {
    "path": "wow-forever-web/docs/IDEA-b2b-license-pilot-2026-10-10.md",
