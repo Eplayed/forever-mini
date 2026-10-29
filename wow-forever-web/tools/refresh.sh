@@ -36,7 +36,10 @@ gate() {
   # site-check 自己起静态服务打 app/dist，所以这一步之前必须先构建：
   # 磁盘上是新的、dist 是旧的，断言就会全打在旧产物上（2026-10-21 栽过一次）。
   run npm --prefix app run build
-  run npx --prefix app vitest run
+  # 必须 cd 进 app 再跑：`npx --prefix app vitest run` 的 cwd 还在仓库根，
+  # vitest 读不到 app/vite.config.js 里的 environment: 'jsdom'，
+  # 于是 13 个 DOM 用例文件整片报 "document is not defined"——假红，2026-10-29 实测。
+  run bash -c "cd app && npx vitest run"
   run python3 tools/site-check.py
 }
 

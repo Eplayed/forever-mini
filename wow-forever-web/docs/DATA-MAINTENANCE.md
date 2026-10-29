@@ -207,3 +207,37 @@ cd app && npm run build           # ③ 打包进 app/dist —— :8821 读的�
 旧号直接 404**，挂 967 条的 `r-1792976599011/changes.json` 与挂 47 条的 `r-1791987485943/chengjiu.json` 都已 404。
 另外顺手修了时间线两条 L0 引用——官方页改版后原句不在了，按 4b 那条规矩**逐字回该页改存现在那句**，
 没有降级、没有靠例外表糊过去。
+
+## 十一、跑完这一轮：链接真的修好了，另外挖出一个假红源（2026-10-29）
+
+**① `_shuju` 来源重挂。**`tools/refresh.sh changes` 跑完，改动清单 967 条的来源号从已 404 的
+`r-1792976599011` 换成当前号 `r-1793184328187`（`foreverBuild 1.60.1.70658`，实测 HTTP 200 / 1.67 MB）。
+成就与传承**没有刷新链**，所以补了一个工具：`tools/rehang-shuju-source.py`——
+现读当前发布号（不写死，跟抓取器同一套 `BUILD_RE`），把成品里指向旧号的 `provenance.url` 逐条重挂，
+**每一条都要在新快照里逐字找得到它的中文名或引用才改**，改不动的列出来给人看；默认干跑，`--write` 才落盘。
+落盘结果：成就 46 条、传承 94 条重挂；`legacy.json` 的 `meta.endpoint` **故意没改**——
+那格写的是"这份快照当初从哪个号取的"，改成新号就是假话。
+改动面用脚本对过：除 `url`/`checkedAt`/`note` 三个字段外，两份文件与 HEAD 逐字节一致。
+
+体检数字（同一份数据，三轮之间）：
+
+| 项 | 10-28 22:0x | 重挂改动清单后 | 重挂成就/传承后 |
+| --- | --- | --- | --- |
+| 逐字命中官方/声明页 | 1111 | 1974 | **2020** |
+| 回本地快照才命中 | 909 | 48 | **2** |
+| 未命中 | 912 | 1 | **1**（`永久 60 级`，L2/L3，不声称官方） |
+| `--strict` | **exit 1** | exit 0 | **exit 0** |
+
+**② 又挖出一个"必红"源：`refresh.sh` 里 vitest 的 cwd 写错了。**
+原来是 `run npx --prefix app vitest run`——`--prefix` 不改 cwd，vitest 在仓库根启动时读不到
+`app/vite.config.js` 里的 `environment: 'jsdom'`，于是 **13 个测试文件里 8 个整片报
+`ReferenceError: document is not defined`**（6 个用例失败）。实测对照：
+
+| 跑法 | 结果 |
+| --- | --- |
+| `npx --prefix app vitest run`（旧写法） | Test Files **8 failed** \| 5 passed，Tests 6 failed |
+| `cd app && npx vitest run`（改后） | Test Files **13 passed**，Tests **167 passed** |
+
+已改成 `run bash -c "cd app && npx vitest run"` 并在注释里写明为什么不能写 `--prefix`。
+**这条跟第十节那条是两件事**：一条让门禁报错误的数据问题，一条让门禁根本跑不完——
+两个都表现为"更新数据失败"，所以只修一个不够。**教训：门禁红了先分"数据真错"与"判据/环境自己坏了"。**

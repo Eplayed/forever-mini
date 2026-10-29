@@ -7,17 +7,17 @@
 | 项 | 数 |
 | --- | --- |
 | 词条总数 | 3931 |
-| 在声明的官方页里逐字命中 | 1113 |
+| 在声明的官方页里逐字命中 | 2020 |
 | 去掉汉字间排版空格才命中（要人眼确认） | 44 |
 | **未命中（要人工回原文看）** | 1 |
-| 回本地留存快照才命中（声明页已失效或不承载这串字，**要重挂来源**） | 909 |
+| 回本地留存快照才命中（声明页已失效或不承载这串字，**要重挂来源**） | 2 |
 | 已人工判定并留痕（见 audit-exceptions.json） | 2 |
 | **声称官方却核不到（L0/L1 缺官方链接）** | 0 |
 | 只有插件来源、按设计就没有可回查网页 | 1862 |
 | 本来就标 L2/L3 的非官方中文名（预期，界面已如实标注） | 0 |
 
 核对范围（按进来的条目数，全部从成品现算）：世界掉落 1569 条、改动清单 967 条、法术书 498 条、世界稀有 362 条、术语 215 条、技能四态 86 条、成就 46 条、种族特长 40 条、世界书籍 36 条、副本 35 条、传承专长 21 条、系统 11 条、时间线 11 条、种族简介 10 条、亮点组合 7 条、书籍奖励 4 条、传承奖励 4 条、世界套装 3 条、书籍称号 3 条、图书管理员 2 条、天裔导语 1 条。区域名不在这批：它来自结构化接口而不是页面正文，由 build-data.js 的两套 mapId 交叉验证把关；天赋与法术、传承与成就都只核名称，句子本站不存，也就没有可核的对象。
-| 命中率 | 28.3% |
+| 命中率 | 51.4% |
 
 ## 来源页
 
@@ -71,7 +71,7 @@
 | 缓存 | https://wowforever.wclbox.com/xiyou | 72 |
 | 缓存 | https://wowforever.wclbox.com/shuji | 45 |
 | 缓存 | https://wowforever.wclbox.com/gaidong | 967 |
-| 缓存 | https://wowforever.wclbox.com/_shuju/r-1792976599011/changes.json | 967 |
+| 缓存 | https://wowforever.wclbox.com/_shuju/r-1793184328187/changes.json | 967 |
 | 缓存 | https://wowforever.wclbox.com/fashu/warrior | 41 |
 | 缓存 | https://wowforever.wclbox.com/fashu/paladin | 56 |
 | 缓存 | https://wowforever.wclbox.com/fashu/hunter | 58 |
@@ -81,9 +81,9 @@
 | 缓存 | https://wowforever.wclbox.com/fashu/mage | 61 |
 | 缓存 | https://wowforever.wclbox.com/fashu/warlock | 55 |
 | 缓存 | https://wowforever.wclbox.com/fashu/druid | 59 |
-| 缓存 | https://wowforever.wclbox.com/_shuju/r-1791987485943/chengjiu.json | 46 |
+| 已抓取 | https://wowforever.wclbox.com/_shuju/r-1793184328187/chengjiu.json | 46 |
 | 缓存 | https://wowforever.wclbox.com/chuancheng | 25 |
-| 缓存 | https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json | 25 |
+| 已抓取 | https://wowforever.wclbox.com/_shuju/r-1793184328187/legacy.json | 25 |
 
 ## 只在去掉排版空格后命中（人工确认这几条）
 
@@ -147,15 +147,13 @@
 
 ## 回本地留存快照才命中的那一类（**要重挂来源，不算词条错**）
 
-这一格 909 条在声明的来源页里已经找不到，但在我们自己留存的 `app/data/upstream/` 快照副本里逐字有。
+这一格 2 条在声明的来源页里已经找不到，但在我们自己留存的 `app/data/upstream/` 快照副本里逐字有。
 最常见的原因是参考站的 `/_shuju/<发布号>/` **发布号会随上游发版轮换、旧号直接 404**——号一失效，整片条目的证据链就断了，而词条本身没动。
 
 **这一档不冒充「官方页命中」**：回本地副本只能证明「我们抄的和当时那份快照一致」，证明不了「快照本身当初抄对没」。所以处置动作是**重挂来源**（跑对应板块的刷新链，让 `provenance.url` 换成当前有效的发布号），不是把这几条当已核对完。
 
 | 板块 | 条数 |
 | --- | --- |
-| 改动清单 | 861 |
-| 成就 | 46 |
 | 系统 | 1 |
 | 法术书 | 1 |
 
@@ -163,8 +161,6 @@
 
 | 页面 | 挂着多少条要重挂 |
 | --- | --- |
-| https://wowforever.wclbox.com/_shuju/r-1792976599011/changes.json | 861 |
-| https://wowforever.wclbox.com/_shuju/r-1791987485943/chengjiu.json | 46 |
 | https://worldofwarcraft.blizzard.com/en-us/forever | 1 |
 
 ## 未命中清单（逐条待人工核对）
