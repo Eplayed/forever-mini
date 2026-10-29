@@ -213,7 +213,7 @@ class H(SimpleHTTPRequestHandler):
         except Exception:
             return self._json(400, {"error": "bad json"})
         if self.path == "/api/jobs":
-            code, obj = jobs.start(body.get("action"), body.get("topic"), bool(body.get("force")))
+            code, obj = jobs.start(body.get("action"), body.get("topic"))
             return self._json(code, obj)
         code, obj = api_run(body)
         return self._json(code, obj)

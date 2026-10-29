@@ -88,8 +88,9 @@ def review_items():
 def dirty_data():
     """工作树里 app/data 与 app/img 的未提交改动（含未跟踪文件）。
 
-    这台机器上常常有另一个会话正在写同一批数据，所以"脏"是常态而不是异常：
-    判据要能单独拿出来给页面用（先列清单、由人确认），不能只在刷新里当一堵墙。
+    这台机器上常常有另一个会话正在写同一批数据，所以"脏"是常态而不是异常。
+    2026-10-28 站主定的口径：**常态不当拦路石**——脏不再拒绝启动刷新链，
+    改成跑前先把它提交成一次本地收口（现场保留、可回退、不 push），见 `commit_data`。
     """
     p = subprocess.run(["git", "status", "--porcelain", "--", "app/data", "app/img"],
                        cwd=ROOT, capture_output=True, text=True, timeout=15)
@@ -98,34 +99,58 @@ def dirty_data():
     return [line[3:].strip() for line in p.stdout.splitlines() if line.strip()]
 
 
-def refresh(topic, progress, force=False):
+def commit_data(message):
+    """把 app/data 与 app/img 的未提交改动提交成一次本地收口，返回 (短哈希, 文件数)。
+
+    三条边界：① **只碰这两个目录**，用 pathspec 提交，别人 staged 的无关文件不会被卷走；
+    ② 只提交不推送——push 永远是人的动作；③ 提交号回给页面，出问题一句 `git revert` 能退掉。
+    """
+    files = dirty_data()
+    if not files:
+        return None
+    add = subprocess.run(["git", "add", "-A", "--", "app/data", "app/img"],
+                         cwd=ROOT, capture_output=True, text=True, timeout=60)
+    if add.returncode:
+        raise RuntimeError("自动收口 git add 失败，刷新链没启动：" + (add.stderr or add.stdout)[-400:])
+    p = subprocess.run(["git", "commit", "-q", "-m", message, "--", "app/data", "app/img"],
+                       cwd=ROOT, capture_output=True, text=True, timeout=60)
+    if p.returncode:
+        raise RuntimeError("自动收口 git commit 失败，刷新链没启动（不想在来历不明的工作树上跑）：" +
+                           (p.stderr or p.stdout)[-400:])
+    short = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT,
+                           capture_output=True, text=True, timeout=15).stdout.strip()
+    return (short, len(files))
+
+
+def refresh(topic, progress):
     workflows = {t[0]: t[7] for t in TOPICS if t[7]}
     if topic not in workflows:
         raise RuntimeError("该板块没有已核准的一键刷新链；请先做数据采编和命令设计")
-    # A refresh chain rewrites derived data too. Never run over someone else's edits
-    # unless the human saw the file list and said "照样跑"（force）.
-    dirty = dirty_data()
-    if dirty and not force:
-        raise RuntimeError("app/data 或 app/img 有未提交改动；先收口工作树再刷新。\n" +
-                           "\n".join(dirty)[:1200])
-    if dirty:
-        progress("已按确认跳过工作树检查，这些文件可能被覆盖：" + "、".join(dirty)[:400])
+    pre_commit = None
+    if dirty_data():
+        # 先收口再跑：这条链会重写派生数据，跑前把现场存成一次提交，被覆盖的东西随时能取回
+        pre_commit = commit_data("chore(admin): 刷新链 %s 启动前自动收口（未推送）" % topic)
+        progress("跑前先收口：%d 个未提交文件已提交成本地 %s" % (pre_commit[1], pre_commit[0]))
     progress("运行 tools/refresh.sh " + workflows[topic] + "；含构建门禁，可能需要数分钟")
     p = subprocess.run(["bash", "tools/refresh.sh", workflows[topic]], cwd=ROOT,
                        capture_output=True, text=True, timeout=900)
     output = ((p.stdout or "") + (p.stderr or ""))[-64000:]
-    changed = subprocess.run(["git", "status", "--short", "--", "app/data", "app/img"],
-                             cwd=ROOT, capture_output=True, text=True, timeout=15).stdout[:6000]
     if p.returncode:
-        raise RuntimeError("刷新或门禁失败，已写文件可能仍在工作树，需检查后处理。\n" + output)
-    note = "刷新链通过；未提交、未部署，请审阅变更"
-    if dirty:
-        note += "（本次按你的确认跳过了工作树检查）"
-    return {"message": note, "code": 0, "skippedWorktreeCheck": bool(dirty),
+        raise RuntimeError("刷新或门禁失败，已写文件仍在工作树里（没有自动提交），需检查后处理。\n" + output)
+    post_commit = commit_data("chore(admin): 刷新链 %s 的产物（门禁已过，未推送、未发布）" % topic)
+    changed = subprocess.run(["git", "show", "--stat", "--oneline", "-1", "--", "app/data", "app/img"],
+                             cwd=ROOT, capture_output=True, text=True, timeout=15).stdout[:6000]
+    note = "刷新链通过；产物已提交到本地"
+    if post_commit:
+        note += "（%s，%d 个文件）" % (post_commit[0], post_commit[1])
+    note += "，没有 push、没有发布"
+    return {"message": note, "code": 0,
+            "preCommit": list(pre_commit) if pre_commit else None,
+            "postCommit": list(post_commit) if post_commit else None,
             "changedFiles": changed, "logTail": output}
 
 
-def start(action, topic=None, force=False):
+def start(action, topic=None):
     global active
     if action != "scan-items" and action != "refresh":
         return 400, {"error": "未知动作"}
@@ -133,16 +158,6 @@ def start(action, topic=None, force=False):
         return 400, {"error": "物品公开 API 只支持 items"}
     if action == "refresh" and topic not in {t[0] for t in TOPICS if t[7]}:
         return 400, {"error": "该板块没有白名单刷新命令"}
-    if action == "refresh" and not force:
-        # 先在工作线程外问一次：脏就当场把清单回给页面，由人确认后再启动，不占单工作线程
-        try:
-            files = dirty_data()
-        except RuntimeError as exc:
-            return 500, {"error": str(exc)}
-        if files:
-            return 409, {"code": "dirty-worktree",
-                         "error": "app/data 或 app/img 有未提交改动，刷新链会覆盖或混写这些文件",
-                         "files": files}
     with lock:
         if active is not None:
             return 409, {"error": "已有任务运行", "jobId": active}
@@ -157,7 +172,7 @@ def start(action, topic=None, force=False):
             with lock:
                 jobs[jid]["progress"] = message
         try:
-            result = scan_items(progress) if action == "scan-items" else refresh(topic, progress, force)
+            result = scan_items(progress) if action == "scan-items" else refresh(topic, progress)
             with lock:
                 jobs[jid].update(state="done", result=result, progress="完成")
         except Exception as exc:

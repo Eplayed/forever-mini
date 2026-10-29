@@ -26,7 +26,10 @@ import urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "app", "data")
 CACHE = os.path.join(ROOT, ".audit-cache")
+UPSTREAM = os.path.join(DATA, "upstream")
 DOCS = os.path.join(ROOT, "docs")
+# 参照物"薄到什么程度算没了"：正文不足这么多字，就不可能承载一次逐字回查
+THIN_PAGE_CHARS = 300
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
@@ -51,6 +54,36 @@ def squeeze(text):
         prev = text
         text = CJK_SPACE.sub("", text)
     return text
+
+
+_SNAPSHOT = None
+
+
+def snapshot_text():
+    """我们自己留存的上游快照原文（`app/data/upstream/*.json`）拼成的一份可逐字查的语料。
+
+    为什么要这一档：参考站把结构化数据放在 `/_shuju/<发布号>/` 下，**发布号会随上游发版轮换，
+    旧号直接 404**（2026-10-28 实测：挂 967 条的 `r-1792976599011/changes.json` 与挂 47 条的
+    `r-1791987485943/chengjiu.json` 都已 404，而 10-26 抓的时候是好的）。号一失效，
+    挂在号上的 provenance 就"回不到原文"，逐字回查整片红——那 900 多条红的是证据链，不是词条。
+    我们当初抓的那份整包存在本地，回这份**不可变副本**同样能证明"我们抄的和它写的是同一串字"；
+    但它证明不了"快照本身当初抄对没"，所以这一档在报告里单列，不冒充"官方页命中"。
+    """
+    global _SNAPSHOT
+    if _SNAPSHOT is None:
+        parts = []
+        if os.path.isdir(UPSTREAM):
+            for name in sorted(os.listdir(UPSTREAM)):
+                if name.endswith(".json"):
+                    with io.open(os.path.join(UPSTREAM, name), encoding="utf-8", errors="replace") as f:
+                        parts.append(f.read())
+        _SNAPSHOT = squeeze(" ".join(parts))
+    return _SNAPSHOT
+
+
+def page_is_thin(text):
+    """参照物还在不在：抓不到、或抓回来是个空壳/404 提示，都算没了。"""
+    return not text or len(squeeze(text).strip()) < THIN_PAGE_CHARS
 
 
 def around(text, needle, span=46):
@@ -280,6 +313,7 @@ def main():
 
     judged = []
     hits, misses, no_source, loose_hits = [], [], [], []
+    snap_hits = []
     expected_unofficial = []
     # 只有插件来源（本地 Lua 文件）的那一类：本来就没有能回查的网页，不是"声称官方却核不到"。
     # 混在 no_source 里会让体检表制造假问题（M1-C 那 326 只单源稀有 + 它们的掉落全落在这格），
@@ -326,7 +360,14 @@ def main():
         elif it.get("id") in exceptions:
             judged.append((it, exceptions[it["id"]]))
         else:
-            misses.append((it, srcs))
+            dead = [u for u in srcs if page_is_thin(pages.get(u))]
+            sn = snapshot_text()
+            if cn in sn or squeeze(cn) in sn:
+                # 声明页已经不承载这一串字（多半是 _shuju 快照号 404），
+                # 但我们留存的快照副本里有——证据链要重挂，词条不算错
+                snap_hits.append((it, srcs, dead))
+            else:
+                misses.append((it, srcs))
 
     today = datetime.date.today().isoformat()
     out = os.path.join(DOCS, "DATA-AUDIT-%s.md" % today)
@@ -346,6 +387,7 @@ def main():
     lines.append("| 在声明的官方页里逐字命中 | %d |" % len(hits))
     lines.append("| 去掉汉字间排版空格才命中（要人眼确认） | %d |" % len(loose_hits))
     lines.append("| **未命中（要人工回原文看）** | %d |" % len(misses))
+    lines.append("| 回本地留存快照才命中（声明页已失效或不承载这串字，**要重挂来源**） | %d |" % len(snap_hits))
     lines.append("| 已人工判定并留痕（见 audit-exceptions.json） | %d |" % len(judged))
     lines.append("| **声称官方却核不到（L0/L1 缺官方链接）** | %d |" % len(no_source))
     lines.append("| 只有插件来源、按设计就没有可回查网页 | %d |" % len(addon_only))
@@ -395,6 +437,38 @@ def main():
             lines.append("| %s（%s） | %s | %s | %s |" % (it["cn"], it["src"], e.get("verdict"),
                                                         e.get("quote"), e.get("decidedAt")))
         lines.append("")
+    if snap_hits:
+        lines.append("## 回本地留存快照才命中的那一类（**要重挂来源，不算词条错**）")
+        lines.append("")
+        lines.append("这一格 %d 条在声明的来源页里已经找不到，但在我们自己留存的 `app/data/upstream/` 快照副本里逐字有。"
+                     % len(snap_hits))
+        lines.append("最常见的原因是参考站的 `/_shuju/<发布号>/` **发布号会随上游发版轮换、旧号直接 404**——"
+                     "号一失效，整片条目的证据链就断了，而词条本身没动。")
+        lines.append("")
+        lines.append("**这一档不冒充「官方页命中」**：回本地副本只能证明「我们抄的和当时那份快照一致」，"
+                     "证明不了「快照本身当初抄对没」。所以处置动作是**重挂来源**（跑对应板块的刷新链，"
+                     "让 `provenance.url` 换成当前有效的发布号），不是把这几条当已核对完。")
+        lines.append("")
+        src_n = {}
+        for it, _s, _d in snap_hits:
+            src_n[it["src"]] = src_n.get(it["src"], 0) + 1
+        lines.append("| 板块 | 条数 |")
+        lines.append("| --- | --- |")
+        for k in sorted(src_n, key=lambda x: -src_n[x]):
+            lines.append("| %s | %d |" % (k, src_n[k]))
+        lines.append("")
+        dead_urls = {}
+        for _it, _srcs, dead in snap_hits:
+            for u in dead:
+                dead_urls[u] = dead_urls.get(u, 0) + 1
+        if dead_urls:
+            lines.append("### 这些来源页现在取不到（挂着上面这些条）")
+            lines.append("")
+            lines.append("| 页面 | 挂着多少条要重挂 |")
+            lines.append("| --- | --- |")
+            for u in sorted(dead_urls, key=lambda x: -dead_urls[x]):
+                lines.append("| %s | %d |" % (u, dead_urls[u]))
+            lines.append("")
     if misses:
         lines.append("## 未命中清单（逐条待人工核对）")
         lines.append("")
@@ -461,8 +535,8 @@ def main():
     lines.append("")
     io.open(out, "w", encoding="utf-8").write("\n".join(lines))
 
-    print("\n命中 %d / 排版空格才命中 %d / 未命中 %d / 结构问题 %d → 报告 %s"
-          % (len(hits), len(loose_hits), len(misses), len(no_source), os.path.relpath(out, ROOT)))
+    print("\n命中 %d / 排版空格才命中 %d / 回本地快照才命中 %d / 未命中 %d / 结构问题 %d → 报告 %s"
+          % (len(hits), len(loose_hits), len(snap_hits), len(misses), len(no_source), os.path.relpath(out, ROOT)))
     if misses:
         print("未命中前 10 条：" + "、".join(it.get("cn", "?") for it, _ in misses[:10]))
     # 卡口只拦两类真正会骗人的：① 声称官方（L0/L1）却在它自己声明的那页原文里找不到的名字
@@ -480,6 +554,9 @@ def main():
     if misses or loose_hits:
         print("警告（不卡口）：没声称官方的未命中 %d 条、排版空格才命中 %d 条，逐条见报告"
               % (len(misses) - len(hard), len(loose_hits)))
+    if snap_hits:
+        print("警告（不卡口）：%d 条只能回我们自己留存的快照副本——来源页已失效或不承载这串字，要重挂来源"
+              % len(snap_hits))
 
 
 if __name__ == "__main__":

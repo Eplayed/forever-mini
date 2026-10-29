@@ -1,5 +1,6 @@
 """Focused tests for staging and allowlist; run: python3 -m unittest discover -s tools/admin."""
 import json
+import io
 import os
 import tempfile
 import unittest
@@ -61,30 +62,80 @@ class AdminTests(unittest.TestCase):
         self.assertEqual(jobs.start("shell", "anything")[0], 400)
         self.assertEqual(jobs.start("refresh", "items")[0], 400)
 
-    def test_refresh_refuses_dirty_data_before_workflow(self):
-        with patch.object(jobs.subprocess, "run", return_value=CompletedProcess([], 0, " M app/data/world.json\n", "")) as run:
-            with self.assertRaises(RuntimeError):
-                jobs.refresh("world", lambda _: None)
-            self.assertEqual(run.call_count, 1)
+    def test_refresh_refuses_topics_without_a_chain(self):
+        with self.assertRaises(RuntimeError):
+            jobs.refresh("items", lambda _: None)
 
-    def test_start_returns_the_file_list_for_confirmation(self):
-        # 脏不再只是"启动失败"，要当场把清单回给页面让人确认，且不占单工作线程
-        with patch.object(jobs, "dirty_data", return_value=["wow-forever-web/app/data/bis.json"]):
-            code, obj = jobs.start("refresh", "bis")
-        self.assertEqual((code, obj["code"], obj["files"]), (409, "dirty-worktree", ["wow-forever-web/app/data/bis.json"]))
-        self.assertIsNone(jobs.active)
+    def test_commit_data_only_touches_data_and_img(self):
+        """自动收口必须只提 app/data 与 app/img——别人 staged 的无关文件不能被卷走。"""
+        import subprocess
+        d = tempfile.mkdtemp()
+        repo = lambda *a: subprocess.run(["git"] + list(a), cwd=d, capture_output=True, text=True)
+        subprocess.run(["git", "init", "-q", d], capture_output=True, text=True)
+        repo("config", "user.email", "t@t"); repo("config", "user.name", "t")
+        for rel in ("app/data/x.json", "app/img/y.png", "docs/z.md"):
+            p = os.path.join(d, rel)
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            with io.open(p, "w", encoding="utf-8") as f:
+                f.write("base")
+        repo("add", "-A"); repo("commit", "-q", "-m", "base")
+        for rel in ("app/data/x.json", "app/img/y.png", "docs/z.md"):
+            with io.open(os.path.join(d, rel), "w", encoding="utf-8") as f:
+                f.write("dirty")
+        with patch.object(jobs, "ROOT", d):
+            got = jobs.commit_data("chore(admin): 测试收口")
+        self.assertIsNotNone(got)
+        self.assertEqual(got[1], 2, "只应提 data 与 img 那两个文件")
+        left = subprocess.run(["git", "status", "--porcelain"], cwd=d, capture_output=True, text=True).stdout
+        self.assertIn("docs/z.md", left, "docs 的改动不该被这次提交带走")
+        self.assertNotIn("app/data", left)
+        files = subprocess.run(["git", "show", "--name-only", "--format=", "HEAD"], cwd=d,
+                               capture_output=True, text=True).stdout.split()
+        self.assertEqual(sorted(os.path.basename(x) for x in files), ["x.json", "y.png"])
+        with patch.object(jobs, "ROOT", d):
+            self.assertIsNone(jobs.commit_data("再来一次"))   # 干净就不该造空提交
 
-    def test_confirmed_force_runs_without_the_worktree_block(self):
-        calls = []
-        def fake(cmd, *a, **kw):
-            calls.append(cmd)
+    def test_refresh_autocommits_before_and_after_the_chain(self):
+        """站主 2026-10-28 定的口径：工作树脏不再是拦路石，跑前收口现场、跑完提交产物、都不 push。"""
+        state = {"dirty": ["wow-forever-web/app/data/x.json"], "commits": [], "cmds": []}
+
+        def fake_run(cmd, *a, **kw):
+            state["cmds"].append(cmd)
+            if cmd[:2] == ["bash", "tools/refresh.sh"]:
+                state["dirty"] = ["wow-forever-web/app/data/talents/druid.json"]
             return CompletedProcess([], 0, "", "")
-        with patch.object(jobs, "dirty_data", return_value=["wow-forever-web/app/data/bis.json"]), \
-             patch.object(jobs.subprocess, "run", side_effect=fake):
-            result = jobs.refresh("bis", lambda _: None, force=True)
-        self.assertTrue(result["skippedWorktreeCheck"])
-        self.assertIn("跳过了工作树检查", result["message"])
-        self.assertEqual(calls[0], ["bash", "tools/refresh.sh", "bis"])
+
+        def fake_commit(message):
+            state["commits"].append(message)
+            n = len(state["dirty"])
+            state["dirty"] = []
+            return ("abc1234", n)
+
+        with patch.object(jobs, "dirty_data", side_effect=lambda: list(state["dirty"])), \
+             patch.object(jobs, "commit_data", side_effect=fake_commit), \
+             patch.object(jobs.subprocess, "run", side_effect=fake_run):
+            result = jobs.refresh("talents", lambda _: None)
+        self.assertEqual(state["cmds"][0], ["bash", "tools/refresh.sh", "talents"])
+        self.assertEqual(len(state["commits"]), 2)
+        self.assertIn("启动前自动收口", state["commits"][0])
+        self.assertIn("的产物（门禁已过，未推送、未发布）", state["commits"][1])
+        self.assertEqual(result["preCommit"], ["abc1234", 1])
+        self.assertEqual(result["postCommit"], ["abc1234", 1])
+        self.assertIn("没有 push", result["message"])
+
+    def test_a_failed_chain_leaves_the_worktree_for_a_human(self):
+        """门禁没过就绝不自动提交产物——现场要留在工作树里给人看。"""
+        state = {"dirty": [], "commits": []}
+
+        def fake_run(cmd, *a, **kw):
+            return CompletedProcess([], 1, "", "gate said no")
+
+        with patch.object(jobs, "dirty_data", side_effect=lambda: list(state["dirty"])), \
+             patch.object(jobs, "commit_data", side_effect=lambda m: state["commits"].append(m)), \
+             patch.object(jobs.subprocess, "run", side_effect=fake_run):
+            with self.assertRaises(RuntimeError):
+                jobs.refresh("talents", lambda _: None)
+        self.assertEqual(state["commits"], [])
 
 
 if __name__ == "__main__":

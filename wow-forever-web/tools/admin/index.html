@@ -372,9 +372,9 @@ async function pollJob(id) {
     await new Promise(resolve => setTimeout(resolve, 1500));
   }
 }
-async function postJob(action, topic, force) {
+async function postJob(action, topic) {
   const r = await fetch('/api/jobs', {method:'POST', headers:{'Content-Type':'application/json'},
-                                      body:JSON.stringify({action, topic, force: !!force})});
+                                      body:JSON.stringify({action, topic})});
   const d = await r.json();
   return {ok: r.ok, status: r.status, d};
 }
@@ -382,23 +382,17 @@ $('#s0').addEventListener('click', async e => {
   const button = e.target.closest('button[data-action]');
   if (!button || jobBusy) return;
   const action = button.dataset.action, topic = button.dataset.topic;
+  if (action === 'refresh' && !confirm('现在跑「' + topic + '」这条刷新链？\n\n' +
+      '会真抓上游、改写 app/data 与 app/img 并跑全套门禁（可能要几分钟）。\n' +
+      '工作树里已有的未提交改动会先被自动提交成一次本地收口（不推送），跑完的产物也另提一次。')) {
+    jobMessage('没启动', '你取消了。什么都没跑，工作树没动。', false, '');
+    return;
+  }
   jobBusy = true;
   setButtons();
   jobMessage('启动中', action === 'scan-items' ? '正在连接公开物品 API…' : '正在检查本地工作树…', false, '');
   try {
-    let {ok, status, d} = await postJob(action, topic, false);
-    if (!ok && d.code === 'dirty-worktree') {
-      const files = (d.files || []).slice(0, 12).join('\n');
-      const more = (d.files || []).length > 12 ? '\n…共 ' + d.files.length + ' 个' : '';
-      // 不静默替人决定：把会被覆盖的文件摆出来，确认了才带着 force 再发一次
-      if (!confirm('工作树里有未提交改动，这条刷新链会覆盖或混写这些文件：\n\n' + files + more +
-                   '\n\n确认没有别的会话正在写它们，照样跑？')) {
-        jobMessage('已停在检查这一步', '没启动。这些改动还没提交——先收口工作树，或确认没人正在写同一批文件。', true, files + more);
-        jobBusy = false; setButtons(); return;
-      }
-      jobMessage('启动中', '正在检查本地工作树…', false, '');
-      ({ok, status, d} = await postJob(action, topic, true));
-    }
+    const {ok, status, d} = await postJob(action, topic);
     if (!ok) throw new Error(d.error || 'HTTP ' + status);
     localStorage.setItem('adminJobId', d.jobId);
     pollJob(d.jobId).catch(err => { jobBusy = false; setButtons(); jobMessage('无法读取任务结果', err.message, true, ''); });
