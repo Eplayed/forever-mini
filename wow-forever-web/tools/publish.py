@@ -101,8 +101,12 @@ def status():
 
 
 def worktree_dirty():
-    """app/data 与 app/img 有没有未提交改动——发布口径必须是"某个提交"，不能是半成品。"""
-    p = subprocess.run(["git", "status", "--porcelain", "--", "app/data", "app/img"],
+    """整个 app/ 有没有未提交改动——发布口径必须是"某个提交"，不能是半成品。
+
+    为什么连 app/src 也算：网页发的是 `app/dist`，而它是 app/src + app/data + app/img 一起构建出来的。
+    只看数据目录会漏：别的会话正在改组件时按下去，发出去的就是人家没写完的界面。
+    """
+    p = subprocess.run(["git", "status", "--porcelain", "--", "app"],
                        cwd=ROOT, capture_output=True, text=True)
     return [line[3:].strip() for line in p.stdout.splitlines() if line.strip()]
 
@@ -165,7 +169,7 @@ def main():
 
     dirty = worktree_dirty()
     if dirty and not args.allow_dirty:
-        sys.exit("app/data 或 app/img 有 %d 个未提交改动，这一版对不上任何提交，不发。\n"
+        sys.exit("app/ 下有 %d 个未提交改动（构建产物含这些），这一版对不上任何提交，不发。\n"
                  "       先收口（刷新链会自动做，或自己提交），确实要越过它加 --allow-dirty：\n       %s"
                  % (len(dirty), "\n       ".join(dirty[:10])))
     if not args.skip_gate:
@@ -180,7 +184,7 @@ def main():
             # 打包器看的是整仓，我们这条闸只看数据目录：多会话并发时别人的未提交文档
             # 也会把包名标成 -dirty。不拦，但必须说清为什么放行，且把这标记留在台账里。
             print("提醒：包名带 -dirty——`release-package.py` 看的是整仓未提交改动，"
-                  "本脚本只要求 app/data 与 app/img 干净（已核对）。")
+                  "本脚本只要求 app/ 干净（已核对）。")
         run(["python3", "tools/pkg-verify.py"])
         result = "只准备未上传"
         if args.push:
