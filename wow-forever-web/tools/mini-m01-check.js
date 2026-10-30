@@ -628,20 +628,21 @@ async function main() {
   log('点一个部位弹出这个部位的备选（含属性行与"另一家列的第一件"）',
     !!bisPop && bisPop.n >= 1 && /头部/.test(bisPop.head) && (bisPop.st || []).length > 0
       && /一致|分歧|没列/.test(String(bisPop.theirs)), JSON.stringify(bisPop));
-  const bis3d = await call('开占位模型', () => mp.evaluate(() => {
-    const p = getCurrentPages().pop();
-    p.toggle3d();
-    const d = p.data;
-    return { live: d.live3d, nodes: (d.nodes || []).length, unmapped: d.unmappedText || '' };
-  }), 3);
-  log('占位人台一件一块，没格子的部位照实列出不硬塞',
-    !!bis3d && bis3d.live === true && bis3d.nodes >= 10, JSON.stringify(bis3d));
+  /* 2026-10-30 站主把「看占位模型」这颗按钮撤了（真实模型已经能在真机出画面），
+     占位人台那一格连同 DOLL_LAYOUT / nodes / unmapped 一起从页面里删掉了。
+     这里钉的是"删干净了、没留半截入口"，不再钉占位人台本身。 */
+  const doll0 = await call('确认占位那一格已撤', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { live: d.live3d, nodes: d.nodes, toggle: typeof getCurrentPages().pop().toggle3d };
+  }), 2);
+  log('「看占位模型」入口与占位数据已从页面撤干净（不留点不到的按钮）',
+    !!doll0 && doll0.live === undefined && doll0.nodes === undefined && doll0.toggle === 'undefined',
+    JSON.stringify(doll0));
 
   /* ---------- 真实 3D（2026-10-30 C 段）----------
      这台模拟器起不了 xr-frame（探针那一轮实测：空场景都不发 ready），
      所以这里钉得住的是"发没发请求、取的是不是当前这一套这一阵营、失败有没有回原画并说明"，
      画面那一半只能由真机回答——不许拿"请求数对了"冒充"玩家看得见模型"。 */
-  await call('关掉占位模型回原画', () => mp.evaluate(() => { getCurrentPages().pop().toggle3d(); return 1; }), 2);
   hitsClear();
   const mv = await call('进页后先数一遍模型请求', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data;
@@ -728,8 +729,10 @@ async function main() {
     !!bis && !/\d+(\.\d+)?\s*%/.test(bis.text) && !/秒伤|DPS|权重/.test(bis.text),
     String(bis && bis.text).slice(0, 80));
   const bisWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
-  log('占位那句话（「不是游戏里的样子」）仍在：真实模型只在自己成功态那一格说话，两种模式各说各的',
-    /占位模型/.test(bisWxml) && /不是游戏里的样子/.test(bisWxml) && /modelState === 'ok'/.test(bisWxml), '');
+  /* 判的是"有没有那颗按钮/那一格"，不是那几个字——注释里还留着"站主把看占位模型撤了"这句来历 */
+  log('页面里只剩两种画面：默认那张图 + 查看 3D；占位入口与那一格都不在代码里',
+    !/bindtap="toggle3d"/.test(bisWxml) && !/class="doll"/.test(bisWxml)
+      && /查看 3D/.test(bisWxml) && /modelState === 'shown'/.test(bisWxml), '');
   const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
   log('首页有整宽的配装入口卡（站主：核心功能，必须醒目），且排在四张小卡前面',
     /class="bis-card/.test(homeWxml) && /bindtap="goBis"/.test(homeWxml)

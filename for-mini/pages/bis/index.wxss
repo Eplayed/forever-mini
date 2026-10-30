@@ -114,8 +114,10 @@
 
 /* —— 中间那一栏：默认职业原画，点开是本站拼的占位人台 —— */
 .stage {
+  /* 竖长方形：站主 2026-10-30 要"完整展示整体装备"。横盒里一个站立人形只能占中间一小条，
+     竖盒同一条相机参数就能把从头到脚框进来（相机参数没动，那是 B2 真机验过的取法） */
   position: relative;
-  height: 420rpx;
+  height: 860rpx;
   border: 1rpx solid var(--line-2);
   border-radius: 6rpx;
   overflow: hidden;
@@ -185,36 +187,6 @@
   color: var(--txt-caution);
 }
 
-.doll {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--sunk);
-}
-
-.db {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18rpx;
-  color: var(--txt-title);
-  background: var(--q0);
-  border: 1rpx solid var(--line-2);
-  border-radius: 4rpx;
-}
-
-.db-round {
-  border-radius: 50%;
-}
-
-.db-q1 { background: var(--q1); color: var(--sunk); }
-.db-q2 { background: var(--q2); color: var(--sunk); }
-.db-q3 { background: var(--q3); }
-.db-q4 { background: var(--q4); }
-.db-q5 { background: var(--q5); }
 
 .stage-btns {
   position: absolute;

@@ -13,28 +13,6 @@ const bisModel = require('../../services/bis-model')
    这一页没有打包快照：配装表 118 KB，主包只剩 6 KB 余量，硬塞会把别的通道挤掉——
    所以离线时明确说"要联网才看得到"，不拿半截数据糊玩家。 */
 
-/* 占位人台：一件一块，颜色跟品质走。坐标是相对展示框的百分比。
-   这是本站自己拼的示意图，不是游戏里的样子（界面上固定写这一句）。 */
-const DOLL_LAYOUT = {
-  '头部': [[43, 3, 14, 10, 1]],
-  '项链': [[44, 14, 12, 5]],
-  '肩部': [[29, 19, 42, 7]],
-  '背部': [[22, 26, 7, 26]],
-  '胸部': [[39, 26, 22, 20]],
-  '手腕': [[25, 34, 8, 7]],
-  '手': [[23, 45, 10, 9]],
-  '腰部': [[39, 47, 22, 7]],
-  '腿部': [[39, 55, 22, 24]],
-  '脚': [[38, 80, 24, 8]],
-  '主手': [[8, 24, 7, 54]],
-  '副手': [[15, 26, 5, 40]],
-  '副手：盾牌': [[15, 26, 6, 34]],
-  '副手：手持物品': [[15, 26, 5, 40]],
-  '双手武器': [[7, 22, 9, 62]],
-  '远程': [[86, 26, 7, 40]],
-  '戒指': [[21, 56, 6, 6], [28, 56, 6, 6]],
-  '饰品': [[66, 44, 9, 9], [66, 55, 9, 9]]
-};
 const SUM_KEYS = ['力量', '敏捷', '耐力', '智力', '精神', '护甲'];
 const CMP_CN = { same: '两家一致', diff: '两家分歧', none: '另一家没列' };
 
@@ -62,9 +40,6 @@ Page({
     enchants: [],
     consumables: [],
     stageUrl: '',
-    nodes: [],
-    unmapped: [],
-    live3d: false,
     /* 真实 3D 那一层：modelOn 才是挂了 xr-frame 组件的状态。
        进这一页时它必须是 false 且 modelSrc 为空——一个模型请求都不发（站主要的是点开才有）。 */
     modelOn: false,
@@ -185,7 +160,7 @@ Page({
       }
       this.set = r.data
       /* 中间那一栏默认是职业原画（与网页配装页同一张，走素材层）；占位人台叠在它上面 */
-      this.setData({ stageUrl: oss.assetUrl(this.batch, r.data.art || null), live3d: false })
+      this.setData({ stageUrl: oss.assetUrl(this.batch, r.data.art || null) })
       this.render()
       return r
     }).catch((e) => { this.setData({ set: null, errText: e.message }) })
@@ -232,28 +207,10 @@ Page({
     })
     const sum = set.sum || {}
     const sumRows = SUM_KEYS.filter((k) => sum[fac] && sum[fac][k]).map((k) => ({ k, v: sum[fac][k] }))
-    /* 占位人台：一件一块；库里没有格子的部位照实列出来，不硬塞到别的块上冒充 */
-    const used = {}
-    const nodes = []
-    const unmapped = []
-    rows.forEach((r) => {
-      const plan = DOLL_LAYOUT[r.slot]
-      if (!plan) { unmapped.push(r.slotLabel); return }
-      const pick = plan[Math.min(r.cell, plan.length) - 1] || plan[0]
-      nodes.push({
-        key: r.slot + '-' + r.cell, l: pick[0], t: pick[1], w: pick[2], h: pick[3],
-        round: !!pick[4], q: r.q, label: r.slot.charAt(0), name: r.name || ('#' + r.item),
-        slot: r.slot, cell: r.cell
-      })
-      used[r.slot] = 1
-    })
     this.setData({
       rows,
       sum: sumRows,
       sumNote: set.sumNote || '',
-      nodes,
-      unmapped,
-      unmappedText: unmapped.join('、'),
       enchants: ((one.enchants) || []).map((x) => this.itemLine(x[0], x[1] + (x[2] == null ? '' : '（技能 ' + x[2] + '）'))),
       consumables: ((one.consumables) || []).map((x) => this.itemLine(x, '')),
       fetched: set.fetched,
@@ -302,13 +259,6 @@ Page({
 
   closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) },
 
-  toggle3d() {
-    /* 占位人台与真实模型不同时出现：两个都开着会有两块画面叠在一起，玩家看不出在看哪个 */
-    const on = !this.data.live3d
-    if (on) this.teardownModel()
-    this.setData({ live3d: on })
-  },
-
   /* 「查看 3D」：到这里才第一次碰模型清单。
      顺序是"拆旧场景 → 拿一个号 → 过三道闸 → 才给 src"，
      组件挂上（有 src）才会真的下载，所以点一次最多取一件。 */
@@ -323,7 +273,7 @@ Page({
       return
     }
     this.setData({
-      live3d: false, modelOn: true, modelSrc: '', modelDetail: '',
+      modelOn: true, modelSrc: '', modelDetail: '',
       modelState: 'loading', modelText: '在对这一套的名单', modelErr: ''
     })
     bisModel.load(setId, fac, doll).then((r) => {
