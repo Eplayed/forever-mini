@@ -10,12 +10,14 @@ glTF 加载器里没有这个扩展的实现，且它的逻辑是"required 扩�
 本脚本做的唯一改动：把每张内嵌 WebP 原图解码后重新编成 PNG，写回 BIN，
 `images[].mimeType` 改 `image/png`，`textures[].extensions.EXT_texture_webp.source`
 搬回标准字段 `source`，并删掉 `extensionsUsed/Required` 里的这一项。
-顶点、索引、材质参数、节点、包围盒一律逐字节照搬——不许"顺手修成别的一套"。
+顶点、索引、材质参数、节点、包围盒一律照搬。PNG 分支逐像素一致；
+JPEG 有损且不支持透明像素，透明图遇到 JPEG 会直接停止。
 
 来源与红线：输入必须是 art.json.bisRealModels 里已登记且 placementVerdict=PASS 的那一份，
 脚本会先核 SHA；产物只是**候选**，未经真机验证不得当成已支持（见 VERIFY 文档）。
 """
 import argparse
+import copy
 import hashlib
 import io
 import json
@@ -87,40 +89,56 @@ def find_registered(file_rel):
 
 
 def convert(src, dst, fmt):
-    j, bin_bytes = read_glb(src)
+    source, bin_bytes = read_glb(src)
+    j = copy.deepcopy(source)
     images = j.get("images") or []
     bufviews = j.get("bufferViews") or []
     # 只支持"单 buffer + image 指向 bufferView"这种客户端导出的写法；不是就停，别猜
     if len(j.get("buffers") or []) != 1 or j["buffers"][0].get("uri"):
         raise SystemExit("这份 GLB 不是单内嵌 buffer 的写法，脚本不处理（别硬改）")
-    new_views = []
-    new_images = []
-    blob = b""
+    if any(view.get("buffer", 0) != 0 for view in bufviews):
+        raise SystemExit("bufferView 引用了非内嵌 buffer，脚本不处理")
+    replacements = {}
+    image_view_ids = set()
     changed = 0
     for idx, im in enumerate(images):
         src_view = im.get("bufferView")
-        if src_view is None:
-            raise SystemExit("image %d 带 uri/外部文件，不在处理范围" % idx)
+        if src_view is None or src_view >= len(bufviews) or src_view in image_view_ids:
+            raise SystemExit("image %d 无有效且独占的内嵌 bufferView，不在处理范围" % idx)
+        image_view_ids.add(src_view)
         bv = bufviews[src_view]
         start = bv.get("byteOffset", 0)
         raw = bin_bytes[start:start + bv["byteLength"]]
+        if len(raw) != bv["byteLength"]:
+            raise SystemExit("image %d 的 bufferView 越过 BIN 边界" % idx)
         mime = (im.get("mimeType") or "").lower()
         want = "image/" + fmt.lower()
         if mime == want:
-            new_views.append(dict(bv))
-            new_images.append({"bufferView": len(new_views) - 1, "mimeType": mime})
-            blob += raw
             continue
-        img = Image.open(io.BytesIO(raw))
+        img = Image.open(io.BytesIO(raw)).convert("RGBA")
+        if fmt == "JPEG":
+            if img.getchannel("A").getextrema()[0] < 255:
+                raise SystemExit("image %d 含透明像素，不能直接编码为 JPEG" % idx)
+            img = img.convert("RGB")
         out = io.BytesIO()
-        img.save(out, fmt)          # 逐像素同一张图，只换编码
-        data = out.getvalue()
-        pad = (4 - len(data) % 4) % 4
-        view = {"buffer": 0, "byteOffset": len(blob), "byteLength": len(data)}
-        blob += data + b"\x00" * pad
-        new_views.append(view)
-        new_images.append({"bufferView": len(new_views) - 1, "mimeType": want})
+        img.save(out, fmt)
+        replacements[src_view] = out.getvalue()
+        im["mimeType"] = want
         changed += 1
+
+    # 保留原有全部 bufferView 的编号和元数据；accessor 仍指向原来的几何视图。
+    # 只替换图片视图的字节，并重新计算每个视图的偏移。
+    blob = bytearray()
+    for view_id, view in enumerate(bufviews):
+        start = source["bufferViews"][view_id].get("byteOffset", 0)
+        length = source["bufferViews"][view_id]["byteLength"]
+        data = replacements.get(view_id, bin_bytes[start:start + length])
+        if view_id not in replacements and len(data) != length:
+            raise SystemExit("bufferView %d 越过 BIN 边界" % view_id)
+        blob.extend(b"\x00" * (-len(blob) % 4))
+        view["byteOffset"] = len(blob)
+        view["byteLength"] = len(data)
+        blob.extend(data)
 
     # textures：把 EXT_texture_webp 的 source 搬回标准字段
     moved = 0
@@ -132,8 +150,6 @@ def convert(src, dst, fmt):
             if not t["extensions"]:
                 t.pop("extensions", None)
             moved += 1
-    j["images"] = new_images
-    j["bufferViews"] = new_views
     j["buffers"][0]["byteLength"] = len(blob)
     used = [u for u in (j.get("extensionsUsed") or []) if u != "EXT_texture_webp"]
     req = [u for u in (j.get("extensionsRequired") or []) if u != "EXT_texture_webp"]
@@ -145,8 +161,8 @@ def convert(src, dst, fmt):
         j["extensionsRequired"] = req
     else:
         j.pop("extensionsRequired", None)
-    size = write_glb(dst, j, blob)
-    return {"images": len(new_images), "reencoded": changed, "textures_moved": moved,
+    size = write_glb(dst, j, bytes(blob))
+    return {"images": len(images), "reencoded": changed, "textures_moved": moved,
             "bytes": size, "sha256": sha256_file(dst),
             "extensions_left": (j.get("extensionsUsed") or []) + (j.get("extensionsRequired") or [])}
 
@@ -167,8 +183,10 @@ def main():
     got = sha256_file(src)
     if got != reg.get("sha256"):
         raise SystemExit("源文件 SHA 与登记不符（%s ≠ %s）——先查清是谁改了" % (got[:12], reg["sha256"][:12]))
+    if os.path.getsize(src) != reg.get("bytes"):
+        raise SystemExit("源文件字节数与登记不符")
 
-    j0, _ = read_glb(src)
+    j0, bin0 = read_glb(src)
     info = convert(src, args.out, args.format)
     print("源 %s\n  登记 SHA %s · %d B · 阵营 %s/%s · placementVerdict %s"
           % (args.file, got[:12], reg["bytes"], reg.get("setId"), reg.get("faction"), reg.get("placementVerdict")))
@@ -176,7 +194,7 @@ def main():
           % (args.out, info["bytes"], info["sha256"][:12], info["images"], info["reencoded"],
              args.format, info["textures_moved"], info["extensions_left"] or "无"))
     # 自检：产物必须还能被读回来，且几何/网格数没动
-    j2, _ = read_glb(args.out)
+    j2, bin2 = read_glb(args.out)
     # 与**源文件**比，不写死数字：几何只许照搬，源里有几个网格就是几个
     for key in ("meshes", "nodes", "accessors", "materials", "images"):
         if len(j2.get(key) or []) != len(j0.get(key) or []):
@@ -184,6 +202,22 @@ def main():
                              % (key, len(j2.get(key) or []), len(j0.get(key) or [])))
     if [a.get("count") for a in j2["accessors"]] != [a.get("count") for a in j0["accessors"]]:
         raise SystemExit("候选的 accessor 顶点数与源不一致，不许改几何")
+    if j2.get("accessors") != j0.get("accessors") or j2.get("meshes") != j0.get("meshes") or j2.get("nodes") != j0.get("nodes") or j2.get("materials") != j0.get("materials"):
+        raise SystemExit("候选的 accessor/mesh/node/material 与源不一致")
+    if len(j2.get("bufferViews") or []) != len(j0.get("bufferViews") or []):
+        raise SystemExit("候选的 bufferView 数量与源不一致")
+    image_views = {im["bufferView"] for im in j0.get("images") or []}
+    for view_id, (old, new) in enumerate(zip(j0["bufferViews"], j2["bufferViews"])):
+        old_data = bin0[old.get("byteOffset", 0):old.get("byteOffset", 0) + old["byteLength"]]
+        new_data = bin2[new.get("byteOffset", 0):new.get("byteOffset", 0) + new["byteLength"]]
+        if len(new_data) != new["byteLength"] or (view_id not in image_views and old_data != new_data):
+            raise SystemExit("候选的 bufferView %d 越界或非图片字节被改动" % view_id)
+    for idx, (old, new) in enumerate(zip(j0.get("images") or [], j2.get("images") or [])):
+        old_view, new_view = j0["bufferViews"][old["bufferView"]], j2["bufferViews"][new["bufferView"]]
+        old_data = bin0[old_view.get("byteOffset", 0):old_view.get("byteOffset", 0) + old_view["byteLength"]]
+        new_data = bin2[new_view.get("byteOffset", 0):new_view.get("byteOffset", 0) + new_view["byteLength"]]
+        if Image.open(io.BytesIO(old_data)).convert("RGBA").tobytes() != Image.open(io.BytesIO(new_data)).convert("RGBA").tobytes():
+            raise SystemExit("候选的 image %d 像素与源不一致" % idx)
     if (j2.get("extensionsRequired") or []):
         raise SystemExit("候选仍声明 required 扩展：%s" % j2["extensionsRequired"])
     print("自检：与源逐项等量（网格 %d · 节点 %d · accessor %d · 材质 %d · 图片 %d）· 顶点数一致 · 无 required 扩展"
