@@ -184,6 +184,9 @@ function fakeOss() {
     if (!o) return Promise.resolve(res(404, {}, Buffer.from('<Code>NoSuchKey</Code>')));
     const h = { etag: '"' + md5u(o.buf) + '"', 'content-length': o.buf.length, 'cache-control': o.cacheControl,
       'content-type': o.contentType || '', 'content-disposition': o.contentDisposition || '', 'last-modified': o.lastModified };
+    /* 真 OSS 的默认域名会给对象强制 attachment + x-oss-force-download: true，
+       素材那层 2026-10-22 实测过；模型通道也要能演这一态（见下面那条"强制下载"断言）。 */
+    if (st.forceDownloadAll) { h['content-disposition'] = 'attachment'; h['x-oss-force-download'] = 'true'; }
     if (method === 'HEAD') { st.counts.HEAD += 1; return Promise.resolve(res(200, h)); }
     st.counts.GET += 1;
     return Promise.resolve(res(200, h, o.buf));
@@ -1340,6 +1343,7 @@ const oss = require(MINI_SERVICE);
     const idx = {
       product: 'wow-forever-mini-models', kind: 'bis-models-index',
       formatVersion: 'glb-png-v1', assetDir: 'assets/models/real/',
+      counts: { models: 1, bytes: buf.length },
       models: [{
         setId, faction, file, pngBytes: buf.length, pngSha256: sha,
         sourceBytes: 405940, sourceSha256: 'fe36a30943517a9c1bb495152f633da95658509ec9e7ead21c8d5c11e50c3aae',
@@ -1437,6 +1441,46 @@ const oss = require(MINI_SERVICE);
     const st = fakeOss();
     return mdlRun(f.dir, st, {}).then((rc) => rc === 1 && st.counts.PUT === 0);
   }, () => '索引说一套、命令拼另一套也没人管');
+
+  await step('反例：索引 counts 与实际条数/字节不自洽 → 传前就停（手改过一条就要红）', () => {
+    const f = mkModelFixture('counts', (idx) => { idx.counts.bytes += 1; });
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) => rc === 1 && st.counts.PUT === 0);
+  }, () => '索引自己算不平也照发');
+
+  await step('--index：模型齐了才发清单，且按可变对象发（短期缓存 + GET 回读同字节）', () => {
+    const f = mkModelFixture('idx');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, { index: true }).then((rc) => {
+      const key = 'wow/beta/v1/bis/models/index.json';
+      const o = st.objs.get(key);
+      const local = fs.readFileSync(path.join(f.dir, 'oss-build', 'beta', 'bis', 'models', 'index.json'));
+      return rc === 0 && st.counts.PUT === 2 && !!o
+        && Buffer.compare(o.buf, local) === 0
+        && o.cacheControl === 'public, max-age=60, must-revalidate';
+    });
+  }, () => '索引没跟上或缓存档发成了不可变');
+
+  await step('反例：模型有一件冲突 → 带 --index 也不许把清单切过去（那等于发一张会 404 的地图）', () => {
+    const f = mkModelFixture('idxclash');
+    const st = fakeOss();
+    st.set(f.key, Buffer.alloc(2048, 9), 'public, max-age=31536000, immutable', 'model/gltf-binary', 'inline');
+    return mdlRun(f.dir, st, { index: true }).then((rc) =>
+      rc === 1 && !st.objs.has('wow/beta/v1/bis/models/index.json') && st.counts.PUT === 0);
+  }, () => '模型没齐还把索引发了');
+
+  await step('默认域名强制 attachment：整批第一次发完，重跑不许当成元数据漂移反复重传', () => {
+    const f = mkModelFixture('forced');
+    const st = fakeOss();
+    st.forceDownloadAll = true;
+    return mdlRun(f.dir, st, {}).then((rc1) => mdlRun(f.dir, st, {}).then((rc2) =>
+      st.transport('HEAD', 'b', 'r', '/' + f.key, null, {}).then((h) =>
+        rc1 === 0 && rc2 === 0 && st.counts.PUT === 1
+        /* 我们写出去的是 inline（对象元数据里就是 inline），但默认域名回读一定是 attachment：
+           这一态必须被认成"内容没动、别重传"，而不是每次判漂移重灌整批 */
+        && h.headers['x-oss-force-download'] === 'true' && h.headers['content-disposition'] === 'attachment'
+        && st.objs.get(f.key).contentDisposition === 'inline')));
+  }, () => '被强制 attachment 每次都被判成漂移、整批重灌');
 
   await step('--set 点名的只传那件、点不到的直接报错', () => {
     const f = mkModelFixture('pick');

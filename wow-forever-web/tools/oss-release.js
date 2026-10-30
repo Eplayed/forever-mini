@@ -2039,6 +2039,9 @@ async function cmdAssets(env, opts) {
 const MODEL_ASSET_DIR = 'assets/models/real';
 const MODEL_LOCAL_DIR = 'models';
 const MODEL_INDEX_REL = ['bis', 'models', 'index.json'];
+/* 远端那份清单是可变对象（和指针同一档缓存）：模型不可变、名字带哈希，
+   清单却必须能当天改，否则换一件模型就要等一年缓存。 */
+const MODEL_INDEX_KEY = 'bis/models/index.json';
 const MODEL_MIME = 'model/gltf-binary';
 
 /* 索引读一次，形状不对就直接返回错误——不发任何远端请求 */
@@ -2053,6 +2056,11 @@ function modelIndex(env) {
   if (String(idx.assetDir) !== MODEL_ASSET_DIR + '/') errors.push('索引 assetDir 是 ' + idx.assetDir + '，与本命令拼的 ' + MODEL_ASSET_DIR + '/ 不一致');
   const models = Array.isArray(idx.models) ? idx.models : [];
   if (!models.length) errors.push('索引里一条模型都没有');
+  /* 索引自己先要算得通：counts 是 B1 构建时算的，手改过一条就对不上（B3 的"重新核一遍"落在这里） */
+  const c = idx.counts || {};
+  const sumBytes = models.reduce((t, m) => t + (Number(m.pngBytes) || 0), 0);
+  if (c.models !== models.length) errors.push('索引 counts.models 是 ' + c.models + '，实际 ' + models.length + ' 条');
+  if (c.bytes !== sumBytes) errors.push('索引 counts.bytes 是 ' + c.bytes + '，逐条加起来是 ' + sumBytes);
   const seen = new Set();
   models.forEach((m) => {
     const id = m.setId + '/' + m.faction;
@@ -2138,6 +2146,9 @@ async function cmdModels(env, opts) {
         throw new Error('GET 回读字节/哈希不符（' + g.body.length + ' B / ' + sha256(g.body).slice(0, 12) + '）');
       }
       uploaded += 1;
+      /* 新传的对象也看一眼回读头：不然"被默认域名强制 attachment"只数已存在那批，
+         整批第一次发的时候会说成 0，把真机要防的那条线索报丢了 */
+      if (back.forceDownload === 'true') forced += 1;
       remoteLines.push('  ✓ ' + label + ' · ' + back.bytes + ' B · ' + it.m.pngSha256.slice(0, 12)
         + ' · HEAD/GET 回读一致 · Content-Type=' + (back.contentType || '?') + '·缓存=' + (back.cacheControl || '?')
         + '·Disposition=' + (back.contentDisposition || '无') + (back.forceDownload === 'true' ? '（默认域名强制 attachment）' : '')
@@ -2150,10 +2161,36 @@ async function cmdModels(env, opts) {
   logLine('模型：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 补正元数据 ' + fixed
     + ' · 失败 ' + failed.length + ' · 同名冲突 ' + violations.length + ' / 共 ' + locals.length
     + (forced ? ' · 其中 ' + forced + ' 个被默认域名强制 attachment' : ''));
-  if (opts.dryRun) { logLine('试运行结束，一个字节都没写。'); return 0; }
+  if (opts.dryRun) {
+    if (opts.index) logLine('  待发索引 → ' + NAMESPACES[env] + '/' + MODEL_INDEX_KEY + '（短期缓存，模型齐了才发）');
+    logLine('试运行结束，一个字节都没写。'); return 0;
+  }
   /* 全部"已存在同字节跳过"也是成功：B3 中途断过要续传，第二次就是这一态 */
-  if (violations.length || failed.length) return 1;
-  logLine('索引来源 ' + rd.indexRel + ' · 本命令只传模型，索引要等整批齐了单独发（见门槛文件 B3）。');
+  if (violations.length || failed.length) {
+    /* 这条顺序是门槛写死的：任何一件没齐，索引不许切到新清单——
+       页面按索引取件，索引先走就等于给玩家发一份会 404 的地图。 */
+    if (opts.index) logLine('✗ 模型没发齐，索引不发。');
+    return 1;
+  }
+  if (opts.index) {
+    const localIdx = path.join(buildRoot(), env, ...MODEL_INDEX_REL);
+    const buf = fs.readFileSync(localIdx);
+    const key = NAMESPACES[env] + '/' + MODEL_INDEX_KEY;
+    const headers = { 'Cache-Control': POINTER_CACHE, 'Content-Type': MIME['.json'] };
+    try {
+      const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(key), buf, signPut(creds, key, buf, headers));
+      if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 200));
+      const back = await remoteHead(creds, key);
+      const g = await raw('GET', creds.bucket, creds.region, '/' + encKey(key), null, signGet(creds, '/' + encKey(key), '/' + key));
+      if (g.statusCode !== 200 || g.body.length !== buf.length || sha256(g.body) !== sha256(buf)) {
+        throw new Error('索引回读不符（HTTP ' + g.statusCode + ' / ' + g.body.length + ' B）');
+      }
+      logLine('索引已发：' + key + ' · ' + buf.length + ' B · ' + sha256(buf).slice(0, 12)
+        + ' · HEAD/GET 回读一致 · 缓存=' + (back.cacheControl || '?') + '（模型那条是长缓存，这一份要能当天改）');
+    } catch (err) { logLine('  ✗ 索引 → ' + err.message); return 1; }
+    return 0;
+  }
+  logLine('索引来源 ' + rd.indexRel + ' · 本命令只传了模型；索引要加 --index 才发（B3 口径：模型齐了最后发）。');
   return 0;
 }
 
@@ -2497,6 +2534,7 @@ function parseArgs(argv) {
     if (a === '--env') { i += 1; env = argv[i]; }
     else if (a === '--to') { i += 1; opts.to = argv[i]; }
     else if (a === '--set') { i += 1; (opts.models = opts.models || []).push(argv[i]); }
+    else if (a === '--index') opts.index = true;
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a === '--yes-release') opts.yesRelease = true;
     else if (a === '--yes-clean') opts.yesClean = true;
@@ -2590,6 +2628,7 @@ module.exports = {
   cmdAssets,
   cmdModels,
   modelIndex,
+  MODEL_INDEX_KEY,
   MODEL_ASSET_DIR,
   MODEL_MIME,
   listKeys,
