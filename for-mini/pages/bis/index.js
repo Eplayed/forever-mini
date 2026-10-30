@@ -368,13 +368,15 @@ Page({
       return
     }
     if (d.state === 'loading') { this.setData({ modelText: d.text || '正在取模型' }); return }
-    if (d.state === 'geometry') {
-      /* 模型已经在这台机器上画出来了，只是本站那把尺子没量到贴图。
-         这时候把画面藏掉等于把主证据扔了——留着，并如实说这一格还没核过。 */
+    if (d.state === 'shown') {
+      /* 资源 loaded 且没报错＝这一件已经在这台机器上画出来了（2026-10-30 真机对过：
+         这种状态下人是带的、贴图是好的）。xr-frame 有时不把网格列表交出来，
+         量不到只说明尺子不对——照样按"已显示"处理，但把数到的/没数到的分开写。 */
       this.setData({
-        modelState: 'geometry', modelText: '',
-        modelDetail: '网格 ' + d.meshes + ' 个已实例化，贴图本站数到 ' + (d.tex || 0) + ' 张。'
-          + '看着是带花纹的那一身就是成了，看着是白模请截这一行给我：' + String(d.detail || '').slice(0, 220)
+        modelState: 'shown', modelText: '',
+        modelDetail: '本站数到网格 ' + (d.meshes || 0) + ' 个、贴图 ' + (d.tex || 0) + ' 张'
+          + '（xr-frame 没把清单交全时这一项会偏少，画面以你看到的为准）｜ '
+          + String(d.detail || '').slice(0, 200)
       })
       return
     }

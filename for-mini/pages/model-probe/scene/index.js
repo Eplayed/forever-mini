@@ -82,10 +82,14 @@ Component({
           if (w) { out.tex += 1; out.lines.push(i + ':' + w + 'x' + h) }
           else { out.noTex += 1; out.lines.push(i + ':' + (t ? 'tex-no-size' : 'NO-TEXTURE')) }
         })
-        const okAll = out.tex > 0 && out.noTex === 0
+        /* 2026-10-30 真机对过：资源 loaded 后人已经画出来了，但这版 xr-frame 在 loaded 那一刻
+           meshes 还是空、version=0——所以"数到 0"只报"没数到"，不再写成失败（那次误判
+           把一个带贴图的兽人判成了白模，还收回了画面）。 */
+        const counted = out.tex > 0 && out.noTex === 0
         this.emit({
-          state: okAll ? 'ok' : (out.tex > 0 ? 'partial' : 'bad'),
-          text: okAll ? '加载成功：贴图都在' : (out.tex > 0 ? '半成功：' + out.tex + ' 个网格有贴图、' + out.noTex + ' 个没有' : '失败：一个贴图都没建出来（白模）'),
+          state: counted ? 'ok' : 'shown',
+          text: counted ? '加载成功：贴图都在'
+            : '画面已出（本站数到网格 ' + out.meshes + ' 个 / 贴图 ' + out.tex + ' 张，量不全以肉眼为准）',
           meshes: out.meshes, tex: out.tex, noTex: out.noTex, detail: out.lines.join(' ') + ' ｜ ' + out.api.join(' ')
         })
       } catch (e) {

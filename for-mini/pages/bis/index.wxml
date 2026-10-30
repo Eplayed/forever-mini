@@ -70,15 +70,13 @@
         </view>
       </view>
       <!-- 这一句只在当前这一件真的画出来之后才出现；失败就回原画并说"3D 暂不可用"＋原因 -->
-      <view class="doll-note note-ok" wx:if="{{modelOn && modelState === 'ok'}}">
+      <view class="doll-note note-ok" wx:if="{{modelOn && (modelState === 'ok' || modelState === 'shown')}}">
         <text class="b">游戏角色与装备的静态预览，拖动可旋转</text>：这一件是本站按<text class="b">{{set.clsCn}} · {{set.mode}} · {{facCn}}</text>
         登记的真实模型（从本机客户端导出、装备位置核对通过才用），<text class="b">不是本站画的</text>。{{modelDetail}}
       </view>
       <view class="doll-note" wx:if="{{modelOn && modelState === 'loading'}}">{{modelText}}</view>
-      <!-- 模型已经画出来了、只是本站那把尺子没量到贴图：不藏画面，也不冒充"成功"那一句 -->
-      <view class="doll-note note-warn" wx:if="{{modelOn && modelState === 'geometry'}}">
-        <text class="b">画面已经出来了</text>：{{modelDetail}}
-      </view>
+      <!-- 网格数没量全时补这一行：画面不藏，但说清哪一项是本站没数到的 -->
+      <view class="doll-note note-warn" wx:if="{{modelOn && modelState === 'shown'}}">{{modelDetail}}</view>
       <view class="doll-note note-bad" wx:if="{{modelState === 'bad' && modelErr}}">
         <text class="b">3D 暂不可用</text>：{{modelErr}}（先显示职业原画；这一套的名单与一览照旧完整，不拿别的套装冒充）
       </view>

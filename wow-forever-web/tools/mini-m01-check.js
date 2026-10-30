@@ -696,7 +696,7 @@ async function main() {
     const p = getCurrentPages().pop();
     p.teardownModel();
     p.setData({ modelOn: true, modelState: 'loading' });
-    p.onModelStatus({ detail: { state: 'geometry', meshes: 20, tex: 0, noTex: 20, detail: 'mat:alpha,beta' } });
+    p.onModelStatus({ detail: { state: 'shown', meshes: 0, tex: 0, noTex: 0, detail: 'meshes 仍为空 ｜ gltf:version' } });
     const d = p.data;
     return { on: d.modelOn, state: d.modelState, detail: d.modelDetail, err: d.modelErr };
   }), 2);
@@ -705,13 +705,16 @@ async function main() {
     const d = getCurrentPages().pop().data;
     return { on: d.modelOn, state: d.modelState };
   }), 2);
-  log('贴图尺子量空了也不许把画面藏掉、不许冒充成功那一句（2026-10-30 真机就是被这条误判藏起来的）',
-    !!m4 && m4.on === true && m4.state === 'geometry' && /画出来|数到/.test(String(m4.detail)) && !m4.err
-      && !!m5 && m5.on === true && m5.state === 'geometry', JSON.stringify({ m4: m4, m5: m5 }));
+  /* 2026-10-30 真机定死：资源 loaded 后人已经画出来了，但 xr-frame 那版没把网格列表交出来
+     （站主截图里是"带贴图的兽人 + 网格 0 个"）。所以量不到只许补一句，不许再把画面藏掉。 */
+  log('尺子量空了也不许把画面藏掉（真机就是被这条误判藏起来的）',
+    !!m4 && m4.on === true && m4.state === 'shown' && /数到网格/.test(String(m4.detail)) && !m4.err
+      && !!m5 && m5.on === true && m5.state === 'shown', JSON.stringify({ m4: m4, m5: m5 }));
   await call('收掉这一格', () => mp.evaluate(() => { getCurrentPages().pop().hideModel(); return 1; }), 1);
   const bis3dWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
-  log('真实模型的 caption「游戏角色与装备的静态预览，拖动可旋转」只在成功态那一格里出现',
-    /modelState === 'ok'/.test(bis3dWxml) && /游戏角色与装备的静态预览，拖动可旋转/.test(bis3dWxml), '');
+  log('真实模型的 caption「游戏角色与装备的静态预览，拖动可旋转」只在模型真的挂着那一格出现',
+    /modelState === 'ok' \|\| modelState === 'shown'/.test(bis3dWxml)
+      && /游戏角色与装备的静态预览，拖动可旋转/.test(bis3dWxml), '');
   const appJson = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/app.json'), 'utf8'));
   const packCfg = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/project.config.json'), 'utf8'));
   log('临时探针路由已从正式 app.json 撤掉，探针目录也不进包（正式包里没有 model-probe）',

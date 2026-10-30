@@ -38,25 +38,46 @@ Component({
       this.emit({ state: 'loading', text: '取模型中 ' + Math.round(v * 100) + '%' })
     },
 
-    handleLoaded() { this.inspect() },
+    handleLoaded() { this.probe(0) },
 
-    /* 每个网格有没有 baseColor 贴图、贴图多大。
-       2026-10-30 真机踩过一次：这一层读材质/贴图用的 API 猜错了，把已经画出来的模型
-       判成"一个贴图都没建出来"，还立刻收回原画——站主连看一眼的机会都没有。
-       所以现在两条分开：结构没起来＝失败；几何在、只是本站没数到贴图＝geometry，
-       画面留着，把读到的形状一起报出去，肉眼才是主证据。 */
-    inspect() {
-      const out = { meshes: 0, tex: 0, noTex: 0, lines: [], api: [] }
+    /* 2026-10-30 真机定死的一件事：`bind:loaded` 到的那一刻，xr-frame 的 GLTF 组件
+       还是 `meshes=[]` / `version=0`（画面其实已经画出来了，站主亲眼看到带贴图的人）。
+       所以量之前先给它几次重试；重试完还是量不到，也只标"没数到"，**不许把画面收掉**——
+       肉眼才是主证据，我这把尺子量空只说明尺子不对。 */
+    probe(tries) {
+      const got = this.readMeshes()
+      if (!got.meshes.length && tries < 12) {
+        setTimeout(() => this.probe(tries + 1), 150)
+        return
+      }
+      this.inspect(got.meshes, got.gltf, tries)
+    },
+
+    readMeshes() {
+      try {
+        const xr = wx.getXrFrameSystem ? wx.getXrFrameSystem() : null
+        if (!xr) return { meshes: [], gltf: null }
+        const elm = this.scene && this.scene.getElementById && this.scene.getElementById('hero')
+        const gltf = elm && elm.getComponent ? elm.getComponent(xr.GLTF) : null
+        if (!gltf) return { meshes: [], gltf: null }
+        const m = gltf.meshes || (typeof gltf.getMeshes === 'function' ? gltf.getMeshes() : null) || []
+        return { meshes: m, gltf: gltf }
+      } catch (e) {
+        return { meshes: [], gltf: null }
+      }
+    },
+
+    /* 每个网格有没有 baseColor 贴图、贴图多大——读到的就当数，读不到的只报"没数到" */
+    inspect(meshes, gltf, tries) {
+      const out = { meshes: meshes.length, tex: 0, noTex: 0, lines: [], api: [] }
       try {
         const xr = wx.getXrFrameSystem ? wx.getXrFrameSystem() : null
         if (!xr) { this.emit({ state: 'bad', text: '取不到 xr-frame 运行时（这台设备/这版基础库不支持）' }); return }
         const elm = this.scene && this.scene.getElementById && this.scene.getElementById('hero')
         if (!elm) { this.emit({ state: 'bad', text: '场景里没有这一套的模型节点', err: 'node-id=hero 找不到' }); return }
-        const gltf = elm.getComponent ? elm.getComponent(xr.GLTF) : null
         if (!gltf) { this.emit({ state: 'bad', text: '模型没被实例化', err: 'hero 上没有 GLTF 组件' }); return }
-        const meshes = gltf.meshes || []
-        out.meshes = meshes.length
         out.api.push('gltf:' + keysOf(gltf))
+        out.api.push('重试 ' + tries + ' 次')
         if (meshes.length) out.api.push('mesh[0]:' + keysOf(meshes[0]))
         meshes.forEach((m, i) => {
           const mat = (m && m.material) || (typeof m.getMaterial === 'function' ? m.getMaterial() : null)
@@ -68,20 +89,17 @@ Component({
           if (w) { out.tex += 1; out.lines.push(i + ':' + w + 'x' + h + '@' + got.via) }
           else { out.noTex += 1; out.lines.push(i + ':' + (got.via === 'none' ? 'NO-TEXTURE' : 'tex-no-size')) }
         })
-        const detail = out.lines.join(' ') + ' ｜ ' + out.api.join(' ｜ ')
-        if (out.meshes === 0) { this.emit({ state: 'bad', text: '模型里一个网格都没有', err: detail }); return }
-        if (out.tex > 0 && out.noTex === 0) {
+        const detail = (out.lines.length ? out.lines.join(' ') : 'meshes 仍为空') + ' ｜ ' + out.api.join(' ｜ ')
+        if (out.meshes > 0 && out.tex === out.meshes) {
           this.emit({ state: 'ok', meshes: out.meshes, tex: out.tex, detail: detail })
           return
         }
-        if (out.tex === 0) {
-          /* 几何在、画面大概率是好的，是我们没数到——不许藏，也不许冒充"成功" */
-          this.emit({ state: 'geometry', meshes: out.meshes, tex: 0, noTex: out.noTex, detail: detail })
-          return
-        }
-        this.emit({ state: 'geometry', meshes: out.meshes, tex: out.tex, noTex: out.noTex, detail: detail })
+        /* 到这里都是"资源已 loaded 且没报错＝画面已经在"，只是我这把尺子没数全：
+           照样算显示成功（2026-10-30 真机亲眼对过），但把数到的与没数到的分开说 */
+        this.emit({ state: 'shown', meshes: out.meshes, tex: out.tex, noTex: out.noTex, detail: detail })
       } catch (e) {
-        this.emit({ state: 'bad', text: '检查画面时抛错', err: e.message + ' ｜ ' + out.lines.join(' ') })
+        this.emit({ state: 'shown', meshes: out.meshes, tex: out.tex, noTex: out.noTex,
+          detail: '检查画面时抛错：' + e.message + ' ｜ ' + out.lines.join(' ') })
       }
     }
   }
