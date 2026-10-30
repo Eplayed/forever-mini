@@ -1,6 +1,6 @@
 {
- "head": "8f3846c887869591e1e1e84ab49ce1e5e64634d7",
- "fingerprint": "feb13871237e11adcc722d1d33fa28d4049099c0b27c1109b201e39edf7effa7",
+ "head": "8791680cf6aa2d2c5cef1fe49ca9a630493ada8d",
+ "fingerprint": "2b86b568b394f78a2f0f736c1acaffc536317b59eb347d6471e40bc8fa14f37e",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 7771,
-   "mtimeNs": 1793341979590785600
+   "bytes": 7703,
+   "mtimeNs": 1793355827202638674
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 644423,
-   "mtimeNs": 1793342014253497717
+   "bytes": 649217,
+   "mtimeNs": 1793355844540531214
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -150,8 +150,8 @@
   },
   {
    "path": "for-mini/components/bis-3d/index.js",
-   "bytes": 4244,
-   "mtimeNs": 1793340679668136593
+   "bytes": 7036,
+   "mtimeNs": 1793352194067796749
   },
   {
    "path": "for-mini/components/bis-3d/index.json",
@@ -167,6 +167,11 @@
    "path": "for-mini/components/icon-cell/index.json",
    "bytes": 24,
    "mtimeNs": 1792634617308678556
+  },
+  {
+   "path": "for-mini/data/bis-posters.js",
+   "bytes": 1688,
+   "mtimeNs": 1793354417801068270
   },
   {
    "path": "for-mini/data/flags-local.js",
@@ -265,13 +270,13 @@
   },
   {
    "path": "for-mini/docs/VERIFY-小程序3D远端单件-2026-10-30.md",
-   "bytes": 12198,
-   "mtimeNs": 1793340258073638263
+   "bytes": 12377,
+   "mtimeNs": 1793352288322531956
   },
   {
    "path": "for-mini/docs/VERIFY-小程序BiS真实3D-2026-10-30.md",
-   "bytes": 9546,
-   "mtimeNs": 1793342041510115752
+   "bytes": 17982,
+   "mtimeNs": 1793355827153684690
   },
   {
    "path": "for-mini/docs/VERIFY-小程序专业页与远程开关-2026-10-27.md",
@@ -345,8 +350,8 @@
   },
   {
    "path": "for-mini/pages/bis/index.js",
-   "bytes": 15006,
-   "mtimeNs": 1793340805902321880
+   "bytes": 14753,
+   "mtimeNs": 1793354435991971231
   },
   {
    "path": "for-mini/pages/bis/index.json",
@@ -455,8 +460,8 @@
   },
   {
    "path": "for-mini/pages/model-probe/scene/index.js",
-   "bytes": 5739,
-   "mtimeNs": 1793332875763420512
+   "bytes": 6018,
+   "mtimeNs": 1793352221834910400
   },
   {
    "path": "for-mini/pages/model-probe/scene/index.json",
@@ -674,14 +679,19 @@
    "mtimeNs": 1792943597372088565
   },
   {
+   "path": "wow-forever-web/app/src/lib/macros.js",
+   "bytes": 3102,
+   "mtimeNs": 1793352080010532275
+  },
+  {
    "path": "wow-forever-web/app/src/lib/motion.js",
    "bytes": 696,
    "mtimeNs": 1793261876306785092
   },
   {
    "path": "wow-forever-web/app/src/lib/nav.js",
-   "bytes": 5257,
-   "mtimeNs": 1793178045333202714
+   "bytes": 5693,
+   "mtimeNs": 1793352505700926941
   },
   {
    "path": "wow-forever-web/app/src/lib/pets.js",
@@ -764,6 +774,11 @@
    "mtimeNs": 1793261897374854742
   },
   {
+   "path": "wow-forever-web/app/src/pages/MacrosPage.vue",
+   "bytes": 12540,
+   "mtimeNs": 1793352985681175535
+  },
+  {
    "path": "wow-forever-web/app/src/pages/PetsPage.vue",
    "bytes": 7803,
    "mtimeNs": 1793165971864945735
@@ -830,8 +845,8 @@
   },
   {
    "path": "wow-forever-web/app/src/router.js",
-   "bytes": 5803,
-   "mtimeNs": 1793159536405668113
+   "bytes": 6195,
+   "mtimeNs": 1793352151743785940
   },
   {
    "path": "wow-forever-web/app/tests/bis-model.spec.js",
@@ -862,6 +877,11 @@
    "path": "wow-forever-web/app/tests/lib.spec.js",
    "bytes": 5050,
    "mtimeNs": 1792851066189833932
+  },
+  {
+   "path": "wow-forever-web/app/tests/macros.spec.js",
+   "bytes": 5057,
+   "mtimeNs": 1793352179294672827
   },
   {
    "path": "wow-forever-web/app/tests/pets.spec.js",
@@ -1514,6 +1534,11 @@
    "mtimeNs": 1792641872501992462
   },
   {
+   "path": "wow-forever-web/docs/PLAN-宏命令页-2026-10-30.md",
+   "bytes": 6222,
+   "mtimeNs": 1793352042655052387
+  },
+  {
    "path": "wow-forever-web/docs/PLAN-小程序下一步-2026-10-21.md",
    "bytes": 6770,
    "mtimeNs": 1792634073571855363
@@ -1735,8 +1760,8 @@
   },
   {
    "path": "wow-forever-web/docs/UI.md",
-   "bytes": 227957,
-   "mtimeNs": 1793263787301701876
+   "bytes": 230870,
+   "mtimeNs": 1793353048571893486
   },
   {
    "path": "wow-forever-web/docs/VERIFY-2026-10-08-site.md",
@@ -2190,8 +2215,8 @@
   },
   {
    "path": "wow-forever-web/tools/build-data.js",
-   "bytes": 140562,
-   "mtimeNs": 1793189176719140398
+   "bytes": 146308,
+   "mtimeNs": 1793351928102457375
   },
   {
    "path": "wow-forever-web/tools/build-icon-map.py",
@@ -2244,6 +2269,11 @@
    "mtimeNs": 1793332421150608909
   },
   {
+   "path": "wow-forever-web/tools/export-bis-posters.js",
+   "bytes": 4826,
+   "mtimeNs": 1793354410158738746
+  },
+  {
    "path": "wow-forever-web/tools/export-mini.js",
    "bytes": 27781,
    "mtimeNs": 1792847885296703364
@@ -2277,6 +2307,11 @@
    "path": "wow-forever-web/tools/extract-gi-item-existence.py",
    "bytes": 5374,
    "mtimeNs": 1792847885218670708
+  },
+  {
+   "path": "wow-forever-web/tools/extract-gi-macros.py",
+   "bytes": 8617,
+   "mtimeNs": 1793351801796937250
   },
   {
    "path": "wow-forever-web/tools/extract-gi-pets.py",
@@ -2409,6 +2444,11 @@
    "mtimeNs": 1792847885522542190
   },
   {
+   "path": "wow-forever-web/tools/merge-macros.py",
+   "bytes": 8968,
+   "mtimeNs": 1793351863129546646
+  },
+  {
    "path": "wow-forever-web/tools/merge-pets.py",
    "bytes": 5958,
    "mtimeNs": 1793159335142271991
@@ -2450,8 +2490,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 67306,
-   "mtimeNs": 1793341336471236463
+   "bytes": 71694,
+   "mtimeNs": 1793354862011867265
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2475,18 +2515,18 @@
   },
   {
    "path": "wow-forever-web/tools/oss-fake-server.js",
-   "bytes": 5787,
-   "mtimeNs": 1793341035755281027
+   "bytes": 6812,
+   "mtimeNs": 1793354875732491650
   },
   {
    "path": "wow-forever-web/tools/oss-release-test.js",
-   "bytes": 123260,
-   "mtimeNs": 1793340093247706424
+   "bytes": 124856,
+   "mtimeNs": 1793354507421952171
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 159304,
-   "mtimeNs": 1793339950767779846
+   "bytes": 164420,
+   "mtimeNs": 1793354331572947716
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
@@ -2537,6 +2577,11 @@
    "path": "wow-forever-web/tools/release-package.py",
    "bytes": 20116,
    "mtimeNs": 1793189176727210289
+  },
+  {
+   "path": "wow-forever-web/tools/render-bis-posters.py",
+   "bytes": 12370,
+   "mtimeNs": 1793354278422765998
   },
   {
    "path": "wow-forever-web/tools/route-smoke.py",
@@ -2620,8 +2665,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 279206,
-   "mtimeNs": 1793324978271814240
+   "bytes": 290164,
+   "mtimeNs": 1793352985725454339
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
