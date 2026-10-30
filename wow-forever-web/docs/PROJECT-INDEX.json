@@ -1,6 +1,6 @@
 {
- "head": "8791680cf6aa2d2c5cef1fe49ca9a630493ada8d",
- "fingerprint": "2b86b568b394f78a2f0f736c1acaffc536317b59eb347d6471e40bc8fa14f37e",
+ "head": "9be7513b6834bb45a93dee64459ab99de40ef846",
+ "fingerprint": "e6d9597932e3dcbbce5ea65a5b4c10eed850e7825406612f289ba1c593dd4ccf",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 7703,
-   "mtimeNs": 1793355827202638674
+   "bytes": 8326,
+   "mtimeNs": 1793356769864945189
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 649217,
-   "mtimeNs": 1793355844540531214
+   "bytes": 653398,
+   "mtimeNs": 1793356750978595042
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -2665,8 +2665,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 290164,
-   "mtimeNs": 1793352985725454339
+   "bytes": 290621,
+   "mtimeNs": 1793356009770736596
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
