@@ -17,6 +17,15 @@ const MODE = process.env.FAKE_OSS_MODE || 'normal';
    开发者工具开着 compileHotReLoad，往项目里写文件会把小程序打回首页，制造一片假红
    （2026-10-27 做功能开关那条两阶段验证时踩的）。每次请求现读，改了立刻可见。 */
 const FLAGS_FILE = process.env.FAKE_OSS_FLAGS_FILE || '';
+/* FAKE_OSS_LOG=<路径>：每个请求落一行"<状态> <rel>"，给回归脚本数请求次数用。
+   为什么要在服务端记而不是在页面里 hook：回归要证的正是"这一页到底发了几次请求"
+   （2026-10-30 接真实 3D：进页必须 0 次模型请求，点一次只取一次清单），
+   在页面里自己数等于让被试对象自己报数。 */
+const LOG_FILE = process.env.FAKE_OSS_LOG || '';
+function noteHit(code, rel) {
+  if (!LOG_FILE) return;
+  try { fs.appendFileSync(LOG_FILE, code + ' ' + rel + '\n'); } catch (e) {}
+}
 const BIDX = JSON.parse(fs.readFileSync(require('path').join(ROOT, 'manifest.json'), 'utf8')).buildId;
 const PORT = Number(process.env.FAKE_OSS_PORT || 8899);
 const md5u = (b) => crypto.createHash('md5').update(b).digest('hex').toUpperCase();
@@ -29,10 +38,12 @@ const server = http.createServer((req, res) => {
   const base = isAsset ? IMG_ROOT : ROOT;
   const file = path.join(base, isAsset ? rel.slice('assets/'.length) : rel);
   if (!file.startsWith(base) || !fs.existsSync(file)) {
+    noteHit(404, rel);
     res.writeHead(404, { 'Content-Type': 'application/xml' });
     res.end('<Error><Code>NoSuchKey</Code></Error>');
     return;
   }
+  noteHit(200, rel);
   if (isAsset) {
     const buf = fs.readFileSync(file);
     res.writeHead(200, {

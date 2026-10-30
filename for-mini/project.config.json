@@ -59,6 +59,10 @@
       {
         "type": "folder",
         "value": "tmp-model"
+      },
+      {
+        "type": "folder",
+        "value": "pages/model-probe"
       }
     ],
     "include": []

@@ -1,6 +1,7 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
+const bisModel = require('../../services/bis-model')
 
 /* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面…3D 模型先放模型占位"）
    数据来自分发层的三份配装产物：索引（38 套）+ 共享物品表（830 件）+ 每套一片。
@@ -64,6 +65,14 @@ Page({
     nodes: [],
     unmapped: [],
     live3d: false,
+    /* 真实 3D 那一层：modelOn 才是挂了 xr-frame 组件的状态。
+       进这一页时它必须是 false 且 modelSrc 为空——一个模型请求都不发（站主要的是点开才有）。 */
+    modelOn: false,
+    modelSrc: '',
+    modelState: 'idle',
+    modelText: '',
+    modelErr: '',
+    modelDetail: '',
     slot: null,
     slotRows: [],
     slotHead: '',
@@ -157,6 +166,8 @@ Page({
   pickFac(e) {
     const f = e.currentTarget.dataset.fac
     if (f === this.data.fac) return
+    /* 换阵营＝换的那一件模型是另一条登记，先拆场景、再让在飞的回包作废，然后才重画 */
+    this.teardownModel()
     this.setData({ fac: f, facCn: f === 'horde' ? '部落' : '联盟', slot: null })
     this.render()
   },
@@ -164,6 +175,8 @@ Page({
   loadSet() {
     const entry = (this.index.sets || []).filter((x) => x.id === this.data.setId)[0]
     if (!entry) { this.setData({ set: null, rows: [] }); return Promise.resolve() }
+    /* 切职业与切套装都经过这里：先把上一套的 xr 场景拆掉，否则旧场景还在画旧的那一身 */
+    this.teardownModel()
     this.setData({ stageUrl: '' })
     return oss.loadBisSet(entry, this.batch).then((r) => {
       if (!r.data || r.data.kind !== 'bis-set') {
@@ -290,10 +303,77 @@ Page({
   closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) },
 
   toggle3d() {
-    this.setData({ live3d: !this.data.live3d })
+    /* 占位人台与真实模型不同时出现：两个都开着会有两块画面叠在一起，玩家看不出在看哪个 */
+    const on = !this.data.live3d
+    if (on) this.teardownModel()
+    this.setData({ live3d: on })
+  },
+
+  /* 「查看 3D」：到这里才第一次碰模型清单。
+     顺序是"拆旧场景 → 拿一个号 → 过三道闸 → 才给 src"，
+     组件挂上（有 src）才会真的下载，所以点一次最多取一件。 */
+  showModel() {
+    this.teardownModel()
+    const seq = this._seq
+    const setId = this.data.setId
+    const fac = this.data.fac
+    const doll = ((this.set && this.set.byFac && this.set.byFac[fac]) || {}).doll || []
+    if (!this.set || !doll.length) {
+      this.setData({ modelOn: false, modelState: 'bad', modelText: '', modelErr: '这一套的名单还没取到，先不猜模型' })
+      return
+    }
+    this.setData({
+      live3d: false, modelOn: true, modelSrc: '', modelDetail: '',
+      modelState: 'loading', modelText: '在对这一套的名单', modelErr: ''
+    })
+    bisModel.load(setId, fac, doll).then((r) => {
+      /* 迟到的那一份不许盖掉后来选中的那一套：号不对就直接丢 */
+      if (seq !== this._seq) return
+      if (!r.ok) { this.modelFail(r.reason); return }
+      this._modelEntry = r.entry
+      this.setData({ modelSrc: r.url, modelText: '正在从远端取这一套的模型' })
+    }).catch((e) => {
+      if (seq !== this._seq) return
+      this.modelFail(((e && e.message) || String(e)).slice(0, 200))
+    })
+  },
+
+  hideModel() { this.teardownModel() },
+
+  /* 拆场景 + 作废所有在飞的回包。切职业/切套/切阵营/离开这一页都先走这里。 */
+  teardownModel() {
+    this._seq = (this._seq || 0) + 1
+    this._modelEntry = null
+    if (this.data.modelOn || this.data.modelSrc) {
+      this.setData({ modelOn: false, modelSrc: '', modelState: 'idle', modelText: '', modelErr: '', modelDetail: '' })
+    }
+  },
+
+  modelFail(reason) {
+    this.setData({
+      modelOn: false, modelSrc: '', modelState: 'bad', modelText: '', modelDetail: '',
+      modelErr: String(reason || '这一套的模型没取到').slice(0, 300)
+    })
+  },
+
+  onModelStatus(e) {
+    const d = (e && e.detail) || {}
+    if (d.state === 'ok') {
+      const en = this._modelEntry || {}
+      this.setData({
+        modelState: 'ok',
+        modelText: '',
+        modelDetail: '画面里 ' + d.meshes + ' 个网格、' + d.tex + ' 张贴图（' + (en.raceId || '?') + ' · ' + (en.bodyType || '?') + '）'
+      })
+      return
+    }
+    if (d.state === 'loading') { this.setData({ modelText: d.text || '正在取模型' }); return }
+    this.modelFail((d.text || '模型没画出来') + (d.err ? '：' + d.err : ''))
   },
 
   onStageError() { this.setData({ stageUrl: '' }) },
+
+  onUnload() { this.teardownModel() },
 
   copyUrl() {
     const u = ((this.index || {}).meta || {}).source

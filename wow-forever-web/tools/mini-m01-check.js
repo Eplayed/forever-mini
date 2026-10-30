@@ -35,6 +35,16 @@ const SERVER = path.join(REPO, 'wow-forever-web/tools/oss-fake-server.js');
 /* 开关的"线上那一份"放在项目外：回归要演"拧一下开关"，但往 for-mini/ 里写会触发
    compileHotReLoad，把小程序打回首页（2026-10-27 踩过）。假 OSS 支持 FAKE_OSS_FLAGS_FILE 覆写。 */
 const LIVE_FLAGS = '/tmp/m01-flags-live.json';
+/* 假 OSS 的访问流水（同样写在项目外）：数的是"这一页到底发了几次请求"。
+   2026-10-30 接真实 3D 那条硬要求——进配装页一个模型请求都不许发、点「查看 3D」只取一次清单——
+   只能这么证；在页面里自己数等于让被试对象自己报数。 */
+const OSS_HITS = '/tmp/m01-oss-hits.log';
+const hitsClear = () => { try { fs.writeFileSync(OSS_HITS, ''); } catch (e) {} };
+const hitsOf = (pat) => {
+  let lines = [];
+  try { lines = fs.readFileSync(OSS_HITS, 'utf8').split('\n'); } catch (e) { return []; }
+  return lines.filter((l) => l && pat.test(l));
+};
 /* 每种模式换一个新端口＝一个新 URL 空间。
    模拟器会照 Cache-Control 把批次文件缓存住（真线上也该这样），
    同一 URL 换内容它是看不到的；不换端口做"篡改/新版本"场景就会读到上一轮缓存，测的是缓存不是校验。 */
@@ -100,7 +110,7 @@ async function stopServer() {
 async function startServer(mode) {
   await stopServer();
   fs.copyFileSync(path.join(BUILD, 'flags.json'), LIVE_FLAGS);
-  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1', FAKE_OSS_FLAGS_FILE: LIVE_FLAGS }) });
+  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1', FAKE_OSS_FLAGS_FILE: LIVE_FLAGS, FAKE_OSS_LOG: OSS_HITS }) });
   p.stderr.on('data', (d) => process.stdout.write('[fake-oss!] ' + String(d).slice(0, 200)));
   live = p;
   for (let i = 0; i < 25; i += 1) {
@@ -626,14 +636,80 @@ async function main() {
   }), 3);
   log('占位人台一件一块，没格子的部位照实列出不硬塞',
     !!bis3d && bis3d.live === true && bis3d.nodes >= 10, JSON.stringify(bis3d));
+
+  /* ---------- 真实 3D（2026-10-30 C 段）----------
+     这台模拟器起不了 xr-frame（探针那一轮实测：空场景都不发 ready），
+     所以这里钉得住的是"发没发请求、取的是不是当前这一套这一阵营、失败有没有回原画并说明"，
+     画面那一半只能由真机回答——不许拿"请求数对了"冒充"玩家看得见模型"。 */
+  await call('关掉占位模型回原画', () => mp.evaluate(() => { getCurrentPages().pop().toggle3d(); return 1; }), 2);
+  hitsClear();
+  const mv = await call('进页后先数一遍模型请求', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { on: d.modelOn, src: d.modelSrc, setId: d.setId, fac: d.fac, state: d.modelState };
+  }), 2);
+  log('没点「查看 3D」之前：模型清单与模型对象都是 0 次请求、组件没挂、src 为空',
+    hitsOf(/bis\/models\/index\.json|assets\/models\/real\//).length === 0
+      && !!mv && mv.on === false && !mv.src && mv.state === 'idle', JSON.stringify(mv));
+  await call('点「查看 3D」', () => mp.evaluate(() => { getCurrentPages().pop().showModel(); return 1; }), 1);
+  await new Promise((r) => setTimeout(r, 1500));
+  const m1 = await call('取完之后看页面状态', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { on: d.modelOn, src: d.modelSrc, state: d.modelState, text: d.modelText, err: d.modelErr, setId: d.setId, fac: d.fac };
+  }), 2);
+  const idxHits = hitsOf(/bis\/models\/index\.json/);
+  log('点一次只取一次清单（不进页就取、或把 76 条都拉一遍都不行）',
+    idxHits.length === 1, idxHits.join(' | ').slice(0, 120));
+  log('取到的正是当前 setId+faction 那一条，文件名带成品哈希、走 https 或本地假 OSS 的 real 目录',
+    !!m1 && m1.on === true && new RegExp('/assets/models/real/' + m1.setId + '-' + m1.fac + '-[0-9a-f]{12}\\.glb$').test(String(m1.src)),
+    JSON.stringify(m1));
+  log('清单没被改过：这一套的名单与登记逐格对得上（对不上会直接回原画并报"逐格没对上"）',
+    !!m1 && m1.state !== 'bad' && !/逐格没对上|没有登记/.test(String(m1.err)), String(m1 && m1.err).slice(0, 160));
+  const glbHits = hitsOf(/assets\/models\/real\//);
+  process.stdout.write('  · 模型对象请求 ' + glbHits.length + ' 次（这台模拟器起不了 xr-frame，真机那一侧才作数）\n');
+  await call('在飞的请求还没回来时切阵营', () => mp.evaluate(() => {
+    /* 阵营从页面自己读：mp.evaluate 的闭包看不见外层变量（写这一段时撞过一次
+       "Uncaught m1 is not defined"——那条红是脚本自己的错，不是页面的） */
+    const p = getCurrentPages().pop();
+    const here = p.data.fac;
+    p.showModel();
+    p.pickFac({ currentTarget: { dataset: { fac: here === 'horde' ? 'alliance' : 'horde' } } });
+    return 1;
+  }), 1);
+  await new Promise((r) => setTimeout(r, 1500));
+  const m2 = await call('切完之后再数一次', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { on: d.modelOn, src: d.modelSrc, fac: d.fac };
+  }), 2);
+  log('迟到的那一份不盖掉刚选中的那一套：切阵营后场景是拆掉的、src 清空',
+    !!m2 && m2.on === false && !m2.src, JSON.stringify(m2));
+  const m3 = await call('演一次取不到（失败分支）', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.showModel();
+    p.modelFail('这一套没有登记的真实模型');
+    const d = p.data;
+    return { on: d.modelOn, state: d.modelState, err: d.modelErr, art: d.stageUrl, rows: (d.rows || []).length, sum: (d.sum || []).length };
+  }), 2);
+  log('失败就回职业原画并写「3D 暂不可用」＋原因，名单与属性合计一条不少',
+    !!m3 && m3.on === false && m3.state === 'bad' && /没有登记/.test(String(m3.err))
+      && !!m3.art && m3.rows >= 10 && m3.sum >= 1, JSON.stringify(m3));
+  const bis3dWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
+  log('真实模型的 caption「游戏角色与装备的静态预览，拖动可旋转」只在成功态那一格里出现',
+    /modelState === 'ok'/.test(bis3dWxml) && /游戏角色与装备的静态预览，拖动可旋转/.test(bis3dWxml), '');
+  const appJson = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/app.json'), 'utf8'));
+  const packCfg = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/project.config.json'), 'utf8'));
+  log('临时探针路由已从正式 app.json 撤掉，探针目录也不进包（正式包里没有 model-probe）',
+    appJson.pages.indexOf('pages/model-probe/index') < 0
+      && (packCfg.packOptions.ignore || []).some((x) => x.value === 'pages/model-probe')
+      && !(packCfg.packOptions.ignore || []).some((x) => /models/.test(String(x.value))),
+    JSON.stringify(appJson.pages.length));
   await shot('h1-bis-page');
   await call('回到占位开着的画面', () => mp.evaluate(() => 1), 1);
   log('配装页渲染文字里没有百分比与强度评价词（红线）',
     !!bis && !/\d+(\.\d+)?\s*%/.test(bis.text) && !/秒伤|DPS|权重/.test(bis.text),
     String(bis && bis.text).slice(0, 80));
   const bisWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
-  log('占位模型那句"不是游戏里的样子"钉在界面上，3D 换成真模型前不许撤',
-    /占位模型/.test(bisWxml) && /不是游戏里的样子/.test(bisWxml), '');
+  log('占位那句话（「不是游戏里的样子」）仍在：真实模型只在自己成功态那一格说话，两种模式各说各的',
+    /占位模型/.test(bisWxml) && /不是游戏里的样子/.test(bisWxml) && /modelState === 'ok'/.test(bisWxml), '');
   const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
   log('首页有整宽的配装入口卡（站主：核心功能，必须醒目），且排在四张小卡前面',
     /class="bis-card/.test(homeWxml) && /bindtap="goBis"/.test(homeWxml)

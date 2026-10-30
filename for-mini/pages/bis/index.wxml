@@ -47,19 +47,38 @@
         </view>
       </view>
 
-      <!-- 中间那一栏：默认职业原画；点开是本站自己拼的占位人台（一件一块、颜色跟品质走） -->
+      <!-- 中间那一栏三种状态：默认职业原画 → 「查看 3D」点开的真实模型 → 「看占位模型」
+           点开的本站自拼人台。真实模型只在服务层过了三道闸（精确命中 / PASS / 名单逐格相同）
+           才会挂上组件，所以进这一页一个模型请求都不发。 -->
       <view class="stage">
-        <image wx:if="{{stageUrl && !live3d}}" class="stage-art" src="{{stageUrl}}" mode="aspectFill"
+        <image wx:if="{{stageUrl && !live3d && !modelOn}}" class="stage-art" src="{{stageUrl}}" mode="aspectFill"
                binderror="onStageError" />
-        <view wx:if="{{live3d}}" class="doll">
+        <view wx:if="{{live3d && !modelOn}}" class="doll">
           <view wx:for="{{nodes}}" wx:key="key" class="db db-q{{item.q}} {{item.round ? 'db-round' : ''}}"
                 style="left:{{item.l}}%;top:{{item.t}}%;width:{{item.w}}%;height:{{item.h}}%"
                 data-slot="{{item.slot}}" data-cell="{{item.cell}}" bindtap="openSlot">{{item.label}}</view>
         </view>
+        <view wx:if="{{modelOn}}" class="model">
+          <bis-3d wx:if="{{modelSrc}}" src="{{modelSrc}}" bind:status="onModelStatus" />
+          <view wx:else class="model-wait">{{modelText}}</view>
+        </view>
         <view class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
-        <view class="stage-btn" bindtap="toggle3d">{{live3d ? '返回原画' : '看占位模型'}}</view>
+        <view class="stage-btns">
+          <view class="stage-btn" wx:if="{{modelOn}}" bindtap="hideModel">返回原画</view>
+          <view class="stage-btn" wx:if="{{!modelOn}}" bindtap="showModel">查看 3D</view>
+          <view class="stage-btn" wx:if="{{!modelOn}}" bindtap="toggle3d">{{live3d ? '返回原画' : '看占位模型'}}</view>
+        </view>
       </view>
-      <view class="doll-note" wx:if="{{live3d}}">
+      <!-- 这一句只在当前这一件真的画出来之后才出现；失败就回原画并说"3D 暂不可用"＋原因 -->
+      <view class="doll-note note-ok" wx:if="{{modelOn && modelState === 'ok'}}">
+        <text class="b">游戏角色与装备的静态预览，拖动可旋转</text>：这一件是本站按<text class="b">{{set.clsCn}} · {{set.mode}} · {{facCn}}</text>
+        登记的真实模型（从本机客户端导出、装备位置核对通过才用），<text class="b">不是本站画的</text>。{{modelDetail}}
+      </view>
+      <view class="doll-note" wx:if="{{modelOn && modelState === 'loading'}}">{{modelText}}</view>
+      <view class="doll-note note-bad" wx:if="{{modelState === 'bad' && modelErr}}">
+        <text class="b">3D 暂不可用</text>：{{modelErr}}（先显示职业原画；这一套的名单与一览照旧完整，不拿别的套装冒充）
+      </view>
+      <view class="doll-note" wx:if="{{live3d && !modelOn}}">
         这一版是本站自己拼的<text class="b">占位模型</text>，不是游戏里的样子：一件一块，颜色跟品质走，
         这一套没穿的部位就不画。真模型要等客户端那一层能取到文件。
       </view>

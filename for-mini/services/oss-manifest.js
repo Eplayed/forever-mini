@@ -69,6 +69,26 @@ function flagsUrl(env) {
   return origin() + '/' + NAMESPACES[env] + '/flags.json'
 }
 
+/* BiS 真实 3D（2026-10-30 B1/B3/C）：模型清单与开关同一档语义——它不在气密批次里，
+   换一件模型不必换 buildId、不必重发数据、不必发小程序版本。
+   对象本身走 assets/models/real/，文件名带成品 SHA，所以是不可变长缓存；
+   清单要能当天改，缓存与指针同一档（max-age=60）。 */
+function modelsIndexUrl(env) {
+  return origin() + '/' + NAMESPACES[env] + '/bis/models/index.json'
+}
+
+/* 拼模型地址这一处必须自己挡穿越：assetDir 与 file 都是从远端 JSON 读进来的，
+   带 .. 或绝对路径就不拼——与 shardRef 那条"条目改成 ../.. 也走不出去"同一条例。 */
+function modelUrl(env, entry) {
+  const dir = String((entry && entry.assetDir) || '')
+  const file = String((entry && entry.file) || '')
+  if (dir !== 'assets/models/real/') return { error: new Error('模型清单里的 assetDir 不是 assets/models/real/：' + dir) }
+  if (file.indexOf('/') >= 0 || file.indexOf('\\') >= 0 || file.indexOf('..') >= 0 || /^[a-z0-9-]+-[0-9a-f]{12}\.glb$/.test(file) === false) {
+    return { error: new Error('模型文件名不合规矩：' + file) }
+  }
+  return { url: origin() + '/' + NAMESPACES[env] + '/' + dir + file }
+}
+
 function requestRaw(url) {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -648,6 +668,8 @@ module.exports = {
   profSetRef,
   loadProfSet,
   flagsUrl,
+  modelsIndexUrl,
+  modelUrl,
   requestRaw,
   loadDungeonDetail,
   loadDungeonLoot,
