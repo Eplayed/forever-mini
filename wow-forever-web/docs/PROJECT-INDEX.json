@@ -1,6 +1,6 @@
 {
- "head": "9be7513b6834bb45a93dee64459ab99de40ef846",
- "fingerprint": "e6d9597932e3dcbbce5ea65a5b4c10eed850e7825406612f289ba1c593dd4ccf",
+ "head": "e97105adfb43788a6d221456436b3a484860d865",
+ "fingerprint": "82b63ac8a0d05dcad24292556282868f19829728a3c35f77a6dfe17ffd0c5d6a",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 8326,
-   "mtimeNs": 1793356769864945189
+   "bytes": 9089,
+   "mtimeNs": 1793369611146822880
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 653398,
-   "mtimeNs": 1793356750978595042
+   "bytes": 658502,
+   "mtimeNs": 1793370427718274862
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -145,8 +145,8 @@
   },
   {
    "path": "for-mini/app.json",
-   "bytes": 1378,
-   "mtimeNs": 1793340864627579690
+   "bytes": 1404,
+   "mtimeNs": 1793367618926569958
   },
   {
    "path": "for-mini/components/bis-3d/index.js",
@@ -175,28 +175,28 @@
   },
   {
    "path": "for-mini/data/flags-local.js",
-   "bytes": 1001,
-   "mtimeNs": 1793083321549140403
+   "bytes": 1028,
+   "mtimeNs": 1793367726544662278
   },
   {
    "path": "for-mini/data/forever-class-snapshot.js",
    "bytes": 11203,
-   "mtimeNs": 1793340884615765262
+   "mtimeNs": 1793369086953846160
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
    "bytes": 21973,
-   "mtimeNs": 1793340884614985148
+   "mtimeNs": 1793369086953006681
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
    "bytes": 19665,
-   "mtimeNs": 1793340884613786840
+   "mtimeNs": 1793369086952176284
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2154,
-   "mtimeNs": 1793340884614004657
+   "mtimeNs": 1793369086952486700
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -284,6 +284,11 @@
    "mtimeNs": 1793088320550997840
   },
   {
+   "path": "for-mini/docs/VERIFY-小程序宏命令页-2026-10-30.md",
+   "bytes": 8172,
+   "mtimeNs": 1793370427649626000
+  },
+  {
    "path": "for-mini/docs/VERIFY-小程序真实3D探针-2026-10-30.md",
    "bytes": 10388,
    "mtimeNs": 1793332428794355647
@@ -316,37 +321,37 @@
   {
    "path": "for-mini/oss-preview/classes.json",
    "bytes": 35422,
-   "mtimeNs": 1793340882956638882
+   "mtimeNs": 1793369083671402036
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
    "bytes": 325903,
-   "mtimeNs": 1793340882950763093
+   "mtimeNs": 1793369083664101704
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
    "bytes": 84105,
-   "mtimeNs": 1793340882947668887
+   "mtimeNs": 1793369083660065507
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1793340882960681325
+   "mtimeNs": 1793369083675999802
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2060,
-   "mtimeNs": 1793340882951323100
+   "mtimeNs": 1793369083664633261
   },
   {
    "path": "for-mini/oss-preview/spells.json",
    "bytes": 450222,
-   "mtimeNs": 1793340882955562141
+   "mtimeNs": 1793369083669817022
   },
   {
    "path": "for-mini/oss-preview/talents.json",
    "bytes": 427739,
-   "mtimeNs": 1793340882960471955
+   "mtimeNs": 1793369083675769434
   },
   {
    "path": "for-mini/pages/bis/index.js",
@@ -420,8 +425,8 @@
   },
   {
    "path": "for-mini/pages/home/index.js",
-   "bytes": 10483,
-   "mtimeNs": 1793086649494804045
+   "bytes": 10813,
+   "mtimeNs": 1793367920299021896
   },
   {
    "path": "for-mini/pages/home/index.json",
@@ -447,6 +452,16 @@
    "path": "for-mini/pages/loots/index.json",
    "bytes": 232,
    "mtimeNs": 1792641515950210144
+  },
+  {
+   "path": "for-mini/pages/macros/index.js",
+   "bytes": 8983,
+   "mtimeNs": 1793369922707280257
+  },
+  {
+   "path": "for-mini/pages/macros/index.json",
+   "bytes": 119,
+   "mtimeNs": 1793367205144816013
   },
   {
    "path": "for-mini/pages/model-probe/index.js",
@@ -515,8 +530,8 @@
   },
   {
    "path": "for-mini/services/oss-manifest.js",
-   "bytes": 32035,
-   "mtimeNs": 1793340503964815449
+   "bytes": 33998,
+   "mtimeNs": 1793367195867659787
   },
   {
    "path": "for-mini/services/quality.js",
@@ -2490,8 +2505,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 71694,
-   "mtimeNs": 1793354862011867265
+   "bytes": 76746,
+   "mtimeNs": 1793369922746176435
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2520,13 +2535,13 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release-test.js",
-   "bytes": 124856,
-   "mtimeNs": 1793354507421952171
+   "bytes": 124889,
+   "mtimeNs": 1793369368319476016
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 164420,
-   "mtimeNs": 1793354331572947716
+   "bytes": 173857,
+   "mtimeNs": 1793369368317684259
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
@@ -2665,8 +2680,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 290621,
-   "mtimeNs": 1793356009770736596
+   "bytes": 290616,
+   "mtimeNs": 1793357264629782018
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
