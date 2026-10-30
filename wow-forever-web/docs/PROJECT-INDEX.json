@@ -1,6 +1,6 @@
 {
- "head": "d4920cea5e98f9d19e0aa22e6c0fb72fd5b88a69",
- "fingerprint": "7ebf9aa7c79c6955481a74db2d2c39430ff18c26b89572591d70c4533be8d0c7",
+ "head": "9af2efe20e919fc84175a7b75b71fb69b27e724d",
+ "fingerprint": "5152d013d0b3a3ccda02029862034b8109f780e08ffee057e3a595d01de78ead",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -100,18 +100,18 @@
   },
   {
    "path": "AGENTS.md",
-   "bytes": 18920,
-   "mtimeNs": 1793189209824808573
+   "bytes": 19675,
+   "mtimeNs": 1793327599165269892
   },
   {
    "path": "NOW.md",
-   "bytes": 5462,
-   "mtimeNs": 1793256524885984245
+   "bytes": 7241,
+   "mtimeNs": 1793335050019143912
   },
   {
    "path": "PROJECT_DECISIONS.md",
-   "bytes": 13405,
-   "mtimeNs": 1793186191165136301
+   "bytes": 14320,
+   "mtimeNs": 1793327628551256621
   },
   {
    "path": "PROJECT_GATES.md",
@@ -125,13 +125,13 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 609847,
-   "mtimeNs": 1793256541390838552
+   "bytes": 631133,
+   "mtimeNs": 1793335101237920539
   },
   {
    "path": "for-mini/AGENTS.md",
-   "bytes": 6955,
-   "mtimeNs": 1793087552666302289
+   "bytes": 7350,
+   "mtimeNs": 1793327608356821317
   },
   {
    "path": "for-mini/README.md",
@@ -145,8 +145,8 @@
   },
   {
    "path": "for-mini/app.json",
-   "bytes": 1335,
-   "mtimeNs": 1793083670347507528
+   "bytes": 1409,
+   "mtimeNs": 1793330201519825059
   },
   {
    "path": "for-mini/components/icon-cell/index.js",
@@ -244,9 +244,29 @@
    "mtimeNs": 1792678904878116381
   },
   {
+   "path": "for-mini/docs/VERIFY-小程序3D分发-2026-10-30.md",
+   "bytes": 9689,
+   "mtimeNs": 1793335162419376785
+  },
+  {
+   "path": "for-mini/docs/VERIFY-小程序3D续做门槛-2026-10-30.md",
+   "bytes": 7695,
+   "mtimeNs": 1793333984694471367
+  },
+  {
    "path": "for-mini/docs/VERIFY-小程序专业页与远程开关-2026-10-27.md",
    "bytes": 13543,
    "mtimeNs": 1793088320550997840
+  },
+  {
+   "path": "for-mini/docs/VERIFY-小程序真实3D探针-2026-10-30.md",
+   "bytes": 10388,
+   "mtimeNs": 1793332428794355647
+  },
+  {
+   "path": "for-mini/docs/VERIFY-小程序真实3D探针复核-2026-10-30.md",
+   "bytes": 11744,
+   "mtimeNs": 1793333252870609062
   },
   {
    "path": "for-mini/docs/VERIFY-小程序配装页-2026-10-26.md",
@@ -404,6 +424,26 @@
    "mtimeNs": 1792641515950210144
   },
   {
+   "path": "for-mini/pages/model-probe/index.js",
+   "bytes": 4284,
+   "mtimeNs": 1793332875763903321
+  },
+  {
+   "path": "for-mini/pages/model-probe/index.json",
+   "bytes": 144,
+   "mtimeNs": 1793330047014837084
+  },
+  {
+   "path": "for-mini/pages/model-probe/scene/index.js",
+   "bytes": 5739,
+   "mtimeNs": 1793332875763420512
+  },
+  {
+   "path": "for-mini/pages/model-probe/scene/index.json",
+   "bytes": 50,
+   "mtimeNs": 1793329852436765603
+  },
+  {
    "path": "for-mini/pages/professions/index.js",
    "bytes": 14273,
    "mtimeNs": 1793087453866828946
@@ -425,8 +465,8 @@
   },
   {
    "path": "for-mini/project.config.json",
-   "bytes": 1290,
-   "mtimeNs": 1792651446740428836
+   "bytes": 1363,
+   "mtimeNs": 1793330965729106735
   },
   {
    "path": "for-mini/services/countdown.js",
@@ -485,8 +525,8 @@
   },
   {
    "path": "wow-forever-web/app/src/App.vue",
-   "bytes": 241,
-   "mtimeNs": 1791534252021687960
+   "bytes": 935,
+   "mtimeNs": 1793261450842196282
   },
   {
    "path": "wow-forever-web/app/src/components/AppShell.vue",
@@ -535,8 +575,8 @@
   },
   {
    "path": "wow-forever-web/app/src/components/ModelViewer.vue",
-   "bytes": 6933,
-   "mtimeNs": 1793232147297864760
+   "bytes": 7026,
+   "mtimeNs": 1793269328046244256
   },
   {
    "path": "wow-forever-web/app/src/components/PinMap.vue",
@@ -545,8 +585,8 @@
   },
   {
    "path": "wow-forever-web/app/src/components/SiteSearch.vue",
-   "bytes": 6018,
-   "mtimeNs": 1792125868319757257
+   "bytes": 6383,
+   "mtimeNs": 1793261732765429454
   },
   {
    "path": "wow-forever-web/app/src/components/SourceList.vue",
@@ -609,6 +649,11 @@
    "mtimeNs": 1792943597372088565
   },
   {
+   "path": "wow-forever-web/app/src/lib/motion.js",
+   "bytes": 696,
+   "mtimeNs": 1793261876306785092
+  },
+  {
    "path": "wow-forever-web/app/src/lib/nav.js",
    "bytes": 5257,
    "mtimeNs": 1793178045333202714
@@ -640,8 +685,8 @@
   },
   {
    "path": "wow-forever-web/app/src/main.js",
-   "bytes": 583,
-   "mtimeNs": 1792848010609379100
+   "bytes": 866,
+   "mtimeNs": 1793261404843441420
   },
   {
    "path": "wow-forever-web/app/src/pages/AchievementsPage.vue",
@@ -660,18 +705,18 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/ClassesPage.vue",
-   "bytes": 15751,
-   "mtimeNs": 1793177614967215259
+   "bytes": 16180,
+   "mtimeNs": 1793263875420557465
   },
   {
    "path": "wow-forever-web/app/src/pages/DungeonPage.vue",
-   "bytes": 22640,
-   "mtimeNs": 1792502371809554884
+   "bytes": 22649,
+   "mtimeNs": 1793261925417806141
   },
   {
    "path": "wow-forever-web/app/src/pages/DungeonsPage.vue",
-   "bytes": 25016,
-   "mtimeNs": 1792848134490727026
+   "bytes": 25224,
+   "mtimeNs": 1793261621309585373
   },
   {
    "path": "wow-forever-web/app/src/pages/GlossaryPage.vue",
@@ -680,18 +725,18 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/HomePage.vue",
-   "bytes": 17849,
-   "mtimeNs": 1793178013418226775
+   "bytes": 16810,
+   "mtimeNs": 1793277843928988345
   },
   {
    "path": "wow-forever-web/app/src/pages/ItemsPage.vue",
-   "bytes": 22155,
-   "mtimeNs": 1792849242931821397
+   "bytes": 22408,
+   "mtimeNs": 1793261925416245076
   },
   {
    "path": "wow-forever-web/app/src/pages/LegacyPage.vue",
-   "bytes": 47123,
-   "mtimeNs": 1792945768560598153
+   "bytes": 47954,
+   "mtimeNs": 1793261897374854742
   },
   {
    "path": "wow-forever-web/app/src/pages/PetsPage.vue",
@@ -710,8 +755,8 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/RacesPage.vue",
-   "bytes": 14741,
-   "mtimeNs": 1792502356957291747
+   "bytes": 14718,
+   "mtimeNs": 1793261925441471436
   },
   {
    "path": "wow-forever-web/app/src/pages/RaidsPage.vue",
@@ -735,8 +780,8 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/TalentPage.vue",
-   "bytes": 29607,
-   "mtimeNs": 1792088009442597836
+   "bytes": 29930,
+   "mtimeNs": 1793261721739897338
   },
   {
    "path": "wow-forever-web/app/src/pages/TimelinePage.vue",
@@ -750,13 +795,13 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/UpdatesPage.vue",
-   "bytes": 14450,
-   "mtimeNs": 1792494745730550840
+   "bytes": 14568,
+   "mtimeNs": 1793261919074854542
   },
   {
    "path": "wow-forever-web/app/src/pages/WorldPage.vue",
-   "bytes": 20337,
-   "mtimeNs": 1792375755560381464
+   "bytes": 20774,
+   "mtimeNs": 1793261830866065537
   },
   {
    "path": "wow-forever-web/app/src/router.js",
@@ -820,8 +865,8 @@
   },
   {
    "path": "wow-forever-web/app/tests/site-search.spec.js",
-   "bytes": 4728,
-   "mtimeNs": 1792848134501980247
+   "bytes": 5046,
+   "mtimeNs": 1793265447535043608
   },
   {
    "path": "wow-forever-web/app/tests/updates-filter.spec.js",
@@ -1464,6 +1509,11 @@
    "mtimeNs": 1792673859550491164
   },
   {
+   "path": "wow-forever-web/docs/PLAN-小程序配装取名宏命令-2026-10-30.md",
+   "bytes": 19269,
+   "mtimeNs": 1793327553125606737
+  },
+  {
    "path": "wow-forever-web/docs/PLAN-小程序首页改版-2026-10-22.md",
    "bytes": 5858,
    "mtimeNs": 1792667524400561605
@@ -1477,6 +1527,11 @@
    "path": "wow-forever-web/docs/PLAN-系统图文攻略系列-2026-10-22.md",
    "bytes": 15303,
    "mtimeNs": 1792641803539840302
+  },
+  {
+   "path": "wow-forever-web/docs/PLAN-网页交互动效-2026-10-29.md",
+   "bytes": 9693,
+   "mtimeNs": 1793264418567751049
   },
   {
    "path": "wow-forever-web/docs/PRD-Qoder-插件数据与整人3D交付-2026-10-27.md",
@@ -1655,8 +1710,8 @@
   },
   {
    "path": "wow-forever-web/docs/UI.md",
-   "bytes": 223606,
-   "mtimeNs": 1793250916925078142
+   "bytes": 227957,
+   "mtimeNs": 1793263787301701876
   },
   {
    "path": "wow-forever-web/docs/VERIFY-2026-10-08-site.md",
@@ -1889,6 +1944,11 @@
    "mtimeNs": 1793256477564084346
   },
   {
+   "path": "wow-forever-web/docs/VERIFY-全职业真实3D接入-2026-10-29.md",
+   "bytes": 4641,
+   "mtimeNs": 1793270131156601896
+  },
+  {
    "path": "wow-forever-web/docs/VERIFY-公众号成稿发布边界-2026-10-27.md",
    "bytes": 5990,
    "mtimeNs": 1793069700282062771
@@ -1929,6 +1989,11 @@
    "mtimeNs": 1792634082243427680
   },
   {
+   "path": "wow-forever-web/docs/VERIFY-小红书图文攻略修复复核-2026-10-29.md",
+   "bytes": 5370,
+   "mtimeNs": 1793269522025704188
+  },
+  {
    "path": "wow-forever-web/docs/VERIFY-排产表实际操作-2026-10-21.md",
    "bytes": 5496,
    "mtimeNs": 1792586825094526540
@@ -1959,6 +2024,16 @@
    "mtimeNs": 1792978203911911540
   },
   {
+   "path": "wow-forever-web/docs/VERIFY-真实3D轻量化-2026-10-29.json",
+   "bytes": 241954,
+   "mtimeNs": 1793272697019143379
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-真实3D轻量化-2026-10-29.md",
+   "bytes": 5143,
+   "mtimeNs": 1793326351620784418
+  },
+  {
    "path": "wow-forever-web/docs/VERIFY-第九轮修复诊断复核-2026-10-29.md",
    "bytes": 3242,
    "mtimeNs": 1793251881254949350
@@ -1972,6 +2047,11 @@
    "path": "wow-forever-web/docs/VERIFY-第九轮输入与附件验收修订-2026-10-28.md",
    "bytes": 1764,
    "mtimeNs": 1793191365845380004
+  },
+  {
+   "path": "wow-forever-web/docs/VERIFY-网页交互动效-2026-10-29.md",
+   "bytes": 8384,
+   "mtimeNs": 1793269409189468972
   },
   {
    "path": "wow-forever-web/docs/VERIFY-项目级角色Skills-2026-10-22.md",
@@ -2039,6 +2119,11 @@
    "mtimeNs": 1792847998240220484
   },
   {
+   "path": "wow-forever-web/tools/apply-optimized-bis-models.py",
+   "bytes": 8331,
+   "mtimeNs": 1793271628514403903
+  },
+  {
    "path": "wow-forever-web/tools/audit-assets.py",
    "bytes": 13120,
    "mtimeNs": 1792847640962006216
@@ -2089,6 +2174,16 @@
    "mtimeNs": 1792847885146538745
   },
   {
+   "path": "wow-forever-web/tools/build-mini-bis-models.py",
+   "bytes": 13890,
+   "mtimeNs": 1793334378305375312
+  },
+  {
+   "path": "wow-forever-web/tools/build-xr-probe.py",
+   "bytes": 9167,
+   "mtimeNs": 1793332970388752982
+  },
+  {
    "path": "wow-forever-web/tools/build-zone-maps.py",
    "bytes": 6545,
    "mtimeNs": 1793158864946896145
@@ -2117,6 +2212,11 @@
    "path": "wow-forever-web/tools/deploy-gh-pages.py",
    "bytes": 9804,
    "mtimeNs": 1792847885155893935
+  },
+  {
+   "path": "wow-forever-web/tools/derive-glb-textures.py",
+   "bytes": 11454,
+   "mtimeNs": 1793332421150608909
   },
   {
    "path": "wow-forever-web/tools/export-mini.js",
@@ -2219,6 +2319,11 @@
    "mtimeNs": 1792669391169639863
   },
   {
+   "path": "wow-forever-web/tools/import-bis-real-models.py",
+   "bytes": 4473,
+   "mtimeNs": 1793272076073560257
+  },
+  {
    "path": "wow-forever-web/tools/import-client-export.py",
    "bytes": 10043,
    "mtimeNs": 1792847885136847391
@@ -2315,8 +2420,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 61266,
-   "mtimeNs": 1793088156357158277
+   "bytes": 61650,
+   "mtimeNs": 1793331371149013477
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2332,6 +2437,11 @@
    "path": "wow-forever-web/tools/openmap-tile-manifest.py",
    "bytes": 6218,
    "mtimeNs": 1793158613735764145
+  },
+  {
+   "path": "wow-forever-web/tools/optimize-bis-glb.py",
+   "bytes": 9737,
+   "mtimeNs": 1793271032418855465
   },
   {
    "path": "wow-forever-web/tools/oss-fake-server.js",
@@ -2480,8 +2590,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 255182,
-   "mtimeNs": 1793250422065344315
+   "bytes": 279206,
+   "mtimeNs": 1793324978271814240
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
@@ -2522,6 +2632,51 @@
    "path": "wow-forever-web/tools/visual-check.py",
    "bytes": 23244,
    "mtimeNs": 1792850084944084617
+  },
+  {
+   "path": "xr-probe/README.md",
+   "bytes": 470,
+   "mtimeNs": 1793332971258444832
+  },
+  {
+   "path": "xr-probe/app.js",
+   "bytes": 8,
+   "mtimeNs": 1793332971248194285
+  },
+  {
+   "path": "xr-probe/app.json",
+   "bytes": 389,
+   "mtimeNs": 1793332971247873675
+  },
+  {
+   "path": "xr-probe/pages/model-probe/index.js",
+   "bytes": 4292,
+   "mtimeNs": 1793332971257762645
+  },
+  {
+   "path": "xr-probe/pages/model-probe/index.json",
+   "bytes": 144,
+   "mtimeNs": 1793330047014837000
+  },
+  {
+   "path": "xr-probe/pages/model-probe/scene/index.js",
+   "bytes": 5739,
+   "mtimeNs": 1793332875763420000
+  },
+  {
+   "path": "xr-probe/pages/model-probe/scene/index.json",
+   "bytes": 50,
+   "mtimeNs": 1793329852436765000
+  },
+  {
+   "path": "xr-probe/project.config.json",
+   "bytes": 302,
+   "mtimeNs": 1793332971249796614
+  },
+  {
+   "path": "xr-probe/sitemap.json",
+   "bytes": 94,
+   "mtimeNs": 1793332971249550824
   }
  ]
 }
