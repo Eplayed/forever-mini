@@ -1328,6 +1328,125 @@ const oss = require(MINI_SERVICE);
   })();
   ok('反例：同名图片远端字节不同 → 判冲突、一个字节都不覆写', assetImm.ok, assetImm.why);
 
+  /* ================= 7·6 真实模型分发（2026-10-30 B2/B3）================= */
+  process.stdout.write('\n模型通道：只认 B1 索引、同名不同字节不覆写、传完必回读\n');
+  /* 夹具：一份 2 KB 的"模型"+ B1 那份索引的最小子集。mutate 用来演字节不符/文件名不符/目录不符 */
+  const mkModelFixture = (label, mutate) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mdl-' + label + '-'));
+    const setId = 'hunter'; const faction = 'alliance';
+    const buf = Buffer.alloc(2048, 7);
+    const sha = crypto.createHash('sha256').update(buf).digest('hex');
+    const file = setId + '-' + faction + '-' + sha.slice(0, 12) + '.glb';
+    const idx = {
+      product: 'wow-forever-mini-models', kind: 'bis-models-index',
+      formatVersion: 'glb-png-v1', assetDir: 'assets/models/real/',
+      models: [{
+        setId, faction, file, pngBytes: buf.length, pngSha256: sha,
+        sourceBytes: 405940, sourceSha256: 'fe36a30943517a9c1bb495152f633da95658509ec9e7ead21c8d5c11e50c3aae',
+        placementVerdict: 'PASS', formatVersion: 'glb-png-v1'
+      }]
+    };
+    if (mutate) mutate(idx, buf);
+    fs.mkdirSync(path.join(dir, 'oss-build', 'beta', 'models'), { recursive: true });
+    fs.mkdirSync(path.join(dir, 'oss-build', 'beta', 'bis', 'models'), { recursive: true });
+    /* 改过字节就要改回文件名与索引，否则测的是夹具自己的错 */
+    const realFile = idx.models[0].file;
+    fs.writeFileSync(path.join(dir, 'oss-build', 'beta', 'models', realFile), buf);
+    fs.writeFileSync(path.join(dir, 'oss-build', 'beta', 'bis', 'models', 'index.json'),
+      JSON.stringify(idx, null, 1));
+    return { dir, buf, sha, file: realFile, key: 'wow/beta/v1/assets/models/real/' + realFile };
+  };
+  const mdlEnv = (dir, mark) => Object.assign({}, NO_MARK, fixtureEnv(dir), {
+    WOW_OSS_ENV: F, WOW_ALLOW_CROSS_CREDS: mark ? '1' : null
+  });
+  /* 一次调用 = 挂假 OSS → 跑命令 → 摘掉；mark=false 用来演"没带写授权标记" */
+  const mdlRun = (dir, st, opts, mark) => withEnv(mdlEnv(dir, mark === false ? false : true), () => {
+    ossTool.setTransportForTest(st.transport);
+    return ossTool.cmdModels('beta', opts || {}).then((rc) => {
+      ossTool.setTransportForTest(null);
+      return rc;
+    });
+  });
+
+  await step('写命令闸：没带 ' + ossTool.WRITE_MARK + ' 时 models 一个请求都不发', () => {
+    const f = mkModelFixture('gate');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}, false).then((rc) => rc === 1 && st.counts.PUT === 0 && st.objs.size === 0);
+  }, () => '没带标记也发了模型');
+
+  await step('models --dry-run：只读远端，一个字节不写', () => {
+    const f = mkModelFixture('dry');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, { dryRun: true }).then((rc) => rc === 0 && st.counts.PUT === 0 && st.objs.size === 0);
+  }, () => '试运行写了东西');
+
+  await step('单件上传：key / Content-Type / immutable 缓存 / inline 都对，且真发了', () => {
+    const f = mkModelFixture('one');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) => {
+      const o = st.objs.get(f.key);
+      return rc === 0 && st.counts.PUT === 1 && !!o && o.buf.length === f.buf.length
+        && o.contentType === 'model/gltf-binary'
+        && o.cacheControl === 'public, max-age=31536000, immutable'
+        && o.contentDisposition === 'inline';
+    });
+  }, () => '对象没落对 key 或元数据不对');
+
+  await step('传完必回读：GET 回来的字节就是索引里那条 SHA', () => {
+    const f = mkModelFixture('readback');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) => {
+      const got = st.get(f.key);
+      const back = crypto.createHash('sha256').update(got).digest('hex');
+      /* 假 OSS 对不存在的 key 只回 404、不计数，所以这里能数到的就是"传完之后的那次 HEAD + GET" */
+      return rc === 0 && back === f.sha && st.counts.HEAD >= 1 && st.counts.GET >= 1;
+    });
+  }, () => '传上去就没回读验证');
+
+  await step('幂等：同字节重跑不再 PUT', () => {
+    const f = mkModelFixture('idem');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc1) => mdlRun(f.dir, st, {}).then((rc2) =>
+      rc1 === 0 && rc2 === 0 && st.counts.PUT === 1));
+  }, () => '第二次重传了同一份模型');
+
+  await step('反例：远端同名对象字节不同 → 停且不覆写（不许冲掉别人那份）', () => {
+    const f = mkModelFixture('clash');
+    const st = fakeOss();
+    const other = Buffer.alloc(2048, 9);
+    st.set(f.key, other, 'public, max-age=31536000, immutable', 'model/gltf-binary', 'inline');
+    return mdlRun(f.dir, st, {}).then((rc) =>
+      rc === 1 && st.counts.PUT === 0 && Buffer.compare(st.get(f.key), other) === 0);
+  }, () => '同名不同字节被静默覆写');
+
+  await step('反例：本地字节与索引不符 → 传前就停，0 个远端请求', () => {
+    const f = mkModelFixture('localbad', (idx, buf) => { idx.models[0].pngBytes = buf.length + 1; });
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) =>
+      rc === 1 && st.counts.PUT === 0 && st.counts.HEAD === 0);
+  }, () => '对不上索引的本地文件照样往上灌');
+
+  await step('反例：文件名哈希段与 pngSha256 不符 → 索引形状判死，0 个请求', () => {
+    const f = mkModelFixture('shape', (idx) => { idx.models[0].file = 'hunter-alliance-000000000000.glb'; });
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) => rc === 1 && st.counts.PUT === 0);
+  }, () => '内容寻址的文件名没被核');
+
+  await step('反例：索引 assetDir 被改成别的目录 → 与本命令拼的 key 不一致就停', () => {
+    const f = mkModelFixture('assetdir', (idx) => { idx.assetDir = 'assets/models/other/'; });
+    const st = fakeOss();
+    return mdlRun(f.dir, st, {}).then((rc) => rc === 1 && st.counts.PUT === 0);
+  }, () => '索引说一套、命令拼另一套也没人管');
+
+  await step('--set 点名的只传那件、点不到的直接报错', () => {
+    const f = mkModelFixture('pick');
+    const st = fakeOss();
+    return mdlRun(f.dir, st, { models: ['hunter/alliance'] }).then((rc1) =>
+      mdlRun(f.dir, st, { models: ['priest/horde'] }).then((rc2) =>
+        rc1 === 0 && rc2 === 1 && st.counts.PUT === 1 && st.objs.size === 1));
+  }, () => '点名传件这条路不对');
+
+
   /* ================= 7. 回滚核实目标批次 ================= */
   process.stdout.write('\n回滚：先核目标批次完整，再动指针\n');
   async function twoBatches() {

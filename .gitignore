@@ -55,3 +55,7 @@ wow-forever-web/release/
 # OSS 写凭证（tools/oss-release.js 的本地凭证文件）。放在仓库根，不在小程序目录里，
 # 这样微信打包器不可能把它带进代码包；密钥一律不许进 git。
 .oss-env
+
+# build-xr-probe.py 生成的扫码预览工程：可随时重生成，且里面烘了一条 OSS 地址，不入库
+/xr-probe/
+/xr-probe-remote/

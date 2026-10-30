@@ -2030,6 +2030,133 @@ async function cmdAssets(env, opts) {
   return 0;
 }
 
+/* ---------- 3.5 真实整人模型的远端分发（2026-10-30，B2 单件 / B3 整批）---------- */
+
+/* 模型不是数据批次里的东西：它是内容寻址的不可变对象，清单是 B1 那份独立索引
+   （for-mini/oss-build/{env}/bis/models/index.json），对象落 assets/models/real/ 下。
+   三条不许：本地字节或哈希与索引不符还照传、远端同名对象字节不同还覆写、
+   传完不回读就报成功。 */
+const MODEL_ASSET_DIR = 'assets/models/real';
+const MODEL_LOCAL_DIR = 'models';
+const MODEL_INDEX_REL = ['bis', 'models', 'index.json'];
+const MODEL_MIME = 'model/gltf-binary';
+
+/* 索引读一次，形状不对就直接返回错误——不发任何远端请求 */
+function modelIndex(env) {
+  const p = path.join(buildRoot(), env, ...MODEL_INDEX_REL);
+  if (!fs.existsSync(p)) return { errors: ['找不到模型索引 ' + path.relative(REPO, p) + '（先跑 tools/build-mini-bis-models.py）'] };
+  let idx;
+  try { idx = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return { errors: ['模型索引不是合法 JSON：' + e.message] }; }
+  const errors = [];
+  if (idx.product !== 'wow-forever-mini-models' || idx.kind !== 'bis-models-index') errors.push('索引 product/kind 不对');
+  if (idx.formatVersion !== 'glb-png-v1') errors.push('索引 formatVersion 不是 glb-png-v1，先确认 B1 重跑过');
+  if (String(idx.assetDir) !== MODEL_ASSET_DIR + '/') errors.push('索引 assetDir 是 ' + idx.assetDir + '，与本命令拼的 ' + MODEL_ASSET_DIR + '/ 不一致');
+  const models = Array.isArray(idx.models) ? idx.models : [];
+  if (!models.length) errors.push('索引里一条模型都没有');
+  const seen = new Set();
+  models.forEach((m) => {
+    const id = m.setId + '/' + m.faction;
+    if (seen.has(id)) errors.push(id + ' 在索引里重复');
+    seen.add(id);
+    if (!/^[a-z0-9-]+-[0-9a-f]{12}\.glb$/.test(String(m.file || ''))) errors.push(id + ' 的文件名不合规矩（要 <setId>-<faction>-<成品sha前12>.glb）：' + m.file);
+    if (String(m.file || '').indexOf('/') >= 0 || String(m.file || '').indexOf('..') >= 0) errors.push(id + ' 的文件名想往上跳：' + m.file);
+    if (String(m.file || '').slice(0, -4).slice(-12) !== String(m.pngSha256 || '').slice(0, 12)) errors.push(id + ' 的文件名哈希与 pngSha256 前 12 位不同');
+  });
+  return { idx, models, errors, indexRel: path.relative(REPO, p) };
+}
+
+async function cmdModels(env, opts) {
+  if (!opts.dryRun) {
+    const gate = requireWriteGate('models', env, opts);
+    if (gate) { gate.forEach(logLine); return 1; }
+  }
+  const rd = modelIndex(env);
+  if (rd.errors.length) { rd.errors.slice(0, 12).forEach((e) => logLine('✗ ' + e)); return 1; }
+  const want = (opts.models && opts.models.length) ? opts.models : null;
+  const picked = want
+    ? rd.models.filter((m) => want.indexOf(m.setId + '/' + m.faction) >= 0)
+    : rd.models;
+  const missingWant = want ? want.filter((w) => !picked.some((m) => m.setId + '/' + m.faction === w)) : [];
+  if (missingWant.length) { missingWant.forEach((w) => logLine('✗ 索引里没有 ' + w)); return 1; }
+
+  /* 传之前把每一份本地文件对完：任何一件对不上，整批停，不发一个请求 */
+  const locals = [];
+  const bad = [];
+  for (const m of picked) {
+    const p = path.join(buildRoot(), env, MODEL_LOCAL_DIR, m.file);
+    if (!fs.existsSync(p)) { bad.push(m.setId + '/' + m.faction + ' 本地文件不存在：' + m.file); continue; }
+    const buf = fs.readFileSync(p);
+    if (buf.length !== m.pngBytes) bad.push(m.setId + '/' + m.faction + ' 本地字节与索引不符（' + buf.length + ' ≠ ' + m.pngBytes + '）');
+    else if (sha256(buf) !== m.pngSha256) bad.push(m.setId + '/' + m.faction + ' 本地 SHA-256 与索引不符');
+    else locals.push({ m, buf });
+  }
+  if (bad.length) { bad.slice(0, 12).forEach((e) => logLine('✗ ' + e)); return 1; }
+
+  const creds = loadCreds();
+  const total = locals.reduce((t, x) => t + x.buf.length, 0);
+  logLine('环境 ' + env + ' · bucket ' + creds.bucket + ' · 前缀 ' + NAMESPACES[env] + '/' + MODEL_ASSET_DIR + '/'
+    + ' · 模型 ' + locals.length + ' 件 / ' + kb(total) + ' KB'
+    + (opts.dryRun ? '（--dry-run 只读远端，不写）' : '（凭证来源 ' + creds.from + (opts.dryRun ? '' : '，已带 ' + WRITE_MARK + '=1') + '）'));
+  if (creds.warnMiniCred) { logLine('✗ ' + credsHint(creds)); return 1; }
+  if (!opts.dryRun && !creds.ok) { logLine(credsHint(creds)); return 1; }
+
+  let uploaded = 0; let unchanged = 0; let fixed = 0; let forced = 0;
+  const failed = []; const violations = []; const remoteLines = [];
+  for (const it of locals) {
+    const key = NAMESPACES[env] + '/' + MODEL_ASSET_DIR + '/' + it.m.file;
+    const headers = { 'Cache-Control': IMUTABLE_CACHE, 'Content-Type': MODEL_MIME, 'Content-Disposition': ASSET_DISP };
+    const head = creds.ok ? await remoteHead(creds, key) : { exists: false };
+    const label = it.m.setId + '/' + it.m.faction;
+    if (head.exists) {
+      if (head.etag !== md5Hex(it.buf)) {
+        violations.push(label + '：远端同名对象字节不同（远端 ETag ' + head.etag + ' ≠ 本地 ' + md5Hex(it.buf) + '），不覆写');
+        continue;
+      }
+      /* 字节相同但元数据漂了：只补元数据。默认域名会强制 attachment（和素材那层一样），
+         被强制的情况不算漂移，也记一笔给真机判定当证据。 */
+      if (head.forceDownload === 'true') forced += 1;
+      const drift = (head.contentType || '').split(';')[0] !== MODEL_MIME || head.cacheControl !== IMUTABLE_CACHE
+        || (!head.forceDownload && head.contentDisposition !== ASSET_DISP);
+      if (drift && !opts.dryRun) {
+        try {
+          const r2 = await raw('PUT', creds.bucket, creds.region, '/' + encKey(key), it.buf, signPut(creds, key, it.buf, headers));
+          if (r2.statusCode >= 200 && r2.statusCode < 300) { fixed += 1; continue; }
+          failed.push(label + ' → 补正元数据失败 HTTP ' + r2.statusCode);
+        } catch (e2) { failed.push(label + ' → 补正失败 ' + e2.message); }
+      }
+      unchanged += 1; continue;
+    }
+    if (opts.dryRun) { uploaded += 1; logLine('  待传 ' + label + ' → ' + key + '  ' + kb(it.buf.length) + ' KB'); continue; }
+    try {
+      const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(key), it.buf, signPut(creds, key, it.buf, headers));
+      if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 200));
+      const back = await remoteHead(creds, key);
+      if (back.etag !== md5Hex(it.buf) || back.bytes !== it.buf.length) throw new Error('HEAD 回读不符（etag ' + back.etag + ' / ' + back.bytes + ' B）');
+      const g = await raw('GET', creds.bucket, creds.region, '/' + encKey(key), null, signGet(creds, '/' + encKey(key), '/' + key));
+      if (g.statusCode !== 200) throw new Error('GET 回读 HTTP ' + g.statusCode);
+      if (g.body.length !== it.buf.length || sha256(g.body) !== it.m.pngSha256) {
+        throw new Error('GET 回读字节/哈希不符（' + g.body.length + ' B / ' + sha256(g.body).slice(0, 12) + '）');
+      }
+      uploaded += 1;
+      remoteLines.push('  ✓ ' + label + ' · ' + back.bytes + ' B · ' + it.m.pngSha256.slice(0, 12)
+        + ' · HEAD/GET 回读一致 · Content-Type=' + (back.contentType || '?') + '·缓存=' + (back.cacheControl || '?')
+        + '·Disposition=' + (back.contentDisposition || '无') + (back.forceDownload === 'true' ? '（默认域名强制 attachment）' : '')
+        + '\n     https://' + creds.bucket + '.' + creds.region + '.aliyuncs.com/' + encKey(key));
+    } catch (err) { failed.push(label + ' → ' + err.message); }
+  }
+  remoteLines.forEach(logLine);
+  if (violations.length) violations.slice(0, 8).forEach((v) => logLine('  ✗ ' + v));
+  if (failed.length) failed.slice(0, 8).forEach((f) => logLine('  ✗ ' + f));
+  logLine('模型：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 补正元数据 ' + fixed
+    + ' · 失败 ' + failed.length + ' · 同名冲突 ' + violations.length + ' / 共 ' + locals.length
+    + (forced ? ' · 其中 ' + forced + ' 个被默认域名强制 attachment' : ''));
+  if (opts.dryRun) { logLine('试运行结束，一个字节都没写。'); return 0; }
+  /* 全部"已存在同字节跳过"也是成功：B3 中途断过要续传，第二次就是这一态 */
+  if (violations.length || failed.length) return 1;
+  logLine('索引来源 ' + rd.indexRel + ' · 本命令只传模型，索引要等整批齐了单独发（见门槛文件 B3）。');
+  return 0;
+}
+
 async function cmdUpload(env, opts) {
   if (!opts.dryRun) {
     const gate = requireWriteGate('upload', env, opts);
@@ -2369,6 +2496,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === '--env') { i += 1; env = argv[i]; }
     else if (a === '--to') { i += 1; opts.to = argv[i]; }
+    else if (a === '--set') { i += 1; (opts.models = opts.models || []).push(argv[i]); }
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a === '--yes-release') opts.yesRelease = true;
     else if (a === '--yes-clean') opts.yesClean = true;
@@ -2384,9 +2512,9 @@ function parseArgs(argv) {
 function main() {
   const argv = process.argv.slice(2);
   if (!argv.length) {
-    logLine('用法：node tools/oss-release.js <build|upload|flags|assets|verify|list|rollback|clean> --env beta|release'
-      + ' [--dry-run] [--check-identity] [--yes-release] [--to <buildId>] [--yes-clean]');
-    logLine('写命令（upload/flags/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
+    logLine('用法：node tools/oss-release.js <build|upload|flags|assets|models|verify|list|rollback|clean> --env beta|release'
+      + ' [--dry-run] [--check-identity] [--yes-release] [--to <buildId>] [--yes-clean] [--set <setId>/<faction>]');
+    logLine('写命令（upload/flags/assets/models/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
     logLine('只拧开关、不动数据：node tools/oss-release.js flags --env beta（改 app/data/flags.json 后跑这一条，约一分钟生效，不用发版）。');
     process.exit(2);
   }
@@ -2399,6 +2527,7 @@ function main() {
       if (cmd === 'verify') return cmdVerify(env);
       if (cmd === 'list') return cmdList(env);
       if (cmd === 'assets') return cmdAssets(env, opts);
+      if (cmd === 'models') return cmdModels(env, opts);
       if (cmd === 'rollback') return cmdRollback(env, opts);
       if (cmd === 'clean') return cmdClean(env, opts);
       logLine('✗ 没有子命令 ' + cmd);
@@ -2459,6 +2588,10 @@ module.exports = {
   ASSET_DIR,
   ICON_EXT,
   cmdAssets,
+  cmdModels,
+  modelIndex,
+  MODEL_ASSET_DIR,
+  MODEL_MIME,
   listKeys,
   pointerKey,
   buildPrefix,

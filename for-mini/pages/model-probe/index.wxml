@@ -13,6 +13,13 @@
     <view class="btn {{which === 'webp' ? 'btn-on' : ''}}" data-w="webp" bindtap="pickFile">② 原件 WebP</view>
     <view class="btn {{which === 'png' ? 'btn-on' : ''}}" data-w="png" bindtap="pickFile">③ 候选 PNG</view>
   </view>
+  <!-- ④⑤ 只在"远端那一件"的隔离预览包里出现：④ 把 HTTPS 地址直接给 xr-asset-load，
+       ⑤ 先 downloadFile 到本机临时文件再给场景。两条路各自一条结论。 -->
+  <view class="row" wx:if="{{hasRemote}}">
+    <view class="btn {{which === 'remote' ? 'btn-on' : ''}}" data-w="remote" bindtap="pickFile">④ 远端 HTTPS</view>
+    <view class="btn {{which === 'dl' ? 'btn-on' : ''}}" data-w="dl" bindtap="pickFile">⑤ 先下载再加载</view>
+  </view>
+  <view class="line" wx:if="{{dlText}}">{{dlText}}</view>
   <view class="stage">
     <probe-scene wx:if="{{alive}}" id="sc" src="{{src}}" bind:status="onStatus" />
   </view>

@@ -31,6 +31,7 @@ REPO = os.path.dirname(ROOT)
 WEB = os.path.join(ROOT, "app")
 PROBE_SRC = os.path.join(REPO, "for-mini", "pages", "model-probe")
 OUT_DIR = os.path.join(REPO, "xr-probe")
+REMOTE_DIR = os.path.join(REPO, "xr-probe-remote")
 MODEL_DIR_NAME = "probe-model"
 MAIN_PKG_LIMIT = 2 * 1024 * 1024          # 微信主包上限 2 MB
 APP_ID = "wxfd9a2b985a6cedc3"             # 与正式小程序同一个号：预览码要用这个 AppID 才扫得开
@@ -60,8 +61,8 @@ def write(path, text):
         f.write(text)
 
 
-def copy_page(dst_root, keep):
-    """把探针页与场景组件拷进隔离工程；顺手改写样本目录与"这次包里到底有哪几份"。"""
+def copy_page(dst_root, keep, remote_url):
+    """把探针页与场景组件拷进隔离工程；顺手改写样本目录、远端地址与"这次包里到底有哪几档"。"""
     out_pages = os.path.join(dst_root, "pages", "model-probe")
     if os.path.isdir(out_pages):
         shutil.rmtree(out_pages)
@@ -69,9 +70,17 @@ def copy_page(dst_root, keep):
     js = os.path.join(out_pages, "index.js")
     t = io.open(js, encoding="utf-8").read()
     t = t.replace("const MODEL_DIR = '/tmp-model/'", "const MODEL_DIR = '/%s/'" % MODEL_DIR_NAME)
-    # 只留这次真打进包的那几档：留一个点得开却 404 的按钮，等于给真机留一条假证据
-    body = ",\n  ".join('%s: %s' % (json.dumps(k, ensure_ascii=False), SRC_EXPR[k]) for k in keep)
-    t = re.sub(r"(const SRC = \{)[\s\S]*?(\n\})", lambda m: m.group(1) + "\n  " + body + m.group(2), t, count=1)
+    if remote_url:
+        t = t.replace("const REMOTE_URL = ''", "const REMOTE_URL = %s" % json.dumps(remote_url), 1)
+    # 只留这次真能测的档：留一个点得开却 404 的按钮，等于给真机留一条假证据
+    t = re.sub(r"(const SRC = \{[\s\S]*?\n\})",
+               lambda m: "\n".join([l for l in m.group(1).split("\n")
+                                    if not re.match(r"^\s+([a-z]+):", l) or l.split(":")[0].strip() in keep]),
+               t, count=1)
+    if 'const SRC = {' in t:
+        body = t.split("const SRC = {")[1].split("\n}")[0]
+        if not re.search(r"\b%s\b\s*:" % keep[0], body):
+            raise SystemExit("改写把 SRC 档位删空了（keep=%s）" % keep)
     write(js, t)
     wxml = os.path.join(out_pages, "index.wxml")
     u = io.open(wxml, encoding="utf-8").read()
@@ -86,16 +95,26 @@ SRC_VALUES = {
     "blank": "",
     "webp": "hunter-alliance.glb",
     "png": "hunter-alliance-png.glb",
+    "remote": "",
+    "dl": ""
 }
-# 生成页里那三行值：空场景是空串，两份模型都拼 MODEL_DIR（不写绝对 /tmp 路径，手机读不到 Mac 磁盘）
-SRC_EXPR = {k: ('""' if not v else 'MODEL_DIR + %s' % json.dumps(v)) for k, v in SRC_VALUES.items()}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", choices=["webp", "png"], help="只打其中一份模型（两份合计超包体时用）")
-    ap.add_argument("--out", default=OUT_DIR)
+    ap.add_argument("--remote", help="B2：包里不放 GLB，改成从这条 beta HTTPS 地址取（与 --only 互斥）")
+    ap.add_argument("--out", default=None)
     args = ap.parse_args()
+
+    remote = args.remote
+    if remote and args.only:
+        raise SystemExit("--remote 与 --only 是两件事：远端探针不在包里放模型")
+    if remote:
+        if not remote.startswith("https://"):
+            raise SystemExit("--remote 要的是 https 地址（微信只认 https）")
+        if not remote.endswith(".glb"):
+            raise SystemExit("--remote 指向的不是 .glb，先核对文件名")
 
     reg = registered_source()
     src_glb = os.path.join(WEB, reg["file"])
@@ -105,26 +124,30 @@ def main():
     if os.path.getsize(src_glb) != reg["bytes"]:
         raise SystemExit("源 GLB 字节与登记不符")
 
-    out = args.out
+    out = args.out or (REMOTE_DIR if remote else OUT_DIR)
     models = os.path.join(out, MODEL_DIR_NAME)
     if os.path.isdir(models):
         shutil.rmtree(models)
-    os.makedirs(models)
 
     keep = ["blank"]
-    if args.only in (None, "webp"):
-        shutil.copy2(src_glb, os.path.join(models, SRC_VALUES["webp"]))
-        keep.append("webp")
-    if args.only in (None, "png"):
-        subprocess.check_call([sys.executable, os.path.join(ROOT, "tools", "derive-glb-textures.py"),
-                               "--file", reg["file"],
-                               "--out", os.path.join(models, "hunter-alliance-png.glb"), "--format", "PNG"],
-                              cwd=ROOT)
-        keep.append("png")
+    if remote:
+        keep += ["remote", "dl"]      # ④ 直接给 xr-asset-load，⑤ 先 downloadFile 到本机再给场景
+    else:
+        os.makedirs(models)
+        if args.only in (None, "webp"):
+            shutil.copy2(src_glb, os.path.join(models, SRC_VALUES["webp"]))
+            keep.append("webp")
+        if args.only in (None, "png"):
+            subprocess.check_call([sys.executable, os.path.join(ROOT, "tools", "derive-glb-textures.py"),
+                                   "--file", reg["file"],
+                                   "--out", os.path.join(models, "hunter-alliance-png.glb"), "--format", "PNG"],
+                                  cwd=ROOT)
+            keep.append("png")
 
     write(os.path.join(out, "app.json"), json.dumps({
         "pages": ["pages/model-probe/index"],
-        "window": {"navigationBarTitleText": "3D 探针（扫码预览专用）", "navigationBarBackgroundColor": "#0b0f16",
+        "window": {"navigationBarTitleText": "3D 探针（远端扫码专用）" if remote else "3D 探针（扫码预览专用）",
+                   "navigationBarBackgroundColor": "#0b0f16",
                    "navigationBarTextStyle": "white", "backgroundColor": "#0b0f16", "backgroundTextStyle": "light"},
         "style": "v2",
         "lazyCodeLoading": "requiredComponents",
@@ -138,19 +161,23 @@ def main():
     write(os.path.join(out, "project.config.json"), json.dumps({
         "compileType": "miniprogram",
         "appid": APP_ID,
-        "projectname": "xr-probe" + ("-" + args.only if args.only else ""),
+        "projectname": "xr-probe" + ("-remote" if remote else ("-" + args.only if args.only else "")),
         "setting": {"es6": True, "postcss": True, "minified": False, "urlCheck": False,
                     "checkInvalidKey": False, "compileHotReLoad": False},
-        # 这里刻意没有任何 packOptions.ignore：两份 GLB 必须真进预览包
+        # 这里刻意没有任何 packOptions.ignore：远端版要证的就是"包里没有模型也取得到"
         "packOptions": {"ignore": []}
     }, ensure_ascii=False, indent=2) + "\n")
-    copy_page(out, keep)
+    copy_page(out, keep, remote)
     write(os.path.join(out, "README.md"), (
-        "# xr-probe —— 仅供扫码真机验证的隔离工程\n\n"
-        "由 `python3 wow-forever-web/tools/build-xr-probe.py` 生成，不要手改，也不要发布。\n"
-        "探针页真源在 `for-mini/pages/model-probe/`；两份 GLB 一份是从 `art.json` 登记核过 SHA 的原件、\n"
-        "一份是 `derive-glb-textures.py` 现做的 PNG 候选。本工程不排除任何文件，模型必须进预览包。\n"
-        "本目录整体可以从仓库删除，删掉即回到没有探针的状态。\n")
+        "# %s —— 仅供扫码真机验证的隔离工程\n\n"
+        "由 `python3 wow-forever-web/tools/build-xr-probe.py%s` 生成，不要手改，也不要发布。\n"
+        % (os.path.basename(out), " --remote <beta HTTPS 地址>" if remote else "")
+        + ("这个工程**包内没有任何 GLB**，要回答的是：xr-frame 能不能直接从本站 OSS 的 https 地址取到模型"
+           "（④ 直接把地址给 xr-asset-load；⑤ 先 wx.downloadFile 落到本机临时文件再交给场景，两条路各自一条结论）。\n"
+           if remote else
+           "探针页真源在 `for-mini/pages/model-probe/`；两份 GLB 一份是从 `art.json` 登记核过 SHA 的原件、\n"
+           "一份是 `derive-glb-textures.py` 现做的 PNG 候选。本工程不排除任何文件，模型必须进预览包。\n")
+        + "本目录整体可以从仓库删除，删掉即回到没有探针的状态。\n")
     )
 
     # 改写坏了宁可不出码：生成的每个 js 都过一遍 node --check（引号/逗号错了就是这里红）
@@ -167,6 +194,7 @@ def main():
     # 打包清单：逐文件列出来，并核两份 GLB 的哈希与主包上限
     total = 0
     lines = []
+    glbs = []
     for dirpath, dirnames, filenames in os.walk(out):
         dirnames.sort()
         for fn in sorted(filenames):
@@ -174,16 +202,26 @@ def main():
             b = os.path.getsize(p)
             total += b
             rel = os.path.relpath(p, out)
+            if fn.endswith(".glb"):
+                glbs.append(rel)
             lines.append("%9d  %s%s" % (b, rel, ("  sha256 " + sha256_file(p)[:16] + "…")
                                         if rel.startswith(MODEL_DIR_NAME) else ""))
     print("\n".join(lines))
     print("合计 %d B（%.2f MB）· 主包上限 %d B · 档位 %s" % (total, total / 1048576.0, MAIN_PKG_LIMIT, keep))
-    for m in keep:
-        if m == "blank":
-            continue
-        p = os.path.join(models, SRC_VALUES[m])
-        if not os.path.isfile(p):
-            raise SystemExit("预览包里缺 %s" % p)
+    if remote:
+        if glbs:
+            raise SystemExit("远端探针的包里出现了 GLB（%s）——那就测不出远端能不能取到了" % ", ".join(glbs))
+        js_txt = io.open(os.path.join(out, "pages", "model-probe", "index.js"), encoding="utf-8").read()
+        if remote not in js_txt:
+            raise SystemExit("生成的页面里没有那条地址，改写没生效")
+        print("包内 GLB：0 份 · 页面取数地址：\n  " + remote)
+    else:
+        for m in keep:
+            if m == "blank":
+                continue
+            p = os.path.join(models, SRC_VALUES[m])
+            if not os.path.isfile(p):
+                raise SystemExit("预览包里缺 %s" % p)
     if total > MAIN_PKG_LIMIT:
         raise SystemExit("超主包 2 MB 上限：改用 --only webp 与 --only png 分两个预览码，不许删模型凑体积")
     print("工程 → %s" % out)
