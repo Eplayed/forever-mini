@@ -70,7 +70,10 @@ const BUDGET_KB = {
   /* 指针从 3 个入口长到 7 个（M02 加技能/掉落，M03 加职业/指南），
      8 KB 是三个入口时代定的；冷启动真正要守的是"指针+副本索引+meta ≤ 40 KB"那条。 */
   manifest: 12,
-  bundle: 64,
+  /* files.json 是"这一批每个文件的哈希台账"，只有构建端的 verify 会整份读，
+     玩家冷启动路径是 meta + 指针 + 那一份索引，不含它——所以这条预算管的是构建产物，不是流量。
+     2026-10-30 加宏命令线（1 索引 + 9 职业片）后从 64 KB 顶到需要更宽，抬到 96 KB 并留这条说明。 */
+  bundle: 96,
   'dungeons/index': 40,
   meta: 8,
   glossary: 200,
@@ -100,7 +103,9 @@ const BUDGET_KB = {
   /* 2026-10-27 实测最大的一片：制皮 511 条配方 = 65.6 KB（紧凑写法）。
      80 KB 是给"再抓一批配方"留的余量；哪天顶破这条，下一步是按分箱把一片拆成四片，
      不是把预算再抬——手机端点开一个专业付一次这个数，得有人守着。 */
-  profSet: 80
+  profSet: 80,
+  'macros/index': 24,
+  macroClass: 48
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -121,7 +126,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    不进 oss-preview 导出产物，理由同 items 那两条。 */
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
-const BASE_INPUTS = ['glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const BASE_INPUTS = ['macros.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -357,6 +362,14 @@ const PROF_DISCLAIMER = '配方、材料与采集点取自无限客户端（经�
 const PROF_REC_COLS = ['itemId', 'name', 'icon', 'q', 'new', 'mats', 'sk', 'src', 'vend', 'drops', 'xr', 'vMore', 'dMore'];
 const PROF_NODE_COLS = ['name', 'icon', 'yields', 'zone', 'sk'];
 const PROF_MAT_COLS = ['name', 'icon'];
+/* 宏命令线（2026-10-30）：一片一职业，行用位置数组存，列名只在索引写一份 */
+const CLASS_IDS = ['warrior', 'paladin', 'hunter', 'rogue', 'priest', 'shaman', 'mage', 'warlock', 'druid'];
+const MACRO_COLS = ['id', 'title', 'group', 'note', 'body', 'minLevel', 'new', 'src', 'nameFrom'];
+const MACRO_TITLE = '宏命令';
+const MACRO_COL_NOTE = '行的列名见 cols（位置数组存）。body 是宏正文，换行原样保留，界面只读＋整条复制；'
+  + 'src 是 srcs 的序号（谁整理的、哪个文件、核对日）；new=1 是无限服新增；nameFrom=addon 表示法术名退回插件烘的那一份。';
+const MACRO_DISCLAIMER = '宏命令与技能说明由第三方插件整理，本站免费列出、不分发插件本体、不做循环提示类宏；'
+  + '每条都标了整理来源与核对日期，但本站没有逐条进游戏试过，等级与法术名以你客户端里能学到的为准。';
 const PROF_COL_NOTE = '行的列名见 cols（位置数组存）。mats 是 [材料序号, 数量, 材料序号, 数量…] 平铺；'
   + 'sk 按 [' + PROF_SK_COLS.join(', ') + '] 排，null 表示这一档源里没给；'
   + 'icon 是 icons 里的序号，-1 就是这条数据本来没有图标（界面画自绘块，不许猜一张）；'
@@ -1218,6 +1231,117 @@ function buildBatch(env, opts) {
     errors.push('缺少专业基底 app/data/professions.json，专业线没有数据来源');
   }
 
+  /* ---------- 3·4. 宏命令线（2026-10-30，网页那 245 条已经上线）----------
+     数据真源只有一份：app/data/macros.json（网页宏页吃的就是它）。
+     PLAN 当初写的是"沿用 guide.json.macros"，但那条一直是空的，宏实际落在了 macros.json，
+     所以这里跟着真源走，不再复制第二份——同一批宏在两端各存一份迟早对不上。
+     一片一类（9 片），点哪个职业才取哪一片；宏正文原样保留换行，界面只读＋复制。 */
+  const macroSrcPath = path.join(siteData(), 'macros.json');
+  const macroSrc = fs.existsSync(macroSrcPath) ? readJson(macroSrcPath) : null;
+  let macroIndexObj = null;
+  if (macroSrc && Array.isArray(macroSrc.macros)) {
+    const ms = macroSrc.macros;
+    const seenId = {};
+    const srcs = (macroSrc.meta && macroSrc.meta.sources) || [];
+    const srcIdx = {};
+    srcs.forEach((x, i) => { srcIdx[x.key] = i; });
+    const classIds = {}
+    const groups = []
+    const byClass = []
+    let dropped = 0
+    ms.forEach((m) => {
+      const id = String(m.id || '')
+      if (!id || seenId[id]) { errors.push('宏：id 空或重复（' + (id || '(空)') + '）'); return }
+      seenId[id] = 1
+      if (!m.classId || !CLASS_IDS.includes(m.classId)) { errors.push('宏 ' + id + ' 的 classId 不是本站九职业之一：' + m.classId); return }
+      if (!String(m.title || '').trim()) errors.push('宏 ' + id + ' 没有标题')
+      if (!String(m.body || '').trim()) { errors.push('宏 ' + id + ' 没有宏正文（宁可少一条，不许给一条空的）'); return }
+      if (!String(m.group || '').trim()) errors.push('宏 ' + id + ' 没有用途分组')
+      if (/秒伤|DPS|权重|更好|优于|推荐顺序|性价比|循环提示/.test(String(m.title) + String(m.note))) errors.push('宏 ' + id + ' 的标题/说明是强度或循环指导（红线不做）')
+      const prov = (m.provenance || []).filter((x) => x && x.url && x.checkedAt)
+      if (!prov.length) { dropped += 1; return }   /* 没来源的按"待核"不下发（PLAN 那条口径） */
+      classIds[m.classId] = (classIds[m.classId] || 0) + 1
+      if (groups.indexOf(m.group) < 0) groups.push(m.group)
+      const row = [id, m.title, m.group, m.note || null, m.body, m.minLevel == null ? null : m.minLevel,
+        m.foreverNew ? 1 : 0, srcIdx[prov[0].key] == null ? null : srcIdx[prov[0].key], m.nameFrom || null]
+      let b = byClass.filter((x) => x.classId === m.classId)[0]
+      if (!b) { b = { classId: m.classId, className: m.className || m.classId, rows: [] }; byClass.push(b) }
+      if (b.className !== (m.className || b.className)) b.className = b.className || m.className
+      b.rows.push(row)
+    })
+    if (dropped) console.log('  · 宏：' + dropped + ' 条没有可追的来源（url + 核对日），按"待核"不下发')
+    const setsOut = []
+    byClass.sort((a, b) => CLASS_IDS.indexOf(a.classId) - CLASS_IDS.indexOf(b.classId)).forEach((c) => {
+      const obj = {
+        schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'macros-class',
+        classId: c.classId, className: c.className, srcs: srcs, rows: c.rows,
+        counts: { macros: c.rows.length }
+      }
+      setsOut.push(obj)
+      pushObj('macroClass:' + c.classId, 'macros/set/' + c.classId + '.json', obj, {
+        records: c.rows.length, budget: 'macroClass', facts: collectFactDates(srcs), flat: true
+      })
+    })
+    macroIndexObj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'macros-index',
+      source: 'wow-forever-web/app/data/macros.json',
+      meta: {
+        generatedAt: (macroSrc.meta || {}).generatedAt || null,
+        checkedAt: (macroSrc.meta || {}).checkedAt || null,
+        title: MACRO_TITLE,
+        /* 口径句与免责由分发层写一次，页面不许各自改写措辞（红线：不冒充实测、不收费、不分发插件） */
+        disclaimer: MACRO_DISCLAIMER,
+        pageNote: (macroSrc.meta || {}).pageNote || null,
+        licenseNote: (macroSrc.meta || {}).licenseNote || null,
+        sources: srcs
+      },
+      cols: MACRO_COLS, colNote: MACRO_COL_NOTE,
+      groups: groups,
+      levels: ms.reduce((o, m) => { const k = String(m.level || '未标'); o[k] = (o[k] || 0) + 1; return o }, {}),
+      classes: byClass.map((c) => ({
+        classId: c.classId, className: c.className, count: c.rows.length,
+        path: 'macros/set/' + c.classId + '.json'
+      })),
+      counts: {
+        macros: ms.length, sent: byClass.reduce((t, c) => t + c.rows.length, 0),
+        classes: byClass.length, groups: groups.length,
+        foreverNew: ms.filter((m) => m.foreverNew).length, droppedNoSource: dropped
+      }
+    }
+    pushObj('macrosIndex', 'macros/index.json', macroIndexObj, {
+      records: byClass.length, budget: 'macros/index', facts: collectFactDates(srcs)
+    })
+    /* 红线扫描：宏这一页最容易撞的是"强度建议 / 循环提示 / 收费"这三条。
+       两条口径要写清楚，别一刀切：
+       ① 我们自己的口径句（disclaimer/pageNote/licenseNote 里"不做循环提示类宏""不收费"）
+          不能被当成撞线——所以只扫行数据与分组名，不扫 meta；
+       ② 红线拦的是"本站算出来的掉率与强度评分"，不是插件抄来的技能效果句。
+          "断筋减速 40%""威慑 +25% 躲闪"这类是技能自己的数值，网页那 245 条已按这个口径上线，
+          小程序不另立一条更严的、把同一条内容判成两边不一致。
+          但**宏正文**（要粘进游戏的那几行）里出现 % 一定是异常，照拦。 */
+    entries.forEach((e) => {
+      if (!e.obj || (e.key !== 'macrosIndex' && String(e.key).indexOf('macroClass:') !== 0)) return
+      const body = e.key === 'macrosIndex'
+        ? JSON.stringify({ groups: e.obj.groups, classes: e.obj.classes, counts: e.obj.counts })
+        : JSON.stringify(e.obj.rows)
+      if (/秒伤|DPS|权重|更好|优于|推荐顺序|性价比|循环提示/.test(body)) errors.push('宏：' + e.path + ' 出现强度/循环指导类词（红线不做这些）')
+      if (/收费|购买|会员|付费/.test(body)) errors.push('宏：' + e.path + ' 出现交易类词（宏一律免费列）')
+      if (e.key !== 'macrosIndex' && /https?:\/\//.test(body)) errors.push('宏：' + e.path + ' 行数据里出现链接（小程序不做跳转）')
+    })
+    macroIndexObj.counts.percentInNotes = ms.filter((m) => /\d+(\.\d+)?\s*%/.test(String(m.note || '') + String(m.title || ''))).length
+    ms.forEach((m) => {
+      if (/\d+(\.\d+)?\s*%/.test(String(m.body || ''))) errors.push('宏 ' + m.id + ' 的正文里出现百分比（正文是要原样粘进游戏的命令）')
+    })
+    setsOut.forEach((s) => {
+      const badBody = s.rows.filter((r) => !String(r[4] || '').trim()).length
+      if (badBody) errors.push('宏 ' + s.classId + '：' + badBody + ' 条正文是空的')
+      const noSrc = s.rows.filter((r) => r[7] == null || !s.srcs[r[7]]).length
+      if (noSrc) errors.push('宏 ' + s.classId + '：' + noSrc + ' 条指不到来源条目（不许无出处下发）')
+    })
+  } else {
+    errors.push('缺少宏基底 app/data/macros.json，宏命令页没有数据来源')
+  }
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
@@ -1270,6 +1394,16 @@ function buildBatch(env, opts) {
     profIndexObj.professions.forEach((it) => {
       const e = byKey['profSet:' + it.id];
       if (!e) { errors.push('专业索引里 ' + it.id + ' 没有对应的分片'); return; }
+      const sBuf = dumpFlat(e.obj);
+      const sm = md5Of(sBuf);
+      it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
+    });
+   }
+
+  if (macroIndexObj) {
+    macroIndexObj.classes.forEach((it) => {
+      const e = byKey['macroClass:' + it.classId];
+      if (!e) { errors.push('宏索引里 ' + it.classId + ' 没有对应的职业片'); return; }
       const sBuf = dumpFlat(e.obj);
       const sm = md5Of(sBuf);
       it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
@@ -1406,6 +1540,10 @@ function buildBatch(env, opts) {
       profNewRecipes: profIndexObj ? profIndexObj.counts.newRecipes : 0,
       profNodes: profIndexObj ? profIndexObj.counts.nodes : 0,
       profShards: profIndexObj ? profIndexObj.counts.shards : 0,
+      /* 宏命令线：发出去的条数与职业片数（构建时数）。
+         注意别和下面那个 `macros` 撞名——那个是旧指南页 guide.json.macros 的条数，至今 0 条。 */
+      macroSent: macroIndexObj ? macroIndexObj.counts.sent : 0,
+      macroClasses: macroIndexObj ? macroIndexObj.counts.classes : 0,
       races: classIndexObj.counts.races,
       classes: classIndexObj.counts.classes,
       macros: (guidePack.macros || []).length,
@@ -1459,7 +1597,8 @@ function buildBatch(env, opts) {
       guide: shared(pickFile('guide')),
       bisIndex: bisIndexObj ? shared(pickFile('bisIndex')) : undefined,
       bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined,
-      professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined
+      professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined,
+      macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };

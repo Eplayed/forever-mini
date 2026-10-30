@@ -1,0 +1,244 @@
+/* 宏命令页。颜色一律吃 app.wxss 的令牌，这一页不写裸色值（与首页/副本页/配装页/专业页同一条规矩）。
+   .card / .chip / .btn / .notice / .badge / .wrap 这些是 app.wxss 的公共件，这里只补这一页自己的。 */
+
+.h1 {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+  letter-spacing: 1rpx;
+}
+
+.h2 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+  flex: 1;
+  min-width: 0;
+}
+
+.b {
+  font-weight: 600;
+  color: var(--gold-hi);
+}
+
+.dim {
+  color: var(--txt-hint);
+  font-size: 22rpx;
+}
+
+.note {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  line-height: 1.6;
+  margin-top: 12rpx;
+}
+
+.stat-line {
+  margin-top: 14rpx;
+  font-size: 20rpx;
+  color: var(--txt-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip-n {
+  color: var(--txt-hint);
+  font-size: 20rpx;
+  margin-left: 8rpx;
+}
+
+.chip-on .chip-n {
+  color: var(--accent-ink);
+}
+
+.grp-chips {
+  margin-top: 6rpx;
+}
+
+.inp {
+  height: 68rpx;
+  margin-top: 16rpx;
+  padding: 0 18rpx;
+  background: var(--panel);
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-ctl);
+  color: var(--txt);
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+.row-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  min-height: 44rpx;
+}
+
+.clear {
+  color: var(--gold-hi);
+  text-decoration: underline;
+}
+
+.mrow {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.mrow:last-of-type {
+  border-bottom: none;
+}
+
+.m-top {
+  display: flex;
+  align-items: center;
+}
+
+.m-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 27rpx;
+  color: var(--txt-title);
+}
+
+.m-note {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  line-height: 1.5;
+}
+
+.m-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.m-meta .dim {
+  margin-left: 14rpx;
+}
+
+.m-grp {
+  font-size: 20rpx;
+  color: var(--gold-hi);
+  background: var(--gold-line-soft);
+  border-radius: 4rpx;
+  padding: 2rpx 10rpx;
+}
+
+.badge-new {
+  margin-left: 10rpx;
+  background: var(--gold-hot);
+  color: var(--accent-ink);
+}
+
+.more {
+  margin-top: 20rpx;
+  padding: 18rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--gold-hi);
+  border-top: 1rpx solid var(--line);
+}
+
+.foot {
+  font-size: 20rpx;
+  color: var(--txt-muted);
+  line-height: 1.6;
+}
+
+/* 详情那一层：宏正文必须能整段选中与复制，所以给它独立滚动区，不让它把页面顶长 */
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--scrim-page);
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sheet {
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 26rpx 26rpx 40rpx;
+  background: var(--panel-2);
+  border-top: 1rpx solid var(--line-2);
+  border-radius: 16rpx 16rpx 0 0;
+}
+
+.s-head {
+  display: flex;
+  align-items: flex-start;
+}
+
+.s-x {
+  margin-left: 18rpx;
+  font-size: 24rpx;
+  color: var(--txt-hint);
+  padding: 6rpx 10rpx;
+}
+
+.s-tags {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.body-label {
+  margin-top: 22rpx;
+  font-size: 20rpx;
+  color: var(--txt-muted);
+}
+
+.body {
+  margin-top: 10rpx;
+  max-height: 420rpx;
+  padding: 18rpx;
+  box-sizing: border-box;
+  background: var(--sunk);
+  border: 1rpx solid var(--line);
+  border-radius: 8rpx;
+}
+
+.body-t {
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: var(--lv0);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.btn {
+  margin-top: 18rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--txt);
+  background: var(--field);
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-ctl);
+}
+
+.btn-main {
+  color: var(--accent-ink);
+  background: var(--gold);
+  border-color: var(--gold-deep);
+  font-weight: 600;
+}
+
+.s-src {
+  margin-top: 14rpx;
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: var(--txt-muted);
+}

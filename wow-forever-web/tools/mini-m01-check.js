@@ -788,16 +788,26 @@ async function main() {
   const sha01 = (p) => crypto01.createHash('sha256').update(fs.readFileSync(p)).digest('hex').slice(0, 12);
   /* 改的就是假 OSS 供出去的那一份（项目外），代码与批次数据一个字节都不动 */
   const FLAGS_FILE = LIVE_FLAGS;
-  const CODE_FILES = ['pages/professions/index.js', 'pages/professions/index.wxml', 'pages/home/index.js',
+  const CODE_FILES = ['pages/professions/index.js', 'pages/professions/index.wxml',
+    'pages/macros/index.js', 'pages/macros/index.wxml', 'pages/macros/index.wxss', 'data/bis-posters.js', 'pages/home/index.js',
     'pages/home/index.wxml', 'services/features.js', 'data/flags-local.js', 'app.json'];
   const codeBefore = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
   const flags0 = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
   log('这一批带开关对象（与指针同一档，改它不发版）',
     flags0.product === 'wow-forever-mini-flags' && flags0.env === 'beta'
       && flags0.features.professions.on === false && flags0.features.bis.on === true
+      && flags0.features.macros.on === false
       && (flags0.policy || []).length >= 3, JSON.stringify(flags0.counts));
 
   await clearStore();
+  await nav('/pages/macros/index');
+  const mOff = await call('宏开关关着直接进这一页', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    return { route: p.route, locked: p.data.locked, loaded: p.data.loaded, rows: (p.data.rows || []).length };
+  }), 2);
+  log('macros 关着：只说"这一页还没开放"，一个数据请求都不发',
+    !!mOff && mOff.route === 'pages/macros/index' && mOff.locked === true && mOff.loaded === false && mOff.rows === 0
+      && hitsOf(/macros\/index\.json/).length === 0, JSON.stringify(mOff));
   await nav('/pages/professions/index');
   const off = await call('读关着的页', () => mp.evaluate(() => {
     const p = getCurrentPages().pop(); const d = p.data || {};
@@ -821,6 +831,7 @@ async function main() {
   /* 只动"线上"那一份开关（项目外那个文件）：等价于跑一次 flags --env beta */
   const flipped = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
   flipped.features.professions.on = true;
+  flipped.features.macros.on = true;
   fs.writeFileSync(FLAGS_FILE, JSON.stringify(flipped, null, 1) + '\n');
   process.stdout.write('    → 把本地那份 flags.json 的 professions 拧成 true（模拟线上改开关，代码一行没动）\n');
   await nav('/pages/home/index');
@@ -999,6 +1010,70 @@ async function main() {
   log('专业页渲染出来的文字里没有百分比与强度评价词（红线）',
     !!pfAlch && !/\d+(\.\d+)?\s*%/.test(pfAlch.text) && !/秒伤|DPS|权重|更好|优于|性价比/.test(pfAlch.text),
     String(pfAlch && pfAlch.text).slice(0, 80));
+  /* ---------- P2. 宏命令页（2026-10-30：网页那 245 条做进小程序） ---------- */
+  await nav('/pages/macros/index');
+  const mOn = await call('拧开开关后重进宏页', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const d = p.data;
+    return { route: d ? p.route : '', locked: d.locked, cls: d.cls, chips: (d.classes || []).length,
+      rows: (d.rows || []).length, total: d.total, groups: (d.groups || []).length,
+      dis: (d.meta || {}).disclaimer || '', stat: d.statText };
+  }), 3);
+  log('macros 拧开就出现（代码一行没动），并且真的取到了这一职业那一片',
+    !!mOn && mOn.locked === false && mOn.chips === 9 && mOn.rows > 5 && mOn.cls === 'warrior'
+      && /第三方插件整理/.test(String(mOn.dis)), JSON.stringify(mOn || {}).slice(0, 200));
+  log('页头那句口径由分发层下发（不冒充实测、免费、不分发插件），页面不改写',
+    !!mOn && /没有逐条进游戏试过/.test(String(mOn.dis)) && /免费/.test(String(mOn.dis)), '');
+  log('索引只取一次、职业片按点到的那一片取（不是进页就把 9 片全拉下来）',
+    hitsOf(/macros\/index\.json/).length === 1 && hitsOf(/macros\/set\//).length >= 1
+      && hitsOf(/macros\/set\//).length < 9,
+    JSON.stringify({ idx: hitsOf(/macros\/index\.json/).length, sets: hitsOf(/macros\/set\//).length }));
+  const mSw = await call('切到德鲁伊', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.pickClass({ currentTarget: { dataset: { id: 'druid' } } });
+    return 1;
+  }), 1);
+  await new Promise((r) => setTimeout(r, 1400));
+  const mDruid = await call('德鲁伊那一片到了', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { cls: d.cls, total: d.total, groups: (d.groups || []).length };
+  }), 2);
+  log('切职业换的是另一片（德鲁伊 36 条，比战士多），用途分组跟着这一片重算',
+    !!mDruid && mDruid.cls === 'druid' && mDruid.total > 30 && mDruid.groups >= 2
+      && hitsOf(/macros\/set\/druid/).length >= 1, JSON.stringify(mDruid));
+  /* 关键词从这片第一条的标题里取——写死"姿态"的话，换个职业那片没这个词就是假红 */
+  const mQ = await call('用第一条标题的头两个字搜，再清掉', () => mp.evaluate(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    const all = p.data.total;
+    const word = String((p.data.rows[0] || {}).title || '').slice(0, 2);
+    p.onSearch({ detail: { value: word } });
+    setTimeout(() => {
+      const hit = p.data.total;
+      p.clearFilters();
+      setTimeout(() => res({ word: word, hit: hit, all: all, back: p.data.total, q: p.data.q, grp: p.data.grp }), 260);
+    }, 260);
+  })), 2);
+  log('搜索框真在筛（标题/说明/宏正文都参与），清掉后条数回到该片全量',
+    !!mQ && mQ.hit >= 1 && mQ.hit <= mQ.all && mQ.back === mQ.all && mQ.q === '' && mQ.grp === '', JSON.stringify(mQ));
+  await shot('q1-macros-page');
+  const mOpen = await call('点开一条宏', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const first = (p.data.rows || [])[0];
+    if (!first) return null;
+    p.openMacro({ currentTarget: { dataset: { id: first.id } } });
+    const o = p.data.open || {};
+    return { id: o.id, body: String(o.body || ''), src: o.srcName, checked: o.srcChecked, grp: o.group };
+  }), 2);
+  log('详情里宏正文原样带换行、来源与核对日都在（红线：每条指得出谁整理的）',
+    !!mOpen && mOpen.body.indexOf('\n') > 0 && /GearInsight|XR_DungeonGuide/.test(String(mOpen.src))
+      && /^2026-\d\d-\d\d$/.test(String(mOpen.checked)), JSON.stringify(mOpen || {}).slice(0, 220));
+  /* 扫的是界面，不是注释——注释里写着"红线：不收费"这种话，按字面扫就是自己抓自己 */
+  const mWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/macros/index.wxml'), 'utf8')
+    .replace(/<!--[\s\S]*?-->/g, '');
+  log('宏这一页只有只读与复制：没有编辑器、没有执行、没有外链、没有收费字样',
+    /复制宏文本/.test(mWxml) && !/<input[^>]*value="{{open.body/.test(mWxml)
+      && !/web-view/.test(mWxml) && !/收费|会员|购买/.test(mWxml), '');
+  await shot('q2-macros-detail');
   await shot('p1-professions');
   await nav('/pages/home/index');
   await shot('p2-home-with-professions-entry');

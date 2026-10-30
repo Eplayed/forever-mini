@@ -12,6 +12,7 @@
 module.exports = {
   features: {
     bis: { on: true },
-    professions: { on: false }
+    professions: { on: false },
+    macros: { on: false }
   }
 }

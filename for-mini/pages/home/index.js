@@ -28,6 +28,7 @@ Page({
     cardBg: { dungeons: '', classes: '', loots: '', guide: '', bis: '', professions: '' },
     /* 首页入口卡受远程开关控制：关着就整块不渲染（不留空白格），开了不用发版就会出现 */
     openProfessions: false,
+    openMacros: false,
     classes: [],
     activeClass: '',
     activeName: '',
@@ -55,8 +56,12 @@ Page({
     /* 回到首页就问一次开关：指针本来就是每次取数都重取（max-age=60 那一档），
        这一份 2 KB 没理由更省。线上拧完，玩家切回首页就该看到，不用等下次冷启动。 */
     features.load(true).then(() => {
+      const patch = {}
       const on = features.isOn('professions')
-      if (on !== this.data.openProfessions) this.setData({ openProfessions: on })
+      if (on !== this.data.openProfessions) patch.openProfessions = on
+      const mo = features.isOn('macros')
+      if (mo !== this.data.openMacros) patch.openMacros = mo
+      if (Object.keys(patch).length) this.setData(patch)
     })
   },
 
@@ -123,7 +128,8 @@ Page({
           loots: oss.assetUrl(mBatch, (ui.cards || {}).loots),
           guide: oss.assetUrl(mBatch, (ui.cards || {}).guide),
           bis: oss.assetUrl(mBatch, (ui.cards || {}).bis),
-          professions: oss.assetUrl(mBatch, (ui.cards || {}).professions)
+          professions: oss.assetUrl(mBatch, (ui.cards || {}).professions),
+          macros: oss.assetUrl(mBatch, (ui.cards || {}).macros)
         }
       })
       const classes = ((cls.data || {}).classes || []).map((c) => ({
@@ -207,6 +213,10 @@ Page({
 
   goProfessions() {
     wx.navigateTo({ url: '/pages/professions/index' })
+  },
+
+  goMacros() {
+    wx.navigateTo({ url: '/pages/macros/index' })
   },
 
   goLoots() {

@@ -296,7 +296,7 @@ const oss = require(MINI_SERVICE);
      （以前这里写死"7 入口"，加一类分片就假红一次——同一个毛病别再犯） */
   const expectFiles = Object.keys(man.fetch).length + idx.items.length * 2
     + man.counts.spellClasses + man.counts.classes + (man.counts.bisSets || 0)
-    + (man.counts.professions || 0);
+    + (man.counts.professions || 0) + (man.counts.macroClasses || 0);
   ok('bundle 收了每个数据文件一条（' + Object.keys(man.fetch).length + ' 入口 + 副本 ' + idx.items.length
     + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes
     + ' + 配装片 ' + (man.counts.bisSets || 0) + '）',

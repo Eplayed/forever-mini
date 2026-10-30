@@ -6,16 +6,21 @@
     "propagation": "下发对象按 max-age=60 供，客户端每次冷启动都重取；改了大约一分钟内玩家侧生效，不用发小程序版本。",
     "ownerNote": "on 是本站自己拍的开关，不是官方结论；每次拧过都要在角色台账记一行为什么开或关。",
     "sources": [
-      { "url": "本仓库 for-mini/AGENTS.md 的取数契约", "label": "客户端兜底口径" }
+      {
+        "url": "本仓库 for-mini/AGENTS.md 的取数契约",
+        "label": "客户端兜底口径"
+      }
     ]
   },
-
   "features": {
     "bis": {
       "name": "配装名单",
       "on": true,
       "page": "pages/bis/index",
-      "needs": ["bisIndex", "bisItems"],
+      "needs": [
+        "bisIndex",
+        "bisItems"
+      ],
       "since": "2026-10-26",
       "note": "2026-10-26 站主拍板上线的一页，开关写在这里是为了让默认值不再散在代码里。关掉这一页会把首页那张入口卡一起收掉。"
     },
@@ -23,9 +28,21 @@
       "name": "专业与配方",
       "on": false,
       "page": "pages/professions/index",
-      "needs": ["professionsIndex"],
+      "needs": [
+        "professionsIndex"
+      ],
       "since": null,
       "note": "数据通道与页面都已做好，站主决定先不公开；要公开只把这一行的 on 改成 true 再发一次开关对象，不用发小程序版本。"
+    },
+    "macros": {
+      "name": "宏命令",
+      "on": false,
+      "page": "pages/macros/index",
+      "needs": [
+        "macrosIndex"
+      ],
+      "since": null,
+      "note": "2026-10-30 站主让照网页那份数据做进小程序；页面与数据通道都已做好，先不公开，要公开只把这一行 on 改成 true 再发一次开关对象，不用发小程序版本。"
     }
   }
 }

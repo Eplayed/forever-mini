@@ -379,6 +379,17 @@ const SHARD_SPECS = {
       && d.classes.reduce((n, c) => n + (c.sets || []).length, 0) === d.sets.length
       && !!d.slotKeys
   },
+  /* 宏命令索引：九职业条数加起来要等于发出去的条数；口径句必须在
+     （红线要求界面固定显示"第三方整理、本站没逐条实测"，漏了页面就只能自己编一句） */
+  macrosIndex: {
+    name: 'macros-index',
+    kind: 'macros-index',
+    shape: (d) => Array.isArray(d.classes) && Array.isArray(d.groups) && !!d.counts && !!d.meta
+      && d.counts.classes === d.classes.length
+      && d.counts.sent === d.classes.reduce((n, c) => n + (c.count || 0), 0)
+      && Array.isArray(d.cols) && !!d.meta.title
+      && !!d.meta.disclaimer && d.meta.disclaimer.indexOf('第三方插件整理') >= 0
+  },
   /* 共享物品表：列名 6 列、count 与行数一致（位置数组，列名漂了界面就会把装等当品质） */
   bisItems: {
     name: 'bis-items',
@@ -580,6 +591,35 @@ function loadProfSet(item, batch, fallback) {
   return loadRef(profSetRef(item), batch, fallback)
 }
 
+/* 宏命令的职业片：路径由 classId 现推并与索引条目比对，校验值取条目自带的三件套。
+   行是齐长的位置数组，列名只在索引写一份——这里不核"第几列是什么"，那是页面按 cols 解码的事。 */
+function macroClassRef(item) {
+  const id = String((item && item.classId) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('职业编号不能当文件名：' + id) }
+  const rel = 'macros/set/' + id + '.json'
+  if (String(item.path) !== rel) {
+    return { error: new Error('宏：职业 ' + id + ' 的分片路径不是由 classId 推出来的：' + item.path) }
+  }
+  return {
+    rel,
+    cacheKind: 'macro-set:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'macros-class',
+      kind: 'macros-class',
+      id,
+      readId: (d) => d.classId,
+      shape: (d) => Array.isArray(d.rows) && Array.isArray(d.srcs) && d.rows.length === 0
+        || (Array.isArray(d.rows) && d.rows.every((r) => Array.isArray(r) && r.length === d.rows[0].length)
+          && !!d.counts && d.counts.macros === d.rows.length)
+    }
+  }
+}
+
+function loadMacroClass(item, batch, fallback) {
+  return loadRef(macroClassRef(item), batch, fallback)
+}
+
 /* 职业法术片：和副本分片同一套规矩——路径由 classId 现推，与名单条目里的 shardPath 比对，
    校验值取条目自带的 shardEtag/shardMd5/shardBytes。条目被改成 ../ 也走不出本批目录。 */
 function spellClassRef(item) {
@@ -666,6 +706,8 @@ module.exports = {
   bisSetRef,
   loadBisSet,
   profSetRef,
+  macroClassRef,
+  loadMacroClass,
   loadProfSet,
   flagsUrl,
   modelsIndexUrl,

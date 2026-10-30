@@ -1,0 +1,90 @@
+<view class="wrap">
+  <!-- 远程开关关着：一句话给到，一个数据请求都不发（services/features.js 的界面义务） -->
+  <view wx:if="{{locked}}" class="card">
+    <view class="h1">{{lockName}} · 这一页还没开放</view>
+    <view class="note">开放的时候不用更新小程序，这一页会自己出现在首页上。</view>
+    <view class="btn" bindtap="goHome">回首页</view>
+  </view>
+
+  <view wx:elif="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+  </view>
+  <view wx:elif="{{unavailable}}" class="notice">
+    宏清单暂时取不到。{{errText ? '（' + errText + '）' : ''}}
+  </view>
+  <view wx:elif="{{needOnline}}" class="notice">
+    现在没连上线，宏命令要联网才取到；这一页没带在小程序里，所以离线看不到。
+  </view>
+
+  <block wx:elif="{{loaded && meta}}">
+    <!-- 页头 + 口径：那句话由分发层下发，页面不改写措辞（红线：不冒充实测、不收费、不分发插件） -->
+    <view class="card">
+      <view class="h1">{{meta.title}}</view>
+      <view class="note">{{meta.disclaimer}}</view>
+      <view class="stat-line">{{statText}}</view>
+    </view>
+
+    <!-- 九职业：点一个才取那一职业那一片（进这一页只取索引，不一次拉 245 条） -->
+    <view class="card">
+      <view class="chips">
+        <view wx:for="{{classes}}" wx:key="classId" class="chip {{cls === item.classId ? 'chip-on' : ''}}"
+              data-id="{{item.classId}}" bindtap="pickClass">{{item.className}}<text class="chip-n">{{item.count}}</text></view>
+      </view>
+      <input class="inp" value="{{q}}" placeholder="搜标题、说明或宏正文" confirm-type="search" bindinput="onSearch" />
+      <view class="chips grp-chips" wx:if="{{groups.length}}">
+        <view wx:for="{{groups}}" wx:key="*this" class="chip chip-s {{grp === item ? 'chip-on' : ''}}"
+              data-g="{{item}}" bindtap="pickGroup">{{item}}</view>
+      </view>
+      <view class="row-meta">
+        <text class="dim">{{clsName}} · 共 {{total}} 条<text wx:if="{{filtered}}">（已筛）</text></text>
+        <text class="dim clear" wx:if="{{filtered}}" bindtap="clearFilters">清掉筛选</text>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{loading}}"><view class="note">正在取这一职业的宏…</view></view>
+    <view class="card" wx:elif="{{!rows.length}}">
+      <view class="note">{{filtered ? '这个条件下没有对得上的宏。换个用途或清掉筛选。' : '这一职业的宏还没整理，不拿别的职业凑数。'}}</view>
+    </view>
+
+    <view class="card" wx:else>
+      <view wx:for="{{rows}}" wx:key="id" class="mrow" data-id="{{item.id}}" bindtap="openMacro">
+        <view class="m-top">
+          <text class="m-title">{{item.title}}</text>
+          <text class="badge badge-new" wx:if="{{item.isNew}}">新</text>
+        </view>
+        <view class="m-note" wx:if="{{item.note}}">{{item.note}}</view>
+        <view class="m-meta">
+          <text class="m-grp">{{item.group}}</text>
+          <text class="dim" wx:if="{{item.minLevel}}">{{item.minLevel}} 级起</text>
+          <text class="dim">{{item.srcName}}</text>
+        </view>
+      </view>
+      <view class="more" wx:if="{{rest > 0}}" bindtap="showMore">再显示 {{rest > 40 ? 40 : rest}} 条（还有 {{rest}} 条）</view>
+    </view>
+
+    <view class="foot">{{meta.pageNote}}</view>
+  </block>
+
+  <!-- 详情：宏正文原样多行显示，只读；两个复制按钮，没有编辑、没有执行、没有外链 -->
+  <view class="mask" wx:if="{{open}}" bindtap="closeMacro" catchtouchmove="noop">
+    <view class="sheet" catchtap="noop">
+      <view class="s-head">
+        <view class="h2">{{open.title}}</view>
+        <view class="s-x" bindtap="closeMacro">关闭</view>
+      </view>
+      <view class="s-tags">
+        <text class="m-grp">{{open.group}}</text>
+        <text class="badge badge-new" wx:if="{{open.isNew}}">无限新增</text>
+        <text class="dim" wx:if="{{open.minLevel}}">{{open.minLevel}} 级起</text>
+      </view>
+      <view class="note" wx:if="{{open.note}}">{{open.note}}</view>
+      <view class="body-label">宏正文（原样，进游戏新建宏粘贴即可）</view>
+      <scroll-view class="body" scroll-y="true"><text class="body-t" user-select="true">{{open.body}}</text></scroll-view>
+      <view class="btn btn-main" bindtap="copyBody">复制宏文本</view>
+      <view class="btn" bindtap="copySource">复制来源</view>
+      <view class="s-src">{{openSrc}}</view>
+      <view class="s-src" wx:if="{{open.nameBack}}">其中 {{open.nameBack}} 个法术名退回插件烘的那一份（本站技能表里没有这一条）</view>
+      <view class="s-src">{{meta.disclaimer}}</view>
+    </view>
+  </view>
+</view>

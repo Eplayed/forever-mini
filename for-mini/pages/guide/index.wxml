@@ -16,7 +16,8 @@
   <block wx:if="{{loaded}}">
     <view wx:if="{{!macros.length && !addons.length}}" class="card empty">
       <view>这一节还在整理。</view>
-      <view class="muted">宏与插件名单要逐条标作者和原帖才会上来，指不出谁写的按待核不发布。练级攻略还没开始写。</view>
+      <view class="muted">插件名单要逐条标作者和原帖才会上来，指不出谁写的按待核不发布。练级攻略还没开始写。
+      宏命令已经单独成一页（首页「宏命令」那一格，245 条按职业分），这一页只留插件名单。</view>
     </view>
 
     <view wx:if="{{macros.length}}" class="sec">

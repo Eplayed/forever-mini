@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "宏命令",
+  "usingComponents": {
+    "icon-cell": "/components/icon-cell/index"
+  }
+}
