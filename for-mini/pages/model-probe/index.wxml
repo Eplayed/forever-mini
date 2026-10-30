@@ -1,0 +1,36 @@
+<view class="probe">
+  <view class="bar">
+    <view class="st st-{{state}}">{{stateText}}</view>
+    <view class="meta">{{metaText}}</view>
+  </view>
+
+  <!-- 场景放在自定义组件里：xr-frame 要组件 json 声明 "renderer": "xr-frame" 才初始化，
+       页面里直接写 <xr-scene> 只会得到一个空盒子且零报错（2026-10-30 实测） -->
+  <!-- 两份文件对照：原件声明 EXT_texture_webp（微信加载器没实现这个扩展），
+       候选是同一份几何 + 逐像素相同的贴图重编码成 PNG -->
+  <view class="row">
+    <view class="btn {{which === 'webp' ? 'btn-on' : ''}}" data-w="webp" bindtap="pickFile">原件 · WebP 贴图</view>
+    <view class="btn {{which === 'png' ? 'btn-on' : ''}}" data-w="png" bindtap="pickFile">候选 · PNG 贴图</view>
+  </view>
+  <view class="stage">
+    <probe-scene wx:if="{{alive}}" id="sc" src="{{src}}" bind:status="onStatus" />
+  </view>
+
+  <view class="row">
+    <view class="btn" bindtap="reloadScene">重建场景（退出重进）</view>
+    <view class="btn" bindtap="turnLeft">转 -60°</view>
+    <view class="btn" bindtap="turnRight">转 +60°</view>
+  </view>
+  <view class="hint">手指在画面上左右拖动 = 绕人物转（camera-orbit-control）。</view>
+
+  <view class="box">
+    <view class="box-t">加载到的东西</view>
+    <view class="line">网格 {{meshCount}} 个 · 有贴图 {{texCount}} 个 · 无贴图 {{noTexCount}} 个 · 转角 {{yaw}}</view>
+    <view class="line">{{texDetail}}</view>
+  </view>
+
+  <view class="box" wx:if="{{errText}}">
+    <view class="box-t box-t-bad">失败原文</view>
+    <view class="line line-err">{{errText}}</view>
+  </view>
+</view>

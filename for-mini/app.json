@@ -11,7 +11,8 @@
     "pages/spells/index",
     "pages/loots/index",
     "pages/glossary/index",
-    "pages/guide/index"
+    "pages/guide/index",
+    "pages/model-probe/index"
   ],
   "window": {
     "navigationBarTitleText": "跑本助手",
@@ -47,5 +48,6 @@
     ]
   },
   "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
   "sitemapLocation": "sitemap.json"
 }

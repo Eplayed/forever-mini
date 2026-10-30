@@ -55,6 +55,10 @@
       {
         "type": "file",
         "value": "README.md"
+      },
+      {
+        "type": "folder",
+        "value": "tmp-model"
       }
     ],
     "include": []

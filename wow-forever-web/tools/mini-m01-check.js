@@ -899,9 +899,16 @@ async function main() {
     JSON.stringify(ignored));
   /* 代码包体积：按 packOptions 规则自算（本机 CLI 没有 code-analyze 命令，
      面板上的实测数要你在开发者工具「详情 → 基本信息」里看一眼核对） */
-  const skipDirs = { docs: 1, 'oss-preview': 1, 'oss-build': 1, node_modules: 1, dist: 1, miniprogram_npm: 1 };
+  /* 名单从 packOptions.ignore 现推，不再自己抄第二份：
+     加一条排除（2026-10-30 的 tmp-model 那种 1.4 MB 探针样本）只要改工程配置，
+     这里跟着变小；自己抄一份就会"配置排了、体积还算着"，或者反过来假红。 */
+  const skipDirs = { node_modules: 1, dist: 1, miniprogram_npm: 1 };
   const skipFiles = {};
-  ignored.concat(['project.config.json', 'project.private.config.json', '.gitignore']).forEach((v) => { skipFiles[v] = 1; });
+  (pcfg.packOptions && pcfg.packOptions.ignore || []).forEach((x) => {
+    if (x.type === 'folder') skipDirs[x.value] = 1
+    else skipFiles[x.value] = 1
+  });
+  ['project.config.json', 'project.private.config.json', '.gitignore'].forEach((v) => { skipFiles[v] = 1; });
   let pkgBytes = 0;
   (function walk(dir) {
     fs.readdirSync(dir, { withFileTypes: true }).forEach((e) => {

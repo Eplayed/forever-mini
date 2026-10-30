@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "3D 探针（临时）",
+  "disableScroll": true,
+  "usingComponents": {
+    "probe-scene": "./scene/index"
+  }
+}
