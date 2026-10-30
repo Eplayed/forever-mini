@@ -64,6 +64,9 @@
         </view>
       </view>
       <!-- 这一句只在当前这一件真的画出来之后才出现；失败就回原画并说"3D 暂不可用"＋原因 -->
+      <view class="doll-note" wx:if="{{!modelOn && stageKind === 'poster'}}">
+        这一格是本站<text class="b">从客户端模型渲出来的静态图</text>，不是游戏截图；点「查看 3D」可以拖动转一圈看这一身。
+      </view>
       <view class="doll-note note-ok" wx:if="{{modelOn && (modelState === 'ok' || modelState === 'shown')}}">
         <text class="b">游戏角色与装备的静态预览，拖动可旋转</text>：这一件是本站按<text class="b">{{set.clsCn}} · {{set.mode}} · {{facCn}}</text>
         登记的真实模型（从本机客户端导出、装备位置核对通过才用），<text class="b">不是本站画的</text>。{{modelDetail}}

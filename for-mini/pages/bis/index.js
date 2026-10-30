@@ -2,6 +2,7 @@ const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
 const bisModel = require('../../services/bis-model')
+const POSTERS = require('../../data/bis-posters')
 
 /* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面…3D 模型先放模型占位"）
    数据来自分发层的三份配装产物：索引（38 套）+ 共享物品表（830 件）+ 每套一片。
@@ -40,6 +41,7 @@ Page({
     enchants: [],
     consumables: [],
     stageUrl: '',
+    stageKind: '',
     /* 真实 3D 那一层：modelOn 才是挂了 xr-frame 组件的状态。
        进这一页时它必须是 false 且 modelSrc 为空——一个模型请求都不发（站主要的是点开才有）。 */
     modelOn: false,
@@ -138,12 +140,25 @@ Page({
     this.loadSet()
   },
 
+  /* 默认那一格的图：优先"这一族模型穿着装备"的底图（站主 2026-10-30 要的），
+     表里没有、或那张图取不到，就退回职业原画——不许留空格。 */
+  setStage() {
+    const set = this.set
+    if (!set) return
+    this.stageArt = oss.assetUrl(this.batch, set.art || null)
+    const key = (set.cls || this.data.cls) + '|' + this.data.fac
+    const rel = (POSTERS.map || {})[key]
+    const url = rel ? oss.assetUrl(this.batch, rel) : ''
+    this.setData({ stageUrl: url || this.stageArt, stageKind: url ? 'poster' : (this.stageArt ? 'art' : '') })
+  },
+
   pickFac(e) {
     const f = e.currentTarget.dataset.fac
     if (f === this.data.fac) return
     /* 换阵营＝换的那一件模型是另一条登记，先拆场景、再让在飞的回包作废，然后才重画 */
     this.teardownModel()
     this.setData({ fac: f, facCn: f === 'horde' ? '部落' : '联盟', slot: null })
+    this.setStage()
     this.render()
   },
 
@@ -160,7 +175,7 @@ Page({
       }
       this.set = r.data
       /* 中间那一栏默认是职业原画（与网页配装页同一张，走素材层）；占位人台叠在它上面 */
-      this.setData({ stageUrl: oss.assetUrl(this.batch, r.data.art || null) })
+      this.setStage()
       this.render()
       return r
     }).catch((e) => { this.setData({ set: null, errText: e.message }) })
@@ -333,7 +348,14 @@ Page({
     this.modelFail((d.text || '模型没画出来') + (d.err ? '：' + d.err : ''))
   },
 
-  onStageError() { this.setData({ stageUrl: '' }) },
+  onStageError() {
+    /* 底图取不到（没发上来 / 域名没通）要能退回职业原画，而不是整格空着 */
+    if (this.data.stageKind === 'poster' && this.stageArt) {
+      this.setData({ stageUrl: this.stageArt, stageKind: 'art' })
+      return
+    }
+    this.setData({ stageUrl: '', stageKind: '' })
+  },
 
   onUnload() { this.teardownModel() },
 

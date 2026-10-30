@@ -2042,6 +2042,10 @@ const MODEL_INDEX_REL = ['bis', 'models', 'index.json'];
 /* 远端那份清单是可变对象（和指针同一档缓存）：模型不可变、名字带哈希，
    清单却必须能当天改，否则换一件模型就要等一年缓存。 */
 const MODEL_INDEX_KEY = 'bis/models/index.json';
+/* 配装页默认那一格的底图（2026-10-30 站主："原画那个位置换成模型穿这一身的图"）。
+   按种族 6 张，名字同样带内容哈希——重渲一次就是换一个名字，不许覆盖已发出去的对象。 */
+const POSTER_DIR = 'assets/models/posters';
+const POSTER_LOCAL = 'posters';
 const MODEL_MIME = 'model/gltf-binary';
 
 /* 索引读一次，形状不对就直接返回错误——不发任何远端请求 */
@@ -2192,6 +2196,76 @@ async function cmdModels(env, opts) {
   }
   logLine('索引来源 ' + rd.indexRel + ' · 本命令只传了模型；索引要加 --index 才发（B3 口径：模型齐了最后发）。');
   return 0;
+}
+
+/* 底图那一层：与模型同一套规矩（本地清单说了算、同名不同字节不覆写、传完必回读），
+   但不参与"索引最后发"那条——它不是清单，缺一张页面就自己退回职业原画。 */
+async function cmdPosters(env, opts) {
+  if (!opts.dryRun) {
+    const gate = requireWriteGate('posters', env, opts);
+    if (gate) { gate.forEach(logLine); return 1; }
+  }
+  const dir = path.join(buildRoot(), env, POSTER_LOCAL);
+  const mfPath = path.join(dir, 'posters.json');
+  if (!fs.existsSync(mfPath)) { logLine('✗ 找不到底图清单 ' + path.relative(REPO, mfPath) + '（先跑 tools/render-bis-posters.py）'); return 1; }
+  let mf;
+  try { mf = JSON.parse(fs.readFileSync(mfPath, 'utf8')); } catch (e) { logLine('✗ 底图清单不是合法 JSON：' + e.message); return 1; }
+  const errs = [];
+  if (mf.product !== 'wow-forever-mini-model-posters' || mf.kind !== 'bis-model-posters') errs.push('底图清单 product/kind 不对');
+  const races = Object.keys(mf.posters || {}).sort();
+  if (!races.length) errs.push('底图清单是空的');
+  if (mf.count !== races.length) errs.push('清单写 ' + mf.count + ' 张，实际 ' + races.length + ' 张');
+  const items = [];
+  races.forEach((r) => {
+    const p = mf.posters[r];
+    const file = String(p.file || '');
+    if (file.indexOf('/') >= 0 || file.indexOf('..') >= 0 || !new RegExp('^' + r + '-[0-9a-f]{12}\\.png$').test(file)) {
+      errs.push(r + ' 的文件名不合规矩：' + file); return;
+    }
+    const abs = path.join(dir, file);
+    if (!fs.existsSync(abs)) { errs.push(r + ' 本地文件不存在：' + file); return; }
+    const buf = fs.readFileSync(abs);
+    if (buf.length !== p.bytes) errs.push(r + ' 本地字节与清单不符（' + buf.length + ' ≠ ' + p.bytes + '）');
+    else if (sha256(buf) !== p.sha256) errs.push(r + ' 本地 SHA-256 与清单不符');
+    else items.push({ race: r, file: file, buf: buf, sha: p.sha256 });
+  });
+  if (errs.length) { errs.slice(0, 10).forEach((e) => logLine('✗ ' + e)); return 1; }
+
+  const creds = loadCreds();
+  const total = items.reduce((t, x) => t + x.buf.length, 0);
+  logLine('环境 ' + env + ' · bucket ' + creds.bucket + ' · 前缀 ' + NAMESPACES[env] + '/' + POSTER_DIR + '/'
+    + ' · 底图 ' + items.length + ' 张 / ' + kb(total) + ' KB'
+    + (opts.dryRun ? '（--dry-run 只读远端，不写）' : '（凭证来源 ' + creds.from + '，已带 ' + WRITE_MARK + '=1）'));
+  if (!opts.dryRun && !creds.ok) { logLine(credsHint(creds)); return 1; }
+  let uploaded = 0; let unchanged = 0; let forced = 0;
+  const failed = []; const violations = [];
+  for (const it of items) {
+    const key = NAMESPACES[env] + '/' + POSTER_DIR + '/' + it.file;
+    const headers = { 'Cache-Control': IMUTABLE_CACHE, 'Content-Type': 'image/png', 'Content-Disposition': ASSET_DISP };
+    const head = creds.ok ? await remoteHead(creds, key) : { exists: false };
+    if (head.exists) {
+      if (head.etag !== md5Hex(it.buf)) { violations.push(it.race + '：远端同名对象字节不同，不覆写'); continue; }
+      if (head.forceDownload === 'true') forced += 1;
+      unchanged += 1; continue;
+    }
+    if (opts.dryRun) { uploaded += 1; logLine('  待传 ' + it.race + ' → ' + key + '  ' + kb(it.buf.length) + ' KB'); continue; }
+    try {
+      const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(key), it.buf, signPut(creds, key, it.buf, headers));
+      if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 160));
+      const back = await remoteHead(creds, key);
+      const g = await raw('GET', creds.bucket, creds.region, '/' + encKey(key), null, signGet(creds, '/' + encKey(key), '/' + key));
+      if (back.etag !== md5Hex(it.buf) || g.statusCode !== 200 || sha256(g.body) !== it.sha) throw new Error('回读不符');
+      if (back.forceDownload === 'true') forced += 1;
+      uploaded += 1;
+      logLine('  ✓ ' + it.race + ' · ' + back.bytes + ' B · ' + it.sha.slice(0, 12) + ' · HEAD/GET 回读一致');
+    } catch (e) { failed.push(it.race + ' → ' + e.message); }
+  }
+  if (violations.length) violations.forEach((v) => logLine('  ✗ ' + v));
+  if (failed.length) failed.forEach((f) => logLine('  ✗ ' + f));
+  logLine('底图：传 ' + uploaded + ' · 已存在跳过 ' + unchanged + ' · 失败 ' + failed.length + ' · 冲突 ' + violations.length
+    + ' / 共 ' + items.length + (forced ? ' · ' + forced + ' 张被默认域名强制 attachment' : ''));
+  if (opts.dryRun) { logLine('试运行结束，一个字节都没写。'); return 0; }
+  return violations.length || failed.length ? 1 : 0;
 }
 
 async function cmdUpload(env, opts) {
@@ -2550,7 +2624,7 @@ function parseArgs(argv) {
 function main() {
   const argv = process.argv.slice(2);
   if (!argv.length) {
-    logLine('用法：node tools/oss-release.js <build|upload|flags|assets|models|verify|list|rollback|clean> --env beta|release'
+    logLine('用法：node tools/oss-release.js <build|upload|flags|assets|models|posters|verify|list|rollback|clean> --env beta|release'
       + ' [--dry-run] [--check-identity] [--yes-release] [--to <buildId>] [--yes-clean] [--set <setId>/<faction>]');
     logLine('写命令（upload/flags/assets/models/rollback/clean）必须显式带环境变量 ' + WRITE_MARK + '=1；release 还要 --yes-release。');
     logLine('只拧开关、不动数据：node tools/oss-release.js flags --env beta（改 app/data/flags.json 后跑这一条，约一分钟生效，不用发版）。');
@@ -2566,6 +2640,7 @@ function main() {
       if (cmd === 'list') return cmdList(env);
       if (cmd === 'assets') return cmdAssets(env, opts);
       if (cmd === 'models') return cmdModels(env, opts);
+      if (cmd === 'posters') return cmdPosters(env, opts);
       if (cmd === 'rollback') return cmdRollback(env, opts);
       if (cmd === 'clean') return cmdClean(env, opts);
       logLine('✗ 没有子命令 ' + cmd);
@@ -2627,6 +2702,8 @@ module.exports = {
   ICON_EXT,
   cmdAssets,
   cmdModels,
+  cmdPosters,
+  POSTER_DIR,
   modelIndex,
   MODEL_INDEX_KEY,
   MODEL_ASSET_DIR,

@@ -1491,6 +1491,37 @@ const oss = require(MINI_SERVICE);
   }, () => '点名传件这条路不对');
 
 
+  await step('底图通道：没带写授权标记时一个请求都不发', () => {
+    const st = fakeOss();
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-gate-'));
+    return withEnv(Object.assign({}, NO_MARK, fixtureEnv(dir), { WOW_OSS_ENV: F }), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdPosters('beta', {}).then((rc) => {
+        ossTool.setTransportForTest(null);
+        return rc === 1 && st.counts.PUT === 0;
+      });
+    });
+  }, () => '底图也绕过了写授权闸');
+
+  await step('底图通道：清单里的字节/哈希与本地文件不符 → 传前就停，0 个请求', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-bad-'));
+    const pdir = path.join(dir, 'oss-build', 'beta', 'posters');
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, 'orc-000000000000.png'), Buffer.from('假图'));
+    fs.writeFileSync(path.join(pdir, 'posters.json'), JSON.stringify({
+      product: 'wow-forever-mini-model-posters', kind: 'bis-model-posters', count: 1,
+      posters: { orc: { file: 'orc-000000000000.png', bytes: 9999, sha256: '0'.repeat(64) } }
+    }));
+    const st = fakeOss();
+    return withEnv(Object.assign({}, NO_MARK, fixtureEnv(dir), { WOW_OSS_ENV: F, WOW_ALLOW_CROSS_CREDS: '1' }), () => {
+      ossTool.setTransportForTest(st.transport);
+      return ossTool.cmdPosters('beta', {}).then((rc) => {
+        ossTool.setTransportForTest(null);
+        return rc === 1 && st.counts.PUT === 0;
+      });
+    });
+  }, () => '对不上清单的底图照样往上灌');
+
   /* ================= 7. 回滚核实目标批次 ================= */
   process.stdout.write('\n回滚：先核目标批次完整，再动指针\n');
   async function twoBatches() {

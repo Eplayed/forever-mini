@@ -110,7 +110,10 @@ async function stopServer() {
 async function startServer(mode) {
   await stopServer();
   fs.copyFileSync(path.join(BUILD, 'flags.json'), LIVE_FLAGS);
-  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1', FAKE_OSS_FLAGS_FILE: LIVE_FLAGS, FAKE_OSS_LOG: OSS_HITS }) });
+  const p = cp.spawn('node', [SERVER], { env: Object.assign({}, process.env, { FAKE_OSS_MODE: mode, FAKE_OSS_PORT: String(PORT), FAKE_OSS_NOCACHE: '1', FAKE_OSS_FLAGS_FILE: LIVE_FLAGS, FAKE_OSS_LOG: OSS_HITS,
+    /* 底图不在素材根（app/img）里，得单独指过去，否则模拟器这一格永远 404 退回原画，
+       截图就看不出底图长什么样 */
+    FAKE_OSS_POSTERS_DIR: path.join(BUILD, 'posters') }) });
   p.stderr.on('data', (d) => process.stdout.write('[fake-oss!] ' + String(d).slice(0, 200)));
   live = p;
   for (let i = 0; i < 25; i += 1) {
@@ -644,6 +647,43 @@ async function main() {
      所以这里钉得住的是"发没发请求、取的是不是当前这一套这一阵营、失败有没有回原画并说明"，
      画面那一半只能由真机回答——不许拿"请求数对了"冒充"玩家看得见模型"。 */
   hitsClear();
+  const ps = await call('看默认那一格用的是哪张图', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const d = p.data;
+    return { kind: d.stageKind, url: d.stageUrl, cls: d.cls, fac: d.fac, rows: (d.rows || []).length };
+  }), 2);
+  log('默认那一格是"这一族模型穿这一身"的底图（带内容哈希的文件名），不是职业图标',
+    !!ps && ps.kind === 'poster' && /\/assets\/models\/posters\/[a-z-]+-[0-9a-f]{12}\.png$/.test(String(ps.url))
+      && ps.rows >= 10, JSON.stringify(ps));
+  const ps2 = await call('换阵营后底图跟着换族', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const before = p.data.stageUrl;
+    p.pickFac({ currentTarget: { dataset: { fac: p.data.fac === 'horde' ? 'alliance' : 'horde' } } });
+    return { before: before, after: p.data.stageUrl, kind: p.data.stageKind };
+  }), 2);
+  log('换阵营底图跟着换成另一族的模型（联盟人类／兽人部落这类映射由生成表说了算，页面不自己抄）',
+    !!ps2 && ps2.kind === 'poster' && ps2.before !== ps2.after
+      && /posters\//.test(String(ps2.after)), JSON.stringify(ps2 || {}).slice(0, 200));
+  const ps3 = await call('演一次底图取不到', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.onStageError();
+    const d = p.data;
+    return { kind: d.stageKind, url: d.stageUrl };
+  }), 2);
+  log('底图取不到就退回职业原画，不许留空格', !!ps3 && ps3.kind === 'art' && /art\/classes\//.test(String(ps3.url)),
+    JSON.stringify(ps3));
+  const posterMap = require(path.join(REPO, 'for-mini/data/bis-posters.js'));
+  const posterManifest = JSON.parse(fs.readFileSync(path.join(BUILD, 'posters', 'posters.json'), 'utf8'));
+  const mapFiles = Object.keys(posterMap.map || {});
+  log('生成表自洽：18 个职业×阵营组合都有底图，且每张文件真在盘上、哈希与清单同',
+    mapFiles.length === 18 && mapFiles.every((k) => {
+      const rel = posterMap.map[k];
+      const race = rel.replace('models/posters/', '').replace(/-[0-9a-f]{12}\.png$/, '');
+      const p = posterManifest.posters[race];
+      return !!p && rel === 'models/posters/' + p.file
+        && fs.existsSync(path.join(BUILD, 'posters', p.file))
+        && new RegExp('^models/posters/' + race + '-[0-9a-f]{12}\\.png$').test(rel);
+    }), mapFiles.length + ' 条');
   const mv = await call('进页后先数一遍模型请求', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data;
     return { on: d.modelOn, src: d.modelSrc, setId: d.setId, fac: d.fac, state: d.modelState };
