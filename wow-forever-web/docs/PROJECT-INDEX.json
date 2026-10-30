@@ -1,6 +1,6 @@
 {
- "head": "9af2efe20e919fc84175a7b75b71fb69b27e724d",
- "fingerprint": "5152d013d0b3a3ccda02029862034b8109f780e08ffee057e3a595d01de78ead",
+ "head": "1389d044984c6f8306f37e67de7080fbca677f59",
+ "fingerprint": "b981c377a563baf7d6d232f19e4131a20fd6e91c2f84361442286d014db5585e",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 7241,
-   "mtimeNs": 1793335050019143912
+   "bytes": 7452,
+   "mtimeNs": 1793336982780877483
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 631133,
-   "mtimeNs": 1793335101237920539
+   "bytes": 635520,
+   "mtimeNs": 1793337038399692422
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -252,6 +252,11 @@
    "path": "for-mini/docs/VERIFY-小程序3D续做门槛-2026-10-30.md",
    "bytes": 7695,
    "mtimeNs": 1793333984694471367
+  },
+  {
+   "path": "for-mini/docs/VERIFY-小程序3D远端单件-2026-10-30.md",
+   "bytes": 10513,
+   "mtimeNs": 1793337000484738097
   },
   {
    "path": "for-mini/docs/VERIFY-小程序专业页与远程开关-2026-10-27.md",
@@ -425,8 +430,8 @@
   },
   {
    "path": "for-mini/pages/model-probe/index.js",
-   "bytes": 4284,
-   "mtimeNs": 1793332875763903321
+   "bytes": 6792,
+   "mtimeNs": 1793336992353349561
   },
   {
    "path": "for-mini/pages/model-probe/index.json",
@@ -2180,8 +2185,8 @@
   },
   {
    "path": "wow-forever-web/tools/build-xr-probe.py",
-   "bytes": 9167,
-   "mtimeNs": 1793332970388752982
+   "bytes": 11307,
+   "mtimeNs": 1793336663114509129
   },
   {
    "path": "wow-forever-web/tools/build-zone-maps.py",
@@ -2450,13 +2455,13 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release-test.js",
-   "bytes": 113968,
-   "mtimeNs": 1793087287839564636
+   "bytes": 120418,
+   "mtimeNs": 1793336410170662189
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 147622,
-   "mtimeNs": 1793088025824030211
+   "bytes": 156547,
+   "mtimeNs": 1793336401211134192
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
@@ -2632,51 +2637,6 @@
    "path": "wow-forever-web/tools/visual-check.py",
    "bytes": 23244,
    "mtimeNs": 1792850084944084617
-  },
-  {
-   "path": "xr-probe/README.md",
-   "bytes": 470,
-   "mtimeNs": 1793332971258444832
-  },
-  {
-   "path": "xr-probe/app.js",
-   "bytes": 8,
-   "mtimeNs": 1793332971248194285
-  },
-  {
-   "path": "xr-probe/app.json",
-   "bytes": 389,
-   "mtimeNs": 1793332971247873675
-  },
-  {
-   "path": "xr-probe/pages/model-probe/index.js",
-   "bytes": 4292,
-   "mtimeNs": 1793332971257762645
-  },
-  {
-   "path": "xr-probe/pages/model-probe/index.json",
-   "bytes": 144,
-   "mtimeNs": 1793330047014837000
-  },
-  {
-   "path": "xr-probe/pages/model-probe/scene/index.js",
-   "bytes": 5739,
-   "mtimeNs": 1793332875763420000
-  },
-  {
-   "path": "xr-probe/pages/model-probe/scene/index.json",
-   "bytes": 50,
-   "mtimeNs": 1793329852436765000
-  },
-  {
-   "path": "xr-probe/project.config.json",
-   "bytes": 302,
-   "mtimeNs": 1793332971249796614
-  },
-  {
-   "path": "xr-probe/sitemap.json",
-   "bytes": 94,
-   "mtimeNs": 1793332971249550824
   }
  ]
 }
