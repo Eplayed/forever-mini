@@ -28,6 +28,11 @@ Component({
         this.emit({ state: 'bad', text: '失败', err: 'xr-scene bind:ready 没给到场景对象' })
         return
       }
+      /* 空场景档：ready 到了就算这一步通过（画面该是绿的），不去取任何资源 */
+      if (!this.data.src) {
+        this.emit({ state: 'ok', text: '空场景 ready：xr-frame 起来了（画面应是那格绿）', detail: '没加载资源，只看 ready 与清屏色' })
+        return
+      }
       this.emit({ state: 'loading', text: '场景就绪，取模型中' })
     },
 

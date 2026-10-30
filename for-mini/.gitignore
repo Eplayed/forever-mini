@@ -14,3 +14,9 @@ oss-build/
 
 # 3D 探针的临时样本（405 KB + 982 KB GLB），只在本地开发者工具里用，不进仓库也不进包
 tmp-model/
+
+# 扫码预览码与 devtools 出的包信息：约 25 分钟就过期，重跑 build-xr-probe + cli preview 即可再出，不入库
+for-mini/docs/screenshots/xr-probe-*/qr-*.png
+for-mini/docs/screenshots/xr-probe-*/preview-info.json
+docs/screenshots/xr-probe-*/qr-*.png
+docs/screenshots/xr-probe-*/preview-info.json

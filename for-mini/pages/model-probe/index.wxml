@@ -9,8 +9,9 @@
   <!-- 两份文件对照：原件声明 EXT_texture_webp（微信加载器没实现这个扩展），
        候选是同一份几何 + 逐像素相同的贴图重编码成 PNG -->
   <view class="row">
-    <view class="btn {{which === 'webp' ? 'btn-on' : ''}}" data-w="webp" bindtap="pickFile">原件 · WebP 贴图</view>
-    <view class="btn {{which === 'png' ? 'btn-on' : ''}}" data-w="png" bindtap="pickFile">候选 · PNG 贴图</view>
+    <view class="btn {{which === 'blank' ? 'btn-on' : ''}}" data-w="blank" bindtap="pickFile">① 空场景（绿）</view>
+    <view class="btn {{which === 'webp' ? 'btn-on' : ''}}" data-w="webp" bindtap="pickFile">② 原件 WebP</view>
+    <view class="btn {{which === 'png' ? 'btn-on' : ''}}" data-w="png" bindtap="pickFile">③ 候选 PNG</view>
   </view>
   <view class="stage">
     <probe-scene wx:if="{{alive}}" id="sc" src="{{src}}" bind:status="onStatus" />
@@ -21,7 +22,8 @@
     <view class="btn" bindtap="turnLeft">转 -60°</view>
     <view class="btn" bindtap="turnRight">转 +60°</view>
   </view>
-  <view class="hint">手指在画面上左右拖动 = 绕人物转（camera-orbit-control）。</view>
+  <view class="hint">① 只证明 xr-frame 会不会发 ready（画面应是那格绿）；② 才谈模型。
+     手指在画面上左右拖动 = 绕人物转（camera-orbit-control）。当前文件：{{src || '（空场景，不加载资源）'}}</view>
 
   <view class="box">
     <view class="box-t">加载到的东西</view>

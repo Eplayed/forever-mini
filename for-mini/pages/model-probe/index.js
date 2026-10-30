@@ -4,6 +4,16 @@
    正式 BiS 页一行没动，不发 OSS，探针样本不进发布包。
    结论写 for-mini/docs/VERIFY-小程序真实3D探针-2026-10-30.md。 */
 
+/* 三份要验的东西。MODEL_DIR 由构建预览工程的那一步改写：
+   正式小程序里样本在 tmp-model/（不进包），隔离预览工程里在 probe-model/（必须进包）。
+   空场景档 src 为空 → 组件只画清屏绿，用来先确认这台设备到底会不会发 ready。 */
+const MODEL_DIR = '/tmp-model/'
+const SRC = {
+  blank: '',
+  webp: MODEL_DIR + 'hunter-alliance.glb',
+  png: MODEL_DIR + 'hunter-alliance-png.glb'
+}
+
 Page({
   data: {
     alive: true,
@@ -16,8 +26,8 @@ Page({
     texDetail: '',
     errText: '',
     yaw: 0,
-    which: 'webp',
-    src: '/tmp-model/hunter-alliance.glb'
+    which: 'blank',
+    src: SRC.blank
   },
 
   onLoad() {
@@ -25,7 +35,7 @@ Page({
     try { si = wx.getSystemInfoSync() || {} } catch (e) { si = {} }
     this.setData({
       metaText: '基础库 ' + (si.SDKVersion || '?') + ' · ' + (si.platform || '?') + ' ' + (si.system || '')
-        + ' · ' + (si.model || '?') + ' · 模型 /tmp-model/hunter-alliance.glb'
+        + ' · ' + (si.model || '?') + ' · 微信 ' + (si.version || '?')
     })
     this.hookLogs()
   },
@@ -84,7 +94,7 @@ Page({
   /* 换要验的那一份：拆掉场景再建，路径只在页面这一处写 */
   pickFile(e) {
     const w = (e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.w) || 'webp'
-    const src = w === 'png' ? '/tmp-model/hunter-alliance-png.glb' : '/tmp-model/hunter-alliance.glb'
+    const src = SRC[w]
     if (w === this.data.which) return
     this.setData({
       which: w, src: src, alive: false,
