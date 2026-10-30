@@ -55,7 +55,7 @@
 - `project.config.json` 的 `packOptions.ignore` 加了 `pages/model-probe`（**先撤路由、再排除目录**——10-30 那次反过来做，整应用起不来、`getCurrentPages()` 是空的）。
 - 包内那两份探针样本 `for-mini/tmp-model/*.glb`（1.6 MB）已从磁盘删除；该目录本来就在 ignore 里。
 - 探针页**真源保留**在 `for-mini/pages/model-probe/`，因为 `wow-forever-web/tools/build-xr-probe.py` 还靠它出扫码验证包（B2 那种"包内零模型"的远端探针还要复用）。它不在路由里、也不进包，玩家看不到。
-- 正式包里没有任何 GLB：ignore 列表里只多了目录，没有放开过模型目录；代码包实测 <见第 6 节> KB，远不到 2 MB。
+- 正式包里没有任何 GLB：ignore 列表里只多了目录，没有放开过模型目录；代码包实测 391.0 KB（m01 自算，上限 2 MB）。
 
 ## 5. 契约测了什么（29/29）
 
