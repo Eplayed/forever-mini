@@ -40,9 +40,13 @@ Component({
 
     handleLoaded() { this.inspect() },
 
-    /* 每个网格有没有 baseColor 贴图、贴图多大：这一层能区分"几何出来了"与"看着像个白模" */
+    /* 每个网格有没有 baseColor 贴图、贴图多大。
+       2026-10-30 真机踩过一次：这一层读材质/贴图用的 API 猜错了，把已经画出来的模型
+       判成"一个贴图都没建出来"，还立刻收回原画——站主连看一眼的机会都没有。
+       所以现在两条分开：结构没起来＝失败；几何在、只是本站没数到贴图＝geometry，
+       画面留着，把读到的形状一起报出去，肉眼才是主证据。 */
     inspect() {
-      const out = { meshes: 0, tex: 0, noTex: 0, lines: [] }
+      const out = { meshes: 0, tex: 0, noTex: 0, lines: [], api: [] }
       try {
         const xr = wx.getXrFrameSystem ? wx.getXrFrameSystem() : null
         if (!xr) { this.emit({ state: 'bad', text: '取不到 xr-frame 运行时（这台设备/这版基础库不支持）' }); return }
@@ -52,34 +56,67 @@ Component({
         if (!gltf) { this.emit({ state: 'bad', text: '模型没被实例化', err: 'hero 上没有 GLTF 组件' }); return }
         const meshes = gltf.meshes || []
         out.meshes = meshes.length
+        out.api.push('gltf:' + keysOf(gltf))
+        if (meshes.length) out.api.push('mesh[0]:' + keysOf(meshes[0]))
         meshes.forEach((m, i) => {
-          const mat = m && m.material
+          const mat = (m && m.material) || (typeof m.getMaterial === 'function' ? m.getMaterial() : null)
           if (!mat) { out.noTex += 1; out.lines.push(i + ':no-material'); return }
-          let t = null
-          try {
-            if (typeof mat.getTexture === 'function') t = mat.getTexture('u_baseColorMap')
-            if (!t && mat.textures) t = mat.textures.u_baseColorMap
-          } catch (err) { out.lines.push(i + ':read-threw') }
-          const w = t && (t.width || (t.value && t.value.width) || (t.texture && t.texture.width))
-          const h = t && (t.height || (t.value && t.value.height) || (t.texture && t.texture.height))
-          if (w) { out.tex += 1; out.lines.push(i + ':' + w + 'x' + h) }
-          else { out.noTex += 1; out.lines.push(i + ':' + (t ? 'tex-no-size' : 'NO-TEXTURE')) }
+          if (i === 0) out.api.push('mat:' + keysOf(mat))
+          const got = textureOf(mat)
+          if (!got.t) { out.noTex += 1; out.lines.push(i + ':NO-TEXTURE'); return }
+          const w = sizeOf(got.t, 'width'), h = sizeOf(got.t, 'height')
+          if (w) { out.tex += 1; out.lines.push(i + ':' + w + 'x' + h + '@' + got.via) }
+          else { out.noTex += 1; out.lines.push(i + ':' + (got.via === 'none' ? 'NO-TEXTURE' : 'tex-no-size')) }
         })
+        const detail = out.lines.join(' ') + ' ｜ ' + out.api.join(' ｜ ')
+        if (out.meshes === 0) { this.emit({ state: 'bad', text: '模型里一个网格都没有', err: detail }); return }
         if (out.tex > 0 && out.noTex === 0) {
-          this.emit({ state: 'ok', meshes: out.meshes, tex: out.tex, detail: out.lines.join(' ') })
+          this.emit({ state: 'ok', meshes: out.meshes, tex: out.tex, detail: detail })
           return
         }
-        this.emit({
-          state: 'bad',
-          text: out.tex > 0 ? ('有 ' + out.noTex + ' 个网格没建出贴图（会看到白模）') : '一个贴图都没建出来（白模）',
-          err: out.lines.join(' '), meshes: out.meshes, tex: out.tex, noTex: out.noTex
-        })
+        if (out.tex === 0) {
+          /* 几何在、画面大概率是好的，是我们没数到——不许藏，也不许冒充"成功" */
+          this.emit({ state: 'geometry', meshes: out.meshes, tex: 0, noTex: out.noTex, detail: detail })
+          return
+        }
+        this.emit({ state: 'geometry', meshes: out.meshes, tex: out.tex, noTex: out.noTex, detail: detail })
       } catch (e) {
         this.emit({ state: 'bad', text: '检查画面时抛错', err: e.message + ' ｜ ' + out.lines.join(' ') })
       }
     }
   }
 })
+
+/* 不同基础库里贴图可能挂在 getTexture / textures / 直接属性 / uniform 上，逐个试，
+   并把"是哪条路读到的"一起报出来——下次再判错，日志里就能看出该走哪条。 */
+function textureOf(mat) {
+  const tries = ['u_baseColorMap', 'u_baseColorTexture', 'baseColorMap']
+  for (let i = 0; i < tries.length; i += 1) {
+    const n = tries[i]
+    try {
+      if (typeof mat.getTexture === 'function') { const t = mat.getTexture(n); if (t) return { t: t, via: 'getTexture(' + n + ')' } }
+    } catch (e) {}
+    try { if (mat.textures && mat.textures[n]) return { t: mat.textures[n], via: 'textures.' + n } } catch (e) {}
+    try { if (mat[n]) return { t: mat[n], via: 'direct.' + n } } catch (e) {}
+    try {
+      if (typeof mat.getUniformValue === 'function') { const t = mat.getUniformValue(n); if (t) return { t: t, via: 'uniform.' + n } }
+    } catch (e) {}
+  }
+  return { t: null, via: 'none' }
+}
+
+function sizeOf(t, key) {
+  if (!t) return 0
+  if (t[key]) return t[key]
+  if (t.value && t.value[key]) return t.value[key]
+  if (t.texture && t.texture[key]) return t.texture[key]
+  if (Array.isArray(t.image) && t.image.length) { return key === 'width' ? t.image.length : (t.image[0] || []).length }
+  return 0
+}
+
+function keysOf(o) {
+  try { return Object.keys(o).slice(0, 10).join(',') } catch (e) { return '?' }
+}
 
 function pickErr(e) {
   const d = (e && e.detail) || e || {}

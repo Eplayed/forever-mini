@@ -368,6 +368,16 @@ Page({
       return
     }
     if (d.state === 'loading') { this.setData({ modelText: d.text || '正在取模型' }); return }
+    if (d.state === 'geometry') {
+      /* 模型已经在这台机器上画出来了，只是本站那把尺子没量到贴图。
+         这时候把画面藏掉等于把主证据扔了——留着，并如实说这一格还没核过。 */
+      this.setData({
+        modelState: 'geometry', modelText: '',
+        modelDetail: '网格 ' + d.meshes + ' 个已实例化，贴图本站数到 ' + (d.tex || 0) + ' 张。'
+          + '看着是带花纹的那一身就是成了，看着是白模请截这一行给我：' + String(d.detail || '').slice(0, 220)
+      })
+      return
+    }
     this.modelFail((d.text || '模型没画出来') + (d.err ? '：' + d.err : ''))
   },
 

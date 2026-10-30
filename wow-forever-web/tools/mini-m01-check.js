@@ -692,6 +692,23 @@ async function main() {
   log('失败就回职业原画并写「3D 暂不可用」＋原因，名单与属性合计一条不少',
     !!m3 && m3.on === false && m3.state === 'bad' && /没有登记/.test(String(m3.err))
       && !!m3.art && m3.rows >= 10 && m3.sum >= 1, JSON.stringify(m3));
+  const m4 = await call('演一次"几何在、贴图没数到"', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.teardownModel();
+    p.setData({ modelOn: true, modelState: 'loading' });
+    p.onModelStatus({ detail: { state: 'geometry', meshes: 20, tex: 0, noTex: 20, detail: 'mat:alpha,beta' } });
+    const d = p.data;
+    return { on: d.modelOn, state: d.modelState, detail: d.modelDetail, err: d.modelErr };
+  }), 2);
+  await new Promise((r) => setTimeout(r, 800));
+  const m5 = await call('量不到贴图那一格过一会儿再看', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { on: d.modelOn, state: d.modelState };
+  }), 2);
+  log('贴图尺子量空了也不许把画面藏掉、不许冒充成功那一句（2026-10-30 真机就是被这条误判藏起来的）',
+    !!m4 && m4.on === true && m4.state === 'geometry' && /画出来|数到/.test(String(m4.detail)) && !m4.err
+      && !!m5 && m5.on === true && m5.state === 'geometry', JSON.stringify({ m4: m4, m5: m5 }));
+  await call('收掉这一格', () => mp.evaluate(() => { getCurrentPages().pop().hideModel(); return 1; }), 1);
   const bis3dWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
   log('真实模型的 caption「游戏角色与装备的静态预览，拖动可旋转」只在成功态那一格里出现',
     /modelState === 'ok'/.test(bis3dWxml) && /游戏角色与装备的静态预览，拖动可旋转/.test(bis3dWxml), '');
