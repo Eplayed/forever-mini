@@ -3889,7 +3889,7 @@ def test_macros(browser, base):
     check("红线：页面上没有下载插件 / 收费 / 已实测这类说法", not bad_words, str(bad_words))
     check("红线：页面上不残留没翻出来的法术占位", "{{" not in txt, "干净")
     check("这一页无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
-    page.screenshot(path=os.path.join(SHOT_DIR, "macros-1440.png"))
+    snap(page, path=os.path.join(SHOT_DIR, "macros-1440.png"))
     ctx.close()
 
 
