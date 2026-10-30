@@ -21,6 +21,7 @@ import RankPage from './pages/RankPage.vue';
 import ProvenancePage from './pages/ProvenancePage.vue';
 import ItemsPage from './pages/ItemsPage.vue';
 import BisPage from './pages/BisPage.vue';
+import MacrosPage from './pages/MacrosPage.vue';
 import Unmigrated from './pages/Unmigrated.vue';
 
 /* 哪些旧页已经迁到新站：键是旧站的 html 文件名。
@@ -51,6 +52,8 @@ export const MIGRATED = {
   'rank.html': '/rank',
   'provenance.html': '/provenance',
   'items.html': '/items',
+  // 宏命令页旧站也没有这个文件（2026-10-30 站主要导航加这一格），同一做法
+  'macros.html': '/macros',
   // 配装页旧站没有对应文件，这一条只是让导航与首页入口能用 linkFor('bis.html') 走站内路由
   'bis.html': '/bis'
 };
@@ -80,6 +83,8 @@ const routes = [
   { path: '/items', name: 'items', component: ItemsPage, meta: { title: '物品库' } },
   // 新站独有页：配装名单（2026-10-16 站主拍板，数据 app/data/bis.json）
   { path: '/bis', name: 'bis', component: BisPage, meta: { title: '配装名单' } },
+  // 宏命令（2026-10-30 新页，数据 app/data/macros.json，整批 L1）
+  { path: '/macros', name: 'macros', component: MacrosPage, meta: { title: '宏命令：按职业与用途分组，可复制' } },
   // 全部迁完后这里只兜住旧书签里可能残留的其它地址
   { path: '/:all(.*)', name: 'unmigrated', component: Unmigrated, meta: { title: '这页还没迁过来' } }
 ];

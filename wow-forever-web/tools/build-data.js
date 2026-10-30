@@ -1640,6 +1640,82 @@ if (fs.existsSync(petsPath)) {
   warns.push('pets.json 缺失：宠物这一格空着（跑 tools/extract-gi-pets.py + tools/merge-pets.py 生成）');
 }
 
+// ---------- 宏命令（2026-10-30 站主：素材库里有宏，先整理数据再上页面） ----------
+// 红线口径在根 AGENTS.md 第五节「网页端放开清单」第 1 条：宏文本可以免费分享，
+// 硬边界是 ① 不收钱 ② 不分发插件本体 ③ 串与说明标来源、指不出的按待核不发布。
+// 所以这张卡口盯的是"来源在不在、宏体烘没烘干净、页面筛得动筛不动"，不评宏好不好用。
+const macrosPath = path.join(ROOT, 'macros.json');
+let macrosOut = null;
+if (fs.existsSync(macrosPath)) {
+  const M = JSON.parse(fs.readFileSync(macrosPath, 'utf8'));
+  macrosOut = M;
+  const ms = M.macros || [], mc = (M.meta || {}).counts || {};
+  const mg = M.groups || [];
+  const classIds = new Set((read('classes.json').classes || []).map((c) => c.id));
+  const mErr = [];
+  const uniq = (f) => new Set(ms.map(f)).size;
+  if (mc.macros !== ms.length) mErr.push(`记 ${mc.macros} · 实数 ${ms.length}`);
+  if (mc.classes !== uniq((m) => m.classId)) mErr.push(`职业数记 ${mc.classes} · 实数 ${uniq((m) => m.classId)}`);
+  if (mc.groups !== uniq((m) => m.group)) mErr.push(`分组数记 ${mc.groups} · 实数 ${uniq((m) => m.group)}`);
+  if (mc.foreverNew !== ms.filter((m) => m.foreverNew).length) mErr.push('《无限》新技能条数与实数不符');
+  if (mc.rankMarker !== ms.filter((m) => m.rankMarker).length) mErr.push('带等级标记的条数与实数不符');
+  if (mc.withMinLevel !== ms.filter((m) => m.minLevel).length) mErr.push('有等级门槛的条数与实数不符');
+  const allIds = new Set([].concat(...ms.map((m) => m.spellIds || [])));
+  if (mc.spellIds !== allIds.size) mErr.push(`法术 ID 记 ${mc.spellIds} · 实数 ${allIds.size}`);
+  const seen = new Set();
+  ms.forEach((m) => {
+    const at = m.id || '(缺 id)';
+    if (!m.id || seen.has(m.id)) mErr.push(`${at}：id 重复或缺`);
+    seen.add(m.id);
+    if (!classIds.has(m.classId)) mErr.push(`${at}：职业 ${m.classId} 不在 classes.json 里（按职业筛会筛不出来）`);
+    if (!m.group || !m.title) mErr.push(`${at}：组名或标题缺`);
+    if (mg.indexOf(m.group) < 0) mErr.push(`${at}：组「${m.group}」不在分组清单里`);
+    if (!m.body) { mErr.push(`${at}：宏体是空的`); return; }
+    if (m.body.indexOf('{{') >= 0) mErr.push(`${at}：宏体还有没翻出来的法术占位（不许出半成品）`);
+    const lines = m.body.split('\n').filter((l) => l.trim());
+    if (!lines.length) mErr.push(`${at}：宏体只有空行`);
+    if (lines.length > 15) mErr.push(`${at}：宏体 ${lines.length} 行，超过游戏内 15 行上限`);
+    const bad = lines.filter((l) => !/^[/#]/.test(l));
+    if (bad.length) mErr.push(`${at}：有 ${bad.length} 行不是宏命令（行首既不是 / 也不是 #）`);
+    if (m.rankMarker && !/\(Rank \d\)/.test(m.body)) mErr.push(`${at}：标了等级标记但宏体里没有等级写法`);
+    if (typeof m.minLevel !== 'number' || m.minLevel < 0 || m.minLevel > 60) {
+      mErr.push(`${at}：最低可用等级写成 ${JSON.stringify(m.minLevel)}（0 到 60，没有门槛写 0）`);
+    }
+    if (m.level !== 'L1') mErr.push(`${at}：分级是 ${m.level}，这份只许 L1（一家插件整理、本站未回客户端逐条核）`);
+    const pv = m.provenance || [];
+    if (!pv.length || !pv[0].url || !pv[0].checkedAt) mErr.push(`${at}：来源不可回查或缺核对日（红线：指不出谁写的就不发布）`);
+    const nf = m.nameFrom || {};
+    const idsInBody = (m.body.match(/[^;,\s\][()]+/g) || []);
+    if (Object.keys(nf).length !== (m.spellIds || []).length) {
+      mErr.push(`${at}：spellIds ${m.spellIds.length} 个但 nameFrom 记了 ${Object.keys(nf).length} 个`);
+    }
+    Object.values(nf).forEach((v) => { if (v !== 'own' && v !== 'addon') mErr.push(`${at}：nameFrom 出现「${v}」`); });
+  });
+  // 空组不许存在（页面上会出现一颗点了为空的芯片）
+  const usedG = new Set(ms.map((m) => m.group));
+  mg.filter((g) => !usedG.has(g)).forEach((g) => mErr.push(`分组「${g}」一条宏都没有，页面上不许出现这颗`));
+  classIds.forEach((cid) => {
+    if (!ms.some((m) => m.classId === cid)) mErr.push(`职业 ${cid} 一条宏都没有（那一格筛出来是空的）`);
+  });
+  // 只有插件能翻出名字的那批 ID 必须逐条列出来，页面据此说"这批还没回客户端核"
+  const addonIds = new Set(ms.filter((m) => Object.values(m.nameFrom || {}).indexOf('addon') >= 0)
+    .map((m) => Object.keys(m.nameFrom).filter((k) => m.nameFrom[k] === 'addon'))
+    .reduce((a, b) => a.concat(b), []).map(Number));
+  const declared = new Set(((M.meta || {}).unverifiedSpellIds || []).map(Number));
+  if (addonIds.size !== declared.size || [...addonIds].some((i) => !declared.has(i))) {
+    mErr.push(`待核 ID 名单与实际不符：名单 ${declared.size} 个 · 实际 ${addonIds.size} 个`);
+  }
+  if (mc.spellIdsAddonOnly !== addonIds.size) mErr.push(`记 ${mc.spellIdsAddonOnly} · 实际要退回插件名的 ID ${addonIds.size} 个`);
+  if (mErr.length) errs.push('macros：' + mErr.slice(0, 6).join('；') + (mErr.length > 6 ? ` 等 ${mErr.length} 条` : ''));
+  scale.macros = ms.length;
+  scale.macrosUnverifiedIds = addonIds.size;
+  console.log('宏命令：' + ms.length + ' 条 / ' + uniq((m) => m.classId) + ' 职业 / ' + mg.length
+    + ' 个用途分组 · 法术名出自本站技能表的 ID ' + (allIds.size - addonIds.size) + '/' + allIds.size
+    + '（其余 ' + addonIds.size + ' 个退回插件写法，等回客户端核）');
+} else {
+  warns.push('macros.json 缺失：宏命令这一格空着（跑 tools/extract-gi-macros.py + tools/merge-macros.py 生成）');
+}
+
 // ---------- 配装名单（2026-10-16 站主拍板走 C 方案，红线例外条款见仓库根 AGENTS.md 第五节） ----------
 // 这份数据只存"哪件装备在哪个部位、按什么顺序"，数值与名称一律回 items.json 查。
 // 卡口因此盯四件事：① 名单里的物品 ID 必须都在我们名录里（否则页面上就是空白格）；
@@ -2197,7 +2273,8 @@ const SECTION_CN = {
   'items.json': '物品名录',
   'art.json': '素材台账（客户端原画）',
   'bis.json': '配装名单',
-  'pets.json': '猎人宠物'
+  'pets.json': '猎人宠物',
+  'macros.json': '宏命令'
 };
 // 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
 // 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。

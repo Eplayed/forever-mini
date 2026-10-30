@@ -166,7 +166,10 @@ nav.main .in { align-items:center; padding-top:8px; padding-bottom:8px }
 
 /* 入口：丸内的一颗小药丸。常态灰字，悬停起一层白底，当前项填本组色 + 本组色字。
    app.css:1181 给每个入口留了 border-radius:0 与 2px 底边，这两条在丸里都是错的形状，一起撤。 */
-nav.main a.nl { position:relative; min-height:30px; padding:0 9px; border-radius:999px;
+/* 2026-10-30：导航加了第 13 格（宏命令）之后，1440 下最后一组差 2px 放不下、整条带折成两行。
+   入口左右内边距从 9px 收到 8px（13 颗省 26px），一条带这个形状是 10-18 定下的，
+   由 [16] 那条 oneRow 断言钉着——再要加格子，先想清楚这一行还塞不塞得下。 */
+nav.main a.nl { position:relative; min-height:30px; padding:0 8px; border-radius:999px;
   color:var(--txt-dim); font-weight:500; letter-spacing:.01em; border-bottom:0;
   transition:background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out) }
 nav.main a.nl:hover { background:rgba(255,255,255,.06); color:var(--txt) }

@@ -149,10 +149,17 @@ def snap(pg, **kw):
        ② animations="disabled"——让 Playwright 把在跑的过渡一次性拨到终态再拍。
           换页与展开现在有过渡了，不关掉就会拍在淡入的中间（半透明、面板还没挂回来），
           既慢又会产出"看着像坏了"的证据图。
+       ③ 撞不上的那一拍再给一次：2026-10-30 整场门禁在专业页这张上断在 90 秒（当时负载 10+，
+          别的会话在跑 3D），判据一条没错，是这台机器交不出那一帧。重试只放宽时间，
+          不改判据、不吞异常——第二次还失败就照常抛出去，宁可红也不要跳过。
        注意：只包带 path 的调用。配装页那两帧 A/B 用的是 element.screenshot() 取字节，不走这里。"""
     kw.setdefault("animations", "disabled")
     kw.setdefault("timeout", 90000)
-    return pg.screenshot(**kw)
+    try:
+        return pg.screenshot(**kw)
+    except Exception:
+        kw["timeout"] = 180000
+        return pg.screenshot(**kw)
 
 
 # 页面上还有没有"在跑的过渡"——按过渡类名判，不按时间猜
@@ -2714,14 +2721,14 @@ def test_app(browser, base):
                              "c.querySelectorAll('.nb').forEach(n => n.remove());"
                              "return c.textContent.trim(); })")
     APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "宠物", "总览",
-               "区域与稀有", "副本", "团本", "配方", "配装", "排行"]
+               "区域与稀有", "副本", "团本", "配方", "配装", "排行", "宏命令"]
     check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
           "%d 项：%s" % (len(app_subs), app_subs))
-    check("世界与工具两组按收窄后的口径（3 格 / 1 格）",
+    check("世界与工具两组按收窄后的口径（3 格 / 2 格；2026-10-30 工具组加了宏命令）",
           page.evaluate("""() => { const g = [...document.querySelectorAll('nav.main .ngrp')];
             const of = (n) => { const b = g.find(x => (x.querySelector('.ngt')||{}).textContent === n);
               return b ? b.querySelectorAll('a.nl').length : -1; };
-            return [of('世界'), of('工具')]; }""") == [3, 1])
+            return [of('世界'), of('工具')]; }""") == [3, 2])
     # 上面剔角标是为了比名字，这一条反过来查角标本身：应画的 = 最新一批本站更新的板块标签
     # ∩ 导航项名字。剔完就没人管角标在不在，等于把"这一版新开了哪几页"这个记号丢了也没人发现。
     sc_nav = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]
@@ -3718,6 +3725,174 @@ def test_data_versions(browser, base):
 # 用来做 30 秒探针；正式门禁仍然不带 --only。
 
 
+def test_macros(browser, base):
+    """宏命令页（2026-10-30 站主："素材库中有魔兽无限的宏命令素材，先整理好数据，
+       然后在网页端导航条添加宏命令入口，设计宏命令页面"）。
+       数据整批 L1（一家第三方插件整理、本站未逐条实测），所以这节盯的四件事都是
+       "界面有没有比数据多说东西"与"筛了到底生不生效"：
+       ① 导航有这一格、走站内路由；② 芯片上的数 = 点下去看到的数（放了不生效的数比不放更坏）；
+       ③ 职业 / 分组 / 搜索 / 等级四个条件真叠加生效，且地址能原样带进来（可分享）；
+       ④ 复制按钮粘出去的字符串与页面上那段 <pre> 逐字相同——这条不靠眼看；
+       ⑤ 红线：页面上不许出现下载插件 / 收费 / 已实测这类话，也不许残留没翻出来的法术占位。"""
+    print("\n[6g] 宏命令页")
+    if not app_up(browser):
+        return
+    import json as _j
+    doc = _j.load(open(os.path.join(SRC, "data", "macros.json"), encoding="utf-8"))
+    MS = doc["macros"]
+    by_cls = {}
+    for m in MS:
+        by_cls.setdefault(m["classId"], []).append(m)
+    ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
+    try:
+        ctx.grant_permissions(["clipboard-read", "clipboard-write"], origin=APP_BASE)
+    except Exception:
+        pass
+    page = ctx.new_page()
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)[:140]))
+    page.goto(APP_BASE + "/#/macros", wait_until="networkidle")
+    settle_motion(page)
+    page.wait_for_timeout(1200)
+
+    nav = page.evaluate("""() => { const a = [...document.querySelectorAll('nav.main a.nl')]
+        .find(x => x.textContent.trim().indexOf('宏命令') === 0);
+      return a ? { href: a.getAttribute('href'), on: a.classList.contains('on') } : null; }""")
+    check("导航「工具」组里有「宏命令」这一格，且走的是站内路由",
+          nav and nav["href"] == "#/macros", json.dumps(nav, ensure_ascii=False))
+    h1 = page.evaluate("() => [...document.querySelectorAll('#main h1')].map(e => e.innerText.trim())")
+    check("这一页只有一个 H1 且标题是宏命令", h1 == [u"宏命令"], str(h1))
+    note = page.evaluate("() => (document.querySelector('#main .note')||{}).innerText || ''")
+    check("页顶那句口径在（第三方整理 + 未逐条实测），不是空话",
+          u"第三方插件" in note and u"没有逐条进游戏试过" in note, note[:60])
+    cards = page.evaluate("() => document.querySelectorAll('.mc').length")
+    check("默认落在第一个职业，卡数等于数据里这一职业的条数",
+          cards == len(by_cls["warrior"]), "%s 张 / 数据 %s" % (cards, len(by_cls["warrior"])))
+
+    chips = page.evaluate("""() => [...document.querySelectorAll('.picks [data-c]')].map(b => ({
+        c: b.getAttribute('data-c'), n: +(b.querySelector('.mono')||{}).textContent }))""")
+    bad = [x for x in chips if x["n"] != len(by_cls.get(x["c"], []))]
+    check("九颗职业芯片各带自己的条数，且与数据一致（不是手抄的数）",
+          len(chips) == 9 and not bad, json.dumps(bad or [c["c"] for c in chips], ensure_ascii=False))
+    page.click('[data-c="priest"]')
+    settle_motion(page)
+    page.wait_for_timeout(400)
+    check("点一颗职业芯片真的换画面（卡数 = 该职业条数）",
+          page.evaluate("() => document.querySelectorAll('.mc').length") == len(by_cls["priest"]),
+          "%s 张 / 数据 %s" % (page.evaluate("() => document.querySelectorAll('.mc').length"), len(by_cls["priest"])))
+
+    grp = page.evaluate("""() => { const b = [...document.querySelectorAll('.mc-groups [data-g]')]
+        .filter(x => x.getAttribute('data-g'))[0];
+      return b ? { g: b.getAttribute('data-g'), n: +b.querySelector('.mono').textContent } : null; }""")
+    want = len([m for m in by_cls["priest"] if m["group"] == grp["g"]])
+    page.click('.mc-groups [data-g]:not([data-g=""])')
+    settle_motion(page)
+    page.wait_for_timeout(400)
+    check("点一颗用途分组芯片筛出来的条数就是芯片上那个数",
+          grp and grp["n"] == want and page.evaluate("() => document.querySelectorAll('.mc').length") == want,
+          json.dumps({"芯片": grp, "数据": want,
+                      "画面": page.evaluate("() => document.querySelectorAll('.mc').length")}, ensure_ascii=False))
+    check("分组芯片里没有『点了为空』的那颗",
+          page.evaluate("""() => [...document.querySelectorAll('.mc-groups [data-g]')]
+            .filter(b => b.getAttribute('data-g')).every(b => +b.querySelector('.mono').textContent > 0)"""), "全都有数")
+
+    page.click('[data-g=""]')
+    settle_motion(page)
+    # 搜的是牧师真有的词：这一页的搜索**在当前职业内**搜（跨职业由空态那排按钮引过去），
+    # 拿"嘲讽"这种战士技能来搜牧师，测的就不是搜索而是空态了——那条单独钉。
+    page.fill("#mq", "真言术")
+    page.wait_for_timeout(700)
+    hit = page.evaluate("""() => [...document.querySelectorAll('.mc')].map(c =>
+        (c.innerText || '') )""")
+    check("搜「真言术」筛出来的每一条都真含这个词（在标题/说明/正文/组名任一处）",
+          0 < len(hit) < len(by_cls["priest"]) and all(u"真言术" in t for t in hit), "%s 条" % len(hit))
+    page.fill("#mq", "嘲讽")
+    page.wait_for_timeout(700)
+    empty = page.evaluate("""() => ({ txt: (document.querySelector('#main .empty')||{}).innerText || '',
+      jump: [...document.querySelectorAll('.mc-jump')].map(b => b.getAttribute('data-c')) })""")
+    check("当前职业里没有这个词时走空态，并把别的职业有几条摆出来（不是白屏也不是死路）",
+          u"没有匹配的宏" in empty["txt"] and "warrior" in empty["jump"],
+          json.dumps(empty, ensure_ascii=False)[:120])
+    page.fill("#mq", "")
+    page.wait_for_timeout(500)
+    # 选了一个组、又搜一个那个组里没有的词：不能掉进"芯片还亮着、画面 0 条"的死路
+    page.fill("#mq", "")
+    page.wait_for_timeout(500)
+    gbtns = page.evaluate("() => [...document.querySelectorAll('.mc-groups [data-g]')]"
+                          ".map(b => b.getAttribute('data-g')).filter(Boolean)")
+    if len(gbtns) > 1:
+        page.click('.mc-groups [data-g="%s"]' % gbtns[0])
+        page.wait_for_timeout(300)
+        page.fill("#mq", "zzzqqqxx")
+        page.wait_for_timeout(700)
+        stuck = page.evaluate("""() => ({ on: [...document.querySelectorAll('.mc-groups [data-g]')]
+            .filter(b => b.classList.contains('on')).map(b => b.getAttribute('data-g')),
+            empty: !!document.querySelector('#main .empty') })""")
+        check("搜到空的时候，上一屏选中的组会自动清掉（不留『芯片亮着、画面 0 条』的死路）",
+              stuck["empty"] and stuck["on"] == [], json.dumps(stuck, ensure_ascii=False))
+    page.fill("#mq", "")
+    page.wait_for_timeout(500)
+    page.fill("#mlv", "20")
+    page.wait_for_timeout(500)
+    lv = page.evaluate("""() => [...document.querySelectorAll('.mc')].map(c => {
+        const m = (c.querySelector('.mc-m')||{}).innerText || '';
+        const k = m.match(/(\\d+)\\s*级能用/); return k ? +k[1] : 0; })""")
+    check("填了等级之后留下的每一条门槛都 ≤ 该等级，且确实滤掉了几条",
+          lv and max(lv) <= 20 and len(lv) < len(by_cls["priest"]),
+          "%s 条 / 最高门槛 %s 级" % (len(lv), max(lv) if lv else "-"))
+    cnt = page.evaluate("() => (document.querySelector('#mcnt')||{}).innerText || ''")
+    cut = len([m for m in by_cls["priest"] if m["minLevel"] and m["minLevel"] > 20])
+    check("读数行说的「学不会的滤掉 N 条」与数据一致（这句话不是摆设）",
+          (u"滤掉 %d 条" % cut) in cnt and cut > 0, cnt[:80])
+    page.fill("#mlv", "")
+    page.wait_for_timeout(400)
+
+    # 复制：粘出去的必须与页面上那段逐字相同
+    pre = page.evaluate("""() => { const p = document.querySelector('.mc .mc-b');
+      return { id: p.getAttribute('data-m'), txt: p.textContent }; }""")
+    page.click(".mc .mc-copy")
+    page.wait_for_timeout(500)
+    got = None
+    try:
+        got = page.evaluate("() => navigator.clipboard.readText()")
+    except Exception:
+        got = None
+    toast = page.evaluate("() => { const t = document.getElementById('toast');"
+                          " return t ? { on: t.classList.contains('on'), txt: t.textContent } : null; }")
+    same = (got == pre["txt"]) if got is not None else bool(toast and toast["on"])
+    check("点「复制宏」粘出去的正文与页面上那段逐字相同（含换行）",
+          same and bool(toast and toast["on"]),
+          ("剪贴板比对" if got is not None else "剪贴板读不到，退回看提示") + "：" + (toast or {}).get("txt", "")[:24])
+    body_in_data = next((m["body"] for m in MS if m["id"] == pre["id"]), None)
+    check("页面上那段正文就是数据里那段（没有被排版改字）", body_in_data == pre["txt"],
+          "对得上" if body_in_data == pre["txt"] else "不一致")
+
+    # 地址能原样带进来（发给别人要用）
+    pick = by_cls["druid"][0]
+    page.goto(APP_BASE + "/#/macros?c=druid&g=%s&lv=10" % pick["group"], wait_until="networkidle")
+    settle_motion(page)
+    page.wait_for_timeout(1200)
+    deep = page.evaluate("""() => {
+      const onOf = (sel) => { const b = [...document.querySelectorAll(sel)].find((x) => x.classList.contains('on'));
+        return b ? b.getAttribute('data-c') || b.getAttribute('data-g') || '' : null; };
+      return { on: onOf('[data-c]'), grpOn: onOf('.mc-groups [data-g]'),
+               cards: document.querySelectorAll('.mc').length }; }""")
+    want_deep = len([m for m in by_cls["druid"] if m["group"] == pick["group"]
+                     and (not m["minLevel"] or m["minLevel"] <= 10)])
+    check("带 ?c=&g=&lv= 的地址直接进来就是那个筛法（可分享）",
+          deep["on"] == "druid" and deep["grpOn"] == pick["group"] and deep["cards"] == want_deep,
+          json.dumps({"画面": deep, "应有": want_deep}, ensure_ascii=False))
+
+    txt = page.evaluate("() => document.querySelector('#main').innerText")
+    bad_words = [w for w in (u"下载插件", u"安装插件", u"付费", u"会员", u"购买", u"已实测", u"官方宏")
+                 if w in txt]
+    check("红线：页面上没有下载插件 / 收费 / 已实测这类说法", not bad_words, str(bad_words))
+    check("红线：页面上不残留没翻出来的法术占位", "{{" not in txt, "干净")
+    check("这一页无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    page.screenshot(path=os.path.join(SHOT_DIR, "macros-1440.png"))
+    ctx.close()
+
+
 def test_motion(browser, base):
     """交互动效（2026-10-29 站主："页面跳转或者是展开收起，卡片切换等动作加入动效"）。
        这节盯的不是"有没有写 CSS"，而是"点下去到底动没动"：白放的选项比不放的选项更坏
@@ -4132,6 +4307,7 @@ SECTIONS = [
     ("bis", test_bis),
     ("prof_tiers", test_prof_tiers),
     ("pets", test_pets),
+    ("macros", test_macros),
     ("motion", test_motion),
     ("classes_sticky", test_classes_sticky),
     ("race_icon", lambda b, base: test_race_icon(b)),

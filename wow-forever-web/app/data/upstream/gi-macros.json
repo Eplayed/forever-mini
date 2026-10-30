@@ -1,0 +1,5792 @@
+{
+ "meta": {
+  "kind": "gi-macros",
+  "fetchedAt": "2026-10-30",
+  "source": "GearInsight_Forever 0.5.6 + XR_DungeonGuide v87（同一批宏的两个形态）",
+  "files": [
+   {
+    "path": "GearInsight_Forever/MacroData.lua",
+    "sha256": "b6db2f38fca3b64297fb2d464e058a0a75aad31aaa8757e227f55b98d18e2695",
+    "selfReported": "宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；技能名 → 法术 ID：Beta 1.60.1.70532"
+   },
+   {
+    "path": "XR_DungeonGuide/Data_Macros.lua",
+    "sha256": "7b9ba9b5166ab570ebd060dba3651b94421fd0c2368b0a757e6954074e52abd6",
+    "selfReported": "XR_DungeonGuide 全职业宏库 v0.39.0 新增，v66 同步 GI 2026-10-19 新版；宏体内法术名已烘焙为中文"
+   }
+  ],
+  "licenseNote": "两个插件目录里都没有 LICENSE 文件、TOC 也没有 X-License 行；按根 AGENTS.md 2026-10-18「网页端放开清单」第 1 条分享宏文本与说明，硬边界是免费 + 标来源 + 不分发插件本体。",
+  "alignment": "两份逐条同职业 / 同组 / 同中文标题，条数都是 245；顺序一致才允许拿 XR 当烘名参照",
+  "notTaken": [
+   "插件的界面代码与文案排版",
+   "任何\"下一个技能打什么\"的循环提示类建议（红线）"
+  ],
+  "counts": {
+   "macros": 245,
+   "classes": 9,
+   "groups": 38,
+   "foreverNew": 6,
+   "distinctSpellIds": 306,
+   "spellRefs": 625
+  }
+ },
+ "groups": [
+  "姿态切换",
+  "坦克",
+  "打断",
+  "输出与怒气",
+  "更多",
+  "练级常用",
+  "治疗与驱散",
+  "祝福与光环",
+  "圣印、审判与输出",
+  "控制与保命",
+  "宠物",
+  "射击与爆发",
+  "近战与保命",
+  "守护、陷阱与控制",
+  "潜行与起手",
+  "闷棍、脚踢与凿击",
+  "保命",
+  "终结技与爆发",
+  "治疗",
+  "驱散、增益与复活",
+  "控制与打断",
+  "输出",
+  "种族专属",
+  "图腾",
+  "震击、打断与净化",
+  "治疗、驱散与复活",
+  "护盾、武器与赶路",
+  "增益、解诅咒与造物",
+  "传送",
+  "恶魔",
+  "恐惧、放逐与诅咒",
+  "输出与灵魂碎片",
+  "治疗石与灵魂石",
+  "形态",
+  "野性：冲锋、晕与嘲讽",
+  "平衡（鸟德）",
+  "恢复（奶德）",
+  "增益、控制与赶路"
+ ],
+ "macros": [
+  {
+   "cls": "Warrior",
+   "key": "warrior-charge-intercept",
+   "no": 1,
+   "group": "姿态切换",
+   "groupEn": "Stance dancing",
+   "titleEn": "Charge out of combat, Intercept in combat",
+   "title": "冲锋 / 拦截 自动切姿态",
+   "noteEn": "Out of combat it Charges your target from Battle Stance. In combat it Intercepts from Berserker Stance. If you're in the wrong stance for the situation, the press changes stance instead, and the next press charges.",
+   "note": "脱战冲锋、战斗中拦截；姿态不对时先切姿态，再按一下出技能",
+   "bodyTemplate": "#showtooltip\\n/cast [nocombat,stance:1] {{100}}; [combat,stance:3] {{20252}}; [nocombat] {{2457}}; {{2458}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    100,
+    2458,
+    2457,
+    20252
+   ],
+   "spellIdsInBody": [
+    100,
+    20252,
+    2457,
+    2458
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [nocombat,stance:1] 冲锋; [combat,stance:3] 拦截; [nocombat] 战斗姿态; 狂暴姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-overpower-any-stance",
+   "no": 2,
+   "group": "姿态切换",
+   "groupEn": "Stance dancing",
+   "titleEn": "Overpower from any stance",
+   "title": "任意姿态压制",
+   "noteEn": "In Battle Stance it casts Overpower. In any other stance it changes you to Battle Stance, and the next press casts Overpower.",
+   "note": "战斗姿态直接压制；别的姿态先切战斗姿态，再按一下压制",
+   "bodyTemplate": "#showtooltip {{7384}}\\n/startattack\\n/cast [stance:1] {{7384}}; {{2457}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    7384,
+    2457
+   ],
+   "spellIdsInBody": [
+    7384,
+    7384,
+    2457
+   ],
+   "bodyBakedByAddon": "#showtooltip 压制\\n/startattack\\n/cast [stance:1] 压制; 战斗姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-hamstring",
+   "no": 3,
+   "group": "姿态切换",
+   "groupEn": "Stance dancing",
+   "titleEn": "Hamstring, out of Defensive Stance if needed",
+   "title": "断筋（防御姿态先切）",
+   "noteEn": "Starts your auto-attack and Hamstrings your target, slowing it by 40%. In Defensive Stance the first press changes you to Battle Stance.",
+   "note": "开自动攻击并断筋减速 40%；防御姿态下第一下先切战斗姿态",
+   "bodyTemplate": "#showtooltip {{1715}}\\n/startattack\\n/cast [stance:2] {{2457}}; {{1715}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    1715,
+    2457
+   ],
+   "spellIdsInBody": [
+    1715,
+    2457,
+    1715
+   ],
+   "bodyBakedByAddon": "#showtooltip 断筋\\n/startattack\\n/cast [stance:2] 战斗姿态; 断筋"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-execute",
+   "no": 4,
+   "group": "姿态切换",
+   "groupEn": "Stance dancing",
+   "titleEn": "Execute, out of Defensive Stance if needed",
+   "title": "斩杀（防御姿态先切）",
+   "noteEn": "Casts Execute on your target. In Defensive Stance the first press changes you to Battle Stance first.",
+   "note": "对目标斩杀；防御姿态下第一下先切战斗姿态",
+   "bodyTemplate": "#showtooltip {{5308}}\\n/startattack\\n/cast [stance:2] {{2457}}; {{5308}}",
+   "foreverNew": false,
+   "level": 24,
+   "spellIds": [
+    5308,
+    2457
+   ],
+   "spellIdsInBody": [
+    5308,
+    2457,
+    5308
+   ],
+   "bodyBakedByAddon": "#showtooltip 斩杀\\n/startattack\\n/cast [stance:2] 战斗姿态; 斩杀"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-berserker-rage",
+   "no": 5,
+   "group": "姿态切换",
+   "groupEn": "Stance dancing",
+   "titleEn": "Berserker Rage from any stance",
+   "title": "任意姿态狂暴之怒",
+   "noteEn": "Casts Berserker Rage in Berserker Stance; in any other stance the first press moves you to Berserker Stance.",
+   "note": "狂暴姿态直接开；别的姿态第一下先切狂暴姿态",
+   "bodyTemplate": "#showtooltip {{18499}}\\n/cast [stance:3] {{18499}}; {{2458}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    18499,
+    2458
+   ],
+   "spellIdsInBody": [
+    18499,
+    18499,
+    2458
+   ],
+   "bodyBakedByAddon": "#showtooltip 狂暴之怒\\n/cast [stance:3] 狂暴之怒; 狂暴姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-taunt-mocking-blow",
+   "no": 6,
+   "group": "坦克",
+   "groupEn": "Tanking",
+   "titleEn": "Taunt your mouseover, Shift for Mocking Blow",
+   "title": "嘲讽鼠标指向，Shift 惩戒痛击",
+   "noteEn": "Taunts the enemy under your mouse, or your target. With Shift it uses Mocking Blow instead. If you're in the wrong stance for either, the press changes stance first.",
+   "note": "嘲讽鼠标指向 / 目标；Shift 改用惩戒痛击；姿态不对先切",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,stance:1,@mouseover,harm,nodead][mod:shift,stance:1] {{694}}; [mod:shift] {{2457}}; [stance:2,@mouseover,harm,nodead][stance:2] {{355}}; {{71}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    71,
+    2457,
+    694,
+    355
+   ],
+   "spellIdsInBody": [
+    694,
+    2457,
+    355,
+    71
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,stance:1,@mouseover,harm,nodead][mod:shift,stance:1] 惩戒痛击; [mod:shift] 战斗姿态; [stance:2,@mouseover,harm,nodead][stance:2] 嘲讽; 防御姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-sunder-armor",
+   "no": 7,
+   "group": "坦克",
+   "groupEn": "Tanking",
+   "titleEn": "Sunder Armor, finding a target first",
+   "title": "破甲攻击（自动找目标）",
+   "noteEn": "Picks the nearest enemy if you have no living enemy targeted, starts your auto-attack and casts Sunder Armor.",
+   "note": "没有活着的敌对目标就选最近的敌人，开自动攻击并破甲",
+   "bodyTemplate": "#showtooltip {{7386}}\\n/targetenemy [noharm][dead]\\n/startattack\\n/cast {{7386}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    7386
+   ],
+   "spellIdsInBody": [
+    7386,
+    7386
+   ],
+   "bodyBakedByAddon": "#showtooltip 破甲攻击\\n/targetenemy [noharm][dead]\\n/startattack\\n/cast 破甲攻击"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-revenge-shield-block",
+   "no": 8,
+   "group": "坦克",
+   "groupEn": "Tanking",
+   "titleEn": "Revenge and Shield Block together",
+   "title": "复仇 + 盾牌格挡",
+   "noteEn": "Casts Revenge when it's usable and Shield Block on the same press. Holding Shift uses only Revenge.",
+   "note": "复仇能用就复仇，同一下顺带盾牌格挡；按住 Shift 只复仇",
+   "bodyTemplate": "#showtooltip {{6572}}\\n/startattack\\n/cast {{6572}}\\n/cast [nomod:shift] {{2565}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    6572,
+    2565
+   ],
+   "spellIdsInBody": [
+    6572,
+    6572,
+    2565
+   ],
+   "bodyBakedByAddon": "#showtooltip 复仇\\n/startattack\\n/cast 复仇\\n/cast [nomod:shift] 盾牌格挡"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-shield-wall",
+   "no": 9,
+   "group": "坦克",
+   "groupEn": "Tanking",
+   "titleEn": "Shield Wall from any stance, Shift for Last Stand",
+   "title": "盾墙（自动切姿态），Shift 破釜沉舟",
+   "noteEn": "Casts Shield Wall in Defensive Stance, or changes you to Defensive Stance first. With Shift it casts Last Stand instead.",
+   "note": "防御姿态直接盾墙，否则先切防御姿态；Shift 改开破釜沉舟",
+   "bodyTemplate": "#showtooltip {{871}}\\n/cast [mod:shift] {{12975}}; [stance:2] {{871}}; {{71}}",
+   "foreverNew": false,
+   "level": 28,
+   "spellIds": [
+    871,
+    71,
+    12975
+   ],
+   "spellIdsInBody": [
+    871,
+    12975,
+    871,
+    71
+   ],
+   "bodyBakedByAddon": "#showtooltip 盾墙\\n/cast [mod:shift] 破釜沉舟; [stance:2] 盾墙; 防御姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-disarm",
+   "no": 10,
+   "group": "坦克",
+   "groupEn": "Tanking",
+   "titleEn": "Disarm your mouseover or target",
+   "title": "缴械鼠标指向或目标",
+   "noteEn": "Disarms the enemy under your mouse, or your target, from Defensive Stance. In another stance the first press changes you to Defensive Stance.",
+   "note": "防御姿态缴械鼠标指向 / 目标；别的姿态第一下先切防御姿态",
+   "bodyTemplate": "#showtooltip {{676}}\\n/cast [stance:2,@mouseover,harm,nodead][stance:2] {{676}}; {{71}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    676,
+    71
+   ],
+   "spellIdsInBody": [
+    676,
+    676,
+    71
+   ],
+   "bodyBakedByAddon": "#showtooltip 缴械\\n/cast [stance:2,@mouseover,harm,nodead][stance:2] 缴械; 防御姿态"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-interrupt-focus",
+   "no": 11,
+   "group": "打断",
+   "groupEn": "Interrupts and weapon swaps",
+   "titleEn": "Interrupt your focus: Shield Bash, or Pummel in Berserker Stance",
+   "title": "打断焦点：盾击 / 拳击",
+   "noteEn": "Uses Shield Bash on your focus, or on your target if you have no living enemy focus. In Berserker Stance it uses Pummel instead.",
+   "note": "盾击焦点（没有焦点就打目标）；狂暴姿态下改用拳击",
+   "bodyTemplate": "#showtooltip\\n/cast [stance:3,@focus,harm,nodead][stance:3] {{6552}}; [@focus,harm,nodead][] {{72}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    72,
+    6552
+   ],
+   "spellIdsInBody": [
+    6552,
+    72
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [stance:3,@focus,harm,nodead][stance:3] 拳击; [@focus,harm,nodead][] 盾击"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-heroic-strike-cleave",
+   "no": 12,
+   "group": "输出与怒气",
+   "groupEn": "Damage and Rage",
+   "titleEn": "Heroic Strike, Shift for Cleave",
+   "title": "英勇打击，Shift 顺劈斩",
+   "noteEn": "Starts your auto-attack and queues Heroic Strike on your next swing. With Shift it queues Cleave instead, which hits a second nearby enemy.",
+   "note": "开自动攻击，下一刀英勇打击；Shift 改顺劈斩多砍一个",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast [mod:shift] {{845}}; {{78}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    78,
+    845
+   ],
+   "spellIdsInBody": [
+    845,
+    78
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/cast [mod:shift] 顺劈斩; 英勇打击"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-thunder-clap-demo",
+   "no": 13,
+   "group": "输出与怒气",
+   "groupEn": "Damage and Rage",
+   "titleEn": "Thunder Clap, Shift for Demoralizing Shout",
+   "title": "雷霆一击，Shift 挫志怒吼",
+   "noteEn": "Casts Thunder Clap on the enemies around you. With Shift it casts Demoralizing Shout. In Berserker Stance, where Thunder Clap doesn't work, the first press moves you to Battle Stance.",
+   "note": "雷霆一击周围敌人；Shift 挫志怒吼；狂暴姿态下先切战斗姿态",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{1160}}; [stance:3] {{2457}}; {{6343}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    2457,
+    1160,
+    6343
+   ],
+   "spellIdsInBody": [
+    1160,
+    2457,
+    6343
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 挫志怒吼; [stance:3] 战斗姿态; 雷霆一击"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-bloodrage-shout",
+   "no": 14,
+   "group": "输出与怒气",
+   "groupEn": "Damage and Rage",
+   "titleEn": "Bloodrage, then Battle Shout",
+   "title": "血性狂暴 + 战斗怒吼",
+   "noteEn": "Uses Bloodrage for instant Rage and spends 10 of it on Battle Shout in the same press.",
+   "note": "血性狂暴拿怒气，同一下花 10 点开战斗怒吼",
+   "bodyTemplate": "#showtooltip {{6673}}\\n/cast {{2687}}\\n/cast {{6673}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6673,
+    2687
+   ],
+   "spellIdsInBody": [
+    6673,
+    2687,
+    6673
+   ],
+   "bodyBakedByAddon": "#showtooltip 战斗怒吼\\n/cast 血性狂暴\\n/cast 战斗怒吼"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-death-wish-trinkets",
+   "no": 15,
+   "group": "输出与怒气",
+   "groupEn": "Damage and Rage",
+   "titleEn": "Death Wish with both trinkets",
+   "title": "死亡之愿 + 两个饰品",
+   "noteEn": "Casts Death Wish and uses the Use effects of both your trinkets on one press.",
+   "note": "死亡之愿和上下两个饰品一键全开",
+   "bodyTemplate": "#showtooltip {{12328}}\\n/cast {{12328}}\\n/use 13\\n/use 14",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    12328
+   ],
+   "spellIdsInBody": [
+    12328,
+    12328
+   ],
+   "bodyBakedByAddon": "#showtooltip 死亡之愿\\n/cast 死亡之愿\\n/use 13\\n/use 14"
+  },
+  {
+   "cls": "Warrior",
+   "key": "warrior-sweeping-strikes-cleave",
+   "no": 16,
+   "group": "输出与怒气",
+   "groupEn": "Damage and Rage",
+   "titleEn": "Sweeping Strikes and Cleave",
+   "title": "横扫攻击 + 顺劈斩",
+   "noteEn": "Casts Sweeping Strikes (from Battle Stance, changing to it first if needed) and queues Cleave on the same press.",
+   "note": "开横扫攻击（不在战斗姿态先切过去），同一下排上顺劈斩",
+   "bodyTemplate": "#showtooltip {{12292}}\\n/startattack\\n/cast [stance:1] {{12292}}; {{2457}}\\n/cast {{845}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    12292,
+    2457,
+    845
+   ],
+   "spellIdsInBody": [
+    12292,
+    12292,
+    2457,
+    845
+   ],
+   "bodyBakedByAddon": "#showtooltip 横扫攻击\\n/startattack\\n/cast [stance:1] 横扫攻击; 战斗姿态\\n/cast 顺劈斩"
+  },
+  {
+   "cls": "Warrior",
+   "key": "cwf-warrior-0",
+   "no": 17,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Charge and start attacking",
+   "title": "冲锋 + 自动攻击",
+   "noteEn": "Dismount, start swinging and Charge in one press.",
+   "note": "下马、开始自动攻击、冲锋，一键完成",
+   "bodyTemplate": "#showtooltip {{100}}\\n/dismount\\n/startattack\\n/cast {{100}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    100
+   ],
+   "spellIdsInBody": [
+    100,
+    100
+   ],
+   "bodyBakedByAddon": "#showtooltip 冲锋\\n/dismount\\n/startattack\\n/cast 冲锋"
+  },
+  {
+   "cls": "Warrior",
+   "key": "cwf-warrior-2",
+   "no": 18,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Victory Rush after a kill",
+   "title": "乘胜追击",
+   "noteEn": "Use the new follow-up strike within 20 seconds of a kill.",
+   "note": "击杀后 20 秒内的追击（《无限》新技能）",
+   "bodyTemplate": "#showtooltip {{402927}}\\n/startattack\\n/cast {{402927}}",
+   "foreverNew": true,
+   "level": 20,
+   "spellIds": [
+    402927
+   ],
+   "spellIdsInBody": [
+    402927,
+    402927
+   ],
+   "bodyBakedByAddon": "#showtooltip 乘胜追击\\n/startattack\\n/cast 乘胜追击"
+  },
+  {
+   "cls": "Warrior",
+   "key": "cwf-warrior-6",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Use both trinkets",
+   "title": "两个饰品一起用",
+   "noteEn": "Top and bottom trinket together.",
+   "note": "上下两个饰品一键同时使用",
+   "bodyTemplate": "#showtooltip\\n/use 13\\n/use 14",
+   "foreverNew": false,
+   "level": 0,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "#showtooltip\\n/use 13\\n/use 14"
+  },
+  {
+   "cls": "Warrior",
+   "key": "dy-warrior-0",
+   "no": 20,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Whirlwind from any stance",
+   "title": "旋风斩（自动切狂暴姿态）",
+   "noteEn": "Not in Berserker Stance: the first press switches, the next press spins.",
+   "note": "不在狂暴姿态时第一下先切姿态，再按一下旋风斩",
+   "bodyTemplate": "#showtooltip {{1680}}\\n/startattack\\n/cast [nostance:3] {{2458}}; {{1680}}",
+   "foreverNew": false,
+   "level": 36,
+   "spellIds": [
+    1680,
+    2458
+   ],
+   "spellIdsInBody": [
+    1680,
+    2458,
+    1680
+   ],
+   "bodyBakedByAddon": "#showtooltip 旋风斩\\n/startattack\\n/cast [nostance:3] 狂暴姿态; 旋风斩"
+  },
+  {
+   "cls": "Warrior",
+   "key": "dy-warrior-1",
+   "no": 21,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Retaliation from any stance",
+   "title": "反击风暴（自动切战斗姿态）",
+   "noteEn": "Surrounded by three or more: switches to Battle Stance if needed, then Retaliation.",
+   "note": "被 3 只以上围住再开；不在战斗姿态先切过去",
+   "bodyTemplate": "#showtooltip {{20230}}\\n/cast [nostance:1] {{2457}}; {{20230}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    20230,
+    2457
+   ],
+   "spellIdsInBody": [
+    20230,
+    2457,
+    20230
+   ],
+   "bodyBakedByAddon": "#showtooltip 反击风暴\\n/cast [nostance:1] 战斗姿态; 反击风暴"
+  },
+  {
+   "cls": "Warrior",
+   "key": "dy-warrior-2",
+   "no": 22,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Battle Shout, Shift Demoralizing Shout",
+   "title": "战斗怒吼，Shift 挫志怒吼",
+   "noteEn": "Battle Shout by default; hold Shift for Demoralizing Shout.",
+   "note": "裸按战斗怒吼加攻强，按住 Shift 挫志怒吼削怪攻击",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{1160}}; {{6673}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    6673,
+    1160
+   ],
+   "spellIdsInBody": [
+    1160,
+    6673
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 挫志怒吼; 战斗怒吼"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-holy-light",
+   "no": 1,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Holy Light on your mouseover, Shift for Flash of Light",
+   "title": "圣光术鼠标指向，Shift 圣光闪现",
+   "noteEn": "Casts Holy Light on the friend under your mouse, or your friendly target, or yourself. With Shift held it casts Flash of Light on the same person instead.",
+   "note": "给鼠标指向 / 友方目标 / 自己圣光术；Shift 改圣光闪现",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{19750}}; [@mouseover,help,nodead][help,nodead][@player] {{635}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    19750,
+    635
+   ],
+   "spellIdsInBody": [
+    19750,
+    635
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 圣光闪现; [@mouseover,help,nodead][help,nodead][@player] 圣光术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-holy-light-downrank",
+   "no": 2,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Holy Light rank 2, a cheap heal",
+   "title": "2 级圣光术（省蓝小奶）",
+   "noteEn": "Casts rank 2 of Holy Light on the friend under your mouse, your friendly target or yourself, whatever your highest rank is.",
+   "note": "用 2 级圣光术奶鼠标指向 / 友方目标 / 自己，省蓝",
+   "bodyTemplate": "#showtooltip {{639}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{639}}(Rank 2)",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    639
+   ],
+   "spellIdsInBody": [
+    639,
+    639
+   ],
+   "bodyBakedByAddon": "#showtooltip 圣光术\\n/cast [@mouseover,help,nodead][help,nodead][@player] 圣光术(Rank 2)"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-purify",
+   "no": 3,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Purify your mouseover or yourself",
+   "title": "纯净术鼠标指向或自己",
+   "noteEn": "Removes 1 poison and 1 disease from the friend under your mouse, your friendly target or you.",
+   "note": "驱散鼠标指向 / 友方目标 / 自己身上 1 个毒和 1 个疾病",
+   "bodyTemplate": "#showtooltip {{1152}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{1152}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    1152
+   ],
+   "spellIdsInBody": [
+    1152,
+    1152
+   ],
+   "bodyBakedByAddon": "#showtooltip 纯净术\\n/cast [@mouseover,help,nodead][help,nodead][@player] 纯净术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-lay-on-hands",
+   "no": 4,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Lay on Hands on your mouseover, Alt for yourself",
+   "title": "圣疗术鼠标指向，Alt 给自己",
+   "noteEn": "Casts Lay on Hands on the friend under your mouse, or your friendly target, or you. Holding Alt always casts it on you.",
+   "note": "圣疗鼠标指向 / 友方目标 / 自己；按住 Alt 一定给自己",
+   "bodyTemplate": "#showtooltip {{633}}\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{633}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    633
+   ],
+   "spellIdsInBody": [
+    633,
+    633
+   ],
+   "bodyBakedByAddon": "#showtooltip 圣疗术\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 圣疗术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-redemption",
+   "no": 5,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Redemption on the dead player under your mouse",
+   "title": "救赎鼠标下的尸体",
+   "noteEn": "Casts Redemption on the dead player under your mouse, or on your target if it's a dead friend. It does nothing when neither is dead.",
+   "note": "复活鼠标下（或目标里）的死亡队友；都没死就不动",
+   "bodyTemplate": "#showtooltip {{7328}}\\n/cast [@mouseover,help,dead][help,dead] {{7328}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    7328
+   ],
+   "spellIdsInBody": [
+    7328,
+    7328
+   ],
+   "bodyBakedByAddon": "#showtooltip 救赎\\n/cast [@mouseover,help,dead][help,dead] 救赎"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-holy-shock",
+   "no": 6,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Holy Shock your mouseover, friend or enemy",
+   "title": "神圣震击鼠标指向（敌我通用）",
+   "noteEn": "Casts Holy Shock on whoever is under your mouse: it heals a friend or hits an enemy. With no mouseover it goes on your target. With Shift, it puts Light's Vigil on the mouseover or target instead.",
+   "note": "鼠标下是友方就奶、敌方就打；Shift 给鼠标指向上圣光守望",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,exists,nodead][mod:shift] {{1310911}}; [@mouseover,help,nodead][@mouseover,harm,nodead][] {{1311606}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    1310911,
+    1311606
+   ],
+   "spellIdsInBody": [
+    1310911,
+    1311606
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,exists,nodead][mod:shift] 圣光守望; [@mouseover,help,nodead][@mouseover,harm,nodead][] 神圣震击"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-divine-favor",
+   "no": 7,
+   "group": "治疗与驱散",
+   "groupEn": "Healing and cleansing",
+   "titleEn": "Divine Favor, then Holy Light",
+   "title": "神恩术 + 圣光术",
+   "noteEn": "Uses Divine Favor, then casts Holy Light on the friend under your mouse, your friendly target or you. Divine Favor makes that Holy Light a certain critical heal.",
+   "note": "先开神恩术，再给鼠标指向 / 友方目标 / 自己圣光术，必爆",
+   "bodyTemplate": "#showtooltip {{20216}}\\n/cast {{20216}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{635}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    20216,
+    635
+   ],
+   "spellIdsInBody": [
+    20216,
+    20216,
+    635
+   ],
+   "bodyBakedByAddon": "#showtooltip 神恩术\\n/cast 神恩术\\n/cast [@mouseover,help,nodead][help,nodead][@player] 圣光术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-blessings",
+   "no": 8,
+   "group": "祝福与光环",
+   "groupEn": "Blessings and auras",
+   "titleEn": "Might, Wisdom or Kings on one key",
+   "title": "祝福一键（Shift 智慧 / Ctrl 王者）",
+   "noteEn": "Blessing of Might on its own, Blessing of Wisdom with Shift and Blessing of Kings with Ctrl, each on the friend under your mouse or on you.",
+   "note": "默认力量祝福，Shift 智慧，Ctrl 王者；给鼠标指向或自己",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] {{19742}}; [mod:ctrl,@mouseover,help,nodead][mod:ctrl,@player] {{20217}}; [@mouseover,help,nodead][@player] {{19740}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    19742,
+    20217,
+    19740
+   ],
+   "spellIdsInBody": [
+    19742,
+    20217,
+    19740
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] 智慧祝福; [mod:ctrl,@mouseover,help,nodead][mod:ctrl,@player] 王者祝福; [@mouseover,help,nodead][@player] 力量祝福"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-blessing-of-protection",
+   "no": 9,
+   "group": "祝福与光环",
+   "groupEn": "Blessings and auras",
+   "titleEn": "Blessing of Protection on your mouseover, Alt for yourself",
+   "title": "保护祝福鼠标指向，Alt 给自己",
+   "noteEn": "Stops your current cast and puts Blessing of Protection on the friend under your mouse, your friendly target or you. Alt always puts it on you.",
+   "note": "打断施法，给鼠标指向 / 友方目标 / 自己保护祝福；Alt 给自己",
+   "bodyTemplate": "#showtooltip {{1022}}\\n/stopcasting\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{1022}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    1022
+   ],
+   "spellIdsInBody": [
+    1022,
+    1022
+   ],
+   "bodyBakedByAddon": "#showtooltip 保护祝福\\n/stopcasting\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 保护祝福"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-blessing-of-freedom",
+   "no": 10,
+   "group": "祝福与光环",
+   "groupEn": "Blessings and auras",
+   "titleEn": "Blessing of Freedom on your mouseover or yourself",
+   "title": "自由祝福鼠标指向或自己",
+   "noteEn": "Puts Blessing of Freedom on the friend under your mouse, your friendly target or you.",
+   "note": "给鼠标指向 / 友方目标 / 自己自由祝福",
+   "bodyTemplate": "#showtooltip {{1044}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{1044}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    1044
+   ],
+   "spellIdsInBody": [
+    1044,
+    1044
+   ],
+   "bodyBakedByAddon": "#showtooltip 自由祝福\\n/cast [@mouseover,help,nodead][help,nodead][@player] 自由祝福"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-auras",
+   "no": 11,
+   "group": "祝福与光环",
+   "groupEn": "Blessings and auras",
+   "titleEn": "Your auras on one key",
+   "title": "光环一键切换",
+   "noteEn": "Devotion Aura on its own, Retribution Aura with Shift and Concentration Aura with Ctrl.",
+   "note": "默认虔诚光环，Shift 惩罚光环，Ctrl 专注光环",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{7294}}; [mod:ctrl] {{19746}}; {{465}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    465,
+    19746,
+    7294
+   ],
+   "spellIdsInBody": [
+    7294,
+    19746,
+    465
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 惩罚光环; [mod:ctrl] 专注光环; 虔诚光环"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-seal-by-shield",
+   "no": 12,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Seal of Fury with a shield, Seal of Righteousness without",
+   "title": "有盾愤怒圣印，没盾正义圣印",
+   "noteEn": "Casts Seal of Fury when you have a shield equipped, and Seal of Righteousness when you don't.",
+   "note": "拿着盾就上愤怒圣印，没盾就上正义圣印",
+   "bodyTemplate": "#showtooltip\\n/cast [equipped:Shields] {{1311649}}; {{20154}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    1311649,
+    20154
+   ],
+   "spellIdsInBody": [
+    1311649,
+    20154
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [equipped:Shields] 愤怒圣印; 正义圣印"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-holy-strike-judgement",
+   "no": 13,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Holy Strike with Judgement, Shift to hold Judgement",
+   "title": "神圣打击 + 审判，Shift 留审判",
+   "noteEn": "Starts your auto-attack, uses Judgement if it's ready, and casts Holy Strike. With Shift held it skips Judgement and only strikes.",
+   "note": "开自动攻击，审判好了就审判，再神圣打击；Shift 只打不审判",
+   "bodyTemplate": "#showtooltip {{679}}\\n/startattack\\n/cast [nomod:shift] {{20271}}\\n/cast {{679}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    679,
+    20271
+   ],
+   "spellIdsInBody": [
+    679,
+    20271,
+    679
+   ],
+   "bodyBakedByAddon": "#showtooltip 神圣打击\\n/startattack\\n/cast [nomod:shift] 审判\\n/cast 神圣打击"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-crusader-opener",
+   "no": 14,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Judge the Crusader, then switch to Righteousness",
+   "title": "十字军审判后切正义圣印",
+   "noteEn": "A cast sequence: the first press casts Seal of the Crusader, the second judges it on the enemy, the third switches you to Seal of Righteousness.",
+   "note": "按三下：十字军圣印 → 审判 → 切正义圣印",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/castsequence reset=target/combat {{21082}}, {{20271}}, {{20154}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    21082,
+    20154,
+    20271
+   ],
+   "spellIdsInBody": [
+    21082,
+    20271,
+    20154
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/castsequence reset=target/combat 十字军圣印, 审判, 正义圣印"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-judgement-taunt",
+   "no": 15,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Tank: Judgement taunt on your mouseover, Shift resets it",
+   "title": "坦克：审判嘲讽鼠标指向",
+   "noteEn": "Judges the enemy under your mouse, or your target. With Seal of Fury up, that taunts it. With Shift it first uses Swift Judgement, which finishes Judgement's cooldown, so you can judge again right away.",
+   "note": "审判鼠标指向 / 目标，有愤怒圣印就是嘲讽；Shift 先迅捷审判刷冷却",
+   "bodyTemplate": "#showtooltip {{20271}}\\n/cast [mod:shift] {{1310994}}\\n/cast [@mouseover,harm,nodead][] {{20271}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    20271,
+    1310994
+   ],
+   "spellIdsInBody": [
+    20271,
+    1310994,
+    20271
+   ],
+   "bodyBakedByAddon": "#showtooltip 审判\\n/cast [mod:shift] 迅捷审判\\n/cast [@mouseover,harm,nodead][] 审判"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-consecration",
+   "no": 16,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Consecration with auto-attack",
+   "title": "奉献 + 自动攻击",
+   "noteEn": "Starts your auto-attack on your target and casts Consecration on the ground under you.",
+   "note": "对目标开自动攻击，脚下放奉献",
+   "bodyTemplate": "#showtooltip {{26573}}\\n/startattack\\n/cast {{26573}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    26573
+   ],
+   "spellIdsInBody": [
+    26573,
+    26573
+   ],
+   "bodyBakedByAddon": "#showtooltip 奉献\\n/startattack\\n/cast 奉献"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-exorcism",
+   "no": 17,
+   "group": "圣印、审判与输出",
+   "groupEn": "Seals, Judgement and damage",
+   "titleEn": "Exorcism, Shift for Turn Undead",
+   "title": "驱邪术，Shift 超度亡灵",
+   "noteEn": "Exorcism on the enemy under your mouse or your target; with Shift, Turn Undead instead.",
+   "note": "驱邪鼠标指向 / 目标；Shift 改超度亡灵",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] {{2878}}; [@mouseover,harm,nodead][] {{879}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    2878,
+    879
+   ],
+   "spellIdsInBody": [
+    2878,
+    879
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] 超度亡灵; [@mouseover,harm,nodead][] 驱邪术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-hammer-of-justice",
+   "no": 18,
+   "group": "控制与保命",
+   "groupEn": "Stuns and survival",
+   "titleEn": "Hammer of Justice your focus, mouseover or target",
+   "title": "制裁之锤焦点 / 鼠标指向 / 目标",
+   "noteEn": "Stops your own cast, then stuns your focus, or the enemy under your mouse, or your target.",
+   "note": "打断自己的读条，锤焦点，没有就锤鼠标指向，再没有就锤目标",
+   "bodyTemplate": "#showtooltip {{853}}\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{853}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    853
+   ],
+   "spellIdsInBody": [
+    853,
+    853
+   ],
+   "bodyBakedByAddon": "#showtooltip 制裁之锤\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 制裁之锤"
+  },
+  {
+   "cls": "Paladin",
+   "key": "paladin-divine-protection",
+   "no": 19,
+   "group": "控制与保命",
+   "groupEn": "Stuns and survival",
+   "titleEn": "Divine Protection, Shift to cancel it",
+   "title": "圣佑术，Shift 取消无敌",
+   "noteEn": "Stops your cast and puts up Divine Protection (or Divine Shield once you've learned it). With Shift held it removes the bubble instead.",
+   "note": "打断读条开圣佑术（学了圣盾术就是圣盾）；Shift 取消无敌",
+   "bodyTemplate": "#showtooltip\\n/stopcasting\\n/cancelaura [mod:shift] {{498}}\\n/cancelaura [mod:shift] {{642}}\\n/cast [nomod] {{642}}\\n/cast [nomod] {{498}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    642,
+    498
+   ],
+   "spellIdsInBody": [
+    498,
+    642,
+    642,
+    498
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/stopcasting\\n/cancelaura [mod:shift] 圣佑术\\n/cancelaura [mod:shift] 圣盾术\\n/cast [nomod] 圣盾术\\n/cast [nomod] 圣佑术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "cwf-paladin-0",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Holy Strike and auto attack",
+   "title": "神圣打击 + 自动攻击",
+   "noteEn": "The baseline strike without turning auto attack off.",
+   "note": "《无限》新的基础打击，不会关掉自动攻击",
+   "bodyTemplate": "#showtooltip {{679}}\\n/startattack\\n/cast {{679}}",
+   "foreverNew": true,
+   "level": 6,
+   "spellIds": [
+    679
+   ],
+   "spellIdsInBody": [
+    679,
+    679
+   ],
+   "bodyBakedByAddon": "#showtooltip 神圣打击\\n/startattack\\n/cast 神圣打击"
+  },
+  {
+   "cls": "Paladin",
+   "key": "cwf-paladin-1",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Blessing of Protection",
+   "title": "保护祝福（鼠标指向）",
+   "noteEn": "Mouseover, friendly target or target's target; Alt = Divine Protection.",
+   "note": "给鼠标指向 / 友方目标 / 目标的目标上保护祝福；按住 Alt 给自己圣佑术",
+   "bodyTemplate": "#showtooltip [mod:alt] {{498}}; {{1022}}\\n/cast [mod:alt] {{498}}; [@mouseover,help,nodead][help,nodead][@targettarget,help,nodead] {{1022}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    498,
+    1022
+   ],
+   "spellIdsInBody": [
+    498,
+    1022,
+    498,
+    1022
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:alt] 圣佑术; 保护祝福\\n/cast [mod:alt] 圣佑术; [@mouseover,help,nodead][help,nodead][@targettarget,help,nodead] 保护祝福"
+  },
+  {
+   "cls": "Paladin",
+   "key": "cwf-paladin-4",
+   "no": 22,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Resistance auras on one button",
+   "title": "抗性光环一键",
+   "noteEn": "Fire; Shift Frost, Ctrl Shadow.",
+   "note": "默认火焰抗性光环，Shift 冰霜，Ctrl 暗影",
+   "bodyTemplate": "#showtooltip [mod:shift] {{19888}}; [mod:ctrl] {{19876}}; {{19891}}\\n/cast [mod:shift] {{19888}}; [mod:ctrl] {{19876}}; {{19891}}",
+   "foreverNew": false,
+   "level": 36,
+   "spellIds": [
+    19888,
+    19876,
+    19891
+   ],
+   "spellIdsInBody": [
+    19888,
+    19876,
+    19891,
+    19888,
+    19876,
+    19891
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 冰霜抗性光环; [mod:ctrl] 暗影抗性光环; 火焰抗性光环\\n/cast [mod:shift] 冰霜抗性光环; [mod:ctrl] 暗影抗性光环; 火焰抗性光环"
+  },
+  {
+   "cls": "Paladin",
+   "key": "cwf-paladin-6",
+   "no": 23,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Divine Shield, and drop it early",
+   "title": "圣盾术（再按取消）",
+   "noteEn": "Bubble, or cancel your protection buffs.",
+   "note": "开圣盾术；已有保护类效果时先取消",
+   "bodyTemplate": "#showtooltip {{642}}\\n/cancelaura {{642}}\\n/cancelaura {{498}}\\n/cancelaura {{1022}}\\n/cast {{642}}",
+   "foreverNew": false,
+   "level": 34,
+   "spellIds": [
+    642,
+    498,
+    1022
+   ],
+   "spellIdsInBody": [
+    642,
+    642,
+    498,
+    1022,
+    642
+   ],
+   "bodyBakedByAddon": "#showtooltip 圣盾术\\n/cancelaura 圣盾术\\n/cancelaura 圣佑术\\n/cancelaura 保护祝福\\n/cast 圣盾术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "dy-paladin-0",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Righteous Fury on, Alt off",
+   "title": "正义之怒（Alt 取消）",
+   "noteEn": "Turns Righteous Fury on; hold Alt to cancel it.",
+   "note": "裸按开正义之怒，按住 Alt 取消",
+   "bodyTemplate": "#showtooltip {{25780}}\\n/cancelaura [mod:alt] {{25780}}\\n/cast [nomod:alt] {{25780}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    25780
+   ],
+   "spellIdsInBody": [
+    25780,
+    25780,
+    25780
+   ],
+   "bodyBakedByAddon": "#showtooltip 正义之怒\\n/cancelaura [mod:alt] 正义之怒\\n/cast [nomod:alt] 正义之怒"
+  },
+  {
+   "cls": "Paladin",
+   "key": "dy-paladin-1",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Cleanse on mouseover",
+   "title": "清洁术（鼠标指向）",
+   "noteEn": "Cleanse whoever is under the mouse.",
+   "note": "解中毒、疾病、魔法，鼠标指谁解谁",
+   "bodyTemplate": "#showtooltip {{4987}}\\n/cast [@mouseover,help,nodead][] {{4987}}",
+   "foreverNew": false,
+   "level": 42,
+   "spellIds": [
+    4987
+   ],
+   "spellIdsInBody": [
+    4987,
+    4987
+   ],
+   "bodyBakedByAddon": "#showtooltip 清洁术\\n/cast [@mouseover,help,nodead][] 清洁术"
+  },
+  {
+   "cls": "Paladin",
+   "key": "dy-paladin-2",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Blessing of Sacrifice, Shift Freedom on yourself",
+   "title": "牺牲祝福，Shift 自由祝福",
+   "noteEn": "Blessing of Sacrifice on your target; Shift for Blessing of Freedom on mouseover or yourself.",
+   "note": "裸按牺牲祝福；按住 Shift 自由祝福（鼠标指向，没有就给自己解定身）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] {{1044}}; {{6940}}",
+   "foreverNew": false,
+   "level": 46,
+   "spellIds": [
+    6940,
+    1044
+   ],
+   "spellIdsInBody": [
+    1044,
+    6940
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] 自由祝福; 牺牲祝福"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-pet-attack-mark",
+   "no": 1,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Send your pet in and mark the target",
+   "title": "宠物进攻 + 猎人印记",
+   "noteEn": "Sends your pet at your target and puts Hunter's Mark on it in the same press.",
+   "note": "让宠物攻击目标，同一下打上猎人印记",
+   "bodyTemplate": "#showtooltip {{1130}}\\n/petattack\\n/cast {{1130}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    1130
+   ],
+   "spellIdsInBody": [
+    1130,
+    1130
+   ],
+   "bodyBakedByAddon": "#showtooltip 猎人印记\\n/petattack\\n/cast 猎人印记"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-pet-attack-follow",
+   "no": 2,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Pet attack, follow or stay on one key",
+   "title": "宠物攻击 / 跟随 / 停留",
+   "noteEn": "Sends your pet at the enemy under your mouse, or at your target. With Shift it comes back to you; with Ctrl it stays where it is.",
+   "note": "宠物攻击鼠标指向或目标；Shift 叫回来，Ctrl 原地停留",
+   "bodyTemplate": "/petfollow [mod:shift]\\n/petstay [mod:ctrl]\\n/petattack [nomod,@mouseover,harm,nodead][nomod]",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "/petfollow [mod:shift]\\n/petstay [mod:ctrl]\\n/petattack [nomod,@mouseover,harm,nodead][nomod]"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-pet-stance",
+   "no": 3,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Pet defensive, passive or aggressive",
+   "title": "宠物防御 / 被动 / 主动",
+   "noteEn": "Sets your pet to defensive. With Shift it goes passive, with Ctrl aggressive.",
+   "note": "默认防御，Shift 被动，Ctrl 主动",
+   "bodyTemplate": "/petpassive [mod:shift]\\n/petaggressive [mod:ctrl]\\n/petdefensive [nomod]",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "/petpassive [mod:shift]\\n/petaggressive [mod:ctrl]\\n/petdefensive [nomod]"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-growl-toggle",
+   "no": 4,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Turn Growl on or off",
+   "title": "低吼自动施放开关",
+   "noteEn": "Switches your pet's Growl autocast on or off. The Growl button on your pet bar glows while autocast is on.",
+   "note": "切换宠物低吼的自动施放，开着时宠物栏按钮会发光",
+   "bodyTemplate": "#showtooltip {{1853}}\\n/petautocasttoggle Growl",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1853
+   ],
+   "spellIdsInBody": [
+    1853
+   ],
+   "bodyBakedByAddon": "#showtooltip 低吼\\n/petautocasttoggle Growl"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-pet-call-mend-revive",
+   "no": 5,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Call, heal or revive your pet",
+   "title": "召唤 / 治疗 / 复活宠物",
+   "noteEn": "Calls your pet when it isn't out, and heals it with Mend Pet when it is. With Shift it casts Revive Pet.",
+   "note": "宠物不在就召唤，在就治疗宠物；Shift 复活宠物",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{982}}; [nopet] {{883}}; {{136}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    883,
+    982,
+    136
+   ],
+   "spellIdsInBody": [
+    982,
+    883,
+    136
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 复活宠物; [nopet] 召唤宠物; 治疗宠物"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-intimidation",
+   "no": 6,
+   "group": "宠物",
+   "groupEn": "Your pet",
+   "titleEn": "Intimidation with your pet's attack",
+   "title": "胁迫 + 宠物进攻",
+   "noteEn": "Sends your pet at your target and casts Intimidation, so its next successful attack stuns the enemy.",
+   "note": "让宠物攻击目标并开胁迫，宠物下一下命中会晕住敌人",
+   "bodyTemplate": "#showtooltip {{19577}}\\n/petattack\\n/cast {{19577}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    19577
+   ],
+   "spellIdsInBody": [
+    19577,
+    19577
+   ],
+   "bodyBakedByAddon": "#showtooltip 胁迫\\n/petattack\\n/cast 胁迫"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-auto-shot-start",
+   "no": 7,
+   "group": "射击与爆发",
+   "groupEn": "Shots and cooldowns",
+   "titleEn": "Start Auto Shot and send the pet",
+   "title": "自动射击 + 宠物进攻",
+   "noteEn": "Sends your pet at your target and starts Auto Shot. Pressing it again doesn't stop your shots (the ! stops it toggling off).",
+   "note": "宠物攻击目标并开自动射击；连按不会把射击关掉",
+   "bodyTemplate": "#showtooltip {{75}}\\n/petattack\\n/cast !{{75}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    75
+   ],
+   "spellIdsInBody": [
+    75,
+    75
+   ],
+   "bodyBakedByAddon": "#showtooltip 自动射击\\n/petattack\\n/cast !自动射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-concussive-shot",
+   "no": 8,
+   "group": "射击与爆发",
+   "groupEn": "Shots and cooldowns",
+   "titleEn": "Concussive Shot on your mouseover",
+   "title": "震荡射击鼠标指向",
+   "noteEn": "Slows the enemy under your mouse with Concussive Shot, or your target if you're not pointing at one.",
+   "note": "震荡射击减速鼠标指向的敌人，没指着就打目标",
+   "bodyTemplate": "#showtooltip {{5116}}\\n/cast [@mouseover,harm,nodead][] {{5116}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    5116
+   ],
+   "spellIdsInBody": [
+    5116,
+    5116
+   ],
+   "bodyBakedByAddon": "#showtooltip 震荡射击\\n/cast [@mouseover,harm,nodead][] 震荡射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-distracting-shot",
+   "no": 9,
+   "group": "射击与爆发",
+   "groupEn": "Shots and cooldowns",
+   "titleEn": "Pull an enemy off the healer",
+   "title": "把怪从治疗身上拉走",
+   "noteEn": "Sends your pet at the enemy under your mouse and hits it with Distracting Shot, which only causes threat. Without a mouseover it uses your target.",
+   "note": "宠物去打鼠标指向的怪，同时扰乱射击（只拉仇恨）；没指着就用目标",
+   "bodyTemplate": "#showtooltip {{20736}}\\n/petattack [@mouseover,harm,nodead][]\\n/cast [@mouseover,harm,nodead][] {{20736}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    20736
+   ],
+   "spellIdsInBody": [
+    20736,
+    20736
+   ],
+   "bodyBakedByAddon": "#showtooltip 扰乱射击\\n/petattack [@mouseover,harm,nodead][]\\n/cast [@mouseover,harm,nodead][] 扰乱射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-aimed-multi",
+   "no": 10,
+   "group": "射击与爆发",
+   "groupEn": "Shots and cooldowns",
+   "titleEn": "Aimed Shot, or Multi-Shot with Shift",
+   "title": "瞄准射击，Shift 多重射击",
+   "noteEn": "Casts Aimed Shot, or Multi-Shot while you hold Shift.",
+   "note": "默认瞄准射击，按住 Shift 多重射击",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{2643}}; {{19434}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    19434,
+    2643
+   ],
+   "spellIdsInBody": [
+    2643,
+    19434
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 多重射击; 瞄准射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-burst",
+   "no": 11,
+   "group": "射击与爆发",
+   "groupEn": "Shots and cooldowns",
+   "titleEn": "Rapid Fire with your trinkets and Bestial Wrath",
+   "title": "急速射击 + 狂野怒火 + 饰品",
+   "noteEn": "Casts Rapid Fire, Bestial Wrath if you have the talent, and the Use effects of both trinkets, all in one press.",
+   "note": "急速射击、狂野怒火（有天赋时）、两个饰品一键全开",
+   "bodyTemplate": "#showtooltip {{3045}}\\n/cast {{3045}}\\n/cast {{19574}}\\n/use 13\\n/use 14",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    3045,
+    19574
+   ],
+   "spellIdsInBody": [
+    3045,
+    3045,
+    19574
+   ],
+   "bodyBakedByAddon": "#showtooltip 急速射击\\n/cast 急速射击\\n/cast 狂野怒火\\n/use 13\\n/use 14"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-raptor-mongoose",
+   "no": 12,
+   "group": "近战与保命",
+   "groupEn": "Melee and staying alive",
+   "titleEn": "Melee: Raptor Strike and Mongoose Bite",
+   "title": "近战：猛禽一击 + 猫鼬撕咬",
+   "noteEn": "Starts your melee attack, uses Mongoose Bite if you've just dodged, and makes your next swing a Raptor Strike.",
+   "note": "开近战攻击，刚闪避就猫鼬撕咬，下一刀猛禽一击",
+   "bodyTemplate": "#showtooltip {{2973}}\\n/startattack\\n/cast {{1495}}\\n/cast {{2973}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    2973,
+    1495
+   ],
+   "spellIdsInBody": [
+    2973,
+    1495,
+    2973
+   ],
+   "bodyBakedByAddon": "#showtooltip 猛禽一击\\n/startattack\\n/cast 猫鼬撕咬\\n/cast 猛禽一击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-deterrence-monkey",
+   "no": 13,
+   "group": "近战与保命",
+   "groupEn": "Melee and staying alive",
+   "titleEn": "Deterrence and Aspect of the Monkey",
+   "title": "威慑 + 灵猴守护",
+   "noteEn": "Casts Deterrence, which adds 25% dodge and parry for 10 sec, and switches you to Aspect of the Monkey for 8% more dodge.",
+   "note": "开威慑（躲闪招架 +25%，10 秒），同时切灵猴守护",
+   "bodyTemplate": "#showtooltip {{19263}}\\n/cast {{19263}}\\n/cast !{{13163}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    19263,
+    13163
+   ],
+   "spellIdsInBody": [
+    19263,
+    19263,
+    13163
+   ],
+   "bodyBakedByAddon": "#showtooltip 威慑\\n/cast 威慑\\n/cast !灵猴守护"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-aspects",
+   "no": 14,
+   "group": "守护、陷阱与控制",
+   "groupEn": "Aspects, traps and crowd control",
+   "titleEn": "Hawk, Monkey or Cheetah on one key",
+   "title": "守护一键（雄鹰 / 猎豹 / 灵猴）",
+   "noteEn": "Casts Aspect of the Hawk, Aspect of the Cheetah with Shift, or Aspect of the Monkey with Ctrl. Pressing it again never turns the current aspect off.",
+   "note": "默认雄鹰守护，Shift 猎豹，Ctrl 灵猴；连按不会关掉",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] !{{5118}}; [mod:ctrl] !{{13163}}; !{{13165}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    13165,
+    5118,
+    13163
+   ],
+   "spellIdsInBody": [
+    5118,
+    13163,
+    13165
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] !猎豹守护; [mod:ctrl] !灵猴守护; !雄鹰守护"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-scare-beast",
+   "no": 15,
+   "group": "守护、陷阱与控制",
+   "groupEn": "Aspects, traps and crowd control",
+   "titleEn": "Scare Beast on your focus or mouseover",
+   "title": "恐吓野兽焦点 / 鼠标指向",
+   "noteEn": "Casts Scare Beast on your focus if it's a living enemy, otherwise on the enemy under your mouse, otherwise on your target.",
+   "note": "先对焦点放，没有就鼠标指向，再没有就目标",
+   "bodyTemplate": "#showtooltip {{1513}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{1513}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    1513
+   ],
+   "spellIdsInBody": [
+    1513,
+    1513
+   ],
+   "bodyBakedByAddon": "#showtooltip 恐吓野兽\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 恐吓野兽"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-traps",
+   "no": 16,
+   "group": "守护、陷阱与控制",
+   "groupEn": "Aspects, traps and crowd control",
+   "titleEn": "Every trap on one key",
+   "title": "陷阱一键",
+   "noteEn": "Places a Freezing Trap, or an Immolation Trap with Shift, or a Frost Trap with Ctrl.",
+   "note": "默认冰冻陷阱，Shift 献祭陷阱，Ctrl 冰霜陷阱",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{13795}}; [mod:ctrl] {{13809}}; {{1499}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1499,
+    13795,
+    13809
+   ],
+   "spellIdsInBody": [
+    13795,
+    13809,
+    1499
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 献祭陷阱; [mod:ctrl] 冰霜陷阱; 冰冻陷阱"
+  },
+  {
+   "cls": "Hunter",
+   "key": "hunter-feign-death",
+   "no": 17,
+   "group": "守护、陷阱与控制",
+   "groupEn": "Aspects, traps and crowd control",
+   "titleEn": "Feign Death cleanly",
+   "title": "干净假死",
+   "noteEn": "Stops your attacks, calls your pet back and casts Feign Death.",
+   "note": "停攻击、叫回宠物、假死，一键完成",
+   "bodyTemplate": "#showtooltip {{5384}}\\n/stopattack\\n/petfollow\\n/cast {{5384}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    5384
+   ],
+   "spellIdsInBody": [
+    5384,
+    5384
+   ],
+   "bodyBakedByAddon": "#showtooltip 假死\\n/stopattack\\n/petfollow\\n/cast 假死"
+  },
+  {
+   "cls": "Hunter",
+   "key": "cwf-hunter-1",
+   "no": 18,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mend your pet",
+   "title": "治疗宠物（不换目标）",
+   "noteEn": "Heal the pet while keeping your enemy targeted.",
+   "note": "不切目标直接治疗宠物",
+   "bodyTemplate": "#showtooltip {{136}}\\n/cast [@pet,exists,nodead] {{136}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    136
+   ],
+   "spellIdsInBody": [
+    136,
+    136
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗宠物\\n/cast [@pet,exists,nodead] 治疗宠物"
+  },
+  {
+   "cls": "Hunter",
+   "key": "cwf-hunter-5",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Aspect of the Hawk after Cheetah",
+   "title": "雄鹰守护（顺手取消猎豹）",
+   "noteEn": "Drop Cheetah and go Hawk.",
+   "note": "取消猎豹守护，切雄鹰守护",
+   "bodyTemplate": "#showtooltip {{13165}}\\n/cancelaura {{5118}}\\n/cast !{{13165}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    13165,
+    5118
+   ],
+   "spellIdsInBody": [
+    13165,
+    5118,
+    13165
+   ],
+   "bodyBakedByAddon": "#showtooltip 雄鹰守护\\n/cancelaura 猎豹守护\\n/cast !雄鹰守护"
+  },
+  {
+   "cls": "Hunter",
+   "key": "cwf-hunter-6",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Cheetah, or Pack on right-click",
+   "title": "猎豹守护 / 右键豹群",
+   "noteEn": "Left Cheetah, right-click Pack.",
+   "note": "左键猎豹守护，右键豹群守护（40 级起）",
+   "bodyTemplate": "#showtooltip {{5118}}\\n/cast [button:2] !{{13159}}; !{{5118}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    5118,
+    13159
+   ],
+   "spellIdsInBody": [
+    5118,
+    13159,
+    5118
+   ],
+   "bodyBakedByAddon": "#showtooltip 猎豹守护\\n/cast [button:2] !豹群守护; !猎豹守护"
+  },
+  {
+   "cls": "Hunter",
+   "key": "cwf-hunter-7",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Tracking on one button",
+   "title": "追踪一键",
+   "noteEn": "Humanoids; Shift Beasts, Ctrl Undead, Alt Hidden.",
+   "note": "默认追踪人型，Shift 野兽，Ctrl 亡灵，Alt 隐藏生物",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{1494}}; [mod:ctrl] {{19884}}; [mod:alt] {{19885}}; {{19883}}",
+   "foreverNew": false,
+   "level": 24,
+   "spellIds": [
+    19883,
+    1494,
+    19885,
+    19884
+   ],
+   "spellIdsInBody": [
+    1494,
+    19884,
+    19885,
+    19883
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 追踪野兽; [mod:ctrl] 追踪亡灵; [mod:alt] 追踪隐藏生物; 追踪人型生物"
+  },
+  {
+   "cls": "Hunter",
+   "key": "dy-hunter-0",
+   "no": 22,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Serpent Sting, Shift Scorpid Sting",
+   "title": "毒蛇钉刺，Shift 毒蝎钉刺",
+   "noteEn": "Serpent Sting by default; Shift for Scorpid Sting on high-armour targets.",
+   "note": "裸按毒蛇钉刺，按住 Shift 毒蝎钉刺",
+   "bodyTemplate": "#showtooltip {{1978}}\\n/cast [mod:shift] {{3043}}; {{1978}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    1978,
+    3043
+   ],
+   "spellIdsInBody": [
+    1978,
+    3043,
+    1978
+   ],
+   "bodyBakedByAddon": "#showtooltip 毒蛇钉刺\\n/cast [mod:shift] 毒蝎钉刺; 毒蛇钉刺"
+  },
+  {
+   "cls": "Hunter",
+   "key": "dy-hunter-1",
+   "no": 23,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Arcane Shot, Shift Multi-Shot, auto shot stays on",
+   "title": "奥术射击，Shift 多重射击（不断自动射击）",
+   "noteEn": "Keeps Auto Shot running (the ! stops a second press turning it off), then Arcane Shot or Multi-Shot.",
+   "note": "先保证自动射击在打（带 ! 连按不会关掉），再出奥术射击；按住 Shift 多重射击",
+   "bodyTemplate": "#showtooltip\\n/cast !{{75}}\\n/cast [mod:shift] {{2643}}; {{3044}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    75,
+    3044,
+    2643
+   ],
+   "spellIdsInBody": [
+    75,
+    2643,
+    3044
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast !自动射击\\n/cast [mod:shift] 多重射击; 奥术射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "dy-hunter-2",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Opener: Mark, Serpent Sting, Arcane Shot",
+   "title": "起手三连（印记→毒蛇→奥术）",
+   "noteEn": "Press it three times on a new target: Hunter's Mark, Serpent Sting, Arcane Shot. Resets on a new target.",
+   "note": "新目标连按三下：猎人印记 → 毒蛇钉刺 → 奥术射击；换目标自动从头来",
+   "bodyTemplate": "#showtooltip\\n/petattack\\n/castsequence reset=target {{1130}}, {{1978}}, {{3044}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    1130,
+    1978,
+    3044
+   ],
+   "spellIdsInBody": [
+    1130,
+    1978,
+    3044
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/petattack\\n/castsequence reset=target 猎人印记, 毒蛇钉刺, 奥术射击"
+  },
+  {
+   "cls": "Hunter",
+   "key": "dy-hunter-3",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Tag mobs: nearest enemy, pet in, shoot",
+   "title": "抢怪：自动锁最近的怪并开火",
+   "noteEn": "Dismounts, targets the nearest live enemy if you have none, sends the pet and opens with Arcane Shot - first damage claims the mob.",
+   "note": "下马、没目标或目标死了就锁最近的活怪、宠物先上、自动射击 + 奥术射击；谁先打出伤害怪归谁",
+   "bodyTemplate": "#showtooltip {{3044}}\\n/dismount\\n/targetenemy [noharm][dead]\\n/petattack\\n/cast !{{75}}\\n/cast {{3044}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    3044,
+    75
+   ],
+   "spellIdsInBody": [
+    3044,
+    75,
+    3044
+   ],
+   "bodyBakedByAddon": "#showtooltip 奥术射击\\n/dismount\\n/targetenemy [noharm][dead]\\n/petattack\\n/cast !自动射击\\n/cast 奥术射击"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-stealth-opener",
+   "no": 1,
+   "group": "潜行与起手",
+   "groupEn": "Stealth and openers",
+   "titleEn": "Stealth opener, Sinister Strike out of Stealth",
+   "title": "潜行起手，平时邪恶攻击",
+   "noteEn": "In Stealth it opens with Ambush, or Garrote with Ctrl, or Cheap Shot with Shift. Out of Stealth the same key is Sinister Strike and starts your auto-attack.",
+   "note": "潜行中伏击（Ctrl 绞喉 / Shift 偷袭）；不潜行时是邪恶攻击",
+   "bodyTemplate": "#showtooltip\\n/cast [stealth,mod:shift] {{1833}}; [stealth,mod:ctrl] {{703}}; [stealth] {{8676}}; {{1752}}\\n/startattack [nostealth]",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    8676,
+    1752,
+    1833,
+    703
+   ],
+   "spellIdsInBody": [
+    1833,
+    703,
+    8676,
+    1752
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [stealth,mod:shift] 偷袭; [stealth,mod:ctrl] 绞喉; [stealth] 伏击; 邪恶攻击\\n/startattack [nostealth]"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-pick-pocket-opener",
+   "no": 2,
+   "group": "潜行与起手",
+   "groupEn": "Stealth and openers",
+   "titleEn": "Pick Pocket, then open",
+   "title": "先搜索再起手",
+   "noteEn": "In Stealth it picks your target's pocket and then Ambushes it. Out of Stealth it's Sinister Strike.",
+   "note": "潜行中先搜目标口袋再伏击；不潜行时是邪恶攻击",
+   "bodyTemplate": "#showtooltip\\n/cast [stealth] {{921}}\\n/cast [stealth] {{8676}}; {{1752}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    921,
+    1752,
+    8676
+   ],
+   "spellIdsInBody": [
+    921,
+    8676,
+    1752
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [stealth] 搜索\\n/cast [stealth] 伏击; 邪恶攻击"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-premeditation-opener",
+   "no": 3,
+   "group": "潜行与起手",
+   "groupEn": "Stealth and openers",
+   "titleEn": "Premeditation, then open",
+   "title": "预谋 + 伏击",
+   "noteEn": "In Stealth it uses Premeditation for 2 free combo points and Ambushes on the same press. Out of Stealth it's Sinister Strike and leaves Premeditation alone.",
+   "note": "潜行中开预谋拿 2 星再伏击；不潜行时是邪恶攻击",
+   "bodyTemplate": "#showtooltip\\n/cast [stealth] {{14183}}\\n/cast [stealth] {{8676}}; {{1752}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    14183,
+    1752,
+    8676
+   ],
+   "spellIdsInBody": [
+    14183,
+    8676,
+    1752
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [stealth] 预谋\\n/cast [stealth] 伏击; 邪恶攻击"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-stealth-no-toggle",
+   "no": 4,
+   "group": "潜行与起手",
+   "groupEn": "Stealth and openers",
+   "titleEn": "Stealth that never switches itself off",
+   "title": "潜行（连按不会退出）",
+   "noteEn": "Enters Stealth. Pressing it again while stealthed does nothing, instead of taking you out of Stealth.",
+   "note": "进入潜行；已经潜行时再按不会把你带出潜行",
+   "bodyTemplate": "#showtooltip {{1784}}\\n/cast !{{1784}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1784
+   ],
+   "spellIdsInBody": [
+    1784,
+    1784
+   ],
+   "bodyBakedByAddon": "#showtooltip 潜行\\n/cast !潜行"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-sap",
+   "no": 5,
+   "group": "闷棍、脚踢与凿击",
+   "groupEn": "Sap, Kick, Blind and Gouge",
+   "titleEn": "Sap your mouseover or focus, Stealth first",
+   "title": "闷棍鼠标指向 / 焦点，先潜行",
+   "noteEn": "Out of Stealth it puts you in Stealth. In Stealth it Saps the enemy under your mouse, or your focus, or your target.",
+   "note": "不潜行时先潜行；潜行中闷棍鼠标指向，没有就焦点或目标",
+   "bodyTemplate": "#showtooltip {{6770}}\\n/cast [nostealth] !{{1784}}; [@mouseover,harm,nodead][@focus,harm,nodead][] {{6770}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6770,
+    1784
+   ],
+   "spellIdsInBody": [
+    6770,
+    1784,
+    6770
+   ],
+   "bodyBakedByAddon": "#showtooltip 闷棍\\n/cast [nostealth] !潜行; [@mouseover,harm,nodead][@focus,harm,nodead][] 闷棍"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-kick-focus",
+   "no": 6,
+   "group": "闷棍、脚踢与凿击",
+   "groupEn": "Sap, Kick, Blind and Gouge",
+   "titleEn": "Kick your focus, mouseover or target",
+   "title": "脚踢焦点 / 鼠标指向 / 目标",
+   "noteEn": "Kicks your focus if it's a living enemy; otherwise the enemy under your mouse; otherwise your target.",
+   "note": "先踢焦点，没有就踢鼠标指向，再没有就踢目标",
+   "bodyTemplate": "#showtooltip {{1766}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{1766}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    1766
+   ],
+   "spellIdsInBody": [
+    1766,
+    1766
+   ],
+   "bodyBakedByAddon": "#showtooltip 脚踢\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 脚踢"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-gouge-backstab",
+   "no": 7,
+   "group": "闷棍、脚踢与凿击",
+   "groupEn": "Sap, Kick, Blind and Gouge",
+   "titleEn": "Gouge, then Backstab",
+   "title": "凿击后背刺",
+   "noteEn": "The first press Gouges your target. The next press Backstabs it once you're behind it.",
+   "note": "第一下凿击，绕到背后再按就背刺",
+   "bodyTemplate": "#showtooltip\\n/castsequence reset=target/5 {{1776}}, {{53}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    1776,
+    53
+   ],
+   "spellIdsInBody": [
+    1776,
+    53
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence reset=target/5 凿击, 背刺"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-distract-cursor",
+   "no": 8,
+   "group": "闷棍、脚踢与凿击",
+   "groupEn": "Sap, Kick, Blind and Gouge",
+   "titleEn": "Distract at your cursor",
+   "title": "扰乱放到鼠标位置",
+   "noteEn": "Throws Distract where your mouse points, with no targeting circle.",
+   "note": "扰乱直接丢在鼠标指的地方，不用再点选位置",
+   "bodyTemplate": "#showtooltip {{1725}}\\n/cast [@cursor] {{1725}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    1725
+   ],
+   "spellIdsInBody": [
+    1725,
+    1725
+   ],
+   "bodyBakedByAddon": "#showtooltip 扰乱\\n/cast [@cursor] 扰乱"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-vanish",
+   "no": 9,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Vanish, stopping your attack first",
+   "title": "消失（先停攻击）",
+   "noteEn": "Turns off your auto-attack and Vanishes.",
+   "note": "关掉自动攻击再消失，防止一出来就被打回原形",
+   "bodyTemplate": "#showtooltip {{1856}}\\n/stopattack\\n/cast {{1856}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    1856
+   ],
+   "spellIdsInBody": [
+    1856,
+    1856
+   ],
+   "bodyBakedByAddon": "#showtooltip 消失\\n/stopattack\\n/cast 消失"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-escape-key",
+   "no": 10,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Evasion, Shift for Sprint, Ctrl for Vanish",
+   "title": "闪避，Shift 疾跑，Ctrl 消失",
+   "noteEn": "Casts Evasion; with Shift, Sprint; with Ctrl, stops your attack and Vanishes.",
+   "note": "默认闪避，Shift 疾跑，Ctrl 停攻击并消失",
+   "bodyTemplate": "#showtooltip\\n/stopattack [mod:ctrl]\\n/cast [mod:shift] {{2983}}; [mod:ctrl] {{1856}}; {{5277}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    5277,
+    2983,
+    1856
+   ],
+   "spellIdsInBody": [
+    2983,
+    1856,
+    5277
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/stopattack [mod:ctrl]\\n/cast [mod:shift] 疾跑; [mod:ctrl] 消失; 闪避"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-feint-mouseover",
+   "no": 11,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Feint on your mouseover or target",
+   "title": "佯攻鼠标指向或目标",
+   "noteEn": "Uses Feint on the enemy under your mouse, or on your target.",
+   "note": "对鼠标指向的敌人佯攻，没指着就对目标",
+   "bodyTemplate": "#showtooltip {{1966}}\\n/cast [@mouseover,harm,nodead][] {{1966}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    1966
+   ],
+   "spellIdsInBody": [
+    1966,
+    1966
+   ],
+   "bodyBakedByAddon": "#showtooltip 佯攻\\n/cast [@mouseover,harm,nodead][] 佯攻"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-finishers",
+   "no": 12,
+   "group": "终结技与爆发",
+   "groupEn": "Finishers, poisons and cooldowns",
+   "titleEn": "Every finisher on one key",
+   "title": "终结技一键",
+   "noteEn": "Eviscerate on its own, Slice and Dice with Shift, Rupture with Ctrl and Expose Armor with Alt.",
+   "note": "默认刺骨，Shift 切割，Ctrl 割裂，Alt 破甲",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{5171}}; [mod:ctrl] {{1943}}; [mod:alt] {{8647}}; {{2098}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    2098,
+    5171,
+    8647,
+    1943
+   ],
+   "spellIdsInBody": [
+    5171,
+    1943,
+    8647,
+    2098
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 切割; [mod:ctrl] 割裂; [mod:alt] 破甲; 刺骨"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-cold-blood-eviscerate",
+   "no": 13,
+   "group": "终结技与爆发",
+   "groupEn": "Finishers, poisons and cooldowns",
+   "titleEn": "Cold Blood and Eviscerate",
+   "title": "冷血 + 刺骨",
+   "noteEn": "Activates Cold Blood and follows it with Eviscerate on the same press, so the Eviscerate is a guaranteed critical strike.",
+   "note": "开冷血再接刺骨，这一下必爆",
+   "bodyTemplate": "#showtooltip {{14177}}\\n/cast {{14177}}\\n/cast {{2098}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    14177,
+    2098
+   ],
+   "spellIdsInBody": [
+    14177,
+    14177,
+    2098
+   ],
+   "bodyBakedByAddon": "#showtooltip 冷血\\n/cast 冷血\\n/cast 刺骨"
+  },
+  {
+   "cls": "Rogue",
+   "key": "rogue-blade-flurry-trinkets",
+   "no": 14,
+   "group": "终结技与爆发",
+   "groupEn": "Finishers, poisons and cooldowns",
+   "titleEn": "Blade Flurry with both trinkets, Shift for Adrenaline Rush",
+   "title": "剑刃乱舞 + 饰品，Shift 冲动",
+   "noteEn": "Uses both trinkets and Blade Flurry. With Shift, uses both trinkets and Adrenaline Rush instead.",
+   "note": "两个饰品 + 剑刃乱舞；Shift 改成两个饰品 + 冲动",
+   "bodyTemplate": "#showtooltip\\n/use 13\\n/use 14\\n/cast [mod:shift] {{13750}}; {{13877}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    13877,
+    13750
+   ],
+   "spellIdsInBody": [
+    13750,
+    13877
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/use 13\\n/use 14\\n/cast [mod:shift] 剑刃乱舞; 冲动"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-1",
+   "no": 15,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Sap",
+   "title": "闷棍（鼠标指向）",
+   "noteEn": "Sap the hovered humanoid.",
+   "note": "闷鼠标指向的人型怪，不换主目标",
+   "bodyTemplate": "#showtooltip {{6770}}\\n/cast [@mouseover,harm,nodead][] {{6770}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6770
+   ],
+   "spellIdsInBody": [
+    6770,
+    6770
+   ],
+   "bodyBakedByAddon": "#showtooltip 闷棍\\n/cast [@mouseover,harm,nodead][] 闷棍"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-3",
+   "no": 16,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Pick Pocket",
+   "title": "搜索（鼠标指向）",
+   "noteEn": "Pick the pocket of the hovered enemy.",
+   "note": "潜行中偷鼠标指向的敌人",
+   "bodyTemplate": "#showtooltip {{921}}\\n/cast [@mouseover,harm,nodead][] {{921}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    921
+   ],
+   "spellIdsInBody": [
+    921,
+    921
+   ],
+   "bodyBakedByAddon": "#showtooltip 搜索\\n/cast [@mouseover,harm,nodead][] 搜索"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-4",
+   "no": 17,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Pick Pocket, then open from Stealth",
+   "title": "搜索 + 起手一键",
+   "noteEn": "Stealth, pick pocket, then Cheap Shot; Shift Garrote, Ctrl Ambush.",
+   "note": "一键：潜行 → 搜索 → 偷袭；Shift 绞喉，Ctrl 伏击（26 级起）",
+   "bodyTemplate": "#showtooltip [stealth,mod:shift] {{703}}; [stealth,mod:ctrl] {{8676}}; {{1833}}\\n/cast [stealth] {{921}}\\n/cast [nostealth] {{1784}}; [mod:shift] {{703}}; [mod:ctrl] {{8676}}; {{1833}}",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    703,
+    1833,
+    8676,
+    921,
+    1784
+   ],
+   "spellIdsInBody": [
+    703,
+    8676,
+    1833,
+    921,
+    1784,
+    703,
+    8676,
+    1833
+   ],
+   "bodyBakedByAddon": "#showtooltip [stealth,mod:shift] 绞喉; [stealth,mod:ctrl] 伏击; 偷袭\\n/cast [stealth] 搜索\\n/cast [nostealth] 潜行; [mod:shift] 绞喉; [mod:ctrl] 伏击; 偷袭"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-5",
+   "no": 18,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Evasion and Sprint together",
+   "title": "闪避 + 疾跑",
+   "noteEn": "Dodge and speed for emergencies.",
+   "note": "危急时一键闪避加疾跑",
+   "bodyTemplate": "#showtooltip {{5277}}\\n/cast {{5277}}\\n/cast {{2983}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    5277,
+    2983
+   ],
+   "spellIdsInBody": [
+    5277,
+    5277,
+    2983
+   ],
+   "bodyBakedByAddon": "#showtooltip 闪避\\n/cast 闪避\\n/cast 疾跑"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-6",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Use both trinkets",
+   "title": "两个饰品一起用",
+   "noteEn": "Both on-use trinkets.",
+   "note": "上下两个饰品一键同时使用",
+   "bodyTemplate": "#showtooltip\\n/use 13\\n/use 14",
+   "foreverNew": false,
+   "level": 0,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "#showtooltip\\n/use 13\\n/use 14"
+  },
+  {
+   "cls": "Rogue",
+   "key": "cwf-rogue-7",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Stealth out of combat, Vanish in it",
+   "title": "潜行 / 战斗中消失",
+   "noteEn": "Stealth out of combat, Vanish in combat.",
+   "note": "脱战潜行，战斗中消失（22 级起）",
+   "bodyTemplate": "#showtooltip [nocombat] {{1784}}; {{1856}}\\n/stopattack [combat]\\n/cast [nocombat] !{{1784}}; {{1856}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    1784,
+    1856
+   ],
+   "spellIdsInBody": [
+    1784,
+    1856,
+    1784,
+    1856
+   ],
+   "bodyBakedByAddon": "#showtooltip [nocombat] 潜行; 消失\\n/stopattack [combat]\\n/cast [nocombat] !潜行; 消失"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-0",
+   "no": 21,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Ambush in stealth, Backstab out of it",
+   "title": "潜行伏击，露头背刺",
+   "noteEn": "One button: Ambush while stealthed, Backstab otherwise (dagger, from behind).",
+   "note": "一个键认状态：潜行中伏击，露头背刺（匕首、绕背）",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast [stealth] {{8676}}; {{53}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    8676,
+    53
+   ],
+   "spellIdsInBody": [
+    8676,
+    53
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/cast [stealth] 伏击; 背刺"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-1",
+   "no": 22,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Sprint, stealthing first out of combat",
+   "title": "疾跑（脱战先潜行）",
+   "noteEn": "Out of combat it stealths first, then Sprint. Same key for chasing and travelling.",
+   "note": "脱战先开潜行再疾跑，追残血、跑图同一个键",
+   "bodyTemplate": "#showtooltip {{2983}}\\n/cast [nocombat,nostealth] {{1784}}\\n/cast {{2983}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    2983,
+    1784
+   ],
+   "spellIdsInBody": [
+    2983,
+    1784,
+    2983
+   ],
+   "bodyBakedByAddon": "#showtooltip 疾跑\\n/cast [nocombat,nostealth] 潜行\\n/cast 疾跑"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-2",
+   "no": 23,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Kick, Shift Gouge",
+   "title": "脚踢，Shift 凿击",
+   "noteEn": "Kick to interrupt; Shift for Gouge.",
+   "note": "裸按脚踢打断，按住 Shift 凿击",
+   "bodyTemplate": "#showtooltip {{1766}}\\n/cast [mod:shift] {{1776}}; {{1766}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    1766,
+    1776
+   ],
+   "spellIdsInBody": [
+    1766,
+    1776,
+    1766
+   ],
+   "bodyBakedByAddon": "#showtooltip 脚踢\\n/cast [mod:shift] 凿击; 脚踢"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-3",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Blind focus or mouseover",
+   "title": "致盲（焦点 / 鼠标指向）",
+   "noteEn": "Blinds your focus, else the enemy under the mouse, else your target.",
+   "note": "有焦点盲焦点，没焦点盲鼠标指向的，都没有盲当前目标",
+   "bodyTemplate": "#showtooltip {{2094}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{2094}}",
+   "foreverNew": false,
+   "level": 34,
+   "spellIds": [
+    2094
+   ],
+   "spellIdsInBody": [
+    2094,
+    2094
+   ],
+   "bodyBakedByAddon": "#showtooltip 致盲\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 致盲"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-4",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Hemorrhage and auto attack",
+   "title": "出血 + 自动攻击",
+   "noteEn": "Hemorrhage (Subtlety talent) without turning auto attack off.",
+   "note": "出血（敏锐天赋）顺手开自动攻击",
+   "bodyTemplate": "#showtooltip {{16511}}\\n/startattack\\n/cast {{16511}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    16511
+   ],
+   "spellIdsInBody": [
+    16511,
+    16511
+   ],
+   "bodyBakedByAddon": "#showtooltip 出血\\n/startattack\\n/cast 出血"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-5",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Pick Pocket, Alt Disarm Trap",
+   "title": "搜索，Alt 解除陷阱",
+   "noteEn": "Pick Pocket in stealth; hold Alt for Disarm Trap.",
+   "note": "潜行中偷东西；按住 Alt 顺手解除陷阱",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:alt] {{1842}}; {{921}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    921,
+    1842
+   ],
+   "spellIdsInBody": [
+    1842,
+    921
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:alt] 解除陷阱; 搜索"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-6",
+   "no": 27,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Eviscerate, Alt Kidney Shot",
+   "title": "刺骨，Alt 肾击",
+   "noteEn": "Eviscerate by default; Alt for Kidney Shot.",
+   "note": "裸按刺骨，按住 Alt 肾击",
+   "bodyTemplate": "#showtooltip [mod:alt] {{408}}; {{2098}}\\n/startattack\\n/cast [mod:alt] {{408}}; {{2098}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    408,
+    2098
+   ],
+   "spellIdsInBody": [
+    408,
+    2098,
+    408,
+    2098
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:alt] 肾击; 刺骨\\n/startattack\\n/cast [mod:alt] 肾击; 刺骨"
+  },
+  {
+   "cls": "Rogue",
+   "key": "dy-rogue-7",
+   "no": 28,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Distract out of combat, Feint in combat",
+   "title": "扰乱 / 战斗中佯攻",
+   "noteEn": "Out of combat it Distracts; in combat it Feints.",
+   "note": "脱战扰乱，战斗中自动换成佯攻",
+   "bodyTemplate": "#showtooltip [combat] {{1966}}; {{1725}}\\n/cast [combat] {{1966}}; {{1725}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    1966,
+    1725
+   ],
+   "spellIdsInBody": [
+    1966,
+    1725,
+    1966,
+    1725
+   ],
+   "bodyBakedByAddon": "#showtooltip [combat] 佯攻; 扰乱\\n/cast [combat] 佯攻; 扰乱"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-heal",
+   "no": 1,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Heal on your mouseover, Shift for Flash Heal",
+   "title": "治疗术鼠标指向，Shift 快速治疗",
+   "noteEn": "Casts Heal on the friend under your mouse, or your friendly target, or yourself. With Shift held it casts Flash Heal on the same person.",
+   "note": "给鼠标指向 / 友方目标 / 自己治疗术；Shift 改快速治疗",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{2061}}; [@mouseover,help,nodead][help,nodead][@player] {{2054}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    2061,
+    2054
+   ],
+   "spellIdsInBody": [
+    2061,
+    2054
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 快速治疗; [@mouseover,help,nodead][help,nodead][@player] 治疗术"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-lesser-heal",
+   "no": 2,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Lesser Heal on your mouseover or yourself",
+   "title": "次级治疗术鼠标指向或自己",
+   "noteEn": "Casts your highest rank of Lesser Heal on the friend under your mouse, your friendly target or you.",
+   "note": "用最高等级次级治疗术奶鼠标指向 / 友方目标 / 自己",
+   "bodyTemplate": "#showtooltip {{2050}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{2050}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    2050
+   ],
+   "spellIdsInBody": [
+    2050,
+    2050
+   ],
+   "bodyBakedByAddon": "#showtooltip 次级治疗术\\n/cast [@mouseover,help,nodead][help,nodead][@player] 次级治疗术"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-renew",
+   "no": 3,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Renew on your mouseover or yourself",
+   "title": "恢复鼠标指向或自己",
+   "noteEn": "Puts Renew on the friend under your mouse, your friendly target or you.",
+   "note": "给鼠标指向 / 友方目标 / 自己上恢复",
+   "bodyTemplate": "#showtooltip {{139}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{139}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    139
+   ],
+   "spellIdsInBody": [
+    139,
+    139
+   ],
+   "bodyBakedByAddon": "#showtooltip 恢复\\n/cast [@mouseover,help,nodead][help,nodead][@player] 恢复"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-power-word-shield",
+   "no": 4,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Power Word: Shield on your mouseover or yourself",
+   "title": "真言术：盾 鼠标指向或自己",
+   "noteEn": "Shields the friend under your mouse, your friendly target or you.",
+   "note": "给鼠标指向 / 友方目标 / 自己上盾",
+   "bodyTemplate": "#showtooltip {{17}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{17}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    17
+   ],
+   "spellIdsInBody": [
+    17,
+    17
+   ],
+   "bodyBakedByAddon": "#showtooltip 真言术：盾\\n/cast [@mouseover,help,nodead][help,nodead][@player] 真言术：盾"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-inner-focus",
+   "no": 5,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Inner Focus, then Flash Heal",
+   "title": "心灵专注 + 快速治疗",
+   "noteEn": "Uses Inner Focus, then casts Flash Heal on the friend under your mouse, your friendly target or you. Inner Focus makes that Flash Heal free and gives it 25% more critical chance.",
+   "note": "开心灵专注再快速治疗鼠标指向 / 友方目标 / 自己，不耗蓝且更容易暴击",
+   "bodyTemplate": "#showtooltip {{14751}}\\n/cast {{14751}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{2061}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    14751,
+    2061
+   ],
+   "spellIdsInBody": [
+    14751,
+    14751,
+    2061
+   ],
+   "bodyBakedByAddon": "#showtooltip 心灵专注\\n/cast 心灵专注\\n/cast [@mouseover,help,nodead][help,nodead][@player] 快速治疗"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-prayer-of-healing",
+   "no": 6,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Prayer of Healing on your mouseover's party",
+   "title": "治疗祷言（鼠标指向的小队）",
+   "noteEn": "Casts Prayer of Healing on the friend under your mouse, or your friendly target, or you. It heals that player and their party.",
+   "note": "对鼠标指向 / 友方目标 / 自己所在小队放治疗祷言",
+   "bodyTemplate": "#showtooltip {{596}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{596}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    596
+   ],
+   "spellIdsInBody": [
+    596,
+    596
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗祷言\\n/cast [@mouseover,help,nodead][help,nodead][@player] 治疗祷言"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-penance",
+   "no": 7,
+   "group": "治疗",
+   "groupEn": "Healing",
+   "titleEn": "Penance your mouseover, friend or enemy",
+   "title": "苦修鼠标指向（敌我通用）",
+   "noteEn": "Casts Penance on whoever is under your mouse: it heals a friend or hurts an enemy. With no mouseover it goes on your target.",
+   "note": "鼠标下是友方就奶、敌方就打；没指着就用目标",
+   "bodyTemplate": "#showtooltip {{402174}}\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][] {{402174}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    402174
+   ],
+   "spellIdsInBody": [
+    402174,
+    402174
+   ],
+   "bodyBakedByAddon": "#showtooltip 苦修\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][] 苦修"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-dispel-magic",
+   "no": 8,
+   "group": "驱散、增益与复活",
+   "groupEn": "Dispels, buffs and resurrection",
+   "titleEn": "Dispel Magic that helps friends and strips enemies",
+   "title": "驱散魔法（敌我通用）",
+   "noteEn": "Casts Dispel Magic on whoever is under your mouse: on a friend it removes a harmful spell, on an enemy it removes a buff. With no mouseover it goes on your target, and with no target on you.",
+   "note": "鼠标下友方驱减益、敌方驱增益；没指着就用目标",
+   "bodyTemplate": "#showtooltip {{527}}\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][help,nodead][harm,nodead][@player] {{527}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    527
+   ],
+   "spellIdsInBody": [
+    527,
+    527
+   ],
+   "bodyBakedByAddon": "#showtooltip 驱散魔法\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][help,nodead][harm,nodead][@player] 驱散魔法"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-cure-disease",
+   "no": 9,
+   "group": "驱散、增益与复活",
+   "groupEn": "Dispels, buffs and resurrection",
+   "titleEn": "Cure Disease on your mouseover or yourself",
+   "title": "祛病术鼠标指向或自己",
+   "noteEn": "Removes a disease from the friend under your mouse, your friendly target or you.",
+   "note": "驱散鼠标指向 / 友方目标 / 自己身上的疾病",
+   "bodyTemplate": "#showtooltip {{528}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{528}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    528
+   ],
+   "spellIdsInBody": [
+    528,
+    528
+   ],
+   "bodyBakedByAddon": "#showtooltip 祛病术\\n/cast [@mouseover,help,nodead][help,nodead][@player] 祛病术"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-resurrection",
+   "no": 10,
+   "group": "驱散、增益与复活",
+   "groupEn": "Dispels, buffs and resurrection",
+   "titleEn": "Resurrection on the dead player under your mouse",
+   "title": "复活鼠标下的尸体",
+   "noteEn": "Casts Resurrection on the dead player under your mouse, or on your target if it's a dead friend. It does nothing when neither is dead.",
+   "note": "复活鼠标下（或目标里）的死亡队友；都没死就不动",
+   "bodyTemplate": "#showtooltip {{2006}}\\n/cast [@mouseover,help,dead][help,dead] {{2006}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    2006
+   ],
+   "spellIdsInBody": [
+    2006,
+    2006
+   ],
+   "bodyBakedByAddon": "#showtooltip 复活术\\n/cast [@mouseover,help,dead][help,dead] 复活术"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-buffs",
+   "no": 11,
+   "group": "驱散、增益与复活",
+   "groupEn": "Dispels, buffs and resurrection",
+   "titleEn": "Fortitude, Divine Spirit or Shadow Protection on one key",
+   "title": "增益一键（韧 / 神圣之灵 / 暗抗）",
+   "noteEn": "Power Word: Fortitude on its own, Divine Spirit with Shift and Shadow Protection with Ctrl, each on the friend under your mouse or on you.",
+   "note": "默认真言术：韧，Shift 神圣之灵，Ctrl 防护暗影；给鼠标指向或自己",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] {{14752}}; [mod:ctrl,@mouseover,help,nodead][mod:ctrl,@player] {{976}}; [@mouseover,help,nodead][help,nodead][@player] {{1243}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1243,
+    976,
+    14752
+   ],
+   "spellIdsInBody": [
+    14752,
+    976,
+    1243
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] 神圣之灵; [mod:ctrl,@mouseover,help,nodead][mod:ctrl,@player] 防护暗影; [@mouseover,help,nodead][help,nodead][@player] 真言术：韧"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-fear-ward",
+   "no": 12,
+   "group": "驱散、增益与复活",
+   "groupEn": "Dispels, buffs and resurrection",
+   "titleEn": "Fear Ward on your mouseover or the tank",
+   "title": "防护恐惧结界给鼠标指向或坦克",
+   "noteEn": "Casts Fear Ward on the friend under your mouse, else your friendly focus, else your friendly target, else you.",
+   "note": "依次给鼠标指向 / 友方焦点 / 友方目标 / 自己",
+   "bodyTemplate": "#showtooltip {{6346}}\\n/cast [@mouseover,help,nodead][@focus,help,nodead][help,nodead][@player] {{6346}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    6346
+   ],
+   "spellIdsInBody": [
+    6346,
+    6346
+   ],
+   "bodyBakedByAddon": "#showtooltip 防护恐惧结界\\n/cast [@mouseover,help,nodead][@focus,help,nodead][help,nodead][@player] 防护恐惧结界"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-psychic-scream",
+   "no": 13,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Psychic Scream right now",
+   "title": "立即心灵尖啸",
+   "noteEn": "Stops the spell you're casting and casts Psychic Scream at once, making nearby enemies flee.",
+   "note": "打断正在读的法术，马上心灵尖啸恐惧周围敌人",
+   "bodyTemplate": "#showtooltip {{8122}}\\n/stopcasting\\n/cast {{8122}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    8122
+   ],
+   "spellIdsInBody": [
+    8122,
+    8122
+   ],
+   "bodyBakedByAddon": "#showtooltip 心灵尖啸\\n/stopcasting\\n/cast 心灵尖啸"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-shackle-undead",
+   "no": 14,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Shackle Undead your focus, mouseover or target",
+   "title": "束缚亡灵焦点 / 鼠标指向 / 目标",
+   "noteEn": "Casts Shackle Undead on your focus, else the enemy under your mouse, else your target.",
+   "note": "依次对焦点、鼠标指向、目标束缚亡灵",
+   "bodyTemplate": "#showtooltip {{9484}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{9484}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    9484
+   ],
+   "spellIdsInBody": [
+    9484,
+    9484
+   ],
+   "bodyBakedByAddon": "#showtooltip 束缚亡灵\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 束缚亡灵"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-silence",
+   "no": 15,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Silence your focus, even mid-cast",
+   "title": "沉默焦点（读条中也能打断）",
+   "noteEn": "Stops whatever you're casting, then Silences your focus, the enemy under your mouse or your target.",
+   "note": "停下读条，沉默焦点，没有就鼠标指向或目标",
+   "bodyTemplate": "#showtooltip {{15487}}\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{15487}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    15487
+   ],
+   "spellIdsInBody": [
+    15487,
+    15487
+   ],
+   "bodyBakedByAddon": "#showtooltip 沉默\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 沉默"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-shadow-word-pain",
+   "no": 16,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Shadow Word: Pain on your mouseover",
+   "title": "暗言术：痛 鼠标指向",
+   "noteEn": "Puts Shadow Word: Pain on the enemy under your mouse, or on your target.",
+   "note": "给鼠标指向的敌人上暗言术：痛，没指着就给目标",
+   "bodyTemplate": "#showtooltip {{589}}\\n/cast [@mouseover,harm,nodead][] {{589}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    589
+   ],
+   "spellIdsInBody": [
+    589,
+    589
+   ],
+   "bodyBakedByAddon": "#showtooltip 暗言术：痛\\n/cast [@mouseover,harm,nodead][] 暗言术：痛"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-wand",
+   "no": 17,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Wand without switching it off",
+   "title": "魔杖射击（连按不会停）",
+   "noteEn": "Starts shooting with your wand. Pressing it again doesn't stop it (the ! stops it toggling off).",
+   "note": "开始用魔杖射击，再按也不会把射击关掉",
+   "bodyTemplate": "#showtooltip {{5019}}\\n/cast !{{5019}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    5019
+   ],
+   "spellIdsInBody": [
+    5019,
+    5019
+   ],
+   "bodyBakedByAddon": "#showtooltip 魔杖射击\\n/cast !魔杖射击"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-divine-grace",
+   "no": 18,
+   "group": "种族专属",
+   "groupEn": "Race-only Priest spells",
+   "titleEn": "Human: Divine Grace on your mouseover",
+   "title": "人类：神圣恩典鼠标指向",
+   "noteEn": "Casts Divine Grace on the friend under your mouse, or on your friendly target.",
+   "note": "给鼠标指向或友方目标上神圣恩典",
+   "bodyTemplate": "#showtooltip {{1277370}}\\n/cast [@mouseover,help,nodead][help,nodead] {{1277370}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    1277370
+   ],
+   "spellIdsInBody": [
+    1277370,
+    1277370
+   ],
+   "bodyBakedByAddon": "#showtooltip 神圣恩典\\n/cast [@mouseover,help,nodead][help,nodead] 神圣恩典"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-desperate-prayer",
+   "no": 19,
+   "group": "种族专属",
+   "groupEn": "Race-only Priest spells",
+   "titleEn": "Dwarf: Desperate Prayer, even mid-cast",
+   "title": "矮人：绝望祷言（读条中也能用）",
+   "noteEn": "Stops the spell you're casting and heals you at once with Desperate Prayer.",
+   "note": "打断正在读的法术，马上绝望祷言奶自己",
+   "bodyTemplate": "#showtooltip {{13908}}\\n/stopcasting\\n/cast {{13908}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    13908
+   ],
+   "spellIdsInBody": [
+    13908,
+    13908
+   ],
+   "bodyBakedByAddon": "#showtooltip 绝望祷言\\n/stopcasting\\n/cast 绝望祷言"
+  },
+  {
+   "cls": "Priest",
+   "key": "priest-contingency-plan",
+   "no": 20,
+   "group": "种族专属",
+   "groupEn": "Race-only Priest spells",
+   "titleEn": "Gnome: Contingency Plan on your mouseover or the tank",
+   "title": "侏儒：应急方案给鼠标指向或坦克",
+   "noteEn": "Casts Contingency Plan on the friend under your mouse, else your friendly focus, else your friendly target, else you.",
+   "note": "依次给鼠标指向 / 友方焦点 / 友方目标 / 自己",
+   "bodyTemplate": "#showtooltip {{1277462}}\\n/cast [@mouseover,help,nodead][@focus,help,nodead][help,nodead][@player] {{1277462}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1277462
+   ],
+   "spellIdsInBody": [
+    1277462,
+    1277462
+   ],
+   "bodyBakedByAddon": "#showtooltip 应急方案\\n/cast [@mouseover,help,nodead][@focus,help,nodead][help,nodead][@player] 应急方案"
+  },
+  {
+   "cls": "Priest",
+   "key": "cwf-priest-1",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Fortitude",
+   "title": "真言术：韧（鼠标指向）",
+   "noteEn": "Buff the friend under your cursor.",
+   "note": "给鼠标指向 / 友方目标 / 自己上耐力",
+   "bodyTemplate": "#showtooltip {{1243}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{1243}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1243
+   ],
+   "spellIdsInBody": [
+    1243,
+    1243
+   ],
+   "bodyBakedByAddon": "#showtooltip 真言术：韧\\n/cast [@mouseover,help,nodead][help,nodead][@player] 真言术：韧"
+  },
+  {
+   "cls": "Priest",
+   "key": "cwf-priest-6",
+   "no": 22,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Dismount and Levitate",
+   "title": "漂浮术（下马）",
+   "noteEn": "Dismount and levitate; Shift cancels.",
+   "note": "下马并漂浮，Shift 取消漂浮（34 级起）",
+   "bodyTemplate": "#showtooltip {{1706}}\\n/dismount\\n/cancelaura [mod:shift] {{1706}}\\n/cast [nomod] {{1706}}",
+   "foreverNew": false,
+   "level": 34,
+   "spellIds": [
+    1706
+   ],
+   "spellIdsInBody": [
+    1706,
+    1706,
+    1706
+   ],
+   "bodyBakedByAddon": "#showtooltip 漂浮术\\n/dismount\\n/cancelaura [mod:shift] 漂浮术\\n/cast [nomod] 漂浮术"
+  },
+  {
+   "cls": "Priest",
+   "key": "cwf-priest-7",
+   "no": 23,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Self buffs in order",
+   "title": "自身增益一键轮流",
+   "noteEn": "Inner Fire, Fortitude, Divine Spirit in order.",
+   "note": "连按依次上心灵之火、真言术：韧、神圣之灵（30 级起）",
+   "bodyTemplate": "#showtooltip\\n/castsequence [@player] reset=15 {{588}}, {{1243}}, {{14818}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    588,
+    1243,
+    14818
+   ],
+   "spellIdsInBody": [
+    588,
+    1243,
+    14818
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence [@player] reset=15 心灵之火, 真言术：韧, 神圣之灵"
+  },
+  {
+   "cls": "Priest",
+   "key": "dy-priest-0",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Smite enemies, Shift Flash Heal friends",
+   "title": "惩击 / Shift 快速治疗",
+   "noteEn": "Smite on an enemy target; hold Shift to Flash Heal your friendly target or yourself.",
+   "note": "选敌人惩击；按住 Shift 快速治疗友方目标，没有就给自己",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,help,nodead][mod:shift,@player] {{2061}}; [harm,nodead] {{585}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    585,
+    2061
+   ],
+   "spellIdsInBody": [
+    2061,
+    585
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,help,nodead][mod:shift,@player] 快速治疗; [harm,nodead] 惩击"
+  },
+  {
+   "cls": "Priest",
+   "key": "dy-priest-1",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Shadowform on, Alt off",
+   "title": "暗影形态（Alt 取消）",
+   "noteEn": "Enters Shadowform; hold Alt to leave it.",
+   "note": "裸按进暗影形态，按住 Alt 退出",
+   "bodyTemplate": "#showtooltip {{15473}}\\n/cancelaura [mod:alt] {{15473}}\\n/cast [nomod] !{{15473}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    15473
+   ],
+   "spellIdsInBody": [
+    15473,
+    15473,
+    15473
+   ],
+   "bodyBakedByAddon": "#showtooltip 暗影形态\\n/cancelaura [mod:alt] 暗影形态\\n/cast [nomod] !暗影形态"
+  },
+  {
+   "cls": "Priest",
+   "key": "dy-priest-2",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Shadow rotation: Pain, Mind Blast, Death",
+   "title": "暗影三连（痛→震爆→灭）",
+   "noteEn": "Keep pressing: Shadow Word: Pain, Mind Blast, Shadow Word: Death. Resets on a new target.",
+   "note": "连按依次：暗言术：痛 → 心灵震爆 → 暗言术：灭；换目标自动重来",
+   "bodyTemplate": "#showtooltip\\n/castsequence [harm,nodead] reset=target/30 {{589}}, {{8092}}, {{1309595}}",
+   "foreverNew": false,
+   "level": 32,
+   "spellIds": [
+    1309595,
+    589,
+    8092
+   ],
+   "spellIdsInBody": [
+    589,
+    8092,
+    1309595
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence [harm,nodead] reset=target/30 暗言术：痛, 心灵震爆, 暗言术：灭"
+  },
+  {
+   "cls": "Priest",
+   "key": "dy-priest-3",
+   "no": 27,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Cure Disease, Shift Abolish Disease",
+   "title": "祛病术，Shift 驱除疾病",
+   "noteEn": "Cure Disease on mouseover or target; Shift for Abolish Disease.",
+   "note": "鼠标指向谁解谁；按住 Shift 驱除疾病（持续解病）",
+   "bodyTemplate": "#showtooltip {{528}}\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift] {{552}}; [@mouseover,help,nodead][] {{528}}",
+   "foreverNew": false,
+   "level": 32,
+   "spellIds": [
+    528,
+    552
+   ],
+   "spellIdsInBody": [
+    528,
+    552,
+    528
+   ],
+   "bodyBakedByAddon": "#showtooltip 祛病术\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift] 驱除疾病; [@mouseover,help,nodead][] 祛病术"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-call-of-the-elements",
+   "no": 1,
+   "group": "图腾",
+   "groupEn": "Totems",
+   "titleEn": "Call of the Elements, Shift for Totemic Recall",
+   "title": "元素的召唤，Shift 收回图腾",
+   "noteEn": "Casts Call of the Elements, which places up to 4 totems you've chosen on the Totem Bar. With Shift it casts Totemic Recall, which removes your totems and gives back 25% of the mana each one cost. With Ctrl it casts Call of the Ancestors, a second set of totems.",
+   "note": "一键放下图腾栏选好的最多 4 个图腾；Shift 收回图腾返还部分法力",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{36936}}; [mod:ctrl] {{66843}}; {{66842}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    66842,
+    66843,
+    36936
+   ],
+   "spellIdsInBody": [
+    36936,
+    66843,
+    66842
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 收回图腾; [mod:ctrl] 先祖的召唤; 元素的召唤"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-totem-sequence",
+   "no": 2,
+   "group": "图腾",
+   "groupEn": "Totems",
+   "titleEn": "Your totems one per press, before level 20",
+   "title": "图腾一按一个（20 级前）",
+   "noteEn": "The first press drops Strength of Earth Totem, the next Searing Totem, the next Healing Stream Totem. Then it starts again from the first.",
+   "note": "依次放大地之力、灼热、治疗之泉图腾，放完从头再来",
+   "bodyTemplate": "#showtooltip\\n/castsequence reset=combat {{8075}}, {{3599}}, {{5394}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    8075,
+    5394,
+    3599
+   ],
+   "spellIdsInBody": [
+    8075,
+    3599,
+    5394
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence reset=combat 大地之力图腾, 灼热图腾, 治疗之泉图腾"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-earth-totems",
+   "no": 3,
+   "group": "图腾",
+   "groupEn": "Totems",
+   "titleEn": "Every Earth totem on one key",
+   "title": "大地图腾一键",
+   "noteEn": "Drops Strength of Earth Totem, or Stoneskin Totem with Shift, Earthbind Totem with Ctrl, or Tremor Totem with Alt.",
+   "note": "默认大地之力，Shift 石肤，Ctrl 地缚，Alt 战栗图腾",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{8071}}; [mod:ctrl] {{2484}}; [mod:alt] {{8143}}; {{8075}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    8075,
+    2484,
+    8071,
+    8143
+   ],
+   "spellIdsInBody": [
+    8071,
+    2484,
+    8143,
+    8075
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 石肤图腾; [mod:ctrl] 地缚图腾; [mod:alt] 战栗图腾; 大地之力图腾"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-searing-fire-nova",
+   "no": 4,
+   "group": "图腾",
+   "groupEn": "Totems",
+   "titleEn": "Searing Totem, then Fire Nova around it",
+   "title": "灼热图腾 / 火焰新星",
+   "noteEn": "With Shift, drops a Searing Totem at your feet. Without Shift, casts Fire Nova, which in Forever hits enemies within 10 yards of your active Fire totem.",
+   "note": "Shift 脚下放灼热图腾；不按 Shift 放火焰新星（以火图腾为中心 10 码）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{3599}}; {{408341}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    408341,
+    3599
+   ],
+   "spellIdsInBody": [
+    3599,
+    408341
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 灼热图腾; 火焰新星"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-grounding-totem",
+   "no": 5,
+   "group": "图腾",
+   "groupEn": "Totems",
+   "titleEn": "Grounding Totem, even mid-cast",
+   "title": "立即根基图腾",
+   "noteEn": "Stops the spell you're casting and drops Grounding Totem at once. The totem pulls the next harmful spell cast on a nearby party member onto itself.",
+   "note": "打断正在读的法术，马上放根基图腾吸收下一个法术",
+   "bodyTemplate": "#showtooltip {{8177}}\\n/stopcasting\\n/cast {{8177}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    8177
+   ],
+   "spellIdsInBody": [
+    8177,
+    8177
+   ],
+   "bodyBakedByAddon": "#showtooltip 根基图腾\\n/stopcasting\\n/cast 根基图腾"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-earth-shock-interrupt",
+   "no": 6,
+   "group": "震击、打断与净化",
+   "groupEn": "Shocks, interrupts and Purge",
+   "titleEn": "Earth Shock your focus, even mid-cast",
+   "title": "地震术打断焦点",
+   "noteEn": "Stops whatever you're casting, then Earth Shocks your focus, the enemy under your mouse or your target, in that order.",
+   "note": "停下读条，依次对焦点、鼠标指向、目标放地震术",
+   "bodyTemplate": "#showtooltip {{8042}}\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{8042}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    8042
+   ],
+   "spellIdsInBody": [
+    8042,
+    8042
+   ],
+   "bodyBakedByAddon": "#showtooltip 地震术\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 地震术"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-shocks-one-key",
+   "no": 7,
+   "group": "震击、打断与净化",
+   "groupEn": "Shocks, interrupts and Purge",
+   "titleEn": "All three shocks on one key",
+   "title": "三种震击一键",
+   "noteEn": "Casts Earth Shock, or Frost Shock with Shift, or Flame Shock with Ctrl, at your target.",
+   "note": "默认地震术，Shift 冰霜震击，Ctrl 烈焰震击",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{8056}}; [mod:ctrl] {{8050}}; {{8042}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    8042,
+    8050,
+    8056
+   ],
+   "spellIdsInBody": [
+    8056,
+    8050,
+    8042
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 冰霜震击; [mod:ctrl] 烈焰震击; 地震术"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-purge",
+   "no": 8,
+   "group": "震击、打断与净化",
+   "groupEn": "Shocks, interrupts and Purge",
+   "titleEn": "Purge your mouseover, focus or target",
+   "title": "净化术鼠标指向 / 焦点 / 目标",
+   "noteEn": "Casts Purge on the enemy under your mouse, or your focus, or your target, removing a magic effect from it.",
+   "note": "驱掉鼠标指向 / 焦点 / 目标身上的一个魔法效果",
+   "bodyTemplate": "#showtooltip {{370}}\\n/cast [@mouseover,harm,nodead][@focus,harm,nodead][] {{370}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    370
+   ],
+   "spellIdsInBody": [
+    370,
+    370
+   ],
+   "bodyBakedByAddon": "#showtooltip 净化术\\n/cast [@mouseover,harm,nodead][@focus,harm,nodead][] 净化术"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-healing-wave",
+   "no": 9,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Healing Wave on your mouseover, Alt for yourself",
+   "title": "治疗波鼠标指向，Alt 给自己",
+   "noteEn": "Casts Healing Wave on the friend under your mouse, or your friendly target, or yourself. With Alt it always heals you.",
+   "note": "给鼠标指向 / 友方目标 / 自己治疗波；Alt 一定给自己",
+   "bodyTemplate": "#showtooltip {{331}}\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{331}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    331
+   ],
+   "spellIdsInBody": [
+    331,
+    331
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗波\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 治疗波"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-lesser-healing-wave",
+   "no": 10,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Lesser Healing Wave on your mouseover, Alt for yourself",
+   "title": "次级治疗波鼠标指向，Alt 给自己",
+   "noteEn": "Casts Lesser Healing Wave on the friend under your mouse, your friendly target or yourself; with Alt, on you.",
+   "note": "给鼠标指向 / 友方目标 / 自己次级治疗波；Alt 给自己",
+   "bodyTemplate": "#showtooltip {{8004}}\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{8004}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    8004
+   ],
+   "spellIdsInBody": [
+    8004,
+    8004
+   ],
+   "bodyBakedByAddon": "#showtooltip 次级治疗波\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 次级治疗波"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-healing-wave-low-rank",
+   "no": 11,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Cheap Healing Wave(Rank 2) on your mouseover",
+   "title": "2 级治疗波（省蓝）",
+   "noteEn": "Casts rank 2 of Healing Wave (64 to 78 healing for 45 mana, 2 sec cast) on the friend under your mouse, your friendly target or yourself.",
+   "note": "用 2 级治疗波奶鼠标指向 / 友方目标 / 自己，45 蓝",
+   "bodyTemplate": "#showtooltip {{332}}\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{332}}(Rank 2)",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    332
+   ],
+   "spellIdsInBody": [
+    332,
+    332
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗波\\n/cast [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 治疗波(Rank 2)"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-natures-swiftness-heal",
+   "no": 12,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Nature's Swiftness into an instant Healing Wave",
+   "title": "自然迅捷 + 瞬发治疗波",
+   "noteEn": "Activates Nature's Swiftness and then casts Healing Wave on your mouseover, friendly target or yourself. Nature's Swiftness makes it instant.",
+   "note": "开自然迅捷，治疗波变瞬发，给鼠标指向 / 友方目标 / 自己",
+   "bodyTemplate": "#showtooltip {{16188}}\\n/cast {{16188}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{331}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    16188,
+    331
+   ],
+   "spellIdsInBody": [
+    16188,
+    16188,
+    331
+   ],
+   "bodyBakedByAddon": "#showtooltip 自然迅捷\\n/cast 自然迅捷\\n/cast [@mouseover,help,nodead][help,nodead][@player] 治疗波"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-cures",
+   "no": 13,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Cure Poison, or Cure Disease with Shift, on your mouseover",
+   "title": "消毒术，Shift 祛病术",
+   "noteEn": "Cures 1 poison from the friend under your mouse, your friendly target or yourself. With Shift, cures 1 disease instead.",
+   "note": "驱鼠标指向 / 友方目标 / 自己 1 个毒；Shift 改驱疾病",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{2870}}; [@mouseover,help,nodead][help,nodead][@player] {{526}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    2870,
+    526
+   ],
+   "spellIdsInBody": [
+    2870,
+    526
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 祛病术; [@mouseover,help,nodead][help,nodead][@player] 消毒术"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-ancestral-spirit",
+   "no": 14,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Ancestral Spirit on the dead player under your mouse",
+   "title": "先祖之魂鼠标下的尸体",
+   "noteEn": "Resurrects the dead player under your mouse (or their corpse), or your dead friendly target.",
+   "note": "复活鼠标下的死亡队友（或尸体），或死亡的友方目标",
+   "bodyTemplate": "#showtooltip {{2008}}\\n/cast [@mouseover,help,dead][help,dead] {{2008}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    2008
+   ],
+   "spellIdsInBody": [
+    2008,
+    2008
+   ],
+   "bodyBakedByAddon": "#showtooltip 先祖之魂\\n/cast [@mouseover,help,dead][help,dead] 先祖之魂"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-shields",
+   "no": 15,
+   "group": "护盾、武器与赶路",
+   "groupEn": "Shields, weapons and travel",
+   "titleEn": "Lightning Shield, or Water Shield with Shift",
+   "title": "闪电之盾，Shift 水之护盾",
+   "noteEn": "Casts Lightning Shield; with Shift, Water Shield.",
+   "note": "默认闪电之盾，按住 Shift 水之护盾",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{408510}}; {{324}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    324,
+    408510
+   ],
+   "spellIdsInBody": [
+    408510,
+    324
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 水之护盾; 闪电之盾"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-weapon-imbues",
+   "no": 16,
+   "group": "护盾、武器与赶路",
+   "groupEn": "Shields, weapons and travel",
+   "titleEn": "Every weapon imbue on one key",
+   "title": "武器附魔一键",
+   "noteEn": "Imbues your weapon with Rockbiter, or Flametongue with Shift, Frostbrand with Ctrl, or Windfury with Alt.",
+   "note": "默认石化，Shift 火舌，Ctrl 冰封，Alt 风怒",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{8024}}; [mod:ctrl] {{8033}}; [mod:alt] {{8232}}; {{8017}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    8017,
+    8024,
+    8033,
+    8232
+   ],
+   "spellIdsInBody": [
+    8024,
+    8033,
+    8232,
+    8017
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 火舌武器; [mod:ctrl] 冰封武器; [mod:alt] 风怒武器; 石化武器"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-stormstrike",
+   "no": 17,
+   "group": "护盾、武器与赶路",
+   "groupEn": "Shields, weapons and travel",
+   "titleEn": "Stormstrike with auto-attack",
+   "title": "风暴打击 + 自动攻击",
+   "noteEn": "Starts your auto-attack on your target and uses Stormstrike.",
+   "note": "对目标开自动攻击并风暴打击",
+   "bodyTemplate": "#showtooltip {{17364}}\\n/startattack\\n/cast {{17364}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    17364
+   ],
+   "spellIdsInBody": [
+    17364,
+    17364
+   ],
+   "bodyBakedByAddon": "#showtooltip 风暴打击\\n/startattack\\n/cast 风暴打击"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-ghost-wolf",
+   "no": 18,
+   "group": "护盾、武器与赶路",
+   "groupEn": "Shields, weapons and travel",
+   "titleEn": "Ghost Wolf that doesn't cancel itself",
+   "title": "幽魂之狼（连按不会变回）",
+   "noteEn": "Turns you into a Ghost Wolf. Pressing it again while you're already a wolf does nothing, instead of turning you back.",
+   "note": "变狼；已经是狼时再按不会变回人形",
+   "bodyTemplate": "#showtooltip {{2645}}\\n/cast !{{2645}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    2645
+   ],
+   "spellIdsInBody": [
+    2645,
+    2645
+   ],
+   "bodyBakedByAddon": "#showtooltip 幽魂之狼\\n/cast !幽魂之狼"
+  },
+  {
+   "cls": "Shaman",
+   "key": "shaman-water-walking",
+   "no": 19,
+   "group": "护盾、武器与赶路",
+   "groupEn": "Shields, weapons and travel",
+   "titleEn": "Water Walking, or Water Breathing with Shift, on your mouseover",
+   "title": "水上行走，Shift 水下呼吸",
+   "noteEn": "Casts Water Walking on the friend under your mouse, your friendly target or yourself. With Shift, Water Breathing instead.",
+   "note": "给鼠标指向 / 友方目标 / 自己水上行走；Shift 改水下呼吸",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{131}}; [@mouseover,help,nodead][help,nodead][@player] {{546}}",
+   "foreverNew": false,
+   "level": 22,
+   "spellIds": [
+    131,
+    546
+   ],
+   "spellIdsInBody": [
+    131,
+    546
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 水下呼吸; [@mouseover,help,nodead][help,nodead][@player] 水上行走"
+  },
+  {
+   "cls": "Shaman",
+   "key": "cwf-shaman-1",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Place or recall your totems",
+   "title": "一键插图腾 / 收回",
+   "noteEn": "Place your saved set; Shift recalls them.",
+   "note": "一键插下保存的图腾组，Shift 收回图腾回蓝（《无限》新技能）",
+   "bodyTemplate": "#showtooltip [mod:shift] {{36936}}; {{66842}}\\n/cast [mod:shift] {{36936}}; {{66842}}",
+   "foreverNew": true,
+   "level": 20,
+   "spellIds": [
+    36936,
+    66842
+   ],
+   "spellIdsInBody": [
+    36936,
+    66842,
+    36936,
+    66842
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 收回图腾; 元素的召唤\\n/cast [mod:shift] 收回图腾; 元素的召唤"
+  },
+  {
+   "cls": "Shaman",
+   "key": "cwf-shaman-2",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "All three totem sets and recall on one key",
+   "title": "三套图腾 + 收回 一键",
+   "noteEn": "Elements; Ctrl Ancestors, Alt Spirits, Shift recall.",
+   "note": "默认元素的召唤，Ctrl 先祖的召唤，Alt 灵魂的召唤，Shift 收回（40 级起，《无限》新技能）",
+   "bodyTemplate": "#showtooltip [mod:ctrl] {{66843}}; [mod:alt] {{66844}}; [mod:shift] {{36936}}; {{66842}}\\n/cast [mod:ctrl] {{66843}}; [mod:alt] {{66844}}; [mod:shift] {{36936}}; {{66842}}",
+   "foreverNew": true,
+   "level": 40,
+   "spellIds": [
+    66843,
+    66842,
+    66844,
+    36936
+   ],
+   "spellIdsInBody": [
+    66843,
+    66844,
+    36936,
+    66842,
+    66843,
+    66844,
+    36936,
+    66842
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:ctrl] 先祖的召唤; [mod:alt] 灵魂的召唤; [mod:shift] 收回图腾; 元素的召唤\\n/cast [mod:ctrl] 先祖的召唤; [mod:alt] 灵魂的召唤; [mod:shift] 收回图腾; 元素的召唤"
+  },
+  {
+   "cls": "Shaman",
+   "key": "cwf-shaman-8",
+   "no": 22,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Heal yourself without losing your target",
+   "title": "给自己治疗（不换目标）",
+   "noteEn": "Healing Wave on yourself; Shift Lesser Healing Wave.",
+   "note": "给自己治疗波，Shift 次级治疗波",
+   "bodyTemplate": "#showtooltip [mod:shift] {{8004}}; {{331}}\\n/cast [mod:shift,@player] {{8004}}; [@player] {{331}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    8004,
+    331
+   ],
+   "spellIdsInBody": [
+    8004,
+    331,
+    8004,
+    331
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 次级治疗波; 治疗波\\n/cast [mod:shift,@player] 次级治疗波; [@player] 治疗波"
+  },
+  {
+   "cls": "Shaman",
+   "key": "dy-shaman-0",
+   "no": 23,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Lightning Bolt, Shift Chain Lightning",
+   "title": "闪电箭，Shift 闪电链",
+   "noteEn": "Lightning Bolt for one target; Shift for Chain Lightning on a pack.",
+   "note": "裸按闪电箭打单体，按住 Shift 闪电链清一片",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{421}}; {{403}}",
+   "foreverNew": false,
+   "level": 32,
+   "spellIds": [
+    403,
+    421
+   ],
+   "spellIdsInBody": [
+    421,
+    403
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 闪电链; 闪电箭"
+  },
+  {
+   "cls": "Shaman",
+   "key": "dy-shaman-1",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Flame Shock then Lava Burst",
+   "title": "烈焰震击 → 熔岩爆裂",
+   "noteEn": "Press twice: Flame Shock, then the new Lava Burst. Resets on a new target or after 12 s.",
+   "note": "连按两下：先上烈焰震击，再接熔岩爆裂（《无限》新技能）；换目标或 12 秒后重来",
+   "bodyTemplate": "#showtooltip\\n/castsequence reset=target/12 {{8050}}, {{408490}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    8050,
+    408490
+   ],
+   "spellIdsInBody": [
+    8050,
+    408490
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence reset=target/12 烈焰震击, 熔岩爆裂"
+  },
+  {
+   "cls": "Shaman",
+   "key": "dy-shaman-2",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Chain Heal on mouseover",
+   "title": "治疗链（鼠标指向）",
+   "noteEn": "Chain Heal starting on whoever is under the mouse.",
+   "note": "群奶，从鼠标指向的队友开始跳",
+   "bodyTemplate": "#showtooltip {{1064}}\\n/cast [@mouseover,help,nodead][] {{1064}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    1064
+   ],
+   "spellIdsInBody": [
+    1064,
+    1064
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗链\\n/cast [@mouseover,help,nodead][] 治疗链"
+  },
+  {
+   "cls": "Shaman",
+   "key": "dy-shaman-3",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Riptide then Chain Heal",
+   "title": "激流 → 治疗链",
+   "noteEn": "Press twice: Riptide, then Chain Heal on the same mouseover target. Resets after 8 s.",
+   "note": "连按两下：先挂激流，再接治疗链（鼠标指向优先）；8 秒后重来",
+   "bodyTemplate": "#showtooltip\\n/castsequence [@mouseover,help,nodead][] reset=8 {{408521}}, {{1064}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    1064,
+    408521
+   ],
+   "spellIdsInBody": [
+    408521,
+    1064
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence [@mouseover,help,nodead][] reset=8 激流, 治疗链"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-polymorph",
+   "no": 1,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Polymorph your focus, mouseover or target",
+   "title": "变形术焦点 / 鼠标指向 / 目标",
+   "noteEn": "Casts Polymorph on your focus if you have a living enemy focus; otherwise on the enemy under your mouse; otherwise on your target.",
+   "note": "依次对活着的敌对焦点、鼠标指向、目标变羊",
+   "bodyTemplate": "#showtooltip {{118}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{118}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    118
+   ],
+   "spellIdsInBody": [
+    118,
+    118
+   ],
+   "bodyBakedByAddon": "#showtooltip 变形术\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 变形术"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-polymorph-set-focus",
+   "no": 2,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Polymorph, and Shift sets the focus first",
+   "title": "变形术，Shift 先设焦点",
+   "noteEn": "With Shift held, makes the enemy under your mouse (or your target) your focus and sheeps it. Without Shift, re-sheeps your focus, or your target if you have no focus.",
+   "note": "Shift：把鼠标指向（或目标）设成焦点并变羊；不按 Shift 补羊焦点",
+   "bodyTemplate": "#showtooltip {{118}}\\n/focus [mod:shift,@mouseover,harm,nodead][mod:shift]\\n/cast [@focus,harm,nodead][] {{118}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    118
+   ],
+   "spellIdsInBody": [
+    118,
+    118
+   ],
+   "bodyBakedByAddon": "#showtooltip 变形术\\n/focus [mod:shift,@mouseover,harm,nodead][mod:shift]\\n/cast [@focus,harm,nodead][] 变形术"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-counterspell",
+   "no": 3,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Counterspell your focus, even mid-cast",
+   "title": "法术反制焦点（读条中也能打断）",
+   "noteEn": "Stops whatever you're casting, then Counterspells your focus, the enemy under your mouse or your target, in that order.",
+   "note": "停下读条，依次对焦点、鼠标指向、目标法术反制",
+   "bodyTemplate": "#showtooltip {{2139}}\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{2139}}",
+   "foreverNew": false,
+   "level": 24,
+   "spellIds": [
+    2139
+   ],
+   "spellIdsInBody": [
+    2139,
+    2139
+   ],
+   "bodyBakedByAddon": "#showtooltip 法术反制\\n/stopcasting\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 法术反制"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-frost-nova",
+   "no": 4,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Frost Nova right now",
+   "title": "立即冰霜新星",
+   "noteEn": "Cancels the spell you're casting and casts Frost Nova at once, freezing enemies around you for up to 8 sec.",
+   "note": "取消读条，马上冰霜新星冻住周围敌人",
+   "bodyTemplate": "#showtooltip {{122}}\\n/stopcasting\\n/cast {{122}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    122
+   ],
+   "spellIdsInBody": [
+    122,
+    122
+   ],
+   "bodyBakedByAddon": "#showtooltip 冰霜新星\\n/stopcasting\\n/cast 冰霜新星"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-frostbolt-rank1",
+   "no": 5,
+   "group": "控制与打断",
+   "groupEn": "Crowd control and interrupts",
+   "titleEn": "Frostbolt rank 1 to slow for less mana",
+   "title": "1 级寒冰箭（省蓝减速）",
+   "noteEn": "Casts rank 1 of Frostbolt: little damage, very little mana, and still the 40% slow (5 sec at rank 1, 6 sec at rank 2 and more after that in the client).",
+   "note": "1 级寒冰箭伤害低、几乎不耗蓝，一样减速 40%",
+   "bodyTemplate": "#showtooltip {{116}}\\n/cast {{116}}(Rank 1)",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    116
+   ],
+   "spellIdsInBody": [
+    116,
+    116
+   ],
+   "bodyBakedByAddon": "#showtooltip 寒冰箭\\n/cast 寒冰箭(Rank 1)"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-blink",
+   "no": 6,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Blink, even while casting",
+   "title": "闪现术（读条中也能闪）",
+   "noteEn": "Stops your current cast and Blinks you 20 yards forward, breaking stuns and roots.",
+   "note": "停下读条直接闪现 20 码，解昏迷和定身",
+   "bodyTemplate": "#showtooltip {{1953}}\\n/stopcasting\\n/cast {{1953}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1953
+   ],
+   "spellIdsInBody": [
+    1953,
+    1953
+   ],
+   "bodyBakedByAddon": "#showtooltip 闪现术\\n/stopcasting\\n/cast 闪现术"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-ice-block",
+   "no": 7,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Ice Block, press again to break it",
+   "title": "寒冰屏障，再按取消",
+   "noteEn": "Casts Ice Block. If you're already in Ice Block, the same key breaks it (the /cancelaura line removes it and the /cast line then fails on its cooldown).",
+   "note": "开寒冰屏障；已经在冰箱里时同一键把它取消",
+   "bodyTemplate": "#showtooltip {{11958}}\\n/stopcasting\\n/cancelaura {{11958}}\\n/cast {{11958}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    11958
+   ],
+   "spellIdsInBody": [
+    11958,
+    11958,
+    11958
+   ],
+   "bodyBakedByAddon": "#showtooltip 寒冰屏障\\n/stopcasting\\n/cancelaura 寒冰屏障\\n/cast 寒冰屏障"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-wards",
+   "no": 8,
+   "group": "保命",
+   "groupEn": "Staying alive",
+   "titleEn": "Mana Shield, Fire Ward and Frost Ward on one key",
+   "title": "护盾结界一键",
+   "noteEn": "Mana Shield on its own, Fire Ward with Shift, Frost Ward with Ctrl.",
+   "note": "默认法力护盾，Shift 防护火焰结界，Ctrl 防护冰霜结界",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{543}}; [mod:ctrl] {{6143}}; {{1463}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1463,
+    6143,
+    543
+   ],
+   "spellIdsInBody": [
+    543,
+    6143,
+    1463
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 防护火焰结界; [mod:ctrl] 防护冰霜结界; 法力护盾"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-flamestrike-cursor",
+   "no": 9,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Flamestrike at your cursor",
+   "title": "烈焰风暴放到鼠标位置",
+   "noteEn": "Casts Flamestrike straight where your mouse points, with no targeting circle to place.",
+   "note": "直接在鼠标指的地方放烈焰风暴，不用再点选位置",
+   "bodyTemplate": "#showtooltip {{2120}}\\n/cast [@cursor] {{2120}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    2120
+   ],
+   "spellIdsInBody": [
+    2120,
+    2120
+   ],
+   "bodyBakedByAddon": "#showtooltip 烈焰风暴\\n/cast [@cursor] 烈焰风暴"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-blizzard-cursor",
+   "no": 10,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Blizzard at your cursor",
+   "title": "暴风雪放到鼠标位置",
+   "noteEn": "Channels Blizzard where your mouse points.",
+   "note": "直接在鼠标指的地方引导暴风雪",
+   "bodyTemplate": "#showtooltip {{10}}\\n/cast [@cursor] {{10}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    10
+   ],
+   "spellIdsInBody": [
+    10,
+    10
+   ],
+   "bodyBakedByAddon": "#showtooltip 暴风雪\\n/cast [@cursor] 暴风雪"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-presence-of-mind",
+   "no": 11,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Presence of Mind, then an instant spell",
+   "title": "气定神闲 + 瞬发法术",
+   "noteEn": "Activates Presence of Mind and casts Fireball (or Frostbolt with Shift) straight away, which Presence of Mind makes instant.",
+   "note": "开气定神闲马上瞬发火球术；Shift 改寒冰箭",
+   "bodyTemplate": "#showtooltip {{12043}}\\n/cast {{12043}}\\n/cast [mod:shift] {{116}}; {{133}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    12043,
+    116,
+    133
+   ],
+   "spellIdsInBody": [
+    12043,
+    12043,
+    116,
+    133
+   ],
+   "bodyBakedByAddon": "#showtooltip 气定神闲\\n/cast 气定神闲\\n/cast [mod:shift] 寒冰箭; 火球术"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-wand",
+   "no": 12,
+   "group": "输出",
+   "groupEn": "Damage",
+   "titleEn": "Wand without switching it off",
+   "title": "魔杖射击（连按不会停）",
+   "noteEn": "Starts shooting with your wand. Pressing it again doesn't stop it (the ! stops it toggling off).",
+   "note": "开始用魔杖射击，再按也不会把射击关掉",
+   "bodyTemplate": "#showtooltip {{5019}}\\n/cast !{{5019}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    5019
+   ],
+   "spellIdsInBody": [
+    5019,
+    5019
+   ],
+   "bodyBakedByAddon": "#showtooltip 魔杖射击\\n/cast !魔杖射击"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-arcane-intellect",
+   "no": 13,
+   "group": "增益、解诅咒与造物",
+   "groupEn": "Buffs, curses and conjuring",
+   "titleEn": "Arcane Intellect on your mouseover or yourself",
+   "title": "奥术智慧鼠标指向或自己",
+   "noteEn": "Casts Arcane Intellect on the friend under your mouse, or your friendly target, or yourself if neither.",
+   "note": "给鼠标指向 / 友方目标 / 自己奥术智慧",
+   "bodyTemplate": "#showtooltip {{1459}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{1459}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1459
+   ],
+   "spellIdsInBody": [
+    1459,
+    1459
+   ],
+   "bodyBakedByAddon": "#showtooltip 奥术智慧\\n/cast [@mouseover,help,nodead][help,nodead][@player] 奥术智慧"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-remove-curse",
+   "no": 14,
+   "group": "增益、解诅咒与造物",
+   "groupEn": "Buffs, curses and conjuring",
+   "titleEn": "Remove Lesser Curse on your mouseover or yourself",
+   "title": "解除次级诅咒鼠标指向或自己",
+   "noteEn": "Removes a curse from the friend under your mouse, from your friendly target, or from you.",
+   "note": "驱鼠标指向 / 友方目标 / 自己身上的诅咒",
+   "bodyTemplate": "#showtooltip {{475}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{475}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    475
+   ],
+   "spellIdsInBody": [
+    475,
+    475
+   ],
+   "bodyBakedByAddon": "#showtooltip 解除次级诅咒\\n/cast [@mouseover,help,nodead][help,nodead][@player] 解除次级诅咒"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-amplify-dampen",
+   "no": 15,
+   "group": "增益、解诅咒与造物",
+   "groupEn": "Buffs, curses and conjuring",
+   "titleEn": "Amplify Magic or Dampen Magic on your mouseover",
+   "title": "魔法增效，Shift 魔法抑制",
+   "noteEn": "Amplify Magic on the friend under your mouse (or your target); with Shift, Dampen Magic instead.",
+   "note": "给鼠标指向（或目标）魔法增效；Shift 改魔法抑制",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift] {{604}}; [@mouseover,help,nodead][] {{1008}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    1008,
+    604
+   ],
+   "spellIdsInBody": [
+    604,
+    1008
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift] 魔法抑制; [@mouseover,help,nodead][] 魔法增效"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-conjure",
+   "no": 16,
+   "group": "增益、解诅咒与造物",
+   "groupEn": "Buffs, curses and conjuring",
+   "titleEn": "Conjure water, food or a mana gem on one key",
+   "title": "造水 / 造食 / 法力宝石一键",
+   "noteEn": "Conjures water, food with Shift, or a Mana Agate with Ctrl.",
+   "note": "默认造水，Shift 造食，Ctrl 制造魔法玛瑙",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{587}}; [mod:ctrl] {{759}}; {{5504}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    5504,
+    759,
+    587
+   ],
+   "spellIdsInBody": [
+    587,
+    759,
+    5504
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 造食术; [mod:ctrl] 制造魔法玛瑙; 造水术"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-teleports-alliance",
+   "no": 17,
+   "group": "传送",
+   "groupEn": "Teleports",
+   "titleEn": "Every Alliance teleport on one key",
+   "title": "联盟传送一键",
+   "noteEn": "Teleports you to Stormwind, or Ironforge with Shift, Darnassus with Alt or Dalaran with Ctrl.",
+   "note": "默认暴风城，Shift 铁炉堡，Alt 达纳苏斯，Ctrl 达拉然",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:alt] {{3565}}; [mod:shift] {{3562}}; [mod:ctrl] {{1297659}}; {{3561}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    3561,
+    3565,
+    3562,
+    1297659
+   ],
+   "spellIdsInBody": [
+    3565,
+    3562,
+    1297659,
+    3561
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:alt] 传送：达纳苏斯; [mod:shift] 传送：铁炉堡; [mod:ctrl] 传送：达拉然; 传送：暴风城"
+  },
+  {
+   "cls": "Mage",
+   "key": "mage-teleports-horde",
+   "no": 18,
+   "group": "传送",
+   "groupEn": "Teleports",
+   "titleEn": "Every Horde teleport on one key",
+   "title": "部落传送一键",
+   "noteEn": "Teleports you to Orgrimmar, or Undercity with Shift or Thunder Bluff with Alt.",
+   "note": "默认奥格瑞玛，Shift 幽暗城，Alt 雷霆崖",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:alt] {{3566}}; [mod:shift] {{3563}}; {{3567}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    3567,
+    3566,
+    3563
+   ],
+   "spellIdsInBody": [
+    3566,
+    3563,
+    3567
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:alt] 传送：雷霆崖; [mod:shift] 传送：幽暗城; 传送：奥格瑞玛"
+  },
+  {
+   "cls": "Mage",
+   "key": "cwf-mage-5",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Conjure water, or food with Shift",
+   "title": "造水术 / Shift 造食术",
+   "noteEn": "Water; Shift food.",
+   "note": "默认造水术，Shift 造食术",
+   "bodyTemplate": "#showtooltip [mod:shift] {{587}}; {{5504}}\\n/cast [mod:shift] {{587}}; {{5504}}",
+   "foreverNew": false,
+   "level": 6,
+   "spellIds": [
+    587,
+    5504
+   ],
+   "spellIdsInBody": [
+    587,
+    5504,
+    587,
+    5504
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 造食术; 造水术\\n/cast [mod:shift] 造食术; 造水术"
+  },
+  {
+   "cls": "Mage",
+   "key": "cwf-mage-6",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Ice, Mage or Frost Armor",
+   "title": "护甲一键（冰甲术 / 魔甲术 / 霜甲术）",
+   "noteEn": "Ice Armor; Shift Mage Armor, Ctrl Frost Armor.",
+   "note": "默认冰甲术，Shift 魔甲术，Ctrl 霜甲术（34 级起）",
+   "bodyTemplate": "#showtooltip [mod:shift] {{6117}}; [mod:ctrl] {{168}}; {{7302}}\\n/cast [mod:shift] {{6117}}; [mod:ctrl] {{168}}; {{7302}}",
+   "foreverNew": false,
+   "level": 34,
+   "spellIds": [
+    6117,
+    168,
+    7302
+   ],
+   "spellIdsInBody": [
+    6117,
+    168,
+    7302,
+    6117,
+    168,
+    7302
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 魔甲术; [mod:ctrl] 霜甲术; 冰甲术\\n/cast [mod:shift] 魔甲术; [mod:ctrl] 霜甲术; 冰甲术"
+  },
+  {
+   "cls": "Mage",
+   "key": "cwf-mage-8",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Horde teleports on one key",
+   "title": "部落传送一键（含达拉然）",
+   "noteEn": "Orgrimmar; Shift Undercity, Ctrl Thunder Bluff, Alt Dalaran.",
+   "note": "默认奥格瑞玛，Shift 幽暗城，Ctrl 雷霆崖，Alt 达拉然（达拉然为《无限》新增）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{3563}}; [mod:ctrl] {{3566}}; [mod:alt] {{1297659}}; {{3567}}",
+   "foreverNew": true,
+   "level": 50,
+   "spellIds": [
+    3567,
+    3566,
+    3563,
+    1297659
+   ],
+   "spellIdsInBody": [
+    3563,
+    3566,
+    1297659,
+    3567
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 传送：幽暗城; [mod:ctrl] 传送：雷霆崖; [mod:alt] 传送：达拉然; 传送：奥格瑞玛"
+  },
+  {
+   "cls": "Mage",
+   "key": "cwf-mage-9",
+   "no": 22,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Alliance portals on one key",
+   "title": "联盟传送门一键",
+   "noteEn": "Stormwind; Shift Ironforge, Ctrl Darnassus.",
+   "note": "默认暴风城，Shift 铁炉堡，Ctrl 达纳苏斯（50 级起）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{11416}}; [mod:ctrl] {{11419}}; {{10059}}",
+   "foreverNew": false,
+   "level": 50,
+   "spellIds": [
+    10059,
+    11419,
+    11416
+   ],
+   "spellIdsInBody": [
+    11416,
+    11419,
+    10059
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 传送门：铁炉堡; [mod:ctrl] 传送门：达纳苏斯; 传送门：暴风城"
+  },
+  {
+   "cls": "Mage",
+   "key": "cwf-mage-10",
+   "no": 23,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Horde portals on one key",
+   "title": "部落传送门一键",
+   "noteEn": "Orgrimmar; Shift Undercity, Ctrl Thunder Bluff.",
+   "note": "默认奥格瑞玛，Shift 幽暗城，Ctrl 雷霆崖（50 级起）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{11418}}; [mod:ctrl] {{11420}}; {{11417}}",
+   "foreverNew": false,
+   "level": 50,
+   "spellIds": [
+    11417,
+    11420,
+    11418
+   ],
+   "spellIdsInBody": [
+    11418,
+    11420,
+    11417
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 传送门：幽暗城; [mod:ctrl] 传送门：雷霆崖; 传送门：奥格瑞玛"
+  },
+  {
+   "cls": "Mage",
+   "key": "dy-mage-0",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Frostbolt that finds its own target",
+   "title": "寒冰箭（自动找怪）",
+   "noteEn": "Drops a dead target and grabs the nearest enemy, then Frostbolt. Just keep pressing.",
+   "note": "目标死了自动丢掉、没目标自动抓最近的怪，一直按就行",
+   "bodyTemplate": "#showtooltip {{116}}\\n/cleartarget [dead]\\n/targetenemy [noexists]\\n/cast [harm,nodead] {{116}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    116
+   ],
+   "spellIdsInBody": [
+    116,
+    116
+   ],
+   "bodyBakedByAddon": "#showtooltip 寒冰箭\\n/cleartarget [dead]\\n/targetenemy [noexists]\\n/cast [harm,nodead] 寒冰箭"
+  },
+  {
+   "cls": "Mage",
+   "key": "dy-mage-1",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Fireball, Shift Frostfire Bolt",
+   "title": "火球术，Shift 霜火之箭",
+   "noteEn": "Fireball by default; Shift for the new Frostfire Bolt on fire-resistant mobs.",
+   "note": "裸按火球术，按住 Shift 霜火之箭（《无限》新技能，抗火的怪也能打）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{401502}}; {{133}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    133,
+    401502
+   ],
+   "spellIdsInBody": [
+    401502,
+    133
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 霜火之箭; 火球术"
+  },
+  {
+   "cls": "Mage",
+   "key": "dy-mage-2",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Frost Nova, Shift Cone of Cold",
+   "title": "冰霜新星，Shift 冰锥术",
+   "noteEn": "Frost Nova when they reach you; Shift for Cone of Cold.",
+   "note": "被贴脸冰霜新星冻住就跑；按住 Shift 冰锥术清前方一排",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{120}}; {{122}}",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    122,
+    120
+   ],
+   "spellIdsInBody": [
+    120,
+    122
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 冰锥术; 冰霜新星"
+  },
+  {
+   "cls": "Mage",
+   "key": "dy-mage-3",
+   "no": 27,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Mana Shield, Shift Ice Barrier",
+   "title": "法力护盾，Shift 寒冰护体",
+   "noteEn": "Mana Shield; Shift for Ice Barrier (Frost talent).",
+   "note": "裸按法力护盾，按住 Shift 寒冰护体（冰霜天赋）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{11426}}; {{1463}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    1463,
+    11426
+   ],
+   "spellIdsInBody": [
+    11426,
+    1463
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 寒冰护体; 法力护盾"
+  },
+  {
+   "cls": "Mage",
+   "key": "dy-mage-4",
+   "no": 28,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Out-of-combat prep in one button",
+   "title": "一键备战（智慧→霜甲→水→食物→玛瑙）",
+   "noteEn": "Out of combat only. Keep pressing: Arcane Intellect, Frost Armor, Conjure Water, Conjure Food, Conjure Mana Agate.",
+   "note": "只在脱战时生效，连按依次：奥术智慧 → 霜甲术 → 造水 → 造食 → 制造魔法玛瑙",
+   "bodyTemplate": "#showtooltip {{5504}}\\n/stopmacro [combat]\\n/castsequence [@player] reset=60 {{1459}}, {{168}}, {{5504}}, {{587}}, {{759}}",
+   "foreverNew": false,
+   "level": 28,
+   "spellIds": [
+    5504,
+    759,
+    1459,
+    587,
+    168
+   ],
+   "spellIdsInBody": [
+    5504,
+    1459,
+    168,
+    5504,
+    587,
+    759
+   ],
+   "bodyBakedByAddon": "#showtooltip 造水术\\n/stopmacro [combat]\\n/castsequence [@player] reset=60 奥术智慧, 霜甲术, 造水术, 造食术, 制造魔法玛瑙"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-demon-attack",
+   "no": 1,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Send your demon in with its attack",
+   "title": "恶魔进攻 + 起手技能",
+   "noteEn": "Sends your demon at your target, and has it open with its own attack: Torment for the Voidwalker, Lash of Pain for the Succubus or Incubus, Firebolt for the Imp.",
+   "note": "恶魔攻击目标并先放自己的技能：虚空行者折磨、魅魔痛苦鞭笞、小鬼火焰箭",
+   "bodyTemplate": "#showtooltip\\n/petattack\\n/cast [pet:Voidwalker] {{446391}}; [pet:Succubus/Incubus] {{21987}}; [pet:Imp] {{701}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    446391,
+    21987,
+    701
+   ],
+   "spellIdsInBody": [
+    446391,
+    21987,
+    701
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/petattack\\n/cast [pet:Voidwalker] 折磨; [pet:Succubus/Incubus] 痛苦鞭笞; [pet:Imp] 火弹"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-demon-control",
+   "no": 2,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Demon attack, or call it back and make it passive",
+   "title": "恶魔进攻 / 回来被动",
+   "noteEn": "Sends your demon at the enemy under your mouse, or at your target. With Shift it comes back and goes passive; with Ctrl it goes back to defensive.",
+   "note": "恶魔攻击鼠标指向或目标；Shift 叫回并被动，Ctrl 改回防御",
+   "bodyTemplate": "/petattack [nomod,@mouseover,harm,nodead][nomod]\\n/petfollow [mod:shift]\\n/petpassive [mod:shift]\\n/petdefensive [mod:ctrl]",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "/petattack [nomod,@mouseover,harm,nodead][nomod]\\n/petfollow [mod:shift]\\n/petpassive [mod:shift]\\n/petdefensive [mod:ctrl]"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-summon-demon",
+   "no": 3,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Summon any demon, with Fel Domination in combat",
+   "title": "召唤恶魔一键（战斗中先恶魔支配）",
+   "noteEn": "Summons your Imp, or the Voidwalker with Shift, the Succubus with Ctrl or the Felhunter with Alt. In combat it casts Fel Domination first, so the summon is quicker and cheaper.",
+   "note": "默认小鬼，Shift 虚空行者，Ctrl 魅魔，Alt 地狱猎犬；战斗中先开恶魔支配",
+   "bodyTemplate": "#showtooltip\\n/cast [combat] {{18708}}\\n/cast [mod:shift] {{697}}; [mod:ctrl] {{712}}; [mod:alt] {{691}}; {{688}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    18708,
+    697,
+    691,
+    712,
+    688
+   ],
+   "spellIdsInBody": [
+    18708,
+    697,
+    712,
+    691,
+    688
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [combat] 恶魔支配\\n/cast [mod:shift] 召唤虚空行者; [mod:ctrl] 召唤魅魔; [mod:alt] 召唤地狱猎犬; 召唤小鬼"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-health-funnel",
+   "no": 4,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Health Funnel, or Consume Shadows out of combat",
+   "title": "生命通道 / 脱战吞噬暗影",
+   "noteEn": "Out of combat with the Voidwalker out, it casts Consume Shadows so the Voidwalker heals itself. Otherwise it channels Health Funnel into your demon.",
+   "note": "脱战且虚空行者在场就让它吞噬暗影回血，否则给恶魔生命通道",
+   "bodyTemplate": "#showtooltip\\n/cast [nocombat,pet:Voidwalker] {{17767}}; {{755}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    17767,
+    755
+   ],
+   "spellIdsInBody": [
+    17767,
+    755
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [nocombat,pet:Voidwalker] 吞噬暗影; 生命通道"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-sacrifice",
+   "no": 5,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Voidwalker Sacrifice, then Drain Life",
+   "title": "牺牲虚空行者 + 吸取生命",
+   "noteEn": "Sacrifices your Voidwalker for a damage shield, then starts channelling Drain Life on your target.",
+   "note": "牺牲虚空行者拿护盾，接着对目标吸取生命",
+   "bodyTemplate": "#showtooltip {{7812}}\\n/cast [pet:Voidwalker] {{7812}}\\n/cast {{689}}",
+   "foreverNew": false,
+   "level": 16,
+   "spellIds": [
+    7812,
+    689
+   ],
+   "spellIdsInBody": [
+    7812,
+    7812,
+    689
+   ],
+   "bodyBakedByAddon": "#showtooltip 牺牲\\n/cast [pet:Voidwalker] 牺牲\\n/cast 吸取生命"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-demonic-sacrifice",
+   "no": 6,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Summon, then Demonic Sacrifice",
+   "title": "召唤 / 恶魔牺牲",
+   "noteEn": "With a demon out, it sacrifices it with Demonic Sacrifice. With none out, it summons the Imp, or the Voidwalker with Shift.",
+   "note": "恶魔在场就恶魔牺牲；不在就召唤小鬼（Shift 虚空行者）",
+   "bodyTemplate": "#showtooltip\\n/cast [pet] {{18788}}; [mod:shift] {{697}}; {{688}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    18788,
+    697,
+    688
+   ],
+   "spellIdsInBody": [
+    18788,
+    697,
+    688
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [pet] 恶魔牺牲; [mod:shift] 召唤虚空行者; 召唤小鬼"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-seduction",
+   "no": 7,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Seduction on your focus or mouseover",
+   "title": "诱惑焦点或鼠标指向",
+   "noteEn": "Your Succubus or Incubus casts Seduction on your focus, or on the enemy under your mouse, or on your target.",
+   "note": "魅魔依次对焦点、鼠标指向、目标放诱惑",
+   "bodyTemplate": "#showtooltip {{6358}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{6358}}",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    6358
+   ],
+   "spellIdsInBody": [
+    6358,
+    6358
+   ],
+   "bodyBakedByAddon": "#showtooltip 诱惑\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 诱惑"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-devour-magic",
+   "no": 8,
+   "group": "恶魔",
+   "groupEn": "Your demon",
+   "titleEn": "Devour Magic on friends or enemies",
+   "title": "吞噬魔法（敌我通用）",
+   "noteEn": "Your Felhunter casts Devour Magic on the friend or enemy under your mouse, or on your target.",
+   "note": "地狱猎犬对鼠标指向或目标吞噬魔法，友方敌方都行",
+   "bodyTemplate": "#showtooltip {{17012}}\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][] {{17012}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    17012
+   ],
+   "spellIdsInBody": [
+    17012,
+    17012
+   ],
+   "bodyBakedByAddon": "#showtooltip 吞噬魔法\\n/cast [@mouseover,help,nodead][@mouseover,harm,nodead][] 吞噬魔法"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-fear",
+   "no": 9,
+   "group": "恐惧、放逐与诅咒",
+   "groupEn": "Fear, Banish and curses",
+   "titleEn": "Fear your focus or mouseover",
+   "title": "恐惧术焦点或鼠标指向",
+   "noteEn": "Casts Fear on your focus if it's a living enemy, otherwise on the enemy under your mouse, otherwise on your target.",
+   "note": "依次对活着的敌对焦点、鼠标指向、目标恐惧",
+   "bodyTemplate": "#showtooltip {{5782}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{5782}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    5782
+   ],
+   "spellIdsInBody": [
+    5782,
+    5782
+   ],
+   "bodyBakedByAddon": "#showtooltip 恐惧术\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 恐惧术"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-banish",
+   "no": 10,
+   "group": "恐惧、放逐与诅咒",
+   "groupEn": "Fear, Banish and curses",
+   "titleEn": "Banish your focus or mouseover",
+   "title": "放逐术焦点或鼠标指向",
+   "noteEn": "Casts Banish on your focus, or on the enemy under your mouse, or on your target.",
+   "note": "依次对焦点、鼠标指向、目标放逐",
+   "bodyTemplate": "#showtooltip {{710}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{710}}",
+   "foreverNew": false,
+   "level": 28,
+   "spellIds": [
+    710
+   ],
+   "spellIdsInBody": [
+    710,
+    710
+   ],
+   "bodyBakedByAddon": "#showtooltip 放逐术\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 放逐术"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-curses",
+   "no": 11,
+   "group": "恐惧、放逐与诅咒",
+   "groupEn": "Fear, Banish and curses",
+   "titleEn": "Three curses on one key, on your mouseover",
+   "title": "诅咒一键（鼠标指向）",
+   "noteEn": "Casts Curse of Weakness, or Curse of Recklessness with Shift, or Curse of the Elements with Ctrl, on the enemy under your mouse or on your target.",
+   "note": "默认虚弱诅咒，Shift 鲁莽诅咒，Ctrl 元素诅咒；鼠标指向或目标",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] {{704}}; [mod:ctrl,@mouseover,harm,nodead][mod:ctrl] {{440892}}; [@mouseover,harm,nodead][] {{702}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    704,
+    440892,
+    702
+   ],
+   "spellIdsInBody": [
+    704,
+    440892,
+    702
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] 鲁莽诅咒; [mod:ctrl,@mouseover,harm,nodead][mod:ctrl] 元素诅咒; [@mouseover,harm,nodead][] 虚弱诅咒"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-amplify-bane",
+   "no": 12,
+   "group": "恐惧、放逐与诅咒",
+   "groupEn": "Fear, Banish and curses",
+   "titleEn": "Bane of Agony, with Amplify Curse on Shift",
+   "title": "痛苦灾祸，Shift 先诅咒增幅",
+   "noteEn": "Casts Bane of Agony. With Shift, it casts Amplify Curse first, so this Bane is 50% stronger.",
+   "note": "痛苦灾祸；Shift 先开诅咒增幅，这次强 50%",
+   "bodyTemplate": "#showtooltip {{980}}\\n/cast [mod:shift] {{18288}}\\n/cast {{980}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    980,
+    18288
+   ],
+   "spellIdsInBody": [
+    980,
+    18288,
+    980
+   ],
+   "bodyBakedByAddon": "#showtooltip 痛苦灾祸\\n/cast [mod:shift] 诅咒增幅\\n/cast 痛苦灾祸"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-dots-sequence",
+   "no": 13,
+   "group": "恐惧、放逐与诅咒",
+   "groupEn": "Fear, Banish and curses",
+   "titleEn": "Bane of Agony, then Immolate",
+   "title": "痛苦灾祸 → 献祭",
+   "noteEn": "The first press casts Bane of Agony and the second Immolate. Changing target or leaving combat starts it again at Bane of Agony.",
+   "note": "第一下痛苦灾祸，第二下献祭；换目标或脱战从头开始",
+   "bodyTemplate": "#showtooltip\\n/castsequence reset=target/combat {{980}}, {{348}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    980,
+    348
+   ],
+   "spellIdsInBody": [
+    980,
+    348
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence reset=target/combat 痛苦灾祸, 献祭"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-shadowburn",
+   "no": 14,
+   "group": "输出与灵魂碎片",
+   "groupEn": "Damage and Soul Shards",
+   "titleEn": "Shadowburn right now",
+   "title": "立即暗影灼烧",
+   "noteEn": "Stops the spell you're casting and casts Shadowburn at once.",
+   "note": "打断正在读的法术，马上暗影灼烧",
+   "bodyTemplate": "#showtooltip {{17877}}\\n/stopcasting\\n/cast {{17877}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    17877
+   ],
+   "spellIdsInBody": [
+    17877,
+    17877
+   ],
+   "bodyBakedByAddon": "#showtooltip 暗影灼烧\\n/stopcasting\\n/cast 暗影灼烧"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-drain-soul-rank1",
+   "no": 15,
+   "group": "输出与灵魂碎片",
+   "groupEn": "Damage and Soul Shards",
+   "titleEn": "Drain Soul rank 1 for shards",
+   "title": "1 级吸取灵魂（攒碎片）",
+   "noteEn": "Channels rank 1 of Drain Soul, which costs little mana.",
+   "note": "引导 1 级吸取灵魂，耗蓝少，专门收灵魂碎片",
+   "bodyTemplate": "#showtooltip {{1120}}\\n/cast {{1120}}(Rank 1)",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    1120
+   ],
+   "spellIdsInBody": [
+    1120,
+    1120
+   ],
+   "bodyBakedByAddon": "#showtooltip 吸取灵魂\\n/cast 吸取灵魂(Rank 1)"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-rain-of-fire",
+   "no": 16,
+   "group": "输出与灵魂碎片",
+   "groupEn": "Damage and Soul Shards",
+   "titleEn": "Rain of Fire at your cursor",
+   "title": "火焰之雨放到鼠标位置",
+   "noteEn": "Channels Rain of Fire where your mouse points, with no targeting circle to place.",
+   "note": "直接在鼠标指的地方引导火焰之雨",
+   "bodyTemplate": "#showtooltip {{5740}}\\n/cast [@cursor] {{5740}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    5740
+   ],
+   "spellIdsInBody": [
+    5740,
+    5740
+   ],
+   "bodyBakedByAddon": "#showtooltip 火焰之雨\\n/cast [@cursor] 火焰之雨"
+  },
+  {
+   "cls": "Warlock",
+   "key": "warlock-create-stones",
+   "no": 17,
+   "group": "治疗石与灵魂石",
+   "groupEn": "Healthstones and soulstones",
+   "titleEn": "Create a healthstone, or a soulstone with Shift",
+   "title": "制造治疗石，Shift 灵魂石",
+   "noteEn": "Makes a healthstone, or a soulstone while you hold Shift. The highest rank you know is used.",
+   "note": "制造治疗石；按住 Shift 制造灵魂石（自动用最高等级）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{693}}; {{6201}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6201,
+    693
+   ],
+   "spellIdsInBody": [
+    693,
+    6201
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 制造灵魂石; 制造治疗石"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-2",
+   "no": 18,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Summon a demon with modifier keys",
+   "title": "召唤恶魔一键",
+   "noteEn": "Voidwalker; Shift Imp, Ctrl Succubus, Alt Felhunter.",
+   "note": "默认虚空行者，Shift 小鬼，Ctrl 魅魔，Alt 地狱猎犬（30 级起）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{688}}; [mod:ctrl] {{712}}; [mod:alt] {{691}}; {{697}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    697,
+    691,
+    712,
+    688
+   ],
+   "spellIdsInBody": [
+    688,
+    712,
+    691,
+    697
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 召唤小鬼; [mod:ctrl] 召唤魅魔; [mod:alt] 召唤地狱猎犬; 召唤虚空行者"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-3",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Pick your curse with a modifier key",
+   "title": "诅咒一键（鼠标指向）",
+   "noteEn": "Elements; Shift Weakness, Ctrl Recklessness, Alt Tongues.",
+   "note": "默认元素诅咒，Shift 虚弱诅咒，Ctrl 鲁莽诅咒，Alt 语言诅咒；支持鼠标指向（26 级起）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] {{702}}; [mod:ctrl,@mouseover,harm,nodead][mod:ctrl] {{704}}; [mod:alt] {{1714}}; [@mouseover,harm,nodead][] {{440892}}",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    704,
+    440892,
+    702,
+    1714
+   ],
+   "spellIdsInBody": [
+    702,
+    704,
+    1714,
+    440892
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,harm,nodead][mod:shift] 虚弱诅咒; [mod:ctrl,@mouseover,harm,nodead][mod:ctrl] 鲁莽诅咒; [mod:alt] 语言诅咒; [@mouseover,harm,nodead][] 元素诅咒"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-4",
+   "no": 20,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Dot sequence for leveling",
+   "title": "升级 DoT 连按",
+   "noteEn": "Pet in, then Immolate, Bane of Agony, Corruption, wand.",
+   "note": "恶魔先上，连按依次献祭、痛苦灾祸（《无限》新）、腐蚀术，最后魔杖",
+   "bodyTemplate": "#showtooltip\\n/petattack [harm,nodead]\\n/castsequence reset=target {{348}}, {{980}}, {{172}}, !{{5019}}",
+   "foreverNew": true,
+   "level": 8,
+   "spellIds": [
+    348,
+    980,
+    172,
+    5019
+   ],
+   "spellIdsInBody": [
+    348,
+    980,
+    172,
+    5019
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/petattack [harm,nodead]\\n/castsequence reset=target 献祭, 痛苦灾祸, 腐蚀术, !魔杖射击"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-5",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Wand without toggling it off",
+   "title": "魔杖射击（不会关掉）",
+   "noteEn": "Keep the wand firing.",
+   "note": "开魔杖射击，连按不会关掉",
+   "bodyTemplate": "#showtooltip 18\\n/cast !{{5019}}",
+   "foreverNew": false,
+   "level": 0,
+   "spellIds": [
+    5019
+   ],
+   "spellIdsInBody": [
+    5019
+   ],
+   "bodyBakedByAddon": "#showtooltip 18\\n/cast !魔杖射击"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-6",
+   "no": 22,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Create your stones with one button",
+   "title": "造石头一键",
+   "noteEn": "Healthstone; Shift Soulstone, Ctrl Spellstone, Alt Firestone.",
+   "note": "默认制造治疗石，Shift 灵魂石，Ctrl 法术石，Alt 火焰石（36 级起）",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{693}}; [mod:ctrl] {{2362}}; [mod:alt] {{6366}}; {{6201}}",
+   "foreverNew": false,
+   "level": 36,
+   "spellIds": [
+    6201,
+    2362,
+    6366,
+    693
+   ],
+   "spellIdsInBody": [
+    693,
+    2362,
+    6366,
+    6201
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 制造灵魂石; [mod:ctrl] 制造法术石; [mod:alt] 制造火焰石; 制造治疗石"
+  },
+  {
+   "cls": "Warlock",
+   "key": "cwf-warlock-7",
+   "no": 23,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Announce Ritual of Summoning",
+   "title": "召唤仪式 + 小队提示",
+   "noteEn": "Tell your party who you are summoning, then start.",
+   "note": "先在小队里说要拉谁，再开召唤仪式",
+   "bodyTemplate": "#showtooltip {{698}}\\n/party Summoning %t, please click the portal\\n/cast {{698}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    698
+   ],
+   "spellIdsInBody": [
+    698,
+    698
+   ],
+   "bodyBakedByAddon": "#showtooltip 召唤仪式\\n/party Summoning %t, please click the portal\\n/cast 召唤仪式"
+  },
+  {
+   "cls": "Warlock",
+   "key": "dy-warlock-0",
+   "no": 24,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Shadow Bolt and send the pet",
+   "title": "暗影箭 + 宠物攻击",
+   "noteEn": "Sends your demon in and casts Shadow Bolt.",
+   "note": "宠物先冲，暗影箭跟上",
+   "bodyTemplate": "#showtooltip {{686}}\\n/petattack\\n/cast {{686}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    686
+   ],
+   "spellIdsInBody": [
+    686,
+    686
+   ],
+   "bodyBakedByAddon": "#showtooltip 暗影箭\\n/petattack\\n/cast 暗影箭"
+  },
+  {
+   "cls": "Warlock",
+   "key": "dy-warlock-1",
+   "no": 25,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Corruption on mouseover",
+   "title": "腐蚀术（鼠标指向）",
+   "noteEn": "Corruption on the enemy under the mouse without changing target.",
+   "note": "鼠标指谁腐蚀谁，不用换目标",
+   "bodyTemplate": "#showtooltip {{172}}\\n/cast [@mouseover,harm,nodead][] {{172}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    172
+   ],
+   "spellIdsInBody": [
+    172,
+    172
+   ],
+   "bodyBakedByAddon": "#showtooltip 腐蚀术\\n/cast [@mouseover,harm,nodead][] 腐蚀术"
+  },
+  {
+   "cls": "Warlock",
+   "key": "dy-warlock-2",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Drain Life, Shift Drain Soul",
+   "title": "吸取生命，Shift 吸取灵魂",
+   "noteEn": "Drain Life by default; Shift for Drain Soul.",
+   "note": "裸按吸取生命回血，按住 Shift 吸取灵魂",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{1120}}; {{689}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    689,
+    1120
+   ],
+   "spellIdsInBody": [
+    1120,
+    689
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 吸取灵魂; 吸取生命"
+  },
+  {
+   "cls": "Warlock",
+   "key": "dy-warlock-3",
+   "no": 27,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Life Tap out of combat, Drain Life in combat",
+   "title": "脱战生命分流 / 战斗中吸取生命",
+   "noteEn": "Out of combat it Life Taps for mana; in combat it Drain Lifes your mouseover or target. Won't cut a channel.",
+   "note": "脱战生命分流回蓝，战斗中吸取生命（鼠标指向优先）；正在引导时不打断",
+   "bodyTemplate": "#showtooltip\\n/stopmacro [channeling]\\n/cast [nocombat] {{1454}}; [@mouseover,harm,nodead][] {{689}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    1454,
+    689
+   ],
+   "spellIdsInBody": [
+    1454,
+    689
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/stopmacro [channeling]\\n/cast [nocombat] 生命分流; [@mouseover,harm,nodead][] 吸取生命"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-cat-shift-free",
+   "no": 1,
+   "group": "形态",
+   "groupEn": "Forms",
+   "titleEn": "Shift out of roots and slows into Cat Form",
+   "title": "变猎豹解减速定身",
+   "noteEn": "Drops whatever form you're in and shifts straight into Cat Form on the same press. If you're already in caster form, it just shifts.",
+   "note": "取消当前形态并马上变猎豹；人形时直接变",
+   "bodyTemplate": "#showtooltip {{768}}\\n/cancelform\\n/cast {{768}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    768
+   ],
+   "spellIdsInBody": [
+    768,
+    768
+   ],
+   "bodyBakedByAddon": "#showtooltip 猎豹形态\\n/cancelform\\n/cast 猎豹形态"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-travel-forms",
+   "no": 2,
+   "group": "形态",
+   "groupEn": "Forms",
+   "titleEn": "Aquatic Form in water, Cat Form on land",
+   "title": "水里水栖、陆地猎豹",
+   "noteEn": "Shifts into Aquatic Form when you're swimming, and Cat Form on land. With Shift outdoors, Travel Form.",
+   "note": "游泳时变水栖形态，陆地变猎豹；户外按 Shift 变旅行形态",
+   "bodyTemplate": "#showtooltip\\n/cast [swimming] {{1066}}; [mod:shift,outdoors] {{783}}; {{768}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1066,
+    783,
+    768
+   ],
+   "spellIdsInBody": [
+    1066,
+    783,
+    768
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [swimming] 水栖形态; [mod:shift,outdoors] 旅行形态; 猎豹形态"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-bear-maul",
+   "no": 3,
+   "group": "形态",
+   "groupEn": "Forms",
+   "titleEn": "Bear Form, then Maul (Swipe with Shift)",
+   "title": "熊形态 + 槌击（Shift 挥击）",
+   "noteEn": "Out of Bear Form, it shifts you into Bear Form. In Bear Form, it starts your auto-attack and uses Maul, or Swipe with Shift.",
+   "note": "不是熊先变熊；是熊就开自动攻击并槌击，Shift 改挥击",
+   "bodyTemplate": "#showtooltip\\n/startattack [form:1,harm,nodead]\\n/cast [form:1,mod:shift] {{779}}; [form:1] {{6807}}; {{5487}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6807,
+    5487,
+    779
+   ],
+   "spellIdsInBody": [
+    779,
+    6807,
+    5487
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack [form:1,harm,nodead]\\n/cast [form:1,mod:shift] 挥击; [form:1] 槌击; 熊形态"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-cat-prowl",
+   "no": 4,
+   "group": "形态",
+   "groupEn": "Forms",
+   "titleEn": "Cat Form, then Prowl",
+   "title": "猎豹形态 + 潜行",
+   "noteEn": "In caster form or Bear Form, shifts you into Cat Form. In Cat Form, Prowls. Pressing it again while prowling doesn't cancel it.",
+   "note": "人形或熊形态先变猎豹；猎豹形态潜行，连按不会退出",
+   "bodyTemplate": "#showtooltip {{5215}}\\n/cast [noform][form:1] {{768}}; !{{5215}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    5215,
+    768
+   ],
+   "spellIdsInBody": [
+    5215,
+    768,
+    5215
+   ],
+   "bodyBakedByAddon": "#showtooltip 潜行\\n/cast [noform][form:1] 猎豹形态; !潜行"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-feral-charge",
+   "no": 5,
+   "group": "野性：冲锋、晕与嘲讽",
+   "groupEn": "Feral: charges, stuns and taunts",
+   "titleEn": "Feral Charge and start attacking",
+   "title": "野性冲锋 + 自动攻击",
+   "noteEn": "Uses Feral Charge on your target and starts your auto-attack.",
+   "note": "对目标野性冲锋并开自动攻击",
+   "bodyTemplate": "#showtooltip {{1238122}}\\n/cast {{1238122}}\\n/startattack",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    1238122
+   ],
+   "spellIdsInBody": [
+    1238122,
+    1238122
+   ],
+   "bodyBakedByAddon": "#showtooltip 野性冲锋\\n/cast 野性冲锋\\n/startattack"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-bash-focus",
+   "no": 6,
+   "group": "野性：冲锋、晕与嘲讽",
+   "groupEn": "Feral: charges, stuns and taunts",
+   "titleEn": "Bash your focus, mouseover or target",
+   "title": "重击焦点 / 鼠标指向 / 目标",
+   "noteEn": "Bashes your focus if it's in melee range, otherwise the enemy under your mouse, otherwise your target.",
+   "note": "焦点在近战范围就重击焦点，否则鼠标指向，再否则目标",
+   "bodyTemplate": "#showtooltip {{5211}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{5211}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    5211
+   ],
+   "spellIdsInBody": [
+    5211,
+    5211
+   ],
+   "bodyBakedByAddon": "#showtooltip 重击\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 重击"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-growl-mouseover",
+   "no": 7,
+   "group": "野性：冲锋、晕与嘲讽",
+   "groupEn": "Feral: charges, stuns and taunts",
+   "titleEn": "Growl the enemy under your mouse",
+   "title": "低吼鼠标指向",
+   "noteEn": "Taunts the enemy under your mouse, or your target if you're not pointing at one.",
+   "note": "嘲讽鼠标指向的敌人，没指着就嘲讽目标",
+   "bodyTemplate": "#showtooltip {{6795}}\\n/cast [@mouseover,harm,nodead][] {{6795}}",
+   "foreverNew": false,
+   "level": 10,
+   "spellIds": [
+    6795
+   ],
+   "spellIdsInBody": [
+    6795,
+    6795
+   ],
+   "bodyBakedByAddon": "#showtooltip 低吼\\n/cast [@mouseover,harm,nodead][] 低吼"
+  },
+  {
+   "cls": "Druid",
+   "key": "dy-druid-0",
+   "no": 24,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Moonfire on mouseover",
+   "title": "月火术（鼠标指向）",
+   "noteEn": "Moonfire the enemy under the mouse without changing target.",
+   "note": "鼠标指谁月火谁，不用换目标",
+   "bodyTemplate": "#showtooltip {{8921}}\\n/cast [@mouseover,harm,nodead][] {{8921}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    8921
+   ],
+   "spellIdsInBody": [
+    8921,
+    8921
+   ],
+   "bodyBakedByAddon": "#showtooltip 月火术\\n/cast [@mouseover,harm,nodead][] 月火术"
+  },
+  {
+   "cls": "Druid",
+   "key": "dy-druid-1",
+   "no": 25,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Wrath, Shift Starfire",
+   "title": "愤怒，Shift 星火术",
+   "noteEn": "Wrath by default; Shift for Starfire.",
+   "note": "裸按愤怒，按住 Shift 星火术",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift] {{2912}}; {{5176}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    5176,
+    2912
+   ],
+   "spellIdsInBody": [
+    2912,
+    5176
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift] 星火术; 愤怒"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-0",
+   "no": 29,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Moonkin Form without dropping out",
+   "title": "枭兽形态（连按不会退出）",
+   "noteEn": "Shifts into Moonkin Form. Pressing it again while in Moonkin Form does nothing, so you never drop out by accident.",
+   "note": "变枭兽形态；已经是枭兽时再按不会切出来，不怕手滑",
+   "bodyTemplate": "#showtooltip {{24858}}\\n/cast !{{24858}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    24858
+   ],
+   "spellIdsInBody": [
+    24858,
+    24858
+   ],
+   "bodyBakedByAddon": "#showtooltip 枭兽形态\\n/cast !枭兽形态"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-1",
+   "no": 30,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Insect Swarm on mouseover",
+   "title": "虫群（鼠标指向）",
+   "noteEn": "Insect Swarm the enemy under the mouse without changing target; otherwise your target.",
+   "note": "鼠标指谁给谁上虫群，不用换目标；没指着就打目标",
+   "bodyTemplate": "#showtooltip {{24974}}\\n/cast [@mouseover,harm,nodead][] {{24974}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    24974
+   ],
+   "spellIdsInBody": [
+    24974,
+    24974
+   ],
+   "bodyBakedByAddon": "#showtooltip 虫群\\n/cast [@mouseover,harm,nodead][] 虫群"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-2",
+   "no": 31,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Moonfire, then Insect Swarm",
+   "title": "月火 → 虫群（两下上齐 DOT）",
+   "noteEn": "Press twice: Moonfire, then Insect Swarm on the mouseover or target. Resets when you change target or after 12 s.",
+   "note": "连按两下：先月火再虫群，鼠标指向优先；换目标或 12 秒后从头来",
+   "bodyTemplate": "#showtooltip\\n/castsequence [@mouseover,harm,nodead][] reset=target/12 {{8921}}, {{24974}}",
+   "foreverNew": false,
+   "level": 25,
+   "spellIds": [
+    24974,
+    8921
+   ],
+   "spellIdsInBody": [
+    8921,
+    24974
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence [@mouseover,harm,nodead][] reset=target/12 月火术, 虫群"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-3",
+   "no": 32,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Faerie Fire on mouseover",
+   "title": "精灵之火（鼠标指向）",
+   "noteEn": "Faerie Fire the enemy under the mouse; otherwise your target. Shows rogues and lowers armor.",
+   "note": "鼠标指谁上谁，没指着就打目标；破潜行、降护甲",
+   "bodyTemplate": "#showtooltip {{770}}\\n/cast [@mouseover,harm,nodead][] {{770}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    770
+   ],
+   "spellIdsInBody": [
+    770,
+    770
+   ],
+   "bodyBakedByAddon": "#showtooltip 精灵之火\\n/cast [@mouseover,harm,nodead][] 精灵之火"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-4",
+   "no": 33,
+   "group": "平衡（鸟德）",
+   "groupEn": "Balance (Moonkin)",
+   "titleEn": "Hurricane at the cursor",
+   "title": "飓风（直接放在鼠标位置）",
+   "noteEn": "Casts Hurricane where your mouse is pointing, without the targeting circle.",
+   "note": "不出绿圈，直接在鼠标位置放飓风",
+   "bodyTemplate": "#showtooltip {{16914}}\\n/cast [@cursor] {{16914}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    16914
+   ],
+   "spellIdsInBody": [
+    16914,
+    16914
+   ],
+   "bodyBakedByAddon": "#showtooltip 飓风\\n/cast [@cursor] 飓风"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-healing-touch",
+   "no": 9,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Healing Touch on your mouseover, Shift for a cheap rank",
+   "title": "治疗之触鼠标指向，Shift 低等级",
+   "noteEn": "Casts your highest Healing Touch on the friend under your mouse, your friendly target or yourself (Alt: always yourself). With Shift, rank 2 instead.",
+   "note": "最高等级治疗之触给鼠标指向 / 友方目标 / 自己（Alt 给自己）；Shift 用 2 级",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{5185}}(Rank 2); [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] {{5185}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    5185
+   ],
+   "spellIdsInBody": [
+    5185,
+    5185
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 治疗之触(Rank 2); [mod:alt,@player][@mouseover,help,nodead][help,nodead][@player] 治疗之触"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-rejuv-regrowth",
+   "no": 10,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Rejuvenation, or Regrowth with Shift, on your mouseover",
+   "title": "回春术，Shift 愈合",
+   "noteEn": "Casts Rejuvenation on the friend under your mouse, your friendly target or yourself. With Shift, Regrowth.",
+   "note": "给鼠标指向 / 友方目标 / 自己回春术；Shift 改愈合",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{8936}}; [@mouseover,help,nodead][help,nodead][@player] {{774}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    774,
+    8936
+   ],
+   "spellIdsInBody": [
+    8936,
+    774
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 愈合; [@mouseover,help,nodead][help,nodead][@player] 回春术"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-natures-swiftness-heal",
+   "no": 11,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Nature's Swiftness into an instant Healing Touch",
+   "title": "自然迅捷 + 瞬发治疗之触",
+   "noteEn": "Activates Nature's Swiftness and casts Healing Touch on your mouseover, friendly target or yourself. Nature's Swiftness makes it instant.",
+   "note": "开自然迅捷，治疗之触变瞬发，给鼠标指向 / 友方目标 / 自己",
+   "bodyTemplate": "#showtooltip {{17116}}\\n/cast {{17116}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{5185}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    17116,
+    5185
+   ],
+   "spellIdsInBody": [
+    17116,
+    17116,
+    5185
+   ],
+   "bodyBakedByAddon": "#showtooltip 自然迅捷\\n/cast 自然迅捷\\n/cast [@mouseover,help,nodead][help,nodead][@player] 治疗之触"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-4",
+   "no": 20,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Mouseover Innervate",
+   "title": "激活（鼠标指向）",
+   "noteEn": "Leaves form; mouseover, target or self.",
+   "note": "先退出形态，给鼠标指向 / 友方目标 / 自己激活（40 级起）",
+   "bodyTemplate": "#showtooltip {{29166}}\\n/cancelform\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{29166}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    29166
+   ],
+   "spellIdsInBody": [
+    29166,
+    29166
+   ],
+   "bodyBakedByAddon": "#showtooltip 激活\\n/cancelform\\n/cast [@mouseover,help,nodead][help,nodead][@player] 激活"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-8",
+   "no": 22,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Heal from any form",
+   "title": "任何形态直接治疗",
+   "noteEn": "Leaves form; Healing Touch, Shift Regrowth.",
+   "note": "先退出形态；默认治疗之触，Shift 愈合；鼠标指向优先",
+   "bodyTemplate": "#showtooltip {{5185}}\\n/cancelform\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] {{8936}}; [@mouseover,help,nodead][@player] {{5185}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    5185,
+    8936
+   ],
+   "spellIdsInBody": [
+    5185,
+    8936,
+    5185
+   ],
+   "bodyBakedByAddon": "#showtooltip 治疗之触\\n/cancelform\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,@player] 愈合; [@mouseover,help,nodead][@player] 治疗之触"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-5",
+   "no": 34,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Swiftmend on mouseover",
+   "title": "迅捷治愈（鼠标指向）",
+   "noteEn": "Swiftmend the friend under the mouse, then your friendly target, then yourself. Needs Rejuvenation or Regrowth on them.",
+   "note": "鼠标指向 / 友方目标 / 自己；对方身上要有回春或愈合",
+   "bodyTemplate": "#showtooltip {{18562}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{18562}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    18562
+   ],
+   "spellIdsInBody": [
+    18562,
+    18562
+   ],
+   "bodyBakedByAddon": "#showtooltip 迅捷治愈\\n/cast [@mouseover,help,nodead][help,nodead][@player] 迅捷治愈"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-6",
+   "no": 35,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Rejuvenation, then Swiftmend",
+   "title": "回春 → 迅捷治愈（急救一键）",
+   "noteEn": "Press twice: Rejuvenation, then Swiftmend on the same mouseover / friendly target / yourself. Resets after 6 s.",
+   "note": "连按两下：先回春，再迅捷治愈把它吃掉回一大口；6 秒后从头来",
+   "bodyTemplate": "#showtooltip\\n/castsequence [@mouseover,help,nodead][help,nodead][@player] reset=6 {{774}}, {{18562}}",
+   "foreverNew": false,
+   "level": 30,
+   "spellIds": [
+    774,
+    18562
+   ],
+   "spellIdsInBody": [
+    774,
+    18562
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/castsequence [@mouseover,help,nodead][help,nodead][@player] reset=6 回春术, 迅捷治愈"
+  },
+  {
+   "cls": "Druid",
+   "key": "spec-druid-7",
+   "no": 36,
+   "group": "恢复（奶德）",
+   "groupEn": "Restoration (healer)",
+   "titleEn": "Wild Growth on mouseover",
+   "title": "野性成长（鼠标指向）",
+   "noteEn": "Wild Growth centered on the friend under the mouse, then your friendly target, then yourself.",
+   "note": "以鼠标指向 / 友方目标 / 自己为中心放野性成长",
+   "bodyTemplate": "#showtooltip {{408120}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{408120}}",
+   "foreverNew": false,
+   "level": 40,
+   "spellIds": [
+    408120
+   ],
+   "spellIdsInBody": [
+    408120,
+    408120
+   ],
+   "bodyBakedByAddon": "#showtooltip 野性成长\\n/cast [@mouseover,help,nodead][help,nodead][@player] 野性成长"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-shift-out-heal",
+   "no": 8,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Leave your form and heal yourself",
+   "title": "出形态给自己回血",
+   "noteEn": "Drops your Bear or Cat Form and casts Rejuvenation on yourself, or Regrowth with Shift.",
+   "note": "取消熊 / 猎豹形态给自己回春术；Shift 改愈合",
+   "bodyTemplate": "#showtooltip\\n/cancelform\\n/cast [mod:shift,@player] {{8936}}; [@player] {{774}}",
+   "foreverNew": false,
+   "level": 4,
+   "spellIds": [
+    774,
+    8936
+   ],
+   "spellIdsInBody": [
+    8936,
+    774
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cancelform\\n/cast [mod:shift,@player] 愈合; [@player] 回春术"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-cures",
+   "no": 12,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Cure Poison, or Remove Curse with Shift, on your mouseover",
+   "title": "消毒术，Shift 解除诅咒",
+   "noteEn": "Cures 1 poison from the friend under your mouse, your friendly target or yourself. With Shift, removes a curse instead.",
+   "note": "驱鼠标指向 / 友方目标 / 自己 1 个毒；Shift 改解诅咒",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{2782}}; [@mouseover,help,nodead][help,nodead][@player] {{8946}}",
+   "foreverNew": false,
+   "level": 14,
+   "spellIds": [
+    2782,
+    8946
+   ],
+   "spellIdsInBody": [
+    2782,
+    8946
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 解除诅咒; [@mouseover,help,nodead][help,nodead][@player] 消毒术"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-rebirth-revive",
+   "no": 13,
+   "group": "治疗、驱散与复活",
+   "groupEn": "Healing, cures and resurrection",
+   "titleEn": "Rebirth in combat, Revive out of combat",
+   "title": "战斗复生，脱战起死回生",
+   "noteEn": "On a dead friend under your mouse (or your dead target): in combat it casts Rebirth, out of combat it casts Revive.",
+   "note": "对鼠标下（或目标）的死亡队友：战斗中复生，脱战起死回生",
+   "bodyTemplate": "#showtooltip\\n/cast [combat,@mouseover,help,dead][combat,help,dead] {{20484}}; [@mouseover,help,dead][help,dead] {{437138}}",
+   "foreverNew": false,
+   "level": 12,
+   "spellIds": [
+    20484,
+    437138
+   ],
+   "spellIdsInBody": [
+    20484,
+    437138
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [combat,@mouseover,help,dead][combat,help,dead] 复生; [@mouseover,help,dead][help,dead] 起死回生"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-mark-thorns",
+   "no": 14,
+   "group": "增益、控制与赶路",
+   "groupEn": "Buffs, crowd control and travel",
+   "titleEn": "Mark of the Wild, or Thorns with Shift, on your mouseover",
+   "title": "野性印记，Shift 荆棘术",
+   "noteEn": "Casts Mark of the Wild on the friend under your mouse, your friendly target or yourself. With Shift, Thorns.",
+   "note": "给鼠标指向 / 友方目标 / 自己野性印记；Shift 改荆棘术",
+   "bodyTemplate": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{467}}; [@mouseover,help,nodead][help,nodead][@player] {{1126}}",
+   "foreverNew": false,
+   "level": 1,
+   "spellIds": [
+    1126,
+    467
+   ],
+   "spellIdsInBody": [
+    467,
+    1126
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 荆棘术; [@mouseover,help,nodead][help,nodead][@player] 野性印记"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-roots-focus",
+   "no": 15,
+   "group": "增益、控制与赶路",
+   "groupEn": "Buffs, crowd control and travel",
+   "titleEn": "Entangling Roots on your focus, mouseover or target",
+   "title": "纠缠根须焦点 / 鼠标指向 / 目标",
+   "noteEn": "Roots your focus, or the enemy under your mouse, or your target.",
+   "note": "依次对焦点、鼠标指向、目标放纠缠根须",
+   "bodyTemplate": "#showtooltip {{339}}\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] {{339}}",
+   "foreverNew": false,
+   "level": 8,
+   "spellIds": [
+    339
+   ],
+   "spellIdsInBody": [
+    339,
+    339
+   ],
+   "bodyBakedByAddon": "#showtooltip 纠缠根须\\n/cast [@focus,harm,nodead][@mouseover,harm,nodead][] 纠缠根须"
+  },
+  {
+   "cls": "Druid",
+   "key": "druid-hibernate-focus",
+   "no": 16,
+   "group": "增益、控制与赶路",
+   "groupEn": "Buffs, crowd control and travel",
+   "titleEn": "Hibernate, and Shift sets the focus first",
+   "title": "休眠，Shift 先设焦点",
+   "noteEn": "With Shift held, makes the enemy under your mouse (or your target) your focus and puts it to sleep. Without Shift, re-sleeps your focus, or your target if you have no focus.",
+   "note": "Shift：把鼠标指向（或目标）设成焦点并休眠；不按 Shift 补焦点",
+   "bodyTemplate": "#showtooltip {{2637}}\\n/focus [mod:shift,@mouseover,harm,nodead][mod:shift]\\n/cast [@focus,harm,nodead][] {{2637}}",
+   "foreverNew": false,
+   "level": 18,
+   "spellIds": [
+    2637
+   ],
+   "spellIdsInBody": [
+    2637,
+    2637
+   ],
+   "bodyBakedByAddon": "#showtooltip 休眠\\n/focus [mod:shift,@mouseover,harm,nodead][mod:shift]\\n/cast [@focus,harm,nodead][] 休眠"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-0",
+   "no": 17,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Rebirth",
+   "title": "复生（鼠标指向）",
+   "noteEn": "Battle-res the dead friend under your cursor.",
+   "note": "战复鼠标指向的或当前目标的阵亡队友",
+   "bodyTemplate": "#showtooltip {{20484}}\\n/cast [@mouseover,help,dead][help,dead][] {{20484}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    20484
+   ],
+   "spellIdsInBody": [
+    20484,
+    20484
+   ],
+   "bodyBakedByAddon": "#showtooltip 复生\\n/cast [@mouseover,help,dead][help,dead][] 复生"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-1",
+   "no": 18,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Remove Curse",
+   "title": "解除诅咒（鼠标指向）",
+   "noteEn": "Mouseover, target or self.",
+   "note": "鼠标指向 / 友方目标 / 自己（24 级起）",
+   "bodyTemplate": "#showtooltip {{2782}}\\n/cast [@mouseover,help,nodead][help,nodead][@player] {{2782}}",
+   "foreverNew": false,
+   "level": 24,
+   "spellIds": [
+    2782
+   ],
+   "spellIdsInBody": [
+    2782,
+    2782
+   ],
+   "bodyBakedByAddon": "#showtooltip 解除诅咒\\n/cast [@mouseover,help,nodead][help,nodead][@player] 解除诅咒"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-2",
+   "no": 19,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Mouseover Cure / Abolish Poison",
+   "title": "消毒术 / 驱毒术（鼠标指向）",
+   "noteEn": "Cure Poison; Shift Abolish Poison. Leaves your form first.",
+   "note": "先退出形态；默认消毒术，Shift 驱毒术（26 级起）",
+   "bodyTemplate": "#showtooltip {{8946}}\\n/cancelform\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] {{2893}}; [@mouseover,help,nodead][help,nodead][@player] {{8946}}",
+   "foreverNew": false,
+   "level": 26,
+   "spellIds": [
+    8946,
+    2893
+   ],
+   "spellIdsInBody": [
+    8946,
+    2893,
+    8946
+   ],
+   "bodyBakedByAddon": "#showtooltip 消毒术\\n/cancelform\\n/cast [mod:shift,@mouseover,help,nodead][mod:shift,help,nodead][mod:shift,@player] 驱毒术; [@mouseover,help,nodead][help,nodead][@player] 消毒术"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-6",
+   "no": 21,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Cat Form or Bear Form on one key",
+   "title": "猎豹 / 熊形态一键",
+   "noteEn": "Cat; Shift Bear.",
+   "note": "默认猎豹形态，Shift 熊形态",
+   "bodyTemplate": "#showtooltip [mod:shift] {{5487}}; {{768}}\\n/dismount\\n/cast [mod:shift] {{5487}}; {{768}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    5487,
+    768
+   ],
+   "spellIdsInBody": [
+    5487,
+    768,
+    5487,
+    768
+   ],
+   "bodyBakedByAddon": "#showtooltip [mod:shift] 熊形态; 猎豹形态\\n/dismount\\n/cast [mod:shift] 熊形态; 猎豹形态"
+  },
+  {
+   "cls": "Druid",
+   "key": "cwf-druid-9",
+   "no": 23,
+   "group": "更多",
+   "groupEn": "More from classicwowforever",
+   "titleEn": "Drop your form and dismount",
+   "title": "退出形态 + 下马",
+   "noteEn": "Stop casting, leave form, dismount.",
+   "note": "停读条、退出形态、下马",
+   "bodyTemplate": "/stopcasting\\n/cancelform\\n/dismount",
+   "foreverNew": false,
+   "level": 0,
+   "spellIds": [],
+   "spellIdsInBody": [],
+   "bodyBakedByAddon": "/stopcasting\\n/cancelform\\n/dismount"
+  },
+  {
+   "cls": "Druid",
+   "key": "dy-druid-2",
+   "no": 26,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Cat: Shred, Shift Claw",
+   "title": "猎豹：撕碎，Shift 爪击",
+   "noteEn": "Gets you into Cat Form (the ! stops it shifting back), then Shred; Shift for Claw.",
+   "note": "不在豹形态先变豹（带 ! 不会变回去），再撕碎；按住 Shift 爪击",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1082}}; {{5221}}",
+   "foreverNew": false,
+   "level": 20,
+   "spellIds": [
+    768,
+    5221,
+    1082
+   ],
+   "spellIdsInBody": [
+    768,
+    1082,
+    5221
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/cast !猎豹形态\\n/cast [mod:shift] 爪击; 撕碎"
+  },
+  {
+   "cls": "Druid",
+   "key": "dy-druid-3",
+   "no": 27,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Cat finisher: Ferocious Bite, Shift Rip",
+   "title": "猎豹终结：凶猛撕咬，Shift 撕扯",
+   "noteEn": "Cat Form if needed, then Ferocious Bite; Shift for Rip.",
+   "note": "不在豹形态先变豹，再凶猛撕咬；按住 Shift 撕扯（流血）",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1079}}; {{22568}}",
+   "foreverNew": false,
+   "level": 32,
+   "spellIds": [
+    768,
+    22568,
+    1079
+   ],
+   "spellIdsInBody": [
+    768,
+    1079,
+    22568
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/cast !猎豹形态\\n/cast [mod:shift] 撕扯; 凶猛撕咬"
+  },
+  {
+   "cls": "Druid",
+   "key": "dy-druid-4",
+   "no": 28,
+   "group": "练级常用",
+   "groupEn": "Leveling picks",
+   "titleEn": "Prowl, then Ravage or Shift Pounce",
+   "title": "潜行开怪：毁灭，Shift 突袭",
+   "noteEn": "Out of combat and not prowling it Prowls; then Ravage, or Pounce with Shift.",
+   "note": "站着不动先进潜行，再毁灭开怪；按住 Shift 突袭",
+   "bodyTemplate": "#showtooltip\\n/cast !{{768}}\\n/cast [nostealth,nocombat] {{5215}}; [mod:shift] {{9005}}; {{6785}}",
+   "foreverNew": false,
+   "level": 36,
+   "spellIds": [
+    768,
+    9005,
+    6785,
+    5215
+   ],
+   "spellIdsInBody": [
+    768,
+    5215,
+    9005,
+    6785
+   ],
+   "bodyBakedByAddon": "#showtooltip\\n/cast !猎豹形态\\n/cast [nostealth,nocombat] 潜行; [mod:shift] 突袭; 毁灭"
+  }
+ ]
+}
