@@ -26,10 +26,15 @@
 
     <!-- 九职业：点一个才取那一职业那一片（进这一页只取索引，不一次拉 245 条） -->
     <view class="card">
-      <view class="chips">
-        <view wx:for="{{classes}}" wx:key="classId" class="chip {{cls === item.classId ? 'chip-on' : ''}}"
-              data-id="{{item.classId}}" bindtap="pickClass">{{item.className}}<text class="chip-n">{{item.count}}</text></view>
-      </view>
+      <!-- 职业条：与配装页同一副长相（图标 + 名字 + 这个职业几条），九个一排横着滚 -->
+      <scroll-view class="rail" scroll-x enable-flex>
+        <view wx:for="{{classes}}" wx:key="classId" class="rtab {{cls === item.classId ? 'on' : ''}}"
+              data-id="{{item.classId}}" bindtap="pickClass">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.className}}" />
+          <view class="rtab-n">{{item.className}}</view>
+          <view class="rtab-c">{{item.count}} 条</view>
+        </view>
+      </scroll-view>
       <input class="inp" value="{{q}}" placeholder="搜标题、说明或宏正文" confirm-type="search" bindinput="onSearch" />
       <view class="chips grp-chips" wx:if="{{groups.length}}">
         <view wx:for="{{groups}}" wx:key="*this" class="chip chip-s {{grp === item ? 'chip-on' : ''}}"

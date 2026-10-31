@@ -1270,6 +1270,10 @@ function buildBatch(env, opts) {
       b.rows.push(row)
     })
     if (dropped) console.log('  · 宏：' + dropped + ' 条没有可追的来源（url + 核对日），按"待核"不下发')
+    /* 职业图标不自己造名字：吃 classIndex 那份（同一批里已经登记过的 iconKey），
+       两处各写一套 "class_warrior" 这种字符串，迟早一端漂了另一端还绿着 */
+    const classIcon = {}
+    ;((classIndexObj || {}).classes || []).forEach((c) => { classIcon[c.classId] = c.iconKey || null })
     const setsOut = []
     byClass.sort((a, b) => CLASS_IDS.indexOf(a.classId) - CLASS_IDS.indexOf(b.classId)).forEach((c) => {
       const obj = {
@@ -1298,10 +1302,15 @@ function buildBatch(env, opts) {
       cols: MACRO_COLS, colNote: MACRO_COL_NOTE,
       groups: groups,
       levels: ms.reduce((o, m) => { const k = String(m.level || '未标'); o[k] = (o[k] || 0) + 1; return o }, {}),
-      classes: byClass.map((c) => ({
-        classId: c.classId, className: c.className, count: c.rows.length,
-        path: 'macros/set/' + c.classId + '.json'
-      })),
+      classes: byClass.map((c) => {
+        const iconKey = classIcon[c.classId] || null
+        if (!iconKey) errors.push('宏：职业 ' + c.classId + ' 在 classIndex 里没有图标键，职业条会缺图')
+        else useIcon(iconKey, 'macros/index')
+        return {
+          classId: c.classId, className: c.className, count: c.rows.length,
+          iconKey: iconKey, path: 'macros/set/' + c.classId + '.json'
+        }
+      }),
       counts: {
         macros: ms.length, sent: byClass.reduce((t, c) => t + c.rows.length, 0),
         classes: byClass.length, groups: groups.length,

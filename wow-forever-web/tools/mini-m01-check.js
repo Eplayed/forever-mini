@@ -1016,11 +1016,12 @@ async function main() {
     const p = getCurrentPages().pop();
     const d = p.data;
     return { route: d ? p.route : '', locked: d.locked, cls: d.cls, chips: (d.classes || []).length,
+      icons: (d.classes || []).filter((c) => /^http/.test(String(c.iconUrl || ''))).length,
       rows: (d.rows || []).length, total: d.total, groups: (d.groups || []).length,
       dis: (d.meta || {}).disclaimer || '', stat: d.statText };
   }), 3);
-  log('macros 拧开就出现（代码一行没动），并且真的取到了这一职业那一片',
-    !!mOn && mOn.locked === false && mOn.chips === 9 && mOn.rows > 5 && mOn.cls === 'warrior'
+  log('macros 拧开就出现（代码一行没动），九职业条每个都带图标，并且真的取到了这一职业那一片',
+    !!mOn && mOn.locked === false && mOn.chips === 9 && mOn.icons === 9 && mOn.rows > 5 && mOn.cls === 'warrior'
       && /第三方插件整理/.test(String(mOn.dis)), JSON.stringify(mOn || {}).slice(0, 200));
   log('页头那句口径由分发层下发（不冒充实测、免费、不分发插件），页面不改写',
     !!mOn && /没有逐条进游戏试过/.test(String(mOn.dis)) && /免费/.test(String(mOn.dis)), '');

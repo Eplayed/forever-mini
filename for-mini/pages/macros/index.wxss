@@ -44,6 +44,42 @@
   flex-wrap: wrap;
 }
 
+/* 职业条：与配装页 .rail/.rtab 同一套尺寸与配色（同一件事在两端就该长一个样），
+   图标由 icon-cell 兜底：没取到图会显示职业名首字，不会留空格子 */
+.rail {
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.rtab {
+  display: inline-block;
+  width: 132rpx;
+  margin-right: 12rpx;
+  padding: 14rpx 6rpx 12rpx;
+  text-align: center;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
+  white-space: normal;
+  vertical-align: top;
+}
+
+.rtab.on {
+  border-color: var(--gold);
+  background: var(--panel);
+}
+
+.rtab-n {
+  font-size: 22rpx;
+  color: var(--txt-dim);
+  margin-top: 6rpx;
+}
+
+.rtab-c {
+  font-size: 18rpx;
+  color: var(--txt-muted);
+}
+
 .chip-n {
   color: var(--txt-hint);
   font-size: 20rpx;

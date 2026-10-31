@@ -90,7 +90,10 @@ Page({
           this.setData({
             loaded: true,
             meta: d.meta,
-            classes: d.classes,
+            classes: d.classes.map((c) => ({
+              classId: c.classId, className: c.className, count: c.count,
+              iconUrl: oss.iconUrl(this.batch, c.iconKey)
+            })),
             statText: d.counts.sent + ' 条宏 · ' + d.counts.classes + ' 个职业 · '
               + d.counts.groups + ' 类用途 · 无限新增标"新" ' + d.counts.foreverNew + ' 条',
             needOnline: ri.source !== 'live'
