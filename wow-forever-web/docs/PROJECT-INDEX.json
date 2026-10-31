@@ -1,6 +1,6 @@
 {
- "head": "e97105adfb43788a6d221456436b3a484860d865",
- "fingerprint": "82b63ac8a0d05dcad24292556282868f19829728a3c35f77a6dfe17ffd0c5d6a",
+ "head": "639c152762d56c55af38f83da9bbf5dbeecb7465",
+ "fingerprint": "169f3cbcf08aed37e8753a1cfade3bfa2a1fc6adb21d602aeee4d848f99212f9",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 9089,
-   "mtimeNs": 1793369611146822880
+   "bytes": 9280,
+   "mtimeNs": 1793449411768412093
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 658502,
-   "mtimeNs": 1793370427718274862
+   "bytes": 661478,
+   "mtimeNs": 1793449476430484130
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -455,8 +455,8 @@
   },
   {
    "path": "for-mini/pages/macros/index.js",
-   "bytes": 8983,
-   "mtimeNs": 1793369922707280257
+   "bytes": 9145,
+   "mtimeNs": 1793447833204141876
   },
   {
    "path": "for-mini/pages/macros/index.json",
@@ -1315,8 +1315,13 @@
   },
   {
    "path": "wow-forever-web/docs/HANDOVER-2026-10-29-去Windows继续.md",
-   "bytes": 12027,
-   "mtimeNs": 1793253721979027224
+   "bytes": 12344,
+   "mtimeNs": 1793449406317617931
+  },
+  {
+   "path": "wow-forever-web/docs/HANDOVER-2026-10-30-去Windows继续.md",
+   "bytes": 13753,
+   "mtimeNs": 1793449370504344394
   },
   {
    "path": "wow-forever-web/docs/IDEA-b2b-license-pilot-2026-10-10.md",
@@ -2505,8 +2510,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 76746,
-   "mtimeNs": 1793369922746176435
+   "bytes": 76890,
+   "mtimeNs": 1793447833207690895
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2540,8 +2545,8 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 173857,
-   "mtimeNs": 1793369368317684259
+   "bytes": 174464,
+   "mtimeNs": 1793447833203021511
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
