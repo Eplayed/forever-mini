@@ -1,6 +1,6 @@
 # wow-forever · 当前接手入口
 
-更新：2026-10-30（北京时间）。这是短索引；开工时先核实际 Git 状态、Qoder/Codex 正在运行的任务和本题最新交接。历史快照不自动代表现状。
+更新：2026-10-31（北京时间）。这是短索引；开工时先核实际 Git 状态、Qoder/Codex 正在运行的任务和本题最新交接。历史快照不自动代表现状。
 
 ## 先读哪里
 
@@ -9,7 +9,7 @@
 | 角色、红线、验证方式 | 根 `AGENTS.md`；具体门禁见 `PROJECT_GATES.md`；网页再看 `wow-forever-web/AGENTS.md`，小程序再看 `for-mini/AGENTS.md` |
 | 站主按日期追加的决定 | `PROJECT_DECISIONS.md`，只读本题相关章节 |
 | 最新任务证据与待确认项 | `ROLES.md` 末尾相关交接；对应的 `wow-forever-web/docs/` 或 `for-mini/docs/` 原件 |
-| **换机器接手（去 Windows 那台继续）** | `wow-forever-web/docs/HANDOVER-2026-10-30-去Windows继续.md`——自足：路径表、规则真源指针、门禁命令、这一天新落了什么、宏命令那 41 个法术名与 `(Rank N)` 为什么要那台才能核、地图那一层缺什么、给 Windows 的六条导出纪律。（`HANDOVER-2026-10-29-…` 留作昨天的快照，它的"当前状态"已被覆盖） |
+| **换机器接手（去 Windows 那台继续）** | `wow-forever-web/docs/HANDOVER-2026-10-30-去Windows继续.md`——自足：路径表、规则真源指针、门禁命令、这一天新落了什么、宏命令那 41 个法术名与 `(Rank N)` 为什么要那台才能核、地图那一层缺什么、给 Windows 的六条导出纪律。**第九节是 2026-10-31 换机前现测**（远端 beta 现状、`git pull` 后库里缺的三类文件与后果、Mac 独有工具链别照抄、门禁当前数、这次全量推送推了什么≠发布了什么），与前面冲突以第九节为准。（`HANDOVER-2026-10-29-…` 留作前天的快照，它的"当前状态"已被覆盖） |
 | 网页文档导航 | `wow-forever-web/docs/README.md` 与 `PROJECT-INDEX.md`；索引只负责找路径 |
 | 六个角色 Skill | `.agents/skills/wow-*/SKILL.md` 是真源；`.qoder/skills/` 和 `.trae/skills/` 是镜像，按根规则同步 |
 
