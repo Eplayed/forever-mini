@@ -1,6 +1,6 @@
 {
- "head": "d631ef0985c6b546074b9dee6622e2cb479658ff",
- "fingerprint": "4a7e9de5340e6918f867974924b8ce746f4427398e1937b0fc1c26ea032343f5",
+ "head": "0138663edd172deed68cda3db907394a242721f7",
+ "fingerprint": "983caa03a2d74a38f0ffb6cc9e7d5a4d470e6e2aeb2780b533c3a85bc2d628be",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 9682,
-   "mtimeNs": 1793449830271755378
+   "bytes": 9938,
+   "mtimeNs": 1793450587200943815
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 663569,
-   "mtimeNs": 1793449846716141593
+   "bytes": 667162,
+   "mtimeNs": 1793450826447549067
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -1320,8 +1320,8 @@
   },
   {
    "path": "wow-forever-web/docs/HANDOVER-2026-10-30-去Windows继续.md",
-   "bytes": 15763,
-   "mtimeNs": 1793449781674920319
+   "bytes": 27979,
+   "mtimeNs": 1793450739831579416
   },
   {
    "path": "wow-forever-web/docs/IDEA-b2b-license-pilot-2026-10-10.md",
