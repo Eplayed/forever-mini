@@ -59,3 +59,12 @@ wow-forever-web/release/
 # build-xr-probe.py 生成的扫码预览工程：可随时重生成，且里面烘了一条 OSS 地址，不入库
 /xr-probe/
 /xr-probe-remote/
+
+# 网页配装 3D 的 76 份客户端整人模型（34 MB）。**台账 `real/manifest.json` 与 `art.json.bisRealModels` 照旧入库**，
+# 只有二进制不进：① 远端 `Eplayed/forever-mini` 是**公开仓库**，而"客户端派生模型上静态托管"这条红线
+# （任务 #104）还没拍板，发布白名单本来也只放 `models/manifest.json` 顶层 `origin == "self-generated"` 那几个；
+# ② 这台到 GitHub 的通道抖、仓库已 2.0 GB，PNG/GLB 在 git 里压不动，每轮重导就永久多留一份。
+# 代价要认：换机器后这些文件不在克隆里，`site-check.py` 的 [6b] 配装那节会红（点 3D 拿不到文件就退回图片）。
+# 要在那台重出：按 `wow-forever-web/docs/VERIFY-全职业真实3D接入-2026-10-29.md` 的导出与校正工序，
+# 或跑 `tools/import-bis-real-models.py` + `tools/optimize-bis-glb.py` + `tools/apply-optimized-bis-models.py`。
+wow-forever-web/app/img/models/real/*.glb

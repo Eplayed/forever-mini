@@ -123,7 +123,8 @@ onMounted(async () => {
         const distance = Math.max(size.y / 2, size.x / (2 * camera.aspect)) * 1.25 / Math.tan(halfFov);
         camera.position.set(0, 0, distance);
         camera.lookAt(0, 0, 0);
-        yaw = 0;
+        // 客户端导出的整人模型正面朝 +X；本站相机朝 -Z 看。
+        yaw = -Math.PI / 2;
         pitch = 0;
         spin = 0;
       } else {

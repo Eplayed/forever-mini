@@ -55,7 +55,23 @@
 | `9fa2ece` | 宏命令证据图改走 `snap()`，刷新成带角标那一版 | 已提交 |
 | 小程序线（`2a7a679d`…`8791680c`） | BiS 真实 3D 的 B1→B3→C 全链（76 份模型发 beta、点一次只取一件、拿不到退回原画）、配装格改竖盒 + 本站渲的 6 张底图 | 已提交，站主真机确认"模型都有了"；**拖动/换套不留旧画面/退出重进/iOS 仍未验** |
 | 小程序线（`e97105ad`） | **小程序宏命令页**：245 条按职业分片、只读 + 复制，`flags.json` 里开关**默认关着** | 已提交，未开开关 |
-| 网页 3D（本轮收口时提交） | 76 份客户端整人模型接进配装页：`app/img/models/real/`（34 MB / 77 份 GLB + manifest）、`art.json.bisRealModels` 台账、`ModelViewer` 朝向修正、配装判据按"当前套装/阵营命中才出 3D 按钮" | **本轮之前一直只在工作树里**，换机时随全量提交入库；逐套人眼位置抽查仍挂着 |
+| 网页 3D（本轮收口时提交） | 76 份客户端整人模型接进配装页：`app/img/models/real/manifest.json` 台账、`art.json.bisRealModels`、`ModelViewer` 朝向修正、配装判据按"当前套装/阵营命中才出 3D 按钮"、三份产线工具（`import-bis-real-models.py` / `optimize-bis-glb.py` / `apply-optimized-bis-models.py`） | 台账与工具**已入库**；**34 MB 的 GLB 二进制按站主拍板不进 git**（见 3.1）；逐套人眼位置抽查仍挂着 |
+
+### 3.1 那 34 MB GLB 为什么不进库、换机后要补什么
+
+站主 2026-10-30 拍板：**不推，加进 `.gitignore`**。理由三条，都写在 `.gitignore` 那段注释里：
+远端 `Eplayed/forever-mini` 是**公开仓库**且已 2.0 GB；"客户端派生模型上静态托管"这条红线（任务 #104）还没拍板；
+发布白名单本来也只放 `models/manifest.json` 顶层 `origin == "self-generated"` 那几个，真模型从来没进过发布包。
+
+**代价要认**：Windows 那台 `git pull` 之后 `app/img/models/real/` 里只有 `manifest.json`、没有 `.glb`，
+于是 `site-check.py` 的 **[6b] 配装那一节会红**（点 3D 按钮拿不到文件就退回图片，"画布真的建起来了"那条必挂）。
+两条路二选一：① 在那台按 `VERIFY-全职业真实3D接入-2026-10-29.md` 的工序重导重算（客户端原件本来就在该台，工具已入库）；
+② 或从 Mac 直接把 `app/img/models/real/*.glb` 走 SMB 拷一次过去（`\\MACBOOKPRO-F157\project\wow-forever\...`），不提交。
+**别为了"让门禁绿"去改 [6b] 的判据**——它钉的是"玩家点 3D 要看到真模型"，不是文件在不在库里。
+
+**门禁截图的留存也收了口**：`docs/screenshots/check-2026-10-30/` 那 80 张 25 MB 里，本轮只把**被文档点名的 26 张**入库，
+其余留本地。仓库规则写的"新批次落库、上一批 tar 进 `screenshots-archive/` 再删"事实上一直没执行
+（`check-2026-10-16…10-29` 九个批次全在库里），这条要不要真执行是站主的清库决定，本轮没替他做。
 
 **要让玩家看到上面这些，得重新发一包**（`tools/release-package.py` → `pkg-verify.py` → `deploy-gh-pages.py --push`），**发布要站主点头**。
 "改了却看不见"先查线上包号，别先怀疑组件——10-28 那次真因就是线上停在 10-23。

@@ -2142,10 +2142,15 @@ def test_bis(browser, base):
     # 都不等于"画出来了"——第一版就是模型被整个藏掉，DOM 一切正常、屏幕上只有原画。
     art_data = json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
     art_bm = art_data.get("bisModels") or {}
-    hunter_real = [m for m in (art_data.get("bisRealModels") or {}).get("items", [])
-                   if m.get("setId") == "hunter" and m.get("placementVerdict") == "PASS"]
+    real_catalog = art_data.get("bisRealModels") or {}
+    real_for_set = [m for m in real_catalog.get("items", [])
+                    if real_catalog.get("origin") == "client-derived"
+                    and m.get("setId") == w["id"] and m.get("placementVerdict") == "PASS"
+                    and m.get("faction") in ("alliance", "horde") and m.get("file")]
+    has_real = any(m.get("faction") == "alliance" for m in real_for_set)
     models = art_bm.get("items") or []
-    has_model = bool(models) and art_bm.get("origin") == "self-generated"
+    has_placeholder = bool(models) and art_bm.get("origin") == "self-generated"
+    has_model = has_real or has_placeholder
     dctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     dp = dctx.new_page()
     dreq = []
@@ -2156,9 +2161,9 @@ def test_bis(browser, base):
     settle_motion(dp)   # 换 hash 走的是路由过渡，等它结束再读
     dp.wait_for_timeout(2200)
     dbtn = dp.query_selector("button.pz-3dbtn")
-    check("台账里有自产模型才出现这个按钮；没有模型就不该给玩家点（不猜路径）",
+    check("当前套装/阵营有已验收真实模型或自产占位时才出现 3D 按钮",
           (dbtn is not None) == has_model,
-          "台账 %d 个（origin=%s）／按钮 %s" % (len(models), art_bm.get("origin"), bool(dbtn)))
+          "真实 %d 个／占位 %d 个／按钮 %s" % (len(real_for_set), len(models), bool(dbtn)))
     pre = [u for u in dreq if "three" in u or "GLTFLoader" in u or u.endswith(".glb")]
     check("不点按钮时 three.js 与模型一个字节都不下载（首屏不为 3D 买单）", not pre,
           "点之前 3D 相关请求 %d 条" % len(pre))
@@ -2177,12 +2182,13 @@ def test_bis(browser, base):
                    w: c ? c.width : 0, h: c ? c.height : 0,
                    pressed: (document.querySelector('button.pz-3dbtn') || {}).getAttribute
                      ? document.querySelector('button.pz-3dbtn').getAttribute('aria-pressed') : '',
-                   honest: note.indexOf('占位模型') >= 0 && note.indexOf('不是游戏里的样子') >= 0 }; }""")
+                   realNote: note.indexOf('游戏角色与装备的静态预览') >= 0 && note.indexOf('拖动可旋转') >= 0,
+                   placeholderNote: note.indexOf('占位模型') >= 0 && note.indexOf('不是游戏里的样子') >= 0 }; }""")
         check("画布真的建起来了（three.js 会把自己标在 canvas 上）",
               bool(gl["eng"]) and gl["w"] > 200 and gl["pressed"] == "true",
               "%s ／ %sx%s" % (gl["eng"], gl["w"], gl["h"]))
-        check("界面上写死这句：这是本站自拼的占位模型、不是游戏里的样子（红线：不冒充）",
-              gl["honest"], "见 .pz-3dnote")
+        check("真实模型标静态预览；自产占位标不是游戏里的样子",
+              gl["realNote"] if has_real else gl["placeholderNote"], "见 .pz-3dnote")
         # A/B 两帧：开 3D 与退回图片，同一块区域必须明显不同
         box = dp.query_selector(".pzart")
         shot_on = box.screenshot()
@@ -2242,7 +2248,7 @@ def test_bis(browser, base):
                 return 100.0 * n / (ca.size[0] * ca.size[1])
 
             r2 = diff_ratio(shot_all, shot_horde)
-            if len(hunter_real) == 2:
+            if len(real_for_set) == 2:
                 check("两阵营真实 3D 模型跟着切换",
                       r2 >= 0.8, "联盟/部落两帧差异 %.1f%%（判据 ≥0.8%%）" % r2)
             else:
@@ -2252,7 +2258,7 @@ def test_bis(browser, base):
                 check("未验收真实模型时换阵营仍显示占位并重新挂载画布",
                       bool(note) and any("不是游戏里的样子" in x for x in note)
                       and dp.query_selector('canvas.pzc-gl') is not old_canvas,
-                      "真实模型 %d 份／像素差 %.1f%%" % (len(hunter_real), r2))
+                      "真实模型 %d 份／像素差 %.1f%%" % (len(real_for_set), r2))
         except ImportError:
             pass
         dp.wait_for_timeout(600)
