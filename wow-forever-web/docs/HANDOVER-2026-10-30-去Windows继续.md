@@ -11,7 +11,7 @@
 
 1. **拉仓**：远端 `Eplayed/forever-mini`，这台机器到 `github.com` 的 HTTPS 经常连不上，走
    `ssh://git@ssh.github.com:443/Eplayed/forever-mini.git`（443 端口那条 SSH 通道实测通）。
-   2026-10-31 Mac 侧已把整条 main 推上去（**含站主要求的全量收口：别人未提交的数据产物与两批证据截图一起进了库**），
+   2026-10-31 换机前 Mac 侧已把脏工作树整份收口并推平 main（**含站主那条"全部提交"：别人两条线未提交的数据产物与两批证据截图一起进了库**，见 9.5），
    所以拉完 `git log -1` 看到的就是 Mac 这边最后的状态；拉之前先 `git fetch`，别看本地旧副本判断"对方没做"。
 2. **看第九节**：那台 `git pull` 之后**库里缺的三类文件**（76 份网页 GLB、`.oss-env` 钥匙、本机开发者工具配置）
    各自怎么补、不补会撞哪条门禁——这三件不补，配装页与分发通道在那台是半瘫的。
@@ -251,12 +251,23 @@ python3 tools/project-index.py           # 收尾刷新路径索引
 
 ### 9.5 这次"全量提交并推送"到底推了什么，以及它**不等于**什么
 
-推的是 Mac 本地 main 上攒的全部提交：除了我这一轮的（图标 `d631ef09`、索引 `298db08f`、本节），
-还连带**别人两条线留在工作树的未提交改动**一起收进库——`for-mini/oss-preview/{dungeons,meta,spells}.json`、
-`for-mini/data/forever-{dungeon,meta}-snapshot.js`、`check-2026-10-29` 重拍的 87 张与 `check-2026-10-30` 剩下 54 张（约 17 MB）、
-小程序三批扫码/预览图。**推送 ≠ 发布**：线上 Pages 仍是 10-28 那一包 `wow-forever-web-20261028-174730-4e216292`，
+**先 `git fetch` 再判断"攒了多少没推"**——这条今天真撞上一次：本地一度显示领先远端 33 个提交，
+fetch 之后才发现远端 main 早被另一条线推到 `40d08981`（我 10-30 深夜那两个提交 `d631ef09`/`298db08f` 已经在里面），
+真正只差 2 个：**交接那一次（本节）与全量收口那一次**。本地 ref 不动就不会告诉你这件事。
+
+收口那一次把 Mac 侧脏工作树整份进了库，其中**不是我做的活**也一起带了：
+`for-mini/oss-preview/{dungeons,meta,spells}.json`、`for-mini/data/forever-{dungeon,meta}-snapshot.js`、
+`check-2026-10-29` 被重拍的 87 张与 `check-2026-10-30` 剩下 54 张（约 17 MB）、
+小程序三批扫码/预览图与两份 `preview-info.json`（只有包体大小，无 token）。
+**推送 ≠ 发布**：线上 Pages 仍是 10-28 那一包 `wow-forever-web-20261028-174730-4e216292`，
 OSS 的 release、beta 数据指针、`flags.json` 一个字没碰，小程序没提审没发布。
 "改了却看不见"先查线上包号，别先怀疑组件——10-28 那次真因就是线上停在 10-23。
+
+推之前扫过密钥（远端是**公开仓库**）：待推提交的文本 diff 与全部 747 个跟踪文本文件，
+按 LTAI / `ACCESS_KEY_SECRET=` 赋值 / GitHub token / 私钥头 四类形状扫，零命中；
+唯一一处命中是 `tools/oss-release-test.js:201` 的 `FAKESECRET` 测试夹具（该文件自己写明是冒充值）。
+`.oss-env`、跨仓那把 PoE 钥匙、`app/img/models/real/*.glb`、`for-mini/oss-build/` 全被 `.gitignore` 拦着，
+`git add -A` 之后逐条复核过暂存清单——**这次没有把任何钥匙推上公开仓库**。
 
 ### 9.6 换机不消失的账（照第七节，加今天这几条）
 
