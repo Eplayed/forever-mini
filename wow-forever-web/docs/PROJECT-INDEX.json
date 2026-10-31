@@ -1,6 +1,6 @@
 {
- "head": "639c152762d56c55af38f83da9bbf5dbeecb7465",
- "fingerprint": "169f3cbcf08aed37e8753a1cfade3bfa2a1fc6adb21d602aeee4d848f99212f9",
+ "head": "d631ef0985c6b546074b9dee6622e2cb479658ff",
+ "fingerprint": "4a7e9de5340e6918f867974924b8ce746f4427398e1937b0fc1c26ea032343f5",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 9280,
-   "mtimeNs": 1793449411768412093
+   "bytes": 9682,
+   "mtimeNs": 1793449830271755378
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 661478,
-   "mtimeNs": 1793449476430484130
+   "bytes": 663569,
+   "mtimeNs": 1793449846716141593
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -285,8 +285,8 @@
   },
   {
    "path": "for-mini/docs/VERIFY-小程序宏命令页-2026-10-30.md",
-   "bytes": 8172,
-   "mtimeNs": 1793370427649626000
+   "bytes": 10044,
+   "mtimeNs": 1793449799152123056
   },
   {
    "path": "for-mini/docs/VERIFY-小程序真实3D探针-2026-10-30.md",
@@ -1320,8 +1320,8 @@
   },
   {
    "path": "wow-forever-web/docs/HANDOVER-2026-10-30-去Windows继续.md",
-   "bytes": 13753,
-   "mtimeNs": 1793449370504344394
+   "bytes": 15763,
+   "mtimeNs": 1793449781674920319
   },
   {
    "path": "wow-forever-web/docs/IDEA-b2b-license-pilot-2026-10-10.md",
