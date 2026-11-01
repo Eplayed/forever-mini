@@ -131,6 +131,9 @@ def main():
         })
 
     all_ids = sorted(set(i for m in macros for i in m['spellIds']))
+    spell_names = up.get('spellNames') or {}
+    ver = up['meta'].get('addonVersions') or {'gi': '版本未记', 'xr': '版本未记'}
+    named = {str(i) for i in all_ids if str(i) in spell_names}
     counts = {
         'macros': len(macros),
         'classes': len(set(m['classId'] for m in macros)),
@@ -142,6 +145,9 @@ def main():
         'spellIdsAddonOnly': len(unverified_ids),
         'macrosAllOwnNamed': sum(1 for m in macros if set() == {k for k, v in m['nameFrom'].items() if v != 'own'}),
         'rankMarker': rank_marker,
+        'spellNameRows': len(spell_names),
+        'spellIdsWithEnglish': len(named),
+        'spellIdsWithoutEnglish': len(all_ids) - len(named),
     }
     out = {
         'meta': {
@@ -157,19 +163,23 @@ def main():
                         '本站免费列出、不收费也不分发插件；每条宏都标了是谁整理的，'
                         '但本站没有逐条进游戏试过，等级与法术名以你客户端里能学到的为准。',
             'sources': [
-                {'key': 'gi', 'name': 'GearInsight 无限版 0.5.6',
+                {'key': 'gi', 'name': 'GearInsight 无限版 %s' % ver['gi'],
                  'kind': '第三方插件整理（其文件自报宏来源为 foreverdb.net，对过 Beta 1.60.1.70205）',
                  'url': 'GearInsight_Forever/MacroData.lua', 'date': up['meta']['fetchedAt']},
-                {'key': 'xr', 'name': 'XR_DungeonGuide v87（作者 血染）',
+                {'key': 'xr', 'name': 'XR_DungeonGuide v%s（作者 血染）' % ver['xr'],
                  'kind': '同一批宏的另一份形态（文件自述「同步 GI 2026-10-19 新版」，不是独立第二来源）',
                  'url': 'XR_DungeonGuide/Data_Macros.lua', 'date': up['meta']['fetchedAt']},
             ],
+            'spellNamesNote': up['meta'].get('spellNamesNote') or
+                              '法术 ID 与中英名对照来自插件的 MacroSpellNames 表，本站未回客户端逐条核，按 L1 对待。',
             'licenseNote': up['meta']['licenseNote'],
             'unverifiedSpellIds': sorted(unverified_ids),
             'counts': counts,
         },
         'groups': up['groups'],
         'macros': macros,
+        # 只带这 245 条宏真用到的 ID：对照表以后变大了，页面负载不跟着涨
+        'spellNames': {k: spell_names[k] for k in sorted(named, key=int)},
     }
     io.open(OUT, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, indent=1) + '\n')
     print('宏 %d 条 / %d 职业 / %d 组 / 《无限》新技能 %d 条' %
@@ -178,6 +188,8 @@ def main():
           % (counts['spellIds'], counts['spellIdsOwnTable'], counts['spellIdsAddonOnly']))
     print('整条宏的名字全部出自本站表的：%d 条；带 (Rank N) 等级标记的：%d 条'
           % (counts['macrosAllOwnNamed'], counts['rankMarker']))
+    print('中英对照（插件 MacroSpellNames，L1）：%d 行，覆盖这 %d 条宏用到的 %d 个法术 ID 中的 %d 个'
+          % (counts['spellNameRows'], counts['macros'], counts['spellIds'], counts['spellIdsWithEnglish']))
     print('→', OUT)
 
 

@@ -138,6 +138,69 @@ dg.meta.lootDisclaimer = '掉落是按经典旧世公开数据库推出来的，
   + '正式开放可能变化——所以掉落一律标待实测，本站不写百分比。';
 dg.meta.upstream = { site: up.meta.site, source: up.meta.source, scrapedAt: up.meta.scrapedAt };
 
+/* ---------- 第三家首领名单（DungeonsForever 的掉落表）：只补我们缺的，我们有的不删 ---------- */
+// 快照由 tools/extract-df-loot.py 落在 upstream/df-dungeon-loot.json。
+// 为什么并进这个文件而不是另起一个脚本去改 dungeons.json：本文件每轮从 upstream 整表重算，
+// 补在外面的首领下一轮就被冲掉了——专业线栽过同一个坑（见 tools/refresh.sh 的 prof 那段注释）。
+// DF 的 300 行里有 41 行没有 npcId（小兵 / 图纸 / 战利品这类分组占位），那不是首领，一条都不收。
+const DF_PATH = path.join(ROOT, 'upstream', 'df-dungeon-loot.json');
+if (fs.existsSync(DF_PATH)) {
+  const dfsnap = JSON.parse(fs.readFileSync(DF_PATH, 'utf8'));
+  const byOurId = {};
+  (dfsnap.dungeons || []).forEach((x) => { byOurId[x.id] = x; });
+  const prov = {
+    type: 'addon',
+    url: 'DungeonsForever ' + (dfsnap.meta.addonVersion || '版本未记') + ' 的 Core/Data/Data_DungeonLoot.lua',
+    note: '第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删',
+    checkedAt: dfsnap.meta.fetched
+  };
+  // 与 build() 里那条同一个判断，另加 DF 常用的三种占位名
+  const notBoss = (s) => !s || /^(小怪|小兵|精英怪|图纸|战利品|trash|other)$/i.test(String(s).trim());
+  const slugOf = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  let added = 0, touched = 0;
+  const diffs = [];
+  [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
+    const src = byOurId[d.id];
+    if (!src) return;
+    d.bosses = d.bosses || [];
+    const real = (src.bosses || []).filter((b) => b.npcId !== null && !notBoss(b.nameCn));
+    const fresh = real.filter((b) => !d.bosses.some((x) => x.nameCn === b.nameCn ||
+      (b.nameEn && x.nameEn && x.nameEn === b.nameEn)));
+    fresh.forEach((b) => {
+      const base = slugOf(b.nameEn) || ('rare-' + b.npcId);
+      let id = base, k = 2;
+      while (d.bosses.some((x) => x.id === id)) id = base + '-' + (k++);
+      d.bosses.push({
+        id, nameCn: b.nameCn, nameEn: b.nameEn || null, npcId: b.npcId,
+        level: 'L1', from: 'df',
+        note: '这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。'
+      });
+      added += 1;
+    });
+    if (fresh.length) {
+      touched += 1;
+      d.provenance = (d.provenance || []).filter((p) => !(p.type === prov.type && p.url === prov.url))
+        .concat([prov]);
+    }
+    const ours = d.bosses.length;
+    if (ours - fresh.length !== real.length) diffs.push([d.id, d.nameCn, ours - fresh.length, real.length]);
+  });
+  dg.meta.bossRosterThirdSource = {
+    addon: 'DungeonsForever', addonVersion: dfsnap.meta.addonVersion || null,
+    sourceStamp: dfsnap.meta.sourceStamp || null, checkedAt: dfsnap.meta.fetched,
+    addedBossRows: added, dungeonsTouched: touched, countDiff: diffs,
+    note: '只补本站缺的首领，本站已有而它没有的一条不删；补进来的每条带 L1 与来源，掉落不写百分比'
+  };
+  console.log('第三家首领名单（DF 掉落表）：补进 %d 条首领，涉及 %d 座；两边条数不同（只补不删）%d 座',
+    added, touched, diffs.length);
+  if (diffs.length) {
+    console.log('  本站 / DF 逐座不同的：%s', diffs.slice(0, 8).map((x) => `${x[1] || x[0]} ${x[2]}:${x[3]}`).join('、')
+      + (diffs.length > 8 ? ` …共 ${diffs.length} 座` : ''));
+  }
+} else {
+  console.log('没有 upstream/df-dungeon-loot.json（先跑 tools/extract-df-loot.py），本轮不并第三家首领名单');
+}
+
 const cardsPath = path.join(ROOT, 'upstream', 'wclbox-cards.json');
 if (fs.existsSync(cardsPath)) {
   const cards = JSON.parse(fs.readFileSync(cardsPath, 'utf8'));

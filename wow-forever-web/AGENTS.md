@@ -67,10 +67,12 @@ python3 tools/extract-gi-pets.py                 # GI 的 PetData.lua → upstre
 python3 tools/merge-pets.py                      # → app/data/pets.json（18 家族 / 22 技能；全部 L1，未回客户端表核）
 python3 tools/extract-df-loot.py [--src <AddOns>] [--show]  # DF 的 Data_DungeonLoot.lua → upstream/df-dungeon-loot.json
                                                 # 首领中英文名 + npcId + 掉落物品 ID；掉率那一列当场丢（红线：掉落不写百分比）
-                                                # **只到快照，不写 dungeons.json**——补站内首领名单要先过站主/wow-pm
+                                                # 名单这一层已经并进 merge-dungeons.js 的后处理遍（只补不删，补进来的 L1 + from:'df'）；掉落物品 ID 还没进成品
                                                 # --src 不给时按 WOW_ADDONS → Mac 的 .scratch/wow → 本机 _cn_beta_ 找；300 行里有 41 行是无 npcId 的伪首领行，按 meta.counts.realBossRows 那一层判数
 python3 tools/openmap-tile-manifest.py           # OpenMap 的层图表 → docs/DATA-openmap-副本层图-*.csv（756 号逐条回读 listfile，任一不 verified 就非 0 退出，不出半成品表）
 python3 tools/build-zone-maps.py --dry-run|--out-dir|--apply   # 客户端 12 片区域瓦片拼成一张，裁到实测的 1002×668；片数不齐或内容盒对不上就跳过不硬拼
+python3 tools/extract-df-bis.py [--src <AddOns>] [--show]     # DF 的 Data_BIS.lua → upstream/df-bis.json（第三家 BiS：只取等级段/职业/专精/部位/物品ID/顺位；每格那列属性句是它写的，一条不取；三家对照还差一座部位桥，不许猜）
+python3 tools/extract-gi-prof-recipes.py [--src <AddOns>]     # GI 的 ProfRecipes.lua → upstream/gi-prof-recipes.json（2,457 条配方 + 1,093 条出处坐标；出处池前四列是作者写的句子，只取第 5–8 位）
 python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 app/data/releases.json）
 python3 tools/extract-abilities.py --write  # 从官方中文职业深度解析稿重抽技能四态（整句照录，名称不在句里就丢弃）
 python3 tools/release-package.py     # 打发布包（只发 app/dist，旧 html 的跳转桩已撤）

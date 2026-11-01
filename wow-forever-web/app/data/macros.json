@@ -1,26 +1,27 @@
 {
  "meta": {
-  "generatedAt": "2026-10-30",
-  "checkedAt": "2026-10-30",
+  "generatedAt": "2026-11-01",
+  "checkedAt": "2026-11-01",
   "kind": "macros",
   "method": "tools/extract-gi-macros.py 抽 upstream/gi-macros.json → 本脚本烘名。宏体里的法术名先用本站技能表（spells.json 的每阶 ID + upstream/gi-spells.json）翻，翻不出的 41 个 ID 退回插件烘好的那一名并标 nameFrom=addon；两份插件文件逐条对齐（同职业 / 同组 / 同中文标题）才允许这么退。",
   "pageNote": "宏命令与技能说明由第三方插件整理（其自报来源是 foreverdb.net 与 classicwowforever.com），本站免费列出、不收费也不分发插件；每条宏都标了是谁整理的，但本站没有逐条进游戏试过，等级与法术名以你客户端里能学到的为准。",
   "sources": [
    {
     "key": "gi",
-    "name": "GearInsight 无限版 0.5.6",
+    "name": "GearInsight 无限版 0.5.7",
     "kind": "第三方插件整理（其文件自报宏来源为 foreverdb.net，对过 Beta 1.60.1.70205）",
     "url": "GearInsight_Forever/MacroData.lua",
-    "date": "2026-10-30"
+    "date": "2026-11-01"
    },
    {
     "key": "xr",
-    "name": "XR_DungeonGuide v87（作者 血染）",
+    "name": "XR_DungeonGuide v95.7（作者 血染）",
     "kind": "同一批宏的另一份形态（文件自述「同步 GI 2026-10-19 新版」，不是独立第二来源）",
     "url": "XR_DungeonGuide/Data_Macros.lua",
-    "date": "2026-10-30"
+    "date": "2026-11-01"
    }
   ],
+  "spellNamesNote": "MacroSpellNames 只取 法术 ID + 中文名 + 英文原名 三项事实标识符；这是插件作者整理的对照，不是客户端表，本站按 L1 对待。",
   "licenseNote": "两个插件目录里都没有 LICENSE 文件、TOC 也没有 X-License 行；按根 AGENTS.md 2026-10-18「网页端放开清单」第 1 条分享宏文本与说明，硬边界是免费 + 标来源 + 不分发插件本体。",
   "unverifiedSpellIds": [
    701,
@@ -75,7 +76,10 @@
    "spellIdsOwnTable": 265,
    "spellIdsAddonOnly": 41,
    "macrosAllOwnNamed": 203,
-   "rankMarker": 5
+   "rankMarker": 5,
+   "spellNameRows": 306,
+   "spellIdsWithEnglish": 306,
+   "spellIdsWithoutEnglish": 0
   }
  },
  "groups": [
@@ -135,7 +139,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -170,7 +174,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -201,7 +205,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -232,7 +236,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -263,7 +267,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -294,7 +298,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -329,7 +333,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -358,7 +362,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -389,7 +393,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -422,7 +426,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -453,7 +457,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -484,7 +488,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -515,7 +519,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -548,7 +552,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -579,7 +583,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -608,7 +612,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -641,7 +645,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -670,7 +674,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -699,7 +703,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -724,7 +728,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -755,7 +759,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -786,7 +790,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -817,7 +821,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -848,7 +852,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -877,7 +881,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -906,7 +910,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -935,7 +939,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -964,7 +968,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -995,7 +999,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1026,7 +1030,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1059,7 +1063,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1088,7 +1092,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1117,7 +1121,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1150,7 +1154,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1181,7 +1185,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1212,7 +1216,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1245,7 +1249,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1276,7 +1280,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1305,7 +1309,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1336,7 +1340,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1365,7 +1369,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1396,7 +1400,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -1425,7 +1429,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1456,7 +1460,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1489,7 +1493,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1522,7 +1526,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1551,7 +1555,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1580,7 +1584,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1611,7 +1615,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1640,7 +1644,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1665,7 +1669,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1690,7 +1694,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1719,7 +1723,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1752,7 +1756,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1781,7 +1785,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1810,7 +1814,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1839,7 +1843,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1868,7 +1872,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1899,7 +1903,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1930,7 +1934,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1961,7 +1965,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -1992,7 +1996,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2025,7 +2029,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2054,7 +2058,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2087,7 +2091,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2116,7 +2120,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2145,7 +2149,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2176,7 +2180,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2207,7 +2211,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2242,7 +2246,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2273,7 +2277,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2306,7 +2310,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2339,7 +2343,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2370,7 +2374,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2405,7 +2409,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2438,7 +2442,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2471,7 +2475,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2500,7 +2504,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2531,7 +2535,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2560,7 +2564,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2591,7 +2595,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2620,7 +2624,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2649,7 +2653,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2682,7 +2686,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2711,7 +2715,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2746,7 +2750,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2777,7 +2781,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2808,7 +2812,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2837,7 +2841,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2866,7 +2870,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2903,7 +2907,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2934,7 +2938,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2959,7 +2963,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -2990,7 +2994,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3021,7 +3025,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3052,7 +3056,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3083,7 +3087,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3112,7 +3116,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3141,7 +3145,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3172,7 +3176,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3203,7 +3207,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3234,7 +3238,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3265,7 +3269,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3294,7 +3298,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3323,7 +3327,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3352,7 +3356,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3383,7 +3387,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3412,7 +3416,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3441,7 +3445,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3470,7 +3474,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3499,7 +3503,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3528,7 +3532,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3561,7 +3565,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3590,7 +3594,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3619,7 +3623,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3648,7 +3652,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3677,7 +3681,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3706,7 +3710,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3735,7 +3739,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3764,7 +3768,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3793,7 +3797,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3822,7 +3826,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3851,7 +3855,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3880,7 +3884,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3913,7 +3917,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3944,7 +3948,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -3973,7 +3977,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4006,7 +4010,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4037,7 +4041,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4070,7 +4074,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4103,7 +4107,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4138,7 +4142,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4169,7 +4173,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4198,7 +4202,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4227,7 +4231,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4260,7 +4264,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4289,7 +4293,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4318,7 +4322,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4347,7 +4351,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4376,7 +4380,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4407,7 +4411,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4438,7 +4442,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4467,7 +4471,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4498,7 +4502,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4533,7 +4537,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4562,7 +4566,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4591,7 +4595,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4622,7 +4626,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -4653,7 +4657,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -4688,7 +4692,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4719,7 +4723,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4750,7 +4754,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4781,7 +4785,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4810,7 +4814,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4841,7 +4845,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4870,7 +4874,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4899,7 +4903,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4928,7 +4932,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4957,7 +4961,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -4986,7 +4990,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5015,7 +5019,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5044,7 +5048,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5077,7 +5081,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5106,7 +5110,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5135,7 +5139,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5168,7 +5172,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5197,7 +5201,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5226,7 +5230,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5255,7 +5259,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5286,7 +5290,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5319,7 +5323,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5354,7 +5358,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5387,7 +5391,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5418,7 +5422,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5451,7 +5455,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -5486,7 +5490,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5519,7 +5523,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5552,7 +5556,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5581,7 +5585,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5612,7 +5616,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5643,7 +5647,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5674,7 +5678,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5711,7 +5715,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5744,7 +5748,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5769,7 +5773,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5806,7 +5810,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5837,7 +5841,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5868,7 +5872,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5901,7 +5905,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5930,7 +5934,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5959,7 +5963,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -5988,7 +5992,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6017,7 +6021,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6050,7 +6054,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6081,7 +6085,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6112,7 +6116,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6141,7 +6145,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6170,7 +6174,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6199,7 +6203,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6230,7 +6234,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6265,7 +6269,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6300,7 +6304,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": true,
@@ -6335,7 +6339,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6364,7 +6368,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6399,7 +6403,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6428,7 +6432,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6457,7 +6461,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6486,7 +6490,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6517,7 +6521,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6548,7 +6552,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6577,7 +6581,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6610,7 +6614,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6643,7 +6647,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6674,7 +6678,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6703,7 +6707,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6732,7 +6736,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6761,7 +6765,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6790,7 +6794,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6821,7 +6825,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6850,7 +6854,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6879,7 +6883,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6910,7 +6914,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6939,7 +6943,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6968,7 +6972,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -6997,7 +7001,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7028,7 +7032,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7059,7 +7063,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7088,7 +7092,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7119,7 +7123,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7148,7 +7152,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7179,7 +7183,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7208,7 +7212,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7239,7 +7243,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7270,7 +7274,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7301,7 +7305,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7332,7 +7336,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7361,7 +7365,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7390,7 +7394,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7419,7 +7423,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7448,7 +7452,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7479,7 +7483,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7510,7 +7514,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7535,7 +7539,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7568,7 +7572,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7601,7 +7605,7 @@
     {
      "key": "gi",
      "url": "GearInsight_Forever/MacroData.lua",
-     "checkedAt": "2026-10-30"
+     "checkedAt": "2026-11-01"
     }
    ],
    "foreverNew": false,
@@ -7620,5 +7624,1231 @@
    },
    "rankMarker": false
   }
- ]
+ ],
+ "spellNames": {
+  "10": {
+   "cn": "暴风雪",
+   "en": "Blizzard"
+  },
+  "17": {
+   "cn": "真言术：盾",
+   "en": "Power Word: Shield"
+  },
+  "53": {
+   "cn": "背刺",
+   "en": "Backstab"
+  },
+  "71": {
+   "cn": "防御姿态",
+   "en": "Defensive Stance"
+  },
+  "72": {
+   "cn": "盾击",
+   "en": "Shield Bash"
+  },
+  "75": {
+   "cn": "自动射击",
+   "en": "Auto Shot"
+  },
+  "78": {
+   "cn": "英勇打击",
+   "en": "Heroic Strike"
+  },
+  "100": {
+   "cn": "冲锋",
+   "en": "Charge"
+  },
+  "116": {
+   "cn": "寒冰箭",
+   "en": "Frostbolt"
+  },
+  "118": {
+   "cn": "变形术",
+   "en": "Polymorph"
+  },
+  "120": {
+   "cn": "冰锥术",
+   "en": "Cone of Cold"
+  },
+  "122": {
+   "cn": "冰霜新星",
+   "en": "Frost Nova"
+  },
+  "131": {
+   "cn": "水下呼吸",
+   "en": "Water Breathing"
+  },
+  "133": {
+   "cn": "火球术",
+   "en": "Fireball"
+  },
+  "136": {
+   "cn": "治疗宠物",
+   "en": "Mend Pet"
+  },
+  "139": {
+   "cn": "恢复",
+   "en": "Renew"
+  },
+  "168": {
+   "cn": "霜甲术",
+   "en": "Frost Armor"
+  },
+  "172": {
+   "cn": "腐蚀术",
+   "en": "Corruption"
+  },
+  "324": {
+   "cn": "闪电之盾",
+   "en": "Lightning Shield"
+  },
+  "331": {
+   "cn": "治疗波",
+   "en": "Healing Wave"
+  },
+  "332": {
+   "cn": "治疗波",
+   "en": "Healing Wave"
+  },
+  "339": {
+   "cn": "纠缠根须",
+   "en": "Entangling Roots"
+  },
+  "348": {
+   "cn": "献祭",
+   "en": "Immolate"
+  },
+  "355": {
+   "cn": "嘲讽",
+   "en": "Taunt"
+  },
+  "370": {
+   "cn": "净化术",
+   "en": "Purge"
+  },
+  "403": {
+   "cn": "闪电箭",
+   "en": "Lightning Bolt"
+  },
+  "408": {
+   "cn": "肾击",
+   "en": "Kidney Shot"
+  },
+  "421": {
+   "cn": "闪电链",
+   "en": "Chain Lightning"
+  },
+  "465": {
+   "cn": "虔诚光环",
+   "en": "Devotion Aura"
+  },
+  "467": {
+   "cn": "荆棘术",
+   "en": "Thorns"
+  },
+  "475": {
+   "cn": "解除次级诅咒",
+   "en": "Remove Lesser Curse"
+  },
+  "498": {
+   "cn": "圣佑术",
+   "en": "Divine Protection"
+  },
+  "526": {
+   "cn": "消毒术",
+   "en": "Cure Poison"
+  },
+  "527": {
+   "cn": "驱散魔法",
+   "en": "Dispel Magic"
+  },
+  "528": {
+   "cn": "祛病术",
+   "en": "Cure Disease"
+  },
+  "543": {
+   "cn": "防护火焰结界",
+   "en": "Fire Ward"
+  },
+  "546": {
+   "cn": "水上行走",
+   "en": "Water Walking"
+  },
+  "552": {
+   "cn": "驱除疾病",
+   "en": "Abolish Disease"
+  },
+  "585": {
+   "cn": "惩击",
+   "en": "Smite"
+  },
+  "587": {
+   "cn": "造食术",
+   "en": "Conjure Food"
+  },
+  "588": {
+   "cn": "心灵之火",
+   "en": "Inner Fire"
+  },
+  "589": {
+   "cn": "暗言术：痛",
+   "en": "Shadow Word: Pain"
+  },
+  "596": {
+   "cn": "治疗祷言",
+   "en": "Prayer of Healing"
+  },
+  "604": {
+   "cn": "魔法抑制",
+   "en": "Dampen Magic"
+  },
+  "633": {
+   "cn": "圣疗术",
+   "en": "Lay on Hands"
+  },
+  "635": {
+   "cn": "圣光术",
+   "en": "Holy Light"
+  },
+  "639": {
+   "cn": "圣光术",
+   "en": "Holy Light"
+  },
+  "642": {
+   "cn": "圣盾术",
+   "en": "Divine Shield"
+  },
+  "676": {
+   "cn": "缴械",
+   "en": "Disarm"
+  },
+  "679": {
+   "cn": "神圣打击",
+   "en": "Holy Strike"
+  },
+  "686": {
+   "cn": "暗影箭",
+   "en": "Shadow Bolt"
+  },
+  "688": {
+   "cn": "召唤小鬼",
+   "en": "Summon Imp"
+  },
+  "689": {
+   "cn": "吸取生命",
+   "en": "Drain Life"
+  },
+  "691": {
+   "cn": "召唤地狱猎犬",
+   "en": "Summon Felhunter"
+  },
+  "693": {
+   "cn": "制造灵魂石",
+   "en": "Create Soulstone"
+  },
+  "694": {
+   "cn": "惩戒痛击",
+   "en": "Mocking Blow"
+  },
+  "697": {
+   "cn": "召唤虚空行者",
+   "en": "Summon Voidwalker"
+  },
+  "698": {
+   "cn": "召唤仪式",
+   "en": "Ritual of Summoning"
+  },
+  "701": {
+   "cn": "火焰箭",
+   "en": "Firebolt"
+  },
+  "702": {
+   "cn": "虚弱诅咒",
+   "en": "Curse of Weakness"
+  },
+  "703": {
+   "cn": "绞喉",
+   "en": "Garrote"
+  },
+  "704": {
+   "cn": "鲁莽诅咒",
+   "en": "Curse of Recklessness"
+  },
+  "710": {
+   "cn": "放逐术",
+   "en": "Banish"
+  },
+  "712": {
+   "cn": "召唤魅魔",
+   "en": "Summon Succubus"
+  },
+  "755": {
+   "cn": "生命通道",
+   "en": "Health Funnel"
+  },
+  "759": {
+   "cn": "制造魔法玛瑙",
+   "en": "Conjure Mana Agate"
+  },
+  "768": {
+   "cn": "猎豹形态",
+   "en": "Cat Form"
+  },
+  "770": {
+   "cn": "精灵之火",
+   "en": "Faerie Fire"
+  },
+  "774": {
+   "cn": "回春术",
+   "en": "Rejuvenation"
+  },
+  "779": {
+   "cn": "挥击",
+   "en": "Swipe"
+  },
+  "783": {
+   "cn": "旅行形态",
+   "en": "Travel Form"
+  },
+  "845": {
+   "cn": "顺劈斩",
+   "en": "Cleave"
+  },
+  "853": {
+   "cn": "制裁之锤",
+   "en": "Hammer of Justice"
+  },
+  "871": {
+   "cn": "盾墙",
+   "en": "Shield Wall"
+  },
+  "879": {
+   "cn": "驱邪术",
+   "en": "Exorcism"
+  },
+  "883": {
+   "cn": "召唤宠物",
+   "en": "Call Pet"
+  },
+  "921": {
+   "cn": "搜索",
+   "en": "Pick Pocket"
+  },
+  "976": {
+   "cn": "防护暗影",
+   "en": "Shadow Protection"
+  },
+  "980": {
+   "cn": "痛苦灾祸",
+   "en": "Bane of Agony"
+  },
+  "982": {
+   "cn": "复活宠物",
+   "en": "Revive Pet"
+  },
+  "1008": {
+   "cn": "魔法增效",
+   "en": "Amplify Magic"
+  },
+  "1022": {
+   "cn": "保护祝福",
+   "en": "Blessing of Protection"
+  },
+  "1044": {
+   "cn": "自由祝福",
+   "en": "Blessing of Freedom"
+  },
+  "1064": {
+   "cn": "治疗链",
+   "en": "Chain Heal"
+  },
+  "1066": {
+   "cn": "水栖形态",
+   "en": "Aquatic Form"
+  },
+  "1079": {
+   "cn": "撕扯",
+   "en": "Rip"
+  },
+  "1082": {
+   "cn": "爪击",
+   "en": "Claw"
+  },
+  "1120": {
+   "cn": "吸取灵魂",
+   "en": "Drain Soul"
+  },
+  "1126": {
+   "cn": "野性印记",
+   "en": "Mark of the Wild"
+  },
+  "1130": {
+   "cn": "猎人印记",
+   "en": "Hunter's Mark"
+  },
+  "1152": {
+   "cn": "纯净术",
+   "en": "Purify"
+  },
+  "1160": {
+   "cn": "挫志怒吼",
+   "en": "Demoralizing Shout"
+  },
+  "1243": {
+   "cn": "真言术：韧",
+   "en": "Power Word: Fortitude"
+  },
+  "1454": {
+   "cn": "生命分流",
+   "en": "Life Tap"
+  },
+  "1459": {
+   "cn": "奥术智慧",
+   "en": "Arcane Intellect"
+  },
+  "1463": {
+   "cn": "法力护盾",
+   "en": "Mana Shield"
+  },
+  "1494": {
+   "cn": "追踪野兽",
+   "en": "Track Beasts"
+  },
+  "1495": {
+   "cn": "猫鼬撕咬",
+   "en": "Mongoose Bite"
+  },
+  "1499": {
+   "cn": "冰冻陷阱",
+   "en": "Freezing Trap"
+  },
+  "1513": {
+   "cn": "恐吓野兽",
+   "en": "Scare Beast"
+  },
+  "1680": {
+   "cn": "旋风斩",
+   "en": "Whirlwind"
+  },
+  "1706": {
+   "cn": "漂浮术",
+   "en": "Levitate"
+  },
+  "1714": {
+   "cn": "语言诅咒",
+   "en": "Curse of Tongues"
+  },
+  "1715": {
+   "cn": "断筋",
+   "en": "Hamstring"
+  },
+  "1725": {
+   "cn": "扰乱",
+   "en": "Distract"
+  },
+  "1752": {
+   "cn": "邪恶攻击",
+   "en": "Sinister Strike"
+  },
+  "1766": {
+   "cn": "脚踢",
+   "en": "Kick"
+  },
+  "1776": {
+   "cn": "凿击",
+   "en": "Gouge"
+  },
+  "1784": {
+   "cn": "潜行",
+   "en": "Stealth"
+  },
+  "1833": {
+   "cn": "偷袭",
+   "en": "Cheap Shot"
+  },
+  "1842": {
+   "cn": "解除陷阱",
+   "en": "Disarm Trap"
+  },
+  "1853": {
+   "cn": "低吼",
+   "en": "Growl"
+  },
+  "1856": {
+   "cn": "消失",
+   "en": "Vanish"
+  },
+  "1943": {
+   "cn": "割裂",
+   "en": "Rupture"
+  },
+  "1953": {
+   "cn": "闪现术",
+   "en": "Blink"
+  },
+  "1966": {
+   "cn": "佯攻",
+   "en": "Feint"
+  },
+  "1978": {
+   "cn": "毒蛇钉刺",
+   "en": "Serpent Sting"
+  },
+  "2006": {
+   "cn": "复活术",
+   "en": "Resurrection"
+  },
+  "2008": {
+   "cn": "先祖之魂",
+   "en": "Ancestral Spirit"
+  },
+  "2050": {
+   "cn": "次级治疗术",
+   "en": "Lesser Heal"
+  },
+  "2054": {
+   "cn": "治疗术",
+   "en": "Heal"
+  },
+  "2061": {
+   "cn": "快速治疗",
+   "en": "Flash Heal"
+  },
+  "2094": {
+   "cn": "致盲",
+   "en": "Blind"
+  },
+  "2098": {
+   "cn": "刺骨",
+   "en": "Eviscerate"
+  },
+  "2120": {
+   "cn": "烈焰风暴",
+   "en": "Flamestrike"
+  },
+  "2139": {
+   "cn": "法术反制",
+   "en": "Counterspell"
+  },
+  "2362": {
+   "cn": "制造法术石",
+   "en": "Create Spellstone"
+  },
+  "2457": {
+   "cn": "战斗姿态",
+   "en": "Battle Stance"
+  },
+  "2458": {
+   "cn": "狂暴姿态",
+   "en": "Berserker Stance"
+  },
+  "2484": {
+   "cn": "地缚图腾",
+   "en": "Earthbind Totem"
+  },
+  "2565": {
+   "cn": "盾牌格挡",
+   "en": "Shield Block"
+  },
+  "2637": {
+   "cn": "休眠",
+   "en": "Hibernate"
+  },
+  "2643": {
+   "cn": "多重射击",
+   "en": "Multi-Shot"
+  },
+  "2645": {
+   "cn": "幽魂之狼",
+   "en": "Ghost Wolf"
+  },
+  "2687": {
+   "cn": "血性狂暴",
+   "en": "Bloodrage"
+  },
+  "2782": {
+   "cn": "解除诅咒",
+   "en": "Remove Curse"
+  },
+  "2870": {
+   "cn": "祛病术",
+   "en": "Cure Disease"
+  },
+  "2878": {
+   "cn": "超度亡灵",
+   "en": "Turn Undead"
+  },
+  "2893": {
+   "cn": "驱毒术",
+   "en": "Abolish Poison"
+  },
+  "2912": {
+   "cn": "星火术",
+   "en": "Starfire"
+  },
+  "2973": {
+   "cn": "猛禽一击",
+   "en": "Raptor Strike"
+  },
+  "2983": {
+   "cn": "疾跑",
+   "en": "Sprint"
+  },
+  "3043": {
+   "cn": "毒蝎钉刺",
+   "en": "Scorpid Sting"
+  },
+  "3044": {
+   "cn": "奥术射击",
+   "en": "Arcane Shot"
+  },
+  "3045": {
+   "cn": "急速射击",
+   "en": "Rapid Fire"
+  },
+  "3561": {
+   "cn": "传送：暴风城",
+   "en": "Teleport: Stormwind"
+  },
+  "3562": {
+   "cn": "传送：铁炉堡",
+   "en": "Teleport: Ironforge"
+  },
+  "3563": {
+   "cn": "传送：幽暗城",
+   "en": "Teleport: Undercity"
+  },
+  "3565": {
+   "cn": "传送：达纳苏斯",
+   "en": "Teleport: Darnassus"
+  },
+  "3566": {
+   "cn": "传送：雷霆崖",
+   "en": "Teleport: Thunder Bluff"
+  },
+  "3567": {
+   "cn": "传送：奥格瑞玛",
+   "en": "Teleport: Orgrimmar"
+  },
+  "3599": {
+   "cn": "灼热图腾",
+   "en": "Searing Totem"
+  },
+  "4987": {
+   "cn": "清洁术",
+   "en": "Cleanse"
+  },
+  "5019": {
+   "cn": "射击",
+   "en": "Shoot"
+  },
+  "5116": {
+   "cn": "震荡射击",
+   "en": "Concussive Shot"
+  },
+  "5118": {
+   "cn": "猎豹守护",
+   "en": "Aspect of the Cheetah"
+  },
+  "5171": {
+   "cn": "切割",
+   "en": "Slice and Dice"
+  },
+  "5176": {
+   "cn": "愤怒",
+   "en": "Wrath"
+  },
+  "5185": {
+   "cn": "治疗之触",
+   "en": "Healing Touch"
+  },
+  "5211": {
+   "cn": "重击",
+   "en": "Bash"
+  },
+  "5215": {
+   "cn": "潜行",
+   "en": "Prowl"
+  },
+  "5221": {
+   "cn": "撕碎",
+   "en": "Shred"
+  },
+  "5277": {
+   "cn": "闪避",
+   "en": "Evasion"
+  },
+  "5308": {
+   "cn": "斩杀",
+   "en": "Execute"
+  },
+  "5384": {
+   "cn": "假死",
+   "en": "Feign Death"
+  },
+  "5394": {
+   "cn": "治疗之泉图腾",
+   "en": "Healing Stream Totem"
+  },
+  "5487": {
+   "cn": "熊形态",
+   "en": "Bear Form"
+  },
+  "5504": {
+   "cn": "造水术",
+   "en": "Conjure Water"
+  },
+  "5740": {
+   "cn": "火焰之雨",
+   "en": "Rain of Fire"
+  },
+  "5782": {
+   "cn": "恐惧术",
+   "en": "Fear"
+  },
+  "6117": {
+   "cn": "魔甲术",
+   "en": "Mage Armor"
+  },
+  "6143": {
+   "cn": "防护冰霜结界",
+   "en": "Frost Ward"
+  },
+  "6201": {
+   "cn": "制造治疗石",
+   "en": "Create Healthstone"
+  },
+  "6343": {
+   "cn": "雷霆一击",
+   "en": "Thunder Clap"
+  },
+  "6346": {
+   "cn": "防护恐惧结界",
+   "en": "Fear Ward"
+  },
+  "6358": {
+   "cn": "诱惑",
+   "en": "Seduction"
+  },
+  "6366": {
+   "cn": "制造火焰石",
+   "en": "Create Firestone"
+  },
+  "6552": {
+   "cn": "拳击",
+   "en": "Pummel"
+  },
+  "6572": {
+   "cn": "复仇",
+   "en": "Revenge"
+  },
+  "6673": {
+   "cn": "战斗怒吼",
+   "en": "Battle Shout"
+  },
+  "6770": {
+   "cn": "闷棍",
+   "en": "Sap"
+  },
+  "6785": {
+   "cn": "毁灭",
+   "en": "Ravage"
+  },
+  "6795": {
+   "cn": "低吼",
+   "en": "Growl"
+  },
+  "6807": {
+   "cn": "槌击",
+   "en": "Maul"
+  },
+  "6940": {
+   "cn": "牺牲祝福",
+   "en": "Blessing of Sacrifice"
+  },
+  "7294": {
+   "cn": "惩罚光环",
+   "en": "Retribution Aura"
+  },
+  "7302": {
+   "cn": "冰甲术",
+   "en": "Ice Armor"
+  },
+  "7328": {
+   "cn": "救赎",
+   "en": "Redemption"
+  },
+  "7384": {
+   "cn": "压制",
+   "en": "Overpower"
+  },
+  "7386": {
+   "cn": "破甲攻击",
+   "en": "Sunder Armor"
+  },
+  "7812": {
+   "cn": "牺牲",
+   "en": "Sacrifice"
+  },
+  "8004": {
+   "cn": "次级治疗波",
+   "en": "Lesser Healing Wave"
+  },
+  "8017": {
+   "cn": "石化武器",
+   "en": "Rockbiter Weapon"
+  },
+  "8024": {
+   "cn": "火舌武器",
+   "en": "Flametongue Weapon"
+  },
+  "8033": {
+   "cn": "冰封武器",
+   "en": "Frostbrand Weapon"
+  },
+  "8042": {
+   "cn": "地震术",
+   "en": "Earth Shock"
+  },
+  "8050": {
+   "cn": "烈焰震击",
+   "en": "Flame Shock"
+  },
+  "8056": {
+   "cn": "冰霜震击",
+   "en": "Frost Shock"
+  },
+  "8071": {
+   "cn": "石肤图腾",
+   "en": "Stoneskin Totem"
+  },
+  "8075": {
+   "cn": "大地之力图腾",
+   "en": "Strength of Earth Totem"
+  },
+  "8092": {
+   "cn": "心灵震爆",
+   "en": "Mind Blast"
+  },
+  "8122": {
+   "cn": "心灵尖啸",
+   "en": "Psychic Scream"
+  },
+  "8143": {
+   "cn": "战栗图腾",
+   "en": "Tremor Totem"
+  },
+  "8177": {
+   "cn": "根基图腾",
+   "en": "Grounding Totem"
+  },
+  "8232": {
+   "cn": "风怒武器",
+   "en": "Windfury Weapon"
+  },
+  "8647": {
+   "cn": "破甲",
+   "en": "Expose Armor"
+  },
+  "8676": {
+   "cn": "伏击",
+   "en": "Ambush"
+  },
+  "8921": {
+   "cn": "月火术",
+   "en": "Moonfire"
+  },
+  "8936": {
+   "cn": "愈合",
+   "en": "Regrowth"
+  },
+  "8946": {
+   "cn": "消毒术",
+   "en": "Cure Poison"
+  },
+  "9005": {
+   "cn": "突袭",
+   "en": "Pounce"
+  },
+  "9484": {
+   "cn": "束缚亡灵",
+   "en": "Shackle Undead"
+  },
+  "10059": {
+   "cn": "传送门：暴风城",
+   "en": "Portal: Stormwind"
+  },
+  "11416": {
+   "cn": "传送门：铁炉堡",
+   "en": "Portal: Ironforge"
+  },
+  "11417": {
+   "cn": "传送门：奥格瑞玛",
+   "en": "Portal: Orgrimmar"
+  },
+  "11418": {
+   "cn": "传送门：幽暗城",
+   "en": "Portal: Undercity"
+  },
+  "11419": {
+   "cn": "传送门：达纳苏斯",
+   "en": "Portal: Darnassus"
+  },
+  "11420": {
+   "cn": "传送门：雷霆崖",
+   "en": "Portal: Thunder Bluff"
+  },
+  "11426": {
+   "cn": "寒冰护体",
+   "en": "Ice Barrier"
+  },
+  "11958": {
+   "cn": "寒冰屏障",
+   "en": "Ice Block"
+  },
+  "12043": {
+   "cn": "气定神闲",
+   "en": "Presence of Mind"
+  },
+  "12292": {
+   "cn": "横扫攻击",
+   "en": "Sweeping Strikes"
+  },
+  "12328": {
+   "cn": "死亡之愿",
+   "en": "Death Wish"
+  },
+  "12975": {
+   "cn": "破釜沉舟",
+   "en": "Last Stand"
+  },
+  "13159": {
+   "cn": "豹群守护",
+   "en": "Aspect of the Pack"
+  },
+  "13163": {
+   "cn": "灵猴守护",
+   "en": "Aspect of the Monkey"
+  },
+  "13165": {
+   "cn": "雄鹰守护",
+   "en": "Aspect of the Hawk"
+  },
+  "13750": {
+   "cn": "冲动",
+   "en": "Adrenaline Rush"
+  },
+  "13795": {
+   "cn": "献祭陷阱",
+   "en": "Immolation Trap"
+  },
+  "13809": {
+   "cn": "冰霜陷阱",
+   "en": "Frost Trap"
+  },
+  "13877": {
+   "cn": "剑刃乱舞",
+   "en": "Blade Flurry"
+  },
+  "13908": {
+   "cn": "绝望祷言",
+   "en": "Desperate Prayer"
+  },
+  "14177": {
+   "cn": "冷血",
+   "en": "Cold Blood"
+  },
+  "14183": {
+   "cn": "预谋",
+   "en": "Premeditation"
+  },
+  "14751": {
+   "cn": "心灵专注",
+   "en": "Inner Focus"
+  },
+  "14752": {
+   "cn": "神圣之灵",
+   "en": "Divine Spirit"
+  },
+  "14818": {
+   "cn": "神圣之灵",
+   "en": "Divine Spirit"
+  },
+  "15473": {
+   "cn": "暗影形态",
+   "en": "Shadowform"
+  },
+  "15487": {
+   "cn": "沉默",
+   "en": "Silence"
+  },
+  "16188": {
+   "cn": "自然迅捷",
+   "en": "Nature's Swiftness"
+  },
+  "16511": {
+   "cn": "出血",
+   "en": "Hemorrhage"
+  },
+  "16914": {
+   "cn": "飓风",
+   "en": "Hurricane"
+  },
+  "17012": {
+   "cn": "吞噬魔法",
+   "en": "Devour Magic"
+  },
+  "17116": {
+   "cn": "自然迅捷",
+   "en": "Nature's Swiftness"
+  },
+  "17364": {
+   "cn": "风暴打击",
+   "en": "Stormstrike"
+  },
+  "17767": {
+   "cn": "吞噬暗影",
+   "en": "Consume Shadows"
+  },
+  "17877": {
+   "cn": "暗影灼烧",
+   "en": "Shadowburn"
+  },
+  "18288": {
+   "cn": "诅咒增幅",
+   "en": "Amplify Curse"
+  },
+  "18499": {
+   "cn": "狂暴之怒",
+   "en": "Berserker Rage"
+  },
+  "18562": {
+   "cn": "迅捷治愈",
+   "en": "Swiftmend"
+  },
+  "18708": {
+   "cn": "恶魔支配",
+   "en": "Fel Domination"
+  },
+  "18788": {
+   "cn": "恶魔牺牲",
+   "en": "Demonic Sacrifice"
+  },
+  "19263": {
+   "cn": "威慑",
+   "en": "Deterrence"
+  },
+  "19434": {
+   "cn": "瞄准射击",
+   "en": "Aimed Shot"
+  },
+  "19574": {
+   "cn": "狂野怒火",
+   "en": "Bestial Wrath"
+  },
+  "19577": {
+   "cn": "胁迫",
+   "en": "Intimidation"
+  },
+  "19740": {
+   "cn": "力量祝福",
+   "en": "Blessing of Might"
+  },
+  "19742": {
+   "cn": "智慧祝福",
+   "en": "Blessing of Wisdom"
+  },
+  "19746": {
+   "cn": "专注光环",
+   "en": "Concentration Aura"
+  },
+  "19750": {
+   "cn": "圣光闪现",
+   "en": "Flash of Light"
+  },
+  "19876": {
+   "cn": "暗影抗性光环",
+   "en": "Shadow Resistance Aura"
+  },
+  "19883": {
+   "cn": "追踪人型生物",
+   "en": "Track Humanoids"
+  },
+  "19884": {
+   "cn": "追踪亡灵",
+   "en": "Track Undead"
+  },
+  "19885": {
+   "cn": "追踪隐藏生物",
+   "en": "Track Hidden"
+  },
+  "19888": {
+   "cn": "冰霜抗性光环",
+   "en": "Frost Resistance Aura"
+  },
+  "19891": {
+   "cn": "火焰抗性光环",
+   "en": "Fire Resistance Aura"
+  },
+  "20154": {
+   "cn": "正义圣印",
+   "en": "Seal of Righteousness"
+  },
+  "20216": {
+   "cn": "神恩术",
+   "en": "Divine Favor"
+  },
+  "20217": {
+   "cn": "王者祝福",
+   "en": "Blessing of Kings"
+  },
+  "20230": {
+   "cn": "反击风暴",
+   "en": "Retaliation"
+  },
+  "20252": {
+   "cn": "拦截",
+   "en": "Intercept"
+  },
+  "20271": {
+   "cn": "审判",
+   "en": "Judgement"
+  },
+  "20484": {
+   "cn": "复生",
+   "en": "Rebirth"
+  },
+  "20736": {
+   "cn": "扰乱射击",
+   "en": "Distracting Shot"
+  },
+  "21082": {
+   "cn": "十字军圣印",
+   "en": "Seal of the Crusader"
+  },
+  "21987": {
+   "cn": "剧痛鞭笞",
+   "en": "Lash of Pain"
+  },
+  "22568": {
+   "cn": "凶猛撕咬",
+   "en": "Ferocious Bite"
+  },
+  "24858": {
+   "cn": "枭兽形态",
+   "en": "Moonkin Form"
+  },
+  "24974": {
+   "cn": "虫群",
+   "en": "Insect Swarm"
+  },
+  "25780": {
+   "cn": "正义之怒",
+   "en": "Righteous Fury"
+  },
+  "26573": {
+   "cn": "奉献",
+   "en": "Consecration"
+  },
+  "29166": {
+   "cn": "激活",
+   "en": "Innervate"
+  },
+  "36936": {
+   "cn": "收回图腾",
+   "en": "Totemic Recall"
+  },
+  "66842": {
+   "cn": "元素的召唤",
+   "en": "Call of the Elements"
+  },
+  "66843": {
+   "cn": "先祖的召唤",
+   "en": "Call of the Ancestors"
+  },
+  "66844": {
+   "cn": "灵魂的召唤",
+   "en": "Call of the Spirits"
+  },
+  "401502": {
+   "cn": "霜火之箭",
+   "en": "Frostfire Bolt"
+  },
+  "402174": {
+   "cn": "苦修",
+   "en": "Penance"
+  },
+  "402927": {
+   "cn": "乘胜追击",
+   "en": "Victory Rush"
+  },
+  "408120": {
+   "cn": "野性成长",
+   "en": "Wild Growth"
+  },
+  "408341": {
+   "cn": "火焰新星",
+   "en": "Fire Nova"
+  },
+  "408490": {
+   "cn": "熔岩爆裂",
+   "en": "Lava Burst"
+  },
+  "408510": {
+   "cn": "水之护盾",
+   "en": "Water Shield"
+  },
+  "408521": {
+   "cn": "激流",
+   "en": "Riptide"
+  },
+  "437138": {
+   "cn": "起死回生",
+   "en": "Revive"
+  },
+  "440892": {
+   "cn": "元素诅咒",
+   "en": "Curse of the Elements"
+  },
+  "446391": {
+   "cn": "折磨",
+   "en": "Torment"
+  },
+  "1238122": {
+   "cn": "野性冲锋",
+   "en": "Feral Charge"
+  },
+  "1277370": {
+   "cn": "神圣恩典",
+   "en": "Divine Grace"
+  },
+  "1277462": {
+   "cn": "应急方案",
+   "en": "Contingency Plan"
+  },
+  "1297659": {
+   "cn": "传送：达拉然",
+   "en": "Teleport: Dalaran"
+  },
+  "1309595": {
+   "cn": "暗言术：灭",
+   "en": "Shadow Word: Death"
+  },
+  "1310911": {
+   "cn": "圣光守望",
+   "en": "Light's Vigil"
+  },
+  "1310994": {
+   "cn": "迅捷审判",
+   "en": "Swift Judgement"
+  },
+  "1311606": {
+   "cn": "神圣震击",
+   "en": "Holy Shock"
+  },
+  "1311649": {
+   "cn": "愤怒圣印",
+   "en": "Seal of Fury"
+  }
+ }
 }

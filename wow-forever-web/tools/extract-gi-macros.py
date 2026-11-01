@@ -45,6 +45,34 @@ NUM_RE = re.compile(r'\b(\w+)=(-?\d+)')
 SPELLS_RE = re.compile(r'spells=\{([^}]*)\}')
 
 
+def toc_version(src, addon):
+    """版本号从插件自己的 .toc 现读。meta 里手抄过 0.5.6 / v87，插件升到 0.5.7 / 95.7
+       之后每条快照还在写旧号——等于给每条记录都配了句过期的出处。"""
+    p = os.path.join(src, addon, addon + '.toc')
+    if not os.path.exists(p):
+        return '版本未记'
+    for line in io.open(p, encoding='utf-8', errors='replace'):
+        m = re.match(r'\s*##\s*Version:\s*(\S+)', line)
+        if m:
+            return m.group(1)
+    return '版本未记'
+
+
+def parse_spell_names(text):
+    """ns.MacroSpellNames = { [法术ID] = { "中文名", "英文名" }, ... }
+       只要 ID 与两个名字：这一层让宏里每个 {{法术ID}} 都能给出中英两种写法，
+       也顺带把 41 个"退回插件写法"的法术 ID 有了英文原文可对。"""
+    i = text.find('ns.MacroSpellNames')
+    if i < 0:
+        return {}
+    seg = text[i:]
+    out = {}
+    for m in re.finditer(r'\[(\d+)\]\s*=\s*\{\s*"((?:[^"\\]|\\.)*)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\}', seg):
+        out[m.group(1)] = {'cn': m.group(2).replace('\\"', '"'),
+                           'en': m.group(3).replace('\\"', '"')}
+    return out
+
+
 def sha256(path):
     h = hashlib.sha256()
     with open(path, 'rb') as f:
@@ -152,11 +180,17 @@ def main():
         if a['group'] not in groups:
             groups.append(a['group'])
 
+    gi_ver = toc_version(args.src, 'GearInsight_Forever')
+    xr_ver = toc_version(args.src, 'XR_DungeonGuide')
+    spell_names = parse_spell_names(gi_text)
+
     out = {
         'meta': {
             'kind': 'gi-macros',
             'fetchedAt': datetime.date.today().isoformat(),
-            'source': 'GearInsight_Forever 0.5.6 + XR_DungeonGuide v87（同一批宏的两个形态）',
+            'source': 'GearInsight_Forever %s + XR_DungeonGuide v%s（同一批宏的两个形态，版本号从各自 .toc 现读）'
+                      % (gi_ver, xr_ver),
+            'addonVersions': {'gi': gi_ver, 'xr': xr_ver},
             'files': [
                 {'path': GI_FILE.replace(os.sep, '/'), 'sha256': sha256(gi_path),
                  'selfReported': '宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；'
@@ -170,6 +204,8 @@ def main():
                            '硬边界是免费 + 标来源 + 不分发插件本体。',
             'alignment': '两份逐条同职业 / 同组 / 同中文标题，条数都是 %d；顺序一致才允许拿 XR 当烘名参照' % len(gi),
             'notTaken': ['插件的界面代码与文案排版', '任何"下一个技能打什么"的循环提示类建议（红线）'],
+            'spellNamesNote': 'MacroSpellNames 只取 法术 ID + 中文名 + 英文原名 三项事实标识符；'
+                              '这是插件作者整理的对照，不是客户端表，本站按 L1 对待。',
             'counts': {
                 'macros': len(gi),
                 'classes': len(set(a['cls'] for a in gi)),
@@ -177,10 +213,12 @@ def main():
                 'foreverNew': sum(1 for a in gi if a['foreverNew']),
                 'distinctSpellIds': len(set(i for a in gi for i in a['spellIdsInBody'])),
                 'spellRefs': sum(len(a['spellIdsInBody']) for a in gi),
+                'spellNamesRows': len(spell_names),
             },
         },
         'groups': groups,
         'macros': gi,
+        'spellNames': {k: spell_names[k] for k in sorted(spell_names, key=int)},
     }
     if not os.path.isdir(os.path.dirname(OUT)):
         os.makedirs(os.path.dirname(OUT))

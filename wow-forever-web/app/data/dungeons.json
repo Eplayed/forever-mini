@@ -10,7 +10,7 @@
    "scrapedAt": "2026-10-28"
   },
   "bossPortraits": {
-   "total": 228,
+   "total": 278,
    "withPortrait": 146,
    "note": "客户端遭遇战手册头像，经第三方站转存在本地 img/art/bosses/；源站自己标\"没有这张脸\"的首领留空",
    "manifest": "app/img/art/manifest.json"
@@ -20,6 +20,117 @@
    "by": "参考站 wowforever.wclbox.com 的副本卡片",
    "url": "https://wowforever.wclbox.com/fuben",
    "note": "同一座本的等级区间以前有官方公告与参考站卡片两个数，2026-10-13 站主决定按参考站卡片定稿。官方公告那个数没有删，还留在这座本的记录里（定稿前那个数），界面上只摆定稿后的那一个。"
+  },
+  "bossRosterThirdSource": {
+   "addon": "DungeonsForever",
+   "addonVersion": "1.9.10",
+   "sourceStamp": {
+    "bytes": 95243,
+    "sha256": "3a2c7428bd5850d05203136078c53204d70a53cdb833a02c1fc1a042be4c1277",
+    "fileDate": "2026-10-25"
+   },
+   "checkedAt": "2026-11-01",
+   "addedBossRows": 50,
+   "dungeonsTouched": 19,
+   "countDiff": [
+    [
+     "hall-of-thanes",
+     "领主大厅",
+     4,
+     3
+    ],
+    [
+     "city-of-dalaran",
+     "达拉然",
+     0,
+     8
+    ],
+    [
+     "shadowfang-keep",
+     "影牙城堡",
+     9,
+     12
+    ],
+    [
+     "gnomeregan",
+     "诺莫瑞根",
+     6,
+     7
+    ],
+    [
+     "razorfen-kraul",
+     "剃刀沼泽",
+     8,
+     9
+    ],
+    [
+     "scarlet-monastery-graveyard",
+     "血色修道院墓地",
+     5,
+     6
+    ],
+    [
+     "razor-krendor",
+     "剃刀高地",
+     6,
+     7
+    ],
+    [
+     "uldaman",
+     "奥达曼",
+     10,
+     9
+    ],
+    [
+     "zulfarrak",
+     "祖尔法拉克",
+     12,
+     13
+    ],
+    [
+     "maraudon",
+     "玛拉顿",
+     9,
+     15
+    ],
+    [
+     "sunken-temple",
+     "沉没的神庙",
+     9,
+     11
+    ],
+    [
+     "blackrock-depths",
+     "黑石深渊",
+     20,
+     27
+    ],
+    [
+     "dire-maul-west",
+     "厄运之槌西区",
+     7,
+     8
+    ],
+    [
+     "scholomance",
+     "通灵学院",
+     14,
+     15
+    ],
+    [
+     "upper-blackrock-spire",
+     "黑石塔上层",
+     9,
+     8
+    ],
+    [
+     "onyxias-lair",
+     null,
+     0,
+     1
+    ]
+   ],
+   "note": "只补本站缺的首领，本站已有而它没有的一条不删；补进来的每条带 L1 与来源，掉落不写百分比"
   }
  },
  "newDungeons": [
@@ -59,6 +170,16 @@
      "nameCn": "杜根·挽锤",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "plunder-2",
+     "nameCn": "普兰德",
+     "nameEn": "Plunder",
+     "npcId": 261311,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -106,6 +227,12 @@
      "url": "https://wowforever.wclbox.com/fuben/hall-of-thanes/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -189,6 +316,26 @@
      "level": "L2",
      "note": "公开数据库里还没有它的掉落记录。",
      "portrait": null
+    },
+    {
+     "id": "the-baron",
+     "nameCn": "男爵",
+     "nameEn": "The Baron",
+     "npcId": 250660,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "viktor-the-vile-2",
+     "nameCn": "邪恶的维克托",
+     "nameEn": "Viktor the Vile",
+     "npcId": 256035,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -244,6 +391,12 @@
      "url": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -305,6 +458,26 @@
      "nameCn": "遗迹守卫者",
      "level": "L2",
      "note": "公开数据库里还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "highland-horror-2",
+     "nameCn": "高地惊魂",
+     "nameEn": "Highland Horror",
+     "npcId": 9010,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "relic-guardian-2",
+     "nameCn": "遗物守护者",
+     "nameEn": "Relic Guardian",
+     "npcId": 260326,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -372,6 +545,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -404,7 +583,88 @@
    "kind": "new",
    "levelRange": "28-35",
    "levelRangeOfficial": "28-33",
-   "bosses": [],
+   "bosses": [
+    {
+     "id": "atrexis-the-grave-knight",
+     "nameCn": "墓穴骑士阿特雷克斯",
+     "nameEn": "Atrexis the Grave Knight",
+     "npcId": 247126,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "lyn-the-ignored",
+     "nameCn": "被无视的琳恩",
+     "nameEn": "Lyn the Ignored",
+     "npcId": 247032,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "arcane-anomaly",
+     "nameCn": "奥术畸体",
+     "nameEn": "Arcane Anomaly",
+     "npcId": 245999,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "arcanic-enigma",
+     "nameCn": "奥术之谜",
+     "nameEn": "Arcanic Enigma",
+     "npcId": 246016,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "unstable-sentinel",
+     "nameCn": "不稳定的哨兵",
+     "nameEn": "Unstable Sentinel",
+     "npcId": 246017,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "mana-devourer",
+     "nameCn": "法力吞噬者",
+     "nameEn": "Mana Devourer",
+     "npcId": 246008,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "fel-ancient",
+     "nameCn": "邪能古树",
+     "nameEn": "Fel Ancient",
+     "npcId": 246003,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "shade-of-the-archmage",
+     "nameCn": "大法师之影",
+     "nameEn": "Shade of the Archmage",
+     "npcId": 246020,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    }
+   ],
    "route": [],
    "drops": [],
    "lootNote": null,
@@ -433,6 +693,12 @@
      "url": "https://wowforever.wclbox.com/fuben/city-of-dalaran/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -1948,6 +2214,36 @@
      "level": "L0",
      "note": null,
      "portrait": null
+    },
+    {
+     "id": "fel-steed-shadow-charger",
+     "nameCn": "邪恶战马 / 暗影战马",
+     "nameEn": "Fel Steed / Shadow Charger",
+     "npcId": 1952,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "arugal-s-voidwalker",
+     "nameCn": "阿鲁高的虚空行者",
+     "nameEn": "Arugal's Voidwalker",
+     "npcId": 1131,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "sever",
+     "nameCn": "塞沃尔",
+     "nameEn": "Sever",
+     "npcId": 14682,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -2374,6 +2670,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -2459,6 +2761,16 @@
      "nameCn": "阿库麦尔",
      "level": "L0",
      "note": "公开数据库里还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "twilight-lord-kelris-2",
+     "nameCn": "梦游者克尔里斯",
+     "nameEn": "Twilight Lord Kelris",
+     "npcId": 4832,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -2625,6 +2937,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -2698,6 +3016,16 @@
      "nameCn": "布鲁高·铁拳",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "bazil-thredd-2",
+     "nameCn": "巴基尔·斯瑞德",
+     "nameEn": "Bazil Thredd",
+     "npcId": 1716,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -2834,6 +3162,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -2905,6 +3239,16 @@
      "nameCn": "格鲁比斯",
      "level": "L0",
      "note": "公开数据库里还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "techbot",
+     "nameCn": "科技机器人",
+     "nameEn": "Techbot",
+     "npcId": 7288,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -3242,6 +3586,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -3330,6 +3680,16 @@
      "nameCn": "唤地者哈穆加",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "razorfen-spearhide",
+     "nameCn": "剃刀沼泽刺鬃守卫",
+     "nameEn": "Razorfen Spearhide",
+     "npcId": 4438,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -3526,6 +3886,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -3591,6 +3957,16 @@
      "nameCn": "死灵勇士",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "scorn",
+     "nameCn": "瑟克恩",
+     "nameEn": "Scorn",
+     "npcId": 14693,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -3722,6 +4098,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -3999,6 +4381,16 @@
      "level": "L0",
      "note": null,
      "portrait": "img/art/bosses/amnennar-the-coldbringer.webp"
+    },
+    {
+     "id": "henry-stern",
+     "nameCn": "亨利·斯特恩",
+     "nameEn": "Henry Stern",
+     "npcId": 8029,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -4225,6 +4617,12 @@
      "url": "https://wowforever.wclbox.com/fuben/razorfen-downs/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -4959,6 +5357,16 @@
      "level": "L0",
      "note": null,
      "portrait": null
+    },
+    {
+     "id": "sandfury-executioner",
+     "nameCn": "沙怒刽子手",
+     "nameEn": "Sandfury Executioner",
+     "npcId": 6440,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -5460,6 +5868,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -5553,6 +5967,66 @@
      "nameCn": "收割者麦什洛克",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "veng",
+     "nameCn": "温格",
+     "nameEn": "Veng",
+     "npcId": 12243,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "maraudos",
+     "nameCn": "玛拉多斯",
+     "nameEn": "Maraudos",
+     "npcId": 9441,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "the-nameless-prophet",
+     "nameCn": "无名先知",
+     "nameEn": "The Nameless Prophet",
+     "npcId": 9426,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "kolk",
+     "nameCn": "库尔克",
+     "nameEn": "Kolk",
+     "npcId": 4860,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "gelk",
+     "nameCn": "盖尔克",
+     "nameEn": "Gelk",
+     "npcId": 9427,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "magra",
+     "nameCn": "玛格拉",
+     "nameEn": "Magra",
+     "npcId": 9433,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -5911,6 +6385,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -6004,6 +6484,26 @@
      "nameCn": "可悲的奥戈姆",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "balcony-minibosses",
+     "nameCn": "阳台的小头目",
+     "nameEn": "Balcony Minibosses",
+     "npcId": 6701,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "spawn-of-hakkar",
+     "nameCn": "哈卡的后代",
+     "nameEn": "Spawn of Hakkar",
+     "npcId": 4065,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -6162,6 +6662,12 @@
      "url": "https://wowforever.wclbox.com/fuben/sunken-temple/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -6336,6 +6842,126 @@
      "nameCn": "达格兰·索瑞森大帝",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-gorosh-the-dervish",
+     "nameCn": "竞技场：修行者高罗什",
+     "nameEn": "Ring of Law: Gorosh the Dervish",
+     "npcId": 8760,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-grizzle",
+     "nameCn": "竞技场：格里兹尔",
+     "nameEn": "Ring of Law: Grizzle",
+     "npcId": 7873,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-eviscerator",
+     "nameCn": "竞技场：腕眼者",
+     "nameEn": "Ring of Law: Eviscerator",
+     "npcId": 523,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-ok-thor-the-breaker",
+     "nameCn": "竞技场：破坏者奥科索尔",
+     "nameEn": "Ring of Law: Ok'thor the Breaker",
+     "npcId": 11538,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-anub-shiah",
+     "nameCn": "竞技场：阿努希尔",
+     "nameEn": "Ring of Law: Anub'shiah",
+     "npcId": 3004,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "ring-of-law-hedrum-the-creeper",
+     "nameCn": "竞技场：爬行者赫杜姆",
+     "nameEn": "Ring of Law: Hedrum the Creeper",
+     "npcId": 8271,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "dark-coffer",
+     "nameCn": "黑暗宝箱",
+     "nameEn": "Dark Coffer",
+     "npcId": 8592,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "verek",
+     "nameCn": "维雷克",
+     "nameEn": "Verek",
+     "npcId": 9019,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "watchman-doomgrip",
+     "nameCn": "卫兵杜格瑞普",
+     "nameEn": "Watchman Doomgrip",
+     "npcId": 8655,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "guzzler",
+     "nameCn": "黑铁酒吧",
+     "nameEn": "Guzzler",
+     "npcId": 8658,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "panzor-the-invincible",
+     "nameCn": "无敌的潘佐尔",
+     "nameEn": "Panzor the Invincible",
+     "npcId": 8270,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "chest-of-the-seven",
+     "nameCn": "七贤之箱",
+     "nameEn": "Chest of The Seven",
+     "npcId": 8690,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -7547,6 +8173,12 @@
      "url": "https://wowforever.wclbox.com/fuben/blackrock-depths/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -9160,6 +9792,16 @@
      "level": "L0",
      "note": null,
      "portrait": null
+    },
+    {
+     "id": "shen-dralar-provisioner",
+     "nameCn": "辛德拉圣职者",
+     "nameEn": "Shen'dralar Provisioner",
+     "npcId": 14371,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -9580,6 +10222,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -9709,6 +10357,36 @@
      "level": "L0",
      "note": null,
      "portrait": "img/art/bosses/darkmaster-gandling.webp"
+    },
+    {
+     "id": "blood-steward-of-kirtonos",
+     "nameCn": "基尔图诺斯的卫士",
+     "nameEn": "Blood Steward of Kirtonos",
+     "npcId": 14861,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "kirtonos-the-herald",
+     "nameCn": "传令官基尔图诺斯",
+     "nameEn": "Kirtonos the Herald",
+     "npcId": 10506,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "death-knight-darkreaver",
+     "nameCn": "死亡骑士达克雷尔",
+     "nameEn": "Death Knight Darkreaver",
+     "npcId": 14516,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
     }
    ],
    "route": [],
@@ -10489,6 +11167,12 @@
      "checkedAt": "2026-10-08"
     },
     {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
+    },
+    {
      "type": "datamine_en",
      "url": "https://wago.tools/db2/GroupFinderActivity/csv?build=1.60.1.70707",
      "note": "客户端版本 1.60.1.70707 的队伍查找器：英文原名、等级与人数上限（经第三方客户端数据站取回）",
@@ -10596,6 +11280,26 @@
      "nameCn": "斯库尔",
      "level": "L0",
      "note": null,
+     "portrait": null
+    },
+    {
+     "id": "stratholme-courier",
+     "nameCn": "斯坦索姆信使",
+     "nameEn": "Stratholme Courier",
+     "npcId": 10547,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    },
+    {
+     "id": "timmy-the-cruel-2",
+     "nameCn": "悲惨的提米",
+     "nameEn": "Timmy the Cruel",
+     "npcId": 571,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
      "portrait": null
     }
    ],
@@ -11168,6 +11872,12 @@
      "url": "https://wowforever.wclbox.com/fuben/stratholme-main-gate/",
      "note": "名单/等级区间/BOSS 名取自无限客户端（经新手盒子转述）；本页抓取",
      "checkedAt": "2026-10-08"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",
@@ -12976,7 +13686,18 @@
    "nameEn": "Onyxia's Lair",
    "kind": "raid",
    "levelRange": "60-60",
-   "bosses": [],
+   "bosses": [
+    {
+     "id": "onyxia",
+     "nameCn": "奥妮克希亚",
+     "nameEn": "Onyxia",
+     "npcId": 10184,
+     "level": "L1",
+     "from": "df",
+     "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
+     "portrait": null
+    }
+   ],
    "route": [],
    "level": "L3",
    "provenance": [
@@ -12991,6 +13712,12 @@
      "url": "https://wowclassicforever.info/raids/onyxias-lair",
      "note": "它把这座列为 40 人团队条目，并写了\"官方还没说\"的推测段；本站只取人数这一个数，不搬它的讲解",
      "checkedAt": "2026-10-11"
+    },
+    {
+     "type": "addon",
+     "url": "DungeonsForever 1.9.10 的 Core/Data/Data_DungeonLoot.lua",
+     "note": "第三份首领名单，由插件整理，本站没有逐条进游戏数过；它没有的首领本站不删",
+     "checkedAt": "2026-11-01"
     },
     {
      "type": "datamine_en",

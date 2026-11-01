@@ -127,7 +127,7 @@
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5345,
+  "search": 5395,
   "talentPreview": 466,
   "releases": 83,
   "navNew": [
@@ -140,7 +140,7 @@
   "talentVerified": 462,
   "dungeons": 38,
   "dungeonsNew": 9,
-  "bosses": 228,
+  "bosses": 278,
   "drops": 1053,
   "dungeonNameEn": 38,
   "dungeonParty": 31,
@@ -214,9 +214,9 @@
     "file": "macros.json",
     "section": "宏命令",
     "build": null,
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-01",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 0,
     "stale": null
    },
    {

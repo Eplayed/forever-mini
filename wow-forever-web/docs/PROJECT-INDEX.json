@@ -1,6 +1,6 @@
 {
- "head": "4223c6d3ed129f8b663d54295e2e238f0c6734c1",
- "fingerprint": "a319967160189c5a6b6efe3102f2345bac6a31b7b3677ba3b90be7cb851cc785",
+ "head": "863e10e9d86b2eb3049d66345bb211022545804e",
+ "fingerprint": "29fae448828df9b67fbc857d0245cc5de5e929e3b69f8a67cf4fc7f7e455892b",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 11826,
-   "mtimeNs": 1793540817841175700
+   "bytes": 12777,
+   "mtimeNs": 1793543866888907600
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 679100,
-   "mtimeNs": 1793540849519032300
+   "bytes": 682877,
+   "mtimeNs": 1793543829412930500
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -360,8 +360,8 @@
   },
   {
    "path": "for-mini/pages/bis/index.js",
-   "bytes": 15383,
-   "mtimeNs": 1793539081620251000
+   "bytes": 16318,
+   "mtimeNs": 1793541478440596800
   },
   {
    "path": "for-mini/pages/bis/index.json",
@@ -390,8 +390,8 @@
   },
   {
    "path": "for-mini/pages/dungeon/index.js",
-   "bytes": 9768,
-   "mtimeNs": 1793510770351967800
+   "bytes": 10883,
+   "mtimeNs": 1793541392891037600
   },
   {
    "path": "for-mini/pages/dungeon/index.json",
@@ -560,8 +560,8 @@
   },
   {
    "path": "wow-forever-web/AGENTS.md",
-   "bytes": 15274,
-   "mtimeNs": 1793540800864041700
+   "bytes": 15843,
+   "mtimeNs": 1793543802342367000
   },
   {
    "path": "wow-forever-web/app/package-lock.json",
@@ -1096,7 +1096,7 @@
   {
    "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-01.md",
    "bytes": 34577,
-   "mtimeNs": 1793539849092427000
+   "mtimeNs": 1793543630085841700
   },
   {
    "path": "wow-forever-web/docs/DATA-BiS-准确性与更新机制-2026-10-28.md",
@@ -1230,8 +1230,8 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-插件与客户端版本对账-2026-11-01.md",
-   "bytes": 17806,
-   "mtimeNs": 1793540726893646900
+   "bytes": 23018,
+   "mtimeNs": 1793543731020560200
   },
   {
    "path": "wow-forever-web/docs/DATA-插件更新来源复核-2026-10-27.md",
@@ -2165,8 +2165,8 @@
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-sources.md",
-   "bytes": 122233,
-   "mtimeNs": 1793540784476196300
+   "bytes": 125614,
+   "mtimeNs": 1793543782064838700
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-workflow.md",
@@ -2329,6 +2329,11 @@
    "mtimeNs": 1793539250614722600
   },
   {
+   "path": "wow-forever-web/tools/extract-df-bis.py",
+   "bytes": 8259,
+   "mtimeNs": 1793543567343697500
+  },
+  {
    "path": "wow-forever-web/tools/extract-df-geo.py",
    "bytes": 8993,
    "mtimeNs": 1793510776683009700
@@ -2350,13 +2355,18 @@
   },
   {
    "path": "wow-forever-web/tools/extract-gi-macros.py",
-   "bytes": 8812,
-   "mtimeNs": 1793510776684009400
+   "bytes": 10702,
+   "mtimeNs": 1793543092741701700
   },
   {
    "path": "wow-forever-web/tools/extract-gi-pets.py",
    "bytes": 8746,
    "mtimeNs": 1793510776721547600
+  },
+  {
+   "path": "wow-forever-web/tools/extract-gi-prof-recipes.py",
+   "bytes": 10844,
+   "mtimeNs": 1793543397257012500
   },
   {
    "path": "wow-forever-web/tools/extract-plugin-maps.py",
@@ -2465,8 +2475,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-dungeons.js",
-   "bytes": 22140,
-   "mtimeNs": 1793510776815043400
+   "bytes": 25842,
+   "mtimeNs": 1793542787040237500
   },
   {
    "path": "wow-forever-web/tools/merge-items-detail.py",
@@ -2485,8 +2495,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-macros.py",
-   "bytes": 9153,
-   "mtimeNs": 1793510776818395100
+   "bytes": 10157,
+   "mtimeNs": 1793543134517671400
   },
   {
    "path": "wow-forever-web/tools/merge-pets.py",
@@ -2530,8 +2540,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 81048,
-   "mtimeNs": 1793540277779943800
+   "bytes": 83528,
+   "mtimeNs": 1793542462705674100
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2565,8 +2575,8 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 177338,
-   "mtimeNs": 1793510776828608100
+   "bytes": 179959,
+   "mtimeNs": 1793541308029356500
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
@@ -2620,8 +2630,8 @@
   },
   {
    "path": "wow-forever-web/tools/render-bis-posters.py",
-   "bytes": 12622,
-   "mtimeNs": 1793510776835402100
+   "bytes": 14769,
+   "mtimeNs": 1793542292873432200
   },
   {
    "path": "wow-forever-web/tools/route-smoke.py",
