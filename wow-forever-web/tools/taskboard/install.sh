@@ -41,14 +41,16 @@ case "${1:-}" in
  <key>Label</key><string>$LABEL</string>
  <key>ProgramArguments</key><array>
   <string>/usr/local/bin/python3</string><string>$HOME_DIR/collect.py</string></array>
- <key>StartInterval</key><integer>1800</integer>
- <key>RunAtLoad</key><true/>
+ <key>StartCalendarInterval</key><array>
+  <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>40</integer></dict>
+  <dict><key>Hour</key><integer>23</integer><key>Minute</key><integer>40</integer></dict>
+ </array>
  <key>StandardOutPath</key><string>$HOME_DIR/collect.out.log</string>
  <key>StandardErrorPath</key><string>$HOME_DIR/collect.err.log</string>
 </dict></plist>
 PL
     launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
-    launchctl bootstrap "gui/$(id -u)" "$PLIST" && echo "已加载：每 30 分钟只读采集一次（撤销：install.sh --unagent）"
+    launchctl bootstrap "gui/$(id -u)" "$PLIST" && echo "已加载：每天 06:40 与 23:40 各只读采集一次（撤销：install.sh --unagent）"
     ;;
   --unagent)
     launchctl bootout "gui/$(id -u)/$LABEL" 2>&1
