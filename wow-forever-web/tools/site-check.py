@@ -1902,7 +1902,10 @@ def test_bis(browser, base):
       over: document.documentElement.scrollWidth - innerWidth,
       body: document.querySelector('#main').innerText })""")
     check("配装页可访问且没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
-    check("配装页一个 H1 且写着等级段", r["h1"].startswith(u"30 级配装"), r["h1"])
+    # 标题比的是数据下发的那一句，不在门禁里抄字面量：站主 2026-11-01 把标题从"30 级配装名单"
+    # 改成"BIS配装"，抄死字符串的门禁会在改标题当天自己变红（同一毛病在 AGENTS 4c 里点过一次）
+    check("配装页一个 H1，且用的就是 bis.json 下发的标题",
+          r["h1"] == (bis.get("meta") or {}).get("title", ""), r["h1"])
     check("纸娃娃格数等于数据里这一套的格数", r["cells"] == len(w["doll"]["alliance"]),
           "%d 格（数据 %d）" % (r["cells"], len(w["doll"]["alliance"])))
     # 纸娃娃是三栏摆的，DOM 顺序（左列→下排→右列）不等于数据顺序，
@@ -3865,10 +3868,24 @@ def test_macros(browser, base):
         got = None
     toast = page.evaluate("() => { const t = document.getElementById('toast');"
                           " return t ? { on: t.classList.contains('on'), txt: t.textContent } : null; }")
-    same = (got == pre["txt"]) if got is not None else bool(toast and toast["on"])
+    same = got == pre["txt"]
+    # Windows 的剪贴板按 CF_TEXT 交付，正文里的 \n 到手里变成 \r\n，这条逐字节等式在这台机器上
+    # 永远不成立（2026-11-01 实测：内容一字不差，只有换行差 \n 的个数那么多字节）。
+    # 不放宽语义：改成"差别只许是换行符"——多一个字符、少一个字符、差在别处都照样红。
+    only_eol = (got is not None and not same
+                and got.replace("\r\n", "\n") == pre["txt"]
+                and len(got) == len(pre["txt"]) + pre["txt"].count("\n"))
+    if got is None:
+        detail = "剪贴板读不到，退回看提示"
+    elif same:
+        detail = "剪贴板逐字等"
+    elif only_eol:
+        detail = "剪贴板差别只在换行符（Windows CF_TEXT）"
+    else:
+        detail = "正文真的不一样"
     check("点「复制宏」粘出去的正文与页面上那段逐字相同（含换行）",
-          same and bool(toast and toast["on"]),
-          ("剪贴板比对" if got is not None else "剪贴板读不到，退回看提示") + "：" + (toast or {}).get("txt", "")[:24])
+          (same or only_eol or (got is None)) and bool(toast and toast["on"]),
+          detail + "：" + (toast or {}).get("txt", "")[:24])
     body_in_data = next((m["body"] for m in MS if m["id"] == pre["id"]), None)
     check("页面上那段正文就是数据里那段（没有被排版改字）", body_in_data == pre["txt"],
           "对得上" if body_in_data == pre["txt"] else "不一致")

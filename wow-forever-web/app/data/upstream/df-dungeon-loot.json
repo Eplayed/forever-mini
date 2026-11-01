@@ -1,0 +1,3768 @@
+{
+ "meta": {
+  "source": "DungeonsForever 1.9.10 Core/Data/Data_DungeonLoot.lua",
+  "addon": "DungeonsForever",
+  "addonVersion": "1.9.10",
+  "installRoot": "Interface",
+  "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
+  "sourceStamp": {
+   "bytes": 95243,
+   "sha256": "3a2c7428bd5850d05203136078c53204d70a53cdb833a02c1fc1a042be4c1277",
+   "fileDate": "2026-10-25"
+  },
+  "fetched": "2026-11-01",
+  "took": "首领中文名、英文名、npcId，以及每条首领的掉落物品 ID（去重、升序）",
+  "droppedFields": [
+   "掉率那一列（DF 行里 100 / nil 那个数）——本站红线：掉落不写百分比",
+   "DF 的任何成段说明、攻略句子、任务目标文本、Media/ 里的图"
+  ],
+  "boundary": "DF 的 LICENSE 是「保留所有权利」。这一层只取游戏内事实标识符；快照不进成品，要不要用它补站内首领名单由合并层决定并两个都留。",
+  "caveat": "bosses 里含 npcId=null 的行（小兵 / 图纸 / 战利品这类分组占位，全表 41 行），它们不是首领：合并层要按 meta.counts.realBossRows 那一层判数，别拿整行数补名单。",
+  "aliasFrom": "tools/extract-df-loot.py 的 ALIAS，与 extract-df-geo.py 同一张表",
+  "counts": {
+   "dfDungeons": 36,
+   "dfRows": 300,
+   "realBossRows": 259,
+   "pseudoRows": 41,
+   "dfItemIds": 1139,
+   "dfItemIdsAlreadyInRoster": 1139,
+   "matchedOurIds": 36,
+   "unmappedDfSlugs": 0
+  },
+  "recountBossDiff": [
+   [
+    "blackrock-depths",
+    "黑石深渊",
+    20,
+    27,
+    29
+   ],
+   [
+    "city-of-dalaran",
+    "达拉然",
+    0,
+    8,
+    9
+   ],
+   [
+    "dire-maul-west",
+    "厄运之槌西区",
+    7,
+    8,
+    9
+   ],
+   [
+    "gnomeregan",
+    "诺莫瑞根",
+    6,
+    7,
+    8
+   ],
+   [
+    "hall-of-thanes",
+    "领主大厅",
+    4,
+    3,
+    4
+   ],
+   [
+    "maraudon",
+    "玛拉顿",
+    9,
+    15,
+    15
+   ],
+   [
+    "onyxias-lair",
+    null,
+    0,
+    1,
+    1
+   ],
+   [
+    "razor-krendor",
+    "剃刀高地",
+    6,
+    7,
+    8
+   ],
+   [
+    "razorfen-kraul",
+    "剃刀沼泽",
+    8,
+    9,
+    10
+   ],
+   [
+    "scholomance",
+    "通灵学院",
+    14,
+    15,
+    16
+   ],
+   [
+    "shadowfang-keep",
+    "影牙城堡",
+    9,
+    12,
+    15
+   ],
+   [
+    "scarlet-monastery-graveyard",
+    "血色修道院墓地",
+    5,
+    6,
+    7
+   ],
+   [
+    "sunken-temple",
+    "沉没的神庙",
+    9,
+    11,
+    12
+   ],
+   [
+    "uldaman",
+    "奥达曼",
+    10,
+    9,
+    14
+   ],
+   [
+    "upper-blackrock-spire",
+    "黑石塔上层",
+    9,
+    8,
+    10
+   ],
+   [
+    "zulfarrak",
+    "祖尔法拉克",
+    12,
+    13,
+    14
+   ]
+  ]
+ },
+ "dungeons": [
+  {
+   "id": "alcaz-prison",
+   "dfSlug": "alcaz_prison",
+   "bosses": []
+  },
+  {
+   "id": "blackfathom-deeps",
+   "dfSlug": "blackfathom_deeps",
+   "bosses": [
+    {
+     "nameCn": "加摩拉",
+     "nameEn": "Ghamoo-ra",
+     "npcId": 4887,
+     "itemIds": [
+      6907,
+      6908,
+      273839
+     ]
+    },
+    {
+     "nameCn": "萨利维丝",
+     "nameEn": "Lady Sarevess",
+     "npcId": 4831,
+     "itemIds": [
+      888,
+      3078,
+      11121
+     ]
+    },
+    {
+     "nameCn": "格里哈斯特",
+     "nameEn": "Gelihast",
+     "npcId": 6243,
+     "itemIds": [
+      1470,
+      6905,
+      6906,
+      252456,
+      252512,
+      252513,
+      252514,
+      252515,
+      252820,
+      273141,
+      273840
+     ]
+    },
+    {
+     "nameCn": "洛古斯·杰特",
+     "nameEn": "Lorgus Jett",
+     "npcId": 12902,
+     "itemIds": [
+      252455,
+      252512,
+      252513,
+      252820,
+      273841,
+      273842,
+      273843
+     ]
+    },
+    {
+     "nameCn": "阿奎尼斯男爵",
+     "nameEn": "Baron Aquanis",
+     "npcId": 12876,
+     "itemIds": [
+      16782,
+      252822
+     ]
+    },
+    {
+     "nameCn": "梦游者克尔里斯",
+     "nameEn": "Twilight Lord Kelris",
+     "npcId": 4832,
+     "itemIds": [
+      1155,
+      6903,
+      252455,
+      252456,
+      252513,
+      252515,
+      252820,
+      252822,
+      273846
+     ]
+    },
+    {
+     "nameCn": "瑟拉吉斯",
+     "nameEn": "Old Serra'kis",
+     "npcId": 4830,
+     "itemIds": [
+      6901,
+      6902,
+      6904,
+      252455,
+      252456,
+      252820
+     ]
+    },
+    {
+     "nameCn": "阿库麦尔",
+     "nameEn": "Aku'mai",
+     "npcId": 4829,
+     "itemIds": [
+      6909,
+      6910,
+      6911,
+      252455,
+      252456,
+      252512,
+      252514,
+      252515,
+      252820
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": []
+    }
+   ]
+  },
+  {
+   "id": "blackmaw-hold",
+   "dfSlug": "blackmaw_hold",
+   "bosses": []
+  },
+  {
+   "id": "blackrock-depths",
+   "dfSlug": "blackrock_depths",
+   "bosses": [
+    {
+     "nameCn": "洛考尔",
+     "nameEn": "Lord Roccor",
+     "npcId": 5781,
+     "itemIds": [
+      11630,
+      11631,
+      11632,
+      11813,
+      22234,
+      22397
+     ]
+    },
+    {
+     "nameCn": "审讯官格斯塔恩",
+     "nameEn": "High Interrogator Gerstahn",
+     "npcId": 8761,
+     "itemIds": [
+      11140,
+      11624,
+      11625,
+      22240
+     ]
+    },
+    {
+     "nameCn": "驯犬者格雷布玛尔",
+     "nameEn": "Houndmaster Grebmar",
+     "npcId": 9212,
+     "itemIds": [
+      11623,
+      11627
+     ]
+    },
+    {
+     "nameCn": "竞技场：修行者高罗什",
+     "nameEn": "Ring of Law: Gorosh the Dervish",
+     "npcId": 8760,
+     "itemIds": [
+      11726,
+      22257,
+      22266,
+      22271
+     ]
+    },
+    {
+     "nameCn": "竞技场：格里兹尔",
+     "nameEn": "Ring of Law: Grizzle",
+     "npcId": 7873,
+     "itemIds": [
+      11610,
+      11702,
+      11703,
+      11722,
+      22270
+     ]
+    },
+    {
+     "nameCn": "竞技场：腕眼者",
+     "nameEn": "Ring of Law: Eviscerator",
+     "npcId": 523,
+     "itemIds": [
+      11679,
+      11685,
+      11686,
+      11730
+     ]
+    },
+    {
+     "nameCn": "竞技场：破坏者奥科索尔",
+     "nameEn": "Ring of Law: Ok'thor the Breaker",
+     "npcId": 11538,
+     "itemIds": [
+      11662,
+      11665,
+      11728,
+      11824
+     ]
+    },
+    {
+     "nameCn": "竞技场：阿努希尔",
+     "nameEn": "Ring of Law: Anub'shiah",
+     "npcId": 3004,
+     "itemIds": [
+      11675,
+      11677,
+      11678
+     ]
+    },
+    {
+     "nameCn": "竞技场：爬行者赫杜姆",
+     "nameEn": "Ring of Law: Hedrum the Creeper",
+     "npcId": 8271,
+     "itemIds": [
+      11633,
+      11634,
+      11635
+     ]
+    },
+    {
+     "nameCn": "控火师罗格雷恩",
+     "nameEn": "Pyromancer Loregrain",
+     "npcId": 8762,
+     "itemIds": [
+      11207,
+      11747,
+      11748,
+      11749,
+      11750
+     ]
+    },
+    {
+     "nameCn": "黑暗宝箱",
+     "nameEn": "Dark Coffer",
+     "npcId": 8592,
+     "itemIds": [
+      11197,
+      11751,
+      11752,
+      11753,
+      11923,
+      11945,
+      11946,
+      22205,
+      22254,
+      22255,
+      22256
+     ]
+    },
+    {
+     "nameCn": "典狱官斯迪尔基斯",
+     "nameEn": "Warder Stilgiss",
+     "npcId": 9089,
+     "itemIds": [
+      11782,
+      11783,
+      11784,
+      22241
+     ]
+    },
+    {
+     "nameCn": "维雷克",
+     "nameEn": "Verek",
+     "npcId": 9019,
+     "itemIds": []
+    },
+    {
+     "nameCn": "卫兵杜格瑞普",
+     "nameEn": "Watchman Doomgrip",
+     "npcId": 8655,
+     "itemIds": [
+      22205,
+      22254,
+      22255,
+      22256
+     ]
+    },
+    {
+     "nameCn": "弗诺斯·达克维尔",
+     "nameEn": "Fineous Darkvire",
+     "npcId": 8704,
+     "itemIds": [
+      11839,
+      11841,
+      11842,
+      22223
+     ]
+    },
+    {
+     "nameCn": "伊森迪奥斯",
+     "nameEn": "Lord Incendius",
+     "npcId": 1204,
+     "itemIds": [
+      11764,
+      11765,
+      11766,
+      11767,
+      11768
+     ]
+    },
+    {
+     "nameCn": "贝尔加",
+     "nameEn": "Bael'Gar",
+     "npcId": 12162,
+     "itemIds": [
+      11802,
+      11803,
+      11807
+     ]
+    },
+    {
+     "nameCn": "安格弗将军",
+     "nameEn": "General Angerforge",
+     "npcId": 8756,
+     "itemIds": [
+      11816,
+      11820,
+      11821,
+      11841
+     ]
+    },
+    {
+     "nameCn": "傀儡统帅阿格曼奇",
+     "nameEn": "Golem Lord Argelmach",
+     "npcId": 8759,
+     "itemIds": [
+      11822,
+      11823
+     ]
+    },
+    {
+     "nameCn": "黑铁酒吧",
+     "nameEn": "Guzzler",
+     "npcId": 8658,
+     "itemIds": [
+      2663,
+      11612,
+      11742,
+      12791,
+      12793,
+      13483,
+      15759,
+      18043,
+      18044,
+      18592,
+      18653,
+      22275
+     ]
+    },
+    {
+     "nameCn": "法拉克斯",
+     "nameEn": "Phalanx",
+     "npcId": 8177,
+     "itemIds": [
+      11744,
+      11745,
+      22212
+     ]
+    },
+    {
+     "nameCn": "弗莱拉斯大使",
+     "nameEn": "Ambassador Flamelash",
+     "npcId": 8329,
+     "itemIds": [
+      11812,
+      11814,
+      23320
+     ]
+    },
+    {
+     "nameCn": "无敌的潘佐尔",
+     "nameEn": "Panzor the Invincible",
+     "npcId": 8270,
+     "itemIds": [
+      11785,
+      11786,
+      11787,
+      22245
+     ]
+    },
+    {
+     "nameCn": "七贤之箱",
+     "nameEn": "Chest of The Seven",
+     "npcId": 8690,
+     "itemIds": [
+      11920,
+      11921,
+      11922,
+      11923,
+      11925,
+      11926,
+      11927,
+      11929
+     ]
+    },
+    {
+     "nameCn": "玛格姆斯",
+     "nameEn": "Magmus",
+     "npcId": 12162,
+     "itemIds": [
+      11746,
+      11935,
+      22208,
+      22395,
+      22400
+     ]
+    },
+    {
+     "nameCn": "铁炉堡公主茉艾拉·铜须",
+     "nameEn": "Princess Moira Bronzebeard",
+     "npcId": 8705,
+     "itemIds": [
+      12553,
+      12554,
+      12556,
+      12557
+     ]
+    },
+    {
+     "nameCn": "达格兰·索瑞森大帝",
+     "nameEn": "Emperor Dagran Thaurissan",
+     "npcId": 8807,
+     "itemIds": [
+      11815,
+      11924,
+      11928,
+      11930,
+      11931,
+      11932,
+      11933,
+      11934,
+      22204,
+      22207
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      11611,
+      11614,
+      11615,
+      11746,
+      11920,
+      11921,
+      11922,
+      15770,
+      15781,
+      16048,
+      16049,
+      16053,
+      18654,
+      18661,
+      22305
+     ]
+    },
+    {
+     "nameCn": "图纸",
+     "nameEn": "Plans",
+     "npcId": null,
+     "itemIds": [
+      11614,
+      11615
+     ]
+    }
+   ]
+  },
+  {
+   "id": "city-of-dalaran",
+   "dfSlug": "city_of_dalaran",
+   "bosses": [
+    {
+     "nameCn": "墓穴骑士阿特雷克斯",
+     "nameEn": "Atrexis the Grave Knight",
+     "npcId": 247126,
+     "itemIds": [
+      273032,
+      273033,
+      273036
+     ]
+    },
+    {
+     "nameCn": "被无视的琳恩",
+     "nameEn": "Lyn the Ignored",
+     "npcId": 247032,
+     "itemIds": [
+      273053,
+      273054,
+      273055
+     ]
+    },
+    {
+     "nameCn": "奥术畸体",
+     "nameEn": "Arcane Anomaly",
+     "npcId": 245999,
+     "itemIds": [
+      273031,
+      273034,
+      273035
+     ]
+    },
+    {
+     "nameCn": "奥术之谜",
+     "nameEn": "Arcanic Enigma",
+     "npcId": 246016,
+     "itemIds": [
+      273043,
+      273044,
+      273045
+     ]
+    },
+    {
+     "nameCn": "不稳定的哨兵",
+     "nameEn": "Unstable Sentinel",
+     "npcId": 246017,
+     "itemIds": [
+      273046,
+      273047,
+      273048
+     ]
+    },
+    {
+     "nameCn": "法力吞噬者",
+     "nameEn": "Mana Devourer",
+     "npcId": 246008,
+     "itemIds": [
+      273040,
+      273041,
+      273042,
+      273048
+     ]
+    },
+    {
+     "nameCn": "邪能古树",
+     "nameEn": "Fel Ancient",
+     "npcId": 246003,
+     "itemIds": [
+      273037,
+      273038,
+      273039
+     ]
+    },
+    {
+     "nameCn": "大法师之影",
+     "nameEn": "Shade of the Archmage",
+     "npcId": 246020,
+     "itemIds": [
+      273049,
+      273051,
+      273052
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      276158,
+      276160
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dire-maul-east",
+   "dfSlug": "dire_maul_east",
+   "bosses": [
+    {
+     "nameCn": "普希林",
+     "nameEn": "Pusillin",
+     "npcId": 7552,
+     "itemIds": [
+      18249,
+      18267
+     ]
+    },
+    {
+     "nameCn": "瑟雷姆·刺蹄",
+     "nameEn": "Zevrim Thornhoof",
+     "npcId": 11335,
+     "itemIds": [
+      18306,
+      18308,
+      18313,
+      18319,
+      18323
+     ]
+    },
+    {
+     "nameCn": "海多斯博恩",
+     "nameEn": "Hydrospawn",
+     "npcId": 5489,
+     "itemIds": [
+      18305,
+      18307,
+      18317,
+      18322
+     ]
+    },
+    {
+     "nameCn": "蕾瑟塔蒂丝",
+     "nameEn": "Lethtendris",
+     "npcId": 14378,
+     "itemIds": [
+      18301,
+      18302,
+      18325
+     ]
+    },
+    {
+     "nameCn": "奥兹恩",
+     "nameEn": "Alzzin the Wildshaper",
+     "npcId": 14416,
+     "itemIds": [
+      18309,
+      18310,
+      18312,
+      18314,
+      18315,
+      18318,
+      18321,
+      18326,
+      18327,
+      18328
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      18255,
+      18297,
+      18332,
+      18333,
+      18334,
+      18354,
+      18458,
+      18493
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dire-maul-north",
+   "dfSlug": "dire_maul_north",
+   "bosses": [
+    {
+     "nameCn": "卫兵摩尔达",
+     "nameEn": "Guard Mol'dar",
+     "npcId": 11561,
+     "itemIds": [
+      18250,
+      18268
+     ]
+    },
+    {
+     "nameCn": "践踏者克雷格",
+     "nameEn": "Stomper Kreeg",
+     "npcId": 11545,
+     "itemIds": [
+      9260,
+      18269,
+      18284,
+      18287,
+      18288,
+      18425
+     ]
+    },
+    {
+     "nameCn": "卫兵芬古斯",
+     "nameEn": "Guard Fengus",
+     "npcId": 11561,
+     "itemIds": [
+      18250,
+      18450,
+      18451,
+      18458,
+      18459,
+      18460,
+      18462,
+      18463,
+      18464
+     ]
+    },
+    {
+     "nameCn": "卫兵斯里基克",
+     "nameEn": "Guard Slip'kik",
+     "npcId": 11561,
+     "itemIds": [
+      18250,
+      18494
+     ]
+    },
+    {
+     "nameCn": "诺特·希姆加克的储物箱",
+     "nameEn": "Knot Thimblejack's Cache",
+     "npcId": null,
+     "itemIds": [
+      18240,
+      18258,
+      18415,
+      18416,
+      18417,
+      18418,
+      18514,
+      18515,
+      18516
+     ]
+    },
+    {
+     "nameCn": "克罗卡斯",
+     "nameEn": "Captain Kromcrush",
+     "npcId": 11564,
+     "itemIds": [
+      18502,
+      18503,
+      18505,
+      18507
+     ]
+    },
+    {
+     "nameCn": "观察者克鲁什",
+     "nameEn": "Cho'Rush the Observer",
+     "npcId": 11537,
+     "itemIds": []
+    },
+    {
+     "nameCn": "戈多克大王",
+     "nameEn": "King Gordok",
+     "npcId": 11583,
+     "itemIds": [
+      18520,
+      18521,
+      18522,
+      18523,
+      18524,
+      18525,
+      18526,
+      18527,
+      18780
+     ]
+    },
+    {
+     "nameCn": "贡品",
+     "nameEn": "Tribute",
+     "npcId": null,
+     "itemIds": [
+      18475,
+      18476,
+      18477,
+      18478,
+      18479,
+      18480,
+      18481,
+      18482,
+      18499,
+      18500,
+      18528,
+      18529,
+      18530,
+      18531,
+      18532,
+      18534
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      18250,
+      18332,
+      18333,
+      18334,
+      18354,
+      18458,
+      18493,
+      18640
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dire-maul-west",
+   "dfSlug": "dire_maul_west",
+   "bosses": [
+    {
+     "nameCn": "特迪斯·扭木",
+     "nameEn": "Tendris Warpwood",
+     "npcId": 14383,
+     "itemIds": [
+      18352,
+      18353,
+      18390,
+      18393
+     ]
+    },
+    {
+     "nameCn": "伊琳娜·暗木",
+     "nameEn": "Illyanna Ravenoak",
+     "npcId": 11270,
+     "itemIds": [
+      18347,
+      18349,
+      18383,
+      18386
+     ]
+    },
+    {
+     "nameCn": "卡雷迪斯镇长",
+     "nameEn": "Magister Kalendris",
+     "npcId": 14384,
+     "itemIds": [
+      18350,
+      18351,
+      18374,
+      18397
+     ]
+    },
+    {
+     "nameCn": "苏斯",
+     "nameEn": "Tsu'zee",
+     "npcId": 11250,
+     "itemIds": [
+      18345,
+      18346,
+      18387
+     ]
+    },
+    {
+     "nameCn": "伊莫塔尔",
+     "nameEn": "Immol'thar",
+     "npcId": 14173,
+     "itemIds": [
+      18377,
+      18379,
+      18381,
+      18384,
+      18385,
+      18389,
+      18391,
+      18394
+     ]
+    },
+    {
+     "nameCn": "托塞德林王子",
+     "nameEn": "Prince Tortheldrin",
+     "npcId": 11256,
+     "itemIds": [
+      18375,
+      18376,
+      18378,
+      18380,
+      18382,
+      18388,
+      18392,
+      18395,
+      18396
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      18332,
+      18333,
+      18334,
+      18354,
+      18458,
+      18493
+     ]
+    },
+    {
+     "nameCn": "辛德拉圣职者",
+     "nameEn": "Shen'dralar Provisioner",
+     "npcId": 14371,
+     "itemIds": [
+      18487
+     ]
+    },
+    {
+     "nameCn": "赫尔努拉斯",
+     "nameEn": "Lord Hel'nurath",
+     "npcId": 14556,
+     "itemIds": [
+      18754,
+      18755,
+      18756,
+      18757
+     ]
+    }
+   ]
+  },
+  {
+   "id": "whelgars-excavation",
+   "dfSlug": "excavation_wetlands",
+   "bosses": [
+    {
+     "nameCn": "盐脊",
+     "nameEn": "Saltspine",
+     "npcId": 260322,
+     "itemIds": [
+      273022,
+      273023,
+      273024
+     ]
+    },
+    {
+     "nameCn": "暗齿",
+     "nameEn": "Shadetooth",
+     "npcId": 260325,
+     "itemIds": [
+      273025,
+      273026,
+      273027,
+      273106
+     ]
+    },
+    {
+     "nameCn": "高地惊魂",
+     "nameEn": "Highland Horror",
+     "npcId": 9010,
+     "itemIds": [
+      270180
+     ]
+    },
+    {
+     "nameCn": "遗物守护者",
+     "nameEn": "Relic Guardian",
+     "npcId": 260326,
+     "itemIds": [
+      270865,
+      273028,
+      273029,
+      273030,
+      273097
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gnomeregan",
+   "dfSlug": "gnomeregan",
+   "bosses": [
+    {
+     "nameCn": "科技机器人",
+     "nameEn": "Techbot",
+     "npcId": 7288,
+     "itemIds": [
+      9444
+     ]
+    },
+    {
+     "nameCn": "格鲁比斯",
+     "nameEn": "Grubbis",
+     "npcId": 6533,
+     "itemIds": [
+      274042,
+      274043
+     ]
+    },
+    {
+     "nameCn": "粘性辐射尘",
+     "nameEn": "Viscous Fallout",
+     "npcId": 5497,
+     "itemIds": [
+      9452,
+      9453,
+      9454
+     ]
+    },
+    {
+     "nameCn": "电刑器6000型",
+     "nameEn": "Electrocutioner 6000",
+     "npcId": 6915,
+     "itemIds": [
+      6893,
+      9446,
+      9447,
+      9448,
+      252822
+     ]
+    },
+    {
+     "nameCn": "群体打击者9-60",
+     "nameEn": "Crowd Pummeler 9-60",
+     "npcId": 6774,
+     "itemIds": [
+      9449,
+      9450,
+      274049,
+      274068
+     ]
+    },
+    {
+     "nameCn": "黑铁大师",
+     "nameEn": "Dark Iron Ambassador",
+     "npcId": 6669,
+     "itemIds": [
+      9455,
+      9456,
+      9457,
+      252820
+     ]
+    },
+    {
+     "nameCn": "机械师瑟玛普拉格",
+     "nameEn": "Mekgineer Thermaplugg",
+     "npcId": 6980,
+     "itemIds": [
+      9458,
+      9459,
+      9461,
+      11828
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7191,
+      9279,
+      9280,
+      9281,
+      9282,
+      9308,
+      9316,
+      9326,
+      9327,
+      11827
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hall-of-thanes",
+   "dfSlug": "hall_of_thanes",
+   "bosses": [
+    {
+     "nameCn": "法德林·安威玛尔",
+     "nameEn": "Faldrim Anvilmar",
+     "npcId": 261306,
+     "itemIds": [
+      270227,
+      271096,
+      271097
+     ]
+    },
+    {
+     "nameCn": "玛格玛图斯",
+     "nameEn": "Magmatus",
+     "npcId": null,
+     "itemIds": [
+      270230,
+      270231,
+      271095
+     ]
+    },
+    {
+     "nameCn": "普兰德",
+     "nameEn": "Plunder",
+     "npcId": 261311,
+     "itemIds": [
+      270228,
+      270229,
+      271098
+     ]
+    },
+    {
+     "nameCn": "杜根·挽锤",
+     "nameEn": "Durgen Dirgehammer",
+     "npcId": 261319,
+     "itemIds": [
+      270256,
+      270260,
+      270261,
+      274286
+     ]
+    }
+   ]
+  },
+  {
+   "id": "kroldok-stronghold",
+   "dfSlug": "kroldok_stronghold",
+   "bosses": []
+  },
+  {
+   "id": "lower-blackrock-spire",
+   "dfSlug": "lower_blackrock_spire",
+   "bosses": [
+    {
+     "nameCn": "燃烧地狱卫士",
+     "nameEn": "Burning Felguard",
+     "npcId": 5047,
+     "itemIds": [
+      13181,
+      13182
+     ]
+    },
+    {
+     "nameCn": "尖石屠夫",
+     "nameEn": "Spirestone Butcher",
+     "npcId": 11574,
+     "itemIds": [
+      12608,
+      13286
+     ]
+    },
+    {
+     "nameCn": "欧莫克大王",
+     "nameEn": "Highlord Omokk",
+     "npcId": 11565,
+     "itemIds": [
+      12336,
+      12534,
+      13166,
+      13167,
+      13168,
+      13169,
+      13170,
+      16670
+     ]
+    },
+    {
+     "nameCn": "尖石统帅",
+     "nameEn": "Spirestone Battle Lord",
+     "npcId": 11576,
+     "itemIds": [
+      13284,
+      13285
+     ]
+    },
+    {
+     "nameCn": "尖石首席法师",
+     "nameEn": "Spirestone Lord Magus",
+     "npcId": 11578,
+     "itemIds": [
+      13261,
+      13282,
+      13283
+     ]
+    },
+    {
+     "nameCn": "暗影猎手沃什加斯",
+     "nameEn": "Shadow Hunter Vosh'gajin",
+     "npcId": 9732,
+     "itemIds": [
+      12626,
+      12651,
+      12653,
+      12654,
+      13255,
+      16712
+     ]
+    },
+    {
+     "nameCn": "指挥官沃恩",
+     "nameEn": "War Master Voone",
+     "npcId": 9733,
+     "itemIds": [
+      12335,
+      12582,
+      13173,
+      13177,
+      13179,
+      16676,
+      22231
+     ]
+    },
+    {
+     "nameCn": "班诺克·巨斧",
+     "nameEn": "Bannok Grimaxe",
+     "npcId": 9668,
+     "itemIds": [
+      12621,
+      12634,
+      12637
+     ]
+    },
+    {
+     "nameCn": "烟网蛛后",
+     "nameEn": "Mother Smolderweb",
+     "npcId": 9929,
+     "itemIds": [
+      13213,
+      13244,
+      16715
+     ]
+    },
+    {
+     "nameCn": "水晶之牙",
+     "nameEn": "Crystal Fang",
+     "npcId": 9755,
+     "itemIds": [
+      13184,
+      13185,
+      13218
+     ]
+    },
+    {
+     "nameCn": "乌洛克",
+     "nameEn": "Urok Doomhowl",
+     "npcId": 10601,
+     "itemIds": [
+      13178,
+      13258,
+      13259,
+      18784,
+      22232
+     ]
+    },
+    {
+     "nameCn": "军需官兹格雷斯",
+     "nameEn": "Quartermaster Zigris",
+     "npcId": 9738,
+     "itemIds": [
+      12835,
+      13247,
+      13252,
+      13253
+     ]
+    },
+    {
+     "nameCn": "哈雷肯",
+     "nameEn": "Halycon",
+     "npcId": 9567,
+     "itemIds": [
+      13210,
+      13211,
+      13212,
+      22313
+     ]
+    },
+    {
+     "nameCn": "奴役者基兹鲁尔",
+     "nameEn": "Gizrul the Slavener",
+     "npcId": 9564,
+     "itemIds": [
+      13205,
+      13206,
+      13208,
+      16718
+     ]
+    },
+    {
+     "nameCn": "霍克·巴什古德",
+     "nameEn": "Ghok Bashguud",
+     "npcId": 11809,
+     "itemIds": [
+      13198,
+      13203,
+      13204
+     ]
+    },
+    {
+     "nameCn": "维姆萨拉克",
+     "nameEn": "Overlord Wyrmthalak",
+     "npcId": 8711,
+     "itemIds": [
+      12337,
+      12780,
+      13161,
+      13162,
+      13163,
+      16679,
+      22321
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      9214,
+      12219,
+      12586,
+      13494,
+      14513,
+      15749,
+      15775,
+      16244,
+      16250,
+      16680,
+      16685,
+      16703,
+      16716,
+      16736
+     ]
+    }
+   ]
+  },
+  {
+   "id": "maraudon",
+   "dfSlug": "maraudon",
+   "bosses": [
+    {
+     "nameCn": "温格",
+     "nameEn": "Veng",
+     "npcId": 12243,
+     "itemIds": [
+      17765
+     ]
+    },
+    {
+     "nameCn": "诺克赛恩",
+     "nameEn": "Noxxion",
+     "npcId": 11172,
+     "itemIds": [
+      17744,
+      17745,
+      17746
+     ]
+    },
+    {
+     "nameCn": "锐刺鞭笞者",
+     "nameEn": "Razorlash",
+     "npcId": 12389,
+     "itemIds": [
+      17748,
+      17749,
+      17750,
+      17751
+     ]
+    },
+    {
+     "nameCn": "玛拉多斯",
+     "nameEn": "Maraudos",
+     "npcId": 9441,
+     "itemIds": [
+      17764
+     ]
+    },
+    {
+     "nameCn": "维利塔恩",
+     "nameEn": "Lord Vyletongue",
+     "npcId": 12334,
+     "itemIds": [
+      17752,
+      17754,
+      17755
+     ]
+    },
+    {
+     "nameCn": "收割者麦什洛克",
+     "nameEn": "Meshlok the Harvester",
+     "npcId": 9014,
+     "itemIds": [
+      17741,
+      17742,
+      17767
+     ]
+    },
+    {
+     "nameCn": "被诅咒的塞雷布拉斯",
+     "nameEn": "Celebras the Cursed",
+     "npcId": 12350,
+     "itemIds": [
+      17738,
+      17739,
+      17740
+     ]
+    },
+    {
+     "nameCn": "兰斯利德",
+     "nameEn": "Landslide",
+     "npcId": 12293,
+     "itemIds": [
+      17734,
+      17736,
+      17737,
+      17943
+     ]
+    },
+    {
+     "nameCn": "工匠吉兹洛克",
+     "nameEn": "Tinkerer Gizlock",
+     "npcId": 7125,
+     "itemIds": [
+      17717,
+      17718,
+      17719
+     ]
+    },
+    {
+     "nameCn": "洛特格里普",
+     "nameEn": "Rotgrip",
+     "npcId": 13589,
+     "itemIds": [
+      17728,
+      17730,
+      17732
+     ]
+    },
+    {
+     "nameCn": "瑟莱德丝公主",
+     "nameEn": "Princess Theradras",
+     "npcId": 12292,
+     "itemIds": [
+      17707,
+      17710,
+      17711,
+      17713,
+      17714,
+      17715,
+      17766
+     ]
+    },
+    {
+     "nameCn": "无名先知",
+     "nameEn": "The Nameless Prophet",
+     "npcId": 9426,
+     "itemIds": [
+      17757
+     ]
+    },
+    {
+     "nameCn": "库尔克",
+     "nameEn": "Kolk",
+     "npcId": 4860,
+     "itemIds": [
+      17761
+     ]
+    },
+    {
+     "nameCn": "盖尔克",
+     "nameEn": "Gelk",
+     "npcId": 9427,
+     "itemIds": [
+      17762
+     ]
+    },
+    {
+     "nameCn": "玛格拉",
+     "nameEn": "Magra",
+     "npcId": 9433,
+     "itemIds": [
+      17763
+     ]
+    }
+   ]
+  },
+  {
+   "id": "onyxias-lair",
+   "dfSlug": "onyxias_lair",
+   "bosses": [
+    {
+     "nameCn": "奥妮克希亚",
+     "nameEn": "Onyxia",
+     "npcId": 10184,
+     "itemIds": [
+      15410,
+      16900,
+      16908,
+      16914,
+      16921,
+      16929,
+      16939,
+      16947,
+      16955,
+      16963,
+      17064,
+      17067,
+      17068,
+      17075,
+      17078,
+      17966,
+      18205,
+      18423,
+      18705,
+      18813
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ragefire-chasm",
+   "dfSlug": "ragefire_chasm",
+   "bosses": [
+    {
+     "nameCn": "奥格弗林特",
+     "nameEn": "Oggleflint",
+     "npcId": 11517,
+     "itemIds": [
+      272996,
+      272998,
+      272999
+     ]
+    },
+    {
+     "nameCn": "饥饿者塔拉加曼",
+     "nameEn": "Taragaman the Hungerer",
+     "npcId": 7970,
+     "itemIds": [
+      14145,
+      14148,
+      14149
+     ]
+    },
+    {
+     "nameCn": "祈求者耶戈什",
+     "nameEn": "Jergosh the Invoker",
+     "npcId": 11429,
+     "itemIds": [
+      14147,
+      14150,
+      14151
+     ]
+    },
+    {
+     "nameCn": "巴扎兰",
+     "nameEn": "Bazzalan",
+     "npcId": 2007,
+     "itemIds": [
+      273003,
+      273005,
+      273007
+     ]
+    }
+   ]
+  },
+  {
+   "id": "razor-krendor",
+   "dfSlug": "razorfen_downs",
+   "bosses": [
+    {
+     "nameCn": "图特卡什",
+     "nameEn": "Tuten'kash",
+     "npcId": 7355,
+     "itemIds": [
+      10775,
+      10776,
+      10777
+     ]
+    },
+    {
+     "nameCn": "火眼莫德雷斯",
+     "nameEn": "Mordresh Fire Eye",
+     "npcId": 7357,
+     "itemIds": [
+      10769,
+      10770,
+      10771
+     ]
+    },
+    {
+     "nameCn": "暴食者",
+     "nameEn": "Glutton",
+     "npcId": 8567,
+     "itemIds": [
+      10772,
+      10774
+     ]
+    },
+    {
+     "nameCn": "拉戈斯诺特",
+     "nameEn": "Ragglesnout",
+     "npcId": 7354,
+     "itemIds": [
+      10758,
+      10767,
+      10768
+     ]
+    },
+    {
+     "nameCn": "寒冰之王亚门纳尔",
+     "nameEn": "Amnennar the Coldbringer",
+     "npcId": 7358,
+     "itemIds": [
+      10761,
+      10762,
+      10763,
+      10764,
+      10765
+     ]
+    },
+    {
+     "nameCn": "腐烂的普雷莫尔",
+     "nameEn": "Plaguemaw the Rotting",
+     "npcId": 7356,
+     "itemIds": [
+      10760,
+      10766
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      10571,
+      10573,
+      10582,
+      10584
+     ]
+    },
+    {
+     "nameCn": "亨利·斯特恩",
+     "nameEn": "Henry Stern",
+     "npcId": 8029,
+     "itemIds": [
+      3826,
+      10841
+     ]
+    }
+   ]
+  },
+  {
+   "id": "razorfen-kraul",
+   "dfSlug": "razorfen_kraul",
+   "bosses": [
+    {
+     "nameCn": "阿格姆",
+     "nameEn": "Aggem Thorncurse",
+     "npcId": 4424,
+     "itemIds": [
+      6681,
+      252455,
+      252512,
+      252820,
+      252822,
+      274158,
+      274159
+     ]
+    },
+    {
+     "nameCn": "亡语者贾格巴",
+     "nameEn": "Death Speaker Jargba",
+     "npcId": 4428,
+     "itemIds": [
+      2816,
+      6682,
+      6685,
+      252512,
+      252515,
+      252822
+     ]
+    },
+    {
+     "nameCn": "鲁古格",
+     "nameEn": "Roogug",
+     "npcId": 6168,
+     "itemIds": [
+      252512,
+      274149,
+      274152,
+      274155
+     ]
+    },
+    {
+     "nameCn": "主宰拉姆塔斯",
+     "nameEn": "Overlord Ramtusk",
+     "npcId": 4420,
+     "itemIds": [
+      6686,
+      6687,
+      252512,
+      252513,
+      252515,
+      252822,
+      274161
+     ]
+    },
+    {
+     "nameCn": "剃刀沼泽刺鬃守卫",
+     "nameEn": "Razorfen Spearhide",
+     "npcId": 4438,
+     "itemIds": [
+      6679
+     ]
+    },
+    {
+     "nameCn": "暴怒的阿迦赛罗斯",
+     "nameEn": "Agathelos the Raging",
+     "npcId": 4422,
+     "itemIds": [
+      6690,
+      6691,
+      252455,
+      252512,
+      252513,
+      252820,
+      274160
+     ]
+    },
+    {
+     "nameCn": "盲眼猎手",
+     "nameEn": "Blind Hunter",
+     "npcId": 4425,
+     "itemIds": [
+      6695,
+      6696,
+      6697
+     ]
+    },
+    {
+     "nameCn": "卡尔加·刺肋",
+     "nameEn": "Charlga Razorflank",
+     "npcId": 4421,
+     "itemIds": [
+      6692,
+      6693,
+      6694,
+      17008,
+      252455,
+      252456,
+      252512,
+      252515,
+      273103
+     ]
+    },
+    {
+     "nameCn": "唤地者哈穆加",
+     "nameEn": "Earthcaller Halmgar",
+     "npcId": 4842,
+     "itemIds": [
+      6688,
+      6689,
+      252455,
+      252514
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      6679
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ruins-of-lordaeron",
+   "dfSlug": "ruins_of_lordaeron",
+   "bosses": [
+    {
+     "nameCn": "男爵",
+     "nameEn": "The Baron",
+     "npcId": 250660,
+     "itemIds": [
+      271204,
+      271205,
+      271206
+     ]
+    },
+    {
+     "nameCn": "枯牙",
+     "nameEn": "Witherfang",
+     "npcId": 250625,
+     "itemIds": [
+      271201,
+      271202,
+      271203
+     ]
+    },
+    {
+     "nameCn": "被遗弃者",
+     "nameEn": "The Abandoned",
+     "npcId": 250631,
+     "itemIds": [
+      271207,
+      271208,
+      271216
+     ]
+    },
+    {
+     "nameCn": "比约克",
+     "nameEn": "Bjork",
+     "npcId": 256097,
+     "itemIds": [
+      271209,
+      271210,
+      271217
+     ]
+    },
+    {
+     "nameCn": "拉斯玛尔",
+     "nameEn": "Rath'mael",
+     "npcId": 250657,
+     "itemIds": [
+      271213,
+      271214,
+      271215,
+      273085,
+      273103
+     ]
+    },
+    {
+     "nameCn": "邪恶的维克托",
+     "nameEn": "Viktor the Vile",
+     "npcId": 256035,
+     "itemIds": [
+      271211,
+      271212,
+      271218
+     ]
+    },
+    {
+     "nameCn": "洛丹伦上尉",
+     "nameEn": "Lordaeron Captain",
+     "npcId": 139050,
+     "itemIds": [
+      6641,
+      6642
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      286978,
+      286979,
+      286980
+     ]
+    }
+   ]
+  },
+  {
+   "id": "scholomance",
+   "dfSlug": "scholomance",
+   "bosses": [
+    {
+     "nameCn": "基尔图诺斯的卫士",
+     "nameEn": "Blood Steward of Kirtonos",
+     "npcId": 14861,
+     "itemIds": [
+      13523
+     ]
+    },
+    {
+     "nameCn": "传令官基尔图诺斯",
+     "nameEn": "Kirtonos the Herald",
+     "npcId": 10506,
+     "itemIds": [
+      13955,
+      13956,
+      13957,
+      13960,
+      13967,
+      13969,
+      13983,
+      14024,
+      16734
+     ]
+    },
+    {
+     "nameCn": "詹迪斯·巴罗夫",
+     "nameEn": "Jandice Barov",
+     "npcId": 10503,
+     "itemIds": [
+      13523,
+      14545,
+      14548,
+      16701,
+      18690,
+      22394
+     ]
+    },
+    {
+     "nameCn": "血骨傀儡",
+     "nameEn": "Rattlegore",
+     "npcId": 11622,
+     "itemIds": [
+      13873,
+      14528,
+      14531,
+      14537,
+      14538,
+      14539,
+      16711,
+      18686
+     ]
+    },
+    {
+     "nameCn": "死亡骑士达克雷尔",
+     "nameEn": "Death Knight Darkreaver",
+     "npcId": 14516,
+     "itemIds": [
+      18758,
+      18759,
+      18760,
+      18761
+     ]
+    },
+    {
+     "nameCn": "马杜克·布莱克波尔",
+     "nameEn": "Marduk Blackpool",
+     "npcId": 10433,
+     "itemIds": [
+      18692
+     ]
+    },
+    {
+     "nameCn": "维克图斯",
+     "nameEn": "Vectus",
+     "npcId": 10432,
+     "itemIds": []
+    },
+    {
+     "nameCn": "莱斯·霜语",
+     "nameEn": "Ras Frostwhisper",
+     "npcId": 10508,
+     "itemIds": [
+      13952,
+      14340,
+      14487,
+      14502,
+      14503,
+      14522,
+      14525,
+      16689,
+      18693,
+      18694,
+      18695,
+      18696
+     ]
+    },
+    {
+     "nameCn": "讲师玛丽希亚",
+     "nameEn": "Instructor Malicia",
+     "npcId": 10505,
+     "itemIds": []
+    },
+    {
+     "nameCn": "瑟尔林·卡斯迪诺夫教授",
+     "nameEn": "Doctor Theolen Krastinov",
+     "npcId": 11261,
+     "itemIds": [
+      14623
+     ]
+    },
+    {
+     "nameCn": "博学者普克尔特",
+     "nameEn": "Lorekeeper Polkelt",
+     "npcId": 10901,
+     "itemIds": []
+    },
+    {
+     "nameCn": "拉文尼亚",
+     "nameEn": "The Ravenian",
+     "npcId": 10507,
+     "itemIds": []
+    },
+    {
+     "nameCn": "阿雷克斯·巴罗夫",
+     "nameEn": "Lord Alexei Barov",
+     "npcId": 10504,
+     "itemIds": [
+      14624
+     ]
+    },
+    {
+     "nameCn": "伊露希亚·巴罗夫",
+     "nameEn": "Lady Illucia Barov",
+     "npcId": 10502,
+     "itemIds": [
+      14615
+     ]
+    },
+    {
+     "nameCn": "黑暗院长加丁",
+     "nameEn": "Darkmaster Gandling",
+     "npcId": 1853,
+     "itemIds": [
+      13398,
+      13938,
+      13944,
+      13951,
+      13953,
+      13964,
+      16677,
+      16686,
+      16693,
+      16698,
+      16707,
+      16720,
+      16731,
+      22433
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      12753,
+      12840,
+      12841,
+      12843,
+      13920,
+      14623,
+      15773,
+      15776,
+      16254,
+      16255,
+      16671,
+      16685,
+      16702,
+      16710,
+      16714,
+      16716,
+      20520
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shadowfang-keep",
+   "dfSlug": "shadowfang_keep",
+   "bosses": [
+    {
+     "nameCn": "雷希戈尔",
+     "nameEn": "Rethilgore",
+     "npcId": 3914,
+     "itemIds": [
+      5254,
+      273456,
+      273457
+     ]
+    },
+    {
+     "nameCn": "邪恶战马 / 暗影战马",
+     "nameEn": "Fel Steed / Shadow Charger",
+     "npcId": 1952,
+     "itemIds": [
+      932
+     ]
+    },
+    {
+     "nameCn": "屠夫拉佐克劳",
+     "nameEn": "Razorclaw the Butcher",
+     "npcId": 3886,
+     "itemIds": [
+      6226,
+      6633,
+      273096
+     ]
+    },
+    {
+     "nameCn": "席瓦莱恩男爵",
+     "nameEn": "Baron Silverlaine",
+     "npcId": 3887,
+     "itemIds": [
+      6321,
+      6323,
+      273637
+     ]
+    },
+    {
+     "nameCn": "指挥官斯普林瓦尔",
+     "nameEn": "Commander Springvale",
+     "npcId": 4278,
+     "itemIds": [
+      3191,
+      6320,
+      273105,
+      273643
+     ]
+    },
+    {
+     "nameCn": "盲眼守卫奥杜",
+     "nameEn": "Odo the Blindwatcher",
+     "npcId": 4279,
+     "itemIds": [
+      6318,
+      6319,
+      273645
+     ]
+    },
+    {
+     "nameCn": "死亡之誓",
+     "nameEn": "Deathsworn Captain",
+     "npcId": 3872,
+     "itemIds": [
+      6641,
+      6642
+     ]
+    },
+    {
+     "nameCn": "阿鲁高的虚空行者",
+     "nameEn": "Arugal's Voidwalker",
+     "npcId": 1131,
+     "itemIds": []
+    },
+    {
+     "nameCn": "吞噬者芬鲁斯",
+     "nameEn": "Fenrus the Devourer",
+     "npcId": 4274,
+     "itemIds": [
+      3230,
+      6340,
+      273646
+     ]
+    },
+    {
+     "nameCn": "狼王南杜斯",
+     "nameEn": "Wolf Master Nandos",
+     "npcId": 3927,
+     "itemIds": [
+      3748,
+      6314,
+      273647
+     ]
+    },
+    {
+     "nameCn": "大法师阿鲁高",
+     "nameEn": "Archmage Arugal",
+     "npcId": 4275,
+     "itemIds": [
+      6220,
+      6324,
+      6392
+     ]
+    },
+    {
+     "nameCn": "塞沃尔",
+     "nameEn": "Sever",
+     "npcId": 14682,
+     "itemIds": [
+      23171,
+      23173
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": []
+    },
+    {
+     "nameCn": "乔丹的铁锤",
+     "nameEn": "Jordan's Smithing Hammer",
+     "npcId": null,
+     "itemIds": [
+      6895
+     ]
+    },
+    {
+     "nameCn": "乌尔之书",
+     "nameEn": "The Book of Ur",
+     "npcId": null,
+     "itemIds": [
+      6283
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shapers-terrace",
+   "dfSlug": "shapers_terrace",
+   "bosses": []
+  },
+  {
+   "id": "scarlet-monastery-armory",
+   "dfSlug": "sm_armory",
+   "bosses": [
+    {
+     "nameCn": "赫洛德",
+     "nameEn": "Herod",
+     "npcId": 3975,
+     "itemIds": [
+      7717,
+      7718,
+      7719,
+      10330
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7736,
+      7760,
+      10330,
+      23192
+     ]
+    }
+   ]
+  },
+  {
+   "id": "scarlet-monastery-cathedral",
+   "dfSlug": "sm_cathedral",
+   "bosses": [
+    {
+     "nameCn": "大检察官法尔班克斯",
+     "nameEn": "High Inquisitor Fairbanks",
+     "npcId": 4542,
+     "itemIds": [
+      19507,
+      19508,
+      19509
+     ]
+    },
+    {
+     "nameCn": "血色十字军指挥官莫格莱尼",
+     "nameEn": "Scarlet Commander Mograine",
+     "npcId": 3976,
+     "itemIds": [
+      7723,
+      7724,
+      7726,
+      10330
+     ]
+    },
+    {
+     "nameCn": "大检察官怀特迈恩",
+     "nameEn": "High Inquisitor Whitemane",
+     "npcId": 2043,
+     "itemIds": [
+      7720,
+      7721,
+      7722
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7736,
+      7760,
+      10330
+     ]
+    }
+   ]
+  },
+  {
+   "id": "scarlet-monastery-graveyard",
+   "dfSlug": "sm_graveyard",
+   "bosses": [
+    {
+     "nameCn": "审讯员韦沙斯",
+     "nameEn": "Interrogator Vishas",
+     "npcId": 3983,
+     "itemIds": [
+      7683,
+      252455,
+      252456,
+      252513,
+      252514,
+      252822,
+      274290
+     ]
+    },
+    {
+     "nameCn": "永醒的艾希尔",
+     "nameEn": "Azshir the Sleepless",
+     "npcId": 5534,
+     "itemIds": [
+      7708,
+      7709,
+      7731,
+      252456,
+      252512
+     ]
+    },
+    {
+     "nameCn": "死灵勇士",
+     "nameEn": "Fallen Champion",
+     "npcId": 5230,
+     "itemIds": [
+      7689,
+      7690,
+      7691,
+      252456,
+      252820
+     ]
+    },
+    {
+     "nameCn": "铁脊死灵",
+     "nameEn": "Ironspine",
+     "npcId": 5231,
+     "itemIds": [
+      7686,
+      7687,
+      7688,
+      252820
+     ]
+    },
+    {
+     "nameCn": "血法师萨尔诺斯",
+     "nameEn": "Bloodmage Thalnos",
+     "npcId": 4543,
+     "itemIds": [
+      7684,
+      7685,
+      252455,
+      252513,
+      252514,
+      252822,
+      274291
+     ]
+    },
+    {
+     "nameCn": "瑟克恩",
+     "nameEn": "Scorn",
+     "npcId": 14693,
+     "itemIds": [
+      23168,
+      23169,
+      23170
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7736,
+      7760,
+      10330
+     ]
+    }
+   ]
+  },
+  {
+   "id": "scarlet-monastery-library",
+   "dfSlug": "sm_library",
+   "bosses": [
+    {
+     "nameCn": "驯犬者洛克希",
+     "nameEn": "Houndmaster Loksey",
+     "npcId": 3974,
+     "itemIds": [
+      3456,
+      7710,
+      7756,
+      252512,
+      274292
+     ]
+    },
+    {
+     "nameCn": "奥法师杜安",
+     "nameEn": "Arcanist Doan",
+     "npcId": 6487,
+     "itemIds": [
+      7711,
+      7712,
+      7713,
+      7714,
+      274293,
+      274294
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7736,
+      7760,
+      10330
+     ]
+    },
+    {
+     "nameCn": "杜安的保险箱",
+     "nameEn": "Doan's Strongbox",
+     "npcId": null,
+     "itemIds": [
+      7146
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stratholme-main-gate",
+   "dfSlug": "stratholme_main",
+   "bosses": [
+    {
+     "nameCn": "斯库尔",
+     "nameEn": "Skul",
+     "npcId": 2606,
+     "itemIds": [
+      13394,
+      13395,
+      13396
+     ]
+    },
+    {
+     "nameCn": "斯坦索姆信使",
+     "nameEn": "Stratholme Courier",
+     "npcId": 10547,
+     "itemIds": [
+      13302,
+      13303,
+      13304,
+      13305,
+      13306,
+      13307
+     ]
+    },
+    {
+     "nameCn": "弗雷斯特恩",
+     "nameEn": "Hearthsinger Forresten",
+     "npcId": 10482,
+     "itemIds": [
+      13378,
+      13379,
+      13383,
+      13384,
+      16682
+     ]
+    },
+    {
+     "nameCn": "不可宽恕者",
+     "nameEn": "The Unforgiven",
+     "npcId": 10771,
+     "itemIds": [
+      13404,
+      13405,
+      13408,
+      13409,
+      16717
+     ]
+    },
+    {
+     "nameCn": "邮差马龙",
+     "nameEn": "Postmaster Malown",
+     "npcId": 10669,
+     "itemIds": [
+      13388,
+      13389,
+      13390,
+      13391,
+      13392,
+      13393
+     ]
+    },
+    {
+     "nameCn": "悲惨的提米",
+     "nameEn": "Timmy the Cruel",
+     "npcId": 571,
+     "itemIds": [
+      13400,
+      13401,
+      13402,
+      13403,
+      16724
+     ]
+    },
+    {
+     "nameCn": "狂热的玛洛尔",
+     "nameEn": "Malor the Zealous",
+     "npcId": 10458,
+     "itemIds": [
+      12845
+     ]
+    },
+    {
+     "nameCn": "红衣铸锤师",
+     "nameEn": "Crimson Hammersmith",
+     "npcId": 10637,
+     "itemIds": [
+      18781
+     ]
+    },
+    {
+     "nameCn": "炮手威利",
+     "nameEn": "Cannon Master Willey",
+     "npcId": 10674,
+     "itemIds": [
+      12839,
+      13377,
+      13380,
+      13381,
+      13382,
+      16708,
+      18721,
+      22403,
+      22404,
+      22405,
+      22407
+     ]
+    },
+    {
+     "nameCn": "档案管理员加尔福特",
+     "nameEn": "Archivist Galford",
+     "npcId": 10544,
+     "itemIds": [
+      13385,
+      13386,
+      13387,
+      16692,
+      18716
+     ]
+    },
+    {
+     "nameCn": "巴纳扎尔",
+     "nameEn": "Balnazzar",
+     "npcId": 10545,
+     "itemIds": [
+      12103,
+      13250,
+      13348,
+      13358,
+      13359,
+      13360,
+      13369,
+      16725,
+      18717,
+      18718,
+      18720
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      12103,
+      12735,
+      12811,
+      12840,
+      12841,
+      12843,
+      13348,
+      13358,
+      13359,
+      13360,
+      13369,
+      14495,
+      15768,
+      15777,
+      16052,
+      16248,
+      16249,
+      16671,
+      16681,
+      16685,
+      16702,
+      16710,
+      16714,
+      16725,
+      16736,
+      17061,
+      18658,
+      18717,
+      18718,
+      18720
+     ]
+    },
+    {
+     "nameCn": "图纸",
+     "nameEn": "Plans",
+     "npcId": null,
+     "itemIds": [
+      12827,
+      12830
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stratholme-service-gate",
+   "dfSlug": "stratholme_service",
+   "bosses": [
+    {
+     "nameCn": "巴瑟拉斯镇长",
+     "nameEn": "Magistrate Barthilas",
+     "npcId": 10433,
+     "itemIds": [
+      12382,
+      13376,
+      18722,
+      18725,
+      18726,
+      18727
+     ]
+    },
+    {
+     "nameCn": "石脊",
+     "nameEn": "Stonespine",
+     "npcId": 7856,
+     "itemIds": [
+      13397,
+      13399,
+      13954
+     ]
+    },
+    {
+     "nameCn": "安娜丝塔丽男爵夫人",
+     "nameEn": "Baroness Anastari",
+     "npcId": 10698,
+     "itemIds": [
+      13534,
+      13535,
+      13537,
+      13538,
+      13539,
+      16704,
+      18728,
+      18729,
+      18730
+     ]
+    },
+    {
+     "nameCn": "黑衣守卫铸剑师",
+     "nameEn": "Black Guard Swordsmith",
+     "npcId": 775,
+     "itemIds": [
+      18783
+     ]
+    },
+    {
+     "nameCn": "奈鲁布恩坎",
+     "nameEn": "Nerub'enkan",
+     "npcId": 9793,
+     "itemIds": [
+      13508,
+      13529,
+      13530,
+      13531,
+      13532,
+      13533,
+      16675,
+      18738,
+      18739,
+      18740
+     ]
+    },
+    {
+     "nameCn": "苍白的玛勒基",
+     "nameEn": "Maleki the Pallid",
+     "npcId": 10546,
+     "itemIds": [
+      12833,
+      13524,
+      13525,
+      13526,
+      13527,
+      13528,
+      16691,
+      18734,
+      18735,
+      18737
+     ]
+    },
+    {
+     "nameCn": "吞咽者拉姆斯登",
+     "nameEn": "Ramstein the Gorger",
+     "npcId": 12818,
+     "itemIds": [
+      13372,
+      13373,
+      13374,
+      13375,
+      13515,
+      16737,
+      18723
+     ]
+    },
+    {
+     "nameCn": "瑞文戴尔男爵",
+     "nameEn": "Baron Rivendare",
+     "npcId": 10440,
+     "itemIds": [
+      13335,
+      13340,
+      13344,
+      13345,
+      13346,
+      13349,
+      16678,
+      16687,
+      16694,
+      16709,
+      16719,
+      22408,
+      22409,
+      22410,
+      22411,
+      22412
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      12103,
+      12735,
+      12811,
+      12840,
+      12841,
+      12843,
+      13348,
+      13358,
+      13359,
+      13360,
+      13369,
+      14495,
+      15768,
+      15777,
+      16052,
+      16248,
+      16249,
+      16671,
+      16681,
+      16685,
+      16702,
+      16710,
+      16714,
+      16725,
+      16736,
+      17061,
+      18658,
+      18717,
+      18718,
+      18720
+     ]
+    },
+    {
+     "nameCn": "图纸",
+     "nameEn": "Plans",
+     "npcId": null,
+     "itemIds": [
+      12827,
+      12830
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sunken-temple",
+   "dfSlug": "sunken_temple",
+   "bosses": [
+    {
+     "nameCn": "阳台的小头目",
+     "nameEn": "Balcony Minibosses",
+     "npcId": 6701,
+     "itemIds": [
+      10783,
+      10787,
+      10788,
+      20606,
+      20607,
+      20608
+     ]
+    },
+    {
+     "nameCn": "阿塔拉利恩",
+     "nameEn": "Atal'alarion",
+     "npcId": 8580,
+     "itemIds": [
+      10798,
+      10799,
+      10800
+     ]
+    },
+    {
+     "nameCn": "哈卡的后代",
+     "nameEn": "Spawn of Hakkar",
+     "npcId": 4065,
+     "itemIds": [
+      10801,
+      10802
+     ]
+    },
+    {
+     "nameCn": "哈卡的化身",
+     "nameEn": "Avatar of Hakkar",
+     "npcId": 8053,
+     "itemIds": [
+      10838,
+      10842,
+      10843,
+      10844,
+      10845,
+      10846
+     ]
+    },
+    {
+     "nameCn": "预言者迦玛兰",
+     "nameEn": "Jammal'an the Prophet",
+     "npcId": 6708,
+     "itemIds": [
+      10806,
+      10807,
+      10808
+     ]
+    },
+    {
+     "nameCn": "可悲的奥戈姆",
+     "nameEn": "Ogom the Wretched",
+     "npcId": 6709,
+     "itemIds": [
+      10803,
+      10804,
+      10805
+     ]
+    },
+    {
+     "nameCn": "德姆塞卡尔",
+     "nameEn": "Dreamscythe",
+     "npcId": 7553,
+     "itemIds": [
+      10797
+     ]
+    },
+    {
+     "nameCn": "德拉维沃尔",
+     "nameEn": "Weaver",
+     "npcId": 6375,
+     "itemIds": [
+      10795,
+      12243,
+      12463
+     ]
+    },
+    {
+     "nameCn": "哈扎斯",
+     "nameEn": "Hazzas",
+     "npcId": 9584,
+     "itemIds": []
+    },
+    {
+     "nameCn": "摩弗拉斯",
+     "nameEn": "Morphaz",
+     "npcId": 7975,
+     "itemIds": []
+    },
+    {
+     "nameCn": "伊兰尼库斯的阴影",
+     "nameEn": "Shade of Eranikus",
+     "npcId": 7806,
+     "itemIds": [
+      10454,
+      10828,
+      10829,
+      10833,
+      10835,
+      10836,
+      10837
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      10623,
+      10627,
+      10628,
+      10634,
+      10780,
+      10781,
+      10782,
+      10787,
+      10838,
+      10842,
+      10843,
+      10844,
+      10845,
+      10846,
+      15733,
+      16216
+     ]
+    }
+   ]
+  },
+  {
+   "id": "deathmine",
+   "dfSlug": "the_deadmines",
+   "bosses": [
+    {
+     "nameCn": "拉克佐",
+     "nameEn": "Rhahk'Zor",
+     "npcId": 644,
+     "itemIds": [
+      5187,
+      251363,
+      273289
+     ]
+    },
+    {
+     "nameCn": "矿工约翰森",
+     "nameEn": "Miner Johnson",
+     "npcId": 3586,
+     "itemIds": [
+      5443,
+      5444
+     ]
+    },
+    {
+     "nameCn": "斯尼德",
+     "nameEn": "Sneed",
+     "npcId": 643,
+     "itemIds": [
+      5194,
+      5195,
+      273092,
+      273293
+     ]
+    },
+    {
+     "nameCn": "斯尼德的伐木机",
+     "nameEn": "Sneed's Shredder",
+     "npcId": 642,
+     "itemIds": [
+      2169,
+      285292
+     ]
+    },
+    {
+     "nameCn": "基尔尼格",
+     "nameEn": "Gilnid",
+     "npcId": 1763,
+     "itemIds": [
+      1156,
+      5199,
+      273086,
+      273297
+     ]
+    },
+    {
+     "nameCn": "重拳先生",
+     "nameEn": "Mr. Smite",
+     "npcId": 646,
+     "itemIds": [
+      5192,
+      5196,
+      7230,
+      284715
+     ]
+    },
+    {
+     "nameCn": "绿皮船长",
+     "nameEn": "Captain Greenskin",
+     "npcId": 7113,
+     "itemIds": [
+      5200,
+      5201,
+      10403
+     ]
+    },
+    {
+     "nameCn": "艾德温·范克里夫",
+     "nameEn": "Edwin VanCleef",
+     "npcId": 639,
+     "itemIds": [
+      2874,
+      5191,
+      5193,
+      5202,
+      10399,
+      253940
+     ]
+    },
+    {
+     "nameCn": "曲奇",
+     "nameEn": "Cookie",
+     "npcId": 645,
+     "itemIds": [
+      5197,
+      5198,
+      8490,
+      273102,
+      273298
+     ]
+    },
+    {
+     "nameCn": "迪菲亚火药",
+     "nameEn": "Defias Gunpowder",
+     "npcId": null,
+     "itemIds": [
+      5397
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      1951,
+      8492
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the-drowned-city",
+   "dfSlug": "the_drowned_city",
+   "bosses": []
+  },
+  {
+   "id": "the-stocks",
+   "dfSlug": "the_stockade",
+   "bosses": [
+    {
+     "nameCn": "卡姆·深怒",
+     "nameEn": "Kam Deepfury",
+     "npcId": 1666,
+     "itemIds": [
+      252455,
+      252512,
+      252513,
+      252515,
+      273807,
+      273808
+     ]
+    },
+    {
+     "nameCn": "可怕的塔格尔",
+     "nameEn": "Targorr the Dread",
+     "npcId": 1696,
+     "itemIds": [
+      273804,
+      273805,
+      273806
+     ]
+    },
+    {
+     "nameCn": "哈姆霍克",
+     "nameEn": "Hamhock",
+     "npcId": 1717,
+     "itemIds": [
+      252513,
+      252822,
+      273809,
+      273810,
+      273811
+     ]
+    },
+    {
+     "nameCn": "巴基尔·斯瑞德",
+     "nameEn": "Bazil Thredd",
+     "npcId": 1716,
+     "itemIds": [
+      252455,
+      252456,
+      252515,
+      252822,
+      273824,
+      273825,
+      273827,
+      273829
+     ]
+    },
+    {
+     "nameCn": "迪克斯特·瓦德",
+     "nameEn": "Dextren Ward",
+     "npcId": 1663,
+     "itemIds": [
+      252456,
+      252512,
+      252514,
+      252515,
+      252820,
+      273817,
+      273819,
+      273820
+     ]
+    },
+    {
+     "nameCn": "布鲁高·铁拳",
+     "nameEn": "Bruegal Ironknuckle",
+     "npcId": 1720,
+     "itemIds": [
+      2941,
+      2942,
+      3228
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      274092
+     ]
+    }
+   ]
+  },
+  {
+   "id": "uldaman",
+   "dfSlug": "uldaman",
+   "bosses": [
+    {
+     "nameCn": "巴尔洛戈",
+     "nameEn": "Baelog",
+     "npcId": 6906,
+     "itemIds": [
+      9399,
+      9400
+     ]
+    },
+    {
+     "nameCn": "奥拉夫",
+     "nameEn": "Olaf",
+     "npcId": 6908,
+     "itemIds": [
+      1177,
+      9403,
+      9404
+     ]
+    },
+    {
+     "nameCn": "鲁维罗什",
+     "nameEn": "Revelosh",
+     "npcId": 6910,
+     "itemIds": [
+      7741,
+      9387,
+      9388,
+      9389,
+      9390
+     ]
+    },
+    {
+     "nameCn": "艾隆纳亚",
+     "nameEn": "Ironaya",
+     "npcId": 7228,
+     "itemIds": [
+      9407,
+      9408,
+      9409
+     ]
+    },
+    {
+     "nameCn": "黑曜石哨兵",
+     "nameEn": "Obsidian Sentinel",
+     "npcId": 7023,
+     "itemIds": [
+      8053
+     ]
+    },
+    {
+     "nameCn": "古代的石头看守者",
+     "nameEn": "Ancient Stone Keeper",
+     "npcId": 7206,
+     "itemIds": [
+      9410,
+      9411
+     ]
+    },
+    {
+     "nameCn": "加加恩·火锤",
+     "nameEn": "Galgann Firehammer",
+     "npcId": 7291,
+     "itemIds": [
+      9412,
+      9419,
+      11310,
+      11311
+     ]
+    },
+    {
+     "nameCn": "格瑞姆洛克",
+     "nameEn": "Grimlok",
+     "npcId": 4854,
+     "itemIds": [
+      7670,
+      9414,
+      9415,
+      9416
+     ]
+    },
+    {
+     "nameCn": "阿扎达斯",
+     "nameEn": "Archaedas",
+     "npcId": 2748,
+     "itemIds": [
+      9413,
+      9418,
+      11118
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      7666,
+      9381,
+      9384,
+      9386,
+      9391,
+      9393,
+      9396,
+      9397,
+      9406,
+      9420,
+      9428
+     ]
+    },
+    {
+     "nameCn": "巴尔洛戈的箱子",
+     "nameEn": "Baelog's Chest",
+     "npcId": null,
+     "itemIds": [
+      7740
+     ]
+    },
+    {
+     "nameCn": "显眼的骨灰罐",
+     "nameEn": "Conspicuous Urn",
+     "npcId": null,
+     "itemIds": [
+      7671
+     ]
+    },
+    {
+     "nameCn": "暗炉宝箱",
+     "nameEn": "Shadowforge Cache",
+     "npcId": null,
+     "itemIds": [
+      7669
+     ]
+    },
+    {
+     "nameCn": "意志石板",
+     "nameEn": "Tablet of Will",
+     "npcId": null,
+     "itemIds": [
+      5824
+     ]
+    }
+   ]
+  },
+  {
+   "id": "upper-blackrock-spire",
+   "dfSlug": "upper_blackrock_spire",
+   "bosses": [
+    {
+     "nameCn": "烈焰卫士艾博希尔",
+     "nameEn": "Pyroguard Emberseer",
+     "npcId": 2172,
+     "itemIds": [
+      12905,
+      12926,
+      12927,
+      12929,
+      16672
+     ]
+    },
+    {
+     "nameCn": "索拉卡·火冠",
+     "nameEn": "Solakar Flamewreath",
+     "npcId": 10264,
+     "itemIds": [
+      12589,
+      12603,
+      12606,
+      12609,
+      16695
+     ]
+    },
+    {
+     "nameCn": "杰德",
+     "nameEn": "Jed Runewatcher",
+     "npcId": 9686,
+     "itemIds": [
+      12604,
+      12605,
+      12930
+     ]
+    },
+    {
+     "nameCn": "古拉鲁克",
+     "nameEn": "Goraluk Anvilcrack",
+     "npcId": 10899,
+     "itemIds": [
+      12696,
+      12806,
+      13498,
+      18047,
+      18048,
+      18779
+     ]
+    },
+    {
+     "nameCn": "盖斯",
+     "nameEn": "Gyth",
+     "npcId": 10339,
+     "itemIds": [
+      12952,
+      12953,
+      12960,
+      16669,
+      22225
+     ]
+    },
+    {
+     "nameCn": "大酋长雷德·黑手",
+     "nameEn": "Warchief Rend Blackhand",
+     "npcId": 9778,
+     "itemIds": [
+      12587,
+      12935,
+      12936,
+      12939,
+      16733,
+      18102,
+      18103,
+      18104,
+      22247
+     ]
+    },
+    {
+     "nameCn": "比斯巨兽",
+     "nameEn": "The Beast",
+     "npcId": 10193,
+     "itemIds": [
+      12709,
+      12731,
+      12963,
+      12964,
+      12965,
+      12966,
+      12967,
+      12968,
+      12969,
+      16729,
+      22311
+     ]
+    },
+    {
+     "nameCn": "达基萨斯将军",
+     "nameEn": "General Drakkisath",
+     "npcId": 10115,
+     "itemIds": [
+      12602,
+      13098,
+      13141,
+      13142,
+      15730,
+      16690,
+      16700,
+      16706,
+      16730,
+      22253,
+      22267,
+      22269
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      16247,
+      16680,
+      16681,
+      16703,
+      24102
+     ]
+    },
+    {
+     "nameCn": "黑暗石板",
+     "nameEn": "Darkstone Tablet",
+     "npcId": null,
+     "itemIds": [
+      12358
+     ]
+    }
+   ]
+  },
+  {
+   "id": "wailing-caverns",
+   "dfSlug": "wailing_caverns",
+   "bosses": [
+    {
+     "nameCn": "考布莱恩",
+     "nameEn": "Lord Cobrahn",
+     "npcId": 3669,
+     "itemIds": [
+      6460,
+      6465,
+      10410,
+      252778,
+      253908
+     ]
+    },
+    {
+     "nameCn": "安娜科德拉",
+     "nameEn": "Lady Anacondra",
+     "npcId": 3671,
+     "itemIds": [
+      5404,
+      273088,
+      273098
+     ]
+    },
+    {
+     "nameCn": "克雷什",
+     "nameEn": "Kresh",
+     "npcId": 3653,
+     "itemIds": [
+      6447,
+      13245,
+      273084
+     ]
+    },
+    {
+     "nameCn": "皮萨斯",
+     "nameEn": "Lord Pythas",
+     "npcId": 3670,
+     "itemIds": [
+      6472,
+      6473,
+      253938,
+      273089
+     ]
+    },
+    {
+     "nameCn": "斯卡姆",
+     "nameEn": "Skum",
+     "npcId": 3674,
+     "itemIds": [
+      6448,
+      6449,
+      253944,
+      273137
+     ]
+    },
+    {
+     "nameCn": "瑟芬迪斯",
+     "nameEn": "Lord Serpentis",
+     "npcId": 3673,
+     "itemIds": [
+      5970,
+      6459,
+      6469,
+      10411,
+      273087
+     ]
+    },
+    {
+     "nameCn": "永生者沃尔丹",
+     "nameEn": "Verdan the Everliving",
+     "npcId": 5775,
+     "itemIds": [
+      6629,
+      6630,
+      6631,
+      253938
+     ]
+    },
+    {
+     "nameCn": "吞噬者穆坦努斯",
+     "nameEn": "Mutanus the Devourer",
+     "npcId": 3654,
+     "itemIds": [
+      6461,
+      6463,
+      6627,
+      10441
+     ]
+    },
+    {
+     "nameCn": "变异精灵龙",
+     "nameEn": "Deviate Faerie Dragon",
+     "npcId": 5912,
+     "itemIds": [
+      5243,
+      6632
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": []
+    }
+   ]
+  },
+  {
+   "id": "zulfarrak",
+   "dfSlug": "zul_farrak",
+   "bosses": [
+    {
+     "nameCn": "安图苏尔",
+     "nameEn": "Antu'sul",
+     "npcId": 8156,
+     "itemIds": [
+      9379,
+      9639,
+      9640,
+      9641
+     ]
+    },
+    {
+     "nameCn": "殉教者塞卡",
+     "nameEn": "Theka the Martyr",
+     "npcId": 6696,
+     "itemIds": [
+      10660
+     ]
+    },
+    {
+     "nameCn": "杉达尔·沙掠者",
+     "nameEn": "Sandarr Dunereaver",
+     "npcId": 9291,
+     "itemIds": []
+    },
+    {
+     "nameCn": "巫医祖穆拉恩",
+     "nameEn": "Witch Doctor Zum'rah",
+     "npcId": 6434,
+     "itemIds": [
+      18082,
+      18083
+     ]
+    },
+    {
+     "nameCn": "耐克鲁姆",
+     "nameEn": "Nekrum Gutchewer",
+     "npcId": 6690,
+     "itemIds": [
+      9471
+     ]
+    },
+    {
+     "nameCn": "暗影祭司塞瑟斯",
+     "nameEn": "Shadowpriest Sezz'ziz",
+     "npcId": 6441,
+     "itemIds": [
+      9470,
+      9473,
+      9474,
+      9475
+     ]
+    },
+    {
+     "nameCn": "灰尘怨灵",
+     "nameEn": "Dustwraith",
+     "npcId": 9292,
+     "itemIds": [
+      12471
+     ]
+    },
+    {
+     "nameCn": "沙怒刽子手",
+     "nameEn": "Sandfury Executioner",
+     "npcId": 6440,
+     "itemIds": [
+      8444
+     ]
+    },
+    {
+     "nameCn": "布莱中士",
+     "nameEn": "Sergeant Bly",
+     "npcId": 7604,
+     "itemIds": [
+      8548
+     ]
+    },
+    {
+     "nameCn": "水占师维蕾萨",
+     "nameEn": "Hydromancer Velratha",
+     "npcId": 6685,
+     "itemIds": [
+      9234,
+      10661
+     ]
+    },
+    {
+     "nameCn": "加兹瑞拉",
+     "nameEn": "Gahz'rilla",
+     "npcId": 7271,
+     "itemIds": [
+      9467,
+      9469
+     ]
+    },
+    {
+     "nameCn": "乌克兹·沙顶",
+     "nameEn": "Chief Ukorz Sandscalp",
+     "npcId": 6439,
+     "itemIds": [
+      9476,
+      9477,
+      9478
+     ]
+    },
+    {
+     "nameCn": "泽雷利斯",
+     "nameEn": "Zerillis",
+     "npcId": 9293,
+     "itemIds": [
+      12470
+     ]
+    },
+    {
+     "nameCn": "小怪",
+     "nameEn": "Trash mobs",
+     "npcId": null,
+     "itemIds": [
+      862,
+      2040,
+      6440,
+      9480,
+      9481,
+      9482,
+      9483,
+      9484,
+      9511,
+      9512
+     ]
+    }
+   ]
+  }
+ ]
+}

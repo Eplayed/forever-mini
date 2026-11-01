@@ -7,45 +7,45 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1792976599011",
-  "foreverBuild": "1.60.1.70532",
-  "classicBuild": "1.15.9.70003",
+  "release": "r-1793441728044",
+  "foreverBuild": "1.60.1.70707",
+  "classicBuild": "1.15.9.70576",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-10-26",
+  "scrapedAt": "2026-11-01",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1792976599011/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1792976599011/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1792976599011/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1792976599011/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1792976599011/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1792976599011/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1792976599011/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1793441728044/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1793441728044/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1793441728044/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1793441728044/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793441728044/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793441728044/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793441728044/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70532",
-   "classicBuild": "1.15.9.70003",
-   "navBuild": "1.60.1.70532",
+   "foreverBuild": "1.60.1.70707",
+   "classicBuild": "1.15.9.70576",
+   "navBuild": "1.60.1.70707",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70532",
+    "build": "1.60.1.70707",
     "month": 10,
-    "day": 22
+    "day": 30
    },
    "counts": {
-    "all": 967,
+    "all": 964,
     "changed": 760,
-    "newTalents": 114,
+    "newTalents": 116,
     "changedTalents": 305,
-    "removedTalents": 80,
-    "spells": 421,
-    "spellsChanged": 261
+    "removedTalents": 83,
+    "spells": 416,
+    "spellsChanged": 256
    }
   },
   "maps": [
@@ -4319,15 +4319,15 @@
         "n": "迅击戒指",
         "q": 4,
         "k": "inv_jewelry_ring_07",
-        "l": 30,
+        "l": 10,
         "x": [
-         "装备后绑定",
+         "拾取后绑定",
          "唯一",
          "手指",
-         "+4 耐力",
-         "+2 力量",
-         "装备：使你造成爆击的几率提高0.5%。",
-         "装备：+14 攻击强度。",
+         "+1 耐力",
+         "+1 力量",
+         "装备：使你造成爆击的几率提高0.21%。",
+         "装备：+5 攻击强度。",
          "售价：6金40银30铜"
         ]
        }

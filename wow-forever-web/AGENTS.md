@@ -65,6 +65,10 @@ python3 tools/prepare-hunter-models.py        # 第七包猎人 GLB 坐标校正
 python3 tools/build-bis-3d-jobs.py --check    # 其余套装的 Windows 导出任务清单与当前 bis.json 对拍
 python3 tools/extract-gi-pets.py                 # GI 的 PetData.lua → upstream/gi-pets.json（dcn/den 成句描述一条不取，图标号先拿客户端 listfile 翻成键名）
 python3 tools/merge-pets.py                      # → app/data/pets.json（18 家族 / 22 技能；全部 L1，未回客户端表核）
+python3 tools/extract-df-loot.py [--src <AddOns>] [--show]  # DF 的 Data_DungeonLoot.lua → upstream/df-dungeon-loot.json
+                                                # 首领中英文名 + npcId + 掉落物品 ID；掉率那一列当场丢（红线：掉落不写百分比）
+                                                # **只到快照，不写 dungeons.json**——补站内首领名单要先过站主/wow-pm
+                                                # --src 不给时按 WOW_ADDONS → Mac 的 .scratch/wow → 本机 _cn_beta_ 找；300 行里有 41 行是无 npcId 的伪首领行，按 meta.counts.realBossRows 那一层判数
 python3 tools/openmap-tile-manifest.py           # OpenMap 的层图表 → docs/DATA-openmap-副本层图-*.csv（756 号逐条回读 listfile，任一不 verified 就非 0 退出，不出半成品表）
 python3 tools/build-zone-maps.py --dry-run|--out-dir|--apply   # 客户端 12 片区域瓦片拼成一张，裁到实测的 1002×668；片数不齐或内容盒对不上就跳过不硬拼
 python3 tools/build-changelog.py     # 开发日志 → docs/CHANGELOG-DEV.md（不进网页；网页那份是手写的 app/data/releases.json）

@@ -5,6 +5,7 @@
 #   XR（XR_DungeonGuide 全能助手，社区整理稿）：st、sell（卖价）
 # nEn 按站主 2026-10-14 拍板不取；两份数据都不含描述正文与掉率（XR loot 无概率字段）。
 # 用法：python3 tools/extract-addon-items-detail.py --gi <GearInsight_Forever/Data.lua> --xr <XR_DungeonGuide/Data.lua>
+#       XR v94.7 之后物品表在 XR_DungeonGuide/Data_Items.lua，--xr 给它就行（两个锚点都认）。
 # 产物：app/data/upstream/gi-items-detail.json、app/data/upstream/xr-items-detail.json
 # 幂等：同输入字节一致（键按数字序、缩进固定）。
 import argparse
@@ -18,6 +19,10 @@ from datetime import date
 UP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app', 'data', 'upstream')
 # 2026-10-24 删旧站时这一层就没了，路径一直留在 'src/data' 上没跟着改：
 # 结果这个脚本写不出快照（物品线的刷新等于断在 10-21 那一版）。改指 app/data/upstream。
+
+# XR 物品总表的两个锚点：v94.7 之前是 Data.lua 里的 D.items，之后是 Data_Items.lua 里的 XR_DGDB.items。
+# 顺序不能倒——'D.items = {' 是 'XR_DGDB.items = {' 的子串，先试它会匹配到拆表后那份的尾巴上。
+XR_ANCHORS = ('XR_DGDB.items = {', 'D.items = {')
 
 
 def toc_version(lua_path, addon_name):
@@ -143,8 +148,16 @@ def extract_gi(path):
 
 def extract_xr(path):
     src = open(path, encoding='utf-8').read()
-    a = src.index('D.items = {')
-    b = brace_match(src, a + len('D.items = ') - 1)
+    # XR v94.7 把这张物品总表从 Data.lua 拆进了 Data_Items.lua，锚点名也跟着变了。
+    # 只认旧锚点会在"文件读到了、表没了"时静默抽回 0 件，所以两个都试、都没有就报错退出。
+    for a_prefix in XR_ANCHORS:
+        a = src.find(a_prefix)
+        if a >= 0:
+            break
+    else:
+        sys.exit('XR 物品表锚点没找到（试过 %s）——插件又改了表名或拆分方式，先人工看文件再改这里'
+                 % ' / '.join(XR_ANCHORS))
+    b = brace_match(src, a + len(a_prefix) - 1)
     seg = src[a:b]
     items, st_n, sell_n = {}, 0, 0
     for m in re.finditer(r'\[(\d{4,7})\]=\{', seg):
@@ -162,6 +175,36 @@ def extract_xr(path):
         if rec:
             items[m.group(1)] = rec
     return items, st_n, sell_n
+
+
+def source_ref(path, addon):
+    """快照里记「插件名/文件名」＋安装根目录名，不记绝对路径：
+       插件装在仓库外的另一块盘上，跨盘 relpath 会直接抛 ValueError；
+       绝对路径又会把某台机器的目录写进全线共用的数据基底。"""
+    parent = os.path.basename(os.path.dirname(os.path.abspath(path)))
+    return '%s/%s' % (addon if parent == addon else parent, os.path.basename(path))
+
+
+def install_root(path):
+    """安装根是 AddOns 往上两层那个客户端目录（本机是 _cn_beta_），不是它上面的 Interface。"""
+    parts = os.path.abspath(path).split(os.sep)
+    if 'AddOns' in parts:
+        i = len(parts) - 1 - parts[::-1].index('AddOns')
+        if i >= 2:
+            return parts[i - 2]
+    return 'unknown'
+
+
+def xr_fetched(path):
+    """作者自述的抓取日写在同目录 Data.lua 的 D.fetched 里，拆出去的 Data_Items.lua 自己没带。
+       以前这里手抄 '2026-09-20'：插件重生成一次，快照上那一行就变成写在每条记录上的过期假话。"""
+    sib = os.path.join(os.path.dirname(os.path.abspath(path)), 'Data.lua')
+    if os.path.exists(sib):
+        m = re.search(r'D\.fetched\s*=\s*"([^"]+)"',
+                      io.open(sib, encoding='utf-8', errors='replace').read())
+        if m:
+            return m.group(1)
+    return 'unknown'
 
 
 def dump(p, obj, n):
@@ -185,7 +228,8 @@ def main():
             'meta': {
                 'addon': 'GearInsight_Forever',
                 'addonVersion': toc_version(args.gi, 'GearInsight_Forever'),
-                'sourceFile': os.path.relpath(args.gi),
+                'sourceFile': source_ref(args.gi, 'GearInsight_Forever'),
+                'installRoot': install_root(args.gi),
                 'sourceStamp': src_stamp(args.gi),
                 # 表内自述的采集口径（作者标注的 build / 日期），与本次提取日分开记
                 'selfReported': 'st 抽自 loot 表（作者标 Beta 实测掉落，build 1.60.1.69913）；'
@@ -203,10 +247,11 @@ def main():
             'meta': {
                 'addon': 'XR_DungeonGuide',
                 'addonVersion': toc_version(args.xr, 'XR_DungeonGuide'),
-                'sourceFile': os.path.relpath(args.xr),
+                'sourceFile': source_ref(args.xr, 'XR_DungeonGuide'),
+                'installRoot': install_root(args.xr),
                 'sourceStamp': src_stamp(args.xr),
                 'selfReported': '站点 research/dg-loot 社区整理稿（作者自述实测，不自动升本站 L0）',
-                'fetched': '2026-09-20',
+                'fetched': xr_fetched(args.xr),
                 'extractedAt': date.today().isoformat(),
                 'counts': {'total': len(items), 'st': st_n, 'sell': sell_n},
             },

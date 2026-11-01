@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-30",
+  "generatedAt": "2026-11-01",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -22,13 +22,13 @@
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
-  "changes": 967,
-  "changesTalents": 546,
-  "changesSpells": 421,
-  "changesNew": 114,
+  "changes": 964,
+  "changesTalents": 548,
+  "changesSpells": 416,
+  "changesNew": 116,
   "changesModified": 305,
-  "changesSpellsChanged": 261,
-  "changesRemoved": 81,
+  "changesSpellsChanged": 256,
+  "changesRemoved": 83,
   "classRank": [
    {
     "classId": "hunter",
@@ -41,9 +41,9 @@
    {
     "classId": "druid",
     "official": 118,
-    "datamine": 114,
-    "total": 232,
-    "share": 50.9,
+    "datamine": 113,
+    "total": 231,
+    "share": 51.1,
     "place": 2
    },
    {
@@ -57,9 +57,9 @@
    {
     "classId": "priest",
     "official": 80,
-    "datamine": 108,
-    "total": 188,
-    "share": 42.6,
+    "datamine": 109,
+    "total": 189,
+    "share": 42.3,
     "place": 4
    },
    {
@@ -73,9 +73,9 @@
    {
     "classId": "mage",
     "official": 64,
-    "datamine": 107,
-    "total": 171,
-    "share": 37.4,
+    "datamine": 106,
+    "total": 170,
+    "share": 37.6,
     "place": 6
    },
    {
@@ -97,9 +97,9 @@
    {
     "classId": "paladin",
     "official": 50,
-    "datamine": 110,
-    "total": 160,
-    "share": 31.3,
+    "datamine": 108,
+    "total": 158,
+    "share": 31.6,
     "place": 9
    }
   ],
@@ -127,7 +127,7 @@
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5348,
+  "search": 5345,
   "talentPreview": 466,
   "releases": 83,
   "navNew": [
@@ -177,28 +177,28 @@
    {
     "file": "queue.json",
     "section": "副本排队表",
-    "build": "1.60.1.70658",
-    "checkedAt": "2026-10-28",
+    "build": "1.60.1.70707",
+    "checkedAt": "2026-11-01",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "changes.json",
     "section": "客户端改动",
-    "build": "1.60.1.70658",
-    "checkedAt": "2026-10-29",
+    "build": "1.60.1.70707",
+    "checkedAt": "2026-11-01",
     "classic": "1.15.9.70576",
-    "daysSince": 1,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "world.json",
     "section": "世界（区域与稀有）",
-    "build": "1.60.1.70532",
-    "checkedAt": "2026-10-26",
+    "build": "1.60.1.70707",
+    "checkedAt": "2026-11-01",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 0,
     "stale": null
    },
    {
@@ -207,8 +207,8 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-23",
     "classic": null,
-    "daysSince": 7,
-    "stale": null
+    "daysSince": 9,
+    "stale": "warn"
    },
    {
     "file": "macros.json",
@@ -216,17 +216,8 @@
     "build": null,
     "checkedAt": "2026-10-30",
     "classic": null,
-    "daysSince": 0,
+    "daysSince": 2,
     "stale": null
-   },
-   {
-    "file": "items.json",
-    "section": "物品名录",
-    "build": null,
-    "checkedAt": "2026-10-22",
-    "classic": null,
-    "daysSince": 8,
-    "stale": "warn"
    },
    {
     "file": "pets.json",
@@ -234,16 +225,7 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 2,
-    "stale": null
-   },
-   {
-    "file": "art.json",
-    "section": "素材台账（客户端原画）",
-    "build": null,
-    "checkedAt": "2026-10-28",
-    "classic": null,
-    "daysSince": 2,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -252,15 +234,33 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 4,
     "stale": null
+   },
+   {
+    "file": "art.json",
+    "section": "素材台账（客户端原画）",
+    "build": null,
+    "checkedAt": "2026-10-28",
+    "classic": null,
+    "daysSince": 4,
+    "stale": null
+   },
+   {
+    "file": "items.json",
+    "section": "物品名录",
+    "build": null,
+    "checkedAt": "2026-10-22",
+    "classic": null,
+    "daysSince": 10,
+    "stale": "warn"
    }
   ],
   "stalePolicy": {
    "soft": 7,
    "hard": 14
   },
-  "newestBuild": "1.60.1.70658",
+  "newestBuild": "1.60.1.70707",
   "newestSection": "副本排队表"
  }
 }
