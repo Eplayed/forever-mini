@@ -1,6 +1,6 @@
 {
- "head": "edf32239f9a133c7a28a9f5f9f92999f7f7b5706",
- "fingerprint": "cac40a9cba6189c94f7d2a22b4de01a319df3c3ea01ea2d72f8a9a79d16236de",
+ "head": "ee25881fa78825cbe693edfc3da53908a4826972",
+ "fingerprint": "c6dbacff1b2835d67d65c0524b789fe03a310cb361e204acc0a7fdca68a83c85",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 19565,
-   "mtimeNs": 1793606021950947700
+   "bytes": 22583,
+   "mtimeNs": 1793610231211030400
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 705165,
-   "mtimeNs": 1793606158746131600
+   "bytes": 715585,
+   "mtimeNs": 1793610216830461200
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -165,23 +165,23 @@
   },
   {
    "path": "for-mini/data/forever-class-snapshot.js",
-   "bytes": 11203,
-   "mtimeNs": 1793590646136059400
+   "bytes": 11979,
+   "mtimeNs": 1793610089737276000
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
    "bytes": 21976,
-   "mtimeNs": 1793590646136059400
+   "mtimeNs": 1793610089736274800
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
-   "bytes": 19809,
-   "mtimeNs": 1793590646135056200
+   "bytes": 19665,
+   "mtimeNs": 1793610089736274800
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2154,
-   "mtimeNs": 1793590646135056200
+   "mtimeNs": 1793610089736274800
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -320,38 +320,38 @@
   },
   {
    "path": "for-mini/oss-preview/classes.json",
-   "bytes": 35527,
-   "mtimeNs": 1793590645032714400
+   "bytes": 42498,
+   "mtimeNs": 1793610087976468200
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
    "bytes": 343958,
-   "mtimeNs": 1793590645029713000
+   "mtimeNs": 1793610087973962500
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
-   "bytes": 84633,
-   "mtimeNs": 1793590645028708400
+   "bytes": 84105,
+   "mtimeNs": 1793610087971987700
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1793590645035222300
+   "mtimeNs": 1793610087979470100
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2060,
-   "mtimeNs": 1793590645030712200
+   "mtimeNs": 1793610087974467200
   },
   {
    "path": "for-mini/oss-preview/spells.json",
    "bytes": 450222,
-   "mtimeNs": 1793590645032714400
+   "mtimeNs": 1793610087976468200
   },
   {
    "path": "for-mini/oss-preview/talents.json",
-   "bytes": 430087,
-   "mtimeNs": 1793590645035222300
+   "bytes": 426509,
+   "mtimeNs": 1793610087979470100
   },
   {
    "path": "for-mini/pages/bis/index.js",
@@ -1016,7 +1016,7 @@
   {
    "path": "wow-forever-web/docs/ASSET-GAPS-2026-11-02.md",
    "bytes": 11847,
-   "mtimeNs": 1793604888596318800
+   "mtimeNs": 1793610159703839600
   },
   {
    "path": "wow-forever-web/docs/BOARD-RECON-2026-10-16.md",
@@ -1096,7 +1096,7 @@
   {
    "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-02.md",
    "bytes": 34577,
-   "mtimeNs": 1793604896078321500
+   "mtimeNs": 1793610167275994700
   },
   {
    "path": "wow-forever-web/docs/DATA-BiS-准确性与更新机制-2026-10-28.md",
@@ -1285,13 +1285,18 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-每日体检-2026-11-02.md",
-   "bytes": 6535,
-   "mtimeNs": 1793605452636769600
+   "bytes": 4319,
+   "mtimeNs": 1793609697319064200
   },
   {
    "path": "wow-forever-web/docs/DATA-每日更新-2026-11-02.md",
    "bytes": 23874,
    "mtimeNs": 1793605802845889300
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-种族天赋三源对账-2026-11-02.md",
+   "bytes": 8197,
+   "mtimeNs": 1793610138500831800
   },
   {
    "path": "wow-forever-web/docs/DATA-译名未命中归因-2026-10-28.md",
@@ -2175,8 +2180,8 @@
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-sources.md",
-   "bytes": 125614,
-   "mtimeNs": 1793543782064838700
+   "bytes": 126555,
+   "mtimeNs": 1793610191920180800
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-workflow.md",
@@ -2200,13 +2205,13 @@
   },
   {
    "path": "wow-forever-web/tools/admin/jobs.py",
-   "bytes": 10808,
-   "mtimeNs": 1793587635285009500
+   "bytes": 13424,
+   "mtimeNs": 1793610227685153600
   },
   {
    "path": "wow-forever-web/tools/admin/server.py",
-   "bytes": 10192,
-   "mtimeNs": 1793510776624798200
+   "bytes": 11131,
+   "mtimeNs": 1793609914728486400
   },
   {
    "path": "wow-forever-web/tools/admin/test_admin.py",
@@ -2305,13 +2310,13 @@
   },
   {
    "path": "wow-forever-web/tools/daily-report.py",
-   "bytes": 13043,
-   "mtimeNs": 1793590910668043400
+   "bytes": 14403,
+   "mtimeNs": 1793609673057328800
   },
   {
    "path": "wow-forever-web/tools/daily.sh",
-   "bytes": 6685,
-   "mtimeNs": 1793597157461518500
+   "bytes": 7339,
+   "mtimeNs": 1793609820254849700
   },
   {
    "path": "wow-forever-web/tools/data-recon.py",
@@ -2405,8 +2410,8 @@
   },
   {
    "path": "wow-forever-web/tools/extract-races.py",
-   "bytes": 22298,
-   "mtimeNs": 1793590608508039400
+   "bytes": 28330,
+   "mtimeNs": 1793610049951862200
   },
   {
    "path": "wow-forever-web/tools/extract-xr-boss-model.py",
@@ -2627,6 +2632,11 @@
    "path": "wow-forever-web/tools/publish.py",
    "bytes": 11788,
    "mtimeNs": 1793510776833116200
+  },
+  {
+   "path": "wow-forever-web/tools/reconcile.py",
+   "bytes": 16945,
+   "mtimeNs": 1793609970294468000
   },
   {
    "path": "wow-forever-web/tools/refresh.sh",

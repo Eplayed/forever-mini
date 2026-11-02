@@ -90,6 +90,23 @@ def api_overview():
     return {"files": files, "upstream": ups, "staleDays": STALE_DAYS, "meta": meta}
 
 
+RECON = os.path.join(HERE, "reconcile", "latest.json")
+
+
+def api_reconcile():
+    """线上对账：页面只读这份现成结果，不在 GET 里碰网络（一次对账约两分钟，挂在请求上会像卡死）。
+       没有就照实说"还没有"——把空当"一致"显示是最坏的一种。"""
+    if not os.path.isfile(RECON):
+        return {"available": False,
+                "note": "还没有对账结果。跑一次 bash tools/daily.sh，或点本页的「重新对账」。"}
+    try:
+        with open(RECON, encoding="utf-8") as f:
+            rep = json.load(f)
+    except (OSError, ValueError) as exc:
+        return {"available": False, "note": "上次那份读不了：%s" % str(exc)[:90]}
+    return dict(rep, available=True, ageMinutes=round((time.time() - os.path.getmtime(RECON)) / 60, 1))
+
+
 def api_dungeons():
     d = json.load(open(os.path.join(DATA, "dungeons.json"), encoding="utf-8"))
     rows = []
@@ -172,6 +189,8 @@ class H(SimpleHTTPRequestHandler):
             return self._json(200, api_dungeons())
         if self.path == "/api/catalog":
             return self._json(200, {"topics": catalog(), "gaps": gaps()})
+        if self.path == "/api/reconcile":
+            return self._json(200, api_reconcile())
         if self.path == "/api/review/items":
             result = jobs.review_items()
             return self._json(200, result) if result else self._json(404, {"error": "尚无待审快照"})

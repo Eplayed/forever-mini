@@ -341,6 +341,17 @@ def main():
         return
 
     print("[4/4] 写包与回滚位")
+    # version.json：让"线上现在是哪一版"能一次 GET 问到。
+    # 在这之前只能靠"逐个文件比尺寸/哈希"反推（tools/reconcile.py 就是这么干的，能用但要打三十几次请求，
+    # 而这台机器到 Pages 单请求常抖）。这一份不参与它自己算的那份清单哈希——自己给自己签名没意义。
+    io.open(os.path.join(stage, "version.json"), "w", encoding="utf-8").write(json.dumps(
+        {"kind": "site-version", "package": name, "gitHead": head, "worktreeDirty": bool(dirty),
+         "builtAt": summary["builtAt"], "files": len(files), "bytes": total,
+         "fileManifestSha256": manifest_sha,
+         "dataVersions": (json.load(io.open(os.path.join(ROOT, "app", "data", "scale.json"),
+                                            encoding="utf-8")).get("scale") or {}).get("dataVersions"),
+         "note": "这一份由打包时写出，不参与上面 fileManifestSha256 那份清单的哈希。"
+                 "对账读它：tools/reconcile.py。"}, ensure_ascii=False, indent=1) + "\n")
     io.open(os.path.join(stage, "PACKAGE-MANIFEST.json"), "w", encoding="utf-8").write(
         json.dumps({"package": name, "builtAt": summary["builtAt"],
                     "fileManifestSha256": manifest_sha, "files": files},

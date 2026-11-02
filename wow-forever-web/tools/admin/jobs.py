@@ -2,6 +2,7 @@
 import json
 import os
 import subprocess
+import sys
 import threading
 import time
 import uuid
@@ -163,14 +164,51 @@ def refresh(topic, progress):
             "changedFiles": changed, "logTail": output}
 
 
+def reconcile(progress):
+    """只读对账：比本地 app/data 与线上 Pages 的那份、本地批次与线上指针。
+       这一步不改任何数据、不构建、不发布——它就是把两个清单读回来比一比。
+       要 ~2 分钟（这台机到 Pages 单请求常拖），所以走任务队列让页面轮询，不塞进 GET 里。"""
+    out = os.path.join(os.path.dirname(__file__), "reconcile", "latest.json")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    progress("正在读线上那一份（Pages 与 OSS 指针，约两分钟）")
+    p = subprocess.run([sys.executable, "tools/reconcile.py", "--env", "beta", "--json", out, "--quiet"],
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=400)
+    if p.returncode:
+        raise RuntimeError("对账没跑完（它只读不写，红也不影响数据）：" + ((p.stdout or "") + (p.stderr or ""))[-1200:])
+    with open(out, encoding="utf-8") as f:
+        rep = json.load(f)
+    w, m = rep.get("web") or {}, rep.get("mini") or {}
+    return {"message": "对账完成 %s｜网页线 一致 %s · 不同 %s · 读不到 %s｜小程序线 %s" % (
+        rep.get("generatedAt"), (w.get("summary") or {}).get("一致"), (w.get("summary") or {}).get("不同"),
+        (w.get("summary") or {}).get("读不到"),
+        "本地与线上是同一批" if m.get("sameBatch") else "本地批次 %s ≠ 线上指针 %s" % (
+            (m.get("local") or {}).get("buildId") or "—", (m.get("live") or {}).get("buildId") or "—")),
+        "snapshot": out, "web": w.get("summary"), "mini": {"sameBatch": m.get("sameBatch"),
+                                                           "summary": m.get("summary"),
+                                                           "error": m.get("error")}}
+
+
+def allowed(action, topic=None):
+    """动作白名单的唯一一份判据：None 表示允许，否则是不允许的原因。
+       单测原来直接调 jobs.start("refresh","items") 期望它被拒——我给 items 接上场景之后，
+       那条断言由 400 变 202，**测试当场把一条真刷新链放了出去并留下一笔自动收口提交**（2026-11-02，ee25881）。
+       判据抽出来之后，测它不用再启动任何东西。"""
+    if action not in ("scan-items", "refresh", "reconcile"):
+        return "未知动作"
+    if action == "scan-items" and topic != "items":
+        return "物品公开 API 只支持 items"
+    if action == "refresh" and topic not in {t[0] for t in TOPICS if t[7]}:
+        return "该板块没有白名单刷新命令"
+    return None
+
+
 def start(action, topic=None):
     global active
-    if action != "scan-items" and action != "refresh":
-        return 400, {"error": "未知动作"}
-    if action == "scan-items" and topic != "items":
-        return 400, {"error": "物品公开 API 只支持 items"}
-    if action == "refresh" and topic not in {t[0] for t in TOPICS if t[7]}:
-        return 400, {"error": "该板块没有白名单刷新命令"}
+    if action == "reconcile":
+        topic = None
+    error = allowed(action, topic)
+    if error:
+        return 400, {"error": error}
     with lock:
         if active is not None:
             return 409, {"error": "已有任务运行", "jobId": active}
@@ -185,7 +223,12 @@ def start(action, topic=None):
             with lock:
                 jobs[jid]["progress"] = message
         try:
-            result = scan_items(progress) if action == "scan-items" else refresh(topic, progress)
+            if action == "scan-items":
+                result = scan_items(progress)
+            elif action == "reconcile":
+                result = reconcile(progress)
+            else:
+                result = refresh(topic, progress)
             with lock:
                 jobs[jid].update(state="done", result=result, progress="完成")
         except Exception as exc:

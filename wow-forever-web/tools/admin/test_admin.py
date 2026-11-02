@@ -59,12 +59,21 @@ class AdminTests(unittest.TestCase):
                 self.assertEqual(f.read(), "old review")
 
     def test_action_allowlist(self):
-        self.assertEqual(jobs.start("shell", "anything")[0], 400)
-        self.assertEqual(jobs.start("refresh", "items")[0], 400)
+        """判据走 allowed()：它不启动任何东西。
+           以前这里调 jobs.start(...)，2026-11-02 items 有了自己的场景之后，那条"应当 400"的断言
+           变成 202——测试当场把一条真刷新链放了出去（抓上游、改 app/data、做本地提交）。
+           单测不该有这种副作用。"""
+        self.assertEqual(jobs.allowed("shell", "anything"), "未知动作")
+        self.assertEqual(jobs.allowed("scan-items", "pets"), "物品公开 API 只支持 items")
+        self.assertEqual(jobs.allowed("refresh", "pets"), "该板块没有白名单刷新命令")
+        self.assertIsNone(jobs.allowed("refresh", "items"))      # items 现在有自己的场景了
+        self.assertIsNone(jobs.allowed("refresh", "dungeon-quests"))
+        self.assertIsNone(jobs.allowed("reconcile"))
 
     def test_refresh_refuses_topics_without_a_chain(self):
+        # 用 pets：它至今没有白名单链。拿有链的板块试会把真链跑起来。
         with self.assertRaises(RuntimeError):
-            jobs.refresh("items", lambda _: None)
+            jobs.refresh("pets", lambda _: None)
 
     def test_commit_data_only_touches_data_and_img(self):
         """自动收口必须只提 app/data 与 app/img——别人 staged 的无关文件不能被卷走。"""

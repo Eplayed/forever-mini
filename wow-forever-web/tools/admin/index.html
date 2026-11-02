@@ -192,6 +192,22 @@ header .sub{letter-spacing:0;font-size:13px;color:var(--dim)}
 .topic-side .secondary{color:var(--info);border-color:var(--info)}
 .topic-side .secondary:hover{color:var(--bg);background:var(--info)}
 .topic-side .badge{white-space:nowrap}
+/* 本地 vs 线上：这一屏只回答一句「比线上差多少、要不要更新」。全部现读，页面自己不算数 */
+.recon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:12px}
+.recon-grid .card{padding:10px 12px}
+.recon-grid b{display:block;font:600 19px var(--mono);color:var(--ink)}
+.recon-grid s{display:block;color:var(--dim);font-size:11px;text-decoration:none}
+.recon-grid em{font-style:normal;font-size:11px}
+table.recon{width:100%;border-collapse:collapse;font-size:12px}
+table.recon caption{text-align:left;color:var(--dim);font-size:11px;padding:0 0 6px}
+table.recon th{text-align:left;color:var(--dim);font-weight:400;border-bottom:1px solid var(--line2);padding:5px 8px;white-space:nowrap}
+table.recon td{border-bottom:1px solid var(--line);padding:5px 8px}
+table.recon tr.live-behind td{background:var(--gold-dim)}
+.recon .badge.same{color:var(--ok);border-color:var(--ok)}
+.recon .badge.diff{color:var(--warn);border-color:var(--warn)}
+.recon .badge.live-none{color:var(--info);border-color:var(--info)}
+.recon .badge.unknown{color:var(--dim)}
+.recon-note{color:var(--dim);font-size:11px;margin-top:10px}
 .more{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 .more>summary{cursor:pointer;color:var(--ink);font-size:13px}
 .more>p{margin:8px 0;color:var(--dim);font-size:11px}
@@ -229,6 +245,18 @@ header .sub{letter-spacing:0;font-size:13px;color:var(--dim)}
   </header>
 
   <div class="errbanner" id="errbanner"></div>
+
+  <section id="s-recon" class="recon">
+    <div class="toolbar">
+      <h2><i>01</i>本地 vs 线上 <small>比的是线上那两份清单，不是"我改过什么"</small></h2>
+      <button id="recon-run" type="button" data-action="reconcile">重新对账 ▸</button>
+    </div>
+    <div id="recon-grid" class="recon-grid"><div class="card pad">正在读取上次的对账结果…</div></div>
+    <div id="recon-body"></div>
+    <p class="recon-note">这一屏只读：它不构建、不上传、不发布，也改不了任何数据。
+      要把本地这一版发出去是另一个动作，得你亲手点头（<code>tools/oss-release.js upload</code> 那一层，
+      指针永远最后换）。读不到就写"读不到"——这台机器到 Pages 的连接常抖，读不到不等于一致，也不等于线上坏了。</p>
+  </section>
 
   <section id="s0">
     <div class="toolbar"><h2>核心数据</h2><button id="reload" type="button">刷新状态</button></div>
@@ -322,6 +350,7 @@ async function jget(url) {
 /* ===== 01 数据板块与来源 ===== */
 const CORE = ["items", "world", "dungeons", "changes", "professions", "legacy", "bis"];
 function drawCatalog(data) {
+  CATALOG = data.topics || [];
   const gap = data.gaps.find(g => g.topic === "item-detail");
   $("#r-detail").textContent = gap && gap.value != null ? gap.value : "—";
   $("#r-stale").textContent = data.topics.filter(t => CORE.includes(t.id) && t.age != null && t.age > 14).length;
@@ -362,11 +391,15 @@ async function pollJob(id) {
         const r = d.result || {};
         jobMessage('已拉取待审', '上游 ' + r.remote + ' 条；新增 ' + r.added + '、移除 ' + r.removed + '、字段变动 ' + r.changed + '。尚未合入成品。', false, JSON.stringify(r, null, 2));
         jget('/api/review/items').then(drawReview).catch(e => fail(e.message));
+      } else if (d.action === 'reconcile') {
+        const r = d.result || {};
+        jobMessage('对账读完', r.message || '两份线上清单都读回来了；上面那一屏就是结果。', false, JSON.stringify(r, null, 2));
       } else jobMessage('本地更新完成', (d.result && d.result.message) || '刷新链已通过；请审阅改动文件，尚未发布。', false, JSON.stringify(d.result || {}, null, 2));
       jobBusy = false;
       localStorage.removeItem('adminJobId');
       setButtons();
       jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
+      if (d.action === 'reconcile') jget('/api/reconcile').then(drawRecon).catch(e => fail(e.message));
       return;
     }
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -378,6 +411,22 @@ async function postJob(action, topic) {
   const d = await r.json();
   return {ok: r.ok, status: r.status, d};
 }
+$('#s-recon').addEventListener('click', async e => {
+  const button = e.target.closest('button[data-action="reconcile"]');
+  if (!button || jobBusy) return;
+  if (!confirm('重新对账会现读线上两份清单（Pages 那一份要逐个文件问一次，约两分钟）。\n\n' +
+      '全程只读：不抓上游、不改 app/data、不构建、不发布。现在跑？')) return;
+  jobBusy = true;
+  setButtons();
+  jobMessage('启动中', '正在读线上那一份…（这步慢，页面可以开着不管）', false, '');
+  try {
+    const {ok, status, d} = await postJob('reconcile');
+    if (!ok) throw new Error(d.error || 'HTTP ' + status);
+    localStorage.setItem('adminJobId', d.jobId);
+    pollJob(d.jobId).catch(err => { jobBusy = false; setButtons(); jobMessage('无法读取任务结果', err.message, true, ''); });
+  } catch (err) { jobBusy = false; setButtons(); jobMessage('无法启动', err.message, true, ''); }
+});
+
 $('#s0').addEventListener('click', async e => {
   const button = e.target.closest('button[data-action]');
   if (!button || jobBusy) return;
@@ -487,6 +536,84 @@ function openDrawer(id) {
 function drawerClose() { $("#drawer").classList.remove("open"); }
 document.addEventListener("keydown", e => { if (e.key === "Escape") drawerClose(); });
 
+/* ===== 01 本地 vs 线上 ===== */
+let CATALOG = [];
+function badge(state) {
+  const s = String(state || "读不到");
+  const cls = s === "一致" || s.indexOf("看着一样") === 0 ? "same"
+    : s.indexOf("线上没") === 0 || s.indexOf("本地已撤") === 0 ? "live-none"
+    : s.indexOf("读不到") === 0 ? "unknown" : "diff";
+  return '<span class="badge ' + cls + '">' + esc(s) + '</span>';
+}
+function drawRecon(d) {
+  const grid = $("#recon-grid"), body = $("#recon-body");
+  if (!d || !d.available) {
+    grid.innerHTML = '<div class="card pad"><s>对账</s><b>还没有结果</b>' + esc((d && d.note) || "") + '</div>';
+    body.innerHTML = "";
+    return;
+  }
+  const w = d.web || {}, m = d.mini || {}, ws = w.summary || {}, ms = m.summary || {};
+  const cards = [];
+  const pkg = w.livePackage || {};
+  cards.push('<div class="card pad"><s>线上网页那一份</s><b>' +
+    esc(pkg.package || (w.liveModified || "读不到").replace(/ GMT$/, "")) +
+    '</b><em>' + (pkg.package ? "提交 " + esc(pkg.gitHead || "—") + " · " + esc(pkg.builtAt || "—")
+      : "还没有 version.json，这一版是从数据文件本身读回来的") + '</em></div>');
+  cards.push('<div class="card pad"><s>网页线 · 成品文件</s><b>' + esc(ws["一致"] || 0) + ' / ' + esc(ws["不同"] || 0) +
+    '</b><em>一致 / 不同 · 线上还没有 ' + esc(ws["线上没有"] || 0) + ' · 读不到 ' + esc(ws["读不到"] || 0) + '</em></div>');
+  const lb = (m.local || {}).buildId, rb = (m.live || {}).buildId;
+  cards.push('<div class="card pad"><s>小程序线 · 批次对批次</s><b>' + (m.sameBatch ? "同一批" : "不是同一批") +
+    '</b><em>本地 ' + esc(lb || "—") + '（' + esc((m.local || {}).files || "—") + ' 个文件 · ' +
+    esc((m.local || {}).builtAt || "?") + ' 构建）· 线上 ' + esc(rb || "—") + '（' + esc((m.live || {}).files || "—") + '）</em>' +
+    (m.dataNewerThanBatch ? '<em class="badge candidate">app/data 比这一批新（' + esc(m.newestDataFile || "") +
+      '）· 要发先重跑 build</em>' : "") + '</div>');
+  cards.push('<div class="card pad"><s>这次对账</s><b>' + esc(d.generatedAt || "—") +
+    '</b><em>' + (d.ageMinutes != null ? "距今 " + esc(Math.round(d.ageMinutes)) + " 分钟" : "") +
+    ' · 只读，不发布</em></div>');
+  grid.innerHTML = cards.join("");
+
+  let html = "";
+  const behind = (w.rows || []).filter(r => r.behind);
+  if (behind.length) {
+    html += '<table class="recon"><caption>线上还停在旧核对日的板块（这就是"要不要更新"那一列答案）</caption>' +
+      "<tr><th>板块</th><th>线上核对日</th><th>本地核对日</th><th>线上客户端</th><th>本地客户端</th></tr>";
+    behind.forEach(r => {
+      html += '<tr class="live-behind"><td>' + esc(r.section) + "</td><td>" + esc(r.liveDate || "线上没记") +
+        "</td><td>" + esc(r.localDate || "—") + "</td><td>" + esc(r.liveBuild || "—") +
+        "</td><td>" + esc(r.localBuild || "—") + "</td></tr>";
+    });
+    html += "</table>";
+  } else if ((w.rows || []).length) {
+    html += '<p class="recon-note">逐板块核对日与线上一致。</p>';
+  }
+  const labelOf = f => { const t = CATALOG.filter(x => x.product === f)[0]; return t ? t.label : f; };
+  if ((w.files || []).length) {
+    html += '<table class="recon"><caption>逐个成品文件（先比尺寸，同尺寸才取全文比哈希）</caption>' +
+      "<tr><th>文件</th><th>板块</th><th>线上</th><th>本地</th><th>判定</th></tr>";
+    w.files.slice().sort((a, b) => String(a.state).localeCompare(String(b.state)) || a.file.localeCompare(b.file))
+      .forEach(r => {
+        html += "<tr><td>" + esc(r.file) + "</td><td>" + esc(labelOf(r.file)) + "</td><td>" +
+          esc(r.liveBytes != null ? r.liveBytes : "—") + "</td><td>" + esc(r.localBytes != null ? r.localBytes : "—") +
+          "</td><td>" + badge(r.state) + "</td></tr>";
+      });
+    html += "</table>";
+  }
+  if ((m.rows || []).filter(r => r.state.indexOf("条数变了") === 0).length) {
+    html += '<table class="recon"><caption>小程序那一批里条数真的变了的键（批次里每个文件都嵌着自己的批次号，所以这里比条数与字节，不比哈希）</caption>' +
+      "<tr><th>键</th><th>判定</th></tr>";
+    m.rows.filter(r => r.state.indexOf("条数变了") === 0).forEach(r => {
+      html += "<tr><td>" + esc(r.key) + "</td><td>" + badge(r.state) + "</td></tr>";
+    });
+    html += "</table>";
+  }
+  if (Object.keys(ms).length) {
+    html += '<p class="recon-note">小程序线逐键汇总：' + esc(Object.keys(ms).map(k => k + " " + ms[k]).join(" · ")) + "</p>";
+  }
+  if (m.error) html += '<p class="recon-note">小程序线：' + esc(m.error) + "</p>";
+  if (w.error) html += '<p class="recon-note">网页线：' + esc(w.error) + "</p>";
+  body.innerHTML = html;
+}
+
 /* ===== 03 门禁 ===== */
 const GATES = [
   { id: "status", label: "上游新鲜度", cmd: "python tools/data-status.py", hint: "秒级" },
@@ -536,13 +663,16 @@ async function runGate(id) {
 
 /* ===== 装载 ===== */
 drawGates();
-jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
+// 对账那块要用板块表（文件 → 板块名），所以目录先回来再渲它，不然整列显示成文件名
+const loadRecon = () => jget('/api/reconcile').then(drawRecon).catch(e => fail(e.message));
+jget('/api/catalog').then(d => { drawCatalog(d); loadRecon(); }).catch(e => fail(e.message));
 jget("/api/overview").then(drawOverview).catch(e => fail(e.message));
 jget("/api/dungeons").then(drawDungeons).catch(e => fail(e.message));
 $('#reload').addEventListener('click', () => {
   jget('/api/catalog').then(drawCatalog).catch(e => fail(e.message));
   jget('/api/overview').then(drawOverview).catch(e => fail(e.message));
   jget('/api/review/items').then(drawReview).catch(() => {});
+  loadRecon();
 });
 const previousJob = localStorage.getItem('adminJobId');
 if (previousJob) { jobBusy = true; setButtons(); pollJob(previousJob).catch(e => { jobBusy = false; setButtons(); fail(e.message); }); }

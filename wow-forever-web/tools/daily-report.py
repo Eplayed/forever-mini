@@ -160,6 +160,7 @@ def main():
     ap.add_argument("--steps", required=True)
     ap.add_argument("--probe", required=True)
     ap.add_argument("--stopped", help="链条提前停在这一步，后面根本没跑")
+    ap.add_argument("--reconcile", help="⑥ 对账写出的 JSON；给了就在报告里加第七节，没给就写清楚没跑")
     a = ap.parse_args()
 
     steps = read_steps(a.steps)
@@ -256,7 +257,29 @@ def main():
     else:
         L.append("本轮没探到跑不了的项：Pillow、miniprogram-automator、开发者工具端口、SSH 都在。")
     L.append("")
-    L.append("> 报告由 `tools/daily-report.py` 生成；未发布，线上包号要另看 `NOW.md`。")
+
+    # 本地 vs 线上对账：这一段整个从 reconcile 现拿的结果里长出来，格式也只由 reconcile.markdown 一份负责
+    # （在这儿再排一次表，第二天就会和页面那份对不上）
+    if a.reconcile and os.path.isfile(a.reconcile):
+        try:
+            import reconcile as rc
+            rep = json.load(io.open(a.reconcile, encoding="utf-8"))
+            L.append("## 七、本地 vs 线上对账（差没差，只读现读）")
+            L.extend(rc.markdown(rep, a.day, heading=False))
+            L.append("")
+        except Exception as e:
+            L.append("## 七、本地 vs 线上对账")
+            L.append("")
+            L.append("这一轮没拼出来（%s）——对账本身是只读报告，它坏了不影响上面那些步骤的结论。" % str(e)[:90])
+            L.append("")
+    elif a.reconcile:
+        L.append("## 七、本地 vs 线上对账")
+        L.append("")
+        L.append("这一轮没有对账结果文件（%s 不在）——是 ⑥ 那步没跑到，还是链条提前停了？" % a.reconcile)
+        L.append("没有这一节不等于「线上和本地一样」，只等于这轮没读。")
+        L.append("")
+
+    L.append("> 报告由 `tools/daily-report.py` 生成；未发布，线上包号看第七节那两份现读的清单，不看本文旧行。")
 
     os.makedirs(DOCS, exist_ok=True)
     out = os.path.join(DOCS, "DATA-每日体检-%s.md" % a.day)

@@ -105,8 +105,16 @@ else
   echo "! ⑤ 门禁按要求跳过（--no-gate）；发版前必须补跑 bash tools/refresh.sh check"
 fi
 
-# ⑥ 报告
-step "⑥ 出报告" python3 tools/daily-report.py --day "$DAY" --steps "$STEPS" --probe "$PROBE"
+# ⑥ 本地 vs 线上对账（只读：HEAD 比尺寸、匿名读 OSS 指针，不构建不上传不发布）
+#    放门禁之后、报告之前：报告只读它写出的 JSON，自己不再碰网络（这台机到 Pages 一次要两分钟）。
+#    同一份结果再存一份到工作台读的位置（那个目录 .gitignore 掉了，不进仓库）——
+#    页面打开就该看见今天这一次的答案，而不是等有人去点按钮。
+RECON="$RUNDIR/reconcile.json"
+step "⑥ 对账" python3 tools/reconcile.py --env beta --json "$RECON" --quiet
+[ -s "$RECON" ] && cp -f "$RECON" tools/admin/reconcile/latest.json
+
+# ⑦ 报告
+step "⑦ 出报告" python3 tools/daily-report.py --day "$DAY" --steps "$STEPS" --probe "$PROBE" --reconcile "$RECON"
 
 echo "----------------------------------------------------------------"
 FAILED=$(awk -F'\t' '$2!=0{print $1}' "$STEPS" | tr '\n' ' ')
