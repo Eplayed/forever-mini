@@ -33,6 +33,8 @@ try:
 except ImportError:
     sys.exit("缺少 playwright：pip3 install playwright")
 
+import browser_channel      # 浏览器由 WOW_BROWSER_CHANNEL 决定，默认仍是 chrome（见那个文件的说明）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "app", "dist")      # 被测产物（vite build 的输出）
 DATA = os.path.join(ROOT, "app", "data")     # 数据基底，取路由参数用的真值从这里读
@@ -4414,12 +4416,13 @@ def main():
     given = args.app_base or os.environ.get("APP_BASE") or ""
     APP_BASE, APP_REQUIRED = (given or base), bool(given)
     print("被测：%s（%s）" % (APP_BASE, "--app-base 指定" if given else "本脚本起的静态服务，根目录 " + SRC))
+    print(browser_channel.banner())     # 换过浏览器时这句话必须跟着结果走，不然是拿 Edge 的数冒充 Chrome 的
     try:
         with sync_playwright() as p:
             # 开软件 GL：配装页那层 3D 要在无 GPU 的 headless 里也真渲染出来，
             # 不然那条"两帧对比"永远只能验到降级路径（2026-10-26 第一次跑就是没 WebGL，
             # 组件正常退回静态图，看着像功能坏了）。
-            browser = p.chromium.launch(channel="chrome", headless=True, args=[
+            browser = browser_channel.launch(p, args=[
                 "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"])
             for name, fn in todo:
                 # 传进去的 base 就是 APP_BASE：这一份只有新站一个被测对象，

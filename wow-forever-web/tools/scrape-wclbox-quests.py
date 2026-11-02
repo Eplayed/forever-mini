@@ -23,6 +23,8 @@ import os
 import re
 import sys
 
+import browser_channel      # 浏览器由 WOW_BROWSER_CHANNEL 决定，默认仍是 chrome（代价与理由见那个文件的说明）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
@@ -92,7 +94,7 @@ def collect(slugs):
     from playwright.sync_api import sync_playwright
     found = {}
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(channel="chrome", headless=True)
+        browser = browser_channel.launch(pw)
         page = browser.new_context(viewport={"width": 1440, "height": 1100}).new_page()
         for i, slug in enumerate(slugs):
             url = "%s/fuben/%s" % (BASE, slug)

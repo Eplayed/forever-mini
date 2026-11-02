@@ -1,6 +1,6 @@
 {
- "head": "ee25881fa78825cbe693edfc3da53908a4826972",
- "fingerprint": "c6dbacff1b2835d67d65c0524b789fe03a310cb361e204acc0a7fdca68a83c85",
+ "head": "7e5cd8ca85e67e76e1f787e704b7289e95fefbb7",
+ "fingerprint": "6435f7b75946223489f0768a6c1bcc512ece03b81182cfdcc7312cec09b44475",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -100,13 +100,13 @@
   },
   {
    "path": "AGENTS.md",
-   "bytes": 23185,
-   "mtimeNs": 1793583559417106300
+   "bytes": 23794,
+   "mtimeNs": 1793616512560958400
   },
   {
    "path": "NOW.md",
-   "bytes": 22583,
-   "mtimeNs": 1793610231211030400
+   "bytes": 27504,
+   "mtimeNs": 1793619919282591400
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 715585,
-   "mtimeNs": 1793610216830461200
+   "bytes": 728844,
+   "mtimeNs": 1793619899192827200
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -200,8 +200,8 @@
   },
   {
    "path": "for-mini/docs/VERIFY-BIS配装页逐件底图-2026-11-02.md",
-   "bytes": 14220,
-   "mtimeNs": 1793588845737552500
+   "bytes": 16283,
+   "mtimeNs": 1793614104081102000
   },
   {
    "path": "for-mini/docs/VERIFY-H01-首页与令牌重做-2026-10-21.md",
@@ -297,6 +297,11 @@
    "path": "for-mini/docs/VERIFY-小程序配装页-2026-10-26.md",
    "bytes": 11037,
    "mtimeNs": 1793510770161955300
+  },
+  {
+   "path": "for-mini/docs/VERIFY-撤说明文案与图标核对-2026-11-02.md",
+   "bytes": 10983,
+   "mtimeNs": 1793619825521034300
   },
   {
    "path": "for-mini/docs/VERIFY-职业详情阵营框与分享-2026-10-22.md",
@@ -1016,7 +1021,7 @@
   {
    "path": "wow-forever-web/docs/ASSET-GAPS-2026-11-02.md",
    "bytes": 11847,
-   "mtimeNs": 1793610159703839600
+   "mtimeNs": 1793620006735576400
   },
   {
    "path": "wow-forever-web/docs/BOARD-RECON-2026-10-16.md",
@@ -1095,8 +1100,8 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-02.md",
-   "bytes": 34577,
-   "mtimeNs": 1793610167275994700
+   "bytes": 34561,
+   "mtimeNs": 1793620014828406000
   },
   {
    "path": "wow-forever-web/docs/DATA-BiS-准确性与更新机制-2026-10-28.md",
@@ -1285,13 +1290,13 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-每日体检-2026-11-02.md",
-   "bytes": 4319,
-   "mtimeNs": 1793609697319064200
+   "bytes": 9761,
+   "mtimeNs": 1793620973296005000
   },
   {
    "path": "wow-forever-web/docs/DATA-每日更新-2026-11-02.md",
-   "bytes": 23874,
-   "mtimeNs": 1793605802845889300
+   "bytes": 34480,
+   "mtimeNs": 1793619453352323000
   },
   {
    "path": "wow-forever-web/docs/DATA-种族天赋三源对账-2026-11-02.md",
@@ -2200,13 +2205,13 @@
   },
   {
    "path": "wow-forever-web/tools/admin/catalog.py",
-   "bytes": 10999,
-   "mtimeNs": 1793592792017360900
+   "bytes": 10851,
+   "mtimeNs": 1793617939477183500
   },
   {
    "path": "wow-forever-web/tools/admin/jobs.py",
-   "bytes": 13424,
-   "mtimeNs": 1793610227685153600
+   "bytes": 13422,
+   "mtimeNs": 1793610324186143500
   },
   {
    "path": "wow-forever-web/tools/admin/server.py",
@@ -2215,8 +2220,8 @@
   },
   {
    "path": "wow-forever-web/tools/admin/test_admin.py",
-   "bytes": 7675,
-   "mtimeNs": 1793510776624798200
+   "bytes": 8496,
+   "mtimeNs": 1793610257737006400
   },
   {
    "path": "wow-forever-web/tools/app-assets.py",
@@ -2252,6 +2257,11 @@
    "path": "wow-forever-web/tools/audit-wowhead.py",
    "bytes": 15572,
    "mtimeNs": 1793510776631320800
+  },
+  {
+   "path": "wow-forever-web/tools/browser_channel.py",
+   "bytes": 1932,
+   "mtimeNs": 1793618896402890400
   },
   {
    "path": "wow-forever-web/tools/build-bis-3d-jobs.py",
@@ -2310,13 +2320,13 @@
   },
   {
    "path": "wow-forever-web/tools/daily-report.py",
-   "bytes": 14403,
-   "mtimeNs": 1793609673057328800
+   "bytes": 17298,
+   "mtimeNs": 1793619247158959000
   },
   {
    "path": "wow-forever-web/tools/daily.sh",
-   "bytes": 7339,
-   "mtimeNs": 1793609820254849700
+   "bytes": 7856,
+   "mtimeNs": 1793619111573835900
   },
   {
    "path": "wow-forever-web/tools/data-recon.py",
@@ -2555,8 +2565,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-upstream.js",
-   "bytes": 10877,
-   "mtimeNs": 1793510776821395500
+   "bytes": 10978,
+   "mtimeNs": 1793616798371050900
   },
   {
    "path": "wow-forever-web/tools/merge-world.js",
@@ -2565,13 +2575,13 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 86242,
-   "mtimeNs": 1793605060195616500
+   "bytes": 86671,
+   "mtimeNs": 1793618611259741000
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
-   "bytes": 69919,
-   "mtimeNs": 1793540097501943300
+   "bytes": 70900,
+   "mtimeNs": 1793619769436344400
   },
   {
    "path": "wow-forever-web/tools/nga-daily.sh",
@@ -2635,13 +2645,13 @@
   },
   {
    "path": "wow-forever-web/tools/reconcile.py",
-   "bytes": 16945,
-   "mtimeNs": 1793609970294468000
+   "bytes": 20314,
+   "mtimeNs": 1793611542248289100
   },
   {
    "path": "wow-forever-web/tools/refresh.sh",
-   "bytes": 10486,
-   "mtimeNs": 1793592568496016500
+   "bytes": 11608,
+   "mtimeNs": 1793617879135536500
   },
   {
    "path": "wow-forever-web/tools/register-bis-models.py",
@@ -2655,8 +2665,8 @@
   },
   {
    "path": "wow-forever-web/tools/release-package.py",
-   "bytes": 20506,
-   "mtimeNs": 1793510776834620000
+   "bytes": 21588,
+   "mtimeNs": 1793610825307852100
   },
   {
    "path": "wow-forever-web/tools/render-bis-posters.py",
@@ -2680,8 +2690,8 @@
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-bis.py",
-   "bytes": 9807,
-   "mtimeNs": 1793510776836625900
+   "bytes": 9756,
+   "mtimeNs": 1793619091397441000
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-changes.py",
@@ -2690,8 +2700,8 @@
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-dom.py",
-   "bytes": 10972,
-   "mtimeNs": 1793510776838130300
+   "bytes": 10851,
+   "mtimeNs": 1793619091395939400
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-items-detail.py",
@@ -2715,8 +2725,8 @@
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-quests.py",
-   "bytes": 10001,
-   "mtimeNs": 1793510776842135400
+   "bytes": 9913,
+   "mtimeNs": 1793619091396937300
   },
   {
    "path": "wow-forever-web/tools/scrape-wclbox-shuju.py",
@@ -2745,8 +2755,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 298836,
-   "mtimeNs": 1793604353211873100
+   "bytes": 299072,
+   "mtimeNs": 1793618974858920100
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",

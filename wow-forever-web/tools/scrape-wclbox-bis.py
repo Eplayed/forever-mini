@@ -21,6 +21,8 @@ import json
 import os
 import re
 import sys
+
+import browser_channel      # 浏览器由 WOW_BROWSER_CHANNEL 决定，默认仍是 chrome（代价与理由见那个文件的说明）
 import time
 from datetime import date
 
@@ -108,7 +110,7 @@ JS_CLICK_FACTION = """(name) => {
 def scrape(only):
     out = []
     with sync_playwright() as p:
-        br = p.chromium.launch(channel='chrome', headless=True)
+        br = browser_channel.launch(p)
         pg = br.new_page(viewport={'width': 1440, 'height': 1100})
         for cls, spec in ROUTES:
             if only and cls not in only:

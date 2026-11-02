@@ -18,6 +18,8 @@ import os
 import re
 import sys
 
+import browser_channel      # 浏览器由 WOW_BROWSER_CHANNEL 决定，默认仍是 chrome（代价与理由见那个文件的说明）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UP = os.path.join(ROOT, "app", "data", "upstream")
 BASE = "https://wowforever.wclbox.com"
@@ -220,7 +222,7 @@ def main():
     ap.add_argument("--what", choices=["cards", "talents", "bossfaces", "all"], default="all")
     args = ap.parse_args()
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(channel="chrome", headless=True)
+        browser = browser_channel.launch(pw)
         if args.what in ("cards", "all"):
             cards(browser)
         if args.what in ("talents", "all"):

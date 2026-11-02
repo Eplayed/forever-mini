@@ -61,6 +61,10 @@ step() {
 }
 
 echo "每日数据更新 · $DAY"
+# 界面回归与几个抓取器要真浏览器。默认 Chrome；Chrome 坏了可以用
+#   WOW_BROWSER_CHANNEL=msedge bash tools/daily.sh
+# 临时换 Edge 跑完这一轮——但那份"通过"只代表 Edge，报告里会跟着写清楚，别当 Chrome 的数。
+echo "浏览器：${WOW_BROWSER_CHANNEL:-chrome}（默认 chrome；换的要写进报告）"
 echo "----------------------------------------------------------------"
 
 # ① 探源：必需来源不通就别往下跑。抓取脚本碰上不通的源，有的会拿旧快照继续、

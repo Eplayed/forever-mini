@@ -205,6 +205,16 @@ def main():
         verdict, len(steps), len(fails),
         "；链条停在「%s」，之后的步骤根本没跑" % a.stopped if a.stopped else ""))
     L.append("")
+    # 界面回归是在哪个浏览器上跑的，必须跟着"701/701"这种数字走：换浏览器不是没有代价的
+    # （本机 Chrome 被一次没跑完的自动更新弄坏过，那晚只能用 Edge 142 跑完，见 tools/browser_channel.py）
+    import browser_channel as bc
+    if bc.is_default():
+        L.append("界面回归用的浏览器：**chrome**（默认）。")
+    else:
+        L.append("⚠ 界面回归用的浏览器是 **%s**（`WOW_BROWSER_CHANNEL` 指定的，不是默认的 chrome）——"
+                 "**这一轮的通过只代表 %s**；Chrome 修好后要再跑一次才算 Chrome 的数。"
+                 % (bc.channel(), bc.channel()))
+    L.append("")
 
     L.append("## 一、这次跑了什么")
     L.append("")
