@@ -8,12 +8,12 @@ DATA = os.path.join(ROOT, "app", "data")
 
 # source = actual evidence for the current product, candidate sources stay labelled as candidates.
 TOPICS = (
-    ("items", "物品名录", "items.json", "items", "upstream/wclbox-items-index.json", "现有成品：新手盒子物品 SSR 名录；待审拉取：公开 API", "https://wowforever.wclbox.com/wupin/liebiao/1", None),
+    ("items", "物品名录", "items.json", "items", "upstream/wclbox-items-index.json", "现有成品：新手盒子物品 SSR 名录；待审拉取：公开 API", "https://wowforever.wclbox.com/wupin/liebiao/1", "items"),
     ("item-detail", "物品详情", "items-detail.json", "items", "upstream/wclbox-items-detail.json", "新手盒子 + GI/XR 插件；属性按插件优先", "https://wowforever.wclbox.com/wupin", None),
     ("world", "世界地图与稀有", "world.json", "zones", "upstream/wclbox-world.json", "新手盒子客户端解包转述 + 插件", "https://wowforever.wclbox.com/ditu", "world"),
     ("changes", "客户端改动", "changes.json", "items", "upstream/wclbox-changes.json", "新手盒子客户端解包转述", "https://wowforever.wclbox.com/gaidong", "changes"),
     ("dungeons", "副本与掉落", "dungeons.json", "newDungeons+classicDungeons+raids", "upstream/wclbox-dungeons.json", "新手盒子 + 客户端排队表 + DB2", "https://wowforever.wclbox.com/fuben", "dungeons"),
-    ("dungeon-quests", "副本任务", "dungeon-quests.json", "dungeons", "upstream/wclbox-dungeon-quests.json", "新手盒子 + Wowhead + GI", "https://wowforever.wclbox.com/fuben", None),
+    ("dungeon-quests", "副本任务", "dungeon-quests.json", "dungeons", "upstream/wclbox-dungeon-quests.json", "新手盒子 + Wowhead + GI", "https://wowforever.wclbox.com/fuben", "quests"),
     ("professions", "专业与配方", "professions.json", "professions", "upstream/wclbox-professions.json", "新手盒子 + XR 插件", "https://wowforever.wclbox.com/zhuanye", "prof"),
     ("legacy", "传承", "legacy.json", "perks", "upstream/wclbox-legacy.json", "新手盒子客户端解包转述", "https://wowforever.wclbox.com/chuancheng", "legacy"),
     ("spells", "技能书", "spells.json", "spells", "upstream/wclbox-spells.json", "新手盒子 + GI/XR 插件", "https://wowforever.wclbox.com/jineng", None),

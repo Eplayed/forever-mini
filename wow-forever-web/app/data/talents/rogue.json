@@ -2,7 +2,7 @@
  "classId": "rogue",
  "classNameCn": "潜行者",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -1055,9 +1055,7 @@
       "nieyi"
      ],
      "iconKey": "ability_racial_avatar",
-     "requires": [
-      "rogue-1-劈斩"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1729,7 +1727,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/rogue",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

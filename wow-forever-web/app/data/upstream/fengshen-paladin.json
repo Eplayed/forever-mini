@@ -7,7 +7,7 @@
  "rows": [
   {
    "tree": 0,
-   "name": "神圣之力",
+   "name": "精神集中",
    "max": 5,
    "row": 0,
    "col": 1,
@@ -15,7 +15,7 @@
   },
   {
    "tree": 0,
-   "name": "神圣智慧",
+   "name": "神圣之力",
    "max": 5,
    "row": 0,
    "col": 2,
@@ -31,7 +31,7 @@
   },
   {
    "tree": 0,
-   "name": "精神集中",
+   "name": "敬畏",
    "max": 2,
    "row": 1,
    "col": 1,
@@ -40,14 +40,14 @@
   {
    "tree": 0,
    "name": "强化圣印",
-   "max": 3,
+   "max": 5,
    "row": 1,
    "col": 2,
    "preName": null
   },
   {
    "tree": 0,
-   "name": "不灭信仰",
+   "name": "净化之力",
    "max": 2,
    "row": 1,
    "col": 3,
@@ -55,33 +55,9 @@
   },
   {
    "tree": 0,
-   "name": "真理之音",
+   "name": "神恩术",
    "max": 1,
    "row": 2,
-   "col": 0,
-   "preName": null
-  },
-  {
-   "tree": 0,
-   "name": "敬畏",
-   "max": 3,
-   "row": 2,
-   "col": 1,
-   "preName": null
-  },
-  {
-   "tree": 0,
-   "name": "净化之力",
-   "max": 2,
-   "row": 2,
-   "col": 2,
-   "preName": null
-  },
-  {
-   "tree": 0,
-   "name": "圣光灌注",
-   "max": 2,
-   "row": 3,
    "col": 0,
    "preName": null
   },
@@ -89,13 +65,37 @@
    "tree": 0,
    "name": "启发",
    "max": 5,
-   "row": 3,
+   "row": 2,
    "col": 1,
    "preName": "敬畏"
   },
   {
    "tree": 0,
-   "name": "神恩术",
+   "name": "神圣导能",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "神圣精准",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "圣光灌注",
+   "max": 2,
+   "row": 3,
+   "col": 1,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "圣光誓约",
    "max": 1,
    "row": 3,
    "col": 2,
@@ -103,11 +103,11 @@
   },
   {
    "tree": 0,
-   "name": "神圣精准",
-   "max": 3,
+   "name": "奉献之地",
+   "max": 2,
    "row": 4,
    "col": 0,
-   "preName": "圣光灌注"
+   "preName": null
   },
   {
    "tree": 0,
@@ -119,11 +119,11 @@
   },
   {
    "tree": 0,
-   "name": "奉献之地",
+   "name": "无垠圣光",
    "max": 2,
    "row": 4,
    "col": 2,
-   "preName": null
+   "preName": "神圣震击"
   },
   {
    "tree": 0,
@@ -143,7 +143,7 @@
   },
   {
    "tree": 1,
-   "name": "坚韧",
+   "name": "神圣智慧",
    "max": 5,
    "row": 0,
    "col": 1,
@@ -175,15 +175,15 @@
   },
   {
    "tree": 1,
-   "name": "预知",
-   "max": 5,
+   "name": "神圣职责",
+   "max": 2,
    "row": 1,
    "col": 3,
    "preName": null
   },
   {
    "tree": 1,
-   "name": "强化愤怒圣印",
+   "name": "圣殿骑士壁垒",
    "max": 1,
    "row": 2,
    "col": 0,
@@ -191,7 +191,7 @@
   },
   {
    "tree": 1,
-   "name": "强化正义之怒",
+   "name": "强化制裁之锤",
    "max": 3,
    "row": 2,
    "col": 1,
@@ -200,15 +200,15 @@
   {
    "tree": 1,
    "name": "盾牌专精",
-   "max": 3,
+   "max": 2,
    "row": 2,
    "col": 2,
    "preName": "盾牌壁垒"
   },
   {
    "tree": 1,
-   "name": "神圣职责",
-   "max": 2,
+   "name": "坚韧",
+   "max": 5,
    "row": 2,
    "col": 3,
    "preName": null
@@ -219,11 +219,11 @@
    "max": 1,
    "row": 3,
    "col": 0,
-   "preName": "强化愤怒圣印"
+   "preName": "圣殿骑士壁垒"
   },
   {
    "tree": 1,
-   "name": "单手武器专精",
+   "name": "强化正义之怒",
    "max": 3,
    "row": 3,
    "col": 1,
@@ -231,15 +231,23 @@
   },
   {
    "tree": 1,
-   "name": "强化制裁之锤",
-   "max": 3,
+   "name": "预知",
+   "max": 5,
    "row": 3,
    "col": 2,
    "preName": null
   },
   {
    "tree": 1,
-   "name": "圣殿骑士壁垒",
+   "name": "坚忍",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "神圣之盾",
    "max": 1,
    "row": 4,
    "col": 1,
@@ -256,18 +264,18 @@
   {
    "tree": 1,
    "name": "钢铁信条",
-   "max": 5,
+   "max": 3,
    "row": 5,
    "col": 2,
    "preName": null
   },
   {
    "tree": 1,
-   "name": "神圣之盾",
+   "name": "以盾为誓",
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": "圣殿骑士壁垒"
+   "preName": "神圣之盾"
   },
   {
    "tree": 2,
@@ -295,16 +303,16 @@
   },
   {
    "tree": 2,
-   "name": "神圣导能",
-   "max": 2,
+   "name": "定罪",
+   "max": 3,
    "row": 1,
    "col": 1,
    "preName": null
   },
   {
    "tree": 2,
-   "name": "定罪",
-   "max": 5,
+   "name": "神圣审判",
+   "max": 3,
    "row": 1,
    "col": 2,
    "preName": null
@@ -319,8 +327,8 @@
   },
   {
    "tree": 2,
-   "name": "神圣审判",
-   "max": 3,
+   "name": "不灭信仰",
+   "max": 2,
    "row": 2,
    "col": 1,
    "preName": null
@@ -354,15 +362,31 @@
    "name": "神圣仲裁者",
    "max": 1,
    "row": 3,
-   "col": 2,
+   "col": 1,
    "preName": null
   },
   {
    "tree": 2,
    "name": "双手武器专精",
    "max": 3,
+   "row": 3,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "超度邪恶",
+   "max": 2,
    "row": 4,
    "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 2,
+   "name": "忏悔",
+   "max": 1,
+   "row": 4,
+   "col": 1,
    "preName": null
   },
   {
@@ -370,40 +394,24 @@
    "name": "复仇",
    "max": 3,
    "row": 4,
-   "col": 1,
-   "preName": "神圣审判"
-  },
-  {
-   "tree": 2,
-   "name": "忏悔",
-   "max": 1,
-   "row": 4,
    "col": 2,
-   "preName": null
+   "preName": "命令圣印"
   },
   {
    "tree": 2,
    "name": "光芒勇士",
-   "max": 3,
-   "row": 5,
-   "col": 1,
-   "preName": null
-  },
-  {
-   "tree": 2,
-   "name": "律法之器",
-   "max": 2,
+   "max": 5,
    "row": 5,
    "col": 2,
    "preName": null
   },
   {
    "tree": 2,
-   "name": "圣光扭转",
+   "name": "解封之怒",
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": null
+   "preName": "忏悔"
   }
  ]
 }

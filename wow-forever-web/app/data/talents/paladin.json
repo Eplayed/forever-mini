@@ -2,7 +2,7 @@
  "classId": "paladin",
  "classNameCn": "圣骑士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -28,9 +28,40 @@
    "nameEn": null,
    "nodes": [
     {
-     "id": "paladin-0-神圣之力",
+     "id": "paladin-0-精神集中",
      "tier": 0,
      "column": 1,
+     "maxRanks": 5,
+     "nameCn": "精神集中",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_arcane_blink",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-holy-spiritual-focus",
+     "changeState": "modified"
+    },
+    {
+     "id": "paladin-0-神圣之力",
+     "tier": 0,
+     "column": 2,
      "maxRanks": 5,
      "nameCn": "神圣之力",
      "nameAlt": null,
@@ -56,38 +87,7 @@
       }
      ],
      "upstreamId": "calc-paladin-holy-divine-strength",
-     "changeState": "unchanged"
-    },
-    {
-     "id": "paladin-0-神圣智慧",
-     "tier": 0,
-     "column": 2,
-     "maxRanks": 5,
-     "nameCn": "神圣智慧",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_nature_sleep",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-holy-divine-intellect",
-     "changeState": "unchanged"
+     "changeState": "moved"
     },
     {
      "id": "paladin-0-治疗之光",
@@ -121,134 +121,10 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-0-精神集中",
-     "tier": 1,
-     "column": 1,
-     "maxRanks": 2,
-     "nameCn": "精神集中",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_arcane_blink",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-holy-spiritual-focus",
-     "changeState": "modified"
-    },
-    {
-     "id": "paladin-0-强化圣印",
-     "tier": 1,
-     "column": 2,
-     "maxRanks": 3,
-     "nameCn": "强化圣印",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_thunderbolt",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-holy-improved-seals",
-     "changeState": "modified"
-    },
-    {
-     "id": "paladin-0-不灭信仰",
-     "tier": 1,
-     "column": 3,
-     "maxRanks": 2,
-     "nameCn": "不灭信仰",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_holy_unyieldingfaith",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-holy-unyielding-faith",
-     "changeState": "modified"
-    },
-    {
-     "id": "paladin-0-真理之音",
-     "tier": 2,
-     "column": 0,
-     "maxRanks": 1,
-     "nameCn": "真理之音",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "inv_misc_horn_03",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-holy-voice-of-truth",
-     "changeState": "added"
-    },
-    {
      "id": "paladin-0-敬畏",
-     "tier": 2,
+     "tier": 1,
      "column": 1,
-     "maxRanks": 3,
+     "maxRanks": 2,
      "nameCn": "敬畏",
      "nameAlt": null,
      "nameConflict": false,
@@ -276,9 +152,40 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-0-净化之力",
-     "tier": 2,
+     "id": "paladin-0-强化圣印",
+     "tier": 1,
      "column": 2,
+     "maxRanks": 5,
+     "nameCn": "强化圣印",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_thunderbolt",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-holy-improved-seals",
+     "changeState": "modified"
+    },
+    {
+     "id": "paladin-0-净化之力",
+     "tier": 1,
+     "column": 3,
      "maxRanks": 2,
      "nameCn": "净化之力",
      "nameAlt": null,
@@ -307,11 +214,11 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-0-圣光灌注",
-     "tier": 3,
+     "id": "paladin-0-神恩术",
+     "tier": 2,
      "column": 0,
-     "maxRanks": 2,
-     "nameCn": "圣光灌注",
+     "maxRanks": 1,
+     "nameCn": "神恩术",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -319,7 +226,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_paladin_infusionoflight",
+     "iconKey": "spell_holy_heal",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -334,12 +241,12 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-holy-infusion-of-light",
-     "changeState": "added"
+     "upstreamId": "calc-paladin-holy-divine-favor",
+     "changeState": "moved"
     },
     {
      "id": "paladin-0-启发",
-     "tier": 3,
+     "tier": 2,
      "column": 1,
      "maxRanks": 5,
      "nameCn": "启发",
@@ -371,11 +278,11 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-0-神恩术",
-     "tier": 3,
+     "id": "paladin-0-神圣导能",
+     "tier": 2,
      "column": 2,
-     "maxRanks": 1,
-     "nameCn": "神恩术",
+     "maxRanks": 2,
+     "nameCn": "神圣导能",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -383,7 +290,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_heal",
+     "iconKey": "spell_holy_devineaegis",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -398,14 +305,14 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-holy-divine-favor",
-     "changeState": "moved"
+     "upstreamId": "calc-paladin-holy-holy-conduit",
+     "changeState": "added"
     },
     {
      "id": "paladin-0-神圣精准",
-     "tier": 4,
+     "tier": 3,
      "column": 0,
-     "maxRanks": 3,
+     "maxRanks": 2,
      "nameCn": "神圣精准",
      "nameAlt": null,
      "nameConflict": false,
@@ -415,9 +322,7 @@
       "nieyi"
      ],
      "iconKey": "spell_holy_healingfocus",
-     "requires": [
-      "paladin-0-神圣震击"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -432,6 +337,99 @@
       }
      ],
      "upstreamId": "calc-paladin-holy-divine-precision",
+     "changeState": "added"
+    },
+    {
+     "id": "paladin-0-圣光灌注",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 2,
+     "nameCn": "圣光灌注",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_paladin_infusionoflight",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-holy-infusion-of-light",
+     "changeState": "added"
+    },
+    {
+     "id": "paladin-0-圣光誓约",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "圣光誓约",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_greaterblessingoflight",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-holy-oath-of-light",
+     "changeState": "added"
+    },
+    {
+     "id": "paladin-0-奉献之地",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "奉献之地",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_innerfire",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-holy-consecrated-ground",
      "changeState": "added"
     },
     {
@@ -466,20 +464,22 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-0-奉献之地",
+     "id": "paladin-0-无垠圣光",
      "tier": 4,
      "column": 2,
      "maxRanks": 2,
-     "nameCn": "奉献之地",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameCn": "无垠圣光",
+     "nameAlt": "无尽圣光",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_innerfire",
-     "requires": [],
+     "iconKey": "ability_paladin_sacredcleansing",
+     "requires": [
+      "paladin-0-神圣震击"
+     ],
      "level": "L2",
      "provenance": [
       {
@@ -493,8 +493,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-holy-consecrated-ground",
-     "changeState": "added"
+     "upstreamId": "calc-paladin-holy-boundless-light",
+     "posMismatch": true
     },
     {
      "id": "paladin-0-神圣强化",
@@ -568,11 +568,11 @@
    "nameEn": null,
    "nodes": [
     {
-     "id": "paladin-1-坚韧",
+     "id": "paladin-1-神圣智慧",
      "tier": 0,
      "column": 1,
      "maxRanks": 5,
-     "nameCn": "坚韧",
+     "nameCn": "神圣智慧",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -580,7 +580,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_devotion",
+     "iconKey": "spell_nature_sleep",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -595,7 +595,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-protection-toughness",
+     "upstreamId": "calc-paladin-protection-divine-intellect",
      "changeState": "moved"
     },
     {
@@ -692,134 +692,8 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-1-预知",
-     "tier": 1,
-     "column": 3,
-     "maxRanks": 5,
-     "nameCn": "预知",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_magic_lesserinvisibilty",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-protection-anticipation",
-     "changeState": "modified"
-    },
-    {
-     "id": "paladin-1-强化愤怒圣印",
-     "tier": 2,
-     "column": 0,
-     "maxRanks": 1,
-     "nameCn": "强化愤怒圣印",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_holy_righteousnessaura",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-protection-improved-seal-of-fury",
-     "changeState": "added"
-    },
-    {
-     "id": "paladin-1-强化正义之怒",
-     "tier": 2,
-     "column": 1,
-     "maxRanks": 3,
-     "nameCn": "强化正义之怒",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_holy_sealoffury",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-protection-improved-righteous-fury",
-     "changeState": "modified"
-    },
-    {
-     "id": "paladin-1-盾牌专精",
-     "tier": 2,
-     "column": 2,
-     "maxRanks": 3,
-     "nameCn": "盾牌专精",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "inv_shield_06",
-     "requires": [
-      "paladin-1-盾牌壁垒"
-     ],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-protection-shield-specialization",
-     "changeState": "modified"
-    },
-    {
      "id": "paladin-1-神圣职责",
-     "tier": 2,
+     "tier": 1,
      "column": 3,
      "maxRanks": 2,
      "nameCn": "神圣职责",
@@ -849,11 +723,11 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-1-迅捷审判",
-     "tier": 3,
+     "id": "paladin-1-圣殿骑士壁垒",
+     "tier": 2,
      "column": 0,
      "maxRanks": 1,
-     "nameCn": "迅捷审判",
+     "nameCn": "圣殿骑士壁垒",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -861,40 +735,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_paladin_judgementred",
-     "requires": [
-      "paladin-1-强化愤怒圣印"
-     ],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-protection-swift-judgement",
-     "changeState": "added"
-    },
-    {
-     "id": "paladin-1-单手武器专精",
-     "tier": 3,
-     "column": 1,
-     "maxRanks": 3,
-     "nameCn": "单手武器专精",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "inv_sword_20",
+     "iconKey": "ability_paladin_shieldofthetemplar",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -909,13 +750,13 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-protection-one-handed-weapon-specialization",
-     "changeState": "modified"
+     "upstreamId": "calc-paladin-protection-templar-s-bulwark",
+     "changeState": "added"
     },
     {
      "id": "paladin-1-强化制裁之锤",
-     "tier": 3,
-     "column": 2,
+     "tier": 2,
+     "column": 1,
      "maxRanks": 3,
      "nameCn": "强化制裁之锤",
      "nameAlt": null,
@@ -944,11 +785,11 @@
      "changeState": "moved"
     },
     {
-     "id": "paladin-1-圣殿骑士壁垒",
-     "tier": 4,
-     "column": 1,
-     "maxRanks": 1,
-     "nameCn": "圣殿骑士壁垒",
+     "id": "paladin-1-盾牌专精",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "盾牌专精",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -956,7 +797,40 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_paladin_shieldofthetemplar",
+     "iconKey": "inv_shield_06",
+     "requires": [
+      "paladin-1-盾牌壁垒"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-shield-specialization",
+     "changeState": "modified"
+    },
+    {
+     "id": "paladin-1-坚韧",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "坚韧",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_devotion",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -971,8 +845,165 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-protection-templar-s-bulwark",
+     "upstreamId": "calc-paladin-protection-toughness",
+     "changeState": "moved"
+    },
+    {
+     "id": "paladin-1-迅捷审判",
+     "tier": 3,
+     "column": 0,
+     "maxRanks": 1,
+     "nameCn": "迅捷审判",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_paladin_judgementred",
+     "requires": [
+      "paladin-1-圣殿骑士壁垒"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-swift-judgement",
      "changeState": "added"
+    },
+    {
+     "id": "paladin-1-强化正义之怒",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "强化正义之怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_sealoffury",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-improved-righteous-fury",
+     "changeState": "modified"
+    },
+    {
+     "id": "paladin-1-预知",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "预知",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_magic_lesserinvisibilty",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-anticipation",
+     "changeState": "modified"
+    },
+    {
+     "id": "paladin-1-坚忍",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "坚忍",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_stoicism",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-stoicism",
+     "changeState": "added"
+    },
+    {
+     "id": "paladin-1-神圣之盾",
+     "tier": 4,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "神圣之盾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_blessingofprotection",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-protection-holy-shield",
+     "changeState": "modified"
     },
     {
      "id": "paladin-1-清算",
@@ -1009,7 +1040,7 @@
      "id": "paladin-1-钢铁信条",
      "tier": 5,
      "column": 2,
-     "maxRanks": 5,
+     "maxRanks": 3,
      "nameCn": "钢铁信条",
      "nameAlt": null,
      "nameConflict": false,
@@ -1037,21 +1068,21 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-1-神圣之盾",
+     "id": "paladin-1-以盾为誓",
      "tier": 6,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "神圣之盾",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameCn": "以盾为誓",
+     "nameAlt": "盾誓",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_blessingofprotection",
+     "iconKey": "spell_holy_greaterblessingofsanctuary",
      "requires": [
-      "paladin-1-圣殿骑士壁垒"
+      "paladin-1-神圣之盾"
      ],
      "level": "L2",
      "provenance": [
@@ -1066,8 +1097,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-protection-holy-shield",
-     "changeState": "modified"
+     "upstreamId": "calc-paladin-protection-shieldsworn",
+     "posMismatch": true
     }
    ]
   },
@@ -1170,41 +1201,10 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-2-神圣导能",
-     "tier": 1,
-     "column": 1,
-     "maxRanks": 2,
-     "nameCn": "神圣导能",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_holy_devineaegis",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-retribution-holy-conduit",
-     "changeState": "added"
-    },
-    {
      "id": "paladin-2-定罪",
      "tier": 1,
-     "column": 2,
-     "maxRanks": 5,
+     "column": 1,
+     "maxRanks": 3,
      "nameCn": "定罪",
      "nameAlt": null,
      "nameConflict": false,
@@ -1230,6 +1230,37 @@
      ],
      "upstreamId": "calc-paladin-retribution-conviction",
      "changeState": "modified"
+    },
+    {
+     "id": "paladin-2-神圣审判",
+     "tier": 1,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "神圣审判",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_paladin_judgementblue",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-retribution-sanctified-judgement",
+     "changeState": "added"
     },
     {
      "id": "paladin-2-辩护",
@@ -1263,11 +1294,11 @@
      "changeState": "modified"
     },
     {
-     "id": "paladin-2-神圣审判",
+     "id": "paladin-2-不灭信仰",
      "tier": 2,
      "column": 1,
-     "maxRanks": 3,
-     "nameCn": "神圣审判",
+     "maxRanks": 2,
+     "nameCn": "不灭信仰",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1275,7 +1306,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_paladin_judgementblue",
+     "iconKey": "spell_holy_unyieldingfaith",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1290,8 +1321,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-retribution-sanctified-judgement",
-     "changeState": "added"
+     "upstreamId": "calc-paladin-retribution-unyielding-faith",
+     "changeState": "modified"
     },
     {
      "id": "paladin-2-命令圣印",
@@ -1389,7 +1420,7 @@
     {
      "id": "paladin-2-神圣仲裁者",
      "tier": 3,
-     "column": 2,
+     "column": 1,
      "maxRanks": 1,
      "nameCn": "神圣仲裁者",
      "nameAlt": null,
@@ -1419,8 +1450,8 @@
     },
     {
      "id": "paladin-2-双手武器专精",
-     "tier": 4,
-     "column": 0,
+     "tier": 3,
+     "column": 3,
      "maxRanks": 3,
      "nameCn": "双手武器专精",
      "nameAlt": null,
@@ -1446,25 +1477,23 @@
       }
      ],
      "upstreamId": "calc-paladin-retribution-two-handed-weapon-specialization",
-     "changeState": "unchanged"
+     "changeState": "modified"
     },
     {
-     "id": "paladin-2-复仇",
+     "id": "paladin-2-邪恶超度",
      "tier": 4,
-     "column": 1,
-     "maxRanks": 3,
-     "nameCn": "复仇",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "邪恶超度",
+     "nameAlt": "驱邪",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_racial_avatar",
-     "requires": [
-      "paladin-2-神圣审判"
-     ],
+     "iconKey": "spell_holy_turnundead",
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1478,13 +1507,13 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-retribution-vengeance",
-     "changeState": "modified"
+     "upstreamId": "calc-paladin-retribution-turn-evil",
+     "posMismatch": true
     },
     {
      "id": "paladin-2-忏悔",
      "tier": 4,
-     "column": 2,
+     "column": 1,
      "maxRanks": 1,
      "nameCn": "忏悔",
      "nameAlt": null,
@@ -1513,10 +1542,43 @@
      "changeState": "modified"
     },
     {
+     "id": "paladin-2-复仇",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "复仇",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_racial_avatar",
+     "requires": [
+      "paladin-2-命令圣印"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/paladin.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-paladin-retribution-vengeance",
+     "changeState": "modified"
+    },
+    {
      "id": "paladin-2-光芒勇士",
      "tier": 5,
-     "column": 1,
-     "maxRanks": 3,
+     "column": 2,
+     "maxRanks": 5,
      "nameCn": "光芒勇士",
      "nameAlt": null,
      "nameConflict": false,
@@ -1544,51 +1606,22 @@
      "changeState": "added"
     },
     {
-     "id": "paladin-2-律法之器",
-     "tier": 5,
-     "column": 2,
-     "maxRanks": 2,
-     "nameCn": "律法之器",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_holy_divinepurpose",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/paladin/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/paladin.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-paladin-retribution-instrument-of-law",
-     "changeState": "added"
-    },
-    {
-     "id": "paladin-2-圣光扭转",
+     "id": "paladin-2-解封之怒",
      "tier": 6,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "圣光扭转",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameCn": "解封之怒",
+     "nameAlt": "无封之怒",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_holy_blessedresillience",
-     "requires": [],
+     "requires": [
+      "paladin-2-忏悔"
+     ],
      "level": "L2",
      "provenance": [
       {
@@ -1602,15 +1635,15 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-paladin-retribution-twist-of-light",
-     "changeState": "added"
+     "upstreamId": "calc-paladin-retribution-unsealed-wrath",
+     "posMismatch": true
     }
    ]
   }
  ],
  "stats": {
-  "nodes": 50,
-  "nameConflict": 0,
+  "nodes": 51,
+  "nameConflict": 1,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1619,7 +1652,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/paladin",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

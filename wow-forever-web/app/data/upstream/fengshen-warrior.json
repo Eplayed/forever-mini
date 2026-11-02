@@ -91,7 +91,7 @@
    "max": 2,
    "row": 3,
    "col": 2,
-   "preName": null
+   "preName": "重伤"
   },
   {
    "tree": 0,
@@ -159,7 +159,7 @@
   },
   {
    "tree": 1,
-   "name": "余怒",
+   "name": "余怒未消",
    "max": 5,
    "row": 1,
    "col": 1,
@@ -275,7 +275,7 @@
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": "乱舞"
+   "preName": null
   },
   {
    "tree": 2,
@@ -331,7 +331,7 @@
    "max": 1,
    "row": 2,
    "col": 0,
-   "preName": "预知"
+   "preName": null
   },
   {
    "tree": 2,

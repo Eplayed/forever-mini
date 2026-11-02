@@ -251,7 +251,7 @@ def link_glossary(races):
             it["raceId"] = sorted(owners)[0]
         for p in it["provenance"]:
             if URL in (p.get("url") or ""):
-                p["note"] = u"官方种族公告原文；种族归属由 tools/extract-races.py 按该页 h4 小标题回填"
+                p["note"] = u"官方种族公告原文；种族归属按该页的小标题一条条对回来"
                 p["checkedAt"] = today
         changed += 1
     io.open(path, "w", encoding="utf-8").write(json.dumps(gl, ensure_ascii=False, indent=1) + "\n")
@@ -369,7 +369,7 @@ def main():
                           + (prov(sub["traits"][0]["quote"], LABEL + u"·子族特长原文", today)
                              if sub and sub["traits"] else [])
                           + ([{"type": "fan_db", "url": ICON_SRC,
-                               "note": u"图标文件名 %s 取自资料站（事实性标识符），图片由 tools/fetch-icons.py 从暴雪官方 CDN 取回本地；官方中文公告不含图标" % RACE_ICON.get(race_cn),
+                               "note": u"图标文件名 %s 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标" % RACE_ICON.get(race_cn),
                                "checkedAt": today}] if RACE_ICON.get(race_cn) else
                              [{"type": "site-note",
                                "note": u"天裔是新种族：官方 CDN 与资料站都查不到可用图标键，界面用自绘阵营块，不拿别人的图凑数",

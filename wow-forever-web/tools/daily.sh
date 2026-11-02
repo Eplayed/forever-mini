@@ -13,6 +13,9 @@
 # 六个板块全跳过，报告上会出现一堆"没跑"，那比真实的"哪块坏了"更难判断。
 set -uo pipefail
 cd "$(dirname "$0")/.."
+# 整条链的子进程统一按 UTF-8 输出：这台机器的控制台默认 GBK，任何一步打 ✓ ✗ ⚠ 都会先崩在打印上，
+# 而 daily 只看退出码——于是"我们的编码"会被记成"那一步失败"。第一步就这么被骗过一次。
+export PYTHONIOENCODING=utf-8
 
 QUICK=0
 NOGATE=0
@@ -28,15 +31,26 @@ DAY="$(date +%F)"
 RUNDIR="$(mktemp -d)"
 STEPS="$RUNDIR/steps.tsv"
 PROBE="$RUNDIR/probe.json"
+LOGDIR="$RUNDIR/logs"
+mkdir -p "$LOGDIR"
 : >"$STEPS"
 
-# 记一步：名字、退出码、秒、末两行输出。报告与终端摘要都读这张表。
+# 记一步：名字、退出码、秒、一条能读懂的输出。报告与终端摘要都读这张表。
+# 失败时不再取"末两行"：门禁的末两行往往是收尾汇总（今天就是"这几页没有脚本报错"这种），
+# 拿它当证据等于没证据。改成先把输出里真正写着 ✗/失败/ERROR 的那几行捞出来。
 step() {
   local name="$1"; shift
   local t0=$(date +%s) out rc
   out="$("$@" 2>&1)"; rc=$?
-  local tail_lines
-  tail_lines="$(printf '%s\n' "$out" | grep -v '^[[:space:]]*$' | tail -2 | tr '\n' ' ' | cut -c1-220)"
+  # 全程输出留档：只靠 400 字的摘要行没法判断红的是哪条断言（今天就是靠单跑才看清的）
+  printf '%s\n' "$out" >"$LOGDIR/$(printf '%s' "$name" | tr -d '①②③④⑤⑥⑦⑧⑨⑩ /｜|' ).txt"
+  local tail_lines=""
+  if [ $rc -ne 0 ]; then
+    # 只认"这行自己在说失败"的：行首的 ✗/FAIL、Traceback、以及 build-data 的"校验失败 N 项"。
+    # 不能宽到含 "失败" 就行——site-check 的 PASS 行写着「无脚本报错与失败请求」，捞它会盖住真红的那几条。
+    tail_lines="$(printf '%s\n' "$out" | grep -avE 'PASS' | grep -aE '^ *(✗|FAIL)|^Traceback|校验失败|不可通过' | head -6 | tr '\n' ' ' | cut -c1-400)"
+  fi
+  [ -n "$tail_lines" ] || tail_lines="$(printf '%s\n' "$out" | grep -v '^[[:space:]]*$' | tail -2 | tr '\n' ' ' | cut -c1-220)"
   printf '%s\t%d\t%d\t%s\n' "$name" "$rc" "$(( $(date +%s) - t0 ))" "$tail_lines" >>"$STEPS"
   if [ $rc -eq 0 ]; then
     printf '\033[32m✓\033[0m %-26s %ss\n' "$name" "$(( $(date +%s) - t0 ))"
@@ -55,7 +69,14 @@ step "① 探源" python3 tools/daily-probe.py --json "$PROBE"
 PROBE_OK=$(awk -F'\t' -v n="① 探源" '$1==n && $2==0{c++} END{print c+0}' "$STEPS")
 if [ "$PROBE_OK" = "0" ]; then
   echo "----------------------------------------------------------------"
-  echo "✗ 必需来源不通，停在这里。旧快照还在库里，日期没被改写，可以直接接着看上次结果。"
+  # rc=1 有两种：源真不通（探针写出了 JSON 并标了哪一条不通），和探针自己崩了（没有 JSON）。
+  # 把后者说成"必需来源不通"是假结论——2026-11-02 就是编码崩了却报源不通，白查一轮。
+  if [ -s "$PROBE" ]; then
+    echo "✗ 必需来源不通，停在这里。旧快照还在库里，日期没被改写，可以直接接着看上次结果。"
+  else
+    echo "✗ 探源脚本自己没跑完（没写出 $PROBE），下面这条是它的原话，不要当成源的状态。"
+    awk -F'\t' -v n="① 探源" '$1==n{print "  " $4}' "$STEPS"
+  fi
   python3 tools/daily-report.py --day "$DAY" --steps "$STEPS" --probe "$PROBE" --stopped probe || true
   exit 1
 fi
@@ -65,8 +86,10 @@ step "② 插件层抽取" bash tools/refresh.sh addons
 
 if [ "$QUICK" = "0" ]; then
   # ③ 各板块重抓。每个场景都带 WOW_SKIP_GATE=1：门禁留到 ⑤ 统一跑一次，
-  #    否则 site-check 要跑八遍（单跑约 13 分钟）
-  for s in world changes dungeons prof legacy talents official icons; do
+  #    否则 site-check 要跑十遍（单跑约 13 分钟）
+  #    顺序不是随便排的：quests / items 要排在 ② 之后（merge-dungeon-quests 吃 GI 的任务快照、
+  #    merge-items 吃 GI 的存在性探针）；icons 放最后，让前面新写进去的 iconKey 先进登记表再补图。
+  for s in world changes dungeons prof legacy talents official quests items icons; do
     step "③ 重抓 $s" env WOW_SKIP_GATE=1 bash tools/refresh.sh "$s"
   done
 fi
@@ -89,9 +112,13 @@ echo "----------------------------------------------------------------"
 FAILED=$(awk -F'\t' '$2!=0{print $1}' "$STEPS" | tr '\n' ' ')
 if [ -z "$FAILED" ]; then
   echo "✓ 全链完成。报告：wow-forever-web/docs/DATA-每日体检-$DAY.md"
+  rm -rf "$RUNDIR"
 else
   echo "✗ 有步骤失败：$FAILED"
   echo "  报告里逐条写了哪步红、输出了什么。红着的步骤对应的数据不要当已更新。"
+  # 红的时候不删临时目录：摘要行只有 400 字，真正要看的（哪条断言、哪个 Traceback）在全程输出里。
+  echo "  每一步的完整输出留在这里，红的那步直接读："
+  awk -F'\t' '$2!=0{print "    " $1 " → '"$LOGDIR"'/"}' "$STEPS"
+  echo "    $LOGDIR"
 fi
-rm -rf "$RUNDIR"
 [ -z "$FAILED" ] || exit 1

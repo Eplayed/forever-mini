@@ -23,7 +23,7 @@
   },
   {
    "tree": 0,
-   "name": "元素防护",
+   "name": "元素浩劫",
    "max": 3,
    "row": 1,
    "col": 0,
@@ -39,7 +39,7 @@
   },
   {
    "tree": 0,
-   "name": "烈焰召唤",
+   "name": "元素迅捷",
    "max": 3,
    "row": 1,
    "col": 2,
@@ -47,7 +47,7 @@
   },
   {
    "tree": 0,
-   "name": "元素浩劫",
+   "name": "烈焰召唤",
    "max": 3,
    "row": 1,
    "col": 3,
@@ -58,20 +58,20 @@
    "name": "元素集中",
    "max": 1,
    "row": 2,
+   "col": 0,
+   "preName": null
+  },
+  {
+   "tree": 0,
+   "name": "元素防护",
+   "max": 3,
+   "row": 2,
    "col": 1,
    "preName": null
   },
   {
    "tree": 0,
-   "name": "元素迅捷",
-   "max": 3,
-   "row": 2,
-   "col": 2,
-   "preName": "烈焰召唤"
-  },
-  {
-   "tree": 0,
-   "name": "强化火焰新星",
+   "name": "火焰试炼",
    "max": 2,
    "row": 3,
    "col": 0,
@@ -87,11 +87,11 @@
   },
   {
    "tree": 0,
-   "name": "雷霆召唤",
+   "name": "地缚",
    "max": 1,
    "row": 3,
-   "col": 2,
-   "preName": "元素迅捷"
+   "col": 3,
+   "preName": null
   },
   {
    "tree": 0,
@@ -103,19 +103,19 @@
   },
   {
    "tree": 0,
-   "name": "闪电超载",
-   "max": 3,
+   "name": "熔岩爆裂",
+   "max": 1,
    "row": 4,
    "col": 1,
    "preName": null
   },
   {
    "tree": 0,
-   "name": "地缚",
-   "max": 1,
+   "name": "闪电超载",
+   "max": 3,
    "row": 4,
-   "col": 3,
-   "preName": null
+   "col": 2,
+   "preName": "元素迅捷"
   },
   {
    "tree": 0,
@@ -123,15 +123,15 @@
    "max": 5,
    "row": 5,
    "col": 2,
-   "preName": null
+   "preName": "闪电超载"
   },
   {
    "tree": 0,
-   "name": "熔岩爆裂",
+   "name": "元素掌握",
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": "闪电超载"
+   "preName": "熔岩爆裂"
   },
   {
    "tree": 1,
@@ -287,7 +287,7 @@
   },
   {
    "tree": 2,
-   "name": "图腾集中",
+   "name": "潮汐集中",
    "max": 5,
    "row": 0,
    "col": 2,
@@ -311,7 +311,7 @@
   },
   {
    "tree": 2,
-   "name": "潮汐集中",
+   "name": "图腾集中",
    "max": 5,
    "row": 1,
    "col": 2,

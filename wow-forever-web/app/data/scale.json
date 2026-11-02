@@ -10,11 +10,11 @@
   "dungeonGeoBoss": 208,
   "dungeonGeoBossPoints": 245,
   "dungeonQuestDungeons": 30,
-  "profVendors": 647,
+  "profVendors": 646,
   "profDrops": 336,
   "professions": 13,
-  "recipes": 1990,
-  "recipesNew": 889,
+  "recipes": 1986,
+  "recipesNew": 885,
   "gatherNodes": 55,
   "zones": 44,
   "newZones": 4,
@@ -40,10 +40,10 @@
    },
    {
     "classId": "druid",
-    "official": 118,
-    "datamine": 113,
+    "official": 119,
+    "datamine": 112,
     "total": 231,
-    "share": 51.1,
+    "share": 51.5,
     "place": 2
    },
    {
@@ -56,26 +56,26 @@
    },
    {
     "classId": "priest",
-    "official": 80,
-    "datamine": 109,
-    "total": 189,
-    "share": 42.3,
+    "official": 78,
+    "datamine": 110,
+    "total": 188,
+    "share": 41.5,
     "place": 4
    },
    {
     "classId": "warlock",
-    "official": 72,
-    "datamine": 113,
+    "official": 73,
+    "datamine": 112,
     "total": 185,
-    "share": 38.9,
+    "share": 39.5,
     "place": 5
    },
    {
     "classId": "mage",
     "official": 64,
-    "datamine": 106,
-    "total": 170,
-    "share": 37.6,
+    "datamine": 105,
+    "total": 169,
+    "share": 37.9,
     "place": 6
    },
    {
@@ -96,10 +96,10 @@
    },
    {
     "classId": "paladin",
-    "official": 50,
-    "datamine": 108,
-    "total": 158,
-    "share": 31.6,
+    "official": 47,
+    "datamine": 112,
+    "total": 159,
+    "share": 29.6,
     "place": 9
    }
   ],
@@ -110,13 +110,13 @@
    "challenges": 66,
    "rewards": 4,
    "cap": 16,
-   "total": 81
+   "total": 65
   },
-  "items": 21296,
+  "items": 21459,
   "itemsSrvAbsent": 796,
-  "itemsSrvPresent": 1005,
-  "itemsSrvConflict": 61,
-  "itemsNew": 5565,
+  "itemsSrvPresent": 802,
+  "itemsSrvConflict": 66,
+  "itemsNew": 5632,
   "spells": 498,
   "achievements": 211,
   "pets": 18,
@@ -127,17 +127,17 @@
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5395,
-  "talentPreview": 466,
+  "search": 5391,
+  "talentPreview": 465,
   "releases": 83,
   "navNew": [
    "宏命令"
   ],
   "glossary": 215,
   "classes": 9,
-  "talentNodes": 466,
+  "talentNodes": 465,
   "talentTreeConflict": 3,
-  "talentVerified": 462,
+  "talentVerified": 459,
   "dungeons": 38,
   "dungeonsNew": 9,
   "bosses": 278,
@@ -161,11 +161,11 @@
   "abilities": 86,
   "coverage": {
    "L0": 367,
-   "L1": 436,
-   "L2": 356,
+   "L1": 432,
+   "L2": 359,
    "L3": 2
   },
-  "coverageTotal": 1161,
+  "coverageTotal": 1160,
   "pubCoverage": {
    "L0": 367,
    "L1": 325,
@@ -175,40 +175,40 @@
   "pubTotal": 695,
   "dataVersions": [
    {
+    "file": "legacy.json",
+    "section": "传承",
+    "build": "1.60.1.70707",
+    "checkedAt": "2026-11-02",
+    "classic": null,
+    "daysSince": 0,
+    "stale": null
+   },
+   {
     "file": "queue.json",
     "section": "副本排队表",
     "build": "1.60.1.70707",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-02",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "changes.json",
     "section": "客户端改动",
     "build": "1.60.1.70707",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-02",
     "classic": "1.15.9.70576",
-    "daysSince": 1,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "world.json",
     "section": "世界（区域与稀有）",
     "build": "1.60.1.70707",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-02",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 0,
     "stale": null
-   },
-   {
-    "file": "legacy.json",
-    "section": "传承",
-    "build": "1.60.1.70532",
-    "checkedAt": "2026-10-23",
-    "classic": null,
-    "daysSince": 10,
-    "stale": "warn"
    },
    {
     "file": "macros.json",
@@ -241,19 +241,19 @@
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
-    "checkedAt": "2026-10-28",
+    "checkedAt": "2026-11-02",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "items.json",
     "section": "物品名录",
     "build": null,
-    "checkedAt": "2026-10-22",
+    "checkedAt": "2026-11-02",
     "classic": null,
-    "daysSince": 11,
-    "stale": "warn"
+    "daysSince": 0,
+    "stale": null
    }
   ],
   "stalePolicy": {
@@ -261,6 +261,6 @@
    "hard": 14
   },
   "newestBuild": "1.60.1.70707",
-  "newestSection": "副本排队表"
+  "newestSection": "传承"
  }
 }

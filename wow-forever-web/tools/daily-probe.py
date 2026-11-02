@@ -26,6 +26,14 @@ import sys
 import time
 import urllib.parse
 
+# 标准输出先钉成 UTF-8。这台机器的控制台/管道默认按 GBK 编，而报告里有 ✓ ✗ ⚠ 这类 GBK 没有的字符：
+# 2026-11-02 完整跑时 print("✓") 抛 UnicodeEncodeError，daily 把"打印失败"记成"必需来源不通"，
+# 整条链在第一步就停了——源其实是通的，坏的是我们自己的编码。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # (名字, URL, 谁在用, 是否必需)
@@ -128,16 +136,28 @@ def main():
     print("数据源连通性 · %s" % time.strftime("%Y-%m-%d %H:%M"))
     print("-" * 66)
     for name, url, who, required in SOURCES:
-        try:
-            code, secs, size = hit(url)
-        except Exception as e:
-            code, secs, size = "000", "0", repr(e)[:40]
-        state, lvl = classify(code)
+        code, secs, tries = "000", "0", 0
+        # 必需源重试一次：2026-11-02 官方图标 CDN 在完整跑里报"不通"把链停住了，
+        # 单独再探 3.5 秒就通——一个源抖动不该让今天所有板块都不更新。
+        # 可选源不重试：它们只是"有没有更好来源"的信号，不是拦路石。
+        for attempt in range(2 if required else 1):
+            tries = attempt + 1
+            try:
+                code, secs, size = hit(url)
+            except Exception as e:
+                code, secs, size = "000", "0", repr(e)[:40]
+            state, lvl = classify(code)
+            if lvl != "bad":
+                break
+            time.sleep(2)
         ok = lvl is None
         mark = "✗" if lvl == "bad" else ("!" if lvl == "warn" else "✓")
-        print("%s %-22s %-6s %5ss  %s" % (mark, name, state, round(float(secs), 1), "必需" if required else "可选"))
+        extra = "（重试 %d 次才通）" % tries if tries > 1 and lvl is None else ""
+        print("%s %-22s %-6s %5ss  %s%s" % (mark, name, state, round(float(secs), 1),
+                                            "必需" if required else "可选", extra))
         rows.append({"kind": "source", "name": name, "code": code, "seconds": round(float(secs), 2),
-                     "state": state, "ok": ok, "required": required, "used_by": who})
+                     "state": state, "ok": ok, "required": required, "used_by": who,
+                     "tries": tries})
         if required and lvl == "bad":
             bad_required.append(name)
 

@@ -8,7 +8,7 @@
    "col": 0,
    "icon": "spell_holy_searinglight",
    "preId": null,
-   "nid": "t0_0"
+   "nid": "power_in_light"
   },
   {
    "tree": 0,
@@ -18,7 +18,7 @@
    "col": 1,
    "icon": "inv_wand_01",
    "preId": null,
-   "nid": "t0_1"
+   "nid": "wand_specialization"
   },
   {
    "tree": 0,
@@ -28,7 +28,7 @@
    "col": 2,
    "icon": "spell_holy_sealofvengeance",
    "preId": null,
-   "nid": "t0_2"
+   "nid": "twin_disciplines"
   },
   {
    "tree": 0,
@@ -38,7 +38,7 @@
    "col": 0,
    "icon": "spell_nature_manaregentotem",
    "preId": null,
-   "nid": "t0_3"
+   "nid": "silent_resolve"
   },
   {
    "tree": 0,
@@ -48,17 +48,17 @@
    "col": 1,
    "icon": "spell_holy_divineillumination",
    "preId": null,
-   "nid": "t0_4"
+   "nid": "holy_precision"
   },
   {
    "tree": 0,
-   "name": "强化真言术：盾",
-   "max": 3,
+   "name": "心灵之力",
+   "max": 5,
    "row": 1,
    "col": 2,
-   "icon": "spell_holy_powerwordshield",
+   "icon": "spell_nature_enchantarmor",
    "preId": null,
-   "nid": "t0_5"
+   "nid": "mental_strength"
   },
   {
    "tree": 0,
@@ -68,7 +68,7 @@
    "col": 3,
    "icon": "spell_nature_tranquility",
    "preId": null,
-   "nid": "t0_6"
+   "nid": "martyrdom"
   },
   {
    "tree": 0,
@@ -78,7 +78,7 @@
    "col": 0,
    "icon": "ability_hibernation",
    "preId": null,
-   "nid": "t0_7"
+   "nid": "mental_agility"
   },
   {
    "tree": 0,
@@ -88,7 +88,17 @@
    "col": 1,
    "icon": "spell_frost_windwalkon",
    "preId": null,
-   "nid": "t0_8"
+   "nid": "inner_focus"
+  },
+  {
+   "tree": 0,
+   "name": "强化真言术：盾",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_holy_powerwordshield",
+   "preId": null,
+   "nid": "improved_power_word_shield"
   },
   {
    "tree": 0,
@@ -98,7 +108,7 @@
    "col": 3,
    "icon": "spell_nature_sleep",
    "preId": null,
-   "nid": "t0_9"
+   "nid": "meditation"
   },
   {
    "tree": 0,
@@ -108,17 +118,17 @@
    "col": 0,
    "icon": "spell_holy_innerfire",
    "preId": null,
-   "nid": "t0_10"
+   "nid": "improved_inner_fire"
   },
   {
    "tree": 0,
-   "name": "心灵之力",
-   "max": 5,
+   "name": "强化法力燃烧",
+   "max": 2,
    "row": 3,
    "col": 1,
-   "icon": "spell_nature_enchantarmor",
+   "icon": "spell_shadow_manaburn",
    "preId": null,
-   "nid": "t0_11"
+   "nid": "improved_mana_burn"
   },
   {
    "tree": 0,
@@ -127,18 +137,8 @@
    "row": 3,
    "col": 2,
    "icon": "spell_holy_pureofheart",
-   "preId": "t0_5",
-   "nid": "t0_12"
-  },
-  {
-   "tree": 0,
-   "name": "强化法力燃烧",
-   "max": 2,
-   "row": 3,
-   "col": 3,
-   "icon": "spell_shadow_manaburn",
    "preId": null,
-   "nid": "t0_13"
+   "nid": "soul_warding"
   },
   {
    "tree": 0,
@@ -148,7 +148,7 @@
    "col": 1,
    "icon": "spell_holy_penance",
    "preId": null,
-   "nid": "t0_14"
+   "nid": "penance"
   },
   {
    "tree": 0,
@@ -157,8 +157,8 @@
    "row": 4,
    "col": 2,
    "icon": "spell_holy_holyprotection",
-   "preId": "t0_12",
-   "nid": "t0_15"
+   "preId": null,
+   "nid": "renewed_hope"
   },
   {
    "tree": 0,
@@ -168,7 +168,7 @@
    "col": 2,
    "icon": "spell_holy_devineaegis",
    "preId": null,
-   "nid": "t0_16"
+   "nid": "divine_aegis"
   },
   {
    "tree": 0,
@@ -177,8 +177,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_holy_powerinfusion",
-   "preId": "t0_14",
-   "nid": "t0_17"
+   "preId": null,
+   "nid": "power_infusion"
   },
   {
    "tree": 1,
@@ -188,7 +188,7 @@
    "col": 0,
    "icon": "spell_holy_healingfocus",
    "preId": null,
-   "nid": "t1_0"
+   "nid": "twilight_focus"
   },
   {
    "tree": 1,
@@ -198,7 +198,7 @@
    "col": 1,
    "icon": "spell_holy_renew",
    "preId": null,
-   "nid": "t1_1"
+   "nid": "improved_renew"
   },
   {
    "tree": 1,
@@ -208,7 +208,7 @@
    "col": 2,
    "icon": "spell_holy_sealofsalvation",
    "preId": null,
-   "nid": "t1_2"
+   "nid": "holy_specialization"
   },
   {
    "tree": 1,
@@ -218,7 +218,7 @@
    "col": 1,
    "icon": "spell_holy_spellwarding",
    "preId": null,
-   "nid": "t1_3"
+   "nid": "spell_warding"
   },
   {
    "tree": 1,
@@ -228,7 +228,7 @@
    "col": 2,
    "icon": "spell_holy_sealofwrath",
    "preId": null,
-   "nid": "t1_4"
+   "nid": "divine_fury"
   },
   {
    "tree": 1,
@@ -238,7 +238,7 @@
    "col": 0,
    "icon": "spell_holy_holynova",
    "preId": null,
-   "nid": "t1_5"
+   "nid": "holy_nova"
   },
   {
    "tree": 1,
@@ -248,7 +248,7 @@
    "col": 1,
    "icon": "spell_holy_blessedrecovery",
    "preId": null,
-   "nid": "t1_6"
+   "nid": "blessed_recovery"
   },
   {
    "tree": 1,
@@ -258,7 +258,7 @@
    "col": 3,
    "icon": "spell_holy_layonhands",
    "preId": null,
-   "nid": "t1_7"
+   "nid": "inspiration"
   },
   {
    "tree": 1,
@@ -268,7 +268,7 @@
    "col": 0,
    "icon": "spell_holy_purify",
    "preId": null,
-   "nid": "t1_8"
+   "nid": "holy_reach"
   },
   {
    "tree": 1,
@@ -278,7 +278,7 @@
    "col": 1,
    "icon": "spell_holy_heal02",
    "preId": null,
-   "nid": "t1_9"
+   "nid": "improved_healing"
   },
   {
    "tree": 1,
@@ -287,18 +287,18 @@
    "row": 3,
    "col": 2,
    "icon": "spell_holy_searinglightpriest",
-   "preId": "t1_4",
-   "nid": "t1_10"
+   "preId": null,
+   "nid": "searing_light"
   },
   {
    "tree": 1,
-   "name": "联结治疗",
+   "name": "圣光联结",
    "max": 1,
    "row": 3,
    "col": 3,
    "icon": "spell_holy_blindingheal",
    "preId": null,
-   "nid": "t1_11"
+   "nid": "holy_binding"
   },
   {
    "tree": 1,
@@ -308,7 +308,7 @@
    "col": 0,
    "icon": "inv_scroll_07",
    "preId": null,
-   "nid": "t1_12"
+   "nid": "litany_of_light"
   },
   {
    "tree": 1,
@@ -318,7 +318,7 @@
    "col": 1,
    "icon": "inv_enchant_essenceeternallarge",
    "preId": null,
-   "nid": "t1_13"
+   "nid": "spirit_of_redemption"
   },
   {
    "tree": 1,
@@ -328,7 +328,7 @@
    "col": 2,
    "icon": "spell_holy_spiritualguidence",
    "preId": null,
-   "nid": "t1_14"
+   "nid": "spiritual_guidance"
   },
   {
    "tree": 1,
@@ -338,7 +338,7 @@
    "col": 2,
    "icon": "spell_nature_moonglow",
    "preId": null,
-   "nid": "t1_15"
+   "nid": "spiritual_healing"
   },
   {
    "tree": 1,
@@ -347,8 +347,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_holy_prayerofmendingtga",
-   "preId": "t1_13",
-   "nid": "t1_16"
+   "preId": null,
+   "nid": "prayer_of_mending"
   },
   {
    "tree": 2,
@@ -358,7 +358,7 @@
    "col": 0,
    "icon": "spell_shadow_burningspirit",
    "preId": null,
-   "nid": "t2_0"
+   "nid": "shadow_focus"
   },
   {
    "tree": 2,
@@ -368,7 +368,7 @@
    "col": 1,
    "icon": "spell_shadow_gathershadows",
    "preId": null,
-   "nid": "t2_1"
+   "nid": "blackout"
   },
   {
    "tree": 2,
@@ -378,17 +378,17 @@
    "col": 2,
    "icon": "spell_shadow_requiem",
    "preId": null,
-   "nid": "t2_2"
+   "nid": "spirit_tap"
   },
   {
    "tree": 2,
-   "name": "暗影亲和",
-   "max": 3,
+   "name": "强化心灵震爆",
+   "max": 5,
    "row": 1,
    "col": 0,
-   "icon": "spell_shadow_shadowward",
+   "icon": "spell_shadow_unholyfrenzy",
    "preId": null,
-   "nid": "t2_3"
+   "nid": "improved_mind_blast"
   },
   {
    "tree": 2,
@@ -398,7 +398,7 @@
    "col": 2,
    "icon": "spell_shadow_shadowwordpain",
    "preId": null,
-   "nid": "t2_4"
+   "nid": "improved_shadow_word_pain"
   },
   {
    "tree": 2,
@@ -408,17 +408,7 @@
    "col": 3,
    "icon": "spell_shadow_chilltouch",
    "preId": null,
-   "nid": "t2_5"
-  },
-  {
-   "tree": 2,
-   "name": "强化心灵震爆",
-   "max": 5,
-   "row": 2,
-   "col": 0,
-   "icon": "spell_shadow_unholyfrenzy",
-   "preId": null,
-   "nid": "t2_6"
+   "nid": "shadow_reach"
   },
   {
    "tree": 2,
@@ -427,8 +417,8 @@
    "row": 2,
    "col": 1,
    "icon": "spell_shadow_psychicscream",
-   "preId": "t2_1",
-   "nid": "t2_7"
+   "preId": null,
+   "nid": "improved_psychic_scream"
   },
   {
    "tree": 2,
@@ -438,7 +428,7 @@
    "col": 2,
    "icon": "spell_shadow_siphonmana",
    "preId": null,
-   "nid": "t2_8"
+   "nid": "mind_flay"
   },
   {
    "tree": 2,
@@ -447,18 +437,18 @@
    "row": 2,
    "col": 3,
    "icon": "spell_shadow_soulleech_2",
-   "preId": "t2_8",
-   "nid": "t2_9"
+   "preId": null,
+   "nid": "improved_mind_flay"
   },
   {
    "tree": 2,
-   "name": "强化渐隐术",
-   "max": 2,
+   "name": "黑暗启发",
+   "max": 5,
    "row": 3,
    "col": 0,
-   "icon": "spell_magic_lesserinvisibilty",
+   "icon": "spell_warlock_demonsoul",
    "preId": null,
-   "nid": "t2_10"
+   "nid": "dark_inspiration"
   },
   {
    "tree": 2,
@@ -468,7 +458,7 @@
    "col": 1,
    "icon": "spell_shadow_unsummonbuilding",
    "preId": null,
-   "nid": "t2_11"
+   "nid": "vampiric_embrace"
   },
   {
    "tree": 2,
@@ -478,7 +468,7 @@
    "col": 2,
    "icon": "spell_shadow_blackplague",
    "preId": null,
-   "nid": "t2_12"
+   "nid": "shadow_weaving"
   },
   {
    "tree": 2,
@@ -488,7 +478,7 @@
    "col": 0,
    "icon": "spell_shadow_impphaseshift",
    "preId": null,
-   "nid": "t2_13"
+   "nid": "silence"
   },
   {
    "tree": 2,
@@ -498,7 +488,7 @@
    "col": 2,
    "icon": "spell_shadow_devouringplague",
    "preId": null,
-   "nid": "t2_14"
+   "nid": "devouring_contagion"
   },
   {
    "tree": 2,
@@ -508,7 +498,7 @@
    "col": 0,
    "icon": "spell_shadow_demonicfortitude",
    "preId": null,
-   "nid": "t2_15"
+   "nid": "early_demise"
   },
   {
    "tree": 2,
@@ -518,7 +508,7 @@
    "col": 2,
    "icon": "spell_shadow_twilight",
    "preId": null,
-   "nid": "t2_16"
+   "nid": "darkness"
   },
   {
    "tree": 2,
@@ -527,8 +517,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_shadow_shadowform",
-   "preId": "t2_11",
-   "nid": "t2_17"
+   "preId": null,
+   "nid": "shadowform"
   }
  ]
 }

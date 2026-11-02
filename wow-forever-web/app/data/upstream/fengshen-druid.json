@@ -143,7 +143,7 @@
   },
   {
    "tree": 1,
-   "name": "野性之心",
+   "name": "激怒",
    "max": 5,
    "row": 0,
    "col": 2,
@@ -215,15 +215,15 @@
   },
   {
    "tree": 1,
-   "name": "变形之力",
-   "max": 1,
+   "name": "猛兽攻击",
+   "max": 3,
    "row": 3,
    "col": 0,
-   "preName": "撕碎攻击"
+   "preName": null
   },
   {
    "tree": 1,
-   "name": "原始撕咬",
+   "name": "割伤",
    "max": 1,
    "row": 3,
    "col": 1,
@@ -231,8 +231,8 @@
   },
   {
    "tree": 1,
-   "name": "猛兽攻击",
-   "max": 3,
+   "name": "掠食自律",
+   "max": 1,
    "row": 3,
    "col": 2,
    "preName": null
@@ -247,14 +247,6 @@
   },
   {
    "tree": 1,
-   "name": "强化变形之力",
-   "max": 2,
-   "row": 4,
-   "col": 0,
-   "preName": "变形之力"
-  },
-  {
-   "tree": 1,
    "name": "兽群领袖",
    "max": 1,
    "row": 4,
@@ -263,7 +255,7 @@
   },
   {
    "tree": 1,
-   "name": "掠食本能",
+   "name": "自然本能",
    "max": 2,
    "row": 4,
    "col": 3,
@@ -271,27 +263,35 @@
   },
   {
    "tree": 1,
-   "name": "自然反射",
-   "max": 5,
-   "row": 5,
-   "col": 0,
-   "preName": null
-  },
-  {
-   "tree": 1,
    "name": "狂乱撕扯",
    "max": 5,
    "row": 5,
-   "col": 2,
+   "col": 0,
    "preName": "猛兽攻击"
   },
   {
    "tree": 1,
-   "name": "狂暴",
+   "name": "自然反射",
+   "max": 5,
+   "row": 5,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
+   "name": "原始撕咬",
    "max": 1,
    "row": 6,
    "col": 1,
    "preName": "兽群领袖"
+  },
+  {
+   "tree": 1,
+   "name": "变形之力",
+   "max": 1,
+   "row": 6,
+   "col": 2,
+   "preName": "掠食自律"
   },
   {
    "tree": 2,
@@ -303,7 +303,7 @@
   },
   {
    "tree": 2,
-   "name": "激怒",
+   "name": "野性之心",
    "max": 5,
    "row": 0,
    "col": 2,
@@ -319,7 +319,7 @@
   },
   {
    "tree": 2,
-   "name": "微妙",
+   "name": "反射",
    "max": 3,
    "row": 1,
    "col": 1,
@@ -335,7 +335,7 @@
   },
   {
    "tree": 2,
-   "name": "反射",
+   "name": "微妙",
    "max": 3,
    "row": 2,
    "col": 1,
@@ -351,7 +351,7 @@
   },
   {
    "tree": 2,
-   "name": "大地母亲的恩赐",
+   "name": "绽放",
    "max": 1,
    "row": 2,
    "col": 3,

@@ -8,27 +8,27 @@
    "col": 0,
    "icon": "inv_wand_01",
    "preId": null,
-   "nid": "t0_0"
-  },
-  {
-   "tree": 0,
-   "name": "奥术集中",
-   "max": 5,
-   "row": 0,
-   "col": 1,
-   "icon": "spell_holy_devotion",
-   "preId": null,
-   "nid": "t0_1"
+   "nid": "wand_specialization"
   },
   {
    "tree": 0,
    "name": "强化引导",
    "max": 5,
    "row": 0,
-   "col": 2,
+   "col": 1,
    "icon": "spell_nature_starfall",
    "preId": null,
-   "nid": "t0_2"
+   "nid": "improved_channeling"
+  },
+  {
+   "tree": 0,
+   "name": "奥术充沛",
+   "max": 3,
+   "row": 0,
+   "col": 2,
+   "icon": "spell_arcane_arcaneresilience",
+   "preId": null,
+   "nid": "arcane_resilience"
   },
   {
    "tree": 0,
@@ -38,7 +38,7 @@
    "col": 0,
    "icon": "spell_holy_dispelmagic",
    "preId": null,
-   "nid": "t0_3"
+   "nid": "arcane_subtlety"
   },
   {
    "tree": 0,
@@ -48,7 +48,7 @@
    "col": 1,
    "icon": "spell_nature_astralrecalgroup",
    "preId": null,
-   "nid": "t0_4"
+   "nid": "magic_absorption"
   },
   {
    "tree": 0,
@@ -58,17 +58,17 @@
    "col": 2,
    "icon": "spell_shadow_manaburn",
    "preId": null,
-   "nid": "t0_5"
+   "nid": "arcane_concentration"
   },
   {
    "tree": 0,
-   "name": "奥术充沛",
+   "name": "飞弹连射",
    "max": 2,
    "row": 1,
    "col": 3,
-   "icon": "spell_arcane_arcaneresilience",
+   "icon": "ability_mage_missilebarrage",
    "preId": null,
-   "nid": "t0_6"
+   "nid": "missile_barrage"
   },
   {
    "tree": 0,
@@ -78,7 +78,7 @@
    "col": 0,
    "icon": "inv_ability_mage_radiantspark",
    "preId": null,
-   "nid": "t0_7"
+   "nid": "arcane_geometry"
   },
   {
    "tree": 0,
@@ -88,7 +88,7 @@
    "col": 1,
    "icon": "spell_nature_wispsplode",
    "preId": null,
-   "nid": "t0_8"
+   "nid": "arcane_impact"
   },
   {
    "tree": 0,
@@ -98,7 +98,7 @@
    "col": 3,
    "icon": "spell_arcane_blast",
    "preId": null,
-   "nid": "t0_9"
+   "nid": "arcane_blast"
   },
   {
    "tree": 0,
@@ -108,7 +108,7 @@
    "col": 0,
    "icon": "spell_shadow_detectlesserinvisibility",
    "preId": null,
-   "nid": "t0_10"
+   "nid": "arcane_shielding"
   },
   {
    "tree": 0,
@@ -118,7 +118,7 @@
    "col": 1,
    "icon": "spell_frost_iceshock",
    "preId": null,
-   "nid": "t0_11"
+   "nid": "improved_counterspell"
   },
   {
    "tree": 0,
@@ -127,18 +127,18 @@
    "row": 3,
    "col": 2,
    "icon": "spell_shadow_siphonmana",
-   "preId": "t0_5",
-   "nid": "t0_12"
+   "preId": null,
+   "nid": "arcane_meditation"
   },
   {
    "tree": 0,
-   "name": "飞弹连射",
+   "name": "奥术愤怒",
    "max": 1,
    "row": 3,
    "col": 3,
-   "icon": "ability_mage_missilebarrage",
+   "icon": "ability_mage_netherwindpresence",
    "preId": null,
-   "nid": "t0_13"
+   "nid": "arcane_wrath"
   },
   {
    "tree": 0,
@@ -148,7 +148,7 @@
    "col": 1,
    "icon": "spell_nature_enchantarmor",
    "preId": null,
-   "nid": "t0_14"
+   "nid": "presence_of_mind"
   },
   {
    "tree": 0,
@@ -158,7 +158,7 @@
    "col": 2,
    "icon": "spell_shadow_charm",
    "preId": null,
-   "nid": "t0_15"
+   "nid": "arcane_mind"
   },
   {
    "tree": 0,
@@ -168,7 +168,7 @@
    "col": 2,
    "icon": "spell_shadow_teleport",
    "preId": null,
-   "nid": "t0_16"
+   "nid": "arcane_instability"
   },
   {
    "tree": 0,
@@ -177,38 +177,28 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_lightning",
-   "preId": "t0_14",
-   "nid": "t0_17"
-  },
-  {
-   "tree": 1,
-   "name": "火焰余波",
-   "max": 2,
-   "row": 0,
-   "col": 0,
-   "icon": "spell_fire_lavaspawn",
    "preId": null,
-   "nid": "t1_0"
+   "nid": "arcane_power"
   },
   {
    "tree": 1,
    "name": "烧尽",
-   "max": 3,
+   "max": 5,
    "row": 0,
    "col": 1,
    "icon": "spell_fire_flameshock",
    "preId": null,
-   "nid": "t1_1"
+   "nid": "incineration"
   },
   {
    "tree": 1,
-   "name": "强化火球术",
+   "name": "助燃",
    "max": 5,
    "row": 0,
    "col": 2,
    "icon": "spell_fire_flamebolt",
    "preId": null,
-   "nid": "t1_2"
+   "nid": "improved_fireball"
   },
   {
    "tree": 1,
@@ -218,7 +208,7 @@
    "col": 0,
    "icon": "spell_fire_incinerate",
    "preId": null,
-   "nid": "t1_3"
+   "nid": "ignite"
   },
   {
    "tree": 1,
@@ -228,7 +218,7 @@
    "col": 1,
    "icon": "spell_fire_flare",
    "preId": null,
-   "nid": "t1_4"
+   "nid": "flame_throwing"
   },
   {
    "tree": 1,
@@ -238,7 +228,7 @@
    "col": 2,
    "icon": "spell_fire_meteorstorm",
    "preId": null,
-   "nid": "t1_5"
+   "nid": "impact"
   },
   {
    "tree": 1,
@@ -248,7 +238,7 @@
    "col": 0,
    "icon": "spell_fire_fire",
    "preId": null,
-   "nid": "t1_6"
+   "nid": "burning_soul"
   },
   {
    "tree": 1,
@@ -258,7 +248,7 @@
    "col": 1,
    "icon": "spell_fire_selfdestruct",
    "preId": null,
-   "nid": "t1_7"
+   "nid": "improved_flamestrike"
   },
   {
    "tree": 1,
@@ -268,7 +258,17 @@
    "col": 2,
    "icon": "spell_fire_fireball02",
    "preId": null,
-   "nid": "t1_8"
+   "nid": "pyroblast"
+  },
+  {
+   "tree": 1,
+   "name": "强化火焰冲击",
+   "max": 2,
+   "row": 2,
+   "col": 3,
+   "icon": "spell_fire_lavaspawn",
+   "preId": null,
+   "nid": "wake_of_fire"
   },
   {
    "tree": 1,
@@ -278,7 +278,7 @@
    "col": 0,
    "icon": "spell_fire_windsofwoe",
    "preId": null,
-   "nid": "t1_9"
+   "nid": "improved_scorch"
   },
   {
    "tree": 1,
@@ -288,17 +288,17 @@
    "col": 1,
    "icon": "spell_fire_firearmor",
    "preId": null,
-   "nid": "t1_10"
+   "nid": "improved_fire_ward"
   },
   {
    "tree": 1,
-   "name": "法术连击",
+   "name": "热力迸发",
    "max": 1,
    "row": 3,
    "col": 2,
    "icon": "spell_fire_firebolt",
-   "preId": "t1_8",
-   "nid": "t1_11"
+   "preId": null,
+   "nid": "hot_streak"
   },
   {
    "tree": 1,
@@ -308,7 +308,7 @@
    "col": 3,
    "icon": "spell_fire_masterofelements",
    "preId": null,
-   "nid": "t1_12"
+   "nid": "master_of_elements"
   },
   {
    "tree": 1,
@@ -318,7 +318,7 @@
    "col": 1,
    "icon": "spell_nature_wispheal",
    "preId": null,
-   "nid": "t1_13"
+   "nid": "critical_mass"
   },
   {
    "tree": 1,
@@ -328,17 +328,17 @@
    "col": 2,
    "icon": "spell_holy_excorcism_02",
    "preId": null,
-   "nid": "t1_14"
+   "nid": "blast_wave"
   },
   {
    "tree": 1,
    "name": "火焰强化",
-   "max": 5,
+   "max": 3,
    "row": 5,
    "col": 2,
    "icon": "spell_fire_immolation",
    "preId": null,
-   "nid": "t1_15"
+   "nid": "fire_power"
   },
   {
    "tree": 1,
@@ -347,8 +347,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_fire_sealoffire",
-   "preId": "t1_13",
-   "nid": "t1_16"
+   "preId": null,
+   "nid": "combustion"
   },
   {
    "tree": 2,
@@ -358,7 +358,7 @@
    "col": 0,
    "icon": "spell_frost_frostward",
    "preId": null,
-   "nid": "t2_0"
+   "nid": "frost_warding"
   },
   {
    "tree": 2,
@@ -368,17 +368,17 @@
    "col": 1,
    "icon": "spell_frost_frostbolt02",
    "preId": null,
-   "nid": "t2_1"
+   "nid": "improved_frostbolt"
   },
   {
    "tree": 2,
-   "name": "元素精准",
-   "max": 5,
+   "name": "精准",
+   "max": 3,
    "row": 0,
    "col": 2,
    "icon": "spell_ice_magicdamage",
    "preId": null,
-   "nid": "t2_2"
+   "nid": "elemental_precision"
   },
   {
    "tree": 2,
@@ -388,17 +388,17 @@
    "col": 0,
    "icon": "spell_frost_iceshard",
    "preId": null,
-   "nid": "t2_3"
+   "nid": "ice_shards"
   },
   {
    "tree": 2,
-   "name": "极寒冰霜",
+   "name": "霜寒刺骨",
    "max": 3,
    "row": 1,
    "col": 1,
-   "icon": "spell_frost_wisp",
+   "icon": "spell_frost_frostarmor",
    "preId": null,
-   "nid": "t2_4"
+   "nid": "frostbite"
   },
   {
    "tree": 2,
@@ -408,37 +408,37 @@
    "col": 2,
    "icon": "spell_frost_freezingbreath",
    "preId": null,
-   "nid": "t2_5"
+   "nid": "improved_frost_nova"
   },
   {
    "tree": 2,
-   "name": "霜寒刺骨",
+   "name": "极寒冰霜",
    "max": 3,
    "row": 1,
    "col": 3,
-   "icon": "spell_frost_frostarmor",
+   "icon": "spell_frost_wisp",
    "preId": null,
-   "nid": "t2_6"
-  },
-  {
-   "tree": 2,
-   "name": "刺骨寒冰",
-   "max": 3,
-   "row": 2,
-   "col": 0,
-   "icon": "spell_frost_frostbolt",
-   "preId": null,
-   "nid": "t2_7"
+   "nid": "permafrost"
   },
   {
    "tree": 2,
    "name": "冰霜导能",
    "max": 3,
    "row": 2,
-   "col": 1,
+   "col": 0,
    "icon": "spell_frost_stun",
    "preId": null,
-   "nid": "t2_8"
+   "nid": "frost_channeling"
+  },
+  {
+   "tree": 2,
+   "name": "强化暴风雪",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_frost_icestorm",
+   "preId": null,
+   "nid": "improved_blizzard"
   },
   {
    "tree": 2,
@@ -448,17 +448,7 @@
    "col": 2,
    "icon": "spell_frost_frostblast",
    "preId": null,
-   "nid": "t2_9"
-  },
-  {
-   "tree": 2,
-   "name": "强化暴风雪",
-   "max": 3,
-   "row": 2,
-   "col": 3,
-   "icon": "spell_frost_icestorm",
-   "preId": null,
-   "nid": "t2_10"
+   "nid": "ice_lance"
   },
   {
    "tree": 2,
@@ -468,7 +458,7 @@
    "col": 0,
    "icon": "spell_shadow_darkritual",
    "preId": null,
-   "nid": "t2_11"
+   "nid": "arctic_reach"
   },
   {
    "tree": 2,
@@ -478,7 +468,7 @@
    "col": 1,
    "icon": "spell_frost_frost",
    "preId": null,
-   "nid": "t2_12"
+   "nid": "ice_block"
   },
   {
    "tree": 2,
@@ -488,7 +478,7 @@
    "col": 3,
    "icon": "spell_frost_frostshock",
    "preId": null,
-   "nid": "t2_13"
+   "nid": "shatter"
   },
   {
    "tree": 2,
@@ -498,7 +488,7 @@
    "col": 0,
    "icon": "spell_frost_glacier",
    "preId": null,
-   "nid": "t2_14"
+   "nid": "improved_cone_of_cold"
   },
   {
    "tree": 2,
@@ -508,7 +498,7 @@
    "col": 1,
    "icon": "spell_frost_wizardmark",
    "preId": null,
-   "nid": "t2_15"
+   "nid": "cold_snap"
   },
   {
    "tree": 2,
@@ -517,8 +507,8 @@
    "row": 4,
    "col": 2,
    "icon": "ability_mage_wintersgrasp",
-   "preId": "t2_9",
-   "nid": "t2_16"
+   "preId": null,
+   "nid": "fingers_of_frost"
   },
   {
    "tree": 2,
@@ -528,7 +518,7 @@
    "col": 2,
    "icon": "spell_frost_chillingblast",
    "preId": null,
-   "nid": "t2_17"
+   "nid": "winter_s_chill"
   },
   {
    "tree": 2,
@@ -537,8 +527,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_ice_lament",
-   "preId": "t2_15",
-   "nid": "t2_18"
+   "preId": null,
+   "nid": "ice_barrier"
   }
  ]
 }

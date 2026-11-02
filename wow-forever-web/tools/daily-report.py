@@ -18,6 +18,13 @@ import re
 import subprocess
 import sys
 
+# 标准输出钉 UTF-8：这台机器控制台默认 GBK，报告里的 ⚠ 编不出来就会在写完文件之后崩在最后几行 print 上，
+# 看着像"报告失败"，其实报告已经落盘了（2026-11-02 踩过）。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(WEB, "docs")
 

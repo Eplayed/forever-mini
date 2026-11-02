@@ -8,7 +8,7 @@
    "col": 0,
    "icon": "ability_gouge",
    "preId": null,
-   "nid": "t0_0"
+   "nid": "improved_gouge"
   },
   {
    "tree": 0,
@@ -18,7 +18,7 @@
    "col": 1,
    "icon": "ability_fiegndead",
    "preId": null,
-   "nid": "t0_1"
+   "nid": "remorseless_attacks"
   },
   {
    "tree": 0,
@@ -28,7 +28,7 @@
    "col": 2,
    "icon": "ability_racial_bloodrage",
    "preId": null,
-   "nid": "t0_2"
+   "nid": "malice"
   },
   {
    "tree": 0,
@@ -38,7 +38,7 @@
    "col": 0,
    "icon": "ability_druid_disembowel",
    "preId": null,
-   "nid": "t0_3"
+   "nid": "ruthlessness"
   },
   {
    "tree": 0,
@@ -48,7 +48,7 @@
    "col": 1,
    "icon": "spell_shadow_deathscream",
    "preId": null,
-   "nid": "t0_4"
+   "nid": "murder"
   },
   {
    "tree": 0,
@@ -58,7 +58,7 @@
    "col": 3,
    "icon": "ability_rogue_slicedice",
    "preId": null,
-   "nid": "t0_5"
+   "nid": "improved_slice_and_dice"
   },
   {
    "tree": 0,
@@ -68,7 +68,7 @@
    "col": 0,
    "icon": "ability_warrior_decisivestrike",
    "preId": null,
-   "nid": "t0_6"
+   "nid": "relentless_strikes"
   },
   {
    "tree": 0,
@@ -78,7 +78,7 @@
    "col": 1,
    "icon": "ability_warrior_riposte",
    "preId": null,
-   "nid": "t0_7"
+   "nid": "improved_expose_armor"
   },
   {
    "tree": 0,
@@ -87,8 +87,8 @@
    "row": 2,
    "col": 2,
    "icon": "ability_criticalstrike",
-   "preId": "t0_2",
-   "nid": "t0_8"
+   "preId": null,
+   "nid": "lethality"
   },
   {
    "tree": 0,
@@ -98,7 +98,7 @@
    "col": 0,
    "icon": "ability_rogue_feigndeath",
    "preId": null,
-   "nid": "t0_9"
+   "nid": "vile_poisons"
   },
   {
    "tree": 0,
@@ -108,7 +108,7 @@
    "col": 1,
    "icon": "spell_ice_lament",
    "preId": null,
-   "nid": "t0_10"
+   "nid": "cold_blood"
   },
   {
    "tree": 0,
@@ -118,7 +118,7 @@
    "col": 2,
    "icon": "ability_poisons",
    "preId": null,
-   "nid": "t0_11"
+   "nid": "improved_poisons"
   },
   {
    "tree": 0,
@@ -128,7 +128,7 @@
    "col": 0,
    "icon": "spell_nature_earthbindtotem",
    "preId": null,
-   "nid": "t0_12"
+   "nid": "vigor"
   },
   {
    "tree": 0,
@@ -138,7 +138,7 @@
    "col": 1,
    "icon": "ability_rogue_deadlybrew",
    "preId": null,
-   "nid": "t0_13"
+   "nid": "mutilate"
   },
   {
    "tree": 0,
@@ -148,7 +148,7 @@
    "col": 2,
    "icon": "ability_rogue_kidneyshot",
    "preId": null,
-   "nid": "t0_14"
+   "nid": "improved_kidney_shot"
   },
   {
    "tree": 0,
@@ -158,7 +158,7 @@
    "col": 2,
    "icon": "spell_shadow_chilltouch",
    "preId": null,
-   "nid": "t0_15"
+   "nid": "seal_fate"
   },
   {
    "tree": 0,
@@ -167,8 +167,8 @@
    "row": 6,
    "col": 1,
    "icon": "inv_sword_31",
-   "preId": "t0_13",
-   "nid": "t0_16"
+   "preId": null,
+   "nid": "venom"
   },
   {
    "tree": 1,
@@ -178,7 +178,7 @@
    "col": 0,
    "icon": "ability_rogue_eviscerate",
    "preId": null,
-   "nid": "t1_0"
+   "nid": "improved_eviscerate"
   },
   {
    "tree": 1,
@@ -188,7 +188,7 @@
    "col": 1,
    "icon": "spell_shadow_ritualofsacrifice",
    "preId": null,
-   "nid": "t1_1"
+   "nid": "improved_sinister_strike"
   },
   {
    "tree": 1,
@@ -198,7 +198,7 @@
    "col": 2,
    "icon": "spell_nature_invisibilty",
    "preId": null,
-   "nid": "t1_2"
+   "nid": "lightning_reflexes"
   },
   {
    "tree": 1,
@@ -208,7 +208,7 @@
    "col": 0,
    "icon": "ability_backstab",
    "preId": null,
-   "nid": "t1_3"
+   "nid": "puncturing_wounds"
   },
   {
    "tree": 1,
@@ -218,7 +218,7 @@
    "col": 1,
    "icon": "ability_parry",
    "preId": null,
-   "nid": "t1_4"
+   "nid": "deflection"
   },
   {
    "tree": 1,
@@ -228,7 +228,7 @@
    "col": 2,
    "icon": "ability_marksmanship",
    "preId": null,
-   "nid": "t1_5"
+   "nid": "precision"
   },
   {
    "tree": 1,
@@ -238,7 +238,7 @@
    "col": 0,
    "icon": "spell_shadow_shadowward",
    "preId": null,
-   "nid": "t1_6"
+   "nid": "endurance"
   },
   {
    "tree": 1,
@@ -247,8 +247,8 @@
    "row": 2,
    "col": 1,
    "icon": "ability_warrior_challange",
-   "preId": "t1_4",
-   "nid": "t1_7"
+   "preId": null,
+   "nid": "riposte"
   },
   {
    "tree": 1,
@@ -258,7 +258,7 @@
    "col": 3,
    "icon": "ability_rogue_sprint",
    "preId": null,
-   "nid": "t1_8"
+   "nid": "improved_sprint"
   },
   {
    "tree": 1,
@@ -268,7 +268,7 @@
    "col": 0,
    "icon": "ability_kick",
    "preId": null,
-   "nid": "t1_9"
+   "nid": "improved_kick"
   },
   {
    "tree": 1,
@@ -278,7 +278,7 @@
    "col": 1,
    "icon": "inv_sword_35",
    "preId": null,
-   "nid": "t1_10"
+   "nid": "flawless_execution"
   },
   {
    "tree": 1,
@@ -287,8 +287,8 @@
    "row": 3,
    "col": 2,
    "icon": "ability_dualwield",
-   "preId": "t1_5",
-   "nid": "t1_11"
+   "preId": null,
+   "nid": "dual_wield_specialization"
   },
   {
    "tree": 1,
@@ -298,7 +298,7 @@
    "col": 1,
    "icon": "ability_warrior_punishingblow",
    "preId": null,
-   "nid": "t1_12"
+   "nid": "blade_flurry"
   },
   {
    "tree": 1,
@@ -308,7 +308,7 @@
    "col": 2,
    "icon": "inv_sword_27",
    "preId": null,
-   "nid": "t1_13"
+   "nid": "hack_and_slash"
   },
   {
    "tree": 1,
@@ -317,8 +317,8 @@
    "row": 5,
    "col": 1,
    "icon": "spell_holy_blessingofstrength",
-   "preId": "t1_12",
-   "nid": "t1_14"
+   "preId": null,
+   "nid": "weapon_expertise"
   },
   {
    "tree": 1,
@@ -327,8 +327,8 @@
    "row": 5,
    "col": 2,
    "icon": "ability_racial_avatar",
-   "preId": "t1_13",
-   "nid": "t1_15"
+   "preId": null,
+   "nid": "aggression"
   },
   {
    "tree": 1,
@@ -338,7 +338,7 @@
    "col": 1,
    "icon": "spell_shadow_shadowworddominate",
    "preId": null,
-   "nid": "t1_16"
+   "nid": "adrenaline_rush"
   },
   {
    "tree": 2,
@@ -348,7 +348,7 @@
    "col": 0,
    "icon": "ability_stealth",
    "preId": null,
-   "nid": "t2_0"
+   "nid": "camouflage"
   },
   {
    "tree": 2,
@@ -358,7 +358,7 @@
    "col": 1,
    "icon": "spell_shadow_charm",
    "preId": null,
-   "nid": "t2_1"
+   "nid": "master_of_deception"
   },
   {
    "tree": 2,
@@ -368,7 +368,7 @@
    "col": 2,
    "icon": "ability_warrior_warcry",
    "preId": null,
-   "nid": "t2_2"
+   "nid": "opportunity"
   },
   {
    "tree": 2,
@@ -378,7 +378,7 @@
    "col": 0,
    "icon": "spell_nature_mirrorimage",
    "preId": null,
-   "nid": "t2_3"
+   "nid": "setup"
   },
   {
    "tree": 2,
@@ -388,7 +388,7 @@
    "col": 1,
    "icon": "spell_magic_lesserinvisibilty",
    "preId": null,
-   "nid": "t2_4"
+   "nid": "elusiveness"
   },
   {
    "tree": 2,
@@ -398,7 +398,7 @@
    "col": 2,
    "icon": "ability_sap",
    "preId": null,
-   "nid": "t2_5"
+   "nid": "dirty_tricks"
   },
   {
    "tree": 2,
@@ -408,7 +408,7 @@
    "col": 3,
    "icon": "ability_rogue_ambush",
    "preId": null,
-   "nid": "t2_6"
+   "nid": "improved_ambush"
   },
   {
    "tree": 2,
@@ -418,7 +418,7 @@
    "col": 0,
    "icon": "spell_shadow_fumble",
    "preId": null,
-   "nid": "t2_7"
+   "nid": "initiative"
   },
   {
    "tree": 2,
@@ -428,7 +428,7 @@
    "col": 1,
    "icon": "spell_shadow_curse",
    "preId": null,
-   "nid": "t2_8"
+   "nid": "ghostly_strike"
   },
   {
    "tree": 2,
@@ -438,7 +438,7 @@
    "col": 2,
    "icon": "ability_rogue_distract",
    "preId": null,
-   "nid": "t2_9"
+   "nid": "improved_distract"
   },
   {
    "tree": 2,
@@ -448,7 +448,7 @@
    "col": 0,
    "icon": "ability_ambush",
    "preId": null,
-   "nid": "t2_10"
+   "nid": "heightened_senses"
   },
   {
    "tree": 2,
@@ -458,7 +458,7 @@
    "col": 1,
    "icon": "spell_shadow_possession",
    "preId": null,
-   "nid": "t2_11"
+   "nid": "premeditation"
   },
   {
    "tree": 2,
@@ -468,7 +468,7 @@
    "col": 2,
    "icon": "inv_sword_17",
    "preId": null,
-   "nid": "t2_12"
+   "nid": "serrated_blades"
   },
   {
    "tree": 2,
@@ -478,7 +478,7 @@
    "col": 0,
    "icon": "spell_shadow_summonsuccubus",
    "preId": null,
-   "nid": "t2_13"
+   "nid": "dirty_deeds"
   },
   {
    "tree": 2,
@@ -488,7 +488,7 @@
    "col": 1,
    "icon": "spell_shadow_antishadow",
    "preId": null,
-   "nid": "t2_14"
+   "nid": "preparation"
   },
   {
    "tree": 2,
@@ -497,8 +497,8 @@
    "row": 4,
    "col": 2,
    "icon": "spell_shadow_lifedrain",
-   "preId": "t2_12",
-   "nid": "t2_15"
+   "preId": null,
+   "nid": "hemorrhage"
   },
   {
    "tree": 2,
@@ -507,8 +507,8 @@
    "row": 5,
    "col": 0,
    "icon": "ability_rogue_garrote",
-   "preId": "t2_13",
-   "nid": "t2_16"
+   "preId": null,
+   "nid": "quietus"
   },
   {
    "tree": 2,
@@ -518,7 +518,7 @@
    "col": 2,
    "icon": "classicon_rogue",
    "preId": null,
-   "nid": "t2_17"
+   "nid": "cutthroat"
   },
   {
    "tree": 2,
@@ -527,8 +527,8 @@
    "row": 6,
    "col": 1,
    "icon": "ability_rogue_rupture",
-   "preId": "t2_14",
-   "nid": "t2_18"
+   "preId": null,
+   "nid": "thousand_cuts"
   }
  ]
 }

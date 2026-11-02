@@ -31,8 +31,8 @@
   },
   {
    "tree": 0,
-   "name": "邪咒",
-   "max": 5,
+   "name": "无情延伸",
+   "max": 2,
    "row": 1,
    "col": 0,
    "preName": null
@@ -231,7 +231,7 @@
   },
   {
    "tree": 1,
-   "name": "灭杀",
+   "name": "屠戮",
    "max": 2,
    "row": 3,
    "col": 0,
@@ -379,7 +379,7 @@
    "max": 1,
    "row": 3,
    "col": 2,
-   "preName": "暗影灼烧"
+   "preName": null
   },
   {
    "tree": 2,

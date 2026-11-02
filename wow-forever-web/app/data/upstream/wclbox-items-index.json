@@ -2,15 +2,15 @@
  "meta": {
   "source": "wowforever.wclbox.com /wupin/liebiao（名称索引全量名录）",
   "url": "https://wowforever.wclbox.com/wupin/liebiao/1",
-  "fetched": "2026-10-22",
-  "pages": 107,
-  "parsed": 21296,
+  "fetched": "2026-11-02",
+  "pages": 108,
+  "parsed": 21459,
   "stats": {
-   "new": 5565,
-   "changed": 3873,
+   "new": 5632,
+   "changed": 3882,
    "same": 10146,
-   "missing": 1705,
-   "ic-rebuilt": 7
+   "missing": 1696,
+   "ic-rebuilt": 103
   },
   "note": "清单级名录：无描述文案可采（红线天然合规）；详情 tooltip 属二批增量"
  },
@@ -20473,7 +20473,7 @@
    "type": "药剂",
    "ilvl": 20,
    "rlvl": 10,
-   "status": "same"
+   "status": "changed"
   },
   {
    "id": 3384,
@@ -36720,7 +36720,7 @@
    "type": "任务",
    "ilvl": 1,
    "rlvl": null,
-   "status": "same"
+   "status": "changed"
   },
   {
    "id": 5060,
@@ -54573,7 +54573,7 @@
    "type": "垃圾",
    "ilvl": 26,
    "rlvl": null,
-   "status": "missing"
+   "status": "same"
   },
   {
    "id": 7191,
@@ -57510,7 +57510,7 @@
    "type": "任务",
    "ilvl": 1,
    "rlvl": null,
-   "status": "same"
+   "status": "changed"
   },
   {
    "id": 7587,
@@ -58104,7 +58104,7 @@
    "type": "双手 · 双手锤",
    "ilvl": 44,
    "rlvl": 39,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 7724,
@@ -70237,7 +70237,7 @@
    "type": "双手 · 双手斧",
    "ilvl": 40,
    "rlvl": 35,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 9384,
@@ -70556,7 +70556,7 @@
    "type": "双手 · 双手锤",
    "ilvl": 49,
    "rlvl": 44,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 9414,
@@ -80966,14 +80966,14 @@
   },
   {
    "id": 10597,
-   "name": "大法师雷姆托里的徽记",
+   "name": "大法师雷姆托里的头颅",
    "quality": 1,
    "icon": "achievement_character_bloodelf_female.jpg",
    "sub": "普通",
    "type": "任务",
    "ilvl": 1,
    "rlvl": 1,
-   "status": "changed"
+   "status": "same"
   },
   {
    "id": 10598,
@@ -82412,9 +82412,9 @@
    "icon": "inv_sword_34.jpg",
    "sub": "精良",
    "type": "单手 · 匕首",
-   "ilvl": 44,
-   "rlvl": 39,
-   "status": "missing"
+   "ilvl": 43,
+   "rlvl": 38,
+   "status": "changed"
   },
   {
    "id": 10762,
@@ -82445,20 +82445,20 @@
    "icon": "inv_chest_plate12.jpg",
    "sub": "精良",
    "type": "胸部 · 锁甲",
-   "ilvl": 44,
+   "ilvl": 43,
    "rlvl": 39,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 10765,
    "name": "白骨手指",
-   "quality": 2,
+   "quality": 3,
    "icon": "inv_gauntlets_09.jpg",
-   "sub": "优秀",
+   "sub": "精良",
    "type": "手 · 皮甲",
    "ilvl": 43,
    "rlvl": 38,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 10766,
@@ -82491,7 +82491,7 @@
    "type": "腰部 · 锁甲",
    "ilvl": 42,
    "rlvl": 37,
-   "status": "missing"
+   "status": "changed"
   },
   {
    "id": 10769,
@@ -128867,7 +128867,7 @@
    "type": "双手 · 长柄武器",
    "ilvl": 63,
    "rlvl": 58,
-   "status": "missing"
+   "status": "same"
   },
   {
    "id": 17075,
@@ -136440,9 +136440,9 @@
   {
    "id": 18610,
    "name": "锋利弯刀",
-   "quality": 1,
+   "quality": 2,
    "icon": "inv_sword_16.jpg",
-   "sub": "普通",
+   "sub": "优秀",
    "type": "主手 · 单手剑",
    "ilvl": 10,
    "rlvl": 5,
@@ -176236,6 +176236,39 @@
    "status": "new"
   },
   {
+   "id": 249519,
+   "name": "配方： 冰冻山脉之心",
+   "quality": 3,
+   "icon": "inv_misc_note_01.jpg",
+   "sub": "精良",
+   "type": "附魔",
+   "ilvl": 53,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 249520,
+   "name": "配方： 熔火山脉之心",
+   "quality": 3,
+   "icon": "inv_misc_note_01.jpg",
+   "sub": "精良",
+   "type": "附魔",
+   "ilvl": 53,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 249521,
+   "name": "配方： 休眠山脉之心",
+   "quality": 3,
+   "icon": "inv_misc_note_01.jpg",
+   "sub": "精良",
+   "type": "附魔",
+   "ilvl": 53,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
    "id": 249522,
    "name": "公式：强效不灭魔杖",
    "quality": 2,
@@ -180009,6 +180042,17 @@
    "status": "new"
   },
   {
+   "id": 251340,
+   "name": "设计图: 老兵的链甲衬衫",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
    "id": 251341,
    "name": "设计图：卫兵的链甲衬衫",
    "quality": 3,
@@ -180016,6 +180060,149 @@
    "sub": "精良",
    "type": "锻造",
    "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251342,
+   "name": "设计图: 保护者的链甲衬衫",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251343,
+   "name": "设计图: 助祭的链甲衬衫",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251344,
+   "name": "设计图: 十字军的链甲衬衫",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251345,
+   "name": "设计图: 老兵的链甲护腿",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251346,
+   "name": "设计图: 卫兵的链甲护腿",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251347,
+   "name": "设计图: 保护者的链甲护腿",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251348,
+   "name": "设计图: 助祭的链甲护腿",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251349,
+   "name": "设计图: 十字军的链甲护腿",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251350,
+   "name": "设计图: 老兵的链甲头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251351,
+   "name": "设计图: 卫兵的链甲头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251352,
+   "name": "设计图: 保护者的链甲头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251353,
+   "name": "设计图: 助祭的链甲头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251354,
+   "name": "设计图: 十字军的链甲头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 30,
    "rlvl": null,
    "status": "new"
   },
@@ -180456,6 +180643,17 @@
    "sub": "优秀",
    "type": "锻造",
    "ilvl": 45,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 251395,
+   "name": "设计图: 闪耀秘银头盔",
+   "quality": 3,
+   "icon": "inv_scroll_03.jpg",
+   "sub": "精良",
+   "type": "锻造",
+   "ilvl": 48,
    "rlvl": null,
    "status": "new"
   },
@@ -184200,6 +184398,72 @@
    "status": "new"
   },
   {
+   "id": 252771,
+   "name": "图案： 争斗者的皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252772,
+   "name": "图案： 捕兽者的皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252773,
+   "name": "图案： 防御者的皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252774,
+   "name": "图案： 图腾师的皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252775,
+   "name": "图案： 风暴行者的皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252776,
+   "name": "图案： 智慧皮甲",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
    "id": 252777,
    "name": "图样：争斗者的皮手套",
    "quality": 3,
@@ -184350,6 +184614,72 @@
    "sub": "精良",
    "type": "制皮",
    "ilvl": 22,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252792,
+   "name": "图案： 争斗者的皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252793,
+   "name": "图案： 捕兽者的皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252794,
+   "name": "图案： 防御者的皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252795,
+   "name": "图案： 图腾师的皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252796,
+   "name": "图案： 风暴行者的皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252797,
+   "name": "图案： 智慧皮裤",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 25,
    "rlvl": null,
    "status": "new"
   },
@@ -184513,6 +184843,72 @@
    "quality": 2,
    "icon": "inv_scroll_06.jpg",
    "sub": "优秀",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252814,
+   "name": "图案： 争斗者的皮盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252815,
+   "name": "图案： 捕兽者的皮盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252816,
+   "name": "图案： 防御者的皮头盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252817,
+   "name": "图案： 图腾师的皮头盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252818,
+   "name": "图案： 风暴行者的皮盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
+   "type": "制皮",
+   "ilvl": 30,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 252819,
+   "name": "图案： 智慧皮盔",
+   "quality": 3,
+   "icon": "inv_scroll_06.jpg",
+   "sub": "精良",
    "type": "制皮",
    "ilvl": 30,
    "rlvl": null,
@@ -189745,7 +190141,7 @@
   },
   {
    "id": 256058,
-   "name": "乌瑟克的法杖",
+   "name": "乌泰克的法杖",
    "quality": 1,
    "icon": "inv_staff_10.jpg",
    "sub": "普通",
@@ -189756,7 +190152,7 @@
   },
   {
    "id": 256061,
-   "name": "乌瑟克的德莱尼水晶法杖",
+   "name": "乌泰克的德莱尼水晶法杖",
    "quality": 1,
    "icon": "inv_staff_07.jpg",
    "sub": "普通",
@@ -190427,7 +190823,7 @@
   },
   {
    "id": 258661,
-   "name": "乌瑟克的德莱尼水晶法杖",
+   "name": "乌泰克的德莱尼水晶法杖",
    "quality": 1,
    "icon": "inv_staff_07.jpg",
    "sub": "普通",
@@ -195575,7 +195971,7 @@
   },
   {
    "id": 267079,
-   "name": "净化混合剂",
+   "name": "山岳法杖",
    "quality": 2,
    "icon": "inv_staff_25.jpg",
    "sub": "优秀",
@@ -197076,7 +197472,7 @@
    "icon": "inv_weapon_shortblade_05.jpg",
    "sub": "优秀",
    "type": "主手 · 匕首",
-   "ilvl": 19,
+   "ilvl": 18,
    "rlvl": null,
    "status": "new"
   },
@@ -197087,7 +197483,7 @@
    "icon": "inv_sword_40.jpg",
    "sub": "优秀",
    "type": "双手 · 双手剑",
-   "ilvl": 19,
+   "ilvl": 18,
    "rlvl": null,
    "status": "new"
   },
@@ -197142,7 +197538,7 @@
    "icon": "inv_weapon_rifle_05.jpg",
    "sub": "优秀",
    "type": "远程 · 枪",
-   "ilvl": 20,
+   "ilvl": 18,
    "rlvl": null,
    "status": "new"
   },
@@ -197326,7 +197722,7 @@
    "id": 270000,
    "name": "学徒巫师的长袍",
    "quality": 2,
-   "icon": "inv_shirt_05.jpg",
+   "icon": "inv_chest_cloth_24.jpg",
    "sub": "优秀",
    "type": "胸部 · 布甲",
    "ilvl": 13,
@@ -199682,7 +200078,7 @@
    "quality": 1,
    "icon": "inv_chest_armor_skybornec60_a_01.jpg",
    "sub": "普通",
-   "type": "衬衣 · 皮甲",
+   "type": "衬衣 · 其它",
    "ilvl": 1,
    "rlvl": null,
    "status": "new"
@@ -210837,7 +211233,7 @@
    "icon": "inv_misc_cape_07.jpg",
    "sub": "优秀",
    "type": "背部 · 布甲",
-   "ilvl": 30,
+   "ilvl": 29,
    "rlvl": null,
    "status": "new"
   },
@@ -210859,8 +211255,8 @@
    "icon": "inv_scroll_02.jpg",
    "sub": "普通",
    "type": "任务",
-   "ilvl": 30,
-   "rlvl": 30,
+   "ilvl": 1,
+   "rlvl": 1,
    "status": "new"
   },
   {
@@ -211239,7 +211635,7 @@
   },
   {
    "id": 273845,
-   "name": "灰烬水晶瓶",
+   "name": "微光法杖",
    "quality": 1,
    "icon": "inv_staff_2h_inscription_c_01_green.jpg",
    "sub": "普通",
@@ -217784,7 +218180,7 @@
   },
   {
    "id": 275968,
-   "name": "凶猛的观察者印戒",
+   "name": "见习者的残暴印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_25.jpg",
    "sub": "精良",
@@ -217795,7 +218191,7 @@
   },
   {
    "id": 275969,
-   "name": "璀璨的观察者印戒",
+   "name": "见习者的光辉印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_09.jpg",
    "sub": "精良",
@@ -217806,7 +218202,7 @@
   },
   {
    "id": 275970,
-   "name": "警惕的观察者印戒",
+   "name": "见习者的决意印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_11.jpg",
    "sub": "精良",
@@ -217817,7 +218213,7 @@
   },
   {
    "id": 275971,
-   "name": "坚定的观察者印戒",
+   "name": "见习者的警戒印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_10.jpg",
    "sub": "精良",
@@ -217828,7 +218224,7 @@
   },
   {
    "id": 275972,
-   "name": "凶猛的观察者印戒",
+   "name": "追踪者的残暴印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_25.jpg",
    "sub": "精良",
@@ -217839,7 +218235,7 @@
   },
   {
    "id": 275973,
-   "name": "璀璨的观察者印戒",
+   "name": "追踪者的光辉印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_09.jpg",
    "sub": "精良",
@@ -217850,7 +218246,7 @@
   },
   {
    "id": 275974,
-   "name": "警惕的观察者印戒",
+   "name": "追踪者的决意印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_11.jpg",
    "sub": "精良",
@@ -217861,7 +218257,7 @@
   },
   {
    "id": 275975,
-   "name": "坚定的观察者印戒",
+   "name": "追踪者的警戒印记",
    "quality": 3,
    "icon": "inv_jewelry_ring_10.jpg",
    "sub": "精良",
@@ -217872,7 +218268,7 @@
   },
   {
    "id": 275976,
-   "name": "凶猛的观察者印戒",
+   "name": "观察者的残暴印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_25.jpg",
    "sub": "史诗",
@@ -217883,7 +218279,7 @@
   },
   {
    "id": 275977,
-   "name": "璀璨的观察者印戒",
+   "name": "观察者的光辉印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_09.jpg",
    "sub": "史诗",
@@ -217894,7 +218290,7 @@
   },
   {
    "id": 275979,
-   "name": "警惕的观察者印戒",
+   "name": "观察者的决意印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_11.jpg",
    "sub": "史诗",
@@ -217905,7 +218301,7 @@
   },
   {
    "id": 275980,
-   "name": "坚定的观察者印戒",
+   "name": "观察者的警戒印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_10.jpg",
    "sub": "史诗",
@@ -217916,7 +218312,7 @@
   },
   {
    "id": 275981,
-   "name": "凶猛的观察者印戒",
+   "name": "守望者的残暴印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_25.jpg",
    "sub": "史诗",
@@ -217927,7 +218323,7 @@
   },
   {
    "id": 275982,
-   "name": "璀璨的观察者印戒",
+   "name": "守望者的光辉印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_09.jpg",
    "sub": "史诗",
@@ -217938,7 +218334,7 @@
   },
   {
    "id": 275983,
-   "name": "警惕的观察者印戒",
+   "name": "守望者的决意印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_11.jpg",
    "sub": "史诗",
@@ -217949,7 +218345,7 @@
   },
   {
    "id": 275984,
-   "name": "坚定的观察者印戒",
+   "name": "守望者的警戒印记",
    "quality": 4,
    "icon": "inv_jewelry_ring_10.jpg",
    "sub": "史诗",
@@ -218966,7 +219362,7 @@
    "icon": "inv_misc_bag_21.jpg",
    "sub": "优秀",
    "type": "背包 · 背包",
-   "ilvl": 30,
+   "ilvl": 29,
    "rlvl": null,
    "status": "new"
   },
@@ -218977,7 +219373,7 @@
    "icon": "inv_misc_bag_12.jpg",
    "sub": "优秀",
    "type": "背包 · 材料袋",
-   "ilvl": 30,
+   "ilvl": 29,
    "rlvl": null,
    "status": "new"
   },
@@ -221299,7 +221695,7 @@
    "sub": "普通",
    "type": "其它",
    "ilvl": 1,
-   "rlvl": null,
+   "rlvl": 60,
    "status": "new"
   },
   {
@@ -222141,9 +222537,9 @@
   {
    "id": 277286,
    "name": "侵入者的宣称",
-   "quality": 3,
+   "quality": 2,
    "icon": "inv_axe_17.jpg",
-   "sub": "精良",
+   "sub": "优秀",
    "type": "双手 · 双手斧",
    "ilvl": 23,
    "rlvl": 1,
@@ -222152,9 +222548,9 @@
   {
    "id": 277288,
    "name": "寻路者的通途",
-   "quality": 3,
+   "quality": 2,
    "icon": "inv_axe_01.jpg",
-   "sub": "精良",
+   "sub": "优秀",
    "type": "主手 · 单手斧",
    "ilvl": 23,
    "rlvl": 1,
@@ -222163,9 +222559,9 @@
   {
    "id": 277289,
    "name": "旅行者的披肩",
-   "quality": 3,
+   "quality": 2,
    "icon": "inv_misc_cape_15.jpg",
-   "sub": "精良",
+   "sub": "优秀",
    "type": "背部 · 布甲",
    "ilvl": 23,
    "rlvl": 1,
@@ -234268,6 +234664,1403 @@
    "sub": "普通",
    "type": "其它",
    "ilvl": 20,
+   "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 288358,
+   "name": "豺狼人巨斧",
+   "quality": 4,
+   "icon": "inv_axe_10.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手斧",
+   "ilvl": 40,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288823,
+   "name": "奥术师头冠",
+   "quality": 4,
+   "icon": "inv_helmet_53.jpg",
+   "sub": "史诗",
+   "type": "头部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288824,
+   "name": "奥术师护腿",
+   "quality": 4,
+   "icon": "inv_pants_08.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288825,
+   "name": "奥术师衬肩",
+   "quality": 4,
+   "icon": "inv_shoulder_02.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288826,
+   "name": "奥术师长袍",
+   "quality": 4,
+   "icon": "inv_chest_cloth_03.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288827,
+   "name": "奥术师护腕",
+   "quality": 4,
+   "icon": "inv_belt_29.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288828,
+   "name": "奥术师便鞋",
+   "quality": 4,
+   "icon": "inv_boots_07.jpg",
+   "sub": "史诗",
+   "type": "脚 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288829,
+   "name": "奥术师手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_14.jpg",
+   "sub": "史诗",
+   "type": "手 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288830,
+   "name": "奥术师腰带",
+   "quality": 4,
+   "icon": "inv_belt_30.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288831,
+   "name": "恶魔之心便鞋",
+   "quality": 4,
+   "icon": "inv_boots_cloth_05.jpg",
+   "sub": "史诗",
+   "type": "脚 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288832,
+   "name": "恶魔之心护腕",
+   "quality": 4,
+   "icon": "inv_bracer_07.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288833,
+   "name": "恶魔之心手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_19.jpg",
+   "sub": "史诗",
+   "type": "手 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288834,
+   "name": "恶魔之心腰带",
+   "quality": 4,
+   "icon": "inv_belt_13.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288835,
+   "name": "恶魔之心护肩",
+   "quality": 4,
+   "icon": "inv_shoulder_23.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288836,
+   "name": "恶魔之心角饰",
+   "quality": 4,
+   "icon": "inv_helmet_08.jpg",
+   "sub": "史诗",
+   "type": "头部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288837,
+   "name": "恶魔之心长袍",
+   "quality": 4,
+   "icon": "inv_chest_cloth_09.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288838,
+   "name": "恶魔之心长裤",
+   "quality": 4,
+   "icon": "inv_pants_cloth_14.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288839,
+   "name": "预言之靴",
+   "quality": 4,
+   "icon": "inv_boots_07.jpg",
+   "sub": "史诗",
+   "type": "脚 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288840,
+   "name": "预言手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_14.jpg",
+   "sub": "史诗",
+   "type": "手 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288841,
+   "name": "预言头饰",
+   "quality": 4,
+   "icon": "inv_helmet_34.jpg",
+   "sub": "史诗",
+   "type": "头部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288842,
+   "name": "预言短裤",
+   "quality": 4,
+   "icon": "inv_pants_08.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288843,
+   "name": "预言法袍",
+   "quality": 4,
+   "icon": "inv_chest_cloth_03.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288844,
+   "name": "预言衬肩",
+   "quality": 4,
+   "icon": "inv_shoulder_02.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288845,
+   "name": "预言束带",
+   "quality": 4,
+   "icon": "inv_belt_22.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288846,
+   "name": "预言臂甲",
+   "quality": 4,
+   "icon": "inv_bracer_09.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288847,
+   "name": "夜幕杀手胸甲",
+   "quality": 4,
+   "icon": "inv_chest_cloth_07.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288848,
+   "name": "夜幕杀手头巾",
+   "quality": 4,
+   "icon": "inv_helmet_41.jpg",
+   "sub": "史诗",
+   "type": "头部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288849,
+   "name": "夜幕杀手短裤",
+   "quality": 4,
+   "icon": "inv_pants_06.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288850,
+   "name": "夜幕杀手护肩",
+   "quality": 4,
+   "icon": "inv_shoulder_25.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288851,
+   "name": "夜幕杀手长靴",
+   "quality": 4,
+   "icon": "inv_boots_08.jpg",
+   "sub": "史诗",
+   "type": "脚 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288852,
+   "name": "夜幕杀手护腕",
+   "quality": 4,
+   "icon": "inv_bracer_02.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288853,
+   "name": "夜幕杀手手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_21.jpg",
+   "sub": "史诗",
+   "type": "手 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288854,
+   "name": "夜幕杀手腰带",
+   "quality": 4,
+   "icon": "inv_belt_23.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288855,
+   "name": "塞纳里奥腰带",
+   "quality": 4,
+   "icon": "inv_belt_06.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288856,
+   "name": "塞纳里奥长靴",
+   "quality": 4,
+   "icon": "inv_boots_08.jpg",
+   "sub": "史诗",
+   "type": "脚 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288857,
+   "name": "塞纳里奥护腕",
+   "quality": 4,
+   "icon": "inv_bracer_03.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288858,
+   "name": "塞纳里奥手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_07.jpg",
+   "sub": "史诗",
+   "type": "手 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288859,
+   "name": "塞纳里奥胸甲",
+   "quality": 4,
+   "icon": "inv_chest_cloth_06.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288860,
+   "name": "塞纳里奥头盔",
+   "quality": 4,
+   "icon": "inv_helmet_09.jpg",
+   "sub": "史诗",
+   "type": "头部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288861,
+   "name": "塞纳里奥护腿",
+   "quality": 4,
+   "icon": "inv_pants_06.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288862,
+   "name": "塞纳里奥肩甲",
+   "quality": 4,
+   "icon": "inv_shoulder_07.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288863,
+   "name": "大地之怒长靴",
+   "quality": 4,
+   "icon": "inv_boots_plate_06.jpg",
+   "sub": "史诗",
+   "type": "脚 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288864,
+   "name": "大地之怒腰带",
+   "quality": 4,
+   "icon": "inv_belt_14.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288865,
+   "name": "大地之怒护手",
+   "quality": 4,
+   "icon": "inv_gauntlets_11.jpg",
+   "sub": "史诗",
+   "type": "手 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288866,
+   "name": "大地之怒护腕",
+   "quality": 4,
+   "icon": "inv_bracer_16.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288867,
+   "name": "大地之怒外衣",
+   "quality": 4,
+   "icon": "inv_chest_chain_11.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288868,
+   "name": "大地之怒头盔",
+   "quality": 4,
+   "icon": "inv_helmet_09.jpg",
+   "sub": "史诗",
+   "type": "头部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288869,
+   "name": "大地之怒腿甲",
+   "quality": 4,
+   "icon": "inv_pants_03.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288870,
+   "name": "大地之怒肩饰",
+   "quality": 4,
+   "icon": "inv_shoulder_29.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288871,
+   "name": "巨人追猎者胸甲",
+   "quality": 4,
+   "icon": "inv_chest_chain_03.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288872,
+   "name": "巨人追猎者头盔",
+   "quality": 4,
+   "icon": "inv_helmet_05.jpg",
+   "sub": "史诗",
+   "type": "头部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288873,
+   "name": "巨人追猎者护腿",
+   "quality": 4,
+   "icon": "inv_pants_mail_03.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288874,
+   "name": "巨人追猎者肩饰",
+   "quality": 4,
+   "icon": "inv_shoulder_10.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288875,
+   "name": "巨人追猎者长靴",
+   "quality": 4,
+   "icon": "inv_boots_chain_13.jpg",
+   "sub": "史诗",
+   "type": "脚 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288876,
+   "name": "巨人追猎者护腕",
+   "quality": 4,
+   "icon": "inv_bracer_17.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288877,
+   "name": "巨人追猎者腰带",
+   "quality": 4,
+   "icon": "inv_belt_28.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288878,
+   "name": "巨人追猎者手套",
+   "quality": 4,
+   "icon": "inv_gauntlets_10.jpg",
+   "sub": "史诗",
+   "type": "手 · 皮甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288879,
+   "name": "秩序之源胸甲",
+   "quality": 4,
+   "icon": "inv_chest_plate03.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288880,
+   "name": "秩序之源头盔",
+   "quality": 4,
+   "icon": "inv_helmet_05.jpg",
+   "sub": "史诗",
+   "type": "头部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288881,
+   "name": "秩序之源腿铠",
+   "quality": 4,
+   "icon": "inv_pants_04.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288882,
+   "name": "秩序之源肩铠",
+   "quality": 4,
+   "icon": "inv_shoulder_20.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288883,
+   "name": "秩序之源护腕",
+   "quality": 4,
+   "icon": "inv_bracer_18.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288884,
+   "name": "秩序之源腰带",
+   "quality": 4,
+   "icon": "inv_belt_27.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288885,
+   "name": "秩序之源战靴",
+   "quality": 4,
+   "icon": "inv_boots_plate_09.jpg",
+   "sub": "史诗",
+   "type": "脚 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288886,
+   "name": "秩序之源护手",
+   "quality": 4,
+   "icon": "inv_gauntlets_29.jpg",
+   "sub": "史诗",
+   "type": "手 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288887,
+   "name": "力量护腕",
+   "quality": 4,
+   "icon": "inv_bracer_19.jpg",
+   "sub": "史诗",
+   "type": "手腕 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288888,
+   "name": "力量马靴",
+   "quality": 4,
+   "icon": "inv_boots_plate_04.jpg",
+   "sub": "史诗",
+   "type": "脚 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288889,
+   "name": "力量护手",
+   "quality": 4,
+   "icon": "inv_gauntlets_10.jpg",
+   "sub": "史诗",
+   "type": "手 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288890,
+   "name": "力量腰带",
+   "quality": 4,
+   "icon": "inv_belt_09.jpg",
+   "sub": "史诗",
+   "type": "腰部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288891,
+   "name": "力量胸甲",
+   "quality": 4,
+   "icon": "inv_chest_plate16.jpg",
+   "sub": "史诗",
+   "type": "胸部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288892,
+   "name": "力量头盔",
+   "quality": 4,
+   "icon": "inv_helmet_09.jpg",
+   "sub": "史诗",
+   "type": "头部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288893,
+   "name": "力量腿铠",
+   "quality": 4,
+   "icon": "inv_pants_04.jpg",
+   "sub": "史诗",
+   "type": "腿部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288894,
+   "name": "力量肩铠",
+   "quality": 4,
+   "icon": "inv_shoulder_15.jpg",
+   "sub": "史诗",
+   "type": "肩部 · 锁甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288896,
+   "name": "超强治疗药水",
+   "quality": 1,
+   "icon": "inv_potion_53.jpg",
+   "sub": "普通",
+   "type": "药水",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288897,
+   "name": "超强法力药水",
+   "quality": 1,
+   "icon": "inv_potion_74.jpg",
+   "sub": "普通",
+   "type": "药水",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288898,
+   "name": "迅捷药水",
+   "quality": 1,
+   "icon": "inv_potion_95.jpg",
+   "sub": "普通",
+   "type": "药水",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288900,
+   "name": "震地者",
+   "quality": 4,
+   "icon": "inv_hammer_04.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手锤",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288901,
+   "name": "脊骨收割者",
+   "quality": 4,
+   "icon": "inv_axe_09.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手斧",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288902,
+   "name": "超强绝热熔岩挖掘器",
+   "quality": 4,
+   "icon": "inv_gizmo_02.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手锤",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288903,
+   "name": "暗影之击",
+   "quality": 4,
+   "icon": "inv_spear_08.jpg",
+   "sub": "史诗",
+   "type": "双手 · 长柄武器",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288904,
+   "name": "削骨之刃",
+   "quality": 4,
+   "icon": "inv_sword_12.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手剑",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288905,
+   "name": "黑曜石之刃",
+   "quality": 4,
+   "icon": "inv_sword_28.jpg",
+   "sub": "史诗",
+   "type": "双手 · 双手剑",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288906,
+   "name": "统御法杖",
+   "quality": 4,
+   "icon": "inv_staff_13.jpg",
+   "sub": "史诗",
+   "type": "双手 · 法杖",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288907,
+   "name": "血腥撕裂者",
+   "quality": 4,
+   "icon": "inv_weapon_shortblade_18.jpg",
+   "sub": "史诗",
+   "type": "单手 · 匕首",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288908,
+   "name": "光环石锤",
+   "quality": 4,
+   "icon": "inv_hammer_05.jpg",
+   "sub": "史诗",
+   "type": "单手 · 单手锤",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288909,
+   "name": "毁灭之刃",
+   "quality": 4,
+   "icon": "inv_sword_48.jpg",
+   "sub": "史诗",
+   "type": "单手 · 匕首",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288910,
+   "name": "巫术匕首",
+   "quality": 4,
+   "icon": "inv_weapon_shortblade_07.jpg",
+   "sub": "史诗",
+   "type": "主手 · 匕首",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288911,
+   "name": "速射强弓",
+   "quality": 4,
+   "icon": "inv_weapon_bow_08.jpg",
+   "sub": "史诗",
+   "type": "远程 · 弓",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288913,
+   "name": "爆击猎枪",
+   "quality": 4,
+   "icon": "inv_weapon_rifle_09.jpg",
+   "sub": "史诗",
+   "type": "远程 · 枪",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288914,
+   "name": "赤红震荡者",
+   "quality": 4,
+   "icon": "inv_staff_13.jpg",
+   "sub": "史诗",
+   "type": "远程 · 魔杖",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288915,
+   "name": "碧空之歌",
+   "quality": 4,
+   "icon": "inv_sword_39.jpg",
+   "sub": "史诗",
+   "type": "主手 · 单手剑",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288916,
+   "name": "钻孔虫之碟",
+   "quality": 4,
+   "icon": "inv_shield_10.jpg",
+   "sub": "史诗",
+   "type": "盾牌 · 盾牌",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288917,
+   "name": "火焰符文魔典",
+   "quality": 4,
+   "icon": "inv_misc_book_09.jpg",
+   "sub": "史诗",
+   "type": "副手物品 · 其它",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288918,
+   "name": "玛利斯达尔防御者",
+   "quality": 4,
+   "icon": "inv_shield_08.jpg",
+   "sub": "史诗",
+   "type": "盾牌 · 盾牌",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288919,
+   "name": "埃古雷亚指环",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_15.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288920,
+   "name": "稳固之力勋章",
+   "quality": 4,
+   "icon": "inv_jewelry_amulet_03.jpg",
+   "sub": "史诗",
+   "type": "颈部 · 其它",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288921,
+   "name": "环雾披风",
+   "quality": 4,
+   "icon": "inv_misc_cape_17.jpg",
+   "sub": "史诗",
+   "type": "背部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288922,
+   "name": "龙血斗篷",
+   "quality": 4,
+   "icon": "inv_misc_cape_08.jpg",
+   "sub": "史诗",
+   "type": "背部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288923,
+   "name": "启示项链",
+   "quality": 4,
+   "icon": "inv_jewelry_necklace_10.jpg",
+   "sub": "史诗",
+   "type": "颈部 · 其它",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288924,
+   "name": "魔法导师的封印",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_21.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288925,
+   "name": "防火披风",
+   "quality": 4,
+   "icon": "inv_misc_cape_18.jpg",
+   "sub": "史诗",
+   "type": "背部 · 布甲",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 288926,
+   "name": "火焰之王的项圈",
+   "quality": 4,
+   "icon": "inv_jewelry_amulet_05.jpg",
+   "sub": "史诗",
+   "type": "颈部 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288927,
+   "name": "迅击戒指",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_07.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288928,
+   "name": "沉重的黑铁戒指",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_14.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288929,
+   "name": "萨弗拉斯指环",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_36.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288930,
+   "name": "灼烧指环",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_39.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 288931,
+   "name": "法术能量之戒",
+   "quality": 4,
+   "icon": "inv_jewelry_ring_38.jpg",
+   "sub": "史诗",
+   "type": "手指 · 其它",
+   "ilvl": 10,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289081,
+   "name": "诺格弗格药剂",
+   "quality": 1,
+   "icon": "inv_potion_83.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289082,
+   "name": "无药剂穷无尽的智慧",
+   "quality": 1,
+   "icon": "inv_potion_43.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289083,
+   "name": "药剂无尽的力量",
+   "quality": 1,
+   "icon": "inv_potion_50.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289084,
+   "name": "无尽治疗药剂",
+   "quality": 1,
+   "icon": "inv_potion_78.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289086,
+   "name": "无尽迅捷药剂",
+   "quality": 1,
+   "icon": "inv_potion_57.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289087,
+   "name": "无尽良机药剂",
+   "quality": 1,
+   "icon": "inv_potion_36.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289088,
+   "name": "卷轴无尽坚韧",
+   "quality": 1,
+   "icon": "inv_scroll_07.jpg",
+   "sub": "普通",
+   "type": "卷轴",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289292,
+   "name": "野兽狂怒之锤",
+   "quality": 4,
+   "icon": "inv_mace_20.jpg",
+   "sub": "史诗",
+   "type": "主手 · 单手锤",
+   "ilvl": 35,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289294,
+   "name": "雷霆之怒，风之神佑之刃",
+   "quality": 5,
+   "icon": "inv_sword_39.jpg",
+   "sub": "传说",
+   "type": "单手 · 单手剑",
+   "ilvl": 45,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289295,
+   "name": "萨弗拉斯，炎魔拉格纳罗斯之手",
+   "quality": 5,
+   "icon": "inv_hammer_unique_sulfuras.jpg",
+   "sub": "传说",
+   "type": "双手 · 双手锤",
+   "ilvl": 45,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289296,
+   "name": "祈福",
+   "quality": 4,
+   "icon": "inv_staff_30.jpg",
+   "sub": "史诗",
+   "type": "双手 · 法杖",
+   "ilvl": 40,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289297,
+   "name": "咒逐",
+   "quality": 4,
+   "icon": "inv_staff_12.jpg",
+   "sub": "史诗",
+   "type": "双手 · 法杖",
+   "ilvl": 40,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289302,
+   "name": "奎尔塞拉",
+   "quality": 4,
+   "icon": "inv_sword_01.jpg",
+   "sub": "史诗",
+   "type": "主手 · 单手剑",
+   "ilvl": 40,
+   "rlvl": 1,
+   "status": "ic-rebuilt"
+  },
+  {
+   "id": 289303,
+   "name": "伦鲁迪洛尔，上古守护者的长弓",
+   "quality": 4,
+   "icon": "inv_weapon_bow_01.jpg",
+   "sub": "史诗",
+   "type": "远程 · 弓",
+   "ilvl": 40,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289321,
+   "name": "药剂的无尽法力",
+   "quality": 1,
+   "icon": "inv_potion_71.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289329,
+   "name": "无药剂止境的成长",
+   "quality": 1,
+   "icon": "inv_potion_10.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289330,
+   "name": "卷轴无尽的速度",
+   "quality": 1,
+   "icon": "inv_scroll_02.jpg",
+   "sub": "普通",
+   "type": "卷轴",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289334,
+   "name": "无尽经验药剂",
+   "quality": 1,
+   "icon": "inv_potion_23.jpg",
+   "sub": "普通",
+   "type": "药剂",
+   "ilvl": 30,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289559,
+   "name": "附魔鞋-速度",
+   "quality": 1,
+   "icon": "inv_misc_enchantedscroll.jpg",
+   "sub": "普通",
+   "type": "永久强化",
+   "ilvl": 1,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
+   "id": 289560,
+   "name": "配方：附魔靴-速度",
+   "quality": 2,
+   "icon": "inv_misc_note_01.jpg",
+   "sub": "优秀",
+   "type": "附魔",
+   "ilvl": 50,
    "rlvl": null,
    "status": "new"
   }

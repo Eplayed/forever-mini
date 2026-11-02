@@ -2,7 +2,7 @@
  "classId": "shaman",
  "classNameCn": "萨满祭司",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -90,11 +90,11 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-元素防护",
+     "id": "shaman-0-元素浩劫",
      "tier": 1,
      "column": 0,
      "maxRanks": 3,
-     "nameCn": "元素防护",
+     "nameCn": "元素浩劫",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -102,7 +102,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_spiritarmor",
+     "iconKey": "spell_fire_elementaldevastation",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -117,7 +117,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-elemental-warding",
+     "upstreamId": "calc-shaman-elemental-combat-elemental-devastation",
      "changeState": "modified"
     },
     {
@@ -152,9 +152,40 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-烈焰召唤",
+     "id": "shaman-0-元素迅捷",
      "tier": 1,
      "column": 2,
+     "maxRanks": 3,
+     "nameCn": "元素迅捷",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_lightning_lightningbolt01",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-elemental-alacrity",
+     "changeState": "modified"
+    },
+    {
+     "id": "shaman-0-烈焰召唤",
+     "tier": 1,
+     "column": 3,
      "maxRanks": 3,
      "nameCn": "烈焰召唤",
      "nameAlt": null,
@@ -183,40 +214,9 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-元素浩劫",
-     "tier": 1,
-     "column": 3,
-     "maxRanks": 3,
-     "nameCn": "元素浩劫",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_fire_elementaldevastation",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/shaman.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-shaman-elemental-combat-elemental-devastation",
-     "changeState": "modified"
-    },
-    {
      "id": "shaman-0-元素集中",
      "tier": 2,
-     "column": 1,
+     "column": 0,
      "maxRanks": 1,
      "nameCn": "元素集中",
      "nameAlt": null,
@@ -242,14 +242,14 @@
       }
      ],
      "upstreamId": "calc-shaman-elemental-combat-elemental-focus",
-     "changeState": "moved"
+     "changeState": "unchanged"
     },
     {
-     "id": "shaman-0-元素迅捷",
+     "id": "shaman-0-元素防护",
      "tier": 2,
-     "column": 2,
+     "column": 1,
      "maxRanks": 3,
-     "nameCn": "元素迅捷",
+     "nameCn": "元素防护",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -257,10 +257,8 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_lightning_lightningbolt01",
-     "requires": [
-      "shaman-0-雷霆召唤"
-     ],
+     "iconKey": "spell_nature_spiritarmor",
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -274,15 +272,15 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-elemental-alacrity",
+     "upstreamId": "calc-shaman-elemental-combat-elemental-warding",
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-强化火焰新星",
+     "id": "shaman-0-火焰试炼",
      "tier": 3,
      "column": 0,
      "maxRanks": 2,
-     "nameCn": "强化火焰新星",
+     "nameCn": "火焰试炼",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -305,7 +303,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-improved-fire-nova",
+     "upstreamId": "calc-shaman-elemental-trial-by-fire",
      "changeState": "modified"
     },
     {
@@ -340,11 +338,11 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-雷霆召唤",
+     "id": "shaman-0-地缚",
      "tier": 3,
-     "column": 2,
+     "column": 3,
      "maxRanks": 1,
-     "nameCn": "雷霆召唤",
+     "nameCn": "地缚",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -352,11 +350,8 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_callstorm",
-     "requires": [
-      "shaman-0-元素之怒",
-      "shaman-0-元素迅捷"
-     ],
+     "iconKey": "spell_nature_stranglevines",
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -370,8 +365,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-call-of-thunder",
-     "changeState": "modified"
+     "upstreamId": "calc-shaman-elemental-combat-earthbound",
+     "changeState": "added"
     },
     {
      "id": "shaman-0-元素射程",
@@ -405,9 +400,40 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-闪电超载",
+     "id": "shaman-0-熔岩爆裂",
      "tier": 4,
      "column": 1,
+     "maxRanks": 1,
+     "nameCn": "熔岩爆裂",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shaman_lavaburst",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/shaman.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-shaman-elemental-combat-lava-burst",
+     "changeState": "added"
+    },
+    {
+     "id": "shaman-0-闪电超载",
+     "tier": 4,
+     "column": 2,
      "maxRanks": 3,
      "nameCn": "闪电超载",
      "nameAlt": null,
@@ -418,7 +444,9 @@
       "nieyi"
      ],
      "iconKey": "spell_nature_lightningoverload",
-     "requires": [],
+     "requires": [
+      "shaman-0-元素迅捷"
+     ],
      "level": "L2",
      "provenance": [
       {
@@ -436,37 +464,6 @@
      "changeState": "added"
     },
     {
-     "id": "shaman-0-地缚",
-     "tier": 4,
-     "column": 3,
-     "maxRanks": 1,
-     "nameCn": "地缚",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_nature_stranglevines",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/shaman.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-shaman-elemental-combat-earthbound",
-     "changeState": "added"
-    },
-    {
      "id": "shaman-0-元素之怒",
      "tier": 5,
      "column": 2,
@@ -481,7 +478,7 @@
      ],
      "iconKey": "spell_fire_volcano",
      "requires": [
-      "shaman-0-雷霆召唤"
+      "shaman-0-闪电超载"
      ],
      "level": "L2",
      "provenance": [
@@ -500,11 +497,11 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-0-熔岩爆裂",
+     "id": "shaman-0-元素掌握",
      "tier": 6,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "熔岩爆裂",
+     "nameCn": "元素掌握",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -512,9 +509,9 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shaman_lavaburst",
+     "iconKey": "spell_nature_wispheal",
      "requires": [
-      "shaman-0-闪电超载"
+      "shaman-0-熔岩爆裂"
      ],
      "level": "L2",
      "provenance": [
@@ -529,8 +526,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-lava-burst",
-     "changeState": "added"
+     "upstreamId": "calc-shaman-elemental-elemental-mastery",
+     "changeState": "modified"
     }
    ],
    "nameAltUpstream": "元素",
@@ -1151,11 +1148,11 @@
      "changeState": "unchanged"
     },
     {
-     "id": "shaman-2-图腾集中",
+     "id": "shaman-2-潮汐集中",
      "tier": 0,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "图腾集中",
+     "nameCn": "潮汐集中",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1163,7 +1160,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_moonglow",
+     "iconKey": "spell_frost_manarecharge",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1178,7 +1175,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-restoration-totemic-focus",
+     "upstreamId": "calc-shaman-restoration-tidal-focus",
      "changeState": "modified"
     },
     {
@@ -1244,11 +1241,11 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-2-潮汐集中",
+     "id": "shaman-2-图腾集中",
      "tier": 1,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "潮汐集中",
+     "nameCn": "图腾集中",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1256,7 +1253,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_frost_manarecharge",
+     "iconKey": "spell_nature_moonglow",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1271,7 +1268,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-restoration-tidal-focus",
+     "upstreamId": "calc-shaman-restoration-totemic-focus",
      "changeState": "modified"
     },
     {
@@ -1635,7 +1632,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/shaman",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

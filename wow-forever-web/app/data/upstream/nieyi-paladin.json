@@ -2,23 +2,23 @@
  "rows": [
   {
    "tree": 0,
-   "name": "神圣之力",
+   "name": "精神集中",
    "max": 5,
    "row": 0,
    "col": 1,
-   "icon": "ability_golemthunderclap",
+   "icon": "spell_arcane_blink",
    "preId": null,
-   "nid": "h2"
+   "nid": "spiritual_focus"
   },
   {
    "tree": 0,
-   "name": "神圣智慧",
+   "name": "神圣之力",
    "max": 5,
    "row": 0,
    "col": 2,
-   "icon": "spell_nature_sleep",
+   "icon": "ability_golemthunderclap",
    "preId": null,
-   "nid": "h3"
+   "nid": "divine_strength"
   },
   {
    "tree": 0,
@@ -28,107 +28,107 @@
    "col": 0,
    "icon": "spell_holy_holybolt",
    "preId": null,
-   "nid": "h4"
-  },
-  {
-   "tree": 0,
-   "name": "精神集中",
-   "max": 2,
-   "row": 1,
-   "col": 1,
-   "icon": "spell_arcane_blink",
-   "preId": null,
-   "nid": "h5"
-  },
-  {
-   "tree": 0,
-   "name": "强化圣印",
-   "max": 3,
-   "row": 1,
-   "col": 2,
-   "icon": "ability_thunderbolt",
-   "preId": null,
-   "nid": "h6"
-  },
-  {
-   "tree": 0,
-   "name": "不灭信仰",
-   "max": 2,
-   "row": 1,
-   "col": 3,
-   "icon": "spell_holy_unyieldingfaith",
-   "preId": null,
-   "nid": "h7"
-  },
-  {
-   "tree": 0,
-   "name": "真理之音",
-   "max": 1,
-   "row": 2,
-   "col": 0,
-   "icon": "inv_misc_horn_03",
-   "preId": null,
-   "nid": "h8"
+   "nid": "healing_light"
   },
   {
    "tree": 0,
    "name": "敬畏",
-   "max": 3,
-   "row": 2,
+   "max": 2,
+   "row": 1,
    "col": 1,
    "icon": "spell_holy_divineillumination",
    "preId": null,
-   "nid": "h9"
+   "nid": "reverence"
+  },
+  {
+   "tree": 0,
+   "name": "强化圣印",
+   "max": 5,
+   "row": 1,
+   "col": 2,
+   "icon": "ability_thunderbolt",
+   "preId": null,
+   "nid": "improved_seals"
   },
   {
    "tree": 0,
    "name": "净化之力",
    "max": 2,
-   "row": 2,
-   "col": 2,
+   "row": 1,
+   "col": 3,
    "icon": "spell_holy_purifyingpower",
    "preId": null,
-   "nid": "h10"
+   "nid": "purifying_power"
+  },
+  {
+   "tree": 0,
+   "name": "神恩术",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "icon": "spell_holy_heal",
+   "preId": null,
+   "nid": "divine_favor"
+  },
+  {
+   "tree": 0,
+   "name": "启发",
+   "max": 5,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_holy_greaterheal",
+   "preId": null,
+   "nid": "illumination"
+  },
+  {
+   "tree": 0,
+   "name": "神圣导能",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "icon": "spell_holy_devineaegis",
+   "preId": null,
+   "nid": "holy_conduit"
+  },
+  {
+   "tree": 0,
+   "name": "神圣精准",
+   "max": 2,
+   "row": 3,
+   "col": 0,
+   "icon": "spell_holy_healingfocus",
+   "preId": null,
+   "nid": "divine_precision"
   },
   {
    "tree": 0,
    "name": "圣光灌注",
    "max": 2,
    "row": 3,
-   "col": 0,
+   "col": 1,
    "icon": "ability_paladin_infusionoflight",
    "preId": null,
-   "nid": "h11"
+   "nid": "infusion_of_light"
   },
   {
    "tree": 0,
-   "name": "启发",
-   "max": 5,
-   "row": 3,
-   "col": 1,
-   "icon": "spell_holy_greaterheal",
-   "preId": "h9",
-   "nid": "h12"
-  },
-  {
-   "tree": 0,
-   "name": "神恩术",
+   "name": "圣光誓约",
    "max": 1,
    "row": 3,
    "col": 2,
-   "icon": "spell_holy_heal",
+   "icon": "spell_holy_greaterblessingoflight",
    "preId": null,
-   "nid": "h13"
+   "nid": "oath_of_light"
   },
   {
    "tree": 0,
-   "name": "神圣精准",
-   "max": 3,
+   "name": "奉献之地",
+   "max": 2,
    "row": 4,
    "col": 0,
-   "icon": "spell_holy_healingfocus",
-   "preId": "h15",
-   "nid": "h14"
+   "icon": "spell_holy_innerfire",
+   "preId": null,
+   "nid": "consecrated_ground"
   },
   {
    "tree": 0,
@@ -138,17 +138,17 @@
    "col": 1,
    "icon": "spell_holy_searinglight",
    "preId": null,
-   "nid": "h15"
+   "nid": "holy_shock"
   },
   {
    "tree": 0,
-   "name": "奉献之地",
+   "name": "无垠圣光",
    "max": 2,
    "row": 4,
    "col": 2,
-   "icon": "spell_holy_innerfire",
+   "icon": "ability_paladin_sacredcleansing",
    "preId": null,
-   "nid": "h16"
+   "nid": "boundless_light"
   },
   {
    "tree": 0,
@@ -158,7 +158,7 @@
    "col": 2,
    "icon": "spell_holy_power",
    "preId": null,
-   "nid": "h17"
+   "nid": "holy_power"
   },
   {
    "tree": 0,
@@ -167,18 +167,18 @@
    "row": 6,
    "col": 1,
    "icon": "ability_paladin_judgementofthepure",
-   "preId": "h15",
-   "nid": "h18"
+   "preId": null,
+   "nid": "light_s_vigil"
   },
   {
    "tree": 1,
-   "name": "坚韧",
+   "name": "神圣智慧",
    "max": 5,
    "row": 0,
    "col": 1,
-   "icon": "spell_holy_devotion",
+   "icon": "spell_nature_sleep",
    "preId": null,
-   "nid": "p1"
+   "nid": "divine_intellect"
   },
   {
    "tree": 1,
@@ -188,7 +188,7 @@
    "col": 2,
    "icon": "ability_defend",
    "preId": null,
-   "nid": "p2"
+   "nid": "redoubt"
   },
   {
    "tree": 1,
@@ -198,7 +198,7 @@
    "col": 0,
    "icon": "ability_rogue_ambush",
    "preId": null,
-   "nid": "p3"
+   "nid": "precision"
   },
   {
    "tree": 1,
@@ -208,57 +208,57 @@
    "col": 1,
    "icon": "spell_holy_sealofprotection",
    "preId": null,
-   "nid": "p4"
-  },
-  {
-   "tree": 1,
-   "name": "预知",
-   "max": 5,
-   "row": 1,
-   "col": 3,
-   "icon": "spell_magic_lesserinvisibilty",
-   "preId": null,
-   "nid": "p5"
-  },
-  {
-   "tree": 1,
-   "name": "强化愤怒圣印",
-   "max": 1,
-   "row": 2,
-   "col": 0,
-   "icon": "spell_holy_righteousnessaura",
-   "preId": null,
-   "nid": "p6"
-  },
-  {
-   "tree": 1,
-   "name": "强化正义之怒",
-   "max": 3,
-   "row": 2,
-   "col": 1,
-   "icon": "spell_holy_sealoffury",
-   "preId": null,
-   "nid": "p7"
-  },
-  {
-   "tree": 1,
-   "name": "盾牌专精",
-   "max": 3,
-   "row": 2,
-   "col": 2,
-   "icon": "inv_shield_06",
-   "preId": "p2",
-   "nid": "p8"
+   "nid": "guardian_s_favor"
   },
   {
    "tree": 1,
    "name": "神圣职责",
    "max": 2,
-   "row": 2,
+   "row": 1,
    "col": 3,
    "icon": "spell_holy_divineintervention",
    "preId": null,
-   "nid": "p9"
+   "nid": "sacred_duty"
+  },
+  {
+   "tree": 1,
+   "name": "圣殿骑士壁垒",
+   "max": 1,
+   "row": 2,
+   "col": 0,
+   "icon": "ability_paladin_shieldofthetemplar",
+   "preId": null,
+   "nid": "templar_s_bulwark"
+  },
+  {
+   "tree": 1,
+   "name": "强化制裁之锤",
+   "max": 3,
+   "row": 2,
+   "col": 1,
+   "icon": "spell_holy_sealofmight",
+   "preId": null,
+   "nid": "improved_hammer_of_justice"
+  },
+  {
+   "tree": 1,
+   "name": "盾牌专精",
+   "max": 2,
+   "row": 2,
+   "col": 2,
+   "icon": "inv_shield_06",
+   "preId": null,
+   "nid": "shield_specialization"
+  },
+  {
+   "tree": 1,
+   "name": "坚韧",
+   "max": 5,
+   "row": 2,
+   "col": 3,
+   "icon": "spell_holy_devotion",
+   "preId": null,
+   "nid": "toughness"
   },
   {
    "tree": 1,
@@ -267,38 +267,48 @@
    "row": 3,
    "col": 0,
    "icon": "ability_paladin_judgementred",
-   "preId": "p6",
-   "nid": "p10"
+   "preId": null,
+   "nid": "swift_judgement"
   },
   {
    "tree": 1,
-   "name": "单手武器专精",
+   "name": "强化正义之怒",
    "max": 3,
    "row": 3,
    "col": 1,
-   "icon": "inv_sword_20",
+   "icon": "spell_holy_sealoffury",
    "preId": null,
-   "nid": "p11"
+   "nid": "improved_righteous_fury"
   },
   {
    "tree": 1,
-   "name": "强化制裁之锤",
-   "max": 3,
+   "name": "预知",
+   "max": 5,
    "row": 3,
    "col": 2,
-   "icon": "spell_holy_sealofmight",
+   "icon": "spell_magic_lesserinvisibilty",
    "preId": null,
-   "nid": "p12"
+   "nid": "anticipation"
   },
   {
    "tree": 1,
-   "name": "圣殿骑士壁垒",
+   "name": "坚忍",
+   "max": 2,
+   "row": 4,
+   "col": 0,
+   "icon": "spell_holy_stoicism",
+   "preId": null,
+   "nid": "stoicism"
+  },
+  {
+   "tree": 1,
+   "name": "神圣之盾",
    "max": 1,
    "row": 4,
    "col": 1,
-   "icon": "ability_paladin_shieldofthetemplar",
+   "icon": "spell_holy_blessingofprotection",
    "preId": null,
-   "nid": "p13"
+   "nid": "holy_shield"
   },
   {
    "tree": 1,
@@ -308,27 +318,27 @@
    "col": 2,
    "icon": "spell_holy_blessingofstrength",
    "preId": null,
-   "nid": "p14"
+   "nid": "reckoning"
   },
   {
    "tree": 1,
    "name": "钢铁信条",
-   "max": 5,
+   "max": 3,
    "row": 5,
    "col": 2,
    "icon": "spell_holy_improvedresistanceauras",
    "preId": null,
-   "nid": "p15"
+   "nid": "iron_creed"
   },
   {
    "tree": 1,
-   "name": "神圣之盾",
+   "name": "以盾为誓",
    "max": 1,
    "row": 6,
    "col": 1,
-   "icon": "spell_holy_blessingofprotection",
-   "preId": "p13",
-   "nid": "p16"
+   "icon": "spell_holy_greaterblessingofsanctuary",
+   "preId": null,
+   "nid": "shieldsworn"
   },
   {
    "tree": 2,
@@ -338,7 +348,7 @@
    "col": 1,
    "icon": "ability_parry",
    "preId": null,
-   "nid": "r1"
+   "nid": "deflection"
   },
   {
    "tree": 2,
@@ -348,7 +358,7 @@
    "col": 2,
    "icon": "spell_frost_windwalkon",
    "preId": null,
-   "nid": "r2"
+   "nid": "benediction"
   },
   {
    "tree": 2,
@@ -358,27 +368,27 @@
    "col": 0,
    "icon": "spell_holy_righteousfury",
    "preId": null,
-   "nid": "r3"
-  },
-  {
-   "tree": 2,
-   "name": "神圣导能",
-   "max": 2,
-   "row": 1,
-   "col": 1,
-   "icon": "spell_holy_devineaegis",
-   "preId": null,
-   "nid": "r4"
+   "nid": "improved_judgement"
   },
   {
    "tree": 2,
    "name": "定罪",
-   "max": 5,
+   "max": 3,
    "row": 1,
-   "col": 2,
+   "col": 1,
    "icon": "spell_holy_retributionaura",
    "preId": null,
-   "nid": "r5"
+   "nid": "conviction"
+  },
+  {
+   "tree": 2,
+   "name": "神圣审判",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "ability_paladin_judgementblue",
+   "preId": null,
+   "nid": "sanctified_judgement"
   },
   {
    "tree": 2,
@@ -388,17 +398,17 @@
    "col": 0,
    "icon": "spell_holy_vindication",
    "preId": null,
-   "nid": "r6"
+   "nid": "vindication"
   },
   {
    "tree": 2,
-   "name": "神圣审判",
-   "max": 3,
+   "name": "不灭信仰",
+   "max": 2,
    "row": 2,
    "col": 1,
-   "icon": "ability_paladin_judgementblue",
+   "icon": "spell_holy_unyieldingfaith",
    "preId": null,
-   "nid": "r7"
+   "nid": "unyielding_faith"
   },
   {
    "tree": 2,
@@ -408,7 +418,7 @@
    "col": 2,
    "icon": "ability_warrior_innerrage",
    "preId": null,
-   "nid": "r8"
+   "nid": "seal_of_command"
   },
   {
    "tree": 2,
@@ -418,7 +428,7 @@
    "col": 3,
    "icon": "spell_holy_persuitofjustice",
    "preId": null,
-   "nid": "r9"
+   "nid": "pursuit_of_justice"
   },
   {
    "tree": 2,
@@ -428,77 +438,77 @@
    "col": 0,
    "icon": "spell_holy_eyeforaneye",
    "preId": null,
-   "nid": "r10"
+   "nid": "eye_for_an_eye"
   },
   {
    "tree": 2,
    "name": "神圣仲裁者",
    "max": 1,
    "row": 3,
-   "col": 2,
+   "col": 1,
    "icon": "inv_sword_08",
    "preId": null,
-   "nid": "r11"
+   "nid": "sacred_arbiter"
   },
   {
    "tree": 2,
    "name": "双手武器专精",
    "max": 3,
-   "row": 4,
-   "col": 0,
+   "row": 3,
+   "col": 3,
    "icon": "inv_hammer_04",
    "preId": null,
-   "nid": "r13"
+   "nid": "two_handed_weapon_specialization"
   },
   {
    "tree": 2,
-   "name": "复仇",
-   "max": 3,
+   "name": "邪恶超度",
+   "max": 2,
    "row": 4,
-   "col": 1,
-   "icon": "ability_racial_avatar",
-   "preId": "r7",
-   "nid": "r14"
+   "col": 0,
+   "icon": "spell_holy_turnundead",
+   "preId": null,
+   "nid": "turn_evil"
   },
   {
    "tree": 2,
    "name": "忏悔",
    "max": 1,
    "row": 4,
-   "col": 2,
+   "col": 1,
    "icon": "spell_holy_prayerofhealing",
    "preId": null,
-   "nid": "r15"
+   "nid": "repentance"
+  },
+  {
+   "tree": 2,
+   "name": "复仇",
+   "max": 3,
+   "row": 4,
+   "col": 2,
+   "icon": "ability_racial_avatar",
+   "preId": null,
+   "nid": "vengeance"
   },
   {
    "tree": 2,
    "name": "光芒勇士",
-   "max": 3,
-   "row": 5,
-   "col": 1,
-   "icon": "ability_paladin_enlightenedjudgements",
-   "preId": null,
-   "nid": "r16"
-  },
-  {
-   "tree": 2,
-   "name": "律法之器",
-   "max": 2,
+   "max": 5,
    "row": 5,
    "col": 2,
-   "icon": "spell_holy_divinepurpose",
+   "icon": "ability_paladin_enlightenedjudgements",
    "preId": null,
-   "nid": "r17"
+   "nid": "champion_of_the_light"
   },
   {
    "tree": 2,
-   "name": "圣光扭转",
+   "name": "解封之怒",
    "max": 1,
    "row": 6,
    "col": 1,
    "icon": "spell_holy_blessedresillience",
    "preId": null,
-   "nid": "r18"
+   "nid": "twist_of_light"
   }
  ]
 }

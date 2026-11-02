@@ -8,7 +8,7 @@
    "col": 1,
    "icon": "spell_nature_wispsplode",
    "preId": null,
-   "nid": "e1"
+   "nid": "convection"
   },
   {
    "tree": 0,
@@ -18,17 +18,17 @@
    "col": 2,
    "icon": "spell_nature_earthshock",
    "preId": null,
-   "nid": "e2"
+   "nid": "concussion"
   },
   {
    "tree": 0,
-   "name": "元素防护",
+   "name": "元素浩劫",
    "max": 3,
    "row": 1,
    "col": 0,
-   "icon": "spell_nature_spiritarmor",
+   "icon": "spell_fire_elementaldevastation",
    "preId": null,
-   "nid": "e3"
+   "nid": "elemental_devastation"
   },
   {
    "tree": 0,
@@ -38,57 +38,57 @@
    "col": 1,
    "icon": "spell_frost_frostward",
    "preId": null,
-   "nid": "e4"
+   "nid": "reverberation"
+  },
+  {
+   "tree": 0,
+   "name": "元素迅捷",
+   "max": 3,
+   "row": 1,
+   "col": 2,
+   "icon": "spell_lightning_lightningbolt01",
+   "preId": null,
+   "nid": "elemental_alacrity"
   },
   {
    "tree": 0,
    "name": "烈焰召唤",
    "max": 3,
    "row": 1,
-   "col": 2,
+   "col": 3,
    "icon": "spell_fire_immolation",
    "preId": null,
-   "nid": "e5"
-  },
-  {
-   "tree": 0,
-   "name": "元素浩劫",
-   "max": 3,
-   "row": 1,
-   "col": 3,
-   "icon": "spell_fire_elementaldevastation",
-   "preId": null,
-   "nid": "e6"
+   "nid": "call_of_flame"
   },
   {
    "tree": 0,
    "name": "元素集中",
    "max": 1,
    "row": 2,
-   "col": 1,
+   "col": 0,
    "icon": "spell_shadow_manaburn",
    "preId": null,
-   "nid": "e7"
+   "nid": "elemental_focus"
   },
   {
    "tree": 0,
-   "name": "元素迅捷",
+   "name": "元素防护",
    "max": 3,
    "row": 2,
-   "col": 2,
-   "icon": "spell_lightning_lightningbolt01",
-   "preId": "e11",
-   "nid": "e15"
+   "col": 1,
+   "icon": "spell_nature_spiritarmor",
+   "preId": null,
+   "nid": "elemental_warding"
   },
   {
    "tree": 0,
-   "name": "强化火焰新星",
+   "name": "火焰试炼",
    "max": 2,
    "row": 3,
    "col": 0,
    "icon": "spell_fire_sealoffire",
    "preId": null,
-   "nid": "e9"
+   "nid": "improved_fire_nova"
   },
   {
    "tree": 0,
@@ -98,17 +98,17 @@
    "col": 1,
    "icon": "spell_nature_eyeofthestorm",
    "preId": null,
-   "nid": "e10"
+   "nid": "eye_of_the_storm"
   },
   {
    "tree": 0,
-   "name": "雷霆召唤",
+   "name": "地缚",
    "max": 1,
    "row": 3,
-   "col": 2,
-   "icon": "spell_nature_callstorm",
-   "preId": "e8",
-   "nid": "e11"
+   "col": 3,
+   "icon": "spell_nature_stranglevines",
+   "preId": null,
+   "nid": "earthbound"
   },
   {
    "tree": 0,
@@ -118,27 +118,27 @@
    "col": 0,
    "icon": "spell_nature_stormreach",
    "preId": null,
-   "nid": "e12"
+   "nid": "elemental_reach"
+  },
+  {
+   "tree": 0,
+   "name": "熔岩爆裂",
+   "max": 1,
+   "row": 4,
+   "col": 1,
+   "icon": "spell_shaman_lavaburst",
+   "preId": null,
+   "nid": "lava_burst"
   },
   {
    "tree": 0,
    "name": "闪电超载",
    "max": 3,
    "row": 4,
-   "col": 1,
+   "col": 2,
    "icon": "spell_nature_lightningoverload",
    "preId": null,
-   "nid": "e13"
-  },
-  {
-   "tree": 0,
-   "name": "地缚",
-   "max": 1,
-   "row": 4,
-   "col": 3,
-   "icon": "spell_nature_stranglevines",
-   "preId": null,
-   "nid": "e14"
+   "nid": "lightning_overload"
   },
   {
    "tree": 0,
@@ -148,17 +148,17 @@
    "col": 2,
    "icon": "spell_fire_volcano",
    "preId": null,
-   "nid": "e8"
+   "nid": "elemental_fury"
   },
   {
    "tree": 0,
-   "name": "熔岩爆裂",
+   "name": "元素掌握",
    "max": 1,
    "row": 6,
    "col": 1,
-   "icon": "spell_shaman_lavaburst",
-   "preId": "e13",
-   "nid": "e16"
+   "icon": "spell_nature_wispheal",
+   "preId": null,
+   "nid": "elemental_mastery"
   },
   {
    "tree": 1,
@@ -168,7 +168,7 @@
    "col": 0,
    "icon": "spell_nature_stoneclawtotem",
    "preId": null,
-   "nid": "h1"
+   "nid": "earth_s_grasp"
   },
   {
    "tree": 1,
@@ -178,7 +178,7 @@
    "col": 1,
    "icon": "ability_thunderbolt",
    "preId": null,
-   "nid": "h2"
+   "nid": "thundering_strikes"
   },
   {
    "tree": 1,
@@ -188,7 +188,7 @@
    "col": 2,
    "icon": "spell_shadow_grimward",
    "preId": null,
-   "nid": "h3"
+   "nid": "ancestral_knowledge"
   },
   {
    "tree": 1,
@@ -198,7 +198,7 @@
    "col": 0,
    "icon": "spell_nature_stoneskintotem",
    "preId": null,
-   "nid": "h4"
+   "nid": "guardian_totems"
   },
   {
    "tree": 1,
@@ -208,7 +208,7 @@
    "col": 1,
    "icon": "spell_nature_mentalquickness",
    "preId": null,
-   "nid": "h5"
+   "nid": "mental_dexterity"
   },
   {
    "tree": 1,
@@ -218,7 +218,7 @@
    "col": 2,
    "icon": "spell_nature_spiritwolf",
    "preId": null,
-   "nid": "h6"
+   "nid": "improved_ghost_wolf"
   },
   {
    "tree": 1,
@@ -228,7 +228,7 @@
    "col": 3,
    "icon": "spell_nature_lightningshield",
    "preId": null,
-   "nid": "h7"
+   "nid": "improved_lightning_shield"
   },
   {
    "tree": 1,
@@ -238,7 +238,7 @@
    "col": 0,
    "icon": "spell_fire_flametounge",
    "preId": null,
-   "nid": "h8"
+   "nid": "elemental_weapons"
   },
   {
    "tree": 1,
@@ -248,7 +248,7 @@
    "col": 2,
    "icon": "spell_nature_elementalabsorption",
    "preId": null,
-   "nid": "h9"
+   "nid": "shamanistic_focus"
   },
   {
    "tree": 1,
@@ -258,7 +258,7 @@
    "col": 3,
    "icon": "spell_nature_mirrorimage",
    "preId": null,
-   "nid": "h10"
+   "nid": "anticipation"
   },
   {
    "tree": 1,
@@ -268,7 +268,7 @@
    "col": 0,
    "icon": "spell_holy_devotion",
    "preId": null,
-   "nid": "h11"
+   "nid": "toughness"
   },
   {
    "tree": 1,
@@ -277,8 +277,8 @@
    "row": 3,
    "col": 1,
    "icon": "ability_ghoulfrenzy",
-   "preId": "h5",
-   "nid": "h12"
+   "preId": null,
+   "nid": "flurry"
   },
   {
    "tree": 1,
@@ -288,7 +288,7 @@
    "col": 2,
    "icon": "ability_shaman_stormstrike",
    "preId": null,
-   "nid": "h13"
+   "nid": "stormstrike"
   },
   {
    "tree": 1,
@@ -298,7 +298,7 @@
    "col": 0,
    "icon": "ability_parry",
    "preId": null,
-   "nid": "h14"
+   "nid": "spirit_weapons"
   },
   {
    "tree": 1,
@@ -308,7 +308,7 @@
    "col": 1,
    "icon": "spell_nature_sleep",
    "preId": null,
-   "nid": "h15"
+   "nid": "mental_quickness"
   },
   {
    "tree": 1,
@@ -317,8 +317,8 @@
    "row": 4,
    "col": 2,
    "icon": "spell_shaman_improvedstormstrike",
-   "preId": "h13",
-   "nid": "h16"
+   "preId": null,
+   "nid": "improved_stormstrike"
   },
   {
    "tree": 1,
@@ -328,7 +328,7 @@
    "col": 2,
    "icon": "spell_shaman_maelstromweapon",
    "preId": null,
-   "nid": "h17"
+   "nid": "maelstrom_weapon"
   },
   {
    "tree": 1,
@@ -337,8 +337,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_bloodlust",
-   "preId": "h15",
-   "nid": "h18"
+   "preId": null,
+   "nid": "rage_of_the_farseer"
   },
   {
    "tree": 2,
@@ -348,17 +348,17 @@
    "col": 1,
    "icon": "spell_nature_magicimmunity",
    "preId": null,
-   "nid": "t2_0"
+   "nid": "improved_healing_wave"
   },
   {
    "tree": 2,
-   "name": "图腾集中",
+   "name": "潮汐集中",
    "max": 5,
    "row": 0,
    "col": 2,
-   "icon": "spell_nature_moonglow",
+   "icon": "spell_frost_manarecharge",
    "preId": null,
-   "nid": "r9"
+   "nid": "tidal_focus"
   },
   {
    "tree": 2,
@@ -368,7 +368,7 @@
    "col": 0,
    "icon": "spell_nature_sleep",
    "preId": null,
-   "nid": "r2"
+   "nid": "mindfulness"
   },
   {
    "tree": 2,
@@ -378,17 +378,17 @@
    "col": 1,
    "icon": "spell_nature_healingtouch",
    "preId": null,
-   "nid": "r3"
+   "nid": "natural_grace"
   },
   {
    "tree": 2,
-   "name": "潮汐集中",
+   "name": "图腾集中",
    "max": 5,
    "row": 1,
    "col": 2,
-   "icon": "spell_frost_manarecharge",
+   "icon": "spell_nature_moonglow",
    "preId": null,
-   "nid": "r4"
+   "nid": "totemic_focus"
   },
   {
    "tree": 2,
@@ -398,7 +398,7 @@
    "col": 3,
    "icon": "spell_nature_reincarnation",
    "preId": null,
-   "nid": "r5"
+   "nid": "improved_reincarnation"
   },
   {
    "tree": 2,
@@ -408,7 +408,7 @@
    "col": 0,
    "icon": "spell_nature_undyingstrength",
    "preId": null,
-   "nid": "r6"
+   "nid": "ancestral_healing"
   },
   {
    "tree": 2,
@@ -418,7 +418,7 @@
    "col": 1,
    "icon": "spell_nature_healingwavelesser",
    "preId": null,
-   "nid": "r7"
+   "nid": "healing_focus"
   },
   {
    "tree": 2,
@@ -428,7 +428,7 @@
    "col": 2,
    "icon": "ability_shaman_watershield",
    "preId": null,
-   "nid": "r8"
+   "nid": "water_shield"
   },
   {
    "tree": 2,
@@ -438,7 +438,7 @@
    "col": 0,
    "icon": "spell_nature_tranquility",
    "preId": null,
-   "nid": "r1"
+   "nid": "tidal_mastery"
   },
   {
    "tree": 2,
@@ -448,7 +448,7 @@
    "col": 1,
    "icon": "spell_nature_manaregentotem",
    "preId": null,
-   "nid": "r10"
+   "nid": "restorative_totems"
   },
   {
    "tree": 2,
@@ -458,7 +458,7 @@
    "col": 2,
    "icon": "spell_frost_summonwaterelemental",
    "preId": null,
-   "nid": "r11"
+   "nid": "mana_tide_totem"
   },
   {
    "tree": 2,
@@ -468,7 +468,7 @@
    "col": 1,
    "icon": "spell_nature_healingway",
    "preId": null,
-   "nid": "r12"
+   "nid": "healing_way"
   },
   {
    "tree": 2,
@@ -478,7 +478,7 @@
    "col": 2,
    "icon": "spell_nature_ravenform",
    "preId": null,
-   "nid": "r13"
+   "nid": "nature_s_swiftness"
   },
   {
    "tree": 2,
@@ -488,7 +488,7 @@
    "col": 2,
    "icon": "spell_frost_wizardmark",
    "preId": null,
-   "nid": "r14"
+   "nid": "purification"
   },
   {
    "tree": 2,
@@ -497,8 +497,8 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_riptide",
-   "preId": "r12",
-   "nid": "r15"
+   "preId": null,
+   "nid": "riptide"
   }
  ]
 }

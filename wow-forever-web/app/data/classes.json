@@ -41,8 +41,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 50,
-   "nameVerified": 50,
+   "talentCount": 51,
+   "nameVerified": 47,
    "iconKey": "class_paladin",
    "provenance": [
     {
@@ -101,8 +101,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 53,
-   "nameVerified": 53,
+   "talentCount": 52,
+   "nameVerified": 51,
    "iconKey": "class_priest",
    "provenance": [
     {
@@ -141,7 +141,7 @@
    "structureStatus": "names-only",
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 54,
+   "talentCount": 53,
    "nameVerified": 53,
    "iconKey": "class_mage",
    "provenance": [
@@ -162,7 +162,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 51,
+   "nameVerified": 52,
    "iconKey": "class_warlock",
    "provenance": [
     {
@@ -182,7 +182,7 @@
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 52,
-   "nameVerified": 50,
+   "nameVerified": 51,
    "iconKey": "class_druid",
    "provenance": [
     {

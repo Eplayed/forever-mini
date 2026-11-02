@@ -2,7 +2,7 @@
  "classId": "hunter",
  "classNameCn": "猎人",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -152,40 +152,9 @@
      "changeState": "modified"
     },
     {
-     "id": "hunter-0-寻路",
-     "tier": 1,
-     "column": 2,
-     "maxRanks": 2,
-     "nameCn": "寻路",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_mount_jungletiger",
-     "requires": [],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/hunter/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/hunter.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-hunter-beast-mastery-pathfinding",
-     "changeState": "moved"
-    },
-    {
      "id": "hunter-0-强化复活宠物",
      "tier": 1,
-     "column": 3,
+     "column": 2,
      "maxRanks": 2,
      "nameCn": "强化复活宠物",
      "nameAlt": null,
@@ -211,6 +180,37 @@
       }
      ],
      "upstreamId": "calc-hunter-beast-mastery-improved-revive-pet",
+     "changeState": "moved"
+    },
+    {
+     "id": "hunter-0-寻路",
+     "tier": 2,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "寻路",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_mount_jungletiger",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/hunter/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/hunter.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-hunter-beast-mastery-pathfinding",
      "changeState": "unchanged"
     },
     {
@@ -1633,7 +1633,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/hunter",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "classId": "warlock",
  "classNameCn": "术士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -121,11 +121,11 @@
      "changeState": "modified"
     },
     {
-     "id": "warlock-0-邪咒",
+     "id": "warlock-0-无情延伸",
      "tier": 1,
      "column": 0,
-     "maxRanks": 5,
-     "nameCn": "邪咒",
+     "maxRanks": 2,
+     "nameCn": "无情延伸",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -133,7 +133,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shadow_curseofachimonde",
+     "iconKey": "spell_shadow_callofbone",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -148,8 +148,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "warlock-malediction",
-     "changeState": "added"
+     "upstreamId": "calc-warlock-affliction-grim-reach",
+     "changeState": "moved"
     },
     {
      "id": "warlock-0-灵魂收割",
@@ -523,7 +523,7 @@
       }
      ],
      "upstreamId": "calc-warlock-affliction-shadow-mastery",
-     "changeState": "modified"
+     "changeState": "moved"
     },
     {
      "id": "warlock-0-折磨",
@@ -911,14 +911,14 @@
      "changeState": "moved"
     },
     {
-     "id": "warlock-1-灭杀",
+     "id": "warlock-1-屠戮",
      "tier": 3,
      "column": 0,
      "maxRanks": 2,
-     "nameCn": "灭杀",
-     "nameAlt": "屠戮",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameCn": "屠戮",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -939,7 +939,7 @@
       }
      ],
      "upstreamId": "warlock-decimation",
-     "posMismatch": true
+     "changeState": "added"
     },
     {
      "id": "warlock-1-恶魔支配",
@@ -1499,9 +1499,7 @@
       "nieyi"
      ],
      "iconKey": "spell_fire_fireball",
-     "requires": [
-      "warlock-2-暗影灼烧"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1697,7 +1695,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warlock",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

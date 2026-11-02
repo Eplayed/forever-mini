@@ -89,6 +89,30 @@ def tolerated(url):
     return url.split("/")[-1].replace(".jpg", "") in ICON_GAPS
 
 
+# 传输层失败的样子：不是页面内容错，是这台机器那一刻没把请求递出去（拒接、缓冲区耗尽、资源不足都算）。
+# 判据只放**传输层**：404/500/脚本报错一律不重试、照旧红。
+REFUSED_MARKS = ("ERR_CONNECTION_REFUSED", "ERR_CONNECTION_RESET", "ERR_CONNECTION_ABORTED",
+                 "ERR_TIMED_OUT", "ERR_SOCKET_NOT_CONNECTED", "ERR_NO_BUFFER_SPACE",
+                 "ERR_INSUFFICIENT_RESOURCES", "ERR_NETWORK_CHANGED", "ERR_ADDRESS_UNREACHABLE",
+                 "Cannot connect to the host")
+
+
+def watch_page(page, errs, failed):
+    """三类失败一起收：控制台报错、HTTP>=400、以及**连接层失败（带 URL）**。
+       连接层失败原来只有控制台那句没有 URL 的文本——2026-11-02 三条这样的红查了一下午，
+       报告里说不出到底是哪个资源连不上，就是因为没留 URL。"""
+    page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
+    page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
+            if r.status >= 400 and not tolerated(r.url) else None)
+    page.on("requestfailed",
+            lambda r, f=failed: f.append("%s｜%s" % ((r.failure or "?"), r.url[:150]))
+            if not any(m in str(r.failure or "") for m in ("ERR_ABORTED",)) else None)
+
+
+def got_refused(items):
+    return [x for x in items if any(m in str(x) for m in REFUSED_MARKS)]
+
+
 _APP_UP = None
 
 
@@ -2960,11 +2984,17 @@ def test_app(browser, base):
         ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
         page = ctx.new_page()
         errs, failed = [], []
-        page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
-        page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
-                if r.status >= 400 and not tolerated(r.url) else None)
+        watch_page(page, errs, failed)
         page.goto(APP_BASE + path, wait_until="networkidle")
         page.wait_for_timeout(2000)
+        if got_refused(errs + failed):
+            # 连接层拒接重开一次：这台机器整跑 13 分钟时本地静态服务偶尔接不住（11-02 三轮分别红在
+            # achievements、bis、首页+bis，换着路由走），而 `--only` 单跑同一组每次全绿。
+            # 只重这一种失败：404、脚本报错、断言不达标一律照旧红，重试不放宽判据。
+            errs.clear()
+            failed.clear()
+            page.goto(APP_BASE + path, wait_until="networkidle")
+            page.wait_for_timeout(2000)
         st = page.evaluate("""() => ({
           h1: document.querySelectorAll('#main h1').length,
           chars: (document.querySelector('#main') || document.body).innerText.length,
@@ -3197,12 +3227,18 @@ def test_app(browser, base):
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     errs, failed = [], []
-    page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
-    page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
-            if r.status >= 400 and not tolerated(r.url) else None)
+    watch_page(page, errs, failed)
     page.goto(APP_BASE + "/#/items", wait_until="networkidle")
     settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(2000)
+    if got_refused(errs + failed):
+        # 传输层失败重开一次（这一页一次拉 50 张行图标，是最容易撞上缓冲区耗尽/拒接的一页）。
+        # 判据一条不放宽：404、脚本报错、行数/坏图对不上，第二次照旧红。
+        errs.clear()
+        failed.clear()
+        page.goto(APP_BASE + "/#/items", wait_until="networkidle")
+        settle_motion(page)
+        page.wait_for_timeout(2000)
     st = page.evaluate("""() => ({
       rows: document.querySelectorAll('.itt tbody tr').length,
       chips: document.querySelectorAll('.kchip').length,
@@ -3616,12 +3652,16 @@ def test_site_wide(browser, base):
         for name, path in routes:
             page = ctx.new_page()
             errs, failed = [], []
-            page.on("console", lambda m, e=errs: e.append(m.text[:120]) if m.type == "error" else None)
-            page.on("response", lambda r, f=failed: f.append("%d %s" % (r.status, r.url.split("/")[-1]))
-                    if r.status >= 400 and not tolerated(r.url) else None)
+            watch_page(page, errs, failed)
             url = "%s/#%s%s" % (APP_BASE, path, route_q(path))
             page.goto(url, wait_until="networkidle")
             page.wait_for_timeout(1500)
+            if got_refused(errs + failed):
+                # 同 21 页那组一样：连接层拒接重开一次，别的失败一律照旧红（判据不放宽）。
+                errs.clear()
+                failed.clear()
+                page.goto(url, wait_until="networkidle")
+                page.wait_for_timeout(1500)
             st = page.evaluate(PAGE_PROBE)
             if "移动" not in mob:
                 # 不要求"控件数 > N"：系统规则、时间表、排行、溯源这几页本来就是纯读数页，
@@ -4015,8 +4055,16 @@ def test_motion(browser, base):
     check("out-in 生效：#main 下始终只有一个 .view（新旧页不重叠）",
           r["views"] == 1, "同屏 %s 个" % r["views"])
     settle_motion(page)
-    rest = page.evaluate("""() => { const v = document.querySelector('#main > .view');
-      return { cls: v.className, op: +getComputedStyle(v).opacity }; }""")
+    # 类名干净 ≠ 动效真落定：`.view` 自己带着 opacity 过渡，摘掉 page-enter 的那一下又起了一次
+    # "补到 1"的过渡。只拍一次会拍到中间帧——本机同一份产物三次拍到 0.994964 / 0.999999 / 0.986647，
+    # 判成"停在半透明"是假红；但写死一个容差（0.99）也照样会被 0.986 打穿。
+    # 所以按**值**判：盯到它自己走到 1 才算落定（最多两秒），盯不动的就是真卡在半透明，照旧红。
+    for _ in range(20):
+        rest = page.evaluate("""() => { const v = document.querySelector('#main > .view');
+          return { cls: v.className, op: +getComputedStyle(v).opacity }; }""")
+        if rest["op"] >= 1 or "page-" in rest["cls"]:
+            break
+        page.wait_for_timeout(100)
     check("过渡结束后 .view 恢复干净状态且看得见（不会停在半透明）",
           "page-" not in rest["cls"] and rest["op"] == 1, json.dumps(rest))
 

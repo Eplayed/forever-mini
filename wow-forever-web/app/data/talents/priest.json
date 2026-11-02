@@ -2,7 +2,7 @@
  "classId": "priest",
  "classNameCn": "牧师",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -183,11 +183,11 @@
      "changeState": "added"
     },
     {
-     "id": "priest-0-强化真言术盾",
+     "id": "priest-0-心灵之力",
      "tier": 1,
      "column": 2,
-     "maxRanks": 3,
-     "nameCn": "强化真言术：盾",
+     "maxRanks": 5,
+     "nameCn": "心灵之力",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -195,7 +195,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_powerwordshield",
+     "iconKey": "spell_nature_enchantarmor",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -210,7 +210,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-priest-discipline-improved-power-word-shield",
+     "upstreamId": "calc-priest-discipline-mental-strength",
      "changeState": "modified"
     },
     {
@@ -307,6 +307,37 @@
      "changeState": "modified"
     },
     {
+     "id": "priest-0-强化真言术盾",
+     "tier": 2,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "强化真言术：盾",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_powerwordshield",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/priest/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/priest.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-priest-discipline-improved-power-word-shield",
+     "changeState": "modified"
+    },
+    {
      "id": "priest-0-冥想",
      "tier": 2,
      "column": 3,
@@ -369,11 +400,11 @@
      "changeState": "modified"
     },
     {
-     "id": "priest-0-心灵之力",
+     "id": "priest-0-强化法力燃烧",
      "tier": 3,
      "column": 1,
-     "maxRanks": 5,
-     "nameCn": "心灵之力",
+     "maxRanks": 2,
+     "nameCn": "强化法力燃烧",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -381,7 +412,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_enchantarmor",
+     "iconKey": "spell_shadow_manaburn",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -396,7 +427,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-priest-discipline-mental-strength",
+     "upstreamId": "calc-priest-discipline-improved-mana-burn",
      "changeState": "modified"
     },
     {
@@ -431,37 +462,6 @@
      ],
      "upstreamId": "calc-priest-discipline-soul-warding",
      "changeState": "added"
-    },
-    {
-     "id": "priest-0-强化法力燃烧",
-     "tier": 3,
-     "column": 3,
-     "maxRanks": 2,
-     "nameCn": "强化法力燃烧",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_shadow_manaburn",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/priest/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/priest.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-priest-discipline-improved-mana-burn",
-     "changeState": "modified"
     },
     {
      "id": "priest-0-苦修",
@@ -946,21 +946,21 @@
      "changeState": "modified"
     },
     {
-     "id": "priest-1-联结治疗",
+     "id": "priest-1-圣光联结",
      "tier": 3,
      "column": 3,
      "maxRanks": 1,
-     "nameCn": "联结治疗",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameCn": "圣光联结",
+     "nameAlt": "神圣束缚",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_holy_blindingheal",
      "requires": [],
-     "level": "L1",
+     "level": "L2",
      "provenance": [
       {
        "type": "fan_db",
@@ -973,8 +973,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-priest-holy-binding-heal",
-     "changeState": "added"
+     "upstreamId": "calc-priest-holy-holy-binding",
+     "posMismatch": true
     },
     {
      "id": "priest-1-圣光连祷",
@@ -1238,11 +1238,11 @@
      "changeState": "modified"
     },
     {
-     "id": "priest-2-暗影亲和",
+     "id": "priest-2-强化心灵震爆",
      "tier": 1,
      "column": 0,
-     "maxRanks": 3,
-     "nameCn": "暗影亲和",
+     "maxRanks": 5,
+     "nameCn": "强化心灵震爆",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1250,7 +1250,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shadow_shadowward",
+     "iconKey": "spell_shadow_unholyfrenzy",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1265,8 +1265,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-priest-shadow-magic-shadow-affinity",
-     "changeState": "modified"
+     "upstreamId": "calc-priest-shadow-magic-improved-mind-blast",
+     "changeState": "moved"
     },
     {
      "id": "priest-2-强化暗言术痛",
@@ -1329,37 +1329,6 @@
      ],
      "upstreamId": "calc-priest-shadow-magic-shadow-reach",
      "changeState": "modified"
-    },
-    {
-     "id": "priest-2-强化心灵震爆",
-     "tier": 2,
-     "column": 0,
-     "maxRanks": 5,
-     "nameCn": "强化心灵震爆",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_shadow_unholyfrenzy",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/priest/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/priest.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-priest-shadow-magic-improved-mind-blast",
-     "changeState": "moved"
     },
     {
      "id": "priest-2-强化心灵尖啸",
@@ -1459,11 +1428,11 @@
      "changeState": "added"
     },
     {
-     "id": "priest-2-强化渐隐术",
+     "id": "priest-2-黑暗启发",
      "tier": 3,
      "column": 0,
-     "maxRanks": 2,
-     "nameCn": "强化渐隐术",
+     "maxRanks": 5,
+     "nameCn": "黑暗启发",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1471,7 +1440,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_magic_lesserinvisibilty",
+     "iconKey": "spell_warlock_demonsoul",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1486,8 +1455,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-priest-shadow-magic-improved-fade",
-     "changeState": "moved"
+     "upstreamId": "calc-priest-shadow-dark-inspiration",
+     "changeState": "added"
     },
     {
      "id": "priest-2-吸血鬼的拥抱",
@@ -1717,8 +1686,8 @@
   }
  ],
  "stats": {
-  "nodes": 53,
-  "nameConflict": 0,
+  "nodes": 52,
+  "nameConflict": 1,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1727,7 +1696,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/priest",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

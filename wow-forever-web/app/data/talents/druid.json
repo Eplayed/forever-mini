@@ -2,7 +2,7 @@
  "classId": "druid",
  "classNameCn": "德鲁伊",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -165,9 +165,7 @@
       "nieyi"
      ],
      "iconKey": "inv_staff_01",
-     "requires": [
-      "druid-0-自然的壮美"
-     ],
+     "requires": [],
      "level": "L1",
      "provenance": [
       {
@@ -572,11 +570,11 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-1-野性之心",
+     "id": "druid-1-激怒",
      "tier": 0,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "野性之心",
+     "nameCn": "激怒",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -584,7 +582,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_blessingofagility",
+     "iconKey": "spell_holy_blessingofstamina",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -599,7 +597,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-druid-feral-combat-heart-of-the-wild",
+     "upstreamId": "calc-druid-feral-combat-furor",
      "changeState": "modified"
     },
     {
@@ -851,75 +849,9 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-1-变形之力",
-     "tier": 3,
-     "column": 0,
-     "maxRanks": 1,
-     "nameCn": "变形之力",
-     "nameAlt": "变换之力",
-     "nameConflict": true,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_druid_displacement",
-     "requires": [
-      "druid-1-撕碎攻击"
-     ],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/druid.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "druid-shifting-power",
-     "posMismatch": true
-    },
-    {
-     "id": "druid-1-原始撕咬",
-     "tier": 3,
-     "column": 1,
-     "maxRanks": 1,
-     "nameCn": "原始撕咬",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_racial_cannibalize",
-     "requires": [
-      "druid-1-野蛮暴怒"
-     ],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/druid.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "druid-primal-bite",
-     "changeState": "added"
-    },
-    {
      "id": "druid-1-猛兽攻击",
      "tier": 3,
-     "column": 2,
+     "column": 0,
      "maxRanks": 3,
      "nameCn": "猛兽攻击",
      "nameAlt": null,
@@ -948,14 +880,78 @@
      "changeState": "modified"
     },
     {
+     "id": "druid-1-割伤",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "割伤",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_druid_lacerate",
+     "requires": [
+      "druid-1-野蛮暴怒"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-druid-feral-combat-lacerate",
+     "changeState": "added"
+    },
+    {
+     "id": "druid-1-掠食纪律",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "掠食纪律",
+     "nameAlt": "掠食者戒律",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_druid_savagery",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-druid-feral-combat-predatory-discipline",
+     "posMismatch": true
+    },
+    {
      "id": "druid-1-血性狂乱",
      "tier": 3,
      "column": 3,
      "maxRanks": 2,
      "nameCn": "血性狂乱",
-     "nameAlt": "血之狂暴",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -978,40 +974,7 @@
       }
      ],
      "upstreamId": "druid-blood-frenzy",
-     "posMismatch": true
-    },
-    {
-     "id": "druid-1-强化变形之力",
-     "tier": 4,
-     "column": 0,
-     "maxRanks": 2,
-     "nameCn": "强化变形之力",
-     "nameAlt": "强化变换之力",
-     "nameConflict": true,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_hunter_aspectmastery",
-     "requires": [
-      "druid-1-变形之力"
-     ],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/druid.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "druid-improved-shifting-power",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
      "id": "druid-1-兽群领袖",
@@ -1045,14 +1008,14 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-1-掠食本能",
+     "id": "druid-1-自然本能",
      "tier": 4,
      "column": 3,
      "maxRanks": 2,
-     "nameCn": "掠食本能",
-     "nameAlt": "自然本能",
-     "nameConflict": true,
-     "nameVerified": false,
+     "nameCn": "自然本能",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1073,43 +1036,12 @@
       }
      ],
      "upstreamId": "calc-druid-feral-combat-natural-instinct",
-     "posMismatch": true
-    },
-    {
-     "id": "druid-1-自然反射",
-     "tier": 5,
-     "column": 0,
-     "maxRanks": 5,
-     "nameCn": "自然反射",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_bullrush",
-     "requires": [],
-     "level": "L1",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/druid.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "druid-natural-reaction",
      "changeState": "added"
     },
     {
      "id": "druid-1-狂乱撕扯",
      "tier": 5,
-     "column": 2,
+     "column": 0,
      "maxRanks": 5,
      "nameCn": "狂乱撕扯",
      "nameAlt": null,
@@ -1140,11 +1072,11 @@
      "changeState": "added"
     },
     {
-     "id": "druid-1-狂暴",
-     "tier": 6,
-     "column": 1,
-     "maxRanks": 1,
-     "nameCn": "狂暴",
+     "id": "druid-1-自然反射",
+     "tier": 5,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "自然反射",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1152,7 +1084,38 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_druid_berserk",
+     "iconKey": "ability_bullrush",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "druid-natural-reaction",
+     "changeState": "added"
+    },
+    {
+     "id": "druid-1-原始撕咬",
+     "tier": 6,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "原始撕咬",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_racial_cannibalize",
      "requires": [
       "druid-1-兽群领袖"
      ],
@@ -1169,7 +1132,40 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "druid-berserk",
+     "upstreamId": "druid-primal-bite",
+     "changeState": "added"
+    },
+    {
+     "id": "druid-1-变形之力",
+     "tier": 6,
+     "column": 2,
+     "maxRanks": 1,
+     "nameCn": "变形之力",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_druid_displacement",
+     "requires": [
+      "druid-1-掠食纪律"
+     ],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/druid/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/druid.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "druid-shifting-power",
      "changeState": "added"
     }
    ],
@@ -1215,11 +1211,11 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-2-激怒",
+     "id": "druid-2-野性之心",
      "tier": 0,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "激怒",
+     "nameCn": "野性之心",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1227,7 +1223,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_blessingofstamina",
+     "iconKey": "spell_holy_blessingofagility",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -1242,7 +1238,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-druid-restoration-furor",
+     "upstreamId": "calc-druid-restoration-heart-of-the-wild",
      "changeState": "modified"
     },
     {
@@ -1277,11 +1273,11 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-2-微妙",
+     "id": "druid-2-反射",
      "tier": 1,
      "column": 1,
      "maxRanks": 3,
-     "nameCn": "微妙",
+     "nameCn": "反射",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1289,7 +1285,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_eyeoftheowl",
+     "iconKey": "spell_frost_windwalkon",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -1304,7 +1300,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "druid-subtlety",
+     "upstreamId": "calc-druid-restoration-reflection",
      "changeState": "modified"
     },
     {
@@ -1339,11 +1335,11 @@
      "changeState": "moved"
     },
     {
-     "id": "druid-2-反射",
+     "id": "druid-2-微妙",
      "tier": 2,
      "column": 1,
      "maxRanks": 3,
-     "nameCn": "反射",
+     "nameCn": "微妙",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1351,7 +1347,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_frost_windwalkon",
+     "iconKey": "ability_eyeoftheowl",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -1366,7 +1362,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-druid-restoration-reflection",
+     "upstreamId": "druid-subtlety",
      "changeState": "modified"
     },
     {
@@ -1401,11 +1397,11 @@
      "changeState": "modified"
     },
     {
-     "id": "druid-2-大地母亲的恩赐",
+     "id": "druid-2-绽放",
      "tier": 2,
      "column": 3,
      "maxRanks": 1,
-     "nameCn": "大地母亲的恩赐",
+     "nameCn": "绽放",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1413,9 +1409,9 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_spiritarmor",
+     "iconKey": "inv_misc_herb_felblossom",
      "requires": [],
-     "level": "L1",
+     "level": "L2",
      "provenance": [
       {
        "type": "fan_db",
@@ -1428,7 +1424,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-druid-restoration-gift-of-the-earthmother",
+     "upstreamId": "calc-druid-restoration-bloom",
      "changeState": "added"
     },
     {
@@ -1694,7 +1690,7 @@
  ],
  "stats": {
   "nodes": 52,
-  "nameConflict": 0,
+  "nameConflict": 1,
   "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
@@ -1703,7 +1699,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/druid",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

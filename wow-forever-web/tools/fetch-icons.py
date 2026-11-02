@@ -8,6 +8,7 @@
 用法：
     python3 tools/fetch-icons.py race_human_male class_warrior        # 取指定键
     python3 tools/fetch-icons.py --from-json app/data/world.json --field iconKey   # 递归收集该字段再补抓
+    python3 tools/fetch-icons.py --from-gaps                         # 按缺图登记重试官方 CDN（官方哪天补图就靠这条捞回）
     python3 tools/fetch-icons.py --list                              # 只报缺哪些，不下载
 """
 import argparse
@@ -63,6 +64,10 @@ def is_jpeg(b):
 
 def load_keys(args):
     keys = list(args.keys or [])
+    if args.from_gaps:
+        gap_path = os.path.join(ROOT, "app", "data", "icon-gaps.json")
+        if os.path.isfile(gap_path):
+            keys += list(json.load(io.open(gap_path, encoding="utf-8")).get("keys") or [])
     if args.from_json:
         path = args.from_json
         if not os.path.isabs(path):
@@ -96,6 +101,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("keys", nargs="*", help=u"图标文件名（不带 .jpg）")
     ap.add_argument("--from-json", help=u"从某个数据文件里递归收集字段值")
+    ap.add_argument("--from-gaps", action="store_true",
+                    help=u"待补清单取 app/data/icon-gaps.json（数据里引用、本地没有的那批键）")
     ap.add_argument("--field", default="iconKey")
     ap.add_argument("--list", action="store_true", help=u"只报告本地缺哪些键")
     args = ap.parse_args()
@@ -104,7 +111,12 @@ def main():
         os.makedirs(ICON_DIR)
     keys = load_keys(args)
     if not keys:
-        sys.exit(u"没有要处理的图标键")
+        # 空清单在 --from-gaps/--list 这一路是好消息（全站引用的键本地全有），不是失败；
+        # 只有"想下载却谁也没给"才算用错。
+        if args.from_gaps or args.list:
+            print(u"没有要处理的图标键：缺图登记为空，数据里引用的图标本地全有")
+            return
+        sys.exit(u"没有要处理的图标键（按缺图登记重试官方 CDN 请加 --from-gaps）")
 
     have = set(f[:-4] for f in os.listdir(ICON_DIR) if f.endswith(".jpg"))
     if args.list:

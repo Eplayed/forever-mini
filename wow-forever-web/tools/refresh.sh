@@ -13,6 +13,8 @@
 #   tools/refresh.sh legacy      # 传承：三棵专长树 + 65 项挑战（句子在落盘前就删）
 #   tools/refresh.sh bis         # 配装名单：38 套 + 同部位备选（要开真浏览器点阵营，见 case 里的注释）
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
+#   tools/refresh.sh quests      # 副本任务（wclbox 35 座 + wowhead/GI 补空座）
+#   tools/refresh.sh items       # 物品名录那一层（107 页列表；详情那一层 3.7 小时，单独手工跑）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
 #   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
@@ -125,8 +127,26 @@ case "${1:-}" in
     ;;
   icons)
     run python3 tools/build-icon-map.py
-    run python3 tools/fetch-icons.py --list
+    # 重试缺图登记里那批键：官方 CDN 哪天补了图就跑这一条捞回来，登记为空时它自己说"没有要处理的"
+    run python3 tools/fetch-icons.py --from-gaps
     run python3 tools/audit-assets.py
+    gate
+    ;;
+  quests)
+    # 副本任务那一层。站主 2026-10-13 定的优先级写在 merge 脚本里（wclbox 为准、缺的按 wowhead、
+    # 两座空座走 GI 转述），这里只负责把最粗的那份快照重抓一遍——
+    # 它曾是全站唯一"有抓取器却没有场景"的板块，所以一路发到 20 天没动（2026-11-02 体检报告第四节）。
+    run python3 tools/scrape-wclbox-quests.py
+    run python3 tools/merge-dungeon-quests.py
+    gate
+    ;;
+  items)
+    # 物品名录那一层（107 页 SSR 列表，约一分多钟）。srv 那一列取 addons 刚抽的 gi-item-existence，
+    # 所以这条要排在 addons 之后。
+    # 物品**详情**那一层不进每天：scrape-wclbox-items-detail.py 全量 21,077 件实测约 3.7 小时，
+    # 一天两次更新等不起；要重抓就单独手工跑那一条 + merge-items-detail。
+    run python3 tools/scrape-wclbox-items.py
+    run python3 tools/merge-items.py
     gate
     ;;
   addons)

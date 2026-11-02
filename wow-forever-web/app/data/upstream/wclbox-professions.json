@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/zhuanye",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-10-11",
+  "scrapedAt": "2026-11-02",
   "method": "tools/scrape-wclbox-prof.py --write",
   "took": "制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、采集点与可得物",
   "skipped": "冲级路线建议、BiS 结论、攻略文字、任何百分比",
@@ -412,7 +412,6 @@
    "inv_gizmo_pipe_02",
    "inv_gizmo_pipe_04",
    "inv_gizmo_rocketboot_01",
-   "inv_gizmo_rocketbootextreme",
    "inv_glove_cloth_raidmagehyjalc60_d_01",
    "inv_glove_cloth_raidpriesthyjalc60_d_01",
    "inv_glove_cloth_raidwarlockhyjalc60_d_01",
@@ -770,7 +769,6 @@
    "inv_misc_leatherscrap_10",
    "inv_misc_leatherscrap_11",
    "inv_misc_leatherscrap_13",
-   "inv_misc_magnet",
    "inv_misc_missilelarge_blue",
    "inv_misc_missilelarge_green",
    "inv_misc_missilelarge_purple",
@@ -857,7 +855,6 @@
    "inv_misc_powder_black",
    "inv_misc_powder_iron",
    "inv_misc_punchcards_white",
-   "inv_misc_questionmark",
    "inv_misc_quiver_01",
    "inv_misc_quiver_02",
    "inv_misc_quiver_07",
@@ -890,6 +887,7 @@
    "inv_ore_blackrock_ore",
    "inv_ore_copper_01",
    "inv_ore_elethium_nugget",
+   "inv_ore_gold_01",
    "inv_ore_iron_01",
    "inv_ore_manticytenugget",
    "inv_ore_mithril_01",
@@ -1277,7 +1275,6 @@
    "trade_alchemy_dpotion_a17",
    "trade_alchemy_dpotion_a22",
    "trade_alchemy_dpotion_a25",
-   "trade_alchemy_dpotion_c24",
    "trade_alchemy_dpotion_c26",
    "trade_alchemy_dpotion_d12",
    "trade_alchemy_dpotion_d13",
@@ -3267,21 +3264,21 @@
      "source": null
     },
     {
-     "itemId": "250952",
-     "nameCn": "致盲烟雾药水",
-     "iconKey": "trade_alchemy_dpotion_c24",
+     "itemId": "250947",
+     "nameCn": "强效修补药水",
+     "iconKey": "inv_potionf_3",
      "quality": 1,
      "isNew": true,
      "mats": [
       {
-       "nameCn": "幽灵菇",
-       "count": 3,
-       "iconKey": "inv_mushroom_08"
+       "nameCn": "阿尔萨斯之泪",
+       "count": 2,
+       "iconKey": "inv_misc_herb_13"
       },
       {
-       "nameCn": "墓地苔",
-       "count": 2,
-       "iconKey": "inv_misc_dust_02"
+       "nameCn": "紫莲花",
+       "count": 1,
+       "iconKey": "inv_misc_herb_17"
       },
       {
        "nameCn": "水晶瓶",
@@ -3327,37 +3324,6 @@
       "grey": 240
      },
      "source": null
-    },
-    {
-     "itemId": "250947",
-     "nameCn": "强效修补药水",
-     "iconKey": "inv_potionf_3",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "阿尔萨斯之泪",
-       "count": 2,
-       "iconKey": "inv_misc_herb_13"
-      },
-      {
-       "nameCn": "紫莲花",
-       "count": 1,
-       "iconKey": "inv_misc_herb_17"
-      },
-      {
-       "nameCn": "水晶瓶",
-       "count": 1,
-       "iconKey": "inv_potion_86"
-      }
-     ],
-     "skill": {
-      "orange": 185,
-      "yellow": 185,
-      "green": 187,
-      "grey": 190
-     },
-     "source": "训练师"
     },
     {
      "itemId": "250935",
@@ -3547,7 +3513,7 @@
     },
     {
      "itemId": "250327",
-     "nameCn": "掠食感知饮剂",
+     "nameCn": "掠食感知药水",
      "iconKey": "trade_alchemy_dpotion_d12",
      "quality": 1,
      "isNew": true,
@@ -6536,7 +6502,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -6762,7 +6728,7 @@
     {
      "itemId": "3469",
      "nameCn": "铜质链甲战靴",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": "inv_boots_01",
      "quality": 2,
      "isNew": false,
      "mats": [
@@ -8378,7 +8344,7 @@
       "green": 85,
       "grey": 85
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250490",
@@ -8409,7 +8375,7 @@
       "green": 85,
       "grey": 85
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250491",
@@ -8440,7 +8406,7 @@
       "green": 85,
       "grey": 85
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250492",
@@ -8471,7 +8437,7 @@
       "green": 85,
       "grey": 85
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "2848",
@@ -9167,7 +9133,7 @@
       "green": 100,
       "grey": 100
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250494",
@@ -9198,7 +9164,7 @@
       "green": 100,
       "grey": 100
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250495",
@@ -9229,7 +9195,7 @@
       "green": 100,
       "grey": 100
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250496",
@@ -9260,7 +9226,7 @@
       "green": 100,
       "grey": 100
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250497",
@@ -9291,7 +9257,7 @@
       "green": 100,
       "grey": 100
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "6731",
@@ -10588,7 +10554,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250499",
@@ -10619,7 +10585,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250500",
@@ -10650,7 +10616,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250501",
@@ -10681,7 +10647,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "250502",
@@ -10712,7 +10678,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "3851",
@@ -15177,7 +15143,7 @@
       "green": 245,
       "grey": 255
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "12416",
@@ -21428,7 +21394,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -22769,7 +22735,7 @@
       "green": 305,
       "grey": 325
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "249470",
@@ -22800,7 +22766,7 @@
       "green": 305,
       "grey": 325
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "249473",
@@ -22831,7 +22797,7 @@
       "green": 305,
       "grey": 325
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "16207",
@@ -23195,7 +23161,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -30591,69 +30557,6 @@
       "grey": 340
      },
      "source": null
-    },
-    {
-     "itemId": "260828",
-     "nameCn": "安全型号氮气推进器",
-     "iconKey": "inv_gizmo_rocketbootextreme",
-     "quality": 2,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "安全型号管子",
-       "count": 2,
-       "iconKey": "inv_gizmo_hardenedadamantitetube"
-      }
-     ],
-     "skill": {
-      "orange": 300,
-      "yellow": 320,
-      "green": 330,
-      "grey": 340
-     },
-     "source": null
-    },
-    {
-     "itemId": "260829",
-     "nameCn": "简易投掷磁力位移器",
-     "iconKey": "inv_misc_magnet",
-     "quality": 2,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "简易投掷外壳",
-       "count": 1,
-       "iconKey": "inv_qiraj_carapaceoldgod"
-      }
-     ],
-     "skill": {
-      "orange": 300,
-      "yellow": 320,
-      "green": 330,
-      "grey": 340
-     },
-     "source": null
-    },
-    {
-     "itemId": "260830",
-     "nameCn": "安全型号传送",
-     "iconKey": "inv_misc_enggizmos_16",
-     "quality": 2,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "安全型号管子",
-       "count": 2,
-       "iconKey": "inv_gizmo_hardenedadamantitetube"
-      }
-     ],
-     "skill": {
-      "orange": 300,
-      "yellow": 320,
-      "green": 330,
-      "grey": 340
-     },
-     "source": null
     }
    ],
    "nodes": [],
@@ -30662,7 +30565,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -32642,7 +32545,7 @@
     },
     {
      "itemId": "2315",
-     "nameCn": "黑皮战靴",
+     "nameCn": "灰皮战靴",
      "iconKey": "inv_boots_05",
      "quality": 2,
      "isNew": false,
@@ -33075,7 +32978,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252492",
@@ -33106,7 +33009,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252435",
@@ -33137,7 +33040,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252434",
@@ -33168,7 +33071,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252491",
@@ -33199,7 +33102,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252490",
@@ -33230,7 +33133,7 @@
       "green": 80,
       "grey": 80
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252437",
@@ -34197,7 +34100,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252502",
@@ -34228,7 +34131,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252446",
@@ -34259,7 +34162,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252445",
@@ -34290,7 +34193,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252501",
@@ -34321,7 +34224,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252500",
@@ -34352,7 +34255,7 @@
       "green": 105,
       "grey": 105
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "4251",
@@ -35377,7 +35280,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252514",
@@ -35408,7 +35311,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252456",
@@ -35439,7 +35342,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252455",
@@ -35470,7 +35373,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252513",
@@ -35501,7 +35404,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "252512",
@@ -35532,7 +35435,7 @@
       "green": 130,
       "grey": 130
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "4255",
@@ -48476,7 +48379,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -55384,7 +55287,7 @@
     {
      "itemId": "10008",
      "nameCn": "白色强盗面罩",
-     "iconKey": "inv_misc_questionmark",
+     "iconKey": "inv_helmet_30",
      "quality": 2,
      "isNew": false,
      "mats": [
@@ -62884,7 +62787,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -62933,7 +62836,10 @@
       }
      ],
      "skill": {
-      "orange": 20
+      "orange": 20,
+      "yellow": 20,
+      "green": 22,
+      "grey": 25
      },
      "source": "训练师"
     },
@@ -63050,7 +62956,10 @@
       }
      ],
      "skill": {
-      "orange": 140
+      "orange": 140,
+      "yellow": 140,
+      "green": 142,
+      "grey": 145
      },
      "source": null
     },
@@ -63064,7 +62973,7 @@
       {
        "nameCn": "金矿石",
        "count": 1,
-       "iconKey": "inv_ore_copper_01"
+       "iconKey": "inv_ore_gold_01"
       }
      ],
      "skill": {
@@ -63214,7 +63123,10 @@
       }
      ],
      "skill": {
-      "orange": 300
+      "orange": 300,
+      "yellow": 300,
+      "green": 300,
+      "grey": 300
      },
      "source": null
     },
@@ -63338,7 +63250,7 @@
     },
     {
      "nameCn": "金矿石",
-     "iconKey": "inv_ore_copper_01",
+     "iconKey": "inv_ore_gold_01",
      "yields": [
       "金矿石",
       "被污染的硫酸盐"
@@ -63457,7 +63369,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -63942,7 +63854,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -64066,7 +63978,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -67178,7 +67090,7 @@
       "green": 300,
       "grey": 300
      },
-     "source": "训练师"
+     "source": null
     },
     {
      "itemId": "21023",
@@ -67223,7 +67135,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -67323,7 +67235,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -67372,7 +67284,10 @@
       }
      ],
      "skill": {
-      "orange": 20
+      "orange": 20,
+      "yellow": 20,
+      "green": 22,
+      "grey": 25
      },
      "source": "训练师"
     },
@@ -67655,7 +67570,10 @@
       }
      ],
      "skill": {
-      "orange": 140
+      "orange": 140,
+      "yellow": 140,
+      "green": 142,
+      "grey": 145
      },
      "source": null
     },
@@ -68050,34 +67968,6 @@
      "source": "训练师"
     },
     {
-     "itemId": "279951",
-     "nameCn": "瘟疫医生实验室",
-     "iconKey": "inv_10_alchemy_incenseholder_color1",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "普通木柴",
-       "count": 2,
-       "iconKey": "inv_tradeskillitem_01"
-      },
-      {
-       "nameCn": "强力抗毒药剂",
-       "count": 2,
-       "iconKey": "inv_misc_slime_01"
-      },
-      {
-       "nameCn": "厚符文布绷带",
-       "count": 5,
-       "iconKey": "inv_misc_bandage_12"
-      }
-     ],
-     "skill": {
-      "orange": 300
-     },
-     "source": null
-    },
-    {
      "itemId": "19440",
      "nameCn": "特效抗毒药剂",
      "iconKey": "inv_drink_14",
@@ -68118,6 +68008,37 @@
       "grey": 360
      },
      "source": null
+    },
+    {
+     "itemId": "279951",
+     "nameCn": "瘟疫医生实验室",
+     "iconKey": "inv_10_alchemy_incenseholder_color1",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "普通木柴",
+       "count": 2,
+       "iconKey": "inv_tradeskillitem_01"
+      },
+      {
+       "nameCn": "强力抗毒药剂",
+       "count": 2,
+       "iconKey": "inv_misc_slime_01"
+      },
+      {
+       "nameCn": "厚符文布绷带",
+       "count": 5,
+       "iconKey": "inv_misc_bandage_12"
+      }
+     ],
+     "skill": {
+      "orange": 300,
+      "yellow": 300,
+      "green": 300,
+      "grey": 300
+     },
+     "source": null
     }
    ],
    "nodes": [],
@@ -68126,7 +68047,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -68143,7 +68064,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-10-11"
+     "checkedAt": "2026-11-02"
     }
    ]
   }

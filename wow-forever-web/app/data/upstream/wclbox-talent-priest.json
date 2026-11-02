@@ -2,7 +2,7 @@
  "meta": {
   "classId": "priest",
   "source": "https://wowforever.wclbox.com/tianfu/priest",
-  "scrapedAt": "2026-10-12",
+  "scrapedAt": "2026-11-02",
   "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
  },
  "grids": [
@@ -30,7 +30,7 @@
      "y1": 0,
      "x2": 0,
      "y2": 0,
-     "d": "M135 100 V169",
+     "d": "M135 154 V169",
      "cls": "tf-link-shadow"
     },
     {
@@ -38,7 +38,7 @@
      "y1": 0,
      "x2": 0,
      "y2": 0,
-     "d": "M135 100 V169",
+     "d": "M135 154 V169",
      "cls": "tf-link-line"
     },
     {
@@ -122,13 +122,13 @@
      "icon": "spell_holy_divineillumination"
     },
     {
-     "id": "calc-priest-discipline-improved-power-word-shield",
-     "name": "强化真言术：盾",
-     "maxRanks": 3,
+     "id": "calc-priest-discipline-mental-strength",
+     "name": "心灵之力",
+     "maxRanks": 5,
      "row": 2,
      "col": 3,
      "change": "modified",
-     "icon": "spell_holy_powerwordshield"
+     "icon": "spell_nature_enchantarmor"
     },
     {
      "id": "calc-priest-discipline-martyrdom",
@@ -158,6 +158,15 @@
      "icon": "spell_frost_windwalkon"
     },
     {
+     "id": "calc-priest-discipline-improved-power-word-shield",
+     "name": "强化真言术：盾",
+     "maxRanks": 3,
+     "row": 3,
+     "col": 3,
+     "change": "modified",
+     "icon": "spell_holy_powerwordshield"
+    },
+    {
      "id": "calc-priest-discipline-meditation",
      "name": "冥想",
      "maxRanks": 3,
@@ -176,13 +185,13 @@
      "icon": "spell_holy_innerfire"
     },
     {
-     "id": "calc-priest-discipline-mental-strength",
-     "name": "心灵之力",
-     "maxRanks": 5,
+     "id": "calc-priest-discipline-improved-mana-burn",
+     "name": "强化法力燃烧",
+     "maxRanks": 2,
      "row": 4,
      "col": 2,
      "change": "modified",
-     "icon": "spell_nature_enchantarmor"
+     "icon": "spell_shadow_manaburn"
     },
     {
      "id": "calc-priest-discipline-soul-warding",
@@ -192,15 +201,6 @@
      "col": 3,
      "change": "added",
      "icon": "spell_holy_pureofheart"
-    },
-    {
-     "id": "calc-priest-discipline-improved-mana-burn",
-     "name": "强化法力燃烧",
-     "maxRanks": 2,
-     "row": 4,
-     "col": 4,
-     "change": "modified",
-     "icon": "spell_shadow_manaburn"
     },
     {
      "id": "calc-priest-discipline-penance",
@@ -394,8 +394,8 @@
      "icon": "spell_holy_searinglightpriest"
     },
     {
-     "id": "calc-priest-holy-binding-heal",
-     "name": "联结治疗",
+     "id": "calc-priest-holy-holy-binding",
+     "name": "神圣束缚",
      "maxRanks": 1,
      "row": 4,
      "col": 4,
@@ -547,13 +547,13 @@
      "icon": "spell_shadow_requiem"
     },
     {
-     "id": "calc-priest-shadow-magic-shadow-affinity",
-     "name": "暗影亲和",
-     "maxRanks": 3,
+     "id": "calc-priest-shadow-magic-improved-mind-blast",
+     "name": "强化心灵震爆",
+     "maxRanks": 5,
      "row": 2,
      "col": 1,
-     "change": "modified",
-     "icon": "spell_shadow_shadowward"
+     "change": "moved",
+     "icon": "spell_shadow_unholyfrenzy"
     },
     {
      "id": "calc-priest-shadow-magic-improved-shadow-word-pain",
@@ -572,15 +572,6 @@
      "col": 4,
      "change": "modified",
      "icon": "spell_shadow_chilltouch"
-    },
-    {
-     "id": "calc-priest-shadow-magic-improved-mind-blast",
-     "name": "强化心灵震爆",
-     "maxRanks": 5,
-     "row": 3,
-     "col": 1,
-     "change": "moved",
-     "icon": "spell_shadow_unholyfrenzy"
     },
     {
      "id": "calc-priest-shadow-magic-improved-psychic-scream",
@@ -610,13 +601,13 @@
      "icon": "spell_shadow_soulleech_2"
     },
     {
-     "id": "calc-priest-shadow-magic-improved-fade",
-     "name": "强化渐隐术",
-     "maxRanks": 2,
+     "id": "calc-priest-shadow-dark-inspiration",
+     "name": "黑暗启发",
+     "maxRanks": 5,
      "row": 4,
      "col": 1,
-     "change": "moved",
-     "icon": "spell_magic_lesserinvisibilty"
+     "change": "added",
+     "icon": "spell_warlock_demonsoul"
     },
     {
      "id": "calc-priest-shadow-magic-vampiric-embrace",
@@ -690,12 +681,12 @@
    "name": "圣光之力",
    "tag": "新增",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：你的惩击和苦修法术对受到神圣之火影响的目标造成的伤害提高10%。",
+   "effect": "等级 5：你的惩击和苦修法术对受到你的神圣之火或暗言术：痛影响的目标造成的伤害提高10%。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "你的惩击和苦修法术对受到神圣之火影响的目标造成的伤害提高2%。"
+     "text": "你的惩击和苦修法术对受到你的神圣之火或暗言术：痛影响的目标造成的伤害提高2%。"
     }
    ]
   },
@@ -732,12 +723,12 @@
    "name": "无声消退",
    "tag": "改动",
    "condition": "最高 3 级 · 第 2 层 · 需在戒律较低层投入 5 点",
-   "effect": "等级 3：使你的神圣法术产生的威胁值降低30%，并使你受到的昏迷、恐惧和沉默效果的持续时间缩短15%。",
+   "effect": "等级 3：使你的法术产生的威胁值降低30%，并使你受到的昏迷、恐惧和沉默效果的持续时间缩短15%。",
    "changeNote": "改动摘要：最高等级从5变为3。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的神圣法术产生的威胁值降低10%，并使你受到的昏迷、恐惧和沉默效果的持续时间缩短5%。"
+     "text": "使你的法术产生的威胁值降低10%，并使你受到的昏迷、恐惧和沉默效果的持续时间缩短5%。"
     }
    ]
   },
@@ -756,16 +747,16 @@
    ]
   },
   {
-   "id": "calc-priest-discipline-improved-power-word-shield",
-   "name": "强化真言术：盾",
+   "id": "calc-priest-discipline-mental-strength",
+   "name": "心灵之力",
    "tag": "改动",
-   "condition": "最高 3 级 · 第 2 层 · 需在戒律较低层投入 5 点",
-   "effect": "等级 3：使你的真言术：盾所吸收的伤害量提高20%。",
-   "changeNote": "改动摘要：数值调整：20%（经典旧世：15%）。",
+   "condition": "最高 5 级 · 第 2 层 · 需在戒律较低层投入 5 点",
+   "effect": "等级 5：使你的智力总值提高10%。",
+   "changeNote": "改动摘要：从第5层移到第2层。数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的真言术：盾所吸收的伤害量提高7%。"
+     "text": "使你的智力总值提高2%。"
     }
    ]
   },
@@ -802,12 +793,26 @@
    "name": "心灵专注",
    "tag": "改动",
    "condition": "最高 1 级 · 第 3 层 · 需在戒律较低层投入 10 点",
-   "effect": "等级 1：激活后，你的下一个法术消耗的法力值降低100%；如果它是可以产生爆击效果的非周期性法术，爆击几率还会提高25%。",
+   "effect": "等级 1：激活之后，你的下一个法术所消耗的法力值减少100%，造成爆击或极效治疗的几率提高25%（如果它是非周期性法术且有可能造成这些效果的话）。",
    "changeNote": "改动摘要：数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "激活后，你的下一个法术消耗的法力值降低100%；如果它是可以产生爆击效果的非周期性法术，爆击几率还会提高25%。"
+     "text": "激活之后，你的下一个法术所消耗的法力值减少100%，造成爆击或极效治疗的几率提高25%（如果它是非周期性法术且有可能造成这些效果的话）。"
+    }
+   ]
+  },
+  {
+   "id": "calc-priest-discipline-improved-power-word-shield",
+   "name": "强化真言术：盾",
+   "tag": "改动",
+   "condition": "最高 3 级 · 第 3 层 · 需在戒律较低层投入 10 点",
+   "effect": "等级 3：使你的真言术：盾所吸收的伤害量提高20%。",
+   "changeNote": "改动摘要：从第2层移到第3层。数值调整：20%（经典旧世：15%）。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "使你的真言术：盾所吸收的伤害量提高7%。"
     }
    ]
   },
@@ -840,16 +845,16 @@
    ]
   },
   {
-   "id": "calc-priest-discipline-mental-strength",
-   "name": "心灵之力",
+   "id": "calc-priest-discipline-improved-mana-burn",
+   "name": "强化法力燃烧",
    "tag": "改动",
-   "condition": "最高 5 级 · 第 4 层 · 需在戒律较低层投入 15 点",
-   "effect": "等级 5：使你的智力总值提高15%。",
-   "changeNote": "改动摘要：从第5层移到第4层。效果改写。",
+   "condition": "最高 2 级 · 第 4 层 · 需在戒律较低层投入 15 点",
+   "effect": "等级 2：使你的法力燃烧的施法时间缩短1.0秒。",
+   "changeNote": "改动摘要：从第4列移到第2列。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的智力总值提高3%。"
+     "text": "使你的法力燃烧的施法时间缩短0.5秒。"
     }
    ]
   },
@@ -864,20 +869,6 @@
     {
      "label": "无限 · 等级 1",
      "text": "使你的真言术：盾冷却时间缩短4秒，法力消耗降低15%。"
-    }
-   ]
-  },
-  {
-   "id": "calc-priest-discipline-improved-mana-burn",
-   "name": "强化法力燃烧",
-   "tag": "改动",
-   "condition": "最高 2 级 · 第 4 层 · 需在戒律较低层投入 15 点",
-   "effect": "等级 2：使你的法力燃烧的施法时间缩短1.0秒。",
-   "changeNote": "改动摘要：效果改写。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "使你的法力燃烧的施法时间缩短0.5秒。"
     }
    ]
   },
@@ -900,12 +891,12 @@
    "name": "新生希望",
    "tag": "新增",
    "condition": "最高 5 级 · 第 5 层 · 需在戒律较低层投入 20 点 · 前置：灵魂守护 1 点",
-   "effect": "等级 5：你对具有虚弱灵魂的目标施放的快速治疗、联结治疗、次级治疗术、治疗术、强效治疗术和苦修的爆击几率提高10%，并使目标身上虚弱灵魂的剩余持续时间缩短5秒。",
+   "effect": "等级 5：你的快速治疗、次级治疗术、治疗术、强效治疗术和苦修对具有虚弱灵魂的目标施放时，爆击几率提高10%，并使目标身上虚弱灵魂的剩余持续时间缩短5秒。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "你对具有虚弱灵魂的目标施放的快速治疗、联结治疗、次级治疗术、治疗术、强效治疗术和苦修的爆击几率提高2%，并使目标身上虚弱灵魂的剩余持续时间缩短1秒。"
+     "text": "你的快速治疗、次级治疗术、治疗术、强效治疗术和苦修对具有虚弱灵魂的目标施放时，爆击几率提高2%，并使目标身上虚弱灵魂的剩余持续时间缩短1秒。"
     }
    ]
   },
@@ -914,12 +905,12 @@
    "name": "神圣庇护",
    "tag": "新增",
    "condition": "最高 3 级 · 第 6 层 · 需在戒律较低层投入 25 点",
-   "effect": "等级 3：你的极效治疗会在目标身上生成一道保护性护盾，吸收相当于治疗量15%的伤害。持续12秒。",
+   "effect": "等级 3：你的非周期性极效治疗会在目标身上生成一道保护性护盾，吸收相当于治疗量15%的伤害。最多可吸收1200点伤害，持续12秒。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "你的极效治疗会在目标身上生成一道保护性护盾，吸收相当于治疗量5%的伤害。持续12秒。"
+     "text": "你的非周期性极效治疗会在目标身上生成一道保护性护盾，吸收相当于治疗量5%的伤害。最多可吸收1200点伤害，持续12秒。"
     }
    ]
   },
@@ -942,12 +933,12 @@
    "name": "暮光专注",
    "tag": "改动",
    "condition": "最高 3 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 3：使你在施放任何法术时有70%的几率避免因受到伤害而被打断。",
+   "effect": "等级 3：使你的法术有70%的几率在你受到伤害时不损失施法时间。",
    "changeNote": "改动摘要：经典旧世中名为治疗专注。最高等级从2变为3。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你在施放任何法术时有23%的几率避免因受到伤害而被打断。"
+     "text": "使你的法术有23%的几率在你受到伤害时不损失施法时间。"
     }
    ]
   },
@@ -1026,12 +1017,12 @@
    "name": "神恩回复",
    "tag": "改动",
    "condition": "最高 3 级 · 第 3 层 · 需在神圣较低层投入 10 点",
-   "effect": "等级 3：在遭受近战或远程爆击，或单次攻击受到超过最大生命值30%的伤害后，在6秒内恢复相当于所受伤害25%的生命值。刷新该效果时会保留剩余治疗量。",
+   "effect": "等级 3：在遭受近战或远程爆击，或单次受到的伤害超过最大生命值30%后，在6秒内恢复相当于所受伤害25%的生命值。刷新该效果时会保留剩余治疗量。",
    "changeNote": "改动摘要：效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "在遭受近战或远程爆击，或单次攻击受到超过最大生命值30%的伤害后，在6秒内恢复相当于所受伤害8%的生命值。刷新该效果时会保留剩余治疗量。"
+     "text": "在遭受近战或远程爆击，或单次受到的伤害超过最大生命值30%后，在6秒内恢复相当于所受伤害8%的生命值。刷新该效果时会保留剩余治疗量。"
     }
    ]
   },
@@ -1092,16 +1083,16 @@
    ]
   },
   {
-   "id": "calc-priest-holy-binding-heal",
-   "name": "联结治疗",
+   "id": "calc-priest-holy-holy-binding",
+   "name": "神圣束缚",
    "tag": "新增",
    "condition": "最高 1 级 · 第 4 层 · 需在神圣较低层投入 15 点",
-   "effect": "等级 1：为一个友方目标和施法者本身各恢复223到271点生命值。低威胁值的技能。",
+   "effect": "等级 1：每当你用快速治疗治疗自己以外的目标时，你自己也会恢复相当于治疗量50%的生命值。此治疗不产生威胁。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "为一个友方目标和施法者本身各恢复223到271点生命值。低威胁值的技能。"
+     "text": "每当你用快速治疗治疗自己以外的目标时，你自己也会恢复相当于治疗量50%的生命值。此治疗不产生威胁。"
     }
    ]
   },
@@ -1208,26 +1199,26 @@
    "name": "精神分流",
    "tag": "改动",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：击杀一个有威胁的目标，或受你的吸血鬼的拥抱影响的敌人死亡后，有100%的几率使你的精神提高100%，持续15秒。在此期间，施法时仍保持50%的法力回复。",
+   "effect": "等级 5：消灭能为你提供经验值或荣誉值的目标后，或受你的吸血鬼的拥抱影响的敌人死亡时，你有100%的几率使精神提高100%，持续15秒。在此期间，你在施法时仍可保持50%的法力恢复速度。",
    "changeNote": "改动摘要：从第2列移到第3列。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "击杀一个有威胁的目标，或受你的吸血鬼的拥抱影响的敌人死亡后，有20%的几率使你的精神提高100%，持续15秒。在此期间，施法时仍保持50%的法力回复。"
+     "text": "消灭能为你提供经验值或荣誉值的目标后，或受你的吸血鬼的拥抱影响的敌人死亡时，你有20%的几率使精神提高100%，持续15秒。在此期间，你在施法时仍可保持50%的法力恢复速度。"
     }
    ]
   },
   {
-   "id": "calc-priest-shadow-magic-shadow-affinity",
-   "name": "暗影亲和",
-   "tag": "改动",
-   "condition": "最高 3 级 · 第 2 层 · 需在暗影较低层投入 5 点",
-   "effect": "等级 3：使你的暗影法术造成的威胁值降低30%。",
-   "changeNote": "改动摘要：数值调整：30%（经典旧世：25%）。",
+   "id": "calc-priest-shadow-magic-improved-mind-blast",
+   "name": "强化心灵震爆",
+   "tag": "移动",
+   "condition": "最高 5 级 · 第 2 层 · 需在暗影较低层投入 5 点",
+   "effect": "等级 5：使你的心灵震爆的冷却时间减少2.5秒。",
+   "changeNote": "改动摘要：从第3层移到第2层。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的暗影法术造成的威胁值降低10%。"
+     "text": "使你的心灵震爆的冷却时间减少0.5秒。"
     }
    ]
   },
@@ -1256,20 +1247,6 @@
     {
      "label": "无限 · 等级 1",
      "text": "使你的暗影系伤害性法术的射程提高10%。"
-    }
-   ]
-  },
-  {
-   "id": "calc-priest-shadow-magic-improved-mind-blast",
-   "name": "强化心灵震爆",
-   "tag": "移动",
-   "condition": "最高 5 级 · 第 3 层 · 需在暗影较低层投入 10 点",
-   "effect": "等级 5：使你的心灵震爆的冷却时间减少2.5秒。",
-   "changeNote": "改动摘要：从第2列移到第1列。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "使你的心灵震爆的冷却时间减少0.5秒。"
     }
    ]
   },
@@ -1306,26 +1283,26 @@
    "name": "强化精神鞭笞",
    "tag": "新增",
    "condition": "最高 2 级 · 第 3 层 · 需在暗影较低层投入 10 点 · 前置：精神鞭笞 1 点",
-   "effect": "等级 2：你的精神鞭笞现在造成的伤害提高20%，射程提高10码，但会使目标的移动速度降低20%。",
+   "effect": "等级 2：精神鞭笞每次造成的伤害都比前一次提高20%。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "你的精神鞭笞现在造成的伤害提高10%，射程提高5码，但会使目标的移动速度降低35%。"
+     "text": "精神鞭笞每次造成的伤害都比前一次提高10%。"
     }
    ]
   },
   {
-   "id": "calc-priest-shadow-magic-improved-fade",
-   "name": "强化渐隐术",
-   "tag": "移动",
-   "condition": "最高 2 级 · 第 4 层 · 需在暗影较低层投入 15 点",
-   "effect": "等级 2：使你的渐隐术的冷却时间减少6秒。",
-   "changeNote": "改动摘要：从第2列移到第1列。",
+   "id": "calc-priest-shadow-dark-inspiration",
+   "name": "黑暗启发",
+   "tag": "新增",
+   "condition": "最高 5 级 · 第 4 层 · 需在暗影较低层投入 15 点",
+   "effect": "等级 5：你的心灵震爆和完整引导的精神鞭笞会触发黑暗启发，使你和小队成员的精神提高15%，持续10秒。",
+   "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的渐隐术的冷却时间减少3秒。"
+     "text": "你的心灵震爆和完整引导的精神鞭笞会触发黑暗启发，使你和小队成员的精神提高3%，持续10秒。"
     }
    ]
   },
@@ -1334,12 +1311,12 @@
    "name": "吸血鬼的拥抱",
    "tag": "改动",
    "condition": "最高 1 级 · 第 4 层 · 需在暗影较低层投入 15 点",
-   "effect": "等级 1：以暗影能量笼罩目标，持续30秒。在此期间你对其造成的暗影法术伤害，会按20%转化为对所有小队成员的治疗。",
-   "changeNote": "改动摘要：从第5层移到第4层。效果改写。",
+   "effect": "等级 1：暗影魔法的能量笼罩你的目标，使你对其造成的暗影伤害总量的20%转而治疗所有队友。效果持续30秒。",
+   "changeNote": "改动摘要：从第5层移到第4层。数值调整：30秒（经典旧世：1分钟）。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "以暗影能量笼罩目标，持续30秒。在此期间你对其造成的暗影法术伤害，会按20%转化为对所有小队成员的治疗。"
+     "text": "暗影魔法的能量笼罩你的目标，使你对其造成的暗影伤害总量的20%转而治疗所有队友。效果持续30秒。"
     }
    ]
   },
@@ -1348,12 +1325,12 @@
    "name": "暗影之波",
    "tag": "改动",
    "condition": "最高 3 级 · 第 4 层 · 需在暗影较低层投入 15 点",
-   "effect": "等级 3：你的暗影伤害法术有100%的几率使你造成的暗影伤害提高2%，持续15秒，最多叠加5次。",
+   "effect": "等级 3：你的暗影伤害法术有100%的几率使目标受到的来自你的暗影伤害提高2%，持续15秒，最多叠加5次。",
    "changeNote": "改动摘要：最高等级从5变为3。从第4列移到第3列。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "你的暗影伤害法术有33%的几率使你造成的暗影伤害提高2%，持续15秒，最多叠加5次。"
+     "text": "你的暗影伤害法术有33%的几率使目标受到的来自你的暗影伤害提高2%，持续15秒，最多叠加5次。"
     }
    ]
   },
@@ -1376,12 +1353,12 @@
    "name": "噬灵传染",
    "tag": "新增",
    "condition": "最高 2 级 · 第 5 层 · 需在暗影较低层投入 20 点",
-   "effect": "等级 2：使你的噬灵瘟疫的法力消耗降低50%。 身中噬灵瘟疫的目标死亡时，瘟疫会跳到10码内的一个敌人身上，持续剩余时间。",
+   "effect": "等级 2：使你的噬灵瘟疫的法力值消耗降低50%。 受到噬灵瘟疫影响的目标死亡时，瘟疫会传播给10码内的2名附近敌人，并保留剩余持续时间。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的噬灵瘟疫的法力消耗降低25%。 身中噬灵瘟疫的目标死亡时，瘟疫会跳到5码内的一个敌人身上，持续剩余时间。"
+     "text": "使你的噬灵瘟疫的法力值消耗降低25%。 受到噬灵瘟疫影响的目标死亡时，瘟疫会传播给5码内的2名附近敌人，并保留剩余持续时间。"
     }
    ]
   },

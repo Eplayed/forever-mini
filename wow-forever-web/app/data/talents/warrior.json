@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-10-12（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -636,11 +636,11 @@
      "changeState": "modified"
     },
     {
-     "id": "warrior-1-余怒",
+     "id": "warrior-1-余怒未消",
      "tier": 1,
      "column": 1,
      "maxRanks": 5,
-     "nameCn": "余怒",
+     "nameCn": "余怒未消",
      "nameAlt": null,
      "nameConflict": false,
      "nameVerified": true,
@@ -1087,9 +1087,7 @@
       "nieyi"
      ],
      "iconKey": "spell_nature_bloodlust",
-     "requires": [
-      "warrior-1-死亡之愿"
-     ],
+     "requires": [],
      "level": "L1",
      "provenance": [
       {
@@ -1317,9 +1315,7 @@
       "nieyi"
      ],
      "iconKey": "spell_holy_ashestoashes",
-     "requires": [
-      "warrior-2-强化血性狂暴"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1699,7 +1695,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-10-12"
+   "checkedAt": "2026-11-02"
   }
  ]
 }

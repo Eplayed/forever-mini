@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1792720578447/legacy.json",
-  "build": "r-1792720578447",
-  "clientBuild": "1.60.1.70532",
-  "upstreamUpdatedAt": "2026-10-22",
-  "fetchedAt": "2026-10-23",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1793441728044/legacy.json",
+  "build": "r-1793441728044",
+  "clientBuild": "1.60.1.70707",
+  "upstreamUpdatedAt": "2026-10-30",
+  "fetchedAt": "2026-11-02",
   "method": "tools/scrape-wclbox-legacy.py 取 _shuju/<发布号>/legacy.json，发布号现读",
   "textPolicy": "落盘前删掉的字段见 droppedFields；效果说明与整句文本一律不存仓库",
   "droppedFields": {
@@ -43,19 +43,19 @@
    {
     "id": "client_legacy",
     "type": "client_data",
-    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70532",
-    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70532"
+    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70707",
+    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70707"
    }
   ]
  },
  "rules": {
-  "point_per_challenge": 16,
+  "point_per_challenge": 1,
   "launch_spending_cap": 16,
-  "launch_earnable_total": 81
+  "launch_earnable_total": 65
  },
  "challengeMeta": {
-  "total": 81,
-  "build": "1.60.1.70532",
+  "total": 65,
+  "build": "1.60.1.70707",
   "unlock": "账号里第一个角色升到 25 级后开放。"
  },
  "trees": [
@@ -1264,7 +1264,7 @@
      "requirement": "参与《魔兽世界》：“无限”Beta测试即可获得此奖励。感谢你参与测试！",
      "sub": null,
      "icon": "inv_misc_gift_01",
-     "points": 16,
+     "points": 0,
      "group": null
     },
     {

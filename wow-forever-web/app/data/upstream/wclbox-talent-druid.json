@@ -2,7 +2,7 @@
  "meta": {
   "classId": "druid",
   "source": "https://wowforever.wclbox.com/tianfu/druid",
-  "scrapedAt": "2026-10-12",
+  "scrapedAt": "2026-11-02",
   "note": "渲染后 DOM 抓取：节点格子位置、改动标记、图标文件名、层级与前置文字、各级效果与经典旧世对照"
  },
  "grids": [
@@ -24,22 +24,6 @@
      "y2": 0,
      "d": "M0 0 L7 3.5 L0 7 L2 3.5 Z",
      "cls": "tf-arrowhead tf-arrowhead-active"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
-     "d": "M135 154 V61",
-     "cls": "tf-link-shadow"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
-     "d": "M135 154 V61",
-     "cls": "tf-link-line"
     },
     {
      "x1": 0,
@@ -246,22 +230,6 @@
      "y1": 0,
      "x2": 0,
      "y2": 0,
-     "d": "M27 154 V169",
-     "cls": "tf-link-shadow"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
-     "d": "M27 154 V169",
-     "cls": "tf-link-line"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
      "d": "M81 154 V169",
      "cls": "tf-link-shadow"
     },
@@ -294,7 +262,7 @@
      "y1": 0,
      "x2": 0,
      "y2": 0,
-     "d": "M27 208 V223",
+     "d": "M27 208 V277",
      "cls": "tf-link-shadow"
     },
     {
@@ -302,23 +270,7 @@
      "y1": 0,
      "x2": 0,
      "y2": 0,
-     "d": "M27 208 V223",
-     "cls": "tf-link-line"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
-     "d": "M135 208 V277",
-     "cls": "tf-link-shadow"
-    },
-    {
-     "x1": 0,
-     "y1": 0,
-     "x2": 0,
-     "y2": 0,
-     "d": "M135 208 V277",
+     "d": "M27 208 V277",
      "cls": "tf-link-line"
     },
     {
@@ -335,6 +287,22 @@
      "x2": 0,
      "y2": 0,
      "d": "M81 262 V331",
+     "cls": "tf-link-line"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V331",
+     "cls": "tf-link-shadow"
+    },
+    {
+     "x1": 0,
+     "y1": 0,
+     "x2": 0,
+     "y2": 0,
+     "d": "M135 208 V331",
      "cls": "tf-link-line"
     }
    ],
@@ -350,13 +318,13 @@
      "icon": "ability_hunter_pet_hyena"
     },
     {
-     "id": "calc-druid-feral-combat-heart-of-the-wild",
-     "name": "野性之心",
+     "id": "calc-druid-feral-combat-furor",
+     "name": "激怒",
      "maxRanks": 5,
      "row": 1,
      "col": 3,
      "change": "modified",
-     "icon": "spell_holy_blessingofagility"
+     "icon": "spell_holy_blessingofstamina"
     },
     {
      "id": "calc-druid-feral-combat-feral-swiftness",
@@ -431,49 +399,40 @@
      "icon": "inv_misc_monsterclaw_04"
     },
     {
-     "id": "druid-shifting-power",
-     "name": "变换之力",
-     "maxRanks": 1,
-     "row": 4,
-     "col": 1,
-     "change": "added",
-     "icon": "spell_druid_displacement"
-    },
-    {
-     "id": "druid-primal-bite",
-     "name": "原始撕咬",
-     "maxRanks": 1,
-     "row": 4,
-     "col": 2,
-     "change": "added",
-     "icon": "ability_racial_cannibalize"
-    },
-    {
      "id": "calc-druid-feral-combat-predatory-strikes",
      "name": "猛兽攻击",
      "maxRanks": 3,
      "row": 4,
-     "col": 3,
+     "col": 1,
      "change": "modified",
      "icon": "ability_hunter_pet_cat"
     },
     {
+     "id": "calc-druid-feral-combat-lacerate",
+     "name": "割伤",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 2,
+     "change": "added",
+     "icon": "ability_druid_lacerate"
+    },
+    {
+     "id": "calc-druid-feral-combat-predatory-discipline",
+     "name": "掠食者戒律",
+     "maxRanks": 1,
+     "row": 4,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_druid_savagery"
+    },
+    {
      "id": "druid-blood-frenzy",
-     "name": "血之狂暴",
+     "name": "血性狂乱",
      "maxRanks": 2,
      "row": 4,
      "col": 4,
      "change": "modified",
      "icon": "ability_ghoulfrenzy"
-    },
-    {
-     "id": "druid-improved-shifting-power",
-     "name": "强化变换之力",
-     "maxRanks": 2,
-     "row": 5,
-     "col": 1,
-     "change": "added",
-     "icon": "ability_hunter_aspectmastery"
     },
     {
      "id": "calc-druid-feral-combat-leader-of-the-pack",
@@ -494,31 +453,40 @@
      "icon": "ability_druid_predatoryinstincts"
     },
     {
-     "id": "druid-natural-reaction",
-     "name": "自然反射",
-     "maxRanks": 5,
-     "row": 6,
-     "col": 1,
-     "change": "added",
-     "icon": "ability_bullrush"
-    },
-    {
      "id": "calc-druid-feral-combat-rend-and-tear",
      "name": "狂乱撕扯",
      "maxRanks": 5,
      "row": 6,
-     "col": 3,
+     "col": 1,
      "change": "added",
      "icon": "ability_druid_primalagression"
     },
     {
-     "id": "druid-berserk",
-     "name": "狂暴",
+     "id": "druid-natural-reaction",
+     "name": "自然反射",
+     "maxRanks": 5,
+     "row": 6,
+     "col": 4,
+     "change": "added",
+     "icon": "ability_bullrush"
+    },
+    {
+     "id": "druid-primal-bite",
+     "name": "原始撕咬",
      "maxRanks": 1,
      "row": 7,
      "col": 2,
      "change": "added",
-     "icon": "ability_druid_berserk"
+     "icon": "ability_racial_cannibalize"
+    },
+    {
+     "id": "druid-shifting-power",
+     "name": "变形之力",
+     "maxRanks": 1,
+     "row": 7,
+     "col": 3,
+     "change": "added",
+     "icon": "spell_druid_displacement"
     }
    ]
   },
@@ -602,13 +570,13 @@
      "icon": "spell_nature_healingwavegreater"
     },
     {
-     "id": "calc-druid-restoration-furor",
-     "name": "激怒",
+     "id": "calc-druid-restoration-heart-of-the-wild",
+     "name": "野性之心",
      "maxRanks": 5,
      "row": 1,
      "col": 3,
      "change": "modified",
-     "icon": "spell_holy_blessingofstamina"
+     "icon": "spell_holy_blessingofagility"
     },
     {
      "id": "calc-druid-restoration-naturalist",
@@ -620,13 +588,13 @@
      "icon": "spell_nature_healingtouch"
     },
     {
-     "id": "druid-subtlety",
-     "name": "微妙",
+     "id": "calc-druid-restoration-reflection",
+     "name": "反射",
      "maxRanks": 3,
      "row": 2,
      "col": 2,
      "change": "modified",
-     "icon": "ability_eyeoftheowl"
+     "icon": "spell_frost_windwalkon"
     },
     {
      "id": "druid-natural-shapeshifter",
@@ -638,13 +606,13 @@
      "icon": "spell_nature_wispsplode"
     },
     {
-     "id": "calc-druid-restoration-reflection",
-     "name": "反射",
+     "id": "druid-subtlety",
+     "name": "微妙",
      "maxRanks": 3,
      "row": 3,
      "col": 2,
      "change": "modified",
-     "icon": "spell_frost_windwalkon"
+     "icon": "ability_eyeoftheowl"
     },
     {
      "id": "druid-gift-of-nature",
@@ -656,13 +624,13 @@
      "icon": "spell_nature_protectionformnature"
     },
     {
-     "id": "calc-druid-restoration-gift-of-the-earthmother",
-     "name": "大地母亲的恩赐",
+     "id": "calc-druid-restoration-bloom",
+     "name": "绽放",
      "maxRanks": 1,
      "row": 3,
      "col": 4,
      "change": "added",
-     "icon": "spell_nature_spiritarmor"
+     "icon": "inv_misc_herb_felblossom"
     },
     {
      "id": "calc-druid-restoration-tranquil-spirit",
@@ -759,12 +727,12 @@
    "name": "起源",
    "tag": "新增",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：使你的法术和技能造成的周期性伤害和治疗量提高5%。",
+   "effect": "等级 5：使你的法术和技能造成的周期性伤害和治疗量提高10%。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的法术和技能造成的周期性伤害和治疗量提高1%。"
+     "text": "使你的法术和技能造成的周期性伤害和治疗量提高2%。"
     }
    ]
   },
@@ -800,7 +768,7 @@
    "id": "druid-nature-s-majesty",
    "name": "自然的威严",
    "tag": "新增",
-   "condition": "最高 2 级 · 第 2 层 · 需在平衡较低层投入 5 点 · 前置：自然的壮美 1 点",
+   "condition": "最高 2 级 · 第 2 层 · 需在平衡较低层投入 5 点",
    "effect": "等级 2：使你的法术和近战攻击的爆击几率提高4%。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
@@ -955,12 +923,12 @@
    "name": "枭兽形态",
    "tag": "改动",
    "condition": "最高 1 级 · 第 7 层 · 需在平衡较低层投入 30 点",
-   "effect": "等级 1：变为枭兽形态，清晰预兆的触发几率提高100%，装备提供的护甲值提高360%，45码内所有小队成员的爆击几率提高3%（与兽群领袖不叠加）。同时免疫变形效果，但无法施放治疗法术。 变形时会解除施法者身上的变形和移动限制效果。",
+   "effect": "等级 1：变形为枭兽形态，使清晰预兆的触发几率提高100%，物品提供的护甲值提高360%，并使45码内所有小队或团队成员的爆击几率提高3%。同时使施法者免疫变形效果，并且无法使用治疗法术。 变形可解除施法者身上的变形术和移动限制效果。",
    "changeNote": "改动摘要：效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "变为枭兽形态，清晰预兆的触发几率提高100%，装备提供的护甲值提高360%，45码内所有小队成员的爆击几率提高3%（与兽群领袖不叠加）。同时免疫变形效果，但无法施放治疗法术。 变形时会解除施法者身上的变形和移动限制效果。"
+     "text": "变形为枭兽形态，使清晰预兆的触发几率提高100%，物品提供的护甲值提高360%，并使45码内所有小队或团队成员的爆击几率提高3%。同时使施法者免疫变形效果，并且无法使用治疗法术。 变形可解除施法者身上的变形术和移动限制效果。"
     }
    ]
   },
@@ -969,26 +937,26 @@
    "name": "凶暴",
    "tag": "改动",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：使你的槌击、原始撕咬、横扫、爪击和扫击消耗的怒气或能量降低5点。",
+   "effect": "等级 5：使你的槌击、原始撕咬、挥击、爪击和扫击技能消耗的怒气或能量减少5点。",
    "changeNote": "改动摘要：数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的槌击、原始撕咬、横扫、爪击和扫击消耗的怒气或能量降低1点。"
+     "text": "使你的槌击、原始撕咬、挥击、爪击和扫击技能消耗的怒气或能量减少1点。"
     }
    ]
   },
   {
-   "id": "calc-druid-feral-combat-heart-of-the-wild",
-   "name": "野性之心",
+   "id": "calc-druid-feral-combat-furor",
+   "name": "激怒",
    "tag": "改动",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：使你的智力提高10%。此外，在熊形态或巨熊形态下，耐力提高20%；在猎豹形态下，力量提高10%。",
-   "changeNote": "改动摘要：从第6层移到第1层。效果改写。",
+   "effect": "等级 5：使你有100%的几率在变身为熊形态或巨熊形态时获得10点怒气。变身为猎豹形态时，恢复上次处于猎豹形态时所拥有能量的100%，并根据你离开熊形态和巨熊形态的时长，按每秒10点额外恢复能量，总计最多恢复100点能量。",
+   "changeNote": "改动摘要：从恢复天赋树移到野性战斗天赋树。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的智力提高2%。此外，在熊形态或巨熊形态下，耐力提高4%；在猎豹形态下，力量提高2%。"
+     "text": "使你有20%的几率在变身为熊形态或巨熊形态时获得10点怒气。变身为猎豹形态时，恢复上次处于猎豹形态时所拥有能量的20%，并根据你离开熊形态和巨熊形态的时长，按每秒2点额外恢复能量，总计最多恢复20点能量。"
     }
    ]
   },
@@ -1105,40 +1073,12 @@
    ]
   },
   {
-   "id": "druid-shifting-power",
-   "name": "变换之力",
-   "tag": "新增",
-   "condition": "最高 1 级 · 第 4 层 · 需在野性战斗较低层投入 15 点 · 前置：撕碎攻击 3 点",
-   "effect": "等级 1：立即将法力值转化为40点能量。降低变形法术消耗的效果同样会降低变换之力的消耗。",
-   "changeNote": "改动摘要：无限新增的天赋。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "立即将法力值转化为40点能量。降低变形法术消耗的效果同样会降低变换之力的消耗。"
-    }
-   ]
-  },
-  {
-   "id": "druid-primal-bite",
-   "name": "原始撕咬",
-   "tag": "新增",
-   "condition": "最高 1 级 · 第 4 层 · 需在野性战斗较低层投入 15 点 · 前置：野蛮暴怒 2 点",
-   "effect": "等级 1：撕咬目标，造成100%的普通伤害外加26点伤害，并产生大量威胁值。",
-   "changeNote": "改动摘要：无限新增的天赋。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "撕咬目标，造成100%的普通伤害外加26点伤害，并产生大量威胁值。"
-    }
-   ]
-  },
-  {
    "id": "calc-druid-feral-combat-predatory-strikes",
    "name": "猛兽攻击",
    "tag": "改动",
    "condition": "最高 3 级 · 第 4 层 · 需在野性战斗较低层投入 15 点",
    "effect": "等级 3：使你在猎豹形态、熊形态和巨熊形态下的近战攻击强度提高，数值相当于你等级的150%。",
-   "changeNote": "改动摘要：从第2列移到第3列。数值不变，措辞调整。",
+   "changeNote": "改动摘要：从第2列移到第1列。数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
@@ -1147,8 +1087,36 @@
    ]
   },
   {
+   "id": "calc-druid-feral-combat-lacerate",
+   "name": "割伤",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在野性战斗较低层投入 15 点 · 前置：野蛮暴怒 2 点",
+   "effect": "等级 1：割伤敌方目标，使其在15秒内流血，共受到20点伤害，目标身上每有一层割伤，额外受到10%的武器伤害。产生大量威胁。此效果在同一目标身上最多叠加5次。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "割伤敌方目标，使其在15秒内流血，共受到20点伤害，目标身上每有一层割伤，额外受到10%的武器伤害。产生大量威胁。此效果在同一目标身上最多叠加5次。"
+    }
+   ]
+  },
+  {
+   "id": "calc-druid-feral-combat-predatory-discipline",
+   "name": "掠食者戒律",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 4 层 · 需在野性战斗较低层投入 15 点",
+   "effect": "等级 1：你的凶猛撕咬不再将额外能量转化为伤害，但仍会根据你多余的能量造成额外伤害。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "你的凶猛撕咬不再将额外能量转化为伤害，但仍会根据你多余的能量造成额外伤害。"
+    }
+   ]
+  },
+  {
    "id": "druid-blood-frenzy",
-   "name": "血之狂暴",
+   "name": "血性狂乱",
    "tag": "改动",
    "condition": "最高 2 级 · 第 4 层 · 需在野性战斗较低层投入 15 点 · 前置：锋利兽爪 2 点",
    "effect": "等级 2：使你在熊形态或巨熊形态下造成爆击时，有100%的几率额外获得5点怒气。此外，你的猎豹形态下可产生连击点数的技能的非周期性爆击有100%的几率额外增加一个连击点数。",
@@ -1161,30 +1129,16 @@
    ]
   },
   {
-   "id": "druid-improved-shifting-power",
-   "name": "强化变换之力",
-   "tag": "新增",
-   "condition": "最高 2 级 · 第 5 层 · 需在野性战斗较低层投入 20 点 · 前置：变换之力 1 点",
-   "effect": "等级 2：使你的变换之力的冷却时间缩短8秒。",
-   "changeNote": "改动摘要：无限新增的天赋。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "使你的变换之力的冷却时间缩短4秒。"
-    }
-   ]
-  },
-  {
    "id": "calc-druid-feral-combat-leader-of-the-pack",
    "name": "兽群领袖",
    "tag": "改动",
    "condition": "最高 1 级 · 第 5 层 · 需在野性战斗较低层投入 20 点",
-   "effect": "等级 1：处于猎豹、熊或巨熊形态时，兽群领袖使45码内所有小队成员的爆击几率提高3%。不可与枭兽光环共存。",
+   "effect": "等级 1：处于猎豹形态、熊形态或巨熊形态时，兽群领袖使45码内所有小队或团队成员的爆击几率提高3%。",
    "changeNote": "改动摘要：从第7层移到第5层。数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "处于猎豹、熊或巨熊形态时，兽群领袖使45码内所有小队成员的爆击几率提高3%。不可与枭兽光环共存。"
+     "text": "处于猎豹形态、熊形态或巨熊形态时，兽群领袖使45码内所有小队或团队成员的爆击几率提高3%。"
     }
    ]
   },
@@ -1193,26 +1147,12 @@
    "name": "自然本能",
    "tag": "新增",
    "condition": "最高 2 级 · 第 5 层 · 需在野性战斗较低层投入 20 点",
-   "effect": "等级 2：使你的近战技能的爆击伤害加成提高20%，并使你的法术治疗效果提高，数值相当于你智力的25%。",
+   "effect": "等级 2：近战技能的爆击伤害加成提高20%，并使你的法术治疗效果获得相当于智力25%的加成。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的近战技能的爆击伤害加成提高10%，并使你的法术治疗效果提高，数值相当于你智力的12%。"
-    }
-   ]
-  },
-  {
-   "id": "druid-natural-reaction",
-   "name": "自然反射",
-   "tag": "新增",
-   "condition": "最高 5 级 · 第 6 层 · 需在野性战斗较低层投入 25 点",
-   "effect": "等级 5：使你的躲闪几率提高5%，并且每次躲闪有100%的几率获得5点怒气。",
-   "changeNote": "改动摘要：无限新增的天赋。",
-   "ranks": [
-    {
-     "label": "无限 · 等级 1",
-     "text": "使你的躲闪几率提高1%，并且每次躲闪有20%的几率获得5点怒气。"
+     "text": "近战技能的爆击伤害加成提高10%，并使你的法术治疗效果获得相当于智力12%的加成。"
     }
    ]
   },
@@ -1231,16 +1171,44 @@
    ]
   },
   {
-   "id": "druid-berserk",
-   "name": "狂暴",
+   "id": "druid-natural-reaction",
+   "name": "自然反射",
    "tag": "新增",
-   "condition": "最高 1 级 · 第 7 层 · 需在野性战斗较低层投入 30 点 · 前置：兽群领袖 1 点",
-   "effect": "等级 1：需要猎豹形态、熊形态或巨熊形态 使你的原始撕咬最多攻击3个目标并且没有冷却时间，可获得连击点数的技能爆击几率提高100%。立即解除恐惧效果，并在效果持续期间免疫恐惧。持续15秒。",
+   "condition": "最高 5 级 · 第 6 层 · 需在野性战斗较低层投入 25 点",
+   "effect": "等级 5：使你的躲闪几率提高5%，并且每次躲闪有100%的几率获得5点怒气。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "需要猎豹形态、熊形态或巨熊形态 使你的原始撕咬最多攻击3个目标并且没有冷却时间，可获得连击点数的技能爆击几率提高100%。立即解除恐惧效果，并在效果持续期间免疫恐惧。持续15秒。"
+     "text": "使你的躲闪几率提高1%，并且每次躲闪有20%的几率获得5点怒气。"
+    }
+   ]
+  },
+  {
+   "id": "druid-primal-bite",
+   "name": "原始撕咬",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在野性战斗较低层投入 30 点 · 前置：兽群领袖 1 点",
+   "effect": "等级 1：撕咬目标，造成100%普通伤害外加42点伤害，并产生大量威胁值。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "撕咬目标，造成100%普通伤害外加42点伤害，并产生大量威胁值。"
+    }
+   ]
+  },
+  {
+   "id": "druid-shifting-power",
+   "name": "变形之力",
+   "tag": "新增",
+   "condition": "最高 1 级 · 第 7 层 · 需在野性战斗较低层投入 30 点 · 前置：掠食者戒律 1 点",
+   "effect": "等级 1：立即将$c点法力值转化为40点能量。降低变形法术消耗的效果也会降低变形之力的消耗。",
+   "changeNote": "改动摘要：无限新增的天赋。",
+   "ranks": [
+    {
+     "label": "无限 · 等级 1",
+     "text": "立即将$c点法力值转化为40点能量。降低变形法术消耗的效果也会降低变形之力的消耗。"
     }
    ]
   },
@@ -1249,26 +1217,26 @@
    "name": "自然集中",
    "tag": "改动",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：使你在施放奥术和自然法术时有70%的几率不会因受到伤害而被打断。",
+   "effect": "等级 5：使你的奥术和自然法术有70%的几率在你受到伤害时不损失施法时间。",
    "changeNote": "改动摘要：从第2层移到第1层。数值不变，措辞调整。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你在施放奥术和自然法术时有14%的几率不会因受到伤害而被打断。"
+     "text": "使你的奥术和自然法术有14%的几率在你受到伤害时不损失施法时间。"
     }
    ]
   },
   {
-   "id": "calc-druid-restoration-furor",
-   "name": "激怒",
+   "id": "calc-druid-restoration-heart-of-the-wild",
+   "name": "野性之心",
    "tag": "改动",
    "condition": "最高 5 级 · 第 1 层 · 无层级点数要求",
-   "effect": "等级 5：使你有100%的几率在进入熊形态和巨熊形态时获得10点怒气值。进入猎豹形态时，恢复你上次处于猎豹形态时所拥有能量的100%，此外不在猎豹形态的每一秒再恢复10点能量，最多100点能量。 处于熊形态和巨熊形态时，这部分能量会被清空，并且停止恢复。",
-   "changeNote": "改动摘要：效果改写。",
+   "effect": "等级 5：使你的智力提高10%。此外，在熊形态或巨熊形态下，耐力提高20%；在猎豹形态下，力量提高10%。",
+   "changeNote": "改动摘要：从野性战斗天赋树移到恢复天赋树。从第6层移到第1层。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你有20%的几率在进入熊形态和巨熊形态时获得10点怒气值。进入猎豹形态时，恢复你上次处于猎豹形态时所拥有能量的20%，此外不在猎豹形态的每一秒再恢复2点能量，最多20点能量。 处于熊形态和巨熊形态时，这部分能量会被清空，并且停止恢复。"
+     "text": "使你的智力提高2%。此外，在熊形态或巨熊形态下，耐力提高4%；在猎豹形态下，力量提高2%。"
     }
    ]
   },
@@ -1277,26 +1245,26 @@
    "name": "自然主义",
    "tag": "改动",
    "condition": "最高 5 级 · 第 2 层 · 需在恢复较低层投入 5 点",
-   "effect": "等级 5：使你的治疗之触的施法时间缩短0.5秒，并使你造成的所有伤害提高5%。",
+   "effect": "等级 5：使你的治疗之触和野性成长的施法时间缩短0.5秒，并使你造成的所有伤害提高10%。",
    "changeNote": "改动摘要：经典旧世中名为强化治疗之触。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的治疗之触的施法时间缩短0.1秒，并使你造成的所有伤害提高1%。"
+     "text": "使你的治疗之触和野性成长的施法时间缩短0.1秒，并使你造成的所有伤害提高2%。"
     }
    ]
   },
   {
-   "id": "druid-subtlety",
-   "name": "微妙",
+   "id": "calc-druid-restoration-reflection",
+   "name": "反射",
    "tag": "改动",
    "condition": "最高 3 级 · 第 2 层 · 需在恢复较低层投入 5 点",
-   "effect": "等级 3：使你的自然和奥术法术产生的威胁降低30%。",
-   "changeNote": "改动摘要：最高等级从5变为3。从第3层移到第2层。效果改写。",
+   "effect": "等级 3：使你在施法时仍保持50%的法力回复速度。",
+   "changeNote": "改动摘要：从第3层移到第2层。数值调整：50%（经典旧世：15%）。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的自然和奥术法术产生的威胁降低10%。"
+     "text": "使你在施法时仍保持17%的法力回复速度。"
     }
    ]
   },
@@ -1315,16 +1283,16 @@
    ]
   },
   {
-   "id": "calc-druid-restoration-reflection",
-   "name": "反射",
+   "id": "druid-subtlety",
+   "name": "微妙",
    "tag": "改动",
    "condition": "最高 3 级 · 第 3 层 · 需在恢复较低层投入 10 点",
-   "effect": "等级 3：使你在施法时仍保持50%的法力回复速度。",
-   "changeNote": "改动摘要：数值调整：50%（经典旧世：15%）。",
+   "effect": "等级 3：使你的自然和奥术法术产生的威胁降低30%。",
+   "changeNote": "改动摘要：最高等级从5变为3。从第4列移到第2列。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你在施法时仍保持17%的法力回复速度。"
+     "text": "使你的自然和奥术法术产生的威胁降低10%。"
     }
    ]
   },
@@ -1343,16 +1311,16 @@
    ]
   },
   {
-   "id": "calc-druid-restoration-gift-of-the-earthmother",
-   "name": "大地母亲的恩赐",
+   "id": "calc-druid-restoration-bloom",
+   "name": "绽放",
    "tag": "新增",
    "condition": "最高 1 级 · 第 3 层 · 需在恢复较低层投入 10 点",
-   "effect": "等级 1：使你的回春术、迅捷治愈和野性成长的公共冷却时间缩短0.5秒。",
+   "effect": "等级 1：你的回春术或愈合因持续时间结束而消失时，目标立即恢复相当于你精神值100%的生命值。如果其中一个法术因被驱散而消失，目标改为恢复相当于你精神值50%的生命值。",
    "changeNote": "改动摘要：无限新增的天赋。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "使你的回春术、迅捷治愈和野性成长的公共冷却时间缩短0.5秒。"
+     "text": "你的回春术或愈合因持续时间结束而消失时，目标立即恢复相当于你精神值100%的生命值。如果其中一个法术因被驱散而消失，目标改为恢复相当于你精神值50%的生命值。"
     }
    ]
   },
@@ -1389,12 +1357,12 @@
    "name": "迅捷治愈",
    "tag": "改动",
    "condition": "最高 1 级 · 第 4 层 · 需在恢复较低层投入 15 点",
-   "effect": "等级 1：立即为一个带有回春术或愈合效果的目标恢复生命值，数值等于其中一个法术完整持续时间的周期性治疗效果。",
+   "effect": "等级 1：立即为一个带有你的回春术或愈合效果的目标恢复生命值，数值等于被消耗法术完整持续时间的周期性治疗量。",
    "changeNote": "改动摘要：从第7层移到第4层。效果改写。",
    "ranks": [
     {
      "label": "无限 · 等级 1",
-     "text": "立即为一个带有回春术或愈合效果的目标恢复生命值，数值等于其中一个法术完整持续时间的周期性治疗效果。"
+     "text": "立即为一个带有你的回春术或愈合效果的目标恢复生命值，数值等于被消耗法术完整持续时间的周期性治疗量。"
     }
    ]
   },

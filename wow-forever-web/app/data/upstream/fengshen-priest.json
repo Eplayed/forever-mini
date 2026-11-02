@@ -47,8 +47,8 @@
   },
   {
    "tree": 0,
-   "name": "强化真言术：盾",
-   "max": 3,
+   "name": "心灵之力",
+   "max": 5,
    "row": 1,
    "col": 2,
    "preName": null
@@ -79,6 +79,14 @@
   },
   {
    "tree": 0,
+   "name": "强化真言术：盾",
+   "max": 3,
+   "row": 2,
+   "col": 2,
+   "preName": null
+  },
+  {
+   "tree": 0,
    "name": "冥想",
    "max": 3,
    "row": 2,
@@ -95,8 +103,8 @@
   },
   {
    "tree": 0,
-   "name": "心灵之力",
-   "max": 5,
+   "name": "强化法力燃烧",
+   "max": 2,
    "row": 3,
    "col": 1,
    "preName": null
@@ -108,14 +116,6 @@
    "row": 3,
    "col": 2,
    "preName": "强化真言术：盾"
-  },
-  {
-   "tree": 0,
-   "name": "强化法力燃烧",
-   "max": 2,
-   "row": 3,
-   "col": 3,
-   "preName": null
   },
   {
    "tree": 0,
@@ -239,7 +239,7 @@
   },
   {
    "tree": 1,
-   "name": "联结治疗",
+   "name": "神圣联结",
    "max": 1,
    "row": 3,
    "col": 3,
@@ -311,8 +311,8 @@
   },
   {
    "tree": 2,
-   "name": "暗影亲和",
-   "max": 3,
+   "name": "强化心灵震爆",
+   "max": 5,
    "row": 1,
    "col": 0,
    "preName": null
@@ -331,14 +331,6 @@
    "max": 2,
    "row": 1,
    "col": 3,
-   "preName": null
-  },
-  {
-   "tree": 2,
-   "name": "强化心灵震爆",
-   "max": 5,
-   "row": 2,
-   "col": 0,
    "preName": null
   },
   {
@@ -363,12 +355,12 @@
    "max": 2,
    "row": 2,
    "col": 3,
-   "preName": "暗影延伸"
+   "preName": "精神鞭笞"
   },
   {
    "tree": 2,
-   "name": "强化渐隐术",
-   "max": 2,
+   "name": "黑暗启发",
+   "max": 5,
    "row": 3,
    "col": 0,
    "preName": null
