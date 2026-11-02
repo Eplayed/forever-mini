@@ -1,6 +1,6 @@
 {
- "head": "8c4fd2b871e74a95ac7b0fddd269fe1fc3450794",
- "fingerprint": "a0e45f8b2ec8ceaa61a28788836e81984619ac7b1f177f83317d9aa96b0eebb4",
+ "head": "f1ec19396e3a976da8950e5144b0fe0c076679ec",
+ "fingerprint": "0d9f55f6aae72ebe83dd9e9c1562527e784f30beb18d7ecd475b224a86886e98",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 14993,
-   "mtimeNs": 1793583913446926400
+   "bytes": 16619,
+   "mtimeNs": 1793585317471546900
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 687480,
-   "mtimeNs": 1793583961375211200
+   "bytes": 694042,
+   "mtimeNs": 1793587028835318800
   },
   {
    "path": "for-mini/AGENTS.md",
