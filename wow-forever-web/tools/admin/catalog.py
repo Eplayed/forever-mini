@@ -20,9 +20,15 @@ TOPICS = (
     ("talents", "天赋节点", "talents/（九职业）", "talents", "upstream/fengshen-hunter.json", "fengshen + nieyi 双源", "https://wowclassicforever.info/", "talents"),
     ("achievements", "成就", "achievements.json", "achievements", "upstream/gi-achievements.json", "GI 插件 + 新手盒子逐字核", "https://wowforever.wclbox.com/chengjiu", None),
     ("bis", "配装名单", "bis.json", "sets", "upstream/wclbox-bis.json", "新手盒子 + 第二社区名单（L1）", "https://wowforever.wclbox.com/peizhuang", "bis"),
-    ("guide", "宏与插件目录", "guide.json", "macros+addons", None, "人工核作者、原帖和日期", None, None),
+    ("guide", "插件目录", "guide.json", "addons", None, "人工核作者、原帖和日期", None, None),
+    # 宏的真源是 macros.json（245 条，2026-10-30 起）；guide.json.macros 至今 0 条，
+    # 在这台机器上已经因为它报过 0，别再让控制台指回那个空字段。
+    ("macros", "宏命令", "macros.json", "macros", "upstream/gi-macros.json",
+     "GI 0.5.7 + XR 95.7 两份逐条对齐（免费分享、标作者与原帖日期、不分发插件本体；L1）", None, None),
     ("quests", "全域任务（未建库）", None, None, None, "候选：新手盒子任务目录；待核 quest ID", "https://wowforever.wclbox.com/renwu", None),
-    ("pets", "猎人宠物（未建库）", None, None, None, "候选：新手盒子猎人宠物；意译待核", "https://wowforever.wclbox.com/lieren-chongwu", None),
+    ("pets", "猎人宠物", "pets.json", "families+skills", "upstream/gi-pets.json",
+     "GI 插件 PetData.lua 转述客户端 DB2（家族 18 / 技能 22，整体 L1，未回客户端表逐条核）",
+     "https://wowforever.wclbox.com/lieren-chongwu", None),
     ("pvp", "PvP 军衔（未建库）", None, None, None, "候选：新手盒子军衔；规则待实测", "https://wowforever.wclbox.com/junxian", None),
 )
 
@@ -43,7 +49,10 @@ def catalog():
                 folder = os.path.join(DATA, "talents")
                 count = 0
                 for name in os.listdir(folder):
-                    if name.endswith(".json"):
+                    # 下划线开头的是演示/草稿件（_demo.json 有 42 个节点），
+                    # build-data.js 的卡口一律跳过它们；这里必须同一口径，
+                    # 否则维护页面显示 508、卡口报 466，两个数都不知该信谁
+                    if name.endswith(".json") and not name.startswith("_"):
                         with open(os.path.join(folder, name), encoding="utf-8") as f:
                             doc = json.load(f)
                         count += sum(len(tree.get("nodes") or []) for tree in doc.get("trees") or [])
@@ -94,6 +103,7 @@ def gaps():
         detail = read("items-detail.json").get("items", {})
         world = read("world.json")
         dungeons = read("dungeons.json")
+        macros = read("macros.json")
         guide = read("guide.json")
         ids = {str(row.get("id")) for row in items}
         detail_ids = set(detail) if isinstance(detail, dict) else {str(x.get("id")) for x in detail}
@@ -102,7 +112,7 @@ def gaps():
             {"label": "名录内缺物品详情", "value": len(ids - detail_ids), "topic": "item-detail"},
             {"label": "稀有缺坐标", "value": len(world.get("raresUnplaced") or []), "topic": "world"},
             {"label": "副本无首领名单", "value": sum(not row.get("bosses") for row in all_dungeons), "topic": "dungeons"},
-            {"label": "宏条目", "value": len(guide.get("macros") or []), "topic": "guide"},
+            {"label": "宏条目", "value": len(macros.get("macros") or []), "topic": "macros"},
             {"label": "插件条目", "value": len(guide.get("addons") or []), "topic": "guide"},
         ]
     except (OSError, ValueError, TypeError, KeyError) as exc:
@@ -120,7 +130,7 @@ def records(topic, query="", offset=0):
         collection = []
         folder = os.path.join(DATA, "talents")
         for name in sorted(os.listdir(folder)):
-            if name.endswith(".json"):
+            if name.endswith(".json") and not name.startswith("_"):   # 与上面同一口径，别让人浏览到演示节点
                 with open(os.path.join(folder, name), encoding="utf-8") as f:
                     doc = json.load(f)
                 for tree in doc.get("trees") or []:
@@ -134,7 +144,7 @@ def records(topic, query="", offset=0):
             collection = [dict(item, dungeon=slug) for slug, group in (doc.get("dungeons") or {}).items()
                           for item in group.get("quests") or []]
         elif topic == "guide":
-            collection = (doc.get("macros") or []) + (doc.get("addons") or [])
+            collection = doc.get("addons") or []      # 宏已另立 macros 板块（真源 macros.json）
         else:
             key = row[3].split("+")[0]
             collection = doc.get(key) or []

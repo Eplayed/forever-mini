@@ -1,6 +1,6 @@
 {
- "head": "f1ec19396e3a976da8950e5144b0fe0c076679ec",
- "fingerprint": "0d9f55f6aae72ebe83dd9e9c1562527e784f30beb18d7ecd475b224a86886e98",
+ "head": "88ba48d942077236f2aae14246d9f074f3ee39a1",
+ "fingerprint": "48b4c41bbd00666adcd0f0ee320378979350743528a3248bec81eef1e39b8d9f",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 694042,
-   "mtimeNs": 1793587028835318800
+   "bytes": 696455,
+   "mtimeNs": 1793587919624518100
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -1280,8 +1280,8 @@
   },
   {
    "path": "wow-forever-web/docs/DATA-每日更新-2026-11-02.md",
-   "bytes": 8808,
-   "mtimeNs": 1793585259721631300
+   "bytes": 12031,
+   "mtimeNs": 1793587891940498700
   },
   {
    "path": "wow-forever-web/docs/DATA-译名未命中归因-2026-10-28.md",
@@ -2185,13 +2185,13 @@
   },
   {
    "path": "wow-forever-web/tools/admin/catalog.py",
-   "bytes": 10022,
-   "mtimeNs": 1793510776623794000
+   "bytes": 10992,
+   "mtimeNs": 1793587834159217100
   },
   {
    "path": "wow-forever-web/tools/admin/jobs.py",
-   "bytes": 9763,
-   "mtimeNs": 1793510776624798200
+   "bytes": 10808,
+   "mtimeNs": 1793587635285009500
   },
   {
    "path": "wow-forever-web/tools/admin/server.py",

@@ -18,10 +18,21 @@ jobs = {}
 active = None
 
 
+def _ref(path):
+    """给页面看的相对路径。跨盘时 os.path.relpath 会抛 ValueError（这台仓库在 D:、
+       临时目录在 C:），2026-11-02 实测把 test_scan_items 直接崩掉；退化成绝对路径总比整条任务崩好。"""
+    try:
+        return os.path.relpath(path, ROOT)
+    except ValueError:
+        return os.path.abspath(path).replace("\\", "/")
+
+
 def _curl_json(url):
-    # Fixed host and fixed paths only. curl uses the system trust store on this Mac.
+    # Fixed host and fixed paths only. curl uses the system trust store.
+    # encoding 必须显式给 utf-8：这台 Windows 的默认码是 GBK，
+    # 上游 JSON 里的中文会让 text=True 的解码线程抛 UnicodeDecodeError（2026-11-02 实测）。
     p = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
-                        "--max-time", "30", url], capture_output=True, text=True, timeout=35)
+                        "--max-time", "30", url], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=35)
     if p.returncode:
         raise RuntimeError("上游请求失败：" + p.stderr[-300:])
     return json.loads(p.stdout)
@@ -78,7 +89,7 @@ def review_items():
                                                    ("quality", "quality"), ("ilvl", "itemLevel"))) or \
            (a.get("rlvl") or 0) != (b.get("requiredLevel") or 0):
             changed.append(key)
-    return {"message": "待审快照；未改成品数据", "path": os.path.relpath(path, ROOT),
+    return {"message": "待审快照；未改成品数据", "path": _ref(path),
             "fetchedAt": (doc.get("meta") or {}).get("fetchedAt"),
             "build": (doc.get("meta") or {}).get("foreverBuild"), "local": len(old), "remote": len(new),
             "added": len(added), "removed": len(removed), "changed": len(changed),
@@ -93,7 +104,7 @@ def dirty_data():
     改成跑前先把它提交成一次本地收口（现场保留、可回退、不 push），见 `commit_data`。
     """
     p = subprocess.run(["git", "status", "--porcelain", "--", "app/data", "app/img"],
-                       cwd=ROOT, capture_output=True, text=True, timeout=15)
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15)
     if p.returncode:
         raise RuntimeError("读不到工作树状态（git status 非 0），不猜它干净")
     return [line[3:].strip() for line in p.stdout.splitlines() if line.strip()]
@@ -109,16 +120,16 @@ def commit_data(message):
     if not files:
         return None
     add = subprocess.run(["git", "add", "-A", "--", "app/data", "app/img"],
-                         cwd=ROOT, capture_output=True, text=True, timeout=60)
+                         cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     if add.returncode:
         raise RuntimeError("自动收口 git add 失败，刷新链没启动：" + (add.stderr or add.stdout)[-400:])
     p = subprocess.run(["git", "commit", "-q", "-m", message, "--", "app/data", "app/img"],
-                       cwd=ROOT, capture_output=True, text=True, timeout=60)
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     if p.returncode:
         raise RuntimeError("自动收口 git commit 失败，刷新链没启动（不想在来历不明的工作树上跑）：" +
                            (p.stderr or p.stdout)[-400:])
     short = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT,
-                           capture_output=True, text=True, timeout=15).stdout.strip()
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15).stdout.strip()
     return (short, len(files))
 
 
@@ -132,14 +143,16 @@ def refresh(topic, progress):
         pre_commit = commit_data("chore(admin): 刷新链 %s 启动前自动收口（未推送）" % topic)
         progress("跑前先收口：%d 个未提交文件已提交成本地 %s" % (pre_commit[1], pre_commit[0]))
     progress("运行 tools/refresh.sh " + workflows[topic] + "；含构建门禁，可能需要数分钟")
+    # 超时从 900s 提到 2700s：这条链末尾含 site-check 全量，这台 Windows 实测单跑就要约 13 分钟
+    # （Mac 上 900s 够用，2026-11-02 迁到这台后差点把跑完一半的链当成卡死杀掉）。
     p = subprocess.run(["bash", "tools/refresh.sh", workflows[topic]], cwd=ROOT,
-                       capture_output=True, text=True, timeout=900)
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=2700)
     output = ((p.stdout or "") + (p.stderr or ""))[-64000:]
     if p.returncode:
         raise RuntimeError("刷新或门禁失败，已写文件仍在工作树里（没有自动提交），需检查后处理。\n" + output)
     post_commit = commit_data("chore(admin): 刷新链 %s 的产物（门禁已过，未推送、未发布）" % topic)
     changed = subprocess.run(["git", "show", "--stat", "--oneline", "-1", "--", "app/data", "app/img"],
-                             cwd=ROOT, capture_output=True, text=True, timeout=15).stdout[:6000]
+                             cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15).stdout[:6000]
     note = "刷新链通过；产物已提交到本地"
     if post_commit:
         note += "（%s，%d 个文件）" % (post_commit[0], post_commit[1])
