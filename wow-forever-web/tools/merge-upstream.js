@@ -71,7 +71,7 @@ CLS.forEach((c) => {
     if (!get('https://www.fengshen.cn/wuxian/talents/' + c + '/data.js', tmp)) { console.error('  ✗ fengshen ' + c); return; }
     const p = parseFengshen(fs.readFileSync(tmp, 'utf8'));
     fs.unlinkSync(tmp);
-    fs.writeFileSync(fFile, JSON.stringify(p, null, 1));
+    fs.writeFileSync(fFile, JSON.stringify(Object.assign({ meta: { scrapedAt: TODAY, via: 'live' } }, p), null, 1));
     fetched[c] = 'live';
   }
   if (USE_CACHE && fs.existsSync(nFile)) fetched[c] += '+cache';
@@ -81,7 +81,7 @@ CLS.forEach((c) => {
     const p = parseNieyi(fs.readFileSync(tmp, 'utf8'));
     fs.unlinkSync(tmp);
     if (!p) { console.error('  ✗ 解析 nieyi ' + c); return; }
-    fs.writeFileSync(nFile, JSON.stringify({ rows: p.rows.map((r) => ({ tree: r.tree, name: r.name, max: r.max, row: r.row, col: r.col, icon: r.icon, preId: r.preId, nid: r.nid })) }, null, 1));
+    fs.writeFileSync(nFile, JSON.stringify({ meta: { scrapedAt: TODAY, via: 'live' }, rows: p.rows.map((r) => ({ tree: r.tree, name: r.name, max: r.max, row: r.row, col: r.col, icon: r.icon, preId: r.preId, nid: r.nid })) }, null, 1));
     fetched[c] += '+live';
   }
   const F = JSON.parse(fs.readFileSync(fFile, 'utf8'));

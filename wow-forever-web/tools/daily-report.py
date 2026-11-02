@@ -110,20 +110,44 @@ def scale_view():
         return {}
 
 
-def upstream_ages(day):
-    """原始快照多久没重抓了——只看**我们自己动手的日期**（fetchedAt / extractedAt / checkedAt / scrapedAt）。
-       作者自述的 fetched（如 xr-items-detail 的 2026-09-20）不能算：那是他那份数据的年份，
-       不是我们多久没刷新；拿它判会把今天刚重抽的算成"43 天没动"。
-       另外别用 read(N) 截断再 json.loads——截断的 JSON 必然解析失败，
-       那份清单会静默变成"没有超期"，看着绿其实一条都没读（2026-11-02 自查抓到）。
-       meta 永远在文件开头，所以取头部用正则把日期全抓出来再按优先序挑。"""
+def nodate_upstream():
+    """一份采集日期都没有的快照——它们不参与上面的超期判断，所以必须单独说出来。
+       不说就等于"没有超期"，而这正是 2026-11-02 那次数出 37 份隐身的起因。"""
     up = os.path.join(WEB, "app", "data", "upstream")
-    today = datetime.date.fromisoformat(day)
-    ours = ("fetchedAt", "extractedAt", "checkedAt", "scrapedAt")
-    pat = re.compile(r'"(fetchedAt|extractedAt|checkedAt|scrapedAt|fetched)"\s*:\s*"(\d{4}-\d{2}-\d{2})"')
+    pat = re.compile(r'"(fetchedAt|extractedAt|checkedAt|scrapedAt|fetched)"\s*:\s*"20\d\d-\d\d-\d\d"')
     out = []
     for f in sorted(os.listdir(up)) if os.path.isdir(up) else []:
         if not f.endswith(".json"):
+            continue
+        try:
+            head = io.open(os.path.join(up, f), encoding="utf-8", errors="replace").read(6000)
+        except OSError:
+            continue
+        if not pat.search(head):
+            out.append(f)
+    return out
+
+
+def upstream_ages(day):
+    """原始快照多久没重抓了——只看**我们自己动手的日期**。
+       优先序里 `fetched` 排最后：插件那三份（xr/gi-items-detail、gi-dungeon-quests）同时带着
+       作者自述的 `fetched` 和我们自己的 `extractedAt`，先取我们的就不会把作者的年份当成我们的新鲜度
+       （docstring 旧版因此一度把 `fetched` 整个排除——代价是 18 份"只有 fetched、而 fetched 就是我们
+       抓取日"的快照集体隐身，2026-11-02 数出来：技能书与物品详情全量都已经 17 天，报告还说"没有超期"）。
+       一次性快照必须显式列出来并写原因，不能靠"它没有日期"糊过去——那样每次都要重新猜一遍它是干什么的。"""
+    up = os.path.join(WEB, "app", "data", "upstream")
+    today = datetime.date.fromisoformat(day)
+    ours = ("fetchedAt", "extractedAt", "checkedAt", "scrapedAt", "fetched")
+    # 这几份不是"每天要重抓的源"，是钉在某一天的对照物；它们不参与超期判断，但要在报告里说清为什么
+    one_off = {
+        "client-export-2026-10-21.json": "本机客户端导出的一次性对照件（导出那天起就不变）",
+        "gi-achievements-0.5.1.json": "GI 0.5.1 期的历史副本，留着跟 0.5.6 对照版本差异",
+        "wclbox-items-detail-sample.json": "全量重抓前的试采样本，按口径只当校准用",
+    }
+    pat = re.compile(r'"(fetchedAt|extractedAt|checkedAt|scrapedAt|fetched)"\s*:\s*"(\d{4}-\d{2}-\d{2})"')
+    out = []
+    for f in sorted(os.listdir(up)) if os.path.isdir(up) else []:
+        if not f.endswith(".json") or f in one_off:
             continue
         try:
             head = io.open(os.path.join(up, f), encoding="utf-8", errors="replace").read(6000)
@@ -238,6 +262,16 @@ def main():
             + ("…" if len(stale) > 8 else "")))
     else:
         L.append("原始快照没有超过 14 天没重抓的。")
+    nodate = nodate_upstream()
+    if nodate:
+        L.append("")
+        L.append("**这些快照一份采集日期都没有，所以上面那句对它们不成立**（%d 份，如 %s）——"
+                 "要么让写入方补日期，要么像天赋双源那样由抓取脚本自己盖章，别把它们当「已刷新」。"
+                 % (len(nodate), "、".join(nodate[:4]) + ("…" if len(nodate) > 4 else "")))
+    L.append("")
+    L.append("> 不参与超期判断的一次性对照件（有日期但故意不重抓）：`client-export-2026-10-21.json`"
+             "（本机客户端导出的一次性件）、`gi-achievements-0.5.1.json`（历史版本副本）、"
+             "`wclbox-items-detail-sample.json`（试采样本，只当校准）。")
     L.append("")
 
     L.append("## 五、这次动了多少数据文件")
