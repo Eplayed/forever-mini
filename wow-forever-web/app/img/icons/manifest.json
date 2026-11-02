@@ -14,21 +14,6 @@
   {
    "at": "2026-11-02",
    "added": 0,
-   "unavailable": [
-    "8119728",
-    "inv_inscription_modified_craftingreagent06"
-   ],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
-  {
-   "at": "2026-11-02",
-   "added": 0,
-   "unavailable": [],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
-  {
-   "at": "2026-11-02",
-   "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
@@ -60,13 +45,22 @@
     "8119728",
     "inv_inscription_modified_craftingreagent06"
    ],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-11-02",
+   "added": 0,
+   "unavailable": [],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-11-02",
+   "added": 0,
+   "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   }
  ],
  "batchAdded": 0,
- "batchUnavailable": [
-  "8119728",
-  "inv_inscription_modified_craftingreagent06"
- ],
+ "batchUnavailable": [],
  "gapsRegistry": "app/data/icon-gaps.json（全站「数据里引用但本地没有」的键，由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）"
 }
