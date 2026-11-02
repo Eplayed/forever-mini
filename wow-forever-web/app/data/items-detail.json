@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-10-28",
+  "generatedAt": "2026-11-02",
   "method": "tools/merge-items-detail.py 合三份 upstream 快照：wclbox-items-detail.json（tools/scrape-wclbox-items-detail.py 逐件全量抓物品详情页）、gi-items-detail.json 与 xr-items-detail.json（tools/extract-addon-items-detail.py 从两份无限服插件 Data.lua 抽取）。属性与卖价按 GI（Beta 实测转述）> XR（社区稿）> wclbox（当前 beta 解包，兜底）取值（站主 2026-10-16 定：取值以插件为准）；教益句单独一段按 GI > XR 补，纯风味句丢掉；数值签名不一致的进 conflicts，只有写法不同的计 formatOnly；出处只有 GI 有；英文名按站主拍板不取。",
   "pageNote": "属性与卖价先按两份插件资料：Beta 实测掉落记录（GearInsight 无限版转述）与社区整理稿（XR 全能助手转述）；这两份都没有的那些件（含无限新增的大部分），改按无限测试版客户端（经新手盒子转述）补。标题右边的小标写明这一条出自哪一份。同一件在几份资料里数值不同的，都留了档，等实测逐件定。出处（哪座本、哪个首领掉落）只有实测掉落记录有。几份资料都没有的那一件，详情里就不显示那一段。",
   "sources": [
@@ -15,19 +15,19 @@
    },
    {
     "key": "gi",
-    "name": "GearInsight 无限版 0.5.6",
+    "name": "GearInsight 无限版 0.5.7",
     "kind": "beta 解包 + 实测掉落转述",
     "date": "2026-10-03",
-    "extractedAt": "2026-10-28",
+    "extractedAt": "2026-11-02",
     "sourceSha256": "adc9390ca174d50daf7d7eb88e31d67fc351c0b650cdc99ad2998f2463b155d1"
    },
    {
     "key": "xr",
-    "name": "XR 全能助手 87",
+    "name": "XR 全能助手 95.7",
     "kind": "社区整理稿转述",
     "date": "2026-09-20",
-    "extractedAt": "2026-10-28",
-    "sourceSha256": "9b80a2948578b0cb3adbcc87d649f9d6e42c79c0bb044935a73a384da7ccd88e"
+    "extractedAt": "2026-11-02",
+    "sourceSha256": "e5e6168b15a50b7b83cee20ac89ee0a13a87e73810672b46967802bf2b26e893"
    }
   ],
   "counts": {

@@ -2,40 +2,40 @@
  "meta": {
   "source": "XR_DungeonGuide/Data_BossModel.lua（作者自述：照 DungeonsForever 掉落集合交集 + 中文名复核生成）",
   "addon": "XR_DungeonGuide",
-  "addonVersion": "75",
-  "sourceFile": ".scratch/wow-client-2026-10-21/XR_DungeonGuide/Data_BossModel.lua",
+  "addonVersion": "95.7",
+  "sourceFile": "XR_DungeonGuide/Data_BossModel.lua",
   "sourceStamp": {
    "bytes": 11691,
    "sha256": "5da43e7b89a9e1011a9984c3b31b85c4f72af3c998d2bb716347cbc4f2242d35",
-   "fileDate": "2026-10-21"
+   "fileDate": "2026-10-26"
   },
-  "extractedAt": "2026-10-21",
+  "extractedAt": "2026-11-02",
   "takes": "只有 displayId(CreatureDisplayInfo) 与 npcId 两个标识符；作者写的说明与注释一条不取",
   "use": "给\"82 只没头像的首领\"指出该去客户端取哪张模型贴图，避免按中文名猜脸",
   "counts": {
-   "dungeons": 29,
-   "bosses": 208,
+   "dungeons": 31,
+   "bosses": 242,
    "xrSlugs": 31,
    "alias": 4,
-   "unmatched": 60
+   "unmatched": 26
   },
   "slugAlias": [
    {
     "xr": "excavation-site",
     "ours": "whelgars-excavation",
     "xrBosses": 4,
-    "ourBosses": 4,
-    "nameMatch": 2,
-    "matchRatio": 0.5,
-    "confidence": "mid"
+    "ourBosses": 6,
+    "nameMatch": 4,
+    "matchRatio": 1.0,
+    "confidence": "high"
    },
    {
     "xr": "razorfen-downs",
     "ours": "razor-krendor",
     "xrBosses": 7,
-    "ourBosses": 6,
-    "nameMatch": 6,
-    "matchRatio": 0.86,
+    "ourBosses": 7,
+    "nameMatch": 7,
+    "matchRatio": 1.0,
     "confidence": "high"
    },
    {
@@ -51,10 +51,10 @@
     "xr": "the-stockade",
     "ours": "the-stocks",
     "xrBosses": 7,
-    "ourBosses": 6,
-    "nameMatch": 5,
-    "matchRatio": 0.71,
-    "confidence": "mid"
+    "ourBosses": 7,
+    "nameMatch": 6,
+    "matchRatio": 0.86,
+    "confidence": "high"
    }
   ],
   "note": "XR 用另一套英文 slug，四条别名是按首领中文名交集判的（重合数见 slugAlias），不是按名字猜。"
@@ -95,6 +95,10 @@
    }
   },
   "blackrock-depths": {
+   "七贤之箱": {
+    "displayId": null,
+    "npcId": 8690
+   },
    "伊森迪奥斯": {
     "displayId": 1204,
     "npcId": 1204
@@ -106,6 +110,10 @@
    "典狱官斯迪尔基斯": {
     "displayId": 9089,
     "npcId": 9089
+   },
+   "卫兵杜格瑞普": {
+    "displayId": 8655,
+    "npcId": 8655
    },
    "安格弗将军": {
     "displayId": 8756,
@@ -127,6 +135,10 @@
     "displayId": 8762,
     "npcId": 8762
    },
+   "无敌的潘佐尔": {
+    "displayId": 8270,
+    "npcId": 8270
+   },
    "法拉克斯": {
     "displayId": 8177,
     "npcId": 8177
@@ -138,6 +150,10 @@
    "玛格姆斯": {
     "displayId": 12162,
     "npcId": 12162
+   },
+   "维雷克": {
+    "displayId": 9019,
+    "npcId": 9019
    },
    "贝尔加": {
     "displayId": 12162,
@@ -154,6 +170,40 @@
    "驯犬者格雷布玛尔": {
     "displayId": 9212,
     "npcId": 9212
+   },
+   "黑暗宝箱": {
+    "displayId": null,
+    "npcId": 8592
+   }
+  },
+  "city-of-dalaran": {
+   "不稳定的哨兵": {
+    "displayId": 129954,
+    "npcId": 246017
+   },
+   "墓穴骑士阿特雷克斯": {
+    "displayId": 145787,
+    "npcId": 247126
+   },
+   "大法师之影": {
+    "displayId": 130061,
+    "npcId": 246020
+   },
+   "奥术畸体": {
+    "displayId": 129891,
+    "npcId": 245999
+   },
+   "法力吞噬者": {
+    "displayId": 129895,
+    "npcId": 246008
+   },
+   "被无视的琳恩": {
+    "displayId": 130235,
+    "npcId": 247032
+   },
+   "邪能古树": {
+    "displayId": 129894,
+    "npcId": 246003
    }
   },
   "deathmine": {
@@ -274,6 +324,10 @@
    "赫尔努拉斯": {
     "displayId": 14556,
     "npcId": 14556
+   },
+   "辛德拉圣职者": {
+    "displayId": null,
+    "npcId": 14371
    }
   },
   "gnomeregan": {
@@ -289,6 +343,10 @@
     "displayId": 6915,
     "npcId": 6915
    },
+   "科技机器人": {
+    "displayId": 7288,
+    "npcId": 7288
+   },
    "粘性辐射尘": {
     "displayId": 5497,
     "npcId": 5497
@@ -300,6 +358,10 @@
   },
   "hall-of-thanes": {
    "劫掠者": {
+    "displayId": 142840,
+    "npcId": 261311
+   },
+   "普兰德": {
     "displayId": 142840,
     "npcId": 261311
    },
@@ -387,6 +449,18 @@
     "displayId": 13589,
     "npcId": 13589
    },
+   "温格": {
+    "displayId": 9418,
+    "npcId": 12243
+   },
+   "玛拉多斯": {
+    "displayId": 9441,
+    "npcId": 9441
+   },
+   "玛格拉": {
+    "displayId": null,
+    "npcId": 9433
+   },
    "瑟莱德丝公主": {
     "displayId": 12292,
     "npcId": 12292
@@ -408,6 +482,12 @@
     "npcId": 12389
    }
   },
+  "onyxias-lair": {
+   "奥妮克希亚": {
+    "displayId": 8570,
+    "npcId": 10184
+   }
+  },
   "ragefire-chasm": {
    "奥格弗林特": {
     "displayId": 11611,
@@ -427,6 +507,10 @@
    }
   },
   "razor-krendor": {
+   "亨利·斯特恩": {
+    "displayId": null,
+    "npcId": 8029
+   },
    "图特卡什": {
     "displayId": 7845,
     "npcId": 7355
@@ -460,6 +544,10 @@
    "亡语者贾格巴": {
     "displayId": 4644,
     "npcId": 4428
+   },
+   "剃刀沼泽刺鬃守卫": {
+    "displayId": 6078,
+    "npcId": 4438
    },
    "卡尔加·刺肋": {
     "displayId": 4642,
@@ -503,11 +591,19 @@
     "displayId": 139050,
     "npcId": 139050
    },
+   "男爵": {
+    "displayId": 144188,
+    "npcId": 250660
+   },
    "被遗弃者": {
     "displayId": 138667,
     "npcId": 250631
    },
    "邪恶的维克多": {
+    "displayId": 139455,
+    "npcId": 256035
+   },
+   "邪恶的维克托": {
     "displayId": 139455,
     "npcId": 256035
    }
@@ -541,6 +637,10 @@
     "displayId": 5230,
     "npcId": 5230
    },
+   "瑟克恩": {
+    "displayId": null,
+    "npcId": 14693
+   },
    "血法师萨尔诺斯": {
     "displayId": 11396,
     "npcId": 4543
@@ -565,13 +665,25 @@
     "displayId": 11835,
     "npcId": 10502
    },
+   "传令官基尔图诺斯": {
+    "displayId": 143673,
+    "npcId": 10506
+   },
    "博学者普克尔特": {
     "displayId": 11492,
     "npcId": 10901
    },
+   "基尔图诺斯的卫士": {
+    "displayId": 10925,
+    "npcId": 14861
+   },
    "拉文尼亚": {
     "displayId": 10433,
     "npcId": 10507
+   },
+   "死亡骑士达克雷尔": {
+    "displayId": 14591,
+    "npcId": 14516
    },
    "瑟尔林·卡斯迪诺夫教授": {
     "displayId": 10901,
@@ -615,6 +727,10 @@
     "displayId": 2352,
     "npcId": 4274
    },
+   "塞沃尔": {
+    "displayId": null,
+    "npcId": 14682
+   },
    "大法师阿鲁高": {
     "displayId": 2353,
     "npcId": 4275
@@ -656,6 +772,10 @@
    "弗雷斯特恩": {
     "displayId": 10482,
     "npcId": 10482
+   },
+   "斯坦索姆信使": {
+    "displayId": 10547,
+    "npcId": 10547
    },
    "斯库尔": {
     "displayId": 2606,
@@ -733,6 +853,10 @@
     "displayId": 8053,
     "npcId": 8053
    },
+   "哈卡的后代": {
+    "displayId": 4065,
+    "npcId": 4065
+   },
    "哈扎斯": {
     "displayId": 9584,
     "npcId": 9584
@@ -770,6 +894,10 @@
    "哈姆霍克": {
     "displayId": 3250,
     "npcId": 1717
+   },
+   "巴基尔·斯瑞德": {
+    "displayId": 1621,
+    "npcId": 1716
    },
    "布鲁高·铁拳": {
     "displayId": 2142,
@@ -898,6 +1026,14 @@
    "盐脊": {
     "displayId": 144209,
     "npcId": 260322
+   },
+   "遗物守护者": {
+    "displayId": 144224,
+    "npcId": 260326
+   },
+   "高地惊魂": {
+    "displayId": 9010,
+    "npcId": 9010
    }
   },
   "zulfarrak": {
@@ -937,6 +1073,10 @@
     "displayId": 6685,
     "npcId": 6685
    },
+   "沙怒刽子手": {
+    "displayId": 6440,
+    "npcId": 6440
+   },
    "泽雷利斯": {
     "displayId": 9293,
     "npcId": 9293
@@ -956,40 +1096,19 @@
    "‘修行者’高罗什",
    "‘爬行者’赫杜姆",
    "‘破坏者’奥科索尔",
-   "七贤之箱",
    "剜眼者",
-   "卫兵杜格瑞普",
-   "无敌的潘佐尔",
    "暴食者",
    "格里兹尔",
-   "维雷克",
-   "阿努希尔",
-   "黑暗宝箱"
+   "阿努希尔"
   ],
   "city-of-dalaran·首领名": [
-   "不稳定的哨兵",
-   "墓穴骑士阿特雷克斯",
-   "大法师之影",
-   "奥术畸体",
-   "奥术谜影",
-   "法力吞噬者",
-   "被无视的琳恩",
-   "邪能古树"
-  ],
-  "dire-maul-west·首领名": [
-   "辛德拉圣职者"
-  ],
-  "excavation-site·首领名": [
-   "遗物守护者",
-   "高地惊魂"
+   "奥术谜影"
   ],
   "gnomeregan·首领名": [
    "尖端机器人",
-   "科技机器人",
    "黑铁大使"
   ],
   "hall-of-thanes·首领名": [
-   "普兰德",
    "玛格玛图斯"
   ],
   "lower-blackrock-spire·首领名": [
@@ -1001,56 +1120,27 @@
    "‘收割者’麦什洛克",
    "吉尔克",
    "无名预言者",
-   "温格",
-   "玛拉多斯",
-   "玛格拉",
    "考尔克"
-  ],
-  "onyxias-lair·首领名": [
-   "奥妮克希亚"
-  ],
-  "razorfen-downs·首领名": [
-   "亨利·斯特恩"
-  ],
-  "razorfen-kraul·首领名": [
-   "剃刀沼泽刺鬃守卫"
-  ],
-  "ruins-of-lordaeron·首领名": [
-   "男爵",
-   "邪恶的维克托"
   ],
   "scarlet-monastery-graveyard·首领名": [
    "不眠的艾希尔",
-   "亡灵勇士",
-   "瑟克恩"
-  ],
-  "scholomance·首领名": [
-   "传令官基尔图诺斯",
-   "基尔图诺斯的卫士",
-   "死亡骑士达克雷尔"
+   "亡灵勇士"
   ],
   "shadowfang-keep·首领名": [
-   "塞沃尔",
    "死亡誓言者队长",
    "魔化战马"
   ],
   "stratholme-main-gate·首领名": [
-   "斯坦索姆信使",
    "斯坦索姆信差"
   ],
   "sunken-temple·首领名": [
-   "二层小首领",
-   "哈卡的后代"
+   "二层小首领"
   ],
   "the-stockade·首领名": [
-   "巴基尔·斯瑞德",
    "布鲁戈·艾尔克纳寇"
   ],
   "uldaman·首领名": [
    "‘迅捷’艾利克"
-  ],
-  "zulfarrak·首领名": [
-   "沙怒刽子手"
   ]
  }
 }

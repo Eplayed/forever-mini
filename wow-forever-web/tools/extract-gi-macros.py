@@ -32,7 +32,8 @@ import re
 import sys
 
 HOME = os.path.expanduser('~')
-DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
+from addons_root import resolve          # 插件装在哪个盘不该写死在这（见 addons_root.py）
+DEF_SRC = resolve('GearInsight_Forever')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(WEB, 'app', 'data', 'upstream', 'gi-macros.json')
 

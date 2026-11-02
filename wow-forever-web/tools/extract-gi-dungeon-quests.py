@@ -104,8 +104,11 @@ def obj_field(raw):
 
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
-        os.path.expanduser('~'), 'Documents/Trae-CN/temp_20261014_01/gi-forever/DungeonQuestData.lua')
+    # 默认源改成本机插件目录里的 DungeonQuestData.lua（原来写死某台机器的一次性临时目录）
+    from addons_root import resolve
+    default_path = os.path.join(resolve('GearInsight_Forever'),
+                                'GearInsight_Forever', 'DungeonQuestData.lua')
+    path = sys.argv[1] if len(sys.argv) > 1 else default_path
     src = open(path, encoding='utf-8').read()
 
     # 副本清单内联在 ns.DQ = { dungeons = {...} 里（不在行首）；任务详情表才是行首顶层键。

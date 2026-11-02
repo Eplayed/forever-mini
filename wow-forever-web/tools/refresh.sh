@@ -17,8 +17,13 @@
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
 #   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
 #   tools/refresh.sh status      # 数据体检：还缺什么、哪些我们能补、哪些只能等（报告，不是门禁）
+#   tools/refresh.sh addons      # 插件层只抽取（GI / XR / DF 的原件从 addons_root 现读的位置）
+#   tools/refresh.sh addons-merge# 插件快照并进成品（必须排在各板块场景之后）
 #   tools/refresh.sh check       # 只跑门禁，不碰网络
 #   tools/refresh.sh publish     # 门禁 + 新站构建 + 小程序导出，全绿才算能发
+#
+#   每天开机要跑的不是这里，是 tools/daily.sh：它按「探源 → 插件层抽取 → 各板块（跳过门禁）
+#   → 插件并成品 → 统一门禁一次 → 出当日报告」串好，见 docs/DATA-每日更新-2026-11-02.md
 #
 # 详见 docs/DATA-MAINTENANCE.md。
 set -euo pipefail
@@ -28,7 +33,15 @@ run() { printf '\n\033[1m▶ %s\033[0m\n' "$*"; "$@"; }
 
 # 所有场景收尾都跑同一套门禁：数据校验 → 图标映射 → 译名逐字回查 → 新站构建 → 界面回归
 # 2026-10-24 旧站删除后，两栈对拍（tools/app-parity.py）一起删掉了：没有第二个站可对。
+#
+# WOW_SKIP_GATE=1 跳过这里：给 tools/daily.sh 用。八个场景各跑一遍完整门禁等于把
+# site-check 跑八遍（单跑就要约 13 分钟），一天两次更新等不起。跳过之后由 daily 在所有
+# 抓取与合并做完之后**统一跑一次**——门禁一道没减，只是不再重复八遍。
 gate() {
+  if [ "${WOW_SKIP_GATE:-0}" = "1" ]; then
+    printf '\n\033[33m▶ 门禁本轮跳过（WOW_SKIP_GATE=1），由 daily 在全部场景跑完后统一过一次\033[0m\n'
+    return 0
+  fi
   run node tools/build-data.js
   run python3 tools/build-icon-map.py
   run node tools/build-data.js
@@ -115,6 +128,34 @@ case "${1:-}" in
     run python3 tools/fetch-icons.py --list
     run python3 tools/audit-assets.py
     gate
+    ;;
+  addons)
+    # 插件层（GearInsight / XR_DungeonGuide / DungeonsForever）的原件不在仓库里，
+    # 装在哪由 tools/addons_root.py 现读——2026-11-02 站主定「Mac 不再做，全部在这台」，
+    # 以前那些写死的 .scratch 路径在这台一律扑空，所以这一层以前只能手工跑，快照才一路发到过期。
+    # 本场景**只抽不改成品**：合并排在各板块场景之后走 addons-merge，
+    # 否则 merge-dungeons / merge-professions 那种整表重写会把插件并进去的字段冲掉。
+    run python3 tools/extract-df-geo.py
+    run python3 tools/extract-df-loot.py
+    run python3 tools/extract-df-bis.py
+    run python3 tools/extract-gi-macros.py
+    run python3 tools/extract-gi-pets.py
+    run python3 tools/extract-gi-item-existence.py
+    run python3 tools/extract-gi-dungeon-quests.py
+    run python3 tools/extract-gi-prof-recipes.py
+    run python3 tools/extract-xr-zonemap.py
+    run python3 tools/extract-xr-boss-model.py
+    run python3 tools/extract-xr-prof.py
+    run python3 tools/extract-addon-items-detail.py
+    run python3 tools/extract-addon-bis.py
+    ;;
+  addons-merge)
+    # 插件快照并进成品。排在 world/dungeons/prof/talents 之后跑，顺序不能倒
+    run python3 tools/merge-dungeon-geo.py
+    run python3 tools/merge-items-detail.py
+    run python3 tools/merge-dungeon-quests.py
+    run python3 tools/merge-macros.py
+    run python3 tools/merge-pets.py
     ;;
   status)
     # 体检只说话不拦人：任何一步非 0 都会把后面的链断掉，见 DATA-MAINTENANCE.md 第四节

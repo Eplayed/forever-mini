@@ -29,20 +29,21 @@ UP = os.path.join(WEB, "app", "data", "upstream")
 ADDON = "DungeonsForever"
 REL = ADDON + "/Core/Data/Data_BIS.lua"
 HOME = os.path.expanduser("~")
-CANDIDATES = [os.path.join(HOME, "Documents", "project", ".scratch", "wow"),
-              "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns"]
+from addons_root import resolve, explain
 
 ITEM_RE = re.compile(r'\{\s*(\d{4,8})\s*,\s*(\d+)(\s*,\s*"(?:[^"\\]|\\.)*")?\s*\}')
 
 
 def resolve_src(given):
+    """--src → WOW_ADDONS → 常见安装位。顺序只维护一份，在 addons_root.py 里。"""
     for c in (given, os.environ.get("WOW_ADDONS")):
         if c and os.path.isdir(os.path.join(c, ADDON)):
             return c
-    for c in CANDIDATES:
-        if os.path.isdir(os.path.join(c, ADDON)):
-            return c
-    sys.exit("找不到 %s：给 --src <插件根目录> 或把 WOW_ADDONS 指到 Interface/AddOns" % ADDON)
+    root = resolve(ADDON)
+    if os.path.isdir(os.path.join(root, ADDON)):
+        return root
+    sys.exit("找不到 %s：给 --src <插件根目录> 或把 WOW_ADDONS 指到 Interface/AddOns\n%s"
+             % (ADDON, explain()))
 
 
 def toc_version(src):

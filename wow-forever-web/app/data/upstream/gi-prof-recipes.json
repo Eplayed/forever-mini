@@ -11,7 +11,7 @@
    "fileDate": "2026-10-30"
   },
   "selfReported": "文件头自述：小程序 forever/prof_route.json 的全部配方（《无限》Beta 1.60.1.70532）；口径 = foreverchanges 物品页 + vmangos 经典库 + 客户端声望（作者脚本 gi_forever_prof.py）",
-  "fetched": "2026-11-01",
+  "fetched": "2026-11-02",
   "took": "法术 ID、中英文名、成品物品 ID、黄/灰技能点、需求等级、品质、是否《无限》新增、主出处类型、材料 (物品ID, 数量)、出处地图号与百分比坐标与阵营",
   "droppedFields": [
    "出处池每一项的前四列（插件作者写的全文中文/全文英文/短句中文/短句英文）——红线不复制第三方说明文字",

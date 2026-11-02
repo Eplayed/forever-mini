@@ -21,7 +21,8 @@ import sys
 from datetime import date
 
 HOME = os.path.expanduser('~')
-DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
+from addons_root import resolve          # 插件装在哪个盘不该写死在这（见 addons_root.py）
+DEF_SRC = resolve('DungeonsForever')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # DF 自己的一套副本 slug 与站内 id 不一样，这 11 个是机械对应（下划线→横线之外的那些）。

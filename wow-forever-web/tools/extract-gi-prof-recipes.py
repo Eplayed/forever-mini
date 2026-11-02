@@ -28,24 +28,22 @@ UP = os.path.join(WEB, "app", "data", "upstream")
 ADDON = "GearInsight_Forever"
 REL = ADDON + "/ProfRecipes.lua"
 HOME = os.path.expanduser("~")
-CANDIDATES = [os.path.join(HOME, "Documents", "project", ".scratch", "wow"),
-              "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns"]
-
 # 主出处编号 → 玩家能懂的说法（编号是 GI 文件头自述的口径，不是本站发明的分类）
 SOURCE_KIND = {1: "训练师", 2: "商人", 3: "掉落", 4: "声望", 5: "任务", 6: "商人（青睐）", 0: "未记录"}
 
+from addons_root import resolve, explain
+
 
 def resolve_src(given):
-    if given:
-        return given
-    env = os.environ.get("WOW_ADDONS")
-    for c in (given, env):
+    """--src → WOW_ADDONS → 常见安装位。顺序只维护一份，在 addons_root.py 里。"""
+    for c in (given, os.environ.get("WOW_ADDONS")):
         if c and os.path.isdir(os.path.join(c, ADDON)):
             return c
-    for c in CANDIDATES:
-        if os.path.isdir(os.path.join(c, ADDON)):
-            return c
-    sys.exit("找不到 %s：给 --src <插件根目录> 或把 WOW_ADDONS 指到 Interface/AddOns" % ADDON)
+    root = resolve(ADDON)
+    if os.path.isdir(os.path.join(root, ADDON)):
+        return root
+    sys.exit("找不到 %s：给 --src <插件根目录> 或把 WOW_ADDONS 指到 Interface/AddOns\n%s"
+             % (ADDON, explain()))
 
 
 def toc_version(src):

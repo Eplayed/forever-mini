@@ -1,16 +1,17 @@
 {
  "meta": {
   "addon": "GearInsight_Forever",
-  "addonVersion": "0.5.6",
-  "sourceFile": "../../.scratch/wow/GearInsight_Forever/Data.lua",
+  "addonVersion": "0.5.7",
+  "sourceFile": "GearInsight_Forever/Data.lua",
+  "installRoot": "_cn_beta_",
   "sourceStamp": {
    "bytes": 3709975,
    "sha256": "adc9390ca174d50daf7d7eb88e31d67fc351c0b650cdc99ad2998f2463b155d1",
-   "fileDate": "2026-10-27"
+   "fileDate": "2026-10-30"
   },
   "selfReported": "st 抽自 loot 表（作者标 Beta 实测掉落，build 1.60.1.69913）；src/srcName 抽自 gear 表（作者标 beta 客户端 1.60.1.69876 解包，2026-10-03）",
   "fetched": "2026-10-03",
-  "extractedAt": "2026-10-28",
+  "extractedAt": "2026-11-02",
   "counts": {
    "st": 1453,
    "src": 1587

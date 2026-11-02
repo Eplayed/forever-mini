@@ -23,7 +23,8 @@ import sys
 from datetime import date
 
 HOME = os.path.expanduser('~')
-DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
+from addons_root import resolve          # 插件装在哪个盘不该写死在这（见 addons_root.py）
+DEF_SRC = resolve('XR_DungeonGuide')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLASS_EN = ['Warrior', 'Paladin', 'Hunter', 'Rogue', 'Priest', 'Shaman', 'Mage', 'Warlock', 'Druid']
 CLASS_CN = {'Warrior': '战士', 'Paladin': '圣骑士', 'Hunter': '猎人', 'Rogue': '潜行者',

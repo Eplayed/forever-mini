@@ -30,7 +30,8 @@ import sys
 from datetime import date
 
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEF_SRC = os.path.join(os.path.dirname(os.path.dirname(WEB)), '.scratch', 'wow-client-2026-10-21')
+from addons_root import resolve, source_ref   # 原来写死 .scratch/wow-client-2026-10-21（Mac 副本）
+DEF_SRC = resolve('GearInsight_Forever')
 UP = os.path.join(WEB, "app", "data", 'upstream')
 
 
@@ -81,7 +82,7 @@ def main():
         'source': 'GearInsight_Forever/ItemMissingData.lua（作者自述：scripts/gi_forever_item_exist_import.py，'
                   '/gi itemprobe all 于 2026-10-19 00:01:38 在测试服实测生成）',
         'addon': 'GearInsight_Forever', 'addonVersion': toc_version(os.path.join(src, 'GearInsight_Forever')),
-        'sourceFile': os.path.relpath(p, os.path.join(WEB, '..', '..')),
+        'sourceFile': source_ref(p, os.path.join(WEB, '..', '..')),
         'sourceStamp': {'bytes': len(blob), 'sha256': hashlib.sha256(blob).hexdigest(),
                         'fileDate': date.fromtimestamp(os.path.getmtime(p)).isoformat()},
         'probedAt': '2026-10-19',

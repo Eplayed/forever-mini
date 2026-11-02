@@ -37,8 +37,9 @@ from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.path.dirname(ROOT)
-# 插件装在仓库外（不进 git）：…/project/.scratch/wow/，比仓库根再往上一层
-SCRATCH = os.path.join(os.path.dirname(REPO), ".scratch", "wow")
+# 插件装在仓库外（不进 git），具体在哪个盘由 addons_root 统一解析，别在这写死
+from addons_root import resolve, source_ref
+SCRATCH = resolve("XR_DungeonGuide")
 SRC = os.path.join(SCRATCH, "XR_DungeonGuide", "Data_Bis.lua")
 OUT = os.path.join(ROOT, "app", "data", "upstream", "xr-bis.json")
 
@@ -284,7 +285,7 @@ def main():
             'addon': 'XR_DungeonGuide',
             'addonVersionLocal': ver,
             'dataVersionInFile': dv.group(1) if dv else None,
-            'srcFile': os.path.relpath(args.src, REPO),
+            'srcFile': source_ref(args.src, REPO),
             'srcBytes': len(raw),
             'srcSha256': sha,
             'fetched': date.today().isoformat(),

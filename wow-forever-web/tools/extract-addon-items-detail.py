@@ -16,6 +16,8 @@ import re
 import sys
 from datetime import date
 
+from addons_root import resolve
+
 UP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app', 'data', 'upstream')
 # 2026-10-24 删旧站时这一层就没了，路径一直留在 'src/data' 上没跟着改：
 # 结果这个脚本写不出快照（物品线的刷新等于断在 10-21 那一版）。改指 app/data/upstream。
@@ -216,11 +218,23 @@ def dump(p, obj, n):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--gi', help='GearInsight_Forever/Data.lua 路径')
-    ap.add_argument('--xr', help='XR_DungeonGuide/Data.lua 路径')
+    ap.add_argument('--gi', help='GearInsight_Forever/Data.lua 路径（不给就用本机插件目录里那份）')
+    ap.add_argument('--xr', help='XR_DungeonGuide 的物品表路径（不给就用本机那份）')
     args = ap.parse_args()
+    # 不给路径就用 addons_root 解析出来的现役插件目录：
+    # 站主 2026-11-01 定「Mac 不再做，全部在这台」，手给 --src 这种用法不该是每天的必经步骤
+    if not args.gi:
+        cand = os.path.join(resolve('GearInsight_Forever'), 'GearInsight_Forever', 'Data.lua')
+        args.gi = cand if os.path.exists(cand) else None
+    if not args.xr:
+        root = resolve('XR_DungeonGuide')
+        for name in ('Data_Items.lua', 'Data.lua'):     # v94.7 之后物品表在 Data_Items.lua
+            cand = os.path.join(root, 'XR_DungeonGuide', name)
+            if os.path.exists(cand) and 'items' in io.open(cand, encoding='utf-8', errors='replace').read(4000000):
+                args.xr = cand
+                break
     if not args.gi and not args.xr:
-        sys.exit('至少给 --gi 或 --xr 其一')
+        sys.exit('至少给 --gi 或 --xr 其一（或把插件装到 addons_root 认的位置）')
     os.makedirs(UP, exist_ok=True)
     if args.gi:
         st_items, src_items = extract_gi(args.gi)

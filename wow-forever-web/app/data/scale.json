@@ -1,14 +1,14 @@
 {
  "meta": {
-  "generatedAt": "2026-11-01",
+  "generatedAt": "2026-11-02",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
  "scale": {
   "dungeonQuests": 396,
   "dungeonGeoEntry": 28,
-  "dungeonGeoBoss": 181,
-  "dungeonGeoBossPoints": 217,
+  "dungeonGeoBoss": 208,
+  "dungeonGeoBossPoints": 245,
   "dungeonQuestDungeons": 30,
   "profVendors": 647,
   "profDrops": 336,
@@ -180,7 +180,7 @@
     "build": "1.60.1.70707",
     "checkedAt": "2026-11-01",
     "classic": null,
-    "daysSince": 0,
+    "daysSince": 1,
     "stale": null
    },
    {
@@ -189,7 +189,7 @@
     "build": "1.60.1.70707",
     "checkedAt": "2026-11-01",
     "classic": "1.15.9.70576",
-    "daysSince": 0,
+    "daysSince": 1,
     "stale": null
    },
    {
@@ -198,7 +198,7 @@
     "build": "1.60.1.70707",
     "checkedAt": "2026-11-01",
     "classic": null,
-    "daysSince": 0,
+    "daysSince": 1,
     "stale": null
    },
    {
@@ -207,14 +207,14 @@
     "build": "1.60.1.70532",
     "checkedAt": "2026-10-23",
     "classic": null,
-    "daysSince": 9,
+    "daysSince": 10,
     "stale": "warn"
    },
    {
     "file": "macros.json",
     "section": "宏命令",
     "build": null,
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-02",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -223,9 +223,9 @@
     "file": "pets.json",
     "section": "猎人宠物",
     "build": null,
-    "checkedAt": "2026-10-28",
+    "checkedAt": "2026-11-02",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 0,
     "stale": null
    },
    {
@@ -234,7 +234,7 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -243,7 +243,7 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -252,7 +252,7 @@
     "build": null,
     "checkedAt": "2026-10-22",
     "classic": null,
-    "daysSince": 10,
+    "daysSince": 11,
     "stale": "warn"
    }
   ],

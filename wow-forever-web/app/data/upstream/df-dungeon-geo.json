@@ -1,12 +1,12 @@
 {
  "meta": {
-  "source": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+  "source": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
   "originFiles": [
-   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_DungeonEntry.lua",
-   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_BossPos.lua",
-   "/Users/zhangyajun/Documents/project/.scratch/wow/DungeonsForever/Core/Data/Data_DungeonLoot.lua"
+   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_DungeonEntry.lua",
+   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_BossPos.lua",
+   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_DungeonLoot.lua"
   ],
-  "fetched": "2026-10-19",
+  "fetched": "2026-11-02",
   "what": "副本入口在区域图上的百分比坐标 + 各首领在副本内部图上的百分比坐标（第三值是该图的层号）",
   "boundary": "只取坐标、地图号与名字映射。DF 的 LICENSE 是「保留所有权利」，它的任何成段说明、任务目标文本、攻略句子、自绘副本图与载入图一律不取",
   "nameBridge": "首领位置以英文名为键，站内首领只有中文名，中间过 Data_DungeonLoot 的「英文名→中文名」那一层（那座桥只取前两列，掉落与掉率不读）",
@@ -26,9 +26,9 @@
   "counts": {
    "entryDungeons": 28,
    "entrySkipped": 0,
-   "bossDungeons": 28,
-   "bossRows": 181,
-   "bossSkipped": 25
+   "bossDungeons": 30,
+   "bossRows": 208,
+   "bossSkipped": 1
   }
  },
  "entry": {
@@ -294,6 +294,13 @@
      "y": 31.2,
      "floor": 3
     }
+   ],
+   "梦游者克尔里斯": [
+    {
+     "x": 51.9,
+     "y": 81.6,
+     "floor": 2
+    }
    ]
   },
   "blackrock-depths": {
@@ -313,8 +320,8 @@
    ],
    "达格兰·索瑞森大帝": [
     {
-     "x": 93.2,
-     "y": 11.9,
+     "x": 93.3,
+     "y": 13.7,
      "floor": 2
     }
    ],
@@ -339,8 +346,8 @@
    ],
    "傀儡统帅阿格曼奇": [
     {
-     "x": 36.9,
-     "y": 65.0,
+     "x": 36.4,
+     "y": 64.9,
      "floor": 2
     }
    ],
@@ -379,6 +386,13 @@
      "floor": 2
     }
    ],
+   "无敌的潘佐尔": [
+    {
+     "x": 50.4,
+     "y": 32.5,
+     "floor": 2
+    }
+   ],
    "法拉克斯": [
     {
      "x": 53.2,
@@ -388,8 +402,8 @@
    ],
    "铁炉堡公主茉艾拉·铜须": [
     {
-     "x": 93.1,
-     "y": 11.5,
+     "x": 93.5,
+     "y": 8.7,
      "floor": 2
     }
    ],
@@ -400,19 +414,84 @@
      "floor": 2
     }
    ],
+   "维雷克": [
+    {
+     "x": 59.8,
+     "y": 68.0,
+     "floor": 2
+    }
+   ],
    "典狱官斯迪尔基斯": [
     {
-     "x": 60.7,
-     "y": 67.3,
+     "x": 59.7,
+     "y": 63.8,
      "floor": 2
+    }
+   ]
+  },
+  "city-of-dalaran": {
+   "奥术畸体": [
+    {
+     "x": 60.9,
+     "y": 74.9,
+     "floor": null
+    }
+   ],
+   "奥术之谜": [
+    {
+     "x": 65.3,
+     "y": 38.9,
+     "floor": null
+    }
+   ],
+   "墓穴骑士阿特雷克斯": [
+    {
+     "x": 54.8,
+     "y": 52.3,
+     "floor": 2
+    }
+   ],
+   "邪能古树": [
+    {
+     "x": 53.2,
+     "y": 51.4,
+     "floor": null
+    }
+   ],
+   "被无视的琳恩": [
+    {
+     "x": 64.1,
+     "y": 13.0,
+     "floor": 2
+    }
+   ],
+   "法力吞噬者": [
+    {
+     "x": 49.2,
+     "y": 68.5,
+     "floor": null
+    }
+   ],
+   "大法师之影": [
+    {
+     "x": 49.2,
+     "y": 25.4,
+     "floor": null
+    }
+   ],
+   "不稳定的哨兵": [
+    {
+     "x": 58.3,
+     "y": 34.0,
+     "floor": null
     }
    ]
   },
   "dire-maul-east": {
    "奥兹恩": [
     {
-     "x": 55.4,
-     "y": 26.9,
+     "x": 56.4,
+     "y": 28.1,
      "floor": 6
     }
    ],
@@ -455,43 +534,43 @@
    ],
    "观察者克鲁什": [
     {
-     "x": 31.2,
-     "y": 25.4,
+     "x": 31.1,
+     "y": 21.9,
      "floor": null
     }
    ],
    "卫兵芬古斯": [
     {
-     "x": 49.3,
-     "y": 81.6,
+     "x": 49.6,
+     "y": 78.2,
      "floor": null
     }
    ],
    "卫兵摩尔达": [
     {
-     "x": 69.9,
-     "y": 75.2,
+     "x": 69.3,
+     "y": 75.8,
      "floor": null
     }
    ],
    "卫兵斯里基克": [
     {
-     "x": 27.7,
-     "y": 58.8,
+     "x": 26.1,
+     "y": 57.1,
      "floor": null
     }
    ],
    "戈多克大王": [
     {
-     "x": 31.9,
-     "y": 25.9,
+     "x": 31.8,
+     "y": 26.3,
      "floor": null
     }
    ],
    "践踏者克雷格": [
     {
-     "x": 62.0,
-     "y": 65.7,
+     "x": 60.9,
+     "y": 67.8,
      "floor": null
     }
    ]
@@ -541,6 +620,20 @@
    ]
   },
   "whelgars-excavation": {
+   "高地惊魂": [
+    {
+     "x": 26.3,
+     "y": 56.2,
+     "floor": null
+    }
+   ],
+   "遗物守护者": [
+    {
+     "x": 46.6,
+     "y": 74.1,
+     "floor": null
+    }
+   ],
    "盐脊": [
     {
      "x": 62.0,
@@ -550,8 +643,8 @@
    ],
    "暗齿": [
     {
-     "x": 40.6,
-     "y": 53.6,
+     "x": 44.5,
+     "y": 63.0,
      "floor": null
     }
    ]
@@ -594,8 +687,8 @@
    ],
    "粘性辐射尘": [
     {
-     "x": 57.6,
-     "y": 56.6,
+     "x": 54.3,
+     "y": 46.0,
      "floor": null
     }
    ]
@@ -612,6 +705,13 @@
     {
      "x": 50.4,
      "y": 63.6,
+     "floor": null
+    }
+   ],
+   "普兰德": [
+    {
+     "x": 50.5,
+     "y": 50.6,
      "floor": null
     }
    ]
@@ -729,8 +829,8 @@
    ],
    "兰斯利德": [
     {
-     "x": 40.6,
-     "y": 48.2,
+     "x": 41.0,
+     "y": 49.0,
      "floor": 2
     }
    ],
@@ -757,8 +857,8 @@
    ],
    "瑟莱德丝公主": [
     {
-     "x": 24.2,
-     "y": 78.4,
+     "x": 26.7,
+     "y": 78.2,
      "floor": 2
     }
    ],
@@ -771,16 +871,25 @@
    ],
    "洛特格里普": [
     {
-     "x": 33.3,
-     "y": 77.1,
+     "x": 41.2,
+     "y": 81.5,
      "floor": 2
     }
    ],
    "工匠吉兹洛克": [
     {
-     "x": 48.4,
-     "y": 68.6,
+     "x": 48.6,
+     "y": 67.9,
      "floor": 2
+    }
+   ]
+  },
+  "onyxias-lair": {
+   "奥妮克希亚": [
+    {
+     "x": 67.2,
+     "y": 30.7,
+     "floor": null
     }
    ]
   },
@@ -868,7 +977,7 @@
    ],
    "卡尔加·刺肋": [
     {
-     "x": 26.4,
+     "x": 25.8,
      "y": 32.4,
      "floor": null
     }
@@ -894,6 +1003,13 @@
      "floor": null
     }
    ],
+   "剃刀沼泽刺鬃守卫": [
+    {
+     "x": 53.4,
+     "y": 35.5,
+     "floor": null
+    }
+   ],
    "鲁古格": [
     {
      "x": 64.8,
@@ -905,8 +1021,8 @@
   "ruins-of-lordaeron": {
    "比约克": [
     {
-     "x": 34.7,
-     "y": 42.5,
+     "x": 36.5,
+     "y": 38.8,
      "floor": null
     }
    ],
@@ -919,27 +1035,48 @@
    ],
    "拉斯玛尔": [
     {
-     "x": 41.3,
-     "y": 62.7,
+     "x": 42.0,
+     "y": 58.6,
      "floor": null
     }
    ],
    "被遗弃者": [
     {
-     "x": 36.5,
-     "y": 53.3,
+     "x": 36.7,
+     "y": 53.2,
+     "floor": null
+    }
+   ],
+   "男爵": [
+    {
+     "x": 58.8,
+     "y": 69.8,
+     "floor": null
+    }
+   ],
+   "邪恶的维克托": [
+    {
+     "x": 33.3,
+     "y": 63.1,
      "floor": null
     }
    ],
    "枯牙": [
     {
      "x": 66.8,
-     "y": 39.2,
+     "y": 34.6,
      "floor": null
     }
    ]
   },
   "scholomance": {
+   "基尔图诺斯的卫士": [
+    {
+     "x": 78.9,
+     "y": 71.6,
+     "floor": null
+    }
+   ],
    "瑟尔林·卡斯迪诺夫教授": [
     {
      "x": 95.6,
@@ -1047,11 +1184,18 @@
      "floor": 7
     }
    ],
+   "邪恶战马 / 暗影战马": [
+    {
+     "x": 37.1,
+     "y": 59.6,
+     "floor": null
+    }
+   ],
    "吞噬者芬鲁斯": [
     {
-     "x": 55.7,
-     "y": 64.5,
-     "floor": 6
+     "x": 54.7,
+     "y": 53.1,
+     "floor": 4
     }
    ],
    "盲眼守卫奥杜": [
@@ -1070,8 +1214,8 @@
    ],
    "雷希戈尔": [
     {
-     "x": 66.1,
-     "y": 71.1,
+     "x": 66.0,
+     "y": 71.7,
      "floor": null
     }
    ],
@@ -1086,6 +1230,11 @@
   "scarlet-monastery-armory": {
    "赫洛德": [
     {
+     "x": 78.3,
+     "y": 10.0,
+     "floor": null
+    },
+    {
      "x": 78.6,
      "y": 10.8,
      "floor": 3
@@ -1095,6 +1244,11 @@
   "scarlet-monastery-cathedral": {
    "大检察官法尔班克斯": [
     {
+     "x": 55.6,
+     "y": 24.7,
+     "floor": null
+    },
+    {
      "x": 55.4,
      "y": 26.1,
      "floor": 4
@@ -1102,12 +1256,22 @@
    ],
    "大检察官怀特迈恩": [
     {
+     "x": 49.1,
+     "y": 16.0,
+     "floor": null
+    },
+    {
      "x": 49.0,
      "y": 16.9,
      "floor": 4
     }
    ],
    "血色十字军指挥官莫格莱尼": [
+    {
+     "x": 49.0,
+     "y": 27.5,
+     "floor": null
+    },
     {
      "x": 49.1,
      "y": 27.2,
@@ -1200,12 +1364,22 @@
   "scarlet-monastery-library": {
    "奥法师杜安": [
     {
+     "x": 83.7,
+     "y": 74.7,
+     "floor": null
+    },
+    {
      "x": 83.2,
      "y": 74.5,
      "floor": 2
     }
    ],
    "驯犬者洛克希": [
+    {
+     "x": 31.8,
+     "y": 88.0,
+     "floor": null
+    },
     {
      "x": 30.8,
      "y": 87.8,
@@ -1238,16 +1412,6 @@
      "x": 85.1,
      "y": 27.5,
      "floor": null
-    },
-    {
-     "x": 63.9,
-     "y": 24.8,
-     "floor": null
-    },
-    {
-     "x": 59.8,
-     "y": 26.7,
-     "floor": null
     }
    ],
    "狂热的玛洛尔": [
@@ -1264,8 +1428,15 @@
      "floor": null
     },
     {
-     "x": 57.5,
-     "y": 69.7,
+     "x": 58.9,
+     "y": 66.6,
+     "floor": null
+    }
+   ],
+   "斯坦索姆信使": [
+    {
+     "x": 54.0,
+     "y": 71.0,
      "floor": null
     }
    ],
@@ -1294,8 +1465,8 @@
    ],
    "巴瑟拉斯镇长": [
     {
-     "x": 65.3,
-     "y": 75.5,
+     "x": 56.6,
+     "y": 15.7,
      "floor": 2
     }
    ],
@@ -1324,15 +1495,15 @@
   "sunken-temple": {
    "哈扎斯": [
     {
-     "x": 44.8,
-     "y": 85.1,
+     "x": 43.5,
+     "y": 90.7,
      "floor": null
     }
    ],
    "预言者迦玛兰": [
     {
-     "x": 76.0,
-     "y": 37.0,
+     "x": 74.9,
+     "y": 38.2,
      "floor": null
     }
    ],
@@ -1345,8 +1516,8 @@
    ],
    "可悲的奥戈姆": [
     {
-     "x": 76.7,
-     "y": 36.1,
+     "x": 78.5,
+     "y": 34.0,
      "floor": null
     }
    ],
@@ -1356,13 +1527,20 @@
      "y": 87.4,
      "floor": null
     }
+   ],
+   "哈卡的后代": [
+    {
+     "x": 60.3,
+     "y": 45.4,
+     "floor": null
+    }
    ]
   },
   "deathmine": {
    "绿皮船长": [
     {
-     "x": 61.7,
-     "y": 35.9,
+     "x": 57.9,
+     "y": 38.7,
      "floor": 2
     }
    ],
@@ -1410,8 +1588,8 @@
    ],
    "斯尼德": [
     {
-     "x": 45.0,
-     "y": 88.9,
+     "x": 47.1,
+     "y": 87.0,
      "floor": null
     }
    ],
@@ -1424,6 +1602,13 @@
    ]
   },
   "the-stocks": {
+   "巴基尔·斯瑞德": [
+    {
+     "x": 85.7,
+     "y": 51.0,
+     "floor": null
+    }
+   ],
    "布鲁高·铁拳": [
     {
      "x": 38.1,
@@ -1510,6 +1695,11 @@
    ],
    "阿扎达斯": [
     {
+     "x": 41.8,
+     "y": 17.2,
+     "floor": null
+    },
+    {
      "x": 55.4,
      "y": 50.6,
      "floor": 2
@@ -1536,6 +1726,13 @@
      "floor": null
     }
    ],
+   "艾隆纳亚": [
+    {
+     "x": 36.9,
+     "y": 73.6,
+     "floor": null
+    }
+   ],
    "黑曜石哨兵": [
     {
      "x": 28.8,
@@ -1552,17 +1749,7 @@
    ],
    "鲁维罗什": [
     {
-     "x": 52.3,
-     "y": 72.6,
-     "floor": null
-    },
-    {
-     "x": 53.1,
-     "y": 73.5,
-     "floor": null
-    },
-    {
-     "x": 54.1,
+     "x": 52.0,
      "y": 72.2,
      "floor": null
     }
@@ -1665,30 +1852,34 @@
    ],
    "灰尘怨灵": [
     {
-     "x": 31.7,
-     "y": 46.0,
+     "x": 31.5,
+     "y": 48.6,
      "floor": null
     },
     {
      "x": 49.3,
      "y": 25.9,
      "floor": null
-    },
+    }
+   ],
+   "加兹瑞拉": [
     {
-     "x": 31.0,
-     "y": 15.2,
-     "floor": null
-    },
-    {
-     "x": 44.2,
-     "y": 15.2,
+     "x": 29.6,
+     "y": 39.4,
      "floor": null
     }
    ],
    "水占师维蕾萨": [
     {
-     "x": 28.9,
-     "y": 40.3,
+     "x": 34.5,
+     "y": 35.8,
+     "floor": null
+    }
+   ],
+   "耐克鲁姆": [
+    {
+     "x": 29.1,
+     "y": 18.1,
      "floor": null
     }
    ],
@@ -1699,22 +1890,29 @@
      "floor": null
     },
     {
-     "x": 52.4,
-     "y": 42.3,
+     "x": 50.5,
+     "y": 41.5,
+     "floor": null
+    }
+   ],
+   "沙怒刽子手": [
+    {
+     "x": 24.0,
+     "y": 15.6,
      "floor": null
     }
    ],
    "布莱中士": [
     {
-     "x": 23.5,
-     "y": 18.3,
+     "x": 23.9,
+     "y": 20.6,
      "floor": null
     }
    ],
    "殉教者塞卡": [
     {
-     "x": 55.4,
-     "y": 29.6,
+     "x": 56.7,
+     "y": 31.5,
      "floor": null
     }
    ],
@@ -1738,153 +1936,9 @@
   "entry": [],
   "bosses": [
    {
-    "dfSlug": "blackfathom_deeps",
-    "nameEn": "Twilight Lord Kelris",
-    "nameCn": "梦游者克尔里斯",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "blackrock_depths",
-    "nameEn": "Panzor the Invincible",
-    "nameCn": "无敌的潘佐尔",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "blackrock_depths",
-    "nameEn": "Verek",
-    "nameCn": "维雷克",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Arcane Anomaly",
-    "nameCn": "奥术异常体",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Arcanic Enigma",
-    "nameCn": "奥术谜团",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Atrexis the Grave Knight",
-    "nameCn": "墓穴骑士阿特雷克西斯",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Fel Ancient",
-    "nameCn": "邪能古树",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Lyn the Ignored",
-    "nameCn": "被无视的琳",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Mana Devourer",
-    "nameCn": "法力吞噬者",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Shade of the Archmage",
-    "nameCn": "大法师之影",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "city_of_dalaran",
-    "nameEn": "Unstable Sentinel",
-    "nameCn": "不稳定的哨兵",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "excavation_wetlands",
-    "nameEn": "Highland Horror",
-    "nameCn": "高地惊魂",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "excavation_wetlands",
-    "nameEn": "Relic Guardian",
-    "nameCn": "遗物守护者",
-    "why": "站内这座本没有同名首领"
-   },
-   {
     "dfSlug": "hall_of_thanes",
     "nameEn": "Magmatus",
     "nameCn": "玛格玛图斯",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "hall_of_thanes",
-    "nameEn": "Plunder",
-    "nameCn": "普兰德",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "onyxias_lair",
-    "nameEn": "Onyxia",
-    "nameCn": "奥妮克希亚",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "razorfen_kraul",
-    "nameEn": "Razorfen Spearhide",
-    "nameCn": "剃刀沼泽刺鬃守卫",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "ruins_of_lordaeron",
-    "nameEn": "The Baron",
-    "nameCn": "男爵",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "ruins_of_lordaeron",
-    "nameEn": "Viktor the Vile",
-    "nameCn": "邪恶的维克托",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "scholomance",
-    "nameEn": "Blood Steward of Kirtonos",
-    "nameCn": "基尔图诺斯的卫士",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "shadowfang_keep",
-    "nameEn": "Fel Steed / Shadow Charger",
-    "nameCn": "邪恶战马 / 暗影战马",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "stratholme_main",
-    "nameEn": "Stratholme Courier",
-    "nameCn": "斯坦索姆信使",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "sunken_temple",
-    "nameEn": "Spawn of Hakkar",
-    "nameCn": "哈卡的后代",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "the_stockade",
-    "nameEn": "Bazil Thredd",
-    "nameCn": "巴基尔·斯瑞德",
-    "why": "站内这座本没有同名首领"
-   },
-   {
-    "dfSlug": "zul_farrak",
-    "nameEn": "Sandfury Executioner",
-    "nameCn": "沙怒刽子手",
     "why": "站内这座本没有同名首领"
    }
   ]

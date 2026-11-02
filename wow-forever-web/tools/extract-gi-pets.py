@@ -29,8 +29,11 @@ import re
 import sys
 
 HOME = os.path.expanduser('~')
-DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
-DEF_LISTFILE = '/tmp/wow-ro/ziliao-export/listfile/client-fdid-name.csv'
+from addons_root import resolve, listfile_csv   # 插件装在哪个盘、导出件在哪个盘都不该写死（见 addons_root.py）
+DEF_SRC = resolve('GearInsight_Forever')
+# 原来写死 /tmp/wow-ro/…（Mac 那台的只读挂载位）。这台 Windows 上它在本机导出目录里，
+# 路径不对时脚本会把 iconKey 全写成 null 照样落盘——2026-11-02 实测踩过，所以解析必须跟着机器走
+DEF_LISTFILE = listfile_csv()
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(WEB, 'app', 'data', 'upstream', 'gi-pets.json')
 

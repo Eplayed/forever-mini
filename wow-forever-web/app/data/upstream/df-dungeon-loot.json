@@ -10,7 +10,7 @@
    "sha256": "3a2c7428bd5850d05203136078c53204d70a53cdb833a02c1fc1a042be4c1277",
    "fileDate": "2026-10-25"
   },
-  "fetched": "2026-11-01",
+  "fetched": "2026-11-02",
   "took": "首领中文名、英文名、npcId，以及每条首领的掉落物品 ID（去重、升序）",
   "droppedFields": [
    "掉率那一列（DF 行里 100 / nil 那个数）——本站红线：掉落不写百分比",
@@ -31,95 +31,60 @@
   },
   "recountBossDiff": [
    [
+    "blackfathom-deeps",
+    "黑暗深渊",
+    9,
+    8,
+    9
+   ],
+   [
     "blackrock-depths",
     "黑石深渊",
-    20,
+    32,
     27,
     29
    ],
    [
-    "city-of-dalaran",
-    "达拉然",
-    0,
-    8,
-    9
-   ],
-   [
-    "dire-maul-west",
-    "厄运之槌西区",
-    7,
-    8,
-    9
-   ],
-   [
-    "gnomeregan",
-    "诺莫瑞根",
+    "whelgars-excavation",
+    "挖掘场：湿地",
     6,
-    7,
-    8
+    4,
+    4
    ],
    [
     "hall-of-thanes",
     "领主大厅",
-    4,
+    5,
     3,
     4
    ],
    [
-    "maraudon",
-    "玛拉顿",
+    "ruins-of-lordaeron",
+    "洛丹伦废墟",
     9,
-    15,
-    15
-   ],
-   [
-    "onyxias-lair",
-    null,
-    0,
-    1,
-    1
-   ],
-   [
-    "razor-krendor",
-    "剃刀高地",
-    6,
     7,
     8
    ],
    [
-    "razorfen-kraul",
-    "剃刀沼泽",
-    8,
-    9,
-    10
-   ],
-   [
     "scholomance",
     "通灵学院",
-    14,
+    17,
     15,
     16
    ],
    [
-    "shadowfang-keep",
-    "影牙城堡",
-    9,
-    12,
-    15
+    "stratholme-main-gate",
+    "斯坦索姆正门",
+    13,
+    11,
+    13
    ],
    [
-    "scarlet-monastery-graveyard",
-    "血色修道院墓地",
-    5,
+    "the-stocks",
+    "监狱",
+    7,
     6,
     7
-   ],
-   [
-    "sunken-temple",
-    "沉没的神庙",
-    9,
-    11,
-    12
    ],
    [
     "uldaman",
@@ -134,13 +99,6 @@
     9,
     8,
     10
-   ],
-   [
-    "zulfarrak",
-    "祖尔法拉克",
-    12,
-    13,
-    14
    ]
   ]
  },

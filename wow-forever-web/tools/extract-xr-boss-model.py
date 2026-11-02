@@ -27,7 +27,8 @@ from datetime import date
 
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 插件在仓库外（红线：插件本体不进 git）：Documents/project/.scratch/<这一批>
-DEF_SRC = os.path.join(os.path.dirname(os.path.dirname(WEB)), '.scratch', 'wow-client-2026-10-21')
+from addons_root import resolve, source_ref   # 原来写死 .scratch/wow-client-2026-10-21（Mac 副本）
+DEF_SRC = resolve('XR_DungeonGuide')
 UP = os.path.join(WEB, "app", "data", 'upstream')
 
 # XR 的 slug → 本站 slug。判据是首领中文名集合的交集（下面 alias 段会把重合数写出来），
@@ -97,7 +98,7 @@ def main():
     doc = {'meta': {
         'source': 'XR_DungeonGuide/Data_BossModel.lua（作者自述：照 DungeonsForever 掉落集合交集 + 中文名复核生成）',
         'addon': 'XR_DungeonGuide', 'addonVersion': toc_version(os.path.join(src, 'XR_DungeonGuide'), 'XR_DungeonGuide'),
-        'sourceFile': os.path.relpath(p, os.path.join(WEB, '..', '..')),
+        'sourceFile': source_ref(p, os.path.join(WEB, '..', '..')),
         'sourceStamp': {'bytes': os.path.getsize(p),
                         'sha256': __import__('hashlib').sha256(open(p, 'rb').read()).hexdigest(),
                         'fileDate': date.fromtimestamp(os.path.getmtime(p)).isoformat()},
