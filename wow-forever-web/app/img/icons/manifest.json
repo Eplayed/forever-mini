@@ -8,18 +8,6 @@
   {
    "at": "2026-11-02",
    "added": 0,
-   "unavailable": [],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
-  {
-   "at": "2026-11-02",
-   "added": 0,
-   "unavailable": [],
-   "note": "见本次改动的数据文件 iconKey 字段"
-  },
-  {
-   "at": "2026-11-02",
-   "added": 0,
    "unavailable": [
     "8119728",
     "inv_inscription_modified_craftingreagent06"
@@ -44,6 +32,24 @@
    "unavailable": [
     "8119728",
     "inv_inscription_modified_craftingreagent06"
+   ],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-11-02",
+   "added": 0,
+   "unavailable": [
+    "8119728",
+    "inv_inscription_modified_craftingreagent06"
+   ],
+   "note": "见本次改动的数据文件 iconKey 字段"
+  },
+  {
+   "at": "2026-11-02",
+   "added": 0,
+   "unavailable": [
+    "race_nightelf_male",
+    "race_skyborne"
    ],
    "note": "见本次改动的数据文件 iconKey 字段"
   },

@@ -15,6 +15,8 @@
 #   tools/refresh.sh talents     # 天赋树（双源对齐 + 图标）
 #   tools/refresh.sh quests      # 副本任务（wclbox 35 座 + wowhead/GI 补空座）
 #   tools/refresh.sh items       # 物品名录那一层（107 页列表；详情那一层 3.7 小时，单独手工跑）
+#   tools/refresh.sh spells      # 法术书（参考站定名 + GI/XR 回填数值）
+#   tools/refresh.sh achievements# 成就（GI 目录 + 参考站端点逐字互证）
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
 #   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
@@ -147,6 +149,24 @@ case "${1:-}" in
     # 一天两次更新等不起；要重抓就单独手工跑那一条 + merge-items-detail。
     run python3 tools/scrape-wclbox-items.py
     run python3 tools/merge-items.py
+    gate
+    ;;
+  spells)
+    # 法术书：参考站定名（L0，要能逐字回查）+ GI/XR 两份插件回填 spellId 与每级学习等级。
+    # 谁是主源、两源数值分歧取谁，全写在 merge-spells.py 的头里（2026-10-20 站主改口那一条）。
+    # 这条以前没有场景，所以那份快照 11-02 数出来是 17 天没动。
+    run python3 tools/scrape-wclbox-spells.py
+    run python3 tools/merge-spells.py
+    run python3 tools/build-icon-map.py
+    run python3 tools/fetch-icons.py --from-json app/data/spells.json --field iconKey
+    gate
+    ;;
+  achievements)
+    # 成就：新版 GI 目录 + 旧版独有行兜底 + 参考站端点逐字互证（id 对上且中文名一字不差才 L0）。
+    # 同样以前没有场景，快照 17 天没动。
+    run python3 tools/scrape-wclbox-achievements.py
+    run python3 tools/merge-achievements.py
+    run python3 tools/build-icon-map.py
     gate
     ;;
   addons)

@@ -16,9 +16,9 @@ TOPICS = (
     ("dungeon-quests", "副本任务", "dungeon-quests.json", "dungeons", "upstream/wclbox-dungeon-quests.json", "新手盒子 + Wowhead + GI", "https://wowforever.wclbox.com/fuben", "quests"),
     ("professions", "专业与配方", "professions.json", "professions", "upstream/wclbox-professions.json", "新手盒子 + XR 插件", "https://wowforever.wclbox.com/zhuanye", "prof"),
     ("legacy", "传承", "legacy.json", "perks", "upstream/wclbox-legacy.json", "新手盒子客户端解包转述", "https://wowforever.wclbox.com/chuancheng", "legacy"),
-    ("spells", "技能书", "spells.json", "spells", "upstream/wclbox-spells.json", "新手盒子 + GI/XR 插件", "https://wowforever.wclbox.com/jineng", None),
+    ("spells", "技能书", "spells.json", "spells", "upstream/wclbox-spells.json", "新手盒子 + GI/XR 插件", "https://wowforever.wclbox.com/jineng", "spells"),
     ("talents", "天赋节点", "talents/（九职业）", "talents", "upstream/fengshen-hunter.json", "fengshen + nieyi 双源", "https://wowclassicforever.info/", "talents"),
-    ("achievements", "成就", "achievements.json", "achievements", "upstream/gi-achievements.json", "GI 插件 + 新手盒子逐字核", "https://wowforever.wclbox.com/chengjiu", None),
+    ("achievements", "成就", "achievements.json", "achievements", "upstream/gi-achievements.json", "GI 插件 + 新手盒子逐字核", "https://wowforever.wclbox.com/chengjiu", "achievements"),
     ("bis", "配装名单", "bis.json", "sets", "upstream/wclbox-bis.json", "新手盒子 + 第二社区名单（L1）", "https://wowforever.wclbox.com/peizhuang", "bis"),
     ("guide", "插件目录", "guide.json", "addons", None, "人工核作者、原帖和日期", None, None),
     # 宏的真源是 macros.json（245 条，2026-10-30 起）；guide.json.macros 至今 0 条，

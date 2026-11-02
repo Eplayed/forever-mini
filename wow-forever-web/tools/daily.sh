@@ -86,10 +86,12 @@ step "② 插件层抽取" bash tools/refresh.sh addons
 
 if [ "$QUICK" = "0" ]; then
   # ③ 各板块重抓。每个场景都带 WOW_SKIP_GATE=1：门禁留到 ⑤ 统一跑一次，
-  #    否则 site-check 要跑十遍（单跑约 13 分钟）
-  #    顺序不是随便排的：quests / items 要排在 ② 之后（merge-dungeon-quests 吃 GI 的任务快照、
-  #    merge-items 吃 GI 的存在性探针）；icons 放最后，让前面新写进去的 iconKey 先进登记表再补图。
-  for s in world changes dungeons prof legacy talents official quests items icons; do
+  #    否则 site-check 要跑十二遍（单跑约 12 分钟）
+  #    顺序不是随便排的：quests / items / spells / achievements 都要排在 ② 之后
+  #    （merge-dungeon-quests 吃 GI 的任务快照、merge-items 吃 GI 的存在性探针、
+  #     merge-spells 吃 GI+XR 的每级学习等级、merge-achievements 吃 GI 的成就目录）；
+  #    icons 放最后，让前面新写进去的 iconKey 先进登记表再补图。
+  for s in world changes dungeons prof legacy talents official quests items spells achievements icons; do
     step "③ 重抓 $s" env WOW_SKIP_GATE=1 bash tools/refresh.sh "$s"
   done
 fi
