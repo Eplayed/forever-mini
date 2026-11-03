@@ -2,7 +2,7 @@
  "classId": "shaman",
  "classNameCn": "萨满祭司",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -405,9 +405,9 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "熔岩爆裂",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "雷霆召唤",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -427,8 +427,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-shaman-elemental-combat-lava-burst",
-     "changeState": "added"
+     "upstreamId": "launch-shaman-雷霆召唤",
+     "posMismatch": true
     },
     {
      "id": "shaman-0-闪电超载",
@@ -461,7 +461,7 @@
       }
      ],
      "upstreamId": "calc-shaman-elemental-combat-lightning-overload",
-     "changeState": "added"
+     "changeState": "modified"
     },
     {
      "id": "shaman-0-元素之怒",
@@ -694,7 +694,7 @@
       }
      ],
      "upstreamId": "calc-shaman-enhancement-mental-dexterity",
-     "changeState": "added"
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-强化幽魂之狼",
@@ -704,7 +704,7 @@
      "nameCn": "强化幽魂之狼",
      "nameAlt": null,
      "nameConflict": false,
-     "nameVerified": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -723,9 +723,7 @@
        "url": "https://nieyi.cn/f/talents/shaman.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ],
-     "upstreamId": "shaman-improved-ghost-wolf",
-     "changeState": "modified"
+     ]
     },
     {
      "id": "shaman-1-强化闪电之盾",
@@ -1612,7 +1610,7 @@
       }
      ],
      "upstreamId": "calc-shaman-restoration-riptide",
-     "changeState": "added"
+     "changeState": "modified"
     }
    ],
    "nameAlt": null,
@@ -1632,7 +1630,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/shaman",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-02"
+   "checkedAt": "2026-11-03"
   }
  ]
 }

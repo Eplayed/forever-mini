@@ -1,7 +1,7 @@
 {
  "meta": {
   "kind": "gi-pets",
-  "fetchedAt": "2026-11-02",
+  "fetchedAt": "2026-11-03",
   "source": "GearInsight 无限版 0.5.6",
   "file": "GearInsight_Forever/PetData.lua",
   "selfReportedBuild": "1.60.1.70532",
@@ -24,7 +24,7 @@
   "provenance": {
    "type": "addon",
    "url": "GearInsight_Forever/PetData.lua",
-   "checkedAt": "2026-11-02"
+   "checkedAt": "2026-11-03"
   }
  },
  "families": [

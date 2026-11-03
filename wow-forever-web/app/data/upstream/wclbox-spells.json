@@ -1,8 +1,8 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fashu/<职业>（九职业法术书，服务端渲染逐页取，共 9 页）",
-  "foreverBuild": "1.60.1.70707",
-  "release": "r-1793597174212",
+  "foreverBuild": "1.60.1.70753",
+  "release": "r-1793694023664",
   "pageUrls": {
    "warrior": "https://wowforever.wclbox.com/fashu/warrior",
    "paladin": "https://wowforever.wclbox.com/fashu/paladin",
@@ -14,19 +14,19 @@
    "warlock": "https://wowforever.wclbox.com/fashu/warlock",
    "druid": "https://wowforever.wclbox.com/fashu/druid"
   },
-  "fetched": "2026-11-02",
+  "fetched": "2026-11-03",
   "counts": {
    "total": 492,
    "byClass": {
     "warrior": 41,
-    "paladin": 52,
+    "paladin": 51,
     "hunter": 58,
-    "rogue": 56,
-    "priest": 56,
+    "rogue": 57,
+    "priest": 55,
     "shaman": 56,
     "mage": 60,
     "warlock": 55,
-    "druid": 58
+    "druid": 59
    },
    "noIcon": 1
   },
@@ -777,20 +777,6 @@
   {
    "classId": "paladin",
    "classNameCn": "圣骑士",
-   "name": "真理之音",
-   "iconKey": "inv_misc_horn_03",
-   "tab": "神圣",
-   "ranks": null,
-   "learnLevel": 20,
-   "state": "new",
-   "stateTag": "new",
-   "relation": null,
-   "url": "https://wowforever.wclbox.com/fashu/paladin",
-   "level": "L0"
-  },
-  {
-   "classId": "paladin",
-   "classNameCn": "圣骑士",
    "name": "超度亡灵",
    "iconKey": "spell_holy_turnundead",
    "tab": "神圣",
@@ -1116,7 +1102,7 @@
    "name": "神圣之盾",
    "iconKey": "spell_holy_blessingofprotection",
    "tab": "防护",
-   "ranks": 3,
+   "ranks": 4,
    "learnLevel": 30,
    "state": null,
    "stateTag": null,
@@ -2527,6 +2513,20 @@
   {
    "classId": "rogue",
    "classNameCn": "潜行者",
+   "name": "蓄势待发",
+   "iconKey": "ability_rogue_fleetfooted",
+   "tab": "敏锐",
+   "ranks": null,
+   "learnLevel": 18,
+   "state": "new",
+   "stateTag": "new",
+   "relation": null,
+   "url": "https://wowforever.wclbox.com/fashu/rogue",
+   "level": "L0"
+  },
+  {
+   "classId": "rogue",
+   "classNameCn": "潜行者",
    "name": "扰乱",
    "iconKey": "ability_rogue_distract",
    "tab": "敏锐",
@@ -3403,20 +3403,6 @@
    "state": null,
    "stateTag": null,
    "relation": "talent",
-   "url": "https://wowforever.wclbox.com/fashu/priest",
-   "level": "L0"
-  },
-  {
-   "classId": "priest",
-   "classNameCn": "牧师",
-   "name": "联结治疗",
-   "iconKey": "spell_holy_blindingheal",
-   "tab": "神圣",
-   "ranks": 6,
-   "learnLevel": 25,
-   "state": "new",
-   "stateTag": "new",
-   "relation": null,
    "url": "https://wowforever.wclbox.com/fashu/priest",
    "level": "L0"
   },
@@ -6636,6 +6622,20 @@
    "learnLevel": 30,
    "state": "changed",
    "stateTag": "changed",
+   "relation": null,
+   "url": "https://wowforever.wclbox.com/fashu/druid",
+   "level": "L0"
+  },
+  {
+   "classId": "druid",
+   "classNameCn": "德鲁伊",
+   "name": "蓄势待发",
+   "iconKey": "ability_racial_darkflight",
+   "tab": "野性战斗",
+   "ranks": null,
+   "learnLevel": 32,
+   "state": "new",
+   "stateTag": "new",
    "relation": null,
    "url": "https://wowforever.wclbox.com/fashu/druid",
    "level": "L0"

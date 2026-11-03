@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-11-02",
+  "scrapedAt": "2026-11-03",
   "method": "tools/scrape-wclbox.py --what dungeons --write",
   "took": "名单/等级区间/新本标记/BOSS 名/掉落归属/物品 ID/图标文件名；不取描述文案与攻略"
  },
@@ -163,11 +163,6 @@
      "noLootNote": "开放数据库里还没有它的掉落。"
     },
     {
-     "id": "rath-mael",
-     "nameCn": "拉斯玛尔",
-     "noLootNote": null
-    },
-    {
      "id": "lordaeron-captain",
      "nameCn": "洛丹伦上尉",
      "noLootNote": "开放数据库里还没有它的掉落。"
@@ -181,6 +176,11 @@
      "id": "bjork",
      "nameCn": "比约克",
      "noLootNote": "开放数据库里还没有它的掉落。"
+    },
+    {
+     "id": "rath-mael",
+     "nameCn": "拉斯玛尔",
+     "noLootNote": null
     }
    ],
    "drops": [

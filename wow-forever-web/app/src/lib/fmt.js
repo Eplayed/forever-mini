@@ -18,9 +18,10 @@ export function typeLabel(t) {
   return TYPE_LABEL[t] || t || '来源';
 }
 
-/* 上线时间固定：2026-11-05 00:00 +08:00（国服口径）。
-   日期只有 data/meta.json 一处真相，tools/build-data.js 会卡这里和旧站 app.js 的常量是否一致。 */
-export const LAUNCH_AT = Date.parse('2026-11-05T00:00:00+08:00');
+/* 上线时间固定：2026-11-05 07:00 +08:00（2026-11-03 站主确认"是 11 月 5 号上午 7 点开服"；
+   从 00:00 挪到 07:00，与小程序 services/countdown.js 仍是同一个瞬间）。
+   日期只有 data/meta.json 一处真相，tools/build-data.js 会卡这里和小程序常量是否一致（比日期段）。 */
+export const LAUNCH_AT = Date.parse('2026-11-05T07:00:00+08:00');
 
 export function launchLeft(now) {
   const ms = Math.max(0, LAUNCH_AT - (now === undefined ? Date.now() : now));

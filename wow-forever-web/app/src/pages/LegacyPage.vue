@@ -314,7 +314,7 @@
          数一律从 legacy.json 现取；开放条件那句直接引数据里官方那篇的说法，不改写。
          不做的事：洗点花费、先点什么最划算这类没核实的，一律不编（数据里 notCollected 记着）。 -->
     <div class="card lge-faq" id="lfaq">
-      <h2>常被问到的四件事</h2>
+      <h2>常被问到的{{ faqCountText }}件事</h2>
       <dl class="lge-qa">
         <dt>传承点数从哪来？</dt>
         <dd>{{ rules.unlock }}常规挑战每完成一项给 <b class="mono">{{ perPoint }}</b> 点，一共
@@ -324,8 +324,8 @@
           一个角色最多能花 <b class="mono">{{ cap }}</b> 点。</dd>
         <dt>{{ nRegular }} 项全做完能拿多少点？客户端里那个 {{ cnt.challengePointSum }} 是什么？</dt>
         <dd>常规挑战全做完是 <b class="mono">{{ cnt.challengePointsRegular }}</b> 点。
-          <span class="mono">{{ cnt.challengePointSum }}</span> 是 {{ cnt.challenges }} 条条目的点数合计
-          （含下面那条测试参与记录），<b>不是人人可得</b>，也不是挑战条数。</dd>
+          <span class="mono">{{ cnt.challengePointSum }}</span> 是 {{ cnt.challenges }} 条条目的点数合计<template
+            v-if="specialItems.length">（含下面那条测试参与记录）</template><b>，不是人人可得</b>，也不是挑战条数。</dd>
         <dt v-if="specialItems.length">那条 {{ specialPointsOf }} 点的记录算不算？</dt>
         <dd v-if="specialItems.length">它是<b>{{ specialItems[0].nameCn }}</b>，官方那篇说的
           {{ nRegular }} 项常规挑战里没有它；正式服还给不给、谁能领，本站没核实，
@@ -578,6 +578,8 @@ const doneRegular = computed(() => checkStat.value.regularDone);
 const specialPoints = computed(() => checkStat.value.specialPoints);
 const specialItems = computed(() => idx.value.special);
 const specialPointsOf = computed(() => (idx.value.special[0] || {}).points || 0);
+// FAQ 条数跟着数据走：三条固定问答 + 有特殊条目才有的第四条（2026-11-03 上游把它收掉后是三条）
+const faqCountText = computed(() => ({ 3: '三', 4: '四' }[3 + (specialItems.value.length ? 1 : 0)] || '几'));
 const track = computed(() => (ctx.value ? rewardTrack(ctx.value, gotPoints.value) : []));
 
 const readout = computed(() => [

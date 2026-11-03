@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水源台 · 数据源更新 · wow-forever 数据线</title>
+<style>
+:root{
+  --bg:#0a0e14; --panel:#10151f; --panel2:#0d1119; --line:#232c3b; --line2:#2e394d;
+  --ink:#d7dbe2; --dim:#8b94a3; --faint:#5b6473;
+  --gold:#c8a35c; --gold-hi:#e6c98a; --gold-dim:rgba(200,163,92,.14);
+  --ok:#7fc08a; --err:#d06a5e; --warn:#c9a15c; --info:#7da7c9;
+  --serif:Georgia,"Times New Roman","STZhongsong","SimSun",serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New","Microsoft YaHei",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:13px/1.65 var(--mono);min-height:100vh;
+  background-image:radial-gradient(ellipse 900px 460px at 50% -140px,rgba(200,163,92,.055),transparent),
+    repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.012) 39px 40px);}
+.wrap{max-width:1340px;margin:0 auto;padding:30px 26px 70px}
+a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-hi)}
+
+header{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  padding:22px 28px 0;margin-bottom:22px}
+header::before{content:"";position:absolute;inset:4px;border:1px solid var(--gold-dim);pointer-events:none;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.kicker{font:600 11px var(--mono);letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+h1{font:400 29px/1.2 var(--serif);letter-spacing:.06em;margin:6px 0 2px}
+h1 b{color:var(--gold);font-weight:400}
+.sub{color:var(--faint);font-size:12px;letter-spacing:.08em}
+.readouts{display:flex;flex-wrap:wrap;margin-top:16px;border-top:1px solid var(--line)}
+.readouts div{padding:9px 20px 10px 0;margin-right:20px;border-right:1px dashed var(--line)}
+.readouts s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--faint)}
+.readouts b{font-weight:400;font-size:13px}
+.readouts em{font-style:normal;color:var(--gold)}
+.readouts .bad{color:var(--err)}.readouts .good{color:var(--ok)}
+
+h2{font:400 18px var(--serif);letter-spacing:.12em;margin-bottom:4px;display:flex;align-items:baseline;gap:12px}
+h2 i{font:600 10px var(--mono);color:var(--gold);letter-spacing:.3em;font-style:normal}
+h2 small{font:400 11.5px var(--mono);color:var(--faint);letter-spacing:0}
+section{margin-bottom:26px}
+
+/* ── 日更链流水线 ── */
+.rail{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));padding:18px 24px 20px}
+.rail-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.run-state{font-size:11.5px;color:var(--dim)}
+.run-state .led{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px}
+.run-state .led.grn{background:var(--ok);box-shadow:0 0 7px var(--ok)}
+.run-state .led.amb{background:var(--warn);box-shadow:0 0 7px var(--warn);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.steps{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:4px}
+.step{flex:1;min-width:118px;position:relative;border:1px solid var(--line2);background:rgba(0,0,0,.22);
+  padding:10px 12px 9px;margin-right:26px;transition:all .2s}
+.step:last-child{margin-right:0}
+.step::after{content:"▸";position:absolute;right:-21px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:13px}
+.step:last-child::after{content:""}
+.step .no{font:600 10px var(--mono);letter-spacing:.2em;color:var(--faint)}
+.step .nm{font:400 14px var(--serif);letter-spacing:.08em;margin:2px 0 3px}
+.step .dt{font-size:10.5px;color:var(--faint)}
+.step .ms{font-size:10px;color:var(--dim);margin-top:2px}
+.step.ok{border-color:rgba(127,192,138,.5)}
+.step.ok .nm{color:var(--ok)}
+.step.run{border-color:var(--gold);background:var(--gold-dim);animation:pulse 1.8s infinite}
+.step.run .nm{color:var(--gold-hi)}
+.step.fail{border-color:var(--err)}
+.step.fail .nm{color:var(--err)}
+.step.fail .dt::after{content:" ─ 红了，链停在这";color:var(--err)}
+.rail-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:1px solid var(--line2);background:transparent;color:var(--dim);font:600 12px var(--mono);
+  letter-spacing:.15em;padding:9px 20px;cursor:pointer;transition:all .15s}
+.btn:hover{border-color:var(--dim);color:var(--ink)}
+.btn.main{border-color:var(--gold);color:var(--gold-hi);background:var(--gold-dim)}
+.btn.main:hover{border-color:var(--gold-hi)}
+.btn small{display:block;font-weight:400;font-size:10px;color:var(--faint);letter-spacing:.03em;margin-top:2px}
+.logbox{margin-top:14px;border:1px solid var(--line2);background:rgba(0,0,0,.35);padding:10px 14px;
+  font-size:11.5px;color:var(--dim);max-height:130px;overflow-y:auto;white-space:pre-wrap;display:none}
+.logbox.on{display:block}
+.logbox .hl{color:var(--gold-hi)}
+
+/* ── 探源 ── */
+.probes{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:10px}
+.probe{border:1px solid var(--line);background:var(--panel2);padding:10px 14px;position:relative}
+.probe::after{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border-top:2px solid var(--ok);border-left:2px solid var(--ok)}
+.probe.bad::after{border-color:var(--err)}
+.probe s{display:block;text-decoration:none;font-size:10px;letter-spacing:.18em;color:var(--faint)}
+.probe b{font-weight:400;font-size:12.5px}
+.probe .lat{font-size:10.5px;color:var(--dim)}
+.probe.bad b{color:var(--err)}
+.probe .fix{font-size:10.5px;color:var(--warn);display:none}
+.probe.bad .fix{display:block}
+
+/* ── 板块网格 ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px}
+.tile{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  padding:12px 14px 11px;position:relative;transition:border-color .15s}
+.tile:hover{border-color:var(--gold)}
+.tile::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px}
+.tile.fresh::before{background:var(--ok)}
+.tile.warm::before{background:var(--warn)}
+.tile.stale::before{background:var(--err)}
+.tile.na::before{background:var(--line2)}
+.tile .tp{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tile .tp h3{font:400 14.5px var(--serif);letter-spacing:.06em}
+.tile .age{font-size:10px;letter-spacing:.1em;padding:1px 7px;border:1px solid}
+.tile.fresh .age{color:var(--ok);border-color:rgba(127,192,138,.5)}
+.tile.warm .age{color:var(--warn);border-color:rgba(201,161,92,.5)}
+.tile.stale .age{color:var(--err);border-color:var(--err)}
+.tile.na .age{color:var(--faint);border-color:var(--line2)}
+.tile .meta{font-size:11px;color:var(--dim);margin:5px 0 2px}
+.tile .meta em{font-style:normal;color:var(--ink)}
+.tile .src{font-size:10.5px;color:var(--faint);margin-bottom:9px}
+.tile .rf{border:1px solid var(--line2);background:transparent;color:var(--dim);font:600 10px var(--mono);
+  letter-spacing:.14em;padding:4px 12px;cursor:pointer;width:100%;transition:all .15s}
+.tile .rf:hover{border-color:var(--gold);color:var(--gold-hi)}
+.tile .rf:disabled{opacity:.4;cursor:not-allowed}
+.tile .rf.running{border-color:var(--gold);color:var(--gold-hi);animation:pulse 1.6s infinite}
+.tile.stale .rf{border-color:var(--err);color:var(--err)}
+.tile.stale .rf:hover{border-color:var(--err)}
+.tile.na .rf{display:none}
+
+/* ── 设计说明 ── */
+details.impl{border:1px dashed var(--line2);padding:14px 20px;color:var(--faint);font-size:11.5px}
+details.impl summary{cursor:pointer;color:var(--dim);letter-spacing:.2em;font-size:11px}
+details.impl summary:hover{color:var(--gold)}
+details.impl ul{margin:10px 0 0 18px;line-height:2}
+details.impl b{color:var(--gold);font-weight:400}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;display:flex;gap:26px;flex-wrap:wrap;
+  color:var(--faint);font-size:11px;letter-spacing:.06em}
+footer b{color:var(--warn);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">WOW FOREVER · 数据线 · 00 号屏</div>
+  <h1>水源<b>台</b> · 数据源更新</h1>
+  <div class="sub">数据从源头来：探源 → 取水（重抓）→ 滤水（门禁）→ 入井（基底）——日更链就是这条河，面板直接看着它流</div>
+  <div class="readouts">
+    <div><s>日更链最近一次</s><b class="good"><em>11-02</em> 14 步全绿 · 用时 12 分钟</b></div>
+    <div><s>十六板块新鲜度</s><b><em class="good">13</em> 新鲜 · <em style="color:var(--warn)">2</em> 超 7 天 · <em class="bad">1</em> 超 14 天</b></div>
+    <div><s>最陈的一块</s><b class="bad">物品详情源 <em>18</em> 天（全量重抓约 3.8 小时）</b></div>
+    <div><s>门禁</s><b>build-data · site-check · vitest —— 红了就修，不许抄日期</b></div>
+  </div>
+</header>
+
+<!-- ═══ 日更链 ═══ -->
+<section class="rail">
+  <div class="rail-head">
+    <h2><i>CHAIN</i>日更链 <small>tools/daily.sh 的 ①-⑦ 步 · steps.tsv 落盘即渲染，面板只是眼睛</small></h2>
+    <span class="run-state" id="runState"><span class="led grn"></span>昨天全绿 · 今天还没跑</span>
+  </div>
+  <div class="steps">
+    <div class="step ok" id="st1"><div class="no">①</div><div class="nm">探源</div><div class="dt">05:41</div><div class="ms">6 源全通 · 41s</div></div>
+    <div class="step ok" id="st2"><div class="no">②</div><div class="nm">插件层抽取</div><div class="dt">05:42</div><div class="ms">XR/GI/DF 全部 · 2m</div></div>
+    <div class="step ok" id="st3"><div class="no">③</div><div class="nm">重抓十块</div><div class="dt">05:44</div><div class="ms">逐块跳过门禁 · 4m</div></div>
+    <div class="step ok" id="st4"><div class="no">④</div><div class="nm">插件并成品</div><div class="dt">05:48</div><div class="ms">addons-merge · 1m</div></div>
+    <div class="step ok" id="st5"><div class="no">⑤</div><div class="nm">门禁</div><div class="dt">05:49</div><div class="ms">build-data · site-check · vitest · 9m</div></div>
+    <div class="step ok" id="st6"><div class="no">⑥</div><div class="nm">对账</div><div class="dt">05:58</div><div class="ms">本地 vs 线上 · 30s</div></div>
+    <div class="step ok" id="st7"><div class="no">⑦</div><div class="nm">出报告</div><div class="dt">05:59</div><div class="ms">当日体检落 docs · 5s</div></div>
+  </div>
+  <div class="rail-actions">
+    <button class="btn main" id="btnChain">▸ 跑今天的日更链<small>等价于 bash tools/daily.sh · 约 10-15 分钟 · 先探源，源不通不开跑</small></button>
+    <button class="btn" id="btnLog">看链上日志<small>steps.tsv + 每步输出尾行</small></button>
+  </div>
+  <div class="logbox" id="logbox">[05:41:02] ① 探源 … 6/6 通（wclbox 210ms · 官方中文页 380ms · GitHub 1.2s · OSS beta 96ms · AddOns 目录就位 · 客户端 70707）
+[05:42:10] ② 插件层抽取 … XR Data_Racials.lua(10-16) / GI Data.lua(10-30) / DF Data_DungeonLoot 已抽
+[05:44:33] ③ 重抓 quests … <span class="hl">216 条 (+4)</span>；items … 21,459 条；spells … 1,842 条；…
+[05:49:01] ⑤ 门禁 … build-data rc=0 · audit --strict rc=0 · site-check <span class="hl">707/707</span> · vitest 181/181
+[05:58:44] ⑥ 对账 … 网页线上仍是 10-28 包（9 板块落后）· 小程序指针与本地同批
+[05:59:02] ⑦ 报告 → docs/DATA-每日体检-2026-11-03.md</div>
+</section>
+
+<!-- ═══ 探源 ═══ -->
+<section>
+  <h2><i>PROBE</i>探源 <small>① 步的六个源 · 哪个不通先亮出来，后面的步骤才不算白跑</small></h2>
+  <div class="probes">
+    <div class="probe"><s>新手盒子</s><b>通</b><div class="lat">wclbox · 210ms</div></div>
+    <div class="probe"><s>官方中文页</s><b>通</b><div class="lat">新闻首页 · 380ms</div></div>
+    <div class="probe"><s>GitHub</s><b>通</b><div class="lat">git ls-remote · 1.2s</div></div>
+    <div class="probe"><s>OSS beta</s><b>通</b><div class="lat">匿名读指针 · 96ms</div></div>
+    <div class="probe"><s>本机插件目录</s><b>就位</b><div class="lat">XR / GI / DF 原件在</div></div>
+    <div class="probe bad"><s>第三方插件镜像（示例态）</s><b>不通</b><div class="lat">连续 3 天 000</div><div class="fix">① 红着 → ③ 里它那几块今天别当已更新</div></div>
+  </div>
+</section>
+
+<!-- ═══ 板块网格 ═══ -->
+<section>
+  <h2><i>TILES</i>十六板块 <small>左边色条 = 新鲜度：绿 ≤7 天 · 金 8-13 天 · 红 ≥14 天（build-data 的 STALE 口径）· 灰 = 未建库</small></h2>
+  <div class="grid">
+    <div class="tile stale"><div class="tp"><h3>物品详情源</h3><span class="age">18 天</span></div>
+      <div class="meta">源快照 <em>11-01 13:26</em> · 全量 21,077 件</div><div class="src">新手盒子逐件 · 全量重抓约 3.8h</div>
+      <button class="rf" data-long="1">重抓全量（后台 · 约 3.8h）</button></div>
+    <div class="tile warm"><div class="tp"><h3>配装名单</h3><span class="age">9 天</span></div>
+      <div class="meta">成品核对日 <em>10-28</em></div><div class="src">新手盒子 + 第二社区名单（L1）</div>
+      <button class="rf">重抓</button></div>
+    <div class="tile warm"><div class="tp"><h3>插件目录</h3><span class="age">8 天</span></div>
+      <div class="meta">人工核作者/原帖/日期</div><div class="src">无自动抓取链 · 人工维护</div>
+      <button class="rf" disabled>人工维护 · 无链</button></div>
+    <div class="tile fresh"><div class="tp"><h3>物品名录</h3><span class="age">昨天</span></div>
+      <div class="meta">21,459 条 · <em>11-02 19:45</em></div><div class="src">新手盒子名录</div><button class="rf">重抓</button></div>
+    <div class="tile fresh"><div class="tp"><h3>副本与掉落</h3><span class="age">昨天</span></div>
+      <div class="meta">BOSS 278 · <em>11-02 19:41</em></div><div class="src">盒子 + 排队表 + DB2 + DF 补名单</div><button class="rf">重抓</button></div>
+    <div class="tile fresh"><div class="tp"><h3>宏命令</h3><span class="age">昨天</span></div>
+      <div class="meta">245 条 · <em>11-02 19:46</em></div><div class="src">GI MacroSpellNames（L1）</div><button class="rf">重抓</button></div>
+    <div class="tile fresh"><div class="tp"><h3>种族特长</h3><span class="age">昨天</span></div>
+      <div class="meta">40 条 · 18 条 XR 覆盖</div><div class="src">官方公告 + XR/GI 双源</div><button class="rf">重抓</button></div>
+    <div class="tile fresh"><div class="tp"><h3>技能书 / 成就 / 专业 / 传承 / 世界 / 改动 / 宠物 / 天赋</h3><span class="age">昨天</span></div>
+      <div class="meta">8 块全部 <em>11-02</em> 日更覆盖</div><div class="src">各自场景走 refresh.sh</div><button class="rf">重抓</button></div>
+    <div class="tile na"><div class="tp"><h3>全域任务 / PvP 军衔</h3><span class="age">未建库</span></div>
+      <div class="meta">候选源已登记 · 库没建</div><div class="src">等产品口径</div></div>
+  </div>
+</section>
+
+<!-- ═══ 设计说明 ═══ -->
+<details class="impl">
+  <summary>设计说明 · 与现状的差异、每块对应的真数据源（wow-dev 接手读这里）</summary>
+  <ul>
+    <li><b>结论：要重设计，但不是推翻</b>——现有工作台的 01 本地vs线上 / 02 条目检索 / 05 门禁都保留，这一稿补的是缺的「上游半边」：日更链、探源、十六板块新鲜度与一键重抓。</li>
+    <li><b>日更链视图</b>：真数据源是 <code>tools/daily.sh</code> 落盘的 <code>steps.tsv</code>（步骤名/退出码/耗时/输出尾行，已在写）+ <code>daily-report.py</code> 产物。面板轮询渲染即可，<b>不新增执行器</b>；「跑日更链」按钮 = jobs.py 白名单加一条 <code>daily.sh</code>（现有单板块 refresh 白名单旁边）。</li>
+    <li><b>进度问题</b>：现有 jobs 只有 running→done。改法：running 时每 5 秒回 <code>logTail</code> 增量（jobs.py 已存这个字段，只是没流出来），门禁 9 分钟不再干等。</li>
+    <li><b>探源视图</b>：真数据源是 <code>daily-probe.py --json</code> 的输出（源名/通断/延迟），探源失败时③里对应的块自动标「今天别当已更新」——这条规则抄 daily.sh 自己的注释。</li>
+    <li><b>板块新鲜度</b>：build-data.js 的 STALE_SOFT/HARD 口径（7/14 天）就是唯一判据，面板不复算第二套；红块按钮 = 现有 refresh 白名单，长任务（物品详情 3.8h）标「后台」并提示可断点续跑。</li>
+    <li><b>与 02 同步台的衔接</b>：这里管「取水入井」，02 管「出井分发」——链条两端，日更链⑥对账本来就是 reconcile.py，两屏共用同一份数据。</li>
+    <li><b>视觉</b>：令牌与 8830 现有工作台、02 同步台完全同族（墨底金纹 + 切角 + serif/mono），三屏拼成一套控制台。</li>
+  </ul>
+</details>
+
+<footer>
+  <span><b>边界</b> 面板是眼睛不是手——所有执行仍走 jobs.py 白名单单命令</span>
+  <span>红了去重抓，不许把日期手抄新</span>
+  <span>设计稿 · wow-ui · 2026-11-03</span>
+</footer>
+
+</div>
+
+<script>
+// 演示交互：链步进 + 日志开关 + 单块刷新模拟
+document.getElementById('btnLog').addEventListener('click', () =>
+  document.getElementById('logbox').classList.toggle('on'));
+document.getElementById('btnChain').addEventListener('click', function(){
+  const state = document.getElementById('runState');
+  state.innerHTML = '<span class="led amb"></span>正在跑 · ① 探源…';
+  const steps = [...document.querySelectorAll('.step')];
+  steps.forEach(s => s.classList.remove('ok','run','fail'));
+  let i = 0;
+  const names = ['① 探源','② 插件层抽取','③ 重抓十块','④ 插件并成品','⑤ 门禁','⑥ 对账','⑦ 出报告'];
+  const tick = () => {
+    if (i > 0) { steps[i-1].classList.remove('run'); steps[i-1].classList.add('ok'); }
+    if (i >= steps.length) {
+      state.innerHTML = '<span class="led grn"></span>跑完 · 7 步全绿（设计稿演示，实际约 10-15 分钟）';
+      return;
+    }
+    steps[i].classList.add('run');
+    state.innerHTML = '<span class="led amb"></span>正在跑 · ' + names[i] + '…';
+    i++; setTimeout(tick, 900);
+  };
+  tick();
+});
+document.querySelectorAll('.tile .rf:not([disabled])').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.long && !confirm('物品详情全量重抓约 3.8 小时，后台跑、可断点续跑。现在发起？（演示）')) return;
+    btn.classList.add('running'); btn.textContent = '重抓中…';
+    setTimeout(() => { btn.classList.remove('running'); btn.textContent = '完成（演示态）'; }, 2600);
+  });
+});
+</script>
+</body>
+</html>

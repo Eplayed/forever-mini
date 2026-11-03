@@ -167,10 +167,16 @@ describe('方案码：只装格子层数与版本，回来必须能对上', () =
 describe('挑战勾选：只认数据里真有的编号，常规与特殊分账', () => {
   const idx = challengeIndex(ctx);
   const oneRegular = String(idx.regular[0].id);
-  const oneSpecial = String(idx.special[0].id);
-  it('勾一条常规给 1 点，勾那条测试参与记录给的是它自己标的点数', () => {
+  it('勾一条常规给 1 点，特殊条目（若数据里还有）按它自己标的点数', () => {
     expect(applyChecks(ctx, [oneRegular]).regularPoints).toBe(1);
     expect(applyChecks(ctx, [oneRegular]).specialPoints).toBe(0);
+    if (!idx.special.length) {
+      // 2026-11-03 上游把那条非 1 点的特殊条目收掉了（见 merge-legacy.js 头注）；
+      // 数据里没有特殊条目是合法状态，断言它真的为空即可，不许再写死"有一条"。
+      expect(idx.special).toEqual([]);
+      return;
+    }
+    const oneSpecial = String(idx.special[0].id);
     const r = applyChecks(ctx, [oneSpecial]);
     expect(r.specialPoints).toBe(idx.special[0].points);
     expect(r.regularPoints).toBe(0);

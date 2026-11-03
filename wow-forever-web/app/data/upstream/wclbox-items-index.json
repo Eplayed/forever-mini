@@ -2,13 +2,13 @@
  "meta": {
   "source": "wowforever.wclbox.com /wupin/liebiao（名称索引全量名录）",
   "url": "https://wowforever.wclbox.com/wupin/liebiao/1",
-  "fetched": "2026-11-02",
+  "fetched": "2026-11-03",
   "pages": 108,
-  "parsed": 21459,
+  "parsed": 21460,
   "stats": {
-   "new": 5632,
-   "changed": 3882,
-   "same": 10146,
+   "new": 5633,
+   "changed": 3883,
+   "same": 10145,
    "missing": 1696,
    "ic-rebuilt": 103
   },
@@ -11403,13 +11403,13 @@
   {
    "id": 2314,
    "name": "韧化皮甲",
-   "quality": 1,
+   "quality": 2,
    "icon": "inv_chest_leather_10.jpg",
-   "sub": "普通",
+   "sub": "优秀",
    "type": "胸部 · 皮甲",
    "ilvl": 24,
    "rlvl": 19,
-   "status": "same"
+   "status": "changed"
   },
   {
    "id": 2315,
@@ -176237,7 +176237,7 @@
   },
   {
    "id": 249519,
-   "name": "配方： 冰冻山脉之心",
+   "name": "公式：冰冻山脉之心",
    "quality": 3,
    "icon": "inv_misc_note_01.jpg",
    "sub": "精良",
@@ -176248,7 +176248,7 @@
   },
   {
    "id": 249520,
-   "name": "配方： 熔火山脉之心",
+   "name": "公式：熔火山脉之心",
    "quality": 3,
    "icon": "inv_misc_note_01.jpg",
    "sub": "精良",
@@ -176259,7 +176259,7 @@
   },
   {
    "id": 249521,
-   "name": "配方： 休眠山脉之心",
+   "name": "公式：休眠山脉之心",
    "quality": 3,
    "icon": "inv_misc_note_01.jpg",
    "sub": "精良",
@@ -180043,7 +180043,7 @@
   },
   {
    "id": 251340,
-   "name": "设计图: 老兵的链甲衬衫",
+   "name": "设计图：老兵的链甲衬衫",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180065,7 +180065,7 @@
   },
   {
    "id": 251342,
-   "name": "设计图: 保护者的链甲衬衫",
+   "name": "设计图：保护者的链甲衬衫",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180076,7 +180076,7 @@
   },
   {
    "id": 251343,
-   "name": "设计图: 助祭的链甲衬衫",
+   "name": "设计图：助祭的链甲衬衫",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180087,7 +180087,7 @@
   },
   {
    "id": 251344,
-   "name": "设计图: 十字军的链甲衬衫",
+   "name": "设计图：十字军的链甲衬衫",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180098,7 +180098,7 @@
   },
   {
    "id": 251345,
-   "name": "设计图: 老兵的链甲护腿",
+   "name": "设计图：老兵的链甲护腿",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180109,7 +180109,7 @@
   },
   {
    "id": 251346,
-   "name": "设计图: 卫兵的链甲护腿",
+   "name": "设计图：卫兵的链甲护腿",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180120,7 +180120,7 @@
   },
   {
    "id": 251347,
-   "name": "设计图: 保护者的链甲护腿",
+   "name": "设计图：保护者的链甲护腿",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180131,7 +180131,7 @@
   },
   {
    "id": 251348,
-   "name": "设计图: 助祭的链甲护腿",
+   "name": "设计图：助祭的链甲护腿",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180142,7 +180142,7 @@
   },
   {
    "id": 251349,
-   "name": "设计图: 十字军的链甲护腿",
+   "name": "设计图：十字军的链甲护腿",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180153,7 +180153,7 @@
   },
   {
    "id": 251350,
-   "name": "设计图: 老兵的链甲头盔",
+   "name": "设计图：老兵的链甲头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180164,7 +180164,7 @@
   },
   {
    "id": 251351,
-   "name": "设计图: 卫兵的链甲头盔",
+   "name": "设计图：卫兵的链甲头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180175,7 +180175,7 @@
   },
   {
    "id": 251352,
-   "name": "设计图: 保护者的链甲头盔",
+   "name": "设计图：保护者的链甲头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180186,7 +180186,7 @@
   },
   {
    "id": 251353,
-   "name": "设计图: 助祭的链甲头盔",
+   "name": "设计图：助祭的链甲头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180197,7 +180197,7 @@
   },
   {
    "id": 251354,
-   "name": "设计图: 十字军的链甲头盔",
+   "name": "设计图：十字军的链甲头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -180648,7 +180648,7 @@
   },
   {
    "id": 251395,
-   "name": "设计图: 闪耀秘银头盔",
+   "name": "设计图：闪耀秘银头盔",
    "quality": 3,
    "icon": "inv_scroll_03.jpg",
    "sub": "精良",
@@ -184399,7 +184399,7 @@
   },
   {
    "id": 252771,
-   "name": "图案： 争斗者的皮甲",
+   "name": "图样：争斗者的皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184410,7 +184410,7 @@
   },
   {
    "id": 252772,
-   "name": "图案： 捕兽者的皮甲",
+   "name": "图样：捕兽者的皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184421,7 +184421,7 @@
   },
   {
    "id": 252773,
-   "name": "图案： 防御者的皮甲",
+   "name": "图样：防御者的皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184432,7 +184432,7 @@
   },
   {
    "id": 252774,
-   "name": "图案： 图腾师的皮甲",
+   "name": "图样：图腾师的皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184443,7 +184443,7 @@
   },
   {
    "id": 252775,
-   "name": "图案： 风暴行者的皮甲",
+   "name": "图样：风暴行者的皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184454,7 +184454,7 @@
   },
   {
    "id": 252776,
-   "name": "图案： 智慧皮甲",
+   "name": "图样：智慧皮甲",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184619,7 +184619,7 @@
   },
   {
    "id": 252792,
-   "name": "图案： 争斗者的皮裤",
+   "name": "图样：争斗者的皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184630,7 +184630,7 @@
   },
   {
    "id": 252793,
-   "name": "图案： 捕兽者的皮裤",
+   "name": "图样：捕兽者的皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184641,7 +184641,7 @@
   },
   {
    "id": 252794,
-   "name": "图案： 防御者的皮裤",
+   "name": "图样：防御者的皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184652,7 +184652,7 @@
   },
   {
    "id": 252795,
-   "name": "图案： 图腾师的皮裤",
+   "name": "图样：图腾师的皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184663,7 +184663,7 @@
   },
   {
    "id": 252796,
-   "name": "图案： 风暴行者的皮裤",
+   "name": "图样：风暴行者的皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184674,7 +184674,7 @@
   },
   {
    "id": 252797,
-   "name": "图案： 智慧皮裤",
+   "name": "图样：智慧皮裤",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184850,7 +184850,7 @@
   },
   {
    "id": 252814,
-   "name": "图案： 争斗者的皮盔",
+   "name": "图样：争斗者的皮盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184861,7 +184861,7 @@
   },
   {
    "id": 252815,
-   "name": "图案： 捕兽者的皮盔",
+   "name": "图样：捕兽者的皮盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184872,7 +184872,7 @@
   },
   {
    "id": 252816,
-   "name": "图案： 防御者的皮头盔",
+   "name": "图样：防御者的皮头盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184883,7 +184883,7 @@
   },
   {
    "id": 252817,
-   "name": "图案： 图腾师的皮头盔",
+   "name": "图样：图腾师的皮头盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184894,7 +184894,7 @@
   },
   {
    "id": 252818,
-   "name": "图案： 风暴行者的皮盔",
+   "name": "图样：风暴行者的皮盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -184905,7 +184905,7 @@
   },
   {
    "id": 252819,
-   "name": "图案： 智慧皮盔",
+   "name": "图样：智慧皮盔",
    "quality": 3,
    "icon": "inv_scroll_06.jpg",
    "sub": "精良",
@@ -236043,8 +236043,19 @@
    "status": "new"
   },
   {
+   "id": 289439,
+   "name": "一袋紫色粉末",
+   "quality": 3,
+   "icon": "inv_12_tailoring_reagent_bag_violet_reagent_bag.jpg",
+   "sub": "精良",
+   "type": "垃圾",
+   "ilvl": 1,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
    "id": 289559,
-   "name": "附魔鞋-速度",
+   "name": "附魔靴子 - 速度",
    "quality": 1,
    "icon": "inv_misc_enchantedscroll.jpg",
    "sub": "普通",
@@ -236055,7 +236066,7 @@
   },
   {
    "id": 289560,
-   "name": "配方：附魔靴-速度",
+   "name": "公式：附魔靴子 - 速度",
    "quality": 2,
    "icon": "inv_misc_note_01.jpg",
    "sub": "优秀",

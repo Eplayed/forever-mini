@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-03",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -10,11 +10,11 @@
   "dungeonGeoBoss": 208,
   "dungeonGeoBossPoints": 245,
   "dungeonQuestDungeons": 30,
-  "profVendors": 579,
-  "profDrops": 327,
+  "profVendors": 646,
+  "profDrops": 336,
   "professions": 13,
-  "recipes": 1865,
-  "recipesNew": 843,
+  "recipes": 1986,
+  "recipesNew": 885,
   "gatherNodes": 55,
   "zones": 44,
   "newZones": 4,
@@ -22,11 +22,11 @@
   "raresUnplaced": 23,
   "books": 36,
   "clientMaps": 48,
-  "changes": 964,
-  "changesTalents": 548,
+  "changes": 967,
+  "changesTalents": 551,
   "changesSpells": 416,
-  "changesNew": 116,
-  "changesModified": 305,
+  "changesNew": 99,
+  "changesModified": 327,
   "changesSpellsChanged": 256,
   "changesRemoved": 83,
   "classRank": [
@@ -41,25 +41,25 @@
    {
     "classId": "druid",
     "official": 119,
-    "datamine": 112,
-    "total": 231,
-    "share": 51.5,
+    "datamine": 113,
+    "total": 232,
+    "share": 51.3,
     "place": 2
    },
    {
     "classId": "warrior",
-    "official": 99,
-    "datamine": 95,
-    "total": 194,
-    "share": 51,
+    "official": 98,
+    "datamine": 98,
+    "total": 196,
+    "share": 50,
     "place": 3
    },
    {
     "classId": "priest",
     "official": 78,
-    "datamine": 110,
-    "total": 188,
-    "share": 41.5,
+    "datamine": 109,
+    "total": 187,
+    "share": 41.7,
     "place": 4
    },
    {
@@ -79,27 +79,27 @@
     "place": 6
    },
    {
-    "classId": "rogue",
-    "official": 60,
-    "datamine": 107,
-    "total": 167,
-    "share": 35.9,
+    "classId": "shaman",
+    "official": 57,
+    "datamine": 109,
+    "total": 166,
+    "share": 34.3,
     "place": 7
    },
    {
-    "classId": "shaman",
-    "official": 59,
-    "datamine": 107,
-    "total": 166,
-    "share": 35.5,
+    "classId": "paladin",
+    "official": 50,
+    "datamine": 108,
+    "total": 158,
+    "share": 31.6,
     "place": 8
    },
    {
-    "classId": "paladin",
-    "official": 47,
-    "datamine": 112,
-    "total": 159,
-    "share": 29.6,
+    "classId": "rogue",
+    "official": 36,
+    "datamine": 133,
+    "total": 169,
+    "share": 21.3,
     "place": 9
    }
   ],
@@ -107,16 +107,16 @@
    "perks": 21,
    "slots": 27,
    "unknown": 6,
-   "challenges": 66,
+   "challenges": 65,
    "rewards": 4,
    "cap": 16,
    "total": 65
   },
-  "items": 21459,
+  "items": 21460,
   "itemsSrvAbsent": 796,
   "itemsSrvPresent": 802,
   "itemsSrvConflict": 66,
-  "itemsNew": 5632,
+  "itemsNew": 5633,
   "spells": 492,
   "achievements": 211,
   "pets": 18,
@@ -127,7 +127,7 @@
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5264,
+  "search": 5386,
   "talentPreview": 465,
   "releases": 83,
   "navNew": [
@@ -137,7 +137,7 @@
   "classes": 9,
   "talentNodes": 465,
   "talentTreeConflict": 3,
-  "talentVerified": 459,
+  "talentVerified": 435,
   "dungeons": 38,
   "dungeonsNew": 9,
   "bosses": 278,
@@ -177,8 +177,8 @@
    {
     "file": "legacy.json",
     "section": "传承",
-    "build": "1.60.1.70707",
-    "checkedAt": "2026-11-02",
+    "build": "1.60.1.70753",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -186,8 +186,8 @@
    {
     "file": "queue.json",
     "section": "副本排队表",
-    "build": "1.60.1.70707",
-    "checkedAt": "2026-11-02",
+    "build": "1.60.1.70753",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -195,8 +195,8 @@
    {
     "file": "changes.json",
     "section": "客户端改动",
-    "build": "1.60.1.70707",
-    "checkedAt": "2026-11-02",
+    "build": "1.60.1.70753",
+    "checkedAt": "2026-11-03",
     "classic": "1.15.9.70576",
     "daysSince": 0,
     "stale": null
@@ -204,8 +204,8 @@
    {
     "file": "world.json",
     "section": "世界（区域与稀有）",
-    "build": "1.60.1.70707",
-    "checkedAt": "2026-11-02",
+    "build": "1.60.1.70753",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -214,7 +214,16 @@
     "file": "macros.json",
     "section": "宏命令",
     "build": null,
-    "checkedAt": "2026-11-02",
+    "checkedAt": "2026-11-03",
+    "classic": null,
+    "daysSince": 0,
+    "stale": null
+   },
+   {
+    "file": "name-generator.json",
+    "section": "角色起名词库",
+    "build": null,
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -223,7 +232,7 @@
     "file": "pets.json",
     "section": "猎人宠物",
     "build": null,
-    "checkedAt": "2026-11-02",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -234,14 +243,14 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 6,
     "stale": null
    },
    {
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
-    "checkedAt": "2026-11-02",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -250,7 +259,7 @@
     "file": "items.json",
     "section": "物品名录",
     "build": null,
-    "checkedAt": "2026-11-02",
+    "checkedAt": "2026-11-03",
     "classic": null,
     "daysSince": 0,
     "stale": null
@@ -260,7 +269,7 @@
    "soft": 7,
    "hard": 14
   },
-  "newestBuild": "1.60.1.70707",
+  "newestBuild": "1.60.1.70753",
   "newestSection": "传承"
  }
 }

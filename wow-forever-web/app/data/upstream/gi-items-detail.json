@@ -11,7 +11,7 @@
   },
   "selfReported": "st 抽自 loot 表（作者标 Beta 实测掉落，build 1.60.1.69913）；src/srcName 抽自 gear 表（作者标 beta 客户端 1.60.1.69876 解包，2026-10-03）",
   "fetched": "2026-10-03",
-  "extractedAt": "2026-11-02",
+  "extractedAt": "2026-11-03",
   "counts": {
    "st": 1453,
    "src": 1587

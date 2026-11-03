@@ -7,42 +7,42 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1793441728044",
-  "foreverBuild": "1.60.1.70707",
+  "release": "r-1793694023664",
+  "foreverBuild": "1.60.1.70753",
   "classicBuild": "1.15.9.70576",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-11-02",
+  "scrapedAt": "2026-11-03",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1793441728044/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1793441728044/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1793441728044/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1793441728044/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793441728044/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793441728044/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793441728044/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1793694023664/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1793694023664/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1793694023664/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1793694023664/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793694023664/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793694023664/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793694023664/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70707",
+   "foreverBuild": "1.60.1.70753",
    "classicBuild": "1.15.9.70576",
-   "navBuild": "1.60.1.70707",
+   "navBuild": "1.60.1.70753",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70707",
-    "month": 10,
-    "day": 30
+    "build": "1.60.1.70753",
+    "month": 11,
+    "day": 2
    },
    "counts": {
-    "all": 964,
-    "changed": 760,
-    "newTalents": 116,
-    "changedTalents": 305,
+    "all": 967,
+    "changed": 765,
+    "newTalents": 99,
+    "changedTalents": 327,
     "removedTalents": 83,
     "spells": 416,
     "spellsChanged": 256

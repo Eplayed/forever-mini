@@ -2,7 +2,7 @@
  "classId": "druid",
  "classNameCn": "德鲁伊",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -918,7 +918,7 @@
      "column": 2,
      "maxRanks": 1,
      "nameCn": "掠食纪律",
-     "nameAlt": "掠食者戒律",
+     "nameAlt": "掠夺性戒律",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
@@ -1069,7 +1069,7 @@
       }
      ],
      "upstreamId": "calc-druid-feral-combat-rend-and-tear",
-     "changeState": "added"
+     "changeState": "modified"
     },
     {
      "id": "druid-1-自然反射",
@@ -1699,7 +1699,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/druid",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-02"
+   "checkedAt": "2026-11-03"
   }
  ]
 }

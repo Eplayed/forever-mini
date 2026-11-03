@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generatedAt": "2026-11-02",
-  "checkedAt": "2026-11-02",
+  "generatedAt": "2026-11-03",
+  "checkedAt": "2026-11-03",
   "kind": "pets",
   "method": "tools/extract-gi-pets.py 抽 upstream/gi-pets.json → 本脚本整形；成句的技能描述（插件里的 dcn/den）一条没取",
   "pageNote": "宠物家族与它们的技能按无限测试版插件资料整理；哪一只在哪个区域能抓到、要不要特殊条件，这份数据里没有，本站也没进游戏实测。",
@@ -11,7 +11,7 @@
     "name": "GearInsight 无限版 0.5.6",
     "kind": "beta 客户端解包转述（插件自述取自客户端 DB2 1.60.1.70532，本站未逐行回查）",
     "url": "GearInsight_Forever/PetData.lua",
-    "date": "2026-11-02"
+    "date": "2026-11-03"
    }
   ],
   "counts": {
@@ -61,7 +61,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -101,7 +101,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -141,7 +141,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -187,7 +187,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -227,7 +227,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -267,7 +267,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -307,7 +307,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -347,7 +347,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -387,7 +387,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -427,7 +427,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -467,7 +467,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -513,7 +513,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -559,7 +559,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -599,7 +599,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -639,7 +639,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -679,7 +679,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -725,7 +725,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -765,7 +765,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   }
@@ -792,7 +792,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -817,7 +817,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -842,7 +842,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -867,7 +867,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -892,7 +892,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -917,7 +917,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -942,7 +942,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -967,7 +967,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -992,7 +992,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1017,7 +1017,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1045,7 +1045,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1070,7 +1070,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1095,7 +1095,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1134,7 +1134,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1159,7 +1159,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1190,7 +1190,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1215,7 +1215,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1240,7 +1240,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1278,7 +1278,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1303,7 +1303,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1328,7 +1328,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -1353,7 +1353,7 @@
     {
      "type": "addon",
      "url": "GearInsight 无限版 0.5.6 PetData.lua",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   }

@@ -2,11 +2,11 @@
  "meta": {
   "source": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
   "originFiles": [
-   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_DungeonEntry.lua",
-   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_BossPos.lua",
-   "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns\\DungeonsForever\\Core\\Data\\Data_DungeonLoot.lua"
+   "/mnt/c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns/DungeonsForever/Core/Data/Data_DungeonEntry.lua",
+   "/mnt/c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns/DungeonsForever/Core/Data/Data_BossPos.lua",
+   "/mnt/c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns/DungeonsForever/Core/Data/Data_DungeonLoot.lua"
   ],
-  "fetched": "2026-11-02",
+  "fetched": "2026-11-03",
   "what": "副本入口在区域图上的百分比坐标 + 各首领在副本内部图上的百分比坐标（第三值是该图的层号）",
   "boundary": "只取坐标、地图号与名字映射。DF 的 LICENSE 是「保留所有权利」，它的任何成段说明、任务目标文本、攻略句子、自绘副本图与载入图一律不取",
   "nameBridge": "首领位置以英文名为键，站内首领只有中文名，中间过 Data_DungeonLoot 的「英文名→中文名」那一层（那座桥只取前两列，掉落与掉率不读）",

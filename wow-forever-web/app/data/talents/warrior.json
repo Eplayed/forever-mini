@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -155,7 +155,7 @@
      "id": "warrior-0-强化战术掌握",
      "tier": 1,
      "column": 1,
-     "maxRanks": 5,
+     "maxRanks": 3,
      "nameCn": "强化战术掌握",
      "nameAlt": null,
      "nameConflict": false,
@@ -378,7 +378,7 @@
      "id": "warrior-0-血之气息",
      "tier": 4,
      "column": 0,
-     "maxRanks": 5,
+     "maxRanks": 2,
      "nameCn": "血之气息",
      "nameAlt": null,
      "nameConflict": false,
@@ -403,7 +403,7 @@
       }
      ],
      "upstreamId": "calc-warrior-arms-bloodthrill",
-     "changeState": "added"
+     "changeState": "modified"
     },
     {
      "id": "warrior-0-横扫攻击",
@@ -858,8 +858,8 @@
      "column": 2,
      "maxRanks": 5,
      "nameCn": "狂怒",
-     "nameAlt": null,
-     "nameConflict": false,
+     "nameAlt": "鲁莽挥击",
+     "nameConflict": true,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -880,8 +880,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-enrage",
-     "changeState": "modified"
+     "upstreamId": "launch-warrior-鲁莽挥击",
+     "posMismatch": true
     },
     {
      "id": "warrior-1-强化斩杀",
@@ -1011,7 +1011,7 @@
      "id": "warrior-1-乱舞",
      "tier": 5,
      "column": 1,
-     "maxRanks": 5,
+     "maxRanks": 3,
      "nameCn": "乱舞",
      "nameAlt": null,
      "nameConflict": false,
@@ -1046,9 +1046,9 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "饮血者",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "强化旋风斩",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1070,8 +1070,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-warrior-fury-gore-drinker",
-     "changeState": "added"
+     "upstreamId": "launch-warrior-强化旋风斩",
+     "posMismatch": true
     },
     {
      "id": "warrior-1-嗜血",
@@ -1087,7 +1087,9 @@
       "nieyi"
      ],
      "iconKey": "spell_nature_bloodlust",
-     "requires": [],
+     "requires": [
+      "warrior-1-死亡之愿"
+     ],
      "level": "L1",
      "provenance": [
       {
@@ -1695,7 +1697,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-02"
+   "checkedAt": "2026-11-03"
   }
  ]
 }

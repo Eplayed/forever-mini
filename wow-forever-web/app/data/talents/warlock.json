@@ -2,7 +2,7 @@
  "classId": "warlock",
  "classNameCn": "术士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-02（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -556,7 +556,7 @@
       }
      ],
      "upstreamId": "warlock-wrack",
-     "changeState": "added"
+     "changeState": "modified"
     }
    ],
    "nameAlt": null,
@@ -1204,7 +1204,7 @@
       }
      ],
      "upstreamId": "calc-warlock-destruction-destructive-reach",
-     "changeState": "modified"
+     "changeState": "moved"
     },
     {
      "id": "warlock-2-强化暗影箭",
@@ -1642,7 +1642,7 @@
       }
      ],
      "upstreamId": "warlock-shadow-and-flame",
-     "changeState": "added"
+     "changeState": "modified"
     },
     {
      "id": "warlock-2-烧尽",
@@ -1695,7 +1695,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warlock",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-02"
+   "checkedAt": "2026-11-03"
   }
  ]
 }

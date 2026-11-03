@@ -82,7 +82,7 @@ const routes = [
   // 新站独有页：数据来自 app/data/items.json（全量名录，件数以 app/data/scale.json 为准）
   { path: '/items', name: 'items', component: ItemsPage, meta: { title: '物品库' } },
   // 新站独有页：配装名单（2026-10-16 站主拍板，数据 app/data/bis.json）
-  { path: '/bis', name: 'bis', component: BisPage, meta: { title: '配装名单' } },
+  { path: '/bis', name: 'bis', component: BisPage, meta: { title: 'BIS配装' } },
   // 宏命令（2026-10-30 新页，数据 app/data/macros.json，整批 L1）
   { path: '/macros', name: 'macros', component: MacrosPage, meta: { title: '宏命令：按职业与用途分组，可复制' } },
   // 全部迁完后这里只兜住旧书签里可能残留的其它地址

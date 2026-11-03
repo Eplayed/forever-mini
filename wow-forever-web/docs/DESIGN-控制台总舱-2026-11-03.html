@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据线控制台 · 总舱 · wow-forever</title>
+<style>
+:root{
+  --bg:#0a0e14; --panel:#10151f; --panel2:#0d1119; --line:#232c3b; --line2:#2e394d;
+  --ink:#d7dbe2; --dim:#8b94a3; --faint:#5b6473;
+  --gold:#c8a35c; --gold-hi:#e6c98a; --gold-dim:rgba(200,163,92,.14);
+  --ok:#7fc08a; --err:#d06a5e; --warn:#c9a15c; --info:#7da7c9;
+  --web:#7da7c9; --mini:#7fc08a;
+  --serif:Georgia,"Times New Roman","STZhongsong","SimSun",serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New","Microsoft YaHei",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:13px/1.65 var(--mono);min-height:100vh;
+  background-image:radial-gradient(ellipse 900px 440px at 50% -130px,rgba(200,163,92,.055),transparent),
+    repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.012) 39px 40px);}
+.wrap{max-width:1340px;margin:0 auto;padding:26px 26px 70px}
+a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-hi)}
+
+header{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  padding:20px 28px 0;margin-bottom:18px}
+header::before{content:"";position:absolute;inset:4px;border:1px solid var(--gold-dim);pointer-events:none;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.kicker{font:600 11px var(--mono);letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+h1{font:400 27px/1.2 var(--serif);letter-spacing:.06em;margin:5px 0 2px}
+h1 b{color:var(--gold);font-weight:400}
+.sub{color:var(--faint);font-size:12px;letter-spacing:.08em;margin-bottom:14px}
+
+/* ── 流域总图（常驻） ── */
+.basin{border-top:1px solid var(--line);padding:12px 0 4px}
+.basin svg{display:block;width:100%;height:96px}
+.flow{stroke-dasharray:6 7;animation:dash 1.4s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-13}}
+.seg{cursor:pointer}
+.seg text{font:10.5px var(--mono);fill:var(--dim)}
+.seg:hover text{fill:var(--gold-hi)}
+.seg .badge-bg{transition:all .15s}
+.seg:hover .badge-bg{stroke:var(--gold)}
+
+/* ── 全局读数 ── */
+.readouts{display:flex;flex-wrap:wrap;border-top:1px solid var(--line)}
+.readouts div{padding:8px 20px 9px 0;margin-right:20px;border-right:1px dashed var(--line)}
+.readouts s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--faint)}
+.readouts b{font-weight:400;font-size:12.5px}
+.readouts em{font-style:normal;color:var(--gold)}
+.readouts .bad{color:var(--err)}.readouts .good{color:var(--ok)}
+
+/* ── 屏导航 ── */
+nav.screens{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+nav.screens button{border:1px solid var(--line2);background:rgba(0,0,0,.22);color:var(--dim);
+  font:600 11.5px var(--mono);letter-spacing:.12em;padding:9px 16px;cursor:pointer;transition:all .15s;
+  display:flex;align-items:baseline;gap:8px}
+nav.screens button i{font-style:normal;font-size:9.5px;letter-spacing:.2em;color:var(--faint)}
+nav.screens button .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:2px}
+nav.screens button:hover{border-color:var(--gold);color:var(--gold-hi)}
+nav.screens button.on{border-color:var(--gold);color:var(--gold-hi);background:var(--gold-dim)}
+.dot.grn{background:var(--ok)}.dot.red{background:var(--err)}.dot.gld{background:var(--gold)}
+
+/* ── 屏容器 ── */
+.screen{display:none;animation:rise .35s both}
+.screen.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{font:400 18px var(--serif);letter-spacing:.12em;margin-bottom:4px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2 i{font:600 10px var(--mono);color:var(--gold);letter-spacing:.3em;font-style:normal}
+h2 small{font:400 11.5px var(--mono);color:var(--faint);letter-spacing:0}
+section.blk{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  padding:16px 22px 16px;margin-bottom:16px;position:relative}
+section.blk::after{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:.5}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:1000px){.grid{grid-template-columns:1fr}}
+.mini-card{border:1px solid var(--line2);background:rgba(0,0,0,.2);padding:11px 14px}
+.mini-card s{display:block;text-decoration:none;font-size:10px;letter-spacing:.18em;color:var(--faint);margin-bottom:4px}
+.mini-card b{font-weight:400;font-size:12.5px}
+.mini-card em{font-style:normal;color:var(--gold-hi)}
+.mini-card .bad{color:var(--err)}.mini-card .good{color:var(--ok)}
+.b{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.8}
+.b em{font-style:normal;color:var(--ink)}
+.btn{border:1px solid var(--gold);background:var(--gold-dim);color:var(--gold-hi);font:600 12px var(--mono);
+  letter-spacing:.15em;padding:9px 20px;cursor:pointer;margin-top:12px}
+.btn:hover{border-color:var(--gold-hi)}
+.btn.ghost{border-color:var(--line2);background:transparent;color:var(--dim)}
+.btn.ghost:hover{border-color:var(--dim);color:var(--ink)}
+
+table.t{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+table.t th{text-align:left;font:600 10px var(--mono);letter-spacing:.16em;color:var(--faint);
+  border-bottom:1px solid var(--line2);padding:5px 8px}
+table.t td{border-bottom:1px solid var(--line);padding:5px 8px}
+table.t tr:hover{background:var(--gold-dim)}
+.old{color:var(--dim)}.new{color:var(--gold-hi)}.miss{color:var(--warn)}
+
+details.impl{border:1px dashed var(--line2);padding:14px 20px;color:var(--faint);font-size:11.5px;margin-top:6px}
+details.impl summary{cursor:pointer;color:var(--dim);letter-spacing:.2em;font-size:11px}
+details.impl summary:hover{color:var(--gold)}
+details.impl ul{margin:10px 0 0 18px;line-height:2}
+details.impl b{color:var(--gold);font-weight:400}
+details.impl code{color:var(--ink)}
+footer{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;display:flex;gap:26px;flex-wrap:wrap;
+  color:var(--faint);font-size:11px;letter-spacing:.06em}
+footer b{color:var(--warn);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">WOW FOREVER · 数据线 · 总舱</div>
+  <h1>数据线<b>控制台</b></h1>
+  <div class="sub">一条河看全程：源头取水 → 入井（基底）→ 滤水（门禁）→ 分流（双管道）→ 玩家 · 每一段都在舱里有自己的屏</div>
+
+  <div class="basin">
+    <svg viewBox="0 0 1240 96" aria-label="数据的一生">
+      <path class="flow" d="M 96 48 L 268 48" stroke="#c8a35c" fill="none" stroke-width="2"/>
+      <path class="flow" d="M 400 48 L 560 48" stroke="#c8a35c" fill="none" stroke-width="2"/>
+      <path class="flow" d="M 692 48 L 850 34" stroke="#7da7c9" fill="none" stroke-width="2"/>
+      <path class="flow" d="M 692 48 L 850 62" stroke="#7fc08a" fill="none" stroke-width="2"/>
+      <path class="flow" d="M 962 34 L 1100 34" stroke="#7da7c9" fill="none" stroke-width="2"/>
+      <path class="flow" d="M 962 62 L 1100 62" stroke="#7fc08a" fill="none" stroke-width="2"/>
+      <g class="seg" data-go="s0"><rect x="16" y="30" width="80" height="36" fill="rgba(200,163,92,.06)" stroke="#c8a35c" fill-opacity="1" stroke-opacity=".6"/><text x="56" y="52" text-anchor="middle">源头</text></g>
+      <g class="seg" data-go="s0"><rect x="268" y="30" width="132" height="36" fill="rgba(200,163,92,.06)" stroke="#c8a35c" stroke-opacity=".6"/><text x="334" y="52" text-anchor="middle">取水 · 日更链</text></g>
+      <g class="seg" data-go="s3"><rect x="560" y="30" width="132" height="36" fill="rgba(200,163,92,.09)" stroke="#c8a35c" stroke-opacity=".9"/><text x="626" y="52" text-anchor="middle">基底井 app/data</text></g>
+      <g class="seg" data-go="s1"><rect x="850" y="16" width="112" height="36" fill="rgba(125,167,201,.06)" stroke="#7da7c9" stroke-opacity=".6"/><text x="906" y="38" text-anchor="middle" fill="#7da7c9">管道 A 网页</text></g>
+      <g class="seg" data-go="s1"><rect x="850" y="44" width="112" height="36" fill="rgba(127,192,138,.06)" stroke="#7fc08a" stroke-opacity=".6"/><text x="906" y="66" text-anchor="middle" fill="#7fc08a">管道 B 小程序</text></g>
+      <g class="seg" data-go="s1"><rect x="1100" y="16" width="80" height="36" fill="rgba(125,167,201,.04)" stroke="#7da7c9" stroke-opacity=".4"/><text x="1140" y="38" text-anchor="middle" fill="#7da7c9">线上站</text></g>
+      <g class="seg" data-go="s1"><rect x="1100" y="44" width="80" height="36" fill="rgba(127,192,138,.04)" stroke="#7fc08a" stroke-opacity=".4"/><text x="1140" y="66" text-anchor="middle" fill="#7fc08a">真机</text></g>
+      <g class="seg" data-go="s4"><rect x="470" y="72" width="90" height="20" fill="none" stroke="none"/><text x="515" y="86" text-anchor="middle">↯ 门禁在 ⑤ 屏</text></g>
+    </svg>
+  </div>
+
+  <div class="readouts">
+    <div><s>基底最新板块</s><b><em>11-02</em> 19:46</b></div>
+    <div><s>超期快照</s><b class="bad">1 份（物品详情源 <em>18</em> 天）</b></div>
+    <div><s>网页管道</s><b class="bad">线上停在 10-28 · 落后 9 板块</b></div>
+    <div><s>小程序管道</s><b class="good">同批 1d12cc2f39b9</b></div>
+    <div><s>工作树未提交</s><b class="bad">87 文件</b></div>
+  </div>
+</header>
+
+<!-- ── 屏导航 ── -->
+<nav class="screens">
+  <button class="on" data-s="s0"><span class="dot gld"></span><i>00</i>水源台 · 更新</button>
+  <button data-s="s1"><span class="dot red"></span><i>02</i>双管道同步</button>
+  <button data-s="s2"><span class="dot"></span><i>01</i>本地 vs 线上</button>
+  <button data-s="s3"><span class="dot grn"></span><i>03</i>基底与检索</button>
+  <button data-s="s4"><span class="dot grn"></span><i>05</i>门禁</button>
+  <button data-s="s5"><span class="dot"></span><i>04</i>缺口台账</button>
+</nav>
+
+<!-- ═══ 00 水源台 ═══ -->
+<section class="screen on" id="s0">
+  <section class="blk">
+    <h2><i>00</i>水源台 <small>日更链 ①-⑦ · 探源 · 十六板块新鲜度 · 设计稿已另立：<a href="DESIGN-水源台-数据源更新-2026-11-03.html">全稿</a></small></h2>
+    <div class="grid">
+      <div class="mini-card"><s>日更链最近一次</s><b class="good">11-02 · 14 步全绿 · 12 分钟</b>
+        <div class="b">①探源 ②插件抽取 ③重抓十块 ④并成品 ⑤门禁 ⑥对账 ⑦报告 —— steps.tsv 真驱动，点「跑今天的链」从这屏发起。</div>
+        <button class="btn" data-go="s0">▸ 跑今天的日更链</button></div>
+      <div class="mini-card"><s>最陈的一块</s><b class="bad">物品详情源 · 18 天</b>
+        <div class="b">全量重抓约 3.8h，后台跑、断点续跑。其余 <em>13</em> 块昨天刚更新，<em>2</em> 块金档（8-13 天）盯一眼就行。</div>
+        <button class="btn ghost">看十六板块网格 →（全稿内）</button></div>
+    </div>
+  </section>
+</section>
+
+<!-- ═══ 02 双管道同步 ═══ -->
+<section class="screen" id="s1">
+  <section class="blk">
+    <h2><i>02</i>双管道同步 <small>入井之后怎么出去 · 设计稿已另立：<a href="DESIGN-双管道同步台-2026-11-03.html">全稿</a></small></h2>
+    <div class="grid">
+      <div class="mini-card"><s>管道 A · 网页（GitHub Pages）</s><b class="bad">落后 6 天 · 9 板块压在本地</b>
+        <div class="b">宏命令线上<em>根本没有</em>、种族 18 条覆盖、物品名录 21,459 条——整包未发布。①构建 → ②打包 → ③验收 → <em>④发布●闸门</em>。</div>
+        <button class="btn" data-gate>④ 发布 ●闸门</button></div>
+      <div class="mini-card"><s>管道 B · 小程序（OSS wow/beta/v1）</s><b class="good">已同步 · 指针 1d12cc2f39b9</b>
+        <div class="b">177 文件 0 失败，回滚位 <em>d3e222b74dc1</em> 常备。①导出 → ②成批 → <em>③上传换指针●闸门</em> → ④回滚。</div>
+        <button class="btn ghost" id="btnRb">④ 回滚演示</button></div>
+    </div>
+  </section>
+</section>
+
+<!-- ═══ 01 本地 vs 线上 ═══ -->
+<section class="screen" id="s2">
+  <section class="blk">
+    <h2><i>01</i>本地 vs 线上 <small>现有屏原样保留 · 真数据源 reconcile.py</small></h2>
+    <table class="t">
+      <thead><tr><th>线</th><th>线上指纹</th><th>本地</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>网页</td><td class="old">10-28 09:59 包</td><td class="new">11-02</td><td class="miss">9 板块 behind</td></tr>
+        <tr><td>小程序</td><td class="new">1d12cc2f39b9（177 文件）</td><td class="new">同批</td><td class="good">一致</td></tr>
+      </tbody>
+    </table>
+    <div class="b">这一屏是 00 和 02 共享的眼睛：00 的日更链⑥对账写它，02 的发布前后也读它——<em>整合的第一个理由就在这：三屏喝同一份对账数据，拆开就得各拉一遍。</em></div>
+  </section>
+</section>
+
+<!-- ═══ 03 基底与检索 ═══ -->
+<section class="screen" id="s3">
+  <section class="blk">
+    <h2><i>03</i>基底与检索 <small>现有屏原样保留 · app/data 唯一真相 + 上游快照对照</small></h2>
+    <div class="grid">
+      <div class="mini-card"><s>成品基底</s><b>app/data/*.json · 28 个成品文件</b>
+        <div class="b">流域总图中间那口「井」。页面运行时只读它；谁也不许绕过门禁直接改它。</div></div>
+      <div class="mini-card"><s>上游快照</s><b>upstream/ · 65 份转述件</b>
+        <div class="b">带来源与核对日期；超期判定（7/14 天）也在 00 水源台的板块网格里复用同一口径。</div></div>
+    </div>
+  </section>
+</section>
+
+<!-- ═══ 05 门禁 ═══ -->
+<section class="screen" id="s4">
+  <section class="blk">
+    <h2><i>05</i>门禁 <small>现有屏原样保留 · 白名单命令 · 在仓库根执行</small></h2>
+    <div class="b">build-data.js / audit-translations / site-check / vitest / export-mini / oss-release-test —— 00 的日更链⑤和 02 的每条动作链内部都会路过这里。<em>流域总图上标了「↯ 门禁在 ⑤ 屏」</em>：门禁不是一段河，是横在每根管子上的闸。</div>
+  </section>
+</section>
+
+<!-- ═══ 04 缺口台账 ═══ -->
+<section class="screen" id="s5">
+  <section class="blk">
+    <h2><i>04</i>缺口台账 <small>现有屏原样保留 · 副本缺口 / 两源分歧 / 缺原画</small></h2>
+    <div class="b">数据这行河的「河床勘测」：缺什么字段、哪两源打架、哪张图没拿到——不动水，只记录。维持现状。</div>
+  </section>
+</section>
+
+<!-- ═══ 整合说明 ═══ -->
+<details class="impl">
+  <summary>整合说明 · 为什么并、怎么并、wow-dev 的接线清单</summary>
+  <ul>
+    <li><b>结论：三份合成一个 8830 控制台</b>。现有工作台（01/02/03/04/05）+ 00 水源台 + 双管道同步屏，同端口同后端同令牌，<b>不是新站，是给现有 index.html 加两屏一图</b>。</li>
+    <li><b>整合理由</b>：① 同一个 jobs.py 白名单后端；② 取水→入井→分发→对账是因果链，拆两处要人肉接力；③ 超期 / 对账 / 门禁三样状态全屏共享（01 对账被 00⑥ 和 02 共用就是实例）。</li>
+    <li><b>流域总图</b>：常驻页头 SVG，每段可点跳屏；状态点（红/金/绿）直接读全局对账与超期接口，红在哪一眼看到。</li>
+    <li><b>接线（后端改动极小）</b>：jobs.py 白名单加 <code>daily.sh</code> 一条；job running 时流出 logTail 增量；reconcile/latest.json 旁加 append-only 发布账；闸门步沿用白名单单命令。前端全部是现有令牌拼装。</li>
+    <li><b>红线不因整合变松</b>：面板是眼睛不是手——执行全走白名单；发布/上传换指针仍需站主点头，闸门弹层只是慎重交互。</li>
+    <li><b>落位</b>：两份分屏设计稿（00 / 02）作为总舱两屏的详稿保留，实现时并入一个 index.html。</li>
+  </ul>
+</details>
+
+<footer>
+  <span><b>红线</b> 面板是眼睛不是手 · 执行走白名单</span>
+  <span>发布与换指针需站主点头</span>
+  <span>总舱设计稿 · wow-ui · 2026-11-03</span>
+</footer>
+
+</div>
+
+<script>
+// 屏切换
+const btns = document.querySelectorAll('nav.screens button');
+function go(id){
+  btns.forEach(b => b.classList.toggle('on', b.dataset.s === id));
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+btns.forEach(b => b.addEventListener('click', () => go(b.dataset.s)));
+document.querySelectorAll('[data-go]').forEach(el =>
+  el.addEventListener('click', () => go(el.dataset.go)));
+// 闸门演示（简版，全稿见 02 分屏稿）
+document.querySelector('[data-gate]').addEventListener('click', function(){
+  if (confirm('发布闸门（演示）：这一步改玩家当天读到的那一份。确认走完整弹层？'))
+    alert('完整弹层见 02 分屏设计稿——总舱内为同一组件。');
+});
+document.getElementById('btnRb').addEventListener('click', function(){
+  if (confirm('回滚到 d3e222b74dc1？（演示）'))
+    this.textContent = '✓ 已回滚（演示态）';
+});
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
  "meta": {
   "kind": "dungeon-geo",
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-03",
   "method": "tools/extract-df-geo.py 抽快照 → tools/merge-dungeon-geo.py 出这份成品",
   "note": "副本入口（在区域图上的百分比坐标）与各首领在副本内部图上的位置。只有副本详情页读这一份，列表页不背它。",
   "coordinateNote": "入口坐标的参照物是那一行的「地图编号」所指的区域图；首领坐标的参照物是这座本自己的内部图（bossMap 那张）。没有 bossMap 的本，首领位置仍只给数字、不画点",
@@ -11,7 +11,7 @@
     "key": "df",
     "name": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
     "kind": "第三方插件从客户端读出的位置",
-    "date": "2026-11-02",
+    "date": "2026-11-03",
     "license": "插件 LICENSE：保留所有权利——这一层只取坐标与地图编号，作者写的文字说明一条没取"
    },
    {
@@ -122,7 +122,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -198,7 +198,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -284,7 +284,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -342,7 +342,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -414,7 +414,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -479,7 +479,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -544,7 +544,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -588,7 +588,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -674,7 +674,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -701,7 +701,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -752,7 +752,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -803,7 +803,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -889,7 +889,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -961,7 +961,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -996,7 +996,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1055,7 +1055,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1158,7 +1158,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1205,7 +1205,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1312,7 +1312,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1405,7 +1405,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1487,7 +1487,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1552,7 +1552,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1617,7 +1617,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1722,7 +1722,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1813,7 +1813,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1914,7 +1914,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1965,7 +1965,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -2082,7 +2082,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -2221,7 +2221,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -2337,7 +2337,7 @@
     {
      "type": "addon",
      "url": "DungeonsForever 1.9.10（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-02",
+     "checkedAt": "2026-11-03",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]

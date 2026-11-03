@@ -7,10 +7,10 @@
   "addon": "XR_DungeonGuide",
   "addonVersionLocal": "95.7",
   "dataVersionInFile": "0.27.6",
-  "srcFile": "XR_DungeonGuide/Data_Bis.lua",
+  "srcFile": "../../../c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns/XR_DungeonGuide/Data_Bis.lua",
   "srcBytes": 1037113,
   "srcSha256": "2c6c296fea1d8cab6b4bb4c78f984348611e6f255cb483d2029321b8f35002a6",
-  "fetched": "2026-11-02",
+  "fetched": "2026-11-03",
   "counts": {
    "classes": 9,
    "specs": 38,

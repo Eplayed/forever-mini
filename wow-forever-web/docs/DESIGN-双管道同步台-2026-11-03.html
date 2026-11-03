@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双管道同步台 · wow-forever 数据线</title>
+<style>
+:root{
+  --bg:#0a0e14; --panel:#10151f; --panel2:#0d1119; --line:#232c3b; --line2:#2e394d;
+  --ink:#d7dbe2; --dim:#8b94a3; --faint:#5b6473;
+  --gold:#c8a35c; --gold-hi:#e6c98a; --gold-dim:rgba(200,163,92,.14);
+  --ok:#7fc08a; --err:#d06a5e; --warn:#c9a15c; --info:#7da7c9;
+  --web:#7da7c9; --web-dim:rgba(125,167,201,.13);
+  --mini:#7fc08a; --mini-dim:rgba(127,192,138,.11);
+  --serif:Georgia,"Times New Roman","STZhongsong","SimSun",serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,"Courier New","Microsoft YaHei",monospace;
+  --sans:"Segoe UI","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:13px/1.65 var(--mono);min-height:100vh;
+  background-image:radial-gradient(ellipse 900px 480px at 50% -140px,rgba(200,163,92,.055),transparent),
+    repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.012) 39px 40px);}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold-hi)}
+.wrap{max-width:1340px;margin:0 auto;padding:30px 26px 70px}
+
+/* ── 头部 ─────────────────────────── */
+header{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  padding:22px 28px 0;margin-bottom:22px}
+header::before{content:"";position:absolute;inset:4px;border:1px solid var(--gold-dim);pointer-events:none;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.kicker{font:600 11px var(--mono);letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+h1{font:400 29px/1.2 var(--serif);letter-spacing:.06em;margin:6px 0 2px}
+h1 b{color:var(--gold);font-weight:400}
+.sub{color:var(--faint);font-size:12px;letter-spacing:.08em}
+.readouts{display:flex;flex-wrap:wrap;gap:0;margin-top:16px;border-top:1px solid var(--line)}
+.readouts div{padding:9px 20px 10px 0;margin-right:20px;border-right:1px dashed var(--line)}
+.readouts s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--faint)}
+.readouts b{font-weight:400;color:var(--ink);font-size:13px}
+.readouts b em{font-style:normal;color:var(--gold)}
+.readouts .bad em,.readouts .bad{color:var(--err)}
+.readouts .good{color:var(--ok)}
+
+/* ── 状态灯与徽标 ─────────────────── */
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px}
+.led.red{background:var(--err);box-shadow:0 0 7px var(--err);animation:pulse 2.2s infinite}
+.led.grn{background:var(--ok);box-shadow:0 0 7px var(--ok)}
+.led.amb{background:var(--warn);box-shadow:0 0 7px var(--warn)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.badge{display:inline-block;font:700 10px var(--mono);letter-spacing:.14em;padding:2px 8px;border:1px solid}
+.badge.behind{color:var(--err);border-color:var(--err)}
+.badge.synced{color:var(--ok);border-color:var(--ok)}
+.badge.local{color:var(--info);border-color:var(--info)}
+.badge.gate{color:var(--gold);border-color:var(--gold)}
+
+/* ── 同源脊 ───────────────────────── */
+.spine{border:1px solid var(--line);background:var(--panel2);padding:18px 26px 12px;margin-bottom:22px;position:relative}
+.spine h2{font:400 18px var(--serif);letter-spacing:.12em;margin-bottom:2px}
+.spine h2 i{font:600 10px var(--mono);color:var(--gold);letter-spacing:.3em;font-style:normal;margin-right:10px}
+.spine .note{color:var(--faint);font-size:11.5px;margin-bottom:8px}
+.spine svg{display:block;width:100%;height:150px}
+.flow{stroke-dasharray:6 7;animation:dash 1.4s linear infinite}
+.flow.w{stroke:var(--web)}.flow.m{stroke:var(--mini)}
+.flow.idle{animation:none;opacity:.35}
+@keyframes dash{to{stroke-dashoffset:-13}}
+.src-label{font:600 11px var(--mono);fill:var(--gold);letter-spacing:2px}
+.lane-label{font:600 10.5px var(--mono);letter-spacing:1.5px}
+.lane-label.w{fill:var(--web)}.lane-label.m{fill:var(--mini)}
+.gate-note{font:10px var(--mono);fill:var(--faint)}
+.tok{fill:none;stroke-width:1.2}
+.tok.src{stroke:var(--gold)}
+.tok.w{stroke:var(--web)}.tok.m{stroke:var(--mini)}
+
+/* ── 双管道 ───────────────────────── */
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:1080px){.lanes{grid-template-columns:1fr}}
+.lane{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+  position:relative;padding:20px 22px 18px}
+.lane::after{content:"";position:absolute;top:0;left:0;width:12px;height:12px;opacity:.7}
+.lane.web::after{border-top:2px solid var(--web);border-left:2px solid var(--web)}
+.lane.mini::after{border-top:2px solid var(--mini);border-left:2px solid var(--mini)}
+.lane-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.lane-head h3{font:400 20px var(--serif);letter-spacing:.1em}
+.lane.web .lane-head h3{color:var(--web)}
+.lane.mini .lane-head h3{color:var(--mini)}
+.lane-head .pipe-id{font:600 10px var(--mono);letter-spacing:.25em;color:var(--faint)}
+.lane-target{color:var(--faint);font-size:11.5px;margin-bottom:14px}
+.lane-target b{color:var(--dim);font-weight:400}
+.finger{border:1px solid var(--line2);background:rgba(0,0,0,.25);padding:10px 14px;margin-bottom:14px}
+.finger s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--faint);margin-bottom:3px}
+.finger .id{font-size:14px;color:var(--gold-hi);letter-spacing:.04em}
+.finger .meta{color:var(--dim);font-size:11.5px;margin-top:4px}
+.finger .meta em{font-style:normal;color:var(--ink)}
+.finger .rb{color:var(--faint);font-size:11px;margin-top:2px}
+.finger .rb b{color:var(--warn);font-weight:400}
+h4.sec{font:600 11px var(--mono);letter-spacing:.22em;color:var(--dim);margin:16px 0 8px}
+h4.sec b{color:var(--gold)}
+
+table.diff{width:100%;border-collapse:collapse;font-size:12px}
+table.diff th{text-align:left;font:600 10px var(--mono);letter-spacing:.16em;color:var(--faint);
+  border-bottom:1px solid var(--line2);padding:5px 8px;white-space:nowrap}
+table.diff td{border-bottom:1px solid var(--line);padding:5px 8px;vertical-align:top;white-space:nowrap}
+table.diff tr:hover{background:var(--gold-dim)}
+td .arrow{color:var(--faint);margin:0 4px}
+td .new-val{color:var(--gold-hi)}
+td .old-val{color:var(--dim)}
+tr.miss td:first-child{color:var(--warn)}
+.diff-scroll{max-height:198px;overflow-y:auto;border:1px solid var(--line);background:rgba(0,0,0,.18)}
+.diff-scroll::-webkit-scrollbar{width:8px}
+.diff-scroll::-webkit-scrollbar-thumb{background:var(--line2)}
+.diff-scroll::-webkit-scrollbar-track{background:transparent}
+.mini-summary{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.chip{border:1px solid var(--line2);padding:4px 10px;font-size:11.5px;color:var(--dim);background:rgba(0,0,0,.2)}
+.chip b{color:var(--ink);font-weight:400}
+.chip.hot{border-color:var(--err);color:var(--err)}
+.chip.hot b{color:var(--err)}
+
+/* ── 动作链 ───────────────────────── */
+.actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.act{flex:1;min-width:118px;position:relative;border:1px solid var(--line2);background:rgba(0,0,0,.25);
+  color:var(--dim);font:600 11px var(--mono);letter-spacing:.1em;padding:10px 8px 9px;cursor:pointer;
+  transition:border-color .18s,color .18s,background .18s;text-align:center}
+.act small{display:block;font-weight:400;font-size:9.5px;letter-spacing:.04em;color:var(--faint);margin-top:3px;text-transform:none}
+.act:hover{border-color:var(--gold);color:var(--gold-hi)}
+.act .step-no{color:var(--faint);margin-right:5px}
+.act.done{border-color:var(--ok);color:var(--ok)}
+.act.done::before{content:"✓ ";color:var(--ok)}
+.act.gate-btn{border-color:var(--gold);color:var(--gold-hi);background:var(--gold-dim)}
+.act.gate-btn:hover{border-color:var(--gold-hi)}
+.act:disabled{opacity:.35;cursor:not-allowed}
+.act:disabled:hover{border-color:var(--line2);color:var(--dim)}
+
+/* ── 发布闸门弹层 ─────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(4,6,10,.78);display:none;align-items:center;justify-content:center;z-index:50}
+.overlay.on{display:flex}
+.gate-modal{width:520px;max-width:92vw;border:2px solid var(--gold);background:var(--panel);
+  padding:26px 30px 24px;position:relative;box-shadow:0 0 60px rgba(200,163,92,.12),0 30px 60px rgba(0,0,0,.6)}
+.gate-modal::before{content:"";position:absolute;inset:5px;border:1px solid var(--gold-dim);pointer-events:none;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%)}
+.gate-modal h3{font:400 22px var(--serif);letter-spacing:.12em;color:var(--gold);margin-bottom:4px}
+.gate-modal .to{color:var(--faint);font-size:11.5px;margin-bottom:14px}
+.gate-modal .to b{color:var(--ink);font-weight:400}
+.gate-warn{border-left:3px solid var(--err);background:rgba(208,106,94,.07);padding:10px 14px;
+  font-size:12px;color:var(--ink);margin-bottom:14px;line-height:1.7}
+.gate-warn b{color:var(--err);font-weight:400}
+.gate-facts{font-size:11.5px;color:var(--dim);margin-bottom:16px;line-height:1.9}
+.gate-facts em{font-style:normal;color:var(--gold-hi)}
+.gate-input{width:100%;border:1px solid var(--line2);background:rgba(0,0,0,.35);color:var(--ink);
+  font:13px var(--mono);padding:9px 12px;margin-bottom:14px;outline:none;letter-spacing:.05em}
+.gate-input:focus{border-color:var(--gold)}
+.gate-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn{border:1px solid var(--line2);background:transparent;color:var(--dim);font:600 12px var(--mono);
+  letter-spacing:.15em;padding:9px 22px;cursor:pointer;transition:all .15s}
+.btn:hover{border-color:var(--dim);color:var(--ink)}
+.btn.arm{border-color:var(--gold);color:var(--gold-hi);background:var(--gold-dim)}
+.btn.arm:disabled{opacity:.35;cursor:not-allowed}
+.btn.arm:not(:disabled):hover{border-color:var(--gold-hi);background:rgba(200,163,92,.25)}
+
+/* ── 同步账 ───────────────────────── */
+.ledger{border:1px solid var(--line);background:var(--panel2);padding:18px 26px 20px;margin-top:22px}
+.ledger h2{font:400 18px var(--serif);letter-spacing:.12em;margin-bottom:14px}
+.ledger h2 i{font:600 10px var(--mono);color:var(--gold);letter-spacing:.3em;font-style:normal;margin-right:10px}
+.ledger ol{list-style:none}
+.ledger li{display:grid;grid-template-columns:118px 110px 1fr;gap:14px;padding:8px 0;
+  border-bottom:1px dashed var(--line);font-size:12px;animation:reveal .5s both}
+@keyframes reveal{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ledger li:last-child{border-bottom:none}
+.ledger time{color:var(--faint)}
+.ledger .lid{letter-spacing:.03em}
+.ledger .lid.w{color:var(--web)}
+.ledger .lid.m{color:var(--mini)}
+.ledger .what{color:var(--dim)}
+.ledger .what em{font-style:normal;color:var(--ink)}
+.ledger .fresh{animation:flash 1.6s both}
+@keyframes flash{0%{background:var(--gold-dim)}100%{background:transparent}}
+
+/* ── 实现注记 ─────────────────────── */
+details.impl{margin-top:22px;border:1px dashed var(--line2);padding:14px 20px;color:var(--faint);font-size:11.5px}
+details.impl summary{cursor:pointer;color:var(--dim);letter-spacing:.2em;font-size:11px}
+details.impl summary:hover{color:var(--gold)}
+details.impl table{margin-top:12px;width:100%;border-collapse:collapse}
+details.impl td{border-bottom:1px solid var(--line);padding:5px 10px 5px 0;vertical-align:top}
+details.impl td:first-child{color:var(--gold);white-space:nowrap;padding-right:18px}
+details.impl code{color:var(--ink)}
+footer{margin-top:30px;border-top:1px solid var(--line);padding-top:14px;display:flex;gap:26px;flex-wrap:wrap;
+  color:var(--faint);font-size:11px;letter-spacing:.06em}
+footer b{color:var(--warn);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">WOW FOREVER · 数据分发 · 02 号屏</div>
+  <h1>双管道<b>同步台</b></h1>
+  <div class="sub">一份基底 · 两条管道 · 各自不可变批次 · 指针最后换 · 发布要站主点头</div>
+  <div class="readouts">
+    <div><s>数据基底最新板块</s><b><em>11-02 19:46</em>（十四板块全绿）</b></div>
+    <div><s>网页管道</s><b class="bad"><span class="led red"></span>线上停在 10-28，落后 <em>6</em> 天 / 9 板块</b></div>
+    <div><s>小程序管道</s><b class="good"><span class="led grn"></span>同批 <em>1d12cc2f39b9</em></b></div>
+    <div><s>工作树未提交</s><b class="bad"><em>87</em> 文件（含 XR 覆盖表）</b></div>
+    <div><s>门禁最近一次</s><b>11-02 全绿（build-data · site-check · vitest）</b></div>
+  </div>
+</header>
+
+<!-- ═══ 同源脊 ═══ -->
+<section class="spine">
+  <h2><i>SPINE</i>同源脊：两根管子只喝一口井</h2>
+  <div class="note">app/data 是全线唯一数据基底——两条管道不各养一份数据，任何同步都从这一口井出发；过了共同门禁才允许分流。</div>
+  <svg viewBox="0 0 1240 150" aria-label="同源脊示意图">
+    <!-- 基底节点 -->
+    <rect class="tok src" x="20" y="48" width="200" height="56" fill="rgba(200,163,92,.06)"/>
+    <text x="120" y="72" text-anchor="middle" class="src-label">app / data</text>
+    <text x="120" y="90" text-anchor="middle" class="gate-note">唯一数据基底 · 11-02</text>
+    <!-- 汇流点 -->
+    <circle cx="360" cy="76" r="26" class="tok src" fill="rgba(200,163,92,.04)"/>
+    <text x="360" y="72" text-anchor="middle" class="gate-note">共同</text>
+    <text x="360" y="85" text-anchor="middle" class="gate-note">门禁</text>
+    <!-- 网页管 -->
+    <path class="flow w" d="M 220 68 C 280 68 300 68 334 68" fill="none" stroke-width="2"/>
+    <path id="webPipe" class="flow w" d="M 386 68 C 470 68 520 40 610 40 L 800 40" fill="none" stroke-width="2"/>
+    <rect class="tok w" x="800" y="18" width="188" height="44" fill="rgba(125,167,201,.05)"/>
+    <text x="894" y="37" text-anchor="middle" class="lane-label w">管道 A · 网页</text>
+    <text x="894" y="53" text-anchor="middle" class="gate-note">发布包 → GitHub Pages</text>
+    <path id="webPipe2" class="flow w" d="M 988 40 C 1050 40 1070 40 1120 40" fill="none" stroke-width="2"/>
+    <text x="1168" y="44" text-anchor="middle" class="lane-label w">线上站</text>
+    <!-- 小程序管 -->
+    <path class="flow m" d="M 220 84 C 280 84 300 84 334 84" fill="none" stroke-width="2"/>
+    <path id="miniPipe" class="flow m" d="M 386 84 C 470 84 520 112 610 112 L 800 112" fill="none" stroke-width="2"/>
+    <rect class="tok m" x="800" y="90" width="188" height="44" fill="rgba(127,192,138,.05)"/>
+    <text x="894" y="109" text-anchor="middle" class="lane-label m">管道 B · 小程序</text>
+    <text x="894" y="125" text-anchor="middle" class="gate-note">OSS wow/beta/v1 · 批次+指针</text>
+    <path id="miniPipe2" class="flow m" d="M 988 112 C 1050 112 1070 112 1120 112" fill="none" stroke-width="2"/>
+    <text x="1168" y="116" text-anchor="middle" class="lane-label m">真机</text>
+    <!-- 中缝注记 -->
+    <text x="600" y="80" text-anchor="middle" class="gate-note">过了门禁的数据才准分流 · 每根管子独立成批、独立回滚、独立对账</text>
+  </svg>
+</section>
+
+<!-- ═══ 双管道 ═══ -->
+<div class="lanes">
+
+  <!-- 管道 A · 网页 -->
+  <section class="lane web" id="laneWeb">
+    <div class="lane-head">
+      <h3>管道 A · 网页</h3>
+      <span class="pipe-id">PIPE · WEB</span>
+      <span class="badge behind"><span class="led red"></span>落后 6 天</span>
+    </div>
+    <div class="lane-target">线上 <b>eplayed.github.io/wuxian-atlas</b> ｜ 指纹 = 发布包名 + 整包 SHA-256</div>
+    <div class="finger">
+      <s>线上当前包</s>
+      <div class="id">wow-forever-web-20261028-174730-4e216292</div>
+      <div class="meta">整包 <em>d8fb1a4faeaa6891…</em> · 3,880 文件 · 10-28 17:50 推送</div>
+      <div class="rb">回滚位 <b> wow-forever-web-20261028-153918-476218a8（41f62c6c…）</b> · previous 位在 release/latest.json</div>
+    </div>
+    <h4 class="sec">对账 · 本地领先线上的板块（<b>9</b>）</h4>
+    <div class="diff-scroll">
+      <table class="diff">
+        <thead><tr><th>板块</th><th>线上</th><th>本地</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td>世界（区域与稀有）</td><td>—</td><td class="new-val">11-02</td><td>整包未发布</td></tr>
+          <tr><td>宏命令</td><td class="old-val">根本没有</td><td class="new-val">11-02 · 245 条</td><td>线上缺整块</td></tr>
+          <tr><td>客户端改动</td><td>—</td><td class="new-val">11-02 · 70707</td><td>整包未发布</td></tr>
+          <tr><td>物品名录</td><td>—</td><td class="new-val">11-02 · 21,459</td><td>整包未发布</td></tr>
+          <tr><td>种族特长</td><td>—</td><td class="new-val">11-02 · 18 条覆盖</td><td>整包未发布</td></tr>
+          <tr><td>猎人宠物</td><td>—</td><td class="new-val">11-02</td><td>整包未发布</td></tr>
+          <tr><td>传承 / 排队表 / 素材台账</td><td>—</td><td class="new-val">11-02</td><td>整包未发布</td></tr>
+          <tr><td>配装名单</td><td class="old-val">10-28</td><td>10-28</td><td>持平</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button class="act" data-step="w1"><span class="step-no">①</span>构建<small>npm run build（app-assets → vite）</small></button>
+      <button class="act" data-step="w2"><span class="step-no">②</span>打包<small>release-package.py</small></button>
+      <button class="act" data-step="w3"><span class="step-no">③</span>验收<small>pkg-verify --live</small></button>
+      <button class="act gate-btn" data-gate="web"><span class="step-no">④</span>发布 ●闸门<small>推 GitHub Pages · 需站主点头</small></button>
+    </div>
+  </section>
+
+  <!-- 管道 B · 小程序 -->
+  <section class="lane mini" id="laneMini">
+    <div class="lane-head">
+      <h3>管道 B · 小程序</h3>
+      <span class="pipe-id">PIPE · MINI / beta</span>
+      <span class="badge synced"><span class="led grn"></span>已同步</span>
+    </div>
+    <div class="lane-target">OSS <b>wow/beta/v1/</b> ｜ 指纹 = 批次号（不可变）+ 指针 manifest.json</div>
+    <div class="finger">
+      <s>线上当前批次（指针）</s>
+      <div class="id">1d12cc2f39b9</div>
+      <div class="meta"><em>177</em> 文件 · 0 失败 · 今天 11-03 发布（起名页 + 种族覆盖同批）</div>
+      <div class="rb">回滚位 <b>d3e222b74dc1</b>（11-02 · 167 文件）· rollback 一条命令换回</div>
+    </div>
+    <h4 class="sec">对账 · 本地 vs 线上（按清单比条数与字节，不比批次号）</h4>
+    <div class="mini-summary">
+      <span class="chip">看着一样 <b>141</b></span>
+      <span class="chip">条数变了 <b>0</b></span>
+      <span class="chip">本地已撤 <b>0</b></span>
+      <span class="chip hot">本地新增 <b>2</b>（names 索引 / professions 索引）</span>
+    </div>
+    <div class="diff-scroll">
+      <table class="diff">
+        <thead><tr><th>键</th><th>线上条数</th><th>本地条数</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr class="miss"><td>names/index</td><td>—</td><td class="new-val">10</td><td>本地新增</td></tr>
+          <tr class="miss"><td>professions/index</td><td>—</td><td class="new-val">9</td><td>本地新增</td></tr>
+          <tr><td>classes</td><td>6,038 B</td><td>6,038 B</td><td>看着一样</td></tr>
+          <tr><td>dungeons</td><td>88,201 B</td><td>88,201 B</td><td>看着一样</td></tr>
+          <tr><td>bis/index</td><td>28,632 B</td><td>28,632 B</td><td>看着一样</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button class="act" data-step="m1"><span class="step-no">①</span>导出<small>export-mini.js</small></button>
+      <button class="act" data-step="m2"><span class="step-no">②</span>成批<small>oss-release build --check-identity</small></button>
+      <button class="act gate-btn" data-gate="mini"><span class="step-no">③</span>上传换指针 ●闸门<small>upload --env beta · 需站主点头</small></button>
+      <button class="act" id="btnRollback"><span class="step-no">④</span>回滚<small>rollback --to d3e222b74dc1</small></button>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ 同步账 ═══ -->
+<section class="ledger">
+  <h2><i>LEDGER</i>同步账：谁、哪一批、带了什么</h2>
+  <ol id="ledgerList">
+    <li><time>11-03 上午</time><span class="lid m">1d12cc2f39b9</span><span class="what">小程序批次：起名页上线、种族 18 条覆盖同批进真机、素材层补 724 件、核对日 10-07 → <em>11-02</em></span></li>
+    <li><time>11-02 17:50</time><span class="lid m">d3e222b74dc1</span><span class="what">小程序批次：BIS 逐件底图 76 张上线、核对日 10-26 → <em>11-02</em>、配装图真机确认能显示</span></li>
+    <li><time>11-02 白天</time><span class="lid m">e600be9 日更</span><span class="what">数据基底：十四板块重抓全绿、A 类超期清零、本地 vs 线上对账接进工作台</span></li>
+    <li><time>10-28 17:50</time><span class="lid w">4e216292</span><span class="what">网页发布包：宠物页入口 + 首页宠物卡，此后<em>网页管道再没发过</em>——现在 9 个板块压在本地</span></li>
+  </ol>
+</section>
+
+<!-- ═══ 发布闸门 ═══ -->
+<div class="overlay" id="overlay">
+  <div class="gate-modal">
+    <h3 id="gateTitle">发布闸门</h3>
+    <div class="to" id="gateTarget"></div>
+    <div class="gate-warn"><b>这一步改的是玩家当天读到的那一份。</b>发布前请确认：门禁全绿、回滚位在、这次改动你要让它上线——工作树里别条线的未提交改动会一起被带出去。</div>
+    <div class="gate-facts" id="gateFacts"></div>
+    <input class="gate-input" id="gateInput" placeholder="输入上方批次号以解锁" autocomplete="off" spellcheck="false">
+    <div class="gate-btns">
+      <button class="btn" id="gateCancel">取消</button>
+      <button class="btn arm" id="gateArm" disabled>解锁并发布</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 实现注记（给 wow-dev） ═══ -->
+<details class="impl">
+  <summary>实现注记 · 本稿每个元素对应的真命令与真字段（wow-dev 接手读这里）</summary>
+  <table>
+    <tr><td>同源脊</td><td>纯示意。<code>app/data</code> 唯一基底 = 根 AGENTS.md 红线；共同门禁 = <code>build-data.js</code> / <code>audit-translations.py</code> / <code>site-check.py</code> / <code>vitest</code>。</td></tr>
+    <tr><td>网页指纹</td><td>包名与整包 SHA 来自 <code>release-package.py</code> 产物；回滚位 = <code>release/latest.json</code> 的 previous。线上指纹读取是已知缺口（<code>live_version()</code> 只有 HTTP 码）——第十节方案里 version.json 落地后这一格改读真值。</td></tr>
+    <tr><td>网页对账表</td><td><code>tools/reconcile.py web_report()</code> 的 <code>rows[]</code>（section / liveDate / localDate / behind）+ files[] 尺寸差；「根本没有」= liveDate null。数值取 2026-11-03 现读。</td></tr>
+    <tr><td>小程序指纹</td><td>指针 = <code>oss-release.js list</code> 读 <code>wow/beta/v1/manifest.json</code> 的 buildId / counts.files / bundle；回滚位 = rollback 目标。批次不可变、指针最后换 = 分发层铁律。</td></tr>
+    <tr><td>小程序对账</td><td><code>reconcile.py mini_report()</code> 的 rows + summary：比 records/bytes、故意不比哈希（产物嵌 buildId）；「本地新增」= 线上 files.json 无此键。数值取 2026-11-03 现读。</td></tr>
+    <tr><td>动作链</td><td>网页 ①②③ = <code>npm run build</code> / <code>release-package.py</code> / <code>pkg-verify.py</code>；小程序 ①②③ = <code>export-mini.js</code> / <code>oss-release.js build --check-identity</code> / <code>upload --env beta</code>。闸门步 = 服务端白名单单命令（沿用 8830 jobs.py 门禁），前端只是眼睛。</td></tr>
+    <tr><td>发布闸门弹层</td><td>输批次号解锁是**界面层的慎重交互**；真授权仍是站主明说。红线三条照抄根 AGENTS.md：改玩家读到的那一份 / 未提交改动连带 / 回滚位常备。</td></tr>
+    <tr><td>同步账</td><td>落 <code>tools/admin/reconcile/latest.json</code> 旁加一份 append-only 发布账（每条 = 批次号 + 时间 + 说明），供此屏渲染。</td></tr>
+    <tr><td>样式</td><td>全部令牌抄 <code>tools/admin/index.html</code> 的 :root，可整段并入 8830 工作台作「02 双管道同步」屏；无字体 CDN、无组件库，符合站规。</td></tr>
+  </table>
+</details>
+
+<footer>
+  <span><b>红线</b> 发布需站主点头</span>
+  <span>批次不可变 · 指针最后换</span>
+  <span>回滚位常备</span>
+  <span>两管道不共用 appid / OSS 命名空间</span>
+  <span>设计稿 · wow-ui · 2026-11-03</span>
+</footer>
+
+</div>
+
+<script>
+// ── 动作链步进（设计稿为演示态，真实现走 8830 jobs 白名单命令）──
+const laneState = { web: {done:0}, mini: {done:0} };
+document.querySelectorAll('.act[data-step]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lane = btn.dataset.step[0] === 'w' ? 'web' : 'mini';
+    const no = +btn.dataset.step[1];
+    if (no > laneState[lane].done + 1) return;
+    btn.classList.add('done');
+    laneState[lane].done = Math.max(laneState[lane].done, no);
+  });
+});
+
+// ── 发布闸门 ──
+const GATES = {
+  web:  { title:'发布闸门 · 网页', target:'目标：GitHub Pages eplayed.github.io/wuxian-atlas',
+          facts:'本次将发布 <em>9</em> 个落后板块（含宏命令整块、种族 18 条覆盖、物品名录 21,459 条）。<br>解锁口令 = 新包号前八位（形如 <em>20261103</em>）。' , pass:'20261103' },
+  mini: { title:'发布闸门 · 小程序', target:'目标：OSS wow/beta/v1/（beta 环境）',
+          facts:'本次将上传新批次并换指针（新增 <em>names</em> / <em>professions</em> 两个索引键）。<br>当前线上 <em>1d12cc2f39b9</em> 将成为回滚位。<br>解锁口令 = 目标批次号（本稿演示：<em>demo0001</em>）。', pass:'demo0001' }
+};
+const overlay = document.getElementById('overlay');
+let gateCtx = null;
+document.querySelectorAll('.act[data-gate]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    gateCtx = GATES[btn.dataset.gate];
+    document.getElementById('gateTitle').textContent = gateCtx.title;
+    document.getElementById('gateTarget').textContent = gateCtx.target;
+    document.getElementById('gateFacts').innerHTML = gateCtx.facts;
+    document.getElementById('gateInput').value = '';
+    document.getElementById('gateArm').disabled = true;
+    overlay.classList.add('on');
+    document.getElementById('gateInput').focus();
+  });
+});
+document.getElementById('gateInput').addEventListener('input', e => {
+  document.getElementById('gateArm').disabled = e.target.value.trim() !== gateCtx.pass;
+});
+document.getElementById('gateCancel').addEventListener('click', () => overlay.classList.remove('on'));
+overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('on'); });
+document.getElementById('gateArm').addEventListener('click', () => {
+  overlay.classList.remove('on');
+  if (!gateCtx) return;
+  const isWeb = gateCtx === GATES.web;
+  const lane = document.getElementById(isWeb ? 'laneWeb' : 'laneMini');
+  lane.querySelectorAll('.act').forEach(b => b.classList.add('done'));
+  // 状态徽标翻转 + 管子点亮 + 记账
+  const badge = lane.querySelector('.badge');
+  badge.className = 'badge synced';
+  badge.innerHTML = '<span class="led grn"></span>已同步';
+  document.querySelectorAll(isWeb ? '.flow.w' : '.flow.m').forEach(p => p.classList.remove('idle'));
+  const ol = document.getElementById('ledgerList');
+  const li = document.createElement('li');
+  li.className = 'fresh';
+  li.innerHTML = '<time>刚刚</time><span class="lid ' + (isWeb ? 'w' : 'm') + '">' +
+    (isWeb ? 'wow-forever-web-新包' : '新批次') + '</span><span class="what">（设计稿演示条目）发布完成，上一批转入回滚位</span>';
+  ol.prepend(li);
+});
+
+// ── 回滚演示 ──
+document.getElementById('btnRollback').addEventListener('click', function(){
+  if (!confirm('回滚到 d3e222b74dc1？（演示）')) return;
+  const lane = document.getElementById('laneMini');
+  const badge = lane.querySelector('.badge');
+  badge.className = 'badge synced';
+  badge.innerHTML = '<span class="led grn"></span>已回滚 d3e222b74dc1';
+});
+</script>
+</body>
+</html>

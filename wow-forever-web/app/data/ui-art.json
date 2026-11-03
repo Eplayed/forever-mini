@@ -36,6 +36,11 @@
     "path": "img/gen/prof-table.webp",
     "kind": "generated-atmosphere",
     "what": "药剂与锻造工具台面（本站自生成），给首页「专业与配方」入口卡（这张卡要远程开关 professions 打开才出现）"
+   },
+   "namer": {
+    "path": "img/gen/hero-ruins.webp",
+    "kind": "generated-atmosphere",
+    "what": "废墟前的人物剪影（本站自生成，gen/ 层清单里有来路），给首页「角色起名」入口卡（这张卡要远程开关 namer 打开才出现）"
    }
   }
  },

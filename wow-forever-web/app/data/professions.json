@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-03",
   "kind": "client-datamine",
   "method": "tools/scrape-wclbox-prof.py --write 抓 → tools/merge-professions.js 整形",
   "sources": [
@@ -19,14 +19,14 @@
   ],
   "sourceFrom": "配方行的 vendors / formulaDrops 来自 XR_DungeonGuide 0.37.1 Data_Prof.lua（tools/extract-xr-prof.py 抽取 → tools/merge-prof-sources.py 并入），掉率百分比在抽取阶段就丢了；原有的 source（训练师/商人这类归法）仍来自参考站，两套并存",
   "xrProf": {
-   "recipes": 1865,
-   "matched": 1769,
-   "withVendors": 579,
-   "withDrops": 327,
-   "vTrimmed": 4,
+   "recipes": 1986,
+   "matched": 1890,
+   "withVendors": 646,
+   "withDrops": 336,
+   "vTrimmed": 12,
    "dTrimmed": 14,
-   "xrOnly": 153,
-   "fetched": "2026-11-02",
+   "xrOnly": 32,
+   "fetched": "2026-11-03",
    "total": 1918,
    "rateDropped": 782
   }
@@ -6621,7 +6621,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -8277,6 +8277,38 @@
      "level": "L0"
     },
     {
+     "itemId": "250488",
+     "nameCn": "老兵的链甲衬衫",
+     "iconKey": "inv_chest_chain_07",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 4,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "劣质砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_01"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 2,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 85,
+      "green": 85,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "250489",
      "nameCn": "卫兵的链甲衬衫",
      "iconKey": "inv_chest_chain_09",
@@ -8297,6 +8329,102 @@
        "nameCn": "暗影石",
        "count": 2,
        "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 85,
+      "green": 85,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250490",
+     "nameCn": "保护者的链甲衬衫",
+     "iconKey": "inv_chest_chain_07",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 4,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "劣质砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_01"
+      },
+      {
+       "nameCn": "虎眼石",
+       "count": 2,
+       "iconKey": "inv_misc_gem_opal_03"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 85,
+      "green": 85,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250491",
+     "nameCn": "助祭的链甲衬衫",
+     "iconKey": "inv_chest_chain_08",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 4,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "劣质砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_01"
+      },
+      {
+       "nameCn": "奇异之尘",
+       "count": 2,
+       "iconKey": "inv_enchant_duststrange"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 85,
+      "green": 85,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250492",
+     "nameCn": "十字军的链甲衬衫",
+     "iconKey": "inv_chest_chain_09",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 4,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "劣质砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_01"
+      },
+      {
+       "nameCn": "次级魔法精华",
+       "count": 2,
+       "iconKey": "inv_enchant_essencemagicsmall"
       }
      ],
      "skill": {
@@ -8632,134 +8760,6 @@
       "grey": 150
      },
      "source": "训练师",
-     "level": "L0"
-    },
-    {
-     "itemId": "250488",
-     "nameCn": "老兵的链甲衬衫",
-     "iconKey": "inv_chest_chain_07",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 4,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "劣质砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_01"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 2,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 85,
-      "yellow": 85,
-      "green": 85,
-      "grey": 85
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250490",
-     "nameCn": "保护者的链甲衬衫",
-     "iconKey": "inv_chest_chain_07",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 4,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "劣质砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_01"
-      },
-      {
-       "nameCn": "虎眼石",
-       "count": 2,
-       "iconKey": "inv_misc_gem_opal_03"
-      }
-     ],
-     "skill": {
-      "orange": 85,
-      "yellow": 85,
-      "green": 85,
-      "grey": 85
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250491",
-     "nameCn": "助祭的链甲衬衫",
-     "iconKey": "inv_chest_chain_08",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 4,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "劣质砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_01"
-      },
-      {
-       "nameCn": "奇异之尘",
-       "count": 2,
-       "iconKey": "inv_enchant_duststrange"
-      }
-     ],
-     "skill": {
-      "orange": 85,
-      "yellow": 85,
-      "green": 85,
-      "grey": 85
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250492",
-     "nameCn": "十字军的链甲衬衫",
-     "iconKey": "inv_chest_chain_09",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 4,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "劣质砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_01"
-      },
-      {
-       "nameCn": "次级魔法精华",
-       "count": 2,
-       "iconKey": "inv_enchant_essencemagicsmall"
-      }
-     ],
-     "skill": {
-      "orange": 85,
-      "yellow": 85,
-      "green": 85,
-      "grey": 85
-     },
-     "source": null,
      "level": "L0"
     },
     {
@@ -9133,6 +9133,166 @@
       "grey": 150
      },
      "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "250493",
+     "nameCn": "老兵的链甲护腿",
+     "iconKey": "inv_pants_mail_05",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 6,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 4,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 95,
+      "yellow": 100,
+      "green": 100,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250494",
+     "nameCn": "卫兵的链甲护腿",
+     "iconKey": "inv_pants_mail_16",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 6,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "暗影石",
+       "count": 4,
+       "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 95,
+      "yellow": 100,
+      "green": 100,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250495",
+     "nameCn": "保护者的链甲护腿",
+     "iconKey": "inv_pants_mail_05",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 6,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "虎眼石",
+       "count": 4,
+       "iconKey": "inv_misc_gem_opal_03"
+      }
+     ],
+     "skill": {
+      "orange": 95,
+      "yellow": 100,
+      "green": 100,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250496",
+     "nameCn": "助祭的链甲护腿",
+     "iconKey": "inv_pants_mail_17",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 6,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "奇异之尘",
+       "count": 4,
+       "iconKey": "inv_enchant_duststrange"
+      }
+     ],
+     "skill": {
+      "orange": 95,
+      "yellow": 100,
+      "green": 100,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250497",
+     "nameCn": "十字军的链甲护腿",
+     "iconKey": "inv_pants_mail_13",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 6,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "次级魔法精华",
+       "count": 4,
+       "iconKey": "inv_enchant_essencemagicsmall"
+      }
+     ],
+     "skill": {
+      "orange": 95,
+      "yellow": 100,
+      "green": 100,
+      "grey": 100
+     },
+     "source": null,
      "level": "L0"
     },
     {
@@ -9555,166 +9715,6 @@
       "grey": 125
      },
      "source": "训练师",
-     "level": "L0"
-    },
-    {
-     "itemId": "250493",
-     "nameCn": "老兵的链甲护腿",
-     "iconKey": "inv_pants_mail_05",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 6,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 4,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 100,
-      "yellow": 100,
-      "green": 100,
-      "grey": 100
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250494",
-     "nameCn": "卫兵的链甲护腿",
-     "iconKey": "inv_pants_mail_16",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 6,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "暗影石",
-       "count": 4,
-       "iconKey": "inv_misc_gem_amethyst_01"
-      }
-     ],
-     "skill": {
-      "orange": 100,
-      "yellow": 100,
-      "green": 100,
-      "grey": 100
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250495",
-     "nameCn": "保护者的链甲护腿",
-     "iconKey": "inv_pants_mail_05",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 6,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "虎眼石",
-       "count": 4,
-       "iconKey": "inv_misc_gem_opal_03"
-      }
-     ],
-     "skill": {
-      "orange": 100,
-      "yellow": 100,
-      "green": 100,
-      "grey": 100
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250496",
-     "nameCn": "助祭的链甲护腿",
-     "iconKey": "inv_pants_mail_17",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 6,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "奇异之尘",
-       "count": 4,
-       "iconKey": "inv_enchant_duststrange"
-      }
-     ],
-     "skill": {
-      "orange": 100,
-      "yellow": 100,
-      "green": 100,
-      "grey": 100
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250497",
-     "nameCn": "十字军的链甲护腿",
-     "iconKey": "inv_pants_mail_13",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 6,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "次级魔法精华",
-       "count": 4,
-       "iconKey": "inv_enchant_essencemagicsmall"
-      }
-     ],
-     "skill": {
-      "orange": 100,
-      "yellow": 100,
-      "green": 100,
-      "grey": 100
-     },
-     "source": null,
      "level": "L0"
     },
     {
@@ -10834,6 +10834,166 @@
      "level": "L0"
     },
     {
+     "itemId": "250498",
+     "nameCn": "老兵的链甲头盔",
+     "iconKey": "inv_helmet_39",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 8,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 6,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250499",
+     "nameCn": "卫兵的链甲头盔",
+     "iconKey": "inv_helmet_38",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 8,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "暗影石",
+       "count": 6,
+       "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250500",
+     "nameCn": "保护者的链甲头盔",
+     "iconKey": "inv_helmet_39",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 8,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "虎眼石",
+       "count": 6,
+       "iconKey": "inv_misc_gem_opal_03"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250501",
+     "nameCn": "助祭的链甲头盔",
+     "iconKey": "inv_helmet_36",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 8,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "奇异之尘",
+       "count": 6,
+       "iconKey": "inv_enchant_duststrange"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250502",
+     "nameCn": "十字军的链甲头盔",
+     "iconKey": "inv_helmet_37",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "青铜锭",
+       "count": 8,
+       "iconKey": "inv_ingot_bronze"
+      },
+      {
+       "nameCn": "粗制砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_02"
+      },
+      {
+       "nameCn": "次级魔法精华",
+       "count": 6,
+       "iconKey": "inv_enchant_essencemagicsmall"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "3485",
      "nameCn": "绿铁护手",
      "iconKey": "inv_gauntlets_05",
@@ -11255,166 +11415,6 @@
       }
      ],
      "srcFrom": "xr"
-    },
-    {
-     "itemId": "250498",
-     "nameCn": "老兵的链甲头盔",
-     "iconKey": "inv_helmet_39",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 8,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 6,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250499",
-     "nameCn": "卫兵的链甲头盔",
-     "iconKey": "inv_helmet_38",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 8,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "暗影石",
-       "count": 6,
-       "iconKey": "inv_misc_gem_amethyst_01"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250500",
-     "nameCn": "保护者的链甲头盔",
-     "iconKey": "inv_helmet_39",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 8,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "虎眼石",
-       "count": 6,
-       "iconKey": "inv_misc_gem_opal_03"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250501",
-     "nameCn": "助祭的链甲头盔",
-     "iconKey": "inv_helmet_36",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 8,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "奇异之尘",
-       "count": 6,
-       "iconKey": "inv_enchant_duststrange"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250502",
-     "nameCn": "十字军的链甲头盔",
-     "iconKey": "inv_helmet_37",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "青铜锭",
-       "count": 8,
-       "iconKey": "inv_ingot_bronze"
-      },
-      {
-       "nameCn": "粗制砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_02"
-      },
-      {
-       "nameCn": "次级魔法精华",
-       "count": 6,
-       "iconKey": "inv_enchant_essencemagicsmall"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
     },
     {
      "itemId": "3851",
@@ -15656,6 +15656,43 @@
      "level": "L0"
     },
     {
+     "itemId": "250543",
+     "nameCn": "闪耀秘银头盔",
+     "iconKey": "inv_helmet_35",
+     "quality": 2,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "秘银锭",
+       "count": 8,
+       "iconKey": "inv_ingot_06"
+      },
+      {
+       "nameCn": "真银锭",
+       "count": 9,
+       "iconKey": "inv_ingot_08"
+      },
+      {
+       "nameCn": "重砂轮",
+       "count": 2,
+       "iconKey": "inv_stone_grindingstone_03"
+      },
+      {
+       "nameCn": "大地之核",
+       "count": 1,
+       "iconKey": "inv_stone_05"
+      }
+     ],
+     "skill": {
+      "orange": 215,
+      "yellow": 235,
+      "green": 245,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "250612",
      "nameCn": "充能秘银战斧",
      "iconKey": "inv_axe_09",
@@ -16647,43 +16684,6 @@
        "nameCn": "坚固的砂轮",
        "count": 1,
        "iconKey": "inv_stone_grindingstone_04"
-      }
-     ],
-     "skill": {
-      "orange": 235,
-      "yellow": 235,
-      "green": 245,
-      "grey": 255
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250543",
-     "nameCn": "闪耀秘银头盔",
-     "iconKey": "inv_helmet_35",
-     "quality": 2,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "秘银锭",
-       "count": 8,
-       "iconKey": "inv_ingot_06"
-      },
-      {
-       "nameCn": "真银锭",
-       "count": 9,
-       "iconKey": "inv_ingot_08"
-      },
-      {
-       "nameCn": "重砂轮",
-       "count": 2,
-       "iconKey": "inv_stone_grindingstone_03"
-      },
-      {
-       "nameCn": "大地之核",
-       "count": 1,
-       "iconKey": "inv_stone_05"
       }
      ],
      "skill": {
@@ -17902,6 +17902,48 @@
      "srcFrom": "xr"
     },
     {
+     "itemId": "250574",
+     "nameCn": "督军护腰",
+     "iconKey": "inv_belt_08",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "瑟银锭",
+       "count": 24,
+       "iconKey": "inv_ingot_07"
+      },
+      {
+       "nameCn": "坚固的砂轮",
+       "count": 4,
+       "iconKey": "inv_stone_grindingstone_04"
+      },
+      {
+       "nameCn": "砂纸",
+       "count": 6,
+       "iconKey": "inv_inscription_papyrus"
+      },
+      {
+       "nameCn": "硫酸",
+       "count": 6,
+       "iconKey": "trade_alchemy"
+      },
+      {
+       "nameCn": "金珍珠",
+       "count": 10,
+       "iconKey": "inv_misc_gem_pearl_04"
+      }
+     ],
+     "skill": {
+      "orange": 250,
+      "yellow": 270,
+      "green": 280,
+      "grey": 290
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "250575",
      "nameCn": "裁决者护腰",
      "iconKey": "inv_belt_13",
@@ -19029,48 +19071,6 @@
       "grey": 295
      },
      "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "250574",
-     "nameCn": "督军护腰",
-     "iconKey": "inv_belt_08",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "瑟银锭",
-       "count": 24,
-       "iconKey": "inv_ingot_07"
-      },
-      {
-       "nameCn": "坚固的砂轮",
-       "count": 4,
-       "iconKey": "inv_stone_grindingstone_04"
-      },
-      {
-       "nameCn": "砂纸",
-       "count": 6,
-       "iconKey": "inv_inscription_papyrus"
-      },
-      {
-       "nameCn": "硫酸",
-       "count": 6,
-       "iconKey": "trade_alchemy"
-      },
-      {
-       "nameCn": "金珍珠",
-       "count": 10,
-       "iconKey": "inv_misc_gem_pearl_04"
-      }
-     ],
-     "skill": {
-      "orange": 270,
-      "yellow": 270,
-      "green": 280,
-      "grey": 290
-     },
-     "source": "训练师",
      "level": "L0"
     },
     {
@@ -23997,7 +23997,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -25258,6 +25258,102 @@
      "level": "L0"
     },
     {
+     "itemId": "249469",
+     "nameCn": "冰冻山脉之心",
+     "iconKey": "inv_misc_gem_sapphire_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "山脉之血",
+       "count": 1,
+       "iconKey": "inv_misc_gem_bloodstone_03"
+      },
+      {
+       "nameCn": "死灵精华",
+       "count": 1,
+       "iconKey": "spell_shadow_shadetruesight"
+      },
+      {
+       "nameCn": "小块魔光碎片",
+       "count": 3,
+       "iconKey": "inv_enchant_shardbrilliantsmall"
+      }
+     ],
+     "skill": {
+      "orange": 265,
+      "yellow": 285,
+      "green": 305,
+      "grey": 325
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "249470",
+     "nameCn": "熔火山脉之心",
+     "iconKey": "inv_misc_gem_ruby_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "山脉之血",
+       "count": 1,
+       "iconKey": "inv_misc_gem_bloodstone_03"
+      },
+      {
+       "nameCn": "大地精华",
+       "count": 1,
+       "iconKey": "spell_nature_strengthofearthtotem02"
+      },
+      {
+       "nameCn": "小块魔光碎片",
+       "count": 3,
+       "iconKey": "inv_enchant_shardbrilliantsmall"
+      }
+     ],
+     "skill": {
+      "orange": 265,
+      "yellow": 285,
+      "green": 305,
+      "grey": 325
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "249473",
+     "nameCn": "休眠山脉之心",
+     "iconKey": "inv_misc_gem_diamond_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "山脉之血",
+       "count": 1,
+       "iconKey": "inv_misc_gem_bloodstone_03"
+      },
+      {
+       "nameCn": "水之精华",
+       "count": 1,
+       "iconKey": "spell_nature_acid_01"
+      },
+      {
+       "nameCn": "小块魔光碎片",
+       "count": 3,
+       "iconKey": "inv_enchant_shardbrilliantsmall"
+      }
+     ],
+     "skill": {
+      "orange": 265,
+      "yellow": 285,
+      "green": 305,
+      "grey": 325
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "20750",
      "nameCn": "巫师之油",
      "iconKey": "inv_potion_104",
@@ -25354,102 +25450,6 @@
       "yellow": 320,
       "green": 340,
       "grey": 360
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "249469",
-     "nameCn": "冰冻山脉之心",
-     "iconKey": "inv_misc_gem_sapphire_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "山脉之血",
-       "count": 1,
-       "iconKey": "inv_misc_gem_bloodstone_03"
-      },
-      {
-       "nameCn": "死灵精华",
-       "count": 1,
-       "iconKey": "spell_shadow_shadetruesight"
-      },
-      {
-       "nameCn": "小块魔光碎片",
-       "count": 3,
-       "iconKey": "inv_enchant_shardbrilliantsmall"
-      }
-     ],
-     "skill": {
-      "orange": 285,
-      "yellow": 285,
-      "green": 305,
-      "grey": 325
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "249470",
-     "nameCn": "熔火山脉之心",
-     "iconKey": "inv_misc_gem_ruby_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "山脉之血",
-       "count": 1,
-       "iconKey": "inv_misc_gem_bloodstone_03"
-      },
-      {
-       "nameCn": "大地精华",
-       "count": 1,
-       "iconKey": "spell_nature_strengthofearthtotem02"
-      },
-      {
-       "nameCn": "小块魔光碎片",
-       "count": 3,
-       "iconKey": "inv_enchant_shardbrilliantsmall"
-      }
-     ],
-     "skill": {
-      "orange": 285,
-      "yellow": 285,
-      "green": 305,
-      "grey": 325
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "249473",
-     "nameCn": "休眠山脉之心",
-     "iconKey": "inv_misc_gem_diamond_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "山脉之血",
-       "count": 1,
-       "iconKey": "inv_misc_gem_bloodstone_03"
-      },
-      {
-       "nameCn": "水之精华",
-       "count": 1,
-       "iconKey": "spell_nature_acid_01"
-      },
-      {
-       "nameCn": "小块魔光碎片",
-       "count": 3,
-       "iconKey": "inv_enchant_shardbrilliantsmall"
-      }
-     ],
-     "skill": {
-      "orange": 285,
-      "yellow": 285,
-      "green": 305,
-      "grey": 325
      },
      "source": null,
      "level": "L0"
@@ -25826,7 +25826,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -34415,7 +34415,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -36570,6 +36570,198 @@
      "level": "L0"
     },
     {
+     "itemId": "252493",
+     "nameCn": "智慧皮甲",
+     "iconKey": "inv_chest_fur",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 1,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252492",
+     "nameCn": "风暴行者的皮甲",
+     "iconKey": "inv_chest_leather_03",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "天蓝染料",
+       "count": 1,
+       "iconKey": "inv_inscription_inkcerulean01"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252435",
+     "nameCn": "图腾师的皮甲",
+     "iconKey": "inv_chest_leather_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "硫酸",
+       "count": 1,
+       "iconKey": "trade_alchemy"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252434",
+     "nameCn": "防御者的皮甲",
+     "iconKey": "inv_chest_leather_10",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "初级坚韧药剂",
+       "count": 1,
+       "iconKey": "inv_potion_42"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252491",
+     "nameCn": "捕兽者的皮甲",
+     "iconKey": "inv_chest_leather_08",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "飞蛇鳞片",
+       "count": 1,
+       "iconKey": "inv_misc_monsterscales_02"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252490",
+     "nameCn": "争斗者的皮甲",
+     "iconKey": "inv_chest_leather_07",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "轻皮",
+       "count": 16,
+       "iconKey": "inv_misc_leatherscrap_03"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "暗影石",
+       "count": 1,
+       "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 80,
+      "grey": 80
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "2313",
      "nameCn": "中型护甲片",
      "iconKey": "inv_misc_armorkit_15",
@@ -37151,198 +37343,6 @@
      "srcFrom": "xr"
     },
     {
-     "itemId": "252493",
-     "nameCn": "智慧皮甲",
-     "iconKey": "inv_chest_fur",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 1,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252492",
-     "nameCn": "风暴行者的皮甲",
-     "iconKey": "inv_chest_leather_03",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "天蓝染料",
-       "count": 1,
-       "iconKey": "inv_inscription_inkcerulean01"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252435",
-     "nameCn": "图腾师的皮甲",
-     "iconKey": "inv_chest_leather_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "硫酸",
-       "count": 1,
-       "iconKey": "trade_alchemy"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252434",
-     "nameCn": "防御者的皮甲",
-     "iconKey": "inv_chest_leather_10",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "初级坚韧药剂",
-       "count": 1,
-       "iconKey": "inv_potion_42"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252491",
-     "nameCn": "捕兽者的皮甲",
-     "iconKey": "inv_chest_leather_08",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "飞蛇鳞片",
-       "count": 1,
-       "iconKey": "inv_misc_monsterscales_02"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252490",
-     "nameCn": "争斗者的皮甲",
-     "iconKey": "inv_chest_leather_07",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "轻皮",
-       "count": 16,
-       "iconKey": "inv_misc_leatherscrap_03"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "暗影石",
-       "count": 1,
-       "iconKey": "inv_misc_gem_amethyst_01"
-      }
-     ],
-     "skill": {
-      "orange": 80,
-      "yellow": 80,
-      "green": 80,
-      "grey": 80
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
      "itemId": "252437",
      "nameCn": "力效中型护甲片",
      "iconKey": "inv_misc_armorkit_15",
@@ -37910,7 +37910,7 @@
      "itemId": "2314",
      "nameCn": "韧化皮甲",
      "iconKey": "inv_chest_leather_10",
-     "quality": 1,
+     "quality": 2,
      "isNew": false,
      "mats": [
       {
@@ -38107,6 +38107,198 @@
       }
      ],
      "srcFrom": "xr"
+    },
+    {
+     "itemId": "252503",
+     "nameCn": "智慧皮裤",
+     "iconKey": "inv_pants_06",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 2,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252502",
+     "nameCn": "风暴行者的皮裤",
+     "iconKey": "inv_pants_10",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "天蓝染料",
+       "count": 2,
+       "iconKey": "inv_inscription_inkcerulean01"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252446",
+     "nameCn": "图腾师的皮裤",
+     "iconKey": "inv_pants_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "硫酸",
+       "count": 2,
+       "iconKey": "trade_alchemy"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252445",
+     "nameCn": "防御者的皮裤",
+     "iconKey": "inv_pants_leather_01",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "初级坚韧药剂",
+       "count": 2,
+       "iconKey": "inv_potion_42"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252501",
+     "nameCn": "捕兽者的皮裤",
+     "iconKey": "inv_pants_14",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "飞蛇鳞片",
+       "count": 2,
+       "iconKey": "inv_misc_monsterscales_02"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252500",
+     "nameCn": "争斗者的皮裤",
+     "iconKey": "inv_pants_06",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 8,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化轻毛皮",
+       "count": 4,
+       "iconKey": "inv_misc_pelt_wolf_01"
+      },
+      {
+       "nameCn": "暗影石",
+       "count": 2,
+       "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 105,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
     },
     {
      "itemId": "4249",
@@ -38494,198 +38686,6 @@
       }
      ],
      "srcFrom": "xr"
-    },
-    {
-     "itemId": "252503",
-     "nameCn": "智慧皮裤",
-     "iconKey": "inv_pants_06",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 2,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252502",
-     "nameCn": "风暴行者的皮裤",
-     "iconKey": "inv_pants_10",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "天蓝染料",
-       "count": 2,
-       "iconKey": "inv_inscription_inkcerulean01"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252446",
-     "nameCn": "图腾师的皮裤",
-     "iconKey": "inv_pants_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "硫酸",
-       "count": 2,
-       "iconKey": "trade_alchemy"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252445",
-     "nameCn": "防御者的皮裤",
-     "iconKey": "inv_pants_leather_01",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "初级坚韧药剂",
-       "count": 2,
-       "iconKey": "inv_potion_42"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252501",
-     "nameCn": "捕兽者的皮裤",
-     "iconKey": "inv_pants_14",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "飞蛇鳞片",
-       "count": 2,
-       "iconKey": "inv_misc_monsterscales_02"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252500",
-     "nameCn": "争斗者的皮裤",
-     "iconKey": "inv_pants_06",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 8,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化轻毛皮",
-       "count": 4,
-       "iconKey": "inv_misc_pelt_wolf_01"
-      },
-      {
-       "nameCn": "暗影石",
-       "count": 2,
-       "iconKey": "inv_misc_gem_amethyst_01"
-      }
-     ],
-     "skill": {
-      "orange": 105,
-      "yellow": 105,
-      "green": 105,
-      "grey": 105
-     },
-     "source": null,
-     "level": "L0"
     },
     {
      "itemId": "4251",
@@ -39428,6 +39428,198 @@
      "srcFrom": "xr"
     },
     {
+     "itemId": "252515",
+     "nameCn": "智慧皮盔",
+     "iconKey": "inv_helmet_26",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "有光泽的小珍珠",
+       "count": 3,
+       "iconKey": "inv_misc_gem_pearl_03"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252514",
+     "nameCn": "风暴行者的皮盔",
+     "iconKey": "inv_helmet_30",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "天蓝染料",
+       "count": 3,
+       "iconKey": "inv_inscription_inkcerulean01"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252456",
+     "nameCn": "图腾师的皮头盔",
+     "iconKey": "inv_helmet_24",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "硫酸",
+       "count": 3,
+       "iconKey": "trade_alchemy"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252455",
+     "nameCn": "防御者的皮头盔",
+     "iconKey": "inv_helmet_33",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "初级坚韧药剂",
+       "count": 3,
+       "iconKey": "inv_potion_42"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252513",
+     "nameCn": "捕兽者的皮盔",
+     "iconKey": "inv_helmet_32",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "飞蛇鳞片",
+       "count": 3,
+       "iconKey": "inv_misc_monsterscales_02"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "252512",
+     "nameCn": "争斗者的皮盔",
+     "iconKey": "inv_helmet_15",
+     "quality": 3,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "熟化中毛皮",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_bear_02"
+      },
+      {
+       "nameCn": "暗影石",
+       "count": 3,
+       "iconKey": "inv_misc_gem_amethyst_01"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 130,
+      "green": 130,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
      "itemId": "4236",
      "nameCn": "熟化重毛皮",
      "iconKey": "inv_misc_pelt_wolf_02",
@@ -39926,198 +40118,6 @@
       }
      ],
      "srcFrom": "xr"
-    },
-    {
-     "itemId": "252515",
-     "nameCn": "智慧皮盔",
-     "iconKey": "inv_helmet_26",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "有光泽的小珍珠",
-       "count": 3,
-       "iconKey": "inv_misc_gem_pearl_03"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252514",
-     "nameCn": "风暴行者的皮盔",
-     "iconKey": "inv_helmet_30",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "天蓝染料",
-       "count": 3,
-       "iconKey": "inv_inscription_inkcerulean01"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252456",
-     "nameCn": "图腾师的皮头盔",
-     "iconKey": "inv_helmet_24",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "硫酸",
-       "count": 3,
-       "iconKey": "trade_alchemy"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252455",
-     "nameCn": "防御者的皮头盔",
-     "iconKey": "inv_helmet_33",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "初级坚韧药剂",
-       "count": 3,
-       "iconKey": "inv_potion_42"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252513",
-     "nameCn": "捕兽者的皮盔",
-     "iconKey": "inv_helmet_32",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "飞蛇鳞片",
-       "count": 3,
-       "iconKey": "inv_misc_monsterscales_02"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
-    },
-    {
-     "itemId": "252512",
-     "nameCn": "争斗者的皮盔",
-     "iconKey": "inv_helmet_15",
-     "quality": 3,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 12,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "熟化中毛皮",
-       "count": 2,
-       "iconKey": "inv_misc_pelt_bear_02"
-      },
-      {
-       "nameCn": "暗影石",
-       "count": 3,
-       "iconKey": "inv_misc_gem_amethyst_01"
-      }
-     ],
-     "skill": {
-      "orange": 130,
-      "yellow": 130,
-      "green": 130,
-      "grey": 130
-     },
-     "source": null,
-     "level": "L0"
     },
     {
      "itemId": "4255",
@@ -55429,7 +55429,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -73054,7 +73054,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -73689,7 +73689,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -74215,7 +74215,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -74356,7 +74356,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -74366,23 +74366,4172 @@
    "nameEn": "Cooking",
    "nameEnSource": "英文名叫法取自那家资料站的网址用词，不是官方英文页的原词",
    "kind": "gather",
-   "unparsed": true,
-   "note": "这一页不是配方表或采集点表的形式，条目这一版还没能拆出来；有页面但不编数据",
+   "unparsed": false,
+   "note": null,
    "counts": {
-    "recipes": 0,
-    "newRecipes": 0,
+    "recipes": 121,
+    "newRecipes": 42,
     "nodes": 0
    },
    "level": "L0",
    "levelNote": "配方、材料、数量与技能档位是客户端里的数据（经第三方转述）；来源方式（训练师等）同",
-   "recipes": [],
+   "recipes": [
+    {
+     "itemId": "279981",
+     "nameCn": "基础营火工具包",
+     "iconKey": "inv_camelot_camping_welcomingcampfire",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "普通木柴",
+       "count": 1,
+       "iconKey": "inv_tradeskillitem_01"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 1,
+      "green": 3,
+      "grey": 5
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "2679",
+     "nameCn": "烧烤狼肉",
+     "iconKey": "inv_misc_food_18",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "多汁狼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "2681",
+     "nameCn": "烤野猪肉",
+     "iconKey": "inv_misc_food_18",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "大块野猪肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "6290",
+     "nameCn": "闪亮小鱼",
+     "iconKey": "inv_misc_fish_07",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的闪亮小鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_08"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯瑟琳·利兰",
+       "zone": "暴风城"
+      },
+      {
+       "name": "苏瓦·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "格雷塔·甘特",
+       "zone": "丹莫罗"
+      },
+      {
+       "name": "萨瑞恩·博丁",
+       "zone": "艾尔文森林"
+      },
+      {
+       "name": "卡拉·深水",
+       "zone": "洛克莫丹"
+      },
+      {
+       "name": "哈恩·长线",
+       "zone": "莫高雷"
+      }
+     ],
+     "vMore": 3,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "787",
+     "nameCn": "滑皮鲭鱼",
+     "iconKey": "inv_misc_fish_24",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的滑皮鲭鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_24"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "坦斯·泥泡",
+       "zone": "丹莫罗"
+      },
+      {
+       "name": "詹苏尔",
+       "zone": "杜隆塔尔"
+      },
+      {
+       "name": "尼莎·影歌",
+       "zone": "泰达希尔"
+      },
+      {
+       "name": "马丁·塔布雷",
+       "zone": "提瑞斯法林地"
+      },
+      {
+       "name": "克雷贡·塔尔松",
+       "zone": "西部荒野"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6888",
+     "nameCn": "草药烘蛋",
+     "iconKey": "inv_egg_03",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "小蛋",
+       "count": 1,
+       "iconKey": "inv_egg_01"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "12224",
+     "nameCn": "香脆翅根",
+     "iconKey": "inv_misc_food_46",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "肥美翅根",
+       "count": 1,
+       "iconKey": "inv_misc_pelt_bear_ruin_05"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "阿比盖尔·沙伊尔",
+       "zone": "提瑞斯法林地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "17197",
+     "nameCn": "姜饼",
+     "iconKey": "inv_misc_food_62",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "小蛋",
+       "count": 1,
+       "iconKey": "inv_egg_01"
+      },
+      {
+       "nameCn": "节日香料",
+       "count": 1,
+       "iconKey": "inv_misc_bag_11"
+      }
+     ],
+     "skill": {
+      "orange": 1,
+      "yellow": 45,
+      "green": 65,
+      "grey": 85
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "Wulmort Jinglepocket",
+       "zone": "铁炉堡"
+      },
+      {
+       "name": "本尼·考伯宾奇",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "霍勒",
+       "zone": "暴风城"
+      },
+      {
+       "name": "希尔萨",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "纳斯塔姆·卡布彬",
+       "zone": "幽暗城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2680",
+     "nameCn": "香辣狼肉",
+     "iconKey": "inv_misc_food_65",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "多汁狼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 10,
+      "yellow": 50,
+      "green": 70,
+      "grey": 90
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "5472",
+     "nameCn": "卡多雷蜘蛛烤肉",
+     "iconKey": "inv_misc_food_68",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "小蜘蛛腿",
+       "count": 1,
+       "iconKey": "inv_misc_monsterspidercarapace_01"
+      }
+     ],
+     "skill": {
+      "orange": 10,
+      "yellow": 50,
+      "green": 70,
+      "grey": 90
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "5473",
+     "nameCn": "蝎肉大餐",
+     "iconKey": "inv_misc_food_10",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "蝎刺",
+       "count": 1,
+       "iconKey": "spell_nature_nullifypoison"
+      }
+     ],
+     "skill": {
+      "orange": 20,
+      "yellow": 60,
+      "green": 80,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "格瑞姆塔克",
+       "zone": "杜隆塔尔"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249865",
+     "nameCn": "宁神茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      },
+      {
+       "nameCn": "宁神花",
+       "count": 2,
+       "iconKey": "inv_misc_flower_02"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 30,
+      "green": 37,
+      "grey": 45
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Frostmane Seer",
+       "zone": "丹莫罗"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249871",
+     "nameCn": "毒味冰沙",
+     "iconKey": "inv_drink_21",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      },
+      {
+       "nameCn": "小毒囊",
+       "count": 1,
+       "iconKey": "inv_misc_organ_02"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 30,
+      "green": 37,
+      "grey": 45
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "263509",
+     "nameCn": "天空之墙舒芙蕾",
+     "iconKey": "inv_misc_food_cooked_fishcake",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "小蛋",
+       "count": 2,
+       "iconKey": "inv_egg_01"
+      },
+      {
+       "nameCn": "面粉",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_01"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 30,
+      "green": 37,
+      "grey": 45
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250079",
+     "nameCn": "美味迅猛龙肉块",
+     "iconKey": "inv_misc_food_68",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙蛋",
+       "count": 1,
+       "iconKey": "inv_egg_03"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 4,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 35,
+      "green": 55,
+      "grey": 75
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Sunscale Screecher",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2888",
+     "nameCn": "啤酒烤猪排",
+     "iconKey": "inv_misc_food_48",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "峭壁野猪肋排",
+       "count": 1,
+       "iconKey": "inv_misc_food_16"
+      },
+      {
+       "nameCn": "狂想麦酒",
+       "count": 1,
+       "iconKey": "inv_drink_13"
+      }
+     ],
+     "skill": {
+      "orange": 25,
+      "yellow": 60,
+      "green": 80,
+      "grey": 100
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "263512",
+     "nameCn": "钳嘴龟块",
+     "iconKey": "inv_misc_claw_deepcrab_purple",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "蟹爪",
+       "count": 1,
+       "iconKey": "inv_misc_birdbeck_02"
+      },
+      {
+       "nameCn": "面粉",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_01"
+      }
+     ],
+     "skill": {
+      "orange": 35,
+      "yellow": 40,
+      "green": 47,
+      "grey": 55
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "5474",
+     "nameCn": "烤科多肉",
+     "iconKey": "inv_misc_food_60",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "科多兽的肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 35,
+      "yellow": 75,
+      "green": 95,
+      "grey": 115
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "温纳·黑鬃",
+       "zone": "莫高雷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "17198",
+     "nameCn": "蛋奶酒",
+     "iconKey": "inv_drink_04",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "小蛋",
+       "count": 1,
+       "iconKey": "inv_egg_01"
+      },
+      {
+       "nameCn": "冰镇牛奶",
+       "count": 1,
+       "iconKey": "inv_drink_milk_01"
+      },
+      {
+       "nameCn": "节日美酒",
+       "count": 1,
+       "iconKey": "inv_drink_10"
+      },
+      {
+       "nameCn": "节日香料",
+       "count": 1,
+       "iconKey": "inv_misc_bag_11"
+      }
+     ],
+     "skill": {
+      "orange": 35,
+      "yellow": 75,
+      "green": 95,
+      "grey": 115
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "Wulmort Jinglepocket",
+       "zone": "铁炉堡"
+      },
+      {
+       "name": "本尼·考伯宾奇",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "霍勒",
+       "zone": "暴风城"
+      },
+      {
+       "name": "希尔萨",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "纳斯塔姆·卡布彬",
+       "zone": "幽暗城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6890",
+     "nameCn": "熏熊肉",
+     "iconKey": "inv_misc_food_13",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "熊肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_71"
+      }
+     ],
+     "skill": {
+      "orange": 40,
+      "yellow": 80,
+      "green": 100,
+      "grey": 120
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "德拉克·卷刃",
+       "zone": "洛克莫丹"
+      },
+      {
+       "name": "安德鲁·希尔伯特",
+       "zone": "银松森林"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2684",
+     "nameCn": "山狗肉排",
+     "iconKey": "inv_misc_food_65",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "山狗肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_69"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "724",
+     "nameCn": "猪肝馅饼",
+     "iconKey": "inv_misc_food_10",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "血牙野猪的肝",
+       "count": 1,
+       "iconKey": "inv_misc_organ_04"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5476",
+     "nameCn": "狂鱼肉片",
+     "iconKey": "inv_misc_fish_05",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "柔软的狂鱼肉",
+       "count": 1,
+       "iconKey": "inv_misc_fish_04"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "莱尔德",
+       "zone": "黑海岸"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5477",
+     "nameCn": "炖陆行鸟",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "陆行鸟肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_16"
+      },
+      {
+       "nameCn": "新鲜的红苹果",
+       "count": 1,
+       "iconKey": "inv_misc_food_19"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "塔里查",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5525",
+     "nameCn": "水煮蚌肉",
+     "iconKey": "inv_misc_shell_02",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "蚌肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "4592",
+     "nameCn": "长颌泥鲷",
+     "iconKey": "inv_misc_fish_32",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的长颌泥鲷",
+       "count": 1,
+       "iconKey": "inv_misc_fish_32"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "坦斯·泥泡",
+       "zone": "丹莫罗"
+      },
+      {
+       "name": "纳尔·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "萨瑞恩·博丁",
+       "zone": "艾尔文森林"
+      },
+      {
+       "name": "卡拉·深水",
+       "zone": "洛克莫丹"
+      },
+      {
+       "name": "哈恩·长线",
+       "zone": "莫高雷"
+      },
+      {
+       "name": "基利恩·萨纳森",
+       "zone": "银松森林"
+      }
+     ],
+     "vMore": 2,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6316",
+     "nameCn": "洛克湖狂鱼",
+     "iconKey": "inv_potion_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的洛克湖狂鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_03"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡拉·深水",
+       "zone": "洛克莫丹"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5095",
+     "nameCn": "彩鳍鱼",
+     "iconKey": "inv_misc_fish_27",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的彩鳍鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_25"
+      }
+     ],
+     "skill": {
+      "orange": 50,
+      "yellow": 90,
+      "green": 110,
+      "grey": 130
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯瑟琳·利兰",
+       "zone": "暴风城"
+      },
+      {
+       "name": "山吉斯",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "海尔丹·风歌",
+       "zone": "黑海岸"
+      },
+      {
+       "name": "詹苏尔",
+       "zone": "杜隆塔尔"
+      },
+      {
+       "name": "基利恩·萨纳森",
+       "zone": "银松森林"
+      },
+      {
+       "name": "尼莎·影歌",
+       "zone": "泰达希尔"
+      }
+     ],
+     "vMore": 4,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3220",
+     "nameCn": "血肠",
+     "iconKey": "inv_misc_food_49",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "熊肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_71"
+      },
+      {
+       "nameCn": "猪大肠",
+       "count": 1,
+       "iconKey": "inv_misc_organ_05"
+      },
+      {
+       "nameCn": "蜘蛛的毒液",
+       "count": 1,
+       "iconKey": "inv_misc_slime_01"
+      }
+     ],
+     "skill": {
+      "orange": 60,
+      "yellow": 100,
+      "green": 120,
+      "grey": 140
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "7676",
+     "nameCn": "蓟叶茶",
+     "iconKey": "inv_drink_milk_05",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "迅蓟叶",
+       "count": 1,
+       "iconKey": "inv_misc_herb_04"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 60,
+      "yellow": 100,
+      "green": 120,
+      "grey": 140
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250080",
+     "nameCn": "早餐煎蛋卷",
+     "iconKey": "inv_misc_food_cooked_fishcake",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "小蛋",
+       "count": 1,
+       "iconKey": "inv_egg_01"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 4,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 80,
+      "green": 87,
+      "grey": 95
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Dire Condor",
+       "zone": "赤脊山"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "733",
+     "nameCn": "杂味炖肉",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "秃鹫肉条",
+       "count": 1,
+       "iconKey": "inv_misc_food_16"
+      },
+      {
+       "nameCn": "鱼人的眼球",
+       "count": 1,
+       "iconKey": "inv_misc_eye_01"
+      },
+      {
+       "nameCn": "血牙野猪的头",
+       "count": 1,
+       "iconKey": "spell_magic_polymorphpig"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 115,
+      "green": 135,
+      "grey": 155
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2683",
+     "nameCn": "蟹肉蛋糕",
+     "iconKey": "inv_misc_food_08",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "蟹肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 115,
+      "green": 135,
+      "grey": 155
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "250077",
+     "nameCn": "双重香辣迅猛龙肉片",
+     "iconKey": "inv_misc_food_legion_saltpeppershank",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 2,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 75,
+      "yellow": 115,
+      "green": 132,
+      "grey": 150
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "2687",
+     "nameCn": "猪肉干",
+     "iconKey": "inv_misc_food_48",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "猪排",
+       "count": 1,
+       "iconKey": "inv_misc_food_16"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 120,
+      "green": 140,
+      "grey": 160
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "3662",
+     "nameCn": "鳄鱼肉排",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "鳄鱼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 120,
+      "green": 140,
+      "grey": 160
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "21072",
+     "nameCn": "烤鼠尾鱼",
+     "iconKey": "inv_misc_fish_20",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的鼠尾鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_20"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 80,
+      "yellow": 120,
+      "green": 140,
+      "grey": 160
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "菲尔丹",
+       "zone": "达纳苏斯"
+      },
+      {
+       "name": "克森图",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "艾瑞卡·塔特",
+       "zone": "暴风城"
+      },
+      {
+       "name": "纳尔·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "乌兰",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "埃姆鲁尔·里克努斯",
+       "zone": "丹莫罗"
+      }
+     ],
+     "vMore": 8,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2682",
+     "nameCn": "煮蟹爪",
+     "iconKey": "inv_misc_birdbeck_02",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "蟹爪",
+       "count": 1,
+       "iconKey": "inv_misc_birdbeck_02"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 85,
+      "yellow": 125,
+      "green": 145,
+      "grey": 165
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "formulaDrops": [
+      {
+       "npc": "Lord Sinslayer",
+       "zone": "黑海岸"
+      },
+      {
+       "npc": "Reef Frenzy",
+       "zone": "银松森林"
+      },
+      {
+       "npc": "Licillin",
+       "zone": "黑海岸"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6657",
+     "nameCn": "美味变异鱼",
+     "iconKey": "inv_misc_monsterhead_04",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "变异鱼",
+       "count": 1,
+       "iconKey": "inv_misc_monsterhead_01"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 85,
+      "yellow": 125,
+      "green": 145,
+      "grey": 165
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Brontus",
+       "zone": "贫瘠之地"
+      },
+      {
+       "npc": "Captain Fairmount",
+       "zone": "贫瘠之地"
+      },
+      {
+       "npc": "Foreman Grills",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "251525",
+     "nameCn": "美味奇想鳍鱼",
+     "iconKey": "inv_misc_fish_69",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "奇想鳍鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_68"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 85,
+      "yellow": 125,
+      "green": 145,
+      "grey": 165
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "279961",
+     "nameCn": "中级营火工具包",
+     "iconKey": "inv_camelot_camping_welcomingcampfire",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "星木",
+       "count": 1,
+       "iconKey": "inv_tradeskillitem_03"
+      }
+     ],
+     "skill": {
+      "orange": 90,
+      "yellow": 95,
+      "green": 100,
+      "grey": 105
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "3663",
+     "nameCn": "鱼人鳍汤",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "鱼人的鳍",
+       "count": 2,
+       "iconKey": "inv_misc_monsterscales_02"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 90,
+      "yellow": 130,
+      "green": 150,
+      "grey": 170
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5478",
+     "nameCn": "掘地鼠炖肉",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "掘地鼠",
+       "count": 1,
+       "iconKey": "inv_misc_pelt_bear_ruin_04"
+      }
+     ],
+     "skill": {
+      "orange": 90,
+      "yellow": 130,
+      "green": 150,
+      "grey": 170
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "5526",
+     "nameCn": "杂烩蚌肉",
+     "iconKey": "inv_potion_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "蚌肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "冰镇牛奶",
+       "count": 1,
+       "iconKey": "inv_drink_milk_01"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 90,
+      "yellow": 130,
+      "green": 150,
+      "grey": 170
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "海尔丹·风歌",
+       "zone": "黑海岸"
+      },
+      {
+       "name": "克雷贡·塔尔松",
+       "zone": "西部荒野"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249866",
+     "nameCn": "皇家茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "冰镇牛奶",
+       "count": 1,
+       "iconKey": "inv_drink_milk_01"
+      },
+      {
+       "nameCn": "魔皇草",
+       "count": 2,
+       "iconKey": "inv_jewelry_talisman_03"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 115,
+      "grey": 125
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Windshear Geomancer",
+       "zone": "石爪山脉"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249872",
+     "nameCn": "黏滑冰沙",
+     "iconKey": "inv_drink_15_color03",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "冰镇牛奶",
+       "count": 1,
+       "iconKey": "inv_drink_milk_01"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 2,
+       "iconKey": "inv_misc_food_wheat_02"
+      },
+      {
+       "nameCn": "蜘蛛的毒液",
+       "count": 1,
+       "iconKey": "inv_misc_slime_01"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 105,
+      "green": 112,
+      "grey": 120
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "1082",
+     "nameCn": "赤脊山炖肉",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "香脆蜘蛛肉",
+       "count": 1,
+       "iconKey": "inv_misc_monsterspidercarapace_01"
+      },
+      {
+       "nameCn": "硬秃鹫肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_72"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 135,
+      "green": 155,
+      "grey": 175
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "1017",
+     "nameCn": "干烤狼肉串",
+     "iconKey": "inv_misc_food_16",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "狼肋排",
+       "count": 2,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 140,
+      "green": 160,
+      "grey": 180
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5479",
+     "nameCn": "脆炸蜥蜴尾",
+     "iconKey": "inv_misc_food_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "雷霆蜥蜴的尾巴",
+       "count": 1,
+       "iconKey": "inv_misc_bone_04"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 140,
+      "green": 160,
+      "grey": 180
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "塔里查",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "4593",
+     "nameCn": "刺须鲶鱼",
+     "iconKey": "inv_misc_fish_30",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的刺须鲶鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_30"
+      }
+     ],
+     "skill": {
+      "orange": 100,
+      "yellow": 140,
+      "green": 160,
+      "grey": 180
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯瑟琳·利兰",
+       "zone": "暴风城"
+      },
+      {
+       "name": "纳尔·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "苏瓦·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "德拉克·奈特弗",
+       "zone": "希尔斯布莱德丘陵"
+      },
+      {
+       "name": "林迪·拉波尼",
+       "zone": "希尔斯布莱德丘陵"
+      },
+      {
+       "name": "罗纳德·伯奇",
+       "zone": "提瑞斯法林地"
+      }
+     ],
+     "vMore": 1,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "2685",
+     "nameCn": "多汁猪排",
+     "iconKey": "inv_misc_food_16",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "猪排",
+       "count": 2,
+       "iconKey": "inv_misc_food_16"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 110,
+      "yellow": 130,
+      "green": 150,
+      "grey": 170
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "formulaDrops": [
+      {
+       "npc": "Shanda the Spinner",
+       "zone": "洛克莫丹"
+      },
+      {
+       "npc": "Lord Condar",
+       "zone": "洛克莫丹"
+      },
+      {
+       "npc": "Snarlflare",
+       "zone": "赤脊山"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3666",
+     "nameCn": "蜘蛛蛋糕",
+     "iconKey": "inv_misc_food_10",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "粘糊的蜘蛛腿",
+       "count": 2,
+       "iconKey": "inv_misc_monsterspidercarapace_01"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 110,
+      "yellow": 150,
+      "green": 170,
+      "grey": 190
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3726",
+     "nameCn": "大块的熊排",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "大块的熊肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 110,
+      "yellow": 150,
+      "green": 170,
+      "grey": 190
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "尤萨恩",
+       "zone": "灰谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "5480",
+     "nameCn": "瘦鹿肉",
+     "iconKey": "inv_misc_food_72",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "鹿肉",
+       "count": 1,
+       "iconKey": "inv_misc_pelt_wolf_ruin_03"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 4,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 110,
+      "yellow": 150,
+      "green": 170,
+      "grey": 190
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "尤萨恩",
+       "zone": "灰谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3664",
+     "nameCn": "鳄鱼浓汤",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "嫩鳄鱼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 120,
+      "yellow": 160,
+      "green": 180,
+      "grey": 200
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249873",
+     "nameCn": "姆嘎冰沙",
+     "iconKey": "inv_drink_21_color01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "果汁",
+       "count": 1,
+       "iconKey": "inv_drink_09"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 2,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      },
+      {
+       "nameCn": "鱼人的鳍",
+       "count": 1,
+       "iconKey": "inv_misc_monsterscales_02"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 135,
+      "green": 140,
+      "grey": 145
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249867",
+     "nameCn": "根须茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "果汁",
+       "count": 1,
+       "iconKey": "inv_drink_09"
+      },
+      {
+       "nameCn": "活根草",
+       "count": 2,
+       "iconKey": "inv_misc_root_02"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 155,
+      "green": 170,
+      "grey": 185
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "5527",
+     "nameCn": "地精芥末蘸蚌肉",
+     "iconKey": "inv_misc_shell_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "有腥味的蚌肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 165,
+      "green": 185,
+      "grey": 205
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "12209",
+     "nameCn": "瘦狼排",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "狼肋排",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 165,
+      "green": 185,
+      "grey": 205
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "超级商人680型",
+       "zone": "凄凉之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3727",
+     "nameCn": "烤狮排",
+     "iconKey": "inv_misc_food_18",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "狮肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_71"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 175,
+      "green": 195,
+      "grey": 215
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "扎尔夫",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3665",
+     "nameCn": "美味煎蛋卷",
+     "iconKey": "inv_egg_04",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "迅猛龙蛋",
+       "count": 1,
+       "iconKey": "inv_egg_03"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 130,
+      "yellow": 170,
+      "green": 190,
+      "grey": 210
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "肯多尔·卡邦卡",
+       "zone": "暴风城"
+      },
+      {
+       "name": "基纳",
+       "zone": "阿拉希高地"
+      },
+      {
+       "name": "耐里斯特",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "279957",
+     "nameCn": "曲奇的大餐",
+     "iconKey": "inv_cooking_80_majorfeast",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "神秘的肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_67"
+      },
+      {
+       "nameCn": "科多兽肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_70"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 140,
+      "yellow": 145,
+      "green": 147,
+      "grey": 150
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "20074",
+     "nameCn": "鳄鱼炖肉",
+     "iconKey": "inv_misc_food_64",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "嫩鳄鱼肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 150,
+      "yellow": 160,
+      "green": 180,
+      "grey": 200
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "奥克玛尔",
+       "zone": "尘泥沼泽"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3728",
+     "nameCn": "香烤狮肉",
+     "iconKey": "inv_misc_food_14",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "狮肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_71"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 150,
+      "yellow": 190,
+      "green": 210,
+      "grey": 230
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "4594",
+     "nameCn": "石鳞鳕鱼",
+     "iconKey": "inv_misc_fish_04",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的石鳞鳕鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_04"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 190,
+      "green": 210,
+      "grey": 230
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "海尔丹·风歌",
+       "zone": "黑海岸"
+      },
+      {
+       "name": "山吉斯",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "维克塔",
+       "zone": "灰谷"
+      },
+      {
+       "name": "乌兰",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "坦斯·泥泡",
+       "zone": "丹莫罗"
+      },
+      {
+       "name": "林迪·拉波尼",
+       "zone": "希尔斯布莱德丘陵"
+      }
+     ],
+     "vMore": 3,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "250078",
+     "nameCn": "巨型炒蛋",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "巨蛋",
+       "count": 2,
+       "iconKey": "inv_egg_03"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 4,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 195,
+      "green": 207,
+      "grey": 220
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250074",
+     "nameCn": "熊胸肉",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "大块的熊肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 3,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 200,
+      "green": 210,
+      "grey": 220
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Ashenvale Bear",
+       "zone": "灰谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "3729",
+     "nameCn": "海龟汤",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "海龟肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_70"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "4457",
+     "nameCn": "烧烤秃鹰翅膀",
+     "iconKey": "inv_misc_food_18",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "秃鹫的翅膀",
+       "count": 1,
+       "iconKey": "inv_misc_monsterscales_02"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "纳尔基·长刀",
+       "zone": "阿拉希高地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6038",
+     "nameCn": "烧烤巨蚌",
+     "iconKey": "inv_ammo_firetar",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "大块蚌肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯尔希·杨斯",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "10841",
+     "nameCn": "金棘茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "金棘草",
+       "count": 1,
+       "iconKey": "inv_misc_herb_15"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "12210",
+     "nameCn": "烤迅猛龙肉",
+     "iconKey": "inv_misc_food_50",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "哈蒙·卡文",
+       "zone": "阿拉希高地"
+      },
+      {
+       "name": "基纳",
+       "zone": "阿拉希高地"
+      },
+      {
+       "name": "海伦妮亚·奥德恩",
+       "zone": "尘泥沼泽"
+      },
+      {
+       "name": "奥克玛尔",
+       "zone": "尘泥沼泽"
+      },
+      {
+       "name": "布鲁斯下士",
+       "zone": "荆棘谷"
+      },
+      {
+       "name": "耐里斯特",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13851",
+     "nameCn": "热狼排",
+     "iconKey": "inv_misc_food_48",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "红狼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_71"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "薇薇安娜",
+       "zone": "菲拉斯"
+      },
+      {
+       "name": "希恩德拉·深草",
+       "zone": "菲拉斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "12212",
+     "nameCn": "丛林大杂烩",
+     "iconKey": "inv_drink_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "虎肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      },
+      {
+       "nameCn": "新鲜的红苹果",
+       "count": 2,
+       "iconKey": "inv_misc_food_19"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "布鲁斯下士",
+       "zone": "荆棘谷"
+      },
+      {
+       "name": "耐里斯特",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "12213",
+     "nameCn": "腐肉大餐",
+     "iconKey": "inv_misc_food_49",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "神秘的肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_67"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "基瑞娜",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "奥克玛尔",
+       "zone": "尘泥沼泽"
+      },
+      {
+       "name": "巴纳拉什",
+       "zone": "悲伤沼泽"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "12214",
+     "nameCn": "神秘杂烩",
+     "iconKey": "inv_drink_19",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "神秘的肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_67"
+      },
+      {
+       "nameCn": "矮人烈酒",
+       "count": 1,
+       "iconKey": "inv_drink_milk_02"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "詹奈特·霍莫斯",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "海伦妮亚·奥德恩",
+       "zone": "尘泥沼泽"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "8364",
+     "nameCn": "秘银冠鳟",
+     "iconKey": "inv_misc_fish_02",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的秘银冠鳟",
+       "count": 1,
+       "iconKey": "inv_misc_fish_02"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "海尔丹·风歌",
+       "zone": "黑海岸"
+      },
+      {
+       "name": "山吉斯",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "维克塔",
+       "zone": "灰谷"
+      },
+      {
+       "name": "乌兰",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "坦斯·泥泡",
+       "zone": "丹莫罗"
+      },
+      {
+       "name": "林迪·拉波尼",
+       "zone": "希尔斯布莱德丘陵"
+      }
+     ],
+     "vMore": 3,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "21217",
+     "nameCn": "美味鼠尾鱼",
+     "iconKey": "inv_misc_fish_21",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的大鼠尾鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_21"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 175,
+      "yellow": 215,
+      "green": 235,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "菲尔丹",
+       "zone": "达纳苏斯"
+      },
+      {
+       "name": "克森图",
+       "zone": "奥格瑞玛"
+      },
+      {
+       "name": "艾瑞卡·塔特",
+       "zone": "暴风城"
+      },
+      {
+       "name": "纳尔·迷雾行者",
+       "zone": "雷霆崖"
+      },
+      {
+       "name": "乌兰",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "埃姆鲁尔·里克努斯",
+       "zone": "丹莫罗"
+      }
+     ],
+     "vMore": 8,
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249874",
+     "nameCn": "钙化冰沙",
+     "iconKey": "inv_drink_15_color01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "蜂蜜饮料",
+       "count": 1,
+       "iconKey": "inv_drink_12"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 3,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      },
+      {
+       "nameCn": "大牙齿",
+       "count": 1,
+       "iconKey": "inv_misc_bone_08"
+      }
+     ],
+     "skill": {
+      "orange": 180,
+      "yellow": 185,
+      "green": 190,
+      "grey": 195
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249868",
+     "nameCn": "急救茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "蜂蜜饮料",
+       "count": 1,
+       "iconKey": "inv_drink_12"
+      },
+      {
+       "nameCn": "枯叶草",
+       "count": 2,
+       "iconKey": "inv_misc_herb_12"
+      }
+     ],
+     "skill": {
+      "orange": 180,
+      "yellow": 195,
+      "green": 215,
+      "grey": 235
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250073",
+     "nameCn": "狂暴迅猛龙肋排",
+     "iconKey": "inv_misc_food_legion_spicedribroast",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 3,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 180,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "274976",
+     "nameCn": "普通的苍牙野猪",
+     "iconKey": "inv_misc_food_16",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "大块野猪肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "甜香料",
+       "count": 1,
+       "iconKey": "inv_misc_food_wheat_02"
+      }
+     ],
+     "skill": {
+      "orange": 185,
+      "yellow": 200,
+      "green": 215,
+      "grey": 230
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "Martha Wellsworth",
+       "zone": "河林"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "279974",
+     "nameCn": "高级营火工具包",
+     "iconKey": "inv_camelot_camping_welcomingcampfire",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "粗原木",
+       "count": 1,
+       "iconKey": "inv_tradeskillitem_03"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 205,
+      "green": 212,
+      "grey": 220
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "249875",
+     "nameCn": "辛辣冰沙",
+     "iconKey": "inv_drink_21_color04",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "草莓汁",
+       "count": 1,
+       "iconKey": "inv_drink_02"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      },
+      {
+       "nameCn": "火囊",
+       "count": 1,
+       "iconKey": "inv_misc_organ_06"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 215,
+      "green": 220,
+      "grey": 225
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249869",
+     "nameCn": "艳阳茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "草莓汁",
+       "count": 1,
+       "iconKey": "inv_drink_02"
+      },
+      {
+       "nameCn": "太阳草",
+       "count": 2,
+       "iconKey": "inv_misc_herb_18"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 220,
+      "green": 235,
+      "grey": 250
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "274971",
+     "nameCn": "咸水海鲜炖肉",
+     "iconKey": "inv_misc_food_154_fish_77green",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "鱼人的眼球",
+       "count": 2,
+       "iconKey": "inv_misc_eye_01"
+      },
+      {
+       "nameCn": "嫩螃蟹肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 220,
+      "green": 230,
+      "grey": 240
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "12217",
+     "nameCn": "龙息红椒",
+     "iconKey": "inv_drink_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "神秘的肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_67"
+      },
+      {
+       "nameCn": "火囊",
+       "count": 1,
+       "iconKey": "inv_misc_organ_06"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 240,
+      "green": 260,
+      "grey": 280
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "海伦妮亚·奥德恩",
+       "zone": "尘泥沼泽"
+      },
+      {
+       "name": "奥克玛尔",
+       "zone": "尘泥沼泽"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "12215",
+     "nameCn": "科多肉杂烩",
+     "iconKey": "inv_drink_19",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "科多兽肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_70"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 240,
+      "green": 260,
+      "grey": 280
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "詹奈特·霍莫斯",
+       "zone": "凄凉之地"
+      },
+      {
+       "name": "基瑞娜",
+       "zone": "凄凉之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "17222",
+     "nameCn": "蜘蛛肉肠",
+     "iconKey": "inv_misc_food_66",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "白蜘蛛肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_51"
+      }
+     ],
+     "skill": {
+      "orange": 200,
+      "yellow": 240,
+      "green": 260,
+      "grey": 280
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "8957",
+     "nameCn": "刺脊比目鱼",
+     "iconKey": "inv_misc_fish_22",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "新鲜的刺脊比目鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_22"
+      }
+     ],
+     "skill": {
+      "orange": 210,
+      "yellow": 210,
+      "green": 215,
+      "grey": 220
+     },
+     "source": "训练师",
+     "level": "L0"
+    },
+    {
+     "itemId": "250065",
+     "nameCn": "美味雄鹿小汉堡",
+     "iconKey": "inv_misc_food_122_steak",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "鹿肉",
+       "count": 2,
+       "iconKey": "inv_misc_pelt_wolf_ruin_03"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 3,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 230,
+      "green": 237,
+      "grey": 245
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250076",
+     "nameCn": "迅猛龙肉卷",
+     "iconKey": "inv_misc_food_meat_cooked_07",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 4,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 230,
+      "green": 237,
+      "grey": 245
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "286152",
+     "nameCn": "板鳞鱼",
+     "iconKey": "inv_misc_fish_04",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "新鲜的板鳞鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_04"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 245,
+      "green": 250,
+      "grey": 255
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "12216",
+     "nameCn": "辣椒蟹肉",
+     "iconKey": "inv_misc_food_48",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "嫩螃蟹肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 2,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "克雷贡·塔尔松",
+       "zone": "西部荒野"
+      },
+      {
+       "name": "尤索克",
+       "zone": "荆棘谷"
+      },
+      {
+       "name": "巴纳拉什",
+       "zone": "悲伤沼泽"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "6887",
+     "nameCn": "斑点黄尾鱼",
+     "iconKey": "inv_misc_fish_01",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的斑点黄尾鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_01"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "吉科希斯",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13927",
+     "nameCn": "煮熟的光滑大鱼",
+     "iconKey": "inv_misc_monsterhead_03",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的光滑大鱼",
+       "count": 1,
+       "iconKey": "inv_misc_monsterhead_03"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯尔希·杨斯",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13930",
+     "nameCn": "油炸红腮鱼",
+     "iconKey": "inv_misc_fish_06",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的红腮鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_06"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯尔希·杨斯",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "16766",
+     "nameCn": "安德麦蚌肉杂烩",
+     "iconKey": "inv_drink_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "美味的蚌肉",
+       "count": 2,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      },
+      {
+       "nameCn": "冰镇牛奶",
+       "count": 1,
+       "iconKey": "inv_drink_milk_01"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "加贝",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "18045",
+     "nameCn": "嫩狼肉排",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "嫩狼肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 225,
+      "yellow": 265,
+      "green": 285,
+      "grey": 305
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "特鲁克·蛮鬃",
+       "zone": "辛特兰"
+      },
+      {
+       "name": "迪尔格·奎克里弗",
+       "zone": "塔纳利斯"
+      },
+      {
+       "name": "旅店老板菲兹格瑞博",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13928",
+     "nameCn": "烤鱿鱼",
+     "iconKey": "inv_misc_fish_13",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的冬鱿鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_13"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 240,
+      "yellow": 280,
+      "green": 300,
+      "grey": 320
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "吉科希斯",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13929",
+     "nameCn": "烟熏鲈鱼",
+     "iconKey": "inv_misc_fish_03",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的夏日鲈鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_03"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 2,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      }
+     ],
+     "skill": {
+      "orange": 240,
+      "yellow": 280,
+      "green": 300,
+      "grey": 320
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "凯尔希·杨斯",
+       "zone": "荆棘谷"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249876",
+     "nameCn": "邪恶冰沙",
+     "iconKey": "inv_drink_15_color04",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "晨露酒",
+       "count": 1,
+       "iconKey": "inv_potion_01"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      },
+      {
+       "nameCn": "邪恶之爪",
+       "count": 1,
+       "iconKey": "inv_misc_monsterclaw_01"
+      }
+     ],
+     "skill": {
+      "orange": 250,
+      "yellow": 255,
+      "green": 262,
+      "grey": 270
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "卡尔西·沙登",
+       "zone": "赤脊山"
+      },
+      {
+       "name": "阿扎贝克",
+       "zone": "贫瘠之地"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "249870",
+     "nameCn": "先知茶",
+     "iconKey": "inv_drink_15",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "晨露酒",
+       "count": 1,
+       "iconKey": "inv_potion_01"
+      },
+      {
+       "nameCn": "山鼠草",
+       "count": 2,
+       "iconKey": "inv_misc_herb_mountainsilversage"
+      }
+     ],
+     "skill": {
+      "orange": 250,
+      "yellow": 260,
+      "green": 275,
+      "grey": 290
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "13931",
+     "nameCn": "夜鳞鱼汤",
+     "iconKey": "inv_drink_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的夜鳍鲷鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_23"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 250,
+      "yellow": 290,
+      "green": 310,
+      "grey": 330
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "吉科希斯",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13932",
+     "nameCn": "水煮阳鳞鲑鱼",
+     "iconKey": "inv_misc_fish_19",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的阳鳞鲑鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_19"
+      }
+     ],
+     "skill": {
+      "orange": 250,
+      "yellow": 290,
+      "green": 310,
+      "grey": 330
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "吉科希斯",
+       "zone": "塔纳利斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "250066",
+     "nameCn": "翱翔的潘普洛纳",
+     "iconKey": "inv_misc_food_meat_cooked_05",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "秃鹫的翅膀",
+       "count": 3,
+       "iconKey": "inv_misc_monsterscales_02"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250067",
+     "nameCn": "蝙蝠肉碎",
+     "iconKey": "inv_misc_food_115_condorsoup",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "肥美翅根",
+       "count": 3,
+       "iconKey": "inv_misc_pelt_bear_ruin_05"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 2,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250068",
+     "nameCn": "美味海龟肉汤",
+     "iconKey": "inv_misc_food_cooked_braisedturtle",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "海龟肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_70"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250070",
+     "nameCn": "熊肉普切塔",
+     "iconKey": "inv_misc_food_legion_fighterchow",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "大块的熊肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250071",
+     "nameCn": "冒热气的雄鹿排",
+     "iconKey": "inv_misc_food_meat_cooked_01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "鹿肉",
+       "count": 3,
+       "iconKey": "inv_misc_pelt_wolf_ruin_03"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250072",
+     "nameCn": "迅击肉排",
+     "iconKey": "inv_misc_food_49",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "虎肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_14"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 2,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250075",
+     "nameCn": "史前手撕迅猛龙肉",
+     "iconKey": "inv_misc_food_124_skewer",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "迅猛龙肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_69"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250081",
+     "nameCn": "蛤蜊扁面条",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "美味的蚌肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_51"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 295,
+      "grey": 310
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "267341",
+     "nameCn": "甜爪果酱",
+     "iconKey": "inv_misc_bowl_01",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "海加尔浆果",
+       "count": 3,
+       "iconKey": "inv_misc_food_40"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 280,
+      "green": 282,
+      "grey": 285
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "250069",
+     "nameCn": "黑椒侧腹肉",
+     "iconKey": "inv_misc_food_meat_cooked_06",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "红狼肉",
+       "count": 3,
+       "iconKey": "inv_misc_food_71"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 3,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 285,
+      "green": 300,
+      "grey": 315
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "13933",
+     "nameCn": "炖龙虾",
+     "iconKey": "inv_drink_17",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "黑爪龙虾",
+       "count": 1,
+       "iconKey": "inv_misc_fish_14"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 1,
+       "iconKey": "inv_drink_07"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 315,
+      "green": 335,
+      "grey": 355
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "薇薇安娜",
+       "zone": "菲拉斯"
+      },
+      {
+       "name": "希恩德拉·深草",
+       "zone": "菲拉斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13934",
+     "nameCn": "大鱼片",
+     "iconKey": "inv_misc_food_47",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的大鱼",
+       "count": 1,
+       "iconKey": "inv_misc_monsterhead_02"
+      },
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 315,
+      "green": 335,
+      "grey": 355
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "薇薇安娜",
+       "zone": "菲拉斯"
+      },
+      {
+       "name": "希恩德拉·深草",
+       "zone": "菲拉斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "13935",
+     "nameCn": "烤鲑鱼",
+     "iconKey": "inv_misc_fish_20",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "新鲜的白鳞鲑鱼",
+       "count": 1,
+       "iconKey": "inv_misc_fish_20"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 315,
+      "green": 335,
+      "grey": 355
+     },
+     "source": null,
+     "level": "L0",
+     "vendors": [
+      {
+       "name": "薇薇安娜",
+       "zone": "菲拉斯"
+      },
+      {
+       "name": "希恩德拉·深草",
+       "zone": "菲拉斯"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "18254",
+     "nameCn": "洛恩塔姆薯块",
+     "iconKey": "inv_misc_food_63",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "洛恩塔姆地薯",
+       "count": 1,
+       "iconKey": "inv_misc_food_55"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 1,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 275,
+      "yellow": 315,
+      "green": 335,
+      "grey": 355
+     },
+     "source": null,
+     "level": "L0",
+     "formulaDrops": [
+      {
+       "npc": "Pusillin",
+       "zone": "厄运之槌"
+      }
+     ],
+     "srcFrom": "xr"
+    },
+    {
+     "itemId": "279982",
+     "nameCn": "铁炉",
+     "iconKey": "achievement_cooking_masteroftheoven",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "面粉",
+       "count": 10,
+       "iconKey": "inv_misc_food_wheat_01"
+      },
+      {
+       "nameCn": "清凉的泉水",
+       "count": 5,
+       "iconKey": "inv_drink_07"
+      },
+      {
+       "nameCn": "舒心草",
+       "count": 4,
+       "iconKey": "inv_misc_food_vendor_rice"
+      }
+     ],
+     "skill": {
+      "orange": 300,
+      "yellow": 300,
+      "green": 300,
+      "grey": 300
+     },
+     "source": null,
+     "level": "L0"
+    },
+    {
+     "itemId": "21023",
+     "nameCn": "迪尔格的超美味奇美拉肉片",
+     "iconKey": "inv_misc_food_65",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "辣椒",
+       "count": 1,
+       "iconKey": "inv_misc_food_legion_dalapenopepper"
+      },
+      {
+       "nameCn": "地精火箭燃油",
+       "count": 1,
+       "iconKey": "inv_cask_02"
+      },
+      {
+       "nameCn": "石中盐",
+       "count": 1,
+       "iconKey": "inv_misc_dust_02"
+      },
+      {
+       "nameCn": "奇美洛克的腰肋肉",
+       "count": 1,
+       "iconKey": "inv_misc_food_70"
+      }
+     ],
+     "skill": {
+      "orange": 300,
+      "yellow": 325,
+      "green": 345,
+      "grey": 365
+     },
+     "source": null,
+     "level": "L0"
+    }
+   ],
    "nodes": [],
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -74505,7 +78654,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -75359,7 +79508,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   },
@@ -75385,7 +79534,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-02"
+     "checkedAt": "2026-11-03"
     }
    ]
   }
