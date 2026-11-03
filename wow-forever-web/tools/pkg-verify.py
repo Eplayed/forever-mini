@@ -64,7 +64,9 @@ def head(url, tries=2):
     import subprocess
     last = (0, "")
     for _ in range(tries):
-        r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code} %{content_type}",
+        # -o 要用 os.devnull：/dev/null 是 Mac/Linux 的写法，Windows 上 curl 写不进去
+        # 直接 rc=23（2026-11-03 这台 Windows 首次跑验收就栽在这，浏览器那半却全绿）
+        r = subprocess.run(["curl", "-s", "-o", os.devnull, "-w", "%{http_code} %{content_type}",
                             "--max-time", "60", url], stdout=subprocess.PIPE)
         if r.returncode != 0:
             last = (0, "curl rc=%d" % r.returncode)
