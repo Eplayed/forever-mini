@@ -28,6 +28,14 @@ import sys
 import threading
 from urllib.parse import quote
 
+# 这台 Windows 的控制台默认是 GBK：这个脚本要打印 ✓/✗ 与中文，不重设编码的话
+# 连"哪一件失败了"都打不出来（2026-11-01 实测：真实报错是缺 numpy，被 UnicodeEncodeError 盖掉了）
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)                       # wow-forever-web
 REPO = os.path.dirname(ROOT)
@@ -38,6 +46,17 @@ OUT_DIR = os.path.join(BUILD, "posters")
 THREE = os.path.join(ROOT, "app", "node_modules", "three")
 WWW = "/tmp/bis-poster-www"
 W, H = 600, 800                                    # 与页面那一格的竖比例一致（3:4）
+FIT_BASE = 1.18                                    # 起步取景余量，像素实测后可能再加
+FIT_MAX_TRIES = 4                                  # 一张最多重渲几次
+MARGIN_Y = 0.06                                    # 目标：上下各留 6% 画高（头与脚都不许贴边）
+MARGIN_X = 0.04                                    # 目标：左右各留 4% 画宽
+# 及格线故意比目标低一档，且放大后的 fit 往 0.02 的网格上取整：
+# 2026-11-02 实测过不这么做的代价——按连续量收敛时，光栅噪声（±1 px）会让 fit 每次都差一点，
+# 需要放大的那 15 张**每次重渲都换内容哈希**，于是"渲一次就要重构建一次、旧对象全成孤儿"。
+# 有了网格 + 迟滞，同一批输入稳定落在同一档，只有真的换模型/换名单才改名。
+FIT_STEP = 0.02
+ACCEPT_Y = 0.05
+ACCEPT_X = 0.03
 
 PAGE = """<!doctype html><html><head><meta charset="utf-8"><style>
 html,body{margin:0;background:transparent}canvas{display:block}
@@ -73,7 +92,10 @@ new GLTFLoader().load(file, (g) => {
        是因为它自己转了手性——底图这边要跟它同一视角，就得站到 +X 去。
        横向余量按 max(宽, 深) 算：牛头人那条尾巴往后伸得远。 */
     const wide = Math.max(size.x, size.z)
-    const dist = Math.max((size.y / 2) / half, (wide / 2) / half / cam.aspect) * 1.18
+    /* 1.18 只是起步余量：Box3 不认蒙皮后的顶点（SkinnedMesh 报的是绑定姿势的框），
+       个别模型画出来比这个框大得多——warlock/部落两件量到占 98.8% 画高、脚贴边。
+       真正的取景由外面按渲染回来的像素迭代这个 fit（见 fitOf）。 */
+    const dist = Math.max((size.y / 2) / half, (wide / 2) / half / cam.aspect) * Number(p.get('fit') || '__FIT__')
     cam.position.set(c.x + dist, c.y, c.z)
     cam.lookAt(c.x, c.y, c.z)
     /* 不用 requestAnimationFrame 等"画够几帧"：无头浏览器这一页不在前台，
@@ -83,7 +105,7 @@ new GLTFLoader().load(file, (g) => {
     setTimeout(() => { renderer.render(scene, cam); setTimeout(() => { renderer.render(scene, cam); window.__ready = true }, 200) }, 200)
   } catch (e) { window.__err = String(e && e.message || e); window.__ready = true }
 }, undefined, (e) => { window.__err = 'load 失败 ' + (e && e.message || e); window.__ready = true })
-</script></body></html>""".replace("__W__", str(W)).replace("__H__", str(H))
+</script></body></html>""".replace("__W__", str(W)).replace("__H__", str(H)).replace("__FIT__", repr(FIT_BASE))
 
 
 def sha256_file(p):
@@ -102,6 +124,14 @@ def pick_reps():
         if r not in best:
             best[r] = m
     return best
+
+
+def pick_per_set():
+    """按 setId+阵营 一件一图——站主 2026-11-01 定的新形态。
+       按种族那张表为什么不能用：键是「职业|阵营」、值却是按种族渲的猎人那身，
+       法师/牧师看到的是猎人的装备，等于拿别的套装冒充当前套（红线）。"""
+    idx = json.load(open(INDEX, encoding="utf-8"))
+    return {(m["setId"] + "/" + m["faction"]): m for m in sorted(idx["models"], key=lambda x: (x["setId"], x["faction"]))}
 
 
 def serve(directory, port):
@@ -126,14 +156,27 @@ def free_port():
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--per-set", action="store_true",
+                    help="按 setId+阵营 一件一图（新形态；默认那条按种族的旧规则只出 6 张，会把猎人那身发给所有职业）")
+    ap.add_argument("--only", default="",
+                    help="只渲清单里的几件，逗号分隔，如 warrior/alliance,mage/horde——先看样图用")
+    args = ap.parse_args()
     if not os.path.isfile(INDEX):
         raise SystemExit("找不到 B1 索引：" + INDEX)
     if not os.path.isdir(THREE):
         raise SystemExit("找不到 three：" + THREE)
-    reps = pick_reps()
-    print("按种族选出的代表件：")
+    reps = pick_per_set() if args.per_set else pick_reps()
+    if args.only:
+        want = [x.strip() for x in args.only.split(",") if x.strip()]
+        missing = [w for w in want if w not in reps]
+        if missing:
+            raise SystemExit("--only 里有不存在的件：" + "、".join(missing) + "（可用的键前几个：" + "、".join(sorted(reps)[:6]) + "…）")
+        reps = {w: reps[w] for w in want}
+    print(("按 setId+阵营 逐件" if args.per_set else "按种族选出的代表件") + "：")
     for r in sorted(reps):
-        print("  %-10s ← %s/%s  %s" % (r, reps[r]["setId"], reps[r]["faction"], reps[r]["file"]))
+        print("  %-26s ← %s/%s  %s" % (r, reps[r]["setId"], reps[r]["faction"], reps[r]["file"]))
 
     if os.path.isdir(WWW):
         shutil.rmtree(WWW)
@@ -166,34 +209,47 @@ def main():
         page.on("console", lambda m: errs.append("console." + m.type + ": " + m.text[:200])
                 if m.type == "error" and "favicon" not in m.text else None)
         page.on("requestfailed", lambda r: errs.append("请求失败: " + r.url[-90:] + " " + str(r.failure)))
-        for race in sorted(reps):
-            m = reps[race]
-            url = "http://127.0.0.1:%d/render.html?file=%s" % (port, quote("models/" + m["file"]))
-            del errs[:]          # 清在 goto 之前：清在等待之后就把自己抓到的错误扔了（第一版就这么瞎了）
-            page.goto(url)
+        for key in sorted(reps):
+            m = reps[key]
+            # 逐件模式下键是 "setId/阵营"，斜杠不能进文件名
+            race = key.replace("/", "-")
+            url0 = "http://127.0.0.1:%d/render.html?file=%s" % (port, quote("models/" + m["file"]))
+            png = os.path.join(out, race + "-tmp.png")
             try:
-                page.wait_for_function("window.__ready === true", timeout=25000)
-                err = page.evaluate("window.__err")
-                if err:
-                    raise RuntimeError(str(err))
-                png = os.path.join(out, race + "-tmp.png")
-                # 元素截图会把页面底色一起合成进去（第一版量到"整张不透明"就是这个）；
-                # 要透明底必须走 omit_background，让 PNG 真的带 alpha
-                page.screenshot(path=png, omit_background=True, clip={"x": 0, "y": 0, "width": W, "height": H})
-                check = verify(png)
-                if check:
-                    raise RuntimeError(check)
+                # 取景是按"渲染回来的像素"收敛的，不是一次算完（原因见 fit_of）
+                fit = FIT_BASE
+                for attempt in range(1, FIT_MAX_TRIES + 1):
+                    del errs[:]      # 清在 goto 之前：清在等待之后就把自己抓到的错误扔了（第一版就这么瞎了）
+                    page.goto(url0 + "&fit=%.4f" % fit)
+                    page.wait_for_function("window.__ready === true", timeout=25000)
+                    err = page.evaluate("window.__err")
+                    if err:
+                        raise RuntimeError(str(err))
+                    # 元素截图会把页面底色一起合成进去（第一版量到"整张不透明"就是这个）；
+                    # 要透明底必须走 omit_background，让 PNG 真的带 alpha
+                    page.screenshot(path=png, omit_background=True, clip={"x": 0, "y": 0, "width": W, "height": H})
+                    check = verify(png)
+                    if check:
+                        raise RuntimeError(check)
+                    need, info = fit_of(png, fit)
+                    if need is None:
+                        break
+                    if attempt == FIT_MAX_TRIES:
+                        raise RuntimeError("重渲 %d 次仍框不住整个人｜最后一版 fit %.3f，%s" % (attempt, fit, info))
+                    fit = need
                 sha = sha256_file(png)
                 named = os.path.join(out, race + "-" + sha[:12] + ".png")
                 os.replace(png, named)
                 png = named
                 manifest[race] = {
                     "file": os.path.basename(png), "bytes": os.path.getsize(png), "sha256": sha,
-                    "width": W, "height": H, "sourceModel": {
+                    "width": W, "height": H, "fit": round(fit, 4),
+                    "sourceModel": {
                         "setId": m["setId"], "faction": m["faction"], "file": m["file"], "pngSha256": m["pngSha256"]
                     }
                 }
-                print("  ✓ %-10s %d B" % (race, manifest[race]["bytes"]))
+                print("  ✓ %-10s %d B%s" % (race, manifest[race]["bytes"],
+                                            "" if fit == FIT_BASE else "（取景放大到 %.2f）" % fit))
             except Exception as e:
                 failures.append("%s → %s ｜ %s" % (race, e, " ; ".join(errs[:3]) or "页面没报错也没 ready"))
                 print("  ✗ %-10s %s ｜ %s" % (race, e, " ; ".join(errs[:3]) or "页面没报错也没 ready"))
@@ -211,12 +267,14 @@ def main():
         shutil.copy2(os.path.join(out, manifest[race]["file"]), os.path.join(OUT_DIR, manifest[race]["file"]))
     json.dump({"product": "wow-forever-mini-model-posters", "kind": "bis-model-posters",
                "formatVersion": "png-alpha-v1", "dir": "assets/models/posters/",
-               "rule": "每个种族取 B1 清单里 setId 排最前的那一件；相机按包围盒框整个人；背景透明",
+               "rule": ("每件 setId+阵营 各一张（2026-11-02 站主定：小程序配装页全部换成这一档）" if args.per_set
+                        else "每个种族取 B1 清单里 setId 排最前的那一件（旧规则：会把猎人那身发给所有职业）")
+               + "；取景先按包围盒、再按渲染回来的像素迭代放大（fit 见每条），头脚不许贴边；背景透明",
                "count": len(manifest), "posters": manifest},
               open(os.path.join(OUT_DIR, "posters.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1, sort_keys=True)
     total = sum(v["bytes"] for v in manifest.values())
-    print("\n6 张全出：%d B 合计 → %s" % (total, os.path.relpath(OUT_DIR, REPO)))
+    print("\n%d 张全出：%d B 合计 → %s" % (len(manifest), total, os.path.relpath(OUT_DIR, REPO)))
     print("清单 sha256", sha256_file(os.path.join(OUT_DIR, "posters.json"))[:12])
     print("状态：LOCAL_READY（未上传 OSS、未改页面）")
     return 0
@@ -240,12 +298,43 @@ def verify(png):
     sat = float(np.std(body, axis=0).mean())
     if sat < 6:
         return "颜色几乎单一（std %.1f），像是没贴图的纯色模" % sat
-    # 上下边缘不许碰到人：碰边说明脚或头被裁
-    top = float((a[:6, :, 3] > 24).mean())
-    bottom = float((a[-6:, :, 3] > 24).mean())
-    if top > 0.01 or bottom > 0.01:
-        return "人顶到画边（上 %.3f 下 %.3f），头或脚被裁" % (top, bottom)
+    # 贴边（头/脚被裁）不在这里判：那是取景问题，交给 fit_of 迭代重渲，
+    # 在这里判会让每一次收敛前的正常尝试都变成"失败"。
     return None
+
+
+def alpha_box(png):
+    """量"画出来的像素"的外接框，折成画宽/画高的比例（top/bottom/left/right 是留白）"""
+    from PIL import Image
+    import numpy as np
+    a = np.asarray(Image.open(png).convert("RGBA"))[:, :, 3]
+    m = a > 24
+    if not m.any():
+        return None
+    rows = np.where(m.any(1))[0]
+    cols = np.where(m.any(0))[0]
+    return {"top": rows.min() / float(H), "bottom": (H - 1 - rows.max()) / float(H),
+            "left": cols.min() / float(W), "right": (W - 1 - cols.max()) / float(W),
+            "half_v": (rows.max() - rows.min() + 1) / (2.0 * H),
+            "half_h": (cols.max() - cols.min() + 1) / (2.0 * W)}
+
+
+def fit_of(png, fit):
+    """按实测像素决定要不要把相机推远：Box3 报的是绑定姿势的包围盒，
+       蒙皮件画出来会比它大——warlock 部落那两件量到占 98.8% 画高、脚贴边（2026-11-02）。
+       画面尺寸 ∝ 1/fit，所以需要的 fit = 旧 fit × (实测半高 / 允许的半高)。
+       返回 (要用的 fit 或 None, 实测留白串)：None = 这一张及格（留白过 ACCEPT 那一档）。
+       给新的 fit 往 FIT_STEP 网格上取整，理由见常量那一段（不让噪声改名）。"""
+    b = alpha_box(png)
+    if b is None:
+        return None, "整张全透明"
+    info = "上 %.3f 下 %.3f 左 %.3f 右 %.3f" % (b["top"], b["bottom"], b["left"], b["right"])
+    if b["top"] >= ACCEPT_Y and b["bottom"] >= ACCEPT_Y and b["left"] >= ACCEPT_X and b["right"] >= ACCEPT_X:
+        return None, info
+    s = max(b["half_v"] / (0.5 - MARGIN_Y), b["half_h"] / (0.5 - MARGIN_X))
+    want = fit * s
+    steps = int((want - FIT_BASE) / FIT_STEP) + 1        # 向上取整到网格（不引 math，避免再动 import）
+    return round(FIT_BASE + steps * FIT_STEP, 4), info
 
 
 if __name__ == "__main__":

@@ -107,6 +107,111 @@ def api_reconcile():
     return dict(rep, available=True, ageMinutes=round((time.time() - os.path.getmtime(RECON)) / 60, 1))
 
 
+DAILY_DIR = os.path.join(HERE, "daily")
+
+
+def api_daily():
+    """00 水源台的链与探源：daily.sh 现在把 steps.tsv / probe.json 写到固定位置，
+       面板轮询这两份就能看着链跑（每步追加一行）。谁在跑由 jobs.active 说。"""
+    steps = []
+    path = os.path.join(DAILY_DIR, "steps.tsv")
+    if os.path.isfile(path):
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) >= 4:
+                    steps.append({"name": parts[0], "rc": int(parts[1] or 0),
+                                  "secs": int(parts[2] or 0), "note": parts[3]})
+    probe = None
+    ppath = os.path.join(DAILY_DIR, "probe.json")
+    if os.path.isfile(ppath):
+        try:
+            probe = json.load(open(ppath, encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            probe = {"error": str(exc)[:120]}
+    with jobs.lock:
+        running_job = jobs.jobs.get(jobs.active) if jobs.active else None
+    daily_running = bool(running_job and running_job.get("action") == "daily"
+                         and running_job.get("state") == "running")
+    return {"steps": steps, "probe": probe, "dailyRunning": daily_running,
+            "jobId": jobs.active if daily_running else None,
+            "stepsAt": datetime.fromtimestamp(os.path.getmtime(path)).strftime("%m-%d %H:%M")
+                       if os.path.isfile(path) else None}
+
+
+def api_freshness():
+    """十六板块新鲜度：唯一判据是 build-data.js 的 STALE 口径（7/14 天），
+       面板不复算第二套——age 由 catalog() 从成品 meta 里读，这里只分级。"""
+    rows = []
+    for t in catalog():
+        if t["state"] == "candidate":
+            level = "na"
+        elif t["age"] is None:
+            level = "na"
+        elif t["age"] <= 7:
+            level = "fresh"
+        elif t["age"] <= 13:
+            level = "warm"
+        else:
+            level = "stale"
+        rows.append({"id": t["id"], "label": t["label"], "count": t["count"],
+                     "date": t["date"], "dateKind": t["dateKind"], "age": t["age"],
+                     "level": level, "refreshable": bool(t["workflow"]),
+                     "source": t["source"], "url": t["url"]})
+    return {"rows": rows,
+            "summary": {"fresh": sum(r["level"] == "fresh" for r in rows),
+                        "warm": sum(r["level"] == "warm" for r in rows),
+                        "stale": sum(r["level"] == "stale" for r in rows)}}
+
+
+RELEASE = os.path.join(WEB_ROOT, "release", "latest.json")
+LEDGER = os.path.join(HERE, "reconcile", "ledger.jsonl")   # append-only 发布账（jobs.ledger_append 写）
+
+
+def api_pipeline():
+    """02 同步屏的指纹格：全部读现成落盘结果，这个 GET 不碰网络。
+       网页回滚位 = release/latest.json 的 previous；小程序侧批次信息在对账快照里。"""
+    web_release = {}
+    if os.path.isfile(RELEASE):
+        try:
+            web_release = json.load(open(RELEASE, encoding="utf-8"))
+        except (OSError, ValueError):
+            web_release = {}
+    rep = api_reconcile()
+    web = rep.get("web") or {}
+    mini = rep.get("mini") or {}
+    behind = [r for r in (web.get("rows") or []) if r.get("behind")]
+    ledger = []
+    if os.path.isfile(LEDGER):
+        try:
+            with open(LEDGER, encoding="utf-8") as f:
+                ledger = [json.loads(x) for x in f if x.strip()]
+        except (OSError, ValueError):
+            ledger = []
+    return {"available": rep.get("available", False), "note": rep.get("note"),
+            "generatedAt": rep.get("generatedAt"),
+            "web": {"livePackage": web.get("livePackage"), "summary": web.get("summary"),
+                    "behind": behind, "behindCount": len(behind),
+                    "current": (web_release.get("current") or {}),
+                    "previous": (web_release.get("previous") or {})},
+            "mini": {"sameBatch": mini.get("sameBatch"), "local": mini.get("local"),
+                     "live": mini.get("live"), "summary": mini.get("summary"),
+                     "rows": mini.get("rows"), "error": mini.get("error")},
+            "ledger": list(reversed(ledger))}
+
+
+def api_worktree():
+    """页头读数：整个仓库的未提交文件数（不只 app/data）。只读，一次 git status。"""
+    try:
+        p = subprocess.run(["git", "status", "--porcelain"], cwd=WEB_ROOT, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=15)
+    except OSError as exc:
+        return {"files": None, "error": str(exc)[:90]}
+    if p.returncode:
+        return {"files": None, "error": (p.stderr or "").strip()[:90] or ("git 退出码 %d" % p.returncode)}
+    return {"files": sum(1 for x in p.stdout.splitlines() if x.strip())}
+
+
 def api_dungeons():
     d = json.load(open(os.path.join(DATA, "dungeons.json"), encoding="utf-8"))
     rows = []
@@ -191,6 +296,14 @@ class H(SimpleHTTPRequestHandler):
             return self._json(200, {"topics": catalog(), "gaps": gaps()})
         if self.path == "/api/reconcile":
             return self._json(200, api_reconcile())
+        if self.path == "/api/daily":
+            return self._json(200, api_daily())
+        if self.path == "/api/freshness":
+            return self._json(200, api_freshness())
+        if self.path == "/api/pipeline":
+            return self._json(200, api_pipeline())
+        if self.path == "/api/worktree":
+            return self._json(200, api_worktree())
         if self.path == "/api/review/items":
             result = jobs.review_items()
             return self._json(200, result) if result else self._json(404, {"error": "尚无待审快照"})

@@ -20,10 +20,15 @@ REPO_PARENT = os.path.dirname(os.path.dirname(WEB))                     # …/pr
 HOME = os.path.expanduser("~")
 
 # 谁在这台机器上就先用谁：环境变量 → 本机两个安装位 → Mac 的两份工作副本
+# CANDIDATES 里的 /mnt/c 行是给 WSL 用的（2026-11-03）：日更链从 8830 面板起跑在
+# WSL bash 里，同一条物理路径在 WSL 得走 /mnt/c 才看得见；Windows 侧跑时
+# os.path.isdir 对 /mnt/c 恒为假，自动跳过，两边互不干扰。
 CANDIDATES = [
     os.environ.get("WOW_ADDONS") or "",
     "C:/GAME/World of Warcraft/_cn_beta_/Interface/AddOns",
     "C:/GAME/World of Warcraft/_forever_/Interface/AddOns",
+    "/mnt/c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns",
+    "/mnt/c/GAME/World of Warcraft/_forever_/Interface/AddOns",
     os.path.join(HOME, "Documents", "project", ".scratch", "wow"),
     os.path.join(REPO_PARENT, ".scratch", "wow"),
     os.path.join(REPO_PARENT, ".scratch", "wow-client-2026-10-21"),
@@ -63,6 +68,7 @@ def explain():
 EXPORT_CANDIDATES = [
     os.environ.get("WOW_EXPORT") or "",
     "C:/GAME/World of Warcraft/ziliao-export",     # 这台 Windows 的现役导出
+    "/mnt/c/GAME/World of Warcraft/ziliao-export", # 同一位的 WSL 挂载视角（见上）
     "/tmp/wow-ro/ziliao-export",                   # Mac 那台曾经的只读挂载位
 ]
 

@@ -1,6 +1,8 @@
 """Single-worker, local-only review jobs for the data console."""
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -17,6 +19,42 @@ ITEM_FIELDS = ("id", "name", "status", "quality", "itemLevel", "requiredLevel", 
 lock = threading.Lock()
 jobs = {}
 active = None
+
+# node/npm 不能裸写：面板服务要是从精简 PATH 的环境起的（2026-11-03 实测，隐藏窗口自启那版
+# 就是这样），CreateProcess 找不到 npm 直接 rc=127。先 which，再兜底这台机的安装位。
+def _node_tool(name):
+    hit = shutil.which(name)
+    if hit:
+        return hit
+    for d in (os.environ.get("ProgramFiles") or r"C:\Program Files", r"D:\Program Files"):
+        for sub in ((name + ".cmd",) if name == "npm" else (name + ".exe",)):
+            p = os.path.join(d, "nodejs", sub)
+            if os.path.isfile(p):
+                return p
+    return name
+
+
+NPM = _node_tool("npm")
+NODE = _node_tool("node")
+
+# 双管道动作链的白名单单命令（02 同步屏的四步）。发布/上传/回滚是闸门步：
+# 前端弹层只是慎重 UI，真正的闸在工具层——oss-release 的写操作必须带
+# WOW_ALLOW_CROSS_CREDS=1（它自己的"每条写命令都要人工点头"卡口），deploy-gh-pages
+# 不加 --push 就不动远端。这里把那条环境变量显式写在白名单里，页面上没有输口令就发不出去的东西。
+OSS_WRITE = dict(os.environ, WOW_ALLOW_CROSS_CREDS="1", PYTHONIOENCODING="utf-8")
+PIPELINE = {
+    "web-build":    {"label": "网页 ① 构建",       "cmd": [NPM, "--prefix", "app", "run", "build"], "timeout": 1200},
+    "web-package":  {"label": "网页 ② 打包",       "cmd": [sys.executable, "tools/release-package.py"], "timeout": 1800},
+    "web-verify":   {"label": "网页 ③ 验收",       "cmd": [sys.executable, "tools/pkg-verify.py"], "timeout": 600},
+    "web-publish":  {"label": "网页 ④ 发布（闸门）", "cmd": [sys.executable, "tools/deploy-gh-pages.py", "--push"], "timeout": 1800, "gate": True},
+    "mini-export":  {"label": "小程序 ① 导出",     "cmd": [NODE, "tools/export-mini.js"], "timeout": 600},
+    "mini-build":   {"label": "小程序 ② 成批",     "cmd": [NODE, "tools/oss-release.js", "build", "--env", "beta", "--check-identity"], "timeout": 900},
+    "mini-upload":  {"label": "小程序 ③ 上传换指针（闸门）", "cmd": [NODE, "tools/oss-release.js", "upload", "--env", "beta"], "timeout": 1800, "env": OSS_WRITE, "gate": True},
+    "mini-rollback": {"label": "小程序 ④ 回滚（闸门）", "cmd": None, "timeout": 1200, "env": OSS_WRITE, "gate": True},
+}
+DAILY_ARGS = ("", "--quick", "--no-gate")   # daily 的 topic 位只接受这三个变体
+LEDGER = os.path.join(os.path.dirname(__file__), "reconcile", "ledger.jsonl")
+OUT_MAX = 64 * 1024                                    # 命令输出截断（与 server.py 同一口径）
 
 
 def _ref(path):
@@ -193,6 +231,15 @@ def allowed(action, topic=None):
        单测原来直接调 jobs.start("refresh","items") 期望它被拒——我给 items 接上场景之后，
        那条断言由 400 变 202，**测试当场把一条真刷新链放了出去并留下一笔自动收口提交**（2026-11-02，ee25881）。
        判据抽出来之后，测它不用再启动任何东西。"""
+    if action in PIPELINE:
+        if action == "mini-rollback":
+            # 回滚目标来自页面输入，是唯一一个客户端能递进命令的参数——按工具自己的
+            # 校验口径先卡一道：12 位十六进制批次号，别的一律不放。
+            if not (isinstance(topic, str) and re.fullmatch(r"[a-f0-9]{12}", topic)):
+                return "回滚目标要是 12 位十六进制批次号"
+        return None
+    if action == "daily":
+        return None if (topic or "") in DAILY_ARGS else "daily 只接受 --quick / --no-gate"
     if action not in ("scan-items", "refresh", "reconcile"):
         return "未知动作"
     if action == "scan-items" and topic != "items":
@@ -200,6 +247,56 @@ def allowed(action, topic=None):
     if action == "refresh" and topic not in {t[0] for t in TOPICS if t[7]}:
         return "该板块没有白名单刷新命令"
     return None
+
+
+def ledger_append(lane, build_id, what):
+    """append-only 发布账：谁、哪一批、带了什么。只在闸门步真正跑完且成功后记一条，
+       失败的尝试不记账（账是"玩家读到了什么"的历史，不是操作日志）。"""
+    os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
+    row = {"at": datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M"),
+           "lane": lane, "buildId": build_id, "what": what}
+    with open(LEDGER, "a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def _stream_run(entry, jid, progress, extra_args=()):
+    """长任务要有心跳：Popen 逐行读输出，尾行滚进 job 的 logTail（页面每 5 秒轮一次），
+       门禁九分钟不再干等。只读 stdout/stderr，不解释、不停步——链红不红由退出码说。"""
+    cmd = list(entry["cmd"]) + list(extra_args)
+    t0 = time.time()
+    # Windows 专项（2026-11-03）：server.py 的父终端被关掉后它成孤儿进程仍活着，
+    # 这时再 spawn bash.exe（WSL 启动器）会拿不到可用控制台，直接 rc=0xC0000142
+    # （DLL 初始化失败），链一步没跑、steps.tsv 纹丝不动，00 屏看着就是"点了没反应"。
+    # CREATE_NO_WINDOW 给子进程一个自己的隐藏控制台，不依赖父进程的控制台死活；
+    # stdin 接 DEVNULL 免得子进程去抢父进程已失效的输入。Linux 下无此常量，跳过。
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
+    try:
+        p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                             stdin=subprocess.DEVNULL, text=True, encoding="utf-8",
+                             errors="replace", env=entry.get("env") or None,
+                             creationflags=flags)
+    except OSError as exc:
+        return 127, str(exc)
+    tail = []
+    try:
+        for line in p.stdout:
+            line = line.rstrip()
+            if not line:
+                continue
+            tail.append(line)
+            if len(tail) > 60:
+                tail = tail[-40:]
+            with lock:
+                jobs[jid]["logTail"] = "\n".join(tail)
+            progress(line[-160:])   # 进度条上永远显示最新一行
+        p.wait(timeout=max(30, entry["timeout"] - int(time.time() - t0)))
+    except subprocess.TimeoutExpired:
+        p.kill()
+        return 124, "超时（%ds）" % entry["timeout"]
+    out = "\n".join(tail)
+    if len(out.encode("utf-8", "replace")) > OUT_MAX:
+        out = out[:OUT_MAX // 4] + "\n…（输出过长，已截断）\n" + out[-OUT_MAX // 4:]
+    return p.returncode, out
 
 
 def start(action, topic=None):
@@ -227,6 +324,29 @@ def start(action, topic=None):
                 result = scan_items(progress)
             elif action == "reconcile":
                 result = reconcile(progress)
+            elif action == "daily":
+                # 日更链是一条长链（25-40 分钟）：走流式读，输出尾行滚进 logTail，
+                # 步子红没红由面板轮询 steps.tsv 看（daily.sh 现在写到固定位置）。
+                args = [topic] if topic else []
+                code, out = _stream_run({"cmd": ["bash", "tools/daily.sh"], "timeout": 3000},
+                                        jid, progress, extra_args=args)
+                if code:
+                    raise RuntimeError("日更链没跑完（rc=%d）。红的那步在 00 水源台的链上看，别当已更新。\n%s" % (code, out[-1500:]))
+                result = {"message": "日更链全绿。报告：docs/DATA-每日体检-%s.md" % datetime.now().strftime("%F"), "logTail": out}
+            elif action in PIPELINE:
+                entry = PIPELINE[action]
+                code, out = _stream_run(entry, jid, progress,
+                                        extra_args=(["--to", topic] if action == "mini-rollback" else ()))
+                if code:
+                    raise RuntimeError("%s 没跑成（rc=%d）。\n%s" % (entry["label"], code, out[-1500:]))
+                if entry.get("gate"):
+                    # 闸门步成功才记账；批次号从输出里捞（upload/rollback/deploy 都会打出它）
+                    m = re.search(r"\b([a-f0-9]{12})\b", out)
+                    ledger_append("mini" if action.startswith("mini") else "web",
+                                  m.group(1) if m else "—",
+                                  entry["label"] + "完成（上一批转入回滚位）" if action != "mini-rollback"
+                                  else "回滚到 " + (topic or ""))
+                result = {"message": entry["label"] + "通过，未自动做下一步", "logTail": out}
             else:
                 result = refresh(topic, progress)
             with lock:

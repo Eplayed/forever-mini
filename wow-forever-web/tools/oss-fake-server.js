@@ -9,8 +9,11 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const ROOT = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/oss-build/beta';
-const IMG_ROOT = '/Users/zhangyajun/Documents/project/wow-forever/wow-forever-web/app/img';
+/* 两份根路径都从脚本位置推：写死 Mac 绝对路径会让本地假 OSS 在 Windows 上直接 ENOENT
+   （2026-11-01 那条回归就是这么死的） */
+const REPO = path.resolve(__dirname, '..', '..');
+const ROOT = path.join(REPO, 'for-mini', 'oss-build', 'beta');
+const IMG_ROOT = path.join(REPO, 'wow-forever-web', 'app', 'img');
 const MODE = process.env.FAKE_OSS_MODE || 'normal';
 /* FAKE_OSS_FLAGS_FILE=<路径>：把这一份文件当 {ns}/flags.json 发（其余照旧）。
    为什么要有这个口子：回归脚本要演"线上拧了一下开关"，但不能往 for-mini/ 里写——

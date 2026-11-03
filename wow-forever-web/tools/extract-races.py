@@ -38,6 +38,72 @@ RACE_CN = {u"兽人": "orc", u"牛头人": "tauren", u"巨魔": "troll", u"亡�
            u"天裔": "skyborne", u"塑风者天裔": "windshaper", u"高阶会天裔": "high-order"}
 FACTION_H3 = [(u"部落种族与职业组合", "horde"), (u"联盟种族与职业组合", "alliance")]
 
+# ── 数值覆盖表（站主 2026-11-02 定："有分歧的以 XR 为准"）────────────────────────
+# 为什么要有这张表：官方那篇《种族与职业组合公告》署名 2026/9/24，是概述文，
+# 而游戏 11-05 才全球同步上线——Beta/RC 阶段改的是**游戏内数值**，不会回头改那篇公告。
+# 本抽取器只盯那一个 URL，所以"官方更新了"这件事它结构上看不见（2026-11-02 对账查明）。
+# 现值来源：本机 XR_DungeonGuide/Data_Racials.lua（自带 updated=2026-10-16，含新增/已改动标记）。
+# 三条硬约束：
+#   ① 措辞**由本站自己写**，不抄插件的句子（红线：只取事实性标识符，不复制第三方描述文案）；
+#   ② 官方那句不删——留在 officialEffect 与 quote 里，两源分歧两个都留并标注；
+#   ③ 覆盖过的条目标 L2「待实测」：GI（10-30）能互证的记在 corroborated 里，
+#      只有 XR 一家的也照 XR 显示，但**不许升回 L0**，除非进游戏对过面板。
+# 这张表是**人工核过**的，不做自动抓取：让第三方文本无人复核地流进产品，比数值旧更糟。
+XR_VALUE_OVERRIDES = {
+    "orc|粉碎诅咒": (u"移除所有诅咒和灾祸效果，受到的魔法伤害降低5%，持续8秒。", None),
+    "undead|食尸": (u"吞噬人型生物或亡灵的尸体，10秒内每2秒回复7%生命值与7%法力值；移动、动作或受击会中断。", None),
+    "undead|哀伤之触": (u"法术与攻击有几率吸取生命值，上限为你最大生命值的5%：牧师/法师/术士为30%几率，战士/圣骑士/潜行者为20%几率。", None),
+    "tauren|战争践踏": (u"使身边8码内最多5个敌人昏迷2秒。", "GI"),
+    "tauren|原野疾驰": (u"移动中每5秒叠加1%移动速度，最多30%；受击或站定会掉层。骑乘时移动速度额外提高3%。", None),
+    "tauren|耐久": (u"总生命值提高5%，爆击伤害与治疗加成提高2%。", None),
+    "troll|极速再生": (u"6秒内恢复50%的最大生命值；移动、动作或受击会中断。", None),
+    "troll|再生": (u"生命值回复速度提高20%，战斗中仍保持20%的回复速度。", "GI"),
+    "skyborne-horde|天穹视界": (u"汲取元素交汇处的祝福，移动与骑乘速度提高10%：附近没有交汇处持续30秒，有则持续15分钟。", None),
+    "skyborne-horde|风灵护佑": (u"法术、近战与远程急速提高3%。", None),
+    "skyborne-alliance|风灵护佑": (u"法术、近战与远程急速提高3%。", None),
+    "dwarf|石像形态": (u"立即移除并免疫流血、中毒与疾病效果，受到的物理伤害降低10%，持续8秒。", "GI"),
+    "night-elf|影遁": (u"潜入暗影，降低被敌人发现的几率，持续到取消或移动为止；战斗中使用时冷却延长到2分钟，并降低敌人攻击你的意愿。", "GI"),
+    "night-elf|迅捷": (u"躲闪几率提高1%，移动速度提高2%；潜行者与德鲁伊潜行时更难被发现（相当于潜行等级提高1级）。", None),
+    "gnome|逃命专家": (u"立即摆脱并免疫一切限制移动的效果，持续3秒。", None),
+    "gnome|我知道了！": (u"持续8秒：非周期性伤害或治疗技能的消耗降低10%、效果提高10%；周期性效果不受益。", None),
+    "gnome|开阔思维": (u"对应资源上限提高5%：牧师/法师/术士为法力值，潜行者为能量值，战士为怒气值。", None),
+    "gnome|工程学专精": (u"使用工程学装置时出现故障或反冲的几率降低20%。", None),
+}
+XR_VALUE_SRC = {"addon": "XR_DungeonGuide", "file": "Data_Racials.lua",
+                "updated": "2026-10-16", "fetched": "2026-11-02"}
+
+
+def apply_xr_values(races, today):
+    """把覆盖表打到 traits 上（含天裔的 subgroup 那一层）。返回改了几条、跳过几条。"""
+    hit = 0
+    miss = []
+    seen = set()
+
+    def do(lst, rid):
+        nonlocal hit
+        for t in lst or []:
+            key = rid + u"|" + t["name"]
+            if key not in XR_VALUE_OVERRIDES:
+                continue
+            seen.add(key)
+            ours, cor = XR_VALUE_OVERRIDES[key]
+            t["officialEffect"] = t.get("effect")
+            t["effect"] = ours
+            t["level"] = "L2"
+            t["valueVia"] = "xr-racials"
+            t["valueSource"] = dict(XR_VALUE_SRC)
+            t["valueSource"]["corroborated"] = (
+                "GearInsight_Forever/Data.lua（2026-10-30）" if cor else None)
+            t["needsTest"] = True
+            hit += 1
+
+    for r in races:
+        do(r.get("traits"), r["id"])
+        do((r.get("subgroup") or {}).get("traits"), r["id"])
+    miss = sorted(set(XR_VALUE_OVERRIDES) - seen)
+    return hit, miss
+
+
 # 图标文件名取自第三方资料站的种族页（事实性标识符），图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取。
 # 官方中文公告本身不含图标文件名。资料站用的 race_scourge_male / race_nightelf_male 在官方 CDN 上是 403，
 # 亡灵改用官方 CDN 实存的 race_undead_male，暗夜精灵暂时取不到 → 留空，界面用自绘块。
@@ -394,12 +460,27 @@ def main():
                                "label": piece, "level": "L0",
                                "provenance": prov(combo_sentence, LABEL + u"·亮点组合整句", today)})
 
+    xr_hit, xr_miss = apply_xr_values(races, today)
+    print(u"数值覆盖 → 改了 %d 条（XR 现值，官方原句留在 officialEffect）" % xr_hit)
+    if xr_miss:
+        raise SystemExit(u"覆盖表里有 %d 个键在这份官方页上找不到，先修表别静默跳过：%s"
+                         % (len(xr_miss), u"、".join(xr_miss)))
+
     payload = {
         "meta": {
             "generatedAt": today,
             "kind": "official-cn-extract",
             "method": u"tools/extract-races.py 按官方页自身结构取数：h3「部落/联盟种族与职业组合」→ 紧跟的表格；"
                       u"h4 种族名 → 紧跟的 em 简介与 ul 特长列表。矩阵里官方只写 X，职业名取自同页表头。",
+            "valueOverlay": {
+                "why": u"官方那篇公告署名 2026/9/24 且是概述文；11-05 上线前改的是游戏内数值，不会回头改公告——"
+                       u"本抽取器只看那一个 URL，结构上看不见更新（2026-11-02 对账查明，站主定"
+                       u"「有分歧的以 XR 为准」）。",
+                "source": dict(XR_VALUE_SRC),
+                "rule": u"覆盖条目的 effect 由本站自己写、数字取 XR；官方原句留在 officialEffect 与 quote 里两个都留；"
+                        u"覆盖过的标 L2 待实测，GI 能互证的记在 valueSource.corroborated，都不许升回 L0 除非进游戏对过面板。",
+                "overridden": len(XR_VALUE_OVERRIDES)
+            },
             "sources": [{"url": URL, "label": LABEL}],
             "notCollected": [
                 u"英文原名：官方中文公告未给出，逐词硬造等于编造，一律留空",

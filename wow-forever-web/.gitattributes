@@ -1,0 +1,6 @@
+# 行尾钉死：这台机器 core.autocrlf=true，checkout 会把 .sh 转成 CRLF，
+# WSL bash 读到 `set -o pipefail\r` 直接报 "invalid option name"（2026-11-03 日更链八步全红的根因）。
+# .sh 一律工作树 LF，谁 checkout 都一样。
+*.sh text eol=lf
+*.py text eol=lf
+*.js text eol=lf

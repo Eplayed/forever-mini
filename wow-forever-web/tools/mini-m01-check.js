@@ -25,7 +25,9 @@ const MiniProgram = MPmod.default || MPmod;
 MiniProgram.prototype.checkVersion = async () => true;   /* IDE 版本字段取不到，跳过握手（工具链问题） */
 const automator = require('miniprogram-automator');
 
-const REPO = '/Users/zhangyajun/Documents/project/wow-forever';
+/* 仓库根从脚本自己的位置推，不写死绝对路径：写死过一次（/Users/zhangyajun/...），
+   结果这条回归在 Windows 上直接 ENOENT 打不开（2026-11-01 撞见）。 */
+const REPO = path.resolve(__dirname, '..', '..');
 const BUILD = path.join(REPO, 'for-mini/oss-build/beta');
 /* 截图先落到项目外：开发者工具开着 compileHotReLoad，往 for-mini/ 里写文件会触发热重载，
    热重载把小程序打回首页，于是"导航后路由没到位"全是假红。跑完再拷进 docs/screenshots/。 */
@@ -36,8 +38,9 @@ const SERVER = path.join(REPO, 'wow-forever-web/tools/oss-fake-server.js');
    compileHotReLoad，把小程序打回首页（2026-10-27 踩过）。假 OSS 支持 FAKE_OSS_FLAGS_FILE 覆写。 */
 const LIVE_FLAGS = '/tmp/m01-flags-live.json';
 /* 假 OSS 的访问流水（同样写在项目外）：数的是"这一页到底发了几次请求"。
-   2026-10-30 接真实 3D 那条硬要求——进配装页一个模型请求都不许发、点「查看 3D」只取一次清单——
-   只能这么证；在页面里自己数等于让被试对象自己报数。 */
+   2026-10-30 那条"进页一个模型请求都不许发"已被站主 2026-11-01 的"直接展示 3D"取代；
+   2026-11-02 3D 整层撤掉、换成逐件 PNG 后，这里数的是"切一套/切一阵营最多取那一张图"
+   ——仍只能这么证：在页面里自己数等于让被试对象自己报数。 */
 const OSS_HITS = '/tmp/m01-oss-hits.log';
 const hitsClear = () => { try { fs.writeFileSync(OSS_HITS, ''); } catch (e) {} };
 const hitsOf = (pat) => {
@@ -269,10 +272,17 @@ async function main() {
   log('详情页：分歧名两个都留（领主大厅 / 另一说法诸王大厅）', /诸王大厅/.test(String(s.conflict)) && /领主大厅/.test(String(s.title)), JSON.stringify({ t: s.title, c: s.conflict }));
   await shot('b4-detail-conflict-name');
   /* 三座无限新增本的首领一张脸都没有（源站自己标 data-unknown，2026-10-23 重探仍 0/15）。
-     界面不许摆一个写"没有这张头像"的虚线空框——那看着像坏了；交给 icon-cell 回落自绘块。 */
+     界面不许摆一个写"没有这张头像"的虚线空框——那看着像坏了；交给 icon-cell 回落自绘块。
+     首领**个数从数据里读**，不写死：这座本跟着 11-01 那批客户端数据涨到 5 个，
+     上一版这里钉的是"恰好 4 个"，数据一对、断言自己变红了（2026-11-02 撞到）。 */
+  const htData = (() => {
+    const pv = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/dungeons.json'), 'utf8'));
+    const all = ['newDungeons', 'classicDungeons', 'raids'].reduce((a, k) => a.concat(pv[k] || []), []);
+    return all.filter((x) => x.id === 'hall-of-thanes')[0] || {};
+  })();
   log('详情页：新本首领没有头像时走自绘回落，页面不再摆"没有这张头像"那句',
-    (s.bosses || []).length === 4 && (s.bosses || []).every((b) => b.portraitUrl === ''),
-    JSON.stringify((s.bosses || []).map((b) => b.portraitUrl)));
+    (s.bosses || []).length === (htData.bosses || []).length && (s.bosses || []).every((b) => b.portraitUrl === ''),
+    JSON.stringify({ want: (htData.bosses || []).length, got: (s.bosses || []).map((b) => b.portraitUrl) }));
   const faceWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
   log('详情页：首领一律一个 icon-cell，缺图由组件回落（不留碎图也不留空框）',
     /boss-face/.test(faceWxml) && !/没有这张头像/.test(faceWxml) && !/face-none/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
@@ -442,11 +452,12 @@ async function main() {
   s = (await snap()) || {};
   const homeCards = await call('首页入口', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    return { go: ['goDungeons', 'goClasses', 'goLoots', 'goGuide'].filter((f) => typeof p[f] === 'function').length,
+    return { go: ['goDungeons', 'goClasses', 'goLoots', 'goMacros'].filter((f) => typeof p[f] === 'function').length,
       glossary: typeof p.goGlossary, counts: p.data.counts, cov: p.data.covList, wip: p.data.wip, fact: p.data.factDate, build: p.data.buildId };
   }), 3);
-  /* 2026-10-22 站主重排：入口卡固定四张 副本/职业/掉落查询/指南，中英速查按指令撤出首页 */
-  log('首页四个入口卡处理器都在（副本/职业/掉落查询/指南）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
+  /* 2026-10-22 站主重排：入口卡固定四张 副本/职业/掉落查询/指南；
+     2026-11-02 站主把第四张换成宏命令（指南页还在 app.json 里，但首页不再给入口） */
+  log('首页四个入口卡处理器都在（副本/职业/掉落查询/宏命令）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
   log('首页不再有中英速查入口', homeCards && homeCards.glossary === 'undefined', String(homeCards && homeCards.glossary));
   log('首页不出现计数、覆盖率、缺口清单、核对日期与批次号（玩家面规矩）',
     homeCards && homeCards.counts === undefined && (homeCards.cov || []).length === 0
@@ -586,16 +597,20 @@ async function main() {
       host: d.sourceHost || '', unavailable: !!d.unavailable, needOnline: !!d.needOnline,
       noName: (d.rows || []).filter((r) => r.missing).length,
       srcSample: ((d.rows || []).filter((r) => r.src)[0] || {}).src || '',
-      cmp: (d.rows || []).map((r) => r.cmp).join(','),
-      text: txt.join(' ')
+      verdict: /两家一致|两家分歧|另一家没列/.test(txt.join(' ')),      text: txt.join(' ')
     };
   }), 3);
   log('配装页打得开：9 个职业、这一套 16 个部位以上、属性合计有数',
     bis && bis.route === 'pages/bis/index' && bis.classes === 9 && bis.rows >= 16 && bis.sum >= 1,
     JSON.stringify(bis && { cls: bis.cls, classes: bis.classes, rows: bis.rows, sum: bis.sum }));
-  log('口径那一句与核对日、来源域名都在页面上（红线：不冒充官方结论）',
-    !!bis && /不是官方结论/.test(bis.disclaimer) && /^\d{4}-\d{2}-\d{2}$/.test(bis.fetched)
-      && /wclbox/.test(bis.host), JSON.stringify(bis && { f: bis.fetched, h: bis.host }));
+  /* 2026-11-01 站主指令：页头那三句（口径句 / 来源与核对日 / L1 留档）从界面上撤下。
+     撤的是出口，不是事实——数据层 meta 里这三条必须还在，否则这一页就成了"没有出处的名单"。
+     所以两条一起判：渲染文字里不许再出现那三句，而 data 里三条一条不能少。 */
+  log('页头三句已从界面撤下（站主 2026-11-01），但数据层一条没删',
+    !!bis && !/不是官方结论|对着来源核过|按 L1 留档/.test(String(bis.text))
+      && /不是官方结论/.test(bis.disclaimer) && /^\d{4}-\d{2}-\d{2}$/.test(bis.fetched)
+      && /wclbox/.test(bis.host),
+    JSON.stringify(bis && { f: bis.fetched, h: bis.host, 界面还有口径句: /不是官方结论/.test(String(bis.text)) }));
   /* 取数状态要说真话：sourceLabel 收的是整个结果对象而不是 source 字符串，
      传错参数不会报错，只会永远显示"没取到数据"——2026-10-27 发完 beta 走真页才发现这条。 */
   log('配装页的取数状态说真话（线上取到了就不许写"没取到数据"）',
@@ -605,9 +620,33 @@ async function main() {
     JSON.stringify(bis && { head: bis.head, src: bis.srcSample.slice(0, 40) }));
   log('这一页没有打包快照：取数走线上，取不到时页面自己说"还没有/要联网"，不半截显示',
     !!bis && (!bis.unavailable || !bis.rows), JSON.stringify(bis && { un: bis.unavailable, on: bis.needOnline }));
-  log('"两家怎么说"逐格带角标（一致/分歧/没列），本站不裁决',
-    !!bis && /^[a-z,]+$/.test(bis.cmp) && bis.cmp.indexOf('none') < 0 || /same|diff/.test(bis.cmp || ''),
-    String(bis && bis.cmp).slice(0, 60));
+  /* 站主 2026-11-02：「两家一致／两家分歧／另一家没列」这几句判词从界面上全部撤掉。
+     撤的是标签，不是事实——分发层那一份逐格比较（bis/set/*.json 的 alt[].state）一条没删，
+     备选那一件照旧列出来，只是不再替玩家下"一致/分歧"这个结论。 */
+  log('判词「两家一致／分歧／没列」已从整页界面撤干净（渲染文字里一条都不许出现）',
+    !!bis && bis.verdict === false, String(bis && bis.verdict));
+  const cmpCss = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxss'), 'utf8');
+  const cmpWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
+  /* 分色这条要钉在令牌上，不钉截图：属性类走 --txt-dim、来源类走 --azure，
+     而且来源不许再被"可点"那档抢走颜色（原来 .s-link 整行金色，蓝灰两档反而分不出来）。 */
+  /* 分色这一档要钉住三件事：属性档与来源档确实不同、来源档不再被"可点"抢色，
+     以及**来源档离六个品质色都要远**——上一版选了 --azure，量出它与稀有装备名 q3 #4aa3ff 只差 34，
+     真机上"来源"那行被读成"又一个装备名"（站主原话"区分不明显"）。这条把那个教训变成算得出来的断言。 */
+  log('装备属性与副本来源分两档（属性 --txt-muted / 来源 --gold + 一条左竖线），可点的那行不再整行改色',
+    /\.s-meta \{[^}]*--txt-muted/.test(cmpCss) && /\.s-src \{[^}]*var\(--gold\)/.test(cmpCss)
+      && /\.s-src \{[^}]*border-left/.test(cmpCss) && /\.p-st \{[^}]*--txt-muted/.test(cmpCss)
+      && !/\.s-src \{[^}]*--azure/.test(cmpCss) && !/\.s-link \{[^}]*color:/.test(cmpCss)
+      && !/class="cmp/.test(cmpWxml) && !/\.cmp\b/.test(cmpCss), '');
+  const tokensCss = fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8');
+  const tok = (n) => {
+    const m = new RegExp('--' + n + ':\\s*#([0-9a-f]{6})', 'i').exec(tokensCss);
+    return m ? [parseInt(m[1].slice(0, 2), 16), parseInt(m[1].slice(2, 4), 16), parseInt(m[1].slice(4, 6), 16)] : null;
+  };
+  const dist = (a, b) => (!a || !b) ? -1 : Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]);
+  const srcC = tok('gold');
+  const minQ = Math.min.apply(null, ['q0', 'q1', 'q2', 'q3', 'q4', 'q5'].map((k) => dist(srcC, tok(k))));
+  log('来源档与六个品质色都拉开了（最小距离 ≥ 100 才算不撞名）',
+    minQ >= 100, 'gold 与品质色的最小距离 = ' + minQ + '（azure 当年是 34）');
   const bisHorde = await call('换部落', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
     p.pickFac({ currentTarget: { dataset: { fac: 'horde' } } });
@@ -626,11 +665,17 @@ async function main() {
     p.openSlot({ currentTarget: { dataset: { slot: '头部', cell: 1 } } });
     const d = p.data;
     return { slot: d.slot, n: (d.slotRows || []).length, head: d.slotHead,
-      theirs: d.slotTheirs && d.slotTheirs.cn, st: ((d.slotRows || [])[0] || {}).st || [] };
+      theirs: d.slotTheirs || {}, st: ((d.slotRows || [])[0] || {}).st || [],
+      cn: (d.slotTheirs || {}).cn, popText: String(d.slotHead) + ' ' + JSON.stringify(d.slotTheirs || {}) };
   }), 3);
-  log('点一个部位弹出这个部位的备选（含属性行与"另一家列的第一件"）',
+  log('点一个部位弹出这个部位的备选（含属性行与另一份名单那一件）',
     !!bisPop && bisPop.n >= 1 && /头部/.test(bisPop.head) && (bisPop.st || []).length > 0
-      && /一致|分歧|没列/.test(String(bisPop.theirs)), JSON.stringify(bisPop));
+      && typeof bisPop.theirs.shown === 'boolean', JSON.stringify(bisPop));
+  /* 弹层里也不许再出现那三个判词；那句前缀要说清"这是另一份名单列的"，
+     不然玩家会以为它是本站推荐的第二件 */
+  log('弹层里同样没有判词，且第二件那行说清了是谁列的',
+    !!bisPop && !bisPop.cn && !/两家一致|两家分歧|另一家没列/.test(String(bisPop.popText)),
+    JSON.stringify(bisPop && { cn: bisPop.cn, t: String(bisPop.popText).slice(0, 70) }));
   /* 2026-10-30 站主把「看占位模型」这颗按钮撤了（真实模型已经能在真机出画面），
      占位人台那一格连同 DOLL_LAYOUT / nodes / unmapped 一起从页面里删掉了。
      这里钉的是"删干净了、没留半截入口"，不再钉占位人台本身。 */
@@ -642,120 +687,134 @@ async function main() {
     !!doll0 && doll0.live === undefined && doll0.nodes === undefined && doll0.toggle === 'undefined',
     JSON.stringify(doll0));
 
-  /* ---------- 真实 3D（2026-10-30 C 段）----------
-     这台模拟器起不了 xr-frame（探针那一轮实测：空场景都不发 ready），
-     所以这里钉得住的是"发没发请求、取的是不是当前这一套这一阵营、失败有没有回原画并说明"，
-     画面那一半只能由真机回答——不许拿"请求数对了"冒充"玩家看得见模型"。 */
+  /* ---------- 逐件底图（2026-11-02 站主："BIS 配装页装备展示全部替换成样图这样的，背景透明，根据职业装备来"）----------
+     3D 那一层的组件、取数契约（services/bis-model.js）与相机链路整层删了，这一栏只剩一张
+     按 <setId>|<阵营> 从分发层桥表指过来的透明底 PNG。这一格钉的是"指没指对、切了换没换、
+     取不到有没有明说"；图上那个人穿得对不对，由构建时那五道闸与站主的眼睛负责，不由这里冒充。 */
+  const ps = await call('看中间那一栏的字段', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data;
+    return { hasModelSrc: ('modelSrc' in d), hasAspect: ('stageAspect' in d),
+      cls: d.cls, fac: d.fac, setId: d.setId, rows: (d.rows || []).length,
+      src: d.posterSrc, state: d.posterState, text: d.posterText };
+  }), 2);
+  log('3D 那一层整层撤干净：data 里不再有 modelSrc/stageAspect，这一格只可能挂逐件图',
+    !!ps && ps.hasModelSrc === false && ps.hasAspect === false && ps.rows >= 10, JSON.stringify(ps));
+  const posterRe = (id, fac) => new RegExp('/assets/models/posters/' + id + '-' + fac + '-[0-9a-f]{12}\\.png$');
+  log('进页就把当前 setId+阵营 那一张指上了（桥表里有就必须有，不等玩家点）',
+    !!ps && ps.state === 'loading' && posterRe(ps.setId, ps.fac).test(String(ps.src)), JSON.stringify(ps));
+  /* 桥表本身从页面内存里取：这一份是真从假 OSS 的指针批下来的一份，不是本地文件抄的 */
+  const pl = await call('取索引里的底图桥表', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const link = (p.index || {}).posterLink || {};
+    return { link: link, sets: ((p.index || {}).sets || []).map((s) => s.id) };
+  }), 2);
+  const rels = Object.keys((pl || {}).link || {});
+  log('桥表每条都指向 models/posters/ 下带内容哈希的那一张，且那张真在发布目录里',
+    rels.length > 0 && rels.every((k) => {
+      const rel = String(pl.link[k]);
+      if (!/^models\/posters\/[a-z0-9-]+-[0-9a-f]{12}\.png$/.test(rel)) return false;
+      return fs.existsSync(path.join(BUILD, 'posters', rel.replace('models/posters/', '')));
+    }), rels.length + ' 条');
+  const noPoster = ((pl || {}).sets || []).reduce((acc, id) => {
+    if (!pl.link[id + '|alliance']) acc.push(id + '|联盟');
+    if (!pl.link[id + '|horde']) acc.push(id + '|部落');
+    return acc;
+  }, []);
+  log('每一套的两个阵营都在桥表里（38 套 × 2 就该有 76 条；缺一条就是那一格只能显示"没有图"）',
+    rels.length === ((pl || {}).sets || []).length * 2 && !noPoster.length,
+    rels.length + '/' + (((pl || {}).sets || []).length * 2) + (noPoster.length ? ' 缺：' + noPoster.slice(0, 4).join('、') : ''));
+  /* 数请求要从零起：进页已经取过当前那一张，这里只数"换一次阵营多花几个请求"。
+     换阵营取的是另一件登记——旧的那一张必须立刻作废，画面上不许留着上一阵营那身。 */
   hitsClear();
-  const ps = await call('看默认那一格用的是哪张图', () => mp.evaluate(() => {
+  const ps2 = await call('换阵营', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    const d = p.data;
-    return { kind: d.stageKind, url: d.stageUrl, cls: d.cls, fac: d.fac, rows: (d.rows || []).length };
-  }), 2);
-  log('默认那一格是"这一族模型穿这一身"的底图（带内容哈希的文件名），不是职业图标',
-    !!ps && ps.kind === 'poster' && /\/assets\/models\/posters\/[a-z-]+-[0-9a-f]{12}\.png$/.test(String(ps.url))
-      && ps.rows >= 10, JSON.stringify(ps));
-  const ps2 = await call('换阵营后底图跟着换族', () => mp.evaluate(() => {
-    const p = getCurrentPages().pop();
-    const before = p.data.stageUrl;
+    const before = { fac: p.data.fac, src: p.data.posterSrc };
     p.pickFac({ currentTarget: { dataset: { fac: p.data.fac === 'horde' ? 'alliance' : 'horde' } } });
-    return { before: before, after: p.data.stageUrl, kind: p.data.stageKind };
+    return { before: before, after: { fac: p.data.fac, src: p.data.posterSrc, state: p.data.posterState } };
   }), 2);
-  log('换阵营底图跟着换成另一族的模型（联盟人类／兽人部落这类映射由生成表说了算，页面不自己抄）',
-    !!ps2 && ps2.kind === 'poster' && ps2.before !== ps2.after
-      && /posters\//.test(String(ps2.after)), JSON.stringify(ps2 || {}).slice(0, 200));
-  const ps3 = await call('演一次底图取不到', () => mp.evaluate(() => {
-    const p = getCurrentPages().pop();
-    p.onStageError();
-    const d = p.data;
-    return { kind: d.stageKind, url: d.stageUrl };
-  }), 2);
-  log('底图取不到就退回职业原画，不许留空格', !!ps3 && ps3.kind === 'art' && /art\/classes\//.test(String(ps3.url)),
-    JSON.stringify(ps3));
-  const posterMap = require(path.join(REPO, 'for-mini/data/bis-posters.js'));
-  const posterManifest = JSON.parse(fs.readFileSync(path.join(BUILD, 'posters', 'posters.json'), 'utf8'));
-  const mapFiles = Object.keys(posterMap.map || {});
-  log('生成表自洽：18 个职业×阵营组合都有底图，且每张文件真在盘上、哈希与清单同',
-    mapFiles.length === 18 && mapFiles.every((k) => {
-      const rel = posterMap.map[k];
-      const race = rel.replace('models/posters/', '').replace(/-[0-9a-f]{12}\.png$/, '');
-      const p = posterManifest.posters[race];
-      return !!p && rel === 'models/posters/' + p.file
-        && fs.existsSync(path.join(BUILD, 'posters', p.file))
-        && new RegExp('^models/posters/' + race + '-[0-9a-f]{12}\\.png$').test(rel);
-    }), mapFiles.length + ' 条');
-  const mv = await call('进页后先数一遍模型请求', () => mp.evaluate(() => {
-    const d = getCurrentPages().pop().data;
-    return { on: d.modelOn, src: d.modelSrc, setId: d.setId, fac: d.fac, state: d.modelState };
-  }), 2);
-  log('没点「查看 3D」之前：模型清单与模型对象都是 0 次请求、组件没挂、src 为空',
-    hitsOf(/bis\/models\/index\.json|assets\/models\/real\//).length === 0
-      && !!mv && mv.on === false && !mv.src && mv.state === 'idle', JSON.stringify(mv));
-  await call('点「查看 3D」', () => mp.evaluate(() => { getCurrentPages().pop().showModel(); return 1; }), 1);
-  await new Promise((r) => setTimeout(r, 1500));
-  const m1 = await call('取完之后看页面状态', () => mp.evaluate(() => {
-    const d = getCurrentPages().pop().data;
-    return { on: d.modelOn, src: d.modelSrc, state: d.modelState, text: d.modelText, err: d.modelErr, setId: d.setId, fac: d.fac };
-  }), 2);
+  await new Promise((r) => setTimeout(r, 1200));
+  log('换阵营后阵营真的翻了、指到的是另一阵营那一张（旧图不许继续挂着）',
+    !!ps2 && ps2.before.fac !== ps2.after.fac && ps2.before.src !== ps2.after.src
+      && new RegExp('-' + ps2.after.fac + '-[0-9a-f]{12}\\.png$').test(String(ps2.after.src)),
+    JSON.stringify(ps2));
+  const picHits = hitsOf(/assets\/models\/posters\//);
   const idxHits = hitsOf(/bis\/models\/index\.json/);
-  log('点一次只取一次清单（不进页就取、或把 76 条都拉一遍都不行）',
-    idxHits.length === 1, idxHits.join(' | ').slice(0, 120));
-  log('取到的正是当前 setId+faction 那一条，文件名带成品哈希、走 https 或本地假 OSS 的 real 目录',
-    !!m1 && m1.on === true && new RegExp('/assets/models/real/' + m1.setId + '-' + m1.fac + '-[0-9a-f]{12}\\.glb$').test(String(m1.src)),
-    JSON.stringify(m1));
-  log('清单没被改过：这一套的名单与登记逐格对得上（对不上会直接回原画并报"逐格没对上"）',
-    !!m1 && m1.state !== 'bad' && !/逐格没对上|没有登记/.test(String(m1.err)), String(m1 && m1.err).slice(0, 160));
-  const glbHits = hitsOf(/assets\/models\/real\//);
-  process.stdout.write('  · 模型对象请求 ' + glbHits.length + ' 次（这台模拟器起不了 xr-frame，真机那一侧才作数）\n');
-  await call('在飞的请求还没回来时切阵营', () => mp.evaluate(() => {
-    /* 阵营从页面自己读：mp.evaluate 的闭包看不见外层变量（写这一段时撞过一次
-       "Uncaught m1 is not defined"——那条红是脚本自己的错，不是页面的） */
+  log('切一次阵营只多取那一张图，不再取模型清单（3D 的清单链路已经整层删掉）',
+    picHits.length <= 1 && idxHits.length === 0,
+    '图 ' + picHits.length + ' 次 · 清单 ' + idxHits.length + ' 次');
+  /* 换一套（不是换阵营）也要真的换图：这是站主那句"切换职业、切换别的装备能展示就好了"的正身 */
+  const ps3 = await call('换到同一职业的另一套', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    const here = p.data.fac;
-    p.showModel();
-    p.pickFac({ currentTarget: { dataset: { fac: here === 'horde' ? 'alliance' : 'horde' } } });
-    return 1;
-  }), 1);
-  await new Promise((r) => setTimeout(r, 1500));
-  const m2 = await call('切完之后再数一次', () => mp.evaluate(() => {
+    const other = (p.data.setList || []).filter((x) => x.id !== p.data.setId)[0];
+    if (!other) return { skipped: true, n: (p.data.setList || []).length };
+    const before = p.data.posterSrc;
+    p.pickSet({ currentTarget: { dataset: { id: other.id } } });
+    return { skipped: false, want: other.id, before: before, setIdNow: p.data.setId };
+  }), 2);
+  await new Promise((r) => setTimeout(r, 1800));
+  const ps4 = await call('换完再看一眼那一格', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data;
-    return { on: d.modelOn, src: d.modelSrc, fac: d.fac };
+    return { setId: d.setId, fac: d.fac, src: d.posterSrc, state: d.posterState, rows: (d.rows || []).length };
   }), 2);
-  log('迟到的那一份不盖掉刚选中的那一套：切阵营后场景是拆掉的、src 清空',
-    !!m2 && m2.on === false && !m2.src, JSON.stringify(m2));
-  const m3 = await call('演一次取不到（失败分支）', () => mp.evaluate(() => {
+  log('换一套真的换成那一套那一张（不是把上一套的图留在屏上）',
+    !ps3.skipped && !!ps4 && ps4.setId === ps3.want && ps4.src !== ps3.before
+      && posterRe(ps4.setId, ps4.fac).test(String(ps4.src)) && ps4.rows >= 10,
+    JSON.stringify({ ps3: ps3, ps4: ps4 }));
+  /* 没有图那一档：桥表里没有这一格时必须直说，且名单/属性合计一条不少。
+     这里演的是"分发层没登记"（键不在表里），不是"网络坏了"——界面上是两句分开的说。 */
+  const m3 = await call('演一次桥表里没有这一格', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    p.showModel();
-    p.modelFail('这一套没有登记的真实模型');
+    const keep = p.index.posterLink;
+    p.index.posterLink = {};
+    p.showPoster();
     const d = p.data;
-    return { on: d.modelOn, state: d.modelState, err: d.modelErr, art: d.stageUrl, rows: (d.rows || []).length, sum: (d.sum || []).length };
+    p.index.posterLink = keep;
+    return { src: d.posterSrc, state: d.posterState, err: d.posterErr, text: d.posterText,
+      hasModelSrc: ('modelSrc' in d), rows: (d.rows || []).length, sum: (d.sum || []).length };
   }), 2);
-  log('失败就回职业原画并写「3D 暂不可用」＋原因，名单与属性合计一条不少',
-    !!m3 && m3.on === false && m3.state === 'bad' && /没有登记/.test(String(m3.err))
-      && !!m3.art && m3.rows >= 10 && m3.sum >= 1, JSON.stringify(m3));
-  const m4 = await call('演一次"几何在、贴图没数到"', () => mp.evaluate(() => {
+  log('桥表里没有这一格就直说「这一格没有可显示的图」＋原因，不拿任何别的图顶；名单与合计一条不少',
+    !!m3 && m3.state === 'none' && !m3.src && /没有可显示的图/.test(String(m3.text))
+      && /没给这一套/.test(String(m3.err)) && m3.hasModelSrc === false
+      && m3.rows >= 10 && m3.sum >= 1, JSON.stringify(m3));
+  await call('把这一张指回来', () => mp.evaluate(() => { getCurrentPages().pop().showPoster(); return 1; }), 1);
+  /* 图是异步的：切走之后旧那张的 load 回调才回来，也不许改当前这一格的状态 */
+  const m4 = await call('演一次迟到的 load 回调', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    p.teardownModel();
-    p.setData({ modelOn: true, modelState: 'loading' });
-    p.onModelStatus({ detail: { state: 'shown', meshes: 0, tex: 0, noTex: 0, detail: 'meshes 仍为空 ｜ gltf:version' } });
+    const cur = p.data.posterSrc;
+    p._posterKey = '别的套|horde';
+    p.onPosterLoad();
+    const stale = { state: p.data.posterState, src: p.data.posterSrc };
+    p._posterKey = p.data.setId + '|' + p.data.fac;
+    p.onPosterLoad();
+    const fresh = { state: p.data.posterState, src: p.data.posterSrc };
+    return { cur: cur, stale: stale, fresh: fresh };
+  }), 2);
+  log('迟到的那一张不改当前状态，键对上了才说"已经取到"（画面与 setId+阵营 必须同人同套）',
+    !!m4 && !!m4.cur && m4.stale.state === 'loading' && m4.stale.src === m4.cur
+      && m4.fresh.state === 'ok' && m4.fresh.src === m4.cur, JSON.stringify(m4));
+  /* 真取不到（断网、没发过、对象不在这个批）也要说清：图没了，名单与合计还在 */
+  const m5 = await call('演一次取不到（binderror 分支）', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    p.onPosterError();
     const d = p.data;
-    return { on: d.modelOn, state: d.modelState, detail: d.modelDetail, err: d.modelErr };
+    return { src: d.posterSrc, state: d.posterState, text: d.posterText, err: d.posterErr,
+      rows: (d.rows || []).length, sum: (d.sum || []).length };
   }), 2);
-  await new Promise((r) => setTimeout(r, 800));
-  const m5 = await call('量不到贴图那一格过一会儿再看', () => mp.evaluate(() => {
-    const d = getCurrentPages().pop().data;
-    return { on: d.modelOn, state: d.modelState };
-  }), 2);
-  /* 2026-10-30 真机定死：资源 loaded 后人已经画出来了，但 xr-frame 那版没把网格列表交出来
-     （站主截图里是"带贴图的兽人 + 网格 0 个"）。所以量不到只许补一句，不许再把画面藏掉。 */
-  log('尺子量空了也不许把画面藏掉（真机就是被这条误判藏起来的）',
-    !!m4 && m4.on === true && m4.state === 'shown' && /数到网格/.test(String(m4.detail)) && !m4.err
-      && !!m5 && m5.on === true && m5.state === 'shown', JSON.stringify({ m4: m4, m5: m5 }));
-  await call('收掉这一格', () => mp.evaluate(() => { getCurrentPages().pop().hideModel(); return 1; }), 1);
+  log('那一张取不到就明说取不到（不许留着空 src 假装还在加载），名单与合计照旧完整',
+    !!m5 && m5.state === 'bad' && !m5.src && m5.text === '这一格没有可显示的图'
+      && /取不到/.test(String(m5.err)) && m5.rows >= 10 && m5.sum >= 1, JSON.stringify(m5));
   const bis3dWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
-  log('真实模型的 caption「游戏角色与装备的静态预览，拖动可旋转」只在模型真的挂着那一格出现',
-    /modelState === 'ok' \|\| modelState === 'shown'/.test(bis3dWxml)
-      && /游戏角色与装备的静态预览，拖动可旋转/.test(bis3dWxml), '');
+  /* 站主 2026-11-02 第二轮："这里文案去掉，只保留属性"——图那一格的说明句、属性合计那句注解、
+     附魔与消耗品那句"本站没有第二处可以核对"全撤。撤的是界面出口：数据层 sumNote 与分发层
+     disclaimer 一条没删（和 11-01 撤页头三句同一个口径）。这条从"必须有那句"翻成"那句不许回来"。 */
+  log('图与属性合计那几句说明已从界面撤干净（站主 11-02），且不留半截出口',
+    !/静态图，不能拖动/.test(bis3dWxml) && !/\{\{sumNote\}\}/.test(bis3dWxml)
+      && !/本站没有第二处可以核对/.test(bis3dWxml) && !/本站不排强弱/.test(bis3dWxml)
+      && /class="sum-v"/.test(bis3dWxml), '');
+  await call('指回当前这一张（给下面那张截图用）', () => mp.evaluate(() => {
+    getCurrentPages().pop().showPoster(); return 1;
+  }), 1);
+  await new Promise((r) => setTimeout(r, 900));
   const appJson = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/app.json'), 'utf8'));
   const packCfg = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/project.config.json'), 'utf8'));
   log('临时探针路由已从正式 app.json 撤掉，探针目录也不进包（正式包里没有 model-probe）',
@@ -764,50 +823,108 @@ async function main() {
       && !(packCfg.packOptions.ignore || []).some((x) => /models/.test(String(x.value))),
     JSON.stringify(appJson.pages.length));
   await shot('h1-bis-page');
+  /* 站主 2026-11-02 要的是"属性与副本分色"，那是视觉主张——只钉 CSS 不够，得有一张看得见的那一屏。
+     滚到「这一套一览」拍一张，再把弹层开着拍一张（弹层里属性行与来源行同屏，最容易比）。 */
+  await call('滚到「这一套一览」', () => mp.evaluate(() => new Promise((r) => {
+    /* 锚要选 .srow（第一行装备）：.bhead 在这一页出现两次（页头那一格也叫它），
+       上一版按 .bhead 滚，拍到的还是上面那一屏（2026-11-02 实拍发现的）。
+       也别用 wx.getPageScrollTop + boundingClientRect 自己算：这台的基础库里那条走的是 fail 分支，
+       结果一格都没滚（15:22 那张又成了顶部）。选择器写法是官方支持的，直接用它，并把结果带出来。 */
+    wx.pageScrollTo({ selector: '.srow', offsetTop: -60,
+      success: () => r('ok'), fail: (e) => r('fail:' + ((e && e.errMsg) || '?')) });
+    setTimeout(() => r('timeout'), 2500);
+  })), 3);
+  await new Promise((r) => setTimeout(r, 900));
+  await shot('h2-bis-list');
+  await call('开着弹层拍一张', () => mp.evaluate(() => {
+    getCurrentPages().pop().openSlot({ currentTarget: { dataset: { slot: '头部', cell: 1 } } });
+    return 1;
+  }), 1);
+  await new Promise((r) => setTimeout(r, 700));
+  await shot('h3-bis-slot-pop');
+  await call('关掉弹层并回到顶部', () => mp.evaluate(() => {
+    getCurrentPages().pop().closeSlot();
+    wx.pageScrollTo({ scrollTop: 0 });
+    return 1;
+  }), 1);
   await call('回到占位开着的画面', () => mp.evaluate(() => 1), 1);
   log('配装页渲染文字里没有百分比与强度评价词（红线）',
     !!bis && !/\d+(\.\d+)?\s*%/.test(bis.text) && !/秒伤|DPS|权重/.test(bis.text),
     String(bis && bis.text).slice(0, 80));
+  /* ---------- 出处跳转（2026-11-01：点"副本：X"那行 → 副本详情页并高亮这一件）----------
+     桥表 dropLink 由分发层现算（只收"这一行出处就写着某座副本"的），页面不解析显示文字。 */
+  const jump = await call('找一行能跳的出处并点它', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    const rows = (p.data.rows || []).filter((r) => r.go);
+    const nogo = (p.data.rows || []).filter((r) => !r.go && r.src);
+    if (!rows.length) return { found: 0, nogo: nogo.length };
+    const hit = rows[0];
+    p.goDungeon({ currentTarget: { dataset: { d: hit.go, item: String(hit.item) } } });
+    return { found: rows.length, nogo: nogo.length, total: (p.data.rows || []).length,
+      want: hit.go, item: String(hit.item) };
+  }), 2);
+  await new Promise((r) => setTimeout(r, 1200));
+  const jumped = await call('看有没有真的跳到副本详情页', () => mp.evaluate(() => {
+    const ps = getCurrentPages();
+    const top = ps[ps.length - 1] || {};
+    const d = top.data || {};
+    return { depth: ps.length, route: top.route || '', id: d.id, hi: d.highlightDrop, notice: d.dropNotice };
+  }), 2);
+  log('有出处的行能跳到那座副本详情页，并把这一件带过去高亮（跳不过去的行本来就不渲染成可点）',
+    !!jump && jump.found > 0 && !!jumped && jumped.route === 'pages/dungeon/index'
+      && jumped.id === jump.want && String(jumped.hi) === String(jump.item),
+    JSON.stringify({ jump: jump, got: jumped && { route: jumped.route, id: jumped.id, hi: jumped.hi } }));
+  /* 提示要按"这件在本页掉落表里到底有没有"说：配装页的出处是参考站写的，
+     本站掉落归属是另一份来源，两边不一致时那里没有可高亮的行，就不能假装高亮了 */
+  log('副本页那句提示说清了来源，且没有把配装页来的玩家说成"从掉落反查过来"',
+    !!jumped && /配装名单/.test(String(jumped.notice))
+      && !/掉落反查/.test(String(jumped.notice)), String(jumped && jumped.notice).slice(0, 90));
+  await call('跳回配装页', () => mp.evaluate(() => { wx.navigateBack(); return 1; }), 1);
+  await new Promise((r) => setTimeout(r, 800));
   const bisWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/bis/index.wxml'), 'utf8');
-  /* 判的是"有没有那颗按钮/那一格"，不是那几个字——注释里还留着"站主把看占位模型撤了"这句来历 */
-  log('页面里只剩两种画面：默认那张图 + 查看 3D；占位入口与那一格都不在代码里',
+  /* 判的是代码里有没有那些元素，不是注释里的字——2026-11-02 起这一栏只剩逐件图一种画面：
+     3D 的挂载、按钮、相机那套，连同按种族那张底图回退，都不许留在页面代码里
+     （留着就说明哪天又被"照旧"接回去，再接回去的正是这次删掉的那条链路） */
+  log('页面里只剩逐件图一种画面：没有 3D 挂载与相机字段、没有「查看 3D／退出 3D」、没有按种族的底图回退',
     !/bindtap="toggle3d"/.test(bisWxml) && !/class="doll"/.test(bisWxml)
-      && /查看 3D/.test(bisWxml) && /modelState === 'shown'/.test(bisWxml), '');
+      && !/查看 3D|退出 3D/.test(bisWxml)
+      && !/bindtap="showModel"|bindtap="hideModel"/.test(bisWxml)
+      && !/<bis-3d|xr-scene|modelSrc|stageAspect|onModelStatus/.test(bisWxml)
+      && /class="stage-art"/.test(bisWxml) && /mode="aspectFit"/.test(bisWxml), '');
   const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
-  log('首页有整宽的配装入口卡（站主：核心功能，必须醒目），且排在四张小卡前面',
-    /class="bis-card/.test(homeWxml) && /bindtap="goBis"/.test(homeWxml)
-      && homeWxml.indexOf('bis-card') < homeWxml.indexOf('class="grid"'), '');
+  /* 2026-11-03 站主照截图重排：整宽 bis-card 撤掉，BIS 改进两列格、换自绘盾牌图标，
+     起名格紧随其后（也是自绘图标）。断言按新意图改写（不是删）：
+     「bis-card」这个类不许再出现在首页——回来就说明整宽卡又被"照旧"接回去了。 */
+  log('首页 BIS/起名是两列格里的图标卡（自绘图标 + 各自跳转），BIS 在起名与副本前，整宽 bis-card 不再存在',
+    /bindtap="goBis"/.test(homeWxml) && /img\/home\/bis-icon\.png/.test(homeWxml)
+      && /bindtap="goNamer"/.test(homeWxml) && /img\/home\/namer-icon\.png/.test(homeWxml)
+      && homeWxml.indexOf('goBis') >= 0 && homeWxml.indexOf('goBis') < homeWxml.indexOf('goNamer')
+      && homeWxml.indexOf('goBis') < homeWxml.indexOf('goDungeons')
+      && !/bis-card/.test(homeWxml), '');
 
 
   /* ---------- I. 远程功能开关（2026-10-27 站主："暂时先不公开，想公开了不用发版就能公开"） ----------
-     两阶段：① 线上（本地假 OSS 那份 flags.json）关着 → 首页没入口、直接进页只说"还没开放"且不取数；
-     ② 只改 flags.json 这一个文件（代码一行不动）→ 重进就出现。
-     阶段之间对页面代码文件求哈希，证明"放开这一页没改过代码"。 */
+     三段：① 基线（专业关、宏开）→ 关着的页只说"还没开放"且不取数，首页那张卡不在、宏那张在；
+     ② 只改 flags.json 这一个文件把宏拧关 / 专业拧开 → 首页两张卡各自换位，代码一行没动；
+     ③ 宏拧回开 → 首页第四格回来，且这一轮还没访问过宏页（P2 那段要求索引整轮只取一次）。
+     阶段之间对页面代码文件求哈希，证明"拧开关没改过代码"。 */
   process.stdout.write('\nI. 远程开关：关着看不见，只改 flags.json 就出现（代码一行没动）\n');
   const crypto01 = require('crypto');
   const sha01 = (p) => crypto01.createHash('sha256').update(fs.readFileSync(p)).digest('hex').slice(0, 12);
   /* 改的就是假 OSS 供出去的那一份（项目外），代码与批次数据一个字节都不动 */
   const FLAGS_FILE = LIVE_FLAGS;
   const CODE_FILES = ['pages/professions/index.js', 'pages/professions/index.wxml',
-    'pages/macros/index.js', 'pages/macros/index.wxml', 'pages/macros/index.wxss', 'data/bis-posters.js', 'pages/home/index.js',
+    'pages/macros/index.js', 'pages/macros/index.wxml', 'pages/macros/index.wxss', 'pages/bis/index.js', 'pages/home/index.js',
     'pages/home/index.wxml', 'services/features.js', 'data/flags-local.js', 'app.json'];
   const codeBefore = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
   const flags0 = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
   log('这一批带开关对象（与指针同一档，改它不发版）',
     flags0.product === 'wow-forever-mini-flags' && flags0.env === 'beta'
       && flags0.features.professions.on === false && flags0.features.bis.on === true
-      && flags0.features.macros.on === false
+      && flags0.features.macros.on === true
       && (flags0.policy || []).length >= 3, JSON.stringify(flags0.counts));
 
   await clearStore();
-  await nav('/pages/macros/index');
-  const mOff = await call('宏开关关着直接进这一页', () => mp.evaluate(() => {
-    const p = getCurrentPages().pop();
-    return { route: p.route, locked: p.data.locked, loaded: p.data.loaded, rows: (p.data.rows || []).length };
-  }), 2);
-  log('macros 关着：只说"这一页还没开放"，一个数据请求都不发',
-    !!mOff && mOff.route === 'pages/macros/index' && mOff.locked === true && mOff.loaded === false && mOff.rows === 0
-      && hitsOf(/macros\/index\.json/).length === 0, JSON.stringify(mOff));
   await nav('/pages/professions/index');
   const off = await call('读关着的页', () => mp.evaluate(() => {
     const p = getCurrentPages().pop(); const d = p.data || {};
@@ -821,27 +938,49 @@ async function main() {
   log('关着的页念得出这一页叫什么（不是"出错了"那种含糊话）',
     !!off && off.lockName === '专业与配方', JSON.stringify(off && off.lockName));
   await nav('/pages/home/index');
-  const homeOff = await call('读首页（关）', () => mp.evaluate(() => {
+  const homeOff = await call('读首页（专业关、宏开）', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data || {};
-    return { open: !!d.openProfessions, art: (d.cardBg || {}).professions === undefined ? null : !!d.cardBg.professions };
+    return { open: !!d.openProfessions, macros: !!d.openMacros,
+      art: (d.cardBg || {}).professions === undefined ? null : !!d.cardBg.professions };
   }), 3);
-  log('首页此时没有「专业与配方」入口卡（关着整块不渲染，不留空白格）',
-    !!homeOff && homeOff.open === false, JSON.stringify(homeOff));
+  log('首页此时没有「专业与配方」入口卡（关着整块不渲染，不留空白格），但「宏命令」卡在',
+    !!homeOff && homeOff.open === false && homeOff.macros === true, JSON.stringify(homeOff));
 
-  /* 只动"线上"那一份开关（项目外那个文件）：等价于跑一次 flags --env beta */
+  /* 只动"线上"那一份开关（项目外那个文件）：等价于跑一次 flags --env beta。
+     先把 11-02 顶替「指南」进第四格的这张卡拧关，验的就是这一张的收回路径 */
   const flipped = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
   flipped.features.professions.on = true;
-  flipped.features.macros.on = true;
+  flipped.features.macros.on = false;
   fs.writeFileSync(FLAGS_FILE, JSON.stringify(flipped, null, 1) + '\n');
-  process.stdout.write('    → 把本地那份 flags.json 的 professions 拧成 true（模拟线上改开关，代码一行没动）\n');
+  process.stdout.write('    → 把本地那份 flags.json 的 macros 拧成 false、professions 拧成 true（模拟线上改开关，代码一行没动）\n');
   await nav('/pages/home/index');
-  const homeOn = await call('读首页（开）', () => mp.evaluate(() => {
+  const homeMacOff = await call('读首页（宏关）', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data || {};
-    return { open: !!d.openProfessions };
+    return { open: !!d.openProfessions, macros: !!d.openMacros };
+  }), 3);
+  log('宏命令拧关后首页第四格整块收掉（专业同时自己冒出来），代码一个字节都没变',
+    !!homeMacOff && homeMacOff.macros === false && homeMacOff.open === true, JSON.stringify(homeMacOff));
+  await nav('/pages/macros/index');
+  const mOff = await call('宏开关关着直接进这一页', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    return { route: p.route, locked: p.data.locked, loaded: p.data.loaded, rows: (p.data.rows || []).length };
+  }), 2);
+  log('macros 关着：只说"这一页还没开放"，一个数据请求都不发',
+    !!mOff && mOff.route === 'pages/macros/index' && mOff.locked === true && mOff.loaded === false && mOff.rows === 0
+      && hitsOf(/macros\/index\.json/).length === 0, JSON.stringify(mOff));
+  /* 恢复成"宏开着"：后面 P2 那一段要真进这一页取数，而且索引整轮只许取一次，
+     所以这里只把开关拧回来，不再访问宏页 */
+  const backOn = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
+  backOn.features.macros.on = true;
+  fs.writeFileSync(FLAGS_FILE, JSON.stringify(backOn, null, 1) + '\n');
+  await nav('/pages/home/index');
+  const homeOn = await call('读首页（都开）', () => mp.evaluate(() => {
+    const d = getCurrentPages().pop().data || {};
+    return { open: !!d.openProfessions, macros: !!d.openMacros };
   }), 3);
   const codeAfter = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
-  log('拧开之后首页入口卡自己出现了，而且代码一个字节都没变（这就是"不用发版"）',
-    !!homeOn && homeOn.open === true && codeBefore === codeAfter,
+  log('再拧回来两张卡都在（这就是"不用发版"），而且代码一个字节都没变',
+    !!homeOn && homeOn.open === true && homeOn.macros === true && codeBefore === codeAfter,
     codeBefore === codeAfter ? '代码哈希一致' : '代码哈希变了：' + codeBefore + ' vs ' + codeAfter);
 
   /* ---------- J. 专业与配方页（对齐网页 ProfessionsPage.vue） ---------- */
@@ -864,7 +1003,7 @@ async function main() {
   })), 3);
   log('开关开了就直接进得来：13 个专业、页头读数与板块图都在',
     !!pf && pf.route === 'pages/professions/index' && pf.locked === false && pf.chips === 13
-      && pf.stats.professions === 13 && pf.stats.recipes > 1900 && /^http/.test(pf.headUrl),
+      && pf.stats.professions === 13 && pf.stats.recipes > 1500 && /^http/.test(pf.headUrl),
     JSON.stringify(pf && { chips: pf.chips, stats: pf.stats }));
   log('取数状态说真话（线上取到了就不许写"没取到数据"）',
     !!pf && /实时|缓存/.test(String(pf.sourceText)), JSON.stringify(pf && pf.sourceText));
@@ -1012,6 +1151,9 @@ async function main() {
     String(pfAlch && pfAlch.text).slice(0, 80));
   /* ---------- P2. 宏命令页（2026-10-30：网页那 245 条做进小程序） ---------- */
   await nav('/pages/macros/index');
+  /* 扫的是界面，不是注释——注释里写着"红线：不收费"这种话，按字面扫就是自己抓自己 */
+  const mWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/macros/index.wxml'), 'utf8')
+    .replace(/<!--[\s\S]*?-->/g, '');
   const mOn = await call('拧开开关后重进宏页', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
     const d = p.data;
@@ -1021,10 +1163,14 @@ async function main() {
       dis: (d.meta || {}).disclaimer || '', stat: d.statText };
   }), 3);
   log('macros 拧开就出现（代码一行没动），九职业条每个都带图标，并且真的取到了这一职业那一片',
-    !!mOn && mOn.locked === false && mOn.chips === 9 && mOn.icons === 9 && mOn.rows > 5 && mOn.cls === 'warrior'
-      && /第三方插件整理/.test(String(mOn.dis)), JSON.stringify(mOn || {}).slice(0, 200));
-  log('页头那句口径由分发层下发（不冒充实测、免费、不分发插件），页面不改写',
-    !!mOn && /没有逐条进游戏试过/.test(String(mOn.dis)) && /免费/.test(String(mOn.dis)), '');
+    !!mOn && mOn.locked === false && mOn.chips === 9 && mOn.icons === 9 && mOn.rows > 5 && mOn.cls === 'warrior',
+    JSON.stringify(mOn || {}).slice(0, 200));
+  /* 2026-11-02 站主指令：来源类界面出口全撤（页头口径句 / 每条"谁整理的"标 / 复制来源钮）。
+     撤的是界面，不是记录——分发层 disclaimer 与分片 srcs 一条没删，网页端与审计都靠它，
+     所以这两条从"必须有那句"翻成"数据层仍在、界面不许出现"（和 11-01 撤配装页三句同一口径）。 */
+  log('口径句仍在数据层（不冒充实测、免费、不分发插件那句一条没删），但界面不再摆出来',
+    !!mOn && /第三方插件整理/.test(String(mOn.dis)) && /没有逐条进游戏试过/.test(String(mOn.dis))
+      && !/meta\.disclaimer/.test(mWxml), String(mOn && mOn.dis).slice(0, 80));
   log('索引只取一次、职业片按点到的那一片取（不是进页就把 9 片全拉下来）',
     hitsOf(/macros\/index\.json/).length === 1 && hitsOf(/macros\/set\//).length >= 1
       && hitsOf(/macros\/set\//).length < 9,
@@ -1063,17 +1209,25 @@ async function main() {
     if (!first) return null;
     p.openMacro({ currentTarget: { dataset: { id: first.id } } });
     const o = p.data.open || {};
-    return { id: o.id, body: String(o.body || ''), src: o.srcName, checked: o.srcChecked, grp: o.group };
+    return { id: o.id, body: String(o.body || ''), grp: o.group,
+      leaksSrc: ('srcName' in o) || ('srcChecked' in o) };
   }), 2);
-  log('详情里宏正文原样带换行、来源与核对日都在（红线：每条指得出谁整理的）',
-    !!mOpen && mOpen.body.indexOf('\n') > 0 && /GearInsight|XR_DungeonGuide/.test(String(mOpen.src))
-      && /^2026-\d\d-\d\d$/.test(String(mOpen.checked)), JSON.stringify(mOpen || {}).slice(0, 220));
-  /* 扫的是界面，不是注释——注释里写着"红线：不收费"这种话，按字面扫就是自己抓自己 */
-  const mWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/macros/index.wxml'), 'utf8')
-    .replace(/<!--[\s\S]*?-->/g, '');
+  log('详情里宏正文原样带换行；来源与核对日不再进页面数据（2026-11-02 撤界面出口）',
+    !!mOpen && mOpen.body.indexOf('\n') > 0 && !mOpen.leaksSrc, JSON.stringify(mOpen || {}).slice(0, 220));
+  /* 界面撤了，记录还在：分片文件里每条宏的 srcs 照旧是"名字+网址+核对日期"，构建时红线没松 */
+  const mSet = JSON.parse(fs.readFileSync(
+    path.join(BUILD, 'builds', man.buildId, 'macros', 'set', 'warrior.json'), 'utf8'));
+  log('分片文件里每条来源仍能追回去（名字 + 出处 + 核对日期；出处可以是插件仓库路径不一定是 http），网页端与审计靠它',
+    Array.isArray(mSet.srcs) && mSet.srcs.length >= 1
+      && mSet.srcs.every((s) => s && s.name && String(s.url || '').length > 3
+        && /^\d{4}-\d{2}-\d{2}$/.test(String(s.date || ''))),
+    JSON.stringify(mSet.srcs || []).slice(0, 160));
   log('宏这一页只有只读与复制：没有编辑器、没有执行、没有外链、没有收费字样',
     /复制宏文本/.test(mWxml) && !/<input[^>]*value="{{open.body/.test(mWxml)
       && !/web-view/.test(mWxml) && !/收费|会员|购买/.test(mWxml), '');
+  log('来源类出口撤干净了：复制来源钮、谁整理的标、口径句、GearInsight 字样都不在界面',
+    !/复制来源/.test(mWxml) && !/srcName/.test(mWxml) && !/openSrc/.test(mWxml)
+      && !/GearInsight/.test(mWxml) && !/meta\.disclaimer/.test(mWxml), '');
   await shot('q2-macros-detail');
   await shot('p1-professions');
   await nav('/pages/home/index');
@@ -1090,7 +1244,7 @@ async function main() {
     JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8')).features.professions.on === false
       && CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ') === codeBefore, '');
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
-  const MINI = '/Users/zhangyajun/Documents/project/wow-forever/for-mini/';
+  const MINI = path.join(REPO, 'for-mini') + path.sep;
   const rawColor = [];
   ['pages/home/index.wxss', 'pages/dungeons/index.wxss', 'pages/dungeon/index.wxss', 'pages/glossary/index.wxss',
     'pages/classes/index.wxss', 'pages/class/index.wxss', 'pages/guide/index.wxss',

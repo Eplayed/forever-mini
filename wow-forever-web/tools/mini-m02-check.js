@@ -17,7 +17,8 @@ const MiniProgram = MPmod.default || MPmod;
 MiniProgram.prototype.checkVersion = async () => true;
 const automator = require('miniprogram-automator');
 
-const REPO = '/Users/zhangyajun/Documents/project/wow-forever';
+/* 仓库根从脚本位置推：写死 Mac 绝对路径会让这条回归在 Windows 上直接 ENOENT */
+const REPO = path.resolve(__dirname, '..', '..');
 const SHOT = '/tmp/m02-shots';
 const results = [];
 const log = (name, pass, info) => {
@@ -133,8 +134,18 @@ async function main() {
     const d = getCurrentPages().pop().data;
     return { loaded: d.loaded, total: d.total, itemCount: d.itemCount, src: d.sourceText, err: d.errorText, build: d.buildId };
   });
-  log('掉落表取回且行数/物品数与首页同源（1050 / 1018）',
-    lb.loaded && lb.total === 1050 && lb.itemCount === 1018 && !lb.err, JSON.stringify(lb));
+  /* 数字不写死：上一版这里钉的是 1050 / 1018，日更把掉落表涨到 1053 / 1021 之后
+     这条自己变红——数据对、断言错。改成"页面读数 == 它读的那一批的读数"，
+     要钉的本来就是"同源"，不是某一个数。 */
+  const lootIdx = (() => {
+    try {
+      const j = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-build/beta/builds', lb.build, 'loots/index.json'), 'utf8'));
+      return j && j.counts ? { rows: j.counts.rows, items: j.counts.items } : null;
+    } catch (e) { return null; }
+  })();
+  log('掉落表取回且行数/物品数与它所读的那一批同源',
+    lb.loaded && !!lootIdx && lb.total === lootIdx.rows && lb.itemCount === lootIdx.items && !lb.err,
+    JSON.stringify({ 页面: [lb.total, lb.itemCount], 批次: lootIdx, build: lb.build }));
   const rose = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.onKw({ detail: { value: '红玫瑰' } });
@@ -153,12 +164,15 @@ async function main() {
     log('掉落物品图标在 bucket 上真取得到', rr.code === 200 && rr.type.indexOf('image/') === 0, String(rr.code));
   }
   await shot('b1-loots-rose');
+  /* 名字不抄进断言：274286 这条 11-02 日更改过名（旧断言钉的是"…的头颅"，现在数据里是"…的徽记"），
+     数据对、断言错。要钉的是"按编号查恰好命中这一件"，所以比 id 不比名字。 */
   const byId = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.onKw({ detail: { value: '274286' } });
-    setTimeout(() => res((p.data.list || []).map((x) => x.name)), 800);
+    setTimeout(() => res((p.data.list || []).map((x) => String(x.itemId || x.id || ''))), 800);
   }));
-  log('按物品编号也能查到', byId.length === 1 && byId[0] === '杜根·挽锤的头颅', JSON.stringify(byId));
+  log('按物品编号也能查到（恰好命中这一件，不钉名字）',
+    byId.length === 1 && byId[0] === '274286', JSON.stringify(byId));
   const none = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.onKw({ detail: { value: 'zzz不存在' } });
@@ -174,7 +188,7 @@ async function main() {
     const p = getCurrentPages().pop();
     const d = p.data;
     return { counts: d.counts, cov: d.covList, wip: d.wip, fact: d.factDate, build: d.buildId,
-      hasLoots: typeof p.goLoots === 'function', hasGuide: typeof p.goGuide === 'function',
+      hasLoots: typeof p.goLoots === 'function', hasMacros: typeof p.goMacros === 'function',
       /* 2026-10-22 首页改版要读的四段：倒计时 / 职业格 / 选中职业 / 可选种族与特长 */
       cd: d.cd, nClasses: (d.classes || []).length, activeClass: d.activeClass, activeName: d.activeName,
       raceIds: (d.races || []).map((r) => r.id),
@@ -183,7 +197,7 @@ async function main() {
       traitNoName: (d.races || []).reduce((s, r) => s + (r.traits || []).filter((t) => !t.name).length, 0),
       traitWithEffect: (d.races || []).reduce((s, r) => s + (r.traits || []).filter((t) => t.effect).length, 0) };
   });
-  log('掉落与指南两个入口的处理器在（两页都不是 tab，必须 navigateTo）', home.hasLoots && home.hasGuide);
+  log('掉落与宏命令两个入口的处理器在（两页都不是 tab，必须 navigateTo）', home.hasLoots && home.hasMacros);
   /* 玩家面规矩（2026-10-22 站主定）：首页不出现计数、覆盖率、缺口、核对日期、批次号 */
   log('首页不出现计数/覆盖率/缺口/核对日期/批次号',
     home.counts === undefined && (home.cov || []).length === 0 && (home.wip || []).length === 0
@@ -330,7 +344,9 @@ async function main() {
   process.stdout.write('\nF. 首页配图与天赋模拟器（2026-10-22 站主指令）\n');
   await goto('/pages/home/index', 7000);
   const art = await ev(() => { const d = getCurrentPages().pop().data; return { bg: d.bgUrl, cards: d.cardBg }; });
-  const CARD_KEYS = ['dungeons', 'classes', 'loots', 'guide'];
+  /* 2026-11-02：第四格从「指南」换成「宏命令」，底图沿用清单里 guide 那张光树场景
+     （ui-art.json 没为宏命令单登记，改那份清单要重发批次），所以这里查的键是 macros、地址还是那张 */
+  const CARD_KEYS = ['dungeons', 'classes', 'loots', 'macros'];
   log('首页背景与四张卡都拼出了 assets 地址（路径由 meta.uiArt 下发，页面不各自抄）',
     /^https?:\/\//.test(String(art.bg)) && CARD_KEYS.every((k) => /^https?:\/\//.test(String(art.cards[k] || ''))),
     JSON.stringify(art.cards));
@@ -559,18 +575,23 @@ async function main() {
   /* —— 首页改版四段的静态卡口（不靠设备，纯文件与纯函数）—— */
   const cd = require(path.join(REPO, 'for-mini/services/countdown.js'));
   const LAUNCH = '2026-11-05';
+  /* 2026-11-03 站主两条口径：目标时刻=北京 07:00（"是 11 月 5 号上午 7 点开服"）、
+     天数按北京日历日做差（"距离上线应该是 2 天"，11-03 看 11-05）。 */
   const before = cd.state(cd.launchInstant(LAUNCH) - (3 * 86400000 + 4 * 3600000), LAUNCH);
   const today = cd.state(cd.launchInstant(LAUNCH) - 3600000, LAUNCH);
   const after = cd.state(cd.launchInstant(LAUNCH) + 1000, LAUNCH);
-  log('倒计时：只给整天数（3 天 4 小时算 3 天），过点立刻 on=false（首页那块整块移除）',
+  /* 11-03 晚 20 点看 11-05（差 1 天 11 小时）：日历差 2 天＝站主原话"距离上线应该是 2 天" */
+  const twoDays = cd.state(cd.launchInstant(LAUNCH) - (1 * 86400000 + 11 * 3600000), LAUNCH);
+  log('倒计时：天数按北京日历日做差（11-02 凌晨看 11-05 是 3 天、11-03 晚上看是 2 天），过点立刻 on=false（首页那块整块移除）',
     before.on === true && before.d === 3 && before.today === false && before.clock === undefined
-      && after.on === false && after.reason === 'launched', JSON.stringify({ before, after }));
-  log('倒计时：剩不到一个整天写"就在今天"，不写 0 天',
+      && twoDays.on === true && twoDays.d === 2
+      && after.on === false && after.reason === 'launched', JSON.stringify({ before, twoDays, after }));
+  log('倒计时：开服当天没到 7 点写"就在今天"，不写 0 天',
     today.on === true && today.d === 0 && today.today === true, JSON.stringify(today));
   log('倒计时：日期没核到时不硬造一个读数',
     cd.state(Date.now(), '').on === false && cd.state(Date.now(), undefined).reason === 'no-date');
-  log('倒计时：目标时刻按北京时间 0 点算，与网页端 fmt.js 的 LAUNCH_AT 同一个瞬间',
-    cd.launchInstant(LAUNCH) === Date.parse('2026-11-05T00:00:00+08:00'), String(cd.launchInstant(LAUNCH)));
+  log('倒计时：目标时刻按北京时间 07:00 算（2026-11-03 站主确认），与网页端 fmt.js 的 LAUNCH_AT 同一个瞬间',
+    cd.launchInstant(LAUNCH) === Date.parse('2026-11-05T07:00:00+08:00'), String(cd.launchInstant(LAUNCH)));
   const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
   const homeJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.js'), 'utf8');
   const cdJs = fs.readFileSync(path.join(REPO, 'for-mini/services/countdown.js'), 'utf8');
@@ -578,17 +599,19 @@ async function main() {
   log('职业格不用横向滚动（全页只有一处 scroll-x，是"最近看过"那条轨）',
     (homeWxml.match(/scroll-x/g) || []).length === 1 && /class="cls9"/.test(homeWxml) && homeWxml.indexOf('cls9') < homeWxml.indexOf('rail'),
     String((homeWxml.match(/scroll-x/g) || []).length));
-  log('首页四张入口卡：有指南卡，且没有中英速查卡',
-    /goGuide/.test(homeWxml) && /entry-name">指南</.test(homeWxml)
-      && !/中英速查/.test(homeWxml.replace(/<!--[\s\S]*?-->/g, ' ')) && !/goGlossary/.test(homeJs),
-    '注释里提到"撤出首页"不算界面文字，所以这条先把注释剥掉再比');
+  const homeFace = homeWxml.replace(/<!--[\s\S]*?-->/g, ' ');
+  log('首页四张入口卡：第四格是宏命令、指南卡已撤出首页，也没有中英速查卡',
+    /goMacros/.test(homeFace) && /entry-name">宏命令</.test(homeFace)
+      && !/goGuide/.test(homeFace) && !/entry-name">指南</.test(homeFace)
+      && !/中英速查/.test(homeFace) && !/goGlossary/.test(homeJs),
+    '注释里写着"从指南换成宏命令"不算界面文字，所以先把注释剥掉再比');
   /* 日期只许来自 data/meta.json → 主包快照这一条链，界面与算法里都不许抄死值 */
   log('界面与倒计时模块里没有写死的开服日期（只认 meta 的 launch）',
     !/2026-11-\d\d/.test(homeJs) && !/2026-11-\d\d/.test(homeWxml) && !/2026-\d\d-\d\d/.test(cdJs.replace(/^\/\*[\s\S]*?\*\//, '')),
     'home.js / home.wxml / countdown.js 正文');
   log('种族特长与可选种族都要图标加文字（模板里两处都渲染 icon-cell 与名字）',
     /size="cls"/.test(homeWxml) && /size="md"/.test(homeWxml) && /size="sm"/.test(homeWxml)
-      && /t\.effect/.test(homeWxml) && /还没核到，不猜/.test(homeWxml));
+      && /t\.effect/.test(homeWxml) && /还没核到/.test(homeWxml));
   /* 用了自定义组件却没在页面 json 里注册＝标签整个不渲染，而且不报错。
      2026-10-22 首页改版实拍就撞上这一次：职业格与种族格的数据都对，图标一格都没出来。
      所以这条按"页面 WXML 用了 icon-cell"逐个查 json 有没有注册，全站一起扫。 */

@@ -50,13 +50,13 @@ def main():
  rows = inventory()
  head = git('rev-parse', 'HEAD').strip()
  sig = hashlib.sha256(json.dumps([head, rows], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
- old = json.loads(STATE.read_text()) if STATE.exists() else {}
+ old = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {}
  if args.check:
   fresh = old.get('fingerprint') == sig and GUIDE.exists()
   print('索引有效（文件元信息检查，不是产品验收）' if fresh else '索引过期：运行 python3 wow-forever-web/tools/project-index.py')
   return 0 if fresh else 1
  state = {'head': head, 'fingerprint': sig, 'method': 'Git路径＋size/mtime；不读文档/数据正文，不代替原件。', 'files': rows}
- STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1)+'\n')
+ STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1)+'\n', encoding='utf-8')
  lines = ['# 项目按需读取索引', '', '自动生成。先定位再读原件；本索引不是授权、来源或验收结果。', '',
           '## 用法', '', '```sh', 'python3 wow-forever-web/tools/project-index.py --topic launch',
           'python3 wow-forever-web/tools/project-index.py --find merge',
@@ -71,7 +71,7 @@ def main():
   lines += ['### '+key+' · '+title, '']
   lines += ['- `'+p+'`'+('（文件不存在，需定位）' if not (REPO/p).exists() else '') for p in paths]
   lines += ['']
- GUIDE.write_text('\n'.join(lines)+'\n')
+ GUIDE.write_text('\n'.join(lines)+'\n', encoding='utf-8')
  print('已刷新 %d 条文件路径；HEAD %s。没有读取其正文。' % (len(rows), head[:8]))
  if args.topic:
   title, paths = TOPICS[args.topic]

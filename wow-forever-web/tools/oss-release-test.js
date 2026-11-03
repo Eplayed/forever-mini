@@ -296,10 +296,11 @@ const oss = require(MINI_SERVICE);
      （以前这里写死"7 入口"，加一类分片就假红一次——同一个毛病别再犯） */
   const expectFiles = Object.keys(man.fetch).length + idx.items.length * 2
     + man.counts.spellClasses + man.counts.classes + (man.counts.bisSets || 0)
-    + (man.counts.professions || 0) + (man.counts.macroClasses || 0);
+    + (man.counts.professions || 0) + (man.counts.macroClasses || 0)
+    + (man.counts.nameClasses || 0);
   ok('bundle 收了每个数据文件一条（' + Object.keys(man.fetch).length + ' 入口 + 副本 ' + idx.items.length
     + '×2 + 法术片 ' + man.counts.spellClasses + ' + 天赋片 ' + man.counts.classes
-    + ' + 配装片 ' + (man.counts.bisSets || 0) + '）',
+    + ' + 配装片 ' + (man.counts.bisSets || 0) + ' + 起名片 ' + (man.counts.nameClasses || 0) + '）',
     Object.keys(bundle.files).length === expectFiles,
     Object.keys(bundle.files).length + ' ≠ ' + expectFiles);
   const ptrPath = path.join(good.envDir, 'oss-build', 'beta', 'manifest.json');
@@ -1503,15 +1504,33 @@ const oss = require(MINI_SERVICE);
     });
   }, () => '底图也绕过了写授权闸');
 
-  await step('底图通道：清单里的字节/哈希与本地文件不符 → 传前就停，0 个请求', () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-bad-'));
-    const pdir = path.join(dir, 'oss-build', 'beta', 'posters');
-    fs.mkdirSync(pdir, { recursive: true });
-    fs.writeFileSync(path.join(pdir, 'orc-000000000000.png'), Buffer.from('假图'));
-    fs.writeFileSync(path.join(pdir, 'posters.json'), JSON.stringify({
-      product: 'wow-forever-mini-model-posters', kind: 'bis-model-posters', count: 1,
-      posters: { orc: { file: 'orc-000000000000.png', bytes: 9999, sha256: '0'.repeat(64) } }
+  /* 2026-11-02：这一批 PNG 就是配装页那一格的画面（3D 整层撤了），所以发布前必须回到
+     B1 模型索引对一遍来源件——图不是从"位置核对 PASS 的那一件"渲出来的就不许上线。 */
+  const regIndex = (dir) => {
+    const md = path.join(dir, 'oss-build', 'beta', 'bis', 'models');
+    fs.mkdirSync(md, { recursive: true });
+    fs.writeFileSync(path.join(md, 'index.json'), JSON.stringify({
+      product: 'wow-forever-mini-models', kind: 'bis-models-index', formatVersion: 'glb-png-v1',
+      assetDir: 'assets/models/real/', counts: { models: 1, bytes: 123 },
+      models: [{ setId: 'warrior', faction: 'alliance', file: 'warrior-alliance-000000000000.glb',
+        pngSha256: '0'.repeat(64), pngBytes: 123, placementVerdict: 'PASS', dollSnapshot: [] }]
     }));
+  };
+  const posterFixture = (dir, over) => {
+    const pdir = path.join(dir, 'oss-build', 'beta', 'posters');
+    const buf = Buffer.from('假图');
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, 'warrior-alliance-000000000000.png'), buf);
+    const one = { file: 'warrior-alliance-000000000000.png', bytes: buf.length,
+      sha256: crypto.createHash('sha256').update(buf).digest('hex'),
+      sourceModel: { setId: 'warrior', faction: 'alliance', pngSha256: '0'.repeat(64) } };
+    Object.keys(over || {}).forEach((k) => { one[k] = over[k]; });
+    fs.writeFileSync(path.join(pdir, 'posters.json'), JSON.stringify({
+      product: 'wow-forever-mini-model-posters', kind: 'bis-model-posters', formatVersion: 'png-alpha-v1',
+      count: 1, posters: { 'warrior-alliance': one }
+    }));
+  };
+  const postersRefused = (dir) => {
     const st = fakeOss();
     return withEnv(Object.assign({}, NO_MARK, fixtureEnv(dir), { WOW_OSS_ENV: F, WOW_ALLOW_CROSS_CREDS: '1' }), () => {
       ossTool.setTransportForTest(st.transport);
@@ -1520,7 +1539,28 @@ const oss = require(MINI_SERVICE);
         return rc === 1 && st.counts.PUT === 0;
       });
     });
+  };
+
+  await step('底图通道：清单里的字节/哈希与本地文件不符 → 传前就停，0 个请求', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-bad-'));
+    regIndex(dir);
+    posterFixture(dir, { bytes: 9999 });
+    return postersRefused(dir);
   }, () => '对不上清单的底图照样往上灌');
+
+  await step('底图通道：来源件不在 B1 索引里（没登记过的图）→ 传前就停，0 个请求', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-noreg-'));
+    regIndex(dir);
+    posterFixture(dir, { sourceModel: { setId: 'mage', faction: 'horde', pngSha256: '0'.repeat(64) } });
+    return postersRefused(dir);
+  }, () => '没登记过来源的底图也能发出去');
+
+  await step('底图通道：来源件哈希与索引不符（图不是从登记那一件渲的）→ 传前就停，0 个请求', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pos-sha-'));
+    regIndex(dir);
+    posterFixture(dir, { sourceModel: { setId: 'warrior', faction: 'alliance', pngSha256: 'f'.repeat(64) } });
+    return postersRefused(dir);
+  }, () => '换了来源件还当同一张发');
 
   /* ================= 7. 回滚核实目标批次 ================= */
   process.stdout.write('\n回滚：先核目标批次完整，再动指针\n');

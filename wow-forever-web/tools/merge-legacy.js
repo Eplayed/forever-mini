@@ -259,13 +259,20 @@ if (officialTotal !== regular.length) {
 }
 /* 每项给几点，两个说法现在能并起来看清楚了：客户端那个字段名叫 point_per_challenge、值却是 16，
    而官方页的 16 是"每个角色最多花 16 点"——它本来就是上限，不是每项的点数。
-   旧说法不删，原样留在 clientRulePointPerChallenge 与下面这段记录里。 */
-const rulesConflict = ('每项挑战给多少点有过两个说法：客户端给的字段写 ' + rules.point_per_challenge +
+   旧说法不删，原样留在 clientRulePointPerChallenge 与下面这段记录里。
+   2026-11-03：上游把这条也收敛了——客户端字段改写 1、那条非 1 点的特殊条目也没了，
+   两个来源说法一致。没有活冲突（无偏差条目且两值相等）就不写 rulesConflict：
+   build-data.js 会拦"声明了冲突却没有任何偏差条目"；上一次分歧的原话在
+   docs/VERIFY-控制台总舱-2026-11-03.md 补记与 git 历史里留档。 */
+const rulesConflictLive = pointVariants.length > 0 ||
+  (rules.point_per_challenge !== undefined && +rules.point_per_challenge !== +modalPoint);
+const rulesConflict = rulesConflictLive ? (
+  '每项挑战给多少点有过两个说法：客户端给的字段写 ' + rules.point_per_challenge +
   ' 点，明细里 ' + regular.length + ' 条各写 ' + modalPoint + ' 点' +
   (pointVariants.length ? '、' + pointVariants.map((v) => v.count + ' 条写 ' + v.points + ' 点').join('、') : '') +
   '。官方那篇说清楚了：每完成一项挑战获得一点传承点数，而 ' + rules.launch_spending_cap +
   ' 是每个角色最多能花的点数——客户端那个字段名叫每项点数，值其实是上限。' +
-  '两个来源的原始值都留着，界面按每条自己的点数摆。');
+  '两个来源的原始值都留着，界面按每条自己的点数摆。') : null;
 const gateByTree = {};
 trees.forEach((t) => {
   const v = {};
@@ -302,8 +309,9 @@ const out = {
       launchSpendingCap: rules.launch_spending_cap === undefined ? null : rules.launch_spending_cap,
       launchSpendingCapSource: '官方那篇同一条：游戏推出时每个角色最多使用 16 点',
       launchEarnableTotal: rules.launch_earnable_total === undefined ? null : rules.launch_earnable_total,
-      launchEarnableTotalNote: '客户端给的这个数是' + chItems.length + ' 条条目的点数合计（含那条 16 点的测试参与记录），' +
-        '不是"人人可得 81 点"，也不是挑战条数。常规 ' + regular.length + ' 条各 1 点，合计 ' + regularSum + ' 点。',
+      launchEarnableTotalNote: '客户端给的这个数是' + chItems.length + ' 条条目的点数合计' +
+        (specials.length ? '（含点数不是 ' + modalPoint + ' 点的那 ' + specials.length + ' 条特殊条目）' : '') +
+        '，不是"人人可得 81 点"，也不是挑战条数。常规 ' + regular.length + ' 条各 ' + modalPoint + ' 点，合计 ' + regularSum + ' 点。',
       unlock: '首次拿到任意一点传承点数就开放；多数人是第一个角色到 25 级，' +
         '也可以用非采集类主专业练到 150、或把整张世界地图探完来拿到第一点。',
       unlockLevel: 'L0', unlockSource: OFFICIAL.zhTw, unlockCheckedAt: OFFICIAL.checkedAt,

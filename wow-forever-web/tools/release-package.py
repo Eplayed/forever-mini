@@ -138,7 +138,21 @@ def sha256_file(p, buf=1024 * 1024):
     return h.hexdigest()
 
 
+def _node_tool(name):
+    """npm/npx 在 Windows 上是 .cmd，CreateProcess 不解析——必须给全路径（2026-11-03：
+    这台 Windows 首次跑打包就栽在这；10-28 之前的包都是 Mac 那台打的，没暴露）。"""
+    hit = shutil.which(name)
+    if hit:
+        return hit
+    for d in (os.environ.get("ProgramFiles") or r"C:\Program Files", r"D:\Program Files"):
+        p = os.path.join(d, "nodejs", name + (".cmd" if name in ("npm", "npx") else ".exe"))
+        if os.path.isfile(p):
+            return p
+    return name
+
+
 def run(cmd, cwd):
+    cmd = [_node_tool(cmd[0])] + cmd[1:]
     print("  $ " + " ".join(cmd))
     r = subprocess.run(cmd, cwd=cwd)
     if r.returncode != 0:

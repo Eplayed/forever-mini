@@ -63,6 +63,9 @@ python3 tools/build-bis-placeholder-model.py  # 重烘配装 3D 的**占位**模
 python3 tools/register-bis-models.py          # 只登记自产占位进 art.json.bisModels
 python3 tools/prepare-hunter-models.py        # 第七包猎人 GLB 坐标校正并留作诊断；第八轮位置未通过，不登记入站
 python3 tools/build-bis-3d-jobs.py --check    # 其余套装的 Windows 导出任务清单与当前 bis.json 对拍
+python3 tools/render-bis-posters.py --per-set # 读 B1 模型索引逐件渲透明底 PNG（小程序配装页那一格，2026-11-02 起取代 3D）
+                                                # 键 <setId>|<阵营>，取景按实测像素迭代收敛；产物落 for-mini/oss-build/{env}/posters/，
+                                                # 发布用 `node tools/oss-release.js posters --env beta`，地址由 bis/index.json 的 posterLink 下发
 python3 tools/extract-gi-pets.py                 # GI 的 PetData.lua → upstream/gi-pets.json（dcn/den 成句描述一条不取，图标号先拿客户端 listfile 翻成键名）
 python3 tools/merge-pets.py                      # → app/data/pets.json（18 家族 / 22 技能；全部 L1，未回客户端表核）
 python3 tools/extract-df-loot.py [--src <AddOns>] [--show]  # DF 的 Data_DungeonLoot.lua → upstream/df-dungeon-loot.json

@@ -12,12 +12,14 @@ const MINI = path.resolve(WEB, '..', 'for-mini');
 const OSS_DIR = path.join(MINI, 'oss-preview');
 const SNAP_DIR = path.join(MINI, 'data');
 
-/* 词条快照挑多少条（2026-10-22 从 60 降到 48）：主包 60 KB 这一格是硬的，
-   里面现在装了三样东西——词条样本、38 本副本索引、10 个种族的完整特长。
-   副本索引和种族特长是"要么全有要么没有"的完整数据，词条样本本来就是 215 条里挑的一部分
-   （离线时少 12 条样本，页面照样能搜、搜到的是这 48 条），所以让路的只能是它。
-   要恢复 60 条就得先把别处减下来，别把预算改成 72 KB 了事——那条数字是给主包体积兜底的。 */
-const SNAPSHOT_TERMS = Number(process.argv[2] || 48);
+/* 词条快照挑多少条（2026-10-22 从 60 降到 48；2026-11-03 再降到 36）：
+   主包 60 KB 这一格是硬的，里面现在装了四样东西——词条样本、38 本副本索引、
+   10 个种族的完整特长、九职业起名词库的离线小池（每专精 5 条）。
+   副本索引、种族特长、起名离线池是"要么全有要么没有"的完整数据，词条样本本来就是
+   215 条里挑的一部分（离线时少 12 条样本，页面照样能搜、搜到的是这 36 条），
+   所以两次让路的都是它。要恢复 48 条就得先在别处减下来，别把预算改成 72 KB 了事
+   ——那条数字是给主包体积兜底的。 */
+const SNAPSHOT_TERMS = Number(process.argv[2] || 36);
 const SNAPSHOT_BUDGET_KB = 60;
 
 const read = (p) => JSON.parse(fs.readFileSync(path.join(DATA, p), 'utf8'));
@@ -393,6 +395,43 @@ const miniSpells = {
   spells: spellList
 };
 
+/* —— 起名词库（2026-11-03）——
+   真源 app/data/name-generator.json（站主提供，1400 条创意名，非官方内容）。
+   完整库走分发层（tools/oss-release.js 的起名线，names/index.json + names/set/{class}.json）；
+   这里只派生主包离线小池：每专精前 NAMES_SNAPSHOT_PER_TALENT 条，断网也能摇——
+   预算吃紧（见文件头 SNAPSHOT_TERMS 那条注释），离线池就是小的，页面不许假装它是全量。 */
+const NAMES_SNAPSHOT_PER_TALENT = 5;
+const nameSrc = read('name-generator.json');
+const nameClassesSrc = nameSrc.classes || [];
+if (!nameClassesSrc.length) errs.push('起名词库 0 个职业，起名页没有内容可发');
+nameClassesSrc.forEach((c) => {
+  if (classIds.indexOf(c.id) < 0) errs.push(`起名词库职业 ${c.id} 不在 classes.json 里`);
+  if (!(c.talents || []).length) errs.push(`起名词库职业 ${c.id} 一个专精都没有`);
+  (c.talents || []).forEach((t) => {
+    if (!Array.isArray(t.names) || !t.names.length) errs.push(`起名词库 ${c.id}/${t.id} 的名单是空的`);
+    t.names.forEach((n) => {
+      if (!String(n || '').trim()) errs.push(`起名词库 ${c.id}/${t.id} 有空名`);
+    });
+  });
+});
+const miniNamesSnapshot = {
+  schemaVersion: 1,
+  product: 'wow-forever-mini',
+  kind: 'names-index',
+  snapshot: true,
+  meta: { checkedAt: (nameSrc.meta || {}).checkedAt || null, perTalent: NAMES_SNAPSHOT_PER_TALENT },
+  counts: { classes: nameClassesSrc.length },
+  classes: nameClassesSrc.map((c) => ({
+    classId: c.id,
+    className: c.name,
+    talents: (c.talents || []).map((t) => ({
+      talentId: t.id,
+      talentName: t.name,
+      names: (t.names || []).slice(0, NAMES_SNAPSHOT_PER_TALENT)
+    }))
+  }))
+};
+
 if (errs.length) {
   errs.slice(0, 20).forEach((e) => console.error('✗ ' + e));
   console.error(`导出失败：${errs.length} 项不合规`);
@@ -488,11 +527,12 @@ const gBytes = writeSnapshot('forever-glossary-snapshot.js', miniGlossary);
 const mBytes = writeSnapshot('forever-meta-snapshot.js', miniMeta);
 const dBytes = writeSnapshot('forever-dungeon-snapshot.js', snapshotDungeonIndex);
 const cBytes = writeSnapshot('forever-class-snapshot.js', miniClassSnapshot);
-const snapBytes = gBytes + mBytes + dBytes + cBytes;
+const nBytes = writeSnapshot('forever-names-snapshot.js', miniNamesSnapshot);
+const snapBytes = gBytes + mBytes + dBytes + cBytes + nBytes;
 const kb = (b) => (b / 1024).toFixed(1) + ' KB';
 
 if (snapBytes > SNAPSHOT_BUDGET_KB * 1024) {
-  console.error(`✗ 快照体积 ${kb(snapBytes)}（词条 ${kb(gBytes)} + meta ${kb(mBytes)} + 副本索引 ${kb(dBytes)} + 职业 ${kb(cBytes)}）超过主包预算 ${SNAPSHOT_BUDGET_KB} KB，减少 SNAPSHOT_TERMS 或精简字段`);
+  console.error(`✗ 快照体积 ${kb(snapBytes)}（词条 ${kb(gBytes)} + meta ${kb(mBytes)} + 副本索引 ${kb(dBytes)} + 职业 ${kb(cBytes)} + 起名 ${kb(nBytes)}）超过主包预算 ${SNAPSHOT_BUDGET_KB} KB，减少 SNAPSHOT_TERMS 或 NAMES_SNAPSHOT_PER_TALENT，不抬预算`);
   process.exit(1);
 }
 
@@ -504,6 +544,6 @@ console.log(`  oss-preview/spells.json    ${kb(fs.statSync(path.join(OSS_DIR, 's
 console.log(`  oss-preview/classes.json   ${kb(fs.statSync(path.join(OSS_DIR, 'classes.json')).size)}（${miniClasses.races.length} 种族 / ${miniClasses.classes.length} 职业）`);
 console.log(`  oss-preview/talents.json   ${kb(fs.statSync(path.join(OSS_DIR, 'talents.json')).size)}（${miniTalents.classes.length} 份天赋树，只走线上分片）`);
 console.log(`  oss-preview/guide.json     ${kb(fs.statSync(path.join(OSS_DIR, 'guide.json')).size)}（宏 ${(guide.macros || []).length} 条 / 插件 ${(guide.addons || []).length} 条）`);
-console.log(`  快照词条 ${snapshotItems.length} 条 ${kb(gBytes)} · meta ${kb(mBytes)} · 副本索引 ${snapshotDungeonIndex.items.length} 本 ${kb(dBytes)} · 职业 ${miniClassSnapshot.classes.length} 格 / ${miniClassSnapshot.races.length} 种族 ${kb(cBytes)}`);
+console.log(`  快照词条 ${snapshotItems.length} 条 ${kb(gBytes)} · meta ${kb(mBytes)} · 副本索引 ${snapshotDungeonIndex.items.length} 本 ${kb(dBytes)} · 职业 ${miniClassSnapshot.classes.length} 格 / ${miniClassSnapshot.races.length} 种族 ${kb(cBytes)} · 起名离线池 ${miniNamesSnapshot.classes.reduce((t, c) => t + c.talents.reduce((s, x) => s + x.names.length, 0), 0)} 名 ${kb(nBytes)}`);
 console.log(`  主包快照合计 ${kb(snapBytes)}（预算 ${SNAPSHOT_BUDGET_KB} KB，用了 ${Math.round(snapBytes / (SNAPSHOT_BUDGET_KB * 1024) * 100)}%）`);
 console.log(`  覆盖率 L0 ${coverage.L0} / L1 ${coverage.L1} / L2 ${coverage.L2} / L3 ${coverage.L3}（共 ${coverage.total}）`);

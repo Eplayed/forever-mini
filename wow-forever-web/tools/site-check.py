@@ -1703,8 +1703,11 @@ def test_legacy_app(browser, base):
         h2: (c.querySelector('h2') || {}).innerText }; }""")
     R = L["meta"].get("rules") or {}
     C = L["meta"].get("counts") or {}
-    check("常见问答那一段在，且正好是四条（多了就是往里塞没核实的话）",
-          faq and len(faq["dts"]) == 4, json.dumps((faq or {}).get("dts"), ensure_ascii=False))
+    # 条数跟着数据走：三条固定问答 + 有特殊条目才有的第四条（页面 v-if 渲染）。
+    # 2026-11-03 上游把那条非 1 点的特殊条目收掉后就是三条——写死 4 会把数据变化当页面坏。
+    want_faq = 3 + (1 if (C.get("challengesSpecial") or 0) > 0 else 0)
+    check("常见问答那一段在，条数等于数据算出的 %d 条（多了就是往里塞没核实的话）" % want_faq,
+          faq and len(faq["dts"]) == want_faq, json.dumps((faq or {}).get("dts"), ensure_ascii=False))
     need = [str(R.get("pointPerChallenge")), str(C.get("challengesRegular")),
             str(R.get("launchSpendingCap")), str(C.get("challengePointsRegular")),
             str(C.get("challengePointSum")), str(C.get("challenges"))]
@@ -1827,9 +1830,12 @@ def test_legacy_app(browser, base):
           json.dumps({k: mm[k] for k in ("over", "innerW", "cells", "wrap", "cut")}, ensure_ascii=False))
     check("传承页 375：胶囊、组头、专长格、勾选框、加减按钮、方案条按钮都够 44px 点击区",
           not mm["small"], "%d 个不够 44px：%s" % (len(mm["small"]), mm["small"][:6]))
-    check("375 上规划器的两个按钮与那条单列记录都在（窄屏不是把功能藏掉）",
-          mm["act"] == 2 and mm["plans"] >= 3 and mm["sp"] >= 1,
-          "加减 %d 个 / 方案条 %d 个 / 单列 %d 条" % (mm["act"], mm["plans"], mm["sp"]))
+    # 单列记录=那条特殊条目的表；上游收掉它之后（2026-11-03）数据没有就不该有行，
+    # 有才要求 ≥1——跟 legacy.json 的 challengesSpecial 对表，不写死。
+    want_sp = 1 if (C.get("challengesSpecial") or 0) > 0 else 0
+    check("375 上规划器的两个按钮与方案条都在，特殊条目单列按数据说该有的行数在（窄屏不是把功能藏掉）",
+          mm["act"] == 2 and mm["plans"] >= 3 and mm["sp"] >= want_sp,
+          "加减 %d 个 / 方案条 %d 个 / 单列 %d 条（要 ≥%d）" % (mm["act"], mm["plans"], mm["sp"], want_sp))
     snap(mp, path=os.path.join(SHOT_DIR, "app-legacy-m.png"), full_page=True)
     mctx.close()
 

@@ -18,6 +18,34 @@ class AdminTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             catalog.records("items", "x" * 81)
 
+    def test_pipeline_whitelist_gates(self):
+        """2026-11-03 总舱开发：日更链与双管道动作链的白名单判据（jobs.allowed）。
+           闸门步在白名单里可发起，但 mini-rollback 的批次号参数必须 12 位十六进制。"""
+        for action in ("web-build", "web-package", "web-verify", "web-publish",
+                       "mini-export", "mini-build", "mini-upload"):
+            self.assertIsNone(jobs.allowed(action), action)
+        self.assertIsNone(jobs.allowed("daily", ""))
+        self.assertIsNone(jobs.allowed("daily", "--quick"))
+        self.assertIsNone(jobs.allowed("daily", "--no-gate"))
+        self.assertIsNotNone(jobs.allowed("daily", "--bogus"))
+        self.assertIsNone(jobs.allowed("mini-rollback", "d3e222b74dc1"))
+        for bad in ("zz", "D3E222B74DC1", "d3e222b74dc", "d3e222b74dc11", ""):
+            self.assertIsNotNone(jobs.allowed("mini-rollback", bad), bad)
+        self.assertIsNotNone(jobs.allowed("no-such-action"))
+
+    def test_ledger_append_writes_jsonl(self):
+        """发布账 append-only：每次闸门步成功追加一行 JSON，不覆盖历史。"""
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "ledger.jsonl")
+            with patch.object(jobs, "LEDGER", path):
+                jobs.ledger_append("web", "4e216292aaaa", "网页 ④ 发布（闸门）完成")
+                jobs.ledger_append("mini", "d3e222b74dc1", "回滚到 d3e222b74dc1")
+            with open(path, encoding="utf-8") as f:
+                rows = [json.loads(x) for x in f if x.strip()]
+        self.assertEqual([r["lane"] for r in rows], ["web", "mini"])
+        self.assertEqual(rows[1]["buildId"], "d3e222b74dc1")
+        self.assertIn("at", rows[0])
+
     def test_scan_items_stages_exact_diff_without_touching_product(self):
         with tempfile.TemporaryDirectory() as directory:
             data = os.path.join(directory, "data")

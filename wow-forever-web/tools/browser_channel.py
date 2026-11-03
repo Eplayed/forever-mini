@@ -28,9 +28,25 @@ def is_default():
     return channel() == DEFAULT
 
 
+def _system_chrome_missing():
+    """系统 Chrome 找不找得到：只查 Linux 侧（WSL）。Windows 侧 channel=chrome 一直由
+       playwright 自己找注册表/Program Files，别在这猜——猜错反而把好端端的 Windows 跑法改坏。"""
+    import shutil
+    return shutil.which("google-chrome") is None and shutil.which("google-chrome-stable") is None
+
+
+def using_bundled():
+    """真跑的时候用的是不是 playwright 自带 chromium（WSL 里没有系统 Chrome 时的回退）。"""
+    import sys
+    return sys.platform.startswith("linux") and channel() == DEFAULT and _system_chrome_missing()
+
+
 def banner():
     """给人看的一行：谁在跑这一轮界面回归。换过浏览器时这句话必须显眼。"""
     c = channel()
+    if using_bundled():
+        return ("浏览器 playwright 自带 chromium（WSL 里没有系统 Chrome，%s 缺席的回退；"
+                "渲染行为可能与 Windows 侧的 Chrome 有差别）" % DEFAULT)
     if is_default():
         return "浏览器 %s（默认）" % c
     return ("浏览器 %s（由 %s 指定，**不是 Chrome**：这一轮的界面结论只代表 %s，"
@@ -40,4 +56,6 @@ def banner():
 def launch(pw, **kw):
     """统一入口：channel 与 headless 只在这一处定，别每个脚本各抄一份。"""
     kw.setdefault("headless", True)
+    if using_bundled():
+        return pw.chromium.launch(**kw)
     return pw.chromium.launch(channel=channel(), **kw)

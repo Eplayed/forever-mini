@@ -90,10 +90,17 @@ const BUDGET_KB = {
   guide: 32,
   /* 配装线（2026-10-26）：索引 38 套约 5 KB；共享物品表 829 件（位置数组存）；
      单套一片最大 16.6 KB（alts 那 175 个 ID 占大头）。 */
+  /* 配装线索引（2026-10-26 定 24 KB 时它只有 5 KB：38 套 + 部位桥）。
+     2026-11-01 加了出处跳转 dropLink（114 件 → 本站副本 id）涨到 22.4 KB；
+     2026-11-02 加逐件底图 posterLink（76 条，值是带内容哈希的文件名，这一层没法再缩——
+     哈希就是这张图的身份）后实测 28,632 B（28.0 KB）。抬到 32 KB 并留这条：
+     它只在进配装页那一次下（不是冷启动路径），而这一页同一次还要下 118 KB 的共享物品表
+     和一张约 250 KB 的图，索引不是这一页的流量大头。哪天再顶破，方向是把两张桥表
+     单独分一片（点开哪套才取哪套的），不是继续抬这条。 */
+  'bis/index': 32,
   /* bisItems 是"进这一页要下一次"的共享表：830 件 × (名字/品质/装等/图标键/最多 4 条属性行)。
      2026-10-26 实测 118 KB。哪天它顶破这条，说明属性行该拆成单独一片（按部位或按职业），
      由构建来提醒，不等手机上出问题。 */
-  'bis/index': 24,
   bisItems: 128,
   bisSet: 28,
   /* 专业线（2026-10-27）：索引 13 个专业约 6 KB；分片自成一格（图标/材料/商人/图纸字典都就地带），
@@ -105,7 +112,11 @@ const BUDGET_KB = {
      不是把预算再抬——手机端点开一个专业付一次这个数，得有人守着。 */
   profSet: 80,
   'macros/index': 24,
-  macroClass: 48
+  macroClass: 48,
+  /* 起名词库线（2026-11-03）：索引 9 职业条约 3 KB；单片一个职业（3–4 专精 × 50 名 ≈ 5 KB）。
+     80 / 16 给"站主往库里补名字"留余量；哪天顶破，方向是按专精拆片，不是抬预算。 */
+  'names/index': 80,
+  nameClass: 16
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -126,7 +137,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    不进 oss-preview 导出产物，理由同 items 那两条。 */
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
-const BASE_INPUTS = ['macros.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -448,7 +459,9 @@ function reExportCompare() {
     });
     return { diffs, outputs, tool: 'wow-forever-web/tools/export-mini.js' };
   } finally {
-    cp.execSync('rm -rf ' + JSON.stringify(tmp));
+    /* Windows 上没有 rm 命令（2026-11-03 实测 build 在这台机器上被 finally 里的
+       rm -rf 整个打红）：清临时目录改用 fs.rmSync，跨平台一条路。 */
+    fs.rmSync(tmp, { recursive: true, force: true });
   }
 }
 
@@ -899,6 +912,9 @@ function buildBatch(env, opts) {
   let bisIndexObj = null;
   let bisItemsObj = null;
   let bisAltRows = 0;
+  /* 逐件底图的账（不进清单字节，只给构建输出与门禁看）：linked=过了闸进桥表的张数，
+     skipped=每张没过闸的原因，missing=本机压根没有 posters.json */
+  const posterAgg = { linked: 0, skipped: [], missing: false };
   if (fs.existsSync(bisSrc)) {
     const bis = readJson(bisSrc);
     const bsets = bis.sets || [];
@@ -909,8 +925,24 @@ function buildBatch(env, opts) {
     } else {
       errors.push('配装：缺 app/data/professions.json，来源那一列的"专业名"没法还原（不许编一个）');
     }
+    /* 副本名按**两个键**收：本站 id 与参考站 slug。
+       bis.json 的 refs 里记的是参考站 URL 上的 slug（scrape-wclbox-bis.py 从 /fuben/<slug> 直接取的），
+       而本站有两座 id 与 slug 不同名（deathmine↔the-deadmines、the-stocks↔the-stockade）。
+       原来只按 id 查，查不到就 `|| x.id` 静默回退成英文 slug，玩家在小人上看到"副本：the-deadmines"
+       ——100 处。现在两个键都收，并且下面有一道闸：还对不上就构建失败，不再静默漏字。 */
     const dunNames = {};
-    list.forEach((d) => { dunNames[d.id] = d.nameCn; });
+    const dunBySlug = {};
+    list.forEach((d) => {
+      dunNames[d.id] = d.nameCn;
+      if (d.upstreamSlug) { dunNames[d.upstreamSlug] = d.nameCn; dunBySlug[d.upstreamSlug] = d.id; }
+    });
+    /* 跳转桥表：物品 → 本站副本 id。只在"这一行的出处就写着某座副本"时才建，
+       绝不用别的来源凑——点了跳过去却和行上那句话说的是两个地方，比不能点更糟。 */
+    const dropLink = {};
+    const dunMiss = {};
+    const dunIds = {};
+    list.forEach((d) => { dunIds[d.id] = 1; });
+    const dunIdOf = (x) => (dunIds[x.id] ? x.id : (dunBySlug[x.id] || null));
     const bisIcon = (key, why) => {
       if (!key) return null;
       const rel = 'icons/' + key + ICON_EXT;
@@ -977,7 +1009,19 @@ function buildBatch(env, opts) {
           consumables: ((st.consumables || {})[f] || []).map((x) => { needItem(x, 'bis/set/' + st.id); return x; })
         };
         const rf = refs[f] || {};
-        Object.keys(rf).forEach((k) => { needItem(k, 'bis/set/' + st.id); const v = srcStr(rf[k]); if (v) src[f][k] = v; });
+        Object.keys(rf).forEach((k) => {
+          needItem(k, 'bis/set/' + st.id);
+          const v = srcStr(rf[k]); if (v) src[f][k] = v;
+          /* 出处里凡是"某座副本"，把本站副本 id 记进桥表；一个物品被两座本提到就都记下来，
+             跳转取第一座，另一座在副本详情页那边本来也看得到 */
+          (rf[k].refs || []).forEach((x) => {
+            if (x.kind !== 'dungeon') return;
+            const did = dunIdOf(x);
+            if (!did) { dunMiss[x.id] = (dunMiss[x.id] || 0) + 1; return; }
+            if (!dropLink[k]) dropLink[k] = [];
+            if (dropLink[k].indexOf(did) < 0) dropLink[k].push(did);
+          });
+        });
         altOut[f] = (((st.alt || {})[f]) || []).map((a) => {
           if (a.item != null) needItem(a.item, 'bis/set/' + st.id);
           (a.top || []).forEach((x) => needItem(x, 'bis/set/' + st.id));
@@ -1033,6 +1077,77 @@ function buildBatch(env, opts) {
       }
       c.sets.push(s.setId);
     });
+    /* 出处里的副本引用必须能落到本站某一整座本。落不上就是"页面上写着一座我们点不开的副本"——
+       以前这种会静默回退成英文 slug 显示给玩家（the-deadmines 那 100 处），现在直接构建失败。 */
+    const missKeys = Object.keys(dunMiss);
+    if (missKeys.length) {
+      errors.push('配装：出处引用的副本对不上本站副本表：'
+        + missKeys.map((k) => k + '（' + dunMiss[k] + ' 处）').join('、')
+        + '——要么在 dungeons.json 补 upstreamSlug，要么改 bis.json 的引用，不许留着当显示文字');
+    }
+    /* 逐件底图桥表（2026-11-02 站主："BIS 配装页装备展示全部替换成样图这样的，背景透明，根据职业装备来"）。
+       以前那三道闸跑在客户端（services/bis-model.js 里比 placementVerdict 与 dollSnapshot），
+       这一版把它们搬到构建时——过不了就不进桥表，页面拿不到地址只能显示"这一格没有可显示的图"，
+       借不到"同职业另一套"来冒充当前套。构建这一步因此比 3D 那版更硬，不是更松。
+       图的来源是 oss-build/{env}/posters/（render-bis-posters.py --per-set 渲的二进制，不进 git）：
+       这台机器没跑过渲染时桥表就是空的，构建照过、页面明说没有，不许为了"看着有图"塞一张别的。 */
+    const posterLink = {};
+    const posterSkipped = [];
+    const posterMfPath = path.join(buildRoot(), env, POSTER_LOCAL, 'posters.json');
+    if (fs.existsSync(posterMfPath)) {
+      const mi = modelIndex(env);
+      const pm = readJson(posterMfPath);
+      if (pm.product !== 'wow-forever-mini-model-posters' || pm.kind !== 'bis-model-posters') {
+        errors.push('配装底图：清单 product/kind 不对（' + pm.product + '/' + pm.kind + '），先重跑 render-bis-posters.py');
+      } else if (pm.formatVersion !== 'png-alpha-v1') {
+        errors.push('配装底图：formatVersion 是 ' + pm.formatVersion + '，这一版构建只认 png-alpha-v1');
+      } else {
+        const modelOf = {};
+        (mi.models || []).forEach((m) => { modelOf[m.setId + '/' + m.faction] = m; });
+        const dollOf = {};
+        setOuts.forEach((s) => {
+          ['alliance', 'horde'].forEach((f) => { dollOf[s.setId + '/' + f] = s.byFac[f].doll; });
+        });
+        const trip = (doll) => (doll || []).map((r) => {
+          const arr = Array.isArray(r);
+          return String(arr ? r[0] : r.slot) + '|' + String(arr ? r[1] : r.cell) + '|' + String(arr ? r[2] : r.item);
+        }).sort();
+        const sameTrip = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+        Object.keys(pm.posters || {}).forEach((k) => {
+          const p = pm.posters[k] || {};
+          const sm = p.sourceModel || {};
+          const key = sm.setId + '/' + sm.faction;
+          const skip = (why) => posterSkipped.push(k + '：' + why);
+          const m = modelOf[key];
+          if (!m) { skip('这张图登记的来源件（' + key + '）不在 B1 模型索引里'); return; }
+          if (m.placementVerdict !== 'PASS') { skip('来源件的装备位置登记是 ' + m.placementVerdict + '，不是 PASS'); return; }
+          if (String(sm.pngSha256 || '') !== String(m.pngSha256 || '')) {
+            skip('这张图记录的来源模型哈希与索引不符（图 ' + String(sm.pngSha256).slice(0, 12)
+              + ' ≠ 索引 ' + String(m.pngSha256).slice(0, 12) + '）——图不是从登记的那一件渲的'); return;
+          }
+          const cur = dollOf[key];
+          if (!cur) { skip('本站这一套（' + key + '）今天已经不在名单里了'); return; }
+          if (!sameTrip(trip(m.dollSnapshot), trip(cur))) {
+            skip('来源件是按另一版名单核对的（登记 ' + trip(m.dollSnapshot).length + ' 格 · 现在 '
+              + trip(cur).length + ' 格，逐格没对上）——名单改过，这张图不再代表这一套'); return;
+          }
+          const fp = path.join(buildRoot(), env, POSTER_LOCAL, String(p.file || ''));
+          if (!p.file || p.file.indexOf('/') >= 0 || p.file.indexOf('..') >= 0 || !fs.existsSync(fp)) {
+            skip('清单指向的文件不在目录里：' + p.file); return;
+          }
+          const buf = fs.readFileSync(fp);
+          const got = sha256(buf);
+          if (buf.length !== p.bytes) { skip('字节与清单不符（' + buf.length + ' ≠ ' + p.bytes + '）'); return; }
+          if (got !== p.sha256) { skip('SHA-256 与清单不符'); return; }
+          if (String(p.file).slice(-16, -4) !== got.slice(0, 12)) { skip('文件名里那 12 位不是这份文件自己的哈希'); return; }
+          posterLink[sm.setId + '|' + sm.faction] = POSTER_URL_DIR + p.file;
+        });
+        posterAgg.linked = Object.keys(posterLink).length;
+        posterAgg.skipped = posterSkipped;
+      }
+    } else {
+      posterAgg.missing = true;
+    }
     bisIndexObj = {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-index',
       source: 'wow-forever-web/app/data/bis.json',
@@ -1048,6 +1163,12 @@ function buildBatch(env, opts) {
       },
       slotCn: (bis.meta || {}).slotCn || {},
       slotKeys: BIS_SLOT_KEYS, slotSiblings: BIS_SLOT_SIBS,
+      /* 出处跳转桥表：物品 id → 本站副本 id 数组（只收"这一行出处就写着某座副本"的）。
+         两端读同一份，页面不许自己拿出处文字去猜——那是第二次抄，迟早飘。 */
+      dropLink,
+      /* 逐件底图桥表：<setId>|<阵营> → models/posters/<带内容哈希的文件名>。
+         能进这张表的都过了上面那五道闸；进不了的这一格就是"没有图"，页面自己说，不拿别的套装顶。 */
+      posterLink,
       classes,
       sets: setOuts.map((s) => ({
         id: s.setId, cls: s.cls, clsCn: s.clsCn, mode: s.mode, level: s.level,
@@ -1239,6 +1360,7 @@ function buildBatch(env, opts) {
   const macroSrcPath = path.join(siteData(), 'macros.json');
   const macroSrc = fs.existsSync(macroSrcPath) ? readJson(macroSrcPath) : null;
   let macroIndexObj = null;
+  let namesIndexObj = null;
   if (macroSrc && Array.isArray(macroSrc.macros)) {
     const ms = macroSrc.macros;
     const seenId = {};
@@ -1351,6 +1473,80 @@ function buildBatch(env, opts) {
     errors.push('缺少宏基底 app/data/macros.json，宏命令页没有数据来源')
   }
 
+  /* —— 起名词库线（2026-11-03）——
+     真源 app/data/name-generator.json（站主提供，1400 条创意名；网页将来也吃这一份）。
+     照宏命令同一套形制：names/index.json 一张索引 + names/set/{classId}.json 九片，
+     点哪个职业才取哪一片。这里只搬运与卡口，不改写任何一条名字——
+     这是站主的创意文案，不是官方内容，界面与数据都不冒充官方。 */
+  const nameSrcPath = path.join(siteData(), 'name-generator.json');
+  const nameSrc = fs.existsSync(nameSrcPath) ? readJson(nameSrcPath) : null;
+  if (nameSrc && Array.isArray(nameSrc.classes) && nameSrc.classes.length) {
+    const nByClass = []
+    let nTalentCount = 0
+    const nameClassIcon = {}
+    ;((classIndexObj || {}).classes || []).forEach((c) => { nameClassIcon[c.classId] = c.iconKey || null })
+    nameSrc.classes.forEach((c) => {
+      const classId = String(c.id || '')
+      if (!CLASS_IDS.includes(classId)) { errors.push('起名：职业 ' + (classId || '(空)') + ' 不是本站九职业之一'); return }
+      if (nByClass.some((x) => x.classId === classId)) { errors.push('起名：职业 ' + classId + ' 重复出现'); return }
+      const talents = (Array.isArray(c.talents) ? c.talents : []).map((t) => {
+        const names = (Array.isArray(t.names) ? t.names : []).map((n) => String(n || '').trim())
+        names.forEach((n) => { if (!n) errors.push('起名：' + classId + '/' + (t.id || '?') + ' 有空名字') })
+        return { talentId: String(t.id || ''), talentName: String(t.name || ''), names: names }
+      })
+      if (!talents.length) { errors.push('起名：职业 ' + classId + ' 一个专精都没有'); return }
+      const total = talents.reduce((s, t) => s + t.names.length, 0)
+      if (!total) { errors.push('起名：职业 ' + classId + ' 一条名字都没有'); return }
+      nTalentCount += talents.length
+      nByClass.push({ classId: classId, className: String(c.name || classId), talents: talents, total: total })
+    })
+    nByClass.sort((a, b) => CLASS_IDS.indexOf(a.classId) - CLASS_IDS.indexOf(b.classId))
+    nByClass.forEach((c) => {
+      const obj = {
+        schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'names-class',
+        classId: c.classId, className: c.className, talents: c.talents,
+        counts: { names: c.total, talents: c.talents.length }
+      }
+      pushObj('namesClass:' + c.classId, 'names/set/' + c.classId + '.json', obj, {
+        records: c.total, budget: 'nameClass'
+      })
+    })
+    const nNamesTotal = nByClass.reduce((t, c) => t + c.total, 0)
+    namesIndexObj = {
+      schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'names-index',
+      source: 'wow-forever-web/app/data/name-generator.json',
+      meta: {
+        checkedAt: (nameSrc.meta || {}).checkedAt || null,
+        title: '角色起名'
+      },
+      classes: nByClass.map((c) => {
+        const iconKey = nameClassIcon[c.classId] || null
+        if (!iconKey) errors.push('起名：职业 ' + c.classId + ' 在 classIndex 里没有图标键，职业条会缺图')
+        else useIcon(iconKey, 'names/index')
+        return {
+          classId: c.classId, className: c.className, count: c.total,
+          talents: c.talents.length, iconKey: iconKey,
+          path: 'names/set/' + c.classId + '.json'
+        }
+      }),
+      counts: { classes: nByClass.length, talents: nTalentCount, names: nNamesTotal }
+    }
+    pushObj('nameGenerator', 'names/index.json', namesIndexObj, {
+      records: nByClass.length, budget: 'names/index'
+    })
+    /* 起名是纯创意文案，没有"来源/抓取日"逐条可追（真源就是站主这一份），
+       所以宏那段"无来源不下发"的闸在这里不适用；但交易类词照拦——
+       起名免费，界面不许长出收费/会员的味道。 */
+    entries.forEach((e) => {
+      if (!e.obj || (e.key !== 'nameGenerator' && String(e.key).indexOf('namesClass:') !== 0)) return
+      if (/收费|购买|会员|付费/.test(JSON.stringify(e.obj.talents || e.obj.classes || {}))) {
+        errors.push('起名：' + e.path + ' 出现交易类词（起名一律免费）')
+      }
+    })
+  } else {
+    errors.push('缺少起名基底 app/data/name-generator.json，起名页没有数据来源')
+  }
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
@@ -1414,6 +1610,18 @@ function buildBatch(env, opts) {
       const e = byKey['macroClass:' + it.classId];
       if (!e) { errors.push('宏索引里 ' + it.classId + ' 没有对应的职业片'); return; }
       const sBuf = dumpFlat(e.obj);
+      const sm = md5Of(sBuf);
+      it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
+    });
+  }
+
+  /* 起名：校验值随索引下发，点开哪个职业取哪一片（与宏同一套契约；
+     分片不是位置数组，所以用 dump 不是 dumpFlat——注入与客户端见到的字节必须是同一种） */
+  if (namesIndexObj) {
+    namesIndexObj.classes.forEach((it) => {
+      const e = byKey['namesClass:' + it.classId];
+      if (!e) { errors.push('起名索引里 ' + it.classId + ' 没有对应的职业片'); return; }
+      const sBuf = dump(e.obj);
       const sm = md5Of(sBuf);
       it.shardEtag = sm.etag; it.shardMd5 = sm.md5; it.shardBytes = sBuf.length;
     });
@@ -1543,6 +1751,9 @@ function buildBatch(env, opts) {
       bisItems: bisItemsObj ? bisItemsObj.count : 0,
       bisAltRows,
       bisItemNoBase: (typeof itemMiss !== 'undefined' && itemMiss) ? itemMiss.noBase : 0,
+      /* 逐件底图（2026-11-02 那一层）：进桥表的张数与被闸拦下的张数 */
+      bisPosters: posterAgg.linked,
+      bisPosterSkipped: posterAgg.skipped.length,
       /* 专业线：专业数 / 配方数 / 无限新增 / 采集点 / 分片数（全部构建时数出来，不抄基底 counts） */
       professions: profIndexObj ? profIndexObj.counts.professions : 0,
       profRecipes: profIndexObj ? profIndexObj.counts.recipes : 0,
@@ -1553,6 +1764,7 @@ function buildBatch(env, opts) {
          注意别和下面那个 `macros` 撞名——那个是旧指南页 guide.json.macros 的条数，至今 0 条。 */
       macroSent: macroIndexObj ? macroIndexObj.counts.sent : 0,
       macroClasses: macroIndexObj ? macroIndexObj.counts.classes : 0,
+      nameClasses: namesIndexObj ? namesIndexObj.counts.classes : 0,
       races: classIndexObj.counts.races,
       classes: classIndexObj.counts.classes,
       macros: (guidePack.macros || []).length,
@@ -1607,7 +1819,8 @@ function buildBatch(env, opts) {
       bisIndex: bisIndexObj ? shared(pickFile('bisIndex')) : undefined,
       bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined,
       professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined,
-      macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined
+      macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined,
+      nameGenerator: namesIndexObj ? shared(pickFile('nameGenerator')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
@@ -1617,7 +1830,7 @@ function buildBatch(env, opts) {
   }
   if (bundleBuf.length > BUDGET_KB.bundle * 1024) errors.push('files.json 超过 ' + BUDGET_KB.bundle + ' KB');
   if (errors.length) return { errors };
-  return { errors: [], buildId, ns, entries, manifest, bundleBuf, bundlePath, assetUse, assetMissing };
+  return { errors: [], buildId, ns, entries, manifest, bundleBuf, bundlePath, assetUse, assetMissing, posterAgg };
 }
 
 function writeBatch(env, built, flags) {
@@ -2061,6 +2274,13 @@ function cmdBuild(env, opts) {
   logLine('  素材引用：' + built.manifest.assets.count + ' 个文件 / ' + kb(built.manifest.assets.bytes)
     + ' KB 在 ' + built.ns + '/assets/ 下（用 `assets --env ' + env + '` 发），缺登记 ' + built.manifest.assets.missing + ' 条');
   logLine('  事实核对日期：最新 ' + (built.manifest.factDates.latest || '未记录') + '（清单内无生成时间字段，发布时刻看服务端 Last-Modified）');
+  logLine('  配装：' + built.manifest.counts.bisSets + ' 套 · 共享物品 ' + built.manifest.counts.bisItems
+    + ' 件 · 逐件底图进桥表 ' + built.manifest.counts.bisPosters + ' 张'
+    + (built.posterAgg.missing
+      ? '（本机没有 oss-build/' + env + '/posters/posters.json：这一格会显示"没有可显示的图"。要出图先跑 render-bis-posters.py --per-set）'
+      : (built.posterAgg.skipped.length
+        ? ' · 被闸拦下 ' + built.posterAgg.skipped.length + ' 张：' + built.posterAgg.skipped.slice(0, 4).join('；') : ''))
+    + '（发图用 `posters --env ' + env + '`）');
   logLine('  功能开关：' + kb(flags.buf.length) + ' KB · ' + Object.keys(flags.obj.features).length
     + ' 个（开 ' + flags.obj.counts.on + '）→ ' + path.relative(REPO, path.join(buildRoot(), env, FLAGS_FILE))
     + '（发它用 `flags --env ' + env + '`，与这批数据互不牵扯）');
@@ -2194,6 +2414,8 @@ const MODEL_INDEX_KEY = 'bis/models/index.json';
    按种族 6 张，名字同样带内容哈希——重渲一次就是换一个名字，不许覆盖已发出去的对象。 */
 const POSTER_DIR = 'assets/models/posters';
 const POSTER_LOCAL = 'posters';
+/* 桥表里存的是相对 assets/ 的路径（与素材层同一套拼法，客户端 assetUrl 直接拼） */
+const POSTER_URL_DIR = 'models/posters/';
 const MODEL_MIME = 'model/gltf-binary';
 
 /* 索引读一次，形状不对就直接返回错误——不发任何远端请求 */
@@ -2360,22 +2582,34 @@ async function cmdPosters(env, opts) {
   try { mf = JSON.parse(fs.readFileSync(mfPath, 'utf8')); } catch (e) { logLine('✗ 底图清单不是合法 JSON：' + e.message); return 1; }
   const errs = [];
   if (mf.product !== 'wow-forever-mini-model-posters' || mf.kind !== 'bis-model-posters') errs.push('底图清单 product/kind 不对');
-  const races = Object.keys(mf.posters || {}).sort();
-  if (!races.length) errs.push('底图清单是空的');
-  if (mf.count !== races.length) errs.push('清单写 ' + mf.count + ' 张，实际 ' + races.length + ' 张');
+  const mfItems = Object.keys(mf.posters || {}).sort();
+  if (!mfItems.length) errs.push('底图清单是空的');
+  if (mf.count !== mfItems.length) errs.push('清单写 ' + mf.count + ' 张，实际 ' + mfItems.length + ' 张');
+  /* 发出去之前回到 B1 索引对一遍：这张图登记的来源件必须是 PASS 过位置核对的那一件，
+     哈希也要是同一条。不然就是"把一个没验收的形象发到线上"——
+     2026-10-28 第八轮就是因为这一条把两份 MARGINAL 的模型撤下过。 */
+  const mi = modelIndex(env);
+  const modelOf = {};
+  (mi.models || []).forEach((m) => { modelOf[m.setId + '/' + m.faction] = m; });
   const items = [];
-  races.forEach((r) => {
-    const p = mf.posters[r];
+  mfItems.forEach((k) => {
+    const p = mf.posters[k];
+    const sm = p.sourceModel || {};
+    const m = modelOf[sm.setId + '/' + sm.faction];
+    if (mi.errors.length) errs.push(k + '：B1 模型索引读不了（' + mi.errors[0] + '），没法核对来源件');
+    else if (!m) errs.push(k + '：来源件 ' + sm.setId + '/' + sm.faction + ' 不在 B1 索引里，这张图没登记过');
+    else if (m.placementVerdict !== 'PASS') errs.push(k + '：来源件位置核对是 ' + m.placementVerdict + '，不是 PASS，不发');
+    else if (String(sm.pngSha256 || '') !== String(m.pngSha256 || '')) errs.push(k + '：来源件哈希与索引不符，图不是从这一件渲的');
     const file = String(p.file || '');
-    if (file.indexOf('/') >= 0 || file.indexOf('..') >= 0 || !new RegExp('^' + r + '-[0-9a-f]{12}\\.png$').test(file)) {
-      errs.push(r + ' 的文件名不合规矩：' + file); return;
+    if (file.indexOf('/') >= 0 || file.indexOf('..') >= 0 || !new RegExp('^' + k + '-[0-9a-f]{12}\\.png$').test(file)) {
+      errs.push(k + ' 的文件名不合规矩：' + file); return;
     }
     const abs = path.join(dir, file);
-    if (!fs.existsSync(abs)) { errs.push(r + ' 本地文件不存在：' + file); return; }
+    if (!fs.existsSync(abs)) { errs.push(k + ' 本地文件不存在：' + file); return; }
     const buf = fs.readFileSync(abs);
-    if (buf.length !== p.bytes) errs.push(r + ' 本地字节与清单不符（' + buf.length + ' ≠ ' + p.bytes + '）');
-    else if (sha256(buf) !== p.sha256) errs.push(r + ' 本地 SHA-256 与清单不符');
-    else items.push({ race: r, file: file, buf: buf, sha: p.sha256 });
+    if (buf.length !== p.bytes) errs.push(k + ' 本地字节与清单不符（' + buf.length + ' ≠ ' + p.bytes + '）');
+    else if (sha256(buf) !== p.sha256) errs.push(k + ' 本地 SHA-256 与清单不符');
+    else items.push({ key: k, file: file, buf: buf, sha: p.sha256 });
   });
   if (errs.length) { errs.slice(0, 10).forEach((e) => logLine('✗ ' + e)); return 1; }
 
@@ -2392,11 +2626,11 @@ async function cmdPosters(env, opts) {
     const headers = { 'Cache-Control': IMUTABLE_CACHE, 'Content-Type': 'image/png', 'Content-Disposition': ASSET_DISP };
     const head = creds.ok ? await remoteHead(creds, key) : { exists: false };
     if (head.exists) {
-      if (head.etag !== md5Hex(it.buf)) { violations.push(it.race + '：远端同名对象字节不同，不覆写'); continue; }
+      if (head.etag !== md5Hex(it.buf)) { violations.push(it.key + '：远端同名对象字节不同，不覆写'); continue; }
       if (head.forceDownload === 'true') forced += 1;
       unchanged += 1; continue;
     }
-    if (opts.dryRun) { uploaded += 1; logLine('  待传 ' + it.race + ' → ' + key + '  ' + kb(it.buf.length) + ' KB'); continue; }
+    if (opts.dryRun) { uploaded += 1; logLine('  待传 ' + it.key + ' → ' + key + '  ' + kb(it.buf.length) + ' KB'); continue; }
     try {
       const r = await raw('PUT', creds.bucket, creds.region, '/' + encKey(key), it.buf, signPut(creds, key, it.buf, headers));
       if (r.statusCode < 200 || r.statusCode >= 300) throw new Error('HTTP ' + r.statusCode + ' ' + r.body.toString('utf8').slice(0, 160));
@@ -2405,8 +2639,8 @@ async function cmdPosters(env, opts) {
       if (back.etag !== md5Hex(it.buf) || g.statusCode !== 200 || sha256(g.body) !== it.sha) throw new Error('回读不符');
       if (back.forceDownload === 'true') forced += 1;
       uploaded += 1;
-      logLine('  ✓ ' + it.race + ' · ' + back.bytes + ' B · ' + it.sha.slice(0, 12) + ' · HEAD/GET 回读一致');
-    } catch (e) { failed.push(it.race + ' → ' + e.message); }
+      logLine('  ✓ ' + it.key + ' · ' + back.bytes + ' B · ' + it.sha.slice(0, 12) + ' · HEAD/GET 回读一致');
+    } catch (e) { failed.push(it.key + ' → ' + e.message); }
   }
   if (violations.length) violations.forEach((v) => logLine('  ✗ ' + v));
   if (failed.length) failed.forEach((f) => logLine('  ✗ ' + f));

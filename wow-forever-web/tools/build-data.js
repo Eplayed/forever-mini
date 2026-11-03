@@ -2274,7 +2274,8 @@ const SECTION_CN = {
   'art.json': '素材台账（客户端原画）',
   'bis.json': '配装名单',
   'pets.json': '猎人宠物',
-  'macros.json': '宏命令'
+  'macros.json': '宏命令',
+  'name-generator.json': '角色起名词库'
 };
 // 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
 // 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。

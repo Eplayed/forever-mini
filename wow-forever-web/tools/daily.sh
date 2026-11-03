@@ -16,6 +16,10 @@ cd "$(dirname "$0")/.."
 # 整条链的子进程统一按 UTF-8 输出：这台机器的控制台默认 GBK，任何一步打 ✓ ✗ ⚠ 都会先崩在打印上，
 # 而 daily 只看退出码——于是"我们的编码"会被记成"那一步失败"。第一步就这么被骗过一次。
 export PYTHONIOENCODING=utf-8
+# 链跑在 WSL 里时（本机 `bash` = System32\bash.exe），node 只有 Windows 侧装了——
+# 把它的安装位补进 PATH，2026-11-03 那轮 world/changes/prof/legacy/门禁五步全因
+# "node: command not found" 一起红就是缺这条。Git Bash / Linux 原生 node 不受影响。
+command -v node >/dev/null 2>&1 || export PATH="$PATH:/mnt/c/Program Files/nodejs"
 
 QUICK=0
 NOGATE=0
@@ -29,8 +33,13 @@ done
 
 DAY="$(date +%F)"
 RUNDIR="$(mktemp -d)"
-STEPS="$RUNDIR/steps.tsv"
-PROBE="$RUNDIR/probe.json"
+# steps/probe 落到工作台的固定位置（不是 $RUNDIR）：8830 面板的 00 水源台要在链跑着的
+# 时候就能逐格点亮（每次 step 追加一行，面板轮询读它）——放 mktemp 里成功后就被删了，
+# 面板永远只能看到"昨天"。红的时候留在原地，也正是要人看的东西。
+ADMINRUN="tools/admin/daily"
+mkdir -p "$ADMINRUN"
+STEPS="$ADMINRUN/steps.tsv"
+PROBE="$ADMINRUN/probe.json"
 LOGDIR="$RUNDIR/logs"
 mkdir -p "$LOGDIR"
 : >"$STEPS"

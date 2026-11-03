@@ -152,7 +152,7 @@ def main():
     doc = OrderedDict([
         ('meta', OrderedDict([
             ('kind', 'bis'),
-            ('title', '30 级配装名单'),
+            ('title', 'BIS配装'),
             ('level', 30),
             ('source', smeta['source']),
             ('scrapedAt', smeta['scrapedAt']),
