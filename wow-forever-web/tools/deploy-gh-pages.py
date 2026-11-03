@@ -21,6 +21,7 @@ from __future__ import print_function
 import argparse
 import hashlib
 import io
+import time
 import json
 import os
 import re
@@ -185,11 +186,21 @@ def main():
     else:
         sh(["gh", "repo", "create", a.repo, "--public", "--source", ".", "--remote", "origin"],
            cwd=STAGE)
-    # 推送参数顶住这台机器到 GitHub 的不稳链路（2026-11-03 首推 408 断在半路）：
-    # 大缓冲一次性发、限 HTTP/1.1 避开分块怪病、低速不限时——慢可以，断不行。
-    sh(["git", "-c", "http.postBuffer=524288000", "-c", "http.version=HTTP/1.1",
-        "-c", "http.lowSpeedLimit=1", "-c", "http.lowSpeedTime=600",
-        "push", "-u", "origin", "main", "--force"], cwd=STAGE)
+    # 推送参数顶住这台机器到 GitHub 的不稳链路（2026-11-03 首推 408 断在半路、
+    # 二推 TLS 握手都起不来）：大缓冲一次性发、限 HTTP/1.1、低速不限时，
+    # 再加 3 次自动重试——间歇性握手失败多试两次通常就过了。
+    push = ["git", "-c", "http.postBuffer=524288000", "-c", "http.version=HTTP/1.1",
+            "-c", "http.lowSpeedLimit=1", "-c", "http.lowSpeedTime=600",
+            "push", "-u", "origin", "main", "--force"]
+    for attempt in (1, 2, 3):
+        print("  推送第 %d 次" % attempt)
+        r = subprocess.run(push, cwd=STAGE)
+        if r.returncode == 0:
+            break
+        if attempt < 3:
+            time.sleep(10 * attempt)
+    else:
+        sys.exit("git push 三次都失败：多半是这台机器到 GitHub 的链路在抖，等会儿重按 ④发布")
     # Pages：项目站，源就是 main 分支根目录
     r = subprocess.run(["gh", "api", "repos/%s/%s/pages" % (owner, a.repo)],
                        cwd=STAGE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

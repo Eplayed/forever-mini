@@ -1,11 +1,11 @@
 {
  "kind": "release-package",
- "package": "wow-forever-web-20261103-200705-f31d0f9",
- "gitHead": "f31d0f9",
+ "package": "wow-forever-web-20261103-203717-5ebe28a",
+ "gitHead": "5ebe28a",
  "worktreeDirty": false,
- "builtAt": "2026-11-03 20:07:40",
- "files": 3965,
- "bytes": 67405875,
+ "builtAt": "2026-11-03 20:37:57",
+ "files": 3889,
+ "bytes": 31891554,
  "byExt": {
   ".png": 4,
   ".js": 3,
@@ -16,10 +16,10 @@
   ".ico": 2,
   ".webp": 319,
   ".jpg": 3499,
-  ".glb": 77,
+  ".glb": 1,
   ".html": 1
  },
- "fileManifestSha256": "7046e55010e84db6925c1a69fe7a3b5bd90809674f0296a70d456401f1a9be4a",
+ "fileManifestSha256": "b291f5810b0bdbfe792c4b2c61b82394dd73f0b1b84d7a519870b4f0e6484e9a",
  "keyFiles": {
   "assets/GLTFLoader-BFidmEIY.js": "b2caccb4283fc25d8efb4b9dcdd4d49893ef5a45f07b75e1587f04aa8e6a73f1",
   "assets/favicon-Db2w2xDQ.svg": "9b654e793129b70b31881b71835b4b71937cd43a162e3c2a3c82e4a11ddfcdbf",
@@ -33,7 +33,7 @@
  "dataFiles": {
   "data/abilities.json": "7207db8bce4c2864aa738cbde5174bab48aca1390bafd6a0331134f4801845c4",
   "data/achievements.json": "a893b347c39651180d879f53b6b63530e735da5d652b8d0f727c723ee8cc29b4",
-  "data/art.json": "e619cfebcc94595fe7ab48290a47218bb4f04a53ce809b2678b93df654ddd499",
+  "data/art.json": "f71bc45d0548206db78301cb43a67cee9527b9b9c7156b99e5079bfdb7a38091",
   "data/audit-exceptions.json": "f0dbc9d52b3226a7532d240e022a2fd1ae62c2fd7526f4c668f5f9bfb8a72fef",
   "data/bis.json": "ffe6c2dce130d06068acd9e831501ead1450655604a82b472b483159ee84d550",
   "data/changes.json": "f31f34d52a492d674ba0a0dd09c6b5722dfbe4e5d6ca89531a5413fb19c11cff",
@@ -88,12 +88,12 @@
   "data/world.json": "2fe94e6c7b0bc3d751ffdf5caeeba5cb89d5a7eb7ef6b3860b7b15cd93bcff0e"
  },
  "hashedAssets": 7,
- "unhashedFiles": 3958,
+ "unhashedFiles": 3882,
  "cachePolicy": {
   "assets/*": "public, max-age=31536000, immutable（文件名带内容哈希，换版即换名）",
   "index.html": "no-cache（must-revalidate）——它是指向新哈希资源的唯一入口",
   "data/*.json": "no-cache 或 max-age=60 + 每次发版刷 CDN——文件名不带哈希，长缓存等于把玩家留在旧数据",
   "img/**": "同 data：文件名不带哈希；素材换图必须让托管方主动刷新这一批"
  },
- "packageSha256": "772ac26e8148956948d85af0d5c5ebe0f3a0a2e9276d85cda7ce210aa7c16074"
+ "packageSha256": "47003713b030f201b41cfc728f8e2be920110fae2aea625aea168eec688afc8c"
 }
