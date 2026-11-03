@@ -185,7 +185,11 @@ def main():
     else:
         sh(["gh", "repo", "create", a.repo, "--public", "--source", ".", "--remote", "origin"],
            cwd=STAGE)
-    sh(["git", "push", "-u", "origin", "main", "--force"], cwd=STAGE)
+    # 推送参数顶住这台机器到 GitHub 的不稳链路（2026-11-03 首推 408 断在半路）：
+    # 大缓冲一次性发、限 HTTP/1.1 避开分块怪病、低速不限时——慢可以，断不行。
+    sh(["git", "-c", "http.postBuffer=524288000", "-c", "http.version=HTTP/1.1",
+        "-c", "http.lowSpeedLimit=1", "-c", "http.lowSpeedTime=600",
+        "push", "-u", "origin", "main", "--force"], cwd=STAGE)
     # Pages：项目站，源就是 main 分支根目录
     r = subprocess.run(["gh", "api", "repos/%s/%s/pages" % (owner, a.repo)],
                        cwd=STAGE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
