@@ -12,10 +12,10 @@ module.exports = {
   "snapshot": true,
   "coverage": {
    "L0": 250,
-   "L1": 111,
-   "L2": 356,
+   "L1": 107,
+   "L2": 359,
    "L3": 2,
-   "total": 719
+   "total": 718
   }
  },
  "items": [
@@ -117,7 +117,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "orc"
@@ -220,7 +220,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "orc"
@@ -323,7 +323,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "undead"
@@ -409,7 +409,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "undead"
@@ -495,7 +495,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "undead"
@@ -581,7 +581,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ],
    "raceId": "undead"
@@ -636,213 +636,6 @@ module.exports = {
      "checkedAt": "2026-10-07"
     }
    ]
-  },
-  {
-   "id": "warrior-talent-87",
-   "cn": "雷霆一击",
-   "en": null,
-   "kind": "talent",
-   "classId": "warrior",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301514/index.html",
-     "note": "国服官方职业深度解析（牧师与战士）原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "race-racial-125",
-   "cn": "战争践踏",
-   "en": null,
-   "kind": "racial",
-   "classId": null,
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
-    }
-   ],
-   "raceId": "tauren"
-  },
-  {
-   "id": "hunter-talent-8",
-   "cn": "毒蝎钉刺",
-   "en": null,
-   "kind": "talent",
-   "classId": "hunter",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "druid-talent-8",
-   "cn": "厚皮",
-   "en": null,
-   "kind": "talent",
-   "classId": "druid",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "priest-talent-70",
-   "cn": "治疗术",
-   "en": null,
-   "kind": "talent",
-   "classId": "priest",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301514/index.html",
-     "note": "国服官方职业深度解析（牧师与战士）原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "warrior-talent-88",
-   "cn": "战斗怒吼",
-   "en": null,
-   "kind": "talent",
-   "classId": "warrior",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301514/index.html",
-     "note": "国服官方职业深度解析（牧师与战士）原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "race-racial-126",
-   "cn": "栽培",
-   "en": null,
-   "kind": "racial",
-   "classId": null,
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
-    }
-   ],
-   "raceId": "tauren"
-  },
-  {
-   "id": "hunter-talent-9",
-   "cn": "欺诈者之舞",
-   "en": null,
-   "kind": "talent",
-   "classId": "hunter",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "druid-talent-9",
-   "cn": "野蛮暴怒",
-   "en": null,
-   "kind": "talent",
-   "classId": "druid",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301515/index.html",
-     "note": "国服官方职业深度解析原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "priest-talent-71",
-   "cn": "强效治疗术",
-   "en": null,
-   "kind": "talent",
-   "classId": "priest",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301514/index.html",
-     "note": "国服官方职业深度解析（牧师与战士）原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "warrior-talent-89",
-   "cn": "破甲攻击",
-   "en": null,
-   "kind": "talent",
-   "classId": "warrior",
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24301514/index.html",
-     "note": "国服官方职业深度解析（牧师与战士）原文用词",
-     "checkedAt": "2026-10-07"
-    }
-   ]
-  },
-  {
-   "id": "race-racial-127",
-   "cn": "原野疾驰",
-   "en": null,
-   "kind": "racial",
-   "classId": null,
-   "spec": null,
-   "level": "L0",
-   "provenance": [
-    {
-     "type": "official_cn",
-     "url": "https://wow.blizzard.cn/news/24304075/index.html",
-     "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-10-08"
-    }
-   ],
-   "raceId": "tauren"
   }
  ]
 };

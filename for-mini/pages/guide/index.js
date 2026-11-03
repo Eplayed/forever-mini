@@ -24,8 +24,13 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 朋友圈（2026-11-03 站主要求全站可分享） */
+  onShareTimeline() {
+    return { title: '无限指南：宏命令与插件名单' }
+  },
+
   onShareAppMessage() {
-    return { title: '无限指南：宏命令与插件名单（免费、标来源）', path: '/pages/guide/index' }
+    return { title: '无限指南：宏命令与插件名单', path: '/pages/guide/index' }
   },
 
   refresh() {

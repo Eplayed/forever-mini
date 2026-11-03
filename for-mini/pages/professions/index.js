@@ -47,8 +47,6 @@ Page({
     shown: 0,
     rest: 0,
     loading: false,
-    provText: '',
-    srcHost: '',
     bandNote: ''
   },
 
@@ -59,6 +57,15 @@ Page({
 
   onPullDownRefresh() {
     this.start().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 微信分享（2026-11-03 站主要求全站可分享） */
+  onShareAppMessage() {
+    return { title: '专业与配方 · 按技能档位找做法', path: '/pages/professions/index' }
+  },
+
+  onShareTimeline() {
+    return { title: '专业与配方 · 按技能档位找做法' }
   },
 
   /* 开关在前，取数在后：关着的页一次请求都不该发，也不该让玩家看到半屏空白 */
@@ -104,7 +111,6 @@ Page({
             n: (p.counts || {}).recipes || (p.counts || {}).nodes || 0,
             gather: p.kind === 'gather'
           })),
-          srcHost: hostOf((idx.meta || {}).sources),
           bandNote: idx.bandNote || ''
         })
         const want = this.want
@@ -127,7 +133,6 @@ Page({
   selectProf(id) {
     const entry = (this.index.professions || []).filter((p) => p.id === id)[0]
     if (!entry) return Promise.resolve(null)
-    const prov = (entry.prov || [])[0] || {}
     this.setData({
       selId: id,
       sel: {
@@ -141,7 +146,6 @@ Page({
         levelNote: entry.levelNote || ''
       },
       nodeHead: (this.index.nodeHeadLabels || {})[id] || '采集点',
-      provText: prov.checkedAt ? prov.checkedAt : '',
       loading: true,
       q: '',
       lv: '',
@@ -383,7 +387,3 @@ Page({
   }
 })
 
-function hostOf(sources) {
-  const first = (sources || [])[0] || {}
-  return String(first.url || '').replace(/^https?:\/\//, '').replace(/\/.*$/, '')
-}

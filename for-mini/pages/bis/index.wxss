@@ -8,36 +8,11 @@
   letter-spacing: 1rpx;
 }
 
-.note {
-  font-size: 22rpx;
-  color: var(--txt-dim);
-  line-height: 1.6;
-  margin-top: 10rpx;
-}
-
 .note2 {
   font-size: 20rpx;
   color: var(--txt-muted);
   line-height: 1.6;
   margin-top: 10rpx;
-}
-
-.src {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12rpx;
-  font-size: 20rpx;
-  color: var(--txt-hint);
-}
-
-.src-op {
-  color: var(--gold);
-  border: 1rpx solid var(--gold-line);
-  border-radius: 8rpx;
-  padding: 0 12rpx;
-  margin-left: 16rpx;
-  flex-shrink: 0;
 }
 
 /* —— 职业条 —— */
@@ -112,21 +87,18 @@
   margin-bottom: 6rpx;
 }
 
-/* —— 中间那一栏：默认职业原画，点开是本站拼的占位人台 —— */
+/* —— 中间那一栏：只有"这一套穿这一身"那一张逐件底图（2026-11-02 起，3D 与按种族的旧底图都撤了） —— */
 .stage {
-  /* 竖长方形：站主 2026-10-30 要"完整展示整体装备"。横盒里一个站立人形只能占中间一小条，
-     竖盒同一条相机参数就能把从头到脚框进来（相机参数没动，那是 B2 真机验过的取法） */
+  /* 竖长方形：站主 2026-10-30 要"完整展示整体装备"，竖盒才能从头到脚框进来。
+     2026-11-02 里面换成逐件渲的透明底 PNG，框的尺寸一条没改；
+     底色沿用 3D 那一版实际铺的 --sunk（图本身透明，玩家看到的就是这一栏的底色，
+     所以"背景透明"要成立，这一格就必须是页面自己的色，不能是图里带的一块白）。 */
   position: relative;
   height: 860rpx;
   border: 1rpx solid var(--line-2);
   border-radius: 6rpx;
   overflow: hidden;
-  background: var(--panel);
-}
-
-.stage-art {
-  width: 100%;
-  height: 100%;
+  background: var(--sunk);
 }
 
 .stage-tag {
@@ -140,30 +112,15 @@
   border-radius: 4rpx;
 }
 
-.stage-btn {
-  /* 位置由外面那一格 .stage-btns 管；这里只管一颗的样子。
-     原来它自己 absolute，加第二颗就要撞在一起 */
-  margin-left: 10rpx;
-  min-height: 56rpx;
-  line-height: 56rpx;
-  padding: 0 20rpx;
-  font-size: 22rpx;
-  color: var(--gold-hi);
-  background: var(--scrim-pop);
-  border: 1rpx solid var(--gold-line);
-  border-radius: 999rpx;
-}
-
-.model {
-  position: absolute;
-  left: 0;
-  top: 0;
+.stage-art {
+  /* aspectFit：图等比缩到框内，绝不拉伸（站主 2026-11-01 那句"保证不失真"到这一版照样有效）。
+     渲染器已经按实测像素留过头脚边距，这里不再裁人。 */
+  display: block;
   width: 100%;
   height: 100%;
-  background: var(--sunk);
 }
 
-.model-wait {
+.stage-wait {
   padding: 24rpx 16rpx;
   font-size: 20rpx;
   color: var(--txt-dim);
@@ -187,14 +144,6 @@
   color: var(--txt-caution);
 }
 
-
-.stage-btns {
-  position: absolute;
-  right: 12rpx;
-  top: 12rpx;
-  display: flex;
-  flex-direction: row;
-}
 
 .doll-note {
   margin-top: 10rpx;
@@ -294,6 +243,11 @@
 .q-5 { color: var(--q5); }
 .q-0 { color: var(--q0); }
 
+/* 两类文字分两档（站主 2026-11-02 两轮：先要"属性与副本分色"，看了真机又说"区分不明显"）。
+   第一版给来源配 --azure，量下来它与**稀有装备名 --q3 的 RGB 距离只有 34**——
+   那一行读起来就是"又一个装备名"，不是"它从哪来"。所以这一档换金色系，并且不只靠色相：
+   明度（属性 5.81 / 来源 7.57 对底）、色相（灰 / 金）、形状（来源多一条左竖线）三个通道一起给。
+   金色与六个品质色最近的是 --q0 灰（114），而配装页几乎不会有灰色装备。只用令牌，不写裸色。 */
 .s-meta {
   display: flex;
   flex-wrap: wrap;
@@ -305,9 +259,29 @@
 
 .s-src {
   font-size: 20rpx;
-  color: var(--txt-hint);
-  margin-top: 6rpx;
+  color: var(--gold);
+  margin-top: 8rpx;
   line-height: 1.5;
+  border-left: 3rpx solid var(--gold-line);
+  padding-left: 12rpx;
+}
+
+/* 这一页原来没定义 .dim（只有宏页与专业页有），弹层里的"装等"一直是继承色，
+   而且紧贴着名字挤成一坨——补上，跟属性那一档同色，并留间距。 */
+.dim {
+  color: var(--txt-muted);
+  margin-left: 12rpx;
+}
+
+/* 可点的出处：整行与不可点的那行同色（都是金），差别交给那颗更亮一档的金色箭头
+   与撑开的命中区。原来这里把整行刷成金，正是它让两档分不开。 */
+.s-link {
+  padding: 10rpx 0;
+}
+
+.s-jump {
+  margin-left: 12rpx;
+  color: var(--gold-hi);
 }
 
 .s-go {
@@ -317,24 +291,10 @@
   align-self: center;
 }
 
-/* 两家角标：分歧不是错误，不许用红 */
-.cmp {
-  font-size: 18rpx;
-  border: 1rpx solid var(--line-2);
-  border-radius: 8rpx;
-  padding: 0 8rpx;
+/* 弹层里"另一份名单在这一格列的是"那句前缀：中性提示色，不带判词也不带颜色暗示 */
+.t-tag {
+  font-size: 20rpx;
   color: var(--txt-muted);
-}
-
-.cmp-same {
-  color: var(--ok);
-  border-color: var(--ok);
-}
-
-.cmp-diff {
-  color: var(--txt-caution);
-  border-color: var(--warn);
-  background: var(--warn-bg);
 }
 
 .sub-t {
@@ -432,6 +392,6 @@
 
 .p-st {
   font-size: 20rpx;
-  color: var(--txt-dim);
+  color: var(--txt-muted);
   line-height: 1.5;
 }

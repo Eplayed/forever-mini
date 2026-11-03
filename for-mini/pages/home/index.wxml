@@ -38,37 +38,33 @@
     <view class="hero-sub">《无限》中文资料 · 每条可溯源 · 缺的直说待实测</view>
   </view>
 
-  <!-- 2）配装名单：站主 2026-10-26 定它是核心功能，"必须醒目"——
-       所以不塞进下面那排两列小卡，单独占一条整宽、带图带一句话，紧跟在倒计时下面。
-       底图清单在 app/data/ui-art.json 的 home.cards.bis，图取不到时回落面色玻璃。 -->
-  <view class="bis-card plate" bindtap="goBis">
-    <image wx:if="{{cardBg.bis}}" class="entry-art" src="{{cardBg.bis}}" mode="aspectFill"
-           binderror="onArtError" data-k="bis" />
-    <view class="entry-scrim"></view>
-    <view class="bis-row">
-      <view class="bis-name">配装名单</view>
-      <view class="bis-go">›</view>
-    </view>
-    <view class="bis-desc">30 级这一档，按职业和阵营列：这一身穿什么、这个部位还能换什么。</view>
-  </view>
-
-  <!-- 3）四个入口：副本 / 职业 / 掉落查询 / 指南。
-       2026-10-22 站主指令：撤掉中英速查卡；「查」「去查」这类字眼不要了——整张卡就是入口，点它就行。
-       每张卡配一张底图（清单在 app/data/ui-art.json），图取不到时回落纯色版式。 -->
+  <!-- 2）六个入口：BIS配装 / 角色起名 / 副本 / 掉落查询 / 宏命令 / 职业（专业另加，开关控）。
+       2026-11-03 站主指令：布局照截图重排——BIS、起名不再是整宽卡，六卡统一进两列格，
+       顺序按截图（BIS、起名排前两格）；这两格换自绘图标（img/home/，官方 CDN 没有这类 UI 图），
+       其余四格的图标与底图一律不动、文案一字未改，只动排布。
+       受远程开关的格（namer/macros/professions）照旧：关着整格不渲染，不留空白格。 -->
   <view class="grid">
+    <view class="entry plate" bindtap="goBis">
+      <view class="entry-head">
+        <image class="entry-ic" src="/img/home/bis-icon.png" mode="aspectFit" />
+        <view class="entry-name">BIS配装</view>
+      </view>
+      <view class="entry-desc">30 级这一档，按职业和阵营列：这一身穿什么、这个部位还能换什么。</view>
+    </view>
+    <!-- 角色起名：2026-11-03 站主指令新增，受远程开关 namer 控制（app/data/flags.json）。 -->
+    <view wx:if="{{openNamer}}" class="entry plate" bindtap="goNamer">
+      <view class="entry-head">
+        <image class="entry-ic" src="/img/home/namer-icon.png" mode="aspectFit" />
+        <view class="entry-name">角色起名</view>
+      </view>
+      <view class="entry-desc">挑个职业摇一摇：搞笑谐音名随机滚，看中哪个复制哪个，还能自己改。</view>
+    </view>
     <view class="entry plate" bindtap="goDungeons">
       <image wx:if="{{cardBg.dungeons}}" class="entry-art" src="{{cardBg.dungeons}}" mode="aspectFill"
              binderror="onArtError" data-k="dungeons" />
       <view class="entry-scrim"></view>
       <view class="entry-name">副本</view>
       <view class="entry-desc">五人本名单：等级、阵营、地图、首领与掉落。</view>
-    </view>
-    <view class="entry plate" bindtap="goClasses">
-      <image wx:if="{{cardBg.classes}}" class="entry-art" src="{{cardBg.classes}}" mode="aspectFill"
-             binderror="onArtError" data-k="classes" />
-      <view class="entry-scrim"></view>
-      <view class="entry-name">职业</view>
-      <view class="entry-desc">种族与可选职业、技能书和天赋树，天赋可以分享。</view>
     </view>
     <view class="entry plate" bindtap="goLoots">
       <image wx:if="{{cardBg.loots}}" class="entry-art" src="{{cardBg.loots}}" mode="aspectFill"
@@ -77,22 +73,22 @@
       <view class="entry-name">掉落查询</view>
       <view class="entry-desc">搜副本或物品名，直接跳到那座本看这件谁掉。</view>
     </view>
-    <view class="entry plate" bindtap="goGuide">
-      <image wx:if="{{cardBg.guide}}" class="entry-art" src="{{cardBg.guide}}" mode="aspectFill"
-             binderror="onArtError" data-k="guide" />
-      <view class="entry-scrim"></view>
-      <view class="entry-name">指南</view>
-      <view class="entry-desc">插件名单：谁做的、干什么用、去哪找，全部免费、逐条标来源。</view>
-    </view>
-    <!-- 宏命令：这一张由远程开关 macros 控制（app/data/flags.json）。关着整块不渲染。 -->
+    <!-- 宏命令：站主 2026-11-02 指令进首页第四格，受远程开关 macros 控制。 -->
     <view wx:if="{{openMacros}}" class="entry plate" bindtap="goMacros">
       <image wx:if="{{cardBg.macros}}" class="entry-art" src="{{cardBg.macros}}" mode="aspectFill"
              binderror="onArtError" data-k="macros" />
       <view class="entry-scrim"></view>
       <view class="entry-name">宏命令</view>
-      <view class="entry-desc">按职业挑、能搜：正文原样复制进游戏就能用，每条标谁整理的。</view>
+      <view class="entry-desc">按职业挑、能搜：正文原样复制进游戏就能用。</view>
     </view>
-    <!-- 专业与配方：这一张由远程开关 professions 控制（app/data/flags.json）。
+    <view class="entry plate" bindtap="goClasses">
+      <image wx:if="{{cardBg.classes}}" class="entry-art" src="{{cardBg.classes}}" mode="aspectFill"
+             binderror="onArtError" data-k="classes" />
+      <view class="entry-scrim"></view>
+      <view class="entry-name">职业</view>
+      <view class="entry-desc">种族与可选职业、技能书和天赋树，天赋可以分享。</view>
+    </view>
+    <!-- 专业与配方：受远程开关 professions 控制（app/data/flags.json），
          关着的时候整块不渲染——不占位、不留空白格；线上拧开不用发小程序版本。 -->
     <view wx:if="{{openProfessions}}" class="entry plate" bindtap="goProfessions">
       <image wx:if="{{cardBg.professions}}" class="entry-art" src="{{cardBg.professions}}" mode="aspectFill"
@@ -103,8 +99,9 @@
     </view>
   </view>
 
-  <!-- 3）职业格：九个一排铺开、超出换行，不做出横向滚动（站主 2026-10-22 明确要求） -->
-  <view class="sec-title">选一个职业</view>
+  <!-- 3）职业格：九个一排铺开、超出换行，不做出横向滚动（站主 2026-10-22 明确要求）；
+       标题 2026-11-03 照截图改成「选择你的职业」 -->
+  <view class="sec-title">选择你的职业</view>
   <view wx:if="{{classes.length}}" class="cls9">
     <view class="cls {{activeClass === item.classId ? 'cls-on' : ''}}" wx:for="{{classes}}" wx:key="classId"
           data-id="{{item.classId}}" bindtap="onPickClass">
@@ -147,7 +144,7 @@
           </view>
         </view>
       </view>
-      <view wx:else class="muted trait-none">这个种族的特长还没核到，不猜。</view>
+      <view wx:else class="muted trait-none">这个种族的特长还没核到。</view>
     </view>
   </block>
 

@@ -17,10 +17,8 @@
   </view>
 
   <block wx:elif="{{loaded && meta}}">
-    <!-- 页头 + 口径：那句话由分发层下发，页面不改写措辞（红线：不冒充实测、不收费、不分发插件） -->
     <view class="card">
       <view class="h1">{{meta.title}}</view>
-      <view class="note">{{meta.disclaimer}}</view>
       <view class="stat-line">{{statText}}</view>
     </view>
 
@@ -61,7 +59,6 @@
         <view class="m-meta">
           <text class="m-grp">{{item.group}}</text>
           <text class="dim" wx:if="{{item.minLevel}}">{{item.minLevel}} 级起</text>
-          <text class="dim">{{item.srcName}}</text>
         </view>
       </view>
       <view class="more" wx:if="{{rest > 0}}" bindtap="showMore">再显示 {{rest > 40 ? 40 : rest}} 条（还有 {{rest}} 条）</view>
@@ -70,7 +67,7 @@
     <view class="foot">{{meta.pageNote}}</view>
   </block>
 
-  <!-- 详情：宏正文原样多行显示，只读；两个复制按钮，没有编辑、没有执行、没有外链 -->
+  <!-- 详情：宏正文原样多行显示，只读；只有一个复制按钮，没有编辑、没有执行、没有外链 -->
   <view class="mask" wx:if="{{open}}" bindtap="closeMacro" catchtouchmove="noop">
     <view class="sheet" catchtap="noop">
       <view class="s-head">
@@ -86,10 +83,6 @@
       <view class="body-label">宏正文（原样，进游戏新建宏粘贴即可）</view>
       <scroll-view class="body" scroll-y="true"><text class="body-t" user-select="true">{{open.body}}</text></scroll-view>
       <view class="btn btn-main" bindtap="copyBody">复制宏文本</view>
-      <view class="btn" bindtap="copySource">复制来源</view>
-      <view class="s-src">{{openSrc}}</view>
-      <view class="s-src" wx:if="{{open.nameBack}}">其中 {{open.nameBack}} 个法术名退回插件烘的那一份（本站技能表里没有这一条）</view>
-      <view class="s-src">{{meta.disclaimer}}</view>
     </view>
   </view>
 </view>

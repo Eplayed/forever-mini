@@ -38,6 +38,15 @@ Page({
     this.refresh(this.data.classId).then(() => wx.stopPullDownRefresh())
   },
 
+  /* 朋友圈（2026-11-03 站主要求全站可分享）：带当前职业，query 与 onShareAppMessage 的 path 参数一致 */
+  onShareTimeline() {
+    const c = this.currentClass()
+    return {
+      title: c ? '无限 ' + c.nameCn + ' 技能速查' : '无限职业技能速查',
+      query: c ? 'classId=' + c.classId : ''
+    }
+  },
+
   onShareAppMessage() {
     const c = this.currentClass()
     return {
@@ -167,19 +176,6 @@ Page({
     this.setData({ expandedId: this.data.expandedId === id ? '' : id })
   },
 
-  onOpenSource(e) {
-    const url = String(e.currentTarget.dataset.url || '')
-    if (!url || url.indexOf('http') !== 0) {
-      wx.showToast({ title: '这条只记了资料名，没有可打开的网址', icon: 'none' })
-      return
-    }
-    /* 个人主体不开 web-view，只能复制链接让玩家自己看 */
-    wx.setClipboardData({
-      data: url,
-      success: () => wx.showToast({ title: '来源网址已复制', icon: 'none' })
-    })
-  },
-
   onCopy(e) {
     const id = String(e.currentTarget.dataset.id || '')
     const s = (this.all || []).filter((x) => x.id === id)[0]
@@ -189,8 +185,7 @@ Page({
       s.name,
       s.rankText + ' · ' + s.learnText,
       s.stateText ? '与经典旧世：' + s.stateText : '',
-      s.altText ? '另一说：' + s.altText : '',
-      '整理自无限测试版客户端资料，非官方结论'
+      s.altText ? '另一说：' + s.altText : ''
     ].filter(Boolean)
     wx.setClipboardData({ data: lines.join('\n'), success: () => wx.showToast({ title: '已复制', icon: 'none' }) })
   }

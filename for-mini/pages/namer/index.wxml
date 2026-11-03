@@ -1,0 +1,53 @@
+<view class="wrap">
+  <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
+    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
+  </view>
+  <view wx:elif="{{offline}}" class="notice">
+    现在没连上线，摇的是机子里存的那一小份名字。
+  </view>
+
+  <view wx:if="{{locked}}" class="locked">
+    <view class="locked-name">{{lockName}}</view>
+    <view class="muted locked-sub">这一页还没开放。</view>
+  </view>
+
+  <block wx:elif="{{unavailable}}">
+    <view class="locked">
+      <view class="locked-name">词库没取到</view>
+      <view class="muted locked-sub">{{errText || '要联网才看得到，稍后再试。'}}</view>
+    </view>
+  </block>
+
+  <block wx:elif="{{loaded}}">
+    <!-- 头牌：一句话说清玩法，不写来历、不写条数台账 -->
+    <view class="hero plate">
+      <view class="hero-name">角色起名</view>
+      <view class="hero-sub">挑个职业，摇一个——不改就复制走。</view>
+    </view>
+
+    <!-- 第一步：选职业。九个一排铺开、超出换行，与首页同一套版式（不做横向滚动） -->
+    <view class="sec-title">选一个职业</view>
+    <view class="cls9">
+      <view class="cls {{cls === item.classId ? 'cls-on' : ''}}" wx:for="{{classes}}" wx:key="classId"
+            data-id="{{item.classId}}" bindtap="pickClass">
+        <image wx:if="{{item.iconUrl}}" class="cls-ico" src="{{item.iconUrl}}" mode="aspectFit" />
+        <view wx:else class="cls-ico cls-fallback">{{item.className[0]}}</view>
+        <view class="cls-name">{{item.className}}</view>
+      </view>
+    </view>
+
+    <!-- 第二步：结果台。摇动时快速换字（页面加 rolling 态的微光），落定后可直接改 -->
+    <view class="stage plate {{rolling ? 'stage-on' : ''}}">
+      <input class="stage-input {{rolling ? 'stage-input-roll' : ''}}" value="{{name}}"
+             bindinput="onEdit" placeholder="先点上面的职业，再点生成"
+             placeholder-class="stage-ph" maxlength="24" />
+      <view wx:if="{{poolText}}" class="stage-hint">{{poolText}}</view>
+    </view>
+
+    <!-- 第三步：生成 → 复制。生成在结果台下面占一整行，复制紧随其下 -->
+    <button class="roll {{cls && !rolling ? 'roll-ready' : ''}}" bindtap="roll" disabled="{{rolling}}">
+      {{rolling ? '摇着呢…' : (name ? '再摇一个' : '生成名字')}}
+    </button>
+    <button class="copy" bindtap="copyName" disabled="{{!name || rolling}}">复制</button>
+  </block>
+</view>

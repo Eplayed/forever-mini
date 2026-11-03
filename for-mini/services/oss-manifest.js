@@ -69,25 +69,9 @@ function flagsUrl(env) {
   return origin() + '/' + NAMESPACES[env] + '/flags.json'
 }
 
-/* BiS 真实 3D（2026-10-30 B1/B3/C）：模型清单与开关同一档语义——它不在气密批次里，
-   换一件模型不必换 buildId、不必重发数据、不必发小程序版本。
-   对象本身走 assets/models/real/，文件名带成品 SHA，所以是不可变长缓存；
-   清单要能当天改，缓存与指针同一档（max-age=60）。 */
-function modelsIndexUrl(env) {
-  return origin() + '/' + NAMESPACES[env] + '/bis/models/index.json'
-}
-
-/* 拼模型地址这一处必须自己挡穿越：assetDir 与 file 都是从远端 JSON 读进来的，
-   带 .. 或绝对路径就不拼——与 shardRef 那条"条目改成 ../.. 也走不出去"同一条例。 */
-function modelUrl(env, entry) {
-  const dir = String((entry && entry.assetDir) || '')
-  const file = String((entry && entry.file) || '')
-  if (dir !== 'assets/models/real/') return { error: new Error('模型清单里的 assetDir 不是 assets/models/real/：' + dir) }
-  if (file.indexOf('/') >= 0 || file.indexOf('\\') >= 0 || file.indexOf('..') >= 0 || /^[a-z0-9-]+-[0-9a-f]{12}\.glb$/.test(file) === false) {
-    return { error: new Error('模型文件名不合规矩：' + file) }
-  }
-  return { url: origin() + '/' + NAMESPACES[env] + '/' + dir + file }
-}
+/* BiS 真实 3D 那条链路（2026-10-30 B1/B3/C 的 modelsIndexUrl / modelUrl）已在 2026-11-02 随
+   站主"小程序不要 3D"一起删掉：这一页改成读分发层桥表 posterLink 的逐件 PNG，
+   走的就是下面 assetUrl 那条普通素材地址，不需要为模型单开一套。 */
 
 function requestRaw(url) {
   return new Promise((resolve, reject) => {
@@ -415,6 +399,15 @@ const SHARD_SPECS = {
     kind: 'loot-index',    /* 行数与列数都要对上：列名是位置数组的解释，少一列界面就会把首领序号当品质显示 */
     shape: (d) => Array.isArray(d.dungeons) && Array.isArray(d.cols) && d.cols.length === 6
       && !!d.counts && d.counts.rows === d.dungeons.reduce((s, x) => s + (x.rows || []).length, 0)
+  },
+  /* 起名词库索引（2026-11-03）：九职业条数加起来要等于发出去的名字总数；
+     每个职业条自带分片路径与校验值（namesClassRef 取） */
+  nameGenerator: {
+    name: 'names-index',
+    kind: 'names-index',
+    shape: (d) => Array.isArray(d.classes) && !!d.counts
+      && d.counts.classes === d.classes.length
+      && d.counts.names === d.classes.reduce((n, c) => n + (c.count || 0), 0)
   }
 }
 
@@ -620,6 +613,37 @@ function loadMacroClass(item, batch, fallback) {
   return loadRef(macroClassRef(item), batch, fallback)
 }
 
+/* 起名的职业片（2026-11-03）：与宏的职业片同一套规矩——路径由 classId 现推、
+   与索引条目里的 path 比对、校验值取条目自带的三件套。
+   片里 talents[].names 是名字数组（不是位置数组），shape 只查"有专精、每专精有名单、
+   计数对得上"；多出来的字段界面不读。 */
+function namesClassRef(item) {
+  const id = String((item && item.classId) || '')
+  if (!/^[a-z][a-z0-9_-]*$/.test(id)) return { error: new Error('职业编号不能当文件名：' + id) }
+  const rel = 'names/set/' + id + '.json'
+  if (String(item.path) !== rel) {
+    return { error: new Error('起名：职业 ' + id + ' 的分片路径不是由 classId 推出来的：' + item.path) }
+  }
+  return {
+    rel,
+    cacheKind: 'names-set:' + id,
+    expect: { etag: item.shardEtag, md5: item.shardMd5, bytes: item.shardBytes },
+    spec: {
+      name: 'names-class',
+      kind: 'names-class',
+      id,
+      readId: (d) => d.classId,
+      shape: (d) => Array.isArray(d.talents) && d.talents.length > 0
+        && d.talents.every((t) => Array.isArray(t.names) && t.names.length > 0)
+        && !!d.counts && d.counts.names === d.talents.reduce((s, t) => s + t.names.length, 0)
+    }
+  }
+}
+
+function loadNamesClass(item, batch, fallback) {
+  return loadRef(namesClassRef(item), batch, fallback)
+}
+
 /* 职业法术片：和副本分片同一套规矩——路径由 classId 现推，与名单条目里的 shardPath 比对，
    校验值取条目自带的 shardEtag/shardMd5/shardBytes。条目被改成 ../ 也走不出本批目录。 */
 function spellClassRef(item) {
@@ -708,10 +732,10 @@ module.exports = {
   profSetRef,
   macroClassRef,
   loadMacroClass,
+  namesClassRef,
+  loadNamesClass,
   loadProfSet,
   flagsUrl,
-  modelsIndexUrl,
-  modelUrl,
   requestRaw,
   loadDungeonDetail,
   loadDungeonLoot,

@@ -29,11 +29,6 @@
         <view class="row gactions">
           <view class="btn" data-id="{{item.id}}" catchtap="onCopyMacro">复制宏文本</view>
           <view class="spacer"></view>
-          <view class="muted gauthor">{{item.author}}</view>
-        </view>
-        <view class="prov" wx:for="{{item.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onCopyUrl">
-          <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
-          <view class="muted prov-url">{{item.url}}</view>
         </view>
       </view>
     </view>
@@ -47,12 +42,7 @@
           <view class="btn" data-url="{{item.url}}" catchtap="onCopyUrl">复制原帖地址</view>
           <view class="spacer"></view>
         </view>
-        <view class="prov" wx:for="{{item.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onCopyUrl">
-          <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
-          <view class="muted prov-url">{{item.url}}</view>
-        </view>
       </view>
-      <view class="muted addon-note">插件为第三方作者作品，与本站无关，安装与使用风险自负。本站不分发插件本体。</view>
     </view>
   </block>
 

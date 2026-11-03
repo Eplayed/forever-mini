@@ -28,7 +28,7 @@
       <view class="muted hero-en">
         <text wx:if="{{!enMissing}}" class="nameen">{{nameEn}}</text>
         <text wx:else class="todo">英文名待补</text>
-        <text wx:if="{{conflict}}" class="conflict">另一说法：{{conflict}}（本站当前取上面这个）</text>
+        <text wx:if="{{conflict}}" class="conflict">另一说法：{{conflict}}</text>
       </view>
       <view class="hero-meta">
         <text class="tag">{{kindLabel}}</text>
@@ -46,8 +46,6 @@
       <view class="card-title">副本地图</view>
       <view wx:if="{{mapUrl}}" class="map-box">
         <icon-cell src="{{mapUrl}}" size="hero" label="{{title}}" fallback-text="这座还没有内部底图" />
-        <view wx:if="{{mapDrawn}}" class="map-note">这张是示意图，不是游戏里的地图。</view>
-        <view wx:else class="map-note">底图取自游戏内画面，经第三方插件转存，不是本站绘制。</view>
       </view>
       <view wx:if="{{mapEntry}}" class="muted map-entry">{{mapEntry}}</view>
     </view>
@@ -67,7 +65,7 @@
       <view class="card-title">首领名单</view>
       <view wx:if="{{bossEmpty}}" class="muted">{{bossEmpty}}</view>
       <view wx:elif="{{needOnline}}" class="muted">首领名单要联网才能取（现在只有列表里就有的字段）。</view>
-      <view wx:elif="{{bosses.length === 0}}" class="muted">这座还没有首领记录，不猜。</view>
+      <view wx:elif="{{bosses.length === 0}}" class="muted">这座还没有首领记录。</view>
       <view class="boss" wx:for="{{bosses}}" wx:key="index">
         <view class="boss-face">
           <icon-cell src="{{item.portraitUrl}}" size="md" label="{{item.name}}" />
@@ -80,10 +78,10 @@
     </view>
 
     <view class="card">
-      <view class="card-title">掉落（按经典旧世公开数据库推的，本站不写几率）</view>
+      <view class="card-title">掉落</view>
       <view wx:if="{{dropNotice}}" class="notice drop-notice">{{dropNotice}}</view>
       <view wx:if="{{needOnline}}" class="muted">掉落分片还没取到，联网后再看。</view>
-      <view wx:elif="{{!dropGroups.length}}" class="muted">这座还没有掉落记录，不猜。</view>
+      <view wx:elif="{{!dropGroups.length}}" class="muted">这座还没有掉落记录。</view>
       <block wx:else>
         <view class="dgrp" wx:for="{{dropGroups}}" wx:key="boss">
           <view class="dgrp-h">{{item.boss}}</view>

@@ -63,6 +63,17 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
+  onShareTimeline() {
+    const d = this.data
+    const used = this.used
+    const usedCode = used && this.name ? engine.encode({ v: 1, n: this.name, b: used }, 'inf-tal') : ''
+    return {
+      title: d.className ? (d.className + ' · 天赋树与技能书') : '职业技能详情',
+      query: d.classId ? ('classId=' + d.classId + (usedCode ? '&b=' + encodeURIComponent(usedCode) : '')) : ''
+    }
+  },
+
   onUnload() {
     this.saveBuild()
   },

@@ -32,8 +32,6 @@
         <view class="stat"><text class="b">{{stats.newRecipes}}</text> 条无限新增</view>
         <view class="stat"><text class="b">{{stats.nodes}}</text> 个采集点</view>
       </view>
-      <view class="note">{{meta.disclaimer}}</view>
-      <view class="src"><text>这一页的数据 {{provText || '未记录'}} 对着来源核过 · 来源 {{srcHost}}</text></view>
     </view>
 
     <!-- 专业选择：13 个一次铺开，超出的换行，不做横向滚动（站主对首页那一排同样的要求） -->

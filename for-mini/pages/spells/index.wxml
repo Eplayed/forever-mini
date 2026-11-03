@@ -18,7 +18,7 @@
     <view wx:if="{{!loaded}}" class="card muted">正在取职业名单…</view>
     <view wx:if="{{loaded && !classes.length}}" class="card empty">
       <view>还没有拿到职业名单。</view>
-      <view class="muted">连一次网就有了。本站不放技能描述与循环建议，只查名称、级数与学习等级。</view>
+      <view class="muted">连一次网就有了。</view>
     </view>
     <view class="cgrid">
       <view class="ccard" wx:for="{{classes}}" wx:key="classId" data-id="{{item.classId}}" bindtap="onPick">
@@ -85,9 +85,8 @@
             </view>
           </view>
           <view wx:else class="muted">这一条还没有逐级记录，只显示上面那个数。</view>
-          <view class="prov" wx:for="{{x.prov}}" wx:key="url" data-url="{{item.url}}" catchtap="onOpenSource">
-            <view class="prov-type">{{item.type}}<text class="muted prov-at">核对 {{item.checkedAt}}</text></view>
-            <view class="muted prov-url">{{item.url}}</view>
+          <view class="prov" wx:for="{{x.prov}}" wx:key="url">
+            <view class="prov-type">{{item.type}}</view>
           </view>
         </view>
       </view>

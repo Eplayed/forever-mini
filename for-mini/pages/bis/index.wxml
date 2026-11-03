@@ -10,15 +10,10 @@
   </view>
 
   <block wx:if="{{meta}}">
-    <!-- 页头：口径那一句由分发层下发，页面不自己改写（红线） -->
+    <!-- 页头只留标题。口径句、来源行与 L1 留档那三句按站主 2026-11-01 的指令撤下
+         （数据层 bis.json 的 meta.source / fetched / gradingNote 一条没删，溯源页与分发层照旧带着） -->
     <view class="card">
       <view class="h1">{{meta.title}}</view>
-      <view class="note">{{meta.disclaimer}}</view>
-      <view class="src" bindtap="copyUrl">
-        <text>这份名单 {{fetched}} 对着来源核过 · 来源 {{sourceHost}}</text>
-        <text class="src-op">复制地址</text>
-      </view>
-      <view class="note2" wx:if="{{meta.gradingNote}}">{{meta.gradingNote}}</view>
     </view>
 
     <!-- 职业条：一格一个职业，图标 + 名字 + 这个职业几套 -->
@@ -47,39 +42,28 @@
         </view>
       </view>
 
-      <!-- 中间这一栏两种状态：默认那张静态图 → 点「查看 3D」挂上真实模型（竖盒，可拖动旋转）。
-           模型只在服务层过了三道闸（精确命中 / placementVerdict=PASS / 名单逐格相同）才会挂上，
-           所以进这一页一个模型请求都不发。2026-10-30 站主把「看占位模型」那颗按钮撤了。 -->
+      <!-- 中间这一栏：这一套穿这一身的人，一套一阵营一张透明底 PNG
+           （站主 2026-11-02："BIS 配装页装备展示全部替换成样图这样的，背景透明，根据职业装备来"）。
+           地址只从分发层桥表 posterLink 取（<setId>|<阵营> → 带内容哈希的文件名），页面不拼、不猜。
+           能不能用是构建时判的：来源件要在 B1 模型索引里、装备位置核对 PASS、图记录的模型哈希与索引一致、
+           名单逐格相同、文件字节与哈希都对得上——任一不过就不进桥表。
+           进不了表的那一格直说"没有图"和原因，绝不拿别的套装、别的职业或按种族渲的那一张来顶
+           （2026-11-01 那次就是顶错了：法师看到的是猎人那身）。 -->
       <view class="stage">
-        <image wx:if="{{stageUrl && !modelOn}}" class="stage-art" src="{{stageUrl}}" mode="aspectFit"
-               binderror="onStageError" />
-        <view wx:if="{{modelOn}}" class="model">
-          <bis-3d wx:if="{{modelSrc}}" src="{{modelSrc}}" bind:status="onModelStatus" />
-          <view wx:else class="model-wait">{{modelText}}</view>
-        </view>
+        <image wx:if="{{posterSrc}}" class="stage-art" src="{{posterSrc}}" mode="aspectFit"
+               bindload="onPosterLoad" binderror="onPosterError" />
+        <view wx:else class="stage-wait">{{posterText}}</view>
         <view class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
-        <view class="stage-btns">
-          <view class="stage-btn" wx:if="{{modelOn}}" bindtap="hideModel">退出 3D</view>
-          <view class="stage-btn" wx:if="{{!modelOn}}" bindtap="showModel">查看 3D</view>
-        </view>
       </view>
-      <!-- 这一句只在当前这一件真的画出来之后才出现；失败就回原画并说"3D 暂不可用"＋原因 -->
-      <view class="doll-note" wx:if="{{!modelOn && stageKind === 'poster'}}">
-        这一格是本站<text class="b">从客户端模型渲出来的静态图</text>，不是游戏截图；点「查看 3D」可以拖动转一圈看这一身。
-      </view>
-      <view class="doll-note note-ok" wx:if="{{modelOn && (modelState === 'ok' || modelState === 'shown')}}">
-        <text class="b">游戏角色与装备的静态预览，拖动可旋转</text>：这一件是本站按<text class="b">{{set.clsCn}} · {{set.mode}} · {{facCn}}</text>
-        登记的真实模型（从本机客户端导出、装备位置核对通过才用），<text class="b">不是本站画的</text>。{{modelDetail}}
-      </view>
-      <view class="doll-note" wx:if="{{modelOn && modelState === 'loading'}}">{{modelText}}</view>
-      <!-- 网格数没量全时补这一行：画面不藏，但说清哪一项是本站没数到的 -->
-      <view class="doll-note note-warn" wx:if="{{modelOn && modelState === 'shown'}}">{{modelDetail}}</view>
-      <view class="doll-note note-bad" wx:if="{{modelState === 'bad' && modelErr}}">
-        <text class="b">3D 暂不可用</text>：{{modelErr}}（先显示职业原画；这一套的名单与一览照旧完整，不拿别的套装冒充）
+      <!-- 图本身不再配说明句（站主 2026-11-02："这里文案去掉，只保留属性"）。
+           取不到时那一句仍然要说——那是状态，不是免责。 -->
+      <view class="doll-note" wx:if="{{posterState === 'loading'}}">{{posterText}}</view>
+      <view class="doll-note note-bad" wx:if="{{posterErr}}">
+        <text class="b">这一格没有图</text>：{{posterErr}}
       </view>
 
       <view class="sum" wx:if="{{sum.length}}">
-        <view class="sum-h"><text class="b">这套装备给的属性</text><text class="dim">{{sumNote}}</text></view>
+        <view class="sum-h"><text class="b">这套装备给的属性</text></view>
         <view class="sum-i">
           <view wx:for="{{sum}}" wx:key="k" class="sum-c"><text class="sum-v">{{item.v}}</text>{{item.k}}</view>
         </view>
@@ -89,7 +73,7 @@
     <!-- 部位一览：一行一个部位，点开通这个部位的备选 -->
     <view class="card" wx:if="{{set}}">
       <view class="bhead"><view class="bt">这一套一览</view>
-        <view class="bn">名字颜色按品质走 · 「可换」是这一格还列了几件</view></view>
+        <view class="bn">名字颜色按品质走 · 灰的是装备给的 · 金的是从哪来的（那条竖线就是来源行）·「可换」是这一格还列了几件</view></view>
       <view wx:for="{{rows}}" wx:key="slotLabel" class="srow" data-slot="{{item.slot}}" data-cell="{{item.cell}}"
             bindtap="openSlot">
         <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.slot}}" />
@@ -103,9 +87,12 @@
             <text wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text>
             <text>{{item.qText}}</text>
             <text wx:if="{{item.n}}">可换 {{item.n}} 件</text>
-            <text class="cmp cmp-{{item.cmp}}">{{item.cmp === 'same' ? '两家一致' : item.cmp === 'diff' ? '两家分歧' : '另一家没列'}}</text>
           </view>
-          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+          <!-- 出处：能确定是哪座本的行才可点（catchtap：不然会连带把这一行的备选弹层一起开） -->
+          <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
+                data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
+            {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
+          </view>
         </view>
         <view class="s-go">›</view>
       </view>
@@ -127,10 +114,12 @@
         <view class="e-main">
           <view class="s-top"><text class="s-name {{'q-' + item.q}}">{{item.name}}</text>
             <text class="dim" wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text></view>
-          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+          <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
+                data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
+            {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
+          </view>
         </view>
       </view>
-      <view class="note2">附魔与消耗品是这一套列的清单，本站没有第二处可以核对，也没实测过。</view>
     </view>
   </block>
 
@@ -142,18 +131,20 @@
     <view class="pop-h">
       <view>
         <view class="pop-t">{{slotHead}}</view>
-        <view class="pop-c">{{slotRows.length}} 件可换 · 顺序就是名单里列的顺序，本站不排强弱</view>
+        <view class="pop-c">{{slotRows.length}} 件可换</view>
       </view>
       <view class="pop-x" bindtap="closeSlot">×</view>
     </view>
+    <!-- 第二家名单那一件：只说它是谁列的，不给"一致/分歧"这类判词（站主 2026-11-02：这些文案不要了）。
+         数据层那条比较结果一条没删，撤的只是界面上的标签。 -->
     <view class="pop-theirs" wx:if="{{slotTheirs}}">
-      <text class="cmp cmp-{{slotTheirs.state}}">{{slotTheirs.cn}}</text>
-      <block wx:if="{{slotTheirs.state === 'diff' || slotTheirs.state === 'same'}}">
+      <block wx:if="{{slotTheirs.shown}}">
+        <text class="t-tag">另一份名单在这一格列的是</text>
         <text class="s-name {{'q-' + slotTheirs.q}}" wx:if="{{!slotTheirs.unknown}}">{{slotTheirs.name}}</text>
         <text class="s-unknown" wx:else>本站名录里没有这一件</text>
         <text class="dim" wx:if="{{slotTheirs.ilvl !== ''}}">装等 {{slotTheirs.ilvl}}</text>
       </block>
-      <text class="dim" wx:else>这一格第二家没单列出来</text>
+      <text class="t-tag" wx:else>另一份名单没单列这一格的装备</text>
     </view>
     <scroll-view class="pop-list" scroll-y>
       <view wx:for="{{slotRows}}" wx:key="item" class="prow">
@@ -162,7 +153,10 @@
           <view class="s-top"><text class="s-name {{'q-' + item.q}}">{{item.name}}</text>
             <text class="dim" wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text></view>
           <view class="p-st" wx:for="{{item.st}}" wx:for-item="line" wx:key="*this">{{line}}</view>
-          <view class="s-src" wx:if="{{item.src}}">{{item.src}}</view>
+          <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
+                data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
+            {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
+          </view>
         </view>
       </view>
     </scroll-view>

@@ -19,7 +19,6 @@ Page({
     errorText: '',
     note: '',
     qualityNote: '',
-    disclaimer: '',
     expandedId: ''
   },
 
@@ -30,6 +29,11 @@ Page({
 
   onPullDownRefresh() {
     this.refresh().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 朋友圈（2026-11-03 站主要求全站可分享） */
+  onShareTimeline() {
+    return { title: '掉落查询：搜副本或物品名，直达那座本' }
   },
 
   onShareAppMessage() {
@@ -84,7 +88,6 @@ Page({
         itemCount: order.length,
         note: d.note || '',
         qualityNote: d.qualityNote || '',
-        disclaimer: d.lootDisclaimer || '',
         requiresUpdate: !!r.requiresUpdate,
         needOnline: r.source !== 'live' && r.source !== 'cache',
         offline: r.source !== 'live',
@@ -137,8 +140,7 @@ Page({
     const lines = [
       '《无限》掉落：' + x.name + '（物品编号 ' + x.id + '）',
       '品质：' + x.qualityText,
-      x.sources.map((s) => '出自 ' + s.dungeon + (s.boss ? ' · ' + s.boss : '')).join('\n'),
-      '整理自无限测试版客户端资料，本站不写掉落几率'
+      x.sources.map((s) => '出自 ' + s.dungeon + (s.boss ? ' · ' + s.boss : ''))
     ].filter(Boolean)
     wx.setClipboardData({ data: lines.join('\n'), success: () => wx.showToast({ title: '已复制', icon: 'none' }) })
   }

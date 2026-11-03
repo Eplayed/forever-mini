@@ -52,6 +52,11 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 朋友圈（2026-11-03 站主要求全站可分享） */
+  onShareTimeline() {
+    return { title: '无限副本名单：等级、阵营、首领与掉落' }
+  },
+
   /* 底图加载失败（素材没发、域名没在白名单）就把这两层撤掉，页面回到纯色版式——
      不许留一块灰框在顶上，碎图比没图更糟 */
   onBgError() {

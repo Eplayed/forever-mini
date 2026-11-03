@@ -40,6 +40,15 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 微信分享（2026-11-03 站主要求全站可分享） */
+  onShareAppMessage() {
+    return { title: '中英速查 · 术语对照随手搜', path: '/pages/glossary/index' }
+  },
+
+  onShareTimeline() {
+    return { title: '中英速查 · 术语对照随手搜' }
+  },
+
   refresh() {
     return service.loadGlossary().then((result) => {
       const payload = result.data || {}

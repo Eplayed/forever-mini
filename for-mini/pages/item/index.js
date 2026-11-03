@@ -38,8 +38,7 @@ Page({
     stText: '',
     boss: '',
     dungeon: '',
-    idNote: '',
-    gradeNote: ''
+    idNote: ''
   },
 
   onLoad(query) {
@@ -53,6 +52,15 @@ Page({
 
   onPullDownRefresh() {
     this.start().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
+  onShareTimeline() {
+    const it = this.item
+    return {
+      title: it ? (it.nameCn || it.nameEn || '物品详情') : '物品详情',
+      query: this.wantD && this.wantI ? ('d=' + encodeURIComponent(this.wantD) + '&i=' + encodeURIComponent(this.wantI)) : ''
+    }
   },
 
   start() {
@@ -105,8 +113,7 @@ Page({
           sell: (card && card.sell) || '',
           stText: card && card.stKey ? (ST_TEXT[card.stKey] || '') : '',
           boss: (row && row.bossCn) || '',
-          idNote: card ? '' : '这件的数值行还没入库，先只给名单里有的那些。',
-          gradeNote: '属性行与卖价取自第三方名录，本站未做游戏内实测；掉落本身按经典旧世推的，官方说过无限服重做过掉落。'
+          idNote: card ? '' : '这件的数值行还没入库，先只给名单里有的那些。'
         })
         return null
       })

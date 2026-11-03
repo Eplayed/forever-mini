@@ -30,9 +30,20 @@
     {
      "name": "粉碎诅咒",
      "passive": false,
-     "effect": "免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。",
+     "effect": "移除所有诅咒和灾祸效果，受到的魔法伤害降低5%，持续8秒。",
      "quote": "粉碎诅咒：免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。",
-     "iconKey": "spell_nature_removecurse"
+     "iconKey": "spell_nature_removecurse",
+     "officialEffect": "免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "斧类武器专精",
@@ -56,20 +67,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「兽人」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、潜行者、萨满祭司、术士、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "兽人一族起源于德拉诺星球。这个崇尚和平、信奉萨满教义的种族遭到燃烧军团奴役，被迫与艾泽拉斯的人类开战。历经多年抗争，兽人终于摆脱恶魔的腐化，重获自由。时至今日，他们仍在这个憎恨并唾弃自己的异乡世界中，为荣誉而战。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_orc_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -99,9 +110,20 @@
     {
      "name": "食尸",
      "passive": false,
-     "effect": "吞噬尸体，在持续时间内恢复35%的生命值和法力值。",
+     "effect": "吞噬人型生物或亡灵的尸体，10秒内每2秒回复7%生命值与7%法力值；移动、动作或受击会中断。",
      "quote": "食尸：吞噬尸体，在持续时间内恢复35%的生命值和法力值。",
-     "iconKey": "ability_racial_cannibalize"
+     "iconKey": "ability_racial_cannibalize",
+     "officialEffect": "吞噬尸体，在持续时间内恢复35%的生命值和法力值。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "水下呼吸",
@@ -113,9 +135,20 @@
     {
      "name": "哀伤之触",
      "passive": true,
-     "effect": "你的攻击有时会吸取生命值。",
+     "effect": "法术与攻击有几率吸取生命值，上限为你最大生命值的5%：牧师/法师/术士为30%几率，战士/圣骑士/潜行者为20%几率。",
      "quote": "哀伤之触（被动）：你的攻击有时会吸取生命值。",
-     "iconKey": "spell_shadow_fingerofdeath"
+     "iconKey": "spell_shadow_fingerofdeath",
+     "officialEffect": "你的攻击有时会吸取生命值。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     }
    ],
    "iconKey": "race_undead_male",
@@ -125,20 +158,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「亡灵」行：官方只给 X 标记，职业名按同页表头还原为 法师、圣骑士、牧师、潜行者、术士、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "摆脱巫妖王的控制后，被遗忘者立志推翻他的统治。在女妖之王希尔瓦娜斯的率领下，他们渴望向天灾军团复仇。人类也已成为他们的敌人，前者执意要将所有亡灵从这片土地上彻底清除。被遗忘者甚至不在乎自己的盟友；对他们而言，部落只是推进黑暗图谋的工具。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_undead_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -159,9 +192,20 @@
     {
      "name": "战争践踏",
      "passive": false,
-     "effect": "使附近的敌人昏迷，持续2秒。",
+     "effect": "使身边8码内最多5个敌人昏迷2秒。",
      "quote": "战争践踏：使附近的敌人昏迷，持续2秒。",
-     "iconKey": "ability_warstomp"
+     "iconKey": "ability_warstomp",
+     "officialEffect": "使附近的敌人昏迷，持续2秒。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": "GearInsight_Forever/Data.lua（2026-10-30）"
+     },
+     "needsTest": true
     },
     {
      "name": "栽培",
@@ -173,16 +217,38 @@
     {
      "name": "原野疾驰",
      "passive": true,
-     "effect": "持续移动时，移动速度会逐渐提高。",
+     "effect": "移动中每5秒叠加1%移动速度，最多30%；受击或站定会掉层。骑乘时移动速度额外提高3%。",
      "quote": "原野疾驰（被动）：持续移动时，移动速度会逐渐提高。",
-     "iconKey": "achievement_zone_barrens_01"
+     "iconKey": "achievement_zone_barrens_01",
+     "officialEffect": "持续移动时，移动速度会逐渐提高。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "耐久",
      "passive": true,
-     "effect": "总生命值提高5%，命中几率提高1%。",
+     "effect": "总生命值提高5%，爆击伤害与治疗加成提高2%。",
      "quote": "耐久（被动）：总生命值提高5%，命中几率提高1%。",
-     "iconKey": "spell_nature_unyeildingstamina"
+     "iconKey": "spell_nature_unyeildingstamina",
+     "officialEffect": "总生命值提高5%，命中几率提高1%。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     }
    ],
    "iconKey": "race_tauren_male",
@@ -192,20 +258,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「牛头人」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、萨满祭司、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "牛头人始终致力于维护自然平衡，并遵从他们所信奉的女神——大地母亲的意志。不久前，凶残的半人马发动袭击，牛头人险遭灭族；所幸他们遇见兽人，并在其帮助下击败了入侵者。为了报答这份以血换来的恩情，牛头人加入部落，进一步巩固了两个种族之间的友谊。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_tauren_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -236,9 +302,20 @@
     {
      "name": "极速再生",
      "passive": false,
-     "effect": "在持续时间内恢复50%的最大生命值。",
+     "effect": "6秒内恢复50%的最大生命值；移动、动作或受击会中断。",
      "quote": "极速再生：在持续时间内恢复50%的最大生命值。",
-     "iconKey": "ability_racial_regeneratin"
+     "iconKey": "ability_racial_regeneratin",
+     "officialEffect": "在持续时间内恢复50%的最大生命值。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "野兽杀手",
@@ -250,9 +327,20 @@
     {
      "name": "再生",
      "passive": true,
-     "effect": "在战斗中保持10%的生命值恢复。",
+     "effect": "生命值回复速度提高20%，战斗中仍保持20%的回复速度。",
      "quote": "再生（被动）：在战斗中保持10%的生命值恢复。",
-     "iconKey": "spell_nature_regenerate"
+     "iconKey": "spell_nature_regenerate",
+     "officialEffect": "在战斗中保持10%的生命值恢复。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": "GearInsight_Forever/Data.lua（2026-10-30）"
+     },
+     "needsTest": true
     }
    ],
    "iconKey": "race_troll_male",
@@ -262,20 +350,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「巨魔」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、牧师、潜行者、萨满祭司、术士、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "凶悍的暗矛部族巨魔曾以荆棘谷的丛林为家，却因各方的连年征战而被逐出了故土。后来，巨魔与兽人部落结为盟友；年轻的兽人酋长萨尔说服他们随自己前往卡利姆多。尽管暗矛巨魔仍坚守其幽暗传统，他们在部落中依然享有崇高地位。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_troll_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -298,16 +386,38 @@
      {
       "name": "天穹视界",
       "passive": false,
-      "effect": "获得元素祝福，移动速度提高10%。",
+      "effect": "汲取元素交汇处的祝福，移动与骑乘速度提高10%：附近没有交汇处持续30秒，有则持续15分钟。",
       "quote": "天穹视界：获得元素祝福，移动速度提高10%。",
-      "iconKey": "ability_skyreach_lens_flare"
+      "iconKey": "ability_skyreach_lens_flare",
+      "officialEffect": "获得元素祝福，移动速度提高10%。",
+      "level": "L2",
+      "valueVia": "xr-racials",
+      "valueSource": {
+       "addon": "XR_DungeonGuide",
+       "file": "Data_Racials.lua",
+       "updated": "2026-10-16",
+       "fetched": "2026-11-02",
+       "corroborated": null
+      },
+      "needsTest": true
      },
      {
       "name": "风灵护佑",
       "passive": true,
-      "effect": "近战、远程与法术急速提高1%。",
+      "effect": "法术、近战与远程急速提高3%。",
       "quote": "风灵护佑（被动）：近战、远程与法术急速提高1%。",
-      "iconKey": "inv_misc_volatileair"
+      "iconKey": "inv_misc_volatileair",
+      "officialEffect": "近战、远程与法术急速提高1%。",
+      "level": "L2",
+      "valueVia": "xr-racials",
+      "valueSource": {
+       "addon": "XR_DungeonGuide",
+       "file": "Data_Racials.lua",
+       "updated": "2026-10-16",
+       "fetched": "2026-11-02",
+       "corroborated": null
+      },
+      "needsTest": true
      },
      {
       "name": "元素洞察",
@@ -322,7 +432,7 @@
       "type": "official_cn",
       "url": "https://wow.blizzard.cn/news/24304075/index.html",
       "note": "国服官方中文·种族与职业组合公告·子族特长原文",
-      "checkedAt": "2026-10-08",
+      "checkedAt": "2026-11-02",
       "quote": "踏空而行：在空中向下滑行10秒。"
      }
     ]
@@ -343,19 +453,19 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「天裔」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、潜行者、萨满祭司、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·子族特长原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "踏空而行：在空中向下滑行10秒。"
     },
     {
      "type": "site-note",
      "note": "天裔是新种族：官方 CDN 与资料站都查不到可用图标键，界面用自绘阵营块，不拿别人的图凑数",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -412,20 +522,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「人类」行：官方只给 X 标记，职业名按同页表头还原为 猎人、法师、圣骑士、牧师、潜行者、术士、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "人类是个年轻的种族，因此适应力极强，能以惊人的效率掌握战斗、工艺与魔法技艺。勇气与乐观的天性使人类建立起世上一些最伟大的王国。在这个动荡的时代，历经世代纷争的人类正努力重振昔日荣光，开创光明的新未来。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_human_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -448,9 +558,20 @@
     {
      "name": "石像形态",
      "passive": false,
-     "effect": "免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。",
+     "effect": "立即移除并免疫流血、中毒与疾病效果，受到的物理伤害降低10%，持续8秒。",
      "quote": "石像形态：免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。",
-     "iconKey": "spell_shadow_unholystrength"
+     "iconKey": "spell_shadow_unholystrength",
+     "officialEffect": "免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": "GearInsight_Forever/Data.lua（2026-10-30）"
+     },
+     "needsTest": true
     },
     {
      "name": "寻找财宝",
@@ -481,20 +602,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「矮人」行：官方只给 X 标记，职业名按同页表头还原为 猎人、圣骑士、牧师、潜行者、萨满祭司、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "往昔，矮人只在乎从大地深处发掘的财富。后来，出土的文献记载，有一个神祇般的种族赋予矮人生命……以及蕴含魔力的天赋传承。为了探寻更多种族起源的真相，矮人全心投入寻找失落的神器与远古知识。如今，矮人考古学家已经遍布世界各地。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_dwarf_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -523,16 +644,38 @@
     {
      "name": "影遁",
      "passive": false,
-     "effect": "在静止时获得潜行状态。",
+     "effect": "潜入暗影，降低被敌人发现的几率，持续到取消或移动为止；战斗中使用时冷却延长到2分钟，并降低敌人攻击你的意愿。",
      "quote": "影遁：在静止时获得潜行状态。",
-     "iconKey": "ability_ambush"
+     "iconKey": "ability_ambush",
+     "officialEffect": "在静止时获得潜行状态。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": "GearInsight_Forever/Data.lua（2026-10-30）"
+     },
+     "needsTest": true
     },
     {
      "name": "迅捷",
      "passive": true,
-     "effect": "躲闪几率提高1%，移动速度提高2%。",
+     "effect": "躲闪几率提高1%，移动速度提高2%；潜行者与德鲁伊潜行时更难被发现（相当于潜行等级提高1级）。",
      "quote": "迅捷（被动）：躲闪几率提高1%，移动速度提高2%。",
-     "iconKey": "ability_racial_shadowmeld"
+     "iconKey": "ability_racial_shadowmeld",
+     "officialEffect": "躲闪几率提高1%，移动速度提高2%。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "精灵之魂",
@@ -549,19 +692,19 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「暗夜精灵」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、牧师、潜行者、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "一万年前，暗夜精灵建立了一个庞大的帝国，但他们对原始魔法的恣意使用最终带来了毁灭。悲痛之中，他们退隐森林、与世隔绝，直到宿敌燃烧军团再度归来。别无选择的暗夜精灵终于走出隐居之地，为自己在新世界中的立足之地而战。"
     },
     {
      "type": "site-note",
      "note": "天裔是新种族：官方 CDN 与资料站都查不到可用图标键，界面用自绘阵营块，不拿别人的图凑数",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -583,30 +726,74 @@
     {
      "name": "逃命专家",
      "passive": false,
-     "effect": "短暂免疫定身和诱捕效果。",
+     "effect": "立即摆脱并免疫一切限制移动的效果，持续3秒。",
      "quote": "逃命专家：短暂免疫定身和诱捕效果。",
-     "iconKey": "ability_rogue_trip"
+     "iconKey": "ability_rogue_trip",
+     "officialEffect": "短暂免疫定身和诱捕效果。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "我知道了！",
      "passive": false,
-     "effect": "使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。",
+     "effect": "持续8秒：非周期性伤害或治疗技能的消耗降低10%、效果提高10%；周期性效果不受益。",
      "quote": "我知道了！：使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。",
-     "iconKey": "inv_gnometoy"
+     "iconKey": "inv_gnometoy",
+     "officialEffect": "使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "开阔思维",
      "passive": true,
-     "effect": "法力值、怒气值或能量值上限提高5%。",
+     "effect": "对应资源上限提高5%：牧师/法师/术士为法力值，潜行者为能量值，战士为怒气值。",
      "quote": "开阔思维（被动）：法力值、怒气值或能量值上限提高5%。",
-     "iconKey": "inv_enchant_essenceeternallarge"
+     "iconKey": "inv_enchant_essenceeternallarge",
+     "officialEffect": "法力值、怒气值或能量值上限提高5%。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     },
     {
      "name": "工程学专精",
      "passive": true,
-     "effect": "工程学装置更加可靠。",
+     "effect": "使用工程学装置时出现故障或反冲的几率降低20%。",
      "quote": "工程学专精（被动）：工程学装置更加可靠。",
-     "iconKey": "inv_misc_gear_01"
+     "iconKey": "inv_misc_gear_01",
+     "officialEffect": "工程学装置更加可靠。",
+     "level": "L2",
+     "valueVia": "xr-racials",
+     "valueSource": {
+      "addon": "XR_DungeonGuide",
+      "file": "Data_Racials.lua",
+      "updated": "2026-10-16",
+      "fetched": "2026-11-02",
+      "corroborated": null
+     },
+     "needsTest": true
     }
    ],
    "iconKey": "race_gnome_male",
@@ -616,20 +803,20 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「侏儒」行：官方只给 X 标记，职业名按同页表头还原为 法师、牧师、潜行者、术士、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·种族简介原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "卡兹莫丹的侏儒虽然身材矮小，却凭借过人的智慧在历史上占据了一席之地。他们的地下王国诺莫瑞根，曾是一座蒸汽动力技术造就的奇观。然而，一场穴居人大举入侵导致这座城市最终沦陷。如今，这座城市的建造者流落在矮人的土地上，竭尽所能协助盟友。"
     },
     {
      "type": "fan_db",
      "url": "https://wowclassicforever.info/zh-hans/races/",
      "note": "图标文件名 race_gnome_male 取自资料站（事实性标识符），图片从暴雪官方图片服务器取回本地；官方中文公告不含图标",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   },
@@ -659,9 +846,20 @@
      {
       "name": "风灵护佑",
       "passive": true,
-      "effect": "近战、远程与法术急速提高1%。",
+      "effect": "法术、近战与远程急速提高3%。",
       "quote": "风灵护佑（被动）：近战、远程与法术急速提高1%。",
-      "iconKey": "inv_misc_volatileair"
+      "iconKey": "inv_misc_volatileair",
+      "officialEffect": "近战、远程与法术急速提高1%。",
+      "level": "L2",
+      "valueVia": "xr-racials",
+      "valueSource": {
+       "addon": "XR_DungeonGuide",
+       "file": "Data_Racials.lua",
+       "updated": "2026-10-16",
+       "fetched": "2026-11-02",
+       "corroborated": null
+      },
+      "needsTest": true
      },
      {
       "name": "元素洞察",
@@ -676,7 +874,7 @@
       "type": "official_cn",
       "url": "https://wow.blizzard.cn/news/24304075/index.html",
       "note": "国服官方中文·种族与职业组合公告·子族特长原文",
-      "checkedAt": "2026-10-08",
+      "checkedAt": "2026-11-02",
       "quote": "踏空而行：在空中向下滑行10秒。"
      }
     ]
@@ -697,19 +895,19 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·矩阵表「天裔」行：官方只给 X 标记，职业名按同页表头还原为 德鲁伊、猎人、法师、潜行者、战士",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     },
     {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·子族特长原文",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "踏空而行：在空中向下滑行10秒。"
     },
     {
      "type": "site-note",
      "note": "天裔是新种族：官方 CDN 与资料站都查不到可用图标键，界面用自绘阵营块，不拿别人的图凑数",
-     "checkedAt": "2026-10-08"
+     "checkedAt": "2026-11-02"
     }
    ]
   }
@@ -801,7 +999,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -817,7 +1015,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -833,7 +1031,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -849,7 +1047,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -865,7 +1063,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -881,7 +1079,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]
@@ -897,7 +1095,7 @@
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "国服官方中文·种族与职业组合公告·亮点组合整句",
-     "checkedAt": "2026-10-08",
+     "checkedAt": "2026-11-02",
      "quote": "《魔兽世界》：“无限”带来了更多角色创建选择，包括兽人法师、巨魔术士、亡灵圣骑士、人类猎人、侏儒牧师、矮人萨满祭司，以及首次登场的天裔。"
     }
    ]

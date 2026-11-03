@@ -36,6 +36,11 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
+  /* 朋友圈（2026-11-03 站主要求全站可分享） */
+  onShareTimeline() {
+    return { title: '无限职业一览：可选种族、技能书与天赋树' }
+  },
+
   /* 底图取不到就撤这两层，页面回纯色版式（碎图比没图更糟） */
   onBgError() {
     this.setData({ bgUrl: '' })

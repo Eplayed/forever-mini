@@ -1,0 +1,173 @@
+/* 角色起名页（2026-11-03）
+   颜色一律引用 app.wxss 的令牌，页面里不出现裸色值（全站唯一颜色来源那条规矩）。 */
+.wrap {
+  padding: 24rpx 24rpx 64rpx;
+}
+
+/* 头牌：这一页做什么，一句话 */
+.hero {
+  padding: 34rpx 30rpx 30rpx;
+  margin-bottom: 30rpx;
+}
+.hero-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--gold-hi);
+  letter-spacing: 6rpx;
+}
+.hero-sub {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+/* 职业格：九个一排、超出换行，与首页职业区同一套版式；选中的描金边 */
+.sec-title {
+  font-size: 26rpx;
+  color: var(--txt-dim);
+  margin: 8rpx 4rpx 16rpx;
+}
+.cls9 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 30rpx;
+}
+.cls {
+  width: 108rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14rpx 0 10rpx;
+  border-radius: var(--r-ctl);
+  border: 2rpx solid var(--line);
+  background: var(--panel-glass);
+  box-sizing: border-box;
+}
+.cls-on {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+  box-shadow: 0 0 16rpx var(--gold-glow);
+}
+.cls-ico {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 8rpx;
+}
+.cls-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: var(--gold);
+  background: var(--field);
+}
+.cls-name {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+.cls-on .cls-name {
+  color: var(--gold-hi);
+}
+
+/* 结果台：摇动时整块描一圈金光，字也在抖——告诉玩家"正在滚"不是卡了 */
+.stage {
+  min-height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 24rpx;
+  border: 2rpx solid var(--line);
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.stage-on {
+  border-color: var(--gold);
+  box-shadow: 0 0 28rpx var(--gold-glow);
+}
+.stage-input {
+  width: 100%;
+  min-height: 88rpx;
+  text-align: center;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--txt-title);
+  letter-spacing: 2rpx;
+}
+.stage-input-roll {
+  color: var(--gold-hi);
+}
+.stage-ph {
+  color: var(--txt-hint);
+  font-weight: 400;
+  font-size: 30rpx;
+}
+.stage-hint {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: var(--txt-muted);
+}
+
+/* 生成键：整宽、金色实底——这一页唯一的强调色块，一眼知道点哪 */
+.roll {
+  margin: 30rpx 0 0;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-radius: var(--r-ctl);
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  color: var(--txt-muted);
+  background: var(--field);
+  border: 2rpx solid var(--line);
+  padding: 0;
+}
+.roll-ready {
+  color: var(--accent-ink);
+  background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  border-color: var(--gold);
+  box-shadow: 0 6rpx 22rpx var(--gold-glow);
+}
+.roll[disabled] {
+  color: var(--txt-muted);
+  background: var(--field);
+  border-color: var(--line);
+}
+
+/* 复制键：描金 ghost，排在生成键正下方 */
+.copy {
+  margin: 20rpx 0 0;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: var(--r-ctl);
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+  color: var(--gold);
+  background: transparent;
+  border: 2rpx solid var(--gold-line);
+  padding: 0;
+}
+.copy[disabled] {
+  color: var(--txt-hint);
+  border-color: var(--line);
+  background: transparent;
+}
+
+/* 未开放 / 取不到：同一套安静版式 */
+.locked {
+  padding: 120rpx 40rpx;
+  text-align: center;
+}
+.locked-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--txt-title);
+  margin-bottom: 16rpx;
+}
+.locked-sub {
+  font-size: 26rpx;
+}

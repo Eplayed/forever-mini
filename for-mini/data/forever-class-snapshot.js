@@ -74,7 +74,7 @@ module.exports = {
     {
      "name": "粉碎诅咒",
      "passive": false,
-     "effect": "免疫诅咒和灾祸效果，并降低受到的魔法伤害，持续8秒。",
+     "effect": "移除所有诅咒和灾祸效果，受到的魔法伤害降低5%，持续8秒。",
      "iconKey": "spell_nature_removecurse"
     },
     {
@@ -119,7 +119,7 @@ module.exports = {
     {
      "name": "食尸",
      "passive": false,
-     "effect": "吞噬尸体，在持续时间内恢复35%的生命值和法力值。",
+     "effect": "吞噬人型生物或亡灵的尸体，10秒内每2秒回复7%生命值与7%法力值；移动、动作或受击会中断。",
      "iconKey": "ability_racial_cannibalize"
     },
     {
@@ -131,7 +131,7 @@ module.exports = {
     {
      "name": "哀伤之触",
      "passive": true,
-     "effect": "你的攻击有时会吸取生命值。",
+     "effect": "法术与攻击有几率吸取生命值，上限为你最大生命值的5%：牧师/法师/术士为30%几率，战士/圣骑士/潜行者为20%几率。",
      "iconKey": "spell_shadow_fingerofdeath"
     }
    ],
@@ -156,7 +156,7 @@ module.exports = {
     {
      "name": "战争践踏",
      "passive": false,
-     "effect": "使附近的敌人昏迷，持续2秒。",
+     "effect": "使身边8码内最多5个敌人昏迷2秒。",
      "iconKey": "ability_warstomp"
     },
     {
@@ -168,13 +168,13 @@ module.exports = {
     {
      "name": "原野疾驰",
      "passive": true,
-     "effect": "持续移动时，移动速度会逐渐提高。",
+     "effect": "移动中每5秒叠加1%移动速度，最多30%；受击或站定会掉层。骑乘时移动速度额外提高3%。",
      "iconKey": "achievement_zone_barrens_01"
     },
     {
      "name": "耐久",
      "passive": true,
-     "effect": "总生命值提高5%，命中几率提高1%。",
+     "effect": "总生命值提高5%，爆击伤害与治疗加成提高2%。",
      "iconKey": "spell_nature_unyeildingstamina"
     }
    ],
@@ -208,7 +208,7 @@ module.exports = {
     {
      "name": "极速再生",
      "passive": false,
-     "effect": "在持续时间内恢复50%的最大生命值。",
+     "effect": "6秒内恢复50%的最大生命值；移动、动作或受击会中断。",
      "iconKey": "ability_racial_regeneratin"
     },
     {
@@ -220,7 +220,7 @@ module.exports = {
     {
      "name": "再生",
      "passive": true,
-     "effect": "在战斗中保持10%的生命值恢复。",
+     "effect": "生命值回复速度提高20%，战斗中仍保持20%的回复速度。",
      "iconKey": "spell_nature_regenerate"
     }
    ],
@@ -254,13 +254,13 @@ module.exports = {
     {
      "name": "天穹视界",
      "passive": false,
-     "effect": "获得元素祝福，移动速度提高10%。",
+     "effect": "汲取元素交汇处的祝福，移动与骑乘速度提高10%：附近没有交汇处持续30秒，有则持续15分钟。",
      "iconKey": "ability_skyreach_lens_flare"
     },
     {
      "name": "风灵护佑",
      "passive": true,
-     "effect": "近战、远程与法术急速提高1%。",
+     "effect": "法术、近战与远程急速提高3%。",
      "iconKey": "inv_misc_volatileair"
     },
     {
@@ -339,7 +339,7 @@ module.exports = {
     {
      "name": "石像形态",
      "passive": false,
-     "effect": "免疫流血、中毒和疾病效果，并降低受到的物理伤害，持续8秒。",
+     "effect": "立即移除并免疫流血、中毒与疾病效果，受到的物理伤害降低10%，持续8秒。",
      "iconKey": "spell_shadow_unholystrength"
     },
     {
@@ -389,13 +389,13 @@ module.exports = {
     {
      "name": "影遁",
      "passive": false,
-     "effect": "在静止时获得潜行状态。",
+     "effect": "潜入暗影，降低被敌人发现的几率，持续到取消或移动为止；战斗中使用时冷却延长到2分钟，并降低敌人攻击你的意愿。",
      "iconKey": "ability_ambush"
     },
     {
      "name": "迅捷",
      "passive": true,
-     "effect": "躲闪几率提高1%，移动速度提高2%。",
+     "effect": "躲闪几率提高1%，移动速度提高2%；潜行者与德鲁伊潜行时更难被发现（相当于潜行等级提高1级）。",
      "iconKey": "ability_racial_shadowmeld"
     },
     {
@@ -427,25 +427,25 @@ module.exports = {
     {
      "name": "逃命专家",
      "passive": false,
-     "effect": "短暂免疫定身和诱捕效果。",
+     "effect": "立即摆脱并免疫一切限制移动的效果，持续3秒。",
      "iconKey": "ability_rogue_trip"
     },
     {
      "name": "我知道了！",
      "passive": false,
-     "effect": "使接下来的3个法术或技能消耗降低，伤害或治疗效果提高10%。",
+     "effect": "持续8秒：非周期性伤害或治疗技能的消耗降低10%、效果提高10%；周期性效果不受益。",
      "iconKey": "inv_gnometoy"
     },
     {
      "name": "开阔思维",
      "passive": true,
-     "effect": "法力值、怒气值或能量值上限提高5%。",
+     "effect": "对应资源上限提高5%：牧师/法师/术士为法力值，潜行者为能量值，战士为怒气值。",
      "iconKey": "inv_enchant_essenceeternallarge"
     },
     {
      "name": "工程学专精",
      "passive": true,
-     "effect": "工程学装置更加可靠。",
+     "effect": "使用工程学装置时出现故障或反冲的几率降低20%。",
      "iconKey": "inv_misc_gear_01"
     }
    ],
@@ -485,7 +485,7 @@ module.exports = {
     {
      "name": "风灵护佑",
      "passive": true,
-     "effect": "近战、远程与法术急速提高1%。",
+     "effect": "法术、近战与远程急速提高3%。",
      "iconKey": "inv_misc_volatileair"
     },
     {

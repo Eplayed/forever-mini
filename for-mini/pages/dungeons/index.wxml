@@ -32,7 +32,7 @@
 
   <view wx:if="{{empty}}" class="card empty">
     <view>没有符合条件的副本。</view>
-    <view class="muted">换个关键词，或把筛选切回「全部」。查不到不等于这座本不存在；缺的字段会写「待实测」，不机翻、不编造。</view>
+    <view class="muted">换个关键词，或把筛选切回「全部」。</view>
   </view>
 
   <view wx:if="{{!loaded}}" class="card muted">正在取副本名单…</view>

@@ -45,12 +45,39 @@ Page({
 
   onLoad(query) {
     this.dropQuery = String((query && query.drop) || '')
+    /* 从哪儿点来的（bis＝配装名单）。提示要说真话，不能把配装页来的玩家说成"从掉落反查过来" */
+    this.dropFrom = String((query && query.from) || '')
     this.setData({ id: pickId(query) })
     this.start()
   },
 
+  /* 高亮那句提示按"这件在本页的掉落表里到底有没有"来说。
+     配装页那行出处是参考站写的，本站的掉落归属是另一份来源，两边不一致时这里根本没有那行——
+     那就直说没有，不能一边找不到一边告诉玩家"下面高亮的是你查的那件"。 */
+  dropNoticeFor(drops) {
+    const q = this.dropQuery
+    if (!q) return ''
+    const from = this.dropFrom === 'bis' ? '配装名单' : '掉落反查'
+    let hit = false
+    for (let i = 0; i < drops.length; i += 1) {
+      if (String(drops[i].itemId) === q) { hit = true; break }
+    }
+    return hit
+      ? '你从' + from + '点过来：下面高亮的是这一件，它左边就是掉它的首领。'
+      : '你从' + from + '点过来。这座本的掉落表里没有这一件——出处只有参考站那行字说过，本站这份没挂上这层归属，所以这里没有可高亮的行。'
+  },
+
   onPullDownRefresh() {
     this.start().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
+  onShareTimeline() {
+    const d = this.d
+    return {
+      title: d ? (d.nameCn || d.nameEn || '副本详情') : '副本详情',
+      query: d ? 'id=' + encodeURIComponent(d.id) : ''
+    }
   },
 
   start() {
@@ -144,7 +171,7 @@ Page({
           })) : [],
           dropGroups: this.groupDrops(l.data ? (l.data.drops || []) : []),
           highlightDrop: this.dropQuery || '',
-          dropNotice: this.dropQuery ? '你从掉落反查过来：下面高亮的是你查的那件。' : '',
+          dropNotice: this.dropNoticeFor(l.data ? (l.data.drops || []) : []),
           detailSource: d.source,
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',

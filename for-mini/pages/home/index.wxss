@@ -203,48 +203,25 @@
   min-height: 66rpx;
 }
 
-/* —— 配装入口（2026-10-26 站主：核心功能，必须醒目）——
-   整宽一条，比下面那排两列卡高一档；底色仍走玻璃令牌，图取不到时不塌版。 */
-.bis-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 168rpx;
-  margin-bottom: 20rpx;
-  padding: 24rpx 24rpx 22rpx;
-  background: var(--glass-sheen), var(--panel-glass);
-  backdrop-filter: var(--glass-blur);
-  border: 1rpx solid var(--gold);
-  border-radius: var(--r-ctl);
-}
-
-.bis-row {
+/* —— 图标入口卡（2026-11-03 站主照截图重排：BIS、起名从整宽卡改进两列格）——
+   头一行 = 自绘图标（img/home/）+ 名称并排，下面接说明行；
+   底子与带底图的入口格同一套玻璃令牌，两格放在一排里高矮一致。 */
+.entry-head {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.bis-name {
-  font-size: 34rpx;
+.entry-ic {
+  width: 72rpx;
+  height: 72rpx;
+  flex-shrink: 0;
+}
+
+.entry-head .entry-name {
   font-weight: 600;
-  letter-spacing: 1rpx;
-  color: var(--txt-title);
-}
-
-.bis-go {
-  font-size: 34rpx;
-  color: var(--gold-hi);
   margin-left: 16rpx;
-}
-
-.bis-desc {
-  position: relative;
-  z-index: 1;
-  font-size: 22rpx;
-  color: var(--txt-dim);
-  line-height: 1.6;
-  margin-top: 10rpx;
 }
 
 /* —— 职业格 ——

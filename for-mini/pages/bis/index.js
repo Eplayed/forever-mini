@@ -1,21 +1,27 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
-const bisModel = require('../../services/bis-model')
-const POSTERS = require('../../data/bis-posters')
 
-/* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面…3D 模型先放模型占位"）
+/* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面"）
    数据来自分发层的三份配装产物：索引（38 套）+ 共享物品表（830 件）+ 每套一片。
-   网页那一版的规则一条不改地跟过来：
-   ① 口径那一句由索引下发，页面不自己改写（红线：不冒充官方结论、不做模拟计算）；
-   ② 名字/品质/装等/属性行/图标全部来自本站物品库，名单只存"哪件在哪个部位"；
-   ③ 两家名单只是并列摆出来，本站不裁决；
-   ④ 属性合计只加装备给的行，不含职业与种族基础值、不含附魔与套装效果。
-   这一页没有打包快照：配装表 118 KB，主包只剩 6 KB 余量，硬塞会把别的通道挤掉——
-   所以离线时明确说"要联网才看得到"，不拿半截数据糊玩家。 */
+   中间那一栏到 2026-11-02 已经换过三种形态，这段是为了下次别再换回去：
+   ① 按种族的 2D 底图（2026-10-30）：底图表 data/bis-posters.js 的键是「职业|阵营」、
+     值却是按种族渲的猎人那身，法师/牧师看到的是猎人装备，撞红线"不得用同职业另一套冒充当前套"，2026-11-01 撤；
+   ② 真实 3D（2026-11-01 直接挂进这一栏）：站主 2026-11-02 说小程序不要 3D 了，
+     组件、取模型契约（services/bis-model.js）与相机那套一起删掉——xr-frame 在这台模拟器里起不来，
+     画面只能靠真机验，留着一套没人消费的链路下次还会被当成"照旧"接回去；
+   ③ 逐件静态图（2026-11-02 站主："BIS 配装页装备展示全部替换成样图这样的，背景透明，根据职业装备来"）：
+     一套一阵营一张透明底 PNG，地址由分发层桥表 posterLink 给（<setId>|<阵营> → 带内容哈希的文件名）。
+     原来跑在客户端的三道闸搬到了构建时（tools/oss-release.js）：来源件不在 B1 索引、位置没 PASS、
+     图记录的模型哈希与索引不符、名单逐格没对上、文件字节或哈希与清单不符——任一过不了就不进桥表。
+     页面拿不到地址就只显示"这一格没有可显示的图"，不拿任何别的图填这一格。
+   页头那三句（口径句 / 来源与核对日 / L1 留档）2026-11-01 起从界面撤下，数据层与溯源页一条没删。
+   仍然照旧的三条：名字/品质/装等/属性行/图标全来自本站物品库；两家名单只并列不裁决；
+   属性合计只加装备给的行。这一页没有打包快照（配装表 118 KB，主包只剩 6 KB 余量），
+   离线时明确说"要联网才看得到"，不拿半截数据糊玩家。 */
 
 const SUM_KEYS = ['力量', '敏捷', '耐力', '智力', '精神', '护甲'];
-const CMP_CN = { same: '两家一致', diff: '两家分歧', none: '另一家没列' };
+const POSTER_NONE = '这一格没有可显示的图';
 
 Page({
   data: {
@@ -40,16 +46,12 @@ Page({
     sumNote: '',
     enchants: [],
     consumables: [],
-    stageUrl: '',
-    stageKind: '',
-    /* 真实 3D 那一层：modelOn 才是挂了 xr-frame 组件的状态。
-       进这一页时它必须是 false 且 modelSrc 为空——一个模型请求都不发（站主要的是点开才有）。 */
-    modelOn: false,
-    modelSrc: '',
-    modelState: 'idle',
-    modelText: '',
-    modelErr: '',
-    modelDetail: '',
+    /* 中间这一栏只有"这一套穿这一身"那一张图（2026-11-02 起）。桥表里没有这一格时
+       posterSrc 一直为空，格子里显示 posterText，下面那行说清原因——不拿任何图去填。 */
+    posterSrc: '',
+    posterState: 'none',
+    posterText: POSTER_NONE,
+    posterErr: '',
     slot: null,
     slotRows: [],
     slotHead: '',
@@ -63,6 +65,19 @@ Page({
 
   onPullDownRefresh() {
     this.start().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 微信分享（2026-11-03 站主要求全站可分享）：带当前职业，接收方打开就是同一身配装。
+     阵营不带（页面默认联盟起步，接收方自己切）。 */
+  onShareAppMessage() {
+    return {
+      title: 'BIS配装 · 30 级这一身穿什么',
+      path: '/pages/bis/index' + (this.data.cls ? '?c=' + this.data.cls : '')
+    }
+  },
+
+  onShareTimeline() {
+    return { title: 'BIS配装 · 30 级这一身穿什么', query: this.data.cls ? 'c=' + this.data.cls : '' }
   },
 
   start() {
@@ -140,42 +155,27 @@ Page({
     this.loadSet()
   },
 
-  /* 默认那一格的图：优先"这一族模型穿着装备"的底图（站主 2026-10-30 要的），
-     表里没有、或那张图取不到，就退回职业原画——不许留空格。 */
-  setStage() {
-    const set = this.set
-    if (!set) return
-    this.stageArt = oss.assetUrl(this.batch, set.art || null)
-    const key = (set.cls || this.data.cls) + '|' + this.data.fac
-    const rel = (POSTERS.map || {})[key]
-    const url = rel ? oss.assetUrl(this.batch, rel) : ''
-    this.setData({ stageUrl: url || this.stageArt, stageKind: url ? 'poster' : (this.stageArt ? 'art' : '') })
-  },
-
   pickFac(e) {
     const f = e.currentTarget.dataset.fac
     if (f === this.data.fac) return
-    /* 换阵营＝换的那一件模型是另一条登记，先拆场景、再让在飞的回包作废，然后才重画 */
-    this.teardownModel()
+    /* 换阵营取的是另一件登记：render() 会重新指一次图，旧的 src 同时作废，
+       不许在飞的那一张回来盖掉现在选的这一套（指图前会核 _posterKey） */
+    this.clearPoster()
     this.setData({ fac: f, facCn: f === 'horde' ? '部落' : '联盟', slot: null })
-    this.setStage()
     this.render()
   },
 
   loadSet() {
     const entry = (this.index.sets || []).filter((x) => x.id === this.data.setId)[0]
     if (!entry) { this.setData({ set: null, rows: [] }); return Promise.resolve() }
-    /* 切职业与切套装都经过这里：先把上一套的 xr 场景拆掉，否则旧场景还在画旧的那一身 */
-    this.teardownModel()
-    this.setData({ stageUrl: '' })
+    /* 切职业与切套装都经过这里：先把上一套的图摘掉，否则名单还没到、画面上还是那一身旧的 */
+    this.clearPoster()
     return oss.loadBisSet(entry, this.batch).then((r) => {
       if (!r.data || r.data.kind !== 'bis-set') {
         this.setData({ set: null, errText: (r.error && r.error.message) || '这一套没取到' })
         return null
       }
       this.set = r.data
-      /* 中间那一栏默认是职业原画（与网页配装页同一张，走素材层）；占位人台叠在它上面 */
-      this.setStage()
       this.render()
       return r
     }).catch((e) => { this.setData({ set: null, errText: e.message }) })
@@ -201,10 +201,15 @@ Page({
     const fac = this.data.fac
     const one = set.byFac[fac] || {}
     const src = (set.src || {})[fac] || {}
-    const altList = (set.alt || {})[fac] || []
+    /* 出处跳转桥表随索引下发（分发层现算，页面不解析出处文字）：
+       只有"这一行出处就写着某座副本"的才给目标，其余保持纯文字不可点。 */
+    const link = (this.index || {}).dropLink || {}
+    const linkOf = (id) => {
+      const v = link[String(id)]
+      return v && v.length ? v[0] : ''
+    }
     const rows = (one.doll || []).map((c) => {
       const it = this.items[String(c[2])] || {}
-      const a = altList.filter((x) => x[0] === c[0] && x[1] === c[1])[0]
       const alts = this.altsFor(c[0])
       return {
         slot: c[0], cell: c[1], item: c[2],
@@ -216,8 +221,8 @@ Page({
         ilvl: it.ilvl == null ? '' : it.ilvl,
         iconUrl: it.iconUrl || '',
         src: src[String(c[2])] || '',
-        n: alts.length,
-        cmp: a ? (a[3] === 'same' ? 'same' : 'diff') : 'none'
+        go: linkOf(c[2]),
+        n: alts.length
       }
     })
     const sum = set.sum || {}
@@ -231,21 +236,89 @@ Page({
       fetched: set.fetched,
       set: set
     })
+    /* 指图不放在 setData 回调里：它只读 this.data.setId/fac 与内存里那份索引，不依赖视图，
+       等回调会让"切完阵营这一拍"仍停在没有画面的空档（m01 抓到过一次）。 */
+    this.showPoster()
   },
 
   itemLine(id, tail) {
     const it = (this.items || {})[String(id)] || {}
+    const dl = ((this.index || {}).dropLink || {})[String(id)]
     return {
       item: id, name: it.name || ('#' + id), missing: !it.name,
       q: it.q || 0, ilvl: it.ilvl == null ? '' : it.ilvl,
       iconUrl: it.iconUrl || '', tail: tail || '',
       st: (this.stOf || {})[String(id)] || [],
-      src: ((this.set.src || {})[this.data.fac] || {})[String(id)] || ''
+      src: ((this.set.src || {})[this.data.fac] || {})[String(id)] || '',
+      go: dl && dl.length ? dl[0] : ''
     }
   },
 
-  /* 弹层不许页面在底下滚过去；点人台上那一块等于点那个部位那一行 */
+  /* 点出处那一行 → 副本详情页，并把这一件带过去高亮（from=bis 让那边的话说得准）。
+     行上没有 go 的（任务奖励、专业制造这类）根本不渲染成可点，不拿"点了没反应"骗玩家。 */
+  goDungeon(e) {
+    const ds = e.currentTarget.dataset
+    if (!ds.d) return
+    wx.navigateTo({ url: '/pages/dungeon/index?id=' + ds.d + '&drop=' + ds.item + '&from=bis' })
+  },
+
+  /* 弹层开着时不许页面在底下滚过去（图上没有可点的部位，这一格只是看） */
   noop() {},
+
+  /* 指这一套、这一阵营那一张图。地址只从分发层桥表里取：
+     桥表在构建时已经过五道闸（见文件头第三条），页面这一层不再判来源，
+     但也绝不"猜"一个地址——键不在表里就是没有。 */
+  showPoster() {
+    const setId = this.data.setId
+    const fac = this.data.fac
+    const key = setId + '|' + fac
+    const rel = ((this.index || {}).posterLink || {})[key]
+    if (!this.set || !((this.set.byFac || {})[fac] || {}).doll) {
+      this._posterKey = ''
+      this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
+        posterErr: '这一套的名单还没取到，先不指图' })
+      return
+    }
+    if (!rel) {
+      this._posterKey = ''
+      this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
+        posterErr: '分发层没给这一套（' + setId + ' · ' + this.data.facCn + '）登记过图：'
+          + '要么这一件没从客户端导出、要么装备位置没核对通过、要么名单后来改过——不拿别的套装冒充' })
+      return
+    }
+    const url = oss.assetUrl(this.batch, rel)
+    if (!url) {
+      this._posterKey = ''
+      this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
+        posterErr: '这张图的地址拼不出来（批次是 ' + ((this.batch || {}).buildId || '空') + '），先确认这批发过素材' })
+      return
+    }
+    this._posterKey = key
+    this.setData({ posterSrc: url, posterState: 'loading', posterText: '正在取这一套的图', posterErr: '' })
+  },
+
+  clearPoster() {
+    this._posterKey = ''
+    if (this.data.posterSrc || this.data.posterState !== 'none') {
+      this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE, posterErr: '' })
+    }
+  },
+
+  onPosterLoad() {
+    /* 迟到的那一张不许盖掉现在选的这套：键不对就当没看见 */
+    if (this._posterKey !== this.data.setId + '|' + this.data.fac) return
+    this.setData({ posterState: 'ok', posterText: '', posterErr: '' })
+  },
+
+  onPosterError() {
+    const key = this.data.setId + '|' + this.data.fac
+    if (this._posterKey !== key) return
+    this.setData({
+      posterSrc: '', posterState: 'bad', posterText: POSTER_NONE,
+      posterErr: '这一张取不到（断网、没发过或对象不在这个批里）——上面那句"分发层登记过"仍然成立，'
+        + '但今天这台设备上没拿到图'
+    })
+  },
 
   openSlot(e) {
     const label = e.currentTarget.dataset.slot
@@ -254,15 +327,17 @@ Page({
     const ids = this.altsFor(label)
     const altRow = ((this.set.alt || {})[this.data.fac] || [])
       .filter((x) => x[0] === label && x[1] === cell)[0]
+    /* 第二家在这一格列的那一件：只带"是谁列的"这一层，不给一致/分歧的判词（站主 2026-11-02）。
+       比较结果仍在数据分片里（alt[].state），界面不显示不等于数据删掉。 */
     let theirs = null
     if (altRow) {
       const t = (this.items || {})[String(altRow[2])] || {}
-      theirs = { state: altRow[3] === 'same' ? 'same' : 'diff', cn: CMP_CN[altRow[3] === 'same' ? 'same' : 'diff'],
+      theirs = { shown: altRow[2] != null,
         name: t.name || (altRow[2] == null ? '' : '#' + altRow[2]), q: t.q || 0,
         ilvl: t.ilvl == null ? '' : t.ilvl, iconUrl: t.iconUrl || '',
         unknown: altRow[2] != null && !t.name }
     } else {
-      theirs = { state: 'none', cn: CMP_CN.none }
+      theirs = { shown: false }
     }
     this.setData({
       slot: label + '·' + cell,
@@ -272,98 +347,7 @@ Page({
     })
   },
 
-  closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) },
-
-  /* 「查看 3D」：到这里才第一次碰模型清单。
-     顺序是"拆旧场景 → 拿一个号 → 过三道闸 → 才给 src"，
-     组件挂上（有 src）才会真的下载，所以点一次最多取一件。 */
-  showModel() {
-    this.teardownModel()
-    const seq = this._seq
-    const setId = this.data.setId
-    const fac = this.data.fac
-    const doll = ((this.set && this.set.byFac && this.set.byFac[fac]) || {}).doll || []
-    if (!this.set || !doll.length) {
-      this.setData({ modelOn: false, modelState: 'bad', modelText: '', modelErr: '这一套的名单还没取到，先不猜模型' })
-      return
-    }
-    this.setData({
-      modelOn: true, modelSrc: '', modelDetail: '',
-      modelState: 'loading', modelText: '在对这一套的名单', modelErr: ''
-    })
-    bisModel.load(setId, fac, doll).then((r) => {
-      /* 迟到的那一份不许盖掉后来选中的那一套：号不对就直接丢 */
-      if (seq !== this._seq) return
-      if (!r.ok) { this.modelFail(r.reason); return }
-      this._modelEntry = r.entry
-      this.setData({ modelSrc: r.url, modelText: '正在从远端取这一套的模型' })
-    }).catch((e) => {
-      if (seq !== this._seq) return
-      this.modelFail(((e && e.message) || String(e)).slice(0, 200))
-    })
-  },
-
-  hideModel() { this.teardownModel() },
-
-  /* 拆场景 + 作废所有在飞的回包。切职业/切套/切阵营/离开这一页都先走这里。 */
-  teardownModel() {
-    this._seq = (this._seq || 0) + 1
-    this._modelEntry = null
-    if (this.data.modelOn || this.data.modelSrc) {
-      this.setData({ modelOn: false, modelSrc: '', modelState: 'idle', modelText: '', modelErr: '', modelDetail: '' })
-    }
-  },
-
-  modelFail(reason) {
-    this.setData({
-      modelOn: false, modelSrc: '', modelState: 'bad', modelText: '', modelDetail: '',
-      modelErr: String(reason || '这一套的模型没取到').slice(0, 300)
-    })
-  },
-
-  onModelStatus(e) {
-    const d = (e && e.detail) || {}
-    if (d.state === 'ok') {
-      const en = this._modelEntry || {}
-      this.setData({
-        modelState: 'ok',
-        modelText: '',
-        modelDetail: '画面里 ' + d.meshes + ' 个网格、' + d.tex + ' 张贴图（' + (en.raceId || '?') + ' · ' + (en.bodyType || '?') + '）'
-      })
-      return
-    }
-    if (d.state === 'loading') { this.setData({ modelText: d.text || '正在取模型' }); return }
-    if (d.state === 'shown') {
-      /* 资源 loaded 且没报错＝这一件已经在这台机器上画出来了（2026-10-30 真机对过：
-         这种状态下人是带的、贴图是好的）。xr-frame 有时不把网格列表交出来，
-         量不到只说明尺子不对——照样按"已显示"处理，但把数到的/没数到的分开写。 */
-      this.setData({
-        modelState: 'shown', modelText: '',
-        modelDetail: '本站数到网格 ' + (d.meshes || 0) + ' 个、贴图 ' + (d.tex || 0) + ' 张'
-          + '（xr-frame 没把清单交全时这一项会偏少，画面以你看到的为准）｜ '
-          + String(d.detail || '').slice(0, 200)
-      })
-      return
-    }
-    this.modelFail((d.text || '模型没画出来') + (d.err ? '：' + d.err : ''))
-  },
-
-  onStageError() {
-    /* 底图取不到（没发上来 / 域名没通）要能退回职业原画，而不是整格空着 */
-    if (this.data.stageKind === 'poster' && this.stageArt) {
-      this.setData({ stageUrl: this.stageArt, stageKind: 'art' })
-      return
-    }
-    this.setData({ stageUrl: '', stageKind: '' })
-  },
-
-  onUnload() { this.teardownModel() },
-
-  copyUrl() {
-    const u = ((this.index || {}).meta || {}).source
-    if (!u) return
-    wx.setClipboardData({ data: u, success: () => wx.showToast({ title: '来源地址已复制', icon: 'none' }) })
-  }
+  closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) }
 })
 
 function keyOf(map, label) {

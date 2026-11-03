@@ -59,7 +59,6 @@
 
     <view class="btn row-btn" bindtap="onOpenDungeon">看这座本</view>
 
-    <view class="muted grade">{{gradeNote}}</view>
     <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
   </block>
 

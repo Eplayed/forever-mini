@@ -33,36 +33,36 @@
   "packOptions": {
     "ignore": [
       {
-        "type": "folder",
-        "value": "docs"
+        "value": "docs",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "oss-preview"
+        "value": "oss-preview",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "oss-build"
+        "value": "oss-build",
+        "type": "folder"
       },
       {
-        "type": "file",
-        "value": ".oss-env"
+        "value": ".oss-env",
+        "type": "file"
       },
       {
-        "type": "file",
-        "value": "AGENTS.md"
+        "value": "AGENTS.md",
+        "type": "file"
       },
       {
-        "type": "file",
-        "value": "README.md"
+        "value": "README.md",
+        "type": "file"
       },
       {
-        "type": "folder",
-        "value": "tmp-model"
+        "value": "tmp-model",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "pages/model-probe"
+        "value": "pages/model-probe",
+        "type": "folder"
       }
     ],
     "include": []

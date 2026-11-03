@@ -23,7 +23,6 @@
 
   <view wx:if="{{loaded && !kw}}" class="card empty">
     <view>先输入要查的东西。</view>
-    <view class="muted">这张表是按名字与物品编号搜的，不支持"这个本掉什么"——那在副本页里每座本下面都有。缺数据的物品显示「待实测」，不机翻、不编造。</view>
   </view>
 
   <view wx:if="{{loaded && kw && !list.length}}" class="card empty">
@@ -60,7 +59,6 @@
   </view>
 
   <view wx:if="{{truncated}}" class="muted truncated">匹配太多，只列前 {{list.length}} 条（共 {{truncated}} 条），请把词输长一点。</view>
-  <view wx:if="{{disclaimer}}" class="muted disc">{{disclaimer}}</view>
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

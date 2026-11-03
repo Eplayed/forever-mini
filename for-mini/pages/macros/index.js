@@ -45,7 +45,6 @@ Page({
     rest: 0,
     loading: false,
     open: null,
-    openSrc: '',
     statText: ''
   },
 
@@ -58,6 +57,16 @@ Page({
 
   onPullDownRefresh() {
     this.start().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致。
+     详情是同页展开态，链接里带不了宏 id，落点就是当前职业的清单。 */
+  onShareTimeline() {
+    const r = this.data.open
+    return {
+      title: r ? (r.title + ' · 宏命令') : '宏命令',
+      query: this.data.cls ? 'c=' + this.data.cls : ''
+    }
   },
 
   start() {
@@ -138,8 +147,6 @@ Page({
         body: at(row, 'body') || '',
         minLevel: at(row, 'minLevel'),
         isNew: at(row, 'new') === 1,
-        srcName: ((shard.srcs || [])[at(row, 'src')] || {}).name || '来源待核',
-        srcChecked: ((shard.srcs || [])[at(row, 'src')] || {}).date || '',
         nameBack: back
       }
     })
@@ -194,10 +201,10 @@ Page({
     const id = e.currentTarget.dataset.id
     const r = (this.all || []).filter((x) => x.id === id)[0]
     if (!r) return
-    this.setData({ open: r, openSrc: r.srcName + (r.srcChecked ? ' · 核对 ' + r.srcChecked : '') })
+    this.setData({ open: r })
   },
 
-  closeMacro() { this.setData({ open: null, openSrc: '' }) },
+  closeMacro() { this.setData({ open: null }) },
 
   noop() {},
 
@@ -210,23 +217,14 @@ Page({
     })
   },
 
-  copySource() {
-    const r = this.data.open
-    const url = ((this.index || {}).meta || {}).sources || []
-    const s = url.filter((x) => r && x.name === r.srcName)[0]
-    const text = s ? (s.name + '：' + s.url + '（核对 ' + (s.date || '?') + '）') : (r ? r.srcName : '')
-    if (!text) return
-    wx.setClipboardData({ data: text, success: () => wx.showToast({ title: '来源已复制', icon: 'none' }) })
-  },
-
   shareNote() {
-    return { title: '宏命令 · 免费列出、标来源', path: '/pages/macros/index' }
+    return { title: '宏命令', path: '/pages/macros/index' }
   },
 
   onShareAppMessage() {
     const r = this.data.open
     return {
-      title: r ? (r.title + ' · 宏命令') : '宏命令 · 免费列出、标来源',
+      title: r ? (r.title + ' · 宏命令') : '宏命令',
       path: '/pages/macros/index' + (this.data.cls ? '?c=' + this.data.cls : '')
     }
   }

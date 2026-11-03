@@ -5,12 +5,14 @@ const features = require('../../services/features')
 const DUNGEON_INDEX = require('../../data/forever-dungeon-snapshot')
 const META_SNAPSHOT = require('../../data/forever-meta-snapshot')
 
-/* 首页（2026-10-22 站主重排，四段从上到下）
+/* 首页（2026-10-22 站主重排；2026-11-03 站主照截图二次重排，四段从上到下）
    1) 开服倒计时：占顶部约 1/4 屏，正式服上线那一刻这块整块消失，不留"0 天"。
-   2) 四个入口卡：副本 / 职业 / 掉落查询 / 指南。中英速查按站主指令从这里撤了
-      （页面还在 app.json 里，但首页不再有入口——要不要一起下线是下一个待拍板项）。
-   3) 职业格：九个职业一排铺开，超出的换行走 grid，不许出现横向滚动条（站主原话）。
-      默认选中战士，点别的只是换下面的内容，不是跳页。
+   2) 六个入口卡：BIS配装 / 角色起名 / 副本 / 掉落查询 / 宏命令 / 职业（专业另加，开关控）。
+      2026-11-03 起 BIS、起名不再是整宽卡，六卡统一进两列格、顺序照截图；
+      这两格用本地自绘图标（img/home/），其余四格底图、图标、文案一律没动。
+      中英速查仍按 2026-10-22 指令不给入口；宏命令按 2026-11-02 指令在格中。
+   3) 职业格：九个职业一排铺开，超出的换行走 grid，不许出现横向滚动条（站主原话）；
+      标题照截图改成「选择你的职业」。默认选中战士，点别的只是换下面的内容，不是跳页。
    4) 选中职业的可选种族 + 种族特长：图标和文字都要有，缺特长（天裔两条都是空的）
       就写"还没核到"，不猜、不拿别的种族凑。
    玩家面规矩不变：这一屏不出现条数、覆盖率、缺口清单、核对日期、批次号。 */
@@ -23,12 +25,14 @@ Page({
     offline: false,
     requiresUpdate: false,
     cd: null,
-    /* 页面背景与四张卡的底图：地址由 meta.uiArt + 批次拼出来，取不到就是空串（版式回落纯色） */
+    /* 页面背景与带底图卡的那几张底图：地址由 meta.uiArt + 批次拼出来，取不到就是空串（版式回落纯色）。
+       2026-11-03 布局重排后 BIS、起名两格改用本地自绘图标（img/home/），不再吃底图，键已摘掉 */
     bgUrl: '',
-    cardBg: { dungeons: '', classes: '', loots: '', guide: '', bis: '', professions: '' },
+    cardBg: { dungeons: '', classes: '', loots: '', macros: '', professions: '' },
     /* 首页入口卡受远程开关控制：关着就整块不渲染（不留空白格），开了不用发版就会出现 */
     openProfessions: false,
     openMacros: false,
+    openNamer: false,
     classes: [],
     activeClass: '',
     activeName: '',
@@ -61,6 +65,8 @@ Page({
       if (on !== this.data.openProfessions) patch.openProfessions = on
       const mo = features.isOn('macros')
       if (mo !== this.data.openMacros) patch.openMacros = mo
+      const na = features.isOn('namer')
+      if (na !== this.data.openNamer) patch.openNamer = na
       if (Object.keys(patch).length) this.setData(patch)
     })
   },
@@ -76,6 +82,16 @@ Page({
 
   onPullDownRefresh() {
     this.refresh().then(() => wx.stopPullDownRefresh())
+  },
+
+  /* 微信分享（2026-11-03 站主要求全站可分享）：右上角菜单转发 + 朋友圈。
+     首页是 tab 页，分享路径不带参数（朋友圈单页模式对 tab 页只认根路径）。 */
+  onShareAppMessage() {
+    return { title: '跑本助手 · 《无限》中文资料', path: '/pages/home/index' }
+  },
+
+  onShareTimeline() {
+    return { title: '跑本助手 · 《无限》中文资料' }
   },
 
   /* 只到天，不跳秒：这张表存在的唯一理由是把"过了一天"这件事跟上，
@@ -109,7 +125,6 @@ Page({
       const meta = list[0]
       const cls = list[1]
       const m = meta.data || {}
-      this.disclaimer = m.disclaimer || ''
       if (m.launch && m.launch !== this.launch) {
         this.launch = m.launch
         this.tick()
@@ -126,10 +141,11 @@ Page({
           dungeons: oss.assetUrl(mBatch, (ui.cards || {}).dungeons),
           classes: oss.assetUrl(mBatch, (ui.cards || {}).classes),
           loots: oss.assetUrl(mBatch, (ui.cards || {}).loots),
-          guide: oss.assetUrl(mBatch, (ui.cards || {}).guide),
-          bis: oss.assetUrl(mBatch, (ui.cards || {}).bis),
-          professions: oss.assetUrl(mBatch, (ui.cards || {}).professions),
-          macros: oss.assetUrl(mBatch, (ui.cards || {}).macros)
+          /* 宏命令卡沿用清单里 guide 那张光树场景：ui-art.json 没为它单登记一张，
+             而改那份清单等于重发整个数据批次（它是 meta.uiArt 的下游），先复用不重发。
+             BIS/起名 2026-11-03 起不吃底图（换本地自绘图标），清单里 bis/namer 两个键留着不消费 */
+          macros: oss.assetUrl(mBatch, (ui.cards || {}).guide),
+          professions: oss.assetUrl(mBatch, (ui.cards || {}).professions)
         }
       })
       const classes = ((cls.data || {}).classes || []).map((c) => ({
@@ -215,18 +231,22 @@ Page({
     wx.navigateTo({ url: '/pages/professions/index' })
   },
 
+  /* 宏命令：站主 2026-11-02 指令顶替「指南」进第四格。
+     入口卡仍由远程开关 macros 控制——关着整块不渲染（不留空白格），线上拧开不用发版；
+     这一页与配装页一样没有打包快照，取不到就是取不到，不拿别的页回退。 */
   goMacros() {
     wx.navigateTo({ url: '/pages/macros/index' })
   },
 
-  goLoots() {
-    wx.navigateTo({ url: '/pages/loots/index' })
+  /* 角色起名：2026-11-03 站主要求的醒目入口——整宽卡排在配装卡之后。
+     同样受远程开关 namer 控制：关着整块不渲染；这页的主词库没有主包快照，
+     离线时页面自己明说摇的是机子里那份小池。 */
+  goNamer() {
+    wx.navigateTo({ url: '/pages/namer/index' })
   },
 
-  /* 指南卡固定占一格：宏与插件一条都还没整理时也摆着，进去是诚实的空状态
-     （2026-10-22 站主：「我要的是指南卡片」——上一版按有没有内容决定显不显示，撤掉） */
-  goGuide() {
-    wx.navigateTo({ url: '/pages/guide/index' })
+  goLoots() {
+    wx.navigateTo({ url: '/pages/loots/index' })
   },
 
   /* 最近看过直接读索引快照里的那几条，不为首页再发一次网络请求 */
@@ -266,7 +286,7 @@ Page({
   onDisclaimer() {
     wx.showModal({
       title: '声明',
-      content: this.disclaimer || '非官方粉丝资料站，与暴雪娱乐及网易无关。',
+      content: '非官方粉丝资料站，与暴雪娱乐及网易无关。',
       showCancel: false
     })
   }

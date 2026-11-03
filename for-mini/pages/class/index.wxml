@@ -90,7 +90,7 @@
             <view class="tcell tcell-empty" wx:for="{{4 - item.cells.length}}" wx:key="*this"></view>
           </view>
         </view>
-        <view class="muted tree-note">点一下加一点，长按看详情。{{gateNote}}。名字与坐标来自第三方资料站转述，缺的写待核，不机翻。</view>
+        <view class="muted tree-note">点一下加一点，长按看详情。{{gateNote}}</view>
       </block>
     </view>
   </block>
@@ -127,15 +127,10 @@
       <text class="pop-k">现在不能点</text>
       <text class="pop-v pop-why">{{pop.why}}</text>
     </view>
-    <view class="pop-desc">
-      <text class="pop-k">这条做什么</text>
-      <text class="muted pop-desc-v">具体说明还没入库——两家上游只给了名称、层位、上限和前置，效果原文要等官方中文页或游戏内实测才上界面，本站不机翻也不替它编一句。</text>
-    </view>
     <view class="pop-btns">
       <view class="btn {{pop.can ? '' : 'btn-dim'}}" bindtap="popAdd">加一点</view>
       <view class="btn {{pop.ranks ? '' : 'btn-dim'}}" bindtap="popRemove">减一点</view>
     </view>
-    <view class="muted pop-note">这套是本站页面内的模拟配置，不进游戏、不代表官方加点方案。</view>
   </view>
 
   <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>

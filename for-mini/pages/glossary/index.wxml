@@ -20,7 +20,7 @@
 
   <view wx:if="{{loaded && list.length === 0}}" class="card empty">
     <view>没有匹配的词条。</view>
-    <view class="muted">换个关键词试试，或切回「全部」。词条只收录官方中文已核过的名称，没收录的不机翻补上。</view>
+    <view class="muted">换个关键词试试，或切回「全部」。</view>
   </view>
 
   <view class="term {{expandedId === item.id ? 'term-open' : ''}}" wx:for="{{list}}" wx:key="id">
