@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-03",
+  "generatedAt": "2026-11-05",
   "kind": "achievements",
   "method": "tools/merge-achievements.py 合新版 gi-achievements.json（210 条）、旧版独有兜底（1 条）+ wclbox-achievements.json（能逐字回查的条目）。两边 id 对上且中文名逐字相同才升 L0；成就描述整句两份都不落。没有中文名且带开发标记的那 12 条标 devOnly，条目照留，页面与搜索不列。",
   "pageNote": "成就目录按无限测试版插件资料整理；能与另一处逐字对上的标为已核，其余仍按单源留档。成就的具体完成条件文本一律不搬，要回游戏看。",
@@ -86,9 +86,9 @@
     "key": "wclbox",
     "name": "无限数据库 · 成就端点",
     "kind": "当前 beta 客户端解包转述",
-    "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
+    "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
     "build": "1.60.1.70205",
-    "date": "2026-11-03"
+    "date": "2026-11-05"
    }
   ]
  },
@@ -1960,8 +1960,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -1992,8 +1992,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2024,8 +2024,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2056,8 +2056,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2088,8 +2088,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2120,8 +2120,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2152,8 +2152,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2184,8 +2184,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2216,8 +2216,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2248,8 +2248,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2280,8 +2280,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2312,8 +2312,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2344,8 +2344,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2376,8 +2376,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2408,8 +2408,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2440,8 +2440,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2472,8 +2472,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2504,8 +2504,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2536,8 +2536,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2568,8 +2568,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2600,8 +2600,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2632,8 +2632,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2664,8 +2664,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2696,8 +2696,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2728,8 +2728,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2760,8 +2760,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2792,8 +2792,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2824,8 +2824,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2856,8 +2856,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2888,8 +2888,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2920,8 +2920,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2952,8 +2952,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -2984,8 +2984,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3016,8 +3016,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3048,8 +3048,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3080,8 +3080,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3112,8 +3112,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3144,8 +3144,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3176,8 +3176,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3208,8 +3208,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3244,8 +3244,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3326,8 +3326,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3358,8 +3358,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3412,8 +3412,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3444,8 +3444,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",
@@ -3501,8 +3501,8 @@
    "provenance": [
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793694023664/chengjiu.json",
-     "checkedAt": "2026-11-03"
+     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/chengjiu.json",
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "addon",

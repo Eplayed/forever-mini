@@ -2,7 +2,7 @@
  "classId": "priest",
  "classNameCn": "牧师",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -951,7 +951,7 @@
      "column": 3,
      "maxRanks": 1,
      "nameCn": "圣光联结",
-     "nameAlt": "神圣联结",
+     "nameAlt": "神圣束缚",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
@@ -1696,7 +1696,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/priest",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-03"
+   "checkedAt": "2026-11-05"
   }
  ]
 }

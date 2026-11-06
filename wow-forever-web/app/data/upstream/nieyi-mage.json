@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -131,7 +131,7 @@
    "row": 3,
    "col": 2,
    "icon": "spell_shadow_siphonmana",
-   "preId": null,
+   "preId": "arcane_concentration",
    "nid": "arcane_meditation"
   },
   {
@@ -141,7 +141,7 @@
    "row": 3,
    "col": 3,
    "icon": "ability_mage_netherwindpresence",
-   "preId": null,
+   "preId": "arcane_blast",
    "nid": "arcane_wrath"
   },
   {
@@ -181,7 +181,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_lightning",
-   "preId": null,
+   "preId": "presence_of_mind",
    "nid": "arcane_power"
   },
   {
@@ -301,7 +301,7 @@
    "row": 3,
    "col": 2,
    "icon": "spell_fire_firebolt",
-   "preId": null,
+   "preId": "pyroblast",
    "nid": "hot_streak"
   },
   {
@@ -351,7 +351,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_fire_sealoffire",
-   "preId": null,
+   "preId": "critical_mass",
    "nid": "combustion"
   },
   {
@@ -511,7 +511,7 @@
    "row": 4,
    "col": 2,
    "icon": "ability_mage_wintersgrasp",
-   "preId": null,
+   "preId": "ice_lance",
    "nid": "fingers_of_frost"
   },
   {
@@ -531,7 +531,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_ice_lament",
-   "preId": null,
+   "preId": "cold_snap",
    "nid": "ice_barrier"
   }
  ]

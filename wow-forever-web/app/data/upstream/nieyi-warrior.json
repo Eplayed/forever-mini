@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -47,7 +47,7 @@
   {
    "tree": 0,
    "name": "强化战术掌握",
-   "max": 5,
+   "max": 3,
    "row": 1,
    "col": 1,
    "icon": "spell_nature_enchantarmor",
@@ -71,7 +71,7 @@
    "row": 2,
    "col": 1,
    "icon": "spell_holy_blessingofstamina",
-   "preId": null,
+   "preId": "improved_tactical_mastery",
    "nid": "anger_management"
   },
   {
@@ -81,7 +81,7 @@
    "row": 2,
    "col": 2,
    "icon": "ability_backstab",
-   "preId": null,
+   "preId": "improved_rend",
    "nid": "deep_wounds"
   },
   {
@@ -111,13 +111,13 @@
    "row": 3,
    "col": 2,
    "icon": "ability_searingarrow",
-   "preId": null,
+   "preId": "deep_wounds",
    "nid": "impale"
   },
   {
    "tree": 0,
    "name": "血之气息",
-   "max": 5,
+   "max": 2,
    "row": 4,
    "col": 0,
    "icon": "inv_sword_01",
@@ -171,7 +171,7 @@
    "row": 6,
    "col": 1,
    "icon": "ability_warrior_savageblow",
-   "preId": null,
+   "preId": "sweeping_strikes",
    "nid": "mortal_strike"
   },
   {
@@ -246,6 +246,16 @@
   },
   {
    "tree": 1,
+   "name": "狂怒",
+   "max": 5,
+   "row": 2,
+   "col": 3,
+   "icon": "spell_shadow_unholyfrenzy",
+   "preId": null,
+   "nid": "enrage"
+  },
+  {
+   "tree": 1,
    "name": "双武器专精",
    "max": 5,
    "row": 3,
@@ -266,13 +276,13 @@
   },
   {
    "tree": 1,
-   "name": "狂怒",
-   "max": 5,
+   "name": "鲁莽挥击",
+   "max": 1,
    "row": 3,
    "col": 2,
-   "icon": "spell_shadow_unholyfrenzy",
+   "icon": "ability_warrior_punishingblow",
    "preId": null,
-   "nid": "enrage"
+   "nid": "reckless_swings"
   },
   {
    "tree": 1,
@@ -306,6 +316,16 @@
   },
   {
    "tree": 1,
+   "name": "饮血者",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "icon": "racial_troll_berserk",
+   "preId": "blood_craze",
+   "nid": "gore_drinker"
+  },
+  {
+   "tree": 1,
    "name": "强化拦截",
    "max": 2,
    "row": 4,
@@ -317,7 +337,7 @@
   {
    "tree": 1,
    "name": "乱舞",
-   "max": 5,
+   "max": 3,
    "row": 5,
    "col": 1,
    "icon": "ability_ghoulfrenzy",
@@ -326,13 +346,13 @@
   },
   {
    "tree": 1,
-   "name": "饮血者",
+   "name": "强化旋风斩",
    "max": 2,
    "row": 5,
    "col": 2,
-   "icon": "racial_troll_berserk",
+   "icon": "ability_whirlwind",
    "preId": null,
-   "nid": "gore_drinker"
+   "nid": "improved_whirlwind"
   },
   {
    "tree": 1,
@@ -341,7 +361,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_bloodlust",
-   "preId": null,
+   "preId": "death_wish",
    "nid": "bloodthirst"
   },
   {
@@ -421,7 +441,7 @@
    "row": 2,
    "col": 1,
    "icon": "ability_warrior_shieldguard",
-   "preId": null,
+   "preId": "shield_specialization",
    "nid": "master_of_defense"
   },
   {
@@ -521,7 +541,7 @@
    "row": 6,
    "col": 1,
    "icon": "inv_shield_05",
-   "preId": null,
+   "preId": "concussion_blow",
    "nid": "shield_slam"
   }
  ]

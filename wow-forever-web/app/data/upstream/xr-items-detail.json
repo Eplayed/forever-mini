@@ -1,17 +1,17 @@
 {
  "meta": {
   "addon": "XR_DungeonGuide",
-  "addonVersion": "95.7",
-  "sourceFile": "XR_DungeonGuide/Data_Items.lua",
-  "installRoot": "_cn_beta_",
+  "addonVersion": "75",
+  "sourceFile": "XR_DungeonGuide/Data.lua",
+  "installRoot": "_forever_",
   "sourceStamp": {
-   "bytes": 3118432,
-   "sha256": "e5e6168b15a50b7b83cee20ac89ee0a13a87e73810672b46967802bf2b26e893",
-   "fileDate": "2026-10-26"
+   "bytes": 4156109,
+   "sha256": "224976c9a8a39dbaaa638797aea092ed3008dedb1669e3fe1a1a9207c01602cd",
+   "fileDate": "2026-10-25"
   },
   "selfReported": "站点 research/dg-loot 社区整理稿（作者自述实测，不自动升本站 L0）",
   "fetched": "2026-09-20",
-  "extractedAt": "2026-11-03",
+  "extractedAt": "2026-11-05",
   "counts": {
    "total": 14591,
    "st": 14197,

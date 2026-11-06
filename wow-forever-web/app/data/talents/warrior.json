@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -403,7 +403,7 @@
       }
      ],
      "upstreamId": "calc-warrior-arms-bloodthrill",
-     "changeState": "modified"
+     "changeState": "added"
     },
     {
      "id": "warrior-0-横扫攻击",
@@ -791,6 +791,31 @@
      "changeState": "modified"
     },
     {
+     "id": "warrior-1-狂怒",
+     "tier": 2,
+     "column": 3,
+     "maxRanks": 5,
+     "nameCn": "狂怒",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_unholyfrenzy",
+     "requires": [],
+     "level": "L1",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-warrior-fury-enrage",
+     "changeState": "modified"
+    },
+    {
      "id": "warrior-1-双武器专精",
      "tier": 3,
      "column": 0,
@@ -827,8 +852,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "怒击",
-     "nameAlt": null,
-     "nameConflict": false,
+     "nameAlt": "鲁莽挥击",
+     "nameConflict": true,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -849,14 +874,14 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "warrior-raging-blows",
-     "changeState": "added"
+     "upstreamId": "calc-warrior-fury-reckless-swings",
+     "posMismatch": true
     },
     {
-     "id": "warrior-1-狂怒",
+     "id": "warrior-1-狂怒-r3c2",
      "tier": 3,
      "column": 2,
-     "maxRanks": 5,
+     "maxRanks": 1,
      "nameCn": "狂怒",
      "nameAlt": "鲁莽挥击",
      "nameConflict": true,
@@ -865,7 +890,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shadow_unholyfrenzy",
+     "iconKey": "ability_warrior_punishingblow",
      "requires": [],
      "level": "L1",
      "provenance": [
@@ -879,9 +904,7 @@
        "url": "https://nieyi.cn/f/talents/warrior.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ],
-     "upstreamId": "launch-warrior-鲁莽挥击",
-     "posMismatch": true
+     ]
     },
     {
      "id": "warrior-1-强化斩杀",
@@ -977,6 +1000,33 @@
      "changeState": "modified"
     },
     {
+     "id": "warrior-1-饮血者",
+     "tier": 4,
+     "column": 2,
+     "maxRanks": 2,
+     "nameCn": "饮血者",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "racial_troll_berserk",
+     "requires": [
+      "warrior-1-血之狂热"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/warrior.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-warrior-fury-gore-drinker",
+     "changeState": "added"
+    },
+    {
      "id": "warrior-1-强化拦截",
      "tier": 4,
      "column": 3,
@@ -1036,26 +1086,24 @@
        "url": "https://nieyi.cn/f/talents/warrior.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ],
-     "upstreamId": "calc-warrior-fury-flurry",
-     "changeState": "modified"
+     ]
     },
     {
-     "id": "warrior-1-饮血者",
+     "id": "warrior-1-强化旋风斩",
      "tier": 5,
      "column": 2,
      "maxRanks": 2,
-     "nameCn": "饮血者",
-     "nameAlt": "强化旋风斩",
+     "nameCn": "强化旋风斩",
+     "nameAlt": "乱舞",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "racial_troll_berserk",
+     "iconKey": "ability_whirlwind",
      "requires": [
-      "warrior-1-狂怒"
+      "warrior-1-狂怒-r3c2"
      ],
      "level": "L2",
      "provenance": [
@@ -1070,7 +1118,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "launch-warrior-强化旋风斩",
+     "upstreamId": "calc-warrior-fury-flurry",
      "posMismatch": true
     },
     {
@@ -1687,9 +1735,9 @@
   }
  ],
  "stats": {
-  "nodes": 52,
-  "nameConflict": 0,
-  "onlyInOneSource": 0
+  "nodes": 54,
+  "nameConflict": 2,
+  "onlyInOneSource": 2
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1697,7 +1745,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-03"
+   "checkedAt": "2026-11-05"
   }
  ]
 }

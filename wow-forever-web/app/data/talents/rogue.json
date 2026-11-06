@@ -2,7 +2,7 @@
  "classId": "rogue",
  "classNameCn": "潜行者",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -152,19 +152,19 @@
      "changeState": "unchanged"
     },
     {
-     "id": "rogue-0-密谋",
+     "id": "rogue-0-强化破甲",
      "tier": 1,
      "column": 1,
      "maxRanks": 2,
-     "nameCn": "密谋",
-     "nameAlt": "强化破甲",
+     "nameCn": "强化破甲",
+     "nameAlt": "密谋",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shadow_deathscream",
+     "iconKey": "ability_warrior_riposte",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -180,7 +180,7 @@
       }
      ],
      "upstreamId": "calc-rogue-assassination-improved-expose-armor",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
      "id": "rogue-0-强化切割",
@@ -214,19 +214,19 @@
      "changeState": "unchanged"
     },
     {
-     "id": "rogue-0-无情打击",
+     "id": "rogue-0-精力",
      "tier": 2,
      "column": 0,
-     "maxRanks": 1,
-     "nameCn": "无情打击",
-     "nameAlt": "精力",
+     "maxRanks": 2,
+     "nameCn": "精力",
+     "nameAlt": "无情打击",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_warrior_decisivestrike",
+     "iconKey": "spell_nature_earthbindtotem",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -242,14 +242,14 @@
       }
      ],
      "upstreamId": "calc-rogue-assassination-vigor",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
-     "id": "rogue-0-强化破甲",
+     "id": "rogue-0-血液飞溅",
      "tier": 2,
      "column": 1,
-     "maxRanks": 2,
-     "nameCn": "强化破甲",
+     "maxRanks": 1,
+     "nameCn": "血液飞溅",
      "nameAlt": "血溅",
      "nameConflict": true,
      "nameVerified": false,
@@ -257,7 +257,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_warrior_riposte",
+     "iconKey": "ability_rogue_rupture",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -272,7 +272,7 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "launch-rogue-血溅",
+     "upstreamId": "calc-rogue-assassination-blood-splatter",
      "posMismatch": true
     },
     {
@@ -402,19 +402,19 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-0-精力",
+     "id": "rogue-0-无情打击",
      "tier": 4,
      "column": 0,
-     "maxRanks": 2,
-     "nameCn": "精力",
-     "nameAlt": "无情打击",
+     "maxRanks": 5,
+     "nameCn": "无情打击",
+     "nameAlt": "精力",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_nature_earthbindtotem",
+     "iconKey": "ability_warrior_decisivestrike",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -430,22 +430,22 @@
       }
      ],
      "upstreamId": "calc-rogue-assassination-relentless-strikes",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
-     "id": "rogue-0-毁伤",
+     "id": "rogue-0-毒针",
      "tier": 4,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "毁伤",
-     "nameAlt": "毒针",
+     "nameCn": "毒针",
+     "nameAlt": "毁伤",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_rogue_deadlybrew",
+     "iconKey": "inv_sword_31",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -461,7 +461,7 @@
       }
      ],
      "upstreamId": "calc-rogue-assassination-venom",
-     "posMismatch": true
+     "changeState": "added"
     },
     {
      "id": "rogue-0-强化肾击",
@@ -526,21 +526,21 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-0-毒针",
+     "id": "rogue-0-毁伤",
      "tier": 6,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "毒针",
-     "nameAlt": "毁伤",
+     "nameCn": "毁伤",
+     "nameAlt": "毒针",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "inv_sword_31",
+     "iconKey": "ability_rogue_deadlybrew",
      "requires": [
-      "rogue-0-毁伤"
+      "rogue-0-毒针"
      ],
      "level": "L2",
      "provenance": [
@@ -556,7 +556,7 @@
       }
      ],
      "upstreamId": "calc-rogue-assassination-mutilate",
-     "posMismatch": true
+     "changeState": "added"
     }
    ],
    "nameAltUpstream": "奇袭",
@@ -571,14 +571,14 @@
    "nameEn": null,
    "nodes": [
     {
-     "id": "rogue-1-强化刺骨",
+     "id": "rogue-1-致命一击",
      "tier": 0,
      "column": 0,
      "maxRanks": 3,
-     "nameCn": "强化刺骨",
-     "nameAlt": "慈悲一击",
+     "nameCn": "致命一击",
+     "nameAlt": "强化刺骨",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -598,18 +598,18 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-rogue-combat-improved-eviscerate",
-     "posMismatch": true
+     "upstreamId": "calc-rogue-combat-coup-de-grace",
+     "changeState": "modified"
     },
     {
-     "id": "rogue-1-强化邪恶攻击",
+     "id": "rogue-1-高效打击",
      "tier": 0,
      "column": 1,
      "maxRanks": 2,
-     "nameCn": "强化邪恶攻击",
-     "nameAlt": "高效打击",
+     "nameCn": "高效打击",
+     "nameAlt": "强化邪恶攻击",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -629,8 +629,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-rogue-combat-improved-sinister-strike",
-     "posMismatch": true
+     "upstreamId": "calc-rogue-combat-efficient-strikes",
+     "changeState": "modified"
     },
     {
      "id": "rogue-1-闪电反射",
@@ -757,6 +757,31 @@
      "changeState": "modified"
     },
     {
+     "id": "rogue-1-强化疾跑",
+     "tier": 1,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "强化疾跑",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_sprint",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-combat-improved-sprint",
+     "changeState": "moved"
+    },
+    {
      "id": "rogue-1-耐久",
      "tier": 2,
      "column": 0,
@@ -821,19 +846,19 @@
      "changeState": "unchanged"
     },
     {
-     "id": "rogue-1-强化疾跑",
+     "id": "rogue-1-沉着",
      "tier": 2,
      "column": 3,
      "maxRanks": 2,
-     "nameCn": "强化疾跑",
-     "nameAlt": null,
-     "nameConflict": false,
+     "nameCn": "沉着",
+     "nameAlt": "镇定",
+     "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_rogue_sprint",
+     "iconKey": "ability_rogue_feigndeath",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -847,7 +872,9 @@
        "url": "https://nieyi.cn/f/talents/rogue.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-rogue-combat-composure",
+     "posMismatch": true
     },
     {
      "id": "rogue-1-强化脚踢",
@@ -909,14 +936,14 @@
       }
      ],
      "upstreamId": "rogue-flawless-execution",
-     "changeState": "modified"
+     "changeState": "added"
     },
     {
-     "id": "rogue-1-双武器专精",
+     "id": "rogue-1-侵略",
      "tier": 3,
      "column": 2,
-     "maxRanks": 5,
-     "nameCn": "双武器专精",
+     "maxRanks": 3,
+     "nameCn": "侵略",
      "nameAlt": "武器专家",
      "nameConflict": true,
      "nameVerified": false,
@@ -924,7 +951,7 @@
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_dualwield",
+     "iconKey": "ability_racial_avatar",
      "requires": [
       "rogue-1-精确"
      ],
@@ -942,6 +969,31 @@
       }
      ],
      "upstreamId": "calc-rogue-combat-weapon-expertise",
+     "posMismatch": true
+    },
+    {
+     "id": "rogue-1-武器专家",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "武器专家",
+     "nameAlt": "侵略",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "spell_holy_blessingofstrength",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-combat-aggression",
      "posMismatch": true
     },
     {
@@ -1007,19 +1059,42 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-1-武器专家",
+     "id": "rogue-1-双武器专精",
+     "tier": 4,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "双武器专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "ability_dualwield",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ]
+    },
+    {
+     "id": "rogue-1-钢之闪光",
      "tier": 5,
      "column": 1,
-     "maxRanks": 2,
-     "nameCn": "武器专家",
-     "nameAlt": "利刃闪光",
+     "maxRanks": 5,
+     "nameCn": "钢之闪光",
+     "nameAlt": "武器专家",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_holy_blessingofstrength",
+     "iconKey": "spell_nature_bloodlust",
      "requires": [
       "rogue-1-剑刃乱舞"
      ],
@@ -1035,24 +1110,21 @@
        "url": "https://nieyi.cn/f/talents/rogue.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ],
-     "upstreamId": "launch-rogue-利刃闪光",
-     "posMismatch": true
+     ]
     },
     {
-     "id": "rogue-1-侵略",
+     "id": "rogue-1-侵略-r5c2",
      "tier": 5,
      "column": 2,
      "maxRanks": 3,
      "nameCn": "侵略",
-     "nameAlt": null,
-     "nameConflict": false,
+     "nameAlt": "利刃闪光",
+     "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
-      "fengshen",
-      "nieyi"
+      "fengshen"
      ],
-     "iconKey": "ability_racial_avatar",
+     "iconKey": null,
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1060,13 +1132,10 @@
        "type": "fan_db",
        "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
        "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-rogue-combat-flash-of-steel",
+     "posMismatch": true
     },
     {
      "id": "rogue-1-冲动",
@@ -1082,7 +1151,9 @@
       "nieyi"
      ],
      "iconKey": "spell_shadow_shadowworddominate",
-     "requires": [],
+     "requires": [
+      "rogue-1-剑刃乱舞"
+     ],
      "level": "L2",
      "provenance": [
       {
@@ -1111,19 +1182,19 @@
    "nameEn": null,
    "nodes": [
     {
-     "id": "rogue-2-伪装",
+     "id": "rogue-2-调整",
      "tier": 0,
      "column": 0,
-     "maxRanks": 5,
-     "nameCn": "伪装",
-     "nameAlt": "调整",
+     "maxRanks": 3,
+     "nameCn": "调整",
+     "nameAlt": "伪装",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_stealth",
+     "iconKey": "spell_nature_mirrorimage",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1139,7 +1210,7 @@
       }
      ],
      "upstreamId": "calc-rogue-subtlety-setup",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
      "id": "rogue-2-欺诈高手",
@@ -1204,50 +1275,19 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-2-调整",
+     "id": "rogue-2-卑鄙",
      "tier": 1,
      "column": 0,
-     "maxRanks": 3,
-     "nameCn": "调整",
-     "nameAlt": "伪装",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_nature_mirrorimage",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-rogue-subtlety-camouflage",
-     "posMismatch": true
-    },
-    {
-     "id": "rogue-2-飘忽不定",
-     "tier": 1,
-     "column": 1,
      "maxRanks": 2,
-     "nameCn": "飘忽不定",
-     "nameAlt": "卑鄙",
+     "nameCn": "卑鄙",
+     "nameAlt": "调整",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_magic_lesserinvisibilty",
+     "iconKey": "spell_shadow_summonsuccubus",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1263,7 +1303,38 @@
       }
      ],
      "upstreamId": "calc-rogue-subtlety-dirty-deeds",
-     "posMismatch": true
+     "changeState": "modified"
+    },
+    {
+     "id": "rogue-2-伪装",
+     "tier": 1,
+     "column": 1,
+     "maxRanks": 3,
+     "nameCn": "伪装",
+     "nameAlt": "飘忽不定",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_stealth",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-subtlety-camouflage",
+     "changeState": "modified"
     },
     {
      "id": "rogue-2-邪恶计谋",
@@ -1271,9 +1342,9 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "邪恶计谋",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "强化伏击",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1293,8 +1364,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-rogue-subtlety-dirty-tricks",
-     "changeState": "added"
+     "upstreamId": "calc-rogue-subtlety-improved-ambush",
+     "posMismatch": true
     },
     {
      "id": "rogue-2-强化伏击",
@@ -1302,9 +1373,9 @@
      "column": 3,
      "maxRanks": 3,
      "nameCn": "强化伏击",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "邪恶计谋",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1324,8 +1395,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-rogue-subtlety-improved-ambush",
-     "changeState": "moved"
+     "upstreamId": "calc-rogue-subtlety-dirty-tricks",
+     "posMismatch": true
     },
     {
      "id": "rogue-2-先发制人",
@@ -1359,107 +1430,14 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-2-鬼魅攻击",
-     "tier": 2,
-     "column": 1,
-     "maxRanks": 1,
-     "nameCn": "鬼魅攻击",
-     "nameAlt": "预谋",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "spell_shadow_curse",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-rogue-subtlety-premeditation",
-     "posMismatch": true
-    },
-    {
-     "id": "rogue-2-强化扰乱",
-     "tier": 2,
-     "column": 2,
-     "maxRanks": 2,
-     "nameCn": "强化扰乱",
-     "nameAlt": "锯齿利刃",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_rogue_distract",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-rogue-subtlety-serrated-blades",
-     "posMismatch": true
-    },
-    {
-     "id": "rogue-2-察觉",
-     "tier": 3,
-     "column": 0,
-     "maxRanks": 2,
-     "nameCn": "察觉",
-     "nameAlt": "飘忽不定",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen",
-      "nieyi"
-     ],
-     "iconKey": "ability_ambush",
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
-      }
-     ],
-     "upstreamId": "calc-rogue-subtlety-elusiveness",
-     "posMismatch": true
-    },
-    {
      "id": "rogue-2-预谋",
-     "tier": 3,
+     "tier": 2,
      "column": 1,
      "maxRanks": 1,
      "nameCn": "预谋",
      "nameAlt": "鬼魅攻击",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1479,18 +1457,18 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "calc-rogue-subtlety-ghostly-strike",
-     "posMismatch": true
+     "upstreamId": "calc-rogue-subtlety-premeditation",
+     "changeState": "modified"
     },
     {
      "id": "rogue-2-锯齿利刃",
-     "tier": 3,
+     "tier": 2,
      "column": 2,
      "maxRanks": 3,
      "nameCn": "锯齿利刃",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": false,
+     "nameAlt": "强化扰乱",
+     "nameConflict": true,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1509,22 +1487,136 @@
        "url": "https://nieyi.cn/f/talents/rogue.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-rogue-subtlety-serrated-blades",
+     "changeState": "modified"
     },
     {
-     "id": "rogue-2-卑鄙",
-     "tier": 4,
+     "id": "rogue-2-飘忽不定",
+     "tier": 3,
      "column": 0,
      "maxRanks": 2,
-     "nameCn": "卑鄙",
+     "nameCn": "飘忽不定",
      "nameAlt": "察觉",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "spell_shadow_summonsuccubus",
+     "iconKey": "spell_magic_lesserinvisibilty",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-subtlety-elusiveness",
+     "changeState": "modified"
+    },
+    {
+     "id": "rogue-2-鬼魅攻击",
+     "tier": 3,
+     "column": 1,
+     "maxRanks": 1,
+     "nameCn": "鬼魅攻击",
+     "nameAlt": "预谋",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "spell_shadow_curse",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-subtlety-ghostly-strike",
+     "changeState": "modified"
+    },
+    {
+     "id": "rogue-2-锯齿利刃-r3c2",
+     "tier": 3,
+     "column": 2,
+     "maxRanks": 3,
+     "nameCn": "锯齿利刃",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": null,
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ]
+    },
+    {
+     "id": "rogue-2-迅捷脱身",
+     "tier": 3,
+     "column": 3,
+     "maxRanks": 2,
+     "nameCn": "迅捷脱身",
+     "nameAlt": "快速脱身",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "nieyi"
+     ],
+     "iconKey": "ability_rogue_trip",
+     "requires": [
+      "rogue-2-强化伏击"
+     ],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://nieyi.cn/f/talents/rogue.html",
+       "note": "nieyi 源：名称/系/坐标/上限/图标名"
+      }
+     ],
+     "upstreamId": "calc-rogue-subtlety-quick-getaway",
+     "posMismatch": true
+    },
+    {
+     "id": "rogue-2-察觉",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "察觉",
+     "nameAlt": "卑鄙",
+     "nameConflict": true,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen",
+      "nieyi"
+     ],
+     "iconKey": "ability_ambush",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1540,7 +1632,7 @@
       }
      ],
      "upstreamId": "calc-rogue-subtlety-heightened-senses",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
      "id": "rogue-2-伺机待发",
@@ -1588,8 +1680,7 @@
      ],
      "iconKey": "spell_shadow_lifedrain",
      "requires": [
-      "rogue-2-锯齿利刃",
-      "rogue-2-强化扰乱"
+      "rogue-2-锯齿利刃"
      ],
      "level": "L2",
      "provenance": [
@@ -1617,12 +1708,11 @@
      "nameConflict": false,
      "nameVerified": false,
      "nameSources": [
-      "fengshen",
-      "nieyi"
+      "fengshen"
      ],
-     "iconKey": "ability_rogue_garrote",
+     "iconKey": null,
      "requires": [
-      "rogue-2-卑鄙"
+      "rogue-2-察觉"
      ],
      "level": "L2",
      "provenance": [
@@ -1630,28 +1720,23 @@
        "type": "fan_db",
        "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
        "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
-       "url": "https://nieyi.cn/f/talents/rogue.html",
-       "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ]
     },
     {
-     "id": "rogue-2-割喉",
+     "id": "rogue-2-靴中剑",
      "tier": 5,
      "column": 2,
      "maxRanks": 5,
-     "nameCn": "割喉",
-     "nameAlt": null,
-     "nameConflict": false,
+     "nameCn": "靴中剑",
+     "nameAlt": "靴刀",
+     "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "classicon_rogue",
+     "iconKey": "ability_backstab",
      "requires": [],
      "level": "L2",
      "provenance": [
@@ -1665,22 +1750,24 @@
        "url": "https://nieyi.cn/f/talents/rogue.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
-     ]
+     ],
+     "upstreamId": "calc-rogue-subtlety-boot-knife",
+     "posMismatch": true
     },
     {
-     "id": "rogue-2-千刀万剐",
+     "id": "rogue-2-死亡印记",
      "tier": 6,
      "column": 1,
      "maxRanks": 1,
-     "nameCn": "千刀万剐",
-     "nameAlt": "死亡印记",
+     "nameCn": "死亡印记",
+     "nameAlt": "千刀万剐",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
-     "iconKey": "ability_rogue_rupture",
+     "iconKey": "spell_shadow_curseofsargeras",
      "requires": [
       "rogue-2-伺机待发"
      ],
@@ -1697,8 +1784,8 @@
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ],
-     "upstreamId": "launch-rogue-死亡印记",
-     "posMismatch": true
+     "upstreamId": "calc-rogue-subtlety-death-mark",
+     "changeState": "added"
     }
    ],
    "nameAlt": null,
@@ -1708,9 +1795,9 @@
   }
  ],
  "stats": {
-  "nodes": 53,
-  "nameConflict": 0,
-  "onlyInOneSource": 0
+  "nodes": 57,
+  "nameConflict": 21,
+  "onlyInOneSource": 7
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1718,7 +1805,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/rogue",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-03"
+   "checkedAt": "2026-11-05"
   }
  ]
 }

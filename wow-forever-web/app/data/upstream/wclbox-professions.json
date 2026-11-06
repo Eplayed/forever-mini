@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/zhuanye",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "method": "tools/scrape-wclbox-prof.py --write",
   "took": "制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、采集点与可得物",
   "skipped": "冲级路线建议、BiS 结论、攻略文字、任何百分比",
@@ -6502,7 +6502,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -21394,7 +21394,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -23161,7 +23161,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -30565,7 +30565,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -48379,7 +48379,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -62787,7 +62787,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -63369,7 +63369,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -63854,7 +63854,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -63978,7 +63978,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -67135,7 +67135,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -67235,7 +67235,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -68047,7 +68047,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -68064,7 +68064,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   }

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -81,7 +81,7 @@
    "row": 2,
    "col": 2,
    "icon": "spell_nature_natureresistancetotem",
-   "preId": null,
+   "preId": "nature_s_majesty",
    "nid": "nature_s_splendor"
   },
   {
@@ -101,7 +101,7 @@
    "row": 3,
    "col": 1,
    "icon": "spell_nature_purge",
-   "preId": null,
+   "preId": "improved_moonfire",
    "nid": "vengeance"
   },
   {
@@ -281,7 +281,7 @@
    "row": 3,
    "col": 1,
    "icon": "ability_druid_lacerate",
-   "preId": null,
+   "preId": "savage_fury",
    "nid": "lacerate"
   },
   {
@@ -301,7 +301,7 @@
    "row": 3,
    "col": 3,
    "icon": "ability_ghoulfrenzy",
-   "preId": null,
+   "preId": "sharpened_claws",
    "nid": "blood_frenzy"
   },
   {
@@ -331,7 +331,7 @@
    "row": 5,
    "col": 0,
    "icon": "ability_druid_primalagression",
-   "preId": null,
+   "preId": "predatory_strikes",
    "nid": "rend_and_tear"
   },
   {
@@ -351,7 +351,7 @@
    "row": 6,
    "col": 1,
    "icon": "ability_racial_cannibalize",
-   "preId": null,
+   "preId": "leader_of_the_pack",
    "nid": "primal_bite"
   },
   {
@@ -361,7 +361,7 @@
    "row": 6,
    "col": 2,
    "icon": "spell_druid_displacement",
-   "preId": null,
+   "preId": "predatory_discipline",
    "nid": "shifting_power"
   },
   {
@@ -481,7 +481,7 @@
    "row": 4,
    "col": 0,
    "icon": "spell_nature_ravenform",
-   "preId": null,
+   "preId": "naturalist",
    "nid": "nature_s_swiftness"
   },
   {
@@ -511,7 +511,7 @@
    "row": 5,
    "col": 2,
    "icon": "spell_nature_resistnature",
-   "preId": null,
+   "preId": "improved_rejuvenation",
    "nid": "improved_regrowth"
   },
   {
@@ -521,7 +521,7 @@
    "row": 6,
    "col": 1,
    "icon": "ability_druid_flourish",
-   "preId": null,
+   "preId": "living_spirit",
    "nid": "wild_growth"
   }
  ]

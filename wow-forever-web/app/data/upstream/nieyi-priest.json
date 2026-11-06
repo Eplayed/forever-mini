@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -141,7 +141,7 @@
    "row": 3,
    "col": 2,
    "icon": "spell_holy_pureofheart",
-   "preId": null,
+   "preId": "improved_power_word_shield",
    "nid": "soul_warding"
   },
   {
@@ -161,7 +161,7 @@
    "row": 4,
    "col": 2,
    "icon": "spell_holy_holyprotection",
-   "preId": null,
+   "preId": "soul_warding",
    "nid": "renewed_hope"
   },
   {
@@ -181,7 +181,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_holy_powerinfusion",
-   "preId": null,
+   "preId": "penance",
    "nid": "power_infusion"
   },
   {
@@ -291,7 +291,7 @@
    "row": 3,
    "col": 2,
    "icon": "spell_holy_searinglightpriest",
-   "preId": null,
+   "preId": "divine_fury",
    "nid": "searing_light"
   },
   {
@@ -351,7 +351,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_holy_prayerofmendingtga",
-   "preId": null,
+   "preId": "spirit_of_redemption",
    "nid": "prayer_of_mending"
   },
   {
@@ -421,7 +421,7 @@
    "row": 2,
    "col": 1,
    "icon": "spell_shadow_psychicscream",
-   "preId": null,
+   "preId": "blackout",
    "nid": "improved_psychic_scream"
   },
   {
@@ -441,7 +441,7 @@
    "row": 2,
    "col": 3,
    "icon": "spell_shadow_soulleech_2",
-   "preId": null,
+   "preId": "mind_flay",
    "nid": "improved_mind_flay"
   },
   {
@@ -521,7 +521,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_shadow_shadowform",
-   "preId": null,
+   "preId": "vampiric_embrace",
    "nid": "shadowform"
   }
  ]

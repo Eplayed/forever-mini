@@ -1,11 +1,11 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1793694023664/legacy.json",
-  "build": "r-1793694023664",
-  "clientBuild": "1.60.1.70753",
-  "upstreamUpdatedAt": "2026-11-02",
-  "fetchedAt": "2026-11-03",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+  "build": "r-1793819765111",
+  "clientBuild": "1.60.1.70790",
+  "upstreamUpdatedAt": "2026-11-05",
+  "fetchedAt": "2026-11-05",
   "method": "tools/scrape-wclbox-legacy.py 取 _shuju/<发布号>/legacy.json，发布号现读",
   "textPolicy": "落盘前删掉的字段见 droppedFields；效果说明与整句文本一律不存仓库",
   "droppedFields": {
@@ -43,8 +43,8 @@
    {
     "id": "client_legacy",
     "type": "client_data",
-    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70753",
-    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70753"
+    "label": "魔兽世界：无限测试版客户端，版本 1.60.1.70790",
+    "url": "https://wago.tools/db2/TraitDefinition?build=1.60.1.70790"
    }
   ]
  },
@@ -55,7 +55,7 @@
  },
  "challengeMeta": {
   "total": 65,
-  "build": "1.60.1.70753",
+  "build": "1.60.1.70790",
   "unlock": "账号里第一个角色升到 25 级后开放。"
  },
  "trees": [

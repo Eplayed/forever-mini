@@ -21,8 +21,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L0",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 52,
-   "nameVerified": 51,
+   "talentCount": 54,
+   "nameVerified": 53,
    "iconKey": "class_warrior",
    "provenance": [
     {
@@ -42,7 +42,7 @@
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
    "talentCount": 51,
-   "nameVerified": 50,
+   "nameVerified": 47,
    "iconKey": "class_paladin",
    "provenance": [
     {
@@ -81,8 +81,8 @@
    "structureStatus": "names-only",
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 53,
-   "nameVerified": 29,
+   "talentCount": 57,
+   "nameVerified": 44,
    "iconKey": "class_rogue",
    "provenance": [
     {
@@ -121,7 +121,7 @@
    "structureStatus": "names-only",
    "nameLevel": "L3",
    "note": "天赋名与上限已入库（第三方数据挖掘，待实测）；游戏内层级未获得",
-   "talentCount": 50,
+   "talentCount": 51,
    "nameVerified": 48,
    "iconKey": "class_shaman",
    "provenance": [

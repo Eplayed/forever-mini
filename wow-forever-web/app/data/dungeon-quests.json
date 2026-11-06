@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-03",
+  "generatedAt": "2026-11-05",
   "method": "tools/merge-dungeon-quests.js 合 upstream 任务快照；优先级按站主 2026-10-13 的决定：wclbox 为准，wclbox 没有的按 wowhead 来。2026-10-14 起空任务座按 PLAN 第 4 节用 GearInsight_Forever DungeonQuestData 补（Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，只补空座，经验值该源没给）。",
   "pageNote": "副本任务这块按参考站 wclbox 的数据为准，它没给的项按另一份客户端资料补上；个别座（挖掘场/达拉然）两份资料都没有，按 Wowhead 无限服数据的插件转述源补齐。任务目标那句话与掉落概率都没采——第三方站只取名称与数字，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，本站没实测过。",
   "note": "任务目标描述整句与掉落概率刻意没采——第三方站只取事实性标识符，本站掉落不写概率。经验值是经典旧世的数字，无限服可能调整，没实测过。GI 补的两座任务名来自 vmangos+游戏内现读，不是 wclbox 口径。",
@@ -102,7 +102,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/hall-of-thanes",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "datamine_en",
@@ -279,7 +279,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/ruins-of-lordaeron",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "datamine_en",
@@ -487,7 +487,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/excavation-site",
      "note": "该站此座任务表为空（无记录），任务数据按下一条转述源补齐",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "datamine_cn",
@@ -708,7 +708,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/city-of-dalaran",
      "note": "该站此座任务表为空（无记录），任务数据按下一条转述源补齐",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     },
     {
      "type": "datamine_cn",
@@ -733,7 +733,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/the-drowned-city",
      "note": "该站此座没有任务记录，两份资料与转述源都没有",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -752,7 +752,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/kroldok-stronghold",
      "note": "该站此座没有任务记录，两份资料与转述源都没有",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -771,7 +771,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/alcaz-prison",
      "note": "该站此座没有任务记录，两份资料与转述源都没有",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -790,7 +790,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/blackmaw-hold",
      "note": "该站此座没有任务记录，两份资料与转述源都没有",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -809,7 +809,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/shapers-terrace",
      "note": "该站此座没有任务记录，两份资料与转述源都没有",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -961,7 +961,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/ragefire-chasm",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -1199,7 +1199,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/wailing-caverns",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -1335,7 +1335,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/the-deadmines",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -1423,7 +1423,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/shadowfang-keep",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -1661,7 +1661,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/blackfathom-deeps",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -1815,7 +1815,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/the-stockade",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2281,7 +2281,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/gnomeregan",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2459,7 +2459,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/razorfen-kraul",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2577,7 +2577,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-graveyard",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2695,7 +2695,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-library",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2813,7 +2813,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-armory",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -2967,7 +2967,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/razorfen-downs",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -3145,7 +3145,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/scarlet-monastery-cathedral",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -3731,7 +3731,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/uldaman",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -3981,7 +3981,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/zulfarrak",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -4219,7 +4219,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/maraudon",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -4463,7 +4463,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/sunken-temple",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -5295,7 +5295,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/blackrock-depths",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -6001,7 +6001,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-east",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -6689,7 +6689,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -7467,7 +7467,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-north",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -8101,7 +8101,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-west",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -8399,7 +8399,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/scholomance",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -8703,7 +8703,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/stratholme-main-gate",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -9055,7 +9055,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/stratholme-service-gate",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -9749,7 +9749,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   }

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-03",
+  "generatedAt": "2026-11-05",
   "kind": "client-datamine",
   "method": "tools/scrape-wclbox-prof.py --write 抓 → tools/merge-professions.js 整形",
   "sources": [
@@ -20,14 +20,14 @@
   "sourceFrom": "配方行的 vendors / formulaDrops 来自 XR_DungeonGuide 0.37.1 Data_Prof.lua（tools/extract-xr-prof.py 抽取 → tools/merge-prof-sources.py 并入），掉率百分比在抽取阶段就丢了；原有的 source（训练师/商人这类归法）仍来自参考站，两套并存",
   "xrProf": {
    "recipes": 1986,
-   "matched": 1890,
+   "matched": 1886,
    "withVendors": 646,
    "withDrops": 336,
    "vTrimmed": 12,
    "dTrimmed": 14,
-   "xrOnly": 32,
-   "fetched": "2026-11-03",
-   "total": 1918,
+   "xrOnly": 20,
+   "fetched": "2026-11-05",
+   "total": 1902,
    "rateDropped": 782
   }
  },
@@ -6621,7 +6621,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -22008,7 +22008,7 @@
      "formulaDrops": [
       {
        "npc": "The Prophet Skeram",
-       "zone": "安其拉神殿"
+       "zone": "Ahn'Qiraj Temple"
       }
      ],
      "srcFrom": "xr"
@@ -22207,7 +22207,7 @@
       },
       {
        "npc": "Anubisath Defender",
-       "zone": "安其拉神殿"
+       "zone": "Ahn'Qiraj Temple"
       },
       {
        "npc": "Carrion Spinner",
@@ -22268,7 +22268,7 @@
       },
       {
        "npc": "Anubisath Defender",
-       "zone": "安其拉神殿"
+       "zone": "Ahn'Qiraj Temple"
       }
      ],
      "dMore": 3,
@@ -23997,7 +23997,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -25826,7 +25826,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -34415,7 +34415,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -55429,7 +55429,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -57565,11 +57565,11 @@
      "formulaDrops": [
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Sneed",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "srcFrom": "xr"
@@ -57613,19 +57613,19 @@
      "formulaDrops": [
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Gilnid",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Sneed",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Lady Anacondra",
-       "zone": "哀嚎洞穴"
+       "zone": "Wailing Caverns"
       }
      ],
      "dMore": 1,
@@ -57670,19 +57670,19 @@
      "formulaDrops": [
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Rhahk'Zor",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Shadow Charger",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Gilnid",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "dMore": 2,
@@ -57727,19 +57727,19 @@
      "formulaDrops": [
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Bazzalan",
-       "zone": "怒焰裂谷"
+       "zone": "Ragefire Chasm"
       },
       {
        "npc": "Cookie",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Lord Cobrahn",
-       "zone": "哀嚎洞穴"
+       "zone": "Wailing Caverns"
       }
      ],
      "srcFrom": "xr"
@@ -57783,15 +57783,15 @@
      "formulaDrops": [
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Bazzalan",
-       "zone": "怒焰裂谷"
+       "zone": "Ragefire Chasm"
       },
       {
        "npc": "Cookie",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "srcFrom": "xr"
@@ -57835,19 +57835,19 @@
      "formulaDrops": [
       {
        "npc": "Bazzalan",
-       "zone": "怒焰裂谷"
+       "zone": "Ragefire Chasm"
       },
       {
        "npc": "Fel Steed",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Captain Greenskin",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Cookie",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "srcFrom": "xr"
@@ -59117,19 +59117,19 @@
      "formulaDrops": [
       {
        "npc": "Ghamoo-ra",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Edwin VanCleef",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       },
       {
        "npc": "Verdan the Everliving",
-       "zone": "哀嚎洞穴"
+       "zone": "Wailing Caverns"
       },
       {
        "npc": "Lord Pythas",
-       "zone": "哀嚎洞穴"
+       "zone": "Wailing Caverns"
       }
      ],
      "srcFrom": "xr"
@@ -59173,15 +59173,15 @@
      "formulaDrops": [
       {
        "npc": "Ghamoo-ra",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Shadow Charger",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Edwin VanCleef",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "srcFrom": "xr"
@@ -59225,15 +59225,15 @@
      "formulaDrops": [
       {
        "npc": "Lady Sarevess",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Ghamoo-ra",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Targorr the Dread",
-       "zone": "监狱"
+       "zone": "The Stockade"
       }
      ],
      "srcFrom": "xr"
@@ -59277,19 +59277,19 @@
      "formulaDrops": [
       {
        "npc": "Lady Sarevess",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Ghamoo-ra",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Targorr the Dread",
-       "zone": "监狱"
+       "zone": "The Stockade"
       },
       {
        "npc": "Skum",
-       "zone": "哀嚎洞穴"
+       "zone": "Wailing Caverns"
       }
      ],
      "srcFrom": "xr"
@@ -59333,11 +59333,11 @@
      "formulaDrops": [
       {
        "npc": "Shadow Charger",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Ghamoo-ra",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       }
      ],
      "srcFrom": "xr"
@@ -59381,15 +59381,15 @@
      "formulaDrops": [
       {
        "npc": "Shadow Charger",
-       "zone": "影牙城堡"
+       "zone": "Shadowfang Keep"
       },
       {
        "npc": "Lady Sarevess",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Edwin VanCleef",
-       "zone": "死亡矿井"
+       "zone": "The Deadmines"
       }
      ],
      "srcFrom": "xr"
@@ -60644,19 +60644,19 @@
      "formulaDrops": [
       {
        "npc": "Blind Hunter",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Charlga Razorflank",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Overlord Ramtusk",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Bazil Thredd",
-       "zone": "监狱"
+       "zone": "The Stockade"
       }
      ],
      "dMore": 1,
@@ -60705,15 +60705,15 @@
       },
       {
        "npc": "Lorgus Jett",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Old Serra'kis",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Charlga Razorflank",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       }
      ],
      "dMore": 3,
@@ -60758,19 +60758,19 @@
      "formulaDrops": [
       {
        "npc": "Lorgus Jett",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Baron Aquanis",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Gelihast",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Aku'mai",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       }
      ],
      "dMore": 4,
@@ -60815,19 +60815,19 @@
      "formulaDrops": [
       {
        "npc": "Lorgus Jett",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Old Serra'kis",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Death Speaker Jargba",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Kam Deepfury",
-       "zone": "监狱"
+       "zone": "The Stockade"
       }
      ],
      "dMore": 3,
@@ -60872,19 +60872,19 @@
      "formulaDrops": [
       {
        "npc": "Lorgus Jett",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Aku'mai",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       },
       {
        "npc": "Hamhock",
-       "zone": "监狱"
+       "zone": "The Stockade"
       },
       {
        "npc": "Twilight Lord Kelris",
-       "zone": "黑暗深渊"
+       "zone": "Blackfathom Deeps"
       }
      ],
      "dMore": 1,
@@ -60929,19 +60929,19 @@
      "formulaDrops": [
       {
        "npc": "Death Speaker Jargba",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Overlord Ramtusk",
-       "zone": "剃刀沼泽"
+       "zone": "Razorfen Kraul"
       },
       {
        "npc": "Bazil Thredd",
-       "zone": "监狱"
+       "zone": "The Stockade"
       },
       {
        "npc": "Dextren Ward",
-       "zone": "监狱"
+       "zone": "The Stockade"
       }
      ],
      "dMore": 1,
@@ -73054,7 +73054,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -73689,7 +73689,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -74215,7 +74215,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -74356,7 +74356,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -78531,7 +78531,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -78654,7 +78654,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -79508,7 +79508,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   },
@@ -79534,7 +79534,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-03"
+     "checkedAt": "2026-11-05"
     }
    ]
   }

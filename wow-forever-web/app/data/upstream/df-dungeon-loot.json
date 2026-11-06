@@ -1,16 +1,16 @@
 {
  "meta": {
-  "source": "DungeonsForever 1.9.10 Core/Data/Data_DungeonLoot.lua",
+  "source": "DungeonsForever 1.8.20 Core/Data/Data_DungeonLoot.lua",
   "addon": "DungeonsForever",
-  "addonVersion": "1.9.10",
+  "addonVersion": "1.8.20",
   "installRoot": "Interface",
   "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
   "sourceStamp": {
-   "bytes": 95243,
-   "sha256": "3a2c7428bd5850d05203136078c53204d70a53cdb833a02c1fc1a042be4c1277",
+   "bytes": 95246,
+   "sha256": "3b906d741e683675985939b56c442655728e33f3c82ea952bfaf13a910eb118f",
    "fileDate": "2026-10-25"
   },
-  "fetched": "2026-11-03",
+  "fetched": "2026-11-05",
   "took": "首领中文名、英文名、npcId，以及每条首领的掉落物品 ID（去重、升序）",
   "droppedFields": [
    "掉率那一列（DF 行里 100 / nil 那个数）——本站红线：掉落不写百分比",
@@ -587,7 +587,7 @@
    "dfSlug": "city_of_dalaran",
    "bosses": [
     {
-     "nameCn": "墓穴骑士阿特雷克斯",
+     "nameCn": "墓穴骑士阿特雷克西斯",
      "nameEn": "Atrexis the Grave Knight",
      "npcId": 247126,
      "itemIds": [
@@ -597,7 +597,7 @@
      ]
     },
     {
-     "nameCn": "被无视的琳恩",
+     "nameCn": "被无视的琳",
      "nameEn": "Lyn the Ignored",
      "npcId": 247032,
      "itemIds": [
@@ -607,7 +607,7 @@
      ]
     },
     {
-     "nameCn": "奥术畸体",
+     "nameCn": "奥术异常体",
      "nameEn": "Arcane Anomaly",
      "npcId": 245999,
      "itemIds": [
@@ -617,7 +617,7 @@
      ]
     },
     {
-     "nameCn": "奥术之谜",
+     "nameCn": "奥术谜团",
      "nameEn": "Arcanic Enigma",
      "npcId": 246016,
      "itemIds": [

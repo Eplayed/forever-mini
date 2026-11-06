@@ -2,7 +2,7 @@
  "classId": "paladin",
  "classNameCn": "圣骑士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-03（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -399,7 +399,7 @@
       }
      ],
      "upstreamId": "calc-paladin-holy-oath-of-light",
-     "changeState": "modified"
+     "changeState": "added"
     },
     {
      "id": "paladin-0-奉献之地",
@@ -469,9 +469,9 @@
      "column": 2,
      "maxRanks": 2,
      "nameCn": "无垠圣光",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "无尽圣光",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -494,7 +494,7 @@
       }
      ],
      "upstreamId": "calc-paladin-holy-boundless-light",
-     "changeState": "added"
+     "posMismatch": true
     },
     {
      "id": "paladin-0-神圣强化",
@@ -1073,9 +1073,9 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "以盾为誓",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "盾誓",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1098,7 +1098,7 @@
       }
      ],
      "upstreamId": "calc-paladin-protection-shieldsworn",
-     "changeState": "added"
+     "posMismatch": true
     }
    ]
   },
@@ -1485,7 +1485,7 @@
      "column": 0,
      "maxRanks": 2,
      "nameCn": "邪恶超度",
-     "nameAlt": "超度邪恶",
+     "nameAlt": "驱邪",
      "nameConflict": true,
      "nameVerified": false,
      "nameSources": [
@@ -1611,9 +1611,9 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "解封之怒",
-     "nameAlt": null,
-     "nameConflict": false,
-     "nameVerified": true,
+     "nameAlt": "无封之怒",
+     "nameConflict": true,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
@@ -1636,7 +1636,7 @@
       }
      ],
      "upstreamId": "calc-paladin-retribution-unsealed-wrath",
-     "changeState": "added"
+     "posMismatch": true
     }
    ]
   }
@@ -1652,7 +1652,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/paladin",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-03"
+   "checkedAt": "2026-11-05"
   }
  ]
 }

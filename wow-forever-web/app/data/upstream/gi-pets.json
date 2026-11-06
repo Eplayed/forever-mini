@@ -1,10 +1,10 @@
 {
  "meta": {
   "kind": "gi-pets",
-  "fetchedAt": "2026-11-03",
+  "fetchedAt": "2026-11-05",
   "source": "GearInsight 无限版 0.5.6",
   "file": "GearInsight_Forever/PetData.lua",
-  "selfReportedBuild": "1.60.1.70532",
+  "selfReportedBuild": "1.60.1.70374",
   "selfReportedBase": "1.15.9.70003",
   "selfReportedNote": "插件文件自述：数据取自《无限》客户端 DB2（wago.tools），「新增」= 经典旧世那一版宠物技能线里没有。本站未逐行回客户端表核对。",
   "droppedFields": [
@@ -24,7 +24,7 @@
   "provenance": {
    "type": "addon",
    "url": "GearInsight_Forever/PetData.lua",
-   "checkedAt": "2026-11-03"
+   "checkedAt": "2026-11-05"
   }
  },
  "families": [
@@ -581,7 +581,7 @@
    "learnLevel": 10,
    "maxLevel": 50,
    "ranks": 5,
-   "cooldownSec": 90,
+   "cooldownSec": 60,
    "cost": 20,
    "isNew": true,
    "renamed": false,
@@ -596,7 +596,7 @@
    "learnLevel": 12,
    "maxLevel": 60,
    "ranks": 5,
-   "cooldownSec": 15,
+   "cooldownSec": 6,
    "cost": 35,
    "isNew": true,
    "renamed": false,
@@ -656,7 +656,7 @@
    "learnLevel": 12,
    "maxLevel": 60,
    "ranks": 5,
-   "cooldownSec": 60,
+   "cooldownSec": 30,
    "cost": 80,
    "isNew": true,
    "renamed": false,

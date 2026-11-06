@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -126,13 +126,13 @@
   },
   {
    "tree": 0,
-   "name": "熔岩爆裂",
+   "name": "雷霆召唤",
    "max": 1,
    "row": 4,
    "col": 1,
-   "icon": "spell_shaman_lavaburst",
+   "icon": "spell_nature_lightning",
    "preId": null,
-   "nid": "lava_burst"
+   "nid": "call_of_thunder"
   },
   {
    "tree": 0,
@@ -141,7 +141,7 @@
    "row": 4,
    "col": 2,
    "icon": "spell_nature_lightningoverload",
-   "preId": null,
+   "preId": "elemental_alacrity",
    "nid": "lightning_overload"
   },
   {
@@ -151,17 +151,17 @@
    "row": 5,
    "col": 2,
    "icon": "spell_fire_volcano",
-   "preId": null,
+   "preId": "lightning_overload",
    "nid": "elemental_fury"
   },
   {
    "tree": 0,
-   "name": "元素掌握",
+   "name": "闪电精通",
    "max": 1,
    "row": 6,
    "col": 1,
    "icon": "spell_nature_wispheal",
-   "preId": null,
+   "preId": "call_of_thunder",
    "nid": "elemental_mastery"
   },
   {
@@ -213,16 +213,6 @@
    "icon": "spell_nature_mentalquickness",
    "preId": null,
    "nid": "mental_dexterity"
-  },
-  {
-   "tree": 1,
-   "name": "强化幽魂之狼",
-   "max": 2,
-   "row": 1,
-   "col": 2,
-   "icon": "spell_nature_spiritwolf",
-   "preId": null,
-   "nid": "improved_ghost_wolf"
   },
   {
    "tree": 1,
@@ -281,7 +271,7 @@
    "row": 3,
    "col": 1,
    "icon": "ability_ghoulfrenzy",
-   "preId": null,
+   "preId": "mental_dexterity",
    "nid": "flurry"
   },
   {
@@ -293,6 +283,16 @@
    "icon": "ability_shaman_stormstrike",
    "preId": null,
    "nid": "stormstrike"
+  },
+  {
+   "tree": 1,
+   "name": "强化幽魂之狼",
+   "max": 2,
+   "row": 3,
+   "col": 3,
+   "icon": "spell_nature_spiritwolf",
+   "preId": null,
+   "nid": "improved_ghost_wolf"
   },
   {
    "tree": 1,
@@ -321,7 +321,7 @@
    "row": 4,
    "col": 2,
    "icon": "spell_shaman_improvedstormstrike",
-   "preId": null,
+   "preId": "stormstrike",
    "nid": "improved_stormstrike"
   },
   {
@@ -341,7 +341,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_bloodlust",
-   "preId": null,
+   "preId": "mental_quickness",
    "nid": "rage_of_the_farseer"
   },
   {
@@ -501,7 +501,7 @@
    "row": 6,
    "col": 1,
    "icon": "spell_nature_riptide",
-   "preId": null,
+   "preId": "healing_way",
    "nid": "riptide"
   }
  ]

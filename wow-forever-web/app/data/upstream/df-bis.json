@@ -1,17 +1,17 @@
 {
  "meta": {
-  "source": "DungeonsForever 1.9.10 Core/Data/Data_BIS.lua",
+  "source": "DungeonsForever 1.8.20 Core/Data/Data_BIS.lua",
   "addon": "DungeonsForever",
-  "addonVersion": "1.9.10",
+  "addonVersion": "1.8.20",
   "installRoot": "Interface",
   "sourceFile": "DungeonsForever/Core/Data/Data_BIS.lua",
   "sourceStamp": {
-   "bytes": 618320,
-   "sha256": "939baea041cc67bf733fcf452c7eebe9bb667936f7b1faa1e5205932b9be5e82",
+   "bytes": 744374,
+   "sha256": "938318cec9de87a01b1b4efe04f387e0042c22406d076969068858810cb62056",
    "fileDate": "2026-10-25"
   },
   "selfReported": "文件里自述 updated=2026-10-16、默认等级段 30；作者没写上游站名（自述来源不明，所以这份只当'另一家列过的名单'，不当独立第二证据）",
-  "fetched": "2026-11-03",
+  "fetched": "2026-11-05",
   "took": "等级段、职业、专精、部位、物品 ID、格内顺位",
   "droppedFields": [
    "每格第三列的属性句（如「敏捷 +3」「所有属性 +2」）——那是 DF 自己写的表述，本站的属性另有来源，不复制别人怎么写",

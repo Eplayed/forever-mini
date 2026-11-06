@@ -1,16 +1,16 @@
 {
  "meta": {
   "kind": "gi-macros",
-  "fetchedAt": "2026-11-03",
-  "source": "GearInsight_Forever 0.5.7 + XR_DungeonGuide v95.7（同一批宏的两个形态，版本号从各自 .toc 现读）",
+  "fetchedAt": "2026-11-05",
+  "source": "GearInsight_Forever 0.5.3 + XR_DungeonGuide v75（同一批宏的两个形态，版本号从各自 .toc 现读）",
   "addonVersions": {
-   "gi": "0.5.7",
-   "xr": "95.7"
+   "gi": "0.5.3",
+   "xr": "75"
   },
   "files": [
    {
     "path": "GearInsight_Forever/MacroData.lua",
-    "sha256": "b6db2f38fca3b64297fb2d464e058a0a75aad31aaa8757e227f55b98d18e2695",
+    "sha256": "f00458f83614c62b2596dcae538c1d94f12cd10a7fa5583a6eecbcef110d6fc0",
     "selfReported": "宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；技能名 → 法术 ID：Beta 1.60.1.70532"
    },
    {
@@ -3615,7 +3615,7 @@
    "note": "连按两下：先上烈焰震击，再接熔岩爆裂（《无限》新技能）；换目标或 12 秒后重来",
    "bodyTemplate": "#showtooltip\\n/castsequence reset=target/12 {{8050}}, {{408490}}",
    "foreverNew": false,
-   "level": 30,
+   "level": 40,
    "spellIds": [
     8050,
     408490
@@ -5729,7 +5729,7 @@
    "note": "不在豹形态先变豹（带 ! 不会变回去），再撕碎；按住 Shift 爪击",
    "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1082}}; {{5221}}",
    "foreverNew": false,
-   "level": 20,
+   "level": 22,
    "spellIds": [
     768,
     5221,

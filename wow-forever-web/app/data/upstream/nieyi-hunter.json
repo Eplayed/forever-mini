@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "via": "live"
  },
  "rows": [
@@ -131,7 +131,7 @@
    "row": 4,
    "col": 1,
    "icon": "ability_devour",
-   "preId": null,
+   "preId": "bestial_swiftness",
    "nid": "intimidation"
   },
   {
@@ -151,7 +151,7 @@
    "row": 5,
    "col": 2,
    "icon": "inv_misc_monsterclaw_03",
-   "preId": null,
+   "preId": "ferocity",
    "nid": "frenzy"
   },
   {
@@ -161,7 +161,7 @@
    "row": 6,
    "col": 1,
    "icon": "ability_druid_ferociousbite",
-   "preId": null,
+   "preId": "intimidation",
    "nid": "bestial_wrath"
   },
   {
@@ -271,7 +271,7 @@
    "row": 3,
    "col": 2,
    "icon": "ability_piercedamage",
-   "preId": null,
+   "preId": "careful_aim",
    "nid": "mortal_shots"
   },
   {
@@ -281,7 +281,7 @@
    "row": 4,
    "col": 0,
    "icon": "ability_hunter_rapidregeneration",
-   "preId": null,
+   "preId": "rapid_killing",
    "nid": "rapid_recuperation"
   },
   {
@@ -321,7 +321,7 @@
    "row": 6,
    "col": 1,
    "icon": "hunter_pvp_snipershot",
-   "preId": null,
+   "preId": "trueshot_aura",
    "nid": "sniper_shot"
   },
   {
@@ -441,7 +441,7 @@
    "row": 3,
    "col": 2,
    "icon": "ability_warrior_challange",
-   "preId": null,
+   "preId": "deterrence",
    "nid": "counterattack"
   },
   {
@@ -501,7 +501,7 @@
    "row": 6,
    "col": 1,
    "icon": "ability_gouge",
-   "preId": null,
+   "preId": "expose_prey",
    "nid": "lacerating_strikes"
   }
  ]

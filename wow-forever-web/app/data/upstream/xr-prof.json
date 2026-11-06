@@ -4,10 +4,10 @@
    "drops": 334,
    "dupItem": 0,
    "rateDropped": 782,
-   "rows": 1921,
+   "rows": 1905,
    "srcHasLearn": 1697,
    "srcHasSkill": 1078,
-   "total": 1918,
+   "total": 1902,
    "vendors": 648
   },
   "droppedFields": [
@@ -17,7 +17,7 @@
    "附魔行的效果文本（句子）",
    "reagents 与 formula（材料这条线站内已有，不重复取）"
   ],
-  "fetched": "2026-11-03",
+  "fetched": "2026-11-05",
   "note": "只取\"去哪儿学、学会要什么门槛、图纸从谁身上掉\"这三类事实字段。商人与 NPC 是游戏内专名，原样保留；区域名用插件给的中文，站内另有定名档，合并层按站内区域名为准、不一致只记冲突。",
   "source": "XR_DungeonGuide 0.37.1 Data_Prof.lua（自述数据源：无限服权威配方 2026-10-10）"
  },
@@ -883,18 +883,6 @@
    "spellId": 12719,
    "vendors": []
   },
-  "10580": {
-   "drops": [],
-   "prof": "engineering",
-   "spellId": 12720,
-   "vendors": []
-  },
-  "10585": {
-   "drops": [],
-   "prof": "engineering",
-   "spellId": 12722,
-   "vendors": []
-  },
   "10586": {
    "drops": [],
    "prof": "engineering",
@@ -965,12 +953,6 @@
    "drops": [],
    "prof": "engineering",
    "spellId": 12903,
-   "vendors": []
-  },
-  "10723": {
-   "drops": [],
-   "prof": "engineering",
-   "spellId": 12904,
    "vendors": []
   },
   "10724": {
@@ -1988,7 +1970,7 @@
     {
      "levels": null,
      "npc": "Vekniss Soldier",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     },
     {
      "levels": [
@@ -2186,12 +2168,6 @@
    "drops": [],
    "prof": "blacksmithing",
    "spellId": 16978,
-   "vendors": []
-  },
-  "12779": {
-   "drops": [],
-   "prof": "blacksmithing",
-   "spellId": 16980,
    "vendors": []
   },
   "12781": {
@@ -6697,12 +6673,6 @@
     }
    ]
   },
-  "210147": {
-   "drops": [],
-   "prof": "engineering",
-   "spellId": 424641,
-   "vendors": []
-  },
   "21023": {
    "drops": [],
    "prof": "cooking",
@@ -6799,12 +6769,6 @@
      "zone": "荆棘谷"
     }
    ]
-  },
-  "210781": {
-   "drops": [],
-   "prof": "tailoring",
-   "spellId": 428424,
-   "vendors": []
   },
   "21154": {
    "drops": [],
@@ -6949,18 +6913,6 @@
    "drops": [],
    "prof": "tailoring",
    "spellId": 26087,
-   "vendors": []
-  },
-  "215365": {
-   "drops": [],
-   "prof": "tailoring",
-   "spellId": 435848,
-   "vendors": []
-  },
-  "215366": {
-   "drops": [],
-   "prof": "tailoring",
-   "spellId": 435841,
    "vendors": []
   },
   "21542": {
@@ -7192,7 +7144,7 @@
     {
      "levels": null,
      "npc": "The Prophet Skeram",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     }
    ],
    "prof": "blacksmithing",
@@ -7350,12 +7302,12 @@
     {
      "levels": null,
      "npc": "Anubisath Defender",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     },
     {
      "levels": null,
      "npc": "Anubisath Sentinel",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     },
     {
      "levels": null,
@@ -7390,7 +7342,7 @@
     {
      "levels": null,
      "npc": "Anubisath Defender",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     },
     {
      "levels": null,
@@ -7415,7 +7367,7 @@
     {
      "levels": null,
      "npc": "Vekniss Guardian",
-     "zone": "安其拉神殿"
+     "zone": "Ahn'Qiraj Temple"
     }
    ],
    "prof": "blacksmithing",
@@ -7591,24 +7543,6 @@
    "spellId": 28474,
    "vendors": []
   },
-  "22762": {
-   "drops": [],
-   "prof": "blacksmithing",
-   "spellId": 28461,
-   "vendors": []
-  },
-  "22763": {
-   "drops": [],
-   "prof": "blacksmithing",
-   "spellId": 28462,
-   "vendors": []
-  },
-  "22764": {
-   "drops": [],
-   "prof": "blacksmithing",
-   "spellId": 28463,
-   "vendors": []
-  },
   "2300": {
    "drops": [],
    "prof": "leatherworking",
@@ -7730,12 +7664,6 @@
    "spellId": 20648,
    "vendors": []
   },
-  "241650": {
-   "drops": [],
-   "prof": "alchemy",
-   "spellId": 1231583,
-   "vendors": []
-  },
   "2454": {
    "drops": [],
    "prof": "alchemy",
@@ -7770,12 +7698,6 @@
    "drops": [],
    "prof": "alchemy",
    "spellId": 2335,
-   "vendors": []
-  },
-  "2460": {
-   "drops": [],
-   "prof": "alchemy",
-   "spellId": 2365,
    "vendors": []
   },
   "246948": {
@@ -8136,12 +8058,6 @@
    "drops": [],
    "prof": "cooking",
    "spellId": 1250158,
-   "vendors": []
-  },
-  "250326": {
-   "drops": [],
-   "prof": "alchemy",
-   "spellId": 1250775,
    "vendors": []
   },
   "250327": {
@@ -13375,12 +13291,12 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Sneed",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13395,27 +13311,27 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Gilnid",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Sneed",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Lady Anacondra",
-     "zone": "哀嚎洞穴"
+     "zone": "Wailing Caverns"
     },
     {
      "levels": null,
      "npc": "Rhahk'Zor",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13430,12 +13346,12 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Rhahk'Zor",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": [
@@ -13443,22 +13359,22 @@
       21
      ],
      "npc": "Shadow Charger",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Gilnid",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Jergosh the Invoker",
-     "zone": "怒焰裂谷"
+     "zone": "Ragefire Chasm"
     },
     {
      "levels": null,
      "npc": "Captain Greenskin",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13473,22 +13389,22 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Bazzalan",
-     "zone": "怒焰裂谷"
+     "zone": "Ragefire Chasm"
     },
     {
      "levels": null,
      "npc": "Cookie",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Lord Cobrahn",
-     "zone": "哀嚎洞穴"
+     "zone": "Wailing Caverns"
     }
    ],
    "prof": "tailoring",
@@ -13503,17 +13419,17 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Bazzalan",
-     "zone": "怒焰裂谷"
+     "zone": "Ragefire Chasm"
     },
     {
      "levels": null,
      "npc": "Cookie",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13525,7 +13441,7 @@
     {
      "levels": null,
      "npc": "Bazzalan",
-     "zone": "怒焰裂谷"
+     "zone": "Ragefire Chasm"
     },
     {
      "levels": [
@@ -13533,17 +13449,17 @@
       20
      ],
      "npc": "Fel Steed",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Captain Greenskin",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Cookie",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13783,22 +13699,22 @@
     {
      "levels": null,
      "npc": "Ghamoo-ra",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Edwin VanCleef",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     },
     {
      "levels": null,
      "npc": "Verdan the Everliving",
-     "zone": "哀嚎洞穴"
+     "zone": "Wailing Caverns"
     },
     {
      "levels": null,
      "npc": "Lord Pythas",
-     "zone": "哀嚎洞穴"
+     "zone": "Wailing Caverns"
     }
    ],
    "prof": "tailoring",
@@ -13810,7 +13726,7 @@
     {
      "levels": null,
      "npc": "Ghamoo-ra",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": [
@@ -13818,12 +13734,12 @@
       21
      ],
      "npc": "Shadow Charger",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Edwin VanCleef",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -13835,17 +13751,17 @@
     {
      "levels": null,
      "npc": "Lady Sarevess",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Ghamoo-ra",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Targorr the Dread",
-     "zone": "监狱"
+     "zone": "The Stockade"
     }
    ],
    "prof": "tailoring",
@@ -13857,22 +13773,22 @@
     {
      "levels": null,
      "npc": "Lady Sarevess",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Ghamoo-ra",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Targorr the Dread",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Skum",
-     "zone": "哀嚎洞穴"
+     "zone": "Wailing Caverns"
     }
    ],
    "prof": "tailoring",
@@ -13887,12 +13803,12 @@
       21
      ],
      "npc": "Shadow Charger",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Ghamoo-ra",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     }
    ],
    "prof": "tailoring",
@@ -13907,17 +13823,17 @@
       21
      ],
      "npc": "Shadow Charger",
-     "zone": "影牙城堡"
+     "zone": "Shadowfang Keep"
     },
     {
      "levels": null,
      "npc": "Lady Sarevess",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Edwin VanCleef",
-     "zone": "死亡矿井"
+     "zone": "The Deadmines"
     }
    ],
    "prof": "tailoring",
@@ -14170,27 +14086,27 @@
     {
      "levels": null,
      "npc": "Blind Hunter",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Charlga Razorflank",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Overlord Ramtusk",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Bazil Thredd",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Twilight Lord Kelris",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     }
    ],
    "prof": "tailoring",
@@ -14210,32 +14126,32 @@
     {
      "levels": null,
      "npc": "Lorgus Jett",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Old Serra'kis",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Charlga Razorflank",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Gelihast",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Kam Deepfury",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Bloodmage Thalnos",
-     "zone": "血色修道院"
+     "zone": "Scarlet Monastery"
     }
    ],
    "prof": "tailoring",
@@ -14247,42 +14163,42 @@
     {
      "levels": null,
      "npc": "Lorgus Jett",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Baron Aquanis",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Gelihast",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Aku'mai",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Dextren Ward",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Hamhock",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Kam Deepfury",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Twilight Lord Kelris",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     }
    ],
    "prof": "tailoring",
@@ -14294,32 +14210,32 @@
     {
      "levels": null,
      "npc": "Lorgus Jett",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Old Serra'kis",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Death Speaker Jargba",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Kam Deepfury",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Twilight Lord Kelris",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Interrogator Vishas",
-     "zone": "血色修道院"
+     "zone": "Scarlet Monastery"
     },
     {
      "levels": null,
@@ -14336,27 +14252,27 @@
     {
      "levels": null,
      "npc": "Lorgus Jett",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Aku'mai",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Hamhock",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Twilight Lord Kelris",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     },
     {
      "levels": null,
      "npc": "Interrogator Vishas",
-     "zone": "血色修道院"
+     "zone": "Scarlet Monastery"
     }
    ],
    "prof": "tailoring",
@@ -14368,27 +14284,27 @@
     {
      "levels": null,
      "npc": "Death Speaker Jargba",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Overlord Ramtusk",
-     "zone": "剃刀沼泽"
+     "zone": "Razorfen Kraul"
     },
     {
      "levels": null,
      "npc": "Bazil Thredd",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Dextren Ward",
-     "zone": "监狱"
+     "zone": "The Stockade"
     },
     {
      "levels": null,
      "npc": "Twilight Lord Kelris",
-     "zone": "黑暗深渊"
+     "zone": "Blackfathom Deeps"
     }
    ],
    "prof": "tailoring",
@@ -15917,12 +15833,6 @@
    "drops": [],
    "prof": "engineering",
    "spellId": 1266943,
-   "vendors": []
-  },
-  "263507": {
-   "drops": [],
-   "prof": "cooking",
-   "spellId": 1270632,
    "vendors": []
   },
   "263509": {
@@ -18048,12 +17958,6 @@
      "zone": "贫瘠之地"
     }
    ]
-  },
-  "280309": {
-   "drops": [],
-   "prof": "engineering",
-   "spellId": 1308182,
-   "vendors": []
   },
   "280310": {
    "drops": [],

@@ -7,45 +7,45 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1793694023664",
-  "foreverBuild": "1.60.1.70753",
+  "release": "r-1793819765111",
+  "foreverBuild": "1.60.1.70790",
   "classicBuild": "1.15.9.70576",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-11-03",
+  "scrapedAt": "2026-11-05",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1793694023664/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1793694023664/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1793694023664/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1793694023664/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793694023664/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793694023664/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793694023664/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1793819765111/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1793819765111/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1793819765111/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1793819765111/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793819765111/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793819765111/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793819765111/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70753",
+   "foreverBuild": "1.60.1.70790",
    "classicBuild": "1.15.9.70576",
-   "navBuild": "1.60.1.70753",
+   "navBuild": "1.60.1.70790",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70753",
+    "build": "1.60.1.70790",
     "month": 11,
-    "day": 2
+    "day": 5
    },
    "counts": {
-    "all": 967,
-    "changed": 765,
-    "newTalents": 99,
-    "changedTalents": 327,
-    "removedTalents": 83,
-    "spells": 416,
-    "spellsChanged": 256
+    "all": 968,
+    "changed": 767,
+    "newTalents": 118,
+    "changedTalents": 307,
+    "removedTalents": 84,
+    "spells": 417,
+    "spellsChanged": 258
    }
   },
   "maps": [

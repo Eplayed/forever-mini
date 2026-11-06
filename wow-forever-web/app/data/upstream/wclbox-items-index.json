@@ -2,11 +2,11 @@
  "meta": {
   "source": "wowforever.wclbox.com /wupin/liebiao（名称索引全量名录）",
   "url": "https://wowforever.wclbox.com/wupin/liebiao/1",
-  "fetched": "2026-11-03",
+  "fetched": "2026-11-05",
   "pages": 108,
-  "parsed": 21460,
+  "parsed": 21465,
   "stats": {
-   "new": 5633,
+   "new": 5638,
    "changed": 3883,
    "same": 10145,
    "missing": 1696,
@@ -195310,6 +195310,17 @@
    "status": "new"
   },
   {
+   "id": 264501,
+   "name": "古天裔刀",
+   "quality": 2,
+   "icon": "inv_sword_1h_skybornec60_b_01.jpg",
+   "sub": "优秀",
+   "type": "单手 · 单手剑",
+   "ilvl": 13,
+   "rlvl": 8,
+   "status": "new"
+  },
+  {
    "id": 264693,
    "name": "血色十字军的攻击计划",
    "quality": 1,
@@ -228689,7 +228700,7 @@
    "quality": 2,
    "icon": "inv_stone_sharpeningstone_02.jpg",
    "sub": "优秀",
-   "type": "垃圾",
+   "type": "钥匙",
    "ilvl": 1,
    "rlvl": null,
    "status": "new"
@@ -228700,7 +228711,7 @@
    "quality": 1,
    "icon": "inv_misc_pocketwatch_03.jpg",
    "sub": "普通",
-   "type": "垃圾",
+   "type": "钥匙",
    "ilvl": 1,
    "rlvl": null,
    "status": "new"
@@ -228731,9 +228742,9 @@
    "id": 281359,
    "name": "休眠符文石",
    "quality": 1,
-   "icon": "inv_misc_pocketwatch_03.jpg",
+   "icon": "inv_misc_stonetablet_02.jpg",
    "sub": "普通",
-   "type": "垃圾",
+   "type": "钥匙",
    "ilvl": 1,
    "rlvl": null,
    "status": "new"
@@ -229982,6 +229993,17 @@
    "status": "new"
   },
   {
+   "id": 282337,
+   "name": "被污染的水球",
+   "quality": 2,
+   "icon": "spell_shadow_teleport.jpg",
+   "sub": "优秀",
+   "type": "其它",
+   "ilvl": 1,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
    "id": 282338,
    "name": "神圣备忘录",
    "quality": 1,
@@ -230023,6 +230045,17 @@
    "type": "任务",
    "ilvl": 1,
    "rlvl": null,
+   "status": "new"
+  },
+  {
+   "id": 282404,
+   "name": "纳拉辛之书",
+   "quality": 1,
+   "icon": "inv_misc_book_01.jpg",
+   "sub": "普通",
+   "type": "其它",
+   "ilvl": 1,
+   "rlvl": 1,
    "status": "new"
   },
   {
@@ -230125,6 +230158,17 @@
    "status": "new"
   },
   {
+   "id": 282547,
+   "name": "深渊微粒",
+   "quality": 1,
+   "icon": "ability_shawaterelemental_split.jpg",
+   "sub": "普通",
+   "type": "其它",
+   "ilvl": 1,
+   "rlvl": 1,
+   "status": "new"
+  },
+  {
    "id": 282550,
    "name": "战斗调谐扳手",
    "quality": 2,
@@ -230210,6 +230254,17 @@
    "type": "远程 · 枪",
    "ilvl": 42,
    "rlvl": 37,
+   "status": "new"
+  },
+  {
+   "id": 282635,
+   "name": "抛出的古代开关",
+   "quality": 1,
+   "icon": "inv_jewelcrafting_starofelune_01.jpg",
+   "sub": "普通",
+   "type": "钥匙",
+   "ilvl": 1,
+   "rlvl": 1,
    "status": "new"
   },
   {

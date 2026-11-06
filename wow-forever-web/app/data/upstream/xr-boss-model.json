@@ -2,14 +2,14 @@
  "meta": {
   "source": "XR_DungeonGuide/Data_BossModel.lua（作者自述：照 DungeonsForever 掉落集合交集 + 中文名复核生成）",
   "addon": "XR_DungeonGuide",
-  "addonVersion": "95.7",
-  "sourceFile": "../../c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns/XR_DungeonGuide/Data_BossModel.lua",
+  "addonVersion": "75",
+  "sourceFile": "../../c/GAME/World of Warcraft/_forever_/Interface/AddOns/XR_DungeonGuide/Data_BossModel.lua",
   "sourceStamp": {
    "bytes": 11691,
    "sha256": "5da43e7b89a9e1011a9984c3b31b85c4f72af3c998d2bb716347cbc4f2242d35",
-   "fileDate": "2026-10-26"
+   "fileDate": "2026-10-25"
   },
-  "extractedAt": "2026-11-03",
+  "extractedAt": "2026-11-05",
   "takes": "只有 displayId(CreatureDisplayInfo) 与 npcId 两个标识符；作者写的说明与注释一条不取",
   "use": "给\"82 只没头像的首领\"指出该去客户端取哪张模型贴图，避免按中文名猜脸",
   "counts": {
