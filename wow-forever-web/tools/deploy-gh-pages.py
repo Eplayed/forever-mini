@@ -26,11 +26,25 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REL = os.path.join(ROOT, "release")
+
+
+def rmtree_force(path):
+    """rmtree 但容忍只读位：上一轮发布留下的 .git 对象文件是只读的（git 的正常行为），
+    Windows 的 rmtree 撞到只读位直接 PermissionError——2026-11-03 与 11-06 两次发布都炸在这。
+    删不动就清只读位再重试一次，别的错误照旧抛。"""
+    def _force(fn, p, _exc):
+        os.chmod(p, stat.S_IWRITE)
+        fn(p)
+
+    shutil.rmtree(path, onexc=_force)
+
+
 STAGE = os.path.join(REL, "ghpages")
 DEFAULT_REPO = "wuxian-atlas"
 
@@ -101,7 +115,7 @@ def stage_from(site_dir, cur):
     if len(want) != cur["files"]:
         sys.exit("清单条数 %d 与摘要里的 %d 不一致" % (len(want), cur["files"]))
     if os.path.isdir(STAGE):
-        shutil.rmtree(STAGE)
+        rmtree_force(STAGE)
     os.makedirs(STAGE)
     bad, n = [], 0
     for rel, dig in sorted(want.items()):
@@ -165,7 +179,7 @@ def main():
 
     print("[3/3] 推送并开 Pages")
     if os.path.isdir(os.path.join(STAGE, ".git")):
-        shutil.rmtree(os.path.join(STAGE, ".git"))
+        rmtree_force(os.path.join(STAGE, ".git"))
     sh(["git", "init", "-b", "main"], cwd=STAGE)
     sh(["git", "config", "user.name", "zyjwb1482"], cwd=STAGE)
     sh(["git", "config", "user.email", "zyjwb1482@users.noreply.github.com"], cwd=STAGE)
