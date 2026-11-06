@@ -114,6 +114,14 @@ def stage_from(site_dir, cur):
     want = {f["path"]: f["sha256"] for f in man["files"]}
     if len(want) != cur["files"]:
         sys.exit("清单条数 %d 与摘要里的 %d 不一致" % (len(want), cur["files"]))
+    # .git 是增量推送的基线（这台机器推 30MB 全量包大概率断，2026-11-06 三推三断；
+    # 留着它每次只传相对上一版的改动），清场时先挪出去保命，文件核完再放回来。
+    gitkeep = os.path.join(REL, "ghpages-git-baseline")
+    gitdir = os.path.join(STAGE, ".git")
+    if os.path.isdir(gitdir):
+        if os.path.isdir(gitkeep):
+            rmtree_force(gitkeep)
+        os.rename(gitdir, gitkeep)
     if os.path.isdir(STAGE):
         rmtree_force(STAGE)
     os.makedirs(STAGE)
@@ -151,6 +159,9 @@ def stage_from(site_dir, cur):
     io.open(os.path.join(STAGE, ".nojekyll"), "w").write("")
     io.open(os.path.join(STAGE, "README.md"), "w", encoding="utf-8").write(README)
     print("  禁含扫描干净；补 .nojekyll 与公开 README")
+    if os.path.isdir(gitkeep) and not os.path.isdir(gitdir):
+        os.rename(gitkeep, gitdir)
+        print("  .git 基线已放回（增量推送用）")
     return man
 
 
@@ -178,43 +189,64 @@ def main():
         return
 
     print("[3/3] 推送并开 Pages")
-    if os.path.isdir(os.path.join(STAGE, ".git")):
-        rmtree_force(os.path.join(STAGE, ".git"))
-    sh(["git", "init", "-b", "main"], cwd=STAGE)
+    # 增量推送基线探测：.git 里已有 HEAD 就复用（只传差异），没有才重新 init（全量兜底）。
+    remote = "https://github.com/%s/%s.git" % (owner, a.repo)
+    gitdir = os.path.join(STAGE, ".git")
+    has_head = subprocess.run(["git", "rev-parse", "--verify", "HEAD"], cwd=STAGE,
+                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+    if not has_head:
+        if os.path.isdir(gitdir):
+            rmtree_force(gitdir)          # 有 .git 却没 HEAD：残缺基线，推不得，重来
+        sh(["git", "init", "-b", "main"], cwd=STAGE)
     sh(["git", "config", "user.name", "zyjwb1482"], cwd=STAGE)
     sh(["git", "config", "user.email", "zyjwb1482@users.noreply.github.com"], cwd=STAGE)
+    # gh 2.92 没有 repo set-remote 这个子命令（第一次部署时踩到），自己管 origin 最省事
+    has_remote = subprocess.run(["git", "remote", "get-url", "origin"], cwd=STAGE,
+                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+    sh(["git", "remote", "add" if not has_remote else "set-url", "origin", remote], cwd=STAGE)
+    aligned = False
+    if has_head:
+        if subprocess.run(["git", "fetch", "origin", "main"], cwd=STAGE).returncode == 0 and \
+           subprocess.run(["git", "reset", "--soft", "FETCH_HEAD"], cwd=STAGE).returncode == 0:
+            aligned = True
+            print("  基线已对齐线上（FETCH_HEAD），本次只传相对线上的差异")
+        else:
+            print("  ! fetch 基线没成（链路抖或仓库还没建），按本机基线继续")
     sh(["git", "add", "-A"], cwd=STAGE)
-    msg = "deploy %s\n\n包 %s\n整包 SHA-256 %s\n逐文件清单哈希 %s\n文件 %d 个" % (
-        cur.get("builtAt", ""), cur["package"], cur["sha256"],
-        man["fileManifestSha256"], len(man["files"]))
-    sh(["git", "commit", "-m", msg], cwd=STAGE)
+    same = has_head and subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "HEAD"], cwd=STAGE).returncode == 0
+    if same:
+        print("  内容与基线一致，无需提交与推送（同一包重复按 ④ 会走到这）")
+    else:
+        msg = "deploy %s\n\n包 %s\n整包 SHA-256 %s\n逐文件清单哈希 %s\n文件 %d 个" % (
+            cur.get("builtAt", ""), cur["package"], cur["sha256"],
+            man["fileManifestSha256"], len(man["files"]))
+        sh(["git", "commit", "-m", msg], cwd=STAGE)
     out = sh(["gh", "repo", "list", owner, "--limit", "200", "--json", "name",
               "--jq", "map(.name) | join(\",\")"], cap=True)
     if a.repo in out.split(","):
         print("  仓库已存在，直接推")
-        # gh 2.92 没有 repo set-remote 这个子命令（第一次部署时踩到），自己加 origin 最省事
-        remote = "https://github.com/%s/%s.git" % (owner, a.repo)
-        has = subprocess.run(["git", "remote", "get-url", "origin"], cwd=STAGE,
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
-        sh(["git", "remote", "add" if not has else "set-url", "origin", remote], cwd=STAGE)
     else:
-        sh(["gh", "repo", "create", a.repo, "--public", "--source", ".", "--remote", "origin"],
-           cwd=STAGE)
-    # 推送参数顶住这台机器到 GitHub 的不稳链路（2026-11-03 首推 408 断在半路、
-    # 二推 TLS 握手都起不来）：大缓冲一次性发、限 HTTP/1.1、低速不限时，
-    # 再加 3 次自动重试——间歇性握手失败多试两次通常就过了。
-    push = ["git", "-c", "http.postBuffer=524288000", "-c", "http.version=HTTP/1.1",
-            "-c", "http.lowSpeedLimit=1", "-c", "http.lowSpeedTime=600",
-            "push", "-u", "origin", "main", "--force"]
-    for attempt in (1, 2, 3):
-        print("  推送第 %d 次" % attempt)
-        r = subprocess.run(push, cwd=STAGE)
-        if r.returncode == 0:
-            break
-        if attempt < 3:
-            time.sleep(10 * attempt)
-    else:
-        sys.exit("git push 三次都失败：多半是这台机器到 GitHub 的链路在抖，等会儿重按 ④发布")
+        # origin 已在上面指好，这里只建空仓库，不用 --source/--remote 再去碰 git
+        sh(["gh", "repo", "create", a.repo, "--public"], cwd=STAGE)
+    if not same:
+        # 推送参数顶住这台机器到 GitHub 的不稳链路（2026-11-03 首推 408 断在半路、
+        # 二推 TLS 握手都起不来）：大缓冲一次性发、限 HTTP/1.1、低速不限时，
+        # 再加 3 次自动重试——间歇性握手失败多试两次通常就过了。
+        push = ["git", "-c", "http.postBuffer=524288000", "-c", "http.version=HTTP/1.1",
+                "-c", "http.lowSpeedLimit=1", "-c", "http.lowSpeedTime=600",
+                "push", "-u", "origin", "main"]
+        if not (has_head and aligned):
+            push.append("--force")        # 没对齐上基线才整包强推（兜底路径）
+        for attempt in (1, 2, 3):
+            print("  推送第 %d 次" % attempt)
+            r = subprocess.run(push, cwd=STAGE)
+            if r.returncode == 0:
+                break
+            if attempt < 3:
+                time.sleep(10 * attempt)
+        else:
+            sys.exit("git push 三次都失败：多半是这台机器到 GitHub 的链路在抖，等会儿重按 ④发布")
     # Pages：项目站，源就是 main 分支根目录
     r = subprocess.run(["gh", "api", "repos/%s/%s/pages" % (owner, a.repo)],
                        cwd=STAGE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
