@@ -267,4 +267,5 @@
 - 判定三条：
   ① **换源**：插件源从 XR_DungeonGuide / GearInsight_Forever / DungeonsForever 一套换成网易有爱（网易DD）分发的**白云飞整合**（装在游戏机 `_forever_`，2026-11-08 01:52 批次）。2026-10-13 第十节"网易DD 暂不用"只翻"本机已装整合当插件源"那半，"爬 DD 网页"照旧不行。旧插件随 `_cn_beta_` 消失，`xr-*`/`gi-*`/`df-*` 快照冻结为存量，同层替代逐字段差分、不许整体覆盖。
   ② **可采范围**（当日盘点，见 `wow-forever-web/docs/DATA-白云飞整合盘点-2026-11-08.md`）：任务中文名层（白云飞 757 条补漏 + QuestieDB zhCN 主库）、classicItemDrops 掉落名单、QuestXP 任务经验为三候选；RXP 攻略正文、DD 元数据照旧不取，alaTradeSkill/RareScanner 暂无缺口。**逐项开采范围待站主点头**。
-  ③ 问了"小程序数据更新了吗"——当时线上指针 `1d12cc2f39b9`（11-03 批），网页已发 11-05 开服日包，**小程序落后一批**；补齐要 export-mini → oss-release build → upload beta（上传按惯例等站主点头）。
+  ③ 问了"小程序数据更新了吗"——当时线上指针 `1d12cc2f39b9`（11-03 批），网页已发 11-05 开服日包，**小程序落后一批**；补齐要 export-mini → oss-release build → upload beta（上传按惯例等站主点头）。**当日点头后已补发：批次 `c1d8fdf09520`（177 文件，核对日 2026-11-05，传 177 失败 0），指针 `1d12cc2f39b9` → `c1d8fdf09520`，回滚位 `1d12cc2f39b9`；记录见 `for-mini/docs/VERIFY-beta数据补发-2026-11-08.md`。**
+  ④ 同日开采（范围经站主点头，只采任务中文名层＋掉落名单两项）：`upstream/questie-quests-cn.json`（5,233 任务 ID / 5,011 中文名，QuestieDB 真身是 15.5 MB baked TOC + 白云飞 757 条补丁，分歧两个都留）与 `upstream/questie-item-drops.json`（16,790 掉落归属对，掉率当场丢）；均只落 upstream 不进成品，接不接由合并层决定。记录见 `wow-forever-web/docs/DATA-任务名与掉落开采-2026-11-08.md`。

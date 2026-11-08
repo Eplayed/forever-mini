@@ -1207,3 +1207,9 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 - **旧源冻结**：XR_DungeonGuide / GearInsight_Forever / DungeonsForever 所在的 `_cn_beta_` 已随开服清掉，`upstream/xr-*`、`gi-*`、`df-*` 快照从此**存量有效、不再追新**；同层替代须逐字段差分，不许整体覆盖。
 - **三候选**：① 任务中文名层（BaiYunFeiQuestieCN 1.3.2 的 757 条漏译补丁 + QuestieDB 自带 zhCN 列，价值最高）；② QuestieDB `support/Forever/DropTables/classicItemDrops.lua`（571,977 B 掉落名单，将成为第三家，"分歧都留"口径要扩）；③ `QuestXP/xpDB-classic.lua`（任务经验，新维度）。**只登记不开**：BaiYunFeiGuideline 1.2.6 的 RXP 攻略正文（撞红线）、alaTradeSkill 与 RareScanner（暂无缺口）。
 - 逐文件清单、格式抽查与开采顺序见 [DATA-白云飞整合盘点-2026-11-08.md](DATA-白云飞整合盘点-2026-11-08.md)。
+
+### 已开采（同日第二批，范围经站主点头：任务中文名层 + 掉落名单）
+
+- **任务中文名层** → `app/data/upstream/questie-quests-cn.json`（652.9 KB，`tools/extract-questie-quests-cn.py`）。主库真身是 **`QuestieDB_Forever.toc`（15.5 MB baked TOC 元数据存储，Base64→zlib→CBOR）**，不是 lua 表；zhCN 翻译列块 4,254 条 + 白云飞补丁 757 条（一致 486 / 串分歧 271，分歧两个都留：`cn`=补丁生效值、`cnBlock`=列块原值），任务 ID 5,233 个、有中文名 5,011。与站内 `dungeon-quests.json` 按英文名桥只接得上 13 条（一致 6 / 分歧 7）——**本站任务条目没有 questID 是合并层的坎**，接不接、怎么接等合并层决定。分级先按 L1（国服客户端串的插件转述，够不够 datamine_cn 口径升 L0 未判）。目标文本（列块列 8 + 白云飞 QuestObjectives.lua 749 条）与 QuestXP **本轮没采**（范围没批）。
+- **掉落名单** → `app/data/upstream/questie-item-drops.json`（413.8 KB，`tools/extract-questie-drops.py`）。classicItemDrops.lua（wowhead 自动生成，文件自述）+ itemDropCorrections.lua，统一成 (npcId → itemIds[]) 归属对：**16,790 对 / 4,404 NPC × 1,313 物品**；掉率 float 与 DropKeys 引用当场丢（红线）。与 `df-dungeon-loot.json` 对拍（npcId 桥，共同 NPC 106）：都认 23 对、只 Questie 263 对、只 DF 464 对——**三家掉落名单分歧确实大，都留口径必要**，哪家准要游戏内实测。
+- 两条快照的 `meta` 都带双文件 SHA-256 与抓取日 2026-11-08（源文件日 2026-11-07）；源本体在游戏机共享，本轮只读。执行记录见 [DATA-任务名与掉落开采-2026-11-08.md](DATA-任务名与掉落开采-2026-11-08.md)。

@@ -93,7 +93,7 @@ module.exports = {
    "partySizeAlt": null,
    "sizeClaim": null,
    "level": "L0",
-   "bossCount": 8,
+   "bossCount": 12,
    "dropCount": 0,
    "hasRoute": false,
    "art": "art/dungeons/city-of-dalaran.webp",
