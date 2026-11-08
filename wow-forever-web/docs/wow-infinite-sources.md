@@ -1198,3 +1198,12 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 
 **站主的决定原话**（2026-11-02）："有分歧的以XR为准。"
 逐条对账、改了什么、还差什么，见 `docs/DATA-种族天赋三源对账-2026-11-02.md`。
+
+## 二十六、2026-11-08 新源：网易有爱「白云飞整合」（站主换插件，旧插件源冻结）
+
+站主 2026-11-08 拍板：插件换成网易有爱（网易DD）分发的**白云飞整合**（装在游戏机 `\\192.168.0.105\World of Warcraft\_forever_\Interface\AddOns\`，2026-11-08 01:52 批次），"数据侧对应调整数据源，插件里对数据有帮助的也可以用"。原话存 `PROJECT_DECISIONS.md`。
+
+- **范围改判**：2026-10-13 第十节"网易DD 暂不用"判的是**爬 DD 网页分发站**那半，维持有效；**本机已装整合当插件源**这半按站主今天的话翻案，与 XR/GI 同口径（克制取用 + 逐条登记）。
+- **旧源冻结**：XR_DungeonGuide / GearInsight_Forever / DungeonsForever 所在的 `_cn_beta_` 已随开服清掉，`upstream/xr-*`、`gi-*`、`df-*` 快照从此**存量有效、不再追新**；同层替代须逐字段差分，不许整体覆盖。
+- **三候选**：① 任务中文名层（BaiYunFeiQuestieCN 1.3.2 的 757 条漏译补丁 + QuestieDB 自带 zhCN 列，价值最高）；② QuestieDB `support/Forever/DropTables/classicItemDrops.lua`（571,977 B 掉落名单，将成为第三家，"分歧都留"口径要扩）；③ `QuestXP/xpDB-classic.lua`（任务经验，新维度）。**只登记不开**：BaiYunFeiGuideline 1.2.6 的 RXP 攻略正文（撞红线）、alaTradeSkill 与 RareScanner（暂无缺口）。
+- 逐文件清单、格式抽查与开采顺序见 [DATA-白云飞整合盘点-2026-11-08.md](DATA-白云飞整合盘点-2026-11-08.md)。
