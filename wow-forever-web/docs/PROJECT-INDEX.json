@@ -1,6 +1,6 @@
 {
- "head": "ef127d514be362737d81c97c91e19ee96f3394ff",
- "fingerprint": "59d3dda9e8f6aee990d600d8c3979624d4c304085a74165ff4a51c4ac487f251",
+ "head": "d2860bd49e33cee4b051fcca46be325cb846f49b",
+ "fingerprint": "008569320e3cb791e1407af871c737f60812afae69d75b03f29d955fb597e476",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,13 +105,13 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 38549,
-   "mtimeNs": 1793682673496104000
+   "bytes": 40552,
+   "mtimeNs": 1794145992079053000
   },
   {
    "path": "PROJECT_DECISIONS.md",
-   "bytes": 27380,
-   "mtimeNs": 1793679709294719900
+   "bytes": 29572,
+   "mtimeNs": 1794145985020239900
   },
   {
    "path": "PROJECT_GATES.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 752276,
-   "mtimeNs": 1793682691322695800
+   "bytes": 755949,
+   "mtimeNs": 1794146006110769500
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -166,27 +166,27 @@
   {
    "path": "for-mini/data/forever-class-snapshot.js",
    "bytes": 11979,
-   "mtimeNs": 1793672531496439800
+   "mtimeNs": 1794145443676573500
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
-   "bytes": 21976,
-   "mtimeNs": 1793672531495439400
+   "bytes": 21977,
+   "mtimeNs": 1794145443676573500
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
    "bytes": 14897,
-   "mtimeNs": 1793672531494432900
+   "mtimeNs": 1794145443675575700
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2189,
-   "mtimeNs": 1793672531495439400
+   "mtimeNs": 1794145443675575700
   },
   {
    "path": "for-mini/data/forever-names-snapshot.js",
    "bytes": 7581,
-   "mtimeNs": 1793672531497439500
+   "mtimeNs": 1794145443676573500
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -237,6 +237,11 @@
    "path": "for-mini/docs/VERIFY-OSS-01-分发层-2026-10-21.md",
    "bytes": 8450,
    "mtimeNs": 1793510770157778700
+  },
+  {
+   "path": "for-mini/docs/VERIFY-beta数据补发-2026-11-08.md",
+   "bytes": 1571,
+   "mtimeNs": 1794145969408018900
   },
   {
    "path": "for-mini/docs/VERIFY-tab页底图与种族图标-2026-10-23.md",
@@ -356,37 +361,37 @@
   {
    "path": "for-mini/oss-preview/classes.json",
    "bytes": 42498,
-   "mtimeNs": 1793672530179817900
+   "mtimeNs": 1794145441493654300
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
-   "bytes": 343958,
-   "mtimeNs": 1793672530175307000
+   "bytes": 345484,
+   "mtimeNs": 1794145441490631100
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
    "bytes": 84105,
-   "mtimeNs": 1793672530173112500
+   "mtimeNs": 1794145441488127900
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1793672530183611600
+   "mtimeNs": 1794145441496164200
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2095,
-   "mtimeNs": 1793672530175307000
+   "mtimeNs": 1794145441491135400
   },
   {
    "path": "for-mini/oss-preview/spells.json",
-   "bytes": 445638,
-   "mtimeNs": 1793672530178817900
+   "bytes": 443675,
+   "mtimeNs": 1794145441492648700
   },
   {
    "path": "for-mini/oss-preview/talents.json",
-   "bytes": 426509,
-   "mtimeNs": 1793672530182583100
+   "bytes": 430044,
+   "mtimeNs": 1794145441496164200
   },
   {
    "path": "for-mini/pages/bis/index.js",
@@ -840,8 +845,8 @@
   },
   {
    "path": "wow-forever-web/app/src/pages/LegacyPage.vue",
-   "bytes": 48810,
-   "mtimeNs": 1793510772575686600
+   "bytes": 49122,
+   "mtimeNs": 1793699313460532900
   },
   {
    "path": "wow-forever-web/app/src/pages/MacrosPage.vue",
@@ -930,8 +935,8 @@
   },
   {
    "path": "wow-forever-web/app/tests/fmt.spec.js",
-   "bytes": 4018,
-   "mtimeNs": 1793510772590509800
+   "bytes": 4158,
+   "mtimeNs": 1793698699665171800
   },
   {
    "path": "wow-forever-web/app/tests/item-stats.spec.js",
@@ -940,8 +945,8 @@
   },
   {
    "path": "wow-forever-web/app/tests/legacy-plan.spec.js",
-   "bytes": 14537,
-   "mtimeNs": 1793510772591509200
+   "bytes": 14856,
+   "mtimeNs": 1793698696748321600
   },
   {
    "path": "wow-forever-web/app/tests/lib.spec.js",
@@ -1079,6 +1084,16 @@
    "mtimeNs": 1793620006735576400
   },
   {
+   "path": "wow-forever-web/docs/ASSET-GAPS-2026-11-03.md",
+   "bytes": 11728,
+   "mtimeNs": 1793698393384817600
+  },
+  {
+   "path": "wow-forever-web/docs/ASSET-GAPS-2026-11-05.md",
+   "bytes": 11812,
+   "mtimeNs": 1793869896297338900
+  },
+  {
    "path": "wow-forever-web/docs/BOARD-RECON-2026-10-16.md",
    "bytes": 6830,
    "mtimeNs": 1793510772599709400
@@ -1157,6 +1172,21 @@
    "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-02.md",
    "bytes": 34561,
    "mtimeNs": 1793672110865313100
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-03.md",
+   "bytes": 34369,
+   "mtimeNs": 1793701443696547400
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-05.md",
+   "bytes": 34369,
+   "mtimeNs": 1793889226961879800
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-AUDIT-2026-11-06.md",
+   "bytes": 34369,
+   "mtimeNs": 1793944957227060900
   },
   {
    "path": "wow-forever-web/docs/DATA-BiS-准确性与更新机制-2026-10-28.md",
@@ -1264,6 +1294,11 @@
    "mtimeNs": 1793510772611193600
   },
   {
+   "path": "wow-forever-web/docs/DATA-任务名与掉落开采-2026-11-08.md",
+   "bytes": 5124,
+   "mtimeNs": 1794145963041326100
+  },
+  {
    "path": "wow-forever-web/docs/DATA-传承页更新-2026-10-23.md",
    "bytes": 15047,
    "mtimeNs": 1793510772611193600
@@ -1349,9 +1384,24 @@
    "mtimeNs": 1793620973296005000
   },
   {
+   "path": "wow-forever-web/docs/DATA-每日体检-2026-11-03.md",
+   "bytes": 10158,
+   "mtimeNs": 1793698659208216000
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-每日体检-2026-11-05.md",
+   "bytes": 10199,
+   "mtimeNs": 1793869990639950800
+  },
+  {
    "path": "wow-forever-web/docs/DATA-每日更新-2026-11-02.md",
    "bytes": 34480,
    "mtimeNs": 1793619453352323000
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-白云飞整合盘点-2026-11-08.md",
+   "bytes": 4599,
+   "mtimeNs": 1794144890481402800
   },
   {
    "path": "wow-forever-web/docs/DATA-种族天赋三源对账-2026-11-02.md",
@@ -2160,8 +2210,8 @@
   },
   {
    "path": "wow-forever-web/docs/VERIFY-控制台总舱-2026-11-03.md",
-   "bytes": 4937,
-   "mtimeNs": 1793682660347205300
+   "bytes": 19605,
+   "mtimeNs": 1793953231941441000
   },
   {
    "path": "wow-forever-web/docs/VERIFY-数据管理台-2026-10-26.md",
@@ -2245,13 +2295,18 @@
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-sources.md",
-   "bytes": 127755,
-   "mtimeNs": 1793672110867816300
+   "bytes": 131119,
+   "mtimeNs": 1794145983000139900
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-workflow.md",
    "bytes": 13838,
    "mtimeNs": 1791892924571292500
+  },
+  {
+   "path": "wow-forever-web/img-models-parked/real/manifest.json",
+   "bytes": 217391,
+   "mtimeNs": 1793510772556799000
   },
   {
    "path": "wow-forever-web/tools/add-gen-art.py",
@@ -2260,8 +2315,8 @@
   },
   {
    "path": "wow-forever-web/tools/addons_root.py",
-   "bytes": 3952,
-   "mtimeNs": 1793583517093399400
+   "bytes": 4444,
+   "mtimeNs": 1793694752196117400
   },
   {
    "path": "wow-forever-web/tools/admin/catalog.py",
@@ -2270,8 +2325,8 @@
   },
   {
    "path": "wow-forever-web/tools/admin/jobs.py",
-   "bytes": 19877,
-   "mtimeNs": 1793682150713773700
+   "bytes": 21279,
+   "mtimeNs": 1793707069229215300
   },
   {
    "path": "wow-forever-web/tools/admin/server.py",
@@ -2320,8 +2375,8 @@
   },
   {
    "path": "wow-forever-web/tools/browser_channel.py",
-   "bytes": 1932,
-   "mtimeNs": 1793618896402890400
+   "bytes": 2844,
+   "mtimeNs": 1793694847919996000
   },
   {
    "path": "wow-forever-web/tools/build-bis-3d-jobs.py",
@@ -2385,8 +2440,8 @@
   },
   {
    "path": "wow-forever-web/tools/daily.sh",
-   "bytes": 8240,
-   "mtimeNs": 1793682118431384000
+   "bytes": 8620,
+   "mtimeNs": 1793694748596614400
   },
   {
    "path": "wow-forever-web/tools/data-recon.py",
@@ -2400,8 +2455,8 @@
   },
   {
    "path": "wow-forever-web/tools/deploy-gh-pages.py",
-   "bytes": 10009,
-   "mtimeNs": 1793510776674208100
+   "bytes": 13331,
+   "mtimeNs": 1793952875477539500
   },
   {
    "path": "wow-forever-web/tools/derive-glb-textures.py",
@@ -2477,6 +2532,16 @@
    "path": "wow-forever-web/tools/extract-plugin-tables.py",
    "bytes": 13912,
    "mtimeNs": 1793583110272021500
+  },
+  {
+   "path": "wow-forever-web/tools/extract-questie-drops.py",
+   "bytes": 7751,
+   "mtimeNs": 1794145925269624300
+  },
+  {
+   "path": "wow-forever-web/tools/extract-questie-quests-cn.py",
+   "bytes": 17346,
+   "mtimeNs": 1794145867579689900
   },
   {
    "path": "wow-forever-web/tools/extract-races.py",
@@ -2590,8 +2655,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-legacy.js",
-   "bytes": 22600,
-   "mtimeNs": 1793510776818395100
+   "bytes": 23287,
+   "mtimeNs": 1793697861283592700
   },
   {
    "path": "wow-forever-web/tools/merge-macros.py",
@@ -2645,8 +2710,8 @@
   },
   {
    "path": "wow-forever-web/tools/nga-daily.sh",
-   "bytes": 6116,
-   "mtimeNs": 1793510776825091600
+   "bytes": 6001,
+   "mtimeNs": 1793684013751403000
   },
   {
    "path": "wow-forever-web/tools/openmap-tile-manifest.py",
@@ -2675,8 +2740,8 @@
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
-   "bytes": 15732,
-   "mtimeNs": 1793510776829607900
+   "bytes": 15941,
+   "mtimeNs": 1793707723465235000
   },
   {
    "path": "wow-forever-web/tools/prepare-hunter-models.py",
@@ -2710,8 +2775,8 @@
   },
   {
    "path": "wow-forever-web/tools/refresh.sh",
-   "bytes": 11608,
-   "mtimeNs": 1793617879135536500
+   "bytes": 11387,
+   "mtimeNs": 1793684013749900100
   },
   {
    "path": "wow-forever-web/tools/register-bis-models.py",
@@ -2725,8 +2790,8 @@
   },
   {
    "path": "wow-forever-web/tools/release-package.py",
-   "bytes": 21588,
-   "mtimeNs": 1793610825307852100
+   "bytes": 22195,
+   "mtimeNs": 1793707133989730900
   },
   {
    "path": "wow-forever-web/tools/render-bis-posters.py",
@@ -2805,8 +2870,8 @@
   },
   {
    "path": "wow-forever-web/tools/serve.sh",
-   "bytes": 2208,
-   "mtimeNs": 1793510776844182400
+   "bytes": 2154,
+   "mtimeNs": 1793684013751403000
   },
   {
    "path": "wow-forever-web/tools/shot-provenance.py",
@@ -2815,8 +2880,8 @@
   },
   {
    "path": "wow-forever-web/tools/site-check.py",
-   "bytes": 299072,
-   "mtimeNs": 1793618974858920100
+   "bytes": 299760,
+   "mtimeNs": 1793699326388983300
   },
   {
    "path": "wow-forever-web/tools/sync-role-skills.py",
@@ -2830,8 +2895,8 @@
   },
   {
    "path": "wow-forever-web/tools/taskboard/install.sh",
-   "bytes": 2929,
-   "mtimeNs": 1793510776849202900
+   "bytes": 2868,
+   "mtimeNs": 1793684013752411800
   },
   {
    "path": "wow-forever-web/tools/taskboard/manage.py",
