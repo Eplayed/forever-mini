@@ -139,3 +139,38 @@
 - 网页侧：DungeonPage.vue 本就渲染 pickupNpc/pickupZone（无需改码），`npm run build` 通过（dist 晚于数据 12 分钟）；`site-check --only dungeon_geo,data_versions` **29/29 全过**。
 
 **没验到的（照实挂账）**：① 真机上任务卡"在哪接的"两列——数据已在线上批次里，但渲染这两列的界面代码在主包里，**要等 PENDING_CODE_UPLOAD 那版代码**（与第八节三处 bug 修复同一次上传）；② 剩余接取 51／地点 33——QuestieDB 里也没有（wclbox 源站本身为空的同一批），只能游戏内实测；③ 54 条消歧失败照实留空，没有拿"看起来合理"的候选充数。
+
+## 十一、追记（2026-11-09 第七笔）：挂账① 收尾——首领头像本机渲染管线建成，首批 18 张上线，批次 `1bf6dcc67aed`
+
+站主拍板「立项首领头像渲染管线」（`PROJECT_DECISIONS.md` 2026-11-09 节）：先做有完整纹理链的 18 个，逐份记来源链＋构建号＋哈希＋核对日，取不到的照旧占位不冒充。本轮把第九节探明的"两端在、中间缺"补成了完整产线。
+
+**中间缺的那块补上了（格式探明，两个证伪）**：
+- `offline-export/` **不是 M2→GLB 转换器**——它是楼层贴图那轮的"离线 CASC 提取器"（强制不用 CDN 回退），与 exporter 的区别只是回退策略。第九节"疑 M2→GLB 工程未验证"的猜测作废，转换器自建。
+- `wow.export-0.2.19` 是 nw.js 打包成品（resources.pak），抠不出导出器源码，弃用。
+- **M2 格式定案**（`boss-portraits-2026-11-09/probe_m2header.py` 等三个探针对拍）：MD21 容器 = magic + u32(md20_size) + 完整 MD20 载荷（version 272/274，WotLK 时代），所有头偏移 **+8** 才是正解；`CreatureDisplayInfo.db2` 的 f27 调色板 fdid 就是游戏里该 displayId 的实际贴图（M2 自身 TXID 槽 0 为 0，正是"由 CDI 调色板注入"的实证）；skin 也是容器（'SKIN' magic），段表 `0x04 顶点重排表 / 0x0C 三角形索引 / 0x14 每顶点附加表（渲染忽略）/ 0x1C submesh(48B: sid,level,vstart,vcount,istart,icount)`——submesh 首次定位在 0x1C 不是 0x24（0x28A0 处 48 字节对拍 vcount=873/icount=2532 全对上）。
+- M2 提取缺口 4 份补齐（科技机器人 124329 / 刺鬃守卫 124208 / 温格 123225 / 基尔图诺斯卫士 124210，jobs-m2-boss2.json），**18 候选 = 16 份独立模型**：泽雷利斯/杉达尔/灰尘怨灵共用 m2_125223，前两者连贴图（125225）都相同，各渲各的账。
+- 客户端构建随取随记：**1.60.1.70862**（`.build.info` Version 列，旧账里的 70532 是 10-28 那轮的构建）。
+
+**产线**：[render-boss-portraits.py](../../wow-forever-web/tools/render-boss-portraits.py)（仓库内，吃仓库外提取产物）：M2+skin(LOD0)→静态 GLB（纯几何＋UV＋槽 0 贴图，无骨骼动画=绑定姿势，Z-up→Y-up，单 primitive 双面材质）→无头 Chrome 512×512 透明底截图→PIL 缩 256×256→webp→`app/img/art/bosses-m2/{bossId}.webp`＋`manifest.json`（displayId/m2/skin/texSlot0 三源 sha256＋成品 sha256＋构建号＋核对日＋回退说明）。质检卡口：非透明占比 4%–90%、色彩≥32，不过不落盘。
+- **取景逐只调**：默认头胸特写（frac 0.18/span 0.60），逐张目检后修正两只——atal-alarion（裁头顶→frac 0.26）、targorr-the-dread（扁宽龟壳按默认算出来太远→span 0.45/frac 0.30/pad 1.0）；修正参数固化在脚本 `OVERRIDES` 表。
+- 多槽贴图模型（石脊/温格/霍克等）本轮只挂槽 0——主皮肤在槽 0，逐张目检没有发现"缺配件"级别的失真；多槽精确映射（skin batches/texCombos）留待有真实需求再补。
+- **盲眼守卫奥杜**渲出来是一桶绿液（它本体就是影牙城堡那只"哥布林浸液桶"模型），不是渲染错误，照实上线。
+
+**18 张清单**（displayId→模型）：菌弗努斯 1070→124427（马形）、矿工约翰森 556→123105、盲眼守卫奥杜 522→123040、瑟拉吉斯 1816→123170、可怕的塔格尔 517→123324、卡姆·深怒 825→125559、科技机器人 7288→124329、剃刀沼泽刺鬃守卫 6078→124208、泽雷利斯 9293/杉达尔·沙掠者 9291/灰尘怨灵 9292→125223、温格 9418→123225、阿塔拉利恩 7873→125263、摩弗拉斯 7975→123747、霍克·巴什古德 11809→1134000、基尔图诺斯的卫士 10925→124210、黑衣守卫铸剑师 775→124272、石脊 7856→125796。逐张拼图人工目检两轮（`boss-portraits-2026-11-09/sheet_final.png`）。
+
+**分发与页面**：数据基底 `dungeons.json` 18 条 `portrait` 写 `img/art/bosses-m2/{bossId}.webp`（apply_portraits.py 幂等写入）；oss-release 分发层 `useAsset` 自动剥前缀转 assets 相对路径＋哈希登记，**零代码改动**；页面 icon-cell 接图链路本来就在（有图出图、无图回落自绘块）。
+
+**发布**：`oss-release build --env beta --check-identity` 过（重跑同源 buildId 一致、字节差异 0）；`assets --env beta` 素材 **107 传 0 失败**（18 头像＋此前欠账的 89 个被引用素材），全量 2358 个素材齐；`upload --env beta` 数据 **177 传 0 失败**，指针 → **`1bf6dcc67aed`**，回滚位 `0451d1ceeb85`；`verify --env beta` rc=0（175 文件逐个回读字节一致）。
+
+**门禁**：
+- m01：**111/113**。断网缓存、切角像素两条历史红照旧；**新红 1 条是断言过时**——"hall-of-thanes 首领全部无头像走回落"钉着挂账①之前的旧现实，而本轮恰恰给这座本的 infurnus 补了真头像。断言改写为**从 oss-preview 的 portrait 字段动态推导期望名单**（有图的比对 assets 地址、无图比对空串），端口也改从 `PORT` 取不再写死 9384——下一批补图不用再改断言。改后重跑 111/113。
+- m02：**116/116 全绿**。
+- 网页侧本轮不动（AGENTS：头像先小程序侧落地）。
+
+**线上回读**（真 bucket）：`builds/1bf6dcc67aed/dungeons/detail/hall-of-thanes.json` 的 `dungeon.bosses[]` 里 infurnus.portrait=`art/bosses-m2/infurnus.webp`（其余 4 个未渲首领 portrait 空串照旧回落）；`assets/art/bosses-m2/infurnus.webp` HEAD 200，4388 B，image/webp。
+
+**没验到的（照实挂账）**：① 剩余 118 个缺图首领（新本 26 个 displayId→M2 映射未解 + 无纹理引用的 47 个 + 无 XR 映射的 45 个）——管线本身已就绪，卡在映射来源与纹理覆盖，等解；
+② 真机头像实拍——本地模拟器门禁已验（bosses 渲染、icon-cell 出图），真机走 OSS 域名，待站主下次真机预览顺带看一眼；
+③ 多槽贴图精确映射——18 张逐张目检无失真才敢只挂槽 0，将来若有首领需精确到 skin batches 再补；
+④ 断言的新期望仍依赖 `oss-preview/dungeons.json` 与分发层 useAsset 的转换约定（`img/`→assets 相对路径），约定变了断言要跟着改。
+

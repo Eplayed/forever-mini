@@ -1,6 +1,6 @@
 {
- "head": "36cd5ee969fb8f0ee31c549db8a1f5ae15509de0",
- "fingerprint": "97ccdaa9f8f7864f5e07b024118f4ee8b8465ba5ffd6e2da06fbcbd743fc8726",
+ "head": "070662c62f1e35e67e2008d4f5d94993d572eace",
+ "fingerprint": "42273ba865bfbce04af0ca4eea8fc18a39d53579df9c85f8fcd45da26c9acc4f",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,13 +105,13 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 42027,
-   "mtimeNs": 1794203877523069500
+   "bytes": 42205,
+   "mtimeNs": 1794209014587032700
   },
   {
    "path": "PROJECT_DECISIONS.md",
-   "bytes": 29572,
-   "mtimeNs": 1794145985020239900
+   "bytes": 30877,
+   "mtimeNs": 1794206298796656500
   },
   {
    "path": "PROJECT_GATES.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 771819,
-   "mtimeNs": 1794203907256334200
+   "bytes": 773941,
+   "mtimeNs": 1794209100834076900
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -166,27 +166,27 @@
   {
    "path": "for-mini/data/forever-class-snapshot.js",
    "bytes": 11979,
-   "mtimeNs": 1794200593369996800
+   "mtimeNs": 1794207892648080700
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
    "bytes": 21977,
-   "mtimeNs": 1794200593368989800
+   "mtimeNs": 1794207892648080700
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
    "bytes": 14897,
-   "mtimeNs": 1794200593367494900
+   "mtimeNs": 1794207892647081300
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2189,
-   "mtimeNs": 1794200593367494900
+   "mtimeNs": 1794207892648080700
   },
   {
    "path": "for-mini/data/forever-names-snapshot.js",
    "bytes": 7581,
-   "mtimeNs": 1794200593369996800
+   "mtimeNs": 1794207892649079700
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -325,8 +325,8 @@
   },
   {
    "path": "for-mini/docs/VERIFY-第一批专业开闸副本任务chooser-2026-11-08.md",
-   "bytes": 24448,
-   "mtimeNs": 1794203865258134200
+   "bytes": 30798,
+   "mtimeNs": 1794209001167796100
   },
   {
    "path": "for-mini/docs/VERIFY-职业详情阵营框与分享-2026-10-22.md",
@@ -366,37 +366,37 @@
   {
    "path": "for-mini/oss-preview/classes.json",
    "bytes": 42498,
-   "mtimeNs": 1794200591211298000
+   "mtimeNs": 1794207890383256400
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
-   "bytes": 345484,
-   "mtimeNs": 1794200591207771600
+   "bytes": 346099,
+   "mtimeNs": 1794207890379110000
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
    "bytes": 84105,
-   "mtimeNs": 1794200591205260700
+   "mtimeNs": 1794207890377109800
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1794200591213298900
+   "mtimeNs": 1794207890384763000
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2095,
-   "mtimeNs": 1794200591208281900
+   "mtimeNs": 1794207890379110000
   },
   {
    "path": "for-mini/oss-preview/spells.json",
    "bytes": 443675,
-   "mtimeNs": 1794200591210793900
+   "mtimeNs": 1794207890382109600
   },
   {
    "path": "for-mini/oss-preview/talents.json",
    "bytes": 430044,
-   "mtimeNs": 1794200591213298900
+   "mtimeNs": 1794207890384763000
   },
   {
    "path": "for-mini/pages/bis/index.js",
@@ -2730,8 +2730,8 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 94195,
-   "mtimeNs": 1794198848544419400
+   "bytes": 94716,
+   "mtimeNs": 1794208478964700000
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
@@ -2827,6 +2827,11 @@
    "path": "wow-forever-web/tools/render-bis-posters.py",
    "bytes": 18669,
    "mtimeNs": 1793672110881917300
+  },
+  {
+   "path": "wow-forever-web/tools/render-boss-portraits.py",
+   "bytes": 17850,
+   "mtimeNs": 1794207813706950500
   },
   {
    "path": "wow-forever-web/tools/route-smoke.py",

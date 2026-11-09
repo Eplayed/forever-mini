@@ -1,0 +1,301 @@
+{
+ "meta": {
+  "kind": "boss-portrait-m2",
+  "clientBuild": "1.60.1.70862",
+  "chain": "displayId -> CreatureDisplayInfo.f27 -> M2+skin(LOD0)+BLP -> static GLB -> headless chrome",
+  "texRule": "贴图槽取 CDI f27 调色板（游戏内该 displayId 实际用的贴图），slot0",
+  "pose": "绑定姿势（无骨骼动画）；非游戏内截图，是客户端模型重渲",
+  "generated": "2026-11-09",
+  "fallback": "整目录删除 + dungeons.json portrait 置 null 即回退"
+ },
+ "portraits": {
+  "infurnus": {
+   "dungeon": "hall-of-thanes",
+   "boss": "茵弗努斯",
+   "displayId": 1070,
+   "m2": 124427,
+   "skin": 476619,
+   "texSlot0": 124435,
+   "srcSha256": {
+    "m2": "9de4289b1396fd2ff68487177aa8c9b88a7ae58d68062228fc31c82ee65ca177",
+    "skin": "1219f846249b8688c596566b24f95f6d14cc3da26e43fb0a0b6f12279d384e4a",
+    "tex": "3743f1804e7ac9bc91a3829c5e14a4b2b4f814394329f36c6a4f684a87c2d982"
+   },
+   "outSha256": "9298cfec08bd05f93100b7929dcccf580895b6aeeee520d650deb07571f29a20",
+   "outBytes": 4388,
+   "quality": "ratio=0.099 colors=3296"
+  },
+  "miner-johnson": {
+   "dungeon": "deathmine",
+   "boss": "矿工约翰森",
+   "displayId": 556,
+   "m2": 123105,
+   "skin": 473280,
+   "texSlot0": 123108,
+   "srcSha256": {
+    "m2": "da0597f9c8e24f13446d3ab494e14afab5f75290eeee14a9c9e5fb621755011a",
+    "skin": "5e880c6f81846ea6bdef0bb83dfd0545b3123b855c5d812da9eb12df3a694bae",
+    "tex": "b6d52fdaae57ba746c8ace5d45c372b044a06926210c0aff5a8b39a4a6c07bec"
+   },
+   "outSha256": "aa20db8ba2a28ea2e83028a2ed58fcfee89204d10a3c6071d3c953f69f865f96",
+   "outBytes": 8564,
+   "quality": "ratio=0.455 colors=4930"
+  },
+  "odo-the-blindwatcher": {
+   "dungeon": "shadowfang-keep",
+   "boss": "盲眼守卫奥杜",
+   "displayId": 522,
+   "m2": 123040,
+   "skin": 473118,
+   "texSlot0": 123045,
+   "srcSha256": {
+    "m2": "fb2f6d821d2e8a1861816fa8134a8c5022e948f423e14df0cda16e9b79706940",
+    "skin": "af22ac38e5f83dcaa68fd6c4d5a1303d80a92b067da653c26e37e9aa211c9552",
+    "tex": "9473505afe363235182b2c358c3f34634813dd1241adf78638bd807929930743"
+   },
+   "outSha256": "312a69b2954c3fc3a8186bafb405faadfe35d048625d732eb9fd792281a90212",
+   "outBytes": 5826,
+   "quality": "ratio=0.217 colors=5934"
+  },
+  "old-serra-kis": {
+   "dungeon": "blackfathom-deeps",
+   "boss": "瑟拉吉斯",
+   "displayId": 1816,
+   "m2": 123170,
+   "skin": 473359,
+   "texSlot0": 123193,
+   "srcSha256": {
+    "m2": "57cce63e7751ff7e651c9d477ed269cc9dd797d5fe7dd4d4004fc345c8f77ca8",
+    "skin": "04d4e477e43b5304be6c41cc997daa46dfd427adff58f2d658934b85cb6f445f",
+    "tex": "6d48fbce54105cf37790d56cf3ef8a04ec52dfbdcf9e487befe4cd46b2600480"
+   },
+   "outSha256": "75f5746281a8c24e5194d30c2420fbc2f63e91ca90a8f6849d600ca0ca0ff4c2",
+   "outBytes": 9016,
+   "quality": "ratio=0.223 colors=8052"
+  },
+  "targorr-the-dread": {
+   "dungeon": "the-stocks",
+   "boss": "可怕的塔格尔",
+   "displayId": 517,
+   "m2": 123324,
+   "skin": 473797,
+   "texSlot0": 123328,
+   "srcSha256": {
+    "m2": "68840e4e41aa92cc7170eae69b2485fcf8a7bb9d3b58b4783c4fe9dd601c3bd1",
+    "skin": "0165de1688dc412969ee6ee25fc54b4d2ec5e573e02e7c50f19a1b2b4419cb11",
+    "tex": "f72126cc09f7fb00ab3cf9460de4b2c4df50333ab4b5ef9c640d3c32cdf6efce"
+   },
+   "outSha256": "1c6fd330642fbcae311fa7d89ffa98c4a58cc09afffa936de363d07818433df6",
+   "outBytes": 6464,
+   "quality": "ratio=0.124 colors=6089"
+  },
+  "kam-deepfury": {
+   "dungeon": "the-stocks",
+   "boss": "卡姆·深怒",
+   "displayId": 825,
+   "m2": 125559,
+   "skin": 479325,
+   "texSlot0": 125563,
+   "srcSha256": {
+    "m2": "5257035080e1dfc2eb4ce920d2f9fd5ecbdb059125d71d3d6885993713c3e929",
+    "skin": "0daa205d4e89b7423f4f61168ef6395bcf4f80ca9771c364626697c5d72fc37b",
+    "tex": "20d25522971185a6c2667c0521b6269b95e00c13f16540bfa92e0fa6d590f809"
+   },
+   "outSha256": "801e0756622af8db972ba1118e33ccbd1a127245286ee6eed61efb610266de98",
+   "outBytes": 7120,
+   "quality": "ratio=0.087 colors=5024"
+  },
+  "techbot": {
+   "dungeon": "gnomeregan",
+   "boss": "科技机器人",
+   "displayId": 7288,
+   "m2": 124329,
+   "skin": 476280,
+   "texSlot0": 124337,
+   "srcSha256": {
+    "m2": "05ebd30263883e3e13bc963d5b53cfd4bf86c504c9039848242a1a0e00fddf2b",
+    "skin": "ade0734441194f5eef08fc5f895fc01a80555ed80444c9101725671d181b9f20",
+    "tex": "8b48cdff631269edf47ba9076bc4df97957e8b7eeb66fcb04b5a008586710d0f"
+   },
+   "outSha256": "f57d3292fbec99a41b45cf7e24a6e544295b507e66dec55fd2f501f30556ef65",
+   "outBytes": 5114,
+   "quality": "ratio=0.204 colors=2655"
+  },
+  "razorfen-spearhide": {
+   "dungeon": "razorfen-kraul",
+   "boss": "剃刀沼泽刺鬃守卫",
+   "displayId": 6078,
+   "m2": 124208,
+   "skin": 476136,
+   "texSlot0": 124214,
+   "srcSha256": {
+    "m2": "4afe15a10f17b5521d0bae75f729b3065aa9e07c3f89981aa48725aaf39fa39f",
+    "skin": "5a5511b3806c8ce28a26a8a4147c01e8b28a45bcd5d0534d21160ab359757658",
+    "tex": "1ce09e0f02823d636100a4472b5283b3c8d49b3770ac42baa05469e8ade8a5d4"
+   },
+   "outSha256": "f47aa2fe83e9ba597dd174434ada3a42ae1b71a6a0d536d928985d8d7bcefa1c",
+   "outBytes": 13640,
+   "quality": "ratio=0.404 colors=8105"
+  },
+  "zerillis": {
+   "dungeon": "zulfarrak",
+   "boss": "泽雷利斯",
+   "displayId": 9293,
+   "m2": 125223,
+   "skin": 478586,
+   "texSlot0": 125225,
+   "srcSha256": {
+    "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
+    "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
+    "tex": "8578a28d1da90f53425ba636b4b31b7d7a533243fc4b156fda2c2ca69411587c"
+   },
+   "outSha256": "3dd989d7d13b679ad7d8e69e189ee08df6d7e2bc283944d83b4fec54ee4dd12c",
+   "outBytes": 10628,
+   "quality": "ratio=0.149 colors=6788"
+  },
+  "sandarr-dunereaver": {
+   "dungeon": "zulfarrak",
+   "boss": "杉达尔·沙掠者",
+   "displayId": 9291,
+   "m2": 125223,
+   "skin": 478586,
+   "texSlot0": 125225,
+   "srcSha256": {
+    "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
+    "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
+    "tex": "8578a28d1da90f53425ba636b4b31b7d7a533243fc4b156fda2c2ca69411587c"
+   },
+   "outSha256": "3dd989d7d13b679ad7d8e69e189ee08df6d7e2bc283944d83b4fec54ee4dd12c",
+   "outBytes": 10628,
+   "quality": "ratio=0.149 colors=6788"
+  },
+  "dustwraith": {
+   "dungeon": "zulfarrak",
+   "boss": "灰尘怨灵",
+   "displayId": 9292,
+   "m2": 125223,
+   "skin": 478586,
+   "texSlot0": 125226,
+   "srcSha256": {
+    "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
+    "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
+    "tex": "50b354dc787643cc8242d008d3d4d8ef8b5e33cb50a30c326f095d4a414bc85d"
+   },
+   "outSha256": "d964510d902f718807b6343d565aff996c9d04796edc5953e86d26e74f90e5f0",
+   "outBytes": 9978,
+   "quality": "ratio=0.149 colors=5312"
+  },
+  "veng": {
+   "dungeon": "maraudon",
+   "boss": "温格",
+   "displayId": 9418,
+   "m2": 123225,
+   "skin": 473385,
+   "texSlot0": 123228,
+   "srcSha256": {
+    "m2": "04225864c7e279fea80f7cc0e4ac356dd1427543e5d85788a2eb032746e99431",
+    "skin": "ed4a5d874d944afc4dde7f4f6d04bfef0fb9012804a359a55849c86f006a2a2f",
+    "tex": "f139b5445f93f8c7243b6aec1c1977ef1b9a3addce916047d85288f467c1b5b4"
+   },
+   "outSha256": "df6ac8986e8b318ca226c5754486ac620e121650c2f1b2bef1c21288d0bcd92d",
+   "outBytes": 8446,
+   "quality": "ratio=0.099 colors=5995"
+  },
+  "atal-alarion": {
+   "dungeon": "sunken-temple",
+   "boss": "阿塔拉利恩",
+   "displayId": 7873,
+   "m2": 125263,
+   "skin": 478882,
+   "texSlot0": 125285,
+   "srcSha256": {
+    "m2": "d85accf01d6b72749148ac1c8a7fb99dd91419f5b9b568733c8376851ae770fe",
+    "skin": "499eb6bbddb598e35bdf9186ed88c5cb6f0acb538410c01cd4fccb63ee77ac91",
+    "tex": "f98c77748b3e54f91738c0faf7c21b3eea852688bb5997839ce65bd645e9bec2"
+   },
+   "outSha256": "a67afcd2484aa77cf5860df1babae4d7950f36c835a13965bbc353a4afe1fd68",
+   "outBytes": 11084,
+   "quality": "ratio=0.406 colors=11234"
+  },
+  "morphaz": {
+   "dungeon": "sunken-temple",
+   "boss": "摩弗拉斯",
+   "displayId": 7975,
+   "m2": 123747,
+   "skin": 474860,
+   "texSlot0": 123745,
+   "srcSha256": {
+    "m2": "84926ad6a152e5d2d8de7a87e08d42f9754cf8ac64fc9007e7da0b6b4a62cf66",
+    "skin": "e2a05e63f4c21ec1ca631e47830683111f39231ce6fb0009ae5fe76d60970742",
+    "tex": "d5fe6b6443049a959d20c422c8862c72b7e46c9f737adb8f3f5e1a38da9b763b"
+   },
+   "outSha256": "72a0dafc6db41458d34bc600011013ca909914db2cca129c9863b2d57e0bbfec",
+   "outBytes": 12814,
+   "quality": "ratio=0.463 colors=12633"
+  },
+  "ghok-bashguud": {
+   "dungeon": "lower-blackrock-spire",
+   "boss": "霍克·巴什古德",
+   "displayId": 11809,
+   "m2": 1134000,
+   "skin": 1134012,
+   "texSlot0": 1134114,
+   "srcSha256": {
+    "m2": "86591e20e1e0b57c00cb33a3c8ea2221fd7d01fc68a843f7725bb16d604b4c01",
+    "skin": "f680f6bbd9e5aca3ac28546be725dea11e23436eebc93add70eebf1065f6434d",
+    "tex": "b4eb40871a27efbb589f918dc51eab511c418eed35fad3214ab24a7e3308c501"
+   },
+   "outSha256": "982d2074dff43a9dd433b206f5c741891bc683ea6ff9c15985b3c25009a42d29",
+   "outBytes": 11846,
+   "quality": "ratio=0.320 colors=7063"
+  },
+  "blood-steward-of-kirtonos": {
+   "dungeon": "scholomance",
+   "boss": "基尔图诺斯的卫士",
+   "displayId": 10925,
+   "m2": 124210,
+   "skin": 476137,
+   "texSlot0": 124214,
+   "srcSha256": {
+    "m2": "0975d970023147145fb93cc8000618aae59bb3096bcbabf5523e400c00314287",
+    "skin": "0fe088c068ff338604da07c175948cfc2df7b0c6097a133a0ada6a776e2463f9",
+    "tex": "1ce09e0f02823d636100a4472b5283b3c8d49b3770ac42baa05469e8ade8a5d4"
+   },
+   "outSha256": "e808a130358e219ded78082e9546124c6f0b25e334d8ba63f38fa93efc519528",
+   "outBytes": 8428,
+   "quality": "ratio=0.236 colors=5776"
+  },
+  "black-guard-swordsmith": {
+   "dungeon": "stratholme-service-gate",
+   "boss": "黑衣守卫铸剑师",
+   "displayId": 775,
+   "m2": 124272,
+   "skin": 476205,
+   "texSlot0": 124273,
+   "srcSha256": {
+    "m2": "2c8b62187fb45ee4c1027a5a2753deb675aaef8c7847769dd6c5e8b766d8f132",
+    "skin": "8adce5c0cf92ac5f476a223ca3c48babf3eb2664029d2e80e23203985601776f",
+    "tex": "1ecbc9d8cf7629e92cddebf1f210e70f4dbffc26cf085b06eb52454ba969398a"
+   },
+   "outSha256": "62a47c97f6b8ee22ccaa260bf711d8fbe95b5e6faec329ce74d9ed07ff75f5a8",
+   "outBytes": 12954,
+   "quality": "ratio=0.273 colors=10595"
+  },
+  "stonespine": {
+   "dungeon": "stratholme-service-gate",
+   "boss": "石脊",
+   "displayId": 7856,
+   "m2": 125796,
+   "skin": 479520,
+   "texSlot0": 125797,
+   "srcSha256": {
+    "m2": "89cef081afb9a9016c72be521d3bdeb0677c0da56ff2d6d95a8022ff89abbd0c",
+    "skin": "84f3306d507454f5856ddae0905b736e7277a2e53626afcaeed841f588a1db75",
+    "tex": "10997f129b42c00fc8e4a0db6a68b56385df71a8ae48b4dbf50ca7cc80140512"
+   },
+   "outSha256": "6a54d1342b787bf8464bb5af5123a819c0f3846049916445fac3d67a42098735",
+   "outBytes": 11096,
+   "quality": "ratio=0.223 colors=10233"
+  }
+ }
+}

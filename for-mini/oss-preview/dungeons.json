@@ -120,7 +120,7 @@
      "nameCn": "茵弗努斯",
      "level": "L2",
      "note": "公开数据库里还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/infurnus.webp"
     },
     {
      "id": "plunder",
@@ -1717,7 +1717,7 @@
      "nameCn": "矿工约翰森",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/miner-johnson.webp"
     },
     {
      "id": "gilnid",
@@ -2156,7 +2156,7 @@
      "nameCn": "盲眼守卫奥杜",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/odo-the-blindwatcher.webp"
     },
     {
      "id": "fenrus-the-devourer",
@@ -2709,7 +2709,7 @@
      "nameCn": "瑟拉吉斯",
      "level": "L0",
      "note": "公开数据库里还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/old-serra-kis.webp"
     },
     {
      "id": "twilight-lord-kelris",
@@ -2940,14 +2940,14 @@
      "nameCn": "可怕的塔格尔",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/targorr-the-dread.webp"
     },
     {
      "id": "kam-deepfury",
      "nameCn": "卡姆·深怒",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/kam-deepfury.webp"
     },
     {
      "id": "hamhock",
@@ -3202,7 +3202,7 @@
      "nameCn": "科技机器人",
      "level": "L1",
      "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/techbot.webp"
     }
    ],
    "route": [],
@@ -3640,7 +3640,7 @@
      "nameCn": "剃刀沼泽刺鬃守卫",
      "level": "L1",
      "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/razorfen-spearhide.webp"
     }
    ],
    "route": [],
@@ -5286,21 +5286,21 @@
      "nameCn": "泽雷利斯",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/zerillis.webp"
     },
     {
      "id": "sandarr-dunereaver",
      "nameCn": "杉达尔·沙掠者",
      "level": "L2",
      "note": "公开数据库里还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/sandarr-dunereaver.webp"
     },
     {
      "id": "dustwraith",
      "nameCn": "灰尘怨灵",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/dustwraith.webp"
     },
     {
      "id": "sandfury-executioner",
@@ -5915,7 +5915,7 @@
      "nameCn": "温格",
      "level": "L1",
      "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/veng.webp"
     },
     {
      "id": "maraudos",
@@ -6351,7 +6351,7 @@
      "nameCn": "阿塔拉利恩",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/atal-alarion.webp"
     },
     {
      "id": "avatar-of-hakkar",
@@ -6379,7 +6379,7 @@
      "nameCn": "摩弗拉斯",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/morphaz.webp"
     },
     {
      "id": "weaver",
@@ -8550,7 +8550,7 @@
      "nameCn": "霍克·巴什古德",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/ghok-bashguud.webp"
     },
     {
      "id": "crystal-fang",
@@ -10241,7 +10241,7 @@
      "nameCn": "基尔图诺斯的卫士",
      "level": "L1",
      "note": "这份名单由插件整理，本站没进游戏逐条核对，也还没有它的掉落记录。",
-     "portrait": null
+     "portrait": "img/art/bosses-m2/blood-steward-of-kirtonos.webp"
     },
     {
      "id": "kirtonos-the-herald",
@@ -11822,14 +11822,14 @@
      "nameCn": "黑衣守卫铸剑师",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/black-guard-swordsmith.webp"
     },
     {
      "id": "stonespine",
      "nameCn": "石脊",
      "level": "L0",
      "note": null,
-     "portrait": null
+     "portrait": "img/art/bosses-m2/stonespine.webp"
     }
    ],
    "route": [],

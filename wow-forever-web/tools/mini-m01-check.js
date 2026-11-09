@@ -303,15 +303,21 @@ async function main() {
   /* 三座无限新增本的首领一张脸都没有（源站自己标 data-unknown，2026-10-23 重探仍 0/15）。
      界面不许摆一个写"没有这张头像"的虚线空框——那看着像坏了；交给 icon-cell 回落自绘块。
      首领**个数从数据里读**，不写死：这座本跟着 11-01 那批客户端数据涨到 5 个，
-     上一版这里钉的是"恰好 4 个"，数据一对、断言自己变红了（2026-11-02 撞到）。 */
+     上一版这里钉的是"恰好 4 个"，数据一对、断言自己变红了（2026-11-02 撞到）。
+     2026-11-09 挂账①：本机客户端渲的头像上线（app/img/art/bosses-m2/），这座本的
+     infurnus 是 18 张之一——断言从"5 个全回落"改成"有图的给真地址、没图的仍回落空串"，
+     名单从 oss-preview 的 portrait 字段读，不再写死哪只有图（下一批补图不用再改这里）。 */
   const htData = (() => {
     const pv = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/dungeons.json'), 'utf8'));
     const all = ['newDungeons', 'classicDungeons', 'raids'].reduce((a, k) => a.concat(pv[k] || []), []);
     return all.filter((x) => x.id === 'hall-of-thanes')[0] || {};
   })();
-  log('详情页：新本首领没有头像时走自绘回落，页面不再摆"没有这张头像"那句',
-    (s.bosses || []).length === (htData.bosses || []).length && (s.bosses || []).every((b) => b.portraitUrl === ''),
-    JSON.stringify({ want: (htData.bosses || []).length, got: (s.bosses || []).map((b) => b.portraitUrl) }));
+  const htWant = (htData.bosses || []).map((b) => (b.portrait
+    ? 'http://127.0.0.1:' + PORT + '/wow/beta/v1/assets/' + b.portrait.replace(/^img\//, '')
+    : ''));
+  log('详情页：新本首领有客户端渲的头像给真地址，没有的走自绘回落，页面不摆"没有这张头像"那句',
+    (s.bosses || []).length === htWant.length && (s.bosses || []).every((b, i) => b.portraitUrl === htWant[i]),
+    JSON.stringify({ want: htWant, got: (s.bosses || []).map((b) => b.portraitUrl) }));
   const faceWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
   log('详情页：首领一律一个 icon-cell，缺图由组件回落（不留碎图也不留空框）',
     /boss-face/.test(faceWxml) && !/没有这张头像/.test(faceWxml) && !/face-none/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
