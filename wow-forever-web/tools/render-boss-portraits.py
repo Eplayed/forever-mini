@@ -3,17 +3,22 @@
 """挂账①（2026-11-09 站主拍板）：首领头像本机客户端渲染管线。
 
 给副本首领行补"这只怪长什么样"的方形头像。素材不是网上抓的，是本机 Forever 客户端
-（1.60.1，CASC）里这只怪的 M2 模型渲出来的：displayId → CreatureDisplayInfo(f27 调色板)
-→ M2 + skin(LOD0) + BLP 贴图 → 静态 GLB（无骨骼动画，绑定姿势）→ 无头 Chrome 透明底
-截图 → 256×256 webp。配套提取脚本与探针在仓库外工作区（默认
-C:\\GAME\\_wowf-export-work\\），本脚本只吃提取产物，不碰 CASC。
+（1.60.1，CASC）里这只怪的 M2 模型渲出来的：displayId → CreatureDisplayInfo → M2 + skin
+(LOD0) + BLP 贴图 → 静态 GLB（无骨骼动画，绑定姿势）→ 无头 Chrome 透明底截图 →
+256×256 webp。配套提取脚本与探针在仓库外工作区（默认 C:\\GAME\\_wowf-export-work\\），
+本脚本只吃提取产物，不碰 CASC。
 
-范围（站主定）：只做有完整纹理链的首领（首批 18 个 / 16 份独立模型）；displayId→M2
-映射未解的新本首领不在本轮，照旧走 icon-cell 的"没有这张脸"回落。
+范围（首批 18 + c3 扩展 2 = 20 张）：贴图来源分两类——首批走 CDI f27 调色板
+（该 displayId 游戏内实际贴图）；c3 扩展批 f27 全空、改吃 M2 TXID chunk 自带 fdid。
+扩展侦查 47 个候选，45 个照实落空（extend-verdict.json 留档：43 个是 HD 角色基础
+模型、2 个地精身体贴图是占位 stub——真脸靠运行时部件组装，渲通用人模=冒充首领
+长相，不干）。侦查前段还各有 26 个 displayId 不在本构建 CDI（领主大厅 4 首领在内，
+新内容真源缺口）、45 个 xr 无 displayId，没进候选。
 
-落位：app/img/art/bosses-m2/{bossId}.webp + manifest.json（来源链/构建号/哈希/核对日）。
-整目录删除即回退：dungeons.json 里对应 portrait 置回 null 即可（由 oss-release 的
-反向卡口兜底：指向不存在文件的地址过不了构建）。
+落位：app/img/art/bosses-m2/{bossId}.webp + manifest.json（来源链/构建号/哈希/核对日；
+c3 起 manifest 按候选整表重建，有失败不覆写旧 manifest）。整目录删除即回退：
+dungeons.json 里对应 portrait 置回 null 即可（由 oss-release 的反向卡口兜底：
+指向不存在文件的地址过不了构建）。
 
 用法：
   python render-boss-portraits.py                # 全量
@@ -49,6 +54,9 @@ M2DIR = os.path.join(WORK, "exporter", "dest-m2boss")
 SKINDIR = os.path.join(WORK, "exporter", "dest-bosshead")
 PNGDIR = os.path.join(WORK, "exporter", "dest-bosshead-png")
 CANDS = os.path.join(WORK, "boss-portraits-2026-11-09", "boss-candidates.json")
+# c3 扩展批（2026-11-09）：47 个首领 f27 全空，贴图改从 M2 TXID chunk 自带 fdid 取。
+# 候选里直接带 bossId/sfid/txid/texFd/texSrc（extend_resolve.py + extend_skins.py 产出）。
+EXT_CANDS = os.path.join(WORK, "boss-portraits-2026-11-09", "extend-candidates.json")
 GAME = r"C:\GAME\World of Warcraft"
 
 W = H = 512          # 渲染尺寸（超采样）
@@ -65,6 +73,8 @@ ACCEPT_MAX = 0.90    # 顶天立地贴边判失败
 OVERRIDES = {
     "atal-alarion": {"frac": 0.26},
     "targorr-the-dread": {"span": 0.45, "frac": 0.30, "pad": 1.0},
+    # 骷髅模型骨架长，默认头胸框收太远，收紧到头肩（c3 扩展批目检后加）
+    "archivist-galford": {"span": 0.38, "frac": 0.12},
 }
 
 
@@ -320,8 +330,26 @@ def main():
         for b in (dun.get("bosses") or []):
             id_of[(dun["id"], b.get("nameCn") or b.get("name"))] = b["id"]
 
+    # 合并扩展批：bossId 直给，不占用首批候选的键
+    ext = json.load(open(EXT_CANDS, encoding="utf-8"))
+
     build = client_build()
-    print("客户端构建:", build, " 候选:", len(cands))
+    # 统一候选形：bossId / texFd / texSrc 齐备。首批贴图走 f27 调色板，扩展批走 TXID。
+    all_cands = []
+    for c in cands:
+        boss_id = id_of.get((c["slug"], c["boss"]))
+        if not boss_id:
+            continue
+        f27nz = [t for t in (c.get("f27") or []) if t]
+        all_cands.append(dict(bossId=boss_id, slug=c["slug"], boss=c["boss"],
+                              displayId=c["displayId"], m2=c["m2"], sfid=c.get("sfid"),
+                              texFd=f27nz[0] if f27nz else None, texSrc="f27" if f27nz else None))
+    for c in ext:
+        all_cands.append(dict(bossId=c["bossId"], slug=c["slug"], boss=c["boss"],
+                              displayId=c["displayId"], m2=c["m2"], sfid=c.get("sfid"),
+                              texFd=c.get("texFd"), texSrc=c.get("texSrc")))
+    print("客户端构建:", build, " 候选: 首批 %d + 扩展 %d = %d" % (
+        len(cands), len(ext), len(all_cands)))
 
     os.makedirs(OUT_DIR, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix="bossport-")
@@ -342,8 +370,9 @@ def main():
     manifest = {"meta": {
         "kind": "boss-portrait-m2",
         "clientBuild": build,
-        "chain": "displayId -> CreatureDisplayInfo.f27 -> M2+skin(LOD0)+BLP -> static GLB -> headless chrome",
-        "texRule": "贴图槽取 CDI f27 调色板（游戏内该 displayId 实际用的贴图），slot0",
+        "chain": "displayId -> CreatureDisplayInfo/模型链 -> M2+skin(LOD0)+BLP -> static GLB -> headless chrome",
+        "texRule": "slot0 贴图：首批取 CDI f27 调色板（游戏内该 displayId 实际用的贴图）；"
+                   "扩展批 f27 全空，取 M2 TXID chunk 自带的贴图 fdid（texSrc=txid）",
         "pose": "绑定姿势（无骨骼动画）；非游戏内截图，是客户端模型重渲",
         "generated": "2026-11-09",
         "fallback": "整目录删除 + dungeons.json portrait 置 null 即回退",
@@ -356,16 +385,13 @@ def main():
             args=["--enable-unsafe-swiftshader", "--use-angle=swiftshader", "--disable-gpu-sandbox"])
         page = browser.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
 
-        for c in cands:
-            boss_id = id_of.get((c["slug"], c["boss"]))
-            if not boss_id:
-                fails.append((c["slug"], c["boss"], "dungeons.json 无此首领"))
-                continue
+        for c in all_cands:
+            boss_id = c["bossId"]
             if args.only and boss_id not in args.only:
                 continue
             m2p = os.path.join(M2DIR, "m2_%d.m2" % c["m2"])
             skin_fd = (c["sfid"] or [None])[0]
-            tex_fd = [t for t in c["f27"] if t][0]
+            tex_fd = c["texFd"]
             skinp = os.path.join(SKINDIR, "skin_%d.skin" % skin_fd)
             pngp = os.path.join(PNGDIR, "tex_%d.png" % tex_fd)
             try:
@@ -387,13 +413,15 @@ def main():
                 manifest["portraits"][boss_id] = {
                     "dungeon": c["slug"], "boss": c["boss"], "displayId": c["displayId"],
                     "m2": c["m2"], "skin": skin_fd, "texSlot0": tex_fd,
+                    "texSrc": c["texSrc"] or "f27",
                     "srcSha256": {"m2": sha256_file(m2p), "skin": sha256_file(skinp),
                                   "tex": sha256_file(os.path.join(SKINDIR, "tex_%d.blp" % tex_fd))},
                     "outSha256": sha256_file(outp), "outBytes": os.path.getsize(outp),
                     "quality": info,
                 }
-                print("✓ %-28s %-10s displayId=%-6d m2=%-7d tex=%-7d %s" % (
-                    boss_id, c["boss"], c["displayId"], c["m2"], tex_fd, info))
+                print("✓ %-28s %-10s displayId=%-6d m2=%-7d tex=%-7d [%s] %s" % (
+                    boss_id, c["boss"], c["displayId"], c["m2"], tex_fd,
+                    c["texSrc"] or "f27", info))
             except Exception as e:
                 fails.append((boss_id, c["boss"], str(e)[:120]))
                 print("✗ %-28s %s" % (boss_id or c["boss"], str(e)[:120]))
@@ -403,13 +431,13 @@ def main():
     shutil.rmtree(tmp, ignore_errors=True)
 
     mpath = os.path.join(OUT_DIR, "manifest.json")
-    if os.path.exists(mpath):
-        old = json.load(open(mpath, encoding="utf-8"))
-        old["portraits"].update(manifest["portraits"])
-        old["meta"] = manifest["meta"]
-        manifest = old
-    json.dump(manifest, open(mpath, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print("\nmanifest:", mpath, " 共 %d 张" % len(manifest["portraits"]))
+    # c3 起 manifest 按本轮候选整表重建（all_cands 就是全部应存在的头像）；
+    # 有失败不覆写旧 manifest，避免半成品批次悄悄上线。
+    if fails and os.path.exists(mpath):
+        print("有失败，保留旧 manifest 不覆写")
+    else:
+        json.dump(manifest, open(mpath, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print("\nmanifest:", mpath, " 共 %d 张" % len(manifest["portraits"]))
     if fails:
         print("失败 %d：" % len(fails))
         for f in fails:

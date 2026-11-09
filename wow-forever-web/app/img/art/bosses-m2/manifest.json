@@ -2,8 +2,8 @@
  "meta": {
   "kind": "boss-portrait-m2",
   "clientBuild": "1.60.1.70862",
-  "chain": "displayId -> CreatureDisplayInfo.f27 -> M2+skin(LOD0)+BLP -> static GLB -> headless chrome",
-  "texRule": "贴图槽取 CDI f27 调色板（游戏内该 displayId 实际用的贴图），slot0",
+  "chain": "displayId -> CreatureDisplayInfo/模型链 -> M2+skin(LOD0)+BLP -> static GLB -> headless chrome",
+  "texRule": "slot0 贴图：首批取 CDI f27 调色板（游戏内该 displayId 实际用的贴图）；扩展批 f27 全空，取 M2 TXID chunk 自带的贴图 fdid（texSrc=txid）",
   "pose": "绑定姿势（无骨骼动画）；非游戏内截图，是客户端模型重渲",
   "generated": "2026-11-09",
   "fallback": "整目录删除 + dungeons.json portrait 置 null 即回退"
@@ -16,6 +16,7 @@
    "m2": 124427,
    "skin": 476619,
    "texSlot0": 124435,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "9de4289b1396fd2ff68487177aa8c9b88a7ae58d68062228fc31c82ee65ca177",
     "skin": "1219f846249b8688c596566b24f95f6d14cc3da26e43fb0a0b6f12279d384e4a",
@@ -32,6 +33,7 @@
    "m2": 123105,
    "skin": 473280,
    "texSlot0": 123108,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "da0597f9c8e24f13446d3ab494e14afab5f75290eeee14a9c9e5fb621755011a",
     "skin": "5e880c6f81846ea6bdef0bb83dfd0545b3123b855c5d812da9eb12df3a694bae",
@@ -48,6 +50,7 @@
    "m2": 123040,
    "skin": 473118,
    "texSlot0": 123045,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "fb2f6d821d2e8a1861816fa8134a8c5022e948f423e14df0cda16e9b79706940",
     "skin": "af22ac38e5f83dcaa68fd6c4d5a1303d80a92b067da653c26e37e9aa211c9552",
@@ -64,6 +67,7 @@
    "m2": 123170,
    "skin": 473359,
    "texSlot0": 123193,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "57cce63e7751ff7e651c9d477ed269cc9dd797d5fe7dd4d4004fc345c8f77ca8",
     "skin": "04d4e477e43b5304be6c41cc997daa46dfd427adff58f2d658934b85cb6f445f",
@@ -80,6 +84,7 @@
    "m2": 123324,
    "skin": 473797,
    "texSlot0": 123328,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "68840e4e41aa92cc7170eae69b2485fcf8a7bb9d3b58b4783c4fe9dd601c3bd1",
     "skin": "0165de1688dc412969ee6ee25fc54b4d2ec5e573e02e7c50f19a1b2b4419cb11",
@@ -96,6 +101,7 @@
    "m2": 125559,
    "skin": 479325,
    "texSlot0": 125563,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "5257035080e1dfc2eb4ce920d2f9fd5ecbdb059125d71d3d6885993713c3e929",
     "skin": "0daa205d4e89b7423f4f61168ef6395bcf4f80ca9771c364626697c5d72fc37b",
@@ -112,6 +118,7 @@
    "m2": 124329,
    "skin": 476280,
    "texSlot0": 124337,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "05ebd30263883e3e13bc963d5b53cfd4bf86c504c9039848242a1a0e00fddf2b",
     "skin": "ade0734441194f5eef08fc5f895fc01a80555ed80444c9101725671d181b9f20",
@@ -128,6 +135,7 @@
    "m2": 124208,
    "skin": 476136,
    "texSlot0": 124214,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "4afe15a10f17b5521d0bae75f729b3065aa9e07c3f89981aa48725aaf39fa39f",
     "skin": "5a5511b3806c8ce28a26a8a4147c01e8b28a45bcd5d0534d21160ab359757658",
@@ -144,6 +152,7 @@
    "m2": 125223,
    "skin": 478586,
    "texSlot0": 125225,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
     "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
@@ -160,6 +169,7 @@
    "m2": 125223,
    "skin": 478586,
    "texSlot0": 125225,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
     "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
@@ -176,6 +186,7 @@
    "m2": 125223,
    "skin": 478586,
    "texSlot0": 125226,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "2415cbef50e6881233cc7980143fd88f6a1a62fefd2b914dfc48227f885a507d",
     "skin": "9a44fdbc7c64c69da6e8ea95e43528f07f352c6f9d2b3a855bb0f641614274b6",
@@ -192,6 +203,7 @@
    "m2": 123225,
    "skin": 473385,
    "texSlot0": 123228,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "04225864c7e279fea80f7cc0e4ac356dd1427543e5d85788a2eb032746e99431",
     "skin": "ed4a5d874d944afc4dde7f4f6d04bfef0fb9012804a359a55849c86f006a2a2f",
@@ -208,6 +220,7 @@
    "m2": 125263,
    "skin": 478882,
    "texSlot0": 125285,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "d85accf01d6b72749148ac1c8a7fb99dd91419f5b9b568733c8376851ae770fe",
     "skin": "499eb6bbddb598e35bdf9186ed88c5cb6f0acb538410c01cd4fccb63ee77ac91",
@@ -224,6 +237,7 @@
    "m2": 123747,
    "skin": 474860,
    "texSlot0": 123745,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "84926ad6a152e5d2d8de7a87e08d42f9754cf8ac64fc9007e7da0b6b4a62cf66",
     "skin": "e2a05e63f4c21ec1ca631e47830683111f39231ce6fb0009ae5fe76d60970742",
@@ -240,6 +254,7 @@
    "m2": 1134000,
    "skin": 1134012,
    "texSlot0": 1134114,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "86591e20e1e0b57c00cb33a3c8ea2221fd7d01fc68a843f7725bb16d604b4c01",
     "skin": "f680f6bbd9e5aca3ac28546be725dea11e23436eebc93add70eebf1065f6434d",
@@ -256,6 +271,7 @@
    "m2": 124210,
    "skin": 476137,
    "texSlot0": 124214,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "0975d970023147145fb93cc8000618aae59bb3096bcbabf5523e400c00314287",
     "skin": "0fe088c068ff338604da07c175948cfc2df7b0c6097a133a0ada6a776e2463f9",
@@ -272,6 +288,7 @@
    "m2": 124272,
    "skin": 476205,
    "texSlot0": 124273,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "2c8b62187fb45ee4c1027a5a2753deb675aaef8c7847769dd6c5e8b766d8f132",
     "skin": "8adce5c0cf92ac5f476a223ca3c48babf3eb2664029d2e80e23203985601776f",
@@ -288,6 +305,7 @@
    "m2": 125796,
    "skin": 479520,
    "texSlot0": 125797,
+   "texSrc": "f27",
    "srcSha256": {
     "m2": "89cef081afb9a9016c72be521d3bdeb0677c0da56ff2d6d95a8022ff89abbd0c",
     "skin": "84f3306d507454f5856ddae0905b736e7277a2e53626afcaeed841f588a1db75",
@@ -296,6 +314,40 @@
    "outSha256": "6a54d1342b787bf8464bb5af5123a819c0f3846049916445fac3d67a42098735",
    "outBytes": 11096,
    "quality": "ratio=0.223 colors=10233"
+  },
+  "tsu-zee": {
+   "dungeon": "dire-maul-west",
+   "boss": "苏斯",
+   "displayId": 11250,
+   "m2": 123814,
+   "skin": 475037,
+   "texSlot0": 123809,
+   "texSrc": "txid",
+   "srcSha256": {
+    "m2": "05a6efcd750d613dda49f96099fd2d4503cb45e59a4aa98c650d43b2f6ce688c",
+    "skin": "b9acc7d0912434c9c98315a7efb241047cf0ecb1e6744666eb9c73a9240b3eff",
+    "tex": "9a6a3250bb6aad3a631750bc24afefb076a4de378b4e8ca53291e625ef28693e"
+   },
+   "outSha256": "3974a1c15f2f48bea57e09f0290838600f5557a58e52d7198a6567a81ceb5477",
+   "outBytes": 4498,
+   "quality": "ratio=0.203 colors=3239"
+  },
+  "archivist-galford": {
+   "dungeon": "stratholme-main-gate",
+   "boss": "档案管理员加尔福特",
+   "displayId": 10544,
+   "m2": 121942,
+   "skin": 471847,
+   "texSlot0": 121955,
+   "texSrc": "txid",
+   "srcSha256": {
+    "m2": "ab5b9633c04eb82697bc7716ffcd6f05e8cc0569864f1286807385279ea06e03",
+    "skin": "605da48004c8e8d32b66777ebc4fe1b4af24adba9f9ba4741695698d570948f0",
+    "tex": "e36ce48a0859e1d17708fff5acfe181be6f5577f0fc173460f64ef7980e0e310"
+   },
+   "outSha256": "9cc41bae7970a158d9aca9396bd0b940cfed83a1ed6fde6b7fdffd74cbfd04c5",
+   "outBytes": 8584,
+   "quality": "ratio=0.280 colors=4379"
   }
  }
 }

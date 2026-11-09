@@ -378,3 +378,8 @@
   font-size: 22rpx;
   color: var(--txt-hint);
 }
+
+/* 没收录掉落的首领行：同一位置同一字色，靠文案本身把"点开是空表"提前说清（数据真源就没有，不编） */
+.boss-go--none {
+  color: var(--txt-hint);
+}

@@ -249,9 +249,14 @@ function detailRecord(d, useAsset, geo) {
   });
   if (out.art) out.art = useAsset(out.art, d.id + '.art');
   if (Array.isArray(out.bosses)) {
+    /* 逐首领数收录的掉落条数（2026-11-09 真机实拍：玩家点开"看它掉什么"才知道是空表——
+       源站就没收录这些首领的掉落，本站不编；把"有没有"提前到首领行，空表不用点开才发现）。 */
+    const dropN = {};
+    (d.drops || []).forEach((x) => { if (x && x.bossId) dropN[x.bossId] = (dropN[x.bossId] || 0) + 1; });
     out.bosses = out.bosses.map((b) => {
       const o = Object.assign({}, b);
       if (o.portrait) o.portrait = useAsset(o.portrait, b.id + '.portrait');
+      o.drops = dropN[b.id] || 0;
       return o;
     });
   }
@@ -647,6 +652,16 @@ function buildBatch(env, opts) {
     records: list.length, budget: 'dungeons/index', facts: collectFactDates(list)
   });
 
+  /* wclbox 自报的汇总对象拼成一句界面可读的话（对象直发会在页面渲出 [object Object]） */
+  function questSummaryText(s) {
+    if (!s || typeof s !== 'object') return null;
+    const seg = [];
+    if (s.faction) seg.push(s.faction + '阵营');
+    if (s.questCount) seg.push(s.questCount + ' 条任务');
+    if (s.xpTotal) seg.push('总经验 ' + s.xpTotal);
+    return seg.join(' · ') || null;
+  }
+
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
     const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
@@ -657,7 +672,10 @@ function buildBatch(env, opts) {
     const dq = dqById[d.id] || null;
     if (dq) {
       det.quests = {
-        summary: dq.summary || null,
+        /* summary 在基底里是 wclbox 自报的汇总对象（faction/questCount/xpTotal），
+           2026-11-09 真机实拍抓到它整对象直发、页面渲出 [object Object]——
+           在这里拼成一句界面可读的话再下发，note（内部口径说明）不上界面。 */
+        summary: questSummaryText(dq.summary),
         note: (dqPack && dqPack.meta && dqPack.meta.pageNote) || null,
         checkedAt: (dqPack && dqPack.meta && dqPack.meta.generatedAt) || null,
         rows: (dq.quests || []).map((x) => ({

@@ -93,6 +93,17 @@ Page({
   questPack(dd) {
     const q = dd && dd.quests
     if (!q) return { rows: [], summary: '', note: '', empty: '这座本的任务线还没有记录，不猜。' }
+    /* summary 判型：旧批缓存里它是 wclbox 自报的汇总对象，直接绑会渲出 [object Object]；
+       新批已在分发层拼成字符串，这里两种都接，不许对象漏到模板。 */
+    const summaryText = (s) => {
+      if (!s) return ''
+      if (typeof s === 'string') return s
+      const seg = []
+      if (s.faction) seg.push(s.faction + '阵营')
+      if (s.questCount) seg.push(s.questCount + ' 条任务')
+      if (s.xpTotal) seg.push('总经验 ' + s.xpTotal)
+      return seg.join(' · ')
+    }
     const rows = (q.rows || []).map((x) => {
       const seg = []
       if (x.questLevel !== null && x.questLevel !== undefined) seg.push(x.questLevel + ' 级')
@@ -111,7 +122,7 @@ Page({
     })
     return {
       rows: rows,
-      summary: q.summary || '',
+      summary: summaryText(q.summary),
       note: q.note || '',
       empty: rows.length ? '' : '这座本的任务线还没有记录，不猜。'
     }
@@ -196,6 +207,7 @@ Page({
             id: b.id,
             name: b.nameCn || b.id,
             missing: !b.nameCn,
+            drops: b.drops || 0,
             portraitUrl: oss.assetUrl(this.batch, b.portrait)
           })) : [],
           bossEmpty: d.data && d.data.dungeon && !(d.data.dungeon.bosses || []).length

@@ -174,3 +174,21 @@
 ③ 多槽贴图精确映射——18 张逐张目检无失真才敢只挂槽 0，将来若有首领需精确到 skin batches 再补；
 ④ 断言的新期望仍依赖 `oss-preview/dungeons.json` 与分发层 useAsset 的转换约定（`img/`→assets 相对路径），约定变了断言要跟着改。
 
+## 十二、追记（2026-11-09 第八笔）：站主真机三反馈——`[object Object]` 修复、掉落空态诚实化、头像扩展侦查（47 探 2 上），批次 `7b832b1fc141`
+
+**起因**：站主真机截图三件事——① 副本详情任务卡第一行渲出字面量 `[object Object]`；② 点首领跳掉落页只见"还没有记录"；③ 首领头像大多没有（领主大厅 5 首领只有茵弗努斯有渲图）。指令"还差哪些没有做，完成他"。
+
+**① `[object Object]`（真 bug，根因+双修）**：`dungeon-quests.json` 35 座的 `summary` 全是对象 `{faction,questCount,xpTotal,note}`，oss-release 的 detailRecord 一直整对象直发，wxml `{{quest.summary}}` 就渲成字面量。修复两端：分发层 [oss-release.js](../../wow-forever-web/tools/oss-release.js) 新增 `questSummaryText()` 把对象拼成"联盟阵营 · 4 条任务"直发字符串（新批）；页面 [dungeon/index.js](../../for-mini/pages/dungeon/index.js) `summaryText()` 判型兜底（string 直用/对象同拼法，旧批缓存不炸）。**m02 断言同步改写**（任务段 summary 从"必须是对象"改为"必须是可直渲的非空字符串"，断言旁留改写注），改后 116/116。
+
+**② 掉落空态（真源缺口，不编）**：回查参考站 wclbox 自报领主大厅全本就"1 件掉落"（连首领数都写 4），questie 掉落快照对杜根·挽锤（npcId 261319）也无记录——真源就这么少，照实呈现。分发层 detailRecord 逐首领数 `drops` 计数下发；页面首领行两态：有货"看它掉什么 ›"/ 无货"收录的掉落还没记录 ›"（同 hint 色，靠文案区分，不新造令牌）。
+
+**③ 头像扩展侦查（工作区 `boss-portraits-2026-11-09/extend_*.py` + `extend-verdict.json` 留档）**：118 个缺图首领全过一遍链路——xr 有 displayId 73 个；其中 46 个唯一 id 在本构建 CDI（24 个不在：达拉安城/领主大厅 4 首领/哀嚎新怪等**新内容真源缺口**，本地 CASC 与 10-22 提取件逐字节一致、非提取过时）；得 47 个候选，M2 全部提取到位，**TXID chunk 全部自带贴图 fdid**（f27 全空，与首批正好互补）。但渲完 65 张目检暴露大问题：10 个人形首领渲出**同一张脸**。溯因：这批 displayId 在本构建被映射到 **HD 角色基础模型**（HumanMale_HD/DwarfMale_HD/NightElfFemale_HD…），真脸靠运行时部件组装，TXID 里只有跨 fdid 字节相同的**占位 stub**（44900 B 一群）；且映射荒诞——奥妮克希亚→暗夜女、达格兰大帝→矮人**女**、阿库麦尔→亡灵女。**定案：渲通用人模=冒充首领长相，不干。**质检规则（listfile placeholder 标签 + 跨 fdid 文件字节指纹）剔 45（43 HD 基础模型 + 2 地精身体贴图占位），**只收 2 张真·专属模型**：苏斯（克苏恩眼杆真生物模型+真贴图）、档案管理员加尔福特（经典骷髅模型+真皮肤，取景覆写 span 0.38/frac 0.12 收到头肩）。头像总数 18→**20**，apply_portraits 幂等写入 dungeons.json（改 2 条）；渲染脚本 manifest 改**整表重建**语义（有失败不覆写旧 manifest），头部说明同步。工作区脚本踩坑留痕：listfile 第二列以后是标签/哈希元数据，按整行存会让 `endswith('_hd.m2')` 永假（芬鲁斯/哈扎斯漏网即此因，已修）。
+
+**发布**：首次 build 撞"导出产物与基底不配套"卡口（portrait 改了基底）→ 先 `export-mini.js` 再 build 过；批次 **`7b832b1fc141`**（重跑同源字节一致），`assets` 传 3（2 新头像+1）跳 2358，`upload` 177 传 0 失败，指针 → `7b832b1fc141`，回滚位 `1bf6dcc67aed`；`verify` rc=0（175 文件逐个回读 0 问题）。
+
+**门禁**：开发者工具会话坏死（Connection closed），按既有处置硬杀 wechatdevtools 进程重开后过。m01 **111/113**（断网缓存、切角像素两条历史红照旧，无新红）；m02 断言改写后 **116/116**。
+
+**线上回读**（真 bucket）：`builds/7b832b1fc141/dungeons/detail/hall-of-thanes.json` `dungeon.quests.summary`=**"联盟阵营 · 4 条任务"**（字符串，①修复上线实证）；`dungeon.bosses[]` drops = faldrim 0 / infurnus 0 / plunder 0 / **durgen 1** / plunder-2 0（与 wclbox 真源一致，②两态的数据底座）；`assets/art/bosses-m2/` 下 tsu-zee.webp 4498 B、archivist-galford.webp 8584 B、infurnus.webp 4388 B 全 HEAD 200。
+
+**没验到的（照实挂账）**：① 领主大厅 4 首领头像——displayId（142826 等）不在本构建 CDI，本机渲不出真脸，照实走"没有这张脸"回落；26 个同因首领 + 45 个 xr 无 displayId 首领同账；HD 组若将来构建补了真贴图，管线重跑即出（质检规则会自动放行）；② "看它掉什么/还没记录"两态只有代码走查、未加自动断言（m02 现有任务段/掉落断言未覆盖这一格）；③ 真机实拍本轮三处改动（任务卡汇总行、首领行两态、2 张新头像），待站主下次真机预览。
+

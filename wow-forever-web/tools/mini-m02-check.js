@@ -649,11 +649,13 @@ async function main() {
       && String(chooserB.meta.note || '').indexOf('不是官方') >= 0,
     chooserB ? chooserB.questions.length + ' 题' : '批次里没有 chooser/chooser.json');
   const detB = (() => { try { return JSON.parse(fs.readFileSync(path.join(bDir, 'dungeons/detail/blackrock-depths.json'), 'utf8')); } catch (e) { return null; } })();
-  log('副本详情分片带任务段（汇总 + 逐条行 + 核对日 + 接取 NPC/地点），任务并入详情同一片不发第二次',
-    !!detB && !!detB.quests && typeof detB.quests.summary === 'object' && (detB.quests.rows || []).length > 0 && !!detB.quests.checkedAt
+  /* 2026-11-09 断言改写：summary 从对象改直发呈现字符串——真机把对象渲成了 "[object Object]"（站主截图）。
+     分片现在直出"联盟阵营 · N 条任务"这行字，页面直用；旧批缓存里的对象由页面 summaryText() 判型兜底。 */
+  log('副本详情分片带任务段（汇总是可直接渲的字符串 + 逐条行 + 核对日 + 接取 NPC/地点），任务并入详情同一片不发第二次',
+    !!detB && !!detB.quests && typeof detB.quests.summary === 'string' && detB.quests.summary.length > 0 && (detB.quests.rows || []).length > 0 && !!detB.quests.checkedAt
       && (detB.quests.rows || []).every((r) => 'pickupNpc' in r && 'pickupZone' in r)
       && (detB.quests.rows || []).some((r) => r.pickupNpc || r.pickupZone),
-    detB && detB.quests ? (detB.quests.rows.length + ' 条 · 接取有值 ' + detB.quests.rows.filter((r) => r.pickupNpc || r.pickupZone).length + ' 条 · ' + detB.quests.checkedAt) : '没有 quests 字段');
+    detB && detB.quests ? (detB.quests.rows.length + ' 条 · 汇总「' + detB.quests.summary + '」· ' + detB.quests.checkedAt) : '没有 quests 字段');
   await goto('/pages/dungeon/index?id=blackrock-depths', 9000);
   const qp = await ev(() => {
     const d = getCurrentPages().pop().data;
