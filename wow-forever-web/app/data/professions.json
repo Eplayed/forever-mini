@@ -12,7 +12,7 @@
   "took": "制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、采集点与可得物",
   "skipped": "冲级路线建议、BiS 结论、攻略文字、任何百分比",
   "notCollected": [
-   "野营（camping）：那一页不是表格形式，条目这一版还没能拆出来；有页面但不编数据",
+   "野营（camping）：2026-11-09 站主拍板不进专业名单——参考站那页不是配方表格、条目拆不出来，0 条配方摆出来是空页",
    "冲级路线与材料性价比建议：属攻略性质，本站红线不做",
    "商人青睐配方与专业专精选择建议：同上",
    "配方产物的装备属性与强度评价：不做强度排行"
@@ -79507,32 +79507,6 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
-     "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
-    }
-   ]
-  },
-  {
-   "id": "camping",
-   "nameCn": "野营",
-   "nameEn": "Camping",
-   "nameEnSource": "英文名叫法取自那家资料站的网址用词，不是官方英文页的原词",
-   "kind": "gather",
-   "unparsed": true,
-   "note": "这一页不是配方表或采集点表的形式，条目这一版还没能拆出来；有页面但不编数据",
-   "counts": {
-    "recipes": 0,
-    "newRecipes": 0,
-    "nodes": 0
-   },
-   "level": "L0",
-   "levelNote": "配方、材料、数量与技能档位是客户端里的数据（经第三方转述）；来源方式（训练师等）同",
-   "recipes": [],
-   "nodes": [],
-   "provenance": [
-    {
-     "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
      "checkedAt": "2026-11-05"
     }

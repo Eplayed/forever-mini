@@ -269,3 +269,9 @@
   ② **可采范围**（当日盘点，见 `wow-forever-web/docs/DATA-白云飞整合盘点-2026-11-08.md`）：任务中文名层（白云飞 757 条补漏 + QuestieDB zhCN 主库）、classicItemDrops 掉落名单、QuestXP 任务经验为三候选；RXP 攻略正文、DD 元数据照旧不取，alaTradeSkill/RareScanner 暂无缺口。**逐项开采范围待站主点头**。
   ③ 问了"小程序数据更新了吗"——当时线上指针 `1d12cc2f39b9`（11-03 批），网页已发 11-05 开服日包，**小程序落后一批**；补齐要 export-mini → oss-release build → upload beta（上传按惯例等站主点头）。**当日点头后已补发：批次 `c1d8fdf09520`（177 文件，核对日 2026-11-05，传 177 失败 0），指针 `1d12cc2f39b9` → `c1d8fdf09520`，回滚位 `1d12cc2f39b9`；记录见 `for-mini/docs/VERIFY-beta数据补发-2026-11-08.md`。**
   ④ 同日开采（范围经站主点头，只采任务中文名层＋掉落名单两项）：`upstream/questie-quests-cn.json`（5,233 任务 ID / 5,011 中文名，QuestieDB 真身是 15.5 MB baked TOC + 白云飞 757 条补丁，分歧两个都留）与 `upstream/questie-item-drops.json`（16,790 掉落归属对，掉率当场丢）；均只落 upstream 不进成品，接不接由合并层决定。记录见 `wow-forever-web/docs/DATA-任务名与掉落开采-2026-11-08.md`。
+
+## 2026-11-09
+
+- 站主原话（真机截图反馈）：「点击副本首领，跳转到了这个页面，查询不了掉落装备物品。pages/dungeons/index 也有「另一说法：xx」文案也去除了」→ 查实三处真 bug 并修复（loots onLoad 解码 / errText 上屏 / 列表页撤句），见 `for-mini/docs/VERIFY-第一批专业开闸副本任务chooser-2026-11-08.md` 第八节。
+- 站主原话：「然后执行3、4」→ 挂账③④立项执行。③ 首领头像：探明结论＝客户端无肖像文件，唯一路径是 M2→GLB 渲染管线，覆盖上限 136 缺里 14–30 个（第九节），当日未动界面；④ 接取/地点缺口：完整 QuestieDB 第四源落地（新抽取器拆 `X-Quest-<id>-2` startedBy 行），补接取 9／地点 63，批次 `0451d1ceeb85` 已上线（第十节）。
+- 站主原话（同日稍晚）：「好的，提交代码并处理挂账①」→ **拍板立项首领头像渲染管线**（第九节挂着的待拍板项）。执行口径：先做有完整纹理链的 18 个（其中 14 个 M2 已提取）；渲出的头像逐份记来源链（displayId→M2→贴图 fdid）与核对日；取不到的照旧显示占位不冒充；新本 26 个（displayId→M2 映射来源未解）不在本轮范围，映射问题另探。

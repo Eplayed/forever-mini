@@ -408,6 +408,17 @@ const SHARD_SPECS = {
     shape: (d) => Array.isArray(d.classes) && !!d.counts
       && d.counts.classes === d.classes.length
       && d.counts.names === d.classes.reduce((n, c) => n + (c.count || 0), 0)
+  },
+  /* 职业选择器（2026-11-08 站主第一批③）：七题问卷，每题选项带九职业权重，分在客户端算。
+     口径句必须在——这是本站整理的玩法归类，不是官方推荐；谁把它漏掉，页面就只能自己编一句。 */
+  chooser: {
+    name: 'chooser',
+    kind: 'chooser',
+    shape: (d) => Array.isArray(d.questions) && !!d.counts
+      && d.counts.questions === d.questions.length && d.questions.length > 0
+      && d.questions.every((q) => q && q.id && q.q && Array.isArray(q.options) && q.options.length > 0
+        && q.options.every((o) => o && o.id && o.label && o.weight && typeof o.weight === 'object'))
+      && !!d.meta && !!d.meta.note && d.meta.note.indexOf('不是官方') >= 0
   }
 }
 

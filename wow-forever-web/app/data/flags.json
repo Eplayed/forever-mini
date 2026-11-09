@@ -26,13 +26,13 @@
     },
     "professions": {
       "name": "专业与配方",
-      "on": false,
+      "on": true,
       "page": "pages/professions/index",
       "needs": [
         "professionsIndex"
       ],
-      "since": null,
-      "note": "数据通道与页面都已做好，站主决定先不公开；要公开只把这一行的 on 改成 true 再发一次开关对象，不用发小程序版本。"
+      "since": "2026-11-08",
+      "note": "数据通道与页面 2026-10-27 已就绪，站主 2026-11-08 拍板开闸（第一批功能盘点①）：13 专业与配方实拍核过界面后拧 true。要收回只改这一行再发一次开关对象，不用发小程序版本。"
     },
     "macros": {
       "name": "宏命令",

@@ -1,0 +1,165 @@
+/* 职业怎么选（2026-11-08）：版式沿用全站令牌（app.wxss 的 --panel-2 / --gold /
+   --gold-glow / --line / --r-ctl），本页只写布局与金色强调，不写死色值——
+   m02 盯着"页面 wxss 不许出现 rgba() 和裸色号"。页头口径句 .note 是数据下发的
+   meta.note（本站整理、不是官方推荐），改版不许把这句改没。 */
+
+.head {
+  margin: 8rpx 4rpx 12rpx;
+}
+
+.head-t {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.head-s {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: var(--txt-dim);
+}
+
+.note {
+  font-size: 22rpx;
+  margin: 0 4rpx 18rpx;
+}
+
+.pad {
+  padding: 32rpx 24rpx;
+}
+
+.prog {
+  height: 6rpx;
+  background: var(--panel-2);
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.prog-in {
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.2s ease;
+}
+
+.prog-t {
+  margin: 8rpx 4rpx 16rpx;
+  font-size: 22rpx;
+  color: var(--txt-hint);
+}
+
+.qcard {
+  padding: 28rpx 24rpx 20rpx;
+}
+
+.q-t {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.q-hint {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+}
+
+.opt {
+  margin-top: 18rpx;
+  padding: 20rpx 22rpx;
+  background: var(--panel-2);
+  border-left: 4rpx solid var(--line);
+  border-radius: var(--r-ctl);
+}
+
+.opt-on {
+  border-left-color: var(--gold);
+  background: var(--gold-glow);
+}
+
+.opt-l {
+  font-size: 28rpx;
+}
+
+.opt-n {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--txt-hint);
+}
+
+.linkback {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: var(--txt-hint);
+}
+
+.rcard {
+  padding-bottom: 16rpx;
+}
+
+.tie {
+  font-size: 22rpx;
+  margin-bottom: 10rpx;
+}
+
+.rrow {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.rrow-last,
+.rcard .rrow:last-child {
+  border-bottom: 0;
+}
+
+.r-name {
+  font-size: 30rpx;
+}
+
+.rrow-first .r-name {
+  color: var(--gold-hi);
+  font-weight: 600;
+}
+
+.r-tie {
+  margin-left: 10rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+  border: 1rpx dashed var(--txt-hint);
+  border-radius: 8rpx;
+}
+
+.r-go {
+  float: right;
+  font-size: 22rpx;
+  color: var(--gold);
+}
+
+.r-bar {
+  margin-top: 10rpx;
+  height: 10rpx;
+  background: var(--panel-2);
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.r-bar-in {
+  height: 100%;
+  background: var(--gold);
+}
+
+.r-note {
+  margin-top: 14rpx;
+  font-size: 22rpx;
+}
+
+.restart {
+  margin-top: 20rpx;
+}
+
+.empty {
+  text-align: center;
+  padding: 40rpx 24rpx;
+}
+
+.retry {
+  display: inline-block;
+  margin-top: 20rpx;
+}

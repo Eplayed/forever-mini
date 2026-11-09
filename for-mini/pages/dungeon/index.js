@@ -2,9 +2,6 @@ const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
 
-/* 素材来源一句话，挂在原画下面：客户端画面经第三方站转存，不是本站画的 */
-const ART_NOTE = '副本原画取自游戏客户端画面，经第三方资料站转存，不是本站绘制。'
-
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
 
 /* 副本详情（M01）
@@ -27,13 +24,12 @@ Page({
     nameEn: '',
     nameMissing: false,
     enMissing: false,
-    conflict: '',
     kindLabel: '',
     rows: [],
     bosses: [],
     bossEmpty: '',
+    quest: { rows: [], summary: '', note: '', empty: '' },
     artUrl: '',
-    artNote: ART_NOTE,
     mapUrl: '',
     mapZone: '',
     mapEntry: '',
@@ -80,6 +76,47 @@ Page({
     }
   },
 
+  /* 站主 2026-11-09：点首领 → 跳掉落页只看这位首领掉的装备（带副本＋首领两个参数） */
+  onOpenBoss(e) {
+    const id = String(e.currentTarget.dataset.id || '')
+    const name = String(e.currentTarget.dataset.name || '')
+    if (!id) return
+    const dname = encodeURIComponent(this.data.nameCn || this.data.title || this.data.id || '')
+    wx.navigateTo({ url: '/pages/loots/index?dungeon=' + encodeURIComponent(this.data.id || '') + '&dname=' + dname + '&boss=' + encodeURIComponent(name) })
+  },
+
+  /* 任务线（2026-11-08 第一批②）：详情分片里的 det.quests（构建时从
+     dungeon-quests.json 并进来，与详情同一次请求）。行里只摆事实字段；
+     中文名没核出来就摆英文名 + "译名待核"，缺数字就不写那一段，不编。
+     2026-11-09 站主要求把"在哪接的"摆出来：接取 NPC 336/396、地点 300/396 有值，
+     都缺的那条照实说"没记录"，不猜接取人。 */
+  questPack(dd) {
+    const q = dd && dd.quests
+    if (!q) return { rows: [], summary: '', note: '', empty: '这座本的任务线还没有记录，不猜。' }
+    const rows = (q.rows || []).map((x) => {
+      const seg = []
+      if (x.questLevel !== null && x.questLevel !== undefined) seg.push(x.questLevel + ' 级')
+      if (x.reqLevel !== null && x.reqLevel !== undefined) seg.push('需 ' + x.reqLevel + ' 级')
+      if (x.xp !== null && x.xp !== undefined) seg.push('经验 ' + x.xp)
+      const npc = (x.pickupNpc || '').trim()
+      const zone = (x.pickupZone || '').trim()
+      return {
+        name: x.nameCn || x.nameEn || '（任务名待核）',
+        missing: !x.nameCn,
+        meta: seg.join(' · '),
+        pickup: npc || zone ? [npc, zone].filter(Boolean).join(' · ') : '',
+        pickupNone: !npc && !zone,
+        src: x.source || ''
+      }
+    })
+    return {
+      rows: rows,
+      summary: q.summary || '',
+      note: q.note || '',
+      empty: rows.length ? '' : '这座本的任务线还没有记录，不猜。'
+    }
+  },
+
   start() {
     return service.loadDungeonIndex().then((r) => {
       const items = (r.data && r.data.items) || []
@@ -103,7 +140,6 @@ Page({
         nameEn: item.nameEn || '',
         nameMissing: !item.nameCn,
         enMissing: !item.nameEn,
-        conflict: item.nameCnConflict || '',
         fav: service.isFavoriteDungeon(item.id)
       })
       this.batch = r.batch || null
@@ -150,12 +186,14 @@ Page({
         }
         this.setData({
           rows: merged,
+          quest: this.questPack(d.data),
           /* 首领一律走 icon-cell：有头像就出图，没有的由组件回落成自绘块（名字首字垫色块）。
              2026-10-23 站主说"头像图标都没有"——先分清是哪一种：经典本 146 个首领的头像
              线上有文件、界面也拼得出地址；三座无限新本的 15 个首领是**源站就没有这张脸**
              （2026-10-13 抓的时候 0/15，今天重探仍 0/15），不是我们漏接。
              所以这里不再摆一个写"没有这张头像"的虚线空框——那看着像坏了。 */
           bosses: d.data && d.data.dungeon ? (d.data.dungeon.bosses || []).map((b) => ({
+            id: b.id,
             name: b.nameCn || b.id,
             missing: !b.nameCn,
             portraitUrl: oss.assetUrl(this.batch, b.portrait)

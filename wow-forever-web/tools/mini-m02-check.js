@@ -65,8 +65,27 @@ async function goto(url, ms) {
   }, url);
 }
 
+/* 9421 会话秒退（2026-11-08 起本机规律，与 mini-m01-check 同一个补法）：
+   cli auto 报成功后监听只活几秒，连不上就重拉 auto 再连，最多四轮。 */
+async function connectWithRetry() {
+  const cp = require('child_process');
+  const cli = 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\cli.bat';
+  const proj = path.resolve(__dirname, '..', '..', 'for-mini');
+  let lastErr = null;
+  for (let i = 0; i < 4; i++) {
+    try {
+      return await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9421' });
+    } catch (e) {
+      lastErr = e;
+      try { cp.execSync('"' + cli + '" auto --project "' + proj + '" --auto-port 9421', { stdio: 'ignore' }); } catch (e2) { /* 下轮再试 */ }
+      await new Promise((r) => setTimeout(r, 1200));
+    }
+  }
+  throw lastErr;
+}
+
 async function main() {
-  mp = await T(automator.connect({ wsEndpoint: 'ws://127.0.0.1:9421' }), 30000, 'connect');
+  mp = await connectWithRetry();
   await ev(() => { try { wx.clearStorageSync() } catch (e) {} return 1 });
 
   process.stdout.write('\nA. 职业技能速查（真 beta 批次）\n');
@@ -74,7 +93,8 @@ async function main() {
   const grid = await ev(() => {
     const d = getCurrentPages().pop().data;
     return { loaded: d.loaded, n: (d.classes || []).length, src: d.sourceText, build: d.buildId, err: d.errorText,
-      icons: (d.classes || []).map((c) => c.iconUrl), counts: (d.classes || []).map((c) => c.count) };
+      icons: (d.classes || []).map((c) => c.iconUrl), counts: (d.classes || []).map((c) => c.count),
+      ids: (d.classes || []).map((c) => c.classId || c.id) };
   });
   /* "实时数据（本机缓存，没重新下载）"也是 live：批次是当前批，只是字节没重下 */
   log('职业名单 9 条且来自实时数据', grid.loaded && grid.n === 9 && String(grid.src).indexOf('实时数据') === 0, JSON.stringify({ n: grid.n, src: grid.src, err: grid.err }));
@@ -87,7 +107,10 @@ async function main() {
   }
   log('职业图标在 bucket 上真取得到（200 + image/*）', badIcon.length === 0, badIcon.slice(0, 3).join(','));
   const sum = grid.counts.reduce((a, b) => a + b, 0);
-  log('职业条数加起来是 498（名单与分片同源）', sum === 498, String(sum));
+  /* 不抄死总数：11-05 日更把技能条数 498→493，钉 498 的断言自己变红——数据对、断言错（11-02 同款）。
+     要钉的是"名单有数且牧师这一格有数"，牧师那格拿去和分片对齐（下一条）。 */
+  const priestListed = (grid.ids || []).indexOf('priest') >= 0 ? grid.counts[(grid.ids || []).indexOf('priest')] : -1;
+  log('职业条数按名单加总为正、且牧师那格有数（不抄死总数）', sum > 0 && priestListed > 0, JSON.stringify({ sum: sum, priest: priestListed }));
   await shot('a1-spells-grid');
 
   const one = await ev(() => new Promise((res) => {
@@ -98,7 +121,10 @@ async function main() {
         need: d.needOnline, err: d.errorText, icon: (d.list || [])[0] ? (d.list || [])[0].iconUrl : '' });
     });
   }));
-  log('点开牧师只取这一片，56 条按三个系分组', one.cls === 'priest' && one.total === 56 && one.groups.length === 3 && !one.err, JSON.stringify(one));
+  /* 分片同源：分片里的条数要等于名单里牧师那格写的数——这才是"名单与分片同源"的本意 */
+  log('点开牧师只取这一片，条数与名单同源，按三个系分组',
+    one.cls === 'priest' && one.total === priestListed && one.groups.length === 3 && !one.err,
+    JSON.stringify({ total: one.total, priestListed: priestListed, groups: one.groups, err: one.err }));
   const rIcon = await head(one.icon);
   log('技能图标在 bucket 上真取得到', rIcon.code === 200 && rIcon.type.indexOf('image/') === 0, one.icon.split('/').pop() + '→' + rIcon.code);
   await shot('a2-spells-priest');
@@ -180,7 +206,12 @@ async function main() {
   }));
   log('查不到就是查不到（空态卡，不编一个相近的）', none === 0, String(none));
   const disc = await ev(() => { const d = getCurrentPages().pop().data; return { disc: d.disclaimer, note: d.qualityNote } });
-  log('页面带着"本站不写掉落几率"与品质四档说明', /不写|几率/.test(disc.disc) && /史诗/.test(disc.note), disc.disc.slice(0, 60));
+  /* 口径跟 2026-11-02 站主"撤说明类文案"的决定走：'本站不写掉落几率'那句已从界面撤下
+     （数据层 meta 照留），这条断言不再要求它出现；要钉的是品质四档说明还在。
+     disc 只记录状态不判生死，避免 undefined.slice 把整份门禁崩掉（11-02 的 rc=2 就是它）。 */
+  log('品质四档说明在页面上（几率免责句按 11-02 决定撤出界面）',
+    /史诗/.test(String(disc.note || '')),
+    JSON.stringify({ note: String(disc.note || '').slice(0, 40), disc: disc.disc === undefined || disc.disc === '' ? '（已撤出界面）' : String(disc.disc).slice(0, 40) }));
 
   process.stdout.write('\nC. 入口与结构\n');
   await goto('/pages/home/index', 7000);
@@ -207,12 +238,17 @@ async function main() {
   const CLASS_SNAP = require(path.join(REPO, 'for-mini/data/forever-class-snapshot.js'));
   const META_SNAP = require(path.join(REPO, 'for-mini/data/forever-meta-snapshot.js'));
   const expectRaces = (classId) => CLASS_SNAP.races.filter((r) => (r.classes || []).indexOf(classId) >= 0).map((r) => r.id);
-  log('开服倒计时这块在，日期取主包 meta 的 launch（界面不写死日期）',
-    !!home.cd && home.cd.on === true && home.cd.to === META_SNAP.launch && home.cd.d > 0,
-    JSON.stringify(home.cd));
-  /* 站主二次指令："只到天，不再做具体的秒表逻辑" → 读数里不许再出现时:分:秒 */
+  /* 开服倒计时两头都能跑（2026-11-05 07:00 北京已开服，这块按 11-03 口径整块消失、不留"0 天"）：
+     launch 没到 → 块在且 on=true、to 与 meta 同源；launch 已过 → cd 必须是 null。 */
+  const launchPast = Date.parse(META_SNAP.launch + 'T07:00:00+08:00') <= Date.now();
+  log('开服倒计时只认 meta 的 launch：没到点块在且日期同源，过了点整块消失（不留 0 天）',
+    launchPast
+      ? home.cd === null || home.cd === undefined
+      : !!home.cd && home.cd.on === true && home.cd.to === META_SNAP.launch && home.cd.d > 0,
+    JSON.stringify({ cd: home.cd, launch: META_SNAP.launch, past: launchPast }));
+  /* 站主二次指令："只到天，不再做具体的秒表逻辑" → 读数里不许再出现时:分:秒（开服后块没了也过） */
   log('倒计时只到天：读数里没有秒表字段，界面也没有',
-    home.cd && home.cd.clock === undefined && !/clock/.test(JSON.stringify(home.cd)),
+    !home.cd || (home.cd.clock === undefined && !/clock/.test(JSON.stringify(home.cd))),
     JSON.stringify(home.cd));
   log('职业格数量与主包职业快照一致',
     home.nClasses === CLASS_SNAP.classes.length && home.nClasses > 0, home.nClasses + ' vs ' + CLASS_SNAP.classes.length);
@@ -340,6 +376,39 @@ async function main() {
     /pages\/item\/index/.test(String(liveItem.route)) && liveItem.st > 0 && liveItem.need === false,
     JSON.stringify(liveItem));
   await shot('e6-item-detail-live');
+
+  /* 2026-11-09 真机踩的坑（站主截图）：详情页点首领跳掉落页一件都查不到——
+     navigateTo 传参编了码，onLoad 必须自己解回来；旧代码没解，筛选串是 %E9 编码串。
+     而且落地就得直接列这位首领掉的装备，不是让玩家再打一遍关键词。
+     这条按 onOpenBoss 的真实编码方式带参进页，钉「解码 + 直接出清单 + 清单全部属于这位首领」。 */
+  await goto('/pages/loots/index', 10000);
+  const bjSrc = await ev(() => new Promise((res) => {
+    const p = getCurrentPages().pop();
+    p.onKw({ detail: { value: '红玫瑰' } });
+    setTimeout(() => {
+      const x = (p.data.list || [])[0];
+      res(x ? { id: x.sources[0].dungeonId, name: x.sources[0].dungeon, boss: x.sources[0].boss } : null);
+    }, 900);
+  }));
+  if (bjSrc) {
+    const bjUrl = '/pages/loots/index?dungeon=' + encodeURIComponent(bjSrc.id)
+      + '&dname=' + encodeURIComponent(bjSrc.name) + '&boss=' + encodeURIComponent(bjSrc.boss);
+    await goto(bjUrl, 10000);
+    const bj = await ev(() => {
+      const p = getCurrentPages().pop();
+      const d = p.data || {};
+      return { route: p.route, fd: d.filterDungeon, fb: d.filterBoss, fn: d.filterDungeonName,
+        n: (d.list || []).length,
+        all: (d.list || []).every((x) => x.sources.every((s) => s.dungeonId === d.filterDungeon && s.boss === d.filterBoss)) };
+    });
+    log('点首领跳掉落页：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）',
+      /pages\/loots\/index/.test(String(bj.route)) && bj.fd === bjSrc.id && bj.fb === bjSrc.boss
+        && bj.fn === bjSrc.name && bj.n > 0 && bj.all,
+      JSON.stringify({ fd: bj.fd, fb: bj.fb, fn: bj.fn, n: bj.n, allMatch: bj.all }));
+    await shot('e7-loots-boss-filter');
+  } else {
+    log('点首领跳掉落页：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）', false, '没拿到种子来源（红玫瑰反查空）');
+  }
 
   process.stdout.write('\nF. 首页配图与天赋模拟器（2026-10-22 站主指令）\n');
   await goto('/pages/home/index', 7000);
@@ -572,6 +641,28 @@ async function main() {
     rowsWithId === cardTotal && cardBad.length === 0 && rowsWithId > 1000
       && bMan.counts.itemCards === cardTotal, JSON.stringify({ rowsWithId, cardTotal, bad: cardBad.slice(0, 3), n: bMan.counts.itemCards }));
 
+  /* —— 第一批新页的静态卡口（2026-11-08）：chooser 与副本任务段进了批次才算数 —— */
+  const chooserB = (() => { try { return JSON.parse(fs.readFileSync(path.join(bDir, 'chooser/chooser.json'), 'utf8')); } catch (e) { return null; } })();
+  log('chooser 进了批次：题目数与指针清单同源、每题选项带权重、口径句写明不是官方',
+    !!chooserB && !!bMan.fetch.chooser && chooserB.questions.length === bMan.fetch.chooser.records
+      && chooserB.questions.every((q) => (q.options || []).length >= 2 && (q.options || []).every((o) => o.weight && Object.keys(o.weight).length > 0))
+      && String(chooserB.meta.note || '').indexOf('不是官方') >= 0,
+    chooserB ? chooserB.questions.length + ' 题' : '批次里没有 chooser/chooser.json');
+  const detB = (() => { try { return JSON.parse(fs.readFileSync(path.join(bDir, 'dungeons/detail/blackrock-depths.json'), 'utf8')); } catch (e) { return null; } })();
+  log('副本详情分片带任务段（汇总 + 逐条行 + 核对日 + 接取 NPC/地点），任务并入详情同一片不发第二次',
+    !!detB && !!detB.quests && typeof detB.quests.summary === 'object' && (detB.quests.rows || []).length > 0 && !!detB.quests.checkedAt
+      && (detB.quests.rows || []).every((r) => 'pickupNpc' in r && 'pickupZone' in r)
+      && (detB.quests.rows || []).some((r) => r.pickupNpc || r.pickupZone),
+    detB && detB.quests ? (detB.quests.rows.length + ' 条 · 接取有值 ' + detB.quests.rows.filter((r) => r.pickupNpc || r.pickupZone).length + ' 条 · ' + detB.quests.checkedAt) : '没有 quests 字段');
+  await goto('/pages/dungeon/index?id=blackrock-depths', 9000);
+  const qp = await ev(() => {
+    const d = getCurrentPages().pop().data;
+    const r = ((d.quest || {}).rows || [])[0] || {};
+    return { n: ((d.quest || {}).rows || []).length, pick: r.pickup || '', none: !!r.pickupNone, name: r.name };
+  });
+  log('详情页任务行把"在哪接的"摆到界面数据里：首行带接取 NPC·地点，两条都缺就标"没记录"（不猜）',
+    qp.n > 0 && ((qp.pick !== '' && qp.none === false) || (qp.pick === '' && qp.none === true)), JSON.stringify(qp));
+
   /* —— 首页改版四段的静态卡口（不靠设备，纯文件与纯函数）—— */
   const cd = require(path.join(REPO, 'for-mini/services/countdown.js'));
   const LAUNCH = '2026-11-05';
@@ -595,6 +686,19 @@ async function main() {
   const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
   const homeJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.js'), 'utf8');
   const cdJs = fs.readFileSync(path.join(REPO, 'for-mini/services/countdown.js'), 'utf8');
+  /* 详情页四件（2026-11-09 站主）：点首领去掉落页只看那位掉的；「另一说法」「原画取自」两句撤下（只撤界面出口，数据不动） */
+  const djJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.js'), 'utf8');
+  const djWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
+  const djFace = djWxml.replace(/<!--[\s\S]*?-->/g, ' ');
+  log('详情页首领行可点：跳掉落页带副本与首领参数（看它掉什么）',
+    /onOpenBoss/.test(djJs) && /pages\/loots\/index\?dungeon=/.test(djJs)
+      && /bindtap="onOpenBoss"/.test(djFace) && /data-id="\{\{item\.id\}\}"/.test(djFace)
+      && /看它掉什么/.test(djFace),
+    'onOpenBoss + bindtap + data-id 在首领行');
+  log('11-09 撤下的两句不再出现在详情页：「另一说法：xx」「副本原画取自…」（js 里的 conflict/artNote 赋值也清了）',
+    djFace.indexOf('另一说法') < 0 && djFace.indexOf('原画取自') < 0 && !/ART_NOTE|artNote/.test(djJs)
+      && djJs.indexOf('nameCnConflict') < 0,
+    'wxml 与 js 都干净');
   /* 站主原话："多出来不要使用横向滚动条"——整页只许"最近看过"那一处用 scroll-x */
   log('职业格不用横向滚动（全页只有一处 scroll-x，是"最近看过"那条轨）',
     (homeWxml.match(/scroll-x/g) || []).length === 1 && /class="cls9"/.test(homeWxml) && homeWxml.indexOf('cls9') < homeWxml.indexOf('rail'),
@@ -605,10 +709,13 @@ async function main() {
       && !/goGuide/.test(homeFace) && !/entry-name">指南</.test(homeFace)
       && !/中英速查/.test(homeFace) && !/goGlossary/.test(homeJs),
     '注释里写着"从指南换成宏命令"不算界面文字，所以先把注释剥掉再比');
-  /* 日期只许来自 data/meta.json → 主包快照这一条链，界面与算法里都不许抄死值 */
+  /* 日期只许来自 data/meta.json → 主包快照这一条链，正文不许抄死值。
+     注释里的"站主 2026-11-03 确认开服钟点"这类开发记录不算界面文字（与上面"四张入口卡"
+     同一处理：先剥净注释再比）——11-03 口径注释追加后这条自己红过一次，是剥法不彻底，不是真写死。 */
+  const stripJs = (s) => s.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:"'])\/\/[^\n]*/gm, '$1 ');
   log('界面与倒计时模块里没有写死的开服日期（只认 meta 的 launch）',
-    !/2026-11-\d\d/.test(homeJs) && !/2026-11-\d\d/.test(homeWxml) && !/2026-\d\d-\d\d/.test(cdJs.replace(/^\/\*[\s\S]*?\*\//, '')),
-    'home.js / home.wxml / countdown.js 正文');
+    !/2026-11-\d\d/.test(stripJs(homeJs)) && !/2026-11-\d\d/.test(homeFace) && !/2026-\d\d-\d\d/.test(stripJs(cdJs)),
+    'home.js / home.wxml / countdown.js 正文（注释剥净后）');
   log('种族特长与可选种族都要图标加文字（模板里两处都渲染 icon-cell 与名字）',
     /size="cls"/.test(homeWxml) && /size="md"/.test(homeWxml) && /size="sm"/.test(homeWxml)
       && /t\.effect/.test(homeWxml) && /还没核到/.test(homeWxml));

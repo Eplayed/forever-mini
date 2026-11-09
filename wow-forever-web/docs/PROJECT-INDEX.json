@@ -1,6 +1,6 @@
 {
- "head": "d2860bd49e33cee4b051fcca46be325cb846f49b",
- "fingerprint": "008569320e3cb791e1407af871c737f60812afae69d75b03f29d955fb597e476",
+ "head": "36cd5ee969fb8f0ee31c549db8a1f5ae15509de0",
+ "fingerprint": "97ccdaa9f8f7864f5e07b024118f4ee8b8465ba5ffd6e2da06fbcbd743fc8726",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,8 +105,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 40552,
-   "mtimeNs": 1794145992079053000
+   "bytes": 42027,
+   "mtimeNs": 1794203877523069500
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 755949,
-   "mtimeNs": 1794146006110769500
+   "bytes": 771819,
+   "mtimeNs": 1794203907256334200
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -145,8 +145,8 @@
   },
   {
    "path": "for-mini/app.json",
-   "bytes": 1482,
-   "mtimeNs": 1793672110780376500
+   "bytes": 1510,
+   "mtimeNs": 1794149602080035900
   },
   {
    "path": "for-mini/components/icon-cell/index.js",
@@ -166,27 +166,27 @@
   {
    "path": "for-mini/data/forever-class-snapshot.js",
    "bytes": 11979,
-   "mtimeNs": 1794145443676573500
+   "mtimeNs": 1794200593369996800
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
    "bytes": 21977,
-   "mtimeNs": 1794145443676573500
+   "mtimeNs": 1794200593368989800
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
    "bytes": 14897,
-   "mtimeNs": 1794145443675575700
+   "mtimeNs": 1794200593367494900
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2189,
-   "mtimeNs": 1794145443675575700
+   "mtimeNs": 1794200593367494900
   },
   {
    "path": "for-mini/data/forever-names-snapshot.js",
    "bytes": 7581,
-   "mtimeNs": 1794145443676573500
+   "mtimeNs": 1794200593369996800
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -324,6 +324,11 @@
    "mtimeNs": 1793672110961598800
   },
   {
+   "path": "for-mini/docs/VERIFY-第一批专业开闸副本任务chooser-2026-11-08.md",
+   "bytes": 24448,
+   "mtimeNs": 1794203865258134200
+  },
+  {
    "path": "for-mini/docs/VERIFY-职业详情阵营框与分享-2026-10-22.md",
    "bytes": 7445,
    "mtimeNs": 1793510770163459800
@@ -361,37 +366,37 @@
   {
    "path": "for-mini/oss-preview/classes.json",
    "bytes": 42498,
-   "mtimeNs": 1794145441493654300
+   "mtimeNs": 1794200591211298000
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
    "bytes": 345484,
-   "mtimeNs": 1794145441490631100
+   "mtimeNs": 1794200591207771600
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
    "bytes": 84105,
-   "mtimeNs": 1794145441488127900
+   "mtimeNs": 1794200591205260700
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1794145441496164200
+   "mtimeNs": 1794200591213298900
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2095,
-   "mtimeNs": 1794145441491135400
+   "mtimeNs": 1794200591208281900
   },
   {
    "path": "for-mini/oss-preview/spells.json",
    "bytes": 443675,
-   "mtimeNs": 1794145441492648700
+   "mtimeNs": 1794200591210793900
   },
   {
    "path": "for-mini/oss-preview/talents.json",
    "bytes": 430044,
-   "mtimeNs": 1794145441496164200
+   "mtimeNs": 1794200591213298900
   },
   {
    "path": "for-mini/pages/bis/index.js",
@@ -402,6 +407,16 @@
    "path": "for-mini/pages/bis/index.json",
    "bytes": 238,
    "mtimeNs": 1793672110836985400
+  },
+  {
+   "path": "for-mini/pages/chooser/index.js",
+   "bytes": 4318,
+   "mtimeNs": 1794149657649359600
+  },
+  {
+   "path": "for-mini/pages/chooser/index.json",
+   "bytes": 50,
+   "mtimeNs": 1794149649475353700
   },
   {
    "path": "for-mini/pages/class/index.js",
@@ -415,8 +430,8 @@
   },
   {
    "path": "for-mini/pages/classes/index.js",
-   "bytes": 6371,
-   "mtimeNs": 1793672922038283700
+   "bytes": 6554,
+   "mtimeNs": 1794149691118366500
   },
   {
    "path": "for-mini/pages/classes/index.json",
@@ -425,8 +440,8 @@
   },
   {
    "path": "for-mini/pages/dungeon/index.js",
-   "bytes": 11205,
-   "mtimeNs": 1793672917350222400
+   "bytes": 13068,
+   "mtimeNs": 1794192576583943700
   },
   {
    "path": "for-mini/pages/dungeon/index.json",
@@ -485,8 +500,8 @@
   },
   {
    "path": "for-mini/pages/loots/index.js",
-   "bytes": 5020,
-   "mtimeNs": 1793672922677502700
+   "bytes": 7072,
+   "mtimeNs": 1794198986798268400
   },
   {
    "path": "for-mini/pages/loots/index.json",
@@ -535,8 +550,8 @@
   },
   {
    "path": "for-mini/pages/professions/index.js",
-   "bytes": 14616,
-   "mtimeNs": 1793672907956344300
+   "bytes": 14701,
+   "mtimeNs": 1794190253993272100
   },
   {
    "path": "for-mini/pages/professions/index.json",
@@ -580,8 +595,8 @@
   },
   {
    "path": "for-mini/services/oss-manifest.js",
-   "bytes": 35607,
-   "mtimeNs": 1793672110855280300
+   "bytes": 36366,
+   "mtimeNs": 1794149595694882100
   },
   {
    "path": "for-mini/services/quality.js",
@@ -1684,6 +1699,11 @@
    "mtimeNs": 1793510772636841000
   },
   {
+   "path": "wow-forever-web/docs/PLAN-功能盘点与候选-2026-11-08.md",
+   "bytes": 8375,
+   "mtimeNs": 1794149209818835600
+  },
+  {
    "path": "wow-forever-web/docs/PLAN-区域地图按OpenMap那套重做-2026-10-28.md",
    "bytes": 8289,
    "mtimeNs": 1793510772637840500
@@ -1737,6 +1757,11 @@
    "path": "wow-forever-web/docs/PLAN-系统图文攻略系列-2026-10-22.md",
    "bytes": 15396,
    "mtimeNs": 1793510772641345200
+  },
+  {
+   "path": "wow-forever-web/docs/PLAN-素材库视频侧重分析-2026-11-08.md",
+   "bytes": 5331,
+   "mtimeNs": 1794148941539898300
   },
   {
    "path": "wow-forever-web/docs/PLAN-网页交互动效-2026-10-29.md",
@@ -2539,6 +2564,11 @@
    "mtimeNs": 1794145925269624300
   },
   {
+   "path": "wow-forever-web/tools/extract-questie-full.py",
+   "bytes": 8428,
+   "mtimeNs": 1794200432404041900
+  },
+  {
    "path": "wow-forever-web/tools/extract-questie-quests-cn.py",
    "bytes": 17346,
    "mtimeNs": 1794145867579689900
@@ -2635,8 +2665,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-dungeon-quests.py",
-   "bytes": 15755,
-   "mtimeNs": 1793510776815043400
+   "bytes": 22936,
+   "mtimeNs": 1794200573001342700
   },
   {
    "path": "wow-forever-web/tools/merge-dungeons.js",
@@ -2675,8 +2705,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-professions.js",
-   "bytes": 4657,
-   "mtimeNs": 1793510776820394900
+   "bytes": 5117,
+   "mtimeNs": 1794190200782216900
   },
   {
    "path": "wow-forever-web/tools/merge-spells.py",
@@ -2700,13 +2730,13 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 91219,
-   "mtimeNs": 1793674477053325100
+   "bytes": 94195,
+   "mtimeNs": 1794198848544419400
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
-   "bytes": 71877,
-   "mtimeNs": 1793679649380179600
+   "bytes": 80182,
+   "mtimeNs": 1794199000617076600
   },
   {
    "path": "wow-forever-web/tools/nga-daily.sh",
@@ -2735,8 +2765,8 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 193383,
-   "mtimeNs": 1793672110879136000
+   "bytes": 197022,
+   "mtimeNs": 1794190774214590300
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",

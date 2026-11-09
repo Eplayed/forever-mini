@@ -188,3 +188,24 @@
   margin: 12rpx 0;
   font-size: 21rpx;
 }
+
+/* 只看某座本某位首领的筛选条（2026-11-09 从详情页首领跳过来时显示） */
+.filter-bar {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 16rpx;
+  border-left: 4rpx solid var(--gold);
+  background: var(--gold-glow);
+}
+
+.filter-t {
+  font-size: 24rpx;
+  color: var(--txt);
+}
+
+.filter-x {
+  font-size: 24rpx;
+  color: var(--txt-hint);
+}

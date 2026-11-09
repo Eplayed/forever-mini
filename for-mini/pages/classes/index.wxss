@@ -29,6 +29,38 @@
   margin-bottom: 12rpx;
 }
 
+/* 职业怎么选入口（2026-11-08 第一批③）：lead 下方一条整宽卡，箭头用 --gold，
+   说明句小一号压 --txt-dim；问卷本体在 chooser 页，这里只负责把人带过去 */
+.chooser-card {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 6rpx;
+}
+
+.cc-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.cc-t {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--txt-title);
+}
+
+.cc-s {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+.cc-go {
+  margin-left: 12rpx;
+  font-size: 34rpx;
+  color: var(--gold);
+}
+
 /* 组合卡：一排三个，图标在上、整名在下（2026-10-22 站主指令）。
    与首页职业格同一套思路——flex 换行，不做横向滚动 */
 .combo3 {

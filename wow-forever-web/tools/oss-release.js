@@ -116,7 +116,14 @@ const BUDGET_KB = {
   /* 起名词库线（2026-11-03）：索引 9 职业条约 3 KB；单片一个职业（3–4 专精 × 50 名 ≈ 5 KB）。
      80 / 16 给"站主往库里补名字"留余量；哪天顶破，方向是按专精拆片，不是抬预算。 */
   'names/index': 80,
-  nameClass: 16
+  nameClass: 16,
+  /* 副本任务线（2026-11-08 站主第一批②）：任务不单开分片，并进每座本的详情分片
+     （det.quests，396 条摊在 35 座上，平均每座约 11 条）。detail 的 32 KB 是按
+     "详情行 + 首领 + 路线"定的，任务并入后实测最大一片涨多少在构建里看；
+     哪天顶破，方向是任务单独一片，不是抬这条预算。 */
+  /* 职业选择器（2026-11-08 站主第一批③）：七题问卷整份一文件（实测约 4 KB）。
+     16 KB 给"以后加题、加说明"留余量；它是进页才取的一次性流量，不是冷启动路径。 */
+  chooser: 16
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -137,7 +144,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    不进 oss-preview 导出产物，理由同 items 那两条。 */
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
-const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -532,6 +539,29 @@ function buildBatch(env, opts) {
   const geoPack = fs.existsSync(geoPath) ? readJson(geoPath) : null;
   const geoById = (geoPack && geoPack.dungeons) || {};
 
+  /* —— 副本任务线（2026-11-08 站主第一批②）：dungeon-quests.json 在构建时并进详情分片 ——
+     与 items/bis 同一模式：只喂分发层、不进导出产物（已在 BASE_INPUTS 登记，哈希跟批次走）。
+     名单外的副本 id 在这里拦下：那说明 merge 快照和名录漂了，先修数据再发批次。 */
+  const dqSrc = path.join(siteData(), 'dungeon-quests.json');
+  if (!fs.existsSync(dqSrc)) errors.push('缺少基底 app/data/dungeon-quests.json，副本任务线没有数据来源');
+  const dqPack = fs.existsSync(dqSrc) ? readJson(dqSrc) : null;
+  const dqById = (dqPack && dqPack.dungeons) || {};
+  let dqRows = 0;
+  Object.keys(dqById).forEach((k) => {
+    if (!list.some((d) => d.id === k)) errors.push('副本任务线里有副本名单外的 id：' + k);
+    dqRows += ((dqById[k] || {}).quests || []).length;
+  });
+  if (dqPack && !dqRows) errors.push('副本任务线 0 条任务：dungeon-quests.json 在但没有可显示的内容，先跑 tools/merge-dungeon-quests.js');
+
+  /* —— 职业选择器（2026-11-08 站主第一批③）：chooser.json 原样进分发层 ——
+     meta.note 是口径句（本站整理、不是官方推荐），客户端形状校验会盯它必须带着。 */
+  const chooserSrc = path.join(siteData(), 'chooser.json');
+  if (!fs.existsSync(chooserSrc)) errors.push('缺少基底 app/data/chooser.json，职业选择器没有数据来源');
+  const chooserPack = fs.existsSync(chooserSrc) ? readJson(chooserSrc) : null;
+  if (chooserPack && (!Array.isArray(chooserPack.questions) || !chooserPack.questions.length)) {
+    errors.push('职业选择器问卷 0 题：chooser.json 在但没有题目');
+  }
+
   /* —— 卡口（与根 AGENTS.md 第五条同一口径，导出这层再拦一次） —— */
   if (!list.length) errors.push('副本 0 条');
   const ids = list.map((d) => d.id);
@@ -620,6 +650,28 @@ function buildBatch(env, opts) {
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
     const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
+    /* 任务线（2026-11-08 第一批②）并进详情分片：玩家进详情页那一屏顺手就看到
+       "这座本有什么任务"，不再发第二次请求——与装备详情卡并进掉落分片同一个理由。
+       只带界面要读的字段。2026-11-09 站主要求补上"在哪接的"：实测 pickupNpc 336/396、
+       pickupZone 300/396 有值（当初"缺得厉害"的判断不成立），缺哪段不发哪段，界面照实留白。 */
+    const dq = dqById[d.id] || null;
+    if (dq) {
+      det.quests = {
+        summary: dq.summary || null,
+        note: (dqPack && dqPack.meta && dqPack.meta.pageNote) || null,
+        checkedAt: (dqPack && dqPack.meta && dqPack.meta.generatedAt) || null,
+        rows: (dq.quests || []).map((x) => ({
+          nameCn: x.nameCn || null,
+          nameEn: x.nameEn || null,
+          questLevel: x.questLevel === undefined ? null : x.questLevel,
+          reqLevel: x.reqLevel === undefined ? null : x.reqLevel,
+          xp: x.xp === undefined ? null : x.xp,
+          pickupNpc: (x.pickupNpc || '').trim() || null,
+          pickupZone: (x.pickupZone || '').trim() || null,
+          source: x.source || null
+        }))
+      };
+    }
     pushObj('dungeonDetail:' + d.id, 'dungeons/detail/' + d.id + '.json', det, {
       records: 1, budget: 'detail', facts: collectFactDates([d])
     });
@@ -1547,6 +1599,21 @@ function buildBatch(env, opts) {
     errors.push('缺少起名基底 app/data/name-generator.json，起名页没有数据来源')
   }
 
+  /* —— 职业选择器（2026-11-08 站主第一批③）：整份一文件，进页取一次 ——
+     问卷与权重是本站整理的玩法归类（meta.kind=site-opinion），不是官方推荐、
+     也不是强度排行（meta.notRanked=true）；客户端本地算分，服务器不做任何计算。 */
+  if (chooserPack) {
+    pushObj('chooser', 'chooser/chooser.json', {
+      schemaVersion: SCHEMA_VERSION,
+      product: PRODUCT,
+      kind: 'chooser',
+      source: 'wow-forever-web/app/data/chooser.json',
+      meta: chooserPack.meta,
+      counts: { questions: chooserPack.questions.length },
+      questions: chooserPack.questions
+    }, { records: chooserPack.questions.length, budget: 'chooser' })
+  }
+
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
@@ -1792,20 +1859,18 @@ function buildBatch(env, opts) {
     },
     integrity: {
       method: 'etag',
-      clientChecks: [
-        '指针里 fetch.* 与 bundle 都带 Content-MD5(base64) + ETag(hex) + bytes：入口文件（meta / glossary / dungeons/index / spells/classes）按指针给的值校验',
-        '客户端优先比响应的 Content-MD5，退化才比 ETag——真 bucket 上 wx.request 收到 gzip 变体时 ETag 会被剥掉，只剩 Content-MD5（2026-10-21 实测）',
-        '索引每条自带 detailEtag / detailBytes / lootEtag / lootBytes：进详情、看掉落时按索引给的值校验，不必先取 files.json',
-        '职业分片的校验值随 spells/classes.json 的每个职业条目下发（shardEtag / shardMd5 / shardBytes），点开哪个职业才取哪一片',
-        '掉落反查表 loots/index.json 是一个整块：一次 GET 换"任何一件装备都能查"，行用位置数组存，列名写在 cols 里',
-        '每件装备的详情行（属性行/装等/卖价/状态）与掉落名单同在 dungeons/loot/{id}.json：点的那件一定在刚打开的这座本里，不再发第二次请求',
-        '这一批的每个文件都带 buildId / product / schemaVersion / kind（副本类分片还带所属副本 id，职业分片带 classId），客户端五项齐验：etag、bytes、buildId、kind、id',
-        '分片路径由条目里的 id 现推并与 detailPath/lootPath/shardPath 比对，对不上就不发请求——写坏一条路径也走不出 builds/{buildId}/',
-        '任一项不符就整条当失败，走缓存或打包快照并在界面标出来，不许拿对不上内容的数据当实时'
-      ],
-      whatItIsNot: '这是"取回的字节是不是清单里那一份"的传输/存储完整性校验（比对服务器自己算的 MD5 ETag），不是抗伪造的内容签名，也不保证上游没写错事实——事实靠 provenance 与红线卡口。',
-      serverSide: '逐文件 SHA-256 由构建端算、写进 files.json，并由 `verify` 子命令在发布后逐个回读比对。',
-      trustRoot: '指针 manifest.json 自己不做哈希自证：它是信任根，靠 HTTPS + bucket 权限 + max-age=60 的新鲜度。'
+      /* 客户端校验清单的完整口径挪进这里（2026-11-08）：它不随批次变化，
+         却曾以 9 条长文案每批重复约 1.7 KB——真源在代码里，清单只留一行指针。
+         九条是：①入口文件按指针校验（Content-MD5 优先，gzip 变体剥 ETag 时退化比 ETag）；
+         ②索引每条自带 detail/loot 的 etag+bytes，进详情不必先取 files.json；
+         ③职业分片校验值随 spells/classes 每条下发，点谁取谁；
+         ④掉落反查表整块换"任何一件都能查"，行用位置数组+cols 列名；
+         ⑤装备详情行与掉落同片，不再发第二次请求；
+         ⑥每文件五项齐验（etag/bytes/buildId/kind/id）；
+         ⑦分片路径现推并与声明的 path 比对，对不上不发请求；
+         ⑧任一不符整条失败走缓存，不拿对不上的数据冒充实时的；
+         ⑨这是传输完整性校验，不是内容签名，事实靠 provenance 与红线卡口。 */
+      clientChecksNote: '九项客户端校验的完整口径见生成器 oss-release.js integrity 注释；此处不再逐批重复。'
     },
     pointer: { key: ns + '/manifest.json', cacheControl: POINTER_CACHE },
     fetch: {
@@ -1820,13 +1885,15 @@ function buildBatch(env, opts) {
       bisItems: bisItemsObj ? shared(pickFile('bisItems')) : undefined,
       professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined,
       macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined,
-      nameGenerator: namesIndexObj ? shared(pickFile('nameGenerator')) : undefined
+      nameGenerator: namesIndexObj ? shared(pickFile('nameGenerator')) : undefined,
+      chooser: chooserPack ? shared(pickFile('chooser')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
 
   if (manifest.counts.bytes && Buffer.byteLength(JSON.stringify(manifest, null, 1)) > BUDGET_KB.manifest * 1024) {
-    errors.push('指针清单超过 ' + BUDGET_KB.manifest + ' KB，冷启动代价太大，把明细挪进 bundle');
+    const manifestKb = (Buffer.byteLength(JSON.stringify(manifest, null, 1)) / 1024).toFixed(1);
+    errors.push('指针清单 ' + manifestKb + ' KB 超过 ' + BUDGET_KB.manifest + ' KB，冷启动代价太大，把明细挪进 bundle');
   }
   if (bundleBuf.length > BUDGET_KB.bundle * 1024) errors.push('files.json 超过 ' + BUDGET_KB.bundle + ' KB');
   if (errors.length) return { errors };

@@ -137,6 +137,11 @@ Page({
     wx.navigateTo({ url: '/pages/class/index?classId=' + encodeURIComponent(id) })
   },
 
+  /* 职业怎么选（2026-11-08 第一批③）：七题问卷独立页，答完给方向参考 */
+  onOpenChooser() {
+    wx.navigateTo({ url: '/pages/chooser/index' })
+  },
+
   /* 组合格：有职业的开这个职业的天赋页；只有种族没有职业的那一格（"天裔"——
      公告里它是"首次登场的种族"，不属于哪个新组合）就选中原族、把下面那块详情铺出来。
      点了没反应的那一格不许留在页面上。 */

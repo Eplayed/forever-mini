@@ -12,6 +12,11 @@
   <view class="lead plate">
     <view class="lead-t">掉落反查</view>
     <view class="lead-s">输入装备或物品的中文名，或物品编号，查它是哪座本、哪个首领掉的。{{qualityNote}}</view>
+    <!-- 从副本详情点首领跳过来时只看那一位掉的（2026-11-09）；叉掉恢复全表 -->
+    <view wx:if="{{filterDungeon || filterBoss}}" class="filter-bar" bindtap="onClearFilter">
+      <text class="filter-t">只看：{{filterDungeonName || filterDungeon}}{{filterBoss ? ' · ' + filterBoss : ''}} 掉的装备</text>
+      <text class="filter-x">看全表 ×</text>
+    </view>
   </view>
 
   <view class="search">
@@ -21,8 +26,14 @@
 
   <view wx:if="{{!loaded}}" class="card muted">正在取掉落表…（第一次约 115 KB，之后走本机缓存）</view>
 
-  <view wx:if="{{loaded && !kw}}" class="card empty">
+  <view wx:if="{{loaded && !kw && !filterDungeon && !filterBoss}}" class="card empty">
     <view>先输入要查的东西。</view>
+  </view>
+
+  <!-- 从副本详情点首领跳过来时：清单直接给（不用再输关键词）；这位首领没收录掉落就照实说 -->
+  <view wx:if="{{loaded && !kw && (filterDungeon || filterBoss) && !list.length}}" class="card empty">
+    <view>这位首领（或这座本）在本站收录的掉落里还没有记录。</view>
+    <view class="muted">可能是掉落还没收进表，也可能是名字写法不一样。点上面的「看全表」可以回到全部掉落。</view>
   </view>
 
   <view wx:if="{{loaded && kw && !list.length}}" class="card empty">

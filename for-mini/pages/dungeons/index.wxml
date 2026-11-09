@@ -49,7 +49,6 @@
       <view class="muted drow-en">
         <text wx:if="{{!item.enMissing}}" class="drow-nameen">{{item.nameEn}}</text>
         <text wx:else class="todo">英文名待补</text>
-        <text wx:if="{{item.nameCnConflict}}" class="conflict">另一说法：{{item.nameCnConflict}}</text>
       </view>
       <view class="drow-meta">
         <text class="tag">{{item.kindLabel}}</text>

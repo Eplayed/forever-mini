@@ -12,7 +12,13 @@
    "addedFromWowhead": 1,
    "deduped": 41,
    "itemStart": 50,
-   "fromGi": 29
+   "fromGi": 29,
+   "questieBridged": 342,
+   "questieAmbiguous": 54,
+   "npcFromQuestie": 9,
+   "npcFromQuestieEn": 6,
+   "zoneFromQuestie": 63,
+   "questieSeats": 18
   }
  },
  "dungeons": {
@@ -38,42 +44,45 @@
      "questLevel": 15,
      "reqLevel": 10,
      "xp": 1050,
-     "pickupNpc": null,
+     "pickupNpc": "Afadra Dunwall",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "The Restless Dead"
+     "nameEn": "The Restless Dead",
+     "npcFrom": "questie"
     },
     {
      "nameCn": "重要的传家宝",
      "questLevel": 15,
      "reqLevel": 10,
      "xp": 1350,
-     "pickupNpc": null,
+     "pickupNpc": "Thom Filch",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "Important Heirlooms"
+     "nameEn": "Important Heirlooms",
+     "npcFrom": "questie"
     },
     {
      "nameCn": "旧铁炉堡入侵",
      "questLevel": 16,
      "reqLevel": 9,
      "xp": 1450,
-     "pickupNpc": null,
+     "pickupNpc": "Earthseer Farsen",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "Old Ironforge Incursion"
+     "nameEn": "Old Ironforge Incursion",
+     "npcFrom": "questie"
     }
    ],
    "questItems": [
@@ -109,6 +118,12 @@
      "url": "https://www.wowhead.com/forever/zone=16919/the-hall-of-thanes",
      "note": "wclbox 没给的那几项经验值与任务，按站主定的顺序退到这份来源",
      "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -132,42 +147,45 @@
      "questLevel": 22,
      "reqLevel": 15,
      "xp": 2200,
-     "pickupNpc": null,
+     "pickupNpc": "Tabitha Heartweaver",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "A Frightened Request"
+     "nameEn": "A Frightened Request",
+     "npcFrom": "questie"
     },
     {
      "nameCn": "圣光的正义",
      "questLevel": 22,
      "reqLevel": 15,
      "xp": 2200,
-     "pickupNpc": null,
+     "pickupNpc": "Morbin Lightbane",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "Light's Justice"
+     "nameEn": "Light's Justice",
+     "npcFrom": "questie"
     },
     {
      "nameCn": "拉斯玛尔之怒",
      "questLevel": 22,
      "reqLevel": 15,
      "xp": 2200,
-     "pickupNpc": null,
+     "pickupNpc": "Deathguard Kristof",
      "pickupZone": null,
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
-     "nameEn": "The Wrath of Rath'mael"
+     "nameEn": "The Wrath of Rath'mael",
+     "npcFrom": "questie"
     },
     {
      "nameCn": "洛丹伦纹章",
@@ -286,6 +304,12 @@
      "url": "https://www.wowhead.com/forever/zone=16611/ruins-of-lordaeron",
      "note": "wclbox 没给的那几项经验值与任务，按站主定的顺序退到这份来源",
      "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -337,11 +361,12 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "湿地",
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "打开巨口",
@@ -402,11 +427,12 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "湿地",
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "心织",
@@ -415,11 +441,12 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "湿地",
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "失落圣物的运送",
@@ -428,11 +455,12 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "湿地",
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "高地兽皮",
@@ -494,6 +522,12 @@
      "url": "https://www.wowhead.com/forever/zone=16732/x",
      "note": "任务名/等级/接取人取自 GearInsight_Forever 0.4.29 的 DungeonQuestData（自述源：Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，中文名 vmangos+游戏内现读）。直采该 zone 时任务名多为方括号「未记录」串，故走此转述源；该源没给经验值，经验列留空",
      "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -675,11 +709,12 @@
      "reqLevel": 24,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "暴风城",
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "力量之源",
@@ -715,6 +750,12 @@
      "url": "https://www.wowhead.com/forever/zone=16544/x",
      "note": "任务名/等级/接取人取自 GearInsight_Forever 0.4.29 的 DungeonQuestData（自述源：Wowhead Forever 1.60.1 经 Dungeon Assistant 转手，中文名 vmangos+游戏内现读）。直采该 zone 时任务名多为方括号「未记录」串，故走此转述源；该源没给经验值，经验列留空",
      "checkedAt": "2026-10-13"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -1021,11 +1062,12 @@
      "reqLevel": 15,
      "xp": 2650,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "贫瘠之地",
      "startItem": "发光的碎片",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "哈缪尔·符文图腾",
@@ -1200,6 +1242,12 @@
      "url": "https://wowforever.wclbox.com/fuben/wailing-caverns",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -1863,11 +1911,12 @@
      "reqLevel": 28,
      "xp": 2700,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "诺莫瑞根",
      "startItem": "脏兮兮的戒指",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "拯救尖端机器人！",
@@ -2282,6 +2331,12 @@
      "url": "https://wowforever.wclbox.com/fuben/gnomeregan",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -3253,11 +3308,12 @@
      "reqLevel": 37,
      "xp": 3300,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "荒芜之地",
      "startItem": "破碎的项链",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "昂贵的知识",
@@ -3732,6 +3788,12 @@
      "url": "https://wowforever.wclbox.com/fuben/uldaman",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -4029,11 +4091,12 @@
      "reqLevel": 41,
      "xp": 5700,
      "pickupNpc": "赎罪的塞雷布拉斯",
-     "pickupZone": null,
+     "pickupZone": "凄凉之地",
      "startItem": null,
      "preQuest": "玛拉顿的传说",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "生命之种",
@@ -4041,11 +4104,12 @@
      "reqLevel": 45,
      "xp": 6100,
      "pickupNpc": "扎尔塔的灵魂",
-     "pickupZone": null,
+     "pickupZone": "凄凉之地",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "暗影残片",
@@ -4220,6 +4284,12 @@
      "url": "https://wowforever.wclbox.com/fuben/maraudon",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -4291,11 +4361,12 @@
      "reqLevel": 60,
      "xp": 6600,
      "pickupNpc": "玛法里奥·怒风",
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "进入阿塔哈卡神庙",
@@ -4464,6 +4535,12 @@
      "url": "https://wowforever.wclbox.com/fuben/sunken-temple",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -4475,11 +4552,12 @@
      "reqLevel": 1,
      "xp": null,
      "pickupNpc": "罗克诺特下士",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "黑铁的遗产",
@@ -4523,11 +4601,12 @@
      "reqLevel": 50,
      "xp": 5450,
      "pickupNpc": "娜玛拉小姐",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "鬼魂之杯",
@@ -4535,11 +4614,12 @@
      "reqLevel": 40,
      "xp": 575,
      "pickupNpc": "鬼魂之杯",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "山脉之心",
@@ -4571,11 +4651,12 @@
      "reqLevel": 60,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": "瑟银兄弟会契约",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "挑战",
@@ -4607,11 +4688,12 @@
      "reqLevel": 48,
      "xp": 5450,
      "pickupNpc": "温德索尔元帅",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "温德索尔元帅",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "霍尔雷·黑须",
@@ -4667,11 +4749,12 @@
      "reqLevel": 50,
      "xp": 6200,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": "弄皱的便笺",
      "preQuest": "被遗弃的希望",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "一丝希望",
@@ -4679,11 +4762,12 @@
      "reqLevel": 50,
      "xp": 6200,
      "pickupNpc": "温德索尔元帅",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "弄皱的便笺",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "冲破牢笼！",
@@ -4691,11 +4775,12 @@
      "reqLevel": 50,
      "xp": 7750,
      "pickupNpc": "温德索尔元帅",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "一丝希望",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "卡兰·巨锤",
@@ -4715,11 +4800,12 @@
      "reqLevel": 50,
      "xp": 1600,
      "pickupNpc": "卡兰·巨锤",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "糟糕的消息",
@@ -4727,11 +4813,12 @@
      "reqLevel": 50,
      "xp": 6400,
      "pickupNpc": "卡兰·巨锤",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "卡兰·巨锤",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "王国的命运",
@@ -4751,11 +4838,12 @@
      "reqLevel": 50,
      "xp": 9650,
      "pickupNpc": "铁炉堡公主茉艾拉·铜须",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "王国的命运",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "指挥官哥沙克",
@@ -4931,11 +5019,12 @@
      "reqLevel": 48,
      "xp": 9950,
      "pickupNpc": "铁炉堡公主茉艾拉·铜须",
-     "pickupZone": null,
+     "pickupZone": "燃烧平原",
      "startItem": null,
      "preQuest": "拯救公主",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     }
    ],
    "questItems": [
@@ -5296,6 +5385,12 @@
      "url": "https://wowforever.wclbox.com/fuben/blackrock-depths",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -5379,11 +5474,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "迦罗娜：潜行与诡计研究",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "防御宝典",
@@ -5391,11 +5487,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "防御宝典",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "奥法师的食谱",
@@ -5403,11 +5500,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "奥法师的食谱",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "圣光之力",
@@ -5415,11 +5513,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "圣光之力",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "束缚之影",
@@ -5427,11 +5526,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "束缚之影",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "最伟大的猎手",
@@ -5439,11 +5539,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "最伟大的猎手",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "光明不会告诉你的事情",
@@ -5451,11 +5552,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "光明不会告诉你的事情",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "你与冰霜震击",
@@ -5463,11 +5565,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "你与冰霜震击",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "翡翠梦境……",
@@ -5475,11 +5578,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "翡翠梦境",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "诺斯特罗的屠龙技术纲要",
@@ -5487,23 +5591,25 @@
      "reqLevel": 60,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "诺斯特罗的屠龙技术纲要",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "铸造奎尔塞拉",
      "questLevel": 60,
      "reqLevel": 60,
      "xp": 7050,
-     "pickupNpc": null,
+     "pickupNpc": "博学者莱德罗斯",
      "pickupZone": null,
      "startItem": "黯淡的精灵剑",
      "preQuest": "诺斯特罗的屠龙技术纲要",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "npcFrom": "questie"
     },
     {
      "nameCn": "安泰恩的老朋友",
@@ -6002,6 +6108,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-east",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -6121,11 +6233,12 @@
      "reqLevel": 55,
      "xp": 7050,
      "pickupNpc": "皮普·急智",
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "恶魔熔炉",
@@ -6157,11 +6270,12 @@
      "reqLevel": 55,
      "xp": 6600,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": "黑手的命令",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "瓦塔拉克饰品的左瓣",
@@ -6277,11 +6391,12 @@
      "reqLevel": 55,
      "xp": 6850,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": "达基萨斯将军的命令",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "座狼的首领",
@@ -6690,6 +6805,12 @@
      "url": "https://wowforever.wclbox.com/fuben/lower-blackrock-spire",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -6797,11 +6918,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "迦罗娜：潜行与诡计研究",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "防御宝典",
@@ -6809,11 +6931,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "防御宝典",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "奥法师的食谱",
@@ -6821,11 +6944,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "奥法师的食谱",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "圣光之力",
@@ -6833,11 +6957,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "圣光之力",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "束缚之影",
@@ -6845,11 +6970,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "束缚之影",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "最伟大的猎手",
@@ -6857,11 +6983,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "最伟大的猎手",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "光明不会告诉你的事情",
@@ -6869,11 +6996,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "光明不会告诉你的事情",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "你与冰霜震击",
@@ -6881,11 +7009,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "你与冰霜震击",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "翡翠梦境……",
@@ -6893,11 +7022,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "翡翠梦境",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "诺斯特罗的屠龙技术纲要",
@@ -6905,23 +7035,25 @@
      "reqLevel": 60,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "诺斯特罗的屠龙技术纲要",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "铸造奎尔塞拉",
      "questLevel": 60,
      "reqLevel": 60,
      "xp": 7050,
-     "pickupNpc": null,
+     "pickupNpc": "博学者莱德罗斯",
      "pickupZone": null,
      "startItem": "黯淡的精灵剑",
      "preQuest": "诺斯特罗的屠龙技术纲要",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "npcFrom": "questie"
     },
     {
      "nameCn": "安泰恩的老朋友",
@@ -7468,6 +7600,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-north",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -7539,11 +7677,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "迦罗娜：潜行与诡计研究",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "防御宝典",
@@ -7551,11 +7690,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "防御宝典",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "奥法师的食谱",
@@ -7563,11 +7703,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "奥法师的食谱",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "圣光之力",
@@ -7575,11 +7716,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "圣光之力",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "束缚之影",
@@ -7587,11 +7729,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "束缚之影",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "最伟大的猎手",
@@ -7599,11 +7742,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "最伟大的猎手",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "光明不会告诉你的事情",
@@ -7611,11 +7755,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "光明不会告诉你的事情",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "你与冰霜震击",
@@ -7623,11 +7768,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "你与冰霜震击",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "翡翠梦境……",
@@ -7635,11 +7781,12 @@
      "reqLevel": 54,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "翡翠梦境",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "诺斯特罗的屠龙技术纲要",
@@ -7647,23 +7794,25 @@
      "reqLevel": 60,
      "xp": 7050,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "菲拉斯",
      "startItem": "诺斯特罗的屠龙技术纲要",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "铸造奎尔塞拉",
      "questLevel": 60,
      "reqLevel": 60,
      "xp": 7050,
-     "pickupNpc": null,
+     "pickupNpc": "博学者莱德罗斯",
      "pickupZone": null,
      "startItem": "黯淡的精灵剑",
      "preQuest": "诺斯特罗的屠龙技术纲要",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "npcFrom": "questie"
     },
     {
      "nameCn": "安泰恩的老朋友",
@@ -8102,6 +8251,12 @@
      "url": "https://wowforever.wclbox.com/fuben/dire-maul-west",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -8125,11 +8280,12 @@
      "reqLevel": 55,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "东瘟疫之地",
      "startItem": "健康的龙鳞",
      "preQuest": "瘟疫之龙",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "黎明先锋",
@@ -8400,6 +8556,12 @@
      "url": "https://wowforever.wclbox.com/fuben/scholomance",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -8483,11 +8645,12 @@
      "reqLevel": 55,
      "xp": 8300,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "斯坦索姆",
      "startItem": "巴纳扎尔的头颅",
      "preQuest": "档案管理员",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "永不安息的灵魂",
@@ -8704,6 +8867,12 @@
      "url": "https://wowforever.wclbox.com/fuben/stratholme-main-gate",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -8787,11 +8956,12 @@
      "reqLevel": 55,
      "xp": 8300,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "斯坦索姆",
      "startItem": "巴纳扎尔的头颅",
      "preQuest": "档案管理员",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "超越",
@@ -9056,6 +9226,12 @@
      "url": "https://wowforever.wclbox.com/fuben/stratholme-service-gate",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   },
@@ -9163,11 +9339,12 @@
      "reqLevel": 55,
      "xp": 7050,
      "pickupNpc": "皮普·急智",
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "恶魔熔炉",
@@ -9199,11 +9376,12 @@
      "reqLevel": 55,
      "xp": 6600,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": "黑手的命令",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "瓦塔拉克饰品的左瓣",
@@ -9235,11 +9413,12 @@
      "reqLevel": 58,
      "xp": 9950,
      "pickupNpc": "伯德雷",
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": null,
      "preQuest": "最后的准备",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "比修的装置",
@@ -9307,11 +9486,12 @@
      "reqLevel": 55,
      "xp": 6850,
      "pickupNpc": null,
-     "pickupZone": null,
+     "pickupZone": "塔纳利斯",
      "startItem": "达基萨斯将军的命令",
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "zoneFrom": "questie"
     },
     {
      "nameCn": "达基萨斯将军之死",
@@ -9750,6 +9930,12 @@
      "url": "https://wowforever.wclbox.com/fuben/upper-blackrock-spire",
      "note": "任务名、任务等级、最低接取等级、经验值、接取人与地点取自该站的副本详情页（客户端解包转述）",
      "checkedAt": "2026-11-05"
+    },
+    {
+     "type": "datamine_cn",
+     "url": "https://github.com/Questie/Questie",
+     "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+     "checkedAt": "2026-11-09"
     }
    ]
   }

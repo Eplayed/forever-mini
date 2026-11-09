@@ -132,9 +132,28 @@ async function startServer(mode) {
 }
 
 
+/* 9421 会话秒退（2026-11-08 起本机规律，11-03 已观察到"会话一次性消费"）：
+   cli auto 报成功后监听只活几秒。连不上就重拉一次 auto 再连，最多四轮——
+   门禁要的是"能跑完"，不是"一次连上"。cli 路径写死这台机器的安装位。 */
+async function connectWithRetry() {
+  const cli = 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\cli.bat';
+  const proj = path.resolve(__dirname, '..', '..', 'for-mini');
+  let lastErr = null;
+  for (let i = 0; i < 4; i++) {
+    try {
+      return await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9421' });
+    } catch (e) {
+      lastErr = e;
+      try { cp.execSync('"' + cli + '" auto --project "' + proj + '" --auto-port 9421', { stdio: 'ignore' }); } catch (e2) { /* 下轮再试 */ }
+      await new Promise((r) => setTimeout(r, 1200));
+    }
+  }
+  throw lastErr;
+}
+
 async function main() {
   fs.mkdirSync(SHOT_DIR, { recursive: true });
-  mp = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9421' });
+  mp = await connectWithRetry();
   process.stdout.write('已连上开发者工具；线上批次 ' + B + ' 由本地假 OSS 供（真 HTTP + 真 ETag）\n');
 
   async function nav(url) {
@@ -269,7 +288,17 @@ async function main() {
 
   await nav('/pages/dungeon/index?id=hall-of-thanes');
   s = (await snap()) || {};
-  log('详情页：分歧名两个都留（领主大厅 / 另一说法诸王大厅）', /诸王大厅/.test(String(s.conflict)) && /领主大厅/.test(String(s.title)), JSON.stringify({ t: s.title, c: s.conflict }));
+  /* 2026-11-09 站主撤「另一说法：xx」界面出口：两源分歧在数据层照旧两个都留（conflict 字段原样下发），
+     只是页面不再摆这句。断言改钉数据层字段仍在 + 界面静态没有这句，不再读页面 data（字段已撤下）。 */
+  const htPv = JSON.parse(fs.readFileSync(path.join(REPO, 'for-mini/oss-preview/dungeons.json'), 'utf8'));
+  const htAll = ['newDungeons', 'classicDungeons', 'raids'].reduce((a, k) => a.concat(htPv[k] || []), []);
+  const htRec = htAll.filter((d) => d.id === 'hall-of-thanes')[0] || {};
+  /* 2026-11-09 站主第二轮：列表页（dungeons/index）那一行「另一说法」也撤下——断言同一口径扩到列表页。 */
+  log('详情页+列表页：分歧名数据层两个都留（hall-of-thanes 的 conflict 字段还在），界面不再摆「另一说法」',
+    /诸王大厅/.test(String(htRec.nameCnConflict || '')) && /领主大厅/.test(String(s.title))
+      && !/另一说法/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8').replace(/<!--[\s\S]*?-->/g, ' '))
+      && !/另一说法/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeons/index.wxml'), 'utf8').replace(/<!--[\s\S]*?-->/g, ' ')),
+    JSON.stringify({ t: s.title, c: htRec.nameCnConflict }));
   await shot('b4-detail-conflict-name');
   /* 三座无限新增本的首领一张脸都没有（源站自己标 data-unknown，2026-10-23 重探仍 0/15）。
      界面不许摆一个写"没有这张头像"的虚线空框——那看着像坏了；交给 icon-cell 回落自绘块。
@@ -918,12 +947,19 @@ async function main() {
     'pages/home/index.wxml', 'services/features.js', 'data/flags-local.js', 'app.json'];
   const codeBefore = CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ');
   const flags0 = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
-  log('这一批带开关对象（与指针同一档，改它不发版）',
+  /* 2026-11-08 起 professions 已上线（站主拍板开闸），基线从"关着"改成"开着"；
+     关态路径改为在这一段里主动拧关来演——收回路径（站主随时可能拧回）比以前更要有覆盖 */
+  log('这一批带开关对象（与指针同一档，改它不发版），专业开关基线是开着',
     flags0.product === 'wow-forever-mini-flags' && flags0.env === 'beta'
-      && flags0.features.professions.on === false && flags0.features.bis.on === true
+      && flags0.features.professions.on === true && flags0.features.bis.on === true
       && flags0.features.macros.on === true
       && (flags0.policy || []).length >= 3, JSON.stringify(flags0.counts));
 
+  /* 先把专业拧关（只动假 OSS 供的那份，代码与批次不动），演"关着"的完整路径 */
+  const flippedOff = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
+  flippedOff.features.professions.on = false;
+  fs.writeFileSync(FLAGS_FILE, JSON.stringify(flippedOff, null, 1) + '\n');
+  process.stdout.write('    → 先把本地那份 flags.json 的 professions 拧成 false（模拟站主收回开关）\n');
   await clearStore();
   await nav('/pages/professions/index');
   const off = await call('读关着的页', () => mp.evaluate(() => {
@@ -947,7 +983,7 @@ async function main() {
     !!homeOff && homeOff.open === false && homeOff.macros === true, JSON.stringify(homeOff));
 
   /* 只动"线上"那一份开关（项目外那个文件）：等价于跑一次 flags --env beta。
-     先把 11-02 顶替「指南」进第四格的这张卡拧关，验的就是这一张的收回路径 */
+     上一步把专业拧关演完收回路径，这里拧回开（=当前线上基线）；macros 拧关，验第四格收回路径 */
   const flipped = JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8'));
   flipped.features.professions.on = true;
   flipped.features.macros.on = false;
@@ -984,7 +1020,12 @@ async function main() {
     codeBefore === codeAfter ? '代码哈希一致' : '代码哈希变了：' + codeBefore + ' vs ' + codeAfter);
 
   /* ---------- J. 专业与配方页（对齐网页 ProfessionsPage.vue） ---------- */
-  process.stdout.write('\nJ. 专业页：13 个专业能切、三个筛选项真生效、分箱与材料条在\n');
+  /* 名单条数与名单内容从分发分片现读，不抄死——2026-11-09 站主拍板剔除野营后 13→12，
+     这类数字变了断言不该红（数据对、断言错，11-02/11-05 同款教训） */
+  const PROF = JSON.parse(fs.readFileSync(path.join(BUILD, 'builds', B, 'professions', 'index.json'), 'utf8'));
+  const PROF_N = (PROF.professions || []).length;
+  const hasCamp = (PROF.professions || []).indexOf('camping') >= 0;
+  process.stdout.write('\nJ. 专业页：' + PROF_N + ' 个专业能切、三个筛选项真生效、分箱与材料条在\n');
   await nav('/pages/professions/index');
   const pf = await call('读专业页', () => mp.evaluate(() => new Promise((res) => {
     setTimeout(() => {
@@ -1001,10 +1042,10 @@ async function main() {
             .concat(x.yields ? [x.yields] : []).join(' ')).join(' | ') });
     }, 1200);
   })), 3);
-  log('开关开了就直接进得来：13 个专业、页头读数与板块图都在',
-    !!pf && pf.route === 'pages/professions/index' && pf.locked === false && pf.chips === 13
-      && pf.stats.professions === 13 && pf.stats.recipes > 1500 && /^http/.test(pf.headUrl),
-    JSON.stringify(pf && { chips: pf.chips, stats: pf.stats }));
+  log('开关开了就直接进得来：名单条数与分片同源、页头读数与板块图都在',
+    !!pf && pf.route === 'pages/professions/index' && pf.locked === false && pf.chips === PROF_N
+      && pf.stats.professions === PROF_N && pf.stats.recipes > 1500 && /^http/.test(pf.headUrl),
+    JSON.stringify(pf && { chips: pf.chips, stats: pf.stats, PROF_N: PROF_N }));
   log('取数状态说真话（线上取到了就不许写"没取到数据"）',
     !!pf && /实时|缓存/.test(String(pf.sourceText)), JSON.stringify(pf && pf.sourceText));
   log('默认这个专业有配方、按橙点分了箱，且一屏只画 60 行（其余点按钮往下走）',
@@ -1118,18 +1159,10 @@ async function main() {
   log('采矿：13 个矿点 + 15 条配方都在，"可得"列出一矿多料',
     !!pfMine && pfMine.nodes === 13 && pfMine.total === 15 && /、/.test(pfMine.yields || ''),
     JSON.stringify(pfMine));
-  const pfCamp = await call('切到野营（拆不出条目那一档）', () => mp.evaluate(() => new Promise((res) => {
-    const p = getCurrentPages().pop();
-    p.pickProf({ currentTarget: { dataset: { id: 'camping' } } });
-    setTimeout(() => {
-      const d = p.data || {};
-      res({ selId: d.selId, unparsed: !!(d.sel || {}).unparsed, note: (d.sel || {}).note || '',
-        total: d.totalRecipes, nodes: (d.nodeRows || []).length });
-    }, 1500);
-  })), 3);
-  log('野营那一档照实说"还没拆出条目"，那句话取自数据里的 note（不在代码里另编）',
-    !!pfCamp && pfCamp.unparsed === true && /没.*拆|还没/.test(pfCamp.note) && pfCamp.total === 0,
-    JSON.stringify(pfCamp));
+  /* 2026-11-09 站主拍板"野营不是的话，去除掉"：名单里不许再有 camping（整层过滤在 merge-professions.js）。
+     原来那条"切到野营看空态文案"的断言随名单剔除一起改写——钉"名单里没有它"，不是钉空态长什么样。 */
+  log('野营不在专业名单里（站主拍板剔除，其余专业一个不少）',
+    hasCamp === false && PROF_N === 12, JSON.stringify({ PROF_N: PROF_N, hasCamp: hasCamp }));
   const pfAlch = await call('切回炼金看来源行', () => mp.evaluate(() => new Promise((res) => {
     const p = getCurrentPages().pop();
     p.pickProf({ currentTarget: { dataset: { id: 'alchemy' } } });
@@ -1237,11 +1270,11 @@ async function main() {
     .filter((f) => fs.existsSync(path.join(SHOT_DIR, f)));
   log('两张实拍落盘（专业页 + 首页带入口）', pfShots.length === 2, JSON.stringify(pfShots));
 
-  /* 收尾：把本地那份开关恢复成"关着"——站主 2026-10-27 的口径是先不公开，
-     测试借道拧开一次，跑完必须还原，否则下一次回归看到的线上状态就是被测试改过的 */
+  /* 收尾：把本地那份开关恢复成测前快照（flags0）——基线自 2026-11-08 起是"开着"，
+     测试里拧关又拧开折腾过，跑完必须还原，否则下一次回归看到的线上状态就是被测试改过的 */
   fs.writeFileSync(FLAGS_FILE, JSON.stringify(flags0, null, 1) + '\n');
-  log('测后把 flags.json 还原成基线（professions 关着），代码文件哈希与测前一致',
-    JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8')).features.professions.on === false
+  log('测后把 flags.json 还原成基线（professions 开着），代码文件哈希与测前一致',
+    JSON.parse(fs.readFileSync(FLAGS_FILE, 'utf8')).features.professions.on === true
       && CODE_FILES.map((f) => f + '=' + sha01(path.join(REPO, 'for-mini', f))).join(' ') === codeBefore, '');
   /* 静态：颜色只在 app.wxss 定义，页面 wxss 里不许有裸色值 */
   const MINI = path.join(REPO, 'for-mini') + path.sep;

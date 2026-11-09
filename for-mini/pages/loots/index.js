@@ -19,12 +19,29 @@ Page({
     errorText: '',
     note: '',
     qualityNote: '',
-    expandedId: ''
+    expandedId: '',
+    filterDungeon: '',
+    filterBoss: '',
+    filterDungeonName: ''
   },
 
-  onLoad() {
+  onLoad(options) {
     this.rows = []
+    /* 从副本详情点首领跳过来：只看那座本那位首领掉的装备（2026-11-09 站主要求）。
+       微信的 onLoad options 不会自动解码——真机踩过：筛选条直接显示 %E9 编码串、
+       一件都匹配不上。传的时候编了码，接的时候必须自己解回来。 */
+    const dec = (v) => { try { return decodeURIComponent(String(v || '')) } catch (e) { return String(v || '') } }
+    this.setData({
+      filterDungeon: dec(options && options.dungeon),
+      filterBoss: dec(options && options.boss),
+      filterDungeonName: dec(options && options.dname)
+    })
     this.refresh()
+  },
+
+  onClearFilter() {
+    this.setData({ filterDungeon: '', filterBoss: '', filterDungeonName: '', kw: '', list: [], truncated: 0, expandedId: '' })
+    this.applyFilter()
   },
 
   onPullDownRefresh() {
@@ -86,6 +103,7 @@ Page({
         loaded: true,
         total: rowCount,
         itemCount: order.length,
+        buildId: r.buildId || '',
         note: d.note || '',
         qualityNote: d.qualityNote || '',
         requiresUpdate: !!r.requiresUpdate,
@@ -94,19 +112,40 @@ Page({
         sourceText: r.sourceText,
         errorText: mismatch
           ? '这张表的行数与条数对不上（清单写 ' + ((d.counts || {}).rows) + ' 行，拼出 ' + rowCount + ' 行），本站会记下来核对。'
-          : (r.error ? String(r.error.message || r.error).slice(0, 120) : '')
+          : (r.error ? this.errText(r.error) : '')
       })
       this.applyFilter()
       return null
     })
   },
 
+  /* 真机踩过：error 是对象且没有 message 字段时，String() 出来就是 [object Object]——
+     界面上滚一条人话，不放调试残渣 */
+  errText(e) {
+    if (!e) return ''
+    if (typeof e === 'string') return e.slice(0, 120)
+    const m = e.message || e.errMsg
+    return (typeof m === 'string' ? m : JSON.stringify(e)).slice(0, 120)
+  },
+
   applyFilter() {
     const kw = String(this.data.kw || '').trim().toLowerCase()
-    const all = this.items || []
-    const hit = !kw ? [] : all.filter((x) => {
-      return String(x.name).toLowerCase().indexOf(kw) >= 0 || String(x.id).indexOf(kw) >= 0
-    })
+    const fd = this.data.filterDungeon || ''
+    const fb = this.data.filterBoss || ''
+    const base = this.items || []
+    let pool = base
+    if (fd || fb) {
+      /* 只看某座本（某位首领）：把没命中的来源整组裁掉，一件装备在别处也掉时不把别处混进来 */
+      pool = base
+        .map((x) => ({ x, hits: x.sources.filter((s) => (!fd || s.dungeonId === fd) && (!fb || s.boss === fb)) }))
+        .filter((p) => p.hits.length)
+        .map((p) => Object.assign({}, p.x, { sources: p.hits }))
+    }
+    /* 两种给清单的方式：带筛选进来（副本详情点首领跳转）→ 落地直接列这一位掉的，
+       不让玩家再打一遍关键词；没筛选 → 保持原样"先输入要查的东西"，不把一千行全泼出来 */
+    const hit = kw
+      ? pool.filter((x) => String(x.name).toLowerCase().indexOf(kw) >= 0 || String(x.id).indexOf(kw) >= 0)
+      : (fd || fb ? pool : [])
     const shown = hit.slice(0, RENDER_LIMIT)
     this.setData({ list: shown, truncated: hit.length > shown.length ? hit.length : 0 })
   },

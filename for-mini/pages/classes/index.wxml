@@ -18,6 +18,16 @@
     <view class="lead-s">九个职业的技能书与天赋树，以及每个种族能练什么。天赋树可以在这里模拟点配置，点一下加一点、长按看详情。</view>
   </view>
 
+  <!-- 职业怎么选入口（2026-11-08 第一批③）：问卷在独立页，答题口味 → 方向参考；
+       口径句在 chooser 页页头（数据下发），这里一句话说清"不是官方推荐" -->
+  <view class="card chooser-card" bindtap="onOpenChooser">
+    <view class="cc-main">
+      <view class="cc-t">不知道玩什么职业？</view>
+      <view class="cc-s">答 7 道题按口味给参考——本站整理，不是官方推荐。</view>
+    </view>
+    <view class="cc-go">›</view>
+  </view>
+
   <view wx:if="{{!loaded}}" class="card muted">正在取职业与种族名单…</view>
 
   <!-- 职业格：与首页同一份版式（一排五个、超出往下排、不做横向滚动），点一格进这个职业 -->

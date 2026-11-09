@@ -36,6 +36,9 @@ D = os.path.join(ROOT, "app", "data")
 WCL = os.path.join(D, "upstream", "wclbox-dungeon-quests.json")
 WH = os.path.join(D, "upstream", "wowhead-dungeon-quests.json")
 GIQ = os.path.join(D, "upstream", "gi-dungeon-quests.json")
+# 第四源（2026-11-09）：本机 QuestieDB baked TOC 抽的全量字段（tools/extract-questie-full.py 产出）。
+# 只补 wclbox/wowhead/GI 都没给的 pickupNpc / pickupZone 空缺，已有值一律不覆盖。
+QFULL = os.path.join(D, "upstream", "questie-quests-full.json")
 # GI 座键 → (wclbox 上游 slug, Wowhead Forever zone 页 url)。zone id 是站内直采时
 # 实测记下的（upstream/wowhead-dungeon-quests.json collectedButNotUsable）；url 挂
 # 数据系源头（Wowhead Forever 1.60.1），实际取数渠道是 GI 插件转述，见 provenance note。
@@ -115,6 +118,137 @@ def clean_gi_quest(q):
         "source": "gi",
         "variants": 1,
     }
+
+
+def build_questie_index(qdoc):
+    """questie-quests-full.json → {cn/en 名 → [qid]}、qid → 行、npc id → 名（中文名优先）。"""
+    cn2q, en2q, qrow = {}, {}, {}
+    for q in qdoc.get("quests") or []:
+        qid = q.get("id")
+        qrow[qid] = q
+        for key, nm in (("cn", q.get("cn")), ("en", q.get("en"))):
+            if nm:
+                m = cn2q if key == "cn" else en2q
+                m.setdefault(nm, []).append(qid)
+    npc_name = {}
+    for n in qdoc.get("npcs") or []:
+        npc_name[n["npcId"]] = n.get("cn") or n.get("en")
+    return cn2q, en2q, qrow, npc_name
+
+
+def questie_npcs(qid, qrow, npc_name):
+    """qid 的接取 npc → [(id, 名字)]；名字没有的条目跳过（不留 '?'）。"""
+    return [(i, npc_name[i]) for i in ((qrow.get(qid) or {}).get("startedByNpc") or []) if i in npc_name]
+
+
+def fill_from_questie(dungeons_out, qdoc):
+    """第四源补空缺（2026-11-09）。两遍法：
+    先按「名字桥 + 等级一致」锁定 questID，从锁定行学 npc id↔中文名、zone id↔中文名；
+    再用学到的名字回头消歧多候选行，最后只补空缺（绝不覆盖既有值）。
+    评分次序：接取人一致 > 地点一致 > 等级一致。补不了的照旧留空，不编。"""
+    st = {"bridged": 0, "npcFilled": 0, "npcFilledEn": 0, "zoneFilled": 0, "ambiguous": 0}
+    if not (qdoc.get("quests") or qdoc.get("npcs")):
+        return st
+    cn2q, en2q, qrow, npc_name = build_questie_index(qdoc)
+
+    # 收集全部行（带 dungeonId）做两遍桥接
+    rows = []
+    for did, d in dungeons_out.items():
+        for q in d.get("quests") or []:
+            rows.append((did, q))
+
+    locked = {}      # id(q) → qid
+    zone_learn = {}  # zone id → 中文名（由已锁行学）
+    npc_learn = {}   # npc id → 中文名（由已锁行学）
+
+    def candidates(q):
+        c = list(cn2q.get(q.get("nameCn") or "", []))
+        if not c and q.get("nameEn"):
+            c = list(en2q.get(q["nameEn"], []))
+        return c
+
+    def level_ok(q, qid):
+        r = qrow.get(qid) or {}
+        if q.get("questLevel") is not None and r.get("questLevel") is not None:
+            return q["questLevel"] == r["questLevel"]
+        if q.get("reqLevel") is not None and r.get("reqLevel") is not None:
+            return q["reqLevel"] == r["reqLevel"]
+        return False
+
+    def zone_ok(did, q, qid):
+        z = (qrow.get(qid) or {}).get("zone")
+        return z is not None and zone_learn.get(z) == (q.get("pickupZone") or None)
+
+    def try_lock(q, cands, did, use_learned):
+        ok = [c for c in cands if level_ok(q, c)]
+        if len(ok) == 1:
+            return ok[0]
+        if use_learned:
+            zok = [c for c in cands if zone_ok(did, q, c)]
+            if len(zok) == 1:
+                return zok[0]
+            # 接取人名字一致（学到的 npc 中文名对照站内 pickupNpc）
+            pc = q.get("pickupNpc")
+            if pc:
+                nok = [c for c in cands
+                       if any(nm == pc for _, nm in questie_npcs(c, qrow, npc_name))]
+                if len(nok) == 1:
+                    return nok[0]
+        if len(cands) == 1:
+            return cands[0]
+        return None
+
+    # 第一遍：能锁的都锁，顺便学两张中文名表
+    for did, q in rows:
+        cands = candidates(q)
+        if not cands:
+            continue
+        qid = try_lock(q, cands, did, False)
+        if qid is None:
+            continue
+        locked[id(q)] = qid
+        st["bridged"] += 1
+        r = qrow.get(qid) or {}
+        if (q.get("pickupZone") or None) and r.get("zone") is not None:
+            zone_learn.setdefault(r["zone"], q["pickupZone"])
+        if (q.get("pickupNpc") or None) and len((r.get("startedByNpc") or [])) == 1:
+            npc_learn.setdefault(r["startedByNpc"][0], q["pickupNpc"])
+
+    # 把学到的中文名并进 npc_name（只覆盖没有中文名的）
+    for nid, cn in npc_learn.items():
+        if cn:
+            npc_name[nid] = cn
+
+    # 第二遍：用学到的表回头消歧 + 补空缺
+    for did, q in rows:
+        qid = locked.get(id(q))
+        cands = candidates(q)
+        if qid is None and cands:
+            qid = try_lock(q, cands, did, True)
+            if qid is not None:
+                locked[id(q)] = qid
+                st["bridged"] += 1
+        if qid is None:
+            if cands:
+                st["ambiguous"] += 1
+            continue
+        r = qrow.get(qid) or {}
+        if not (q.get("pickupNpc") or "").strip():
+            npcs = questie_npcs(qid, qrow, npc_name)
+            names = sorted({nm for _, nm in npcs})
+            if len(names) == 1:
+                q["pickupNpc"] = names[0]
+                q["npcFrom"] = "questie"
+                st["npcFilled"] += 1
+                if not any(i in npc_learn for i, _ in npcs):
+                    st["npcFilledEn"] += 1
+        if not (q.get("pickupZone") or "").strip():
+            z = r.get("zone")
+            if z is not None and z in zone_learn:
+                q["pickupZone"] = zone_learn[z]
+                q["zoneFrom"] = "questie"
+                st["zoneFilled"] += 1
+    return st
 
 
 def main():
@@ -286,6 +420,25 @@ def main():
         st["dungeons"] += 1
         st["quests"] += len(quests)
 
+    # 第四源（2026-11-09）：QuestieDB baked TOC 补接取 NPC / 地点空缺。
+    # 必须在全部座收齐后跑一次——它要跨座把「已锁行的 wclbox 中文名」学给 npc id / zone id。
+    qdoc = load(QFULL) if os.path.exists(QFULL) else {}
+    qst = fill_from_questie(out, qdoc)
+    q_seats = 0
+    for did, d in out.items():
+        hits = [q for q in d.get("quests") or [] if q.get("npcFrom") or q.get("zoneFrom")]
+        if hits:
+            q_seats += 1
+            d["provenance"].append({
+                "type": "datamine_cn",
+                "url": "https://github.com/Questie/Questie",
+                "note": "接取人与地点的空缺项按 QuestieDB（Questie 插件的 Forever 版数据库，"
+                        "从本机插件目录提取）补齐；只补这一列的空缺，wclbox 已给的值一条没动。"
+                        "NPC 中文名优先（来自游戏内 zhCN 提取或同源对读），"
+                        "拿不到中文名时用 QuestieDB 的英文名原文，不做翻译",
+                "checkedAt": (qdoc.get("meta") or {}).get("extractedAt"),
+            })
+
     doc = {
         "meta": {
             "generatedAt": wcl.get("meta", {}).get("scrapedAt"),
@@ -303,7 +456,10 @@ def main():
             "counts": {"dungeons": st["dungeons"], "quests": st["quests"],
                        "xpFromWowhead": st["fromWowhead"], "xpConflict": st["xpAlt"],
                        "addedFromWowhead": st["addedFromWowhead"], "deduped": st["deduped"],
-                       "itemStart": st["itemStart"], "fromGi": st["fromGi"]}
+                       "itemStart": st["itemStart"], "fromGi": st["fromGi"],
+                       "questieBridged": qst["bridged"], "questieAmbiguous": qst["ambiguous"],
+                       "npcFromQuestie": qst["npcFilled"], "npcFromQuestieEn": qst["npcFilledEn"],
+                       "zoneFromQuestie": qst["zoneFilled"], "questieSeats": q_seats}
         },
         "dungeons": out
     }
@@ -313,6 +469,8 @@ def main():
           "补 wowhead 独有 %d 条 / GI 补空座 %d 条 / 去重合并 %d 条 / 物品开启的任务 %d 条" % (
               c["dungeons"], c["quests"], c["xpFromWowhead"], c["xpConflict"],
               c["addedFromWowhead"], c["fromGi"], c["deduped"], c["itemStart"]))
+    print("QuestieDB 第四源：桥接 %d 条（消歧失败留空 %d），补接取人 %d 条（其中英文名 %d）、补地点 %d 条，涉及 %d 座" % (
+        qst["bridged"], qst["ambiguous"], qst["npcFilled"], qst["npcFilledEn"], qst["zoneFilled"], q_seats))
 
 
 if __name__ == "__main__":

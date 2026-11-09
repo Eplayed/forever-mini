@@ -95,6 +95,66 @@
   border: 0;
 }
 
+/* 任务线（2026-11-08 第一批②）：行式列表，任务名 + 事实字段一行小字，
+   来源压到行尾用 --txt-hint（它是"哪来的"不是内容本体）；金色只给
+   行左侧 4rpx 竖线，与配装页"来源档"同一套视觉语言 */
+.qsum {
+  font-size: 22rpx;
+  margin-bottom: 10rpx;
+}
+
+.quest {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0 14rpx 16rpx;
+  border-left: 4rpx solid var(--gold);
+  margin: 10rpx 0 10rpx 4rpx;
+}
+
+.quest-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.quest-name {
+  font-size: 26rpx;
+}
+
+.quest-meta {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+
+/* 接取行（2026-11-09 站主要求摆"在哪接的"）：标签压暗、NPC/地点用正文字色；
+   缺记录的那句再用暗一档，且语气是"没记录"，不是"没有" */
+.quest-pick {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--txt);
+}
+
+.pick-k {
+  margin-right: 8rpx;
+  color: var(--gold);
+}
+
+.pick-none {
+  color: var(--txt-hint);
+}
+
+.quest-src {
+  margin-left: 12rpx;
+  flex-shrink: 0;
+  font-size: 20rpx;
+  color: var(--txt-hint);
+}
+
+.qnote {
+  font-size: 20rpx;
+  margin-top: 8rpx;
+}
+
 .frow {
   display: flex;
   align-items: flex-start;
@@ -309,4 +369,12 @@
 
 .map-entry {
   font-size: 22rpx;
+}
+
+/* 首领行尾的跳转提示（点首领去掉落页看它掉什么） */
+.boss-go {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--txt-hint);
 }

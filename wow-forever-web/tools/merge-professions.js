@@ -12,9 +12,14 @@ const up = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'wclbox-profes
 const EN = { alchemy: 'Alchemy', blacksmithing: 'Blacksmithing', enchanting: 'Enchanting',
   engineering: 'Engineering', leatherworking: 'Leatherworking', tailoring: 'Tailoring',
   mining: 'Mining', herbalism: 'Herbalism', skinning: 'Skinning', cooking: 'Cooking',
-  fishing: 'Fishing', 'first-aid': 'First Aid', camping: 'Camping' };
+  fishing: 'Fishing', 'first-aid': 'First Aid' };
 
-const professions = (up.professions || []).map((p) => {
+/* 野营（camping）不进专业名单（2026-11-09 站主拍板"野营不是的话，去除掉"）：
+   参考站有这一页但不是配方表格、条目一直拆不出来，摆进名单只会让玩家点进去看 0 条的空页。
+   过滤放在整形层而不是删 upstream 快照——重抓 upstream 这里仍是唯一闸，名单不会漏回来。 */
+const DROP_IDS = { camping: true };
+
+const professions = (up.professions || []).filter((p) => !DROP_IDS[p.id]).map((p) => {
   const recipes = p.recipes || [], nodes = p.nodes || [];
   return {
     id: p.id,
@@ -75,7 +80,7 @@ const payload = {
     took: up.meta.took,
     skipped: up.meta.skipped,
     notCollected: [
-      '野营（camping）：那一页不是表格形式，条目这一版还没能拆出来；有页面但不编数据',
+      '野营（camping）：2026-11-09 站主拍板不进专业名单——参考站那页不是配方表格、条目拆不出来，0 条配方摆出来是空页',
       '冲级路线与材料性价比建议：属攻略性质，本站红线不做',
       '商人青睐配方与专业专精选择建议：同上',
       '配方产物的装备属性与强度评价：不做强度排行'
