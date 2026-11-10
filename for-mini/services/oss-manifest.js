@@ -419,6 +419,15 @@ const SHARD_SPECS = {
       && d.questions.every((q) => q && q.id && q.q && Array.isArray(q.options) && q.options.length > 0
         && q.options.every((o) => o && o.id && o.label && o.weight && typeof o.weight === 'object'))
       && !!d.meta && !!d.meta.note && d.meta.note.indexOf('不是官方') >= 0
+  },
+  census: {
+    name: 'census',
+    kind: 'census',
+    shape: (d) => !!d.scope && d.scope.id === 'all' && !!d.window && d.window.id === 'week'
+      && Number.isSafeInteger(d.characters) && d.characters > 0
+      && Array.isArray(d.factions) && d.factions.length === 2
+      && Array.isArray(d.classes) && d.classes.length === 9
+      && !!d.provenance && !!d.provenance.credit && !!d.provenance.licenseUrl
   }
 }
 
@@ -453,7 +462,7 @@ function loadKey(kind, opts) {
         pointerSource: p.pointerSource || p.source,
         stale: !!p.stale,
         batch,
-        error: new Error('指针里没有 ' + kind)
+        error: Object.assign(new Error('指针里没有 ' + kind), { code: 'missing' })
       }
     }
     const spec = SHARD_SPECS[kind]

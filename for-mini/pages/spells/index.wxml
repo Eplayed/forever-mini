@@ -1,19 +1,18 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，技能可能显示不全。请更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{needOnline}}" class="notice notice-bad">
-    技能表要联网才能取。现在没连上，这一页不给离线内容——免得拿半个职业当全部。
+    联网后可查看职业技能。
   </view>
   <view wx:elif="{{offline && classId}}" class="notice">
-    当前显示的是{{sourceText}}，可能不是最新核对结果。
+    当前离线，显示已保存的内容。
   </view>
 
   <!-- 第一层：选职业。九个职业一眼看得全，不必先下一个大文件 -->
   <block wx:if="{{!classId}}">
     <view class="lead plate">
       <view class="lead-t">职业技能速查</view>
-      <view class="lead-s">按无限测试版客户端读出的法术书，{{fieldNote}}</view>
     </view>
     <view wx:if="{{!loaded}}" class="card muted">正在取职业名单…</view>
     <view wx:if="{{loaded && !classes.length}}" class="card empty">
@@ -47,8 +46,6 @@
       <input class="search-input" placeholder="在这个职业里搜，例如「英勇打击」" value="{{kw}}" bindinput="onKw" confirm-type="search" />
       <view class="fav-btn" bindtap="onBackToClasses">全部职业</view>
     </view>
-
-    <view class="muted colnote">{{fieldNote}}</view>
 
     <view wx:if="{{!loaded}}" class="card muted">正在取{{className}}的法术…</view>
     <view wx:if="{{loaded && !list.length}}" class="card empty">
@@ -94,6 +91,6 @@
     <view wx:if="{{truncated}}" class="muted truncated">结果过多，仅显示前 {{list.length}} 条（共 {{truncated}} 条），请缩小关键词范围。</view>
   </block>
 
-  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{errorText}}" class="notice notice-bad">技能数据可能不完整，请联网后刷新。</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

@@ -1,0 +1,28 @@
+{
+  "level": "L2",
+  "scope": "国服无限服",
+  "window": "24 小时人口",
+  "factions": [
+    { "id": "alliance", "share": 47 },
+    { "id": "horde", "share": 53 }
+  ],
+  "classes": [
+    { "id": "warrior", "share": 10 },
+    { "id": "paladin", "share": 16 },
+    { "id": "hunter", "share": 18 },
+    { "id": "rogue", "share": 9 },
+    { "id": "priest", "share": 8 },
+    { "id": "shaman", "share": 9 },
+    { "id": "mage", "share": 13 },
+    { "id": "warlock", "share": 8 },
+    { "id": "druid", "share": 10 }
+  ],
+  "provenance": {
+    "name": "大脚BIGFOOT",
+    "type": "public_aggregate",
+    "url": "https://bigfoot.nga.cn/",
+    "screen": "服务器人口 · 魔兽世界无限服 · 24小时人口",
+    "sourceTime": "2026-11-10 10:07",
+    "checkedAt": "2026-11-10"
+  }
+}

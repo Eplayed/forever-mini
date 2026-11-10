@@ -1,9 +1,9 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    现在没连上线，摇的是机子里存的那一小份名字。
+    当前离线，候选名字较少。
   </view>
 
   <view wx:if="{{locked}}" class="locked">
@@ -14,7 +14,7 @@
   <block wx:elif="{{unavailable}}">
     <view class="locked">
       <view class="locked-name">词库没取到</view>
-      <view class="muted locked-sub">{{errText || '要联网才看得到，稍后再试。'}}</view>
+      <view class="muted locked-sub">请联网后再试。</view>
     </view>
   </block>
 
@@ -22,7 +22,6 @@
     <!-- 头牌：一句话说清玩法，不写来历、不写条数台账 -->
     <view class="hero plate">
       <view class="hero-name">角色起名</view>
-      <view class="hero-sub">挑个职业，摇一个——不改就复制走。</view>
     </view>
 
     <!-- 第一步：选职业。九个一排铺开、超出换行，与首页同一套版式（不做横向滚动） -->

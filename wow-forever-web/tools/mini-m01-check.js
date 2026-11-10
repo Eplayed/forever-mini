@@ -184,8 +184,8 @@ async function main() {
       buildId: d.buildId, factLatest: d.factLatest, all: (d.all || []).length, list: (d.list || []).length,
       kinds: d.kinds || [], levels: d.levels || [], recent: (d.recent || []).length, routeMissing: d.routeMissing,
       dataFrom: d.dataFrom, needOnline: d.needOnline, notFound: d.notFound, title: d.title, nameMissing: d.nameMissing,
-      bosses: d.bosses || [], drops: d.drops || [], prov: d.prov || [], rows: d.rows || [], bossEmpty: d.bossEmpty,
-      dropGroups: (d.dropGroups || []).map((g) => ({ boss: g.boss, rows: (g.rows || []).map((r) => ({ itemId: r.itemId, q: r.q, quality: r.quality, name: r.name })) })),
+      bosses: (d.bosses || []).filter((b) => !b.other), drops: (d.bosses || []).flatMap((b) => b.items || []), prov: d.prov || [], rows: d.rows || [], bossEmpty: d.bossEmpty,
+      dropGroups: (d.bosses || []).filter((g) => g.items && g.items.length).map((g) => ({ boss: g.name, rows: g.items.map((r) => ({ itemId: r.itemId, q: r.q, quality: r.quality, name: r.name })) })),
       highlightDrop: d.highlightDrop,
       detailSource: d.detailSource, conflict: d.conflict, id: d.id, cacheHint: d.source, cacheHit: d.cacheHit,
       counts: d.counts, cov: (d.covList || []).length, wip: (d.wip || []).length, meta: d.meta ? { counts: d.meta.counts } : null
@@ -283,7 +283,7 @@ async function main() {
   await nav('/pages/dungeon/index?id=barrow-deeps');
   s = (await snap()) || {};
   log('详情页：缺中文名显示"中文名待核"，标题退回英文', s && s.nameMissing === true && /Barrow|barrow/.test(String(s.title)), JSON.stringify({ t: s && s.title }));
-  log('详情页：首领空数组写"没有记录"而不是 0 个', (s.bosses || []).length === 0 && /没有记录/.test(String(s.bossEmpty)), JSON.stringify({ e: s.bossEmpty }));
+  log('详情页：首领空数组写"没有首领记录"', (s.bosses || []).length === 0 && /没有首领记录/.test(String(s.bossEmpty)), JSON.stringify({ e: s.bossEmpty }));
   await shot('b3-detail-missing-fields');
 
   await nav('/pages/dungeon/index?id=hall-of-thanes');
@@ -320,7 +320,7 @@ async function main() {
     JSON.stringify({ want: htWant, got: (s.bosses || []).map((b) => b.portraitUrl) }));
   const faceWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
   log('详情页：首领一律一个 icon-cell，缺图由组件回落（不留碎图也不留空框）',
-    /boss-face/.test(faceWxml) && !/没有这张头像/.test(faceWxml) && !/face-none/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
+    /encounter-face/.test(faceWxml) && !/没有这张头像/.test(faceWxml) && !/face-none/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
 
   /* —— 掉落排序与装备详情（2026-10-23 站主指令）—— */
   await nav('/pages/dungeon/index?id=ragefire-chasm');
@@ -338,31 +338,26 @@ async function main() {
     JSON.stringify((((s.dropGroups || [])[0] || {}).rows || []).map((r) => r.quality)));
   await shot('b5-drops-sorted');
 
-  const itemPage = await (async () => {
-    await ev(() => {
-      const p = getCurrentPages().pop();
-      const g = (p.data.dropGroups || [])[0];
-      const row = g.rows.filter((r) => !!r.itemId)[0];
-      p.onOpenItem({ currentTarget: { dataset: { item: row.itemId, dungeon: p.data.id } } });
-      return row.itemId;
-    });
-    await new Promise((r) => setTimeout(r, 9000));
-    return ev(() => {
-      const p = getCurrentPages().pop();
-      const d = p.data || {};
-      return { route: p.route, id: d.itemId, name: d.name, q: d.q, qt: d.qualityText, st: (d.st || []).length, s0: String(((d.st || [])[0] || {}).t || '').slice(0, 12), ilvl: d.ilvl, type: d.type, sell: d.sell, boss: d.boss, dg: d.dungeon, need: d.needOnline, off: d.offline };
-    });
-  })();
-  log('点一件装备：真的换到一个独立页面（不是就地展开）', /pages\/item\/index/.test(String(itemPage.route)) && !!itemPage.id, JSON.stringify(itemPage));
-  log('装备详情：名单里的名字/品质/首领与数值侧的属性行/装等/类型都在',
-    !!itemPage.name && !!itemPage.boss && itemPage.st > 0 && !!itemPage.type && itemPage.need === false,
-    JSON.stringify(itemPage));
-  log('装备详情：品质档名与列表那一行是同一套叫法（两屏不许各写一份）',
-    /普通|优秀|精良|史诗|传说/.test(String(itemPage.qt)), String(itemPage.qt));
-  await shot('b6-item-detail');
-  const backFromItem = await ev(() => { wx.navigateBack(); return 1 });
-  await new Promise((r) => setTimeout(r, 2500));
-  log('装备详情返回副本详情：返回栈在（不是只能重开）', backFromItem === 1, '');
+  const inline = await ev(() => {
+    const p = getCurrentPages().pop();
+    const groups = p.data.bosses.filter((b) => b.items.length);
+    const first = groups[0];
+    const row = first.items[0];
+    const trigger = (dataset) => ({ currentTarget: { dataset } });
+    p.onToggleBoss(trigger({ id: first.id }));
+    p.onToggleItem(trigger({ key: row.key, item: row.itemId }));
+    const card = p.data.itemCard;
+    const opened = p.data.openBoss === first.id && p.data.openItem === row.key;
+    const next = groups[1] || first;
+    p.onToggleBoss(trigger({ id: next.id }));
+    return { route: p.route, opened, card, reset: !p.data.openItem && p.data.itemCard === null,
+      accordion: p.data.openBoss === (next === first ? '' : next.id) };
+  });
+  log('掉落手风琴：首领与装备均在详情页展开，换组时清空装备详情',
+    inline.route === 'pages/dungeon/index' && inline.opened && inline.reset && inline.accordion, JSON.stringify(inline));
+  log('行内装备详情：显示同一掉落分片的属性与类型',
+    !!inline.card && inline.card.st.length > 0 && !!inline.card.type, JSON.stringify(inline.card));
+  await shot('b6-item-detail-inline');
 
   await nav('/pages/dungeons/index');
   s = (await snap()) || {};
@@ -487,12 +482,10 @@ async function main() {
   s = (await snap()) || {};
   const homeCards = await call('首页入口', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
-    return { go: ['goDungeons', 'goClasses', 'goLoots', 'goMacros'].filter((f) => typeof p[f] === 'function').length,
+    return { go: ['goCensus', 'goDungeons', 'goClasses', 'goLoots', 'goMacros'].filter((f) => typeof p[f] === 'function').length,
       glossary: typeof p.goGlossary, counts: p.data.counts, cov: p.data.covList, wip: p.data.wip, fact: p.data.factDate, build: p.data.buildId };
   }), 3);
-  /* 2026-10-22 站主重排：入口卡固定四张 副本/职业/掉落查询/指南；
-     2026-11-02 站主把第四张换成宏命令（指南页还在 app.json 里，但首页不再给入口） */
-  log('首页四个入口卡处理器都在（副本/职业/掉落查询/宏命令）', homeCards && homeCards.go === 4, JSON.stringify(homeCards));
+  log('首页查询入口含人口普查、副本、职业、掉落与宏', homeCards && homeCards.go === 5, JSON.stringify(homeCards));
   log('首页不再有中英速查入口', homeCards && homeCards.glossary === 'undefined', String(homeCards && homeCards.glossary));
   log('首页不出现计数、覆盖率、缺口清单、核对日期与批次号（玩家面规矩）',
     homeCards && homeCards.counts === undefined && (homeCards.cov || []).length === 0
@@ -535,84 +528,19 @@ async function main() {
     }, 300);
   })), 3);
   s = (await snap()) || {};
-  log('看过一座本之后，首页「继续」里有它（读页面 data，不读 DOM）', s.route === 'pages/home/index' && s.recent >= 1, JSON.stringify({ r: s.recent }));
+  log('看过一座本之后，首页「最近查看」里有它（读页面 data，不读 DOM）', s.route === 'pages/home/index' && s.recent >= 1, JSON.stringify({ r: s.recent }));
   await shot('g2-home-recent-rail');
 
-  /* 签名动作用像素量，不靠眼睛：切角铭牌真渲染出来时，
-     卡片顶边往下的最右像素必须逐步外移（右上角被切掉一块），直角版不会动。
-     判据按"位移 ÷ 卡宽"算，不按像素数算——截图缩放每次可能不一样（同一天拍出过 285 / 570 / 664 三种宽），
-     写死像素数的门禁会假红。切角是 CSS 定值 10px、卡宽约 334px，比值恒定 0.015~0.021，直角版是 0。
-     2026-10-24 改成量几何，不再按颜色认卡片。这张卡是"按颜色找"第三次被带偏的地方：
-     第一次是背景图压暗后整屏接近 --panel（量到 cut=-37），第二次是卡片上玻璃面色，
-     第三次是玻璃顶部那条乳白反光——它把卡片上沿十几像素染亮，探针就从切角之前错位，比值 0.0149→0。
-     现在分工是：卡片在哪由 DOM 说（`.cd` 的 rect），角有没有被切由像素说。 */
-  const PY_CORNER = [
-    'import sys',
-    'from PIL import Image',
-    'import numpy as np',
-    'A = np.asarray(Image.open(sys.argv[1]).convert("RGB")).astype(float)',
-    'B = np.asarray(Image.open(sys.argv[2]).convert("RGB")).astype(float)',
-    'W = int(A.shape[1])',
-    'sc = W / float(sys.argv[3])',
-    '# 截图含状态栏与导航条，rect 的 y 是视口坐标：两帧只在底图那一段不一样，',
-    '# 第一处"整行都有差"的行就是视口第 0 行',
-    'd = np.abs(A - B).mean(axis=2)',
-    'wide = (d > 8).sum(axis=1)',
-    'off = next((y for y in range(60, 400) if wide[y] > W * 0.9), 0)',
-    'bg = np.array([int(x) for x in sys.argv[4:7]], float)',
-    'y0 = off + int(round(float(sys.argv[7]) * sc)) - 4',
-    'nb = (np.abs(B[:, :, :] - bg).max(axis=2) > 6)',
-    'rows = {}',
-    '# 只在 DOM 报的那一行往下 60 像素的窗口里找；每行取"不是页底色"的最长一段连续像素',
-    'for y in range(max(0, y0), min(B.shape[0], y0 + 60)):',
-    '    idx = np.flatnonzero(nb[y])',
-    '    if idx.size < 120: continue',
-    '    brk = np.flatnonzero(np.diff(idx) > 1)',
-    '    segs = np.split(idx, brk + 1)',
-    '    seg = max(segs, key=len)',
-    '    if len(seg) > 120 and seg[0] > 6 and seg[-1] < W - 6: rows[y] = (int(seg[0]), int(seg[-1]))',
-    'ys = sorted(rows)',
-    'if not ys: print("none 0 0 0"); raise SystemExit',
-    'top = ys[0]',
-    'base = top + 14',
-    'while base not in rows and base < ys[-1]: base += 1',
-    'print("%d %d %d %d" % (top, rows[base][1] - rows[top][1], rows[base][1] - rows[base][0], W))'
-  ].join('\n');
-  /* 页底色仍然从 app.wxss 现读，不写字面量（写死过一次，换令牌当场假红） */
-  const appCss = fs.readFileSync(path.join(REPO, 'for-mini/app.wxss'), 'utf8');
-  const bM = appCss.match(/--bg:\s*#([0-9a-fA-F]{6})/);
-  if (!bM) {
-    log('切角探针拿不到 --bg 令牌，拒绝用旧的字面量继续量', false, 'app.wxss 里没有这个令牌');
-  }
-  const bgHex = bM ? parseInt(bM[1], 16) : 0;
-  const bgRgb = [(bgHex >> 16) & 255, (bgHex >> 8) & 255, bgHex & 255];
-  /* 卡片位置与视口标定要在"底图还开着"的时候量（.pagebg 是 wx:if 出来的） */
-  const plate = await call('量卡片位置', () => mp.evaluate(() => new Promise((res) => {
-    const q = wx.createSelectorQuery();
-    q.select('.cd').boundingClientRect();
-    q.select('.pagebg').boundingClientRect();
-    q.exec((r) => res({ card: r[0], bg: r[1] }));
-  })), 2);
-  await call('关掉底图再量切角', () => mp.evaluate(() => {
-    getCurrentPages().pop().setData({ bgUrl: '' });
-    return 1;
-  }), 2);
-  await new Promise((r) => setTimeout(r, 2200));
-  await shot('g1b-home-cards-flatbg');
-  const corner = await call('量切角', () => new Promise((resolve) => {
-    if (!plate || !plate.card || !plate.bg) { resolve(null); return; }
-    cp.execFile('python3', ['-c', PY_CORNER,
-      path.join(SHOT_DIR, 'g2-home-recent-rail.png'), path.join(SHOT_DIR, 'g1b-home-cards-flatbg.png'),
-      String(plate.bg.width)].concat(bgRgb.map(String)).concat([String(plate.card.top)]),
-      { encoding: 'utf8' }, (err, out) => {
-      const t = String(out || '').trim();
-      if (err || !/\d+ \d+ \d+ \d+$/.test(t)) { resolve(null); return; }
-      const [top, cut, width, w] = t.split(' ').map(Number);
-      resolve({ top, cut, cardWidth: width, shotWidth: w, ratio: width ? cut / width : 0 });
-    });
-  }), 2);
-  log('切角铭牌真的渲染出来了（右上角斜边让最右像素往外移，直角版比值为 0）',
-    !!corner && corner.ratio >= 0.01 && corner.ratio <= 0.045, JSON.stringify(corner));
+  const homeMarkup = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
+  const spotlight = homeMarkup.match(/<swiper [^>]+>[\s\S]*?<\/swiper>/);
+  log('首页人口普查是首张焦点卡，副本可横滑切换，焦点区无需自动轮播',
+    !!spotlight && /bindtap="goCensus"[\s\S]*bindtap="goDungeons"/.test(spotlight[0])
+      && !/autoplay=/.test(spotlight[0]), '');
+  const censusCheck = await call('点人口普查卡', () => mp.evaluate(() => new Promise((res) => {
+    getCurrentPages().pop().goCensus();
+    setTimeout(() => res(getCurrentPages().pop().route), 1200);
+  })), 3);
+  log('首页人口普查卡打开对应页面', censusCheck === 'pages/census/index', String(censusCheck));
 
   /* ---------- H. 配装页（2026-10-26 站主：把网页那条 BiS 线做进小程序） ---------- */
   process.stdout.write('\nH. 配装页：名单能取到、阵营与套能真切、备选与"两家"并列在\n');
@@ -926,17 +854,10 @@ async function main() {
       && !/bindtap="showModel"|bindtap="hideModel"/.test(bisWxml)
       && !/<bis-3d|xr-scene|modelSrc|stageAspect|onModelStatus/.test(bisWxml)
       && /class="stage-art"/.test(bisWxml) && /mode="aspectFit"/.test(bisWxml), '');
-  const homeWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
-  /* 2026-11-03 站主照截图重排：整宽 bis-card 撤掉，BIS 改进两列格、换自绘盾牌图标，
-     起名格紧随其后（也是自绘图标）。断言按新意图改写（不是删）：
-     「bis-card」这个类不许再出现在首页——回来就说明整宽卡又被"照旧"接回去了。 */
-  log('首页 BIS/起名是两列格里的图标卡（自绘图标 + 各自跳转），BIS 在起名与副本前，整宽 bis-card 不再存在',
-    /bindtap="goBis"/.test(homeWxml) && /img\/home\/bis-icon\.png/.test(homeWxml)
-      && /bindtap="goNamer"/.test(homeWxml) && /img\/home\/namer-icon\.png/.test(homeWxml)
-      && homeWxml.indexOf('goBis') >= 0 && homeWxml.indexOf('goBis') < homeWxml.indexOf('goNamer')
-      && homeWxml.indexOf('goBis') < homeWxml.indexOf('goDungeons')
-      && !/bis-card/.test(homeWxml), '');
-
+  log('掉落查询与 BIS 配装在常用区，角色起名在更多工具区',
+    /class="grid priority"[\s\S]*bindtap="goLoots"[\s\S]*bindtap="goBis"[\s\S]*class="grid tools"[\s\S]*bindtap="goNamer"/.test(homeMarkup)
+      && /img\/home\/bis-icon\.png/.test(homeMarkup)
+      && /img\/home\/namer-icon\.png/.test(homeMarkup), '');
 
   /* ---------- I. 远程功能开关（2026-10-27 站主："暂时先不公开，想公开了不用发版就能公开"） ----------
      三段：① 基线（专业关、宏开）→ 关着的页只说"还没开放"且不取数，首页那张卡不在、宏那张在；
@@ -982,8 +903,7 @@ async function main() {
   await nav('/pages/home/index');
   const homeOff = await call('读首页（专业关、宏开）', () => mp.evaluate(() => {
     const d = getCurrentPages().pop().data || {};
-    return { open: !!d.openProfessions, macros: !!d.openMacros,
-      art: (d.cardBg || {}).professions === undefined ? null : !!d.cardBg.professions };
+    return { open: !!d.openProfessions, macros: !!d.openMacros };
   }), 3);
   log('首页此时没有「专业与配方」入口卡（关着整块不渲染，不留空白格），但「宏命令」卡在',
     !!homeOff && homeOff.open === false && homeOff.macros === true, JSON.stringify(homeOff));

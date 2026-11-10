@@ -2,18 +2,17 @@
   <!-- 远程开关关着：一句话给到，一个数据请求都不发（services/features.js 的界面义务） -->
   <view wx:if="{{locked}}" class="card">
     <view class="h1">{{lockName}} · 这一页还没开放</view>
-    <view class="note">开放的时候不用更新小程序，这一页会自己出现在首页上。</view>
     <view class="btn" bindtap="goHome">回首页</view>
   </view>
 
   <view wx:elif="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{unavailable}}" class="notice">
-    宏清单暂时取不到。{{errText ? '（' + errText + '）' : ''}}
+    宏命令加载失败，请稍后再试。
   </view>
   <view wx:elif="{{needOnline}}" class="notice">
-    现在没连上线，宏命令要联网才取到；这一页没带在小程序里，所以离线看不到。
+    联网后可查看宏命令。
   </view>
 
   <block wx:elif="{{loaded && meta}}">
@@ -46,7 +45,7 @@
 
     <view class="card" wx:if="{{loading}}"><view class="note">正在取这一职业的宏…</view></view>
     <view class="card" wx:elif="{{!rows.length}}">
-      <view class="note">{{filtered ? '这个条件下没有对得上的宏。换个用途或清掉筛选。' : '这一职业的宏还没整理，不拿别的职业凑数。'}}</view>
+      <view class="note">{{filtered ? '没有符合条件的宏。试试调整筛选。' : '暂无该职业的宏。'}}</view>
     </view>
 
     <view class="card" wx:else>

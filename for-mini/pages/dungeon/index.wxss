@@ -95,25 +95,16 @@
   border: 0;
 }
 
-/* 任务线（2026-11-08 第一批②）：行式列表，任务名 + 事实字段一行小字，
-   来源压到行尾用 --txt-hint（它是"哪来的"不是内容本体）；金色只给
-   行左侧 4rpx 竖线，与配装页"来源档"同一套视觉语言 */
+/* 任务线以左侧细线串起任务和接取地点。 */
 .qsum {
   font-size: 22rpx;
   margin-bottom: 10rpx;
 }
 
 .quest {
-  display: flex;
-  align-items: flex-start;
   padding: 14rpx 0 14rpx 16rpx;
   border-left: 4rpx solid var(--gold);
   margin: 10rpx 0 10rpx 4rpx;
-}
-
-.quest-main {
-  flex: 1;
-  min-width: 0;
 }
 
 .quest-name {
@@ -129,30 +120,21 @@
 /* 接取行（2026-11-09 站主要求摆"在哪接的"）：标签压暗、NPC/地点用正文字色；
    缺记录的那句再用暗一档，且语气是"没记录"，不是"没有" */
 .quest-pick {
-  margin-top: 4rpx;
+  display: flex;
+  align-items: baseline;
+  margin-top: 12rpx;
   font-size: 22rpx;
   color: var(--txt);
 }
 
 .pick-k {
-  margin-right: 8rpx;
+  flex-shrink: 0;
+  margin-right: 12rpx;
   color: var(--gold);
 }
 
 .pick-none {
   color: var(--txt-hint);
-}
-
-.quest-src {
-  margin-left: 12rpx;
-  flex-shrink: 0;
-  font-size: 20rpx;
-  color: var(--txt-hint);
-}
-
-.qnote {
-  font-size: 20rpx;
-  margin-top: 8rpx;
 }
 
 .frow {
@@ -188,75 +170,6 @@
   border-top: 1rpx dashed var(--line);
 }
 
-.boss {
-  padding: 14rpx 0;
-  border-bottom: 1rpx solid var(--line);
-}
-
-.boss:last-child {
-  border-bottom: 0;
-}
-
-.boss-main {
-  display: flex;
-  align-items: center;
-}
-
-.boss-name {
-  font-size: 28rpx;
-  margin-right: 10rpx;
-}
-
-.boss-badge {
-  margin-left: auto;
-}
-
-.boss-note {
-  margin-top: 4rpx;
-  font-size: 22rpx;
-}
-
-.drop {
-  display: flex;
-  align-items: center;
-  padding: 12rpx 0;
-  border-bottom: 1rpx solid var(--line);
-}
-
-.drop:last-child {
-  border-bottom: 0;
-}
-
-.drop-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.drop-name {
-  font-size: 26rpx;
-  display: block;
-}
-
-.drop-boss {
-  font-size: 22rpx;
-}
-
-.drop-side {
-  text-align: right;
-  margin-left: 12rpx;
-}
-
-.drop-side .badge {
-  display: block;
-  margin-top: 4rpx;
-}
-
-.loot-note {
-  margin-top: 14rpx;
-  font-size: 22rpx;
-}
-
-
 .bold {
   color: var(--txt);
 }
@@ -291,21 +204,6 @@
   margin-top: 8rpx;
 }
 
-.boss {
-  display: flex;
-  align-items: flex-start;
-}
-
-.boss-face {
-  width: 88rpx;
-  margin-right: 16rpx;
-  flex-shrink: 0;
-}
-
-.drop-face {
-  margin-right: 14rpx;
-}
-
 /* 品质档名与颜色：档名收在 services/quality.js（与网页端同源），
    颜色用 app.wxss 的 --q1…--q5 令牌。没有品质数的那一档（q 为空）走默认字色，不猜。 */
 .q-1 { color: var(--q1); }
@@ -313,48 +211,6 @@
 .q-3 { color: var(--q3); }
 .q-4 { color: var(--q4); }
 .q-5 { color: var(--q5); }
-
-.chev {
-  color: var(--txt-hint);
-  font-size: 30rpx;
-}
-
-/* 来源折叠（2026-10-22 玩家面清理）：来源是红线要求能点开的，
-   但它不是玩家第一屏要看的东西，所以收进一个开关里。 */
-.prov-head {
-  display: flex;
-  align-items: center;
-}
-
-.prov-toggle {
-  margin-left: auto;
-  font-size: 22rpx;
-  font-weight: 400;
-}
-
-/* 掉落按首领分组 + 反查高亮（M03） */
-.dgrp {
-  margin-bottom: 16rpx;
-}
-
-.dgrp-h {
-  padding: 8rpx 14rpx;
-  margin-bottom: 6rpx;
-  background: var(--panel-2);
-  border-left: 4rpx solid var(--gold);
-  font-size: 24rpx;
-  color: var(--gold-hi);
-}
-
-.drop-notice {
-  margin-bottom: 12rpx;
-}
-
-.drop-hit {
-  border: 1rpx solid var(--gold);
-  background: var(--gold-glow);
-  border-radius: 10rpx;
-}
 
 /* 副本地图（M03） */
 .map-box {
@@ -371,15 +227,163 @@
   font-size: 22rpx;
 }
 
-/* 首领行尾的跳转提示（点首领去掉落页看它掉什么） */
-.boss-go {
-  display: block;
-  margin-top: 4rpx;
-  font-size: 22rpx;
-  color: var(--txt-hint);
+/* 副本档案：金色只标可读层级与展开状态，物品品质独立着色。 */
+.section-kicker {
+  color: var(--gold-hi);
+  font-size: 20rpx;
+  letter-spacing: 3rpx;
+  margin-bottom: 4rpx;
 }
 
-/* 没收录掉落的首领行：同一位置同一字色，靠文案本身把"点开是空表"提前说清（数据真源就没有，不编） */
-.boss-go--none {
-  color: var(--txt-hint);
+.encounter {
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
+  margin-top: 12rpx;
+  background: var(--bg);
+}
+
+.encounter-open {
+  border-color: var(--gold-line);
+}
+
+.encounter-toggle,
+.loot-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14rpx;
+  background: transparent;
+  color: var(--txt);
+  line-height: 1.4;
+  text-align: left;
+  border-radius: var(--r-ctl);
+}
+
+.encounter-open .encounter-toggle,
+.encounter-pressed {
+  background: var(--gold-glow);
+}
+
+.encounter-face,
+.loot-icon {
+  flex-shrink: 0;
+  margin-right: 14rpx;
+}
+
+.encounter-other {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88rpx;
+  height: 88rpx;
+  background: var(--panel);
+  color: var(--gold-hi);
+  font-size: 24rpx;
+}
+
+.encounter-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.encounter-name {
+  font-weight: 600;
+  font-size: 28rpx;
+  color: var(--txt-title);
+}
+
+.encounter-meta,
+.loot-meta,
+.loot-empty {
+  margin-top: 4rpx;
+  color: var(--txt-dim);
+  font-size: 22rpx;
+}
+
+.encounter-caret {
+  flex: 0 0 auto;
+  width: 12rpx;
+  height: 12rpx;
+  margin: 0 8rpx 6rpx 12rpx;
+  border-right: 2rpx solid var(--gold-hi);
+  border-bottom: 2rpx solid var(--gold-hi);
+  transform: rotate(45deg);
+  transition: transform 150ms ease-out;
+}
+
+.encounter-open .encounter-caret {
+  transform: rotate(225deg);
+}
+
+.encounter-loot {
+  margin: 0 14rpx 10rpx;
+  border-top: 1rpx solid var(--gold-line);
+}
+
+.loot-entry + .loot-entry {
+  border-top: 1rpx solid var(--line);
+}
+
+.loot-toggle {
+  padding: 12rpx 8rpx;
+}
+
+.loot-name {
+  font-size: 25rpx;
+  overflow-wrap: break-word;
+}
+
+.loot-expand {
+  flex: 0 0 32rpx;
+  color: var(--gold-hi);
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.loot-details {
+  padding: 0 8rpx 14rpx 78rpx;
+}
+
+.loot-stat {
+  color: var(--txt);
+  font-size: 23rpx;
+  line-height: 1.5;
+}
+
+.loot-hit {
+  background: var(--gold-glow);
+}
+
+.loot-empty {
+  padding: 12rpx 4rpx 6rpx;
+}
+
+.drop-notice {
+  margin-bottom: 12rpx;
+}
+
+.pick-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pick-npc {
+  color: var(--txt-title);
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.pick-place {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4rpx 12rpx;
+  margin-top: 4rpx;
+  color: var(--txt-dim);
+}
+
+.pick-coords {
+  color: var(--gold-hi);
+  white-space: nowrap;
 }

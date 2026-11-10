@@ -1,6 +1,5 @@
 {
   "navigationBarTitleText": "中英速查",
   "enablePullDownRefresh": true,
-  "backgroundColor": "#0b0f16",
-  "navigationBarBackgroundColor": "#0b0f16"
+  "backgroundColor": "#0b0f16"
 }

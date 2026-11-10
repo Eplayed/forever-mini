@@ -1,0 +1,343 @@
+{
+  "kind": "boss-portraits-game-capture",
+  "fetched": "2026-11-09",
+  "fallback": "整目录删除后重跑数据合并与分发即回到首字占位。",
+  "identitySources": [
+    "app/data/upstream/xr-boss-model.json（按副本、中文名与 NPC ID 对照）",
+    "app/data/upstream/df-dungeon-loot.json（按副本、英文名与 NPC ID 对照）",
+    "app/data/upstream/wclbox-dungeons.json（已用站内首领 ID 与中文名）"
+  ],
+  "files": {
+    "city-of-dalaran|arcane-anomaly": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "arcane-anomaly",
+      "npcId": 245999,
+      "encounterId": 3298,
+      "bossNameEnInSource": "Arcane Anomaly",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3298.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/arcane-anomaly-54d1b01aebf4.png",
+      "sourceSha256": "067d939018f1b17d0dbd5c055982c02e21d915d6f82d6d2d970514e1982f9761",
+      "sha256": "54d1b01aebf491dec2719c246a7f9d540d35a05c9adf327b14605287b5c3ba77",
+      "bytes": 16918,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "arcane-anomaly-2",
+          "nameCn": "奥术异常体"
+        }
+      ]
+    },
+    "city-of-dalaran|fel-ancient": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "fel-ancient",
+      "npcId": 246003,
+      "encounterId": 3299,
+      "bossNameEnInSource": "Fel Ancient",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3299.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/fel-ancient-af357a47d9fd.png",
+      "sourceSha256": "32ea04f8dfa9cecd490bc5c66e5cde9b92086e4ccbe11e9e33fcfd3af9e0e50c",
+      "sha256": "af357a47d9fd0264dad6db916970123385cfb63d1818ec4a06ac3d686ba73c71",
+      "bytes": 21419,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "city-of-dalaran|mana-devourer": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "mana-devourer",
+      "npcId": 246008,
+      "encounterId": 3300,
+      "bossNameEnInSource": "Mana Devourer",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3300.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/mana-devourer-3e68a8312467.png",
+      "sourceSha256": "958b78c013b5145634b2b7753a5fcc701bca2d72717548cef7c7d5a2cba961ed",
+      "sha256": "3e68a8312467f1054f16efd31ad7e5930d388bb939873b2d90bfb8827926564f",
+      "bytes": 19860,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "city-of-dalaran|arcanic-enigma": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "arcanic-enigma",
+      "npcId": 246016,
+      "encounterId": 3301,
+      "bossNameEnInSource": "Mana Elemental",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/#arcanic-enigma",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3301.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/arcanic-enigma-34f6dd46dd6f.png",
+      "sourceSha256": "13b9418b184257f6e90044dc5e45e6a48366660e0374d80709c71f651b16f741",
+      "sha256": "34f6dd46dd6f926d5b76acf784e62a4c57df7df8a6304acb17c7f5d533dfe526",
+      "bytes": 17805,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "arcanic-enigma-2",
+          "nameCn": "奥术谜团"
+        }
+      ],
+      "identityNote": "原作者在遭遇 3301 的 Mana Elemental 面板登记 arcanic-enigma 锚点；本机 DF 用 Arcanic Enigma NPC 246016。两种来源称法分别保留。"
+    },
+    "city-of-dalaran|unstable-sentinel": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "unstable-sentinel",
+      "npcId": 246017,
+      "encounterId": 3302,
+      "bossNameEnInSource": "Unstable Sentinel",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3302.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/unstable-sentinel-e8d0976e6dc5.png",
+      "sourceSha256": "880f6b85f4ae21d1dbde650cb72f14d2d114e976fd9360e8141b2356d42f59fa",
+      "sha256": "e8d0976e6dc56a30a2de55060589f9adb8e8047a94a3f28625cce7abf43390d1",
+      "bytes": 21069,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "city-of-dalaran|shade-of-the-archmage": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "shade-of-the-archmage",
+      "npcId": 246020,
+      "encounterId": 3303,
+      "bossNameEnInSource": "Shade of the Archmage",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3303.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/shade-of-the-archmage-5c56ceea73bb.png",
+      "sourceSha256": "5396433547e6ae660ba059099d1b63cc02ecfad249621ace2b6a2deecd34b738",
+      "sha256": "5c56ceea73bb5566f05e77ed7b41e804e0a9efabd7a0ba9cc1484a292ee40271",
+      "bytes": 21188,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "city-of-dalaran|lyn-the-ignored": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "lyn-the-ignored",
+      "npcId": 247032,
+      "encounterId": 3310,
+      "bossNameEnInSource": "Lyn the Ignored",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3310.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/lyn-the-ignored-796bc5762328.png",
+      "sourceSha256": "c9699cb4b46ac26a0e0277566dfc665a6262eda5645689b5d53d286f541dc9e8",
+      "sha256": "796bc576232891a7d11971e483bb98b9e55fddba2d262c876aebbed0b888d4ee",
+      "bytes": 18733,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "lyn-the-ignored-2",
+          "nameCn": "被无视的琳"
+        }
+      ]
+    },
+    "city-of-dalaran|atrexis-the-grave-knight": {
+      "dungeonId": "city-of-dalaran",
+      "bossId": "atrexis-the-grave-knight",
+      "npcId": 247126,
+      "encounterId": 3311,
+      "bossNameEnInSource": "Atrexis the Grave Knight",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/city-of-dalaran/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3311.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/atrexis-the-grave-knight-abbc3f9e3586.png",
+      "sourceSha256": "00e5ec3f6201067a6a4294d765f8437e2493afd25f9d8026791ab9e10de744ae",
+      "sha256": "abbc3f9e3586164a250701110d2be881d46980e783f2d173fac74b072c5d92df",
+      "bytes": 18591,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "atrexis-the-grave-knight-2",
+          "nameCn": "墓穴骑士阿特雷克西斯"
+        }
+      ]
+    },
+    "whelgars-excavation|saltspine": {
+      "dungeonId": "whelgars-excavation",
+      "bossId": "saltspine",
+      "npcId": 260322,
+      "encounterId": 3480,
+      "bossNameEnInSource": "Saltspine",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3480.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/saltspine-c6f35e030137.png",
+      "sourceSha256": "9cdcca0e287f05b29f229bca5e117d669408aab89a569f70e112c83800f1c010",
+      "sha256": "c6f35e0301377b304d662dbe6326ef93849ce05c020fe5ec82f3ddeef3533873",
+      "bytes": 22203,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "whelgars-excavation|shadetooth": {
+      "dungeonId": "whelgars-excavation",
+      "bossId": "shadetooth",
+      "npcId": 260325,
+      "encounterId": 3481,
+      "bossNameEnInSource": "Shadetooth",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3481.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/shadetooth-22b1adce5a05.png",
+      "sourceSha256": "bd2a2daadbe2fd7ad8507d6add43131bed71a7b7854f0307f95818da533c6579",
+      "sha256": "22b1adce5a0500918df52757855b487324f1548bee5548728ea1df2a5522b7dd",
+      "bytes": 19116,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "whelgars-excavation|highland-horror": {
+      "dungeonId": "whelgars-excavation",
+      "bossId": "highland-horror",
+      "npcId": 9010,
+      "encounterId": 3644,
+      "bossNameEnInSource": "Highland Horror",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3644.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/highland-horror-39a298ce223d.png",
+      "sourceSha256": "fc651892518ad1d70d210f939f1d6d3e57e5a42c42e82452388a9d4e62141a93",
+      "sha256": "39a298ce223d9f0034291d2ea3225275c249c5ab77f17282dece5465d48d720f",
+      "bytes": 18452,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "highland-horror-2",
+          "nameCn": "高地惊魂"
+        }
+      ]
+    },
+    "whelgars-excavation|relic-guardian": {
+      "dungeonId": "whelgars-excavation",
+      "bossId": "relic-guardian",
+      "npcId": 260326,
+      "encounterId": 3482,
+      "bossNameEnInSource": "Relic Guardian",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3482.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/relic-guardian-ff060d3e5fc4.png",
+      "sourceSha256": "39a75dc915d76f9a1ab698e1fca146811ae1973233bd851626a7456122c33596",
+      "sha256": "ff060d3e5fc4ffc7eea79d670a8cf0d39c61c02c3bdb238ad2d08c4fa2c8dc37",
+      "bytes": 22326,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "relic-guardian-2",
+          "nameCn": "遗物守护者"
+        }
+      ]
+    },
+    "ruins-of-lordaeron|witherfang": {
+      "dungeonId": "ruins-of-lordaeron",
+      "bossId": "witherfang",
+      "npcId": 250625,
+      "encounterId": 3353,
+      "bossNameEnInSource": "Witherfang",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/ruins-of-lordaeron/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3353.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/witherfang-5c72a27ac23e.png",
+      "sourceSha256": "32d300c0b829598fd9af70dd217327be71a2ec856f8cacf87c6bcda15fd2f4eb",
+      "sha256": "5c72a27ac23e370a518b21b84495de7820d7fa4eb54e9fd0859101524562eab3",
+      "bytes": 18302,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "ruins-of-lordaeron|rath-mael": {
+      "dungeonId": "ruins-of-lordaeron",
+      "bossId": "rath-mael",
+      "npcId": 250657,
+      "encounterId": 3354,
+      "bossNameEnInSource": "Rath'mael",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/ruins-of-lordaeron/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3354.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/rath-mael-c087d45e5625.png",
+      "sourceSha256": "728db52d8d19180e5aed97c7ba01896943fec71edeb473c30d0f851ea7e43821",
+      "sha256": "c087d45e5625dd2ffcd5ad06041c103ac3b5c2549f9fa881351d38cf4f8474e5",
+      "bytes": 21007,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    },
+    "ruins-of-lordaeron|viktor-the-vile": {
+      "dungeonId": "ruins-of-lordaeron",
+      "bossId": "viktor-the-vile",
+      "npcId": 256035,
+      "encounterId": 3411,
+      "bossNameEnInSource": "Viktor the Vile",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/ruins-of-lordaeron/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3411.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/viktor-the-vile-24dbb0f136b6.png",
+      "sourceSha256": "4e621ab1f32116148175f0ed84a87114ae65a382d25974223568e4a7c38c1ba2",
+      "sha256": "24dbb0f136b672e301ef8f8916fb5eecb926fee8bcb425acba3ed9435b78f798",
+      "bytes": 21261,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。",
+      "aliases": [
+        {
+          "bossId": "viktor-the-vile-2",
+          "nameCn": "邪恶的维克托"
+        }
+      ]
+    },
+    "ruins-of-lordaeron|bjork": {
+      "dungeonId": "ruins-of-lordaeron",
+      "bossId": "bjork",
+      "npcId": 256097,
+      "encounterId": 3412,
+      "bossNameEnInSource": "Bjork",
+      "origin": "game-capture",
+      "sourceUrl": "https://forever-tavern.com/dungeons/ruins-of-lordaeron/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/boss-3412.webp",
+      "fetched": "2026-11-09",
+      "file": "img/art/bosses-game-capture/bjork-584abab85259.png",
+      "sourceSha256": "a7186fc4bbdd9c1c6fb16f80f9f1cb5619e5b27d121a0c8378c51e4c715f40ea",
+      "sha256": "584abab8525904957abbdd991ab4641b8777aba8a2aa133e73c34ea2616b4cba",
+      "bytes": 21017,
+      "width": 112,
+      "height": 112,
+      "note": "作者标记为自录 Beta 头像。原 WebP 无损转存 PNG，逐像素一致。"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，指南可能显示不全。请更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{offline}}" class="notice">
     现在没连上线，指南要联网取。
@@ -8,16 +8,13 @@
 
   <view class="lead plate">
     <view class="lead-t">指南</view>
-    <view class="lead-s">{{boundaries}}</view>
   </view>
 
   <view wx:if="{{!loaded}}" class="card muted">正在取指南…</view>
 
   <block wx:if="{{loaded}}">
     <view wx:if="{{!macros.length && !addons.length}}" class="card empty">
-      <view>这一节还在整理。</view>
-      <view class="muted">插件名单要逐条标作者和原帖才会上来，指不出谁写的按待核不发布。练级攻略还没开始写。
-      宏命令已经单独成一页（首页「宏命令」那一格，245 条按职业分），这一页只留插件名单。</view>
+      <view>暂无指南内容。</view>
     </view>
 
     <view wx:if="{{macros.length}}" class="sec">
@@ -46,6 +43,6 @@
     </view>
   </block>
 
-  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{errorText}}" class="notice notice-bad">指南加载失败，请稍后再试。</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

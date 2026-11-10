@@ -1,17 +1,17 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，掉落可能显示不全。请更新「跑本助手」后再查。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{needOnline}}" class="notice notice-bad">
-    掉落反查表要联网才能取（整张表一次取回，之后本机就存着）。现在没连上，这一页不给离线内容。
+    联网后可查询掉落。
   </view>
   <view wx:elif="{{offline && kw}}" class="notice">
-    当前显示的是{{sourceText}}，可能不是最新核对结果。
+    当前离线，显示已保存的内容。
   </view>
 
   <view class="lead plate">
     <view class="lead-t">掉落反查</view>
-    <view class="lead-s">输入装备或物品的中文名，或物品编号，查它是哪座本、哪个首领掉的。{{qualityNote}}</view>
+    <view class="lead-s">用物品名称或编号查询掉落。</view>
     <!-- 从副本详情点首领跳过来时只看那一位掉的（2026-11-09）；叉掉恢复全表 -->
     <view wx:if="{{filterDungeon || filterBoss}}" class="filter-bar" bindtap="onClearFilter">
       <text class="filter-t">只看：{{filterDungeonName || filterDungeon}}{{filterBoss ? ' · ' + filterBoss : ''}} 掉的装备</text>
@@ -24,7 +24,7 @@
     <view wx:if="{{kw}}" class="fav-btn" bindtap="onClear">清空</view>
   </view>
 
-  <view wx:if="{{!loaded}}" class="card muted">正在取掉落表…（第一次约 115 KB，之后走本机缓存）</view>
+  <view wx:if="{{!loaded}}" class="card muted">正在加载掉落…</view>
 
   <view wx:if="{{loaded && !kw && !filterDungeon && !filterBoss}}" class="card empty">
     <view>先输入要查的东西。</view>
@@ -32,13 +32,13 @@
 
   <!-- 从副本详情点首领跳过来时：清单直接给（不用再输关键词）；这位首领没收录掉落就照实说 -->
   <view wx:if="{{loaded && !kw && (filterDungeon || filterBoss) && !list.length}}" class="card empty">
-    <view>这位首领（或这座本）在本站收录的掉落里还没有记录。</view>
-    <view class="muted">可能是掉落还没收进表，也可能是名字写法不一样。点上面的「看全表」可以回到全部掉落。</view>
+    <view>暂无掉落记录。</view>
+    <view class="muted">点「看全表」可取消筛选。</view>
   </view>
 
   <view wx:if="{{loaded && kw && !list.length}}" class="card empty">
-    <view>本站收录的掉落里没有「{{kw}}」。</view>
-    <view class="muted">查不到不等于这件东西不存在，可能是这座本还没收录，也可能是中文名叫法不一样。换个词，或只输入名字里的一段。</view>
+    <view>未找到「{{kw}}」的掉落。</view>
+    <view class="muted">试试缩短关键词或输入物品编号。</view>
   </view>
 
   <view class="it {{expandedId === item.id ? 'it-open' : ''}}" wx:for="{{list}}" wx:key="id">
@@ -70,6 +70,6 @@
   </view>
 
   <view wx:if="{{truncated}}" class="muted truncated">匹配太多，只列前 {{list.length}} 条（共 {{truncated}} 条），请把词输长一点。</view>
-  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{errorText}}" class="notice notice-bad">掉落数据可能不完整，请联网后刷新。</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

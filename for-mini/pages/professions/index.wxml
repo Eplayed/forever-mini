@@ -2,28 +2,25 @@
   <!-- 远程开关关着：一句话给到，不发数据请求、不留空白格（services/features.js 的界面义务） -->
   <view wx:if="{{locked}}" class="card">
     <view class="h1">{{lockName}} · 这一页还没开放</view>
-    <view class="note">开放的时候不用更新小程序，这一页会自己出现在首页上。</view>
     <view class="btn" bindtap="goHome">回首页</view>
   </view>
 
   <view wx:elif="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{unavailable}}" class="notice">
-    这一版还没有专业与配方的数据。{{errText ? '（' + errText + '）' : ''}}
+    配方数据暂不可用，请稍后再试。
   </view>
   <view wx:elif="{{needOnline}}" class="notice">
-    现在没连上线，专业与配方要联网才取到；这一页没带在小程序里，所以离线看不到。
+    联网后可查看专业与配方。
   </view>
 
   <block wx:elif="{{loaded && meta}}">
-    <!-- 页头：板块图与网页专业页同一张（站内同一板块同一张脸），口径那句由分发层下发、页面不改写 -->
     <view class="card">
       <view class="head">
         <icon-cell src="{{headUrl}}" size="md" label="专" />
         <view class="head-t">
           <view class="h1">{{meta.title}}</view>
-          <view class="note2">{{meta.took}}</view>
         </view>
       </view>
       <view class="stats">
@@ -60,9 +57,8 @@
       </view>
     </view>
 
-    <!-- 拆不出条目的那一档：那句话取自数据里的 note，不在代码里另编一遍 -->
     <view class="card" wx:if="{{sel.unparsed}}">
-      <view class="empty">{{sel.note || '这一版还没拆出可列的条目。'}}</view>
+      <view class="empty">暂无该专业的配方。</view>
     </view>
 
     <view class="card" wx:if="{{nodeRows.length}}">
@@ -88,7 +84,6 @@
         <view class="bt">配方</view>
         <view class="bn">{{totalRecipes}} 条 · 按技能橙点分箱</view>
       </view>
-      <view class="band-note" wx:if="{{bandNote}}">{{bandNote}}</view>
 
       <view class="grp" wx:for="{{bands}}" wx:for-item="g" wx:key="label">
         <view class="grp-h" wx:if="{{g.count}}">

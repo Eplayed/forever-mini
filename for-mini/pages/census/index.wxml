@@ -1,0 +1,65 @@
+<view class="wrap">
+  <view class="card census-head">
+    <view class="census-title">人口普查</view>
+    <view wx:if="{{sample && !hasChina}}" class="muted">国服暂无可用数据</view>
+  </view>
+
+  <view wx:if="{{loading && !sample}}" class="card muted">正在加载…</view>
+  <view wx:elif="{{!sample}}" class="card">
+    <view>{{notice}}</view>
+    <button class="btn census-action" bindtap="onRetry">重试</button>
+  </view>
+
+  <block wx:if="{{sample}}">
+    <view wx:if="{{hasChina}}" class="census-tabs">
+      <button class="btn census-action {{selectedSource === 'china' ? 'census-tab-on' : ''}}" data-source="china" bindtap="onSourceSelect">国服</button>
+      <button class="btn census-action {{selectedSource === 'community' ? 'census-tab-on' : ''}}" data-source="community" bindtap="onSourceSelect">社区样本</button>
+    </view>
+    <view wx:if="{{offline}}" class="notice">离线数据 · 可能不是最新</view>
+    <view class="card">
+      <view class="census-kicker">{{sample.source}} · {{sample.scope}}</view>
+      <view wx:if="{{sample.characters}}" class="sample-total">{{sample.characters}}<text class="sample-unit"> 个观察到的角色</text></view>
+      <view wx:if="{{sample.range}}" class="muted census-meta">{{sample.range}}</view>
+      <view wx:if="{{sample.note}}" class="muted census-note">{{sample.note}}</view>
+    </view>
+
+    <view class="card">
+      <view class="census-section">阵营比例</view>
+      <view class="faction-row">
+        <view class="faction-cell faction-{{item.id}}" wx:for="{{sample.factions}}" wx:key="id">
+          <view class="faction-line">
+            <text class="faction-name">{{item.name}}</text>
+            <text class="faction-value">{{item.percent}}</text>
+          </view>
+          <progress wx:if="{{item.progress !== null}}" class="census-progress" percent="{{item.progress}}"
+                    stroke-width="6" border-radius="3"
+                    activeColor="{{item.id === 'alliance' ? '#49aee9' : '#e17668'}}" backgroundColor="#172737" />
+          <view wx:if="{{item.count}}" class="muted census-meta">{{item.count}} 个角色</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="census-section">职业分布</view>
+      <view class="muted census-note">{{sample.classNote}}</view>
+      <view class="class-row" wx:for="{{sample.classes}}" wx:key="id">
+        <view class="class-line">
+          <view class="class-name">{{item.name}}</view>
+          <view class="class-value"><text wx:if="{{item.count}}" class="muted class-count">{{item.count}}</text><text>{{item.percent}}</text></view>
+        </view>
+        <progress wx:if="{{item.progress !== null}}" class="census-progress" percent="{{item.progress}}"
+                  stroke-width="5" border-radius="3" activeColor="#d9af69" backgroundColor="#172737" />
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="census-section">数据来源</view>
+      <view class="muted census-note">{{sample.credit}}</view>
+      <view class="census-links">
+        <button class="btn census-action" wx:for="{{sample.links}}" wx:key="url"
+                data-index="{{index}}" bindtap="copySource">复制{{item.label}}</button>
+      </view>
+    </view>
+  </block>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

@@ -1,44 +1,29 @@
-/* 设计令牌：与网页端 wow-forever-web/app/src/styles/tokens.css 同一套值（2026-10-12 换轨后的现行版），
-   不是 docs/UI.md §2.0 那段历史。设计依据与官网实测值见
-   wow-forever-web/docs/UI-小程序首页与令牌对齐-2026-10-21.md。
-   规则：页面 wxss 里不许再写裸色值，要新色先加到这里。小程序主包不放中文字体，
-   标题层级靠字号与字重拉开（官网那套方正兰亭黑是商用授权，不抄）。 */
+/* 小程序主题参照国服《无限》专题的冒险章节。游戏品质色与阵营色独立。 */
 page {
-  --bg: #0b0f16;
-  --panel: #1b2335;
-  --panel-2: #131a28;
-  /* 玻璃底的面色（2026-10-24 站主二次指令：要更像玻璃；同日三次指令：毛玻璃还不够）。
-     基色比 --panel-2 亮一档（28,39,60）、不透明度 0.46——面色越接近页底色，透出来就越像"没变"，
-     亮一档的底色 + 重虚化才是磨砂感的主来源（0.5/19,26,40 那一版卡片内部只有 15,20,31，
-     跟页底 11,15,22 差不到一档）。
-     只有铺了底图的三个 tab 页用它，别的页面仍是纯色，不受影响。 */
-  --panel-glass: rgba(28, 39, 60, 0.46);
-  /* 玻璃的四件质感：顶部一道 2px 反光沿、上半一小段乳白（只到 22% 高，再往下铺就会把
-     20rpx 那档小字压到 AA 线下——2026-10-24 试过占 16% 的成片高光带，最差那档掉到 3.98:1，
-     而且它当时还把 m01 那把"按颜色找卡片顶边"的探针带偏过，那把探针现已改成量几何）、
-     底部压暗（卡片自己的厚度）、身后画面重虚化。
-     虚化半径 30px + 提饱和提亮，是"磨砂"而不是"透明"的那一分。
-     值只写在这里，页面只引用令牌。老内核不认 backdrop-filter 时那一条整条忽略，
-     退化成一层面色玻璃 + 一片已经糊掉的环境底图，版式不受影响（真机效果待人工复核）。 */
-  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.055) 2px, rgba(255, 255, 255, 0.012) 22%, rgba(11, 15, 22, 0.06) 55%, rgba(11, 15, 22, 0.30) 100%);
-  --glass-blur: blur(30px) saturate(180%) brightness(1.10);
+  --bg: #15202f;
+  --panel: #293d49;
+  --panel-2: #263844;
+  --panel-glass: rgba(31, 48, 59, 0.79);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 2px, rgba(255, 255, 255, 0.04) 2px, transparent 25%, rgba(16, 27, 40, 0.24));
   --glass-line: rgba(255, 255, 255, 0.22);
-  --elev: #2a364c;
-  --leather: #2a1c1c;
-  --foot: #080b11;
+  --elev: #2f4860;
+  --leather: #182b3a;
+  --foot: #192235;
 
-  --line: #2c3850;
-  --line-2: #3a465e;
+  --line: #385064;
+  --line-2: #4b6579;
   --gold: #c8a35c;
   --gold-hi: #e6c886;
-  --gold-hot: #f8b700;
+  --gold-hot: #f7b90a;
   --gold-deep: #a8863f;
   --accent: var(--gold);
-  --accent-ink: #1a1408;
+  --accent-ink: #231206;
   --gold-line: rgba(200, 163, 92, 0.30);
   --gold-line-soft: rgba(200, 163, 92, 0.15);
   --gold-glow: rgba(200, 163, 92, 0.12);
 
+  --jade: #0f6064;
+  --jade-line: #73aeb0;
   --azure: #49aee9;
   --azure-deep: #1d8dcd;
   --blue: var(--azure);
@@ -64,11 +49,11 @@ page {
   --q4: #a335ee;
   --q5: #ff8000;
 
-  --txt: #e9e2d2;
-  --txt-title: #f2ead8;
-  --txt-dim: #aeb6c4;
-  --txt-muted: #8a93a5;
-  --txt-hint: #7e8696;
+  --txt: #ebdec2;
+  --txt-title: #f3eee2;
+  --txt-dim: #bec9d1;
+  --txt-muted: #a7b5c3;
+  --txt-hint: #9eafbf;
 
   /* 分级四态：有序量，用明度阶梯 + 徽标形状 + 文字三通道，不靠色相 */
   --lv0: #e2ecf5;
@@ -85,31 +70,18 @@ page {
   --warn-bg: rgba(221, 159, 68, 0.12);
   --bad-bg: rgba(199, 92, 92, 0.16);
 
-  /* 底图压暗层（2026-10-22 首页配图）：页面背景与卡片背景都要盖一层暗底，
-     不然原画的亮部会把文字吃掉。同样只在这里写 rgba，页面里引用令牌。
-     2026-10-24：从 0.88 降到 0.76。这张官方天裔图本身是亮蓝的（整幅均值 110,148,177，
-     顶部一条 p90 到 184,219,240），压到 0.88 只剩 12% 的画面，等于把图压成一块纯色，
-     卡片再怎么透也透不出东西。0.76 留 24%（是原来的两倍）。
-     代价是可读性，所以这一版是逐行文字量出来的，不是估的：实拍两帧对照，
-     每个文字元素自己那一小块的主色 vs 它的令牌色，最差的一档是倒计时卡底部那行
-     20rpx 说明文字（--txt-muted）5.21:1，AA 线是 4.5；其余从 6.05 到 12.74。
-     再往下压暗就换来对比度，往上就换来透，要哪一头由站主看实拍定。 */
-  --scrim-page: rgba(11, 15, 22, 0.76);
-  /* 首页专用压暗层（2026-10-26 站主：首页还是看不清背景图）。
-     首页第一屏约七成面积被卡片盖住，整幅统一压暗时"背景"只剩卡片缝里一点暗色，
-     所以首页改成渐变压暗：顶部 260rpx 一条只压 22%（原图带，那一截不放任何文字，
-     金色发丝线落在它的下沿当分隔），260→300rpx 之间过渡，往下才压到 0.70——
-     过渡必须在倒计时卡顶边之前走完，卡片里那几行小字是浅色字，压不到 0.70 就掉到 AA 线下。
-     副本/职业两页顶部有搜索框、筛选 chip 这些直接压在页底上的字，不能用这条，仍吃 --scrim-page。 */
-  --scrim-home: linear-gradient(180deg, rgba(11, 15, 22, 0.22) 0rpx, rgba(11, 15, 22, 0.22) 260rpx, rgba(11, 15, 22, 0.70) 300rpx, rgba(11, 15, 22, 0.70) 100%);
-  --scrim-card: rgba(11, 15, 22, 0.58);
-  --scrim-card-b: rgba(11, 15, 22, 0.86);
-  --scrim-pop: rgba(8, 11, 17, 0.78);
-  --lead: #8a93a5;
+  --adventure-bg: linear-gradient(180deg, #514632, #62543b 32%, #334956 74%, var(--bg));
+  --scrim-page: linear-gradient(180deg, rgba(21, 32, 47, 0.24), rgba(21, 32, 47, 0.50) 46%, var(--bg) 94%);
+  --home-feature-scrim: linear-gradient(90deg, rgba(16, 25, 31, 0.54), transparent 74%), linear-gradient(0deg, rgba(18, 24, 29, 0.88), transparent 64%);
+  --home-tile-scrim: linear-gradient(90deg, rgba(19, 24, 27, 0.87), rgba(19, 24, 27, 0.22));
+  --scrim-card: rgba(16, 27, 40, 0.58);
+  --scrim-card-b: rgba(16, 27, 40, 0.86);
+  --scrim-pop: rgba(16, 27, 40, 0.78);
+  --lead: #a7b5c3;
 
-  --sunk: #0d121c;
-  --field: #101725;
-  --hatch: #46506a;
+  --sunk: #172737;
+  --field: #182a3a;
+  --hatch: #506779;
 
   /* 切角铭牌：与网页同一组数值（CTA 10px、铭牌 14px） */
   --cut-cta: 10px;
@@ -133,22 +105,6 @@ button::after {
 
 .wrap {
   padding: 24rpx 28rpx 60rpx;
-}
-
-/* 整页环境底图（2026-10-24 站主：三页卡片毛玻璃还不够）。
-   原因不在配方，在"没有东西可透"：那张页面底图是 widthFix 锚在顶部的，只有上面约 703rpx 有图，
-   再往下卡片背后本来就是纯色页底，玻璃透得再狠也透不出东西。
-   这一层是同一张图 fixed 铺满视口、并且自己先糊掉（filter 是画在图上的，比 backdrop-filter 通用），
-   只当一片柔和的色场给卡片去透；它压在 .pagebg-scrim 那层暗底下面，所以不会亮过顶部那张原图。
-   三个 tab 页共用，写在全局；图取不到时（bgUrl 为空）这一层整个不渲染。 */
-.pagebg-ambient {
-  position: fixed;
-  left: -40px;
-  top: -40px;
-  width: calc(100% + 80px);
-  height: calc(100vh + 80px);
-  z-index: 0;
-  filter: blur(26px) saturate(150%);
 }
 
 .card {

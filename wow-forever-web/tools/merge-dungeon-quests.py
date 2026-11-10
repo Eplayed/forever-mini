@@ -39,6 +39,7 @@ GIQ = os.path.join(D, "upstream", "gi-dungeon-quests.json")
 # 第四源（2026-11-09）：本机 QuestieDB baked TOC 抽的全量字段（tools/extract-questie-full.py 产出）。
 # 只补 wclbox/wowhead/GI 都没给的 pickupNpc / pickupZone 空缺，已有值一律不覆盖。
 QFULL = os.path.join(D, "upstream", "questie-quests-full.json")
+PICKUP_FILES = ("df-quest-pickups.json", "forever-wetlands-quest-pickups.json")
 # GI 座键 → (wclbox 上游 slug, Wowhead Forever zone 页 url)。zone id 是站内直采时
 # 实测记下的（upstream/wowhead-dungeon-quests.json collectedButNotUsable）；url 挂
 # 数据系源头（Wowhead Forever 1.60.1），实际取数渠道是 GI 插件转述，见 provenance note。
@@ -439,6 +440,34 @@ def main():
                 "checkedAt": (qdoc.get("meta") or {}).get("extractedAt"),
             })
 
+    pickup_rows = []
+    for filename in PICKUP_FILES:
+        pickup_path = os.path.join(D, "upstream", filename)
+        if os.path.exists(pickup_path):
+            pickup_rows.extend(load(pickup_path).get("rows", []))
+    by_pickup = {(r["dungeonId"], r["nameCn"]): r for r in pickup_rows}
+    for did, dungeon in out.items():
+        for quest in dungeon["quests"]:
+            pickup = by_pickup.get((did, quest["nameCn"]))
+            if not pickup:
+                continue
+            if pickup.get("pickupNpc") and quest.get("pickupNpc") and quest["pickupNpc"] != pickup["pickupNpc"]:
+                quest["pickupNpcAlternates"] = [quest["pickupNpc"]]
+            for field in ("pickupNpc", "pickupMapId", "pickupMap", "pickupX", "pickupY",
+                          "pickupLevel", "pickupProvenance", "pickupAlternates", "startItem", "startItemId"):
+                if field in pickup:
+                    quest[field] = pickup[field]
+            if not quest.get("pickupZone") or quest.get("zoneFrom") == "questie":
+                if quest.get("pickupZone") and quest["pickupZone"] != pickup["pickupZone"]:
+                    quest["pickupZoneAlt"] = quest["pickupZone"]
+                quest["pickupZone"] = pickup["pickupZone"]
+            if pickup.get("pickupNpcAlternates"):
+                quest["pickupNpcAlternates"] = list(dict.fromkeys(
+                    quest.get("pickupNpcAlternates", []) + pickup["pickupNpcAlternates"]))
+            quest["questId"] = pickup["questId"]
+            if pickup.get("npcId") is not None:
+                quest["pickupNpcId"] = pickup["npcId"]
+
     doc = {
         "meta": {
             "generatedAt": wcl.get("meta", {}).get("scrapedAt"),
@@ -456,7 +485,8 @@ def main():
             "counts": {"dungeons": st["dungeons"], "quests": st["quests"],
                        "xpFromWowhead": st["fromWowhead"], "xpConflict": st["xpAlt"],
                        "addedFromWowhead": st["addedFromWowhead"], "deduped": st["deduped"],
-                       "itemStart": st["itemStart"], "fromGi": st["fromGi"],
+                       "itemStart": sum(bool(q.get("startItem")) for d in out.values() for q in d["quests"]),
+                       "fromGi": st["fromGi"],
                        "questieBridged": qst["bridged"], "questieAmbiguous": qst["ambiguous"],
                        "npcFromQuestie": qst["npcFilled"], "npcFromQuestieEn": qst["npcFilledEn"],
                        "zoneFromQuestie": qst["zoneFilled"], "questieSeats": q_seats}

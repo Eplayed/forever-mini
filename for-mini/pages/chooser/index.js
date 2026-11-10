@@ -54,7 +54,7 @@ Page({
       if (!d || !Array.isArray(d.questions) || !d.questions.length) {
         this.setData({
           loaded: true,
-          errorText: '问卷要联网才能取，现在取不到——待会儿再试。',
+          errorText: '问卷加载失败，请联网后重试。',
           offline: r.source !== 'live'
         })
         return

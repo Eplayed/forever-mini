@@ -1,233 +1,130 @@
-/* 首页样式。颜色一律吃 app.wxss 的令牌，这里不写裸色值；
-   切角铭牌 .plate、.foot、.muted 都在全局定义，页面只补布局。
-   2026-10-22 站主重排后新增：开服倒计时 .cd 开头、职业格 .cls9 与 .cls、
-   种族与特长 .race 与 .trait 开头。上一版留给覆盖率读数与缺口清单的样式已随界面一起删掉。 */
-
-/* —— 底图两层（2026-10-22 站主要配图；2026-10-23 二次指令：三个 tab 页统一用官方天裔那张，
-   位置 top 居中）——
-   .pagebg 是图，.pagebg-scrim 是压在图上的暗底（不压暗，原画的亮部会把文字吃掉），
-   .fg 把所有内容浮到这两层上面。图取不到时这两层整个不渲染，页面就是原来的纯色版式。
-   为什么从 aspectFill 改成 widthFix + 高度自适应：aspectFill 会把图裁满整屏并居中裁切，
-   天裔那张是 1280x1200 近方图，裁完只剩中间一条；站主要的是"图片 top 居中"，
-   所以按屏宽铺满、高度按原图比例走，锚在页面顶部、跟着页面滚。 */
-.pagebg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  z-index: 0;
+.home {
+  background: var(--adventure-bg) top / 100% 1360rpx no-repeat;
+  animation: home-reveal 240ms ease-out both;
 }
 
-.pagebg-scrim {
+@keyframes home-reveal {
+  from { opacity: 0; transform: translateY(8rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home { animation: none; }
+}
+
+.masthead, .launch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.masthead { margin-bottom: 18rpx; }
+.mast-name { color: var(--txt-title); font-size: 38rpx; font-weight: 750; }
+.mast-tag, .feature-tag {
+  color: var(--gold-hi);
+  border: 1rpx solid var(--gold-line);
+  background: var(--foot);
+  font-size: 21rpx;
+  padding: 2rpx 12rpx;
+}
+
+.launch { margin-bottom: 14rpx; color: var(--gold-hi); font-size: 23rpx; }
+
+.spotlight {
+  height: 356rpx;
+  border: 2rpx solid var(--gold);
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.feature {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  background: var(--panel);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.feature-art, .feature-scrim, .entry-art, .entry-scrim {
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
-  background: var(--scrim-home);
+  pointer-events: none;
 }
 
-/* 顶部这条空档是故意留的：那一截不放任何文字，让原图以 78% 的亮度露出来，
-   金色发丝线落在它的下沿当分隔。高度与 --scrim-home 的第一段停点是一对，改要一起改。 */
-.hero-space {
-  height: 260rpx;
-}
-
-.fg {
-  position: relative;
-  z-index: 1;
-}
-
-.hero {
-  padding: 8rpx 4rpx 28rpx;
-}
-
-.hero-title {
-  font-size: 48rpx;
-  font-weight: 600;
-  letter-spacing: 2rpx;
+.feature-scrim { background: var(--home-feature-scrim); }
+.feature-body { position: relative; padding: 28rpx; }
+.feature-title { font-weight: 800; font-size: 53rpx; line-height: 1.22; color: var(--txt-title); margin-top: 10rpx; }
+.feature-desc { color: var(--txt); font-size: 25rpx; margin-top: 6rpx; }
+.feature-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 5rpx 18rpx;
+  margin-top: 15rpx;
+  background: var(--jade);
+  border: 1rpx solid var(--jade-line);
   color: var(--txt-title);
-}
-
-.hero-sub {
   font-size: 24rpx;
-  color: var(--txt-dim);
-  margin-top: 6rpx;
-}
-
-/* —— 开服倒计时：站主要它占顶部约 1/4 屏（iPhone 6 上一屏 1334rpx，取 330rpx）——
-   这块不写"数据核对到哪天"之类的话，只回答"还有几天开服"；过了那天页面直接不渲染。
-   2026-10-24 玻璃底三层（站主：卡片加玻璃效果，让页面背景更容易看到）：
-   --glass-sheen 是斜向高光，--panel-glass 是面色的玻璃，backdrop-filter 把身后的底图虚化。
-   这张卡正好压在底图最亮的那一段上，是"透不透"最看得出的一处。 */
-.cd {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 330rpx;
-  margin-bottom: 30rpx;
-  padding: 26rpx 24rpx 24rpx;
-  background: var(--glass-sheen), var(--panel-glass);
-  backdrop-filter: var(--glass-blur);
-  border: 1rpx solid var(--gold-line);
+  font-weight: 700;
   border-radius: var(--r-ctl);
-  box-sizing: border-box;
 }
 
-.cd-brand {
-  font-size: 24rpx;
-  letter-spacing: 2rpx;
+.feature-tabs { display: flex; gap: 12rpx; margin-top: 10rpx; }
+.feature-tab {
+  flex: 1;
   color: var(--txt-dim);
-}
-
-.cd-sub {
-  font-size: 20rpx;
-  letter-spacing: 0;
-  color: var(--txt-muted);
-  margin-left: 14rpx;
-}
-
-.cd-kicker {
+  background: var(--foot);
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
   font-size: 22rpx;
-  letter-spacing: 4rpx;
-  color: var(--gold);
-  margin-top: 22rpx;
+  line-height: 2.2;
 }
-
-.cd-row {
-  display: flex;
-  align-items: baseline;
-  margin-top: 6rpx;
-}
-
-/* 天数是这块的主读数：字号拉开一档，数字用等宽避免每秒跳动时宽度抖 */
-.cd-num {
-  font-size: 92rpx;
-  line-height: 1.05;
-  font-weight: 600;
-  color: var(--gold-hi);
-  font-family: Menlo, Consolas, monospace;
-  font-variant-numeric: tabular-nums;
-}
-
-.cd-unit {
-  font-size: 26rpx;
-  color: var(--txt-dim);
-  margin-left: 8rpx;
-}
-
-/* 只剩半天时不写"0 天"，换成这一句（字号收一档，它是一句话不是一个数） */
-.cd-today {
-  font-size: 64rpx;
-  line-height: 1.2;
-  font-weight: 600;
-  color: var(--gold-hi);
-}
-
-.cd-note {
-  font-size: 20rpx;
-  color: var(--txt-muted);
-  margin-top: 10rpx;
-  line-height: 1.5;
-}
+.feature-tab-on { color: var(--gold-hi); background: var(--panel-2); border-color: var(--gold-line); box-shadow: inset 0 -3rpx var(--gold); }
 
 .sec-title {
-  font-size: 22rpx;
-  letter-spacing: 4rpx;
-  color: var(--gold);
-  margin: 4rpx 0 14rpx;
+  color: var(--gold-hi);
+  font-size: 27rpx;
+  font-weight: 700;
+  margin: 24rpx 0 12rpx;
 }
+.sec-title-2 { margin-top: 24rpx; }
 
-.sec-title-2 {
-  margin-top: 28rpx;
-}
-
-/* 流式入口卡：一行两张，容器变窄自动换行 */
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -8rpx;
-}
-
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12rpx; }
 .entry {
   position: relative;
   overflow: hidden;
-  flex: 1 1 300rpx;
-  min-width: 300rpx;
-  min-height: 200rpx;
-  margin: 0 8rpx 16rpx;
-  background: var(--glass-sheen), var(--panel-glass);
-  backdrop-filter: var(--glass-blur);
-  border: 1rpx solid var(--gold-line);
-  border-radius: var(--r-ctl);
-  padding: 24rpx 22rpx 20rpx;
+  min-width: 0;
+  padding: 18rpx;
   box-sizing: border-box;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: 7rpx;
 }
-
-/* 卡的底图铺满整格，上面再压一层由下往上的暗渐变：
-   上半留原画、下半保证名称与那行说明读得清 */
-.entry-art {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.entry-scrim {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background: linear-gradient(180deg, var(--scrim-card) 0%, var(--scrim-card-b) 78%);
-}
-
-.entry-name {
-  position: relative;
-  z-index: 1;
-  font-size: 30rpx;
-  color: var(--txt-title);
-}
-
-.entry-desc {
-  position: relative;
-  z-index: 1;
-  font-size: 22rpx;
-  color: var(--txt-dim);
-  margin-top: 10rpx;
-  min-height: 66rpx;
-}
-
-/* —— 图标入口卡（2026-11-03 站主照截图重排：BIS、起名从整宽卡改进两列格）——
-   头一行 = 自绘图标（img/home/）+ 名称并排，下面接说明行；
-   底子与带底图的入口格同一套玻璃令牌，两格放在一排里高矮一致。 */
-.entry-head {
-  position: relative;
-  z-index: 1;
+.priority-entry {
+  min-height: 126rpx;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  border-color: var(--gold-line);
+  background: var(--panel);
 }
+.entry-scrim { background: var(--home-tile-scrim); }
+.entry-content { position: relative; width: 100%; }
+.entry-emblem { position: absolute; width: 108rpx; height: 108rpx; right: 21rpx; top: 9rpx; opacity: 0.42; }
+.entry-name { position: relative; font-size: 27rpx; font-weight: 700; color: var(--txt-title); padding-right: 24rpx; }
+.entry-arrow { position: absolute; right: 0; top: 0; color: var(--gold-hi); }
+.entry-desc { position: relative; font-size: 21rpx; color: var(--txt); margin-top: 2rpx; }
+.entry-pressed { border-color: var(--gold-hi); background: var(--panel); }
+.tool-icon { position: absolute; width: 48rpx; height: 48rpx; right: 36rpx; top: 17rpx; opacity: 0.26; }
 
-.entry-ic {
-  width: 72rpx;
-  height: 72rpx;
-  flex-shrink: 0;
-}
+.cls9 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8rpx; }
+.cls { min-width: 0; text-align: center; padding: 8rpx 0; border: 1rpx solid transparent; }
+.cls-on { border-color: var(--gold-line); background: var(--panel-2); }
+.cls-name { font-size: 21rpx; color: var(--txt-dim); }
 
-.entry-head .entry-name {
-  font-weight: 600;
-  margin-left: 16rpx;
-}
-
-/* —— 职业格 ——
-   格子的版式（一行五格、超出换行、选中态）在 app.wxss 里与职业页共用一份，
-   这里只留首页特有的两句：不许出现横向滚动条（站主 2026-10-22 明确要求），
-   所以这一排不用 scroll-view 包——全页只有"最近看过"那条轨用横滚。 */
 .cls-empty {
   margin-bottom: 10rpx;
 }
@@ -255,7 +152,6 @@
 
 .race {
   background: var(--glass-sheen), var(--panel-glass);
-  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--gold-line-soft);
   border-radius: var(--r-ctl);
   padding: 20rpx 20rpx 8rpx;
@@ -351,7 +247,6 @@
   margin-right: 14rpx;
   padding: 18rpx;
   background: var(--glass-sheen), var(--panel-glass);
-  backdrop-filter: var(--glass-blur);
   border: 1rpx solid var(--line-2);
   border-radius: var(--r-ctl);
   box-sizing: border-box;
@@ -376,9 +271,4 @@
   font-size: 20rpx;
   color: var(--txt-muted);
   margin-left: 10rpx;
-}
-
-/* 底图两层是 absolute，锚在这一层顶上（跟着页面滚，不会钉在屏幕中间） */
-.wrap {
-  position: relative;
 }

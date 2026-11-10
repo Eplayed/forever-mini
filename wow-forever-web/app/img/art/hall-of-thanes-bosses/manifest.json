@@ -1,0 +1,83 @@
+{
+  "kind": "boss-portraits-game-capture",
+  "dungeonId": "hall-of-thanes",
+  "fetched": "2026-11-09",
+  "fallback": "整目录删除即回退到首领名字首字占位。",
+  "files": {
+    "faldrim-anvilmar": {
+      "file": "img/art/hall-of-thanes-bosses/faldrim-anvilmar-4bbf8be16a6f.png",
+      "origin": "game-capture",
+      "npcId": 261306,
+      "npcNameEn": "Faldrim Anvilmar",
+      "encounterId": 3493,
+      "sourceUrl": "https://forever-tavern.com/dungeons/the-hall-of-thanes/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/3493.webp",
+      "fetched": "2026-11-09",
+      "sourceSha256": "48de06afde964bebe5cc0f90a584523b55a933d8d31e9129285b42b74270ddb3",
+      "sha256": "4bbf8be16a6fbc55879ed2f3cb03e4241b1b6d9610a433b59ce48ec3dd4dd025",
+      "bytes": 22078,
+      "width": 112,
+      "height": 112,
+      "crop": null,
+      "note": "来源页面标为作者自录 Beta 游戏内头像，WebP 无损转存为 PNG，像素逐点一致。"
+    },
+    "infurnus": {
+      "file": "img/art/hall-of-thanes-bosses/infurnus-886fdf1e48f1.png",
+      "origin": "game-capture",
+      "npcId": 261316,
+      "npcNameEn": "Magmatus",
+      "encounterId": 3495,
+      "sourceUrl": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/#boss-magmatus",
+      "assetUrl": "https://dlonem.com/assets/img/wow/hot-magmatus-2.jpg",
+      "fetched": "2026-11-09",
+      "sourceSha256": "643e58fe624a7b8ba0d164c5620c20067f53a6ad86b786c97fc0af216580be14",
+      "sha256": "886fdf1e48f199e01930af0d53a9c3db320f84ef42091121b1af6d6cff94d307",
+      "bytes": 72365,
+      "width": 176,
+      "height": 176,
+      "crop": {
+        "x": 705,
+        "y": 94,
+        "width": 176,
+        "height": 176,
+        "sourceWidth": 1280,
+        "sourceHeight": 720
+      },
+      "note": "从作者 Beta 实战录屏帧裁出火元素；保留截图原色与像素。"
+    },
+    "plunder": {
+      "file": "img/art/hall-of-thanes-bosses/plunder-a2dbd94f8c2a.png",
+      "origin": "game-capture",
+      "npcId": 261311,
+      "npcNameEn": "Plunder",
+      "encounterId": 3494,
+      "sourceUrl": "https://forever-tavern.com/dungeons/the-hall-of-thanes/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/3494.webp",
+      "fetched": "2026-11-09",
+      "sourceSha256": "ba97e530e6cd0fe4438aef5581bb6e8452db82e7b67cd25add30423ebb126dd4",
+      "sha256": "a2dbd94f8c2a30ba096017c6924802eca85589fc599aab2f83e4777b0f992fae",
+      "bytes": 21082,
+      "width": 112,
+      "height": 112,
+      "crop": null,
+      "note": "来源页面标为作者自录 Beta 游戏内头像，WebP 无损转存为 PNG，像素逐点一致。"
+    },
+    "durgen-dirgehammer": {
+      "file": "img/art/hall-of-thanes-bosses/durgen-dirgehammer-6d46cc62f3a2.png",
+      "origin": "game-capture",
+      "npcId": 261319,
+      "npcNameEn": "Durgen Dirgehammer",
+      "encounterId": 3496,
+      "sourceUrl": "https://forever-tavern.com/dungeons/the-hall-of-thanes/",
+      "assetUrl": "https://forever-tavern.com/assets/dungeons/3496.webp",
+      "fetched": "2026-11-09",
+      "sourceSha256": "45f7caa6ef46e037dba56f1ea0ae4c2c6908c8f8f007f8a38412844376e768c0",
+      "sha256": "6d46cc62f3a205fee03c195db5a68705a6b299c8e15f9e4a473dda7838defbd0",
+      "bytes": 20019,
+      "width": 112,
+      "height": 112,
+      "crop": null,
+      "note": "来源页面标为作者自录 Beta 游戏内头像，WebP 无损转存为 PNG，像素逐点一致。"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
+const joinCard = require('../../services/item-card')
 
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
 
@@ -28,39 +29,37 @@ Page({
     rows: [],
     bosses: [],
     bossEmpty: '',
-    quest: { rows: [], summary: '', note: '', empty: '' },
+    quest: { rows: [], summary: '', empty: '' },
     artUrl: '',
     mapUrl: '',
     mapZone: '',
     mapEntry: '',
     mapDrawn: false,
-    drops: [],
+    openBoss: '',
+    openItem: '',
+    itemCard: null,
+    lootState: 'loading',
+    highlightDrop: '',
+    dropNotice: '',
     fav: false,
     disclaimer: ''
   },
 
   onLoad(query) {
     this.dropQuery = String((query && query.drop) || '')
+    this.followDrop = !!this.dropQuery
     /* 从哪儿点来的（bis＝配装名单）。提示要说真话，不能把配装页来的玩家说成"从掉落反查过来" */
     this.dropFrom = String((query && query.from) || '')
     this.setData({ id: pickId(query) })
     this.start()
   },
 
-  /* 高亮那句提示按"这件在本页的掉落表里到底有没有"来说。
-     配装页那行出处是参考站写的，本站的掉落归属是另一份来源，两边不一致时这里根本没有那行——
-     那就直说没有，不能一边找不到一边告诉玩家"下面高亮的是你查的那件"。 */
-  dropNoticeFor(drops) {
-    const q = this.dropQuery
-    if (!q) return ''
+  dropNoticeFor(groups, lootState) {
+    if (!this.dropQuery || lootState !== 'ready') return ''
     const from = this.dropFrom === 'bis' ? '配装名单' : '掉落反查'
-    let hit = false
-    for (let i = 0; i < drops.length; i += 1) {
-      if (String(drops[i].itemId) === q) { hit = true; break }
-    }
-    return hit
-      ? '你从' + from + '点过来：下面高亮的是这一件，它左边就是掉它的首领。'
-      : '你从' + from + '点过来。这座本的掉落表里没有这一件——出处只有参考站那行字说过，本站这份没挂上这层归属，所以这里没有可高亮的行。'
+    return groups.some((b) => b.items.some((x) => x.itemId === this.dropQuery))
+      ? '从' + from + '查看的物品已标出。'
+      : '从' + from + '查看的物品尚未收录在这座本的掉落表里。'
   },
 
   onPullDownRefresh() {
@@ -76,23 +75,21 @@ Page({
     }
   },
 
-  /* 站主 2026-11-09：点首领 → 跳掉落页只看这位首领掉的装备（带副本＋首领两个参数） */
-  onOpenBoss(e) {
-    const id = String(e.currentTarget.dataset.id || '')
-    const name = String(e.currentTarget.dataset.name || '')
-    if (!id) return
-    const dname = encodeURIComponent(this.data.nameCn || this.data.title || this.data.id || '')
-    wx.navigateTo({ url: '/pages/loots/index?dungeon=' + encodeURIComponent(this.data.id || '') + '&dname=' + dname + '&boss=' + encodeURIComponent(name) })
+  onToggleBoss(e) {
+    const id = e.currentTarget.dataset.id
+    this.setData({ openBoss: this.data.openBoss === id ? '' : id, openItem: '', itemCard: null })
   },
 
-  /* 任务线（2026-11-08 第一批②）：详情分片里的 det.quests（构建时从
-     dungeon-quests.json 并进来，与详情同一次请求）。行里只摆事实字段；
-     中文名没核出来就摆英文名 + "译名待核"，缺数字就不写那一段，不编。
-     2026-11-09 站主要求把"在哪接的"摆出来：接取 NPC 336/396、地点 300/396 有值，
-     都缺的那条照实说"没记录"，不猜接取人。 */
+  onToggleItem(e) {
+    const { key, item } = e.currentTarget.dataset
+    const openItem = this.data.openItem === key ? '' : key
+    this.setData({ openItem, itemCard: openItem ? joinCard(this.loot, String(item || '')) : null })
+  },
+
+  /* 任务与详情同一次取数。页面只整理任务与接取信息，来源留在分片中。 */
   questPack(dd) {
     const q = dd && dd.quests
-    if (!q) return { rows: [], summary: '', note: '', empty: '这座本的任务线还没有记录，不猜。' }
+    if (!q) return { rows: [], summary: '', empty: '暂无任务记录。' }
     /* summary 判型：旧批缓存里它是 wclbox 自报的汇总对象，直接绑会渲出 [object Object]；
        新批已在分发层拼成字符串，这里两种都接，不许对象漏到模板。 */
     const summaryText = (s) => {
@@ -115,16 +112,17 @@ Page({
         name: x.nameCn || x.nameEn || '（任务名待核）',
         missing: !x.nameCn,
         meta: seg.join(' · '),
-        pickup: npc || zone ? [npc, zone].filter(Boolean).join(' · ') : '',
-        pickupNone: !npc && !zone,
-        src: x.source || ''
+        pickupNpc: npc,
+        startItem: npc ? '' : (x.startItem || '').trim(),
+        pickupZone: zone,
+        pickupCoords: pickupCoords(x),
+        pickupMap: x.pickupMap && x.pickupMap !== zone ? x.pickupMap : ''
       }
     })
     return {
       rows: rows,
       summary: summaryText(q.summary),
-      note: q.note || '',
-      empty: rows.length ? '' : '这座本的任务线还没有记录，不猜。'
+      empty: rows.length ? '' : '暂无任务记录。'
     }
   },
 
@@ -167,7 +165,7 @@ Page({
          下面两节本来就把名单和掉落一条条列出来了，行里再报一遍数只是台账。 */
       this.setData({ rows: baseRows })
       if (!r.batch) {
-        this.setData({ needOnline: true, detailSource: 'snapshot' })
+        this.setData({ needOnline: true, detailSource: 'snapshot', lootState: 'offline' })
         return null
       }
       return Promise.all([
@@ -177,6 +175,12 @@ Page({
         const d = pair[0]
         const l = pair[1]
         const merged = baseRows.slice()
+        const roster = d.data && d.data.dungeon ? d.data.dungeon.bosses || [] : []
+        const lootState = l.data ? 'ready' : 'offline'
+        this.loot = l.data
+        const bosses = this.groupDrops(roster, (l.data && l.data.drops) || [])
+        const highlighted = this.followDrop && bosses.find((b) => b.items.some((x) => x.itemId === this.dropQuery))
+        if (l.data && d.data) this.followDrop = false
         if (d.data && d.data.dungeon) {
           const g = d.data.dungeon
           const alt = g.levelRangeAlt || g.levelRangeClient
@@ -198,30 +202,14 @@ Page({
         this.setData({
           rows: merged,
           quest: this.questPack(d.data),
-          /* 首领一律走 icon-cell：有头像就出图，没有的由组件回落成自绘块（名字首字垫色块）。
-             2026-10-23 站主说"头像图标都没有"——先分清是哪一种：经典本 146 个首领的头像
-             线上有文件、界面也拼得出地址；三座无限新本的 15 个首领是**源站就没有这张脸**
-             （2026-10-13 抓的时候 0/15，今天重探仍 0/15），不是我们漏接。
-             所以这里不再摆一个写"没有这张头像"的虚线空框——那看着像坏了。 */
-          bosses: d.data && d.data.dungeon ? (d.data.dungeon.bosses || []).map((b) => ({
-            id: b.id,
-            name: b.nameCn || b.id,
-            missing: !b.nameCn,
-            drops: b.drops || 0,
-            portraitUrl: oss.assetUrl(this.batch, b.portrait)
-          })) : [],
-          bossEmpty: d.data && d.data.dungeon && !(d.data.dungeon.bosses || []).length
-            ? '这座的首领名单还没有记录，不猜。' : '',
-          drops: l.data ? (l.data.drops || []).map((x) => ({
-            itemId: String(x.itemId || ''),
-            name: x.nameCn || x.itemId,
-            boss: x.bossCn || '',
-            quality: quality.qualityName(x.quality),
-            iconUrl: oss.iconUrl(this.batch, x.iconKey)
-          })) : [],
-          dropGroups: this.groupDrops(l.data ? (l.data.drops || []) : []),
-          highlightDrop: this.dropQuery || '',
-          dropNotice: this.dropNoticeFor(l.data ? (l.data.drops || []) : []),
+          bosses,
+          bossEmpty: d.data && !bosses.length ? '这座副本还没有首领记录。' : '',
+          openBoss: highlighted ? highlighted.id : this.data.openBoss,
+          openItem: '',
+          itemCard: null,
+          lootState,
+          highlightDrop: this.dropQuery,
+          dropNotice: this.dropNoticeFor(bosses, lootState),
           detailSource: d.source,
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',
@@ -232,42 +220,35 @@ Page({
     })
   },
 
-  /* 掉落按首领分组：玩家问的是"这个 boss 掉什么"，不是一条平铺的长单子。
-     没标首领的归到"没标首领"一组，不偷偷塞进第一组。
-     组内按稀有度从高往下排（2026-10-23 站主指令），同档按名字排，
-     这样紫的绿的一眼分得开，不用逐条读品质文字。 */
-  groupDrops(drops) {
-    const order = []
-    const byBoss = {}
-    drops.forEach((x) => {
-      const b = x.bossCn || '没标首领'
-      if (!byBoss[b]) { byBoss[b] = []; order.push(b) }
-      byBoss[b].push({
+  groupDrops(roster, drops) {
+    const bosses = roster.map((b) => ({
+      id: b.id,
+      name: b.nameCn || b.id,
+      missing: !b.nameCn,
+      portraitUrl: oss.assetUrl(this.batch, b.portrait),
+      items: []
+    }))
+    const byId = new Map(bosses.map((b) => [b.id, b]))
+    const byName = new Map()
+    bosses.forEach((b) => byName.set(b.name, byName.has(b.name) ? null : b))
+    const other = { id: '__other', name: '其他掉落', other: true, items: [] }
+    drops.forEach((x, index) => {
+      const boss = byId.get(x.bossId) || byName.get(x.bossCn) || other
+      boss.items.push({
+        key: String(index),
         itemId: String(x.itemId || ''),
-        name: x.nameCn || x.itemId || '（中文名待核）',
+        name: x.nameCn || x.nameEn || String(x.itemId || '') || '物品名待核',
         missing: !x.nameCn,
+        boss: boss === other ? x.bossCn || '首领归属待实测' : '',
         q: x.quality === undefined || x.quality === null ? '' : x.quality,
         quality: quality.qualityName(x.quality),
         iconUrl: oss.iconUrl(this.batch, x.iconKey)
       })
     })
-    return order.map((b) => ({
-      boss: b,
-      rows: byBoss[b].sort((a, c) => quality.qualityRank(c.q) - quality.qualityRank(a.q)
-        || String(a.name).localeCompare(String(c.name)))
-    }))
-  },
-
-  /* 点一件装备 → 它自己的详情页。掉落片里已经带着每件的详情行了（属性/装等/卖价），
-     详情页按这座本取同一片，不再发第二次网络请求。 */
-  onOpenItem(e) {
-    const id = e.currentTarget.dataset.item
-    const d = e.currentTarget.dataset.dungeon
-    if (!id) {
-      wx.showToast({ title: '这件还没有物品编号', icon: 'none' })
-      return
-    }
-    wx.navigateTo({ url: '/pages/item/index?d=' + encodeURIComponent(d) + '&i=' + encodeURIComponent(id) })
+    if (other.items.length) bosses.push(other)
+    bosses.forEach((b) => b.items.sort((a, c) => quality.qualityRank(c.q) - quality.qualityRank(a.q)
+      || a.name.localeCompare(c.name)))
+    return bosses
   },
 
   /* 副本列表现在是 tabBar 页：redirectTo / navigateTo 都打不开它，只会静默失败
@@ -290,6 +271,12 @@ Page({
     }
   }
 })
+
+function pickupCoords(row) {
+  const { pickupX: x, pickupY: y } = row
+  if (!Number.isFinite(x) || !Number.isFinite(y) || x < 0 || x > 100 || y < 0 || y > 100) return ''
+  return x + ', ' + y
+}
 
 /* 分享出去的地址冷启动时 query 里就是 id；不认识的 id 走"没收录"分支，不白屏 */
 function pickId(query) {

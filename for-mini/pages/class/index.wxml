@@ -1,6 +1,6 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，天赋可能显示不全。请更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{offline}}" class="notice">
     现在没连上线，天赋树要联网取。
@@ -49,8 +49,7 @@
       <view class="sec-t">天赋模拟器</view>
       <view wx:if="{{!talentLoaded}}" class="card muted">正在取天赋树…</view>
       <view wx:elif="{{!trees.length}}" class="card empty">
-        <view>这个职业的天赋树还没有整理好。</view>
-        <view class="muted">核到位之前这里不摆猜出来的树。</view>
+        <view>暂无该职业的天赋数据。</view>
       </view>
       <block wx:else>
         <!-- 读数条：剩余点数 + 三系各投了多少 + 分享 + 清空（"复制这套"按 2026-10-22 指令撤了） -->
@@ -113,7 +112,7 @@
     </view>
     <view class="pop-row" wx:if="{{pop.alt}}">
       <text class="pop-k">也叫</text>
-      <text class="pop-v">{{pop.alt}}<text class="muted pop-alt-note">（两家资料站叫法不同，两个都留）</text></text>
+      <text class="pop-v">{{pop.alt}}</text>
     </view>
     <view class="pop-row" wx:if="{{pop.changeText}}">
       <text class="pop-k">与经典旧世比</text>
@@ -133,6 +132,6 @@
     </view>
   </view>
 
-  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{errorText}}" class="notice notice-bad">天赋暂未加载，请稍后再试。</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
 </view>

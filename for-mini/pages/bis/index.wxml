@@ -1,12 +1,12 @@
 <view class="wrap">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，这一页可能显示不全。请在微信里更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{unavailable}}" class="notice">
-    这一版还没有配装名单。{{errText ? '（' + errText + '）' : ''}}
+    配装暂不可用，请稍后再试。
   </view>
   <view wx:elif="{{needOnline}}" class="notice">
-    现在没连上线，配装名单要联网才取到；下面显示的是上次存下的内容。
+    当前离线，显示已保存的配装。
   </view>
 
   <block wx:if="{{meta}}">
@@ -52,14 +52,8 @@
       <view class="stage">
         <image wx:if="{{posterSrc}}" class="stage-art" src="{{posterSrc}}" mode="aspectFit"
                bindload="onPosterLoad" binderror="onPosterError" />
-        <view wx:else class="stage-wait">{{posterText}}</view>
+        <view wx:else class="stage-wait">{{posterErr || posterText}}</view>
         <view class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
-      </view>
-      <!-- 图本身不再配说明句（站主 2026-11-02："这里文案去掉，只保留属性"）。
-           取不到时那一句仍然要说——那是状态，不是免责。 -->
-      <view class="doll-note" wx:if="{{posterState === 'loading'}}">{{posterText}}</view>
-      <view class="doll-note note-bad" wx:if="{{posterErr}}">
-        <text class="b">这一格没有图</text>：{{posterErr}}
       </view>
 
       <view class="sum" wx:if="{{sum.length}}">
@@ -72,8 +66,7 @@
 
     <!-- 部位一览：一行一个部位，点开通这个部位的备选 -->
     <view class="card" wx:if="{{set}}">
-      <view class="bhead"><view class="bt">这一套一览</view>
-        <view class="bn">名字颜色按品质走 · 灰的是装备给的 · 金的是从哪来的（那条竖线就是来源行）·「可换」是这一格还列了几件</view></view>
+      <view class="bhead"><view class="bt">装备一览</view></view>
       <view wx:for="{{rows}}" wx:key="slotLabel" class="srow" data-slot="{{item.slot}}" data-cell="{{item.cell}}"
             bindtap="openSlot">
         <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.slot}}" />
@@ -81,7 +74,7 @@
           <view class="s-top">
             <text class="s-slot">{{item.slotLabel}}</text>
             <text class="s-name {{'q-' + item.q}}" wx:if="{{!item.missing}}">{{item.name}}</text>
-            <text class="s-name s-unknown" wx:else>本站名录里没有这一件（#{{item.item}}）</text>
+            <text class="s-name s-unknown" wx:else>物品详情暂无（#{{item.item}}）</text>
           </view>
           <view class="s-meta">
             <text wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text>
@@ -141,7 +134,7 @@
       <block wx:if="{{slotTheirs.shown}}">
         <text class="t-tag">另一份名单在这一格列的是</text>
         <text class="s-name {{'q-' + slotTheirs.q}}" wx:if="{{!slotTheirs.unknown}}">{{slotTheirs.name}}</text>
-        <text class="s-unknown" wx:else>本站名录里没有这一件</text>
+        <text class="s-unknown" wx:else>物品详情暂无</text>
         <text class="dim" wx:if="{{slotTheirs.ilvl !== ''}}">装等 {{slotTheirs.ilvl}}</text>
       </block>
       <text class="t-tag" wx:else>另一份名单没单列这一格的装备</text>

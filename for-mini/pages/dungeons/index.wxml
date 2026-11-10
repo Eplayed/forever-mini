@@ -1,19 +1,16 @@
 <view class="wrap">
-  <!-- 页面底图：三个 tab 页共用那张官方天裔图，top 居中；图取不到（断网、素材没发）
-       就整两层不渲染，版式回落到 app.wxss 的纯色底。内容抬一层见本页 .wrap -->
-  <image wx:if="{{bgUrl}}" class="pagebg-ambient" src="{{bgUrl}}" mode="aspectFill" />
   <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="widthFix" binderror="onBgError" />
   <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
   <view class="fg">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，界面可能显示不全。请在微信里更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    现在没连上线，显示的是上次存下的名单。进详情看首领与掉落要联网。
+    当前离线，首领与掉落需联网查看。
   </view>
 
   <view class="search">
-    <input class="search-input" placeholder="搜中文名或英文名，例如「怒焰裂谷」" value="{{kw}}" bindinput="onKw" confirm-type="search" />
+    <input class="search-input" placeholder="搜索副本中英文名" value="{{kw}}" bindinput="onKw" confirm-type="search" />
     <view class="fav-btn {{onlyFav ? 'fav-btn-on' : ''}}" bindtap="onFavOnly">只看收藏</view>
   </view>
 
@@ -37,28 +34,24 @@
 
   <view wx:if="{{!loaded}}" class="card muted">正在取副本名单…</view>
 
-  <view class="drow" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen">
-    <view wx:if="{{item.artUrl}}" class="drow-art">
-      <icon-cell src="{{item.artUrl}}" size="wide" label="{{item.title}}" />
-    </view>
-    <view class="drow-main">
-      <view class="drow-title">
-        <text>{{item.title}}</text>
-        <text wx:if="{{item.nameMissing}}" class="todo">中文名待核</text>
+  <view wx:if="{{list.length}}" class="dgrid">
+    <view class="drow" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen" hover-class="drow-pressed">
+      <view class="drow-cover">
+        <icon-cell src="{{item.artUrl}}" size="tile" label="{{item.title}}" />
+        <view class="drow-cover-shade"></view>
+        <text class="drow-kind">{{item.kindLabel}}</text>
+        <view class="fav {{item.fav ? 'fav-active' : ''}}" role="button"
+              aria-label="{{item.fav ? '取消收藏' : '收藏'}}" data-id="{{item.id}}" catchtap="onFav">{{item.fav ? '★' : '☆'}}</view>
       </view>
-      <view class="muted drow-en">
-        <text wx:if="{{!item.enMissing}}" class="drow-nameen">{{item.nameEn}}</text>
-        <text wx:else class="todo">英文名待补</text>
+      <view class="drow-main">
+        <view class="drow-title">{{item.title}}</view>
+        <view wx:if="{{!item.enMissing && item.nameEn !== item.title}}" class="drow-en">{{item.nameEn}}</view>
+        <view class="drow-meta">
+          <text class="drow-level">{{item.rangeText}}</text>
+          <text wx:if="{{item.faction}}" class="drow-faction">{{item.faction}}</text>
+        </view>
+        <view wx:if="{{item.zoneCn}}" class="drow-zone">{{item.zoneCn}}</view>
       </view>
-      <view class="drow-meta">
-        <text class="tag">{{item.kindLabel}}</text>
-        <text class="tag">{{item.rangeText}}</text>
-        <text wx:if="{{item.faction}}" class="tag">{{item.faction}}</text>
-        <text wx:if="{{item.zoneCn}}" class="tag tag-zone">{{item.zoneCn}}</text>
-      </view>
-    </view>
-    <view class="drow-side">
-      <view class="fav {{item.fav ? 'fav-active' : ''}}" data-id="{{item.id}}" catchtap="onFav">{{item.fav ? '★' : '☆'}}</view>
     </view>
   </view>
 

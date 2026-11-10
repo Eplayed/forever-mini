@@ -276,21 +276,20 @@ Page({
     if (!this.set || !((this.set.byFac || {})[fac] || {}).doll) {
       this._posterKey = ''
       this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
-        posterErr: '这一套的名单还没取到，先不指图' })
+        posterErr: '配装暂未加载，请稍后再试。' })
       return
     }
     if (!rel) {
       this._posterKey = ''
       this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
-        posterErr: '分发层没给这一套（' + setId + ' · ' + this.data.facCn + '）登记过图：'
-          + '要么这一件没从客户端导出、要么装备位置没核对通过、要么名单后来改过——不拿别的套装冒充' })
+        posterErr: '当前套装暂无预览图。' })
       return
     }
     const url = oss.assetUrl(this.batch, rel)
     if (!url) {
       this._posterKey = ''
       this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
-        posterErr: '这张图的地址拼不出来（批次是 ' + ((this.batch || {}).buildId || '空') + '），先确认这批发过素材' })
+        posterErr: '预览图暂不可用。' })
       return
     }
     this._posterKey = key
@@ -315,8 +314,7 @@ Page({
     if (this._posterKey !== key) return
     this.setData({
       posterSrc: '', posterState: 'bad', posterText: POSTER_NONE,
-      posterErr: '这一张取不到（断网、没发过或对象不在这个批里）——上面那句"分发层登记过"仍然成立，'
-        + '但今天这台设备上没拿到图'
+      posterErr: '预览图加载失败，请稍后再试。'
     })
   },
 

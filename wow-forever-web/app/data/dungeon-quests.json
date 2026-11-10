@@ -11,7 +11,7 @@
    "xpConflict": 2,
    "addedFromWowhead": 1,
    "deduped": 41,
-   "itemStart": 50,
+   "itemStart": 49,
    "fromGi": 29,
    "questieBridged": 342,
    "questieAmbiguous": 54,
@@ -29,60 +29,226 @@
      "questLevel": 15,
      "reqLevel": 10,
      "xp": 1050,
-     "pickupNpc": null,
-     "pickupZone": null,
+     "pickupNpc": "鬼魅随从",
+     "pickupZone": "领主大厅 · 西翼第二间房",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "reqFrom": "wowhead",
-     "nameEn": "An Ancient Grudge"
+     "nameEn": "An Ancient Grudge",
+     "pickupMapId": null,
+     "pickupMap": null,
+     "pickupX": null,
+     "pickupY": null,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_DungeonQuestFlow.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://news.17173.com/content/11082026/203246798.shtml",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://wow.icednicco.online/forever/db/instance/3065",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "pickupNpcAlternates": [
+      "幽灵侍从"
+     ],
+     "questId": 96395,
+     "pickupNpcId": 265002
     },
     {
      "nameCn": "永不安息的亡者",
      "questLevel": 15,
      "reqLevel": 10,
      "xp": 1050,
-     "pickupNpc": "Afadra Dunwall",
-     "pickupZone": null,
+     "pickupNpc": "阿法德拉·顿沃尔",
+     "pickupZone": "旧铁炉堡 · 副本入口上方楼梯",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "The Restless Dead",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupNpcAlternates": [
+      "Afadra Dunwall"
+     ],
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 32.4,
+     "pickupY": 47.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://news.17173.com/content/11082026/203246798.shtml",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "x": 33.23,
+       "y": 48,
+       "mapId": 1455,
+       "provenance": {
+        "type": "addon",
+        "url": "https://github.com/Questie/Questie",
+        "file": "QuestieDB_Forever.toc#Npc-264943-7",
+        "checkedAt": "2026-11-09"
+       }
+      }
+     ],
+     "questId": 96394,
+     "pickupNpcId": 264943
     },
     {
      "nameCn": "重要的传家宝",
      "questLevel": 15,
      "reqLevel": 10,
      "xp": 1350,
-     "pickupNpc": "Thom Filch",
-     "pickupZone": null,
+     "pickupNpc": "汤姆·费尔奇",
+     "pickupZone": "旧铁炉堡 · 入口前的桥",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "Important Heirlooms",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupNpcAlternates": [
+      "Thom Filch"
+     ],
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 31.4,
+     "pickupY": 45.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_NPCLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://news.17173.com/content/11082026/203246798.shtml",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "x": 32.18,
+       "y": 44.5,
+       "mapId": 1455,
+       "provenance": {
+        "type": "addon",
+        "url": "https://github.com/Questie/Questie",
+        "file": "QuestieDB_Forever.toc#Npc-265003-7",
+        "checkedAt": "2026-11-09"
+       }
+      }
+     ],
+     "questId": 96403,
+     "pickupNpcId": 265003
     },
     {
      "nameCn": "旧铁炉堡入侵",
      "questLevel": 16,
      "reqLevel": 9,
      "xp": 1450,
-     "pickupNpc": "Earthseer Farsen",
-     "pickupZone": null,
+     "pickupNpc": "大地先知法森",
+     "pickupZone": "丹莫罗 · 戈尔高拉采石场上方山坡",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "Old Ironforge Incursion",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupNpcAlternates": [
+      "Earthseer Farsen",
+      "地卜师法尔森"
+     ],
+     "pickupMapId": 1426,
+     "pickupMap": "丹莫罗",
+     "pickupX": 64.8,
+     "pickupY": 58.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://news.17173.com/content/11082026/203246798.shtml",
+       "checkedAt": "2026-11-09"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://wowkp.com/wowdb/forever/d/hall_of_thanes",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "x": 64.87,
+       "y": 58.47,
+       "mapId": 1426,
+       "provenance": {
+        "type": "addon",
+        "url": "https://github.com/Questie/Questie",
+        "file": "QuestieDB_Forever.toc#Npc-264936-7",
+        "checkedAt": "2026-11-09"
+       }
+      }
+     ],
+     "questId": 96393,
+     "pickupNpcId": 264936
     }
    ],
    "questItems": [
@@ -148,14 +314,30 @@
      "reqLevel": 15,
      "xp": 2200,
      "pickupNpc": "Tabitha Heartweaver",
-     "pickupZone": null,
+     "pickupZone": "银松森林",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "A Frightened Request",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupMapId": 1421,
+     "pickupMap": "银松森林",
+     "pickupX": 44.4,
+     "pickupY": 43.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 92401,
+     "pickupNpcId": 250686
     },
     {
      "nameCn": "圣光的正义",
@@ -163,14 +345,30 @@
      "reqLevel": 15,
      "xp": 2200,
      "pickupNpc": "Morbin Lightbane",
-     "pickupZone": null,
+     "pickupZone": "幽暗城",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "Light's Justice",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 57.4,
+     "pickupY": 88.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 92421,
+     "pickupNpcId": 266484
     },
     {
      "nameCn": "拉斯玛尔之怒",
@@ -178,14 +376,30 @@
      "reqLevel": 15,
      "xp": 2200,
      "pickupNpc": "Deathguard Kristof",
-     "pickupZone": null,
+     "pickupZone": "提瑞斯法林地",
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
      "variants": 1,
      "xpFrom": "wowhead",
      "nameEn": "The Wrath of Rath'mael",
-     "npcFrom": "questie"
+     "npcFrom": "questie",
+     "pickupMapId": 1420,
+     "pickupMap": "提瑞斯法林地",
+     "pickupX": 65.2,
+     "pickupY": 60.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 92422,
+     "pickupNpcId": 251001
     },
     {
      "nameCn": "洛丹伦纹章",
@@ -326,7 +540,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 56.4,
+     "pickupY": 40.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1437,
+       "map": "湿地",
+       "x": 56.3,
+       "y": 40.3,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95646,
+     "pickupNpcId": 1244
     },
     {
      "nameCn": "迷失在灌木丛中",
@@ -339,7 +585,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 11.9,
+     "pickupY": 58.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1437,
+       "map": "湿地",
+       "x": 11.8,
+       "y": 58.8,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95647,
+     "pickupNpcId": 1480
     },
     {
      "nameCn": "龙喉传闻",
@@ -352,7 +630,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1417,
+     "pickupMap": "阿拉希高地",
+     "pickupX": 74.5,
+     "pickupY": 35.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1417,
+       "map": "阿拉希高地",
+       "x": 74.4,
+       "y": 35.6,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95663,
+     "pickupNpcId": 2787
     },
     {
      "nameCn": "长者的学识",
@@ -361,12 +671,29 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": "湿地",
-     "startItem": null,
+     "pickupZone": "挖掘场：湿地 · 圣物守护者",
+     "startItem": "泰坦圣物",
      "preQuest": null,
      "source": "gi",
      "variants": 1,
-     "zoneFrom": "questie"
+     "zoneFrom": "questie",
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "addon",
+       "url": "https://github.com/Questie/Questie",
+       "checkedAt": "2026-11-10",
+       "file": "questie-quests-full.json"
+      }
+     ],
+     "startItemId": 270866,
+     "pickupZoneAlt": "湿地",
+     "questId": 95664
     },
     {
      "nameCn": "打开巨口",
@@ -379,7 +706,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 51.4,
+     "pickupY": 59.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://bytetavern.com/wow-forever-excavation-site-wetlands-guide/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1437,
+       "map": "湿地",
+       "x": 51.5,
+       "y": 59.3,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://bytetavern.com/wow-forever-excavation-site-wetlands-guide/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95682,
+     "pickupNpcId": 13155
     },
     {
      "nameCn": "口味变了",
@@ -392,7 +751,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 57.2,
+     "pickupY": 53.3,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1454,
+       "map": "奥格瑞玛",
+       "x": 57.3,
+       "y": 53.3,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95697,
+     "pickupNpcId": 3368
     },
     {
      "nameCn": "寻找凯特琳",
@@ -405,7 +796,26 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1440,
+     "pickupMap": "灰谷",
+     "pickupX": 35.0,
+     "pickupY": 48.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "questId": 95737,
+     "pickupNpcId": 3970
     },
     {
      "nameCn": "寻找歌刃",
@@ -418,7 +828,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1433,
+     "pickupMap": "赤脊山",
+     "pickupX": 25.8,
+     "pickupY": 46.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1433,
+       "map": "赤脊山",
+       "x": 25.6,
+       "y": 46.6,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 95772,
+     "pickupNpcId": 956
     },
     {
      "nameCn": "倒在沼泽",
@@ -455,12 +897,29 @@
      "reqLevel": 20,
      "xp": null,
      "pickupNpc": null,
-     "pickupZone": "湿地",
-     "startItem": null,
+     "pickupZone": "挖掘场：湿地 · 圣物守护者",
+     "startItem": "泰坦圣物",
      "preQuest": null,
      "source": "gi",
      "variants": 1,
-     "zoneFrom": "questie"
+     "zoneFrom": "questie",
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "addon",
+       "url": "https://github.com/Questie/Questie",
+       "checkedAt": "2026-11-10",
+       "file": "questie-quests-full.json"
+      }
+     ],
+     "startItemId": 270865,
+     "pickupZoneAlt": "湿地",
+     "questId": 95810
     },
     {
      "nameCn": "高地兽皮",
@@ -473,7 +932,26 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 8.6,
+     "pickupY": 55.7,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "questId": 98815,
+     "pickupNpcId": 2094
     },
     {
      "nameCn": "大地回响",
@@ -486,7 +964,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 71.1,
+     "pickupY": 34.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1456,
+       "map": "雷霆崖",
+       "x": 71.0,
+       "y": 33.6,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 98823,
+     "pickupNpcId": 9087
     },
     {
      "nameCn": "史前棱镜",
@@ -499,7 +1009,39 @@
      "startItem": null,
      "preQuest": null,
      "source": "gi",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 38.8,
+     "pickupY": 52.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      },
+      {
+       "type": "fan_db",
+       "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+       "checkedAt": "2026-11-10"
+      }
+     ],
+     "pickupAlternates": [
+      {
+       "mapId": 1437,
+       "map": "湿地",
+       "x": 38.8,
+       "y": 52.3,
+       "provenance": {
+        "type": "fan_db",
+        "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+        "checkedAt": "2026-11-10"
+       }
+      }
+     ],
+     "questId": 98824,
+     "pickupNpcId": 1077
     }
    ],
    "questItems": [],
@@ -868,7 +1410,23 @@
      "source": "wclbox",
      "variants": 1,
      "xpAlt": 1050,
-     "xpAltFrom": "wowhead"
+     "xpAltFrom": "wowhead",
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 69.4,
+     "pickupY": 28.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5723,
+     "pickupNpcId": 11833
     },
     {
      "nameCn": "寻找背包",
@@ -882,7 +1440,23 @@
      "source": "wclbox",
      "variants": 1,
      "xpAlt": 880,
-     "xpAltFrom": "wowhead"
+     "xpAltFrom": "wowhead",
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 69.4,
+     "pickupY": 28.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5722,
+     "pickupNpcId": 11833
     },
     {
      "nameCn": "归还背包",
@@ -894,7 +1468,23 @@
      "startItem": null,
      "preQuest": "寻找背包",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 2437,
+     "pickupMap": "怒焰裂谷",
+     "pickupX": 58.6,
+     "pickupY": 39.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5724,
+     "pickupNpcId": 11834
     },
     {
      "nameCn": "毁灭之力",
@@ -906,7 +1496,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 56.2,
+     "pickupY": 92.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5725,
+     "pickupNpcId": 2425
     },
     {
      "nameCn": "隐藏的敌人",
@@ -930,7 +1536,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 49.4,
+     "pickupY": 50.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5761,
+     "pickupNpcId": 3216
     }
    ],
    "questItems": [
@@ -1079,7 +1701,23 @@
      "startItem": null,
      "preQuest": "变异的生物",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1413,
+     "pickupMap": "贫瘠之地",
+     "pickupX": 52.2,
+     "pickupY": 31.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1489,
+     "pickupNpcId": 3448
     },
     {
      "nameCn": "纳拉·蛮鬃",
@@ -1091,7 +1729,23 @@
      "startItem": null,
      "preQuest": "哈缪尔·符文图腾",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 78.4,
+     "pickupY": 28.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1490,
+     "pickupNpcId": 5769
     },
     {
      "nameCn": "毒蛇花",
@@ -1103,7 +1757,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 22.4,
+     "pickupY": 19.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 962,
+     "pickupNpcId": 3419
     },
     {
      "nameCn": "尖牙德鲁伊",
@@ -1115,7 +1785,23 @@
      "startItem": null,
      "preQuest": "纳拉·蛮鬃",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 75.2,
+     "pickupY": 30.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 914,
+     "pickupNpcId": 5770
     }
    ],
    "questItems": [
@@ -1263,7 +1949,23 @@
      "startItem": null,
      "preQuest": "迪菲亚兄弟会",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1436,
+     "pickupMap": "西部荒野",
+     "pickupX": 56.6,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 214,
+     "pickupNpcId": 820
     },
     {
      "nameCn": "收集记忆",
@@ -1275,7 +1977,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 70.3,
+     "pickupY": 40.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 168,
+     "pickupNpcId": 656
     },
     {
      "nameCn": "我的兄弟……",
@@ -1287,7 +2005,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 70.3,
+     "pickupY": 40.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 167,
+     "pickupNpcId": 656
     },
     {
      "nameCn": "地底突袭",
@@ -1299,7 +2033,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 62.6,
+     "pickupY": 34.1,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2040,
+     "pickupNpcId": 6579
     },
     {
      "nameCn": "迪菲亚兄弟会",
@@ -1311,7 +2061,23 @@
      "startItem": null,
      "preQuest": "迪菲亚兄弟会",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1436,
+     "pickupMap": "西部荒野",
+     "pickupX": 56.2,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 166,
+     "pickupNpcId": 234
     }
    ],
    "questItems": [
@@ -1399,7 +2165,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1421,
+     "pickupMap": "银松森林",
+     "pickupX": 43.4,
+     "pickupY": 40.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1098,
+     "pickupNpcId": 1952
     },
     {
      "nameCn": "乌尔之书",
@@ -1411,7 +2193,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 53.4,
+     "pickupY": 53.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1013,
+     "pickupNpcId": 2934
     },
     {
      "nameCn": "除掉阿鲁高",
@@ -1423,7 +2221,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1421,
+     "pickupMap": "银松森林",
+     "pickupX": 44.2,
+     "pickupY": 39.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1014,
+     "pickupNpcId": 1938
     }
    ],
    "questItems": [
@@ -1487,7 +2301,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 50.2,
+     "pickupY": 7.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 971,
+     "pickupNpcId": 2786
     },
     {
      "nameCn": "寻找塞尔瑞德",
@@ -1511,7 +2341,23 @@
      "startItem": null,
      "preQuest": "遥远的旅途",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1439,
+     "pickupMap": "黑海岸",
+     "pickupX": 38.4,
+     "pickupY": 43.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1275,
+     "pickupNpcId": 8997
     },
     {
      "nameCn": "暮光之锤的末日",
@@ -1523,7 +2369,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1457,
+     "pickupMap": "达纳苏斯",
+     "pickupX": 55.2,
+     "pickupY": 23.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1199,
+     "pickupNpcId": 4784
     },
     {
      "nameCn": "黑暗深渊中的恶魔",
@@ -1547,7 +2409,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1442,
+     "pickupMap": "石爪山脉",
+     "pickupX": 47.2,
+     "pickupY": 64.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6562,
+     "pickupNpcId": 11862
     },
     {
      "nameCn": "阿库麦尔水晶",
@@ -1559,7 +2437,23 @@
      "startItem": null,
      "preQuest": "帮助耶努萨克雷",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1440,
+     "pickupMap": "灰谷",
+     "pickupX": 11.6,
+     "pickupY": 34.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6563,
+     "pickupNpcId": 12736
     },
     {
      "nameCn": "上古之神的仆从",
@@ -1571,7 +2465,23 @@
      "startItem": null,
      "preQuest": "上古之神的仆从",
      "source": "wclbox",
-     "variants": 2
+     "variants": 2,
+     "pickupMapId": 1440,
+     "pickupMap": "灰谷",
+     "pickupX": 11.6,
+     "pickupY": 34.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6565,
+     "pickupNpcId": 12736
     },
     {
      "nameCn": "黑暗深渊中的邪恶",
@@ -1583,7 +2493,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 719,
+     "pickupMap": "黑暗深渊",
+     "pickupX": 20.1,
+     "pickupY": 52.3,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6561,
+     "pickupNpcId": 4787
     },
     {
      "nameCn": "废墟之间",
@@ -1595,7 +2521,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1440,
+     "pickupMap": "灰谷",
+     "pickupX": 11.6,
+     "pickupY": 34.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6921,
+     "pickupNpcId": 12736
     }
    ],
    "questItems": [
@@ -1725,7 +2667,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1433,
+     "pickupMap": "赤脊山",
+     "pickupX": 26.4,
+     "pickupY": 46.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 386,
+     "pickupNpcId": 859
     },
     {
      "nameCn": "罪与罚",
@@ -1737,7 +2695,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1431,
+     "pickupMap": "暮色森林",
+     "pickupX": 72.0,
+     "pickupY": 47.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 377,
+     "pickupNpcId": 270
     },
     {
      "nameCn": "镇压暴动",
@@ -1749,7 +2723,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 51.5,
+     "pickupY": 69.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 387,
+     "pickupNpcId": 1719
     },
     {
      "nameCn": "鲜血的颜色",
@@ -1761,7 +2751,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 73.3,
+     "pickupY": 55.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 388,
+     "pickupNpcId": 1721
     },
     {
      "nameCn": "卡姆·深怒",
@@ -1773,7 +2779,23 @@
      "startItem": null,
      "preQuest": "黑铁战争",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1437,
+     "pickupMap": "湿地",
+     "pickupX": 49.6,
+     "pickupY": 18.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 378,
+     "pickupNpcId": 1074
     },
     {
      "nameCn": "监狱暴动",
@@ -1785,7 +2807,23 @@
      "startItem": null,
      "preQuest": "巴吉尔·特雷德",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 51.5,
+     "pickupY": 69.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 391,
+     "pickupNpcId": 1719
     }
    ],
    "questItems": [
@@ -1928,7 +2966,23 @@
      "startItem": null,
      "preQuest": "工匠大师欧沃斯巴克",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 69.4,
+     "pickupY": 50.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2922,
+     "pickupNpcId": 7944
     },
     {
      "nameCn": "工匠大师欧沃斯巴克",
@@ -1940,7 +2994,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 51.0,
+     "pickupY": 48.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2923,
+     "pickupNpcId": 7917
     },
     {
      "nameCn": "诺恩",
@@ -1952,7 +3022,23 @@
      "startItem": null,
      "preQuest": "灾难之后",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1426,
+     "pickupMap": "丹莫罗",
+     "pickupX": 45.8,
+     "pickupY": 49.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2926,
+     "pickupNpcId": 1268
     },
     {
      "nameCn": "灾难之后",
@@ -1964,7 +3050,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 69.4,
+     "pickupY": 50.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2927,
+     "pickupNpcId": 6569
     },
     {
      "nameCn": "卡斯派普的任务",
@@ -1976,7 +3078,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1442,
+     "pickupMap": "石爪山脉",
+     "pickupX": 59.4,
+     "pickupY": 67.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2931,
+     "pickupNpcId": 4077
     },
     {
      "nameCn": "基础模组",
@@ -1988,7 +3106,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 68.0,
+     "pickupY": 46.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2924,
+     "pickupNpcId": 6169
     },
     {
      "nameCn": "帮助科劳莫特",
@@ -2000,7 +3134,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1457,
+     "pickupMap": "达纳苏斯",
+     "pickupX": 59.2,
+     "pickupY": 45.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2925,
+     "pickupNpcId": 6142
     },
     {
      "nameCn": "陀螺式挖掘机",
@@ -2012,7 +3162,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 62.6,
+     "pickupY": 34.1,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2928,
+     "pickupNpcId": 6579
     },
     {
      "nameCn": "抢救数据",
@@ -2024,7 +3190,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 69.4,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2930,
+     "pickupNpcId": 7950
     },
     {
      "nameCn": "更多的辐射尘！",
@@ -2036,7 +3218,23 @@
      "startItem": null,
      "preQuest": "诺恩",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1426,
+     "pickupMap": "丹莫罗",
+     "pickupX": 45.8,
+     "pickupY": 49.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2962,
+     "pickupNpcId": 1268
     },
     {
      "nameCn": "戒指归来",
@@ -2060,7 +3258,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 69.0,
+     "pickupY": 49.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2929,
+     "pickupNpcId": 7937
     },
     {
      "nameCn": "设备之战",
@@ -2072,7 +3286,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 75.4,
+     "pickupY": 24.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2841,
+     "pickupNpcId": 3412
     },
     {
      "nameCn": "主工程师斯库提",
@@ -2084,7 +3314,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 75.0,
+     "pickupY": 24.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2842,
+     "pickupNpcId": 3413
     },
     {
      "nameCn": "出发！诺莫瑞根！",
@@ -2096,7 +3342,23 @@
      "startItem": null,
      "preQuest": "主工程师斯库提",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1434,
+     "pickupMap": "荆棘谷",
+     "pickupX": 27.4,
+     "pickupY": 77.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2843,
+     "pickupNpcId": 7853
     }
    ],
    "questItems": [
@@ -2376,7 +3638,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 491,
+     "pickupMap": "剃刀沼泽",
+     "pickupX": 37.8,
+     "pickupY": 32.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1142,
+     "pickupNpcId": 4510
     },
     {
      "nameCn": "卡尔加·刺肋",
@@ -2388,7 +3666,23 @@
      "startItem": null,
      "preQuest": "亨里格的日记",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1444,
+     "pickupMap": "菲拉斯",
+     "pickupX": 89.4,
+     "pickupY": 45.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1101,
+     "pickupNpcId": 4048
     },
     {
      "nameCn": "蝙蝠的粪便",
@@ -2400,7 +3694,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 48.4,
+     "pickupY": 69.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1109,
+     "pickupNpcId": 2055
     },
     {
      "nameCn": "奥尔德的报复",
@@ -2412,7 +3722,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 36.2,
+     "pickupY": 59.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1102,
+     "pickupNpcId": 4451
     }
    ],
    "questItems": [
@@ -2530,7 +3856,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 74.0,
+     "pickupY": 13.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1050,
+     "pickupNpcId": 3979
     },
     {
      "nameCn": "沃瑞尔的复仇",
@@ -2542,7 +3884,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 796,
+     "pickupMap": "血色修道院",
+     "pickupX": 37.1,
+     "pickupY": 21.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1051,
+     "pickupNpcId": 3981
     },
     {
      "nameCn": "知识试炼",
@@ -2554,7 +3912,23 @@
      "startItem": null,
      "preQuest": "知识试炼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 57.4,
+     "pickupY": 65.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1160,
+     "pickupNpcId": 4488
     },
     {
      "nameCn": "堕落者纲要",
@@ -2566,7 +3940,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 34.4,
+     "pickupY": 47.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1049,
+     "pickupNpcId": 3978
     }
    ],
    "questItems": [
@@ -2648,7 +4038,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 74.0,
+     "pickupY": 13.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1050,
+     "pickupNpcId": 3979
     },
     {
      "nameCn": "沃瑞尔的复仇",
@@ -2660,7 +4066,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 796,
+     "pickupMap": "血色修道院",
+     "pickupX": 37.1,
+     "pickupY": 21.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1051,
+     "pickupNpcId": 3981
     },
     {
      "nameCn": "知识试炼",
@@ -2672,7 +4094,23 @@
      "startItem": null,
      "preQuest": "知识试炼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 57.4,
+     "pickupY": 65.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1160,
+     "pickupNpcId": 4488
     },
     {
      "nameCn": "堕落者纲要",
@@ -2684,7 +4122,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 34.4,
+     "pickupY": 47.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1049,
+     "pickupNpcId": 3978
     }
    ],
    "questItems": [
@@ -2766,7 +4220,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 74.0,
+     "pickupY": 13.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1050,
+     "pickupNpcId": 3979
     },
     {
      "nameCn": "沃瑞尔的复仇",
@@ -2778,7 +4248,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 796,
+     "pickupMap": "血色修道院",
+     "pickupX": 37.1,
+     "pickupY": 21.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1051,
+     "pickupNpcId": 3981
     },
     {
      "nameCn": "知识试炼",
@@ -2790,7 +4276,23 @@
      "startItem": null,
      "preQuest": "知识试炼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 57.4,
+     "pickupY": 65.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1160,
+     "pickupNpcId": 4488
     },
     {
      "nameCn": "堕落者纲要",
@@ -2802,7 +4304,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 34.4,
+     "pickupY": 47.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1049,
+     "pickupNpcId": 3978
     }
    ],
    "questItems": [
@@ -2920,7 +4438,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 50.3,
+     "pickupY": 45.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3636,
+     "pickupNpcId": 1284
     },
     {
      "nameCn": "邪恶的盟友",
@@ -2944,7 +4478,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 74.0,
+     "pickupY": 32.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3341,
+     "pickupNpcId": 2308
     }
    ],
    "questItems": [
@@ -3038,7 +4588,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 74.0,
+     "pickupY": 13.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1050,
+     "pickupNpcId": 3979
     },
     {
      "nameCn": "以圣光之名",
@@ -3050,7 +4616,23 @@
      "startItem": null,
      "preQuest": "血色之路",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1424,
+     "pickupMap": "希尔斯布莱德丘陵",
+     "pickupX": 51.4,
+     "pickupY": 58.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1053,
+     "pickupNpcId": 3980
     },
     {
      "nameCn": "沃瑞尔的复仇",
@@ -3062,7 +4644,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 796,
+     "pickupMap": "血色修道院",
+     "pickupX": 37.1,
+     "pickupY": 21.5,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1051,
+     "pickupNpcId": 3981
     },
     {
      "nameCn": "狂热之心",
@@ -3074,7 +4672,23 @@
      "startItem": null,
      "preQuest": "蝙蝠的粪便",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 48.4,
+     "pickupY": 69.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1113,
+     "pickupNpcId": 2055
     },
     {
      "nameCn": "知识试炼",
@@ -3086,7 +4700,23 @@
      "startItem": null,
      "preQuest": "知识试炼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 57.4,
+     "pickupY": 65.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1160,
+     "pickupNpcId": 4488
     },
     {
      "nameCn": "堕落者纲要",
@@ -3098,7 +4728,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1456,
+     "pickupMap": "雷霆崖",
+     "pickupX": 34.4,
+     "pickupY": 47.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1049,
+     "pickupNpcId": 3978
     },
     {
      "nameCn": "深入血色修道院",
@@ -3110,7 +4756,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 56.2,
+     "pickupY": 92.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1048,
+     "pickupNpcId": 2425
     }
    ],
    "questItems": [
@@ -3264,7 +4926,23 @@
      "startItem": null,
      "preQuest": "莫达洛克",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1432,
+     "pickupMap": "洛克莫丹",
+     "pickupX": 65.8,
+     "pickupY": 65.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 704,
+     "pickupNpcId": 1344
     },
     {
      "nameCn": "铁趾的护符",
@@ -3276,7 +4954,23 @@
      "startItem": null,
      "preQuest": "一线希望",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1415,
+     "pickupMap": "东部王国",
+     "pickupX": 54.0,
+     "pickupY": 57.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 722,
+     "pickupNpcId": 2909
     },
     {
      "nameCn": "密室",
@@ -3288,7 +4982,23 @@
      "startItem": null,
      "preQuest": "失踪的矮人",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1337,
+     "pickupMap": "奥达曼",
+     "pickupX": 65.1,
+     "pickupY": 94.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2240,
+     "pickupNpcId": 6906
     },
     {
      "nameCn": "失踪的矮人",
@@ -3300,7 +5010,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 73.8,
+     "pickupY": 13.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2398,
+     "pickupNpcId": 1356
     },
     {
      "nameCn": "破碎的项链",
@@ -3325,7 +5051,23 @@
      "startItem": null,
      "preQuest": "破碎的项链",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 36.0,
+     "pickupY": 3.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2199,
+     "pickupNpcId": 6826
     },
     {
      "nameCn": "奥达曼的蘑菇",
@@ -3349,7 +5091,23 @@
      "startItem": null,
      "preQuest": "昂贵的知识",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 36.0,
+     "pickupY": 3.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2200,
+     "pickupNpcId": 6826
     },
     {
      "nameCn": "占卜之瓶",
@@ -3373,7 +5131,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 74.2,
+     "pickupY": 9.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1360,
+     "pickupNpcId": 6294
     },
     {
      "nameCn": "寻找宝石",
@@ -3385,7 +5159,23 @@
      "startItem": null,
      "preQuest": "回到奥达曼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1337,
+     "pickupMap": "奥达曼",
+     "pickupX": 59.0,
+     "pickupY": 63.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2201,
+     "pickupNpcId": 6912
     },
     {
      "nameCn": "修复项链",
@@ -3409,7 +5199,23 @@
      "startItem": null,
      "preQuest": "邪恶的使者",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 76.4,
+     "pickupY": 10.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1139,
+     "pickupNpcId": 2918
     },
     {
      "nameCn": "搜寻项链",
@@ -3421,7 +5227,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 59.4,
+     "pickupY": 36.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2283,
+     "pickupNpcId": 6986
     },
     {
      "nameCn": "搜寻项链，再来一次",
@@ -3433,7 +5255,23 @@
      "startItem": null,
      "preQuest": "搜寻项链",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 59.4,
+     "pickupY": 36.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2284,
+     "pickupNpcId": 6986
     },
     {
      "nameCn": "翻译日记",
@@ -3457,7 +5295,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 62.4,
+     "pickupY": 48.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2342,
+     "pickupNpcId": 5651
     },
     {
      "nameCn": "寻找宝贝",
@@ -3469,7 +5323,23 @@
      "startItem": null,
      "preQuest": "翻译日记",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 2.4,
+     "pickupY": 46.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2339,
+     "pickupNpcId": 6868
     },
     {
      "nameCn": "交付宝石",
@@ -3481,7 +5351,23 @@
      "startItem": null,
      "preQuest": "寻找宝贝",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 2.4,
+     "pickupY": 46.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2340,
+     "pickupNpcId": 6868
     },
     {
      "nameCn": "项链任务的终结",
@@ -3493,7 +5379,23 @@
      "startItem": null,
      "preQuest": "交付宝石",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 59.4,
+     "pickupY": 36.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2341,
+     "pickupNpcId": 6986
     }
    ],
    "questItems": [
@@ -3809,7 +5711,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1434,
+     "pickupMap": "荆棘谷",
+     "pickupX": 27.0,
+     "pickupY": 77.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2864,
+     "pickupNpcId": 773
     },
     {
      "nameCn": "圣甲虫的壳",
@@ -3821,7 +5739,23 @@
      "startItem": null,
      "preQuest": "特兰雷克",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 51.4,
+     "pickupY": 26.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2865,
+     "pickupNpcId": 7876
     },
     {
      "nameCn": "巨魔调和剂",
@@ -3833,7 +5767,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 51.4,
+     "pickupY": 28.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3042,
+     "pickupNpcId": 7804
     },
     {
      "nameCn": "深渊皇冠",
@@ -3845,7 +5795,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1445,
+     "pickupMap": "尘泥沼泽",
+     "pickupX": 46.0,
+     "pickupY": 57.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2846,
+     "pickupNpcId": 6546
     },
     {
      "nameCn": "塔贝萨的任务",
@@ -3869,7 +5835,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 52.4,
+     "pickupY": 28.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2768,
+     "pickupNpcId": 7407
     },
     {
      "nameCn": "摩沙鲁的预言",
@@ -3881,7 +5863,23 @@
      "startItem": null,
      "preQuest": "尖啸者的灵魂",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 67.0,
+     "pickupY": 22.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3527,
+     "pickupNpcId": 8579
     },
     {
      "nameCn": "加兹瑞拉",
@@ -3893,7 +5891,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1441,
+     "pickupMap": "千针石林",
+     "pickupX": 78.0,
+     "pickupY": 77.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2770,
+     "pickupNpcId": 4453
     },
     {
      "nameCn": "耐克鲁姆的徽章",
@@ -3905,7 +5919,23 @@
      "startItem": null,
      "preQuest": "萨迪斯·格希德",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1419,
+     "pickupMap": "诅咒之地",
+     "pickupX": 67.0,
+     "pickupY": 19.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2991,
+     "pickupNpcId": 8022
     },
     {
      "nameCn": "蜘蛛之神",
@@ -3917,7 +5947,23 @@
      "startItem": null,
      "preQuest": "请教加德林大师",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1411,
+     "pickupMap": "杜隆塔尔",
+     "pickupX": 55.8,
+     "pickupY": 74.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 2936,
+     "pickupNpcId": 3188
     }
    ],
    "questItems": [
@@ -4059,7 +6105,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1443,
+     "pickupMap": "凄凉之地",
+     "pickupX": 62.0,
+     "pickupY": 39.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 7028,
+     "pickupNpcId": 13656
     },
     {
      "nameCn": "贱民的指引",
@@ -4071,7 +6133,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1443,
+     "pickupMap": "凄凉之地",
+     "pickupX": 43.4,
+     "pickupY": 84.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 7067,
+     "pickupNpcId": 13717
     },
     {
      "nameCn": "玛拉顿的传说",
@@ -4305,7 +6383,23 @@
      "startItem": null,
      "preQuest": "石环",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 52.6,
+     "pickupY": 45.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3446,
+     "pickupNpcId": 7771
     },
     {
      "nameCn": "雕像群的秘密",
@@ -4317,7 +6411,23 @@
      "startItem": null,
      "preQuest": "石环",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 52.6,
+     "pickupY": 45.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3447,
+     "pickupNpcId": 7771
     },
     {
      "nameCn": "预言者迦玛兰",
@@ -4329,7 +6439,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1425,
+     "pickupMap": "辛特兰",
+     "pickupX": 33.6,
+     "pickupY": 75.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1446,
+     "pickupNpcId": 5598
     },
     {
      "nameCn": "神灵哈卡",
@@ -4341,7 +6467,23 @@
      "startItem": null,
      "preQuest": "远古之卵",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 67.0,
+     "pickupY": 22.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3528,
+     "pickupNpcId": 8579
     },
     {
      "nameCn": "伊兰尼库斯精华",
@@ -4378,7 +6520,23 @@
      "startItem": null,
      "preQuest": "拉普索迪的故事",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 69.5,
+     "pickupY": 40.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1475,
+     "pickupNpcId": 5384
     },
     {
      "nameCn": "阿塔哈卡神庙",
@@ -4390,7 +6548,23 @@
      "startItem": null,
      "preQuest": "向费泽鲁尔复命",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1435,
+     "pickupMap": "悲伤沼泽",
+     "pickupX": 48.0,
+     "pickupY": 55.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 1445,
+     "pickupNpcId": 1443
     },
     {
      "nameCn": "沉没的神庙",
@@ -4414,7 +6588,23 @@
      "startItem": null,
      "preQuest": "玛尔冯的车间",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1413,
+     "pickupMap": "贫瘠之地",
+     "pickupX": 62.4,
+     "pickupY": 38.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4146,
+     "pickupNpcId": 8496
     }
    ],
    "questItems": [
@@ -4581,7 +6771,23 @@
      "startItem": null,
      "preQuest": "尤卡·斯库比格特",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 66.0,
+     "pickupY": 22.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4136,
+     "pickupNpcId": 9544
     },
     {
      "nameCn": "尤卡·斯库比格特",
@@ -4593,7 +6799,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 67.0,
+     "pickupY": 24.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4324,
+     "pickupNpcId": 9706
     },
     {
      "nameCn": "爱情药水",
@@ -4631,7 +6853,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.2,
+     "pickupY": 23.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4123,
+     "pickupNpcId": 9536
     },
     {
      "nameCn": "烈焰精华",
@@ -4643,7 +6881,23 @@
      "startItem": null,
      "preQuest": "烈焰精华、烈焰精华",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 94.8,
+     "pickupY": 31.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4024,
+     "pickupNpcId": 9459
     },
     {
      "nameCn": "瑟银兄弟会契约",
@@ -4680,7 +6934,23 @@
      "startItem": null,
      "preQuest": "真正的主人",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.6,
+     "pickupY": 68.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4241,
+     "pickupNpcId": 9560
     },
     {
      "nameCn": "被遗弃的希望",
@@ -4705,7 +6975,23 @@
      "startItem": null,
      "preQuest": "拉格纳·雷酒",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1426,
+     "pickupMap": "丹莫罗",
+     "pickupX": 46.8,
+     "pickupY": 52.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4126,
+     "pickupNpcId": 1267
     },
     {
      "nameCn": "拉格纳·雷酒",
@@ -4717,7 +7003,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1419,
+     "pickupMap": "诅咒之地",
+     "pickupX": 63.6,
+     "pickupY": 20.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4128,
+     "pickupNpcId": 9540
     },
     {
      "nameCn": "伊森迪奥斯！",
@@ -4729,7 +7031,23 @@
      "startItem": null,
      "preQuest": "征服者派隆",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 85.4,
+     "pickupY": 70.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4263,
+     "pickupNpcId": 9561
     },
     {
      "nameCn": "好东西",
@@ -4741,7 +7059,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.4,
+     "pickupY": 68.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4286,
+     "pickupNpcId": 9177
     },
     {
      "nameCn": "弄皱的便笺",
@@ -4792,7 +7126,23 @@
      "startItem": null,
      "preQuest": "索瑞森废墟",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 39.4,
+     "pickupY": 55.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4341,
+     "pickupNpcId": 2784
     },
     {
      "nameCn": "卡兰的故事",
@@ -4830,7 +7180,23 @@
      "startItem": null,
      "preQuest": "糟糕的消息",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1455,
+     "pickupMap": "铁炉堡",
+     "pickupX": 39.4,
+     "pickupY": 55.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4362,
+     "pickupNpcId": 2784
     },
     {
      "nameCn": "语出惊人的公主",
@@ -4855,7 +7221,23 @@
      "startItem": null,
      "preQuest": "不和谐的烈焰",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 5.8,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3981,
+     "pickupNpcId": 9081
     },
     {
      "nameCn": "格杀勿论：黑铁矮人",
@@ -4891,7 +7273,23 @@
      "startItem": null,
      "preQuest": "出了什么事？",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 32.0,
+     "pickupY": 37.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4002,
+     "pickupNpcId": 4949
     },
     {
      "nameCn": "格杀勿论：高阶黑铁军官",
@@ -4915,7 +7313,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.0,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 7201,
+     "pickupNpcId": 9078
     },
     {
      "nameCn": "薇薇安·拉格雷",
@@ -4927,7 +7341,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 49.2,
+     "pickupY": 68.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4133,
+     "pickupNpcId": 5204
     },
     {
      "nameCn": "遗失的雷酒秘方",
@@ -4939,7 +7369,23 @@
      "startItem": null,
      "preQuest": "薇薇安·拉格雷",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.0,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4134,
+     "pickupNpcId": 9078
     },
     {
      "nameCn": "不和谐的火焰",
@@ -4951,7 +7397,23 @@
      "startItem": null,
      "preQuest": "不和谐的烈焰",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.4,
+     "pickupY": 48.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 3907,
+     "pickupNpcId": 9084
     },
     {
      "nameCn": "机器的崛起",
@@ -4963,7 +7425,23 @@
      "startItem": null,
      "preQuest": "机器的崛起",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 25.8,
+     "pickupY": 44.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4063,
+     "pickupNpcId": 2921
     },
     {
      "nameCn": "押送囚徒",
@@ -4975,7 +7453,23 @@
      "startItem": null,
      "preQuest": "格拉克·洛克鲁布",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 33.4,
+     "pickupY": 50.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4121,
+     "pickupNpcId": 9520
     },
     {
      "nameCn": "格拉克·洛克鲁布",
@@ -4987,7 +7481,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 5.8,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4122,
+     "pickupNpcId": 9080
     },
     {
      "nameCn": "行动：杀死安格弗将军",
@@ -4999,7 +7509,23 @@
      "startItem": null,
      "preQuest": "押送囚徒",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.0,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4132,
+     "pickupNpcId": 9077
     },
     {
      "nameCn": "拯救公主",
@@ -5011,7 +7537,23 @@
      "startItem": null,
      "preQuest": "东部王国",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 32.0,
+     "pickupY": 37.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4003,
+     "pickupNpcId": 4949
     },
     {
      "nameCn": "拯救公主？",
@@ -5406,7 +7948,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1444,
+     "pickupMap": "菲拉斯",
+     "pickupX": 76.8,
+     "pickupY": 37.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 7441,
+     "pickupNpcId": 14355
     },
     {
      "nameCn": "破碎的陷阱",
@@ -6129,7 +8687,23 @@
      "startItem": null,
      "preQuest": "失落的摩沙鲁石板",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 66.8,
+     "pickupY": 24.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4788,
+     "pickupNpcId": 10460
     },
     {
      "nameCn": "基布雷尔的特殊宠物",
@@ -6141,7 +8715,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.8,
+     "pickupY": 22.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4729,
+     "pickupNpcId": 10260
     },
     {
      "nameCn": "蜘蛛卵",
@@ -6153,7 +8743,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.8,
+     "pickupY": 22.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4862,
+     "pickupNpcId": 10260
     },
     {
      "nameCn": "冷冻龙蛋",
@@ -6165,7 +8771,23 @@
      "startItem": null,
      "preQuest": "返回丁奇身边",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.2,
+     "pickupY": 23.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4734,
+     "pickupNpcId": 10267
     },
     {
      "nameCn": "收集龙蛋",
@@ -6177,7 +8799,23 @@
      "startItem": null,
      "preQuest": "冷冻龙蛋",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.2,
+     "pickupY": 23.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4735,
+     "pickupNpcId": 10267
     },
     {
      "nameCn": "晋升印章",
@@ -6201,7 +8839,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.0,
+     "pickupY": 23.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4866,
+     "pickupNpcId": 9563
     },
     {
      "nameCn": "乌洛克",
@@ -6225,7 +8879,23 @@
      "startItem": null,
      "preQuest": "返回丁奇身边",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1452,
+     "pickupMap": "冬泉谷",
+     "pickupX": 61.4,
+     "pickupY": 38.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4907,
+     "pickupNpcId": 10468
     },
     {
      "nameCn": "皮普·急智，为您效劳！",
@@ -6250,7 +8920,23 @@
      "startItem": null,
      "preQuest": "罗拉克斯的故事",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1452,
+     "pickupMap": "冬泉谷",
+     "pickupX": 63.8,
+     "pickupY": 73.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5127,
+     "pickupNpcId": 10918
     },
     {
      "nameCn": "监护者",
@@ -6311,7 +8997,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 85.4,
+     "pickupY": 68.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4701,
+     "pickupNpcId": 9562
     },
     {
      "nameCn": "比修的装置",
@@ -6347,7 +9049,23 @@
      "startItem": null,
      "preQuest": "玛亚拉·布莱特文",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.8,
+     "pickupY": 69.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4764,
+     "pickupNpcId": 9565
     },
     {
      "nameCn": "瑞治维尔的箱子",
@@ -6359,7 +9077,23 @@
      "startItem": null,
      "preQuest": "末日扣环",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.8,
+     "pickupY": 69.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4765,
+     "pickupNpcId": 9565
     },
     {
      "nameCn": "玛亚拉·布莱特文",
@@ -6371,7 +9105,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 76.9,
+     "pickupY": 47.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4766,
+     "pickupNpcId": 2285
     },
     {
      "nameCn": "麦克斯韦尔的任务",
@@ -6383,7 +9133,23 @@
      "startItem": null,
      "preQuest": "给麦克斯韦尔的消息",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.6,
+     "pickupY": 68.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5081,
+     "pickupNpcId": 9560
     },
     {
      "nameCn": "达基萨斯将军的命令",
@@ -6408,7 +9174,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 5.8,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4724,
+     "pickupNpcId": 9081
     },
     {
      "nameCn": "狡猾的比修",
@@ -6420,7 +9202,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 5.8,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4981,
+     "pickupNpcId": 9080
     },
     {
      "nameCn": "比修的侦察报告",
@@ -6444,7 +9242,23 @@
      "startItem": null,
      "preQuest": "薇薇安·拉格雷和黑暗石板",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.0,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4768,
+     "pickupNpcId": 9078
     },
     {
      "nameCn": "薇薇安·拉格雷和黑暗石板",
@@ -6456,7 +9270,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 49.2,
+     "pickupY": 68.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4769,
+     "pickupNpcId": 5204
     },
     {
      "nameCn": "高图斯的命令",
@@ -8272,7 +11102,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5529,
+     "pickupNpcId": 11035
     },
     {
      "nameCn": "健康的龙鳞",
@@ -8297,7 +11143,23 @@
      "startItem": null,
      "preQuest": "贝蒂娜·比格辛克",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4771,
+     "pickupNpcId": 11035
     },
     {
      "nameCn": "瑟尔林·卡斯迪诺夫教授",
@@ -8309,7 +11171,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 70.2,
+     "pickupY": 73.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5382,
+     "pickupNpcId": 11216
     },
     {
      "nameCn": "传令官基尔图诺斯",
@@ -8321,7 +11199,23 @@
      "startItem": null,
      "preQuest": "卡斯迪诺夫的恐惧之袋",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 70.2,
+     "pickupY": 73.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5384,
+     "pickupNpcId": 11216
     },
     {
      "nameCn": "巫妖莱斯·霜语",
@@ -8333,7 +11227,23 @@
      "startItem": null,
      "preQuest": "禁锢灵魂的遗物",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 70.4,
+     "pickupY": 74.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5466,
+     "pickupNpcId": 11286
     },
     {
      "nameCn": "卡斯迪诺夫的恐惧之袋",
@@ -8345,7 +11255,23 @@
      "startItem": null,
      "preQuest": "瑟尔林·卡斯迪诺夫教授",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 70.2,
+     "pickupY": 73.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5515,
+     "pickupNpcId": 11216
     },
     {
      "nameCn": "贝蒂娜·比格辛克",
@@ -8357,7 +11283,23 @@
      "startItem": null,
      "preQuest": "莱尼德·巴萨罗梅",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.6,
+     "pickupY": 57.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5531,
+     "pickupNpcId": 11036
     },
     {
      "nameCn": "瓦塔拉克饰品的左瓣",
@@ -8601,7 +11543,23 @@
      "startItem": null,
      "preQuest": "血肉不会撒谎",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5213,
+     "pickupNpcId": 11035
     },
     {
      "nameCn": "了不起的艾兹拉·格里姆",
@@ -8613,7 +11571,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 80.4,
+     "pickupY": 58.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5214,
+     "pickupNpcId": 11033
     },
     {
      "nameCn": "神圣之屋",
@@ -8625,7 +11599,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.6,
+     "pickupY": 57.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5243,
+     "pickupNpcId": 11036
     },
     {
      "nameCn": "档案管理员",
@@ -8637,7 +11627,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5251,
+     "pickupNpcId": 11039
     },
     {
      "nameCn": "可怕的真相",
@@ -8686,7 +11692,23 @@
      "startItem": null,
      "preQuest": "爱与家庭",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 65.4,
+     "pickupY": 75.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5848,
+     "pickupNpcId": 11936
     },
     {
      "nameCn": "死人的请求",
@@ -8912,7 +11934,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5212,
+     "pickupNpcId": 11035
     },
     {
      "nameCn": "活跃的探子",
@@ -8924,7 +11962,23 @@
      "startItem": null,
      "preQuest": "血肉不会撒谎",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5213,
+     "pickupNpcId": 11035
     },
     {
      "nameCn": "了不起的艾兹拉·格里姆",
@@ -8936,7 +11990,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 80.4,
+     "pickupY": 58.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5214,
+     "pickupNpcId": 11033
     },
     {
      "nameCn": "神圣之屋",
@@ -8948,7 +12018,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.6,
+     "pickupY": 57.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5243,
+     "pickupNpcId": 11036
     },
     {
      "nameCn": "可怕的真相",
@@ -8973,7 +12059,23 @@
      "startItem": null,
      "preQuest": "可怕的真相",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 81.4,
+     "pickupY": 59.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5263,
+     "pickupNpcId": 11039
     },
     {
      "nameCn": "永不安息的灵魂",
@@ -9009,7 +12111,23 @@
      "startItem": null,
      "preQuest": "爱与家庭",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 65.4,
+     "pickupY": 75.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5848,
+     "pickupNpcId": 11936
     },
     {
      "nameCn": "死人的请求",
@@ -9057,7 +12175,23 @@
      "startItem": null,
      "preQuest": "暗翼蝠",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1423,
+     "pickupMap": "东瘟疫之地",
+     "pickupX": 26.4,
+     "pickupY": 74.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6163,
+     "pickupNpcId": 11878
     }
    ],
    "questItems": [
@@ -9247,7 +12381,23 @@
      "startItem": null,
      "preQuest": "失落的摩沙鲁石板",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1446,
+     "pickupMap": "塔纳利斯",
+     "pickupX": 66.8,
+     "pickupY": 24.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4788,
+     "pickupNpcId": 10460
     },
     {
      "nameCn": "基布雷尔的特殊宠物",
@@ -9259,7 +12409,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.8,
+     "pickupY": 22.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4729,
+     "pickupNpcId": 10260
     },
     {
      "nameCn": "蜘蛛卵",
@@ -9271,7 +12437,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.8,
+     "pickupY": 22.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4862,
+     "pickupNpcId": 10260
     },
     {
      "nameCn": "冷冻龙蛋",
@@ -9283,7 +12465,23 @@
      "startItem": null,
      "preQuest": "返回丁奇身边",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.2,
+     "pickupY": 23.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4734,
+     "pickupNpcId": 10267
     },
     {
      "nameCn": "收集龙蛋",
@@ -9295,7 +12493,23 @@
      "startItem": null,
      "preQuest": "冷冻龙蛋",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.2,
+     "pickupY": 23.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4735,
+     "pickupNpcId": 10267
     },
     {
      "nameCn": "晋升印章",
@@ -9319,7 +12533,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 65.0,
+     "pickupY": 23.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4866,
+     "pickupNpcId": 9563
     },
     {
      "nameCn": "丁奇·斯迪波尔",
@@ -9331,7 +12561,23 @@
      "startItem": null,
      "preQuest": "返回丁奇身边",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1452,
+     "pickupMap": "冬泉谷",
+     "pickupX": 61.4,
+     "pickupY": 38.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4907,
+     "pickupNpcId": 10468
     },
     {
      "nameCn": "皮普·急智，为您效劳！",
@@ -9356,7 +12602,23 @@
      "startItem": null,
      "preQuest": "罗拉克斯的故事",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1452,
+     "pickupMap": "冬泉谷",
+     "pickupX": 63.8,
+     "pickupY": 73.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5127,
+     "pickupNpcId": 10918
     },
     {
      "nameCn": "监护者",
@@ -9454,7 +12716,23 @@
      "startItem": null,
      "preQuest": "玛亚拉·布莱特文",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.8,
+     "pickupY": 69.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4764,
+     "pickupNpcId": 9565
     },
     {
      "nameCn": "瑞治维尔的箱子",
@@ -9466,7 +12744,23 @@
      "startItem": null,
      "preQuest": "末日扣环",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.8,
+     "pickupY": 69.0,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4765,
+     "pickupNpcId": 9565
     },
     {
      "nameCn": "玛亚拉·布莱特文",
@@ -9478,7 +12772,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1453,
+     "pickupMap": "暴风城",
+     "pickupX": 76.9,
+     "pickupY": 47.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4766,
+     "pickupNpcId": 2285
     },
     {
      "nameCn": "达基萨斯将军的命令",
@@ -9503,7 +12813,23 @@
      "startItem": null,
      "preQuest": "达基萨斯将军的命令",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1428,
+     "pickupMap": "燃烧平原",
+     "pickupX": 84.6,
+     "pickupY": 68.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 5102,
+     "pickupNpcId": 9560
     },
     {
      "nameCn": "龙火护符",
@@ -9515,7 +12841,23 @@
      "startItem": null,
      "preQuest": "巨龙之眼",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1452,
+     "pickupMap": "冬泉谷",
+     "pickupX": 54.4,
+     "pickupY": 51.2,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6502,
+     "pickupNpcId": 10929
     },
     {
      "nameCn": "狡猾的比修",
@@ -9527,7 +12869,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 5.8,
+     "pickupY": 47.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4981,
+     "pickupNpcId": 9080
     },
     {
      "nameCn": "比修的侦察报告",
@@ -9551,7 +12909,23 @@
      "startItem": null,
      "preQuest": "薇薇安·拉格雷和黑暗石板",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1418,
+     "pickupMap": "荒芜之地",
+     "pickupX": 3.0,
+     "pickupY": 47.6,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4768,
+     "pickupNpcId": 9078
     },
     {
      "nameCn": "薇薇安·拉格雷和黑暗石板",
@@ -9563,7 +12937,23 @@
      "startItem": null,
      "preQuest": null,
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1458,
+     "pickupMap": "幽暗城",
+     "pickupX": 49.2,
+     "pickupY": 68.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4769,
+     "pickupNpcId": 5204
     },
     {
      "nameCn": "为部落而战！",
@@ -9575,7 +12965,23 @@
      "startItem": null,
      "preQuest": "伊崔格的智慧",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1454,
+     "pickupMap": "奥格瑞玛",
+     "pickupX": 32.0,
+     "pickupY": 37.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 4974,
+     "pickupNpcId": 4949
     },
     {
      "nameCn": "黑龙幻象",
@@ -9587,7 +12993,23 @@
      "startItem": null,
      "preQuest": "雷克萨的证明",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1422,
+     "pickupMap": "西瘟疫之地",
+     "pickupX": 50.8,
+     "pickupY": 77.8,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6569,
+     "pickupNpcId": 11872
     },
     {
      "nameCn": "黑龙勇士之血",
@@ -9599,7 +13021,23 @@
      "startItem": null,
      "preQuest": "晋升……",
      "source": "wclbox",
-     "variants": 1
+     "variants": 1,
+     "pickupMapId": 1444,
+     "pickupMap": "菲拉斯",
+     "pickupX": 44.8,
+     "pickupY": 7.4,
+     "pickupLevel": "L2",
+     "pickupProvenance": [
+      {
+       "type": "addon",
+       "url": "https://wx-wow.com/changelog.html",
+       "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+       "version": "2.1.43",
+       "checkedAt": "2026-11-09"
+      }
+     ],
+     "questId": 6602,
+     "pickupNpcId": 10182
     }
    ],
    "questItems": [

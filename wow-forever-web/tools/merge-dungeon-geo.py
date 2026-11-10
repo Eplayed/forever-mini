@@ -22,10 +22,14 @@ def main():
     art = json.load(open(os.path.join(DATA, 'art.json'), encoding='utf-8')).get('maps') or {}
     dz = json.load(open(os.path.join(DATA, 'dungeons.json'), encoding='utf-8'))
     bosses_of = {}
+    aliases_of = {}
     dun_name = {}
     for key in ('newDungeons', 'classicDungeons', 'raids'):
         for x in dz.get(key) or []:
-            bosses_of[x['id']] = {b.get('nameCn') for b in (x.get('bosses') or [])}
+            bosses = x.get('bosses') or []
+            bosses_of[x['id']] = {b.get('nameCn') for b in bosses}
+            aliases_of[x['id']] = {a['nameCn']: b['nameCn'] for b in bosses
+                                   for a in (b.get('aliases') or []) if a.get('nameCn')}
             dun_name[x['id']] = x.get('nameCn') or x.get('nameEn') or x['id']
 
     prov = {'type': 'addon', 'url': snap['meta']['source'], 'checkedAt': snap['meta']['fetched'],
@@ -58,6 +62,9 @@ def main():
     for did, bs in sorted((snap.get('bosses') or {}).items()):
         # 首领名必须是这座本真有的那一条；对不上的一律不进成品（快照的 unmapped 里留着原因）
         keep = {n: pts for n, pts in bs.items() if n in bosses_of.get(did, set())}
+        for alias, name in aliases_of.get(did, {}).items():
+            if alias in bs:
+                keep.setdefault(name, bs[alias])
         if keep:
             e = out.setdefault(did, {})
             e['bossPos'] = keep

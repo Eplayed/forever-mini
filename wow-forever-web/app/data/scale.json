@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-09",
+  "generatedAt": "2026-11-10",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -127,7 +127,7 @@
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5395,
+  "search": 5419,
   "talentPreview": 472,
   "releases": 83,
   "navNew": [
@@ -140,8 +140,8 @@
   "talentVerified": 449,
   "dungeons": 38,
   "dungeonsNew": 9,
-  "bosses": 282,
-  "drops": 1053,
+  "bosses": 306,
+  "drops": 1166,
   "dungeonNameEn": 38,
   "dungeonParty": 31,
   "dungeonRangeTwoSay": 0,
@@ -180,7 +180,7 @@
     "build": "1.60.1.70790",
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -189,7 +189,7 @@
     "build": "1.60.1.70790",
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -198,7 +198,7 @@
     "build": "1.60.1.70790",
     "checkedAt": "2026-11-05",
     "classic": "1.15.9.70576",
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -207,7 +207,7 @@
     "build": "1.60.1.70790",
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -216,7 +216,7 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -225,7 +225,7 @@
     "build": null,
     "checkedAt": "2026-11-03",
     "classic": null,
-    "daysSince": 6,
+    "daysSince": 7,
     "stale": null
    },
    {
@@ -234,7 +234,7 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -243,7 +243,7 @@
     "build": null,
     "checkedAt": "2026-10-28",
     "classic": null,
-    "daysSince": 12,
+    "daysSince": 13,
     "stale": "warn"
    },
    {
@@ -252,7 +252,7 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    },
    {
@@ -261,7 +261,7 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 4,
+    "daysSince": 5,
     "stale": null
    }
   ],

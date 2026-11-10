@@ -1,0 +1,406 @@
+{
+ "meta": {
+  "source": "无限服副本接取坐标与 QuestieDB Forever 任务起始关系",
+  "checkedAt": "2026-11-10"
+ },
+ "rows": [
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "高地恐魔",
+   "questId": 95646,
+   "npcId": 1244,
+   "pickupNpc": "绿色守护者瑞瑟尔",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 56.4,
+   "pickupY": 40.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1437,
+     "map": "湿地",
+     "x": 56.3,
+     "y": 40.3,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "迷失在灌木丛中",
+   "questId": 95647,
+   "npcId": 1480,
+   "pickupNpc": "凯特琳·格拉斯曼",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 11.9,
+   "pickupY": 58.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1437,
+     "map": "湿地",
+     "x": 11.8,
+     "y": 58.8,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "龙喉传闻",
+   "questId": 95663,
+   "npcId": 2787,
+   "pickupNpc": "萨鲁克",
+   "pickupZone": "阿拉希高地",
+   "pickupMapId": 1417,
+   "pickupMap": "阿拉希高地",
+   "pickupX": 74.5,
+   "pickupY": 35.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1417,
+     "map": "阿拉希高地",
+     "x": 74.4,
+     "y": 35.6,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "打开巨口",
+   "questId": 95682,
+   "npcId": 13155,
+   "pickupNpc": "亡灵哨兵特工",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 51.4,
+   "pickupY": 59.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://bytetavern.com/wow-forever-excavation-site-wetlands-guide/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1437,
+     "map": "湿地",
+     "x": 51.5,
+     "y": 59.3,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://bytetavern.com/wow-forever-excavation-site-wetlands-guide/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "口味变了",
+   "questId": 95697,
+   "npcId": 3368,
+   "pickupNpc": "博斯坦",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 57.2,
+   "pickupY": 53.3,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1454,
+     "map": "奥格瑞玛",
+     "x": 57.3,
+     "y": 53.3,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "寻找凯特琳",
+   "questId": 95737,
+   "npcId": 3970,
+   "pickupNpc": "拉娜",
+   "pickupZone": "灰谷",
+   "pickupMapId": 1440,
+   "pickupMap": "灰谷",
+   "pickupX": 35.0,
+   "pickupY": 48.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "寻找歌刃",
+   "questId": 95772,
+   "npcId": 956,
+   "pickupNpc": "多林·歌刃",
+   "pickupZone": "赤脊山",
+   "pickupMapId": 1433,
+   "pickupMap": "赤脊山",
+   "pickupX": 25.8,
+   "pickupY": 46.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1433,
+     "map": "赤脊山",
+     "x": 25.6,
+     "y": 46.6,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "高地兽皮",
+   "questId": 98815,
+   "npcId": 2094,
+   "pickupNpc": "詹姆斯·哈洛兰",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 8.6,
+   "pickupY": 55.7,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "大地回响",
+   "questId": 98823,
+   "npcId": 9087,
+   "pickupNpc": "巴珊娜·符文图腾",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 71.1,
+   "pickupY": 34.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1456,
+     "map": "雷霆崖",
+     "x": 71.0,
+     "y": 33.6,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "史前棱镜",
+   "questId": 98824,
+   "npcId": 1077,
+   "pickupNpc": "勘察员维尔加",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 38.8,
+   "pickupY": 52.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://www.x1x.tw/wow/dungeon/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "mapId": 1437,
+     "map": "湿地",
+     "x": 38.8,
+     "y": 52.3,
+     "provenance": {
+      "type": "fan_db",
+      "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+      "checkedAt": "2026-11-10"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "长者的学识",
+   "questId": 95664,
+   "startItem": "泰坦圣物",
+   "startItemId": 270866,
+   "pickupZone": "挖掘场：湿地 · 圣物守护者",
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "addon",
+     "url": "https://github.com/Questie/Questie",
+     "checkedAt": "2026-11-10",
+     "file": "questie-quests-full.json"
+    }
+   ]
+  },
+  {
+   "dungeonId": "whelgars-excavation",
+   "nameCn": "失落圣物的运送",
+   "questId": 95810,
+   "startItem": "泰坦圣物",
+   "startItemId": 270865,
+   "pickupZone": "挖掘场：湿地 · 圣物守护者",
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "fan_db",
+     "url": "https://forever-tavern.com/dungeons/excavation-site-wetlands/",
+     "checkedAt": "2026-11-10"
+    },
+    {
+     "type": "addon",
+     "url": "https://github.com/Questie/Questie",
+     "checkedAt": "2026-11-10",
+     "file": "questie-quests-full.json"
+    }
+   ]
+  }
+ ]
+}

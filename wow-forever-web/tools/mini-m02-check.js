@@ -347,8 +347,8 @@ async function main() {
     const q = getCurrentPages().pop();
     const d = q.data;
     return { route: q.route, hl: d.highlightDrop, notice: String(d.dropNotice || '').slice(0, 12),
-      groups: (d.dropGroups || []).length,
-      hit: (d.dropGroups || []).some((g) => g.rows.some((r) => r.itemId === d.highlightDrop)) };
+      groups: (d.bosses || []).length,
+      hit: (d.bosses || []).some((g) => g.id === d.openBoss && g.items.some((r) => r.itemId === d.highlightDrop)) };
   });
   log('掉落反查点一座本：跳详情并把查的那件高亮', /pages\/dungeon\/index/.test(String(jump.route))
     && !!jump.hl && jump.hit && jump.groups > 0, JSON.stringify(jump));
@@ -356,31 +356,22 @@ async function main() {
   const mapShot = await ev(() => { const d = getCurrentPages().pop().data; return { map: !!d.mapUrl, drawn: d.mapDrawn, entry: d.mapEntry }; });
   log('副本详情带地图（底图或入口坐标至少一样，自绘会标示意图）', mapShot.map || !!mapShot.entry, JSON.stringify(mapShot));
   await shot('e5-detail-map');
-  /* 真 beta 批次再走一遍装备详情：M01 那条测的是本地夹具批次，这一条测的是线上那一份的字节 */
-  const liveItem = await (async () => {
-    await ev(() => {
-      const p = getCurrentPages().pop();
-      const g = (p.data.dropGroups || []).filter((x) => x.rows.length)[0];
-      const row = g.rows[0];
-      p.onOpenItem({ currentTarget: { dataset: { item: row.itemId, dungeon: p.data.id } } });
-      return 1;
-    });
-    await new Promise((r) => setTimeout(r, 9000));
-    return ev(() => {
-      const p = getCurrentPages().pop();
-      const d = p.data || {};
-      return { route: p.route, name: d.name, st: (d.st || []).length, s0: String(((d.st || [])[0] || {}).t || '').slice(0, 12), type: d.type, sell: d.sell, boss: d.boss, need: d.needOnline };
-    });
-  })();
-  log('真 beta 批次：点掉落行进的装备详情页有属性行与卖价',
-    /pages\/item\/index/.test(String(liveItem.route)) && liveItem.st > 0 && liveItem.need === false,
-    JSON.stringify(liveItem));
-  await shot('e6-item-detail-live');
+  const liveItem = await ev(() => {
+    const p = getCurrentPages().pop();
+    const boss = p.data.bosses.find((b) => b.id === p.data.openBoss);
+    const row = boss.items.find((x) => x.itemId === p.data.highlightDrop);
+    p.onToggleItem({ currentTarget: { dataset: { key: row.key, item: row.itemId } } });
+    const card = p.data.itemCard;
+    return { route: p.route, open: p.data.openItem === row.key, st: card ? card.st.length : 0 };
+  });
+  log('真 beta 数据：高亮装备的属性在副本详情行内展开',
+    liveItem && liveItem.route === 'pages/dungeon/index' && liveItem.open && liveItem.st > 0, JSON.stringify(liveItem));
+  await shot('e6-item-detail-inline-live');
 
   /* 2026-11-09 真机踩的坑（站主截图）：详情页点首领跳掉落页一件都查不到——
      navigateTo 传参编了码，onLoad 必须自己解回来；旧代码没解，筛选串是 %E9 编码串。
      而且落地就得直接列这位首领掉的装备，不是让玩家再打一遍关键词。
-     这条按 onOpenBoss 的真实编码方式带参进页，钉「解码 + 直接出清单 + 清单全部属于这位首领」。 */
+     这条按旧分享链接的编码方式带参进页，钉「解码 + 直接出清单 + 清单全部属于这位首领」。 */
   await goto('/pages/loots/index', 10000);
   const bjSrc = await ev(() => new Promise((res) => {
     const p = getCurrentPages().pop();
@@ -401,13 +392,13 @@ async function main() {
         n: (d.list || []).length,
         all: (d.list || []).every((x) => x.sources.every((s) => s.dungeonId === d.filterDungeon && s.boss === d.filterBoss)) };
     });
-    log('点首领跳掉落页：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）',
+    log('旧掉落反查筛选链接：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）',
       /pages\/loots\/index/.test(String(bj.route)) && bj.fd === bjSrc.id && bj.fb === bjSrc.boss
         && bj.fn === bjSrc.name && bj.n > 0 && bj.all,
       JSON.stringify({ fd: bj.fd, fb: bj.fb, fn: bj.fn, n: bj.n, allMatch: bj.all }));
     await shot('e7-loots-boss-filter');
   } else {
-    log('点首领跳掉落页：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）', false, '没拿到种子来源（红玫瑰反查空）');
+    log('旧掉落反查筛选链接：参数解码回中文，落地直接列这位首领掉的（不用再输关键词）', false, '没拿到种子来源（红玫瑰反查空）');
   }
 
   process.stdout.write('\nF. 首页配图与天赋模拟器（2026-10-22 站主指令）\n');
@@ -597,13 +588,15 @@ async function main() {
     /\.act\s*\{[^}]*flex:\s*1/.test(fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxss'), 'utf8')), '');
   log('副本详情：底部"来源"这一节整块撤了（记录仍在分片里，由 M01 那条查）',
     !/来源/.test(dgWxml.replace(/<!--[\s\S]*?-->/g, ' ')) && !/onProvToggle/.test(dgJs) && !/onOpenSource/.test(dgJs), '');
-  log('掉落行可点：一行带 data-item 与 bindtap，指向装备详情页',
-    /data-item="\{\{row\.itemId\}\}"/.test(dgWxml) && /bindtap="onOpenItem"/.test(dgWxml)
-      && /pages\/item\/index/.test(dgJs) && appJson.pages.indexOf('pages/item/index') >= 0, '');
+  log('掉落行在副本详情内展开，独立物品页旧链接仍可访问',
+    /bindtap="onToggleItem"/.test(dgWxml) && !/pages\/item\/index/.test(dgJs)
+      && appJson.pages.indexOf('pages/item/index') >= 0, '');
   const itemJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/item/index.js'), 'utf8');
   const itemWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/item/index.wxml'), 'utf8');
-  log('装备详情页按列名读 cards（不写死下标，生成器加一列不会读歪）',
-    /cardCols/.test(itemJs) && /cols\.indexOf\(/.test(itemJs), '');
+  const cardJs = fs.readFileSync(path.join(REPO, 'for-mini/services/item-card.js'), 'utf8');
+  log('行内装备与独立物品页按列名复用同一份 cards 读取',
+    /services\/item-card/.test(itemJs) && /services\/item-card/.test(dgJs)
+      && /cardCols/.test(cardJs) && /cols\.indexOf\(/.test(cardJs), '');
   log('装备详情页把库里有的事实都给出去，缺的照实说（不拿空行充数）',
     /属性行|掉落于|商人卖价|物品编号/.test(itemWxml) && /还没入库/.test(itemJs), '');
   /* 品质档名以前两页各抄一份、四档叫法互不相同；现在只许有 services/quality.js 这一份 */
@@ -660,7 +653,7 @@ async function main() {
   const qp = await ev(() => {
     const d = getCurrentPages().pop().data;
     const r = ((d.quest || {}).rows || [])[0] || {};
-    return { n: ((d.quest || {}).rows || []).length, pick: r.pickup || '', none: !!r.pickupNone, name: r.name };
+    return { n: ((d.quest || {}).rows || []).length, pick: r.pickupNpc || r.pickupZone || '', none: !r.pickupNpc && !r.pickupZone, name: r.name };
   });
   log('详情页任务行把"在哪接的"摆到界面数据里：首行带接取 NPC·地点，两条都缺就标"没记录"（不猜）',
     qp.n > 0 && ((qp.pick !== '' && qp.none === false) || (qp.pick === '' && qp.none === true)), JSON.stringify(qp));
@@ -692,11 +685,10 @@ async function main() {
   const djJs = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.js'), 'utf8');
   const djWxml = fs.readFileSync(path.join(REPO, 'for-mini/pages/dungeon/index.wxml'), 'utf8');
   const djFace = djWxml.replace(/<!--[\s\S]*?-->/g, ' ');
-  log('详情页首领行可点：跳掉落页带副本与首领参数（看它掉什么）',
-    /onOpenBoss/.test(djJs) && /pages\/loots\/index\?dungeon=/.test(djJs)
-      && /bindtap="onOpenBoss"/.test(djFace) && /data-id="\{\{item\.id\}\}"/.test(djFace)
-      && /看它掉什么/.test(djFace),
-    'onOpenBoss + bindtap + data-id 在首领行');
+  log('详情页首领行展开本组掉落并声明展开状态',
+    /onToggleBoss/.test(djJs) && !/pages\/loots\/index/.test(djJs)
+      && /bindtap="onToggleBoss"/.test(djFace) && /aria-expanded/.test(djFace)
+      && /item\.items/.test(djFace), '');
   log('11-09 撤下的两句不再出现在详情页：「另一说法：xx」「副本原画取自…」（js 里的 conflict/artNote 赋值也清了）',
     djFace.indexOf('另一说法') < 0 && djFace.indexOf('原画取自') < 0 && !/ART_NOTE|artNote/.test(djJs)
       && djJs.indexOf('nameCnConflict') < 0,

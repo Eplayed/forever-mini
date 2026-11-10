@@ -168,13 +168,11 @@ function decorate(item, batch) {
     nameEn: item.nameEn || '',
     nameCnConflict: item.nameCnConflict || '',
     title: item.nameCn || item.nameEn || item.id,
-    nameMissing: !item.nameCn,
     enMissing: !item.nameEn,
     rangeText: item.levelRange || '等级待实测',
     faction: item.faction || '',
     zoneCn: item.zoneCn || '',
-    /* 列表行缩略图：art 是相对 assets/ 的路径，地址由 oss-manifest 拼（页面不自己拼 URL）。
-       没这张图的座（art 为 null）界面直接不摆格子，不摆一个空框冒充有图。 */
+    /* 封面取不到时由 icon-cell 显示首字。 */
     artUrl: item.art ? oss.assetUrl(batch, item.art) : '',
     fav: false
   }

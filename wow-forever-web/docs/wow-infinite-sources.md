@@ -1213,3 +1213,26 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 - **任务中文名层** → `app/data/upstream/questie-quests-cn.json`（652.9 KB，`tools/extract-questie-quests-cn.py`）。主库真身是 **`QuestieDB_Forever.toc`（15.5 MB baked TOC 元数据存储，Base64→zlib→CBOR）**，不是 lua 表；zhCN 翻译列块 4,254 条 + 白云飞补丁 757 条（一致 486 / 串分歧 271，分歧两个都留：`cn`=补丁生效值、`cnBlock`=列块原值），任务 ID 5,233 个、有中文名 5,011。与站内 `dungeon-quests.json` 按英文名桥只接得上 13 条（一致 6 / 分歧 7）——**本站任务条目没有 questID 是合并层的坎**，接不接、怎么接等合并层决定。分级先按 L1（国服客户端串的插件转述，够不够 datamine_cn 口径升 L0 未判）。目标文本（列块列 8 + 白云飞 QuestObjectives.lua 749 条）与 QuestXP **本轮没采**（范围没批）。
 - **掉落名单** → `app/data/upstream/questie-item-drops.json`（413.8 KB，`tools/extract-questie-drops.py`）。classicItemDrops.lua（wowhead 自动生成，文件自述）+ itemDropCorrections.lua，统一成 (npcId → itemIds[]) 归属对：**16,790 对 / 4,404 NPC × 1,313 物品**；掉率 float 与 DropKeys 引用当场丢（红线）。与 `df-dungeon-loot.json` 对拍（npcId 桥，共同 NPC 106）：都认 23 对、只 Questie 263 对、只 DF 464 对——**三家掉落名单分歧确实大，都留口径必要**，哪家准要游戏内实测。
 - 两条快照的 `meta` 都带双文件 SHA-256 与抓取日 2026-11-08（源文件日 2026-11-07）；源本体在游戏机共享，本轮只读。执行记录见 [DATA-任务名与掉落开采-2026-11-08.md](DATA-任务名与掉落开采-2026-11-08.md)。
+
+## 二十七、领主大厅掉落归属复核（2026-11-09）
+
+副本聚合页原来只列出任务物品 `274286`。同站的物品详情快照 `app/data/upstream/wclbox-items-detail.json`（2026-10-16）却逐件给出了其余 12 件装备的首领出处。用 DungeonsForever 1.9.10 的 `df-dungeon-loot.json` 对拍，四组物品 ID 一致，三组有明确 NPC ID。另用 Hyjal 的带 ID 物品链接、IceDNicco 的遭遇与掉落表和 WoW Forever DB 的归属表逐组复核。ForeverDB 的采集记录覆盖其中 7 件装备与 1 件任务物品，Questie 快照对这四个 NPC 暂无记录。各来源的覆盖差异保留在来源记录里。 [新手盒子副本页](https://wowforever.wclbox.com/fuben/hall-of-thanes/) · [Hyjal](https://hyjal.cc/dungeons/hall-of-thanes) · [IceDNicco](https://wow.icednicco.online/forever/db/instance/3065) · [WoW Forever DB](https://wowfdb.com/zones/the-hall-of-thanes/loot/) · [ForeverDB](https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes)
+
+| 遭遇 | NPC | 掉落物品 ID |
+| --- | --- | --- |
+| 3493 法德林·安威玛尔 | 261306 Faldrim Anvilmar | 270227、271096、271097 |
+| 3495 茵弗努斯（Infurnus） | 261316 Magmatus（玛格玛图斯／玛格马图斯） | 270230、270231、271095 |
+| 3494 劫掠者（普兰德） | 261311 Plunder | 270228、270229、271098 |
+| 3496 杜根·挽锤 | 261319 Durgen Dirgehammer | 270256、270260、270261、274286（任务物品） |
+
+第二战的客户端遭遇名与掉落 NPC 名各自保留。IceDNicco 在同一个遭遇条目下列出 NPC 261316 和这三件装备，Wiki 记录了两字段的命名差异，改名时间与关系待实测。XR 快照将「劫掠者」和「普兰德」都指向 NPC 261311、displayId 142840，保留两个译名及旧站内 ID `plunder-2` 供归并。 [第二战记录](https://wow.icednicco.online/forever/db/boss/3495) · [客户端字段对照](https://wowfwiki.com/wiki/Hall_of_Thanes#Encounters)
+
+13 项存于 `app/data/upstream/hall-of-thanes-loot.json`。中文物品名、品质与图标键沿用同 ID 的现有物品名录，本地 13 个图标均已核存。物品 `271095` 的名录中文为「阿兹加洛的獠牙」，英文源列 `Fang of Magmatus`，按同一 ID 留双语原串，中文游戏内显示待实测。归属统一 L2，快照只收事实字段与逐条来源。 [物品名录来源](https://wowforever.wclbox.com/wupin/liebiao/1) · [271095 英文条目](https://hyjal.cc/item/271095/fang-of-magmatus)
+
+首领头像转存 4 张 `game-capture`。法德林、劫掠者、杜根使用 Tavern 明确标为其 Beta 自录画面、与各遭遇逐一绑定的 112×112 头像。原件为 WebP，小程序开发者工具的图片接口报 invalid，转成逐像素一致的 PNG。第二场使用 Dlonem 的 Beta 实战帧，原图的 Magmatus 名牌与火元素同屏，裁出 176×176 的角色画面。Tavern 第二战标为通用图标，未采用。目录 `app/img/art/hall-of-thanes-bosses/` 的 `manifest.json` 逐件登记来源、抓取日、原件与成品哈希、裁剪边界和对应遭遇／NPC。成品名带内容哈希，移除整目录后重建即回退首字占位。 [Tavern 头像来源](https://forever-tavern.com/dungeons/the-hall-of-thanes/) · [Dlonem 第二战实拍](https://dlonem.com/wow-forever/dungeons/hall-of-thanes/#boss-magmatus)
+
+## 无限服人口普查 · Everloot 社区样本（2026-11-10）
+
+新增公开汇总源 [Everloot population API](https://everloot.app/api/tools/population?window=week)。正式服、地区与规则集未分组，按 L2 观察样本留档。只取阵营与职业公开汇总并按 CC BY-SA 4.0 单独署名。见 [数据源核查](DATA-无限服人口普查源-2026-11-10.md)。
+
+国服另存 `app/data/population-census-cn.json`，取自大脚小程序「服务器人口 → 魔兽世界无限服 → 24小时人口」公开面板。保留阵营与九职业整数占比、来源显示时间和核对日。未取得样本量、阵营内职业精确占比或广告解锁后的明细。 [大脚官网](https://bigfoot.nga.cn/) · [核查记录](DATA-大脚国服无限普查核查-2026-11-10.md)

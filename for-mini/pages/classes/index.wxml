@@ -1,29 +1,32 @@
 <view class="wrap">
-  <!-- 页面底图：三个 tab 页共用那张官方天裔图，top 居中；图取不到就整两层不渲染，
-       版式回落到 app.wxss 的纯色底。内容抬一层见本页 .wrap -->
-  <image wx:if="{{bgUrl}}" class="pagebg-ambient" src="{{bgUrl}}" mode="aspectFill" />
   <image wx:if="{{bgUrl}}" class="pagebg" src="{{bgUrl}}" mode="widthFix" binderror="onBgError" />
   <view wx:if="{{bgUrl}}" class="pagebg-scrim"></view>
   <view class="fg">
 
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-    这批数据的结构比当前小程序新，职业与天赋可能显示不全。请更新「跑本助手」后再看。
+    请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{offline}}" class="notice">
-    现在没连上线：种族与职业名单显示的是随小程序打包的那一份，天赋树要联网才取到。
+    当前离线，天赋树需联网查看。
   </view>
 
   <view class="lead plate">
     <view class="lead-t">职业</view>
-    <view class="lead-s">九个职业的技能书与天赋树，以及每个种族能练什么。天赋树可以在这里模拟点配置，点一下加一点、长按看详情。</view>
+    <view class="lead-s">查看技能、天赋和可选种族。</view>
   </view>
 
-  <!-- 职业怎么选入口（2026-11-08 第一批③）：问卷在独立页，答题口味 → 方向参考；
-       口径句在 chooser 页页头（数据下发），这里一句话说清"不是官方推荐" -->
   <view class="card chooser-card" bindtap="onOpenChooser">
     <view class="cc-main">
       <view class="cc-t">不知道玩什么职业？</view>
-      <view class="cc-s">答 7 道题按口味给参考——本站整理，不是官方推荐。</view>
+      <view class="cc-s">按你的玩法偏好选职业。</view>
+    </view>
+    <view class="cc-go">›</view>
+  </view>
+
+  <view class="card chooser-card" bindtap="onOpenCensus" aria-role="button" aria-label="查看人口普查">
+    <view class="cc-main">
+      <view class="cc-t">人口普查</view>
+      <view class="cc-s">查看阵营比例与职业分布。</view>
     </view>
     <view class="cc-go">›</view>
   </view>
@@ -98,7 +101,7 @@
     </view>
   </view>
 
-  <view wx:if="{{errorText}}" class="notice notice-bad">{{errorText}}</view>
+  <view wx:if="{{errorText}}" class="notice notice-bad">职业资料加载失败，请稍后再试。</view>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
   </view>
 </view>

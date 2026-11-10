@@ -17,9 +17,16 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', 'app', 'data');
+const IMG = path.resolve(ROOT, '..', 'img');
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const dg = read('dungeons.json');
 const up = read('upstream/wclbox-dungeons.json');
+const thanesLootPath = 'upstream/hall-of-thanes-loot.json';
+const thanesLoot = fs.existsSync(path.join(ROOT, thanesLootPath)) ? read(thanesLootPath) : null;
+const thanesAliases = thanesLoot ? thanesLoot.bosses.flatMap((b) => b.aliases || []) : [];
+const foreverLootPath = 'upstream/df-forever-boss-loot.json';
+const foreverLoot = fs.existsSync(path.join(ROOT, foreverLootPath)) ? read(foreverLootPath) : null;
+const foreverById = new Map((foreverLoot ? foreverLoot.dungeons : []).map((d) => [d.id, d.bosses]));
 
 // 上游 slug → 我们已有条目的 id（我们先用了自己的命名，改回去没必要，链接会断）
 const ALIAS = {
@@ -59,7 +66,11 @@ function build(d) {
   // 直接收进来会在副本页上出现一个假首领。
   const junk = (s) => !s || /^(小怪|精英怪|trash|other)$/i.test(String(s).trim());
   const upB = (d.bosses || []).filter((b) => !junk(b.nameCn));
-  const mineB = (mine && mine.bosses) || [];
+  const refreshed = foreverById.get(mine ? mine.id : slug) || [];
+  const retired = new Set(refreshed.flatMap((b) => (b.aliases || []).map((a) => a.bossId)
+    .concat(b.match === 'new' ? [b.bossId] : [])));
+  if (thanesLoot && slug === thanesLoot.dungeonId) thanesAliases.forEach((a) => retired.add(a.bossId));
+  const mineB = ((mine && mine.bosses) || []).filter((b) => !retired.has(b.id));
   // 上游删掉的有名首领不跟着删：我们没法进游戏数首领，删错了就是丢数据。
   // 保留原名单、追加上游新增的，并把差额报出来等人工核。
   const gone = mineB.filter((b) => !junk(b.nameCn) &&
@@ -164,8 +175,11 @@ if (fs.existsSync(DF_PATH)) {
     if (!src) return;
     d.bosses = d.bosses || [];
     const real = (src.bosses || []).filter((b) => b.npcId !== null && !notBoss(b.nameCn));
-    const fresh = real.filter((b) => !d.bosses.some((x) => x.nameCn === b.nameCn ||
-      (b.nameEn && x.nameEn && x.nameEn === b.nameEn)));
+    const refreshedAliases = (foreverById.get(d.id) || []).flatMap((b) => b.aliases || []);
+    const fresh = real.filter((b) => !refreshedAliases.some((a) => a.nameCn === b.nameCn)
+      && !d.bosses.some((x) => x.nameCn === b.nameCn ||
+      (b.nameEn && x.nameEn && x.nameEn === b.nameEn)) &&
+      (!thanesLoot || d.id !== thanesLoot.dungeonId || !thanesAliases.some((a) => a.nameCn === b.nameCn)));
     fresh.forEach((b) => {
       const base = slugOf(b.nameEn) || ('rare-' + b.npcId);
       let id = base, k = 2;
@@ -232,11 +246,17 @@ if (fs.existsSync(cardsPath)) {
 // 界面退回自绘方块——不拿别的种族或别的本的脸凑。
 try {
   const bossArt = JSON.parse(fs.readFileSync(path.join(ROOT, 'art.json'), 'utf8')).bosses || {};
+  const renderedPath = path.join(IMG, 'art/bosses-m2/manifest.json');
+  const rendered = fs.existsSync(renderedPath) ? JSON.parse(fs.readFileSync(renderedPath, 'utf8')).portraits : {};
   let n = 0, tot = 0;
   [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).forEach((d) => {
     (d.bosses || []).forEach((b) => {
       tot += 1;
+      const model = rendered[b.id];
+      const modelFile = 'art/bosses-m2/' + b.id + '.webp';
       b.portrait = bossArt[b.id] || null;
+      if (!b.portrait && b.id !== 'infurnus' && model && model.dungeon === d.id
+        && fs.existsSync(path.join(IMG, modelFile))) b.portrait = 'img/' + modelFile;
       if (b.portrait) n += 1;
     });
   });
@@ -448,6 +468,118 @@ dg.meta.levelRangeSettled = {
 };
 if (settled || filled) {
   console.log('等级区间定稿：按参考站卡片改写 %d 座 / 用客户端数补上空值 %d 座', settled, filled);
+}
+
+/* 领主大厅的旧掉落表只有一件任务物品。用逐件对过 ID 的无限服资料补全，
+   同一 NPC 的两种译名留在同一条首领记录，免得点到重复的空行。 */
+if (thanesLoot) {
+  const pack = thanesLoot;
+  const dungeon = dg.newDungeons.find((d) => d.id === pack.dungeonId);
+  if (!dungeon) throw new Error('找不到已核掉落所属的副本：' + pack.dungeonId);
+  const portraitManifest = path.join(ROOT, '..', 'img', 'art', 'hall-of-thanes-bosses', 'manifest.json');
+  const portraits = fs.existsSync(portraitManifest)
+    ? JSON.parse(fs.readFileSync(portraitManifest, 'utf8')).files : {};
+  pack.bosses.forEach(({ bossId, drops, aliases = [], ...facts }) => {
+    const boss = dungeon.bosses.find((b) => b.id === bossId);
+    if (!boss) throw new Error('找不到已核掉落所属的首领：' + bossId);
+    const aliasIds = new Set(aliases.map((b) => b.bossId));
+    dungeon.bosses = dungeon.bosses.filter((b) => !aliasIds.has(b.id));
+    Object.assign(boss, facts, { note: null });
+    if (aliases.length) boss.aliases = aliases;
+    if (boss.id === 'infurnus' && boss.portrait === 'img/art/bosses-m2/infurnus.webp') boss.portrait = null;
+    const portrait = portraits[bossId];
+    if (portrait && portrait.origin === 'game-capture' && portrait.npcId === boss.npcId && portrait.encounterId === boss.encounterId) {
+      boss.portrait = portrait.file;
+    }
+    dungeon.drops.forEach((x) => {
+      if (aliasIds.has(x.bossId)) Object.assign(x, { bossId, bossCn: boss.nameCn });
+    });
+    drops.forEach((x) => {
+      const existing = dungeon.drops.find((row) => row.bossId === bossId && String(row.itemId) === String(x.itemId));
+      if (existing) Object.assign(existing, x);
+      else dungeon.drops.push(Object.assign({}, x, { bossId, bossCn: boss.nameCn }));
+    });
+  });
+  const lootSource = { type: 'fan_db', url: pack.sourceUrl, checkedAt: pack.checkedAt,
+    note: '领主大厅首领掉落按无限服资料逐件核对归属，本站待实测' };
+  dungeon.provenance = dungeon.provenance.filter((p) => p.url !== lootSource.url || p.type !== lootSource.type);
+  dungeon.provenance.push(lootSource);
+  dungeon.lootNote = '领主大厅的掉落按无限服公开资料及插件记录核对，本站待实测。';
+}
+
+if (foreverLoot) {
+  const pack = foreverLoot;
+  const items = new Map(read('items.json').items.map((item) => [String(item.id), item]));
+  const dungeons = new Map([].concat(dg.newDungeons, dg.classicDungeons, dg.raids).map((d) => [d.id, d]));
+  const source = { type: 'addon', url: pack.sourceUrl, checkedAt: pack.checkedAt,
+    note: 'DungeonsForever 当前客户端版本的首领名单与掉落归属，本站待实测。旧表与未对齐条目留档。' };
+  let updated = 0;
+  let added = 0;
+  for (const data of pack.dungeons) {
+    const dungeon = dungeons.get(data.id);
+    if (!dungeon || (data.id === 'hall-of-thanes' && thanesLoot)) continue;
+    const touched = new Set();
+    for (const row of data.bosses) {
+      if (!row.bossId) continue;
+      if (touched.has(row.bossId)) throw new Error('新版插件重复挂接首领：' + data.id + '/' + row.bossId);
+      touched.add(row.bossId);
+      let boss = dungeon.bosses.find((b) => b.id === row.bossId);
+      if (!boss && row.match === 'new') {
+        boss = { id: row.bossId, nameCn: row.nameCn, nameEn: row.nameEn, npcId: row.npcId,
+          level: 'L2', note: '首领名单来自客户端插件，待实测。', portrait: null };
+        dungeon.bosses.push(boss);
+        added += 1;
+      }
+      if (!boss) throw new Error('新版插件未对上已核首领：' + data.id + '/' + row.bossId);
+      const aliases = row.aliases || [];
+      const ids = new Set([boss.id].concat(aliases.map((b) => b.bossId)));
+      const names = new Set([boss.nameCn].concat(aliases.map((b) => b.nameCn)));
+      if (aliases.length) {
+        const portrait = dungeon.bosses.find((b) => ids.has(b.id) && b.portrait);
+        if (!boss.portrait && portrait) boss.portrait = portrait.portrait;
+        boss.aliases = aliases;
+        dungeon.bosses = dungeon.bosses.filter((b) => b.id === boss.id || !ids.has(b.id));
+      }
+      dungeon.drops = (dungeon.drops || []).map((x) =>
+        ids.has(x.bossId) || names.has(x.bossCn)
+          ? Object.assign({}, x, { bossId: boss.id, bossCn: boss.nameCn }) : x);
+      if (!row.itemIds.length) continue;
+      const rows = row.itemIds.map((id) => items.get(String(id)));
+      if (rows.some((item) => !item || !item.name)) throw new Error('新版插件的物品未入名录：' + data.id + '/' + row.bossId);
+      dungeon.drops = dungeon.drops.filter((x) => x.bossId !== boss.id);
+      for (const item of rows) {
+        const iconKey = item.iconKey && fs.existsSync(path.join(IMG, 'icons', item.iconKey + '.jpg')) ? item.iconKey : null;
+        dungeon.drops.push({ itemId: String(item.id), nameCn: item.name, iconKey,
+          quality: item.quality ?? null, bossId: boss.id, bossCn: boss.nameCn, level: 'L2', from: 'df-forever' });
+      }
+      boss.note = null;
+      updated += 1;
+    }
+    if (!touched.size) continue;
+    dungeon.provenance = (dungeon.provenance || []).filter((p) => p.url !== source.url || p.type !== source.type);
+    dungeon.provenance.push(source);
+    if (dungeon.drops.length) dungeon.lootNote = '已对齐的首领使用无限服插件掉落记录，其他条目参考已有资料，本站待实测。';
+  }
+  dg.meta.lootDisclaimer = '掉落来自无限服插件与公开资料，均待实测，本站不写掉落几率。';
+  console.log('新版插件掉落：更新 %d 位首领，补名单 %d 位', updated, added);
+}
+
+const captureManifest = path.join(IMG, 'art/bosses-game-capture/manifest.json');
+if (fs.existsSync(captureManifest)) {
+  const { files } = JSON.parse(fs.readFileSync(captureManifest, 'utf8'));
+  for (const dungeon of [].concat(dg.newDungeons, dg.classicDungeons, dg.raids)) {
+    for (const boss of dungeon.bosses) {
+      const portrait = files[dungeon.id + '|' + boss.id];
+      if (portrait && portrait.origin === 'game-capture') boss.portrait = portrait.file;
+    }
+  }
+}
+
+if (dg.meta.bossPortraits) {
+  const bosses = [].concat(dg.newDungeons, dg.classicDungeons, dg.raids).flatMap((d) => d.bosses);
+  dg.meta.bossPortraits.total = bosses.length;
+  dg.meta.bossPortraits.withPortrait = bosses.filter((b) => b.portrait).length;
+  dg.meta.bossPortraits.note = '已登记的游戏原图、实录裁切与本机客户端模型渲染，未核头像留空。';
 }
 
 fs.writeFileSync(path.join(ROOT, 'dungeons.json'), JSON.stringify(dg, null, 1) + '\n');

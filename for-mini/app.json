@@ -10,6 +10,7 @@
     "pages/macros/index",
     "pages/namer/index",
     "pages/chooser/index",
+    "pages/census/index",
     "pages/class/index",
     "pages/spells/index",
     "pages/loots/index",
@@ -18,15 +19,15 @@
   ],
   "window": {
     "navigationBarTitleText": "跑本助手",
-    "navigationBarBackgroundColor": "#0b0f16",
+    "navigationBarBackgroundColor": "#192235",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#0b0f16",
+    "backgroundColor": "#15202f",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
-    "color": "#8a93a5",
-    "selectedColor": "#f8b700",
-    "backgroundColor": "#2a1c1c",
+    "color": "#a7b5c3",
+    "selectedColor": "#f7b90a",
+    "backgroundColor": "#192235",
     "borderStyle": "black",
     "list": [
       {

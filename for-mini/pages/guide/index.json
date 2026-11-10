@@ -1,7 +1,5 @@
 {
   "navigationBarTitleText": "指南",
   "enablePullDownRefresh": true,
-  "backgroundColor": "#0b0f16",
-  "navigationBarBackgroundColor": "#0b0f16",
   "usingComponents": {}
 }

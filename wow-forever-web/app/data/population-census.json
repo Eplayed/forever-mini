@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "product": "wow-forever-mini",
+  "kind": "census",
+  "level": "L2",
+  "scope": {
+    "id": "all",
+    "label": "地区与规则集未区分"
+  },
+  "dataAsOf": "2026-11-10T01:10:27.649Z",
+  "window": {
+    "id": "week",
+    "from": "2026-11-04T23:00:00.000Z",
+    "to": "2026-11-10T01:10:27.649Z",
+    "label": "近 7 天观测"
+  },
+  "characters": 14950,
+  "installs": 13,
+  "factions": [
+    {
+      "id": "alliance",
+      "count": 3290,
+      "share": 0.22
+    },
+    {
+      "id": "horde",
+      "count": 11660,
+      "share": 0.78
+    }
+  ],
+  "classes": [
+    {
+      "id": "warrior",
+      "count": 1935,
+      "share": 0.129
+    },
+    {
+      "id": "paladin",
+      "count": 1790,
+      "share": 0.12
+    },
+    {
+      "id": "hunter",
+      "count": 1855,
+      "share": 0.124
+    },
+    {
+      "id": "rogue",
+      "count": 1345,
+      "share": 0.09
+    },
+    {
+      "id": "priest",
+      "count": 1325,
+      "share": 0.089
+    },
+    {
+      "id": "shaman",
+      "count": 1920,
+      "share": 0.128
+    },
+    {
+      "id": "mage",
+      "count": 1400,
+      "share": 0.094
+    },
+    {
+      "id": "warlock",
+      "count": 1415,
+      "share": 0.095
+    },
+    {
+      "id": "druid",
+      "count": 1965,
+      "share": 0.131
+    }
+  ],
+  "provenance": {
+    "name": "Everloot",
+    "type": "community_sample",
+    "url": "https://everloot.app/census",
+    "apiUrl": "https://everloot.app/api/tools/population?window=week",
+    "methodUrl": "https://everloot.app/methodology",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "credit": "Data from Everloot contributors (everloot.app), CC BY-SA 4.0",
+    "checkedAt": "2026-11-10"
+  }
+}

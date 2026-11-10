@@ -312,8 +312,8 @@ const oss = require(MINI_SERVICE);
   /* M02 起头像是"素材相对路径"，不再是摘掉——断言跟着换成更严的一条：
      值必须落在 assets/ 的相对路径里，站内 img/ 一个都不许出现。 */
   const detArt = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons', 'detail', 'ragefire-chasm.json'), 'utf8')).dungeon;
-  ok('首领头像改成了 assets 相对路径（不是站内 img/，也不再是 undefined）',
-    detArt.bosses.every((b) => !b.portrait || /^art\/boss\w*\/[a-z0-9-]+\.webp$/.test(b.portrait))
+  ok('首领头像改成了 assets PNG 相对路径',
+    detArt.bosses.every((b) => !b.portrait || /^art\/bosses-mini-png\/[a-z0-9-]+\.png$/.test(b.portrait))
       && detArt.bosses.some((b) => b.portrait), JSON.stringify(detArt.bosses.slice(0, 1)));
   ok('副本原画同样改成 assets 相对路径', /^art\/dungeons\/[a-z0-9-]+\.webp$/.test(String(detArt.art)), String(detArt.art));
   ok('整批数据文件里搜不到站内 img/ 路径',
@@ -559,6 +559,20 @@ const oss = require(MINI_SERVICE);
       && r[4] >= 0 && r[4] < d.bosses.length)));
   ok('每行都有 itemId（玩家复制过去要能查到）',
     lootTab.dungeons.every((d) => d.rows.every((r) => r[0] !== null && r[0] !== undefined && r[0] !== '')));
+  const thanes = lootTab.dungeons.find((d) => d.id === 'hall-of-thanes');
+  const thanesDetail = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons/detail/hall-of-thanes.json'), 'utf8'));
+  const thanesBosses = thanesDetail.dungeon.bosses;
+  ok('领主大厅：法德林三件装备可反查，首领行与反查的归属和条数一致',
+    thanesBosses.length === 4 && thanesBosses.every((b) => b.drops > 0
+      && thanes.rows.filter((r) => thanes.bosses[r[4]] === b.nameCn).length === b.drops)
+      && ['270227', '271096', '271097'].every((id) => thanes.rows.some((r) =>
+        String(r[0]) === id && thanes.bosses[r[4]] === '法德林·安威玛尔')));
+  const ragefire = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons/detail/ragefire-chasm.json'), 'utf8'));
+  const ragefireLoot = JSON.parse(fs.readFileSync(path.join(batchDir, 'dungeons/loot/ragefire-chasm.json'), 'utf8'));
+  ok('怒焰裂谷：旧 WebP 头像从小程序 PNG 通道下发，巴扎兰有新版首领掉落',
+    ragefire.dungeon.bosses.length === 4 && ragefire.dungeon.bosses.every((b) =>
+      /^art\/bosses-mini-png\/.+\.png$/.test(b.portrait))
+      && ragefireLoot.drops.some((r) => r.bossId === 'bazzalan' && r.from === 'df-forever'));
   ok('红线：整张表里没有掉落百分比', !/%\s|\d+(\.\d+)?\s*%/.test(JSON.stringify(lootTab.dungeons)));
   ok('整表 ≤ 192 KB（一次 GET 换"任何一件都能查"，再大就该切了）',
     fs.statSync(path.join(batchDir, 'loots', 'index.json')).size <= 192 * 1024,

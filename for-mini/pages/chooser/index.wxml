@@ -14,7 +14,7 @@
       <view class="head-s">答 {{total}} 道题，按你的玩法口味给个参考。</view>
     </view>
     <view wx:if="{{note}}" class="muted note">{{note}}</view>
-    <view wx:if="{{offline}}" class="muted note">这份问卷是缓存里的一份；要最新版连一下网。</view>
+    <view wx:if="{{offline}}" class="muted note">当前离线，显示已保存的问卷。</view>
 
     <block wx:if="{{!finished}}">
       <view class="prog">
@@ -57,7 +57,7 @@
             <view class="r-bar-in" style="width: {{item.pct}}%"></view>
           </view>
         </view>
-        <view class="muted r-note">分数只反映你自己的答法，不是职业强弱；点一个职业去看它的天赋树和技能书。</view>
+        <view class="muted r-note">结果反映你的玩法偏好。点职业可查看天赋和技能。</view>
       </view>
       <view class="btn gold restart" bindtap="onRestart">重新答一次</view>
     </block>

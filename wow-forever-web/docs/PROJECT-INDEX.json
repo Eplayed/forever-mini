@@ -1,6 +1,6 @@
 {
- "head": "070662c62f1e35e67e2008d4f5d94993d572eace",
- "fingerprint": "42273ba865bfbce04af0ca4eea8fc18a39d53579df9c85f8fcd45da26c9acc4f",
+ "head": "0fa29e764da4ee80b31823a04c110a6a93ae9db4",
+ "fingerprint": "4f2f23f2758e14607f6e08858aa4d06d8566edaa7d269fd4dfaa172253860f05",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -105,13 +105,13 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 42205,
-   "mtimeNs": 1794209014587032700
+   "bytes": 43519,
+   "mtimeNs": 1794278944303130700
   },
   {
    "path": "PROJECT_DECISIONS.md",
-   "bytes": 30877,
-   "mtimeNs": 1794206298796656500
+   "bytes": 32040,
+   "mtimeNs": 1794278970752019400
   },
   {
    "path": "PROJECT_GATES.md",
@@ -125,8 +125,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 773941,
-   "mtimeNs": 1794209100834076900
+   "bytes": 783612,
+   "mtimeNs": 1794278970752019400
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -145,8 +145,8 @@
   },
   {
    "path": "for-mini/app.json",
-   "bytes": 1510,
-   "mtimeNs": 1794149602080035900
+   "bytes": 1483,
+   "mtimeNs": 1794278298683592400
   },
   {
    "path": "for-mini/components/icon-cell/index.js",
@@ -160,33 +160,33 @@
   },
   {
    "path": "for-mini/data/flags-local.js",
-   "bytes": 1071,
-   "mtimeNs": 1793672110781376400
+   "bytes": 1052,
+   "mtimeNs": 1794211908756922600
   },
   {
    "path": "for-mini/data/forever-class-snapshot.js",
    "bytes": 11979,
-   "mtimeNs": 1794207892648080700
+   "mtimeNs": 1794278535194213800
   },
   {
    "path": "for-mini/data/forever-dungeon-snapshot.js",
-   "bytes": 21977,
-   "mtimeNs": 1794207892648080700
+   "bytes": 21891,
+   "mtimeNs": 1794278535193692600
   },
   {
    "path": "for-mini/data/forever-glossary-snapshot.js",
    "bytes": 14897,
-   "mtimeNs": 1794207892647081300
+   "mtimeNs": 1794278535192510800
   },
   {
    "path": "for-mini/data/forever-meta-snapshot.js",
    "bytes": 2189,
-   "mtimeNs": 1794207892648080700
+   "mtimeNs": 1794278535193179200
   },
   {
    "path": "for-mini/data/forever-names-snapshot.js",
    "bytes": 7581,
-   "mtimeNs": 1794207892649079700
+   "mtimeNs": 1794278535194213800
   },
   {
    "path": "for-mini/docs/DATA.md",
@@ -249,9 +249,34 @@
    "mtimeNs": 1793510770157778700
   },
   {
+   "path": "for-mini/docs/VERIFY-人口普查-2026-11-10.md",
+   "bytes": 2407,
+   "mtimeNs": 1794275073982352900
+  },
+  {
    "path": "for-mini/docs/VERIFY-倒计时口径-2026-11-03.md",
    "bytes": 3788,
    "mtimeNs": 1793679720583951300
+  },
+  {
+   "path": "for-mini/docs/VERIFY-其他副本首领头像与掉落-2026-11-09.md",
+   "bytes": 4530,
+   "mtimeNs": 1794241000289575700
+  },
+  {
+   "path": "for-mini/docs/VERIFY-冒险主题与湿地任务-2026-11-10.md",
+   "bytes": 2315,
+   "mtimeNs": 1794278944301129700
+  },
+  {
+   "path": "for-mini/docs/VERIFY-副本任务卡文案精简-2026-11-10.md",
+   "bytes": 918,
+   "mtimeNs": 1794241225086349800
+  },
+  {
+   "path": "for-mini/docs/VERIFY-副本掉落手风琴与任务坐标-2026-11-09.md",
+   "bytes": 3156,
+   "mtimeNs": 1794223552496648600
   },
   {
    "path": "for-mini/docs/VERIFY-副本详情与装备详情-2026-10-23.md",
@@ -325,8 +350,8 @@
   },
   {
    "path": "for-mini/docs/VERIFY-第一批专业开闸副本任务chooser-2026-11-08.md",
-   "bytes": 30798,
-   "mtimeNs": 1794209001167796100
+   "bytes": 35896,
+   "mtimeNs": 1794214239225818100
   },
   {
    "path": "for-mini/docs/VERIFY-职业详情阵营框与分享-2026-10-22.md",
@@ -349,14 +374,19 @@
    "mtimeNs": 1793672110962604700
   },
   {
+   "path": "for-mini/docs/VERIFY-领主大厅掉落与头像-2026-11-09.md",
+   "bytes": 4496,
+   "mtimeNs": 1794221052590404600
+  },
+  {
    "path": "for-mini/docs/VERIFY-首页布局重排-2026-11-03.md",
    "bytes": 5895,
    "mtimeNs": 1793677227294859800
   },
   {
    "path": "for-mini/docs/VERIFY-首页指南卡换宏命令-2026-11-02.md",
-   "bytes": 8801,
-   "mtimeNs": 1793672110963581200
+   "bytes": 8695,
+   "mtimeNs": 1794211908752156200
   },
   {
    "path": "for-mini/docs/VERIFY-首页改版-2026-10-22.md",
@@ -364,54 +394,69 @@
    "mtimeNs": 1793510770164004600
   },
   {
+   "path": "for-mini/docs/VERIFY-首页改版与国服普查-2026-11-10.md",
+   "bytes": 2650,
+   "mtimeNs": 1794276948564313600
+  },
+  {
    "path": "for-mini/oss-preview/classes.json",
    "bytes": 42498,
-   "mtimeNs": 1794207890383256400
+   "mtimeNs": 1794278533285448700
   },
   {
    "path": "for-mini/oss-preview/dungeons.json",
-   "bytes": 346099,
-   "mtimeNs": 1794207890379110000
+   "bytes": 416076,
+   "mtimeNs": 1794278533280882500
   },
   {
    "path": "for-mini/oss-preview/glossary.json",
    "bytes": 84105,
-   "mtimeNs": 1794207890377109800
+   "mtimeNs": 1794278533278381400
   },
   {
    "path": "for-mini/oss-preview/guide.json",
    "bytes": 622,
-   "mtimeNs": 1794207890384763000
+   "mtimeNs": 1794278533287961800
   },
   {
    "path": "for-mini/oss-preview/meta.json",
    "bytes": 2095,
-   "mtimeNs": 1794207890379110000
+   "mtimeNs": 1794278533281885900
   },
   {
    "path": "for-mini/oss-preview/spells.json",
    "bytes": 443675,
-   "mtimeNs": 1794207890382109600
+   "mtimeNs": 1794278533284393800
   },
   {
    "path": "for-mini/oss-preview/talents.json",
    "bytes": 430044,
-   "mtimeNs": 1794207890384763000
+   "mtimeNs": 1794278533287961800
   },
   {
    "path": "for-mini/pages/bis/index.js",
-   "bytes": 15692,
-   "mtimeNs": 1793672907189271800
+   "bytes": 14899,
+   "mtimeNs": 1794276514786159500
   },
   {
    "path": "for-mini/pages/bis/index.json",
-   "bytes": 238,
-   "mtimeNs": 1793672110836985400
+   "bytes": 152,
+   "mtimeNs": 1794277616522712300
+  },
+  {
+   "path": "for-mini/pages/census/index.js",
+   "bytes": 4659,
+   "mtimeNs": 1794278298687623300
+  },
+  {
+   "path": "for-mini/pages/census/index.json",
+   "bytes": 80,
+   "mtimeNs": 1794274458114598100
   },
   {
    "path": "for-mini/pages/chooser/index.js",
-   "bytes": 4318,
-   "mtimeNs": 1794149657649359600
+   "bytes": 4294,
+   "mtimeNs": 1794276554658432500
   },
   {
    "path": "for-mini/pages/chooser/index.json",
@@ -420,98 +465,98 @@
   },
   {
    "path": "for-mini/pages/class/index.js",
-   "bytes": 12294,
-   "mtimeNs": 1793672919867508900
+   "bytes": 11931,
+   "mtimeNs": 1794276514787161200
   },
   {
    "path": "for-mini/pages/class/index.json",
-   "bytes": 241,
-   "mtimeNs": 1793510770349962800
+   "bytes": 155,
+   "mtimeNs": 1794277616524174000
   },
   {
    "path": "for-mini/pages/classes/index.js",
-   "bytes": 6554,
-   "mtimeNs": 1794149691118366500
+   "bytes": 6469,
+   "mtimeNs": 1794274458111092800
   },
   {
    "path": "for-mini/pages/classes/index.json",
-   "bytes": 235,
-   "mtimeNs": 1793510770350968300
+   "bytes": 149,
+   "mtimeNs": 1794277616524174000
   },
   {
    "path": "for-mini/pages/dungeon/index.js",
-   "bytes": 13068,
-   "mtimeNs": 1794192576583943700
+   "bytes": 11920,
+   "mtimeNs": 1794278503775690700
   },
   {
    "path": "for-mini/pages/dungeon/index.json",
-   "bytes": 239,
-   "mtimeNs": 1793510770351967800
+   "bytes": 154,
+   "mtimeNs": 1794277616524174000
   },
   {
    "path": "for-mini/pages/dungeons/index.js",
-   "bytes": 6412,
-   "mtimeNs": 1793672930573893600
+   "bytes": 6031,
+   "mtimeNs": 1794277616529177400
   },
   {
    "path": "for-mini/pages/dungeons/index.json",
-   "bytes": 242,
-   "mtimeNs": 1793510770353991300
+   "bytes": 157,
+   "mtimeNs": 1794277616524174000
   },
   {
    "path": "for-mini/pages/glossary/index.js",
-   "bytes": 4698,
-   "mtimeNs": 1793672908716861000
+   "bytes": 4534,
+   "mtimeNs": 1794211908756922600
   },
   {
    "path": "for-mini/pages/glossary/index.json",
-   "bytes": 161,
-   "mtimeNs": 1793510770355805400
+   "bytes": 111,
+   "mtimeNs": 1794277616525177700
   },
   {
    "path": "for-mini/pages/guide/index.js",
-   "bytes": 2878,
-   "mtimeNs": 1793672910279603200
+   "bytes": 2791,
+   "mtimeNs": 1794211908753665700
   },
   {
    "path": "for-mini/pages/guide/index.json",
-   "bytes": 183,
-   "mtimeNs": 1793510770358195700
+   "bytes": 99,
+   "mtimeNs": 1794277616525177700
   },
   {
    "path": "for-mini/pages/home/index.js",
-   "bytes": 12596,
-   "mtimeNs": 1793674446845374000
+   "bytes": 9871,
+   "mtimeNs": 1794278298685621500
   },
   {
    "path": "for-mini/pages/home/index.json",
-   "bytes": 241,
-   "mtimeNs": 1793510770360201300
+   "bytes": 155,
+   "mtimeNs": 1794277616526177500
   },
   {
    "path": "for-mini/pages/item/index.js",
-   "bytes": 6141,
-   "mtimeNs": 1793672921421961900
+   "bytes": 5540,
+   "mtimeNs": 1794276554658432500
   },
   {
    "path": "for-mini/pages/item/index.json",
-   "bytes": 241,
-   "mtimeNs": 1793510770362270800
+   "bytes": 155,
+   "mtimeNs": 1794277616526177500
   },
   {
    "path": "for-mini/pages/loots/index.js",
-   "bytes": 7072,
-   "mtimeNs": 1794198986798268400
+   "bytes": 6886,
+   "mtimeNs": 1794211908755936300
   },
   {
    "path": "for-mini/pages/loots/index.json",
-   "bytes": 241,
-   "mtimeNs": 1793510770363774600
+   "bytes": 155,
+   "mtimeNs": 1794277616526177500
   },
   {
    "path": "for-mini/pages/macros/index.js",
-   "bytes": 9041,
-   "mtimeNs": 1793672911708044900
+   "bytes": 8810,
+   "mtimeNs": 1794211908776737400
   },
   {
    "path": "for-mini/pages/macros/index.json",
@@ -540,33 +585,33 @@
   },
   {
    "path": "for-mini/pages/namer/index.js",
-   "bytes": 7011,
-   "mtimeNs": 1793672918338596900
+   "bytes": 6830,
+   "mtimeNs": 1794211908763940000
   },
   {
    "path": "for-mini/pages/namer/index.json",
-   "bytes": 85,
-   "mtimeNs": 1793672110966732100
+   "bytes": 81,
+   "mtimeNs": 1794211908754676700
   },
   {
    "path": "for-mini/pages/professions/index.js",
-   "bytes": 14701,
-   "mtimeNs": 1794190253993272100
+   "bytes": 14312,
+   "mtimeNs": 1794211908746997400
   },
   {
    "path": "for-mini/pages/professions/index.json",
-   "bytes": 244,
-   "mtimeNs": 1793510770369003700
+   "bytes": 158,
+   "mtimeNs": 1794277616527177400
   },
   {
    "path": "for-mini/pages/spells/index.js",
-   "bytes": 6967,
-   "mtimeNs": 1793672909746434600
+   "bytes": 6775,
+   "mtimeNs": 1794211908761433200
   },
   {
    "path": "for-mini/pages/spells/index.json",
-   "bytes": 241,
-   "mtimeNs": 1793510770370506900
+   "bytes": 155,
+   "mtimeNs": 1794277616527177400
   },
   {
    "path": "for-mini/project.config.json",
@@ -575,8 +620,8 @@
   },
   {
    "path": "for-mini/services/countdown.js",
-   "bytes": 2667,
-   "mtimeNs": 1793679621297736500
+   "bytes": 2620,
+   "mtimeNs": 1794211908759436900
   },
   {
    "path": "for-mini/services/features.js",
@@ -585,18 +630,23 @@
   },
   {
    "path": "for-mini/services/forever-data.js",
-   "bytes": 6528,
-   "mtimeNs": 1793510770374015800
+   "bytes": 6617,
+   "mtimeNs": 1794274466240519100
+  },
+  {
+   "path": "for-mini/services/item-card.js",
+   "bytes": 640,
+   "mtimeNs": 1794222085337074200
   },
   {
    "path": "for-mini/services/name-roll.js",
-   "bytes": 1215,
-   "mtimeNs": 1793672110967732000
+   "bytes": 1183,
+   "mtimeNs": 1794211908742964500
   },
   {
    "path": "for-mini/services/oss-manifest.js",
-   "bytes": 36366,
-   "mtimeNs": 1794149595694882100
+   "bytes": 36047,
+   "mtimeNs": 1794274575957134300
   },
   {
    "path": "for-mini/services/quality.js",
@@ -750,8 +800,8 @@
   },
   {
    "path": "wow-forever-web/app/src/lib/fmt.js",
-   "bytes": 4694,
-   "mtimeNs": 1793679634042370300
+   "bytes": 4589,
+   "mtimeNs": 1794211908743963700
   },
   {
    "path": "wow-forever-web/app/src/lib/glyph.js",
@@ -1319,6 +1369,11 @@
    "mtimeNs": 1793510772611193600
   },
   {
+   "path": "wow-forever-web/docs/DATA-副本任务接取位置-2026-11-09.md",
+   "bytes": 2878,
+   "mtimeNs": 1794222389823660800
+  },
+  {
    "path": "wow-forever-web/docs/DATA-副本层图-Windows任务书-2026-10-28.md",
    "bytes": 5658,
    "mtimeNs": 1793510772611193600
@@ -1327,6 +1382,11 @@
    "path": "wow-forever-web/docs/DATA-区域图-Windows实拍任务书-2026-10-28.md",
    "bytes": 5646,
    "mtimeNs": 1793510772612194100
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-大脚国服无限普查核查-2026-11-10.md",
+   "bytes": 2285,
+   "mtimeNs": 1794276527123879000
   },
   {
    "path": "wow-forever-web/docs/DATA-客户端原料-2026-10-21.md",
@@ -1389,6 +1449,11 @@
    "mtimeNs": 1793510772616721900
   },
   {
+   "path": "wow-forever-web/docs/DATA-无限服人口普查源-2026-11-10.md",
+   "bytes": 2757,
+   "mtimeNs": 1794274351137993500
+  },
+  {
    "path": "wow-forever-web/docs/DATA-架构与社区缺口-2026-10-26.md",
    "bytes": 11420,
    "mtimeNs": 1793510772616721900
@@ -1412,6 +1477,11 @@
    "path": "wow-forever-web/docs/DATA-每日更新-2026-11-02.md",
    "bytes": 34480,
    "mtimeNs": 1793619453352323000
+  },
+  {
+   "path": "wow-forever-web/docs/DATA-湿地任务接取坐标-2026-11-10.md",
+   "bytes": 2561,
+   "mtimeNs": 1794278539900533400
   },
   {
    "path": "wow-forever-web/docs/DATA-白云飞整合盘点-2026-11-08.md",
@@ -1834,6 +1904,11 @@
    "mtimeNs": 1793510772646894000
   },
   {
+   "path": "wow-forever-web/docs/PRD-无限服人口普查-2026-11-10.md",
+   "bytes": 6809,
+   "mtimeNs": 1794274686867711700
+  },
+  {
    "path": "wow-forever-web/docs/PRD-移动查询首期-2026-10-21.md",
    "bytes": 17132,
    "mtimeNs": 1793510772647893100
@@ -1945,8 +2020,8 @@
   },
   {
    "path": "wow-forever-web/docs/UI.md",
-   "bytes": 233330,
-   "mtimeNs": 1793510772657485000
+   "bytes": 234439,
+   "mtimeNs": 1794278970753525500
   },
   {
    "path": "wow-forever-web/docs/VERIFY-2026-10-08-site.md",
@@ -2320,8 +2395,8 @@
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-sources.md",
-   "bytes": 131119,
-   "mtimeNs": 1794145983000139900
+   "bytes": 135292,
+   "mtimeNs": 1794276903127094300
   },
   {
    "path": "wow-forever-web/docs/wow-infinite-workflow.md",
@@ -2420,8 +2495,8 @@
   },
   {
    "path": "wow-forever-web/tools/build-data.js",
-   "bytes": 148715,
-   "mtimeNs": 1793672110870322400
+   "bytes": 147075,
+   "mtimeNs": 1794276572079571700
   },
   {
    "path": "wow-forever-web/tools/build-icon-map.py",
@@ -2442,6 +2517,11 @@
    "path": "wow-forever-web/tools/build-zone-maps.py",
    "bytes": 6698,
    "mtimeNs": 1793510776658131200
+  },
+  {
+   "path": "wow-forever-web/tools/convert-mini-boss-portraits.py",
+   "bytes": 1741,
+   "mtimeNs": 1794225816158997700
   },
   {
    "path": "wow-forever-web/tools/copy-banned.json",
@@ -2490,8 +2570,8 @@
   },
   {
    "path": "wow-forever-web/tools/export-mini.js",
-   "bytes": 30472,
-   "mtimeNs": 1793672110871324300
+   "bytes": 29923,
+   "mtimeNs": 1794211908762434500
   },
   {
    "path": "wow-forever-web/tools/extract-abilities.py",
@@ -2660,18 +2740,18 @@
   },
   {
    "path": "wow-forever-web/tools/merge-dungeon-geo.py",
-   "bytes": 8988,
-   "mtimeNs": 1793510776814038700
+   "bytes": 9343,
+   "mtimeNs": 1794219892837101000
   },
   {
    "path": "wow-forever-web/tools/merge-dungeon-quests.py",
-   "bytes": 22936,
-   "mtimeNs": 1794200573001342700
+   "bytes": 24358,
+   "mtimeNs": 1794278499859923600
   },
   {
    "path": "wow-forever-web/tools/merge-dungeons.js",
-   "bytes": 25842,
-   "mtimeNs": 1793542787040237500
+   "bytes": 34090,
+   "mtimeNs": 1794239396980263100
   },
   {
    "path": "wow-forever-web/tools/merge-items-detail.py",
@@ -2705,8 +2785,8 @@
   },
   {
    "path": "wow-forever-web/tools/merge-professions.js",
-   "bytes": 5117,
-   "mtimeNs": 1794190200782216900
+   "bytes": 5019,
+   "mtimeNs": 1794211908769793600
   },
   {
    "path": "wow-forever-web/tools/merge-spells.py",
@@ -2730,13 +2810,13 @@
   },
   {
    "path": "wow-forever-web/tools/mini-m01-check.js",
-   "bytes": 94716,
-   "mtimeNs": 1794208478964700000
+   "bytes": 89510,
+   "mtimeNs": 1794276459969274000
   },
   {
    "path": "wow-forever-web/tools/mini-m02-check.js",
-   "bytes": 80182,
-   "mtimeNs": 1794199000617076600
+   "bytes": 80174,
+   "mtimeNs": 1794222211733680700
   },
   {
    "path": "wow-forever-web/tools/nga-daily.sh",
@@ -2760,13 +2840,13 @@
   },
   {
    "path": "wow-forever-web/tools/oss-release-test.js",
-   "bytes": 129096,
-   "mtimeNs": 1793672110876629700
+   "bytes": 128329,
+   "mtimeNs": 1794239731400028000
   },
   {
    "path": "wow-forever-web/tools/oss-release.js",
-   "bytes": 197022,
-   "mtimeNs": 1794190774214590300
+   "bytes": 206103,
+   "mtimeNs": 1794278503775185800
   },
   {
    "path": "wow-forever-web/tools/pkg-verify.py",
@@ -2830,8 +2910,8 @@
   },
   {
    "path": "wow-forever-web/tools/render-boss-portraits.py",
-   "bytes": 17850,
-   "mtimeNs": 1794207813706950500
+   "bytes": 19910,
+   "mtimeNs": 1794214200499849100
   },
   {
    "path": "wow-forever-web/tools/route-smoke.py",

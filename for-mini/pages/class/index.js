@@ -122,7 +122,7 @@ Page({
         iconUrl: oss.raceIconUrl(this.batch, entry),
         allianceRaces: byFaction.alliance,
         hordeRaces: byFaction.horde,
-        raceEmpty: total ? '' : '名单里还没有种族能练这个职业，不猜。',
+        raceEmpty: total ? '' : '暂无可选种族记录。',
         /* 补齐到 3 的倍数，最后一行不留半格错位（(3 - n%3) % 3：正好整除时不补） */
         padAlliance: (3 - byFaction.alliance.length % 3) % 3,
         padHorde: (3 - byFaction.horde.length % 3) % 3,
@@ -131,7 +131,7 @@ Page({
         requiresUpdate: !!r.requiresUpdate
       })
       if (!entry.shardPath) {
-        this.setData({ talentLoaded: true, errorText: '这个职业的天赋树还没有整理好。' })
+        this.setData({ talentLoaded: true, errorText: '暂无该职业的天赋数据。' })
         return null
       }
       return service.loadTalentClass(entry, this.batch).then((t) => {

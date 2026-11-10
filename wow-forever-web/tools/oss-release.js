@@ -123,7 +123,8 @@ const BUDGET_KB = {
      哪天顶破，方向是任务单独一片，不是抬这条预算。 */
   /* 职业选择器（2026-11-08 站主第一批③）：七题问卷整份一文件（实测约 4 KB）。
      16 KB 给"以后加题、加说明"留余量；它是进页才取的一次性流量，不是冷启动路径。 */
-  chooser: 16
+  chooser: 16,
+  census: 8
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -144,7 +145,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    不进 oss-preview 导出产物，理由同 items 那两条。 */
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
-const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'population-census.json', 'population-census-cn.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -193,6 +194,87 @@ const isOfficial = (list) => (list || []).some((s) => String(s.type || '').index
 
 /* ---------- 1. 把 oss-preview 的三份成品切成一个批次 ---------- */
 
+/* 只接受已公开的汇总字段。原始角色、隐藏计数及其他额外字段不能随批次下发。 */
+function validateCensus(census, classIds) {
+  const keys = (o, expected) => o && typeof o === 'object' && !Array.isArray(o)
+    && Object.keys(o).sort().join(' ') === expected.split(' ').sort().join(' ');
+  const hasText = (v) => typeof v === 'string' && !!v.trim();
+  const utcTime = (v) => typeof v === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(v) && Number.isFinite(Date.parse(v));
+  const errors = [];
+  if (!keys(census, 'schemaVersion product kind level scope dataAsOf window characters installs factions classes provenance')) {
+    return ['人口普查：只接收已登记的汇总字段'];
+  }
+  if (census.schemaVersion !== SCHEMA_VERSION || census.product !== PRODUCT || census.kind !== 'census' || census.level !== 'L2') {
+    errors.push('人口普查：版本或分级不符');
+  }
+  if (!keys(census.scope, 'id label') || census.scope.id !== 'all' || !hasText(census.scope.label)
+      || !keys(census.window, 'id from to label') || census.window.id !== 'week' || !hasText(census.window.label)
+      || !utcTime(census.window.from) || !utcTime(census.window.to) || !utcTime(census.dataAsOf)
+      || Date.parse(census.window.from) >= Date.parse(census.window.to)
+      || Date.parse(census.window.to) - Date.parse(census.window.from) > 7 * 86400000) {
+    errors.push('人口普查：地区口径或采样时间窗无效');
+  }
+  const p = census.provenance;
+  if (!keys(p, 'name type url apiUrl methodUrl license licenseUrl credit checkedAt')
+      || p.name !== 'Everloot' || p.type !== 'community_sample' || p.url !== 'https://everloot.app/census'
+      || p.apiUrl !== 'https://everloot.app/api/tools/population?window=week'
+      || p.methodUrl !== 'https://everloot.app/methodology' || p.license !== 'CC BY-SA 4.0'
+      || p.licenseUrl !== 'https://creativecommons.org/licenses/by-sa/4.0/'
+      || p.credit !== 'Data from Everloot contributors (everloot.app), CC BY-SA 4.0'
+      || !/^\d{4}-\d\d-\d\d$/.test(p.checkedAt) || !utcTime(p.checkedAt + 'T00:00:00Z')) {
+    errors.push('人口普查：缺少已核来源、再发布许可、署名或核对日期');
+  }
+  const total = census.characters;
+  if (!Number.isSafeInteger(total) || total <= 0 || !Number.isSafeInteger(census.installs) || census.installs <= 0) {
+    return errors.concat('人口普查：样本数或上报安装数无效');
+  }
+  [['阵营', census.factions, ['alliance', 'horde']], ['职业', census.classes, classIds]].forEach(([label, rows, ids]) => {
+    if (!Array.isArray(rows) || rows.length !== ids.length || !rows.every((r) => keys(r, 'id count share')
+      && ids.includes(r.id) && Number.isSafeInteger(r.count) && r.count >= 0 && r.count <= total + 5
+      && Number.isFinite(r.share) && r.share >= 0 && r.share <= 1)
+      || new Set(rows.map((r) => r.id)).size !== ids.length) {
+      errors.push('人口普查：' + label + ' ID 缺失、重复或比例与计数无效');
+      return;
+    }
+    /* 上游人数取最接近的 5，比例取最接近的千分之一。保留原数，不强行归一。 */
+    const countTolerance = 2.5 * (rows.length + 1);
+    const shareTolerance = 0.0005 * rows.length + countTolerance / total;
+    if (Math.abs(rows.reduce((sum, r) => sum + r.count, 0) - total) > countTolerance
+      || Math.abs(rows.reduce((sum, r) => sum + r.share, 0) - 1) > shareTolerance
+      || rows.some((r) => Math.abs(r.count / total - r.share) > 0.0005 + 5 / total)) {
+      errors.push('人口普查：' + label + '占比无法与样本数对拍');
+    }
+  });
+  return errors;
+}
+
+function validateCensusChina(sample, classIds) {
+  const keys = (o, expected) => o && typeof o === 'object' && !Array.isArray(o)
+    && Object.keys(o).sort().join(' ') === expected;
+  if (!keys(sample, 'classes factions level provenance scope window') || sample.level !== 'L2'
+    || sample.scope !== '国服无限服' || sample.window !== '24 小时人口') {
+    return ['国服人口普查：只接收已核的 24 小时汇总字段'];
+  }
+  const p = sample.provenance;
+  if (!keys(p, 'checkedAt name screen sourceTime type url') || p.name !== '大脚BIGFOOT'
+    || p.type !== 'public_aggregate' || p.url !== 'https://bigfoot.nga.cn/'
+    || p.screen !== '服务器人口 · 魔兽世界无限服 · 24小时人口'
+    || !/^\d{4}-\d\d-\d\d$/.test(p.checkedAt)
+    || !/^\d{4}-\d\d-\d\d (?:[01]\d|2[0-3]):[0-5]\d$/.test(p.sourceTime)
+    || !Number.isFinite(Date.parse(p.checkedAt + 'T00:00:00Z'))
+    || !Number.isFinite(Date.parse(p.sourceTime.replace(' ', 'T') + ':00Z'))) {
+    return ['国服人口普查：来源或时间缺失'];
+  }
+  const validShares = (list, ids) => Array.isArray(list) && list.length === ids.length
+    && list.every((r) => keys(r, 'id share') && ids.includes(r.id) && Number.isInteger(r.share) && r.share >= 0 && r.share <= 100)
+    && new Set(list.map((r) => r.id)).size === ids.length
+    && Math.abs(list.reduce((sum, r) => sum + r.share, 0) - 100) <= ids.length / 2;
+  const errors = [];
+  if (!validShares(sample.factions, ['alliance', 'horde'])) errors.push('国服人口普查：阵营占比无效');
+  if (!validShares(sample.classes, classIds)) errors.push('国服人口普查：职业占比无效');
+  return errors;
+}
+
 function collectFactDates(records) {
   const dates = [];
   let without = 0;
@@ -240,7 +322,7 @@ function indexEntry(d, useAsset) {
   };
 }
 
-function detailRecord(d, useAsset, geo) {
+function detailRecord(d, useAsset, geo, usePortrait) {
   const out = {};
   Object.keys(d).forEach((k) => {
     if (k === 'drops') return;
@@ -255,7 +337,7 @@ function detailRecord(d, useAsset, geo) {
     (d.drops || []).forEach((x) => { if (x && x.bossId) dropN[x.bossId] = (dropN[x.bossId] || 0) + 1; });
     out.bosses = out.bosses.map((b) => {
       const o = Object.assign({}, b);
-      if (o.portrait) o.portrait = useAsset(o.portrait, b.id + '.portrait');
+      if (o.portrait) o.portrait = usePortrait(o.portrait, b.id + '.portrait');
       o.drops = dropN[b.id] || 0;
       return o;
     });
@@ -539,6 +621,21 @@ function buildBatch(env, opts) {
     if (!statAsset(rel)) { assetMissing.push({ ref: rel, reason: '图标文件不在 app/img/icons/', by: why }); return; }
     assetUse[rel] = statAsset(rel);
   };
+  const pngManifest = path.join(WEB, 'app/img/art/bosses-mini-png/manifest.json');
+  const portraitPng = fs.existsSync(pngManifest) ? readJson(pngManifest).files : {};
+  const usePortrait = (source, why) => {
+    if (!source.endsWith('.webp')) return useAsset(source, why);
+    const png = portraitPng[source];
+    const originalRel = assetRelFromSite(source);
+    const pngRel = png && assetRelFromSite(png.file);
+    const original = originalRel && statAsset(originalRel);
+    const converted = pngRel && statAsset(pngRel);
+    if (!original || !converted || original.sha256 !== png.sourceSha256 || converted.sha256 !== png.sha256) {
+      errors.push('首领头像 PNG 缺失或与原件不符：' + source + '，先跑 convert-mini-boss-portraits.py');
+      return null;
+    }
+    return useAsset(png.file, why);
+  };
   const list = [].concat(dungeons.newDungeons || [], dungeons.classicDungeons || [], dungeons.raids || []);
   const geoPath = path.join(siteData(), 'dungeon-geo.json');
   const geoPack = fs.existsSync(geoPath) ? readJson(geoPath) : null;
@@ -566,6 +663,14 @@ function buildBatch(env, opts) {
   if (chooserPack && (!Array.isArray(chooserPack.questions) || !chooserPack.questions.length)) {
     errors.push('职业选择器问卷 0 题：chooser.json 在但没有题目');
   }
+  const censusSrc = path.join(siteData(), 'population-census.json');
+  const censusPack = fs.existsSync(censusSrc) ? readJson(censusSrc) : null;
+  const censusChinaSrc = path.join(siteData(), 'population-census-cn.json');
+  const censusChina = fs.existsSync(censusChinaSrc) ? readJson(censusChinaSrc) : null;
+  const censusClassIds = (classPack.classes || []).map((c) => c.classId);
+  if (censusPack) errors.push(...validateCensus(censusPack, censusClassIds));
+  if (censusChina) errors.push(...validateCensusChina(censusChina, censusClassIds));
+  if (censusChina && !censusPack) errors.push('国服人口普查：缺少主分片');
 
   /* —— 卡口（与根 AGENTS.md 第五条同一口径，导出这层再拦一次） —— */
   if (!list.length) errors.push('副本 0 条');
@@ -664,7 +769,7 @@ function buildBatch(env, opts) {
 
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
-    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById) };
+    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById, usePortrait) };
     /* 任务线（2026-11-08 第一批②）并进详情分片：玩家进详情页那一屏顺手就看到
        "这座本有什么任务"，不再发第二次请求——与装备详情卡并进掉落分片同一个理由。
        只带界面要读的字段。2026-11-09 站主要求补上"在哪接的"：实测 pickupNpc 336/396、
@@ -686,6 +791,12 @@ function buildBatch(env, opts) {
           xp: x.xp === undefined ? null : x.xp,
           pickupNpc: (x.pickupNpc || '').trim() || null,
           pickupZone: (x.pickupZone || '').trim() || null,
+          ...(x.startItem ? { startItem: x.startItem } : {}),
+          ...(Number.isFinite(x.pickupX) && Number.isFinite(x.pickupY) ? {
+            pickupX: x.pickupX,
+            pickupY: x.pickupY,
+            pickupMap: x.pickupMap || null
+          } : {}),
           source: x.source || null
         }))
       };
@@ -1631,6 +1742,20 @@ function buildBatch(env, opts) {
       questions: chooserPack.questions
     }, { records: chooserPack.questions.length, budget: 'chooser' })
   }
+  if (censusPack) {
+    const provenance = [censusPack.provenance];
+    let records = censusPack.factions.length + censusPack.classes.length;
+    if (censusChina) {
+      provenance.push(censusChina.provenance);
+      records += censusChina.factions.length + censusChina.classes.length;
+    }
+    const payload = censusChina ? { ...censusPack, china: censusChina } : censusPack;
+    pushObj('census', 'census/census.json', payload, {
+      records,
+      budget: 'census',
+      facts: collectFactDates([{ provenance }])
+    });
+  }
 
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
@@ -1904,7 +2029,8 @@ function buildBatch(env, opts) {
       professionsIndex: profIndexObj ? shared(pickFile('professionsIndex')) : undefined,
       macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined,
       nameGenerator: namesIndexObj ? shared(pickFile('nameGenerator')) : undefined,
-      chooser: chooserPack ? shared(pickFile('chooser')) : undefined
+      chooser: chooserPack ? shared(pickFile('chooser')) : undefined,
+      census: censusPack ? shared(pickFile('census')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };
@@ -3158,6 +3284,8 @@ module.exports = {
   DROPPED_DETAIL_FIELDS,
   WRITE_MARK,
   buildBatch,
+  validateCensus,
+  validateCensusChina,
   writeBatch,
   loadCreds,
   requireWriteGate,

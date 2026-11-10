@@ -1,0 +1,4244 @@
+{
+ "meta": {
+  "source": "DungeonsForever 2.1.43 + QuestieDB Forever + 领主大厅实录",
+  "checkedAt": "2026-11-09",
+  "fileSha256": {
+   "Data_QuestStartLoc.lua": "9db11d814fdd87e98faf3e0299617a59b294fe9be9539d69b0960fa33d9387e5",
+   "Data_NPCLoc.lua": "978b0702ee6273be93c5d36d04c43777e50d599d16b943cdc2ad0db9d9640be5",
+   "Data_DungeonQuestFlow.lua": "c5727f73d4c8d9d99b74d22e0727fff7fdd3efc93edfaa46cfc8864a77feb7b3"
+  }
+ },
+ "rows": [
+  {
+   "dungeonId": "hall-of-thanes",
+   "nameCn": "远古的宿怨",
+   "questId": 96395,
+   "npcId": 265002,
+   "pickupNpc": "鬼魅随从",
+   "pickupZone": "领主大厅 · 西翼第二间房",
+   "pickupMapId": null,
+   "pickupMap": null,
+   "pickupX": null,
+   "pickupY": null,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_DungeonQuestFlow.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://news.17173.com/content/11082026/203246798.shtml",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://wow.icednicco.online/forever/db/instance/3065",
+     "checkedAt": "2026-11-09"
+    }
+   ],
+   "pickupNpcAlternates": [
+    "幽灵侍从"
+   ]
+  },
+  {
+   "dungeonId": "hall-of-thanes",
+   "nameCn": "永不安息的亡者",
+   "questId": 96394,
+   "npcId": 264943,
+   "pickupNpc": "阿法德拉·顿沃尔",
+   "pickupZone": "旧铁炉堡 · 副本入口上方楼梯",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 32.4,
+   "pickupY": 47.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://news.17173.com/content/11082026/203246798.shtml",
+     "checkedAt": "2026-11-09"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "x": 33.23,
+     "y": 48,
+     "mapId": 1455,
+     "provenance": {
+      "type": "addon",
+      "url": "https://github.com/Questie/Questie",
+      "file": "QuestieDB_Forever.toc#Npc-264943-7",
+      "checkedAt": "2026-11-09"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "hall-of-thanes",
+   "nameCn": "重要的传家宝",
+   "questId": 96403,
+   "npcId": 265003,
+   "pickupNpc": "汤姆·费尔奇",
+   "pickupZone": "旧铁炉堡 · 入口前的桥",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 31.4,
+   "pickupY": 45.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_NPCLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://news.17173.com/content/11082026/203246798.shtml",
+     "checkedAt": "2026-11-09"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "x": 32.18,
+     "y": 44.5,
+     "mapId": 1455,
+     "provenance": {
+      "type": "addon",
+      "url": "https://github.com/Questie/Questie",
+      "file": "QuestieDB_Forever.toc#Npc-265003-7",
+      "checkedAt": "2026-11-09"
+     }
+    }
+   ]
+  },
+  {
+   "dungeonId": "hall-of-thanes",
+   "nameCn": "旧铁炉堡入侵",
+   "questId": 96393,
+   "npcId": 264936,
+   "pickupNpc": "大地先知法森",
+   "pickupZone": "丹莫罗 · 戈尔高拉采石场上方山坡",
+   "pickupMapId": 1426,
+   "pickupMap": "丹莫罗",
+   "pickupX": 64.8,
+   "pickupY": 58.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://dlonem.com/wow-forever/dungeons/hall-of-thanes/",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://news.17173.com/content/11082026/203246798.shtml",
+     "checkedAt": "2026-11-09"
+    },
+    {
+     "type": "fan_db",
+     "url": "https://wowkp.com/wowdb/forever/d/hall_of_thanes",
+     "checkedAt": "2026-11-09"
+    }
+   ],
+   "pickupAlternates": [
+    {
+     "x": 64.87,
+     "y": 58.47,
+     "mapId": 1426,
+     "provenance": {
+      "type": "addon",
+      "url": "https://github.com/Questie/Questie",
+      "file": "QuestieDB_Forever.toc#Npc-264936-7",
+      "checkedAt": "2026-11-09"
+     }
+    }
+   ],
+   "pickupNpcAlternates": [
+    "地卜师法尔森"
+   ]
+  },
+  {
+   "dungeonId": "ruins-of-lordaeron",
+   "nameCn": "惊恐的求援",
+   "questId": 92401,
+   "npcId": 250686,
+   "pickupNpc": "Tabitha Heartweaver",
+   "pickupZone": "银松森林",
+   "pickupMapId": 1421,
+   "pickupMap": "银松森林",
+   "pickupX": 44.4,
+   "pickupY": 43.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ruins-of-lordaeron",
+   "nameCn": "圣光的正义",
+   "questId": 92421,
+   "npcId": 266484,
+   "pickupNpc": "Morbin Lightbane",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 57.4,
+   "pickupY": 88.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ruins-of-lordaeron",
+   "nameCn": "拉斯玛尔之怒",
+   "questId": 92422,
+   "npcId": 251001,
+   "pickupNpc": "Deathguard Kristof",
+   "pickupZone": "提瑞斯法林地",
+   "pickupMapId": 1420,
+   "pickupMap": "提瑞斯法林地",
+   "pickupX": 65.2,
+   "pickupY": 60.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ragefire-chasm",
+   "nameCn": "试探敌人",
+   "questId": 5723,
+   "npcId": 11833,
+   "pickupNpc": "拉哈罗",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 69.4,
+   "pickupY": 28.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ragefire-chasm",
+   "nameCn": "寻找背包",
+   "questId": 5722,
+   "npcId": 11833,
+   "pickupNpc": "拉哈罗",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 69.4,
+   "pickupY": 28.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ragefire-chasm",
+   "nameCn": "归还背包",
+   "questId": 5724,
+   "npcId": 11834,
+   "pickupNpc": "玛尔·恐怖图腾",
+   "pickupZone": "怒焰裂谷",
+   "pickupMapId": 2437,
+   "pickupMap": "怒焰裂谷",
+   "pickupX": 58.6,
+   "pickupY": 39.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ragefire-chasm",
+   "nameCn": "毁灭之力",
+   "questId": 5725,
+   "npcId": 2425,
+   "pickupNpc": "瓦里玛萨斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 56.2,
+   "pickupY": 92.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "ragefire-chasm",
+   "nameCn": "饥饿者塔拉加曼",
+   "questId": 5761,
+   "npcId": 3216,
+   "pickupNpc": "尼尔鲁·火刃",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 49.4,
+   "pickupY": 50.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "wailing-caverns",
+   "nameCn": "哈缪尔·符文图腾",
+   "questId": 1489,
+   "npcId": 3448,
+   "pickupNpc": "图加·符文图腾",
+   "pickupZone": "贫瘠之地",
+   "pickupMapId": 1413,
+   "pickupMap": "贫瘠之地",
+   "pickupX": 52.2,
+   "pickupY": 31.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "wailing-caverns",
+   "nameCn": "纳拉·蛮鬃",
+   "questId": 1490,
+   "npcId": 5769,
+   "pickupNpc": "大德鲁伊哈缪尔·符文图腾",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 78.4,
+   "pickupY": 28.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "wailing-caverns",
+   "nameCn": "毒蛇花",
+   "questId": 962,
+   "npcId": 3419,
+   "pickupNpc": "药剂师扎玛",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 22.4,
+   "pickupY": 19.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "wailing-caverns",
+   "nameCn": "尖牙德鲁伊",
+   "questId": 914,
+   "npcId": 5770,
+   "pickupNpc": "纳拉·蛮鬃",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 75.2,
+   "pickupY": 30.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "deathmine",
+   "nameCn": "红色丝质面罩",
+   "questId": 214,
+   "npcId": 820,
+   "pickupNpc": "哨兵瑞尔",
+   "pickupZone": "西部荒野",
+   "pickupMapId": 1436,
+   "pickupMap": "西部荒野",
+   "pickupX": 56.6,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "deathmine",
+   "nameCn": "收集记忆",
+   "questId": 168,
+   "npcId": 656,
+   "pickupNpc": "维尔德·蓟草",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 70.3,
+   "pickupY": 40.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "deathmine",
+   "nameCn": "我的兄弟……",
+   "questId": 167,
+   "npcId": 656,
+   "pickupNpc": "维尔德·蓟草",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 70.3,
+   "pickupY": 40.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "deathmine",
+   "nameCn": "地底突袭",
+   "questId": 2040,
+   "npcId": 6579,
+   "pickupNpc": "沉默的舒尼",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 62.6,
+   "pickupY": 34.1,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "deathmine",
+   "nameCn": "迪菲亚兄弟会",
+   "questId": 166,
+   "npcId": 234,
+   "pickupNpc": "格里安·斯托曼",
+   "pickupZone": "西部荒野",
+   "pickupMapId": 1436,
+   "pickupMap": "西部荒野",
+   "pickupX": 56.2,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "shadowfang-keep",
+   "nameCn": "影牙城堡里的亡灵哨兵",
+   "questId": 1098,
+   "npcId": 1952,
+   "pickupNpc": "高级执行官哈德瑞克",
+   "pickupZone": "银松森林",
+   "pickupMapId": 1421,
+   "pickupMap": "银松森林",
+   "pickupX": 43.4,
+   "pickupY": 40.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "shadowfang-keep",
+   "nameCn": "乌尔之书",
+   "questId": 1013,
+   "npcId": 2934,
+   "pickupNpc": "看守者贝尔杜加",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 53.4,
+   "pickupY": 53.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "shadowfang-keep",
+   "nameCn": "除掉阿鲁高",
+   "questId": 1014,
+   "npcId": 1938,
+   "pickupNpc": "达拉尔·道恩维沃尔",
+   "pickupZone": "银松森林",
+   "pickupMapId": 1421,
+   "pickupMap": "银松森林",
+   "pickupX": 44.2,
+   "pickupY": 39.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "深渊中的知识",
+   "questId": 971,
+   "npcId": 2786,
+   "pickupNpc": "葛利·硬骨",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 50.2,
+   "pickupY": 7.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "研究堕落",
+   "questId": 1275,
+   "npcId": 8997,
+   "pickupNpc": "戈沙拉·夜语",
+   "pickupZone": "黑海岸",
+   "pickupMapId": 1439,
+   "pickupMap": "黑海岸",
+   "pickupX": 38.4,
+   "pickupY": 43.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "暮光之锤的末日",
+   "questId": 1199,
+   "npcId": 4784,
+   "pickupNpc": "银月守卫玛纳杜斯",
+   "pickupZone": "达纳苏斯",
+   "pickupMapId": 1457,
+   "pickupMap": "达纳苏斯",
+   "pickupX": 55.2,
+   "pickupY": 23.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "帮助耶努萨克雷",
+   "questId": 6562,
+   "npcId": 11862,
+   "pickupNpc": "苏纳曼",
+   "pickupZone": "石爪山脉",
+   "pickupMapId": 1442,
+   "pickupMap": "石爪山脉",
+   "pickupX": 47.2,
+   "pickupY": 64.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "阿库麦尔水晶",
+   "questId": 6563,
+   "npcId": 12736,
+   "pickupNpc": "耶努萨克雷",
+   "pickupZone": "灰谷",
+   "pickupMapId": 1440,
+   "pickupMap": "灰谷",
+   "pickupX": 11.6,
+   "pickupY": 34.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "上古之神的仆从",
+   "questId": 6565,
+   "npcId": 12736,
+   "pickupNpc": "耶努萨克雷",
+   "pickupZone": "灰谷",
+   "pickupMapId": 1440,
+   "pickupMap": "灰谷",
+   "pickupX": 11.6,
+   "pickupY": 34.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "黑暗深渊中的邪恶",
+   "questId": 6561,
+   "npcId": 4787,
+   "pickupNpc": "银月守卫塞尔瑞德",
+   "pickupZone": "黑暗深渊",
+   "pickupMapId": 719,
+   "pickupMap": "黑暗深渊",
+   "pickupX": 20.1,
+   "pickupY": 52.3,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackfathom-deeps",
+   "nameCn": "废墟之间",
+   "questId": 6921,
+   "npcId": 12736,
+   "pickupNpc": "耶努萨克雷",
+   "pickupZone": "灰谷",
+   "pickupMapId": 1440,
+   "pickupMap": "灰谷",
+   "pickupX": 11.6,
+   "pickupY": 34.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "伸张正义",
+   "questId": 386,
+   "npcId": 859,
+   "pickupNpc": "卫兵伯尔顿",
+   "pickupZone": "赤脊山",
+   "pickupMapId": 1433,
+   "pickupMap": "赤脊山",
+   "pickupX": 26.4,
+   "pickupY": 46.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "罪与罚",
+   "questId": 377,
+   "npcId": 270,
+   "pickupNpc": "议员米尔斯迪普",
+   "pickupZone": "暮色森林",
+   "pickupMapId": 1431,
+   "pickupMap": "暮色森林",
+   "pickupX": 72.0,
+   "pickupY": 47.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "镇压暴动",
+   "questId": 387,
+   "npcId": 1719,
+   "pickupNpc": "典狱官塞尔沃特",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 51.5,
+   "pickupY": 69.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "鲜血的颜色",
+   "questId": 388,
+   "npcId": 1721,
+   "pickupNpc": "尼科瓦·拉斯克",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 73.3,
+   "pickupY": 55.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "卡姆·深怒",
+   "questId": 378,
+   "npcId": 1074,
+   "pickupNpc": "莫特雷·加玛森",
+   "pickupZone": "湿地",
+   "pickupMapId": 1437,
+   "pickupMap": "湿地",
+   "pickupX": 49.6,
+   "pickupY": 18.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "the-stocks",
+   "nameCn": "监狱暴动",
+   "questId": 391,
+   "npcId": 1719,
+   "pickupNpc": "典狱官塞尔沃特",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 51.5,
+   "pickupY": 69.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "拯救尖端机器人！",
+   "questId": 2922,
+   "npcId": 7944,
+   "pickupNpc": "工匠大师欧沃斯巴克",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 69.4,
+   "pickupY": 50.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "工匠大师欧沃斯巴克",
+   "questId": 2923,
+   "npcId": 7917,
+   "pickupNpc": "萨尔努修士",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 51.0,
+   "pickupY": 48.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "诺恩",
+   "questId": 2926,
+   "npcId": 1268,
+   "pickupNpc": "奥齐·电环",
+   "pickupZone": "丹莫罗",
+   "pickupMapId": 1426,
+   "pickupMap": "丹莫罗",
+   "pickupX": 45.8,
+   "pickupY": 49.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "灾难之后",
+   "questId": 2927,
+   "npcId": 6569,
+   "pickupNpc": "诺恩",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 69.4,
+   "pickupY": 50.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "卡斯派普的任务",
+   "questId": 2931,
+   "npcId": 4077,
+   "pickupNpc": "加克希姆·尘链",
+   "pickupZone": "石爪山脉",
+   "pickupMapId": 1442,
+   "pickupMap": "石爪山脉",
+   "pickupX": 59.4,
+   "pickupY": 67.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "基础模组",
+   "questId": 2924,
+   "npcId": 6169,
+   "pickupNpc": "科罗莫特·钢尺",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 68.0,
+   "pickupY": 46.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "帮助科劳莫特",
+   "questId": 2925,
+   "npcId": 6142,
+   "pickupNpc": "玛希尔",
+   "pickupZone": "达纳苏斯",
+   "pickupMapId": 1457,
+   "pickupMap": "达纳苏斯",
+   "pickupX": 59.2,
+   "pickupY": 45.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "陀螺式挖掘机",
+   "questId": 2928,
+   "npcId": 6579,
+   "pickupNpc": "沉默的舒尼",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 62.6,
+   "pickupY": 34.1,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "抢救数据",
+   "questId": 2930,
+   "npcId": 7950,
+   "pickupNpc": "大机械师卡斯派普",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 69.4,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "更多的辐射尘！",
+   "questId": 2962,
+   "npcId": 1268,
+   "pickupNpc": "奥齐·电环",
+   "pickupZone": "丹莫罗",
+   "pickupMapId": 1426,
+   "pickupMap": "丹莫罗",
+   "pickupX": 45.8,
+   "pickupY": 49.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "大叛徒",
+   "questId": 2929,
+   "npcId": 7937,
+   "pickupNpc": "大工匠梅卡托克",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 69.0,
+   "pickupY": 49.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "设备之战",
+   "questId": 2841,
+   "npcId": 3412,
+   "pickupNpc": "诺格",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 75.4,
+   "pickupY": 24.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "主工程师斯库提",
+   "questId": 2842,
+   "npcId": 3413,
+   "pickupNpc": "索维克",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 75.0,
+   "pickupY": 24.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "gnomeregan",
+   "nameCn": "出发！诺莫瑞根！",
+   "questId": 2843,
+   "npcId": 7853,
+   "pickupNpc": "斯库提",
+   "pickupZone": "荆棘谷",
+   "pickupMapId": 1434,
+   "pickupMap": "荆棘谷",
+   "pickupX": 27.4,
+   "pickupY": 77.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razorfen-kraul",
+   "nameCn": "临终遗言",
+   "questId": 1142,
+   "npcId": 4510,
+   "pickupNpc": "赫尔拉斯·静水",
+   "pickupZone": "剃刀沼泽",
+   "pickupMapId": 491,
+   "pickupMap": "剃刀沼泽",
+   "pickupX": 37.8,
+   "pickupY": 32.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razorfen-kraul",
+   "nameCn": "卡尔加·刺肋",
+   "questId": 1101,
+   "npcId": 4048,
+   "pickupNpc": "法芬德尔",
+   "pickupZone": "菲拉斯",
+   "pickupMapId": 1444,
+   "pickupMap": "菲拉斯",
+   "pickupX": 89.4,
+   "pickupY": 45.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razorfen-kraul",
+   "nameCn": "蝙蝠的粪便",
+   "questId": 1109,
+   "npcId": 2055,
+   "pickupNpc": "大药剂师法拉尼尔",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 48.4,
+   "pickupY": 69.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razorfen-kraul",
+   "nameCn": "奥尔德的报复",
+   "questId": 1102,
+   "npcId": 4451,
+   "pickupNpc": "奥尔德·石塔",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 36.2,
+   "pickupY": 59.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-graveyard",
+   "nameCn": "泰坦神话",
+   "questId": 1050,
+   "npcId": 3979,
+   "pickupNpc": "图书馆员麦伊·苍尘",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 74.0,
+   "pickupY": 13.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-graveyard",
+   "nameCn": "沃瑞尔的复仇",
+   "questId": 1051,
+   "npcId": 3981,
+   "pickupNpc": "沃瑞尔·森加斯",
+   "pickupZone": "血色修道院",
+   "pickupMapId": 796,
+   "pickupMap": "血色修道院",
+   "pickupX": 37.1,
+   "pickupY": 21.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-graveyard",
+   "nameCn": "知识试炼",
+   "questId": 1160,
+   "npcId": 4488,
+   "pickupNpc": "帕科瓦·芬塔拉斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 57.4,
+   "pickupY": 65.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-graveyard",
+   "nameCn": "堕落者纲要",
+   "questId": 1049,
+   "npcId": 3978,
+   "pickupNpc": "圣者图希克",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 34.4,
+   "pickupY": 47.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-library",
+   "nameCn": "泰坦神话",
+   "questId": 1050,
+   "npcId": 3979,
+   "pickupNpc": "图书馆员麦伊·苍尘",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 74.0,
+   "pickupY": 13.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-library",
+   "nameCn": "沃瑞尔的复仇",
+   "questId": 1051,
+   "npcId": 3981,
+   "pickupNpc": "沃瑞尔·森加斯",
+   "pickupZone": "血色修道院",
+   "pickupMapId": 796,
+   "pickupMap": "血色修道院",
+   "pickupX": 37.1,
+   "pickupY": 21.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-library",
+   "nameCn": "知识试炼",
+   "questId": 1160,
+   "npcId": 4488,
+   "pickupNpc": "帕科瓦·芬塔拉斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 57.4,
+   "pickupY": 65.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-library",
+   "nameCn": "堕落者纲要",
+   "questId": 1049,
+   "npcId": 3978,
+   "pickupNpc": "圣者图希克",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 34.4,
+   "pickupY": 47.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-armory",
+   "nameCn": "泰坦神话",
+   "questId": 1050,
+   "npcId": 3979,
+   "pickupNpc": "图书馆员麦伊·苍尘",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 74.0,
+   "pickupY": 13.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-armory",
+   "nameCn": "沃瑞尔的复仇",
+   "questId": 1051,
+   "npcId": 3981,
+   "pickupNpc": "沃瑞尔·森加斯",
+   "pickupZone": "血色修道院",
+   "pickupMapId": 796,
+   "pickupMap": "血色修道院",
+   "pickupX": 37.1,
+   "pickupY": 21.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-armory",
+   "nameCn": "知识试炼",
+   "questId": 1160,
+   "npcId": 4488,
+   "pickupNpc": "帕科瓦·芬塔拉斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 57.4,
+   "pickupY": 65.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-armory",
+   "nameCn": "堕落者纲要",
+   "questId": 1049,
+   "npcId": 3978,
+   "pickupNpc": "圣者图希克",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 34.4,
+   "pickupY": 47.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razor-krendor",
+   "nameCn": "与圣光同在",
+   "questId": 3636,
+   "npcId": 1284,
+   "pickupNpc": "大主教本尼迪塔斯",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 50.3,
+   "pickupY": 45.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "razor-krendor",
+   "nameCn": "寒冰之王",
+   "questId": 3341,
+   "npcId": 2308,
+   "pickupNpc": "安德鲁·布隆奈尔",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 74.0,
+   "pickupY": 32.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "泰坦神话",
+   "questId": 1050,
+   "npcId": 3979,
+   "pickupNpc": "图书馆员麦伊·苍尘",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 74.0,
+   "pickupY": 13.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "以圣光之名",
+   "questId": 1053,
+   "npcId": 3980,
+   "pickupNpc": "虔诚的莱雷恩",
+   "pickupZone": "希尔斯布莱德丘陵",
+   "pickupMapId": 1424,
+   "pickupMap": "希尔斯布莱德丘陵",
+   "pickupX": 51.4,
+   "pickupY": 58.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "沃瑞尔的复仇",
+   "questId": 1051,
+   "npcId": 3981,
+   "pickupNpc": "沃瑞尔·森加斯",
+   "pickupZone": "血色修道院",
+   "pickupMapId": 796,
+   "pickupMap": "血色修道院",
+   "pickupX": 37.1,
+   "pickupY": 21.5,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "狂热之心",
+   "questId": 1113,
+   "npcId": 2055,
+   "pickupNpc": "大药剂师法拉尼尔",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 48.4,
+   "pickupY": 69.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "知识试炼",
+   "questId": 1160,
+   "npcId": 4488,
+   "pickupNpc": "帕科瓦·芬塔拉斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 57.4,
+   "pickupY": 65.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "堕落者纲要",
+   "questId": 1049,
+   "npcId": 3978,
+   "pickupNpc": "圣者图希克",
+   "pickupZone": "雷霆崖",
+   "pickupMapId": 1456,
+   "pickupMap": "雷霆崖",
+   "pickupX": 34.4,
+   "pickupY": 47.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scarlet-monastery-cathedral",
+   "nameCn": "深入血色修道院",
+   "questId": 1048,
+   "npcId": 2425,
+   "pickupNpc": "瓦里玛萨斯",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 56.2,
+   "pickupY": 92.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "阿戈莫德的命运",
+   "questId": 704,
+   "npcId": 1344,
+   "pickupNpc": "勘察员基恩萨·铁环",
+   "pickupZone": "洛克莫丹",
+   "pickupMapId": 1432,
+   "pickupMap": "洛克莫丹",
+   "pickupX": 65.8,
+   "pickupY": 65.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "铁趾的护符",
+   "questId": 722,
+   "npcId": 2909,
+   "pickupNpc": "铁趾格雷兹",
+   "pickupZone": "东部王国",
+   "pickupMapId": 1415,
+   "pickupMap": "东部王国",
+   "pickupX": 54.0,
+   "pickupY": 57.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "密室",
+   "questId": 2240,
+   "npcId": 6906,
+   "pickupNpc": "巴尔洛戈",
+   "pickupZone": "奥达曼",
+   "pickupMapId": 1337,
+   "pickupMap": "奥达曼",
+   "pickupX": 65.1,
+   "pickupY": 94.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "失踪的矮人",
+   "questId": 2398,
+   "npcId": 1356,
+   "pickupNpc": "勘察员塔伯斯·雷矛",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 73.8,
+   "pickupY": 13.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "昂贵的知识",
+   "questId": 2199,
+   "npcId": 6826,
+   "pickupNpc": "塔瓦斯德·基瑟尔",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 36.0,
+   "pickupY": 3.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "回到奥达曼",
+   "questId": 2200,
+   "npcId": 6826,
+   "pickupNpc": "塔瓦斯德·基瑟尔",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 36.0,
+   "pickupY": 3.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "失而复得",
+   "questId": 1360,
+   "npcId": 6294,
+   "pickupNpc": "克罗姆·粗臂",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 74.2,
+   "pickupY": 9.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "寻找宝石",
+   "questId": 2201,
+   "npcId": 6912,
+   "pickupNpc": "圣骑士的遗体",
+   "pickupZone": "奥达曼",
+   "pickupMapId": 1337,
+   "pickupMap": "奥达曼",
+   "pickupX": 59.0,
+   "pickupY": 63.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "意志石板",
+   "questId": 1139,
+   "npcId": 2918,
+   "pickupNpc": "顾问贝尔格拉姆",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 76.4,
+   "pickupY": 10.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "搜寻项链",
+   "questId": 2283,
+   "npcId": 6986,
+   "pickupNpc": "德兰·杜佛斯",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 59.4,
+   "pickupY": 36.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "搜寻项链，再来一次",
+   "questId": 2284,
+   "npcId": 6986,
+   "pickupNpc": "德兰·杜佛斯",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 59.4,
+   "pickupY": 36.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "寻找宝物",
+   "questId": 2342,
+   "npcId": 5651,
+   "pickupNpc": "帕特里克·加瑞特",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 62.4,
+   "pickupY": 48.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "寻找宝贝",
+   "questId": 2339,
+   "npcId": 6868,
+   "pickupNpc": "加卡尔",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 2.4,
+   "pickupY": 46.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "交付宝石",
+   "questId": 2340,
+   "npcId": 6868,
+   "pickupNpc": "加卡尔",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 2.4,
+   "pickupY": 46.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "uldaman",
+   "nameCn": "项链任务的终结",
+   "questId": 2341,
+   "npcId": 6986,
+   "pickupNpc": "德兰·杜佛斯",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 59.4,
+   "pickupY": 36.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "特兰雷克",
+   "questId": 2864,
+   "npcId": 773,
+   "pickupNpc": "克拉兹克",
+   "pickupZone": "荆棘谷",
+   "pickupMapId": 1434,
+   "pickupMap": "荆棘谷",
+   "pickupX": 27.0,
+   "pickupY": 77.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "圣甲虫的壳",
+   "questId": 2865,
+   "npcId": 7876,
+   "pickupNpc": "特兰雷克",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 51.4,
+   "pickupY": 26.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "巨魔调和剂",
+   "questId": 3042,
+   "npcId": 7804,
+   "pickupNpc": "特伦顿·轻锤",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 51.4,
+   "pickupY": 28.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "深渊皇冠",
+   "questId": 2846,
+   "npcId": 6546,
+   "pickupNpc": "塔贝萨",
+   "pickupZone": "尘泥沼泽",
+   "pickupMapId": 1445,
+   "pickupMap": "尘泥沼泽",
+   "pickupX": 46.0,
+   "pickupY": 57.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "探水棒",
+   "questId": 2768,
+   "npcId": 7407,
+   "pickupNpc": "首席工程师沙克斯·比格维兹",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 52.4,
+   "pickupY": 28.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "摩沙鲁的预言",
+   "questId": 3527,
+   "npcId": 8579,
+   "pickupNpc": "叶基亚",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 67.0,
+   "pickupY": 22.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "加兹瑞拉",
+   "questId": 2770,
+   "npcId": 4453,
+   "pickupNpc": "维兹尔·铜栓",
+   "pickupZone": "千针石林",
+   "pickupMapId": 1441,
+   "pickupMap": "千针石林",
+   "pickupX": 78.0,
+   "pickupY": 77.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "耐克鲁姆的徽章",
+   "questId": 2991,
+   "npcId": 8022,
+   "pickupNpc": "萨迪斯·格希德",
+   "pickupZone": "诅咒之地",
+   "pickupMapId": 1419,
+   "pickupMap": "诅咒之地",
+   "pickupX": 67.0,
+   "pickupY": 19.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "zulfarrak",
+   "nameCn": "蜘蛛之神",
+   "questId": 2936,
+   "npcId": 3188,
+   "pickupNpc": "加德林大师",
+   "pickupZone": "杜隆塔尔",
+   "pickupMapId": 1411,
+   "pickupMap": "杜隆塔尔",
+   "pickupX": 55.8,
+   "pickupY": 74.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "maraudon",
+   "nameCn": "扭曲的邪恶",
+   "questId": 7028,
+   "npcId": 13656,
+   "pickupNpc": "维洛",
+   "pickupZone": "凄凉之地",
+   "pickupMapId": 1443,
+   "pickupMap": "凄凉之地",
+   "pickupX": 62.0,
+   "pickupY": 39.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "maraudon",
+   "nameCn": "贱民的指引",
+   "questId": 7067,
+   "npcId": 13717,
+   "pickupNpc": "半人马贱民",
+   "pickupZone": "凄凉之地",
+   "pickupMapId": 1443,
+   "pickupMap": "凄凉之地",
+   "pickupX": 43.4,
+   "pickupY": 84.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "深入神庙",
+   "questId": 3446,
+   "npcId": 7771,
+   "pickupNpc": "玛尔冯·瑞文斯克",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 52.6,
+   "pickupY": 45.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "雕像群的秘密",
+   "questId": 3447,
+   "npcId": 7771,
+   "pickupNpc": "玛尔冯·瑞文斯克",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 52.6,
+   "pickupY": 45.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "预言者迦玛兰",
+   "questId": 1446,
+   "npcId": 5598,
+   "pickupNpc": "阿塔莱流放者",
+   "pickupZone": "辛特兰",
+   "pickupMapId": 1425,
+   "pickupMap": "辛特兰",
+   "pickupX": 33.6,
+   "pickupY": 75.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "神灵哈卡",
+   "questId": 3528,
+   "npcId": 8579,
+   "pickupNpc": "叶基亚",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 67.0,
+   "pickupY": 22.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "进入阿塔哈卡神庙",
+   "questId": 1475,
+   "npcId": 5384,
+   "pickupNpc": "布罗哈恩·铁桶",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 69.5,
+   "pickupY": 40.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "阿塔哈卡神庙",
+   "questId": 1445,
+   "npcId": 1443,
+   "pickupNpc": "费泽鲁尔",
+   "pickupZone": "悲伤沼泽",
+   "pickupMapId": 1435,
+   "pickupMap": "悲伤沼泽",
+   "pickupX": 48.0,
+   "pickupY": 55.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "sunken-temple",
+   "nameCn": "除草器的燃料",
+   "questId": 4146,
+   "npcId": 8496,
+   "pickupNpc": "莉芙·雷兹菲克斯",
+   "pickupZone": "贫瘠之地",
+   "pickupMapId": 1413,
+   "pickupMap": "贫瘠之地",
+   "pickupX": 62.4,
+   "pickupY": 38.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "雷布里·斯库比格特",
+   "questId": 4136,
+   "npcId": 9544,
+   "pickupNpc": "尤卡·斯库比格特",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 66.0,
+   "pickupY": 22.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "尤卡·斯库比格特",
+   "questId": 4324,
+   "npcId": 9706,
+   "pickupNpc": "尤尔巴·斯库比格特",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 67.0,
+   "pickupY": 24.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "山脉之心",
+   "questId": 4123,
+   "npcId": 9536,
+   "pickupNpc": "麦克斯沃特·尤博格林",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.2,
+   "pickupY": 23.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "烈焰精华",
+   "questId": 4024,
+   "npcId": 9459,
+   "pickupNpc": "塞勒斯·萨雷芬图斯",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 94.8,
+   "pickupY": 31.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "温德索尔元帅",
+   "questId": 4241,
+   "npcId": 9560,
+   "pickupNpc": "麦克斯韦尔元帅",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.6,
+   "pickupY": 68.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "霍尔雷·黑须",
+   "questId": 4126,
+   "npcId": 1267,
+   "pickupNpc": "拉格纳·雷酒",
+   "pickupZone": "丹莫罗",
+   "pickupMapId": 1426,
+   "pickupMap": "丹莫罗",
+   "pickupX": 46.8,
+   "pickupY": 52.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "拉格纳·雷酒",
+   "questId": 4128,
+   "npcId": 9540,
+   "pickupNpc": "恩诺哈尔·雷酒",
+   "pickupZone": "诅咒之地",
+   "pickupMapId": 1419,
+   "pickupMap": "诅咒之地",
+   "pickupX": 63.6,
+   "pickupY": 20.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "伊森迪奥斯！",
+   "questId": 4263,
+   "npcId": 9561,
+   "pickupNpc": "加琳达",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 85.4,
+   "pickupY": 70.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "好东西",
+   "questId": 4286,
+   "npcId": 9177,
+   "pickupNpc": "奥拉留斯",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.4,
+   "pickupY": 68.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "卡兰·巨锤",
+   "questId": 4341,
+   "npcId": 2784,
+   "pickupNpc": "国王麦格尼·铜须",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 39.4,
+   "pickupY": 55.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "王国的命运",
+   "questId": 4362,
+   "npcId": 2784,
+   "pickupNpc": "国王麦格尼·铜须",
+   "pickupZone": "铁炉堡",
+   "pickupMapId": 1455,
+   "pickupMap": "铁炉堡",
+   "pickupX": 39.4,
+   "pickupY": 55.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "指挥官哥沙克",
+   "questId": 3981,
+   "npcId": 9081,
+   "pickupNpc": "神射手贾拉玛弗",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 5.8,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "东部王国",
+   "questId": 4002,
+   "npcId": 4949,
+   "pickupNpc": "萨尔",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 32.0,
+   "pickupY": 37.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "最后的元素",
+   "questId": 7201,
+   "npcId": 9078,
+   "pickupNpc": "暗法师薇薇安·拉格雷",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.0,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "薇薇安·拉格雷",
+   "questId": 4133,
+   "npcId": 5204,
+   "pickupNpc": "药剂师金格",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 49.2,
+   "pickupY": 68.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "遗失的雷酒秘方",
+   "questId": 4134,
+   "npcId": 9078,
+   "pickupNpc": "暗法师薇薇安·拉格雷",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.0,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "不和谐的火焰",
+   "questId": 3907,
+   "npcId": 9084,
+   "pickupNpc": "桑德哈特",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.4,
+   "pickupY": 48.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "机器的崛起",
+   "questId": 4063,
+   "npcId": 2921,
+   "pickupNpc": "鲁特维尔·沃拉图斯",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 25.8,
+   "pickupY": 44.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "押送囚徒",
+   "questId": 4121,
+   "npcId": 9520,
+   "pickupNpc": "格拉克·洛克鲁布",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 33.4,
+   "pickupY": 50.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "格拉克·洛克鲁布",
+   "questId": 4122,
+   "npcId": 9080,
+   "pickupNpc": "雷克斯洛特",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 5.8,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "行动：杀死安格弗将军",
+   "questId": 4132,
+   "npcId": 9077,
+   "pickupNpc": "军官高图斯",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.0,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "blackrock-depths",
+   "nameCn": "拯救公主",
+   "questId": 4003,
+   "npcId": 4949,
+   "pickupNpc": "萨尔",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 32.0,
+   "pickupY": 37.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "dire-maul-east",
+   "nameCn": "普希林和埃斯托尔迪",
+   "questId": 7441,
+   "npcId": 14355,
+   "pickupNpc": "埃斯托尔迪",
+   "pickupZone": "菲拉斯",
+   "pickupMapId": 1444,
+   "pickupMap": "菲拉斯",
+   "pickupX": 76.8,
+   "pickupY": 37.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "最后的石板",
+   "questId": 4788,
+   "npcId": 10460,
+   "pickupNpc": "勘查员詹斯·铁靴",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 66.8,
+   "pickupY": 24.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "基布雷尔的特殊宠物",
+   "questId": 4729,
+   "npcId": 10260,
+   "pickupNpc": "基布雷尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.8,
+   "pickupY": 22.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "蜘蛛卵",
+   "questId": 4862,
+   "npcId": 10260,
+   "pickupNpc": "基布雷尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.8,
+   "pickupY": 22.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "冷冻龙蛋",
+   "questId": 4734,
+   "npcId": 10267,
+   "pickupNpc": "丁奇·斯迪波尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.2,
+   "pickupY": 23.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "收集龙蛋",
+   "questId": 4735,
+   "npcId": 10267,
+   "pickupNpc": "丁奇·斯迪波尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.2,
+   "pickupY": 23.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "蛛后的乳汁",
+   "questId": 4866,
+   "npcId": 9563,
+   "pickupNpc": "狼狈不堪的约翰",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.0,
+   "pickupY": 23.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "丁奇·斯迪波尔",
+   "questId": 4907,
+   "npcId": 10468,
+   "pickupNpc": "菲诺克",
+   "pickupZone": "冬泉谷",
+   "pickupMapId": 1452,
+   "pickupMap": "冬泉谷",
+   "pickupX": 61.4,
+   "pickupY": 38.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "恶魔熔炉",
+   "questId": 5127,
+   "npcId": 10918,
+   "pickupNpc": "罗拉克斯",
+   "pickupZone": "冬泉谷",
+   "pickupMapId": 1452,
+   "pickupMap": "冬泉谷",
+   "pickupX": 63.8,
+   "pickupY": 73.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "座狼之源",
+   "questId": 4701,
+   "npcId": 9562,
+   "pickupNpc": "赫林迪斯·河角",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 85.4,
+   "pickupY": 68.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "末日扣环",
+   "questId": 4764,
+   "npcId": 9565,
+   "pickupNpc": "玛亚拉·布莱特文",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.8,
+   "pickupY": 69.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "瑞治维尔的箱子",
+   "questId": 4765,
+   "npcId": 9565,
+   "pickupNpc": "玛亚拉·布莱特文",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.8,
+   "pickupY": 69.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "玛亚拉·布莱特文",
+   "questId": 4766,
+   "npcId": 2285,
+   "pickupNpc": "雷明顿·瑞治维尔伯爵",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 76.9,
+   "pickupY": 47.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "麦克斯韦尔的任务",
+   "questId": 5081,
+   "npcId": 9560,
+   "pickupNpc": "麦克斯韦尔元帅",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.6,
+   "pickupY": 68.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "座狼的首领",
+   "questId": 4724,
+   "npcId": 9081,
+   "pickupNpc": "神射手贾拉玛弗",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 5.8,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "狡猾的比修",
+   "questId": 4981,
+   "npcId": 9080,
+   "pickupNpc": "雷克斯洛特",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 5.8,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "黑暗石板",
+   "questId": 4768,
+   "npcId": 9078,
+   "pickupNpc": "暗法师薇薇安·拉格雷",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.0,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "lower-blackrock-spire",
+   "nameCn": "薇薇安·拉格雷和黑暗石板",
+   "questId": 4769,
+   "npcId": 5204,
+   "pickupNpc": "药剂师金格",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 49.2,
+   "pickupY": 68.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "瘟疫之龙",
+   "questId": 5529,
+   "npcId": 11035,
+   "pickupNpc": "贝蒂娜·比格辛克",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "黎明先锋",
+   "questId": 4771,
+   "npcId": 11035,
+   "pickupNpc": "贝蒂娜·比格辛克",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "瑟尔林·卡斯迪诺夫教授",
+   "questId": 5382,
+   "npcId": 11216,
+   "pickupNpc": "艾瓦·萨克霍夫",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 70.2,
+   "pickupY": 73.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "传令官基尔图诺斯",
+   "questId": 5384,
+   "npcId": 11216,
+   "pickupNpc": "艾瓦·萨克霍夫",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 70.2,
+   "pickupY": 73.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "巫妖莱斯·霜语",
+   "questId": 5466,
+   "npcId": 11286,
+   "pickupNpc": "马杜克镇长",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 70.4,
+   "pickupY": 74.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "卡斯迪诺夫的恐惧之袋",
+   "questId": 5515,
+   "npcId": 11216,
+   "pickupNpc": "艾瓦·萨克霍夫",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 70.2,
+   "pickupY": 73.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "scholomance",
+   "nameCn": "贝蒂娜·比格辛克",
+   "questId": 5531,
+   "npcId": 11036,
+   "pickupNpc": "莱尼德·巴萨罗梅",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.6,
+   "pickupY": 57.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-main-gate",
+   "nameCn": "活跃的探子",
+   "questId": 5213,
+   "npcId": 11035,
+   "pickupNpc": "贝蒂娜·比格辛克",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-main-gate",
+   "nameCn": "了不起的艾兹拉·格里姆",
+   "questId": 5214,
+   "npcId": 11033,
+   "pickupNpc": "烟鬼拉鲁恩",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 80.4,
+   "pickupY": 58.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-main-gate",
+   "nameCn": "神圣之屋",
+   "questId": 5243,
+   "npcId": 11036,
+   "pickupNpc": "莱尼德·巴萨罗梅",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.6,
+   "pickupY": 57.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-main-gate",
+   "nameCn": "档案管理员",
+   "questId": 5251,
+   "npcId": 11039,
+   "pickupNpc": "尼古拉斯·瑟伦霍夫公爵",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-main-gate",
+   "nameCn": "爱与家庭",
+   "questId": 5848,
+   "npcId": 11936,
+   "pickupNpc": "画家瑞弗蕾",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 65.4,
+   "pickupY": 75.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "血肉不会撒谎",
+   "questId": 5212,
+   "npcId": 11035,
+   "pickupNpc": "贝蒂娜·比格辛克",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "活跃的探子",
+   "questId": 5213,
+   "npcId": 11035,
+   "pickupNpc": "贝蒂娜·比格辛克",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "了不起的艾兹拉·格里姆",
+   "questId": 5214,
+   "npcId": 11033,
+   "pickupNpc": "烟鬼拉鲁恩",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 80.4,
+   "pickupY": 58.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "神圣之屋",
+   "questId": 5243,
+   "npcId": 11036,
+   "pickupNpc": "莱尼德·巴萨罗梅",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.6,
+   "pickupY": 57.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "超越",
+   "questId": 5263,
+   "npcId": 11039,
+   "pickupNpc": "尼古拉斯·瑟伦霍夫公爵",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 81.4,
+   "pickupY": 59.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "爱与家庭",
+   "questId": 5848,
+   "npcId": 11936,
+   "pickupNpc": "画家瑞弗蕾",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 65.4,
+   "pickupY": 75.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "stratholme-service-gate",
+   "nameCn": "吞咽者拉姆斯登",
+   "questId": 6163,
+   "npcId": 11878,
+   "pickupNpc": "纳萨诺斯·凋零者",
+   "pickupZone": "东瘟疫之地",
+   "pickupMapId": 1423,
+   "pickupMap": "东瘟疫之地",
+   "pickupX": 26.4,
+   "pickupY": 74.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "最后的石板",
+   "questId": 4788,
+   "npcId": 10460,
+   "pickupNpc": "勘查员詹斯·铁靴",
+   "pickupZone": "塔纳利斯",
+   "pickupMapId": 1446,
+   "pickupMap": "塔纳利斯",
+   "pickupX": 66.8,
+   "pickupY": 24.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "基布雷尔的特殊宠物",
+   "questId": 4729,
+   "npcId": 10260,
+   "pickupNpc": "基布雷尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.8,
+   "pickupY": 22.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "蜘蛛卵",
+   "questId": 4862,
+   "npcId": 10260,
+   "pickupNpc": "基布雷尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.8,
+   "pickupY": 22.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "冷冻龙蛋",
+   "questId": 4734,
+   "npcId": 10267,
+   "pickupNpc": "丁奇·斯迪波尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.2,
+   "pickupY": 23.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "收集龙蛋",
+   "questId": 4735,
+   "npcId": 10267,
+   "pickupNpc": "丁奇·斯迪波尔",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.2,
+   "pickupY": 23.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "蛛后的乳汁",
+   "questId": 4866,
+   "npcId": 9563,
+   "pickupNpc": "狼狈不堪的约翰",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 65.0,
+   "pickupY": 23.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "丁奇·斯迪波尔",
+   "questId": 4907,
+   "npcId": 10468,
+   "pickupNpc": "菲诺克",
+   "pickupZone": "冬泉谷",
+   "pickupMapId": 1452,
+   "pickupMap": "冬泉谷",
+   "pickupX": 61.4,
+   "pickupY": 38.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "恶魔熔炉",
+   "questId": 5127,
+   "npcId": 10918,
+   "pickupNpc": "罗拉克斯",
+   "pickupZone": "冬泉谷",
+   "pickupMapId": 1452,
+   "pickupMap": "冬泉谷",
+   "pickupX": 63.8,
+   "pickupY": 73.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "末日扣环",
+   "questId": 4764,
+   "npcId": 9565,
+   "pickupNpc": "玛亚拉·布莱特文",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.8,
+   "pickupY": 69.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "瑞治维尔的箱子",
+   "questId": 4765,
+   "npcId": 9565,
+   "pickupNpc": "玛亚拉·布莱特文",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.8,
+   "pickupY": 69.0,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "玛亚拉·布莱特文",
+   "questId": 4766,
+   "npcId": 2285,
+   "pickupNpc": "雷明顿·瑞治维尔伯爵",
+   "pickupZone": "暴风城",
+   "pickupMapId": 1453,
+   "pickupMap": "暴风城",
+   "pickupX": 76.9,
+   "pickupY": 47.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "达基萨斯将军之死",
+   "questId": 5102,
+   "npcId": 9560,
+   "pickupNpc": "麦克斯韦尔元帅",
+   "pickupZone": "燃烧平原",
+   "pickupMapId": 1428,
+   "pickupMap": "燃烧平原",
+   "pickupX": 84.6,
+   "pickupY": 68.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "龙火护符",
+   "questId": 6502,
+   "npcId": 10929,
+   "pickupNpc": "哈尔琳",
+   "pickupZone": "冬泉谷",
+   "pickupMapId": 1452,
+   "pickupMap": "冬泉谷",
+   "pickupX": 54.4,
+   "pickupY": 51.2,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "狡猾的比修",
+   "questId": 4981,
+   "npcId": 9080,
+   "pickupNpc": "雷克斯洛特",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 5.8,
+   "pickupY": 47.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "黑暗石板",
+   "questId": 4768,
+   "npcId": 9078,
+   "pickupNpc": "暗法师薇薇安·拉格雷",
+   "pickupZone": "荒芜之地",
+   "pickupMapId": 1418,
+   "pickupMap": "荒芜之地",
+   "pickupX": 3.0,
+   "pickupY": 47.6,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "薇薇安·拉格雷和黑暗石板",
+   "questId": 4769,
+   "npcId": 5204,
+   "pickupNpc": "药剂师金格",
+   "pickupZone": "幽暗城",
+   "pickupMapId": 1458,
+   "pickupMap": "幽暗城",
+   "pickupX": 49.2,
+   "pickupY": 68.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "为部落而战！",
+   "questId": 4974,
+   "npcId": 4949,
+   "pickupNpc": "萨尔",
+   "pickupZone": "奥格瑞玛",
+   "pickupMapId": 1454,
+   "pickupMap": "奥格瑞玛",
+   "pickupX": 32.0,
+   "pickupY": 37.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "黑龙幻象",
+   "questId": 6569,
+   "npcId": 11872,
+   "pickupNpc": "巫女麦兰达",
+   "pickupZone": "西瘟疫之地",
+   "pickupMapId": 1422,
+   "pickupMap": "西瘟疫之地",
+   "pickupX": 50.8,
+   "pickupY": 77.8,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  },
+  {
+   "dungeonId": "upper-blackrock-spire",
+   "nameCn": "黑龙勇士之血",
+   "questId": 6602,
+   "npcId": 10182,
+   "pickupNpc": "雷克萨",
+   "pickupZone": "菲拉斯",
+   "pickupMapId": 1444,
+   "pickupMap": "菲拉斯",
+   "pickupX": 44.8,
+   "pickupY": 7.4,
+   "pickupLevel": "L2",
+   "pickupProvenance": [
+    {
+     "type": "addon",
+     "url": "https://wx-wow.com/changelog.html",
+     "file": "DungeonsForever/Core/Data/Data_QuestStartLoc.lua",
+     "version": "2.1.43",
+     "checkedAt": "2026-11-09"
+    }
+   ]
+  }
+ ]
+}

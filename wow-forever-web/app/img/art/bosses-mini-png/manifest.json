@@ -1,0 +1,996 @@
+{
+  "kind": "boss-portrait-format-derivatives",
+  "note": "Registered local portrait images decoded to RGBA and saved losslessly as PNG. Original art manifests retain source attribution.",
+  "files": {
+    "img/art/bosses-m2/archivist-galford.webp": {
+      "file": "img/art/bosses-mini-png/archivist-galford-d37f1ac7b470.png",
+      "sourceSha256": "9cc41bae7970a158d9aca9396bd0b940cfed83a1ed6fde6b7fdffd74cbfd04c5",
+      "sha256": "d37f1ac7b470a27e7d01fb248507f1ebd41fb29e6c2724c30d252a0391b29bbc",
+      "bytes": 41487
+    },
+    "img/art/bosses-m2/atal-alarion.webp": {
+      "file": "img/art/bosses-mini-png/atal-alarion-ca48213e089f.png",
+      "sourceSha256": "a67afcd2484aa77cf5860df1babae4d7950f36c835a13965bbc353a4afe1fd68",
+      "sha256": "ca48213e089fda01f8f961a77655e5329b850a039936c41311ebace9e4c21ee0",
+      "bytes": 54150
+    },
+    "img/art/bosses-m2/black-guard-swordsmith.webp": {
+      "file": "img/art/bosses-mini-png/black-guard-swordsmith-a3a978e0765f.png",
+      "sourceSha256": "62a47c97f6b8ee22ccaa260bf711d8fbe95b5e6faec329ce74d9ed07ff75f5a8",
+      "sha256": "a3a978e0765f6d94667b28894e7698df5b5bea2924a2a9442d6adb385b875f00",
+      "bytes": 55220
+    },
+    "img/art/bosses-m2/blood-steward-of-kirtonos.webp": {
+      "file": "img/art/bosses-mini-png/blood-steward-of-kirtonos-1825077a6c6b.png",
+      "sourceSha256": "e808a130358e219ded78082e9546124c6f0b25e334d8ba63f38fa93efc519528",
+      "sha256": "1825077a6c6bd9a0e1819a16c1a4e1a1948b433332193b9165749cbdf7614557",
+      "bytes": 37706
+    },
+    "img/art/bosses-m2/dustwraith.webp": {
+      "file": "img/art/bosses-mini-png/dustwraith-7fe8877be86a.png",
+      "sourceSha256": "d964510d902f718807b6343d565aff996c9d04796edc5953e86d26e74f90e5f0",
+      "sha256": "7fe8877be86a8face8a9b07c975d68a7e8abc39e7b3f6b537de97bc544779796",
+      "bytes": 36604
+    },
+    "img/art/bosses-m2/ghok-bashguud.webp": {
+      "file": "img/art/bosses-mini-png/ghok-bashguud-4f316b76c58c.png",
+      "sourceSha256": "982d2074dff43a9dd433b206f5c741891bc683ea6ff9c15985b3c25009a42d29",
+      "sha256": "4f316b76c58c346fabb94eb2f8212e1a3bdd2166f4851d0de34ae0adebc48f2e",
+      "bytes": 52458
+    },
+    "img/art/bosses-m2/kam-deepfury.webp": {
+      "file": "img/art/bosses-mini-png/kam-deepfury-01dd80d13834.png",
+      "sourceSha256": "801e0756622af8db972ba1118e33ccbd1a127245286ee6eed61efb610266de98",
+      "sha256": "01dd80d1383465a69721ce22c35fe0ef95ddcaf53e6d7dec86ee4f573dcf497c",
+      "bytes": 24977
+    },
+    "img/art/bosses-m2/miner-johnson.webp": {
+      "file": "img/art/bosses-mini-png/miner-johnson-28cdf39b0c7b.png",
+      "sourceSha256": "aa20db8ba2a28ea2e83028a2ed58fcfee89204d10a3c6071d3c953f69f865f96",
+      "sha256": "28cdf39b0c7b69b28bfd7dfb5255b754f9d9c21a5be7c4379b3571c1313718a2",
+      "bytes": 42720
+    },
+    "img/art/bosses-m2/morphaz.webp": {
+      "file": "img/art/bosses-mini-png/morphaz-e64255beeb2e.png",
+      "sourceSha256": "72a0dafc6db41458d34bc600011013ca909914db2cca129c9863b2d57e0bbfec",
+      "sha256": "e64255beeb2e114bb153bfcf647ee6b689a26245064fe3659b0c60f48092a5ef",
+      "bytes": 62529
+    },
+    "img/art/bosses-m2/odo-the-blindwatcher.webp": {
+      "file": "img/art/bosses-mini-png/odo-the-blindwatcher-202e59a9a14a.png",
+      "sourceSha256": "312a69b2954c3fc3a8186bafb405faadfe35d048625d732eb9fd792281a90212",
+      "sha256": "202e59a9a14a0965feb95b08f3ed1b0bcb06e18b0b02801a5d4be95b2912f002",
+      "bytes": 28463
+    },
+    "img/art/bosses-m2/old-serra-kis.webp": {
+      "file": "img/art/bosses-mini-png/old-serra-kis-d0695cfa0d3f.png",
+      "sourceSha256": "75f5746281a8c24e5194d30c2420fbc2f63e91ca90a8f6849d600ca0ca0ff4c2",
+      "sha256": "d0695cfa0d3fd3adf5d30f2a396f77eda951830958c31b58a2cb021edbcff672",
+      "bytes": 39021
+    },
+    "img/art/bosses-m2/razorfen-spearhide.webp": {
+      "file": "img/art/bosses-mini-png/razorfen-spearhide-4371ebbb1300.png",
+      "sourceSha256": "f47aa2fe83e9ba597dd174434ada3a42ae1b71a6a0d536d928985d8d7bcefa1c",
+      "sha256": "4371ebbb13004dd48cd33e2f0a7c076b4d7ced5d4a8a784363f5e7daa72a88ab",
+      "bytes": 60006
+    },
+    "img/art/bosses-m2/sandarr-dunereaver.webp": {
+      "file": "img/art/bosses-mini-png/sandarr-dunereaver-02847f89f4ed.png",
+      "sourceSha256": "3dd989d7d13b679ad7d8e69e189ee08df6d7e2bc283944d83b4fec54ee4dd12c",
+      "sha256": "02847f89f4ed27b0157650829c84c7c614261c7b3b295e14cc0943f7dd63604e",
+      "bytes": 39341
+    },
+    "img/art/bosses-m2/stonespine.webp": {
+      "file": "img/art/bosses-mini-png/stonespine-719708826a93.png",
+      "sourceSha256": "6a54d1342b787bf8464bb5af5123a819c0f3846049916445fac3d67a42098735",
+      "sha256": "719708826a932cd2a195641bb68924592e85d01bef0f78066d5a754ce082c407",
+      "bytes": 47607
+    },
+    "img/art/bosses-m2/targorr-the-dread.webp": {
+      "file": "img/art/bosses-mini-png/targorr-the-dread-75d35eabfb4b.png",
+      "sourceSha256": "1c6fd330642fbcae311fa7d89ffa98c4a58cc09afffa936de363d07818433df6",
+      "sha256": "75d35eabfb4b276c7c440b5173d764b12e8e581475e92a02fa603584e2b45568",
+      "bytes": 27183
+    },
+    "img/art/bosses-m2/techbot.webp": {
+      "file": "img/art/bosses-mini-png/techbot-4c32009725dc.png",
+      "sourceSha256": "f57d3292fbec99a41b45cf7e24a6e544295b507e66dec55fd2f501f30556ef65",
+      "sha256": "4c32009725dc50ec6d7e6495cc711445d69f3130bb3631a4e3e866762b738ff9",
+      "bytes": 20700
+    },
+    "img/art/bosses-m2/tsu-zee.webp": {
+      "file": "img/art/bosses-mini-png/tsu-zee-97bfbce968bb.png",
+      "sourceSha256": "3974a1c15f2f48bea57e09f0290838600f5557a58e52d7198a6567a81ceb5477",
+      "sha256": "97bfbce968bb3d475e5818de19e41c14e518399d5834305e5e62b947a617d75d",
+      "bytes": 19058
+    },
+    "img/art/bosses-m2/veng.webp": {
+      "file": "img/art/bosses-mini-png/veng-3a169dbd358d.png",
+      "sourceSha256": "df6ac8986e8b318ca226c5754486ac620e121650c2f1b2bef1c21288d0bcd92d",
+      "sha256": "3a169dbd358d200f9498772d9c40e490e3ef26bf37faba780679463761c32046",
+      "bytes": 30095
+    },
+    "img/art/bosses-m2/zerillis.webp": {
+      "file": "img/art/bosses-mini-png/zerillis-02847f89f4ed.png",
+      "sourceSha256": "3dd989d7d13b679ad7d8e69e189ee08df6d7e2bc283944d83b4fec54ee4dd12c",
+      "sha256": "02847f89f4ed27b0157650829c84c7c614261c7b3b295e14cc0943f7dd63604e",
+      "bytes": 39341
+    },
+    "img/art/bosses/agathelos-the-raging.webp": {
+      "file": "img/art/bosses-mini-png/agathelos-the-raging-01fcde2dfa35.png",
+      "sourceSha256": "9bb8d7666f5e0307085636c0be7f5ca07bdd398e189ff45bec4c6ce13df06b3d",
+      "sha256": "01fcde2dfa35538606a7ec322a26a49e77ec8034a17a26b051b0f8fecce06c10",
+      "bytes": 9762
+    },
+    "img/art/bosses/aggem-thorncurse.webp": {
+      "file": "img/art/bosses-mini-png/aggem-thorncurse-03863db44f96.png",
+      "sourceSha256": "b6c8d3f7c14a9584c5b3b820d3a97c94b2209af27a8941488f834b02b62b6a9a",
+      "sha256": "03863db44f96cc412677ddad212dfeb90bfb52179bf5570e93a111c618c4de42",
+      "bytes": 10161
+    },
+    "img/art/bosses/alzzin-the-wildshaper.webp": {
+      "file": "img/art/bosses-mini-png/alzzin-the-wildshaper-c8fafbd63c2a.png",
+      "sourceSha256": "5b2ec8ecbcb7bd21902f1cb221990278ce0952b5a22468f54de702b296df5a6b",
+      "sha256": "c8fafbd63c2aee682c0a426b39a26061823cca326d7db096c85f2079457da1ff",
+      "bytes": 8200
+    },
+    "img/art/bosses/ambassador-flamelash.webp": {
+      "file": "img/art/bosses-mini-png/ambassador-flamelash-623539ff1f67.png",
+      "sourceSha256": "1bcb26bdcb2a2790f215da009d0d4aa7c73d0d2d1e9e45d99495701a240ac600",
+      "sha256": "623539ff1f6743f66d984b97e094225a8b7cf602ce0ff519be2cc19e203be428",
+      "bytes": 10487
+    },
+    "img/art/bosses/amnennar-the-coldbringer.webp": {
+      "file": "img/art/bosses-mini-png/amnennar-the-coldbringer-ed2b123d6420.png",
+      "sourceSha256": "9e4fcbcbefc3a44574cf571fd6680964bff52431eb5ac4e0f61ee14d352fdbcf",
+      "sha256": "ed2b123d6420e30b84b69ec4c994a17ef6637dd0f8b1a0beb3252713b1fb5d0f",
+      "bytes": 11208
+    },
+    "img/art/bosses/ancient-stone-keeper.webp": {
+      "file": "img/art/bosses-mini-png/ancient-stone-keeper-6de00e1858e4.png",
+      "sourceSha256": "3f5a4f7bd90adb0bfd5cceaf5a04ef172a9dcc0365c471ce496f46e861bad4e3",
+      "sha256": "6de00e1858e44e63a28c5916532590a8da0b5d5a603e2cbdc3041cd460eae7cd",
+      "bytes": 9444
+    },
+    "img/art/bosses/antu-sul.webp": {
+      "file": "img/art/bosses-mini-png/antu-sul-de9bdd45d2e0.png",
+      "sourceSha256": "03ac77ebcd5cacb5f068d3178f28d2118eb637b4a203d0936780dfcf164ab827",
+      "sha256": "de9bdd45d2e0c0f1c301e520f792ef46a9665dd138f2fcb5758e5cdae01e1f20",
+      "bytes": 9064
+    },
+    "img/art/bosses/arcanist-doan.webp": {
+      "file": "img/art/bosses-mini-png/arcanist-doan-5073007e4e32.png",
+      "sourceSha256": "9aecc1592d77b202c21473fa4a69d656f223ee4f3794597716ba4bfdfdf962f6",
+      "sha256": "5073007e4e326ad098b062fa71e9255dad535c4384cd20f3abf1dd265d7badb4",
+      "bytes": 9586
+    },
+    "img/art/bosses/archaedas.webp": {
+      "file": "img/art/bosses-mini-png/archaedas-c4f7d1973078.png",
+      "sourceSha256": "274c64c5494ddfa0b85a58af2e24d5c986bcbef3ef913988766375b8a6697062",
+      "sha256": "c4f7d19730787a65f5668840ab196bbfdb1888208daade040591d9f6dfb9d507",
+      "bytes": 8454
+    },
+    "img/art/bosses/avatar-of-hakkar.webp": {
+      "file": "img/art/bosses-mini-png/avatar-of-hakkar-543e93686d80.png",
+      "sourceSha256": "abf6c44e72ad22d410f195ba3b56f443922fcfc360a03f8520283f80c209970c",
+      "sha256": "543e93686d80ac4ff4bc4494462584810c3dedbac33d7fed94e43682ba7aef8a",
+      "bytes": 10552
+    },
+    "img/art/bosses/bael-gar.webp": {
+      "file": "img/art/bosses-mini-png/bael-gar-5a7e7a5ab72f.png",
+      "sourceSha256": "880dcba32fcd025a202f1eaf33ab7078df0808646f703db421ac7262c75de111",
+      "sha256": "5a7e7a5ab72f036c487494b6c12423a2e5a6800f253f5a17765eda0164e60de6",
+      "bytes": 9313
+    },
+    "img/art/bosses/baelog.webp": {
+      "file": "img/art/bosses-mini-png/baelog-68e31f72f24b.png",
+      "sourceSha256": "39af2d611dbdf12ab347d5fde6d1ec1d96474d03bd81261012ce95cc0e69a22f",
+      "sha256": "68e31f72f24b68d6d158153f406df2bedee94d2e76a0454c4aff64603f9e6e23",
+      "bytes": 8942
+    },
+    "img/art/bosses/balnazzar.webp": {
+      "file": "img/art/bosses-mini-png/balnazzar-0a59e45fffea.png",
+      "sourceSha256": "361a689888b2b685b843c4428dc67654dfa2edeebdf06913faa45d520001512d",
+      "sha256": "0a59e45fffea20901d0aa94c31154e130212d98540550f67422979f3501638f5",
+      "bytes": 9657
+    },
+    "img/art/bosses/baron-aquanis.webp": {
+      "file": "img/art/bosses-mini-png/baron-aquanis-c11da48a45a8.png",
+      "sourceSha256": "691e27d9c2d4755d96c030b9656c8f80847d9c0b9038d7b693c32e120f9c78a9",
+      "sha256": "c11da48a45a8b1bb12952cf15ccb023c9de28d2016a48ef92386ebdb8a354642",
+      "bytes": 9840
+    },
+    "img/art/bosses/baron-rivendare.webp": {
+      "file": "img/art/bosses-mini-png/baron-rivendare-9b1571bfd279.png",
+      "sourceSha256": "8f701498597139007eeabd0da09b5ddec5d6b62990fea063d770585c23ac83f6",
+      "sha256": "9b1571bfd279bfd207798aa88edd5530b9f62bcef77b9d5c1db51db8368b3fbe",
+      "bytes": 8145
+    },
+    "img/art/bosses/baron-silverlaine.webp": {
+      "file": "img/art/bosses-mini-png/baron-silverlaine-f19df165e1e3.png",
+      "sourceSha256": "97acf5b636b31ab71e0de0f13e49f37ac9ab3b70bd38c4e9b718be6ad2ccc5ab",
+      "sha256": "f19df165e1e35d5f22aa1340bfb072902abe0a6b9b6a3f5a12d7264bc54d045e",
+      "bytes": 7488
+    },
+    "img/art/bosses/baroness-anastari.webp": {
+      "file": "img/art/bosses-mini-png/baroness-anastari-410eedba5489.png",
+      "sourceSha256": "3d1f4787befce8631475bc7db162321f95013c6c5a5ce0ff722d7b91adebd78f",
+      "sha256": "410eedba5489a5005bdb4ad376d0f0eac17852d815a1817ecfde557e241c67b9",
+      "bytes": 8844
+    },
+    "img/art/bosses/bazzalan.webp": {
+      "file": "img/art/bosses-mini-png/bazzalan-88db4c25b4cb.png",
+      "sourceSha256": "5bc5925f7fe1d0e0358c7810e05f8a8f6befbe35626d5a5a9897c2a7b1015f7a",
+      "sha256": "88db4c25b4cb59cccec82ed8c96a208f369b5afe0b48394fad09d839d07d7c8f",
+      "bytes": 8142
+    },
+    "img/art/bosses/bloodmage-thalnos.webp": {
+      "file": "img/art/bosses-mini-png/bloodmage-thalnos-afb2febeb776.png",
+      "sourceSha256": "ea5a421492573da0fcb9b449a4ff19fdf65ffdc30153604cbcd32da16dce0106",
+      "sha256": "afb2febeb776b6a9d4a6d467b1874d024d4fc452e742c40968ea7fa5abe542f1",
+      "bytes": 10137
+    },
+    "img/art/bosses/cannon-master-willey.webp": {
+      "file": "img/art/bosses-mini-png/cannon-master-willey-176382f91b60.png",
+      "sourceSha256": "a7346f3fe629054609c7a97fa69cf1c25bf7d79ad464f3ac64e671816e874a3a",
+      "sha256": "176382f91b6037ffb71e6b21dc517ecec38a6faf8fca4de4e59a1be878af113d",
+      "bytes": 9166
+    },
+    "img/art/bosses/captain-greenskin.webp": {
+      "file": "img/art/bosses-mini-png/captain-greenskin-61cd1f5806c4.png",
+      "sourceSha256": "f1ca13404915804a9c27e1ef63ebe57ee209e8c05af315417dbb1f5ee186f807",
+      "sha256": "61cd1f5806c40074c34c19bb2d5a46324ba2b905a37f6c4a7f6f3b113324eba0",
+      "bytes": 9566
+    },
+    "img/art/bosses/captain-kromcrush.webp": {
+      "file": "img/art/bosses-mini-png/captain-kromcrush-b8b933948923.png",
+      "sourceSha256": "1ec2a84615cd80cd14cef03cee49ce03d245d1e2d8c1d5d1608e1e9183fbd62c",
+      "sha256": "b8b93394892331ca5587c84a13d1bf2a53d1ccad7a6e6c621ca46aa540778d8d",
+      "bytes": 8810
+    },
+    "img/art/bosses/celebras-the-cursed.webp": {
+      "file": "img/art/bosses-mini-png/celebras-the-cursed-fbebffab8194.png",
+      "sourceSha256": "5bb4583d4257403345afa67a3768bfa9180ff2efd5d83a0302e71332d6589ad6",
+      "sha256": "fbebffab819444b2c07c0fb8e3bba902a3bdfdc1a3b622aac74c6bb2859610e8",
+      "bytes": 7652
+    },
+    "img/art/bosses/charlga-razorflank.webp": {
+      "file": "img/art/bosses-mini-png/charlga-razorflank-7d738d50eb22.png",
+      "sourceSha256": "40e69cb89a02e2a30abc5126692d052732e00cb9d38f11f5a85aa2b78f992769",
+      "sha256": "7d738d50eb22942cd276dd1d40486826e6c941d4c6b969e96e2cfca6b031380c",
+      "bytes": 11047
+    },
+    "img/art/bosses/chief-ukorz-sandscalp.webp": {
+      "file": "img/art/bosses-mini-png/chief-ukorz-sandscalp-f18b1e35b96d.png",
+      "sourceSha256": "dbce3252fe007861325a8939763e312b401ab5026adef1d7517b12f5627b8f7c",
+      "sha256": "f18b1e35b96d7dce71925973cd7983fbc2ea5d56a55837f946659f3224bbdbc2",
+      "bytes": 9791
+    },
+    "img/art/bosses/cho-rush-the-observer.webp": {
+      "file": "img/art/bosses-mini-png/cho-rush-the-observer-835fb4c5a9cb.png",
+      "sourceSha256": "19740911d00302fa713b0a949fb23e6ccb3c53cf641052661962d19204e09dfc",
+      "sha256": "835fb4c5a9cb328c867dcf46fd0c61d6699ad33dfea4b76cfede68c50c3e8f72",
+      "bytes": 8366
+    },
+    "img/art/bosses/commander-springvale.webp": {
+      "file": "img/art/bosses-mini-png/commander-springvale-99618d42e255.png",
+      "sourceSha256": "8ebafd8fb11c6a367e91883e8b581ccb25ba3a440e40dc2c1a028477a5d615c8",
+      "sha256": "99618d42e2554c9e2f83b48feb5ef765418279ba41e290f293f11d9ae63ff623",
+      "bytes": 10067
+    },
+    "img/art/bosses/cookie.webp": {
+      "file": "img/art/bosses-mini-png/cookie-446adf65bfd0.png",
+      "sourceSha256": "27dcc8919d3966230818fa9eb0093b51e7761dd3ab83f168cdf1b61005495eae",
+      "sha256": "446adf65bfd0d03cecfc551b2bcb4d47ecead3a535e2e7eb6b95158a7b53fcae",
+      "bytes": 9913
+    },
+    "img/art/bosses/crowd-pummeler-9-60.webp": {
+      "file": "img/art/bosses-mini-png/crowd-pummeler-9-60-5f193cab5270.png",
+      "sourceSha256": "e1eff5d397af19ffdd1f25a456cb58793821a53e1c799e1e001d081d363c7c87",
+      "sha256": "5f193cab527018afc59c971f62185aa3da2ea30aac547a44d6992a12fe0e1ed2",
+      "bytes": 10113
+    },
+    "img/art/bosses/darkmaster-gandling.webp": {
+      "file": "img/art/bosses-mini-png/darkmaster-gandling-d9087236a2e4.png",
+      "sourceSha256": "1462a2be3edb4bdbbd2919b4ade2511bf5bd10dad8601f36bc5b3bfb7f689298",
+      "sha256": "d9087236a2e411a4db2387a19a288a53cffdd6b1fea3dd2abb61d0ec1aeb33c8",
+      "bytes": 10223
+    },
+    "img/art/bosses/death-speaker-jargba.webp": {
+      "file": "img/art/bosses-mini-png/death-speaker-jargba-917fcdfd381c.png",
+      "sourceSha256": "d68a8e566089901c80ff167567779754fd84e5c7922d683af5e2102b41f81d6b",
+      "sha256": "917fcdfd381cf4dd4e0416f95097e95f37372ba1edee702ab61d54e3028132ee",
+      "bytes": 11279
+    },
+    "img/art/bosses/doctor-theolen-krastinov.webp": {
+      "file": "img/art/bosses-mini-png/doctor-theolen-krastinov-f1f45487f63a.png",
+      "sourceSha256": "c79a63cd6bdc83058a86b1f5b90397f7b4f6217713006bb9fb8dbe23ec0145e9",
+      "sha256": "f1f45487f63a191e94026b639e67d28af509f09738c5ab5347eec8bceacd8d95",
+      "bytes": 8905
+    },
+    "img/art/bosses/dreamscythe.webp": {
+      "file": "img/art/bosses-mini-png/dreamscythe-1d8d3ef8b72f.png",
+      "sourceSha256": "7a874b9d6b081ff48c013660fdb920b82d2ae28868456c2d6c9243cc86d8673c",
+      "sha256": "1d8d3ef8b72f5c8f7c045eda988ac79811e6ce4d2ff22e7a046b3a3c22cb8de1",
+      "bytes": 9863
+    },
+    "img/art/bosses/edwin-vancleef.webp": {
+      "file": "img/art/bosses-mini-png/edwin-vancleef-de790fa17426.png",
+      "sourceSha256": "307d80cb2db27bc23dcaef40c22190a7dbb486ee7b9f7cafffdafed1ddd98f32",
+      "sha256": "de790fa174269daa5f2ffd9e926cea6f6694dfb5171c849675b86d55a3ab23e6",
+      "bytes": 9678
+    },
+    "img/art/bosses/electrocutioner-6000.webp": {
+      "file": "img/art/bosses-mini-png/electrocutioner-6000-5e0af701721c.png",
+      "sourceSha256": "35a3ef66535f898fd96de2e806cff89e44ac8345da4965a8aac164c803ea92cc",
+      "sha256": "5e0af701721c48148362568b2e4ef04f3212296758ffcd394cac4c243969a834",
+      "bytes": 9158
+    },
+    "img/art/bosses/eric-the-swift.webp": {
+      "file": "img/art/bosses-mini-png/eric-the-swift-9613a6f05904.png",
+      "sourceSha256": "aa21513aa566052d24458ac963398db6b1441afb2551038c2c59b68edccc7f0c",
+      "sha256": "9613a6f05904152c1f5ee1357a7e0ef64b2d72e90131f1ec5f760c7fcaefdbb2",
+      "bytes": 8794
+    },
+    "img/art/bosses/fineous-darkvire.webp": {
+      "file": "img/art/bosses-mini-png/fineous-darkvire-2ea0b4855783.png",
+      "sourceSha256": "8fb1c60ef4bfb51cc3e716be023c589fa533fe1f16c51f38b1d4ef22fb0a6684",
+      "sha256": "2ea0b4855783f1f35c418067dae385b0135421142adc8386169f3758086f851d",
+      "bytes": 7719
+    },
+    "img/art/bosses/gahz-rilla.webp": {
+      "file": "img/art/bosses-mini-png/gahz-rilla-8be876be66fa.png",
+      "sourceSha256": "3e45554b77a56bb4cfcd185b84cffcfef9221b96dd80d68741ffae774faf3fc2",
+      "sha256": "8be876be66fab19a7d7ec54880a7cc0f05d44da8e16904ea67a50b5dd541c1d7",
+      "bytes": 9032
+    },
+    "img/art/bosses/galgann-firehammer.webp": {
+      "file": "img/art/bosses-mini-png/galgann-firehammer-8209680e56bd.png",
+      "sourceSha256": "596105f2b50177e4640852f86e1b820de8efaffcc1e60d55eb6d3379a1b08690",
+      "sha256": "8209680e56bde3efc33d8c0019a366b69ddf981ed36366abe111ff81ca0bc34e",
+      "bytes": 9551
+    },
+    "img/art/bosses/geilhast.webp": {
+      "file": "img/art/bosses-mini-png/geilhast-f976d0f17d94.png",
+      "sourceSha256": "47be9f1f5a12ca2f20cf325b7f9450331f9916a685740d854c433667554c2f06",
+      "sha256": "f976d0f17d94384ad54d9eeb3ac85921f11baab856b24ea3e2f3a50fac146272",
+      "bytes": 9629
+    },
+    "img/art/bosses/general-angerforge.webp": {
+      "file": "img/art/bosses-mini-png/general-angerforge-6a12c411fe82.png",
+      "sourceSha256": "f35f16678f5edeb6a7ac1ba6df21c3073e3c5d0589d89da185feea0ef9450174",
+      "sha256": "6a12c411fe82cb68ecf9ddf61138d3becd547d06975e1c2e6d824f65b198056e",
+      "bytes": 9572
+    },
+    "img/art/bosses/general-drakkisath.webp": {
+      "file": "img/art/bosses-mini-png/general-drakkisath-8cbf59bb2024.png",
+      "sourceSha256": "e6052121458b8ce937d18ec25beaa00009f868f7a860745cb4754293aa20fcac",
+      "sha256": "8cbf59bb202486979f75514e770b47601c94c89252af80a072bd8f210cf76f48",
+      "bytes": 8830
+    },
+    "img/art/bosses/ghamoo-ra.webp": {
+      "file": "img/art/bosses-mini-png/ghamoo-ra-19764d0b402e.png",
+      "sourceSha256": "15ab70e4a5a5bd766082049dd5582fc72e6fc52b50ee866d57878d6260f9a711",
+      "sha256": "19764d0b402e6b4af3b8a2ae62a38c4bafcc27d75170a94eb783e7bd8c2e156e",
+      "bytes": 7722
+    },
+    "img/art/bosses/gilnid.webp": {
+      "file": "img/art/bosses-mini-png/gilnid-c2a46caf5d6c.png",
+      "sourceSha256": "2c517c374617bd4850fc7ddc447c6dfc5e1946dc1692af5986650db598fababd",
+      "sha256": "c2a46caf5d6cc6974bde02ab6b7cb9bedc6969cc3fb1235a299f06121feac498",
+      "bytes": 8810
+    },
+    "img/art/bosses/gizrul-the-slavener.webp": {
+      "file": "img/art/bosses-mini-png/gizrul-the-slavener-c18d851dca2b.png",
+      "sourceSha256": "a44421863d4fe3168cc8e529e29280c30610623d80882c0e465611d416eccb15",
+      "sha256": "c18d851dca2b1e00693677b40293b629bcd6fa08d7796fab0a294b868375af7e",
+      "bytes": 9506
+    },
+    "img/art/bosses/glutton.webp": {
+      "file": "img/art/bosses-mini-png/glutton-dcd21a36ee7e.png",
+      "sourceSha256": "a85bba90925201af553e915465c3095b952ebda94e7beffb046eec6ec0c3cca1",
+      "sha256": "dcd21a36ee7e5f84a7ad0919e4cbd522c0e6be61175893d9469e1efd0ece1513",
+      "bytes": 9214
+    },
+    "img/art/bosses/golem-lord-argelmach.webp": {
+      "file": "img/art/bosses-mini-png/golem-lord-argelmach-7239e85e3a7a.png",
+      "sourceSha256": "f3cfa5a7884befd424b56af419cf1ecc12bdffde421a4e68f85fd4a1f8c19f19",
+      "sha256": "7239e85e3a7ad0a881d93f7b2993090212f339349d3b0457152d4b944b98f8b1",
+      "bytes": 10061
+    },
+    "img/art/bosses/grimlok.webp": {
+      "file": "img/art/bosses-mini-png/grimlok-19415a649e41.png",
+      "sourceSha256": "8e60caeecd35dff820ed472ae2b5a74f5bcfaccfb3e70f498ec62bfac4a21ef1",
+      "sha256": "19415a649e4168b9d38f36098a3b575f9854a3492897801e78367a8bf0d26430",
+      "bytes": 8955
+    },
+    "img/art/bosses/guard-fengus.webp": {
+      "file": "img/art/bosses-mini-png/guard-fengus-6739b393f21c.png",
+      "sourceSha256": "b0e59033c03349e8bf057f7ba710d0c39d6f4a8d5402d5f764d4734b8cac27bb",
+      "sha256": "6739b393f21c858920fd505c8c825e34567615020c827b82ea2636c2662821f8",
+      "bytes": 8719
+    },
+    "img/art/bosses/guard-mol-dar.webp": {
+      "file": "img/art/bosses-mini-png/guard-mol-dar-c81e8ad0a781.png",
+      "sourceSha256": "bfbb1547debd9f7868a882f7634159deb895758a397d5a0b0c1750dfb48a58da",
+      "sha256": "c81e8ad0a7813964c78bd4f1382d6a3f5171a0df46e8d37eca720ac408686cdb",
+      "bytes": 8674
+    },
+    "img/art/bosses/guard-slip-kik.webp": {
+      "file": "img/art/bosses-mini-png/guard-slip-kik-fe5d227edde7.png",
+      "sourceSha256": "9290b395f850033175968722d87428f29d1497c4c39c94b533f1197f01ee9f43",
+      "sha256": "fe5d227edde7252a13bebe2e5939a400d80c5a2dbecbaa8580e992f576eb2da9",
+      "bytes": 8877
+    },
+    "img/art/bosses/gyth.webp": {
+      "file": "img/art/bosses-mini-png/gyth-82e236a1ff19.png",
+      "sourceSha256": "b4a0f8288db580bfb7027ca6e31d396ae9ecccbaf9c6e2dbc02287e222648cf3",
+      "sha256": "82e236a1ff1953895fbd988aa40696a4350f04c146be79c4b7664c81c1b5d7b0",
+      "bytes": 9416
+    },
+    "img/art/bosses/halycon.webp": {
+      "file": "img/art/bosses-mini-png/halycon-3631960bbce9.png",
+      "sourceSha256": "53260fe83c970cb01eec88327f29068c46b331cb549fa77077f9c8ba86792892",
+      "sha256": "3631960bbce98e6d22344e1938dc8ef70b96a05676b25bd0cc7539866d718788",
+      "bytes": 9487
+    },
+    "img/art/bosses/hearthsinger-forresten.webp": {
+      "file": "img/art/bosses-mini-png/hearthsinger-forresten-047895440a8d.png",
+      "sourceSha256": "e6598d788cee61301ec915a4aae8ca962a500ed1015f42044ca2d3fed69fe824",
+      "sha256": "047895440a8dff22d4dabd4cc50ade1bc0a98bd9daff9def57e6831edb710465",
+      "bytes": 8990
+    },
+    "img/art/bosses/herod.webp": {
+      "file": "img/art/bosses-mini-png/herod-69e46da70509.png",
+      "sourceSha256": "0da5fa6762bfc8cb1195bbd608c6a7ba8ac73c6ba55ff3059d10feb597565b33",
+      "sha256": "69e46da70509fcf094b7f0a2bb9f031e37181a13b5663a397486ef0d2a70f172",
+      "bytes": 8652
+    },
+    "img/art/bosses/high-inquisitor-fairbanks.webp": {
+      "file": "img/art/bosses-mini-png/high-inquisitor-fairbanks-44673ba03488.png",
+      "sourceSha256": "8a8c5be9496601ca9c7e0cf811efa2b1bea980a2e190c5b744dfc73a41cfc1a6",
+      "sha256": "44673ba034887017e0901b1e64329853b07652dc394869fb1bad0906f77ef05e",
+      "bytes": 7546
+    },
+    "img/art/bosses/high-inquisitor-whitemane.webp": {
+      "file": "img/art/bosses-mini-png/high-inquisitor-whitemane-b62a1dcbc172.png",
+      "sourceSha256": "e2ac66a5d991fad9eb768e835c30e02150b3ca4eaf382eae974f3517e8c17a16",
+      "sha256": "b62a1dcbc17248e36e5869c2870c161b2a183427b0426984f8967916b25aa1a9",
+      "bytes": 8984
+    },
+    "img/art/bosses/high-interrogator-gerstahn.webp": {
+      "file": "img/art/bosses-mini-png/high-interrogator-gerstahn-56c385eacaa4.png",
+      "sourceSha256": "10fdd9704b6b7e0cfe21a8804a588bf9fac310d3002dfdf0fa6c838a7e00424b",
+      "sha256": "56c385eacaa4e5c8b716a4c18a3bff50f721282699aaa759b2e11ed69d99bdf7",
+      "bytes": 7596
+    },
+    "img/art/bosses/highlord-omokk.webp": {
+      "file": "img/art/bosses-mini-png/highlord-omokk-862f556352e8.png",
+      "sourceSha256": "a08a5dfb42c90f8d0f5a21eebdab7d12edacd1aee2ec3264934965e740dc23ce",
+      "sha256": "862f556352e85598504cdc194e54d3058389fcb4d46a0eee5ccc6067aa82225f",
+      "bytes": 8571
+    },
+    "img/art/bosses/houndmaster-grebmar.webp": {
+      "file": "img/art/bosses-mini-png/houndmaster-grebmar-d4a415ff6ac2.png",
+      "sourceSha256": "e0707925e5095ad6ad34893441da0001aa1343b51abc57f73df682913ab85a8b",
+      "sha256": "d4a415ff6ac225000f601b503a62dae82a625c74a10d92e0b237711ab09e8e8b",
+      "bytes": 8910
+    },
+    "img/art/bosses/houndmaster-loksey.webp": {
+      "file": "img/art/bosses-mini-png/houndmaster-loksey-4bbd26baecbe.png",
+      "sourceSha256": "d8cc6d8cd35745dd15bc595f30f528a29b40d2cc6a8d89f3c82351a4430c9a0a",
+      "sha256": "4bbd26baecbe6b7c44bf48d6bcb289a9facc7e97bd2a5d76205fe26f75833f8b",
+      "bytes": 8531
+    },
+    "img/art/bosses/hydromancer-velratha.webp": {
+      "file": "img/art/bosses-mini-png/hydromancer-velratha-1537171e561f.png",
+      "sourceSha256": "80d635eccf94cc07748b83ac41b096cb03861661b6bde96a2aa173f5e3703a18",
+      "sha256": "1537171e561f2668c3be6a64073805287838e73bd08ab9cc648519a4094e7726",
+      "bytes": 7553
+    },
+    "img/art/bosses/hydrospawn.webp": {
+      "file": "img/art/bosses-mini-png/hydrospawn-f18e3ca3c26f.png",
+      "sourceSha256": "c6d273451cc77e6db5be208ed3cef374ac8169c21f03ad68b873d421792a0c22",
+      "sha256": "f18e3ca3c26f7d2e3c72f5e20e82c073cf2c0fc88f779fc02440c11debd630bf",
+      "bytes": 10102
+    },
+    "img/art/bosses/illyanna-ravenoak.webp": {
+      "file": "img/art/bosses-mini-png/illyanna-ravenoak-4a936f4fa0ac.png",
+      "sourceSha256": "e9ef2a21a739a69c1e9609f46fb9ff424fe10c084fcadbc3132a61396040fda7",
+      "sha256": "4a936f4fa0ac35ee68748fb3a6290c6fbe668ab35516664e03266cf5fa77a82a",
+      "bytes": 8352
+    },
+    "img/art/bosses/immol-thar.webp": {
+      "file": "img/art/bosses-mini-png/immol-thar-d4b51d514cb1.png",
+      "sourceSha256": "9a5e3efa01fcba71b6f6fac50ee99f7824e0f11a501b76afe234dd7ba217352c",
+      "sha256": "d4b51d514cb19ee59a4f94cd9f802a8e7bc0bcea98b90ff9048101f7743b62d1",
+      "bytes": 9736
+    },
+    "img/art/bosses/instructor-malicia.webp": {
+      "file": "img/art/bosses-mini-png/instructor-malicia-52504797cff1.png",
+      "sourceSha256": "95e65e9de30d3d3baf6d79e1aa9de06b9c44b002d61dd35dfdcf084e37f4bb6e",
+      "sha256": "52504797cff1a496a4ed3a36523503ef213d5be77993665fc19bdd617767c2d7",
+      "bytes": 8446
+    },
+    "img/art/bosses/interrogator-vishas.webp": {
+      "file": "img/art/bosses-mini-png/interrogator-vishas-0e1f758c6195.png",
+      "sourceSha256": "2325f66724fa8665b8d54b000aafe067e07b97d29b16b25c257b8ede2c166d1b",
+      "sha256": "0e1f758c61959b5b70413a4a6634597342bc49cb478c37b2d4bca26836b55f2f",
+      "bytes": 7905
+    },
+    "img/art/bosses/ironaya.webp": {
+      "file": "img/art/bosses-mini-png/ironaya-8b8cef61cada.png",
+      "sourceSha256": "530dc68cc605d3fa0ee8630fa9165d1ac790461dc641598e3e1d5c09df756eaf",
+      "sha256": "8b8cef61cada11c7a4ae9e7623534555ba20b3024444c3aaa92cfc1dd1f92496",
+      "bytes": 8717
+    },
+    "img/art/bosses/jammal-an-the-prophet.webp": {
+      "file": "img/art/bosses-mini-png/jammal-an-the-prophet-a95f82fba145.png",
+      "sourceSha256": "74317c9c09f5e13ba0689e37f2dc57a082ef433b1d9eddaad2db38dec2478e8b",
+      "sha256": "a95f82fba14526131269e3478c83451d13c1097cb7eecbac11643dda33d5e19f",
+      "bytes": 9748
+    },
+    "img/art/bosses/jandice-barov.webp": {
+      "file": "img/art/bosses-mini-png/jandice-barov-73033113745f.png",
+      "sourceSha256": "b01bd75e632a9b63a0923d8fcc43db58b3a1ede14556e5736e5aa662a8ed5b6f",
+      "sha256": "73033113745f9141226d5395fc9b31bfb2707fe64555e25a68f786744ce65fd2",
+      "bytes": 8845
+    },
+    "img/art/bosses/jergosh-the-invoker.webp": {
+      "file": "img/art/bosses-mini-png/jergosh-the-invoker-c1dfa9d8fd84.png",
+      "sourceSha256": "cf6c840db95cf98b31a0a87d0299d2841a3005bd9e23424451ef1aaae998c2f3",
+      "sha256": "c1dfa9d8fd840fb1b82e53938ccc67d58471014a262749e335648902b11e96aa",
+      "bytes": 9481
+    },
+    "img/art/bosses/king-gordok.webp": {
+      "file": "img/art/bosses-mini-png/king-gordok-d4e9aced353d.png",
+      "sourceSha256": "d307c42e6cc50329ed596ec94c71f2af00310c3108f89146b40d24072f9777ea",
+      "sha256": "d4e9aced353d211ba1f511dea05e4e32b1377a2af8bc22a66c893ecb5a3ee072",
+      "bytes": 8976
+    },
+    "img/art/bosses/kirtonos.webp": {
+      "file": "img/art/bosses-mini-png/kirtonos-662d8091dbc3.png",
+      "sourceSha256": "80ddefb0f6ea226216e8960a35441936378e39951b587477a2c6cfd62ad0d5ee",
+      "sha256": "662d8091dbc33390d111ede9de41f170c00ec7c944a48294950769afe74e58bf",
+      "bytes": 8763
+    },
+    "img/art/bosses/kresh.webp": {
+      "file": "img/art/bosses-mini-png/kresh-d0eb18662fb8.png",
+      "sourceSha256": "64ceef3c633d5385bff5fdfd90eeadaa868707e6f791a09dff2fa95627aead82",
+      "sha256": "d0eb18662fb8b78c00633a2798689904fe72574d93a1d4f06fa7967e50077444",
+      "bytes": 9446
+    },
+    "img/art/bosses/lady-anacondra.webp": {
+      "file": "img/art/bosses-mini-png/lady-anacondra-626361fa916b.png",
+      "sourceSha256": "ac84841900af51524862380973b095176fefb282b3be0b7a0f54b7b52a9fd0d6",
+      "sha256": "626361fa916bdb15a2fc9716d3e67b3e9ee201b8368bb44297552f017fc0ba20",
+      "bytes": 8446
+    },
+    "img/art/bosses/lady-illucia-barov.webp": {
+      "file": "img/art/bosses-mini-png/lady-illucia-barov-e22fcb9069ad.png",
+      "sourceSha256": "6570b9ab29bb6a1ee6dfeb7b65c00dfa3fa53cd035bbe8a79fbece4920f5a70f",
+      "sha256": "e22fcb9069adf45ad409d0386c544c144fdd8382cc6388e27dea12a04e89f227",
+      "bytes": 8402
+    },
+    "img/art/bosses/lady-sarevess.webp": {
+      "file": "img/art/bosses-mini-png/lady-sarevess-9902917c6956.png",
+      "sourceSha256": "814c5b6a43ba06fbb7ce7b5c3e0114ddc321066ee169f1853f4ff0493f7b62b8",
+      "sha256": "9902917c69566f1c6d9e02f94fe697b2bf02e1ac23293cbe130c9929fec51093",
+      "bytes": 9070
+    },
+    "img/art/bosses/landslide.webp": {
+      "file": "img/art/bosses-mini-png/landslide-f98c812a1c0b.png",
+      "sourceSha256": "0b4725cd62077754e5d52047a8498f3e981a17f499fce93c91b0d17c4424be28",
+      "sha256": "f98c812a1c0b2a1b9a506cc3e3d976b7fcc0a41a9ae4600f62fc3299d4194716",
+      "bytes": 10237
+    },
+    "img/art/bosses/lethtendris.webp": {
+      "file": "img/art/bosses-mini-png/lethtendris-509e8a199b43.png",
+      "sourceSha256": "abc33816236eabc6fd044a804bb6f9be1fc187564e1eaceb5b594e97f3c960d7",
+      "sha256": "509e8a199b43ad0bd675ebe522821c9092ee629a638eedba7df6ef475a9cb187",
+      "bytes": 7712
+    },
+    "img/art/bosses/lord-alexei-barov.webp": {
+      "file": "img/art/bosses-mini-png/lord-alexei-barov-24c2123d1e39.png",
+      "sourceSha256": "6d491a9c6db802177693a09e6a1eddb483c6b2f087e306915b0487130102757b",
+      "sha256": "24c2123d1e39854082cc71e25577efa33f1f70c9964592c0c9895798b94f9f9f",
+      "bytes": 9890
+    },
+    "img/art/bosses/lord-cobrahn.webp": {
+      "file": "img/art/bosses-mini-png/lord-cobrahn-8a80047449df.png",
+      "sourceSha256": "16525887f4d46b7520d851f5d9438a81396ef08582b3cd24a6b863e8dffb5638",
+      "sha256": "8a80047449df0164d70cdfb31ffe0c65f03338127ee3e9def865f437553c17b1",
+      "bytes": 9615
+    },
+    "img/art/bosses/lord-incendius.webp": {
+      "file": "img/art/bosses-mini-png/lord-incendius-33ac8027bafb.png",
+      "sourceSha256": "b6bf07dd8403dee35eb13449b5b93529078b30ed174a11e1e4802ec4910dcadf",
+      "sha256": "33ac8027bafbe2362bfe1a44ac8643cdc0aa28274739b2fcf23e8204244d28a8",
+      "bytes": 9617
+    },
+    "img/art/bosses/lord-pythas.webp": {
+      "file": "img/art/bosses-mini-png/lord-pythas-a274d37d972c.png",
+      "sourceSha256": "ad4e6c5b87a204e36006eaecf1d2e27c0144e7b0bbaf8ed03451ad4f557759ba",
+      "sha256": "a274d37d972c2ac9822161db5203b99199445868cf00b9630250cdf8b32aca2e",
+      "bytes": 8425
+    },
+    "img/art/bosses/lord-roccor.webp": {
+      "file": "img/art/bosses-mini-png/lord-roccor-62268233065d.png",
+      "sourceSha256": "877b3ce3095a6762ad9bfc36e81c706547c25b9fd3ad84f35ed5c5b07e197870",
+      "sha256": "62268233065d30d00ea39c93f064a23aa81b51b0623e2c115e4e5a9d37068575",
+      "bytes": 8395
+    },
+    "img/art/bosses/lord-serpentis.webp": {
+      "file": "img/art/bosses-mini-png/lord-serpentis-aecbb3c9efa5.png",
+      "sourceSha256": "93439767f67d384a05f67306d2cd5db7d380bd99deb7fbc43e20159c89956693",
+      "sha256": "aecbb3c9efa535be6eddd5c12f7ed3ea1d9a9bef78325b775a8f9ede7518ebfd",
+      "bytes": 10223
+    },
+    "img/art/bosses/lord-vyletongue.webp": {
+      "file": "img/art/bosses-mini-png/lord-vyletongue-2f3bdc1c9fec.png",
+      "sourceSha256": "3c95c500649bec23d1c9842d1abde708610173d5c1418a8394cb7eacdac50cae",
+      "sha256": "2f3bdc1c9fecbce9b726975e7b3e83672fe266912dd7206e24d594672348e0a9",
+      "bytes": 7492
+    },
+    "img/art/bosses/lorekeeper-polkelt.webp": {
+      "file": "img/art/bosses-mini-png/lorekeeper-polkelt-38fe9b2fdfce.png",
+      "sourceSha256": "1ffa9bd9de10493e2bf2598cdbaa85609a01a3b4d55b5e6750e68d0037aa6701",
+      "sha256": "38fe9b2fdfce743e5d55a46e679de52b845156c3dcc636a7f2dbfd220338f104",
+      "bytes": 9453
+    },
+    "img/art/bosses/lorgus-jett.webp": {
+      "file": "img/art/bosses-mini-png/lorgus-jett-0f23cb2fa989.png",
+      "sourceSha256": "8237f0150b43ecf03a8466577caf960e293d5dac5f79a0036e6aa54e4244920c",
+      "sha256": "0f23cb2fa989a4c2883557a1591cfb5dc1f2a6527cbc4ccd6bc13e05e2300685",
+      "bytes": 8609
+    },
+    "img/art/bosses/magister-kalendris.webp": {
+      "file": "img/art/bosses-mini-png/magister-kalendris-224bca652a66.png",
+      "sourceSha256": "d58acf97be4feae2ce31f84610e893bef48d24904b580483c786f79eae4c14b9",
+      "sha256": "224bca652a66575b3627affeebe02a49557da21025efa434e523ae8394ecefc2",
+      "bytes": 8075
+    },
+    "img/art/bosses/magistrate-barthilas.webp": {
+      "file": "img/art/bosses-mini-png/magistrate-barthilas-83235ef34417.png",
+      "sourceSha256": "f27eec30fb462a960b28baee4a9c82b0b93b85a1ae9da35d72471758e3f22293",
+      "sha256": "83235ef34417a481185f847a101a315a224908f5a326ac497cd860f6bf2a01b6",
+      "bytes": 7953
+    },
+    "img/art/bosses/magmus.webp": {
+      "file": "img/art/bosses-mini-png/magmus-d13a29ba2c98.png",
+      "sourceSha256": "31434304d2e0743c0462d0dd8e401a419a32f32bdd553fbab6d12395dedcb46a",
+      "sha256": "d13a29ba2c989cc3c42aed8feb4f25242354960ffc0bf3f8c2fd8d0141d57bc3",
+      "bytes": 11257
+    },
+    "img/art/bosses/maleki-the-pallid.webp": {
+      "file": "img/art/bosses-mini-png/maleki-the-pallid-b0b535ad3765.png",
+      "sourceSha256": "020628726386a0c72f31d99cba5df863cb521c5a4fe6ca5ae0b721f5770bf6fd",
+      "sha256": "b0b535ad37653334e465d19bb5890e5f3f727b69d7fe9bf0b6d06c02379211bb",
+      "bytes": 9818
+    },
+    "img/art/bosses/marduk-blackpool.webp": {
+      "file": "img/art/bosses-mini-png/marduk-blackpool-0cc0e99fdefa.png",
+      "sourceSha256": "44a21df40a8ea9f9908bccacf4f85accdf8bd8226deadf5266d838084425aac6",
+      "sha256": "0cc0e99fdefa8639e54e7fde67bb7d1dc91dcce381c9340a448c6f90957eaa63",
+      "bytes": 9278
+    },
+    "img/art/bosses/mekgineer-thermaplugg.webp": {
+      "file": "img/art/bosses-mini-png/mekgineer-thermaplugg-fdd31784b633.png",
+      "sourceSha256": "27d7361e102829b31bbc40ebbec46f4ce6f6527f03e5ac20c8dd809441d8354d",
+      "sha256": "fdd31784b6332d1da9f595dcbec404df2f3e7282698701116167bbf975629232",
+      "bytes": 8760
+    },
+    "img/art/bosses/mordresh-fire-eye.webp": {
+      "file": "img/art/bosses-mini-png/mordresh-fire-eye-471d21e6e0cc.png",
+      "sourceSha256": "35aeedb65bd7d937d25c23d5509546833ec6695e210af3566dcd7d31cccc0b29",
+      "sha256": "471d21e6e0cc69229f47fbf9af13b1c46dd302f462a2dbed7936beaffe92f788",
+      "bytes": 8757
+    },
+    "img/art/bosses/mother-smolderweb.webp": {
+      "file": "img/art/bosses-mini-png/mother-smolderweb-2693e64a40e6.png",
+      "sourceSha256": "2b7475f75d9410539747e3839719c8688f07ba657272b7f69b6756db24ea03fb",
+      "sha256": "2693e64a40e61d739def6015ce187faf162abc31c2a5bd3c08bdfe8f81c452b7",
+      "bytes": 7186
+    },
+    "img/art/bosses/mr-smite.webp": {
+      "file": "img/art/bosses-mini-png/mr-smite-6a7c6df237e9.png",
+      "sourceSha256": "4cdea4c2a97d7fb76309203df6cbe96ff6713b2dd8b9f877944170500b0e0d85",
+      "sha256": "6a7c6df237e974714f2953216b70dbb3584ab7fe22d683b641776665f662cbd6",
+      "bytes": 8591
+    },
+    "img/art/bosses/mutanus-the-devourer.webp": {
+      "file": "img/art/bosses-mini-png/mutanus-the-devourer-4315f6ce0241.png",
+      "sourceSha256": "86a084b204817a6a2b20ddb1d1418ab5f540b270c151575370f207c9aea75dbe",
+      "sha256": "4315f6ce02413d649c3a2620179f7346b495427c919e0cb54fd67477fdd6613c",
+      "bytes": 9510
+    },
+    "img/art/bosses/nekrum-gutchewer.webp": {
+      "file": "img/art/bosses-mini-png/nekrum-gutchewer-27da99f7b3b8.png",
+      "sourceSha256": "2793fec4cf7c8ea7eeb0fb1905e8e6b3e9c12665b578e3f4c9a5bd403b3717a4",
+      "sha256": "27da99f7b3b85799d433218436f7c822007924c045a8f5d8b4ae4847523fc87a",
+      "bytes": 9920
+    },
+    "img/art/bosses/nerub-enkan.webp": {
+      "file": "img/art/bosses-mini-png/nerub-enkan-18585670aec4.png",
+      "sourceSha256": "c95ef716430e786e59148afbd990459de9b025dc160e764327feebee77e63d42",
+      "sha256": "18585670aec461012b49781b211e45aa0d04163c83be2166492ee31468cc96cb",
+      "bytes": 9555
+    },
+    "img/art/bosses/noxxion.webp": {
+      "file": "img/art/bosses-mini-png/noxxion-2e5dc9ca2015.png",
+      "sourceSha256": "c7c4aeb42b9fc3d9900d08cc48c6942aa6066ba812ff27c49197f95009fb8fba",
+      "sha256": "2e5dc9ca2015e668ad85af3fa59a15a618fad0db881d27130dc3c057fba11b3a",
+      "bytes": 10215
+    },
+    "img/art/bosses/obsidian-sentinel.webp": {
+      "file": "img/art/bosses-mini-png/obsidian-sentinel-6047ac08a8be.png",
+      "sourceSha256": "8f024f028b17c6e59e38ccdb404d52a72253cdb62a3bc824ee937f244bf6cd01",
+      "sha256": "6047ac08a8bea2f71de2a64080848bf329281c2916bf2a33fb08ed9de6bd9e1d",
+      "bytes": 9178
+    },
+    "img/art/bosses/oggleflint.webp": {
+      "file": "img/art/bosses-mini-png/oggleflint-f9170ed501b4.png",
+      "sourceSha256": "018b02a8d4ac7271c651d4281d085f3f46ea7aaae8d766adc9ac523f367bd131",
+      "sha256": "f9170ed501b4ed56876c729fb3c103ad01b73d50b4a82e9656856a0fdada878f",
+      "bytes": 8247
+    },
+    "img/art/bosses/olaf.webp": {
+      "file": "img/art/bosses-mini-png/olaf-4cea9e8b9366.png",
+      "sourceSha256": "d1a9c7af6b7d7ce7e67b97cc8224f879db3a16a4e79573b9c3e8597ae3427dfc",
+      "sha256": "4cea9e8b9366964598644a6fbc8c264fae1cc5ee1cb944a30b2e40ead7eca6c8",
+      "bytes": 8717
+    },
+    "img/art/bosses/overlord-ramtusk.webp": {
+      "file": "img/art/bosses-mini-png/overlord-ramtusk-4cf5e7951f05.png",
+      "sourceSha256": "3f4b888c688fcf8a61b9e3eb55e2ba32aa1a4db8c5eead90f109064a79eba926",
+      "sha256": "4cf5e7951f059f2f10d68ae28aa74537762747ce02ef7aacca889b970436fde1",
+      "bytes": 11072
+    },
+    "img/art/bosses/overlord-wyrmthalak.webp": {
+      "file": "img/art/bosses-mini-png/overlord-wyrmthalak-96ba23cd482f.png",
+      "sourceSha256": "866303f658d3591729d88158ade65453f46ea51dad2641d249e7f76b55dc4b5a",
+      "sha256": "96ba23cd482f757c1ffb4cae734ad55c3b45ac97b4467e6c90b406604514457e",
+      "bytes": 11350
+    },
+    "img/art/bosses/phalanx.webp": {
+      "file": "img/art/bosses-mini-png/phalanx-cb1c41b73d14.png",
+      "sourceSha256": "40c12bdaab11a095bde4a90be0a7ae44ca9cb667b90936ec3419f94048e92e7f",
+      "sha256": "cb1c41b73d1480a414052cc68b54c9b62959feea7c8f1d0160df40d9b1f41c66",
+      "bytes": 9818
+    },
+    "img/art/bosses/postmaster-malown.webp": {
+      "file": "img/art/bosses-mini-png/postmaster-malown-3f127878f031.png",
+      "sourceSha256": "dbd881e4973476b9d8c431a780e0b575a05b8ba5de8ee000de024bcb85928c8c",
+      "sha256": "3f127878f031dca74d6a01d9d22dae17217dc14103934c8f9c3a93f43c426700",
+      "bytes": 7493
+    },
+    "img/art/bosses/prince-tortheldrin.webp": {
+      "file": "img/art/bosses-mini-png/prince-tortheldrin-d306f19610e4.png",
+      "sourceSha256": "0fef6342c31c793b456b0d7688609d14eeb64448c3076cbec242c82fe5ffcebc",
+      "sha256": "d306f19610e480ca0e2b638f71098ac18ad77a074b9b25343ab3939ba139ceb8",
+      "bytes": 9836
+    },
+    "img/art/bosses/princess-moira-bronzebeard.webp": {
+      "file": "img/art/bosses-mini-png/princess-moira-bronzebeard-ba1d63ee24c4.png",
+      "sourceSha256": "ab611198409e534440e449670299d28a6a7babb89525c2f5ad96c881e9a81412",
+      "sha256": "ba1d63ee24c48eb95efdb5f20f7c5381d4f0f8d6680a8ba5de1df580517d2764",
+      "bytes": 7610
+    },
+    "img/art/bosses/princess-theradras.webp": {
+      "file": "img/art/bosses-mini-png/princess-theradras-3e7fb93b6c0f.png",
+      "sourceSha256": "d5622b7ae655fa1f013e821202cc4ae3131ab3f249859506ca4f0e5464d30904",
+      "sha256": "3e7fb93b6c0f25ed433810f568d6d6d659515783b742e0ea338debda66161ae7",
+      "bytes": 10982
+    },
+    "img/art/bosses/pyroguard-emberseer.webp": {
+      "file": "img/art/bosses-mini-png/pyroguard-emberseer-18224c3cd3fa.png",
+      "sourceSha256": "a0e7eca32e7252a37d857a997aba6422d6f9b6e7471a57e5719ffa8ccd1ea69e",
+      "sha256": "18224c3cd3fac087631cb714ba6a9906e47e9fdcb09eae34a5bb22447f9e5821",
+      "bytes": 9588
+    },
+    "img/art/bosses/pyromancer-loregrain.webp": {
+      "file": "img/art/bosses-mini-png/pyromancer-loregrain-11933aa14309.png",
+      "sourceSha256": "c02ac04198596ebbefb8c3edb892c06cb598b5d6fad0230568bf18526beab336",
+      "sha256": "11933aa1430952d1635c017537946e31fc2ee4e34d8292cd3f17e0305ac0768b",
+      "bytes": 9811
+    },
+    "img/art/bosses/quartermaster-zigris.webp": {
+      "file": "img/art/bosses-mini-png/quartermaster-zigris-e7d997eb3ec6.png",
+      "sourceSha256": "1918c628b65fa612f9c5ae6d39881f610e890baec1cf4fa02f7363c8832a80e7",
+      "sha256": "e7d997eb3ec67081506352e9c3dff44d5d7cb1ec8c5bb359c5245865efbe73ac",
+      "bytes": 8893
+    },
+    "img/art/bosses/ramstein-the-gorger.webp": {
+      "file": "img/art/bosses-mini-png/ramstein-the-gorger-1121bd6b501d.png",
+      "sourceSha256": "9df29d55d7dc7ae8fa3a4de4b5778bd357290424058902fe76297162f4f83f27",
+      "sha256": "1121bd6b501d4bf5e4f8df7927bf3bbef56a094969d2e1435b6c0498c7999935",
+      "bytes": 8881
+    },
+    "img/art/bosses/ras-frostwhisperer.webp": {
+      "file": "img/art/bosses-mini-png/ras-frostwhisperer-ec8d4b3fdde9.png",
+      "sourceSha256": "b1a673174edafd2cfb56bde988aeeadfe9781e3a6e6ca8c4a88b0b3ae0966962",
+      "sha256": "ec8d4b3fdde96826d4e21f31fd982a2934a98b7ec5492f05e99be16245b516a2",
+      "bytes": 11498
+    },
+    "img/art/bosses/rattlegore.webp": {
+      "file": "img/art/bosses-mini-png/rattlegore-2bcb1dde6641.png",
+      "sourceSha256": "58ab151cbf21b425d3ffcafaf954273bea4c545a5415ee111afd9ff1b6d746d3",
+      "sha256": "2bcb1dde6641b4408dc4782ebfa83c710208124362a109367bd595ca21be8a92",
+      "bytes": 9661
+    },
+    "img/art/bosses/razorlash.webp": {
+      "file": "img/art/bosses-mini-png/razorlash-fd2a394695fb.png",
+      "sourceSha256": "f8f729b90f59d8935358374a7a7a290e002f10b0010bc074f021831ab8dc4574",
+      "sha256": "fd2a394695fb4a9950b1b7ad6c3a1259d052adba50f5507cdb7571242bb6644f",
+      "bytes": 8544
+    },
+    "img/art/bosses/revelosh.webp": {
+      "file": "img/art/bosses-mini-png/revelosh-99614b14ce45.png",
+      "sourceSha256": "4b231141c4583a4d2be8b0c5063aee999fd12a1fe60540a6921e5b4452f27e1c",
+      "sha256": "99614b14ce4520818e6502092e453bbefb6ba79221da762da7aa97ddfa28500d",
+      "bytes": 9366
+    },
+    "img/art/bosses/rhahk-zor.webp": {
+      "file": "img/art/bosses-mini-png/rhahk-zor-be01f22a13bd.png",
+      "sourceSha256": "b0447ebdcb2a527f4af8373e99035ec6ec38345cbe08e5169953b2e0f7e35770",
+      "sha256": "be01f22a13bd25d912d853284cd4501633b54e0dbae7a7d083ea7f69958cccba",
+      "bytes": 8371
+    },
+    "img/art/bosses/roogug.webp": {
+      "file": "img/art/bosses-mini-png/roogug-06027b59e680.png",
+      "sourceSha256": "36c3d6c8bec37f2cb8b4448cdc12ea57f53854464a9ab883d3c33a27961773c3",
+      "sha256": "06027b59e680d8759dd76199dc5258bf86becbb00b36e145a2f7e1b8e1698820",
+      "bytes": 10644
+    },
+    "img/art/bosses/rotgrip.webp": {
+      "file": "img/art/bosses-mini-png/rotgrip-66d8d0f3d463.png",
+      "sourceSha256": "9be3c8bf186c556ddc616435308d74ab1ca9caf2ca2501759c5258bd1112eb1c",
+      "sha256": "66d8d0f3d46327002cab021f70cdd1375076a319a50a3a6dc5b90fc935072de7",
+      "bytes": 7767
+    },
+    "img/art/bosses/scarlet-commander-mograine.webp": {
+      "file": "img/art/bosses-mini-png/scarlet-commander-mograine-844cbaa5bf5e.png",
+      "sourceSha256": "b1a18857bc83ffcda610268f4714d278baeb4bac09da177312091f9f658a2ac8",
+      "sha256": "844cbaa5bf5e8896f0ad5217e8198f7d9fb6dccbee1f88a6128b9a3da6045af1",
+      "bytes": 9493
+    },
+    "img/art/bosses/shade-of-eranikus.webp": {
+      "file": "img/art/bosses-mini-png/shade-of-eranikus-f64685408bc1.png",
+      "sourceSha256": "920d4aa8d3d46cf8515a2af836d61279d7aab73223a66ca50729d4dec01ee91e",
+      "sha256": "f64685408bc16e233b0e9ccf17936eeb53a30034cbd7c0b736c7368710b904d7",
+      "bytes": 9963
+    },
+    "img/art/bosses/shadow-hunter-vosh-gajin.webp": {
+      "file": "img/art/bosses-mini-png/shadow-hunter-vosh-gajin-f4f896d8bc81.png",
+      "sourceSha256": "501054bf34c71c4ba4efce22c655ecb7f7e44e8d28aae1b220439202f2c17f38",
+      "sha256": "f4f896d8bc81074bb4f63d1797feb01b857ad656d2172922c5b75fcd4247fde8",
+      "bytes": 8381
+    },
+    "img/art/bosses/skum.webp": {
+      "file": "img/art/bosses-mini-png/skum-208e951112c0.png",
+      "sourceSha256": "f072c4e129d2e45a8d73d9c40155c670c89cb4aab5b5e2940c95864045180e76",
+      "sha256": "208e951112c005710500ce73a27ac81ed555be4ff987105de0778e9fc0ac10f3",
+      "bytes": 10278
+    },
+    "img/art/bosses/sneed.webp": {
+      "file": "img/art/bosses-mini-png/sneed-9003ee620f02.png",
+      "sourceSha256": "9071f70f05d7afa8d22c1290c5c0ef10b227a595e94adb9d1bfbbb5c080f43f9",
+      "sha256": "9003ee620f025ec1282127ec4fe6b7ac984d813b68a1e8ca40f1086a3a0bdb6e",
+      "bytes": 8930
+    },
+    "img/art/bosses/stomper-kreeg.webp": {
+      "file": "img/art/bosses-mini-png/stomper-kreeg-96e541b3b774.png",
+      "sourceSha256": "35364fa22fa4b6bbe93126c6e235c48cf91244a030bf424e725add6c9faad08e",
+      "sha256": "96e541b3b774ab588d9b7b84c53441f0feddf1daeb956b80695f0ce79152663e",
+      "bytes": 7549
+    },
+    "img/art/bosses/taragaman-the-hungerer.webp": {
+      "file": "img/art/bosses-mini-png/taragaman-the-hungerer-01e66c40b401.png",
+      "sourceSha256": "64e76739ee76163ebb26acd381c5da99242919e7a57bb17c1c5c2c87f1e07f48",
+      "sha256": "01e66c40b401a60408a1f6c5d1d3cc6de3420ef00affc26fba3c5a5d1cc92721",
+      "bytes": 9002
+    },
+    "img/art/bosses/tendris-warpwood.webp": {
+      "file": "img/art/bosses-mini-png/tendris-warpwood-aa9d7d1b256e.png",
+      "sourceSha256": "68c42f96904e5550a7891de07a4627b53ef2bce1463ef8178e8ef5bd32595004",
+      "sha256": "aa9d7d1b256e69f22df884923bc87fd33c5855abf1602216e842c0fc8c793624",
+      "bytes": 9336
+    },
+    "img/art/bosses/the-beast.webp": {
+      "file": "img/art/bosses-mini-png/the-beast-f555d1f3024e.png",
+      "sourceSha256": "04e99e79569b86f884303b13abde3ad206772bfc92227cd94f16b75cdcf0e74b",
+      "sha256": "f555d1f3024e35c42161c076ffeda8b42d38639c3db81a5c63c354540f48a9a2",
+      "bytes": 10153
+    },
+    "img/art/bosses/the-ravenian.webp": {
+      "file": "img/art/bosses-mini-png/the-ravenian-e00c0f30b738.png",
+      "sourceSha256": "16b249ebfd218a1d71ec16d32beb713e5d33ca338e03b3b0bfd738edf20da31d",
+      "sha256": "e00c0f30b738c45b17cc1f18382061409c7cd3bb9b5f061c4e3ac6ac4290cc0f",
+      "bytes": 9116
+    },
+    "img/art/bosses/the-unforgiven.webp": {
+      "file": "img/art/bosses-mini-png/the-unforgiven-1008cd2c8800.png",
+      "sourceSha256": "3253eac00622e2260e775c8356bb4ad7d30674deb77fa42b241b0291c6251ce3",
+      "sha256": "1008cd2c880029fc8218d66c13d89f29c77b6d54844895494a74a330510e816b",
+      "bytes": 7820
+    },
+    "img/art/bosses/theka-the-martyr.webp": {
+      "file": "img/art/bosses-mini-png/theka-the-martyr-a68b4ac6d07b.png",
+      "sourceSha256": "cc388d5c48baea3e4e8ec4e6c7ccdb8adf26abec64e8783d508fb179d45f1c81",
+      "sha256": "a68b4ac6d07b75d5217bab23e6abc72f749968e2836241a2ce3b677bbc5230a9",
+      "bytes": 9707
+    },
+    "img/art/bosses/timmy-the-cruel.webp": {
+      "file": "img/art/bosses-mini-png/timmy-the-cruel-023acce326f7.png",
+      "sourceSha256": "92ec93d8696173cd0eafdd2b2b0db942320b6793114152466be1690ee9c430fa",
+      "sha256": "023acce326f70718223dd2a19136db13c69e638bc612b314c0813be1abc7764e",
+      "bytes": 9931
+    },
+    "img/art/bosses/tinkerer-gizlock.webp": {
+      "file": "img/art/bosses-mini-png/tinkerer-gizlock-ef99e7c85d49.png",
+      "sourceSha256": "3af4eca47bb9686ac7977e27cf8d7efc80f86fd8d09e78a449df3adaccc9482f",
+      "sha256": "ef99e7c85d49284334355084dad428590e9d652ccbae6bf40f805f49c8edf74e",
+      "bytes": 8275
+    },
+    "img/art/bosses/tuten-kash.webp": {
+      "file": "img/art/bosses-mini-png/tuten-kash-88c7bc2c8967.png",
+      "sourceSha256": "d17812dd77ba60c05a73a1e4aa7043d900b9b5b3faf2d95b3d8241b900d35422",
+      "sha256": "88c7bc2c896734319cb16478a416831dc23e4be1f5d87dad0aae723f3945431a",
+      "bytes": 9986
+    },
+    "img/art/bosses/urok-doomhowl.webp": {
+      "file": "img/art/bosses-mini-png/urok-doomhowl-a3becd00971f.png",
+      "sourceSha256": "b7277dc73d7b4badf069a56809b5a2170a4dd3be3a8f5a0b7d166f6c343663f3",
+      "sha256": "a3becd00971f1f539cbf2c2af1a0521a27577bca9f7ad2e9abd4b345a35a692b",
+      "bytes": 8479
+    },
+    "img/art/bosses/vectus.webp": {
+      "file": "img/art/bosses-mini-png/vectus-9a20e6056baa.png",
+      "sourceSha256": "ae9413a67e7a6daf1ad51c4855f18859e35ac7b620be59295964cb97047df57e",
+      "sha256": "9a20e6056baae12b22b0f06c3157ba842f3e05a7dba31db5b8f988e421ffb3ab",
+      "bytes": 10547
+    },
+    "img/art/bosses/verdan-the-everliving.webp": {
+      "file": "img/art/bosses-mini-png/verdan-the-everliving-c5962d3a5556.png",
+      "sourceSha256": "7336900f8f9124c9834150ef312bd037b948f8bea3c49a5a029cb413a9499cdb",
+      "sha256": "c5962d3a55564971d91fea919f266e2e500db4d95e16a7983422ce26293fec81",
+      "bytes": 8512
+    },
+    "img/art/bosses/viscous-fallout.webp": {
+      "file": "img/art/bosses-mini-png/viscous-fallout-1aa13552593e.png",
+      "sourceSha256": "bbfbc7744c6f14625b035de6ca9652f365fc7fa2c4e3dd0887ae74e31570b92f",
+      "sha256": "1aa13552593e0dc47631b74682ebe3b7f15165a78bce61e07831daab82e0d515",
+      "bytes": 10188
+    },
+    "img/art/bosses/war-master-voone.webp": {
+      "file": "img/art/bosses-mini-png/war-master-voone-99948c9d75fa.png",
+      "sourceSha256": "955c452a0ddd0a65c4cae55bafc71fe56d8349ad7fd0b4330ee7132751f2ddd1",
+      "sha256": "99948c9d75fa910b617ff99df8bc4fa8a54ec918d172a71f66fd1d3318dfc9e6",
+      "bytes": 9797
+    },
+    "img/art/bosses/warchief-rend-blackhand.webp": {
+      "file": "img/art/bosses-mini-png/warchief-rend-blackhand-0a7e1628e599.png",
+      "sourceSha256": "e121e4bb1cc710924e4cd8a362144253b0f49c472e7d05b62d5090dbe4e3deb4",
+      "sha256": "0a7e1628e59934e3832f9536bba6abe71fbefbf99e343a8e2ec80c5bff97b7a0",
+      "bytes": 9802
+    },
+    "img/art/bosses/warder-stilgiss.webp": {
+      "file": "img/art/bosses-mini-png/warder-stilgiss-9279901be12d.png",
+      "sourceSha256": "81b5c76ac9acb03792b5df0ec813fb17ea337b2287619883ab3863653f285722",
+      "sha256": "9279901be12dfb797f832451689ec846e53608c833421ab989ce0f51dd64a19a",
+      "bytes": 9653
+    },
+    "img/art/bosses/witch-doctor-zum-rah.webp": {
+      "file": "img/art/bosses-mini-png/witch-doctor-zum-rah-e5b199d4a413.png",
+      "sourceSha256": "f63c2939760a734f775475b0f358a37f38f96990e6a05d505244b6ce66c8b115",
+      "sha256": "e5b199d4a4131979bc03f24d1a1283cd14fce5cbcd0df65971fb449e23d3c4f7",
+      "bytes": 9353
+    },
+    "img/art/bosses/zevrim-thornhoof.webp": {
+      "file": "img/art/bosses-mini-png/zevrim-thornhoof-0a7f2894e883.png",
+      "sourceSha256": "3b353a16511ad9059a9edcbadadeeb69d6ea107d96918d5b89f24c3119fd26c7",
+      "sha256": "0a7f2894e8837b29bffdbf13481e1b437c29cb546c7de44e4b28b892b9cd0f0c",
+      "bytes": 7732
+    }
+  }
+}

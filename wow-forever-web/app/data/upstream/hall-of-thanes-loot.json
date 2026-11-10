@@ -1,0 +1,525 @@
+{
+  "dungeonId": "hall-of-thanes",
+  "sourceUrl": "https://hyjal.cc/dungeons/hall-of-thanes",
+  "checkedAt": "2026-11-09",
+  "itemCatalogue": {
+    "path": "app/data/items.json",
+    "url": "https://wowforever.wclbox.com/wupin/liebiao/1",
+    "checkedAt": "2026-11-05"
+  },
+  "bosses": [
+    {
+      "bossId": "faldrim-anvilmar",
+      "encounterId": 3493,
+      "encounterNameEn": "Faldrim Anvilmar",
+      "npcId": 261306,
+      "npcNameEn": "Faldrim Anvilmar",
+      "npcNameCn": "法德林·安威玛尔",
+      "npcNameCnAlt": "法尔德林·安威玛尔",
+      "provenance": [
+        {
+          "type": "fan_db",
+          "url": "https://wow.icednicco.online/forever/db/boss/3493",
+          "checkedAt": "2026-11-09"
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "270227",
+          "nameCn": "短暂强力项圈",
+          "nameEn": "Ephemeral Choker",
+          "quality": 3,
+          "iconKey": "inv_misc_necklacea8",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3493",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270227",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "271096",
+          "nameCn": "以太小精灵护腕",
+          "nameEn": "Aetherwisp Bracers",
+          "quality": 3,
+          "iconKey": "inv_bracer_11",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3493",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/271096",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "271097",
+          "nameCn": "幽灵怨灵披风",
+          "nameEn": "Spiritwraith Drape",
+          "quality": 3,
+          "iconKey": "inv_misc_cape_12",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3493",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/271097",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bossId": "infurnus",
+      "encounterId": 3495,
+      "encounterNameEn": "Infurnus",
+      "npcId": 261316,
+      "npcNameEn": "Magmatus",
+      "npcNameCn": "玛格玛图斯",
+      "npcNameCnAlt": "玛格马图斯",
+      "provenance": [
+        {
+          "type": "fan_db",
+          "url": "https://wow.icednicco.online/forever/db/boss/3495",
+          "checkedAt": "2026-11-09"
+        },
+        {
+          "type": "fan_db",
+          "url": "https://wowfwiki.com/wiki/Hall_of_Thanes",
+          "checkedAt": "2026-11-09"
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "270230",
+          "nameCn": "火种束带",
+          "nameEn": "Kindlegem Girdle",
+          "quality": 3,
+          "iconKey": "inv_belt_20",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3495",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270230",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "270231",
+          "nameCn": "焰拳护手",
+          "nameEn": "Flamefist Grips",
+          "quality": 3,
+          "iconKey": "inv_gauntlets_25",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3495",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270231",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "271095",
+          "nameCn": "阿兹加洛的獠牙",
+          "nameEn": "Fang of Magmatus",
+          "quality": 3,
+          "iconKey": "inv_misc_bone_06",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3495",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/271095",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bossId": "plunder",
+      "encounterId": 3494,
+      "encounterNameEn": "Plunder",
+      "npcId": 261311,
+      "npcNameEn": "Plunder",
+      "npcNameCn": "劫掠者",
+      "npcNameCnAlt": "普兰德",
+      "aliases": [
+        {
+          "bossId": "plunder-2",
+          "nameCn": "普兰德"
+        }
+      ],
+      "provenance": [
+        {
+          "type": "fan_db",
+          "url": "https://wow.icednicco.online/forever/db/boss/3494",
+          "checkedAt": "2026-11-09"
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "270228",
+          "nameCn": "魔像之心法杖",
+          "nameEn": "Golemheart Stave",
+          "quality": 3,
+          "iconKey": "inv_staff_18",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3494",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270228",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "270229",
+          "nameCn": "保护魔像之履",
+          "nameEn": "Treads of the Protector Golem",
+          "quality": 3,
+          "iconKey": "inv_boots_01",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3494",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270229",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "271098",
+          "nameCn": "魔像守卫护胸",
+          "nameEn": "Golemguard Chest",
+          "quality": 3,
+          "iconKey": "inv_chest_chain",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3494",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/271098",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bossId": "durgen-dirgehammer",
+      "encounterId": 3496,
+      "encounterNameEn": "Durgen Dirgehammer",
+      "npcId": 261319,
+      "npcNameEn": "Durgen Dirgehammer",
+      "npcNameCn": "杜根·挽锤",
+      "npcNameCnAlt": "杜尔根·挽歌锤",
+      "provenance": [
+        {
+          "type": "fan_db",
+          "url": "https://wow.icednicco.online/forever/db/boss/3496",
+          "checkedAt": "2026-11-09"
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "270256",
+          "nameCn": "杜根的月牙斧",
+          "nameEn": "Durgen's Crescent Axe",
+          "quality": 3,
+          "iconKey": "inv_axe_18",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3496",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270256",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "270260",
+          "nameCn": "恐狼护腿",
+          "nameEn": "Direhammer Leggings",
+          "quality": 3,
+          "iconKey": "inv_pants_06",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3496",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270260",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "270261",
+          "nameCn": "失宠领主长袍",
+          "nameEn": "Robes of the Disgraced Thane",
+          "quality": 3,
+          "iconKey": "inv_chest_cloth_09",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3496",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/wupin/270261",
+              "checkedAt": "2026-10-16"
+            }
+          ]
+        },
+        {
+          "itemId": "274286",
+          "nameCn": "杜根·挽锤的徽记",
+          "nameEn": "Durgen Dirgehammer's Head",
+          "quality": 1,
+          "iconKey": "inv_misc_head_dwarf_01",
+          "level": "L2",
+          "provenance": [
+            {
+              "type": "fan_db",
+              "url": "https://hyjal.cc/dungeons/hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wow.icednicco.online/forever/db/boss/3496",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowfdb.com/zones/the-hall-of-thanes/loot/",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes",
+              "checkedAt": "2026-11-09"
+            },
+            {
+              "type": "fan_db",
+              "url": "https://wowforever.wclbox.com/fuben/hall-of-thanes/",
+              "checkedAt": "2026-10-08"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

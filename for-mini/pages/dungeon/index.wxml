@@ -1,19 +1,18 @@
 <view class="wrap">
   <view wx:if="{{notFound}}" class="card empty">
-    <view>这座副本不在本站收录的名单里。</view>
-    <view class="muted">地址里的编号是 <text class="mono">{{id}}</text>。可能是分享时用的旧编号，也可能是还没收录的本。下面回到列表按名字找。</view>
+    <view>未找到该副本。</view>
     <view class="btn gold" bindtap="onBack">回到副本列表</view>
   </view>
 
   <block wx:elif="{{loaded}}">
     <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
-      这批数据的结构比当前小程序新，字段可能显示不全。请更新小程序后再看。
+      请更新小程序以查看最新资料。
     </view>
     <view wx:elif="{{needOnline}}" class="notice">
-      现在是打包快照：下面只有列表里就有的字段，<text class="bold">首领名单与掉落要联网才能取</text>。
+      联网查看首领名单和掉落。
     </view>
     <view wx:elif="{{offline}}" class="notice">
-      当前显示的是{{sourceText}}，可能不是最新核对结果。
+      当前离线，显示已保存的内容。
     </view>
 
     <view class="hero">
@@ -49,7 +48,7 @@
     </view>
 
     <view class="card">
-      <view class="card-title">这座本的关键信息</view>
+      <view class="card-title">副本信息</view>
       <view class="frow" wx:for="{{rows}}" wx:key="k">
         <view class="fkey">{{item.k}}</view>
         <view class="fval">
@@ -59,65 +58,76 @@
       </view>
     </view>
 
-    <view class="card">
-      <view class="card-title">首领名单</view>
+    <view class="card encounter-card">
+      <view class="section-kicker">副本档案</view>
+      <view class="card-title">首领与掉落</view>
+      <view wx:if="{{dropNotice}}" class="notice drop-notice">{{dropNotice}}</view>
       <view wx:if="{{bossEmpty}}" class="muted">{{bossEmpty}}</view>
-      <view wx:elif="{{needOnline}}" class="muted">首领名单要联网才能取（现在只有列表里就有的字段）。</view>
-      <view wx:elif="{{bosses.length === 0}}" class="muted">这座还没有首领记录。</view>
-      <view class="boss" wx:for="{{bosses}}" wx:key="index"
-            data-id="{{item.id}}" data-name="{{item.name}}" bindtap="onOpenBoss">
-        <view class="boss-face">
-          <icon-cell src="{{item.portraitUrl}}" size="md" label="{{item.name}}" />
+      <view wx:elif="{{needOnline && !bosses.length}}" class="muted">首领名单要联网才能取。</view>
+      <view wx:for="{{bosses}}" wx:key="id" class="encounter {{openBoss === item.id ? 'encounter-open' : ''}}">
+        <view class="encounter-toggle" hover-class="encounter-pressed" data-id="{{item.id}}" aria-role="button"
+                aria-expanded="{{openBoss === item.id}}" bindtap="onToggleBoss">
+          <view class="encounter-face">
+            <icon-cell wx:if="{{!item.other}}" src="{{item.portraitUrl}}" size="md" label="{{item.name}}" />
+            <text wx:else class="encounter-other">余</text>
+          </view>
+          <view class="encounter-main">
+            <view class="encounter-name">{{item.name}}<text wx:if="{{item.missing}}" class="todo">待核</text></view>
+            <view class="encounter-meta">
+              {{lootState === 'ready' ? (item.items.length ? item.items.length + ' 条掉落' : '掉落待实测') : '掉落暂未加载'}}
+            </view>
+          </view>
+          <view class="encounter-caret" aria-hidden="true"></view>
         </view>
-        <view class="boss-main">
-          <text class="boss-name">{{item.name}}</text>
-          <text wx:if="{{item.missing}}" class="todo">待核</text>
-          <text wx:if="{{item.drops}}" class="boss-go">看它掉什么 ›</text>
-          <text wx:else class="boss-go boss-go--none">收录的掉落还没记录 ›</text>
+        <view wx:if="{{openBoss === item.id}}" class="encounter-loot">
+          <view wx:if="{{lootState !== 'ready'}}" class="loot-empty">掉落暂未取到，联网后下拉刷新。</view>
+          <view wx:elif="{{!item.items.length}}" class="loot-empty">这位首领的掉落待实测。</view>
+          <block wx:for="{{item.items}}" wx:for-item="row" wx:key="key">
+            <view class="loot-entry {{highlightDrop && row.itemId === highlightDrop ? 'loot-hit' : ''}}">
+              <view class="loot-toggle" hover-class="encounter-pressed" bindtap="onToggleItem" aria-role="button"
+                      aria-expanded="{{openItem === row.key}}" data-key="{{row.key}}" data-item="{{row.itemId}}">
+                <view class="loot-icon"><icon-cell src="{{row.iconUrl}}" size="sm" label="{{row.name}}" /></view>
+                <view class="encounter-main">
+                  <view class="loot-name q-{{row.q}}">{{row.name}}<text wx:if="{{row.missing}}" class="todo">中文名待核</text></view>
+                  <view class="loot-meta">{{row.quality}}{{row.boss ? ' · ' + row.boss : ''}}</view>
+                </view>
+                <text class="loot-expand" aria-hidden="true">{{openItem === row.key ? '−' : '+'}}</text>
+              </view>
+              <view wx:if="{{openItem === row.key}}" class="loot-details">
+                <view wx:if="{{itemCard.type || itemCard.ilvl}}" class="loot-meta">
+                  <text>{{itemCard.type}}</text><text wx:if="{{itemCard.ilvl}}">{{itemCard.type ? ' · ' : ''}}装等 {{itemCard.ilvl}}</text>
+                </view>
+                <view wx:for="{{itemCard.st}}" wx:for-item="stat" wx:key="index" class="loot-stat">{{stat}}</view>
+                <view wx:if="{{!itemCard.st.length}}" class="loot-meta">属性待实测</view>
+                <view wx:if="{{itemCard.sell}}" class="loot-meta">商人卖价 {{itemCard.sell}}</view>
+                <view wx:if="{{row.itemId}}" class="loot-meta">物品编号 <text class="mono">{{row.itemId}}</text></view>
+              </view>
+            </view>
+          </block>
         </view>
       </view>
     </view>
 
-    <!-- 任务线（2026-11-08 第一批②）：与详情分片同一次请求带回来，不再发第二次。
-         行里只摆事实字段（任务名/等级/需求等级/经验），来源写在行尾；
-         2026-11-09 站主要求摆出"在哪接的"：接取 NPC 与地点，缺哪段不写哪段，
-         两条都缺就照实说没记录，不猜接取人；没记录就直说"还没有记录，不猜"，不拿别处的任务凑数。 -->
-    <view class="card">
+    <view class="card quest-card">
+      <view class="section-kicker">接取路线</view>
       <view class="card-title">这座本的任务</view>
-      <view wx:if="{{needOnline}}" class="muted">任务跟着详情分片走，联网后再看。</view>
+      <view wx:if="{{needOnline}}" class="muted">联网后可查看任务。</view>
       <block wx:else>
         <view wx:if="{{quest.summary}}" class="muted qsum">{{quest.summary}}</view>
         <view wx:if="{{quest.empty}}" class="muted">{{quest.empty}}</view>
         <view class="quest" wx:for="{{quest.rows}}" wx:key="index">
-          <view class="quest-main">
-            <text class="quest-name">{{item.name}}<text wx:if="{{item.missing}}" class="todo">译名待核</text></text>
-            <view wx:if="{{item.meta}}" class="quest-meta">{{item.meta}}</view>
-            <view class="quest-pick"><text class="pick-k">接取</text><text wx:if="{{item.pickup}}">{{item.pickup}}</text><text wx:else class="pick-none">接取人还没记录，进游戏确认</text></view>
-          </view>
-          <text wx:if="{{item.src}}" class="quest-src">{{item.src}}</text>
-        </view>
-        <view wx:if="{{quest.note}}" class="muted qnote">{{quest.note}}</view>
-      </block>
-    </view>
-
-    <view class="card">
-      <view class="card-title">掉落</view>
-      <view wx:if="{{dropNotice}}" class="notice drop-notice">{{dropNotice}}</view>
-      <view wx:if="{{needOnline}}" class="muted">掉落分片还没取到，联网后再看。</view>
-      <view wx:elif="{{!dropGroups.length}}" class="muted">这座还没有掉落记录。</view>
-      <block wx:else>
-        <view class="dgrp" wx:for="{{dropGroups}}" wx:key="boss">
-          <view class="dgrp-h">{{item.boss}}</view>
-          <view class="drop {{highlightDrop && row.itemId === highlightDrop ? 'drop-hit' : ''}}"
-                wx:for="{{item.rows}}" wx:for-item="row" wx:key="itemId"
-                data-item="{{row.itemId}}" data-dungeon="{{id}}" bindtap="onOpenItem">
-            <view class="drop-face">
-              <icon-cell src="{{row.iconUrl}}" size="sm" label="{{row.name}}" />
+          <text class="quest-name">{{item.name}}<text wx:if="{{item.missing}}" class="todo">译名待核</text></text>
+          <view wx:if="{{item.meta}}" class="quest-meta">{{item.meta}}</view>
+          <view class="quest-pick">
+            <text class="pick-k">{{item.startItem ? '物品开启' : '接取'}}</text>
+            <view class="pick-body">
+              <view class="{{item.pickupNpc || item.startItem ? 'pick-npc' : 'pick-none'}}">{{item.pickupNpc || item.startItem || '接取人待实测'}}</view>
+              <view wx:if="{{!item.startItem || item.pickupZone}}" class="pick-place">
+                <text>{{item.pickupZone || '地点待实测'}}</text>
+                <text wx:if="{{item.pickupCoords}}" class="pick-coords">{{item.pickupMap ? item.pickupMap + ' ' : ''}}<text class="mono">{{item.pickupCoords}}</text></text>
+                <text wx:elif="{{!item.startItem}}" class="pick-none">坐标待实测</text>
+              </view>
             </view>
-            <view class="drop-main">
-              <text class="drop-name q-{{row.q}}">{{row.name}}<text wx:if="{{row.missing}}" class="todo">中文名待核</text></text>
-            </view>
-            <view class="drop-side"><text class="chev">›</text></view>
           </view>
         </view>
       </block>

@@ -1,6 +1,7 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
+const joinCard = require('../../services/item-card')
 
 /* 装备详情（2026-10-23 站主："点击装备可以单独展示装备详情"）
    数据只取这座本的掉落片——那一件的名字、品质、图标、掉它的首领在同片的 drops 里，
@@ -113,7 +114,7 @@ Page({
           sell: (card && card.sell) || '',
           stText: card && card.stKey ? (ST_TEXT[card.stKey] || '') : '',
           boss: (row && row.bossCn) || '',
-          idNote: card ? '' : '这件的数值行还没入库，先只给名单里有的那些。'
+          idNote: card ? '' : '物品属性待实测。'
         })
         return null
       })
@@ -139,23 +140,6 @@ Page({
     }
   }
 })
-
-/* cards 是位置数组（列名在同片 cardCols 里），按列名取值而不是按序号写死：
-   生成器加一列不会把这一页读歪。 */
-function joinCard(loot, itemId) {
-  if (!loot || !Array.isArray(loot.cards)) return null
-  const cols = loot.cardCols || []
-  const row = loot.cards.filter((r) => String(r[cols.indexOf('itemId')]) === itemId)[0]
-  if (!row) return null
-  const at = (k) => (cols.indexOf(k) >= 0 ? row[cols.indexOf(k)] : null)
-  return {
-    type: at('type'),
-    ilvl: at('ilvl'),
-    st: at('st') || [],
-    sell: at('sell'),
-    stKey: at('stKey')
-  }
-}
 
 /* 属性行分两类：数值行（护甲/属性加成/速度）与那句话（装备效果、套装名与套装件数）。
    游戏里的悬浮框就是这个层次，玩家扫一眼能先看到数值。 */

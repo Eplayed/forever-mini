@@ -183,6 +183,14 @@ Object.keys(dqs.dungeons || {}).forEach((did) => {
       errs.push(`dungeon-quests ${did}/${y.nameCn}：留了另一个经验值却没写它来自哪份资料`);
     }
     if (!y.source) errs.push(`dungeon-quests ${did}/${y.nameCn}：没写这条是从哪份资料来的`);
+    if (y.pickupX != null || y.pickupY != null) {
+      const coords = [y.pickupX, y.pickupY];
+      if (!coords.every((n) => Number.isFinite(n) && n >= 0 && n <= 100)
+        || typeof y.pickupMap !== 'string' || !y.pickupMap.trim()
+        || !Array.isArray(y.pickupProvenance) || !y.pickupProvenance.some((p) => p && p.url && p.checkedAt)) {
+        errs.push(`dungeon-quests ${did}/${y.nameCn}：接取坐标必须成对且有对应地图、来源和核对日期`);
+      }
+    }
     // 红线：掉落与任务一律不许出现概率
     if (/%/.test(JSON.stringify(y))) errs.push(`dungeon-quests ${did}/${y.nameCn}：出现了百分号，本站不写概率`);
   });
@@ -460,6 +468,9 @@ fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
 // 本站观点类数据：问答与方法说明，防止被当成官方口径
 const ch = read('chooser.json');
 const classIds = new Set(cl.classes.map((c) => c.id));
+const { validateCensus, validateCensusChina } = require('./oss-release');
+errs.push(...validateCensus(read('population-census.json'), [...classIds]));
+errs.push(...validateCensusChina(read('population-census-cn.json'), [...classIds]));
 if (ch.meta && ch.meta.kind !== 'site-opinion') errs.push('chooser.json：必须标 kind=site-opinion，问答结论不是官方推荐');
 const qSeen = {};
 (ch.questions || []).forEach((q) => {

@@ -5,17 +5,6 @@ const features = require('../../services/features')
 const DUNGEON_INDEX = require('../../data/forever-dungeon-snapshot')
 const META_SNAPSHOT = require('../../data/forever-meta-snapshot')
 
-/* 首页（2026-10-22 站主重排；2026-11-03 站主照截图二次重排，四段从上到下）
-   1) 开服倒计时：占顶部约 1/4 屏，正式服上线那一刻这块整块消失，不留"0 天"。
-   2) 六个入口卡：BIS配装 / 角色起名 / 副本 / 掉落查询 / 宏命令 / 职业（专业另加，开关控）。
-      2026-11-03 起 BIS、起名不再是整宽卡，六卡统一进两列格、顺序照截图；
-      这两格用本地自绘图标（img/home/），其余四格底图、图标、文案一律没动。
-      中英速查仍按 2026-10-22 指令不给入口；宏命令按 2026-11-02 指令在格中。
-   3) 职业格：九个职业一排铺开，超出的换行走 grid，不许出现横向滚动条（站主原话）；
-      标题照截图改成「选择你的职业」。默认选中战士，点别的只是换下面的内容，不是跳页。
-   4) 选中职业的可选种族 + 种族特长：图标和文字都要有，缺特长（天裔两条都是空的）
-      就写"还没核到"，不猜、不拿别的种族凑。
-   玩家面规矩不变：这一屏不出现条数、覆盖率、缺口清单、核对日期、批次号。 */
 const FACTION = { alliance: '联盟', horde: '部落' }
 const DEFAULT_CLASS = 'warrior'
 
@@ -25,10 +14,9 @@ Page({
     offline: false,
     requiresUpdate: false,
     cd: null,
-    /* 页面背景与带底图卡的那几张底图：地址由 meta.uiArt + 批次拼出来，取不到就是空串（版式回落纯色）。
-       2026-11-03 布局重排后 BIS、起名两格改用本地自绘图标（img/home/），不再吃底图，键已摘掉 */
+    featuredIndex: 0,
     bgUrl: '',
-    cardBg: { dungeons: '', classes: '', loots: '', macros: '', professions: '' },
+    cardBg: { dungeons: '', loots: '', bis: '', classes: '', macros: '', professions: '', namer: '' },
     /* 首页入口卡受远程开关控制：关着就整块不渲染（不留空白格），开了不用发版就会出现 */
     openProfessions: false,
     openMacros: false,
@@ -131,21 +119,19 @@ Page({
       }
       this.batch = cls.batch || this.batch
       this.raceSource = (cls.data || {}).races || []
-      /* 底图走 meta 下发的那份清单（真源在 wow-forever-web/app/data/ui-art.json），页面不各自抄路径；
-         批次取 meta 的（拿不到再退到职业索引的），断网没有批次时 assetUrl 返回空 → 版式回落纯色 */
       const mBatch = meta.batch || cls.batch
       const ui = m.uiArt || {}
+      const cards = ui.cards || {}
       this.setData({
         bgUrl: oss.assetUrl(mBatch, ui.tabBg),
         cardBg: {
-          dungeons: oss.assetUrl(mBatch, (ui.cards || {}).dungeons),
-          classes: oss.assetUrl(mBatch, (ui.cards || {}).classes),
-          loots: oss.assetUrl(mBatch, (ui.cards || {}).loots),
-          /* 宏命令卡沿用清单里 guide 那张光树场景：ui-art.json 没为它单登记一张，
-             而改那份清单等于重发整个数据批次（它是 meta.uiArt 的下游），先复用不重发。
-             BIS/起名 2026-11-03 起不吃底图（换本地自绘图标），清单里 bis/namer 两个键留着不消费 */
-          macros: oss.assetUrl(mBatch, (ui.cards || {}).guide),
-          professions: oss.assetUrl(mBatch, (ui.cards || {}).professions)
+          dungeons: oss.assetUrl(mBatch, cards.dungeons),
+          loots: oss.assetUrl(mBatch, cards.loots),
+          bis: oss.assetUrl(mBatch, cards.bis),
+          classes: oss.assetUrl(mBatch, cards.classes),
+          macros: oss.assetUrl(mBatch, cards.guide),
+          professions: oss.assetUrl(mBatch, cards.professions),
+          namer: oss.assetUrl(mBatch, cards.namer)
         }
       })
       const classes = ((cls.data || {}).classes || []).map((c) => ({
@@ -163,7 +149,7 @@ Page({
         offline: meta.source !== 'live' || cls.source !== 'live',
         requiresUpdate: !!(meta.requiresUpdate || cls.requiresUpdate),
         classes: named,
-        classEmpty: named.length ? '' : '职业名单还没取到，联网后再选。'
+        classEmpty: named.length ? '' : '联网后可查看职业。'
       })
       this.pickClass(want)
       return null
@@ -204,7 +190,7 @@ Page({
       races: races,
       /* 一个种族都没匹配上＝矩阵里没这个组合或数据没对上，界面必须说一句，
          不能让玩家以为"这职业没人能选" */
-      raceNote: races.length ? '' : '这个职业的可选种族还没核到，不猜。'
+      raceNote: races.length ? '' : '暂无可选种族资料。'
     })
   },
 
@@ -231,16 +217,10 @@ Page({
     wx.navigateTo({ url: '/pages/professions/index' })
   },
 
-  /* 宏命令：站主 2026-11-02 指令顶替「指南」进第四格。
-     入口卡仍由远程开关 macros 控制——关着整块不渲染（不留空白格），线上拧开不用发版；
-     这一页与配装页一样没有打包快照，取不到就是取不到，不拿别的页回退。 */
   goMacros() {
     wx.navigateTo({ url: '/pages/macros/index' })
   },
 
-  /* 角色起名：2026-11-03 站主要求的醒目入口——整宽卡排在配装卡之后。
-     同样受远程开关 namer 控制：关着整块不渲染；这页的主词库没有主包快照，
-     离线时页面自己明说摇的是机子里那份小池。 */
   goNamer() {
     wx.navigateTo({ url: '/pages/namer/index' })
   },
@@ -249,11 +229,25 @@ Page({
     wx.navigateTo({ url: '/pages/loots/index' })
   },
 
+  goCensus() {
+    wx.navigateTo({ url: '/pages/census/index' })
+  },
+
+  onFeaturedChange(e) {
+    if (this.data.featuredIndex !== e.detail.current) {
+      this.setData({ featuredIndex: e.detail.current })
+    }
+  },
+
+  onFeaturedSelect(e) {
+    this.setData({ featuredIndex: Number(e.currentTarget.dataset.index) })
+  },
+
   /* 最近看过直接读索引快照里的那几条，不为首页再发一次网络请求 */
   syncRecent() {
     const map = {}
     ;(DUNGEON_INDEX.items || []).forEach((it) => {
-      map[it.id] = { id: it.id, title: it.nameCn || it.nameEn || it.id, range: it.levelRange || '等级待实测' }
+      map[it.id] = { id: it.id, title: it.nameCn || it.nameEn || it.id, range: it.levelRange || '等级待补' }
     })
     const ids = service.getRecentDungeons()
     const recent = ids.map((id) => map[id] || { id: id, title: id, range: '' }).slice(0, 4)
@@ -281,13 +275,5 @@ Page({
 
   onRecentTap(e) {
     wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(e.currentTarget.dataset.id) })
-  },
-
-  onDisclaimer() {
-    wx.showModal({
-      title: '声明',
-      content: '非官方粉丝资料站，与暴雪娱乐及网易无关。',
-      showCancel: false
-    })
   }
 })
