@@ -1214,6 +1214,8 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 - **掉落名单** → `app/data/upstream/questie-item-drops.json`（413.8 KB，`tools/extract-questie-drops.py`）。classicItemDrops.lua（wowhead 自动生成，文件自述）+ itemDropCorrections.lua，统一成 (npcId → itemIds[]) 归属对：**16,790 对 / 4,404 NPC × 1,313 物品**；掉率 float 与 DropKeys 引用当场丢（红线）。与 `df-dungeon-loot.json` 对拍（npcId 桥，共同 NPC 106）：都认 23 对、只 Questie 263 对、只 DF 464 对——**三家掉落名单分歧确实大，都留口径必要**，哪家准要游戏内实测。
 - 两条快照的 `meta` 都带双文件 SHA-256 与抓取日 2026-11-08（源文件日 2026-11-07）；源本体在游戏机共享，本轮只读。执行记录见 [DATA-任务名与掉落开采-2026-11-08.md](DATA-任务名与掉落开采-2026-11-08.md)。
 
+**2026-11-11 追记（源状态改判）**：11-10 整合更新把结构换了——BaiYunFeiQuestieCN / BaiYunFeiGuideline / QuestieDB 独立插件**全部撤装**，换官方 Questie v12.6.5 裸装（任务库本体与 Forever support 掉落/经验文件都没装）。**上两条快照的源本体已删 → 孤儿化，存量有效（SHA-256 锚定 11-08 批次），这两层不再追新**。XR/GI/ala 维持冻结。唯一复活的是 DungeonsForever 全家（11-10 14:40）：`df-dungeon-loot.json` 已按新版重采（真首领 259→296、物品 1,139→1,170、15 个新物品不在名录；快照 67.8 KB），合并层消费与否另判。明细见盘点档第六节。
+
 ## 二十七、领主大厅掉落归属复核（2026-11-09）
 
 副本聚合页原来只列出任务物品 `274286`。同站的物品详情快照 `app/data/upstream/wclbox-items-detail.json`（2026-10-16）却逐件给出了其余 12 件装备的首领出处。用 DungeonsForever 1.9.10 的 `df-dungeon-loot.json` 对拍，四组物品 ID 一致，三组有明确 NPC ID。另用 Hyjal 的带 ID 物品链接、IceDNicco 的遭遇与掉落表和 WoW Forever DB 的归属表逐组复核。ForeverDB 的采集记录覆盖其中 7 件装备与 1 件任务物品，Questie 快照对这四个 NPC 暂无记录。各来源的覆盖差异保留在来源记录里。 [新手盒子副本页](https://wowforever.wclbox.com/fuben/hall-of-thanes/) · [Hyjal](https://hyjal.cc/dungeons/hall-of-thanes) · [IceDNicco](https://wow.icednicco.online/forever/db/instance/3065) · [WoW Forever DB](https://wowfdb.com/zones/the-hall-of-thanes/loot/) · [ForeverDB](https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes)
