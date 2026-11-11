@@ -1214,7 +1214,9 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 - **掉落名单** → `app/data/upstream/questie-item-drops.json`（413.8 KB，`tools/extract-questie-drops.py`）。classicItemDrops.lua（wowhead 自动生成，文件自述）+ itemDropCorrections.lua，统一成 (npcId → itemIds[]) 归属对：**16,790 对 / 4,404 NPC × 1,313 物品**；掉率 float 与 DropKeys 引用当场丢（红线）。与 `df-dungeon-loot.json` 对拍（npcId 桥，共同 NPC 106）：都认 23 对、只 Questie 263 对、只 DF 464 对——**三家掉落名单分歧确实大，都留口径必要**，哪家准要游戏内实测。
 - 两条快照的 `meta` 都带双文件 SHA-256 与抓取日 2026-11-08（源文件日 2026-11-07）；源本体在游戏机共享，本轮只读。执行记录见 [DATA-任务名与掉落开采-2026-11-08.md](DATA-任务名与掉落开采-2026-11-08.md)。
 
-**2026-11-11 追记（源状态改判）**：11-10 整合更新把结构换了——BaiYunFeiQuestieCN / BaiYunFeiGuideline / QuestieDB 独立插件**全部撤装**，换官方 Questie v12.6.5 裸装（任务库本体与 Forever support 掉落/经验文件都没装）。**上两条快照的源本体已删 → 孤儿化，存量有效（SHA-256 锚定 11-08 批次），这两层不再追新**。XR/GI/ala 维持冻结。唯一复活的是 DungeonsForever 全家（11-10 14:40）：`df-dungeon-loot.json` 已按新版重采（真首领 259→296、物品 1,139→1,170、15 个新物品不在名录；快照 67.8 KB），合并层消费与否另判。明细见盘点档第六节。
+**2026-11-11 追记（源状态改判）**：11-10 整合更新把结构换了——BaiYunFeiQuestieCN / BaiYunFeiGuideline / QuestieDB 独立插件**全部撤装**，换官方 Questie v12.6.5 裸装（任务库本体与 Forever support 掉落/经验文件都没装）。XR/GI/ala 维持冻结。唯一复活的是 DungeonsForever 全家（11-10 14:40）：`df-dungeon-loot.json` 已按新版重采（真首领 259→296、物品 1,139→1,170、15 个新物品不在名录；快照 67.8 KB），合并层消费与否另判。
+
+**2026-11-11 续（当日第二次改判）**：站主装回 **QuestieDB v1.0.14**（TOC 16.4 MB）——任务名层复活并已重采（任务 ID 5,682 / 列块中文名 4,595；**掉落表与 11-08 批字节相同，不用重采**）。但白云飞汉化层仍缺席：757 条补丁缺位 → 中文覆盖 5,011→4,595，**271 条补丁修过的坏串全部回退**（含补丁值的上批快照留 git `d2860bd`，消费时对拍标"待核"）。**XR 判退役**（站主当日拍"可以不从 XR 取"）：种族 18 条覆盖值已硬编码在 `extract-races.py`、互证快照本地留存、无日更链路读插件现值，退役零破坏。明细见盘点档第七节。
 
 ## 二十七、领主大厅掉落归属复核（2026-11-09）
 
