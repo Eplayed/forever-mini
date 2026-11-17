@@ -18,6 +18,11 @@
         <span><b class="mono">{{ meta.counts.items }}</b>件装备</span>
         <span><b class="mono">{{ meta.counts.altRows }}</b>条同部位备选</span>
       </div>
+      <div class="pz-jumps" v-if="bis60Sets.length || raidSets.length || itemSets.length">
+        <button v-if="bis60Sets.length" type="button" class="pick" @click="jumpTo('pz-bis60')">60 级团前 BiS（{{ bis60Sets.length }} 套）↓</button>
+        <button v-if="raidSets.length" type="button" class="pick" @click="jumpTo('pz-t1')">海加尔峰 T1 套装（{{ raidSets.length }} 套）↓</button>
+        <button v-if="itemSets.length" type="button" class="pick" @click="jumpTo('pz-item-sets')">14–58 级套装图鉴（{{ itemSets.length }} 套）↓</button>
+      </div>
     </div>
 
     <!-- 职业条：一格一个职业，带职业图标与本套数（10-17 站主实拍：原来只有文字，认不出） -->
@@ -245,6 +250,117 @@
       </template>
     </div>
 
+    <!-- 60 级团本前 Pre-Raid BiS（27 专精，L1） -->
+    <div class="card" v-if="bis60Sets.length" id="pz-bis60">
+      <div class="bhead">
+        <h2 class="bt">60 级团本前 Pre-Raid BiS</h2>
+        <span class="bn">{{ bis60Sets.length }} 套（9 职业 × 3 专精）· L1 整理 ·
+          <a v-if="curBis60 && curBis60.url" :href="curBis60.url" target="_blank" rel="noopener noreferrer">来源链接</a>
+          <span v-if="curBis60 && curBis60.fetched" class="mono">（{{ curBis60.fetched }}）</span></span>
+      </div>
+      <p class="note">这份 60 级团前名单整理自第三方资料，不是官方结论，也没做模拟计算；
+        只列部位、物品、同部位备选顺位与出处，点行可展开同部位可换备选。</p>
+      <div class="pz-picks">
+        <div class="picks b60-classes">
+          <button v-for="c in classes" :key="'b60-' + c.cls" type="button" class="pick"
+                  :class="{ on: bis60Cls === c.cls }" @click="pickBis60Class(c.cls)">
+            <b>{{ c.clsCn }}</b>
+          </button>
+        </div>
+        <div class="picks b60-specs">
+          <button v-for="s in bis60ClassSets" :key="s.id" type="button" class="pick"
+                  :class="{ on: curBis60 && curBis60.id === s.id }" @click="pickBis60Set(s.id)">
+            <b>{{ s.mode }}</b>
+          </button>
+        </div>
+      </div>
+
+      <template v-if="curBis60">
+        <div class="b60-sum" v-if="Object.keys(curBis60Sum).some((k) => curBis60Sum[k])">
+          <div class="b60-sum-h">
+            <b>{{ curBis60.clsCn }} · {{ curBis60.mode }} 基础属性合计</b>
+            <span class="dim">只把这一套选中装备的属性行相加，不含职业/种族基础值与附魔</span>
+          </div>
+          <div class="b60-sum-i">
+            <span v-for="k in SUM_KEYS" :key="k" v-show="curBis60Sum[k]"><b class="mono">{{ curBis60Sum[k] }}</b>{{ k }}</span>
+          </div>
+        </div>
+        <div class="boardwrap">
+          <table class="board">
+            <colgroup><col style="width:11%"><col class="c-ico"><col style="width:28%"><col class="c-num"><col class="c-num"><col></colgroup>
+            <thead><tr><th>部位</th><th class="c-ico">图标</th><th>首选装备</th><th class="c-num">装等</th><th class="c-num">备选</th><th class="w-tail">出处</th></tr></thead>
+            <tbody>
+              <template v-for="x in bis60Rows" :key="x.key">
+                <tr class="pzrow2" @click="toggleB60Alt(x.key)">
+                  <td><button type="button" class="pzlink">{{ x.slot }}<span v-if="x.cell > 1" class="mono"> · {{ x.cell }}</span></button></td>
+                  <td class="c-ico"><span class="qbox" :class="'bq' + (x.quality || 0)"><IconCell :icon-key="x.iconKey" :seed="x.item" :cn="x.name" small /></span></td>
+                  <td><span class="nm" :class="'q' + (x.quality || 0)">{{ x.name }}</span>
+                    <span class="sub" v-if="x.st">{{ x.st }}</span></td>
+                  <td class="c-num num">{{ x.ilvl }}</td>
+                  <td class="c-num num">{{ x.alts.length }}</td>
+                  <td class="w-tail dim">
+                    <router-link v-if="x.dungeonId" :to="'/dungeons/' + x.dungeonId" @click.stop>{{ x.src }}</router-link>
+                    <span v-else>{{ x.src || '—' }}</span>
+                  </td>
+                </tr>
+                <tr v-if="b60OpenKey === x.key && x.alts.length" class="b60-altrow">
+                  <td colspan="6">
+                    <div class="b60-altbox">
+                      <div class="b60-althead">同部位可换备选（{{ x.slot }} · 共 {{ x.alts.length }} 件）</div>
+                      <div class="b60-altlist">
+                        <div v-for="(alt, idx) in x.alts" :key="alt.item + '-' + idx" class="b60-altitem">
+                          <span class="mono dim">#{{ idx + 1 }}</span>
+                          <span class="qbox" :class="'bq' + (alt.quality || 0)"><IconCell :icon-key="alt.iconKey" :seed="alt.item" :cn="alt.name" small /></span>
+                          <span class="nm" :class="'q' + (alt.quality || 0)">{{ alt.name }}</span>
+                          <span class="mono dim" v-if="alt.ilvl">iLv{{ alt.ilvl }}</span>
+                          <span class="dim b60-altsrc">
+                            <router-link v-if="alt.dungeonId" :to="'/dungeons/' + alt.dungeonId">{{ alt.src }}</router-link>
+                            <span v-else>{{ alt.src }}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </template>
+    </div>
+
+    <!-- 海加尔峰 T1 团本套装（18 套） -->
+    <div class="card" v-if="raidSets.length" id="pz-t1">
+      <div class="bhead">
+        <h2 class="bt">海加尔峰 T1 团本套装名录</h2>
+        <span class="bn">{{ raidSets.length }} 套（9 职业）· 来自 {{ raidSetsMeta.source || 'DungeonsForever 插件' }}</span>
+      </div>
+      <p class="note">Beta 客户端内 T1 套装散件基础属性尚未开放，此处只列出游戏内登记的套装名、定位、护甲类型与部件编号，不编造数值或套装加成。</p>
+      <div class="pz-picks">
+        <div class="picks t1-classes">
+          <button type="button" class="pick" :class="{ on: raidCls === 'all' }" @click="raidCls = 'all'"><b>全部（{{ raidSets.length }}）</b></button>
+          <button v-for="c in classes" :key="'t1-' + c.cls" type="button" class="pick"
+                  :class="{ on: raidCls === c.cls }" @click="raidCls = c.cls"><b>{{ c.clsCn }}</b></button>
+        </div>
+      </div>
+      <div class="boardwrap">
+        <table class="board">
+          <colgroup><col style="width:11%"><col style="width:18%"><col style="width:10%"><col style="width:18%"><col style="width:10%"><col></colgroup>
+          <thead><tr><th>职业</th><th>套装名称</th><th>定位</th><th>适配专精</th><th>护甲</th><th class="w-tail">部件编号（{{ 6 }}件）</th></tr></thead>
+          <tbody>
+            <tr v-for="rs in filteredRaidSets" :key="rs.id">
+              <td>{{ rs.clsCn }}</td>
+              <td><span class="nm q4">{{ rs.name }}</span> <span class="mono dim">#{{ rs.setId }}</span></td>
+              <td>{{ rs.roleCn }}</td>
+              <td>{{ rs.spec }}</td>
+              <td>{{ rs.armor }}</td>
+              <td class="w-tail mono dim">{{ (rs.pieceIds || []).map((id) => '#' + id).join(' · ') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- 备选 popover：站主 2026-10-17 改口径——不要 modal 弹窗，要贴着点的那一格弹出来。
          纸娃娃那一格与下面一览表的那一行开同一个 popover，anchor 传的是被点的元素。 -->
     <BisPop v-if="pick" :slot="pick" :rows="pickerRows" :head="pickerHead"
@@ -303,6 +419,10 @@ function boot() {
     .then((r) => {
       const byId = {};
       (r[1].items || []).forEach((x) => { byId[x.id] = x; });
+      const extra60 = ((r[0].meta || {}).bis60Meta || {}).extraItems || {};
+      Object.keys(extra60).forEach((k) => {
+        if (!byId[k]) byId[k] = extra60[k];
+      });
       const prof = {};
       (r[3].professions || []).forEach((x) => { prof[x.id] = x.nameCn; });
       const dun = {};
@@ -353,6 +473,78 @@ function pickItemSetCat(k) {
   const first = (k === 'all' ? itemSets.value : itemSets.value.filter((x) => x.cat === k))[0];
   activeItemSetId.value = first ? first.id : '';
 }
+const bis60Sets = computed(() => ((P.value || {}).bis || {}).bis60Sets || []);
+const bis60Cls = ref(String(route.query.c || 'warrior'));
+const bis60SetId = ref('');
+const b60OpenKey = ref('');
+const bis60ClassSets = computed(() => bis60Sets.value.filter((s) => s.cls === bis60Cls.value));
+const curBis60 = computed(() => bis60ClassSets.value.filter((s) => s.id === bis60SetId.value)[0]
+  || bis60ClassSets.value[0] || null);
+function pickBis60Class(v) {
+  bis60Cls.value = v;
+  const first = bis60Sets.value.filter((s) => s.cls === v)[0];
+  bis60SetId.value = first ? first.id : '';
+  b60OpenKey.value = '';
+}
+function pickBis60Set(id) {
+  bis60SetId.value = id;
+  b60OpenKey.value = '';
+}
+function toggleB60Alt(k) {
+  b60OpenKey.value = b60OpenKey.value === k ? '' : k;
+}
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const B60_KEY_CN = {
+  head: '头部', neck: '项链', shoulder: '肩部', shoulders: '肩部',
+  back: '背部', chest: '胸部', wrist: '手腕', wrists: '手腕',
+  hands: '手', waist: '腰部', legs: '腿部', feet: '脚',
+  finger: '戒指', trinket: '饰品', 'main-hand': '主手',
+  'off-hand': '副手', 'two-hand': '双手武器', ranged: '远程', relic: '圣物'
+};
+const B60_SIB = { '主手': ['main-hand', 'two-hand'], '副手': ['off-hand', 'shield', 'held'] };
+function bis60AltsFor(s, slotLabel) {
+  if (!s || !s.alts) return [];
+  const kInv = Object.keys(B60_KEY_CN).filter((k) => B60_KEY_CN[k] === slotLabel);
+  const keys = B60_SIB[slotLabel] || kInv;
+  for (let i = 0; i < keys.length; i++) {
+    if ((s.alts[keys[i]] || []).length) return s.alts[keys[i]];
+  }
+  return [];
+}
+const bis60Rows = computed(() => {
+  const s = curBis60.value;
+  if (!s) return [];
+  const refs = s.refs || {};
+  return (s.doll || []).map((d) => {
+    const ref = refs[String(d.item)] || {};
+    const alts = bis60AltsFor(s, d.slot).map((aid) => {
+      const ar = refs[String(aid)] || {};
+      return {
+        item: aid, name: nm(aid) || ('#' + aid), iconKey: ic(aid), quality: qo(aid),
+        ilvl: il(aid), src: ar.src || '', dungeonId: ar.dungeonId || ''
+      };
+    });
+    return {
+      key: d.slot + '-' + (d.cell || 1),
+      slot: d.slot, cell: d.cell || 1, item: d.item,
+      name: nm(d.item) || ('#' + d.item), iconKey: ic(d.item), quality: qo(d.item),
+      ilvl: il(d.item), st: stOf(d.item),
+      src: ref.src || '', dungeonId: ref.dungeonId || '', alts
+    };
+  });
+});
+const curBis60Sum = computed(() => sumStatLines(((curBis60.value || {}).doll || []).map((d) => {
+  return (((P.value || {}).det || {})[String(d.item)] || {}).st || [];
+})));
+const raidSetsMeta = computed(() => ((P.value || {}).bis || {}).raidSetsMeta || {});
+const raidSets = computed(() => ((P.value || {}).bis || {}).raidSets || []);
+const raidCls = ref('all');
+const filteredRaidSets = computed(() => (raidCls.value === 'all'
+  ? raidSets.value
+  : raidSets.value.filter((r) => r.cls === raidCls.value)));
 const classes = computed(() => {
   const out = [];
   sets.value.forEach((s) => {
@@ -580,6 +772,17 @@ function srcOf(id) {
 .iset-sum-h { margin-bottom: 6px; font-size: 13.5px; color: var(--txt-title) }
 .iset-sum-i { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--txt-dim) }
 .iset-sum-i b { color: var(--ok); font-size: 15px; margin-right: 4px }
+.pz-jumps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px }
+.b60-sum { margin: 10px 0 12px; border-top: 1px solid var(--line-2); padding-top: 10px }
+.b60-sum-h { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 6px; font-size: 13.5px; color: var(--txt-title) }
+.b60-sum-i { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--txt-dim) }
+.b60-sum-i b { color: var(--ok); font-size: 15px; margin-right: 4px }
+.b60-altrow td { background: var(--sunk); padding: 8px 12px }
+.b60-altbox { display: flex; flex-direction: column; gap: 6px }
+.b60-althead { font-size: 12px; color: var(--txt-muted); font-weight: 600 }
+.b60-altlist { display: flex; flex-direction: column; gap: 5px }
+.b60-altitem { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 12.5px }
+.b60-altsrc { margin-left: auto }
 .pztab-t tr.cur { background: rgba(201, 162, 74, .07) }
 /* 一览表整行可点开弹窗。行里那个"部位"渲染成 button 是为了键盘能 Tab 到，
    但点击热区是整行，所以 button 自己不带边框与内边距。 */

@@ -97,10 +97,11 @@ const BUDGET_KB = {
      它只在进配装页那一次下（不是冷启动路径），而这一页同一次还要下 118 KB 的共享物品表
      和一张约 250 KB 的图，索引不是这一页的流量大头。哪天再顶破，方向是把两张桥表
      单独分一片（点开哪套才取哪套的），不是继续抬这条。 */
-  'bis/index': 64,
-  /* bisItems 是"进这一页要下一次"的共享表：830 件 30 级配装 + 181 件 14–58 级套装部件。
-     2026-11-17 合入 36 套套装图鉴后约 140 KB，预算抬到 160 KB。 */
-  bisItems: 160,
+  /* bis/index 随 60 级 27 套 Pre-Raid BiS + 海加尔峰 18 套 T1 + 36 套图鉴一同下发，进配装页才取一次。
+     采用 flat 紧凑序列化去掉换行缩进省约 35 KB 流量。 */
+  'bis/index': 112,
+  /* bisItems 是"进这一页要下一次"的共享表：830 件 30 级配装 + 181 件 14–58 级套装 + 422 件 60 级配装。 */
+  bisItems: 240,
   bisSet: 28,
   /* 专业线（2026-10-27）：索引 13 个专业约 6 KB；分片自成一格（图标/材料/商人/图纸字典都就地带），
      点开哪个专业才下那一片。最大的是制皮 511 条配方。哪天顶破这条，说明该把分片再按分箱拆了，
@@ -1165,11 +1166,12 @@ function buildBatch(env, opts) {
       return key;
     };
     const itemMiss = { noBase: 0 };
+    const extra60 = (bis.meta && bis.meta.bis60Meta && bis.meta.bis60Meta.extraItems) || {};
     const rows = {};
     const needItem = (id, why) => {
       const k = String(id);
       if (rows[k]) return rows[k];
-      const base = itemsIndex[k];
+      const base = itemsIndex[k] || extra60[k];
       const det = itemDetailIndex[k] || {};
       /* 属性行只留"数值行"：使用/装备：/套装那几句是效果文案，既不进合计也不进这一页的简版显示，
          留着会让这张共享表从 ~95 KB 涨到 150 KB，而它是每个玩家进这一页都要下一次的。 */
@@ -1298,6 +1300,61 @@ function buildBatch(env, opts) {
         pieces: pcs
       };
     });
+    const bis60Src = {};
+    const bis60SetsOut = (bis.bis60Sets || []).map((st) => {
+      const doll = (st.doll || []).map((r) => {
+        needItem(r.item, 'bis60/' + st.id + '/doll');
+        return [r.slot, r.cell || 1, r.item];
+      });
+      const alts = {};
+      Object.keys(st.alts || {}).forEach((slotKey) => {
+        const arr = (st.alts[slotKey] || []).slice();
+        arr.forEach((iid) => needItem(iid, 'bis60/' + st.id + '/alt'));
+        alts[slotKey] = arr;
+      });
+      Object.keys(st.refs || {}).forEach((iid) => {
+        const ref = st.refs[iid] || {};
+        if (ref.src && !bis60Src[iid]) bis60Src[iid] = ref.src;
+        if (ref.dungeonId) {
+          const did = dunIdOf({ id: ref.dungeonId });
+          if (!did) {
+            dunMiss[ref.dungeonId] = (dunMiss[ref.dungeonId] || 0) + 1;
+          } else {
+            if (!dropLink[iid]) dropLink[iid] = [];
+            if (dropLink[iid].indexOf(did) < 0) dropLink[iid].push(did);
+          }
+        }
+      });
+      const sum = statParser.sumStatLines((st.doll || []).map((r) => ((itemDetailIndex[String(r.item)] || {}).st) || []));
+      return {
+        id: st.id,
+        cls: st.cls,
+        clsCn: st.clsCn,
+        spec: st.spec || '',
+        mode: st.mode,
+        level: st.level || 60,
+        fetched: st.fetched,
+        url: st.url,
+        sum,
+        doll,
+        alts
+      };
+    });
+    const raidSetsOut = (bis.raidSets || []).map((rs) => ({
+      id: rs.id,
+      setId: rs.setId,
+      cls: rs.cls,
+      clsCn: rs.clsCn,
+      role: rs.role,
+      roleCn: rs.roleCn,
+      spec: rs.spec,
+      armor: rs.armor,
+      name: rs.name,
+      raid: rs.raid,
+      level: rs.level,
+      pieceCount: rs.pieceCount,
+      pieceIds: rs.pieceIds || []
+    }));
     const itemRows = Object.keys(rows).sort((a, b) => Number(a) - Number(b)).map((k) => rows[k]);
     bisItemsObj = {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-items',
@@ -1415,13 +1472,24 @@ function buildBatch(env, opts) {
       posterLink,
       classes,
       itemSets: itemSetsOut,
+      bis60Meta: {
+        source: ((bis.meta || {}).bis60Meta || {}).source || null,
+        fetched: ((bis.meta || {}).bis60Meta || {}).fetched || null
+      },
+      bis60Src,
+      bis60Sets: bis60SetsOut,
+      raidSetsMeta: {
+        raid: ((bis.meta || {}).raidSetsMeta || {}).raid || '海加尔峰',
+        updated: ((bis.meta || {}).raidSetsMeta || {}).updated || null
+      },
+      raidSets: raidSetsOut,
       sets: setOuts.map((s) => ({
         id: s.setId, cls: s.cls, clsCn: s.clsCn, mode: s.mode, level: s.level,
         fetched: s.fetched, url: s.url, path: 'bis/set/' + s.setId + '.json'
       }))
     };
     pushObj('bisIndex', 'bis/index.json', bisIndexObj, {
-      records: setOuts.length, budget: 'bis/index',
+      records: setOuts.length, budget: 'bis/index', flat: true,
       facts: { min: (bis.meta || {}).scrapedAt, max: (bis.meta || {}).scrapedAt,
         distinct: 1, recordsWithoutDate: (bis.meta || {}).scrapedAt ? 0 : setOuts.length }
     });

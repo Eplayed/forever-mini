@@ -62,6 +62,8 @@
       <view class="set-actions">
         <button size="mini" class="want-target" bindtap="goEquipment">查看装备 ↓</button>
         <button wx:if="{{!picking}}" size="mini" class="want-target" bindtap="beginPick">多选装备</button>
+        <button wx:if="{{bis60Classes.length}}" size="mini" class="want-target" bindtap="goBis60">60级团前BiS ↓</button>
+        <button wx:if="{{raidTotal}}" size="mini" class="want-target" bindtap="goRaidSets">海加尔峰T1 ↓</button>
         <button wx:if="{{itemSetCats.length}}" size="mini" class="want-target" bindtap="goItemSets">14–58级套装图鉴 ↓</button>
       </view>
 
@@ -179,6 +181,87 @@
           <button size="mini" wx:if="{{item.item && !item.missing}}" class="want-target {{selected[item.item] ? 'target-selected' : ''}}" data-id="{{item.item}}" catchtap="saveTarget">{{savedTargets[item.item] ? '已加入' : (picking ? (selected[item.item] ? '✓ 已选' : '选择') : '＋ 想要')}}</button>
         </view>
       </block>
+    </view>
+
+    <!-- 60 级团本前 Pre-Raid BiS（27 专精） -->
+    <view class="card" wx:if="{{bis60Classes.length}}" id="bis-lv60">
+      <view class="bhead"><view class="bt">60 级团前 Pre-Raid BiS</view></view>
+      <view class="note">27 套（9 职业 × 3 专精，L1）· 点一行可看同部位备选，点掉落可跳去对应副本</view>
+      <view class="panel">
+        <view class="chips">
+          <view wx:for="{{bis60Classes}}" wx:key="cls" class="chip {{bis60Cls === item.cls ? 'chip-on' : ''}}"
+                data-cls="{{item.cls}}" bindtap="pickBis60Class">{{item.clsCn}}</view>
+        </view>
+        <view class="chips">
+          <view wx:for="{{bis60SpecList}}" wx:key="id" class="chip {{bis60SetId === item.id ? 'chip-on' : ''}}"
+                data-id="{{item.id}}" bindtap="pickBis60Set">{{item.mode}}</view>
+        </view>
+      </view>
+
+      <block wx:if="{{activeBis60}}">
+        <view class="iset-head">
+          <view class="iset-title">
+            <text class="bt">{{activeBis60.clsCn}} · {{activeBis60.mode}}</text>
+            <text class="s-slot">{{activeBis60.sourceHost}} · {{activeBis60.fetched}}</text>
+          </view>
+          <button size="mini" class="want-target" bindtap="addBis60ToAdventure">＋ 整套加入清单</button>
+        </view>
+
+        <view class="sum" wx:if="{{activeBis60.sumRows.length}}">
+          <view class="sum-h"><text class="b">整套基础属性合计</text></view>
+          <view class="sum-i">
+            <view wx:for="{{activeBis60.sumRows}}" wx:key="k" class="sum-c"><text class="sum-v">{{item.v}}</text>{{item.k}}</view>
+          </view>
+        </view>
+
+        <view wx:for="{{activeBis60.rows}}" wx:key="slotLabel" class="srow" data-slot="{{item.slot}}" data-cell="{{item.cell}}"
+              bindtap="openBis60Slot">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.slot}}" />
+          <view class="s-main">
+            <view class="s-top">
+              <text class="s-slot">{{item.slotLabel}}</text>
+              <text class="s-name {{'q-' + item.q}}" wx:if="{{!item.missing}}">{{item.name}}</text>
+              <text class="s-name s-unknown" wx:else>物品详情暂无（#{{item.item}}）</text>
+            </view>
+            <view class="s-meta">
+              <text wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text>
+              <text>{{item.qText}}</text>
+            </view>
+            <view class="p-st" wx:for="{{item.st}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+            <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
+                  data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
+              {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
+            </view>
+          </view>
+          <button size="mini" wx:if="{{item.item && !item.missing}}" class="want-target {{savedTargets[item.item] ? 'target-selected' : ''}}" data-id="{{item.item}}" catchtap="saveTarget">{{savedTargets[item.item] ? '已加入' : '＋ 想要'}}</button>
+        </view>
+      </block>
+    </view>
+
+    <!-- 海加尔峰 T1 团本套装（18 套） -->
+    <view class="card" wx:if="{{raidTotal}}" id="bis-t1">
+      <view class="bhead"><view class="bt">海加尔峰 T1 团本套装名录（{{raidTotal}} 套）</view></view>
+      <view class="note">Beta 客户端散件基础属性尚隐藏，此处只列套装标识、定位、护甲与 6 部件编号。</view>
+      <view class="panel">
+        <view class="chips">
+          <view wx:for="{{raidClassChips}}" wx:key="cls" class="chip {{raidCls === item.cls ? 'chip-on' : ''}}"
+                data-cls="{{item.cls}}" bindtap="pickRaidCls">{{item.clsCn}}</view>
+        </view>
+      </view>
+      <view wx:for="{{filteredRaidSets}}" wx:key="id" class="srow">
+        <view class="s-main">
+          <view class="s-top">
+            <text class="s-slot">{{item.clsCn}} · {{item.roleCn}}</text>
+            <text class="s-name q-4">{{item.name}}</text>
+          </view>
+          <view class="s-meta">
+            <text>适配 {{item.spec}}</text>
+            <text>{{item.armor}}</text>
+            <text>套装 #{{item.setId}} · {{item.pieceCount}} 件</text>
+          </view>
+          <view class="p-st">{{item.pieceText}}</view>
+        </view>
+      </view>
     </view>
   </block>
   <view wx:if="{{loaded && meta && !set && errText && !unavailable}}" class="notice">

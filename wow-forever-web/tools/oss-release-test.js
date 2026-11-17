@@ -762,6 +762,16 @@ const oss = require(MINI_SERVICE);
       && biIdx.itemSets.every((s) => Array.isArray(s.pieces) && s.pieces.length >= 2
         && s.pieces.every((p) => !!biIds[String(p[0])])),
     JSON.stringify({ sets: (biIdx.itemSets || []).length }));
+  ok('60 级团前 Pre-Raid BiS 随索引下发（27 套，所有部件与备选均在共享物品表中）',
+    Array.isArray(biIdx.bis60Sets) && biIdx.bis60Sets.length === 27
+      && biIdx.bis60Sets.every((s) => s.level === 60 && Array.isArray(s.doll) && s.doll.length >= 12
+        && s.doll.every((d) => !!biIds[String(d[2])])
+        && Object.keys(s.alts || {}).every((k) => (s.alts[k] || []).every((id) => !!biIds[String(id)]))),
+    JSON.stringify({ bis60: (biIdx.bis60Sets || []).length }));
+  ok('海加尔峰 T1 团本套装随索引下发（18 套，含 setId/name/pieceCount 且无百分比）',
+    Array.isArray(biIdx.raidSets) && biIdx.raidSets.length === 18
+      && biIdx.raidSets.every((r) => !!r.setId && !!r.name && r.pieceCount > 0),
+    JSON.stringify({ raidSets: (biIdx.raidSets || []).length }));
 
 
   /* ================= 3·10. 功能开关（2026-10-27）================= */

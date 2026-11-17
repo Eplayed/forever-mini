@@ -1843,6 +1843,55 @@ if (fs.existsSync(bisPath)) {
     scale.bisItemSets = itemSets.length;
     console.log('套装图鉴：' + itemSets.length + ' 套 / ' + isPieces + ' 件部件（14–58 级，含无限新增与职业 T0 套）');
   }
+  const bis60Sets = bis.bis60Sets || [];
+  if (bis60Sets.length) {
+    const extra60 = (bis.meta && bis.meta.bis60Meta && bis.meta.bis60Meta.extraItems) || {};
+    const extra60Ids = new Set(Object.keys(extra60).map((k) => Number(k)));
+    const b60Seen = new Set();
+    const b60Cls = new Set();
+    const b60Items = new Set();
+    bis60Sets.forEach((st) => {
+      if (!st.id || b60Seen.has(st.id)) bErr.push('60级BiS id 缺失或重复:' + st.id);
+      b60Seen.add(st.id);
+      if (st.level !== 60 || !st.url || !st.fetched) {
+        bErr.push((st.id || '?') + ' 60级BiS缺 level=60 / url / fetched');
+      }
+      if (st.cls) b60Cls.add(st.cls);
+      (st.doll || []).forEach((d) => {
+        b60Items.add(d.item);
+        if (!baseIds.has(d.item) && !extra60Ids.has(d.item)) {
+          bErr.push((st.id || '?') + ' 部件 #' + d.item + ' 不在 items.json 或 extraItems');
+        }
+      });
+      Object.values(st.alts || {}).forEach((arr) => {
+        (arr || []).forEach((iid) => {
+          b60Items.add(iid);
+          if (!baseIds.has(iid) && !extra60Ids.has(iid)) {
+            bErr.push((st.id || '?') + ' 备选 #' + iid + ' 不在 items.json 或 extraItems');
+          }
+        });
+      });
+    });
+    if (/\d+%/.test(JSON.stringify(bis60Sets))) bErr.push('60级BiS含百分比字样');
+    scale.bis60Sets = bis60Sets.length;
+    scale.bis60Classes = b60Cls.size;
+    console.log('60 级团前 BiS：' + bis60Sets.length + ' 套 / ' + b60Cls.size + ' 职业 / 用到 '
+      + b60Items.size + ' 件装备（兜底 ' + extra60Ids.size + ' 件，L1）');
+  }
+  const raidSets = bis.raidSets || [];
+  if (raidSets.length) {
+    const rSeen = new Set();
+    const rCls = new Set();
+    raidSets.forEach((rs) => {
+      if (!rs.id || rSeen.has(rs.id)) bErr.push('T1套装 id 缺失或重复:' + rs.id);
+      rSeen.add(rs.id);
+      if (!rs.setId || !rs.name || !rs.pieceCount) bErr.push((rs.id || '?') + ' T1套装缺 setId/name/pieceCount');
+      if (rs.cls) rCls.add(rs.cls);
+    });
+    if (/\d+%/.test(JSON.stringify(raidSets))) bErr.push('T1套装含百分比字样');
+    scale.raidSets = raidSets.length;
+    console.log('海加尔峰 T1 团本套装：' + raidSets.length + ' 套 / ' + rCls.size + ' 职业（仅目录标识，无套装属性百分比）');
+  }
   if (bErr.length) errs.push('配装名单：' + bErr.slice(0, 6).join(' ｜ ') + (bErr.length > 6 ? ` …共 ${bErr.length} 条` : ''));
   scale.bisSets = bisSets.length;
   scale.bisClasses = Object.keys(clsOf).length;

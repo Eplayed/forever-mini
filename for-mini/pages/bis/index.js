@@ -65,7 +65,16 @@ Page({
     itemSetCat: 'new',
     filteredItemSets: [],
     activeItemSetId: '',
-    activeItemSet: null
+    activeItemSet: null,
+    bis60Classes: [],
+    bis60Cls: 'warrior',
+    bis60SpecList: [],
+    bis60SetId: '',
+    activeBis60: null,
+    raidCls: 'all',
+    raidClassChips: [],
+    filteredRaidSets: [],
+    raidTotal: 0
   },
 
   onLoad(query) {
@@ -139,6 +148,14 @@ Page({
     wx.pageScrollTo({ selector: '#bis-item-sets', duration: 240, offsetTop: -12 })
   },
 
+  goBis60() {
+    wx.pageScrollTo({ selector: '#bis-lv60', duration: 240, offsetTop: -12 })
+  },
+
+  goRaidSets() {
+    wx.pageScrollTo({ selector: '#bis-t1', duration: 240, offsetTop: -12 })
+  },
+
   addItemSetToAdventure() {
     const cur = this.data.activeItemSet
     if (!cur || !cur.pieces || !cur.pieces.length) return
@@ -204,6 +221,7 @@ Page({
           this.items = items
           this.stOf = stOf
           this.initItemSets(ri.data.itemSets || [])
+          this.initBis60(ri.data.bis60Sets || [], ri.data.bis60Src || {}, ri.data.raidSets || [])
           this.setData({
             loaded: true,
             meta: ri.data.meta,
@@ -549,6 +567,146 @@ Page({
         pieces: pieces
       }
     })
+  },
+
+  initBis60(raw60, srcMap, rawRaid) {
+    this.bis60Sets = raw60 || []
+    this.bis60Src = srcMap || {}
+    this.raidSets = rawRaid || []
+    const clsOrder = []
+    const seenCls = {}
+    this.bis60Sets.forEach((s) => {
+      if (!seenCls[s.cls]) {
+        seenCls[s.cls] = 1
+        clsOrder.push({ cls: s.cls, clsCn: s.clsCn })
+      }
+    })
+    const initCls = (this.want && seenCls[this.want]) ? this.want : ((clsOrder[0] && clsOrder[0].cls) || 'warrior')
+    this.setData({
+      bis60Classes: clsOrder,
+      raidTotal: this.raidSets.length,
+      raidClassChips: [{ cls: 'all', clsCn: '全部' }].concat(clsOrder)
+    })
+    this.applyBis60Class(initCls)
+    this.applyRaidCls('all')
+  },
+
+  pickBis60Class(e) {
+    const cls = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cls) || '')
+    if (cls) this.applyBis60Class(cls)
+  },
+
+  applyBis60Class(cls) {
+    const specs = (this.bis60Sets || []).filter((s) => s.cls === cls)
+    const specList = specs.map((s) => ({ id: s.id, mode: s.mode }))
+    const firstId = (specs[0] && specs[0].id) || ''
+    this.setData({ bis60Cls: cls, bis60SpecList: specList, bis60SetId: firstId })
+    this.renderBis60(firstId)
+  },
+
+  pickBis60Set(e) {
+    const id = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id) || '')
+    if (!id) return
+    this.setData({ bis60SetId: id })
+    this.renderBis60(id)
+  },
+
+  bis60ItemLine(id, slotLabel, cell) {
+    const it = (this.items || {})[String(id)] || {}
+    const link = ((this.index || {}).dropLink || {})[String(id)]
+    const src = (this.bis60Src || {})[String(id)] || ''
+    return {
+      item: id,
+      slot: slotLabel || '',
+      cell: cell || 1,
+      slotLabel: (slotLabel || '') + ((cell || 1) > 1 ? ' · ' + cell : ''),
+      name: it.name || ('#' + id),
+      missing: !it.name,
+      q: it.q || 0,
+      qText: quality.qualityName(it.q),
+      ilvl: it.ilvl == null ? '' : it.ilvl,
+      iconUrl: it.iconUrl || '',
+      st: (this.stOf || {})[String(id)] || [],
+      src: src,
+      go: link && link.length ? link[0] : ''
+    }
+  },
+
+  renderBis60(id) {
+    const s = (this.bis60Sets || []).filter((x) => x.id === id)[0]
+    if (!s) {
+      this.setData({ activeBis60: null })
+      return
+    }
+    const rows = (s.doll || []).map((d) => this.bis60ItemLine(d[2], d[0], d[1]))
+    const sum = s.sum || {}
+    const sumRows = SUM_KEYS.filter((k) => sum[k]).map((k) => ({ k: k, v: sum[k] }))
+    this.setData({
+      activeBis60: {
+        id: s.id,
+        clsCn: s.clsCn,
+        mode: s.mode,
+        fetched: s.fetched,
+        sourceHost: hostOf(s.url),
+        sumRows: sumRows,
+        rows: rows
+      }
+    })
+  },
+
+  addBis60ToAdventure() {
+    const cur = this.data.activeBis60
+    if (!cur || !cur.rows || !cur.rows.length) return
+    const list = cur.rows
+      .filter((r) => r.item && !r.missing)
+      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, dungeonId: r.go, source: r.src }))
+    if (!list.length) return
+    const count = adventure.addGearBatch(list)
+    if (count === null) return
+    this.syncGear()
+    wx.showToast({ title: count ? ('已加入 ' + count + ' 件 60 级配装') : '本套部件已在清单中', icon: 'none' })
+  },
+
+  openBis60Slot(e) {
+    const label = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.slot) || '')
+    const cell = Number((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cell) || 1)
+    const s = (this.bis60Sets || []).filter((x) => x.id === this.data.bis60SetId)[0]
+    if (!s || !label) return
+    const map = (this.index && this.index.slotKeys) || {}
+    const sib = (this.index && this.index.slotSiblings) || {}
+    const extraKeys = { 头部: ['head'], 肩部: ['shoulder', 'shoulders'], 手腕: ['wrist', 'wrists'] }
+    const keys = sib[label] || extraKeys[label] || [keyOf(map, label)]
+    let ids = []
+    for (let i = 0; i < keys.length; i += 1) {
+      if (((s.alts || {})[keys[i]] || []).length) { ids = s.alts[keys[i]]; break }
+    }
+    this.setData({
+      slot: label + '·' + cell,
+      slotHead: (s.clsCn || '') + ' · ' + (s.mode || '') + ' · ' + label,
+      slotTheirs: { shown: false },
+      slotRows: ids.map((id) => this.bis60ItemLine(id, '', 1))
+    })
+  },
+
+  pickRaidCls(e) {
+    const cls = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cls) || '')
+    if (cls) this.applyRaidCls(cls)
+  },
+
+  applyRaidCls(cls) {
+    const list = cls === 'all' ? (this.raidSets || []) : (this.raidSets || []).filter((r) => r.cls === cls)
+    const out = list.map((r) => ({
+      id: r.id,
+      setId: r.setId,
+      clsCn: r.clsCn,
+      roleCn: r.roleCn,
+      spec: r.spec,
+      armor: r.armor,
+      name: r.name,
+      pieceCount: r.pieceCount,
+      pieceText: (r.pieceIds || []).map((id) => '#' + id).join(' · ')
+    }))
+    this.setData({ raidCls: cls, filteredRaidSets: out })
   },
 
   closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) }

@@ -72,6 +72,56 @@
    "grade": "L1",
    "count": 36,
    "pieceCount": 191
+  },
+  "bis60Meta": {
+   "source": "https://classicwowforever.com/bis-list/",
+   "fetched": "2026-11-17",
+   "level": 60,
+   "grade": "L1",
+   "took": "职业、专精、部位、物品ID、同部位备选顺位、来源结构化指向",
+   "dropped": "note 说明文字、属性优先级、循环建议、页面攻略正文",
+   "extraItems": {
+    "228175": {
+     "id": 228175,
+     "name": "神圣灵动圣契",
+     "quality": 3,
+     "ilvl": 55,
+     "iconKey": null
+    },
+    "228176": {
+     "id": 228176,
+     "name": "滚滚惊雷图腾",
+     "quality": 3,
+     "ilvl": 60,
+     "iconKey": null
+    },
+    "220606": {
+     "id": 220606,
+     "name": "梦境神像",
+     "quality": 3,
+     "ilvl": 55,
+     "iconKey": null
+    }
+   },
+   "counts": {
+    "sets": 27,
+    "classes": 9,
+    "uniqueItems": 422,
+    "missingInItemsJson": 3
+   },
+   "missingIds": [
+    220606,
+    228175,
+    228176
+   ]
+  },
+  "raidSetsMeta": {
+   "source": "DungeonsForever/Core/Data/Data_RaidSets.lua",
+   "raid": "海加尔峰",
+   "updated": "2026-10-08",
+   "grade": "L1",
+   "note": "Beta 客户端套装散件基础属性尚隐藏，仅记录套装标识、定位、护甲及部件数（无套装效果文案与百分比）",
+   "count": 18
   }
  },
  "sets": [
@@ -81752,6 +81802,9875 @@
      "dungeonId": "upper-blackrock-spire"
     }
    ]
+  }
+ ],
+ "bis60Sets": [
+  {
+   "id": "lv60-arms-warrior",
+   "cls": "warrior",
+   "clsCn": "战士",
+   "spec": "arms",
+   "mode": "武器 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/arms-warrior/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 12640
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 12625
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18509
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 21997
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 21996
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21998
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 21994
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22385
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 21995
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 15855
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 10659
+    },
+    {
+     "slot": "饰品",
+     "cell": 2,
+     "item": 10779
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 12784
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     12640,
+     12620,
+     21999
+    ],
+    "neck": [
+     22150,
+     7731
+    ],
+    "shoulder": [
+     12625,
+     22001,
+     16733,
+     15051
+    ],
+    "back": [
+     18509,
+     18511,
+     6314
+    ],
+    "chest": [
+     21997,
+     16730,
+     15050
+    ],
+    "wrist": [
+     21996,
+     16735,
+     250581,
+     19508
+    ],
+    "hands": [
+     21998,
+     16737,
+     15063
+    ],
+    "waist": [
+     21994,
+     10798,
+     250571
+    ],
+    "legs": [
+     22385,
+     12619,
+     22000,
+     21316,
+     16732
+    ],
+    "feet": [
+     21995,
+     16734,
+     250561
+    ],
+    "finger": [
+     17713,
+     11862,
+     15855,
+     18400,
+     274754
+    ],
+    "trinket": [
+     10659,
+     273840,
+     10779
+    ],
+    "main-hand": [
+     12784,
+     250619,
+     12782,
+     17766
+    ],
+    "ranged": [
+     16007,
+     9412
+    ]
+   },
+   "refs": {
+    "12640": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12620": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "21999": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "12625": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22001": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16733": {
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18509": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "6314": {
+     "src": "副本：影牙城堡 · 狼王南杜斯",
+     "dungeonId": "shadowfang-keep"
+    },
+    "21997": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16730": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21996": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16735": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250581": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "21998": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16737": {
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21994": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "10798": {
+     "src": "副本：沉没的神庙 · 阿塔拉利恩",
+     "dungeonId": "sunken-temple"
+    },
+    "250571": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22385": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22000": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "21316": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "16732": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "21995": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16734": {
+     "src": "副本：通灵学院 · 基尔图诺斯",
+     "dungeonId": "scholomance"
+    },
+    "250561": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15855": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "10659": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "10779": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "12784": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12782": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17766": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-fury-warrior",
+   "cls": "warrior",
+   "clsCn": "战士",
+   "spec": "fury",
+   "mode": "狂怒 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/fury-warrior/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 12640
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 12625
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18511
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 21997
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 21996
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21998
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 21994
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22385
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 21995
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 15855
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 10659
+    },
+    {
+     "slot": "饰品",
+     "cell": 2,
+     "item": 10779
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     12640,
+     12620,
+     21999
+    ],
+    "neck": [
+     22150,
+     7731
+    ],
+    "shoulder": [
+     12625,
+     22001,
+     16733,
+     15051
+    ],
+    "back": [
+     18511,
+     18509,
+     6314
+    ],
+    "chest": [
+     21997,
+     16730,
+     15050
+    ],
+    "wrist": [
+     21996,
+     16735,
+     250581,
+     19508
+    ],
+    "hands": [
+     21998,
+     16737,
+     15063
+    ],
+    "waist": [
+     21994,
+     10798,
+     250571
+    ],
+    "legs": [
+     22385,
+     12619,
+     22000,
+     21316,
+     16732
+    ],
+    "feet": [
+     21995,
+     16734,
+     250561
+    ],
+    "finger": [
+     17713,
+     11862,
+     15855,
+     18400,
+     274754
+    ],
+    "trinket": [
+     10659,
+     273840,
+     10779
+    ],
+    "ranged": [
+     16007,
+     9412
+    ]
+   },
+   "refs": {
+    "12640": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12620": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "21999": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "12625": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22001": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16733": {
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18509": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "6314": {
+     "src": "副本：影牙城堡 · 狼王南杜斯",
+     "dungeonId": "shadowfang-keep"
+    },
+    "21997": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16730": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21996": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16735": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250581": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "21998": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16737": {
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21994": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "10798": {
+     "src": "副本：沉没的神庙 · 阿塔拉利恩",
+     "dungeonId": "sunken-temple"
+    },
+    "250571": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22385": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22000": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "21316": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "16732": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "21995": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16734": {
+     "src": "副本：通灵学院 · 基尔图诺斯",
+     "dungeonId": "scholomance"
+    },
+    "250561": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15855": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "10659": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "10779": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-protection-warrior",
+   "cls": "warrior",
+   "clsCn": "战士",
+   "spec": "protection",
+   "mode": "防护 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/protection-warrior/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 12640
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 12625
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18413
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 21997
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 21996
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21998
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 21994
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22385
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 21995
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 15855
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 17713
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 13164
+    },
+    {
+     "slot": "饰品",
+     "cell": 2,
+     "item": 10779
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 12798
+    },
+    {
+     "slot": "副手",
+     "cell": 1,
+     "item": 7726
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     12640,
+     12620,
+     21999,
+     16731
+    ],
+    "neck": [
+     22150,
+     274749
+    ],
+    "shoulder": [
+     12625,
+     22001,
+     16733,
+     250577
+    ],
+    "back": [
+     18413,
+     18511,
+     11311
+    ],
+    "chest": [
+     21997,
+     12618,
+     16730
+    ],
+    "wrist": [
+     21996,
+     16735,
+     250582
+    ],
+    "hands": [
+     21998,
+     16737,
+     12639
+    ],
+    "waist": [
+     21994,
+     250572,
+     10798
+    ],
+    "legs": [
+     22385,
+     12619,
+     22000,
+     16732
+    ],
+    "feet": [
+     21995,
+     16734,
+     250562
+    ],
+    "finger": [
+     15855,
+     274754,
+     17713,
+     18400
+    ],
+    "trinket": [
+     13164,
+     10659,
+     273840,
+     10779
+    ],
+    "main-hand": [
+     12798,
+     12774,
+     22384,
+     12797
+    ],
+    "off-hand": [
+     7726,
+     18168,
+     9643,
+     274418
+    ],
+    "ranged": [
+     16007,
+     9412
+    ]
+   },
+   "refs": {
+    "12640": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12620": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "21999": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16731": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "274749": {
+     "src": "商人出售（荆棘谷）",
+     "dungeonId": null
+    },
+    "12625": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22001": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16733": {
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250577": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "18413": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "11311": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    },
+    "21997": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "12618": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16730": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "21996": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16735": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250582": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "21998": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16737": {
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "12639": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "21994": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "250572": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "10798": {
+     "src": "副本：沉没的神庙 · 阿塔拉利恩",
+     "dungeonId": "sunken-temple"
+    },
+    "22385": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22000": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16732": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "21995": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16734": {
+     "src": "副本：通灵学院 · 基尔图诺斯",
+     "dungeonId": "scholomance"
+    },
+    "250562": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "15855": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "13164": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "10659": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "10779": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "12798": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12774": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22384": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12797": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "7726": {
+     "src": "副本：血色修道院大教堂 · 血色十字军指挥官莫格莱尼",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "18168": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "9643": {
+     "src": "任务奖励（塔纳利斯）",
+     "dungeonId": null
+    },
+    "274418": {
+     "src": "商人出售（海加尔山）",
+     "dungeonId": null
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-holy-paladin",
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "spec": "holy",
+   "mode": "神圣 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/holy-paladin/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 12633
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 15856
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 12625
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18510
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16726
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 16722
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16692
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 250574
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16728
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16725
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 273031
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 7721
+    },
+    {
+     "slot": "副手",
+     "cell": 1,
+     "item": 249456
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 228175
+    }
+   ],
+   "alts": {
+    "head": [
+     12633,
+     16693,
+     14140,
+     22091
+    ],
+    "neck": [
+     15856,
+     22149,
+     10769,
+     23125
+    ],
+    "shoulder": [
+     12625,
+     16718,
+     15061,
+     250579
+    ],
+    "back": [
+     18510,
+     275046,
+     275050
+    ],
+    "chest": [
+     16726,
+     16690,
+     15047,
+     18486,
+     22089
+    ],
+    "wrist": [
+     16722,
+     252573,
+     250584,
+     254061
+    ],
+    "hands": [
+     16692,
+     20296,
+     18409
+    ],
+    "waist": [
+     250574,
+     252591,
+     254081
+    ],
+    "legs": [
+     16728,
+     16694,
+     14137,
+     15060
+    ],
+    "feet": [
+     16725,
+     252579,
+     16691,
+     250564
+    ],
+    "finger": [
+     281635,
+     274746,
+     275043,
+     18402,
+     273031,
+     273030,
+     9447
+    ],
+    "main-hand": [
+     7721,
+     22383,
+     9419
+    ],
+    "off-hand": [
+     249456,
+     249455,
+     277258
+    ],
+    "ranged": [
+     228175
+    ]
+   },
+   "refs": {
+    "12633": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16693": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "14140": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22091": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "15856": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "10769": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "12625": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16718": {
+     "src": "副本：黑石塔下层 · 奴役者基兹鲁尔",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "15061": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "250579": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "275046": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "275050": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "16726": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "16690": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15047": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18486": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22089": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16722": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "252573": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "250584": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "254061": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16692": {
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "20296": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18409": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "250574": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "252591": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "254081": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16728": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16694": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "14137": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15060": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16725": {
+     "src": "副本：斯坦索姆正门 · 巴纳扎尔",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "252579": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16691": {
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "250564": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "274746": {
+     "src": "商人出售（荆棘谷）",
+     "dungeonId": null
+    },
+    "275043": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "273031": {
+     "src": "副本：达拉然 · 奥术畸体",
+     "dungeonId": "city-of-dalaran"
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "9447": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "7721": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22383": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "9419": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    },
+    "249456": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "249455": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "277258": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "228175": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-protection-paladin",
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "spec": "protection",
+   "mode": "防护 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/protection-paladin/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 250597
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 23125
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16733
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18413
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 250595
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 16722
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16737
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 250573
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 12619
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 250563
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 15855
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 11811
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 12798
+    },
+    {
+     "slot": "副手",
+     "cell": 1,
+     "item": 7726
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249442
+    }
+   ],
+   "alts": {
+    "head": [
+     250597,
+     16731,
+     22091,
+     12620
+    ],
+    "neck": [
+     23125,
+     22149
+    ],
+    "shoulder": [
+     16733,
+     250578,
+     250580,
+     22093
+    ],
+    "back": [
+     18413,
+     11311
+    ],
+    "chest": [
+     250595,
+     16730,
+     22089
+    ],
+    "wrist": [
+     16722,
+     250583,
+     250582,
+     250585,
+     22088
+    ],
+    "hands": [
+     16737,
+     22090
+    ],
+    "waist": [
+     250573,
+     250572,
+     250575,
+     22086
+    ],
+    "legs": [
+     12619,
+     250596,
+     16732,
+     22092
+    ],
+    "feet": [
+     250563,
+     16734,
+     250562,
+     22087
+    ],
+    "finger": [
+     15855,
+     17713,
+     274754,
+     275045,
+     9533,
+     18400
+    ],
+    "trinket": [
+     11811
+    ],
+    "main-hand": [
+     12798,
+     12797,
+     22383,
+     9419
+    ],
+    "off-hand": [
+     7726,
+     274418,
+     18168,
+     11915
+    ],
+    "ranged": [
+     249442
+    ]
+   },
+   "refs": {
+    "250597": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16731": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22091": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "12620": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "16733": {
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250578": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250580": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22093": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "18413": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "11311": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    },
+    "250595": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16730": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22089": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16722": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "250583": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250582": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250585": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22088": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16737": {
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22090": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "250573": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250572": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250575": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22086": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "12619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250596": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16732": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22092": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "250563": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16734": {
+     "src": "副本：通灵学院 · 基尔图诺斯",
+     "dungeonId": "scholomance"
+    },
+    "250562": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22087": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "15855": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "275045": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "11811": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "12798": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12797": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22383": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "9419": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    },
+    "7726": {
+     "src": "副本：血色修道院大教堂 · 血色十字军指挥官莫格莱尼",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "274418": {
+     "src": "商人出售（海加尔山）",
+     "dungeonId": null
+    },
+    "18168": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "11915": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "249442": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-retribution-paladin",
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "spec": "retribution",
+   "mode": "惩戒 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/retribution-paladin/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 12640
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16729
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18510
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16666
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 16722
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16672
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 250575
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22385
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16682
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 12784
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249442
+    }
+   ],
+   "alts": {
+    "head": [
+     12640,
+     16686,
+     16727,
+     22091,
+     16731
+    ],
+    "neck": [
+     22150,
+     15856,
+     23125,
+     22149
+    ],
+    "shoulder": [
+     16729,
+     250580,
+     22093
+    ],
+    "back": [
+     18510,
+     15789,
+     18511,
+     18509
+    ],
+    "chest": [
+     16666,
+     16726,
+     22089,
+     15050
+    ],
+    "wrist": [
+     16722,
+     250585,
+     250581,
+     22088
+    ],
+    "hands": [
+     16672,
+     16737,
+     22090,
+     15063,
+     19057
+    ],
+    "waist": [
+     250575,
+     250571,
+     22086,
+     10798
+    ],
+    "legs": [
+     22385,
+     16687,
+     16728,
+     16732,
+     22092,
+     17711
+    ],
+    "feet": [
+     16682,
+     250565,
+     250561,
+     22087,
+     16675
+    ],
+    "finger": [
+     17713,
+     274754,
+     275044,
+     9533,
+     18400,
+     281635
+    ],
+    "main-hand": [
+     12784,
+     7960,
+     250617,
+     9418
+    ],
+    "ranged": [
+     249442
+    ]
+   },
+   "refs": {
+    "12640": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16727": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "22091": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16731": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "15856": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "16729": {
+     "src": "副本：黑石塔上层 · 比斯巨兽",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "250580": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22093": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18509": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16666": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "16726": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22089": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16722": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "250585": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250581": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22088": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16672": {
+     "src": "副本：黑石塔上层 · 烈焰卫士艾博希尔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "16737": {
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22090": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19057": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250575": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250571": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22086": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "10798": {
+     "src": "副本：沉没的神庙 · 阿塔拉利恩",
+     "dungeonId": "sunken-temple"
+    },
+    "22385": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16728": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16732": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22092": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "17711": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "250565": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250561": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22087": {
+     "src": "任务奖励（铁炉堡）",
+     "dungeonId": null
+    },
+    "16675": {
+     "src": "副本：斯坦索姆侧门 · 奈鲁布恩坎",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "275044": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "12784": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "7960": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250617": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "9418": {
+     "src": "副本：奥达曼 · 阿扎达斯",
+     "dungeonId": "uldaman"
+    },
+    "249442": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-beast-mastery-hunter",
+   "cls": "hunter",
+   "clsCn": "猎人",
+   "spec": "beast-mastery",
+   "mode": "野兽控制 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/beast-mastery-hunter/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16677
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16679
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18511
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16674
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 18508
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16676
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 16680
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16678
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16675
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     16677,
+     22013,
+     15080,
+     16707
+    ],
+    "neck": [
+     22150,
+     20649,
+     7731
+    ],
+    "shoulder": [
+     16679,
+     22016,
+     15051,
+     16708
+    ],
+    "back": [
+     18511,
+     15789
+    ],
+    "chest": [
+     16674,
+     22060,
+     15050,
+     21320
+    ],
+    "wrist": [
+     18508,
+     22011,
+     252570,
+     15077
+    ],
+    "hands": [
+     16676,
+     15063,
+     15078
+    ],
+    "waist": [
+     16680,
+     252588,
+     22010,
+     15082,
+     19125
+    ],
+    "legs": [
+     16678,
+     22017,
+     15052,
+     15062
+    ],
+    "feet": [
+     16675,
+     22061,
+     16711,
+     18506
+    ],
+    "finger": [
+     17713,
+     7686,
+     11862,
+     9533,
+     276202,
+     275044
+    ],
+    "ranged": [
+     16007,
+     16004,
+     16992,
+     17753
+    ]
+   },
+   "refs": {
+    "16677": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22013": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15080": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "16679": {
+     "src": "副本：黑石塔下层 · 维姆萨拉克",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22016": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "16674": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22060": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21320": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "18508": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22011": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252570": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15077": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16676": {
+     "src": "副本：黑石塔下层 · 指挥官沃恩",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15078": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16680": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "252588": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22010": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15082": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19125": {
+     "src": "任务奖励（灼热峡谷）",
+     "dungeonId": null
+    },
+    "16678": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22017": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15052": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16675": {
+     "src": "副本：斯坦索姆侧门 · 奈鲁布恩坎",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22061": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "7686": {
+     "src": "副本：血色修道院墓地 · 铁脊死灵",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "276202": {
+     "src": "商人出售（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "275044": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16004": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "17753": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    }
+   }
+  },
+  {
+   "id": "lv60-marksmanship-hunter",
+   "cls": "hunter",
+   "clsCn": "猎人",
+   "spec": "marksmanship",
+   "mode": "射击 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/marksmanship-hunter/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16677
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16679
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18511
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16674
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 18508
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16676
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 16680
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16678
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16675
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     16677,
+     22013,
+     15080,
+     11124
+    ],
+    "neck": [
+     22150,
+     20649,
+     7731
+    ],
+    "shoulder": [
+     16679,
+     22016,
+     15051,
+     16708
+    ],
+    "back": [
+     18511,
+     15789
+    ],
+    "chest": [
+     16674,
+     22060,
+     15050,
+     15787
+    ],
+    "wrist": [
+     18508,
+     22011,
+     252570,
+     15077
+    ],
+    "hands": [
+     16676,
+     15063,
+     15078
+    ],
+    "waist": [
+     16680,
+     252588,
+     22010,
+     15082,
+     19125
+    ],
+    "legs": [
+     16678,
+     22017,
+     15052,
+     15062
+    ],
+    "feet": [
+     16675,
+     22061,
+     16711,
+     18506
+    ],
+    "finger": [
+     17713,
+     7686,
+     11862,
+     9533,
+     276202,
+     275044
+    ],
+    "ranged": [
+     16007,
+     16004,
+     16992,
+     17753
+    ]
+   },
+   "refs": {
+    "16677": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22013": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15080": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "11124": {
+     "src": "副本任务：沉没的神庙",
+     "dungeonId": "sunken-temple"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "16679": {
+     "src": "副本：黑石塔下层 · 维姆萨拉克",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22016": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "16674": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22060": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15787": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "18508": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22011": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252570": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15077": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16676": {
+     "src": "副本：黑石塔下层 · 指挥官沃恩",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15078": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16680": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "252588": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22010": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15082": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19125": {
+     "src": "任务奖励（灼热峡谷）",
+     "dungeonId": null
+    },
+    "16678": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22017": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15052": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16675": {
+     "src": "副本：斯坦索姆侧门 · 奈鲁布恩坎",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22061": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "7686": {
+     "src": "副本：血色修道院墓地 · 铁脊死灵",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "276202": {
+     "src": "商人出售（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "275044": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16004": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "17753": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    }
+   }
+  },
+  {
+   "id": "lv60-survival-hunter",
+   "cls": "hunter",
+   "clsCn": "猎人",
+   "spec": "survival",
+   "mode": "生存 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/survival-hunter/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16677
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16679
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18511
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16674
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 252570
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16676
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 16680
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16678
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16675
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16007
+    }
+   ],
+   "alts": {
+    "head": [
+     16677,
+     22013,
+     15080,
+     16707
+    ],
+    "neck": [
+     22150,
+     20649,
+     7731
+    ],
+    "shoulder": [
+     16679,
+     22016,
+     15051,
+     16708
+    ],
+    "back": [
+     18511,
+     15789
+    ],
+    "chest": [
+     16674,
+     22060,
+     15050,
+     21320
+    ],
+    "wrist": [
+     252570,
+     22011,
+     252540,
+     15077
+    ],
+    "hands": [
+     16676,
+     15063,
+     15078
+    ],
+    "waist": [
+     16680,
+     252588,
+     22010,
+     252474,
+     19125
+    ],
+    "legs": [
+     16678,
+     22017,
+     15052,
+     15062
+    ],
+    "feet": [
+     16675,
+     22061,
+     16711,
+     18506
+    ],
+    "finger": [
+     17713,
+     7686,
+     11862,
+     9533,
+     276202,
+     275044
+    ],
+    "ranged": [
+     16007,
+     16004,
+     16992,
+     17753
+    ]
+   },
+   "refs": {
+    "16677": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22013": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15080": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "16679": {
+     "src": "副本：黑石塔下层 · 维姆萨拉克",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22016": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "16674": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22060": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21320": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "252570": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22011": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252540": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15077": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16676": {
+     "src": "副本：黑石塔下层 · 指挥官沃恩",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15078": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16680": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "252588": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22010": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252474": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19125": {
+     "src": "任务奖励（灼热峡谷）",
+     "dungeonId": null
+    },
+    "16678": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22017": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15052": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16675": {
+     "src": "副本：斯坦索姆侧门 · 奈鲁布恩坎",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22061": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "7686": {
+     "src": "副本：血色修道院墓地 · 铁脊死灵",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "276202": {
+     "src": "商人出售（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "275044": {
+     "src": "任务奖励（河林（永望/新地图））",
+     "dungeonId": null
+    },
+    "16007": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16004": {
+     "src": "工程学",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "17753": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    }
+   }
+  },
+  {
+   "id": "lv60-assassination-rogue",
+   "cls": "rogue",
+   "clsCn": "潜行者",
+   "spec": "assassination",
+   "mode": "刺杀 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/assassination-rogue/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22005
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16708
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 21187
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22009
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22004
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21278
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 252474
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22007
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 18506
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 12783
+    },
+    {
+     "slot": "副手",
+     "cell": 1,
+     "item": 19166
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 20086
+    }
+   ],
+   "alts": {
+    "head": [
+     22005,
+     16707,
+     15086,
+     8348
+    ],
+    "neck": [
+     22150,
+     20649
+    ],
+    "shoulder": [
+     16708,
+     22008,
+     252535,
+     15822
+    ],
+    "back": [
+     21187,
+     18511,
+     15789
+    ],
+    "chest": [
+     22009,
+     16721,
+     15085,
+     15064
+    ],
+    "wrist": [
+     22004,
+     272186,
+     19508,
+     15084
+    ],
+    "hands": [
+     21278,
+     16712,
+     22006,
+     15063,
+     15708
+    ],
+    "waist": [
+     252474,
+     22002,
+     19044,
+     15088
+    ],
+    "legs": [
+     22007,
+     16709,
+     15062,
+     15065
+    ],
+    "feet": [
+     18506,
+     16711,
+     22003,
+     9398
+    ],
+    "finger": [
+     17713,
+     21182,
+     9533,
+     275831,
+     11862
+    ],
+    "main-hand": [
+     12783,
+     15706,
+     250616
+    ],
+    "off-hand": [
+     19166,
+     250616,
+     15706,
+     15783
+    ],
+    "ranged": [
+     20086,
+     16992,
+     9412
+    ]
+   },
+   "refs": {
+    "22005": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "15086": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "8348": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22008": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252535": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15822": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "21187": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "22009": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16721": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15085": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15064": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22004": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "272186": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "15084": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21278": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16712": {
+     "src": "副本：黑石塔下层 · 暗影猎手沃什加斯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22006": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15708": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "252474": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22002": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19044": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15088": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22007": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16709": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15065": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "22003": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9398": {
+     "src": "副本：奥达曼 · 埃瑞克",
+     "dungeonId": "uldaman"
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "21182": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "275831": {
+     "src": "任务奖励（海加尔山）",
+     "dungeonId": null
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "12783": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "15706": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "250616": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "19166": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "15783": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "20086": {
+     "src": "任务奖励（希尔斯布莱德丘陵）",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-combat-rogue",
+   "cls": "rogue",
+   "clsCn": "潜行者",
+   "spec": "combat",
+   "mode": "战斗 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/combat-rogue/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22005
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16708
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 21187
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22009
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22004
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21278
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 252474
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22007
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 18506
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 22384
+    },
+    {
+     "slot": "副手",
+     "cell": 1,
+     "item": 17016
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 20086
+    }
+   ],
+   "alts": {
+    "head": [
+     22005,
+     16707,
+     15086,
+     8348
+    ],
+    "neck": [
+     22150,
+     20649
+    ],
+    "shoulder": [
+     16708,
+     22008,
+     252535,
+     15822
+    ],
+    "back": [
+     21187,
+     18511,
+     15789
+    ],
+    "chest": [
+     22009,
+     16721,
+     15085,
+     15064
+    ],
+    "wrist": [
+     22004,
+     272186,
+     19508,
+     15084
+    ],
+    "hands": [
+     21278,
+     16712,
+     22006,
+     15063,
+     15708
+    ],
+    "waist": [
+     252474,
+     22002,
+     19044,
+     15088
+    ],
+    "legs": [
+     22007,
+     16709,
+     15062,
+     15065
+    ],
+    "feet": [
+     18506,
+     16711,
+     22003,
+     9398
+    ],
+    "finger": [
+     17713,
+     21182,
+     9533,
+     275831,
+     11862
+    ],
+    "main-hand": [
+     22384,
+     12798,
+     12797,
+     250618,
+     18671
+    ],
+    "off-hand": [
+     17016,
+     12783,
+     250616,
+     17738
+    ],
+    "ranged": [
+     20086,
+     16992,
+     9412
+    ]
+   },
+   "refs": {
+    "22005": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "15086": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "8348": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22008": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252535": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15822": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "21187": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "22009": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16721": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15085": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15064": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22004": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "272186": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "15084": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21278": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16712": {
+     "src": "副本：黑石塔下层 · 暗影猎手沃什加斯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22006": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15708": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "252474": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22002": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19044": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15088": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22007": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16709": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15065": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "22003": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9398": {
+     "src": "副本：奥达曼 · 埃瑞克",
+     "dungeonId": "uldaman"
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "21182": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "275831": {
+     "src": "任务奖励（海加尔山）",
+     "dungeonId": null
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "22384": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12798": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12797": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250618": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "18671": {
+     "src": "掉落：安戈洛环形山",
+     "dungeonId": null
+    },
+    "17016": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12783": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "250616": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17738": {
+     "src": "副本：玛拉顿 · 被诅咒的塞雷布拉斯",
+     "dungeonId": "maraudon"
+    },
+    "20086": {
+     "src": "任务奖励（希尔斯布莱德丘陵）",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-subtlety-rogue",
+   "cls": "rogue",
+   "clsCn": "潜行者",
+   "spec": "subtlety",
+   "mode": "敏锐 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/subtlety-rogue/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22005
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16708
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 21187
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22009
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22004
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21278
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 252474
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22007
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 18506
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 20086
+    }
+   ],
+   "alts": {
+    "head": [
+     22005,
+     16707,
+     15086,
+     8348
+    ],
+    "neck": [
+     22150,
+     20649
+    ],
+    "shoulder": [
+     16708,
+     22008,
+     252535,
+     15822
+    ],
+    "back": [
+     21187,
+     18511,
+     15789
+    ],
+    "chest": [
+     22009,
+     16721,
+     15085,
+     15064
+    ],
+    "wrist": [
+     22004,
+     272186,
+     19508,
+     15084
+    ],
+    "hands": [
+     21278,
+     16712,
+     22006,
+     15063,
+     15708
+    ],
+    "waist": [
+     252474,
+     22002,
+     19044,
+     15088
+    ],
+    "legs": [
+     22007,
+     16709,
+     15062,
+     15065
+    ],
+    "feet": [
+     18506,
+     16711,
+     22003,
+     9398
+    ],
+    "finger": [
+     17713,
+     21182,
+     9533,
+     275831,
+     11862
+    ],
+    "ranged": [
+     20086,
+     16992,
+     9412
+    ]
+   },
+   "refs": {
+    "22005": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "15086": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "8348": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "20649": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22008": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252535": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15822": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "21187": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "22009": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16721": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15085": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15064": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22004": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "272186": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "15084": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21278": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16712": {
+     "src": "副本：黑石塔下层 · 暗影猎手沃什加斯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "22006": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15708": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "252474": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22002": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19044": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15088": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22007": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16709": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15065": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "22003": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "9398": {
+     "src": "副本：奥达曼 · 埃瑞克",
+     "dungeonId": "uldaman"
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "21182": {
+     "src": "任务奖励（希利苏斯）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "275831": {
+     "src": "任务奖励（海加尔山）",
+     "dungeonId": null
+    },
+    "11862": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "20086": {
+     "src": "任务奖励（希尔斯布莱德丘陵）",
+     "dungeonId": null
+    },
+    "16992": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "9412": {
+     "src": "副本：奥达曼 · 加加恩·火锤",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-discipline-priest",
+   "cls": "priest",
+   "clsCn": "牧师",
+   "spec": "discipline",
+   "mode": "戒律 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/discipline-priest/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 14140
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 14139
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18510
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22083
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254061
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16692
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 19047
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 14137
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 275609
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 273030
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9447
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 10659
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     14140,
+     22080,
+     16693,
+     7720
+    ],
+    "neck": [
+     22149,
+     23125,
+     10769
+    ],
+    "shoulder": [
+     14139,
+     254049,
+     22082,
+     16695
+    ],
+    "back": [
+     18510,
+     13860,
+     19121
+    ],
+    "chest": [
+     22083,
+     14154,
+     14138,
+     16690
+    ],
+    "wrist": [
+     254061,
+     254123,
+     9448
+    ],
+    "hands": [
+     16692,
+     18409,
+     19116,
+     10019
+    ],
+    "waist": [
+     19047,
+     254081,
+     18405,
+     17755
+    ],
+    "legs": [
+     14137,
+     16694,
+     22085,
+     11123
+    ],
+    "feet": [
+     275609,
+     16691,
+     22084,
+     15802,
+     254107
+    ],
+    "finger": [
+     273030,
+     274746,
+     9447,
+     273031
+    ],
+    "trinket": [
+     10659
+    ],
+    "ranged": [
+     249385,
+     16993,
+     10766
+    ]
+   },
+   "refs": {
+    "14140": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22080": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16693": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "7720": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "10769": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "14139": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254049": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22082": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16695": {
+     "src": "副本：黑石塔上层 · 索拉卡·火冠",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19121": {
+     "src": "任务奖励（辛特兰）",
+     "dungeonId": null
+    },
+    "22083": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14154": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14138": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16690": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "254061": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "9448": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "16692": {
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "18409": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19116": {
+     "src": "任务奖励（辛特兰）",
+     "dungeonId": null
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19047": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254081": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "14137": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16694": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22085": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "11123": {
+     "src": "副本任务：沉没的神庙",
+     "dungeonId": "sunken-temple"
+    },
+    "275609": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16691": {
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22084": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15802": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254107": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "274746": {
+     "src": "商人出售（荆棘谷）",
+     "dungeonId": null
+    },
+    "9447": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "273031": {
+     "src": "副本：达拉然 · 奥术畸体",
+     "dungeonId": "city-of-dalaran"
+    },
+    "10659": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-holy-priest",
+   "cls": "priest",
+   "clsCn": "牧师",
+   "spec": "holy",
+   "mode": "神圣 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/holy-priest/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 14140
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 14139
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18510
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22083
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254061
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16692
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 19047
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 14137
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 275609
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 273030
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9447
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 10659
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     14140,
+     22080,
+     16693,
+     7720
+    ],
+    "neck": [
+     22149,
+     23125,
+     10769
+    ],
+    "shoulder": [
+     14139,
+     254049,
+     22082,
+     16695
+    ],
+    "back": [
+     18510,
+     13860,
+     19121
+    ],
+    "chest": [
+     22083,
+     14154,
+     14138,
+     16690
+    ],
+    "wrist": [
+     254061,
+     254123,
+     9448
+    ],
+    "hands": [
+     16692,
+     18409,
+     19116,
+     10019
+    ],
+    "waist": [
+     19047,
+     254081,
+     18405,
+     17755
+    ],
+    "legs": [
+     14137,
+     16694,
+     22085,
+     11123
+    ],
+    "feet": [
+     275609,
+     16691,
+     22084,
+     15802,
+     254107
+    ],
+    "finger": [
+     273030,
+     274746,
+     9447,
+     273031
+    ],
+    "trinket": [
+     10659
+    ],
+    "ranged": [
+     249385,
+     16993,
+     10766
+    ]
+   },
+   "refs": {
+    "14140": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22080": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16693": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "7720": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "10769": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "14139": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254049": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22082": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16695": {
+     "src": "副本：黑石塔上层 · 索拉卡·火冠",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19121": {
+     "src": "任务奖励（辛特兰）",
+     "dungeonId": null
+    },
+    "22083": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14154": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14138": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16690": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "254061": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "9448": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "16692": {
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "18409": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19116": {
+     "src": "任务奖励（辛特兰）",
+     "dungeonId": null
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19047": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254081": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "14137": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16694": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22085": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "11123": {
+     "src": "副本任务：沉没的神庙",
+     "dungeonId": "sunken-temple"
+    },
+    "275609": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16691": {
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22084": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15802": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254107": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "274746": {
+     "src": "商人出售（荆棘谷）",
+     "dungeonId": null
+    },
+    "9447": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "273031": {
+     "src": "副本：达拉然 · 奥术畸体",
+     "dungeonId": "city-of-dalaran"
+    },
+    "10659": {
+     "src": "任务奖励（诅咒之地）",
+     "dungeonId": null
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-shadow-priest",
+   "cls": "priest",
+   "clsCn": "牧师",
+   "spec": "shadow",
+   "mode": "暗影 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/shadow-priest/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 9470
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 23125
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 14112
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 14136
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254067
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 18407
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 18405
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 14107
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 254113
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 273030
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 273806
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 16993
+    }
+   ],
+   "alts": {
+    "head": [
+     9470,
+     14111,
+     16698,
+     22080
+    ],
+    "neck": [
+     23125,
+     22149,
+     7722
+    ],
+    "shoulder": [
+     14112,
+     254055,
+     16701,
+     22082
+    ],
+    "back": [
+     13860,
+     18510,
+     19121
+    ],
+    "chest": [
+     14136,
+     14106,
+     16688,
+     22083
+    ],
+    "wrist": [
+     254067,
+     254123,
+     9448
+    ],
+    "hands": [
+     18407,
+     14146,
+     10023
+    ],
+    "waist": [
+     18405,
+     254087,
+     17755
+    ],
+    "legs": [
+     14107,
+     14144,
+     16699,
+     22085
+    ],
+    "feet": [
+     254113,
+     16682,
+     16704,
+     22084
+    ],
+    "finger": [
+     273030,
+     6750,
+     273806,
+     9622
+    ],
+    "ranged": [
+     16993,
+     249385,
+     10766
+    ]
+   },
+   "refs": {
+    "9470": {
+     "src": "副本：祖尔法拉克 · 暗影祭司塞瑟斯",
+     "dungeonId": "zulfarrak"
+    },
+    "14111": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22080": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "7722": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "14112": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254055": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "22082": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19121": {
+     "src": "任务奖励（辛特兰）",
+     "dungeonId": null
+    },
+    "14136": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14106": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16688": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22083": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254067": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "9448": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "18407": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "10023": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254087": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "14107": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22085": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254113": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22084": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "9622": {
+     "src": "任务奖励（尘泥沼泽）",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-elemental-shaman",
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "spec": "elemental",
+   "mode": "元素 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/elemental-shaman/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16667
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 23125
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 19050
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16666
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254123
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21318
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 17755
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 20295
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16682
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 273030
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 270081
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 270226
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249398
+    }
+   ],
+   "alts": {
+    "head": [
+     16667,
+     16686,
+     10033,
+     22097
+    ],
+    "neck": [
+     23125,
+     22149,
+     23169
+    ],
+    "shoulder": [
+     19050,
+     15067,
+     16689,
+     22101
+    ],
+    "back": [
+     13860,
+     8216,
+     14044
+    ],
+    "chest": [
+     16666,
+     15048,
+     16688
+    ],
+    "wrist": [
+     254123,
+     15092,
+     22095
+    ],
+    "hands": [
+     21318,
+     10019,
+     16672,
+     22099
+    ],
+    "waist": [
+     17755,
+     18405,
+     22098
+    ],
+    "legs": [
+     20295,
+     15095,
+     16668
+    ],
+    "feet": [
+     16682,
+     16670,
+     20641,
+     22096
+    ],
+    "finger": [
+     273030,
+     20682,
+     270081,
+     17768,
+     270109
+    ],
+    "trinket": [
+     270226,
+     274760
+    ],
+    "ranged": [
+     249398,
+     228176
+    ]
+   },
+   "refs": {
+    "16667": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "10033": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22097": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23169": {
+     "src": "副本：血色修道院墓地 · 瑟克恩",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "19050": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15067": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16689": {
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    "22101": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "8216": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14044": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16666": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15048": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16688": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15092": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22095": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16672": {
+     "src": "副本：黑石塔上层 · 烈焰卫士艾博希尔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22099": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22098": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "20295": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15095": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16668": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16670": {
+     "src": "副本：黑石塔下层 · 欧莫克大王",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "20641": {
+     "src": "任务奖励（塔纳利斯）",
+     "dungeonId": null
+    },
+    "22096": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "270081": {
+     "src": "副本任务：剃刀高地",
+     "dungeonId": "razor-krendor"
+    },
+    "17768": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "270109": {
+     "src": "任务奖励（荆棘谷）",
+     "dungeonId": null
+    },
+    "270226": {
+     "src": "任务奖励（荆棘谷）",
+     "dungeonId": null
+    },
+    "274760": {
+     "src": "商人出售（冬泉谷）",
+     "dungeonId": null
+    },
+    "249398": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "228176": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-enhancement-shaman",
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "spec": "enhancement",
+   "mode": "增强 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/enhancement-shaman/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 7719
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 19050
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 15789
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 15050
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 19508
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 12632
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 18405
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 15065
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 252578
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9533
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 270226
+    },
+    {
+     "slot": "饰品",
+     "cell": 2,
+     "item": 17774
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 9449
+    }
+   ],
+   "alts": {
+    "head": [
+     7719,
+     274291,
+     3837
+    ],
+    "neck": [
+     22149,
+     22150,
+     7731
+    ],
+    "shoulder": [
+     19050,
+     15051,
+     252568,
+     11871,
+     22101
+    ],
+    "back": [
+     15789,
+     5257
+    ],
+    "chest": [
+     15050,
+     252599,
+     22102
+    ],
+    "wrist": [
+     19508,
+     272186,
+     252572
+    ],
+    "hands": [
+     12632,
+     15063,
+     15823,
+     7724,
+     22099
+    ],
+    "waist": [
+     18405,
+     10768,
+     21312,
+     19043,
+     22098
+    ],
+    "legs": [
+     15065,
+     15052,
+     15062,
+     22100
+    ],
+    "feet": [
+     252578,
+     275618,
+     16984,
+     22096
+    ],
+    "finger": [
+     17713,
+     7686,
+     9533,
+     274754
+    ],
+    "trinket": [
+     270226,
+     274759,
+     17774,
+     274760
+    ],
+    "main-hand": [
+     9449,
+     12784,
+     12796,
+     17766,
+     9413
+    ]
+   },
+   "refs": {
+    "7719": {
+     "src": "副本：血色修道院军械库 · 赫洛德",
+     "dungeonId": "scarlet-monastery-armory"
+    },
+    "274291": {
+     "src": "副本：血色修道院墓地 · 血法师萨尔诺斯",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "3837": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "19050": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15051": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "252568": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "11871": {
+     "src": "任务奖励（达纳苏斯 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "22101": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "5257": {
+     "src": "掉落：阿拉希高地",
+     "dungeonId": null
+    },
+    "15050": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "252599": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22102": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "272186": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "252572": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "12632": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15823": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "7724": {
+     "src": "副本：血色修道院大教堂 · 血色十字军指挥官莫格莱尼",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22099": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "10768": {
+     "src": "副本：剃刀高地 · 拉戈斯诺特",
+     "dungeonId": "razor-krendor"
+    },
+    "21312": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "19043": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22098": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "15065": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15052": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22100": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "252578": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "275618": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16984": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22096": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "7686": {
+     "src": "副本：血色修道院墓地 · 铁脊死灵",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "274754": {
+     "src": "商人出售（塔纳利斯）",
+     "dungeonId": null
+    },
+    "270226": {
+     "src": "任务奖励（荆棘谷）",
+     "dungeonId": null
+    },
+    "274759": {
+     "src": "商人出售（冬泉谷）",
+     "dungeonId": null
+    },
+    "17774": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "274760": {
+     "src": "商人出售（冬泉谷）",
+     "dungeonId": null
+    },
+    "9449": {
+     "src": "副本：诺莫瑞根 · 群体打击者9-60",
+     "dungeonId": "gnomeregan"
+    },
+    "12784": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "12796": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17766": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "9413": {
+     "src": "副本：奥达曼 · 阿扎达斯",
+     "dungeonId": "uldaman"
+    }
+   }
+  },
+  {
+   "id": "lv60-restoration-shaman",
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "spec": "restoration",
+   "mode": "恢复 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/restoration-shaman/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16693
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16695
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16690
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254123
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 20296
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 17755
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16694
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16691
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 273030
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 9447
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 270226
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249398
+    }
+   ],
+   "alts": {
+    "head": [
+     16693,
+     16667,
+     14140,
+     22097
+    ],
+    "neck": [
+     22149,
+     10769,
+     23125,
+     20685
+    ],
+    "shoulder": [
+     16695,
+     19507,
+     22101
+    ],
+    "back": [
+     13860,
+     18510,
+     273825
+    ],
+    "chest": [
+     16690,
+     18486,
+     15047,
+     22102
+    ],
+    "wrist": [
+     254123,
+     22095
+    ],
+    "hands": [
+     20296,
+     21318,
+     16692,
+     22099
+    ],
+    "waist": [
+     17755,
+     18405,
+     10771,
+     22098
+    ],
+    "legs": [
+     16694,
+     11123,
+     20295,
+     14137
+    ],
+    "feet": [
+     16691,
+     15802,
+     22096
+    ],
+    "finger": [
+     273030,
+     20682,
+     9447,
+     17768,
+     270081
+    ],
+    "trinket": [
+     270226,
+     274761
+    ],
+    "ranged": [
+     249398
+    ]
+   },
+   "refs": {
+    "16693": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16667": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "14140": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22097": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "10769": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "20685": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "16695": {
+     "src": "副本：黑石塔上层 · 索拉卡·火冠",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "19507": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22101": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "273825": {
+     "src": "副本：监狱 · 巴吉尔·特雷德",
+     "dungeonId": "the-stocks"
+    },
+    "16690": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "18486": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15047": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22102": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22095": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "20296": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "16692": {
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22099": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "10771": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "22098": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16694": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "11123": {
+     "src": "副本任务：沉没的神庙",
+     "dungeonId": "sunken-temple"
+    },
+    "20295": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14137": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16691": {
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15802": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22096": {
+     "src": "任务奖励（奥格瑞玛）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "9447": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "17768": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "270081": {
+     "src": "副本任务：剃刀高地",
+     "dungeonId": "razor-krendor"
+    },
+    "270226": {
+     "src": "任务奖励（荆棘谷）",
+     "dungeonId": null
+    },
+    "274761": {
+     "src": "商人出售（冬泉谷）",
+     "dungeonId": null
+    },
+    "249398": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-arcane-mage",
+   "cls": "mage",
+   "clsCn": "法师",
+   "spec": "arcane",
+   "mode": "奥术 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/arcane-mage/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22065
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 22068
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16688
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 16683
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16684
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 22062
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22067
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22064
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 270081
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 17768
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22065,
+     16686,
+     16698,
+     10041
+    ],
+    "neck": [
+     22149,
+     23125,
+     15856,
+     7722
+    ],
+    "shoulder": [
+     22068,
+     254057,
+     16689,
+     19059
+    ],
+    "back": [
+     13860,
+     18510
+    ],
+    "chest": [
+     16688,
+     14152,
+     22069,
+     17775,
+     14128
+    ],
+    "wrist": [
+     16683,
+     254069,
+     22063,
+     254123,
+     11917
+    ],
+    "hands": [
+     16684,
+     21318,
+     14146,
+     10019,
+     13863
+    ],
+    "waist": [
+     22062,
+     18405,
+     254089,
+     17755
+    ],
+    "legs": [
+     22067,
+     16687,
+     14144,
+     16699
+    ],
+    "feet": [
+     22064,
+     254115,
+     16682,
+     16704
+    ],
+    "finger": [
+     270081,
+     281635,
+     20682,
+     17768,
+     273806
+    ],
+    "ranged": [
+     249385,
+     10766,
+     9654
+    ]
+   },
+   "refs": {
+    "22065": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "10041": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "15856": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "7722": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "22068": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254057": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16689": {
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    "19059": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16688": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "14152": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22069": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17775": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "14128": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16683": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "254069": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22063": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "16684": {
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    "21318": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13863": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22062": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254089": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "22067": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22064": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254115": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "270081": {
+     "src": "副本任务：剃刀高地",
+     "dungeonId": "razor-krendor"
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "17768": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    },
+    "9654": {
+     "src": "任务奖励（菲拉斯）",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-fire-mage",
+   "cls": "mage",
+   "clsCn": "法师",
+   "spec": "fire",
+   "mode": "火焰 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/fire-mage/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22065
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 23125
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16701
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 14044
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 14152
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254065
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 18408
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 18405
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 14045
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22064
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 17768
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22065,
+     16698,
+     10041,
+     16686
+    ],
+    "neck": [
+     23125,
+     22149,
+     15856,
+     7722
+    ],
+    "shoulder": [
+     16701,
+     254053,
+     22068,
+     19059
+    ],
+    "back": [
+     14044,
+     13860,
+     18510
+    ],
+    "chest": [
+     14152,
+     22069,
+     10042,
+     14128
+    ],
+    "wrist": [
+     254065,
+     22063,
+     254123,
+     11917
+    ],
+    "hands": [
+     18408,
+     14146,
+     21318,
+     10019
+    ],
+    "waist": [
+     18405,
+     17755,
+     254085
+    ],
+    "legs": [
+     14045,
+     22067,
+     14144,
+     16687
+    ],
+    "feet": [
+     22064,
+     254111,
+     16682,
+     16704
+    ],
+    "finger": [
+     281635,
+     270081,
+     20682,
+     17768,
+     273806
+    ],
+    "ranged": [
+     249385,
+     10766,
+     9654
+    ]
+   },
+   "refs": {
+    "22065": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "10041": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "15856": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "7722": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "254053": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22068": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19059": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14044": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14152": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22069": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "10042": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14128": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254065": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22063": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "18408": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "254085": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14045": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22067": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22064": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254111": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "270081": {
+     "src": "副本任务：剃刀高地",
+     "dungeonId": "razor-krendor"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "17768": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    },
+    "9654": {
+     "src": "任务奖励（菲拉斯）",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-frost-mage",
+   "cls": "mage",
+   "clsCn": "法师",
+   "spec": "frost",
+   "mode": "冰霜 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/frost-mage/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22065
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 23125
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16701
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 14152
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254063
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 22066
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 18405
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 14144
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22064
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 17768
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22065,
+     16698,
+     10041,
+     16686
+    ],
+    "neck": [
+     23125,
+     22149,
+     15856,
+     7722
+    ],
+    "shoulder": [
+     16701,
+     254051,
+     22068,
+     19059
+    ],
+    "back": [
+     13860,
+     18510
+    ],
+    "chest": [
+     14152,
+     14136,
+     22069,
+     14128
+    ],
+    "wrist": [
+     254063,
+     22063,
+     254123,
+     11917
+    ],
+    "hands": [
+     22066,
+     14146,
+     21318,
+     10019
+    ],
+    "waist": [
+     18405,
+     22062,
+     17755,
+     254083
+    ],
+    "legs": [
+     14144,
+     22067,
+     16687,
+     16699
+    ],
+    "feet": [
+     22064,
+     254109,
+     16682,
+     16704
+    ],
+    "finger": [
+     281635,
+     270081,
+     20682,
+     17768,
+     273806
+    ],
+    "ranged": [
+     249385,
+     10766,
+     9654
+    ]
+   },
+   "refs": {
+    "22065": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "10041": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "15856": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "7722": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "254051": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22068": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "19059": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14152": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14136": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22069": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14128": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254063": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22063": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "22066": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22062": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "254083": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22067": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22064": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "254109": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "270081": {
+     "src": "副本任务：剃刀高地",
+     "dungeonId": "razor-krendor"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "17768": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    },
+    "9654": {
+     "src": "任务奖励（菲拉斯）",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-affliction-warlock",
+   "cls": "warlock",
+   "clsCn": "术士",
+   "spec": "affliction",
+   "mode": "痛苦 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/affliction-warlock/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22074
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 22073
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 22075
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22071
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 22077
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 22070
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22072
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22076
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 18402
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 22678
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22074,
+     16698,
+     14111,
+     16686
+    ],
+    "neck": [
+     22149,
+     23125,
+     22657
+    ],
+    "shoulder": [
+     22073,
+     16701,
+     14112,
+     254055
+    ],
+    "back": [
+     13860,
+     18510
+    ],
+    "chest": [
+     22075,
+     14136,
+     14106,
+     16700
+    ],
+    "wrist": [
+     22071,
+     16703,
+     11917,
+     254123,
+     254067
+    ],
+    "hands": [
+     22077,
+     16705,
+     18407,
+     14146,
+     21318
+    ],
+    "waist": [
+     22070,
+     17755,
+     254087,
+     18405
+    ],
+    "legs": [
+     22072,
+     16699,
+     14107,
+     14144
+    ],
+    "feet": [
+     22076,
+     16704,
+     254113,
+     16682
+    ],
+    "finger": [
+     281635,
+     273030,
+     20682,
+     18402,
+     6750,
+     273806
+    ],
+    "trinket": [
+     22678,
+     273840
+    ],
+    "ranged": [
+     249385,
+     16993,
+     10766
+    ]
+   },
+   "refs": {
+    "22074": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "14111": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22657": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "22073": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "14112": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254055": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22075": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "14136": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14106": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16700": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22071": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16703": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254067": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22077": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16705": {
+     "src": "副本：通灵学院 · 博学者普克尔特",
+     "dungeonId": "scholomance"
+    },
+    "18407": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "22070": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "254087": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22072": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "14107": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22076": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "254113": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "22678": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-demonology-warlock",
+   "cls": "warlock",
+   "clsCn": "术士",
+   "spec": "demonology",
+   "mode": "恶魔学识 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/demonology-warlock/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22074
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 22073
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 14153
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22071
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 22077
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 22070
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22072
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22076
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 18402
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 22678
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22074,
+     16698,
+     16686,
+     14111
+    ],
+    "neck": [
+     22149,
+     23125,
+     22657
+    ],
+    "shoulder": [
+     22073,
+     16701,
+     16689,
+     254055
+    ],
+    "back": [
+     13860,
+     18510,
+     14044
+    ],
+    "chest": [
+     14153,
+     22075,
+     16700,
+     14136
+    ],
+    "wrist": [
+     22071,
+     16703,
+     11917,
+     254123,
+     254067
+    ],
+    "hands": [
+     22077,
+     16705,
+     21318,
+     14146,
+     18407
+    ],
+    "waist": [
+     22070,
+     17755,
+     18405
+    ],
+    "legs": [
+     22072,
+     16699,
+     16687,
+     14144
+    ],
+    "feet": [
+     22076,
+     16704,
+     16682,
+     254113
+    ],
+    "finger": [
+     281635,
+     273030,
+     20682,
+     18402,
+     6750,
+     273806
+    ],
+    "trinket": [
+     22678,
+     273840
+    ],
+    "ranged": [
+     249385,
+     16993,
+     10766
+    ]
+   },
+   "refs": {
+    "22074": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "14111": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22657": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "22073": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "16689": {
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    "254055": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14044": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14153": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22075": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16700": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "14136": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22071": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16703": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254067": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22077": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16705": {
+     "src": "副本：通灵学院 · 博学者普克尔特",
+     "dungeonId": "scholomance"
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18407": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22070": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22072": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22076": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "254113": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "22678": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-destruction-warlock",
+   "cls": "warlock",
+   "clsCn": "术士",
+   "spec": "destruction",
+   "mode": "毁灭 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/destruction-warlock/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 22074
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 22073
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 14153
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 22071
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 22077
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 22070
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 22072
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 22076
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 281635
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 18402
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 22678
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249385
+    }
+   ],
+   "alts": {
+    "head": [
+     22074,
+     16698,
+     16686,
+     10041
+    ],
+    "neck": [
+     22149,
+     23125,
+     22657
+    ],
+    "shoulder": [
+     22073,
+     16701,
+     16689,
+     254053
+    ],
+    "back": [
+     13860,
+     14044,
+     18510
+    ],
+    "chest": [
+     14153,
+     22075,
+     16688,
+     16700
+    ],
+    "wrist": [
+     22071,
+     16703,
+     11917,
+     254123,
+     254065
+    ],
+    "hands": [
+     22077,
+     16705,
+     21318,
+     18408,
+     14146
+    ],
+    "waist": [
+     22070,
+     17755,
+     18405,
+     254085
+    ],
+    "legs": [
+     22072,
+     16699,
+     16687,
+     14045
+    ],
+    "feet": [
+     22076,
+     16704,
+     16682,
+     254111
+    ],
+    "finger": [
+     281635,
+     273030,
+     20682,
+     18402,
+     6750,
+     273806
+    ],
+    "trinket": [
+     22678,
+     273840
+    ],
+    "ranged": [
+     249385,
+     16993,
+     10766
+    ]
+   },
+   "refs": {
+    "22074": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "10041": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "22657": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "22073": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "16689": {
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    "254053": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14044": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14153": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22075": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16688": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "16700": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "22071": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16703": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "11917": {
+     "src": "任务奖励（安戈洛环形山）",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254065": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22077": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16705": {
+     "src": "副本：通灵学院 · 博学者普克尔特",
+     "dungeonId": "scholomance"
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "18408": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "14146": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22070": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254085": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22072": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "14045": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22076": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "254111": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "281635": {
+     "src": "任务奖励（暴风城 / 幽暗城）",
+     "dungeonId": null
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "20682": {
+     "src": "掉落：希利苏斯",
+     "dungeonId": null
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "22678": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "249385": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "16993": {
+     "src": "任务奖励（东瘟疫之地）",
+     "dungeonId": null
+    },
+    "10766": {
+     "src": "副本：剃刀高地 · 腐烂的普雷莫尔",
+     "dungeonId": "razor-krendor"
+    }
+   }
+  },
+  {
+   "id": "lv60-balance-druid",
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "spec": "balance",
+   "mode": "平衡 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/balance-druid/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16698
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 15067
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16688
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254123
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 21318
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 18405
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16687
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16682
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 18402
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 273030
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 273840
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249441
+    }
+   ],
+   "alts": {
+    "head": [
+     16698,
+     16686,
+     270099,
+     10041
+    ],
+    "neck": [
+     22149,
+     23125,
+     7722
+    ],
+    "shoulder": [
+     15067,
+     16689,
+     16701,
+     252537
+    ],
+    "back": [
+     13860,
+     18510,
+     279855
+    ],
+    "chest": [
+     16688,
+     15066,
+     8349
+    ],
+    "wrist": [
+     254123,
+     252542,
+     15092
+    ],
+    "hands": [
+     21318,
+     10019,
+     13863,
+     22110
+    ],
+    "waist": [
+     18405,
+     19162,
+     17755,
+     252476,
+     18504
+    ],
+    "legs": [
+     16687,
+     16699,
+     14144
+    ],
+    "feet": [
+     16682,
+     252471,
+     16704,
+     22107
+    ],
+    "finger": [
+     18402,
+     6750,
+     273030,
+     273806
+    ],
+    "trinket": [
+     273840
+    ],
+    "ranged": [
+     249441,
+     249396
+    ]
+   },
+   "refs": {
+    "16698": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16686": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "270099": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "10041": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "7722": {
+     "src": "副本：血色修道院大教堂 · 大检察官怀特迈恩",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "15067": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16689": {
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    "16701": {
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    "252537": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "279855": {
+     "src": "副本任务：克罗多克要塞",
+     "dungeonId": "kroldok-stronghold"
+    },
+    "16688": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15066": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "8349": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "252542": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15092": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "21318": {
+     "src": "副本任务：黑喉要塞",
+     "dungeonId": "blackmaw-hold"
+    },
+    "10019": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "13863": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22110": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "18405": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19162": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "17755": {
+     "src": "副本：玛拉顿 · 维利塔恩",
+     "dungeonId": "maraudon"
+    },
+    "252476": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18504": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16687": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16699": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "14144": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16682": {
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "252471": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16704": {
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "22107": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "249441": {
+     "src": "附魔",
+     "dungeonId": null
+    },
+    "249396": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-feral-druid",
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "spec": "feral",
+   "mode": "野性战斗 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/feral-druid/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 8345
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22150
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16708
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 18511
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16721
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 272186
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 19049
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 9636
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 15065
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 16711
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 17713
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 18400
+    },
+    {
+     "slot": "饰品",
+     "cell": 1,
+     "item": 273840
+    },
+    {
+     "slot": "主手",
+     "cell": 1,
+     "item": 250619
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 220606
+    }
+   ],
+   "alts": {
+    "head": [
+     8345,
+     16707,
+     15086,
+     8348
+    ],
+    "neck": [
+     22150,
+     7731,
+     270095
+    ],
+    "shoulder": [
+     16708,
+     252535,
+     11874,
+     19058
+    ],
+    "back": [
+     18511,
+     15789
+    ],
+    "chest": [
+     16721,
+     15085,
+     15064
+    ],
+    "wrist": [
+     272186,
+     252540,
+     19508
+    ],
+    "hands": [
+     19049,
+     15063,
+     16712
+    ],
+    "waist": [
+     9636,
+     19044,
+     252473,
+     252475
+    ],
+    "legs": [
+     15065,
+     16709,
+     15062,
+     22111
+    ],
+    "feet": [
+     16711,
+     252469,
+     18506,
+     252470
+    ],
+    "finger": [
+     17713,
+     7686,
+     18400,
+     9533
+    ],
+    "trinket": [
+     273840
+    ],
+    "main-hand": [
+     250619,
+     17766,
+     12796
+    ],
+    "ranged": [
+     220606
+    ]
+   },
+   "refs": {
+    "8345": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16707": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "15086": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "8348": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22150": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "7731": {
+     "src": "副本：血色修道院墓地 · 永醒的艾希尔",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "270095": {
+     "src": "副本任务：奥达曼",
+     "dungeonId": "uldaman"
+    },
+    "16708": {
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "252535": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "11874": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "19058": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18511": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15789": {
+     "src": "任务奖励（冬泉谷）",
+     "dungeonId": null
+    },
+    "16721": {
+     "src": "副本：黑石塔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "15085": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15064": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "272186": {
+     "src": "副本任务：玛拉顿",
+     "dungeonId": "maraudon"
+    },
+    "252540": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "19508": {
+     "src": "副本：血色修道院大教堂 · 大检察官法尔班克斯",
+     "dungeonId": "scarlet-monastery-cathedral"
+    },
+    "19049": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15063": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16712": {
+     "src": "副本：黑石塔下层 · 暗影猎手沃什加斯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "9636": {
+     "src": "任务奖励（塔纳利斯）",
+     "dungeonId": null
+    },
+    "19044": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "252473": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "252475": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "15065": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16709": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15062": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "22111": {
+     "src": "任务奖励（铁炉堡 / 奥格瑞玛）",
+     "dungeonId": null
+    },
+    "16711": {
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    },
+    "252469": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18506": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "252470": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "17713": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "7686": {
+     "src": "副本：血色修道院墓地 · 铁脊死灵",
+     "dungeonId": "scarlet-monastery-graveyard"
+    },
+    "18400": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "9533": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "273840": {
+     "src": "副本：黑暗深渊 · 格里哈斯特",
+     "dungeonId": "blackfathom-deeps"
+    },
+    "250619": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "17766": {
+     "src": "副本：玛拉顿 · 瑟莱德丝公主",
+     "dungeonId": "maraudon"
+    },
+    "12796": {
+     "src": "锻造",
+     "dungeonId": null
+    },
+    "220606": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  },
+  {
+   "id": "lv60-restoration-druid",
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "spec": "restoration",
+   "mode": "恢复 Lv.60",
+   "level": 60,
+   "url": "https://classicwowforever.com/bis-list/restoration-druid/",
+   "fetched": "2026-11-17",
+   "doll": [
+    {
+     "slot": "头部",
+     "cell": 1,
+     "item": 16693
+    },
+    {
+     "slot": "项链",
+     "cell": 1,
+     "item": 22149
+    },
+    {
+     "slot": "肩部",
+     "cell": 1,
+     "item": 16718
+    },
+    {
+     "slot": "背部",
+     "cell": 1,
+     "item": 13860
+    },
+    {
+     "slot": "胸部",
+     "cell": 1,
+     "item": 16690
+    },
+    {
+     "slot": "手腕",
+     "cell": 1,
+     "item": 254061
+    },
+    {
+     "slot": "手",
+     "cell": 1,
+     "item": 16692
+    },
+    {
+     "slot": "腰部",
+     "cell": 1,
+     "item": 254081
+    },
+    {
+     "slot": "腿部",
+     "cell": 1,
+     "item": 16694
+    },
+    {
+     "slot": "脚",
+     "cell": 1,
+     "item": 254107
+    },
+    {
+     "slot": "戒指",
+     "cell": 1,
+     "item": 18402
+    },
+    {
+     "slot": "戒指",
+     "cell": 2,
+     "item": 273030
+    },
+    {
+     "slot": "远程",
+     "cell": 1,
+     "item": 249396
+    }
+   ],
+   "alts": {
+    "head": [
+     16693,
+     16720,
+     9534,
+     14140
+    ],
+    "neck": [
+     22149,
+     10769,
+     23125
+    ],
+    "shoulder": [
+     16718,
+     15061,
+     14139,
+     16695
+    ],
+    "back": [
+     13860,
+     18510,
+     11873,
+     279855
+    ],
+    "chest": [
+     16690,
+     16706,
+     14138,
+     15059
+    ],
+    "wrist": [
+     254061,
+     252543,
+     254123
+    ],
+    "hands": [
+     16692,
+     252530,
+     18409
+    ],
+    "waist": [
+     254081,
+     19047,
+     252477
+    ],
+    "legs": [
+     16694,
+     16719,
+     14137,
+     15060
+    ],
+    "feet": [
+     254107,
+     16691,
+     15802,
+     16715
+    ],
+    "finger": [
+     18402,
+     274746,
+     6750,
+     273030,
+     9447,
+     273806
+    ],
+    "ranged": [
+     249396
+    ]
+   },
+   "refs": {
+    "16693": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "16720": {
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    "9534": {
+     "src": "副本任务：祖尔法拉克",
+     "dungeonId": "zulfarrak"
+    },
+    "14140": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "22149": {
+     "src": "副本任务：厄运之槌",
+     "dungeonId": "dire-maul-east"
+    },
+    "10769": {
+     "src": "副本：剃刀高地 · 火眼莫德雷斯",
+     "dungeonId": "razor-krendor"
+    },
+    "23125": {
+     "src": "副本：斯坦索姆",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "16718": {
+     "src": "副本：黑石塔下层 · 奴役者基兹鲁尔",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "15061": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "14139": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16695": {
+     "src": "副本：黑石塔上层 · 索拉卡·火冠",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "13860": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "18510": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "11873": {
+     "src": "任务奖励（费伍德森林）",
+     "dungeonId": null
+    },
+    "279855": {
+     "src": "副本任务：克罗多克要塞",
+     "dungeonId": "kroldok-stronghold"
+    },
+    "16690": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "16706": {
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    "14138": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15059": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "254061": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "252543": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "254123": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16692": {
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    "252530": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "18409": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "254081": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "19047": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "252477": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "16694": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "16719": {
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "14137": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "15060": {
+     "src": "制皮",
+     "dungeonId": null
+    },
+    "254107": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16691": {
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    },
+    "15802": {
+     "src": "裁缝",
+     "dungeonId": null
+    },
+    "16715": {
+     "src": "副本：黑石塔下层 · 烟网蛛后",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    "18402": {
+     "src": "任务奖励（月光林地）",
+     "dungeonId": null
+    },
+    "274746": {
+     "src": "商人出售（荆棘谷）",
+     "dungeonId": null
+    },
+    "6750": {
+     "src": "副本任务：剃刀沼泽",
+     "dungeonId": "razorfen-kraul"
+    },
+    "273030": {
+     "src": "副本：挖掘场：湿地 · 遗迹守卫者",
+     "dungeonId": "whelgars-excavation"
+    },
+    "9447": {
+     "src": "副本：诺莫瑞根 · 电刑器6000型",
+     "dungeonId": "gnomeregan"
+    },
+    "273806": {
+     "src": "副本：监狱 · 可怕的塔格尔",
+     "dungeonId": "the-stocks"
+    },
+    "249396": {
+     "src": "附魔",
+     "dungeonId": null
+    }
+   }
+  }
+ ],
+ "raidSets": [
+  {
+   "id": "t1-2102",
+   "setId": 2102,
+   "cls": "warrior",
+   "clsCn": "战士",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "武器/狂怒",
+   "armor": "板甲",
+   "name": "荣耀战甲",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280904,
+    280903,
+    280902,
+    280899,
+    280901,
+    280900
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2103",
+   "setId": 2103,
+   "cls": "warrior",
+   "clsCn": "战士",
+   "role": "tank",
+   "roleCn": "坦克",
+   "spec": "防护",
+   "armor": "板甲",
+   "name": "荣耀战铠",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280910,
+    280909,
+    280908,
+    280905,
+    280907,
+    280906
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2107",
+   "setId": 2107,
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "role": "heal",
+   "roleCn": "治疗",
+   "spec": "神圣",
+   "armor": "板甲",
+   "name": "正义护甲",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280936,
+    280935,
+    280934,
+    280931,
+    280933,
+    280932
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2108",
+   "setId": 2108,
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "role": "tank",
+   "roleCn": "坦克",
+   "spec": "防护",
+   "armor": "板甲",
+   "name": "正义战铠",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280937,
+    280942,
+    280941,
+    280938,
+    280940,
+    280939
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2106",
+   "setId": 2106,
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "惩戒",
+   "armor": "板甲",
+   "name": "正义战甲",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280930,
+    280929,
+    280928,
+    280925,
+    280927,
+    280926
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2101",
+   "setId": 2101,
+   "cls": "hunter",
+   "clsCn": "猎人",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "全专精",
+   "armor": "锁甲",
+   "name": "荒野追猎者护甲",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280898,
+    280897,
+    280896,
+    280893,
+    280895,
+    280894
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2099",
+   "setId": 2099,
+   "cls": "rogue",
+   "clsCn": "潜行者",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "全专精",
+   "armor": "皮甲",
+   "name": "幽缝护甲",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280877,
+    280876,
+    280879,
+    280875,
+    280872,
+    280878
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2104",
+   "setId": 2104,
+   "cls": "priest",
+   "clsCn": "牧师",
+   "role": "heal",
+   "roleCn": "治疗",
+   "spec": "戒律/神圣",
+   "armor": "布甲",
+   "name": "信念法衣",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280918,
+    280917,
+    280912,
+    280913,
+    280915,
+    280914
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2105",
+   "setId": 2105,
+   "cls": "priest",
+   "clsCn": "牧师",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "暗影",
+   "armor": "布甲",
+   "name": "信念神服",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280924,
+    280923,
+    280919,
+    280920,
+    280922,
+    280921
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2109",
+   "setId": 2109,
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "role": "heal",
+   "roleCn": "治疗",
+   "spec": "恢复",
+   "armor": "锁甲",
+   "name": "唤灵者",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280951,
+    280944,
+    280950,
+    280949,
+    280947,
+    280945
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2110",
+   "setId": 2110,
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "增强",
+   "armor": "锁甲",
+   "name": "唤灵者之怒",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280957,
+    280956,
+    280955,
+    280952,
+    280954,
+    280953
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2111",
+   "setId": 2111,
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "元素",
+   "armor": "锁甲",
+   "name": "唤灵者之暴",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280963,
+    280962,
+    280961,
+    280958,
+    280960,
+    280959
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2098",
+   "setId": 2098,
+   "cls": "mage",
+   "clsCn": "法师",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "全专精",
+   "armor": "布甲",
+   "name": "法焰法衣",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280455,
+    280454,
+    280450,
+    280451,
+    280453,
+    280452
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2100",
+   "setId": 2100,
+   "cls": "warlock",
+   "clsCn": "术士",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "全专精",
+   "armor": "布甲",
+   "name": "恶魔之心",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280887,
+    280882,
+    280883,
+    280888,
+    280886,
+    280889
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2112",
+   "setId": 2112,
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "role": "heal",
+   "roleCn": "治疗",
+   "spec": "恢复",
+   "armor": "皮甲",
+   "name": "丛林守护者神服",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280977,
+    280976,
+    280974,
+    280965,
+    280971,
+    280967
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2113",
+   "setId": 2113,
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "role": "tank",
+   "roleCn": "坦克",
+   "spec": "守护",
+   "armor": "皮甲",
+   "name": "丛林守护者之怒",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280986,
+    280987,
+    280988,
+    280991,
+    280989,
+    280990
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2114",
+   "setId": 2114,
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "平衡",
+   "armor": "皮甲",
+   "name": "丛林守护者之蚀",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280998,
+    280999,
+    281000,
+    281003,
+    281001,
+    281002
+   ],
+   "fetched": "2026-10-08"
+  },
+  {
+   "id": "t1-2115",
+   "setId": 2115,
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "role": "dps",
+   "roleCn": "输出",
+   "spec": "野性",
+   "armor": "皮甲",
+   "name": "丛林守护者之猛",
+   "raid": "海加尔峰",
+   "level": 60,
+   "pieceCount": 6,
+   "pieceIds": [
+    280992,
+    280993,
+    280994,
+    280997,
+    280995,
+    280996
+   ],
+   "fetched": "2026-10-08"
   }
  ]
 }

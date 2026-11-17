@@ -318,6 +318,21 @@ def main():
             sum(1 for s in isets if s.get('cat') == 'new'),
             sum(1 for s in isets if s.get('cat') == 't0')))
 
+    # ---------- Lv.60 团前 Pre-Raid BiS（classicwowforever.com）与海加尔峰 T1（DungeonsForever） ----------
+    cwf_path = os.path.join(ROOT, "app", "data", 'upstream', 'cwf-bis60.json')
+    if os.path.isfile(cwf_path):
+        cwf = load(cwf_path)
+        doc['meta']['bis60Meta'] = cwf.get('meta') or {}
+        doc['bis60Sets'] = cwf.get('sets') or []
+        print('Lv.60 团前 Pre-Raid：%d 套' % len(doc['bis60Sets']))
+
+    raid_path = os.path.join(ROOT, "app", "data", 'upstream', 'df-raid-sets.json')
+    if os.path.isfile(raid_path):
+        raid = load(raid_path)
+        doc['meta']['raidSetsMeta'] = raid.get('meta') or {}
+        doc['raidSets'] = raid.get('raidSets') or []
+        print('海加尔峰 T1 团本套装：%d 套' % len(doc['raidSets']))
+
     blob = json.dumps(doc, ensure_ascii=False, indent=1)
     if args.dry:
         print('（--dry：没写文件）')
