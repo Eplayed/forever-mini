@@ -1,8 +1,8 @@
-# AGENTS.md — 无限服中文资料线（角色协作规则 · 仓库根）
+# AGENTS.md — 无限服中文资料线（协作与红线规则 · 仓库根）
 
-本仓库是《魔兽世界：无限》(World of Warcraft: **Forever**) 资料线的唯一归属：资料站、小程序、将来的后端都在这里。**凡本项目任务必须按下面的角色机制执行**，不要用一个通用身份把所有活揽完。
+本仓库是《魔兽世界：无限》(World of Warcraft: **Forever**) 资料线的唯一归属：资料站、小程序、将来的后端都在这里。
 
-子项目各自的工程约定在 `wow-forever-web/AGENTS.md` 与 `for-mini/AGENTS.md`，但它们只写"怎么实现"，**角色分工与红线以本文件为准**。
+子项目各自的工程约定在 `wow-forever-web/AGENTS.md` 与 `for-mini/AGENTS.md`，但它们只写"怎么实现"，**任务产出、门禁与全项目红线以本文件为准**。
 
 ## 一、仓库地图
 
@@ -24,36 +24,33 @@
 
 **不属于本线、不要改动**：`daily-talk`（流放助手）、`poe-mini`（AI 工具小程序）、`p2-database`（流放数据生产端）。它们只作架构参考。
 
-## 二、六个角色 skill
+## 二、按任务与改动类型的产出约定（2026-11-17 裁撤角色 Skill）
 
-| 角色 | skill | 职责边界 | 主要产出（路径相对仓库根，必须带前缀） |
-| --- | --- | --- | --- |
-| 产品经理 | `wow-pm` | 需求、范围裁剪、验收标准 | `wow-forever-web/docs/PRD*.md` |
-| 策划 | `wow-planner` | 信息架构、内容组织、工具逻辑、分享卡 | `wow-forever-web/docs/PLAN-*.md` |
-| UI | `wow-ui` | 视觉规格、组件状态、渲染证据 | 令牌与规范 `wow-forever-web/docs/UI.md`；站点截图 `wow-forever-web/docs/screenshots/`；小程序截图 `for-mini/docs/screenshots/` |
-| 开发 | `wow-dev` | 实现、构建卡口、验证 | 代码 `wow-forever-web/app/`、`wow-forever-web/tools/`、`for-mini/`；验证记录 `for-mini/docs/VERIFY-*.md` 或 `wow-forever-web/docs/VERIFY-*.md` |
-| 数据采编 | `wow-data` | 来源、溯源、覆盖率、译名分歧 | `wow-forever-web/app/data/**`、`wow-forever-web/docs/wow-infinite-sources.md` |
-| 运营 | `wow-ops` | 平台合规、备案、上线节奏、增长 | `wow-forever-web/docs/OPS-*.md` |
+**2026-11-17 站主拍板（方案 A）**：裁撤仓库内 `.agents/skills/wow-*`、`.trae/skills/wow-*`、`.qoder/skills/wow-*`（共 18 个角色 Skill 文件）及同步脚本 `wow-forever-web/tools/sync-role-skills.py`，不再维护重复抄写红线的角色文件，也不再强制单角色开场白切分对话，改为**按本轮实际任务与改动类型直接约束产出文件与验证门禁**：
 
-**六个角色 skill 的项目内唯一真源**是仓库根 `.agents/skills/wow-<角色>/SKILL.md`。Codex 从这个目录发现项目级 skill；Trae 的 `.trae/skills/` 与 Qoder 的 `.qoder/skills/` 是由真源生成的完整镜像，供各自项目级发现机制加载。任何 agent 换机或换工作目录，先从本文件找到真源，按本轮主角色读取对应 `SKILL.md`；不依赖某个人的 `~/.codex`、`~/.qoder` 等用户目录。**只编辑 `.agents/skills/`**，改完运行 `python3 wow-forever-web/tools/sync-role-skills.py --write`，再用 `--check` 核对镜像，勿分别手改三套正文。若运行时没自动列出 skill，仍按本文件显式读取真源；运行时是否成功发现需要在相应 agent 新会话中核实。
+| 任务 / 改动类型 | 职责范围与边界 | 主要产出（路径相对仓库根，必须带前缀） |
+| --- | --- | --- |
+| 需求与范围裁剪 | 需求澄清、范围裁剪、验收标准（只定边界，不动代码或数据） | `wow-forever-web/docs/PRD*.md` |
+| 内容架构与工具策划 | 信息架构、内容组织、工具逻辑、分享卡文案 | `wow-forever-web/docs/PLAN-*.md` |
+| 视觉规格与渲染证据 | 设计令牌、组件状态、页面/小程序实拍截图验证 | 令牌与规范 `wow-forever-web/docs/UI.md`；站点截图 `wow-forever-web/docs/screenshots/`；小程序截图 `for-mini/docs/screenshots/` |
+| 代码实现与构建验证 | 网页、小程序、脚本、插件实现与回归门禁 | 代码 `wow-forever-web/app/`、`wow-forever-web/tools/`、`for-mini/`；验证记录 `for-mini/docs/VERIFY-*.md` 或 `wow-forever-web/docs/VERIFY-*.md` |
+| 数据采编与溯源 | 来源、溯源、覆盖率、译名分歧处理 | `wow-forever-web/app/data/**`、`wow-forever-web/docs/wow-infinite-sources.md`、`wow-forever-web/docs/DATA-*.md` |
+| 运营与平台合规 | 平台合规、备案、部署、上线节奏、增长 | `wow-forever-web/docs/OPS-*.md` |
 
 小程序侧改数据**不另建第二份基底**：一律改 `wow-forever-web/app/data/`，再跑 `tools/export-mini.js` 导出。
 
-## 三、调用规则
+## 三、执行与并行规则
 
-1. **一轮对话只有一个主角色**，开头必须声明：`本轮角色：wow-data ｜任务：… ｜产出：文件路径 ｜交接给：…`。
-2. 用户没指定角色时，按「需求 → 数据可得性 → 内容架构 → 视觉 → 实现 → 运营」自动选第一个合适的，并说明为什么。
-3. 用户可点名覆盖：`/wow-pm`、`/wow-planner`、`/wow-ui`、`/wow-dev`、`/wow-data`、`/wow-ops`。
-4. **默认不自动串完六个角色**（那会重新变成一锅粥）。要连着做，用户说"按链条走完"，我按顺序执行，每步落一个文件、记一行台账。
-5. 需要并行时用子代理：一个角色一份任务书，写死输入文件、输出路径、不许改动的范围。**同一个文件不许两个子代理同时写。**
+1. **按任务闭环执行**：单轮任务可按实际需要端到端闭环（如「查数据 → 改代码 → 跑门禁 → 写验证记录」），也可在用户指定只做方案、只查数据时仅落盘对应 `PRD-*` / `PLAN-*` / `DATA-*` 文档，不再用虚拟角色身份卡住推进。
+2. 需要并行时用子代理：一个子代理一份明确任务书，写死输入文件、输出路径、不许改动的范围。**同一个文件不许两个子代理同时写。**
 
 ## 四、防乱三规矩（硬约束）
 
 1. **产出必须落文件**，按上表的固定位置。只在对话里说结论不算完成。
-2. **角色之间只通过文件交接**：下一个角色必须先读上一个角色的产出文件，不依赖聊天记忆或上下文。
+2. **跨轮次只通过文件交接**：接手任务必须先读 `NOW.md`、`ROLES.md` 末尾交接与对应产出文件，不依赖聊天记忆或上下文。
 3. **交接必须带状态**：`已定` / `待用户确认` / `阻塞（原因）`，并写进 `ROLES.md` 的交接记录表。阻塞项不许口头带过。
 
-## 五、全项目红线（所有角色共同遵守）
+## 五、全项目红线（所有任务共同遵守）
 
 - 英文官方名是 **Forever**，不是 Infinite，检索与命名都按 Forever。
 - **个人主体**：小程序类目只有 `工具-信息查询`；**零 UGC**（无评论、无投稿、无社区）；不开虚拟支付与付费会员。
@@ -148,7 +145,7 @@
 
 ## 六、验证基线
 
-按本轮角色与改动范围读取 `PROJECT_GATES.md` 的对应条款；角色 Skill 和子项目规则可补充更具体的命令。验证证据与没验到的事项必须留在本题产出和交接中。
+按本轮改动范围读取 `PROJECT_GATES.md` 的对应条款；子项目规则可补充更具体的命令。验证证据与没验到的事项必须留在本题产出和交接中。
 
 ## 七、状态与决定的读取入口
 

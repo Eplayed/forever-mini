@@ -64,10 +64,11 @@ python3 wow-forever-web/tools/project-index.py --check
 - `wow-forever-web/app/src/pages/UpdatesPage.vue`
 - `wow-forever-web/app/tests/updates-filter.spec.js`
 
-### business · 换轨与内容主线
+### business · 魔兽无限内容与推广
 
-- `wow-forever-web/docs/OPS-换轨方向复核-2026-10-20.md`
-- `wow-forever-web/docs/OPS-三渠道内容优化-2026-10-19.md`
+- `NOW.md`
+- `PROJECT_DECISIONS.md`
+- `wow-forever-web/docs/OPS-推广试验-2026-11-16.md`
 
 ### tests · 验证入口
 

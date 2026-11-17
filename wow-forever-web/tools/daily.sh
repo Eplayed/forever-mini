@@ -131,6 +131,9 @@ step "⑥ 对账" python3 tools/reconcile.py --env beta --json "$RECON" --quiet
 # ⑦ 报告
 step "⑦ 出报告" python3 tools/daily-report.py --day "$DAY" --steps "$STEPS" --probe "$PROBE" --reconcile "$RECON"
 
+# ⑧ 增量同步最新成品数据与图标原画到局域网 MacBook（video2text 图文产线；Mac 睡眠时不阻断本地日更）
+python3 tools/sync-to-mac.py || echo "! 局域网 MacBook (192.168.0.101) 未连通，跳过同步（随时可单跑 python tools/sync-to-mac.py）"
+
 echo "----------------------------------------------------------------"
 FAILED=$(awk -F'\t' '$2!=0{print $1}' "$STEPS" | tr '\n' ' ')
 if [ -z "$FAILED" ]; then

@@ -17,7 +17,7 @@ TOPICS = {
  'items': ('物品与配装', ['wow-forever-web/tools/merge-items-detail.py', 'wow-forever-web/tools/extract-addon-items-detail.py', 'wow-forever-web/app/src/lib/item-stats.js', 'wow-forever-web/app/src/pages/BisPage.vue']),
  'maps': ('地图与素材', ['wow-forever-web/tools/extract-df-geo.py', 'wow-forever-web/tools/merge-dungeon-geo.py', 'wow-forever-web/tools/fetch-art.py', 'wow-forever-web/app/src/components/PinMap.vue', 'wow-forever-web/docs/VERIFY-prelaunch-independent-2026-10-20.md']),
  'updates': ('动态筛选', ['wow-forever-web/app/src/pages/UpdatesPage.vue', 'wow-forever-web/app/tests/updates-filter.spec.js']),
- 'business': ('换轨与内容主线', ['wow-forever-web/docs/OPS-换轨方向复核-2026-10-20.md', 'wow-forever-web/docs/OPS-三渠道内容优化-2026-10-19.md']),
+ 'business': ('魔兽无限内容与推广', ['NOW.md', 'PROJECT_DECISIONS.md', 'wow-forever-web/docs/OPS-推广试验-2026-11-16.md']),
  'tests': ('验证入口', ['.github/workflows/gates.yml', 'wow-forever-web/app/package.json', 'wow-forever-web/tools/site-check.py', 'wow-forever-web/tools/route-smoke.py', 'wow-forever-web/tools/build-data.js']),
 }
 
