@@ -1,6 +1,6 @@
 {
- "head": "bea1e38291050839f9cf031b631e7a3a2cf3ff64",
- "fingerprint": "f7b51c9ec6aafb1151b20a8e90a5359e429532d4f2779a9bcdd440d7449ac9b4",
+ "head": "173a84482299a597e7ee697feec04ee5d8ce2594",
+ "fingerprint": "52ad02258fddab421bb02e57be14d142a4f7a08a4c5ffe40cf3271b68913ae14",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -35,8 +35,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 805376,
-   "mtimeNs": 1794919741003617800
+   "bytes": 806432,
+   "mtimeNs": 1794920316834596500
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -1917,6 +1917,11 @@
    "path": "wow-forever-web/docs/PRD-web-parity-2026-10-16.md",
    "bytes": 15794,
    "mtimeNs": 1793510772645893600
+  },
+  {
+   "path": "wow-forever-web/docs/PRD-个人开发者差异化与流量主变现分析-2026-11-17.md",
+   "bytes": 7667,
+   "mtimeNs": 1794920287644069500
   },
   {
    "path": "wow-forever-web/docs/PRD-内容质量与首份资料包-2026-10-21.md",
