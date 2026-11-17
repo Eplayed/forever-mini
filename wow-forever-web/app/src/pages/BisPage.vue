@@ -199,6 +199,52 @@
         配方要什么材料、做出来要多少技能点，点上面的物品名去物品库那一页看。</p>
     </div>
 
+    <div class="card" v-if="itemSets.length" id="pz-item-sets">
+      <div class="bhead">
+        <h2 class="bt">14–58 级专属与地下城套装图鉴</h2>
+        <span class="bn">{{ itemSets.length }} 套 · 含 7 套无限新增套装与 9 职业 T0 套 · 名称与装等均回本站物品库核对</span>
+      </div>
+      <div class="pz-picks">
+        <div class="picks iset-cats">
+          <button v-for="c in itemSetCats" :key="c.key" type="button" class="pick"
+                  :class="{ on: itemSetCat === c.key }" @click="pickItemSetCat(c.key)">
+            <b>{{ c.label }}</b> <span class="mono">({{ c.n }})</span>
+          </button>
+        </div>
+        <div class="picks iset-list">
+          <button v-for="s in filteredItemSets" :key="s.id" type="button" class="pick"
+                  :class="{ on: curItemSet && curItemSet.id === s.id }" @click="activeItemSetId = s.id">
+            <span class="mono">{{ s.level }}级</span> · <b>{{ s.name }}</b>
+          </button>
+        </div>
+      </div>
+
+      <template v-if="curItemSet">
+        <div class="iset-sum" v-if="Object.keys(curItemSetSum).some((k) => curItemSetSum[k])">
+          <div class="iset-sum-h"><b>{{ curItemSet.name }}（{{ curItemSet.level }} 级 · {{ curItemSet.clsCn }} · {{ curItemSet.pieces.length }} 件）整套基础属性合计</b></div>
+          <div class="iset-sum-i">
+            <span v-for="k in SUM_KEYS" :key="k" v-show="curItemSetSum[k]"><b class="mono">{{ curItemSetSum[k] }}</b>{{ k }}</span>
+          </div>
+        </div>
+        <div class="boardwrap">
+          <table class="board">
+            <colgroup><col style="width:12%"><col class="c-ico"><col style="width:32%"><col class="c-num"><col></colgroup>
+            <thead><tr><th>部位</th><th class="c-ico">图标</th><th>套装部件</th><th class="c-num">装等</th><th class="w-tail">出处</th></tr></thead>
+            <tbody>
+              <tr v-for="p in curItemSetRows" :key="p.item">
+                <td>{{ p.slot }}</td>
+                <td class="c-ico"><span class="qbox" :class="'bq' + (p.quality || 0)"><IconCell :icon-key="p.iconKey" :seed="p.item" :cn="p.name" small /></span></td>
+                <td><span class="nm" :class="'q' + (p.quality || 0)">{{ p.name }}</span>
+                  <span class="sub" v-if="p.st">{{ p.st }}</span></td>
+                <td class="c-num num">{{ p.ilvl }}</td>
+                <td class="w-tail dim">{{ p.src }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </template>
+    </div>
+
     <!-- 备选 popover：站主 2026-10-17 改口径——不要 modal 弹窗，要贴着点的那一格弹出来。
          纸娃娃那一格与下面一览表的那一行开同一个 popover，anchor 传的是被点的元素。 -->
     <BisPop v-if="pick" :slot="pick" :rows="pickerRows" :head="pickerHead"
@@ -275,6 +321,38 @@ onMounted(boot);
 
 const meta = computed(() => ((P.value || {}).bis || {}).meta || { counts: {} });
 const sets = computed(() => ((P.value || {}).bis || {}).sets || []);
+const itemSets = computed(() => ((P.value || {}).bis || {}).itemSets || []);
+const itemSetCat = ref('new');
+const activeItemSetId = ref('');
+const ITEM_SET_CATS = [
+  { key: 'new', label: '无限新套装' },
+  { key: 't0', label: '52级职业T0' },
+  { key: 'endgame', label: '满级副本套' },
+  { key: 'craft', label: '练级与制造套' },
+  { key: 'all', label: '全部' },
+];
+const itemSetCats = computed(() => ITEM_SET_CATS.map((c) => ({
+  key: c.key,
+  label: c.label,
+  n: c.key === 'all' ? itemSets.value.length : itemSets.value.filter((x) => x.cat === c.key).length
+})).filter((c) => c.n > 0));
+const filteredItemSets = computed(() => (itemSetCat.value === 'all'
+  ? itemSets.value
+  : itemSets.value.filter((x) => x.cat === itemSetCat.value)));
+const curItemSet = computed(() => filteredItemSets.value.filter((s) => s.id === activeItemSetId.value)[0]
+  || filteredItemSets.value[0] || null);
+const curItemSetRows = computed(() => ((curItemSet.value || {}).pieces || []).map((p) => ({
+  item: p.item, slot: p.slot, src: p.src, name: nm(p.item), iconKey: ic(p.item),
+  quality: qo(p.item), ilvl: il(p.item), st: stOf(p.item)
+})));
+const curItemSetSum = computed(() => sumStatLines(((curItemSet.value || {}).pieces || []).map((p) => {
+  return (((P.value || {}).det || {})[String(p.item)] || {}).st || [];
+})));
+function pickItemSetCat(k) {
+  itemSetCat.value = k;
+  const first = (k === 'all' ? itemSets.value : itemSets.value.filter((x) => x.cat === k))[0];
+  activeItemSetId.value = first ? first.id : '';
+}
 const classes = computed(() => {
   const out = [];
   sets.value.forEach((s) => {
@@ -498,6 +576,10 @@ function srcOf(id) {
 .pzsum-h .dim { font-size: 11.5px }
 .pzsum-i { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--txt-dim) }
 .pzsum-i b { color: var(--ok); font-size: 15px; margin-right: 4px }
+.iset-sum { margin: 10px 0 12px; border-top: 1px solid var(--line-2); padding-top: 10px }
+.iset-sum-h { margin-bottom: 6px; font-size: 13.5px; color: var(--txt-title) }
+.iset-sum-i { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--txt-dim) }
+.iset-sum-i b { color: var(--ok); font-size: 15px; margin-right: 4px }
 .pztab-t tr.cur { background: rgba(201, 162, 74, .07) }
 /* 一览表整行可点开弹窗。行里那个"部位"渲染成 button 是为了键盘能 Tab 到，
    但点击热区是整行，所以 button 自己不带边框与内边距。 */

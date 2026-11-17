@@ -1,6 +1,6 @@
-const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
+const adventure = require('../../services/adventure')
 
 /* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面"）
    数据来自分发层的三份配装产物：索引（38 套）+ 共享物品表（830 件）+ 每套一片。
@@ -42,6 +42,10 @@ Page({
     facCn: '联盟',
     set: null,
     rows: [],
+    savedTargets: {},
+    picking: false,
+    selected: {},
+    selectedCount: 0,
     sum: [],
     sumNote: '',
     enchants: [],
@@ -49,18 +53,103 @@ Page({
     /* 中间这一栏只有"这一套穿这一身"那一张图（2026-11-02 起）。桥表里没有这一格时
        posterSrc 一直为空，格子里显示 posterText，下面那行说清原因——不拿任何图去填。 */
     posterSrc: '',
+    posterRequest: 0,
     posterState: 'none',
     posterText: POSTER_NONE,
     posterErr: '',
     slot: null,
     slotRows: [],
     slotHead: '',
-    slotTheirs: null
+    slotTheirs: null,
+    itemSetCats: [],
+    itemSetCat: 'new',
+    filteredItemSets: [],
+    activeItemSetId: '',
+    activeItemSet: null
   },
 
   onLoad(query) {
     this.want = (query && query.c) || ''
+    this.draft = new Map()
+    this.fromList = !!(query && query.pick === '1')
+    if (this.fromList) this.setData({ picking: true })
     this.start()
+  },
+
+  onShow() {
+    this.syncGear()
+  },
+
+  syncGear() {
+    const gear = adventure.read().gear
+    if (this.savedGear === gear) return
+    this.savedGear = gear
+    const savedTargets = {}
+    Object.keys(gear).forEach((id) => { savedTargets[id] = true })
+    this.setData({ savedTargets })
+  },
+
+  saveTarget(e) {
+    const id = String(e.currentTarget.dataset.id || '')
+    if (adventure.read().gear[id]) {
+      if (!this.data.picking) wx.navigateTo({ url: '/pages/adventure/index' })
+      return
+    }
+    const item = (this.data.slotRows || []).find((r) => String(r.item) === id)
+      || (this.data.rows || []).find((r) => String(r.item) === id)
+      || (((this.data.activeItemSet && this.data.activeItemSet.pieces) || []).find((r) => String(r.item) === id))
+    if (!item) return
+    const target = { id, name: item.name, quality: item.q, dungeonId: item.go, source: item.src }
+    if (!this.data.picking) {
+      if (adventure.addGear(target)) this.syncGear()
+      return
+    }
+    const chosen = !this.draft.has(id)
+    if (chosen) this.draft.set(id, target)
+    else this.draft.delete(id)
+    const selected = Object.fromEntries(Array.from(this.draft.keys(), (key) => [key, true]))
+    this.setData({ selected, selectedCount: this.draft.size })
+  },
+
+  beginPick() {
+    this.setData({ picking: true })
+    this.goEquipment()
+  },
+
+  cancelPick() {
+    this.draft.clear()
+    this.setData({ picking: false, selected: {}, selectedCount: 0 })
+  },
+
+  saveSelection() {
+    if (!this.draft.size) return
+    const count = adventure.addGearBatch(Array.from(this.draft.values()))
+    if (count === null) return
+    this.cancelPick()
+    this.syncGear()
+    wx.showToast({ title: '已加入 ' + count + ' 件装备', icon: 'none' })
+    if (this.fromList && getCurrentPages().length > 1) wx.navigateBack()
+  },
+
+  goEquipment() {
+    wx.pageScrollTo({ selector: '#bis-equipment', duration: 240, offsetTop: -12 })
+  },
+
+  goItemSets() {
+    wx.pageScrollTo({ selector: '#bis-item-sets', duration: 240, offsetTop: -12 })
+  },
+
+  addItemSetToAdventure() {
+    const cur = this.data.activeItemSet
+    if (!cur || !cur.pieces || !cur.pieces.length) return
+    const list = cur.pieces
+      .filter((r) => r.item && !r.missing)
+      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, dungeonId: r.go, source: r.src }))
+    if (!list.length) return
+    const count = adventure.addGearBatch(list)
+    if (count === null) return
+    this.syncGear()
+    wx.showToast({ title: count ? ('已加入 ' + count + ' 件套装部件') : '本套部件已在清单中', icon: 'none' })
   },
 
   onPullDownRefresh() {
@@ -81,28 +170,30 @@ Page({
   },
 
   start() {
-    return service.loadMeta().then((r) => {
-      this.batch = r.batch
-      this.setData({
-        sourceText: oss.sourceLabel(r),
-        offline: r.source !== 'live',
-        requiresUpdate: !!r.requiresUpdate
-      })
-      if (r.requiresUpdate) return null
-      return oss.loadKey('bisIndex').then((ri) => {
+    const request = this.startRequest = (this.startRequest || 0) + 1
+    this.setData({ unavailable: false, errText: '' })
+    return oss.loadPointer().then((pointer) => {
+      return oss.loadKey('bisIndex', { pointer }).then((ri) => {
+        if (this.startRequest !== request) return
+        this.setData({ sourceText: oss.sourceLabel(ri), offline: ri.source !== 'live', requiresUpdate: !!ri.requiresUpdate })
+        if (ri.requiresUpdate) return
         if (!ri.data || !ri.data.sets || !ri.data.sets.length) {
           this.setData({ loaded: true, unavailable: true, errText: (ri.error && ri.error.message) || '' })
           return null
         }
-        this.index = ri.data
-        return oss.loadKey('bisItems').then((rt) => {
+        return oss.loadKey('bisItems', { pointer }).then((rt) => {
+          if (this.startRequest !== request) return
+          if (!rt.data || !Array.isArray(rt.data.items)) {
+            this.setData({ loaded: true, unavailable: true })
+            return
+          }
+          this.batch = ri.batch
+          this.index = ri.data
           const items = {}
           const stOf = {}
           /* 结构不对时给空表而不是白屏：这一片 830 行，崩一次玩家看到的是整页空白。
              （2026-10-26 写这一页时确实撞到过一次"items 不是数组"，原因没查到底，先留这道闸） */
-          const raw = (rt.data || {}).items
-          const list = Array.isArray(raw) ? raw : []
-          list.forEach((row) => {
+          rt.data.items.forEach((row) => {
             const k = String(row[0])
             items[k] = {
               id: row[0], name: row[1], q: row[2], ilvl: row[3],
@@ -112,6 +203,7 @@ Page({
           })
           this.items = items
           this.stOf = stOf
+          this.initItemSets(ri.data.itemSets || [])
           this.setData({
             loaded: true,
             meta: ri.data.meta,
@@ -124,11 +216,11 @@ Page({
           })
           const want = this.want && (ri.data.classes || []).some((c) => c.cls === this.want)
             ? this.want : ((ri.data.classes || [])[0] || {}).cls
-          this.pickClassId(want, true)
+          return this.pickClassId(want, true)
         })
       })
     }).catch((e) => {
-      this.setData({ loaded: true, unavailable: true, errText: ((e && (e.stack || e.message)) || String(e)).slice(0, 300) })
+      if (this.startRequest === request) this.setData({ loaded: true, unavailable: true })
     })
   },
 
@@ -147,7 +239,7 @@ Page({
       }),
       setId: resetSet ? (ids[0] || '') : this.data.setId
     })
-    this.loadSet()
+    return this.loadSet()
   },
 
   pickSet(e) {
@@ -170,7 +262,11 @@ Page({
     if (!entry) { this.setData({ set: null, rows: [] }); return Promise.resolve() }
     /* 切职业与切套装都经过这里：先把上一套的图摘掉，否则名单还没到、画面上还是那一身旧的 */
     this.clearPoster()
+    const request = this.setRequest = (this.setRequest || 0) + 1
+    this.set = null
+    this.setData({ set: null, rows: [], errText: '', slot: null })
     return oss.loadBisSet(entry, this.batch).then((r) => {
+      if (this.setRequest !== request) return
       if (!r.data || r.data.kind !== 'bis-set') {
         this.setData({ set: null, errText: (r.error && r.error.message) || '这一套没取到' })
         return null
@@ -178,7 +274,9 @@ Page({
       this.set = r.data
       this.render()
       return r
-    }).catch((e) => { this.setData({ set: null, errText: e.message }) })
+    }).catch(() => {
+      if (this.setRequest === request) this.setData({ set: null, errText: '这一套没取到' })
+    })
   },
 
   /* 索引里的部位键桥（slotKeys / slotSiblings）算出一格的备选：
@@ -268,10 +366,11 @@ Page({
   /* 指这一套、这一阵营那一张图。地址只从分发层桥表里取：
      桥表在构建时已经过五道闸（见文件头第三条），页面这一层不再判来源，
      但也绝不"猜"一个地址——键不在表里就是没有。 */
-  showPoster() {
+  showPoster(retry) {
     const setId = this.data.setId
     const fac = this.data.fac
     const key = setId + '|' + fac
+    if (!retry && key === this._posterKey && this.data.posterSrc) return
     const rel = ((this.index || {}).posterLink || {})[key]
     if (!this.set || !((this.set.byFac || {})[fac] || {}).doll) {
       this._posterKey = ''
@@ -282,7 +381,7 @@ Page({
     if (!rel) {
       this._posterKey = ''
       this.setData({ posterSrc: '', posterState: 'none', posterText: POSTER_NONE,
-        posterErr: '当前套装暂无预览图。' })
+        posterErr: '分发层没给这一套登记底图' })
       return
     }
     const url = oss.assetUrl(this.batch, rel)
@@ -293,7 +392,11 @@ Page({
       return
     }
     this._posterKey = key
-    this.setData({ posterSrc: url, posterState: 'loading', posterText: '正在取这一套的图', posterErr: '' })
+    const posterRequest = this.data.posterRequest + 1
+    this.setData({
+      posterSrc: retry ? url + '?retry=' + Date.now() : url, posterRequest,
+      posterState: 'loading', posterText: '正在取这一套的图', posterErr: ''
+    })
   },
 
   clearPoster() {
@@ -303,19 +406,26 @@ Page({
     }
   },
 
-  onPosterLoad() {
-    /* 迟到的那一张不许盖掉现在选的这套：键不对就当没看见 */
-    if (this._posterKey !== this.data.setId + '|' + this.data.fac) return
+  isCurrentPoster(e) {
+    return this._posterKey === this.data.setId + '|' + this.data.fac
+      && (!e || Number(e.currentTarget.dataset.request) === this.data.posterRequest)
+  },
+
+  onPosterLoad(e) {
+    if (!this.isCurrentPoster(e)) return
     this.setData({ posterState: 'ok', posterText: '', posterErr: '' })
   },
 
-  onPosterError() {
-    const key = this.data.setId + '|' + this.data.fac
-    if (this._posterKey !== key) return
+  onPosterError(e) {
+    if (!this.isCurrentPoster(e)) return
     this.setData({
       posterSrc: '', posterState: 'bad', posterText: POSTER_NONE,
-      posterErr: '预览图加载失败，请稍后再试。'
+      posterErr: '这一张图取不到，请稍后重试'
     })
+  },
+
+  retryPoster() {
+    this.showPoster(true)
   },
 
   openSlot(e) {
@@ -342,6 +452,102 @@ Page({
       slotHead: (this.set.clsCn || '') + ' · ' + (this.set.mode || '') + ' · ' + this.data.facCn + ' · ' + label,
       slotTheirs: theirs,
       slotRows: ids.map((id) => this.itemLine(id, ''))
+    })
+  },
+
+  initItemSets(rawSets) {
+    this.itemSets = rawSets || []
+    if (!this.itemSets.length) {
+      this.setData({ itemSetCats: [], filteredItemSets: [], activeItemSetId: '', activeItemSet: null })
+      return
+    }
+    const CATS = [
+      { key: 'new', label: '无限新套装' },
+      { key: 't0', label: '52级职业T0' },
+      { key: 'endgame', label: '满级副本套' },
+      { key: 'craft', label: '练级与制造套' },
+      { key: 'all', label: '全部' }
+    ]
+    const cats = CATS.map((c) => ({
+      key: c.key,
+      label: c.label,
+      n: c.key === 'all' ? this.itemSets.length : this.itemSets.filter((x) => x.cat === c.key).length
+    })).filter((c) => c.n > 0)
+    const defCat = (cats[0] && cats[0].key) || 'all'
+    this.setData({ itemSetCats: cats })
+    this.applyItemSetCat(defCat)
+  },
+
+  pickItemSetCat(e) {
+    const k = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cat) || '')
+    if (k) this.applyItemSetCat(k)
+  },
+
+  applyItemSetCat(cat) {
+    const all = this.itemSets || []
+    const list = (cat === 'all' ? all : all.filter((x) => x.cat === cat)).map((s) => ({
+      id: s.id,
+      name: s.name,
+      level: s.level,
+      clsCn: s.clsCn,
+      isNew: !!s.isNew,
+      count: (s.pieces || []).length
+    }))
+    const firstId = (list[0] && list[0].id) || ''
+    this.setData({ itemSetCat: cat, filteredItemSets: list, activeItemSetId: firstId })
+    this.renderItemSet(firstId)
+  },
+
+  pickItemSet(e) {
+    const id = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id) || '')
+    if (!id) return
+    this.setData({ activeItemSetId: id })
+    this.renderItemSet(id)
+  },
+
+  renderItemSet(id) {
+    const s = (this.itemSets || []).filter((x) => x.id === id)[0]
+    if (!s) {
+      this.setData({ activeItemSet: null })
+      return
+    }
+    const link = (this.index || {}).dropLink || {}
+    const linkOf = (iid) => {
+      const v = link[String(iid)]
+      return v && v.length ? v[0] : ''
+    }
+    const pieces = (s.pieces || []).map((p) => {
+      const iid = p[0]
+      const slot = p[1] || ''
+      const src = p[2] || ''
+      const it = (this.items || {})[String(iid)] || {}
+      return {
+        item: iid,
+        slot: slot,
+        name: it.name || ('#' + iid),
+        missing: !it.name,
+        q: it.q || 0,
+        qText: quality.qualityName(it.q),
+        ilvl: it.ilvl == null ? '' : it.ilvl,
+        iconUrl: it.iconUrl || '',
+        st: (this.stOf || {})[String(iid)] || [],
+        src: src,
+        go: linkOf(iid)
+      }
+    })
+    const sum = s.sum || {}
+    const sumRows = SUM_KEYS.filter((k) => sum[k]).map((k) => ({ k: k, v: sum[k] }))
+    this.setData({
+      activeItemSet: {
+        id: s.id,
+        name: s.name,
+        level: s.level,
+        catCn: s.catCn,
+        clsCn: s.clsCn,
+        isNew: !!s.isNew,
+        sumRows: sumRows,
+        pieces: pieces
+      }
     })
   },
 

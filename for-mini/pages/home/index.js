@@ -2,6 +2,8 @@ const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const countdown = require('../../services/countdown')
 const features = require('../../services/features')
+const adventure = require('../../services/adventure')
+const LEVELING = require('../../data/forever-leveling-preview')
 const DUNGEON_INDEX = require('../../data/forever-dungeon-snapshot')
 const META_SNAPSHOT = require('../../data/forever-meta-snapshot')
 
@@ -22,9 +24,12 @@ Page({
     openMacros: false,
     openNamer: false,
     classes: [],
+    leveling: LEVELING,
+    levelingIcons: {},
     activeClass: '',
     activeName: '',
     races: [],
+    racesExpanded: false,
     raceNote: '',
     classEmpty: '',
     recent: []
@@ -44,6 +49,7 @@ Page({
 
   onShow() {
     this.syncRecent()
+    this.syncAdventure()
     this.startTimer()
     /* 回到首页就问一次开关：指针本来就是每次取数都重取（max-age=60 那一档），
        这一份 2 KB 没理由更省。线上拧完，玩家切回首页就该看到，不用等下次冷启动。 */
@@ -140,15 +146,18 @@ Page({
         iconUrl: oss.iconUrl(this.batch, c.iconKey)
       }))
       const named = classes.filter((c) => c.nameCn)
+      const levelingIcons = {}
+      named.forEach((c) => { levelingIcons[c.classId] = c.iconUrl })
       /* 站主要默认选中战士；哪天名单里没有战士（改数据、或快照没更上），
          退到名单第一个，别让用户看见一个"选中的职业名字是空的" */
-      const want = named.filter((c) => c.classId === DEFAULT_CLASS).length ? DEFAULT_CLASS : (named[0] || {}).classId || ''
+      const want = named.some((c) => c.classId === DEFAULT_CLASS) ? DEFAULT_CLASS : (named[0] || {}).classId || ''
       this.classes = named
       this.setData({
         loaded: true,
         offline: meta.source !== 'live' || cls.source !== 'live',
         requiresUpdate: !!(meta.requiresUpdate || cls.requiresUpdate),
         classes: named,
+        levelingIcons,
         classEmpty: named.length ? '' : '联网后可查看职业。'
       })
       this.pickClass(want)
@@ -156,10 +165,17 @@ Page({
     })
   },
 
-  /* 选职业：只换下面那一段的内容，不跳转（跳转留给"看这个职业的技能书与天赋树"那条） */
+  /* 选职业：换下面那一段的内容并展开可选种族，不直接跳走（跳转留给"看这个职业的技能书与天赋树"那条） */
   onPickClass(e) {
     const id = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id) || '')
-    if (id) this.pickClass(id)
+    if (id) {
+      this.pickClass(id)
+      if (!this.data.racesExpanded) this.setData({ racesExpanded: true })
+    }
+  },
+
+  toggleRaces() {
+    this.setData({ racesExpanded: !this.data.racesExpanded })
   },
 
   pickClass(classId) {
@@ -256,6 +272,31 @@ Page({
       try { wx.setStorageSync(service.RECENT_DUNGEON_KEY, ids.filter((id) => map[id])) } catch (e) {}
     }
     this.setData({ recent })
+  },
+
+  syncAdventure() {
+    const state = adventure.read()
+    const latest = this.data.recent[0] || null
+    if (this.adventureState === state && this.adventureRecent === (latest && latest.id)) return
+    this.adventureState = state
+    this.adventureRecent = latest && latest.id
+    const { plans, gear } = state
+    const plan = plans[0]
+    const pending = Object.values(gear).filter((item) => !item.done).length
+    this.setData({ adventureNext: plan || latest, adventurePlanned: !!plan, adventurePending: pending })
+  },
+
+  goAdventure() {
+    wx.navigateTo({ url: '/pages/adventure/index' })
+  },
+
+  goLeveling(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '/pages/leveling/index' + (id ? '?c=' + encodeURIComponent(id) : '') })
+  },
+
+  continueAdventure(e) {
+    wx.navigateTo({ url: adventure.dungeonUrl(e.currentTarget.dataset.id, '&tasks=1') })
   },
 
   /* 底图取不到（素材还没发、这张被撤、路径换了）就把那一层撤掉，卡片回到纯色版式。

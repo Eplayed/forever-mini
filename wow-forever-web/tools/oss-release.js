@@ -97,11 +97,10 @@ const BUDGET_KB = {
      它只在进配装页那一次下（不是冷启动路径），而这一页同一次还要下 118 KB 的共享物品表
      和一张约 250 KB 的图，索引不是这一页的流量大头。哪天再顶破，方向是把两张桥表
      单独分一片（点开哪套才取哪套的），不是继续抬这条。 */
-  'bis/index': 32,
-  /* bisItems 是"进这一页要下一次"的共享表：830 件 × (名字/品质/装等/图标键/最多 4 条属性行)。
-     2026-10-26 实测 118 KB。哪天它顶破这条，说明属性行该拆成单独一片（按部位或按职业），
-     由构建来提醒，不等手机上出问题。 */
-  bisItems: 128,
+  'bis/index': 64,
+  /* bisItems 是"进这一页要下一次"的共享表：830 件 30 级配装 + 181 件 14–58 级套装部件。
+     2026-11-17 合入 36 套套装图鉴后约 140 KB，预算抬到 160 KB。 */
+  bisItems: 160,
   bisSet: 28,
   /* 专业线（2026-10-27）：索引 13 个专业约 6 KB；分片自成一格（图标/材料/商人/图纸字典都就地带），
      点开哪个专业才下那一片。最大的是制皮 511 条配方。哪天顶破这条，说明该把分片再按分箱拆了，
@@ -146,6 +145,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
 const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'population-census.json', 'population-census-cn.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const ADDON_DROP_FACTS = 'upstream/df-drop-item-facts.json';
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
   + '取不到的（在 assets/missing.json 里登记过）界面必须回落自绘块，不许热链站内 img/ 路径。';
@@ -190,6 +190,7 @@ const dump = (obj) => Buffer.from(JSON.stringify(obj, null, 1) + '\n', 'utf8');
    一份给人看的索引值排，一份机器读的行列不值这个流量。标了 flat 的条目按紧凑写，
    校验值/字节数一律走 bufOf()，两处必须是同一份字节。 */
 const dumpFlat = (obj) => Buffer.from(JSON.stringify(obj), 'utf8');
+const encodeEntry = (entry) => entry.flat ? dumpFlat(entry.obj) : dump(entry.obj);
 const isOfficial = (list) => (list || []).some((s) => String(s.type || '').indexOf('official') === 0 || String(s.type || '') === 'datamine_cn');
 
 /* ---------- 1. 把 oss-preview 的三份成品切成一个批次 ---------- */
@@ -517,6 +518,10 @@ function reExportCompare() {
     const web = path.join(tmp, 'wow-forever-web');
     fs.mkdirSync(path.join(web, 'tools'), { recursive: true });
     fs.copyFileSync(EXPORT_TOOL, path.join(web, 'tools', 'export-mini.js'));
+    fs.copyFileSync(path.join(__dirname, 'leveling-builds.js'), path.join(web, 'tools', 'leveling-builds.js'));
+    const miniServices = path.join(tmp, 'for-mini', 'services');
+    fs.mkdirSync(miniServices, { recursive: true });
+    fs.copyFileSync(path.join(REPO, 'for-mini', 'services', 'talent-engine.js'), path.join(miniServices, 'talent-engine.js'));
     /* 导出层自己也有一道对拍（索引快照 ↔ 分发层索引），要把这份工具一起拷过去，
        否则临时目录里的 export-mini.js 会因为找不到参照而直接拒绝跑。 */
     fs.copyFileSync(path.join(__dirname, 'oss-release.js'), path.join(web, 'tools', 'oss-release.js'));
@@ -596,6 +601,17 @@ function buildBatch(env, opts) {
     (readJson(itemsSrc).items || []).forEach((x) => { itemsIndex[String(x.id)] = x; });
     const det = readJson(itemDetailSrc).items || {};
     Object.keys(det).forEach((k) => { itemDetailIndex[String(k)] = det[k]; });
+  }
+  const dropFactsPath = path.join(siteData(), ADDON_DROP_FACTS);
+  const hasDropFacts = fs.existsSync(dropFactsPath);
+  const dropItems = { ...itemsIndex };
+  if (hasDropFacts) {
+    for (const fact of readJson(dropFactsPath).items) {
+      const old = dropItems[fact.id];
+      if (!old || old.status === 'missing') {
+        dropItems[fact.id] = { ...old, ilvl: fact.itemLevel, status: fact.status };
+      }
+    }
   }
 
   /* 素材登记表：这一批真引用到、且本地确实在的文件 */
@@ -700,7 +716,7 @@ function buildBatch(env, opts) {
     if (!(spells.classes || []).some((c) => c.classId === s.classId)) errors.push('法术 ' + s.id + '：所属职业不在职业名单里，这条永远不会被读到');
   });
 
-  const srcFiles = BASE_INPUTS.map((f) => {
+  const srcFiles = BASE_INPUTS.concat(hasDropFacts ? [ADDON_DROP_FACTS] : []).map((f) => {
     const abs = path.join(siteData(), f);
     if (!fs.existsSync(abs)) { errors.push('找不到基底文件 app/data/' + f); return null; }
     const buf = fs.readFileSync(abs);
@@ -776,6 +792,13 @@ function buildBatch(env, opts) {
        pickupZone 300/396 有值（当初"缺得厉害"的判断不成立），缺哪段不发哪段，界面照实留白。 */
     const dq = dqById[d.id] || null;
     if (dq) {
+      const factions = new Map();
+      for (const row of [...(dq.questStarts || []), ...(dq.questItems || [])]) {
+        if (!row.quest || !['联盟', '部落', '双方'].includes(row.faction)) continue;
+        const values = factions.get(row.quest) || new Set();
+        values.add(row.faction);
+        factions.set(row.quest, values);
+      }
       det.quests = {
         /* summary 在基底里是 wclbox 自报的汇总对象（faction/questCount/xpTotal），
            2026-11-09 真机实拍抓到它整对象直发、页面渲出 [object Object]——
@@ -786,6 +809,9 @@ function buildBatch(env, opts) {
         rows: (dq.quests || []).map((x) => ({
           nameCn: x.nameCn || null,
           nameEn: x.nameEn || null,
+          ...(x.preQuest && x.preQuest !== x.nameCn ? { preQuest: x.preQuest } : {}),
+          ...(factions.has(x.nameCn) && factions.get(x.nameCn).size === 1
+            ? { faction: [...factions.get(x.nameCn)][0] } : {}),
           questLevel: x.questLevel === undefined ? null : x.questLevel,
           reqLevel: x.reqLevel === undefined ? null : x.reqLevel,
           xp: x.xp === undefined ? null : x.xp,
@@ -819,10 +845,10 @@ function buildBatch(env, opts) {
       cardNote: 'cardCols 是 cards 每行的列名：itemId、类型、装等、属性行数组（顺序就是游戏里的读法）、'
         + '商人卖价、相对经典旧世的状态；装备名/品质/图标/首领在同片 drops 里按 itemId 对。'
         + '状态里「无限中没有」是参考站自报，不是官方结论；属性行与卖价取自插件名录或第三方解包站，本站未做游戏内实测。',
-      cards: (d.drops || []).map((x) => itemCardRow(x, itemsIndex, itemDetailIndex, itemCardMiss)).filter((x) => x)
+      cards: (d.drops || []).map((x) => itemCardRow(x, dropItems, itemDetailIndex, itemCardMiss)).filter((x) => x)
     };
     pushObj('dungeonLoot:' + d.id, 'dungeons/loot/' + d.id + '.json', loot, {
-      records: (d.drops || []).length, budget: 'loot', facts: collectFactDates([d])
+      records: (d.drops || []).length, budget: 'loot', facts: collectFactDates([d]), flat: true
     });
   });
 
@@ -1004,8 +1030,14 @@ function buildBatch(env, opts) {
     }),
     conflicts: classPack.conflicts || []
   };
+  const raceFacts = raceList.map((race) => ({
+    provenance: (race.provenance || []).concat(
+      (race.traits || []).concat((race.subgroup || {}).traits || [])
+        .filter((trait) => trait.valueVia === 'launch-client')
+        .map((trait) => trait.valueSource || {}))
+  }));
   pushObj('classIndex', 'classes/index.json', classIndexObj, {
-    records: classIndexObj.counts.races + classIndexObj.counts.classes, budget: 'classes/index', facts: collectFactDates(raceList)
+    records: classIndexObj.counts.races + classIndexObj.counts.classes, budget: 'classes/index', facts: collectFactDates(raceFacts)
   });
   const guideObj = Object.assign({ schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'guide' }, guidePack);
   pushObj('guide', 'guide.json', guideObj, {
@@ -1235,6 +1267,37 @@ function buildBatch(env, opts) {
         facts: { min: st.fetched || null, max: st.fetched || null, distinct: st.fetched ? 1 : 0, recordsWithoutDate: st.fetched ? 0 : 1 }
       });
     });
+    const itemSetsOut = (bis.itemSets || []).map((st) => {
+      const pcs = (st.pieces || []).map((p) => {
+        needItem(p.item, 'bis/itemSet/' + st.id);
+        const k = String(p.item);
+        if (p.dungeonId) {
+          const did = dunIdOf({ id: p.dungeonId });
+          if (!did) {
+            dunMiss[p.dungeonId] = (dunMiss[p.dungeonId] || 0) + 1;
+          } else {
+            if (!dropLink[k]) dropLink[k] = [];
+            if (dropLink[k].indexOf(did) < 0) dropLink[k].push(did);
+          }
+        }
+        return [p.item, p.slot || '', p.src || ''];
+      });
+      const sum = statParser.sumStatLines(pcs.map((r) => ((itemDetailIndex[String(r[0])] || {}).st) || []));
+      return {
+        id: st.id,
+        setId: st.setId,
+        name: st.name,
+        level: st.level,
+        cat: st.cat,
+        catCn: st.catCn,
+        isNew: st.isNew ? 1 : 0,
+        cls: st.cls || null,
+        clsCn: st.clsCn || '',
+        mat: st.mat || '',
+        sum,
+        pieces: pcs
+      };
+    });
     const itemRows = Object.keys(rows).sort((a, b) => Number(a) - Number(b)).map((k) => rows[k]);
     bisItemsObj = {
       schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'bis-items',
@@ -1351,6 +1414,7 @@ function buildBatch(env, opts) {
          能进这张表的都过了上面那五道闸；进不了的这一格就是"没有图"，页面自己说，不拿别的套装顶。 */
       posterLink,
       classes,
+      itemSets: itemSetsOut,
       sets: setOuts.map((s) => ({
         id: s.setId, cls: s.cls, clsCn: s.clsCn, mode: s.mode, level: s.level,
         fetched: s.fetched, url: s.url, path: 'bis/set/' + s.setId + '.json'
@@ -1760,7 +1824,7 @@ function buildBatch(env, opts) {
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
   entries.forEach((e) => {
-    e.preBuf = e.buf || (e.flat ? dumpFlat(e.obj) : dump(e.obj));
+    e.preBuf = e.buf || encodeEntry(e);
     e.contentSha = sha256(e.preBuf);
   });
   /* buildId 必须把"生成器自己"也算进指纹。
@@ -1775,8 +1839,8 @@ function buildBatch(env, opts) {
      最后统一出 buf/bytes/sha256/etag——这一步没有随机因素，重跑必得同样字节。 */
   entries.forEach((e) => { if (e.obj) e.obj.buildId = buildId; });
   indexObj.items.forEach((it) => {
-    const dBuf = dump(byKey['dungeonDetail:' + it.id].obj);
-    const lBuf = dump(byKey['dungeonLoot:' + it.id].obj);
+    const dBuf = encodeEntry(byKey['dungeonDetail:' + it.id]);
+    const lBuf = encodeEntry(byKey['dungeonLoot:' + it.id]);
     const dm = md5Of(dBuf); const lm = md5Of(lBuf);
     it.detailEtag = dm.etag; it.detailMd5 = dm.md5; it.detailBytes = dBuf.length;
     it.lootEtag = lm.etag; it.lootMd5 = lm.md5; it.lootBytes = lBuf.length;
@@ -1886,7 +1950,7 @@ function buildBatch(env, opts) {
   });
 
   entries.forEach((e) => {
-    if (!e.buf) e.buf = e.flat ? dumpFlat(e.obj) : dump(e.obj);
+    if (!e.buf) e.buf = encodeEntry(e);
     e.bytes = e.buf.length;
     e.sha256 = sha256(e.buf);
     e.etag = md5Hex(e.buf);
@@ -3258,6 +3322,7 @@ module.exports = {
   BUDGET_KB,
   EXPORT_RELS,
   BASE_INPUTS,
+  ADDON_DROP_FACTS,
   BIS_ITEM_COLS,
   BIS_SLOT_KEYS,
   BIS_SLOT_SIBS,

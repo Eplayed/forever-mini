@@ -1,19 +1,19 @@
 {
  "meta": {
-  "generatedAt": "2026-11-10",
+  "generatedAt": "2026-11-17",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
  "scale": {
   "dungeonQuests": 396,
-  "dungeonGeoEntry": 28,
-  "dungeonGeoBoss": 201,
-  "dungeonGeoBossPoints": 237,
+  "dungeonGeoEntry": 36,
+  "dungeonGeoBoss": 266,
+  "dungeonGeoBossPoints": 287,
   "dungeonQuestDungeons": 30,
   "profVendors": 646,
   "profDrops": 336,
   "professions": 12,
-  "recipes": 1986,
+  "recipes": 1987,
   "recipesNew": 885,
   "gatherNodes": 55,
   "zones": 44,
@@ -26,8 +26,8 @@
   "changesTalents": 551,
   "changesSpells": 417,
   "changesNew": 118,
-  "changesModified": 307,
-  "changesSpellsChanged": 258,
+  "changesModified": 308,
+  "changesSpellsChanged": 260,
   "changesRemoved": 84,
   "classRank": [
    {
@@ -48,10 +48,10 @@
    },
    {
     "classId": "warrior",
-    "official": 100,
-    "datamine": 97,
+    "official": 99,
+    "datamine": 98,
     "total": 197,
-    "share": 50.8,
+    "share": 50.3,
     "place": 3
    },
    {
@@ -72,26 +72,26 @@
    },
    {
     "classId": "mage",
-    "official": 64,
-    "datamine": 105,
+    "official": 63,
+    "datamine": 106,
     "total": 169,
-    "share": 37.9,
+    "share": 37.3,
     "place": 6
    },
    {
     "classId": "shaman",
     "official": 57,
-    "datamine": 110,
-    "total": 167,
-    "share": 34.1,
+    "datamine": 109,
+    "total": 166,
+    "share": 34.3,
     "place": 7
    },
    {
     "classId": "rogue",
     "official": 51,
-    "datamine": 124,
-    "total": 175,
-    "share": 29.1,
+    "datamine": 121,
+    "total": 172,
+    "share": 29.7,
     "place": 8
    },
    {
@@ -112,11 +112,11 @@
    "cap": 16,
    "total": 65
   },
-  "items": 21465,
+  "items": 21869,
   "itemsSrvAbsent": 796,
   "itemsSrvPresent": 1005,
-  "itemsSrvConflict": 66,
-  "itemsNew": 5638,
+  "itemsSrvConflict": 777,
+  "itemsNew": 6044,
   "spells": 493,
   "achievements": 211,
   "pets": 18,
@@ -124,28 +124,29 @@
   "macros": 245,
   "macrosUnverifiedIds": 41,
   "bisAltRows": 1237,
+  "bisItemSets": 36,
   "bisSets": 38,
   "bisClasses": 9,
   "bisItems": 177,
-  "search": 5419,
-  "talentPreview": 472,
+  "search": 5434,
+  "talentPreview": 468,
   "releases": 83,
   "navNew": [
    "宏命令"
   ],
   "glossary": 215,
   "classes": 9,
-  "talentNodes": 472,
-  "talentTreeConflict": 3,
-  "talentVerified": 449,
+  "talentNodes": 468,
+  "talentTreeConflict": 2,
+  "talentVerified": 447,
   "dungeons": 38,
   "dungeonsNew": 9,
-  "bosses": 306,
-  "drops": 1166,
+  "bosses": 320,
+  "drops": 1450,
   "dungeonNameEn": 38,
-  "dungeonParty": 31,
-  "dungeonRangeTwoSay": 0,
-  "queueRows": 51,
+  "dungeonParty": 36,
+  "dungeonRangeTwoSay": 3,
+  "queueRows": 56,
   "queueUnlisted": 16,
   "raids": {
    "entries": 19,
@@ -160,15 +161,15 @@
   "timeline": 11,
   "abilities": 86,
   "coverage": {
-   "L0": 367,
-   "L1": 433,
-   "L2": 365,
+   "L0": 369,
+   "L1": 430,
+   "L2": 362,
    "L3": 2
   },
-  "coverageTotal": 1167,
+  "coverageTotal": 1163,
   "pubCoverage": {
-   "L0": 367,
-   "L1": 325,
+   "L0": 369,
+   "L1": 323,
    "L2": 1,
    "L3": 2
   },
@@ -177,37 +178,37 @@
    {
     "file": "legacy.json",
     "section": "传承",
-    "build": "1.60.1.70790",
-    "checkedAt": "2026-11-05",
+    "build": "1.60.1.70938",
+    "checkedAt": "2026-11-16",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    },
    {
     "file": "queue.json",
     "section": "副本排队表",
-    "build": "1.60.1.70790",
-    "checkedAt": "2026-11-05",
+    "build": "1.60.1.70938",
+    "checkedAt": "2026-11-16",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    },
    {
     "file": "changes.json",
     "section": "客户端改动",
-    "build": "1.60.1.70790",
-    "checkedAt": "2026-11-05",
+    "build": "1.60.1.70938",
+    "checkedAt": "2026-11-16",
     "classic": "1.15.9.70576",
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    },
    {
     "file": "world.json",
     "section": "世界（区域与稀有）",
-    "build": "1.60.1.70790",
-    "checkedAt": "2026-11-05",
+    "build": "1.60.1.70938",
+    "checkedAt": "2026-11-16",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    },
    {
@@ -216,8 +217,8 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 5,
-    "stale": null
+    "daysSince": 12,
+    "stale": "warn"
    },
    {
     "file": "name-generator.json",
@@ -225,8 +226,8 @@
     "build": null,
     "checkedAt": "2026-11-03",
     "classic": null,
-    "daysSince": 7,
-    "stale": null
+    "daysSince": 14,
+    "stale": "warn"
    },
    {
     "file": "pets.json",
@@ -234,34 +235,34 @@
     "build": null,
     "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 5,
-    "stale": null
+    "daysSince": 12,
+    "stale": "warn"
    },
    {
     "file": "bis.json",
     "section": "配装名单",
     "build": null,
-    "checkedAt": "2026-10-28",
+    "checkedAt": "2026-11-05",
     "classic": null,
-    "daysSince": 13,
+    "daysSince": 12,
     "stale": "warn"
    },
    {
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-16",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    },
    {
     "file": "items.json",
     "section": "物品名录",
     "build": null,
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-16",
     "classic": null,
-    "daysSince": 5,
+    "daysSince": 1,
     "stale": null
    }
   ],
@@ -269,7 +270,7 @@
    "soft": 7,
    "hard": 14
   },
-  "newestBuild": "1.60.1.70790",
+  "newestBuild": "1.60.1.70938",
   "newestSection": "传承"
  }
 }

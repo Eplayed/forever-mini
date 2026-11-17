@@ -4,7 +4,7 @@
   "title": "BIS配装",
   "level": 30,
   "source": "https://wowforever.wclbox.com/peizhuang",
-  "scrapedAt": "2026-10-28",
+  "scrapedAt": "2026-11-05",
   "method": "tools/scrape-wclbox-bis.py（真浏览器：联盟读 SSR 后的纸娃娃，点 .pz-faction 的「部落」再读一遍）",
   "notTaken": "该页的成段中文说明、属性优先级、循环建议、.pz-stats-note 那句计算口径一律没取（红线）",
   "basis": "数值与名称一律回 items.json / items-detail.json 查，这份只存\"哪件装备在哪个部位、按什么顺序\"",
@@ -64,6 +64,14 @@
    "notInOurIndexSample": [
     9395
    ]
+  },
+  "itemSetsMeta": {
+   "source": "ForeverLevelingBiS/Data/Sets.lua + Items.lua",
+   "declaredOrigin": "客户端解包转述（Forever 1.60.1）",
+   "fetched": "2026-11-16",
+   "grade": "L1",
+   "count": 36,
+   "pieceCount": 191
   }
  },
  "sets": [
@@ -75,7 +83,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -2196,7 +2204,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior/pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -4115,7 +4123,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warrior/tank",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -6220,7 +6228,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/hunter",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -8527,7 +8535,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/hunter/pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -10636,7 +10644,7 @@
    "mode": "冰霜 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -12932,7 +12940,7 @@
    "mode": "冰霜 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -14999,7 +15007,7 @@
    "mode": "火焰 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/fire",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -17259,7 +17267,7 @@
    "mode": "火焰 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/fire-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -19297,7 +19305,7 @@
    "mode": "奥术 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/mage/arcane",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -21563,7 +21571,7 @@
    "mode": "战斗 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -23761,7 +23769,7 @@
    "mode": "刺杀 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/assassination",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -25921,7 +25929,7 @@
    "mode": "敏锐 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -27982,7 +27990,7 @@
    "mode": "出血 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/rogue/pvp-hemo",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -30043,7 +30051,7 @@
    "mode": "暗影 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -32297,7 +32305,7 @@
    "mode": "暗影 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/shadow-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -34323,7 +34331,7 @@
    "mode": "神圣 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/holy",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -36512,7 +36520,7 @@
    "mode": "戒律 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/priest/discipline-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -38606,7 +38614,7 @@
    "mode": "PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warlock",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -40876,7 +40884,7 @@
    "mode": "PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/warlock/pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -42910,7 +42918,7 @@
    "mode": "惩戒 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -44740,7 +44748,7 @@
    "mode": "惩戒 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/retribution-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -46637,7 +46645,7 @@
    "mode": "神圣 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/holy",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -48903,7 +48911,7 @@
    "mode": "神圣 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/holy-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -51058,7 +51066,7 @@
    "mode": "震击骑 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/shockadin",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -53093,7 +53101,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/paladin/tank",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -55075,7 +55083,7 @@
    "mode": "野性战斗 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -57143,7 +57151,7 @@
    "mode": "野性战斗 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/feral-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -59233,7 +59241,7 @@
    "mode": "坦克",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/tank",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -61074,7 +61082,7 @@
    "mode": "平衡 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/balance",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -63208,7 +63216,7 @@
    "mode": "平衡 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/balance-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -65159,7 +65167,7 @@
    "mode": "恢复",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/restoration",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -67392,7 +67400,7 @@
    "mode": "恢复 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/druid/restoration-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -69569,7 +69577,7 @@
    "mode": "元素 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -71732,7 +71740,7 @@
    "mode": "元素 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/elemental-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -73668,7 +73676,7 @@
    "mode": "增强 PvE",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/enhancement",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -75815,7 +75823,7 @@
    "mode": "增强 PvP",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/enhancement-pvp",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -77781,7 +77789,7 @@
    "mode": "恢复",
    "level": 30,
    "url": "https://wowforever.wclbox.com/peizhuang/shaman/restoration",
-   "fetched": "2026-10-28",
+   "fetched": "2026-11-05",
    "doll": {
     "alliance": [
      {
@@ -80020,6 +80028,1730 @@
      }
     ]
    }
+  }
+ ],
+ "itemSets": [
+  {
+   "id": "set-161",
+   "setId": 161,
+   "name": "迪菲亚皮甲",
+   "nameEn": "Defias Leather",
+   "level": 14,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 10399,
+     "slot": "胸部",
+     "src": "副本：死亡矿井 · 艾德温·范克里夫",
+     "dungeonId": "deathmine"
+    },
+    {
+     "item": 10401,
+     "slot": "手",
+     "src": "副本：死亡矿井 · 小怪",
+     "dungeonId": "deathmine"
+    },
+    {
+     "item": 10403,
+     "slot": "腰部",
+     "src": "副本：死亡矿井 · 绿皮船长",
+     "dungeonId": "deathmine"
+    },
+    {
+     "item": 10400,
+     "slot": "腿部",
+     "src": "副本：死亡矿井 · 小怪",
+     "dungeonId": "deathmine"
+    },
+    {
+     "item": 10402,
+     "slot": "脚",
+     "src": "副本：死亡矿井 · 小怪",
+     "dungeonId": "deathmine"
+    }
+   ]
+  },
+  {
+   "id": "set-162",
+   "setId": 162,
+   "name": "毒蛇的拥抱",
+   "nameEn": "Embrace of the Viper",
+   "level": 14,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 6473,
+     "slot": "胸部",
+     "src": "副本：哀嚎洞穴 · 皮萨斯",
+     "dungeonId": "wailing-caverns"
+    },
+    {
+     "item": 10413,
+     "slot": "手",
+     "src": "副本：哀嚎洞穴 · 小怪",
+     "dungeonId": "wailing-caverns"
+    },
+    {
+     "item": 10412,
+     "slot": "腰部",
+     "src": "副本：哀嚎洞穴",
+     "dungeonId": "wailing-caverns"
+    },
+    {
+     "item": 10410,
+     "slot": "腿部",
+     "src": "副本：哀嚎洞穴 · 考布莱恩",
+     "dungeonId": "wailing-caverns"
+    },
+    {
+     "item": 10411,
+     "slot": "脚",
+     "src": "副本：哀嚎洞穴 · 瑟芬迪斯",
+     "dungeonId": "wailing-caverns"
+    }
+   ]
+  },
+  {
+   "id": "set-2131",
+   "setId": 2131,
+   "name": "同谋佳偶",
+   "nameEn": "Partners in Crime",
+   "level": 17,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "手指",
+   "mat": "手指",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 284715,
+     "slot": "手指",
+     "src": "副本：死亡矿井 · 重拳先生",
+     "dungeonId": "deathmine"
+    },
+    {
+     "item": 284716,
+     "slot": "手指",
+     "src": "待实测",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-2133",
+   "setId": 2133,
+   "name": "腐疗者的法衣",
+   "nameEn": "Rotmender's Raiment",
+   "level": 17,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "布甲",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 286978,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 286979,
+     "slot": "手",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 286980,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 271207,
+     "slot": "腿部",
+     "src": "副本：洛丹伦废墟 · 被遗弃者",
+     "dungeonId": "ruins-of-lordaeron"
+    },
+    {
+     "item": 271214,
+     "slot": "脚",
+     "src": "副本：洛丹伦废墟 · 拉斯玛尔",
+     "dungeonId": "ruins-of-lordaeron"
+    }
+   ]
+  },
+  {
+   "id": "set-2134",
+   "setId": 2134,
+   "name": "紫罗兰巫师的法衣",
+   "nameEn": "Violet Sorcerer's Vestments",
+   "level": 27,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "布甲",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 273051,
+     "slot": "肩部",
+     "src": "副本：达拉然 · 大法师之影",
+     "dungeonId": "city-of-dalaran"
+    },
+    {
+     "item": 273044,
+     "slot": "胸部",
+     "src": "副本：达拉然 · 奥术之谜",
+     "dungeonId": "city-of-dalaran"
+    },
+    {
+     "item": 286989,
+     "slot": "手",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    },
+    {
+     "item": 286988,
+     "slot": "腿部",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    },
+    {
+     "item": 286987,
+     "slot": "脚",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-163",
+   "setId": 163,
+   "name": "血色十字军链甲",
+   "nameEn": "Chain of the Scarlet Crusade",
+   "level": 30,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 10328,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 10333,
+     "slot": "手腕",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 10331,
+     "slot": "手",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 10329,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 10330,
+     "slot": "腿部",
+     "src": "副本：血色修道院军械库 · 赫洛德",
+     "dungeonId": "scarlet-monastery-armory"
+    },
+    {
+     "item": 10332,
+     "slot": "脚",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-2135",
+   "setId": 2135,
+   "name": "克罗多克战甲",
+   "nameEn": "Krol'dok Battlegear",
+   "level": 40,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "板甲",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 275006,
+     "slot": "头部",
+     "src": "副本：克罗多克要塞 · 纳古克",
+     "dungeonId": "kroldok-stronghold"
+    },
+    {
+     "item": 287014,
+     "slot": "肩部",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    },
+    {
+     "item": 275005,
+     "slot": "胸部",
+     "src": "副本：克罗多克要塞 · 纳古克",
+     "dungeonId": "kroldok-stronghold"
+    },
+    {
+     "item": 287012,
+     "slot": "手",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    },
+    {
+     "item": 287013,
+     "slot": "腿部",
+     "src": "世界掉落（装绑）",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-1968",
+   "setId": 1968,
+   "name": "祝福板甲",
+   "nameEn": "Blessed Plate",
+   "level": 47,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "板甲",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 250593,
+     "slot": "头部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250586,
+     "slot": "肩部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250594,
+     "slot": "胸部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250590,
+     "slot": "手腕",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250588,
+     "slot": "手",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250592,
+     "slot": "腰部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250591,
+     "slot": "腿部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250587,
+     "slot": "脚",
+     "src": "锻造",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-490",
+   "setId": 490,
+   "name": "绿龙锁甲",
+   "nameEn": "Green Dragon Mail",
+   "level": 47,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15045,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 20296,
+     "slot": "手",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15046,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-321",
+   "setId": 321,
+   "name": "君王板甲",
+   "nameEn": "Imperial Plate",
+   "level": 47,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "板甲",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 12427,
+     "slot": "头部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12428,
+     "slot": "肩部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12422,
+     "slot": "胸部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12425,
+     "slot": "手腕",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 250589,
+     "slot": "手",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12424,
+     "slot": "腰部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12429,
+     "slot": "腿部",
+     "src": "锻造",
+     "dungeonId": null
+    },
+    {
+     "item": 12426,
+     "slot": "脚",
+     "src": "锻造",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-2136",
+   "setId": 2136,
+   "name": "迪菲亚执行者的套装",
+   "nameEn": "Defias Enforcer's Garb",
+   "level": 48,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 287019,
+     "slot": "头部",
+     "src": "副本：奥卡兹监狱",
+     "dungeonId": "alcaz-prison"
+    },
+    {
+     "item": 276741,
+     "slot": "肩部",
+     "src": "副本：奥卡兹监狱 · 质问者",
+     "dungeonId": "alcaz-prison"
+    },
+    {
+     "item": 287020,
+     "slot": "胸部",
+     "src": "待实测",
+     "dungeonId": null
+    },
+    {
+     "item": 276746,
+     "slot": "腿部",
+     "src": "副本：奥卡兹监狱 · 烈焰咆哮者",
+     "dungeonId": "alcaz-prison"
+    },
+    {
+     "item": 287021,
+     "slot": "脚",
+     "src": "副本：奥卡兹监狱",
+     "dungeonId": "alcaz-prison"
+    }
+   ]
+  },
+  {
+   "id": "set-144",
+   "setId": 144,
+   "name": "铁羽护甲",
+   "nameEn": "Ironfeather Armor",
+   "level": 49,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15067,
+     "slot": "肩部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15066,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-141",
+   "setId": 141,
+   "name": "火山",
+   "nameEn": "Volcanic Armor",
+   "level": 49,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15055,
+     "slot": "肩部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15053,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15054,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-142",
+   "setId": 142,
+   "name": "雷暴",
+   "nameEn": "Stormshroud Armor",
+   "level": 50,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15058,
+     "slot": "肩部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15056,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 21278,
+     "slot": "手",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15057,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-189",
+   "setId": 189,
+   "name": "勇气",
+   "nameEn": "Battlegear of Valor",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "warrior",
+   "clsCn": "战士",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16731,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16733,
+     "slot": "肩部",
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16730,
+     "slot": "胸部",
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16735,
+     "slot": "手腕",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16737,
+     "slot": "手",
+     "src": "副本：斯坦索姆侧门 · 吞咽者拉姆斯登",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16736,
+     "slot": "腰部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16732,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16734,
+     "slot": "脚",
+     "src": "副本：通灵学院 · 基尔图诺斯",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-186",
+   "setId": 186,
+   "name": "野兽追猎者",
+   "nameEn": "Beaststalker Armor",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "hunter",
+   "clsCn": "猎人",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16677,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16679,
+     "slot": "肩部",
+     "src": "副本：黑石塔下层 · 维姆萨拉克",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    {
+     "item": 16674,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16681,
+     "slot": "手腕",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16676,
+     "slot": "手",
+     "src": "副本：黑石塔下层 · 指挥官沃恩",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    {
+     "item": 16680,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16678,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16675,
+     "slot": "脚",
+     "src": "副本：斯坦索姆侧门 · 奈鲁布恩坎",
+     "dungeonId": "stratholme-service-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-491",
+   "setId": 491,
+   "name": "蓝龙锁甲",
+   "nameEn": "Blue Dragon Mail",
+   "level": 52,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15049,
+     "slot": "肩部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15048,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 20295,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-183",
+   "setId": 183,
+   "name": "鬼雾",
+   "nameEn": "Dreadmist Raiment",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "warlock",
+   "clsCn": "术士",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16698,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16701,
+     "slot": "肩部",
+     "src": "副本：通灵学院 · 詹迪斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16700,
+     "slot": "胸部",
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16703,
+     "slot": "手腕",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16705,
+     "slot": "手",
+     "src": "副本：通灵学院 · 博学者普克尔特",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16702,
+     "slot": "腰部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16699,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16704,
+     "slot": "脚",
+     "src": "副本：斯坦索姆侧门 · 安娜丝塔丽男爵夫人",
+     "dungeonId": "stratholme-service-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-188",
+   "setId": 188,
+   "name": "光铸护甲",
+   "nameEn": "Lightforge Armor",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "paladin",
+   "clsCn": "圣骑士",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16727,
+     "slot": "头部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16729,
+     "slot": "肩部",
+     "src": "副本：黑石塔上层 · 比斯巨兽",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16726,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16722,
+     "slot": "手腕",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16724,
+     "slot": "手",
+     "src": "副本：斯坦索姆正门 · 残忍的提米",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16723,
+     "slot": "腰部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16728,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16725,
+     "slot": "脚",
+     "src": "副本：斯坦索姆正门 · 巴纳扎尔",
+     "dungeonId": "stratholme-main-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-181",
+   "setId": 181,
+   "name": "博学者的徽记",
+   "nameEn": "Magister's Regalia",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "mage",
+   "clsCn": "法师",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16686,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16689,
+     "slot": "肩部",
+     "src": "副本：通灵学院 · 莱斯·霜语",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16688,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16683,
+     "slot": "手腕",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16684,
+     "slot": "手",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16685,
+     "slot": "腰部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16687,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16682,
+     "slot": "脚",
+     "src": "副本：斯坦索姆正门 · 弗雷斯特恩",
+     "dungeonId": "stratholme-main-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-184",
+   "setId": 184,
+   "name": "迅影",
+   "nameEn": "Shadowcraft Armor",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "rogue",
+   "clsCn": "盗贼",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16707,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16708,
+     "slot": "肩部",
+     "src": "副本：斯坦索姆正门 · 炮手威利",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16721,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16710,
+     "slot": "手腕",
+     "src": "副本：通灵学院 · 讲师玛丽希亚",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16712,
+     "slot": "手",
+     "src": "副本：黑石塔下层 · 暗影猎手沃什加斯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    {
+     "item": 16713,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16709,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16711,
+     "slot": "脚",
+     "src": "副本：通灵学院 · 血骨傀儡",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-187",
+   "setId": 187,
+   "name": "元素",
+   "nameEn": "The Elements",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "shaman",
+   "clsCn": "萨满祭司",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16667,
+     "slot": "头部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16669,
+     "slot": "肩部",
+     "src": "副本：黑石塔上层 · 盖斯",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16666,
+     "slot": "胸部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16671,
+     "slot": "手腕",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16672,
+     "slot": "手",
+     "src": "副本：黑石塔上层 · 烈焰卫士艾博希尔",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16673,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16668,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16670,
+     "slot": "脚",
+     "src": "副本：黑石塔下层 · 欧莫克大王",
+     "dungeonId": "lower-blackrock-spire"
+    }
+   ]
+  },
+  {
+   "id": "set-1",
+   "setId": 1,
+   "name": "角斗士",
+   "nameEn": "The Gladiator",
+   "level": 52,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 11729,
+     "slot": "头部",
+     "src": "副本：黑石深渊 · 秩序竞技场",
+     "dungeonId": "blackrock-depths"
+    },
+    {
+     "item": 277117,
+     "slot": "肩部",
+     "src": "待实测",
+     "dungeonId": null
+    },
+    {
+     "item": 11726,
+     "slot": "胸部",
+     "src": "副本：黑石深渊 · 秩序竞技场",
+     "dungeonId": "blackrock-depths"
+    },
+    {
+     "item": 11730,
+     "slot": "手",
+     "src": "副本：黑石深渊 · 秩序竞技场",
+     "dungeonId": "blackrock-depths"
+    },
+    {
+     "item": 11728,
+     "slot": "腿部",
+     "src": "副本：黑石深渊 · 秩序竞技场",
+     "dungeonId": "blackrock-depths"
+    },
+    {
+     "item": 11731,
+     "slot": "脚",
+     "src": "副本：黑石深渊 · 秩序竞技场",
+     "dungeonId": "blackrock-depths"
+    }
+   ]
+  },
+  {
+   "id": "set-182",
+   "setId": 182,
+   "name": "虔诚",
+   "nameEn": "Vestments of the Devout",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "priest",
+   "clsCn": "牧师",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16693,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16695,
+     "slot": "肩部",
+     "src": "副本：黑石塔上层 · 索拉卡·火冠",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16690,
+     "slot": "胸部",
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16697,
+     "slot": "手腕",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16692,
+     "slot": "手",
+     "src": "副本：斯坦索姆正门 · 档案管理员加尔福特",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16696,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 16694,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16691,
+     "slot": "脚",
+     "src": "副本：斯坦索姆侧门 · 苍白的玛勒基",
+     "dungeonId": "stratholme-service-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-185",
+   "setId": 185,
+   "name": "野性之心",
+   "nameEn": "Wildheart Raiment",
+   "level": 52,
+   "cat": "t0",
+   "catCn": "职业T0套",
+   "isNew": false,
+   "cls": "druid",
+   "clsCn": "德鲁伊",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 16720,
+     "slot": "头部",
+     "src": "副本：通灵学院 · 黑暗院长加丁",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16718,
+     "slot": "肩部",
+     "src": "副本：黑石塔下层 · 奴役者基兹鲁尔",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    {
+     "item": 16706,
+     "slot": "胸部",
+     "src": "副本：黑石塔上层 · 达基萨斯将军",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 16714,
+     "slot": "手腕",
+     "src": "副本：斯坦索姆正门",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16717,
+     "slot": "手",
+     "src": "副本：斯坦索姆正门 · 不可宽恕者",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 16716,
+     "slot": "腰部",
+     "src": "副本：通灵学院 · 拉文尼亚",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 16719,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆侧门 · 瑞文戴尔男爵",
+     "dungeonId": "stratholme-service-gate"
+    },
+    {
+     "item": 16715,
+     "slot": "脚",
+     "src": "副本：黑石塔下层 · 烟网蛛后",
+     "dungeonId": "lower-blackrock-spire"
+    }
+   ]
+  },
+  {
+   "id": "set-489",
+   "setId": 489,
+   "name": "黑龙锁甲",
+   "nameEn": "Black Dragon Mail",
+   "level": 53,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15051,
+     "slot": "肩部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15050,
+     "slot": "胸部",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15052,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-143",
+   "setId": 143,
+   "name": "魔暴龙护甲",
+   "nameEn": "Devilsaur Armor",
+   "level": 53,
+   "cat": "craft",
+   "catCn": "练级与制造套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 15063,
+     "slot": "手",
+     "src": "制皮",
+     "dungeonId": null
+    },
+    {
+     "item": 15062,
+     "slot": "腿部",
+     "src": "制皮",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-65",
+   "setId": 65,
+   "name": "蜘蛛之吻",
+   "nameEn": "Spider's Kiss",
+   "level": 55,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "单手锤",
+   "mat": "单手锤",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 13183,
+     "slot": "单手",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 13218,
+     "slot": "单手",
+     "src": "副本：黑石塔下层 · 水晶之牙",
+     "dungeonId": "lower-blackrock-spire"
+    }
+   ]
+  },
+  {
+   "id": "set-2071",
+   "setId": 2071,
+   "name": "熊怪的教诲",
+   "nameEn": "Teachings of the Furbolgs",
+   "level": 55,
+   "cat": "new",
+   "catCn": "无限新套装",
+   "isNew": true,
+   "cls": null,
+   "clsCn": "饰品",
+   "mat": "饰品",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 21326,
+     "slot": "饰品",
+     "src": "任务奖励",
+     "dungeonId": null
+    },
+    {
+     "item": 268873,
+     "slot": "饰品",
+     "src": "待实测",
+     "dungeonId": null
+    }
+   ]
+  },
+  {
+   "id": "set-123",
+   "setId": 123,
+   "name": "血链",
+   "nameEn": "Bloodmail Regalia",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "锁甲",
+   "mat": "锁甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 14611,
+     "slot": "胸部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14615,
+     "slot": "手",
+     "src": "副本：通灵学院 · 伊露希亚·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14614,
+     "slot": "腰部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14612,
+     "slot": "腿部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14616,
+     "slot": "脚",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-121",
+   "setId": 121,
+   "name": "苍白",
+   "nameEn": "Cadaverous Garb",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "皮甲",
+   "mat": "皮甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 14637,
+     "slot": "胸部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14640,
+     "slot": "手",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14636,
+     "slot": "腰部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14638,
+     "slot": "腿部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14641,
+     "slot": "脚",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-124",
+   "setId": 124,
+   "name": "亡者之骨",
+   "nameEn": "Deathbone Guardian",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "板甲",
+   "mat": "板甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 14624,
+     "slot": "胸部",
+     "src": "副本：通灵学院 · 阿雷克斯·巴罗夫",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14622,
+     "slot": "手",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14620,
+     "slot": "腰部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14623,
+     "slot": "腿部",
+     "src": "副本：通灵学院 · 瑟尔林·卡斯迪诺夫教授",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14621,
+     "slot": "脚",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-520",
+   "setId": 520,
+   "name": "铁纹作战套装",
+   "nameEn": "Ironweave Battlesuit",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "布甲",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 22302,
+     "slot": "头部",
+     "src": "副本：黑石塔上层 · 瓦塔拉克公爵",
+     "dungeonId": "upper-blackrock-spire"
+    },
+    {
+     "item": 22305,
+     "slot": "肩部",
+     "src": "副本：黑石深渊 · 塞尔德伦",
+     "dungeonId": "blackrock-depths"
+    },
+    {
+     "item": 22301,
+     "slot": "胸部",
+     "src": "待实测",
+     "dungeonId": null
+    },
+    {
+     "item": 22313,
+     "slot": "手腕",
+     "src": "副本：黑石塔下层 · 哈雷肯",
+     "dungeonId": "lower-blackrock-spire"
+    },
+    {
+     "item": 22304,
+     "slot": "手",
+     "src": "副本：厄运之槌东区",
+     "dungeonId": "dire-maul-east"
+    },
+    {
+     "item": 22306,
+     "slot": "腰部",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 22303,
+     "slot": "腿部",
+     "src": "副本：通灵学院 · 库尔莫克",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 22311,
+     "slot": "脚",
+     "src": "副本：黑石塔上层 · 比斯巨兽",
+     "dungeonId": "upper-blackrock-spire"
+    }
+   ]
+  },
+  {
+   "id": "set-122",
+   "setId": 122,
+   "name": "骨堆",
+   "nameEn": "Necropile Raiment",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "布甲",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 14633,
+     "slot": "肩部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14626,
+     "slot": "胸部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14629,
+     "slot": "手腕",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14632,
+     "slot": "腿部",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    },
+    {
+     "item": 14631,
+     "slot": "脚",
+     "src": "副本：通灵学院",
+     "dungeonId": "scholomance"
+    }
+   ]
+  },
+  {
+   "id": "set-81",
+   "setId": 81,
+   "name": "邮差",
+   "nameEn": "The Postmaster",
+   "level": 56,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "布甲",
+   "mat": "布甲",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 13390,
+     "slot": "头部",
+     "src": "副本：斯坦索姆正门 · 邮差马龙",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 13388,
+     "slot": "胸部",
+     "src": "副本：斯坦索姆正门 · 邮差马龙",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 13389,
+     "slot": "腿部",
+     "src": "副本：斯坦索姆正门 · 邮差马龙",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 13391,
+     "slot": "脚",
+     "src": "副本：斯坦索姆正门 · 邮差马龙",
+     "dungeonId": "stratholme-main-gate"
+    },
+    {
+     "item": 13392,
+     "slot": "手指",
+     "src": "副本：斯坦索姆正门 · 邮差马龙",
+     "dungeonId": "stratholme-main-gate"
+    }
+   ]
+  },
+  {
+   "id": "set-41",
+   "setId": 41,
+   "name": "雷德双刀",
+   "nameEn": "Dal'Rend's Arms",
+   "level": 58,
+   "cat": "endgame",
+   "catCn": "满级副本套",
+   "isNew": false,
+   "cls": null,
+   "clsCn": "单手剑",
+   "mat": "单手剑",
+   "fetched": "2026-11-16",
+   "pieces": [
+    {
+     "item": 12940,
+     "slot": "主手",
+     "src": "世界/区域掉落",
+     "dungeonId": null
+    },
+    {
+     "item": 12939,
+     "slot": "副手",
+     "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
+     "dungeonId": "upper-blackrock-spire"
+    }
+   ]
   }
  ]
 }

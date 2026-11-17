@@ -99,9 +99,14 @@ const dg = read('dungeons.json');
 ['newDungeons', 'classicDungeons', 'raids'].forEach((k) => {
   (dg[k] || []).forEach((d) => {
     if (!d.nameEn && !d.nameCn) errs.push(`dungeon ${d.id}：中英文名都没有`);
+    const npcIds = new Set();
     (d.bosses || []).forEach((b) => {
       scanNoPercent('dungeon', b, d.id);
       if (!b.nameCn) errs.push(`dungeon ${d.id}：首领缺中文名`);
+      if (Number.isInteger(b.npcId)) {
+        if (npcIds.has(b.npcId)) errs.push(`dungeon ${d.id}：重复首领 NPC ID ${b.npcId}`);
+        npcIds.add(b.npcId);
+      }
     });
     (d.drops || []).forEach((x, i) => {
       scanNoPercent('drop', x, d.id + '/drop' + i);
@@ -469,6 +474,8 @@ fs.readdirSync(path.join(ROOT, 'talents')).forEach((f) => {
 const ch = read('chooser.json');
 const classIds = new Set(cl.classes.map((c) => c.id));
 const { validateCensus, validateCensusChina } = require('./oss-release');
+try { require('./leveling-builds')(ROOT); }
+catch (error) { errs.push(error.message); }
 errs.push(...validateCensus(read('population-census.json'), [...classIds]));
 errs.push(...validateCensusChina(read('population-census-cn.json'), [...classIds]));
 if (ch.meta && ch.meta.kind !== 'site-opinion') errs.push('chooser.json：必须标 kind=site-opinion，问答结论不是官方推荐');
@@ -545,7 +552,7 @@ const abIds = new Set();
 });
 if ((ab.items || []).some((x) => x.state === 'unchanged')) errs.push('abilities：出现"未变"条目——官方没写过，不许凭沉默生成');
 
-// 种族：矩阵与特长只能出自官方中文页，特长名必须原样出现在它自己的整句里
+// 种族矩阵以官方中文页为准；正式客户端覆盖的特长要保留旧引用及客户端证据。
 const rc = read('races.json');
 const facIds = new Set((rc.factions || []).map((f) => f.id));
 const raceIds = new Set();
@@ -559,8 +566,17 @@ const raceIds = new Set();
   const all = (x.traits || []).concat((x.subgroup && x.subgroup.traits) || []);
   if (!all.length) errs.push(`races ${x.id}：一条特长都没有，官方页每个种族小标题下都有列表`);
   all.forEach((t) => {
-    if (!t.name || !t.quote) errs.push(`races ${x.id}：特长缺名称或整句`);
-    if (t.name && t.quote && t.quote.indexOf(t.name) < 0) errs.push(`races ${x.id}：特长「${t.name}」不在整句里，疑似串行`);
+    const cited = t.valueVia === 'launch-client' ? t.previousTrait || {} : t;
+    if (!t.name || !cited.name || !cited.quote) errs.push(`races ${x.id}：特长缺名称或整句`);
+    if (cited.name && cited.quote && !cited.quote.includes(cited.name)) errs.push(`races ${x.id}：特长「${cited.name}」不在整句里，疑似串行`);
+    if (t.valueVia === 'launch-client') {
+      const src = t.valueSource || {};
+      if (!t.effect || !/^1\.60\.\d+\.\d+$/.test(src.build || '') || !/^\d{4}-\d{2}-\d{2}$/.test(src.checkedAt || '')
+        || !String(src.url || '').startsWith('https://wago.tools/db2/') || !Array.isArray(src.spellIds)
+        || !src.spellIds.length || src.spellIds.some((id) => !Number.isInteger(id) || id < 1)) {
+        errs.push(`races ${x.id}/${t.name}：客户端覆盖缺构建号、来源或法术 ID`);
+      }
+    }
     if (t.iconKey && !fs.existsSync(path.join(ROOT, '..', 'img', 'icons', t.iconKey + '.jpg'))) {
       errs.push(`races ${x.id}/${t.name}：iconKey ${t.iconKey} 本地没有文件，跑 tools/fetch-icons.py 补`);
     }
@@ -811,7 +827,7 @@ if (fs.existsSync(profPath)) {
   // 合并脚本自报的两个数与实际逐条对数：对不上就是"快照与成品不是同一次合并跑出来的"
   const xp = (pf.meta || {}).xrProf || {};
   if (!Object.keys(xp).length) {
-    warns.push('professions.meta.xrProf 缺失：配方那一层的商人与图纸掉落没并进来（跑 tools/merge-prof-sources.py）');
+    errs.push('professions.meta.xrProf 缺失：配方的归档商人与图纸来源还未合并（重跑 tools/merge-professions.js）');
   } else {
     if (xp.withVendors !== pv) errs.push(`professions：meta.xrProf.withVendors 记 ${xp.withVendors} · 实数 ${pv}`);
     if (xp.withDrops !== pd) errs.push(`professions：meta.xrProf.withDrops 记 ${xp.withDrops} · 实数 ${pd}`);
@@ -1009,7 +1025,8 @@ console.log('全站覆盖率：L0 ' + cov.L0 + ' / L1 ' + cov.L1 + ' / L2 ' + co
   '（共 ' + total + ' 条，L0 占 ' + (cov.L0 / total * 100).toFixed(1) + '%）');
 const rcTraitN = (rc.races || []).reduce((a, x) => a + (x.traits || []).length + (((x.subgroup && x.subgroup.traits) || []).length), 0);
 console.log('种族 ' + (rc.races || []).length + ' 行 / 特长 ' + rcTraitN + ' 条 / 亮点组合 ' + (rc.newCombos || []).length +
-  ' 组，全部出自国服官方中文公告；已回填种族归属的词条 ' + gl.items.filter((x) => x.raceId).length + ' 条');
+  ' 组，正式客户端覆盖 ' + ((rc.meta || {}).launchOverlay || {}).updated + ' 条，已回填种族归属的词条 ' +
+  gl.items.filter((x) => x.raceId).length + ' 条');
 // 改动清单：只许有名称与类别，出现任何句子字段就是抓取阶段没删干净
 const chPath = path.join(ROOT, 'changes.json');
 let chItems = [];
@@ -1808,6 +1825,24 @@ if (fs.existsSync(bisPath)) {
     console.log('第二份名单：' + aRows + ' 格做了对照 / 一致 ' + aSame + ' / 分歧 ' + aDiff
       + ' / 另一家没列 ' + aNone + '（L1，两份并列、不裁决）');
   }
+  const itemSets = bis.itemSets || [];
+  if (itemSets.length) {
+    const isSeen = new Set();
+    let isPieces = 0;
+    itemSets.forEach((st) => {
+      if (!st.id || isSeen.has(st.id)) bErr.push('套装图鉴 id 缺失或重复:' + st.id);
+      isSeen.add(st.id);
+      if (!st.name || !st.level || !Array.isArray(st.pieces) || !st.pieces.length) {
+        bErr.push((st.id || '?') + ' 套装图鉴缺 name/level/pieces');
+      }
+      (st.pieces || []).forEach((p) => {
+        isPieces += 1;
+        if (!baseIds.has(p.item)) bErr.push((st.id || '?') + ' 部件 #' + p.item + ' 不在 items.json 名录里');
+      });
+    });
+    scale.bisItemSets = itemSets.length;
+    console.log('套装图鉴：' + itemSets.length + ' 套 / ' + isPieces + ' 件部件（14–58 级，含无限新增与职业 T0 套）');
+  }
   if (bErr.length) errs.push('配装名单：' + bErr.slice(0, 6).join(' ｜ ') + (bErr.length > 6 ? ` …共 ${bErr.length} 条` : ''));
   scale.bisSets = bisSets.length;
   scale.bisClasses = Object.keys(clsOf).length;
@@ -1989,7 +2024,7 @@ const facCn = {};
     (r.classes || []).length + ' 个职业可选', 'r=' + r.faction + '-' + r.id, r.level);
   (r.traits || []).concat(r.subgroup ? r.subgroup.traits || [] : []).forEach((t) => {
     // 带上种族号：种族页那张跨种族全表撤了，点搜索结果要直接落到这个种族的详情上
-    sPush('tra', t.name, nm, 'r=' + r.faction + '-' + r.id, r.level);
+    sPush('tra', t.name, nm, 'r=' + r.faction + '-' + r.id, t.valueVia === 'launch-client' ? t.level : r.level);
   });
 });
 (cl.classes || []).forEach((c) => {

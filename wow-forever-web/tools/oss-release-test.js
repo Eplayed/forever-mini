@@ -46,8 +46,8 @@ async function step(name, condFn, extra) {
   }
 }
 
-/* 夹具 = 一个迷你仓库：app/data 逐文件符号链接到真源（talents 等目录整体链，
-   upstream 不参与导出所以不链），preview 由真 export-mini.js 现生成。
+/* 夹具 = 一个迷你仓库：app/data 逐文件符号链接到真源（talents 等目录整体链），
+   upstream 只链接分发层实际读取的掉落物品事实，preview 由真 export-mini.js 现生成。
    这样"改源"与"只改 preview"是两件事，能分别测：前者换 buildId，后者必须被对拍拦下。 */
 function regen(dir) {
   cp.execFileSync('node', [path.join(dir, 'wow-forever-web', 'tools', 'export-mini.js')], {
@@ -60,6 +60,7 @@ function freshFixture(label) {
   const web = path.join(dir, 'wow-forever-web');
   fs.mkdirSync(path.join(web, 'tools'), { recursive: true });
   fs.copyFileSync(EXPORT_TOOL, path.join(web, 'tools', 'export-mini.js'));
+  fs.copyFileSync(path.join(path.dirname(EXPORT_TOOL), 'leveling-builds.js'), path.join(web, 'tools', 'leveling-builds.js'));
   fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/oss-release.js', path.join(web, 'tools', 'oss-release.js'));
   /* 导出层要读禁词表；夹具里少拷这一个文件，regen 会以 ENOENT 的形式红，看不出真正的原因 */
   fs.copyFileSync(path.dirname(EXPORT_TOOL) + '/copy-banned.json', path.join(web, 'tools', 'copy-banned.json'));
@@ -74,11 +75,20 @@ function freshFixture(label) {
   /* 功能开关要核"这一页在不在小程序的 pages 里"，读的是 <仓库>/for-mini/app.json。
      夹具里少这一层，反例会以"读不到 app.json"的形式红，看不出真正的原因。 */
   fs.mkdirSync(path.join(dir, 'for-mini'), { recursive: true });
+  fs.mkdirSync(path.join(dir, 'for-mini', 'services'), { recursive: true });
+  fs.copyFileSync(path.join(REPO, 'for-mini', 'services', 'talent-engine.js'), path.join(dir, 'for-mini', 'services', 'talent-engine.js'));
   fs.symlinkSync(path.join(REPO, 'for-mini', 'app.json'), path.join(dir, 'for-mini', 'app.json'));
   fs.readdirSync(REAL_SRC_DATA).forEach((f) => {
     if (f === 'upstream') return;
     fs.symlinkSync(path.join(REAL_SRC_DATA, f), path.join(web, 'app', 'data', f));
   });
+  const dropFacts = ossTool.ADDON_DROP_FACTS;
+  const dropFactsSource = path.join(REAL_SRC_DATA, dropFacts);
+  if (fs.existsSync(dropFactsSource)) {
+    const target = path.join(web, 'app', 'data', dropFacts);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.symlinkSync(dropFactsSource, target);
+  }
   regen(dir);
   return dir;
 }
@@ -259,6 +269,13 @@ const oss = require(MINI_SERVICE);
     JSON.stringify(idx.counts));
   ok('每条索引都能落到实际存在的详情与掉落文件', idx.items.every((it) =>
     fs.existsSync(path.join(batchDir, it.detailPath)) && fs.existsSync(path.join(batchDir, it.lootPath))));
+  ok('详情与掉落的索引校验值与实际分片一致', idx.items.every((item) =>
+    ['detail', 'loot'].every((kind) => {
+      const body = fs.readFileSync(path.join(batchDir, item[kind + 'Path']));
+      return body.length === item[kind + 'Bytes']
+        && md5u(body) === item[kind + 'Etag']
+        && crypto.createHash('md5').update(body).digest('base64') === item[kind + 'Md5'];
+    })));
   /* 列表页缩略图（M02 补）：art 进索引，值是相对 assets/ 的路径，缺的那座是 null 而不是空串 */
   const withArt = idx.items.filter((it) => it.art);
   ok('索引带 art 且是 assets 相对路径（37/38 有，缺的那座是 null 不是空串）',
@@ -355,12 +372,15 @@ const oss = require(MINI_SERVICE);
      不是条数相等。名单读 oss-release.js 导出的常量：加一份基底不用再回来改门禁。 */
   const REL = require(TOOL);
   const relSet = (arr, pre) => arr.map((x) => x.rel).filter((r) => r.indexOf(pre) === 0).sort().join(',');
+  const expectedInputs = REL.BASE_INPUTS.concat(
+    fs.existsSync(path.join(REAL_SRC_DATA, REL.ADDON_DROP_FACTS)) ? [REL.ADDON_DROP_FACTS] : []
+  );
   ok('溯源写明了导出对拍（' + REL.EXPORT_RELS.length + ' 份产物逐字节重导一致，'
-      + REL.BASE_INPUTS.length + ' 份基底原件都带哈希）',
+      + expectedInputs.length + ' 份基底原件都带哈希）',
     man.source && man.source.exportCheck && man.source.exportCheck.reproduced === true
       && relSet(man.source.exportCheck.outputs, 'oss-preview/') === REL.EXPORT_RELS.map((f) => 'oss-preview/' + f).sort().join(',')
       && man.source.exportCheck.outputs.every((o) => o.sha256 && o.bytes > 0)
-      && relSet(man.source.inputs, 'app/data/') === REL.BASE_INPUTS.map((f) => 'app/data/' + f).sort().join(',')
+      && relSet(man.source.inputs, 'app/data/') === expectedInputs.map((f) => 'app/data/' + f).sort().join(',')
       && man.source.inputs.every((i) => i.sha256 && i.bytes > 0),
     JSON.stringify({ inputs: man.source.inputs.map((i) => i.rel), outputs: man.source.exportCheck.outputs.map((o) => o.rel) }));
   process.stdout.write('  · 副本首屏实际字节：meta ' + man.fetch.meta.bytes + 'B + 索引 '
@@ -737,6 +757,11 @@ const oss = require(MINI_SERVICE);
   ok('职业图标键随索引下发（那一排不用为了图标再下 64 KB 职业索引）',
     biIdx.classes.filter((c) => !!c.iconKey).length === biIdx.classes.length,
     JSON.stringify(biIdx.classes.slice(0, 2)));
+  ok('14–58 级套装图鉴随索引下发（36 套 / 191 件部件均在共享物品表中）',
+    Array.isArray(biIdx.itemSets) && biIdx.itemSets.length === 36
+      && biIdx.itemSets.every((s) => Array.isArray(s.pieces) && s.pieces.length >= 2
+        && s.pieces.every((p) => !!biIds[String(p[0])])),
+    JSON.stringify({ sets: (biIdx.itemSets || []).length }));
 
 
   /* ================= 3·10. 功能开关（2026-10-27）================= */
@@ -1086,14 +1111,12 @@ const oss = require(MINI_SERVICE);
     });
   }, () => '只读被误拦');
 
-  await step('真 PoE 路径仍被标成跨项目（只读判定，不发请求）', () => {
-    const saved = Object.assign({}, process.env);
-    ['OSS_ACCESS_KEY_ID', 'OSS_ACCESS_KEY_SECRET', 'WOW_OSS_ENV', 'WOW_OSS_LOCAL_ENV', 'WOW_OSS_CROSS_ENV'].forEach((k) => { delete process.env[k]; });
+  await step('回退到 PoE 凭证时标成跨项目（只读判定，不发请求）', () => withEnv({
+    ...NO_MARK, WOW_OSS_LOCAL_ENV: path.join(CRED_TMP, 'missing'), WOW_OSS_CROSS_ENV: X
+  }, () => {
     const c = ossTool.loadCreds(false);
-    const r = c.ok === true && c.crossProject === true && String(c.from).indexOf('p2-database') >= 0;
-    Object.keys(saved).forEach((k) => { process.env[k] = saved[k]; });
-    return r;
-  }, () => JSON.stringify(ossTool.loadCreds(false).from));
+    return c.ok === true && c.crossProject === true && c.from.endsWith(path.relative(REPO, X));
+  }));
 
   await step('写闸在本地落盘之前：无标记时不生成 oss-build 目录', () => {
     const st = fakeOss();

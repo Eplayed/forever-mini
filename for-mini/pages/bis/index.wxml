@@ -1,9 +1,10 @@
-<view class="wrap">
+<view class="wrap {{picking ? 'selecting' : ''}}">
   <view wx:if="{{requiresUpdate}}" class="notice notice-bad">
     请更新小程序以查看最新资料。
   </view>
   <view wx:elif="{{unavailable}}" class="notice">
-    配装暂不可用，请稍后再试。
+    配装暂不可用
+    <button size="mini" class="want-target" bindtap="start">重新加载</button>
   </view>
   <view wx:elif="{{needOnline}}" class="notice">
     当前离线，显示已保存的配装。
@@ -49,11 +50,19 @@
            名单逐格相同、文件字节与哈希都对得上——任一不过就不进桥表。
            进不了表的那一格直说"没有图"和原因，绝不拿别的套装、别的职业或按种族渲的那一张来顶
            （2026-11-01 那次就是顶错了：法师看到的是猎人那身）。 -->
-      <view class="stage">
+      <view class="stage {{posterState === 'bad' || posterState === 'none' ? 'stage-compact' : ''}}">
         <image wx:if="{{posterSrc}}" class="stage-art" src="{{posterSrc}}" mode="aspectFit"
-               bindload="onPosterLoad" binderror="onPosterError" />
-        <view wx:else class="stage-wait">{{posterErr || posterText}}</view>
-        <view class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
+               data-request="{{posterRequest}}" bindload="onPosterLoad" binderror="onPosterError" />
+        <view wx:else class="stage-wait">
+          <text>{{posterErr || posterText}}</text>
+          <button size="mini" wx:if="{{posterState === 'bad'}}" class="want-target" bindtap="retryPoster">重试</button>
+        </view>
+        <view wx:if="{{posterSrc}}" class="stage-tag">{{set.clsCn}} · {{set.level}} 级</view>
+      </view>
+      <view class="set-actions">
+        <button size="mini" class="want-target" bindtap="goEquipment">查看装备 ↓</button>
+        <button wx:if="{{!picking}}" size="mini" class="want-target" bindtap="beginPick">多选装备</button>
+        <button wx:if="{{itemSetCats.length}}" size="mini" class="want-target" bindtap="goItemSets">14–58级套装图鉴 ↓</button>
       </view>
 
       <view class="sum" wx:if="{{sum.length}}">
@@ -65,7 +74,7 @@
     </view>
 
     <!-- 部位一览：一行一个部位，点开通这个部位的备选 -->
-    <view class="card" wx:if="{{set}}">
+    <view class="card" wx:if="{{set}}" id="bis-equipment">
       <view class="bhead"><view class="bt">装备一览</view></view>
       <view wx:for="{{rows}}" wx:key="slotLabel" class="srow" data-slot="{{item.slot}}" data-cell="{{item.cell}}"
             bindtap="openSlot">
@@ -87,7 +96,8 @@
             {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
           </view>
         </view>
-        <view class="s-go">›</view>
+        <button size="mini" wx:if="{{item.item && !item.missing}}" class="want-target {{selected[item.item] ? 'target-selected' : ''}}" data-id="{{item.item}}" catchtap="saveTarget">{{savedTargets[item.item] ? '已加入' : (picking ? (selected[item.item] ? '✓ 已选' : '选择') : '＋ 想要')}}</button>
+        <view wx:else class="s-go">›</view>
       </view>
     </view>
 
@@ -114,7 +124,67 @@
         </view>
       </view>
     </view>
+
+    <!-- 14–58 级专属与地下城套装图鉴（36 套，含 7 套无限新增套装与 9 职业 T0 套） -->
+    <view class="card" wx:if="{{itemSetCats.length}}" id="bis-item-sets">
+      <view class="bhead">
+        <view class="bt">14–58 级套装图鉴</view>
+        <view class="bn">含无限新增套装与满级职业 T0 套 · 可一键整套加入清单</view>
+      </view>
+      <view class="picks">
+        <view class="pickrow">
+          <view wx:for="{{itemSetCats}}" wx:key="key" class="chip {{itemSetCat === item.key ? 'chip-on' : ''}}"
+                data-cat="{{item.key}}" bindtap="pickItemSetCat">{{item.label}} ({{item.n}})</view>
+        </view>
+        <view class="pickrow">
+          <view wx:for="{{filteredItemSets}}" wx:key="id" class="chip {{activeItemSetId === item.id ? 'chip-on' : ''}}"
+                data-id="{{item.id}}" bindtap="pickItemSet">{{item.level}}级 · {{item.name}}</view>
+        </view>
+      </view>
+
+      <block wx:if="{{activeItemSet}}">
+        <view class="iset-head">
+          <view class="iset-title">
+            <text class="bt">{{activeItemSet.name}}</text>
+            <text class="s-slot">{{activeItemSet.level}} 级 · {{activeItemSet.clsCn}} · {{activeItemSet.pieces.length}} 件</text>
+          </view>
+          <button size="mini" class="want-target" bindtap="addItemSetToAdventure">＋ 整套加入清单</button>
+        </view>
+
+        <view class="sum" wx:if="{{activeItemSet.sumRows.length}}">
+          <view class="sum-h"><text class="b">整套基础属性合计</text></view>
+          <view class="sum-i">
+            <view wx:for="{{activeItemSet.sumRows}}" wx:key="k" class="sum-c"><text class="sum-v">{{item.v}}</text>{{item.k}}</view>
+          </view>
+        </view>
+
+        <view wx:for="{{activeItemSet.pieces}}" wx:key="item" class="srow">
+          <icon-cell src="{{item.iconUrl}}" size="sm" label="{{item.name || item.slot}}" />
+          <view class="s-main">
+            <view class="s-top">
+              <text class="s-slot">{{item.slot}}</text>
+              <text class="s-name {{'q-' + item.q}}" wx:if="{{!item.missing}}">{{item.name}}</text>
+              <text class="s-name s-unknown" wx:else>物品详情暂无（#{{item.item}}）</text>
+            </view>
+            <view class="s-meta">
+              <text wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text>
+              <text>{{item.qText}}</text>
+            </view>
+            <view class="p-st" wx:for="{{item.st}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+            <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
+                  data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
+              {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
+            </view>
+          </view>
+          <button size="mini" wx:if="{{item.item && !item.missing}}" class="want-target {{selected[item.item] ? 'target-selected' : ''}}" data-id="{{item.item}}" catchtap="saveTarget">{{savedTargets[item.item] ? '已加入' : (picking ? (selected[item.item] ? '✓ 已选' : '选择') : '＋ 想要')}}</button>
+        </view>
+      </block>
+    </view>
   </block>
+  <view wx:if="{{loaded && meta && !set && errText && !unavailable}}" class="notice">
+    这一套暂未加载
+    <button size="mini" class="want-target" bindtap="loadSet">重试</button>
+  </view>
 
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关</view>
 
@@ -146,6 +216,7 @@
           <view class="s-top"><text class="s-name {{'q-' + item.q}}">{{item.name}}</text>
             <text class="dim" wx:if="{{item.ilvl !== ''}}">装等 {{item.ilvl}}</text></view>
           <view class="p-st" wx:for="{{item.st}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+          <button size="mini" wx:if="{{item.item && !item.missing}}" class="want-target {{selected[item.item] ? 'target-selected' : ''}}" data-id="{{item.item}}" bindtap="saveTarget">{{savedTargets[item.item] ? '已加入' : (picking ? (selected[item.item] ? '✓ 已选' : '选择') : '＋ 想要')}}</button>
           <view class="s-src {{item.go ? 's-link' : ''}}" wx:if="{{item.src}}"
                 data-d="{{item.go}}" data-item="{{item.item}}" catchtap="goDungeon">
             {{item.src}}<text class="s-jump" wx:if="{{item.go}}">看这座本 ›</text>
@@ -153,5 +224,10 @@
         </view>
       </view>
     </scroll-view>
+  </view>
+  <view wx:if="{{picking && !slot}}" class="selection-bar">
+    <text>已选 {{selectedCount}} 件</text>
+    <button size="mini" class="want-target" bindtap="cancelPick">取消</button>
+    <button size="mini" class="want-target target-selected" disabled="{{!selectedCount}}" bindtap="saveSelection">加入清单</button>
   </view>
 </view>

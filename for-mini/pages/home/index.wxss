@@ -141,6 +141,39 @@
   margin: 0;
 }
 
+.race-toggle {
+  font-size: 21rpx;
+  font-weight: 400;
+  color: var(--txt-muted);
+  margin-left: 10rpx;
+}
+
+.race-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  padding: 16rpx 18rpx;
+  margin-bottom: 16rpx;
+  background: var(--panel-2);
+  border: 1rpx solid var(--line);
+  border-radius: var(--r-ctl);
+}
+
+.race-chip {
+  font-size: 22rpx;
+  color: var(--txt);
+  padding: 4rpx 14rpx;
+  background: var(--foot);
+  border: 1rpx solid var(--line-2);
+  border-radius: var(--r-ctl);
+}
+
+.race-chip-more {
+  font-size: 21rpx;
+  color: var(--gold);
+  padding: 4rpx 10rpx;
+}
+
 .race-go {
   font-size: 22rpx;
   color: var(--gold);
@@ -272,3 +305,21 @@
   color: var(--txt-muted);
   margin-left: 10rpx;
 }
+
+.adventure-card { margin-bottom: 20rpx; border: 1rpx solid var(--gold-line); border-radius: 12rpx; background: var(--leather); }
+.adventure-main, .adventure-continue { display: flex; min-height: 76rpx; box-sizing: border-box; align-items: center; justify-content: space-between; gap: 12rpx; padding: 14rpx 20rpx; color: var(--gold-hi); font-size: 26rpx; line-height: 1.4; }
+.adventure-title { color: var(--txt-title); font-size: 30rpx; font-weight: 700; }
+.adventure-book { display: block; flex: 0 0 54rpx; width: 54rpx; height: 54rpx; box-sizing: border-box; border: 1rpx solid var(--gold-line); border-radius: 7rpx; }
+.adventure-copy { flex: 1; min-width: 0; }
+.adventure-detail { margin-top: 4rpx; color: var(--txt-dim); font-size: 24rpx; }
+.adventure-continue { border-top: 1rpx solid var(--gold-line); }
+.adventure-continue > text:first-child { flex-shrink: 0; }
+.adventure-dungeon { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.leveling-heading { display: flex; justify-content: space-between; align-items: baseline; }
+.leveling-all { color: var(--gold-hi); font-size: 24rpx; padding: 14rpx 0 14rpx 14rpx; }
+.leveling-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10rpx; }
+.leveling-card { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 5rpx; padding: 14rpx; border: 1rpx solid var(--gold-line); border-radius: 10rpx; background: var(--leather); }
+.leveling-class { font-size: 27rpx; font-weight: 700; color: var(--txt-title); }
+.leveling-name { font-size: 22rpx; color: var(--txt-dim); }
+.leveling-feature { width: 100%; box-sizing: border-box; margin-top: 3rpx; padding-top: 7rpx; border-top: 1rpx solid var(--gold-line); color: var(--gold-hi); font-size: 22rpx; line-height: 1.35; white-space: pre-line; }

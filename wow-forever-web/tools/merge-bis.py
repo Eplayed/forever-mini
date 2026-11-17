@@ -303,6 +303,21 @@ def main():
     else:
         print('没有 upstream/xr-bis.json（先跑 tools/extract-addon-bis.py），这一版不带第二份名单')
 
+    # ---------- 14–58 级专属与地下城套装图鉴（ForeverLevelingBiS Sets.lua） ----------
+    flb_path = os.path.join(ROOT, "app", "data", 'upstream', 'flb-sets.json')
+    if os.path.isfile(flb_path):
+        flb = load(flb_path)
+        isets = flb.get('itemSets') or []
+        imiss = sorted({p['item'] for st in isets for p in (st.get('pieces') or []) if p['item'] not in base})
+        if imiss:
+            sys.exit('套装图鉴里有 %d 个物品 ID 不在 items.json：%s' % (len(imiss), imiss[:10]))
+        doc['meta']['itemSetsMeta'] = flb.get('meta') or {}
+        doc['itemSets'] = isets
+        print('套装图鉴：%d 套 / %d 件部件（含无限新增套装 %d 套、职业 T0 套 %d 套）' % (
+            len(isets), sum(len(s.get('pieces') or []) for s in isets),
+            sum(1 for s in isets if s.get('cat') == 'new'),
+            sum(1 for s in isets if s.get('cat') == 't0')))
+
     blob = json.dumps(doc, ensure_ascii=False, indent=1)
     if args.dry:
         print('（--dry：没写文件）')

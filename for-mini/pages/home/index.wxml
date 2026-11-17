@@ -12,6 +12,20 @@
     <text>{{cd.dayText}}</text>
   </view>
 
+  <view class="adventure-card">
+    <view class="adventure-main" aria-role="button" bindtap="goAdventure">
+      <image class="adventure-book" src="/img/home/adventure-book.jpg" mode="aspectFill" aria-hidden="true" />
+      <view class="adventure-copy">
+        <view class="adventure-title">我的冒险清单</view>
+        <view class="adventure-detail">{{adventurePending ? adventurePending + ' 件想要的装备' : '安排下次跑本与装备目标'}}</view>
+      </view>
+      <text aria-hidden="true">›</text>
+    </view>
+    <view wx:if="{{adventureNext}}" class="adventure-continue" aria-role="button" data-id="{{adventureNext.id}}" bindtap="continueAdventure">
+      <text>{{adventurePlanned ? '首选副本' : '继续上次副本'}}</text><text class="adventure-dungeon">{{adventureNext.name || adventureNext.title}} ›</text>
+    </view>
+  </view>
+
   <swiper class="spotlight" current="{{featuredIndex}}" duration="320" bindchange="onFeaturedChange">
     <swiper-item>
       <view class="feature feature-census" bindtap="goCensus">
@@ -59,8 +73,22 @@
       <image class="entry-emblem" src="/img/home/bis-icon.png" mode="aspectFit" />
       <view class="entry-content">
         <view class="entry-name">BIS配装 <text class="entry-arrow">›</text></view>
-        <view class="entry-desc">职业套装 · 部位备选</view>
+        <view class="entry-desc">30级配装 · 14–58级套装图鉴</view>
       </view>
+    </view>
+  </view>
+
+  <view class="leveling-heading">
+    <view class="sec-title">练级天赋</view>
+    <view class="leveling-all" aria-role="button" bindtap="goLeveling">全部职业 ›</view>
+  </view>
+  <view class="leveling-cards">
+    <view wx:for="{{leveling}}" wx:key="classId" class="leveling-card" aria-role="button" hover-class="entry-pressed"
+          data-id="{{item.classId}}" bindtap="goLeveling">
+      <icon-cell src="{{levelingIcons[item.classId] || ''}}" size="sm" label="{{item.className}}" />
+      <text class="leveling-class">{{item.className}}</text>
+      <text class="leveling-name">{{item.name}}</text>
+      <text class="leveling-feature">{{item.feature}}</text>
     </view>
   </view>
 
@@ -103,41 +131,47 @@
   </view>
   <view wx:else class="muted cls-empty">{{classEmpty}}</view>
 
-  <!-- 4）选中职业的可选种族与种族特长：图标 + 文字都要有 -->
+  <!-- 4）选中职业的可选种族与种族特长：默认收起为一行标签，点职业或展开钮查看完整特长 -->
   <block wx:if="{{activeName}}">
     <view class="race-bar">
-      <view class="sec-title race-title">{{activeName}} · 可选种族</view>
+      <view class="sec-title race-title" bindtap="toggleRaces">{{activeName}} · 可选种族（{{races.length}}）<text class="race-toggle">{{racesExpanded ? '收起 ▴' : '展开特长 ▾'}}</text></view>
       <view class="race-go" bindtap="goClass">看技能书与天赋树 →</view>
     </view>
     <view wx:if="{{raceNote}}" class="muted race-none">{{raceNote}}</view>
-    <view class="race plate" wx:for="{{races}}" wx:key="key">
-      <view class="race-top">
-        <!-- 缺图就让它显示首字块：88rpx 的格子里塞"没有这张图标"六个字会被裁成"没有这"，
-             既难看又读不完（暗夜精灵那条实拍里就是这样） -->
-        <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
-        <view class="race-id">
-          <view class="race-name">
-            {{item.nameCn}}
-            <text wx:if="{{item.nameMissing}}" class="todo">中文名待补</text>
-          </view>
-          <view class="race-fac">{{item.factionText}}<text wx:if="{{item.subCn}}" class="race-sub">{{item.subCn}}</text></view>
-        </view>
-      </view>
-      <view wx:if="{{item.traits.length}}" class="traits">
-        <view class="trait" wx:for="{{item.traits}}" wx:for-item="t" wx:key="key">
-          <icon-cell src="{{t.iconUrl}}" size="sm" label="{{t.name}}" />
-          <view class="trait-main">
-            <view class="trait-name">
-              {{t.name}}
-              <text wx:if="{{t.passive}}" class="trait-pass">被动</text>
-            </view>
-            <view wx:if="{{t.effect}}" class="trait-eff">{{t.effect}}</view>
-            <view wx:else class="muted trait-eff">效果待补</view>
-          </view>
-        </view>
-      </view>
-      <view wx:else class="muted trait-none">种族特长待补</view>
+    <view wx:if="{{!racesExpanded && races.length}}" class="race-chips" bindtap="toggleRaces">
+      <text class="race-chip" wx:for="{{races}}" wx:key="key">{{item.nameCn}}{{item.subCn ? '·' + item.subCn : ''}}</text>
+      <text class="race-chip-more">点此查看种族特长 ▾</text>
     </view>
+    <block wx:if="{{racesExpanded}}">
+      <view class="race plate" wx:for="{{races}}" wx:key="key">
+        <view class="race-top">
+          <!-- 缺图就让它显示首字块：88rpx 的格子里塞"没有这张图标"六个字会被裁成"没有这"，
+               既难看又读不完（暗夜精灵那条实拍里就是这样） -->
+          <icon-cell src="{{item.iconUrl}}" size="md" label="{{item.nameCn}}" />
+          <view class="race-id">
+            <view class="race-name">
+              {{item.nameCn}}
+              <text wx:if="{{item.nameMissing}}" class="todo">中文名待补</text>
+            </view>
+            <view class="race-fac">{{item.factionText}}<text wx:if="{{item.subCn}}" class="race-sub">{{item.subCn}}</text></view>
+          </view>
+        </view>
+        <view wx:if="{{item.traits.length}}" class="traits">
+          <view class="trait" wx:for="{{item.traits}}" wx:for-item="t" wx:key="key">
+            <icon-cell src="{{t.iconUrl}}" size="sm" label="{{t.name}}" />
+            <view class="trait-main">
+              <view class="trait-name">
+                {{t.name}}
+                <text wx:if="{{t.passive}}" class="trait-pass">被动</text>
+              </view>
+              <view wx:if="{{t.effect}}" class="trait-eff">{{t.effect}}</view>
+              <view wx:else class="muted trait-eff">效果还没核到</view>
+            </view>
+          </view>
+        </view>
+        <view wx:else class="muted trait-none">种族特长还没核到</view>
+      </view>
+    </block>
   </block>
 
   <block wx:if="{{recent.length}}">
