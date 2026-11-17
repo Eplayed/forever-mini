@@ -182,7 +182,7 @@
     </view>
   </block>
   <view wx:if="{{loaded && meta && !set && errText && !unavailable}}" class="notice">
-    这一套暂未加载
+    这一套暂未加载（需联网或开启域名调试后重试）
     <button size="mini" class="want-target" bindtap="loadSet">重试</button>
   </view>
 

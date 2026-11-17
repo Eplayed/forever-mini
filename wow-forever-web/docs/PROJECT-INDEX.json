@@ -1,6 +1,6 @@
 {
- "head": "417cdf432c12b87007bcc61ec635b4b9384595b1",
- "fingerprint": "4fa6441bfdb7870b44405f192fdd5ba9862ca0423ebd616b19a4f4dca513ce8a",
+ "head": "9b7a503daf2636e911d68e6931095bba91e4b6c7",
+ "fingerprint": "e7b27a6798b39379b034306212fb6ab70510dd6a3b23e8a9a89780e15e20a148",
  "method": "Git路径＋size/mtime；不读文档/数据正文，不代替原件。",
  "files": [
   {
@@ -15,8 +15,8 @@
   },
   {
    "path": "NOW.md",
-   "bytes": 47109,
-   "mtimeNs": 1794922837028859200
+   "bytes": 47053,
+   "mtimeNs": 1794924950250767000
   },
   {
    "path": "PROJECT_DECISIONS.md",
@@ -35,8 +35,8 @@
   },
   {
    "path": "ROLES.md",
-   "bytes": 808148,
-   "mtimeNs": 1794922838153936000
+   "bytes": 809424,
+   "mtimeNs": 1794924980847524900
   },
   {
    "path": "for-mini/AGENTS.md",
@@ -220,8 +220,8 @@
   },
   {
    "path": "for-mini/docs/VERIFY-套装图鉴与首页精简-2026-11-17.md",
-   "bytes": 6664,
-   "mtimeNs": 1794922804475111600
+   "bytes": 7834,
+   "mtimeNs": 1794924952358974700
   },
   {
    "path": "for-mini/docs/VERIFY-小程序3D分发-2026-10-30.md",
