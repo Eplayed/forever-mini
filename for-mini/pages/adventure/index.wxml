@@ -1,0 +1,59 @@
+<view class="wrap">
+  <view class="overview card">
+    <view class="overview-top">
+      <view>
+        <view class="title">跑本计划</view>
+        <view class="muted subtitle">{{plans.length ? plans.length + ' 个副本 · 按优先级排列' : '把下次想去的副本加进来'}}</view>
+      </view>
+      <button size="mini" class="outline primary" bindtap="browseDungeons">选副本</button>
+    </view>
+    <view wx:if="{{plans.length}}" class="plan-list">
+      <view wx:if="{{plans.length > 1}}" class="plan-tools">
+        <text class="muted subtitle">{{sorting ? '按住右侧手柄拖动' : '第一项在首页显示'}}</text>
+        <button size="mini" class="outline" bindtap="toggleSort">{{sorting ? '完成' : '调整顺序'}}</button>
+      </view>
+      <view wx:for="{{plans}}" wx:key="id" class="plan-row {{dragIndex === index ? 'dragging' : ''}}"
+        style="transform:translateY({{dragIndex === index ? dragY : (dragIndex < index && index <= dragTo ? -rowStep : (dragTo <= index && index < dragIndex ? rowStep : 0))}}px)">
+        <text class="plan-rank {{index === 0 ? 'plan-first' : ''}}">{{index + 1}}</text>
+        <view class="plan-name" aria-role="button" data-id="{{item.id}}" bindtap="openDungeon">
+          <text class="plan-title">{{item.name}}</text>
+          <text wx:if="{{!sorting}}" class="plan-link">任务接取路线 ›</text>
+        </view>
+        <view wx:if="{{sorting}}" class="sort-grip" aria-label="拖动调整{{item.name}}的顺序" data-id="{{item.id}}" data-index="{{index}}"
+              bindtouchstart="startDrag" catchtouchmove="moveDrag" bindtouchend="dropDrag" bindtouchcancel="endDrag">≡</view>
+        <button wx:else size="mini" class="plan-remove" aria-label="移除副本" data-id="{{item.id}}" bindtap="removePlan">移除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-tools">
+    <text>{{showDone ? '已获得的装备' : '想要的装备 · ' + pending}}</text>
+    <button size="mini" class="outline" bindtap="toggleDone">{{showDone ? '返回装备目标' : '已获得'}}</button>
+  </view>
+  <button wx:if="{{groups.length && !showDone}}" size="mini" class="outline primary pick-more" bindtap="browseGear">从配装选装备 ＋</button>
+  <view wx:if="{{cachedSources}}" class="muted source-note">离线显示已缓存的掉落来源</view>
+
+  <view wx:if="{{!groups.length}}" class="card empty">
+    <view>{{showDone ? '暂无已获得的装备' : '还没有装备目标'}}</view>
+    <block wx:if="{{!showDone}}">
+      <view class="muted">在副本掉落或配装里，点「想要」加入。</view>
+      <button size="mini" class="outline primary" bindtap="browseGear">从配装选装备 ›</button>
+    </block>
+  </view>
+
+  <view class="card group" wx:for="{{groups}}" wx:key="key">
+    <view class="group-title">{{item.title}}</view>
+    <view class="goal" wx:for="{{item.rows}}" wx:for-item="row" wx:key="id">
+      <view class="goal-name q-{{row.quality}}">{{row.name}}</view>
+      <view class="source" aria-role="button" wx:for="{{row.sources}}" wx:for-item="source" wx:key="id"
+            data-id="{{source.id}}" data-item="{{row.id}}" bindtap="openDungeon">{{source.label}} ›</view>
+      <view wx:if="{{!row.sources.length}}" class="muted source-note">{{row.sourceText}}</view>
+      <view class="goal-actions">
+        <button size="mini" class="outline primary" data-id="{{row.id}}" bindtap="toggleGear">{{row.done ? '重新设为想要' : '标记已获得'}}</button>
+        <button size="mini" class="outline" data-id="{{row.id}}" bindtap="removeGear">移除</button>
+      </view>
+    </view>
+  </view>
+  <button size="mini" wx:if="{{more}}" class="outline more" bindtap="showMore">查看更多</button>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

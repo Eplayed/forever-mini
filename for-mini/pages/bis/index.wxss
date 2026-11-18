@@ -1,55 +1,100 @@
-/* 配装页。颜色一律吃 app.wxss 的令牌，这里不写裸色值（与首页/副本页同一条规矩）。
-   品质色与「两家」角标都回令牌：q-1…q-5 用 --q1…--q5，一致绿 / 分歧琥珀 / 没列灰。 */
+.gear-wrap { padding: 20rpx 22rpx 56rpx; }
+
+.gear-wrap .card {
+  background: var(--glass-sheen), var(--forge-surface);
+  border-color: var(--forge-edge);
+  box-shadow: var(--forge-inset), var(--forge-shadow);
+}
 
 .h1 {
   font-size: 36rpx;
   font-weight: 600;
   color: var(--txt-title);
   letter-spacing: 1rpx;
+  line-height: 1.28;
+  padding: 0 2rpx 12rpx;
 }
 
-.note2 {
-  font-size: 20rpx;
-  color: var(--txt-muted);
-  line-height: 1.6;
-  margin-top: 10rpx;
+.gear-nav {
+  padding: 6rpx 0 12rpx;
+  background: var(--forge-shade);
 }
 
-/* —— 职业条 —— */
+.stage-switch { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8rpx; }
+
+.stage-tab {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  margin: 0;
+  padding: 12rpx 4rpx 11rpx;
+  line-height: 1.25;
+  text-align: center;
+  border: 1rpx solid var(--forge-edge);
+  background: var(--glass-sheen), var(--forge-surface);
+  clip-path: polygon(0 0, calc(100% - 12rpx) 0, 100% 12rpx, 100% 100%, 12rpx 100%, 0 calc(100% - 12rpx));
+  box-shadow: var(--forge-inset);
+  color: var(--txt);
+  transition: transform var(--forge-press) var(--forge-ease);
+}
+.stage-tab::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 9rpx;
+  right: 9rpx;
+  height: 2rpx;
+  background: var(--forge-line);
+  opacity: .46;
+}
+.stage-tab-on {
+  border-color: var(--forge-edge-active);
+  background: var(--glass-sheen), var(--forge-surface-active);
+  box-shadow: var(--forge-inset), var(--forge-focus);
+  color: var(--forge-glint);
+}
+.stage-tab-on::before { opacity: 1; }
+.stage-tab:active { border-color: var(--forge-edge-active); transform: scale(.97); }
+.stage-tab-title { display: block; font-size: 24rpx; font-weight: 700; white-space: nowrap; }
+.stage-tab-info { display: flex; align-items: center; flex-direction: column; gap: 4rpx; margin-top: 7rpx; }
+.stage-tab-count { padding: 2rpx 9rpx; background: var(--sunk); border: 1rpx solid var(--forge-edge); color: var(--gold-hi); font-size: 20rpx; line-height: 1.2; }
+.stage-tab-hint { color: var(--txt-dim); font-size: 19rpx; white-space: nowrap; }
+
 .rail {
   white-space: nowrap;
-  margin-bottom: 20rpx;
+  margin-top: 10rpx;
 }
 
 .rtab {
   display: inline-block;
-  width: 132rpx;
-  margin-right: 12rpx;
-  padding: 14rpx 6rpx 12rpx;
+  box-sizing: border-box;
+  width: 104rpx;
+  margin-right: 8rpx;
+  padding: 7rpx 4rpx 6rpx;
   text-align: center;
-  background: var(--panel-2);
+  background: var(--forge-surface);
   border: 1rpx solid var(--line);
   border-radius: var(--r-ctl);
   white-space: normal;
   vertical-align: top;
 }
 
-.rtab-on,
 .rtab.on {
-  border-color: var(--gold);
-  background: var(--panel);
+  border-color: var(--forge-edge-active);
+  background: var(--forge-surface-active);
+  box-shadow: var(--forge-inset);
 }
 
 .rtab-n {
   font-size: 22rpx;
   color: var(--txt-dim);
-  margin-top: 6rpx;
+  line-height: 1.25;
 }
-
-.rtab-c {
-  font-size: 18rpx;
-  color: var(--txt-muted);
-}
+.rtab.on .rtab-n { color: var(--forge-glint); font-weight: 600; }
+.stage-content { animation: gear-enter var(--forge-enter) var(--forge-ease) both; }
+.gear-preview { padding: 16rpx; }
 
 .bhead {
   display: flex;
@@ -66,7 +111,7 @@
 }
 
 .bn {
-  font-size: 20rpx;
+  font-size: 22rpx;
   color: var(--txt-muted);
 }
 
@@ -75,8 +120,17 @@
   flex-wrap: wrap;
   gap: 10rpx 24rpx;
   align-items: center;
-  margin: 12rpx 0 18rpx;
+  margin: 10rpx 0 13rpx;
 }
+
+.gear-preview .picks { justify-content: space-between; gap: 6rpx; }
+.gear-preview .chip { padding: 6rpx 14rpx; }
+.faction-picks .chip { margin-right: 0; margin-left: 8rpx; }
+.faction-alliance { --faction-ink: var(--fac-alliance); --faction-haze: var(--forge-alliance-glow); --faction-tint: var(--fac-alliance-bg); }
+.faction-horde { --faction-ink: var(--fac-horde); --faction-haze: var(--forge-horde-glow); --faction-tint: var(--fac-horde-bg); }
+.faction-on { border-color: var(--faction-ink); background: var(--faction-tint); color: var(--txt-title); font-weight: 700; }
+.spec-strip { margin: 10rpx 0 12rpx; }
+.raid-note { margin: 2rpx 0 10rpx; }
 
 .pickrow {
   display: flex;
@@ -89,27 +143,36 @@
 
 /* —— 中间那一栏：只有"这一套穿这一身"那一张逐件底图（2026-11-02 起，3D 与按种族的旧底图都撤了） —— */
 .stage {
-  /* 竖长方形：站主 2026-10-30 要"完整展示整体装备"，竖盒才能从头到脚框进来。
-     2026-11-02 里面换成逐件渲的透明底 PNG，框的尺寸一条没改；
-     底色沿用 3D 那一版实际铺的 --sunk（图本身透明，玩家看到的就是这一栏的底色，
-     所以"背景透明"要成立，这一格就必须是页面自己的色，不能是图里带的一块白）。 */
   position: relative;
-  height: 860rpx;
-  border: 1rpx solid var(--line-2);
-  border-radius: 6rpx;
+  height: clamp(306rpx, 30vh, 418rpx);
+  box-sizing: border-box;
+  padding: 8rpx 28rpx 12rpx;
+  border: 1rpx solid var(--faction-ink);
+  border-radius: var(--r-ctl);
   overflow: hidden;
-  background: var(--sunk);
+  background: var(--faction-haze), var(--forge-shade);
+  box-shadow: var(--forge-inset), var(--forge-shadow);
 }
+
+.stage::before, .stage::after {
+  position: absolute;
+  content: '';
+  width: 26rpx;
+  height: 26rpx;
+  pointer-events: none;
+}
+.stage::before { top: 6rpx; left: 6rpx; border-top: 2rpx solid var(--forge-edge-active); border-left: 2rpx solid var(--forge-edge-active); }
+.stage::after { right: 6rpx; bottom: 6rpx; border-right: 2rpx solid var(--forge-edge-active); border-bottom: 2rpx solid var(--forge-edge-active); }
 
 .stage-tag {
   position: absolute;
   left: 12rpx;
   bottom: 10rpx;
   font-size: 20rpx;
-  color: var(--txt-dim);
+  color: var(--txt-title);
   background: var(--scrim-pop);
   padding: 2rpx 10rpx;
-  border-radius: 4rpx;
+  border: 1rpx solid var(--forge-edge);
 }
 
 .stage-art {
@@ -239,9 +302,16 @@
 .q-1 { color: var(--q1); }
 .q-2 { color: var(--q2); }
 .q-3 { color: var(--q3); }
-.q-4 { color: var(--q4); }
+.q-4 { color: var(--forge-q4-text); }
 .q-5 { color: var(--q5); }
 .q-0 { color: var(--q0); }
+
+.gear-q2 { --quality-edge: var(--q2); --quality-glow: var(--forge-q2-glow); }
+.gear-q3 { --quality-edge: var(--q3); --quality-glow: var(--forge-q3-glow); }
+.gear-q4 { --quality-edge: var(--q4); --quality-glow: var(--forge-q4-glow); }
+.gear-q5 { --quality-edge: var(--q5); --quality-glow: var(--forge-q5-glow); }
+.gear-row { border-left: 3rpx solid var(--quality-edge, var(--line-2)); padding-left: 10rpx; }
+.gear-icon { flex: none; line-height: 0; padding: 2rpx; border: 1rpx solid var(--quality-edge, var(--line-2)); box-shadow: 0 0 10rpx var(--quality-glow, transparent); }
 
 /* 两类文字分两档（站主 2026-11-02 两轮：先要"属性与副本分色"，看了真机又说"区分不明显"）。
    第一版给来源配 --azure，量下来它与**稀有装备名 --q3 的 RGB 距离只有 34**——
@@ -325,6 +395,7 @@
   bottom: 0;
   background: var(--scrim-pop);
   z-index: 20;
+  animation: gear-mask var(--forge-enter) var(--forge-ease) both;
 }
 
 .pop {
@@ -334,11 +405,13 @@
   bottom: 0;
   z-index: 21;
   max-height: 70vh;
-  background: var(--panel);
-  border-top: 1rpx solid var(--gold-line);
+  background: var(--glass-sheen), var(--forge-pop);
+  border-top: 2rpx solid var(--forge-edge-active);
   border-radius: 16rpx 16rpx 0 0;
   padding: 20rpx 24rpx 24rpx;
   box-sizing: border-box;
+  box-shadow: var(--forge-inset), var(--forge-shadow);
+  animation: gear-sheet var(--forge-enter) var(--forge-ease) both;
 }
 
 .pop-h {
@@ -396,18 +469,38 @@
   line-height: 1.5;
 }
 
-.want-target { display: inline-flex; flex-shrink: 0; align-items: center; min-height: 80rpx; margin: 0; padding: 8rpx 12rpx; border: 1rpx solid var(--gold-line); border-radius: 8rpx; background: var(--sunk); color: var(--gold-hi); font-size: 24rpx; line-height: 1.35; white-space: nowrap; }
+.want-target { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; min-height: 76rpx; margin: 0; padding: 8rpx 13rpx; border: 1rpx solid var(--forge-edge); border-radius: var(--r-ctl); background: var(--sunk); color: var(--gold-hi); font-size: 24rpx; line-height: 1.35; white-space: nowrap; transition: transform var(--forge-press) var(--forge-ease); }
 .want-target::after { border: 0; }
+.want-target:active, .gear-wrap .chip:active { transform: scale(.97); border-color: var(--forge-edge-active); }
+.gear-wrap .chip { transition: transform var(--forge-press) var(--forge-ease); }
 .prow .want-target { margin-top: 8rpx; }
 
 .stage.stage-compact { height: auto; min-height: 105rpx; }
 .stage-wait { display: flex; align-items: center; justify-content: space-between; gap: 14rpx; font-size: 25rpx; }
-.set-actions { display: flex; flex-wrap: wrap; gap: 12rpx; margin: 14rpx 0; }
-.target-selected { background: var(--gold-glow); border-color: var(--gold-deep); }
+.set-actions { display: flex; gap: 10rpx; margin: 12rpx 0 4rpx; }
+.set-actions .want-target { flex: 1; min-height: 68rpx; }
+.set-primary, .target-selected { background: var(--forge-surface-active); border-color: var(--forge-edge-active); }
+.target-selected { animation: gear-confirm var(--forge-enter) var(--forge-ease); }
 .selecting { padding-bottom: calc(130rpx + env(safe-area-inset-bottom)); }
-.selecting .stage:not(.stage-compact) { height: 370rpx; }
 .selection-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 12; display: flex; align-items: center; gap: 12rpx; padding: 16rpx 22rpx calc(16rpx + env(safe-area-inset-bottom)); border-top: 1rpx solid var(--gold-line); background: var(--leather); }
 .selection-bar > text { flex: 1; color: var(--txt-title); font-size: 27rpx; }
 .selection-bar button[disabled] { opacity: .48; }
 .iset-head { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; padding: 12rpx 0 6rpx; border-top: 1rpx solid var(--line-2); }
 .iset-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8rpx 14rpx; flex: 1; min-width: 0; }
+
+@keyframes gear-enter {
+  from { opacity: .58; transform: translateY(8rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gear-sheet {
+  from { opacity: .65; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gear-mask { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gear-confirm { 50% { transform: scale(.97); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-content, .mask, .pop, .target-selected { animation: none; opacity: 1; transform: none; }
+  .stage-tab, .want-target, .gear-wrap .chip { transition: none; }
+  .stage-tab:active, .want-target:active, .gear-wrap .chip:active { transform: none; }
+}

@@ -22,6 +22,12 @@ const adventure = require('../../services/adventure')
 
 const SUM_KEYS = ['力量', '敏捷', '耐力', '智力', '精神', '护甲'];
 const POSTER_NONE = '这一格没有可显示的图';
+const STAGES = [
+  { key: '30', title: '30级 P1', hint: '人物搭配', field: 'sets' },
+  { key: '60', title: '60级团前', hint: '九职业三系', field: 'bis60Sets' },
+  { key: 't1', title: '海加尔峰T1', hint: '团队套装', field: 'raidSets' },
+  { key: 'sets', title: '14–58套装', hint: '新装与 T0', field: 'itemSets' }
+]
 
 Page({
   data: {
@@ -34,6 +40,8 @@ Page({
     errText: '',
     meta: null,
     sourceHost: '',
+    stages: [],
+    stageKey: '30',
     classes: [],
     cls: '',
     setList: [],
@@ -81,7 +89,11 @@ Page({
     this.want = (query && query.c) || ''
     this.draft = new Map()
     this.fromList = !!(query && query.pick === '1')
-    if (this.fromList) this.setData({ picking: true })
+    const stageKey = query && query.stage
+    this.setData({
+      stageKey: STAGES.some((stage) => stage.key === stageKey) ? stageKey : '30',
+      picking: this.fromList
+    })
     this.start()
   },
 
@@ -100,17 +112,22 @@ Page({
 
   saveTarget(e) {
     const id = String(e.currentTarget.dataset.id || '')
+    const { activeBis60, activeItemSet, stageKey, picking, rows, slot, slotRows } = this.data
+    const multi = stageKey === '30' && picking
     if (adventure.read().gear[id]) {
-      if (!this.data.picking) wx.navigateTo({ url: '/pages/adventure/index' })
+      if (!multi) wx.navigateTo({ url: '/pages/adventure/index' })
       return
     }
-    const item = (this.data.slotRows || []).find((r) => String(r.item) === id)
-      || (this.data.rows || []).find((r) => String(r.item) === id)
-      || (((this.data.activeItemSet && this.data.activeItemSet.pieces) || []).find((r) => String(r.item) === id))
+    const current = stageKey === '60' ? (activeBis60 && activeBis60.rows)
+      : stageKey === 'sets' ? (activeItemSet && activeItemSet.pieces) : rows
+    const item = (slot ? slotRows : (current || [])).find((r) => String(r.item) === id)
     if (!item) return
     const target = { id, name: item.name, quality: item.q, dungeonId: item.go, source: item.src }
-    if (!this.data.picking) {
-      if (adventure.addGear(target)) this.syncGear()
+    if (!multi) {
+      if (adventure.addGear(target)) {
+        this.syncGear()
+        lightFeedback()
+      }
       return
     }
     const chosen = !this.draft.has(id)
@@ -136,6 +153,7 @@ Page({
     if (count === null) return
     this.cancelPick()
     this.syncGear()
+    if (count) lightFeedback()
     wx.showToast({ title: '已加入 ' + count + ' 件装备', icon: 'none' })
     if (this.fromList && getCurrentPages().length > 1) wx.navigateBack()
   },
@@ -144,16 +162,19 @@ Page({
     wx.pageScrollTo({ selector: '#bis-equipment', duration: 240, offsetTop: -12 })
   },
 
-  goItemSets() {
-    wx.pageScrollTo({ selector: '#bis-item-sets', duration: 240, offsetTop: -12 })
-  },
-
-  goBis60() {
-    wx.pageScrollTo({ selector: '#bis-lv60', duration: 240, offsetTop: -12 })
-  },
-
-  goRaidSets() {
-    wx.pageScrollTo({ selector: '#bis-t1', duration: 240, offsetTop: -12 })
+  pickStage(e) {
+    const key = e.currentTarget.dataset.stage
+    if (!STAGES.some((stage) => stage.key === key) || key === this.data.stageKey) return
+    if (this.data.stageKey === '30') {
+      this.setRequest = (this.setRequest || 0) + 1
+      this.clearPoster()
+    }
+    this.closeSlot()
+    this.setData({ stageKey: key })
+    wx.pageScrollTo({ scrollTop: 0, duration: 0 })
+    lightFeedback()
+    if (key === '30' && this.set && this.set.setId === this.data.setId) return this.render()
+    return this.pickClassId(this.data.cls, false)
   },
 
   addItemSetToAdventure() {
@@ -166,6 +187,7 @@ Page({
     const count = adventure.addGearBatch(list)
     if (count === null) return
     this.syncGear()
+    if (count) lightFeedback()
     wx.showToast({ title: count ? ('已加入 ' + count + ' 件套装部件') : '本套部件已在清单中', icon: 'none' })
   },
 
@@ -173,17 +195,20 @@ Page({
     this.start().then(() => wx.stopPullDownRefresh())
   },
 
-  /* 微信分享（2026-11-03 站主要求全站可分享）：带当前职业，接收方打开就是同一身配装。
-     阵营不带（页面默认联盟起步，接收方自己切）。 */
   onShareAppMessage() {
+    const share = this.onShareTimeline()
     return {
-      title: 'BIS配装 · 30 级这一身穿什么',
-      path: '/pages/bis/index' + (this.data.cls ? '?c=' + this.data.cls : '')
+      title: share.title,
+      path: '/pages/bis/index' + (share.query ? '?' + share.query : '')
     }
   },
 
   onShareTimeline() {
-    return { title: 'BIS配装 · 30 级这一身穿什么', query: this.data.cls ? 'c=' + this.data.cls : '' }
+    const stage = STAGES.find((item) => item.key === this.data.stageKey)
+    const query = []
+    if (this.data.cls) query.push('c=' + encodeURIComponent(this.data.cls))
+    if (stage && stage.key !== '30') query.push('stage=' + stage.key)
+    return { title: 'BIS配装 · ' + (stage ? stage.title : STAGES[0].title), query: query.join('&') }
   },
 
   start() {
@@ -204,6 +229,8 @@ Page({
             this.setData({ loaded: true, unavailable: true })
             return
           }
+          this.setRequest = (this.setRequest || 0) + 1
+          this.set = null
           this.batch = ri.batch
           this.index = ri.data
           const items = {}
@@ -225,6 +252,9 @@ Page({
           this.setData({
             loaded: true,
             meta: ri.data.meta,
+            stages: STAGES.map((stage) => ({
+              key: stage.key, title: stage.title, hint: stage.hint, count: (ri.data[stage.field] || []).length
+            })),
             sourceHost: hostOf(ri.data.meta && ri.data.meta.source),
             classes: (ri.data.classes || []).map((c) => ({
               cls: c.cls, clsCn: c.clsCn, n: (c.sets || []).length,
@@ -232,9 +262,7 @@ Page({
             })),
             needOnline: rt.source !== 'live' || ri.source !== 'live'
           })
-          const want = this.want && (ri.data.classes || []).some((c) => c.cls === this.want)
-            ? this.want : ((ri.data.classes || [])[0] || {}).cls
-          return this.pickClassId(want, true)
+          return this.pickClassId(this.data.cls || this.want, false)
         })
       })
     }).catch((e) => {
@@ -242,21 +270,37 @@ Page({
     })
   },
 
-  pickClass(e) { this.pickClassId(e.currentTarget.dataset.cls, true) },
+  pickClass(e) {
+    const cls = e.currentTarget.dataset.cls
+    if (cls === this.data.cls && !(this.data.stageKey === 't1' && this.data.raidCls === 'all')) return
+    return this.pickClassId(cls, true)
+  },
 
   pickClassId(cls, resetSet) {
     const idx = this.index
     if (!idx) return
-    const c = (idx.classes || []).filter((x) => x.cls === cls)[0] || idx.classes[0]
-    const ids = (c || {}).sets || []
+    const classes = idx.classes || []
+    const c = classes.find((x) => x.cls === cls) || classes[0]
+    if (!c) return
+    const ids = c.sets || []
+    this.closeSlot()
     this.setData({
       cls: c.cls,
       setList: ids.map((id) => {
         const s = idx.sets.filter((x) => x.id === id)[0] || {}
         return { id, mode: s.mode, label: s.mode || id }
       }),
-      setId: resetSet ? (ids[0] || '') : this.data.setId
+      setId: !resetSet && ids.includes(this.data.setId) ? this.data.setId : (ids[0] || '')
     })
+    if (this.data.stageKey === '60') {
+      this.applyBis60Class(c.cls, !resetSet)
+      return
+    }
+    if (this.data.stageKey === 't1') {
+      this.applyRaidCls(c.cls)
+      return
+    }
+    if (this.data.stageKey !== '30') return
     return this.loadSet()
   },
 
@@ -581,32 +625,26 @@ Page({
         clsOrder.push({ cls: s.cls, clsCn: s.clsCn })
       }
     })
-    const initCls = (this.want && seenCls[this.want]) ? this.want : ((clsOrder[0] && clsOrder[0].cls) || 'warrior')
     this.setData({
       bis60Classes: clsOrder,
       raidTotal: this.raidSets.length,
       raidClassChips: [{ cls: 'all', clsCn: '全部' }].concat(clsOrder)
     })
-    this.applyBis60Class(initCls)
-    this.applyRaidCls('all')
   },
 
-  pickBis60Class(e) {
-    const cls = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cls) || '')
-    if (cls) this.applyBis60Class(cls)
-  },
-
-  applyBis60Class(cls) {
+  applyBis60Class(cls, keepSet) {
     const specs = (this.bis60Sets || []).filter((s) => s.cls === cls)
     const specList = specs.map((s) => ({ id: s.id, mode: s.mode }))
-    const firstId = (specs[0] && specs[0].id) || ''
-    this.setData({ bis60Cls: cls, bis60SpecList: specList, bis60SetId: firstId })
-    this.renderBis60(firstId)
+    const setId = keepSet && specs.some((s) => s.id === this.data.bis60SetId)
+      ? this.data.bis60SetId : ((specs[0] && specs[0].id) || '')
+    this.setData({ bis60Cls: cls, bis60SpecList: specList, bis60SetId: setId })
+    this.renderBis60(setId)
   },
 
   pickBis60Set(e) {
     const id = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.id) || '')
     if (!id) return
+    this.closeSlot()
     this.setData({ bis60SetId: id })
     this.renderBis60(id)
   },
@@ -664,6 +702,7 @@ Page({
     const count = adventure.addGearBatch(list)
     if (count === null) return
     this.syncGear()
+    if (count) lightFeedback()
     wx.showToast({ title: count ? ('已加入 ' + count + ' 件 60 级配装') : '本套部件已在清单中', icon: 'none' })
   },
 
@@ -688,9 +727,8 @@ Page({
     })
   },
 
-  pickRaidCls(e) {
-    const cls = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.cls) || '')
-    if (cls) this.applyRaidCls(cls)
+  toggleRaidAll() {
+    this.applyRaidCls(this.data.raidCls === 'all' ? this.data.cls : 'all')
   },
 
   applyRaidCls(cls) {
@@ -709,8 +747,27 @@ Page({
     this.setData({ raidCls: cls, filteredRaidSets: out })
   },
 
+  addRaidSetToAdventure(e) {
+    const id = e.currentTarget.dataset.id
+    const raidSet = (this.raidSets || []).find((set) => set.id === id)
+    if (!raidSet || !raidSet.pieceIds || !raidSet.pieceIds.length) return
+    const count = adventure.addGearBatch(raidSet.pieceIds.map((itemId) => ({
+      id: String(itemId),
+      name: raidSet.name + ' · #' + itemId,
+      source: raidSet.raid
+    })))
+    if (count === null) return
+    this.syncGear()
+    if (count) lightFeedback()
+    wx.showToast({ title: count ? ('已加入 ' + count + ' 件团本套装部件') : '本套部件已在清单中', icon: 'none' })
+  },
+
   closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) }
 })
+
+function lightFeedback() {
+  try { if (typeof wx.vibrateShort === 'function') wx.vibrateShort({ type: 'light', fail() {} }) } catch (error) {}
+}
 
 function keyOf(map, label) {
   const ks = Object.keys(map)

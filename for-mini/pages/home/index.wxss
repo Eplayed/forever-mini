@@ -1,15 +1,20 @@
 .home {
-  background: var(--adventure-bg) top / 100% 1360rpx no-repeat;
-  animation: home-reveal 240ms ease-out both;
+  background: var(--forge-surface), var(--bg);
 }
 
 @keyframes home-reveal {
-  from { opacity: 0; transform: translateY(8rpx); }
+  from { opacity: 0.75; transform: translateY(8rpx); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .home { animation: none; }
+.adventure-card, .spotlight, .priority {
+  animation: home-reveal 180ms ease-out both;
+}
+
+.priority { animation-delay: 40ms; }
+
+.feature-selected .feature-body {
+  animation: home-reveal 160ms ease-out both;
 }
 
 .masthead, .launch {
@@ -18,22 +23,25 @@
   justify-content: space-between;
 }
 
-.masthead { margin-bottom: 18rpx; }
-.mast-name { color: var(--txt-title); font-size: 38rpx; font-weight: 750; }
-.mast-tag, .feature-tag {
+.masthead { margin-bottom: 16rpx; }
+.mast-name { color: var(--txt-title); font-size: 40rpx; font-weight: 800; letter-spacing: 1rpx; }
+.mast-tag {
   color: var(--gold-hi);
-  border: 1rpx solid var(--gold-line);
-  background: var(--foot);
-  font-size: 21rpx;
-  padding: 2rpx 12rpx;
+  background: var(--forge-surface-active);
+  box-shadow: var(--forge-inset);
+  border: 1rpx solid var(--forge-edge);
+  clip-path: polygon(0 0, calc(100% - 9rpx) 0, 100% 9rpx, 100% 100%, 0 100%);
+  font-size: 20rpx;
+  padding: 3rpx 14rpx;
 }
 
 .launch { margin-bottom: 14rpx; color: var(--gold-hi); font-size: 23rpx; }
 
 .spotlight {
-  height: 356rpx;
-  border: 2rpx solid var(--gold);
-  border-radius: 8rpx;
+  height: 312rpx;
+  border: 1rpx solid var(--forge-edge-active);
+  border-radius: var(--r-ctl);
+  box-shadow: var(--forge-shadow);
   overflow: hidden;
 }
 
@@ -41,10 +49,22 @@
   position: relative;
   height: 100%;
   box-sizing: border-box;
-  background: var(--panel);
+  background: var(--forge-surface);
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+}
+
+.feature::after {
+  content: '';
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  width: 32rpx;
+  height: 28rpx;
+  border-top: 1rpx solid var(--forge-edge-active);
+  border-right: 1rpx solid var(--forge-edge-active);
+  pointer-events: none;
 }
 
 .feature-art, .feature-scrim, .entry-art, .entry-scrim {
@@ -56,41 +76,53 @@
 }
 
 .feature-scrim { background: var(--home-feature-scrim); }
-.feature-body { position: relative; padding: 28rpx; }
-.feature-title { font-weight: 800; font-size: 53rpx; line-height: 1.22; color: var(--txt-title); margin-top: 10rpx; }
-.feature-desc { color: var(--txt); font-size: 25rpx; margin-top: 6rpx; }
+.feature-body { position: relative; padding: 24rpx; }
+.feature-title { font-weight: 800; font-size: 48rpx; line-height: 1.18; color: var(--txt-title); }
+.feature-desc { color: var(--txt); font-size: 24rpx; margin-top: 6rpx; }
 .feature-cta {
   display: inline-flex;
   align-items: center;
-  gap: 16rpx;
-  padding: 5rpx 18rpx;
-  margin-top: 15rpx;
-  background: var(--jade);
-  border: 1rpx solid var(--jade-line);
-  color: var(--txt-title);
-  font-size: 24rpx;
+  gap: 14rpx;
+  padding: 4rpx 16rpx;
+  margin-top: 12rpx;
+  background: var(--gold-hot);
+  color: var(--accent-ink);
+  font-size: 22rpx;
   font-weight: 700;
-  border-radius: var(--r-ctl);
+  clip-path: polygon(0 0, calc(100% - 10rpx) 0, 100% 10rpx, 100% 100%, 0 100%);
 }
 
-.feature-tabs { display: flex; gap: 12rpx; margin-top: 10rpx; }
+.feature-tabs { display: flex; gap: 10rpx; margin-top: 6rpx; }
 .feature-tab {
   flex: 1;
+  line-height: 1.4;
+  min-height: 78rpx;
+  padding: 10rpx;
   color: var(--txt-dim);
-  background: var(--foot);
-  border: 1rpx solid var(--line);
+  background: var(--forge-surface);
+  border: 1rpx solid var(--forge-edge);
   border-radius: var(--r-ctl);
-  font-size: 22rpx;
-  line-height: 2.2;
+  box-shadow: var(--forge-inset);
+  font-size: 23rpx;
+  font-weight: 600;
 }
-.feature-tab-on { color: var(--gold-hi); background: var(--panel-2); border-color: var(--gold-line); box-shadow: inset 0 -3rpx var(--gold); }
+.feature-tab-on {
+  color: var(--gold-hi);
+  background: var(--forge-surface-active);
+  border-color: var(--forge-edge-active);
+  box-shadow: inset 0 -3rpx var(--gold);
+}
 
 .sec-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
   color: var(--gold-hi);
-  font-size: 27rpx;
+  font-size: 26rpx;
   font-weight: 700;
-  margin: 24rpx 0 12rpx;
+  margin: 20rpx 0 10rpx;
 }
+.sec-title::before { content: ''; width: 4rpx; height: 22rpx; background: var(--gold); }
 .sec-title-2 { margin-top: 24rpx; }
 
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12rpx; }
@@ -98,26 +130,29 @@
   position: relative;
   overflow: hidden;
   min-width: 0;
-  padding: 18rpx;
+  padding: 16rpx;
   box-sizing: border-box;
-  background: var(--panel-2);
-  border: 1rpx solid var(--line);
-  border-radius: 7rpx;
+  background: var(--forge-surface);
+  border: 1rpx solid var(--forge-edge);
+  border-radius: var(--r-ctl);
+  box-shadow: var(--forge-inset);
 }
 .priority-entry {
-  min-height: 126rpx;
+  min-height: 118rpx;
   display: flex;
   align-items: flex-end;
-  border-color: var(--gold-line);
-  background: var(--panel);
 }
+.priority-bis { border-color: var(--forge-edge-active); }
+.priority-bis .entry-name { color: var(--gold-hi); }
+.leveling-entry { background: var(--glass-sheen), var(--forge-surface); }
 .entry-scrim { background: var(--home-tile-scrim); }
 .entry-content { position: relative; width: 100%; }
-.entry-emblem { position: absolute; width: 108rpx; height: 108rpx; right: 21rpx; top: 9rpx; opacity: 0.42; }
-.entry-name { position: relative; font-size: 27rpx; font-weight: 700; color: var(--txt-title); padding-right: 24rpx; }
+.entry-emblem { position: absolute; width: 84rpx; height: 84rpx; right: 18rpx; top: 11rpx; opacity: 0.45; }
+.entry-name { position: relative; font-size: 27rpx; line-height: 1.4; font-weight: 700; color: var(--txt-title); padding-right: 24rpx; }
 .entry-arrow { position: absolute; right: 0; top: 0; color: var(--gold-hi); }
-.entry-desc { position: relative; font-size: 21rpx; color: var(--txt); margin-top: 2rpx; }
-.entry-pressed { border-color: var(--gold-hi); background: var(--panel); }
+.entry-desc { position: relative; font-size: 22rpx; line-height: 1.35; color: var(--txt); margin-top: 5rpx; }
+.entry, .feature-tab, .leveling-card, .adventure-main, .adventure-continue { transition: transform 110ms ease-out; }
+.home .entry-pressed { border-color: var(--forge-edge-active); box-shadow: var(--forge-focus); transform: scale(0.97); }
 .tool-icon { position: absolute; width: 48rpx; height: 48rpx; right: 36rpx; top: 17rpx; opacity: 0.26; }
 
 .cls9 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8rpx; }
@@ -306,12 +341,14 @@
   margin-left: 10rpx;
 }
 
-.adventure-card { margin-bottom: 20rpx; border: 1rpx solid var(--gold-line); border-radius: 12rpx; background: var(--leather); }
+.adventure-card { position: relative; margin-bottom: 16rpx; border: 1rpx solid var(--forge-edge); border-radius: var(--r-ctl); background: var(--glass-sheen), var(--forge-surface); box-shadow: var(--forge-inset); }
+.adventure-card::before { content: ''; position: absolute; top: 0; left: 15rpx; right: 15rpx; height: 2rpx; background: var(--forge-line); pointer-events: none; }
 .adventure-main, .adventure-continue { display: flex; min-height: 76rpx; box-sizing: border-box; align-items: center; justify-content: space-between; gap: 12rpx; padding: 14rpx 20rpx; color: var(--gold-hi); font-size: 26rpx; line-height: 1.4; }
-.adventure-title { color: var(--txt-title); font-size: 30rpx; font-weight: 700; }
+.adventure-title { color: var(--gold-hi); font-size: 29rpx; font-weight: 750; }
 .adventure-book { display: block; flex: 0 0 54rpx; width: 54rpx; height: 54rpx; box-sizing: border-box; border: 1rpx solid var(--gold-line); border-radius: 7rpx; }
 .adventure-copy { flex: 1; min-width: 0; }
-.adventure-detail { margin-top: 4rpx; color: var(--txt-dim); font-size: 24rpx; }
+.adventure-detail { margin-top: 3rpx; color: var(--txt-dim); font-size: 22rpx; }
+.adventure-arrow { color: var(--gold-hi); font-size: 34rpx; }
 .adventure-continue { border-top: 1rpx solid var(--gold-line); }
 .adventure-continue > text:first-child { flex-shrink: 0; }
 .adventure-dungeon { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -319,7 +356,13 @@
 .leveling-heading { display: flex; justify-content: space-between; align-items: baseline; }
 .leveling-all { color: var(--gold-hi); font-size: 24rpx; padding: 14rpx 0 14rpx 14rpx; }
 .leveling-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10rpx; }
-.leveling-card { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 5rpx; padding: 14rpx; border: 1rpx solid var(--gold-line); border-radius: 10rpx; background: var(--leather); }
+.leveling-card { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 5rpx; padding: 14rpx; border: 1rpx solid var(--forge-edge); border-radius: var(--r-ctl); background: var(--forge-surface); box-shadow: var(--forge-inset); }
 .leveling-class { font-size: 27rpx; font-weight: 700; color: var(--txt-title); }
 .leveling-name { font-size: 22rpx; color: var(--txt-dim); }
 .leveling-feature { width: 100%; box-sizing: border-box; margin-top: 3rpx; padding-top: 7rpx; border-top: 1rpx solid var(--gold-line); color: var(--gold-hi); font-size: 22rpx; line-height: 1.35; white-space: pre-line; }
+
+@media (prefers-reduced-motion: reduce) {
+  .adventure-card, .spotlight, .priority, .feature-selected .feature-body { animation: none; }
+  .entry, .feature-tab, .leveling-card, .adventure-main, .adventure-continue { transition: none; }
+  .home .entry-pressed { transform: none; }
+}

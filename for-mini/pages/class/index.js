@@ -18,7 +18,8 @@ const CHANGE_TEXT = {
   moved: '换了层级',
   unchanged: '与经典旧世一致'
 }
-const BUILD_KEY = 'wow_forever_v1_tbuild@'
+const BUILD_KEY = 'wow_forever_v1_tbuild_'
+const LEGACY_BUILD_KEY = 'wow_forever_v1_tbuild@'
 
 Page({
   data: {
@@ -40,6 +41,8 @@ Page({
     gateNote: '',
     buildCode: '',
     fromShare: false,
+    importMode: '',
+    importError: '',
     loaded: false,
     talentLoaded: false,
     offline: false,
@@ -52,10 +55,15 @@ Page({
     this.batch = null
     this.classId = String((query && query.classId) || 'warrior')
     this.shareBuild = String((query && query.b) || '')
+    this.shareLayout = String((query && query.s) || '')
+    const mode = query && query.mode
+    this.shareMode = mode === 'leveling' || mode === 'partial' ? mode : ''
+    this.scrollToTalent = !!this.shareBuild
     this.trees = []
     this.rules = null
     this.state = {}
     this.nodeById = {}
+    this.migrateSavedBuild()
     this.refresh()
   },
 
@@ -63,15 +71,8 @@ Page({
     this.refresh().then(() => wx.stopPullDownRefresh())
   },
 
-  /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
   onShareTimeline() {
-    const d = this.data
-    const used = this.used
-    const usedCode = used && this.name ? engine.encode({ v: 1, n: this.name, b: used }, 'inf-tal') : ''
-    return {
-      title: d.className ? (d.className + ' · 天赋树与技能书') : '职业技能详情',
-      query: d.classId ? ('classId=' + d.classId + (usedCode ? '&b=' + encodeURIComponent(usedCode) : '')) : ''
-    }
+    return this.shareTalent()
   },
 
   onUnload() {
@@ -84,13 +85,21 @@ Page({
 
   /* 分享出去的就是当前这套：路径带短码，别人点开直接是同一个点法 */
   onShareAppMessage() {
-    const code = engine.encode(this.trees, this.state)
+    const { title, query } = this.shareTalent()
+    return { title, path: '/pages/class/index?' + query }
+  },
+
+  shareTalent() {
+    const name = this.data.nameCn || '职业'
     const used = engine.spent(this.state, this.trees)
-    return {
-      title: (used ? '无限 ' + (this.data.nameCn || '职业') + '天赋：' + this.data.spentText : '无限 ' + (this.data.nameCn || '职业') + '天赋树'),
-      path: '/pages/class/index?classId=' + encodeURIComponent(this.classId)
-        + (used ? '&b=' + encodeURIComponent(code) : '')
-    }
+    let query = 'classId=' + encodeURIComponent(this.classId)
+    if (!used) return { title: '无限 ' + name + '天赋树', query }
+    query += '&b=' + encodeURIComponent(engine.encode(this.trees, this.state))
+      + '&s=' + encodeURIComponent(this.talentLayout)
+    const mode = this.data.importMode
+    if (mode) query += '&mode=' + mode
+    const title = '无限 ' + name + '天赋：' + this.data.spentText + (mode === 'partial' ? '（部分加点）' : '')
+    return { title, query }
   },
 
   refresh() {
@@ -148,29 +157,55 @@ Page({
         }))
         this.nodeById = {}
         this.trees.forEach((tr) => tr.nodes.forEach((n) => { this.nodeById[n.id] = n }))
+        this.talentLayout = engine.layoutKey(this.trees)
         const start = this.startBuild()
         this.state = start.state
-        this.setData({
+        const patch = {
           talentLoaded: true,
           fromShare: start.from === 'share',
+          importMode: start.mode || '',
+          importError: start.error || '',
           gateNote: this.rules.tierUnlockCost
             ? '层级门槛按经典旧世推（第 2 层起 ' + this.rules.tierUnlockCost.slice(1).join(' / ') + ' 点），无限服还没实测'
             : '层级点数门槛未核实：这一版不做分层限制，只做前置与总点数判定',
           offline: this.data.offline || t.source !== 'live',
           errorText: t.error && !this.trees.length ? String(t.error.message || t.error).slice(0, 120) : this.data.errorText
-        })
-        this.render()
+        }
+        if (start.mode) {
+          patch.treeTab = this.trees.reduce((best, tree, index) =>
+            engine.treeSpent(tree, this.state) > engine.treeSpent(this.trees[best], this.state) ? index : best, 0)
+        }
+        this.setData(patch)
+        const jump = this.scrollToTalent && this.trees.length
+        if (jump) this.scrollToTalent = false
+        this.render(jump ? () => wx.pageScrollTo({ selector: '#talent-simulator', duration: 220 }) : undefined)
         return null
       })
     })
+  },
+
+  migrateSavedBuild() {
+    try {
+      const key = BUILD_KEY + this.classId
+      if (wx.getStorageSync(key)) return
+      const legacy = wx.getStorageSync(LEGACY_BUILD_KEY + this.classId)
+      if (legacy) wx.setStorageSync(key, legacy)
+    } catch (e) {}
   },
 
   /* 打开时先用哪套：分享链接带的码 > 本机存过的 > 空。
      分享那条要标出来——别人给的点法不是自己点的，界面得说清是谁的这套。 */
   startBuild() {
     if (this.shareBuild) {
+      if (this.shareLayout && this.shareLayout !== this.talentLayout) {
+        return { state: {}, error: '这套点法与当前天赋树版本不同，暂时无法带入。' }
+      }
       const got = engine.decode(this.shareBuild, this.trees)
-      if (engine.spent(got.state, this.trees) > 0) return { state: got.state, from: 'share' }
+      const used = engine.spent(got.state, this.trees)
+      if (used > 0 && (!this.shareLayout || (!got.bad && used <= this.rules.totalPoints))) {
+        return { state: got.state, from: 'share', mode: this.shareMode }
+      }
+      if (this.shareLayout) return { state: {}, error: '这套点法暂时无法带入。' }
     }
     try {
       const saved = wx.getStorageSync(BUILD_KEY + this.classId)
@@ -183,7 +218,7 @@ Page({
   },
 
   saveBuild() {
-    if (!this.trees || !this.trees.length) return
+    if (this.shareBuild || !this.trees || !this.trees.length) return
     try {
       const code = engine.encode(this.trees, this.state)
       if (engine.spent(this.state, this.trees) > 0) wx.setStorageSync(BUILD_KEY + this.classId, code)
@@ -191,8 +226,16 @@ Page({
     } catch (e) {}
   },
 
+  saveEditedBuild() {
+    this.shareBuild = ''
+    this.shareLayout = ''
+    this.shareMode = ''
+    this.setData({ fromShare: false, importMode: '', importError: '' })
+    this.saveBuild()
+  },
+
   /* 每次加减点重画整棵树：让 WXML 判"能不能点"会写出第二套规则，那是这次天裔漂移的老毛病 */
-  render() {
+  render(onReady) {
     const trees = this.trees
     const rules = this.rules
     const nameOf = (id) => (this.nodeById[id] || {}).nameCn || ''
@@ -234,7 +277,7 @@ Page({
       totalPoints: rules ? rules.totalPoints : 51,
       spentText: engine.describe(trees, this.state),
       buildCode: engine.encode(trees, this.state)
-    })
+    }, onReady)
   },
 
   onTreeTab(e) {
@@ -258,8 +301,7 @@ Page({
       return
     }
     this.state = got.state
-    if (this.data.fromShare) this.setData({ fromShare: false })
-    this.saveBuild()
+    this.saveEditedBuild()
     this.render()
   },
 
@@ -279,7 +321,7 @@ Page({
     if (got.msg) wx.showToast({ title: got.msg, icon: 'none', duration: 2000 })
     else {
       this.state = got.state
-      this.saveBuild()
+      this.saveEditedBuild()
       this.render()
       this.setData({ pop: this.findCell(cell.id) })
     }
@@ -291,9 +333,9 @@ Page({
     const node = this.nodeById[cell.id]
     const got = engine.remove(this.trees, this.state, node)
     if (got.msg) wx.showToast({ title: got.msg, icon: 'none', duration: 2000 })
-    else {
+    if (got.state !== this.state) {
       this.state = got.state
-      this.saveBuild()
+      this.saveEditedBuild()
       this.render()
       this.setData({ pop: this.findCell(cell.id) })
     }
@@ -311,8 +353,7 @@ Page({
       success: (res) => {
         if (!res.confirm) return
         this.state = {}
-        this.setData({ fromShare: false })
-        this.saveBuild()
+        this.saveEditedBuild()
         this.render()
       }
     })

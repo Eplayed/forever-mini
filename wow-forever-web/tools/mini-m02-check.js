@@ -53,16 +53,24 @@ function head(url) {
     req.setTimeout(15000, () => { req.destroy(); resolve({ code: 0, err: 'TMO' }); });
   });
 }
-/* 导航的"等"放在 Node 侧，不放在小程序侧：掉落反查那一页 onLoad 要同步拼 1018 件物品，
-   主线程忙的时候在页面里 setTimeout 再回话的 evaluate 会超时（实测稳定卡在这一步），
-   于是断言读到的是上一秒的状态。发完导航 → Node 睡一会儿 → 再单独查当前路由。 */
+/* 在 Node 侧等目标路由和数据，避免读取仍在切换页面或首次下载时的初始值。 */
 async function goto(url, ms) {
-  await ev((u) => { wx.reLaunch({ url: u, fail: () => {} }); return 1 }, url);
-  await new Promise((r) => setTimeout(r, ms || 6000));
-  return ev((u) => {
-    const c = getCurrentPages().pop();
-    return c ? c.route + '|' + JSON.stringify(c.data.loaded === undefined ? '' : c.data.loaded) : 'none';
-  }, url);
+  const expected = url.replace(/^\//, '').split('?')[0];
+  const nav = await ev((u) => new Promise((resolve) => {
+    wx.reLaunch({ url: u, success: () => resolve('ok'), fail: (e) => resolve(e.errMsg) });
+  }), url);
+  if (nav !== 'ok') throw new Error('打开 ' + url + ' 失败：' + nav);
+  const end = Date.now() + (ms || 6000) + 14000;
+  let state;
+  do {
+    await new Promise((resolve) => setTimeout(resolve, 700));
+    state = await ev(() => {
+      const p = getCurrentPages().pop();
+      return p ? { route: p.route, ready: p.data.loaded !== false } : null;
+    });
+    if (state && state.route === expected && state.ready) return state;
+  } while (Date.now() < end);
+  throw new Error('页面未完成加载：' + url + ' ' + JSON.stringify(state));
 }
 
 /* 9421 会话秒退（2026-11-08 起本机规律，与 mini-m01-check 同一个补法）：
@@ -86,7 +94,12 @@ async function connectWithRetry() {
 
 async function main() {
   mp = await connectWithRetry();
-  await ev(() => { try { wx.clearStorageSync() } catch (e) {} return 1 });
+  await ev(() => {
+    delete getApp().globalData.ossTestOrigin;
+    try { wx.clearStorageSync() } catch (e) {}
+    wx.removeStorageSync('wow_forever_v1_dev_origin');
+    return 1;
+  });
 
   process.stdout.write('\nA. 职业技能速查（真 beta 批次）\n');
   await goto('/pages/spells/index', 8000);
@@ -445,7 +458,10 @@ async function main() {
   await ev(() => { const p = getCurrentPages().pop(); p.onPickClass({ currentTarget: { dataset: { id: 'warrior' } } }); return 1 });
 
 
-  await ev(() => { try { wx.removeStorageSync('wow_forever_v1_tbuild@warrior'); } catch (e) {} return 1 });
+  await ev(() => { try {
+    wx.removeStorageSync('wow_forever_v1_tbuild@warrior');
+    wx.removeStorageSync('wow_forever_v1_tbuild_warrior');
+  } catch (e) {} return 1; });
   await goto('/pages/class/index?classId=warrior', 9000);
   const sim0 = await ev(() => {
     const d = getCurrentPages().pop().data;
@@ -698,8 +714,9 @@ async function main() {
     (homeWxml.match(/scroll-x/g) || []).length === 1 && /class="cls9"/.test(homeWxml) && homeWxml.indexOf('cls9') < homeWxml.indexOf('rail'),
     String((homeWxml.match(/scroll-x/g) || []).length));
   const homeFace = homeWxml.replace(/<!--[\s\S]*?-->/g, ' ');
-  log('首页四张入口卡：第四格是宏命令、指南卡已撤出首页，也没有中英速查卡',
-    /goMacros/.test(homeFace) && /entry-name">宏命令</.test(homeFace)
+  log('宏命令位于常用区且排在配装和掉落之后，首页仍无指南或中英速查卡',
+    /class="grid priority"[\s\S]*bindtap="goBis"[\s\S]*bindtap="goLoots"[\s\S]*bindtap="goMacros"[\s\S]*class="grid tools"/.test(homeFace)
+      && /entry-name">宏命令</.test(homeFace)
       && !/goGuide/.test(homeFace) && !/entry-name">指南</.test(homeFace)
       && !/中英速查/.test(homeFace) && !/goGlossary/.test(homeJs),
     '注释里写着"从指南换成宏命令"不算界面文字，所以先把注释剥掉再比');
@@ -1101,13 +1118,22 @@ async function main() {
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length
     + (bad.length ? ' · 未过：' + bad.map((b) => b.name).join('、') : '') + '\n');
   fs.writeFileSync('/tmp/mp-m02-results.json', JSON.stringify({ results }, null, 1));
-  await mp.disconnect();
-  process.exit(bad.length ? 1 : 0);
+  return bad.length ? 1 : 0;
 }
 
-main().catch((e) => {
+main().finally(async () => {
+  if (!mp) return;
+  try {
+    await T(mp.evaluate(() => {
+      delete getApp().globalData.ossTestOrigin;
+      wx.removeStorageSync('wow_forever_v1_dev_origin');
+      return true;
+    }), 10000, '清理测试取数地址');
+  } finally {
+    await mp.disconnect();
+  }
+}).then((code) => process.exit(code)).catch((e) => {
   process.stdout.write('\n脚本异常：' + (e && e.stack ? e.stack : e) + '\n');
   fs.writeFileSync('/tmp/mp-m02-results.json', JSON.stringify({ results }, null, 1));
-  if (mp) mp.disconnect();
   process.exit(2);
 });

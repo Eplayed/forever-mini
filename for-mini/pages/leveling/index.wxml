@@ -1,0 +1,21 @@
+<view class="wrap leveling">
+  <navigator wx:for="{{rows}}" wx:key="classId" id="build-{{item.classId}}" url="{{item.url}}"
+    class="build-row {{focus === item.classId ? 'build-focused' : ''}}" hover-class="build-pressed"
+    aria-label="{{item.className}} {{item.name}} {{item.mainTalentName}} {{item.feature}}，打开天赋模拟器">
+    <view class="build-icons" aria-hidden="true">
+      <image class="main-icon" src="{{item.mainIcon}}" mode="aspectFill" />
+      <image class="class-icon" src="{{item.classIcon}}" mode="aspectFill" />
+    </view>
+    <view class="build-content">
+      <view class="build-class">{{item.className}} · {{item.mainTreeName}}<text wx:if="{{!item.complete}}" class="partial">部分加点</text></view>
+      <view class="build-name">{{item.name}}</view>
+      <view class="build-feature">{{item.feature}}</view>
+    </view>
+    <view class="build-end" aria-hidden="true">
+      <text class="build-arrow">›</text>
+      <text class="build-points">{{item.total}} 点</text>
+    </view>
+  </navigator>
+  <view class="talent-source">玩家方案 · {{source.author}}</view>
+  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+</view>

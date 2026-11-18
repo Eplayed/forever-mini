@@ -2,6 +2,7 @@ const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
 const joinCard = require('../../services/item-card')
+const adventure = require('../../services/adventure')
 
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
 
@@ -29,7 +30,10 @@ Page({
     rows: [],
     bosses: [],
     bossEmpty: '',
-    quest: { rows: [], summary: '', empty: '' },
+    quest: { rows: [], empty: '' },
+    faction: '',
+    hasFactions: false,
+    planned: false,
     artUrl: '',
     mapUrl: '',
     mapZone: '',
@@ -38,6 +42,7 @@ Page({
     openBoss: '',
     openItem: '',
     itemCard: null,
+    itemSaved: false,
     lootState: 'loading',
     highlightDrop: '',
     dropNotice: '',
@@ -50,12 +55,28 @@ Page({
     this.followDrop = !!this.dropQuery
     /* 从哪儿点来的（bis＝配装名单）。提示要说真话，不能把配装页来的玩家说成"从掉落反查过来" */
     this.dropFrom = String((query && query.from) || '')
+    this.wantTasks = !!(query && query.tasks === '1')
     this.setData({ id: pickId(query) })
     this.start()
   },
 
+  onShow() {
+    const { faction, plans, gear } = adventure.read()
+    const patch = { planned: plans.some((plan) => plan.id === this.data.id) }
+    if (faction !== this.data.faction) {
+      patch.faction = faction
+      if (this.questRows) patch.quest = this.filteredQuests(faction)
+    }
+    if (this.openTarget) patch.itemSaved = !!gear[this.openTarget.id]
+    this.setData(patch)
+  },
+
   dropNoticeFor(groups, lootState) {
     if (!this.dropQuery || lootState !== 'ready') return ''
+    if (this.dropFrom === 'adventure') {
+      return groups.some((b) => b.items.some((x) => x.itemId === this.dropQuery))
+        ? '' : '当前掉落表未收录这件目标装备。'
+    }
     const from = this.dropFrom === 'bis' ? '配装名单' : '掉落反查'
     return groups.some((b) => b.items.some((x) => x.itemId === this.dropQuery))
       ? '从' + from + '查看的物品已标出。'
@@ -77,53 +98,94 @@ Page({
 
   onToggleBoss(e) {
     const id = e.currentTarget.dataset.id
-    this.setData({ openBoss: this.data.openBoss === id ? '' : id, openItem: '', itemCard: null })
+    this.openTarget = null
+    this.setData({ openBoss: this.data.openBoss === id ? '' : id, openItem: '', itemCard: null, itemSaved: false })
   },
 
   onToggleItem(e) {
     const { key, item } = e.currentTarget.dataset
     const openItem = this.data.openItem === key ? '' : key
-    this.setData({ openItem, itemCard: openItem ? joinCard(this.loot, String(item || '')) : null })
+    const boss = openItem && this.data.bosses.find((b) => b.id === this.data.openBoss)
+    const row = boss && boss.items.find((r) => r.key === key)
+    this.setData(this.itemSelection(row, boss, String(item || '')))
+  },
+
+  itemSelection(row, boss, itemId) {
+    this.openTarget = row ? {
+      id: row.itemId, name: row.name, quality: row.q, dungeonId: this.data.id, dungeon: this.data.title,
+      boss: boss.other ? '' : boss.name
+    } : null
+    return {
+      openItem: row ? row.key : '',
+      itemCard: row ? joinCard(this.loot, itemId) : null,
+      itemSaved: !!(row && adventure.read().gear[row.itemId])
+    }
+  },
+
+  onAddGear() {
+    const item = this.openTarget
+    if (!item) return
+    if (adventure.read().gear[item.id]) {
+      wx.navigateTo({ url: '/pages/adventure/index' })
+      return
+    }
+    if (adventure.addGear(item)) this.setData({ itemSaved: true })
+  },
+
+  scrollToTasks() {
+    wx.pageScrollTo({ selector: '#dungeon-quests', offsetTop: -12, duration: 220 })
+  },
+
+  onPlanDungeon() {
+    if (this.data.planned) {
+      wx.navigateTo({ url: '/pages/adventure/index' })
+      return
+    }
+    if (adventure.addPlan({ id: this.data.id, name: this.data.title })) {
+      this.setData({ planned: true })
+      wx.showToast({ title: '已加入跑本计划', icon: 'none' })
+    }
+  },
+
+  pickQuestFaction(e) {
+    const faction = e.currentTarget.dataset.faction
+    if (faction === this.data.faction || !adventure.setFaction(faction)) return
+    this.setData({ faction, quest: this.filteredQuests(faction) })
+  },
+
+  filteredQuests(faction) {
+    const visible = this.questRows.filter((q) => adventure.matchesQuest(q, faction))
+    let region
+    const rows = visible.map((q) => {
+      const group = questRegion(q)
+      const header = region === group ? '' : group
+      region = group
+      return Object.assign({}, q, { header, location: q.pickupZone === group ? '' : q.pickupZone })
+    })
+    return { rows, empty: rows.length ? '' : (this.questRows.length ? '这个阵营暂无已知任务。' : '暂无任务记录。') }
   },
 
   /* 任务与详情同一次取数。页面只整理任务与接取信息，来源留在分片中。 */
   questPack(dd) {
     const q = dd && dd.quests
-    if (!q) return { rows: [], summary: '', empty: '暂无任务记录。' }
-    /* summary 判型：旧批缓存里它是 wclbox 自报的汇总对象，直接绑会渲出 [object Object]；
-       新批已在分发层拼成字符串，这里两种都接，不许对象漏到模板。 */
-    const summaryText = (s) => {
-      if (!s) return ''
-      if (typeof s === 'string') return s
-      const seg = []
-      if (s.faction) seg.push(s.faction + '阵营')
-      if (s.questCount) seg.push(s.questCount + ' 条任务')
-      if (s.xpTotal) seg.push('总经验 ' + s.xpTotal)
-      return seg.join(' · ')
-    }
-    const rows = (q.rows || []).map((x) => {
-      const seg = []
-      if (x.questLevel !== null && x.questLevel !== undefined) seg.push(x.questLevel + ' 级')
-      if (x.reqLevel !== null && x.reqLevel !== undefined) seg.push('需 ' + x.reqLevel + ' 级')
-      if (x.xp !== null && x.xp !== undefined) seg.push('经验 ' + x.xp)
+    this.questRows = ((q && q.rows) || []).map((x, i) => {
       const npc = (x.pickupNpc || '').trim()
       const zone = (x.pickupZone || '').trim()
       return {
+        key: String(i),
+        faction: x.faction || '',
+        reqLevel: x.reqLevel || 0,
+        preQuest: x.preQuest || '',
         name: x.nameCn || x.nameEn || '（任务名待核）',
         missing: !x.nameCn,
-        meta: seg.join(' · '),
         pickupNpc: npc,
-        startItem: npc ? '' : (x.startItem || '').trim(),
+        startItem: (x.startItem || '').trim(),
         pickupZone: zone,
         pickupCoords: pickupCoords(x),
         pickupMap: x.pickupMap && x.pickupMap !== zone ? x.pickupMap : ''
       }
-    })
-    return {
-      rows: rows,
-      summary: summaryText(q.summary),
-      empty: rows.length ? '' : '暂无任务记录。'
-    }
+    }).sort((a, b) => questRegion(a).localeCompare(questRegion(b)))
+    return this.filteredQuests(this.data.faction)
   },
 
   start() {
@@ -178,8 +240,10 @@ Page({
         const roster = d.data && d.data.dungeon ? d.data.dungeon.bosses || [] : []
         const lootState = l.data ? 'ready' : 'offline'
         this.loot = l.data
+        this.openTarget = null
         const bosses = this.groupDrops(roster, (l.data && l.data.drops) || [])
         const highlighted = this.followDrop && bosses.find((b) => b.items.some((x) => x.itemId === this.dropQuery))
+        const target = highlighted && this.dropFrom === 'adventure' && highlighted.items.find((x) => x.itemId === this.dropQuery)
         if (l.data && d.data) this.followDrop = false
         if (d.data && d.data.dungeon) {
           const g = d.data.dungeon
@@ -199,14 +263,15 @@ Page({
             mapDrawn: geo && geo.mapKind === 'addon-drawn'
           })
         }
+        const quest = this.questPack(d.data)
         this.setData({
           rows: merged,
-          quest: this.questPack(d.data),
+          quest,
+          hasFactions: this.questRows.some((q) => q.faction === '联盟' || q.faction === '部落'),
           bosses,
           bossEmpty: d.data && !bosses.length ? '这座副本还没有首领记录。' : '',
           openBoss: highlighted ? highlighted.id : this.data.openBoss,
-          openItem: '',
-          itemCard: null,
+          ...this.itemSelection(target, highlighted, this.dropQuery),
           lootState,
           highlightDrop: this.dropQuery,
           dropNotice: this.dropNoticeFor(bosses, lootState),
@@ -214,6 +279,14 @@ Page({
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',
           sourceText: d.sourceText
+        }, () => {
+          if (target) {
+            wx.pageScrollTo({ selector: '#goal-drop-' + target.key, offsetTop: -12, duration: 220 })
+            return
+          }
+          if (!this.wantTasks) return
+          this.wantTasks = false
+          this.scrollToTasks()
         })
         return null
       })
@@ -271,6 +344,10 @@ Page({
     }
   }
 })
+
+function questRegion(row) {
+  return row.pickupMap || row.pickupZone || (row.startItem ? '物品开启' : '接取地点待实测')
+}
 
 function pickupCoords(row) {
   const { pickupX: x, pickupY: y } = row

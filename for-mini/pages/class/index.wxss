@@ -288,8 +288,8 @@
   background: var(--gold-glow);
 }
 
-/* 现在点不了的：整格压暗。仍然可点长按看"为什么点不了"，所以不隐藏、不 disabled */
-.tcell-off {
+/* 未点且当前不能加点的节点退后，让已选方案即使点满也能读清。 */
+.tcell-off:not(.tcell-on) {
   opacity: 0.42;
 }
 

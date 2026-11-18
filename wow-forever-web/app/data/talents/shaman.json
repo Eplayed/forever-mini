@@ -2,7 +2,7 @@
  "classId": "shaman",
  "classNameCn": "萨满祭司",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-16（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -405,8 +405,8 @@
      "column": 1,
      "maxRanks": 1,
      "nameCn": "雷霆召唤",
-     "nameAlt": "熔岩爆裂",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -697,31 +697,6 @@
      "changeState": "added"
     },
     {
-     "id": "shaman-1-强化幽魂之狼",
-     "tier": 1,
-     "column": 2,
-     "maxRanks": 2,
-     "nameCn": "强化幽魂之狼",
-     "nameAlt": "强化闪电之盾",
-     "nameConflict": true,
-     "nameVerified": false,
-     "nameSources": [
-      "fengshen"
-     ],
-     "iconKey": null,
-     "requires": [],
-     "level": "L2",
-     "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      }
-     ],
-     "upstreamId": "calc-shaman-enhancement-improved-lightning-shield",
-     "posMismatch": true
-    },
-    {
      "id": "shaman-1-强化闪电之盾",
      "tier": 1,
      "column": 3,
@@ -779,7 +754,7 @@
       }
      ],
      "upstreamId": "calc-shaman-enhancement-elemental-weapons",
-     "changeState": "moved"
+     "changeState": "modified"
     },
     {
      "id": "shaman-1-萨满专注",
@@ -939,7 +914,7 @@
      "changeState": "modified"
     },
     {
-     "id": "shaman-1-强化幽魂之狼-r3c3",
+     "id": "shaman-1-强化幽魂之狼",
      "tier": 3,
      "column": 3,
      "maxRanks": 2,
@@ -948,12 +923,18 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_nature_spiritwolf",
      "requires": [],
      "level": "L2",
      "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/shaman.html",
@@ -1348,7 +1329,7 @@
       }
      ],
      "upstreamId": "calc-shaman-restoration-ancestral-healing",
-     "changeState": "moved"
+     "changeState": "modified"
     },
     {
      "id": "shaman-2-治疗专注",
@@ -1639,9 +1620,9 @@
   }
  ],
  "stats": {
-  "nodes": 51,
-  "nameConflict": 2,
-  "onlyInOneSource": 2
+  "nodes": 50,
+  "nameConflict": 1,
+  "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1649,7 +1630,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/shaman",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-05"
+   "checkedAt": "2026-11-16"
   }
  ]
 }

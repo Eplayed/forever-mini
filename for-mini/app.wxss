@@ -22,6 +22,29 @@ page {
   --gold-line-soft: rgba(200, 163, 92, 0.15);
   --gold-glow: rgba(200, 163, 92, 0.12);
 
+  /* 首页与配装共用的锻金面板。边、高光和阴影分层，正文仍使用全站文本色。 */
+  --forge-edge: #806644;
+  --forge-edge-active: #e1b878;
+  --forge-surface: linear-gradient(154deg, #302b25 0%, #242b35 46%, #1b2835 100%);
+  --forge-surface-active: linear-gradient(154deg, #5a4025 0%, #382f25 49%, #242b34 100%);
+  --forge-shade: linear-gradient(180deg, #191d23 0%, #151f2b 100%);
+  --forge-line: linear-gradient(90deg, transparent, #bd9258 18%, #f0d49b 50%, #bd9258 82%, transparent);
+  --forge-inset: inset 0 1rpx 0 rgba(255, 220, 165, .22), inset 0 -10rpx 24rpx rgba(7, 12, 19, .28);
+  --forge-shadow: 0 8rpx 20rpx rgba(4, 9, 15, .32);
+  --forge-focus: 0 0 16rpx rgba(243, 184, 104, .24);
+  --forge-pop: linear-gradient(155deg, #2f2c27, #1d2a38 75%);
+  --forge-glint: #fff0c6;
+  --forge-q2-glow: rgba(30, 255, 0, .19);
+  --forge-q3-glow: rgba(74, 163, 255, .26);
+  --forge-q4-glow: rgba(163, 53, 238, .30);
+  --forge-q5-glow: rgba(255, 128, 0, .27);
+  --forge-q4-text: #d79bff;
+  --forge-alliance-glow: radial-gradient(ellipse at 50% 68%, rgba(73, 174, 233, .17), transparent 70%);
+  --forge-horde-glow: radial-gradient(ellipse at 50% 68%, rgba(210, 90, 80, .19), transparent 70%);
+  --forge-press: 110ms;
+  --forge-enter: 200ms;
+  --forge-ease: cubic-bezier(.2, .72, .28, 1);
+
   --jade: #0f6064;
   --jade-line: #73aeb0;
   --azure: #49aee9;

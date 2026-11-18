@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-16（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -800,12 +800,18 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_shadow_unholyfrenzy",
      "requires": [],
      "level": "L1",
      "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -878,21 +884,23 @@
      "posMismatch": true
     },
     {
-     "id": "warrior-1-狂怒-r3c2",
+     "id": "warrior-1-鲁莽挥击",
      "tier": 3,
      "column": 2,
      "maxRanks": 1,
-     "nameCn": "狂怒",
-     "nameAlt": "鲁莽挥击",
-     "nameConflict": true,
-     "nameVerified": true,
+     "nameCn": "鲁莽挥击",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": false,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_warrior_punishingblow",
-     "requires": [],
-     "level": "L1",
+     "requires": [
+      "warrior-1-血之狂热"
+     ],
+     "level": "L2",
      "provenance": [
       {
        "type": "fan_db",
@@ -935,7 +943,7 @@
       }
      ],
      "upstreamId": "calc-warrior-fury-improved-execute",
-     "changeState": "moved"
+     "changeState": "modified"
     },
     {
      "id": "warrior-1-强化狂暴之怒",
@@ -1009,6 +1017,7 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
+      "fengshen",
       "nieyi"
      ],
      "iconKey": "racial_troll_berserk",
@@ -1017,6 +1026,11 @@
      ],
      "level": "L2",
      "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -1102,9 +1116,7 @@
       "nieyi"
      ],
      "iconKey": "ability_whirlwind",
-     "requires": [
-      "warrior-1-狂怒-r3c2"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
       {
@@ -1736,8 +1748,8 @@
  ],
  "stats": {
   "nodes": 54,
-  "nameConflict": 2,
-  "onlyInOneSource": 2
+  "nameConflict": 0,
+  "onlyInOneSource": 0
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1745,7 +1757,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-05"
+   "checkedAt": "2026-11-16"
   }
  ]
 }

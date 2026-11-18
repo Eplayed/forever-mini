@@ -8,9 +8,11 @@ const path = require('path');
 
 const WEB = path.resolve(__dirname, '..');
 const DATA = path.join(WEB, "app", "data");
+const IMG = path.join(WEB, 'app', 'img');
 const MINI = path.resolve(WEB, '..', 'for-mini');
 const OSS_DIR = path.join(MINI, 'oss-preview');
 const SNAP_DIR = path.join(MINI, 'data');
+const leveling = require('./leveling-builds')(DATA);
 
 /* 词条快照挑多少条（2026-10-22 从 60 降到 48；2026-11-03 再降到 36）：
    主包 60 KB 这一格是硬的，里面现在装了四样东西——词条样本、38 本副本索引、
@@ -528,13 +530,27 @@ const mBytes = writeSnapshot('forever-meta-snapshot.js', miniMeta);
 const dBytes = writeSnapshot('forever-dungeon-snapshot.js', snapshotDungeonIndex);
 const cBytes = writeSnapshot('forever-class-snapshot.js', miniClassSnapshot);
 const nBytes = writeSnapshot('forever-names-snapshot.js', miniNamesSnapshot);
-const snapBytes = gBytes + mBytes + dBytes + cBytes + nBytes;
+const levelingBytes = writeSnapshot('forever-leveling-preview.js', leveling.featured);
+const snapBytes = gBytes + mBytes + dBytes + cBytes + nBytes + levelingBytes;
 const kb = (b) => (b / 1024).toFixed(1) + ' KB';
 
 if (snapBytes > SNAPSHOT_BUDGET_KB * 1024) {
   console.error(`✗ 快照体积 ${kb(snapBytes)}（词条 ${kb(gBytes)} + meta ${kb(mBytes)} + 副本索引 ${kb(dBytes)} + 职业 ${kb(cBytes)} + 起名 ${kb(nBytes)}）超过主包预算 ${SNAPSHOT_BUDGET_KB} KB，减少 SNAPSHOT_TERMS 或 NAMES_SNAPSHOT_PER_TALENT，不抬预算`);
   process.exit(1);
 }
+
+const levelingPackage = path.join(MINI, 'pages', 'leveling');
+const levelingIcons = path.join(levelingPackage, 'icons');
+ensureDir(levelingIcons);
+const list = leveling.builds.map(({ trees, ...build }) => build);
+const keys = new Set(list.flatMap(({ classIconKey, mainIconKey }) => [classIconKey, mainIconKey]));
+for (const key of keys) {
+  const file = key + '.jpg';
+  fs.copyFileSync(path.join(IMG, 'icons', file), path.join(levelingIcons, file));
+}
+const levelingBody = '/* 自动生成，勿手改：node wow-forever-web/tools/export-mini.js */\nmodule.exports = '
+  + JSON.stringify({ builds: list, source: leveling.source }) + ';\n';
+fs.writeFileSync(path.join(levelingPackage, 'builds.js'), levelingBody);
 
 console.log(`导出完成 → ${path.relative(process.cwd(), MINI)}`);
 console.log(`  oss-preview/glossary.json  ${kb(fs.statSync(path.join(OSS_DIR, 'glossary.json')).size)}（${glossary.items.length} 条）`);

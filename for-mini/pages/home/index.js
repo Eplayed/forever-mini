@@ -250,13 +250,17 @@ Page({
   },
 
   onFeaturedChange(e) {
-    if (this.data.featuredIndex !== e.detail.current) {
-      this.setData({ featuredIndex: e.detail.current })
-    }
+    this.selectFeatured(e.detail.current)
   },
 
   onFeaturedSelect(e) {
-    this.setData({ featuredIndex: Number(e.currentTarget.dataset.index) })
+    this.selectFeatured(Number(e.currentTarget.dataset.index))
+  },
+
+  selectFeatured(index) {
+    if ((index === 0 || index === 1) && index !== this.data.featuredIndex) {
+      this.setData({ featuredIndex: index })
+    }
   },
 
   /* 最近看过直接读索引快照里的那几条，不为首页再发一次网络请求 */
@@ -291,7 +295,8 @@ Page({
   },
 
   goLeveling(e) {
-    const id = e.currentTarget.dataset.id
+    const target = e && e.currentTarget
+    const id = target && target.dataset && target.dataset.id
     wx.navigateTo({ url: '/pages/leveling/index' + (id ? '?c=' + encodeURIComponent(id) : '') })
   },
 

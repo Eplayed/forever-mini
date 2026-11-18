@@ -55,7 +55,6 @@ const PORT_BASE = 9300 + (process.pid % 40) * 3;
 const MODE_PORT = { normal: PORT_BASE, tamper: PORT_BASE + 1, tamperindex: PORT_BASE + 2, min99: PORT_BASE + 3 };
 let PORT = PORT_BASE;
 const man = JSON.parse(fs.readFileSync(path.join(BUILD, 'manifest.json'), 'utf8'));
-const OSS_ORIGIN = 'https://poe2-all-class.oss-cn-hangzhou.aliyuncs.com';
 /* 五人本座数从本批索引现读：列表页默认筛五人本，断言要拿它当期望值 */
 const IDX0 = JSON.parse(fs.readFileSync(path.join(BUILD, 'builds', man.buildId, 'dungeons', 'index.json'), 'utf8'));
 const FIVE_N = IDX0.items.filter((i) => i.partySize === 5).length;
@@ -191,37 +190,43 @@ async function main() {
       counts: d.counts, cov: (d.covList || []).length, wip: (d.wip || []).length, meta: d.meta ? { counts: d.meta.counts } : null
     };
   }), 4);
-  const shot = (name) => call('截图 ' + name, () => mp.screenshot({ path: path.join(SHOT_DIR, name + '.png') }), 2);
-  const setOrigin = (v) => {
-    curOrigin = v || '';
-    return call('设 dev_origin', () => mp.evaluate((o) => {
-      if (o) { wx.setStorageSync('wow_forever_v1_dev_origin', o); } else { wx.removeStorageSync('wow_forever_v1_dev_origin'); }
-      return wx.getStorageSync('wow_forever_v1_dev_origin') || '已清';
-    }, curOrigin));
+  const settled = async (ready) => {
+    const end = Date.now() + 12000;
+    let state = await snap();
+    while (!ready(state) && Date.now() < end) {
+      await new Promise((resolve) => setTimeout(resolve, 450));
+      state = await snap();
+    }
+    return state;
   };
-  let curOrigin = '';
-  const clearStore = () => call('清 storage', () => mp.evaluate((o) => {
+  const shot = (name) => call('截图 ' + name, () => mp.screenshot({ path: path.join(SHOT_DIR, name + '.png') }), 2);
+  const setOrigin = (v) => call('设置本次会话的假 OSS', () => mp.evaluate((o) => {
+    wx.removeStorageSync('wow_forever_v1_dev_origin');
+    if (o) getApp().globalData.ossTestOrigin = o;
+    else delete getApp().globalData.ossTestOrigin;
+    return getApp().globalData.ossTestOrigin || '线上';
+  }, v));
+  const clearStore = () => call('清 storage', () => mp.evaluate(() => {
     try { wx.clearStorageSync(); } catch (e) {}
-    if (o) { wx.setStorageSync('wow_forever_v1_dev_origin', o); }
-    return wx.getStorageSync('wow_forever_v1_dev_origin') || '线上';
-  }, curOrigin));
+    return getApp().globalData.ossTestOrigin || '线上';
+  }));
 
   /* ---------- A. 断网等价场景：指针取不到 → 主包快照 ----------
      以前这一段是"直连真 bucket，赌 beta 是空的"。beta 一旦有批次（M02 已发），
      这四条就全变成假红——门禁的前提不该是"线上还没东西"。
-     改成把取数地址指到一个必然 404 的前缀：拿不到指针这件事与 beta 有没有数据无关。 */
-  process.stdout.write('\nA. 指针取不到（地址指到一个空前缀）→ 主包快照兜底\n');
-  await setOrigin(OSS_ORIGIN + '/m01-no-such-namespace');
+     用未启动的测试端口模拟断网，避免依赖线上 beta 的发布状态。 */
+  process.stdout.write('\nA. 指针取不到（本次会话测试端口未启动）→ 主包快照兜底\n');
+  await setOrigin('http://127.0.0.1:' + (PORT_BASE + 4));
   await clearStore();
   await nav('/pages/home/index');
-  let s = (await snap()) || {};
+  let s = (await settled((d) => d && d.offline === true)) || {};
   /* 首页现在只用一条顶条说"没连上"（玩家面不再印 sourceText/核对日期），
      所以这里断言 offline 标记为真——顶条由 wx:if 渲染，截图里看得见。 */
   log('首页：线上取不到 → offline 标记为真（顶条提示由界面渲染）', s && s.offline === true, JSON.stringify({ off: s && s.offline }));
   await shot('a1-home-snapshot');
 
   await nav('/pages/dungeons/index');
-  s = (await snap()) || {};
+  s = (await settled((d) => d && d.list > 0)) || {};
   /* 新 IA 默认落在五人本，全量 38 座在快照里、切「全部」才列全 */
   log('列表页：38 座全在主包快照里，默认五人本、切全部才列全', /快照/.test(String(s && s.sourceText)) && s.all === 38 && s.list === FIVE_N && !s.buildId,
     JSON.stringify({ src: s.sourceText, all: s.all, list: s.list, five: FIVE_N, b: s.buildId }));
@@ -233,12 +238,12 @@ async function main() {
   await shot('a2-dungeons-snapshot');
 
   await nav('/pages/dungeon/index?id=ragefire-chasm');
-  s = (await snap()) || {};
+  s = (await settled((d) => d && d.title)) || {};
   log('详情页：首用离线只给索引字段 + 明说详情需联网', s && s.needOnline === true && (s.bosses || []).length === 0 && !!s.title, JSON.stringify({ need: s && s.needOnline, t: s && s.title }));
   await shot('a3-detail-need-online');
 
   await nav('/pages/dungeon/index?id=no-such-dungeon');
-  s = (await snap()) || {};
+  s = (await settled((d) => d && d.notFound)) || {};
   log('详情页：不存在的 id 走"没收录"分支并给返回入口', s && s.notFound === true && /no-such-dungeon/.test(String(s.id)), JSON.stringify({ nf: s && s.notFound, id: s && s.id }));
   await shot('a4-detail-unknown-id');
 
@@ -466,7 +471,7 @@ async function main() {
   process.stdout.write('\nF. 关掉假 OSS（连不上）→ 有本批缓存时是离线缓存\n');
   await stopServer();
   await nav('/pages/dungeons/index');
-  s = (await snap()) || {};
+  s = (await settled((d) => d && d.list > 0)) || {};
   log('断网有缓存：标离线缓存且默认五人本仍在', s && /离线缓存/.test(String(s.sourceText)) && s.list === FIVE_N && s.offline === true, JSON.stringify({ src: s.sourceText, n: s.list, five: FIVE_N }));
   await shot('f1-offline-cache');
 
@@ -533,8 +538,8 @@ async function main() {
 
   const homeMarkup = fs.readFileSync(path.join(REPO, 'for-mini/pages/home/index.wxml'), 'utf8');
   const spotlight = homeMarkup.match(/<swiper [^>]+>[\s\S]*?<\/swiper>/);
-  log('首页人口普查是首张焦点卡，副本可横滑切换，焦点区无需自动轮播',
-    !!spotlight && /bindtap="goCensus"[\s\S]*bindtap="goDungeons"/.test(spotlight[0])
+  log('首页副本手册是首张焦点卡，人口普查可横滑切换，焦点区无需自动轮播',
+    !!spotlight && /bindtap="goDungeons"[\s\S]*bindtap="goCensus"/.test(spotlight[0])
       && !/autoplay=/.test(spotlight[0]), '');
   const censusCheck = await call('点人口普查卡', () => mp.evaluate(() => new Promise((res) => {
     getCurrentPages().pop().goCensus();
@@ -729,7 +734,7 @@ async function main() {
     const p = getCurrentPages().pop();
     const keep = p.index.posterLink;
     p.index.posterLink = {};
-    p.showPoster();
+    p.showPoster(true);
     const d = p.data;
     p.index.posterLink = keep;
     return { src: d.posterSrc, state: d.posterState, err: d.posterErr, text: d.posterText,
@@ -743,12 +748,12 @@ async function main() {
   /* 图是异步的：切走之后旧那张的 load 回调才回来，也不许改当前这一格的状态 */
   const m4 = await call('演一次迟到的 load 回调', () => mp.evaluate(() => {
     const p = getCurrentPages().pop();
+    p.showPoster(true);
     const cur = p.data.posterSrc;
-    p._posterKey = '别的套|horde';
-    p.onPosterLoad();
+    const request = p.data.posterRequest;
+    p.onPosterLoad({ currentTarget: { dataset: { request: request - 1 } } });
     const stale = { state: p.data.posterState, src: p.data.posterSrc };
-    p._posterKey = p.data.setId + '|' + p.data.fac;
-    p.onPosterLoad();
+    p.onPosterLoad({ currentTarget: { dataset: { request } } });
     const fresh = { state: p.data.posterState, src: p.data.posterSrc };
     return { cur: cur, stale: stale, fresh: fresh };
   }), 2);
@@ -854,10 +859,32 @@ async function main() {
       && !/bindtap="showModel"|bindtap="hideModel"/.test(bisWxml)
       && !/<bis-3d|xr-scene|modelSrc|stageAspect|onModelStatus/.test(bisWxml)
       && /class="stage-art"/.test(bisWxml) && /mode="aspectFit"/.test(bisWxml), '');
-  log('掉落查询与 BIS 配装在常用区，角色起名在更多工具区',
-    /class="grid priority"[\s\S]*bindtap="goLoots"[\s\S]*bindtap="goBis"[\s\S]*class="grid tools"[\s\S]*bindtap="goNamer"/.test(homeMarkup)
+  log('常用区依次为配装、掉落、宏命令、练级天赋，起名位于更多工具，配装保留网格入口',
+    /class="grid priority"[\s\S]*bindtap="goBis"[\s\S]*bindtap="goLoots"[\s\S]*bindtap="goMacros"[\s\S]*bindtap="goLeveling"[\s\S]*class="grid tools"[\s\S]*bindtap="goNamer"/.test(homeMarkup)
       && /img\/home\/bis-icon\.png/.test(homeMarkup)
-      && /img\/home\/namer-icon\.png/.test(homeMarkup), '');
+      && /img\/home\/namer-icon\.png/.test(homeMarkup) && !/class="[^"]*\bbis-card\b/.test(homeMarkup), '');
+  log('顶部阶段切换先于共用职业条，取消三个旧锚点，保留原有装备锚点',
+    /class="stage-switch"[\s\S]*bindtap="pickStage"[\s\S]*bindtap="pickClass"/.test(bisWxml)
+      && !/bindtap="(?:goBis60|goRaidSets|goItemSets|pickBis60Class|pickRaidCls)"/.test(bisWxml)
+      && /bindtap="goEquipment"/.test(bisWxml), '');
+  await nav('/pages/bis/index?stage=60&c=warrior');
+  const stages = await call('配装阶段与跨阶段职业', () => mp.evaluate(() => {
+    const p = getCurrentPages().pop();
+    if (!p || !p.index) return null;
+    const before = { stage: p.data.stageKey, cls: p.data.bis60Cls, rows: p.data.activeBis60 && p.data.activeBis60.rows.length };
+    p.pickClass({ currentTarget: { dataset: { cls: 'mage' } } });
+    const changed = { cls: p.data.bis60Cls, specs: p.data.bis60SpecList.length };
+    p.pickStage({ currentTarget: { dataset: { stage: 't1' } } });
+    const raid = { cls: p.data.raidCls, count: p.data.filteredRaidSets.length };
+    p.pickStage({ currentTarget: { dataset: { stage: 'sets' } } });
+    return { counts: p.data.stages.map((s) => s.count), expected: ['sets', 'bis60Sets', 'raidSets', 'itemSets'].map((key) => p.index[key].length),
+      before, changed, raid, activeSet: !!p.data.activeItemSet, query: p.onShareTimeline().query };
+  }), 2);
+  log('阶段计数取真实索引，直达团前、跨阶段职业同步，图鉴和阶段分享仍可用',
+    !!stages && stages.counts.join(',') === stages.expected.join(',')
+      && stages.before.stage === '60' && stages.before.cls === 'warrior' && stages.before.rows > 0
+      && stages.changed.cls === 'mage' && stages.changed.specs === 3 && stages.raid.cls === 'mage'
+      && stages.raid.count > 0 && stages.activeSet && /(?:^|&)stage=sets(?:&|$)/.test(stages.query), JSON.stringify(stages));
 
   /* ---------- I. 远程功能开关（2026-10-27 站主："暂时先不公开，想公开了不用发版就能公开"） ----------
      三段：① 基线（专业关、宏开）→ 关着的页只说"还没开放"且不取数，首页那张卡不在、宏那张在；
@@ -1038,19 +1065,24 @@ async function main() {
         pfWxml.replace(/\s+/g, ' ').replace('<view class="card" wx:if="{{', '{{'))
       || /没有匹配条目/.test(pfWxml) && /!totalRecipes && !nodeRows.length && !sel.unparsed/.test(pfWxml),
     JSON.stringify(pfNone));
-  const pfNew = await call('只看无限新增', () => mp.evaluate(() => new Promise((res) => {
+  const pfNew = await call('只看无限新增', () => mp.evaluate(async () => {
     const p = getCurrentPages().pop();
+    const rendered = async (ready) => {
+      for (let tries = 0; tries < 10; tries += 1) {
+        const d = p.data;
+        if (ready(d) && d.bands.reduce((n, b) => n + b.count, 0) === d.totalRecipes
+          && d.shown === Math.min(60, d.totalRecipes)) return d;
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      }
+      return p.data;
+    };
     p.onSearch({ detail: { value: '' } });
-    setTimeout(() => {
-      const all = p.data.totalRecipes;
-      p.toggleNew();
-      setTimeout(() => {
-        const d = p.data || {};
-        res({ all, after: d.totalRecipes, on: !!d.onlyNew,
-          allNew: (d.bands || []).every((b) => b.rows.every((r) => r.isNew)) });
-      }, 500);
-    }, 400);
-  })), 3);
+    const all = (await rendered((d) => d.q === '' && d.totalRecipes > 0)).totalRecipes;
+    p.toggleNew();
+    const d = await rendered((state) => state.onlyNew && state.totalRecipes < all);
+    return { all, after: d.totalRecipes, on: !!d.onlyNew,
+      allNew: d.shown > 0 && d.bands.every((b) => b.rows.every((r) => r.isNew)) };
+  }), 3);
   log('「只看无限新增」真在筛，且筛出来的每一条都带"新"角标',
     !!pfNew && pfNew.on === true && pfNew.after > 0 && pfNew.after < pfNew.all && pfNew.allNew === true,
     JSON.stringify(pfNew));
@@ -1237,31 +1269,47 @@ async function main() {
     else skipFiles[x.value] = 1
   });
   ['project.config.json', 'project.private.config.json', '.gitignore'].forEach((v) => { skipFiles[v] = 1; });
-  let pkgBytes = 0;
-  (function walk(dir) {
+  const subRoots = new Set((appjson.subPackages || appjson.subpackages || []).map((p) => path.join(MINI, p.root)));
+  let mainBytes = 0;
+  let subBytes = 0;
+  (function walk(dir, subpackage) {
     fs.readdirSync(dir, { withFileTypes: true }).forEach((e) => {
       if (e.name.startsWith('.')) return;
       const p = path.join(dir, e.name);
-      if (e.isDirectory()) { if (!skipDirs[e.name]) walk(p); return; }
-      if (!skipFiles[e.name]) pkgBytes += fs.statSync(p).size;
+      if (e.isDirectory()) {
+        if (!skipDirs[e.name]) walk(p, subpackage || subRoots.has(p));
+        return;
+      }
+      if (skipFiles[e.name]) return;
+      const bytes = fs.statSync(p).size;
+      if (subpackage) subBytes += bytes;
+      else mainBytes += bytes;
     });
   })(MINI);
-  process.stdout.write('  · 自算代码包 ' + (pkgBytes / 1024).toFixed(1) + ' KB（主包上限 2 MB）\n');
-  log('代码包体积在预算内（< 512 KB）', pkgBytes < 512 * 1024, (pkgBytes / 1024).toFixed(1) + ' KB');
+  process.stdout.write('  · 自算分包合计 ' + (subBytes / 1024).toFixed(1) + ' KB\n');
+  log('主包体积在预算内（< 512 KB）', mainBytes < 512 * 1024, (mainBytes / 1024).toFixed(1) + ' KB');
 
-  await setOrigin('');
-  await clearStore();
   fs.mkdirSync(SHOT_TARGET, { recursive: true });
   fs.readdirSync(SHOT_DIR).forEach((f) => fs.copyFileSync(path.join(SHOT_DIR, f), path.join(SHOT_TARGET, f)));
   process.stdout.write('截图已拷到 ' + SHOT_TARGET + '（' + fs.readdirSync(SHOT_DIR).length + ' 张）\n');
   fs.writeFileSync('/tmp/mp-m01-results.json', JSON.stringify({ buildId: B, results }, null, 1));
   const bad = results.filter((r) => !r.pass);
   process.stdout.write('\n通过 ' + (results.length - bad.length) + ' / ' + results.length + (bad.length ? ' · 未过：' + bad.map((b) => b.name).join('、') : '') + '\n');
-  await mp.disconnect();
-  process.exit(bad.length ? 1 : 0);
+  return bad.length ? 1 : 0;
 }
 
-main().catch((e) => {
+main().finally(async () => {
+  try {
+    if (mp) await T(mp.evaluate(() => {
+      delete getApp().globalData.ossTestOrigin;
+      wx.removeStorageSync('wow_forever_v1_dev_origin');
+      return true;
+    }), 10000, '清理测试取数地址');
+  } finally {
+    if (live) live.kill();
+    if (mp) await mp.disconnect();
+  }
+}).then((code) => process.exit(code)).catch((e) => {
   process.stdout.write('\n脚本异常：' + (e && e.stack ? e.stack : e) + '\n');
   fs.writeFileSync('/tmp/mp-m01-results.json', JSON.stringify({ results }, null, 1));
   process.exit(2);

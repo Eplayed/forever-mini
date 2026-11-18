@@ -46,15 +46,15 @@ const SOURCE_TEXT = {
 const BUILD_ID_RE = /^[a-f0-9]{12}$/
 const ETAG_RE = /^[0-9A-F]{32}$/
 
-/* 开发者工具用的取数地址覆盖：storage 里写 wow_forever_v1_dev_origin = http://127.0.0.1:8899
-   就改打本地假 OSS（tools/oss-fake-server.js 起的那一个），用来验 live 路径与 ETag 校验。
-   为什么放 storage 而不是编译期常量：线上真机这个 key 不存在，走的是原来的 OSS_ORIGIN；
-   而且微信线上域名白名单只放 https 的备案域，http://127.0.0.1 在真机上根本发不出去。 */
+/* 本地假 OSS 由自动化显式注入，只在当前开发者工具会话有效。 */
 const DEV_ORIGIN_KEY = CACHE_PREFIX + 'dev_origin'
 function origin() {
   try {
-    const o = wx.getStorageSync(DEV_ORIGIN_KEY)
-    if (o && /^(https?:)?\/\//.test(String(o))) return String(o).replace(/\/+$/, '')
+    if (wx.getDeviceInfo().platform === 'devtools') {
+      const app = getApp()
+      const value = app && app.globalData && app.globalData.ossTestOrigin
+      if (typeof value === 'string' && /^http:\/\/127\.0\.0\.1:\d{1,5}$/.test(value)) return value
+    }
   } catch (error) {}
   return OSS_ORIGIN
 }
@@ -433,7 +433,8 @@ const SHARD_SPECS = {
 
 function loadKey(kind, opts) {
   const options = opts || {}
-  return loadPointer(options.env).then((p) => {
+  const pointer = options.pointer ? Promise.resolve(options.pointer) : loadPointer(options.env)
+  return pointer.then((p) => {
     const fallback = options.fallback || null
     if (!p.manifest) {
       return {
@@ -739,6 +740,7 @@ function sourceLabel(r) {
 module.exports = {
   ACTIVE_ENV,
   CACHE_PREFIX,
+  DEV_ORIGIN_KEY,
   CLIENT_SCHEMA_VERSION,
   NAMESPACES,
   OSS_ORIGIN,

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/adventure/index",
     "pages/dungeons/index",
     "pages/classes/index",
     "pages/dungeon/index",
@@ -16,6 +17,9 @@
     "pages/loots/index",
     "pages/glossary/index",
     "pages/guide/index"
+  ],
+  "subPackages": [
+    { "root": "pages/leveling", "pages": ["index"] }
   ],
   "window": {
     "navigationBarTitleText": "跑本助手",

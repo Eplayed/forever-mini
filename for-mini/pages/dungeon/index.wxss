@@ -387,3 +387,10 @@
   color: var(--gold-hi);
   white-space: nowrap;
 }
+
+.goal-button { display: inline-flex; align-items: center; justify-content: center; min-height: 80rpx; margin: 0; padding: 8rpx 16rpx; border: 1rpx solid var(--gold-line); border-radius: 8rpx; background: var(--sunk); color: var(--gold-hi); font-size: 24rpx; line-height: 1.35; white-space: nowrap; }
+.goal-button::after { border: 0; }
+.loot-details .goal-button, .plan-actions { margin-top: 12rpx; }
+.plan-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12rpx; }
+.plan-actions .faction-on { border-color: var(--gold-deep); background: var(--gold-glow); }
+.quest-region { margin: 20rpx 0 8rpx; color: var(--gold-hi); font-size: 24rpx; font-weight: 700; }

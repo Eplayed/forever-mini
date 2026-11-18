@@ -13,73 +13,85 @@
   </view>
 
   <view class="adventure-card">
-    <view class="adventure-main" aria-role="button" bindtap="goAdventure">
+    <view class="adventure-main" aria-role="button" bindtap="goAdventure" hover-class="entry-pressed">
       <image class="adventure-book" src="/img/home/adventure-book.jpg" mode="aspectFill" aria-hidden="true" />
       <view class="adventure-copy">
         <view class="adventure-title">我的冒险清单</view>
         <view class="adventure-detail">{{adventurePending ? adventurePending + ' 件想要的装备' : '安排下次跑本与装备目标'}}</view>
       </view>
-      <text aria-hidden="true">›</text>
+      <text class="adventure-arrow" aria-hidden="true">›</text>
     </view>
-    <view wx:if="{{adventureNext}}" class="adventure-continue" aria-role="button" data-id="{{adventureNext.id}}" bindtap="continueAdventure">
+    <view wx:if="{{adventureNext}}" class="adventure-continue" aria-role="button" data-id="{{adventureNext.id}}" bindtap="continueAdventure" hover-class="entry-pressed">
       <text>{{adventurePlanned ? '首选副本' : '继续上次副本'}}</text><text class="adventure-dungeon">{{adventureNext.name || adventureNext.title}} ›</text>
     </view>
   </view>
 
-  <swiper class="spotlight" current="{{featuredIndex}}" duration="320" bindchange="onFeaturedChange">
+  <swiper class="spotlight" current="{{featuredIndex}}" duration="0" bindchange="onFeaturedChange">
     <swiper-item>
-      <view class="feature feature-census" bindtap="goCensus">
-        <image wx:if="{{bgUrl}}" class="feature-art" src="{{bgUrl}}" mode="aspectFill" data-k="bg" binderror="onArtError" />
+      <view class="feature feature-dungeons {{featuredIndex === 0 ? 'feature-selected' : ''}}" aria-role="button" bindtap="goDungeons">
+        <image wx:if="{{cardBg.dungeons}}" class="feature-art" src="{{cardBg.dungeons}}" mode="aspectFill" data-k="dungeons" binderror="onArtError" />
         <view class="feature-scrim"></view>
         <view class="feature-body">
-          <text class="feature-tag">无限服</text>
-          <view class="feature-title">人口普查</view>
-          <view class="feature-desc">阵营比例与职业分布</view>
-          <view class="feature-cta">查看普查 <text>›</text></view>
+          <view class="feature-title">副本手册</view>
+          <view class="feature-desc">路线 · 首领掉落 · 任务坐标</view>
+          <view class="feature-cta">打开手册 <text aria-hidden="true">›</text></view>
         </view>
       </view>
     </swiper-item>
     <swiper-item>
-      <view class="feature feature-dungeons" bindtap="goDungeons">
-        <image wx:if="{{cardBg.dungeons}}" class="feature-art" src="{{cardBg.dungeons}}" mode="aspectFill" data-k="dungeons" binderror="onArtError" />
+      <view class="feature feature-census {{featuredIndex === 1 ? 'feature-selected' : ''}}" aria-role="button" bindtap="goCensus">
+        <image wx:if="{{bgUrl}}" class="feature-art" src="{{bgUrl}}" mode="aspectFill" data-k="bg" binderror="onArtError" />
         <view class="feature-scrim"></view>
         <view class="feature-body">
-          <text class="feature-tag">五人副本</text>
-          <view class="feature-title">副本手册</view>
-          <view class="feature-desc">路线、首领掉落与任务坐标</view>
-          <view class="feature-cta">查副本 <text>›</text></view>
+          <view class="feature-title">人口普查</view>
+          <view class="feature-desc">阵营比例与职业分布</view>
+          <view class="feature-cta">查看普查 <text aria-hidden="true">›</text></view>
         </view>
       </view>
     </swiper-item>
   </swiper>
   <view class="feature-tabs">
-    <button class="feature-tab {{featuredIndex === 0 ? 'feature-tab-on' : ''}}" data-index="0" bindtap="onFeaturedSelect">人口普查</button>
-    <button class="feature-tab {{featuredIndex === 1 ? 'feature-tab-on' : ''}}" data-index="1" bindtap="onFeaturedSelect">副本手册</button>
+    <button class="feature-tab {{featuredIndex === 0 ? 'feature-tab-on' : ''}}" data-index="0" bindtap="onFeaturedSelect" hover-class="entry-pressed" aria-pressed="{{featuredIndex === 0}}">副本手册</button>
+    <button class="feature-tab {{featuredIndex === 1 ? 'feature-tab-on' : ''}}" data-index="1" bindtap="onFeaturedSelect" hover-class="entry-pressed" aria-pressed="{{featuredIndex === 1}}">人口普查</button>
   </view>
 
   <view class="sec-title">常用查询</view>
   <view class="grid priority">
-    <view class="entry priority-entry" bindtap="goLoots" hover-class="entry-pressed">
+    <view class="entry priority-entry priority-bis" aria-role="button" bindtap="goBis" hover-class="entry-pressed">
+      <image wx:if="{{cardBg.bis}}" class="entry-art" src="{{cardBg.bis}}" mode="aspectFill" data-k="bis" binderror="onArtError" lazy-load />
+      <view class="entry-scrim"></view>
+      <image class="entry-emblem" src="/img/home/bis-icon.png" mode="aspectFit" aria-hidden="true" />
+      <view class="entry-content">
+        <view class="entry-name">BIS配装 <text class="entry-arrow" aria-hidden="true">›</text></view>
+        <view class="entry-desc">30/60级 · T1与新套装</view>
+      </view>
+    </view>
+    <view class="entry priority-entry" aria-role="button" bindtap="goLoots" hover-class="entry-pressed">
       <image wx:if="{{cardBg.loots}}" class="entry-art" src="{{cardBg.loots}}" mode="aspectFill" binderror="onArtError" data-k="loots" lazy-load />
       <view class="entry-scrim"></view>
       <view class="entry-content">
-        <view class="entry-name">掉落查询 <text class="entry-arrow">›</text></view>
-        <view class="entry-desc">物品 · 掉落首领</view>
+        <view class="entry-name">掉落查询 <text class="entry-arrow" aria-hidden="true">›</text></view>
+        <view class="entry-desc">按物品查掉落首领</view>
       </view>
     </view>
-    <view class="entry priority-entry" bindtap="goBis" hover-class="entry-pressed">
-      <image wx:if="{{cardBg.bis}}" class="entry-art" src="{{cardBg.bis}}" mode="aspectFill" data-k="bis" binderror="onArtError" lazy-load />
+    <view wx:if="{{openMacros}}" class="entry priority-entry" aria-role="button" bindtap="goMacros" hover-class="entry-pressed">
+      <image wx:if="{{cardBg.macros}}" class="entry-art" src="{{cardBg.macros}}" mode="aspectFill" data-k="macros" binderror="onArtError" lazy-load />
       <view class="entry-scrim"></view>
-      <image class="entry-emblem" src="/img/home/bis-icon.png" mode="aspectFit" />
       <view class="entry-content">
-        <view class="entry-name">BIS配装 <text class="entry-arrow">›</text></view>
-        <view class="entry-desc">30/60级配装 · T1与新套装</view>
+        <view class="entry-name">宏命令<text class="entry-arrow" aria-hidden="true">›</text></view>
+        <view class="entry-desc">按职业查找与复制</view>
+      </view>
+    </view>
+    <view class="entry priority-entry leveling-entry" aria-role="button" bindtap="goLeveling" hover-class="entry-pressed">
+      <view class="entry-content">
+        <view class="entry-name">练级天赋 <text class="entry-arrow" aria-hidden="true">›</text></view>
+        <view class="entry-desc">按职业选练级方案</view>
       </view>
     </view>
   </view>
 
   <view class="leveling-heading">
-    <view class="sec-title">练级天赋</view>
+    <view class="sec-title">天赋速览</view>
     <view class="leveling-all" aria-role="button" bindtap="goLeveling">全部职业 ›</view>
   </view>
   <view class="leveling-cards">
@@ -94,30 +106,24 @@
 
   <view class="sec-title">更多工具</view>
   <view class="grid tools">
-    <view class="entry tool-entry" bindtap="goClasses" hover-class="entry-pressed">
-      <image wx:if="{{cardBg.classes}}" class="entry-art" src="{{cardBg.classes}}" mode="aspectFill" data-k="classes" binderror="onArtError" lazy-load />
-      <view class="entry-scrim"></view>
-      <view class="entry-name">职业 <text class="entry-arrow">›</text></view>
-      <view class="entry-desc">技能书与天赋</view>
-    </view>
-    <view wx:if="{{openMacros}}" class="entry tool-entry" bindtap="goMacros" hover-class="entry-pressed">
-      <image wx:if="{{cardBg.macros}}" class="entry-art" src="{{cardBg.macros}}" mode="aspectFill" data-k="macros" binderror="onArtError" lazy-load />
-      <view class="entry-scrim"></view>
-      <view class="entry-name">宏命令 <text class="entry-arrow">›</text></view>
-      <view class="entry-desc">按职业查找与复制</view>
-    </view>
-    <view wx:if="{{openProfessions}}" class="entry tool-entry" bindtap="goProfessions" hover-class="entry-pressed">
+    <view wx:if="{{openProfessions}}" class="entry tool-entry" aria-role="button" bindtap="goProfessions" hover-class="entry-pressed">
       <image wx:if="{{cardBg.professions}}" class="entry-art" src="{{cardBg.professions}}" mode="aspectFill" data-k="professions" binderror="onArtError" lazy-load />
       <view class="entry-scrim"></view>
       <view class="entry-name">专业与配方 <text class="entry-arrow">›</text></view>
       <view class="entry-desc">技能等级与材料</view>
     </view>
-    <view wx:if="{{openNamer}}" class="entry tool-entry" bindtap="goNamer" hover-class="entry-pressed">
+    <view wx:if="{{openNamer}}" class="entry tool-entry" aria-role="button" bindtap="goNamer" hover-class="entry-pressed">
       <image wx:if="{{cardBg.namer}}" class="entry-art" src="{{cardBg.namer}}" mode="aspectFill" data-k="namer" binderror="onArtError" lazy-load />
       <view class="entry-scrim"></view>
       <image class="tool-icon" src="/img/home/namer-icon.png" mode="aspectFit" />
       <view class="entry-name">角色起名 <text class="entry-arrow">›</text></view>
       <view class="entry-desc">生成职业角色名</view>
+    </view>
+    <view class="entry tool-entry" aria-role="button" bindtap="goClasses" hover-class="entry-pressed">
+      <image wx:if="{{cardBg.classes}}" class="entry-art" src="{{cardBg.classes}}" mode="aspectFill" data-k="classes" binderror="onArtError" lazy-load />
+      <view class="entry-scrim"></view>
+      <view class="entry-name">职业 <text class="entry-arrow" aria-hidden="true">›</text></view>
+      <view class="entry-desc">技能书与天赋</view>
     </view>
   </view>
 
@@ -186,5 +192,5 @@
     </scroll-view>
   </block>
 
-  <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+  <view class="foot">非官方粉丝资料站，与游戏开发及运营方无关。</view>
 </view>

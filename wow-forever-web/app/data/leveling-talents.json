@@ -1,0 +1,775 @@
+{
+ "meta": {
+  "kind": "leveling-talent-builds",
+  "level": "L2",
+  "source": {
+   "materialId": 348075,
+   "author": "沐月（魔兽）",
+   "url": "https://www.douyin.com/note/7704236592273132843",
+   "publishedAt": "2026-11-04",
+   "checkedAt": "2026-11-12"
+  }
+ },
+ "featured": [
+  "warrior",
+  "hunter",
+  "mage"
+ ],
+ "features": {
+  "warrior": "剑盾反击\n兼顾防护",
+  "hunter": "强化宠物\n侧重续航",
+  "mage": "寒冰减速\n群怪控场",
+  "paladin": "惩戒爆击\n双手武器",
+  "rogue": "双持近战\n剑刃乱舞",
+  "priest": "暗影输出\n兼顾回蓝",
+  "shaman": "近战增强\n保留自疗",
+  "warlock": "持续伤害\n吸血续航",
+  "druid": "猎豹输出\n巨熊抗怪"
+ },
+ "mainTalents": {
+  "warrior": "warrior-0-横扫攻击",
+  "paladin": "paladin-2-解封之怒",
+  "hunter": "hunter-0-狂野怒火",
+  "mage": "mage-2-寒冰护体",
+  "rogue": "rogue-1-剑刃乱舞",
+  "priest": "priest-2-暗影形态",
+  "shaman": "shaman-1-先知之怒",
+  "warlock": "warlock-0-生命虹吸",
+  "druid": "druid-1-兽群领袖"
+ },
+ "builds": [
+  {
+   "classId": "warrior",
+   "name": "武器防护混合",
+   "sheet": 2,
+   "sha256": "5cae4f65f3fd876f81d009f7580c69dacbf9442b8646296ae6cf3794eb4703d4",
+   "complete": true,
+   "picks": [
+    [
+     "warrior-0-偏斜",
+     5
+    ],
+    [
+     "warrior-0-强化撕裂",
+     3
+    ],
+    [
+     "warrior-0-强化冲锋",
+     2
+    ],
+    [
+     "warrior-0-强化战术掌握",
+     3
+    ],
+    [
+     "warrior-0-愤怒掌控",
+     1
+    ],
+    [
+     "warrior-0-重伤",
+     3
+    ],
+    [
+     "warrior-0-穿刺打击",
+     1
+    ],
+    [
+     "warrior-0-穿刺",
+     2
+    ],
+    [
+     "warrior-0-横扫攻击",
+     1
+    ],
+    [
+     "warrior-0-武器大师",
+     5
+    ],
+    [
+     "warrior-1-残忍",
+     5
+    ],
+    [
+     "warrior-2-盾牌专精",
+     5
+    ],
+    [
+     "warrior-2-预知",
+     5
+    ],
+    [
+     "warrior-2-强化复仇",
+     3
+    ],
+    [
+     "warrior-2-强化雷霆一击",
+     3
+    ],
+    [
+     "warrior-2-破釜沉舟",
+     1
+    ],
+    [
+     "warrior-2-防御大师",
+     2
+    ],
+    [
+     "warrior-2-先锋",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "paladin",
+   "name": "惩戒暴击",
+   "sheet": 3,
+   "sha256": "9fcec3d8f0914f8a54f1f188a31d26a83f0b732a7150f78f6367153b26b20e34",
+   "complete": false,
+   "picks": [
+    [
+     "paladin-0-治疗之光",
+     3
+    ],
+    [
+     "paladin-1-盾牌专精",
+     2
+    ],
+    [
+     "paladin-2-祈福",
+     5
+    ],
+    [
+     "paladin-2-强化审判",
+     2
+    ],
+    [
+     "paladin-2-定罪",
+     3
+    ],
+    [
+     "paladin-2-神圣审判",
+     3
+    ],
+    [
+     "paladin-2-辩护",
+     1
+    ],
+    [
+     "paladin-2-命令圣印",
+     1
+    ],
+    [
+     "paladin-2-正义追击",
+     2
+    ],
+    [
+     "paladin-2-神圣仲裁者",
+     1
+    ],
+    [
+     "paladin-2-双手武器专精",
+     3
+    ],
+    [
+     "paladin-2-忏悔",
+     1
+    ],
+    [
+     "paladin-2-复仇",
+     3
+    ],
+    [
+     "paladin-2-光芒勇士",
+     5
+    ],
+    [
+     "paladin-2-解封之怒",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "hunter",
+   "name": "兽王续航",
+   "sheet": 4,
+   "sha256": "59cf662d70374d045d7c009eb9968f065d47b70a11a83dca2f000e5c78b5047a",
+   "complete": true,
+   "picks": [
+    [
+     "hunter-0-致命守护",
+     1
+    ],
+    [
+     "hunter-0-耐久训练",
+     5
+    ],
+    [
+     "hunter-0-集中火力",
+     2
+    ],
+    [
+     "hunter-0-强化复活宠物",
+     2
+    ],
+    [
+     "hunter-0-野兽迅捷",
+     1
+    ],
+    [
+     "hunter-0-狂怒释放",
+     5
+    ],
+    [
+     "hunter-0-凶暴",
+     5
+    ],
+    [
+     "hunter-0-召唤雄鹰",
+     1
+    ],
+    [
+     "hunter-0-灵魂联结",
+     2
+    ],
+    [
+     "hunter-0-胁迫",
+     1
+    ],
+    [
+     "hunter-0-野兽戒律",
+     2
+    ],
+    [
+     "hunter-0-狂乱",
+     3
+    ],
+    [
+     "hunter-0-狂野怒火",
+     1
+    ],
+    [
+     "hunter-1-致命攻击",
+     5
+    ],
+    [
+     "hunter-1-强化钉刺",
+     3
+    ],
+    [
+     "hunter-1-精确瞄准",
+     5
+    ],
+    [
+     "hunter-1-疾速杀戮",
+     2
+    ],
+    [
+     "hunter-2-强化追踪",
+     5
+    ]
+   ]
+  },
+  {
+   "classId": "mage",
+   "name": "冰霜控场",
+   "sheet": 5,
+   "sha256": "131022e1d9aca39164a322a6b7a96f29d3cf024464ec4390b116f51ddc5e9230",
+   "complete": true,
+   "picks": [
+    [
+     "mage-0-魔杖专精",
+     2
+    ],
+    [
+     "mage-0-奥术充沛",
+     3
+    ],
+    [
+     "mage-0-奥术专注",
+     5
+    ],
+    [
+     "mage-2-强化寒冰箭",
+     5
+    ],
+    [
+     "mage-2-精准",
+     3
+    ],
+    [
+     "mage-2-寒冰碎片",
+     5
+    ],
+    [
+     "mage-2-霜寒刺骨",
+     3
+    ],
+    [
+     "mage-2-极寒冰霜",
+     3
+    ],
+    [
+     "mage-2-冰霜导能",
+     3
+    ],
+    [
+     "mage-2-强化暴风雪",
+     1
+    ],
+    [
+     "mage-2-冰枪术",
+     1
+    ],
+    [
+     "mage-2-极寒延伸",
+     2
+    ],
+    [
+     "mage-2-寒冰屏障",
+     1
+    ],
+    [
+     "mage-2-碎冰",
+     3
+    ],
+    [
+     "mage-2-强化冰锥术",
+     3
+    ],
+    [
+     "mage-2-急速冷却",
+     1
+    ],
+    [
+     "mage-2-寒冰指",
+     2
+    ],
+    [
+     "mage-2-深冬之寒",
+     4
+    ],
+    [
+     "mage-2-寒冰护体",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "rogue",
+   "name": "战斗反击",
+   "sheet": 6,
+   "sha256": "ec9a65be19c94b90246f11ec28ba257cb71052f56d2b278e49fb8a70dac394c2",
+   "complete": false,
+   "picks": [
+    [
+     "rogue-0-冷酷攻击",
+     2
+    ],
+    [
+     "rogue-0-恶意",
+     5
+    ],
+    [
+     "rogue-0-无情",
+     2
+    ],
+    [
+     "rogue-0-强化切割",
+     3
+    ],
+    [
+     "rogue-0-精力",
+     2
+    ],
+    [
+     "rogue-0-血液飞溅",
+     1
+    ],
+    [
+     "rogue-0-致命偷袭",
+     2
+    ],
+    [
+     "rogue-1-致命一击",
+     3
+    ],
+    [
+     "rogue-1-高效打击",
+     2
+    ],
+    [
+     "rogue-1-偏斜",
+     3
+    ],
+    [
+     "rogue-1-精确",
+     3
+    ],
+    [
+     "rogue-1-强化疾跑",
+     1
+    ],
+    [
+     "rogue-1-耐久",
+     2
+    ],
+    [
+     "rogue-1-还击",
+     1
+    ],
+    [
+     "rogue-1-完美处刑",
+     1
+    ],
+    [
+     "rogue-1-武器专家",
+     2
+    ],
+    [
+     "rogue-1-侵略",
+     3
+    ],
+    [
+     "rogue-1-双武器专精",
+     2
+    ],
+    [
+     "rogue-1-剑刃乱舞",
+     1
+    ],
+    [
+     "rogue-1-劈斩",
+     5
+    ]
+   ]
+  },
+  {
+   "classId": "priest",
+   "name": "戒律暗影",
+   "sheet": 7,
+   "sha256": "d487c6448a8cd68736bf3f48c6a33fc7144dda83e871cecd91171a71a137d057",
+   "complete": true,
+   "picks": [
+    [
+     "priest-0-魔杖专精",
+     2
+    ],
+    [
+     "priest-0-双生戒律",
+     5
+    ],
+    [
+     "priest-0-心灵之力",
+     5
+    ],
+    [
+     "priest-0-强化真言术盾",
+     3
+    ],
+    [
+     "priest-0-冥想",
+     3
+    ],
+    [
+     "priest-0-灵魂守护",
+     1
+    ],
+    [
+     "priest-2-暗影集中",
+     5
+    ],
+    [
+     "priest-2-强化心灵震爆",
+     5
+    ],
+    [
+     "priest-2-强化暗言术痛",
+     2
+    ],
+    [
+     "priest-2-暗影延伸",
+     2
+    ],
+    [
+     "priest-2-精神鞭笞",
+     1
+    ],
+    [
+     "priest-2-强化精神鞭笞",
+     2
+    ],
+    [
+     "priest-2-黑暗启发",
+     5
+    ],
+    [
+     "priest-2-吸血鬼的拥抱",
+     1
+    ],
+    [
+     "priest-2-暗影之波",
+     2
+    ],
+    [
+     "priest-2-噬灵传染",
+     1
+    ],
+    [
+     "priest-2-黑暗",
+     5
+    ],
+    [
+     "priest-2-暗影形态",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "shaman",
+   "name": "增强兼自疗",
+   "sheet": 8,
+   "sha256": "233fcbcb816ece05d6c3e4453149a9ff8d0381c224f8cc564fcae584c6d89939",
+   "complete": true,
+   "picks": [
+    [
+     "shaman-1-雷鸣猛击",
+     5
+    ],
+    [
+     "shaman-1-先祖知识",
+     5
+    ],
+    [
+     "shaman-1-聪慧",
+     3
+    ],
+    [
+     "shaman-1-萨满专注",
+     1
+    ],
+    [
+     "shaman-1-预知",
+     3
+    ],
+    [
+     "shaman-1-乱舞",
+     5
+    ],
+    [
+     "shaman-1-风暴打击",
+     1
+    ],
+    [
+     "shaman-1-强化幽魂之狼",
+     2
+    ],
+    [
+     "shaman-1-灵魂武器",
+     1
+    ],
+    [
+     "shaman-1-精神敏锐",
+     2
+    ],
+    [
+     "shaman-1-强化风暴打击",
+     2
+    ],
+    [
+     "shaman-1-先知之怒",
+     1
+    ],
+    [
+     "shaman-2-潮汐集中",
+     5
+    ],
+    [
+     "shaman-2-全神贯注",
+     3
+    ],
+    [
+     "shaman-2-图腾集中",
+     5
+    ],
+    [
+     "shaman-2-强化复生",
+     2
+    ],
+    [
+     "shaman-2-治疗专注",
+     3
+    ],
+    [
+     "shaman-2-水之护盾",
+     1
+    ],
+    [
+     "shaman-2-法力之潮图腾",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "warlock",
+   "name": "痛苦持续伤害",
+   "sheet": 9,
+   "sha256": "68339968da6c72cd4d034b08605a8967da2a9f62f7cda3bdb120a31b31e1090a",
+   "complete": true,
+   "picks": [
+    [
+     "warlock-0-镇压",
+     5
+    ],
+    [
+     "warlock-0-强化腐蚀术",
+     5
+    ],
+    [
+     "warlock-0-灵魂收割",
+     2
+    ],
+    [
+     "warlock-0-强化吸取",
+     3
+    ],
+    [
+     "warlock-0-强化痛苦灾祸",
+     2
+    ],
+    [
+     "warlock-0-恶魔专注",
+     3
+    ],
+    [
+     "warlock-0-恶疾",
+     3
+    ],
+    [
+     "warlock-0-怨毒",
+     5
+    ],
+    [
+     "warlock-0-夜幕",
+     2
+    ],
+    [
+     "warlock-0-生命虹吸",
+     1
+    ],
+    [
+     "warlock-0-灵魂虹吸",
+     3
+    ],
+    [
+     "warlock-0-暗影掌握",
+     5
+    ],
+    [
+     "warlock-0-折磨",
+     1
+    ],
+    [
+     "warlock-1-恶魔之拥",
+     5
+    ],
+    [
+     "warlock-1-恶魔庇护",
+     2
+    ],
+    [
+     "warlock-1-邪能活力",
+     3
+    ],
+    [
+     "warlock-1-恶魔牺牲",
+     1
+    ]
+   ]
+  },
+  {
+   "classId": "druid",
+   "name": "野性熊猫切换",
+   "sheet": 10,
+   "sha256": "a0296f111d018249a05b46515330626cff5b520269e323045329628b9118217f",
+   "complete": true,
+   "picks": [
+    [
+     "druid-0-起源",
+     5
+    ],
+    [
+     "druid-0-自然的威严",
+     2
+    ],
+    [
+     "druid-0-自然延伸",
+     2
+    ],
+    [
+     "druid-1-凶暴",
+     5
+    ],
+    [
+     "druid-1-豹之迅捷",
+     2
+    ],
+    [
+     "druid-1-野性本能",
+     3
+    ],
+    [
+     "druid-1-野蛮冲撞",
+     2
+    ],
+    [
+     "druid-1-野蛮暴怒",
+     2
+    ],
+    [
+     "druid-1-野性冲锋",
+     1
+    ],
+    [
+     "druid-1-锋利兽爪",
+     2
+    ],
+    [
+     "druid-1-猛兽攻击",
+     3
+    ],
+    [
+     "druid-1-割伤",
+     1
+    ],
+    [
+     "druid-1-血性狂乱",
+     2
+    ],
+    [
+     "druid-1-兽群领袖",
+     1
+    ],
+    [
+     "druid-1-自然本能",
+     2
+    ],
+    [
+     "druid-1-自然反射",
+     5
+    ],
+    [
+     "druid-1-原始撕咬",
+     1
+    ],
+    [
+     "druid-2-野性之心",
+     5
+    ],
+    [
+     "druid-2-自然主义",
+     5
+    ]
+   ]
+  }
+ ]
+}

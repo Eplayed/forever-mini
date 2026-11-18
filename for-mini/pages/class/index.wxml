@@ -45,7 +45,7 @@
       <view class="btn gold" bindtap="onSpells">看{{nameCn}}的法术书 →</view>
     </view>
 
-    <view class="sec">
+    <view class="sec" id="talent-simulator">
       <view class="sec-t">天赋模拟器</view>
       <view wx:if="{{!talentLoaded}}" class="card muted">正在取天赋树…</view>
       <view wx:elif="{{!trees.length}}" class="card empty">
@@ -63,7 +63,10 @@
           </view>
         </view>
         <view class="muted tsum">{{spentText || '还没加点'}}</view>
-        <view wx:if="{{fromShare}}" class="muted tsum">这是别人分享给你的一套点法，改动它就变成你自己的</view>
+        <view wx:if="{{importError}}" class="notice">{{importError}}</view>
+        <view wx:elif="{{importMode === 'leveling'}}" class="muted tsum">已带入练级推荐加点</view>
+        <view wx:elif="{{importMode === 'partial'}}" class="muted tsum">已带入练级方案的部分加点，剩余点位待核对</view>
+        <view wx:elif="{{fromShare}}" class="muted tsum">这是别人分享给你的一套点法，改动它就变成你自己的</view>
 
         <view class="tabs">
           <view class="tab {{treeTab === index ? 'tab-on' : ''}}" wx:for="{{trees}}" wx:key="name"

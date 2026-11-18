@@ -109,6 +109,17 @@ function encode(trees, state) {
   }).join('-')
 }
 
+/* 短码按节点顺序编码，跨批次先确认两边使用同一套顺序和点数上限。 */
+function layoutKey(trees) {
+  const layout = JSON.stringify(trees.map((tree) =>
+    [tree.id, tree.nodes.map((node) => [node.id, node.maxRanks])]))
+  let hash = 2166136261
+  for (let i = 0; i < layout.length; i += 1) {
+    hash = Math.imul(hash ^ layout.charCodeAt(i), 16777619)
+  }
+  return (hash >>> 0).toString(36)
+}
+
 function decode(str, trees) {
   const state = {}
   let bad = 0
@@ -145,5 +156,5 @@ function describe(trees, state) {
 
 module.exports = {
   ranksOf, treeSpent, spent, normalizeRules, tierOpen, reqMissing, canAdd,
-  add, remove, encode, decode, tiersOf, describe
+  add, remove, encode, decode, layoutKey, tiersOf, describe
 }

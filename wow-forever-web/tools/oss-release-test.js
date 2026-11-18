@@ -1737,6 +1737,48 @@ const oss = require(MINI_SERVICE);
     r1b.source === 'live' && r1b.cacheHit === true, JSON.stringify({ s: r1b.source, c: r1b.cacheHit }));
   ok('同批第二次读没有重复下载索引', hitsTo(idxNeedle) === 1, '索引被取了 ' + hitsTo(idxNeedle) + ' 次');
 
+  await step('遗留 dev_origin 不会劫持开发者工具的指针或功能开关', async () => {
+    const app = { globalData: {} };
+    const storedKey = oss.CACHE_PREFIX + 'dev_origin';
+    const start = net.log.length;
+    store[storedKey] = 'http://127.0.0.1:8899';
+    global.getApp = () => app;
+    wx.getDeviceInfo = () => ({ platform: 'devtools' });
+    try {
+      const pointer = await oss.loadPointer();
+      return pointer.source === 'live' && pointer.manifest.buildId === man.buildId
+        && net.log.slice(start).every((url) => url.startsWith(servedIndex))
+        && oss.flagsUrl(man.env) === servedIndex + 'flags.json';
+    } finally {
+      delete store[storedKey];
+      delete wx.getDeviceInfo;
+      delete global.getApp;
+    }
+  });
+  await step('会话假 OSS 仅限开发者工具的回环地址，清除后恢复线上', async () => {
+    const app = { globalData: { ossTestOrigin: 'http://127.0.0.1:8899' } };
+    const fakePointer = app.globalData.ossTestOrigin + '/' + oss.NAMESPACES[man.env] + '/manifest.json';
+    global.getApp = () => app;
+    wx.getDeviceInfo = () => ({ platform: 'devtools' });
+    net.map[fakePointer] = { data: man };
+    try {
+      const live = await oss.loadPointer();
+      if (live.source !== 'live' || net.log[net.log.length - 1] !== fakePointer) return false;
+      if (!oss.assetUrl(r1.batch, 'icons/class_warrior.jpg').startsWith('http://127.0.0.1:8899/')) return false;
+      wx.getDeviceInfo = () => ({ platform: 'ios' });
+      if (oss.pointerUrl(man.env) !== servedIndex + 'manifest.json') return false;
+      wx.getDeviceInfo = () => ({ platform: 'devtools' });
+      app.globalData.ossTestOrigin = 'https://example.com';
+      if (oss.pointerUrl(man.env) !== servedIndex + 'manifest.json') return false;
+      delete app.globalData.ossTestOrigin;
+      return oss.pointerUrl(man.env) === servedIndex + 'manifest.json';
+    } finally {
+      delete net.map[fakePointer];
+      delete wx.getDeviceInfo;
+      delete global.getApp;
+    }
+  });
+
   const item = r1.data.items.filter((x) => x.id === 'ragefire-chasm')[0];
   let det = null; let loot = null;
   await step('点详情才取详情文件（' + item.detailBytes + ' B）', async () => {

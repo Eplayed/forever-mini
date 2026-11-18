@@ -1,0 +1,33 @@
+.leveling { color: var(--txt); }
+.build-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 19rpx 20rpx;
+  margin-bottom: 12rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 12rpx;
+  background: var(--panel);
+}
+.build-focused, .build-pressed { border-color: var(--gold-deep); background: var(--leather); }
+.build-icons { position: relative; flex: 0 0 96rpx; height: 88rpx; }
+.main-icon, .class-icon { display: block; box-sizing: border-box; background: var(--sunk); }
+.main-icon { width: 86rpx; height: 86rpx; border: 2rpx solid var(--gold-deep); border-radius: 10rpx; }
+.class-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 35rpx;
+  height: 35rpx;
+  border: 2rpx solid var(--txt-dim);
+  border-radius: 7rpx;
+}
+.build-content { flex: 1; min-width: 0; }
+.build-class { color: var(--gold-hi); font-size: 22rpx; line-height: 1.4; }
+.partial { margin-left: 10rpx; padding-left: 10rpx; border-left: 1rpx solid var(--gold-line); color: var(--txt-dim); }
+.build-name { margin-top: 3rpx; color: var(--txt-title); font-size: 32rpx; font-weight: 700; line-height: 1.25; }
+.build-feature { margin-top: 5rpx; color: var(--txt-dim); font-size: 24rpx; line-height: 1.35; }
+.build-end { display: flex; flex-shrink: 0; align-items: flex-end; flex-direction: column; gap: 6rpx; }
+.build-arrow { color: var(--gold-hi); font-size: 42rpx; line-height: 1; }
+.build-points, .talent-source { color: var(--txt-dim); font-size: 22rpx; }
+.talent-source { padding: 10rpx 0; }

@@ -37,6 +37,10 @@
         <view class="btn act {{fav ? 'btn-on' : ''}}" bindtap="onFav">{{fav ? '★ 已收藏' : '☆ 收藏'}}</view>
         <button class="btn act btn-share" open-type="share">分享给微信好友</button>
       </view>
+      <view class="plan-actions">
+        <button size="mini" class="goal-button" bindtap="onPlanDungeon">{{planned ? '已计划 · 查看清单 ›' : '＋ 跑本计划'}}</button>
+        <button size="mini" wx:if="{{quest.rows.length || hasFactions}}" class="goal-button" bindtap="scrollToTasks">看任务接取 ↓</button>
+      </view>
     </view>
 
     <view wx:if="{{mapUrl || mapEntry}}" class="card">
@@ -83,7 +87,7 @@
           <view wx:if="{{lootState !== 'ready'}}" class="loot-empty">掉落暂未取到，联网后下拉刷新。</view>
           <view wx:elif="{{!item.items.length}}" class="loot-empty">这位首领的掉落待实测。</view>
           <block wx:for="{{item.items}}" wx:for-item="row" wx:key="key">
-            <view class="loot-entry {{highlightDrop && row.itemId === highlightDrop ? 'loot-hit' : ''}}">
+            <view id="goal-drop-{{row.key}}" class="loot-entry {{highlightDrop && row.itemId === highlightDrop ? 'loot-hit' : ''}}">
               <view class="loot-toggle" hover-class="encounter-pressed" bindtap="onToggleItem" aria-role="button"
                       aria-expanded="{{openItem === row.key}}" data-key="{{row.key}}" data-item="{{row.itemId}}">
                 <view class="loot-icon"><icon-cell src="{{row.iconUrl}}" size="sm" label="{{row.name}}" /></view>
@@ -101,6 +105,7 @@
                 <view wx:if="{{!itemCard.st.length}}" class="loot-meta">属性待实测</view>
                 <view wx:if="{{itemCard.sell}}" class="loot-meta">商人卖价 {{itemCard.sell}}</view>
                 <view wx:if="{{row.itemId}}" class="loot-meta">物品编号 <text class="mono">{{row.itemId}}</text></view>
+                <button size="mini" wx:if="{{row.itemId}}" class="goal-button" bindtap="onAddGear">{{itemSaved ? '已加入 · 查看清单 ›' : '＋ 想要'}}</button>
               </view>
             </view>
           </block>
@@ -108,28 +113,36 @@
       </view>
     </view>
 
-    <view class="card quest-card">
-      <view class="section-kicker">接取路线</view>
-      <view class="card-title">这座本的任务</view>
+    <view class="card quest-card" id="dungeon-quests">
+      <view class="card-title">任务接取路线</view>
       <view wx:if="{{needOnline}}" class="muted">联网后可查看任务。</view>
       <block wx:else>
-        <view wx:if="{{quest.summary}}" class="muted qsum">{{quest.summary}}</view>
+        <view wx:if="{{hasFactions}}" class="plan-actions">
+          <button size="mini" class="goal-button {{!faction ? 'faction-on' : ''}}" data-faction="" bindtap="pickQuestFaction">全部</button>
+          <button size="mini" class="goal-button {{faction === 'alliance' ? 'faction-on' : ''}}" data-faction="alliance" bindtap="pickQuestFaction">联盟</button>
+          <button size="mini" class="goal-button {{faction === 'horde' ? 'faction-on' : ''}}" data-faction="horde" bindtap="pickQuestFaction">部落</button>
+        </view>
         <view wx:if="{{quest.empty}}" class="muted">{{quest.empty}}</view>
-        <view class="quest" wx:for="{{quest.rows}}" wx:key="index">
-          <text class="quest-name">{{item.name}}<text wx:if="{{item.missing}}" class="todo">译名待核</text></text>
-          <view wx:if="{{item.meta}}" class="quest-meta">{{item.meta}}</view>
-          <view class="quest-pick">
-            <text class="pick-k">{{item.startItem ? '物品开启' : '接取'}}</text>
-            <view class="pick-body">
-              <view class="{{item.pickupNpc || item.startItem ? 'pick-npc' : 'pick-none'}}">{{item.pickupNpc || item.startItem || '接取人待实测'}}</view>
-              <view wx:if="{{!item.startItem || item.pickupZone}}" class="pick-place">
-                <text>{{item.pickupZone || '地点待实测'}}</text>
-                <text wx:if="{{item.pickupCoords}}" class="pick-coords">{{item.pickupMap ? item.pickupMap + ' ' : ''}}<text class="mono">{{item.pickupCoords}}</text></text>
-                <text wx:elif="{{!item.startItem}}" class="pick-none">坐标待实测</text>
+        <block wx:for="{{quest.rows}}" wx:key="key">
+          <view wx:if="{{item.header}}" class="quest-region">{{item.header}}</view>
+          <view class="quest">
+            <text class="quest-name">{{item.name}}<text wx:if="{{item.missing}}" class="todo">译名待核</text></text>
+            <view wx:if="{{item.faction || item.reqLevel}}" class="quest-meta">
+              {{item.faction}}{{item.faction && item.reqLevel ? ' · ' : ''}}{{item.reqLevel ? '需 ' + item.reqLevel + ' 级' : ''}}
+            </view>
+            <view class="quest-pick">
+              <text class="pick-k">{{item.startItem ? '物品开启' : '接取'}}</text>
+              <view class="pick-body">
+                <view class="{{item.pickupNpc || item.startItem ? 'pick-npc' : 'pick-none'}}">{{item.startItem || item.pickupNpc || '接取人待实测'}}</view>
+                <view wx:if="{{item.location || item.pickupCoords}}" class="pick-place">
+                  <text>{{item.location}}</text>
+                  <text wx:if="{{item.pickupCoords}}" class="pick-coords mono">{{item.pickupCoords}}</text>
+                </view>
               </view>
             </view>
+            <view wx:if="{{item.preQuest}}" class="quest-meta">前置：{{item.preQuest}}</view>
           </view>
-        </view>
+        </block>
       </block>
     </view>
 
