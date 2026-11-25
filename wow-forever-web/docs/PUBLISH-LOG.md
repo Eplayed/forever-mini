@@ -8,3 +8,5 @@
 | 2026-10-29 12:48 | web | `wow-forever-web-20261029-124743-f31c4ac4-dirty` | f31c4ac4 | 只准备未上传 |
 | 2026-11-18 10:15 | web | `wow-forever-web-20261118-101241-cb2951d-dirty` | cb2951d | 只准备未上传（包带 -dirty 标记） |
 | 2026-11-18 10:23 | web | `wow-forever-web-20261118-101940-cb2951d-dirty` | cb2951d | 只准备未上传（包带 -dirty 标记） |
+| 2026-11-25 16:52 | mini | `2b53c3092870` | a96b018（事后收口 ba7919d） | 已传批次并换指针（回滚位 38348f4852ca，verify 177/177 问题 0；补记：当时经 oss-release upload 直发未走本脚本） |
+| 2026-11-25 16:54 | web | `wow-forever-web-20261125-164328-a96b018-dirty`（FC zip sha256 f48b8c836217…） | a96b018（事后收口 ba7919d/327c496） | 已部署阿里云 FC paoben.top 并公网回读通过（包带 -dirty 标记；补记：当时经控制台上传 ZIP 直发未走本脚本） |
