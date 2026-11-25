@@ -181,16 +181,32 @@
   {
    "id": "raids-dec9",
    "date": "2026-12-09",
-   "title": "新团队副本开放",
-   "what": "官方英文回顾说 12 月 9 日开放新团本，之后还有更多副本、PvP 更新、世界内容与专家模式。国服公告未重复这个日期。",
+   "title": "新团队副本开放（官方英文公告）",
+   "what": "官方英文回顾说 12 月 9 日开放新团本（对应北京时间 12 月 10 日），之后还有更多副本、PvP 更新、世界内容与专家模式。",
    "level": "L1",
    "provenance": [
     {
      "type": "official_en",
      "url": "https://news.blizzard.com/en-us/article/24303862/world-of-warcraft-forever-whats-next-panel-recap",
      "quote": "New raids unlock on December 9, followed by more raids, dungeons, PvP updates, world content",
-     "note": "仅英文来源；与本站已入库的三座团本名称是否对应，未证实",
-     "checkedAt": "2026-10-08"
+     "note": "英文来源日期，与国服 12 月 10 日因时差一致",
+     "checkedAt": "2026-11-25"
+    }
+   ]
+  },
+  {
+   "id": "raids-dec10-cn",
+   "date": "2026-12-10",
+   "title": "首批三座团队副本解锁（国服公告）",
+   "what": "60 级首批开放三座团队副本：深穴（10 人，8 首领）、海加尔峰（20 人，13 首领）、奥妮克希亚的巢穴（40 人，需龙火护符开门任务），均计划每周重置。",
+   "level": "L0",
+   "provenance": [
+    {
+     "type": "official_cn",
+     "url": "https://wow.blizzard.cn/news/24303009",
+     "quote": "从12月10日起，60级玩家可以挑战三个团队副本：深穴、海加尔峰和奥妮克希亚的巢穴，让他们的战前筹备、团队配合能力和职业精通水平接受考验。",
+     "note": "国服官方团队副本概览",
+     "checkedAt": "2026-11-25"
     }
    ]
   }

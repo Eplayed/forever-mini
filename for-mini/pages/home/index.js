@@ -9,6 +9,21 @@ const META_SNAPSHOT = require('../../data/forever-meta-snapshot')
 
 const FACTION = { alliance: '联盟', horde: '部落' }
 const DEFAULT_CLASS = 'warrior'
+const RAID_UNLOCK_DATE = '2026-12-10'
+
+function buildRaidBanner(now) {
+  const s = countdown.state(now, RAID_UNLOCK_DATE)
+  if (s && s.on) {
+    return {
+      headline: s.today ? '首批团本今日开放' : '距首批团本开放 ' + s.d + ' 天',
+      dayText: s.dayText
+    }
+  }
+  return {
+    headline: '首批团本已开放 · 每周重置',
+    dayText: '12 月 10 日'
+  }
+}
 
 Page({
   data: {
@@ -16,6 +31,7 @@ Page({
     offline: false,
     requiresUpdate: false,
     cd: null,
+    raidBanner: buildRaidBanner(Date.now()),
     featuredIndex: 0,
     bgUrl: '',
     cardBg: { dungeons: '', loots: '', bis: '', classes: '', macros: '', professions: '', namer: '' },
@@ -23,6 +39,15 @@ Page({
     openProfessions: false,
     openMacros: false,
     openNamer: false,
+    openGRank: features.isOn('grank'),
+    gRankLoaded: false,
+    gRankHasAny: false,
+    gRankUpdated: '',
+    gRankNote: '',
+    gRankFaction: 'all',
+    gRankExpanded: false,
+    gRankTotal: 0,
+    gRankView: [],
     classes: [],
     leveling: LEVELING,
     levelingIcons: {},
@@ -41,6 +66,7 @@ Page({
     this.batch = null
     this.launch = META_SNAPSHOT.launch
     this.raceSource = []
+    this.gRankItems = []
     this.tick()
     this.startTimer()
     this.refresh()
@@ -61,6 +87,8 @@ Page({
       if (mo !== this.data.openMacros) patch.openMacros = mo
       const na = features.isOn('namer')
       if (na !== this.data.openNamer) patch.openNamer = na
+      const gr = features.isOn('grank')
+      if (gr !== this.data.openGRank) patch.openGRank = gr
       if (Object.keys(patch).length) this.setData(patch)
     })
   },
@@ -106,7 +134,10 @@ Page({
     const s = countdown.state(Date.now(), this.launch)
     if (!s.on) {
       this.clearTimer()
-      if (this.data.cd) this.setData({ cd: null })
+      const rb = buildRaidBanner(Date.now())
+      if (this.data.cd || !this.data.raidBanner || this.data.raidBanner.headline !== rb.headline) {
+        this.setData({ cd: null, raidBanner: rb })
+      }
       return
     }
     /* 只到天：天数没变就不重绘（60 秒一次的心跳不该变成另一个秒表） */
@@ -115,9 +146,11 @@ Page({
   },
 
   refresh() {
-    return Promise.all([service.loadMeta(), service.loadClassIndex()]).then((list) => {
+    const gRankTask = service.loadGRank().catch(() => null)
+    return Promise.all([service.loadMeta(), service.loadClassIndex(), gRankTask]).then((list) => {
       const meta = list[0]
       const cls = list[1]
+      const gr = list[2]
       const m = meta.data || {}
       if (m.launch && m.launch !== this.launch) {
         this.launch = m.launch
@@ -125,6 +158,8 @@ Page({
       }
       this.batch = cls.batch || this.batch
       this.raceSource = (cls.data || {}).races || []
+      const grData = (gr && gr.data) || null
+      this.gRankItems = (grData && Array.isArray(grData.items)) ? grData.items.slice() : []
       const mBatch = meta.batch || cls.batch
       const ui = m.uiArt || {}
       const cards = ui.cards || {}
@@ -152,17 +187,53 @@ Page({
          退到名单第一个，别让用户看见一个"选中的职业名字是空的" */
       const want = named.some((c) => c.classId === DEFAULT_CLASS) ? DEFAULT_CLASS : (named[0] || {}).classId || ''
       this.classes = named
-      this.setData({
+      this.setData(Object.assign({
         loaded: true,
         offline: meta.source !== 'live' || cls.source !== 'live',
         requiresUpdate: !!(meta.requiresUpdate || cls.requiresUpdate),
         classes: named,
         levelingIcons,
-        classEmpty: named.length ? '' : '联网后可查看职业。'
-      })
+        classEmpty: named.length ? '' : '联网后可查看职业。',
+        gRankLoaded: true,
+        gRankHasAny: this.gRankItems.length > 0,
+        gRankUpdated: (grData && grData.updatedAt) ? String(grData.updatedAt).slice(5, 16) : '',
+        gRankNote: (grData && grData.note) || ''
+      }, this.buildGRankPatch(this.data.gRankFaction, this.data.gRankExpanded)))
       this.pickClass(want)
       return null
     })
+  },
+
+  buildGRankPatch(faction, expanded) {
+    const raw = (this.gRankItems || []).filter((it) => faction === 'all' || it.faction === faction)
+    const sorted = raw.slice().sort((a, b) => (b.gPerMi - a.gPerMi)
+      || String(a.realm || '').localeCompare(String(b.realm || '')))
+    const limit = expanded ? sorted.length : 5
+    const view = sorted.slice(0, limit).map((it, idx) => ({
+      id: it.id || (it.realm + '-' + it.faction),
+      rank: idx + 1,
+      realm: it.realm || '',
+      faction: it.faction || '',
+      factionText: FACTION[it.faction] || it.faction || '',
+      rateText: formatGRate(it.gPerMi)
+    }))
+    return {
+      gRankFaction: faction,
+      gRankExpanded: !!expanded,
+      gRankTotal: sorted.length,
+      gRankView: view
+    }
+  },
+
+  onPickGRankFaction(e) {
+    const fac = String((e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.faction) || 'all')
+    if (fac !== 'all' && fac !== 'alliance' && fac !== 'horde') return
+    if (fac === this.data.gRankFaction) return
+    this.setData(this.buildGRankPatch(fac, false))
+  },
+
+  onToggleGRankExpand() {
+    this.setData(this.buildGRankPatch(this.data.gRankFaction, !this.data.gRankExpanded))
   },
 
   /* 选职业：换下面那一段的内容并展开可选种族，不直接跳走（跳转留给"看这个职业的技能书与天赋树"那条） */
@@ -249,6 +320,20 @@ Page({
     wx.navigateTo({ url: '/pages/census/index' })
   },
 
+  goRaids() {
+    const app = getApp()
+    if (app && app.globalData) app.globalData.pendingDungeonKind = 'raid'
+    wx.switchTab({ url: '/pages/dungeons/index' })
+  },
+
+  goOnyxia() {
+    wx.navigateTo({ url: '/pages/dungeon/index?id=onyxias-lair' })
+  },
+
+  goBis60() {
+    wx.navigateTo({ url: '/pages/bis/index?stage=60' })
+  },
+
   onFeaturedChange(e) {
     this.selectFeatured(e.detail.current)
   },
@@ -323,3 +408,9 @@ Page({
     wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(e.currentTarget.dataset.id) })
   }
 })
+
+function formatGRate(val) {
+  const n = Number(val)
+  if (!Number.isFinite(n) || n <= 0) return '-'
+  return n >= 100 ? String(Math.round(n)) : (Math.round(n * 100) / 100).toString()
+}

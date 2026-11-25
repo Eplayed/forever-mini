@@ -230,3 +230,58 @@
 .card {
   background: var(--glass-sheen), var(--panel-glass);
 }
+
+/* 团本筹备头卡与门任务标签（仅走 app.wxss 令牌） */
+.raid-intro {
+  background: var(--forge-surface);
+  border: 1rpx solid var(--forge-edge-active);
+  margin-bottom: 16rpx;
+}
+.raid-intro-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10rpx;
+  margin-bottom: 8rpx;
+}
+.raid-intro-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--gold-hi);
+}
+.raid-intro-tag {
+  font-size: 20rpx;
+  color: var(--accent-ink);
+  background: var(--gold);
+  padding: 2rpx 10rpx;
+  border-radius: var(--r-ctl);
+  font-weight: 700;
+}
+.raid-intro-sub {
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+.raid-intro-btns {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 14rpx;
+}
+.raid-intro-btn {
+  flex: 1;
+  text-align: center;
+  padding: 10rpx 12rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: var(--gold-hi);
+  background: var(--sunk);
+  border: 1rpx solid var(--gold-line);
+  border-radius: var(--r-ctl);
+}
+.drow-attune {
+  font-size: 20rpx;
+  color: var(--txt-caution);
+  background: var(--warn-bg);
+  border: 1rpx solid var(--warn);
+  padding: 0 8rpx;
+  border-radius: var(--r-ctl);
+}

@@ -3,8 +3,22 @@ const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
 const joinCard = require('../../services/item-card')
 const adventure = require('../../services/adventure')
+const countdown = require('../../services/countdown')
 
 const KIND_LABEL = { new: '无限新本', classic: '经典本', raid: '团本' }
+const ATTUNE_KEY = 'wow_forever_v1_onyxia_attune'
+
+function readAttuneStore() {
+  try {
+    const raw = wx.getStorageSync(ATTUNE_KEY)
+    if (raw && typeof raw === 'object') return raw
+  } catch (e) {}
+  return { fac: '', done: {} }
+}
+
+function saveAttuneStore(state) {
+  try { wx.setStorageSync(ATTUNE_KEY, state) } catch (e) {}
+}
 
 /* 副本详情（M01）
    取数三段：索引（列表页给的同一批）→ 详情分片 → 掉落分片。
@@ -36,6 +50,10 @@ Page({
     planned: false,
     artUrl: '',
     mapUrl: '',
+    mapTitle: '副本地图',
+    mapIsZone: false,
+    mapBroken: false,
+    mapPins: [],
     mapZone: '',
     mapEntry: '',
     mapDrawn: false,
@@ -47,7 +65,13 @@ Page({
     highlightDrop: '',
     dropNotice: '',
     fav: false,
-    disclaimer: ''
+    disclaimer: '',
+    raidGuide: null,
+    attune: null,
+    attuneFac: 'alliance',
+    attuneSteps: [],
+    attuneDoneCount: 0,
+    attunePct: 0
   },
 
   onLoad(query) {
@@ -89,11 +113,25 @@ Page({
 
   /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
   onShareTimeline() {
-    const d = this.d
+    const d = this.data
     return {
-      title: d ? (d.nameCn || d.nameEn || '副本详情') : '副本详情',
-      query: d ? 'id=' + encodeURIComponent(d.id) : ''
+      title: d.title || '副本详情',
+      query: d.id ? 'id=' + encodeURIComponent(d.id) : ''
     }
+  },
+
+  onPreviewMap() {
+    if (!this.data.mapUrl || this.data.mapBroken) return
+    wx.previewImage({ current: this.data.mapUrl, urls: [this.data.mapUrl] })
+  },
+
+  onPreviewArt() {
+    if (!this.data.artUrl) return
+    wx.previewImage({ current: this.data.artUrl, urls: [this.data.artUrl] })
+  },
+
+  onMapError() {
+    this.setData({ mapBroken: true })
   },
 
   onToggleBoss(e) {
@@ -112,7 +150,8 @@ Page({
 
   itemSelection(row, boss, itemId) {
     this.openTarget = row ? {
-      id: row.itemId, name: row.name, quality: row.q, dungeonId: this.data.id, dungeon: this.data.title,
+      id: row.itemId, name: row.name, quality: row.q, iconUrl: row.iconUrl || '',
+      dungeonId: this.data.id, dungeon: this.data.title,
       boss: boss.other ? '' : boss.name
     } : null
     return {
@@ -254,18 +293,52 @@ Page({
           /* lootNote 是方法论长段（谁取的、怎么推的），玩家面不上；
              掉落那一节的标题已经写了"按经典旧世公开数据库推的，本站不写几率"。 */
           const geo = g.geo || null
+          const hasInnerMap = !!(geo && geo.map)
+          const mapRel = hasInnerMap ? geo.map : (geo && geo.zoneMap ? geo.zoneMap : '')
+          const mapUrl = mapRel ? oss.assetUrl(this.batch, mapRel) : ''
+          const mapIsZone = !hasInnerMap && !!mapUrl
+          const mapDrawn = !!(hasInnerMap && geo && geo.mapKind === 'addon-drawn')
+          const mapPins = mapDrawn && geo && geo.bossPins ? buildMapPins(bosses, geo.bossPins) : []
           this.setData({
             artUrl: oss.assetUrl(this.batch, g.art),
-            mapUrl: geo && geo.map ? oss.assetUrl(this.batch, geo.map) : '',
+            mapUrl: mapUrl,
+            mapTitle: mapIsZone ? '区域地图' : '副本地图',
+            mapIsZone: mapIsZone,
+            mapBroken: false,
+            mapPins: mapPins,
             mapZone: geo ? (geo.zone || '') : '',
             mapEntry: geo && geo.entryX !== null && geo.entryX !== undefined
-              ? '入口约在 ' + geo.zone + ' ' + geo.entryX + ', ' + geo.entryY : '',
-            mapDrawn: geo && geo.mapKind === 'addon-drawn'
+              ? '入口约在 ' + geo.zone + ' ' + geo.entryX + ', ' + geo.entryY
+              : (mapIsZone && geo && geo.zone ? '所在区域：' + geo.zone : ''),
+            mapDrawn: mapDrawn
           })
         }
         const quest = this.questPack(d.data)
-        this.setData({
+        const rawGuide = (d.data && d.data.raidGuide) || null
+        let raidGuide = null
+        let attune = null
+        let attunePatch = { attuneSteps: [], attuneDoneCount: 0, attunePct: 0 }
+        if (rawGuide) {
+          const cdS = countdown.state(Date.now(), rawGuide.unlockDate || '2026-12-10')
+          const titleText = (cdS && cdS.on)
+            ? (cdS.today ? '12月10日首批开放 · 今日解锁' : '12月10日首批开放 · 剩 ' + cdS.d + ' 天')
+            : '首批团本已开放 · ' + (rawGuide.resetCycle || '每周重置')
+          raidGuide = Object.assign({}, rawGuide, { title: titleText })
+          if (rawGuide.attunement && Array.isArray(rawGuide.attunement.alliance)) {
+            attune = rawGuide.attunement
+            const store = readAttuneStore()
+            const advFac = adventure.read().faction
+            const fac = (store.fac === 'alliance' || store.fac === 'horde')
+              ? store.fac
+              : ((advFac === 'alliance' || advFac === 'horde') ? advFac : 'alliance')
+            this.attuneSource = attune
+            attunePatch = this.buildAttuneView(attune, fac, store.done || {})
+          }
+        }
+        this.setData(Object.assign({
           rows: merged,
+          raidGuide,
+          attune,
           quest,
           hasFactions: this.questRows.some((q) => q.faction === '联盟' || q.faction === '部落'),
           bosses,
@@ -279,7 +352,7 @@ Page({
           needOnline: d.source !== 'live' && d.source !== 'cache',
           offline: d.source !== 'live' || l.source !== 'live' || r.source !== 'live',
           sourceText: d.sourceText
-        }, () => {
+        }, attunePatch), () => {
           if (target) {
             wx.pageScrollTo({ selector: '#goal-drop-' + target.key, offsetTop: -12, duration: 220 })
             return
@@ -293,9 +366,69 @@ Page({
     })
   },
 
+  buildAttuneView(attune, fac, doneMap) {
+    const rawList = (attune && attune[fac]) || []
+    const steps = rawList.map((st) => Object.assign({}, st, { done: !!(doneMap && doneMap[st.id]) }))
+    const doneCount = steps.filter((st) => st.done).length
+    const pct = steps.length ? Math.round((doneCount / steps.length) * 100) : 0
+    return {
+      attuneFac: fac,
+      attuneSteps: steps,
+      attuneDoneCount: doneCount,
+      attunePct: pct
+    }
+  },
+
+  onPickAttuneFac(e) {
+    const fac = e.currentTarget.dataset.fac
+    if ((fac !== 'alliance' && fac !== 'horde') || !this.attuneSource) return
+    const store = readAttuneStore()
+    store.fac = fac
+    saveAttuneStore(store)
+    this.setData(this.buildAttuneView(this.attuneSource, fac, store.done || {}))
+  },
+
+  onToggleAttuneStep(e) {
+    const id = e.currentTarget.dataset.id
+    if (!id || !this.attuneSource) return
+    const store = readAttuneStore()
+    const done = Object.assign({}, store.done || {})
+    done[id] = !done[id]
+    store.done = done
+    store.fac = this.data.attuneFac || 'alliance'
+    saveAttuneStore(store)
+    this.setData(this.buildAttuneView(this.attuneSource, store.fac, done))
+  },
+
+  onResetAttune() {
+    if (!this.attuneSource) return
+    const store = readAttuneStore()
+    const done = Object.assign({}, store.done || {})
+    const list = this.attuneSource[this.data.attuneFac] || []
+    list.forEach((st) => { delete done[st.id] })
+    store.done = done
+    saveAttuneStore(store)
+    this.setData(this.buildAttuneView(this.attuneSource, this.data.attuneFac, done))
+  },
+
+  onOpenLinkedDungeon(e) {
+    const id = e.currentTarget.dataset.id
+    if (!id) return
+    wx.navigateTo({ url: '/pages/dungeon/index?id=' + encodeURIComponent(id) })
+  },
+
+  onGoBis60() {
+    wx.navigateTo({ url: '/pages/bis/index?stage=60' })
+  },
+
+  onGoT1() {
+    wx.navigateTo({ url: '/pages/bis/index?stage=t1' })
+  },
+
   groupDrops(roster, drops) {
-    const bosses = roster.map((b) => ({
+    const bosses = roster.map((b, idx) => ({
       id: b.id,
+      seq: idx + 1,
       name: b.nameCn || b.id,
       missing: !b.nameCn,
       portraitUrl: oss.assetUrl(this.batch, b.portrait),
@@ -304,7 +437,7 @@ Page({
     const byId = new Map(bosses.map((b) => [b.id, b]))
     const byName = new Map()
     bosses.forEach((b) => byName.set(b.name, byName.has(b.name) ? null : b))
-    const other = { id: '__other', name: '其他掉落', other: true, items: [] }
+    const other = { id: '__other', seq: 0, name: '其他掉落', other: true, items: [] }
     drops.forEach((x, index) => {
       const boss = byId.get(x.bossId) || byName.get(x.bossCn) || other
       boss.items.push({
@@ -344,6 +477,23 @@ Page({
     }
   }
 })
+
+function buildMapPins(bosses, bossPins) {
+  const out = []
+  bosses.forEach((b) => {
+    if (b.other || !b.seq) return
+    const pts = bossPins[b.id]
+    if (!Array.isArray(pts) || !pts.length) return
+    pts.forEach((pt, idx) => {
+      if (!Array.isArray(pt) || pt.length < 2) return
+      const x = Number(pt[0])
+      const y = Number(pt[1])
+      if (!Number.isFinite(x) || !Number.isFinite(y) || x < 0 || x > 100 || y < 0 || y > 100) return
+      out.push({ key: b.id + '-' + idx, seq: b.seq, name: b.name, x: x, y: y })
+    })
+  })
+  return out
+}
 
 function questRegion(row) {
   return row.pickupMap || row.pickupZone || (row.startItem ? '物品开启' : '接取地点待实测')

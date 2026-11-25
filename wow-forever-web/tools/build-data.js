@@ -478,6 +478,128 @@ try { require('./leveling-builds')(ROOT); }
 catch (error) { errs.push(error.message); }
 errs.push(...validateCensus(read('population-census.json'), [...classIds]));
 errs.push(...validateCensusChina(read('population-census-cn.json'), [...classIds]));
+
+// 桌面 1440px 副屏导流与推荐配置（可选文件；存在时严格校 schema / HTTPS / 本地素材 / 商标与红线词）
+const commercialBan = /私服|金币交易|代练|工作室收金|RMT|卡密|收费宏|付费WA|魔兽世界|魔兽|暴雪|艾泽拉斯|\bWoW\b/i;
+const sideRailPath = path.join(ROOT, 'side-rail.json');
+if (fs.existsSync(sideRailPath)) {
+  const sr = read('side-rail.json');
+  if (typeof sr.enabled !== 'boolean' || !Array.isArray(sr.slots)) {
+    errs.push('side-rail：须包含布尔 enabled 与数组 slots');
+  } else {
+    const srIds = new Set();
+    sr.slots.forEach((slot) => {
+      if (!slot || !slot.id || !slot.title || !slot.ctaLabel) {
+        errs.push('side-rail：条目缺必填 id/title/ctaLabel');
+        return;
+      }
+      if (srIds.has(slot.id)) errs.push('side-rail：重复 id ' + slot.id);
+      srIds.add(slot.id);
+      if (slot.kind === 'mini-program') {
+        if (!slot.artFile) errs.push(`side-rail ${slot.id}：小程序导流条目必须提供本地太阳码 artFile`);
+      } else if (!/^https:\/\//.test(String(slot.url || ''))) {
+        errs.push(`side-rail ${slot.id}：落地地址必须为 HTTPS`);
+      }
+      if (slot.artFile && !fs.existsSync(path.join(ROOT, '..', slot.artFile))) {
+        errs.push(`side-rail ${slot.id}：本地素材不存在 ${slot.artFile}`);
+      }
+      const combined = [slot.badge, slot.title, slot.subtitle, slot.desc, slot.ctaLabel, slot.searchHint, slot.note].join(' ');
+      if (commercialBan.test(combined)) errs.push(`side-rail ${slot.id}：文案命中红线词或商标词`);
+    });
+  }
+}
+
+// 轻量隐私统计配置（严格校验主机白名单与协议，避免测试环境误发请求）
+const analyticsPath = path.join(ROOT, 'analytics.json');
+if (fs.existsSync(analyticsPath)) {
+  const an = read('analytics.json');
+  if (typeof an.enabled !== 'boolean' || !Array.isArray(an.allowedHosts)) {
+    errs.push('analytics：须包含布尔 enabled 与数组 allowedHosts');
+  } else {
+    const fc = an.fcBeacon || {};
+    if (typeof fc.enabled !== 'boolean' || (fc.enabled && !/^\/[A-Za-z0-9/_-]+$/.test(String(fc.endpoint || '')))) {
+      errs.push('analytics：fcBeacon.endpoint 须为同源相对路径');
+    }
+    const pv = an.provider || {};
+    const okProviders = new Set(['none', 'umami', 'baidu', 'clarity']);
+    if (!okProviders.has(String(pv.type || 'none'))) {
+      errs.push('analytics：不支持的统计提供商 ' + pv.type);
+    } else if (pv.type && pv.type !== 'none' && !/^https:\/\//.test(String(pv.scriptUrl || ''))) {
+      errs.push('analytics：启用第三方统计时 scriptUrl 必须为 HTTPS');
+    }
+  }
+}
+
+// 外设/加速器合作槽与广告联盟配置（空配置为合法候选；严禁 RMT/私服/商标词/非 HTTPS/热链素材）
+const partnerSlotsPath = path.join(ROOT, 'partner-slots.json');
+if (fs.existsSync(partnerSlotsPath)) {
+  const ps = read('partner-slots.json');
+  if (typeof ps.enabled !== 'boolean' || !Array.isArray(ps.slots)) {
+    errs.push('partner-slots：须包含布尔 enabled 与数组 slots');
+  } else {
+    const okPos = new Set(['page-bottom', 'bis-inline', 'desktop-right-rail']);
+    const okCat = new Set(['accelerator', 'peripheral', 'partner']);
+    const psIds = new Set();
+    ps.slots.forEach((slot) => {
+      if (!slot || !slot.id || !slot.title || !slot.ctaLabel || !slot.url) {
+        errs.push('partner-slots：条目缺必填 id/title/ctaLabel/url');
+        return;
+      }
+      if (psIds.has(slot.id)) errs.push('partner-slots：重复 id ' + slot.id);
+      psIds.add(slot.id);
+      if (!okPos.has(String(slot.position || ''))) errs.push(`partner-slots ${slot.id}：未知展示位置 ${slot.position}`);
+      if (slot.kind !== 'partner') errs.push(`partner-slots ${slot.id}：kind 必须为 partner`);
+      if (slot.category && !okCat.has(String(slot.category))) errs.push(`partner-slots ${slot.id}：未知合作类别 ${slot.category}`);
+      if (!/^https:\/\//.test(String(slot.url))) errs.push(`partner-slots ${slot.id}：落地地址必须为 HTTPS`);
+      if (slot.artFile && !fs.existsSync(path.join(ROOT, '..', slot.artFile))) {
+        errs.push(`partner-slots ${slot.id}：本地素材不存在 ${slot.artFile}`);
+      }
+      const combined = [slot.badge, slot.vendor, slot.title, slot.subtitle, slot.desc, slot.ctaLabel, slot.note].join(' ');
+      if (commercialBan.test(combined)) errs.push(`partner-slots ${slot.id}：文案命中红线词或商标词`);
+    });
+    const nets = ps.adNetworks || {};
+    if (nets.adsense && nets.adsense.enabled && !/^ca-pub-\d+$/.test(String(nets.adsense.clientId || ''))) {
+      errs.push('partner-slots：启用 adsense 时 clientId 格式必须为 ca-pub-数字');
+    }
+    if (nets.baidu && nets.baidu.enabled && !/^[A-Za-z0-9_-]+$/.test(String(nets.baidu.unionId || ''))) {
+      errs.push('partner-slots：启用 baidu 联盟时 unionId 不能为空或含非法字符');
+    }
+  }
+}
+
+// 首批 60 级团本开放与黑龙门任务档案（2026-11-25，L0 官宣真源）
+const raidLaunchPath = path.join(ROOT, 'raid-launch.json');
+if (fs.existsSync(raidLaunchPath)) {
+  const rl = read('raid-launch.json');
+  const allDunIds = new Set([].concat(dg.newDungeons || [], dg.classicDungeons || [], dg.raids || []).map((x) => x.id));
+  const raidIds = new Set((dg.raids || []).map((x) => x.id));
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(rl.unlockDate || ''))) {
+    errs.push('raid-launch：unlockDate 须为 YYYY-MM-DD');
+  }
+  if (!Array.isArray(rl.raids) || !rl.raids.length) {
+    errs.push('raid-launch：raids 数组不能为空');
+  } else {
+    rl.raids.forEach((r) => {
+      if (!r || !raidIds.has(r.id)) errs.push(`raid-launch：未知团本 id ${r && r.id}`);
+      if (!r.nameCn || !r.partySize || !r.entrances) errs.push(`raid-launch ${r && r.id}：缺 nameCn/partySize/entrances`);
+      checkRecord('raid-launch', r);
+    });
+  }
+  const att = rl.onyxiaAttunement || {};
+  ['alliance', 'horde'].forEach((fac) => {
+    const steps = att[fac];
+    if (!Array.isArray(steps) || !steps.length) {
+      errs.push(`raid-launch：onyxiaAttunement.${fac} 不能为空`);
+      return;
+    }
+    steps.forEach((st) => {
+      if (!st || !st.id || !st.questCn || !st.summary) errs.push(`raid-launch ${fac}：步骤缺必填项`);
+      if (st && st.dungeonId && !allDunIds.has(st.dungeonId)) {
+        errs.push(`raid-launch ${fac}/${st.id}：指向未知副本 ${st.dungeonId}`);
+      }
+    });
+  });
+}
 if (ch.meta && ch.meta.kind !== 'site-opinion') errs.push('chooser.json：必须标 kind=site-opinion，问答结论不是官方推荐');
 const qSeen = {};
 (ch.questions || []).forEach((q) => {
@@ -2370,7 +2492,8 @@ const SECTION_CN = {
   'bis.json': '配装名单',
   'pets.json': '猎人宠物',
   'macros.json': '宏命令',
-  'name-generator.json': '角色起名词库'
+  'name-generator.json': '角色起名词库',
+  'raid-launch.json': '团队副本开放档案'
 };
 // 触发条件只看"版本类"键：generatedAt 几乎每份数据都有（它是重算那天），
 // 拿它当触发会把 24 份文件全拉进这张表，表就失去意义了。它只作日期的兜底。

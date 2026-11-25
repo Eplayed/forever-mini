@@ -59,6 +59,23 @@
         <div><s>一次几人</s><b>{{ x.partySize ? x.partySize : '未标' }}</b><s>{{ x.partySize ? '取自客户端的队伍查找器' : '客户端里还没有它' }}</s></div>
         <div><s>掉落</s><b>{{ drops.length || '待补' }}</b><s>{{ drops.length ? '件，按首领分组' : '还没有名单' }}</s></div>
       </div>
+      <div v-if="raidInfo" class="raid-prep-box">
+        <div class="raid-prep-hd">
+          <b>12 月 10 日首批开放 · {{ raidMeta.resetCycle || '每周重置' }}</b>
+          <span class="raid-prep-tag" :class="raidInfo.attunementRequired ? 'is-req' : 'is-free'">
+            {{ raidInfo.attunementRequired ? '需' + (raidInfo.attunementItem || '门任务') : '无需门任务' }}
+          </span>
+        </div>
+        <p v-if="raidInfo.entrances" class="raid-prep-p"><b>入口路线：</b>{{ raidInfo.entrances }}</p>
+        <p v-if="raidInfo.attunementNote" class="raid-prep-p"><b>进本要求：</b>{{ raidInfo.attunementNote }}</p>
+        <ul v-if="(raidInfo.prepTips || []).length" class="raid-prep-tips">
+          <li v-for="(tip, idx) in raidInfo.prepTips" :key="idx">{{ tip }}</li>
+        </ul>
+        <div class="raid-prep-links">
+          <router-link class="cta-cut" to="/raids">{{ raidInfo.attunementRequired ? '打开黑龙门任务打卡清单 →' : '看首批 3 座团本总览 →' }}</router-link>
+          <router-link class="cta cta-line" to="/bis">{{ raidInfo.hasT1Sets ? '看海加尔峰 18 套 T1 与 60 级团前 →' : '看 60 级团前 BiS 配装 →' }}</router-link>
+        </div>
+      </div>
       <div v-for="(t, i) in conf" :key="i" class="conf">{{ t }}</div>
       <div v-if="noQueue" class="note">客户端的队伍查找器里还没有这座本，所以现在还不能排队进去，名单与掉落以正式开放后为准。</div>
       <p v-if="!x.nameCn" class="note">中文定名未公布，这一页的标题用的是客户端里的原名。</p>
@@ -227,6 +244,7 @@ const D = ref(null);
 const ART = ref({});
 const QD = ref({});
 const GEO = ref({});
+const RL = ref(null);
 const err = ref('');
 const badFace = ref({});
 const route = useRoute();
@@ -273,8 +291,9 @@ function boot() {
     load('data/art.json').catch(() => ({})),
     load('data/dungeon-quests.json').catch(() => ({})),
     // 坐标这一层缺了不挡页：没有入口的本就不显示那一节
-    load('data/dungeon-geo.json').catch(() => ({}))])
-    .then((rs) => { D.value = rs[0]; ART.value = rs[1] || {}; QD.value = rs[2] || {}; GEO.value = rs[3] || {}; })
+    load('data/dungeon-geo.json').catch(() => ({})),
+    load('data/raid-launch.json').catch(() => null)])
+    .then((rs) => { D.value = rs[0]; ART.value = rs[1] || {}; QD.value = rs[2] || {}; GEO.value = rs[3] || {}; RL.value = rs[4] || null; })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
 boot();
@@ -284,6 +303,11 @@ const did = computed(() => String(route.query.d || route.query.id || ''));
 const duns = computed(() => [].concat((D.value || {}).newDungeons || [], (D.value || {}).classicDungeons || []));
 const all = computed(() => duns.value.concat((D.value || {}).raids || []));
 const x = computed(() => (did.value ? all.value.filter((y) => y.id === did.value)[0] || null : null));
+const raidMeta = computed(() => RL.value || {});
+const raidInfo = computed(() => {
+  if (!x.value || !RL.value || !Array.isArray(RL.value.raids)) return null;
+  return RL.value.raids.find((r) => r.id === x.value.id) || null;
+});
 
 /* query.d 变化（App.vue 不重建组件）→ 换标题；query.b → 滚到那名首领 */
 watch([did, D], () => {
@@ -406,3 +430,49 @@ function jump(id) {
   scrollToEl(node);
 }
 </script>
+
+<style scoped>
+.raid-prep-box {
+  margin: 14px 0 16px;
+  padding: 14px 16px;
+  background: var(--panel-2);
+  border: 1px solid var(--gold-line);
+}
+.raid-prep-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  color: var(--gold-hi);
+  font-size: 14.5px;
+}
+.raid-prep-tag {
+  font-size: 11.5px;
+  padding: 2px 8px;
+  border: 1px solid var(--line-2);
+  background: var(--panel);
+}
+.raid-prep-tag.is-free { color: var(--ok); border-color: var(--ok); }
+.raid-prep-tag.is-req { color: var(--warn); border-color: var(--amber-line); }
+.raid-prep-p {
+  margin: 4px 0;
+  font-size: 13.5px;
+  color: var(--txt-dim);
+  line-height: 1.6;
+}
+.raid-prep-p b { color: var(--txt-title); }
+.raid-prep-tips {
+  margin: 8px 0 12px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--txt-dim);
+  line-height: 1.6;
+}
+.raid-prep-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+</style>

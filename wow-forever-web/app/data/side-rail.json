@@ -1,0 +1,31 @@
+{
+  "enabled": true,
+  "slots": [
+    {
+      "id": "mini-program-paoben",
+      "position": "desktop-right-rail",
+      "kind": "mini-program",
+      "badge": "微信小程序",
+      "title": "跑本无限助手",
+      "subtitle": "手机同步跑本清单",
+      "desc": "微信扫码打开：随时查副本掉落、勾目标装备、领团长开荒一图流。",
+      "ctaLabel": "放大扫码",
+      "searchHint": "微信搜一搜：跑本无限助手",
+      "artFile": "img/art/brand/mini-qrcode.jpg",
+      "note": "本站同源免费小程序"
+    },
+    {
+      "id": "cw-taptap-minigame",
+      "position": "desktop-right-rail",
+      "kind": "self-game",
+      "badge": "站长自研",
+      "title": "超武刷宝觉醒",
+      "subtitle": "9 职业暗黑肉鸽割草",
+      "desc": "排本或坐鸟点无聊？点开 TapTap 小游戏免费刷套装、玩超武觉醒。",
+      "ctaLabel": "去 TapTap 试玩",
+      "url": "https://www.taptap.cn/app/1090838",
+      "artFile": "img/art/side-rail/cw-icon.png",
+      "note": "作者自研免费小游戏，与本站资料无关"
+    }
+  ]
+}

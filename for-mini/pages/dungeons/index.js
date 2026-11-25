@@ -1,6 +1,7 @@
 const service = require('../../services/forever-data')
 const oss = require('../../services/oss-manifest')
 const uiArt = require('../../services/ui-art')
+const countdown = require('../../services/countdown')
 
 /* 副本随手查（2026-10-22 玩家面清理）
    ------------------------------------------------------------------
@@ -35,7 +36,8 @@ Page({
     dataFrom: '',
     cacheHit: false,
     bgUrl: '',
-    disclaimer: ''
+    disclaimer: '',
+    raidHeader: buildRaidHeader(null)
   },
 
   onLoad() {
@@ -44,6 +46,14 @@ Page({
   },
 
   onShow() {
+    const app = getApp()
+    if (app && app.globalData && app.globalData.pendingDungeonKind) {
+      const nextKind = app.globalData.pendingDungeonKind
+      app.globalData.pendingDungeonKind = ''
+      if (nextKind === 'raid' || nextKind === 'five' || nextKind === 'all') {
+        this.setData({ activeKind: nextKind })
+      }
+    }
     this.syncLocal()
     this.applyFilter()
   },
@@ -66,12 +76,18 @@ Page({
   refresh() {
     return service.loadDungeonIndex().then((r) => {
       const payload = r.data || {}
-      const all = (payload.items || []).map((it) => decorate(it, r.batch))
+      const rl = payload.raidLaunch || null
+      const attuneSet = {}
+      if (rl && Array.isArray(rl.attuneIds)) {
+        rl.attuneIds.forEach((id) => { if (id) attuneSet[id] = true })
+      }
+      const all = (payload.items || []).map((it) => decorate(it, r.batch, !!attuneSet[it.id]))
       /* sourceText / buildId / factLatest / dataFrom / cacheHit 不上界面（玩家面规矩），
          但它们是四态契约的读点：门禁与排障要能读到"这一屏到底是 live 还是缓存/快照"，
          所以留在 data 里、不渲染。 */
       this.setData({
         all,
+        raidHeader: buildRaidHeader(rl),
         loaded: true,
         offline: r.source !== 'live',
         sourceText: r.sourceText,
@@ -153,16 +169,38 @@ Page({
     wx.navigateTo({ url: '/pages/loots/index' })
   },
 
+  onGoBis60() {
+    wx.navigateTo({ url: '/pages/bis/index?stage=60' })
+  },
+
+  onGoT1() {
+    wx.navigateTo({ url: '/pages/bis/index?stage=t1' })
+  },
+
   onShareAppMessage() {
     return { title: '无限服副本随手查：等级、首领与掉落', path: '/pages/dungeons/index' }
   }
 })
 
-function decorate(item, batch) {
+function buildRaidHeader(rl) {
+  const unlock = (rl && rl.unlockDate) || '2026-12-10'
+  const reset = (rl && rl.resetCycle) || '每周重置'
+  const s = countdown.state(Date.now(), unlock)
+  const title = (s && s.on)
+    ? (s.today ? '12月10日首批团本今日开放' : '12月10日首批团本 · 剩 ' + s.d + ' 天')
+    : '首批 60 级团本已开放'
+  return { title: title, resetCycle: reset }
+}
+
+function decorate(item, batch, needAttune) {
+  const isRaid = item.kind === 'raid'
+  const pSize = item.partySize || 0
+  const kindLabel = item.partySize === 5 ? '五人本' : (isRaid ? (pSize ? pSize + '人团本' : '团本') : '副本')
+  const attuneTag = (isRaid && (needAttune || item.id === 'onyxias-lair')) ? '需龙火护符' : ''
   return {
     id: item.id,
     kind: item.kind,
-    kindLabel: item.partySize === 5 ? '五人本' : (item.kind === 'raid' ? '团本' : '副本'),
+    kindLabel: kindLabel,
     five: item.partySize === 5,
     nameCn: item.nameCn || '',
     nameEn: item.nameEn || '',
@@ -171,6 +209,7 @@ function decorate(item, batch) {
     enMissing: !item.nameEn,
     rangeText: item.levelRange || '等级待实测',
     faction: item.faction || '',
+    attuneTag: attuneTag,
     zoneCn: item.zoneCn || '',
     /* 封面取不到时由 icon-cell 显示首字。 */
     artUrl: item.art ? oss.assetUrl(batch, item.art) : '',

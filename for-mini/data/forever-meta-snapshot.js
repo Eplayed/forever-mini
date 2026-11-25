@@ -9,22 +9,22 @@ module.exports = {
  "checkedAt": "2026-10-07",
  "source": "wow-forever-web/app/data",
  "coverage": {
-  "L0": 250,
+  "L0": 253,
   "L1": 108,
-  "L2": 365,
-  "L3": 2,
-  "total": 725
+  "L2": 363,
+  "L3": 0,
+  "total": 724
  },
  "counts": {
   "terms": 215,
   "dungeons": 38,
   "spells": 493,
-  "lootRows": 1166,
-  "lootItems": 1034,
+  "lootRows": 1483,
+  "lootItems": 1302,
   "macros": 0,
   "addons": 0,
-  "talentNodes": 472,
-  "talentNameVerified": 449
+  "talentNodes": 471,
+  "talentNameVerified": 450
  },
  "openQuestions": [
   "天赋结构已按客户端解包核对（格子位置、点数上限、前置连线、层级门槛 5/10/15/20/25/30），473 个节点里 114 个名称与官网中文稿逐字一致；其余名称仍只有解包来源，等官方中文稿或实测再收口",

@@ -21,6 +21,7 @@
         <!-- 2026-10-12 用户决定：首页 hero 不再放覆盖率条、L0-L3 四枚徽标与「数据基线…」那行，
              也不放四条规模读数——出处与数据质量集中在溯源页说，首页只留标题、搜索与入口。 -->
         <div class="herobtns">
+          <a class="cta-cut" :href="hrefOf('raids.html')">12/10 首批团本筹备（含黑龙门任务）</a>
           <a class="cta cta-line" :href="hrefOf('updates.html')">看这一版改了什么</a>
           <a class="cta cta-mute" :href="hrefOf('chooser.html')">不知道选哪个职业：做 7 题玩法问答</a>
         </div>
@@ -28,8 +29,18 @@
       <!-- 读数框里只放倒计时：旧站这条被对拍与断言双双钉住（框里混进链接就算回归） -->
       <aside class="heros">
         <div class="cd">
-          <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
-          <p class="dim">到正式服上线（{{ launchDay }}）</p>
+          <template v-if="phase === 'launch'">
+            <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
+            <p class="dim">到正式服上线（{{ launchDay }}）</p>
+          </template>
+          <template v-else-if="phase === 'raid'">
+            <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
+            <p class="dim">到首批团本首次开放（{{ targetDay }}）</p>
+          </template>
+          <template v-else>
+            <div class="cdrow"><b class="mono">3</b><span>座团本</span></div>
+            <p class="dim">深穴 · 海加尔峰 · 奥妮克希亚（每周重置）</p>
+          </template>
         </div>
       </aside>
     </section>
@@ -166,7 +177,7 @@ const err = ref('');
 const pv = ref({ classes: {} });
 const ART = ref({});
 const DUN = ref([]);
-const { left } = useCountdown();
+const { left, phase, targetDay } = useCountdown();
 
 function boot() {
   err.value = '';
@@ -268,9 +279,9 @@ const MOD_GROUPS = computed(() => {
       { href: 'dungeons.html', t: '副本与掉落', kicker: '世界 · ' + s.dungeons + ' 座',
         art: artOf(A, 'dungeons', 'city-of-dalaran'),
         n: [[s.dungeons, '座本'], [s.bosses, '个首领'], [s.drops, '条掉落']] },
-      { href: 'raids.html', t: '团队副本', kicker: '世界 · 团本',
-        art: artOf(A, 'scenes', 'tielu-dadian'),
-        n: [[(s.raids || {}).names || 0, '个团队条目'], [(s.raids || {}).claimed || 0, '座有名单']] },
+      { href: 'raids.html', t: '团队副本 · 12/10 首开', kicker: '世界 · 团本筹备',
+        art: artOf(A, 'dungeons', 'hyjal-summit') || artOf(A, 'scenes', 'tielu-dadian'),
+        n: [[(s.raids || {}).claimed || 3, '座首发团本'], [s.raidSets || 18, '套海山 T1'], ['12-10', '首次开放']] },
       { href: 'professions.html', t: '专业与配方', kicker: '专业 · ' + s.professions + ' 个',
         art: artOf(A, 'scenes', 'gulin'),
         n: [[s.professions, '个专业'], [s.recipes, '条配方'], [s.gatherNodes, '个采集点']] },

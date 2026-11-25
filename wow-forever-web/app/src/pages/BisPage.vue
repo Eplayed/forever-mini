@@ -242,7 +242,10 @@
                 <td><span class="nm" :class="'q' + (p.quality || 0)">{{ p.name }}</span>
                   <span class="sub" v-if="p.st">{{ p.st }}</span></td>
                 <td class="c-num num">{{ p.ilvl }}</td>
-                <td class="w-tail dim">{{ p.src }}</td>
+                <td class="w-tail dim">
+                  <router-link v-if="p.dungeonId" :to="{ path: '/dungeon', query: { d: p.dungeonId } }">{{ p.src }}</router-link>
+                  <span v-else>{{ p.src }}</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -299,7 +302,7 @@
                   <td class="c-num num">{{ x.ilvl }}</td>
                   <td class="c-num num">{{ x.alts.length }}</td>
                   <td class="w-tail dim">
-                    <router-link v-if="x.dungeonId" :to="'/dungeons/' + x.dungeonId" @click.stop>{{ x.src }}</router-link>
+                    <router-link v-if="x.dungeonId" :to="{ path: '/dungeon', query: { d: x.dungeonId } }" @click.stop>{{ x.src }}</router-link>
                     <span v-else>{{ x.src || '—' }}</span>
                   </td>
                 </tr>
@@ -314,7 +317,7 @@
                           <span class="nm" :class="'q' + (alt.quality || 0)">{{ alt.name }}</span>
                           <span class="mono dim" v-if="alt.ilvl">iLv{{ alt.ilvl }}</span>
                           <span class="dim b60-altsrc">
-                            <router-link v-if="alt.dungeonId" :to="'/dungeons/' + alt.dungeonId">{{ alt.src }}</router-link>
+                            <router-link v-if="alt.dungeonId" :to="{ path: '/dungeon', query: { d: alt.dungeonId } }">{{ alt.src }}</router-link>
                             <span v-else>{{ alt.src }}</span>
                           </span>
                         </div>
@@ -361,6 +364,7 @@
       </div>
     </div>
 
+    <PartnerSlots position="bis-inline" />
     <!-- 备选 popover：站主 2026-10-17 改口径——不要 modal 弹窗，要贴着点的那一格弹出来。
          纸娃娃那一格与下面一览表的那一行开同一个 popover，anchor 传的是被点的元素。 -->
     <BisPop v-if="pick" :slot="pick" :rows="pickerRows" :head="pickerHead"
@@ -386,6 +390,7 @@ import IconCell from '../components/IconCell.vue';
 import BisCell from '../components/BisCell.vue';
 import BisPop from '../components/BisPop.vue';
 import ModelViewer from '../components/ModelViewer.vue';
+import PartnerSlots from '../components/PartnerSlots.vue';
 import { gearNodes } from '../lib/bis-model.js';
 
 const FACS = [['alliance', '联盟'], ['horde', '部落']];
@@ -462,7 +467,7 @@ const filteredItemSets = computed(() => (itemSetCat.value === 'all'
 const curItemSet = computed(() => filteredItemSets.value.filter((s) => s.id === activeItemSetId.value)[0]
   || filteredItemSets.value[0] || null);
 const curItemSetRows = computed(() => ((curItemSet.value || {}).pieces || []).map((p) => ({
-  item: p.item, slot: p.slot, src: p.src, name: nm(p.item), iconKey: ic(p.item),
+  item: p.item, slot: p.slot, src: p.src, dungeonId: p.dungeonId, name: nm(p.item), iconKey: ic(p.item),
   quality: qo(p.item), ilvl: il(p.item), st: stOf(p.item)
 })));
 const curItemSetSum = computed(() => sumStatLines(((curItemSet.value || {}).pieces || []).map((p) => {

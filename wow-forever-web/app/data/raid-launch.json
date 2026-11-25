@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "title": "首批 60 级团队副本开放档案",
+    "generatedAt": "2026-11-25",
+    "checkedAt": "2026-11-25",
+    "level": "L0",
+    "provenance": [
+      {
+        "type": "official_cn",
+        "url": "https://wow.blizzard.cn/news/24303009",
+        "quote": "从12月10日起，60级玩家可以挑战三个团队副本：深穴、海加尔峰和奥妮克希亚的巢穴",
+        "note": "国服官方团队副本概览——位置、团队规模和开门任务",
+        "checkedAt": "2026-11-25"
+      },
+      {
+        "type": "official_cn",
+        "url": "https://wow.blizzard.cn/news/24303009",
+        "quote": "这些团队副本目前都计划每周重置，你可以针对固定的日程循环做好调整，随时和你的团队回来再次挑战。",
+        "note": "官方公布重置周期",
+        "checkedAt": "2026-11-25"
+      }
+    ]
+  },
+  "unlockDate": "2026-12-10",
+  "unlockDateEn": "2026-12-09",
+  "resetCycle": "每周重置",
+  "raids": [
+    {
+      "id": "barrow-deeps",
+      "nameCn": "深穴",
+      "nameEn": "The Barrow Deeps",
+      "partySize": 10,
+      "levelRange": "60",
+      "bossCount": 8,
+      "zoneCn": "海加尔山",
+      "entrances": "海加尔山地下，多处入口连通海加尔山、冬泉谷和黑喉要塞",
+      "attunementRequired": false,
+      "attunementItem": null,
+      "attunementNote": "无需开门任务，60 级即可集结 10 人进入",
+      "hasT1Sets": false,
+      "summary": "曾囚禁伊利丹一万年的地下牢狱，10 人满级团队副本，共 8 位首领，设有多条通道可入内。",
+      "prepTips": [
+        "10 人规模适合小型固定团率先开荒，无需前置开门任务。",
+        "拥有连通海加尔山、冬泉谷与黑喉要塞的多处入口，提前约定集合路线更省时。"
+      ],
+      "level": "L0",
+      "provenance": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24303009",
+          "quote": "与海加尔山、冬泉谷和黑喉要塞相连的入口为冒险者们提供多条道路进入深穴。10名玩家组成的团队将会在探索这座地下牢狱的过程中遭遇八名强大的首领。",
+          "checkedAt": "2026-11-25"
+        }
+      ]
+    },
+    {
+      "id": "hyjal-summit",
+      "nameCn": "海加尔峰",
+      "nameEn": "Hyjal Summit",
+      "partySize": 20,
+      "levelRange": "60",
+      "bossCount": 13,
+      "zoneCn": "海加尔山",
+      "entrances": "海加尔山之巅，接近世界之树诺达希尔",
+      "attunementRequired": false,
+      "attunementItem": null,
+      "attunementNote": "无需开门任务，60 级即可集结 20 人进入",
+      "hasT1Sets": true,
+      "summary": "20 人非线性登山团队副本，盘踞 13 位首领，击败山脚远古守卫后可从多条路线选择进攻方向。",
+      "prepTips": [
+        "无需前置开门任务，20 人团队可自选多条地上与地下登山路线推进。",
+        "本站已收录 18 套海加尔峰 T1 职业套装目录，可在配装页提前核对本职业定位。"
+      ],
+      "level": "L0",
+      "provenance": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24303009",
+          "quote": "海加尔峰位于海加尔山之巅的世界之树诺达希尔附近，这里盘踞着13名首领，其中一名远古守卫把守着山脚的入口。完成这场战斗后，冒险团队可以从多条道路中选择一条登山",
+          "checkedAt": "2026-11-25"
+        }
+      ]
+    },
+    {
+      "id": "onyxias-lair",
+      "nameCn": "奥妮克希亚的巢穴",
+      "nameEn": "Onyxia's Lair",
+      "partySize": 40,
+      "levelRange": "60",
+      "bossCount": 1,
+      "zoneCn": "尘泥沼泽",
+      "entrances": "尘泥沼泽深处",
+      "attunementRequired": true,
+      "attunementItem": "龙火护符",
+      "attunementNote": "必须完成阵营专属开门任务，全员背包携带「龙火护符」（无需装备）方可进本",
+      "hasT1Sets": false,
+      "summary": "40 人经典黑龙公主三阶段团本，强力火焰吐息考验团队站位、火抗准备与转阶段配合。",
+      "prepTips": [
+        "开荒前务必尽早组队完成阵营开门任务链，拿到龙火护符并放在背包中（不需装备）。",
+        "战斗分为三个阶段且有强力火焰吐息，进本前建议提前准备火焰抗性装备与药剂。"
+      ],
+      "level": "L0",
+      "provenance": [
+        {
+          "type": "official_cn",
+          "url": "https://wow.blizzard.cn/news/24303009",
+          "quote": "奥妮克希亚的巢穴位于尘泥沼泽深处，是一个供40名玩家组队挑战的60级团队副本。奥妮克希亚的巢穴专为60级玩家设计，需要冒险团队的每一名成员都携带龙火护符方可进入。",
+          "checkedAt": "2026-11-25"
+        }
+      ]
+    }
+  ],
+  "onyxiaAttunement": {
+    "itemName": "龙火护符",
+    "bagRule": "进入副本前确保背包携带龙火护符，无需装备即可进本。",
+    "level": "L0",
+    "provenance": [
+      {
+        "type": "official_cn",
+        "url": "https://wow.blizzard.cn/news/24303009",
+        "quote": "确保你的背包中携带有龙火护符。不需要装备这个物品即可进入奥妮克希亚的巢穴。",
+        "checkedAt": "2026-11-25"
+      }
+    ],
+    "alliance": [
+      {
+        "step": 1,
+        "id": "a1",
+        "questCn": "黑龙的威胁",
+        "zone": "燃烧平原",
+        "npc": "赫林迪斯·河角",
+        "dungeonId": null,
+        "summary": "在燃烧平原找赫林迪斯·河角接取起始任务。"
+      },
+      {
+        "step": 2,
+        "id": "a2",
+        "questCn": "真正的主人（6 步系列）",
+        "zone": "燃烧平原 / 湖畔镇 / 暴风城",
+        "npc": "赫林迪斯·河角",
+        "dungeonId": null,
+        "summary": "完成六个「真正的主人」系列跑腿与调查任务，追查黑龙军团对黑石兽人的影响。"
+      },
+      {
+        "step": 3,
+        "id": "a3",
+        "questCn": "温德索尔元帅",
+        "zone": "燃烧平原 · 摩根的岗哨 → 黑石深渊",
+        "npc": "麦克斯韦尔元帅",
+        "dungeonId": "blackrock-depths",
+        "summary": "从麦克斯韦尔元帅接取任务，前往黑石深渊牢房寻找温德索尔元帅。"
+      },
+      {
+        "step": 4,
+        "id": "a4",
+        "questCn": "被遗弃的希望",
+        "zone": "黑石深渊 → 燃烧平原",
+        "npc": "温德索尔元帅",
+        "dungeonId": "blackrock-depths",
+        "summary": "与温德索尔元帅对话后，返回摩根的岗哨向麦克斯韦尔元帅汇报。"
+      },
+      {
+        "step": 5,
+        "id": "a5",
+        "questCn": "弄皱的便笺",
+        "zone": "黑石深渊",
+        "npc": "副本敌人掉落物品开启",
+        "dungeonId": "blackrock-depths",
+        "summary": "在黑石深渊敌人身上拾取「弄皱的便笺」接取任务，并将其带回牢房交给温德索尔元帅。"
+      },
+      {
+        "step": 6,
+        "id": "a6",
+        "questCn": "一丝希望",
+        "zone": "黑石深渊",
+        "npc": "温德索尔元帅",
+        "dungeonId": "blackrock-depths",
+        "summary": "击败黑石深渊的傀儡统帅阿格曼奇和怒炉将军，取回遗失的情报。"
+      },
+      {
+        "step": 7,
+        "id": "a7",
+        "questCn": "冲破牢笼！",
+        "zone": "黑石深渊 → 燃烧平原",
+        "npc": "温德索尔元帅",
+        "dungeonId": "blackrock-depths",
+        "summary": "护送温德索尔元帅逃离黑石深渊，随后回摩根的岗哨向麦克斯韦尔元帅交差。"
+      },
+      {
+        "step": 8,
+        "id": "a8",
+        "questCn": "集合在暴风城",
+        "zone": "燃烧平原 → 暴风城城门",
+        "npc": "麦克斯韦尔元帅 / 侍卫洛文",
+        "dungeonId": null,
+        "summary": "前往暴风城城门找侍卫洛文对话召唤温德索尔元帅。"
+      },
+      {
+        "step": 9,
+        "id": "a9",
+        "questCn": "潜藏者",
+        "zone": "暴风城要塞",
+        "npc": "温德索尔元帅",
+        "dungeonId": null,
+        "summary": "召集盟友随元帅进入暴风城要塞揭穿伪装并击退龙人卫士。"
+      },
+      {
+        "step": 10,
+        "id": "a10",
+        "questCn": "巨龙之眼",
+        "zone": "暴风城 → 冬泉谷",
+        "npc": "大领主伯瓦尔·弗塔根",
+        "dungeonId": null,
+        "summary": "从伯瓦尔·弗塔根处接取任务，前往寻找能重铸护符的帮助者。"
+      },
+      {
+        "step": 11,
+        "id": "a11",
+        "questCn": "龙火护符",
+        "zone": "黑石塔上层",
+        "npc": "达基萨斯将军掉落",
+        "dungeonId": "upper-blackrock-spire",
+        "summary": "通关黑石塔上层，从达基萨斯将军身上取得黑龙勇士之血，最终换取龙火护符。"
+      }
+    ],
+    "horde": [
+      {
+        "step": 1,
+        "id": "h1",
+        "questCn": "鲜血与雷鸣",
+        "zone": "荒芜之地 · 卡加斯",
+        "npc": "军官高图斯",
+        "dungeonId": null,
+        "summary": "在荒芜之地卡加斯找军官高图斯接取起始任务。"
+      },
+      {
+        "step": 2,
+        "id": "h2",
+        "questCn": "高图斯的命令",
+        "zone": "黑石塔下层",
+        "npc": "军官高图斯",
+        "dungeonId": "lower-blackrock-spire",
+        "summary": "深入黑石塔下层执行命令，随后按指引前往奥格瑞玛向伊崔格与萨尔报告。"
+      },
+      {
+        "step": 3,
+        "id": "h3",
+        "questCn": "为部落而战！",
+        "zone": "黑石塔（上/下层）",
+        "npc": "萨尔",
+        "dungeonId": "upper-blackrock-spire",
+        "summary": "为萨尔拿下大酋长雷德·黑手的头颅。"
+      },
+      {
+        "step": 4,
+        "id": "h4",
+        "questCn": "风吹来的消息",
+        "zone": "奥格瑞玛",
+        "npc": "萨尔",
+        "dungeonId": null,
+        "summary": "在奥格瑞玛倾听萨尔讲述他的发现。"
+      },
+      {
+        "step": 5,
+        "id": "h5",
+        "questCn": "部落的勇士",
+        "zone": "凄凉之地",
+        "npc": "雷克萨",
+        "dungeonId": null,
+        "summary": "前往凄凉之地沿道路寻找游荡的雷克萨。"
+      },
+      {
+        "step": 6,
+        "id": "h6",
+        "questCn": "雷克萨的证明",
+        "zone": "凄凉之地 → 西瘟疫之地",
+        "npc": "雷克萨 / 巫女麦兰达",
+        "dungeonId": null,
+        "summary": "将雷克萨的信送往西瘟疫之地交给巫女麦兰达。"
+      },
+      {
+        "step": 7,
+        "id": "h7",
+        "questCn": "黑龙幻象",
+        "zone": "黑石塔上层",
+        "npc": "巫女麦兰达",
+        "dungeonId": "upper-blackrock-spire",
+        "summary": "按麦兰达要求收集黑色龙人的眼球，制作龙形护符。"
+      },
+      {
+        "step": 8,
+        "id": "h8",
+        "questCn": "埃博斯塔夫",
+        "zone": "尘泥沼泽",
+        "npc": "古龙埃博斯塔夫",
+        "dungeonId": null,
+        "summary": "使用龙形护符伪装，前往尘泥沼泽面见古龙埃博斯塔夫。"
+      },
+      {
+        "step": 9,
+        "id": "h9",
+        "questCn": "龙骨试炼（4 头巨龙）",
+        "zone": "冬泉谷 / 悲伤沼泽 / 塔纳利斯 / 湿地",
+        "npc": "古龙埃博斯塔夫",
+        "dungeonId": null,
+        "summary": "完成四个试炼任务，击败斯克利尔、索姆努斯、克鲁纳里斯和埃克托兹并取回颅骨。"
+      },
+      {
+        "step": 10,
+        "id": "h10",
+        "questCn": "晋升……",
+        "zone": "尘泥沼泽 → 凄凉之地",
+        "npc": "埃博斯塔夫 → 雷克萨",
+        "dungeonId": null,
+        "summary": "取得黯淡的龙火护符，带回凄凉之地交给游荡的雷克萨。"
+      },
+      {
+        "step": 11,
+        "id": "h11",
+        "questCn": "黑龙勇士之血",
+        "zone": "黑石塔上层 → 凄凉之地",
+        "npc": "雷克萨 / 达基萨斯将军",
+        "dungeonId": "upper-blackrock-spire",
+        "summary": "击杀黑石塔上层达基萨斯将军取得黑龙勇士之血，交回雷克萨即可获得龙火护符。"
+      }
+    ]
+  }
+}

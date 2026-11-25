@@ -1,20 +1,20 @@
 {
  "meta": {
-  "generatedAt": "2026-11-17",
+  "generatedAt": "2026-11-25",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
  "scale": {
   "dungeonQuests": 396,
   "dungeonGeoEntry": 36,
-  "dungeonGeoBoss": 266,
-  "dungeonGeoBossPoints": 287,
+  "dungeonGeoBoss": 269,
+  "dungeonGeoBossPoints": 290,
   "dungeonQuestDungeons": 30,
   "profVendors": 646,
   "profDrops": 336,
   "professions": 12,
-  "recipes": 1987,
-  "recipesNew": 885,
+  "recipes": 1988,
+  "recipesNew": 886,
   "gatherNodes": 55,
   "zones": 44,
   "newZones": 4,
@@ -48,10 +48,10 @@
    },
    {
     "classId": "warrior",
-    "official": 99,
-    "datamine": 98,
-    "total": 197,
-    "share": 50.3,
+    "official": 101,
+    "datamine": 97,
+    "total": 198,
+    "share": 51,
     "place": 3
    },
    {
@@ -88,10 +88,10 @@
    },
    {
     "classId": "rogue",
-    "official": 51,
-    "datamine": 121,
-    "total": 172,
-    "share": 29.7,
+    "official": 52,
+    "datamine": 122,
+    "total": 174,
+    "share": 29.9,
     "place": 8
    },
    {
@@ -112,39 +112,42 @@
    "cap": 16,
    "total": 65
   },
-  "items": 21869,
+  "items": 21874,
   "itemsSrvAbsent": 796,
-  "itemsSrvPresent": 1005,
-  "itemsSrvConflict": 777,
-  "itemsNew": 6044,
+  "itemsSrvPresent": 802,
+  "itemsSrvConflict": 781,
+  "itemsNew": 6049,
   "spells": 493,
   "achievements": 211,
   "pets": 18,
   "petSkills": 22,
   "macros": 245,
-  "macrosUnverifiedIds": 41,
-  "bisAltRows": 1237,
-  "bisItemSets": 36,
+  "macrosUnverifiedIds": 43,
+  "bisAltRows": 1206,
+  "bisItemSets": 78,
+  "bis60Sets": 27,
+  "bis60Classes": 9,
+  "raidSets": 18,
   "bisSets": 38,
   "bisClasses": 9,
-  "bisItems": 177,
-  "search": 5434,
-  "talentPreview": 468,
+  "bisItems": 193,
+  "search": 5462,
+  "talentPreview": 471,
   "releases": 83,
   "navNew": [
    "宏命令"
   ],
   "glossary": 215,
   "classes": 9,
-  "talentNodes": 468,
+  "talentNodes": 471,
   "talentTreeConflict": 2,
-  "talentVerified": 447,
+  "talentVerified": 450,
   "dungeons": 38,
   "dungeonsNew": 9,
-  "bosses": 320,
-  "drops": 1450,
+  "bosses": 346,
+  "drops": 1483,
   "dungeonNameEn": 38,
-  "dungeonParty": 36,
+  "dungeonParty": 38,
   "dungeonRangeTwoSay": 3,
   "queueRows": 56,
   "queueUnlisted": 16,
@@ -153,116 +156,125 @@
    "names": 15,
    "claimed": 3,
    "matched": 1,
-   "named": 0,
+   "named": 3,
    "dungeonVariants": 3
   },
   "races": 10,
   "traits": 40,
-  "timeline": 11,
+  "timeline": 12,
   "abilities": 86,
   "coverage": {
-   "L0": 369,
-   "L1": 430,
-   "L2": 362,
-   "L3": 2
+   "L0": 372,
+   "L1": 431,
+   "L2": 363,
+   "L3": 0
   },
-  "coverageTotal": 1163,
+  "coverageTotal": 1166,
   "pubCoverage": {
-   "L0": 369,
+   "L0": 372,
    "L1": 323,
-   "L2": 1,
-   "L3": 2
+   "L2": 0,
+   "L3": 0
   },
   "pubTotal": 695,
   "dataVersions": [
    {
     "file": "legacy.json",
     "section": "传承",
-    "build": "1.60.1.70938",
-    "checkedAt": "2026-11-16",
+    "build": "1.60.1.71037",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
     "file": "queue.json",
     "section": "副本排队表",
-    "build": "1.60.1.70938",
-    "checkedAt": "2026-11-16",
+    "build": "1.60.1.71037",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
     "file": "changes.json",
     "section": "客户端改动",
-    "build": "1.60.1.70938",
-    "checkedAt": "2026-11-16",
+    "build": "1.60.1.71037",
+    "checkedAt": "2026-11-23",
     "classic": "1.15.9.70576",
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
     "file": "world.json",
     "section": "世界（区域与稀有）",
-    "build": "1.60.1.70938",
-    "checkedAt": "2026-11-16",
+    "build": "1.60.1.71037",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
     "file": "macros.json",
     "section": "宏命令",
     "build": null,
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 12,
-    "stale": "warn"
+    "daysSince": 2,
+    "stale": null
    },
    {
     "file": "name-generator.json",
     "section": "角色起名词库",
     "build": null,
-    "checkedAt": "2026-11-03",
+    "checkedAt": "2026-11-18",
     "classic": null,
-    "daysSince": 14,
-    "stale": "warn"
+    "daysSince": 7,
+    "stale": null
    },
    {
     "file": "pets.json",
     "section": "猎人宠物",
     "build": null,
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 12,
-    "stale": "warn"
+    "daysSince": 2,
+    "stale": null
    },
    {
     "file": "bis.json",
     "section": "配装名单",
     "build": null,
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 12,
-    "stale": "warn"
+    "daysSince": 2,
+    "stale": null
    },
    {
     "file": "art.json",
     "section": "素材台账（客户端原画）",
     "build": null,
-    "checkedAt": "2026-11-16",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
+    "stale": null
+   },
+   {
+    "file": "raid-launch.json",
+    "section": "团队副本开放档案",
+    "build": null,
+    "checkedAt": "2026-11-25",
+    "classic": null,
+    "daysSince": 0,
     "stale": null
    },
    {
     "file": "items.json",
     "section": "物品名录",
     "build": null,
-    "checkedAt": "2026-11-16",
+    "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    }
   ],
@@ -270,7 +282,7 @@
    "soft": 7,
    "hard": 14
   },
-  "newestBuild": "1.60.1.70938",
+  "newestBuild": "1.60.1.71037",
   "newestSection": "传承"
  }
 }

@@ -361,8 +361,267 @@
 .leveling-name { font-size: 22rpx; color: var(--txt-dim); }
 .leveling-feature { width: 100%; box-sizing: border-box; margin-top: 3rpx; padding-top: 7rpx; border-top: 1rpx solid var(--gold-line); color: var(--gold-hi); font-size: 22rpx; line-height: 1.35; white-space: pre-line; }
 
+/* 区服 G 排行卡（2026-11-24 站主拍板：位于常用查询上方，只用 G/g/米） */
+.grank-card {
+  position: relative;
+  margin-top: 22rpx;
+  padding: 18rpx 20rpx 14rpx;
+  border: 1rpx solid var(--forge-edge);
+  border-radius: var(--r-ctl);
+  background: var(--glass-sheen), var(--forge-surface);
+  box-shadow: var(--forge-inset), var(--forge-shadow);
+}
+.grank-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16rpx;
+  right: 16rpx;
+  height: 2rpx;
+  background: var(--forge-line);
+  pointer-events: none;
+}
+.grank-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.grank-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.grank-title {
+  color: var(--gold-hi);
+  font-size: 29rpx;
+  font-weight: 750;
+}
+.grank-unit {
+  padding: 2rpx 12rpx;
+  border: 1rpx solid var(--gold-line);
+  border-radius: 8rpx;
+  background: var(--gold-glow);
+  color: var(--gold-hi);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+.grank-time {
+  color: var(--txt-muted);
+  font-size: 20rpx;
+  flex-shrink: 0;
+}
+.grank-tabs {
+  display: flex;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+.grank-tab {
+  flex: 1;
+  text-align: center;
+  padding: 8rpx 0;
+  border: 1rpx solid var(--line);
+  border-radius: 8rpx;
+  background: var(--panel-glass);
+  color: var(--txt-dim);
+  font-size: 22rpx;
+  font-weight: 600;
+}
+.grank-tab-on {
+  border-color: var(--forge-edge-active);
+  background: var(--forge-surface-active);
+  color: var(--gold-hi);
+}
+.grank-tab-a {
+  border-color: var(--fac-alliance-line);
+  background: var(--fac-alliance-bg);
+  color: var(--fac-alliance);
+}
+.grank-tab-h {
+  border-color: var(--fac-horde-line);
+  background: var(--fac-horde-bg);
+  color: var(--fac-horde);
+}
+.grank-list {
+  margin-top: 12rpx;
+}
+.grank-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 13rpx 6rpx;
+  border-top: 1rpx solid var(--gold-line-soft);
+}
+.grank-row:first-child {
+  border-top: 0;
+}
+.grank-pos {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  border: 1rpx solid var(--line);
+  background: var(--leather);
+  color: var(--txt-dim);
+  font-size: 22rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.grank-pos-1 {
+  border-color: var(--gold-hot);
+  background: var(--gold-hot);
+  color: var(--accent-ink);
+}
+.grank-pos-2 {
+  border-color: var(--gold-hi);
+  background: var(--forge-surface-active);
+  color: var(--gold-hi);
+}
+.grank-pos-3 {
+  border-color: var(--forge-edge);
+  background: var(--forge-surface-active);
+  color: var(--gold);
+}
+.grank-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+.grank-realm {
+  color: var(--txt-title);
+  font-size: 26rpx;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.grank-fac {
+  flex-shrink: 0;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  font-size: 19rpx;
+  font-weight: 600;
+}
+.grank-fac-a {
+  border: 1rpx solid var(--fac-alliance-line);
+  background: var(--fac-alliance-bg);
+  color: var(--fac-alliance);
+}
+.grank-fac-h {
+  border: 1rpx solid var(--fac-horde-line);
+  background: var(--fac-horde-bg);
+  color: var(--fac-horde);
+}
+.grank-val {
+  flex-shrink: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.grank-prefix {
+  color: var(--txt-muted);
+  font-size: 21rpx;
+}
+.grank-num {
+  color: var(--gold-hi);
+  font-size: 29rpx;
+  font-weight: 750;
+}
+.grank-g {
+  color: var(--gold);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+.grank-empty {
+  padding: 26rpx 8rpx 18rpx;
+  text-align: center;
+  color: var(--txt-muted);
+  font-size: 23rpx;
+}
+.grank-more {
+  margin-top: 6rpx;
+  padding: 12rpx 0 6rpx;
+  border-top: 1rpx solid var(--gold-line-soft);
+  text-align: center;
+  color: var(--gold-hi);
+  font-size: 22rpx;
+  font-weight: 600;
+}
+.grank-note {
+  margin-top: 8rpx;
+  color: var(--txt-hint);
+  font-size: 19rpx;
+  text-align: right;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .adventure-card, .spotlight, .priority, .feature-selected .feature-body { animation: none; }
   .entry, .feature-tab, .leveling-card, .adventure-main, .adventure-continue { transition: none; }
   .home .entry-pressed { transform: none; }
+}
+
+/* 12月10日首批团本筹备横幅（开服倒计时结束后展示） */
+.raid-banner {
+  margin-bottom: 16rpx;
+  padding: 18rpx 20rpx;
+  background: var(--forge-surface);
+  border: 1rpx solid var(--forge-edge-active);
+  border-radius: var(--r-ctl);
+  box-shadow: var(--forge-inset), var(--forge-shadow);
+}
+.raid-banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.raid-banner-title {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex-wrap: wrap;
+}
+.raid-tag {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--gold-hot);
+  padding: 2rpx 10rpx;
+  border-radius: var(--r-ctl);
+}
+.raid-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--txt-title);
+}
+.raid-arrow {
+  font-size: 32rpx;
+  color: var(--gold-hi);
+}
+.raid-banner-sub {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--txt-dim);
+}
+.raid-banner-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+.raid-chip {
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: var(--gold-hi);
+  background: var(--sunk);
+  border: 1rpx solid var(--gold-line);
+  border-radius: var(--r-ctl);
+}
+.raid-chip-warn {
+  color: var(--txt-caution);
+  border-color: var(--warn);
+  background: var(--warn-bg);
 }

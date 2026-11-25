@@ -19,6 +19,18 @@
     <view class="chip chip-src" bindtap="onLoots">掉落反查 ›</view>
   </scroll-view>
 
+  <view wx:if="{{activeKind === 'raid' && raidHeader}}" class="card raid-intro">
+    <view class="raid-intro-hd">
+      <text class="raid-intro-title">{{raidHeader.title}}</text>
+      <text class="raid-intro-tag">{{raidHeader.resetCycle}}</text>
+    </view>
+    <view class="muted raid-intro-sub">深穴 10人 / 海加尔峰 20人无需门任务；奥妮克希亚 40人需全员背包携带龙火护符。</view>
+    <view class="raid-intro-btns">
+      <view class="raid-intro-btn" bindtap="onGoBis60">60级团前 & 一图流 ›</view>
+      <view class="raid-intro-btn" bindtap="onGoT1">海加尔峰 T1 套装 ›</view>
+    </view>
+  </view>
+
   <view wx:if="{{recent.length && !kw && activeKind === 'all' && !onlyFav}}" class="card">
     <view class="card-title">最近看过</view>
     <view class="mini-row" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="onOpen">
@@ -49,6 +61,7 @@
         <view class="drow-meta">
           <text class="drow-level">{{item.rangeText}}</text>
           <text wx:if="{{item.faction}}" class="drow-faction">{{item.faction}}</text>
+          <text wx:if="{{item.attuneTag}}" class="drow-attune">{{item.attuneTag}}</text>
         </view>
         <view wx:if="{{item.zoneCn}}" class="drow-zone">{{item.zoneCn}}</view>
       </view>

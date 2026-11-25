@@ -16,7 +16,7 @@
     </view>
 
     <view class="hero">
-      <view class="hero-art">
+      <view class="hero-art" bindtap="onPreviewArt">
         <icon-cell src="{{artUrl}}" size="hero" fallback-text="这座还没有原画" />
       </view>
       <view class="hero-title">
@@ -44,10 +44,17 @@
     </view>
 
     <view wx:if="{{mapUrl || mapEntry}}" class="card">
-      <view class="card-title">副本地图</view>
-      <view wx:if="{{mapUrl}}" class="map-box">
-        <icon-cell src="{{mapUrl}}" size="hero" label="{{title}}" fallback-text="这座还没有内部底图" />
+      <view class="card-head">
+        <view class="card-title">{{mapTitle}}</view>
+        <text wx:if="{{mapUrl && !mapBroken}}" class="map-zoom-hint" bindtap="onPreviewMap">点击放大</text>
       </view>
+      <view wx:if="{{mapUrl && !mapBroken}}" class="map-box" bindtap="onPreviewMap" aria-role="button" aria-label="点击放大查看{{mapTitle}}">
+        <view class="map-stage">
+          <image class="map-img" src="{{mapUrl}}" mode="widthFix" lazy-load binderror="onMapError" />
+          <view wx:for="{{mapPins}}" wx:key="key" class="map-pin mono" style="left:{{item.x}}%;top:{{item.y}}%;">{{item.seq}}</view>
+        </view>
+      </view>
+      <view wx:elif="{{mapUrl && mapBroken}}" class="map-fallback">底图暂未加载，下拉刷新重试</view>
       <view wx:if="{{mapEntry}}" class="muted map-entry">{{mapEntry}}</view>
     </view>
 
@@ -62,6 +69,55 @@
       </view>
     </view>
 
+    <view wx:if="{{raidGuide}}" class="card raid-guide-card">
+      <view class="raid-guide-hd">
+        <view class="card-title raid-guide-title">{{raidGuide.title}}</view>
+        <text class="raid-guide-badge {{raidGuide.attunementRequired ? 'raid-badge-warn' : 'raid-badge-ok'}}">
+          {{raidGuide.attunementRequired ? '需' + (raidGuide.attunementItem || '门任务') : '无需门任务'}}
+        </text>
+      </view>
+      <view wx:if="{{raidGuide.entrances}}" class="raid-guide-row">
+        <text class="raid-guide-k">入口路线</text>
+        <text class="raid-guide-v">{{raidGuide.entrances}}</text>
+      </view>
+      <view wx:if="{{raidGuide.attunementNote}}" class="raid-guide-row">
+        <text class="raid-guide-k">进本条件</text>
+        <text class="raid-guide-v">{{raidGuide.attunementNote}}</text>
+      </view>
+      <view wx:for="{{raidGuide.prepTips}}" wx:key="index" class="raid-guide-tip">· {{item}}</view>
+      <view class="raid-guide-btns">
+        <view class="raid-guide-btn" bindtap="onGoBis60">60级团前 BiS & 一图流 ›</view>
+        <view wx:if="{{raidGuide.hasT1Sets}}" class="raid-guide-btn raid-guide-btn-gold" bindtap="onGoT1">海加尔峰 18 套 T1 ›</view>
+      </view>
+    </view>
+
+    <view wx:if="{{attune && attuneSteps.length}}" class="card attune-card" id="raid-attunement">
+      <view class="attune-hd">
+        <view class="card-title attune-title">龙火护符开门任务</view>
+        <text class="attune-prog mono">{{attuneDoneCount}} / {{attuneSteps.length}}</text>
+      </view>
+      <view class="muted attune-note">{{attune.bagRule}} 点击步骤即可勾选记录进度。</view>
+      <view class="attune-tabs">
+        <view class="attune-tab {{attuneFac === 'alliance' ? 'attune-tab-a' : ''}}" data-fac="alliance" bindtap="onPickAttuneFac">联盟（{{attune.alliance.length}}步）</view>
+        <view class="attune-tab {{attuneFac === 'horde' ? 'attune-tab-h' : ''}}" data-fac="horde" bindtap="onPickAttuneFac">部落（{{attune.horde.length}}步）</view>
+        <view wx:if="{{attuneDoneCount > 0}}" class="attune-reset" bindtap="onResetAttune">重置</view>
+      </view>
+      <view class="attune-bar">
+        <view class="attune-fill" style="width:{{attunePct}}%;"></view>
+      </view>
+      <view wx:for="{{attuneSteps}}" wx:key="id" class="attune-row {{item.done ? 'attune-row-done' : ''}}">
+        <view class="attune-main" data-id="{{item.id}}" bindtap="onToggleAttuneStep">
+          <view class="attune-box {{item.done ? 'attune-box-on' : ''}}">{{item.done ? '✓' : item.step}}</view>
+          <view class="attune-copy">
+            <view class="attune-q">{{item.questCn}}</view>
+            <view class="attune-sub">{{item.zone}}{{item.npc ? ' · ' + item.npc : ''}}</view>
+            <view class="attune-desc">{{item.summary}}</view>
+          </view>
+        </view>
+        <view wx:if="{{item.dungeonId}}" class="attune-go" data-id="{{item.dungeonId}}" catchtap="onOpenLinkedDungeon">看副本 ›</view>
+      </view>
+    </view>
+
     <view class="card encounter-card">
       <view class="section-kicker">副本档案</view>
       <view class="card-title">首领与掉落</view>
@@ -71,6 +127,7 @@
       <view wx:for="{{bosses}}" wx:key="id" class="encounter {{openBoss === item.id ? 'encounter-open' : ''}}">
         <view class="encounter-toggle" hover-class="encounter-pressed" data-id="{{item.id}}" aria-role="button"
                 aria-expanded="{{openBoss === item.id}}" bindtap="onToggleBoss">
+          <view wx:if="{{!item.other}}" class="encounter-seq mono">{{item.seq}}</view>
           <view class="encounter-face">
             <icon-cell wx:if="{{!item.other}}" src="{{item.portraitUrl}}" size="md" label="{{item.name}}" />
             <text wx:else class="encounter-other">余</text>

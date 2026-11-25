@@ -124,7 +124,8 @@ const BUDGET_KB = {
   /* 职业选择器（2026-11-08 站主第一批③）：七题问卷整份一文件（实测约 4 KB）。
      16 KB 给"以后加题、加说明"留余量；它是进页才取的一次性流量，不是冷启动路径。 */
   chooser: 16,
-  census: 8
+  census: 8,
+  gRank: 16
 };
 
 /* M02 起素材走自己的通道：站内 `img/art/...` 不改字段名，只把值改写成
@@ -145,7 +146,7 @@ const EXPORT_RELS = ['meta.json', 'glossary.json', 'dungeons.json', 'spells.json
    不进 oss-preview 导出产物，理由同 items 那两条。 */
 /* flags.json 故意不在这份名单里：它是策略不是数据，改开关不许换 buildId（换了就等于
    "拧一个开关要重发整批数据"）。开关走自己那份可变对象，见 buildFlags。 */
-const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'population-census.json', 'population-census-cn.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
+const BASE_INPUTS = ['macros.json', 'name-generator.json', 'glossary.json', 'meta.json', 'dungeons.json', 'raid-launch.json', 'spells.json', 'races.json', 'classes.json', 'guide.json', 'dungeon-geo.json', 'dungeon-quests.json', 'chooser.json', 'population-census.json', 'population-census-cn.json', 'g-rank.json', 'ui-art.json', 'art.json', 'items.json', 'items-detail.json', 'bis.json', 'professions.json'];
 const ADDON_DROP_FACTS = 'upstream/df-drop-item-facts.json';
 const DROPPED_DETAIL_FIELDS = [];
 const ASSET_NOTE = 'art 与 bosses[].portrait 的值是相对 assets/ 的路径，图标只用 drops[].iconKey 拼 assets/icons/{key}.jpg；'
@@ -260,20 +261,22 @@ function validateCensusChina(sample, classIds) {
   const p = sample.provenance;
   if (!keys(p, 'checkedAt name screen sourceTime type url') || p.name !== '大脚BIGFOOT'
     || p.type !== 'public_aggregate' || p.url !== 'https://bigfoot.nga.cn/'
-    || p.screen !== '服务器人口 · 魔兽世界无限服 · 24小时人口'
+    || !['服务器人口 · 魔兽世界无限服 · 24小时人口', '服务器人口 · 无限服 · 昨日人口'].includes(p.screen)
     || !/^\d{4}-\d\d-\d\d$/.test(p.checkedAt)
     || !/^\d{4}-\d\d-\d\d (?:[01]\d|2[0-3]):[0-5]\d$/.test(p.sourceTime)
     || !Number.isFinite(Date.parse(p.checkedAt + 'T00:00:00Z'))
     || !Number.isFinite(Date.parse(p.sourceTime.replace(' ', 'T') + ':00Z'))) {
     return ['国服人口普查：来源或时间缺失'];
   }
-  const validShares = (list, ids) => Array.isArray(list) && list.length === ids.length
-    && list.every((r) => keys(r, 'id share') && ids.includes(r.id) && Number.isInteger(r.share) && r.share >= 0 && r.share <= 100)
+  const validShares = (list, ids, precision) => Array.isArray(list) && list.length === ids.length
+    && list.every((r) => keys(r, 'id share') && ids.includes(r.id) && Number.isFinite(r.share) && r.share >= 0 && r.share <= 100
+      && Math.abs(r.share * precision - Math.round(r.share * precision)) < 1e-8)
     && new Set(list.map((r) => r.id)).size === ids.length
-    && Math.abs(list.reduce((sum, r) => sum + r.share, 0) - 100) <= ids.length / 2;
+    && Math.abs(list.reduce((sum, r) => sum + r.share, 0) - 100) <= ids.length / (2 * precision) + 1e-8;
   const errors = [];
-  if (!validShares(sample.factions, ['alliance', 'horde'])) errors.push('国服人口普查：阵营占比无效');
-  if (!validShares(sample.classes, classIds)) errors.push('国服人口普查：职业占比无效');
+  const classPrecision = p.screen.endsWith('昨日人口') ? 100 : 1;
+  if (!validShares(sample.factions, ['alliance', 'horde'], 1)) errors.push('国服人口普查：阵营占比无效');
+  if (!validShares(sample.classes, classIds, classPrecision)) errors.push('国服人口普查：职业占比无效');
   return errors;
 }
 
@@ -324,7 +327,7 @@ function indexEntry(d, useAsset) {
   };
 }
 
-function detailRecord(d, useAsset, geo, usePortrait) {
+function detailRecord(d, useAsset, geo, usePortrait, zoneMapByCn) {
   const out = {};
   Object.keys(d).forEach((k) => {
     if (k === 'drops') return;
@@ -346,16 +349,33 @@ function detailRecord(d, useAsset, geo, usePortrait) {
   }
   out.dropCount = (d.drops || []).length;
   out.lootPath = 'dungeons/loot/' + d.id + '.json';
-  /* 副本地图（M03）：入口在哪个区、坐标多少，内部底图走素材层。
-     底图分两种来源，addon-drawn 的那几座界面必须就地标"示意图"（根 AGENTS.md）。 */
+  /* 副本地图（M03 + 2026-11-24）：入口在哪个区、坐标多少，内部底图走素材层，
+     并附带本内首领百分比坐标（bossPins，键为首领 id）供小程序在无内置标号的新本底图上叠加序号；
+     尚无本内底图时（如未开放团本海加尔峰）按所在区域名挂 zoneMap，界面明确标「区域地图」。 */
   const g = geo ? geo[d.id] : null;
-  if (g) {
+  const fallbackZoneRel = !(g && g.bossMap)
+    ? ((g && g.entry && g.entry.mapFile) || (d.zoneCn && zoneMapByCn && zoneMapByCn[d.zoneCn]) || null)
+    : null;
+  if (g || fallbackZoneRel) {
+    let bossPins = null;
+    if (g && g.bossPos && Array.isArray(out.bosses)) {
+      const pins = {};
+      out.bosses.forEach((b) => {
+        const pts = (b.nameCn && g.bossPos[b.nameCn]) || null;
+        if (Array.isArray(pts) && pts.length) {
+          pins[b.id] = pts.map((p) => (p.floor ? [p.x, p.y, p.floor] : [p.x, p.y]));
+        }
+      });
+      if (Object.keys(pins).length) bossPins = pins;
+    }
     out.geo = {
-      zone: (g.entry && g.entry.zone) || null,
-      entryX: g.entry && g.entry.x !== undefined && g.entry.x !== null ? g.entry.x : null,
-      entryY: g.entry && g.entry.y !== undefined && g.entry.y !== null ? g.entry.y : null,
-      mapKind: g.bossMapKind || null,
-      map: g.bossMap ? useAsset(g.bossMap, d.id + '.map') : null
+      zone: (g && g.entry && g.entry.zone) || d.zoneCn || null,
+      entryX: g && g.entry && g.entry.x !== undefined && g.entry.x !== null ? g.entry.x : null,
+      entryY: g && g.entry && g.entry.y !== undefined && g.entry.y !== null ? g.entry.y : null,
+      mapKind: (g && g.bossMapKind) || null,
+      map: g && g.bossMap ? useAsset(g.bossMap, d.id + '.map') : null,
+      zoneMap: fallbackZoneRel ? useAsset(fallbackZoneRel, d.id + '.zoneMap') : null,
+      ...(bossPins ? { bossPins } : {})
     };
   }
   return out;
@@ -657,6 +677,12 @@ function buildBatch(env, opts) {
   const geoPath = path.join(siteData(), 'dungeon-geo.json');
   const geoPack = fs.existsSync(geoPath) ? readJson(geoPath) : null;
   const geoById = (geoPack && geoPack.dungeons) || {};
+  const worldPath = path.join(siteData(), 'world.json');
+  const worldPack = fs.existsSync(worldPath) ? readJson(worldPath) : null;
+  const zoneMapByCn = {};
+  ((worldPack && worldPack.zones) || []).forEach((z) => {
+    if (z && z.nameCn && z.mapFile) zoneMapByCn[z.nameCn] = z.mapFile;
+  });
 
   /* —— 副本任务线（2026-11-08 站主第一批②）：dungeon-quests.json 在构建时并进详情分片 ——
      与 items/bis 同一模式：只喂分发层、不进导出产物（已在 BASE_INPUTS 登记，哈希跟批次走）。
@@ -665,6 +691,10 @@ function buildBatch(env, opts) {
   if (!fs.existsSync(dqSrc)) errors.push('缺少基底 app/data/dungeon-quests.json，副本任务线没有数据来源');
   const dqPack = fs.existsSync(dqSrc) ? readJson(dqSrc) : null;
   const dqById = (dqPack && dqPack.dungeons) || {};
+  const rlSrc = path.join(siteData(), 'raid-launch.json');
+  const rlPack = fs.existsSync(rlSrc) ? readJson(rlSrc) : null;
+  const rlById = {};
+  ((rlPack && rlPack.raids) || []).forEach((r) => { if (r && r.id) rlById[r.id] = r; });
   let dqRows = 0;
   Object.keys(dqById).forEach((k) => {
     if (!list.some((d) => d.id === k)) errors.push('副本任务线里有副本名单外的 id：' + k);
@@ -688,6 +718,29 @@ function buildBatch(env, opts) {
   if (censusPack) errors.push(...validateCensus(censusPack, censusClassIds));
   if (censusChina) errors.push(...validateCensusChina(censusChina, censusClassIds));
   if (censusChina && !censusPack) errors.push('国服人口普查：缺少主分片');
+  const gRankSrc = path.join(siteData(), 'g-rank.json');
+  const gRankPack = fs.existsSync(gRankSrc) ? readJson(gRankSrc) : null;
+  if (gRankPack) {
+    const GRANK_BANNED = /金币|人民币|元|¥|￥|交易|购买|dd373|7881|uu898/i;
+    if (gRankPack.kind !== 'g-rank' || !Array.isArray(gRankPack.items)) {
+      errors.push('区服 G 排行：g-rank.json 缺少 kind=g-rank 或 items 数组');
+    } else {
+      const seen = new Set();
+      if (GRANK_BANNED.test(String(gRankPack.note || '')) || GRANK_BANNED.test(String(gRankPack.unit || ''))) {
+        errors.push('区服 G 排行：note/unit 出现禁用货币或平台词（只允许用 G/g/米）');
+      }
+      gRankPack.items.forEach((it, idx) => {
+        if (!it || !it.id || !it.realm) errors.push('区服 G 排行第 ' + idx + ' 条缺 id/realm');
+        if (it && seen.has(it.id)) errors.push('区服 G 排行重复 id：' + it.id);
+        if (it && it.id) seen.add(it.id);
+        if (!it || (it.faction !== 'alliance' && it.faction !== 'horde')) errors.push('区服 G 排行第 ' + idx + ' 条 faction 须为 alliance/horde');
+        if (!it || typeof it.gPerMi !== 'number' || !Number.isFinite(it.gPerMi) || it.gPerMi <= 0) errors.push('区服 G 排行第 ' + idx + ' 条 gPerMi 须为正数');
+        if (it && GRANK_BANNED.test(String(it.realm || '') + ' ' + String(it.note || ''))) {
+          errors.push('区服 G 排行第 ' + idx + ' 条出现禁用词（只允许用 G/g/米）');
+        }
+      });
+    }
+  }
 
   /* —— 卡口（与根 AGENTS.md 第五条同一口径，导出这层再拦一次） —— */
   if (!list.length) errors.push('副本 0 条');
@@ -786,7 +839,29 @@ function buildBatch(env, opts) {
 
   list.forEach((d) => {
     (d.drops || []).forEach((x) => useIcon(x.iconKey, 'dungeons/loot/' + d.id));
-    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById, usePortrait) };
+    const det = { schemaVersion: SCHEMA_VERSION, product: PRODUCT, kind: 'dungeon-detail', source: 'wow-forever-web/app/data/dungeons.json', dungeon: detailRecord(d, useAsset, geoById, usePortrait, zoneMapByCn) };
+    if (rlPack && rlById[d.id]) {
+      const rg = rlById[d.id];
+      det.raidGuide = {
+        unlockDate: rlPack.unlockDate || null,
+        resetCycle: rlPack.resetCycle || null,
+        entrances: rg.entrances || '',
+        attunementRequired: !!rg.attunementRequired,
+        attunementItem: rg.attunementItem || null,
+        attunementNote: rg.attunementNote || '',
+        hasT1Sets: !!rg.hasT1Sets,
+        summary: rg.summary || '',
+        prepTips: Array.isArray(rg.prepTips) ? rg.prepTips : [],
+        ...(d.id === 'onyxias-lair' && rlPack.onyxiaAttunement ? {
+          attunement: {
+            itemName: rlPack.onyxiaAttunement.itemName,
+            bagRule: rlPack.onyxiaAttunement.bagRule,
+            alliance: rlPack.onyxiaAttunement.alliance || [],
+            horde: rlPack.onyxiaAttunement.horde || []
+          }
+        } : {})
+      };
+    }
     /* 任务线（2026-11-08 第一批②）并进详情分片：玩家进详情页那一屏顺手就看到
        "这座本有什么任务"，不再发第二次请求——与装备详情卡并进掉落分片同一个理由。
        只带界面要读的字段。2026-11-09 站主要求补上"在哪接的"：实测 pickupNpc 336/396、
@@ -1888,6 +1963,25 @@ function buildBatch(env, opts) {
       facts: collectFactDates([{ provenance }])
     });
   }
+  if (gRankPack) {
+    const gRankItems = (gRankPack.items || []).slice().sort((a, b) => (b.gPerMi - a.gPerMi)
+      || String(a.realm).localeCompare(String(b.realm))
+      || String(a.faction).localeCompare(String(b.faction)));
+    pushObj('gRank', 'g-rank/index.json', {
+      schemaVersion: SCHEMA_VERSION,
+      product: PRODUCT,
+      kind: 'g-rank',
+      level: gRankPack.level || 'L2',
+      updatedAt: gRankPack.updatedAt || '',
+      unit: gRankPack.unit || 'G/米',
+      note: gRankPack.note || '仅供参考，以游戏内实际为准',
+      counts: { items: gRankItems.length },
+      items: gRankItems
+    }, {
+      records: gRankItems.length,
+      budget: 'gRank'
+    });
+  }
 
   const byKey = {};
   entries.forEach((e) => { byKey[e.key] = e; });
@@ -2162,7 +2256,8 @@ function buildBatch(env, opts) {
       macrosIndex: macroIndexObj ? shared(pickFile('macrosIndex')) : undefined,
       nameGenerator: namesIndexObj ? shared(pickFile('nameGenerator')) : undefined,
       chooser: chooserPack ? shared(pickFile('chooser')) : undefined,
-      census: censusPack ? shared(pickFile('census')) : undefined
+      census: censusPack ? shared(pickFile('census')) : undefined,
+      gRank: gRankPack ? shared(pickFile('gRank')) : undefined
     },
     bundle: { path: bundlePath, sha256: sha256(bundleBuf), etag: md5Hex(bundleBuf), md5: md5B64(bundleBuf), bytes: bundleBuf.length }
   };

@@ -22,13 +22,36 @@ export function typeLabel(t) {
    从 00:00 挪到 07:00，与小程序 services/countdown.js 仍是同一个瞬间）。
    日期只有 data/meta.json 一处真相，tools/build-data.js 会卡这里和小程序常量是否一致（比日期段）。 */
 export const LAUNCH_AT = Date.parse('2026-11-05T07:00:00+08:00');
+export const RAID_UNLOCK_AT = Date.parse('2026-12-10T07:00:00+08:00');
 
-export function launchLeft(now) {
-  const ms = Math.max(0, LAUNCH_AT - (now === undefined ? Date.now() : now));
+export function timeLeftTo(targetMs, now) {
+  const ms = Math.max(0, targetMs - (now === undefined ? Date.now() : now));
   return {
+    ms,
     d: Math.floor(ms / 86400000), h: Math.floor(ms / 3600000) % 24,
     m: Math.floor(ms / 60000) % 60, s: Math.floor(ms / 1000) % 60
   };
+}
+
+export function launchLeft(now) {
+  const t = timeLeftTo(LAUNCH_AT, now);
+  return { d: t.d, h: t.h, m: t.m, s: t.s };
+}
+
+export function raidUnlockLeft(now) {
+  return timeLeftTo(RAID_UNLOCK_AT, now);
+}
+
+export function raidCalendarDays(now, unlockDate) {
+  const n = now === undefined ? Date.now() : now;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(unlockDate || '2026-12-10'));
+  if (!m) return 0;
+  const HOUR = 3600000;
+  const DAY = 86400000;
+  const target = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])) - 8 * HOUR + 7 * HOUR;
+  if (n >= target) return 0;
+  const bjDay = (ts) => Math.floor((ts + 8 * HOUR) / DAY);
+  return Math.max(0, bjDay(target) - bjDay(n));
 }
 
 export function pad2(n) { return (n < 10 ? '0' : '') + n; }

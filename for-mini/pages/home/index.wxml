@@ -11,6 +11,21 @@
     <text wx:else>距开服 {{cd.d}} 天</text>
     <text>{{cd.dayText}}</text>
   </view>
+  <view wx:elif="{{raidBanner}}" class="raid-banner">
+    <view class="raid-banner-top" aria-role="button" bindtap="goRaids" hover-class="entry-pressed">
+      <view class="raid-banner-title">
+        <text class="raid-tag">12月10日首开</text>
+        <text class="raid-name">{{raidBanner.headline}}</text>
+      </view>
+      <text class="raid-arrow" aria-hidden="true">›</text>
+    </view>
+    <view class="raid-banner-sub">深穴 10人 · 海加尔峰 20人 · 奥妮克希亚 40人（每周重置）</view>
+    <view class="raid-banner-btns">
+      <view class="raid-chip" aria-role="button" bindtap="goRaids" hover-class="entry-pressed">3 座团本 ›</view>
+      <view class="raid-chip raid-chip-warn" aria-role="button" bindtap="goOnyxia" hover-class="entry-pressed">黑龙门任务打卡 ›</view>
+      <view class="raid-chip" aria-role="button" bindtap="goBis60" hover-class="entry-pressed">60级团前/T1 ›</view>
+    </view>
+  </view>
 
   <view class="adventure-card">
     <view class="adventure-main" aria-role="button" bindtap="goAdventure" hover-class="entry-pressed">
@@ -53,6 +68,42 @@
   <view class="feature-tabs">
     <button class="feature-tab {{featuredIndex === 0 ? 'feature-tab-on' : ''}}" data-index="0" bindtap="onFeaturedSelect" hover-class="entry-pressed" aria-pressed="{{featuredIndex === 0}}">副本手册</button>
     <button class="feature-tab {{featuredIndex === 1 ? 'feature-tab-on' : ''}}" data-index="1" bindtap="onFeaturedSelect" hover-class="entry-pressed" aria-pressed="{{featuredIndex === 1}}">人口普查</button>
+  </view>
+
+  <view wx:if="{{openGRank}}" class="grank-card">
+    <view class="grank-head">
+      <view class="grank-title-wrap">
+        <text class="grank-title">区服 G 排行</text>
+        <text class="grank-unit">1米 ≈ xxG</text>
+      </view>
+      <text class="grank-time">{{gRankUpdated ? '更新 ' + gRankUpdated : '待更新'}}</text>
+    </view>
+    <view class="grank-tabs">
+      <view class="grank-tab {{gRankFaction === 'all' ? 'grank-tab-on' : ''}}" data-faction="all" bindtap="onPickGRankFaction" aria-role="button">全部</view>
+      <view class="grank-tab {{gRankFaction === 'alliance' ? 'grank-tab-on grank-tab-a' : ''}}" data-faction="alliance" bindtap="onPickGRankFaction" aria-role="button">联盟</view>
+      <view class="grank-tab {{gRankFaction === 'horde' ? 'grank-tab-on grank-tab-h' : ''}}" data-faction="horde" bindtap="onPickGRankFaction" aria-role="button">部落</view>
+    </view>
+    <view wx:if="{{gRankView.length}}" class="grank-list">
+      <view wx:for="{{gRankView}}" wx:key="id" class="grank-row">
+        <view class="grank-pos {{item.rank <= 3 ? 'grank-pos-' + item.rank : ''}}">{{item.rank}}</view>
+        <view class="grank-main">
+          <text class="grank-realm">{{item.realm}}</text>
+          <text class="grank-fac {{item.faction === 'alliance' ? 'grank-fac-a' : 'grank-fac-h'}}">{{item.factionText}}</text>
+        </view>
+        <view class="grank-val">
+          <text class="grank-prefix">1米 ≈ </text>
+          <text class="grank-num">{{item.rateText}}</text>
+          <text class="grank-g"> G</text>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="grank-empty">
+      {{gRankLoaded ? (gRankHasAny ? '当前阵营暂无数据' : '暂未录入区服 G 数据，稍后更新') : '正在读取区服 G 排行…'}}
+    </view>
+    <view wx:if="{{gRankTotal > 5}}" class="grank-more" bindtap="onToggleGRankExpand" aria-role="button">
+      {{gRankExpanded ? '收起排行 ▴' : '展开全部（共 ' + gRankTotal + ' 条）▾'}}
+    </view>
+    <view wx:if="{{gRankNote}}" class="grank-note">{{gRankNote}}</view>
   </view>
 
   <view class="sec-title">常用查询</view>

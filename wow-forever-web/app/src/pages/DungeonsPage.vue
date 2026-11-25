@@ -123,7 +123,7 @@
 
     <!-- 团本带：不吃上面的筛选（旧站 dunBandBlock('团队副本', …) 在 #dlist 外） -->
     <template v-if="raids.length">
-      <div class="band"><b>团队副本</b><span class="dim">开放时间未定 · <component :is="raidsLink.to ? 'router-link' : 'a'" v-bind="raidsLink">团本那一页</component></span><span class="dim mono">{{ raids.length }} 座</span></div>
+      <div class="band"><b>团队副本</b><span class="dim">2026-12-10 首批开放 · 每周重置 · <component :is="raidsLink.to ? 'router-link' : 'a'" v-bind="raidsLink">团本开荒中心与门任务 →</component></span><span class="dim mono">{{ raids.length }} 座</span></div>
       <div class="dgrid">
         <div v-for="c in raidCards" :key="c.x.id" class="dcard2">
           <div class="dbn2"><span class="dbn2-shade"></span>

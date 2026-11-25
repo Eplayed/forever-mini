@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router.js';
+import { initAnalytics } from './lib/analytics.js';
 
 /* 全站样式三层，都只在这一个文件里引入：令牌 → 组件基线 → 新站视觉层。
    令牌是单一事实源（docs/UI.md 的令牌表对着它写），改色值/断点只改这里引的那几个文件。 */
@@ -13,3 +14,4 @@ import './styles/board.css';
 import './styles/motion.css';
 
 createApp(App).use(router).mount('#app');
+router.isReady().then(() => initAnalytics(router));

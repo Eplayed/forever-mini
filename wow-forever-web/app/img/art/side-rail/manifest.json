@@ -1,0 +1,19 @@
+{
+  "note": "桌面 1440px 副屏侧栏素材台账（仅保留在本机与仓库，不发布公网）。删除本目录及清空 app/data/side-rail.json 即可整块撤下。",
+  "updatedAt": "2026-11-25",
+  "files": [
+    {
+      "file": "cw-icon.png",
+      "origin": "owner-original",
+      "source": "站主自研小游戏《超武刷宝觉醒》原创图标（d:/project/dark-survivors/docs/taptap-release/icon_512.png 缩至 160x160）",
+      "sha256Prefix": "4c98b5988445a1eb",
+      "fetched": "2026-11-24"
+    },
+    {
+      "file": "../brand/mini-qrcode.jpg",
+      "origin": "owner-original",
+      "source": "本站自研微信小程序「跑本无限助手」官方太阳码（AppID wxfd9a2b985a6cedc3）",
+      "fetched": "2026-11-25"
+    }
+  ]
+}

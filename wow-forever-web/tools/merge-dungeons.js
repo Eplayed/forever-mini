@@ -20,6 +20,7 @@ const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const IMG = path.resolve(ROOT, '..', 'img');
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const dg = read('dungeons.json');
+const priorDungeons = new Map([...dg.newDungeons, ...dg.classicDungeons, ...dg.raids].map((d) => [d.id, d]));
 const up = read('upstream/wclbox-dungeons.json');
 const thanesLootPath = 'upstream/hall-of-thanes-loot.json';
 const thanesLoot = fs.existsSync(path.join(ROOT, thanesLootPath)) ? read(thanesLootPath) : null;
@@ -67,8 +68,7 @@ function build(d) {
   const junk = (s) => !s || /^(小怪|精英怪|trash|other)$/i.test(String(s).trim());
   const upB = (d.bosses || []).filter((b) => !junk(b.nameCn));
   const refreshed = foreverById.get(mine ? mine.id : slug) || [];
-  const retired = new Set(refreshed.flatMap((b) => (b.aliases || []).map((a) => a.bossId)
-    .concat(b.match === 'new' ? [b.bossId] : [])));
+  const retired = new Set(refreshed.flatMap((b) => (b.aliases || []).map((a) => a.bossId)));
   if (thanesLoot && slug === thanesLoot.dungeonId) thanesAliases.forEach((a) => retired.add(a.bossId));
   const mineB = ((mine && mine.bosses) || []).filter((b) => !retired.has(b.id));
   // 上游删掉的有名首领不跟着删：我们没法进游戏数首领，删错了就是丢数据。
@@ -86,6 +86,7 @@ function build(d) {
   if (fresh.length) console.log('%s 上游新增首领 %d 个：%s', slug, fresh.length,
     fresh.map((b) => b.nameCn).join('、'));
   const mk = (b) => ({
+    ...mineB.find((old) => old.id === b.id),
     id: b.id, nameCn: b.nameCn,
     level: (d.drops || []).some((x) => x.bossId === b.id) ? 'L0' : 'L2',
     // 这句是玩家看到的，不能写「上游标了：」（禁词卡口会红，2026-10-10 实测：
@@ -94,7 +95,7 @@ function build(d) {
     note: (d.drops || []).some((x) => x.bossId === b.id) ? null : '公开数据库里还没有它的掉落记录。'
   });
   const bosses = upB.map(mk).concat(gone.map((b) => ({
-    id: b.id, nameCn: b.nameCn, level: b.level || 'L2',
+    ...b, level: b.level || 'L2',
     note: (d.drops || []).some((x) => x.bossId === b.id) ? null : b.note || '公开数据库里还没有它的掉落记录。'
   })));
   const drops = (d.drops || []).map((x) => ({
@@ -175,9 +176,12 @@ if (fs.existsSync(DF_PATH)) {
     if (!src) return;
     d.bosses = d.bosses || [];
     const real = (src.bosses || []).filter((b) => b.npcId !== null && !notBoss(b.nameCn));
-    const refreshedAliases = (foreverById.get(d.id) || []).flatMap((b) => b.aliases || []);
+    // 同一 NPC 若已由核对包登记，稍后的核对包处理会统一使用该首领 ID。
+    const refreshed = foreverById.get(d.id) || [];
+    const refreshedAliases = refreshed.flatMap((b) => b.aliases || []);
     const fresh = real.filter((b) => !refreshedAliases.some((a) => a.nameCn === b.nameCn)
-      && !d.bosses.some((x) => x.nameCn === b.nameCn ||
+      && !refreshed.some((row) => row.bossId && row.npcId === b.npcId)
+      && !d.bosses.some((x) => x.npcId === b.npcId || x.id === 'npc-' + b.npcId || x.nameCn === b.nameCn ||
       (b.nameEn && x.nameEn && x.nameEn === b.nameEn)) &&
       (!thanesLoot || d.id !== thanesLoot.dungeonId || !thanesAliases.some((a) => a.nameCn === b.nameCn)));
     fresh.forEach((b) => {
@@ -470,6 +474,145 @@ if (settled || filled) {
   console.log('等级区间定稿：按参考站卡片改写 %d 座 / 用客户端数补上空值 %d 座', settled, filled);
 }
 
+/* ---------- 团本已知事实补齐（2026-11-24）：中文名、所在区域、规模、首领名单 ----------
+   来源均为客户端解包转述（wclbox 传承成就 62034/62035、物品出处页 17064）与本机插件 RaidUI.lua，
+   不编造掉落与未公布的入口坐标；重跑幂等，已有首领（如奥妮克希亚）原样保留。 */
+const RAID_ENRICH = {
+  'barrow-deeps': {
+    nameCn: '深穴',
+    level: 'L0',
+    levelRange: '60-60',
+    partySize: 10,
+    zoneCn: '海加尔山',
+    bosses: [
+      { id: 'barrow-frosthowl', nameCn: '寒嚎' },
+      { id: 'barrow-elder-tangleclaw', nameCn: '长者纠爪' },
+      { id: 'barrow-dreadweaver-kalis', nameCn: '恐网者卡利斯' },
+      { id: 'barrow-well-of-sorrow', nameCn: '悲伤之井' },
+      { id: 'barrow-amesthrax', nameCn: '阿梅斯拉克斯' },
+      { id: 'barrow-delinar-songwood', nameCn: '德利纳尔·歌木' },
+      { id: 'barrow-ravus-and-dalisa', nameCn: '拉弗斯与达莉莎' },
+      { id: 'barrow-sonia-shadowvale', nameCn: '索尼娅·暗影之谷' }
+    ],
+    bossNote: '首领名单取自客户端传承成就（深穴征服者），掉落待实测。',
+    provenance: [
+      {
+        type: 'official_cn',
+        url: 'https://wow.blizzard.cn/news/24303009',
+        quote: '与海加尔山、冬泉谷和黑喉要塞相连的入口为冒险者们提供多条道路进入深穴。10名玩家组成的团队将会在探索这座地下牢狱的过程中遭遇八名强大的首领。',
+        note: '国服官方团队副本概览（12月10日开放，10人，8首领）',
+        checkedAt: '2026-11-25'
+      },
+      {
+        type: 'datamine_cn',
+        url: 'https://wowforever.wclbox.com/chuancheng',
+        note: '传承成就 62035「深穴征服者」（在深穴击败下列首领，8 位首领名单；无限客户端解包，经新手盒子转述）',
+        checkedAt: '2026-11-23'
+      },
+      {
+        type: 'addon',
+        url: 'DungeonsForever 2.1.132 Core/RaidUI.lua',
+        note: '团本列表记为「深穴」、10 人、等级上限 60，本站待实测',
+        checkedAt: '2026-11-24'
+      }
+    ]
+  },
+  'hyjal-summit': {
+    nameCn: '海加尔峰',
+    level: 'L0',
+    levelRange: '60-60',
+    partySize: 20,
+    zoneCn: '海加尔山',
+    bosses: [
+      { id: 'hyjal-bandalar', nameCn: '班达拉尔' },
+      { id: 'hyjal-rotting-ancient', nameCn: '腐朽古树' },
+      { id: 'hyjal-lost-legion', nameCn: '迷时军团' },
+      { id: 'hyjal-sylvestris-dusksong', nameCn: '希尔维斯翠丝·暮歌' },
+      { id: 'hyjal-old-duskstalker', nameCn: '老暮暗潜伏者' },
+      { id: 'hyjal-galaris-the-deep', nameCn: '深渊者加拉里斯' },
+      { id: 'hyjal-haunted-kasris', nameCn: '鬼影缠身的卡斯里斯' },
+      { id: 'hyjal-anara-frostwind', nameCn: '阿娜拉·寒风' },
+      { id: 'hyjal-elder-mindrel', nameCn: '长者敏德雷尔' },
+      { id: 'hyjal-stalker-stillwind', nameCn: '追踪者静风' },
+      { id: 'hyjal-council-of-thorns', nameCn: '荆棘议会' },
+      { id: 'hyjal-dreamweaver-nisus', nameCn: '缚梦者尼苏斯' },
+      { id: 'hyjal-lord-of-the-wilds', nameCn: '荒野之王' }
+    ],
+    bossNote: '首领名单取自客户端传承成就（荒野征服者），掉落待实测。',
+    provenance: [
+      {
+        type: 'official_cn',
+        url: 'https://wow.blizzard.cn/news/24303009',
+        quote: '海加尔峰位于海加尔山之巅的世界之树诺达希尔附近，这里盘踞着13名首领，其中一名远古守卫把守着山脚的入口。',
+        note: '国服官方团队副本概览（12月10日开放，20人，13首领）',
+        checkedAt: '2026-11-25'
+      },
+      {
+        type: 'datamine_cn',
+        url: 'https://wowforever.wclbox.com/chuancheng',
+        note: '传承成就 62034「荒野征服者」（在海加尔峰击败下列首领，13 位首领名单；无限客户端解包，经新手盒子转述）',
+        checkedAt: '2026-11-23'
+      },
+      {
+        type: 'addon',
+        url: 'DungeonsForever 2.1.132 Core/RaidUI.lua',
+        note: '团本列表记为「海加尔峰」、20 人、海加尔山、等级上限 60，本站待实测',
+        checkedAt: '2026-11-24'
+      }
+    ]
+  },
+  'onyxias-lair': {
+    nameCn: '奥妮克希亚的巢穴',
+    level: 'L0',
+    zoneCn: '尘泥沼泽',
+    provenance: [
+      {
+        type: 'official_cn',
+        url: 'https://wow.blizzard.cn/news/24303009',
+        quote: '奥妮克希亚的巢穴位于尘泥沼泽深处，是一个供40名玩家组队挑战的60级团队副本。奥妮克希亚的巢穴专为60级玩家设计，需要冒险团队的每一名成员都携带龙火护符方可进入。',
+        note: '国服官方团队副本概览（12月10日开放，40人，需龙火护符）',
+        checkedAt: '2026-11-25'
+      },
+      {
+        type: 'datamine_cn',
+        url: 'https://wowforever.wclbox.com/wupin/17064',
+        note: '无限客户端物品出处记为「奥妮克希亚的巢穴」（经新手盒子转述），并与本机客户端地图 249_1 标题一致',
+        checkedAt: '2026-11-24'
+      },
+      {
+        type: 'addon',
+        url: 'DungeonsForever 2.1.132 Core/RaidUI.lua',
+        note: '团本列表记为「奥妮克希亚的巢穴」、40 人、尘泥沼泽，本站待实测',
+        checkedAt: '2026-11-24'
+      }
+    ]
+  }
+};
+(dg.raids || []).forEach((r) => {
+  const spec = RAID_ENRICH[r.id];
+  if (!spec) return;
+  if (spec.nameCn) r.nameCn = spec.nameCn;
+  if (spec.level) r.level = spec.level;
+  if (spec.levelRange && !r.levelRange) r.levelRange = spec.levelRange;
+  if (spec.partySize && !r.partySize) r.partySize = spec.partySize;
+  if (spec.zoneCn) r.zoneCn = spec.zoneCn;
+  if (spec.bosses && spec.bosses.length) {
+    const prev = new Map((r.bosses || []).map((b) => [b.id, b]));
+    const next = spec.bosses.map((b) => Object.assign(
+      { id: b.id, nameCn: b.nameCn, level: 'L2', note: spec.bossNote || null, portrait: null },
+      prev.get(b.id) || {}
+    ));
+    const extra = (r.bosses || []).filter((b) => !spec.bosses.some((s) => s.id === b.id));
+    r.bosses = next.concat(extra);
+  }
+  if (spec.provenance) {
+    r.provenance = (r.provenance || []).slice();
+    spec.provenance.forEach((p) => {
+      if (!r.provenance.some((q) => q.type === p.type && q.url === p.url)) r.provenance.push(p);
+    });
+  }
+});
+
 /* 领主大厅的旧掉落表只有一件任务物品。用逐件对过 ID 的无限服资料补全，
    同一 NPC 的两种译名留在同一条首领记录，免得点到重复的空行。 */
 if (thanesLoot) {
@@ -582,6 +725,22 @@ if (dg.meta.bossPortraits) {
   dg.meta.bossPortraits.note = '已登记的游戏原图、实录裁切与本机客户端模型渲染，未核头像留空。';
 }
 
+// 已发布的插件掉落保留到同一个首领，网页源重抓不会覆盖这部分事实。
+for (const dungeon of [...dg.newDungeons, ...dg.classicDungeons, ...dg.raids]) {
+  const prior = priorDungeons.get(dungeon.id);
+  const pairs = new Set((dungeon.drops || []).map((row) => row.bossId + '|' + row.itemId));
+  const byId = new Map(dungeon.bosses.map((boss) => [boss.id, boss]));
+  for (const row of prior?.drops || []) {
+    if (row.from !== 'df-forever') continue;
+    const boss = byId.get(row.bossId);
+    if (!boss) continue;
+    const pair = boss.id + '|' + row.itemId;
+    if (pairs.has(pair)) continue;
+    dungeon.drops.push({ ...row, bossCn: boss.nameCn });
+    pairs.add(pair);
+  }
+}
+require('./merge-addon-dungeon-loot')(dg);
 fs.writeFileSync(path.join(ROOT, 'dungeons.json'), JSON.stringify(dg, null, 1) + '\n');
 const cnt = (a) => a.reduce((s, x) => s + (x.bosses || []).length, 0);
 console.log('已写 dungeons.json：新本 %d / 经典本 %d / 团本 %d，BOSS 共 %d 个，掉落条目 %d 条',

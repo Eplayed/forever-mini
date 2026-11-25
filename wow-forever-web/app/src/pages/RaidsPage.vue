@@ -6,49 +6,189 @@
   </div>
 
   <template v-else-if="P">
-    <!-- 页首 banner：团本页不在旧站 PAGE_HEAD_SEC 表里，2026-10-12 起按设计稿改用 .dhero 放 H1，
-         不套卡片头。卡上的图一律是本站自生成的氛围底图，不拿一张通用风景冒充某个团本的载入图。
-         名字与人数只用我们数据里有的说法：中文定名没公布就写英文原名，两说的两个数都摆。 -->
-    <section class="dhero" style="height:300px">
-      <img :src="HERO" alt="" style="object-position:center 25%">
+    <!-- 页首 banner：12 月 10 日首批 60 级团本首次开放总览 -->
+    <section class="dhero raid-hero">
+      <img :src="HERO" alt="" style="object-position:center 28%">
       <span class="dx"></span>
-      <div class="db" style="padding-top:104px">
-        <div class="kicker">RAID</div>
-        <h1 class="pt" style="font-family:var(--font-display);font-size:46px;margin:10px 0 8px;color:#f2ead8">团队副本</h1>
-        <div style="font-size:15px;color:var(--txt-dim)">现在能排到 {{ P.names.length }} 个团队条目。<template v-if="P.nextRaid">新团本 <b style="color:var(--gold-hi);font-family:var(--font-mono)">{{ raidDate }}</b> 开放。</template></div>
-      </div>
-      <div class="dstate"><i></i><b>{{ P.both ? '部分已有名单' : '全部未开放' }}</b></div>
-    </section>
-
-    <section style="padding:36px 0 0">
-      <div class="raidgrid">
-        <div v-for="c in cards" :key="c.r.id" class="raidcard">
-          <div class="art">
-            <img :src="c.art" alt="" loading="lazy">
-            <span class="sh"></span>
-            <span class="goldtag">{{ c.sizes.length ? c.sizes[0] + ' 人' : '人数未定' }}</span>
-            <span class="chip-open">{{ c.bosses ? '名单已收录' : '未开放' }}</span>
-            <h3>{{ c.r.nameEn || c.r.nameCn || '未定名' }}</h3>
-          </div>
-          <div class="bd">
-            <div class="facts">
-              <template v-if="c.sizes.length > 1">人数两说：<template v-for="(s, i) in c.sizes" :key="s + '-' + i"><b>{{ s }}</b>{{ i < c.sizes.length - 1 ? ' / ' : '' }}</template> 人</template>
-              <template v-else-if="c.sizes.length">进入人数 <b>{{ c.sizes[0] }}</b> 人</template>
-              <template v-else>人数未定</template>
-              <br>{{ c.r.nameCn || '中文定名未公布' }}
-            </div>
-            <div class="dashedbox">{{ c.bosses ? '首领 ' + c.bosses + ' 个已收录' : '首领名单待补' }}</div>
-            <!-- 红线：两份名单人数不一致时两个都摆着，不替玩家挑一个 -->
-            <div v-if="c.sizes.length > 1" class="conf">规模两说：另一份资料自报的人数与客户端排队条目写的不是一个数，两个都摆着等定稿。</div>
-            <component v-if="c.inClient" :is="c.link.to ? 'router-link' : 'a'" v-bind="c.link" class="cta-cut">看这一座的收录情况</component>
-            <component v-else :is="TL_LINK.to ? 'router-link' : 'a'" v-bind="TL_LINK" class="cta-cut">看上线时间表那一页</component>
-          </div>
+      <div class="db raid-hero-b">
+        <div class="kicker">FIRST RAID LAUNCH · 2026-12-10</div>
+        <h1 class="pt raid-hero-h1">团队副本 · 首次开放筹备</h1>
+        <p class="raid-hero-sub">
+          <b class="mono" style="color:var(--gold-hi)">{{ unlockDateCn }}</b> 首次同步解锁 3 座 60 级团本：
+          <b>深穴（10人）</b>、<b>海加尔峰（20人）</b>、<b>奥妮克希亚的巢穴（40人）</b>，计划<b>{{ resetCycle }}</b>。
+        </p>
+        <div class="raid-hero-actions">
+          <button type="button" class="cta-cut" @click="jumpTo('onyxia-attune')">黑龙门任务打卡清单 ↓</button>
+          <button type="button" class="cta cta-line" @click="jumpTo('hyjal-t1')">海加尔峰 {{ raidSets.length }} 套 T1 ↓</button>
+          <router-link class="cta cta-mute" :to="{ path: '/bis' }">60 级团前 BiS 配装 →</router-link>
         </div>
       </div>
+      <div class="dstate raid-hero-cd">
+        <template v-if="cdPhase === 'raid'">
+          <i class="dot-on"></i>
+          <div>
+            <b>距首次开放 {{ cdLeft.d }} 天</b>
+            <span class="mono raid-cd-clk">{{ clockText(cdLeft) }}</span>
+          </div>
+        </template>
+        <template v-else>
+          <i class="dot-ok"></i>
+          <div>
+            <b>已开放 · {{ resetCycle }}</b>
+            <span class="raid-cd-clk">10 / 20 / 40 人</span>
+          </div>
+        </template>
+      </div>
     </section>
 
-    <!-- 三步带：日期全部取自 timeline.json（官方那条怎么写就怎么摆），不抄稿子写死的日期 -->
-    <section class="tl3" style="margin-top:32px">
+    <!-- 首发 3 座团本核心档案大卡（使用已核真实团本封面图） -->
+    <section class="raid-sec">
+      <div class="raidgrid">
+        <article v-for="c in cards" :key="c.r.id" class="raidcard raidcard-v2">
+          <div class="art">
+            <img :src="assetUrl(c.art)" :alt="(c.r.nameCn || c.r.nameEn || '团本') + ' 封面图'" loading="lazy">
+            <span class="sh"></span>
+            <span class="goldtag">{{ c.partyText }}</span>
+            <span class="chip-open" :class="c.attuneRequired ? 'chip-warn' : 'chip-ok'">
+              {{ c.attuneRequired ? '需' + (c.attuneItem || '门任务') : '无需门任务' }}
+            </span>
+            <h2 class="rc-title">{{ c.r.nameCn || c.r.nameEn || '未定名' }}</h2>
+            <span v-if="c.r.nameEn" class="rc-en">{{ c.r.nameEn }}</span>
+          </div>
+          <div class="bd">
+            <p v-if="c.summary" class="rc-sum">{{ c.summary }}</p>
+            <div class="rc-kv">
+              <div><span class="dim">开放时间</span><b class="mono">{{ unlockDate }}</b></div>
+              <div><span class="dim">重置周期</span><b>{{ resetCycle }}</b></div>
+              <div><span class="dim">首领数量</span><b class="mono">{{ c.bosses }} 位</b></div>
+              <div><span class="dim">所在区域</span><b>{{ c.zoneCn || '待补' }}</b></div>
+            </div>
+            <div v-if="c.entrances" class="rc-meta-line"><b class="rc-lbl">入口</b>{{ c.entrances }}</div>
+            <div v-if="c.attuneNote" class="rc-meta-line" :class="{ 'rc-attune-hi': c.attuneRequired }">
+              <b class="rc-lbl">进本条件</b>{{ c.attuneNote }}
+            </div>
+
+            <!-- 首领速览折叠 -->
+            <div v-if="c.bossList.length" class="rc-bosses">
+              <button type="button" class="rc-boss-btn" @click="toggleBosses(c.r.id)">
+                {{ openBosses[c.r.id] ? '收起首领名单 ▴' : '速览全部 ' + c.bossList.length + ' 位首领 ▾' }}
+              </button>
+              <ol v-if="openBosses[c.r.id]" class="rc-boss-ol">
+                <li v-for="b in c.bossList" :key="b.id">{{ b.nameCn }}</li>
+              </ol>
+            </div>
+
+            <div class="rc-btns">
+              <router-link :to="{ path: '/dungeon', query: { d: c.r.id } }" class="cta-cut">
+                首领、地图与掉落 →
+              </router-link>
+              <button v-if="c.attuneRequired" type="button" class="ghost rc-subbtn" @click="jumpTo('onyxia-attune')">
+                打卡黑龙门任务 ↓
+              </button>
+              <button v-else-if="c.hasT1Sets" type="button" class="ghost rc-subbtn" @click="jumpTo('hyjal-t1')">
+                看 18 套 T1 套装 ↓
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 奥妮克希亚开门任务（龙火护符）交互式打卡清单 -->
+    <section v-if="attune" class="card attune-card" id="onyxia-attune">
+      <div class="bhead">
+        <div>
+          <div class="kicker">ONYXIA ATTUNEMENT CHECKLIST</div>
+          <h2 class="bt">奥妮克希亚开门任务（{{ attune.itemName }}）打卡清单</h2>
+        </div>
+        <div class="attune-head-r">
+          <span class="attune-prog mono">已完成 {{ doneCount }} / {{ currentSteps.length }} 步</span>
+          <button v-if="doneCount > 0" type="button" class="ghost" @click="resetAttune">重置当前阵营</button>
+        </div>
+      </div>
+      <p class="note">{{ attune.bagRule }} 勾选进度自动保存在本机浏览器，下次打开接着做。</p>
+
+      <div class="attune-bar">
+        <div class="picks" role="group" aria-label="选择阵营">
+          <button type="button" class="pick" :class="{ on: attuneFac === 'alliance' }" @click="setFac('alliance')">
+            <b>联盟（{{ (attune.alliance || []).length }} 步）</b>
+          </button>
+          <button type="button" class="pick" :class="{ on: attuneFac === 'horde' }" @click="setFac('horde')">
+            <b>部落（{{ (attune.horde || []).length }} 步）</b>
+          </button>
+        </div>
+        <div class="attune-meter" aria-hidden="true">
+          <span class="attune-fill" :style="{ width: doneRatio + '%' }"></span>
+        </div>
+      </div>
+
+      <ol class="attune-list">
+        <li v-for="st in currentSteps" :key="st.id" class="attune-item" :class="{ done: !!checkedMap[st.id] }">
+          <label class="attune-check">
+            <input type="checkbox" :checked="!!checkedMap[st.id]" @change="toggleStep(st.id)">
+            <span class="attune-num mono">{{ st.step }}</span>
+          </label>
+          <div class="attune-body">
+            <div class="attune-top">
+              <b class="attune-q">{{ st.questCn }}</b>
+              <span v-if="st.zone" class="attune-zone">{{ st.zone }}</span>
+              <span v-if="st.npc" class="dim attune-npc">· {{ st.npc }}</span>
+            </div>
+            <p class="attune-desc">{{ st.summary }}</p>
+          </div>
+          <router-link v-if="st.dungeonId" class="attune-go" :to="{ path: '/dungeon', query: { d: st.dungeonId } }">
+            看副本 →
+          </router-link>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 海加尔峰 T1 套装（18 套）速览 -->
+    <section v-if="raidSets.length" class="card" id="hyjal-t1">
+      <div class="bhead">
+        <div>
+          <div class="kicker">HYJAL SUMMIT · TIER 1</div>
+          <h2 class="bt">海加尔峰 T1 套装速览（{{ raidSets.length }} 套）</h2>
+        </div>
+        <router-link class="cta" :to="{ path: '/bis' }">前往配装页看 60 级团前与 T1 →</router-link>
+      </div>
+      <div class="picks t1-cls-bar">
+        <button type="button" class="pick" :class="{ on: t1Cls === '' }" @click="t1Cls = ''">
+          <b>全部职业（{{ raidSets.length }}）</b>
+        </button>
+        <button v-for="c in t1Classes" :key="c.cls" type="button" class="pick"
+                :class="{ on: t1Cls === c.cls }" @click="t1Cls = c.cls">
+          <b>{{ c.clsCn }}</b>
+        </button>
+      </div>
+      <div class="boardwrap">
+        <table class="board">
+          <thead>
+            <tr>
+              <th>职业</th>
+              <th>套装名称</th>
+              <th>定位</th>
+              <th>适配专精</th>
+              <th>护甲</th>
+              <th class="c-num">件数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="rs in filteredRaidSets" :key="rs.id">
+              <td><b>{{ rs.clsCn }}</b></td>
+              <td><b>{{ rs.name }}</b> <span class="dim mono">#{{ rs.setId }}</span></td>
+              <td>{{ rs.roleCn }}</td>
+              <td class="dim">{{ rs.spec }}</td>
+              <td class="dim">{{ rs.armor }}</td>
+              <td class="c-num mono">{{ rs.pieceCount }} 件</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 三步时间带：日期取自 timeline.json -->
+    <section class="tl3" style="margin-top:24px">
       <template v-for="(n, i) in tlSeq" :key="i">
         <span v-if="n.link" class="link"></span>
         <div v-else class="node">
@@ -60,17 +200,18 @@
 
     <div class="card">
       <div class="stats">
-        <div class="stat"><b>{{ P.names.length }}</b>可排队的团队条目</div>
-        <div class="stat"><b>{{ P.claimed.length }}</b>名单里的团本</div>
-        <div class="stat"><b>{{ P.both }}</b>两边对得上</div>
-        <div class="stat"><b>{{ P.named }}</b>有中文名</div>
+        <div class="stat"><b>{{ P.claimed.length }}</b>首批开放团本</div>
+        <div class="stat"><b>{{ raidSets.length }}</b>海加尔峰 T1 套装</div>
+        <div class="stat"><b>{{ P.names.length }}</b>客户端团队条目</div>
+        <div class="stat"><b>{{ P.named }}</b>已定中文名</div>
       </div>
     </div>
 
+    <!-- 客户端队伍查找器团队条目（保留既有全量对照表与筛选） -->
     <div class="card" id="client">
-      <h2>能排到队的团队副本</h2>
+      <h2>客户端可排队的团队条目</h2>
       <div class="field">
-        <input id="rq" type="search" placeholder="按英文名筛，例如 Storm" aria-label="按英文名筛团本"
+        <input id="rq" type="search" placeholder="按英文名筛，例如 Onyxia" aria-label="按英文名筛团本"
                :value="q" @input="onFilter">
         <span class="dim mono" id="rcnt">{{ shown.length }} / {{ P.names.length }}</span>
       </div>
@@ -83,7 +224,7 @@
               <thead><tr><th>客户端里的名字</th><th>排队等级</th><th>一次几人</th><th>排队条目</th><th>本站</th></tr></thead>
               <tbody>
                 <tr v-for="x in b.rows" :key="x.nameEn">
-                  <td><b>{{ x.nameEn }}</b><span class="dim">　中文定名未公布</span></td>
+                  <td><b>{{ x.nameEn }}</b><span v-if="!x.st" class="dim">　中文定名未公布</span></td>
                   <td class="mono">{{ x.levelRange }} 级</td>
                   <td class="mono">{{ sizeText(x) }}</td>
                   <td class="mono">{{ entryText(x) }}</td>
@@ -99,69 +240,106 @@
           </div>
         </template>
       </template>
-      <div v-else class="empty">没有匹配的名字；这一列只有客户端里的英文原名，中文定名还没公布。</div>
-    </div>
-
-    <div class="card" id="claimed">
-      <h2>名单里的 {{ P.claimed.length }} 座</h2>
-      <div class="boardwrap">
-        <table class="board rtab">
-          <colgroup><col class="c-ico"><col style="width:34%"><col style="width:18%"><col></colgroup>
-          <thead><tr><th class="c-ico">载入图</th><th>名字</th><th>它自报规模</th><th>客户端的队伍查找器里</th></tr></thead>
-          <tbody>
-            <tr v-for="r in P.claimed" :key="r.id">
-              <td class="ich">
-                <span v-if="r.art" class="liw t"><img :src="r.art" :alt="(r.nameEn || '') + ' 的客户端载入图'"
-                      loading="lazy" :class="{ bad: artBad[r.id] }" @error="artBad[r.id] = true"></span>
-                <span v-else class="dim">没有这张载入图</span>
-              </td>
-              <td><b>{{ r.nameEn || r.nameCn || '未定名' }}</b><template v-if="r.nameCn"><span class="dim">　{{ r.nameCn }}</span></template><template v-else><span class="dim">　中文定名未公布</span></template></td>
-              <td class="mono">{{ r.sizeClaim || '未写' }} 人</td>
-              <td>
-                <template v-if="clientOf[r.id]">有这一条：{{ sizeText(clientOf[r.id]) }}、{{ entryText(clientOf[r.id]) }}</template>
-                <template v-else><span class="dim">没有对应的排队条目</span></template>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div v-else class="empty">没有匹配的名字；这一列只有客户端里的英文原名。</div>
     </div>
   </template>
 </template>
 
 <script setup>
-/* 团本名单 · 与旧站 src/js/app.js 的 raids()（行 2033-2212）逐块对齐。
-   同名两条排队条目归并成一座，条目数留着说清是「两种规模」还是「两个入口」；
-   queues（能排到但没名单的）与 dungeons.json 的 raids 数组对照呈现，两源分歧两个都摆。
-   2026-10-12 站主决定：这一页只留两份名单本身的数与表，讲来路的说明已删，出处集中在溯源页。 */
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { load } from '../lib/data.js';
+import { assetUrl, load } from '../lib/data.js';
 import { linkFor } from '../lib/nav.js';
+import { clockText } from '../lib/fmt.js';
+import { useCountdown } from '../lib/countdown.js';
 
 const HERO = 'img/gen/banner-cloudsea.webp';
-/* 各团本的氛围底图：本站自生成，取不到退回页首同一张，不拿不相干的图凑数 */
-const CARD_ART = { 'barrow-deeps': 'img/gen/cavern-hall.webp', 'hyjal-summit': HERO,
-  'onyxias-lair': 'img/gen/hero-ruins.webp' };
+const CARD_ART = {
+  'barrow-deeps': 'img/art/dungeons/barrow-deeps.webp',
+  'hyjal-summit': 'img/art/dungeons/hyjal-summit-v2.webp',
+  'onyxias-lair': 'img/art/dungeons/onyxias-lair.webp'
+};
+const ATTUNE_KEY = 'wow_forever_v1_onyxia_attune_v1';
 
+const { left: cdLeft, phase: cdPhase } = useCountdown();
 const D = ref(null);
 const err = ref('');
-const artBad = ref({});
 const route = useRoute();
-const q = ref(String(route.query.q || ''));   // 旧站 urlQ('q')：落地带着筛好的词
+const q = ref(String(route.query.q || ''));
+const openBosses = reactive({});
+const attuneFac = ref('alliance');
+const checkedMap = reactive({});
+const t1Cls = ref('');
+
+function loadSavedAttune() {
+  try {
+    const raw = window.localStorage.getItem(ATTUNE_KEY);
+    if (!raw) return;
+    const obj = JSON.parse(raw);
+    if (obj && (obj.fac === 'alliance' || obj.fac === 'horde')) attuneFac.value = obj.fac;
+    if (obj && obj.done && typeof obj.done === 'object') {
+      Object.keys(obj.done).forEach((k) => { if (obj.done[k]) checkedMap[k] = true; });
+    }
+  } catch (_) {}
+}
+
+function persistAttune() {
+  try {
+    const done = {};
+    Object.keys(checkedMap).forEach((k) => { if (checkedMap[k]) done[k] = true; });
+    window.localStorage.setItem(ATTUNE_KEY, JSON.stringify({ fac: attuneFac.value, done }));
+  } catch (_) {}
+}
+
+function setFac(f) {
+  attuneFac.value = f;
+  persistAttune();
+}
+
+function toggleStep(id) {
+  checkedMap[id] = !checkedMap[id];
+  persistAttune();
+}
+
+function resetAttune() {
+  currentSteps.value.forEach((st) => { delete checkedMap[st.id]; });
+  persistAttune();
+}
+
+function toggleBosses(id) {
+  openBosses[id] = !openBosses[id];
+}
+
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 function boot() {
   err.value = '';
-  /* queue.json 与 timeline.json 取不到就按空表出页，不整页报错（与旧站同一兜底口径） */
-  Promise.all([load('data/queue.json').catch(() => ({})), load('data/dungeons.json'),
-    load('data/timeline.json').catch(() => ({ items: [] }))])
-    .then((rs) => { D.value = { QU: rs[0] || {}, DG: rs[1], TL: (rs[2] || {}).items || [] }; })
+  Promise.all([
+    load('data/queue.json').catch(() => ({})),
+    load('data/dungeons.json'),
+    load('data/timeline.json').catch(() => ({ items: [] })),
+    load('data/raid-launch.json').catch(() => null),
+    load('data/bis.json').catch(() => ({ raidSets: [] }))
+  ])
+    .then((rs) => {
+      D.value = {
+        QU: rs[0] || {},
+        DG: rs[1],
+        TL: (rs[2] || {}).items || [],
+        RL: rs[3] || null,
+        BIS: rs[4] || {}
+      };
+    })
     .catch((e) => { err.value = (e && e.message) || String(e); });
 }
-boot();
-onMounted(boot);   // 从别的页切回来看不到数据时重新拉一次
 
-/* 数据整理与旧站 raids() 同一份算法：按 nameEn 归并、规模降序、 matchedId 判定对上了哪份名单 */
+loadSavedAttune();
+boot();
+onMounted(boot);
+
 const P = computed(() => {
   if (!D.value) return null;
   const QU = D.value.QU, DG = D.value.DG, TL = D.value.TL;
@@ -194,20 +372,77 @@ const P = computed(() => {
       const dn = dunIds[matched];
       st = { label: (dn && dn.nameCn) || matched, link: dLinkProps(matched) };
     }
-    return { nameEn: k, entries: list.length, sizes: sizes,
+    return {
+      nameEn: k, entries: list.length, sizes,
       multiSize: Object.keys(diffs).length > 1,
       levelRange: list[0].levelRange,
-      matched: matched, matchedIn: matchedIn, st: st,
-      prov: list[0].provenance || [] };
+      matched, matchedIn, st,
+      prov: list[0].provenance || []
+    };
   });
   names.sort((a, b) => (b.sizes[0] || 0) - (a.sizes[0] || 0) || a.nameEn.localeCompare(b.nameEn));
   const both = names.filter((x) => x.matchedIn === 'raid').length;
-  const nextRaid = TL.filter((x) => /团本|团队副本/.test(x.title || ''))[0] || null;
+  const nextRaid = TL.filter((x) => x.id === 'raids-dec10-cn')[0]
+    || TL.filter((x) => /团本|团队副本/.test(x.title || ''))[0] || null;
   const beta = TL.filter((x) => /国服 Beta 开启/.test(x.title || ''))[0] || null;
-  const launch = TL.filter((x) => /国服/.test(x.title || '') && /上线/.test(x.title || ''))[0] || null;
+  const launch = TL.filter((x) => /全球同步上线/.test(x.title || ''))[0]
+    || TL.filter((x) => /国服/.test(x.title || '') && /上线/.test(x.title || ''))[0] || null;
   const named = claimed.filter((r) => r.nameCn).length;
-  return { claimed: claimed, names: names, both: both, nextRaid: nextRaid, beta: beta,
-    launch: launch, named: named };
+  return { claimed, names, both, nextRaid, beta, launch, named };
+});
+
+const rlById = computed(() => {
+  const m = {};
+  const list = (D.value && D.value.RL && D.value.RL.raids) || [];
+  list.forEach((r) => { m[r.id] = r; });
+  return m;
+});
+
+const unlockDate = computed(() => (D.value && D.value.RL && D.value.RL.unlockDate) || '2026-12-10');
+const unlockDateCn = computed(() => {
+  const parts = String(unlockDate.value).split('-');
+  return parts.length === 3 ? `${Number(parts[1])} 月 ${Number(parts[2])} 日` : unlockDate.value;
+});
+const resetCycle = computed(() => (D.value && D.value.RL && D.value.RL.resetCycle) || '每周重置');
+const attune = computed(() => (D.value && D.value.RL && D.value.RL.onyxiaAttunement) || null);
+const currentSteps = computed(() => (attune.value && attune.value[attuneFac.value]) || []);
+const doneCount = computed(() => currentSteps.value.filter((st) => !!checkedMap[st.id]).length);
+const doneRatio = computed(() => (currentSteps.value.length ? Math.round((doneCount.value / currentSteps.value.length) * 100) : 0));
+
+const raidSets = computed(() => (D.value && D.value.BIS && D.value.BIS.raidSets) || []);
+const t1Classes = computed(() => {
+  const seen = new Set();
+  const out = [];
+  raidSets.value.forEach((rs) => {
+    if (!seen.has(rs.cls)) {
+      seen.add(rs.cls);
+      out.push({ cls: rs.cls, clsCn: rs.clsCn });
+    }
+  });
+  return out;
+});
+const filteredRaidSets = computed(() => (t1Cls.value ? raidSets.value.filter((x) => x.cls === t1Cls.value) : raidSets.value));
+
+const cards = computed(() => {
+  if (!P.value) return [];
+  return P.value.claimed.map((r) => {
+    const info = rlById.value[r.id] || {};
+    const party = info.partySize || r.partySize || r.sizeClaim || '';
+    return {
+      r,
+      partyText: party ? party + ' 人团本' : '团本',
+      bosses: (r.bosses || []).length || info.bossCount || 0,
+      bossList: r.bosses || [],
+      zoneCn: info.zoneCn || r.zoneCn || '',
+      entrances: info.entrances || '',
+      summary: info.summary || '',
+      attuneRequired: !!info.attunementRequired,
+      attuneItem: info.attunementItem || '',
+      attuneNote: info.attunementNote || '',
+      hasT1Sets: !!info.hasT1Sets,
+      art: r.art || CARD_ART[r.id] || HERO
+    };
+  });
 });
 
 function sizeText(x) { return x.sizes.length ? x.sizes.join(' / ') + ' 人' : '未标'; }
@@ -216,51 +451,23 @@ function entryText(x) {
   return x.entries + ' 条（' + (x.multiSize ? '两种规模' : '同规模的两个入口') + '）';
 }
 
-/* 客户端里对得上这座团本的那条排队条目（多条时取旧站 filter()[0] 同款的第一条） */
-const clientOf = computed(() => {
-  const m = {};
-  if (P.value) P.value.names.forEach((x) => { if (x.matchedIn === 'raid' && !m[x.matched]) m[x.matched] = x; });
-  return m;
-});
-
-const cards = computed(() => {
-  if (!P.value) return [];
-  return P.value.claimed.map((r) => {
-    const inClient = clientOf.value[r.id];
-    const sizes = [];
-    if (r.sizeClaim) sizes.push(String(r.sizeClaim));
-    if (inClient && inClient.sizes) inClient.sizes.forEach((s) => {
-      if (sizes.indexOf(String(s)) < 0) sizes.push(String(s));
-    });
-    return { r: r, inClient: !!inClient, sizes: sizes,
-      bosses: (r.bosses || []).length,
-      art: CARD_ART[r.id] || HERO,
-      link: dLinkProps(r.id) };
-  });
-});
-
-const raidDate = computed(() => ((P.value && P.value.nextRaid)
-  ? P.value.nextRaid.date.slice(5).replace('-', ' 月 ') + ' 日' : ''));
-
 const shown = computed(() => {
   const k = q.value.trim().toLowerCase();
   if (!P.value) return [];
   return k ? P.value.names.filter((x) => x.nameEn.toLowerCase().indexOf(k) >= 0) : P.value.names;
 });
 
-/* 三步带：Beta → 国服上线 → 新团本，节点有无决定连线有无 */
 const tlSeq = computed(() => {
   if (!P.value) return [];
   const seq = [];
-  if (P.value.beta) seq.push({ lab: '国服 Beta 进行中', col: 'var(--ok)', date: P.value.beta.date });
+  if (P.value.beta) seq.push({ lab: '国服 Beta 测试', col: 'var(--txt-muted)', date: P.value.beta.date });
   if (P.value.beta && P.value.launch) seq.push({ link: true });
-  if (P.value.launch) seq.push({ lab: P.value.launch.title, col: 'var(--gold)', date: P.value.launch.date });
+  if (P.value.launch) seq.push({ lab: P.value.launch.title, col: 'var(--ok)', date: P.value.launch.date });
   if (P.value.launch && P.value.nextRaid) seq.push({ link: true });
-  if (P.value.nextRaid) seq.push({ lab: P.value.nextRaid.title, col: 'var(--warn)', date: P.value.nextRaid.date });
+  if (P.value.nextRaid) seq.push({ lab: P.value.nextRaid.title, col: 'var(--gold-hi)', date: P.value.nextRaid.date });
   return seq;
 });
 
-/* 人数分档带：40/25/20/15/10 各一段，剩下的进「人数未标」 */
 const bands = computed(() => {
   const out = [];
   [40, 25, 20, 15, 10].forEach((n) => {
@@ -280,8 +487,62 @@ function dLinkProps(id) {
   return l.to ? { to: { path: l.to, query: { d: id } } }
     : { href: l.href + '?d=' + encodeURIComponent(id) };
 }
-const TL_LINK = (() => {
-  const l = linkFor('timeline.html');
-  return l.to ? { to: { path: l.to } } : { href: l.href };
-})();
 </script>
+
+<style scoped>
+.raid-hero { min-height: 310px; height: auto; padding-bottom: 28px; }
+.raid-hero-b { padding-top: 64px; max-width: 780px; }
+.raid-hero-h1 { font-family: var(--font-display); font-size: clamp(30px, 3.8vw, 44px); margin: 10px 0 10px; color: var(--txt-title); }
+.raid-hero-sub { font-size: 15px; color: var(--txt-dim); margin: 0 0 18px; line-height: 1.65; }
+.raid-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.raid-hero-cd { display: flex; align-items: center; gap: 10px; }
+.raid-cd-clk { display: block; font-size: 12px; color: var(--gold-hi); margin-top: 2px; }
+.dot-on { background: var(--warn); }
+.dot-ok { background: var(--ok); }
+
+.raid-sec { padding: 28px 0 0; }
+.raidcard-v2 .art { position: relative; min-height: 170px; }
+.raidcard-v2 .rc-title { position: absolute; left: 16px; bottom: 26px; margin: 0; font-family: var(--font-display); font-size: 22px; color: var(--txt-title); z-index: 2; }
+.raidcard-v2 .rc-en { position: absolute; left: 16px; bottom: 8px; font-size: 12px; color: var(--txt-dim); z-index: 2; }
+.chip-ok { color: var(--ok); border-color: var(--ok); }
+.chip-warn { color: var(--warn); border-color: var(--amber-line); }
+
+.rc-sum { margin: 0 0 12px; font-size: 13.5px; line-height: 1.6; color: var(--txt-dim); }
+.rc-kv { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 12px; padding: 10px 12px; background: var(--sunk); border: 1px solid var(--line); margin-bottom: 12px; }
+.rc-kv > div { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; }
+.rc-kv b { color: var(--txt-title); font-size: 13.5px; }
+.rc-meta-line { font-size: 13px; color: var(--txt-dim); line-height: 1.55; margin-bottom: 8px; }
+.rc-lbl { display: inline-block; margin-right: 8px; padding: 1px 6px; font-size: 11px; color: var(--gold-hi); background: var(--panel); border: 1px solid var(--gold-line); }
+.rc-attune-hi { padding: 8px 10px; background: var(--panel); border-left: 2px solid var(--warn); color: var(--txt); }
+
+.rc-bosses { margin: 10px 0 14px; }
+.rc-boss-btn { width: 100%; text-align: left; padding: 7px 10px; font-size: 12.5px; color: var(--gold-hi); background: var(--sunk); border: 1px dashed var(--line-2); cursor: pointer; }
+.rc-boss-ol { margin: 8px 0 0; padding: 8px 12px 8px 28px; background: var(--sunk); border: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px; font-size: 12.5px; color: var(--txt-dim); }
+.rc-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.rc-subbtn { padding: 8px 12px; font-size: 13px; }
+
+.attune-card { margin-top: 24px; }
+.attune-head-r { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.attune-prog { font-size: 13px; font-weight: 700; color: var(--gold-hi); padding: 4px 10px; background: var(--panel-2); border: 1px solid var(--gold-line); }
+.attune-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 12px 0 14px; }
+.attune-meter { flex: 1 1 200px; height: 8px; background: var(--sunk); border: 1px solid var(--line); overflow: hidden; }
+.attune-fill { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--ok)); transition: width var(--dur-2) var(--ease-out); }
+
+.attune-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.attune-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); }
+.attune-item.done { border-color: var(--ok); opacity: 0.72; }
+.attune-item.done .attune-q { text-decoration: line-through; color: var(--txt-muted); }
+.attune-check { display: flex; align-items: center; gap: 8px; cursor: pointer; padding-top: 2px; flex: 0 0 auto; }
+.attune-check input { width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; }
+.attune-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; font-size: 12px; color: var(--gold-hi); background: var(--sunk); border: 1px solid var(--gold-line); }
+.attune-body { flex: 1 1 auto; min-width: 0; }
+.attune-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; }
+.attune-q { font-size: 14px; color: var(--txt-title); }
+.attune-zone { font-size: 12px; color: var(--azure); }
+.attune-npc { font-size: 12px; }
+.attune-desc { margin: 4px 0 0; font-size: 13px; color: var(--txt-dim); line-height: 1.5; }
+.attune-go { flex: 0 0 auto; align-self: center; font-size: 12.5px; color: var(--gold-hi); padding: 4px 10px; border: 1px solid var(--gold-line); background: var(--panel); text-decoration: none; white-space: nowrap; }
+.attune-go:hover { border-color: var(--gold-hi); text-decoration: none; }
+
+.t1-cls-bar { margin: 10px 0 14px; }
+</style>

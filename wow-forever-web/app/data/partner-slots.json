@@ -1,0 +1,26 @@
+{
+  "enabled": false,
+  "allowedHosts": [
+    "paoben.top",
+    "www.paoben.top"
+  ],
+  "adNetworks": {
+    "adsense": {
+      "enabled": false,
+      "clientId": "",
+      "positions": {
+        "page-bottom": "",
+        "bis-inline": ""
+      }
+    },
+    "baidu": {
+      "enabled": false,
+      "unionId": "",
+      "positions": {
+        "page-bottom": "",
+        "bis-inline": ""
+      }
+    }
+  },
+  "slots": []
+}

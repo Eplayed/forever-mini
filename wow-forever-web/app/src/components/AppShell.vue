@@ -11,7 +11,11 @@
                  aria-label="全站搜索：跳到首页搜索框并带上这个词">
           <button type="submit" class="gsgo">搜索</button>
         </form>
-        <div class="chip mono" id="lchip">距上线 {{ left.d }} 天 {{ clockText(left) }}</div>
+        <router-link v-if="phase !== 'launch'" class="chip mono" id="lchip" to="/raids">
+          <template v-if="phase === 'raid'">{{ label }} {{ left.d }} 天 {{ clockText(left) }}</template>
+          <template v-else>{{ label }} · 每周重置</template>
+        </router-link>
+        <div v-else class="chip mono" id="lchip">{{ label }} {{ left.d }} 天 {{ clockText(left) }}</div>
       </div>
     </div>
     <!-- 第二行：上下两级导航（2026-10-11 用户反馈"平铺看不清"）。
@@ -39,11 +43,16 @@
     </nav>
   </div>
 
-  <main id="main" class="wrap" ref="mainEl"><slot /></main>
+  <main id="main" class="wrap" ref="mainEl">
+    <slot />
+    <PartnerSlots position="page-bottom" />
+  </main>
+  <SideRailPromo />
 
   <footer id="foot">
     <div class="in" v-if="foot">
       <span>{{ foot.disclaimer }}</span>
+      <span v-if="foot.beian"><a :href="foot.beian.url" target="_blank" rel="noopener noreferrer">{{ foot.beian.number }}</a></span>
       <!-- 原来这里挂一句全站版本号，但各板块核到的版本本来就不同（传承 70532、改动 70425、
            世界 70338），一句话必然是假数；逐板块的版本在溯源页那张表里，由规模快照现算。 -->
       <span>{{ foot.note }}</span>
@@ -61,10 +70,12 @@ import { clockText } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
 import { load } from '../lib/data.js';
 import { applyRails } from '../lib/rails.js';
+import SideRailPromo from './SideRailPromo.vue';
+import PartnerSlots from './PartnerSlots.vue';
 
 const route = useRoute();
 const router = useRouter();
-const { left } = useCountdown();
+const { left, phase, label } = useCountdown();
 const foot = ref(null);
 const mainEl = ref(null);
 /* 顶栏搜索：这一行的框只负责把词带到首页的搜索框，不重复实现一遍索引匹配 */
@@ -126,6 +137,7 @@ onMounted(() => {
       scale.value = sc;
       foot.value = {
         disclaimer: m.disclaimer, note: (m.dataBaseline || {}).note || '各板块的数据分别核对，版本与核对日期见溯源页',
+        beian: m.beian || null,
         L0: sc.pubCoverage.L0, L1: sc.pubCoverage.L1, L2: sc.pubCoverage.L2, L3: sc.pubCoverage.L3,
         pubTotal: sc.pubTotal
       };
