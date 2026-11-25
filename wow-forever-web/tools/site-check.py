@@ -250,6 +250,7 @@ class ThreadingServer(socketserver.ThreadingTCPServer):
     """必须多线程：单线程 HTTPServer 会被上一个页面的 keep-alive 连接卡住，后来者直接超时。"""
     daemon_threads = True
     allow_reuse_address = True
+    request_queue_size = 128
 
 
 def start_server():
@@ -1089,7 +1090,8 @@ def test_dungeon_geo(browser, base):
           len(mapped) == (gm.get("counts") or {}).get("bossMapped"),
           "数据 %d 座 / meta.counts.bossMapped %s"
           % (len(mapped), (gm.get("counts") or {}).get("bossMapped")))
-    b1 = sorted(mapped)[0]
+    game_mapped = sorted(k for k, v in mapped.items() if v.get("bossMapKind") == "game-capture")
+    b1 = game_mapped[0] if game_mapped else sorted(mapped)[0]
     r4 = shot(b1)
     want_b = sum(len(x) for x in geo[b1]["bossPos"].values())
     check("副本详情页「首领在哪个位置」一颗点=一个刷新点，且底图真加载出来了",
@@ -3229,7 +3231,8 @@ def test_app(browser, base):
     # 每页 50 行、筛选芯片与四个读数、页内搜索接得住、正文没有面向开发的词。
     # 行图标按本地库存如实渲染：取不到官方图的（icon-gaps.json 登记）本就该退占位块，
     # 所以"该有图的行数"由 items.json 前 50 行对照 icon-gaps 推导，404 只放行登记过的键。
-    it = json.load(open(os.path.join(SRC, "data", "items.json"), encoding="utf-8"))["items"]
+    item_doc = json.load(open(os.path.join(SRC, "data", "items.json"), encoding="utf-8"))
+    it = item_doc["items"]
     it.sort(key=lambda x: x["id"])
     expect_lico = 50 - sum(1 for x in it[:50] if not x.get("iconKey") or x.get("iconKey") in ICON_GAPS)
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
@@ -3265,10 +3268,15 @@ def test_app(browser, base):
     chip = page.evaluate("""() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]
              .find(x => (x.innerText || '').indexOf('测试服有') >= 0);
              return b ? b.innerText.replace(/\\s+/g, ' ').trim() : null; }""")
-    check("物品库状态条里有「测试服有」这一格，且格子上写的数等于数据里反向分歧的条数",
-          chip is not None and str(len(srv_has)) in (chip or ""), "%s / 数据 %d 件" % (chip, len(srv_has)))
-    page.evaluate("""() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]
-             .find(x => (x.innerText || '').indexOf('测试服有') >= 0); if (b) b.click(); }""")
+    check("物品库「测试服有」入口随反向分歧条数显示或隐藏",
+          chip == ("测试服有 %d" % len(srv_has) if srv_has else None),
+          "%s / 数据 %d 件" % (chip, len(srv_has)))
+    if srv_has:
+        page.locator(".kchip").filter(has_text="测试服有").first.click()
+    else:
+        # 已分享的筛选地址仍可直接打开，零结果用现有空态显示。
+        page.goto(APP_BASE + "/#/items?st=srvHas", wait_until="networkidle")
+        page.locator(".itt + .empty").wait_for()
     page.wait_for_timeout(900)
     got = page.evaluate("""() => ({ n: document.querySelectorAll('.itt tbody tr').length,
              total: (document.querySelector('.pinfo') || {}).innerText || '',
@@ -3284,19 +3292,23 @@ def test_app(browser, base):
         total_ok = (not got["pager"]) and got["n"] == len(srv_has)
     else:
         total_ok = str(len(srv_has)) in got["total"].replace(",", "")
-    check("点「测试服有」筛出来的总数等于数据条数，且这一页列里显示的都是同一种",
-          total_ok and set(got["labels"]) == {"测试服有"},
+    check("「测试服有」筛选与数据条数一致，标签或零结果空态正确",
+          total_ok and set(got["labels"]) == ({"测试服有"} if srv_has else set()),
           "页脚「%s」/ 分页条 %s / 行数 %d / 数据 %d / 标签 %s" % (
               got["total"].strip() or "（不足一页，分页条不渲染）", got["pager"],
               got["n"], len(srv_has), sorted(set(got["labels"]))[:3]))
     snap(page, path=os.path.join(SHOT_DIR, "a03-items-srvhas.png"))
-    page.evaluate("() => { const b = [...document.querySelectorAll('.kchip, .chips .chip, .chipb')]"
-                  ".find(x => (x.innerText || '').indexOf('全部') >= 0); if (b) b.click(); }")
+    if srv_has:
+        page.locator(".kchip").filter(has_text="全部").first.click()
+    else:
+        page.goto(APP_BASE + "/#/items", wait_until="networkidle")
     page.wait_for_timeout(700)
-    check("探针说「测试服查不到」的条数与名录侧自报 missing 是两条独立的腿（不互相覆盖）",
-          len(srv_absent) > 0 and len(srv_absent) <= len([x for x in it if x.get("status") == "missing"]),
-          "探针 absent %d / 名录 missing %d" % (
-              len(srv_absent), len([x for x in it if x.get("status") == "missing"])))
+    srv_present = [x for x in it if x.get("srv") == "present"]
+    srv_conflicts = srv_has + [x for x in srv_absent if x.get("status") != "missing"]
+    actual_srv = {"absent": len(srv_absent), "present": len(srv_present), "conflict": len(srv_conflicts)}
+    check("按物品逐条核对探针与名录，两个方向的分歧均计入来源统计",
+          actual_srv == item_doc["meta"]["srv"],
+          "%s / 元数据 %s" % (actual_srv, item_doc["meta"]["srv"]))
     page.fill(".qsearch", "护腕")
     page.wait_for_timeout(900)
     hit = page.evaluate("""() => { const n = document.querySelector('.itt tbody tr .nm');

@@ -1,0 +1,26 @@
+{
+  "pack_id": "grimoire-hall-of-thanes",
+  "theme": "grimoire",
+  "title": "无限冒险笔记｜领主大厅副本任务与专属掉落全指南",
+  "column_name": "无限冒险笔记",
+  "date_str": "2026-11-20",
+  "generated_at": "2026-11-20T18:19:20",
+  "carousel_slides": [
+    "carousel/slide_01.png",
+    "carousel/slide_02.png",
+    "carousel/slide_03.png",
+    "carousel/slide_04.png",
+    "carousel/slide_05.png",
+    "carousel/slide_06.png"
+  ],
+  "carousel_caption": "carousel/caption.txt",
+  "wechat_article_html": "wechat/article.html",
+  "wechat_article_md": "wechat/article.md",
+  "wechat_inline_cards": [
+    "wechat/card_01.png",
+    "wechat/card_02.png",
+    "wechat/card_03.png",
+    "wechat/card_04.png",
+    "wechat/card_05.png"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+ "meta": {
+  "build": "1.60.1.70888",
+  "checkedAt": "2026-11-12",
+  "url": "https://wago.tools/db2/SkillLineAbility/csv?build=1.60.1.70888",
+  "notesUrl": "https://us.forums.blizzard.com/en/wow/t/2360696/9",
+  "locale": "zhCN"
+ },
+ "races": {
+  "orc": {
+   "血性狂怒": { "name": "血性狂暴", "spellIds": [20572], "iconKey": "racial_orc_berserkerstrength", "effect": "攻击强度与法术强度提高10%，持续15秒。冷却2分钟。" },
+   "斧类武器专精": { "name": "命令", "spellIds": [20576, 20575, 21563], "iconKey": "ability_warrior_warcry", "effect": "猎人和术士的宠物伤害提高5%。" }
+  },
+  "human": {
+   "剑类武器专精": { "name": "无情", "spellIds": [20597], "iconKey": "ability_rogue_eviscerate", "effect": "法术与攻击的爆击几率提高1%。" },
+   "人类精魂": { "spellIds": [20598], "effect": "精神提高10%。" }
+  },
+  "dwarf": {
+   "寻找财宝": { "spellIds": [2481], "effect": "在小地图上标记附近的宝藏，偶尔能找到额外宝藏。持续至主动取消。" },
+   "锤类武器专精": { "name": "工匠精准", "spellIds": [1259719], "iconKey": "inv_hammer_09", "effect": "法术与攻击的命中几率提高1%。" }
+  },
+  "tauren": {
+   "原野疾驰": { "spellIds": [1259918], "effect": "移动时每5秒提高2%移动速度，最高60%。受伤或停下会降低效果。" },
+   "耐久": { "spellIds": [20550], "effect": "总生命值提高5%。" }
+  },
+  "troll": {
+   "狂暴": { "spellIds": [20554], "effect": "施法与攻击速度提高10%，持续15秒。冷却3分钟。" }
+  },
+  "undead": {
+   "哀伤之触": { "spellIds": [1260189, 1260201], "effect": "法术和攻击有几率吸取生命值，最多为自身最大生命值的5%。战士、圣骑士和潜行者触发率20%，牧师、法师和术士30%。触发间隔至少15秒。" }
+  },
+  "skyborne-horde": {
+   "风灵护佑": { "spellIds": [1259710], "effect": "法术、近战与远程急速提高2%。" },
+   "天穹视界": { "spellIds": [1259686, 1259688, 1270893], "effect": "移动与骑乘速度提高15%，持续30秒。在元素交汇处使用可获得1小时充能，速度加成提高至30%。冷却2分钟。", "notesEffect": "开发者说明记载速度增益持续15秒。客户端的增益持续时间为30秒，正式服效果待实测。" }
+  },
+  "skyborne-alliance": {
+   "风灵护佑": { "spellIds": [1259710], "effect": "法术、近战与远程急速提高2%。" },
+   "阅读魔网": { "spellIds": [1259705, 1270842, 1259691], "effect": "生命与法力回复速度提高50%，持续15秒。在魔网节点使用可获得1小时调和，回复加成提高至100%。冷却2分钟。" }
+  }
+ }
+}

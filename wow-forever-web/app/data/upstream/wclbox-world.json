@@ -7,45 +7,45 @@
    "https://wowforever.wclbox.com/shuji",
    "https://wowforever.wclbox.com/shuidai"
   ],
-  "release": "r-1793819765111",
-  "foreverBuild": "1.60.1.70790",
+  "release": "r-1795205406386",
+  "foreverBuild": "1.60.1.71037",
   "classicBuild": "1.15.9.70576",
   "dropsAsOf": "2026-10-06",
-  "scrapedAt": "2026-11-05",
+  "scrapedAt": "2026-11-23",
   "endpoints": {
-   "meta": "https://wowforever.wclbox.com/_shuju/r-1793819765111/meta.json",
-   "maps": "https://wowforever.wclbox.com/_shuju/r-1793819765111/maps.json",
-   "zones": "https://wowforever.wclbox.com/_shuju/r-1793819765111/map-zones.json",
-   "reach": "https://wowforever.wclbox.com/_shuju/r-1793819765111/map-reach.json",
-   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1793819765111/xiyou.json",
-   "shuji": "https://wowforever.wclbox.com/_shuju/r-1793819765111/shuji.json",
-   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1793819765111/shuidai.json"
+   "meta": "https://wowforever.wclbox.com/_shuju/r-1795205406386/meta.json",
+   "maps": "https://wowforever.wclbox.com/_shuju/r-1795205406386/maps.json",
+   "zones": "https://wowforever.wclbox.com/_shuju/r-1795205406386/map-zones.json",
+   "reach": "https://wowforever.wclbox.com/_shuju/r-1795205406386/map-reach.json",
+   "xiyou": "https://wowforever.wclbox.com/_shuju/r-1795205406386/xiyou.json",
+   "shuji": "https://wowforever.wclbox.com/_shuju/r-1795205406386/shuji.json",
+   "shuidai": "https://wowforever.wclbox.com/_shuju/r-1795205406386/shuidai.json"
   },
   "took": "地图清单、区域等级与阵营、稀有精英位置与掉落归属、书籍位置、睡袋物品",
   "skipped": "上游 JSON 里的书本文案、营地路线讲解、任何攻略性建议"
  },
  "payload": {
   "meta": {
-   "foreverBuild": "1.60.1.70790",
+   "foreverBuild": "1.60.1.71037",
    "classicBuild": "1.15.9.70576",
-   "navBuild": "1.60.1.70790",
+   "navBuild": "1.60.1.71037",
    "launchAt": "2026-11-04T23:00:00Z",
    "betaOpenAt": "2026-09-17T17:30:00Z",
    "betaCloseAt": "2026-10-21T00:00:00Z",
    "dropsAsOf": "2026-10-06",
    "talentsUpdated": {
-    "build": "1.60.1.70790",
+    "build": "1.60.1.71037",
     "month": 11,
-    "day": 5
+    "day": 20
    },
    "counts": {
     "all": 968,
-    "changed": 767,
+    "changed": 770,
     "newTalents": 118,
-    "changedTalents": 307,
+    "changedTalents": 308,
     "removedTalents": 84,
     "spells": 417,
-    "spellsChanged": 258
+    "spellsChanged": 260
    }
   },
   "maps": [
@@ -2921,7 +2921,7 @@
      ]
     },
     {
-     "anchor": "rare-22",
+     "anchor": "rare-23",
      "count": 2,
      "zone": "塔纳利斯",
      "side": "c",
@@ -2958,13 +2958,33 @@
      ]
     },
     {
-     "anchor": "rare-23",
+     "anchor": "rare-22",
+     "count": 1,
+     "zone": "阿拉希高地",
+     "side": "c",
+     "level": [
+      30,
+      40
+     ]
+    },
+    {
+     "anchor": "rare-24",
      "count": 1,
      "zone": "悲伤沼泽",
      "side": "c",
      "level": [
       36,
       43
+     ]
+    },
+    {
+     "anchor": "rare-26",
+     "count": 1,
+     "zone": "灼热峡谷",
+     "side": "c",
+     "level": [
+      43,
+      48
      ]
     },
     {
@@ -4089,6 +4109,52 @@
      "id": "rare-21"
     },
     {
+     "key": "Ruul Onestone",
+     "name": "鲁尔·巨石",
+     "npc": null,
+     "zone": "阿拉希高地",
+     "level": [
+      39,
+      39
+     ],
+     "kind": "rare-elite",
+     "new": false,
+     "map": {
+      "href": "/ditu/eastern-kingdoms#x=6062&y=7855&z=5&with=rare",
+      "img": "/ditu-xiao/1417.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1417
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 282705,
+        "n": "鲁尔的副石",
+        "q": 3,
+        "k": "inv_jewelry_ring_09",
+        "l": 41,
+        "x": [
+         "拾取后绑定",
+         "手指",
+         "+9 精神",
+         "需要等级 36",
+         "装备：提高所有法术和魔法效果所造成的伤害，最多9点。",
+         "售价：8银37铜"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 18.0,
+       "y": 68.7,
+       "map": "/ditu/eastern-kingdoms#x=6062&y=7855&z=5&with=rare"
+      }
+     ],
+     "id": "rare-22"
+    },
+    {
      "key": "Warleader Krazzilak",
      "name": "克莱吉拉克",
      "npc": null,
@@ -4132,7 +4198,7 @@
        "map": "/ditu/kalimdor#x=19164&y=22982&z=5&with=rare"
       }
      ],
-     "id": "rare-22"
+     "id": "rare-23"
     },
     {
      "key": "Lord Captain Wyrmak",
@@ -4180,7 +4246,7 @@
        "map": "/ditu/eastern-kingdoms#x=8259&y=15951&z=5&with=rare"
       }
      ],
-     "id": "rare-23"
+     "id": "rare-24"
     },
     {
      "key": "Greater Firebird",
@@ -4232,7 +4298,61 @@
       "id": "carrion-bird",
       "name": "食腐鸟"
      },
-     "id": "rare-24"
+     "id": "rare-25"
+    },
+    {
+     "key": "Highlord Mastrogonde",
+     "name": "玛斯托格",
+     "npc": null,
+     "zone": "灼热峡谷",
+     "level": [
+      51,
+      51
+     ],
+     "kind": "rare-elite",
+     "new": false,
+     "map": {
+      "href": "/ditu/eastern-kingdoms#x=5556&y=12383&z=5&with=rare",
+      "img": "/ditu-xiao/1427.webp",
+      "w": 560,
+      "h": 373,
+      "mapId": 1427
+     },
+     "drops": [
+      {
+       "item": {
+        "id": 282633,
+        "n": "马斯特罗贡德的邪恶长袍",
+        "q": 3,
+        "k": "inv_chest_cloth_17",
+        "l": 53,
+        "x": [
+         "拾取后绑定",
+         "胸部\t布甲",
+         "护甲值 76",
+         "+12 智力",
+         "+17 精神",
+         "+12 耐力",
+         "需要等级 48",
+         "装备：提高暗影法术和效果所造成的伤害，最多11点。",
+         "售价：6银48铜"
+        ]
+       }
+      }
+     ],
+     "coords": [
+      {
+       "x": 29.8,
+       "y": 26.8,
+       "map": "/ditu/eastern-kingdoms#x=5556&y=12383&z=5&with=rare"
+      },
+      {
+       "x": 14.5,
+       "y": 37.2,
+       "map": "/ditu/eastern-kingdoms#x=5229&y=12531&z=5&with=rare"
+      }
+     ],
+     "id": "rare-26"
     },
     {
      "key": "Slydris",
@@ -4295,7 +4415,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-25"
+     "id": "rare-27"
     },
     {
      "key": "Snapbeak the Quick",
@@ -4319,15 +4439,15 @@
         "n": "迅击戒指",
         "q": 4,
         "k": "inv_jewelry_ring_07",
-        "l": 10,
+        "l": 30,
         "x": [
-         "拾取后绑定",
+         "装备后绑定",
          "唯一",
          "手指",
-         "+1 耐力",
-         "+1 力量",
-         "装备：使你造成爆击的几率提高0.21%。",
-         "装备：+5 攻击强度。",
+         "+4 耐力",
+         "+2 力量",
+         "装备：使你造成爆击的几率提高0.5%。",
+         "装备：+14 攻击强度。",
          "售价：6金40银30铜"
         ]
        }
@@ -4375,7 +4495,7 @@
       }
      ],
      "tame": false,
-     "id": "rare-26"
+     "id": "rare-28"
     }
    ],
    "sets": [
@@ -4897,7 +5017,7 @@
     "斯卡达隆",
     "老锈嚎"
    ],
-   "count": 37
+   "count": 39
   },
   "shuji": {
    "rewards": [
@@ -6083,7 +6203,7 @@
       "26 - 49 点伤害\t速度 2.30",
       "(每秒伤害 16.3)",
       "+4 敏捷",
-      "售价：54银26铜"
+      "售价：9铜"
      ]
     },
     "3464": {

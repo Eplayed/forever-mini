@@ -14,6 +14,7 @@ module.exports = {
     bis: { on: true },
     professions: { on: false },
     macros: { on: true },
-    namer: { on: true }
+    namer: { on: true },
+    grank: { on: true }
   }
 }

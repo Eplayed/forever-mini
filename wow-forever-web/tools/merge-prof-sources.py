@@ -5,11 +5,11 @@
 # 站内原有的 `source`（"训练师" / null）不动——那是参考站给的来源类别，与"具体哪个商人"是两件事，
 # 覆盖掉就等于把两个不同层次的说法揉成一个。新字段各带自己的出处标记 srcFrom。
 #
-# 顺序：merge-professions.js 之后跑本脚本（refresh.sh prof 那条链已排好）。
+# merge-professions.js 用 --stdin 合并已归档的快照，然后才替换成品。
 # 幂等：只加/改 vendors、formulaDrops、srcFrom 三个键，重跑字节一致。
 import json
 import os
-from datetime import date
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "app", "data")
@@ -23,7 +23,8 @@ def load(name):
 
 
 def main():
-    prof = load('professions.json')
+    stream = sys.argv[1:] == ['--stdin']
+    prof = json.load(sys.stdin) if stream else load('professions.json')
     xr = load(os.path.join('upstream', 'xr-prof.json'))
     rec = xr['recipes']
     n = {'recipes': 0, 'matched': 0, 'withVendors': 0, 'withDrops': 0, 'vTrimmed': 0,
@@ -66,15 +67,18 @@ def main():
         if k not in have:
             n['xrOnly'] += 1
     m = prof.setdefault('meta', {})
-    m['sourceFrom'] = ('配方行的 vendors / formulaDrops 来自 XR_DungeonGuide 0.37.1 Data_Prof.lua'
-                       '（tools/extract-xr-prof.py 抽取 → tools/merge-prof-sources.py 并入），'
-                       '掉率百分比在抽取阶段就丢了；原有的 source（训练师/商人这类归法）仍来自参考站，两套并存')
+    m['sourceFrom'] = '商人和图纸掉落来自已归档的 ' + xr['meta']['source'] + '，核对日期 ' + xr['meta']['fetched']
     m['xrProf'] = dict(n, fetched=xr['meta']['fetched'], total=xr['meta']['counts']['total'],
                        rateDropped=xr['meta']['counts']['rateDropped'])
+    if stream:
+        json.dump(prof, sys.stdout, ensure_ascii=False, indent=1)
+        sys.stdout.write('\n')
+        return
     out = os.path.join(DATA, 'professions.json')
-    with open(out, 'w', encoding='utf-8', newline='\n') as f:
+    with open(out + '.tmp', 'w', encoding='utf-8', newline='\n') as f:
         json.dump(prof, f, ensure_ascii=False, indent=1)
         f.write('\n')
+    os.replace(out + '.tmp', out)
     print('配方 %d 条：并上商人 %d · 图纸掉落 %d（商人超 6 个截断 %d 条、掉落超 4 个截断 %d 条）；'
           'XR 有、站内没有的 %d 条'
           % (n['recipes'], n['withVendors'], n['withDrops'], n['vTrimmed'], n['dTrimmed'], n['xrOnly']))

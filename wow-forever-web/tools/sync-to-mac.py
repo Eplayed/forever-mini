@@ -20,15 +20,17 @@ import time
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 WEB_APP = REPO / "wow-forever-web" / "app"
-ADDONS_DIR = pathlib.Path(r"C:/GAME/World of Warcraft/_forever_/Interface/AddOns")
+sys.path.insert(0, str(REPO / "wow-forever-web" / "tools"))
+from addons_root import resolve as resolve_addons_root
 
 REMOTE_FOREVER_APP = "~/Documents/project/wow-forever/wow-forever-web/app"
 REMOTE_V2T = "~/Documents/project/video2text"
+CENSUS_FILES = ("population-census.json", "population-census-cn.json")
 
 
 def extract_flb_sets():
     """从本机 ForeverLevelingBiS 插件提取套装 ID、中英文名、件数与物品 ID 列表（仅取事实字段）。"""
-    sets_lua = ADDONS_DIR / "ForeverLevelingBiS" / "Data" / "Sets.lua"
+    sets_lua = pathlib.Path(resolve_addons_root("ForeverLevelingBiS")) / "ForeverLevelingBiS" / "Data" / "Sets.lua"
     if not sets_lua.is_file():
         return []
     text = sets_lua.read_text(encoding="utf-8")
@@ -111,10 +113,16 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--host", default="zhangyajun@192.168.0.101", help="MacBook SSH 地址")
     ap.add_argument("--full", action="store_true", help="强制全量同步")
+    ap.add_argument("--only", nargs="+", metavar="APP_PATH", help="只同步指定成品路径并刷新 video2text 资产索引")
     args = ap.parse_args()
 
     t0 = time.time()
     local_files = collect_local_files()
+    if args.only:
+        unknown = set(args.only) - local_files.keys()
+        if unknown:
+            ap.error("不在成品清单中：" + ", ".join(sorted(unknown)))
+        local_files = {rel: local_files[rel] for rel in dict.fromkeys(args.only)}
     remote_map = {} if args.full else get_remote_manifest(args.host)
 
     to_send = []
@@ -133,7 +141,7 @@ def main():
         to_send.append((rel, path))
         total_bytes += st.st_size
 
-    sets_data = extract_flb_sets()
+    sets_data = [] if args.only else extract_flb_sets()
     sets_bytes = json.dumps({"updatedAt": time.strftime("%Y-%m-%d"), "sets": sets_data},
                             ensure_ascii=False, indent=2).encode("utf-8")
 
@@ -161,6 +169,24 @@ def main():
         if proc.returncode != 0:
             raise RuntimeError("解压失败: " + proc.stderr.decode("utf-8", "ignore"))
 
+    # 同步双皮肤图文与公众号内联排版引擎到 MacBook video2text/src/
+    code_files = () if args.only else (
+        ("build-ningjing-pack.py", "ningjing_studio.py"),
+        ("wechat_mp_publisher.py", "wechat_mp_publisher.py"),
+        ("today_ningjing.py", "today_ningjing.py"),
+        ("talent_vision.py", "talent_vision.py"),
+        ("forever_data_routes.py", "forever_data_routes.py"),
+    )
+    for local_name, remote_name in code_files:
+        src_p = REPO / "wow-forever-web" / "tools" / local_name
+        if src_p.is_file():
+            subprocess.run(
+                ["ssh", "-o", "ConnectTimeout=5", args.host, f"cat > {REMOTE_V2T}/src/{remote_name}"],
+                input=src_p.read_bytes(),
+                capture_output=True,
+                timeout=30,
+            )
+
     # 触发 MacBook video2text 同步脚本
     sync_cmd = f"cd {REMOTE_V2T} && python3 tools/sync_wow_icons.py"
     proc2 = subprocess.run(
@@ -173,6 +199,14 @@ def main():
     if proc2.returncode != 0:
         print("[sync-to-mac] 警告：MacBook sync_wow_icons.py 退出非 0：", err_txt, file=sys.stderr)
         return proc2.returncode
+    census_files = [name for name in CENSUS_FILES if f"data/{name}" in local_files]
+    if census_files:
+        census_cmd = f"mkdir -p {REMOTE_V2T}/output/_assets && " + " && ".join(
+            f"cp {REMOTE_FOREVER_APP}/data/{name} {REMOTE_V2T}/output/_assets/{name}.tmp"
+            f" && mv {REMOTE_V2T}/output/_assets/{name}.tmp {REMOTE_V2T}/output/_assets/{name}"
+            for name in census_files
+        )
+        subprocess.run(["ssh", "-o", "ConnectTimeout=5", args.host, census_cmd], check=True, timeout=30)
     print(f"[sync-to-mac] 完成（耗时 {time.time()-t0:.1f}s）：\n{out_txt}")
     return 0
 

@@ -21,7 +21,7 @@ MD = os.path.join(ROOT, "app", "img", "models")
 ART = os.path.join(ROOT, "app", "data", "art.json")
 
 
-def main():
+def placeholder_index():
     man_path = os.path.join(MD, "manifest.json")
     if not os.path.exists(man_path):
         sys.exit("缺 %s —— 先跑 tools/build-bis-placeholder-model.py" % os.path.relpath(man_path, ROOT))
@@ -51,8 +51,7 @@ def main():
             "gearNodes": it.get("gearNodes") or [],
         })
 
-    art = json.load(open(ART, encoding="utf-8"))
-    art["bisModels"] = {
+    return {
         "items": items,
         "origin": origin,
         "note": man.get("note") or "",
@@ -60,8 +59,14 @@ def main():
         # 生成脚本的名字只留在 img/models/manifest.json（那份不进构建产物），
         # 抄进 art.json 就会被禁词闸拦下——那是给玩家看的数据文件，不该出现我们的脚本路径
     }
+
+
+def main():
+    art = json.load(open(ART, encoding="utf-8"))
+    art["bisModels"] = placeholder_index()
     with open(ART, "w", encoding="utf-8") as f:
         f.write(json.dumps(art, ensure_ascii=False, indent=1) + "\n")
+    items = art["bisModels"]["items"]
     print("art.json.bisModels 登记 %d 个模型：%s"
           % (len(items), ", ".join(x["file"] for x in items) or "（空）"))
     return 0

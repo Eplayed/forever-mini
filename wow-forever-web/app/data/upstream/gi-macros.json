@@ -1,26 +1,21 @@
 {
  "meta": {
   "kind": "gi-macros",
-  "fetchedAt": "2026-11-05",
-  "source": "GearInsight_Forever 0.5.3 + XR_DungeonGuide v75（同一批宏的两个形态，版本号从各自 .toc 现读）",
+  "fetchedAt": "2026-11-25",
+  "source": "GearInsight_Forever 1.0.0（单源：XR_DungeonGuide 已退役，缺省法术名由 GI 内置 MacroSpellNames 烘名）",
   "addonVersions": {
-   "gi": "0.5.3",
-   "xr": "75"
+   "gi": "1.0.0",
+   "xr": null
   },
   "files": [
    {
     "path": "GearInsight_Forever/MacroData.lua",
-    "sha256": "f00458f83614c62b2596dcae538c1d94f12cd10a7fa5583a6eecbcef110d6fc0",
+    "sha256": "1560999b3c59f1ea90912b322d86379d2b26ed4a6c84f92264d9fba67459f0ae",
     "selfReported": "宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；技能名 → 法术 ID：Beta 1.60.1.70532"
-   },
-   {
-    "path": "XR_DungeonGuide/Data_Macros.lua",
-    "sha256": "7b9ba9b5166ab570ebd060dba3651b94421fd0c2368b0a757e6954074e52abd6",
-    "selfReported": "XR_DungeonGuide 全职业宏库 v0.39.0 新增，v66 同步 GI 2026-10-19 新版；宏体内法术名已烘焙为中文"
    }
   ],
-  "licenseNote": "两个插件目录里都没有 LICENSE 文件、TOC 也没有 X-License 行；按根 AGENTS.md 2026-10-18「网页端放开清单」第 1 条分享宏文本与说明，硬边界是免费 + 标来源 + 不分发插件本体。",
-  "alignment": "两份逐条同职业 / 同组 / 同中文标题，条数都是 245；顺序一致才允许拿 XR 当烘名参照",
+  "licenseNote": "插件目录里没有 LICENSE 文件、TOC 也没有 X-License 行；按根 AGENTS.md 2026-10-18「网页端放开清单」第 1 条分享宏文本与说明，硬边界是免费 + 标来源 + 不分发插件本体。",
+  "alignment": "单源 GI 245 条宏，所有 306 个法术 ID 均在 MacroSpellNames 有明确映射",
   "notTaken": [
    "插件的界面代码与文案排版",
    "任何\"下一个技能打什么\"的循环提示类建议（红线）"
@@ -1152,7 +1147,7 @@
    "note": "裸按开正义之怒，按住 Alt 取消",
    "bodyTemplate": "#showtooltip {{25780}}\\n/cancelaura [mod:alt] {{25780}}\\n/cast [nomod:alt] {{25780}}",
    "foreverNew": false,
-   "level": 16,
+   "level": 10,
    "spellIds": [
     25780
    ],
@@ -2113,7 +2108,7 @@
     13750,
     13877
    ],
-   "bodyBakedByAddon": "#showtooltip\\n/use 13\\n/use 14\\n/cast [mod:shift] 剑刃乱舞; 冲动"
+   "bodyBakedByAddon": "#showtooltip\\n/use 13\\n/use 14\\n/cast [mod:shift] 冲动; 剑刃乱舞"
   },
   {
    "cls": "Rogue",
@@ -2823,7 +2818,7 @@
     5019,
     5019
    ],
-   "bodyBakedByAddon": "#showtooltip 魔杖射击\\n/cast !魔杖射击"
+   "bodyBakedByAddon": "#showtooltip 射击\\n/cast !射击"
   },
   {
    "cls": "Priest",
@@ -3611,11 +3606,11 @@
    "groupEn": "Leveling picks",
    "titleEn": "Flame Shock then Lava Burst",
    "title": "烈焰震击 → 熔岩爆裂",
-   "noteEn": "Press twice: Flame Shock, then the new Lava Burst. Resets on a new target or after 12 s.",
-   "note": "连按两下：先上烈焰震击，再接熔岩爆裂（《无限》新技能）；换目标或 12 秒后重来",
+   "noteEn": "Press twice: Flame Shock, then Lava Burst. Resets on a new target or after 12 s. Since the launch client Lava Burst is no longer taught by trainers — you only get it from the talent tree.",
+   "note": "连按两下：先上烈焰震击，再接熔岩爆裂；换目标或 12 秒后重来。开服版起训练师不再教熔岩爆裂，只能靠天赋获得",
    "bodyTemplate": "#showtooltip\\n/castsequence reset=target/12 {{8050}}, {{408490}}",
    "foreverNew": false,
-   "level": 40,
+   "level": 30,
    "spellIds": [
     8050,
     408490
@@ -3941,7 +3936,7 @@
     5019,
     5019
    ],
-   "bodyBakedByAddon": "#showtooltip 魔杖射击\\n/cast !魔杖射击"
+   "bodyBakedByAddon": "#showtooltip 射击\\n/cast !射击"
   },
   {
    "cls": "Mage",
@@ -4361,7 +4356,7 @@
     21987,
     701
    ],
-   "bodyBakedByAddon": "#showtooltip\\n/petattack\\n/cast [pet:Voidwalker] 折磨; [pet:Succubus/Incubus] 痛苦鞭笞; [pet:Imp] 火弹"
+   "bodyBakedByAddon": "#showtooltip\\n/petattack\\n/cast [pet:Voidwalker] 折磨; [pet:Succubus/Incubus] 剧痛鞭笞; [pet:Imp] 火焰箭"
   },
   {
    "cls": "Warlock",
@@ -4809,7 +4804,7 @@
     172,
     5019
    ],
-   "bodyBakedByAddon": "#showtooltip\\n/petattack [harm,nodead]\\n/castsequence reset=target 献祭, 痛苦灾祸, 腐蚀术, !魔杖射击"
+   "bodyBakedByAddon": "#showtooltip\\n/petattack [harm,nodead]\\n/castsequence reset=target 献祭, 痛苦灾祸, 腐蚀术, !射击"
   },
   {
    "cls": "Warlock",
@@ -4830,7 +4825,7 @@
    "spellIdsInBody": [
     5019
    ],
-   "bodyBakedByAddon": "#showtooltip 18\\n/cast !魔杖射击"
+   "bodyBakedByAddon": "#showtooltip 18\\n/cast !射击"
   },
   {
    "cls": "Warlock",
@@ -5210,15 +5205,15 @@
    "title": "虫群（鼠标指向）",
    "noteEn": "Insect Swarm the enemy under the mouse without changing target; otherwise your target.",
    "note": "鼠标指谁给谁上虫群，不用换目标；没指着就打目标",
-   "bodyTemplate": "#showtooltip {{24974}}\\n/cast [@mouseover,harm,nodead][] {{24974}}",
+   "bodyTemplate": "#showtooltip {{5570}}\\n/cast [@mouseover,harm,nodead][] {{5570}}",
    "foreverNew": false,
    "level": 25,
    "spellIds": [
-    24974
+    5570
    ],
    "spellIdsInBody": [
-    24974,
-    24974
+    5570,
+    5570
    ],
    "bodyBakedByAddon": "#showtooltip 虫群\\n/cast [@mouseover,harm,nodead][] 虫群"
   },
@@ -5232,16 +5227,16 @@
    "title": "月火 → 虫群（两下上齐 DOT）",
    "noteEn": "Press twice: Moonfire, then Insect Swarm on the mouseover or target. Resets when you change target or after 12 s.",
    "note": "连按两下：先月火再虫群，鼠标指向优先；换目标或 12 秒后从头来",
-   "bodyTemplate": "#showtooltip\\n/castsequence [@mouseover,harm,nodead][] reset=target/12 {{8921}}, {{24974}}",
+   "bodyTemplate": "#showtooltip\\n/castsequence [@mouseover,harm,nodead][] reset=target/12 {{8921}}, {{5570}}",
    "foreverNew": false,
    "level": 25,
    "spellIds": [
-    24974,
+    5570,
     8921
    ],
    "spellIdsInBody": [
     8921,
-    24974
+    5570
    ],
    "bodyBakedByAddon": "#showtooltip\\n/castsequence [@mouseover,harm,nodead][] reset=target/12 月火术, 虫群"
   },
@@ -5729,7 +5724,7 @@
    "note": "不在豹形态先变豹（带 ! 不会变回去），再撕碎；按住 Shift 爪击",
    "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1082}}; {{5221}}",
    "foreverNew": false,
-   "level": 22,
+   "level": 20,
    "spellIds": [
     768,
     5221,
@@ -5752,18 +5747,18 @@
    "title": "猎豹终结：凶猛撕咬，Shift 撕扯",
    "noteEn": "Cat Form if needed, then Ferocious Bite; Shift for Rip.",
    "note": "不在豹形态先变豹，再凶猛撕咬；按住 Shift 撕扯（流血）",
-   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1079}}; {{22568}}",
+   "bodyTemplate": "#showtooltip\\n/startattack\\n/cast !{{768}}\\n/cast [mod:shift] {{1079}}; {{1328618}}",
    "foreverNew": false,
-   "level": 32,
+   "level": 24,
    "spellIds": [
     768,
-    22568,
+    1328618,
     1079
    ],
    "spellIdsInBody": [
     768,
     1079,
-    22568
+    1328618
    ],
    "bodyBakedByAddon": "#showtooltip\\n/startattack\\n/cast !猎豹形态\\n/cast [mod:shift] 撕扯; 凶猛撕咬"
   },
@@ -6468,6 +6463,10 @@
    "cn": "造水术",
    "en": "Conjure Water"
   },
+  "5570": {
+   "cn": "虫群",
+   "en": "Insect Swarm"
+  },
   "5740": {
    "cn": "火焰之雨",
    "en": "Rain of Fire"
@@ -6900,17 +6899,9 @@
    "cn": "剧痛鞭笞",
    "en": "Lash of Pain"
   },
-  "22568": {
-   "cn": "凶猛撕咬",
-   "en": "Ferocious Bite"
-  },
   "24858": {
    "cn": "枭兽形态",
    "en": "Moonkin Form"
-  },
-  "24974": {
-   "cn": "虫群",
-   "en": "Insect Swarm"
   },
   "25780": {
    "cn": "正义之怒",
@@ -7019,6 +7010,10 @@
   "1311649": {
    "cn": "愤怒圣印",
    "en": "Seal of Fury"
+  },
+  "1328618": {
+   "cn": "凶猛撕咬",
+   "en": "Ferocious Bite"
   }
  }
 }

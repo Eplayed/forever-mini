@@ -428,6 +428,14 @@ const SHARD_SPECS = {
       && Array.isArray(d.factions) && d.factions.length === 2
       && Array.isArray(d.classes) && d.classes.length === 9
       && !!d.provenance && !!d.provenance.credit && !!d.provenance.licenseUrl
+  },
+  gRank: {
+    name: 'g-rank',
+    kind: 'g-rank',
+    shape: (d) => Array.isArray(d.items)
+      && d.items.every((x) => x && x.id && x.realm
+        && (x.faction === 'alliance' || x.faction === 'horde')
+        && typeof x.gPerMi === 'number' && Number.isFinite(x.gPerMi) && x.gPerMi > 0)
   }
 }
 

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-05",
+  "generatedAt": "2026-11-23",
   "source": "wow-forever-web/app/data/spells.json",
   "pageNote": "法术书按无限测试版客户端读出，与经典旧世逐条对照状态；等级数与起学等级另按两份职业技能表交叉核对过，两边说法不一样的两条都留着。",
   "levelPolicy": "名字与状态来自客户端解包转述，按 2026-10-08 站主定的档算 L0；插件来源（作者译名 / Wowhead 转译）不参与定名。",
@@ -26,8 +26,8 @@
     "null": 391
    },
    "byState": {
-    "same": 158,
-    "changed": 204,
+    "same": 156,
+    "changed": 206,
     "new": 26,
     "removed": 0,
     "renamed": 3,
@@ -36,8 +36,8 @@
    "ranksAlt": 29,
    "learnAlt": 10,
    "withId": 410,
-   "withLevels": 416,
-   "noPluginMatch": 24,
+   "withLevels": 415,
+   "noPluginMatch": 25,
    "noIcon": 1,
    "exported": 493
   },
@@ -190,9 +190,9 @@
     }
    ],
    "states": {
-    "changed": 21,
+    "changed": 22,
     "new": 6,
-    "same": 14
+    "same": 13
    }
   },
   {
@@ -249,8 +249,8 @@
     }
    ],
    "states": {
-    "same": 27,
-    "changed": 18,
+    "same": 26,
+    "changed": 19,
     "new": 4
    }
   },
@@ -380,7 +380,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -430,7 +430,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -500,7 +500,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -565,7 +565,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -615,7 +615,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -670,7 +670,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -704,7 +704,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -759,7 +759,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -800,7 +800,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -841,7 +841,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -896,7 +896,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -935,7 +935,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -965,7 +965,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1030,7 +1030,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1090,7 +1090,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1150,7 +1150,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1210,7 +1210,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1251,7 +1251,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1311,7 +1311,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1352,7 +1352,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1393,7 +1393,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1434,7 +1434,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1484,7 +1484,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1525,7 +1525,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1570,7 +1570,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1625,7 +1625,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1666,7 +1666,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1696,7 +1696,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1721,7 +1721,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1741,7 +1741,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1777,7 +1777,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1818,7 +1818,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1878,7 +1878,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1919,7 +1919,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -1969,7 +1969,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2034,7 +2034,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2075,7 +2075,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2116,7 +2116,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2157,7 +2157,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2212,7 +2212,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2242,7 +2242,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2267,7 +2267,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warrior",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2336,7 +2336,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2377,7 +2377,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2427,7 +2427,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2487,7 +2487,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2552,7 +2552,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2611,7 +2611,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2676,7 +2676,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2741,7 +2741,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2791,7 +2791,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2846,7 +2846,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2901,7 +2901,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -2951,7 +2951,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3002,7 +3002,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3043,7 +3043,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3093,7 +3093,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3138,7 +3138,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3183,7 +3183,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3213,7 +3213,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3238,7 +3238,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -3298,7 +3298,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3343,7 +3343,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3398,7 +3398,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3448,7 +3448,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3492,7 +3492,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3562,7 +3562,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3603,7 +3603,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3637,7 +3637,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3673,7 +3673,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3714,7 +3714,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3764,7 +3764,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3805,7 +3805,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3858,7 +3858,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3908,7 +3908,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -3953,7 +3953,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4003,7 +4003,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4044,7 +4044,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4089,7 +4089,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4130,7 +4130,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4169,7 +4169,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4208,7 +4208,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4278,7 +4278,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4319,7 +4319,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4394,7 +4394,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4459,7 +4459,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4519,7 +4519,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4579,7 +4579,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4624,7 +4624,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4654,7 +4654,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4690,7 +4690,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4731,7 +4731,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4761,7 +4761,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/paladin",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -4821,7 +4821,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4862,7 +4862,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4903,7 +4903,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4944,7 +4944,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -4985,7 +4985,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5027,7 +5027,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5097,7 +5097,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5138,7 +5138,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5179,7 +5179,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5229,7 +5229,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5270,7 +5270,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5311,7 +5311,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5367,7 +5367,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5422,7 +5422,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5463,7 +5463,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5508,7 +5508,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5549,7 +5549,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5579,7 +5579,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5604,7 +5604,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5640,7 +5640,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5720,7 +5720,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5795,7 +5795,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5850,7 +5850,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5891,7 +5891,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5956,7 +5956,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -5997,7 +5997,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6061,7 +6061,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6102,7 +6102,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6162,7 +6162,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6203,7 +6203,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6244,7 +6244,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6294,7 +6294,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6344,7 +6344,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6394,7 +6394,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6439,7 +6439,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6469,7 +6469,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6538,7 +6538,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6579,7 +6579,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6620,7 +6620,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6670,7 +6670,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6730,7 +6730,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6785,7 +6785,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6826,7 +6826,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6876,7 +6876,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6926,7 +6926,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -6967,7 +6967,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7025,7 +7025,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7066,7 +7066,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7107,7 +7107,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7148,7 +7148,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7203,7 +7203,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7244,7 +7244,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7294,7 +7294,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7335,7 +7335,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7376,7 +7376,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7406,7 +7406,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7440,7 +7440,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7470,7 +7470,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/hunter",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7510,7 +7510,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7570,7 +7570,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7635,7 +7635,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7700,7 +7700,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7765,7 +7765,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7806,7 +7806,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7851,7 +7851,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7913,7 +7913,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -7943,7 +7943,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8012,7 +8012,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8092,7 +8092,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8152,7 +8152,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8193,7 +8193,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8243,7 +8243,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8298,7 +8298,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8358,7 +8358,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8378,7 +8378,7 @@
    "tab": "战斗",
    "name": "戳刺",
    "iconKey": "ability_theblackarrow",
-   "ranks": null,
+   "ranks": 2,
    "learnLevel": 24,
    "state": "new",
    "stateTag": "new",
@@ -8388,7 +8388,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -8408,7 +8408,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8433,7 +8433,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8458,7 +8458,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8508,7 +8508,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8549,7 +8549,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8599,7 +8599,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8629,7 +8629,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -8660,7 +8660,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8705,7 +8705,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8739,7 +8739,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8775,7 +8775,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8816,7 +8816,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8850,7 +8850,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8875,7 +8875,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -8895,7 +8895,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8920,7 +8920,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8945,7 +8945,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8970,7 +8970,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -8995,7 +8995,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9025,7 +9025,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9059,7 +9059,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9092,7 +9092,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9107,33 +9107,22 @@
    ]
   },
   {
-   "id": "rogue-麻痹毒药",
+   "id": "rogue-麻痹药膏",
    "classId": "rogue",
    "tab": "毒药",
-   "name": "麻痹毒药",
+   "name": "麻痹药膏",
    "iconKey": "spell_nature_nullifydisease",
-   "ranks": 3,
+   "ranks": null,
    "learnLevel": 24,
    "state": "changed",
    "stateTag": "changed",
    "relation": null,
    "level": "L0",
-   "learnLevels": [
-    24,
-    38,
-    52
-   ],
-   "ranksFrom": "xr",
    "provenance": [
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
-    },
-    {
-     "type": "addon",
-     "url": "XR_DungeonGuide 87 Data_Skills.lua",
-     "checkedAt": "2026-10-28"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9153,7 +9142,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9181,7 +9170,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9213,7 +9202,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9242,7 +9231,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9267,7 +9256,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9287,7 +9276,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9307,7 +9296,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9327,7 +9316,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9347,7 +9336,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9367,7 +9356,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9387,7 +9376,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9407,7 +9396,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9427,7 +9416,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9447,7 +9436,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9467,7 +9456,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9487,7 +9476,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9507,7 +9496,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9527,7 +9516,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/rogue",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -9602,7 +9591,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9643,7 +9632,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9713,7 +9702,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9778,7 +9767,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9823,7 +9812,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9883,7 +9872,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9924,7 +9913,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -9984,7 +9973,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10034,7 +10023,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10056,8 +10045,8 @@
    "iconKey": "spell_shadow_manaburn",
    "ranks": 5,
    "learnLevel": 24,
-   "state": "same",
-   "stateTag": "same",
+   "state": "changed",
+   "stateTag": "changed",
    "relation": null,
    "level": "L0",
    "spellRanks": [
@@ -10094,7 +10083,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10148,7 +10137,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10204,7 +10193,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10245,7 +10234,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10290,7 +10279,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10331,7 +10320,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10361,7 +10350,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10386,7 +10375,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10430,7 +10419,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10504,7 +10493,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10589,7 +10578,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10659,7 +10648,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10729,7 +10718,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10789,7 +10778,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10830,7 +10819,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10885,7 +10874,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -10965,7 +10954,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11006,7 +10995,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11076,7 +11065,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11151,7 +11140,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11217,7 +11206,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11277,7 +11266,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11318,7 +11307,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11378,7 +11367,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11427,7 +11416,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11478,7 +11467,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11529,7 +11518,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11604,7 +11593,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11669,7 +11658,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11734,7 +11723,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11814,7 +11803,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11879,7 +11868,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11934,7 +11923,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -11994,7 +11983,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12059,7 +12048,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12109,7 +12098,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12174,7 +12163,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12239,7 +12228,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12284,7 +12273,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12334,7 +12323,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12384,7 +12373,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12439,7 +12428,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12480,7 +12469,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12510,7 +12499,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12535,7 +12524,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12560,7 +12549,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/priest",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12625,7 +12614,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12666,7 +12655,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12731,7 +12720,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12796,7 +12785,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12861,7 +12850,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12921,7 +12910,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -12966,7 +12955,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13007,7 +12996,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13062,7 +13051,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13103,7 +13092,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13158,7 +13147,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13199,7 +13188,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13254,7 +13243,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13295,7 +13284,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13325,7 +13314,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -13385,7 +13374,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13450,7 +13439,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13520,7 +13509,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13585,7 +13574,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13645,7 +13634,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13705,7 +13694,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13746,7 +13735,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13776,7 +13765,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -13807,7 +13796,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13857,7 +13846,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13898,7 +13887,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -13948,7 +13937,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14003,7 +13992,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14044,7 +14033,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14085,7 +14074,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14126,7 +14115,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14176,7 +14165,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14231,7 +14220,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14281,7 +14270,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14322,7 +14311,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14372,7 +14361,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14422,7 +14411,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14452,7 +14441,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14486,7 +14475,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14570,7 +14559,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14630,7 +14619,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14671,7 +14660,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14712,7 +14701,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14772,7 +14761,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14837,7 +14826,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14878,7 +14867,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14919,7 +14908,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -14977,7 +14966,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15032,7 +15021,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15067,7 +15056,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15103,7 +15092,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15153,7 +15142,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15204,7 +15193,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15234,7 +15223,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15259,7 +15248,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/shaman",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15331,7 +15320,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15353,8 +15342,8 @@
    "iconKey": "inv_misc_food_10",
    "ranks": 7,
    "learnLevel": 6,
-   "state": "same",
-   "stateTag": "same",
+   "state": "changed",
+   "stateTag": "changed",
    "relation": null,
    "level": "L0",
    "spellRanks": [
@@ -15401,7 +15390,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15476,7 +15465,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15538,7 +15527,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15598,7 +15587,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15639,7 +15628,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15704,7 +15693,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15759,7 +15748,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15800,7 +15789,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15841,7 +15830,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15882,7 +15871,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15947,7 +15936,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -15988,7 +15977,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16029,7 +16018,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16070,7 +16059,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16111,7 +16100,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16172,7 +16161,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16213,7 +16202,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16269,7 +16258,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16310,7 +16299,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16351,7 +16340,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16392,7 +16381,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16442,7 +16431,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16483,7 +16472,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16524,7 +16513,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16565,7 +16554,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16606,7 +16595,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16647,7 +16636,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16688,7 +16677,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16729,7 +16718,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16770,7 +16759,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16811,7 +16800,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16852,7 +16841,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16893,7 +16882,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16934,7 +16923,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16964,7 +16953,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -16989,7 +16978,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17078,7 +17067,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17148,7 +17137,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17213,7 +17202,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17273,7 +17262,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17348,7 +17337,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17418,7 +17407,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17478,7 +17467,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17528,7 +17517,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17569,7 +17558,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17599,7 +17588,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17643,7 +17632,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17733,7 +17722,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17788,7 +17777,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17853,7 +17842,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17919,7 +17908,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -17979,7 +17968,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18039,7 +18028,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18094,7 +18083,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18149,7 +18138,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18179,7 +18168,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18204,7 +18193,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18229,7 +18218,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18258,7 +18247,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/mage",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18318,7 +18307,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18383,7 +18372,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18448,7 +18437,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18498,7 +18487,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18553,7 +18542,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18608,7 +18597,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18673,7 +18662,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18728,7 +18717,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18783,7 +18772,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18828,7 +18817,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18883,7 +18872,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18928,7 +18917,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -18978,7 +18967,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19019,7 +19008,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19049,7 +19038,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19074,7 +19063,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19108,7 +19097,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19152,7 +19141,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19193,7 +19182,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19253,7 +19242,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19294,7 +19283,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19364,7 +19353,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19405,7 +19394,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19465,7 +19454,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19525,7 +19514,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19566,7 +19555,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19607,7 +19596,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19648,7 +19637,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19689,7 +19678,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19730,7 +19719,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19780,7 +19769,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19825,7 +19814,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19880,7 +19869,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19930,7 +19919,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -19971,7 +19960,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20026,7 +20015,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20076,7 +20065,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20117,7 +20106,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20158,7 +20147,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20199,7 +20188,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20229,7 +20218,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20254,7 +20243,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20279,7 +20268,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20349,7 +20338,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20433,7 +20422,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20498,7 +20487,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20553,7 +20542,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20618,7 +20607,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20683,7 +20672,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20733,7 +20722,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20784,7 +20773,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20829,7 +20818,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20868,7 +20857,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20902,7 +20891,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -20938,7 +20927,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/warlock",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21023,7 +21012,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21088,7 +21077,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21153,7 +21142,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21217,7 +21206,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21258,7 +21247,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21313,7 +21302,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21363,7 +21352,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21397,7 +21386,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21462,7 +21451,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21512,7 +21501,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21575,7 +21564,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21625,7 +21614,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21666,7 +21655,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21696,7 +21685,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21732,7 +21721,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21792,7 +21781,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21833,7 +21822,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21903,7 +21892,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21944,7 +21933,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -21994,7 +21983,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22035,7 +22024,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22095,7 +22084,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22136,7 +22125,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22196,7 +22185,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22246,7 +22235,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22311,7 +22300,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22371,7 +22360,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22437,7 +22426,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22492,7 +22481,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22548,7 +22537,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22593,7 +22582,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22634,7 +22623,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22684,7 +22673,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22725,7 +22714,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22755,7 +22744,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -22800,7 +22789,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22841,7 +22830,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22882,7 +22871,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22932,7 +22921,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -22973,7 +22962,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23007,7 +22996,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23064,7 +23053,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23103,7 +23092,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23133,7 +23122,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23217,7 +23206,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23287,7 +23276,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23377,7 +23366,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23457,7 +23446,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23517,7 +23506,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23558,7 +23547,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23618,7 +23607,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23659,7 +23648,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23700,7 +23689,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23755,7 +23744,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23796,7 +23785,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23847,7 +23836,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23892,7 +23881,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23922,7 +23911,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",
@@ -23947,7 +23936,7 @@
     {
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/fashu/druid",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "addon",

@@ -92,13 +92,16 @@ def sha(b):
 def local_stat(path):
     if not os.path.isfile(path):
         return None
-    b = open(path, "rb").read()
-    return {"bytes": len(b), "sha256": sha(b), "mtime": datetime.date.fromtimestamp(os.path.getmtime(path)).isoformat()}
+    with open(path, "rb") as f:
+        body = f.read()
+    lf = body.replace(b"\r\n", b"\n")
+    return {"bytes": len(body), "sha256": sha(body), "lfBytes": len(lf), "lfSha256": sha(lf),
+            "mtime": datetime.date.fromtimestamp(os.path.getmtime(path)).isoformat()}
 
 
 # ─────────────────────────────── 网页线 ───────────────────────────────
 def web_row(base, rel, loc):
-    """一个文件：先 HEAD 比尺寸，同尺寸才下载比哈希。"""
+    """先用 HEAD 筛选，兼容 Windows 本地与 Pages 的换行差异。"""
     url = "%s/data/%s" % (base, rel)
     code, head, _ = fetch(url, timeout=12, method="HEAD")
     if code == 404:
@@ -112,15 +115,16 @@ def web_row(base, rel, loc):
         out["state"] = "本地没有这个文件（线上有）"
         return out
     out["localBytes"] = loc["bytes"]
-    if live_bytes != loc["bytes"]:
+    if live_bytes not in (loc["bytes"], loc["lfBytes"]):
         out["state"] = "不同（尺寸就不一样）"
         return out
     code2, _, body = fetch(url, timeout=45)
     if code2 != 200 or len(body) != live_bytes:
         # 取不全就当读不到：拿截断字节算哈希会把"一致"判成"不同"
-        out["state"] = "读不到（同尺寸但这一趟没取全）"
+        out["state"] = "读不到（这一趟没取全）"
         return out
-    out["state"] = "一致" if sha(body) == loc["sha256"] else "不同（同尺寸不同内容，多半是里面那个日期）"
+    same = sha(body) == loc["sha256"] or sha(body.replace(b"\r\n", b"\n")) == loc["lfSha256"]
+    out["state"] = "一致" if same else "不同（核对内容后有差异）"
     return out
 
 

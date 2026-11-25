@@ -1,6 +1,6 @@
 {
  "meta": {
-  "scrapedAt": "2026-11-05",
+  "scrapedAt": "2026-11-23",
   "via": "live"
  },
  "trees": [
@@ -44,7 +44,7 @@
   {
    "tree": 0,
    "name": "强化战术掌握",
-   "max": 5,
+   "max": 3,
    "row": 1,
    "col": 1,
    "preName": null
@@ -100,7 +100,7 @@
   {
    "tree": 0,
    "name": "血之气息",
-   "max": 5,
+   "max": 2,
    "row": 4,
    "col": 0,
    "preName": null
@@ -203,6 +203,14 @@
   },
   {
    "tree": 1,
+   "name": "狂怒",
+   "max": 5,
+   "row": 2,
+   "col": 3,
+   "preName": null
+  },
+  {
+   "tree": 1,
    "name": "双武器专精",
    "max": 5,
    "row": 3,
@@ -211,18 +219,10 @@
   },
   {
    "tree": 1,
-   "name": "怒击",
+   "name": "鲁莽挥击",
    "max": 1,
    "row": 3,
    "col": 1,
-   "preName": null
-  },
-  {
-   "tree": 1,
-   "name": "狂怒",
-   "max": 5,
-   "row": 3,
-   "col": 2,
    "preName": null
   },
   {
@@ -251,6 +251,14 @@
   },
   {
    "tree": 1,
+   "name": "饮血者",
+   "max": 2,
+   "row": 4,
+   "col": 2,
+   "preName": "血之狂热"
+  },
+  {
+   "tree": 1,
    "name": "强化拦截",
    "max": 2,
    "row": 4,
@@ -259,19 +267,19 @@
   },
   {
    "tree": 1,
-   "name": "乱舞",
-   "max": 5,
+   "name": "强化旋风斩",
+   "max": 2,
    "row": 5,
-   "col": 1,
-   "preName": "死亡之愿"
+   "col": 0,
+   "preName": null
   },
   {
    "tree": 1,
-   "name": "饮血者",
-   "max": 2,
+   "name": "乱舞",
+   "max": 3,
    "row": 5,
    "col": 2,
-   "preName": "狂怒"
+   "preName": null
   },
   {
    "tree": 1,
@@ -279,7 +287,7 @@
    "max": 1,
    "row": 6,
    "col": 1,
-   "preName": null
+   "preName": "死亡之愿"
   },
   {
    "tree": 2,

@@ -3,26 +3,26 @@
   "scope": "国服无限服",
   "window": "24 小时人口",
   "factions": [
-    { "id": "alliance", "share": 47 },
-    { "id": "horde", "share": 53 }
+    { "id": "alliance", "share": 50 },
+    { "id": "horde", "share": 50 }
   ],
   "classes": [
-    { "id": "warrior", "share": 10 },
-    { "id": "paladin", "share": 16 },
-    { "id": "hunter", "share": 18 },
-    { "id": "rogue", "share": 9 },
-    { "id": "priest", "share": 8 },
-    { "id": "shaman", "share": 9 },
-    { "id": "mage", "share": 13 },
-    { "id": "warlock", "share": 8 },
-    { "id": "druid", "share": 10 }
+    { "id": "warrior", "share": 10.42 },
+    { "id": "paladin", "share": 15.63 },
+    { "id": "hunter", "share": 17.43 },
+    { "id": "rogue", "share": 8.78 },
+    { "id": "priest", "share": 8.39 },
+    { "id": "shaman", "share": 9.03 },
+    { "id": "mage", "share": 13.35 },
+    { "id": "warlock", "share": 7.15 },
+    { "id": "druid", "share": 9.82 }
   ],
   "provenance": {
     "name": "大脚BIGFOOT",
     "type": "public_aggregate",
     "url": "https://bigfoot.nga.cn/",
-    "screen": "服务器人口 · 魔兽世界无限服 · 24小时人口",
-    "sourceTime": "2026-11-10 10:07",
-    "checkedAt": "2026-11-10"
+    "screen": "服务器人口 · 无限服 · 昨日人口",
+    "sourceTime": "2026-11-19 00:00",
+    "checkedAt": "2026-11-19"
   }
 }

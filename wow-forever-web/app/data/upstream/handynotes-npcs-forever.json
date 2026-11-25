@@ -1,0 +1,2532 @@
+{
+ "meta": {
+  "source": "HandyNotes_NPCs (Classic) 1.36-r9 forever/data.lua + locales/forever/zhCN.lua",
+  "addon": "HandyNotes_NPCs (Classic)",
+  "addonVersion": "1.36-r9",
+  "fetched": "2026-11-21",
+  "levelStatus": "L1",
+  "droppedFields": [
+   "description 短说明文本（仅保留 category / profession / fpName / npcID / 坐标 / 中英文名）"
+  ],
+  "sourceFiles": {
+   "HandyNotes_NPCs (Classic)/forever/data.lua": {
+    "bytes": 1201631,
+    "sha256": "8b73cb61949c3a88fdc3f10b5c1123d4ea66b8327331f1ea678421d298308c8f",
+    "fileDate": "2026-11-19"
+   },
+   "HandyNotes_NPCs (Classic)/classic/data.lua": {
+    "bytes": 1201663,
+    "sha256": "020e59937f039cf8bf65e85e3ec22da95bd261553276292485d6f3804cc637da",
+    "fileDate": "2026-11-19"
+   },
+   "HandyNotes_NPCs (Classic)/locales/forever/zhCN.lua": {
+    "bytes": 236718,
+    "sha256": "d53361073b4f75e16eaf6edecfc84c56da21854e3a848a1de508f0cfdecf2648",
+    "fileDate": "2026-11-19"
+   }
+  },
+  "counts": {
+   "changedOrNewMaps": 4,
+   "newMaps": 2,
+   "recalibratedMaps": 2,
+   "totalPins": 268,
+   "newMapPins": 56
+  }
+ },
+ "maps": [
+  {
+   "uiMapId": 1423,
+   "isNewMapInForever": false,
+   "pinCount": 30,
+   "pins": [
+    {
+     "x": 9.72,
+     "y": 61.39,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 11.36,
+     "y": 26.37,
+     "npcId": 12384,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Augustus the Touched",
+     "nameCn": "被感动的奥古斯图斯"
+    },
+    {
+     "x": 12.67,
+     "y": 51.75,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 18.2,
+     "y": 68.53,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 21.95,
+     "y": 25.76,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Lord Darkscythe",
+     "nameCn": "黑暗镰刀"
+    },
+    {
+     "x": 23.6,
+     "y": 65.02,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 31.22,
+     "y": 52.4,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 32.41,
+     "y": 59.39,
+     "npcId": null,
+     "category": "spirithealers",
+     "faction": "Neutral",
+     "nameEn": "Spirit Healer",
+     "nameCn": "灵魂医者"
+    },
+    {
+     "x": 32.52,
+     "y": 52.85,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 33.58,
+     "y": 80.63,
+     "npcId": null,
+     "category": "spirithealers",
+     "faction": "Neutral",
+     "nameEn": "Spirit Healer",
+     "nameCn": "灵魂医者"
+    },
+    {
+     "x": 33.7,
+     "y": 59.69,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Duggan Wildhammer",
+     "nameCn": "杜甘·蛮锤"
+    },
+    {
+     "x": 34.02,
+     "y": 64.1,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Hed'mush the Rotting",
+     "nameCn": "腐烂者海德姆什"
+    },
+    {
+     "x": 40.89,
+     "y": 36.64,
+     "npcId": null,
+     "category": "spirithealers",
+     "faction": "Neutral",
+     "nameEn": "Spirit Healer",
+     "nameCn": "灵魂医者"
+    },
+    {
+     "x": 45.28,
+     "y": 12.86,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Ranger Lord Hawkspear",
+     "nameCn": "游侠之王霍克斯比尔"
+    },
+    {
+     "x": 48.16,
+     "y": 18.65,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Hed'mush the Rotting",
+     "nameCn": "腐烂者海德姆什"
+    },
+    {
+     "x": 58.13,
+     "y": 40.72,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Hed'mush the Rotting",
+     "nameCn": "腐烂者海德姆什"
+    },
+    {
+     "x": 59.49,
+     "y": 42.2,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Hed'mush the Rotting",
+     "nameCn": "腐烂者海德姆什"
+    },
+    {
+     "x": 63.31,
+     "y": 11.45,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Zul'Brin Warpbranch",
+     "nameCn": "祖布林·扭枝"
+    },
+    {
+     "x": 63.33,
+     "y": 8.81,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Warlord Thresh'jin",
+     "nameCn": "塔雷什森"
+    },
+    {
+     "x": 65.23,
+     "y": 43.94,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Gish the Unmoving",
+     "nameCn": "僵硬的吉斯"
+    },
+    {
+     "x": 69.93,
+     "y": 53.72,
+     "npcId": 11038,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Caretaker Alen",
+     "nameCn": "护理者奥林"
+    },
+    {
+     "x": 70.53,
+     "y": 47.55,
+     "npcId": null,
+     "category": "flightmasters",
+     "faction": "Horde",
+     "nameEn": "Georgia",
+     "nameCn": "乔吉亚",
+     "fpNameEn": "Light's Hope Chapel, Eastern Plaguelands",
+     "fpNameCn": "圣光之愿礼拜堂，东瘟疫之地"
+    },
+    {
+     "x": 70.73,
+     "y": 54.97,
+     "npcId": null,
+     "category": "spirithealers",
+     "faction": "Neutral",
+     "nameEn": "Spirit Healer",
+     "nameCn": "灵魂医者"
+    },
+    {
+     "x": 70.86,
+     "y": 48.06,
+     "npcId": 12941,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Jase Farlane",
+     "nameCn": "贾斯·法拉恩"
+    },
+    {
+     "x": 71.2,
+     "y": 48.9,
+     "npcId": null,
+     "category": "mailboxes",
+     "faction": "Neutral",
+     "nameEn": "Mailbox",
+     "nameCn": "邮箱"
+    },
+    {
+     "x": 71.24,
+     "y": 49.9,
+     "npcId": 16376,
+     "category": "repair",
+     "faction": "Neutral",
+     "nameEn": "Craftsman Wilhelm",
+     "nameCn": "工匠威尔海姆"
+    },
+    {
+     "x": 71.79,
+     "y": 50.25,
+     "npcId": 11536,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Quartermaster Miranda Breechlock",
+     "nameCn": "军需官米兰达·布利洛克"
+    },
+    {
+     "x": 71.81,
+     "y": 49.6,
+     "npcId": null,
+     "category": "flightmasters",
+     "faction": "Alliance",
+     "nameEn": "Khaelyn Steelwing",
+     "nameCn": "凯琳·斯蒂文",
+     "fpNameEn": "Light's Hope Chapel, Eastern Plaguelands",
+     "fpNameCn": "圣光之愿礼拜堂，东瘟疫之地"
+    },
+    {
+     "x": 75.42,
+     "y": 36.98,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "Deathspeaker Selendre",
+     "nameCn": "亡语者塞伦德"
+    },
+    {
+     "x": 77.99,
+     "y": 74.12,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Neutral",
+     "nameEn": "High General Abbendis",
+     "nameCn": "阿比迪斯将军"
+    }
+   ]
+  },
+  {
+   "uiMapId": 1453,
+   "isNewMapInForever": false,
+   "pinCount": 182,
+   "pins": [
+    {
+     "x": 31.44,
+     "y": 62.97,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Shylamiir",
+     "nameCn": "莎拉米尔",
+     "profession": "Herbalism"
+    },
+    {
+     "x": 34.38,
+     "y": 64.98,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Maldryn",
+     "nameCn": "玛尔德利恩"
+    },
+    {
+     "x": 35.31,
+     "y": 63.74,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Nara Meideros",
+     "nameCn": "娜拉·梅德隆"
+    },
+    {
+     "x": 35.93,
+     "y": 67.3,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Sheldras Moontree",
+     "nameCn": "沙德拉斯·月树"
+    },
+    {
+     "x": 36.24,
+     "y": 64.21,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Theridran",
+     "nameCn": "塞瑞德兰"
+    },
+    {
+     "x": 36.86,
+     "y": 69.08,
+     "npcId": null,
+     "category": "mailboxes",
+     "faction": "Alliance",
+     "nameEn": "Mailbox",
+     "nameCn": "邮箱"
+    },
+    {
+     "x": 39.33,
+     "y": 84.95,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Demisette Cloyce",
+     "nameCn": "德米赛特·克劳斯"
+    },
+    {
+     "x": 39.64,
+     "y": 84.48,
+     "npcId": 5520,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Spackle Thornberry",
+     "nameCn": "斯巴克尔"
+    },
+    {
+     "x": 39.64,
+     "y": 85.57,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Sandahl",
+     "nameCn": "山达尔"
+    },
+    {
+     "x": 39.95,
+     "y": 84.33,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Ursula Deline",
+     "nameCn": "厄苏拉·德林"
+    },
+    {
+     "x": 40.26,
+     "y": 84.48,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Jalane Ayrole",
+     "nameCn": "嘉莱恩·艾罗",
+     "profession": "Tailoring"
+    },
+    {
+     "x": 41.81,
+     "y": 82.47,
+     "npcId": 1305,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Jarel Moor",
+     "nameCn": "扎雷·穆尔"
+    },
+    {
+     "x": 42.43,
+     "y": 64.05,
+     "npcId": null,
+     "category": "stablemasters",
+     "faction": "Alliance",
+     "nameEn": "Sylista",
+     "nameCn": "塞丽斯塔"
+    },
+    {
+     "x": 42.58,
+     "y": 76.9,
+     "npcId": 1304,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Darian Singh",
+     "nameCn": "达利安·辛格"
+    },
+    {
+     "x": 42.89,
+     "y": 72.57,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 43.51,
+     "y": 73.34,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 43.82,
+     "y": 71.17,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 44.28,
+     "y": 70.86,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 44.44,
+     "y": 72.57,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 44.59,
+     "y": 73.03,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 44.75,
+     "y": 86.34,
+     "npcId": 1307,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Charys Yserian",
+     "nameCn": "查瑞斯·伊瑟里安"
+    },
+    {
+     "x": 45.37,
+     "y": 74.11,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 46.76,
+     "y": 59.41,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 47.22,
+     "y": 57.86,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 47.22,
+     "y": 60.34,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 47.53,
+     "y": 58.17,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 47.53,
+     "y": 59.41,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 47.53,
+     "y": 82.32,
+     "npcId": 1308,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Owen Vaughn",
+     "nameCn": "欧文·沃弗恩"
+    },
+    {
+     "x": 48.31,
+     "y": 54.92,
+     "npcId": 1348,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Gregory Ardus",
+     "nameCn": "格雷戈里·阿杜斯"
+    },
+    {
+     "x": 48.31,
+     "y": 87.27,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Elsharin",
+     "nameCn": "艾尔莎林"
+    },
+    {
+     "x": 48.46,
+     "y": 49.97,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Lord Grayson Shadowbreaker",
+     "nameCn": "格雷森·沙东布瑞克公爵"
+    },
+    {
+     "x": 48.62,
+     "y": 49.2,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Katherine the Pure",
+     "nameCn": "纯洁的凯瑟琳"
+    },
+    {
+     "x": 48.77,
+     "y": 58.95,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 49.08,
+     "y": 87.58,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Maginor Dumas",
+     "nameCn": "玛吉诺·仲马"
+    },
+    {
+     "x": 49.23,
+     "y": 60.8,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 49.54,
+     "y": 49.66,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Arthur the Faithful",
+     "nameCn": "虔诚的亚瑟"
+    },
+    {
+     "x": 49.54,
+     "y": 61.11,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 49.54,
+     "y": 85.88,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Jennea Cannon",
+     "nameCn": "詹妮亚·坎农"
+    },
+    {
+     "x": 49.7,
+     "y": 44.86,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "High Priestess Laurena",
+     "nameCn": "高阶牧师劳瑞娜"
+    },
+    {
+     "x": 49.7,
+     "y": 45.17,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Brother Joshua",
+     "nameCn": "乔舒修士"
+    },
+    {
+     "x": 50.16,
+     "y": 86.03,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Larimaine Purdue",
+     "nameCn": "拉瑞麦尼·普尔度"
+    },
+    {
+     "x": 50.47,
+     "y": 89.9,
+     "npcId": null,
+     "category": "mailboxes",
+     "faction": "Alliance",
+     "nameEn": "Mailbox",
+     "nameCn": "邮箱"
+    },
+    {
+     "x": 50.78,
+     "y": 71.17,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 51.25,
+     "y": 93.92,
+     "npcId": 1311,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Joachim Brenlow",
+     "nameCn": "扎希姆·布伦罗"
+    },
+    {
+     "x": 51.4,
+     "y": 46.26,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Brother Benjamin",
+     "nameCn": "本杰明修士"
+    },
+    {
+     "x": 51.4,
+     "y": 71.02,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 51.71,
+     "y": 74.89,
+     "npcId": 1316,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Adair Gilroy",
+     "nameCn": "艾代尔·吉尔罗"
+    },
+    {
+     "x": 51.87,
+     "y": 83.71,
+     "npcId": 1309,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Wynne Larson",
+     "nameCn": "维恩·拉尔森"
+    },
+    {
+     "x": 52.02,
+     "y": 71.64,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 52.17,
+     "y": 83.4,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Sellandus",
+     "nameCn": "塞拉多斯",
+     "profession": "Tailoring"
+    },
+    {
+     "x": 52.48,
+     "y": 83.71,
+     "npcId": 1310,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Evan Larson",
+     "nameCn": "伊万·拉尔森"
+    },
+    {
+     "x": 52.79,
+     "y": 44.86,
+     "npcId": null,
+     "category": "secondaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Shaina Fuller",
+     "nameCn": "珊娜·弗勒",
+     "profession": "First Aid"
+    },
+    {
+     "x": 52.79,
+     "y": 75.04,
+     "npcId": 1312,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Ardwyn Cailen",
+     "nameCn": "阿德温·凯伦"
+    },
+    {
+     "x": 52.95,
+     "y": 73.96,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Betty Quin",
+     "nameCn": "贝蒂·奎恩",
+     "profession": "Enchanting"
+    },
+    {
+     "x": 52.95,
+     "y": 74.11,
+     "npcId": 1318,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Jessara Cordell",
+     "nameCn": "杰萨拉·考迪尔",
+     "profession": "enchanting"
+    },
+    {
+     "x": 52.95,
+     "y": 74.27,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Lucan Cordell",
+     "nameCn": "鲁坎·考迪尔",
+     "profession": "Enchanting"
+    },
+    {
+     "x": 52.95,
+     "y": 75.04,
+     "npcId": 1315,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Allan Hafgan",
+     "nameCn": "艾伦·哈弗甘"
+    },
+    {
+     "x": 53.1,
+     "y": 45.17,
+     "npcId": 1351,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Brother Cassius",
+     "nameCn": "卡苏斯修士"
+    },
+    {
+     "x": 53.1,
+     "y": 81.39,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Georgio Bolero",
+     "nameCn": "乔吉奥·波利罗",
+     "profession": "Tailoring"
+    },
+    {
+     "x": 53.26,
+     "y": 81.7,
+     "npcId": 1347,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Alexandra Bolero",
+     "nameCn": "亚历山德拉·波利罗",
+     "profession": "tailoring"
+    },
+    {
+     "x": 53.26,
+     "y": 81.85,
+     "npcId": 1314,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Duncan Cullen",
+     "nameCn": "邓肯·库仑"
+    },
+    {
+     "x": 53.41,
+     "y": 58.02,
+     "npcId": 1350,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Theresa Moulaine",
+     "nameCn": "瑟里莎·莫莱恩"
+    },
+    {
+     "x": 53.41,
+     "y": 81.54,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Lawrence Schneider",
+     "nameCn": "劳伦斯·瑟尼德",
+     "profession": "Tailoring"
+    },
+    {
+     "x": 53.57,
+     "y": 57.86,
+     "npcId": 1349,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Agustus Moulaine",
+     "nameCn": "阿古塔斯·莫莱恩"
+    },
+    {
+     "x": 54.34,
+     "y": 84.02,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Tannysa",
+     "nameCn": "塔尼莎",
+     "profession": "Herbalism"
+    },
+    {
+     "x": 55.11,
+     "y": 69.47,
+     "npcId": null,
+     "category": "secondaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Arnold Leland",
+     "nameCn": "阿诺德·利兰",
+     "profession": "Fishing"
+    },
+    {
+     "x": 55.11,
+     "y": 69.51,
+     "npcId": 5494,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Catherine Leland",
+     "nameCn": "凯瑟琳·利兰"
+    },
+    {
+     "x": 55.58,
+     "y": 85.57,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Tel'Athir",
+     "nameCn": "泰兰希尔",
+     "profession": "Alchemy"
+    },
+    {
+     "x": 55.58,
+     "y": 85.72,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Lilyssia Nightbreeze",
+     "nameCn": "莉琳希亚·夜风",
+     "profession": "Alchemy"
+    },
+    {
+     "x": 55.73,
+     "y": 85.41,
+     "npcId": 1313,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Maria Lumere",
+     "nameCn": "玛丽亚·卢米尔",
+     "profession": "alchemy"
+    },
+    {
+     "x": 55.73,
+     "y": 85.45,
+     "npcId": 5503,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Eldraeith",
+     "nameCn": "艾达伊斯",
+     "profession": "herbalism"
+    },
+    {
+     "x": 56.82,
+     "y": 73.8,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 57.59,
+     "y": 76.28,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 57.9,
+     "y": 72.87,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 57.9,
+     "y": 75.66,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 58.05,
+     "y": 66.99,
+     "npcId": 1299,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Lisbeth Schneider",
+     "nameCn": "利斯贝·斯涅德"
+    },
+    {
+     "x": 58.21,
+     "y": 41.92,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 58.36,
+     "y": 72.57,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 58.52,
+     "y": 69.01,
+     "npcId": 1298,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Frederick Stover",
+     "nameCn": "弗德瑞克·斯图瓦"
+    },
+    {
+     "x": 58.67,
+     "y": 68.85,
+     "npcId": 1297,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Lina Stover",
+     "nameCn": "黎娜·斯图瓦"
+    },
+    {
+     "x": 58.98,
+     "y": 42.23,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 59.14,
+     "y": 37.74,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Gelman Stonehand",
+     "nameCn": "吉尔曼·石手",
+     "profession": "Mining"
+    },
+    {
+     "x": 59.29,
+     "y": 37.43,
+     "npcId": 5514,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Brooke Stonebraid",
+     "nameCn": "布鲁克·石衣",
+     "profession": "mining"
+    },
+    {
+     "x": 59.29,
+     "y": 43.16,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 59.45,
+     "y": 34.03,
+     "npcId": 5509,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Kathrum Axehand",
+     "nameCn": "卡斯鲁姆·斧拳"
+    },
+    {
+     "x": 59.45,
+     "y": 34.18,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Borgus Steelhand",
+     "nameCn": "博古斯·钢拳",
+     "profession": "blacksmithing"
+    },
+    {
+     "x": 59.76,
+     "y": 77.36,
+     "npcId": 1301,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Julia Gallina",
+     "nameCn": "朱莉安·加林纳"
+    },
+    {
+     "x": 59.91,
+     "y": 47.65,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 59.91,
+     "y": 76.9,
+     "npcId": 277,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Roberto Pupellyverbos",
+     "nameCn": "罗伯特·奥布斯"
+    },
+    {
+     "x": 60.38,
+     "y": 75.2,
+     "npcId": 6740,
+     "category": "innkeepers",
+     "faction": "Alliance",
+     "nameEn": "Innkeeper Allison",
+     "nameCn": "旅店老板奥里森"
+    },
+    {
+     "x": 60.84,
+     "y": 71.33,
+     "npcId": null,
+     "category": "auctioneers",
+     "faction": "Alliance",
+     "nameEn": "Auctioneer Chilton",
+     "nameCn": "拍卖师希尔顿"
+    },
+    {
+     "x": 60.99,
+     "y": 70.55,
+     "npcId": null,
+     "category": "auctioneers",
+     "faction": "Alliance",
+     "nameEn": "Auctioneer Jaxon",
+     "nameCn": "拍卖师亚克森"
+    },
+    {
+     "x": 60.99,
+     "y": 71.17,
+     "npcId": null,
+     "category": "auctioneers",
+     "faction": "Alliance",
+     "nameEn": "Auctioneer Fitch",
+     "nameCn": "拍卖师费奇"
+    },
+    {
+     "x": 61.77,
+     "y": 36.35,
+     "npcId": 5510,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Thulman Flintcrag",
+     "nameCn": "苏尔曼·火崖"
+    },
+    {
+     "x": 61.77,
+     "y": 75.82,
+     "npcId": null,
+     "category": "mailboxes",
+     "faction": "Alliance",
+     "nameEn": "Mailbox",
+     "nameCn": "邮箱"
+    },
+    {
+     "x": 61.92,
+     "y": 30.62,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Sprite Jumpsprocket",
+     "nameCn": "斯普莱特",
+     "profession": "Engineering"
+    },
+    {
+     "x": 62.08,
+     "y": 30.47,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Lilliam Sparkspindle",
+     "nameCn": "利廉姆·火轴",
+     "profession": "Engineering"
+    },
+    {
+     "x": 62.08,
+     "y": 45.79,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 62.08,
+     "y": 67.15,
+     "npcId": 1294,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Aldric Moore",
+     "nameCn": "奥德瑞克·摩尔"
+    },
+    {
+     "x": 62.08,
+     "y": 67.46,
+     "npcId": 1295,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Lara Moore",
+     "nameCn": "劳拉·摩尔"
+    },
+    {
+     "x": 62.23,
+     "y": 67.61,
+     "npcId": 1291,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Carla Granger",
+     "nameCn": "卡拉·格兰治"
+    },
+    {
+     "x": 62.39,
+     "y": 30.16,
+     "npcId": 5519,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Billibub Cogspinner",
+     "nameCn": "比利巴布·旋轮",
+     "profession": "engineering"
+    },
+    {
+     "x": 62.85,
+     "y": 74.89,
+     "npcId": 1257,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Keldric Boucher",
+     "nameCn": "凯德雷克·布舍尔"
+    },
+    {
+     "x": 63.16,
+     "y": 74.73,
+     "npcId": 1275,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Kyra Boucher",
+     "nameCn": "凯拉·布舍尔"
+    },
+    {
+     "x": 63.32,
+     "y": 37.59,
+     "npcId": 5512,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Kaita Deepforge",
+     "nameCn": "凯塔·深炉",
+     "profession": "blacksmithing"
+    },
+    {
+     "x": 63.32,
+     "y": 81.08,
+     "npcId": null,
+     "category": "bankers",
+     "faction": "Alliance",
+     "nameEn": "John Burnside",
+     "nameCn": "约翰·伯恩赛德"
+    },
+    {
+     "x": 63.63,
+     "y": 37.12,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Dane Lindgren",
+     "nameCn": "丹恩·林德雷",
+     "profession": "Blacksmithing"
+    },
+    {
+     "x": 63.63,
+     "y": 37.16,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Therum Deepforge",
+     "nameCn": "瑟鲁姆·深炉",
+     "profession": "Blacksmithing"
+    },
+    {
+     "x": 63.78,
+     "y": 69.01,
+     "npcId": 11867,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Woo Ping",
+     "nameCn": "吴平"
+    },
+    {
+     "x": 63.78,
+     "y": 80.77,
+     "npcId": null,
+     "category": "bankers",
+     "faction": "Alliance",
+     "nameEn": "Newton Burnside",
+     "nameCn": "牛顿·伯恩赛德"
+    },
+    {
+     "x": 63.93,
+     "y": 68.54,
+     "npcId": 1287,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Marda Weller",
+     "nameCn": "玛尔达·维勒"
+    },
+    {
+     "x": 63.93,
+     "y": 68.7,
+     "npcId": 1289,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Gunther Weller",
+     "nameCn": "冈瑟尔·维勒"
+    },
+    {
+     "x": 63.93,
+     "y": 77.05,
+     "npcId": null,
+     "category": "guildmasters",
+     "faction": "Alliance",
+     "nameEn": "Aldwin Laughlin",
+     "nameCn": "奥德文·拉弗林"
+    },
+    {
+     "x": 63.93,
+     "y": 77.36,
+     "npcId": 5193,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Rebecca Laughlin",
+     "nameCn": "瑞贝卡·拉弗林"
+    },
+    {
+     "x": 64.09,
+     "y": 80.46,
+     "npcId": null,
+     "category": "bankers",
+     "faction": "Alliance",
+     "nameEn": "Olivia Burnside",
+     "nameCn": "奥利维亚·伯恩赛德"
+    },
+    {
+     "x": 64.24,
+     "y": 69.93,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 64.4,
+     "y": 73.18,
+     "npcId": 3518,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Thomas Miller",
+     "nameCn": "托马斯·米勒"
+    },
+    {
+     "x": 64.71,
+     "y": 71.33,
+     "npcId": 1286,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Edna Mullby",
+     "nameCn": "艾德娜·穆比"
+    },
+    {
+     "x": 64.71,
+     "y": 71.95,
+     "npcId": 1285,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Thurman Mullby",
+     "nameCn": "萨尔曼·穆比"
+    },
+    {
+     "x": 65.33,
+     "y": 52.91,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 65.95,
+     "y": 53.22,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 66.26,
+     "y": 64.21,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 66.41,
+     "y": 73.49,
+     "npcId": 483,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Elaine Trias",
+     "nameCn": "伊莱恩·提亚斯"
+    },
+    {
+     "x": 66.41,
+     "y": 73.65,
+     "npcId": 4981,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Ben Trias",
+     "nameCn": "本·提亚斯"
+    },
+    {
+     "x": 67.03,
+     "y": 37.74,
+     "npcId": null,
+     "category": "stablemasters",
+     "faction": "Alliance",
+     "nameEn": "Jenova Stoneshield",
+     "nameCn": "耶诺瓦·石盾"
+    },
+    {
+     "x": 67.34,
+     "y": 36.35,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Einris Brightspear",
+     "nameCn": "恩瑞斯·锐矛"
+    },
+    {
+     "x": 67.34,
+     "y": 36.66,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Karrina Mekenda",
+     "nameCn": "卡瑞娜·麦肯达"
+    },
+    {
+     "x": 67.65,
+     "y": 36.04,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Ulfir Ironbeard",
+     "nameCn": "奥菲尔·铁须"
+    },
+    {
+     "x": 67.8,
+     "y": 53.99,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 67.96,
+     "y": 35.73,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Thorfin Stoneshield",
+     "nameCn": "索尔芬·石盾"
+    },
+    {
+     "x": 67.96,
+     "y": 63.28,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.11,
+     "y": 66.22,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.58,
+     "y": 52.29,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.73,
+     "y": 64.21,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.89,
+     "y": 51.36,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.89,
+     "y": 62.04,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 68.89,
+     "y": 66.84,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.2,
+     "y": 53.84,
+     "npcId": 8666,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Lil Timmy",
+     "nameCn": "利尔·迪米"
+    },
+    {
+     "x": 69.35,
+     "y": 50.59,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.35,
+     "y": 57.71,
+     "npcId": 1319,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Bryan Cross",
+     "nameCn": "布赖恩·克罗斯"
+    },
+    {
+     "x": 69.35,
+     "y": 71.64,
+     "npcId": 1302,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Bernard Gump",
+     "nameCn": "伯纳德·加姆"
+    },
+    {
+     "x": 69.51,
+     "y": 71.33,
+     "npcId": 1303,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Felicia Gump",
+     "nameCn": "菲利希亚·加姆",
+     "profession": "herbalism"
+    },
+    {
+     "x": 69.66,
+     "y": 50.28,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.66,
+     "y": 50.9,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.66,
+     "y": 66.53,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.81,
+     "y": 66.99,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 69.81,
+     "y": 68.08,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.12,
+     "y": 49.35,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.12,
+     "y": 68.85,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.43,
+     "y": 49.97,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.74,
+     "y": 49.2,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.9,
+     "y": 68.39,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 70.9,
+     "y": 72.72,
+     "npcId": null,
+     "category": "flightmasters",
+     "faction": "Alliance",
+     "nameEn": "Dungar Longdrink",
+     "nameCn": "杜加尔·朗德瑞克",
+     "fpNameEn": "Stormwind, Elwynn",
+     "fpNameCn": "暴风城，艾尔文森林"
+    },
+    {
+     "x": 71.05,
+     "y": 49.35,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 71.05,
+     "y": 68.23,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 71.05,
+     "y": 69.47,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 71.21,
+     "y": 67.92,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 71.36,
+     "y": 48.58,
+     "npcId": null,
+     "category": "rares",
+     "faction": "Horde",
+     "nameEn": "Sewer Beast",
+     "nameCn": "下水道鳄鱼"
+    },
+    {
+     "x": 71.52,
+     "y": 57.86,
+     "npcId": 1339,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Mayda Thane",
+     "nameCn": "梅达·希恩"
+    },
+    {
+     "x": 71.67,
+     "y": 62.66,
+     "npcId": 5565,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Jillian Tanner",
+     "nameCn": "基利安·坦纳尔",
+     "profession": "leatherworking"
+    },
+    {
+     "x": 71.67,
+     "y": 62.82,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Simon Tanner",
+     "nameCn": "西蒙·坦纳尔",
+     "profession": "Leatherworking"
+    },
+    {
+     "x": 71.83,
+     "y": 62.35,
+     "npcId": 1321,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Alyssa Griffith",
+     "nameCn": "奥琳萨·格瑞菲斯"
+    },
+    {
+     "x": 71.98,
+     "y": 62.2,
+     "npcId": 1320,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Seoman Griffith",
+     "nameCn": "希欧曼·格瑞菲斯"
+    },
+    {
+     "x": 72.14,
+     "y": 62.35,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Maris Granger",
+     "nameCn": "马瑞斯·格兰治",
+     "profession": "Skinning"
+    },
+    {
+     "x": 72.14,
+     "y": 62.66,
+     "npcId": null,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Randal Worth",
+     "nameCn": "兰达尔·沃斯",
+     "profession": "Leatherworking"
+    },
+    {
+     "x": 73.06,
+     "y": 57.24,
+     "npcId": 1333,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Gerik Koen",
+     "nameCn": "格瑞克·考恩"
+    },
+    {
+     "x": 74.38,
+     "y": 55.62,
+     "npcId": null,
+     "category": "mailboxes",
+     "faction": "Alliance",
+     "nameEn": "Mailbox",
+     "nameCn": "邮箱"
+    },
+    {
+     "x": 76.31,
+     "y": 53.37,
+     "npcId": 1328,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Elly Langston",
+     "nameCn": "艾丽·朗斯顿"
+    },
+    {
+     "x": 76.78,
+     "y": 65.76,
+     "npcId": 12805,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Officer Areyn",
+     "nameCn": "埃雷恩"
+    },
+    {
+     "x": 77.09,
+     "y": 57.55,
+     "npcId": 1324,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Heinrich Stone",
+     "nameCn": "亨里克·斯通"
+    },
+    {
+     "x": 77.09,
+     "y": 61.11,
+     "npcId": 1323,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Osric Strang",
+     "nameCn": "奥斯瑞克·斯图恩"
+    },
+    {
+     "x": 77.24,
+     "y": 65.29,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Osborne the Night Man",
+     "nameCn": "夜行者奥斯伯"
+    },
+    {
+     "x": 77.4,
+     "y": 52.91,
+     "npcId": 340,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Kendor Kabonka",
+     "nameCn": "肯多尔·卡邦卡"
+    },
+    {
+     "x": 77.4,
+     "y": 61.42,
+     "npcId": 1341,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Wilhelm Strang",
+     "nameCn": "维尔海姆·斯图恩"
+    },
+    {
+     "x": 78.17,
+     "y": 53.06,
+     "npcId": null,
+     "category": "secondaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Stephen Ryback",
+     "nameCn": "斯蒂芬·雷百克",
+     "profession": "Cooking"
+    },
+    {
+     "x": 78.33,
+     "y": 52.91,
+     "npcId": 5483,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Erika Tate",
+     "nameCn": "艾瑞卡·塔特",
+     "profession": "cooking"
+    },
+    {
+     "x": 78.79,
+     "y": 70.86,
+     "npcId": 1326,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Sloan McCoy",
+     "nameCn": "斯洛安·麦考伊"
+    },
+    {
+     "x": 80.18,
+     "y": 60.96,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Ander Germaine",
+     "nameCn": "安德尔·杰曼"
+    },
+    {
+     "x": 80.18,
+     "y": 68.7,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Lord Tony Romano",
+     "nameCn": "托尼·罗曼诺"
+    },
+    {
+     "x": 80.18,
+     "y": 70.09,
+     "npcId": 1325,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Jasper Fel",
+     "nameCn": "贾斯伯·菲尔"
+    },
+    {
+     "x": 80.49,
+     "y": 59.72,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Ilsa Corbin",
+     "nameCn": "伊尔萨·考宾"
+    },
+    {
+     "x": 80.65,
+     "y": 59.72,
+     "npcId": null,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Wu Shen",
+     "nameCn": "武神"
+    }
+   ]
+  },
+  {
+   "uiMapId": 2482,
+   "isNewMapInForever": true,
+   "pinCount": 13,
+   "pins": [
+    {
+     "x": 12.93,
+     "y": 52.85,
+     "npcId": 244512,
+     "category": "innkeepers",
+     "faction": "Horde",
+     "nameEn": "Ortak Lomgok",
+     "nameCn": "奥塔克·隆戈克"
+    },
+    {
+     "x": 13.72,
+     "y": 52.56,
+     "npcId": 265883,
+     "category": "repair",
+     "faction": "Horde",
+     "nameEn": "Chagrak Hammerstrike",
+     "nameCn": "查格拉克·锤击"
+    },
+    {
+     "x": 15.64,
+     "y": 49.99,
+     "npcId": 249968,
+     "category": "secondaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Hnaz Blunderflame",
+     "nameCn": "赫纳兹·枪焰",
+     "profession": "Cooking"
+    },
+    {
+     "x": 15.65,
+     "y": 50.44,
+     "npcId": 258380,
+     "category": "innkeepers",
+     "faction": "Alliance",
+     "nameEn": "Caitir Flinthew",
+     "nameCn": "凯提尔·燧斧"
+    },
+    {
+     "x": 15.67,
+     "y": 50.72,
+     "npcId": 265866,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Trigg Ironhand",
+     "nameCn": "特里格·铁手"
+    },
+    {
+     "x": 46.84,
+     "y": 80.69,
+     "npcId": 266901,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Pexmit",
+     "nameCn": "佩米特"
+    },
+    {
+     "x": 55.0,
+     "y": 82.8,
+     "npcId": 260626,
+     "category": "flightmasters",
+     "faction": "Neutral",
+     "nameEn": "Bluebell",
+     "nameCn": "蓝铃",
+     "fpNameEn": "Tainted Foothills, Mount Hyjal",
+     "fpNameCn": "污染山麓，海加尔山"
+    },
+    {
+     "x": 68.6,
+     "y": 44.0,
+     "npcId": 41861,
+     "category": "flightmasters",
+     "faction": "Neutral",
+     "nameEn": "Fayran Elthas",
+     "nameCn": "费兰·艾尔萨斯",
+     "fpNameEn": "Summit of Eternity, Mount Hyjal",
+     "fpNameCn": "永恒之巅，海加尔山"
+    },
+    {
+     "x": 68.88,
+     "y": 48.35,
+     "npcId": 243855,
+     "category": "repair",
+     "faction": "Neutral",
+     "nameEn": "Toron Rockhoof",
+     "nameCn": "托隆·石蹄"
+    },
+    {
+     "x": 70.66,
+     "y": 51.25,
+     "npcId": 255151,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Rhylin Stonethorn",
+     "nameCn": "莱琳·石角"
+    },
+    {
+     "x": 70.87,
+     "y": 51.55,
+     "npcId": 243815,
+     "category": "innkeepers",
+     "faction": "Neutral",
+     "nameEn": "Sebelia",
+     "nameCn": "塞贝莉雅"
+    },
+    {
+     "x": 70.88,
+     "y": 50.75,
+     "npcId": 43411,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Lenedil Moonwing",
+     "nameCn": "利尼迪尔·月翼"
+    },
+    {
+     "x": 70.96,
+     "y": 51.23,
+     "npcId": 264797,
+     "category": "repair",
+     "faction": "Neutral",
+     "nameEn": "Aisarra Nightmeadow",
+     "nameCn": "艾萨拉·夜甸"
+    }
+   ]
+  },
+  {
+   "uiMapId": 2548,
+   "isNewMapInForever": true,
+   "pinCount": 43,
+   "pins": [
+    {
+     "x": 57.9,
+     "y": 45.81,
+     "npcId": 261313,
+     "category": "vendors",
+     "faction": "Horde",
+     "nameEn": "Naluk",
+     "nameCn": "纳鲁克"
+    },
+    {
+     "x": 58.0,
+     "y": 45.1,
+     "npcId": 256675,
+     "category": "innkeepers",
+     "faction": "Horde",
+     "nameEn": "Innkeeper Toka",
+     "nameCn": "旅店老板托卡"
+    },
+    {
+     "x": 58.18,
+     "y": 45.9,
+     "npcId": 260343,
+     "category": "vendors",
+     "faction": "Horde",
+     "nameEn": "Maka",
+     "nameCn": "玛卡"
+    },
+    {
+     "x": 58.65,
+     "y": 44.57,
+     "npcId": 256655,
+     "category": "secondaryProfession",
+     "faction": "Horde",
+     "nameEn": "Gorg",
+     "nameCn": "戈尔格",
+     "profession": "Cooking"
+    },
+    {
+     "x": 59.6,
+     "y": 45.0,
+     "npcId": 255993,
+     "category": "flightmasters",
+     "faction": "Horde",
+     "nameEn": "Grakna",
+     "nameCn": "格拉克纳",
+     "fpNameEn": "Rog'mar, Riverglades",
+     "fpNameCn": "洛格玛，河林"
+    },
+    {
+     "x": 59.92,
+     "y": 45.97,
+     "npcId": 256657,
+     "category": "repair",
+     "faction": "Horde",
+     "nameEn": "Kreza Darkthorn",
+     "nameCn": "克雷扎·暗棘"
+    },
+    {
+     "x": 59.97,
+     "y": 46.27,
+     "npcId": 256658,
+     "category": "primaryProfession",
+     "faction": "Horde",
+     "nameEn": "Gur'dok",
+     "nameCn": "古尔多克",
+     "profession": "Blacksmithing"
+    },
+    {
+     "x": 60.6,
+     "y": 81.6,
+     "npcId": 257087,
+     "category": "flightmasters",
+     "faction": "Alliance",
+     "nameEn": "Gretchen Mayberry",
+     "nameCn": "格雷琴·梅伯里",
+     "fpNameEn": "Farholde Keep, Riverglades",
+     "fpNameCn": "法霍德要塞，河林"
+    },
+    {
+     "x": 62.05,
+     "y": 81.14,
+     "npcId": 268663,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Penny Pinderton",
+     "nameCn": "佩妮·平德顿"
+    },
+    {
+     "x": 62.23,
+     "y": 85.95,
+     "npcId": 272437,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Marla Bell",
+     "nameCn": "玛拉·贝尔"
+    },
+    {
+     "x": 63.48,
+     "y": 82.44,
+     "npcId": 272646,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Miranda Turner",
+     "nameCn": "米兰达·特纳"
+    },
+    {
+     "x": 63.53,
+     "y": 85.09,
+     "npcId": 259859,
+     "category": "stablemasters",
+     "faction": "Alliance",
+     "nameEn": "Wheatley",
+     "nameCn": "惠特利"
+    },
+    {
+     "x": 63.81,
+     "y": 17.01,
+     "npcId": 263230,
+     "category": "vendors",
+     "faction": "Horde",
+     "nameEn": "Dorb",
+     "nameCn": "多布"
+    },
+    {
+     "x": 64.25,
+     "y": 84.1,
+     "npcId": 259860,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Martha Wellsworth",
+     "nameCn": "玛莎·威尔斯沃斯"
+    },
+    {
+     "x": 64.34,
+     "y": 82.0,
+     "npcId": 259861,
+     "category": "repair",
+     "faction": "Alliance",
+     "nameEn": "Paige Armstrong",
+     "nameCn": "佩吉·阿姆斯特朗"
+    },
+    {
+     "x": 64.46,
+     "y": 82.03,
+     "npcId": 259250,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Alphonse Dumas",
+     "nameCn": "阿尔方斯·杜马斯",
+     "profession": "Blacksmithing"
+    },
+    {
+     "x": 64.58,
+     "y": 84.23,
+     "npcId": 271005,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Burt Lazlo",
+     "nameCn": "伯特·拉兹洛"
+    },
+    {
+     "x": 64.62,
+     "y": 84.16,
+     "npcId": 257595,
+     "category": "innkeepers",
+     "faction": "Alliance",
+     "nameEn": "Barracks Master Harlan",
+     "nameCn": "兵营主管哈兰"
+    },
+    {
+     "x": 64.66,
+     "y": 82.88,
+     "npcId": 259863,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Cassandra Wheeler",
+     "nameCn": "卡桑德拉·惠勒"
+    },
+    {
+     "x": 64.69,
+     "y": 84.27,
+     "npcId": 271006,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Christina Von Stavern",
+     "nameCn": "克里斯蒂娜·冯·斯塔文"
+    },
+    {
+     "x": 65.43,
+     "y": 90.04,
+     "npcId": 270545,
+     "category": "vendors",
+     "faction": "Alliance",
+     "nameEn": "Kenneth \"Kirby\" Millstead",
+     "nameCn": "Kenneth \"Kirby\" Millstead"
+    },
+    {
+     "x": 66.15,
+     "y": 79.62,
+     "npcId": 260080,
+     "category": "trainers",
+     "faction": "Alliance",
+     "nameEn": "Ember Bladewhisper",
+     "nameCn": "余烬·刃语"
+    },
+    {
+     "x": 66.21,
+     "y": 83.36,
+     "npcId": 259287,
+     "category": "primaryProfession",
+     "faction": "Alliance",
+     "nameEn": "Melanie Sable",
+     "nameCn": "梅兰妮·萨布尔",
+     "profession": "Enchanting"
+    },
+    {
+     "x": 67.43,
+     "y": 19.41,
+     "npcId": 257057,
+     "category": "vendors",
+     "faction": "Horde",
+     "nameEn": "Glop",
+     "nameCn": "格洛普"
+    },
+    {
+     "x": 76.62,
+     "y": 54.13,
+     "npcId": 260543,
+     "category": "bankers",
+     "faction": "Neutral",
+     "nameEn": "Mizzy",
+     "nameCn": "米兹"
+    },
+    {
+     "x": 76.65,
+     "y": 53.18,
+     "npcId": 255895,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Grizzek",
+     "nameCn": "格里泽克"
+    },
+    {
+     "x": 76.75,
+     "y": 54.33,
+     "npcId": 257292,
+     "category": "bankers",
+     "faction": "Neutral",
+     "nameEn": "Brakkit",
+     "nameCn": "布拉基特"
+    },
+    {
+     "x": 76.79,
+     "y": 51.11,
+     "npcId": 260560,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Krikshank",
+     "nameCn": "克里克香克"
+    },
+    {
+     "x": 76.93,
+     "y": 54.35,
+     "npcId": 257294,
+     "category": "bankers",
+     "faction": "Neutral",
+     "nameEn": "Lizi Pinchwhistle",
+     "nameCn": "莉姿·宾奇维瑟"
+    },
+    {
+     "x": 77.1,
+     "y": 52.9,
+     "npcId": 255897,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Friz Frazzlespark",
+     "nameCn": "弗里兹·法拉兹斯帕克"
+    },
+    {
+     "x": 77.3,
+     "y": 51.4,
+     "npcId": 260570,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Stitch Pinwizzle",
+     "nameCn": "斯蒂奇·针线"
+    },
+    {
+     "x": 77.62,
+     "y": 50.92,
+     "npcId": 260565,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Kor'gar",
+     "nameCn": "科尔加"
+    },
+    {
+     "x": 77.73,
+     "y": 51.92,
+     "npcId": 255891,
+     "category": "primaryProfession",
+     "faction": "Neutral",
+     "nameEn": "Grungle",
+     "nameCn": "格伦格尔",
+     "profession": "Mining"
+    },
+    {
+     "x": 77.75,
+     "y": 50.87,
+     "npcId": 260562,
+     "category": "primaryProfession",
+     "faction": "Neutral",
+     "nameEn": "Melbin Powderfuse",
+     "nameCn": "梅尔宾·爆引",
+     "profession": "Engineering"
+    },
+    {
+     "x": 77.77,
+     "y": 52.01,
+     "npcId": 259766,
+     "category": "repair",
+     "faction": "Neutral",
+     "nameEn": "Mika Darby",
+     "nameCn": "米卡·达比"
+    },
+    {
+     "x": 78.19,
+     "y": 51.92,
+     "npcId": 263384,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Mister Graphed",
+     "nameCn": "格拉夫先生"
+    },
+    {
+     "x": 78.41,
+     "y": 55.01,
+     "npcId": 260487,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Gritta Chumwater",
+     "nameCn": "格丽塔·密水"
+    },
+    {
+     "x": 78.43,
+     "y": 54.0,
+     "npcId": 260525,
+     "category": "stablemasters",
+     "faction": "Neutral",
+     "nameEn": "Tallow Sparksocket",
+     "nameCn": "塔洛·火花套管"
+    },
+    {
+     "x": 78.61,
+     "y": 53.59,
+     "npcId": 260566,
+     "category": "repair",
+     "faction": "Neutral",
+     "nameEn": "Fizzix Boomshot",
+     "nameCn": "菲兹克斯·轰爆"
+    },
+    {
+     "x": 78.77,
+     "y": 53.98,
+     "npcId": 255894,
+     "category": "innkeepers",
+     "faction": "Neutral",
+     "nameEn": "Innkeeper Zizplink",
+     "nameCn": "旅店老板吉兹普林克"
+    },
+    {
+     "x": 79.02,
+     "y": 54.2,
+     "npcId": 259962,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Fimbo Greasemitz",
+     "nameCn": "芬博·格里斯米兹"
+    },
+    {
+     "x": 79.27,
+     "y": 54.78,
+     "npcId": 260558,
+     "category": "secondaryProfession",
+     "faction": "Neutral",
+     "nameEn": "Krix",
+     "nameCn": "克里克斯",
+     "profession": "Fishing"
+    },
+    {
+     "x": 79.31,
+     "y": 54.66,
+     "npcId": 260559,
+     "category": "vendors",
+     "faction": "Neutral",
+     "nameEn": "Gilliwigs",
+     "nameCn": "吉利维格斯"
+    }
+   ]
+  }
+ ]
+}

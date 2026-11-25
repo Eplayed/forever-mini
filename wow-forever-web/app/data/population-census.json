@@ -7,72 +7,72 @@
     "id": "all",
     "label": "地区与规则集未区分"
   },
-  "dataAsOf": "2026-11-10T01:10:27.649Z",
+  "dataAsOf": "2026-11-23T04:51:13.310Z",
   "window": {
     "id": "week",
-    "from": "2026-11-04T23:00:00.000Z",
-    "to": "2026-11-10T01:10:27.649Z",
+    "from": "2026-11-17T00:00:00.000Z",
+    "to": "2026-11-23T04:51:13.310Z",
     "label": "近 7 天观测"
   },
-  "characters": 14950,
-  "installs": 13,
+  "characters": 25195,
+  "installs": 18,
   "factions": [
     {
       "id": "alliance",
-      "count": 3290,
-      "share": 0.22
+      "count": 11640,
+      "share": 0.462
     },
     {
       "id": "horde",
-      "count": 11660,
-      "share": 0.78
+      "count": 13560,
+      "share": 0.538
     }
   ],
   "classes": [
     {
       "id": "warrior",
-      "count": 1935,
-      "share": 0.129
+      "count": 3140,
+      "share": 0.125
     },
     {
       "id": "paladin",
-      "count": 1790,
-      "share": 0.12
+      "count": 3270,
+      "share": 0.13
     },
     {
       "id": "hunter",
-      "count": 1855,
-      "share": 0.124
+      "count": 3565,
+      "share": 0.141
     },
     {
       "id": "rogue",
-      "count": 1345,
-      "share": 0.09
+      "count": 2040,
+      "share": 0.081
     },
     {
       "id": "priest",
-      "count": 1325,
-      "share": 0.089
-    },
-    {
-      "id": "shaman",
-      "count": 1920,
-      "share": 0.128
-    },
-    {
-      "id": "mage",
-      "count": 1400,
-      "share": 0.094
-    },
-    {
-      "id": "warlock",
-      "count": 1415,
+      "count": 2395,
       "share": 0.095
     },
     {
+      "id": "shaman",
+      "count": 2585,
+      "share": 0.103
+    },
+    {
+      "id": "mage",
+      "count": 2730,
+      "share": 0.108
+    },
+    {
+      "id": "warlock",
+      "count": 2265,
+      "share": 0.09
+    },
+    {
       "id": "druid",
-      "count": 1965,
-      "share": 0.131
+      "count": 3210,
+      "share": 0.127
     }
   ],
   "provenance": {
@@ -84,6 +84,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "credit": "Data from Everloot contributors (everloot.app), CC BY-SA 4.0",
-    "checkedAt": "2026-11-10"
+    "checkedAt": "2026-11-23"
   }
 }

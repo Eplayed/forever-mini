@@ -66,10 +66,10 @@ module.exports = {
    ],
    "traits": [
     {
-     "name": "血性狂怒",
+     "name": "血性狂暴",
      "passive": false,
-     "effect": "攻击强度和法术强度提高10%，持续15秒。",
-     "iconKey": null
+     "effect": "攻击强度与法术强度提高10%，持续15秒。冷却2分钟。",
+     "iconKey": "racial_orc_berserkerstrength"
     },
     {
      "name": "粉碎诅咒",
@@ -78,10 +78,10 @@ module.exports = {
      "iconKey": "spell_nature_removecurse"
     },
     {
-     "name": "斧类武器专精",
+     "name": "命令",
      "passive": true,
-     "effect": "斧类使法术和技能的爆击几率提高1%。",
-     "iconKey": null
+     "effect": "猎人和术士的宠物伤害提高5%。",
+     "iconKey": "ability_warrior_warcry"
     },
     {
      "name": "坚韧",
@@ -131,7 +131,7 @@ module.exports = {
     {
      "name": "哀伤之触",
      "passive": true,
-     "effect": "法术与攻击有几率吸取生命值，上限为你最大生命值的5%：牧师/法师/术士为30%几率，战士/圣骑士/潜行者为20%几率。",
+     "effect": "法术和攻击有几率吸取生命值，最多为自身最大生命值的5%。战士、圣骑士和潜行者触发率20%，牧师、法师和术士30%。触发间隔至少15秒。",
      "iconKey": "spell_shadow_fingerofdeath"
     }
    ],
@@ -168,13 +168,13 @@ module.exports = {
     {
      "name": "原野疾驰",
      "passive": true,
-     "effect": "移动中每5秒叠加1%移动速度，最多30%；受击或站定会掉层。骑乘时移动速度额外提高3%。",
+     "effect": "移动时每5秒提高2%移动速度，最高60%。受伤或停下会降低效果。",
      "iconKey": "achievement_zone_barrens_01"
     },
     {
      "name": "耐久",
      "passive": true,
-     "effect": "总生命值提高5%，爆击伤害与治疗加成提高2%。",
+     "effect": "总生命值提高5%。",
      "iconKey": "spell_nature_unyeildingstamina"
     }
    ],
@@ -202,7 +202,7 @@ module.exports = {
     {
      "name": "狂暴",
      "passive": false,
-     "effect": "施法速度和攻击速度提高10%，持续10秒。",
+     "effect": "施法与攻击速度提高10%，持续15秒。冷却3分钟。",
      "iconKey": "racial_troll_berserk"
     },
     {
@@ -254,13 +254,13 @@ module.exports = {
     {
      "name": "天穹视界",
      "passive": false,
-     "effect": "汲取元素交汇处的祝福，移动与骑乘速度提高10%：附近没有交汇处持续30秒，有则持续15分钟。",
+     "effect": "移动与骑乘速度提高15%，持续30秒。在元素交汇处使用可获得1小时充能，速度加成提高至30%。冷却2分钟。",
      "iconKey": "ability_skyreach_lens_flare"
     },
     {
      "name": "风灵护佑",
      "passive": true,
-     "effect": "法术、近战与远程急速提高3%。",
+     "effect": "法术、近战与远程急速提高2%。",
      "iconKey": "inv_misc_volatileair"
     },
     {
@@ -304,15 +304,15 @@ module.exports = {
      "iconKey": "spell_nature_sleep"
     },
     {
-     "name": "剑类武器专精",
+     "name": "无情",
      "passive": true,
-     "effect": "剑类使法术和技能的爆击几率提高2%。",
-     "iconKey": "ability_meleedamage"
+     "effect": "法术与攻击的爆击几率提高1%。",
+     "iconKey": "ability_rogue_eviscerate"
     },
     {
      "name": "人类精魂",
      "passive": true,
-     "effect": "精神提高5%。",
+     "effect": "精神提高10%。",
      "iconKey": "inv_enchant_shardbrilliantsmall"
     }
    ],
@@ -345,14 +345,14 @@ module.exports = {
     {
      "name": "寻找财宝",
      "passive": false,
-     "effect": "追踪附近的宝箱。",
+     "effect": "在小地图上标记附近的宝藏，偶尔能找到额外宝藏。持续至主动取消。",
      "iconKey": "racial_dwarf_findtreasure"
     },
     {
-     "name": "锤类武器专精",
+     "name": "工匠精准",
      "passive": true,
-     "effect": "锤类使法术和技能的爆击几率提高1%。",
-     "iconKey": "inv_hammer_05"
+     "effect": "法术与攻击的命中几率提高1%。",
+     "iconKey": "inv_hammer_09"
     },
     {
      "name": "王牌猎人",
@@ -479,13 +479,13 @@ module.exports = {
     {
      "name": "阅读魔网",
      "passive": false,
-     "effect": "激活一条魔网，生命与法力恢复速度提高100%。",
+     "effect": "生命与法力回复速度提高50%，持续15秒。在魔网节点使用可获得1小时调和，回复加成提高至100%。冷却2分钟。",
      "iconKey": "ability_mage_incantersabsorbtion"
     },
     {
      "name": "风灵护佑",
      "passive": true,
-     "effect": "法术、近战与远程急速提高3%。",
+     "effect": "法术、近战与远程急速提高2%。",
      "iconKey": "inv_misc_volatileair"
     },
     {

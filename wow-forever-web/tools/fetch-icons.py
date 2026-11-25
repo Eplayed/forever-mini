@@ -162,7 +162,7 @@ def main():
         "gapsRegistry": "app/data/icon-gaps.json（全站「数据里引用但本地没有」的键，"
                         "由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）",
         "batches": batches[-8:],
-        "note": u"图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。"
+        "note": u"图标文件名取自上游结构化数据或第三方资料站。暴雪官方 CDN 无法取得的图标可从已核对的本机游戏客户端文件补齐。"
                 u"属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。"
     })
     io.open(MANIFEST, "w", encoding="utf-8").write(json.dumps(man, ensure_ascii=False, indent=1) + "\n")

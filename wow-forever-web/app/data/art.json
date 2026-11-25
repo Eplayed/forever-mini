@@ -47,7 +47,8 @@
   "stratholme-main-gate": "img/art/dungeons/stratholme-main-gate.webp",
   "stratholme-service-gate": "img/art/dungeons/stratholme-service-gate.webp",
   "upper-blackrock-spire": "img/art/dungeons/upper-blackrock-spire.webp",
-  "hyjal-summit": "img/art/dungeons/hyjal-summit.webp"
+  "hyjal-summit": "img/art/dungeons/hyjal-summit-v2.webp",
+  "barrow-deeps": "img/art/dungeons/barrow-deeps.webp"
  },
  "maps": {
   "1411": "img/art/maps/1411.webp",
@@ -86,7 +87,16 @@
   "1431": "img/art/maps/1431.webp",
   "1433": "img/art/maps/1433.webp",
   "1448": "img/art/maps/1448.webp",
-  "1452": "img/art/maps/1452.webp"
+  "1452": "img/art/maps/1452.webp",
+  "1424": "img/art/maps/1424.webp",
+  "1430": "img/art/maps/1430.webp",
+  "1440": "img/art/maps/1440.webp",
+  "1449": "img/art/maps/1449.webp",
+  "1451": "img/art/maps/1451.webp",
+  "1453": "img/art/maps/1453.webp",
+  "1457": "img/art/maps/1457.webp",
+  "2548": "img/art/maps/2548.webp",
+  "2652": "img/art/maps/2652.webp"
  },
  "races": {
   "skyborne": "img/art/races/skyborne.webp",
@@ -253,7 +263,8 @@
   "warchief-rend-blackhand": "img/art/bosses/warchief-rend-blackhand.webp",
   "gyth": "img/art/bosses/gyth.webp",
   "the-beast": "img/art/bosses/the-beast.webp",
-  "general-drakkisath": "img/art/bosses/general-drakkisath.webp"
+  "general-drakkisath": "img/art/bosses/general-drakkisath.webp",
+  "onyxia": "img/art/bosses/onyxia.webp"
  },
  "specs": {
   "warrior-0": "img/art/specs/warrior-0.webp",
@@ -314,9 +325,9 @@
   "skyborne": "img/art/raceicons/skyborne.webp"
  },
  "meta": {
-  "fetchedAt": "2026-11-05",
+  "fetchedAt": "2026-11-23",
   "note": "客户端原画：暴雪游戏美术，经第三方站转存。整目录删除即可回退到自绘占位图。",
-  "count": 288,
+  "count": 297,
   "addonFiles": [
    {
     "name": "skyborne",
@@ -332,5 +343,39 @@
     "sha256": "9df418ce227d3548486d445fb3280f34fca56bbeb7bf15dc2608563cda20bce0"
    }
   ]
+ },
+ "bisModels": {
+  "items": [
+   {
+    "file": "img/models/placeholder.glb",
+    "bytes": 9588,
+    "sha1": "a969d3939b2d91c67fb8afc57049cd5e24dbc84e",
+    "kind": "placeholder",
+    "generatedAt": "2026-10-26",
+    "gearNodes": [
+     "head",
+     "neck",
+     "shoulder",
+     "back",
+     "chest",
+     "wrist",
+     "hands",
+     "waist",
+     "legs",
+     "feet",
+     "ring1",
+     "ring2",
+     "trinket1",
+     "trinket2",
+     "mainhand",
+     "ranged",
+     "offhand",
+     "relic"
+    ]
+   }
+  ],
+  "origin": "self-generated",
+  "note": "占位模型，不是素材：纯几何体自己拼的，不含任何游戏客户端资产，也不含第三方站的模型文件。它只用来验前端那条链（懒加载、部位对数据、无 WebGL 退回图片）。整目录删掉 app/img/models/ 即回到 2D 纸娃娃。",
+  "generatedAt": "2026-10-26"
  }
 }

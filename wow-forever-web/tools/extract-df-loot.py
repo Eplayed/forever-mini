@@ -224,13 +224,13 @@ def main():
         },
         "dungeons": entries,
     }
-    if not os.path.isdir(UP):
-        os.makedirs(UP)
-    p = os.path.join(UP, "df-dungeon-loot.json")
+    out_dir = sys.argv[sys.argv.index("--out-dir") + 1] if "--out-dir" in sys.argv else UP
+    os.makedirs(out_dir, exist_ok=True)
+    p = os.path.join(out_dir, "df-dungeon-loot.json")
     with io.open(p, "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=1)
         f.write("\n")
-    print("写 %s（%.1f KB）" % (os.path.relpath(p, WEB), os.path.getsize(p) / 1024.0))
+    print("写 %s（%.1f KB）" % (p, os.path.getsize(p) / 1024.0))
 
 
 if __name__ == "__main__":

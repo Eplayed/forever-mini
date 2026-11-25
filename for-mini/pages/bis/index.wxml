@@ -67,6 +67,7 @@
       <view class="set-actions">
         <button size="mini" class="want-target set-primary" bindtap="goEquipment">查看装备 ↓</button>
         <button wx:if="{{!picking}}" size="mini" class="want-target" bindtap="beginPick">多选装备</button>
+        <button size="mini" class="want-target" bindtap="openCurrentSetPoster">生成分享图</button>
       </view>
 
       <view class="sum" wx:if="{{sum.length}}">
@@ -157,7 +158,10 @@
             <text class="bt">{{activeItemSet.name}}</text>
             <text class="s-slot">{{activeItemSet.level}} 级 · {{activeItemSet.clsCn}} · {{activeItemSet.pieces.length}} 件</text>
           </view>
-          <button size="mini" class="want-target" bindtap="addItemSetToAdventure">＋ 整套加入清单</button>
+          <view class="iset-btns">
+            <button size="mini" class="want-target" bindtap="openCurrentSetPoster">生成分享图</button>
+            <button size="mini" class="want-target" bindtap="addItemSetToAdventure">＋ 整套加入清单</button>
+          </view>
         </view>
 
         <view class="sum" wx:if="{{activeItemSet.sumRows.length}}">
@@ -192,8 +196,11 @@
 
     <!-- 60 级团本前 Pre-Raid BiS（27 专精） -->
     <view class="card stage-content" wx:elif="{{stageKey === '60' && bis60Classes.length}}" id="bis-lv60">
-      <view class="bhead"><view class="bt">60 级团前配装</view></view>
-      <view class="bn">点装备看同部位备选</view>
+      <view class="bhead">
+        <view class="bt">60 级团前配装</view>
+        <button size="mini" class="want-target raid-prep-btn" bindtap="openRaidPrepPoster">团长开荒一图流</button>
+      </view>
+      <view class="bn">点装备看同部位备选 · 可生成全团必刷五人本长图发群</view>
       <view class="spec-strip">
         <view class="chips">
           <view wx:for="{{bis60SpecList}}" wx:key="id" class="chip {{bis60SetId === item.id ? 'chip-on' : ''}}"
@@ -206,7 +213,10 @@
           <view class="iset-title">
             <text class="bt">{{activeBis60.clsCn}} · {{activeBis60.mode}}</text>
           </view>
-          <button size="mini" class="want-target" bindtap="addBis60ToAdventure">＋ 整套加入清单</button>
+          <view class="iset-btns">
+            <button size="mini" class="want-target" bindtap="openCurrentSetPoster">生成配装图</button>
+            <button size="mini" class="want-target" bindtap="addBis60ToAdventure">＋ 整套加入清单</button>
+          </view>
         </view>
 
         <view class="sum" wx:if="{{activeBis60.sumRows.length}}">
@@ -245,7 +255,10 @@
     <view class="card stage-content" wx:elif="{{stageKey === 't1' && raidTotal}}" id="bis-t1">
       <view class="bhead">
         <view class="bt">海加尔峰 T1</view>
-        <button size="mini" class="want-target raid-all" bindtap="toggleRaidAll">{{raidCls === 'all' ? '只看当前职业' : '全部 ' + raidTotal + ' 套'}}</button>
+        <view class="iset-btns">
+          <button size="mini" class="want-target" bindtap="openCurrentSetPoster">生成分享图</button>
+          <button size="mini" class="want-target raid-all" bindtap="toggleRaidAll">{{raidCls === 'all' ? '只看当前职业' : '全部 ' + raidTotal + ' 套'}}</button>
+        </view>
       </view>
       <view class="bn raid-note">部件属性暂未公开，清单以部件编号记录。</view>
       <view wx:if="{{!filteredRaidSets.length}}" class="bn">这个职业的套装待补。</view>
@@ -312,4 +325,5 @@
     <button size="mini" class="want-target" bindtap="cancelPick">取消</button>
     <button size="mini" class="want-target target-selected" disabled="{{!selectedCount}}" bindtap="saveSelection">加入清单</button>
   </view>
+  <share-poster visible="{{posterOpen}}" spec="{{posterSpec}}" bindclose="closeSharePoster" />
 </view>

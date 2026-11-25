@@ -5,7 +5,10 @@
         <view class="title">跑本计划</view>
         <view class="muted subtitle">{{plans.length ? plans.length + ' 个副本 · 按优先级排列' : '把下次想去的副本加进来'}}</view>
       </view>
-      <button size="mini" class="outline primary" bindtap="browseDungeons">选副本</button>
+      <view class="overview-btns">
+        <button wx:if="{{plans.length || pending}}" size="mini" class="outline share-btn" bindtap="openAdventurePoster">生成喊人图</button>
+        <button size="mini" class="outline primary" bindtap="browseDungeons">选副本</button>
+      </view>
     </view>
     <view wx:if="{{plans.length}}" class="plan-list">
       <view wx:if="{{plans.length > 1}}" class="plan-tools">
@@ -56,4 +59,5 @@
   </view>
   <button size="mini" wx:if="{{more}}" class="outline more" bindtap="showMore">查看更多</button>
   <view class="foot">非官方粉丝资料站，与暴雪娱乐及网易无关。</view>
+  <share-poster visible="{{posterOpen}}" spec="{{posterSpec}}" bindclose="closeSharePoster" />
 </view>

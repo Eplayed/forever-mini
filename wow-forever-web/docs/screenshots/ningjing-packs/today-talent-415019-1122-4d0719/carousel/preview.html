@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>魔兽无限服9职业练级天赋：防战拉7怪，近战兽王 · 小绿书/头条图文配文</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #141118;
+    color: #EFE9DC;
+    font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    padding: 0 0 64px;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 99;
+    background: #1C1722;
+    border-bottom: 1px solid rgba(229,184,105,0.28);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  .tb-meta { font-size: 13.5px; color: #CBBF9F; }
+  .tb-meta strong { color: #F3C969; }
+  .tb-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 15px; border-radius: 6px; border: none;
+    font-size: 13.5px; font-weight: 700; cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-gold { background: linear-gradient(180deg, #E5B85B, #B58728); color: #19120A; }
+  .btn-green { background: linear-gradient(180deg, #2EA043, #1E7E34); color: #FFFFFF; }
+  .btn-dark { background: #2A2333; color: #E5B869; border: 1px solid rgba(229,184,105,0.38); }
+  .wrap { max-width: 1120px; margin: 26px auto 0; padding: 0 24px; }
+  .panel {
+    background: #1D1824;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 22px;
+  }
+  .panel-hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .panel-title { font-size: 15.5px; font-weight: 800; color: #F3C969; }
+  .title-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: #120F16; border: 1px solid rgba(229,184,105,0.28);
+    border-radius: 8px; padding: 12px 16px; flex-wrap: wrap;
+  }
+  .title-text { font-size: 18px; font-weight: 800; color: #FFFFFF; }
+  .count-badge {
+    font-size: 12px; color: #A8A093;
+    background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 999px;
+  }
+  textarea.cap-editor {
+    width: 100%; min-height: 140px; resize: vertical;
+    background: #120F16; color: #EFE9DC;
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 8px;
+    padding: 14px 16px; font-size: 15px; line-height: 1.7;
+    font-family: inherit;
+  }
+  .tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+  .tag-chip {
+    font-size: 12.5px; font-weight: 700; color: #F3C969;
+    background: rgba(229,184,105,0.14); border: 1px solid rgba(229,184,105,0.34);
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .slides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 18px;
+  }
+  .slide-card {
+    background: #120F16; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 10px; overflow: hidden;
+  }
+  .slide-card img { width: 100%; display: block; border-radius: 6px; }
+  .slide-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 10px; font-size: 12.5px; color: #A8A093;
+  }
+  .dl-one { color: #E5B869; text-decoration: none; font-weight: 700; }
+  .dl-one:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="tb-meta">
+      <strong>跑本无限助手 · 小绿书 / 头条号图文配文</strong> ｜ 栏目：无限服攻略（11.22） ｜ 共 10 张 3:4 配图
+    </div>
+    <div class="tb-btns">
+      
+      <a class="btn btn-dark" href="../wechat/article.html" target="_blank">👁 切换公众号长文</a>
+      
+      <button class="btn btn-gold" id="copyCapBtn" onclick="copyText('capBox', this, '📋 一键复制完整配文')">📋 一键复制完整配文</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="panel">
+      <div class="panel-hdr">
+        <span class="panel-title">📌 推荐标题（小绿书 / 头条号 / 小红书）</span>
+        <span class="count-badge">23 字</span>
+      </div>
+      <div class="title-box">
+        <span class="title-text" id="titleTxt">魔兽无限服9职业练级天赋：防战拉7怪，近战兽王</span>
+        <button class="btn btn-dark" onclick="copyPlain(document.getElementById('titleTxt').textContent, this, '📋 复制标题')">📋 复制标题</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-hdr">
+        <span class="panel-title">📝 配文正文与话题标签（可直接微调后复制发布）</span>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span class="count-badge" id="capLen">152 字</span>
+          <a class="dl-one" href="caption.txt" target="_blank">查看纯文本 caption.txt</a>
+        </div>
+      </div>
+      <textarea class="cap-editor" id="capBox" oninput="document.getElementById('capLen').textContent=this.value.length+' 字'">魔兽无限服九大职业练级天赋大洗牌！猎人近战兽王称王，战士防战拉6-7个怪不掉血，圣骑40级转防骑，盗贼战斗贼最稳，德鲁伊野德猫形态效率翻倍，萨满增强萨唯一真神，法师奥法爆发最猛，术士痛苦/恶魔二选一，牧师40级后暗牧封神。选对天赋，练级效率翻倍！
+#魔兽世界 #魔兽无限服 #练级天赋 #防战 #近战兽王</textarea>
+      <div class="tags-row">
+        <span style="font-size:12.5px;color:#A8A093;">话题标签：</span>
+        <span class="tag-chip">#魔兽世界</span><span class="tag-chip">#魔兽无限服</span><span class="tag-chip">#练级天赋</span><span class="tag-chip">#防战</span><span class="tag-chip">#近战兽王</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-hdr">
+        <span class="panel-title">🖼️ 全套 3:4 轮播配图（点击放大，按 P1→P10 顺序上传）</span>
+        
+      </div>
+      <div class="slides-grid"><div class="slide-card"><a href="slide_01.png" target="_blank" rel="noopener"><img src="slide_01.png" alt="P1" loading="lazy" /></a><div class="slide-foot"><span>P1 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_01.png" download="today-talent-415019-1122-4d0719_P01.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_02.png" target="_blank" rel="noopener"><img src="slide_02.png" alt="P2" loading="lazy" /></a><div class="slide-foot"><span>P2 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_02.png" download="today-talent-415019-1122-4d0719_P02.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_03.png" target="_blank" rel="noopener"><img src="slide_03.png" alt="P3" loading="lazy" /></a><div class="slide-foot"><span>P3 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_03.png" download="today-talent-415019-1122-4d0719_P03.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_04.png" target="_blank" rel="noopener"><img src="slide_04.png" alt="P4" loading="lazy" /></a><div class="slide-foot"><span>P4 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_04.png" download="today-talent-415019-1122-4d0719_P04.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_05.png" target="_blank" rel="noopener"><img src="slide_05.png" alt="P5" loading="lazy" /></a><div class="slide-foot"><span>P5 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_05.png" download="today-talent-415019-1122-4d0719_P05.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_06.png" target="_blank" rel="noopener"><img src="slide_06.png" alt="P6" loading="lazy" /></a><div class="slide-foot"><span>P6 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_06.png" download="today-talent-415019-1122-4d0719_P06.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_07.png" target="_blank" rel="noopener"><img src="slide_07.png" alt="P7" loading="lazy" /></a><div class="slide-foot"><span>P7 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_07.png" download="today-talent-415019-1122-4d0719_P07.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_08.png" target="_blank" rel="noopener"><img src="slide_08.png" alt="P8" loading="lazy" /></a><div class="slide-foot"><span>P8 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_08.png" download="today-talent-415019-1122-4d0719_P08.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_09.png" target="_blank" rel="noopener"><img src="slide_09.png" alt="P9" loading="lazy" /></a><div class="slide-foot"><span>P9 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_09.png" download="today-talent-415019-1122-4d0719_P09.png">⬇ 保存原图</a></div></div><div class="slide-card"><a href="slide_10.png" target="_blank" rel="noopener"><img src="slide_10.png" alt="P10" loading="lazy" /></a><div class="slide-foot"><span>P10 · 1080×1440 (3:4)</span><a class="dl-one" href="slide_10.png" download="today-talent-415019-1122-4d0719_P10.png">⬇ 保存原图</a></div></div></div>
+    </div>
+  </div>
+<script>
+async function copyPlain(txt, btn, resetLabel) {
+  try {
+    await navigator.clipboard.writeText(txt);
+    btn.textContent = '✅ 已复制';
+    setTimeout(() => { btn.textContent = resetLabel; }, 2200);
+  } catch (_e) {
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    btn.textContent = '✅ 已复制';
+    setTimeout(() => { btn.textContent = resetLabel; }, 2200);
+  }
+}
+function copyText(elId, btn, resetLabel) {
+  const el = document.getElementById(elId);
+  copyPlain(el ? el.value : '', btn, resetLabel);
+}
+</script>
+</body>
+</html>

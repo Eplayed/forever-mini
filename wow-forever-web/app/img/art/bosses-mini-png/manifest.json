@@ -740,6 +740,12 @@
       "sha256": "4cea9e8b9366964598644a6fbc8c264fae1cc5ee1cb944a30b2e40ead7eca6c8",
       "bytes": 8717
     },
+    "img/art/bosses/onyxia.webp": {
+      "file": "img/art/bosses-mini-png/onyxia-dd90ea951226.png",
+      "sourceSha256": "fee0c6861bdd948a1594b91ede70891b3a735734b58abe7219aa5a7467ebd51d",
+      "sha256": "dd90ea951226bd7bb9d088eb4e892e04bc1a2aba147ca8bef101f33c58a41391",
+      "bytes": 10661
+    },
     "img/art/bosses/overlord-ramtusk.webp": {
       "file": "img/art/bosses-mini-png/overlord-ramtusk-4cf5e7951f05.png",
       "sourceSha256": "3f4b888c688fcf8a61b9e3eb55e2ba32aa1a4db8c5eead90f109064a79eba926",

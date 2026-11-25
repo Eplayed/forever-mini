@@ -149,13 +149,13 @@ def main():
         },
         "npcs": [{"npcId": n, "itemIds": v} for n, v in sorted(by_npc.items())],
     }
-    if not os.path.isdir(UP):
-        os.makedirs(UP)
-    p = os.path.join(UP, "questie-item-drops.json")
+    out_dir = sys.argv[sys.argv.index("--out-dir") + 1] if "--out-dir" in sys.argv else UP
+    os.makedirs(out_dir, exist_ok=True)
+    p = os.path.join(out_dir, "questie-item-drops.json")
     with io.open(p, "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=1)
         f.write("\n")
-    print("写 %s（%.1f KB）" % (os.path.relpath(p, WEB), os.path.getsize(p) / 1024.0))
+    print("写 %s（%.1f KB）" % (p, os.path.getsize(p) / 1024.0))
 
 
 if __name__ == "__main__":

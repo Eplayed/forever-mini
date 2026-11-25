@@ -4,6 +4,7 @@ import io
 import os
 import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 from subprocess import CompletedProcess
 
@@ -12,6 +13,32 @@ import jobs
 
 
 class AdminTests(unittest.TestCase):
+    def test_addon_review_checks_snapshot_and_source_before_apply(self):
+        review = jobs.addon_review
+        self.assertIsNotNone(jobs.allowed("apply-addon", "../races"))
+        self.assertIsNotNone(jobs.allowed("scan-addons", "custom-root"))
+        key = "df-dungeon-loot"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "addon" / "loot.lua"
+            source.parent.mkdir()
+            source.write_bytes(b"reviewed")
+            stage, upstream = root / "review", root / "upstream"
+            target = upstream / (key + ".json")
+            review.save(target, {"old": True})
+            review.save(stage / "report.json", {"rows": [{"id": key, "state": "changed", "label": "掉落"}]})
+            review.save(stage / target.name, {"baseHash": review.digest(target), "root": directory,
+                        "sources": {"addon/loot.lua": review.digest(source)}, "data": {"new": True}})
+            with patch.object(review, "REVIEW", stage), patch.object(review, "UPSTREAM", upstream):
+                source.write_bytes(b"changed")
+                with self.assertRaisesRegex(ValueError, "插件源已变化"):
+                    review.apply(key)
+                self.assertEqual(review.load(target), {"old": True})
+                source.write_bytes(b"reviewed")
+                review.apply(key)
+                self.assertEqual(review.load(target), {"new": True})
+                self.assertEqual(review.latest()["rows"][0]["state"], "applied")
+
     def test_records_rejects_unlisted_topic_and_large_query(self):
         with self.assertRaises(ValueError):
             catalog.records("../../secret")

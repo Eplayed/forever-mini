@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/zhuanye",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-11-05",
+  "scrapedAt": "2026-11-23",
   "method": "tools/scrape-wclbox-prof.py --write",
   "took": "制成品与物品 ID、材料清单与数量、技能难度四档、来源方式、采集点与可得物",
   "skipped": "冲级路线建议、BiS 结论、攻略文字、任何百分比",
@@ -600,10 +600,6 @@
    "inv_misc_cape_20",
    "inv_misc_claw_deepcrab_purple",
    "inv_misc_clothscrap_01",
-   "inv_misc_desecrated_mailboots",
-   "inv_misc_desecrated_mailglove",
-   "inv_misc_desecrated_mailpants",
-   "inv_misc_desecrated_mailshoulder",
    "inv_misc_dust_01",
    "inv_misc_dust_02",
    "inv_misc_dust_06",
@@ -1453,8 +1449,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -2736,8 +2732,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -3388,6 +3384,37 @@
      "source": "训练师"
     },
     {
+     "itemId": "8827",
+     "nameCn": "水上行走饮剂",
+     "iconKey": "inv_potion_15",
+     "quality": 1,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "黑口鱼油",
+       "count": 1,
+       "iconKey": "inv_drink_12"
+      },
+      {
+       "nameCn": "活根草",
+       "count": 1,
+       "iconKey": "inv_misc_root_02"
+      },
+      {
+       "nameCn": "铅瓶",
+       "count": 1,
+       "iconKey": "inv_potion_85"
+      }
+     ],
+     "skill": {
+      "orange": 190,
+      "yellow": 190,
+      "green": 210,
+      "grey": 230
+     },
+     "source": null
+    },
+    {
      "itemId": "250941",
      "nameCn": "强效狂乱药水",
      "iconKey": "inv_potionf_1",
@@ -3513,7 +3540,7 @@
     },
     {
      "itemId": "250327",
-     "nameCn": "掠食感知药水",
+     "nameCn": "掠食感知饮剂",
      "iconKey": "trade_alchemy_dpotion_d12",
      "quality": 1,
      "isNew": true,
@@ -6502,7 +6529,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/alchemy",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -6689,8 +6716,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -7480,8 +7507,8 @@
      "skill": {
       "orange": 50,
       "yellow": 50,
-      "green": 62,
-      "grey": 75
+      "green": 70,
+      "grey": 90
      },
      "source": "训练师"
     },
@@ -11015,8 +11042,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -13763,6 +13790,32 @@
      "source": null
     },
     {
+     "itemId": "7929",
+     "nameCn": "兽人护腿",
+     "iconKey": "inv_pants_03",
+     "quality": 2,
+     "isNew": false,
+     "mats": [
+      {
+       "nameCn": "秘银锭",
+       "count": 12,
+       "iconKey": "inv_ingot_06"
+      },
+      {
+       "nameCn": "元素之土",
+       "count": 1,
+       "iconKey": "inv_ore_iron_01"
+      }
+     ],
+     "skill": {
+      "orange": 205,
+      "yellow": 225,
+      "green": 235,
+      "grey": 245
+     },
+     "source": null
+    },
+    {
      "itemId": "7930",
      "nameCn": "重型秘银胸甲",
      "iconKey": "inv_chest_plate10",
@@ -14622,32 +14675,6 @@
       "yellow": 245,
       "green": 257,
       "grey": 270
-     },
-     "source": null
-    },
-    {
-     "itemId": "7929",
-     "nameCn": "兽人护腿",
-     "iconKey": "inv_pants_03",
-     "quality": 2,
-     "isNew": false,
-     "mats": [
-      {
-       "nameCn": "秘银锭",
-       "count": 12,
-       "iconKey": "inv_ingot_06"
-      },
-      {
-       "nameCn": "元素之土",
-       "count": 1,
-       "iconKey": "inv_ore_iron_01"
-      }
-     ],
-     "skill": {
-      "orange": 225,
-      "yellow": 225,
-      "green": 235,
-      "grey": 245
      },
      "source": null
     },
@@ -21394,7 +21421,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/blacksmithing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -21554,8 +21581,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -21904,8 +21931,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -23161,7 +23188,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/enchanting",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -23264,8 +23291,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -24698,8 +24725,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -30565,7 +30592,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/engineering",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -30762,8 +30789,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -34845,6 +34872,37 @@
      "source": null
     },
     {
+     "itemId": "279941",
+     "nameCn": "制革架",
+     "iconKey": "inv_10_skinning_leather_rarehide_color1",
+     "quality": 1,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "中皮",
+       "count": 5,
+       "iconKey": "inv_misc_leatherscrap_05"
+      },
+      {
+       "nameCn": "细线",
+       "count": 3,
+       "iconKey": "inv_fabric_wool_02"
+      },
+      {
+       "nameCn": "普通木柴",
+       "count": 2,
+       "iconKey": "inv_tradeskillitem_01"
+      }
+     ],
+     "skill": {
+      "orange": 125,
+      "yellow": 125,
+      "green": 125,
+      "grey": 125
+     },
+     "source": null
+    },
+    {
      "itemId": "252515",
      "nameCn": "智慧皮盔",
      "iconKey": "inv_helmet_26",
@@ -35644,37 +35702,6 @@
      "source": null
     },
     {
-     "itemId": "279941",
-     "nameCn": "制革架",
-     "iconKey": "inv_10_skinning_leather_rarehide_color1",
-     "quality": 1,
-     "isNew": true,
-     "mats": [
-      {
-       "nameCn": "中皮",
-       "count": 5,
-       "iconKey": "inv_misc_leatherscrap_05"
-      },
-      {
-       "nameCn": "细线",
-       "count": 3,
-       "iconKey": "inv_fabric_wool_02"
-      },
-      {
-       "nameCn": "普通木柴",
-       "count": 2,
-       "iconKey": "inv_tradeskillitem_01"
-      }
-     ],
-     "skill": {
-      "orange": 140,
-      "yellow": 140,
-      "green": 142,
-      "grey": 145
-     },
-     "source": null
-    },
-    {
      "itemId": "4455",
      "nameCn": "迅猛龙皮背心",
      "iconKey": "inv_chest_leather_04",
@@ -36388,6 +36415,32 @@
       "yellow": 180,
       "green": 190,
       "grey": 200
+     },
+     "source": null
+    },
+    {
+     "itemId": "274490",
+     "nameCn": "半人马护蹄",
+     "iconKey": "inv_boots_05",
+     "quality": 2,
+     "isNew": true,
+     "mats": [
+      {
+       "nameCn": "厚皮",
+       "count": 12,
+       "iconKey": "inv_misc_leatherscrap_08"
+      },
+      {
+       "nameCn": "粗丝线",
+       "count": 2,
+       "iconKey": "inv_fabric_silk_02"
+      }
+     ],
+     "skill": {
+      "orange": 165,
+      "yellow": 170,
+      "green": 175,
+      "grey": 180
      },
      "source": null
     },
@@ -47568,7 +47621,7 @@
     {
      "itemId": "276538",
      "nameCn": "唤灵者链裙",
-     "iconKey": "inv_misc_desecrated_mailpants",
+     "iconKey": "inv_pant_mail_raidshamanhyjalc60_d_01",
      "quality": 4,
      "isNew": true,
      "mats": [
@@ -47604,7 +47657,7 @@
     {
      "itemId": "276539",
      "nameCn": "唤灵者手套",
-     "iconKey": "inv_misc_desecrated_mailglove",
+     "iconKey": "inv_glove_mail_raidshamanhyjalc60_d_01",
      "quality": 4,
      "isNew": true,
      "mats": [
@@ -47640,7 +47693,7 @@
     {
      "itemId": "276540",
      "nameCn": "唤灵者披风",
-     "iconKey": "inv_misc_desecrated_mailshoulder",
+     "iconKey": "inv_shoulder_mail_raidshamanhyjalc60_d_01",
      "quality": 4,
      "isNew": true,
      "mats": [
@@ -47676,7 +47729,7 @@
     {
      "itemId": "276541",
      "nameCn": "唤灵者靴子",
-     "iconKey": "inv_misc_desecrated_mailboots",
+     "iconKey": "inv_boot_mail_raidshamanhyjalc60_d_01",
      "quality": 4,
      "isNew": true,
      "mats": [
@@ -48379,7 +48432,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/leatherworking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -48643,8 +48696,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -48669,8 +48722,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -50405,7 +50458,7 @@
      "mats": [
       {
        "nameCn": "毛布卷",
-       "count": 4,
+       "count": 5,
        "iconKey": "inv_fabric_wool_03"
       },
       {
@@ -51137,7 +51190,7 @@
      "mats": [
       {
        "nameCn": "毛布卷",
-       "count": 4,
+       "count": 5,
        "iconKey": "inv_fabric_wool_03"
       },
       {
@@ -53400,8 +53453,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -53800,7 +53853,7 @@
      "mats": [
       {
        "nameCn": "丝绸卷",
-       "count": 4,
+       "count": 5,
        "iconKey": "inv_fabric_silk_03"
       },
       {
@@ -54192,7 +54245,7 @@
      "mats": [
       {
        "nameCn": "丝绸卷",
-       "count": 5,
+       "count": 6,
        "iconKey": "inv_fabric_silk_03"
       },
       {
@@ -56252,7 +56305,7 @@
      "mats": [
       {
        "nameCn": "魔纹布卷",
-       "count": 4,
+       "count": 5,
        "iconKey": "inv_fabric_mageweave_03"
       },
       {
@@ -62787,7 +62840,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/tailoring",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -62838,8 +62891,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -62958,8 +63011,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -63369,7 +63422,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/mining",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -63854,7 +63907,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/herbalism",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -63978,7 +64031,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/skinning",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -65013,8 +65066,8 @@
      "skill": {
       "orange": 90,
       "yellow": 95,
-      "green": 100,
-      "grey": 105
+      "green": 95,
+      "grey": 95
      },
      "source": null
     },
@@ -65569,8 +65622,8 @@
      "skill": {
       "orange": 140,
       "yellow": 145,
-      "green": 147,
-      "grey": 150
+      "green": 145,
+      "grey": 145
      },
      "source": null
     },
@@ -66110,8 +66163,8 @@
      "skill": {
       "orange": 200,
       "yellow": 205,
-      "green": 212,
-      "grey": 220
+      "green": 205,
+      "grey": 205
      },
      "source": null
     },
@@ -67135,7 +67188,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/cooking",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -67235,7 +67288,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/fishing",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -67286,8 +67339,8 @@
      "skill": {
       "orange": 20,
       "yellow": 20,
-      "green": 22,
-      "grey": 25
+      "green": 20,
+      "grey": 20
      },
      "source": "训练师"
     },
@@ -67572,8 +67625,8 @@
      "skill": {
       "orange": 140,
       "yellow": 140,
-      "green": 142,
-      "grey": 145
+      "green": 140,
+      "grey": 140
      },
      "source": null
     },
@@ -68047,7 +68100,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/first-aid",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -68064,7 +68117,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/zhuanye/camping",
      "note": "配方、材料、技能难度与采集点取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   }

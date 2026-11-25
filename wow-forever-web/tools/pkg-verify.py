@@ -150,9 +150,9 @@ def main():
     check("upstream 原料不在包里（请求它得 404）", s == 404, "%s" % s)
 
     print("\n[B] 旧页地址（talent.html 这一类，2026-10-24 站主拍板撤掉跳转桩）")
-    extra = [f for f in os.listdir(site) if f.endswith(".html") and f != "index.html"]
-    check("包里没有旧页地址的跳转桩（除 index.html 外不许有 .html）", not extra,
-          "、".join(extra[:5]) or "只有 index.html")
+    extra = [f for f in os.listdir(site) if f.endswith(".html") and f not in ("index.html", "404.html")]
+    check("包里没有旧页地址的跳转桩（只许 index.html 与 404.html）", not extra,
+          "、".join(extra[:5]) or "只有 index.html 与 404.html")
     s, c = head(base_root + "/talent.html")
     check("/talent.html 是 404，不是被兜底成 200 首页（撤桩后要的是明确失败，不是点了没反应）",
           s == 404, "%s %s" % (s, c))

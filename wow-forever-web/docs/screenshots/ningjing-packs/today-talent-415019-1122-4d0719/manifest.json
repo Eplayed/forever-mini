@@ -1,0 +1,169 @@
+{
+  "pack_id": "today-talent-415019-1122-4d0719",
+  "theme": "frosted-daily",
+  "title": "魔兽无限服9职业练级天赋：防战拉7怪，近战兽王",
+  "column_name": "无限服攻略",
+  "date_str": "11.22",
+  "generated_at": "2026-11-22T10:52:50",
+  "carousel_slides": [
+    "carousel/slide_01.png",
+    "carousel/slide_02.png",
+    "carousel/slide_03.png",
+    "carousel/slide_04.png",
+    "carousel/slide_05.png",
+    "carousel/slide_06.png",
+    "carousel/slide_07.png",
+    "carousel/slide_08.png",
+    "carousel/slide_09.png",
+    "carousel/slide_10.png"
+  ],
+  "carousel_caption": "carousel/caption.txt",
+  "carousel_preview_html": "carousel/preview.html",
+  "wechat_article_html": "wechat/article.html",
+  "wechat_article_md": "wechat/article.md",
+  "wechat_inline_cards": [
+    "wechat/card_01.png",
+    "wechat/card_02.png",
+    "wechat/card_03.png",
+    "wechat/card_04.png",
+    "wechat/card_05.png",
+    "wechat/card_06.png",
+    "wechat/card_07.png",
+    "wechat/card_08.png",
+    "wechat/card_09.png"
+  ],
+  "talent_builds": [
+    {
+      "status": "verified",
+      "class_id": "warrior",
+      "class_cn": "战士",
+      "summary_text": "武器 4 / 狂怒 16 / 防护 31",
+      "p_code": "01300000000000000-0505000501000000000-050033120331001351",
+      "simulator_url": "#/talent?c=warrior&p=01300000000000000-0505000501000000000-050033120331001351",
+      "panel_img_rel": "talent_warrior.png",
+      "ref_frame_rel": null,
+      "tree_names": [
+        "武器",
+        "狂怒",
+        "防护"
+      ],
+      "tree_sums": [
+        4,
+        16,
+        31
+      ],
+      "total_points": 51,
+      "key_talents": [
+        "怒击(1/1)",
+        "破釜沉舟(1/1)",
+        "强化破甲攻击(3/3)",
+        "先锋(1/1)",
+        "震荡猛击(1/1)",
+        "怒火聚焦(3/3)"
+      ],
+      "issues": []
+    },
+    {
+      "status": "needs_review",
+      "class_id": "rogue",
+      "class_cn": "潜行者",
+      "summary_text": "奇袭 16 / 战斗 27 / 敏锐 0",
+      "p_code": "02530201201000000-3200330112012215001-000000000000000000",
+      "simulator_url": "#/talent?c=rogue&p=02530201201000000-3200330112012215001-000000000000000000",
+      "panel_img_rel": null,
+      "ref_frame_rel": "wechat/talent_ref_rogue.jpg",
+      "tree_names": [
+        "奇袭",
+        "战斗",
+        "敏锐"
+      ],
+      "tree_sums": [
+        16,
+        27,
+        0
+      ],
+      "total_points": 43,
+      "key_talents": [
+        "血液飞溅(1/1)",
+        "冷血(1/1)",
+        "还击(1/1)",
+        "完美处刑(1/1)",
+        "侵略(2/3)",
+        "武器专家(2/2)"
+      ],
+      "issues": [
+        "战斗(3,3)「武器专家」点数 3 > 上限 2",
+        "战斗「冲动」(第7层): 下层 26 < 30",
+        "战斗「冲动」(第7层): 下层已投 26 点 < 门槛 30 点",
+        "三系总点 [16, 27, 0] 与画面顶部 [16, 35, 0] 不一致"
+      ]
+    },
+    {
+      "status": "verified",
+      "class_id": "priest",
+      "class_cn": "牧师",
+      "summary_text": "戒律 13 / 神圣 3 / 暗影 35",
+      "p_code": "025003000030000000-30000000000000000-30542001251312051",
+      "simulator_url": "#/talent?c=priest&p=025003000030000000-30000000000000000-30542001251312051",
+      "panel_img_rel": "talent_priest.png",
+      "ref_frame_rel": null,
+      "tree_names": [
+        "戒律",
+        "神圣",
+        "暗影"
+      ],
+      "tree_sums": [
+        13,
+        3,
+        35
+      ],
+      "total_points": 51,
+      "key_talents": [
+        "精神鞭笞(1/1)",
+        "黑暗启发(5/5)",
+        "吸血鬼的拥抱(1/1)",
+        "暗影之波(3/3)",
+        "沉默(1/1)",
+        "噬灵传染(2/2)"
+      ],
+      "issues": []
+    },
+    {
+      "status": "verified",
+      "class_id": "paladin",
+      "class_cn": "圣骑士",
+      "summary_text": "神圣 0 / 防护 35 / 惩戒 16",
+      "p_code": "00000000000000000-05302102313501531-05233000201000000",
+      "simulator_url": "#/talent?c=paladin&p=00000000000000000-05302102313501531-05233000201000000",
+      "panel_img_rel": "talent_paladin.png",
+      "tree_names": [
+        "神圣",
+        "防护",
+        "惩戒"
+      ],
+      "tree_sums": [
+        0,
+        35,
+        16
+      ],
+      "total_points": 51,
+      "key_talents": [
+        "圣殿骑士壁垒(1/1)",
+        "迅捷审判(1/1)",
+        "强化正义之怒(3/3)",
+        "预知(5/5)",
+        "神圣之盾(1/1)",
+        "清算(5/5)"
+      ],
+      "issues": []
+    }
+  ],
+  "today_meta": {
+    "slot_key": "talent-415019",
+    "summary_id": null,
+    "video_ids": [
+      415019
+    ],
+    "created_date": "2026-11-22"
+  }
+}

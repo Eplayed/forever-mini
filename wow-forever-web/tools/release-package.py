@@ -63,7 +63,7 @@ FORBIDDEN = [
 # 放开的是扩展名，不是来源：下面只允许自产占位与已登记、逐哈希校验的
 # 本机客户端整人模型；第三方站模型仍拦。
 ALLOW_EXT = {".html", ".js", ".css", ".json", ".webp", ".png", ".jpg", ".jpeg",
-             ".svg", ".ico", ".woff2", ".woff", ".txt", ".glb"}
+             ".svg", ".ico", ".woff2", ".woff", ".txt", ".glb", ".xml"}
 
 
 def self_generated_models():

@@ -10,7 +10,7 @@
    "classId": "druid",
    "classNameCn": "德鲁伊",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -1707,7 +1707,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/druid",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1716,7 +1716,7 @@
    "classId": "hunter",
    "classNameCn": "猎人",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -3347,7 +3347,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/hunter",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -3356,7 +3356,7 @@
    "classId": "mage",
    "classNameCn": "法师",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -4628,9 +4628,9 @@
        "column": 1,
        "maxRanks": 3,
        "nameCn": "霜寒刺骨",
-       "nameAlt": null,
-       "nameConflict": false,
-       "nameVerified": true,
+       "nameAlt": "冰霜撕咬",
+       "nameConflict": true,
+       "nameVerified": false,
        "nameSources": [
         "fengshen",
         "nieyi"
@@ -4651,7 +4651,7 @@
         }
        ],
        "upstreamId": "calc-mage-frost-frostbite",
-       "changeState": "modified"
+       "posMismatch": true
       },
       {
        "id": "mage-2-强化冰霜新星",
@@ -4930,7 +4930,7 @@
         }
        ],
        "upstreamId": "calc-mage-frost-improved-cone-of-cold",
-       "changeState": "moved"
+       "changeState": "modified"
       },
       {
        "id": "mage-2-急速冷却",
@@ -5078,7 +5078,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/mage",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -5087,7 +5087,7 @@
    "classId": "paladin",
    "classNameCn": "圣骑士",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -6438,7 +6438,7 @@
         }
        ],
        "upstreamId": "calc-paladin-retribution-seal-of-command",
-       "changeState": "unchanged"
+       "changeState": "modified"
       },
       {
        "id": "paladin-2-正义追击",
@@ -6737,7 +6737,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/paladin",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -6746,7 +6746,7 @@
    "classId": "priest",
    "classNameCn": "牧师",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -8440,7 +8440,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/priest",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -8449,7 +8449,7 @@
    "classId": "rogue",
    "classNameCn": "潜行者",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -8604,8 +8604,8 @@
        "column": 1,
        "maxRanks": 2,
        "nameCn": "强化破甲",
-       "nameAlt": "密谋",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -8666,8 +8666,8 @@
        "column": 0,
        "maxRanks": 2,
        "nameCn": "精力",
-       "nameAlt": "无情打击",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -8854,8 +8854,8 @@
        "column": 0,
        "maxRanks": 5,
        "nameCn": "无情打击",
-       "nameAlt": "精力",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -8885,8 +8885,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "毒针",
-       "nameAlt": "毁伤",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -8978,8 +8978,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "毁伤",
-       "nameAlt": "毒针",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9006,9 +9006,8 @@
        "changeState": "added"
       }
      ],
-     "nameAltUpstream": "奇袭",
-     "nameAlt": "刺杀",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSource": "https://wow.blizzard.cn/news/24301515 · 24301514 · 24302097 · 24310968"
     },
@@ -9023,8 +9022,8 @@
        "column": 0,
        "maxRanks": 3,
        "nameCn": "致命一击",
-       "nameAlt": "强化刺骨",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9054,8 +9053,8 @@
        "column": 1,
        "maxRanks": 2,
        "nameCn": "高效打击",
-       "nameAlt": "强化邪恶攻击",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9213,12 +9212,18 @@
        "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "ability_rogue_sprint",
        "requires": [],
        "level": "L2",
        "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/rogue.html",
@@ -9428,6 +9433,7 @@
        "nameConflict": true,
        "nameVerified": false,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "spell_holy_blessingofstrength",
@@ -9436,12 +9442,42 @@
        "provenance": [
         {
          "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
+        {
+         "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/rogue.html",
          "note": "nieyi 源：名称/系/坐标/上限/图标名"
         }
        ],
        "upstreamId": "calc-rogue-combat-aggression",
        "posMismatch": true
+      },
+      {
+       "id": "rogue-1-双武器专精",
+       "tier": 4,
+       "column": 0,
+       "maxRanks": 2,
+       "nameCn": "双武器专精",
+       "nameAlt": null,
+       "nameConflict": false,
+       "nameVerified": true,
+       "nameSources": [
+        "fengshen"
+       ],
+       "iconKey": "ability_dualwield",
+       "requires": [],
+       "level": "L2",
+       "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        }
+       ],
+       "upstreamId": "calc-rogue-combat-dual-wield-specialization",
+       "changeState": "modified"
       },
       {
        "id": "rogue-1-剑刃乱舞",
@@ -9506,7 +9542,7 @@
        "changeState": "modified"
       },
       {
-       "id": "rogue-1-双武器专精",
+       "id": "rogue-1-双武器专精-r4c3",
        "tier": 4,
        "column": 3,
        "maxRanks": 2,
@@ -9534,24 +9570,16 @@
        "column": 1,
        "maxRanks": 5,
        "nameCn": "钢之闪光",
-       "nameAlt": "武器专家",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": false,
        "nameSources": [
-        "fengshen",
         "nieyi"
        ],
        "iconKey": "spell_nature_bloodlust",
-       "requires": [
-        "rogue-1-剑刃乱舞"
-       ],
+       "requires": [],
        "level": "L2",
        "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/rogue.html",
@@ -9560,18 +9588,18 @@
        ]
       },
       {
-       "id": "rogue-1-侵略-r5c2",
+       "id": "rogue-1-刃光乍现",
        "tier": 5,
        "column": 2,
-       "maxRanks": 3,
-       "nameCn": "侵略",
+       "maxRanks": 5,
+       "nameCn": "刃光乍现",
        "nameAlt": "利刃闪光",
        "nameConflict": true,
        "nameVerified": false,
        "nameSources": [
         "fengshen"
        ],
-       "iconKey": null,
+       "iconKey": "ability_rogue_restlessblades",
        "requires": [],
        "level": "L2",
        "provenance": [
@@ -9582,7 +9610,8 @@
         }
        ],
        "upstreamId": "calc-rogue-combat-flash-of-steel",
-       "posMismatch": true
+       "posMismatch": true,
+       "iconFromCell": true
       },
       {
        "id": "rogue-1-冲动",
@@ -9634,8 +9663,8 @@
        "column": 0,
        "maxRanks": 3,
        "nameCn": "调整",
-       "nameAlt": "伪装",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9727,8 +9756,8 @@
        "column": 0,
        "maxRanks": 2,
        "nameCn": "卑鄙",
-       "nameAlt": "调整",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9758,8 +9787,8 @@
        "column": 1,
        "maxRanks": 3,
        "nameCn": "伪装",
-       "nameAlt": "飘忽不定",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9882,8 +9911,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "预谋",
-       "nameAlt": "鬼魅攻击",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9913,8 +9942,8 @@
        "column": 2,
        "maxRanks": 3,
        "nameCn": "锯齿利刃",
-       "nameAlt": "强化扰乱",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9944,8 +9973,8 @@
        "column": 0,
        "maxRanks": 2,
        "nameCn": "飘忽不定",
-       "nameAlt": "察觉",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -9975,8 +10004,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "鬼魅攻击",
-       "nameAlt": "预谋",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -10001,29 +10030,6 @@
        "changeState": "modified"
       },
       {
-       "id": "rogue-2-锯齿利刃-r3c2",
-       "tier": 3,
-       "column": 2,
-       "maxRanks": 3,
-       "nameCn": "锯齿利刃",
-       "nameAlt": null,
-       "nameConflict": false,
-       "nameVerified": false,
-       "nameSources": [
-        "fengshen"
-       ],
-       "iconKey": null,
-       "requires": [],
-       "level": "L2",
-       "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        }
-       ]
-      },
-      {
        "id": "rogue-2-迅捷脱身",
        "tier": 3,
        "column": 3,
@@ -10033,6 +10039,7 @@
        "nameConflict": true,
        "nameVerified": false,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "ability_rogue_trip",
@@ -10041,6 +10048,11 @@
        ],
        "level": "L2",
        "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/rogue.html",
@@ -10056,8 +10068,8 @@
        "column": 0,
        "maxRanks": 2,
        "nameCn": "察觉",
-       "nameAlt": "卑鄙",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -10146,31 +10158,6 @@
        "changeState": "modified"
       },
       {
-       "id": "rogue-2-寂灭",
-       "tier": 5,
-       "column": 0,
-       "maxRanks": 5,
-       "nameCn": "寂灭",
-       "nameAlt": null,
-       "nameConflict": false,
-       "nameVerified": false,
-       "nameSources": [
-        "fengshen"
-       ],
-       "iconKey": null,
-       "requires": [
-        "rogue-2-察觉"
-       ],
-       "level": "L2",
-       "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        }
-       ]
-      },
-      {
        "id": "rogue-2-靴中剑",
        "tier": 5,
        "column": 2,
@@ -10207,8 +10194,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "死亡印记",
-       "nameAlt": "千刀万剐",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -10242,9 +10229,9 @@
     }
    ],
    "stats": {
-    "nodes": 57,
-    "nameConflict": 21,
-    "onlyInOneSource": 7
+    "nodes": 56,
+    "nameConflict": 5,
+    "onlyInOneSource": 4
    },
    "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
    "structureSources": [
@@ -10252,7 +10239,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/rogue",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -10261,7 +10248,7 @@
    "classId": "shaman",
    "classNameCn": "萨满祭司",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -10664,8 +10651,8 @@
        "column": 1,
        "maxRanks": 1,
        "nameCn": "雷霆召唤",
-       "nameAlt": "熔岩爆裂",
-       "nameConflict": true,
+       "nameAlt": null,
+       "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
         "fengshen",
@@ -10956,31 +10943,6 @@
        "changeState": "added"
       },
       {
-       "id": "shaman-1-强化幽魂之狼",
-       "tier": 1,
-       "column": 2,
-       "maxRanks": 2,
-       "nameCn": "强化幽魂之狼",
-       "nameAlt": "强化闪电之盾",
-       "nameConflict": true,
-       "nameVerified": false,
-       "nameSources": [
-        "fengshen"
-       ],
-       "iconKey": null,
-       "requires": [],
-       "level": "L2",
-       "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        }
-       ],
-       "upstreamId": "calc-shaman-enhancement-improved-lightning-shield",
-       "posMismatch": true
-      },
-      {
        "id": "shaman-1-强化闪电之盾",
        "tier": 1,
        "column": 3,
@@ -11038,7 +11000,7 @@
         }
        ],
        "upstreamId": "calc-shaman-enhancement-elemental-weapons",
-       "changeState": "moved"
+       "changeState": "modified"
       },
       {
        "id": "shaman-1-萨满专注",
@@ -11198,7 +11160,7 @@
        "changeState": "modified"
       },
       {
-       "id": "shaman-1-强化幽魂之狼-r3c3",
+       "id": "shaman-1-强化幽魂之狼",
        "tier": 3,
        "column": 3,
        "maxRanks": 2,
@@ -11207,12 +11169,18 @@
        "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "spell_nature_spiritwolf",
        "requires": [],
        "level": "L2",
        "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/shaman/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/shaman.html",
@@ -11607,7 +11575,7 @@
         }
        ],
        "upstreamId": "calc-shaman-restoration-ancestral-healing",
-       "changeState": "moved"
+       "changeState": "modified"
       },
       {
        "id": "shaman-2-治疗专注",
@@ -11898,9 +11866,9 @@
     }
    ],
    "stats": {
-    "nodes": 51,
-    "nameConflict": 2,
-    "onlyInOneSource": 2
+    "nodes": 50,
+    "nameConflict": 1,
+    "onlyInOneSource": 0
    },
    "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
    "structureSources": [
@@ -11908,7 +11876,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/shaman",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -11917,7 +11885,7 @@
    "classId": "warlock",
    "classNameCn": "术士",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -13610,7 +13578,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/warlock",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -13619,7 +13587,7 @@
    "classId": "warrior",
    "classNameCn": "战士",
    "structureStatus": "confirmed",
-   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-05（两源本次现读）",
+   "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
    "grid": {
     "rows": 7,
     "cols": 4,
@@ -14417,12 +14385,18 @@
        "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "spell_shadow_unholyfrenzy",
        "requires": [],
        "level": "L1",
        "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -14495,27 +14469,21 @@
        "posMismatch": true
       },
       {
-       "id": "warrior-1-狂怒-r3c2",
+       "id": "warrior-1-鲁莽挥击",
        "tier": 3,
        "column": 2,
        "maxRanks": 1,
-       "nameCn": "狂怒",
-       "nameAlt": "鲁莽挥击",
-       "nameConflict": true,
-       "nameVerified": true,
+       "nameCn": "鲁莽挥击",
+       "nameAlt": null,
+       "nameConflict": false,
+       "nameVerified": false,
        "nameSources": [
-        "fengshen",
         "nieyi"
        ],
        "iconKey": "ability_warrior_punishingblow",
        "requires": [],
-       "level": "L1",
+       "level": "L2",
        "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -14552,7 +14520,7 @@
         }
        ],
        "upstreamId": "calc-warrior-fury-improved-execute",
-       "changeState": "moved"
+       "changeState": "modified"
       },
       {
        "id": "warrior-1-强化狂暴之怒",
@@ -14626,6 +14594,7 @@
        "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
+        "fengshen",
         "nieyi"
        ],
        "iconKey": "racial_troll_berserk",
@@ -14634,6 +14603,11 @@
        ],
        "level": "L2",
        "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -14675,6 +14649,31 @@
        "changeState": "unchanged"
       },
       {
+       "id": "warrior-1-强化旋风斩",
+       "tier": 5,
+       "column": 0,
+       "maxRanks": 2,
+       "nameCn": "强化旋风斩",
+       "nameAlt": null,
+       "nameConflict": false,
+       "nameVerified": true,
+       "nameSources": [
+        "fengshen"
+       ],
+       "iconKey": "ability_whirlwind",
+       "requires": [],
+       "level": "L2",
+       "provenance": [
+        {
+         "type": "fan_db",
+         "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+         "note": "fengshen 源：名称/系/坐标/上限/前置名"
+        }
+       ],
+       "upstreamId": "calc-warrior-fury-improved-whirlwind",
+       "changeState": "added"
+      },
+      {
        "id": "warrior-1-乱舞",
        "tier": 5,
        "column": 1,
@@ -14684,20 +14683,12 @@
        "nameConflict": false,
        "nameVerified": true,
        "nameSources": [
-        "fengshen",
         "nieyi"
        ],
        "iconKey": "ability_ghoulfrenzy",
-       "requires": [
-        "warrior-1-死亡之愿"
-       ],
+       "requires": [],
        "level": "L1",
        "provenance": [
-        {
-         "type": "fan_db",
-         "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-         "note": "fengshen 源：名称/系/坐标/上限/前置名"
-        },
         {
          "type": "fan_db",
          "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -14706,23 +14697,21 @@
        ]
       },
       {
-       "id": "warrior-1-强化旋风斩",
+       "id": "warrior-1-乱舞-r5c2",
        "tier": 5,
        "column": 2,
-       "maxRanks": 2,
-       "nameCn": "强化旋风斩",
-       "nameAlt": "乱舞",
+       "maxRanks": 3,
+       "nameCn": "乱舞",
+       "nameAlt": "强化旋风斩",
        "nameConflict": true,
-       "nameVerified": false,
+       "nameVerified": true,
        "nameSources": [
         "fengshen",
         "nieyi"
        ],
        "iconKey": "ability_whirlwind",
-       "requires": [
-        "warrior-1-狂怒-r3c2"
-       ],
-       "level": "L2",
+       "requires": [],
+       "level": "L1",
        "provenance": [
         {
          "type": "fan_db",
@@ -14736,7 +14725,7 @@
         }
        ],
        "upstreamId": "calc-warrior-fury-flurry",
-       "posMismatch": true
+       "changeState": "modified"
       },
       {
        "id": "warrior-1-嗜血",
@@ -15352,9 +15341,9 @@
     }
    ],
    "stats": {
-    "nodes": 54,
+    "nodes": 55,
     "nameConflict": 2,
-    "onlyInOneSource": 2
+    "onlyInOneSource": 3
    },
    "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
    "structureSources": [
@@ -15362,7 +15351,7 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/tianfu/warrior",
      "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   }

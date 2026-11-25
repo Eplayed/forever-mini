@@ -20,6 +20,7 @@ import io
 import json
 import os
 import re
+import runpy
 import subprocess
 import sys
 
@@ -31,6 +32,9 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 WCF = "https://wowclassicforever.info"
 WBX = "https://wowforever.wclbox.com"
 WBX = "https://wowforever.wclbox.com"
+GI_ZONE_MAP = "https://gearinsight.app/static/img/forever/map/{}.webp"
+# 在 GearInsight 区域表核对过 ID，并确认底图使用游戏内 0–100 坐标。
+GI_ZONE_IDS = frozenset(("1424", "1430", "1440", "1449", "1451", "1453", "1457", "2548", "2652"))
 # 我们的副本 id → 参考站用的 slug（两边命名不一致的几座）
 SLUG_ALIAS = {"whelgars-excavation": "excavation-site-wetlands", "deathmine": "the-deadmines",
               "the-stocks": "the-stockade", "razor-krendor": "razorfen-downs"}
@@ -52,7 +56,7 @@ def save(path, blob, url, kind):
         os.makedirs(d)
     with open(path, "wb") as fh:
         fh.write(blob)
-    return {"file": os.path.relpath(path, os.path.dirname(ART)), "bytes": len(blob),
+    return {"file": os.path.relpath(path, os.path.dirname(ART)).replace(os.sep, "/"), "bytes": len(blob),
             "sha1": hashlib.sha1(blob).hexdigest()[:10], "source": url, "kind": kind,
             "fetchedAt": datetime.date.today().isoformat()}
 
@@ -164,18 +168,38 @@ def zone_map_ids():
     return out
 
 
+def read_zone_map(url, size):
+    from PIL import Image
+
+    code, blob = http(url, binary=True)
+    if code != 200 or len(blob) <= 2000:
+        return code, None
+    try:
+        with Image.open(io.BytesIO(blob)) as im:
+            if im.format == "WEBP" and im.size == size:
+                im.load()
+                return code, blob
+    except (OSError, ValueError, SyntaxError):
+        pass
+    return code, None
+
+
 def maps(man):
     """区域小地图：560×373 的客户端地图渲染，托管在第三方站（官方 CDN 不提供这个尺寸）。
     口径与副本载入图一致——只转存我们数据里真引用到的 id，整目录删除即回退到坐标文字。"""
     want = zone_map_ids()
-    have = set(os.path.basename(x["file"]).split(".")[0] for x in man["items"] if "/maps/" in x["file"])
+    have = {os.path.basename(x["file"]).split(".")[0] for x in man["items"]
+            if x["kind"] == "zone-map" and os.path.isfile(os.path.join(ART, "maps", os.path.basename(x["file"])))}
     ok, miss = [], []
-    for mid, path in sorted(want.items()):
+    for mid in sorted(set(want) | GI_ZONE_IDS):
         if mid in have:
             continue
-        url = WBX + path
-        code, blob = http(url, binary=True)
-        if code == 200 and len(blob) > 2000 and blob[:4] == b"RIFF":
+        url = WBX + want.get(mid, "/ditu-xiao/" + mid + ".webp")
+        code, blob = read_zone_map(url, (560, 373))
+        if blob is None and mid in GI_ZONE_IDS:
+            url = GI_ZONE_MAP.format(mid)
+            code, blob = read_zone_map(url, (1002, 668))
+        if blob is not None:
             rec = save(os.path.join(ART, "maps", mid + ".webp"), blob, url, "zone-map")
             man["items"] = [x for x in man["items"]
                             if not (x["kind"] == "zone-map" and os.path.basename(x["file"]).split(".")[0] == mid)]
@@ -184,7 +208,7 @@ def maps(man):
         else:
             miss.append(mid)
             print(u"  取不到小地图 %s（%d）" % (mid, code))
-    print(u"区域小地图：需要 %d 张，本轮新增 %d，取不到 %d" % (len(want), len(ok), len(miss)))
+    print(u"区域小地图：需要 %d 张，本轮新增 %d，取不到 %d" % (len(set(want) | GI_ZONE_IDS), len(ok), len(miss)))
 
 
 # 参考站种族页的文件名 → 我们的种族 id。只有两处对不上（nightelf / skyborne），其余同名；
@@ -604,7 +628,17 @@ def write_art_index(man):
             "sha256": x.get("sha256"),
         })
     idx["meta"]["addonFiles"] = addon
-    io.open(os.path.join(DATA, "art.json"), "w", encoding="utf-8").write(
+    index_path = os.path.join(DATA, "art.json")
+    if os.path.isfile(index_path):
+        # 真实模型另行验收登记，原画刷新不能替它增减名单。
+        with io.open(index_path, encoding="utf-8") as previous_file:
+            real_models = json.load(previous_file).get("bisRealModels")
+        if real_models:
+            idx["bisRealModels"] = real_models
+    if os.path.isfile(os.path.join(ROOT, "app", "img", "models", "manifest.json")):
+        registry = runpy.run_path(os.path.join(os.path.dirname(__file__), "register-bis-models.py"))
+        idx["bisModels"] = registry["placeholder_index"]()
+    io.open(index_path, "w", encoding="utf-8").write(
         json.dumps(idx, ensure_ascii=False, indent=1) + "\n")
     print(u"界面索引 → app/data/art.json（职业 %d / 副本 %d / 小地图 %d / 种族头像 %d / "
           u"阵营徽标 %d / 阵营城市 %d / 首领头像 %d / 专精背景 %d / 职业横幅 %d / "

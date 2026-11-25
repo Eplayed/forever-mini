@@ -2,7 +2,7 @@
  "classId": "rogue",
  "classNameCn": "潜行者",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-16（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -575,8 +575,8 @@
      "column": 0,
      "maxRanks": 3,
      "nameCn": "致命一击",
-     "nameAlt": "强化刺骨",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -606,8 +606,8 @@
      "column": 1,
      "maxRanks": 2,
      "nameCn": "高效打击",
-     "nameAlt": "强化邪恶攻击",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
       "fengshen",
@@ -1008,6 +1008,31 @@
      "posMismatch": true
     },
     {
+     "id": "rogue-1-双武器专精",
+     "tier": 4,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "双武器专精",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": "ability_dualwield",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ],
+     "upstreamId": "calc-rogue-combat-dual-wield-specialization",
+     "changeState": "modified"
+    },
+    {
      "id": "rogue-1-剑刃乱舞",
      "tier": 4,
      "column": 1,
@@ -1070,7 +1095,7 @@
      "changeState": "modified"
     },
     {
-     "id": "rogue-1-双武器专精",
+     "id": "rogue-1-双武器专精-r4c3",
      "tier": 4,
      "column": 3,
      "maxRanks": 2,
@@ -1079,18 +1104,12 @@
      "nameConflict": false,
      "nameVerified": false,
      "nameSources": [
-      "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_dualwield",
      "requires": [],
      "level": "L2",
      "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/rogue.html",
@@ -1104,11 +1123,10 @@
      "column": 1,
      "maxRanks": 5,
      "nameCn": "钢之闪光",
-     "nameAlt": "钢铁闪击",
-     "nameConflict": true,
+     "nameAlt": null,
+     "nameConflict": false,
      "nameVerified": false,
      "nameSources": [
-      "fengshen",
       "nieyi"
      ],
      "iconKey": "spell_nature_bloodlust",
@@ -1117,15 +1135,36 @@
      "provenance": [
       {
        "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
-      {
-       "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/rogue.html",
        "note": "nieyi 源：名称/系/坐标/上限/图标名"
       }
      ]
+    },
+    {
+     "id": "rogue-1-刃光乍现",
+     "tier": 5,
+     "column": 2,
+     "maxRanks": 5,
+     "nameCn": "刃光乍现",
+     "nameAlt": "利刃闪光",
+     "nameConflict": true,
+     "nameVerified": false,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": "ability_rogue_restlessblades",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/rogue/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ],
+     "upstreamId": "calc-rogue-combat-flash-of-steel",
+     "posMismatch": true,
+     "iconFromCell": true
     },
     {
      "id": "rogue-1-冲动",
@@ -1743,9 +1782,9 @@
   }
  ],
  "stats": {
-  "nodes": 54,
-  "nameConflict": 6,
-  "onlyInOneSource": 0
+  "nodes": 56,
+  "nameConflict": 5,
+  "onlyInOneSource": 4
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1753,7 +1792,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/rogue",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-16"
+   "checkedAt": "2026-11-23"
   }
  ]
 }

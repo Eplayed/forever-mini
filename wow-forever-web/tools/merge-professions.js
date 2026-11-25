@@ -5,6 +5,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', 'app', 'data');
 const up = JSON.parse(fs.readFileSync(path.join(ROOT, 'upstream', 'wclbox-professions.json'), 'utf8'));
@@ -89,7 +90,14 @@ const payload = {
   professions: professions
 };
 
-fs.writeFileSync(path.join(ROOT, 'professions.json'), JSON.stringify(payload, null, 1) + '\n');
+const output = path.join(ROOT, 'professions.json');
+const completed = execFileSync('python3', [path.join(__dirname, 'merge-prof-sources.py'), '--stdin'], {
+  input: JSON.stringify(payload),
+  env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
+  maxBuffer: 8 * 1024 * 1024
+});
+fs.writeFileSync(output + '.tmp', completed);
+fs.renameSync(output + '.tmp', output);
 const r = professions.reduce((s, p) => s + p.counts.recipes, 0);
 const n = professions.reduce((s, p) => s + p.counts.nodes, 0);
 const nw = professions.reduce((s, p) => s + p.counts.newRecipes, 0);

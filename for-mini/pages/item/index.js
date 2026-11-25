@@ -57,10 +57,10 @@ Page({
 
   /* 朋友圈（2026-11-03 站主要求全站可分享）：query 与 onShareAppMessage 的 path 参数一致 */
   onShareTimeline() {
-    const it = this.item
+    const { dungeonId, itemId, name } = this.data
     return {
-      title: it ? (it.nameCn || it.nameEn || '物品详情') : '物品详情',
-      query: this.wantD && this.wantI ? ('d=' + encodeURIComponent(this.wantD) + '&i=' + encodeURIComponent(this.wantI)) : ''
+      title: name || '物品详情',
+      query: dungeonId && itemId ? itemQuery(dungeonId, itemId) : ''
     }
   },
 
@@ -136,7 +136,7 @@ Page({
     const d = this.data
     return {
       title: (d.name || '这件装备') + (d.dungeon ? ' · ' + d.dungeon : ''),
-      path: '/pages/item/index?d=' + encodeURIComponent(d.dungeonId) + '&i=' + encodeURIComponent(d.itemId)
+      path: '/pages/item/index?' + itemQuery(d.dungeonId, d.itemId)
     }
   }
 })
@@ -156,4 +156,8 @@ function dec(v) {
   } catch (e) {
     return s
   }
+}
+
+function itemQuery(dungeonId, itemId) {
+  return 'd=' + encodeURIComponent(dungeonId) + '&i=' + encodeURIComponent(itemId)
 }

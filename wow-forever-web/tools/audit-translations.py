@@ -208,6 +208,7 @@ def main():
             if x.get("subgroup"):
                 pool += list(x["subgroup"].get("traits") or [])
             for t in pool:
+                t = t.get("previousTrait", t)
                 if t.get("quote"):
                     items.append({"src": "种族特长", "id": "%s/%s" % (x["id"], t["name"]), "cn": t["quote"],
                                   "cls": x.get("faction"), "level": x.get("level"),

@@ -2,7 +2,7 @@
  "classId": "warrior",
  "classNameCn": "战士",
  "structureStatus": "confirmed",
- "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-16（两源本次现读）",
+ "dataVersion": "两份客户端解包按坐标对齐 · 本站对齐于 2026-11-23（两源本次现读）",
  "grid": {
   "rows": 7,
   "cols": 4,
@@ -893,20 +893,12 @@
      "nameConflict": false,
      "nameVerified": false,
      "nameSources": [
-      "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_warrior_punishingblow",
-     "requires": [
-      "warrior-1-血之狂热"
-     ],
+     "requires": [],
      "level": "L2",
      "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -1072,6 +1064,31 @@
      "changeState": "unchanged"
     },
     {
+     "id": "warrior-1-强化旋风斩",
+     "tier": 5,
+     "column": 0,
+     "maxRanks": 2,
+     "nameCn": "强化旋风斩",
+     "nameAlt": null,
+     "nameConflict": false,
+     "nameVerified": true,
+     "nameSources": [
+      "fengshen"
+     ],
+     "iconKey": "ability_whirlwind",
+     "requires": [],
+     "level": "L2",
+     "provenance": [
+      {
+       "type": "fan_db",
+       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
+       "note": "fengshen 源：名称/系/坐标/上限/前置名"
+      }
+     ],
+     "upstreamId": "calc-warrior-fury-improved-whirlwind",
+     "changeState": "added"
+    },
+    {
      "id": "warrior-1-乱舞",
      "tier": 5,
      "column": 1,
@@ -1081,20 +1098,12 @@
      "nameConflict": false,
      "nameVerified": true,
      "nameSources": [
-      "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_ghoulfrenzy",
-     "requires": [
-      "warrior-1-死亡之愿"
-     ],
+     "requires": [],
      "level": "L1",
      "provenance": [
-      {
-       "type": "fan_db",
-       "url": "https://www.fengshen.cn/wuxian/talents/warrior/data.js",
-       "note": "fengshen 源：名称/系/坐标/上限/前置名"
-      },
       {
        "type": "fan_db",
        "url": "https://nieyi.cn/f/talents/warrior.html",
@@ -1103,21 +1112,21 @@
      ]
     },
     {
-     "id": "warrior-1-强化旋风斩",
+     "id": "warrior-1-乱舞-r5c2",
      "tier": 5,
      "column": 2,
-     "maxRanks": 2,
-     "nameCn": "强化旋风斩",
-     "nameAlt": "乱舞",
+     "maxRanks": 3,
+     "nameCn": "乱舞",
+     "nameAlt": "强化旋风斩",
      "nameConflict": true,
-     "nameVerified": false,
+     "nameVerified": true,
      "nameSources": [
       "fengshen",
       "nieyi"
      ],
      "iconKey": "ability_whirlwind",
      "requires": [],
-     "level": "L2",
+     "level": "L1",
      "provenance": [
       {
        "type": "fan_db",
@@ -1131,7 +1140,7 @@
       }
      ],
      "upstreamId": "calc-warrior-fury-flurry",
-     "posMismatch": true
+     "changeState": "modified"
     },
     {
      "id": "warrior-1-嗜血",
@@ -1747,9 +1756,9 @@
   }
  ],
  "stats": {
-  "nodes": 54,
-  "nameConflict": 0,
-  "onlyInOneSource": 0
+  "nodes": 55,
+  "nameConflict": 2,
+  "onlyInOneSource": 3
  },
  "note": "双源按坐标对齐。名字分歧的节点同时保留两个叫法（nameAlt），不做取舍掩盖。图标名仅取标识符，图片来自暴雪官方 CDN。",
  "structureSources": [
@@ -1757,7 +1766,7 @@
    "type": "datamine_cn",
    "url": "https://wowforever.wclbox.com/tianfu/warrior",
    "note": "格子位置、改动标记、前置连线与层级点数门槛取自无限客户端（经新手盒子转述）",
-   "checkedAt": "2026-11-16"
+   "checkedAt": "2026-11-23"
   }
  ]
 }

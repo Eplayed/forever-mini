@@ -276,10 +276,10 @@ const oss = require(MINI_SERVICE);
         && md5u(body) === item[kind + 'Etag']
         && crypto.createHash('md5').update(body).digest('base64') === item[kind + 'Md5'];
     })));
-  /* 列表页缩略图（M02 补）：art 进索引，值是相对 assets/ 的路径，缺的那座是 null 而不是空串 */
+  /* 列表页缩略图（M02 补；2026-11-24 深穴补齐自绘封面后 38/38 全有）：art 进索引，值是相对 assets/ 的路径 */
   const withArt = idx.items.filter((it) => it.art);
-  ok('索引带 art 且是 assets 相对路径（37/38 有，缺的那座是 null 不是空串）',
-    withArt.length === 37 && withArt.every((it) => /^art\/dungeons\/[a-z0-9-]+\.webp$/.test(it.art))
+  ok('索引带 art 且是 assets 相对路径（38/38 全有，若有缺则须为 null 不是空串）',
+    withArt.length === 38 && withArt.every((it) => /^art\/dungeons\/[a-z0-9-]+\.webp$/.test(it.art))
       && idx.items.filter((it) => !it.art).every((it) => it.art === null),
     withArt.length + ' / 38');
   ok('索引里的 art 都在素材层登记过（列表页要的图也发得出去）',
@@ -757,11 +757,13 @@ const oss = require(MINI_SERVICE);
   ok('职业图标键随索引下发（那一排不用为了图标再下 64 KB 职业索引）',
     biIdx.classes.filter((c) => !!c.iconKey).length === biIdx.classes.length,
     JSON.stringify(biIdx.classes.slice(0, 2)));
-  ok('14–58 级套装图鉴随索引下发（36 套 / 191 件部件均在共享物品表中）',
-    Array.isArray(biIdx.itemSets) && biIdx.itemSets.length === 36
+  const srcBisDoc = JSON.parse(fs.readFileSync(path.join(REPO, 'wow-forever-web', 'app', 'data', 'bis.json'), 'utf8'));
+  const expectedItemSets = (srcBisDoc.itemSets || []).length;
+  ok('14–58 级套装图鉴随索引下发（与 bis.json 套数一致且部件均在共享物品表中）',
+    Array.isArray(biIdx.itemSets) && biIdx.itemSets.length === expectedItemSets && expectedItemSets >= 36
       && biIdx.itemSets.every((s) => Array.isArray(s.pieces) && s.pieces.length >= 2
         && s.pieces.every((p) => !!biIds[String(p[0])])),
-    JSON.stringify({ sets: (biIdx.itemSets || []).length }));
+    JSON.stringify({ sets: (biIdx.itemSets || []).length, expected: expectedItemSets }));
   ok('60 级团前 Pre-Raid BiS 随索引下发（27 套，所有部件与备选均在共享物品表中）',
     Array.isArray(biIdx.bis60Sets) && biIdx.bis60Sets.length === 27
       && biIdx.bis60Sets.every((s) => s.level === 60 && Array.isArray(s.doll) && s.doll.length >= 12

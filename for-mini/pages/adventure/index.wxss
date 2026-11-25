@@ -37,3 +37,6 @@ button::after { border: 0; }
 .plan-remove, .sort-grip { box-sizing: border-box; min-height: 74rpx; padding: 0 12rpx; margin: 0; line-height: 74rpx; color: var(--txt-dim); background: var(--sunk); border: 1rpx solid var(--line); border-radius: 8rpx; font-size: 24rpx; }
 .sort-grip { flex: 0 0 92rpx; min-height: 86rpx; line-height: 84rpx; text-align: center; font-size: 38rpx; color: var(--gold-hi); }
 .pick-more { margin: 0 0 16rpx; }
+
+.overview-btns { display: flex; align-items: center; gap: 10rpx; flex-shrink: 0; }
+.share-btn { border-color: var(--forge-edge-active); background: var(--forge-surface-active); color: var(--gold-hi); font-weight: 700; }

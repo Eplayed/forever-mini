@@ -16,12 +16,6 @@
       <button class="btn census-action {{selectedSource === 'community' ? 'census-tab-on' : ''}}" data-source="community" bindtap="onSourceSelect">社区样本</button>
     </view>
     <view wx:if="{{offline}}" class="notice">离线数据 · 可能不是最新</view>
-    <view class="card">
-      <view class="census-kicker">{{sample.source}} · {{sample.scope}}</view>
-      <view wx:if="{{sample.characters}}" class="sample-total">{{sample.characters}}<text class="sample-unit"> 个观察到的角色</text></view>
-      <view wx:if="{{sample.range}}" class="muted census-meta">{{sample.range}}</view>
-      <view wx:if="{{sample.note}}" class="muted census-note">{{sample.note}}</view>
-    </view>
 
     <view class="card">
       <view class="census-section">阵营比例</view>
@@ -48,16 +42,7 @@
           <view class="class-value"><text wx:if="{{item.count}}" class="muted class-count">{{item.count}}</text><text>{{item.percent}}</text></view>
         </view>
         <progress wx:if="{{item.progress !== null}}" class="census-progress" percent="{{item.progress}}"
-                  stroke-width="5" border-radius="3" activeColor="#d9af69" backgroundColor="#172737" />
-      </view>
-    </view>
-
-    <view class="card">
-      <view class="census-section">数据来源</view>
-      <view class="muted census-note">{{sample.credit}}</view>
-      <view class="census-links">
-        <button class="btn census-action" wx:for="{{sample.links}}" wx:key="url"
-                data-index="{{index}}" bindtap="copySource">复制{{item.label}}</button>
+                  stroke-width="5" border-radius="3" activeColor="{{item.color}}" backgroundColor="#172737" />
       </view>
     </view>
   </block>

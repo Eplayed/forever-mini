@@ -1,0 +1,602 @@
+{
+ "meta": {
+  "source": "HandyNotes_Traveler 1.0.0-r2 Data.lua + zhCN.lua",
+  "addon": "HandyNotes_Traveler",
+  "addonVersion": "1.0.0-r2",
+  "fetched": "2026-11-21",
+  "levelStatus": "L1",
+  "droppedFields": [
+   "pt.note 位置说明句（避免复制第三方描述文本）"
+  ],
+  "sourceFiles": {
+   "HandyNotes_Traveler/Data.lua": {
+    "bytes": 7004,
+    "sha256": "c8d0f171d65162cf633694d82b6fe82bf7d5150b9bae8b0c7b63a89e55f9a972",
+    "fileDate": "2026-11-11"
+   },
+   "HandyNotes_Traveler/zhCN.lua": {
+    "bytes": 2799,
+    "sha256": "7224ceb32cbd42e6dfc051cb6720af27201ab0cdfa5c5d56ee818377c23fb7f5",
+    "fileDate": "2026-11-11"
+   }
+  },
+  "counts": {
+   "maps": 17,
+   "points": 26,
+   "newInForever": 13,
+   "byKind": {
+    "zeppelin": 3,
+    "skycutter": 4,
+    "boat": 15,
+    "portal": 2,
+    "tram": 2
+   }
+  }
+ },
+ "points": [
+  {
+   "uiMapId": 1411,
+   "x": 50.73,
+   "y": 13.3,
+   "kind": "zeppelin",
+   "kindCn": "飞艇",
+   "side": "H",
+   "areaId": 1637,
+   "nameEn": "Orgrimmar",
+   "nameCn": "奥格瑞玛",
+   "to": [
+    {
+     "areaId": 1497,
+     "uiMapId": 1420,
+     "nameEn": "Undercity",
+     "nameCn": "幽暗城"
+    },
+    {
+     "areaId": 117,
+     "uiMapId": 1434,
+     "nameEn": "Grom'gol Base Camp",
+     "nameCn": "格罗姆高营地"
+    }
+   ],
+   "isNewForever": false,
+   "tower": true
+  },
+  {
+   "uiMapId": 1412,
+   "x": 34.64,
+   "y": 25.85,
+   "kind": "skycutter",
+   "kindCn": "飞空艇",
+   "side": "H",
+   "areaId": 17045,
+   "nameEn": "Skywatcher Plateau",
+   "nameCn": "观天者台地",
+   "to": [
+    {
+     "areaId": 16638,
+     "uiMapId": 2521,
+     "nameEn": "Valanaar",
+     "nameCn": "瓦拉纳尔"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 1413,
+   "x": 63.8,
+   "y": 38.75,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "N",
+   "areaId": 392,
+   "nameEn": "Ratchet",
+   "nameCn": "棘齿城",
+   "to": [
+    {
+     "areaId": 35,
+     "uiMapId": 1434,
+     "nameEn": "Booty Bay",
+     "nameCn": "藏宝海湾"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1416,
+   "x": 12.1,
+   "y": 56.45,
+   "kind": "portal",
+   "kindCn": "传送门",
+   "side": "A",
+   "areaId": 279,
+   "nameEn": "Skyborne Portal to Stormwind",
+   "nameCn": "天裔传送门：暴风城",
+   "to": [
+    {
+     "areaId": 1519,
+     "uiMapId": 1453,
+     "nameEn": "Stormwind City",
+     "nameCn": "暴风城"
+    }
+   ],
+   "isNewForever": true,
+   "skyborne": true,
+   "objectId": 631299
+  },
+  {
+   "uiMapId": 1416,
+   "x": 12.64,
+   "y": 51.23,
+   "kind": "skycutter",
+   "kindCn": "飞空艇",
+   "side": "A",
+   "areaId": 279,
+   "nameEn": "Dalaran",
+   "nameCn": "达拉然",
+   "to": [
+    {
+     "areaId": 16638,
+     "uiMapId": 2521,
+     "nameEn": "Valanaar",
+     "nameCn": "瓦拉纳尔"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 1416,
+   "x": 15.1,
+   "y": 55.6,
+   "kind": "portal",
+   "kindCn": "传送门",
+   "side": "A",
+   "areaId": 279,
+   "nameEn": "Portal to The Violet Citadel",
+   "nameCn": "通往紫罗兰城堡的传送门",
+   "to": [
+    {
+     "areaId": null,
+     "uiMapId": 1416,
+     "nameEn": "The Violet Citadel",
+     "nameCn": "紫罗兰城堡"
+    }
+   ],
+   "isNewForever": true,
+   "objectId": 691558
+  },
+  {
+   "uiMapId": 1420,
+   "x": 61.28,
+   "y": 58.92,
+   "kind": "zeppelin",
+   "kindCn": "飞艇",
+   "side": "H",
+   "areaId": 1497,
+   "nameEn": "Undercity",
+   "nameCn": "幽暗城",
+   "to": [
+    {
+     "areaId": 1637,
+     "uiMapId": 1411,
+     "nameEn": "Orgrimmar",
+     "nameCn": "奥格瑞玛"
+    },
+    {
+     "areaId": 117,
+     "uiMapId": 1434,
+     "nameEn": "Grom'gol Base Camp",
+     "nameCn": "格罗姆高营地"
+    }
+   ],
+   "isNewForever": false,
+   "tower": true
+  },
+  {
+   "uiMapId": 1424,
+   "x": 50.6,
+   "y": 69.97,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 271,
+   "nameEn": "Southshore",
+   "nameCn": "南海镇",
+   "to": [
+    {
+     "areaId": 442,
+     "uiMapId": 1439,
+     "nameEn": "Auberdine",
+     "nameCn": "奥伯丁"
+    }
+   ],
+   "isNewForever": true,
+   "next": {
+    "areaId": 150,
+    "uiMapId": 1437,
+    "nameEn": "Menethil Harbor",
+    "nameCn": "米奈希尔港"
+   }
+  },
+  {
+   "uiMapId": 1434,
+   "x": 25.67,
+   "y": 73.08,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "N",
+   "areaId": 35,
+   "nameEn": "Booty Bay",
+   "nameCn": "藏宝海湾",
+   "to": [
+    {
+     "areaId": 392,
+     "uiMapId": 1413,
+     "nameEn": "Ratchet",
+     "nameCn": "棘齿城"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1434,
+   "x": 31.33,
+   "y": 29.78,
+   "kind": "zeppelin",
+   "kindCn": "飞艇",
+   "side": "H",
+   "areaId": 117,
+   "nameEn": "Grom'gol Base Camp",
+   "nameCn": "格罗姆高营地",
+   "to": [
+    {
+     "areaId": 1637,
+     "uiMapId": 1411,
+     "nameEn": "Orgrimmar",
+     "nameCn": "奥格瑞玛"
+    },
+    {
+     "areaId": 1497,
+     "uiMapId": 1420,
+     "nameEn": "Undercity",
+     "nameCn": "幽暗城"
+    }
+   ],
+   "isNewForever": false,
+   "tower": true
+  },
+  {
+   "uiMapId": 1437,
+   "x": 4.49,
+   "y": 56.66,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 150,
+   "nameEn": "Menethil Harbor",
+   "nameCn": "米奈希尔港",
+   "to": [
+    {
+     "areaId": 271,
+     "uiMapId": 1424,
+     "nameEn": "Southshore",
+     "nameCn": "南海镇"
+    }
+   ],
+   "isNewForever": true,
+   "next": {
+    "areaId": 442,
+    "uiMapId": 1439,
+    "nameEn": "Auberdine",
+    "nameCn": "奥伯丁"
+   }
+  },
+  {
+   "uiMapId": 1437,
+   "x": 4.74,
+   "y": 63.76,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 150,
+   "nameEn": "Menethil Harbor",
+   "nameCn": "米奈希尔港",
+   "to": [
+    {
+     "areaId": 513,
+     "uiMapId": 1445,
+     "nameEn": "Theramore Isle",
+     "nameCn": "塞拉摩岛"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1438,
+   "x": 54.81,
+   "y": 97.22,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 702,
+   "nameEn": "Rut'theran Village",
+   "nameCn": "鲁瑟兰村",
+   "to": [
+    {
+     "areaId": 442,
+     "uiMapId": 1439,
+     "nameEn": "Auberdine",
+     "nameCn": "奥伯丁"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1439,
+   "x": 30.42,
+   "y": 40.88,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 442,
+   "nameEn": "Auberdine",
+   "nameCn": "奥伯丁",
+   "to": [
+    {
+     "areaId": 17203,
+     "uiMapId": 1453,
+     "nameEn": "Stormwind Harbor",
+     "nameCn": "暴风城港口"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 1439,
+   "x": 32.34,
+   "y": 44.13,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 442,
+   "nameEn": "Auberdine",
+   "nameCn": "奥伯丁",
+   "to": [
+    {
+     "areaId": 150,
+     "uiMapId": 1437,
+     "nameEn": "Menethil Harbor",
+     "nameCn": "米奈希尔港"
+    }
+   ],
+   "isNewForever": true,
+   "next": {
+    "areaId": 271,
+    "uiMapId": 1424,
+    "nameEn": "Southshore",
+    "nameCn": "南海镇"
+   }
+  },
+  {
+   "uiMapId": 1439,
+   "x": 33.31,
+   "y": 39.82,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 442,
+   "nameEn": "Auberdine",
+   "nameCn": "奥伯丁",
+   "to": [
+    {
+     "areaId": 702,
+     "uiMapId": 1438,
+     "nameEn": "Rut'theran Village",
+     "nameCn": "鲁瑟兰村"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1444,
+   "x": 31.01,
+   "y": 39.51,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 1116,
+   "nameEn": "Feathermoon Stronghold",
+   "nameCn": "羽月要塞",
+   "to": [
+    {
+     "areaId": 1108,
+     "uiMapId": 1444,
+     "nameEn": "The Forgotten Coast",
+     "nameCn": "被遗忘的海岸"
+    }
+   ],
+   "isNewForever": false,
+   "ferry": true
+  },
+  {
+   "uiMapId": 1444,
+   "x": 43.13,
+   "y": 42.76,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 1108,
+   "nameEn": "The Forgotten Coast",
+   "nameCn": "被遗忘的海岸",
+   "to": [
+    {
+     "areaId": 1116,
+     "uiMapId": 1444,
+     "nameEn": "Feathermoon Stronghold",
+     "nameCn": "羽月要塞"
+    }
+   ],
+   "isNewForever": false,
+   "ferry": true
+  },
+  {
+   "uiMapId": 1445,
+   "x": 71.73,
+   "y": 56.66,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 513,
+   "nameEn": "Theramore Isle",
+   "nameCn": "塞拉摩岛",
+   "to": [
+    {
+     "areaId": 150,
+     "uiMapId": 1437,
+     "nameEn": "Menethil Harbor",
+     "nameCn": "米奈希尔港"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1446,
+   "x": 68.47,
+   "y": 23.06,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "N",
+   "areaId": 977,
+   "nameEn": "Steamwheedle Port",
+   "nameCn": "热砂港",
+   "to": [
+    {
+     "areaId": 16727,
+     "uiMapId": 2548,
+     "nameEn": "Powderfuse Port",
+     "nameCn": "爆破引线港"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 1453,
+   "x": 22.09,
+   "y": 56.42,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "A",
+   "areaId": 17203,
+   "nameEn": "Stormwind Harbor",
+   "nameCn": "暴风城港口",
+   "to": [
+    {
+     "areaId": 442,
+     "uiMapId": 1439,
+     "nameEn": "Auberdine",
+     "nameCn": "奥伯丁"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 1453,
+   "x": 69.58,
+   "y": 30.27,
+   "kind": "tram",
+   "kindCn": "矿道地铁",
+   "side": "A",
+   "areaId": 2257,
+   "nameEn": "Deeprun Tram",
+   "nameCn": "矿道地铁",
+   "to": [
+    {
+     "areaId": 1537,
+     "uiMapId": 1455,
+     "nameEn": "Ironforge",
+     "nameCn": "铁炉堡"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 1455,
+   "x": 78.02,
+   "y": 51.37,
+   "kind": "tram",
+   "kindCn": "矿道地铁",
+   "side": "A",
+   "areaId": 2257,
+   "nameEn": "Deeprun Tram",
+   "nameCn": "矿道地铁",
+   "to": [
+    {
+     "areaId": 1519,
+     "uiMapId": 1453,
+     "nameEn": "Stormwind City",
+     "nameCn": "暴风城"
+    }
+   ],
+   "isNewForever": false
+  },
+  {
+   "uiMapId": 2521,
+   "x": 58.06,
+   "y": 81.3,
+   "kind": "skycutter",
+   "kindCn": "飞空艇",
+   "side": "H",
+   "areaId": 16628,
+   "nameEn": "Valanaar Skydocks",
+   "nameCn": "瓦拉纳尔天港",
+   "to": [
+    {
+     "areaId": 17045,
+     "uiMapId": 1412,
+     "nameEn": "Skywatcher Plateau",
+     "nameCn": "观天者台地"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 2521,
+   "x": 65.83,
+   "y": 83.73,
+   "kind": "skycutter",
+   "kindCn": "飞空艇",
+   "side": "A",
+   "areaId": 16628,
+   "nameEn": "Valanaar Skydocks",
+   "nameCn": "瓦拉纳尔天港",
+   "to": [
+    {
+     "areaId": 279,
+     "uiMapId": 1416,
+     "nameEn": "Dalaran",
+     "nameCn": "达拉然"
+    }
+   ],
+   "isNewForever": true
+  },
+  {
+   "uiMapId": 2548,
+   "x": 80.43,
+   "y": 54.6,
+   "kind": "boat",
+   "kindCn": "船舶",
+   "side": "N",
+   "areaId": 16727,
+   "nameEn": "Powderfuse Port",
+   "nameCn": "爆破引线港",
+   "to": [
+    {
+     "areaId": 977,
+     "uiMapId": 1446,
+     "nameEn": "Steamwheedle Port",
+     "nameCn": "热砂港"
+    }
+   ],
+   "isNewForever": true
+  }
+ ]
+}

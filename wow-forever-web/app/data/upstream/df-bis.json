@@ -1,17 +1,17 @@
 {
  "meta": {
-  "source": "DungeonsForever 1.8.20 Core/Data/Data_BIS.lua",
-  "addon": "DungeonsForever",
-  "addonVersion": "1.8.20",
+  "source": "DungeonsForeverGear 2.0.3 Core/Data/Data_BIS.lua",
+  "addon": "DungeonsForeverGear",
+  "addonVersion": "2.0.3",
   "installRoot": "Interface",
-  "sourceFile": "DungeonsForever/Core/Data/Data_BIS.lua",
+  "sourceFile": "DungeonsForeverGear/Core/Data/Data_BIS.lua",
   "sourceStamp": {
-   "bytes": 744374,
-   "sha256": "938318cec9de87a01b1b4efe04f387e0042c22406d076969068858810cb62056",
-   "fileDate": "2026-10-25"
+   "bytes": 747602,
+   "sha256": "d161cd55fc227657d6831d1b14d357d4e875e3c016127f2130b57d0b7b28b24f",
+   "fileDate": "2026-11-22"
   },
-  "selfReported": "文件里自述 updated=2026-10-16、默认等级段 30；作者没写上游站名（自述来源不明，所以这份只当'另一家列过的名单'，不当独立第二证据）",
-  "fetched": "2026-11-05",
+  "selfReported": "文件里自述 updated=2026-10-16、2026-11-19、默认等级段 30；作者没写上游站名（自述来源不明，所以这份只当'另一家列过的名单'，不当独立第二证据）",
+  "fetched": "2026-11-25",
   "took": "等级段、职业、专精、部位、物品 ID、格内顺位",
   "droppedFields": [
    "每格第三列的属性句（如「敏捷 +3」「所有属性 +2」）——那是 DF 自己写的表述，本站的属性另有来源，不复制别人怎么写",

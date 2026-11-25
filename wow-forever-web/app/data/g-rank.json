@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "product": "wow-forever-mini",
+  "kind": "g-rank",
+  "level": "L2",
+  "updatedAt": "2026-11-24 20:31",
+  "unit": "G/米",
+  "note": "仅供参考，以游戏内实际为准",
+  "items": [
+    {
+      "id": "PVP-alliance",
+      "realm": "PVP",
+      "faction": "alliance",
+      "gPerMi": 2.43,
+      "sampleCount": 1
+    },
+    {
+      "id": "PVP-horde",
+      "realm": "PVP",
+      "faction": "horde",
+      "gPerMi": 2.43,
+      "sampleCount": 20
+    }
+  ]
+}

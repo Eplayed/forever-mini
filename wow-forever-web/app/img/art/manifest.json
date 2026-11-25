@@ -2710,17 +2710,115 @@
    "note": "第三方插件目录里转存的加工图（客户端种族图标位），与 img/icons/ 那批官方 CDN 图标分开记：这一张不进 icons/manifest.json，不冒充官方来源。"
   },
   {
+   "file": "art/maps/1424.webp",
+   "bytes": 146006,
+   "sha1": "75f652ef0b",
+   "source": "https://gearinsight.app/static/img/forever/map/1424.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1430.webp",
+   "bytes": 136780,
+   "sha1": "c9b95893fe",
+   "source": "https://gearinsight.app/static/img/forever/map/1430.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1440.webp",
+   "bytes": 161392,
+   "sha1": "b3750340dc",
+   "source": "https://gearinsight.app/static/img/forever/map/1440.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1449.webp",
+   "bytes": 156306,
+   "sha1": "f209a66936",
+   "source": "https://gearinsight.app/static/img/forever/map/1449.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1451.webp",
+   "bytes": 128834,
+   "sha1": "763c582f1a",
+   "source": "https://gearinsight.app/static/img/forever/map/1451.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1453.webp",
+   "bytes": 127586,
+   "sha1": "f262e870fb",
+   "source": "https://gearinsight.app/static/img/forever/map/1453.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/1457.webp",
+   "bytes": 114726,
+   "sha1": "4c23ba9b08",
+   "source": "https://gearinsight.app/static/img/forever/map/1457.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/2548.webp",
+   "bytes": 143430,
+   "sha1": "5a50ace96d",
+   "source": "https://gearinsight.app/static/img/forever/map/2548.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/maps/2652.webp",
+   "bytes": 135248,
+   "sha1": "7503347809",
+   "source": "https://gearinsight.app/static/img/forever/map/2652.webp",
+   "kind": "zone-map",
+   "fetchedAt": "2026-11-19"
+  },
+  {
+   "file": "art/dungeons/barrow-deeps.webp",
+   "kind": "dungeon-loading",
+   "origin": "self-generated",
+   "source": "本站自绘氛围图（官方客户端尚无深穴载入图，避开商标词，整目录删除可回退）",
+   "fetchedAt": "2026-11-24",
+   "bytes": 44932,
+   "sha1": "cb1ca500ba"
+  },
+  {
+   "file": "art/bosses/onyxia.webp",
+   "kind": "boss-portrait",
+   "origin": "official-cdn-icon",
+   "source": "暴雪官方 CDN 成就图标 achievement_boss_onyxia.jpg 本地转存（64x64 webp）",
+   "fetchedAt": "2026-11-24",
+   "bytes": 1864,
+   "sha1": "c0f2e87350"
+  },
+  {
    "file": "art/dungeons/hyjal-summit.webp",
    "bytes": 45382,
    "sha1": "076e0b65e5",
-   "source": "客户端导出（build 70245 (WOW-70245patch1.60.1_Retail, flavor=wowf, schema=wowstatic_camelot_1_60_1)）",
+   "source": "客户端导出（build 70245）历史不可变归档件，已由 hyjal-summit-v2.webp 接替展示",
    "kind": "dungeon-loading",
    "origin": "client-export",
-   "fetchedAt": "2026-10-21",
-   "note": "暴雪游戏美术，由站主从本机客户端导出，不经第三方站"
+   "fetchedAt": "2026-10-21"
+  },
+  {
+   "file": "art/dungeons/hyjal-summit-v2.webp",
+   "bytes": 38286,
+   "sha1": "6ddd407ced",
+   "source": "本站自绘氛围图（替换含旧资料片大字标的原图，避开商标词，按不可变文件名规则独立命名，整目录删除可回退）",
+   "kind": "dungeon-loading",
+   "origin": "self-generated",
+   "fetchedAt": "2026-11-24"
   }
  ],
- "fetchedAt": "2026-11-05",
- "total": 288,
+ "fetchedAt": "2026-11-23",
+ "total": 297,
  "clientExportAt": "2026-10-21"
 }

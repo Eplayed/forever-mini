@@ -166,10 +166,11 @@ def main():
                 {'key': 'gi', 'name': 'GearInsight 无限版 %s' % ver['gi'],
                  'kind': '第三方插件整理（其文件自报宏来源为 foreverdb.net，对过 Beta 1.60.1.70205）',
                  'url': 'GearInsight_Forever/MacroData.lua', 'date': up['meta']['fetchedAt']},
+            ] + ([
                 {'key': 'xr', 'name': 'XR_DungeonGuide v%s（作者 血染）' % ver['xr'],
                  'kind': '同一批宏的另一份形态（文件自述「同步 GI 2026-10-19 新版」，不是独立第二来源）',
                  'url': 'XR_DungeonGuide/Data_Macros.lua', 'date': up['meta']['fetchedAt']},
-            ],
+            ] if ver.get('xr') else []),
             'spellNamesNote': up['meta'].get('spellNamesNote') or
                               '法术 ID 与中英名对照来自插件的 MacroSpellNames 表，本站未回客户端逐条核，按 L1 对待。',
             'licenseNote': up['meta']['licenseNote'],

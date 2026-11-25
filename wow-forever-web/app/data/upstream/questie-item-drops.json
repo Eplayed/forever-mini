@@ -10,15 +10,15 @@
    "classicItemDrops": {
     "bytes": 571977,
     "sha256": "12888b91d87943b2e448dd60c6f33a21418dffc837ec7662fbd6892d91a6657f",
-    "fileDate": "2026-11-07"
+    "fileDate": "2026-11-24"
    },
    "itemDropCorrections": {
-    "bytes": 23799,
-    "sha256": "d23528afa6c89614e372d8ec96cc95768194978a034f161407529aaf12f7a6b2",
-    "fileDate": "2026-11-07"
+    "bytes": 16328,
+    "sha256": "4ef7688882a0275bea167cb6dfc56e5060eaf932b745b68ee64d479e68695b6f",
+    "fileDate": "2026-11-24"
    }
   },
-  "fetched": "2026-11-08",
+  "fetched": "2026-11-25",
   "took": "itemID→npcID 的掉落归属对（方向统一为 npcId → itemIds 升序去重）",
   "droppedFields": [
    "掉率数值（wowhead float）——本站红线：掉落不写百分比",
@@ -30,17 +30,17 @@
   "counts": {
    "wowheadBlocks": 2032,
    "wowheadPairs": 16679,
-   "correctionBlocks": 153,
-   "correctionPairs": 447,
-   "correctionOnlyPairs": 111,
-   "pairs": 16790,
-   "distinctNpcs": 4404,
-   "distinctItems": 1313,
-   "dfPairs": 1070,
-   "dfBossRows": 259,
-   "sharedNpcBridgedPairs": 23,
-   "questieOnlyOnSharedNpcs": 263,
-   "dfOnlyOnSharedNpcs": 464
+   "correctionBlocks": 88,
+   "correctionPairs": 340,
+   "correctionOnlyPairs": 4,
+   "pairs": 16683,
+   "distinctNpcs": 4303,
+   "distinctItems": 1252,
+   "dfPairs": 1358,
+   "dfBossRows": 309,
+   "sharedNpcBridgedPairs": 44,
+   "questieOnlyOnSharedNpcs": 483,
+   "dfOnlyOnSharedNpcs": 762
   }
  },
  "npcs": [
@@ -2910,7 +2910,6 @@
   {
    "npcId": 937,
    "itemIds": [
-    2633,
     2725,
     2728,
     2730,
@@ -10754,7 +10753,8 @@
     2318,
     4893,
     5134,
-    5635
+    5635,
+    269715
    ]
   },
   {
@@ -11286,7 +11286,8 @@
     2318,
     4893,
     5134,
-    5635
+    5635,
+    269715
    ]
   },
   {
@@ -13913,8 +13914,7 @@
     3864,
     4234,
     4304,
-    8165,
-    33087
+    8165
    ]
   },
   {
@@ -13922,16 +13922,14 @@
    "itemIds": [
     4234,
     4304,
-    8165,
-    33087
+    8165
    ]
   },
   {
    "npcId": 4331,
    "itemIds": [
     4234,
-    4304,
-    33087
+    4304
    ]
   },
   {
@@ -33831,12 +33829,6 @@
    ]
   },
   {
-   "npcId": 15273,
-   "itemIds": [
-    20934
-   ]
-  },
-  {
    "npcId": 15275,
    "itemIds": [
     20926,
@@ -35332,12 +35324,6 @@
    ]
   },
   {
-   "npcId": 16339,
-   "itemIds": [
-    23706
-   ]
-  },
-  {
    "npcId": 16368,
    "itemIds": [
     7910,
@@ -35478,604 +35464,6 @@
    "npcId": 16505,
    "itemIds": [
     18335
-   ]
-  },
-  {
-   "npcId": 16517,
-   "itemIds": [
-    22934
-   ]
-  },
-  {
-   "npcId": 16807,
-   "itemIds": [
-    25462
-   ]
-  },
-  {
-   "npcId": 16876,
-   "itemIds": [
-    30327
-   ]
-  },
-  {
-   "npcId": 16880,
-   "itemIds": [
-    23336
-   ]
-  },
-  {
-   "npcId": 16925,
-   "itemIds": [
-    30327
-   ]
-  },
-  {
-   "npcId": 17014,
-   "itemIds": [
-    29161
-   ]
-  },
-  {
-   "npcId": 17102,
-   "itemIds": [
-    23614
-   ]
-  },
-  {
-   "npcId": 17129,
-   "itemIds": [
-    28667
-   ]
-  },
-  {
-   "npcId": 17133,
-   "itemIds": [
-    28668
-   ]
-  },
-  {
-   "npcId": 17189,
-   "itemIds": [
-    23733
-   ]
-  },
-  {
-   "npcId": 17190,
-   "itemIds": [
-    23849
-   ]
-  },
-  {
-   "npcId": 17191,
-   "itemIds": [
-    23849
-   ]
-  },
-  {
-   "npcId": 17192,
-   "itemIds": [
-    23849
-   ]
-  },
-  {
-   "npcId": 17200,
-   "itemIds": [
-    23676
-   ]
-  },
-  {
-   "npcId": 17201,
-   "itemIds": [
-    23676
-   ]
-  },
-  {
-   "npcId": 17475,
-   "itemIds": [
-    23849
-   ]
-  },
-  {
-   "npcId": 17544,
-   "itemIds": [
-    24156
-   ]
-  },
-  {
-   "npcId": 17832,
-   "itemIds": [
-    24226
-   ]
-  },
-  {
-   "npcId": 18062,
-   "itemIds": [
-    24473
-   ]
-  },
-  {
-   "npcId": 18128,
-   "itemIds": [
-    24426
-   ]
-  },
-  {
-   "npcId": 18129,
-   "itemIds": [
-    24426
-   ]
-  },
-  {
-   "npcId": 18132,
-   "itemIds": [
-    24372
-   ]
-  },
-  {
-   "npcId": 18133,
-   "itemIds": [
-    24372,
-    24485
-   ]
-  },
-  {
-   "npcId": 18134,
-   "itemIds": [
-    24427
-   ]
-  },
-  {
-   "npcId": 18138,
-   "itemIds": [
-    24374
-   ]
-  },
-  {
-   "npcId": 18280,
-   "itemIds": [
-    24426
-   ]
-  },
-  {
-   "npcId": 18281,
-   "itemIds": [
-    24427
-   ]
-  },
-  {
-   "npcId": 18283,
-   "itemIds": [
-    24372
-   ]
-  },
-  {
-   "npcId": 18334,
-   "itemIds": [
-    25463
-   ]
-  },
-  {
-   "npcId": 18437,
-   "itemIds": [
-    24279
-   ]
-  },
-  {
-   "npcId": 18472,
-   "itemIds": [
-    25461
-   ]
-  },
-  {
-   "npcId": 18585,
-   "itemIds": [
-    25767
-   ]
-  },
-  {
-   "npcId": 18586,
-   "itemIds": [
-    25768
-   ]
-  },
-  {
-   "npcId": 18588,
-   "itemIds": [
-    25769
-   ]
-  },
-  {
-   "npcId": 18750,
-   "itemIds": [
-    25891
-   ]
-  },
-  {
-   "npcId": 18850,
-   "itemIds": [
-    28637
-   ]
-  },
-  {
-   "npcId": 18860,
-   "itemIds": [
-    29797
-   ]
-  },
-  {
-   "npcId": 18864,
-   "itemIds": [
-    28527
-   ]
-  },
-  {
-   "npcId": 18869,
-   "itemIds": [
-    29822
-   ]
-  },
-  {
-   "npcId": 18870,
-   "itemIds": [
-    29822
-   ]
-  },
-  {
-   "npcId": 18877,
-   "itemIds": [
-    28970
-   ]
-  },
-  {
-   "npcId": 18885,
-   "itemIds": [
-    29163
-   ]
-  },
-  {
-   "npcId": 18886,
-   "itemIds": [
-    29163
-   ]
-  },
-  {
-   "npcId": 18952,
-   "itemIds": [
-    30327
-   ]
-  },
-  {
-   "npcId": 19402,
-   "itemIds": [
-    29481
-   ]
-  },
-  {
-   "npcId": 19527,
-   "itemIds": [
-    29161
-   ]
-  },
-  {
-   "npcId": 19701,
-   "itemIds": [
-    30327
-   ]
-  },
-  {
-   "npcId": 19792,
-   "itemIds": [
-    31316
-   ]
-  },
-  {
-   "npcId": 19796,
-   "itemIds": [
-    31316
-   ]
-  },
-  {
-   "npcId": 19806,
-   "itemIds": [
-    31316
-   ]
-  },
-  {
-   "npcId": 20021,
-   "itemIds": [
-    30743,
-    30782,
-    30783
-   ]
-  },
-  {
-   "npcId": 20134,
-   "itemIds": [
-    28635
-   ]
-  },
-  {
-   "npcId": 20136,
-   "itemIds": [
-    28636
-   ]
-  },
-  {
-   "npcId": 20197,
-   "itemIds": [
-    24372
-   ]
-  },
-  {
-   "npcId": 20198,
-   "itemIds": [
-    24372,
-    24485
-   ]
-  },
-  {
-   "npcId": 20202,
-   "itemIds": [
-    29163
-   ]
-  },
-  {
-   "npcId": 20285,
-   "itemIds": [
-    29797
-   ]
-  },
-  {
-   "npcId": 20324,
-   "itemIds": [
-    29480
-   ]
-  },
-  {
-   "npcId": 20326,
-   "itemIds": [
-    29797
-   ]
-  },
-  {
-   "npcId": 20387,
-   "itemIds": [
-    24426
-   ]
-  },
-  {
-   "npcId": 20409,
-   "itemIds": [
-    29365
-   ]
-  },
-  {
-   "npcId": 20458,
-   "itemIds": [
-    29591
-   ]
-  },
-  {
-   "npcId": 20459,
-   "itemIds": [
-    29591
-   ]
-  },
-  {
-   "npcId": 20512,
-   "itemIds": [
-    29338
-   ]
-  },
-  {
-   "npcId": 20520,
-   "itemIds": [
-    31957
-   ]
-  },
-  {
-   "npcId": 20747,
-   "itemIds": [
-    30791
-   ]
-  },
-  {
-   "npcId": 20748,
-   "itemIds": [
-    30184
-   ]
-  },
-  {
-   "npcId": 20751,
-   "itemIds": [
-    30798
-   ]
-  },
-  {
-   "npcId": 20765,
-   "itemIds": [
-    31651
-   ]
-  },
-  {
-   "npcId": 20766,
-   "itemIds": [
-    31651
-   ]
-  },
-  {
-   "npcId": 21065,
-   "itemIds": [
-    29338
-   ]
-  },
-  {
-   "npcId": 21242,
-   "itemIds": [
-    31812
-   ]
-  },
-  {
-   "npcId": 21285,
-   "itemIds": [
-    31812
-   ]
-  },
-  {
-   "npcId": 21373,
-   "itemIds": [
-    30792
-   ]
-  },
-  {
-   "npcId": 21380,
-   "itemIds": [
-    31132
-   ]
-  },
-  {
-   "npcId": 21381,
-   "itemIds": [
-    31132
-   ]
-  },
-  {
-   "npcId": 21408,
-   "itemIds": [
-    30819
-   ]
-  },
-  {
-   "npcId": 21462,
-   "itemIds": [
-    30867
-   ]
-  },
-  {
-   "npcId": 21809,
-   "itemIds": [
-    31119
-   ]
-  },
-  {
-   "npcId": 21839,
-   "itemIds": [
-    30792
-   ]
-  },
-  {
-   "npcId": 21849,
-   "itemIds": [
-    31132
-   ]
-  },
-  {
-   "npcId": 22466,
-   "itemIds": [
-    31132
-   ]
-  },
-  {
-   "npcId": 22482,
-   "itemIds": [
-    31814
-   ]
-  },
-  {
-   "npcId": 70997,
-   "itemIds": [
-    97530
-   ]
-  },
-  {
-   "npcId": 70998,
-   "itemIds": [
-    97530
-   ]
-  },
-  {
-   "npcId": 70999,
-   "itemIds": [
-    97530
-   ]
-  },
-  {
-   "npcId": 71000,
-   "itemIds": [
-    97544
-   ]
-  },
-  {
-   "npcId": 71001,
-   "itemIds": [
-    97530
-   ]
-  },
-  {
-   "npcId": 71002,
-   "itemIds": [
-    97544
-   ]
-  },
-  {
-   "npcId": 71005,
-   "itemIds": [
-    97544
-   ]
-  },
-  {
-   "npcId": 71006,
-   "itemIds": [
-    97544
-   ]
-  },
-  {
-   "npcId": 71007,
-   "itemIds": [
-    97543
-   ]
-  },
-  {
-   "npcId": 71009,
-   "itemIds": [
-    97543
-   ]
-  },
-  {
-   "npcId": 71010,
-   "itemIds": [
-    97545
-   ]
-  },
-  {
-   "npcId": 71011,
-   "itemIds": [
-    97545
-   ]
-  },
-  {
-   "npcId": 71012,
-   "itemIds": [
-    97545
-   ]
-  },
-  {
-   "npcId": 71187,
-   "itemIds": [
-    97543
-   ]
-  },
-  {
-   "npcId": 71188,
-   "itemIds": [
-    97543
-   ]
-  },
-  {
-   "npcId": 73590,
-   "itemIds": [
-    97545
    ]
   },
   {

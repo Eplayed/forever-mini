@@ -1,6 +1,11 @@
 node_modules/
 dist/
-# public/data 与 public/img 是 tools/app-assets.py 从 app/data、app/img 同步出来的副本，不入库
-public/
+# public/data 与 public/img 是 tools/app-assets.py 从 app/data、app/img 同步出来的副本，不入库；
+# 头标两个副本同理。但 public 下手写的 404.html / robots.txt / sitemap.xml 是源文件，必须入库，
+# 所以这里只排除副本子目录与副本文件，不能整目录排除（整目录排除后无法再单独收进源文件）。
+public/data/
+public/img/
+public/favicon.ico
+public/apple-touch-icon.png
 .vite/
 coverage/

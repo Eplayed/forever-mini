@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
 from catalog import DATA, ROOT, TOPICS
+import addon_review
 
 REVIEW = os.path.join(os.path.dirname(__file__), "review")
 API = "https://wowforever.wclbox.com/api/open/v1"
@@ -49,8 +50,24 @@ PIPELINE = {
     "web-publish":  {"label": "网页 ④ 发布（闸门）", "cmd": [sys.executable, "tools/deploy-gh-pages.py", "--push"], "timeout": 1800, "gate": True},
     "mini-export":  {"label": "小程序 ① 导出",     "cmd": [NODE, "tools/export-mini.js"], "timeout": 600},
     "mini-build":   {"label": "小程序 ② 成批",     "cmd": [NODE, "tools/oss-release.js", "build", "--env", "beta", "--check-identity"], "timeout": 900},
+    "mini-assets":  {"label": "小程序 素材同步",    "cmd": [NODE, "tools/oss-release.js", "assets", "--env", "beta"], "timeout": 1800, "env": OSS_WRITE, "gate": True},
     "mini-upload":  {"label": "小程序 ③ 上传换指针（闸门）", "cmd": [NODE, "tools/oss-release.js", "upload", "--env", "beta"], "timeout": 1800, "env": OSS_WRITE, "gate": True},
     "mini-rollback": {"label": "小程序 ④ 回滚（闸门）", "cmd": None, "timeout": 1200, "env": OSS_WRITE, "gate": True},
+    "sync-mac":     {"label": "同步最新数据到 MacBook", "cmd": [sys.executable, "tools/sync-to-mac.py"], "timeout": 300},
+}
+DIRECT_REFRESH = {
+    "census": (
+        [sys.executable, "tools/refresh-census.py"],
+        [NODE, "tools/build-data.js"],
+    ),
+    "nga": (
+        [sys.executable, "tools/scrape-nga-forever.py", "hot"],
+    ),
+    "bis60": (
+        [sys.executable, "tools/scrape-cwf-bis60.py"],
+        [sys.executable, "tools/merge-bis60.py"],
+        [NODE, "tools/build-data.js"],
+    ),
 }
 DAILY_ARGS = ("", "--quick", "--no-gate")   # daily 的 topic 位只接受这三个变体
 LEDGER = os.path.join(os.path.dirname(__file__), "reconcile", "ledger.jsonl")
@@ -174,21 +191,33 @@ def commit_data(message):
 
 def refresh(topic, progress):
     workflows = {t[0]: t[7] for t in TOPICS if t[7]}
-    if topic not in workflows:
+    if topic not in workflows and topic not in DIRECT_REFRESH:
         raise RuntimeError("该板块没有已核准的一键刷新链；请先做数据采编和命令设计")
     pre_commit = None
     if dirty_data():
         # 先收口再跑：这条链会重写派生数据，跑前把现场存成一次提交，被覆盖的东西随时能取回
         pre_commit = commit_data("chore(admin): 刷新链 %s 启动前自动收口（未推送）" % topic)
         progress("跑前先收口：%d 个未提交文件已提交成本地 %s" % (pre_commit[1], pre_commit[0]))
-    progress("运行 tools/refresh.sh " + workflows[topic] + "；含构建门禁，可能需要数分钟")
-    # 超时从 900s 提到 2700s：这条链末尾含 site-check 全量，这台 Windows 实测单跑就要约 13 分钟
-    # （Mac 上 900s 够用，2026-11-02 迁到这台后差点把跑完一半的链当成卡死杀掉）。
-    p = subprocess.run(["bash", "tools/refresh.sh", workflows[topic]], cwd=ROOT,
-                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=2700)
-    output = ((p.stdout or "") + (p.stderr or ""))[-64000:]
-    if p.returncode:
-        raise RuntimeError("刷新或门禁失败，已写文件仍在工作树里（没有自动提交），需检查后处理。\n" + output)
+    if topic in DIRECT_REFRESH:
+        out_chunks = []
+        for step_cmd in DIRECT_REFRESH[topic]:
+            progress("运行 " + " ".join(os.path.basename(x) for x in step_cmd))
+            p = subprocess.run(step_cmd, cwd=ROOT, capture_output=True, text=True,
+                               encoding="utf-8", errors="replace", timeout=900)
+            chunk = (p.stdout or "") + (p.stderr or "")
+            out_chunks.append(chunk)
+            if p.returncode:
+                raise RuntimeError("刷新或校验失败：\n" + "\n".join(out_chunks)[-16000:])
+        output = "\n".join(out_chunks)[-64000:]
+    else:
+        progress("运行 tools/refresh.sh " + workflows[topic] + "；含构建门禁，可能需要数分钟")
+        # 超时从 900s 提到 2700s：这条链末尾含 site-check 全量，这台 Windows 实测单跑就要约 13 分钟
+        # （Mac 上 900s 够用，2026-11-02 迁到这台后差点把跑完一半的链当成卡死杀掉）。
+        p = subprocess.run(["bash", "tools/refresh.sh", workflows[topic]], cwd=ROOT,
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=2700)
+        output = ((p.stdout or "") + (p.stderr or ""))[-64000:]
+        if p.returncode:
+            raise RuntimeError("刷新或门禁失败，已写文件仍在工作树里（没有自动提交），需检查后处理。\n" + output)
     post_commit = commit_data("chore(admin): 刷新链 %s 的产物（门禁已过，未推送、未发布）" % topic)
     changed = subprocess.run(["git", "show", "--stat", "--oneline", "-1", "--", "app/data", "app/img"],
                              cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=15).stdout[:6000]
@@ -231,6 +260,12 @@ def allowed(action, topic=None):
        单测原来直接调 jobs.start("refresh","items") 期望它被拒——我给 items 接上场景之后，
        那条断言由 400 变 202，**测试当场把一条真刷新链放了出去并留下一笔自动收口提交**（2026-11-02，ee25881）。
        判据抽出来之后，测它不用再启动任何东西。"""
+    if action == "scan-addons":
+        return None if not topic else "插件检查不接受参数"
+    if action == "apply-addon":
+        return None if isinstance(topic, str) and topic in addon_review.SOURCES else "未知插件快照"
+    if action == "merge-addon-dungeons":
+        return None if not topic else "副本成品合并不接受参数"
     if action in PIPELINE:
         if action == "mini-rollback":
             # 回滚目标来自页面输入，是唯一一个客户端能递进命令的参数——按工具自己的
@@ -240,11 +275,12 @@ def allowed(action, topic=None):
         return None
     if action == "daily":
         return None if (topic or "") in DAILY_ARGS else "daily 只接受 --quick / --no-gate"
-    if action not in ("scan-items", "refresh", "reconcile"):
+    if action not in ("scan-items", "refresh", "refresh-and-sync", "reconcile"):
         return "未知动作"
     if action == "scan-items" and topic != "items":
         return "物品公开 API 只支持 items"
-    if action == "refresh" and topic not in {t[0] for t in TOPICS if t[7]}:
+    valid_refresh = {t[0] for t in TOPICS if t[7]} | set(DIRECT_REFRESH)
+    if action in ("refresh", "refresh-and-sync") and topic not in valid_refresh:
         return "该板块没有白名单刷新命令"
     return None
 
@@ -273,7 +309,7 @@ def _stream_run(entry, jid, progress, extra_args=()):
     try:
         p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                              stdin=subprocess.DEVNULL, text=True, encoding="utf-8",
-                             errors="replace", env=entry.get("env") or None,
+                             errors="replace", env={"PYTHONIOENCODING": "utf-8", **(entry.get("env") or os.environ)},
                              creationflags=flags)
     except OSError as exc:
         return 127, str(exc)
@@ -322,6 +358,26 @@ def start(action, topic=None):
         try:
             if action == "scan-items":
                 result = scan_items(progress)
+            elif action == "scan-addons":
+                report = addon_review.scan(progress)
+                count = sum(row["state"] == "changed" for row in report["rows"])
+                result = {"message": "插件检查完成，%d 份快照有事实差异" % count}
+            elif action == "apply-addon":
+                result = addon_review.apply(topic)
+            elif action == "merge-addon-dungeons":
+                steps = (
+                    [NODE, "tools/merge-addon-dungeon-loot.js"],
+                    [sys.executable, "tools/merge-dungeon-geo.py"],
+                    [NODE, "tools/build-data.js"],
+                )
+                logs = []
+                for cmd in steps:
+                    code, out = _stream_run({"cmd": cmd, "timeout": 300,
+                                             "env": dict(os.environ, PYTHONIOENCODING="utf-8")}, jid, progress)
+                    if code:
+                        raise RuntimeError("副本成品合并或校验失败。\n" + out[-2500:])
+                    logs.append(out)
+                result = {"message": "副本掉落与坐标已合并，构建校验通过", "logTail": "\n".join(logs)}
             elif action == "reconcile":
                 result = reconcile(progress)
             elif action == "daily":
@@ -339,7 +395,7 @@ def start(action, topic=None):
                                         extra_args=(["--to", topic] if action == "mini-rollback" else ()))
                 if code:
                     raise RuntimeError("%s 没跑成（rc=%d）。\n%s" % (entry["label"], code, out[-1500:]))
-                if entry.get("gate"):
+                if entry.get("gate") and action != "mini-assets":
                     # 闸门步成功才记账；批次号从输出里捞（upload/rollback/deploy 都会打出它）
                     m = re.search(r"\b([a-f0-9]{12})\b", out)
                     ledger_append("mini" if action.startswith("mini") else "web",
@@ -349,6 +405,13 @@ def start(action, topic=None):
                 result = {"message": entry["label"] + "通过，未自动做下一步", "logTail": out}
             else:
                 result = refresh(topic, progress)
+                if action == "refresh-and-sync":
+                    progress("正在把最新数据增量同步至 MacBook...")
+                    code_s, out_s = _stream_run(PIPELINE["sync-mac"], jid, progress)
+                    if code_s:
+                        raise RuntimeError("Windows 刷新已完成，但同步至 MacBook 失败：\n" + out_s[-1500:])
+                    result["message"] = (result.get("message") or "刷新完成") + "；已同步至 MacBook"
+                    result["logTail"] = ((result.get("logTail") or "") + "\n" + out_s)[-64000:]
             with lock:
                 jobs[jid].update(state="done", result=result, progress="完成")
         except Exception as exc:

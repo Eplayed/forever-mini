@@ -2,7 +2,7 @@
  "meta": {
   "source": "https://wowforever.wclbox.com/fuben",
   "site": "新手盒子 · 魔兽世界无限数据库",
-  "scrapedAt": "2026-11-05",
+  "scrapedAt": "2026-11-23",
   "method": "tools/scrape-wclbox.py --what dungeons --write",
   "took": "名单/等级区间/新本标记/BOSS 名/掉落归属/物品 ID/图标文件名；不取描述文案与攻略"
  },
@@ -2660,20 +2660,20 @@
      "quality": 3
     },
     {
+     "itemId": "10760",
+     "iconKey": "inv_gauntlets_23",
+     "nameCn": "野猪之拳",
+     "bossId": "plaguemaw-the-rotting",
+     "bossCn": "腐烂的普雷莫尔",
+     "quality": 3
+    },
+    {
      "itemId": "10766",
      "iconKey": "inv_wand_03",
      "nameCn": "瘟疫短枝",
      "bossId": "plaguemaw-the-rotting",
      "bossCn": "腐烂的普雷莫尔",
      "quality": 3
-    },
-    {
-     "itemId": "10760",
-     "iconKey": "inv_gauntlets_23",
-     "nameCn": "野猪之拳",
-     "bossId": "plaguemaw-the-rotting",
-     "bossCn": "腐烂的普雷莫尔",
-     "quality": 2
     },
     {
      "itemId": "10769",
@@ -3419,20 +3419,20 @@
      "quality": 1
     },
     {
+     "itemId": "9467",
+     "iconKey": "inv_misc_monsterfang_01",
+     "nameCn": "加兹瑞拉之牙",
+     "bossId": "gahz-rilla",
+     "bossCn": "加兹瑞拉",
+     "quality": 3
+    },
+    {
      "itemId": "9469",
      "iconKey": "inv_chest_chain_06",
      "nameCn": "加兹瑞拉鳞片护甲",
      "bossId": "gahz-rilla",
      "bossCn": "加兹瑞拉",
      "quality": 3
-    },
-    {
-     "itemId": "9467",
-     "iconKey": "inv_misc_monsterfang_01",
-     "nameCn": "加兹瑞拉之牙",
-     "bossId": "gahz-rilla",
-     "bossCn": "加兹瑞拉",
-     "quality": 2
     },
     {
      "itemId": "14270",
@@ -3904,7 +3904,7 @@
      "nameCn": "绿瘤束带",
      "bossId": "razorlash",
      "bossCn": "锐刺鞭笞者",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "17751",
@@ -3912,7 +3912,7 @@
      "nameCn": "藤蔓护腿",
      "bossId": "razorlash",
      "bossCn": "锐刺鞭笞者",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "4808",
@@ -4329,7 +4329,7 @@
      "nameCn": "奥戈姆之刃",
      "bossId": "ogom-the-wretched",
      "bossCn": "可悲的奥戈姆",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "10804",
@@ -4337,7 +4337,7 @@
      "nameCn": "诅咒之拳",
      "bossId": "ogom-the-wretched",
      "bossCn": "可悲的奥戈姆",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "10805",
@@ -4345,7 +4345,7 @@
      "nameCn": "食尸者",
      "bossId": "ogom-the-wretched",
      "bossCn": "可悲的奥戈姆",
-     "quality": 2
+     "quality": 3
     }
    ],
    "lootSourceNote": "首领名单取自无限客户端；谁掉落什么、掉落几率取自经典旧世的开放数据库，物品名称与图标取自客户端。标记为“新增”的是无限新加的物品。暴雪表示重新调整过地下城掉落，正式开放时可能有变化。"
@@ -5564,6 +5564,22 @@
    ],
    "drops": [
     {
+     "itemId": "18306",
+     "iconKey": "inv_gauntlets_22",
+     "nameCn": "暗影迷雾手套",
+     "bossId": "zevrim-thornhoof",
+     "bossCn": "瑟雷姆·刺蹄",
+     "quality": 3
+    },
+    {
+     "itemId": "18308",
+     "iconKey": "inv_helmet_51",
+     "nameCn": "聪明帽",
+     "bossId": "zevrim-thornhoof",
+     "bossCn": "瑟雷姆·刺蹄",
+     "quality": 3
+    },
+    {
      "itemId": "18313",
      "iconKey": "inv_helmet_19",
      "nameCn": "警觉头盔",
@@ -5588,20 +5604,20 @@
      "quality": 3
     },
     {
-     "itemId": "18306",
-     "iconKey": "inv_gauntlets_22",
-     "nameCn": "暗影迷雾手套",
-     "bossId": "zevrim-thornhoof",
-     "bossCn": "瑟雷姆·刺蹄",
-     "quality": 2
+     "itemId": "18305",
+     "iconKey": "inv_pants_04",
+     "nameCn": "破水护腿",
+     "bossId": "hydrospawn",
+     "bossCn": "海多斯博恩",
+     "quality": 3
     },
     {
-     "itemId": "18308",
-     "iconKey": "inv_helmet_51",
-     "nameCn": "聪明帽",
-     "bossId": "zevrim-thornhoof",
-     "bossCn": "瑟雷姆·刺蹄",
-     "quality": 2
+     "itemId": "18307",
+     "iconKey": "inv_boots_05",
+     "nameCn": "破潮软鞋",
+     "bossId": "hydrospawn",
+     "bossCn": "海多斯博恩",
+     "quality": 3
     },
     {
      "itemId": "18317",
@@ -5628,22 +5644,6 @@
      "quality": 3
     },
     {
-     "itemId": "18305",
-     "iconKey": "inv_pants_04",
-     "nameCn": "破水护腿",
-     "bossId": "hydrospawn",
-     "bossCn": "海多斯博恩",
-     "quality": 2
-    },
-    {
-     "itemId": "18307",
-     "iconKey": "inv_boots_05",
-     "nameCn": "破潮软鞋",
-     "bossId": "hydrospawn",
-     "bossCn": "海多斯博恩",
-     "quality": 2
-    },
-    {
      "itemId": "19268",
      "iconKey": "inv_misc_ticket_tarot_elemental_01",
      "nameCn": "元素之一",
@@ -5660,6 +5660,22 @@
      "quality": 1
     },
     {
+     "itemId": "18301",
+     "iconKey": "inv_wand_06",
+     "nameCn": "蕾瑟塔蒂丝的魔杖",
+     "bossId": "lethtendris",
+     "bossCn": "蕾瑟塔蒂丝",
+     "quality": 3
+    },
+    {
+     "itemId": "18302",
+     "iconKey": "inv_jewelry_ring_20",
+     "nameCn": "活力指环",
+     "bossId": "lethtendris",
+     "bossCn": "蕾瑟塔蒂丝",
+     "quality": 3
+    },
+    {
      "itemId": "18325",
      "iconKey": "inv_helmet_31",
      "nameCn": "魔皮软帽",
@@ -5674,22 +5690,6 @@
      "bossId": "lethtendris",
      "bossCn": "蕾瑟塔蒂丝",
      "quality": 3
-    },
-    {
-     "itemId": "18301",
-     "iconKey": "inv_wand_06",
-     "nameCn": "蕾瑟塔蒂丝的魔杖",
-     "bossId": "lethtendris",
-     "bossCn": "蕾瑟塔蒂丝",
-     "quality": 2
-    },
-    {
-     "itemId": "18302",
-     "iconKey": "inv_jewelry_ring_20",
-     "nameCn": "活力指环",
-     "bossId": "lethtendris",
-     "bossCn": "蕾瑟塔蒂丝",
-     "quality": 2
     },
     {
      "itemId": "18426",
@@ -6547,7 +6547,7 @@
      "nameCn": "克雷格的杯子",
      "bossId": "stomper-kreeg",
      "bossCn": "践踏者克雷格",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "18450",
@@ -6820,6 +6820,22 @@
    ],
    "drops": [
     {
+     "itemId": "18352",
+     "iconKey": "inv_shield_18",
+     "nameCn": "石化树皮盾牌",
+     "bossId": "tendris-warpwood",
+     "bossCn": "特迪斯·扭木",
+     "quality": 3
+    },
+    {
+     "itemId": "18353",
+     "iconKey": "inv_staff_08",
+     "nameCn": "石花法杖",
+     "bossId": "tendris-warpwood",
+     "bossCn": "特迪斯·扭木",
+     "quality": 3
+    },
+    {
      "itemId": "18390",
      "iconKey": "inv_pants_14",
      "nameCn": "苔藓护腿",
@@ -6836,20 +6852,20 @@
      "quality": 3
     },
     {
-     "itemId": "18352",
-     "iconKey": "inv_shield_18",
-     "nameCn": "石化树皮盾牌",
-     "bossId": "tendris-warpwood",
-     "bossCn": "特迪斯·扭木",
-     "quality": 2
+     "itemId": "18347",
+     "iconKey": "inv_axe_11",
+     "nameCn": "精衡战斧",
+     "bossId": "illyanna-ravenoak",
+     "bossCn": "伊琳娜·暗木",
+     "quality": 3
     },
     {
-     "itemId": "18353",
-     "iconKey": "inv_staff_08",
-     "nameCn": "石花法杖",
-     "bossId": "tendris-warpwood",
-     "bossCn": "特迪斯·扭木",
-     "quality": 2
+     "itemId": "18349",
+     "iconKey": "inv_gauntlets_12",
+     "nameCn": "精准护手",
+     "bossId": "illyanna-ravenoak",
+     "bossCn": "伊琳娜·暗木",
+     "quality": 3
     },
     {
      "itemId": "18383",
@@ -6876,20 +6892,20 @@
      "quality": 2
     },
     {
-     "itemId": "18347",
-     "iconKey": "inv_axe_11",
-     "nameCn": "精衡战斧",
-     "bossId": "illyanna-ravenoak",
-     "bossCn": "伊琳娜·暗木",
-     "quality": 2
+     "itemId": "18350",
+     "iconKey": "inv_misc_cape_18",
+     "nameCn": "魔法增幅披风",
+     "bossId": "magister-kalendris",
+     "bossCn": "卡雷迪斯镇长",
+     "quality": 3
     },
     {
-     "itemId": "18349",
-     "iconKey": "inv_gauntlets_12",
-     "nameCn": "精准护手",
-     "bossId": "illyanna-ravenoak",
-     "bossCn": "伊琳娜·暗木",
-     "quality": 2
+     "itemId": "18351",
+     "iconKey": "inv_bracer_18",
+     "nameCn": "魔法封印护腕",
+     "bossId": "magister-kalendris",
+     "bossCn": "卡雷迪斯镇长",
+     "quality": 3
     },
     {
      "itemId": "18371",
@@ -6914,22 +6930,6 @@
      "bossId": "magister-kalendris",
      "bossCn": "卡雷迪斯镇长",
      "quality": 3
-    },
-    {
-     "itemId": "18350",
-     "iconKey": "inv_misc_cape_18",
-     "nameCn": "魔法增幅披风",
-     "bossId": "magister-kalendris",
-     "bossCn": "卡雷迪斯镇长",
-     "quality": 2
-    },
-    {
-     "itemId": "18351",
-     "iconKey": "inv_bracer_18",
-     "nameCn": "魔法封印护腕",
-     "bossId": "magister-kalendris",
-     "bossCn": "卡雷迪斯镇长",
-     "quality": 2
     },
     {
      "itemId": "22309",
@@ -7156,20 +7156,12 @@
      "quality": 3
     },
     {
-     "itemId": "18387",
-     "iconKey": "inv_gauntlets_16",
-     "nameCn": "火花手套",
-     "bossId": "tsu-zee",
-     "bossCn": "苏斯",
-     "quality": 3
-    },
-    {
      "itemId": "18345",
      "iconKey": "inv_jewelry_ring_15",
      "nameCn": "低语戒指",
      "bossId": "tsu-zee",
      "bossCn": "苏斯",
-     "quality": 2
+     "quality": 3
     },
     {
      "itemId": "18346",
@@ -7177,7 +7169,15 @@
      "nameCn": "无丝长裤",
      "bossId": "tsu-zee",
      "bossCn": "苏斯",
-     "quality": 2
+     "quality": 3
+    },
+    {
+     "itemId": "18387",
+     "iconKey": "inv_gauntlets_16",
+     "nameCn": "火花手套",
+     "bossId": "tsu-zee",
+     "bossCn": "苏斯",
+     "quality": 3
     }
    ],
    "lootSourceNote": "首领名单取自无限客户端；谁掉落什么、掉落几率取自经典旧世的开放数据库，物品名称与图标取自客户端。标记为“新增”的是无限新加的物品。暴雪表示重新调整过地下城掉落，正式开放时可能有变化。"
@@ -8576,6 +8576,38 @@
      "quality": 3
     },
     {
+     "itemId": "13535",
+     "iconKey": "inv_chest_cloth_47",
+     "nameCn": "冰冷幻影长袍",
+     "bossId": "baroness-anastari",
+     "bossCn": "安娜丝塔丽男爵夫人",
+     "quality": 3
+    },
+    {
+     "itemId": "13537",
+     "iconKey": "inv_bracer_07",
+     "nameCn": "冰鳞护腕",
+     "bossId": "baroness-anastari",
+     "bossCn": "安娜丝塔丽男爵夫人",
+     "quality": 3
+    },
+    {
+     "itemId": "13538",
+     "iconKey": "inv_shoulder_13",
+     "nameCn": "寒风肩铠",
+     "bossId": "baroness-anastari",
+     "bossCn": "安娜丝塔丽男爵夫人",
+     "quality": 3
+    },
+    {
+     "itemId": "13539",
+     "iconKey": "inv_gauntlets_29",
+     "nameCn": "女妖之触",
+     "bossId": "baroness-anastari",
+     "bossCn": "安娜丝塔丽男爵夫人",
+     "quality": 3
+    },
+    {
      "itemId": "16704",
      "iconKey": "inv_boots_05",
      "nameCn": "鬼雾便鞋",
@@ -8616,41 +8648,41 @@
      "quality": 2
     },
     {
-     "itemId": "13535",
-     "iconKey": "inv_chest_cloth_47",
-     "nameCn": "冰冷幻影长袍",
-     "bossId": "baroness-anastari",
-     "bossCn": "安娜丝塔丽男爵夫人",
-     "quality": 2
-    },
-    {
-     "itemId": "13537",
-     "iconKey": "inv_bracer_07",
-     "nameCn": "冰鳞护腕",
-     "bossId": "baroness-anastari",
-     "bossCn": "安娜丝塔丽男爵夫人",
-     "quality": 2
-    },
-    {
-     "itemId": "13538",
-     "iconKey": "inv_shoulder_13",
-     "nameCn": "寒风肩铠",
-     "bossId": "baroness-anastari",
-     "bossCn": "安娜丝塔丽男爵夫人",
-     "quality": 2
-    },
-    {
-     "itemId": "13539",
-     "iconKey": "inv_gauntlets_29",
-     "nameCn": "女妖之触",
-     "bossId": "baroness-anastari",
-     "bossCn": "安娜丝塔丽男爵夫人",
-     "quality": 2
-    },
-    {
      "itemId": "13529",
      "iconKey": "inv_shield_02",
      "nameCn": "奈鲁布恩坎的壳",
+     "bossId": "nerub-enkan",
+     "bossCn": "奈鲁布恩坎",
+     "quality": 3
+    },
+    {
+     "itemId": "13530",
+     "iconKey": "inv_boots_05",
+     "nameCn": "蛛牙长靴",
+     "bossId": "nerub-enkan",
+     "bossCn": "奈鲁布恩坎",
+     "quality": 3
+    },
+    {
+     "itemId": "13531",
+     "iconKey": "inv_pants_09",
+     "nameCn": "地穴行者护腿",
+     "bossId": "nerub-enkan",
+     "bossCn": "奈鲁布恩坎",
+     "quality": 3
+    },
+    {
+     "itemId": "13532",
+     "iconKey": "inv_gauntlets_31",
+     "nameCn": "黑暗蛛爪",
+     "bossId": "nerub-enkan",
+     "bossCn": "奈鲁布恩坎",
+     "quality": 3
+    },
+    {
+     "itemId": "13533",
+     "iconKey": "inv_shoulder_18",
+     "nameCn": "酸蚀肩甲",
      "bossId": "nerub-enkan",
      "bossCn": "奈鲁布恩坎",
      "quality": 3
@@ -8696,41 +8728,41 @@
      "quality": 2
     },
     {
-     "itemId": "13530",
-     "iconKey": "inv_boots_05",
-     "nameCn": "蛛牙长靴",
-     "bossId": "nerub-enkan",
-     "bossCn": "奈鲁布恩坎",
-     "quality": 2
-    },
-    {
-     "itemId": "13531",
-     "iconKey": "inv_pants_09",
-     "nameCn": "地穴行者护腿",
-     "bossId": "nerub-enkan",
-     "bossCn": "奈鲁布恩坎",
-     "quality": 2
-    },
-    {
-     "itemId": "13532",
-     "iconKey": "inv_gauntlets_31",
-     "nameCn": "黑暗蛛爪",
-     "bossId": "nerub-enkan",
-     "bossCn": "奈鲁布恩坎",
-     "quality": 2
-    },
-    {
-     "itemId": "13533",
-     "iconKey": "inv_shoulder_18",
-     "nameCn": "酸蚀肩甲",
-     "bossId": "nerub-enkan",
-     "bossCn": "奈鲁布恩坎",
-     "quality": 2
-    },
-    {
      "itemId": "13524",
      "iconKey": "inv_misc_bone_humanskull_01",
      "nameCn": "燃魂之颅",
+     "bossId": "maleki-the-pallid",
+     "bossCn": "苍白的玛勒基",
+     "quality": 3
+    },
+    {
+     "itemId": "13525",
+     "iconKey": "inv_gauntlets_15",
+     "nameCn": "暗缚之指",
+     "bossId": "maleki-the-pallid",
+     "bossCn": "苍白的玛勒基",
+     "quality": 3
+    },
+    {
+     "itemId": "13526",
+     "iconKey": "inv_belt_09",
+     "nameCn": "火痕束带",
+     "bossId": "maleki-the-pallid",
+     "bossCn": "苍白的玛勒基",
+     "quality": 3
+    },
+    {
+     "itemId": "13527",
+     "iconKey": "inv_boots_plate_09",
+     "nameCn": "熔岩行者胫甲",
+     "bossId": "maleki-the-pallid",
+     "bossCn": "苍白的玛勒基",
+     "quality": 3
+    },
+    {
+     "itemId": "13528",
+     "iconKey": "inv_bracer_16",
+     "nameCn": "暮色虚空护腕",
      "bossId": "maleki-the-pallid",
      "bossCn": "苍白的玛勒基",
      "quality": 3
@@ -8779,38 +8811,6 @@
      "itemId": "13509",
      "iconKey": "inv_misc_rune_03",
      "nameCn": "预知之眼",
-     "bossId": "maleki-the-pallid",
-     "bossCn": "苍白的玛勒基",
-     "quality": 2
-    },
-    {
-     "itemId": "13525",
-     "iconKey": "inv_gauntlets_15",
-     "nameCn": "暗缚之指",
-     "bossId": "maleki-the-pallid",
-     "bossCn": "苍白的玛勒基",
-     "quality": 2
-    },
-    {
-     "itemId": "13526",
-     "iconKey": "inv_belt_09",
-     "nameCn": "火痕束带",
-     "bossId": "maleki-the-pallid",
-     "bossCn": "苍白的玛勒基",
-     "quality": 2
-    },
-    {
-     "itemId": "13527",
-     "iconKey": "inv_boots_plate_09",
-     "nameCn": "熔岩行者胫甲",
-     "bossId": "maleki-the-pallid",
-     "bossCn": "苍白的玛勒基",
-     "quality": 2
-    },
-    {
-     "itemId": "13528",
-     "iconKey": "inv_bracer_16",
-     "nameCn": "暮色虚空护腕",
      "bossId": "maleki-the-pallid",
      "bossCn": "苍白的玛勒基",
      "quality": 2

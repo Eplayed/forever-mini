@@ -20,6 +20,7 @@
 #   tools/refresh.sh official    # 官方中文稿重抽（技能四态 + 种族）
 #   tools/refresh.sh icons       # 只补素材（图标映射 + 官方 CDN + 缺口审计）
 #   tools/refresh.sh art         # 只补原画（职业背景 / 副本载入 / 小地图 / 种族头像 / 阵营城市）
+#   tools/refresh.sh census      # 更新 Everloot 近七天人口汇总（国服大脚从小程序人工核对）
 #   tools/refresh.sh status      # 数据体检：还缺什么、哪些我们能补、哪些只能等（报告，不是门禁）
 #   tools/refresh.sh addons      # 插件层只抽取（GI / XR / DF 的原件从 addons_root 现读的位置）
 #   tools/refresh.sh addons-merge# 插件快照并进成品（必须排在各板块场景之后）
@@ -46,7 +47,6 @@ gate() {
     printf '\n\033[33m▶ 门禁本轮跳过（WOW_SKIP_GATE=1），由 daily 在全部场景跑完后统一过一次\033[0m\n'
     return 0
   fi
-  run node tools/build-data.js
   run python3 tools/build-icon-map.py
   run node tools/build-data.js
   run python3 tools/audit-translations.py --strict
@@ -61,6 +61,9 @@ gate() {
 }
 
 case "${1:-}" in
+  census)
+    run python3 tools/refresh-census.py
+    ;;
   world)
     run python3 tools/scrape-wclbox-shuju.py
     run node tools/merge-world.js
@@ -74,10 +77,7 @@ case "${1:-}" in
   prof)
     run python3 tools/scrape-wclbox-prof.py --write
     run node tools/merge-professions.js
-    # 商人与图纸掉落来自 XR 那份插件（原件在仓库外 .scratch/wow），顺序不能倒：
-    # merge-professions.js 会整表重写配方，先并后 merge 会被冲掉
-    run python3 tools/extract-xr-prof.py
-    run python3 tools/merge-prof-sources.py
+    # 专业生成器会在替换成品前并入已归档的商人与图纸来源。
     gate
     ;;
   dungeons)
@@ -178,19 +178,16 @@ case "${1:-}" in
     run python3 tools/extract-df-geo.py
     run python3 tools/extract-df-loot.py
     run python3 tools/extract-df-bis.py
-    run python3 tools/extract-gi-macros.py
     run python3 tools/extract-gi-pets.py
+    run python3 tools/extract-gi-macros.py
     run python3 tools/extract-gi-item-existence.py
     run python3 tools/extract-gi-dungeon-quests.py
     run python3 tools/extract-gi-prof-recipes.py
-    run python3 tools/extract-xr-zonemap.py
-    run python3 tools/extract-xr-boss-model.py
-    run python3 tools/extract-xr-prof.py
-    run python3 tools/extract-addon-items-detail.py
-    run python3 tools/extract-addon-bis.py
+    # XR 已退役。extract-gi-macros.py 已在缺 XR 时改用 GI 内置 MacroSpellNames 烘名。
     ;;
   addons-merge)
     # 插件快照并进成品。排在 world/dungeons/prof/talents 之后跑，顺序不能倒
+    run node tools/merge-addon-dungeon-loot.js
     run python3 tools/merge-dungeon-geo.py
     run python3 tools/merge-items-detail.py
     run python3 tools/merge-dungeon-quests.py

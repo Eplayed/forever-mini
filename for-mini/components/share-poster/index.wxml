@@ -1,0 +1,35 @@
+<view class="sp-mask" wx:if="{{visible}}" bindtap="close" catchtouchmove="noop"></view>
+<view class="sp-sheet" wx:if="{{visible}}">
+  <view class="sp-head">
+    <view class="sp-head-left">
+      <text class="sp-title">{{titleText}}</text>
+      <text class="sp-sub" wx:if="{{totalPages > 1}}">第 {{pageIndex + 1}} / {{totalPages}} 张</text>
+    </view>
+    <view class="sp-close" aria-role="button" aria-label="关闭分享图" bindtap="close">×</view>
+  </view>
+
+  <view class="sp-stage">
+    <image wx:if="{{previewUrl}}" class="sp-img" src="{{previewUrl}}" mode="widthFix" bindtap="previewImage" />
+    <view wx:elif="{{errorText}}" class="sp-state">
+      <text class="sp-err">{{errorText}}</text>
+      <button size="mini" class="sp-btn sp-btn-gold" bindtap="retryRender">重试生成</button>
+    </view>
+    <view wx:else class="sp-state">
+      <text class="sp-loading">正在生成高清长图…</text>
+    </view>
+  </view>
+
+  <view class="sp-pager" wx:if="{{totalPages > 1}}">
+    <button size="mini" class="sp-btn" disabled="{{pageIndex <= 0 || rendering}}" bindtap="prevPage">上一张</button>
+    <text class="sp-page-num">{{pageIndex + 1}} / {{totalPages}}</text>
+    <button size="mini" class="sp-btn" disabled="{{pageIndex >= totalPages - 1 || rendering}}" bindtap="nextPage">下一张</button>
+  </view>
+
+  <view class="sp-actions">
+    <button size="mini" class="sp-btn" disabled="{{!previewUrl}}" bindtap="previewImage">预览长按转发</button>
+    <button size="mini" class="sp-btn sp-btn-gold" disabled="{{!previewUrl || saving}}" bindtap="saveToAlbum">{{saving ? '保存中…' : '保存到相册发群'}}</button>
+  </view>
+  <view class="sp-tip">保存后可直接发到微信开黑群，无需对方提前关注</view>
+</view>
+
+<canvas type="2d" id="posterCanvas" class="sp-canvas" style="width:{{canvasW}}px;height:{{canvasH}}px;"></canvas>

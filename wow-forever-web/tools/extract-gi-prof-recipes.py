@@ -183,6 +183,7 @@ def lua_list(s):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src")
+    ap.add_argument("--out-dir", default=UP)
     ap.add_argument("--show", action="store_true")
     a = ap.parse_args()
     src = resolve_src(a.src)
@@ -249,11 +250,10 @@ def main():
         },
         "recipes": {k: recipes[k] for k in sorted(recipes)},
     }
-    if not os.path.isdir(UP):
-        os.makedirs(UP)
-    p = os.path.join(UP, "gi-prof-recipes.json")
+    os.makedirs(a.out_dir, exist_ok=True)
+    p = os.path.join(a.out_dir, "gi-prof-recipes.json")
     io.open(p, "w", encoding="utf-8").write(json.dumps(snap, ensure_ascii=False, indent=1) + "\n")
-    print("写 %s（%.1f KB）" % (os.path.relpath(p, WEB), os.path.getsize(p) / 1024.0))
+    print("写 %s（%.1f KB）" % (p, os.path.getsize(p) / 1024.0))
 
 
 if __name__ == "__main__":

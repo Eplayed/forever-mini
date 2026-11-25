@@ -59,7 +59,7 @@ export const MIGRATED = {
 };
 
 const routes = [
-  { path: '/', name: 'home', component: HomePage, meta: { title: '《魔兽世界：无限》中文资料' } },
+  { path: '/', name: 'home', component: HomePage, meta: { title: '跑本集合石 · 无限服资料' } },
   { path: '/world', name: 'world', component: WorldPage, meta: { title: '世界：区域、稀有与书' } },
   { path: '/classes', name: 'classes', component: ClassesPage, meta: { title: '职业：三系、技能变化与可选种族' } },
   { path: '/talent', name: 'talent', component: TalentPage, meta: { title: '天赋计算器' } },

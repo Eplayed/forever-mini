@@ -104,6 +104,38 @@ def apply_xr_values(races, today):
     return hit, miss
 
 
+def apply_launch_values(races):
+    """按正式客户端覆盖现值，保留旧公告、插件值及相应来源。"""
+    overlay_path = os.path.join(DATA, "upstream", "db2-racials.json")
+    with io.open(overlay_path, encoding="utf-8") as src:
+        overlay = json.load(src)
+    meta = overlay["meta"]
+    race_by_id = {race["id"]: race for race in races}
+    for race_id, updates in overlay["races"].items():
+        race = race_by_id[race_id]
+        traits = race.get("traits") or race["subgroup"]["traits"]
+        for old_name, row in updates.items():
+            index = next((i for i, t in enumerate(traits)
+                          if t.get("previousTrait", t)["name"] == old_name), None)
+            if index is None:
+                raise ValueError("正式客户端覆盖找不到原条目：" + race_id + "/" + old_name)
+            previous = traits[index].get("previousTrait", traits[index])
+            value_source = dict(meta, spellIds=row["spellIds"])
+            if row.get("notesEffect"):
+                value_source["notesEffect"] = row["notesEffect"]
+            traits[index] = {
+                "name": row.get("name", old_name),
+                "passive": previous["passive"],
+                "effect": row["effect"],
+                "iconKey": row.get("iconKey", previous.get("iconKey")),
+                "level": "L2" if row.get("notesEffect") else "L1",
+                "valueVia": "launch-client",
+                "valueSource": value_source,
+                "previousTrait": previous
+            }
+    return dict(meta, updated=sum(map(len, overlay["races"].values())))
+
+
 # 图标文件名取自第三方资料站的种族页（事实性标识符），图片字节由 tools/fetch-icons.py 从暴雪官方 CDN 取。
 # 官方中文公告本身不含图标文件名。资料站用的 race_scourge_male / race_nightelf_male 在官方 CDN 上是 403，
 # 亡灵改用官方 CDN 实存的 race_undead_male，暗夜精灵暂时取不到 → 留空，界面用自绘块。
@@ -292,11 +324,10 @@ def link_glossary(races):
     gl = json.loads(io.open(path, encoding="utf-8").read())
     owner = {}
     for r in races:
-        for t in r.get("traits") or []:
-            owner.setdefault(norm(t["name"]), set()).add(r["id"])
         sg = r.get("subgroup") or {}
-        for t in sg.get("traits") or []:
-            owner.setdefault(norm(t["name"]), set()).add(r["id"])
+        for t in (r.get("traits") or []) + (sg.get("traits") or []):
+            name = t.get("previousTrait", t)["name"]
+            owner.setdefault(norm(name), set()).add(r["id"])
     today = datetime.date.today().isoformat()
     changed, orphans = 0, []
     for it in gl["items"]:
@@ -465,6 +496,7 @@ def main():
     if xr_miss:
         raise SystemExit(u"覆盖表里有 %d 个键在这份官方页上找不到，先修表别静默跳过：%s"
                          % (len(xr_miss), u"、".join(xr_miss)))
+    launch_overlay = apply_launch_values(races)
 
     payload = {
         "meta": {
@@ -482,14 +514,14 @@ def main():
                 "overridden": len(XR_VALUE_OVERRIDES)
             },
             "sources": [{"url": URL, "label": LABEL}],
+            "launchOverlay": launch_overlay,
             "notCollected": [
                 u"英文原名：官方中文公告未给出，逐词硬造等于编造，一律留空",
                 u"阵营之外的可选种族：血精灵、兽人萨满之外的经典旧世组合等，官方本页没提就是没提",
-                u"种族数值平衡与实测改动：Beta 阶段官方只给描述句，不做推算",
+                u"正式客户端与公告差异的实测结果：待游戏内复核",
                 u"种族图标：暴雪官方 CDN 只查得到 7 个种族的图标键（亡灵用 race_undead_male，资料站用的 race_scourge_male 在 CDN 上是 403）；"
                 u"暗夜精灵与天裔取不到，继续用自绘块。另注：CDN 只有 race_*_male 男性图标键，女性角色图标未单独收录",
-                u"种族特长图标：40 条里 38 条拿到键（配对来自参考站的客户端解包，未逐条进游戏核对）；"
-                u"兽人的血性狂怒与斧类武器专精在该页上没出现，留空用自绘块，不靠猜配图标"
+                u"种族特长图标沿用本地目录。正式客户端替换的特长按客户端文件标识匹配"
             ]
         },
         "factions": [

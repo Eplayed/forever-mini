@@ -2,6 +2,7 @@
   "navigationBarTitleText": "BIS配装",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "icon-cell": "/components/icon-cell/index"
+    "icon-cell": "/components/icon-cell/index",
+    "share-poster": "/components/share-poster/index"
   }
 }

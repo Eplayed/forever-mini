@@ -80,6 +80,7 @@ function addGearBatch(items) {
       id,
       name: item.name || '#' + id,
       quality: item.quality == null ? '' : item.quality,
+      iconUrl: item.iconUrl || '',
       dungeonId: item.dungeonId || '',
       dungeon: item.dungeon || '',
       boss: item.boss || '',

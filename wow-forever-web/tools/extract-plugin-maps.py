@@ -26,15 +26,25 @@ except ImportError:
     sys.exit('需要 Pillow（转 .tga → .webp）：pip3 install pillow')
 
 HOME = os.path.expanduser('~')
-DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(WEB, "app", "img", 'art', 'dungeonmaps')
 
-# 站内副本 id → 插件里那张底图。别名对不上的一律留空，不猜。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    from addons_root import resolve as resolve_addon_root, export_root as resolve_export_root
+    DEF_SRC = resolve_addon_root('DungeonsForever')
+    DEF_EXPORT = resolve_export_root()
+except Exception:
+    DEF_SRC = os.path.join(HOME, 'Documents', 'project', '.scratch', 'wow')
+    DEF_EXPORT = os.path.join(DEF_SRC, 'ziliao-export')
+
+# 站内副本 id → 插件或本机客户端导出的那张底图。别名对不上的一律留空，不猜。
 # 两处容易搞错的：站内 razor-krendor 写的是「剃刀高地」＝Razorfen Downs → dmap_rfndowns；
 # razorfen-kraul 是「剃刀沼泽」＝Razorfen Kraul → dmap_rfnkraul。
 MAP = {
+    'alcaz-prison': 'DF/AlcazPrison',
     'blackfathom-deeps': 'XR/dmap_blackfathom',
+    'blackmaw-hold': 'DF/BlackmawHold',
     'blackrock-depths': 'XR/dmap_brd',
     'city-of-dalaran': 'DF/Dalaran',
     'deathmine': 'XR/dmap_deadmines',
@@ -43,8 +53,10 @@ MAP = {
     'dire-maul-west': 'XR/dmap_dm_west',
     'gnomeregan': 'XR/dmap_gnomeregan',
     'hall-of-thanes': 'DF/HallOfThanes',
+    'kroldok-stronghold': 'DF/KroldokStronghold',
     'lower-blackrock-spire': 'XR/dmap_lbrs',
     'maraudon': 'XR/dmap_maraudon',
+    'onyxias-lair': 'CLIENT/249_1',
     'ragefire-chasm': 'XR/dmap_ragefire',
     'razor-krendor': 'XR/dmap_rfndowns',
     'razorfen-kraul': 'XR/dmap_rfnkraul',
@@ -55,9 +67,11 @@ MAP = {
     'scarlet-monastery-library': 'XR/dmap_sm_lib',
     'scholomance': 'XR/dmap_scholomance',
     'shadowfang-keep': 'XR/dmap_shadowfangkeep',
+    'shapers-terrace': 'DF/ShapersTerrace',
     'stratholme-main-gate': 'XR/dmap_strat',
     'stratholme-service-gate': 'XR/dmap_strat',
     'sunken-temple': 'XR/dmap_sunken_temple',
+    'the-drowned-city': 'DF/TheDrownedCity',
     'the-stocks': 'XR/dmap_stockade',
     'uldaman': 'XR/dmap_uldaman',
     'upper-blackrock-spire': 'XR/dmap_ubrs',
@@ -67,16 +81,20 @@ MAP = {
 }
 
 PREFIX = {'XR': 'XR_DungeonGuide/Media/DungeonMaps', 'DF': 'DungeonsForever/Media/Maps'}
+CLIENT_FLOOR_BOX = (0, 0, 1002, 668)  # 与 build-zone-maps.py 实测内容盒一致，裁掉 1024×768 右下黑边
 
-# 这两批图不是一类东西，必须分开记（2026-10-19 逐目录看过作者自己的注释才确认的）：
+# 这三批图不是一类东西，必须分开记：
 #   XR 的 Media/DungeonMaps —— XR_DungeonGuide/Data_DungeonMaps.lua 文件头第一行写着
 #     "粉丝整理 31 张实截图；512²/192色 TGA-RLE"，也就是**游戏里那张副本地图的截图**，
 #     内容是官方的，文件是作者加工出来的（还写过一次修 BGR 反色的教训）。
-#   DF 的 Media/Maps —— 领主大厅 / 洛丹伦废墟 / 挖掘场 / 达拉然 / 哀嚎洞穴 五张，
-#     这几座无限新增本游戏内没有底图，是**插件作者自己画的示意图**
-#     （同样的文件 XR 也带了一份，放在 Media/CustomMaps，谁先画的判不出来）。
-ORIGIN = {'XR': ('game-capture', '游戏内副本地图的截图（内容是官方的那张图，文件由插件作者整理）'),
-          'DF': ('addon-drawn', '插件作者自绘的示意图（这几座本游戏内没有底图）')}
+#   CLIENT 的 maps-floor-2026-10-29/floors/*.png —— 本机 Forever 客户端导出的官方层图拼片（如奥妮克希亚的巢穴 249_1），
+#     同归 game-capture（画的就是游戏内那张官方副本地图）。
+#   DF 的 Media/Maps —— 无限新增本游戏内没有底图，是**插件作者自己画的示意图**。
+ORIGIN = {
+    'XR': ('game-capture', '游戏内副本地图的截图（内容是官方的那张图，文件由插件作者整理）'),
+    'CLIENT': ('game-capture', '本机无限服客户端导出的官方副本地图（裁切内容盒 1002×668 缩放）'),
+    'DF': ('addon-drawn', '插件作者自绘的示意图（这几座本游戏内没有底图）'),
+}
 
 
 def toc_version(addon_dir, name):
@@ -94,50 +112,86 @@ def toc_version(addon_dir, name):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--src', default=DEF_SRC)
+    ap.add_argument('--export', default=DEF_EXPORT)
     ap.add_argument('--dry', action='store_true', help='只报对得上多少张，不写文件')
+    ap.add_argument('--force', action='store_true', help='强制覆盖本地已有的 webp（注意 OSS 不可变素材文件名冲突）')
     a = ap.parse_args()
 
     geo = json.load(open(os.path.join(WEB, "app", "data", 'dungeon-geo.json'), encoding='utf-8'))
     need = sorted(k for k, v in (geo.get('dungeons') or {}).items() if v.get('bossPos'))
     ver = {'XR': toc_version(os.path.join(a.src, 'XR_DungeonGuide'), 'XR_DungeonGuide'),
-           'DF': toc_version(os.path.join(a.src, 'DungeonsForever'), 'DungeonsForever')}
+           'DF': toc_version(os.path.join(a.src, 'DungeonsForever'), 'DungeonsForever'),
+           'CLIENT': '1.60.1'}
     today = date.today().isoformat()
 
-    files, miss = {}, []
+    # XR_DungeonGuide 已退役，不在本机时保留 manifest 里既有且本地 webp 仍在盘上的条目，避免洗掉 24 张经典本实截图
+    prev_manifest_path = os.path.join(OUT_DIR, 'manifest.json')
+    prev_files = {}
+    if os.path.exists(prev_manifest_path):
+        prev_files = json.load(open(prev_manifest_path, encoding='utf-8')).get('files') or {}
+
+    files, miss, kept_prev = {}, [], 0
     for slug in need:
         ref = MAP.get(slug)
         if not ref:
             miss.append(slug)
             continue
         tag, stem = ref.split('/')
-        src = os.path.join(a.src, PREFIX[tag], stem + '.tga')
+        if tag == 'CLIENT':
+            src = os.path.join(a.export, 'maps-floor-2026-10-29', 'floors', stem + '.png')
+            out = slug.replace('-', '') + '.webp'
+            from_name = 'maps-floor-2026-10-29/floors/' + stem + '.png'
+            addon_name = 'WoW-Forever-Client'
+        else:
+            src = os.path.join(a.src, PREFIX[tag], stem + '.tga')
+            out = stem.lower() + '.webp'
+            from_name = stem + '.tga'
+            addon_name = 'XR_DungeonGuide' if tag == 'XR' else 'DungeonsForever'
+
         if not os.path.exists(src):
-            miss.append(slug + '（插件里没有 ' + stem + '.tga）')
+            prev = prev_files.get(slug)
+            prev_disk = prev and os.path.join(WEB, 'app', prev.get('file', ''))
+            if prev and prev_disk and os.path.exists(prev_disk):
+                files[slug] = dict(prev)
+                kept_prev += 1
+                continue
+            miss.append(slug + '（找不到原件 ' + from_name + '）')
             continue
-        out = stem.lower() + '.webp'
-        files[slug] = {'file': 'img/art/dungeonmaps/' + out, 'from': stem + '.tga',
-                       'addon': ('XR_DungeonGuide' if tag == 'XR' else 'DungeonsForever'),
-                       'addonVersion': ver[tag], 'sourcePath': src, 'fetched': today,
+
+        files[slug] = {'file': 'img/art/dungeonmaps/' + out, 'from': from_name,
+                       'addon': addon_name,
+                       'addonVersion': ver[tag], 'sourcePath': src, 'tag': tag,
+                       'fetched': today,
                        'origin': ORIGIN[tag][0], 'originNote': ORIGIN[tag][1]}
-    print('要画首领坐标的 %d 座里，插件底图能对上 %d 座；对不上 %d：%s'
-          % (len(need), len(files), len(miss), miss or '无'))
+    print('要画首领坐标的 %d 座里，底图能对上 %d 座（其中沿用既有归档 %d 座）；对不上 %d：%s'
+          % (len(need), len(files), kept_prev, len(miss), miss or '无'))
     if a.dry or not files:
         return
 
     os.makedirs(OUT_DIR, exist_ok=True)
     done = 0
     for slug, v in sorted(files.items()):
+        src_path = v.pop('sourcePath', None)
+        tag = v.pop('tag', None)
+        if not src_path:
+            done += 1
+            continue
         out = os.path.join(OUT_DIR, os.path.basename(v['file']))
-        im = Image.open(v['sourcePath'])
+        if os.path.exists(out) and not a.force:
+            im_old = Image.open(out)
+            v['pixels'] = list(im_old.size)
+            done += 1
+            continue
+        im = Image.open(src_path)
         if im.mode not in ('RGB', 'RGBA'):
             im = im.convert('RGB')
+        if tag == 'CLIENT' and im.size[0] >= CLIENT_FLOOR_BOX[2] and im.size[1] >= CLIENT_FLOOR_BOX[3]:
+            im = im.crop(CLIENT_FLOOR_BOX)
         if max(im.size) > 640:
             im.thumbnail((640, 640))
         im.save(out, 'WEBP', quality=82)
         v['pixels'] = list(im.size)
         done += 1
-    for slug, v in files.items():
-        v.pop('sourcePath', None)
     originCounts = {}
     for v in files.values():
         originCounts[v['origin']] = originCounts.get(v['origin'], 0) + 1

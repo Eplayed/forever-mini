@@ -25,10 +25,8 @@ const FLAGS_FILE = process.env.FAKE_OSS_FLAGS_FILE || '';
    （2026-10-30 接真实 3D：进页必须 0 次模型请求，点一次只取一次清单），
    在页面里自己数等于让被试对象自己报数。 */
 const LOG_FILE = process.env.FAKE_OSS_LOG || '';
-/* FAKE_OSS_POSTERS_DIR=<目录>：把 assets/models/posters/ 指到那一批渲好的底图。
-   默认素材根是网页的 app/img，而底图不在那儿（它在 oss-build/beta/posters）；
-   不给这个口子，模拟器里这一格永远 404 退回原画，截图就看不出底图到底长什么样。 */
-const POSTERS_DIR = process.env.FAKE_OSS_POSTERS_DIR || '';
+/* 路径先归一化，否则 Windows 的正斜杠目录与 path.join 的反斜杠结果对不上。 */
+const POSTERS_DIR = path.resolve(process.env.FAKE_OSS_POSTERS_DIR || path.join(ROOT, 'posters'));
 function noteHit(code, rel) {
   if (!LOG_FILE) return;
   try { fs.appendFileSync(LOG_FILE, code + ' ' + rel + '\n'); } catch (e) {}
@@ -39,7 +37,7 @@ const md5u = (b) => crypto.createHash('md5').update(b).digest('hex').toUpperCase
 const MIME = { '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png' };
 
 const server = http.createServer((req, res) => {
-  const rel = decodeURIComponent(req.url.replace(/^\/+/, '').replace(/^wow\/beta\/v1\//, ''));
+  const rel = decodeURIComponent(req.url.split('?')[0].replace(/^\/+/, '').replace(/^wow\/beta\/v1\//, ''));
   /* 素材走 app/img，批次与指针走 oss-build/beta，两条路径互不串门 */
   const isAsset = rel.indexOf('assets/') === 0;
   const isPoster = isAsset && rel.indexOf('assets/models/posters/') === 0;
@@ -49,13 +47,7 @@ const server = http.createServer((req, res) => {
      于是模拟器里这一格静默退回原画，截图看不出底图长什么样。 */
   const file = isPoster ? path.join(base || '', path.basename(rel))
     : path.join(base || '', isAsset ? rel.slice('assets/'.length) : rel);
-  if (isPoster && !POSTERS_DIR) {
-    res.writeHead(404, { 'Content-Type': 'application/xml' });
-    res.end('<Error><Code>NoPostersDir</Code></Error>');
-    noteHit(404, rel);
-    return;
-  }
-  if (!file.startsWith(base) || !fs.existsSync(file)) {
+  if (!file.startsWith(base + path.sep) || !fs.existsSync(file)) {
     noteHit(404, rel);
     res.writeHead(404, { 'Content-Type': 'application/xml' });
     res.end('<Error><Code>NoSuchKey</Code></Error>');

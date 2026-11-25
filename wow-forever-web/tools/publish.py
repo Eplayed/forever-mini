@@ -43,7 +43,8 @@ FOREIGN_BUCKET = "poe2-all-class"
 
 
 def run(cmd):
-    print("\n\033[1m▶ %s\033[0m" % " ".join(cmd))
+    shown = " ".join(cmd)
+    print("\n\033[1m▶ %s\033[0m" % shown)
     p = subprocess.run(cmd, cwd=ROOT, text=True)
     if p.returncode:
         sys.exit("这一步非 0 退出（%d），发布停在这里： %s" % (p.returncode, shown))

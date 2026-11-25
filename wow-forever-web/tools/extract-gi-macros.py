@@ -155,26 +155,35 @@ def main():
     args = ap.parse_args()
     gi_path = os.path.join(args.src, GI_FILE)
     xr_path = os.path.join(args.src, XR_FILE)
-    for p in (gi_path, xr_path):
-        if not os.path.isfile(p):
-            sys.exit('找不到源文件：%s' % p)
+    if not os.path.isfile(gi_path):
+        sys.exit('找不到源文件：%s' % gi_path)
 
     gi_text = io.open(gi_path, encoding='utf-8').read()
-    xr_text = io.open(xr_path, encoding='utf-8').read()
     gi = parse_gi(gi_text)
-    xr = parse_xr(xr_text)
+    spell_names = parse_spell_names(gi_text)
+    has_xr = os.path.isfile(xr_path)
 
-    # 结构核对：两份必须逐条同职业、同标题、同组，否则"烘好的那份"就当不了参照
-    if len(gi) != len(xr):
-        sys.exit('条数对不上：GI %d / XR %d' % (len(gi), len(xr)))
-    mis = [i for i, (a, b) in enumerate(zip(gi, xr))
-           if a['cls'] != b['cls'] or a['title'] != b['title'] or a['group'] != b['group']]
-    if mis:
-        sys.exit('两份不是同一批同顺序（第 %s 条起对不上），不能拿 XR 当烘名参照' % mis[:5])
-
-    # 逐条把 XR 烘好的正文并进去（下一步用它反推本站技能表缺的那批法术名）
-    for a, b in zip(gi, xr):
-        a['bodyBakedByAddon'] = b['bodyBaked']
+    if has_xr:
+        xr_text = io.open(xr_path, encoding='utf-8').read()
+        xr = parse_xr(xr_text)
+        # 结构核对：两份必须逐条同职业、同标题、同组，否则"烘好的那份"就当不了参照
+        if len(gi) != len(xr):
+            sys.exit('条数对不上：GI %d / XR %d' % (len(gi), len(xr)))
+        mis = [i for i, (a, b) in enumerate(zip(gi, xr))
+               if a['cls'] != b['cls'] or a['title'] != b['title'] or a['group'] != b['group']]
+        if mis:
+            sys.exit('两份不是同一批同顺序（第 %s 条起对不上），不能拿 XR 当烘名参照' % mis[:5])
+        for a, b in zip(gi, xr):
+            a['bodyBakedByAddon'] = b['bodyBaked']
+    else:
+        # XR 已退役：改用 GI 自带的 ns.MacroSpellNames 烘名，确保每个 {{id}} 都有显式中文映射
+        missing = sorted({i for a in gi for i in a['spellIdsInBody'] if str(i) not in spell_names})
+        if missing:
+            sys.exit('XR 已退役且 MacroSpellNames 缺法术 ID：%s' % missing[:10])
+        for a in gi:
+            tpl = a.get('bodyTemplate') or ''
+            a['bodyBakedByAddon'] = re.sub(
+                r'\{\{(\d+)\}\}', lambda m: spell_names[m.group(1)]['cn'], tpl)
 
     groups = []
     for a in gi:
@@ -182,28 +191,36 @@ def main():
             groups.append(a['group'])
 
     gi_ver = toc_version(args.src, 'GearInsight_Forever')
-    xr_ver = toc_version(args.src, 'XR_DungeonGuide')
-    spell_names = parse_spell_names(gi_text)
+    xr_ver = toc_version(args.src, 'XR_DungeonGuide') if has_xr else None
+
+    files_meta = [
+        {'path': GI_FILE.replace(os.sep, '/'), 'sha256': sha256(gi_path),
+         'selfReported': '宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；'
+                         '技能名 → 法术 ID：Beta 1.60.1.70532'},
+    ]
+    if has_xr:
+        files_meta.append(
+            {'path': XR_FILE.replace(os.sep, '/'), 'sha256': sha256(xr_path),
+             'selfReported': 'XR_DungeonGuide 全职业宏库 v0.39.0 新增，v66 同步 GI 2026-10-19 新版；'
+                             '宏体内法术名已烘焙为中文'})
 
     out = {
         'meta': {
             'kind': 'gi-macros',
             'fetchedAt': datetime.date.today().isoformat(),
-            'source': 'GearInsight_Forever %s + XR_DungeonGuide v%s（同一批宏的两个形态，版本号从各自 .toc 现读）'
-                      % (gi_ver, xr_ver),
+            'source': ('GearInsight_Forever %s + XR_DungeonGuide v%s（同一批宏的两个形态，版本号从各自 .toc 现读）'
+                       % (gi_ver, xr_ver)) if has_xr else
+                      ('GearInsight_Forever %s（单源：XR_DungeonGuide 已退役，缺省法术名由 GI 内置 MacroSpellNames 烘名）'
+                       % gi_ver),
             'addonVersions': {'gi': gi_ver, 'xr': xr_ver},
-            'files': [
-                {'path': GI_FILE.replace(os.sep, '/'), 'sha256': sha256(gi_path),
-                 'selfReported': '宏来源：foreverdb.net（对过 Beta 1.60.1.70205）+ classicwowforever.com；'
-                                 '技能名 → 法术 ID：Beta 1.60.1.70532'},
-                {'path': XR_FILE.replace(os.sep, '/'), 'sha256': sha256(xr_path),
-                 'selfReported': 'XR_DungeonGuide 全职业宏库 v0.39.0 新增，v66 同步 GI 2026-10-19 新版；'
-                                 '宏体内法术名已烘焙为中文'},
-            ],
-            'licenseNote': '两个插件目录里都没有 LICENSE 文件、TOC 也没有 X-License 行；'
+            'files': files_meta,
+            'licenseNote': '插件目录里没有 LICENSE 文件、TOC 也没有 X-License 行；'
                            '按根 AGENTS.md 2026-10-18「网页端放开清单」第 1 条分享宏文本与说明，'
                            '硬边界是免费 + 标来源 + 不分发插件本体。',
-            'alignment': '两份逐条同职业 / 同组 / 同中文标题，条数都是 %d；顺序一致才允许拿 XR 当烘名参照' % len(gi),
+            'alignment': ('两份逐条同职业 / 同组 / 同中文标题，条数都是 %d；顺序一致才允许拿 XR 当烘名参照' % len(gi))
+                         if has_xr else
+                         ('单源 GI %d 条宏，所有 %d 个法术 ID 均在 MacroSpellNames 有明确映射'
+                          % (len(gi), len({i for a in gi for i in a['spellIdsInBody']}))),
             'notTaken': ['插件的界面代码与文案排版', '任何"下一个技能打什么"的循环提示类建议（红线）'],
             'spellNamesNote': 'MacroSpellNames 只取 法术 ID + 中文名 + 英文原名 三项事实标识符；'
                               '这是插件作者整理的对照，不是客户端表，本站按 L1 对待。',

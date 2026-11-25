@@ -1,14 +1,14 @@
 {
  "meta": {
   "kind": "legacy",
-  "generatedAt": "2026-11-05",
+  "generatedAt": "2026-11-23",
   "method": "tools/scrape-wclbox-legacy.py 抓 → tools/merge-legacy.js 整形；数据真相在 upstream/",
   "source": "https://wowforever.wclbox.com/chuancheng",
-  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
-  "build": "r-1793819765111",
-  "clientBuild": "1.60.1.70790",
-  "upstreamUpdatedAt": "2026-11-05",
-  "fetchedAt": "2026-11-05",
+  "endpoint": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
+  "build": "r-1795212446031",
+  "clientBuild": "1.60.1.71037",
+  "upstreamUpdatedAt": "2026-11-20",
+  "fetchedAt": "2026-11-23",
   "versionHistory": [
    {
     "clientBuild": "1.60.1.70338",
@@ -34,6 +34,16 @@
     "clientBuild": "1.60.1.70790",
     "build": "r-1793819765111",
     "fetchedAt": "2026-11-05"
+   },
+   {
+    "clientBuild": "1.60.1.70938",
+    "build": "r-1794559443729",
+    "fetchedAt": "2026-11-16"
+   },
+   {
+    "clientBuild": "1.60.1.71037",
+    "build": "r-1795212446031",
+    "fetchedAt": "2026-11-23"
    }
   ],
   "officialSource": {
@@ -114,13 +124,13 @@
     "type": "datamine_cn",
     "url": "https://wowforever.wclbox.com/chuancheng",
     "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-    "checkedAt": "2026-11-05"
+    "checkedAt": "2026-11-23"
    },
    {
     "type": "datamine_cn",
-    "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+    "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
     "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-    "checkedAt": "2026-11-05"
+    "checkedAt": "2026-11-23"
    },
    {
     "type": "official_cn",
@@ -333,13 +343,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -553,13 +563,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -773,13 +783,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "nameAlt": [
@@ -828,13 +838,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -866,13 +876,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -896,13 +906,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -926,13 +936,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -956,13 +966,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -986,13 +996,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1016,13 +1026,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -1060,13 +1070,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1090,13 +1100,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1120,13 +1130,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1150,13 +1160,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1180,13 +1190,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1210,13 +1220,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1240,13 +1250,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -1278,13 +1288,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1308,13 +1318,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1338,13 +1348,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1368,13 +1378,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1398,13 +1408,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -1428,13 +1438,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -1466,13 +1476,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "history": [
@@ -1562,13 +1572,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1588,13 +1598,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1614,13 +1624,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1640,13 +1650,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1666,13 +1676,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1692,13 +1702,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1718,13 +1728,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1744,13 +1754,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1770,13 +1780,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1796,13 +1806,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1822,13 +1832,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1848,13 +1858,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1874,13 +1884,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1900,13 +1910,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1926,13 +1936,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1952,13 +1962,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -1978,13 +1988,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2004,13 +2014,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2030,13 +2040,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2056,13 +2066,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2082,13 +2092,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2108,13 +2118,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2134,13 +2144,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2160,13 +2170,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2186,13 +2196,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2212,13 +2222,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2238,13 +2248,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -2279,13 +2289,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2305,13 +2315,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2331,13 +2341,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2357,13 +2367,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2383,13 +2393,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2409,13 +2419,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2435,13 +2445,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2461,13 +2471,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2487,13 +2497,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2513,13 +2523,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2539,13 +2549,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2565,13 +2575,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2591,13 +2601,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2617,13 +2627,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2643,13 +2653,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2669,13 +2679,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2695,13 +2705,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2721,13 +2731,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -2755,13 +2765,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2781,13 +2791,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2807,13 +2817,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -2841,13 +2851,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2867,13 +2877,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ],
      "history": [
@@ -2901,13 +2911,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -2939,13 +2949,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2965,13 +2975,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -2991,13 +3001,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3017,13 +3027,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3043,13 +3053,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3069,13 +3079,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3095,13 +3105,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3121,13 +3131,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3147,13 +3157,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3173,13 +3183,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3199,13 +3209,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3225,13 +3235,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -3259,13 +3269,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     },
@@ -3285,13 +3295,13 @@
        "type": "datamine_cn",
        "url": "https://wowforever.wclbox.com/chuancheng",
        "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       },
       {
        "type": "datamine_cn",
-       "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+       "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
        "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-       "checkedAt": "2026-11-05"
+       "checkedAt": "2026-11-23"
       }
      ]
     }
@@ -3310,13 +3320,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -3331,13 +3341,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -3352,13 +3362,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   },
@@ -3373,13 +3383,13 @@
      "type": "datamine_cn",
      "url": "https://wowforever.wclbox.com/chuancheng",
      "note": "传承页（无限测试版客户端解包，经新手盒子转述）；每层效果说明本站不复制",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     },
     {
      "type": "datamine_cn",
-     "url": "https://wowforever.wclbox.com/_shuju/r-1793819765111/legacy.json",
+     "url": "https://wowforever.wclbox.com/_shuju/r-1795212446031/legacy.json",
      "note": "本页渲染用的记录，名称、槽位坐标、前置与点数以此为准",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ]
   }

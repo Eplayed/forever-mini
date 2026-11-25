@@ -192,14 +192,35 @@ def addon_version(addon_dir, addon):
     return "版本未记"
 
 
+def arg_val(flag):
+    if flag in sys.argv:
+        idx = sys.argv.index(flag)
+        if idx + 1 < len(sys.argv):
+            return sys.argv[idx + 1]
+    return None
+
+
 def resolve_src():
-    for i, a in enumerate(sys.argv):
-        if a == "--src":
-            return sys.argv[i + 1]
+    given = arg_val("--src")
+    if given:
+        return given
     root = resolve(DB_ADDON)
     if os.path.isdir(os.path.join(root, DB_ADDON)):
         return root
     sys.exit("找不到 %s。给 --src <AddOns 目录>，或设 WOW_ADDONS。\n%s" % (DB_ADDON, explain()))
+
+
+def resolve_cn_root(src):
+    given = arg_val("--cn-src")
+    if given:
+        return given
+    if os.path.isdir(os.path.join(src, CN_ADDON)):
+        return src
+    if "--src" not in sys.argv:
+        fallback = resolve(CN_ADDON)
+        if os.path.isdir(os.path.join(fallback, CN_ADDON)):
+            return fallback
+    return src
 
 
 def main():
@@ -207,8 +228,9 @@ def main():
     toc_path = os.path.join(src, DB_ADDON, "QuestieDB_Forever.toc")
     if not os.path.exists(toc_path):
         sys.exit("找不到 %s" % toc_path)
-    qn_path = os.path.join(src, CN_ADDON, "Locale", "QuestNames.lua")
-    npc_path = os.path.join(src, CN_ADDON, "Locale", "NpcNames.lua")
+    cn_root = resolve_cn_root(src)
+    qn_path = os.path.join(cn_root, CN_ADDON, "Locale", "QuestNames.lua")
+    npc_path = os.path.join(cn_root, CN_ADDON, "Locale", "NpcNames.lua")
 
     # ---- 流式扫 TOC：15.5 MB 一次读完，只留需要的行 ----
     ids_parts, zh_parts = {}, {}
@@ -260,14 +282,16 @@ def main():
     name_col = zh_block[0]
     if not isinstance(name_col, list):
         sys.exit("zhCN 列块第一列（任务名列）不是数组（拿到 %s）" % type(name_col).__name__)
-    if len(name_col) != len(ids):
-        sys.exit("zhCN 名字列长度 %d 与 ID 表长度 %d 不齐——对位关系破了，不许猜" % (len(name_col), len(ids)))
+    if len(name_col) > len(ids) or any(not isinstance(qid, int) for qid in ids) or ids != sorted(set(ids)):
+        sys.exit("任务 ID 表无效，或 zhCN 名字列超出 ID 表长度")
 
     def as_text(v):
         return v.decode("utf-8") if isinstance(v, bytes) else v
 
-    cn_by_id = {qid: as_text(name_col[pos]) for pos, qid in enumerate(ids)
-                if isinstance(name_col[pos], (str, bytes))}
+    # QuestieDB 的 provider 按位置读取 column[position]，缺失的尾部位置返回 nil。
+    # v1.1.0 的 zhCN 列比 ID 表短两项；中间的 null 仍占原位置，不参与配名。
+    cn_by_id = {qid: as_text(name) for qid, name in zip(ids, name_col)
+                if isinstance(name, (str, bytes))}
 
     # ---- 白云飞补丁层 ----
     patches, npc_patch = {}, {}
@@ -344,6 +368,7 @@ def main():
         "baiyunfeiPatchRows": len(patches),
         "baiyunfeiNpcPatchRows": len(npc_patch),
         "scalarEnglishNames": len(scalar_en),
+        "zhCNMissingTailPositions": len(ids) - len(name_col),
         "ourDungeonQuests": len(our_quests),
         "ourEnNotInSnapshot": missing_en,
         "ourCnMatched": same,
@@ -366,7 +391,7 @@ def main():
     snap = {
         "meta": {
             "source": "%s（QuestieDB %s，baked TOC metadata store）+ %s %s Locale/QuestNames.lua、NpcNames.lua"
-                      % (DB_ADDON, toc_version, CN_ADDON, addon_version(src, CN_ADDON)),
+                      % (DB_ADDON, toc_version, CN_ADDON, addon_version(cn_root, CN_ADDON)),
             "addon": DB_ADDON,
             "addonVersion": toc_version,
             "sourceFile": "QuestieDB/QuestieDB_Forever.toc + BaiYunFeiQuestieCN/Locale/{QuestNames,NpcNames}.lua",
@@ -383,20 +408,20 @@ def main():
             "boundary": "主库 zhCN 列块是国服客户端串的插件转述（baked 进 TOC）；白云飞补丁自述只补列块漏译。"
                         "两者都按名称层事实标识符取；快照不进成品，要不要接进 dungeon-quests 由合并层决定。",
             "decode": "## X-* 行 → Base64 → zlib → CBOR（tools/extract-questie-quests-cn.py 内置解码器）",
-            "aliasNote": "zhCN 列块与 IDS 按位对齐（overlay.lua 的 provider 二分），脚本已断言长度一致",
+            "aliasNote": "zhCN 列块与 IDS 按位对齐（overlay.lua 的 provider 二分），超出列尾的位置按插件返回的 nil 处理",
             "counts": counts,
             "reconOurCnDiff": diff_rows,
         },
         "npcNames": [{"npcId": k, "nameCn": v} for k, v in sorted(npc_patch.items())],
         "quests": quests,
     }
-    if not os.path.isdir(UP):
-        os.makedirs(UP)
-    p = os.path.join(UP, "questie-quests-cn.json")
+    out_dir = sys.argv[sys.argv.index("--out-dir") + 1] if "--out-dir" in sys.argv else UP
+    os.makedirs(out_dir, exist_ok=True)
+    p = os.path.join(out_dir, "questie-quests-cn.json")
     with io.open(p, "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=1)
         f.write("\n")
-    print("写 %s（%.1f KB）" % (os.path.relpath(p, WEB), os.path.getsize(p) / 1024.0))
+    print("写 %s（%.1f KB）" % (p, os.path.getsize(p) / 1024.0))
 
 
 if __name__ == "__main__":

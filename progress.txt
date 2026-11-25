@@ -1,0 +1,9 @@
+2026-11-18 · 双端商业闭环与体验升级
+计划已落盘：wow-forever-web/docs/PLAN-商业闭环与体验升级-2026-11-18.md
+开工基线：a96b0184。现有 UI 改版已提交，仍需 Batch 1 二次验收。
+Batch 1 — NOT_STARTED（复用现有实现与证据，先复核 M02 七项红灯）
+Batch 2 — NOT_STARTED
+Batch 3 — NOT_STARTED
+Batch 4 — NOT_STARTED
+Batch 5 — NOT_STARTED
+续跑入口：Batch 1。每批完成或明确受阻时追加 DONE / BLOCKED、时间、候选提交、命令退出码、证据路径与下一步。

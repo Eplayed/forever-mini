@@ -142,6 +142,10 @@ def main():
                 want.add(os.path.join("public", os.path.relpath(os.path.join(dirpath, fn), SRC)))
     for _s_rel, d_rel in FILES:
         want.add(os.path.join("public", d_rel))
+    # 手写入库的站点根静态源文件（见 app/.gitignore），不是同步副本，不判为孤儿
+    for fn in ("404.html", "robots.txt", "sitemap.xml"):
+        if os.path.isfile(os.path.join(PUB, fn)):
+            want.add(os.path.join("public", fn))
     orphans = []
     if os.path.isdir(PUB):
         for dirpath, _n, files in os.walk(PUB):

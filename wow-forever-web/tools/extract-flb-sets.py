@@ -6,9 +6,11 @@
 - 只取事实性标识符（套装 ID、中英文名、最低等级、部件物品 ID、掉落归属/专业制造归属）；
 - 不取任何描述文案、不写掉落百分比、不编造未核出处（缺出处统一标"待实测"）。
 """
+import datetime
 import json
 import os
 import re
+import sys
 from collections import OrderedDict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -171,6 +173,7 @@ def main():
                 ("dungeonId", dun_id),
             ]))
 
+        today = datetime.date.today().isoformat()
         out_sets.append(OrderedDict([
             ("id", "set-%d" % sid),
             ("setId", sid),
@@ -183,15 +186,16 @@ def main():
             ("cls", cls_slug),
             ("clsCn", cls_cn or mat),
             ("mat", mat),
-            ("fetched", "2026-11-16"),
+            ("fetched", today),
             ("pieces", pieces),
         ]))
 
+    today_str = datetime.date.today().isoformat()
     doc = OrderedDict([
         ("meta", OrderedDict([
             ("source", "ForeverLevelingBiS/Data/Sets.lua + Items.lua"),
             ("declaredOrigin", "客户端解包转述（Forever 1.60.1）"),
-            ("fetched", "2026-11-16"),
+            ("fetched", today_str),
             ("grade", "L1"),
             ("count", len(out_sets)),
             ("pieceCount", sum(len(s["pieces"]) for s in out_sets)),
@@ -203,22 +207,20 @@ def main():
         json.dump(doc, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-    bis_path = os.path.join(ROOT, "app", "data", "bis.json")
-    if os.path.isfile(bis_path):
-        with open(bis_path, encoding="utf-8") as f:
-            bis_doc = json.load(f, object_pairs_hook=OrderedDict)
-        bis_doc["meta"]["scrapedAt"] = "2026-11-05"
-        for st in bis_doc.get("sets") or []:
-            st["fetched"] = "2026-11-05"
-        bis_doc["meta"]["itemSetsMeta"] = doc["meta"]
-        bis_doc["itemSets"] = out_sets
-        if os.path.exists(bis_path):
-            os.remove(bis_path)
-        with open(bis_path, "w", encoding="utf-8") as f:
-            json.dump(bis_doc, f, ensure_ascii=False, indent=1)
-            f.write("\n")
+    if "--upstream-only" not in sys.argv:
+        bis_path = os.path.join(ROOT, "app", "data", "bis.json")
+        if os.path.isfile(bis_path):
+            with open(bis_path, encoding="utf-8") as f:
+                bis_doc = json.load(f, object_pairs_hook=OrderedDict)
+            bis_doc["meta"]["itemSetsMeta"] = doc["meta"]
+            bis_doc["itemSets"] = out_sets
+            if os.path.exists(bis_path):
+                os.remove(bis_path)
+            with open(bis_path, "w", encoding="utf-8") as f:
+                json.dump(bis_doc, f, ensure_ascii=False, indent=1)
+                f.write("\n")
 
-    print("已生成 %s 并合入 bis.json：%d 套 / %d 件部件" % (OUT_JSON, len(out_sets), doc["meta"]["pieceCount"]))
+    print("已生成 %s：%d 套 / %d 件部件" % (OUT_JSON, len(out_sets), doc["meta"]["pieceCount"]))
 
 
 if __name__ == "__main__":

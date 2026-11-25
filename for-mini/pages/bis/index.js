@@ -1,6 +1,8 @@
 const oss = require('../../services/oss-manifest')
 const quality = require('../../services/quality')
 const adventure = require('../../services/adventure')
+const posterModel = require('../../services/share-poster-model')
+const dungeonSnapshot = require('../../data/forever-dungeon-snapshot')
 
 /* 配装页（2026-10-26 站主："根据 web 页面的 BIS 页面，在小程序中添加 BIS 页面"）
    数据来自分发层的三份配装产物：索引（38 套）+ 共享物品表（830 件）+ 每套一片。
@@ -58,6 +60,8 @@ Page({
     sumNote: '',
     enchants: [],
     consumables: [],
+    posterOpen: false,
+    posterSpec: null,
     /* 中间这一栏只有"这一套穿这一身"那一张图（2026-11-02 起）。桥表里没有这一格时
        posterSrc 一直为空，格子里显示 posterText，下面那行说清原因——不拿任何图去填。 */
     posterSrc: '',
@@ -122,7 +126,7 @@ Page({
       : stageKey === 'sets' ? (activeItemSet && activeItemSet.pieces) : rows
     const item = (slot ? slotRows : (current || [])).find((r) => String(r.item) === id)
     if (!item) return
-    const target = { id, name: item.name, quality: item.q, dungeonId: item.go, source: item.src }
+    const target = { id, name: item.name, quality: item.q, iconUrl: item.iconUrl || '', dungeonId: item.go, source: item.src }
     if (!multi) {
       if (adventure.addGear(target)) {
         this.syncGear()
@@ -182,7 +186,7 @@ Page({
     if (!cur || !cur.pieces || !cur.pieces.length) return
     const list = cur.pieces
       .filter((r) => r.item && !r.missing)
-      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, dungeonId: r.go, source: r.src }))
+      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, iconUrl: r.iconUrl || '', dungeonId: r.go, source: r.src }))
     if (!list.length) return
     const count = adventure.addGearBatch(list)
     if (count === null) return
@@ -697,7 +701,7 @@ Page({
     if (!cur || !cur.rows || !cur.rows.length) return
     const list = cur.rows
       .filter((r) => r.item && !r.missing)
-      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, dungeonId: r.go, source: r.src }))
+      .map((r) => ({ id: String(r.item), name: r.name, quality: r.q, iconUrl: r.iconUrl || '', dungeonId: r.go, source: r.src }))
     if (!list.length) return
     const count = adventure.addGearBatch(list)
     if (count === null) return
@@ -760,6 +764,86 @@ Page({
     this.syncGear()
     if (count) lightFeedback()
     wx.showToast({ title: count ? ('已加入 ' + count + ' 件团本套装部件') : '本套部件已在清单中', icon: 'none' })
+  },
+
+  getDungeonArtMap() {
+    const batch = this.batch || { env: oss.ACTIVE_ENV }
+    return posterModel.buildDungeonArtMap(dungeonSnapshot.items || [], (art) => oss.assetUrl(batch, art))
+  },
+
+  openRaidPrepPoster() {
+    if (!this.bis60Sets || !this.bis60Sets.length) {
+      wx.showToast({ title: '请先加载 60 级团前配装数据', icon: 'none' })
+      return
+    }
+    const spec = posterModel.buildRaidPrepOneSheet(
+      this.bis60Sets,
+      this.bis60Src || {},
+      this.items || {},
+      this.getDungeonArtMap()
+    )
+    this.setData({ posterSpec: spec, posterOpen: true })
+    lightFeedback()
+  },
+
+  openCurrentSetPoster() {
+    const stageKey = this.data.stageKey
+    let spec = null
+    if (stageKey === '60' && this.data.activeBis60) {
+      const cur60 = this.data.activeBis60
+      spec = posterModel.buildBisSetPoster({
+        stageKey: '60',
+        badge: '60级团前配装卡',
+        title: cur60.clsCn + ' · ' + cur60.mode,
+        subtitle: '共 ' + (cur60.rows || []).length + ' 个核心部位 · 进群分享抄作业',
+        rows: cur60.rows || []
+      })
+    } else if (stageKey === '30' && this.data.set) {
+      spec = posterModel.buildBisSetPoster({
+        stageKey: '30',
+        badge: '30级 P1 配装卡',
+        title: this.data.set.clsCn + ' · ' + this.data.set.mode,
+        subtitle: this.data.facCn + ' · 共 ' + (this.data.rows || []).length + ' 个部位',
+        rows: this.data.rows || []
+      })
+    } else if (stageKey === 'sets' && this.data.activeItemSet) {
+      const curSet = this.data.activeItemSet
+      spec = posterModel.buildBisSetPoster({
+        stageKey: 'sets',
+        badge: '套装图鉴分享卡',
+        title: curSet.name,
+        subtitle: curSet.level + ' 级 · ' + curSet.clsCn + ' · ' + (curSet.pieces || []).length + ' 件',
+        rows: curSet.pieces || []
+      })
+    } else if (stageKey === 't1' && this.data.filteredRaidSets && this.data.filteredRaidSets.length) {
+      const clsIconMap = {}
+      ;(this.data.classes || []).forEach((c) => { clsIconMap[c.clsCn] = c.iconUrl || '' })
+      const t1Rows = this.data.filteredRaidSets.map((r) => ({
+        slotLabel: r.clsCn + '·' + r.roleCn,
+        name: r.name,
+        q: 4,
+        iconUrl: clsIconMap[r.clsCn] || '',
+        src: r.spec + ' · ' + r.armor + ' · ' + r.pieceCount + ' 件',
+        pieceText: r.pieceText
+      }))
+      spec = posterModel.buildBisSetPoster({
+        stageKey: 't1',
+        badge: '海加尔峰 T1 一览',
+        title: '海加尔峰 T1 团本套装',
+        subtitle: '共 ' + t1Rows.length + ' 套 · 部件属性待实测，以编号留档',
+        rows: t1Rows
+      })
+    }
+    if (!spec) {
+      wx.showToast({ title: '当前阶段暂无可生成内容', icon: 'none' })
+      return
+    }
+    this.setData({ posterSpec: spec, posterOpen: true })
+    lightFeedback()
+  },
+
+  closeSharePoster() {
+    this.setData({ posterOpen: false })
   },
 
   closeSlot() { this.setData({ slot: null, slotRows: [], slotTheirs: null }) }

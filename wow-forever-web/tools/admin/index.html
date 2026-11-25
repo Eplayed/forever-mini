@@ -466,6 +466,21 @@ footer b{color:var(--warn);font-weight:400}
 
   <!-- ═══ 00 水源台 ═══ -->
   <section class="screen on" id="scr-water">
+    <section class="blk" id="addon-review">
+      <h2>插件数据更新</h2>
+      <p class="dim">比较本机插件和上游快照。确认后可逐项更新快照，再决定是否合入成品。</p>
+      <div class="btnrow">
+        <button class="main" data-action="scan-addons">检查插件更新</button>
+        <button class="ghost" data-action="merge-addon-dungeons">合并副本掉落与坐标</button>
+      </div>
+      <dialog id="addon-confirm">
+        <form method="dialog">
+          <p>应用这一项插件快照？成品还需合并后发布。</p>
+          <div class="btnrow"><button value="cancel" autofocus>取消</button><button class="main" value="apply">确认更新快照</button></div>
+        </form>
+      </dialog>
+      <div id="addon-results" aria-live="polite" class="dim">等待检查</div>
+    </section>
     <section class="blk">
       <div class="rail-head">
         <h2 style="margin:0"><i>CHAIN</i>日更链 <small>tools/daily.sh ①-⑦ · steps.tsv 真驱动 · 面板只是眼睛</small></h2>
@@ -585,6 +600,7 @@ footer b{color:var(--warn);font-weight:400}
           <button class="act gate-btn" data-gate="mini-upload"><span class="step-no">③</span>上传换指针 ●闸门<small>upload --env beta · 需站主点头</small></button>
           <button class="act" data-gate="mini-rollback"><span class="step-no">④</span>回滚<small>rollback --to 批次号 · 需站主点头</small></button>
         </div>
+        <div class="btnrow"><button class="ghost" data-gate="mini-assets">同步图标与图片</button></div>
       </section>
     </div>
 
@@ -790,6 +806,18 @@ function drawDaily(d) {
   }
 }
 async function loadDaily() { try { drawDaily(await jget("/api/daily")); } catch (e) { fail(e.message); } }
+async function loadAddons() {
+  const report = await jget("/api/review/addons");
+  if (!report.checkedAt) return;
+  const status = {same: "无变化", changed: "可更新快照", missing: "文件缺失", review: "待核对", error: "检查失败", applied: "已更新快照"};
+  $("#addon-results").innerHTML = '<p>检查时间 ' + esc(new Date(report.checkedAt).toLocaleString("zh-CN")) + '</p>'
+    + '<div class="probes">' + report.rows.map(row => '<div class="probe' + (row.state === "error" ? " bad" : "") + '">'
+      + '<b>' + esc(row.label) + '</b><div class="lat">' + esc(row.version ? "版本 " + row.version + " · " : "")
+      + esc(status[row.state]) + '</div><div class="lat">' + esc(row.detail) + '</div>'
+      + (row.state === "changed" ? '<button class="ghost" data-action="apply-addon" data-addon="' + esc(row.id) + '">更新快照</button>' : "")
+      + '</div>').join("") + '</div>';
+  setButtons();
+}
 
 function drawFresh(d) {
   const tiles = d.rows.map(t => {
@@ -843,6 +871,7 @@ async function pollJob(id) {
       setButtons();
       Promise.all([jget("/api/catalog").then(drawCatalog), loadDaily(), loadFresh(), loadHead(), loadPipeline()]).catch(e => fail(e.message));
       if (d.action === "reconcile") jget("/api/reconcile").then(drawRecon).catch(e => fail(e.message));
+      if (d.action === "scan-addons" || d.action === "apply-addon") loadAddons().catch(e => fail(e.message));
       return;
     }
     await new Promise(resolve => setTimeout(resolve, 4000));
@@ -866,6 +895,24 @@ function launchJob(action, topic, startingMsg) {
 }
 // 00 屏：日更链
 $("#scr-water").addEventListener("click", async e => {
+  if (e.target.closest("button[data-action='merge-addon-dungeons']")) {
+    if (!jobBusy) launchJob("merge-addon-dungeons", "", "正在合并副本成品…");
+    return;
+  }
+  const addon = e.target.closest("button[data-action='scan-addons'], button[data-action='apply-addon']");
+  if (addon) {
+    if (jobBusy) return;
+    const action = addon.dataset.action;
+    if (action === "apply-addon") {
+      const dialog = $("#addon-confirm");
+      dialog.returnValue = "";
+      dialog.addEventListener("close", () => {
+        if (dialog.returnValue === "apply" && !jobBusy) launchJob(action, addon.dataset.addon, "正在更新快照…");
+      }, {once: true});
+      dialog.showModal();
+    } else launchJob(action, "", "正在核对本机插件…");
+    return;
+  }
   const btn = e.target.closest("button[data-action='daily']");
   if (btn) {
     if (jobBusy) return;
@@ -985,6 +1032,8 @@ const GATE_META = {
   "mini-upload": {title: "发布闸门 · 小程序", target: "目标：OSS wow/beta/v1/（upload --env beta）",
     facts: p => { const lb = (p.mini.local || {}).buildId; return "本次将上传本地批次 <em>" + esc(lb || "（先跑②成批）") + "</em> 并换指针，当前线上指针将转入回滚位。<br>工具层要求 WOW_ALLOW_CROSS_CREDS=1（每条写命令都要人工点头的口径）。<br>解锁口令 = 本地批次号。"; },
     pass: p => (p.mini.local || {}).buildId || "？"},
+  "mini-assets": {title: "同步小程序图标与图片", target: "目标：OSS wow/beta/v1/assets/",
+    facts: () => "同步本批引用的图片和素材清单。输入「确认同步」继续。", pass: () => "确认同步"},
   "mini-rollback": {title: "发布闸门 · 小程序回滚", target: "目标：OSS wow/beta/v1/（rollback --to 批次号）",
     facts: () => "回滚会把指针换回一个旧批次。输入你想指回的那个批次号（12 位十六进制）——它既是口令也是参数。", pass: null},
 };
@@ -1270,6 +1319,7 @@ $("#reload").addEventListener("click", () => {
   jget("/api/review/items").then(drawReview).catch(() => {});
   loadRecon(); loadDaily(); loadFresh(); loadHead();
 });
+loadAddons().catch(e => fail(e.message));
 const previousJob = localStorage.getItem("adminJobId");
 if (previousJob) { jobBusy = true; setButtons(); pollJob(previousJob).catch(e => { jobBusy = false; setButtons(); fail(e.message); }); }
 jget("/api/review/items").then(drawReview).catch(() => {});

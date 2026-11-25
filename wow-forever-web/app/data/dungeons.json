@@ -91,8 +91,8 @@
    "note": "只补本站缺的首领，本站已有而它没有的一条不删；补进来的每条带 L1 与来源，掉落不写百分比"
   },
   "addonLoot": {
-   "version": "2.1.132",
-   "checkedAt": "2026-11-24",
+   "version": "2.1.133",
+   "checkedAt": "2026-11-25",
    "covered": 1262,
    "unmatchedBosses": [
     "blackfathom-deeps/4832",
@@ -1113,8 +1113,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -1383,8 +1383,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -1825,8 +1825,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -2190,8 +2190,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -2572,8 +2572,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -2885,8 +2885,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -3475,8 +3475,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -4001,8 +4001,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -4330,8 +4330,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -4880,8 +4880,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -5636,8 +5636,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -6438,8 +6438,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -7280,8 +7280,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -7861,8 +7861,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -8230,8 +8230,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -8914,8 +8914,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -9349,8 +9349,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -9542,8 +9542,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -9666,8 +9666,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -10091,8 +10091,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -10283,8 +10283,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -10815,8 +10815,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -11443,8 +11443,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -12037,8 +12037,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -12640,8 +12640,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -14645,8 +14645,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -15091,8 +15091,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -16036,8 +16036,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -16520,8 +16520,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -17043,8 +17043,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -18209,8 +18209,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -19072,8 +19072,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -19849,8 +19849,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -20635,8 +20635,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },
@@ -20988,8 +20988,8 @@
     {
      "type": "addon",
      "url": "https://wx-wow.com/changelog.html",
-     "checkedAt": "2026-11-24",
-     "version": "2.1.132",
+     "checkedAt": "2026-11-25",
+     "version": "2.1.133",
      "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
      "note": "DungeonsForever 首领掉落归属，本站待实测。"
     },

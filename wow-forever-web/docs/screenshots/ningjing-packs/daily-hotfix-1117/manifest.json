@@ -1,0 +1,26 @@
+{
+  "pack_id": "daily-hotfix-1117",
+  "theme": "frosted-daily",
+  "title": "11.17热修：黑上恢复预定难度，防骑魂铸套改加法强",
+  "column_name": "无限服日报",
+  "date_str": "11.19",
+  "generated_at": "2026-11-20T18:19:10",
+  "carousel_slides": [
+    "carousel/slide_01.png",
+    "carousel/slide_02.png",
+    "carousel/slide_03.png",
+    "carousel/slide_04.png",
+    "carousel/slide_05.png",
+    "carousel/slide_06.png"
+  ],
+  "carousel_caption": "carousel/caption.txt",
+  "wechat_article_html": "wechat/article.html",
+  "wechat_article_md": "wechat/article.md",
+  "wechat_inline_cards": [
+    "wechat/card_01.png",
+    "wechat/card_02.png",
+    "wechat/card_03.png",
+    "wechat/card_04.png",
+    "wechat/card_05.png"
+  ]
+}

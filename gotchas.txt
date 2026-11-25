@@ -1,0 +1,5 @@
+2026-11-18 · 双端商业闭环与体验升级
+- 工作树有既有的未提交改动。flags.json、flags-local.js、BisPage.vue、publish.py、site-check.py、NOW.md 和 ROLES.md 均需按路径区分归属。业务批次采用隔离工作树，保留主工作树差分。
+- Batch 1 的已有记录为 M01 114/114、M02 108/115，七项红灯与七张实拍见 for-mini/docs/VERIFY-首页与配装UI改版-2026-11-18.md。该记录属于先前验证。
+- 保鲜基线：30 级配装 meta.scrapedAt、宏与宠物 meta.checkedAt 均为 2026-11-05。按 11-18 快照为 13 天、warn。上游新快照须先对拍成品，重算时间不作为核对时间。
+- Web 本地打包先验 app/ 干净，独立工作树再执行 publish.py --target web。真实广告、相册真机、正式域名和 MacBook SSH 留至相应批次实测。

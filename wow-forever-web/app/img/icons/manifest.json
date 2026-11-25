@@ -1,72 +1,103 @@
 {
  "source": "https://render.worldofwarcraft.com/us/icons/56/",
  "format": "56x56 jpg",
- "fetchedAt": "2026-11-05",
- "total": 3506,
- "note": "图标文件名取自上游结构化数据或第三方资料站的事实性标识符，图片一律从暴雪官方 CDN 取回本地留存，页面不热链。属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。",
+ "fetchedAt": "2026-11-23",
+ "total": 3528,
+ "note": "图标文件名取自上游结构化数据或第三方资料站。暴雪官方 CDN 无法取得的图标可从已核对的本机游戏客户端文件补齐。属游戏美术素材：如需整体下线，删除本目录即可回退到自绘占位图标。",
  "batches": [
   {
-   "at": "2026-11-03",
+   "at": "2026-11-16",
    "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-03",
+   "at": "2026-11-16",
    "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-03",
+   "at": "2026-11-16",
    "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-03",
-   "added": 0,
+   "at": "2026-11-16",
+   "added": 16,
    "unavailable": [
     "8119728",
     "inv_12_tailoring_reagent_bag_violet_reagent_bag",
-    "inv_inscription_modified_craftingreagent06"
+    "inv_axe_1h_raidbarrowc60_d_01",
+    "inv_inscription_modified_craftingreagent06",
+    "inv_misc_food_meat_raw_08_color03"
    ],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-05",
+   "at": "2026-11-23",
    "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-05",
+   "at": "2026-11-23",
    "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-05",
-   "added": 3,
+   "at": "2026-11-23",
+   "added": 0,
    "unavailable": [],
    "note": "见本次改动的数据文件 iconKey 字段"
   },
   {
-   "at": "2026-11-05",
-   "added": 4,
+   "at": "2026-11-23",
+   "added": 0,
    "unavailable": [
-    "8119728",
-    "inv_12_tailoring_reagent_bag_violet_reagent_bag",
-    "inv_inscription_modified_craftingreagent06"
+    "8119728"
    ],
    "note": "见本次改动的数据文件 iconKey 字段"
   }
  ],
- "batchAdded": 4,
+ "batchAdded": 0,
  "batchUnavailable": [
-  "8119728",
-  "inv_12_tailoring_reagent_bag_violet_reagent_bag",
-  "inv_inscription_modified_craftingreagent06"
+  "8119728"
  ],
- "gapsRegistry": "app/data/icon-gaps.json（全站「数据里引用但本地没有」的键，由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）"
+ "gapsRegistry": "app/data/icon-gaps.json（全站「数据里引用但本地没有」的键，由 tools/build-icon-map.py 派生；本文件的 batch* 只说最近一次抓取）",
+ "clientExports": [
+  {
+   "at": "2026-11-19",
+   "build": "1.60.1.70938",
+   "source": "CASC 客户端文件",
+   "items": [
+    {
+     "file": "inv_inscription_modified_craftingreagent06.jpg",
+     "fileDataId": 3717601,
+     "sourceSha256": "a93367c9d5b17ec1b94b188a960b8939d0e34c1bf8cdda854fe80448872c5d9d",
+     "sha256": "3fca76364a60a6828dbfd2e0247031366cd91ea14fd83bf8bfa9c1d323e9ec26"
+    },
+    {
+     "file": "inv_misc_food_meat_raw_08_color03.jpg",
+     "fileDataId": 4639595,
+     "sourceSha256": "56b0f2bd6e9e15b567828c6d527012339bcb98483b115037e191fbcd34daa033",
+     "sha256": "e03da8c393a86d06e1a4b4170c45aac9643180c490694beb430a3cca01f86f69"
+    },
+    {
+     "file": "inv_12_tailoring_reagent_bag_violet_reagent_bag.jpg",
+     "fileDataId": 5931149,
+     "sourceSha256": "557c18104d25f07cd9c907f3f506609ad3722be73afebae9193d13b601e160dc",
+     "sha256": "71a938ff810b2f17fc9605bb2ae521d6d2f538a3ffeaae82c11fac1b4804147f"
+    },
+    {
+     "file": "inv_axe_1h_raidbarrowc60_d_01.jpg",
+     "fileDataId": 7816730,
+     "sourceSha256": "2a60850e0ea731e70ad38afa75d11eee9fd7b7198f1c55ed331217875771e076",
+     "sha256": "3cd4826cf6b83302e43a5be05cde4f882afbd1c58573cf72fe52a0439f6a7362"
+    }
+   ]
+  }
+ ]
 }

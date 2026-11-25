@@ -1218,6 +1218,12 @@ BagSync / BagBrother / Bagnonium（每角色背包与银行内容，撞"战绩�
 
 **2026-11-11 续（当日第二次改判）**：站主装回 **QuestieDB v1.0.14**（TOC 16.4 MB）——任务名层复活并已重采（任务 ID 5,682 / 列块中文名 4,595；**掉落表与 11-08 批字节相同，不用重采**）。但白云飞汉化层仍缺席：757 条补丁缺位 → 中文覆盖 5,011→4,595，**271 条补丁修过的坏串全部回退**（含补丁值的上批快照留 git `d2860bd`，消费时对拍标"待核"）。**XR 判退役**（站主当日拍"可以不从 XR 取"）：种族 18 条覆盖值已硬编码在 `extract-races.py`、互证快照本地留存、无日更链路读插件现值，退役零破坏。明细见盘点档第七节。
 
+**2026-11-13 追记**：管理台核到 DungeonsForever 2.1.90、QuestieDB 1.0.15、白云飞 1.3.2 与 GearInsight 1.0.0。五份快照已生成待审稿。详见 [插件更新核对](DATA-AUDIT-插件更新管理台-2026-11-13.md)。
+
+**2026-11-15 追记**：DungeonsForever 2.1.96、QuestieDB 1.1.0 和 GearInsight 1.0.0 共 5 份待审差异。DF 的配装名单仍为 20、30 级。QuestieDB zhCN 列尾少两位，按插件查表语义留空。详见 [60 级覆盖与插件复核](DATA-AUDIT-60级覆盖与插件复核-2026-11-15.md)。
+
+**2026-11-25 追记（v1.1.6 再开采）**：站主装机更新 QuestieDB **v1.1.6**（TOC 19,014,629 B，文件日 11-24）与 DF **2.1.133**。同范围重采两条快照：任务中文名层 **6,084 ID / 5,885 中文名**（列块 5,128 + 白云飞补丁 757，串分歧 583 两个都留）；掉落名单 **16,683 对 / 4,303 NPC × 1,252 物品**，与 DF 对拍都认 44 / 只 Questie 483 / 只 DF 762。掉率当场丢、快照不进成品、105 只读，口径全不变。DF 2.1.133 掉落 1,262 条经 `addons-merge` 并进成品（11-25 晚双端补发）。明细见 [DATA-任务名与掉落开采-2026-11-08.md](DATA-任务名与掉落开采-2026-11-08.md) 第五节。
+
 ## 二十七、领主大厅掉落归属复核（2026-11-09）
 
 副本聚合页原来只列出任务物品 `274286`。同站的物品详情快照 `app/data/upstream/wclbox-items-detail.json`（2026-10-16）却逐件给出了其余 12 件装备的首领出处。用 DungeonsForever 1.9.10 的 `df-dungeon-loot.json` 对拍，四组物品 ID 一致，三组有明确 NPC ID。另用 Hyjal 的带 ID 物品链接、IceDNicco 的遭遇与掉落表和 WoW Forever DB 的归属表逐组复核。ForeverDB 的采集记录覆盖其中 7 件装备与 1 件任务物品，Questie 快照对这四个 NPC 暂无记录。各来源的覆盖差异保留在来源记录里。 [新手盒子副本页](https://wowforever.wclbox.com/fuben/hall-of-thanes/) · [Hyjal](https://hyjal.cc/dungeons/hall-of-thanes) · [IceDNicco](https://wow.icednicco.online/forever/db/instance/3065) · [WoW Forever DB](https://wowfdb.com/zones/the-hall-of-thanes/loot/) · [ForeverDB](https://www.foreverdb.app/en/forever/dungeons-raids/the-hall-of-thanes)

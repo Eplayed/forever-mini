@@ -4,8 +4,8 @@
     "declaredOrigin": "客户端解包转述（Forever 1.60.1）",
     "fetched": "2026-11-16",
     "grade": "L1",
-    "count": 36,
-    "pieceCount": 191
+    "count": 78,
+    "pieceCount": 407
   },
   "itemSets": [
     {
@@ -675,8 +675,8 @@
         {
           "item": 16736,
           "slot": "腰部",
-          "src": "副本：斯坦索姆正门",
-          "dungeonId": "stratholme-main-gate"
+          "src": "世界/区域掉落",
+          "dungeonId": null
         },
         {
           "item": 16732,
@@ -727,8 +727,8 @@
         {
           "item": 16681,
           "slot": "手腕",
-          "src": "副本：斯坦索姆正门",
-          "dungeonId": "stratholme-main-gate"
+          "src": "世界/区域掉落",
+          "dungeonId": null
         },
         {
           "item": 16676,
@@ -837,8 +837,8 @@
         {
           "item": 16702,
           "slot": "腰部",
-          "src": "副本：斯坦索姆正门",
-          "dungeonId": "stratholme-main-gate"
+          "src": "副本：通灵学院",
+          "dungeonId": "scholomance"
         },
         {
           "item": 16699,
@@ -1081,8 +1081,8 @@
         {
           "item": 16671,
           "slot": "手腕",
-          "src": "副本：斯坦索姆正门",
-          "dungeonId": "stratholme-main-gate"
+          "src": "副本：通灵学院",
+          "dungeonId": "scholomance"
         },
         {
           "item": 16672,
@@ -1133,8 +1133,8 @@
         {
           "item": 277117,
           "slot": "肩部",
-          "src": "待实测",
-          "dungeonId": null
+          "src": "副本：黑石深渊 · 竞技场：格里兹尔",
+          "dungeonId": "blackrock-depths"
         },
         {
           "item": 11726,
@@ -1261,8 +1261,8 @@
         {
           "item": 16714,
           "slot": "手腕",
-          "src": "副本：斯坦索姆正门",
-          "dungeonId": "stratholme-main-gate"
+          "src": "副本：通灵学院",
+          "dungeonId": "scholomance"
         },
         {
           "item": 16717,
@@ -1353,6 +1353,1566 @@
       ]
     },
     {
+      "id": "set-2082",
+      "setId": 2082,
+      "name": "勇士的庇护",
+      "nameEn": "Champion's Aegis",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 274246,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274247,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274244,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274256,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274245,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274258,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-281",
+      "setId": 281,
+      "name": "勇士的战甲",
+      "nameEn": "Champion's Battlegear",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272480,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272637,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272479,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272478,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272481,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272477,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-301",
+      "setId": 301,
+      "name": "勇士的震撼",
+      "nameEn": "Champion's Earthshaker",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272647,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272489,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272625,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272485,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272488,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272609,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2072",
+      "setId": 2072,
+      "name": "勇士的天职",
+      "nameEn": "Champion's Investiture",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272649,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272650,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272634,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272619,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272663,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272611,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-361",
+      "setId": 361,
+      "name": "勇士的猎装",
+      "nameEn": "Champion's Pursuit",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272491,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272640,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272490,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272495,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272492,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272496,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-549",
+      "setId": 549,
+      "name": "勇士的神服",
+      "nameEn": "Champion's Raiment",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272562,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272565,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272564,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272569,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272563,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272568,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-539",
+      "setId": 539,
+      "name": "勇士的庇护",
+      "nameEn": "Champion's Refuge",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272641,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272642,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272626,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272464,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272627,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272606,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-546",
+      "setId": 546,
+      "name": "勇士的法衣",
+      "nameEn": "Champion's Regalia",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272457,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272680,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272459,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272455,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272458,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272453,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-382",
+      "setId": 382,
+      "name": "勇士的圣装",
+      "nameEn": "Champion's Sanctuary",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272471,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272469,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272472,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272614,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272470,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272462,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-345",
+      "setId": 345,
+      "name": "勇士的魔装",
+      "nameEn": "Champion's Threads",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272643,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272549,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272548,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272553,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272630,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272552,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2094",
+      "setId": 2094,
+      "name": "勇士的雷霆之拳",
+      "nameEn": "Champion's Thunderfist",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272486,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272648,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272487,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272617,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272636,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272484,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-522",
+      "setId": 522,
+      "name": "勇士的制服",
+      "nameEn": "Champion's Vestments",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272474,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272475,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272473,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272467,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272476,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272608,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2084",
+      "setId": 2084,
+      "name": "勇士的辩护",
+      "nameEn": "Champion's Vindication",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 274231,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274233,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274230,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274227,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274232,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274226,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2090",
+      "setId": 2090,
+      "name": "勇士的战争之潮",
+      "nameEn": "Champion's Wartide",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 273356,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273360,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273357,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273358,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273359,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273355,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2080",
+      "setId": 2080,
+      "name": "勇士的野性之皮",
+      "nameEn": "Champion's Wildhide",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 273386,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273387,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273384,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273382,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273385,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273383,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-401",
+      "setId": 401,
+      "name": "少校的庇护",
+      "nameEn": "Lieutenant Commander's Aegis",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272854,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272855,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272852,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273363,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272853,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273365,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-282",
+      "setId": 282,
+      "name": "少校的战甲",
+      "nameEn": "Lieutenant Commander's Battlegear",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272738,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272741,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272739,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272717,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272740,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272716,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2088",
+      "setId": 2088,
+      "name": "少校的震撼",
+      "nameEn": "Lieutenant Commander's Earthshaker",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 274196,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274181,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274194,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274177,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274180,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274192,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2075",
+      "setId": 2075,
+      "name": "少校的天职",
+      "nameEn": "Lieutenant Commander's Investiture",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272677,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272678,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273448,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273445,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273447,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273443,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-362",
+      "setId": 362,
+      "name": "少校的猎装",
+      "nameEn": "Lieutenant Commander's Pursuit",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272737,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272736,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272734,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272715,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272735,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272713,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-344",
+      "setId": 344,
+      "name": "少校的神服",
+      "nameEn": "Lieutenant Commander's Raiment",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272814,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272817,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272816,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272812,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272815,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272810,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-551",
+      "setId": 551,
+      "name": "少校的庇护",
+      "nameEn": "Lieutenant Commander's Refuge",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 273374,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273375,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273380,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273377,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273373,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273379,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-343",
+      "setId": 343,
+      "name": "少校的法衣",
+      "nameEn": "Lieutenant Commander's Regalia",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272725,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272724,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272722,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272703,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272723,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272701,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-381",
+      "setId": 381,
+      "name": "少校的圣装",
+      "nameEn": "Lieutenant Commander's Sanctuary",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272733,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272732,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272730,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272709,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272731,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272705,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-346",
+      "setId": 346,
+      "name": "少校的魔装",
+      "nameEn": "Lieutenant Commander's Threads",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272671,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272801,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272800,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272796,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272657,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272794,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2096",
+      "setId": 2096,
+      "name": "少校的雷霆之拳",
+      "nameEn": "Lieutenant Commander's Thunderfist",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 274178,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274197,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274179,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274193,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274195,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274176,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-348",
+      "setId": 348,
+      "name": "少校的制服",
+      "nameEn": "Lieutenant Commander's Vestments",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272727,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272729,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272726,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272708,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272728,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272704,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2086",
+      "setId": 2086,
+      "name": "少校的辩护",
+      "nameEn": "Lieutenant Commander's Vindication",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272743,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272745,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272742,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272719,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272744,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272718,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2092",
+      "setId": 2092,
+      "name": "少校的战争之潮",
+      "nameEn": "Lieutenant Commander's Wartide",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 274218,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274222,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274219,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274220,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274221,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 274217,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-2081",
+      "setId": 2081,
+      "name": "少校的野性之皮",
+      "nameEn": "Lieutenant Commander's Wildhide",
+      "level": 55,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 272669,
+          "slot": "头部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272670,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273371,
+          "slot": "胸部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273368,
+          "slot": "手",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 272656,
+          "slot": "腿部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 273370,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
       "id": "set-65",
       "setId": 65,
       "name": "蜘蛛之吻",
@@ -1403,7 +2963,7 @@
         {
           "item": 268873,
           "slot": "饰品",
-          "src": "待实测",
+          "src": "商人出售",
           "dungeonId": null
         }
       ]
@@ -1575,8 +3135,8 @@
         {
           "item": 22301,
           "slot": "胸部",
-          "src": "待实测",
-          "dungeonId": null
+          "src": "副本：斯坦索姆正门 · 亚雷恩与索托斯",
+          "dungeonId": "stratholme-main-gate"
         },
         {
           "item": 22313,
@@ -1587,14 +3147,14 @@
         {
           "item": 22304,
           "slot": "手",
-          "src": "副本：厄运之槌东区",
+          "src": "副本：厄运之槌东区 · 伊萨莉恩",
           "dungeonId": "dire-maul-east"
         },
         {
           "item": 22306,
           "slot": "腰部",
-          "src": "世界/区域掉落",
-          "dungeonId": null
+          "src": "副本：黑石塔下层 · 莫尔·灰蹄",
+          "dungeonId": "lower-blackrock-spire"
         },
         {
           "item": 22303,
@@ -1727,6 +3287,414 @@
           "slot": "副手",
           "src": "副本：黑石塔上层 · 大酋长雷德·黑手",
           "dungeonId": "upper-blackrock-spire"
+        }
+      ]
+    },
+    {
+      "id": "set-483",
+      "setId": 483,
+      "name": "污染者的果断",
+      "nameEn": "The Defiler's Determination",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20158,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20150,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20154,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-484",
+      "setId": 484,
+      "name": "污染者的坚韧",
+      "nameEn": "The Defiler's Fortitude",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20203,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20195,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20199,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-485",
+      "setId": 485,
+      "name": "污染者的专注",
+      "nameEn": "The Defiler's Intent",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20176,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20163,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20159,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-486",
+      "setId": 486,
+      "name": "污染者的毅力",
+      "nameEn": "The Defiler's Purpose",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20194,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20190,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20186,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-487",
+      "setId": 487,
+      "name": "污染者的决心",
+      "nameEn": "The Defiler's Resolution",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20212,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20204,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20208,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-488",
+      "setId": 488,
+      "name": "污染者的意志",
+      "nameEn": "The Defiler's Will",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20175,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20171,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20167,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-469",
+      "setId": 469,
+      "name": "高地人的果断",
+      "nameEn": "The Highlander's Determination",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "锁甲",
+      "mat": "锁甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20055,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20043,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20050,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-473",
+      "setId": 473,
+      "name": "高地人的专注",
+      "nameEn": "The Highlander's Intent",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "布甲",
+      "mat": "布甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20061,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20047,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20054,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-471",
+      "setId": 471,
+      "name": "高地人的毅力",
+      "nameEn": "The Highlander's Purpose",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20059,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20045,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20052,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-467",
+      "setId": 467,
+      "name": "高地人的决心",
+      "nameEn": "The Highlander's Resolution",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20057,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20041,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20048,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-468",
+      "setId": 468,
+      "name": "高地人的执著",
+      "nameEn": "The Highlander's Resolve",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "板甲",
+      "mat": "板甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20058,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20042,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20049,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
+        }
+      ]
+    },
+    {
+      "id": "set-472",
+      "setId": 472,
+      "name": "高地人的意志",
+      "nameEn": "The Highlander's Will",
+      "level": 58,
+      "cat": "endgame",
+      "catCn": "满级副本套",
+      "isNew": false,
+      "cls": null,
+      "clsCn": "皮甲",
+      "mat": "皮甲",
+      "fetched": "2026-11-16",
+      "pieces": [
+        {
+          "item": 20060,
+          "slot": "肩部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20046,
+          "slot": "腰部",
+          "src": "商人出售",
+          "dungeonId": null
+        },
+        {
+          "item": 20053,
+          "slot": "脚",
+          "src": "商人出售",
+          "dungeonId": null
         }
       ]
     }

@@ -5,7 +5,7 @@ module.exports = {
  "kind": "names-index",
  "snapshot": true,
  "meta": {
-  "checkedAt": "2026-11-03",
+  "checkedAt": "2026-11-18",
   "perTalent": 5
  },
  "counts": {

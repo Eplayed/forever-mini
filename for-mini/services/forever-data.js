@@ -112,6 +112,10 @@ function loadCensus() {
   return oss.loadKey('census').then(shape)
 }
 
+function loadGRank() {
+  return oss.loadKey('gRank').then(shape)
+}
+
 /* 掉落反查（M02-3）：一整个 118 KB 的表换"任何一件装备都能查"，
    同样不打进主包，断网必须说"这张表要联网"。 */
 function loadLootIndex() {
@@ -204,6 +208,7 @@ module.exports = {
   loadDungeonLoot,
   loadClassIndex,
   loadCensus,
+  loadGRank,
   loadGlossary,
   loadGuide,
   loadLootIndex,

@@ -11,11 +11,11 @@ module.exports = {
   ],
   "snapshot": true,
   "coverage": {
-   "L0": 250,
+   "L0": 253,
    "L1": 108,
-   "L2": 365,
-   "L3": 2,
-   "total": 725
+   "L2": 363,
+   "L3": 0,
+   "total": 724
   }
  },
  "items": [
@@ -117,7 +117,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "orc"
@@ -220,7 +220,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "orc"
@@ -323,7 +323,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "undead"
@@ -409,7 +409,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "undead"
@@ -495,7 +495,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "undead"
@@ -581,7 +581,7 @@ module.exports = {
      "type": "official_cn",
      "url": "https://wow.blizzard.cn/news/24304075/index.html",
      "note": "官方种族公告原文；种族归属按该页的小标题一条条对回来",
-     "checkedAt": "2026-11-05"
+     "checkedAt": "2026-11-23"
     }
    ],
    "raceId": "undead"

@@ -70,7 +70,14 @@
             <div class="rdtr-b">
               <b>{{ t.name }}</b>
               <span class="tag">{{ t.passive ? '被动' : '主动' }}</span>
-              <p class="quote">{{ t.quote }}</p>
+              <p class="quote">{{ t.valueVia === 'launch-client' ? t.effect : t.quote }}</p>
+              <details v-if="t.valueVia === 'launch-client'" class="dim">
+                <summary>客户端版本与旧公告</summary>
+                <p v-if="t.valueSource.notesEffect">{{ t.valueSource.notesEffect }}</p>
+                <p>{{ t.previousTrait.quote }}</p>
+                <a :href="t.valueSource.url" target="_blank" rel="noopener noreferrer">客户端 {{ t.valueSource.build }}</a>
+                <a v-if="t.valueSource.notesEffect" :href="t.valueSource.notesUrl" target="_blank" rel="noopener noreferrer">开发者说明</a>
+              </details>
             </div>
           </li>
         </ul>

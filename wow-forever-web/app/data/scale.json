@@ -218,9 +218,9 @@
     "file": "macros.json",
     "section": "宏命令",
     "build": null,
-    "checkedAt": "2026-11-23",
+    "checkedAt": "2026-11-25",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 0,
     "stale": null
    },
    {
@@ -236,9 +236,9 @@
     "file": "pets.json",
     "section": "猎人宠物",
     "build": null,
-    "checkedAt": "2026-11-23",
+    "checkedAt": "2026-11-25",
     "classic": null,
-    "daysSince": 2,
+    "daysSince": 0,
     "stale": null
    },
    {

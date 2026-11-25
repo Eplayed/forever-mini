@@ -1,0 +1,631 @@
+{
+  "observedDate": "2026-11-13",
+  "source": "https://cc.163.com/act/m/daily/uibox-dd/",
+  "filter": "无限服 / 全部",
+  "sort": "周下载量排行",
+  "metric": "周安装量 / 总安装量",
+  "scope": "首100条；不是全库；安装量去重、更新计数及版本归属未获平台定义",
+  "rows": [
+    {
+      "rank": 1,
+      "name": "Questie",
+      "weekly": "63.6万",
+      "total": "1亿"
+    },
+    {
+      "rank": 2,
+      "name": "无限副本手册",
+      "weekly": "62万",
+      "total": "92.2万"
+    },
+    {
+      "rank": 3,
+      "name": "DungeonsForever 无限副本手册",
+      "weekly": "53万",
+      "total": "70.5万"
+    },
+    {
+      "rank": 4,
+      "name": "RurutiaSuite 露露的工具箱",
+      "weekly": "40.1万",
+      "total": "60.3万"
+    },
+    {
+      "rank": 5,
+      "name": "QuestieDB",
+      "weekly": "39.6万",
+      "total": "47.2万"
+    },
+    {
+      "rank": 6,
+      "name": "RestedXP Guide",
+      "weekly": "38.9万",
+      "total": "918.5万"
+    },
+    {
+      "rank": 7,
+      "name": "RurutiaSuite_Setup 露露的预设安装器",
+      "weekly": "34.5万",
+      "total": "50.3万"
+    },
+    {
+      "rank": 8,
+      "name": "EllesmereUI",
+      "weekly": "30.8万",
+      "total": "134.8万"
+    },
+    {
+      "rank": 9,
+      "name": "openmap-cn汉化高清地图 副本内地图",
+      "weekly": "29万",
+      "total": "38.3万"
+    },
+    {
+      "rank": 10,
+      "name": "Gearinsight 无限版",
+      "weekly": "27.6万",
+      "total": "40.9万"
+    },
+    {
+      "rank": 11,
+      "name": "网易有爱白云飞暴雪原始UI整合精简版26.11.22支持MAC打包复制使用",
+      "weekly": "21.9万",
+      "total": "36.4万"
+    },
+    {
+      "rank": 12,
+      "name": "Auctionator 拍卖行无限服AH版",
+      "weekly": "20.7万",
+      "total": "23.2万"
+    },
+    {
+      "rank": 13,
+      "name": "Lueur",
+      "weekly": "19.1万",
+      "total": "26.6万"
+    },
+    {
+      "rank": 14,
+      "name": "DBM - Deadly Boss Mods (DBM-Core)",
+      "weekly": "18.8万",
+      "total": "4.8亿"
+    },
+    {
+      "rank": 15,
+      "name": "Questie 无限合集版",
+      "weekly": "17.2万",
+      "total": "17.2万"
+    },
+    {
+      "rank": 16,
+      "name": "Lueur中文汉化版",
+      "weekly": "13.6万",
+      "total": "17.4万"
+    },
+    {
+      "rank": 17,
+      "name": "DBM - Dungeons, Delves, Visions, & Events (Requires Deadly Boss Mods) - DBM",
+      "weekly": "11.4万",
+      "total": "2597.1万"
+    },
+    {
+      "rank": 18,
+      "name": "Questie 新任务中文版26.11.16",
+      "weekly": "11.1万",
+      "total": "13.5万"
+    },
+    {
+      "rank": 19,
+      "name": "Bagnonium (formely Combuctor)",
+      "weekly": "10.9万",
+      "total": "289.6万"
+    },
+    {
+      "rank": 20,
+      "name": "有爱经典整合包-无限服",
+      "weekly": "10.8万",
+      "total": "22.9万"
+    },
+    {
+      "rank": 21,
+      "name": "Auctionator 拍卖行插件AH原版",
+      "weekly": "8.6万",
+      "total": "8.6万"
+    },
+    {
+      "rank": 22,
+      "name": "Myslot",
+      "weekly": "8.5万",
+      "total": "385.3万"
+    },
+    {
+      "rank": 23,
+      "name": "Details! Damage Meter",
+      "weekly": "8.4万",
+      "total": "2亿"
+    },
+    {
+      "rank": 24,
+      "name": "大脚整合包 - 无限服",
+      "weekly": "6.7万",
+      "total": "12.5万"
+    },
+    {
+      "rank": 25,
+      "name": "BlizzMove",
+      "weekly": "6.5万",
+      "total": "670.3万"
+    },
+    {
+      "rank": 26,
+      "name": "WhisperPop (Continued)",
+      "weekly": "6.1万",
+      "total": "6.2万"
+    },
+    {
+      "rank": 27,
+      "name": "Waypoint UI",
+      "weekly": "5.6万",
+      "total": "65.3万"
+    },
+    {
+      "rank": 28,
+      "name": "互助切位面",
+      "weekly": "5.6万",
+      "total": "7.4万"
+    },
+    {
+      "rank": 29,
+      "name": "alaTalentEmu",
+      "weekly": "5.3万",
+      "total": "199.6万"
+    },
+    {
+      "rank": 30,
+      "name": "RareScanner",
+      "weekly": "5.2万",
+      "total": "6426.2万"
+    },
+    {
+      "rank": 31,
+      "name": "Baganator (Bags)",
+      "weekly": "5.1万",
+      "total": "220.9万"
+    },
+    {
+      "rank": 32,
+      "name": "WaypointUI光柱追踪中文汉化版26.11.12",
+      "weekly": "5.1万",
+      "total": "8.1万"
+    },
+    {
+      "rank": 33,
+      "name": "BagSync",
+      "weekly": "4.6万",
+      "total": "472.2万"
+    },
+    {
+      "rank": 34,
+      "name": "Syndicator",
+      "weekly": "4.6万",
+      "total": "182.1万"
+    },
+    {
+      "rank": 35,
+      "name": "Copy Anything",
+      "weekly": "4.5万",
+      "total": "121.7万"
+    },
+    {
+      "rank": 36,
+      "name": "What's Training?",
+      "weekly": "4.2万",
+      "total": "327.9万"
+    },
+    {
+      "rank": 37,
+      "name": "Bagnon",
+      "weekly": "4.2万",
+      "total": "1.1亿"
+    },
+    {
+      "rank": 38,
+      "name": "alaTradeSkill",
+      "weekly": "4万",
+      "total": "189.9万"
+    },
+    {
+      "rank": 39,
+      "name": "Panda exp全能练级助手",
+      "weekly": "3.9万",
+      "total": "7万"
+    },
+    {
+      "rank": 40,
+      "name": "HandyNotes地图NPC5合一白云飞修复版",
+      "weekly": "3.9万",
+      "total": "4.7万"
+    },
+    {
+      "rank": 41,
+      "name": "Leatrix Maps",
+      "weekly": "3.8万",
+      "total": "807.2万"
+    },
+    {
+      "rank": 42,
+      "name": "Platynator (Nameplates)",
+      "weekly": "3.6万",
+      "total": "129.7万"
+    },
+    {
+      "rank": 43,
+      "name": "MtjChatBar 聊天切换条无限增强版",
+      "weekly": "3.6万",
+      "total": "4.8万"
+    },
+    {
+      "rank": 44,
+      "name": "ForeverAuras - A WeakAura Fork",
+      "weekly": "3.4万",
+      "total": "5万"
+    },
+    {
+      "rank": 45,
+      "name": "魔兽无限游戏全能助手",
+      "weekly": "3.3万",
+      "total": "5.9万"
+    },
+    {
+      "rank": 46,
+      "name": "Leatrix Plus",
+      "weekly": "2.7万",
+      "total": "2779.6万"
+    },
+    {
+      "rank": 47,
+      "name": "GatherLite",
+      "weekly": "2.6万",
+      "total": "139.7万"
+    },
+    {
+      "rank": 48,
+      "name": "Dialogue UI",
+      "weekly": "2.6万",
+      "total": "106.8万"
+    },
+    {
+      "rank": 49,
+      "name": "BigWigs (Boss Timers & Tools)",
+      "weekly": "2.5万",
+      "total": "1.1亿"
+    },
+    {
+      "rank": 50,
+      "name": "Forever Bestiary (Pet Hunter) 丨 野兽图鉴",
+      "weekly": "2.5万",
+      "total": "2.5万"
+    },
+    {
+      "rank": 51,
+      "name": "Plumber",
+      "weekly": "2.3万",
+      "total": "361.9万"
+    },
+    {
+      "rank": 52,
+      "name": "GTFO",
+      "weekly": "2.1万",
+      "total": "7168.7万"
+    },
+    {
+      "rank": 53,
+      "name": "ThreatClassic2",
+      "weekly": "2万",
+      "total": "899.5万"
+    },
+    {
+      "rank": 54,
+      "name": "YUI · 言工坊",
+      "weekly": "2万",
+      "total": "3.6万"
+    },
+    {
+      "rank": 55,
+      "name": "Auctionator 拍卖行助手",
+      "weekly": "1.9万",
+      "total": "1.9万"
+    },
+    {
+      "rank": 56,
+      "name": "白云飞永恒无限任务指南汉化合集26.11.17",
+      "weekly": "1.8万",
+      "total": "3万"
+    },
+    {
+      "rank": 57,
+      "name": "Decursive一键驱散插件BUG修复版",
+      "weekly": "1.7万",
+      "total": "2.2万"
+    },
+    {
+      "rank": 58,
+      "name": "DBM - Season of Discovery, Vanilla, and TBC (Requires Deadly Boss Mods)",
+      "weekly": "1.7万",
+      "total": "4056.5万"
+    },
+    {
+      "rank": 59,
+      "name": "Scrap (Junk Seller)",
+      "weekly": "1.6万",
+      "total": "1757.3万"
+    },
+    {
+      "rank": 60,
+      "name": "SpellActivationOverlay",
+      "weekly": "1.6万",
+      "total": "255.9万"
+    },
+    {
+      "rank": 61,
+      "name": "Simulationcraft",
+      "weekly": "1.6万",
+      "total": "3332.7万"
+    },
+    {
+      "rank": 62,
+      "name": "RestedXP Forever HordeQuest Guide",
+      "weekly": "1.6万",
+      "total": "2.2万"
+    },
+    {
+      "rank": 63,
+      "name": "Postal 邮箱助手",
+      "weekly": "1.5万",
+      "total": "1.5万"
+    },
+    {
+      "rank": 64,
+      "name": "无限插件修改整合白云飞更新自用26.11.18",
+      "weekly": "1.5万",
+      "total": "1.6万"
+    },
+    {
+      "rank": 65,
+      "name": "WhisperPop 密语助手",
+      "weekly": "1.4万",
+      "total": "1.4万"
+    },
+    {
+      "rank": 66,
+      "name": "BtWQuests",
+      "weekly": "1.4万",
+      "total": "633.1万"
+    },
+    {
+      "rank": 67,
+      "name": "Simple Addon Manager (SAM)",
+      "weekly": "1.4万",
+      "total": "11.5万"
+    },
+    {
+      "rank": 68,
+      "name": "Speedy AutoLoot",
+      "weekly": "1.4万",
+      "total": "589.2万"
+    },
+    {
+      "rank": 69,
+      "name": "HandyNotes",
+      "weekly": "1.3万",
+      "total": "4593.4万"
+    },
+    {
+      "rank": 70,
+      "name": "AuctionMaster",
+      "weekly": "1.3万",
+      "total": "316.6万"
+    },
+    {
+      "rank": 71,
+      "name": "Better Fishing汉化版",
+      "weekly": "1.3万",
+      "total": "2.3万"
+    },
+    {
+      "rank": 72,
+      "name": "Plater Nameplates",
+      "weekly": "1.2万",
+      "total": "4984.2万"
+    },
+    {
+      "rank": 73,
+      "name": "EUI-RestedXP",
+      "weekly": "1.2万",
+      "total": "1.4万"
+    },
+    {
+      "rank": 74,
+      "name": "BlizzMove无限服修复版",
+      "weekly": "1.2万",
+      "total": "2.6万"
+    },
+    {
+      "rank": 75,
+      "name": "ALL THE THINGS",
+      "weekly": "1.2万",
+      "total": "2923.5万"
+    },
+    {
+      "rank": 76,
+      "name": "GatherMate2",
+      "weekly": "1.1万",
+      "total": "3080.2万"
+    },
+    {
+      "rank": 77,
+      "name": "!Pig(工具箱)",
+      "weekly": "1.1万",
+      "total": "1.3万"
+    },
+    {
+      "rank": 78,
+      "name": "Pawn",
+      "weekly": "1.1万",
+      "total": "9437.9万"
+    },
+    {
+      "rank": 79,
+      "name": "TotemTimers Classic",
+      "weekly": "1万",
+      "total": "313.1万"
+    },
+    {
+      "rank": 80,
+      "name": "Better Fishing",
+      "weekly": "1万",
+      "total": "109.3万"
+    },
+    {
+      "rank": 81,
+      "name": "TomTom",
+      "weekly": "1万",
+      "total": "4812.8万"
+    },
+    {
+      "rank": 82,
+      "name": "Threat Plates",
+      "weekly": "1万",
+      "total": "2671.3万"
+    },
+    {
+      "rank": 83,
+      "name": "LittleWigs",
+      "weekly": "9861",
+      "total": "6109万"
+    },
+    {
+      "rank": 84,
+      "name": "Mailwright",
+      "weekly": "9845",
+      "total": "1.3万"
+    },
+    {
+      "rank": 85,
+      "name": "HandyNotes: MapNotes",
+      "weekly": "9709",
+      "total": "63.5万"
+    },
+    {
+      "rank": 86,
+      "name": "GatherMate2 Data Wowhead classic",
+      "weekly": "9378",
+      "total": "1396.2万"
+    },
+    {
+      "rank": 87,
+      "name": "BugSack",
+      "weekly": "9198",
+      "total": "851.4万"
+    },
+    {
+      "rank": 88,
+      "name": "Waylaid Auction Helper",
+      "weekly": "9089",
+      "total": "1.3万"
+    },
+    {
+      "rank": 89,
+      "name": "魔兽无限游戏战斗助手",
+      "weekly": "9037",
+      "total": "2.2万"
+    },
+    {
+      "rank": 90,
+      "name": "PallyPower Forever",
+      "weekly": "8829",
+      "total": "1.2万"
+    },
+    {
+      "rank": 91,
+      "name": "TinyInspect 重制版",
+      "weekly": "8064",
+      "total": "1.2万"
+    },
+    {
+      "rank": 92,
+      "name": "Hunters Handbook",
+      "weekly": "7800",
+      "total": "1.2万"
+    },
+    {
+      "rank": 93,
+      "name": "Prat 3.0",
+      "weekly": "7476",
+      "total": "2531.9万"
+    },
+    {
+      "rank": 94,
+      "name": "ClassicSpellActivations",
+      "weekly": "7026",
+      "total": "127.3万"
+    },
+    {
+      "rank": 95,
+      "name": "喵影无限服掉落插件",
+      "weekly": "6835",
+      "total": "2.7万"
+    },
+    {
+      "rank": 96,
+      "name": "Leatrix_Maps白云飞修复版",
+      "weekly": "6671",
+      "total": "9494"
+    },
+    {
+      "rank": 97,
+      "name": "Cooldown Manager Centered - Better CDM CMC",
+      "weekly": "6577",
+      "total": "113.5万"
+    },
+    {
+      "rank": 98,
+      "name": "BugGrabber",
+      "weekly": "6502",
+      "total": "934.7万"
+    },
+    {
+      "rank": 99,
+      "name": "RXP Custom Quest Guides",
+      "weekly": "6422",
+      "total": "2.8万"
+    },
+    {
+      "rank": 100,
+      "name": "Polestar Guides",
+      "weekly": "6118",
+      "total": "7858"
+    }
+  ],
+  "crossVersionCheck": [
+    {
+      "name": "BlizzMove",
+      "foreverWeekly": "6.5万",
+      "retailWeekly": "6.5万",
+      "bothTotal": "670.3万"
+    },
+    {
+      "name": "Details! Damage Meter",
+      "foreverWeekly": "8.4万",
+      "retailWeekly": "8.4万",
+      "bothTotal": "2亿"
+    },
+    {
+      "name": "DBM-Core",
+      "foreverWeekly": "18.8万",
+      "retailWeekly": "18.9万",
+      "bothTotal": "4.8亿",
+      "note": "不同时间读取，不能据此推断分版本计数"
+    }
+  ]
+}

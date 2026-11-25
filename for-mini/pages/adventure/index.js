@@ -1,6 +1,8 @@
 const adventure = require('../../services/adventure')
 const service = require('../../services/forever-data')
+const oss = require('../../services/oss-manifest')
 const dungeonIndex = require('../../data/forever-dungeon-snapshot')
+const posterModel = require('../../services/share-poster-model')
 
 const DUNGEONS = new Map(dungeonIndex.items.map((d) => [d.id, d.nameCn || d.nameEn || d.id]))
 const PAGE_SIZE = 24
@@ -17,7 +19,9 @@ Page({
     showDone: false,
     groups: [],
     more: false,
-    pending: 0
+    pending: 0,
+    posterOpen: false,
+    posterSpec: null
   },
 
   onLoad() {
@@ -99,14 +103,31 @@ Page({
   loadSources(force) {
     if (this.sourceRequest) return this.sourceRequest
     if (!Object.keys(adventure.read().gear).length || (this.loot && !force)) return Promise.resolve()
-    this.sourceRequest = service.loadLootIndex().then((result) => {
-      if (this.closed || !result.data) return
+    const loadLoot = service.loadLootIndex().then((result) => {
+      if (this.closed || !result || !result.data) return
       this.loot = result.data
+      this.batch = result.batch || this.batch
       this.sourceMode = result.source
       this.indexedIds = null
       this.indexTargets()
-      this.render()
-    }).catch(() => {}).finally(() => { this.sourceRequest = null })
+    }).catch(() => {})
+    const loadBisIcons = (this.bisIcons && !force)
+      ? Promise.resolve()
+      : oss.loadKey('bisItems').then((res) => {
+        if (this.closed || !res || !res.data || !Array.isArray(res.data.items)) return
+        const batch = res.batch || this.batch || { env: oss.ACTIVE_ENV }
+        this.batch = this.batch || batch
+        const map = new Map()
+        res.data.items.forEach((row) => {
+          if (row && row[0] && row[4]) {
+            map.set(String(row[0]), oss.iconUrl(batch, row[4]))
+          }
+        })
+        this.bisIcons = map
+      }).catch(() => {})
+    this.sourceRequest = Promise.all([loadLoot, loadBisIcons]).then(() => {
+      if (!this.closed) this.render()
+    }).finally(() => { this.sourceRequest = null })
     return this.sourceRequest
   },
 
@@ -116,12 +137,18 @@ Page({
     if (ids === this.indexedIds) return
     this.indexedIds = ids
     this.sources = new Map()
+    this.lootIcons = new Map()
+    const batch = this.batch || { env: oss.ACTIVE_ENV }
     const idAt = this.loot.cols.indexOf('itemId')
     const bossAt = this.loot.cols.indexOf('boss')
+    const iconAt = this.loot.cols.indexOf('iconKey')
     for (const dungeon of this.loot.dungeons || []) {
       for (const row of dungeon.rows || []) {
         const id = String(row[idAt])
         if (!gear[id]) continue
+        if (iconAt >= 0 && row[iconAt] && !this.lootIcons.has(id)) {
+          this.lootIcons.set(id, oss.iconUrl(batch, row[iconAt]))
+        }
         const matches = this.sources.get(id) || new Map()
         const source = matches.get(dungeon.id) || {
           id: dungeon.id, name: dungeon.nameCn || DUNGEONS.get(dungeon.id) || dungeon.id, bosses: []
@@ -158,7 +185,12 @@ Page({
       const key = plannedId || (sources.length ? sources[0].id : '')
       const title = DUNGEONS.get(key) || item.dungeon || (key ? '其他副本' : '其他来源')
       if (!groups.has(key)) groups.set(key, { key, title, rows: [] })
+      const resolvedIcon = item.iconUrl
+        || (this.lootIcons && this.lootIcons.get(item.id))
+        || (this.bisIcons && this.bisIcons.get(item.id))
+        || ''
       groups.get(key).rows.push(Object.assign({}, item, {
+        iconUrl: resolvedIcon,
         sources,
         sourceText: item.source || '副本掉落待核'
       }))
@@ -207,5 +239,38 @@ Page({
 
   browseGear() {
     wx.navigateTo({ url: '/pages/bis/index?pick=1' })
+  },
+
+  getDungeonArtMap() {
+    const batch = this.batch || { env: oss.ACTIVE_ENV }
+    return posterModel.buildDungeonArtMap(dungeonIndex.items || [], (art) => oss.assetUrl(batch, art))
+  },
+
+  openAdventurePoster() {
+    const launch = () => {
+      if (this.closed) return
+      const spec = posterModel.buildAdventurePoster(this.data.plans, this.data.groups, this.getDungeonArtMap())
+      this.setData({ posterSpec: spec, posterOpen: true })
+    }
+    if (this.sourceRequest) {
+      let fired = false
+      const done = () => { if (!fired) { fired = true; launch() } }
+      setTimeout(done, 800)
+      this.sourceRequest.then(done, done)
+      return
+    }
+    launch()
+  },
+
+  closeSharePoster() {
+    this.setData({ posterOpen: false })
+  },
+
+  onShareAppMessage() {
+    return { title: '我的冒险清单 · 跑本助手', path: '/pages/adventure/index' }
+  },
+
+  onShareTimeline() {
+    return { title: '我的冒险清单 · 跑本助手' }
   }
 })

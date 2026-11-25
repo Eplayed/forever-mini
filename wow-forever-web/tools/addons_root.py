@@ -29,6 +29,8 @@ CANDIDATES = [
     "C:/GAME/World of Warcraft/_forever_/Interface/AddOns",
     "/mnt/c/GAME/World of Warcraft/_cn_beta_/Interface/AddOns",
     "/mnt/c/GAME/World of Warcraft/_forever_/Interface/AddOns",
+    "C:/GAME/World of Warcraft/ziliao-addons-backup/2026-11-21-pre-update/AddOns",
+    "/mnt/c/GAME/World of Warcraft/ziliao-addons-backup/2026-11-21-pre-update/AddOns",
     os.path.join(HOME, "Documents", "project", ".scratch", "wow"),
     os.path.join(REPO_PARENT, ".scratch", "wow"),
     os.path.join(REPO_PARENT, ".scratch", "wow-client-2026-10-21"),

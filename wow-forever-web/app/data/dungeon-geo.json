@@ -1,46 +1,104 @@
 {
  "meta": {
   "kind": "dungeon-geo",
-  "generatedAt": "2026-11-09",
+  "generatedAt": "2026-11-25",
   "method": "tools/extract-df-geo.py 抽快照 → tools/merge-dungeon-geo.py 出这份成品",
   "note": "副本入口（在区域图上的百分比坐标）与各首领在副本内部图上的位置。只有副本详情页读这一份，列表页不背它。",
   "coordinateNote": "入口坐标的参照物是那一行的「地图编号」所指的区域图；首领坐标的参照物是这座本自己的内部图（bossMap 那张）。没有 bossMap 的本，首领位置仍只给数字、不画点",
-  "mapNote": "首领画点的底图分两类：25 座用的是游戏里那张副本地图（插件作者从游戏里截下来整理的，画的就是官方那张图）；3 座（领主大厅、洛丹伦废墟、挖掘场：湿地）游戏内没有地图，用的是插件作者自绘的示意图。文件都来自第三方插件（DungeonsForever 1.8.20 3 张、XR_DungeonGuide 65 25 张），不是暴雪直接发布的素材文件，2026-10-19 站主决定采用；只拿图，作者写的说明一条没取。整目录删掉就退回只显示数字坐标。",
+  "mapNote": "首领画点的底图分两类：26 座用的是游戏里那张副本地图（插件作者从游戏里截下来整理的，画的就是官方那张图）；9 座（奥卡兹监狱、黑喉要塞、达拉然、领主大厅、克罗多克要塞、洛丹伦废墟、塑源者平台、沉没之城、挖掘场：湿地）游戏内没有地图，用的是插件作者自绘的示意图。文件都来自第三方插件（DungeonsForever 2.1.132 9 张、WoW-Forever-Client 1.60.1 1 张、XR_DungeonGuide 65 25 张），不是暴雪直接发布的素材文件，2026-10-19 站主决定采用；只拿图，作者写的说明一条没取。整目录删掉就退回只显示数字坐标。",
   "sources": [
    {
     "key": "df",
-    "name": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+    "name": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
     "kind": "第三方插件从客户端读出的位置",
-    "date": "2026-11-05",
+    "date": "2026-11-25",
     "license": "插件 LICENSE：保留所有权利——这一层只取坐标与地图编号，作者写的文字说明一条没取"
    },
    {
     "key": "map",
-    "name": "DungeonsForever 1.8.20 3 张、XR_DungeonGuide 65 25 张",
-    "kind": "副本内部底图（25 座用游戏内地图的截图、3 座用插件作者自绘）",
-    "date": "2026-10-19",
+    "name": "DungeonsForever 2.1.132 9 张、WoW-Forever-Client 1.60.1 1 张、XR_DungeonGuide 65 25 张",
+    "kind": "副本内部底图（26 座用游戏内地图的截图、9 座用插件作者自绘）",
+    "date": "2026-11-24",
     "license": "来源插件的许可：DungeonsForever LICENSE 为「Copyright © 2026 圆圆 · 保留所有权利」，XR_DungeonGuide 同属作者作品。2026-10-19 站主拍板\"从插件里用\"，与站内已有的客户端原画同一套处理（本地留存、记来源与抓取日、可整体下线）；作者写的任何文字说明与攻略内容一律没取"
    }
   ],
   "counts": {
-   "entryDungeons": 28,
-   "bossDungeons": 30,
-   "bossRows": 201,
-   "bossMapped": 28,
-   "bossMapGame": 25,
-   "bossMapDrawn": 3,
-   "droppedRows": 5
+   "entryDungeons": 36,
+   "bossDungeons": 36,
+   "bossRows": 269,
+   "bossMapped": 35,
+   "bossMapGame": 26,
+   "bossMapDrawn": 9,
+   "droppedRows": 11
   }
  },
  "dungeons": {
+  "alcaz-prison": {
+   "entry": {
+    "mapId": "1445",
+    "x": 75.3,
+    "y": 14.1,
+    "zone": "尘泥沼泽",
+    "mapFile": "img/art/maps/1445.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "烈焰咆哮者": [
+     {
+      "x": 20.3,
+      "y": 79.9,
+      "floor": null
+     }
+    ],
+    "清道夫卡特琳娜": [
+     {
+      "x": 20.1,
+      "y": 49.8,
+      "floor": null
+     }
+    ],
+    "监工雷克斯": [
+     {
+      "x": 68.5,
+      "y": 66.2,
+      "floor": null
+     }
+    ],
+    "质问者": [
+     {
+      "x": 76.5,
+      "y": 22.2,
+      "floor": null
+     }
+    ],
+    "海潮主母卡扎斯": [
+     {
+      "x": 49.6,
+      "y": 34.1,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/alcazprison.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
   "blackfathom-deeps": {
    "entry": {
     "mapId": "1440",
     "x": 14.1,
     "y": 13.1,
     "zone": "灰谷",
-    "mapFile": null,
-    "noMap": true
+    "mapFile": "img/art/maps/1440.webp",
+    "noMap": false
    },
    "bossPos": {
     "阿库麦尔": [
@@ -52,8 +110,8 @@
     ],
     "阿奎尼斯男爵": [
      {
-      "x": 41.5,
-      "y": 75.4,
+      "x": 44.2,
+      "y": 72.7,
       "floor": 2
      }
     ],
@@ -73,8 +131,8 @@
     ],
     "萨利维丝": [
      {
-      "x": 10.1,
-      "y": 36.0,
+      "x": 11.4,
+      "y": 39.8,
       "floor": null
      }
     ],
@@ -88,16 +146,6 @@
       "x": 44.1,
       "y": 23.4,
       "floor": 2
-     },
-     {
-      "x": 35.4,
-      "y": 48.3,
-      "floor": 2
-     },
-     {
-      "x": 33.8,
-      "y": 72.3,
-      "floor": 2
      }
     ],
     "瑟拉吉斯": [
@@ -105,13 +153,6 @@
       "x": 60.6,
       "y": 31.2,
       "floor": 3
-     }
-    ],
-    "暮光领主克尔里斯": [
-     {
-      "x": 51.9,
-      "y": 81.6,
-      "floor": 2
      }
     ]
    },
@@ -121,8 +162,241 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "blackmaw-hold": {
+   "entry": {
+    "mapId": "1447",
+    "x": 38.6,
+    "y": 33.2,
+    "zone": "艾萨拉",
+    "mapFile": "img/art/maps/1447.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "不屈的白骨之吻": [
+     {
+      "x": 44.6,
+      "y": 42.6,
+      "floor": null
+     }
+    ],
+    "长者萨满血鬃": [
+     {
+      "x": 84.7,
+      "y": 25.0,
+      "floor": null
+     }
+    ],
+    "狱牢头鬼": [
+     {
+      "x": 29.3,
+      "y": 57.2,
+      "floor": null
+     }
+    ],
+    "不羁之魂": [
+     {
+      "x": 81.1,
+      "y": 67.6,
+      "floor": null
+     }
+    ],
+    "瓦罗克斯·暗蹄": [
+     {
+      "x": 82.8,
+      "y": 81.3,
+      "floor": null
+     }
+    ],
+    "枯颌": [
+     {
+      "x": 47.5,
+      "y": 20.3,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/blackmawhold.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "blackrock-depths": {
+   "entry": {
+    "mapId": "1427",
+    "x": 45.6,
+    "y": 89.4,
+    "zone": "灼热峡谷",
+    "mapFile": "img/art/maps/1427.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "弗莱拉斯大使": [
+     {
+      "x": 53.8,
+      "y": 48.8,
+      "floor": 2
+     }
+    ],
+    "贝尔加": [
+     {
+      "x": 25.7,
+      "y": 52.7,
+      "floor": null
+     }
+    ],
+    "七贤之箱": [
+     {
+      "x": 53.7,
+      "y": 24.7,
+      "floor": 2
+     }
+    ],
+    "达格兰·索瑞森大帝": [
+     {
+      "x": 93.3,
+      "y": 13.7,
+      "floor": 2
+     }
+    ],
+    "弗诺斯·达克维尔": [
+     {
+      "x": 63.4,
+      "y": 20.5,
+      "floor": null
+     }
+    ],
+    "安格弗将军": [
+     {
+      "x": 35.6,
+      "y": 57.0,
+      "floor": null
+     },
+     {
+      "x": 36.5,
+      "y": 82.8,
+      "floor": 2
+     }
+    ],
+    "傀儡统帅阿格曼奇": [
+     {
+      "x": 36.4,
+      "y": 64.9,
+      "floor": 2
+     }
+    ],
+    "黑铁酒吧": [
+     {
+      "x": 48.2,
+      "y": 60.8,
+      "floor": 2
+     }
+    ],
+    "审讯官格斯塔恩": [
+     {
+      "x": 47.4,
+      "y": 91.9,
+      "floor": null
+     }
+    ],
+    "驯犬者格雷布玛尔": [
+     {
+      "x": 50.4,
+      "y": 63.0,
+      "floor": null
+     }
+    ],
+    "伊森迪奥斯": [
+     {
+      "x": 56.1,
+      "y": 31.2,
+      "floor": null
+     }
+    ],
+    "洛考尔": [
+     {
+      "x": 55.9,
+      "y": 66.9,
+      "floor": null
+     }
+    ],
+    "玛格姆斯": [
+     {
+      "x": 80.3,
+      "y": 11.8,
+      "floor": 2
+     }
+    ],
+    "无敌的潘佐尔": [
+     {
+      "x": 50.4,
+      "y": 32.5,
+      "floor": 2
+     }
+    ],
+    "法拉克斯": [
+     {
+      "x": 52.1,
+      "y": 64.1,
+      "floor": 2
+     }
+    ],
+    "铁炉堡公主茉艾拉·铜须": [
+     {
+      "x": 93.5,
+      "y": 8.7,
+      "floor": 2
+     }
+    ],
+    "控火师罗格雷恩": [
+     {
+      "x": 54.2,
+      "y": 96.5,
+      "floor": 2
+     }
+    ],
+    "竞技场：修行者高罗什": [
+     {
+      "x": 50.5,
+      "y": 90.2,
+      "floor": 2
+     }
+    ],
+    "维雷克": [
+     {
+      "x": 59.1,
+      "y": 67.1,
+      "floor": 2
+     }
+    ],
+    "典狱官斯迪尔基斯": [
+     {
+      "x": 60.6,
+      "y": 65.4,
+      "floor": 2
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/dmap_brd.webp",
+   "bossMapKind": "game-capture",
+   "bossMapRatio": "512/512",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -137,11 +411,39 @@
     "noMap": false
    },
    "bossPos": {
+    "奥术畸体": [
+     {
+      "x": 60.9,
+      "y": 74.9,
+      "floor": null
+     }
+    ],
+    "奥术之谜": [
+     {
+      "x": 65.3,
+      "y": 38.9,
+      "floor": null
+     }
+    ],
+    "墓穴骑士阿特雷克斯": [
+     {
+      "x": 48.9,
+      "y": 45.6,
+      "floor": 2
+     }
+    ],
     "邪能古树": [
      {
       "x": 53.2,
       "y": 51.4,
       "floor": null
+     }
+    ],
+    "被无视的琳恩": [
+     {
+      "x": 61.8,
+      "y": 14.9,
+      "floor": 2
      }
     ],
     "法力吞噬者": [
@@ -153,24 +455,27 @@
     ],
     "大法师之影": [
      {
-      "x": 49.2,
-      "y": 25.4,
+      "x": 45.7,
+      "y": 22.2,
       "floor": null
      }
     ],
     "不稳定的哨兵": [
      {
-      "x": 56.6,
-      "y": 36.2,
+      "x": 58.3,
+      "y": 34.0,
       "floor": null
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/dalaran.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -187,8 +492,8 @@
    "bossPos": {
     "绿皮船长": [
      {
-      "x": 61.7,
-      "y": 35.9,
+      "x": 57.9,
+      "y": 38.7,
       "floor": 2
      }
     ],
@@ -208,8 +513,8 @@
     ],
     "基尔尼格": [
      {
-      "x": 11.9,
-      "y": 73.1,
+      "x": 12.6,
+      "y": 76.0,
       "floor": 2
      }
     ],
@@ -236,8 +541,8 @@
     ],
     "斯尼德": [
      {
-      "x": 45.0,
-      "y": 88.9,
+      "x": 47.1,
+      "y": 87.0,
       "floor": null
      }
     ],
@@ -255,8 +560,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -273,8 +578,8 @@
    "bossPos": {
     "奥兹恩": [
      {
-      "x": 55.4,
-      "y": 26.9,
+      "x": 56.4,
+      "y": 28.1,
       "floor": 6
      }
     ],
@@ -287,15 +592,15 @@
     ],
     "蕾瑟塔蒂丝": [
      {
-      "x": 42.6,
-      "y": 48.2,
+      "x": 44.0,
+      "y": 47.4,
       "floor": 5
      }
     ],
     "普希林": [
      {
-      "x": 12.2,
-      "y": 31.0,
+      "x": 74.4,
+      "y": 44.0,
       "floor": 5
      }
     ],
@@ -313,8 +618,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -338,43 +643,43 @@
     ],
     "观察者克鲁什": [
      {
-      "x": 31.2,
-      "y": 25.4,
+      "x": 31.1,
+      "y": 21.9,
       "floor": null
      }
     ],
     "卫兵芬古斯": [
      {
-      "x": 49.3,
-      "y": 81.6,
+      "x": 49.6,
+      "y": 78.2,
       "floor": null
      }
     ],
     "卫兵摩尔达": [
      {
-      "x": 69.9,
-      "y": 75.2,
+      "x": 69.3,
+      "y": 75.8,
       "floor": null
      }
     ],
     "卫兵斯里基克": [
      {
-      "x": 27.7,
-      "y": 58.8,
+      "x": 26.1,
+      "y": 57.1,
       "floor": null
      }
     ],
     "戈多克大王": [
      {
-      "x": 31.9,
-      "y": 25.9,
+      "x": 31.8,
+      "y": 26.3,
       "floor": null
      }
     ],
     "践踏者克雷格": [
      {
-      "x": 62.0,
-      "y": 65.7,
+      "x": 60.9,
+      "y": 67.8,
       "floor": null
      }
     ]
@@ -385,8 +690,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -403,8 +708,8 @@
    "bossPos": {
     "伊琳娜·暗木": [
      {
-      "x": 28.2,
-      "y": 85.1,
+      "x": 21.0,
+      "y": 78.1,
       "floor": 2
      }
     ],
@@ -417,15 +722,15 @@
     ],
     "卡雷迪斯镇长": [
      {
-      "x": 29.4,
-      "y": 43.6,
+      "x": 33.7,
+      "y": 44.8,
       "floor": 3
      }
     ],
     "托塞德林王子": [
      {
-      "x": 59.9,
-      "y": 23.5,
+      "x": 62.2,
+      "y": 22.7,
       "floor": 4
      }
     ],
@@ -450,8 +755,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -468,8 +773,8 @@
    "bossPos": {
     "群体打击者9-60": [
      {
-      "x": 43.8,
-      "y": 86.5,
+      "x": 43.2,
+      "y": 87.7,
       "floor": 3
      }
     ],
@@ -489,8 +794,8 @@
     ],
     "格鲁比斯": [
      {
-      "x": 81.9,
-      "y": 65.1,
+      "x": 77.2,
+      "y": 66.8,
       "floor": null
      }
     ],
@@ -503,9 +808,9 @@
     ],
     "粘性辐射尘": [
      {
-      "x": 57.6,
-      "y": 56.6,
-      "floor": null
+      "x": 79.5,
+      "y": 40.3,
+      "floor": 2
      }
     ]
    },
@@ -515,8 +820,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -544,13 +849,6 @@
       "y": 63.6,
       "floor": null
      }
-    ],
-    "劫掠者": [
-     {
-      "x": 50.5,
-      "y": 50.6,
-      "floor": null
-     }
     ]
    },
    "bossMap": "img/art/dungeonmaps/hallofthanes.webp",
@@ -559,8 +857,185 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "kroldok-stronghold": {
+   "entry": {
+    "mapId": "2548",
+    "x": 37.5,
+    "y": 37.9,
+    "zone": "河林",
+    "mapFile": "img/art/maps/2548.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "头目图夫": [
+     {
+      "x": 62.7,
+      "y": 39.1,
+      "floor": null
+     }
+    ],
+    "纳古克": [
+     {
+      "x": 34.7,
+      "y": 50.3,
+      "floor": null
+     }
+    ],
+    "碎奴者格罗克斯": [
+     {
+      "x": 26.2,
+      "y": 64.0,
+      "floor": null
+     }
+    ],
+    "暮光指挥官扎尔莫克": [
+     {
+      "x": 39.1,
+      "y": 69.4,
+      "floor": null
+     }
+    ],
+    "驯兽师阿什卡": [
+     {
+      "x": 60.1,
+      "y": 50.1,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/kroldokstronghold.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "lower-blackrock-spire": {
+   "entry": {
+    "mapId": "1428",
+    "x": 33.0,
+    "y": 25.2,
+    "zone": "燃烧平原",
+    "mapFile": "img/art/maps/1428.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "班诺克·巨斧": [
+     {
+      "x": 46.9,
+      "y": 64.1,
+      "floor": null
+     }
+    ],
+    "水晶之牙": [
+     {
+      "x": 55.4,
+      "y": 75.8,
+      "floor": 2
+     }
+    ],
+    "霍克·巴什古德": [
+     {
+      "x": 34.8,
+      "y": 60.0,
+      "floor": 5
+     },
+     {
+      "x": 39.5,
+      "y": 67.5,
+      "floor": 5
+     }
+    ],
+    "奴役者基兹鲁尔": [
+     {
+      "x": 40.5,
+      "y": 83.6,
+      "floor": 5
+     }
+    ],
+    "欧莫克大王": [
+     {
+      "x": 35.1,
+      "y": 55.3,
+      "floor": 3
+     }
+    ],
+    "烟网蛛后": [
+     {
+      "x": 61.4,
+      "y": 75.2,
+      "floor": 2
+     }
+    ],
+    "维姆萨拉克": [
+     {
+      "x": 57.8,
+      "y": 60.5,
+      "floor": 6
+     }
+    ],
+    "军需官兹格雷斯": [
+     {
+      "x": 54.1,
+      "y": 85.0,
+      "floor": 5
+     }
+    ],
+    "暗影猎手沃什加斯": [
+     {
+      "x": 55.5,
+      "y": 69.4,
+      "floor": 2
+     }
+    ],
+    "尖石统帅": [
+     {
+      "x": 35.8,
+      "y": 60.4,
+      "floor": 3
+     }
+    ],
+    "尖石屠夫": [
+     {
+      "x": 44.8,
+      "y": 57.8,
+      "floor": 3
+     }
+    ],
+    "尖石首席法师": [
+     {
+      "x": 37.4,
+      "y": 61.4,
+      "floor": 3
+     }
+    ],
+    "指挥官沃恩": [
+     {
+      "x": 52.5,
+      "y": 54.9,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/dmap_lbrs.webp",
+   "bossMapKind": "game-capture",
+   "bossMapRatio": "512/512",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -584,8 +1059,8 @@
     ],
     "兰斯利德": [
      {
-      "x": 40.6,
-      "y": 48.2,
+      "x": 41.0,
+      "y": 49.0,
       "floor": 2
      }
     ],
@@ -593,6 +1068,13 @@
      {
       "x": 37.7,
       "y": 69.4,
+      "floor": null
+     }
+    ],
+    "玛拉多斯": [
+     {
+      "x": 49.1,
+      "y": 77.9,
       "floor": null
      }
     ],
@@ -605,15 +1087,15 @@
     ],
     "诺克赛恩": [
      {
-      "x": 34.8,
-      "y": 10.7,
+      "x": 35.8,
+      "y": 9.0,
       "floor": null
      }
     ],
     "瑟莱德丝公主": [
      {
-      "x": 24.2,
-      "y": 78.4,
+      "x": 26.0,
+      "y": 78.3,
       "floor": 2
      }
     ],
@@ -626,16 +1108,23 @@
     ],
     "洛特格里普": [
      {
-      "x": 33.3,
-      "y": 77.1,
+      "x": 40.3,
+      "y": 81.5,
       "floor": 2
      }
     ],
     "工匠吉兹洛克": [
      {
-      "x": 48.4,
-      "y": 68.6,
+      "x": 49.1,
+      "y": 67.7,
       "floor": 2
+     }
+    ],
+    "温格": [
+     {
+      "x": 54.8,
+      "y": 23.0,
+      "floor": null
      }
     ]
    },
@@ -645,8 +1134,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -669,11 +1158,14 @@
      }
     ]
    },
+   "bossMap": "img/art/dungeonmaps/onyxiaslair.webp",
+   "bossMapKind": "game-capture",
+   "bossMapRatio": "640/427",
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -723,8 +1215,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -766,6 +1258,13 @@
       "y": 67.2,
       "floor": null
      }
+    ],
+    "图特卡什": [
+     {
+      "x": 58.7,
+      "y": 34.8,
+      "floor": null
+     }
     ]
    },
    "bossMap": "img/art/dungeonmaps/dmap_rfndowns.webp",
@@ -774,8 +1273,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -813,7 +1312,7 @@
     ],
     "卡尔加·刺肋": [
      {
-      "x": 26.4,
+      "x": 25.8,
       "y": 32.4,
       "floor": null
      }
@@ -848,8 +1347,8 @@
     ],
     "鲁古格": [
      {
-      "x": 64.8,
-      "y": 42.1,
+      "x": 44.1,
+      "y": 58.5,
       "floor": null
      }
     ]
@@ -860,8 +1359,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -878,29 +1377,29 @@
    "bossPos": {
     "比约克": [
      {
-      "x": 34.7,
-      "y": 42.5,
+      "x": 36.5,
+      "y": 38.8,
       "floor": null
      }
     ],
     "洛丹伦上尉": [
      {
-      "x": 38.5,
-      "y": 25.0,
+      "x": 37.8,
+      "y": 23.0,
       "floor": null
      }
     ],
     "拉斯玛尔": [
      {
-      "x": 41.3,
-      "y": 62.7,
+      "x": 43.9,
+      "y": 60.7,
       "floor": null
      }
     ],
     "被遗弃者": [
      {
-      "x": 36.5,
-      "y": 53.3,
+      "x": 36.7,
+      "y": 53.2,
       "floor": null
      }
     ],
@@ -913,15 +1412,8 @@
     ],
     "枯牙": [
      {
-      "x": 66.8,
-      "y": 39.2,
-      "floor": null
-     }
-    ],
-    "邪恶的维克多": [
-     {
-      "x": 33.2,
-      "y": 64.8,
+      "x": 70.2,
+      "y": 37.3,
       "floor": null
      }
     ]
@@ -932,8 +1424,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -950,6 +1442,11 @@
    "bossPos": {
     "赫洛德": [
      {
+      "x": 78.7,
+      "y": 10.8,
+      "floor": null
+     },
+     {
       "x": 78.6,
       "y": 10.8,
       "floor": 3
@@ -962,8 +1459,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -980,6 +1477,11 @@
    "bossPos": {
     "大检察官法尔班克斯": [
      {
+      "x": 55.6,
+      "y": 24.7,
+      "floor": null
+     },
+     {
       "x": 55.4,
       "y": 26.1,
       "floor": 4
@@ -987,12 +1489,22 @@
     ],
     "大检察官怀特迈恩": [
      {
+      "x": 49.1,
+      "y": 16.0,
+      "floor": null
+     },
+     {
       "x": 49.0,
       "y": 16.9,
       "floor": 4
      }
     ],
     "血色十字军指挥官莫格莱尼": [
+     {
+      "x": 49.0,
+      "y": 27.5,
+      "floor": null
+     },
      {
       "x": 49.1,
       "y": 27.2,
@@ -1006,8 +1518,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1024,81 +1536,36 @@
    "bossPos": {
     "永醒的艾希尔": [
      {
-      "x": 41.6,
-      "y": 67.9,
-      "floor": null
-     },
-     {
-      "x": 40.9,
-      "y": 46.6,
-      "floor": null
-     },
-     {
-      "x": 36.7,
-      "y": 43.9,
-      "floor": null
-     },
-     {
-      "x": 35.5,
-      "y": 66.4,
+      "x": 32.0,
+      "y": 66.6,
       "floor": null
      }
     ],
     "血法师萨尔诺斯": [
      {
       "x": 24.4,
-      "y": 50.8,
+      "y": 56.3,
       "floor": null
      }
     ],
     "死灵勇士": [
      {
-      "x": 41.6,
-      "y": 67.9,
-      "floor": null
-     },
-     {
-      "x": 40.9,
-      "y": 46.6,
-      "floor": null
-     },
-     {
-      "x": 36.7,
-      "y": 43.9,
-      "floor": null
-     },
-     {
-      "x": 35.5,
-      "y": 66.4,
+      "x": 41.3,
+      "y": 45.7,
       "floor": null
      }
     ],
     "审讯员韦沙斯": [
      {
-      "x": 71.5,
-      "y": 58.9,
+      "x": 71.9,
+      "y": 60.2,
       "floor": null
      }
     ],
     "铁脊死灵": [
      {
-      "x": 41.6,
-      "y": 67.9,
-      "floor": null
-     },
-     {
-      "x": 40.9,
-      "y": 46.6,
-      "floor": null
-     },
-     {
-      "x": 36.7,
-      "y": 43.9,
-      "floor": null
-     },
-     {
-      "x": 35.5,
-      "y": 66.4,
+      "x": 41.8,
+      "y": 66.6,
       "floor": null
      }
     ]
@@ -1109,8 +1576,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1127,12 +1594,22 @@
    "bossPos": {
     "奥法师杜安": [
      {
+      "x": 83.7,
+      "y": 74.7,
+      "floor": null
+     },
+     {
       "x": 83.2,
       "y": 74.5,
       "floor": 2
      }
     ],
     "驯犬者洛克希": [
+     {
+      "x": 31.8,
+      "y": 88.0,
+      "floor": null
+     },
      {
       "x": 30.8,
       "y": 87.8,
@@ -1146,8 +1623,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1164,22 +1641,29 @@
    "bossPos": {
     "基尔图诺斯的卫士": [
      {
-      "x": 78.9,
-      "y": 71.6,
+      "x": 76.6,
+      "y": 54.7,
       "floor": null
+     }
+    ],
+    "黑暗院长加丁": [
+     {
+      "x": 67.5,
+      "y": 29.8,
+      "floor": 4
      }
     ],
     "瑟尔林·卡斯迪诺夫教授": [
      {
-      "x": 95.6,
-      "y": 45.9,
+      "x": 88.8,
+      "y": 45.5,
       "floor": 3
      }
     ],
     "讲师玛丽希亚": [
      {
-      "x": 72.8,
-      "y": 80.9,
+      "x": 72.6,
+      "y": 70.4,
       "floor": 3
      }
     ],
@@ -1190,24 +1674,31 @@
       "floor": 3
      }
     ],
+    "传令官基尔图诺斯": [
+     {
+      "x": 49.5,
+      "y": 10.3,
+      "floor": 2
+     }
+    ],
     "伊露希亚·巴罗夫": [
      {
       "x": 67.0,
-      "y": 6.1,
+      "y": 14.9,
       "floor": 4
      }
     ],
     "阿雷克斯·巴罗夫": [
      {
-      "x": 84.4,
-      "y": 30.8,
+      "x": 79.5,
+      "y": 29.8,
       "floor": 4
      }
     ],
     "博学者普克尔特": [
      {
-      "x": 72.0,
-      "y": 12.0,
+      "x": 72.2,
+      "y": 22.1,
       "floor": 3
      }
     ],
@@ -1220,22 +1711,22 @@
     ],
     "莱斯·霜语": [
      {
-      "x": 40.6,
-      "y": 88.4,
+      "x": 40.4,
+      "y": 81.4,
       "floor": 4
      }
     ],
     "血骨傀儡": [
      {
-      "x": 30.4,
-      "y": 62.4,
+      "x": 31.5,
+      "y": 64.1,
       "floor": 3
      }
     ],
     "拉文尼亚": [
      {
       "x": 67.5,
-      "y": 52.1,
+      "y": 48.7,
       "floor": 4
      }
     ],
@@ -1253,8 +1744,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1299,16 +1790,16 @@
     ],
     "邪恶战马 / 暗影战马": [
      {
-      "x": 36.0,
-      "y": 62.9,
+      "x": 37.1,
+      "y": 59.6,
       "floor": null
      }
     ],
     "吞噬者芬鲁斯": [
      {
-      "x": 55.7,
-      "y": 64.5,
-      "floor": 6
+      "x": 54.7,
+      "y": 53.1,
+      "floor": 4
      }
     ],
     "盲眼守卫奥杜": [
@@ -1327,8 +1818,8 @@
     ],
     "雷希戈尔": [
      {
-      "x": 66.1,
-      "y": 71.1,
+      "x": 66.0,
+      "y": 71.7,
       "floor": null
      }
     ],
@@ -1346,8 +1837,115 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "shapers-terrace": {
+   "entry": {
+    "mapId": "1449",
+    "x": 48.1,
+    "y": 6.1,
+    "zone": "安戈洛环形山",
+    "mapFile": "img/art/maps/1449.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "霹雳": [
+     {
+      "x": 50.2,
+      "y": 63.1,
+      "floor": null
+     }
+    ],
+    "烈火": [
+     {
+      "x": 27.9,
+      "y": 61.7,
+      "floor": null
+     }
+    ],
+    "恐角龙母": [
+     {
+      "x": 80.5,
+      "y": 56.8,
+      "floor": null
+     }
+    ],
+    "伊扎雷尔": [
+     {
+      "x": 78.4,
+      "y": 43.5,
+      "floor": null
+     }
+    ],
+    "奥普国王": [
+     {
+      "x": 95.5,
+      "y": 80.6,
+      "floor": null
+     }
+    ],
+    "娜娜亚": [
+     {
+      "x": 72.0,
+      "y": 57.4,
+      "floor": null
+     }
+    ],
+    "雪爪": [
+     {
+      "x": 23.7,
+      "y": 21.3,
+      "floor": null
+     }
+    ],
+    "雷蹄": [
+     {
+      "x": 64.0,
+      "y": 66.7,
+      "floor": null
+     }
+    ],
+    "泰坦巨龙": [
+     {
+      "x": 24.7,
+      "y": 44.3,
+      "floor": null
+     }
+    ],
+    "托瑞尔": [
+     {
+      "x": 80.8,
+      "y": 42.0,
+      "floor": null
+     }
+    ],
+    "毒脊": [
+     {
+      "x": 46.8,
+      "y": 63.0,
+      "floor": null
+     }
+    ],
+    "翠鳞": [
+     {
+      "x": 56.2,
+      "y": 32.7,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/shapersterrace.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1369,51 +1967,45 @@
       "floor": null
      }
     ],
+    "巴纳扎尔": [
+     {
+      "x": 20.4,
+      "y": 81.3,
+      "floor": null
+     }
+    ],
     "炮手威利": [
      {
-      "x": 3.6,
-      "y": 50.1,
+      "x": 3.9,
+      "y": 50.7,
+      "floor": null
+     }
+    ],
+    "红衣铸锤师": [
+     {
+      "x": 11.7,
+      "y": 47.8,
       "floor": null
      }
     ],
     "弗雷斯特恩": [
      {
-      "x": 84.7,
-      "y": 45.4,
-      "floor": null
-     },
-     {
-      "x": 85.1,
-      "y": 27.5,
-      "floor": null
-     },
-     {
-      "x": 63.9,
-      "y": 24.8,
-      "floor": null
-     },
-     {
-      "x": 59.8,
-      "y": 26.7,
+      "x": 60.6,
+      "y": 32.9,
       "floor": null
      }
     ],
     "狂热的玛洛尔": [
      {
-      "x": 30.4,
-      "y": 40.0,
+      "x": 30.1,
+      "y": 40.1,
       "floor": null
      }
     ],
     "斯库尔": [
      {
-      "x": 81.5,
-      "y": 43.8,
-      "floor": null
-     },
-     {
-      "x": 57.5,
-      "y": 69.7,
+      "x": 58.9,
+      "y": 66.6,
       "floor": null
      }
     ],
@@ -1426,8 +2018,8 @@
     ],
     "不可宽恕者": [
      {
-      "x": 72.9,
-      "y": 19.3,
+      "x": 73.5,
+      "y": 20.3,
       "floor": null
      }
     ]
@@ -1438,8 +2030,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1456,8 +2048,8 @@
    "bossPos": {
     "瑞文戴尔男爵": [
      {
-      "x": 37.2,
-      "y": 19.9,
+      "x": 38.9,
+      "y": 20.4,
       "floor": 2
      }
     ],
@@ -1468,24 +2060,38 @@
       "floor": 2
      }
     ],
+    "黑衣守卫铸剑师": [
+     {
+      "x": 74.8,
+      "y": 50.7,
+      "floor": 2
+     }
+    ],
     "巴瑟拉斯镇长": [
      {
-      "x": 65.3,
-      "y": 75.5,
+      "x": 56.6,
+      "y": 15.7,
       "floor": 2
      }
     ],
     "苍白的玛勒基": [
      {
-      "x": 68.2,
-      "y": 19.9,
+      "x": 67.7,
+      "y": 21.3,
       "floor": 2
      }
     ],
     "奈鲁布恩坎": [
      {
-      "x": 56.4,
-      "y": 46.9,
+      "x": 57.3,
+      "y": 45.9,
+      "floor": 2
+     }
+    ],
+    "吞咽者拉姆斯登": [
+     {
+      "x": 45.5,
+      "y": 19.5,
       "floor": 2
      }
     ],
@@ -1503,8 +2109,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1519,17 +2125,66 @@
     "noMap": false
    },
    "bossPos": {
+    "阿塔拉利恩": [
+     {
+      "x": 50.3,
+      "y": 58.8,
+      "floor": 3
+     }
+    ],
+    "哈卡的化身": [
+     {
+      "x": 24.0,
+      "y": 45.3,
+      "floor": null
+     }
+    ],
+    "德姆塞卡尔": [
+     {
+      "x": 44.2,
+      "y": 39.9,
+      "floor": null
+     }
+    ],
+    "加什尔": [
+     {
+      "x": 55.3,
+      "y": 58.9,
+      "floor": null
+     }
+    ],
     "哈扎斯": [
      {
-      "x": 44.8,
-      "y": 85.1,
+      "x": 43.5,
+      "y": 90.7,
+      "floor": null
+     }
+    ],
+    "胡库": [
+     {
+      "x": 55.3,
+      "y": 32.5,
       "floor": null
      }
     ],
     "预言者迦玛兰": [
      {
-      "x": 76.0,
-      "y": 37.0,
+      "x": 73.2,
+      "y": 38.4,
+      "floor": null
+     }
+    ],
+    "洛若尔": [
+     {
+      "x": 60.3,
+      "y": 45.7,
+      "floor": null
+     }
+    ],
+    "米杉": [
+     {
+      "x": 45.0,
+      "y": 32.3,
       "floor": null
      }
     ],
@@ -1542,22 +2197,43 @@
     ],
     "可悲的奥戈姆": [
      {
-      "x": 76.7,
-      "y": 36.1,
+      "x": 78.3,
+      "y": 37.7,
       "floor": null
      }
     ],
     "伊兰尼库斯的阴影": [
      {
-      "x": 68.6,
+      "x": 66.4,
       "y": 87.4,
       "floor": null
      }
     ],
     "哈卡的后代": [
      {
-      "x": 64.0,
-      "y": 45.9,
+      "x": 57.3,
+      "y": 45.6,
+      "floor": null
+     }
+    ],
+    "德拉维沃尔": [
+     {
+      "x": 44.4,
+      "y": 49.7,
+      "floor": null
+     }
+    ],
+    "祖罗": [
+     {
+      "x": 45.0,
+      "y": 59.1,
+      "floor": null
+     }
+    ],
+    "祖罗尔": [
+     {
+      "x": 39.5,
+      "y": 45.6,
       "floor": null
      }
     ]
@@ -1568,8 +2244,94 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "the-drowned-city": {
+   "entry": {
+    "mapId": "1434",
+    "x": 21.5,
+    "y": 27.7,
+    "zone": "荆棘谷",
+    "mapFile": "img/art/maps/1434.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "德雷德莱斯船长": [
+     {
+      "x": 51.0,
+      "y": 26.3,
+      "floor": null
+     }
+    ],
+    "不死骨髓": [
+     {
+      "x": 27.3,
+      "y": 49.8,
+      "floor": null
+     }
+    ],
+    "吉尔": [
+     {
+      "x": 79.9,
+      "y": 87.3,
+      "floor": null
+     }
+    ],
+    "毒蛇明洛斯": [
+     {
+      "x": 9.2,
+      "y": 50.0,
+      "floor": null
+     }
+    ],
+    "原始元素": [
+     {
+      "x": 84.6,
+      "y": 75.9,
+      "floor": null
+     }
+    ],
+    "乌姆布拉": [
+     {
+      "x": 52.0,
+      "y": 85.2,
+      "floor": null
+     }
+    ],
+    "瓦尔塔卡": [
+     {
+      "x": 47.8,
+      "y": 71.7,
+      "floor": null
+     }
+    ],
+    "辛阿卡": [
+     {
+      "x": 50.4,
+      "y": 49.4,
+      "floor": null
+     }
+    ],
+    "祖拉莱": [
+     {
+      "x": 72.7,
+      "y": 51.6,
+      "floor": null
+     }
+    ]
+   },
+   "bossMap": "img/art/dungeonmaps/thedrownedcity.webp",
+   "bossMapKind": "addon-drawn",
+   "bossMapRatio": "640/427",
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1580,8 +2342,8 @@
     "x": 50.4,
     "y": 66.4,
     "zone": "暴风城",
-    "mapFile": null,
-    "noMap": true
+    "mapFile": "img/art/maps/1453.webp",
+    "noMap": false
    },
    "bossPos": {
     "布鲁高·铁拳": [
@@ -1658,13 +2420,6 @@
       "y": 37.5,
       "floor": null
      }
-    ],
-    "巴吉尔·特雷德": [
-     {
-      "x": 85.7,
-      "y": 51.0,
-      "floor": null
-     }
     ]
    },
    "bossMap": "img/art/dungeonmaps/dmap_stockade.webp",
@@ -1673,8 +2428,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1697,6 +2452,11 @@
      }
     ],
     "阿扎达斯": [
+     {
+      "x": 41.8,
+      "y": 17.2,
+      "floor": null
+     },
      {
       "x": 55.4,
       "y": 50.6,
@@ -1724,6 +2484,13 @@
       "floor": null
      }
     ],
+    "艾隆纳亚": [
+     {
+      "x": 36.9,
+      "y": 73.6,
+      "floor": null
+     }
+    ],
     "黑曜石哨兵": [
      {
       "x": 28.8,
@@ -1740,17 +2507,7 @@
     ],
     "鲁维罗什": [
      {
-      "x": 52.3,
-      "y": 72.6,
-      "floor": null
-     },
-     {
-      "x": 53.1,
-      "y": 73.5,
-      "floor": null
-     },
-     {
-      "x": 54.1,
+      "x": 52.0,
       "y": 72.2,
       "floor": null
      }
@@ -1762,8 +2519,84 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
+     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
+    }
+   ]
+  },
+  "upper-blackrock-spire": {
+   "entry": {
+    "mapId": "1428",
+    "x": 33.0,
+    "y": 25.2,
+    "zone": "燃烧平原",
+    "mapFile": "img/art/maps/1428.webp",
+    "noMap": false
+   },
+   "bossPos": {
+    "达基萨斯将军": [
+     {
+      "x": 34.8,
+      "y": 50.1,
+      "floor": 3
+     }
+    ],
+    "古拉鲁克": [
+     {
+      "x": 61.8,
+      "y": 45.5,
+      "floor": 3
+     }
+    ],
+    "盖斯": [
+     {
+      "x": 48.8,
+      "y": 15.1,
+      "floor": 3
+     }
+    ],
+    "杰德": [
+     {
+      "x": 33.0,
+      "y": 25.6,
+      "floor": 3
+     }
+    ],
+    "烈焰卫士艾博希尔": [
+     {
+      "x": 30.5,
+      "y": 27.0,
+      "floor": 2
+     }
+    ],
+    "索拉卡·火冠": [
+     {
+      "x": 38.1,
+      "y": 37.7,
+      "floor": 2
+     }
+    ],
+    "比斯巨兽": [
+     {
+      "x": 64.3,
+      "y": 31.2,
+      "floor": 3
+     }
+    ],
+    "大酋长雷德·黑手": [
+     {
+      "x": 48.6,
+      "y": 25.6,
+      "floor": 3
+     }
+    ]
+   },
+   "provenance": [
+    {
+     "type": "addon",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1802,16 +2635,6 @@
       "x": 28.1,
       "y": 31.8,
       "floor": null
-     },
-     {
-      "x": 47.0,
-      "y": 45.6,
-      "floor": null
-     },
-     {
-      "x": 40.3,
-      "y": 27.4,
-      "floor": null
      }
     ],
     "考布莱恩": [
@@ -1830,15 +2653,15 @@
     ],
     "瑟芬迪斯": [
      {
-      "x": 62.5,
-      "y": 53.3,
+      "x": 61.6,
+      "y": 53.8,
       "floor": null
      }
     ],
     "吞噬者穆坦努斯": [
      {
-      "x": 34.2,
-      "y": 15.8,
+      "x": 34.4,
+      "y": 13.6,
       "floor": null
      }
     ],
@@ -1851,8 +2674,8 @@
     ],
     "永生者沃尔丹": [
      {
-      "x": 56.4,
-      "y": 47.4,
+      "x": 55.6,
+      "y": 46.8,
       "floor": null
      }
     ]
@@ -1863,8 +2686,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1888,22 +2711,8 @@
     ],
     "暗齿": [
      {
-      "x": 40.6,
-      "y": 53.6,
-      "floor": null
-     }
-    ],
-    "高地恐魔": [
-     {
-      "x": 26.3,
-      "y": 56.2,
-      "floor": null
-     }
-    ],
-    "遗迹守卫者": [
-     {
-      "x": 46.6,
-      "y": 74.1,
+      "x": 44.5,
+      "y": 63.0,
       "floor": null
      }
     ]
@@ -1914,8 +2723,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]
@@ -1946,30 +2755,34 @@
     ],
     "灰尘怨灵": [
      {
-      "x": 31.7,
-      "y": 46.0,
+      "x": 31.5,
+      "y": 48.6,
       "floor": null
      },
      {
       "x": 49.3,
       "y": 25.9,
       "floor": null
-     },
+     }
+    ],
+    "加兹瑞拉": [
      {
-      "x": 31.0,
-      "y": 15.2,
-      "floor": null
-     },
-     {
-      "x": 44.2,
-      "y": 15.2,
+      "x": 30.8,
+      "y": 40.8,
       "floor": null
      }
     ],
     "水占师维蕾萨": [
      {
-      "x": 28.9,
-      "y": 40.3,
+      "x": 34.5,
+      "y": 35.8,
+      "floor": null
+     }
+    ],
+    "耐克鲁姆": [
+     {
+      "x": 29.1,
+      "y": 18.1,
       "floor": null
      }
     ],
@@ -1980,36 +2793,36 @@
       "floor": null
      },
      {
-      "x": 52.4,
-      "y": 42.3,
+      "x": 50.5,
+      "y": 41.5,
       "floor": null
      }
     ],
     "沙怒刽子手": [
      {
-      "x": 24.2,
-      "y": 17.9,
+      "x": 24.0,
+      "y": 15.6,
       "floor": null
      }
     ],
     "布莱中士": [
      {
-      "x": 23.5,
-      "y": 18.3,
+      "x": 23.9,
+      "y": 20.6,
       "floor": null
      }
     ],
     "殉教者塞卡": [
      {
-      "x": 55.4,
-      "y": 29.6,
+      "x": 56.7,
+      "y": 31.5,
       "floor": null
      }
     ],
     "巫医祖穆拉恩": [
      {
-      "x": 44.0,
-      "y": 15.2,
+      "x": 44.1,
+      "y": 17.6,
       "floor": null
      }
     ],
@@ -2027,263 +2840,8 @@
    "provenance": [
     {
      "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
-     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
-    }
-   ]
-  },
-  "blackrock-depths": {
-   "bossPos": {
-    "弗莱拉斯大使": [
-     {
-      "x": 53.8,
-      "y": 48.8,
-      "floor": 2
-     }
-    ],
-    "贝尔加": [
-     {
-      "x": 24.0,
-      "y": 51.6,
-      "floor": null
-     }
-    ],
-    "达格兰·索瑞森大帝": [
-     {
-      "x": 93.2,
-      "y": 11.9,
-      "floor": 2
-     }
-    ],
-    "弗诺斯·达克维尔": [
-     {
-      "x": 61.3,
-      "y": 24.2,
-      "floor": null
-     }
-    ],
-    "安格弗将军": [
-     {
-      "x": 35.6,
-      "y": 57.0,
-      "floor": null
-     },
-     {
-      "x": 36.6,
-      "y": 84.4,
-      "floor": 2
-     }
-    ],
-    "傀儡统帅阿格曼奇": [
-     {
-      "x": 36.9,
-      "y": 65.0,
-      "floor": 2
-     }
-    ],
-    "审讯官格斯塔恩": [
-     {
-      "x": 47.5,
-      "y": 93.4,
-      "floor": null
-     }
-    ],
-    "驯犬者格雷布玛尔": [
-     {
-      "x": 49.5,
-      "y": 61.7,
-      "floor": null
-     }
-    ],
-    "伊森迪奥斯": [
-     {
-      "x": 56.1,
-      "y": 31.2,
-      "floor": null
-     }
-    ],
-    "洛考尔": [
-     {
-      "x": 49.4,
-      "y": 56.7,
-      "floor": null
-     }
-    ],
-    "玛格姆斯": [
-     {
-      "x": 81.7,
-      "y": 11.9,
-      "floor": 2
-     }
-    ],
-    "无敌的潘佐尔": [
-     {
-      "x": 50.4,
-      "y": 32.5,
-      "floor": 2
-     }
-    ],
-    "法拉克斯": [
-     {
-      "x": 53.2,
-      "y": 64.9,
-      "floor": 2
-     }
-    ],
-    "铁炉堡公主茉艾拉·铜须": [
-     {
-      "x": 93.1,
-      "y": 11.5,
-      "floor": 2
-     }
-    ],
-    "控火师罗格雷恩": [
-     {
-      "x": 54.2,
-      "y": 96.5,
-      "floor": 2
-     }
-    ],
-    "维雷克": [
-     {
-      "x": 60.6,
-      "y": 67.5,
-      "floor": 2
-     }
-    ],
-    "典狱官斯迪尔基斯": [
-     {
-      "x": 60.7,
-      "y": 67.3,
-      "floor": 2
-     }
-    ]
-   },
-   "bossMap": "img/art/dungeonmaps/dmap_brd.webp",
-   "bossMapKind": "game-capture",
-   "bossMapRatio": "512/512",
-   "provenance": [
-    {
-     "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
-     "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
-    }
-   ]
-  },
-  "lower-blackrock-spire": {
-   "bossPos": {
-    "班诺克·巨斧": [
-     {
-      "x": 46.9,
-      "y": 64.1,
-      "floor": null
-     },
-     {
-      "x": 49.5,
-      "y": 56.0,
-      "floor": null
-     }
-    ],
-    "水晶之牙": [
-     {
-      "x": 54.1,
-      "y": 74.9,
-      "floor": 2
-     }
-    ],
-    "霍克·巴什古德": [
-     {
-      "x": 34.8,
-      "y": 60.0,
-      "floor": 5
-     },
-     {
-      "x": 39.5,
-      "y": 67.5,
-      "floor": 5
-     }
-    ],
-    "哈雷肯": [
-     {
-      "x": 39.3,
-      "y": 84.3,
-      "floor": 5
-     }
-    ],
-    "欧莫克大王": [
-     {
-      "x": 35.1,
-      "y": 55.3,
-      "floor": 3
-     }
-    ],
-    "烟网蛛后": [
-     {
-      "x": 65.0,
-      "y": 74.4,
-      "floor": 2
-     }
-    ],
-    "维姆萨拉克": [
-     {
-      "x": 56.0,
-      "y": 55.3,
-      "floor": 6
-     }
-    ],
-    "军需官兹格雷斯": [
-     {
-      "x": 54.8,
-      "y": 83.8,
-      "floor": 5
-     }
-    ],
-    "暗影猎手沃什加斯": [
-     {
-      "x": 55.6,
-      "y": 72.0,
-      "floor": 2
-     }
-    ],
-    "尖石统帅": [
-     {
-      "x": 35.8,
-      "y": 60.4,
-      "floor": 3
-     }
-    ],
-    "尖石屠夫": [
-     {
-      "x": 44.8,
-      "y": 57.8,
-      "floor": 3
-     }
-    ],
-    "尖石首席法师": [
-     {
-      "x": 37.4,
-      "y": 61.4,
-      "floor": 3
-     }
-    ],
-    "指挥官沃恩": [
-     {
-      "x": 52.9,
-      "y": 53.2,
-      "floor": null
-     }
-    ]
-   },
-   "bossMap": "img/art/dungeonmaps/dmap_lbrs.webp",
-   "bossMapKind": "game-capture",
-   "bossMapRatio": "512/512",
-   "provenance": [
-    {
-     "type": "addon",
-     "url": "DungeonsForever 1.8.20（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
-     "checkedAt": "2026-11-05",
+     "url": "DungeonsForever 2.1.133（Core/Data 的 Data_DungeonEntry.lua 与 Data_BossPos.lua）",
+     "checkedAt": "2026-11-25",
      "note": "副本入口与各首领的百分比坐标（第三方插件从客户端读出的位置，本站未进游戏实测）"
     }
    ]

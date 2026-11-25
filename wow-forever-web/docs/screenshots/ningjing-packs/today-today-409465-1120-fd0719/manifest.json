@@ -1,0 +1,34 @@
+{
+  "pack_id": "today-today-409465-1120-fd0719",
+  "theme": "frosted-daily",
+  "title": "黑石深渊隐藏任务！对话拿三件神器",
+  "column_name": "无限服攻略",
+  "date_str": "11.20",
+  "generated_at": "2026-11-20T19:38:08",
+  "carousel_slides": [
+    "carousel/slide_01.png",
+    "carousel/slide_02.png",
+    "carousel/slide_03.png",
+    "carousel/slide_04.png",
+    "carousel/slide_05.png",
+    "carousel/slide_06.png"
+  ],
+  "carousel_caption": "carousel/caption.txt",
+  "wechat_article_html": "wechat/article.html",
+  "wechat_article_md": "wechat/article.md",
+  "wechat_inline_cards": [
+    "wechat/card_01.png",
+    "wechat/card_02.png",
+    "wechat/card_03.png",
+    "wechat/card_04.png",
+    "wechat/card_05.png"
+  ],
+  "today_meta": {
+    "slot_key": "today-409465",
+    "summary_id": null,
+    "video_ids": [
+      409465
+    ],
+    "created_date": "2026-11-20"
+  }
+}

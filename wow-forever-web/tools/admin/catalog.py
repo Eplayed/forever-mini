@@ -19,7 +19,9 @@ TOPICS = (
     ("spells", "技能书", "spells.json", "spells", "upstream/wclbox-spells.json", "新手盒子 + GI/XR 插件", "https://wowforever.wclbox.com/jineng", "spells"),
     ("talents", "天赋节点", "talents/（九职业）", "talents", "upstream/fengshen-hunter.json", "fengshen + nieyi 双源", "https://wowclassicforever.info/", "talents"),
     ("achievements", "成就", "achievements.json", "achievements", "upstream/gi-achievements.json", "GI 插件 + 新手盒子逐字核", "https://wowforever.wclbox.com/chengjiu", "achievements"),
-    ("bis", "配装名单", "bis.json", "sets", "upstream/wclbox-bis.json", "新手盒子 + 第二社区名单（L1）", "https://wowforever.wclbox.com/peizhuang", "bis"),
+    ("bis", "配装名单（30级/60级团前/T1/套装）", "bis.json", "sets+bis60Sets+raidSets+itemSets", "upstream/wclbox-bis.json", "新手盒子 + 60级团前BiS + 客户端套装（L1）", "https://wowforever.wclbox.com/peizhuang", "bis"),
+    ("census", "人口普查（双源）", "population-census-cn.json", "classes+races", "population-census.json", "大脚国服样本 + Everloot 社区双源", "https://wowforever.wclbox.com/", "census"),
+    ("nga", "NGA 选题雷达", "nga-radar", "threads", None, "NGA 无限服板块热帖元数据快照（~/.nga/data/，仅当选题雷达）", "https://bbs.nga.cn/thread.php?fid=510569", "nga"),
     ("guide", "插件目录", "guide.json", "addons", None, "人工核作者、原帖和日期", None, None),
     # 宏的真源是 macros.json（245 条，2026-10-30 起）；guide.json.macros 至今 0 条，
     # 在这台机器上已经因为它报过 0，别再让控制台指回那个空字段。
@@ -58,11 +60,28 @@ def catalog():
                         count += sum(len(tree.get("nodes") or []) for tree in doc.get("trees") or [])
             except (OSError, ValueError, TypeError) as exc:
                 error = str(exc)
+        elif slug == "nga":
+            nga_dir = os.path.expanduser("~/.nga/data")
+            try:
+                cand = sorted(f for f in os.listdir(nga_dir) if (f.startswith("hot-") or f.startswith("board-")) and f.endswith(".json")) if os.path.isdir(nga_dir) else []
+                if cand:
+                    latest_nga = os.path.join(nga_dir, cand[-1])
+                    with open(latest_nga, encoding="utf-8") as f:
+                        nd = json.load(f)
+                    rows_n = nd.get("threads") or nd.get("items") or nd.get("data") or []
+                    count = len(rows_n) if isinstance(rows_n, list) else 0
+                    meta = {"fetchedAt": nd.get("fetchedAt") or cand[-1].split("-", 1)[-1].replace(".json", "")}
+                else:
+                    count = 0
+            except (OSError, ValueError, TypeError) as exc:
+                error = str(exc)
         elif path and os.path.isfile(path):
             try:
                 with open(path, encoding="utf-8") as f:
                     data = json.load(f)
                 meta = data.get("meta") or {}
+                if not meta and isinstance(data.get("provenance"), dict):
+                    meta = {"fetchedAt": data["provenance"].get("checkedAt") or data["provenance"].get("sourceTime")}
                 count = _count(data, "dungeon-quests" if slug == "dungeon-quests" else key)
             except (OSError, ValueError, TypeError) as exc:
                 error = str(exc)

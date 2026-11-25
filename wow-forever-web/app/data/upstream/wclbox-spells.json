@@ -1,8 +1,8 @@
 {
  "meta": {
   "source": "https://wowforever.wclbox.com/fashu/<职业>（九职业法术书，服务端渲染逐页取，共 9 页）",
-  "foreverBuild": "1.60.1.70790",
-  "release": "r-1793819765111",
+  "foreverBuild": "1.60.1.71037",
+  "release": "r-1795205406386",
   "pageUrls": {
    "warrior": "https://wowforever.wclbox.com/fashu/warrior",
    "paladin": "https://wowforever.wclbox.com/fashu/paladin",
@@ -14,7 +14,7 @@
    "warlock": "https://wowforever.wclbox.com/fashu/warlock",
    "druid": "https://wowforever.wclbox.com/fashu/druid"
   },
-  "fetched": "2026-11-05",
+  "fetched": "2026-11-23",
   "counts": {
    "total": 493,
    "byClass": {
@@ -62,8 +62,8 @@
    "防护"
   ],
   "states": {
-   "same": 158,
-   "changed": 204,
+   "same": 156,
+   "changed": 206,
    "new": 26,
    "removed": 0,
    "renamed": 3
@@ -75,8 +75,8 @@
    "baseline": 8
   },
   "stateTags": {
-   "same": 158,
-   "changed": 204,
+   "same": 156,
+   "changed": 206,
    "new": 26,
    "removed": 0,
    "renamed": 3
@@ -2432,7 +2432,7 @@
    "name": "戳刺",
    "iconKey": "ability_theblackarrow",
    "tab": "战斗",
-   "ranks": null,
+   "ranks": 2,
    "learnLevel": 24,
    "state": "new",
    "stateTag": "new",
@@ -2751,7 +2751,7 @@
   {
    "classId": "rogue",
    "classNameCn": "潜行者",
-   "name": "麻痹毒药",
+   "name": "麻痹药膏",
    "iconKey": "spell_nature_nullifydisease",
    "tab": "毒药",
    "ranks": null,
@@ -3148,8 +3148,8 @@
    "tab": "戒律",
    "ranks": 5,
    "learnLevel": 24,
-   "state": "same",
-   "stateTag": "same",
+   "state": "changed",
+   "stateTag": "changed",
    "relation": null,
    "url": "https://wowforever.wclbox.com/fashu/priest",
    "level": "L0"
@@ -4576,8 +4576,8 @@
    "tab": "奥术",
    "ranks": 7,
    "learnLevel": 6,
-   "state": "same",
-   "stateTag": "same",
+   "state": "changed",
+   "stateTag": "changed",
    "relation": null,
    "url": "https://wowforever.wclbox.com/fashu/mage",
    "level": "L0"

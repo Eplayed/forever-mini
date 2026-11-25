@@ -187,7 +187,7 @@ def main():
     c = payload['meta']['counts']
     print('DF %s：入口 %d 座（对不上 %d）· 首领 %d 座 %d 行（翻不出或对不上 %d 行）→ %s'
           % (ver, c['entryDungeons'], c['entrySkipped'], c['bossDungeons'], c['bossRows'],
-             c['bossSkipped'], os.path.relpath(out, WEB)))
+             c['bossSkipped'], out))
 
 
 main()

@@ -287,9 +287,9 @@ async function main() {
 
   await nav('/pages/dungeon/index?id=barrow-deeps');
   s = (await snap()) || {};
-  log('详情页：缺中文名显示"中文名待核"，标题退回英文', s && s.nameMissing === true && /Barrow|barrow/.test(String(s.title)), JSON.stringify({ t: s && s.title }));
-  log('详情页：首领空数组写"没有首领记录"', (s.bosses || []).length === 0 && /没有首领记录/.test(String(s.bossEmpty)), JSON.stringify({ e: s.bossEmpty }));
-  await shot('b3-detail-missing-fields');
+  log('详情页：深穴团本显示中文名「深穴」、英文原名与封面图', s && s.nameMissing === false && /深穴/.test(String(s.title)) && /Barrow/.test(String(s.nameEn)) && !!s.artUrl, JSON.stringify({ t: s && s.title, en: s && s.nameEn, art: !!(s && s.artUrl) }));
+  log('详情页：深穴团本首领名单与序号完整（8 位首领，1..8 连续）', (s.bosses || []).length === 8 && (s.bosses || []).every((b, idx) => b.seq === idx + 1), JSON.stringify({ n: (s.bosses || []).length }));
+  await shot('b3-detail-raid-barrow');
 
   await nav('/pages/dungeon/index?id=hall-of-thanes');
   s = (await snap()) || {};

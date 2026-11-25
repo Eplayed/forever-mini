@@ -28,6 +28,8 @@ WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UP = os.path.join(WEB, "app", "data", "upstream")
 ADDON = "DungeonsForever"
 REL = ADDON + "/Core/Data/Data_BIS.lua"
+GEAR_ADDON = "DungeonsForeverGear"
+GEAR_REL = GEAR_ADDON + "/Core/Data/Data_BIS.lua"
 HOME = os.path.expanduser("~")
 from addons_root import resolve, explain
 
@@ -37,7 +39,7 @@ ITEM_RE = re.compile(r'\{\s*(\d{4,8})\s*,\s*(\d+)(\s*,\s*"(?:[^"\\]|\\.)*")?\s*\
 def resolve_src(given):
     """--src → WOW_ADDONS → 常见安装位。顺序只维护一份，在 addons_root.py 里。"""
     for c in (given, os.environ.get("WOW_ADDONS")):
-        if c and os.path.isdir(os.path.join(c, ADDON)):
+        if c and any(os.path.isfile(os.path.join(c, rel)) for rel in (GEAR_REL, REL)):
             return c
     root = resolve(ADDON)
     if os.path.isdir(os.path.join(root, ADDON)):
@@ -46,8 +48,8 @@ def resolve_src(given):
              % (ADDON, explain()))
 
 
-def toc_version(src):
-    p = os.path.join(src, ADDON, ADDON + ".toc")
+def toc_version(src, addon):
+    p = os.path.join(src, addon, addon + ".toc")
     for line in io.open(p, encoding="utf-8", errors="replace"):
         m = re.match(r"\s*##\s*Version:\s*(\S+)", line)
         if m:
@@ -124,10 +126,13 @@ def parse(text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src")
+    ap.add_argument("--out-dir", default=UP)
     ap.add_argument("--show", action="store_true")
     a = ap.parse_args()
     src = resolve_src(a.src)
-    lua = os.path.join(src, ADDON, "Core", "Data", "Data_BIS.lua")
+    rel = GEAR_REL if os.path.isfile(os.path.join(src, GEAR_REL)) else REL
+    addon = rel.split("/")[0]
+    lua = os.path.join(src, rel)
     raw = io.open(lua, encoding="utf-8").read()
     b = open(lua, "rb").read()
     sets, stat_strings = parse(raw)
@@ -148,9 +153,9 @@ def main():
     upd = sorted(set(re.findall(r'updated\s*=\s*"([0-9\-]+)"', raw)))
     snap = {
         "meta": {
-            "source": "%s %s Core/Data/Data_BIS.lua" % (ADDON, toc_version(src)),
-            "addon": ADDON, "addonVersion": toc_version(src), "installRoot": install_root(src),
-            "sourceFile": REL,
+            "source": "%s %s Core/Data/Data_BIS.lua" % (addon, toc_version(src, addon)),
+            "addon": addon, "addonVersion": toc_version(src, addon), "installRoot": install_root(src),
+            "sourceFile": rel,
             "sourceStamp": {"bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(),
                             "fileDate": datetime.datetime.fromtimestamp(os.path.getmtime(lua)).strftime("%Y-%m-%d")},
             "selfReported": "文件里自述 updated=%s、默认等级段 30；作者没写上游站名（自述来源不明，"
@@ -173,11 +178,10 @@ def main():
         },
         "sets": sorted(sets, key=lambda x: (x["level"], x["class"], x["spec"], x["slot"])),
     }
-    if not os.path.isdir(UP):
-        os.makedirs(UP)
-    p = os.path.join(UP, "df-bis.json")
+    os.makedirs(a.out_dir, exist_ok=True)
+    p = os.path.join(a.out_dir, "df-bis.json")
     io.open(p, "w", encoding="utf-8").write(json.dumps(snap, ensure_ascii=False, indent=1) + "\n")
-    print("写 %s（%.1f KB）" % (os.path.relpath(p, WEB), os.path.getsize(p) / 1024.0))
+    print("写 %s（%.1f KB）" % (p, os.path.getsize(p) / 1024.0))
 
 
 if __name__ == "__main__":
