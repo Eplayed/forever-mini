@@ -10,6 +10,7 @@
       <!-- 整幅底图带：本站自生成的氛围图。2026-10-12 站主决定内容页不挂素材出处角标，
            图的来路记在 app/img/art/manifest.json 与溯源页，页面上不再写。 -->
       <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
+      <span class="forge-rivets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <div class="herot">
         <!-- 2026-10-25：不再报"全站一个客户端号"。各板块核到的版本不一样（传承 70532、
              改动清单 70425、世界 70338），报一个号就是假数；这里只报最新核到的那个，
@@ -29,6 +30,10 @@
       <!-- 读数框里只放倒计时：旧站这条被对拍与断言双双钉住（框里混进链接就算回归） -->
       <aside class="heros">
         <div class="cd">
+          <div class="cd-kicker">
+            <span>{{ phase === 'launch' ? 'LAUNCH COUNTDOWN' : 'FIRST RAIDS UNLOCK' }}</span>
+            <span>{{ phase === 'launch' ? launchDay : targetDay }}</span>
+          </div>
           <template v-if="phase === 'launch'">
             <div class="cdrow"><b class="mono">{{ left.d }}</b><span>天</span><i class="mono">{{ clockText(left) }}</i></div>
             <p class="dim">到正式服上线（{{ launchDay }}）</p>
@@ -41,6 +46,11 @@
             <div class="cdrow"><b class="mono">3</b><span>座团本</span></div>
             <p class="dim">深穴 · 海加尔峰 · 奥妮克希亚（每周重置）</p>
           </template>
+          <div class="cd-tags" aria-hidden="true">
+            <span>深穴<small>10人</small></span>
+            <span>海加尔峰<small>20人</small></span>
+            <span>黑龙巢穴<small>40人</small></span>
+          </div>
         </div>
       </aside>
     </section>
@@ -63,6 +73,7 @@
       </div>
       <div class="cls9">
         <a v-for="c in classes" :key="c.id" :href="hrefOf('talent.html?c=' + encodeURIComponent(c.id))"
+           :style="{ '--cls-glow': clsColor(c.id) }"
            :title="'打开 ' + c.cn + ' 的天赋计算器'">
           <img v-if="clsArt(c.id)" :src="clsArt(c.id)" alt="" loading="lazy">
           <i v-else class="hrt-x">{{ (c.cn || '?').charAt(0) }}</i>
@@ -146,9 +157,14 @@ import { clockText, tlCounts } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
 import { linkFor, hrefOf } from '../lib/nav.js';
 import { artOf } from '../lib/art.js';
+import { CLASS_COLOR } from '../lib/glyph.js';
 import SiteSearch from '../components/SiteSearch.vue';
 import HubRail from '../components/HubRail.vue';
 import TalentPreview from '../components/TalentPreview.vue';
+
+function clsColor(id) {
+  return CLASS_COLOR[id] || 'var(--gold)';
+}
 
 const HERO_ART = 'img/gen/hero-ruins.webp';
 /* 站方口径的去处不做卡片（2026-10-13 用户：首页留一行小入口就够）：

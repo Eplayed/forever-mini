@@ -2851,60 +2851,50 @@ def test_app(browser, base):
             const b = document.querySelector('.hrail');
             if (!a || !b) return -1;
             return Math.round(b.getBoundingClientRect().top - a.getBoundingClientRect().bottom); }""") >= 12)
-    # 4) 导航带：2026-10-18 站主选 B 方案改成"胶囊分组"。这里钉的是**形状**不是配色——
-    #    好不好看只有看图能判，但"是不是八颗丸、丸有没有描边、当前项是不是丸内一颗填充小药丸、
-    #    上一版的指示条与下划线撤干净没有"全都可以量。
-    #    读当前项文本一律先剔「新」角标：上一轮刚在姊妹断言上栽过，这条别再犯一遍。
-    # 已知偶发：这一条在同一份产物上会自己红（实测 site-check 上下文 3/13 红，
-    # 单独照 /#/world → /#/ 这条路重跑 8 次红 2 次、再重跑 6 次全绿），
-    # 红出来的值是"当前项底色透明、字色是默认灰"——`.on` 这个类明明在元素上。
-    # 试过"等连续两次读数一致再量"，没治好，已撤回。它不是这一轮引入的，要单开一修。
+    # 4) 导航侧栏：2026-11-26 站主拍板将桌面主导航改为左侧黑曜锻造侧栏（>=1280px 固定在左侧，
+    #    释放顶栏单行高度；<1280px / 375 仍维持横向胶囊带）。这里钉新的桌面侧栏形态：
+    #    8 组齐、每组带描边与实体底色、固定在左缘不遮挡 #main、当前项填充且字色等于 --gc、7 组 7 色。
     nav1440 = page.evaluate("""() => { const n = document.querySelector('nav.main');
+      const m = document.querySelector('#main');
       const pills = [...n.querySelectorAll('.ngrp')];
       const on = n.querySelector('a.nl.on');
       const cs = (e, p) => getComputedStyle(e, p || null);
-      // 伪元素"没画"有两种表现：display:none，或压根没有 content（不生成盒子）
       const gone = (e, p) => { const c = cs(e, p);
         return c.display === 'none' || c.content === 'none' || c.content === ''; };
-      const rad = (e) => parseFloat(cs(e).borderTopLeftRadius) || 0;
-      // 把某个元素作用域里的 --gc 解析成 rgb：当前项的字色必须等于本组色，
-      // 但组色是令牌，不该把 rgb 抄进断言，所以现场解析出来比。
       const gcOf = (host) => { const t = document.createElement('i');
         t.style.color = 'var(--gc)'; host.appendChild(t);
         const v = cs(t).color; t.remove(); return v; };
-      return { h: Math.round(n.getBoundingClientRect().height),
+      const nr = n.getBoundingClientRect();
+      const mr = m ? m.getBoundingClientRect() : null;
+      return { w: Math.round(nr.width), h: Math.round(nr.height), left: Math.round(nr.left),
+        pos: cs(n).position,
+        mainClear: mr ? Math.round(mr.left) >= Math.round(nr.right) - 2 : false,
         on: on ? (() => { const c = on.cloneNode(true);
                c.querySelectorAll('.nb').forEach(x => x.remove());
                return c.textContent.trim(); })() : null,
         pills: pills.length,
-        pillRound: pills.every(p => rad(p) >= p.getBoundingClientRect().height / 2 - 1),
         pillBordered: pills.every(p => cs(p).borderTopWidth === '1px'
           && cs(p).borderTopStyle === 'solid'),
         pillRaised: pills.every(p => cs(p).backgroundColor !== 'rgba(0, 0, 0, 0)'),
-        oneRow: new Set([...n.querySelectorAll('a.nl')].map(e => Math.round(e.getBoundingClientRect().top))).size,
-        chipRound: on ? rad(on) >= on.getBoundingClientRect().height / 2 - 1 : false,
         chipFill: on ? cs(on).backgroundColor : '',
         chipIsGroupColor: on ? cs(on).color === gcOf(on.closest('.ngrp')) : false,
-        dotShown: cs(n.querySelector('.ngt'), '::before').display !== 'none',
         railGone: gone(pills[0], '::after') && gone(pills[0], '::before') && gone(on, '::after'),
         dotGone: gone(n.querySelector('.ngt'), '::before') }; }""")
-    # 组色单独量：七组七个色，少定义任何一组就会落回 --txt-muted 默认灰，Set 立刻少一个。
-    # （「工具」这一组在 app.css 里只写到 g6，一直是灰的——胶囊描边把这个老问题照出来了。）
     gcols = page.evaluate("""() => [...document.querySelectorAll('nav.main .ngrp:not(.solo)')]
       .map(g => getComputedStyle(g.querySelector('.ngt')).color)""")
-    check("首页导航是八颗圆角胶囊：丸有描边、有底色、入口排在一行",
-          nav1440["pills"] == 8 and nav1440["pillRound"] and nav1440["pillBordered"]
-          and nav1440["pillRaised"] and nav1440["oneRow"] == 1
-          and nav1440["h"] >= 44 and nav1440["h"] <= 96,
-          json.dumps({k: nav1440[k] for k in ("h", "pills", "pillRound", "pillBordered",
-                                              "pillRaised", "oneRow")}, ensure_ascii=False))
-    check("当前项是丸内一颗填充的小药丸，字色就是本组色（不抄硬编码 rgb，现场解析 --gc）",
-          nav1440["on"] == "首页" and nav1440["chipRound"]
+    check("首页桌面导航是左侧固定锻造侧栏：8 组有描边有底色，高度充满视口且贴左不遮挡正文",
+          nav1440["pills"] == 8 and nav1440["pillBordered"] and nav1440["pillRaised"]
+          and nav1440["pos"] == "fixed" and nav1440["left"] <= 2
+          and 160 <= nav1440["w"] <= 240 and nav1440["h"] >= 400 and nav1440["mainClear"],
+          json.dumps({k: nav1440[k] for k in ("pos", "left", "w", "h", "mainClear", "pills",
+                                              "pillBordered", "pillRaised")}, ensure_ascii=False))
+    check("当前项在侧栏内有高亮填充，字色就是本组色（不抄硬编码 rgb，现场解析 --gc）",
+          nav1440["on"] == "首页"
           and nav1440["chipFill"] not in ("", "rgba(0, 0, 0, 0)", "transparent")
           and nav1440["chipIsGroupColor"],
-          json.dumps({k: nav1440[k] for k in ("on", "chipRound", "chipFill", "chipIsGroupColor")},
+          json.dumps({k: nav1440[k] for k in ("on", "chipFill", "chipIsGroupColor")},
                      ensure_ascii=False))
-    check("上一版的组底指示条、竖分隔、项下划线都撤干净了，组名前也不许再画点或短横",
+    check("旧版组底指示条、竖分隔与组名前圆点都撤干净了",
           nav1440["railGone"] and nav1440["dotGone"],
           json.dumps({k: nav1440[k] for k in ("railGone", "dotGone")}, ensure_ascii=False))
     check("七个分组各有自己的颜色（少定义任何一组就会落回默认灰，这里 Set 会少一个）",

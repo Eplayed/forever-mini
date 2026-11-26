@@ -1,0 +1,1027 @@
+/* =============================================================================
+   forge.css —— 方案 A「黑曜锻炉 · 史诗剧场」× 全屏火星粒子 × 左侧导航侧栏 × 旋转流光边框
+   （2026-11-26 站主拍板：方案 A + 全页面火星粒子 + 桌面左侧导航侧栏 + 旋转流光边框）
+
+   结构职责：
+   - 独立作为第五层样式引入（tokens → app → board → motion → forge），
+     不改 motion.css 的状态过渡门禁（<=240ms / 无 infinite）。
+   - 所有色值均来自 tokens.css，@media (prefers-reduced-motion: reduce) 下所有
+     旋转流光、火星粒子、扫光、脉冲与 3D 倾角优雅归零。
+   ========================================================================== */
+
+@property --forge-beam {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes forgeBeamSpin {
+  to { --forge-beam: 360deg; }
+}
+
+@keyframes forgeShimmer {
+  0% { transform: translateX(-150%) skewX(-22deg); }
+  55%, 100% { transform: translateX(270%) skewX(-22deg); }
+}
+
+@keyframes forgePulseDot {
+  0% { box-shadow: 0 0 0 0 var(--forge-ember-glow); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* ---- 1. 全站黑曜石锻炉环境光、微颗粒层与全屏漂浮火星画布 ---- */
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(960px 520px at 78% -4%, var(--forge-ember-soft), transparent 62%),
+    radial-gradient(720px 440px at 14% 12%, var(--gold-glow), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--sunk) 56%, var(--sunk-2) 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+/* 全页面漂浮火星粒子（视口常驻、零拦截点击、滤色叠加让火星在暗面与卡片上自然飘浮） */
+.forge-embers {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.forge-embers.forge-embers-full {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 15;
+  mix-blend-mode: screen;
+  opacity: .88;
+}
+
+/* ---- 2. 吸顶黑曜石磨砂顶栏 ---- */
+/* 注意：不把 backdrop-filter 写在 #top.top 上，否则会把桌面端 position:fixed 的子元素
+   nav.main 劫持到 #top.top 自己的 54px 盒子内导致侧栏高度归零；毛玻璃改挂在 .hd-top 上。 */
+#top.top {
+  background: transparent;
+  box-shadow: none;
+  z-index: 40;
+}
+
+.hd-top {
+  background: var(--top-bg);
+  background-image: linear-gradient(180deg, rgba(33, 27, 36, .92), rgba(20, 16, 24, .92));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gold-line);
+  box-shadow: 0 12px 32px var(--forge-shadow);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  color: var(--txt-title);
+  letter-spacing: .04em;
+  text-shadow: 0 2px 12px var(--forge-shadow);
+}
+
+.brand::before {
+  content: "无";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold-hi);
+  background: linear-gradient(145deg, var(--elev), var(--sunk));
+  border: 1px solid var(--gold-line-2);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 0 14px var(--gold-glow);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  flex: none;
+}
+
+.brand span {
+  color: var(--gold-hi);
+}
+
+.brand:hover::before {
+  border-color: var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 0 20px var(--forge-ember-glow);
+}
+
+.top-search {
+  background: var(--field);
+  border: 1px solid var(--gold-line-soft);
+  box-shadow:
+    inset 0 2px 6px var(--forge-shadow),
+    0 1px 0 var(--forge-highlight);
+  transition: border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+.top-search:focus-within {
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 2px 6px var(--forge-shadow),
+    0 0 0 2px var(--gold-glow);
+}
+
+.top-search .gs-kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  margin-right: 6px;
+  font: 600 10.5px/1.2 var(--font-mono);
+  color: var(--txt-muted);
+  background: var(--forge-kbd-bg);
+  border: 1px solid var(--line-2);
+  flex: none;
+  pointer-events: none;
+}
+
+.top-search .gsgo {
+  background-color: var(--gold);
+  background-image: linear-gradient(180deg, var(--gold-hi), var(--gold-deep));
+  color: var(--ink-on-bright);
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: filter var(--dur-1) var(--ease-out);
+}
+
+.top-search .gsgo:hover {
+  background-color: var(--gold-hi);
+  background-image: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  filter: brightness(1.06);
+}
+
+#lchip.chip {
+  background: linear-gradient(145deg, var(--forge-plate-top), var(--sunk));
+  border: 1px solid var(--gold-line-2);
+  color: var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 0 16px var(--gold-glow);
+  transition: border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+
+#lchip.chip:hover {
+  border-color: var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 0 22px var(--forge-ember-glow);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* ---- 3. 导航系统：窄屏保持横滑锻铁胶囊，桌面 1280px+ 切换为左侧黑曜锻造侧栏 ---- */
+nav.main {
+  background: linear-gradient(180deg, var(--sunk), var(--bg));
+  border-top: 1px solid var(--gold-line-soft);
+}
+
+nav.main .nav-foot {
+  display: none;
+}
+
+.ngrp {
+  background-color: var(--panel-2);
+  background-image: linear-gradient(180deg, var(--forge-plate-top), var(--forge-plate-bot));
+  border-color: var(--line-2);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 3px 10px var(--forge-shadow);
+  transition: border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+@media (min-width: 1280px) {
+  /* 顶栏满宽对齐左侧栏与右侧副屏 */
+  .hd-top .in {
+    max-width: none;
+    padding: 0 22px;
+  }
+
+  /* 左侧固定黑曜锻造侧栏（脱离顶栏文档流，顶栏高度自动收窄至 ~54px） */
+  nav.main {
+    position: fixed;
+    top: var(--hd-h, 54px);
+    left: 0;
+    bottom: 0;
+    height: calc(100vh - var(--hd-h, 54px));
+    width: var(--nav-w);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 1px solid var(--gold-line);
+    background-color: var(--sunk);
+    background-image: linear-gradient(180deg, var(--panel-2) 0%, var(--sunk) 48%, var(--sunk-2) 100%);
+    box-shadow:
+      inset -1px 0 0 var(--forge-highlight),
+      10px 0 32px var(--forge-shadow);
+    z-index: 30;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-2) transparent;
+  }
+
+  nav.main .in {
+    max-width: none;
+    margin: 0;
+    padding: 14px 12px 18px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  nav.main .ngrp {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin: 0;
+    padding: 8px 8px 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background-color: var(--panel-2);
+    background-image: linear-gradient(165deg, var(--forge-plate-top), var(--forge-plate-bot));
+    box-shadow:
+      inset 0 1px 0 var(--forge-highlight),
+      0 4px 12px var(--forge-shadow);
+  }
+
+  nav.main .ngrp.solo {
+    padding: 5px;
+  }
+
+  nav.main .ngrp.hit,
+  nav.main .ngrp:hover {
+    border-color: var(--gc);
+    box-shadow:
+      inset 0 1px 0 var(--forge-highlight-hi),
+      0 6px 18px var(--forge-shadow);
+  }
+
+  nav.main .ngrp .ngt {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    padding: 0 6px 3px;
+    border-bottom: 1px solid var(--gold-line-soft);
+    opacity: .92;
+  }
+
+  nav.main .ngrp .ngi {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  nav.main a.nl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 31px;
+    padding: 0 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--txt-dim);
+  }
+
+  nav.main a.nl:hover {
+    background: var(--elev);
+    color: var(--txt-title);
+  }
+
+  nav.main a.nl.on {
+    background: var(--gc-soft);
+    color: var(--gc);
+    font-weight: 700;
+    box-shadow: inset 2px 0 0 var(--gc), 0 0 12px var(--gold-glow);
+  }
+
+  nav.main .nav-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 8px 10px;
+    border: 1px solid var(--gold-line-soft);
+    border-radius: 8px;
+    background: var(--sunk);
+    font-size: 11.5px;
+    color: var(--txt-muted);
+  }
+
+  nav.main .nav-foot kbd {
+    padding: 2px 6px;
+    font: 600 10.5px/1.2 var(--font-mono);
+    color: var(--gold-hi);
+    background: var(--forge-kbd-bg);
+    border: 1px solid var(--gold-line);
+    border-radius: 4px;
+  }
+
+  /* 1280–1439px：左导航 + 居中主区 */
+  #main.wrap,
+  #foot .in {
+    margin-left: var(--nav-w);
+    margin-right: 0;
+    max-width: none;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+/* 1440–1599px：三栏均衡（左 196px 导航 + 中主区 1116px + 右 114px 副屏） */
+@media (min-width: 1440px) {
+  #main.wrap,
+  #foot .in {
+    margin-left: var(--nav-w);
+    margin-right: 128px;
+    max-width: none;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* 1600px+：大宽屏三栏居中（左 196px 导航 + 居中 1180px 主区 + 右 184px 完整副屏） */
+@media (min-width: 1600px) {
+  #main.wrap,
+  #foot .in {
+    margin-left: calc(var(--nav-w) + max(0px, (100vw - var(--nav-w) - 210px - 1180px) / 2));
+    margin-right: auto;
+    max-width: 1180px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ---- 4. 旋转流光边框引擎（@property --forge-beam + mask-composite: exclude） ---- */
+.hero.dh.mhero::before,
+.dhero.raid-hero::before,
+.heros .cd::before,
+.dhero.raid-hero .dstate::before,
+.side-rail::before,
+.raidcard-v2::before,
+.mod::before,
+.card.go::before,
+.cls9 > a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  background: conic-gradient(
+    from var(--forge-beam),
+    transparent 0deg,
+    transparent 240deg,
+    var(--gold-deep) 285deg,
+    var(--gold-hi) 325deg,
+    var(--forge-ember) 348deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: forgeBeamSpin 5.2s linear infinite;
+}
+
+/* 常驻高亮旋转流光：Hero 剧场、12/10 倒计时基座与副屏 */
+.hero.dh.mhero::before,
+.dhero.raid-hero::before {
+  padding: 2px;
+  opacity: .92;
+  animation-duration: 5.8s;
+}
+
+.heros .cd::before,
+.dhero.raid-hero .dstate::before {
+  padding: 2px;
+  opacity: 1;
+  animation-duration: 3.4s;
+  background: conic-gradient(
+    from var(--forge-beam),
+    transparent 0deg,
+    transparent 200deg,
+    var(--forge-ember) 265deg,
+    var(--gold-hi) 320deg,
+    var(--forge-rivet-hi) 345deg,
+    transparent 360deg
+  );
+}
+
+.side-rail::before {
+  opacity: .78;
+  animation-duration: 6.4s;
+}
+
+/* 悬停点亮旋转流光：团本大卡、模块卡、首页双主卡 */
+.raidcard-v2::before,
+.mod::before,
+.card.go::before {
+  opacity: 0;
+  animation-duration: 3.8s;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.raidcard-v2:hover::before,
+.mod:hover::before,
+.card.go:hover::before {
+  opacity: 1;
+}
+
+/* 九职业徽章悬停点亮「职业本命色」旋转流光边框 */
+.cls9 > a::before {
+  padding: 2px;
+  opacity: 0;
+  animation-duration: 3.0s;
+  background: conic-gradient(
+    from var(--forge-beam),
+    transparent 0deg,
+    transparent 210deg,
+    var(--cls-glow) 305deg,
+    var(--gold-hi) 345deg,
+    transparent 360deg
+  );
+  transition: opacity var(--dur-1) var(--ease-out);
+}
+
+.cls9 > a:hover::before,
+.cls9 > a:focus-visible::before {
+  opacity: 1;
+}
+
+/* ---- 5. 通用锻造金属板材 & 鼠标金光追踪（Spotlight） ---- */
+.card,
+.mod,
+.raidcard-v2 {
+  background-color: var(--panel-2);
+  background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
+  border-color: var(--gold-line);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 14px 36px var(--forge-shadow);
+}
+
+.cls9 > a,
+.hrt .hrt-b,
+.mod,
+.raidcard-v2,
+.card.go,
+.heros .cd {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+
+.cls9 > a::after,
+.mod::after,
+.raidcard-v2::after,
+.card.go::after,
+.heros .cd::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--forge-spot), transparent 64%);
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.cls9 > a:hover::after,
+.cls9 > a:focus-visible::after,
+.mod:hover::after,
+.raidcard-v2:hover::after,
+.card.go:hover::after,
+.heros .cd:hover::after {
+  opacity: 1;
+}
+
+.mod:hover,
+.raidcard-v2:hover,
+.card.go:hover {
+  border-color: var(--forge-rim-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 20px 44px var(--forge-shadow-hi),
+    0 0 26px var(--gold-glow);
+  transform: translateY(-3px);
+}
+
+/* ---- 6. 熔金扫光主按钮（.cta-cut / .cta-gold）与锻钢次按钮 ---- */
+.cta-cut,
+.cta.cta-gold,
+.gsearch .cta-gold {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 22px;
+  border: 0;
+  color: var(--ink-on-bright);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-decoration: none;
+  background-color: var(--gold);
+  background-image: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 54%, var(--gold-deep) 100%);
+  clip-path: polygon(var(--cut-cta) 0, 100% 0, 100% calc(100% - var(--cut-cta)), calc(100% - var(--cut-cta)) 100%, 0 100%, 0 var(--cut-cta));
+  box-shadow:
+    inset 0 1px 0 var(--forge-sheen),
+    0 8px 24px var(--forge-ember-soft);
+  transition: transform var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+.cta-cut::after,
+.cta.cta-gold::after,
+.gsearch .cta-gold::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 44%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--forge-sheen), transparent);
+  animation: forgeShimmer 4.2s ease-in-out infinite;
+}
+
+.cta-cut:hover,
+.cta.cta-gold:hover,
+.gsearch .cta-gold:hover {
+  color: var(--ink-on-bright);
+  background-color: var(--gold-hi);
+  background-image: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 54%, var(--gold-deep) 100%);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--forge-sheen),
+    0 12px 28px var(--forge-ember-glow);
+  text-decoration: none;
+}
+
+.cta-cut:active,
+.cta.cta-gold:active {
+  transform: translateY(1px);
+}
+
+.herobtns {
+  gap: 10px;
+}
+
+.herobtns .cta-cut {
+  padding: 10px 16px;
+  font-size: 13px;
+}
+
+.herobtns .cta.cta-line,
+.raid-hero-actions .cta.cta-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  font-size: 13px;
+  border: 1px solid var(--gold-line-2);
+  background: linear-gradient(180deg, var(--forge-plate-top), var(--panel-2));
+  color: var(--gold-hi);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 var(--forge-highlight), 0 4px 14px var(--forge-shadow);
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+.herobtns .cta.cta-line:hover,
+.raid-hero-actions .cta.cta-line:hover {
+  border-color: var(--gold-hi);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 8px 20px var(--forge-shadow), 0 0 16px var(--gold-glow);
+  text-decoration: none;
+}
+
+.herobtns .cta.cta-mute,
+.raid-hero-actions .cta.cta-mute {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 13px;
+  font-size: 13px;
+  border: 1px solid var(--line-2);
+  background: var(--sunk);
+  color: var(--txt-dim);
+  text-decoration: none;
+  transition: border-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+
+.herobtns .cta.cta-mute:hover,
+.raid-hero-actions .cta.cta-mute:hover {
+  border-color: var(--gold-line);
+  color: var(--gold-hi);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* ---- 7. 首页 & 团本页史诗剧场 Hero ---- */
+.hero.dh.mhero,
+.dhero.raid-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gold-line-2);
+  background-color: var(--sunk);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    inset 0 -1px 0 var(--forge-shadow-hi),
+    0 24px 56px var(--forge-shadow-hi),
+    0 0 40px var(--forge-ember-soft);
+}
+
+.hero.dh.mhero .dhx {
+  background:
+    radial-gradient(680px 380px at 84% 26%, var(--forge-ember-soft), transparent 62%),
+    linear-gradient(96deg, rgba(11, 9, 13, .92) 0%, rgba(11, 9, 13, .76) 46%, rgba(11, 9, 13, .36) 78%, rgba(11, 9, 13, .62) 100%),
+    linear-gradient(180deg, rgba(11, 9, 13, .28) 0%, transparent 32%, rgba(11, 9, 13, .82) 100%);
+}
+
+.dhero.raid-hero .dx {
+  background:
+    radial-gradient(560px 320px at 82% 28%, var(--forge-ember-soft), transparent 64%),
+    linear-gradient(96deg, rgba(11, 9, 13, .92) 0%, rgba(11, 9, 13, .72) 52%, rgba(11, 9, 13, .40) 100%);
+}
+
+.hero.dh.mhero .herot,
+.hero.dh.mhero .heros,
+.dhero.raid-hero .db {
+  position: relative;
+  z-index: 2;
+}
+
+.dhero.raid-hero .dstate {
+  z-index: 2;
+  background-color: var(--panel);
+  background-image: linear-gradient(155deg, var(--forge-plate-top), var(--sunk));
+  border: 1px solid var(--gold-line-2);
+  border-top: 2px solid var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 14px 32px var(--forge-shadow-hi),
+    0 0 24px var(--forge-ember-soft);
+}
+
+.forge-rivets {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.forge-rivets i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--forge-rivet-hi), var(--forge-rivet-lo));
+  box-shadow: 0 1px 3px var(--forge-shadow-hi);
+}
+
+.forge-rivets i:nth-child(1) { top: 10px; left: 10px; }
+.forge-rivets i:nth-child(2) { top: 10px; right: 10px; }
+.forge-rivets i:nth-child(3) { bottom: 10px; left: 10px; }
+.forge-rivets i:nth-child(4) { bottom: 10px; right: 10px; }
+
+.hero.mhero .bbadge {
+  background: linear-gradient(90deg, var(--forge-plate-top), var(--sunk));
+  border: 1px solid var(--gold-line-2);
+  box-shadow: inset 0 1px 0 var(--forge-highlight), 0 4px 14px var(--forge-shadow);
+  letter-spacing: 2px;
+}
+
+.hero.mhero .bbadge i {
+  background: var(--forge-ember);
+  animation: forgePulseDot 2.6s ease-out infinite;
+}
+
+.hero.mhero h1.pt {
+  text-shadow: 0 4px 20px var(--forge-shadow-hi);
+}
+
+.hero.mhero h1.pt em {
+  color: var(--gold-hi);
+  text-shadow:
+    0 0 28px var(--forge-ember-glow),
+    0 3px 14px var(--forge-shadow-hi);
+}
+
+.gsearch.hs {
+  background: linear-gradient(180deg, var(--panel-2), var(--sunk));
+  border: 1px solid var(--gold-line-2);
+  box-shadow:
+    inset 0 2px 8px var(--forge-shadow),
+    0 10px 28px var(--forge-shadow),
+    0 0 20px var(--gold-glow);
+}
+
+.gsearch.hs:focus-within {
+  border-color: var(--gold-hi);
+  box-shadow:
+    inset 0 2px 8px var(--forge-shadow),
+    0 0 0 2px var(--gold-glow),
+    0 14px 32px var(--forge-shadow-hi);
+}
+
+.gsearch.hs .gsx {
+  background: var(--forge-plate-top);
+  border: 1px solid var(--line-2);
+  color: var(--txt-dim);
+  transition: border-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+}
+
+.gsearch.hs .gsx:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+  background: var(--elev);
+}
+
+.hero.dh.mhero .heros {
+  padding: 28px 30px 28px 0;
+  justify-content: center;
+}
+
+.hero.dh.mhero .heros .cd {
+  width: 100%;
+  min-width: 264px;
+  padding: 22px 22px;
+  background-color: var(--panel);
+  background-image: linear-gradient(155deg, var(--forge-plate-top) 0%, var(--panel-2) 58%, var(--sunk) 100%);
+  border: 1px solid var(--gold-line-2);
+  border-top: 2px solid var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 18px 42px var(--forge-shadow-hi),
+    0 0 32px var(--forge-ember-soft);
+  transform-style: preserve-3d;
+}
+
+.hero.dh.mhero .heros .cd-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  white-space: nowrap;
+  font: 700 10.5px/1.2 var(--font-mono);
+  letter-spacing: .1em;
+  color: var(--gold);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--gold-line-soft);
+}
+
+.hero.dh.mhero .heros .cdrow b {
+  font-size: 46px;
+  line-height: 1;
+  color: var(--gold-hi);
+  text-shadow: 0 0 24px var(--forge-ember-glow);
+}
+
+.hero.dh.mhero .heros .cdrow i {
+  font-size: 20px;
+  color: var(--txt-title);
+  font-style: normal;
+}
+
+.hero.dh.mhero .heros .cd-tags {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gold-line-soft);
+}
+
+.hero.dh.mhero .heros .cd-tags span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 6px;
+  background: var(--sunk);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--txt-title);
+  text-align: center;
+}
+
+.hero.dh.mhero .heros .cd-tags small {
+  font: 500 10px/1.2 var(--font-mono);
+  color: var(--gold);
+}
+
+/* ---- 8. 首页九职业 3D 锻造徽章画廊（.cls9） ---- */
+.cls9 > a {
+  background-color: var(--panel-2);
+  background-image: linear-gradient(165deg, var(--forge-plate-top), var(--forge-plate-bot));
+  border: 1px solid var(--gold-line-soft);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 10px 24px var(--forge-shadow);
+  padding: 15px 6px 13px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cls9 > a:hover,
+.cls9 > a:focus-visible {
+  border-color: var(--cls-glow);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 18px 34px var(--forge-shadow-hi),
+    0 0 24px var(--gold-glow);
+}
+
+.cls9 > a img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--cls-glow);
+  box-shadow: 0 4px 14px var(--forge-shadow-hi);
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+
+.cls9 > a:hover img {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px var(--cls-glow), 0 6px 18px var(--forge-shadow-hi);
+}
+
+.cls9 > a b {
+  color: var(--txt-title);
+  letter-spacing: .03em;
+}
+
+/* ---- 9. 首页九板块原画画廊（.hrail） ---- */
+.hrail {
+  margin-top: 28px;
+}
+
+.hrt .hrt-b {
+  height: 90px;
+  border: 1px solid var(--gold-line-soft);
+  background: var(--sunk);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 10px 22px var(--forge-shadow);
+}
+
+.hrt .hrt-b::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(150px circle at var(--mx, 50%) var(--my, 50%), var(--forge-spot), transparent 65%),
+    linear-gradient(180deg, transparent 42%, rgba(11, 9, 13, .72) 100%);
+  opacity: .75;
+  transition: opacity var(--dur-1) var(--ease-out);
+}
+
+.hrt:hover .hrt-b,
+.hrt:focus-visible .hrt-b {
+  border-color: var(--gold-hi);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 16px 32px var(--forge-shadow-hi),
+    0 0 20px var(--gold-glow);
+}
+
+.hrt:hover .hrt-b::after {
+  opacity: 1;
+}
+
+.hrt:hover .hrt-l {
+  color: var(--gold-hi);
+}
+
+/* ---- 10. 团本页大卡、进度条与副屏 ---- */
+.raidcard-v2 {
+  border: 1px solid var(--gold-line);
+}
+
+.raidcard-v2 .art img {
+  transition: transform .48s var(--ease-out);
+}
+
+.raidcard-v2:hover .art img {
+  transform: scale(1.06);
+}
+
+.attune-fill {
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-hi), var(--forge-ember));
+  box-shadow: 0 0 14px var(--forge-ember-glow);
+}
+
+.side-rail {
+  background-color: var(--panel);
+  background-image: linear-gradient(175deg, var(--forge-plate-top), var(--sunk));
+  border-color: var(--gold-line-2);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 18px 40px var(--forge-shadow-hi);
+}
+
+.side-rail .sr-card {
+  background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
+  box-shadow: inset 0 1px 0 var(--forge-highlight);
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+
+.side-rail .sr-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+#foot {
+  background: linear-gradient(180deg, var(--sunk), var(--foot-bg));
+  border-top: 1px solid var(--gold-line-soft);
+}
+
+/* ---- 11. 响应式细节保护（保证 375 门禁不横滚、不切角） ---- */
+@media (max-width: 899px) {
+  .top-search .gs-kbd {
+    display: none;
+  }
+  .herobtns .cta-cut,
+  .herobtns .cta.cta-line,
+  .herobtns .cta.cta-mute {
+    min-height: 44px;
+  }
+  .hero.dh.mhero .heros {
+    padding: 0 20px 24px;
+  }
+  .hero.dh.mhero .heros .cd {
+    min-width: 0;
+  }
+  .hrt .hrt-b {
+    height: 62px;
+  }
+}
+
+/* ---- 12. 减弱动态效果无障碍保护 ---- */
+@media (prefers-reduced-motion: reduce) {
+  .forge-embers {
+    display: none;
+  }
+  .hero.dh.mhero::before,
+  .dhero.raid-hero::before,
+  .heros .cd::before,
+  .dhero.raid-hero .dstate::before,
+  .side-rail::before,
+  .raidcard-v2::before,
+  .mod::before,
+  .card.go::before,
+  .cls9 > a::before,
+  .cta-cut::after,
+  .cta.cta-gold::after,
+  .gsearch .cta-gold::after,
+  .hero.mhero .bbadge i {
+    animation: none;
+    opacity: 0;
+  }
+  .cls9 > a,
+  .hrt .hrt-b,
+  .mod,
+  .raidcard-v2,
+  .card.go,
+  .heros .cd,
+  .raidcard-v2 .art img {
+    transition: none;
+    transform: none !important;
+  }
+}

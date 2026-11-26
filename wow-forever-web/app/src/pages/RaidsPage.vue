@@ -10,6 +10,7 @@
     <section class="dhero raid-hero">
       <img :src="HERO" alt="" style="object-position:center 28%">
       <span class="dx"></span>
+      <span class="forge-rivets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <div class="db raid-hero-b">
         <div class="kicker">FIRST RAID LAUNCH · 2026-12-10</div>
         <h1 class="pt raid-hero-h1">团队副本 · 首次开放筹备</h1>

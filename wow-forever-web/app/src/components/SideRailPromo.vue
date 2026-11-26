@@ -143,16 +143,17 @@ onBeforeUnmount(() => {
   display: none;
 }
 
-/* 仅在 1440px 以上桌面宽屏挂载于 1180px 主内容右侧留白区，零挤压正文、零横溢 */
+/* 仅在 1440px 以上桌面宽屏挂载于右侧留白区（配合左侧锻造导航栏形成均衡三栏），零挤压正文、零横溢 */
 @media (min-width: 1440px) {
   .side-rail {
     display: flex;
     flex-direction: column;
     gap: var(--s2);
     position: fixed;
-    top: calc(var(--hd-h, 93px) + 16px);
-    left: calc(50% + 596px);
-    width: 116px;
+    top: calc(var(--hd-h, 56px) + 16px);
+    left: auto;
+    right: 10px;
+    width: 114px;
     padding: 24px 6px 8px;
     background: var(--panel);
     border: 1px solid var(--gold-line);
@@ -275,7 +276,8 @@ onBeforeUnmount(() => {
 /* 1600px+ 大屏展开为 184px 完整展示卡片 */
 @media (min-width: 1600px) {
   .side-rail {
-    left: calc(50% + 608px);
+    left: auto;
+    right: 14px;
     width: 184px;
     padding: 26px var(--s3) var(--s3);
     gap: var(--s3);

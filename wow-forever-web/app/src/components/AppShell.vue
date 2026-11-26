@@ -1,4 +1,5 @@
 <template>
+  <ForgeEmbers :count="54" fullscreen />
   <div id="top" ref="topEl" class="top">
     <!-- 第一行：品牌 + 全站搜索 + 上线读数。稿子里这排是「WOW / RETAIL / CLASSIC」版本页签，
          本站红线不许出现商标词，而且只有一款游戏，所以这一排放自己的东西，只借它的排印语法。 -->
@@ -9,6 +10,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 105.3 14.3l5 5 1.4-1.4-5-5A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
           <input ref="qBox" type="search" v-model="qText" placeholder="搜全站词条、天赋、副本、配方"
                  aria-label="全站搜索：跳到首页搜索框并带上这个词">
+          <kbd class="gs-kbd" aria-hidden="true">⌘K</kbd>
           <button type="submit" class="gsgo">搜索</button>
         </form>
         <router-link v-if="phase !== 'launch'" class="chip mono" id="lchip" to="/raids">
@@ -39,6 +41,9 @@
             </span>
           </span>
         </template>
+        <div class="nav-foot" aria-hidden="true">
+          <span>极速检索</span><kbd>⌘K</kbd>
+        </div>
       </div>
     </nav>
   </div>
@@ -72,6 +77,7 @@ import { load } from '../lib/data.js';
 import { applyRails } from '../lib/rails.js';
 import SideRailPromo from './SideRailPromo.vue';
 import PartnerSlots from './PartnerSlots.vue';
+import ForgeEmbers from './ForgeEmbers.vue';
 
 const route = useRoute();
 const router = useRouter();
