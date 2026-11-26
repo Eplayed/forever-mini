@@ -2764,14 +2764,14 @@ def test_app(browser, base):
                              "c.querySelectorAll('.nb').forEach(n => n.remove());"
                              "return c.textContent.trim(); })")
     APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "宠物", "总览",
-               "区域与稀有", "副本", "团本", "配方", "配装", "排行", "宏命令"]
+               "区域与稀有", "副本", "团本", "配方", "配装", "排行", "宏命令", "插件"]
     check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
           "%d 项：%s" % (len(app_subs), app_subs))
-    check("世界与工具两组按收窄后的口径（3 格 / 2 格；2026-10-30 工具组加了宏命令）",
+    check("世界与工具两组按最新口径（3 格 / 3 格；2026-11-26 工具组加入插件目录）",
           page.evaluate("""() => { const g = [...document.querySelectorAll('nav.main .ngrp')];
             const of = (n) => { const b = g.find(x => (x.querySelector('.ngt')||{}).textContent === n);
               return b ? b.querySelectorAll('a.nl').length : -1; };
-            return [of('世界'), of('工具')]; }""") == [3, 2])
+            return [of('世界'), of('工具')]; }""") == [3, 3])
     # 上面剔角标是为了比名字，这一条反过来查角标本身：应画的 = 最新一批本站更新的板块标签
     # ∩ 导航项名字。剔完就没人管角标在不在，等于把"这一版新开了哪几页"这个记号丢了也没人发现。
     sc_nav = json.load(open(os.path.join(SRC, "data", "scale.json"), encoding="utf-8"))["scale"]

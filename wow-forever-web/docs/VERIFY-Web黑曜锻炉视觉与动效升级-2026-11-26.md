@@ -42,5 +42,10 @@
 
 ---
 
-## 三、待确认与下一步
-- 最新 `wow-forever-web/release/fc-deploy.zip`（sha256 `668934576754…`）已打包验收就绪，**尚未提交推送 git 或部署上阿里云 FC 3.0（`paoben.top`）**；站主确认效果后即可一键提交推送并上线。
+## 三、提交推送与公网发布回读（2026-11-26 21:19–21:23）
+- **Git 提交与推送**：提交 `267d35f`（20 个白名单文件）已推送至远端 `codex/forever-mini-adventure`（`327c496..267d35f`）。
+- **阿里云 FC 3.0 部署**：已在杭州 `paoben-web` 函数上传部署最新 `fc-deploy.zip`（`19.83 MB` / `20,790,710 B` / sha256 `668934576754…`），控制台核验上次修改时间更新为 **`2026-11-26 21:22:53`**（Python 3.10、启动命令 `/var/fc/lang/python3.10/bin/python3 app.py`、监听端口 `9000`、超时 `60 秒` 均未改动）。
+- **公网 `https://paoben.top/` 实测回读**：
+  - `GET /` → **`200`**（`825 B`，`theme-color=#0b090d`，引用 `./assets/index-BN_5Ke6f.css` 与 `./assets/index-CxSY-uE2.js`）
+  - `GET ./assets/index-BN_5Ke6f.css` → **`200`**（`162,550 B`，命中 `--forge-beam` / `forge-embers-full` / `--nav-w`）
+  - `POST /api/t` → **`204`**，`GET /api/t` → **`405`**，`HEAD /talent.html` → **`404`**

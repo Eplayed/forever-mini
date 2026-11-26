@@ -19,8 +19,9 @@
         <span><b class="mono">{{ meta.counts.altRows }}</b>条同部位备选</span>
       </div>
       <div class="pz-jumps" v-if="bis60Sets.length || raidSets.length || itemSets.length">
+        <router-link class="cta-cut" :to="{ path: '/raids' }">12/10 首批团本开荒中心 →</router-link>
         <button v-if="bis60Sets.length" type="button" class="pick" @click="jumpTo('pz-bis60')">60 级团前 BiS（{{ bis60Sets.length }} 套）↓</button>
-        <button v-if="raidSets.length" type="button" class="pick" @click="jumpTo('pz-t1')">海加尔峰 T1 套装（{{ raidSets.length }} 套）↓</button>
+        <button v-if="raidSets.length" type="button" class="pick" @click="jumpTo('pz-t1')">海加尔峰 T1 团本（{{ raidSets.length }} 套）↓</button>
         <button v-if="itemSets.length" type="button" class="pick" @click="jumpTo('pz-item-sets')">14–58 级套装图鉴（{{ itemSets.length }} 套）↓</button>
       </div>
     </div>
@@ -67,7 +68,7 @@
                          :height="300" @fail="glWhy = $event" />
             <span class="pzart-tag mono">{{ cur.clsCn }} · {{ cur.level }} 级</span>
             <button v-if="modelFile" type="button" class="pz-3dbtn"
-                    :aria-pressed="live3d ? 'true' : 'false'" @click="toggle3d">{{ live3d ? '返回图片' : '旋转 3D 模型' }}</button>
+                    :aria-pressed="live3d ? 'true' : 'false'" @click="toggle3d">{{ live3d ? '返回图片' : (modelKind === 'real' ? '旋转 3D 模型' : '预览占位模型') }}</button>
           </div>
           <p v-if="live3d && !glWhy && modelKind === 'real'" class="pz-3dnote">游戏角色与装备的静态预览；拖动可旋转。模型显示导出时手持的武器，装备表保留完整清单。</p>
           <p v-if="live3d && !glWhy && modelKind !== 'real'" class="pz-3dnote">这一版是本站自己拼的<b>占位模型</b>，不是游戏里的样子：
@@ -93,6 +94,117 @@
         <div class="pzsum-i">
           <span v-for="k in SUM_KEYS" :key="k" v-show="sum[k]"><b class="mono">{{ sum[k] }}</b>{{ k }}</span>
         </div>
+      </div>
+    </div>
+
+    <!-- 60 级团本前 Pre-Raid BiS（27 专精，L1） -->
+    <div class="card" v-if="bis60Sets.length" id="pz-bis60">
+      <div class="bhead">
+        <h2 class="bt">60 级团本前 Pre-Raid BiS</h2>
+        <span class="bn">{{ bis60Sets.length }} 套（9 职业 × 3 专精）· L1 整理 ·
+          <a v-if="curBis60 && curBis60.url" :href="curBis60.url" target="_blank" rel="noopener noreferrer">来源链接</a>
+          <span v-if="curBis60 && curBis60.fetched" class="mono">（{{ curBis60.fetched }}）</span></span>
+      </div>
+      <p class="note">这份 60 级团前名单整理自第三方资料，不是官方结论，也没做模拟计算；
+        只列部位、物品、同部位备选顺位与出处，点行可展开同部位可换备选。</p>
+      <div class="pz-picks">
+        <div class="picks b60-classes">
+          <button v-for="c in classes" :key="'b60-' + c.cls" type="button" class="pick"
+                  :class="{ on: bis60Cls === c.cls }" @click="pickBis60Class(c.cls)">
+            <b>{{ c.clsCn }}</b>
+          </button>
+        </div>
+        <div class="picks b60-specs">
+          <button v-for="s in bis60ClassSets" :key="s.id" type="button" class="pick"
+                  :class="{ on: curBis60 && curBis60.id === s.id }" @click="pickBis60Set(s.id)">
+            <b>{{ s.mode }}</b>
+          </button>
+        </div>
+      </div>
+
+      <template v-if="curBis60">
+        <div class="b60-sum" v-if="Object.keys(curBis60Sum).some((k) => curBis60Sum[k])">
+          <div class="b60-sum-h">
+            <b>{{ curBis60.clsCn }} · {{ curBis60.mode }} 基础属性合计</b>
+            <span class="dim">只把这一套选中装备的属性行相加，不含职业/种族基础值与附魔</span>
+          </div>
+          <div class="b60-sum-i">
+            <span v-for="k in SUM_KEYS" :key="k" v-show="curBis60Sum[k]"><b class="mono">{{ curBis60Sum[k] }}</b>{{ k }}</span>
+          </div>
+        </div>
+        <div class="boardwrap">
+          <table class="board">
+            <colgroup><col style="width:11%"><col class="c-ico"><col style="width:28%"><col class="c-num"><col class="c-num"><col></colgroup>
+            <thead><tr><th>部位</th><th class="c-ico">图标</th><th>首选装备</th><th class="c-num">装等</th><th class="c-num">备选</th><th class="w-tail">出处</th></tr></thead>
+            <tbody>
+              <template v-for="x in bis60Rows" :key="x.key">
+                <tr class="pzrow2" @click="toggleB60Alt(x.key)">
+                  <td><button type="button" class="pzlink">{{ x.slot }}<span v-if="x.cell > 1" class="mono"> · {{ x.cell }}</span></button></td>
+                  <td class="c-ico"><span class="qbox" :class="'bq' + (x.quality || 0)"><IconCell :icon-key="x.iconKey" :seed="x.item" :cn="x.name" small /></span></td>
+                  <td><span class="nm" :class="'q' + (x.quality || 0)">{{ x.name }}</span>
+                    <span class="sub" v-if="x.st">{{ x.st }}</span></td>
+                  <td class="c-num num">{{ x.ilvl }}</td>
+                  <td class="c-num num">{{ x.alts.length }}</td>
+                  <td class="w-tail dim">
+                    <router-link v-if="x.dungeonId" :to="{ path: '/dungeon', query: { d: x.dungeonId } }" @click.stop>{{ x.src }}</router-link>
+                    <span v-else>{{ x.src || '—' }}</span>
+                  </td>
+                </tr>
+                <tr v-if="b60OpenKey === x.key && x.alts.length" class="b60-altrow">
+                  <td colspan="6">
+                    <div class="b60-altbox">
+                      <div class="b60-althead">同部位可换备选（{{ x.slot }} · 共 {{ x.alts.length }} 件）</div>
+                      <div class="b60-altlist">
+                        <div v-for="(alt, idx) in x.alts" :key="alt.item + '-' + idx" class="b60-altitem">
+                          <span class="mono dim">#{{ idx + 1 }}</span>
+                          <span class="qbox" :class="'bq' + (alt.quality || 0)"><IconCell :icon-key="alt.iconKey" :seed="alt.item" :cn="alt.name" small /></span>
+                          <span class="nm" :class="'q' + (alt.quality || 0)">{{ alt.name }}</span>
+                          <span class="mono dim" v-if="alt.ilvl">iLv{{ alt.ilvl }}</span>
+                          <span class="dim b60-altsrc">
+                            <router-link v-if="alt.dungeonId" :to="{ path: '/dungeon', query: { d: alt.dungeonId } }">{{ alt.src }}</router-link>
+                            <span v-else>{{ alt.src }}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </template>
+    </div>
+
+    <!-- 海加尔峰 T1 团本套装（18 套） -->
+    <div class="card" v-if="raidSets.length" id="pz-t1">
+      <div class="bhead">
+        <h2 class="bt">海加尔峰 T1 团本套装名录</h2>
+        <span class="bn">{{ raidSets.length }} 套（9 职业）· 来自 {{ raidSetsMeta.source || 'DungeonsForever 插件' }}</span>
+      </div>
+      <p class="note">Beta 客户端内 T1 套装散件基础属性尚未开放，此处只列出游戏内登记的套装名、定位、护甲类型与部件编号，不编造数值或套装加成。</p>
+      <div class="pz-picks">
+        <div class="picks t1-classes">
+          <button type="button" class="pick" :class="{ on: raidCls === 'all' }" @click="raidCls = 'all'"><b>全部（{{ raidSets.length }}）</b></button>
+          <button v-for="c in classes" :key="'t1-' + c.cls" type="button" class="pick"
+                  :class="{ on: raidCls === c.cls }" @click="raidCls = c.cls"><b>{{ c.clsCn }}</b></button>
+        </div>
+      </div>
+      <div class="boardwrap">
+        <table class="board">
+          <colgroup><col style="width:11%"><col style="width:18%"><col style="width:10%"><col style="width:18%"><col style="width:10%"><col></colgroup>
+          <thead><tr><th>职业</th><th>套装名称</th><th>定位</th><th>适配专精</th><th>护甲</th><th class="w-tail">部件编号（{{ 6 }}件）</th></tr></thead>
+          <tbody>
+            <tr v-for="rs in filteredRaidSets" :key="rs.id">
+              <td>{{ rs.clsCn }}</td>
+              <td><span class="nm q4">{{ rs.name }}</span> <span class="mono dim">#{{ rs.setId }}</span></td>
+              <td>{{ rs.roleCn }}</td>
+              <td>{{ rs.spec }}</td>
+              <td>{{ rs.armor }}</td>
+              <td class="w-tail mono dim">{{ (rs.pieceIds || []).map((id) => '#' + id).join(' · ') }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -251,117 +363,6 @@
           </table>
         </div>
       </template>
-    </div>
-
-    <!-- 60 级团本前 Pre-Raid BiS（27 专精，L1） -->
-    <div class="card" v-if="bis60Sets.length" id="pz-bis60">
-      <div class="bhead">
-        <h2 class="bt">60 级团本前 Pre-Raid BiS</h2>
-        <span class="bn">{{ bis60Sets.length }} 套（9 职业 × 3 专精）· L1 整理 ·
-          <a v-if="curBis60 && curBis60.url" :href="curBis60.url" target="_blank" rel="noopener noreferrer">来源链接</a>
-          <span v-if="curBis60 && curBis60.fetched" class="mono">（{{ curBis60.fetched }}）</span></span>
-      </div>
-      <p class="note">这份 60 级团前名单整理自第三方资料，不是官方结论，也没做模拟计算；
-        只列部位、物品、同部位备选顺位与出处，点行可展开同部位可换备选。</p>
-      <div class="pz-picks">
-        <div class="picks b60-classes">
-          <button v-for="c in classes" :key="'b60-' + c.cls" type="button" class="pick"
-                  :class="{ on: bis60Cls === c.cls }" @click="pickBis60Class(c.cls)">
-            <b>{{ c.clsCn }}</b>
-          </button>
-        </div>
-        <div class="picks b60-specs">
-          <button v-for="s in bis60ClassSets" :key="s.id" type="button" class="pick"
-                  :class="{ on: curBis60 && curBis60.id === s.id }" @click="pickBis60Set(s.id)">
-            <b>{{ s.mode }}</b>
-          </button>
-        </div>
-      </div>
-
-      <template v-if="curBis60">
-        <div class="b60-sum" v-if="Object.keys(curBis60Sum).some((k) => curBis60Sum[k])">
-          <div class="b60-sum-h">
-            <b>{{ curBis60.clsCn }} · {{ curBis60.mode }} 基础属性合计</b>
-            <span class="dim">只把这一套选中装备的属性行相加，不含职业/种族基础值与附魔</span>
-          </div>
-          <div class="b60-sum-i">
-            <span v-for="k in SUM_KEYS" :key="k" v-show="curBis60Sum[k]"><b class="mono">{{ curBis60Sum[k] }}</b>{{ k }}</span>
-          </div>
-        </div>
-        <div class="boardwrap">
-          <table class="board">
-            <colgroup><col style="width:11%"><col class="c-ico"><col style="width:28%"><col class="c-num"><col class="c-num"><col></colgroup>
-            <thead><tr><th>部位</th><th class="c-ico">图标</th><th>首选装备</th><th class="c-num">装等</th><th class="c-num">备选</th><th class="w-tail">出处</th></tr></thead>
-            <tbody>
-              <template v-for="x in bis60Rows" :key="x.key">
-                <tr class="pzrow2" @click="toggleB60Alt(x.key)">
-                  <td><button type="button" class="pzlink">{{ x.slot }}<span v-if="x.cell > 1" class="mono"> · {{ x.cell }}</span></button></td>
-                  <td class="c-ico"><span class="qbox" :class="'bq' + (x.quality || 0)"><IconCell :icon-key="x.iconKey" :seed="x.item" :cn="x.name" small /></span></td>
-                  <td><span class="nm" :class="'q' + (x.quality || 0)">{{ x.name }}</span>
-                    <span class="sub" v-if="x.st">{{ x.st }}</span></td>
-                  <td class="c-num num">{{ x.ilvl }}</td>
-                  <td class="c-num num">{{ x.alts.length }}</td>
-                  <td class="w-tail dim">
-                    <router-link v-if="x.dungeonId" :to="{ path: '/dungeon', query: { d: x.dungeonId } }" @click.stop>{{ x.src }}</router-link>
-                    <span v-else>{{ x.src || '—' }}</span>
-                  </td>
-                </tr>
-                <tr v-if="b60OpenKey === x.key && x.alts.length" class="b60-altrow">
-                  <td colspan="6">
-                    <div class="b60-altbox">
-                      <div class="b60-althead">同部位可换备选（{{ x.slot }} · 共 {{ x.alts.length }} 件）</div>
-                      <div class="b60-altlist">
-                        <div v-for="(alt, idx) in x.alts" :key="alt.item + '-' + idx" class="b60-altitem">
-                          <span class="mono dim">#{{ idx + 1 }}</span>
-                          <span class="qbox" :class="'bq' + (alt.quality || 0)"><IconCell :icon-key="alt.iconKey" :seed="alt.item" :cn="alt.name" small /></span>
-                          <span class="nm" :class="'q' + (alt.quality || 0)">{{ alt.name }}</span>
-                          <span class="mono dim" v-if="alt.ilvl">iLv{{ alt.ilvl }}</span>
-                          <span class="dim b60-altsrc">
-                            <router-link v-if="alt.dungeonId" :to="{ path: '/dungeon', query: { d: alt.dungeonId } }">{{ alt.src }}</router-link>
-                            <span v-else>{{ alt.src }}</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
-      </template>
-    </div>
-
-    <!-- 海加尔峰 T1 团本套装（18 套） -->
-    <div class="card" v-if="raidSets.length" id="pz-t1">
-      <div class="bhead">
-        <h2 class="bt">海加尔峰 T1 团本套装名录</h2>
-        <span class="bn">{{ raidSets.length }} 套（9 职业）· 来自 {{ raidSetsMeta.source || 'DungeonsForever 插件' }}</span>
-      </div>
-      <p class="note">Beta 客户端内 T1 套装散件基础属性尚未开放，此处只列出游戏内登记的套装名、定位、护甲类型与部件编号，不编造数值或套装加成。</p>
-      <div class="pz-picks">
-        <div class="picks t1-classes">
-          <button type="button" class="pick" :class="{ on: raidCls === 'all' }" @click="raidCls = 'all'"><b>全部（{{ raidSets.length }}）</b></button>
-          <button v-for="c in classes" :key="'t1-' + c.cls" type="button" class="pick"
-                  :class="{ on: raidCls === c.cls }" @click="raidCls = c.cls"><b>{{ c.clsCn }}</b></button>
-        </div>
-      </div>
-      <div class="boardwrap">
-        <table class="board">
-          <colgroup><col style="width:11%"><col style="width:18%"><col style="width:10%"><col style="width:18%"><col style="width:10%"><col></colgroup>
-          <thead><tr><th>职业</th><th>套装名称</th><th>定位</th><th>适配专精</th><th>护甲</th><th class="w-tail">部件编号（{{ 6 }}件）</th></tr></thead>
-          <tbody>
-            <tr v-for="rs in filteredRaidSets" :key="rs.id">
-              <td>{{ rs.clsCn }}</td>
-              <td><span class="nm q4">{{ rs.name }}</span> <span class="mono dim">#{{ rs.setId }}</span></td>
-              <td>{{ rs.roleCn }}</td>
-              <td>{{ rs.spec }}</td>
-              <td>{{ rs.armor }}</td>
-              <td class="w-tail mono dim">{{ (rs.pieceIds || []).map((id) => '#' + id).join(' · ') }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
 
     <PartnerSlots position="bis-inline" />

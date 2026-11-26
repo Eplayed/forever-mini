@@ -180,14 +180,17 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
 
     def end_headers(self):
-        p = self.path
-        if p.split("?", 1)[0] == STAT_PATH:
+        p = self.path.split("?", 1)[0]
+        if p == STAT_PATH:
             super().end_headers()
             return
         if "/assets/" in p:
             self.send_header("Cache-Control", "public, max-age=31536000, immutable")
-        elif p.endswith((".html", ".json", ".xml", ".txt")):
-            self.send_header("Cache-Control", "public, max-age=300")
+        elif p == "/" or p.endswith("/") or p.endswith(".html"):
+            # 入口 HTML 禁止强缓存，避免发版后浏览器沿用旧 index.html 去拉已被删掉的旧哈希 CSS/JS
+            self.send_header("Cache-Control", "no-cache, must-revalidate")
+        elif p.endswith((".json", ".xml", ".txt")):
+            self.send_header("Cache-Control", "public, max-age=60")
         else:
             self.send_header("Cache-Control", "public, max-age=86400")
         super().end_headers()

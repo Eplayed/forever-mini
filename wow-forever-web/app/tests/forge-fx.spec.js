@@ -36,7 +36,7 @@ describe('Obsidian Forge interactive engine (forge-fx & ForgeEmbers)', () => {
 
     expect(tile.style.getPropertyValue('--mx')).toBe('90px');
     expect(tile.style.getPropertyValue('--my')).toBe('25px');
-    expect(tile.style.transform).toContain('perspective(720px)');
+    expect(tile.style.transform).toContain('perspective(660px)');
     expect(tile.style.transform).toContain('rotateX(');
   });
 

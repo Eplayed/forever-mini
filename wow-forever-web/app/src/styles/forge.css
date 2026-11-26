@@ -1,6 +1,7 @@
 /* =============================================================================
-   forge.css —— 方案 A「黑曜锻炉 · 史诗剧场」× 全屏火星粒子 × 左侧导航侧栏 × 旋转流光边框
-   （2026-11-26 站主拍板：方案 A + 全页面火星粒子 + 桌面左侧导航侧栏 + 旋转流光边框）
+   forge.css —— 方案 A「黑曜锻炉 · 史诗剧场」× 全屏火星 × 左侧导航侧栏 × 旋转流光边框
+   （2026-11-26 站主拍板：方案 A 锻铁金属质感 + 3D 倾角职业卡 + 熔金流光按钮
+     + 全页面火星粒子 + 左侧导航侧栏 + 旋转流光边框）
 
    结构职责：
    - 独立作为第五层样式引入（tokens → app → board → motion → forge），
@@ -20,22 +21,22 @@
 }
 
 @keyframes forgeShimmer {
-  0% { transform: translateX(-150%) skewX(-22deg); }
-  55%, 100% { transform: translateX(270%) skewX(-22deg); }
+  0% { transform: translateX(-160%) skewX(-24deg); }
+  48%, 100% { transform: translateX(280%) skewX(-24deg); }
 }
 
 @keyframes forgePulseDot {
   0% { box-shadow: 0 0 0 0 var(--forge-ember-glow); }
-  70% { box-shadow: 0 0 0 8px transparent; }
+  70% { box-shadow: 0 0 0 9px transparent; }
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-/* ---- 1. 全站黑曜石锻炉环境光、微颗粒层与全屏漂浮火星画布 ---- */
+/* ---- 1. 全站黑曜石锻炉环境光、锻铁微颗粒与全屏漂浮火星画布 ---- */
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(960px 520px at 78% -4%, var(--forge-ember-soft), transparent 62%),
-    radial-gradient(720px 440px at 14% 12%, var(--gold-glow), transparent 60%),
+    radial-gradient(1040px 560px at 76% -2%, var(--forge-ember-soft), transparent 62%),
+    radial-gradient(760px 460px at 16% 14%, var(--gold-glow), transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--sunk) 56%, var(--sunk-2) 100%);
   background-attachment: fixed;
 }
@@ -46,7 +47,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: .045;
+  opacity: .055;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -55,7 +56,7 @@ body::before {
   z-index: 1;
 }
 
-/* 全页面漂浮火星粒子（视口常驻、零拦截点击、滤色叠加让火星在暗面与卡片上自然飘浮） */
+/* 全页面漂浮火星粒子（视口常驻、零拦截点击、滤色叠加让火星在暗面与卡片上清晰飘浮） */
 .forge-embers {
   position: absolute;
   inset: 0;
@@ -71,14 +72,14 @@ body::before {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 15;
+  z-index: 18;
   mix-blend-mode: screen;
-  opacity: .88;
+  opacity: 1;
 }
 
 /* ---- 2. 吸顶黑曜石磨砂顶栏 ---- */
 /* 注意：不把 backdrop-filter 写在 #top.top 上，否则会把桌面端 position:fixed 的子元素
-   nav.main 劫持到 #top.top 自己的 54px 盒子内导致侧栏高度归零；毛玻璃改挂在 .hd-top 上。 */
+   nav.main 劫持到 #top.top 自己的 54px 盒子内导致侧栏高度归零；毛玻璃挂在 .hd-top 上。 */
 #top.top {
   background: transparent;
   box-shadow: none;
@@ -87,59 +88,34 @@ body::before {
 
 .hd-top {
   background: var(--top-bg);
-  background-image: linear-gradient(180deg, rgba(33, 27, 36, .92), rgba(20, 16, 24, .92));
+  background-image: linear-gradient(180deg, rgba(38, 30, 32, .94), rgba(18, 14, 18, .94));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--gold-line);
-  box-shadow: 0 12px 32px var(--forge-shadow);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight),
+    0 12px 32px var(--forge-shadow);
 }
 
+/* 站主决定：去掉站名前面的「无」字印徽，保持干净的锻金衬线站名 */
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 0;
   color: var(--txt-title);
-  letter-spacing: .04em;
-  text-shadow: 0 2px 12px var(--forge-shadow);
-}
-
-.brand::before {
-  content: "无";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-right: 10px;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--gold-hi);
-  background: linear-gradient(145deg, var(--elev), var(--sunk));
-  border: 1px solid var(--gold-line-2);
-  box-shadow:
-    inset 0 1px 0 var(--forge-highlight),
-    0 0 14px var(--gold-glow);
-  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-  flex: none;
+  letter-spacing: .06em;
+  text-shadow: 0 2px 14px var(--forge-shadow);
 }
 
 .brand span {
   color: var(--gold-hi);
 }
 
-.brand:hover::before {
-  border-color: var(--gold-hi);
-  box-shadow:
-    inset 0 1px 0 var(--forge-highlight-hi),
-    0 0 20px var(--forge-ember-glow);
-}
-
 .top-search {
   background: var(--field);
   border: 1px solid var(--gold-line-soft);
   box-shadow:
-    inset 0 2px 6px var(--forge-shadow),
+    inset 0 2px 7px var(--forge-shadow),
     0 1px 0 var(--forge-highlight);
   transition: border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
 }
@@ -147,7 +123,7 @@ body::before {
 .top-search:focus-within {
   border-color: var(--gold);
   box-shadow:
-    inset 0 2px 6px var(--forge-shadow),
+    inset 0 2px 7px var(--forge-shadow),
     0 0 0 2px var(--gold-glow);
 }
 
@@ -166,7 +142,7 @@ body::before {
 
 .top-search .gsgo {
   background-color: var(--gold);
-  background-image: linear-gradient(180deg, var(--gold-hi), var(--gold-deep));
+  background-image: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 52%, var(--gold-deep) 100%);
   color: var(--ink-on-bright);
   font-weight: 700;
   letter-spacing: .04em;
@@ -175,8 +151,7 @@ body::before {
 
 .top-search .gsgo:hover {
   background-color: var(--gold-hi);
-  background-image: linear-gradient(180deg, var(--gold-hi), var(--gold));
-  filter: brightness(1.06);
+  filter: brightness(1.08);
 }
 
 #lchip.chip {
@@ -184,8 +159,8 @@ body::before {
   border: 1px solid var(--gold-line-2);
   color: var(--gold-hi);
   box-shadow:
-    inset 0 1px 0 var(--forge-highlight),
-    0 0 16px var(--gold-glow);
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 0 18px var(--gold-glow);
   transition: border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
 }
 
@@ -193,12 +168,12 @@ body::before {
   border-color: var(--gold-hi);
   box-shadow:
     inset 0 1px 0 var(--forge-highlight-hi),
-    0 0 22px var(--forge-ember-glow);
+    0 0 24px var(--forge-ember-glow);
   transform: translateY(-1px);
   text-decoration: none;
 }
 
-/* ---- 3. 导航系统：窄屏保持横滑锻铁胶囊，桌面 1280px+ 切换为左侧黑曜锻造侧栏 ---- */
+/* ---- 3. 导航系统：窄屏横滑锻铁胶囊，桌面 1280px+ 左侧黑曜锻造侧栏 ---- */
 nav.main {
   background: linear-gradient(180deg, var(--sunk), var(--bg));
   border-top: 1px solid var(--gold-line-soft);
@@ -219,13 +194,11 @@ nav.main .nav-foot {
 }
 
 @media (min-width: 1280px) {
-  /* 顶栏满宽对齐左侧栏与右侧副屏 */
   .hd-top .in {
     max-width: none;
     padding: 0 22px;
   }
 
-  /* 左侧固定黑曜锻造侧栏（脱离顶栏文档流，顶栏高度自动收窄至 ~54px） */
   nav.main {
     position: fixed;
     top: var(--hd-h, 54px);
@@ -239,10 +212,10 @@ nav.main .nav-foot {
     border-bottom: 0;
     border-right: 1px solid var(--gold-line);
     background-color: var(--sunk);
-    background-image: linear-gradient(180deg, var(--panel-2) 0%, var(--sunk) 48%, var(--sunk-2) 100%);
+    background-image: linear-gradient(180deg, var(--panel-2) 0%, var(--sunk) 50%, var(--sunk-2) 100%);
     box-shadow:
       inset -1px 0 0 var(--forge-highlight),
-      10px 0 32px var(--forge-shadow);
+      12px 0 34px var(--forge-shadow);
     z-index: 30;
     scrollbar-width: thin;
     scrollbar-color: var(--line-2) transparent;
@@ -251,24 +224,25 @@ nav.main .nav-foot {
   nav.main .in {
     max-width: none;
     margin: 0;
-    padding: 14px 12px 18px;
+    padding: 12px 12px 18px;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 7px;
   }
 
   nav.main .ngrp {
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
+    gap: 3px;
     margin: 0;
-    padding: 8px 8px 8px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--line);
+    padding: 7px 8px 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line-2);
     background-color: var(--panel-2);
-    background-image: linear-gradient(165deg, var(--forge-plate-top), var(--forge-plate-bot));
+    background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
     box-shadow:
       inset 0 1px 0 var(--forge-highlight),
+      inset 0 -1px 0 var(--forge-shadow),
       0 4px 12px var(--forge-shadow);
   }
 
@@ -304,9 +278,9 @@ nav.main .nav-foot {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    min-height: 31px;
+    min-height: 29px;
     padding: 0 10px;
-    border-radius: 6px;
+    border-radius: 5px;
     font-size: 13px;
     color: var(--txt-dim);
   }
@@ -327,10 +301,10 @@ nav.main .nav-foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 6px;
-    padding: 8px 10px;
+    margin-top: 4px;
+    padding: 7px 10px;
     border: 1px solid var(--gold-line-soft);
-    border-radius: 8px;
+    border-radius: 6px;
     background: var(--sunk);
     font-size: 11.5px;
     color: var(--txt-muted);
@@ -345,7 +319,6 @@ nav.main .nav-foot {
     border-radius: 4px;
   }
 
-  /* 1280–1439px：左导航 + 居中主区 */
   #main.wrap,
   #foot .in {
     margin-left: var(--nav-w);
@@ -356,7 +329,6 @@ nav.main .nav-foot {
   }
 }
 
-/* 1440–1599px：三栏均衡（左 196px 导航 + 中主区 1116px + 右 114px 副屏） */
 @media (min-width: 1440px) {
   #main.wrap,
   #foot .in {
@@ -368,7 +340,6 @@ nav.main .nav-foot {
   }
 }
 
-/* 1600px+：大宽屏三栏居中（左 196px 导航 + 居中 1180px 主区 + 右 184px 完整副屏） */
 @media (min-width: 1600px) {
   #main.wrap,
   #foot .in {
@@ -389,71 +360,74 @@ nav.main .nav-foot {
 .raidcard-v2::before,
 .mod::before,
 .card.go::before,
+.addon-card::before,
 .cls9 > a::before {
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1.5px;
+  padding: 2px;
   border-radius: inherit;
   pointer-events: none;
   z-index: 4;
   background: conic-gradient(
     from var(--forge-beam),
     transparent 0deg,
-    transparent 240deg,
-    var(--gold-deep) 285deg,
-    var(--gold-hi) 325deg,
-    var(--forge-ember) 348deg,
+    transparent 205deg,
+    var(--gold-deep) 258deg,
+    var(--gold-hi) 312deg,
+    var(--forge-ember) 342deg,
+    var(--forge-rivet-hi) 354deg,
     transparent 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: forgeBeamSpin 5.2s linear infinite;
+  animation: forgeBeamSpin 4.8s linear infinite;
 }
 
-/* 常驻高亮旋转流光：Hero 剧场、12/10 倒计时基座与副屏 */
 .hero.dh.mhero::before,
 .dhero.raid-hero::before {
   padding: 2px;
-  opacity: .92;
-  animation-duration: 5.8s;
+  opacity: .96;
+  animation-duration: 5.2s;
 }
 
 .heros .cd::before,
 .dhero.raid-hero .dstate::before {
   padding: 2px;
   opacity: 1;
-  animation-duration: 3.4s;
+  animation-duration: 3.2s;
   background: conic-gradient(
     from var(--forge-beam),
     transparent 0deg,
-    transparent 200deg,
-    var(--forge-ember) 265deg,
-    var(--gold-hi) 320deg,
+    transparent 180deg,
+    var(--forge-ember) 250deg,
+    var(--gold-hi) 315deg,
     var(--forge-rivet-hi) 345deg,
     transparent 360deg
   );
 }
 
 .side-rail::before {
-  opacity: .78;
-  animation-duration: 6.4s;
+  opacity: .84;
+  animation-duration: 6s;
 }
 
-/* 悬停点亮旋转流光：团本大卡、模块卡、首页双主卡 */
+/* 悬停点亮旋转流光：团本大卡、模块卡、插件卡、首页双主卡 */
 .raidcard-v2::before,
 .mod::before,
-.card.go::before {
+.card.go::before,
+.addon-card::before {
   opacity: 0;
-  animation-duration: 3.8s;
+  animation-duration: 3.4s;
   transition: opacity var(--dur-2) var(--ease-out);
 }
 
 .raidcard-v2:hover::before,
 .mod:hover::before,
-.card.go:hover::before {
+.card.go:hover::before,
+.addon-card:hover::before {
   opacity: 1;
 }
 
@@ -461,13 +435,13 @@ nav.main .nav-foot {
 .cls9 > a::before {
   padding: 2px;
   opacity: 0;
-  animation-duration: 3.0s;
+  animation-duration: 2.8s;
   background: conic-gradient(
     from var(--forge-beam),
     transparent 0deg,
-    transparent 210deg,
-    var(--cls-glow) 305deg,
-    var(--gold-hi) 345deg,
+    transparent 195deg,
+    var(--cls-glow) 295deg,
+    var(--gold-hi) 342deg,
     transparent 360deg
   );
   transition: opacity var(--dur-1) var(--ease-out);
@@ -478,16 +452,19 @@ nav.main .nav-foot {
   opacity: 1;
 }
 
-/* ---- 5. 通用锻造金属板材 & 鼠标金光追踪（Spotlight） ---- */
+/* ---- 5. 锻铁金属板材质感 + 彻底修复 .hasart 悬停发黑冲突 ---- */
 .card,
 .mod,
 .raidcard-v2 {
   background-color: var(--panel-2);
-  background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
+  background-image:
+    linear-gradient(155deg, rgba(44, 35, 36, .92) 0%, rgba(21, 17, 22, .96) 46%, rgba(13, 10, 15, .98) 100%);
   border-color: var(--gold-line);
   box-shadow:
-    inset 0 1px 0 var(--forge-highlight),
-    0 14px 36px var(--forge-shadow);
+    inset 0 1px 0 var(--forge-highlight-hi),
+    inset 0 -1px 0 var(--forge-shadow-hi),
+    inset 1px 0 0 rgba(255, 226, 168, .10),
+    0 18px 42px var(--forge-shadow);
 }
 
 .cls9 > a,
@@ -495,6 +472,7 @@ nav.main .nav-foot {
 .mod,
 .raidcard-v2,
 .card.go,
+.addon-card,
 .heros .cd {
   position: relative;
   overflow: hidden;
@@ -504,10 +482,54 @@ nav.main .nav-foot {
     box-shadow var(--dur-2) var(--ease-out);
 }
 
+/* 关键修复（图 1 Hover 发黑根治）：
+   app.css 把 .hasart::after 用作 96% 深黑底图遮罩且文字在 z-index:1。
+   这里显式把所有 .hasart 的正文子节点抬到 z-index:3，把底图遮罩 + 暖金鼠标聚光统一放在 z-index:1，
+   悬停时底图微微透亮 + 暖金光晕跟随鼠标 + 旋转流光边框点亮，绝不会把黑罩盖到文字上！ */
+.hasart > *:not(.bgart) {
+  position: relative;
+  z-index: 3;
+}
+
+.mod.hasart > .bgart,
+.two > .card.hasart > .bgart {
+  opacity: .42;
+  transition: transform .42s var(--ease-out), opacity var(--dur-2) var(--ease-out);
+}
+
+.mod.hasart:hover > .bgart,
+.mod.hasart:focus-visible > .bgart,
+.two > .card.hasart:hover > .bgart {
+  transform: scale(1.06);
+  opacity: .56;
+}
+
+.mod.hasart::after,
+.card.go.hasart::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  background:
+    linear-gradient(102deg, rgba(12, 9, 14, .90) 0%, rgba(12, 9, 14, .72) 44%, rgba(12, 9, 14, .32) 100%);
+  transition: background var(--dur-2) var(--ease-out);
+}
+
+.mod.hasart:hover::after,
+.mod.hasart:focus-visible::after,
+.card.go.hasart:hover::after {
+  opacity: 1;
+  background:
+    radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(243, 210, 135, .24), transparent 62%),
+    linear-gradient(102deg, rgba(16, 12, 16, .84) 0%, rgba(16, 12, 16, .62) 44%, rgba(16, 12, 16, .22) 100%);
+}
+
+/* 非 .hasart 卡片（职业格、团本大卡、插件卡、倒计时基座）的暖金鼠标聚光层 */
 .cls9 > a::after,
-.mod::after,
 .raidcard-v2::after,
-.card.go::after,
+.addon-card::after,
 .heros .cd::after {
   content: "";
   position: absolute;
@@ -515,34 +537,35 @@ nav.main .nav-foot {
   pointer-events: none;
   z-index: 2;
   opacity: 0;
-  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--forge-spot), transparent 64%);
-  transition: opacity var(--dur-2) var(--ease-out);
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(243, 210, 135, .24), transparent 64%);
+  transition: opacity var(--dur-1) var(--ease-out);
 }
 
 .cls9 > a:hover::after,
 .cls9 > a:focus-visible::after,
-.mod:hover::after,
 .raidcard-v2:hover::after,
-.card.go:hover::after,
+.addon-card:hover::after,
 .heros .cd:hover::after {
   opacity: 1;
 }
 
 .mod:hover,
 .raidcard-v2:hover,
-.card.go:hover {
+.card.go:hover,
+.addon-card:hover {
   border-color: var(--forge-rim-hi);
   box-shadow:
     inset 0 1px 0 var(--forge-highlight-hi),
-    0 20px 44px var(--forge-shadow-hi),
-    0 0 26px var(--gold-glow);
+    0 22px 48px var(--forge-shadow-hi),
+    0 0 30px var(--gold-glow);
   transform: translateY(-3px);
 }
 
-/* ---- 6. 熔金扫光主按钮（.cta-cut / .cta-gold）与锻钢次按钮 ---- */
+/* ---- 6. 熔金流光主按钮（.cta-cut / .cta-gold / .sr-cta）与锻钢次按钮 ---- */
 .cta-cut,
 .cta.cta-gold,
-.gsearch .cta-gold {
+.gsearch .cta-gold,
+.side-rail .sr-cta {
   position: relative;
   overflow: hidden;
   display: inline-flex;
@@ -552,43 +575,49 @@ nav.main .nav-foot {
   padding: 11px 22px;
   border: 0;
   color: var(--ink-on-bright);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .04em;
   text-decoration: none;
   background-color: var(--gold);
-  background-image: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 54%, var(--gold-deep) 100%);
+  background-image: linear-gradient(135deg, #ffe7a8 0%, #e0a545 48%, #a6681e 100%);
   clip-path: polygon(var(--cut-cta) 0, 100% 0, 100% calc(100% - var(--cut-cta)), calc(100% - var(--cut-cta)) 100%, 0 100%, 0 var(--cut-cta));
   box-shadow:
-    inset 0 1px 0 var(--forge-sheen),
-    0 8px 24px var(--forge-ember-soft);
+    inset 0 1px 0 rgba(255, 250, 232, .68),
+    0 8px 26px rgba(232, 148, 48, .34);
   transition: transform var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+.side-rail .sr-cta {
+  padding: 5px 8px;
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
 }
 
 .cta-cut::after,
 .cta.cta-gold::after,
-.gsearch .cta-gold::after {
+.gsearch .cta-gold::after,
+.side-rail .sr-cta::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 44%;
+  width: 48%;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--forge-sheen), transparent);
-  animation: forgeShimmer 4.2s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 250, 234, .65), transparent);
+  animation: forgeShimmer 3.2s ease-in-out infinite;
 }
 
 .cta-cut:hover,
 .cta.cta-gold:hover,
-.gsearch .cta-gold:hover {
+.gsearch .cta-gold:hover,
+.side-rail .sr-cta:hover {
   color: var(--ink-on-bright);
   background-color: var(--gold-hi);
-  background-image: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 54%, var(--gold-deep) 100%);
-  filter: brightness(1.08);
+  filter: brightness(1.1);
   transform: translateY(-2px);
   box-shadow:
-    inset 0 1px 0 var(--forge-sheen),
-    0 12px 28px var(--forge-ember-glow);
+    inset 0 1px 0 rgba(255, 252, 240, .82),
+    0 12px 32px rgba(232, 148, 48, .50);
   text-decoration: none;
 }
 
@@ -611,10 +640,11 @@ nav.main .nav-foot {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
+  padding: 10px 15px;
   font-size: 13px;
   border: 1px solid var(--gold-line-2);
-  background: linear-gradient(180deg, var(--forge-plate-top), var(--panel-2));
+  background-color: var(--panel-2);
+  background-image: linear-gradient(180deg, var(--forge-plate-top), var(--panel-2));
   color: var(--gold-hi);
   font-weight: 600;
   text-decoration: none;
@@ -626,7 +656,7 @@ nav.main .nav-foot {
 .raid-hero-actions .cta.cta-line:hover {
   border-color: var(--gold-hi);
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 8px 20px var(--forge-shadow), 0 0 16px var(--gold-glow);
+  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 8px 22px var(--forge-shadow), 0 0 18px var(--gold-glow);
   text-decoration: none;
 }
 
@@ -652,7 +682,7 @@ nav.main .nav-foot {
   text-decoration: none;
 }
 
-/* ---- 7. 首页 & 团本页史诗剧场 Hero ---- */
+/* ---- 7. 首页 & 团本页史诗剧场 Hero（修复右侧倒计时卡贴边问题） ---- */
 .hero.dh.mhero,
 .dhero.raid-hero {
   position: relative;
@@ -663,14 +693,29 @@ nav.main .nav-foot {
     inset 0 1px 0 var(--forge-highlight-hi),
     inset 0 -1px 0 var(--forge-shadow-hi),
     0 24px 56px var(--forge-shadow-hi),
-    0 0 40px var(--forge-ember-soft);
+    0 0 42px var(--forge-ember-soft);
+}
+
+@media (min-width: 960px) {
+  .hero.dh.mhero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 316px;
+    align-items: center;
+  }
+  .hero.dh.mhero .herot {
+    padding: 48px 24px 36px 38px;
+  }
+  .hero.dh.mhero .heros {
+    padding: 28px 30px 28px 6px;
+    width: 100%;
+  }
 }
 
 .hero.dh.mhero .dhx {
   background:
     radial-gradient(680px 380px at 84% 26%, var(--forge-ember-soft), transparent 62%),
-    linear-gradient(96deg, rgba(11, 9, 13, .92) 0%, rgba(11, 9, 13, .76) 46%, rgba(11, 9, 13, .36) 78%, rgba(11, 9, 13, .62) 100%),
-    linear-gradient(180deg, rgba(11, 9, 13, .28) 0%, transparent 32%, rgba(11, 9, 13, .82) 100%);
+    linear-gradient(96deg, rgba(11, 9, 13, .92) 0%, rgba(11, 9, 13, .74) 46%, rgba(11, 9, 13, .36) 78%, rgba(11, 9, 13, .62) 100%),
+    linear-gradient(180deg, rgba(11, 9, 13, .26) 0%, transparent 32%, rgba(11, 9, 13, .82) 100%);
 }
 
 .dhero.raid-hero .dx {
@@ -728,7 +773,7 @@ nav.main .nav-foot {
 
 .hero.mhero .bbadge i {
   background: var(--forge-ember);
-  animation: forgePulseDot 2.6s ease-out infinite;
+  animation: forgePulseDot 2.4s ease-out infinite;
 }
 
 .hero.mhero h1.pt {
@@ -738,7 +783,7 @@ nav.main .nav-foot {
 .hero.mhero h1.pt em {
   color: var(--gold-hi);
   text-shadow:
-    0 0 28px var(--forge-ember-glow),
+    0 0 30px var(--forge-ember-glow),
     0 3px 14px var(--forge-shadow-hi);
 }
 
@@ -748,7 +793,7 @@ nav.main .nav-foot {
   box-shadow:
     inset 0 2px 8px var(--forge-shadow),
     0 10px 28px var(--forge-shadow),
-    0 0 20px var(--gold-glow);
+    0 0 22px var(--gold-glow);
 }
 
 .gsearch.hs:focus-within {
@@ -772,17 +817,12 @@ nav.main .nav-foot {
   background: var(--elev);
 }
 
-.hero.dh.mhero .heros {
-  padding: 28px 30px 28px 0;
-  justify-content: center;
-}
-
 .hero.dh.mhero .heros .cd {
   width: 100%;
-  min-width: 264px;
-  padding: 22px 22px;
+  min-width: 0;
+  padding: 20px 20px;
   background-color: var(--panel);
-  background-image: linear-gradient(155deg, var(--forge-plate-top) 0%, var(--panel-2) 58%, var(--sunk) 100%);
+  background-image: linear-gradient(155deg, rgba(44, 33, 28, .96) 0%, var(--panel-2) 56%, var(--sunk) 100%);
   border: 1px solid var(--gold-line-2);
   border-top: 2px solid var(--gold-hi);
   box-shadow:
@@ -796,10 +836,10 @@ nav.main .nav-foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   white-space: nowrap;
-  font: 700 10.5px/1.2 var(--font-mono);
-  letter-spacing: .1em;
+  font: 700 10px/1.2 var(--font-mono);
+  letter-spacing: .08em;
   color: var(--gold);
   padding-bottom: 10px;
   margin-bottom: 12px;
@@ -807,14 +847,14 @@ nav.main .nav-foot {
 }
 
 .hero.dh.mhero .heros .cdrow b {
-  font-size: 46px;
+  font-size: 44px;
   line-height: 1;
   color: var(--gold-hi);
   text-shadow: 0 0 24px var(--forge-ember-glow);
 }
 
 .hero.dh.mhero .heros .cdrow i {
-  font-size: 20px;
+  font-size: 19px;
   color: var(--txt-title);
   font-style: normal;
 }
@@ -832,7 +872,7 @@ nav.main .nav-foot {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 6px 6px;
+  padding: 6px 4px;
   background: var(--sunk);
   border: 1px solid var(--line);
   font-size: 11px;
@@ -845,15 +885,21 @@ nav.main .nav-foot {
   color: var(--gold);
 }
 
-/* ---- 8. 首页九职业 3D 锻造徽章画廊（.cls9） ---- */
+/* ---- 8. 首页九职业 3D 倾角锻铁职业卡（.cls9） ---- */
+.cls9 {
+  perspective: 1100px;
+}
+
 .cls9 > a {
   background-color: var(--panel-2);
-  background-image: linear-gradient(165deg, var(--forge-plate-top), var(--forge-plate-bot));
-  border: 1px solid var(--gold-line-soft);
+  background-image:
+    linear-gradient(160deg, rgba(44, 35, 36, .95) 0%, rgba(20, 16, 22, .97) 58%, rgba(12, 9, 14, .99) 100%);
+  border: 1px solid var(--gold-line);
   box-shadow:
-    inset 0 1px 0 var(--forge-highlight),
-    0 10px 24px var(--forge-shadow);
-  padding: 15px 6px 13px;
+    inset 0 1px 0 var(--forge-highlight-hi),
+    inset 0 -1px 0 var(--forge-shadow-hi),
+    0 12px 28px var(--forge-shadow);
+  padding: 16px 6px 14px;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -863,27 +909,86 @@ nav.main .nav-foot {
   border-color: var(--cls-glow);
   box-shadow:
     inset 0 1px 0 var(--forge-highlight-hi),
-    0 18px 34px var(--forge-shadow-hi),
-    0 0 24px var(--gold-glow);
+    0 22px 42px var(--forge-shadow-hi),
+    0 0 28px var(--gold-glow);
 }
 
 .cls9 > a img {
-  width: 48px;
-  height: 48px;
+  position: relative;
+  z-index: 3;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 2px solid var(--cls-glow);
-  box-shadow: 0 4px 14px var(--forge-shadow-hi);
+  box-shadow: 0 6px 16px var(--forge-shadow-hi);
   transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
 }
 
 .cls9 > a:hover img {
-  transform: scale(1.08);
-  box-shadow: 0 0 18px var(--cls-glow), 0 6px 18px var(--forge-shadow-hi);
+  transform: translateZ(16px) scale(1.1);
+  box-shadow: 0 0 22px var(--cls-glow), 0 8px 20px var(--forge-shadow-hi);
+}
+
+.cls9 > a b,
+.cls9 > a small {
+  position: relative;
+  z-index: 3;
 }
 
 .cls9 > a b {
   color: var(--txt-title);
-  letter-spacing: .03em;
+  letter-spacing: .04em;
+}
+
+/* 天赋页顶部修复（图 2 根治）：把 .tbg 严格关进 .tpanel 内部，彻底消除顶部溢出拉伸丑图 */
+.tpanel {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--gold-line);
+  background-color: var(--panel-2);
+  background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
+  box-shadow: inset 0 1px 0 var(--forge-highlight), 0 16px 38px var(--forge-shadow);
+}
+
+.tpanel > .tbg {
+  position: relative;
+  inset: auto;
+  height: 92px;
+  opacity: 1;
+  overflow: hidden;
+  border-bottom: 1px solid var(--gold-line-soft);
+}
+
+.tpanel > .tbg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 9, 13, .16) 0%, rgba(18, 15, 21, .92) 100%);
+}
+
+.tpanel > .tbg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 26%;
+  opacity: .55;
+}
+
+/* 天赋页职业切换格同步获得锻铁 3D 倾角与金属质感 */
+.classbar .cls {
+  background-color: var(--panel-2);
+  background-image: linear-gradient(160deg, var(--forge-plate-top), var(--forge-plate-bot));
+  border-color: var(--line-2);
+  box-shadow: inset 0 1px 0 var(--forge-highlight), 0 6px 16px var(--forge-shadow);
+  transform-style: preserve-3d;
+  transition: transform var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+
+.classbar .cls.on,
+.classbar .cls:hover {
+  border-color: var(--gold-hi);
+  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 10px 22px var(--forge-shadow), 0 0 18px var(--gold-glow);
 }
 
 /* ---- 9. 首页九板块原画画廊（.hrail） ---- */
@@ -906,9 +1011,9 @@ nav.main .nav-foot {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(150px circle at var(--mx, 50%) var(--my, 50%), var(--forge-spot), transparent 65%),
+    radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), var(--forge-spot), transparent 65%),
     linear-gradient(180deg, transparent 42%, rgba(11, 9, 13, .72) 100%);
-  opacity: .75;
+  opacity: .78;
   transition: opacity var(--dur-1) var(--ease-out);
 }
 
@@ -918,7 +1023,7 @@ nav.main .nav-foot {
   box-shadow:
     inset 0 1px 0 var(--forge-highlight-hi),
     0 16px 32px var(--forge-shadow-hi),
-    0 0 20px var(--gold-glow);
+    0 0 22px var(--gold-glow);
 }
 
 .hrt:hover .hrt-b::after {
@@ -972,7 +1077,7 @@ nav.main .nav-foot {
   border-top: 1px solid var(--gold-line-soft);
 }
 
-/* ---- 11. 响应式细节保护（保证 375 门禁不横滚、不切角） ---- */
+/* ---- 11. 响应式细节保护（保证 375 门禁不横滚、不切角、点击目标 >= 44px） ---- */
 @media (max-width: 899px) {
   .top-search .gs-kbd {
     display: none;
@@ -1006,10 +1111,12 @@ nav.main .nav-foot {
   .raidcard-v2::before,
   .mod::before,
   .card.go::before,
+  .addon-card::before,
   .cls9 > a::before,
   .cta-cut::after,
   .cta.cta-gold::after,
   .gsearch .cta-gold::after,
+  .side-rail .sr-cta::after,
   .hero.mhero .bbadge i {
     animation: none;
     opacity: 0;
@@ -1019,7 +1126,9 @@ nav.main .nav-foot {
   .mod,
   .raidcard-v2,
   .card.go,
+  .addon-card,
   .heros .cd,
+  .classbar .cls,
   .raidcard-v2 .art img {
     transition: none;
     transform: none !important;

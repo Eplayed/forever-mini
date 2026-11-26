@@ -1,11 +1,96 @@
 {
- "meta": {
-  "generatedAt": "2026-10-22",
-  "kind": "guide",
-  "boundaries": "宏与 WA 串一律免费分享，不收钱、不设会员；不分发插件本体、不推荐循环提示类插件；每条标作者/原帖/抓取日期，指不出谁写的按待核不发布。插件为第三方作者作品，与本站无关，安装与使用风险自负。",
-  "statusNote": "这一节 2026-10-22 经站主拍板放开到小程序；内容还没开始整理，整理一条上一条，界面按有没有内容决定显不显示入口。",
-  "source": "wow-forever-web/app/data/guide.json"
- },
- "macros": [],
- "addons": []
+  "meta": {
+    "generatedAt": "2026-11-26",
+    "kind": "guide",
+    "boundaries": "插件为第三方作者作品，与本站无关，安装与使用风险自负。本站仅做免费插件名单整理，不分发插件本体、不推荐循环提示类插件、不做强弱排行与评分。",
+    "statusNote": "2026-11-26 整理首批无限服已核免费插件名单（L1），涵盖站长自研小插件与国服社区常用查询/地图插件。",
+    "source": "wow-forever-web/app/data/guide.json"
+  },
+  "macros": [],
+  "addons": [
+    {
+      "id": "camp-portrait",
+      "name": "旅途小憩（CampPortrait）",
+      "category": "站长自研",
+      "author": "本站站长",
+      "use": "监控睡袋与营地强化休息冷却、自动提醒进账休息经验，并支持最多 4 位队友同框合影与纯净截图模式。",
+      "channel": "网易 DD 插件库搜「旅途小憩」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-11-26",
+      "provenance": [
+        { "type": "self_addon", "name": "本站自研免费插件 0.8.0", "checkedAt": "2026-11-26" }
+      ]
+    },
+    {
+      "id": "dungeons-forever",
+      "name": "DungeonsForever",
+      "category": "副本与团本",
+      "author": "DungeonsForever 团队",
+      "use": "游戏内查看无限服全部地下城与团本首领名单、掉落物品、副本地图点位及海加尔峰套装目录。",
+      "channel": "网易 DD 插件库搜「DungeonsForever」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-11-25",
+      "provenance": [
+        { "type": "addon_verified", "name": "国服客户端实装核对 v2.1.133", "checkedAt": "2026-11-25" }
+      ]
+    },
+    {
+      "id": "gear-insight-forever",
+      "name": "GearInsight 无限版",
+      "category": "资料与查询",
+      "author": "枫叶大象",
+      "use": "游戏内查询无限服装备出处、稀有精英刷新点、专业配方出处坐标与副本相关任务。",
+      "channel": "网易 DD 插件库搜「GearInsight」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-11-25",
+      "provenance": [
+        { "type": "addon_verified", "name": "国服客户端实装核对", "checkedAt": "2026-11-25" }
+      ]
+    },
+    {
+      "id": "questiedb-forever-cn",
+      "name": "QuestieDB（无限服任务追踪）",
+      "category": "任务与地图",
+      "author": "Questie 社区 / 白云飞整合",
+      "use": "在大地图与小地图标记可接任务、任务目标与交任务位置，方便练级与黑龙门任务跑图。",
+      "channel": "网易 DD 插件库搜「Questie」或「白云飞整合」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-11-25",
+      "provenance": [
+        { "type": "addon_verified", "name": "国服客户端实装核对 v1.1.6", "checkedAt": "2026-11-25" }
+      ]
+    },
+    {
+      "id": "xr-dungeon-guide",
+      "name": "XR_DungeonGuide",
+      "category": "副本与宏",
+      "author": "血染",
+      "use": "提供地下城内部路线图、任务指引与各职业常用基础宏文本参考。",
+      "channel": "网易 DD 插件库搜「XR_DungeonGuide」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-11-01",
+      "provenance": [
+        { "type": "addon_verified", "name": "国服客户端实装核对", "checkedAt": "2026-11-01" }
+      ]
+    },
+    {
+      "id": "openmap-forever",
+      "name": "OpenMap",
+      "category": "任务与地图",
+      "author": "OpenMap 社区",
+      "use": "提供经典与无限新增地下城的多层内部地图切换与浏览。",
+      "channel": "网易 DD 插件库搜「OpenMap」",
+      "url": "",
+      "level": "L1",
+      "checkedAt": "2026-10-28",
+      "provenance": [
+        { "type": "addon_verified", "name": "国服客户端实装核对 v0.7.5-CN", "checkedAt": "2026-10-28" }
+      ]
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 <template>
-  <ForgeEmbers :count="54" fullscreen />
+  <ForgeEmbers :count="100" fullscreen />
   <div id="top" ref="topEl" class="top">
     <!-- 第一行：品牌 + 全站搜索 + 上线读数。稿子里这排是「WOW / RETAIL / CLASSIC」版本页签，
          本站红线不许出现商标词，而且只有一款游戏，所以这一排放自己的东西，只借它的排印语法。 -->
