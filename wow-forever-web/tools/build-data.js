@@ -251,6 +251,9 @@ Object.keys(geo.dungeons || {}).forEach((did) => {
   if (e.bossMap && !fs.existsSync(path.join(ROOT, '..', e.bossMap))) {
     errs.push(`dungeon-geo ${did}：bossMap 指向的文件不存在（${e.bossMap}）——整目录可删这条要能成立`);
   }
+  if (e.zoneMap && !fs.existsSync(path.join(ROOT, '..', e.zoneMap))) {
+    errs.push(`dungeon-geo ${did}：zoneMap 指向的文件不存在（${e.zoneMap}）`);
+  }
   if (e.bossMap) {
     geoMapped += 1;
     // 底图分两类记（游戏里那张图的截图 / 插件作者自绘），不分类就等于把官方的图说成别人画的

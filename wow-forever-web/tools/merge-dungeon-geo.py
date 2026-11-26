@@ -88,8 +88,30 @@ def main():
                  'unknown': sum(v for k, v in mapSplit.items()
                                 if k not in ('game-capture', 'addon-drawn'))}
     mapCounts['total'] = sum(mapCounts.values())
+    # zoneMap 兜底（对齐小程序 oss-release.js detailRecord 的 fallbackZoneRel）：
+    # 没有内部底图的本，挂所在区域的地图供参考；有 bossMap 的不需要。
+    world = json.load(open(os.path.join(DATA, 'world.json'), encoding='utf-8'))
+    zoneMapByCn = {z['nameCn']: z['mapFile'] for z in (world.get('zones') or [])
+                   if z.get('nameCn') and z.get('mapFile')}
+    for key in ('newDungeons', 'classicDungeons', 'raids'):
+        for d in dz.get(key) or []:
+            did = d['id']
+            if out.get(did, {}).get('bossMap'):
+                continue
+            e = out.get(did, {})
+            fb = (e.get('entry') or {}).get('mapFile') or zoneMapByCn.get(d.get('zoneCn') or '')
+            if fb:
+                out.setdefault(did, {})['zoneMap'] = fb
+
     for did in out:
-        out[did]['provenance'] = [dict(prov)]
+        e = out[did]
+        if e.get('entry') or e.get('bossPos') or e.get('bossMap'):
+            e['provenance'] = [dict(prov)]
+        else:
+            e['provenance'] = [{'type': 'datamine_cn',
+                                'url': 'https://wowforever.wclbox.com/ditu',
+                                'note': '无内部底图，按所在区域挂区域图兜底（与小程序 zoneMap 同源）',
+                                'checkedAt': date.today().isoformat()}]
 
     payload = {
         'meta': {

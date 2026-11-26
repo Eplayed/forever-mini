@@ -92,6 +92,7 @@
         <!-- 首领块：Glyph.bossFace('lg') 的等价内联复刻（同算法同类名），id="b-首领id" 供锚点跳转 -->
         <div v-for="b in bossRows" :key="b.id" class="brow" :id="'b-' + b.id">
           <div class="bh">
+            <span class="bseq mono">{{ b.seq }}</span>
             <span class="liw t lg">
               <svg viewBox="0 0 40 40" aria-hidden="true">
                 <rect width="40" height="40" rx="6" :fill="'hsl(' + b.f.hue + ',22%,16%)'" :stroke="'hsl(' + b.f.hue + ',30%,42%)'" stroke-opacity=".65" />
@@ -145,6 +146,13 @@
       <h2>首领在哪个位置<span v-if="mapIsDrawn" class="dmap-tag">这张是示意图，不是游戏里的地图</span></h2>
       <PinMap :alt="nm + '的首领位置图'" :items="bossMapItems" :ratio="geo.bossMapRatio || '512/512'" />
       <p class="dim">点一下钉住、再点收掉；手机上直接点右边那一行。同一只首领有多个刷新点就出多颗。</p>
+    </div>
+
+    <!-- 区域图兜底（对齐小程序）：没有内部底图的本，挂所在区域地图供参考，不画首领钉 -->
+    <div v-if="!geo.bossMap && geo.zoneMap" class="card dgeo">
+      <h2>副本地图<span class="dmap-tag">区域地图</span></h2>
+      <img class="zone-fallback-img" :src="assetUrl(geo.zoneMap)" :alt="nm + '所在区域地图'" loading="lazy">
+      <p class="dim">{{ zone }} · 内部平面图待补，首领序号见上方名单</p>
     </div>
 
     <!-- 本里的任务（2026-10-13 口径：讲资料出处的句子一律不上页面；唯一保留的是
@@ -414,10 +422,10 @@ const bossMapItems = computed(() => {
   return out;
 });
 /* 首领块：带掉落归属与头像参数 */
-const bossRows = computed(() => bosses.value.map((b) => {
+const bossRows = computed(() => bosses.value.map((b, idx) => {
   const pts = (geo.value.bossPos || {})[b.nameCn] || [];
   return {
-    id: b.id, nameCn: b.nameCn, portrait: b.portrait, f: faceOf(b),
+    id: b.id, nameCn: b.nameCn, portrait: b.portrait, f: faceOf(b), seq: idx + 1,
     mine: drops.value.filter((y) => y.bossId === b.id),
     // 一只首领可能给好几个刷新点，全列出来；层号（多层的本才有）跟着各自那个点
     pos: pts.length,
@@ -474,5 +482,28 @@ function jump(id) {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.bseq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: var(--panel-2);
+  border: 1px solid var(--line-2);
+  color: var(--gold-hi);
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.zone-fallback-img {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  border: 1px solid var(--line-2);
+  margin: 10px 0;
 }
 </style>
