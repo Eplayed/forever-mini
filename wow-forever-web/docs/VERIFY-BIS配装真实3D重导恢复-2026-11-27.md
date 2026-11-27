@@ -17,7 +17,7 @@
 - 客户端：`World of Warcraft: Forever` 本机 CASC（`1.60.1.70532`），`allowCacheCollection=false`，姿态 `No Animation`，按 `2026-11-23` `app/data/bis.json` 实际物品 ID 逐套导出。
 - 导出数量：**76 / 76**（38 套 × 联盟/部落，覆盖人类/兽人/亡灵/暗夜精灵/牛头人/矮人 6 种族），失败 **0**。
 - 76 份报告全量审计：`total=76`、`non_identity_helmet=0`（全部挂点旋转基底严格为单位阵 `[[1,0,0],[0,1,0],[0,0,1]]`）、`no_cloak=0`（76/76 披风均已写入背部物品真实 cape 贴图）。
-- 轻量化（`tools/optimize-bis-glb.py --webp --body-width 1024 --quality 90`）：总量 **`873.0 MB → 33.70 MB`**，76 份经 `verify_triangle_stream` 逐三角面属性字节比对全部一致；已登记至 `app/img/models/real/manifest.json` 与 `app/data/art.json`（`bisRealModels`，76 条全部 `placementVerdict: "PASS"`）。
+- 轻量化（`tools/optimize-bis-glb.py --webp --body-width 1024 --quality 82`）：总量 **`873.0 MB → 30.38 MB`**（从初版 q90 的 33.70 MB 进一步优化至 q82，贴图清晰度目视无损且使 `fc-deploy.zip` 降至 48.49 MiB），76 份经 `verify_triangle_stream` 逐三角面属性字节比对全部一致；已登记至 `app/img/models/real/manifest.json` 与 `app/data/art.json`（`bisRealModels`，76 条全部 `placementVerdict: "PASS"`）。
 - `.gitignore` 规则保持不变：`app/img/models/real/*.glb` 不入公开 Git 仓库，随 `fc-deploy.zip` 打包发布至阿里云 FC 3.0。
 
 ## 4. 门禁与实拍验证
@@ -25,10 +25,10 @@
 | 检查项 | 结果 | 关键指标 / 证据 |
 | --- | --- | --- |
 | `node wow-forever-web/tools/build-data.js` | **PASS** | 0 错，`bisRealModels` 76/76 `dollSnapshot` 逐格与 `bis.json` 一致 |
-| `npm --prefix wow-forever-web/app run build` | **PASS** | 同步 80 文件至 `app/public/`，`vite build` 6.09 s |
+| `npm --prefix wow-forever-web/app run build` | **PASS** | 同步 80 文件至 `app/public/`，`vite build` 通过 |
 | `npm --prefix wow-forever-web/app test` | **PASS** | **198 / 198** 全绿 |
-| `python -u wow-forever-web/tools/site-check.py --only css_tokens,bis` | **PASS** | **50 / 50** 全绿；点「旋转 3D 模型」按需加载 Three.js + GLB（首屏 0 请求），开 3D 与退回图片差异 93.3%，两阵营切换差异 24.8% |
+| `python -u wow-forever-web/tools/site-check.py --only css_tokens,bis` | **PASS** | **50 / 50** 全绿；点「旋转 3D 模型」按需加载 Three.js + GLB（首屏 0 请求），开 3D 与退回图片差异 93.3%，两阵营切换差异 25.0% |
 | 目视实拍核验 | **PASS** | `docs/screenshots/check-2026-11-27/app-bis-3d.png`：兽人战士牛角头盔正戴头顶、双肩贴合、旋风之斧稳握右手、盔甲纹理清晰 |
-| `release-package.py` + `pkg-verify.py` | **PASS** | 4,455 文件 / 76.7 MB，**18 / 18** 验包通过 |
-| `build-fc-package.py` | **PASS** | `release/fc-deploy.zip`（51.8 MB，4,455 文件，含全部 76 个 `.glb`） |
-| 阿里云 FC 3.0 线上部署与公网实拍 | 待本轮收口 | 提交推送后重打无 `-dirty` FC 包上传 `paoben-web`，实拍验证 `https://www.paoben.top/#/bis` |
+| `release-package.py` + `pkg-verify.py` | **PASS** | 4,455 文件，**18 / 18** 验包通过 |
+| `build-fc-package.py` | **PASS** | `release/fc-deploy.zip`（**48.49 MiB** / 50,846,472 B / 4,455 文件 / sha256 `75b98438ac3d5686ef5365d22637b25c1415451d0fe2e7a4aa66810e370faa9b`） |
+| 阿里云 FC 3.0 线上部署与公网实拍 | **PASS** | **2026-11-27 21:59:46** 部署上线 `paoben-web`（杭州）；`https://www.paoben.top/`、`https://paoben.top/`、`data/art.json`（`bisRealModels=76`）及 `warrior-alliance/warrior-horde/hunter-horde.glb` 均返回 `200`；`https://www.paoben.top/#/bis` 实拍确认战士（联盟/部落）与猎人（部落）真实 3D 角色渲染清晰、头盔与武器贴合、控制台与网络 0 报错 |

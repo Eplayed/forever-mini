@@ -388,8 +388,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-alliance.glb",
-        "bytes": 429352,
-        "sha256": "d2f966e15b5f54e7a5cdae140fad82fc95508b46b00ea43bd969df9d1c6ecdfc",
+        "bytes": 389988,
+        "sha256": "0678c8cc366ef7ad20d2d4672ce6f5dc1d8342b1f73fe8a628e5cd5e2517944a",
         "sourceBytes": 12129380,
         "sourceSha256": "2854ca363d4808385a369dd8c82b3ef683d35c31f6dc84e380fd00f9eb22ef7f",
         "dollSnapshot": [
@@ -495,7 +495,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -505,8 +505,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-balance-alliance.glb",
-        "bytes": 473448,
-        "sha256": "462e9fbe3c869707fc053bbc39b111373785c51a2a7de8fb78aa1ab9efad3e00",
+        "bytes": 436264,
+        "sha256": "d7eefa31fd41b6031d8996f758747aa3515ecd52536372365c566b385772f695",
         "sourceBytes": 11923940,
         "sourceSha256": "ae25f543ec304dda30f0cf25eacad9ac2f4965479577127778797731749b70a6",
         "dollSnapshot": [
@@ -618,7 +618,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -628,8 +628,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-balance-horde.glb",
-        "bytes": 567360,
-        "sha256": "a2c3506d1f7f80169b886b486e4769f6aefdd7f5c777f85d6708ec60be9669d2",
+        "bytes": 504824,
+        "sha256": "66db05bfcdb3f573c077074466639d1853b76061d11db3ba44507d320c76e48f",
         "sourceBytes": 9763060,
         "sourceSha256": "40065fe3eec2195bd83953a3bff9a3d505ef4e1646a93d7b15bd2998638328d8",
         "dollSnapshot": [
@@ -741,7 +741,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -751,8 +751,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-balance-pvp-alliance.glb",
-        "bytes": 436944,
-        "sha256": "277867f3fdebb8c2fc7c980b9d3bdbf1e7cd18ee2961293a81008e3cbc4e2bbd",
+        "bytes": 397220,
+        "sha256": "0ccb61093a6bd397f60df53bbe3040bff1b7c2376cff7c762dc2f37178e45d50",
         "sourceBytes": 12141028,
         "sourceSha256": "71f86ac2c5d76fd58609a86e0f1ea0cfe9dda5c8bb38061a27b563e199e2d06c",
         "dollSnapshot": [
@@ -869,7 +869,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -879,8 +879,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-balance-pvp-horde.glb",
-        "bytes": 609016,
-        "sha256": "4fa3b8d7d4ff09917a40114e31c97ae42e081b5ff4260c47d9666d86943d502a",
+        "bytes": 547208,
+        "sha256": "fa8540e05e6c1bc13d5876efe74ec93a2a36398d8ab1316813275ec622fe98fa",
         "sourceBytes": 9909088,
         "sourceSha256": "13757e9a6852fe9298efaf0efe5a4ee5dc0337a9ce0552867b8369b99b8adc08",
         "dollSnapshot": [
@@ -986,7 +986,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -996,8 +996,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-feral-pvp-alliance.glb",
-        "bytes": 429352,
-        "sha256": "d2f966e15b5f54e7a5cdae140fad82fc95508b46b00ea43bd969df9d1c6ecdfc",
+        "bytes": 389988,
+        "sha256": "0678c8cc366ef7ad20d2d4672ce6f5dc1d8342b1f73fe8a628e5cd5e2517944a",
         "sourceBytes": 12129380,
         "sourceSha256": "2854ca363d4808385a369dd8c82b3ef683d35c31f6dc84e380fd00f9eb22ef7f",
         "dollSnapshot": [
@@ -1103,7 +1103,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1113,8 +1113,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-feral-pvp-horde.glb",
-        "bytes": 609016,
-        "sha256": "4fa3b8d7d4ff09917a40114e31c97ae42e081b5ff4260c47d9666d86943d502a",
+        "bytes": 547208,
+        "sha256": "fa8540e05e6c1bc13d5876efe74ec93a2a36398d8ab1316813275ec622fe98fa",
         "sourceBytes": 9909088,
         "sourceSha256": "13757e9a6852fe9298efaf0efe5a4ee5dc0337a9ce0552867b8369b99b8adc08",
         "dollSnapshot": [
@@ -1220,7 +1220,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1230,8 +1230,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-horde.glb",
-        "bytes": 609016,
-        "sha256": "4fa3b8d7d4ff09917a40114e31c97ae42e081b5ff4260c47d9666d86943d502a",
+        "bytes": 547208,
+        "sha256": "fa8540e05e6c1bc13d5876efe74ec93a2a36398d8ab1316813275ec622fe98fa",
         "sourceBytes": 9909088,
         "sourceSha256": "13757e9a6852fe9298efaf0efe5a4ee5dc0337a9ce0552867b8369b99b8adc08",
         "dollSnapshot": [
@@ -1337,7 +1337,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1347,8 +1347,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-restoration-alliance.glb",
-        "bytes": 453408,
-        "sha256": "e765215b3b28ea6098e5b98988c28943eaf01203a00ed1ede26cba52933d99c2",
+        "bytes": 416628,
+        "sha256": "0d0118aca7f66e1db60be0e1985d6c133c0474a347698c4f4f83d0068993af15",
         "sourceBytes": 11942016,
         "sourceSha256": "2285dbbca42bed7efe8497e22c66b0d498fd11c164fd102341c0b044418c7c96",
         "dollSnapshot": [
@@ -1465,7 +1465,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1475,8 +1475,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-restoration-horde.glb",
-        "bytes": 584264,
-        "sha256": "b65d69160a68bd86f10da64bf53110843bc2918d8f1492fd8a1b53363c777323",
+        "bytes": 521860,
+        "sha256": "dfda088e5f0db9cada94defd7f1c1d0e87b395269e266ac7f212fbc170288cca",
         "sourceBytes": 9831224,
         "sourceSha256": "16796cb6f5e9e97a9dc2bdba6de9ab2344347df4f4b363a612923ebc781a8d03",
         "dollSnapshot": [
@@ -1593,7 +1593,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1603,8 +1603,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-restoration-pvp-alliance.glb",
-        "bytes": 436944,
-        "sha256": "277867f3fdebb8c2fc7c980b9d3bdbf1e7cd18ee2961293a81008e3cbc4e2bbd",
+        "bytes": 397220,
+        "sha256": "0ccb61093a6bd397f60df53bbe3040bff1b7c2376cff7c762dc2f37178e45d50",
         "sourceBytes": 12141028,
         "sourceSha256": "71f86ac2c5d76fd58609a86e0f1ea0cfe9dda5c8bb38061a27b563e199e2d06c",
         "dollSnapshot": [
@@ -1721,7 +1721,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1731,8 +1731,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-restoration-pvp-horde.glb",
-        "bytes": 609016,
-        "sha256": "4fa3b8d7d4ff09917a40114e31c97ae42e081b5ff4260c47d9666d86943d502a",
+        "bytes": 547208,
+        "sha256": "fa8540e05e6c1bc13d5876efe74ec93a2a36398d8ab1316813275ec622fe98fa",
         "sourceBytes": 9909088,
         "sourceSha256": "13757e9a6852fe9298efaf0efe5a4ee5dc0337a9ce0552867b8369b99b8adc08",
         "dollSnapshot": [
@@ -1838,7 +1838,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1848,8 +1848,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-tank-alliance.glb",
-        "bytes": 446652,
-        "sha256": "f08b580d0d8e91d9689901efae480d0e071100b42da73f759e25fa9e75ed4248",
+        "bytes": 407100,
+        "sha256": "70285e9b761fbc6d10e4f89d7a1736985119170fcf8bf9f5309757604a8c29b7",
         "sourceBytes": 12078108,
         "sourceSha256": "3823642dc4a232bb5a83a5b97b3825c00dda6fcd5e1fd168612ac007352b7d6a",
         "dollSnapshot": [
@@ -1955,7 +1955,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -1965,8 +1965,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/druid-tank-horde.glb",
-        "bytes": 577480,
-        "sha256": "5350e41826cf865ec1a95e9f5c54e5fcf4ea758254b53252de3b3e532725c9c8",
+        "bytes": 512252,
+        "sha256": "6577a720304016ceadf754cd6ad6e4d9425738b76d94e3692e6f28115e8cc746",
         "sourceBytes": 9968976,
         "sourceSha256": "ca1ec16c5868f933b5301685a2b421eee834fc96db44c4e50d74409c1494c92c",
         "dollSnapshot": [
@@ -2072,7 +2072,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2082,8 +2082,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/hunter-alliance.glb",
-        "bytes": 443036,
-        "sha256": "a140f3cdfbda4354a021a9daca71347f9530e9838b290482d6ca4f972d530211",
+        "bytes": 403772,
+        "sha256": "2d5aa5975fb468e7450a4d12d263d8426ea4f0fd839e909f9439a82cfd206837",
         "sourceBytes": 10951040,
         "sourceSha256": "556d2988c7538cfdae3119a40db437a893c7f4e5d090d519a5a4fe427d2f7409",
         "dollSnapshot": [
@@ -2185,7 +2185,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2195,8 +2195,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/hunter-horde.glb",
-        "bytes": 468684,
-        "sha256": "d5afa2b6cbbf536435b9cd158de716e3634a4e78a25cf61fb8ad69aa54ceaa40",
+        "bytes": 412840,
+        "sha256": "54a9d9935468815f786fb557bc0afb8b3ab3ce0cb4ea7844ca488361410756d9",
         "sourceBytes": 14033140,
         "sourceSha256": "494bf9e6bfd953ac62d38cce44d1b74c825cffa8f3c3b0775a19077e527bd260",
         "dollSnapshot": [
@@ -2298,7 +2298,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2308,8 +2308,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/hunter-pvp-alliance.glb",
-        "bytes": 443036,
-        "sha256": "a140f3cdfbda4354a021a9daca71347f9530e9838b290482d6ca4f972d530211",
+        "bytes": 403772,
+        "sha256": "2d5aa5975fb468e7450a4d12d263d8426ea4f0fd839e909f9439a82cfd206837",
         "sourceBytes": 10951040,
         "sourceSha256": "556d2988c7538cfdae3119a40db437a893c7f4e5d090d519a5a4fe427d2f7409",
         "dollSnapshot": [
@@ -2411,7 +2411,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2421,8 +2421,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/hunter-pvp-horde.glb",
-        "bytes": 468684,
-        "sha256": "d5afa2b6cbbf536435b9cd158de716e3634a4e78a25cf61fb8ad69aa54ceaa40",
+        "bytes": 412840,
+        "sha256": "54a9d9935468815f786fb557bc0afb8b3ab3ce0cb4ea7844ca488361410756d9",
         "sourceBytes": 14033140,
         "sourceSha256": "494bf9e6bfd953ac62d38cce44d1b74c825cffa8f3c3b0775a19077e527bd260",
         "dollSnapshot": [
@@ -2524,7 +2524,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2534,8 +2534,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-alliance.glb",
-        "bytes": 434684,
-        "sha256": "3d67b7e40e4573577fcf9a58288b0604aa82050ff076c60f4e99c42269374bac",
+        "bytes": 397840,
+        "sha256": "82d7b2ab3e07595334c9c15183c6db167d8825a8cc7aca63b2f6c83fbfa6afad",
         "sourceBytes": 10820412,
         "sourceSha256": "090d3c88a4a13af8d02ec565e8552e97e3da15d530b0a5161cd3741ccf75b612",
         "dollSnapshot": [
@@ -2648,7 +2648,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2658,8 +2658,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-arcane-alliance.glb",
-        "bytes": 423452,
-        "sha256": "f4eff441ee4d821bdb889f89c0f5833e23cdf55f2c2e9f22f9144f89168a87e9",
+        "bytes": 390356,
+        "sha256": "3ca26011227e4ff209595044fd0f51f14d965e6195f044e750bee50ddec4a9af",
         "sourceBytes": 10627480,
         "sourceSha256": "adaf0ca4c40a7bde18024a6cac3a464197992a7ce8e87b7ae0fe069cc192baaa",
         "dollSnapshot": [
@@ -2772,7 +2772,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2782,8 +2782,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-arcane-horde.glb",
-        "bytes": 457492,
-        "sha256": "0876b251adad13c0d9c5173474f3b7e097c131076efbac9c683fd81a183666c2",
+        "bytes": 406768,
+        "sha256": "20e4a5c87e54506b4ea383c78c64c3f86e0ad60c7f7eda821f228e1cf834a2e7",
         "sourceBytes": 13712672,
         "sourceSha256": "34169038cd724cd72c825fdc7f167a67baa4da162feab3f8fce2f959efd1b6f0",
         "dollSnapshot": [
@@ -2896,7 +2896,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -2906,8 +2906,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-fire-alliance.glb",
-        "bytes": 429244,
-        "sha256": "5025e90e1ded46aeb69c15af572134b0c94cd42e14527505f4c593893677a163",
+        "bytes": 392468,
+        "sha256": "3f916829e43f52fbbf8a935f73940538f846dbd13d72f6803ca70fdb818d3923",
         "sourceBytes": 10818724,
         "sourceSha256": "08180d84d83db00cbadabe68c7e9eedff9531066ba5b0b6df4f10ee67c6949b3",
         "dollSnapshot": [
@@ -3020,7 +3020,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3030,8 +3030,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-fire-horde.glb",
-        "bytes": 462000,
-        "sha256": "19b9f7e62e36094915ee942023158c479322cdba0449c10bd3121aa51a0a41db",
+        "bytes": 409604,
+        "sha256": "1c9ae14c11f2e532bc50b11b1e8051c79c7c09dd5b78c852bff2d1c40089ad77",
         "sourceBytes": 13898860,
         "sourceSha256": "7cb068808c289b78df5406842f6819b13659555e762c2ada605044a9151fded1",
         "dollSnapshot": [
@@ -3144,7 +3144,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3154,8 +3154,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-fire-pvp-alliance.glb",
-        "bytes": 434684,
-        "sha256": "3d67b7e40e4573577fcf9a58288b0604aa82050ff076c60f4e99c42269374bac",
+        "bytes": 397840,
+        "sha256": "82d7b2ab3e07595334c9c15183c6db167d8825a8cc7aca63b2f6c83fbfa6afad",
         "sourceBytes": 10820412,
         "sourceSha256": "090d3c88a4a13af8d02ec565e8552e97e3da15d530b0a5161cd3741ccf75b612",
         "dollSnapshot": [
@@ -3268,7 +3268,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3278,8 +3278,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-fire-pvp-horde.glb",
-        "bytes": 469272,
-        "sha256": "fdf1971106318d4ac10564f1b6d3106cabba8c52edcbb0d69953df5a0d9f4c29",
+        "bytes": 415468,
+        "sha256": "1d65363eda03d0c9ade2329b863cf40178b3395866db0880aadf8d6dc2eeb1c7",
         "sourceBytes": 13900568,
         "sourceSha256": "ed2b9abaa9e163fac6b15c93c12cf85af9fb41afbd291e6f9402e262f91daabe",
         "dollSnapshot": [
@@ -3392,7 +3392,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3402,8 +3402,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-horde.glb",
-        "bytes": 469272,
-        "sha256": "fdf1971106318d4ac10564f1b6d3106cabba8c52edcbb0d69953df5a0d9f4c29",
+        "bytes": 415468,
+        "sha256": "1d65363eda03d0c9ade2329b863cf40178b3395866db0880aadf8d6dc2eeb1c7",
         "sourceBytes": 13900568,
         "sourceSha256": "ed2b9abaa9e163fac6b15c93c12cf85af9fb41afbd291e6f9402e262f91daabe",
         "dollSnapshot": [
@@ -3516,7 +3516,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3526,8 +3526,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-pvp-alliance.glb",
-        "bytes": 434684,
-        "sha256": "3d67b7e40e4573577fcf9a58288b0604aa82050ff076c60f4e99c42269374bac",
+        "bytes": 397840,
+        "sha256": "82d7b2ab3e07595334c9c15183c6db167d8825a8cc7aca63b2f6c83fbfa6afad",
         "sourceBytes": 10820412,
         "sourceSha256": "090d3c88a4a13af8d02ec565e8552e97e3da15d530b0a5161cd3741ccf75b612",
         "dollSnapshot": [
@@ -3640,7 +3640,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3650,8 +3650,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/mage-pvp-horde.glb",
-        "bytes": 469272,
-        "sha256": "fdf1971106318d4ac10564f1b6d3106cabba8c52edcbb0d69953df5a0d9f4c29",
+        "bytes": 415468,
+        "sha256": "1d65363eda03d0c9ade2329b863cf40178b3395866db0880aadf8d6dc2eeb1c7",
         "sourceBytes": 13900568,
         "sourceSha256": "ed2b9abaa9e163fac6b15c93c12cf85af9fb41afbd291e6f9402e262f91daabe",
         "dollSnapshot": [
@@ -3764,7 +3764,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3774,8 +3774,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-alliance.glb",
-        "bytes": 424204,
-        "sha256": "b4fb7d016e1d21db84f2a9e2b4ced6308d638997e97e65388583110a76431c76",
+        "bytes": 384140,
+        "sha256": "602b09becfd8275c2c6e5dc7474addb36e4ede5577cafcf2cb578bfdf475c685",
         "sourceBytes": 11087968,
         "sourceSha256": "c716eb1ddc7805af10a2d22b66a709a7ff38bf461fb4124e437eb1eff2a8599b",
         "dollSnapshot": [
@@ -3881,7 +3881,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -3891,8 +3891,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-holy-alliance.glb",
-        "bytes": 417644,
-        "sha256": "5effb1d09be80477c1f15e946b9e999888f83336f0ecb200ef717fc1e13302c2",
+        "bytes": 382744,
+        "sha256": "4a15a15fe2112ae524302258ead7c52e91d42e644177cc93bd8d15a4803d8f46",
         "sourceBytes": 10676488,
         "sourceSha256": "39805657e0573e927f1d5dd960cce326e5ede1d07f656f06a99a50b7cffd0ca4",
         "dollSnapshot": [
@@ -4009,7 +4009,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4019,8 +4019,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-holy-horde.glb",
-        "bytes": 508532,
-        "sha256": "86387fd52ac1cf9120884704540f14e1dda47de6c9bcbd5fb9dfa110cc6b1265",
+        "bytes": 469088,
+        "sha256": "14b8c1c2242b411ab94d3d96ca5f6a398db68c1c092e9bbe150d4fb269792d31",
         "sourceBytes": 12579412,
         "sourceSha256": "6cd75411cecd07002fb46d61d619765b8accd189cad40c746cc260bbd38d43ab",
         "dollSnapshot": [
@@ -4137,7 +4137,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4147,8 +4147,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-holy-pvp-alliance.glb",
-        "bytes": 429164,
-        "sha256": "b99599c5b314b728d2af356262ae93f79229b14037b2db1d5045204733b2bd12",
+        "bytes": 388148,
+        "sha256": "c48015275bb589e5381e62c00e9e6ff48ef9566de6076d86af0eec301e4de6b2",
         "sourceBytes": 11101800,
         "sourceSha256": "d4ac31b822dd7dd62b0d5e39e8d38c731625cf64321c886171c12de923518b7f",
         "dollSnapshot": [
@@ -4265,7 +4265,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4275,8 +4275,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-holy-pvp-horde.glb",
-        "bytes": 476800,
-        "sha256": "e42a43b14513b7b81a202002a2bbb9436d1db39770438d87c6cfc7249915f5de",
+        "bytes": 430088,
+        "sha256": "0fb4618597e0726b636cece8ce0bed39636bbd295ba4939e98a34cfb4c7acc9c",
         "sourceBytes": 12964156,
         "sourceSha256": "726216e43084c9c21cdddd9e53e3c36ae6d21bdee6bbb2d375393a6f5fc79eee",
         "dollSnapshot": [
@@ -4393,7 +4393,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4403,8 +4403,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-horde.glb",
-        "bytes": 474012,
-        "sha256": "157ca9c3680e4cf006ed648c7af5661b1de0b136b803ac4e0cc728f90eef6af7",
+        "bytes": 428168,
+        "sha256": "5afd19b48d0f20ffea4707e5a83dca1a3ef47eea331e2550eb17683d5f0eaff1",
         "sourceBytes": 12953092,
         "sourceSha256": "af2be5dad28afe798af1564a0cd731637eea2732e5a7c6a20270653ff6b03256",
         "dollSnapshot": [
@@ -4510,7 +4510,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4520,8 +4520,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-retribution-pvp-alliance.glb",
-        "bytes": 424204,
-        "sha256": "b4fb7d016e1d21db84f2a9e2b4ced6308d638997e97e65388583110a76431c76",
+        "bytes": 384140,
+        "sha256": "602b09becfd8275c2c6e5dc7474addb36e4ede5577cafcf2cb578bfdf475c685",
         "sourceBytes": 11087968,
         "sourceSha256": "c716eb1ddc7805af10a2d22b66a709a7ff38bf461fb4124e437eb1eff2a8599b",
         "dollSnapshot": [
@@ -4627,7 +4627,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4637,8 +4637,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-retribution-pvp-horde.glb",
-        "bytes": 474012,
-        "sha256": "157ca9c3680e4cf006ed648c7af5661b1de0b136b803ac4e0cc728f90eef6af7",
+        "bytes": 428168,
+        "sha256": "5afd19b48d0f20ffea4707e5a83dca1a3ef47eea331e2550eb17683d5f0eaff1",
         "sourceBytes": 12953092,
         "sourceSha256": "af2be5dad28afe798af1564a0cd731637eea2732e5a7c6a20270653ff6b03256",
         "dollSnapshot": [
@@ -4744,7 +4744,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4754,8 +4754,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-shockadin-alliance.glb",
-        "bytes": 429164,
-        "sha256": "b99599c5b314b728d2af356262ae93f79229b14037b2db1d5045204733b2bd12",
+        "bytes": 388148,
+        "sha256": "c48015275bb589e5381e62c00e9e6ff48ef9566de6076d86af0eec301e4de6b2",
         "sourceBytes": 11101800,
         "sourceSha256": "d4ac31b822dd7dd62b0d5e39e8d38c731625cf64321c886171c12de923518b7f",
         "dollSnapshot": [
@@ -4872,7 +4872,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -4882,8 +4882,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-shockadin-horde.glb",
-        "bytes": 476800,
-        "sha256": "e42a43b14513b7b81a202002a2bbb9436d1db39770438d87c6cfc7249915f5de",
+        "bytes": 430088,
+        "sha256": "0fb4618597e0726b636cece8ce0bed39636bbd295ba4939e98a34cfb4c7acc9c",
         "sourceBytes": 12964156,
         "sourceSha256": "726216e43084c9c21cdddd9e53e3c36ae6d21bdee6bbb2d375393a6f5fc79eee",
         "dollSnapshot": [
@@ -5000,7 +5000,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5010,8 +5010,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-tank-alliance.glb",
-        "bytes": 415480,
-        "sha256": "2ae564573286c0ca0667463d569af6c1eec1a8ccbe5104cb3601e6dcbbc85ab3",
+        "bytes": 376352,
+        "sha256": "b1985f117bf746810933d39016d3b41e73d89800694308389ab974301846fd03",
         "sourceBytes": 10870840,
         "sourceSha256": "e44ab57176b0902d4d975539a7711e72c79bf0f8d45c397d3553a342c353f489",
         "dollSnapshot": [
@@ -5128,7 +5128,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5138,8 +5138,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/paladin-tank-horde.glb",
-        "bytes": 510716,
-        "sha256": "6925ec1f14189c95ba3342a9cffa31036ce958407d136ffad7ce8c95d3e63c91",
+        "bytes": 469192,
+        "sha256": "7c76c00011598003467cc47432b1a2e3e7132d1a7071dad9d66e366ac6f33dc7",
         "sourceBytes": 12713516,
         "sourceSha256": "8ca618f3d7a04fdc5a075ed54bf7a7db12710563250682e22fb47ee8dd183411",
         "dollSnapshot": [
@@ -5256,7 +5256,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5266,8 +5266,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-alliance.glb",
-        "bytes": 419180,
-        "sha256": "2d3d9cf0a3eb1c7c2151554f136b59cb016eda88306c6edc5bf3d359a37edcbc",
+        "bytes": 384748,
+        "sha256": "1cf58fd83d81de06b42a65fc71450e3e61fd5a6d42820b961608fd31959e8d02",
         "sourceBytes": 10712560,
         "sourceSha256": "538948476c84cbc55e22b416fae728d9b46cc01e5e4502d842bde218227fcead",
         "dollSnapshot": [
@@ -5369,7 +5369,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5379,8 +5379,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-discipline-pvp-alliance.glb",
-        "bytes": 426024,
-        "sha256": "c497f446d0eddafe103b447d7bff8bb5f4acf1005fb3cf610164577a59806045",
+        "bytes": 390616,
+        "sha256": "fae9ebaf0351a882b7ff4f411a174e244f7589d5ac183bc48100ef7e90f3a389",
         "sourceBytes": 10729448,
         "sourceSha256": "0cdd989c71a6756fc6c63edb4241669213e55febeb7875922bf44cf64b625174",
         "dollSnapshot": [
@@ -5493,7 +5493,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5503,8 +5503,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-discipline-pvp-horde.glb",
-        "bytes": 504000,
-        "sha256": "751c32623e0b61e5483e1bc8b300907bb577e574d432309475979cd8a79c9a2e",
+        "bytes": 465596,
+        "sha256": "65614ac24dcf00904f54072a0fd086001a464c7c4abcc6290a375a9f689d8821",
         "sourceBytes": 12607916,
         "sourceSha256": "c82ce3941c4610600cf2c6be2164e919de72344864bf7a026ff869fdc3f730f5",
         "dollSnapshot": [
@@ -5617,7 +5617,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5627,8 +5627,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-holy-alliance.glb",
-        "bytes": 419808,
-        "sha256": "a915e72c0ceb2367d2727d4e8c8d54748e27317cf309d6c8414e9be3ae3664bb",
+        "bytes": 384252,
+        "sha256": "b035beb0151e24aeca1ee799436f8bc7538752dc5b0b418017e5c710712f47c7",
         "sourceBytes": 10705204,
         "sourceSha256": "628353df5c6b17022f197abfb3894368ef8725ad0ba7300c2589890955416d90",
         "dollSnapshot": [
@@ -5746,7 +5746,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5756,8 +5756,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-holy-horde.glb",
-        "bytes": 509696,
-        "sha256": "abd92b37424f273c46338525431cf07424b494e1d47e13730bb7e50e71a4e961",
+        "bytes": 469748,
+        "sha256": "93e4afd19db10461a41e7755e3d308fa2682d4a7461b1ab2e0a9fff603c3bc39",
         "sourceBytes": 12596952,
         "sourceSha256": "b5b35db0d0006768af5faf2b3b15cd2ace8003fef147f6ef4b1b3002dc2483bb",
         "dollSnapshot": [
@@ -5875,7 +5875,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5885,8 +5885,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-horde.glb",
-        "bytes": 496956,
-        "sha256": "55eefb341d05eafa43294e9b7da18194a6bd9394717fb39b7057fc9624a34e1a",
+        "bytes": 459680,
+        "sha256": "e4328f81b04dfb0fb411f579886a24d7c4630c54652adb5f5f776ed850c660fe",
         "sourceBytes": 12591040,
         "sourceSha256": "22a0f693ef1763dbc1ffc1ca38106c7ac9cfc914666571c1808ee474e55024d0",
         "dollSnapshot": [
@@ -5988,7 +5988,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -5998,8 +5998,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-shadow-pvp-alliance.glb",
-        "bytes": 419180,
-        "sha256": "2d3d9cf0a3eb1c7c2151554f136b59cb016eda88306c6edc5bf3d359a37edcbc",
+        "bytes": 384748,
+        "sha256": "1cf58fd83d81de06b42a65fc71450e3e61fd5a6d42820b961608fd31959e8d02",
         "sourceBytes": 10712560,
         "sourceSha256": "538948476c84cbc55e22b416fae728d9b46cc01e5e4502d842bde218227fcead",
         "dollSnapshot": [
@@ -6101,7 +6101,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6111,8 +6111,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/priest-shadow-pvp-horde.glb",
-        "bytes": 496956,
-        "sha256": "55eefb341d05eafa43294e9b7da18194a6bd9394717fb39b7057fc9624a34e1a",
+        "bytes": 459680,
+        "sha256": "e4328f81b04dfb0fb411f579886a24d7c4630c54652adb5f5f776ed850c660fe",
         "sourceBytes": 12591040,
         "sourceSha256": "22a0f693ef1763dbc1ffc1ca38106c7ac9cfc914666571c1808ee474e55024d0",
         "dollSnapshot": [
@@ -6214,7 +6214,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6224,8 +6224,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-alliance.glb",
-        "bytes": 413344,
-        "sha256": "b72ea3951ddbe445afdf5e18457c05bfed5dfe7812dfa8ab5c165020e8922907",
+        "bytes": 374820,
+        "sha256": "1fd69c72084dfe909622acca36b9aff63760335b4c905bcfc58d230caf201736",
         "sourceBytes": 10934684,
         "sourceSha256": "dd0d82955622ea27a1b1bacc8f73d8e2d7e528da6665db90f72e3714db7dde33",
         "dollSnapshot": [
@@ -6343,7 +6343,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6353,8 +6353,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-assassination-alliance.glb",
-        "bytes": 416988,
-        "sha256": "f01079a0121b9dddede9da97b5f125126bfaabe1b3d7c9c78789fecaf4b68f3b",
+        "bytes": 377396,
+        "sha256": "f2883178c168095a3cadde520923a83c234687fa7d1576e69f9f32fc91767425",
         "sourceBytes": 10945708,
         "sourceSha256": "13e8d73ec648810caf3c3c66877b489ded0dbe8a2668fe864fa391ffcb323ccf",
         "dollSnapshot": [
@@ -6472,7 +6472,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6482,8 +6482,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-assassination-horde.glb",
-        "bytes": 452436,
-        "sha256": "2cb87754e49ccd20f358a854f37e209cf334f39f770cf679f104011d1eaf1817",
+        "bytes": 398076,
+        "sha256": "54044bfba617db6e50b3124d625815a77aea41c4b95708d2d640e9abda6eead4",
         "sourceBytes": 13906384,
         "sourceSha256": "2f9313e1e30085f4f6821f7a67e230e08f1d56f09ceeee0451e8e597bc3f8629",
         "dollSnapshot": [
@@ -6601,7 +6601,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6611,8 +6611,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-horde.glb",
-        "bytes": 448768,
-        "sha256": "4f13192f42012921d8ae4d0850cf2a0bbbac2c7b9579be7dd0f91aaa87a6f46a",
+        "bytes": 395348,
+        "sha256": "b9090d88e8a1e2a3285789bf4c31d1742663efe46aeca96f62315654799c0029",
         "sourceBytes": 13894940,
         "sourceSha256": "53c262ebbdaebe6cbe09fbd2caedd788010d982fe364fa6e91309a5beec5b269",
         "dollSnapshot": [
@@ -6730,7 +6730,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6740,8 +6740,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-pvp-alliance.glb",
-        "bytes": 413344,
-        "sha256": "b72ea3951ddbe445afdf5e18457c05bfed5dfe7812dfa8ab5c165020e8922907",
+        "bytes": 374820,
+        "sha256": "1fd69c72084dfe909622acca36b9aff63760335b4c905bcfc58d230caf201736",
         "sourceBytes": 10934684,
         "sourceSha256": "dd0d82955622ea27a1b1bacc8f73d8e2d7e528da6665db90f72e3714db7dde33",
         "dollSnapshot": [
@@ -6859,7 +6859,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6869,8 +6869,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-pvp-hemo-alliance.glb",
-        "bytes": 413344,
-        "sha256": "b72ea3951ddbe445afdf5e18457c05bfed5dfe7812dfa8ab5c165020e8922907",
+        "bytes": 374820,
+        "sha256": "1fd69c72084dfe909622acca36b9aff63760335b4c905bcfc58d230caf201736",
         "sourceBytes": 10934684,
         "sourceSha256": "dd0d82955622ea27a1b1bacc8f73d8e2d7e528da6665db90f72e3714db7dde33",
         "dollSnapshot": [
@@ -6988,7 +6988,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -6998,8 +6998,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-pvp-hemo-horde.glb",
-        "bytes": 448768,
-        "sha256": "4f13192f42012921d8ae4d0850cf2a0bbbac2c7b9579be7dd0f91aaa87a6f46a",
+        "bytes": 395348,
+        "sha256": "b9090d88e8a1e2a3285789bf4c31d1742663efe46aeca96f62315654799c0029",
         "sourceBytes": 13894940,
         "sourceSha256": "53c262ebbdaebe6cbe09fbd2caedd788010d982fe364fa6e91309a5beec5b269",
         "dollSnapshot": [
@@ -7117,7 +7117,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7127,8 +7127,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/rogue-pvp-horde.glb",
-        "bytes": 448768,
-        "sha256": "4f13192f42012921d8ae4d0850cf2a0bbbac2c7b9579be7dd0f91aaa87a6f46a",
+        "bytes": 395348,
+        "sha256": "b9090d88e8a1e2a3285789bf4c31d1742663efe46aeca96f62315654799c0029",
         "sourceBytes": 13894940,
         "sourceSha256": "53c262ebbdaebe6cbe09fbd2caedd788010d982fe364fa6e91309a5beec5b269",
         "dollSnapshot": [
@@ -7246,7 +7246,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7256,8 +7256,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-alliance.glb",
-        "bytes": 489660,
-        "sha256": "e38fc1a8cbae94c152d4f257403085792b3b734f4eab4e745401af9e81a8c846",
+        "bytes": 441552,
+        "sha256": "beb83fb653d516bb56a94e05c7cbe7adba3f24d2f583c2b338d3e6cfaea89b20",
         "sourceBytes": 11967068,
         "sourceSha256": "e6a886e48f04832888f11f7ea949043a5ec61d1acccf8d7347f1c35c37566faa",
         "dollSnapshot": [
@@ -7369,7 +7369,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7379,8 +7379,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-elemental-pvp-alliance.glb",
-        "bytes": 489660,
-        "sha256": "e38fc1a8cbae94c152d4f257403085792b3b734f4eab4e745401af9e81a8c846",
+        "bytes": 441552,
+        "sha256": "beb83fb653d516bb56a94e05c7cbe7adba3f24d2f583c2b338d3e6cfaea89b20",
         "sourceBytes": 11967068,
         "sourceSha256": "e6a886e48f04832888f11f7ea949043a5ec61d1acccf8d7347f1c35c37566faa",
         "dollSnapshot": [
@@ -7492,7 +7492,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7502,8 +7502,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-elemental-pvp-horde.glb",
-        "bytes": 458116,
-        "sha256": "50cb479648b2efe4113566d288e8eff7e1f78eb5abe0105c64a4e69006b77fab",
+        "bytes": 402796,
+        "sha256": "b479138de35762dbfc5d151f1bb3db884cff3624536d203bf5d85d3a362a2081",
         "sourceBytes": 13793228,
         "sourceSha256": "b6efca649cde31fe3ccc98a6352baea5007b8d5362d3a19a72861384dcc38ed2",
         "dollSnapshot": [
@@ -7615,7 +7615,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7625,8 +7625,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-enhancement-alliance.glb",
-        "bytes": 486976,
-        "sha256": "b2600b03da37cae4b63019de37da80ef1efcc7cbe4d91bcddea55477a5174b69",
+        "bytes": 439040,
+        "sha256": "6deb1c27a70317ca99d2f3b7190f93cdb9a3607b918ad23112ebda27fea6cd6c",
         "sourceBytes": 12166476,
         "sourceSha256": "6ce7a9cffe5fc98744abe360370e042575a7305c679fe1d6e1f653f62e42984c",
         "dollSnapshot": [
@@ -7732,7 +7732,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7742,8 +7742,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-enhancement-horde.glb",
-        "bytes": 452532,
-        "sha256": "453ddb1c08df7a5f0fdfcdb20f1554b52fe429ca69516dc992974f49bd0cea0a",
+        "bytes": 396388,
+        "sha256": "a463d21d9205baf7781b0d6d133d2a9e7d3dfaffbd24f4b267c9e03337a15260",
         "sourceBytes": 13955324,
         "sourceSha256": "08e663970bf9e4fe35fc52778ce47de6aec63028fbe9e3a35a516ab4ddf85cb3",
         "dollSnapshot": [
@@ -7849,7 +7849,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7859,8 +7859,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-enhancement-pvp-alliance.glb",
-        "bytes": 471748,
-        "sha256": "58319932a53cf51470e58df2709d224536359d93878f7a45b26d892a6110e134",
+        "bytes": 427156,
+        "sha256": "0e2beff0720e38f87bf3170c527134cffaf64a14038c81fc61e12de5faadf2fa",
         "sourceBytes": 11909820,
         "sourceSha256": "d51fc906df726419303f83be839cd8cb0dab1be90abf3fa7e3d8583aa939bc54",
         "dollSnapshot": [
@@ -7961,7 +7961,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -7971,8 +7971,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-enhancement-pvp-horde.glb",
-        "bytes": 437568,
-        "sha256": "eb27195d99d663c2eccee2107a7273ade03d0f32cb28863f838797ab28f1d84f",
+        "bytes": 385484,
+        "sha256": "ff3da315fca765846ecccb5028b11b78c27bc88ce1e6849e9011e20a286570fb",
         "sourceBytes": 13734040,
         "sourceSha256": "2109108eb7aff1dc01aace06d17ee09ebe430f237790b3e8f98c33e329d30d08",
         "dollSnapshot": [
@@ -8073,7 +8073,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8083,8 +8083,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-horde.glb",
-        "bytes": 458116,
-        "sha256": "50cb479648b2efe4113566d288e8eff7e1f78eb5abe0105c64a4e69006b77fab",
+        "bytes": 402796,
+        "sha256": "b479138de35762dbfc5d151f1bb3db884cff3624536d203bf5d85d3a362a2081",
         "sourceBytes": 13793228,
         "sourceSha256": "b6efca649cde31fe3ccc98a6352baea5007b8d5362d3a19a72861384dcc38ed2",
         "dollSnapshot": [
@@ -8196,7 +8196,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8206,8 +8206,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-restoration-alliance.glb",
-        "bytes": 507628,
-        "sha256": "782675ee98c546a180fa612a526d6fb401ca8853f3b1ab38d3c275bb61b62343",
+        "bytes": 461480,
+        "sha256": "96fd571e325fb9bd0ff294a1b7f4a795ba3526713d4a81b160192db04e2b3742",
         "sourceBytes": 11946060,
         "sourceSha256": "f336179e8827e372640a842a2806552901a9d08e28fecb0990d6d21c3d960b77",
         "dollSnapshot": [
@@ -8324,7 +8324,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8334,8 +8334,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/shaman-restoration-horde.glb",
-        "bytes": 473740,
-        "sha256": "4a64f63cea0c0e616fb4e0c2cd527558733cc3bedb844bdb4de94f47d7584142",
+        "bytes": 420204,
+        "sha256": "b9b429d27f0e5d58b5bfd6a9e5f3675d31de5a142a321d4db8840361b4e882cc",
         "sourceBytes": 13840612,
         "sourceSha256": "5a45c64a375f1262d8149057f91f3724b4b69298fa9134071d2c0be8457224d6",
         "dollSnapshot": [
@@ -8452,7 +8452,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8462,8 +8462,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warlock-alliance.glb",
-        "bytes": 414968,
-        "sha256": "539e74783c7558584e5bf9cf62c0c3db17a1bfb2ef6aeeb9a92c28a779495dc2",
+        "bytes": 379124,
+        "sha256": "0ff80661bd6b5155057268768d9b3ff72c64b8375585355652756d168e063d60",
         "sourceBytes": 10658944,
         "sourceSha256": "042293da3086b3dfdede45841690be7db7576685ce1385fead82f719d1379695",
         "dollSnapshot": [
@@ -8576,7 +8576,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8586,8 +8586,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warlock-horde.glb",
-        "bytes": 443888,
-        "sha256": "8400c6611322e9d14f32f7806e20d6a54d9302a9fb87f5ad9237c9c7a83ffd94",
+        "bytes": 390844,
+        "sha256": "da4b98105388d02fb14bb171d6b1f75a4fc5204c9b6916f56f8598ebd2c92f4e",
         "sourceBytes": 13734900,
         "sourceSha256": "7f4999a1e9f4c48923df6165433a48631ddb207b93044a07c1e8ed349f169c4c",
         "dollSnapshot": [
@@ -8700,7 +8700,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8710,8 +8710,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warlock-pvp-alliance.glb",
-        "bytes": 414968,
-        "sha256": "539e74783c7558584e5bf9cf62c0c3db17a1bfb2ef6aeeb9a92c28a779495dc2",
+        "bytes": 379124,
+        "sha256": "0ff80661bd6b5155057268768d9b3ff72c64b8375585355652756d168e063d60",
         "sourceBytes": 10658944,
         "sourceSha256": "042293da3086b3dfdede45841690be7db7576685ce1385fead82f719d1379695",
         "dollSnapshot": [
@@ -8824,7 +8824,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8834,8 +8834,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warlock-pvp-horde.glb",
-        "bytes": 443888,
-        "sha256": "8400c6611322e9d14f32f7806e20d6a54d9302a9fb87f5ad9237c9c7a83ffd94",
+        "bytes": 390844,
+        "sha256": "da4b98105388d02fb14bb171d6b1f75a4fc5204c9b6916f56f8598ebd2c92f4e",
         "sourceBytes": 13734900,
         "sourceSha256": "7f4999a1e9f4c48923df6165433a48631ddb207b93044a07c1e8ed349f169c4c",
         "dollSnapshot": [
@@ -8948,7 +8948,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -8958,8 +8958,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-alliance.glb",
-        "bytes": 429716,
-        "sha256": "6938c738cc5a6ca16637a4f895a6f955fd40c856ef894e076db32dd6eb35ce8e",
+        "bytes": 391796,
+        "sha256": "0c543ab2a04df8ac510916be78408132d823f0a7cdc8321b880f6be973c5b79b",
         "sourceBytes": 10960056,
         "sourceSha256": "e5cdf13a6b1a0ce63b4a3d999aa5e30b7f21933ef9495722c962dc0fcc104b50",
         "dollSnapshot": [
@@ -9066,7 +9066,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -9076,8 +9076,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-horde.glb",
-        "bytes": 465380,
-        "sha256": "1a05ff01e7984b981cc2b0ada31d9097c64fbd235c0b0a4653fd79a5d13a89ed",
+        "bytes": 407656,
+        "sha256": "ab4167b79eb8fe723457616101abe32b3be786b3093d4777a1fa6a4bfdd8744b",
         "sourceBytes": 14057732,
         "sourceSha256": "df2ee0488a18efa01b5137e8b27c6a1a0754ebb818411ff087854730136caf4b",
         "dollSnapshot": [
@@ -9184,7 +9184,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -9194,8 +9194,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-pvp-alliance.glb",
-        "bytes": 429716,
-        "sha256": "6938c738cc5a6ca16637a4f895a6f955fd40c856ef894e076db32dd6eb35ce8e",
+        "bytes": 391796,
+        "sha256": "0c543ab2a04df8ac510916be78408132d823f0a7cdc8321b880f6be973c5b79b",
         "sourceBytes": 10960056,
         "sourceSha256": "e5cdf13a6b1a0ce63b4a3d999aa5e30b7f21933ef9495722c962dc0fcc104b50",
         "dollSnapshot": [
@@ -9302,7 +9302,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -9312,8 +9312,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-pvp-horde.glb",
-        "bytes": 465380,
-        "sha256": "1a05ff01e7984b981cc2b0ada31d9097c64fbd235c0b0a4653fd79a5d13a89ed",
+        "bytes": 407656,
+        "sha256": "ab4167b79eb8fe723457616101abe32b3be786b3093d4777a1fa6a4bfdd8744b",
         "sourceBytes": 14057732,
         "sourceSha256": "df2ee0488a18efa01b5137e8b27c6a1a0754ebb818411ff087854730136caf4b",
         "dollSnapshot": [
@@ -9420,7 +9420,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -9430,8 +9430,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-tank-alliance.glb",
-        "bytes": 431484,
-        "sha256": "aecec9993eb26d8a906cdbc1c4414a5427fdf90c72df868107bf5f70a25b3c16",
+        "bytes": 392700,
+        "sha256": "af3950212cd1865d53077c6c39f668f371a63ca2860ef377ee3b7f3d30e585e3",
         "sourceBytes": 10908432,
         "sourceSha256": "1e1cff3cd99cfde65b78a7163c62fa1fb780d8397dd510684b34de4802ec4bb0",
         "dollSnapshot": [
@@ -9549,7 +9549,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       },
       {
@@ -9559,8 +9559,8 @@
         "bodyType": "male",
         "placementVerdict": "PASS",
         "file": "img/models/real/warrior-tank-horde.glb",
-        "bytes": 484360,
-        "sha256": "0d8e1b67879109ec7ea10f671e1640ea809906af35c92c08d55bf83980305344",
+        "bytes": 424684,
+        "sha256": "1f999a75503d0eecacc62ef15275d96a29841cd646c85d1fbbaacac3329ad9b9",
         "sourceBytes": 14096308,
         "sourceSha256": "c9590488868de1f785eab88cf9fc132f30f74f415d7133e7037bee3f80824afa",
         "dollSnapshot": [
@@ -9678,7 +9678,7 @@
         ],
         "optimization": {
           "geometry": "referenced vertices only",
-          "textures": "WebP quality 90; body atlas max width 1024"
+          "textures": "WebP quality 82; body atlas max width 1024"
         }
       }
     ]
