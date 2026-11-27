@@ -1,6 +1,6 @@
 # wow-forever · 当前接手入口
 
-更新：2026-11-26（北京时间）。开工时先核实际 Git 状态、Qoder/Codex 正在运行的任务和本题最新交接。
+更新：2026-11-27（北京时间）。开工时先核实际 Git 状态、Qoder/Codex 正在运行的任务和本题最新交接。
 
 ## 先读哪里
 
@@ -16,7 +16,7 @@
 
 ## 线上是哪一包
 
-内地主站 <https://paoben.top/>（阿里云函数计算 FC 3.0 `paoben-web`，`cn-hangzhou`，备案号 `沪ICP备2025127988号`）已于 **2026-11-26 21:22:53** 部署最新包 `wow-forever-web/release/fc-deploy.zip`（19.83 MB，4,156 文件，sha256 `668934576754…`，对应提交 `267d35f`），内容为 **方案 A「黑曜锻炉 · 史诗剧场」× 全屏火星 × 左侧导航侧栏 × 旋转流光边框** 全站视觉与动效升级；公网回读确认首页 `200`（`theme-color=#0b090d`，引用 `./assets/index-BN_5Ke6f.css` 与 `./assets/index-CxSY-uE2.js`）、样式表 `200`（`162,550 B`，含 `--forge-beam` / `forge-embers-full` / `--nav-w`）、`POST /api/t` 返回真 `204`、`GET /api/t` 返回 `405`、`HEAD /talent.html` 仍为真 `404`（详见 `wow-forever-web/docs/VERIFY-Web黑曜锻炉视觉与动效升级-2026-11-26.md`；上一包 11-25 22:03:45 `187cc8310e6b…` 为回滚位）。境外备用 GitHub Pages <https://eplayed.github.io/wuxian-atlas/> 停在 `wow-forever-web-20261117-131807-bea1e38-dirty`（Pages 提交 `6199760`）。
+内地主站 <https://paoben.top/>（与 <https://www.paoben.top/>，阿里云函数计算 FC 3.0 `paoben-web`，`cn-hangzhou`，备案号 `沪ICP备2025127988号`）已于 **2026-11-27 09:20:39** 部署最新包 `wow-forever-web/release/fc-deploy.zip`（19.83 MB，4,153 文件，sha256 `57231697f5f2…`，对应提交 `d5c1e15`），在方案 A「黑曜锻炉」× 全屏火星 × 左侧导航侧栏（含插件目录）× 旋转流光边框 × 锻铁质感/3D 倾角/熔金扫光按钮 + `index.html no-cache` 基础上，**修复了 Windows「调整为最佳性能」（`prefers-reduced-motion: reduce`）静默关停全屏火星与流光边框的缺陷**，新增左侧栏底部「特效开/特效关」手动开关（持久化 `localStorage`）并保留 `motion.css` 无障碍降级；公网回读确认 `www.paoben.top/` 与 `paoben.top/` 均返回 `200` 且 `Cache-Control: no-cache, must-revalidate`（引用 `./assets/index-DSD8t3uy.css` 与 `./assets/index-B4mTWozV.js`）、`POST /api/t` 返回真 `204`，线上 `reduced_motion="reduce"` Playwright 实测 `canvas.forge-embers` 正常绘制（`4,306` 非零透明像素、`forgeBeamSpin` 旋转流光开启、零报错，详见 `wow-forever-web/docs/VERIFY-Web黑曜锻炉视觉与动效升级-2026-11-26.md`）。境外备用 GitHub Pages <https://eplayed.github.io/wuxian-atlas/> 停在 `wow-forever-web-20261117-131807-bea1e38-dirty`（Pages 提交 `6199760`）。
 
 小程序 OSS beta 线上指针已于 **2026-11-25 21:44**（北京时间）升至 **`4c85302c224e`**（回滚位 **`2b53c3092870`**），179/179 上传 0 失败 0 冲突，`flags.json`（3.1 KB，开启 `[bis / professions / macros / namer / grank]`）同步对齐，`verify --env beta` 逐文件回读 **177/177 问题 0**。本批为 **11-25 插件层重抓数据补发**（与网页同源；含 12 月 10 日三座团本 `raidGuide` 与奥妮克希亚联盟/部落各 11 步门任务分片、78 套 14–58 级新套装、9/9 无限新本底图与首页「区服 G 排行」）。小程序代码 **`v1.6.3`**（AppID `wxfd9a2b985a6cedc3`，总包 **`434.6 KB`**：主包 `383.9 KB` + 分包 `50.8 KB`，含首页 12.10 团本筹备横幅、副本页团本标签筹备卡与门任务徽标、详情页开荒卡与交互式黑龙门任务 11 步打卡）已于 **2026-11-25 16:54** 通过 CLI 上传至微信公众平台开发版本，待在微信公众平台提交审核发布（本轮纯数据补发未重传代码；详见 `for-mini/docs/VERIFY-beta数据补发-2026-11-25.md` 与 `wow-forever-web/docs/VERIFY-12月团本首开双端优化-2026-11-25.md`）。
 发布经过三坑（只读 `.git` 清场、Clash 代理、30MB 全量包三推三断）与增量推送根治写在 `wow-forever-web/docs/VERIFY-控制台总舱-2026-11-03.md` 补记七。**发布前先确认 Clash（7890）开着；判落地用数据文件哈希＋gh-pages 头，别用 index.html。**

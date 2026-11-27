@@ -49,3 +49,17 @@
   - `GET /` → **`200`**（`825 B`，`theme-color=#0b090d`，引用 `./assets/index-BN_5Ke6f.css` 与 `./assets/index-CxSY-uE2.js`）
   - `GET ./assets/index-BN_5Ke6f.css` → **`200`**（`162,550 B`，命中 `--forge-beam` / `forge-embers-full` / `--nav-w`）
   - `POST /api/t` → **`204`**，`GET /api/t` → **`405`**，`HEAD /talent.html` → **`404`**
+
+---
+
+## 四、2026-11-27 追记：Windows 减弱动态导致全屏火星不可见根治与二次发布
+
+- **问题根因**：站主实机访问 `https://www.paoben.top/` 反馈整体无火星粒子；核查本机 Windows 注册表存在 `VisualFXSetting=2`（「调整为最佳性能」）与 `MinAnimate=0`，桌面端 Chrome/Edge 据此默认上报 `prefers-reduced-motion: reduce === true`，导致此前 `ForgeEmbers.vue`、`forge.css` 与 `forge-fx.js` 直接静默关闭了全屏火星、旋转流光边框、扫光按钮与 3D 倾角。
+- **修复内容（提交 `d5c1e15`）**：
+  1. [ForgeEmbers.vue](file:///d:/project/forever/wow-forever-web/app/src/components/ForgeEmbers.vue)：移除对系统 `prefers-reduced-motion` 的退出判断，改为仅在 `document.hidden` 或 `html.forge-fx-off` 时暂停清屏；同时提升全屏粒子密度（88–150 颗）、亮度、余烬拖尾与高亮白金火芯。
+  2. [forge-fx.js](file:///d:/project/forever/wow-forever-web/app/src/lib/forge-fx.js)、[AppShell.vue](file:///d:/project/forever/wow-forever-web/app/src/components/AppShell.vue)、[forge.css](file:///d:/project/forever/wow-forever-web/app/src/styles/forge.css)：将黑曜锻炉装饰性流光/扫光/3D 倾角降级策略从 `@media (prefers-reduced-motion: reduce)` 改为受 `html.forge-fx-off` 控制，并在左侧导航栏底部增加「**特效开 / 特效关**」手动按钮（持久化 `localStorage['wow_forever_v1_forge_fx']`）；**不修改 `motion.css`**，路由与抽屉过渡仍严格遵守系统减弱动态无障碍门禁。
+  3. [forge-fx.spec.js](file:///d:/project/forever/wow-forever-web/app/tests/forge-fx.spec.js)：补充手动特效开关与持久化单测。
+- **验证与公网发布（2026-11-27 09:10–09:22）**：
+  - `vite build` + `vitest` 全部通过；`site-check.py --only css_tokens,app,motion` **107 / 107 PASS**（减弱动态过渡断言全部绿灯）；`pkg-verify.py` **18 / 18 PASS**。
+  - 新 FC 包 `wow-forever-web/release/fc-deploy.zip`（`4,153` 文件 / `20,792,903 B` / `19.83 MB` / sha256 `57231697f5f24d572a879fd61b2194bb5c1aa9e3cd67561f0f408baefd19fe99`）已上传部署至阿里云 FC 3.0 `paoben-web`，控制台核验上次修改时间更新为 **`2026-11-27 09:20:39`**。
+  - 公网 `https://www.paoben.top/` 与 `https://paoben.top/` 实测回读：`GET /` → **`200`**（`Cache-Control: no-cache, must-revalidate`，引用 `./assets/index-DSD8t3uy.css` 与 `./assets/index-B4mTWozV.js`），`POST /api/t` → **`204`**；在 Playwright `reduced_motion="reduce"` 仿真环境下直连 `https://www.paoben.top/#/` 实测 `canvas.forge-embers` 正常显示（`1440×950`，`4,306` 非零透明粒子像素）、Hero 旋转流光边框 `forgeBeamSpin` 生效、侧栏按钮显示「特效开」、零脚本报错。
