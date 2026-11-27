@@ -1,16 +1,16 @@
 {
  "meta": {
-  "source": "DungeonsForever 2.1.133 Core/Data/Data_DungeonLoot.lua",
+  "source": "DungeonsForever 2.1.136 Core/Data/Data_DungeonLoot.lua",
   "addon": "DungeonsForever",
-  "addonVersion": "2.1.133",
+  "addonVersion": "2.1.136",
   "installRoot": "Interface",
   "sourceFile": "DungeonsForever/Core/Data/Data_DungeonLoot.lua",
   "sourceStamp": {
-   "bytes": 128760,
-   "sha256": "34aee687730a3f16f860c78712aa5d6fdf28ff7a6ffb0d12a4a0b1ee1a2d243e",
-   "fileDate": "2026-11-23"
+   "bytes": 128795,
+   "sha256": "acbd51830df505a5faa4c216ece46d02992dec5541e96e7adb476a6b71ce0f14",
+   "fileDate": "2026-11-25"
   },
-  "fetched": "2026-11-25",
+  "fetched": "2026-11-27",
   "took": "首领中文名、英文名、npcId，以及每条首领的掉落物品 ID（去重、升序）",
   "droppedFields": [
    "掉率那一列（DF 行里 100 / nil 那个数）——本站红线：掉落不写百分比",
@@ -24,8 +24,8 @@
    "dfRows": 392,
    "realBossRows": 309,
    "pseudoRows": 83,
-   "dfItemIds": 1575,
-   "dfItemIdsAlreadyInRoster": 1575,
+   "dfItemIds": 1576,
+   "dfItemIdsAlreadyInRoster": 1576,
    "matchedOurIds": 36,
    "unmappedDfSlugs": 0
   },
@@ -166,7 +166,8 @@
       287022,
       287023,
       287024,
-      287025
+      287025,
+      287026
      ]
     }
    ]

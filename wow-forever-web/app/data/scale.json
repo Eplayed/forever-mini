@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generatedAt": "2026-11-26",
+  "generatedAt": "2026-11-27",
   "method": "tools/build-data.js 校验时顺手算出来，别在页面里手抄这些数",
   "note": "首页与溯源页的规模数字唯一来源。改数据后重跑 build-data.js 才会变。"
  },
@@ -184,7 +184,7 @@
     "build": "1.60.1.71037",
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -193,7 +193,7 @@
     "build": "1.60.1.71037",
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -202,7 +202,7 @@
     "build": "1.60.1.71037",
     "checkedAt": "2026-11-23",
     "classic": "1.15.9.70576",
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -211,7 +211,7 @@
     "build": "1.60.1.71037",
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -220,7 +220,7 @@
     "build": null,
     "checkedAt": "2026-11-25",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
@@ -229,7 +229,7 @@
     "build": null,
     "checkedAt": "2026-11-18",
     "classic": null,
-    "daysSince": 8,
+    "daysSince": 9,
     "stale": "warn"
    },
    {
@@ -238,7 +238,7 @@
     "build": null,
     "checkedAt": "2026-11-25",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
@@ -247,7 +247,7 @@
     "build": null,
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -256,7 +256,7 @@
     "build": null,
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    },
    {
@@ -265,7 +265,7 @@
     "build": null,
     "checkedAt": "2026-11-25",
     "classic": null,
-    "daysSince": 1,
+    "daysSince": 2,
     "stale": null
    },
    {
@@ -274,7 +274,7 @@
     "build": null,
     "checkedAt": "2026-11-23",
     "classic": null,
-    "daysSince": 3,
+    "daysSince": 4,
     "stale": null
    }
   ],
