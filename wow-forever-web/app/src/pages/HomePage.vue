@@ -12,12 +12,10 @@
       <img class="dhbg" :src="HERO_ART" alt="" style="object-position:center 42%"><span class="dhx"></span>
       <span class="forge-rivets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <div class="herot">
-        <!-- 2026-10-25：不再报"全站一个客户端号"。各板块核到的版本不一样（传承 70532、
-             改动清单 70425、世界 70338），报一个号就是假数；这里只报最新核到的那个，
-             并写明是哪一块，值从规模快照现取。 -->
-        <span class="bbadge"><i></i>测试服进行中 · 最新核到客户端 {{ newestTail }}<template v-if="newestSection">（{{ newestSection }}）</template></span>
+        <!-- 2026-11-27 站主拍板：去掉首页 Hero 顶部「测试服进行中 · 最新核到客户端…」胶囊，直入大标题；
+             各板块核对版本号继续保留在溯源页（#/provenance）版本表中。 -->
         <h1 class="pt">回到最初的世界<br><em>探索无限的可能</em></h1>
-        <p class="lead">天赋、区域与稀有、副本掉落、专业配方、种族组合、中英术语。</p>
+        <p class="lead">天赋、无限地图、副本掉落、专业配方、种族组合、中英术语。</p>
         <SiteSearch :total="S.search || 0" :initial="String($route.query.q || '')" />
         <!-- 2026-10-12 用户决定：首页 hero 不再放覆盖率条、L0-L3 四枚徽标与「数据基线…」那行，
              也不放四条规模读数——出处与数据质量集中在溯源页说，首页只留标题、搜索与入口。 -->
@@ -289,7 +287,7 @@ const MOD_GROUPS = computed(() => {
         n: [[s.races, '个种族行'], [s.traits, '条特长整句']] }
     ] },
     { line: '世界与冒险', items: [
-      { href: 'world.html', t: '区域与稀有精英', kicker: '世界 · 区域 ' + s.zones + ' 个',
+      { href: 'world.html', t: '无限地图 · 稀有与 NPC', kicker: '世界 · 地图 ' + s.zones + ' 区',
         art: artOf(A, 'maps', '1411'),
         n: [[s.zones, '区域'], [s.rares, '已定位稀有'], [s.books, '本书有坐标']] },
       { href: 'dungeons.html', t: '副本与掉落', kicker: '世界 · ' + s.dungeons + ' 座',

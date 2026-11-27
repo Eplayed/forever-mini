@@ -710,300 +710,123 @@ def test_css_tokens(browser, base):
           if missing else "干净")
 
 def test_world_pins(browser, base):
-    """世界页四个面板共用一套点位图（2026-10-19 站主：把稀有那版铺到其余三个面板；
-       同日再改：区域面板**一行一张**，左边图右边点位列表，原来一行两张太小）。
-       盯六件事：① 每个面板的带数/点位数/列表行数都等于 world.json 现算的数；
-       ② 区域卡一行一张、卡上混标三类，点数=能标的、行数=全部条数；
-       ③ 区域卡的点位与"跳到该区域稀有列表"那一行按钮不互相嵌套（按钮套按钮是无效 HTML）；
-       ④ 红框里那两处文字确实没了（首屏五格读数、"先挑区域"标题）；
-       ⑤ 只换查询参数也要切面板（/world?t=zones → ?t=books 不换组件实例）；
-       ⑥ 桌面与 375 都不横溢，窄屏地图仍占满一整块。"""
-    print("\n[6e] 世界页四面板共用点位图")
+    """无限地图（2026-11-27 站主拍板：将「区域与稀有」升级为仿 OpenMap 拼接无缝地图）。
+       盯六件事：① 46 张本地高清区域底图全部拼接上画布且图片全部加载；
+       ② 图层筛选抽屉与「传承书籍」扩展进度卡就绪，勾选/缩放 LOD 真实生效；
+       ③ 搜索飞跃定位可命中区域/稀有/NPC 并弹出黑曜锻炉点位详情卡（含 /way 指令）；
+       ④ 旧链接 #/world?t=rares 与 #/world?t=books 仍向后兼容并切到对应图层；
+       ⑤ 原「书籍换奖 / 稀有套装 / 睡袋参数」完整保留在弹窗中；
+       ⑥ 桌面 1440 与 375 移动端均不横向溢出且零脚本报错。"""
+    print("\n[6e] 无限地图（OpenMap 风格无缝画布与图层筛选）")
     import json
-    W = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
-    zones = W.get("zones") or []
-    rares = W.get("rares") or []
-    books = W.get("books") or []
-    camps = [p for c in ((W.get("bagTool") or {}).get("camps") or []) for p in (c.get("places") or [])]
-    # art.json 的 maps 键就是地图号，值是本地图文件——"有没有这张图"以它为准，不靠猜
-    art_maps = set((json.load(open(os.path.join(SRC, "data", "art.json"), encoding="utf-8"))
-                    .get("maps") or {}).keys())
-    pin = lambda x: bool(x.get("mapFile") and x.get("mark"))
-    znames = {z["nameCn"] for z in zones}
-    want_zone_pins = len([x for x in rares + books + camps if pin(x) and x.get("zone") in znames])
-    # 列表那一列比图上多：本地没切到那张图的稀有不上图但要能查到，所以行数按全部条数算
-    want_zone_rows = len([x for x in rares + books + camps if x.get("zone") in znames])
-    book_zones = {b.get("zone") for b in books if b.get("zone")}
-    camp_zones = {c.get("zone") for c in camps if c.get("zone")}
+    atlas = json.load(open(os.path.join(SRC, "data", "world-atlas.json"), encoding="utf-8"))
+    npcs = json.load(open(os.path.join(SRC, "data", "map-npcs.json"), encoding="utf-8"))
+    zones = atlas.get("zones") or []
 
     ctx = browser.new_context(viewport={"width": 1440, "height": 1000})
     page = ctx.new_page()
     errs = []
     page.on("pageerror", lambda e: errs.append(str(e)[:140]))
 
-    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(2400)
-    z = page.evaluate("""() => { const cards = [...document.querySelectorAll('.zcard')];
-      const grid = document.querySelector('.zgrid');
-      const big = document.querySelector('.zcard .zbig');
-      return { cards: cards.length,
-        cols: grid ? (getComputedStyle(grid).gridTemplateColumns || '').trim().split(/\\s+/).length : 0,
-        mapW: big ? Math.round(big.getBoundingClientRect().width) : 0,
-        lists: document.querySelectorAll('.zcard .zband > .zlist').length,
-        rows: document.querySelectorAll('.zcard .zband > .zlist .zrow').length,
-        dots: document.querySelectorAll('.zcard .zdot').length,
-        kinds: [...new Set([...document.querySelectorAll('.zcard .zdot')].map(d => d.dataset.kind))],
-        nested: cards.filter(c => c.matches('button') || c.querySelector('button button')).length,
-        bodyBtn: document.querySelectorAll('.zcard button.zhead').length,
-        noimg: [...document.querySelectorAll('.zcard .zbig-id')].map(e => e.innerText.trim()),
-        bigCards: [...document.querySelectorAll('.zcard')].filter(c => c.querySelector('.zbig')).length,
-        nomap: document.querySelectorAll('.zcard .zband.nomap').length,
-        heroStats: (document.querySelector('.cdhead.big').closest('.card').querySelectorAll('.stats') || []).length,
-        over: document.documentElement.scrollWidth - window.innerWidth}; }""")
-    check("区域面板一行一张图（站主：原来一行两个、图太小），左图右列表同一版式",
-          z["cards"] == len(zones) == 44 and z["cols"] == 1 and z["lists"] == len(zones)
-          and z["mapW"] >= 520,
-          "%d 张卡 / 网格 %d 列 / 右侧列表 %d 份 / 图宽 %dpx"
-          % (z["cards"], z["cols"], z["lists"], z["mapW"]))
-    check("区域卡每张都带该区域的全部点位，三类点混标在同一张上",
-          z["dots"] == want_zone_pins and sorted(z["kinds"]) == ["book", "camp", "rare"]
-          and z["cards"] == len(zones),
-          "%d 个点（数据能标在区域卡上的 %d）/ 类型 %s" % (z["dots"], want_zone_pins, z["kinds"]))
-    check("区域卡不是按钮套按钮（点位自己是按钮，整卡是外层 div + 上面一行信息是按钮）",
-          z["nested"] == 0 and z["bodyBtn"] == len(zones),
-          "嵌套 %d 处 / 区域信息按钮 %d 个" % (z["nested"], z["bodyBtn"]))
-    check("右侧列表那一列一条不少：行数 = 该区域的稀有 + 书 + 营地（含标不出点位的）",
-          z["rows"] == want_zone_rows,
-          "列表 %d 行，数据 %d 条" % (z["rows"], want_zone_rows))
-    check("整张图都标不出点的区域，仍然写明这是哪张地图的编号，不留空盒",
-          len(z["noimg"]) == len([x for x in zones if not x.get("mapFile")])
-          and all("地图编号" in t for t in z["noimg"]),
-          "%d 张没图的：%s" % (len(z["noimg"]), z["noimg"]))
-    # 上面那条只证明"编号还在"，证明不了那个 120px 的空图框没了（2026-10-20 W01 改的就是这个）。
-    # 这一条钉两件事：有底图的才有 .zbig；没底图的那几张整块换成单列紧凑布局（.zband.nomap）。
-    check("没有底图的区域不再留空图框：图框只给有图的区域，无图那几张换成整宽紧凑布局",
-          z["bigCards"] == len([x for x in zones if x.get("mapFile")])
-          and z["nomap"] == len([x for x in zones if not x.get("mapFile")]),
-          "图框 %d（数据有图 %d）/ 紧凑态 %d（数据缺图 %d）"
-          % (z["bigCards"], len([x for x in zones if x.get("mapFile")]),
-             z["nomap"], len([x for x in zones if not x.get("mapFile")])))
-    check("首屏那排五格读数按站主要求撤掉了", z["heroStats"] == 0, "还剩 %d 组" % z["heroStats"])
-    check("区域面板不横向溢出", z["over"] == 0, "溢出 %d" % z["over"])
-    # 某一张卡上的点数必须等于该区域 rareCount + bookCount + 营地数（数据是本轮重算过的）
-    per = page.evaluate("""() => { const out = {};
-      [...document.querySelectorAll('.zcard')].forEach(c => {
-        out[c.dataset.zone] = c.querySelectorAll('.zdot').length; });
-      return out; }""")
-    camp_by = {}
-    for c in camps:
-        if pin(c):
-            camp_by[c["zone"]] = camp_by.get(c["zone"], 0) + 1
-    bad = []
-    for zz in zones:
-        n = zz["nameCn"]
-        want = int(zz.get("rareCount") or 0) + int(zz.get("bookCount") or 0) + camp_by.get(n, 0)
-        if per.get(n) != want:
-            bad.append("%s 画 %s 个，数据 %s 稀有 + %s 书 + %s 营地 = %d"
-                       % (n, per.get(n), zz.get("rareCount"), zz.get("bookCount"),
-                          camp_by.get(n, 0), want))
-    check("每张区域卡上的点数 = 该区域的稀有数 + 书本数（+ 营地），逐张核过",
-          not bad, "；".join(bad[:3]) or "44 张全部对得上")
-    # 计数是这一轮刚从"抄上游汇总"改成"按实际条数算"的，钉住别又漂回去
-    drift = [z2["nameCn"] for z2 in zones
-             if int(z2.get("rareCountSource") or 0) != int(z2.get("rareTotal") or 0)]
-    check("数据侧：上游那份汇总的说法留在 rareCountSource 里没删，页面用的是按实际算的那份",
-          all("rareCountSource" in z2 and "rareTotal" in z2 for z2 in zones) and len(drift) > 0,
-          "%d 个区域的上游汇总与实际条数不一致（正是本轮改掉的）" % len(drift))
-    # 2026-10-19：地图号这一层现在有三份来源，顺位写死在 merge-world 里——
-    #   ① GI 每条稀有行自带的 ui=（坐标与地图号出自同一行，最硬）② 站内那三层（paint / 分组 id / rareRegions）
-    #   ③ XR 那份「区域名→地图号」只补前两层都查不到的空位。三份要对得上，
-    #   对不上不悄悄取舍：记进 meta.mapIdMismatch 与 meta.zoneMapFill.conflicts，让人当场看见
-    gi_ui = [r for r in rares if r.get("mapIdFrom") == "gi-ui"]
-    filled = [r for r in rares if r.get("mapIdFrom") == "xr-zonemap"]
-    zm = (W.get("meta") or {}).get("zoneMapFill") or {}
-    check("数据侧：地图号以 GI 行内 ui 为主源，XR 那张名字表退成兜底（只补空位）",
-          len(gi_ui) >= 300 and all(r.get("mapId") for r in gi_ui) and
-          all(r.get("mapId") for r in filled),
-          "gi-ui %d 只 · XR 补 %d 只 · 名字表与站内一致 %s 条 / 只 XR 有的区域 %d 个"
-          % (len(gi_ui), len(filled), zm.get("agreeWithSite"), zm.get("zonesOnlyHere")))
-    check("数据侧：三份来源对账零冲突（mapIdMismatch 与 zoneMapFill.conflicts 都得是空的）",
-          not (W.get("meta") or {}).get("mapIdMismatch") and not (zm.get("conflicts") or []),
-          "稀有层冲突 %d 条 · 名字表冲突 %d 条"
-          % (len((W.get("meta") or {}).get("mapIdMismatch") or []), len(zm.get("conflicts") or [])))
-    check("补上地图号不等于就能标点：只有本地真有那张贴图的才许上图",
-          all(bool(r.get("mapFile")) == (str(r.get("mapId")) in art_maps)
-              for r in rares if r.get("mapId") and r.get("mark")),
-          "%d 只有地图号，其中 %d 只本地有贴图可标、%d 只仍只进列表"
-          % (len([r for r in rares if r.get("mapId") and r.get("mark")]),
-             len([r for r in rares if r.get("mapFile") and r.get("mark")]),
-             len([r for r in rares if r.get("mapId") and r.get("mark") and not r.get("mapFile")])))
+    page.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    settle_motion(page)
+    page.wait_for_selector(".imap-shell", timeout=20000)
+    page.wait_for_timeout(1200)
+
+    m = page.evaluate("""() => ({
+      zones: document.querySelectorAll('.imap-zone').length,
+      cats: document.querySelectorAll('.imap-ck input[data-cat]').length,
+      checkedCats: document.querySelectorAll('.imap-ck input[data-cat]:checked').length,
+      hasLegacyBox: !!document.querySelector('.imap-legacy-box'),
+      hasTopTools: document.querySelectorAll('.imap-top-tools button').length,
+      pins: document.querySelectorAll('.imap-pin').length,
+      over: document.documentElement.scrollWidth - window.innerWidth
+    })""")
+    check("无限地图默认全不选且整屏无左右留白溢出",
+          m["zones"] == len(zones) >= 44 and m["checkedCats"] == 0 and m["pins"] == 0 and m["over"] == 0,
+          "%d 区域 / 默认勾选 %d / 默认点位 %d / 溢出 %d" % (m["zones"], m["checkedCats"], m["pins"], m["over"]))
+    check("左侧筛选抽屉、「传承书籍」扩展卡与右上角工具栏就绪",
+          m["cats"] >= 18 and m["hasLegacyBox"] and m["hasTopTools"] >= 4,
+          "%d 图层复选 / 传承卡=%s / 右上工具=%d" % (m["cats"], m["hasLegacyBox"], m["hasTopTools"]))
+
+    # 勾选「航线点（船/飞艇/空艇）」验证点位与真实航线立即亮起
+    page.locator('input[data-cat="transport"]').check()
+    page.wait_for_timeout(350)
+    m2 = page.evaluate("""() => ({
+      pins: document.querySelectorAll('.imap-pin').length,
+      routes: document.querySelectorAll('.imap-routes path').length
+    })""")
+    check("手动勾选航线点后立即展示航线停靠点与真实航线图",
+          m2["pins"] >= 10 and m2["routes"] >= 8,
+          "%d 个航线点 / %d 条航线（含 NPC 数据 %d 条）" % (m2["pins"], m2["routes"], npcs["meta"]["total"]))
+
+    # 搜索「断矛」并点击飞跃定位，验证详情卡与 /way 复制按钮
+    page.fill("#wq", "断矛")
+    page.wait_for_timeout(400)
+    hits = page.locator(".imap-drop-row").count()
+    check("聚合搜索「断矛」即时命中稀有怪", hits > 0, "命中 %d 条" % hits)
+    if hits > 0:
+        page.locator(".imap-drop-row").first.click()
+        page.wait_for_timeout(600)
+        card = page.evaluate("""() => {
+          const c = document.querySelector('.imap-card');
+          return c ? { title: (c.querySelector('h3') || {}).innerText, txt: c.innerText } : null;
+        }""")
+        check("点击搜索结果丝滑飞跃并弹出黑曜锻炉点位详情卡（含 /way 指令）",
+              bool(card) and "断矛" in (card.get("title") or "") and "/way" in (card.get("txt") or ""),
+              str((card or {}).get("title")))
+
+    # 打开附属弹窗验证书籍换奖与睡袋参数保留完整
+    page.locator("button", has_text="书籍换奖").click()
+    page.wait_for_timeout(400)
+    modal_txt = page.evaluate("() => (document.querySelector('.imap-modal') || {}).innerText || ''")
+    check("原世界页「图书馆换奖 / 稀有套装 / 睡袋参数」完整保留在弹窗中",
+          "图书馆管理员" in modal_txt and "舒适的睡袋" in modal_txt,
+          "弹窗字数 %d" % len(modal_txt))
+    page.locator(".imap-modal button", has_text="关闭").click()
+    page.wait_for_timeout(300)
+    snap(page, path=os.path.join(SHOT_DIR, "app-world-infinite-map.png"))
+
+    # 向后兼容旧链接 #/world?t=rares 与 #/world?t=books
+    page.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
+    settle_motion(page)
+    page.wait_for_timeout(800)
+    rares_only = page.evaluate("""() => ({
+      rareChecked: !!(document.querySelector('input[data-cat="rare"]') || {}).checked,
+      pins: document.querySelectorAll('.imap-pin[data-pin-cat="rare"]').length
+    })""")
+    check("旧链接 #/world?t=rares 向后兼容：自动切到稀有图层并展示稀有点位",
+          rares_only["rareChecked"] and rares_only["pins"] > 0,
+          json.dumps(rares_only, ensure_ascii=False))
 
     page.goto(APP_BASE + "/#/world?t=books", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(2200)
-    bk = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
-      dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
-      kinds: [...new Set([...document.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
-      old: document.querySelectorAll('.zthumb, table.bktab').length,
-      over: document.documentElement.scrollWidth - window.innerWidth})""")
-    check("书籍面板也走点位图：一个有书的区域一张图，36 本全标出来",
-          bk["bands"] == len(book_zones) and bk["dots"] == len([x for x in books if pin(x)])
-          and bk["rows"] == len(books) and bk["kinds"] == ["book"],
-          "%d 张图 / %d 个点 / %d 行（数据 %d 本、有坐标的 %d 个区域）"
-          % (bk["bands"], bk["dots"], bk["rows"], len(books), len(book_zones)))
-    check("书籍原来那张只标一个点的缩略图与五列表已撤掉（信息搬进浮层与列表行）",
-          bk["old"] == 0 and bk["over"] == 0, "残留 %d 处" % bk["old"])
-    page.evaluate("() => document.querySelectorAll('.zband')[0].scrollIntoView({block:'center'})")
-    page.wait_for_timeout(300)
-    page.hover(".zdot")
-    page.wait_for_timeout(500)
-    pop = page.evaluate("""() => { const p = document.querySelector('.zpop'); if (!p) return null;
-      return {kind: p.className, title: (p.querySelector('b') || {}).innerText.trim(),
-        rows: [...p.querySelectorAll('.zpop-x > div')]
-        .map(e => e.innerText.replace(/\\s+/g, ' ').trim())}; }""")
-    # 页面第一个浮层是"按等级排下来第一个有书的区域"的第一本书，
-    # 不能拿数据里的 books[0] 去比（那是另一本）——按浮层标题回数据里找它自己
-    b0 = [x for x in books if pin(x) and x.get("nameCn") == (pop or {}).get("title")]
-    want0 = b0 and ["容器 %s" % (b0[0].get("container") or "—"),
-                    "位置 %s" % (b0[0].get("place") or "—"),
-                    "物品编号 #%s" % b0[0].get("itemId")]
-    check("书点位浮层把原来表格里那三列带回来了（容器 / 位置 / 物品编号）",
-          pop and "k-book" in pop["kind"] and pop["rows"] == want0,
-          json.dumps({"pop": pop, "want": want0}, ensure_ascii=False))
-    snap(page, path=os.path.join(SHOT_DIR, "app-world-books.png"))
-
-    page.goto(APP_BASE + "/#/world?t=bag", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(2200)
-    bg = page.evaluate("""() => ({bands: document.querySelectorAll('.zband').length,
-      dots: document.querySelectorAll('.zdot').length, rows: document.querySelectorAll('.zrow').length,
-      kinds: [...new Set([...document.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
-      old: document.querySelectorAll('#main .rarecard').length,
-      over: document.documentElement.scrollWidth - window.innerWidth})""")
-    check("营地面板也走点位图：5 处按区域归到图上，旧的「五条各一张缩略图」撤掉",
-          bg["bands"] == len(camp_zones) and bg["dots"] == len([c for c in camps if pin(c)])
-          and bg["rows"] == len(camps) and bg["kinds"] == ["camp"] and bg["old"] == 0
-          and bg["over"] == 0,
-          "%d 张图 / %d 个点 / %d 行（数据 %d 处）" % (bg["bands"], bg["dots"], bg["rows"], len(camps)))
-
-    # 只换查询参数也要切面板：/world?t=zones → ?t=books 不换组件实例，
-    # 只在建立时读一次 route.query 的话点了不会动（2026-10-19 实测到，搜索跳这一页就撞这条）
-    # 先归位到"区域"再只换查询参数——不先归位的话上一段停在营地面板，比的是残留状态
-    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(1800)
-    first_tab = page.evaluate("() => (document.querySelector('.pick.on b') || {}).innerText")
-    page.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(1800)
-    now = page.evaluate("""() => ({tab: (document.querySelector('.pick.on b') || {}).innerText,
-      bands: document.querySelectorAll('.zband').length,
-      stats: document.querySelectorAll('#main .stats').length,
-      head: document.querySelector('#main').innerText.indexOf('先挑区域') >= 0})""")
-    # 带数按数据现算，不写死：区域分组数会随稀有增减而变（2026-10-19 补地图号那一层之后
-    # 有稀有点位的区域从 31 涨到 36，写死的数下一次就是假绿或假红）
-    want_rare_bands = len({(r.get("zone") or "未归区域") for r in rares})
-    check("只换查询参数（不换组件）也要切面板",
-          first_tab == "区域" and now["tab"] == "稀有精英" and now["bands"] == want_rare_bands,
-          "%s → %s（%d 张图，数据 %d 个区域分组）"
-          % (first_tab, now["tab"], now["bands"], want_rare_bands))
-    check("「先挑区域」那行标题按站主要求撤掉了", not now["head"],
-          "页面上还有" if now["head"] else "已无")
-
-    # ---- S3（2026-10-29）：图例即筛选 + 点位分级 ----
-    # 这一节存在的直接原因：第一版我把 @click 只挂在「全部」那颗上，类别芯片点了
-    # aria-pressed 不动、图上一颗不少——构建和上面所有旧断言全绿，只有真点一下才暴露。
-    # 所以这里必须"点一次、再量一次"，且 click 与读结果分开两次调用（Vue 更新是异步的）。
-    page.goto(APP_BASE + "/#/world?t=zones", wait_until="networkidle")
-    settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_timeout(2000)
-    lg = page.evaluate("""() => {
-      const bs = [...document.querySelectorAll('.zband')];
-      const i = bs.findIndex(b => b.querySelectorAll('.zlg').length > 1);
-      if (i < 0) return { none: true };
-      const b0 = bs[i];
-      const chip = b0.querySelector('[data-lg="rare"]');
-      const kinds = (el) => [...new Set([...el.querySelectorAll('.zdot')].map(d => d.dataset.kind))].sort();
-      const num = (el) => parseInt((el.textContent || '').replace(/\\D/g, ''), 10) || 0;
-      return { idx: i, dots: b0.querySelectorAll('.zdot').length,
-               rows: b0.querySelectorAll('.zrow').length,
-               chips: b0.querySelectorAll('.zlg').length,
-               kinds: kinds(b0), wantRare: chip ? num(chip) : -1,
-               pressed: chip ? chip.getAttribute('aria-pressed') : null,
-               src: (b0.querySelector('.zcanvas img') || {}).getAttribute
-                 ? b0.querySelector('.zcanvas img').getAttribute('src') : '',
-               t1: [...b0.querySelectorAll('.zdot.t1 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
-               t2: [...b0.querySelectorAll('.zdot.t2 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
-               t3: [...b0.querySelectorAll('.zdot.t3 .zdot-n')].map(e => Math.round(e.getBoundingClientRect().height)),
-               hit: (b0.querySelector('.zdot.t3') || {}).getBoundingClientRect
-                 ? Math.round(b0.querySelector('.zdot.t3').getBoundingClientRect().height) : 0,
-               over: document.documentElement.scrollWidth - window.innerWidth };
-    }""")
-    check("S3 区域卡上混标多类时出图例（芯片数 = 类别数 + 全部）",
-          not lg.get("none") and lg["chips"] == len(lg["kinds"]) + 1,
-          "%d 颗芯片 / %d 类 %s" % (lg.get("chips", 0), len(lg.get("kinds", [])), lg.get("kinds")))
-    check("S3 桌面 1440 加了图例这一行也不横溢", lg.get("over", 99) <= 1, "%s" % lg.get("over"))
-    # 只比"这一屏真出现的档"：世界页区域卡只有书与稀有（t3 与 t2），拿一个不存在的档
-    # 当 0 去比会造出一条永远为假的断言——第一版就是这么红的，是判据错不是功能坏。
-    _sz = lambda a: (min(a) if a else None)
-    _tiers = [x for x in (_sz(lg.get("t1")), _sz(lg.get("t2")), _sz(lg.get("t3"))) if x is not None]
-    check("S3 分级只改视觉不改点击区（小那颗仍有 20px 命中框）",
-          len(_tiers) == len(set(_tiers)) and lg.get("hit", 0) >= 20,
-          "这一屏出现的档从大到小 %s / 最小那颗的点击区 %spx" % (_tiers, lg.get("hit")))
-    band = page.locator(".zband").nth(lg["idx"])
-    band.locator('[data-lg="rare"]').click()
-    page.wait_for_timeout(700)
-    f = page.evaluate("""(i) => {
-      const b0 = [...document.querySelectorAll('.zband')][i];
-      const chip = b0.querySelector('[data-lg="rare"]');
-      return { dots: b0.querySelectorAll('.zdot').length,
-               rows: b0.querySelectorAll('.zrow').length,
-               kinds: [...new Set([...b0.querySelectorAll('.zdot')].map(d => d.dataset.kind))],
-               pressed: [...b0.querySelectorAll('.zlg')].map(c => c.getAttribute('aria-pressed')),
-               src: (b0.querySelector('.zcanvas img') || {}).getAttribute
-                 ? b0.querySelector('.zcanvas img').getAttribute('src') : '' };
-    }""", lg["idx"])
-    check("S3 点「稀有」真的只剩稀有（颗数 = 芯片上写的数）",
-          f["kinds"] == ["rare"] and f["dots"] == lg["wantRare"],
-          "图上 %d 颗 %s / 芯片写 %d（点前 %d 颗 %s）" % (f["dots"], f["kinds"], lg["wantRare"], lg["dots"], lg["kinds"]))
-    check("S3 筛选只筛图上的点，右边列表一条不藏（选了看不见的红线）",
-          f["rows"] == lg["rows"], "筛选后列表 %d 行 / 筛选前 %d 行" % (f["rows"], lg["rows"]))
-    check("S3 选中态跟着走：稀有那颗 pressed=true、全部 pressed=false",
-          f["pressed"][0] == "false" and "true" in f["pressed"][1:], "%s" % f["pressed"])
-    check("S3 筛选不许把底图换掉（底图按全量点选，参照物不能一动就跳）",
-          f["src"] == lg["src"] and bool(f["src"]), "%s -> %s" % (lg["src"][-28:], f["src"][-28:]))
-    band.locator('[data-lg="rare"]').click()
-    page.wait_for_timeout(700)
-    back = page.evaluate("""(i) => { const b0 = [...document.querySelectorAll('.zband')][i];
-      return { dots: b0.querySelectorAll('.zdot').length,
-               kinds: [...new Set([...b0.querySelectorAll('.zdot')].map(d => d.dataset.kind))].length }; }""",
-                         lg["idx"])
-    check("S3 再点同一颗回到「全部」（不是一次性开关）",
-          back["dots"] == lg["dots"] and back["kinds"] == len(lg["kinds"]),
-          "回到 %d 颗 / %d 类（原本 %d 颗 / %d 类）" % (back["dots"], back["kinds"], lg["dots"], len(lg["kinds"])))
+    settle_motion(page)
+    page.wait_for_timeout(800)
+    books_only = page.evaluate("""() => ({
+      bookChecked: !!(document.querySelector('input[data-cat="book"]') || {}).checked,
+      legacyChecked: !!(document.querySelector('input[data-cat="legacy_book"]') || {}).checked,
+      pins: document.querySelectorAll('.imap-pin[data-pin-cat="book"]').length
+    })""")
+    check("旧链接 #/world?t=books 向后兼容：自动切到书籍与传承书籍图层",
+          books_only["bookChecked"] and books_only["legacyChecked"] and books_only["pins"] > 0,
+          json.dumps(books_only, ensure_ascii=False))
 
     mctx = browser.new_context(viewport={"width": 375, "height": 812})
     mp = mctx.new_page()
-    for t in ("zones", "books", "bag"):
-        mp.goto(APP_BASE + "/#/world?t=" + t, wait_until="networkidle")
-        settle_motion(mp)   # 换 hash 走的是路由过渡，等它结束再读
-        mp.wait_for_timeout(2000)
-        mm = mp.evaluate("""() => ({over: document.documentElement.scrollWidth - window.innerWidth,
-          mapW: (document.querySelector('.zbig') || { offsetWidth: 0 }).offsetWidth,
-          cut: [...document.querySelectorAll('.zdot')].some(d => { const r = d.getBoundingClientRect();
-            return r.width && (r.right > window.innerWidth + 1 || r.left < -1); }),
-          small: [...document.querySelectorAll('.zhead')].filter(e => {
-            const r = e.getBoundingClientRect(); return r.width && r.height < 44; }).length})""")
-        check("世界页 %s 面板 375：整页不横溢、点位没被切到屏外、区域信息行够 44px 点击区" % t,
-              mm["over"] == 0 and not mm["cut"] and mm["small"] == 0,
-              json.dumps(mm, ensure_ascii=False))
-        # 站主这条改的就是"图太小"，所以窄屏也钉一层：地图至少铺满屏宽的七成
-        check("世界页 %s 面板 375：地图占满一整块（不是半张小图）" % t,
-              mm["mapW"] >= 0.7 * 375, "图宽 %dpx（屏宽 375）" % mm["mapW"])
+    mp.goto(APP_BASE + "/#/world", wait_until="networkidle")
+    settle_motion(mp)
+    mp.wait_for_selector(".imap-shell", timeout=20000)
+    mp.wait_for_timeout(1200)
+    mm = mp.evaluate("""() => ({
+      over: document.documentElement.scrollWidth - window.innerWidth,
+      mapW: (document.querySelector('.imap-stage-wrap') || { offsetWidth: 0 }).offsetWidth
+    })""")
+    check("无限地图 375 移动端不横向溢出且地图视口占满屏宽",
+          mm["over"] == 0 and mm["mapW"] >= 320,
+          json.dumps(mm, ensure_ascii=False))
     snap(mp, path=os.path.join(SHOT_DIR, "app-world-zones-m.png"))
     mctx.close()
-    check("世界页四个面板走一遍没有脚本报错", not errs, "; ".join(errs[:2]) or "干净")
+    check("无限地图交互走查无脚本报错", not errs, "; ".join(errs[:2]) or "干净")
     ctx.close()
 
 
@@ -2764,7 +2587,7 @@ def test_app(browser, base):
                              "c.querySelectorAll('.nb').forEach(n => n.remove());"
                              "return c.textContent.trim(); })")
     APP_NAV = ["首页", "计算器", "职业", "玩法问答", "传承", "宠物", "总览",
-               "区域与稀有", "副本", "团本", "配方", "配装", "排行", "宏命令", "插件"]
+               "无限地图", "副本", "团本", "配方", "BIS配装", "排行", "宏命令", "插件"]
     check("新站导航二级就是这 %d 格，顺序与名字不许漂" % len(APP_NAV), app_subs == APP_NAV,
           "%d 项：%s" % (len(app_subs), app_subs))
     check("世界与工具两组按最新口径（3 格 / 3 格；2026-11-26 工具组加入插件目录）",
@@ -3056,164 +2879,33 @@ def test_app(browser, base):
             check("新站预览没有坏图，格子也链回计算器（全量迁移后是站内路由 #/talent）",
                   pv2 and pv2["broken"] == 0 and "/talent?c=" in (pv2["href"] or ""), pv2 and pv2["href"])
         else:
-            tabs = page.evaluate("() => document.querySelectorAll('.picks .pick[data-t]').length")
-            check("新站世界页四个面板齐全", tabs == 4, "%d 个" % tabs)
-            for t in ["books", "bag", "zones"]:      # 切一圈再回到区域，验证面板切换不残留
-                page.click('[data-t="%s"]' % t)
-                page.wait_for_timeout(900)
-                settle_motion(page)
-            zc = page.evaluate("() => document.querySelectorAll('.zcard').length")
-            check("新站区域卡数量与数据一致", zc == S["zones"], "%d 张（数据 %d）" % (zc, S["zones"]))
-            page.click('[data-t="rares"]')
-            page.wait_for_timeout(1400)
-            settle_motion(page)   # 上面那一圈刚把面板换掉，量点位前必须等它挂回来
-            # ---- 10-18 站主：一区域一张图，稀有直接标在图上 ----
-            # 原来这里只数 `.zmark` 的个数（每条稀有卡上一个点），换结构之后那个类已经没有了。
-            # 新的判据要能抓住三件真会出错的事：点位与坐标对不上、没图的稀有被"猜"上图、
-            # 以及悬停不生效（只有看图才知道，所以这里去量计算样式）。
-            W = json.load(open(os.path.join(SRC, "data", "world.json"), encoding="utf-8"))
-            rs = W.get("rares") or []
-            groups = {}
-            for r in rs:
-                groups.setdefault(r.get("zone") or "未归区域", []).append(r)
-            want_bands = len(groups)
-            want_dots = len([r for r in rs if r.get("mapFile") and r.get("mark")])
-            want_maps = len([k for k, v in groups.items() if any(r.get("mapFile") for r in v)])
-            geo = page.evaluate("""() => { const bands = [...document.querySelectorAll('.zband')];
-              return { bands: bands.length,
-                maps: document.querySelectorAll('.zbig img').length,
-                dots: document.querySelectorAll('.zdot').length,
-                rows: document.querySelectorAll('.zrow').length,
-                old: document.querySelectorAll('.rarecard').length,
-                perBand: bands.map(b => ({ d: b.querySelectorAll('.zdot').length,
-                  r: b.querySelectorAll('.zrow').length, img: !!b.querySelector('.zbig img') })),
-                badPos: [...document.querySelectorAll('.zdot')].filter(d => {
-                  const l = d.style.left, t = d.style.top;
-                  return !/%$/.test(l) || !/%$/.test(t); }).length,
-                over: document.documentElement.scrollWidth - window.innerWidth}; }""")
-            check("一个区域一张图：带数、图数、点位数、列表行数全部对得上数据",
-                  geo["bands"] == want_bands and geo["maps"] == want_maps
-                  and geo["dots"] == want_dots and geo["rows"] == len(rs) and geo["badPos"] == 0,
-                  "带 %d（数据 %d）／图 %d（应 %d）／点 %d（数据有图有坐标的 %d）／行 %d（数据 %d）／没坐标的 %d"
-                  % (geo["bands"], want_bands, geo["maps"], want_maps, geo["dots"], want_dots,
-                     geo["rows"], len(rs), geo["badPos"]))
-            check("旧的「每条稀有各带一张同样的区域图」已经撤掉（反向钉，别搬回来）",
-                  geo["old"] == 0, "还剩 %d 张 rarecard" % geo["old"])
-            # 每个点位的 left/top 必须等于这条稀有自己数据里的百分比——不猜位置、不重排
-            pos = page.evaluate("""() => [...document.querySelectorAll('.zdot')].map(d => ({
-              id: d.dataset.r, l: d.style.left, t: d.style.top }))""")
-            byid = {str(r["id"]): r for r in rs}
-            badp = []
-            for x in pos:
-                r = byid.get(str(x["id"]))
-                if not r:
-                    badp.append("页面上有个点位在数据里找不到：%s" % x["id"]); continue
-                want = "(%s%%, %s%%)" % (r["mark"]["x"], r["mark"]["y"])
-                got = "(%s, %s)" % (x["l"], x["t"])
-                if want != got:
-                    badp.append("%s 应 %s 实 %s" % (r["nameCn"], want, got))
-            check("每个点位就摆在这条稀有自己的坐标百分比上，一个都不偏移",
-                  not badp, "；".join(badp[:4]) or "%d 个点逐位核对通过" % len(pos))
-            # 没有地图文件的那些不许出现在图上（只进列表），这是"不猜位置"的可执行版本
-            plotted = set(x["id"] for x in pos)
-            should = set(str(r["id"]) for r in rs if r.get("mapFile") and r.get("mark"))
-            extra = plotted - {int(s) if str(s).isdigit() else s for s in should}
-            check("没有地图文件的稀有不标点（只在列表里出现，不拿别的图猜位置）",
-                  not extra and len(plotted) == len(should),
-                  "多标 %d 个／应标 %d 个／实标 %d 个" % (len(extra), len(should), len(plotted)))
-            # 悬停：默认虚、指上去实体并弹层，右边对应行同时高亮
-            page.evaluate("() => document.querySelector('.zband').scrollIntoView({block:'center'})")
-            page.wait_for_timeout(400)
-            before = page.evaluate("""() => { const d = getComputedStyle(document.querySelector('.zdot'));
-              return {op: parseFloat(d.opacity), blur: d.filter, pop: !!document.querySelector('.zpop')}; }""")
-            first = page.evaluate("() => document.querySelector('.zdot').dataset.r")
-            page.hover(".zdot")
+            # 2026-11-27 站主拍板：世界页升级为仿 OpenMap 拼接「无限地图」
+            imap = page.evaluate("""() => ({
+              shell: !!document.querySelector('.imap-shell'),
+              zones: document.querySelectorAll('.imap-zone').length,
+              dtabs: document.querySelectorAll('.imap-dtabs [data-t]').length,
+              cats: document.querySelectorAll('.imap-ck input[data-cat]').length,
+              checked: document.querySelectorAll('.imap-ck input[data-cat]:checked').length,
+              pins: document.querySelectorAll('.imap-pin').length,
+              over: document.documentElement.scrollWidth - window.innerWidth
+            })""")
+            check("新站无限地图工作台与 46 张区域底图全部就绪",
+                  imap["shell"] and imap["zones"] >= S["zones"] and imap["dtabs"] == 2 and imap["cats"] >= 18,
+                  json.dumps(imap, ensure_ascii=False))
+            check("新站无限地图默认全不选且 1440 桌面零横向溢出",
+                  imap["checked"] == 0 and imap["pins"] == 0 and imap["over"] == 0,
+                  "默认勾选 %d / 点位 %d / 溢出 %d" % (imap["checked"], imap["pins"], imap["over"]))
+            page.click('[data-t="zones"]')
             page.wait_for_timeout(500)
             settle_motion(page)
-            try:   # opacity 是从 .6 过渡到 1 的：量早了就是"悬停没生效"的假红
-                page.wait_for_function("() => { const d = document.querySelector('.zdot.on');"
-                                       "  return d && +getComputedStyle(d).opacity > 0.99; }", timeout=6000)
-            except Exception:
-                pass
-            hov = page.evaluate("""() => { const d = document.querySelector('.zdot.on');
-              const c = getComputedStyle(d); const p = document.querySelector('.zpop');
-              const r = p && p.getBoundingClientRect();
-              return {op: parseFloat(c.opacity), blur: c.filter, has: !!p,
-                title: p ? (p.querySelector('b') || {}).innerText : '',
-                drops: p ? p.querySelectorAll('.zpop-i').length : -1,
-                rows: document.querySelectorAll('.zrow.on').length,
-                out: r ? (r.left < 0 || r.right > window.innerWidth || r.top < 0) : null}; }""")
-            wr = byid.get(str(first)) or {}
-            check("点位平时是虚的（半透明 + 模糊），指上去才实体",
-                  before["op"] < 0.8 and "blur" in before["blur"] and not before["pop"]
-                  and hov["op"] > 0.99 and hov["blur"] == "none",
-                  "默认 透明度 %.2f/%s → 悬停 透明度 %.2f/%s"
-                  % (before["op"], before["blur"], hov["op"], hov["blur"]))
-            check("悬停弹出的浮层写的就是这一条：名字、掉落件数与数据一致，且不越出视口",
-                  hov["has"] and hov["title"] == wr.get("nameCn")
-                  and hov["drops"] == len(wr.get("drops") or []) and not hov["out"],
-                  "标题 %s（数据 %s）／掉落 %d（数据 %d）／越界 %s"
-                  % (hov["title"], wr.get("nameCn"), hov["drops"],
-                     len(wr.get("drops") or []), hov["out"]))
-            check("点位与右边列表双向联动：指点位，对应那一行也亮",
-                  hov["rows"] == 1, "%d 行高亮" % hov["rows"])
-            page.click(".zdot")
-            page.mouse.move(10, 300)
+            zrows = page.evaluate("() => document.querySelectorAll('.imap-zrow').length")
+            check("新站无限地图区域目录列出全部区域且可直飞",
+                  zrows >= S["zones"], "%d 行（数据 %d）" % (zrows, S["zones"]))
+            page.click('[data-t="filter"]')
             page.wait_for_timeout(400)
-            check("手机上没有悬停，所以点一下要把这层钉住（移开鼠标仍在）",
-                  page.evaluate("() => !!document.querySelector('.zpop')"))
-            page.keyboard.press("Escape")
-            page.wait_for_timeout(400)
-            check("按 ESC 收掉浮层", page.evaluate("() => !document.querySelector('.zpop')"))
-            page.hover(".zlist .zrow")
-            page.wait_for_timeout(400)
-            check("反过来指列表那一行，图上的点位也实体并弹层",
-                  page.evaluate("""() => ({dot: document.querySelectorAll('.zdot.on').length,
-                    pop: !!document.querySelector('.zpop')})""") == {"dot": 1, "pop": True})
-            check("换结构之后这一页仍然不横向溢出", geo["over"] == 0, "溢出 %d" % geo["over"])
-            # 375 上浮层改成挂在图下面（桌面是 absolute，手机不行——手机上盖住图就等于盖住别的点位）。
-            # 而点位是按父盒高度的百分比摆的，所以必须验：浮层一开，父盒不能变高、点位不能集体跳位。
-            jc = browser.new_context(viewport={"width": 375, "height": 812})
-            jp = jc.new_page()
-            jp.goto(APP_BASE + "/#/world?t=rares", wait_until="networkidle")
-            settle_motion(jp)   # 换 hash 走的是路由过渡，等它结束再读
-            jp.wait_for_timeout(2200)
-            jp.evaluate("() => document.querySelector('.zband').scrollIntoView({block:'center'})")
-            jp.wait_for_timeout(400)
-            # 注意 Vue 的 DOM 更新是异步的：click 与"查 .zpop / 量点位"必须分成两次 evaluate，
-            # 中间等一次。写在同一个 evaluate 里永远查不到（第一版就是这么假红的）。
-            # 量的是 offsetLeft/offsetTop 而不是 getBoundingClientRect：
-            # 被点中的那颗会 transform:scale(1.3)，rect 会跟着涨 3px——那是设计要的放大，不是跳位。
-            # offset* 只看布局位置，不吃 transform，才能把"父盒被撑高导致全体下移"和"这一颗自己变大"分开。
-            jp.evaluate("""() => { const band = document.querySelector('.zband');
-              window.__shot = () => [...band.querySelectorAll('.zdot')].map((d) => [d.offsetLeft, d.offsetTop]);
-              window.__before = window.__shot();
-              band.querySelector('.zdot').click(); }""")
-            jp.wait_for_timeout(600)
-            jump = jp.evaluate("""() => { const band = document.querySelector('.zband');
-              const after = window.__shot();
-              const before = window.__before;
-              const pop = band.querySelector('.zpop');
-              const pr = pop ? pop.getBoundingClientRect() : null;
-              const mr = band.querySelector('.zcanvas').getBoundingClientRect();
-              const moved = before.filter((b, i) => !after[i]
-                || b[0] !== after[i][0] || b[1] !== after[i][1]).length;
-              return { n: before.length, moved: moved, pop: !!pop,
-                over: document.documentElement.scrollWidth - window.innerWidth,
-                full: pr ? (Math.round(pr.left - mr.left) <= 2 && Math.round(mr.right - pr.right) <= 2) : null,
-                below: pr ? pr.top >= mr.bottom - 2 : null }; }""")
-            check("375 打开浮层时点位不许集体跳位（浮层撑高的是外层盒，不是点位参照的那层画布）",
-                  jump["pop"] and jump["n"] > 1 and jump["moved"] == 0,
-                  "%d 个点里 %d 个动了" % (jump["n"], jump["moved"]))
-            check("375 浮层整宽贴在地图下方、不盖住图、也不溢出屏幕",
-                  jump["over"] == 0 and jump["full"] and jump["below"],
-                  "横向溢出 %d ／ 整宽 %s ／ 贴在图下方 %s"
-                  % (jump["over"], jump["full"], jump["below"]))
-            # 这张图存的是"浮层展开态"：上面那一步刚点开了第一个点位，正好拍到手感
-            snap(jp, path=os.path.join(SHOT_DIR, "app-rares-m.png"))
-            jc.close()
+            settle_motion(page)
             body = page.evaluate("() => document.querySelector('#main').innerText")
-            check("新站世界页正文没有面向开发的词", not dev_word_hits(body), "干净")
+            check("新站无限地图正文没有面向开发的词", not dev_word_hits(body), "干净")
             snap(page, path=os.path.join(SHOT_DIR, "app-world-rares.png"))
         ctx.close()
 
@@ -3745,9 +3437,8 @@ def test_data_versions(browser, base):
     check("页脚不再出现客户端号那一串（1.60.1.x 或'核对于'）",
           not re.search(r"1\.60\.1\.\d|核对于", foot), foot.replace("\n", " ")[:100])
     badge = page.evaluate("() => (document.querySelector('.bbadge') || {}).innerText || ''")
-    want = "%s（%s）" % (tail(sc.get("newestBuild")), sc.get("newestSection") or "")
-    check("首页徽标报的是快照里最新那个号与那一块（%s）" % want, want in badge.replace(" ", ""),
-          badge)
+    check("首页按 2026-11-27 站主拍板已移除顶部测试服客户端号胶囊（各板块版本号保留在溯源页）",
+          badge == "", badge or "已移除")
     page.goto(APP_BASE + "/#/provenance", wait_until="networkidle")
     settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
     page.wait_for_timeout(1600)
@@ -4121,35 +3812,34 @@ def test_motion(browser, base):
     check("再点一次是反向展开（进场类也在）",
           any("unfold-enter-active" in c for c in re_["classes"]), str(re_["classes"][:2]))
 
-    # —— ④ 世界页换面板 ——
+    # —— ④ 无限地图左侧筛选抽屉换面板 ——
     page.goto(APP_BASE + "/#/world", wait_until="networkidle")
     settle_motion(page)   # 换 hash 走的是路由过渡，等它结束再读
-    page.wait_for_selector('[data-t="rares"]', timeout=20000)
-    page.wait_for_timeout(900)
-    before = page.evaluate("() => document.querySelectorAll('#main .zcard').length")
+    page.wait_for_selector('[data-t="zones"]', timeout=20000)
+    page.wait_for_timeout(700)
+    before = page.evaluate("() => document.querySelectorAll('#main .imap-ck').length")
     watch(page, ".wswap")
-    page.click('[data-t="rares"]')
+    page.click('[data-t="zones"]')
     rows = []
     for _ in range(12):
         rows.append(page.evaluate("() => !!document.querySelector('.wswap.swap-enter-active,"
                                   " .wswap.swap-leave-active')"))
         settle_motion(page, timeout=2500)
-    # out-in 之后新面板要重挂整块（世界页那一面板 25000 像素），等它换完再判画面
     page.wait_for_function("""() => { const on = [...document.querySelectorAll('[data-t]')]
-        .find(x => x.classList.contains('on')); return on && on.getAttribute('data-t') === 'rares'
+        .find(x => x.classList.contains('on')); return on && on.getAttribute('data-t') === 'zones'
         && !document.querySelector('.wswap.swap-leave-active'); }""", timeout=8000)
     r = stop(page)
-    check("世界页换面板有 swap 过渡类（淡出再淡入）",
+    check("无限地图左侧抽屉换面板有 swap 过渡类（淡出再淡入）",
           any("swap-leave-active" in c for c in r["classes"])
           and any("swap-enter-active" in c for c in r["classes"]), str(r["classes"][:4]))
     check("这一路过渡类真的挂上过（不是只换了块内容）", any(rows), str(rows[:6]))
-    after = page.evaluate("""() => ({ z: document.querySelectorAll('#main .zcard').length,
-      band: document.querySelectorAll('#main .band').length,
+    after = page.evaluate("""() => ({ ck: document.querySelectorAll('#main .imap-ck').length,
+      zr: document.querySelectorAll('#main .imap-zrow').length,
       on: (([...document.querySelectorAll('[data-t]')].find(x => x.classList.contains('on')) || {})
            ).getAttribute('data-t') || '' })""")
-    check("切到「稀有」之后画面上确实换成那一块（区域卡没了、稀有那一排的分组条出来了）",
-          before > 0 and after["z"] == 0 and after["on"] == "rares" and after["band"] > 0,
-          json.dumps({"切换前区域卡": before, "切换后": after}, ensure_ascii=False))
+    check("切到「区域目录」之后画面上确实换成区域直达列表",
+          before > 0 and after["ck"] == 0 and after["on"] == "zones" and after["zr"] >= 44,
+          json.dumps({"切换前筛选项": before, "切换后": after}, ensure_ascii=False))
     snap(page, path=os.path.join(SHOT_DIR, "motion-世界页换面板.png"))
 
     # —— ⑤ 物品抽屉退场 ——
@@ -4196,8 +3886,8 @@ def test_motion(browser, base):
     check("减弱动态效果下：换页这一路没有任何一帧是不可见的",
           r["ops"] and all(o == 1 for o in r["ops"]), "采样 %s" % r["ops"][:8])
     settle_motion(rp)
-    check("减弱动态效果下：换到的还是同一块内容（世界页区域卡照常出来）",
-          rp.evaluate("() => document.querySelectorAll('#main .zcard').length") > 0, "有卡")
+    check("减弱动态效果下：换到的还是同一块内容（无限地图 46 张区域底图照常出来）",
+          rp.evaluate("() => document.querySelectorAll('#main .imap-zone').length") >= 44, "有图")
     rp.goto(APP_BASE + "/#/dungeons", wait_until="networkidle")
     settle_motion(rp)   # 换 hash 走的是路由过渡，等它结束再读
     rp.wait_for_selector("[data-d]", timeout=20000)

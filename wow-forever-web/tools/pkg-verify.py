@@ -193,26 +193,26 @@ def main():
         zones = json.load(open(os.path.join(site, "data", "world.json"), encoding="utf-8"))["zones"]
         want_names = [z0["nameCn"] for z0 in zones[:6]]
         pg, fails, errs = open_url(base_root, "/#/world")
-        n = pg.evaluate("() => document.querySelectorAll('#main .zonecard, #main .card').length")
+        n = pg.evaluate("() => document.querySelectorAll('#main .imap-zone, #main .zonecard, #main .card').length")
         txt = pg.evaluate("() => (document.querySelector('#main') || {}).innerText || ''")
         miss = [w for w in want_names if w not in txt]
         check("根目录 #/world 直达能渲染出区域内容（数据真的取到了）",
-              n >= 2 and len(txt) > 5000 and not miss and not errs,
-              "%d 个卡片 / %d 字 / 缺区域名 %s / 报错 %s" % (n, len(txt), miss or "无", errs[:1]))
+              n >= 40 and len(txt) >= 800 and not miss and not errs,
+              "%d 个区域与卡片 / %d 字 / 缺区域名 %s / 报错 %s" % (n, len(txt), miss or "无", errs[:1]))
         check("根目录 #/world 没有失败请求", not fails, "; ".join(fails[:3]) or "干净")
         # 2) 刷新（同一 URL 再走一遍，等于 F5）
         pg.reload(wait_until="networkidle")
         pg.wait_for_timeout(2200)
-        n2 = pg.evaluate("() => document.querySelectorAll('#main .zonecard, #main .card').length")
-        check("刷新后仍是同一页且内容不丢（hash 路由不依赖托管方 rewrite）", n2 == n and n2 >= 2,
+        n2 = pg.evaluate("() => document.querySelectorAll('#main .imap-zone, #main .zonecard, #main .card').length")
+        check("刷新后仍是同一页且内容不丢（hash 路由不依赖托管方 rewrite）", n2 == n and n2 >= 40,
               "%d → %d" % (n, n2))
         pg.close()
         # 3) 子路径挂载：同一份包挂到 /wow/ 下也要能开（base 相对路径的验收点）。--live 时跳过。
         if base_sub:
             pg, fails, errs = open_url(base_sub, "/wow/#/world")
-            n3 = pg.evaluate("() => document.querySelectorAll('#main .zonecard, #main .card').length")
+            n3 = pg.evaluate("() => document.querySelectorAll('#main .imap-zone, #main .zonecard, #main .card').length")
             check("挂到子路径 /wow/ 下 #/world 同样渲染（数据与图标都按相对路径取到）",
-                  n3 == n and not errs, "%d 个卡片 / 报错 %s" % (n3, errs[:1]))
+                  n3 == n and not errs, "%d 个区域与卡片 / 报错 %s" % (n3, errs[:1]))
             check("子路径挂载没有失败请求", not fails, "; ".join(fails[:3]) or "干净")
             pg.screenshot(path=os.path.join(SHOT_DIR, "q05-subpath-world.png"))
             pg.close()

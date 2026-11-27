@@ -80,6 +80,13 @@
      这一组一直落回 --txt-muted 灰。钢灰蓝，刻意留在六个色相之外——它是"杂项"那一档。 */
   --nav-7:#8f9bb3;
 
+  /* ---- 导航五大核心特色入口语义色（2026-11-27 站主拍板：计算器/传承/无限地图/BIS配装/宏命令） ---- */
+  --nav-feat-talent:#f4a242; --nav-feat-talent-soft:rgba(244,162,66,.14);
+  --nav-feat-legacy:#c48eff; --nav-feat-legacy-soft:rgba(196,142,255,.14);
+  --nav-feat-world:#4fd69c; --nav-feat-world-soft:rgba(79,214,156,.14);
+  --nav-feat-bis:#f5c758; --nav-feat-bis-soft:rgba(245,199,88,.15);
+  --nav-feat-macros:#58c1f0; --nav-feat-macros-soft:rgba(88,193,240,.14);
+
   /* ---- 切角铭牌：稿子里 54 处 clip-path 只用三种切角，收到这里 ---- */
   --cut-cta:10px; --cut-plate:14px; --cut-hero:28px;
 
@@ -100,6 +107,32 @@
   --lh-tight:1.16; --lh-body:1.7;
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
   --r-ctl:0; --r-card:0;
+
+  /* ---- 无限地图（仿 OpenMap 拼接世界画布）语义色令牌（2026-11-27） ---- */
+  --imap-sea-hi:#16202e;
+  --imap-sea-lo:#090c14;
+  --imap-grid:rgba(212,165,86,.05);
+  --imap-pin-legacy:#c490ff;
+  --imap-pin-book:#5ec6f2;
+  --imap-pin-camp:#f59e56;
+  --imap-pin-rare:#f4b942;
+  --imap-pin-dungeon:#4cd99c;
+  --imap-pin-flight:#6aaeff;
+  --imap-pin-inn:#f2df68;
+  --imap-pin-repair:#a6e056;
+  --imap-pin-vendor:#8bd6a8;
+  --imap-pin-bank:#f0c451;
+  --imap-pin-ah:#e8a94a;
+  --imap-pin-mail:#7ec8e3;
+  --imap-pin-trainer:#4dd9c0;
+  --imap-pin-prof:#5bc2d9;
+  --imap-pin-stable:#d4a574;
+  --imap-pin-spirit:#c8d3e0;
+  --imap-pin-other:#b4a7c7;
+  --imap-route-a:#54b8f2;
+  --imap-route-h:#f06c7a;
+  --imap-route-n:#e8b948;
+  --imap-route-air:#c490ff;
 
   /* ---- 动效：时长与缓动不变，reduced-motion 下整体归零 ----
      dur-press / dur-panel 是 2026-10-29 交互动效那轮补的两档（离场与面板入场），

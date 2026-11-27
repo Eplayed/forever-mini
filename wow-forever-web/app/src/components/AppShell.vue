@@ -36,7 +36,8 @@
             <span class="ngi">
               <component v-for="it in g.items" :key="it.file"
                          :is="linkFor(it.file).to ? 'router-link' : 'a'" v-bind="linkFor(it.file)"
-                         class="nl" :class="{ on: activeFor(it.file) }" :title="it.d">{{ it.t }}<i v-if="isNavNew(it.t)" class="nb new"
+                         class="nl" :class="[it.feat ? ['is-feat', 'is-feat-' + it.feat.key] : null, { on: activeFor(it.file) }]"
+                         :title="it.d"><span class="nl-main"><img v-if="it.feat" class="nl-ic" :src="assetUrl(it.feat.icon)" alt="" aria-hidden="true" decoding="async">{{ it.t }}</span><span v-if="it.feat && !isNavNew(it.t)" class="nl-pill" aria-hidden="true" :data-pill="it.feat.pill"></span><i v-if="isNavNew(it.t)" class="nb new"
                          title="这一版新开了这一页" aria-label="这一版新开了这一页">新</i></component>
             </span>
           </span>
@@ -51,11 +52,11 @@
     </nav>
   </div>
 
-  <main id="main" class="wrap" ref="mainEl">
+  <main id="main" class="wrap" :class="{ 'is-world-full': route.path === '/world' }" ref="mainEl">
     <slot />
-    <PartnerSlots position="page-bottom" />
+    <PartnerSlots v-if="route.path !== '/world'" position="page-bottom" />
   </main>
-  <SideRailPromo />
+  <SideRailPromo v-if="route.path !== '/world'" />
 
   <footer id="foot">
     <div class="in" v-if="foot">
@@ -76,7 +77,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { NAV, linkFor } from '../lib/nav.js';
 import { clockText } from '../lib/fmt.js';
 import { useCountdown } from '../lib/countdown.js';
-import { load } from '../lib/data.js';
+import { assetUrl, load } from '../lib/data.js';
 import { applyRails } from '../lib/rails.js';
 import SideRailPromo from './SideRailPromo.vue';
 import PartnerSlots from './PartnerSlots.vue';

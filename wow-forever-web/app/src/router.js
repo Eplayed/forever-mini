@@ -63,7 +63,7 @@ export const MIGRATED = {
 
 const routes = [
   { path: '/', name: 'home', component: HomePage, meta: { title: '跑本集合石 · 无限服资料' } },
-  { path: '/world', name: 'world', component: WorldPage, meta: { title: '世界：区域、稀有与书' } },
+  { path: '/world', name: 'world', component: WorldPage, meta: { title: '无限地图 · 稀有、NPC 与书籍' } },
   { path: '/classes', name: 'classes', component: ClassesPage, meta: { title: '职业：三系、技能变化与可选种族' } },
   { path: '/talent', name: 'talent', component: TalentPage, meta: { title: '天赋计算器' } },
   { path: '/chooser', name: 'chooser', component: ChooserPage, meta: { title: '选职业问答' } },

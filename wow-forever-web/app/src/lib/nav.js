@@ -13,11 +13,13 @@ import { MIGRATED } from '../router.js';
 export const NAV = [
   { t: '首页', file: 'index.html', d: '数据覆盖率与全部入口' },
   { t: '天赋', items: [
-    { file: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点' }] },
+    { file: 'talent.html', t: '计算器', d: '9 职业 · 树结构与加点',
+      feat: { key: 'talent', icon: 'img/icons/spell_nature_starfall.jpg', pill: '模拟' } }] },
   { t: '职业', items: [
     { file: 'classes.html', t: '职业', d: '9 职业逐页：三系与节点数、技能变化、可选种族' },
     { file: 'chooser.html', t: '玩法问答', d: '7 题玩法取向问答，不是强度排行' },
-    { file: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写' },
+    { file: 'legacy.html', t: '传承', d: '三棵专长树与全部传承挑战，每条点数照客户端写',
+      feat: { key: 'legacy', icon: 'img/icons/inv_misc_book_11.jpg', pill: '专长' } },
     // 2026-10-28 站主：这一页上线后他在首页和线上都找不到入口。说明里不写"18 家族 / 22 技能"
     // 那种数——和上面世界那一组同一条理由，数会随采集变，写死在导航里就是发给玩家的假数。
     { file: 'pets.html', t: '宠物', d: '猎人宠物家族与技能：三项修正、几级能学、会哪些技能' } ] },
@@ -25,19 +27,22 @@ export const NAV = [
     { file: 'races.html', t: '总览', d: '10 个种族行 · 可选职业矩阵' }] },
   { t: '世界', items: [
     // 说明里不写稀有条数：那个数会随采集变（10-16 从 36 走到 362），写在导航里就是发给玩家的假数
-    { file: 'world.html', t: '区域与稀有', d: '44 个区域 · 稀有精英刷新点 · 书籍与营地' },
+    { file: 'world.html', t: '无限地图', d: '46 张无缝拼接地图 · 稀有精英、城镇 NPC、副本入口、书籍与传承书籍点位',
+      feat: { key: 'world', icon: 'img/icons/inv_misc_map_01.jpg', pill: '全图' } },
     { file: 'dungeons.html', t: '副本', d: '38 座按十级一档分：首领与掉落归属' },
     { file: 'raids.html', t: '团本', d: '客户端能排到的团队条目与另一份名单对照' }] },
   { t: '专业', items: [
     { file: 'professions.html', t: '配方', d: '13 个专业 · 配方材料与采集点' }] },
-  // 站主 2026-10-16 定：配装单独一组（旧站没有这一页，linkFor 走 MIGRATED 里的 bis.html → /bis）
+  // 站主 2026-10-16 定：配装单独一组；2026-11-27 改名为「BIS配装」并突出特色入口
   { t: '配装', items: [
-    { file: 'bis.html', t: '配装', d: '30 级各职业各专精的部位名单与同部位备选（本站整理，不是官方结论）' }] },
+    { file: 'bis.html', t: 'BIS配装', d: '各职业专精的部位名单与同部位备选（本站整理，不是官方结论）',
+      feat: { key: 'bis', icon: 'img/icons/inv_crown_01.jpg', pill: '推荐' } }] },
   // 2026-10-30 站主：宏命令上线要导航加入口，这一组从 1 格变 2 格。
   // 说明里不写条数（"245 条"那种）——数会随采集变，写死在导航里就是发给玩家的假数。
   { t: '工具', items: [
     { file: 'rank.html', t: '排行', d: '本站资料完整度排序，不是强度（仅网页）' },
-    { file: 'macros.html', t: '宏命令', d: '9 职业宏库：按用途分组、写清几级能用、宏正文一键复制' },
+    { file: 'macros.html', t: '宏命令', d: '9 职业宏库：按用途分组、写清几级能用、宏正文一键复制',
+      feat: { key: 'macros', icon: 'img/icons/inv_scroll_03.jpg', pill: '速抄' } },
     { file: 'addons.html', t: '插件', d: '无限服免费插件目录与站长自研插件说明（非官方）' } ] }
 ];
 

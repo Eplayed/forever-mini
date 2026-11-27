@@ -183,6 +183,52 @@ nav.main .nav-foot {
   display: none;
 }
 
+nav.main a.nl .nl-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+nav.main a.nl .nl-ic {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  border: 1px solid var(--nf, var(--gold-line));
+}
+
+nav.main a.nl.is-feat-talent { --nf: var(--nav-feat-talent); --nf-soft: var(--nav-feat-talent-soft); }
+nav.main a.nl.is-feat-legacy { --nf: var(--nav-feat-legacy); --nf-soft: var(--nav-feat-legacy-soft); }
+nav.main a.nl.is-feat-world  { --nf: var(--nav-feat-world);  --nf-soft: var(--nav-feat-world-soft); }
+nav.main a.nl.is-feat-bis    { --nf: var(--nav-feat-bis);    --nf-soft: var(--nav-feat-bis-soft); }
+nav.main a.nl.is-feat-macros { --nf: var(--nav-feat-macros); --nf-soft: var(--nav-feat-macros-soft); }
+
+nav.main a.nl.is-feat {
+  color: var(--txt-title);
+  font-weight: 700;
+}
+
+nav.main a.nl.is-feat .nl-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 1279px) {
+  nav.main a.nl.is-feat {
+    padding-left: 7px;
+    padding-right: 7px;
+    background: var(--nf-soft, var(--gold-glow));
+    border: 1px solid var(--nf, var(--gold-line));
+    border-radius: 4px;
+  }
+  nav.main a.nl.is-feat .nl-pill {
+    display: none;
+  }
+}
+
 .ngrp {
   background-color: var(--panel-2);
   background-image: linear-gradient(180deg, var(--forge-plate-top), var(--forge-plate-bot));
@@ -295,6 +341,66 @@ nav.main .nav-foot {
     color: var(--gc);
     font-weight: 700;
     box-shadow: inset 2px 0 0 var(--gc), 0 0 12px var(--gold-glow);
+  }
+
+  /* 五大核心特色入口（计算器 / 传承 / 无限地图 / BIS配装 / 宏命令）：
+     专属游戏图标 + 亮色光棱边 + 右侧轻角标，一眼区别于常规索引项并引导点击 */
+  nav.main a.nl.is-feat {
+    min-height: 33px;
+    padding: 0 8px 0 7px;
+    margin: 2px 0;
+    border: 1px solid var(--gold-line-soft);
+    border-left: 2.5px solid var(--nf, var(--gold));
+    background: linear-gradient(95deg, var(--nf-soft, var(--gold-glow)) 0%, rgba(25, 20, 30, .78) 68%, rgba(16, 13, 21, .92) 100%);
+    color: var(--txt-title);
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 var(--forge-highlight), 0 2px 10px rgba(0, 0, 0, .42);
+    transition: transform var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+  }
+
+  nav.main a.nl.is-feat:hover {
+    transform: translateX(2px);
+    border-color: var(--nf, var(--gold-hi));
+    background: linear-gradient(95deg, var(--nf-soft, var(--gold-glow)) 0%, rgba(36, 29, 44, .92) 72%, rgba(20, 16, 26, .96) 100%);
+    color: var(--txt-title);
+    box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 0 14px var(--nf-soft, var(--gold-glow));
+  }
+
+  nav.main a.nl.is-feat.on {
+    border-color: var(--nf, var(--gold-hi));
+    border-left-width: 3px;
+    background: linear-gradient(95deg, var(--nf-soft, var(--gold-glow)) 0%, rgba(40, 32, 48, .96) 100%);
+    color: var(--nf, var(--gold-hi));
+    box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 0 16px var(--nf-soft, var(--gold-glow));
+  }
+
+  nav.main a.nl.is-feat .nl-ic {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid var(--nf, var(--gold));
+    box-shadow: 0 0 6px var(--nf-soft, var(--gold-glow));
+  }
+
+  nav.main a.nl.is-feat .nl-pill::after {
+    content: attr(data-pill);
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font: 700 10px/1.25 var(--font-body);
+    letter-spacing: .04em;
+    color: var(--nf, var(--gold-hi));
+    background: var(--sunk);
+    border: 1px solid var(--nf, var(--gold-line-2));
+    opacity: .92;
+  }
+
+  nav.main a.nl.is-feat:hover .nl-pill::after,
+  nav.main a.nl.is-feat.on .nl-pill::after {
+    background: var(--nf, var(--gold));
+    color: var(--ink-on-bright);
+    opacity: 1;
   }
 
   nav.main .nav-foot {
@@ -1151,4 +1257,927 @@ html.forge-fx-off .classbar .cls,
 html.forge-fx-off .raidcard-v2 .art img {
   transition: none;
   transform: none !important;
+}
+
+/* ---- 13. 无限地图工作台（仿 OpenMap 单张完整无缝世界大地图 + 悬浮筛选抽屉 · 2026-11-27） ---- */
+.imap-shell {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--gold-line-2);
+  background: var(--imap-sea-lo);
+  box-shadow:
+    inset 0 1px 0 var(--forge-highlight-hi),
+    0 20px 50px var(--forge-shadow-hi);
+}
+
+.imap-body {
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+  height: calc(100vh - var(--hd-h, 54px) - 52px);
+  max-height: 960px;
+  overflow: hidden;
+}
+
+/* 无限地图页：整块满铺无左右留白（对齐新手盒子全幅视口） */
+#main.wrap.is-world-full {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+@media (min-width: 1280px) {
+  #main.wrap.is-world-full {
+    margin-left: var(--nav-w) !important;
+    margin-right: 0 !important;
+    width: calc(100% - var(--nav-w)) !important;
+  }
+}
+
+#main.wrap.is-world-full .imap-shell {
+  margin: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+#main.wrap.is-world-full .imap-body {
+  height: calc(100vh - var(--hd-h, 54px));
+  min-height: 620px;
+}
+
+.imap-shell.is-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+.imap-shell.is-fullscreen .imap-body {
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+.imap-top-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: rgba(14, 11, 18, .92);
+  border: 1px solid var(--gold-line-2);
+  box-shadow: 0 6px 20px var(--forge-shadow-hi);
+  backdrop-filter: blur(8px);
+}
+
+.imap-top-tools .imap-btn {
+  min-height: 28px;
+  min-width: 28px;
+  padding: 4px 8px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  font-size: 12px;
+}
+
+.imap-top-tools .imap-btn:hover {
+  background: rgba(240, 198, 116, .14);
+  border-color: var(--gold-line-soft);
+}
+
+/* 悬浮顶部控制条（磨砂黑曜青铜，浮于单张大地图上方不抢高度） */
+.imap-float-top {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 35;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.imap-bar-l,
+.imap-bar-r {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.imap-bar-l {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+.imap-title-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  min-height: 32px;
+  background: rgba(16, 13, 21, .90);
+  border: 1px solid var(--gold-line-2);
+  box-shadow: 0 6px 20px var(--forge-shadow-hi);
+  backdrop-filter: blur(8px);
+}
+
+.imap-title {
+  margin: 0;
+  font: 700 15px/1.2 var(--font-display);
+  color: var(--gold-hi);
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.imap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 5px 10px;
+  font: 600 12px/1.2 var(--font-body);
+  color: var(--txt);
+  background-color: var(--panel);
+  background-image: linear-gradient(180deg, rgba(36, 28, 38, .92), rgba(16, 13, 21, .94));
+  border: 1px solid var(--gold-line);
+  box-shadow: 0 4px 14px var(--forge-shadow);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+}
+
+.imap-btn:hover,
+.imap-btn:focus-visible {
+  border-color: var(--gold-hi);
+  color: var(--gold-hi);
+  text-decoration: none;
+}
+
+.imap-btn.on {
+  background-color: var(--gold);
+  background-image: linear-gradient(135deg, var(--gold-hi), var(--gold));
+  border-color: var(--gold-hi);
+  color: var(--ink-on-bright);
+  font-weight: 700;
+}
+
+.imap-search {
+  position: relative;
+  min-width: 190px;
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.imap-search input {
+  width: 100%;
+  min-height: 32px;
+  padding: 5px 10px;
+  font-size: 12.5px;
+  color: var(--txt-title);
+  background: rgba(14, 11, 18, .92);
+  border: 1px solid var(--gold-line-2);
+  box-shadow: 0 4px 14px var(--forge-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.imap-search input:focus {
+  outline: none;
+  border-color: var(--gold-hi);
+  box-shadow: 0 0 0 2px var(--gold-glow);
+}
+
+.imap-drop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 60;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--gold-line-2);
+  box-shadow: 0 16px 36px var(--forge-shadow-hi);
+}
+
+.imap-drop-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 12px;
+  color: var(--txt);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.imap-drop-row:hover {
+  background: var(--elev);
+  color: var(--gold-hi);
+}
+
+.imap-drop-empty {
+  padding: 10px;
+  font-size: 12px;
+  color: var(--txt-dim);
+}
+
+/* OpenMap 风格左侧磨砂悬浮筛选抽屉（浮在大地图左缘，一键可收起） */
+.imap-drawer {
+  position: absolute;
+  top: 56px;
+  left: 12px;
+  bottom: 54px;
+  width: 262px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gold-line-2);
+  background: linear-gradient(175deg, rgba(22, 17, 26, .91), rgba(12, 10, 16, .93));
+  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 16px 40px var(--forge-shadow-hi);
+  backdrop-filter: blur(10px);
+  z-index: 30;
+  overflow: hidden;
+}
+
+.imap-dtabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.imap-dscroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.imap-sec {
+  margin-bottom: 11px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+.imap-sec:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.imap-sec-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font: 700 11px/1.3 var(--font-mono);
+  color: var(--gold);
+  letter-spacing: .05em;
+}
+
+.imap-sec-act {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 11px;
+  color: var(--txt-dim);
+  cursor: pointer;
+}
+
+.imap-sec-act:hover {
+  color: var(--gold-hi);
+}
+
+.imap-fac {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.imap-legacy-box {
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  background: rgba(24, 15, 36, .72);
+  border: 1px solid var(--imap-pin-legacy);
+}
+
+.imap-legacy-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--txt-title);
+  margin-bottom: 4px;
+}
+
+.imap-legacy-bar {
+  height: 5px;
+  background: var(--line);
+  overflow: hidden;
+  margin: 4px 0 6px;
+}
+
+.imap-legacy-bar i {
+  display: block;
+  height: 100%;
+  background: var(--imap-pin-legacy);
+}
+
+.imap-legacy-note {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--txt-dim);
+}
+
+.imap-ck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 4px 5px;
+  cursor: pointer;
+  color: var(--txt);
+}
+
+.imap-ck:hover {
+  background: var(--elev);
+}
+
+.imap-ck-l {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.imap-ck input {
+  accent-color: var(--gold);
+  margin: 0;
+}
+
+.imap-dot-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-line-2);
+  overflow: hidden;
+  background: var(--sunk);
+  flex: 0 0 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .75);
+}
+
+.imap-dot-ic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.imap-zrow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  text-align: left;
+  background: rgba(14, 11, 18, .75);
+  border: 1px solid var(--line);
+  color: var(--txt);
+  cursor: pointer;
+}
+
+.imap-zrow:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+}
+
+.imap-zrow small {
+  display: block;
+  font-size: 11px;
+  color: var(--txt-dim);
+}
+
+/* 全视口满铺单张大地图画布 */
+.imap-stage-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  background: radial-gradient(circle at 50% 45%, var(--imap-sea-hi), var(--imap-sea-lo) 78%);
+}
+
+.imap-stage-wrap.dragging {
+  cursor: grabbing;
+}
+
+.imap-stage-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 18;
+  box-shadow: inset 0 0 80px rgba(8, 6, 12, .72);
+}
+
+.imap-raster-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.imap-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 6;
+  transform-origin: 0 0;
+}
+
+/* 层 0：完整世界大地图（947），屏幕空间原生分辨率绘制，外缘轻羽化与深海背景无缝衔接 */
+.imap-world-img {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 96%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 96%, transparent 100%);
+}
+
+.imap-city-img {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  z-index: 7;
+  transition: opacity var(--dur-2) var(--ease-out);
+  -webkit-mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, rgba(0, 0, 0, 1) 66%, transparent 98%);
+  mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, rgba(0, 0, 0, 1) 66%, transparent 98%);
+}
+
+/* 层 1：两大陆高清叠加层（1414/1415），随缩放平滑淡入、边缘羽化无黑缝 */
+.imap-cont-img {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity var(--dur-2) var(--ease-out);
+  -webkit-mask-image: radial-gradient(ellipse 48% 48% at 50% 50%, #000 62%, transparent 96%);
+  mask-image: radial-gradient(ellipse 48% 48% at 50% 50%, #000 62%, transparent 96%);
+}
+
+/* 活字大陆名与海名（仿 OpenMap Labels.lua，拉近后自动淡出） */
+.imap-cont-lbl {
+  position: absolute;
+  font: 700 44px/1 var(--font-display);
+  letter-spacing: .28em;
+  color: var(--txt-title);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, .95), 0 0 28px rgba(0, 0, 0, .85);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.imap-sea-lbl {
+  position: absolute;
+  font: 600 22px/1 var(--font-display);
+  letter-spacing: .34em;
+  color: var(--txt-dim);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .95);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.imap-routes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.imap-route-a { stroke: var(--imap-route-a); }
+.imap-route-h { stroke: var(--imap-route-h); }
+.imap-route-n { stroke: var(--imap-route-n); }
+.imap-route-air { stroke: var(--imap-route-air); }
+
+/* 无缝多级瓦片金字塔层（z1 2K → z2 4K → z3 6K，零矩形缝隙） */
+.imap-tiles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.imap-tile {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  image-rendering: auto;
+}
+
+/* 层 2：46 区域精确投影命中热区 + 主城高清图层 */
+.imap-zone {
+  position: absolute;
+  z-index: 4;
+  background: transparent;
+}
+
+.imap-zone.is-active-zone {
+  z-index: 8;
+}
+
+.imap-zone.is-city {
+  z-index: 9;
+}
+
+.imap-zone.is-city.is-active-zone {
+  z-index: 12;
+}
+
+.imap-zone.is-city img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  transition: opacity var(--dur-2) var(--ease-out);
+  -webkit-mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, rgba(0, 0, 0, 1) 66%, transparent 98%);
+  mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, rgba(0, 0, 0, 1) 66%, transparent 98%);
+}
+
+.imap-style-sw {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px;
+  background: rgba(14, 11, 18, .9);
+  border: 1px solid var(--gold-line-2);
+  backdrop-filter: blur(8px);
+}
+
+.imap-style-sw .imap-btn {
+  border-color: transparent;
+  background: transparent;
+  padding: 4px 8px;
+  font-size: 11.5px;
+}
+
+.imap-style-sw .imap-btn.on {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  color: var(--ink-on-bright);
+}
+
+.imap-zone-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(16, 13, 20, .92);
+  border: 1px solid var(--gold-line-2);
+  color: var(--gold-hi);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+.imap-zone-crumb button {
+  padding: 1px 6px;
+  background: rgba(240, 198, 116, .14);
+  border: 1px solid var(--gold-line-soft);
+  color: var(--txt-title);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.imap-zone-crumb button:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+}
+
+/* 活字区域中文名 + 等级（无方框、带暗影描边，缩放时保持清爽可读） */
+.imap-ztag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font: 700 13px/1.2 var(--font-body);
+  color: var(--txt-title);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .98), 0 0 14px rgba(0, 0, 0, .95), 1px 1px 0 rgba(0, 0, 0, .95);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 14;
+  transition: opacity var(--dur-1) var(--ease-out);
+}
+
+.imap-ztag small {
+  display: block;
+  font: 600 10.5px/1.15 var(--font-mono);
+  color: var(--gold-hi);
+}
+
+.imap-pin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-line-2);
+  background: var(--sunk);
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 0 0 1px rgba(8, 6, 12, .92), 0 2px 6px rgba(0, 0, 0, .88);
+}
+
+.imap-pin-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.imap-pin-done {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 6, 12, .68);
+  color: var(--gold-hi);
+  font: 900 10px/1 var(--font-body);
+  pointer-events: none;
+}
+
+.imap-pin:hover,
+.imap-pin.on {
+  z-index: 40;
+  box-shadow: 0 0 0 2.5px var(--gold-glow), 0 0 14px var(--gold-hi), 0 2px 8px rgba(0, 0, 0, .95);
+}
+
+.imap-pin.done {
+  opacity: .55;
+  filter: saturate(.35);
+}
+
+.imap-card-ic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-line-2);
+  object-fit: cover;
+  flex: 0 0 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .85);
+}
+
+.im-c-legacy_book { border-color: var(--imap-pin-legacy); }
+.im-c-book { border-color: var(--imap-pin-book); }
+.im-c-camp { border-color: var(--imap-pin-camp); }
+.im-c-rare { border-color: var(--imap-pin-rare); }
+.im-c-dungeon { border-color: var(--imap-pin-dungeon); }
+.im-c-transport { border-color: var(--imap-route-n); }
+.im-c-transport.im-fac-A { border-color: var(--imap-route-a); }
+.im-c-transport.im-fac-H { border-color: var(--imap-route-h); }
+.im-c-transport.im-kind-airship { border-color: var(--imap-route-air); }
+.im-c-flight_a { border-color: var(--imap-route-a); }
+.im-c-flight_h { border-color: var(--imap-route-h); }
+.im-c-flight_n { border-color: var(--imap-route-n); }
+.im-c-innkeeper { border-color: var(--imap-pin-inn); }
+.im-c-repair { border-color: var(--imap-pin-repair); }
+.im-c-vendor { border-color: var(--imap-pin-vendor); }
+.im-c-banker { border-color: var(--imap-pin-bank); }
+.im-c-auctioneer { border-color: var(--imap-pin-ah); }
+.im-c-mailbox { border-color: var(--imap-pin-mail); }
+.im-c-classTrainer { border-color: var(--imap-pin-trainer); }
+.im-c-profTrainer { border-color: var(--imap-pin-prof); }
+.im-c-stable { border-color: var(--imap-pin-stable); }
+.im-c-spirit { border-color: var(--imap-pin-spirit); }
+.im-c-otherNpc { border-color: var(--imap-pin-other); }
+
+.imap-beacon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-hi);
+  pointer-events: none;
+  z-index: 32;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 16px var(--gold-hi);
+}
+
+/* 右侧磨砂悬浮点位详情卡 */
+.imap-card {
+  position: absolute;
+  right: 12px;
+  top: 56px;
+  width: 312px;
+  max-height: calc(100% - 118px);
+  overflow-y: auto;
+  z-index: 45;
+  padding: 12px 14px;
+  background: linear-gradient(165deg, rgba(26, 20, 30, .93), rgba(14, 11, 18, .95));
+  border: 1px solid var(--gold-line-2);
+  box-shadow: inset 0 1px 0 var(--forge-highlight-hi), 0 16px 40px var(--forge-shadow-hi);
+  backdrop-filter: blur(10px);
+  font-size: 12.5px;
+}
+
+.imap-card-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.imap-card-h h3 {
+  margin: 4px 0 2px;
+  font-size: 15px;
+  color: var(--txt-title);
+}
+
+.imap-card-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: rgba(8, 6, 12, .72);
+  border: 1px solid var(--line);
+  font-size: 11.5px;
+}
+
+.imap-card-rows {
+  margin-bottom: 8px;
+}
+
+.imap-card-rows > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.imap-card-drops {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.imap-card-drop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background: rgba(8, 6, 12, .75);
+  border: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.imap-card-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.imap-card-acts .imap-btn {
+  flex: 1 1 auto;
+}
+
+.imap-hud {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 32;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 11px;
+  background: rgba(14, 11, 18, .90);
+  border: 1px solid var(--gold-line);
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  color: var(--txt);
+  pointer-events: none;
+}
+
+.imap-zoom {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 32;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.imap-zoom-val {
+  padding: 5px 9px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(14, 11, 18, .90);
+  border: 1px solid var(--gold-line);
+  backdrop-filter: blur(8px);
+  color: var(--gold-hi);
+  font: 700 12px/1 var(--font-mono);
+}
+
+.imap-modal-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(8, 6, 12, .78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.imap-modal {
+  width: min(780px, 100%);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--gold-line-2);
+  box-shadow: 0 24px 60px var(--forge-shadow-hi);
+}
+
+@media (max-width: 960px) {
+  .imap-body {
+    height: 600px;
+    min-height: 540px;
+  }
+  .imap-float-top {
+    position: static;
+    padding: 8px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--gold-line-soft);
+    pointer-events: auto;
+  }
+  .imap-drawer {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: auto;
+    width: auto;
+    max-height: 360px;
+  }
+  .imap-card {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    top: auto;
+    bottom: 52px;
+    max-height: 55%;
+  }
+  .imap-btn {
+    min-height: 44px;
+  }
+  .imap-search {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
 }
