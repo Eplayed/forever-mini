@@ -6,7 +6,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 const props = defineProps({
-  count: { type: Number, default: 96 },
+  count: { type: Number, default: 110 },
   fullscreen: { type: Boolean, default: false }
 });
 
@@ -15,15 +15,14 @@ let rafId = 0;
 let ro = null;
 let onWinResize = null;
 
-function reduced() {
-  return typeof window === 'undefined'
-    || !window.matchMedia
-    || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fxDisabled() {
+  return typeof document !== 'undefined'
+    && document.documentElement.classList.contains('forge-fx-off');
 }
 
 onMounted(() => {
   const canvas = cv.value;
-  if (!canvas || reduced()) return;
+  if (!canvas) return;
   let ctx = null;
   try {
     ctx = canvas.getContext('2d');
@@ -48,23 +47,23 @@ onMounted(() => {
   };
   resize();
 
-  const areaTarget = props.fullscreen ? Math.round((w * h) / 14500) : props.count;
-  const total = Math.max(72, Math.min(130, Math.max(props.count, areaTarget)));
+  const areaTarget = props.fullscreen ? Math.round((w * h) / 12000) : props.count;
+  const total = Math.max(88, Math.min(150, Math.max(props.count, areaTarget)));
 
   const makeSpark = (randomY) => {
     const tier = Math.random();
-    const bright = tier > 0.72;
-    const mid = tier > 0.32 && tier <= 0.72;
+    const bright = tier > 0.68;
+    const mid = tier > 0.28 && tier <= 0.68;
     return {
       x: Math.random() * w,
-      y: randomY ? Math.random() * h : h + 8 + Math.random() * 40,
-      r: bright ? (2.1 + Math.random() * 1.5) : mid ? (1.4 + Math.random() * 1.1) : (1.0 + Math.random() * 0.8),
-      vx: (Math.random() - 0.32) * (bright ? 0.65 : 0.42),
-      vy: -(bright ? (0.65 + Math.random() * 1.15) : mid ? (0.42 + Math.random() * 0.8) : (0.25 + Math.random() * 0.55)),
-      a: bright ? (0.72 + Math.random() * 0.26) : mid ? (0.50 + Math.random() * 0.34) : (0.34 + Math.random() * 0.32),
+      y: randomY ? Math.random() * h : h + 10 + Math.random() * 44,
+      r: bright ? (2.4 + Math.random() * 1.7) : mid ? (1.6 + Math.random() * 1.2) : (1.1 + Math.random() * 0.9),
+      vx: (Math.random() - 0.30) * (bright ? 0.72 : 0.46),
+      vy: -(bright ? (0.70 + Math.random() * 1.25) : mid ? (0.45 + Math.random() * 0.85) : (0.28 + Math.random() * 0.58)),
+      a: bright ? (0.78 + Math.random() * 0.22) : mid ? (0.56 + Math.random() * 0.32) : (0.38 + Math.random() * 0.32),
       bright,
       phase: Math.random() * Math.PI * 2,
-      hue: bright ? (34 + Math.random() * 14) : (22 + Math.random() * 22)
+      hue: bright ? (34 + Math.random() * 14) : (20 + Math.random() * 24)
     };
   };
 
@@ -81,49 +80,49 @@ onMounted(() => {
   let frame = 0;
   const draw = () => {
     rafId = window.requestAnimationFrame(draw);
-    if (document.hidden) return;
-    frame += 0.032;
+    if (document.hidden || fxDisabled()) {
+      ctx.clearRect(0, 0, w, h);
+      return;
+    }
+    frame += 0.034;
     ctx.clearRect(0, 0, w, h);
     for (let i = 0; i < sparks.length; i++) {
       const s = sparks[i];
-      const sway = Math.sin(s.y * 0.014 + s.phase) * 0.38;
+      const sway = Math.sin(s.y * 0.013 + s.phase) * 0.42;
       const dx = s.vx + sway;
       s.x += dx;
       s.y += s.vy;
-      if (s.y < -18) {
+      if (s.y < -20) {
         sparks[i] = makeSpark(false);
         continue;
       }
-      if (s.x > w + 18) s.x = -14;
-      if (s.x < -18) s.x = w + 14;
-      const flicker = 0.72 + 0.28 * Math.sin(frame * 2.6 + s.phase);
+      if (s.x > w + 20) s.x = -16;
+      if (s.x < -20) s.x = w + 16;
+      const flicker = 0.74 + 0.26 * Math.sin(frame * 2.8 + s.phase);
       const alpha = Math.min(1, s.a * flicker);
 
-      // 柔和余烬尾迹
       if (s.bright) {
         ctx.beginPath();
         ctx.moveTo(s.x, s.y);
-        ctx.lineTo(s.x - dx * 4.5, s.y - s.vy * 4.5);
-        ctx.strokeStyle = 'hsla(' + s.hue.toFixed(0) + ',98%,62%,' + (alpha * 0.36).toFixed(2) + ')';
-        ctx.lineWidth = s.r * 0.9;
+        ctx.lineTo(s.x - dx * 5.2, s.y - s.vy * 5.2);
+        ctx.strokeStyle = 'hsla(' + s.hue.toFixed(0) + ',100%,64%,' + (alpha * 0.42).toFixed(2) + ')';
+        ctx.lineWidth = s.r * 0.95;
         ctx.lineCap = 'round';
         ctx.stroke();
       }
 
-      // 火星发光外晕
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'hsla(' + s.hue.toFixed(0) + ',98%,66%,' + alpha.toFixed(2) + ')';
-      ctx.shadowBlur = s.bright ? 18 : 11;
-      ctx.shadowColor = 'hsla(' + s.hue.toFixed(0) + ',100%,54%,0.95)';
+      ctx.fillStyle = 'hsla(' + s.hue.toFixed(0) + ',100%,68%,' + alpha.toFixed(2) + ')';
+      ctx.shadowBlur = s.bright ? 20 : 12;
+      ctx.shadowColor = 'hsla(' + s.hue.toFixed(0) + ',100%,54%,0.98)';
       ctx.fill();
 
-      // 熔金高亮点核心
       if (s.bright) {
         ctx.shadowBlur = 0;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * 0.45, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,246,214,' + Math.min(1, alpha + 0.1).toFixed(2) + ')';
+        ctx.arc(s.x, s.y, s.r * 0.46, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,248,220,' + Math.min(1, alpha + 0.1).toFixed(2) + ')';
         ctx.fill();
       }
     }

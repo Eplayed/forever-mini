@@ -1,19 +1,58 @@
-/* forge-fx.js —— 黑曜锻炉全站交互光影、3D 金属倾角与快捷键引擎（零外部依赖）
-   1. 鼠标金光追踪（--mx / --my）：事件委托挂在 document，所有卡片/职业格/团本卡/插件卡共享；
-   2. 3D 金属倾角（perspective + rotateX/rotateY + 轻浮起）：悬停跟手响应（60ms），离场平滑归位；
+/* forge-fx.js —— 黑曜锻炉全站交互光影、3D 金属倾角、手动特效开关与快捷键引擎
+   1. 不再因 Windows「调整为最佳性能」导致的 prefers-reduced-motion 而静默关闭装饰特效，
+      改为默认开启 + 左侧导航栏底部提供一键手动「特效 开/关」（存 localStorage）；
+   2. 鼠标金光追踪（--mx / --my）与 3D 金属倾角（perspective + rotateX/Y，65ms 跟手响应）；
    3. 快捷搜（Ctrl+K / Cmd+K / '/'）：首页聚焦主搜索框 #gs，其余页聚焦顶栏搜索框。 */
 
+const FX_KEY = 'wow_forever_v1_forge_fx';
 const SPOT_SEL = '.cls9 > a, .classbar .cls, .hrt .hrt-b, .mod, .raidcard-v2, .card.go, .addon-card, .heros .cd, .sr-card, [data-forge-spot]';
 const TILT_SEL = '.cls9 > a, .classbar .cls, .hrt .hrt-b, .heros .cd, [data-forge-tilt]';
 
-function prefersReducedMotion() {
-  if (typeof window === 'undefined' || !window.matchMedia) return true;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function readSavedOff() {
+  try {
+    return typeof window !== 'undefined' && window.localStorage
+      && window.localStorage.getItem(FX_KEY) === '0';
+  } catch (_) {
+    return false;
+  }
+}
+
+function fxDisabled() {
+  return typeof document !== 'undefined'
+    && document.documentElement.classList.contains('forge-fx-off');
+}
+
+export function isForgeFxOff() {
+  if (fxDisabled()) return true;
+  if (readSavedOff()) {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.add('forge-fx-off');
+    }
+    return true;
+  }
+  return false;
+}
+
+export function setForgeFxOff(off) {
+  if (typeof document !== 'undefined') {
+    document.documentElement.classList.toggle('forge-fx-off', !!off);
+  }
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(FX_KEY, off ? '0' : '1');
+    }
+  } catch (_) {}
+}
+
+export function toggleForgeFx() {
+  const next = !fxDisabled();
+  setForgeFxOff(next);
+  return !next;
 }
 
 function isFinePointer() {
-  if (typeof window === 'undefined' || !window.matchMedia) return false;
-  return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (typeof window === 'undefined' || !window.matchMedia) return true;
+  return !window.matchMedia('(pointer: coarse)').matches;
 }
 
 function isTypingTarget(el) {
@@ -24,6 +63,12 @@ function isTypingTarget(el) {
 
 export function initForgeFx() {
   if (typeof window === 'undefined' || typeof document === 'undefined') return () => {};
+
+  try {
+    if (window.localStorage && window.localStorage.getItem(FX_KEY) === '0') {
+      document.documentElement.classList.add('forge-fx-off');
+    }
+  } catch (_) {}
 
   let activeEl = null;
   let rafId = 0;
@@ -46,7 +91,7 @@ export function initForgeFx() {
       resetTilt(activeEl);
     }
     activeEl = target;
-    if (!target || prefersReducedMotion()) return;
+    if (!target || fxDisabled()) return;
 
     const rect = target.getBoundingClientRect();
     if (!rect.width || !rect.height) return;

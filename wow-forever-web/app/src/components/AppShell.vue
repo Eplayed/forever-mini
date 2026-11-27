@@ -41,8 +41,11 @@
             </span>
           </span>
         </template>
-        <div class="nav-foot" aria-hidden="true">
-          <span>极速检索</span><kbd>⌘K</kbd>
+        <div class="nav-foot">
+          <span aria-hidden="true">极速检索 <kbd>⌘K</kbd></span>
+          <button type="button" class="nav-fx-btn" :aria-pressed="fxOn ? 'true' : 'false'"
+                  :title="fxOn ? '关闭火星粒子与流光特效' : '开启火星粒子与流光特效'"
+                  @click="onToggleFx">{{ fxOn ? '特效开' : '特效关' }}</button>
         </div>
       </div>
     </nav>
@@ -78,6 +81,7 @@ import { applyRails } from '../lib/rails.js';
 import SideRailPromo from './SideRailPromo.vue';
 import PartnerSlots from './PartnerSlots.vue';
 import ForgeEmbers from './ForgeEmbers.vue';
+import { isForgeFxOff, toggleForgeFx } from '../lib/forge-fx.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -123,6 +127,10 @@ function isNavNew(label) {
   return ((scale.value || {}).navNew || []).indexOf(label) >= 0;
 }
 const scale = ref(null);
+const fxOn = ref(!isForgeFxOff());
+function onToggleFx() {
+  fxOn.value = toggleForgeFx();
+}
 
 onMounted(() => {
   refreshRails();

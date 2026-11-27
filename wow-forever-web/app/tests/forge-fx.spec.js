@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { initForgeFx } from '../src/lib/forge-fx.js';
+import { initForgeFx, isForgeFxOff, setForgeFxOff, toggleForgeFx } from '../src/lib/forge-fx.js';
 import ForgeEmbers from '../src/components/ForgeEmbers.vue';
 
 describe('Obsidian Forge interactive engine (forge-fx & ForgeEmbers)', () => {
@@ -8,6 +8,8 @@ describe('Obsidian Forge interactive engine (forge-fx & ForgeEmbers)', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
+    document.documentElement.classList.remove('forge-fx-off');
+    try { window.localStorage.removeItem('wow_forever_v1_forge_fx'); } catch (_) {}
     vi.stubGlobal('matchMedia', (q) => ({
       matches: q.includes('hover: hover'),
       media: q,
@@ -60,5 +62,28 @@ describe('Obsidian Forge interactive engine (forge-fx & ForgeEmbers)', () => {
     expect(canvas.exists()).toBe(true);
     expect(canvas.attributes('aria-hidden')).toBe('true');
     w.unmount();
+  });
+
+  it('toggles forge-fx-off cleanly and persists user choice without breaking under OS reduced-motion', () => {
+    expect(isForgeFxOff()).toBe(false);
+    expect(toggleForgeFx()).toBe(false);
+    expect(isForgeFxOff()).toBe(true);
+    expect(document.documentElement.classList.contains('forge-fx-off')).toBe(true);
+
+    // Turning off disables 3D tilt even on desktop fine pointer
+    document.body.innerHTML = '<div class="cls9"><a href="#/talent?c=warrior">战士</a></div>';
+    const tile = document.querySelector('.cls9 > a');
+    tile.getBoundingClientRect = () => ({ left: 0, top: 0, width: 120, height: 100 });
+    stop = initForgeFx();
+    const ev = new Event('pointermove', { bubbles: true });
+    Object.defineProperty(ev, 'clientX', { value: 80 });
+    Object.defineProperty(ev, 'clientY', { value: 30 });
+    tile.dispatchEvent(ev);
+    expect(tile.style.transform).toBe('');
+
+    // Re-enabling restores normal state
+    setForgeFxOff(false);
+    expect(isForgeFxOff()).toBe(false);
+    expect(document.documentElement.classList.contains('forge-fx-off')).toBe(false);
   });
 });

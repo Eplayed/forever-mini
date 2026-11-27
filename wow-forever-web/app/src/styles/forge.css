@@ -301,22 +301,41 @@ nav.main .nav-foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 6px;
     margin-top: 4px;
-    padding: 7px 10px;
+    padding: 6px 8px;
     border: 1px solid var(--gold-line-soft);
     border-radius: 6px;
     background: var(--sunk);
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--txt-muted);
   }
 
   nav.main .nav-foot kbd {
-    padding: 2px 6px;
-    font: 600 10.5px/1.2 var(--font-mono);
+    padding: 1px 5px;
+    font: 600 10px/1.2 var(--font-mono);
     color: var(--gold-hi);
     background: var(--forge-kbd-bg);
     border: 1px solid var(--gold-line);
     border-radius: 4px;
+  }
+
+  nav.main .nav-fx-btn {
+    padding: 3px 7px;
+    min-height: 24px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold-hi);
+    background: var(--forge-plate-top);
+    border: 1px solid var(--gold-line);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+  }
+
+  nav.main .nav-fx-btn:hover {
+    border-color: var(--gold-hi);
+    background: var(--elev);
   }
 
   #main.wrap,
@@ -1098,39 +1117,38 @@ nav.main .nav-foot {
   }
 }
 
-/* ---- 12. 减弱动态效果无障碍保护 ---- */
-@media (prefers-reduced-motion: reduce) {
-  .forge-embers {
-    display: none;
-  }
-  .hero.dh.mhero::before,
-  .dhero.raid-hero::before,
-  .heros .cd::before,
-  .dhero.raid-hero .dstate::before,
-  .side-rail::before,
-  .raidcard-v2::before,
-  .mod::before,
-  .card.go::before,
-  .addon-card::before,
-  .cls9 > a::before,
-  .cta-cut::after,
-  .cta.cta-gold::after,
-  .gsearch .cta-gold::after,
-  .side-rail .sr-cta::after,
-  .hero.mhero .bbadge i {
-    animation: none;
-    opacity: 0;
-  }
-  .cls9 > a,
-  .hrt .hrt-b,
-  .mod,
-  .raidcard-v2,
-  .card.go,
-  .addon-card,
-  .heros .cd,
-  .classbar .cls,
-  .raidcard-v2 .art img {
-    transition: none;
-    transform: none !important;
-  }
+/* ---- 12. 手动关闭锻炉装饰特效（html.forge-fx-off，由侧栏「特效开/关」控制，
+   避免 Windows「调整为最佳性能」误杀全屏火星、流光边框与 3D 倾角；页面过渡仍由 motion.css 遵守系统减弱动态） ---- */
+html.forge-fx-off .forge-embers {
+  display: none;
+}
+html.forge-fx-off .hero.dh.mhero::before,
+html.forge-fx-off .dhero.raid-hero::before,
+html.forge-fx-off .heros .cd::before,
+html.forge-fx-off .dhero.raid-hero .dstate::before,
+html.forge-fx-off .side-rail::before,
+html.forge-fx-off .raidcard-v2::before,
+html.forge-fx-off .mod::before,
+html.forge-fx-off .card.go::before,
+html.forge-fx-off .addon-card::before,
+html.forge-fx-off .cls9 > a::before,
+html.forge-fx-off .cta-cut::after,
+html.forge-fx-off .cta.cta-gold::after,
+html.forge-fx-off .gsearch .cta-gold::after,
+html.forge-fx-off .side-rail .sr-cta::after,
+html.forge-fx-off .hero.mhero .bbadge i {
+  animation: none;
+  opacity: 0;
+}
+html.forge-fx-off .cls9 > a,
+html.forge-fx-off .hrt .hrt-b,
+html.forge-fx-off .mod,
+html.forge-fx-off .raidcard-v2,
+html.forge-fx-off .card.go,
+html.forge-fx-off .addon-card,
+html.forge-fx-off .heros .cd,
+html.forge-fx-off .classbar .cls,
+html.forge-fx-off .raidcard-v2 .art img {
+  transition: none;
+  transform: none !important;
 }
